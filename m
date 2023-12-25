@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 120A7C3DA6E
-	for <u-boot@archiver.kernel.org>; Mon, 25 Dec 2023 12:22:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08760C3DA6E
+	for <u-boot@archiver.kernel.org>; Mon, 25 Dec 2023 12:29:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC0A28700D;
-	Mon, 25 Dec 2023 13:22:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 74A0086E82;
+	Mon, 25 Dec 2023 13:29:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="F6l2ej70";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ITZALGoY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25406871CC; Mon, 25 Dec 2023 13:22:34 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 265AF86E82; Mon, 25 Dec 2023 13:29:04 +0100 (CET)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15F5286FFE
- for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 13:22:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DD48380844
+ for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 13:29:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1703506950; x=1704111750; i=xypron.glpk@gmx.de;
- bh=fs3kKag/cxXVT/cM9bgKyxux1OoyzE3x1WF+wq3+RvE=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=F6l2ej700UOxqko5CMUG1xOMYecsB8EhmcjwMzdhFM/4ZOjEe7Cu47DZ8D+/ipDg
- HGMnwgUc190NDROCjGxVhFgyo5k9p2J/JcZeDUFSf5FFtRIaaGd9xsEFpr9+X091G
- AAhW+hRHK7XUozwYR3hbVqhphnRBE5jSQNMedWi4fWErxIQRT9SOBktUiwleI4U5Y
- 8oL3NadRvLR3cjwVJ75+VheyQhHVwp54UvjM9QL4R0PszPt1nSwcIGhnPtHdtcg26
- ws4Zplg9uTmr8VV579KWsVM+NDK0eT+EeCwXYcI03wo2NsNw0CbWJ6HUL3GRV0U11
- d6/kTTT+sYmXKV+pNw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.136] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MgesG-1qly4A2RgK-00h4zP; Mon, 25
- Dec 2023 13:22:30 +0100
-Message-ID: <0001a0b4-8104-4a15-9614-470c3108b379@gmx.de>
-Date: Mon, 25 Dec 2023 13:22:30 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-5d33574f64eso33393377b3.3
+ for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 04:29:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1703507340; x=1704112140; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=823MV+S3bWXhyElKC42jMnbSlSMb1+2waYDKRguXf44=;
+ b=ITZALGoYt2Jm8tvMoVVlGDbFO/YQTNYRru8zaK3L/gfxb73OMs5G7Z1WLG2T2D2K7a
+ x9GkIvKqkmk5UGaBVr1iAAYmcu62jC6+xq24a7cB4KRmLoNv7HcGwDOrhrrz790uGa87
+ KMExXDxxmqarQFOhraGy230+qIEGw2JIBDwlA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703507340; x=1704112140;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=823MV+S3bWXhyElKC42jMnbSlSMb1+2waYDKRguXf44=;
+ b=PYq7B7Ddc67wdzmqUzxJOfGGosrcxR+b9b/wuPLhrrUJKZOnSY9W5LcfovKQcMPUqc
+ FxkY4/QQ6Yd9wabOXUqZLgvobwJ0HuInWnLrgoGeN8EpSM8rkpQNvcolHeo6k9jtkS+l
+ qdbzosv4UI6W7A7y69xCByjkEd4QKbno4ckeDS3PA0Q/j//SGuIcF4GJtncwfw4mn2aZ
+ r60yEhyv97bi2vuUrc6Nr4PCpXGuXzCmNSV/y3E8wdHkdO1W826X/eJ+j1lFh2zVXOBi
+ J3U1VG6V6lUQXggKwKtD/q0MyDlFZhWKm156iPW9E8XqJWL6UBxYl+z0OoeidxI2q09Y
+ r0BQ==
+X-Gm-Message-State: AOJu0Ywnrw2mYsm1XW8K34rpklUmFt+w0MiVNnL8yMoqLQKdoNzrs21S
+ GI1qeJf8sg4mn9VeOa60zKmVXZRwQd89yA==
+X-Google-Smtp-Source: AGHT+IHGumQ/1iDDTOnnOfSCTejqSZrsXQJtbKqneGMV+uzLFT16OjGifZGSMu1pgBK+RM89YbQ2TA==
+X-Received: by 2002:a81:914d:0:b0:5d6:85f1:1539 with SMTP id
+ i74-20020a81914d000000b005d685f11539mr3210325ywg.18.1703507340582; 
+ Mon, 25 Dec 2023 04:29:00 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ t199-20020a0dead0000000b005e6e0361d87sm4623175ywe.16.2023.12.25.04.28.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Dec 2023 04:28:59 -0800 (PST)
+Date: Mon, 25 Dec 2023 07:28:56 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>, u-boot@lists.denx.de,
+ sjg@chromium.org, ilias.apalodimas@linaro.org,
+ Ramon Fried <rfried.dev@gmail.com>
+Subject: Re: [PATCH v3 3/4] net: tftp: remove explicit efi configuration
+ dependency
+Message-ID: <20231225122856.GG2652760@bill-the-cat>
+References: <20231218023842.281336-1-takahiro.akashi@linaro.org>
+ <20231218023842.281336-4-takahiro.akashi@linaro.org>
+ <b236a38c-3b66-4b7d-8c00-bfd06b3d0e77@gmx.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] efi_loader: auto-generate boot option for each blkio
- device
-Content-Language: en-US
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-References: <20231220084133.435240-1-masahisa.kojima@linaro.org>
- <20231220084133.435240-2-masahisa.kojima@linaro.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231220084133.435240-2-masahisa.kojima@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:LoiOjYIgfBrkgIbFXI6Xt/6SIj1HQvPimwY5XgIGaZbBfTLb7Eh
- roNhtvk5vtjVqMJO/kTzo+rRnBL7DlcRTmvgMJqbBm/OLsQm+mlfn6eit0goE7cKompRWiu
- NgRmJ4C/icQUy+B+g0YvHx5FBJKlDJkXxCd9SLmwT+hHdnq8P5kzvPgdxD+uXPlCcfuAsSC
- LQxC3XQnliKwDaNZFVHEw==
-UI-OutboundReport: notjunk:1;M01:P0:Tv4Pb6eRbJI=;/b7CKRgsYMpz5/E263vCwfCouBx
- Q+0knusec+Fh42sNpAMTxNHYo96qIO8QyP+LvNr9UZWZ7Zwqj7FMWZH+vhbwouLJXSg0rx7FR
- 1Hmz/ODESF7tA/tad4vuzAxfdVDRdJHWHEAhnXokNFYHUGOClWL89rrm9rz2i9YgOc5tv1SvW
- y/oiqns2zj0m3IAR3a0Sq73+BgLD/m0lkmGtzGY75XcL2G26T5UBRlecJOuTjf4QoxSUva7LC
- mN7Bh4vKkA+UFuEBg6htLiba0Qdj+IyIu24qWkXpSiZRdPNnsL8ay2fx98nwmzi9f+geAviYn
- ZjFSRVyGy4+BS8e937Rb1igx84rnJ9BQ8HwIlwjLHwTCCqXc1DnESjxVEDNZR89WUOdTTZnvp
- vvcQ3nuLkX7WkG5d8f7XRy1fE8B8R4K/b/CUOeBkdmi65F4/CQoMr6FjDJh75QJaHdWuNAYiX
- vflclhbP9gBmi5Pr9goHU47qAMRRCKzWCkl6TTjxFu6IOi8flSg/3ZQJVSVLnhbTncxratvzr
- StZSq3h6XH6ALtZ9ONRlELV96RvnRnt3AEq4RxnjOjkRMVpptgVgz1dt9IZNo73vEn634G/1J
- 96yEMs7dkAM4Fn53GZuLQ8vKjnBgu3CxnRDZtRXqsmtz+W0B9ckI9Z9eG7sWSdpy/FRPudtrh
- JuTmkaQH1hUQrgGane4TJi96C1UhW1RP4iKZWbHUX9ysHbvrG0o394+79SgSMryKWqX8HJo7T
- CECn9q211NR0rLVq8iRkBqM3PiQW9qsLlmiXHe2UJqY71rMB8nl8bo8/iUHd4JF+wS0qUbUzo
- uxORdEclMvVM6Oi9NBD6PZ7ORWqpwOIgl0258WrPRItyvSyOpZ9PsdQTVK/laAxKbw81/QZy4
- LmUUfOCX0tMJjPZMkjXpfWLa6oneqrKYFCasGNuIxYZVN7FREKb14OFuf166mdzQxdDOCrGTT
- U7s+W4SmGAV7kPOvvx4wLaZnZjs=
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="r6UyMDVru5C0/Yad"
+Content-Disposition: inline
+In-Reply-To: <b236a38c-3b66-4b7d-8c00-bfd06b3d0e77@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,251 +95,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/20/23 09:41, Masahisa Kojima wrote:
-> Current efibootmgr auto-generates the boot option for all
-> disks and partitions installing EFI_SIMPLE_FILE_SYSTEM_PROTOCOL,
-> while EDK II reference implementation auto-generates the boot option
-> for all devices installing  EFI_BLOCK_IO_PROTOCOL with
-> eliminating logical partitions.
->
-> This commit modifies the efibootmgr to get aligned to EDK II.
->
-> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-> ---
->   lib/efi_loader/efi_bootmgr.c | 94 +++++++++++++++++++++++++++---------
->   1 file changed, 71 insertions(+), 23 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> index 56d97f2382..636f01e2eb 100644
-> --- a/lib/efi_loader/efi_bootmgr.c
-> +++ b/lib/efi_loader/efi_bootmgr.c
-> @@ -560,6 +560,50 @@ err:
->   	return ret;
->   }
->
-> +/**
-> + * try_load_from_media() - load file from media
-> + *
-> + * @fp:		file path
 
-This does not match the parameter name of the function leading to a
-'make htmldocs' build error.
+--r6UyMDVru5C0/Yad
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> + * @handle:	pointer to handle for newly installed image
-> + *
-> + * If @fp contains a file name, load the file.
-> + * If @fp does not have a file name, search the architecture-specific
+On Mon, Dec 25, 2023 at 10:23:35AM +0100, Heinrich Schuchardt wrote:
+> On 12/18/23 03:38, AKASHI Takahiro wrote:
+> > Now it is clear that the feature actually depends on efi interfaces,
+> > not "bootefi" command. efi_set_bootdev() will automatically be nullified
+> > if necessary efi component is disabled.
+> >=20
+> > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> > ---
+> >   net/tftp.c | 10 ++++------
+> >   1 file changed, 4 insertions(+), 6 deletions(-)
+> >=20
+> > diff --git a/net/tftp.c b/net/tftp.c
+> > index 88e71e67de35..2e335413492b 100644
+> > --- a/net/tftp.c
+> > +++ b/net/tftp.c
+> > @@ -302,12 +302,10 @@ static void tftp_complete(void)
+> >   			time_start * 1000, "/s");
+> >   	}
+> >   	puts("\ndone\n");
+> > -	if (IS_ENABLED(CONFIG_CMD_BOOTEFI)) {
+> > -		if (!tftp_put_active)
+> > -			efi_set_bootdev("Net", "", tftp_filename,
+> > -					map_sysmem(tftp_load_addr, 0),
+> > -					net_boot_file_size);
+> > -	}
+> > +	if (!tftp_put_active)
+> > +		efi_set_bootdev("Net", "", tftp_filename,
+>=20
+> Function efi_set_bootdev() will not be compiled for CONFIG_EFI_LOADER=3Dn.
+> So this change may lead to build failures.
 
-ditto
+In the EFI_LOADER=3Dn case <efi_loader.h> has an empty inline instead so
+this should be fine.
 
-Best regards
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-Heinrich
+--=20
+Tom
 
-> + * default file and load it.
-> + * TODO: If the FilePathList[0] device does not support
-> + * EFI_SIMPLE_FILE_SYSTEM_PROTOCOL but supports EFI_BLOCK_IO_PROTOCOL,
-> + * call EFI_BOOT_SERVICES.ConnectController()
-> + * TODO: FilePathList[0] device supports EFI_SIMPLE_FILE_SYSTEM_PROTOCO=
-L
-> + * not based on EFI_BLOCK_IO_PROTOCOL
-> + *
-> + * Return:	status code
-> + */
-> +static efi_status_t try_load_from_media(struct efi_device_path *file_pa=
-th,
-> +					efi_handle_t *handle)
-> +{
-> +	efi_handle_t h;
-> +	efi_status_t ret =3D EFI_SUCCESS;
-> +	struct efi_device_path *rem, *dp =3D NULL;
-> +	struct efi_device_path *final_dp =3D file_path;
-> +
-> +	h =3D efi_dp_find_obj(file_path, &efi_block_io_guid, &rem);
-> +	if (h) {
-> +		if (rem->type =3D=3D DEVICE_PATH_TYPE_END) {
-> +			/* no file name present, try default file */
-> +			ret =3D check_disk_has_default_file(h->dev, &dp);
-> +			if (ret !=3D EFI_SUCCESS)
-> +				return ret;
-> +
-> +			final_dp =3D dp;
-> +		}
-> +	}
-> +
-> +	ret =3D EFI_CALL(efi_load_image(true, efi_root, final_dp, NULL, 0, han=
-dle));
-> +
-> +	efi_free_pool(dp);
-> +
-> +	return ret;
-> +}
-> +
->   /**
->    * try_load_entry() - try to load image for boot option
->    *
-> @@ -594,7 +638,6 @@ static efi_status_t try_load_entry(u16 n, efi_handle=
-_t *handle,
->   	}
->
->   	if (lo.attributes & LOAD_OPTION_ACTIVE) {
-> -		struct efi_device_path *file_path;
->   		u32 attributes;
->
->   		log_debug("trying to load \"%ls\" from %pD\n", lo.label,
-> @@ -611,10 +654,7 @@ static efi_status_t try_load_entry(u16 n, efi_handl=
-e_t *handle,
->   			else
->   				ret =3D EFI_LOAD_ERROR;
->   		} else {
-> -			file_path =3D expand_media_path(lo.file_path);
-> -			ret =3D EFI_CALL(efi_load_image(true, efi_root, file_path,
-> -						      NULL, 0, handle));
-> -			efi_free_pool(file_path);
-> +			ret =3D try_load_from_media(lo.file_path, handle);
->   		}
->   		if (ret !=3D EFI_SUCCESS) {
->   			log_warning("Loading %ls '%ls' failed\n",
-> @@ -748,19 +788,19 @@ error:
->    * efi_bootmgr_enumerate_boot_option() - enumerate the possible bootab=
-le media
->    *
->    * @opt:		pointer to the media boot option structure
-> - * @volume_handles:	pointer to the efi handles
-> + * @handles:		pointer to the efi handles
->    * @count:		number of efi handle
->    * Return:		status code
->    */
->   static efi_status_t efi_bootmgr_enumerate_boot_option(struct eficonfig=
-_media_boot_option *opt,
-> -						      efi_handle_t *volume_handles,
-> -						      efi_status_t count)
-> +						      efi_handle_t *handles,
-> +						      efi_uintn_t *count)
->   {
-> -	u32 i;
-> +	u32 i, num =3D 0;
->   	struct efi_handler *handler;
->   	efi_status_t ret =3D EFI_SUCCESS;
->
-> -	for (i =3D 0; i < count; i++) {
-> +	for (i =3D 0; i < *count; i++) {
->   		u16 *p;
->   		u16 dev_name[BOOTMENU_DEVICE_NAME_MAX];
->   		char *optional_data;
-> @@ -768,8 +808,15 @@ static efi_status_t efi_bootmgr_enumerate_boot_opti=
-on(struct eficonfig_media_boo
->   		char buf[BOOTMENU_DEVICE_NAME_MAX];
->   		struct efi_device_path *device_path;
->   		struct efi_device_path *short_dp;
-> +		struct efi_block_io *blkio;
-> +
-> +		ret =3D efi_search_protocol(handles[i], &efi_block_io_guid, &handler)=
-;
-> +		blkio =3D handler->protocol_interface;
->
-> -		ret =3D efi_search_protocol(volume_handles[i], &efi_guid_device_path,=
- &handler);
-> +		if (blkio->media->logical_partition)
-> +			continue;
-> +
-> +		ret =3D efi_search_protocol(handles[i], &efi_guid_device_path, &handl=
-er);
->   		if (ret !=3D EFI_SUCCESS)
->   			continue;
->   		ret =3D efi_protocol_open(handler, (void **)&device_path,
-> @@ -777,7 +824,7 @@ static efi_status_t efi_bootmgr_enumerate_boot_optio=
-n(struct eficonfig_media_boo
->   		if (ret !=3D EFI_SUCCESS)
->   			continue;
->
-> -		ret =3D efi_disk_get_device_name(volume_handles[i], buf, BOOTMENU_DEV=
-ICE_NAME_MAX);
-> +		ret =3D efi_disk_get_device_name(handles[i], buf, BOOTMENU_DEVICE_NAM=
-E_MAX);
->   		if (ret !=3D EFI_SUCCESS)
->   			continue;
->
-> @@ -801,17 +848,20 @@ static efi_status_t efi_bootmgr_enumerate_boot_opt=
-ion(struct eficonfig_media_boo
->   		 * to store guid, instead of realloc the load_option.
->   		 */
->   		lo.optional_data =3D "1234567";
-> -		opt[i].size =3D efi_serialize_load_option(&lo, (u8 **)&opt[i].lo);
-> -		if (!opt[i].size) {
-> +		opt[num].size =3D efi_serialize_load_option(&lo, (u8 **)&opt[num].lo)=
-;
-> +		if (!opt[num].size) {
->   			ret =3D EFI_OUT_OF_RESOURCES;
->   			goto out;
->   		}
->   		/* set the guid */
-> -		optional_data =3D (char *)opt[i].lo + (opt[i].size - u16_strsize(u"12=
-34567"));
-> +		optional_data =3D (char *)opt[num].lo + (opt[num].size - u16_strsize(=
-u"1234567"));
->   		memcpy(optional_data, &efi_guid_bootmenu_auto_generated, sizeof(efi_=
-guid_t));
-> +		num++;
->   	}
->
->   out:
-> +	*count =3D num;
-> +
->   	return ret;
->   }
->
-> @@ -1040,8 +1090,7 @@ efi_status_t efi_bootmgr_delete_boot_option(u16 bo=
-ot_index)
->   /**
->    * efi_bootmgr_update_media_device_boot_option() - generate the media =
-device boot option
->    *
-> - * This function enumerates all devices supporting EFI_SIMPLE_FILE_SYST=
-EM_PROTOCOL
-> - * and generate the bootmenu entries.
-> + * This function enumerates all BlockIo devices and add the boot option=
- for it.
->    * This function also provide the BOOT#### variable maintenance for
->    * the media device entries.
->    * - Automatically create the BOOT#### variable for the newly detected=
- device,
-> @@ -1057,13 +1106,13 @@ efi_status_t efi_bootmgr_update_media_device_boo=
-t_option(void)
->   	u32 i;
->   	efi_status_t ret;
->   	efi_uintn_t count;
-> -	efi_handle_t *volume_handles =3D NULL;
-> +	efi_handle_t *handles =3D NULL;
->   	struct eficonfig_media_boot_option *opt =3D NULL;
->
->   	ret =3D efi_locate_handle_buffer_int(BY_PROTOCOL,
-> -					   &efi_simple_file_system_protocol_guid,
-> +					   &efi_block_io_guid,
->   					   NULL, &count,
-> -					   (efi_handle_t **)&volume_handles);
-> +					   (efi_handle_t **)&handles);
->   	if (ret !=3D EFI_SUCCESS)
->   		goto out;
->
-> @@ -1073,8 +1122,7 @@ efi_status_t efi_bootmgr_update_media_device_boot_=
-option(void)
->   		goto out;
->   	}
->
-> -	/* enumerate all devices supporting EFI_SIMPLE_FILE_SYSTEM_PROTOCOL */
-> -	ret =3D efi_bootmgr_enumerate_boot_option(opt, volume_handles, count);
-> +	ret =3D efi_bootmgr_enumerate_boot_option(opt, handles, &count);
->   	if (ret !=3D EFI_SUCCESS)
->   		goto out;
->
-> @@ -1122,7 +1170,7 @@ out:
->   			free(opt[i].lo);
->   	}
->   	free(opt);
-> -	efi_free_pool(volume_handles);
-> +	efi_free_pool(handles);
->
->   	if (ret =3D=3D EFI_NOT_FOUND)
->   		return EFI_SUCCESS;
+--r6UyMDVru5C0/Yad
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWJdYIACgkQFHw5/5Y0
+tyyJcQv8C83qaXebj+KcoE4wG95wPA2Q1ODayJHJErzM9oeQafDHiwMyYgrHwlFB
+3MqbzexKbg9TY9ML7Fz6W1yJ4uFo5R27DFibJhN/3ZP5cjqVjBdteKot5gjxo5OG
+DWC2elbbsdH0sB9Jqw2KB4Uz6C4UCxBPU3/GHaNR5SbihUb819WVEs51mSbYY4KW
+RuLWN6701iZZNAYiRavRo/7l3iAIEDJRyIUCaNpcH0+PkdFp3Ulc55Jk/s0RIfqA
+5sPQb68LxInAzB4Iw2FKXjWAi4Kqp4Z1Gg96jh4w66DXNsCpFi+xLzO1RWqpYohm
+rc1VdZi76ro5Y3nWDe3YmCgnRzNcnx6ms2VPiNhuuCLcfjmnOTIWmLgcrWmwWYk2
+SbVeF2jKCULEi0YlWhWRqiqujU6RFQPmo5jc7lZJN2AsPF5BuF5ojYpUnwlpqi0u
+Vw1AXrXA65Dsjzoj26nhnZGXCrzYXfwl3REeuBeCCtMGMg6KYjO86QdCRPZhfl4+
+oHb1npLr
+=tVyy
+-----END PGP SIGNATURE-----
+
+--r6UyMDVru5C0/Yad--
