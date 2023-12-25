@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CC48C3DA6E
-	for <u-boot@archiver.kernel.org>; Mon, 25 Dec 2023 13:06:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4B2FC3DA6E
+	for <u-boot@archiver.kernel.org>; Mon, 25 Dec 2023 13:06:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3A18877DB;
-	Mon, 25 Dec 2023 14:06:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3E007877DA;
+	Mon, 25 Dec 2023 14:06:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23F9E87808; Mon, 25 Dec 2023 14:06:03 +0100 (CET)
+ id 11C0E87480; Mon, 25 Dec 2023 14:06:08 +0100 (CET)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2C15877F1
- for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 14:06:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B043C87800
+ for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 14:06:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 3BPD5tiD042931
- for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 21:05:55 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 3BPD60jQ043000
+ for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 21:06:00 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS16.andestech.com
  (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0;
- Mon, 25 Dec 2023 21:05:51 +0800
+ Mon, 25 Dec 2023 21:05:56 +0800
 From: Leo Yu-Chi Liang <ycliang@andestech.com>
 To: <u-boot@lists.denx.de>
 CC: <randolph@andestech.com>, <peterlin@andestech.com>, <ycliang@andestech.com>
-Subject: [PATCH 3/5] andes: cpu: Enable memboost feature
-Date: Mon, 25 Dec 2023 21:05:26 +0800
-Message-ID: <20231225130528.1954968-3-ycliang@andestech.com>
+Subject: [PATCH 4/5] andes: cpu: Enable cache and TLB ECC support
+Date: Mon, 25 Dec 2023 21:05:27 +0800
+Message-ID: <20231225130528.1954968-4-ycliang@andestech.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231225130528.1954968-1-ycliang@andestech.com>
 References: <20231225130528.1954968-1-ycliang@andestech.com>
@@ -44,7 +44,7 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 3BPD5tiD042931
+X-MAIL: Atcsqr.andestech.com 3BPD60jQ043000
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,59 +61,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Andes CPU has memboost feature including prefetch,
-write-around and non-blocking load. Enable them by default.
+Andes CPU supports cache and TLB ECC.
+Enable them by default.
 
 Signed-off-by: Leo Yu-Chi Liang <ycliang@andestech.com>
 ---
- arch/riscv/cpu/andesv5/cpu.c            | 7 +++++++
- arch/riscv/include/asm/arch-andes/csr.h | 6 ++++++
- 2 files changed, 13 insertions(+)
+ arch/riscv/cpu/andesv5/cpu.c            | 1 +
+ arch/riscv/include/asm/arch-andes/csr.h | 3 +++
+ 2 files changed, 4 insertions(+)
 
 diff --git a/arch/riscv/cpu/andesv5/cpu.c b/arch/riscv/cpu/andesv5/cpu.c
-index 50cd31905d..c9288dcb51 100644
+index c9288dcb51..c011c00a94 100644
 --- a/arch/riscv/cpu/andesv5/cpu.c
 +++ b/arch/riscv/cpu/andesv5/cpu.c
-@@ -31,8 +31,11 @@ void harts_early_init(void)
- 	/* Enable I/D-cache in SPL */
- 	if (CONFIG_IS_ENABLED(RISCV_MMODE)) {
- 		unsigned long mcache_ctl_val = csr_read(CSR_MCACHE_CTL);
-+		unsigned long mmisc_ctl_val = csr_read(CSR_MMISC_CTL);
- 
+@@ -36,6 +36,7 @@ void harts_early_init(void)
  		mcache_ctl_val |= (MCACHE_CTL_DC_COHEN | MCACHE_CTL_CCTL_SUEN | \
-+				MCACHE_CTL_IC_PREFETCH_EN | MCACHE_CTL_DC_PREFETCH_EN | \
-+				MCACHE_CTL_DC_WAROUND_EN | MCACHE_CTL_L2C_WAROUND_EN | \
+ 				MCACHE_CTL_IC_PREFETCH_EN | MCACHE_CTL_DC_PREFETCH_EN | \
+ 				MCACHE_CTL_DC_WAROUND_EN | MCACHE_CTL_L2C_WAROUND_EN | \
++				MCACHE_CTL_IC_ECCEN | MCACHE_CTL_DC_ECCEN | MCACHE_CTL_TLB_ECCEN);
  
  	if (!CONFIG_IS_ENABLED(SYS_ICACHE_OFF))
  		mcache_ctl |= MCACHE_CTL_IC_EN;
-@@ -51,4 +54,8 @@ void harts_early_init(void)
- 			while (!(csr_read(CSR_MCACHE_CTL) & MCACHE_CTL_DC_COHSTA));
- 		}
- 	}
-+		mmisc_ctl_val |= MMISC_CTL_NON_BLOCKING_EN;
-+
-+		csr_write(CSR_MMISC_CTL, mmisc_ctl_val);
-+	}
- }
 diff --git a/arch/riscv/include/asm/arch-andes/csr.h b/arch/riscv/include/asm/arch-andes/csr.h
-index 93aa8b2343..755504c3c4 100644
+index 755504c3c4..1a34618066 100644
 --- a/arch/riscv/include/asm/arch-andes/csr.h
 +++ b/arch/riscv/include/asm/arch-andes/csr.h
-@@ -20,9 +20,15 @@
+@@ -19,11 +19,14 @@
+ 
  #define MCACHE_CTL_IC_EN		BIT(0)
  #define MCACHE_CTL_DC_EN		BIT(1)
++#define MCACHE_CTL_IC_ECCEN		BIT(3)
++#define MCACHE_CTL_DC_ECCEN		BIT(5)
  #define MCACHE_CTL_CCTL_SUEN		BIT(8)
-+#define MCACHE_CTL_IC_PREFETCH_EN	BIT(9)
-+#define MCACHE_CTL_DC_PREFETCH_EN	BIT(10)
-+#define MCACHE_CTL_DC_WAROUND_EN	BIT(13)
-+#define MCACHE_CTL_L2C_WAROUND_EN	BIT(15)
+ #define MCACHE_CTL_IC_PREFETCH_EN	BIT(9)
+ #define MCACHE_CTL_DC_PREFETCH_EN	BIT(10)
+ #define MCACHE_CTL_DC_WAROUND_EN	BIT(13)
+ #define MCACHE_CTL_L2C_WAROUND_EN	BIT(15)
++#define MCACHE_CTL_TLB_ECCEN		BIT(18)
  #define MCACHE_CTL_DC_COHEN		BIT(19)
  #define MCACHE_CTL_DC_COHSTA		BIT(20)
- 
-+/* mmisc_ctl register */
-+#define MMISC_CTL_NON_BLOCKING_EN	BIT(8)
- 
- #define CCTL_L1D_WBINVAL_ALL 6
  
 -- 
 2.34.1
