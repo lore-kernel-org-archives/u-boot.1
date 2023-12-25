@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 222CBC3DA6E
-	for <u-boot@archiver.kernel.org>; Mon, 25 Dec 2023 15:42:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0C59C3DA6E
+	for <u-boot@archiver.kernel.org>; Mon, 25 Dec 2023 15:42:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C37987808;
-	Mon, 25 Dec 2023 16:42:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 15B6E8781D;
+	Mon, 25 Dec 2023 16:42:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fTWi75a/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ff38fPYe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 021678780F; Mon, 25 Dec 2023 16:42:10 +0100 (CET)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id E95088773D; Mon, 25 Dec 2023 16:42:14 +0100 (CET)
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [IPv6:2a00:1450:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F004D8744F
- for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 16:42:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E858987831
+ for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 16:42:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2ccb923c4d2so11322711fa.1
- for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 07:42:07 -0800 (PST)
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-2ccbaea0a6cso11969041fa.2
+ for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 07:42:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703518926; x=1704123726; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703518931; x=1704123731; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MxFJwKL5zDs8b5aiVb6q3SDjOsJLBc/cfLiOxsIC9AE=;
- b=fTWi75a/dZ5pOlid97zusdR7OQemOXJvph9PjjcbNFAAfgZ2OnPunWnw7WFf1/sihd
- nTomjFcIcLfR2okjrsox1Foyky9+dXZ3CvtbjvnBcn643xQOuFMeXGccbv4c5po5n4vC
- l3SiXR/gvLLVR/NF9nCCBGhpK3/yQcDOPwhKYWpupbQzW0pDSbGRAKbV31/PyNcCZoSA
- HIbHA7UPGl7/wdq8a1meUVTeBrC/iEO5Wsymo1ZSQCeXAM9HVlj09+IP9oXu0AhpzXWM
- uTZBDTIAlKMe1wQca1t7DxW2secM2hrkuxsd6qBEgt4rZRd4OUJmRxbT+8+tdHqkVRDM
- E1DA==
+ bh=CvQDLylMZZyItYAARaG/slPihLAB8fb3RjCohXg8958=;
+ b=ff38fPYeqzsV/pzlyxOiaMDB/OJZVAawJHfnmWKPcLjh3jQsUDr1gwx68F0mH5epae
+ k0pdMa0BnmPfheRR1wBQctUdUVFL9L2pk/7+jShQRP0SOO94yB4YdsrfP+e726i2tbkv
+ Ap+32nNlDDNslFnztz5TKEh2tHdkqMzn8T14DmwWOo2eNjiMkU0Qz3krMwEFIH6RiDOw
+ /pBkmO0dQEw4zH5T0vQqnl+RWXmA+R178QgtjAwBX/mcT4TI2mPDFfHGYjcE9v9TV3jb
+ 1cKXaMWkWG2HbXKDjeW1RrBIIeT6kDpbRuIqspI2VLqoZkTV6tgAINV6Z2qcZbfc75UN
+ 3XcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703518926; x=1704123726;
+ d=1e100.net; s=20230601; t=1703518931; x=1704123731;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MxFJwKL5zDs8b5aiVb6q3SDjOsJLBc/cfLiOxsIC9AE=;
- b=cuzJZGAQS8dcbW/UbSTUzNri+hFWNEwqrLZhJXnwedSr6wflZTVl+j26tZY8ADbyjD
- ZppRgA1HQJOMUp1zdFSX8TqUJ6SRBDyCWbXSt9GXS9x6gp9mb5If6Fg+UwQAdANFRAgG
- 6xw1KOor1r/Ci8DOaHsrQvQChrFBBBDGB22Co2fp0/fRg+U9doCrugERpU33WwbVT4rE
- jZkgEgvg1XsFemaOv0JeWyeaIOvlKMUL4hUdYVJDIjqUsU5pUTDUZKmW5P83xyJEsAhi
- m9gVk27HpPkQg4L6M6S9lqH/j68yGDRkzR1gRMvUVxaWl2Z64On3PXMvi4KZPSnzITCo
- xp4A==
-X-Gm-Message-State: AOJu0YyZhEPXpgGM/V+Bg5QsYNmzdl5EJeQavBSWdjnGlQNELFu3Yypl
- LTM2++Cm4Zq/HRIplDnI+y/I6NOrqg/g5KA8DCbe7PBYkVM=
-X-Google-Smtp-Source: AGHT+IENWK3r7tbjd67gsRovSx06YsS6dW74OozUFvQu53CEWidcO3LQJksZGRzl3xf/wyzXdwmPtg==
-X-Received: by 2002:a05:651c:227:b0:2cc:8b49:6dbb with SMTP id
- z7-20020a05651c022700b002cc8b496dbbmr1439501ljn.62.1703518926692; 
- Mon, 25 Dec 2023 07:42:06 -0800 (PST)
+ bh=CvQDLylMZZyItYAARaG/slPihLAB8fb3RjCohXg8958=;
+ b=qBbEInq8BcMrWY5mDOVcMAPDYBaZROfUeWLNDF9f/+hdvoGD9BWo6UIeW2J1VMIJyp
+ FqSeaFXh1EzpD06YKMDtIi+Hv2CyTlhla7Kz4espb1u3NEE7/Jn5FstWX6I0RL+92lTc
+ fln4QdpRiWWcDhoH14KOrsjJgldzQwLRApZtx+H5L37FRB/rKSMggIzpr3Lp0dPCozbZ
+ 76ZS8AqfTY0uwWRC0Yay4qaMoa0Fs5Gfd0M3n2pSwOKPCPAxEDVP58T6m6Rm+a3Drbqy
+ UWvrstgaVqpX3+hTVBt8rtPRVn4oBDAcnsix0NzgaTQQ/GkOc406WXGOyNKGz+nQ/Lex
+ qNog==
+X-Gm-Message-State: AOJu0YxrUJlHDDv0uptnZJiZz02b4So/aZgxUItaaT92pzxa1EW57yxH
+ YhmTl4fDLGVP7PoIdj57PnsDremiG429s/RLVWEJhKjgoCI=
+X-Google-Smtp-Source: AGHT+IGcDH+7sXg8Iq86KMFlz0XhbFa9ARIfLEhlXbXEW6mUKZeGBHh508PRwl3003NLem5OlkycUA==
+X-Received: by 2002:a05:651c:2044:b0:2cc:9ec8:fc60 with SMTP id
+ t4-20020a05651c204400b002cc9ec8fc60mr2030658ljo.9.1703518931649; 
+ Mon, 25 Dec 2023 07:42:11 -0800 (PST)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- a17-20020a2ebe91000000b002cca6eafc44sm1425644ljr.113.2023.12.25.07.42.02
+ a17-20020a2ebe91000000b002cca6eafc44sm1425644ljr.113.2023.12.25.07.42.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Dec 2023 07:42:06 -0800 (PST)
+ Mon, 25 Dec 2023 07:42:11 -0800 (PST)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
  sjg@chromium.org, joe.hershberger@ni.com, rfried.dev@gmail.com,
  bharat.gooty@broadcom.com, rayagonda.kokatanur@broadcom.com,
- trini@konsulko.com, Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATHv2 6/9] mach-socfpga: do not overlap defines with lwip
-Date: Mon, 25 Dec 2023 21:39:26 +0600
-Message-Id: <20231225153929.8284-7-maxim.uvarov@linaro.org>
+ trini@konsulko.com, Maxim Uvarov <maxim.uvarov@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>
+Subject: [PATHv2 7/9] bcm_ns3: use device specific naming for variables
+Date: Mon, 25 Dec 2023 21:39:27 +0600
+Message-Id: <20231225153929.8284-8-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20231225153929.8284-1-maxim.uvarov@linaro.org>
 References: <20231225153929.8284-1-maxim.uvarov@linaro.org>
@@ -94,51 +95,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix compilation issue with overlapping lwip and march defines.
+Use device specific naming for variables so as to not overlap
+with common function names.
 
 Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+Reviewed-by: Tom Rini <trini@konsulko.com>
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 ---
- arch/arm/mach-socfpga/include/mach/handoff_soc64.h | 6 ------
- arch/arm/mach-socfpga/wrap_handoff_soc64.c         | 9 +++++++++
- 2 files changed, 9 insertions(+), 6 deletions(-)
+ include/configs/bcm_ns3.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm/mach-socfpga/include/mach/handoff_soc64.h b/arch/arm/mach-socfpga/include/mach/handoff_soc64.h
-index 902fc6bfb5..9b85e5865b 100644
---- a/arch/arm/mach-socfpga/include/mach/handoff_soc64.h
-+++ b/arch/arm/mach-socfpga/include/mach/handoff_soc64.h
-@@ -78,12 +78,6 @@
+diff --git a/include/configs/bcm_ns3.h b/include/configs/bcm_ns3.h
+index 47de4bc201..7c6e0725a6 100644
+--- a/include/configs/bcm_ns3.h
++++ b/include/configs/bcm_ns3.h
+@@ -45,11 +45,11 @@
+ #define PCIE_ARGS "pcie_args=pci=pcie_bus_safe pcie_ports=native vfio_pci.disable_idle_d3=1\0"
  
- #ifndef __ASSEMBLY__
- #include <asm/types.h>
--enum endianness {
--	LITTLE_ENDIAN = 0,
--	BIG_ENDIAN,
--	UNKNOWN_ENDIANNESS
--};
--
- int socfpga_get_handoff_size(void *handoff_address);
- int socfpga_handoff_read(void *handoff_address, void *table, u32 table_len);
+ #ifdef CONFIG_BCM_SF2_ETH
+-#define ETH_ADDR "ethaddr=00:0A:F7:95:65:A4\0"
++#define BCM_ETH_ADDR "ethaddr=00:0A:F7:95:65:A4\0"
+ #define NET_ARGS "bgmac_platform.ethaddr=${ethaddr} " \
+ 	"ip=${ipaddr}::${gatewayip}:${netmask}::${ethif}:off"
+ #else
+-#define ETH_ADDR
++#define BMC_ETH_ADDR
+ #define NET_ARGS
  #endif
-diff --git a/arch/arm/mach-socfpga/wrap_handoff_soc64.c b/arch/arm/mach-socfpga/wrap_handoff_soc64.c
-index e7cb5ea89c..df0701ec85 100644
---- a/arch/arm/mach-socfpga/wrap_handoff_soc64.c
-+++ b/arch/arm/mach-socfpga/wrap_handoff_soc64.c
-@@ -10,6 +10,15 @@
- #include <errno.h>
- #include "log.h"
  
-+#ifndef __ASSEMBLY__
-+#include <asm/types.h>
-+enum endianness {
-+	LITTLE_ENDIAN = 0,
-+	BIG_ENDIAN,
-+	UNKNOWN_ENDIANNESS
-+};
-+#endif
-+
- static enum endianness check_endianness(u32 handoff)
- {
- 	switch (handoff) {
+@@ -749,7 +749,7 @@
+ 	OS_LOG_LEVEL \
+ 	EXTRA_ARGS \
+ 	PCIE_ARGS \
+-	ETH_ADDR \
++	BMC_ETH_ADDR \
+ 	RESERVED_MEM \
+ 	SETBOOTARGS \
+ 	UPDATEME_FLASH_PARAMS \
 -- 
 2.30.2
 
