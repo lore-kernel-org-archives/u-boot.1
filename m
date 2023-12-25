@@ -4,80 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46337C3DA6E
-	for <u-boot@archiver.kernel.org>; Mon, 25 Dec 2023 15:43:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9F01C3DA6E
+	for <u-boot@archiver.kernel.org>; Mon, 25 Dec 2023 17:14:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0796B87846;
-	Mon, 25 Dec 2023 16:42:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B7AF2876A2;
+	Mon, 25 Dec 2023 18:14:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="u1rvfe+T";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Bw1N9Olo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1309E87846; Mon, 25 Dec 2023 16:42:24 +0100 (CET)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 42FD9876E4; Mon, 25 Dec 2023 18:14:28 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08A668784F
- for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 16:42:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B5EBA86E82
+ for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 18:14:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-50e78f1f41fso702264e87.2
- for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 07:42:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703518940; x=1704123740; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=St6T7N12zAnPhC+iJ9D85GlFLIcEFMxDRD31qwUyTgQ=;
- b=u1rvfe+T7HTkgSpdg2LI4t0VYutlnj82qECUXyEWG0fVaWb+dq6/oyYTeLcHGveQa/
- I0yWWP2h52xHJJcKyJSldCU+cEM9W9cnLSsNHnbXNnYEr42Vi/PmNQhekohMCBjh0T8C
- F8M9knZRFLYIdQ02OWv2CMCjdpURW4opANr3cc9sQBo3RaFgfsuo9jnhxNGFABDu3tNZ
- hGtnoMw1lNP2jURMOQI+wuv6zU1AkCJIUqpCIip0dqrcF7dAb8EN1ZbejHCkBUW6UOKt
- G3jjyyWQPhHby2GT+qTTXnO/5AdEPMu+qaeiB6SwReCeoZUSZKVW0GxH1txtaaFgsjuL
- wu7Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703518940; x=1704123740;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=St6T7N12zAnPhC+iJ9D85GlFLIcEFMxDRD31qwUyTgQ=;
- b=Jmx5Bo3amPP7At3sDPBHy0OiiI3rfxz/QLqyc2DT1Le9I9kOZx1HzGs9QfhPyiL9KT
- WKJLrxAiK5R8ZT/MQFhp+0lqt8+4aNduBqRvMMJPsrbCeORPW4G8BFcDdjpcdKXGswAf
- 34c7ZGl81Aw2J2nH0zNlQkodcIZ/UVwpWUutcDHjEV24OlL3PhjiK6Ru+MU5CzvimGZc
- KUwB04c4Vd8ysXCC47DeCzeIO/XkV/OHCscH6qVVjydNk4GxdE94vIU+4MbDkEGsjOTH
- EBqUGBs7goHyZrl6c9zWWVV42JVIIxOKcrDleAvvWvfQizD7Pn1IDf/oi7SWIgycTg9G
- KZ3w==
-X-Gm-Message-State: AOJu0Yw7afM/oTOmhc58X/oirVae/HcjbKztyNXrs3rnLhUos4DLoa09
- 2F0xH7ZmK2ZfYdCjr56jojjm931pUQl5Q4BPmXCrHvLELoI=
-X-Google-Smtp-Source: AGHT+IGCc/Lhf5Ykhjh2TmqmXN6hmwyOCCJtFF7OTuyNgTbxO+vr4KR6CqX+xYNnUTNND9D9QzOL7w==
-X-Received: by 2002:a05:651c:b12:b0:2cc:c723:9a12 with SMTP id
- b18-20020a05651c0b1200b002ccc7239a12mr532153ljr.68.1703518940704; 
- Mon, 25 Dec 2023 07:42:20 -0800 (PST)
-Received: from localhost.localdomain ([45.82.14.220])
- by smtp.gmail.com with ESMTPSA id
- a17-20020a2ebe91000000b002cca6eafc44sm1425644ljr.113.2023.12.25.07.42.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Dec 2023 07:42:20 -0800 (PST)
-From: Maxim Uvarov <maxim.uvarov@linaro.org>
-To: u-boot@lists.denx.de
-Cc: simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
- sjg@chromium.org, joe.hershberger@ni.com, rfried.dev@gmail.com,
- bharat.gooty@broadcom.com, rayagonda.kokatanur@broadcom.com,
- trini@konsulko.com, Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATHv2 9/9] Makefile: add dtbs to clean
-Date: Mon, 25 Dec 2023 21:39:29 +0600
-Message-Id: <20231225153929.8284-10-maxim.uvarov@linaro.org>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20231225153929.8284-1-maxim.uvarov@linaro.org>
-References: <20231225153929.8284-1-maxim.uvarov@linaro.org>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1703524464; x=1704129264; i=xypron.glpk@gmx.de;
+ bh=i7vgoAO8/1pLO+DgslzcNR8QxFnJnoxxjPRLQvPUXY0=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=Bw1N9OloTodZz9jrc+DknR8W1swCtL755yiQUlnj7UaqsbI+e+SRGlEzZcuNqDTx
+ i9UJ385NwNTO82h5Zsp2SLu3XUUTHdQnAkEMdWQkutSUR1NcTuIWLytFfbIQBtiVM
+ nOFNlpylO8vLi8HU/JW6basefor4/RDBHmqEhVsYqMxw3TEO3LZ8rCkUaVRAjiyub
+ Q6MMRnWm11thPunk17nKfstKbzl51H2muqtghtvdwOYyA0ZMszeklIxEki1AJqYvs
+ YKpcEZaM0Cw+ZAib9iQamZUukTw8S0T3bQ23vxc3nhlWB7hmnQPVvlgfbyKH8szZj
+ VCYsruaN3/WAirhzAQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.140] ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MEm6F-1rT1zv1qMV-00GHWU; Mon, 25
+ Dec 2023 18:14:24 +0100
+Message-ID: <b8724e86-0ed0-4786-90d3-78e5923bc3d4@gmx.de>
+Date: Mon, 25 Dec 2023 18:14:20 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/2] fix auto-generated boot options
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20231220084133.435240-1-masahisa.kojima@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20231220084133.435240-1-masahisa.kojima@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:4qzL6dhF5V+teBa9kqHlwwFCaFFU5YWWJOYU8TkJvUDigAEm9CI
+ cqkVTuQ3vnAiqkGpDfrIkGgYaodMm/8ZQbcRwzZL5i5Fi7omudHb48h30OlQWm9gSmwDhLO
+ jjYtHJuk4NeK7eF3Xzm+RHA7vjlxGVT1kfj3QeesIlR6/HP1ciXPhrn0bXN29bzUJtwPet1
+ wrNl6ixLk0opNwfzk7qJA==
+UI-OutboundReport: notjunk:1;M01:P0:Slqi8RFbiV4=;aOERQhFNtb47zdbgCZ1ULPCzxgc
+ zo4l5dHeHGAN35sWCgbEarTHdwfgSNn9YcebYK5t/GuKSdQ/Cv0WzWjmQEOV+hMAqwwjgEEgG
+ AEfaE3Dh2NIILFD0yN/YeD6vQUPV94YcY3+mPkPKxRFfDvqbaygFdMeLymSwN12LnVqBlFwGH
+ 1Lu5rHGEMh27P13pvkGeqbsz0dtXueC/GY0wubJu+RhcTgE7mpMooKISTxgxMYZyPCDUKrNeG
+ 1aE2eVu488CswSMSkjQgBDrWVZd9vs8qxjlsi50r3NlDMbQAwrD36aA78ra7drGv52I1Z3Ax7
+ gPfoHcKnIaD6oC+h8Qn0bHNcM41C7+UaQtOwb7YVG+9/rE1oFL+1WxxBnShXKqJCjTlmVO0Hq
+ CfX+F2tk8nmSBew+mtfCM+w7YxRUsczqdVIjwRENvHxcgMkrJUjmWRfmMmqmhNQwlb5ELDjDS
+ 0lqg3Fjinca7/itm+UtzUNTNMmkW9NsHAWVtMGD2hnIXvIAjPpaq4M2KGEvTu54+1m5Xgq4Yi
+ EsMx+7XSg/1uWR8b/yTmWG7QBGCfBlM/F2ZEAc4sPvAnhPvVduVbcuprIcLd29Oo2UCV/l10m
+ G1XhgcUO2POfxJz8AOzRgzZC+8SYmhxd7a2FooyfLTJ5X98+iqEwCpC9p+uGEYzhBPzGzsX86
+ h7z8NVWfnTUgzv7RFQA2LnUw9msFSM2C/KfdK6qqsrNQz3Z9h+tuQO/ibBBZGSDReXoP2uPAH
+ vmH0rkXnIICBHySQTSrTqF4n6YAAzdqw0ya+EaJ/hbcqk5H5RcAla5wz/vASInwoknbR8zzC5
+ RmIuTwQhMGQc7pQ9FFX4NNTy5biCAEJMU5ps/MbSEvT6iU18O8cNj1YVy/oN+MfovF/t9Q2ZT
+ 1LZHNURgNkElcsHQutHj9X7rs88129mA7NiHh0LUQ4iXDmz2SA1zs2d86/WIFcy75Bn2UBElt
+ AhXQasY7ddkO/nOrPOIgn/FSm3w=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,27 +88,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CI test checks that generated dtb has to be cleaned up.
+On 12/20/23 09:41, Masahisa Kojima wrote:
+> This series aims to get aligned to the EDK II reference
+> implementation for auto-generated boot options, and tries
+> to address the following issue.
+> https://source.denx.de/u-boot/custodians/u-boot-efi/-/issues/13
+>
+> This series is based on the efi-next-20231217 tag.
+>
+> Masahisa Kojima (2):
+>    efi_loader: auto-generate boot option for each blkio device
+>    efi_loader: auto-generate removable media boot option first
+>
+>   lib/efi_loader/efi_bootmgr.c | 123 +++++++++++++++++++++++++++--------
+>   1 file changed, 96 insertions(+), 27 deletions(-)
+>
 
-Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
----
- Makefile | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Hello Masahisa,
 
-diff --git a/Makefile b/Makefile
-index 220411a293..ab603191ad 100644
---- a/Makefile
-+++ b/Makefile
-@@ -2165,7 +2165,8 @@ CLEAN_FILES += include/autoconf.mk* include/bmp_logo.h include/bmp_logo_data.h \
- 	       mkimage-out.spl.mkimage mkimage.spl.mkimage imx-boot.map \
- 	       itb.fit.fit itb.fit.itb itb.map spl.map mkimage-out.rom.mkimage \
- 	       mkimage.rom.mkimage mkimage-in-simple-bin* rom.map simple-bin* \
--	       idbloader-spi.img lib/efi_loader/helloworld_efi.S *.itb
-+	       idbloader-spi.img lib/efi_loader/helloworld_efi.S *.itb \
-+	       ./*/*.dtb *.dtb
- 
- # Directories & files removed with 'make mrproper'
- MRPROPER_DIRS  += include/config include/generated spl tpl vpl \
--- 
-2.30.2
+please, have a look at the test failures in
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/19089
 
+Best regards
+
+Heinrich
