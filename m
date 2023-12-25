@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62103C3DA6E
-	for <u-boot@archiver.kernel.org>; Mon, 25 Dec 2023 11:00:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19164C3DA6E
+	for <u-boot@archiver.kernel.org>; Mon, 25 Dec 2023 11:05:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7584587692;
-	Mon, 25 Dec 2023 12:00:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 43E9A871B1;
+	Mon, 25 Dec 2023 12:05:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="cJeTJ46Y";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="O+X5uZRT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2483F876A2; Mon, 25 Dec 2023 12:00:15 +0100 (CET)
+ id 3BE1F874F6; Mon, 25 Dec 2023 12:05:08 +0100 (CET)
 Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A17A874F6
- for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 12:00:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A42A8700D
+ for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 12:05:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1703502012; x=1704106812; i=xypron.glpk@gmx.de;
- bh=wYLUlf/Z1USvVRIrJH/vd9rriUXWY+J1B52gH95gaF4=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ t=1703502305; x=1704107105; i=xypron.glpk@gmx.de;
+ bh=f7swGZwbzNtj6OTsG5okBTy7Oi5uRrWX+Rk4wVlBYZY=;
+ h=X-UI-Sender-Class:Date:Subject:From:To:Cc:References:
  In-Reply-To;
- b=cJeTJ46YkjYKsPX170P+Fn9YZbsQZkiLC5SApB7eAU3SeukCf9aGpnTFLFFEDdZy
- XNfNIPCdz355zlsoBjbdBR5HoeGdKQuGIj9SQ7uf3Bus95Lq8AiU0mJzbBrbTAHqP
- WcIj/tHAhSJqizyRvtXWTsVphHVJta4IrqdpNCIA2ndV4Wtd5aOiYnnAroHoVzJdf
- T02aHiqSzkBhG1voIz6Y8PNDZWnOfzIDDjXRY/I5Af2wT++kgXmf33N37Yc6GiE42
- KRtxV2RMWR5rPGxRUeUa9bEr5//270R96NsVQpXSatqa+WOvEKXX9jB3EIuLTQYuX
- 3clZmSz8FL1YCXnmaA==
+ b=O+X5uZRT6udQSakzFKrii0mv4TKg3EZKgHDdUcGwgUSUtBhnk0Nu/7H7jk8vqERa
+ J2SrbFijwN6IRnbZIlNmNeJcSFoRo4Rb+gkMZ8Dm0kXyprS04zJBvBj4IN0sktVeG
+ 5ei/r2Kui7/XfSbgwMf2Q68nhQKMrXaTXvGj63kAUOU4yYKuIoVSSUNGkdAa+qkkA
+ gwHwb9uvb32UNUiY/injjFgQj3FEY8oBIdsfOnJTaXIviUpYI9SvIM7/NcFgrPoCT
+ Dr/TJd0BaoNPlSqEBdRvUqkFUCmedOn6oXiKVIcCXZRuK/TaAo109zvN57Ro81iF4
+ IIN9XaAxjzNKqjxaaQ==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.136] ([178.202.40.247]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MwQT9-1r11Hl0LMT-00sLvq; Mon, 25
- Dec 2023 12:00:12 +0100
-Message-ID: <d5be3c6d-b189-441d-847e-b78194c8a17a@gmx.de>
-Date: Mon, 25 Dec 2023 12:00:11 +0100
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N33Ed-1r7alY07qv-013Ja0; Mon, 25
+ Dec 2023 12:05:05 +0100
+Message-ID: <0a93f491-68a0-49e1-9f19-384550e9fc57@gmx.de>
+Date: Mon, 25 Dec 2023 12:05:04 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 1/2] efi_loader: auto-generate boot option for each blkio
  device
 Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 To: Masahisa Kojima <masahisa.kojima@linaro.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
 References: <20231220084133.435240-1-masahisa.kojima@linaro.org>
  <20231220084133.435240-2-masahisa.kojima@linaro.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231220084133.435240-2-masahisa.kojima@linaro.org>
+ <d5be3c6d-b189-441d-847e-b78194c8a17a@gmx.de>
+In-Reply-To: <d5be3c6d-b189-441d-847e-b78194c8a17a@gmx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:qN3ZxkdUfTV4GZDU/9qM+e7LNJYyBlvEZXqjpVpzHugYkgYufVx
- r9Pf1ut8Q+iquyULTsxzBgV+nkmoJkELSppibFV+CkjoeKtzN+GI+2AVxCkeiQdWJZ08nbg
- svFF3S65xKzSEXv7DMnUpHfyaAf+ZxQ2UUHIAtRW145n8xNhaXmqJgsQrrsZBXTSjWBVXcM
- 8sjx/8+yQIrRwlDBsApAg==
-UI-OutboundReport: notjunk:1;M01:P0:jRb/rxJuzFY=;Dkyc8wwTbp2NwGKepYk6gIdmjPV
- Fauy74sEs+a/dBGPwuGKgPa8kHNJ69WoA2Ok2rwU8HJaBDdz4b4+I9ezSMZ5SvxGv6B5ZHryH
- gtTwYRvkyQ8dCRXZ7xFztYvUCweQ+O+bnmjQzJ7dXieeSL6nxy6ej3BPTnxD/pDC8Z2wlHUZP
- j+S4sfiBPv6mPaTU2suQ7uB8dX3v0MDUBI9e+o7D+GFJVU9DvIEsxQWIWgJzxiVzh9qmFyICV
- PIpJqZA3RgVKTn701365YbaEvt7I83xBEFu6ix7uNW72AWGMrtW+BTyl6oCepvCc4mMw5Dnxf
- 1EWlxbMQX33W3N+YxB7uGet2aDo0HDBiaJJv4XXbKtzW+/pyiy8TbLdeOETuhu0XQeJ6EC8nq
- sj4DeuZC/xGMGcqhMOnxmQDkxmVwuudWVn+KrB9BH8UbRrcx3h/zbESfGpY6Ao6A4zhuPIFTe
- UaBTLKumuZydUTFYMjoscjLgDIWqrjQl0GibdwBbjZx+WD3IUSLgl2dFrfxHdNg2Avw1tCBFu
- 6Z9CJ8C1ID1QLrNgQJN+s3Cx/FJvoexCNk3pC3VAlVyql9UyeEBORe34ltmGevi9HmANAB3zT
- xHLB+VUQvAGklmXhX5Iy99R5pFukUZbX02cIyC6IOBdQUlmCWKrr21FlHDfuHBDk9682vekLF
- Uvwyz0gV21b9UExGvCqfiWxQ31xEg4WsptxmoalokVPl7wkLcJADN4Hh9e8pfRnaCaH5yRGC2
- LkV6+0UuRssWHK7uyvLZnoT2lEnDeqCq+/m5aa+Dc2WFzM4LlBQALGhy2+paHUZB4UJ35fOJ5
- dbxpE+HIu51yleasLCUeiNMthBFyC+P7PJUEVYSZ5l5S847ed6QR8KsizXZMYjGZ/h6LLELVn
- jJyvp6XskR0pxAoiQLgm7HrP82zjdd6tMxP8D2P0mEydTnEgStLm1OT4I7BsUllMdVEHP5lTm
- 9wRWL6PEtSrQqYRF20xbxWnwAIo=
+Content-Transfer-Encoding: base64
+X-Provags-ID: V03:K1:FATS1YHTYEAcD0oAfsIC/vBeiimook0/qjYemZ1x2tzYh0szz7/
+ eQj2pH7fNVpIUSVDeEuK6fv6NRzoPlJ0R47XcxOMozs0Iuzu+nPr6Fmlgt2ZOGkigY5gNSu
+ jykUTTTmQukrczavkDBhX78l5AQaGR9KsUePE7/ztA79ODv21J1Ncygk2fgoN3HPqHG3VJw
+ 10K67aAvspOrUvLX6UNjg==
+UI-OutboundReport: notjunk:1;M01:P0:g/Yt/Grt0TM=;mKOJs102TGyW4kx/JHemvvgFmgm
+ Ya7sRRYzlxk5Cv/KtVuY4oznCosulasha/o/xkgsvs+VzLuWHS23dgw76p5UnQawdMtSM/xyn
+ OEHJjSRj06NuMTaDYa8y3JYpbkLhy9zLD761Lm+dODfdURzSLT4fOhsNGVWu/uozm0Sc+aEat
+ LdeZeQ79Ije5mdS/SQ5tTqMOfR5HJbmvaM9eKnKxC53hT8KBJ6jTaoe3nxw8RiUvS3R3CIJra
+ NW8ZsLYG4PQF4ItuV5fZAvFsdxTphYJt3XBoH/QImNGDRUHM71lD7m2DDurglIwfRKEFElKxz
+ 3fxNKwG8SCoimMFPVo27lD3uafdBSXBdUBvA6sh6hPvs+CTv9yn3mmeoN4CrJ/bSA45rxf3/8
+ MOBj22D9ts0kSTEb2GN0GV5jswwc2b9sQVhcIajmn6x588pJc82lUhxTpPkEk+gjqXtTHUkEO
+ DDcW/EY4wSigLalcF+neO23cSBq/WDhUUkXo+rxduGDuYhXggJatmQ59KsfQzE9cwqy1/cYXe
+ F4rBaB/l1EOfhwBi/33OYXle6U6KaltV+0ar2k3xNZsi9jKnUb9ezopo7Rkm8SSmikh73lqw4
+ fRmnxVZFndpat2zsjW7vvO7vP/E215ThBrPcE9CnU+ekFXPGh1/PuaDEQ2bqwpg3Fhlzn2S0h
+ AUtaTxfcaiQf/ezp4cEDK0hOKZLkXSPwKgexbdA+6joUvPJ6AZT6T9b/0vr4SkhlToAvGHi64
+ 7WDX1GOyy4YpJiM0wFPE/5YijyVWjJ3RdkUPQ4boGPTrc1JcoXRR0TFy68bnulxpd/jY//kfe
+ Hw4AXc9gnL4gavSd4gGlWUAbcYGiE2DM+VekkKPLvjhU3q/nychshbqFgjHCkNMIQxJ3WEu28
+ UIWaefYjnG/wHe04ywtGCba6APdWyMheqQ6ywA+qaPSzI3JuAyzZ4M8+OA9YZtgaLSjNhG7BP
+ frYHix9vhd2ogF97EfcuhEHYeGk=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,247 +91,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/20/23 09:41, Masahisa Kojima wrote:
-> Current efibootmgr auto-generates the boot option for all
-> disks and partitions installing EFI_SIMPLE_FILE_SYSTEM_PROTOCOL,
-> while EDK II reference implementation auto-generates the boot option
-> for all devices installing  EFI_BLOCK_IO_PROTOCOL with
-> eliminating logical partitions.
->
-> This commit modifies the efibootmgr to get aligned to EDK II.
->
-> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-> ---
->   lib/efi_loader/efi_bootmgr.c | 94 +++++++++++++++++++++++++++---------
->   1 file changed, 71 insertions(+), 23 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> index 56d97f2382..636f01e2eb 100644
-> --- a/lib/efi_loader/efi_bootmgr.c
-> +++ b/lib/efi_loader/efi_bootmgr.c
-> @@ -560,6 +560,50 @@ err:
->   	return ret;
->   }
->
-> +/**
-> + * try_load_from_media() - load file from media
-> + *
-> + * @fp:		file path
-> + * @handle:	pointer to handle for newly installed image
-> + *
-> + * If @fp contains a file name, load the file.
-> + * If @fp does not have a file name, search the architecture-specific
-> + * default file and load it.
-> + * TODO: If the FilePathList[0] device does not support
-> + * EFI_SIMPLE_FILE_SYSTEM_PROTOCOL but supports EFI_BLOCK_IO_PROTOCOL,
-> + * call EFI_BOOT_SERVICES.ConnectController()
-> + * TODO: FilePathList[0] device supports EFI_SIMPLE_FILE_SYSTEM_PROTOCO=
-L
-> + * not based on EFI_BLOCK_IO_PROTOCOL
-> + *
-> + * Return:	status code
-> + */
-> +static efi_status_t try_load_from_media(struct efi_device_path *file_pa=
-th,
-> +					efi_handle_t *handle)
-> +{
-> +	efi_handle_t h;
-> +	efi_status_t ret =3D EFI_SUCCESS;
-> +	struct efi_device_path *rem, *dp =3D NULL;
-> +	struct efi_device_path *final_dp =3D file_path;
-> +
-> +	h =3D efi_dp_find_obj(file_path, &efi_block_io_guid, &rem);
-> +	if (h) {
-> +		if (rem->type =3D=3D DEVICE_PATH_TYPE_END) {
-> +			/* no file name present, try default file */
-> +			ret =3D check_disk_has_default_file(h->dev, &dp);
-> +			if (ret !=3D EFI_SUCCESS)
-> +				return ret;
-> +
-> +			final_dp =3D dp;
-> +		}
-> +	}
-> +
-> +	ret =3D EFI_CALL(efi_load_image(true, efi_root, final_dp, NULL, 0, han=
-dle));
-> +
-> +	efi_free_pool(dp);
-> +
-> +	return ret;
-> +}
-> +
->   /**
->    * try_load_entry() - try to load image for boot option
->    *
-> @@ -594,7 +638,6 @@ static efi_status_t try_load_entry(u16 n, efi_handle=
-_t *handle,
->   	}
->
->   	if (lo.attributes & LOAD_OPTION_ACTIVE) {
-> -		struct efi_device_path *file_path;
->   		u32 attributes;
->
->   		log_debug("trying to load \"%ls\" from %pD\n", lo.label,
-> @@ -611,10 +654,7 @@ static efi_status_t try_load_entry(u16 n, efi_handl=
-e_t *handle,
->   			else
->   				ret =3D EFI_LOAD_ERROR;
-
-This line does not exist in efi/next. Am I missing a prerequisite patch?
-
-Best regards
-
-Heinrich
-
->   		} else {
-> -			file_path =3D expand_media_path(lo.file_path);
-> -			ret =3D EFI_CALL(efi_load_image(true, efi_root, file_path,
-> -						      NULL, 0, handle));
-> -			efi_free_pool(file_path);
-> +			ret =3D try_load_from_media(lo.file_path, handle);
->   		}
->   		if (ret !=3D EFI_SUCCESS) {
->   			log_warning("Loading %ls '%ls' failed\n",
-> @@ -748,19 +788,19 @@ error:
->    * efi_bootmgr_enumerate_boot_option() - enumerate the possible bootab=
-le media
->    *
->    * @opt:		pointer to the media boot option structure
-> - * @volume_handles:	pointer to the efi handles
-> + * @handles:		pointer to the efi handles
->    * @count:		number of efi handle
->    * Return:		status code
->    */
->   static efi_status_t efi_bootmgr_enumerate_boot_option(struct eficonfig=
-_media_boot_option *opt,
-> -						      efi_handle_t *volume_handles,
-> -						      efi_status_t count)
-> +						      efi_handle_t *handles,
-> +						      efi_uintn_t *count)
->   {
-> -	u32 i;
-> +	u32 i, num =3D 0;
->   	struct efi_handler *handler;
->   	efi_status_t ret =3D EFI_SUCCESS;
->
-> -	for (i =3D 0; i < count; i++) {
-> +	for (i =3D 0; i < *count; i++) {
->   		u16 *p;
->   		u16 dev_name[BOOTMENU_DEVICE_NAME_MAX];
->   		char *optional_data;
-> @@ -768,8 +808,15 @@ static efi_status_t efi_bootmgr_enumerate_boot_opti=
-on(struct eficonfig_media_boo
->   		char buf[BOOTMENU_DEVICE_NAME_MAX];
->   		struct efi_device_path *device_path;
->   		struct efi_device_path *short_dp;
-> +		struct efi_block_io *blkio;
-> +
-> +		ret =3D efi_search_protocol(handles[i], &efi_block_io_guid, &handler)=
-;
-> +		blkio =3D handler->protocol_interface;
->
-> -		ret =3D efi_search_protocol(volume_handles[i], &efi_guid_device_path,=
- &handler);
-> +		if (blkio->media->logical_partition)
-> +			continue;
-> +
-> +		ret =3D efi_search_protocol(handles[i], &efi_guid_device_path, &handl=
-er);
->   		if (ret !=3D EFI_SUCCESS)
->   			continue;
->   		ret =3D efi_protocol_open(handler, (void **)&device_path,
-> @@ -777,7 +824,7 @@ static efi_status_t efi_bootmgr_enumerate_boot_optio=
-n(struct eficonfig_media_boo
->   		if (ret !=3D EFI_SUCCESS)
->   			continue;
->
-> -		ret =3D efi_disk_get_device_name(volume_handles[i], buf, BOOTMENU_DEV=
-ICE_NAME_MAX);
-> +		ret =3D efi_disk_get_device_name(handles[i], buf, BOOTMENU_DEVICE_NAM=
-E_MAX);
->   		if (ret !=3D EFI_SUCCESS)
->   			continue;
->
-> @@ -801,17 +848,20 @@ static efi_status_t efi_bootmgr_enumerate_boot_opt=
-ion(struct eficonfig_media_boo
->   		 * to store guid, instead of realloc the load_option.
->   		 */
->   		lo.optional_data =3D "1234567";
-> -		opt[i].size =3D efi_serialize_load_option(&lo, (u8 **)&opt[i].lo);
-> -		if (!opt[i].size) {
-> +		opt[num].size =3D efi_serialize_load_option(&lo, (u8 **)&opt[num].lo)=
-;
-> +		if (!opt[num].size) {
->   			ret =3D EFI_OUT_OF_RESOURCES;
->   			goto out;
->   		}
->   		/* set the guid */
-> -		optional_data =3D (char *)opt[i].lo + (opt[i].size - u16_strsize(u"12=
-34567"));
-> +		optional_data =3D (char *)opt[num].lo + (opt[num].size - u16_strsize(=
-u"1234567"));
->   		memcpy(optional_data, &efi_guid_bootmenu_auto_generated, sizeof(efi_=
-guid_t));
-> +		num++;
->   	}
->
->   out:
-> +	*count =3D num;
-> +
->   	return ret;
->   }
->
-> @@ -1040,8 +1090,7 @@ efi_status_t efi_bootmgr_delete_boot_option(u16 bo=
-ot_index)
->   /**
->    * efi_bootmgr_update_media_device_boot_option() - generate the media =
-device boot option
->    *
-> - * This function enumerates all devices supporting EFI_SIMPLE_FILE_SYST=
-EM_PROTOCOL
-> - * and generate the bootmenu entries.
-> + * This function enumerates all BlockIo devices and add the boot option=
- for it.
->    * This function also provide the BOOT#### variable maintenance for
->    * the media device entries.
->    * - Automatically create the BOOT#### variable for the newly detected=
- device,
-> @@ -1057,13 +1106,13 @@ efi_status_t efi_bootmgr_update_media_device_boo=
-t_option(void)
->   	u32 i;
->   	efi_status_t ret;
->   	efi_uintn_t count;
-> -	efi_handle_t *volume_handles =3D NULL;
-> +	efi_handle_t *handles =3D NULL;
->   	struct eficonfig_media_boot_option *opt =3D NULL;
->
->   	ret =3D efi_locate_handle_buffer_int(BY_PROTOCOL,
-> -					   &efi_simple_file_system_protocol_guid,
-> +					   &efi_block_io_guid,
->   					   NULL, &count,
-> -					   (efi_handle_t **)&volume_handles);
-> +					   (efi_handle_t **)&handles);
->   	if (ret !=3D EFI_SUCCESS)
->   		goto out;
->
-> @@ -1073,8 +1122,7 @@ efi_status_t efi_bootmgr_update_media_device_boot_=
-option(void)
->   		goto out;
->   	}
->
-> -	/* enumerate all devices supporting EFI_SIMPLE_FILE_SYSTEM_PROTOCOL */
-> -	ret =3D efi_bootmgr_enumerate_boot_option(opt, volume_handles, count);
-> +	ret =3D efi_bootmgr_enumerate_boot_option(opt, handles, &count);
->   	if (ret !=3D EFI_SUCCESS)
->   		goto out;
->
-> @@ -1122,7 +1170,7 @@ out:
->   			free(opt[i].lo);
->   	}
->   	free(opt);
-> -	efi_free_pool(volume_handles);
-> +	efi_free_pool(handles);
->
->   	if (ret =3D=3D EFI_NOT_FOUND)
->   		return EFI_SUCCESS;
-
+T24gMTIvMjUvMjMgMTI6MDAsIEhlaW5yaWNoIFNjaHVjaGFyZHQgd3JvdGU6DQo+IE9uIDEyLzIw
+LzIzIDA5OjQxLCBNYXNhaGlzYSBLb2ppbWEgd3JvdGU6DQo+PiBDdXJyZW50IGVmaWJvb3RtZ3Ig
+YXV0by1nZW5lcmF0ZXMgdGhlIGJvb3Qgb3B0aW9uIGZvciBhbGwNCj4+IGRpc2tzIGFuZCBwYXJ0
+aXRpb25zIGluc3RhbGxpbmcgRUZJX1NJTVBMRV9GSUxFX1NZU1RFTV9QUk9UT0NPTCwNCj4+IHdo
+aWxlIEVESyBJSSByZWZlcmVuY2UgaW1wbGVtZW50YXRpb24gYXV0by1nZW5lcmF0ZXMgdGhlIGJv
+b3Qgb3B0aW9uDQo+PiBmb3IgYWxsIGRldmljZXMgaW5zdGFsbGluZ8KgIEVGSV9CTE9DS19JT19Q
+Uk9UT0NPTCB3aXRoDQo+PiBlbGltaW5hdGluZyBsb2dpY2FsIHBhcnRpdGlvbnMuDQo+Pg0KPj4g
+VGhpcyBjb21taXQgbW9kaWZpZXMgdGhlIGVmaWJvb3RtZ3IgdG8gZ2V0IGFsaWduZWQgdG8gRURL
+IElJLg0KPj4NCj4+IFNpZ25lZC1vZmYtYnk6IE1hc2FoaXNhIEtvamltYSA8bWFzYWhpc2Eua29q
+aW1hQGxpbmFyby5vcmc+DQo+PiAtLS0NCj4+IMKgIGxpYi9lZmlfbG9hZGVyL2VmaV9ib290bWdy
+LmMgfCA5NCArKysrKysrKysrKysrKysrKysrKysrKysrKystLS0tLS0tLS0NCj4+IMKgIDEgZmls
+ZSBjaGFuZ2VkLCA3MSBpbnNlcnRpb25zKCspLCAyMyBkZWxldGlvbnMoLSkNCj4+DQo+PiBkaWZm
+IC0tZ2l0IGEvbGliL2VmaV9sb2FkZXIvZWZpX2Jvb3RtZ3IuYyBiL2xpYi9lZmlfbG9hZGVyL2Vm
+aV9ib290bWdyLmMNCj4+IGluZGV4IDU2ZDk3ZjIzODIuLjYzNmYwMWUyZWIgMTAwNjQ0DQo+PiAt
+LS0gYS9saWIvZWZpX2xvYWRlci9lZmlfYm9vdG1nci5jDQo+PiArKysgYi9saWIvZWZpX2xvYWRl
+ci9lZmlfYm9vdG1nci5jDQo+PiBAQCAtNTYwLDYgKzU2MCw1MCBAQCBlcnI6DQo+PiDCoMKgwqDC
+oMKgIHJldHVybiByZXQ7DQo+PiDCoCB9DQo+Pg0KPj4gKy8qKg0KPj4gKyAqIHRyeV9sb2FkX2Zy
+b21fbWVkaWEoKSAtIGxvYWQgZmlsZSBmcm9tIG1lZGlhDQo+PiArICoNCj4+ICsgKiBAZnA6wqDC
+oMKgwqDCoMKgwqAgZmlsZSBwYXRoDQo+PiArICogQGhhbmRsZTrCoMKgwqAgcG9pbnRlciB0byBo
+YW5kbGUgZm9yIG5ld2x5IGluc3RhbGxlZCBpbWFnZQ0KPj4gKyAqDQo+PiArICogSWYgQGZwIGNv
+bnRhaW5zIGEgZmlsZSBuYW1lLCBsb2FkIHRoZSBmaWxlLg0KPj4gKyAqIElmIEBmcCBkb2VzIG5v
+dCBoYXZlIGEgZmlsZSBuYW1lLCBzZWFyY2ggdGhlIGFyY2hpdGVjdHVyZS1zcGVjaWZpYw0KPj4g
+KyAqIGRlZmF1bHQgZmlsZSBhbmQgbG9hZCBpdC4NCj4+ICsgKiBUT0RPOiBJZiB0aGUgRmlsZVBh
+dGhMaXN0WzBdIGRldmljZSBkb2VzIG5vdCBzdXBwb3J0DQo+PiArICogRUZJX1NJTVBMRV9GSUxF
+X1NZU1RFTV9QUk9UT0NPTCBidXQgc3VwcG9ydHMgRUZJX0JMT0NLX0lPX1BST1RPQ09MLA0KPj4g
+KyAqIGNhbGwgRUZJX0JPT1RfU0VSVklDRVMuQ29ubmVjdENvbnRyb2xsZXIoKQ0KPj4gKyAqIFRP
+RE86IEZpbGVQYXRoTGlzdFswXSBkZXZpY2Ugc3VwcG9ydHMgRUZJX1NJTVBMRV9GSUxFX1NZU1RF
+TV9QUk9UT0NPTA0KPj4gKyAqIG5vdCBiYXNlZCBvbiBFRklfQkxPQ0tfSU9fUFJPVE9DT0wNCj4+
+ICsgKg0KPj4gKyAqIFJldHVybjrCoMKgwqAgc3RhdHVzIGNvZGUNCj4+ICsgKi8NCj4+ICtzdGF0
+aWMgZWZpX3N0YXR1c190IHRyeV9sb2FkX2Zyb21fbWVkaWEoc3RydWN0IGVmaV9kZXZpY2VfcGF0
+aCANCj4+ICpmaWxlX3BhdGgsDQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqAgZWZpX2hhbmRsZV90ICpoYW5kbGUpDQo+PiArew0KPj4gK8KgwqDCoCBlZmlfaGFuZGxl
+X3QgaDsNCj4+ICvCoMKgwqAgZWZpX3N0YXR1c190IHJldCA9IEVGSV9TVUNDRVNTOw0KPj4gK8Kg
+wqDCoCBzdHJ1Y3QgZWZpX2RldmljZV9wYXRoICpyZW0sICpkcCA9IE5VTEw7DQo+PiArwqDCoMKg
+IHN0cnVjdCBlZmlfZGV2aWNlX3BhdGggKmZpbmFsX2RwID0gZmlsZV9wYXRoOw0KPj4gKw0KPj4g
+K8KgwqDCoCBoID0gZWZpX2RwX2ZpbmRfb2JqKGZpbGVfcGF0aCwgJmVmaV9ibG9ja19pb19ndWlk
+LCAmcmVtKTsNCj4+ICvCoMKgwqAgaWYgKGgpIHsNCj4+ICvCoMKgwqDCoMKgwqDCoCBpZiAocmVt
+LT50eXBlID09IERFVklDRV9QQVRIX1RZUEVfRU5EKSB7DQo+PiArwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCAvKiBubyBmaWxlIG5hbWUgcHJlc2VudCwgdHJ5IGRlZmF1bHQgZmlsZSAqLw0KPj4gK8Kg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0ID0gY2hlY2tfZGlza19oYXNfZGVmYXVsdF9maWxlKGgt
+PmRldiwgJmRwKTsNCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlmIChyZXQgIT0gRUZJX1NV
+Q0NFU1MpDQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHJldHVybiByZXQ7DQo+
+PiArDQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBmaW5hbF9kcCA9IGRwOw0KPj4gK8KgwqDC
+oMKgwqDCoMKgIH0NCj4+ICvCoMKgwqAgfQ0KPj4gKw0KPj4gK8KgwqDCoCByZXQgPSBFRklfQ0FM
+TChlZmlfbG9hZF9pbWFnZSh0cnVlLCBlZmlfcm9vdCwgZmluYWxfZHAsIE5VTEwsIDAsIA0KPj4g
+aGFuZGxlKSk7DQo+PiArDQo+PiArwqDCoMKgIGVmaV9mcmVlX3Bvb2woZHApOw0KPj4gKw0KPj4g
+K8KgwqDCoCByZXR1cm4gcmV0Ow0KPj4gK30NCj4+ICsNCj4+IMKgIC8qKg0KPj4gwqDCoCAqIHRy
+eV9sb2FkX2VudHJ5KCkgLSB0cnkgdG8gbG9hZCBpbWFnZSBmb3IgYm9vdCBvcHRpb24NCj4+IMKg
+wqAgKg0KPj4gQEAgLTU5NCw3ICs2MzgsNiBAQCBzdGF0aWMgZWZpX3N0YXR1c190IHRyeV9sb2Fk
+X2VudHJ5KHUxNiBuLCANCj4+IGVmaV9oYW5kbGVfdCAqaGFuZGxlLA0KPj4gwqDCoMKgwqDCoCB9
+DQo+Pg0KPj4gwqDCoMKgwqDCoCBpZiAobG8uYXR0cmlidXRlcyAmIExPQURfT1BUSU9OX0FDVElW
+RSkgew0KPj4gLcKgwqDCoMKgwqDCoMKgIHN0cnVjdCBlZmlfZGV2aWNlX3BhdGggKmZpbGVfcGF0
+aDsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCB1MzIgYXR0cmlidXRlczsNCj4+DQo+PiDCoMKgwqDC
+oMKgwqDCoMKgwqAgbG9nX2RlYnVnKCJ0cnlpbmcgdG8gbG9hZCBcIiVsc1wiIGZyb20gJXBEXG4i
+LCBsby5sYWJlbCwNCj4+IEBAIC02MTEsMTAgKzY1NCw3IEBAIHN0YXRpYyBlZmlfc3RhdHVzX3Qg
+dHJ5X2xvYWRfZW50cnkodTE2IG4sIA0KPj4gZWZpX2hhbmRsZV90ICpoYW5kbGUsDQo+PiDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBlbHNlDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIHJldCA9IEVGSV9MT0FEX0VSUk9SOw0KPiANCj4gVGhpcyBsaW5lIGRvZXMgbm90
+IGV4aXN0IGluIGVmaS9uZXh0LiBBbSBJIG1pc3NpbmcgYSBwcmVyZXF1aXNpdGUgcGF0Y2g/DQoN
+Ck15IGZhdWx0Lg0KDQoNCg0KPiANCj4gQmVzdCByZWdhcmRzDQo+IA0KPiBIZWlucmljaA0KPiAN
+Cj4+IMKgwqDCoMKgwqDCoMKgwqDCoCB9IGVsc2Ugew0KPj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgZmlsZV9wYXRoID0gZXhwYW5kX21lZGlhX3BhdGgobG8uZmlsZV9wYXRoKTsNCj4+IC3CoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIHJldCA9IEVGSV9DQUxMKGVmaV9sb2FkX2ltYWdlKHRydWUsIGVm
+aV9yb290LCBmaWxlX3BhdGgsDQo+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBOVUxMLCAwLCBoYW5kbGUpKTsNCj4+IC3CoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgIGVmaV9mcmVlX3Bvb2woZmlsZV9wYXRoKTsNCj4+ICvCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIHJldCA9IHRyeV9sb2FkX2Zyb21fbWVkaWEobG8uZmlsZV9wYXRoLCBoYW5k
+bGUpOw0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIH0NCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAo
+cmV0ICE9IEVGSV9TVUNDRVNTKSB7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBsb2df
+d2FybmluZygiTG9hZGluZyAlbHMgJyVscycgZmFpbGVkXG4iLA0KPj4gQEAgLTc0OCwxOSArNzg4
+LDE5IEBAIGVycm9yOg0KPj4gwqDCoCAqIGVmaV9ib290bWdyX2VudW1lcmF0ZV9ib290X29wdGlv
+bigpIC0gZW51bWVyYXRlIHRoZSBwb3NzaWJsZSANCj4+IGJvb3RhYmxlIG1lZGlhDQo+PiDCoMKg
+ICoNCj4+IMKgwqAgKiBAb3B0OsKgwqDCoMKgwqDCoMKgIHBvaW50ZXIgdG8gdGhlIG1lZGlhIGJv
+b3Qgb3B0aW9uIHN0cnVjdHVyZQ0KPj4gLSAqIEB2b2x1bWVfaGFuZGxlczrCoMKgwqAgcG9pbnRl
+ciB0byB0aGUgZWZpIGhhbmRsZXMNCj4+ICsgKiBAaGFuZGxlczrCoMKgwqDCoMKgwqDCoCBwb2lu
+dGVyIHRvIHRoZSBlZmkgaGFuZGxlcw0KPj4gwqDCoCAqIEBjb3VudDrCoMKgwqDCoMKgwqDCoCBu
+dW1iZXIgb2YgZWZpIGhhbmRsZQ0KPj4gwqDCoCAqIFJldHVybjrCoMKgwqDCoMKgwqDCoCBzdGF0
+dXMgY29kZQ0KPj4gwqDCoCAqLw0KPj4gwqAgc3RhdGljIGVmaV9zdGF0dXNfdCBlZmlfYm9vdG1n
+cl9lbnVtZXJhdGVfYm9vdF9vcHRpb24oc3RydWN0IA0KPj4gZWZpY29uZmlnX21lZGlhX2Jvb3Rf
+b3B0aW9uICpvcHQsDQo+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCBlZmlfaGFuZGxlX3QgKnZvbHVtZV9oYW5kbGVzLA0KPj4gLcKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+ZWZpX3N0YXR1c190IGNvdW50KQ0KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZWZpX2hhbmRsZV90ICpoYW5kbGVzLA0KPj4gK8Kg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+ZWZpX3VpbnRuX3QgKmNvdW50KQ0KPj4gwqAgew0KPj4gLcKgwqDCoCB1MzIgaTsNCj4+ICvCoMKg
+wqAgdTMyIGksIG51bSA9IDA7DQo+PiDCoMKgwqDCoMKgIHN0cnVjdCBlZmlfaGFuZGxlciAqaGFu
+ZGxlcjsNCj4+IMKgwqDCoMKgwqAgZWZpX3N0YXR1c190IHJldCA9IEVGSV9TVUNDRVNTOw0KPj4N
+Cj4+IC3CoMKgwqAgZm9yIChpID0gMDsgaSA8IGNvdW50OyBpKyspIHsNCj4+ICvCoMKgwqAgZm9y
+IChpID0gMDsgaSA8ICpjb3VudDsgaSsrKSB7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgdTE2ICpw
+Ow0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHUxNiBkZXZfbmFtZVtCT09UTUVOVV9ERVZJQ0VfTkFN
+RV9NQVhdOw0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIGNoYXIgKm9wdGlvbmFsX2RhdGE7DQo+PiBA
+QCAtNzY4LDggKzgwOCwxNSBAQCBzdGF0aWMgZWZpX3N0YXR1c190IA0KPj4gZWZpX2Jvb3RtZ3Jf
+ZW51bWVyYXRlX2Jvb3Rfb3B0aW9uKHN0cnVjdCBlZmljb25maWdfbWVkaWFfYm9vDQo+PiDCoMKg
+wqDCoMKgwqDCoMKgwqAgY2hhciBidWZbQk9PVE1FTlVfREVWSUNFX05BTUVfTUFYXTsNCj4+IMKg
+wqDCoMKgwqDCoMKgwqDCoCBzdHJ1Y3QgZWZpX2RldmljZV9wYXRoICpkZXZpY2VfcGF0aDsNCj4+
+IMKgwqDCoMKgwqDCoMKgwqDCoCBzdHJ1Y3QgZWZpX2RldmljZV9wYXRoICpzaG9ydF9kcDsNCj4+
+ICvCoMKgwqDCoMKgwqDCoCBzdHJ1Y3QgZWZpX2Jsb2NrX2lvICpibGtpbzsNCj4+ICsNCj4+ICvC
+oMKgwqDCoMKgwqDCoCByZXQgPSBlZmlfc2VhcmNoX3Byb3RvY29sKGhhbmRsZXNbaV0sICZlZmlf
+YmxvY2tfaW9fZ3VpZCwgDQo+PiAmaGFuZGxlcik7DQo+PiArwqDCoMKgwqDCoMKgwqAgYmxraW8g
+PSBoYW5kbGVyLT5wcm90b2NvbF9pbnRlcmZhY2U7DQo+Pg0KPj4gLcKgwqDCoMKgwqDCoMKgIHJl
+dCA9IGVmaV9zZWFyY2hfcHJvdG9jb2wodm9sdW1lX2hhbmRsZXNbaV0sIA0KPj4gJmVmaV9ndWlk
+X2RldmljZV9wYXRoLCAmaGFuZGxlcik7DQo+PiArwqDCoMKgwqDCoMKgwqAgaWYgKGJsa2lvLT5t
+ZWRpYS0+bG9naWNhbF9wYXJ0aXRpb24pDQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBjb250
+aW51ZTsNCj4+ICsNCj4+ICvCoMKgwqDCoMKgwqDCoCByZXQgPSBlZmlfc2VhcmNoX3Byb3RvY29s
+KGhhbmRsZXNbaV0sICZlZmlfZ3VpZF9kZXZpY2VfcGF0aCwgDQo+PiAmaGFuZGxlcik7DQo+PiDC
+oMKgwqDCoMKgwqDCoMKgwqAgaWYgKHJldCAhPSBFRklfU1VDQ0VTUykNCj4+IMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgIGNvbnRpbnVlOw0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHJldCA9IGVm
+aV9wcm90b2NvbF9vcGVuKGhhbmRsZXIsICh2b2lkICoqKSZkZXZpY2VfcGF0aCwNCj4+IEBAIC03
+NzcsNyArODI0LDcgQEAgc3RhdGljIGVmaV9zdGF0dXNfdCANCj4+IGVmaV9ib290bWdyX2VudW1l
+cmF0ZV9ib290X29wdGlvbihzdHJ1Y3QgZWZpY29uZmlnX21lZGlhX2Jvbw0KPj4gwqDCoMKgwqDC
+oMKgwqDCoMKgIGlmIChyZXQgIT0gRUZJX1NVQ0NFU1MpDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCBjb250aW51ZTsNCj4+DQo+PiAtwqDCoMKgwqDCoMKgwqAgcmV0ID0gZWZpX2Rpc2tf
+Z2V0X2RldmljZV9uYW1lKHZvbHVtZV9oYW5kbGVzW2ldLCBidWYsIA0KPj4gQk9PVE1FTlVfREVW
+SUNFX05BTUVfTUFYKTsNCj4+ICvCoMKgwqDCoMKgwqDCoCByZXQgPSBlZmlfZGlza19nZXRfZGV2
+aWNlX25hbWUoaGFuZGxlc1tpXSwgYnVmLCANCj4+IEJPT1RNRU5VX0RFVklDRV9OQU1FX01BWCk7
+DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKHJldCAhPSBFRklfU1VDQ0VTUykNCj4+IMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIGNvbnRpbnVlOw0KPj4NCj4+IEBAIC04MDEsMTcgKzg0OCwy
+MCBAQCBzdGF0aWMgZWZpX3N0YXR1c190IA0KPj4gZWZpX2Jvb3RtZ3JfZW51bWVyYXRlX2Jvb3Rf
+b3B0aW9uKHN0cnVjdCBlZmljb25maWdfbWVkaWFfYm9vDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCAqIHRvIHN0b3JlIGd1aWQsIGluc3RlYWQgb2YgcmVhbGxvYyB0aGUgbG9hZF9vcHRpb24uDQo+
+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoCAqLw0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIGxvLm9wdGlv
+bmFsX2RhdGEgPSAiMTIzNDU2NyI7DQo+PiAtwqDCoMKgwqDCoMKgwqAgb3B0W2ldLnNpemUgPSBl
+Zmlfc2VyaWFsaXplX2xvYWRfb3B0aW9uKCZsbywgKHU4ICoqKSZvcHRbaV0ubG8pOw0KPj4gLcKg
+wqDCoMKgwqDCoMKgIGlmICghb3B0W2ldLnNpemUpIHsNCj4+ICvCoMKgwqDCoMKgwqDCoCBvcHRb
+bnVtXS5zaXplID0gZWZpX3NlcmlhbGl6ZV9sb2FkX29wdGlvbigmbG8sICh1OCANCj4+ICoqKSZv
+cHRbbnVtXS5sbyk7DQo+PiArwqDCoMKgwqDCoMKgwqAgaWYgKCFvcHRbbnVtXS5zaXplKSB7DQo+
+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXQgPSBFRklfT1VUX09GX1JFU09VUkNFUzsN
+Cj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGdvdG8gb3V0Ow0KPj4gwqDCoMKgwqDCoMKg
+wqDCoMKgIH0NCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAvKiBzZXQgdGhlIGd1aWQgKi8NCj4+IC3C
+oMKgwqDCoMKgwqDCoCBvcHRpb25hbF9kYXRhID0gKGNoYXIgKilvcHRbaV0ubG8gKyAob3B0W2ld
+LnNpemUgLSANCj4+IHUxNl9zdHJzaXplKHUiMTIzNDU2NyIpKTsNCj4+ICvCoMKgwqDCoMKgwqDC
+oCBvcHRpb25hbF9kYXRhID0gKGNoYXIgKilvcHRbbnVtXS5sbyArIChvcHRbbnVtXS5zaXplIC0g
+DQo+PiB1MTZfc3Ryc2l6ZSh1IjEyMzQ1NjciKSk7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgbWVt
+Y3B5KG9wdGlvbmFsX2RhdGEsICZlZmlfZ3VpZF9ib290bWVudV9hdXRvX2dlbmVyYXRlZCwgDQo+
+PiBzaXplb2YoZWZpX2d1aWRfdCkpOw0KPj4gK8KgwqDCoMKgwqDCoMKgIG51bSsrOw0KPj4gwqDC
+oMKgwqDCoCB9DQo+Pg0KPj4gwqAgb3V0Og0KPj4gK8KgwqDCoCAqY291bnQgPSBudW07DQo+PiAr
+DQo+PiDCoMKgwqDCoMKgIHJldHVybiByZXQ7DQo+PiDCoCB9DQo+Pg0KPj4gQEAgLTEwNDAsOCAr
+MTA5MCw3IEBAIGVmaV9zdGF0dXNfdCBlZmlfYm9vdG1ncl9kZWxldGVfYm9vdF9vcHRpb24odTE2
+IA0KPj4gYm9vdF9pbmRleCkNCj4+IMKgIC8qKg0KPj4gwqDCoCAqIGVmaV9ib290bWdyX3VwZGF0
+ZV9tZWRpYV9kZXZpY2VfYm9vdF9vcHRpb24oKSAtIGdlbmVyYXRlIHRoZSANCj4+IG1lZGlhIGRl
+dmljZSBib290IG9wdGlvbg0KPj4gwqDCoCAqDQo+PiAtICogVGhpcyBmdW5jdGlvbiBlbnVtZXJh
+dGVzIGFsbCBkZXZpY2VzIHN1cHBvcnRpbmcgDQo+PiBFRklfU0lNUExFX0ZJTEVfU1lTVEVNX1BS
+T1RPQ09MDQo+PiAtICogYW5kIGdlbmVyYXRlIHRoZSBib290bWVudSBlbnRyaWVzLg0KPj4gKyAq
+IFRoaXMgZnVuY3Rpb24gZW51bWVyYXRlcyBhbGwgQmxvY2tJbyBkZXZpY2VzIGFuZCBhZGQgdGhl
+IGJvb3QgDQo+PiBvcHRpb24gZm9yIGl0Lg0KPj4gwqDCoCAqIFRoaXMgZnVuY3Rpb24gYWxzbyBw
+cm92aWRlIHRoZSBCT09UIyMjIyB2YXJpYWJsZSBtYWludGVuYW5jZSBmb3INCj4+IMKgwqAgKiB0
+aGUgbWVkaWEgZGV2aWNlIGVudHJpZXMuDQo+PiDCoMKgICogLSBBdXRvbWF0aWNhbGx5IGNyZWF0
+ZSB0aGUgQk9PVCMjIyMgdmFyaWFibGUgZm9yIHRoZSBuZXdseSANCj4+IGRldGVjdGVkIGRldmlj
+ZSwNCj4+IEBAIC0xMDU3LDEzICsxMTA2LDEzIEBAIGVmaV9zdGF0dXNfdCANCj4+IGVmaV9ib290
+bWdyX3VwZGF0ZV9tZWRpYV9kZXZpY2VfYm9vdF9vcHRpb24odm9pZCkNCj4+IMKgwqDCoMKgwqAg
+dTMyIGk7DQo+PiDCoMKgwqDCoMKgIGVmaV9zdGF0dXNfdCByZXQ7DQo+PiDCoMKgwqDCoMKgIGVm
+aV91aW50bl90IGNvdW50Ow0KPj4gLcKgwqDCoCBlZmlfaGFuZGxlX3QgKnZvbHVtZV9oYW5kbGVz
+ID0gTlVMTDsNCj4+ICvCoMKgwqAgZWZpX2hhbmRsZV90ICpoYW5kbGVzID0gTlVMTDsNCj4+IMKg
+wqDCoMKgwqAgc3RydWN0IGVmaWNvbmZpZ19tZWRpYV9ib290X29wdGlvbiAqb3B0ID0gTlVMTDsN
+Cj4+DQo+PiDCoMKgwqDCoMKgIHJldCA9IGVmaV9sb2NhdGVfaGFuZGxlX2J1ZmZlcl9pbnQoQllf
+UFJPVE9DT0wsDQo+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgJmVmaV9zaW1wbGVfZmlsZV9zeXN0ZW1fcHJvdG9jb2xfZ3VpZCwNCj4+ICvCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAmZWZpX2Jsb2NrX2lvX2d1aWQsDQo+
+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgTlVMTCwg
+JmNvdW50LA0KPj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IChlZmlfaGFuZGxlX3QgKiopJnZvbHVtZV9oYW5kbGVzKTsNCj4+ICvCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAoZWZpX2hhbmRsZV90ICoqKSZoYW5kbGVzKTsN
+Cj4+IMKgwqDCoMKgwqAgaWYgKHJldCAhPSBFRklfU1VDQ0VTUykNCj4+IMKgwqDCoMKgwqDCoMKg
+wqDCoCBnb3RvIG91dDsNCj4+DQo+PiBAQCAtMTA3Myw4ICsxMTIyLDcgQEAgZWZpX3N0YXR1c190
+IA0KPj4gZWZpX2Jvb3RtZ3JfdXBkYXRlX21lZGlhX2RldmljZV9ib290X29wdGlvbih2b2lkKQ0K
+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIGdvdG8gb3V0Ow0KPj4gwqDCoMKgwqDCoCB9DQo+Pg0KPj4g
+LcKgwqDCoCAvKiBlbnVtZXJhdGUgYWxsIGRldmljZXMgc3VwcG9ydGluZyANCj4+IEVGSV9TSU1Q
+TEVfRklMRV9TWVNURU1fUFJPVE9DT0wgKi8NCj4+IC3CoMKgwqAgcmV0ID0gZWZpX2Jvb3RtZ3Jf
+ZW51bWVyYXRlX2Jvb3Rfb3B0aW9uKG9wdCwgdm9sdW1lX2hhbmRsZXMsIGNvdW50KTsNCj4+ICvC
+oMKgwqAgcmV0ID0gZWZpX2Jvb3RtZ3JfZW51bWVyYXRlX2Jvb3Rfb3B0aW9uKG9wdCwgaGFuZGxl
+cywgJmNvdW50KTsNCj4+IMKgwqDCoMKgwqAgaWYgKHJldCAhPSBFRklfU1VDQ0VTUykNCj4+IMKg
+wqDCoMKgwqDCoMKgwqDCoCBnb3RvIG91dDsNCj4+DQo+PiBAQCAtMTEyMiw3ICsxMTcwLDcgQEAg
+b3V0Og0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZnJlZShvcHRbaV0ubG8pOw0KPj4g
+wqDCoMKgwqDCoCB9DQo+PiDCoMKgwqDCoMKgIGZyZWUob3B0KTsNCj4+IC3CoMKgwqAgZWZpX2Zy
+ZWVfcG9vbCh2b2x1bWVfaGFuZGxlcyk7DQo+PiArwqDCoMKgIGVmaV9mcmVlX3Bvb2woaGFuZGxl
+cyk7DQo+Pg0KPj4gwqDCoMKgwqDCoCBpZiAocmV0ID09IEVGSV9OT1RfRk9VTkQpDQo+PiDCoMKg
+wqDCoMKgwqDCoMKgwqAgcmV0dXJuIEVGSV9TVUNDRVNTOw0KPiANCg0K
