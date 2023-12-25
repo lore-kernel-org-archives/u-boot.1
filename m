@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9A48C3DA6E
-	for <u-boot@archiver.kernel.org>; Mon, 25 Dec 2023 15:41:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A6FFC3DA6E
+	for <u-boot@archiver.kernel.org>; Mon, 25 Dec 2023 15:42:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1E808760D;
-	Mon, 25 Dec 2023 16:41:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3793F87646;
+	Mon, 25 Dec 2023 16:41:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pMBhUNVH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="N64ZV7oB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 777C38760D; Mon, 25 Dec 2023 16:41:48 +0100 (CET)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
+ id 736CA87561; Mon, 25 Dec 2023 16:41:52 +0100 (CET)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77EC48753E
- for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 16:41:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A79C87721
+ for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 16:41:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2ccabfd9762so22187471fa.1
- for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 07:41:46 -0800 (PST)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-3333b46f26aso3754467f8f.1
+ for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 07:41:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703518905; x=1704123705; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703518909; x=1704123709; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bztCqZtuZeWJbD9MIA2Nj/8rhjf7X26SpwotbAnqAAE=;
- b=pMBhUNVH3qEYFHRkj2j8sySwmYka0aCizvI6U4pUOY1eRckTF0eb/1E2xqunPy4SJx
- 1moUftl7MCff8M7eSVFDTmefB8osx8ywtKcnOTaNbOKbXmD/isL64/uMrRW0gC4EPsjA
- 4KgR/04NQ/uQWVHB1I+lTlXfhmGzgZ2hPKxpMsE34bYq5ioxpLSscYUQkq0OeuLwCzC4
- HhKnmoNaOUl+lnwqQ5QhrxmRP0bXOAqhC/hk5vmodLwci/d6GCMKsS0GpDn3lHL42nTy
- CgHcJumyA28CcBEU5JFE0yRLNwc30dgHkDWM1Lf2rLEmu7wWYc1244KAMQMmBVY8xm3b
- GC5g==
+ bh=zsr0zJss76jKia1cvuV3LBXuFsGHY7LZmxXVF8UwBkM=;
+ b=N64ZV7oBxqV1DxRAuO1gtDYURgYGWB7Bc3mHQSUmLeKih5sC+hVW/LzgnLHZbjuN5q
+ as0sSEzbw0hX/OOnyACExCuKppCqQvtbXjXs2pqqHUjNkCdAaLAiTF7iFFW2zKJwsAD9
+ jRbZzwpdIe4D+ND40b4aA2R+toZnjVkGfeiO7/MJMgjrWRbhK0zEp+/YkQcQG5MSjg5O
+ g6jh9T1/PTnMAhXkC/S97arcIPIOR8hvQBVjAUj1CL/t9nPUHEd+dnyoHsAW2bIvxHCA
+ +XGGYyEPNsTaoWELjCyLv66CwkAlMwuhaEqXZvMyzKl5NNqp6WbKn5A/i8sDFznjvjcc
+ k6Sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703518905; x=1704123705;
+ d=1e100.net; s=20230601; t=1703518909; x=1704123709;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bztCqZtuZeWJbD9MIA2Nj/8rhjf7X26SpwotbAnqAAE=;
- b=C6b+CGbPhavIE2YROHQOYWfO+oZj4EPxRQKFYenZrKM+YomKD/QFZjmchuPdLf9nvo
- VDu658lZxsGOlT72U9NOfaIR8loPfyK9sVZLAKYT41bTExUKSeq1fJZ9HlWrzW3wJUq5
- ZFwOtPsMm4b1G1O9Fy/U5Sl2MEgqXB3of66DVXZIGBGynJXKxaq5LOhhBjDPoC5MoZXD
- ehBuHnGB+TK0X5qEI2Ec108xybVgnaoYFp0p4pxhmiN03Fbj29bum8LQiRHCRGFax/Cb
- uK5NscMtTNGnlmHj0LuiytEl9WO1iMHxQEvJ0vpTa4w0bHA6umt+T2OP4eMSrT+mXt29
- WBVw==
-X-Gm-Message-State: AOJu0Yxl586X2/jteiAlpreU2yu5eusGi55W2bdUYXljaxOuO2Z9RkSs
- 3XYxCL0nzkeTecT+MK97ShWLh6IUWV4Bk2YnQdj86lcb3D8=
-X-Google-Smtp-Source: AGHT+IHOqcRsn4ZxTBU3Xg0pG/S87bNB0MKzs+Z02jW8jt5edxbUeGePAlV6YBkToDPpJWPYbCGABQ==
-X-Received: by 2002:a05:651c:613:b0:2cc:c6ae:9fa1 with SMTP id
- k19-20020a05651c061300b002ccc6ae9fa1mr887576lje.16.1703518905096; 
- Mon, 25 Dec 2023 07:41:45 -0800 (PST)
+ bh=zsr0zJss76jKia1cvuV3LBXuFsGHY7LZmxXVF8UwBkM=;
+ b=wuRvQsK0hXG4P/kbYvNT6lQorzMzMe579GhOkLqraKRUDaaniohdpK4gF55TILzQ1z
+ 5Yc7XNJOWdw5hz9iU0i+M3IACyeFMr/02JQka675SL83ynkanhJwggVnDE7LVP/mufpi
+ sHNnPPGHdSBMjFJqAhUtT3zAZYx0/llus0NzNjdMuZ55oqSpNL8O9CV0C6+vuOl2S8ol
+ 3tQoCfk4DpDHDj+5M5ABiTr2qHUG/fAWITEUDXNIuYL+SkNMTGSLdE5YKq4XBwrwkq5y
+ bdpl9WYsE5DjMZ2ZKT+V/219GJNb7MvveqfkSFWddfK8EIFGt6C6q34Aipu71lEeVZB3
+ aazA==
+X-Gm-Message-State: AOJu0YxFL3tTI2X3xn12bnAyKBF5ZKGDK97Ml6BSygGFzE0dpm8dB941
+ NeLePwFPI3hZp5+JLRCs5u6AmN2ASQJE+q3Xy9YaIcc2efw=
+X-Google-Smtp-Source: AGHT+IGg7RB7OD9sCrSpHPSZAuDHudLyv0u+udbsBTQhSSH7bZkqzTgXbiG+L2Gh+AUpAZh+ILo+nw==
+X-Received: by 2002:adf:e881:0:b0:336:737d:4b93 with SMTP id
+ d1-20020adfe881000000b00336737d4b93mr3233669wrm.46.1703518909253; 
+ Mon, 25 Dec 2023 07:41:49 -0800 (PST)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- a17-20020a2ebe91000000b002cca6eafc44sm1425644ljr.113.2023.12.25.07.41.40
+ a17-20020a2ebe91000000b002cca6eafc44sm1425644ljr.113.2023.12.25.07.41.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Dec 2023 07:41:44 -0800 (PST)
+ Mon, 25 Dec 2023 07:41:48 -0800 (PST)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
  sjg@chromium.org, joe.hershberger@ni.com, rfried.dev@gmail.com,
  bharat.gooty@broadcom.com, rayagonda.kokatanur@broadcom.com,
  trini@konsulko.com, Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATHv2 1/9] test_net: print out net list
-Date: Mon, 25 Dec 2023 21:39:21 +0600
-Message-Id: <20231225153929.8284-2-maxim.uvarov@linaro.org>
+Subject: [PATHv2 2/9] net: sandbox: fix NULL pointer derefences
+Date: Mon, 25 Dec 2023 21:39:22 +0600
+Message-Id: <20231225153929.8284-3-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20231225153929.8284-1-maxim.uvarov@linaro.org>
 References: <20231225153929.8284-1-maxim.uvarov@linaro.org>
@@ -94,26 +94,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Printing net list is useful in CI log files.
+Add additional checks for NULL pointers.
 
 Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
 ---
- test/py/tests/test_net.py | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/net/sandbox.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/test/py/tests/test_net.py b/test/py/tests/test_net.py
-index b2241ae6a4..cd5b791a6a 100644
---- a/test/py/tests/test_net.py
-+++ b/test/py/tests/test_net.py
-@@ -96,6 +96,8 @@ def test_net_pre_commands(u_boot_console):
-     if init_pci:
-         u_boot_console.run_command('pci enum')
+diff --git a/drivers/net/sandbox.c b/drivers/net/sandbox.c
+index 13022addb6..d91935e032 100644
+--- a/drivers/net/sandbox.c
++++ b/drivers/net/sandbox.c
+@@ -65,6 +65,9 @@ int sandbox_eth_arp_req_to_reply(struct udevice *dev, void *packet,
+ 	struct ethernet_hdr *eth_recv;
+ 	struct arp_hdr *arp_recv;
  
-+    u_boot_console.run_command('net list')
++	if (!priv)
++		return -EAGAIN;
 +
- @pytest.mark.buildconfigspec('cmd_dhcp')
- def test_net_dhcp(u_boot_console):
-     """Test the dhcp command.
+ 	if (ntohs(eth->et_protlen) != PROT_ARP)
+ 		return -EAGAIN;
+ 
 -- 
 2.30.2
 
