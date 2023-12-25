@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E172DC3DA6E
-	for <u-boot@archiver.kernel.org>; Mon, 25 Dec 2023 22:43:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBBB8C3DA6E
+	for <u-boot@archiver.kernel.org>; Mon, 25 Dec 2023 22:49:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA8A187561;
-	Mon, 25 Dec 2023 23:43:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 108EF8772E;
+	Mon, 25 Dec 2023 23:49:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nUUmoLHj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PjDYH8oT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 082E3876F7; Mon, 25 Dec 2023 23:43:51 +0100 (CET)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id 8802F87735; Mon, 25 Dec 2023 23:49:29 +0100 (CET)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 820F386FF4
- for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 23:43:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 067E487480
+ for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 23:49:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-78132affa95so179235685a.1
- for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 14:43:48 -0800 (PST)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-67f9f6ca479so28503886d6.3
+ for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 14:49:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703544227; x=1704149027; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1703544561; x=1704149361; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=orqCRGGb/7qiT85Z5UIJHYWKM1xIIZrAsR8+j3kvdvA=;
- b=nUUmoLHjLmq00yhyxZVFohMmJG5NJwveRUlwu+kMaAVmyeKfR6QUP79OwxfSNes2vf
- OT5CVBLOAbI59LHkSvVKM4AhPolrXuRgLY5R3EjFymvlCajBDeRnmJH3ZD1B+wJ2cbFi
- r6SOoUAbrjSp9sWTPf26Y9PdqfbPHem8kNjUfeW4U41oyz5kNIcXHegoyCPHHjjWTT6E
- tHEE3HwTu+xPTjQg4PfPO+jnhUZ8ykw9hL4pW0pFsMCLOazuosEDmg5QhOVSXiLTEk+L
- ehvKm5A12Z3hv3pn2ESGMA+X2YyHBQyifZCJh1lfxF2kMfk7y/Bb9VFMelLguGstrAaW
- dbtA==
+ bh=8xm0pjB/U/1fjXYqUd6G+8ipnV1pitqicj+o9trXN5o=;
+ b=PjDYH8oTbTiIzJYBa3jkm/ueEUhF/YRxLbVGcONWdzdFBFFKoWo5kPVjW1uWAjmG9x
+ 28Cysfl7vKhqvFxixnhBGFC4w+DYNGuN4SUXMRvwoV4ck7jAVioRwakg90KYn8sriArl
+ FalhjNtmY3baETmDpTEIB4bQ3L/et/EOlpou9g0/rlm2oCdjWS4itF0lB0qObQLVTsCt
+ x2BX1WIid4GwWW7AXJWCECyT8SKdf/VWHPa0MavDxGwXbYnR7ptlsimffw7mqVoC5fa/
+ ewV1pf0TUSCLueX8bh3nys6RH9hYuDc25boELXaD4dat3OA3aNrJbCzfkPqssRfclgey
+ A9dA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703544227; x=1704149027;
+ d=1e100.net; s=20230601; t=1703544561; x=1704149361;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=orqCRGGb/7qiT85Z5UIJHYWKM1xIIZrAsR8+j3kvdvA=;
- b=v3/a2MnvIWl3+gAeiyRcadtTmGtM1H9ClLqsBIbjpDuiye4cBi4ZU22KJ99rUgR0qh
- 91J5lEZhfHwQuLS4YwWJJYEco4wodyJpP56WDmh8lzFnYCo3TU/9hxQm9upEP+HqVewz
- +sk9dYLtLPpGFSEeH44IaHJY2ySVI+57ZYQ/P1RTyvy/Gnx9pSsKkLL074Qvy7g/Y3wc
- JMFs/ooi0Cnu1syeS8xt9MFyqrUPpFMRylnIx3FVqhvWvmkUPlSXWQzPF/VCzbWEzprn
- cpA1fFw6cLaKLxporMkxHK8O6VIe07ZUAETNLAdDwycaDI+hKQXpVT7Nng2LUmVmlxgy
- qs5A==
-X-Gm-Message-State: AOJu0Yx7oopuF5JJtw1XLNIK2AEpB4HOuQsXMjAWZ4fHgOJo5+W+v3Di
- ec06sUn4XjLP24rGXAVWoZQ=
-X-Google-Smtp-Source: AGHT+IGQxuQZbvIlUQHNLwbDeMhIDkClCilSRbji1JltB2NzJt78ryhuE4sABAyNLatXBW+Y0Uugow==
-X-Received: by 2002:a05:620a:4487:b0:77f:551:e339 with SMTP id
- x7-20020a05620a448700b0077f0551e339mr8791881qkp.64.1703544226978; 
- Mon, 25 Dec 2023 14:43:46 -0800 (PST)
+ bh=8xm0pjB/U/1fjXYqUd6G+8ipnV1pitqicj+o9trXN5o=;
+ b=jjLX4vLxa2HWCKUiqsfq9QTfaLWAFbkbi+TH5HDtE0OJObFveBG+RV4Sn1zuqIJOF5
+ HQvZ82Px4q8EqWMecx5jhKq9PGgDTtvZGgLoR49I5ckMiTKatO3KWdFNXzk92I/fjiHP
+ hVQU5SfrpRLJQL/eiC6ygVUCnZ3DckGyY+5R0DIX6MXNC1SFinuxp1a05lUQandKfy6Y
+ E3gJPf4Kq9QPEDYH6A4bQ7PCzKEBQPNT1OcmOpFJKtYSAlVuJSCYEygpMbUlkNdkOT4A
+ MLSH7wAtgaxpL4WqAvnzvP8XpNmpeYme8N807LJSbBtrGluULSDprlOibfNRgT9LlOBS
+ TA+A==
+X-Gm-Message-State: AOJu0YwNq92usE9K/+Cbomh5kJDoGZo0vnzEQr5a0fzK62biDJViKDO3
+ nCLf55LiEHn70pFJDiyIqR0=
+X-Google-Smtp-Source: AGHT+IHY4lmwSUV5Bjw+ZRYzh7ibqWXb6CM5FESAIY96b4ctrof382R8FhKzKYevCpc0ExhdcEj6iw==
+X-Received: by 2002:ad4:4d85:0:b0:67f:a104:bbbd with SMTP id
+ cv5-20020ad44d85000000b0067fa104bbbdmr8325588qvb.71.1703544561468; 
+ Mon, 25 Dec 2023 14:49:21 -0800 (PST)
 Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- p16-20020a05620a22f000b0076efaec147csm3874345qki.45.2023.12.25.14.43.46
+ g5-20020ad45105000000b0067f7d131256sm4126002qvp.17.2023.12.25.14.49.20
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 25 Dec 2023 14:43:46 -0800 (PST)
-Message-ID: <a45cbd9a-cfa2-7728-3c5f-1a21ebbcb068@gmail.com>
-Date: Mon, 25 Dec 2023 17:43:45 -0500
+ Mon, 25 Dec 2023 14:49:21 -0800 (PST)
+Message-ID: <7bbe53d3-3ef7-b9de-472e-cb9c25c6cc06@gmail.com>
+Date: Mon, 25 Dec 2023 17:49:20 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
-Subject: Re: [PATHv2 2/9] net: sandbox: fix NULL pointer derefences
+Subject: Re: [PATHv2 8/9] omap3: use device specific naming for mem_init
 Content-Language: en-US
 To: Maxim Uvarov <maxim.uvarov@linaro.org>, u-boot@lists.denx.de
 Cc: simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
@@ -77,9 +77,9 @@ Cc: simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
  bharat.gooty@broadcom.com, rayagonda.kokatanur@broadcom.com,
  trini@konsulko.com
 References: <20231225153929.8284-1-maxim.uvarov@linaro.org>
- <20231225153929.8284-3-maxim.uvarov@linaro.org>
+ <20231225153929.8284-9-maxim.uvarov@linaro.org>
 From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20231225153929.8284-3-maxim.uvarov@linaro.org>
+In-Reply-To: <20231225153929.8284-9-maxim.uvarov@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -99,30 +99,89 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 12/25/23 10:39, Maxim Uvarov wrote:
-> Add additional checks for NULL pointers.
+> Use device specific naming for functions so as to not overlap
+> with common function names.
 > 
 > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
 > ---
->   drivers/net/sandbox.c | 3 +++
->   1 file changed, 3 insertions(+)
+>   arch/arm/include/asm/arch-omap3/mem.h | 2 +-
+>   arch/arm/mach-omap2/omap3/board.c     | 2 +-
+>   arch/arm/mach-omap2/omap3/emif4.c     | 4 ++--
+>   arch/arm/mach-omap2/omap3/sdrc.c      | 6 +++---
+>   4 files changed, 7 insertions(+), 7 deletions(-)
 > 
-> diff --git a/drivers/net/sandbox.c b/drivers/net/sandbox.c
-> index 13022addb6..d91935e032 100644
-> --- a/drivers/net/sandbox.c
-> +++ b/drivers/net/sandbox.c
-> @@ -65,6 +65,9 @@ int sandbox_eth_arp_req_to_reply(struct udevice *dev, void *packet,
->   	struct ethernet_hdr *eth_recv;
->   	struct arp_hdr *arp_recv;
+> diff --git a/arch/arm/include/asm/arch-omap3/mem.h b/arch/arm/include/asm/arch-omap3/mem.h
+> index 569779c55e..fce3568eca 100644
+> --- a/arch/arm/include/asm/arch-omap3/mem.h
+> +++ b/arch/arm/include/asm/arch-omap3/mem.h
+> @@ -475,7 +475,7 @@ enum {
+>   #ifndef __ASSEMBLY__
 >   
-> +	if (!priv)
-> +		return -EAGAIN;
-> +
-
-When can priv be NULL?
-
---Sean
-
->   	if (ntohs(eth->et_protlen) != PROT_ARP)
->   		return -EAGAIN;
+>   /* Function prototypes */
+> -void mem_init(void);
+> +void omap3_mem_init(void);
 >   
+>   u32 is_mem_sdr(void);
+>   u32 mem_ok(u32 cs);
+> diff --git a/arch/arm/mach-omap2/omap3/board.c b/arch/arm/mach-omap2/omap3/board.c
+> index 8b70251457..c76a95dd5d 100644
+> --- a/arch/arm/mach-omap2/omap3/board.c
+> +++ b/arch/arm/mach-omap2/omap3/board.c
+> @@ -216,7 +216,7 @@ void s_init(void)
+>   void board_init_f(ulong dummy)
+>   {
+>   	early_system_init();
+> -	mem_init();
+> +	omap3_mem_init();
+>   	/*
+>   	* Save the boot parameters passed from romcode.
+>   	* We cannot delay the saving further than this,
+> diff --git a/arch/arm/mach-omap2/omap3/emif4.c b/arch/arm/mach-omap2/omap3/emif4.c
+> index 7e5a281922..4fbfb387ab 100644
+> --- a/arch/arm/mach-omap2/omap3/emif4.c
+> +++ b/arch/arm/mach-omap2/omap3/emif4.c
+> @@ -159,10 +159,10 @@ int dram_init_banksize(void)
+>   }
+>   
+>   /*
+> - * mem_init() -
+> + * omap3_mem_init() -
+>    *  - Initialize memory subsystem
+>    */
+> -void mem_init(void)
+> +void omap3_mem_init(void)
+>   {
+>   	do_emif4_init();
+>   }
+> diff --git a/arch/arm/mach-omap2/omap3/sdrc.c b/arch/arm/mach-omap2/omap3/sdrc.c
+> index 5d43e7c9cf..f2a0769b9d 100644
+> --- a/arch/arm/mach-omap2/omap3/sdrc.c
+> +++ b/arch/arm/mach-omap2/omap3/sdrc.c
+> @@ -4,7 +4,7 @@
+>    *
+>    * This file has been created after exctracting and consolidating
+>    * the SDRC related content from mem.c and board.c, also created
+> - * generic init function (mem_init).
+> + * generic init function (omap3_mem_init).
+>    *
+>    * Copyright (C) 2004-2010
+>    * Texas Instruments Incorporated - https://www.ti.com/
+> @@ -232,11 +232,11 @@ int dram_init_banksize(void)
+>   }
+>   
+>   /*
+> - * mem_init -
+> + * map3_mem_init -
+
+nit: omap3
+
+>    *  - Init the sdrc chip,
+>    *  - Selects CS0 and CS1,
+>    */
+> -void mem_init(void)
+> +void omap3_mem_init(void)
+>   {
+>   	/* only init up first bank here */
+>   	do_sdrc_init(CS0, EARLY_INIT);
 
