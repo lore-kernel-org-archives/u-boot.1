@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0B7FC3DA6E
-	for <u-boot@archiver.kernel.org>; Mon, 25 Dec 2023 09:43:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20B74C3DA6E
+	for <u-boot@archiver.kernel.org>; Mon, 25 Dec 2023 10:05:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2392D87719;
-	Mon, 25 Dec 2023 10:43:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 44C8C8752B;
+	Mon, 25 Dec 2023 11:05:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QA3D0xqF";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="SFVbhOJq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3858F8765B; Mon, 25 Dec 2023 10:43:01 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id 8BA228758C; Mon, 25 Dec 2023 11:05:04 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 444928765B
- for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 10:42:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A078287480
+ for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 11:05:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1703497378; x=1704102178; i=xypron.glpk@gmx.de;
- bh=wqlzssIvl3lMju8Z0pPwQ0Igtl2eerFuxzoGznMBZXs=;
+ t=1703498701; x=1704103501; i=xypron.glpk@gmx.de;
+ bh=3xQasDYxcykcKPjt9sKPiiQV7JE7GiTwJWNpm+4ian0=;
  h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
  In-Reply-To;
- b=QA3D0xqFsNMb8FkQzFKmeqZvv6yUG2WzinVNiupJv2GnzEy7H4f1fteJP6zzT1Mh
- U7jit13GYupXL22k0sIpx2uM4yCQ1+CzwzrjLHjoEv0OG4bkdr4Gf5kVriwM+jIMG
- 7As74dNW6On3fHHr6jmHeV5Uk6XQ+4mKJD7u/8dLlwisxy9egOS/v6ux6/pvORqPa
- T8mZNV0Ge76AZ7Bkq5/9ueQ0tzT67cX27soOb4xv3jCL4w4I/d76bdLC7f9d+6Mrb
- 3/5FmVCcsuy8vt4LoKHnKenUcqrE+VXey5GqROFrIUDY+sU0I1XNa/EflMkLohPG+
- /et0v6d1DirlgcvK6w==
+ b=SFVbhOJqc1ZCWuieO7Ns8Nzm2I+VlocGU3/J+/6jMLZMDgI/csL6PeUUl8vw/1xM
+ OkfeRP6zI/i9/VknL93LjgoffvzaknwroR0liao6DNPdggvKCGn9oaEFivmKShhuH
+ Y1Pu+cjPtP1sE8hwjHoXyxG0zAP5az2jQJm94q+LCxnl/QbH2UXTom9xBczIPIb04
+ DIOcKuimogzvzrRDLjD6Au2NGOQQCAYm/Gl2irMFC3GI2hAmILloXfEAyKgz8tdfF
+ MF6HmJrzZ5BuxDMrTzWzg9uG9iMQ4/8WUC/5Ks+NL9tFDOa8Rq0tn6NQayQml2BU5
+ 9+locrx/w9icbByNkQ==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.136] ([178.202.40.247]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MA7Ka-1rOsDQ190E-00Be5G; Mon, 25
- Dec 2023 10:42:58 +0100
-Message-ID: <76b22009-920f-4962-ba27-ff009b7e1e82@gmx.de>
-Date: Mon, 25 Dec 2023 10:42:57 +0100
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MaJ3n-1rnHS41Nfp-00WCpP; Mon, 25
+ Dec 2023 11:05:01 +0100
+Message-ID: <585c8dd4-2fc9-44ff-b71b-ca1ad384c223@gmx.de>
+Date: Mon, 25 Dec 2023 11:05:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] efi_loader: remove unused members from struct
- efi_disk_obj
+Subject: Re: [PATCH 2/3] efi_loader: avoid pointer access after calling
+ efi_delete_handle
 Content-Language: en-US
 To: Masahisa Kojima <masahisa.kojima@linaro.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, Takahiro Akashi
  <takahiro.akashi@linaro.org>, u-boot@lists.denx.de
 References: <20231225044356.626900-1-masahisa.kojima@linaro.org>
- <20231225044356.626900-2-masahisa.kojima@linaro.org>
+ <20231225044356.626900-3-masahisa.kojima@linaro.org>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231225044356.626900-2-masahisa.kojima@linaro.org>
+In-Reply-To: <20231225044356.626900-3-masahisa.kojima@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:rW3FAYEZmR3EG5/nVP4nTiOU5P29SDunkkn4GUIMJeAo7H5aoSf
- 3uTSzcMxEJnB2PsfKbM5JQVcryayxndikPYaNNOBdl2MsIR+QgFEPddAgkJRmb5oZQ3iMio
- rtjnjonUUIndvlCgzdEJpFpCuknlC/cFURwdg13lULM7+P8f44HN2UMGexBoDI3QS2jF8ec
- 46fvWgA5PBlFE1WTbkelQ==
-UI-OutboundReport: notjunk:1;M01:P0:+BPnfPfBy0M=;ke7uQ3cdMTKKTEey6iWquht9I74
- q5ar125TTJFvxEt2nbnD2C5BjWvBjvVwPDIQxdNFYO8+cCLOYLEWW0Bn78u0lRVumBojMYWGr
- +W5N5HWlhwYtFW23aq7Mup+DGqAjFAVVBsPKYNlUkmG8yWGn2ZqbvSahyxIfdnqOeMvq4mwcn
- 0+g91w7i2XhCAPhcpr1a7qo6jTfH9YKqFLJ+rA6BWsRvo0S/MGUaqHLCBnERHqMdXx7jl97wL
- AFLfFhhRabmAWdQj2Tv3F90NQz3rs25f+5nKk0iaF9Jsna0QmgPGJY5aoYpOG2lm78ha0ywPR
- 9USNrM/8YrxqdP7oGlLesPpiBxzvez+SvuRrinVQ4G8aGqvkyDGdlMITWBiObX151r1y3degM
- yib+EcUbFxQNZXpAqQpDZrIRiUYJHrt+1j2v2nCw92FbMyns767PyCxTWJnLEDcoMkRNDJAJn
- KE/OxqbTIEKVdaImkxFTszgJQC7hruDy6WEPtKfbbTJ7JthfTOPNViCpW2/3lJB26c0DH6mEP
- QSeFh/A31nUzpw6dvZGcRNivjV1C1U2cThKqZKuaGphIGyE74U85QBUDMyDGDJkLbftCn2w//
- Y2sTx2Tnd4Acnkj602NILNDBnYV3iIbRTV0y2+6bKnpZUvSidyKf0ObduncV9cQFU51wswVAu
- b9oFf4hph6ry6/g2O/8BKY1TNzMHvG3QrU7rJlmXATTZ/neC9hXDZeYwNDViYbqhjtYAd0a4+
- FqpN+RSkII7YmI7i4ECk+90qgNannfQSRTujDdoFUIleiIbrq0Fd9lFkR+TDMdwnEEwklu5/c
- jcKmcWgsXOVtZr7uNzDuIEJeNv6Ki2IjPKR6AIRQZxLbcCHLxBR4Qq6AY1iMN1uSkB2FE7ueg
- rB/DelqrxNRSaPNFe21j7Y/EhObtSH7OMgpzTiIMz8zsaRC/UshB185NIFavGR1P+8h1zerco
- Kj6cobBW8jzPTZoBSduSFQku6U8=
+X-Provags-ID: V03:K1:vzZIodXM/yMV7PUdvoc4vsLQ5Kpfx2YurhmVBqBiEhKJo8upVoO
+ vipcMoNeI0UujPkgYMF6tiG6Aa9+OX86PMU1a0VKa56XGweE2aL4yejWa6CfsQlSM9oYDAT
+ 2P5DiUsKEOQm/QPpoS6/XBOpHTicaO59rut38bEP0WOQZ8dVT2xbOQp+eMT8aq/3PmEqTz3
+ BCz7uV0eM6Aq4ZEFQsdpg==
+UI-OutboundReport: notjunk:1;M01:P0:KH21HDpTUQs=;HYJuPkKXSGgAGPY2uRfCDcyZ2M5
+ U1uDs1kTljpuLMoHyXH9IDEEayd/vkuabkU35zYI6Vm8Z3J1w7JlZOFSRFcdthvGjTOov1PLO
+ 9+BQjvavi+svqjp9ZTqHX8AqLevLQHqcA3wDnpue3/QoUMK9muhMsqrxu0MAqLbEX5vYIqTb1
+ j17leuz/MOUQydoz/oi1y5u4h0elt8xRMm1uHemFBF9CANhbFDeDGw6bdxRlnZ2tKqvtQ11RN
+ tI6IfmKFoRe43MSJQupb7JlAX6vj4gfCl4pP9l8VbsF8aeqqfSo/PCXcousXlP4ntOXZwzJzw
+ EpSWntX64TMzb95Z74/aiKMXSw+8FTPp2mRknNVMNBZGRMb6KZAcLg37luj23jsx90+556+42
+ AwlgtX6Ea1jHpp5zt6kbiqs/r5nNJldNmc/xAQVslgBY0XXAB7eNsfsNVGJyLAwPv42QI9cYJ
+ 4MLOyiZz5szf9OMhGZLKIIJwrbL7Y9zz4JCHiNJw4FV3ofZauDw3TZKvhf6DmklDVihEXYUwA
+ 69OvXeRFqzZdKtYwg2aNLC3+EQqUpq7ZPOL31qaDbFXJiWRWlA/oi3iJmMgUC44nqzlLMJkgV
+ sZdYdbEcKPNMnXRoFM1Fgk+4R85yoP0cSw/MlRUw0l3TxI8GAjIq/tEMiBdCWuEj711q7oSNO
+ 277egMdn4J3pNi9kI9wjxMEwJBTEDb6JtJrH9ulitTxUU+K+fW4HXYAF6EAj22CJDn+uCZOwe
+ JU1S0EQJFIjNsdOxzR/UMH/8zWMmHXlXInmZUAls0pxNKS54d2fL5UYs5lMpbihjPySmmN8MU
+ rMokts6lL/A53y24Icwnt8U2JZX/oW5dxYf84uGIsovHaYtFoD6mDoCoBhaP66LSpLmOAWIvK
+ VPJduFe8bnGds9rte9vaFzCcNw7nuVjAHtPRBJgIxWVdAjg1uTARCB+WUwnZVilJymTcvjbhr
+ GoAxKw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,106 +93,84 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 12/25/23 05:43, Masahisa Kojima wrote:
-> part and dev_index in struct efi_disk_obj are not used,
-> let's remove it.
+> efi_delete_handle() calls efi_purge_handle(), then it finally
+> frees the efi handle.
+> Both diskobj and handle variables in efi_disk_remove() have
+> the same pointer, we can not access diskobj->dp after calling
+> efi_delete_handle().
 >
-> This commit also removes the invalid structure comment
-> for @dev, it does not exist.
+> This commit saves the struct efi_device_path pointer before
+> calling efi_delete_handle(). This commit also fixes the
+> missing free for volume member in struct efi_disk_obj.
 >
 > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
 > ---
->   lib/efi_loader/efi_disk.c | 15 +++------------
->   1 file changed, 3 insertions(+), 12 deletions(-)
+>   lib/efi_loader/efi_disk.c | 12 +++++++++---
+>   1 file changed, 9 insertions(+), 3 deletions(-)
 >
 > diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-> index f0d76113b0..a2f8b531a3 100644
+> index a2f8b531a3..415d8601ba 100644
 > --- a/lib/efi_loader/efi_disk.c
 > +++ b/lib/efi_loader/efi_disk.c
-> @@ -32,20 +32,15 @@ const efi_guid_t efi_system_partition_guid =3D PARTI=
-TION_SYSTEM_GUID;
->    *
->    * @header:	EFI object header
->    * @ops:	EFI disk I/O protocol interface
-> - * @dev_index:	device index of block device
->    * @media:	block I/O media information
->    * @dp:		device path to the block device
-> - * @part:	partition
->    * @volume:	simple file system protocol of the partition
-> - * @dev:	associated DM device
->    */
->   struct efi_disk_obj {
->   	struct efi_object header;
->   	struct efi_block_io ops;
-> -	int dev_index;
->   	struct efi_block_io_media media;
->   	struct efi_device_path *dp;
-> -	unsigned int part;
->   	struct efi_simple_file_system_protocol *volume;
->   };
+> @@ -701,7 +701,9 @@ int efi_disk_remove(void *ctx, struct event *event)
+>   	struct udevice *dev =3D event->data.dm.dev;
+>   	efi_handle_t handle;
+>   	struct blk_desc *desc;
+> +	struct efi_device_path *dp =3D NULL;
+>   	struct efi_disk_obj *diskobj =3D NULL;
+> +	struct efi_simple_file_system_protocol *volume =3D NULL;
+>   	efi_status_t ret;
 >
-> @@ -383,7 +378,6 @@ static int efi_fs_exists(struct blk_desc *desc, int =
-part)
->    * @parent:		parent handle
->    * @dp_parent:		parent device path
->    * @desc:		internal block device
-> - * @dev_index:		device index for block device
->    * @part_info:		partition info
->    * @part:		partition
->    * @disk:		pointer to receive the created handle
-> @@ -394,7 +388,6 @@ static efi_status_t efi_disk_add_dev(
->   				efi_handle_t parent,
->   				struct efi_device_path *dp_parent,
->   				struct blk_desc *desc,
-> -				int dev_index,
->   				struct disk_partition *part_info,
->   				unsigned int part,
->   				struct efi_disk_obj **disk,
-> @@ -456,7 +449,6 @@ static efi_status_t efi_disk_add_dev(
->   		diskobj->dp =3D efi_dp_from_part(desc, part);
->   		diskobj->media.last_block =3D desc->lba - 1;
+>   	if (dev_tag_get_ptr(dev, DM_TAG_EFI, (void **)&handle))
+> @@ -722,14 +724,18 @@ int efi_disk_remove(void *ctx, struct event *event=
+)
+>   		return 0;
 >   	}
-> -	diskobj->part =3D part;
 >
->   	/*
->   	 * Install the device path and the block IO protocol.
-> @@ -499,7 +491,6 @@ static efi_status_t efi_disk_add_dev(
->   			goto error;
->   	}
->   	diskobj->ops =3D block_io_disk_template;
-> -	diskobj->dev_index =3D dev_index;
->
->   	/* Fill in EFI IO Media info (for read/write callbacks) */
->   	diskobj->media.removable_media =3D desc->removable;
-> @@ -519,7 +510,7 @@ static efi_status_t efi_disk_add_dev(
->
->   	EFI_PRINT("BlockIO: part %u, present %d, logical %d, removable %d"
->   		  ", last_block %llu\n",
-> -		  diskobj->part,
-> +		  part,
->   		  diskobj->media.media_present,
->   		  diskobj->media.logical_partition,
->   		  diskobj->media.removable_media,
-> @@ -566,7 +557,7 @@ static int efi_disk_create_raw(struct udevice *dev, =
-efi_handle_t agent_handle)
->   	diskid =3D desc->devnum;
->
->   	ret =3D efi_disk_add_dev(NULL, NULL, desc,
-> -			       diskid, NULL, 0, &disk, agent_handle);
-> +			       NULL, 0, &disk, agent_handle);
->   	if (ret !=3D EFI_SUCCESS) {
->   		if (ret =3D=3D EFI_NOT_READY) {
->   			log_notice("Disk %s not ready\n", dev->name);
-> @@ -627,7 +618,7 @@ static int efi_disk_create_part(struct udevice *dev,=
- efi_handle_t agent_handle)
+> +	if (diskobj) {
+
+
+   diskobj =3D container_of(handle, struct efi_disk_obj, header);
+
+can be replaced by
+
+   diskobj =3D handle
+
+We should check the handle immediately after dev_tag_get_ptr() and
+return 0 if the handle =3D=3D NULL.
+
+> +		dp =3D diskobj->dp;
+> +		volume =3D diskobj->volume;
+> +	}
+> +
+>   	ret =3D efi_delete_handle(handle);
+
+We must not delete the handle in case of UCLASS_EFI_LOADER.
+
+Instead of calling efi_delete_handle we should uninstall all protocols
+that we have installed. If no protocol is left the handle will go away.
+
+To make the protocols to delete tractable they should be opened with
+BY_DRIVER.
+
+When a partition is removed we must close the protocol interfaces opened
+with EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER (cf. efi_disk_add_dev()).
+
+Best regards
+
+Heinrich
+
+>   	/* Do not delete DM device if there are still EFI drivers attached. *=
+/
+>   	if (ret !=3D EFI_SUCCESS)
 >   		return -1;
->   	dp_parent =3D (struct efi_device_path *)handler->protocol_interface;
 >
-> -	ret =3D efi_disk_add_dev(parent, dp_parent, desc, diskid,
-> +	ret =3D efi_disk_add_dev(parent, dp_parent, desc,
->   			       info, part, &disk, agent_handle);
->   	if (ret !=3D EFI_SUCCESS) {
->   		log_err("Adding partition for %s failed\n", dev->name);
+> -	if (diskobj)
+> -		efi_free_pool(diskobj->dp);
+> -
+> +	efi_free_pool(dp);
+> +	free(volume);
+>   	dev_tag_del(dev, DM_TAG_EFI);
+>
+>   	return 0;
 
