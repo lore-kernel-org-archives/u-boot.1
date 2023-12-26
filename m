@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61394C46CD4
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 14:34:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67A75C46CD3
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 14:39:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D49B7878E9;
-	Tue, 26 Dec 2023 15:34:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E7A2D878C1;
+	Tue, 26 Dec 2023 15:39:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DqZTftl7";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yEOcDd43";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A93A87955; Tue, 26 Dec 2023 15:34:42 +0100 (CET)
-Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
- [IPv6:2607:f8b0:4864:20::b2e])
+ id 8F096878CB; Tue, 26 Dec 2023 15:39:24 +0100 (CET)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C41E6878C1
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 15:34:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 257D587849
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 15:39:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-dbdb8e032f7so3522076276.1
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 06:34:38 -0800 (PST)
+ spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-50e759ece35so1676324e87.3
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 06:39:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703601277; x=1704206077; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=kNGni2HaqKwjzk43wxsgsCRcP4a3+TyMjjfsMPNebfQ=;
- b=DqZTftl7mkKaDIXhCJgoj+JjlA56IVZnGZszXpTd01vL26w2+YTSv9hWx9YuQVCjlb
- /ISd7UskrKJYwSUkb/4YuUuFaDet9JcXGt4iXnQriNNl1fPLvvfaolyT2UXgMzfdOPk1
- 5YF/qZwkR4ONYjkQXIwp+ktOYyF1b6byP71Yk=
+ d=linaro.org; s=google; t=1703601560; x=1704206360; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=LeQDrQad80nn4o3KEJXbxopxoGwBFw2ElCz8yfz+CoY=;
+ b=yEOcDd43hX+GXHlrmincULyHDen5Ip2B3DU2oXSoOo75kJ2ixgPjp5/9TvOt6bBEWa
+ RehsPmAnExvgE2HdCsNqRcH/Axdz6VG6SaJfiWwPE8M6B6VPs4bpuKYo7cHtsCGS6oWU
+ 0ifgBwf/AAQB+8gxejyj4sc8NaVBtTOyoaHga0C/mfRhFmsCQXkn0lTHlgbIcVcD1tov
+ +jp3hg+lZ1/w6nJpwkzZ9jIMrXBJ14Y3lC2PKcux3ZvlY8VxAi6sBqRxhi/4Rooo7jjJ
+ +dKsPBbE5Z9Od1vlZ9Ri/Tbc6puWaBFRLayW0BTRH4H5QcEzn0LOQ3ITCWE7ZG1cvAp+
+ D2eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703601277; x=1704206077;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kNGni2HaqKwjzk43wxsgsCRcP4a3+TyMjjfsMPNebfQ=;
- b=O6NyJr1LN/4C9+GoqsCcCErRRlkVPfc3sjB47uTAgkIKV6BmfPWFU1F5iHcw83a2Oq
- pgHA9nAMz4bx/+AC1LRME2LyoytMSvPj3SO9nG48kNTVXjhd7+KUv1xN9VVSeQ2WW8X6
- 1S4xH/gh98+o0MD8Y2WvHFvhtkFpXN0yBBdd6L0kKE5bCKgsfySqmoM5pxbfPMS3t7tu
- +bXLdoHAaU/aStb0uVg7a2L9Qe5Wy2FH1QFiiKnXGpIzJh4QMep8/a7cSkRV9TJu6QWg
- 7RHm+vJUuQ7wCd6xyosf0Bo9Rn4eM1px/pMu+VlD1KUzJBH+sAPSqU4l3Ak+rpxbdwBs
- n5nA==
-X-Gm-Message-State: AOJu0Yxpv7NHM1/QyPN+Og2cQOfqnCyAsIKKl5dgr90WNtqRuFnS3mUN
- Xtpru4qgXEmWg6Aziu9KISnHGvPM3f6ydw==
-X-Google-Smtp-Source: AGHT+IFzTsxqlu/7J8PTqYH/RfMcucrk0+GS+jsDHTI+vU5JweOmZY5lI041gYGut+YnEGuxZqMqgQ==
-X-Received: by 2002:a0d:da85:0:b0:5e4:8966:948f with SMTP id
- c127-20020a0dda85000000b005e48966948fmr5850925ywe.49.1703601277435; 
- Tue, 26 Dec 2023 06:34:37 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- n20-20020a819c54000000b005a7aef2c1c3sm5409611ywa.132.2023.12.26.06.34.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Dec 2023 06:34:36 -0800 (PST)
-Date: Tue, 26 Dec 2023 09:34:35 -0500
-From: Tom Rini <trini@konsulko.com>
-To: sploit em <sploitem@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: CVE-2019-14194 patch bypass
-Message-ID: <20231226143435.GK2652760@bill-the-cat>
-References: <CADk2PNNTD4o=v5VdJpJSV5btrfEHVbwJvDgApvCrMVp8e8hcrw@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1703601560; x=1704206360;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LeQDrQad80nn4o3KEJXbxopxoGwBFw2ElCz8yfz+CoY=;
+ b=heylMPIKYRJsC9og0X8S8an90YyfFU3+CI6YUwbFdrty9i5nTcrD6YtnBYcMUBOvoV
+ P98YNeCjYVf8HhYIgfeoPPY96xcpsV9TmMGI/L0xRO7f06Bm+wYOpli7aw76448quFiV
+ EslNQOJBqYPqPj9rf8C4z6XslHInTXynhBkSJEXsKN5u9uLO7GAeJCmjhrUwG1uVJ3Qc
+ JpKF5r6yj9jwn8xIISp1WGqMXEWLrV6gIEz++zJn5ubnIc311TXjthjiOdPtDwWL11t7
+ c590x7jvg6FuuqCihyXbMhMGDhotiQXxSzx+U9IoEN+bsLbqx+nmhWDf/x/xvTbwU9b7
+ inuw==
+X-Gm-Message-State: AOJu0YyL3SQ5BGogQ1mdxtANWAaMAlmBiBPaUBWNvytUbGIXaVVl91wx
+ AVs7AvUADbuk8neJ8Jv6qZ/deFPDubHiJkq0HdZnqU6+slSUcg==
+X-Google-Smtp-Source: AGHT+IHiTsSe176ugexKgKj5h8P1XSpgZvT9b0+wvRxIdhvPb6oso7zqDYQt9WKTjR7UFXIJ7IwIcbDysUCt8g0Qkvs=
+X-Received: by 2002:a19:6549:0:b0:50e:558e:1259 with SMTP id
+ c9-20020a196549000000b0050e558e1259mr2358799lfj.19.1703601559069; Tue, 26 Dec
+ 2023 06:39:19 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/JGtuBGIR2EkVujD"
-Content-Disposition: inline
-In-Reply-To: <CADk2PNNTD4o=v5VdJpJSV5btrfEHVbwJvDgApvCrMVp8e8hcrw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231225153929.8284-1-maxim.uvarov@linaro.org>
+ <20231225153929.8284-10-maxim.uvarov@linaro.org>
+ <CAFLszTjg2MTAfJZ17dQFe+Of0VTJVADemigh_gki8GSR07FEvQ@mail.gmail.com>
+ <CAD8XO3bF3Xr=YTfB7Yjb7RydRkGdGXaV-k0Ep9OsxR=2SJnyvw@mail.gmail.com>
+ <20231226142635.GI2652760@bill-the-cat>
+In-Reply-To: <20231226142635.GI2652760@bill-the-cat>
+From: Maxim Uvarov <maxim.uvarov@linaro.org>
+Date: Tue, 26 Dec 2023 20:39:06 +0600
+Message-ID: <CAD8XO3aqVucahW1Dm3TisOAkntGU7pZ4ZMbQ1zkekGeZdMexrw@mail.gmail.com>
+Subject: Re: [PATHv2 9/9] Makefile: add dtbs to clean
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ simon.k.r.goldschmidt@gmail.com, 
+ tien.fong.chee@intel.com, joe.hershberger@ni.com, rfried.dev@gmail.com, 
+ bharat.gooty@broadcom.com, rayagonda.kokatanur@broadcom.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,62 +93,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 26 Dec 2023 at 20:26, Tom Rini <trini@konsulko.com> wrote:
 
---/JGtuBGIR2EkVujD
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> On Tue, Dec 26, 2023 at 06:27:58PM +0600, Maxim Uvarov wrote:
+> > On Tue, 26 Dec 2023 at 15:50, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > > Hi Maxim,
+> > >
+> > > On Mon, Dec 25, 2023 at 3:42=E2=80=AFPM Maxim Uvarov <maxim.uvarov@li=
+naro.org>
+> > > wrote:
+> > > >
+> > > > CI test checks that generated dtb has to be cleaned up.
+> > > >
+> > > > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+> > > > ---
+> > > >  Makefile | 3 ++-
+> > > >  1 file changed, 2 insertions(+), 1 deletion(-)
+> > > >
+> > > > diff --git a/Makefile b/Makefile
+> > > > index 220411a293..ab603191ad 100644
+> > > > --- a/Makefile
+> > > > +++ b/Makefile
+> > > > @@ -2165,7 +2165,8 @@ CLEAN_FILES +=3D include/autoconf.mk*
+> > > include/bmp_logo.h include/bmp_logo_data.h \
+> > > >                mkimage-out.spl.mkimage mkimage.spl.mkimage
+> imx-boot.map \
+> > > >                itb.fit.fit itb.fit.itb itb.map spl.map
+> > > mkimage-out.rom.mkimage \
+> > > >                mkimage.rom.mkimage mkimage-in-simple-bin* rom.map
+> > > simple-bin* \
+> > > > -              idbloader-spi.img lib/efi_loader/helloworld_efi.S
+> *.itb
+> > > > +              idbloader-spi.img lib/efi_loader/helloworld_efi.S
+> *.itb \
+> > > > +              ./*/*.dtb *.dtb
+> > > >
+> > > >  # Directories & files removed with 'make mrproper'
+> > > >  MRPROPER_DIRS  +=3D include/config include/generated spl tpl vpl \
+> > > > --
+> > > > 2.30.2
+> > > >
+> > >
+> > > Shouldn't this be handled with CLEAN_FILES in arch/xxx/dts ?
+> > >
+> > > Regards,
+> > > Simon
+> > >
+> >
+> > I don't know. It looks like CLEAN_FILES is almost not used inside ./arc=
+h
+> > directory. Only 1 place where it appears:
+> >
+> > fgrep -r CLEAN_FILES ./arch/
+> > ./arch/arm/mach-rmobile/Makefile:CLEAN_FILES +=3D u-boot-spl.scif
+>
+> I see that our top-level clean target is missing dtb related targets
+> like the linux kernel has, and that's how this should be fixed.
+>
+> --
+> Tom
+>
 
-On Wed, Aug 02, 2023 at 11:16:17PM +0300, sploit em wrote:
+If I understand right you just refers to kernel's top level Makefile
+clean:
+find
+                -o -name '*.dtb' -o -name '*.dtbo' \
 
-> Hello.
->=20
-> I was analyzing CVE-2019-14194 and I think the patch can be bypassed.
-> patch
-> <https://source.denx.de/u-boot/u-boot/-/commit/aa207cf3a6d68f39d64cd29057=
-a4fb63943e9078>
->=20
-> In nfs_read_reply, rlen is signed int. So we can make it less than zero.
-> The value less than zero can bypass the check at line 756. This will lead
-> to overflow due that assign has an unsigned int len parameter.
->=20
-> For example -1 will become 0xffffffff.
->=20
-> [image: nfs_read_reply_cve_2019_14194.png]
->=20
->=20
-> I've constructed some code to prove this.
->=20
-> [image: nfs_read_reply_cve_2019_14194_bypass.png]
->=20
-> [image: nfs_read_reply_cve_2019_14194_3.png]
->=20
-> Thanks.
+                -o -name '*.dtb.S' -o -name '*.dtbo.S' \
+| xargs rm -rf
 
-Good find.  A patch to resolve this issue, by someone with an eye
-towards other ways the problem could be exploited again so that this
-time we don't have other avenues of attack open, would be appreciated.
-Thanks.
+ I will fix it in that way in v3.
 
---=20
-Tom
-
---/JGtuBGIR2EkVujD
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWK5HsACgkQFHw5/5Y0
-tyzUGwwAl0qNWll+MxuAQy1pzNK44t9hTvBbcJDUC/NyV3VlBUdP8UoQIrIdFdHf
-VM3VjOoM9vtD3tUUNEHP0xmKYNVNaxlTQbmoygT9Cpx97dMsPwCmUb9/zj9sviEx
-ai/l9ax6CKsZ2uNXI/ZrXjUMmqsudS9T22hZaiMLFtJ6NZX9fRjFgF1Vj7tEGDBQ
-+UYBn5ee8aJ4E1VN75zWd/B8O8GLTEKNba8L2zn8sl+5EiwayK/hZGCCScTB2EUV
-GPEjaH7j1tIhNBWyD3ANONvt4PPdlgZu25Es4kGoj9w+FmXCfc+Ed2gKer/rqpyF
-LcRC5U4xN6r4l+eP9V2G1CUMe4cNG5TCkrjAJM2G5iXIxKXIuvXur0R6GJXJKeQ0
-3s1q9rsmwNArJGzPBUQLO4s2GOLmvGuh9wfH/ZA5EXVXvlwb24dz+LRrdGo8Ykll
-9U1VC5StVe2+Pnc1IWWSCecKRNYmiWJnEtZX+AbZaQ2znecNvkNsPxJACV7JTgyO
-l4I0nkFX
-=Ed/q
------END PGP SIGNATURE-----
-
---/JGtuBGIR2EkVujD--
+BR,
+Maxim.
