@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87371C46CD4
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:52:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CAADC46CD4
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:53:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FEB787954;
-	Tue, 26 Dec 2023 10:50:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 86CA3878F1;
+	Tue, 26 Dec 2023 10:50:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QiaKmJJw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MFFsHIqg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3F58878CB; Tue, 26 Dec 2023 10:50:21 +0100 (CET)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id 777818794B; Tue, 26 Dec 2023 10:50:24 +0100 (CET)
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
+ [IPv6:2607:f8b0:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 244E7878A5
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:50:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B370F87687
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:50:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-204235d0913so2353363fac.1
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:50:19 -0800 (PST)
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-517ab9a4a13so3322457a12.1
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:50:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703584217; x=1704189017; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703584219; x=1704189019; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=si28QcTVcaz+QddN+iwQmeKdkn9xM97JW1ybfxVPuCE=;
- b=QiaKmJJwWtz7p34P7sACQy5eNixgg1kqQjBlKuYJiuW7uW6RIMQsTwCScpZOptC9yl
- XcinUbtaqXHxtn5F3PaVduIwcdbQ6GHs4gEQOYdNOOYlcFWpQJ6iTQ8S91+ji/k4JKI6
- gHYEg+xPeOUlVD2JmV9wFw+hjEV1e9XppgYDg=
+ bh=Dgz0BcBdZUhwTJb6g6gbD1bkfA2zP2lFeNYR05XcjFA=;
+ b=MFFsHIqgSdOh2Z5+XHLJfge+F/uf8GBmRNyoMZ5F0/qId2/HNOrOAbEyi5QGxEs/rV
+ OBW2Eaaszdv2PYa2J6mUU681dnfvSpajXZz5eJMN9qos8b4iIlGnvqFbMw8acSZNwSdV
+ nI4MDJZVGD7Caeg3b9Cig6ytPLPGJTuw6IHI4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703584217; x=1704189017;
+ d=1e100.net; s=20230601; t=1703584219; x=1704189019;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=si28QcTVcaz+QddN+iwQmeKdkn9xM97JW1ybfxVPuCE=;
- b=pR9uplJEUoftz8ydSVt0B3p6WhbfdpbkyODzto3gDSRvd/VWOCnJdQHOY/7vtjS0CI
- obBX0+mDgvGiEjK41NU6/Ccepn6CI4lN4eAtuzoz19ZZkOXgtGcvW/kJnClQ331nfSeQ
- g6jarTUkeps0/IFSczJpwOz6nvC0TFLChshd/WS/sdeCchh/mIEThXIv5Xuos5RQtubs
- AAgTa9U2zc8mG3pb9us9XVKKVIYLCStMUQcwtO9EKstr8Sc9CflWmaiQcpf5SbnMHM48
- TbxcVcrIMFkYuECbD5T/UOXxzIUQOCRGSiaVJSPLm8n+J1I9RPe9/NTLG/uGhoKv/RNZ
- zhpw==
-X-Gm-Message-State: AOJu0YzAGcrtgchoUCVNjOmc/8vpiqzeSRkzx3BXGFT2uC8mfFTmLV3s
- qO03PZystxHXfe+SJWeFYoCO320rK3XuuZ9fcyoDC0ScZ6T/A3OLlyF0M9foiQ==
-X-Google-Smtp-Source: AGHT+IFEIC6G8t1E+61QFFwCsA0x54lgYuBpTPACSlqVES9C5/E6Y0VJgeKbBCupSmrDZ2QyOCAo3qaAjbCxq5SZ6J4=
-X-Received: by 2002:a05:6358:9047:b0:172:b387:51bd with SMTP id
- f7-20020a056358904700b00172b38751bdmr3402713rwf.25.1703584217046; Tue, 26 Dec
- 2023 01:50:17 -0800 (PST)
+ bh=Dgz0BcBdZUhwTJb6g6gbD1bkfA2zP2lFeNYR05XcjFA=;
+ b=Aq7/VL6QhXxon+VkqSdUSO9Cszo3nzzWQ7BaR0qirYQhW0fEFQg6XRndx2tJT9qRdP
+ rHDmIfd76wbTXIhvEqCqGJnnU436utfmbYQraePTOOivpqHFsn3GvQcavB8lpq6m5uA4
+ ilKxSH7NmvXqTV9xaiAgg3oV3Pvn8weKLTmhQFTDbOibu5qeb8q4xdSw5294tPeEva0S
+ M6nshODS++v+IdS/2rRX0u8xYCDkbfcPu7gebbpzTamcw3o7C1VfXTYmvDRBATcJdsDh
+ MT+hvVsAIVdd2ecu4QsxAEAaE7wQ6IrkOt1jdR+osEBH91Unu4c0/xYXjiqN1qSZ9Sx5
+ soUw==
+X-Gm-Message-State: AOJu0YyWqbbNyXtF7UyswI75epAJZ8RfQchh/l/S72wrcQjDrekyPmts
+ MCbeEpd4ZbZdX7GH+dRbxNmmncvCcH/kfauLG972eQ3HRPfh
+X-Google-Smtp-Source: AGHT+IFb8++DRpWbWZ2HKpJupUHjmm75rn7Y5iTJkyqhUFbj0BB4RntmlzP9NGcNBixc7SelvsKfKGI1GTlFU1UT4iw=
+X-Received: by 2002:a05:6a21:32a6:b0:18c:4811:cf69 with SMTP id
+ yt38-20020a056a2132a600b0018c4811cf69mr9604356pzb.61.1703584219708; Tue, 26
+ Dec 2023 01:50:19 -0800 (PST)
 MIME-Version: 1.0
 References: <20231211122051.1240855-1-lukas.funke-oss@weidmueller.com>
- <20231211122051.1240855-2-lukas.funke-oss@weidmueller.com>
-In-Reply-To: <20231211122051.1240855-2-lukas.funke-oss@weidmueller.com>
+ <20231211122051.1240855-3-lukas.funke-oss@weidmueller.com>
+In-Reply-To: <20231211122051.1240855-3-lukas.funke-oss@weidmueller.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Dec 2023 09:50:05 +0000
-Message-ID: <CAFLszTjjjXmvrCSXNS03uqhqEvL1Q=MYyjxK_RosgyT6VzZ_XA@mail.gmail.com>
-Subject: Re: [PATCH 1/5] sandbox: add generic find_next_zero_bit implementation
+Date: Tue, 26 Dec 2023 09:50:07 +0000
+Message-ID: <CAFLszTjU8BjV2ThHwDEoKB2vdy7oWNreGYx8XTp=YsinNs_P-w@mail.gmail.com>
+Subject: Re: [PATCH 2/5] linux: bitmap.h: add 'for_each_set_bitrange'
+ iteration macro
 To: lukas.funke-oss@weidmueller.com
 Cc: u-boot@lists.denx.de, Lukas Funke <lukas.funke@weidmueller.com>
 Content-Type: text/plain; charset="UTF-8"
@@ -88,21 +89,15 @@ wrote:
 >
 > From: Lukas Funke <lukas.funke@weidmueller.com>
 >
-> Add generic 'find_next_zero_bit' implementation in order to enable the
-> use of the 'for_each_set_bitrange' macro. The implementation is currently
-> missing for the sandbox-arch and using the function results in a linker
-> error.
->
-> There are more efficient implementations in the architecture specific
-> implementations. However, for the sandbox the implementation should be
-> simple and portable.
+> Add 'for_each_set_bitrange' (from Linux kernel) in order to iterate
+> over each set bitrange of a bitmap. This becomes handy if one wants
+> to generate a cpu list i.e. for isolcpu or nohz_full.
 >
 > Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
 > ---
 >
->  arch/sandbox/include/asm/bitops.h | 16 ++++++++++++++--
->  1 file changed, 14 insertions(+), 2 deletions(-)
+>  include/linux/bitmap.h | 7 +++++++
+>  1 file changed, 7 insertions(+)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Could you add a test to test/lib perhaps?
