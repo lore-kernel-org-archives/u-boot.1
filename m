@@ -4,84 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D07D3C46CD4
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 07:53:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96FE0C46CD4
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 07:58:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34A5F8760D;
-	Tue, 26 Dec 2023 08:53:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CEF4E87480;
+	Tue, 26 Dec 2023 08:58:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x5lEoF3l";
+	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="ES9UchBn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4879E87786; Tue, 26 Dec 2023 08:53:41 +0100 (CET)
-Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com
- [IPv6:2607:f8b0:4864:20::934])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0D668760D
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 08:53:38 +0100 (CET)
+ id A4D9A87561; Tue, 26 Dec 2023 08:58:38 +0100 (CET)
+Received: from m15.mail.163.com (m15.mail.163.com [45.254.50.220])
+ by phobos.denx.de (Postfix) with ESMTP id 9E1C68744F
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 08:58:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-7cc4647543aso968263241.0
- for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 23:53:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703577217; x=1704182017; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HAxbftN0aN036HsMgXe5QrB4b6ULu6pXVWLHsE9HVNw=;
- b=x5lEoF3lPUZUpLEvAiUHtOnLgqesdjOlNZIp2Ubqvna+bTf9+o7CWY1Dx9KV/5AYdT
- p3EDoB2y6GMTYqXOYblA4IOFhzNzTJ9LmJXOtmPaOCpnCt9HBGd7rlfKQGFc9wAIDKCK
- zrrcD21fNfFRg3Vt5OfsEadfkeEeUw3PjQ5gudEo9ZUSgKtGIR9i6Y49jTGBns420sI2
- K7cNCJJlcyW8wID6XK/38gvPUhYzlj/axzo78BfuiUJ0GbPIYe2if2ZqV+IJCARhWsSO
- 8sO8DnpQ5PCe183v4PHyxNQQmuTNLFGvwdTork137tR+DXDBqA27JdEseIc9SsRt1diD
- dq3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703577217; x=1704182017;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=HAxbftN0aN036HsMgXe5QrB4b6ULu6pXVWLHsE9HVNw=;
- b=V4fvF07UyyYj0hQ1UMuwGP0FEgeIcCN83fE8SDMkQPahGKoAsSrAOGKTdANita+/D/
- 5mBof4jtW1zwgD0GAcQjwWb3N2IwVbQq1iC88wB+sgnschfOgAdWAs4FM/CGUpt5c5gU
- DslPEUimj/MJ2+nVl+R0OiwBQXuUHjz9uoyJAG7muvuOgNCvsGLWQKz009IpTxHaPHQR
- RKh10L9myvTRHBHmZo52ox9xsjG1VwNq+JVhwi4bQ4bTxhNjeU3RtZbiPAfm85Lrqps/
- nlx05Ar7XZ+Sg8GgR98tvfSSXWNZxPNe9Vkb0962A3tOppAvhXTmBJowvaSR0Z3c2Nli
- bVug==
-X-Gm-Message-State: AOJu0YxAy+LS6KsRBCPfmweKh/wBdnLRqy5TiCQGBrPESVkf3FCN2N1L
- jyX1bH8haU6xOXPwTNDvFSqrBAHDqWjgoI4HsqPDD0/8IRNAQA==
-X-Google-Smtp-Source: AGHT+IHAnJ3V6OtZXnmSKou/aW0fWVJXyihV/0ciysZ5EpmVI6INg0ZohlvD/54R+QqfFiRFOH/Mr685sZ7fewY/Skc=
-X-Received: by 2002:a05:6122:2317:b0:4b6:e6b6:7f4f with SMTP id
- bq23-20020a056122231700b004b6e6b67f4fmr1625514vkb.15.1703577217348; Mon, 25
- Dec 2023 23:53:37 -0800 (PST)
+ spf=pass smtp.mailfrom=bruce_suen@163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=mnhD5
+ 4i6exgX5sXYDntDldP1rq0CyGtCgE7V17USBW0=; b=ES9UchBn3uqDV67yzI49i
+ 9YitCnp2WsEl+mc8fCoFhpPRES6BpUuySNGU8dauCZz0CvU5IZ9soC89Mtg9OJEE
+ PEUUNCbqKpdxasZU5OJzo6blvOnNyxe0n2vuaJr8pcw/xYFNBeFM065GU4b0ejcG
+ KIVt21tj1aYQ1kdXeZq+Uo=
+Received: from localhost.localdomain (unknown [113.110.214.156])
+ by zwqz-smtp-mta-g0-1 (Coremail) with SMTP id _____wC3XxCXh4plOHDGEg--.61781S4;
+ Tue, 26 Dec 2023 15:58:17 +0800 (CST)
+From: Bruce Suen <bruce_suen@163.com>
+To: u-boot@lists.denx.de
+Cc: dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
+ frieder.schrempf@kontron.de, jagan@amarulasolutions.com,
+ bruce.sun@xtxtech.com, Bruce Suen <bruce_suen@163.com>
+Subject: [PATCH] mtd: spinand: Add support for XTX XT26xxxDxxxxx
+Date: Tue, 26 Dec 2023 02:58:12 -0500
+Message-Id: <20231226075812.3803-1-bruce_suen@163.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20231222061208.3009970-1-sumit.garg@linaro.org>
- <02fdfc4b-113b-409f-8aaf-8f4a04822706@linaro.org>
- <CAFA6WYM8EVY-D_Kptggsvxq0ZrFdP0gQ3y4UEbM+vLu0F8tLjw@mail.gmail.com>
- <c6d65491-c407-4518-aee9-f53f6d4a84ed@linaro.org>
- <20231222-whole-canola-81240881c2e7@spud>
- <4a809aa2-0cc5-4ffa-a19f-06d69ae9e460@linaro.org>
-In-Reply-To: <4a809aa2-0cc5-4ffa-a19f-06d69ae9e460@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 26 Dec 2023 13:23:25 +0530
-Message-ID: <CAFA6WYPY7DmY3+Wf-=xbCpm11ub5BWTVc_C=SeSPVK0dVLTQ9w@mail.gmail.com>
-Subject: Re: [PATCH v2 0/8] An effort to bring DT bindings compliance within
- U-Boot
-To: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
- Conor Dooley <conor@kernel.org>, Rob Herring <robh+dt@kernel.org>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, trini@konsulko.com, sjg@chromium.org, 
- krzysztof.kozlowski+dt@linaro.org, neil.armstrong@linaro.org, 
- caleb.connolly@linaro.org, ff@shokubai.tech, daniel.thompson@linaro.org, 
- dgilmore@fedoraproject.org, pbrobinson@gmail.com, ilias.apalodimas@linaro.org, 
- maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de, 
- michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk, 
- peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: _____wC3XxCXh4plOHDGEg--.61781S4
+X-Coremail-Antispam: 1Uf129KBjvJXoW3JFyrGw1xJr4ftF1rZw48Crg_yoW3tw17pa
+ s0qFyrGr48Ga17Was2qayDZr98Xw4xKrW7u3429a4jvFyrK34rZFZrAry3CrnrG3yxJay3
+ uw4jgr9rW3WYyaUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pRVT5LUUUUU=
+X-Originating-IP: [113.110.214.156]
+X-CM-SenderInfo: 5euxuvpbvxv0i6rwjhhfrp/1tbitxtSKGV4HBLO6QAAsi
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,75 +66,246 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 22 Dec 2023 at 21:23, Krzysztof Kozlowski
-<krzysztof.kozlowski@linaro.org> wrote:
->
-> On 22/12/2023 16:45, Conor Dooley wrote:
-> >>>
-> >>> I suppose we have to relay information to kernel sub-arch maintainers
-> >>> who aren't the same as maintaining U-Boot counterparts. How about
-> >>> adding U-Boot ML to CC for whichever DT change gets submitted in the
-> >>
-> >> And every other project? Just setup lei filters.
-> >>
-> >>> kernel? Otherwise adding U-Boot sub-arch maintainers as reviewers for
-> >>> corresponding kernel DT changes works too if that's acceptable.
-> >>
-> >> You just entirely ignored my proposal without addressing it... ok let it
-> >> be. No, CC-ing U-boot maintainers changes nothing because as I said, I
-> >> want kernel maintainers and contributors to be aware.
-> >
-> > I don't think that adding U-Boot platform maintainers as reviewers for
-> > the platforms in the kernel is a terrible idea. Certainly kernel
-> > platform maintainers for which U-Boot platform maintainers are added to
-> > the MAINTAINERS entry will be aware. That said, something like your
->
-> The point is it does not solve my concern here. I did not express
-> problem that U-Boot maintainers are not aware. They can easily be aware
-> by setting simple lei filters.
+Add Support XTX Technology XT26G01DXXXXX, XT26G11DXXXXX, XT26Q01DXXXXX,
+XT26G02DXXXXX, XT26G12DXXXXX, XT26Q02DXXXXX, XT26G04DXXXXX, and
+XT26Q04DXXXXX SPI NAND.
 
-I thought your major concern was how we can enforce DTS backward and
-forward compatibility although the DT ABI stability is already
-documented here [1]. My suggestion was really based on recognising
-people who really care about DT ABI for particular platforms. I think
-adding people from other projects would certainly help with DT ABI
-stability since the kernel is the single point of contribution. There
-will be DT contributors from other projects too like you may have
-already seen people contributing bootloader (U-Boot) specific
-bindings/DTS changes.
+These are 3V/1.8V 1G/2G/4Gbit serial SLC NAND flash device with on-die
+ECC(8bit strength per 512bytes).
 
-[1] https://docs.kernel.org/process/maintainer-soc.html#devicetree-abi-stability
+Datasheet Links:
+- http://www.xtxtech.com/download/?AId=458
+- http://www.xtxtech.com/download/?AId=495
 
->
-> The problem I want to solve is the kernel maintainers to be aware.
->
+Signed-off-by: Bruce Suen <bruce_suen@163.com>
+---
+ drivers/mtd/nand/spi/Makefile |   1 +
+ drivers/mtd/nand/spi/core.c   |   1 +
+ drivers/mtd/nand/spi/xtx.c    | 180 ++++++++++++++++++++++++++++++++++
+ include/linux/mtd/spinand.h   |   1 +
+ 4 files changed, 183 insertions(+)
+ create mode 100644 drivers/mtd/nand/spi/xtx.c
 
-Although Tom has already expressed in the other thread that U-Boot has
-been a long time user of upstream DT but if we want to make it more
-formal from an enforcement point of view then I liked Conor's idea. If
-you agree then I can create maintainer profile entry as per following
-example for Amlogic platforms to start with:
+diff --git a/drivers/mtd/nand/spi/Makefile b/drivers/mtd/nand/spi/Makefile
+index 3051de4f7e..e46cfed446 100644
+--- a/drivers/mtd/nand/spi/Makefile
++++ b/drivers/mtd/nand/spi/Makefile
+@@ -1,4 +1,5 @@
+ # SPDX-License-Identifier: GPL-2.0
+ 
+ spinand-objs := core.o gigadevice.o macronix.o micron.o paragon.o toshiba.o winbond.o
++spinand-objs += xtx.o
+ obj-$(CONFIG_MTD_SPI_NAND) += spinand.o
+diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
+index 597b088ca7..0b4c067425 100644
+--- a/drivers/mtd/nand/spi/core.c
++++ b/drivers/mtd/nand/spi/core.c
+@@ -828,6 +828,7 @@ static const struct spinand_manufacturer *spinand_manufacturers[] = {
+ 	&paragon_spinand_manufacturer,
+ 	&toshiba_spinand_manufacturer,
+ 	&winbond_spinand_manufacturer,
++	&xtx_spinand_manufacturer,
+ };
+ 
+ static int spinand_manufacturer_match(struct spinand_device *spinand,
+diff --git a/drivers/mtd/nand/spi/xtx.c b/drivers/mtd/nand/spi/xtx.c
+new file mode 100644
+index 0000000000..602861c77b
+--- /dev/null
++++ b/drivers/mtd/nand/spi/xtx.c
+@@ -0,0 +1,180 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2018 Stefan Roese <sr@denx.de>
++ *
++ * Derived from drivers/mtd/nand/spi/micron.c
++ *   Copyright (c) 2016-2017 Micron Technology, Inc.
++ */
++
++#ifndef __UBOOT__
++#include <linux/device.h>
++#include <linux/kernel.h>
++#endif
++#include <linux/bitfield.h>
++#include <linux/mtd/spinand.h>
++
++#define SPINAND_MFR_XTX	0x0B
++
++#define XT26XXXD_STATUS_ECC3_ECC2_MASK	    GENMASK(7, 6)
++#define XT26XXXD_STATUS_ECC_NO_DETECTED     (0)
++#define XT26XXXD_STATUS_ECC_1_7_CORRECTED   (1)
++#define XT26XXXD_STATUS_ECC_8_CORRECTED     (3)
++#define XT26XXXD_STATUS_ECC_UNCOR_ERROR     (2)
++
++static SPINAND_OP_VARIANTS(read_cache_variants,
++		SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_DUALIO_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++
++static SPINAND_OP_VARIANTS(write_cache_variants,
++		SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
++		SPINAND_PROG_LOAD(true, 0, NULL, 0));
++
++static SPINAND_OP_VARIANTS(update_cache_variants,
++		SPINAND_PROG_LOAD_X4(false, 0, NULL, 0),
++		SPINAND_PROG_LOAD(false, 0, NULL, 0));
++
++static int xt26xxxd_ooblayout_ecc(struct mtd_info *mtd, int section,
++				  struct mtd_oob_region *region)
++{
++	if (section)
++		return -ERANGE;
++
++	region->offset = mtd->oobsize / 2;
++	region->length = mtd->oobsize / 2;
++
++	return 0;
++}
++
++static int xt26xxxd_ooblayout_free(struct mtd_info *mtd, int section,
++				   struct mtd_oob_region *region)
++{
++	if (section)
++		return -ERANGE;
++
++	region->offset = 2;
++	region->length = mtd->oobsize / 2 - 2;
++
++	return 0;
++}
++
++static const struct mtd_ooblayout_ops xt26xxxd_ooblayout = {
++	.ecc = xt26xxxd_ooblayout_ecc,
++	.rfree = xt26xxxd_ooblayout_free,
++};
++
++static int xt26xxxd_ecc_get_status(struct spinand_device *spinand,
++				   u8 status)
++{
++	switch (FIELD_GET(STATUS_ECC_MASK, status)) {
++	case XT26XXXD_STATUS_ECC_NO_DETECTED:
++		return 0;
++	case XT26XXXD_STATUS_ECC_UNCOR_ERROR:
++		return -EBADMSG;
++	case XT26XXXD_STATUS_ECC_1_7_CORRECTED:
++		return 4 + FIELD_GET(XT26XXXD_STATUS_ECC3_ECC2_MASK, status);
++	case XT26XXXD_STATUS_ECC_8_CORRECTED:
++		return 8;
++	default:
++		break;
++	}
++
++	return -EINVAL;
++}
++
++static const struct spinand_info xtx_spinand_table[] = {
++	SPINAND_INFO("XT26G01D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x31),
++		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26G11D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x34),
++		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26Q01D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x51),
++		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26G02D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x32),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26G12D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x35),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26Q02D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x52),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26G04D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x33),
++		     NAND_MEMORG(1, 4096, 256, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26Q04D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x53),
++		     NAND_MEMORG(1, 4096, 256, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++};
++
++static const struct spinand_manufacturer_ops xtx_spinand_manuf_ops = {
++};
++
++const struct spinand_manufacturer xtx_spinand_manufacturer = {
++	.id = SPINAND_MFR_XTX,
++	.name = "XTX",
++	.chips = xtx_spinand_table,
++	.nchips = ARRAY_SIZE(xtx_spinand_table),
++	.ops = &xtx_spinand_manuf_ops,
++};
+diff --git a/include/linux/mtd/spinand.h b/include/linux/mtd/spinand.h
+index e8d6feb970..bf7696a981 100644
+--- a/include/linux/mtd/spinand.h
++++ b/include/linux/mtd/spinand.h
+@@ -251,6 +251,7 @@ extern const struct spinand_manufacturer micron_spinand_manufacturer;
+ extern const struct spinand_manufacturer paragon_spinand_manufacturer;
+ extern const struct spinand_manufacturer toshiba_spinand_manufacturer;
+ extern const struct spinand_manufacturer winbond_spinand_manufacturer;
++extern const struct spinand_manufacturer xtx_spinand_manufacturer;
+ 
+ /**
+  * struct spinand_op_variants - SPI NAND operation variants
+-- 
+2.34.1
 
-ARM/Amlogic Meson SoC support
-M:      Neil Armstrong <neil.armstrong@linaro.org>
-M:      Kevin Hilman <khilman@baylibre.com>
-R:      Jerome Brunet <jbrunet@baylibre.com>
-R:      Martin Blumenstingl <martin.blumenstingl@googlemail.com>
-L:      linux-arm-kernel@lists.infradead.org (moderated for non-subscribers)
-L:      linux-amlogic@lists.infradead.org
-S:      Maintained
-P:      Documentation/process/maintainer-soc-u-boot-dt-abi.rst
-W:      http://linux-meson.com/
-F:      Documentation/devicetree/bindings/phy/amlogic*
-F:      arch/arm/boot/dts/amlogic/
-F:      arch/arm/mach-meson/
-F:      arch/arm64/boot/dts/amlogic/
-F:      drivers/pmdomain/amlogic/
-F:      drivers/mmc/host/meson*
-F:      drivers/phy/amlogic/
-F:      drivers/pinctrl/meson/
-F:      drivers/rtc/rtc-meson*
-F:      drivers/soc/amlogic/
-N:      meson
-
--Sumit
