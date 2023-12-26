@@ -4,66 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08D06C46CD4
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:51:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74B6CC46CD3
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:51:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA40F87940;
-	Tue, 26 Dec 2023 10:48:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5A5358787E;
+	Tue, 26 Dec 2023 10:48:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L9STfqtZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l+8eZtzw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 824BB8787E; Tue, 26 Dec 2023 10:48:25 +0100 (CET)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
+ id 55F9E8793C; Tue, 26 Dec 2023 10:48:27 +0100 (CET)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8D5887922
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:48:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8835187931
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:48:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-593f7a1afd7so2539011eaf.0
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:48:22 -0800 (PST)
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-28bc7155755so1552112a91.2
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:48:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703584100; x=1704188900; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703584103; x=1704188903; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2F7y2ZAsDOsnL3tR0un72mklLb2AW3kbO9YY4CuA/Dg=;
- b=L9STfqtZ1KROK401TNZ49ZDBhmek0LCAhFgtKkcVwDRseGFSiELRdZgWhI55XGmpk1
- rmdRbi8mottKI1YXZrHdrxOrRQ6IS3FZ/c8TcUH01o1ZzJtxly+QImHomD46r3gESgUM
- rSBuTkBqLuihVGNi81uttH7+3hy9lF0n75nH4=
+ bh=0mKRQMQ7yjpThcUlSL56Zrv/JvS/Lf8a6j4Dg32zwgU=;
+ b=l+8eZtzwDz/ZLrzpMzhhfS/W36dFiIKG6xPrMQzVAdv3yG/JuRmbQQgxQudFMfOpEK
+ 5BFGlgziQ1X0ixRn64zXNYpd3tkWazWAYdAHb5Gcuqw55UJwv6Q907qu2lRAHWvRr/Ur
+ xL/zf5rw+NQJm+r24JbFEvb4Rh8mna/FUfja4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703584100; x=1704188900;
+ d=1e100.net; s=20230601; t=1703584103; x=1704188903;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2F7y2ZAsDOsnL3tR0un72mklLb2AW3kbO9YY4CuA/Dg=;
- b=jnb0QEOkVRRvsB6rC0YsY5XnIQLvROQCusmXupDeomtNAIbNFQPZM8bB8IwFd3Z3Fq
- GNcXmVnXrEvbzJNPOJrgULXHDK9VrkBaRuZd83/FidvpJH88lBQzzmn5iy8EB++aiso8
- ehuxs1tBEx/ZDZSwJ/Kf0VJu8Vu9Cw1EQ5OdTV4eXHMlO7MFrd7UOqXkUz74a5qI/zER
- ETM2uDWwm7uWP/hfFGn3LM93e6ueyCNATckX/hPsVueZM+fXtUmsZsgxrEx3Sd8cuYoE
- o1fOKGIbv6xHxtllXEOsNkYcl2c8OYU8f7esB/y/44A9N928UZevGijyLweH8axcbSzQ
- my9g==
-X-Gm-Message-State: AOJu0Yw8pQEF+XxAK75usvvf4bQe5ztnN9bbkYABfRT9hfC2T+WO6r1J
- R3iT2lviB3Fj8eUZCQeoQ+EntTGPtgGxogOOqxmricmIY/6A
-X-Google-Smtp-Source: AGHT+IEWafE2AMVS8lk4XK1K+/kC5FLA0kLm19r8J72y5BfEB5AzR9OX6PSPAI8Xf4auNff5FCqjEUdFIX9yfx5Eo1k=
-X-Received: by 2002:a05:6358:2905:b0:170:c3c6:bda5 with SMTP id
- y5-20020a056358290500b00170c3c6bda5mr5269384rwb.15.1703584100410; Tue, 26 Dec
- 2023 01:48:20 -0800 (PST)
+ bh=0mKRQMQ7yjpThcUlSL56Zrv/JvS/Lf8a6j4Dg32zwgU=;
+ b=uBvbZRA/3jImcQIxpGYILjqZ++uUdm9bEBfHeuJltClPhYlGHLSH3UOaNhh9kngG8x
+ UFWNv6oxbrGcmmFGaUamFDlrFcr2UcPJv7pa88myTBqeEUJrre6KlgSwTNAGrWQLQ5Gd
+ zvvWWQJ4XkAHWN34uClYpm31zR9zmhwjvWIH92zEcJdOA0zmVOiWSbGAsez+zcOfM/O1
+ MyPsqr9/VV1ZhI0n46K9SNCaqTKMilOvvHzWS51u4547Ko5ypFUyvvPhvLgOg2nXqXYt
+ BOPBOM5BKAZdV8i7m7ot56aU1phByziNnndgzrZVzQcfjNT901cUhkooTGBl9qTRRkpN
+ CBJw==
+X-Gm-Message-State: AOJu0YwMUXu6VQ7gZplJYyMzuKLl8RJ295qbhUcHvJKp3nmZYUZ6LpnT
+ nYM8dWu8LArFRKiSOV9iHJMJd+LiM9qOjDb7aEdRSBSe3kJp
+X-Google-Smtp-Source: AGHT+IGdfL/cZw3s/8aV1RViIO6rRh9c3zTwmLNgA4+zNI1QufXetr2JTk1eVn79B7ApgGLnuB+sZSYNJTrUNzbSseE=
+X-Received: by 2002:a17:90a:fe8d:b0:28c:7de9:253 with SMTP id
+ co13-20020a17090afe8d00b0028c7de90253mr100238pjb.40.1703584102925; Tue, 26
+ Dec 2023 01:48:22 -0800 (PST)
 MIME-Version: 1.0
-References: <92d06d89e2d2d6b1738c62453789872dcb6bfa92.1701777713.git.love.kumar@amd.com>
-In-Reply-To: <92d06d89e2d2d6b1738c62453789872dcb6bfa92.1701777713.git.love.kumar@amd.com>
+References: <20231205155523.721784-1-devarsht@ti.com>
+ <871ec46f-feb6-146f-91f9-6f02c0da3b45@ti.com>
+In-Reply-To: <871ec46f-feb6-146f-91f9-6f02c0da3b45@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Dec 2023 09:47:49 +0000
-Message-ID: <CAFLszTgKZWyCWRXFJvYpwLTTV0OQ+rjKXPssW0Zc9thqLDf9nw@mail.gmail.com>
-Subject: Re: [PATCH v2] test/py: mii: Add tests for mii command
-To: Love Kumar <love.kumar@amd.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
+Date: Tue, 26 Dec 2023 09:47:50 +0000
+Message-ID: <CAFLszTiJ6En-jQr_3v4S0d4eUyBvvOt==SeZ8n46ZjLwju6Tdw@mail.gmail.com>
+Subject: Re: [PATCH v5 0/8] Move framebuffer reservation for SPL to RAM end
+To: Devarsh Thakkar <devarsht@ti.com>
+Cc: u-boot@lists.denx.de, agust@denx.de, trini@konsulko.com, 
+ bmeng.cn@gmail.com, msuchanek@suse.de, rasmus.villemoes@prevas.dk, 
+ yangshiji66@outlook.com, praneeth@ti.com, nm@ti.com, vigneshr@ti.com, 
+ a-bhatia1@ti.com, j-luthra@ti.com, nsekhar@ti.com, n-jain1@ti.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -82,159 +86,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Love,
-
-On Tue, Dec 5, 2023 at 12:03=E2=80=AFPM Love Kumar <love.kumar@amd.com> wro=
-te:
+On Wed, Dec 13, 2023 at 2:56=E2=80=AFPM Devarsh Thakkar <devarsht@ti.com> w=
+rote:
 >
-> Add below test cases for mii commands:
-> mii_info -To display MII PHY info
-> mii_list - To list MII devices
-> mii_set_device - To set MII device
-> mii_read - To reads register from MII PHY address
-> mii_dump - To display data from MII PHY address
+> Hi Antoine,
 >
-> Signed-off-by: Love Kumar <love.kumar@amd.com>
-> ---
-> Changes in v2:
->   - Get MII device list from env instead of auto-detecting it
->   - Set the MII device to its current device after testing so that it
->   won't impact next cases
-> ---
->  test/py/tests/test_mii.py | 92 +++++++++++++++++++++++++++++++++++++++
->  1 file changed, 92 insertions(+)
->  create mode 100644 test/py/tests/test_mii.py
+> On 05/12/23 21:25, Devarsh Thakkar wrote:
+> > Move video memory reservation for SPL at end of RAM so that it does
+> > not interefere with reservations for next stage so that the next stage
+> > need not have holes in between for passed regions and instead it can
+> > maintain continuity in reservations.
+> >
+> > Also catch the bloblist before starting reservations to avoid the same
+> > problem.
+> >
+> > While at it, also fill missing fields in video handoff struct before
+> > passing it to next stage.
+> >
+> > This is as per discussions at :
+> > For moving SPL framebuffer reservation at end of RAM:
+> >
+> > https://lore.kernel.org/all/CAPnjgZ3xSoe_G3yrqwuAvoiVjUfZ+YQgkOR0ZTVXGT=
+9VK8TwJg@mail.gmail.com/
+> >
+> > For filling missing video handoff fields :
+> > https://lore.kernel.org/all/CAPnjgZ1Hs0rNf0JDirp6YPsOQ5=3DQqQSP9g9qRwLo=
+OASUV8a4cw@mail.gmail.com/
+> >
+> > Changelog:
+> > V2:
+> > - Make a generic function to reserve video memory at SPL stage.
+> > - Add debug prints while skipping framebuffer allocation at uboot.
+> > - Correct commenting style as suggested.
+> >
+> > V3:
+> > - Change spl_reserve_video to spl_reserve_video_from_ram_top
+> >   which enforce framebuffer reservation from end of RAM.
+> > - Use gd->ram_top instead of local ram_top and update
+> >   gd->reloc_addr after each reservation.
+> > - Print error message on framebuffer reservation.
+> > - Update SPL doc with spl splash screen specific info.
+> >
+> > V4:
+> > - Split patches into atomic commits.
+> > - Remove duplicate check for video blob passed addresses and error out
+> >   if invalid address/size received from blob.
+> > - Improve SPL documentation memory reservation scheme and print message
+> >   for video memory reservation from bloblist.
+> > - Add Reviewed-By.
+> >
+> > V5:
+> >  - Add comment for filling video handoff size with aligned size
+> >  - Use PHASE_BOARD_F while checking for U-boot proper stage
+> >  - Add Reviewed-by
+> >
+>
+> Is it possible to pull this series in if no further comments ?
 
-I'll just note that we can write tests in C now, even if they need
-Python setup. See [1].
-
-Some nits below, with which:
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Yes please, this has been pending for a while.
 
 >
-> diff --git a/test/py/tests/test_mii.py b/test/py/tests/test_mii.py
-> new file mode 100644
-> index 000000000000..e9bdbadffc8e
-> --- /dev/null
-> +++ b/test/py/tests/test_mii.py
-> @@ -0,0 +1,92 @@
-> +# SPDX-License-Identifier: GPL-2.0
-> +# (C) Copyright 2023, Advanced Micro Devices, Inc.
-> +
-> +import pytest
-> +import re
-> +
-> +"""
-> +Note: This test doesn't rely on boardenv_* configuration value but they =
-can
-> +change test behavior.
-> +
-> +For example:
-> +
-> +# Setup env__mii_deive_test_skip to True if tests with ethernet PHY devi=
-ces
-> +# should be skipped. For example: Missing PHY device
-> +env__mii_device_test_skip =3D True
-> +
-> +# Setup env__mii_device_test to set the MII device names. Test will be s=
-kipped
-> +# if env_mii_device_test is not set
-> +env__mii_device_test =3D {
-> +    "device_list": ["eth0", "eth1"],
-
-Please be sure to use single quotes throughout, for consistency.
-
-> +}
-> +"""
-> +
-> +@pytest.mark.buildconfigspec("cmd_mii")
-> +def test_mii_info(u_boot_console):
-> +    if u_boot_console.config.env.get("env__mii_device_test_skip", False)=
-:
-> +        pytest.skip("MII device test is not enabled!")
-> +    expected_output =3D "PHY"
-> +    output =3D u_boot_console.run_command("mii info")
-> +    if not re.search(r"PHY (.+?):", output):
-> +        pytest.skip("PHY device does not exist!")
-> +    assert expected_output in output
-> +
-> +@pytest.mark.buildconfigspec("cmd_mii")
-> +def test_mii_list(u_boot_console):
-> +    if u_boot_console.config.env.get("env__mii_device_test_skip", False)=
-:
-> +        pytest.skip("MII device test is not enabled!")
-> +
-> +    f =3D u_boot_console.config.env.get("env__mii_device_test", None)
-> +    if not f:
-> +        pytest.skip("No MII device to test!")
-> +
-> +    dev_list =3D f.get("device_list")
-> +    if len(dev_list) =3D=3D 0:
-
-if not dev_list:
-
-> +        pytest.fail("No MII device list provided via env__mii_device_tes=
-t!")
-> +
-> +    expected_output =3D "Current device"
-> +    output =3D u_boot_console.run_command("mii device")
-> +    mii_devices =3D (
-> +        re.search(r"MII devices: '(.+)'", output).groups()[0].replace("'=
-", "").split()
-> +    )
-> +
-> +    assert len([x for x in dev_list if x in mii_devices]) =3D=3D len(dev=
-_list)
-> +    assert expected_output in output
-> +
-> +@pytest.mark.buildconfigspec("cmd_mii")
-> +def test_mii_set_device(u_boot_console):
-> +    test_mii_list(u_boot_console)
-> +    f =3D u_boot_console.config.env.get("env__mii_device_test", None)
-> +    dev_list =3D f.get("device_list")
-> +    output =3D u_boot_console.run_command("mii device")
-> +    current_dev =3D re.search(r"Current device: '(.+?)'", output).groups=
-()[0]
-> +
-> +    for dev in dev_list:
-> +        u_boot_console.run_command(f"mii device {dev}")
-> +        output =3D u_boot_console.run_command("echo $?")
-> +        assert output.endswith("0")
-> +
-> +    u_boot_console.run_command(f"mii device {current_dev}")
-> +    output =3D u_boot_console.run_command("mii device")
-> +    dev =3D re.search(r"Current device: '(.+?)'", output).groups()[0]
-> +    assert current_dev =3D=3D dev
-> +
-> +@pytest.mark.buildconfigspec("cmd_mii")
-> +def test_mii_read(u_boot_console):
-> +    test_mii_list(u_boot_console)
-> +    output =3D u_boot_console.run_command("mii info")
-> +    eth_addr =3D hex(int(re.search(r"PHY (.+?):", output).groups()[0], 1=
-6))
-> +    u_boot_console.run_command(f"mii read {eth_addr} 0")
-> +    output =3D u_boot_console.run_command("echo $?")
-> +    assert output.endswith("0")
-> +
-> +@pytest.mark.buildconfigspec("cmd_mii")
-> +def test_mii_dump(u_boot_console):
-> +    test_mii_list(u_boot_console)
-> +    expected_response =3D "PHY control register"
-> +    output =3D u_boot_console.run_command("mii info")
-> +    eth_addr =3D hex(int(re.search(r"PHY (.+?):", output).groups()[0], 1=
-6))
-> +    response =3D u_boot_console.run_command(f"mii dump {eth_addr} 0")
-> +    assert expected_response in response
-> +    output =3D u_boot_console.run_command("echo $?")
-> +    assert output.endswith("0")
-> --
-> 2.25.1
+> Regards
+> Devarsh
 >
+> > Test logs:
+> > https://gist.github.com/devarsht/30a3c1591270c9ebae00714b48d33058
+> >
+> > Devarsh Thakkar (8):
+> >   spl: Enforce framebuffer reservation from end of RAM
+> >   arm: mach-k3: common: Reserve video memory from end of the RAM
+> >   board: ti: am62x: evm: Remove video_setup from spl_board_init
+> >   common/board_f: Catch bloblist before starting reservations
+> >   video: Skip framebuffer reservation if already reserved
+> >   video: Fill video handoff in video post probe
+> >   doc: spl: Add info for missing Kconfigs
+> >   doc: spl: Add info regarding memory reservation
+> >
+> >  arch/arm/mach-k3/common.c    | 17 ++++++++++-----
+> >  board/ti/am62x/evm.c         | 18 ----------------
+> >  common/board_f.c             | 41 +++++++++++++++++++++++++++++++-----
+> >  common/spl/spl.c             | 19 +++++++++++++++++
+> >  doc/develop/spl.rst          | 37 ++++++++++++++++++++++++++++++++
+> >  drivers/video/video-uclass.c | 40 ++++++++++++++++++++++++-----------
+> >  include/spl.h                | 10 +++++++++
+> >  7 files changed, 142 insertions(+), 40 deletions(-)
+> >
 
 Regards,
 Simon
-
-
-[1] https://docs.u-boot.org/en/latest/develop/tests_writing.html#mixing-pyt=
-hon-and-c
