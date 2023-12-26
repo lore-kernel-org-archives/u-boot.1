@@ -4,77 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84B70C46CD3
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:49:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06CB9C46CD3
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:49:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8893A878EA;
-	Tue, 26 Dec 2023 10:47:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F4151878F1;
+	Tue, 26 Dec 2023 10:47:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oabFWQCz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OFSHxkzL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94893878F9; Tue, 26 Dec 2023 10:47:33 +0100 (CET)
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
+ id 4CCF58786E; Tue, 26 Dec 2023 10:47:35 +0100 (CET)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C67B878CB
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:47:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1CA61878F1
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:47:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-28c467446f0so892989a91.0
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:47:30 -0800 (PST)
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-594965fbb3cso707267eaf.1
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:47:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703584048; x=1704188848; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703584051; x=1704188851; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bVdFE3W3MBYd4mKaAdFZWM5RmzLe/CpmdAfQz5IEfW8=;
- b=oabFWQCziLGSHTqCx3W6A238Yk6+tNOBMUXjh53nhvvqJYtrTsZvDSXltbmCTud/zz
- Bw055puXK+D5M/8FS6NTvVUJ3KW1tSUYq7Rs3CXHFnHsoeXcJ4xDYVKwIGPOQkDGIoiK
- iOowMWJVk4BhAi15EjrptLGVi3+RRG2s4yaZM=
+ bh=GhbjdiXWuf/yHTGcvGsH9DplVpuo2ikwiArOJZ5lUiQ=;
+ b=OFSHxkzL7eMGaGVKzhOEmn9JylieXwriVM5Y4AMJ6ud2sO3gT7ltZxU3sMgXSdgoaD
+ PxBFSuwZwCA2U3kEprBbVLV+thIf/dvbKCvIiJp1r7cjmMNdOD7QKm2q7bpHnJ8A5fGm
+ q5a4+2rVXu0cuf9WBfhu3z9v+yOe+x5OiUH0A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703584048; x=1704188848;
+ d=1e100.net; s=20230601; t=1703584051; x=1704188851;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bVdFE3W3MBYd4mKaAdFZWM5RmzLe/CpmdAfQz5IEfW8=;
- b=cXlJyiEwtvw6FOB/nCn8WX36CfDCD2yeC6rYfztoj5TlKdukbgWilYseFCcETbPPY2
- dXh0EfLn6AH/l+LzL0vmKdrHaJ4gUp0Emal128d6icQ6lJPOsmNZ1yF3nmsUnqfkdwKf
- vBqfbvAqGgPjLPDxZr3wpx/yXjlfSP6PZTBhy56JpBwFxqz3MVsTDq9GU6a/wTxIlLyC
- V4hSJV+tixYYyjX+Ul4yu83ho6hBwQiz7QREcrLjXRbngP3/o/XrhCMhtQfG7yPqG9/7
- gWwlL6Qo+MpftcAA0fvqFHGCn0tV6/Y8KMn4d9OhQCcs3+ZXv82C1MZrp34UFcnTwVhT
- sBmQ==
-X-Gm-Message-State: AOJu0YxcQ7OxzehCVR7ipbYw7vjI4XifiYPl96q7I8/hOHf17VMB3EI2
- liQLqM2OgaZG+Zx6uk1nZ+H2b2WcWSr633dU8UYdC608YyAu
-X-Google-Smtp-Source: AGHT+IEoi09fPfTMdd1g8MxDSvBkHAKyZbreFRQqYfqMacKOZ3Zs/biPZYkC6w0QNPyRzQyBxaXsY8KnEWpS7U7DDiY=
-X-Received: by 2002:a17:90b:4a8b:b0:28b:e7fc:5060 with SMTP id
- lp11-20020a17090b4a8b00b0028be7fc5060mr7235307pjb.11.1703584048497; Tue, 26
- Dec 2023 01:47:28 -0800 (PST)
+ bh=GhbjdiXWuf/yHTGcvGsH9DplVpuo2ikwiArOJZ5lUiQ=;
+ b=PXG0S2sYmzZL9Qn9fxntfJjThp4cEzZhuANb9lRuFtTjzuWGUuxkiD7GacTX1o6yoU
+ ERtW/kLHi7rWocK3RL1s8d1PTjig68r9EIuz0E31CaGT7zL2c8VbYdSWpktdr7GQ/LJc
+ iQJ5MzU9hpwc+fXpK4b87tUcqddoNThvdqRP9fUijIRc3A/u5FJ7KK09QZbFx04O2c9y
+ ndUv+OWLPjMdXUHOSQ7ai+ij1ZndGvTSAhx+aobRqm/otNvdHYAJJXOPuu3hNUbGwRT/
+ IpnLihWtPvqPccodFzX1uAQvw2IOn7g9H3vkffomXtDo99VQHTOBDIufyUHchKb5r8vA
+ 5dwg==
+X-Gm-Message-State: AOJu0YyMq8tYRBX3B+Qo4SAmI/INdYC+0gQ0sSRxumdlQlgxq6ljrpFb
+ 5d/M6OFw4l6YMNbJV868g3KrIT0d7/LoGuCshEMoFTo1OrTV
+X-Google-Smtp-Source: AGHT+IG6tk3QykbmGy911FDtKEWrchdcHo8P6rci4YIgmnEq+b2EXZKdDVAYmaV1Lt0eZLG7EAVvJwiqTXh3dSLAXQc=
+X-Received: by 2002:a05:6358:4406:b0:170:982:5611 with SMTP id
+ z6-20020a056358440600b0017009825611mr10352122rwc.32.1703584051731; Tue, 26
+ Dec 2023 01:47:31 -0800 (PST)
 MIME-Version: 1.0
-References: <20231214135103.1606605-1-sumit.garg@linaro.org>
- <20231214135103.1606605-5-sumit.garg@linaro.org>
- <CAPnjgZ37QMzyVNxd8608dMBXVPed-PAU39CAhOrMRHVedEnSkQ@mail.gmail.com>
- <CAFA6WYMeLoD_z1W+iK3C6yj44dO_pdM71bhd6gK14gB==75gxw@mail.gmail.com>
-In-Reply-To: <CAFA6WYMeLoD_z1W+iK3C6yj44dO_pdM71bhd6gK14gB==75gxw@mail.gmail.com>
+References: <20231218181901.337515-1-raymond.mao@linaro.org>
+ <20231218181901.337515-4-raymond.mao@linaro.org>
+In-Reply-To: <20231218181901.337515-4-raymond.mao@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Dec 2023 09:46:54 +0000
-Message-ID: <CAFLszTgnOHQJGin-=32syDVPAkLXAni7QFd3WV_xtW0a2D84Bg@mail.gmail.com>
-Subject: Re: [PATCH 4/8] dts: Add alternative location for upstream DTB builds
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, trini@konsulko.com, robh+dt@kernel.org, 
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
- rfried.dev@gmail.com, marex@denx.de
+Date: Tue, 26 Dec 2023 09:46:59 +0000
+Message-ID: <CAFLszTjUcyiG29YjxstZOTJytbb367+dEtoECEwE+FMT55Yk9Q@mail.gmail.com>
+Subject: Re: [PATCH v3 03/14] bloblist: Change the magic value
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, jwerner@chromium.org, 
+ Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -93,160 +84,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sumit,
+On Mon, Dec 18, 2023 at 6:19=E2=80=AFPM Raymond Mao <raymond.mao@linaro.org=
+> wrote:
+>
+> From: Simon Glass <sjg@chromium.org>
+>
+> This uses a new value with spec v0.9 so change it.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+> Changes in v2
+> - Update the bloblist magic to align to FW handoff spec v0.9.
+> Changes in v3
+> - Update the bloblist magic to align to FW handoff spec up to commit 3592=
+349.
+>
+>  include/bloblist.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Wed, Dec 20, 2023 at 12:01=E2=80=AFPM Sumit Garg <sumit.garg@linaro.org>=
- wrote:
->
-> Hi Simon,
->
-> On Wed, 20 Dec 2023 at 10:17, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Sumit,
-> >
-> > On Thu, 14 Dec 2023 at 06:52, Sumit Garg <sumit.garg@linaro.org> wrote:
-> > >
-> > > Allow platform owners to mirror devicetree files from devitree-rebasi=
-ng
-> > > directory into dts/arch/$(ARCH) (special case for dts/arch/arm64). Th=
-en
-> > > build then along with any *-u-boot.dtsi file present in arch/$(ARCH)/=
-dts
-> > > directory.
-> >
-> > Also add a new Makefile for arm64.
->
-> I suppose you are referring to dts/arch/arm64/Makefile which has been
-> added by this patch.
-
-Yes, I just mean that you should mention this in the commit message
-
->
-> >
-> > >
-> > > This will help easy migration for platforms which currently are compl=
-iant
-> > > with upstream Linux kernel devicetree files.
-> > >
-> > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > > ---
-> > >  dts/Kconfig             | 11 +++++++++++
-> > >  dts/Makefile            | 17 ++++++++++++++---
-> > >  dts/arch/arm64/Makefile | 14 ++++++++++++++
-> > >  3 files changed, 39 insertions(+), 3 deletions(-)
-> > >  create mode 100644 dts/arch/arm64/Makefile
-> > >
-> > > diff --git a/dts/Kconfig b/dts/Kconfig
-> > > index 00c0aeff893..96396f12b67 100644
-> > > --- a/dts/Kconfig
-> > > +++ b/dts/Kconfig
-> > > @@ -85,6 +85,17 @@ config OF_LIVE
-> > >           enables a live tree which is available after relocation,
-> > >           and can be adjusted as needed.
-> > >
-> > > +config OF_UPSTREAM
-> > > +       bool "Enable use of devicetree imported from Linux kernel rel=
-ease"
-> > > +       help
-> > > +         Traditionally, U-boot platforms used to have their custom d=
-evicetree
-> >
-> > U-Boot
-> >
-> > (I think I mentioned this, but you thought I said U-boot...but it
-> > really is U-Boot). Perhaps grep your patches next time.
->
-> Ah, I see. It looks like I missed that bit, and will take care of it
-> in the next revision.
->
-> >
-> > > +         files or copy devicetree files from Linux kernel which are =
-hard to
-> > > +         maintain and can usually get out-of-sync from Linux kernel.=
- This
-> > > +         option enables platforms to migrate to devicetree-rebasing =
-repo where
-> > > +         a regular sync will be maintained every major Linux kernel =
-release
-> > > +         cycle. However, platforms can still have some custom u-boot=
- specific
-> > > +         bits maintained as part of *-u-boot.dtsi files.
-> >
-> > I'm a bit nervous about this. It means that boards chose between this
-> > dir of the local files. It means there is some effort to switch.
-> >
-> > I wonder if we could default to using the rebasing thing, with boards
-> > having to 'opt out'? So this should be 'default y' ?
->
-> Ideally that should be our migration path going forward once we get
-> enough boards migrated to use rebasing repo. But at this initial stage
-> we have to put some effort on migrating boards to use rebasing
-> subtree, although effort should be just adding (given DT bindings
-> compliance) following to defconfig (see patch #7):
->
-> CONFIG_OF_UPSTREAM=3Dy
-> CONFIG_DEFAULT_DEVICE_TREE=3D"amlogic/meson-gxbb-nanopi-k2"
->
-> and create a mirrored copy of:
-> ../../../devicetree-rebasing/src/arm64/amlogic/ into
-> dts/arch/arm64/amlogic/ with modifications to add targets to
-> dts/arch/arm64/Makefile.
->
-> I am happy to put in that effort but certainly for new board support
-> that would like to import DT from Linux it should be the default. That
-> stands true for the Qcom platform series for which Caleb is currently
-> working on.
-
-The problem I see is that this is board-by-board, so will never
-happen. Changing one board (e.g. rockpro64-rk3399) typically involves
-changing the .dtsi files it includes (e.g. rk3399.dtsi) so it is
-hard/impossible to do one board without doing all.
-
-So this is why I believe the setting should be on an SoC basis, not on
-a board basis.
-
->
-> >
-> >
-> > > +
-> > >  choice
-> > >         prompt "Provider of DTB for DT control"
-> > >         depends on OF_CONTROL
-> > > diff --git a/dts/Makefile b/dts/Makefile
-> > > index 3437e54033d..8098bf8191a 100644
-> > > --- a/dts/Makefile
-> > > +++ b/dts/Makefile
-> > > @@ -10,10 +10,20 @@ ifeq ($(DEVICE_TREE),)
-> > >  DEVICE_TREE :=3D unset
-> > >  endif
-> > >
-> > > +ifeq ($(CONFIG_OF_UPSTREAM),y)
-> > > +ifeq ($(CONFIG_ARM64),y)
-> > > +DEVICE_TREE_LOC :=3D dts/arch/arm64
-> >
-> > dt_dir ?
->
-> Okay I will rename it.
->
-> >
-> > Should we move the arm64 DTs to arch/arm64 ?
->
-> IMO, the migration path should be to use rebasing subtree via
-> dts/arch/arm64/ and dropping DTs except *-u-boot.dtsi from
-> arch/$(ARCH)/dts. So moving DTs from arch/arm/ to arch/arm64/ seems
-> like a redundant change to me.
-
-I can see that argument, but having two different directory structures
-would be confusing.
-
->
-> >
-> > What about the subdirs used in Linux?
->
-> I hope I have described above regarding how subdirs are mirrored.
-> However, have a look at patch #7 for the amlogic/ subdir example.
-
-OK
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
