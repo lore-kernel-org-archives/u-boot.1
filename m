@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A36AC46CD3
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:51:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6941BC46CD4
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:51:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF70D8792D;
-	Tue, 26 Dec 2023 10:48:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5345E8791F;
+	Tue, 26 Dec 2023 10:48:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ngqW2hRX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H1JKoJUl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 829F587922; Tue, 26 Dec 2023 10:48:22 +0100 (CET)
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
+ id E02D38787E; Tue, 26 Dec 2023 10:48:24 +0100 (CET)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F4A687919
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:48:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 988B58791D
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:48:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-28b9e9e83b0so1876386a91.2
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:48:19 -0800 (PST)
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-28beb1d946fso3466118a91.0
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:48:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703584098; x=1704188898; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703584099; x=1704188899; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RKFLwlJscF5JbYbHdx9KmaBk32ZX7p3thN5rrl+Du8k=;
- b=ngqW2hRXKbdKAN7TWljP+Rsab2zgliTwh9ovzfE6StxVg8U1fwUDYhnIVWrLtBnaE5
- wJpAQToF0k9cdd7rkBAbvnJzfvEoFkAJZVqGb1uv0k81xLyEjJT5pnKYE6sgWUgQcB76
- w9AYrZTbAFRKxnWea5+CBUFD9VnLzWiaZfLrQ=
+ bh=vtXzculmzU58eDjU+pdGEM7MpKR/b6Ix/pYM8JWcktc=;
+ b=H1JKoJUlhcfbRlZ4u+tAkfj88N82/JIjtcBSvpisnHFvGGidUK67Dv0juReHjLFiFH
+ lQK14WRPSLWgJtsG44bdYLvyfugJ90HEKormBr95981hx+Hvqr6rlRccK8+1Amlig6Ug
+ BeVAty3PNdLF3VXAAxfBFU7q4jYVJPYEkbyZM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703584098; x=1704188898;
+ d=1e100.net; s=20230601; t=1703584099; x=1704188899;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RKFLwlJscF5JbYbHdx9KmaBk32ZX7p3thN5rrl+Du8k=;
- b=Zn4dViPoIwvAa1PKVaFp62kh8Nlmh4kdMnH6R3IKDCDnd2OckeIAcusPHy8KM11q2o
- A4k3+nGuxoKPFqb5U9/8oO0Np1URJrrPBvKmAvBKJFZjxm4wR5Ua1XIusIEMdWM7oIx0
- EEKDsCHrVnPtdNjM41WK8oNyUregqvpOGXjKBK4tXvWujFttgXD9fdTIeRyS/2eFnDFC
- jYZFCByCfV4fA271767RkAHfOPwNkXlFgD97aDvh2HBNWTg6iu+wSbqR5SnyUP2t6Eh3
- h24rWkJKRyMoWnGdFMHDTyA8MYEkvl3DH/VwqZb6x5v+8dqGuaCqyhFyHNGiZbznQ3gI
- fhvQ==
-X-Gm-Message-State: AOJu0YzUQpGEHKRgdq13sFVhsHbb8MaFJrz0h2hDRPp/irHngm2i25qM
- CMdeoxiMozHd6TyQNFssXAfs9SjOAQ7PhXNNC/LNC6RTf4is
-X-Google-Smtp-Source: AGHT+IGV9CgLCXivwFKZET2z8xvjAZwJFYQpRvHoHD4vqFO5m7Ve+bMwxPKNqN88TWJ/UNXn8N05BVXc8RCakWz6ohM=
-X-Received: by 2002:a17:90a:3002:b0:28c:42c8:7fbf with SMTP id
- g2-20020a17090a300200b0028c42c87fbfmr638808pjb.29.1703584097998; Tue, 26 Dec
- 2023 01:48:17 -0800 (PST)
+ bh=vtXzculmzU58eDjU+pdGEM7MpKR/b6Ix/pYM8JWcktc=;
+ b=wbpstkMvvDDK9K2Nud4/lYSYPa8P+5xeyJwMrlYPrnf5dy8+P8X8uSlKyNpYYntHoz
+ GdbSp3UiWNabaV1tQJ4BSdQgpFFBGwdQ6TjNnzsguRYtXbZWZd43x1yQKGhN8yFQpv5Z
+ EKhjJFx4ZpKXJ4ApNJkgQjPovx3hXLHZy6i3sqd90966LogE33BO8hlUpvPYQ9XSFmmN
+ QheqLVPik185cic7DcfGoboXwwG4KOa8pqeqO4ftSyy87nu0qPRIbSzbXYfMqFQEjOHP
+ 9u1V3l43J5mnUyEUPTGqETnSDi0potPOdNg1efNSOz82iVaPRKKWlgLwevyzBTeoz7Ms
+ bGkw==
+X-Gm-Message-State: AOJu0YyuFjAvrQn1OUSLVWtYGjzAPJJDjU4XD7lqZUDc/PQF53p8oK6Z
+ MZzWnYzvAG6aj2LC7BqOOFtjB2ICGWIwupBaN/JZew7ihXr1
+X-Google-Smtp-Source: AGHT+IG+rXKnVcrAtoU5x3MNWRgkpEAsMkPWfSMbLyLX2iJEPbYw/YMm7DfYlnkiDemFpQ3JmwkGdgPJ7ANRVEu+v6A=
+X-Received: by 2002:a17:90a:d312:b0:28b:d338:db18 with SMTP id
+ p18-20020a17090ad31200b0028bd338db18mr3024252pju.63.1703584099540; Tue, 26
+ Dec 2023 01:48:19 -0800 (PST)
 MIME-Version: 1.0
-References: <20231222213110.660402-1-raymond.mao@linaro.org>
- <20231222213110.660402-10-raymond.mao@linaro.org>
-In-Reply-To: <20231222213110.660402-10-raymond.mao@linaro.org>
+References: <20231112205516.183410-1-sjg@chromium.org>
+ <20231112205516.183410-4-sjg@chromium.org>
+ <082aeedd-4371-4ba4-a29a-bf0f0730b77b@gmx.de>
+ <20231121132110.GQ2513409@bill-the-cat>
+ <CAPnjgZ30CjQZ0+DMp2gy0HzrnRsjcY5NMi1YVVRQiN8UG-5oBg@mail.gmail.com>
+ <c8f1c7cf-346f-42b4-9652-69476e763d5f@gmx.de>
+ <CAPnjgZ2DM55YjF845k2uGscwr6-yrQ7KU=mZFsoo9K-6Gik1WA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ2DM55YjF845k2uGscwr6-yrQ7KU=mZFsoo9K-6Gik1WA@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Dec 2023 09:47:47 +0000
-Message-ID: <CAFLszTjGejJm4XdCachiy5C-2i2L2XyWUschx+bNy+1YpYoOcQ@mail.gmail.com>
-Subject: Re: [PATCH v3 9/9] qemu-arm: get FDT from bloblist
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, jwerner@chromium.org, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Kevin Chen <kevin_chen@aspeedtech.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Shiji Yang <yangshiji66@outlook.com>, 
- Baruch Siach <baruch@tkos.co.il>, Michal Simek <michal.simek@amd.com>,
- Stefan Roese <sr@denx.de>, Sean Anderson <sean.anderson@seco.com>
+Date: Tue, 26 Dec 2023 09:47:39 +0000
+Message-ID: <CAFLszTi61XrAswTvaMVgLp32K+9TftAxo2=VW3jivU1tyOucWw@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] efi: Avoid using dm_scan_other()
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,55 +89,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Heinrich,
 
-On Fri, Dec 22, 2023 at 9:32=E2=80=AFPM Raymond Mao <raymond.mao@linaro.org=
-> wrote:
+On Mon, Dec 18, 2023 at 3:02=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
 >
-> Get devicetree from a bloblist if it exists.
-> If not, fallback to get FDT from the specified memory address.
+> Hi Heinrich,
 >
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
-> Changes in v2
-> - Refactor of board_fdt_blob_setup().
+> On Sat, 16 Dec 2023 at 14:02, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
+ote:
+> >
+> > On 12/16/23 21:46, Simon Glass wrote:
+> > > Hi,
+> > >
+> > > On Tue, 21 Nov 2023 at 06:21, Tom Rini <trini@konsulko.com> wrote:
+> > >>
+> > >> On Tue, Nov 21, 2023 at 01:18:09PM +0100, Heinrich Schuchardt wrote:
+> > >>> On 11/12/23 21:55, Simon Glass wrote:
+> > >>>> This function is defined by bootstd so using it precludes using th=
+at
+> > >>>> feature. Use the board_early_init_r() feature instead.
+> > >>>>
+> > >>>> This requires moving quite a lot of code into the board directory,=
+ butt
+> > >>>> this is the normal place for code called by board_early_init_r()
+> > >>>>
+> > >>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+> > >>>> ---
+> > >>>>
+> > >>>> Changes in v2:
+> > >>>> - Drop duplicate acpi_xsdt patch
+> > >>>> - Put the board_early_init_r code into board/
+> > >>>>
+> > >>>>    board/efi/efi-x86_app/Makefile  |   5 +
+> > >>>>    board/efi/efi-x86_app/efi_app.c | 205 +++++++++++++++++++++++++=
++++++++
+> > >>>
+> > >>> Our target should be to enable building the EFI app on all architec=
+tures.
+> > >>>
+> > >>> Only x86 specific code should be added to board/efi/efi-x86_app/efi=
+_app.c.
+> > >>
+> > >> A later enhancement to make U-Boot as an EFI app more generic would =
+be
+> > >> good, but outside the scope of this patch which is moving generic co=
+de
+> > >> out from "lib" and in to "board".
+> >
+> > I cannot see that this patch is moving any code our of lib/.
+> >
+> > But why should we move generic code into board?
 >
->  board/emulation/qemu-arm/qemu-arm.c | 12 ++++++++++--
->  1 file changed, 10 insertions(+), 2 deletions(-)
+> It isn't really generic
 >
+> >
+> > >
+> > > This patch was marked as old /archived in patchwork so has been
+> > > forgotten. I have marked it new and non-archived in the hope that it
+> > > can be applied to -master soon.
+> >
+> > There is nothing x86 specific about the code. Generic code should be in
+> > lib/. Please, provide a new version of the patch.
+> >
+> > >
+> > > I believe that having the EFI app support bootstd could be a useful a=
+ddition.
+> >
+> > That was not disputed.
 
-I believe this patch will not be needed, since we have fdtdec_setup()
-to do this.
+OK, I see now that your objection was putting it into board/ so I sent
+a new patch for that.
 
-> diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-a=
-rm/qemu-arm.c
-> index e225011bf0..d326668caf 100644
-> --- a/board/emulation/qemu-arm/qemu-arm.c
-> +++ b/board/emulation/qemu-arm/qemu-arm.c
-> @@ -149,9 +149,17 @@ int dram_init_banksize(void)
->
->  void *board_fdt_blob_setup(int *err)
->  {
-> +       void *fdt =3D NULL;
->         *err =3D 0;
-> -       /* QEMU loads a generated DTB for us at the start of RAM. */
-> -       return (void *)CFG_SYS_SDRAM_BASE;
-> +
-> +       /* Check if a DTB exists in bloblist */
-> +       if (IS_ENABLED(CONFIG_BLOBLIST) && !bloblist_maybe_init())
-> +               fdt =3D bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-> +       if (!fdt)
-> +               /* QEMU loads a generated DTB for us at the start of RAM.=
- */
-> +               return (void *)CFG_SYS_SDRAM_BASE;
-> +
-> +       return fdt;
->  }
->
->  int board_bloblist_from_boot_arg(unsigned long addr, unsigned long size)
-> --
-> 2.25.1
->
+It is very strange to have board_early_init_r() calling code in lib
+though. We should think of a better way.
 
 Regards,
-Simon
+SImon
