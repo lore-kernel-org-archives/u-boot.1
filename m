@@ -4,73 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6941BC46CD4
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:51:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08D06C46CD4
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:51:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5345E8791F;
+	by phobos.denx.de (Postfix) with ESMTP id CA40F87940;
 	Tue, 26 Dec 2023 10:48:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H1JKoJUl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L9STfqtZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E02D38787E; Tue, 26 Dec 2023 10:48:24 +0100 (CET)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
+ id 824BB8787E; Tue, 26 Dec 2023 10:48:25 +0100 (CET)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 988B58791D
+ by phobos.denx.de (Postfix) with ESMTPS id D8D5887922
  for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:48:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-28beb1d946fso3466118a91.0
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-593f7a1afd7so2539011eaf.0
  for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:48:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703584099; x=1704188899; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703584100; x=1704188900; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vtXzculmzU58eDjU+pdGEM7MpKR/b6Ix/pYM8JWcktc=;
- b=H1JKoJUlhcfbRlZ4u+tAkfj88N82/JIjtcBSvpisnHFvGGidUK67Dv0juReHjLFiFH
- lQK14WRPSLWgJtsG44bdYLvyfugJ90HEKormBr95981hx+Hvqr6rlRccK8+1Amlig6Ug
- BeVAty3PNdLF3VXAAxfBFU7q4jYVJPYEkbyZM=
+ bh=2F7y2ZAsDOsnL3tR0un72mklLb2AW3kbO9YY4CuA/Dg=;
+ b=L9STfqtZ1KROK401TNZ49ZDBhmek0LCAhFgtKkcVwDRseGFSiELRdZgWhI55XGmpk1
+ rmdRbi8mottKI1YXZrHdrxOrRQ6IS3FZ/c8TcUH01o1ZzJtxly+QImHomD46r3gESgUM
+ rSBuTkBqLuihVGNi81uttH7+3hy9lF0n75nH4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703584099; x=1704188899;
+ d=1e100.net; s=20230601; t=1703584100; x=1704188900;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vtXzculmzU58eDjU+pdGEM7MpKR/b6Ix/pYM8JWcktc=;
- b=wbpstkMvvDDK9K2Nud4/lYSYPa8P+5xeyJwMrlYPrnf5dy8+P8X8uSlKyNpYYntHoz
- GdbSp3UiWNabaV1tQJ4BSdQgpFFBGwdQ6TjNnzsguRYtXbZWZd43x1yQKGhN8yFQpv5Z
- EKhjJFx4ZpKXJ4ApNJkgQjPovx3hXLHZy6i3sqd90966LogE33BO8hlUpvPYQ9XSFmmN
- QheqLVPik185cic7DcfGoboXwwG4KOa8pqeqO4ftSyy87nu0qPRIbSzbXYfMqFQEjOHP
- 9u1V3l43J5mnUyEUPTGqETnSDi0potPOdNg1efNSOz82iVaPRKKWlgLwevyzBTeoz7Ms
- bGkw==
-X-Gm-Message-State: AOJu0YyuFjAvrQn1OUSLVWtYGjzAPJJDjU4XD7lqZUDc/PQF53p8oK6Z
- MZzWnYzvAG6aj2LC7BqOOFtjB2ICGWIwupBaN/JZew7ihXr1
-X-Google-Smtp-Source: AGHT+IG+rXKnVcrAtoU5x3MNWRgkpEAsMkPWfSMbLyLX2iJEPbYw/YMm7DfYlnkiDemFpQ3JmwkGdgPJ7ANRVEu+v6A=
-X-Received: by 2002:a17:90a:d312:b0:28b:d338:db18 with SMTP id
- p18-20020a17090ad31200b0028bd338db18mr3024252pju.63.1703584099540; Tue, 26
- Dec 2023 01:48:19 -0800 (PST)
+ bh=2F7y2ZAsDOsnL3tR0un72mklLb2AW3kbO9YY4CuA/Dg=;
+ b=jnb0QEOkVRRvsB6rC0YsY5XnIQLvROQCusmXupDeomtNAIbNFQPZM8bB8IwFd3Z3Fq
+ GNcXmVnXrEvbzJNPOJrgULXHDK9VrkBaRuZd83/FidvpJH88lBQzzmn5iy8EB++aiso8
+ ehuxs1tBEx/ZDZSwJ/Kf0VJu8Vu9Cw1EQ5OdTV4eXHMlO7MFrd7UOqXkUz74a5qI/zER
+ ETM2uDWwm7uWP/hfFGn3LM93e6ueyCNATckX/hPsVueZM+fXtUmsZsgxrEx3Sd8cuYoE
+ o1fOKGIbv6xHxtllXEOsNkYcl2c8OYU8f7esB/y/44A9N928UZevGijyLweH8axcbSzQ
+ my9g==
+X-Gm-Message-State: AOJu0Yw8pQEF+XxAK75usvvf4bQe5ztnN9bbkYABfRT9hfC2T+WO6r1J
+ R3iT2lviB3Fj8eUZCQeoQ+EntTGPtgGxogOOqxmricmIY/6A
+X-Google-Smtp-Source: AGHT+IEWafE2AMVS8lk4XK1K+/kC5FLA0kLm19r8J72y5BfEB5AzR9OX6PSPAI8Xf4auNff5FCqjEUdFIX9yfx5Eo1k=
+X-Received: by 2002:a05:6358:2905:b0:170:c3c6:bda5 with SMTP id
+ y5-20020a056358290500b00170c3c6bda5mr5269384rwb.15.1703584100410; Tue, 26 Dec
+ 2023 01:48:20 -0800 (PST)
 MIME-Version: 1.0
-References: <20231112205516.183410-1-sjg@chromium.org>
- <20231112205516.183410-4-sjg@chromium.org>
- <082aeedd-4371-4ba4-a29a-bf0f0730b77b@gmx.de>
- <20231121132110.GQ2513409@bill-the-cat>
- <CAPnjgZ30CjQZ0+DMp2gy0HzrnRsjcY5NMi1YVVRQiN8UG-5oBg@mail.gmail.com>
- <c8f1c7cf-346f-42b4-9652-69476e763d5f@gmx.de>
- <CAPnjgZ2DM55YjF845k2uGscwr6-yrQ7KU=mZFsoo9K-6Gik1WA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2DM55YjF845k2uGscwr6-yrQ7KU=mZFsoo9K-6Gik1WA@mail.gmail.com>
+References: <92d06d89e2d2d6b1738c62453789872dcb6bfa92.1701777713.git.love.kumar@amd.com>
+In-Reply-To: <92d06d89e2d2d6b1738c62453789872dcb6bfa92.1701777713.git.love.kumar@amd.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Dec 2023 09:47:39 +0000
-Message-ID: <CAFLszTi61XrAswTvaMVgLp32K+9TftAxo2=VW3jivU1tyOucWw@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] efi: Avoid using dm_scan_other()
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Date: Tue, 26 Dec 2023 09:47:49 +0000
+Message-ID: <CAFLszTgKZWyCWRXFJvYpwLTTV0OQ+rjKXPssW0Zc9thqLDf9nw@mail.gmail.com>
+Subject: Re: [PATCH v2] test/py: mii: Add tests for mii command
+To: Love Kumar <love.kumar@amd.com>
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -89,80 +82,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Love,
 
-On Mon, Dec 18, 2023 at 3:02=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
-e:
+On Tue, Dec 5, 2023 at 12:03=E2=80=AFPM Love Kumar <love.kumar@amd.com> wro=
+te:
 >
-> Hi Heinrich,
+> Add below test cases for mii commands:
+> mii_info -To display MII PHY info
+> mii_list - To list MII devices
+> mii_set_device - To set MII device
+> mii_read - To reads register from MII PHY address
+> mii_dump - To display data from MII PHY address
 >
-> On Sat, 16 Dec 2023 at 14:02, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
-ote:
-> >
-> > On 12/16/23 21:46, Simon Glass wrote:
-> > > Hi,
-> > >
-> > > On Tue, 21 Nov 2023 at 06:21, Tom Rini <trini@konsulko.com> wrote:
-> > >>
-> > >> On Tue, Nov 21, 2023 at 01:18:09PM +0100, Heinrich Schuchardt wrote:
-> > >>> On 11/12/23 21:55, Simon Glass wrote:
-> > >>>> This function is defined by bootstd so using it precludes using th=
-at
-> > >>>> feature. Use the board_early_init_r() feature instead.
-> > >>>>
-> > >>>> This requires moving quite a lot of code into the board directory,=
- butt
-> > >>>> this is the normal place for code called by board_early_init_r()
-> > >>>>
-> > >>>> Signed-off-by: Simon Glass <sjg@chromium.org>
-> > >>>> ---
-> > >>>>
-> > >>>> Changes in v2:
-> > >>>> - Drop duplicate acpi_xsdt patch
-> > >>>> - Put the board_early_init_r code into board/
-> > >>>>
-> > >>>>    board/efi/efi-x86_app/Makefile  |   5 +
-> > >>>>    board/efi/efi-x86_app/efi_app.c | 205 +++++++++++++++++++++++++=
-+++++++
-> > >>>
-> > >>> Our target should be to enable building the EFI app on all architec=
-tures.
-> > >>>
-> > >>> Only x86 specific code should be added to board/efi/efi-x86_app/efi=
-_app.c.
-> > >>
-> > >> A later enhancement to make U-Boot as an EFI app more generic would =
-be
-> > >> good, but outside the scope of this patch which is moving generic co=
-de
-> > >> out from "lib" and in to "board".
-> >
-> > I cannot see that this patch is moving any code our of lib/.
-> >
-> > But why should we move generic code into board?
->
-> It isn't really generic
->
-> >
-> > >
-> > > This patch was marked as old /archived in patchwork so has been
-> > > forgotten. I have marked it new and non-archived in the hope that it
-> > > can be applied to -master soon.
-> >
-> > There is nothing x86 specific about the code. Generic code should be in
-> > lib/. Please, provide a new version of the patch.
-> >
-> > >
-> > > I believe that having the EFI app support bootstd could be a useful a=
-ddition.
-> >
-> > That was not disputed.
+> Signed-off-by: Love Kumar <love.kumar@amd.com>
+> ---
+> Changes in v2:
+>   - Get MII device list from env instead of auto-detecting it
+>   - Set the MII device to its current device after testing so that it
+>   won't impact next cases
+> ---
+>  test/py/tests/test_mii.py | 92 +++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 92 insertions(+)
+>  create mode 100644 test/py/tests/test_mii.py
 
-OK, I see now that your objection was putting it into board/ so I sent
-a new patch for that.
+I'll just note that we can write tests in C now, even if they need
+Python setup. See [1].
 
-It is very strange to have board_early_init_r() calling code in lib
-though. We should think of a better way.
+Some nits below, with which:
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+>
+> diff --git a/test/py/tests/test_mii.py b/test/py/tests/test_mii.py
+> new file mode 100644
+> index 000000000000..e9bdbadffc8e
+> --- /dev/null
+> +++ b/test/py/tests/test_mii.py
+> @@ -0,0 +1,92 @@
+> +# SPDX-License-Identifier: GPL-2.0
+> +# (C) Copyright 2023, Advanced Micro Devices, Inc.
+> +
+> +import pytest
+> +import re
+> +
+> +"""
+> +Note: This test doesn't rely on boardenv_* configuration value but they =
+can
+> +change test behavior.
+> +
+> +For example:
+> +
+> +# Setup env__mii_deive_test_skip to True if tests with ethernet PHY devi=
+ces
+> +# should be skipped. For example: Missing PHY device
+> +env__mii_device_test_skip =3D True
+> +
+> +# Setup env__mii_device_test to set the MII device names. Test will be s=
+kipped
+> +# if env_mii_device_test is not set
+> +env__mii_device_test =3D {
+> +    "device_list": ["eth0", "eth1"],
+
+Please be sure to use single quotes throughout, for consistency.
+
+> +}
+> +"""
+> +
+> +@pytest.mark.buildconfigspec("cmd_mii")
+> +def test_mii_info(u_boot_console):
+> +    if u_boot_console.config.env.get("env__mii_device_test_skip", False)=
+:
+> +        pytest.skip("MII device test is not enabled!")
+> +    expected_output =3D "PHY"
+> +    output =3D u_boot_console.run_command("mii info")
+> +    if not re.search(r"PHY (.+?):", output):
+> +        pytest.skip("PHY device does not exist!")
+> +    assert expected_output in output
+> +
+> +@pytest.mark.buildconfigspec("cmd_mii")
+> +def test_mii_list(u_boot_console):
+> +    if u_boot_console.config.env.get("env__mii_device_test_skip", False)=
+:
+> +        pytest.skip("MII device test is not enabled!")
+> +
+> +    f =3D u_boot_console.config.env.get("env__mii_device_test", None)
+> +    if not f:
+> +        pytest.skip("No MII device to test!")
+> +
+> +    dev_list =3D f.get("device_list")
+> +    if len(dev_list) =3D=3D 0:
+
+if not dev_list:
+
+> +        pytest.fail("No MII device list provided via env__mii_device_tes=
+t!")
+> +
+> +    expected_output =3D "Current device"
+> +    output =3D u_boot_console.run_command("mii device")
+> +    mii_devices =3D (
+> +        re.search(r"MII devices: '(.+)'", output).groups()[0].replace("'=
+", "").split()
+> +    )
+> +
+> +    assert len([x for x in dev_list if x in mii_devices]) =3D=3D len(dev=
+_list)
+> +    assert expected_output in output
+> +
+> +@pytest.mark.buildconfigspec("cmd_mii")
+> +def test_mii_set_device(u_boot_console):
+> +    test_mii_list(u_boot_console)
+> +    f =3D u_boot_console.config.env.get("env__mii_device_test", None)
+> +    dev_list =3D f.get("device_list")
+> +    output =3D u_boot_console.run_command("mii device")
+> +    current_dev =3D re.search(r"Current device: '(.+?)'", output).groups=
+()[0]
+> +
+> +    for dev in dev_list:
+> +        u_boot_console.run_command(f"mii device {dev}")
+> +        output =3D u_boot_console.run_command("echo $?")
+> +        assert output.endswith("0")
+> +
+> +    u_boot_console.run_command(f"mii device {current_dev}")
+> +    output =3D u_boot_console.run_command("mii device")
+> +    dev =3D re.search(r"Current device: '(.+?)'", output).groups()[0]
+> +    assert current_dev =3D=3D dev
+> +
+> +@pytest.mark.buildconfigspec("cmd_mii")
+> +def test_mii_read(u_boot_console):
+> +    test_mii_list(u_boot_console)
+> +    output =3D u_boot_console.run_command("mii info")
+> +    eth_addr =3D hex(int(re.search(r"PHY (.+?):", output).groups()[0], 1=
+6))
+> +    u_boot_console.run_command(f"mii read {eth_addr} 0")
+> +    output =3D u_boot_console.run_command("echo $?")
+> +    assert output.endswith("0")
+> +
+> +@pytest.mark.buildconfigspec("cmd_mii")
+> +def test_mii_dump(u_boot_console):
+> +    test_mii_list(u_boot_console)
+> +    expected_response =3D "PHY control register"
+> +    output =3D u_boot_console.run_command("mii info")
+> +    eth_addr =3D hex(int(re.search(r"PHY (.+?):", output).groups()[0], 1=
+6))
+> +    response =3D u_boot_console.run_command(f"mii dump {eth_addr} 0")
+> +    assert expected_response in response
+> +    output =3D u_boot_console.run_command("echo $?")
+> +    assert output.endswith("0")
+> --
+> 2.25.1
+>
 
 Regards,
-SImon
+Simon
+
+
+[1] https://docs.u-boot.org/en/latest/develop/tests_writing.html#mixing-pyt=
+hon-and-c
