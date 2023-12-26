@@ -4,76 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BAAAC46CD3
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 06:21:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8729BC46CD4
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 06:23:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBC2987823;
-	Tue, 26 Dec 2023 07:21:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DD36487786;
+	Tue, 26 Dec 2023 07:23:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JFyp7rlJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YclijP+a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0E5687847; Tue, 26 Dec 2023 07:21:44 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id B903187861; Tue, 26 Dec 2023 07:23:54 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50F088771E
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 07:21:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F7B48773F
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 07:23:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a26ea1e88b7so136666466b.1
- for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 22:21:42 -0800 (PST)
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a2340c803c6so471617866b.0
+ for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 22:23:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703571702; x=1704176502; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703571832; x=1704176632; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YhZ/LjN6VUv2UxmoulbBcT2Rx8yIl05i9wBzA7BDGi0=;
- b=JFyp7rlJqiuRhzjBBdkoY/MMjg3m5ejNGNGrvEMs4ls9MoWUFZXO5WDDB+dYfAcSo7
- uHFYGm+cXWliOrok+FEeDSkCkYrmYPfDlshekfSEeYLfHiWbyPx0qUNP/ajb5yHSVBr6
- AqRwvQFgrtuAE1sLi2fD7LOb92n+7UjbvKR/B6UO96zN15516ZUV++Obg4EuSKqibTfs
- uXqmCgIcxuDKg2FE+JrLDCAcA2Hw6CHYH5ISke6mxLBcSjhuX4jDFIupVNSxrPnpO7ib
- zYghvd/TIX8FGJvIwbS1kNYX97YHgkgUchFYpmbQDcUmyNMbuDSJ2/KB/ZSlOtKEAdjb
- xLew==
+ bh=F5T7UcbBCAVfyah2dG+Srd+zC2aHhxT0k47oBlBhkwI=;
+ b=YclijP+aGqKEl9x/uHKXSz81+o4BAMHgQcOvecsg2aNCv8tsEwrpppeA51lBqI3f87
+ d7DWt1GBuSNBh4tG0D0vqWRIPGwu6nCFo5xUU06lFdyaMHiwWD61znKe4OOsIE3mdOX4
+ zwAAnBh7wNWv4XjoCMjclUtPWUTbCFPzFVOUWiD/JarffYcZocNIqftHgtg7RGxtn0M6
+ 6n2D/l4YhvWIQayXX5ACgtnfZBikdQyBk29qTQmSJBFc0QQf6Qp6+NFnlQyoUO6/rWkT
+ zI8G4mn5nnwhKeFYUIbKUbwe62nrm/wRd0BcW2W27uRSDco9Q/J3TxS6LStvzMEDz7qi
+ wMuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703571702; x=1704176502;
+ d=1e100.net; s=20230601; t=1703571832; x=1704176632;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=YhZ/LjN6VUv2UxmoulbBcT2Rx8yIl05i9wBzA7BDGi0=;
- b=tXI18KNo74kLu9yvP0TLcN5CKSB+cfa8qbZpMxnxPETo8gPZwVuZNc2uc0B7XodyzN
- 6vt0qbEJPq5hVP9NWxYGYKKz07MMnb//0hM/IwZj15GVcu0xlrbE29x8O5ANsbx5qCLe
- J1JtNkJqoHNIItRem5FCjIyYcB3cwBDzKigXmnziLMhA7YV4K1a9O3gUqtWFPmYDSbJW
- Y+/wVVSJVUI4yAghRBl4J8ki/QKjLVNZuw7VAaD8j48MOUuN+aPc7IGBtJq3v+lpvGOj
- n+bVbXQ0w9ojw9MdafgohDyg71oWxk8c48pgyeSUNdNp2+gKhOnUtVRiw7KLyYxT5Wdq
- f0Gw==
-X-Gm-Message-State: AOJu0Yw12pysrw+7zOWfsKFG0L+1ahx1MAsZv3Io1ihaROtkJiuXinsQ
- aMcvQVbRnsKDmEnfNrwgxtIQPsPgD6dB19OcX9CqXy6ueklQog==
-X-Google-Smtp-Source: AGHT+IFifWRyv1wGXzVCl7kjVnuN/91wOl8qWTsRTea5mLaGZ49JGnqXUMhIBqP2pMUW0fbLtofpRYIEGETDKMKyDMA=
-X-Received: by 2002:a17:906:284:b0:a26:f7f6:6dcf with SMTP id
- 4-20020a170906028400b00a26f7f66dcfmr680030ejf.72.1703571701603; Mon, 25 Dec
- 2023 22:21:41 -0800 (PST)
+ bh=F5T7UcbBCAVfyah2dG+Srd+zC2aHhxT0k47oBlBhkwI=;
+ b=hUIWHxLVc2b+3YW/yE6Nil/7fMCRFh4wb/JFmsDTBBWt6noq666Cldhgq8ehiBO50v
+ rx7jCgGvuah/KvzmKak27p4Qk08fk/eVIE4cSumqMaOAJhaOp4g8aotRm+MHseF+V5vh
+ 4jYuDjtg3a4kJC61LVLVIlEoIuyMwMUswsOiFP0sr3pyzOS9NXAdOtEOvj/7MdkCUZl0
+ zGzdPA3si7LyJPZF0ODnEZItAGCI822A6LXBsIorcrb1StSv3JXHKWdNr/97OYLHi0nY
+ jgkWronVuQHLEHtL3vyxvC8qno+CMCWvS8NBrO8C1/pGVC7dl4w0+4FZIc/g3fUkmmZX
+ +GOw==
+X-Gm-Message-State: AOJu0YynqUSUpo+aH7AYMK1oE43molwLjJqiffzepY1NnstYnGi1goeF
+ 43Ppoeo++x/lPMP62R1MyVlxKWs9sP9g0PohHgVEvdfkz5Mahw==
+X-Google-Smtp-Source: AGHT+IE3ihNIPpkjNgNsRoQQPZuDfrYnOvHOieSSCaCyuy55/W4kDMMrO2HByf4cJTfVNXYWJfNeEwmjvVH2ceKKbz4=
+X-Received: by 2002:a17:906:7497:b0:a26:b45d:7f0a with SMTP id
+ e23-20020a170906749700b00a26b45d7f0amr2976814ejl.2.1703571831942; Mon, 25 Dec
+ 2023 22:23:51 -0800 (PST)
 MIME-Version: 1.0
-References: <20231225153929.8284-1-maxim.uvarov@linaro.org>
- <20231225153929.8284-9-maxim.uvarov@linaro.org>
- <7bbe53d3-3ef7-b9de-472e-cb9c25c6cc06@gmail.com>
-In-Reply-To: <7bbe53d3-3ef7-b9de-472e-cb9c25c6cc06@gmail.com>
-From: Maxim Uvarov <maxim.uvarov@linaro.org>
-Date: Tue, 26 Dec 2023 12:21:29 +0600
-Message-ID: <CAD8XO3YN4e4zqNKJJACPjrDAP_d-Ddn_+aQ_ifyQ13LnU4oJBw@mail.gmail.com>
-Subject: Re: [PATHv2 8/9] omap3: use device specific naming for mem_init
-To: Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de, simon.k.r.goldschmidt@gmail.com, 
- tien.fong.chee@intel.com, sjg@chromium.org, joe.hershberger@ni.com, 
- rfried.dev@gmail.com, bharat.gooty@broadcom.com, 
- rayagonda.kokatanur@broadcom.com, trini@konsulko.com
+References: <20231220084133.435240-1-masahisa.kojima@linaro.org>
+ <b8724e86-0ed0-4786-90d3-78e5923bc3d4@gmx.de>
+In-Reply-To: <b8724e86-0ed0-4786-90d3-78e5923bc3d4@gmx.de>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Tue, 26 Dec 2023 15:23:40 +0900
+Message-ID: <CADQ0-X8=s1_t3hb0VheQTfCw1LJR1_D3nXAwOgiQsGZWemWe5A@mail.gmail.com>
+Subject: Re: [PATCH 0/2] fix auto-generated boot options
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,102 +85,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 26 Dec 2023 at 04:49, Sean Anderson <seanga2@gmail.com> wrote:
+On Tue, 26 Dec 2023 at 02:14, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 12/20/23 09:41, Masahisa Kojima wrote:
+> > This series aims to get aligned to the EDK II reference
+> > implementation for auto-generated boot options, and tries
+> > to address the following issue.
+> > https://source.denx.de/u-boot/custodians/u-boot-efi/-/issues/13
+> >
+> > This series is based on the efi-next-20231217 tag.
+> >
+> > Masahisa Kojima (2):
+> >    efi_loader: auto-generate boot option for each blkio device
+> >    efi_loader: auto-generate removable media boot option first
+> >
+> >   lib/efi_loader/efi_bootmgr.c | 123 +++++++++++++++++++++++++++--------
+> >   1 file changed, 96 insertions(+), 27 deletions(-)
+> >
+>
+> Hello Masahisa,
+>
+> please, have a look at the test failures in
+> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/19089
 
-> On 12/25/23 10:39, Maxim Uvarov wrote:
-> > Use device specific naming for functions so as to not overlap
-> > with common function names.
-> >
-> > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
-> > Reviewed-by: Tom Rini <trini@konsulko.com>
-> > ---
-> >   arch/arm/include/asm/arch-omap3/mem.h | 2 +-
-> >   arch/arm/mach-omap2/omap3/board.c     | 2 +-
-> >   arch/arm/mach-omap2/omap3/emif4.c     | 4 ++--
-> >   arch/arm/mach-omap2/omap3/sdrc.c      | 6 +++---
-> >   4 files changed, 7 insertions(+), 7 deletions(-)
-> >
-> > diff --git a/arch/arm/include/asm/arch-omap3/mem.h
-> b/arch/arm/include/asm/arch-omap3/mem.h
-> > index 569779c55e..fce3568eca 100644
-> > --- a/arch/arm/include/asm/arch-omap3/mem.h
-> > +++ b/arch/arm/include/asm/arch-omap3/mem.h
-> > @@ -475,7 +475,7 @@ enum {
-> >   #ifndef __ASSEMBLY__
-> >
-> >   /* Function prototypes */
-> > -void mem_init(void);
-> > +void omap3_mem_init(void);
-> >
-> >   u32 is_mem_sdr(void);
-> >   u32 mem_ok(u32 cs);
-> > diff --git a/arch/arm/mach-omap2/omap3/board.c
-> b/arch/arm/mach-omap2/omap3/board.c
-> > index 8b70251457..c76a95dd5d 100644
-> > --- a/arch/arm/mach-omap2/omap3/board.c
-> > +++ b/arch/arm/mach-omap2/omap3/board.c
-> > @@ -216,7 +216,7 @@ void s_init(void)
-> >   void board_init_f(ulong dummy)
-> >   {
-> >       early_system_init();
-> > -     mem_init();
-> > +     omap3_mem_init();
-> >       /*
-> >       * Save the boot parameters passed from romcode.
-> >       * We cannot delay the saving further than this,
-> > diff --git a/arch/arm/mach-omap2/omap3/emif4.c
-> b/arch/arm/mach-omap2/omap3/emif4.c
-> > index 7e5a281922..4fbfb387ab 100644
-> > --- a/arch/arm/mach-omap2/omap3/emif4.c
-> > +++ b/arch/arm/mach-omap2/omap3/emif4.c
-> > @@ -159,10 +159,10 @@ int dram_init_banksize(void)
-> >   }
-> >
-> >   /*
-> > - * mem_init() -
-> > + * omap3_mem_init() -
-> >    *  - Initialize memory subsystem
-> >    */
-> > -void mem_init(void)
-> > +void omap3_mem_init(void)
-> >   {
-> >       do_emif4_init();
-> >   }
-> > diff --git a/arch/arm/mach-omap2/omap3/sdrc.c
-> b/arch/arm/mach-omap2/omap3/sdrc.c
-> > index 5d43e7c9cf..f2a0769b9d 100644
-> > --- a/arch/arm/mach-omap2/omap3/sdrc.c
-> > +++ b/arch/arm/mach-omap2/omap3/sdrc.c
-> > @@ -4,7 +4,7 @@
-> >    *
-> >    * This file has been created after exctracting and consolidating
-> >    * the SDRC related content from mem.c and board.c, also created
-> > - * generic init function (mem_init).
-> > + * generic init function (omap3_mem_init).
-> >    *
-> >    * Copyright (C) 2004-2010
-> >    * Texas Instruments Incorporated - https://www.ti.com/
-> > @@ -232,11 +232,11 @@ int dram_init_banksize(void)
-> >   }
-> >
-> >   /*
-> > - * mem_init -
-> > + * map3_mem_init -
->
-> nit: omap3
->
->
-thanks, will add to v3.
+I fixed the error, v2 will be sent shortly.
 
+Thanks,
+Masahis Kojima
 
-
-> >    *  - Init the sdrc chip,
-> >    *  - Selects CS0 and CS1,
-> >    */
-> > -void mem_init(void)
-> > +void omap3_mem_init(void)
-> >   {
-> >       /* only init up first bank here */
-> >       do_sdrc_init(CS0, EARLY_INIT);
 >
+> Best regards
 >
+> Heinrich
