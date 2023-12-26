@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2B7EC46CD3
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 15:51:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA13AC46CD3
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 16:11:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D41C86FCE;
-	Tue, 26 Dec 2023 16:51:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0E1748786A;
+	Tue, 26 Dec 2023 17:11:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gv5pXJpd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BkhMjHHo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49C1F87910; Tue, 26 Dec 2023 16:51:20 +0100 (CET)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
+ id D5761878AF; Tue, 26 Dec 2023 17:11:47 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27E1E86FCE
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 16:51:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A95F087869
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 17:11:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-dbd029beef4so4144535276.0
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 07:51:18 -0800 (PST)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-5e6c8b70766so36739487b3.3
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 08:11:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703605875; x=1704210675; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1703607104; x=1704211904; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=8uPflpMmSotZyI2sZKiU8EunhhY8gsVZDbnL009Lq40=;
- b=gv5pXJpdWwRfSQ/ivMFI11Du7OaBXf726kTPQ77B0VZmKKO+mqfTJwEXqT+3PQ54V2
- eAGkmK2kjrDV2eBBl1I2LskDn+aMrj1o9jbqdTHi3Z3vx2e48Qo1atn80k+mht9V6H5o
- N0zKWRDUJ5CjHnvgG/Y2rKG1n0a4t5bVewH1U=
+ bh=J9A4qPTOjA0s2Pj8/WnHNwYz7yDwIXvGEfeRQ5ddwr0=;
+ b=BkhMjHHovcGNMV1jijzLlKwpAtRADQcdM8lP/NxmxWffUrq83ZrhSzI/9prx56bQUe
+ 1UqnV7oZUsdY2g71M2VAx4gxaHqzX+NgeBGcPqe+BHuz8XA/3lY66ai54Zqx7k/Coaca
+ /FfzLzI7eUzLWOK2eHxtQD5fbzRUbC2AEbqwo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703605875; x=1704210675;
+ d=1e100.net; s=20230601; t=1703607104; x=1704211904;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8uPflpMmSotZyI2sZKiU8EunhhY8gsVZDbnL009Lq40=;
- b=eMTOtH6w/jUAmcnh9yyiFQCuHpvmsXaC1qRaGBhEGPYEoq8Xzw3xOMNB8UQAOHHxLB
- 2scYxLEZbVTHuzcIKDhF/THcz2TPpjQJXrNTXAQXLkLipgohNKxDLjQZSxko/XnkBIp+
- HJ9NcRXyQhCInAmoTIv/lL3w7kIj2X4giPjjM9mYbi+fCnYvUos/h90Mr8lrLE5+CiFT
- 3ThV7TdtDBp4U1AETdyN7tKBiu36F2NiJZeexAIbiL3lKW5/9TqmvhGspkvbwNaeEZx4
- 22t/6F3SWTCi1SnwWgMB4eL/8m2ZbEyxOGRsFZurCa5U5ExMP3zmsWL+6fpE5LcG/BZE
- YARw==
-X-Gm-Message-State: AOJu0YwmOiHTjnV0j838zumMDrCtedHpJZPHpvSYSxL3ifyb0Oue3I63
- ZKwdZ3MR2nu8r64M3W2WfxbyOI9LIHgubA==
-X-Google-Smtp-Source: AGHT+IH8bRljxQ1PmMPpFkbwEukJkeNUT36/1anj4i/9Dtn2FBvpMhv/6Xtbe71O+FHFMNp5qzA7HQ==
-X-Received: by 2002:a05:6902:1782:b0:dbd:d003:3c16 with SMTP id
- ca2-20020a056902178200b00dbdd0033c16mr4325695ybb.9.1703605875470; 
- Tue, 26 Dec 2023 07:51:15 -0800 (PST)
+ bh=J9A4qPTOjA0s2Pj8/WnHNwYz7yDwIXvGEfeRQ5ddwr0=;
+ b=ZztFqvtbAAurmksYEzKY02xD4cNiwLwIqgIJvS16l3wb+j2E5usYn/DH8oBC9Ii9XB
+ rEKd+KIeMc8LohMK1T/3SQUoGU3gXNHmy7wedLnyLOqCetpMDh0SEwqrvr/sM/hCl8Iw
+ O78V+MsD9K9SD135XDTYuR455MvTmzi4SbTDijvj3aq8M3PnzeNN2ScOwlvAW87eewOD
+ uUamGnpvH+skWH4AWtLILM8TGsxyTg5RYosfpGNq/n9fYzOc8Z4YmpfPBxR2rivgKkMr
+ vdFkI1YcZqUFXUyYEsvOGEUgAgpYQzh8/V/JOHGJa2Eq8K+iFRXQrdMi/JcLMrhpGIb0
+ cgwQ==
+X-Gm-Message-State: AOJu0YxLxfJR7NOmX/RsrykMQGiLcfs+akFdxAZpc8Lngack6+VAvaVO
+ 4isUxnyjmtiJabROVH6lCfTi9AkS6iee5A==
+X-Google-Smtp-Source: AGHT+IGKKNEs5L5OY04AoGywlOJSz0suLVqgbMpYN0FrcQ0yzw0V8YvCtFEcttQekDMxcRmx1y/y+w==
+X-Received: by 2002:a0d:fc02:0:b0:5e8:c7e4:e7a6 with SMTP id
+ m2-20020a0dfc02000000b005e8c7e4e7a6mr4353013ywf.71.1703607104340; 
+ Tue, 26 Dec 2023 08:11:44 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- d1-20020a258241000000b00d8679407796sm4432992ybn.48.2023.12.26.07.51.14
+ u66-20020a818445000000b005e6d6903934sm5580123ywf.9.2023.12.26.08.11.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Dec 2023 07:51:14 -0800 (PST)
-Date: Tue, 26 Dec 2023 10:51:13 -0500
+ Tue, 26 Dec 2023 08:11:43 -0800 (PST)
+Date: Tue, 26 Dec 2023 11:11:41 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, jagan@amarulasolutions.com,
- vigneshr@ti.com, lukma@denx.de, git@xilinx.com
-Subject: Re: [PATCH v9 7/8] config: xea: Enable the SPL_FIT config option
-Message-ID: <20231226155113.GN2652760@bill-the-cat>
-References: <20231226114453.577589-1-venkatesh.abbarapu@amd.com>
- <20231226114453.577589-8-venkatesh.abbarapu@amd.com>
+To: Maxim Uvarov <maxim.uvarov@linaro.org>
+Cc: u-boot@lists.denx.de, simon.k.r.goldschmidt@gmail.com,
+ tien.fong.chee@intel.com, sjg@chromium.org, joe.hershberger@ni.com,
+ rfried.dev@gmail.com, bharat.gooty@broadcom.com,
+ rayagonda.kokatanur@broadcom.com
+Subject: Re: [PATHv3 8/8] Makefile: add dtbs to clean
+Message-ID: <20231226161141.GO2652760@bill-the-cat>
+References: <20231226154619.5071-1-maxim.uvarov@linaro.org>
+ <20231226154619.5071-9-maxim.uvarov@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="xEkqYgeRpif9ZqrS"
+ protocol="application/pgp-signature"; boundary="6eALlFQRsBPz9qOX"
 Content-Disposition: inline
-In-Reply-To: <20231226114453.577589-8-venkatesh.abbarapu@amd.com>
+In-Reply-To: <20231226154619.5071-9-maxim.uvarov@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,50 +95,39 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---xEkqYgeRpif9ZqrS
+--6eALlFQRsBPz9qOX
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Dec 26, 2023 at 05:14:52PM +0530, Venkatesh Yadav Abbarapu wrote:
+On Tue, Dec 26, 2023 at 09:46:19PM +0600, Maxim Uvarov wrote:
 
-> Enable the config SPL_FIT, as getting the below error
-> ../arm-xilinx-linux-gnueabi-ld.bfd.real: drivers/core/ofnode.o: in functi=
-on
-> `ofnode_get_property':
-> /u-boot/drivers/core/ofnode.c:1185: undefined reference to `fdt_getprop'
-> make[1]: *** [scripts/Makefile.spl:527: spl/u-boot-spl] Error 1
+> CI test checks that generated dtb has to be cleaned up.
+> Use the same clean procedure as Linux top level Makefile has.
 >=20
-> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> ---
->  configs/imx28_xea_defconfig | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
 
-This isn't a problem today and is a side effect of changes you're making
-elsewhere in the series. Please figure out what that is, and then work
-to rework things so that platforms like this one which don't (and can't
-ever) make use of the new functionality don't see much in the way of
-growth, thanks.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---xEkqYgeRpif9ZqrS
+--6eALlFQRsBPz9qOX
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWK9nEACgkQFHw5/5Y0
-tyxwmwv+OGLkJOswp/nC9xtnQ9ANN/TY2H+BKDfk5buGxD2HNh0lXj7ruxl6TUSf
-r735qzK07sbnY1qu3P+XfCcOe0rRzxwTX4CAbABLJM8/wDQipJ3sxgmXtdjBrGUl
-BbibMHP+NHIUcKmSo7Y9D/ljpCJQP0PDVSpqrzVhuoOjGhAG55hXPjrj+aEI0SzA
-zEQdwjicqaT7Xiq11JTfz1LdlgJYQZDIueCKXsZMgP7H+C/7ZdwD1BWzXqIrlgh5
-/FUi2DwqX3yB0HzYott9JqcBQGit3ADUTWxXegRta61UqVvmkN946BBQGp7o66KR
-xVarnubmidMILL47NgbJ9j50Kz5uu3ESFTF3E9jDkaXjCQxEu44x3WJ9YcOSL7Nj
-p3isiJxdPudWrgzMPcMW8fUdV8QO2ZtalF9M0GizkCpsHLK3LHxeoZg6hPqBujoK
-fpSFptsAxzCefije8id4A5IWY/cw4MyXktuBcQxRSmZzdKUm7Oxjdp4GdUYefXXj
-QYLO8nu1
-=z14R
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWK+zYACgkQFHw5/5Y0
+tyw7PQv7B5VnsfNaOvf725BRbyRDPCAglsK5d4DoV/dUeYZUb2q1OIz1W9nEq+FP
+UFnkmWxjvkOs8KNRm9QXvM0et3iPCRrY3vaYow2EtnFSPKv9TD29IeSXAahzTVFs
+1JsNBvQiAdwXiYmevNiLISVJt8BE89Ux8s4vquoyOjAVe8XykXx6bSo5z0tpTKiF
+iDEh0dVW6o/bprHHQvGiuiIYF78QoOiAl2tI+n1bNGlhdGMa+P2EIa3h5YUFo8KH
+9V/4DNpRwtIqBeS14mOKoAiV9PvTaHEO/07C3AUsGDvGYdAJ3Km+zwarL4K9EK9Z
+7VmX8P84MLnfs80Bq2CR/nq0rho9zDbffXjTbsmhlmbcMUx5DdoDvJoH/WIBP9C+
+SyyMdwc8pW0FYMcyDBATQRMbjd+H5w21mQky8cJ8CJXJ9p1LbkxUqzSnpWnsS4zL
+MD0C7dKAINerJcL+tVDiPKV+CV15LzJddKq2xH8R6PYAl4PXFZ3F3bb+GZZ225wE
+de/UQUz9
+=QwoR
 -----END PGP SIGNATURE-----
 
---xEkqYgeRpif9ZqrS--
+--6eALlFQRsBPz9qOX--
