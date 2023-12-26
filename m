@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F23AEC46CD3
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:54:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4F79C46CD4
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:54:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71B988795D;
-	Tue, 26 Dec 2023 10:50:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7C3A687972;
+	Tue, 26 Dec 2023 10:50:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IhtftdiG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fm/HO1J/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15C3A87961; Tue, 26 Dec 2023 10:50:35 +0100 (CET)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id EE98B8795C; Tue, 26 Dec 2023 10:50:36 +0100 (CET)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51D738794F
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:50:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B95F8795E
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:50:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-594c7443cc5so4769eaf.2
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:50:31 -0800 (PST)
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-6d9b37f4804so748204b3a.1
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:50:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703584230; x=1704189030; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703584232; x=1704189032; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ltjrEMAj8rtyv0y+W7bXeFen0k2UOOvHbny0Aw+8v4g=;
- b=IhtftdiGzXqKviycpu8oagdTg4VmVmvmy6VeoKL50OOPOXwVAAoLT4uR1Amgjz9OGO
- J1PpnOxYxkve+UfVHf4ZJKseXPevM5t2HnsAAOARtJxbDovGWBLAw9wcQ5xfAWIpnsHh
- tZwVBeQoDVXhEml9F9KUaQGNAfwHzA9f46NoA=
+ bh=lYD5nTtqXXRc3ludjLtikO6HoJ28BNY9kbrcp4xg2v0=;
+ b=Fm/HO1J/EDVT2I5qESfPmaiU3VF8+jUoXAnOH/dUs6TC9z2mLrr9vyGAtpkLo81E6J
+ BCPZeHUXzpsvB+Eng99l8hHsuGx/0cOFfClCS5n4h2Zgh5KWVoP0yJyoCt4kVeywS4nW
+ GPebCBPK98kE8OxjLUZVz8dNOjCkERuWzD2Wo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703584230; x=1704189030;
+ d=1e100.net; s=20230601; t=1703584232; x=1704189032;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ltjrEMAj8rtyv0y+W7bXeFen0k2UOOvHbny0Aw+8v4g=;
- b=Kl/Peq8iakFA6BFj0Vag0sOsHIFoS8uo+tXsOLfjgFJzqlt/N8rX+ODabf5g+1WWOE
- upsvf44OB70BDf+G82izQOmUjdBOKy+DH2aESSQUy0LIfFoNAutlMQCD+QYPjwnGLoqF
- egAvs1GEwGp7LNIQ4fsWzgwPdUSiJFfKt7dAYsr+Ao+w5N4eaRFmp2NO1Xp6pw/6H4hJ
- c7v31j+ZFMoASIC0ZvEEs0bf3JvFS24k52HcHEsS77Gk/5g5uL+SPrAKcxEzwJxEe9CJ
- Hl4ep5wPHlT3d079CUAvssefyAOSwJMoOOBQOujsuHCMId3VOFQj92tX+jVTerQUT4+U
- HXIg==
-X-Gm-Message-State: AOJu0YyGtQwnVkUA8TxusbCABFmVdY671MNji77vSBTLXhadjHAr5NPV
- IsZZIb3ksrbs7U8n0a3jznTJglOrTf0y+0JTbD/7I2XmIkoi
-X-Google-Smtp-Source: AGHT+IEuSupUi5cXMS8P/+iOoeu8FtWwSXrRiBOBTPigZCMNX6EGXHeqLtID4ZNYiFcU8raXgu9o42soh/FrXM8nurk=
-X-Received: by 2002:a05:6358:71cd:b0:172:e3d3:4906 with SMTP id
- u13-20020a05635871cd00b00172e3d34906mr5511800rwu.34.1703584229945; Tue, 26
- Dec 2023 01:50:29 -0800 (PST)
+ bh=lYD5nTtqXXRc3ludjLtikO6HoJ28BNY9kbrcp4xg2v0=;
+ b=RuHvolzU31q8zkureAC4Yf91coveofMyp+rxB2zdoRbMDkhV/pnPd/cjnG6eFOPdRa
+ j68aamCtnCmyBEXbLuNyehvLso6vI18H1hRepz8Qi71cDIYmgCWGPRc3/ggdW8b5MJc0
+ pveckDjVTjyouxlRfU6Sz7DO1NEOB0QJLqTGihDtjW8d+D6XiYW7vF+FdNe2XdNteJvm
+ gt9lT/AlKufAQJl9oRNZACnIur1DsNBohuvwfyXQD8OcN7cXwRLvQFzzFg6HePw5Mw9H
+ Uf+OPO2i6U6Itk0cCVSIb/mgagPCrPwyKtMdL+KjzHch8oWpyS63QhPWM6J5MtTnN4zs
+ T51Q==
+X-Gm-Message-State: AOJu0YyrzVaWcCzyfJezggryvhHzzULFlrbYNCqSka7foeAlMwqmrhbX
+ mB+5NwLP8CZ92GueOLRU6rfEz4wtUWmZ4b7CHSyqD7bSpIR5hh8SiJ0YlILoOg==
+X-Google-Smtp-Source: AGHT+IE+oHqHTc/stMncMdPZY+NhG7hLM+q2tt5zMZBiTI860rjDvvAihoAwZvEB2yC3Zzp/PVZDql8jtt3ws5tbSso=
+X-Received: by 2002:a05:6a20:3d1a:b0:18f:97c:384e with SMTP id
+ y26-20020a056a203d1a00b0018f097c384emr8658778pzi.40.1703584232479; Tue, 26
+ Dec 2023 01:50:32 -0800 (PST)
 MIME-Version: 1.0
 References: <20231225153929.8284-1-maxim.uvarov@linaro.org>
- <20231225153929.8284-7-maxim.uvarov@linaro.org>
-In-Reply-To: <20231225153929.8284-7-maxim.uvarov@linaro.org>
+ <20231225153929.8284-10-maxim.uvarov@linaro.org>
+In-Reply-To: <20231225153929.8284-10-maxim.uvarov@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Dec 2023 09:50:14 +0000
-Message-ID: <CAFLszTh168V4TQwxxFo_cwMic-W9BQ1kcP-pDVZ_wvrHAB55BA@mail.gmail.com>
-Subject: Re: [PATHv2 6/9] mach-socfpga: do not overlap defines with lwip
+Date: Tue, 26 Dec 2023 09:50:15 +0000
+Message-ID: <CAFLszTjg2MTAfJZ17dQFe+Of0VTJVADemigh_gki8GSR07FEvQ@mail.gmail.com>
+Subject: Re: [PATHv2 9/9] Makefile: add dtbs to clean
 To: Maxim Uvarov <maxim.uvarov@linaro.org>
 Cc: u-boot@lists.denx.de, simon.k.r.goldschmidt@gmail.com, 
  tien.fong.chee@intel.com, joe.hershberger@ni.com, rfried.dev@gmail.com, 
@@ -86,16 +86,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Maxim,
+
 On Mon, Dec 25, 2023 at 3:42=E2=80=AFPM Maxim Uvarov <maxim.uvarov@linaro.o=
 rg> wrote:
 >
-> Fix compilation issue with overlapping lwip and march defines.
+> CI test checks that generated dtb has to be cleaned up.
 >
 > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
 > ---
->  arch/arm/mach-socfpga/include/mach/handoff_soc64.h | 6 ------
->  arch/arm/mach-socfpga/wrap_handoff_soc64.c         | 9 +++++++++
->  2 files changed, 9 insertions(+), 6 deletions(-)
+>  Makefile | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/Makefile b/Makefile
+> index 220411a293..ab603191ad 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -2165,7 +2165,8 @@ CLEAN_FILES +=3D include/autoconf.mk* include/bmp_l=
+ogo.h include/bmp_logo_data.h \
+>                mkimage-out.spl.mkimage mkimage.spl.mkimage imx-boot.map \
+>                itb.fit.fit itb.fit.itb itb.map spl.map mkimage-out.rom.mk=
+image \
+>                mkimage.rom.mkimage mkimage-in-simple-bin* rom.map simple-=
+bin* \
+> -              idbloader-spi.img lib/efi_loader/helloworld_efi.S *.itb
+> +              idbloader-spi.img lib/efi_loader/helloworld_efi.S *.itb \
+> +              ./*/*.dtb *.dtb
+>
+>  # Directories & files removed with 'make mrproper'
+>  MRPROPER_DIRS  +=3D include/config include/generated spl tpl vpl \
+> --
+> 2.30.2
 >
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Shouldn't this be handled with CLEAN_FILES in arch/xxx/dts ?
+
+Regards,
+Simon
