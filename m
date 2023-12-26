@@ -4,46 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D48AC46CD4
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 07:45:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D07D3C46CD4
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 07:53:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7B4586FCE;
-	Tue, 26 Dec 2023 08:45:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 34A5F8760D;
+	Tue, 26 Dec 2023 08:53:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8571387032; Tue, 26 Dec 2023 08:45:26 +0100 (CET)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06824807A7
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 08:45:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peterlin@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 3BQ7jHIG020765
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 15:45:17 +0800 (+08)
- (envelope-from peterlin@andestech.com)
-Received: from APC323 (10.0.12.98) by ATCPCS16.andestech.com (10.0.1.222) with
- Microsoft SMTP Server id 14.3.498.0; Tue, 26 Dec 2023 15:45:17 +0800
-Date: Tue, 26 Dec 2023 15:45:13 +0800
-From: Yu-Chien Peter Lin <peterlin@andestech.com>
-To: Leo Yu-Chi Liang <ycliang@andestech.com>
-CC: <u-boot@lists.denx.de>, <randolph@andestech.com>
-Subject: Re: [PATCH v2 6/6] andes: ae350: Enable MISC_INIT_R for ae350 platform
-Message-ID: <ZYqEiazBiQqmSsrt@APC323>
-References: <20231226065441.1130540-1-ycliang@andestech.com>
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x5lEoF3l";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 4879E87786; Tue, 26 Dec 2023 08:53:41 +0100 (CET)
+Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com
+ [IPv6:2607:f8b0:4864:20::934])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C0D668760D
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 08:53:38 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x934.google.com with SMTP id
+ a1e0cc1a2514c-7cc4647543aso968263241.0
+ for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 23:53:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1703577217; x=1704182017; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=HAxbftN0aN036HsMgXe5QrB4b6ULu6pXVWLHsE9HVNw=;
+ b=x5lEoF3lPUZUpLEvAiUHtOnLgqesdjOlNZIp2Ubqvna+bTf9+o7CWY1Dx9KV/5AYdT
+ p3EDoB2y6GMTYqXOYblA4IOFhzNzTJ9LmJXOtmPaOCpnCt9HBGd7rlfKQGFc9wAIDKCK
+ zrrcD21fNfFRg3Vt5OfsEadfkeEeUw3PjQ5gudEo9ZUSgKtGIR9i6Y49jTGBns420sI2
+ K7cNCJJlcyW8wID6XK/38gvPUhYzlj/axzo78BfuiUJ0GbPIYe2if2ZqV+IJCARhWsSO
+ 8sO8DnpQ5PCe183v4PHyxNQQmuTNLFGvwdTork137tR+DXDBqA27JdEseIc9SsRt1diD
+ dq3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703577217; x=1704182017;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HAxbftN0aN036HsMgXe5QrB4b6ULu6pXVWLHsE9HVNw=;
+ b=V4fvF07UyyYj0hQ1UMuwGP0FEgeIcCN83fE8SDMkQPahGKoAsSrAOGKTdANita+/D/
+ 5mBof4jtW1zwgD0GAcQjwWb3N2IwVbQq1iC88wB+sgnschfOgAdWAs4FM/CGUpt5c5gU
+ DslPEUimj/MJ2+nVl+R0OiwBQXuUHjz9uoyJAG7muvuOgNCvsGLWQKz009IpTxHaPHQR
+ RKh10L9myvTRHBHmZo52ox9xsjG1VwNq+JVhwi4bQ4bTxhNjeU3RtZbiPAfm85Lrqps/
+ nlx05Ar7XZ+Sg8GgR98tvfSSXWNZxPNe9Vkb0962A3tOppAvhXTmBJowvaSR0Z3c2Nli
+ bVug==
+X-Gm-Message-State: AOJu0YxAy+LS6KsRBCPfmweKh/wBdnLRqy5TiCQGBrPESVkf3FCN2N1L
+ jyX1bH8haU6xOXPwTNDvFSqrBAHDqWjgoI4HsqPDD0/8IRNAQA==
+X-Google-Smtp-Source: AGHT+IHAnJ3V6OtZXnmSKou/aW0fWVJXyihV/0ciysZ5EpmVI6INg0ZohlvD/54R+QqfFiRFOH/Mr685sZ7fewY/Skc=
+X-Received: by 2002:a05:6122:2317:b0:4b6:e6b6:7f4f with SMTP id
+ bq23-20020a056122231700b004b6e6b67f4fmr1625514vkb.15.1703577217348; Mon, 25
+ Dec 2023 23:53:37 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20231226065441.1130540-1-ycliang@andestech.com>
-User-Agent: Mutt/2.2.12 (2023-09-09)
-X-Originating-IP: [10.0.12.98]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 3BQ7jHIG020765
+References: <20231222061208.3009970-1-sumit.garg@linaro.org>
+ <02fdfc4b-113b-409f-8aaf-8f4a04822706@linaro.org>
+ <CAFA6WYM8EVY-D_Kptggsvxq0ZrFdP0gQ3y4UEbM+vLu0F8tLjw@mail.gmail.com>
+ <c6d65491-c407-4518-aee9-f53f6d4a84ed@linaro.org>
+ <20231222-whole-canola-81240881c2e7@spud>
+ <4a809aa2-0cc5-4ffa-a19f-06d69ae9e460@linaro.org>
+In-Reply-To: <4a809aa2-0cc5-4ffa-a19f-06d69ae9e460@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Tue, 26 Dec 2023 13:23:25 +0530
+Message-ID: <CAFA6WYPY7DmY3+Wf-=xbCpm11ub5BWTVc_C=SeSPVK0dVLTQ9w@mail.gmail.com>
+Subject: Re: [PATCH v2 0/8] An effort to bring DT bindings compliance within
+ U-Boot
+To: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+ Conor Dooley <conor@kernel.org>, Rob Herring <robh+dt@kernel.org>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
+ u-boot-custodians@lists.denx.de, trini@konsulko.com, sjg@chromium.org, 
+ krzysztof.kozlowski+dt@linaro.org, neil.armstrong@linaro.org, 
+ caleb.connolly@linaro.org, ff@shokubai.tech, daniel.thompson@linaro.org, 
+ dgilmore@fedoraproject.org, pbrobinson@gmail.com, ilias.apalodimas@linaro.org, 
+ maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de, 
+ michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk, 
+ peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,221 +98,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Dec 26, 2023 at 02:54:41PM +0800, Leo Yu-Chi Liang wrote:
-> Enable MISC_INIT_R for ae350 to support CPU name detection
-> and re-sync the configs via make savedefconfig.
-> 
-> Signed-off-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+On Fri, 22 Dec 2023 at 21:23, Krzysztof Kozlowski
+<krzysztof.kozlowski@linaro.org> wrote:
+>
+> On 22/12/2023 16:45, Conor Dooley wrote:
+> >>>
+> >>> I suppose we have to relay information to kernel sub-arch maintainers
+> >>> who aren't the same as maintaining U-Boot counterparts. How about
+> >>> adding U-Boot ML to CC for whichever DT change gets submitted in the
+> >>
+> >> And every other project? Just setup lei filters.
+> >>
+> >>> kernel? Otherwise adding U-Boot sub-arch maintainers as reviewers for
+> >>> corresponding kernel DT changes works too if that's acceptable.
+> >>
+> >> You just entirely ignored my proposal without addressing it... ok let it
+> >> be. No, CC-ing U-boot maintainers changes nothing because as I said, I
+> >> want kernel maintainers and contributors to be aware.
+> >
+> > I don't think that adding U-Boot platform maintainers as reviewers for
+> > the platforms in the kernel is a terrible idea. Certainly kernel
+> > platform maintainers for which U-Boot platform maintainers are added to
+> > the MAINTAINERS entry will be aware. That said, something like your
+>
+> The point is it does not solve my concern here. I did not express
+> problem that U-Boot maintainers are not aware. They can easily be aware
+> by setting simple lei filters.
 
-Reviewed-by: Yu Chien Peter Lin <peterlin@andestech.com>
+I thought your major concern was how we can enforce DTS backward and
+forward compatibility although the DT ABI stability is already
+documented here [1]. My suggestion was really based on recognising
+people who really care about DT ABI for particular platforms. I think
+adding people from other projects would certainly help with DT ABI
+stability since the kernel is the single point of contribution. There
+will be DT contributors from other projects too like you may have
+already seen people contributing bootloader (U-Boot) specific
+bindings/DTS changes.
 
-> ---
->  configs/ae350_rv32_defconfig         | 5 +++--
->  configs/ae350_rv32_spl_defconfig     | 5 +++--
->  configs/ae350_rv32_spl_xip_defconfig | 5 +++--
->  configs/ae350_rv32_xip_defconfig     | 5 +++--
->  configs/ae350_rv64_defconfig         | 5 +++--
->  configs/ae350_rv64_spl_defconfig     | 5 +++--
->  configs/ae350_rv64_spl_xip_defconfig | 5 +++--
->  configs/ae350_rv64_xip_defconfig     | 5 +++--
->  8 files changed, 24 insertions(+), 16 deletions(-)
-> 
-> diff --git a/configs/ae350_rv32_defconfig b/configs/ae350_rv32_defconfig
-> index 06cd972a0d..3bfa3e9f8e 100644
-> --- a/configs/ae350_rv32_defconfig
-> +++ b/configs/ae350_rv32_defconfig
-> @@ -11,14 +11,15 @@ CONFIG_SYS_LOAD_ADDR=0x100000
->  CONFIG_TARGET_ANDES_AE350=y
->  CONFIG_SYS_MONITOR_BASE=0x88000000
->  CONFIG_FIT=y
-> +CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_DISTRO_DEFAULTS=y
->  CONFIG_BOOTDELAY=3
-> +CONFIG_SYS_PBSIZE=1050
->  CONFIG_DISPLAY_CPUINFO=y
->  CONFIG_DISPLAY_BOARDINFO=y
->  CONFIG_BOARD_EARLY_INIT_F=y
-> +CONFIG_MISC_INIT_R=y
->  CONFIG_SYS_PROMPT="RISC-V # "
-> -CONFIG_SYS_PBSIZE=1050
-> -CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_CMD_IMLS=y
->  CONFIG_CMD_MMC=y
->  CONFIG_CMD_SF_TEST=y
-> diff --git a/configs/ae350_rv32_spl_defconfig b/configs/ae350_rv32_spl_defconfig
-> index f469d5bb2b..aeb50206d2 100644
-> --- a/configs/ae350_rv32_spl_defconfig
-> +++ b/configs/ae350_rv32_spl_defconfig
-> @@ -16,19 +16,20 @@ CONFIG_RISCV_SMODE=y
->  CONFIG_SYS_MONITOR_BASE=0x88000000
->  CONFIG_FIT=y
->  CONFIG_SPL_LOAD_FIT_ADDRESS=0x10000000
-> +CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_DISTRO_DEFAULTS=y
->  CONFIG_BOOTDELAY=3
-> +CONFIG_SYS_PBSIZE=1050
->  CONFIG_DISPLAY_CPUINFO=y
->  CONFIG_DISPLAY_BOARDINFO=y
->  CONFIG_BOARD_EARLY_INIT_F=y
-> +CONFIG_MISC_INIT_R=y
->  CONFIG_SPL_MAX_SIZE=0x100000
->  CONFIG_SPL_BSS_START_ADDR=0x400000
->  CONFIG_SPL_BOARD_INIT=y
->  CONFIG_SPL_CACHE=y
->  CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
->  CONFIG_SYS_PROMPT="RISC-V # "
-> -CONFIG_SYS_PBSIZE=1050
-> -CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_CMD_IMLS=y
->  CONFIG_CMD_MMC=y
->  CONFIG_CMD_SF_TEST=y
-> diff --git a/configs/ae350_rv32_spl_xip_defconfig b/configs/ae350_rv32_spl_xip_defconfig
-> index 9672a19c23..f15ec301ce 100644
-> --- a/configs/ae350_rv32_spl_xip_defconfig
-> +++ b/configs/ae350_rv32_spl_xip_defconfig
-> @@ -17,19 +17,20 @@ CONFIG_SPL_XIP=y
->  CONFIG_SYS_MONITOR_BASE=0x88000000
->  CONFIG_FIT=y
->  CONFIG_SPL_LOAD_FIT_ADDRESS=0x80010000
-> +CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_DISTRO_DEFAULTS=y
->  CONFIG_BOOTDELAY=3
-> +CONFIG_SYS_PBSIZE=1050
->  CONFIG_DISPLAY_CPUINFO=y
->  CONFIG_DISPLAY_BOARDINFO=y
->  CONFIG_BOARD_EARLY_INIT_F=y
-> +CONFIG_MISC_INIT_R=y
->  CONFIG_SPL_MAX_SIZE=0x100000
->  CONFIG_SPL_BSS_START_ADDR=0x400000
->  CONFIG_SPL_BOARD_INIT=y
->  CONFIG_SPL_CACHE=y
->  CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
->  CONFIG_SYS_PROMPT="RISC-V # "
-> -CONFIG_SYS_PBSIZE=1050
-> -CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_CMD_IMLS=y
->  CONFIG_CMD_MMC=y
->  CONFIG_CMD_SF_TEST=y
-> diff --git a/configs/ae350_rv32_xip_defconfig b/configs/ae350_rv32_xip_defconfig
-> index b90200a97e..c40eb043c5 100644
-> --- a/configs/ae350_rv32_xip_defconfig
-> +++ b/configs/ae350_rv32_xip_defconfig
-> @@ -12,14 +12,15 @@ CONFIG_TARGET_ANDES_AE350=y
->  CONFIG_XIP=y
->  CONFIG_SYS_MONITOR_BASE=0x88000000
->  CONFIG_FIT=y
-> +CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_DISTRO_DEFAULTS=y
->  CONFIG_BOOTDELAY=3
-> +CONFIG_SYS_PBSIZE=1050
->  CONFIG_DISPLAY_CPUINFO=y
->  CONFIG_DISPLAY_BOARDINFO=y
->  CONFIG_BOARD_EARLY_INIT_F=y
-> +CONFIG_MISC_INIT_R=y
->  CONFIG_SYS_PROMPT="RISC-V # "
-> -CONFIG_SYS_PBSIZE=1050
-> -CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_CMD_IMLS=y
->  CONFIG_CMD_MMC=y
->  CONFIG_CMD_SF_TEST=y
-> diff --git a/configs/ae350_rv64_defconfig b/configs/ae350_rv64_defconfig
-> index a4b9ad6162..7ae938aeb2 100644
-> --- a/configs/ae350_rv64_defconfig
-> +++ b/configs/ae350_rv64_defconfig
-> @@ -11,14 +11,15 @@ CONFIG_TARGET_ANDES_AE350=y
->  CONFIG_ARCH_RV64I=y
->  CONFIG_SYS_MONITOR_BASE=0x88000000
->  CONFIG_FIT=y
-> +CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_DISTRO_DEFAULTS=y
->  CONFIG_BOOTDELAY=3
-> +CONFIG_SYS_PBSIZE=1050
->  CONFIG_DISPLAY_CPUINFO=y
->  CONFIG_DISPLAY_BOARDINFO=y
->  CONFIG_BOARD_EARLY_INIT_F=y
-> +CONFIG_MISC_INIT_R=y
->  CONFIG_SYS_PROMPT="RISC-V # "
-> -CONFIG_SYS_PBSIZE=1050
-> -CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_CMD_IMLS=y
->  CONFIG_CMD_MMC=y
->  CONFIG_CMD_SF_TEST=y
-> diff --git a/configs/ae350_rv64_spl_defconfig b/configs/ae350_rv64_spl_defconfig
-> index 834a0fbbdd..68ac4325ab 100644
-> --- a/configs/ae350_rv64_spl_defconfig
-> +++ b/configs/ae350_rv64_spl_defconfig
-> @@ -16,19 +16,20 @@ CONFIG_RISCV_SMODE=y
->  CONFIG_SYS_MONITOR_BASE=0x88000000
->  CONFIG_FIT=y
->  CONFIG_SPL_LOAD_FIT_ADDRESS=0x10000000
-> +CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_DISTRO_DEFAULTS=y
->  CONFIG_BOOTDELAY=3
-> +CONFIG_SYS_PBSIZE=1050
->  CONFIG_DISPLAY_CPUINFO=y
->  CONFIG_DISPLAY_BOARDINFO=y
->  CONFIG_BOARD_EARLY_INIT_F=y
-> +CONFIG_MISC_INIT_R=y
->  CONFIG_SPL_MAX_SIZE=0x100000
->  CONFIG_SPL_BSS_START_ADDR=0x400000
->  CONFIG_SPL_BOARD_INIT=y
->  CONFIG_SPL_CACHE=y
->  CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
->  CONFIG_SYS_PROMPT="RISC-V # "
-> -CONFIG_SYS_PBSIZE=1050
-> -CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_CMD_IMLS=y
->  CONFIG_CMD_MMC=y
->  CONFIG_CMD_SF_TEST=y
-> diff --git a/configs/ae350_rv64_spl_xip_defconfig b/configs/ae350_rv64_spl_xip_defconfig
-> index b52b8d78d7..839ca335d4 100644
-> --- a/configs/ae350_rv64_spl_xip_defconfig
-> +++ b/configs/ae350_rv64_spl_xip_defconfig
-> @@ -17,19 +17,20 @@ CONFIG_SPL_XIP=y
->  CONFIG_SYS_MONITOR_BASE=0x88000000
->  CONFIG_FIT=y
->  CONFIG_SPL_LOAD_FIT_ADDRESS=0x80010000
-> +CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_DISTRO_DEFAULTS=y
->  CONFIG_BOOTDELAY=3
-> +CONFIG_SYS_PBSIZE=1050
->  CONFIG_DISPLAY_CPUINFO=y
->  CONFIG_DISPLAY_BOARDINFO=y
->  CONFIG_BOARD_EARLY_INIT_F=y
-> +CONFIG_MISC_INIT_R=y
->  CONFIG_SPL_MAX_SIZE=0x100000
->  CONFIG_SPL_BSS_START_ADDR=0x400000
->  CONFIG_SPL_BOARD_INIT=y
->  CONFIG_SPL_CACHE=y
->  CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
->  CONFIG_SYS_PROMPT="RISC-V # "
-> -CONFIG_SYS_PBSIZE=1050
-> -CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_CMD_IMLS=y
->  CONFIG_CMD_MMC=y
->  CONFIG_CMD_SF_TEST=y
-> diff --git a/configs/ae350_rv64_xip_defconfig b/configs/ae350_rv64_xip_defconfig
-> index cc5e751c9b..5432b6d6d7 100644
-> --- a/configs/ae350_rv64_xip_defconfig
-> +++ b/configs/ae350_rv64_xip_defconfig
-> @@ -12,14 +12,15 @@ CONFIG_ARCH_RV64I=y
->  CONFIG_XIP=y
->  CONFIG_SYS_MONITOR_BASE=0x88000000
->  CONFIG_FIT=y
-> +CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_DISTRO_DEFAULTS=y
->  CONFIG_BOOTDELAY=3
-> +CONFIG_SYS_PBSIZE=1050
->  CONFIG_DISPLAY_CPUINFO=y
->  CONFIG_DISPLAY_BOARDINFO=y
->  CONFIG_BOARD_EARLY_INIT_F=y
-> +CONFIG_MISC_INIT_R=y
->  CONFIG_SYS_PROMPT="RISC-V # "
-> -CONFIG_SYS_PBSIZE=1050
-> -CONFIG_SYS_BOOTM_LEN=0x4000000
->  CONFIG_CMD_IMLS=y
->  CONFIG_CMD_MMC=y
->  CONFIG_CMD_SF_TEST=y
-> -- 
-> 2.34.1
-> 
+[1] https://docs.kernel.org/process/maintainer-soc.html#devicetree-abi-stability
+
+>
+> The problem I want to solve is the kernel maintainers to be aware.
+>
+
+Although Tom has already expressed in the other thread that U-Boot has
+been a long time user of upstream DT but if we want to make it more
+formal from an enforcement point of view then I liked Conor's idea. If
+you agree then I can create maintainer profile entry as per following
+example for Amlogic platforms to start with:
+
+ARM/Amlogic Meson SoC support
+M:      Neil Armstrong <neil.armstrong@linaro.org>
+M:      Kevin Hilman <khilman@baylibre.com>
+R:      Jerome Brunet <jbrunet@baylibre.com>
+R:      Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+L:      linux-arm-kernel@lists.infradead.org (moderated for non-subscribers)
+L:      linux-amlogic@lists.infradead.org
+S:      Maintained
+P:      Documentation/process/maintainer-soc-u-boot-dt-abi.rst
+W:      http://linux-meson.com/
+F:      Documentation/devicetree/bindings/phy/amlogic*
+F:      arch/arm/boot/dts/amlogic/
+F:      arch/arm/mach-meson/
+F:      arch/arm64/boot/dts/amlogic/
+F:      drivers/pmdomain/amlogic/
+F:      drivers/mmc/host/meson*
+F:      drivers/phy/amlogic/
+F:      drivers/pinctrl/meson/
+F:      drivers/rtc/rtc-meson*
+F:      drivers/soc/amlogic/
+N:      meson
+
+-Sumit
