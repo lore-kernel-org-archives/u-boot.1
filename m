@@ -4,66 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C39EC46CD4
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:48:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AADD1C46CD4
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:48:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FFB48788C;
+	by phobos.denx.de (Postfix) with ESMTP id B1915878CD;
 	Tue, 26 Dec 2023 10:47:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m6SrMsES";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dCCquzDm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30067878C8; Tue, 26 Dec 2023 10:47:19 +0100 (CET)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
+ id 54E758781A; Tue, 26 Dec 2023 10:47:19 +0100 (CET)
+Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
+ [IPv6:2607:f8b0:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1CC28781A
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:47:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 11CD387831
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:47:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-6d9bba6d773so843116b3a.1
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-6d93d15db24so3748922b3a.0
  for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:47:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1703584035; x=1704188835; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qHl5gwxpnjV6Cqeki5wF7B8gImPR71mbVOWn4UU+pGw=;
- b=m6SrMsESljSyGlIUlyCYRaVitXcNf1HcAkKfX3DmqRTTNxn6xdsf5hqtTr1SnvTZSv
- 9zjqZbksz0mXfbVIBHChI076aOwPF9rHdhyHrf2CAs6QNVq14xAD5jMae/kdVOtCyQRp
- n54tE1v3DqxwrcQzm3MunwveyOTvCbEP/5/+w=
+ bh=gUEJ8hfFDAlfCk2jtTuRuBV2hFhM9mPu4vcD1cEmois=;
+ b=dCCquzDm7d/7WnX/Jnl3HVPOZwCeehdmyAuxCg3LFUDwB05fyNvNzo3bmOjw2qZ3qk
+ /V2DEZPX7/ejUpr73dTGdTLX/PCFq+GhYcgQmJR4bFbrGFQlOlWj4UpUBqEhTnLisshl
+ tJzvnLh82aCVmhJUNF6HuBGtKQXqcYwkHXWiY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1703584035; x=1704188835;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qHl5gwxpnjV6Cqeki5wF7B8gImPR71mbVOWn4UU+pGw=;
- b=d94ZS0NqWp3wkECjtdGd3UHWboSHyHafWLQkbVOBDALvPJL/o+IAGFZLarVQxHlh8f
- BkHKFf4pYmunnHTjzwE9fqhwtV5l9mRDadVX2iyXEsTNkhWZeR39tFelC1x792TDvXXQ
- q+J/yXC6cPzgOeVY6MdMCUzF15+lb4HmmD+pwKPknWYOrAbsdkAYHAi55vztxrJNODzF
- TStxlmXOV96GHNQEPP1TWKjS07Y5hCv8ymUiepxU32p6tTqvSHkn+eB0AciTiuqMm9Vq
- a77epzFwOHpdbmjw4kZ/eTqh9PKbDSRGE/ET9836jayX5UyUhi7AZsfH0XjKCFG0lgNx
- IVpw==
-X-Gm-Message-State: AOJu0YyjSDAo1W8TxsRfL+vcHJif8Xr9hlVad4eeIYe/KNGUsAtHTq8I
- ekH0VwBTwaekBywZjxUUrwAZ/OystgzPVRXale/ZGfbGufYR
-X-Google-Smtp-Source: AGHT+IFru82QhQvLWtiR0hGsYVaJrEwO3FPqZ9Vw8sxcBFGVEALCCSE7yD+SGB88DRPbRw4k5ENAtf57n3nPSXsYlwE=
-X-Received: by 2002:a05:6a00:11e2:b0:6d9:bc74:542a with SMTP id
- a34-20020a056a0011e200b006d9bc74542amr2227146pfu.58.1703584035259; Tue, 26
+ bh=gUEJ8hfFDAlfCk2jtTuRuBV2hFhM9mPu4vcD1cEmois=;
+ b=h690XcRPHP9fSjX3LGXZsvNHGWPRXI2/LaxBoiWu+HtXjielmUx8dvGyzcAVZCBdhi
+ 6PXRj0qDZE3TL5Q63gsWJFA6L4AFmWUU6t8bMUQZQbeR0Std0DUS7nmqBV1jTvcEm/Rg
+ JyTlEdvcrJjFDsMJhMQdMmYCXR8bCGxBomHpAJ2xfqUKIPtWGduXvZ2sFCKlHot83KAV
+ fF1HHON4/meg+HPg/TCaAFfQ24PIxHA3CnQ5vGipTkVQmtflfvBl7wx8W8CvRm7Sj/bl
+ tjH1W7POj7l0TxonKGR9y3gGlKB1mEkhaRDLPIazGmMOgtI+W2rHmA4W8iVHiH58e5We
+ 6GVQ==
+X-Gm-Message-State: AOJu0YxVxXkd+Ffytt0/TiLMjIIv7ssX2Bk4f9CBvLBAz8J7wqn3/Ii+
+ YzIM7XXMeWV+uVwSeHR+xAipMe7mQVH9Ac5NukGtAE5UftSK
+X-Google-Smtp-Source: AGHT+IHlNF4tBFiUfaof5cwU1Em8NBA6B/OimHkLAX4VKxk2lxetnJjZBxJqsUGYjRGRL153J2+gTROJu5lznBX+qD4=
+X-Received: by 2002:aa7:82cd:0:b0:6d9:ad07:e860 with SMTP id
+ f13-20020aa782cd000000b006d9ad07e860mr3784536pfn.35.1703584035387; Tue, 26
  Dec 2023 01:47:15 -0800 (PST)
 MIME-Version: 1.0
-References: <20231219115741.3681175-1-rasmus.villemoes@prevas.dk>
-In-Reply-To: <20231219115741.3681175-1-rasmus.villemoes@prevas.dk>
+References: <20231219103418.3445886-1-danishanwar@ti.com>
+ <20231219103418.3445886-16-danishanwar@ti.com>
+In-Reply-To: <20231219103418.3445886-16-danishanwar@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Dec 2023 09:47:00 +0000
-Message-ID: <CAFLszThGpG9Na6zsLGyiFF4Xm0uCwm8+Vg39RoNYfkHMBM8Pcw@mail.gmail.com>
-Subject: Re: [PATCH] cmd/mem.c: use memmove in do_mem_cp()
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Date: Tue, 26 Dec 2023 09:47:02 +0000
+Message-ID: <CAFLszTjVBzpM-GiraSSNtXtbbQGPDUrCo7ZDjyeByx7Xtg+t_A@mail.gmail.com>
+Subject: Re: [RFC PATCH 15/16] tools/fdtgrep: Include __symbols__ table
+To: MD Danish Anwar <danishanwar@ti.com>
+Cc: Maxime Ripard <mripard@kernel.org>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, 
+ Roger Quadros <rogerq@kernel.org>, Nishanth Menon <nm@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, 
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, 
+ Manorit Chawdhry <m-chawdhry@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Andrew Davis <afd@ti.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, srk@ti.com,
+ r-gunasekaran@ti.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -82,47 +93,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
+Hi,
 
-On Tue, Dec 19, 2023 at 11:57=E2=80=AFAM Rasmus Villemoes
-<rasmus.villemoes@prevas.dk> wrote:
+On Tue, Dec 19, 2023 at 10:34=E2=80=AFAM MD Danish Anwar <danishanwar@ti.co=
+m> wrote:
 >
-> There's no 'mv' shell command for handling overlapping src and dst
-> regions, and there's no point introducing one, when we can just make
-> the existing 'cp' command DTRT in all cases. memmove() should at most
-> be a few instructions more then memcpy() (to detect the appropriate
-> direction to do the copy), which is of course completely in the noise
-> with all the string processing that a shell command does.
+> This is required for overlays to work at SPL.
 >
-> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+> Loading of symbol table depends on DT Overlay support in SPL
+> so make it compile-time dependent. Without this SPL fails to
+> boot some platforms where this feature is not enabled
+> (e.g. dra71-evm.)
+>
+> Without including the <linux/kconfig.h> file, the symbol
+> CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY will not be visible and
+> we will never include the symbol table.
+>
+> So include <linux/kconfig.h>
+>
+> Due to some reason it needs to be included after
+> [#include "fdt_host.h"] otherwise it causes a build error.
+>
+> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
 > ---
->  cmd/mem.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Is there any size growth? I assume not.
-
+>  tools/fdtgrep.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
 >
-> diff --git a/cmd/mem.c b/cmd/mem.c
-> index 66c2d36a148..c696b92a274 100644
-> --- a/cmd/mem.c
-> +++ b/cmd/mem.c
-> @@ -361,7 +361,7 @@ static int do_mem_cp(struct cmd_tbl *cmdtp, int flag,=
- int argc,
+> diff --git a/tools/fdtgrep.c b/tools/fdtgrep.c
+> index 7eabcab439..706b4a35f4 100644
+> --- a/tools/fdtgrep.c
+> +++ b/tools/fdtgrep.c
+> @@ -22,6 +22,8 @@
+>  #include "fdt_host.h"
+>  #include "libfdt_internal.h"
+>
+> +#include <linux/kconfig.h>
+> +
+>  /* Define DEBUG to get some debugging output on stderr */
+>  #ifdef DEBUG
+>  #define debug(a, b...) fprintf(stderr, a, ## b)
+> @@ -1234,6 +1236,12 @@ int main(int argc, char *argv[])
+>                 disp.fout =3D stdout;
 >         }
->  #endif
 >
-> -       memcpy(dst, src, count * size);
-> +       memmove(dst, src, count * size);
->
->         unmap_sysmem(src);
->         unmap_sysmem(dst);
+> +       if (IS_ENABLED(CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY)) {
+> +               /* include symbol table */
+> +               if (value_add(&disp, &disp.value_head, FDT_IS_NODE, 1, "/=
+__symbols__"))
+> +                       usage("Cannot add __symbols__ value");
+> +       }
+> +
+>         /* Run the grep and output the results */
+>         ret =3D do_fdtgrep(&disp, filename);
+>         if (disp.output_fname)
 > --
-> 2.40.1.1.g1c60b9335d
+> 2.34.1
 >
 
-Would you like to add to doc/usage/cmd/ and test/cmd as well?
+I may have replied elsewhere, but please use a new fdtgrep option for this.
 
 Regards,
 Simon
