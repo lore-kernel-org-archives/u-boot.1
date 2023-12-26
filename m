@@ -4,112 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BCBCC46CD3
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 13:59:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D781C46CD3
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 14:24:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C7CF8796A;
-	Tue, 26 Dec 2023 14:58:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id DBA968794A;
+	Tue, 26 Dec 2023 15:24:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="cvRn2hxQ";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dpHXAbth";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DD7187968; Tue, 26 Dec 2023 14:58:10 +0100 (CET)
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
- (mail-sn1nam02on20617.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7ea9::617])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 277638773F; Tue, 26 Dec 2023 06:07:38 +0100 (CET)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 900B887963
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 14:58:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E241F876FB
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 06:07:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-Received: from SA1PR12MB8093.namprd12.prod.outlook.com (2603:10b6:806:335::15)
- by IA0PR12MB8255.namprd12.prod.outlook.com (2603:10b6:208:404::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7113.27; Tue, 26 Dec
- 2023 12:27:12 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jf5DXo0NKoE3h9Jl39soiQjbHSigAZu7HbTJOUjVuWuETUKkiI0dFiYHFOGiyNKulaTF1qU4fIwzPQwwGugXCBy1jazO30ifALm5XkU7eXLxLk3MhPYCKGlh6eJB+I92ebZtOUPvL0kPBVPDS2iIx1CUNFWVpBpaWeUH8f35kn9XomuAQ5/Fstk3forF6mPHw9HxanOeYcZsn1hqFvp28G0GrdSIM6uQwjpGPwrJ0MN/fSRlvxyejfYaxtbDcFEgJ783kYQYvmq3Ypo2xSnMuOB8tzfXw7AUHPGZTDTV5V0XDTBk4nu8LW5dQ2xZd2Fo407586lGtIOBMat0TbmnJQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1gJVCpvQvcG2eAxBSFfRYwrFN4o+29Wm1DqEaSqvN5k=;
- b=LPcLaBkZdkDlOjX8v189arFE2SlU4H/AHrVgN/TdGJ5MQpwk5ldF/A59A0X7J19JaiYKeXBpdn+BO97+8AAdwDMmxlWvVryi4qdgpW4wngOwsa4skcyeqYKklcNJiR/fDHO1gW6HSnPQy7Opmb/ur2C3q4LCPWPhocbgSZZkwCS16pd87b/f8LGtY7nlLRPP/ieOgHwX3fnxcI8XSpFvct7/7ZXSEoN6gdDEmb5i7fBhhaB7NJA+hHlouyDPyQifDvW1XsD9DpX8R8KN01KUbUbcj0SJR5LdrpPpYbwx2yjRjcZTN1BhnSSNzfKW4gXYKZXne7Fp7EPdE5QFuDYFbQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1gJVCpvQvcG2eAxBSFfRYwrFN4o+29Wm1DqEaSqvN5k=;
- b=cvRn2hxQrQW6GZYZtVRogzRU/Yt9ynn2lgw51tIYnqL0kH5eTxAswMB+3djfhfV2RIrOoyAuGEGQcE6lAJJJle48nopvWbYhu3BiNH4S+KOMm8pZ8twO4Jy8RVeQmG/n1yU/8sCb2Kv3u919zQg3We7p+vofgfntt/1CQ5aE48Y=
-Received: from CH0PR07CA0028.namprd07.prod.outlook.com (2603:10b6:610:32::33)
- by SA1PR12MB8093.namprd12.prod.outlook.com (2603:10b6:806:335::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7113.26; Tue, 26 Dec
- 2023 11:45:22 +0000
-Received: from DS2PEPF00003442.namprd04.prod.outlook.com
- (2603:10b6:610:32:cafe::36) by CH0PR07CA0028.outlook.office365.com
- (2603:10b6:610:32::33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7113.27 via Frontend
- Transport; Tue, 26 Dec 2023 11:45:22 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- DS2PEPF00003442.mail.protection.outlook.com (10.167.17.69) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7135.14 via Frontend Transport; Tue, 26 Dec 2023 11:45:22 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Tue, 26 Dec
- 2023 05:45:21 -0600
-Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34 via Frontend
- Transport; Tue, 26 Dec 2023 05:45:19 -0600
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
- <lukma@denx.de>, <git@xilinx.com>
-Subject: [PATCH v9 8/8] axm/taurus: Disable the SPL_SPI config
-Date: Tue, 26 Dec 2023 17:14:53 +0530
-Message-ID: <20231226114453.577589-9-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20231226114453.577589-1-venkatesh.abbarapu@amd.com>
-References: <20231226114453.577589-1-venkatesh.abbarapu@amd.com>
+ spf=pass smtp.mailfrom=sploitem@gmail.com
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-2ccae380df2so21894081fa.1
+ for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 21:07:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1703567254; x=1704172054; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=vFMcDSgQid6I28dOr9ebH4DOpLna0THRZLI0gYMUl3A=;
+ b=dpHXAbthj/n5ktycBHDLAqw7M2tFr/3637HGTh+67HeQ3oj/pdoFsC0Uh6VbKiWLwa
+ mkTHQsHxQ0RGZYFwVNVI3GzEeJE+SRK6SJpZzk1Bfv+rc+rYyuFu4BU1CLUMlv9VmdIK
+ BLyHKJvqgxDbxOgmZnLM3RzE9ooFIIXY7UxXm2d8B921YUYMsGEq0RuexXkY4Ra2z8Tm
+ q0GilmQdJ7EWXUvawCUD/XFxWZtA+4iyBRuP54rTmx9IKQGVl/ypGEvdYMwS0FI2nbEt
+ wsJ/Iq9/EGXpOneF8S5OsVgRZ/t++pmKf8aw3AvHs6Vi3DHj3PsJ5wdgJcIozaxPmIuf
+ eWpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703567254; x=1704172054;
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=vFMcDSgQid6I28dOr9ebH4DOpLna0THRZLI0gYMUl3A=;
+ b=qLQcJmuD+9ERN/4yjXzr1KRj1S3UOiWNa15zrTJz9oAjnLmZaNU8yOn8TPO+Y/zoFx
+ LOYbebeZJKOLfuLTnh/mTeexCnXEJht4FBbrs5FA31iloe+GqvRQmbT4gd31t6aNHfH/
+ c9om5Od4cBpRT0G+sUWqaA4Da9kInI7mFRQHFzEqNG7GG98wZ8AncmNpW4tqgkaAsXrk
+ 4Jt8fmm+Ce+7NlqbNgJaoE5hplNOB48s5OJEjjuM8qqKyZT/Z+r6qjaID0Ir1w/m6Dt2
+ PmRk0JxkyO5ixFWYnauRLEUo/6DcedNFbZ8qcATSMbab5TAPjjtePBDOWW4Zh3zTSeJ2
+ MuVw==
+X-Gm-Message-State: AOJu0YyKbNyV/DkJGGf07e6bxZxzB68jMNzqRtA72qeOomty7EqAcjZF
+ NghQLtpppf10/xaKXLuiSELsILeysDk3vFYOp7cy03Ypa2Q=
+X-Google-Smtp-Source: AGHT+IH5rgKnsMZBZdXee/gQWlqE9w2P9kfFhWspelrmMgPbro5qa9buq3sg7GjHp0lbKas4E0olgrZ5/LJCqXK6r1o=
+X-Received: by 2002:a2e:87c6:0:b0:2cb:4e98:2641 with SMTP id
+ v6-20020a2e87c6000000b002cb4e982641mr2281130ljj.74.1703567253626; Mon, 25 Dec
+ 2023 21:07:33 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF00003442:EE_|SA1PR12MB8093:EE_|IA0PR12MB8255:EE_
-X-MS-Office365-Filtering-Correlation-Id: 53cebb8e-e13c-4d09-5222-08dc060824ad
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: aorsnsX6VKD+0+2CIyl4TeT9ddSxqQcSLhscrKKWUNlOIrnRdf+/iKNCi2+Fs4DcKsSedj5ukDJQchsspX/sGrsSqKPCOFzT8vgzd9L7PzNSuPzREV++JqWQEFRdOD4QRDd3p1UjJQsZXnPhGcEZUbXOwBaYb9OpaAFEqIDEBV+/Qm8ZNUMuWyAYhhxjU/c31mfVfZxgv/lLkuKnJRHKcMsdXayVZGI3RHqpjJmdMCACJ4iFJyO9fvJuIORat6eSYwOO3q+EkHomanlbNHsQDQgdB6f6Qllxqvu27GV1wUnPak5gBF8x0SsuBAuMYxo+1il46+QhTdPShvuhvF3+06YeqexcW/qsoT9Wxz5YIjGG+jO7EDVnC9HWuqfInNuF46gkxLP+Y3kPCxzZT77RusDW77uE0bmCDH26tu4DuqA61q4cFg+sEjXg0zE5kPHZfP/JuM4qyG/5lo9E5chPNDwopWgqQ/mT14oO4LuzoGAVpAAhsNASfSHnmUgCl532dHp+3G8PhMpTNGwd7GnFRP3jqOzVt9OaLLscaUt6A5dUwVK5in72he7/N0ew2shqxVmiNzwEz0ad0MrJO9jmG8YlGe/jj8gs07rR8/vAs06OtqKkEJ3G/D4mbCdNmL0+se6/8Fz+rPwBkW9SLz1cOmdNLSa0L5/pObAK8YkVPesNg2N9KKPjSSrydcO8FVjmjQONeRa+trtHgfyRX/zLGQv4N0datIc4cmxTgd19sE1h9P2MAAIAI9qtlHj/YwSHw2W19l3PRWma9RIHYQ9few==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(376002)(39860400002)(136003)(396003)(346002)(230922051799003)(451199024)(82310400011)(1800799012)(186009)(64100799003)(36840700001)(40470700004)(46966006)(1076003)(83380400001)(6666004)(478600001)(426003)(336012)(81166007)(26005)(107886003)(356005)(2616005)(82740400003)(47076005)(36860700001)(41300700001)(8676002)(8936002)(6916009)(54906003)(316002)(70206006)(70586007)(4326008)(5660300002)(2906002)(40480700001)(36756003)(40460700003)(86362001)(36900700001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Dec 2023 11:45:22.3830 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 53cebb8e-e13c-4d09-5222-08dc060824ad
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF00003442.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB8093
-X-OriginatorOrg: amd.com
+References: <6581d54e.ll82lGTmJx9oFRYQ%cve-request@mitre.org>
+In-Reply-To: <6581d54e.ll82lGTmJx9oFRYQ%cve-request@mitre.org>
+From: sploitem <sploitem@gmail.com>
+Date: Tue, 26 Dec 2023 08:07:20 +0300
+Message-ID: <CADk2PNOxKKTW6n=+49j==rRKd_xNqG7EP9Gw4BO0URi1V8BWow@mail.gmail.com>
+Subject: Fwd: [scr1564375] your CVE ID requests
+To: trini@konsulko.com, u-boot@lists.denx.de
+X-Mailman-Approved-At: Tue, 26 Dec 2023 15:24:10 +0100
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,119 +85,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Disabling the CONFIG_SPL_SPI for the axm and taurus defconfigs,
-as facing the SPL size issue "SPL image too big".
+---------- Forwarded message ---------
+=D0=9E=D1=82: <cve-request@mitre.org>
+Date: =D0=B2=D1=82, 19 =D0=B4=D0=B5=D0=BA. 2023=E2=80=AF=D0=B3. =D0=B2 20:3=
+9
+Subject: Re: [scr1564375] your CVE ID requests
+To: <sploitem@gmail.com>
+Cc: <cve-request@mitre.org>
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- board/siemens/taurus/taurus.c | 4 +++-
- configs/axm_defconfig         | 7 ++-----
- configs/taurus_defconfig      | 7 ++-----
- 3 files changed, 7 insertions(+), 11 deletions(-)
 
-diff --git a/board/siemens/taurus/taurus.c b/board/siemens/taurus/taurus.c
-index ad44a7c0d2..ac1ce8acf4 100644
---- a/board/siemens/taurus/taurus.c
-+++ b/board/siemens/taurus/taurus.c
-@@ -135,11 +135,12 @@ void spl_board_init(void)
- 
- 	/* check for recovery mode */
- 	if (at91_is_recovery() == 1) {
--		struct spi_flash *flash;
- 
- 		puts("Recovery button pressed\n");
- 		nand_init();
- 		spl_nand_erase_one(0, 0);
-+#if defined(CONFIG_SPL_SPI)
-+		struct spi_flash *flash;
- 		flash = spi_flash_probe(CONFIG_SF_DEFAULT_BUS,
- 					0,
- 					CONFIG_SF_DEFAULT_SPEED,
-@@ -151,6 +152,7 @@ void spl_board_init(void)
- 			spi_flash_erase(flash, 0,
- 					CFG_SYS_NAND_U_BOOT_SIZE);
- 		}
-+#endif
- 	}
- }
- 
-diff --git a/configs/axm_defconfig b/configs/axm_defconfig
-index e1a01b24b8..4d439832d7 100644
---- a/configs/axm_defconfig
-+++ b/configs/axm_defconfig
-@@ -3,7 +3,6 @@ CONFIG_SKIP_LOWLEVEL_INIT_ONLY=y
- CONFIG_SPL_SKIP_LOWLEVEL_INIT_ONLY=y
- CONFIG_SPL_SYS_DCACHE_OFF=y
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_SYS_THUMB_BUILD=y
- # CONFIG_SPL_USE_ARCH_MEMCPY is not set
- # CONFIG_SPL_USE_ARCH_MEMSET is not set
- CONFIG_ARCH_AT91=y
-@@ -26,14 +25,14 @@ CONFIG_SPL=y
- CONFIG_DEBUG_UART_BASE=0xfffff200
- CONFIG_DEBUG_UART_CLOCK=18432000
- CONFIG_ENV_OFFSET_REDUND=0x180000
--CONFIG_SPL_SPI_FLASH_SUPPORT=y
--CONFIG_SPL_SPI=y
- CONFIG_SYS_LOAD_ADDR=0x22000000
- CONFIG_DEBUG_UART=y
- CONFIG_NAND_BOOT=y
- CONFIG_BOOTDELAY=3
- CONFIG_USE_BOOTCOMMAND=y
- CONFIG_BOOTCOMMAND="run flash_self"
-+CONFIG_SYS_CBSIZE=256
-+CONFIG_SYS_PBSIZE=281
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_BOARD_EARLY_INIT_F=y
- CONFIG_SPL_MAX_SIZE=0x3e00
-@@ -57,8 +56,6 @@ CONFIG_SPL_NAND_BASE=y
- CONFIG_SPL_DM_SPI_FLASH=y
- CONFIG_HUSH_PARSER=y
- CONFIG_SYS_PROMPT="U-Boot> "
--CONFIG_SYS_CBSIZE=256
--CONFIG_SYS_PBSIZE=281
- # CONFIG_CMD_BDI is not set
- CONFIG_CMD_BOOTZ=y
- # CONFIG_CMD_IMI is not set
-diff --git a/configs/taurus_defconfig b/configs/taurus_defconfig
-index 9be30c8d8a..7d71262d1a 100644
---- a/configs/taurus_defconfig
-+++ b/configs/taurus_defconfig
-@@ -4,7 +4,6 @@ CONFIG_SPL_SKIP_LOWLEVEL_INIT_ONLY=y
- CONFIG_SPL_SYS_ICACHE_OFF=y
- CONFIG_SPL_SYS_DCACHE_OFF=y
- CONFIG_ARCH_CPU_INIT=y
--CONFIG_SYS_THUMB_BUILD=y
- # CONFIG_SPL_USE_ARCH_MEMCPY is not set
- # CONFIG_SPL_USE_ARCH_MEMSET is not set
- CONFIG_ARCH_AT91=y
-@@ -28,8 +27,6 @@ CONFIG_SPL=y
- CONFIG_DEBUG_UART_BASE=0xfffff200
- CONFIG_DEBUG_UART_CLOCK=18432000
- CONFIG_ENV_OFFSET_REDUND=0x180000
--CONFIG_SPL_SPI_FLASH_SUPPORT=y
--CONFIG_SPL_SPI=y
- CONFIG_SYS_LOAD_ADDR=0x22000000
- CONFIG_DEBUG_UART=y
- CONFIG_NAND_BOOT=y
-@@ -38,6 +35,8 @@ CONFIG_USE_BOOTARGS=y
- CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk mtdparts=atmel_nand:256k(bootstrap)ro,512k(uboot)ro,256k(env),256k(env_redundant),256k(spare),512k(dtb),6M(kernel)ro,-(rootfs) root=/dev/mtdblock7 rw rootfstype=jffs2"
- CONFIG_USE_BOOTCOMMAND=y
- CONFIG_BOOTCOMMAND="nand read 0x22000000 0x200000 0x300000; bootm"
-+CONFIG_SYS_CBSIZE=256
-+CONFIG_SYS_PBSIZE=281
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_BOARD_EARLY_INIT_F=y
- CONFIG_SPL_MAX_SIZE=0x3e00
-@@ -61,8 +60,6 @@ CONFIG_SPL_NAND_BASE=y
- CONFIG_SPL_DM_SPI_FLASH=y
- CONFIG_HUSH_PARSER=y
- CONFIG_SYS_PROMPT="U-Boot> "
--CONFIG_SYS_CBSIZE=256
--CONFIG_SYS_PBSIZE=281
- # CONFIG_SYS_XTRACE is not set
- # CONFIG_CMD_BDI is not set
- CONFIG_CMD_BOOTZ=y
--- 
-2.25.1
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
 
+
+> [Suggested description]
+> Integer underflow in ipv6 net component when processing incoming packets.
+udp->udp_len is not verified before substruction leading to large number in
+len parameter (unsigned int). This can lead to DoS or code execution.
+>
+> ------------------------------------------
+>
+> [Vulnerability Type]
+> Integer Overflow
+>
+> ------------------------------------------
+>
+> [Vendor of Product]
+> U-Boot
+>
+> ------------------------------------------
+>
+> [Affected Product Code Base]
+> U-boot - <=3D v2024.01-rc3
+>
+> ------------------------------------------
+>
+> [Affected Component]
+> u-boot/net/net6.c
+>
+> ------------------------------------------
+>
+> [Attack Type]
+> Remote
+>
+> ------------------------------------------
+>
+> [Impact Code execution]
+> true
+>
+> ------------------------------------------
+>
+> [Impact Denial of Service]
+> true
+>
+> ------------------------------------------
+>
+> [Attack Vectors]
+> Crafted ipv6 udp packet.
+>
+> ------------------------------------------
+>
+> [Reference]
+> https://github.com/u-boot/u-boot/blob/master/net/net6.c#L442C18-L442C18
+>
+> ------------------------------------------
+>
+> [Discoverer]
+> sploitem
+
+This request did not receive a CVE ID assignment as CVEs are not assigned
+to Release Candidate (rc) versions of products.
+
+
+
+- --
+CVE Assignment Team
+M/S M300, 202 Burlington Road, Bedford, MA 01730 USA
+ [ A PGP key is available for encrypted communications at
+   https://cve.mitre.org/cve/request_id.html ]
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQIcBAEBCAAGBQJlgdSnAAoJENiPHH3233OGtbYQAKDjsoR/MIuN6txsUarIqDx9
+KzoNx5MR0Ze+HIyZ3vBV1+eUJcnHfStLDaIMRNGR7497+A474X54vn8OVRTqgh+W
+CPQiTqx2PpJTYikxBAUrbh6uzwFHlb+iv7Dt2mqyZ4Eg+sX8X507YfyyIsWr6Npw
+VYiXSt53Sy9hQDski7H+Nl3keO3km5G29MdavcvNiAwH0g/a9f+NtRvQvi68X+n7
+4nWRa2bzH3zChvOVJ0TRvua9ptwU+svM4wjL9vloEMO8sDO3CyFIoiGhyhseERcT
+Zv/NpPdqpqlKwRcvY6vW/GMGU6pVhwpIer9jrX4yolviN1d92/J9sIfJXchl5yNh
+fUnX0NYlBbBKH1Hy/ttOXuOBPeNgFv1VpryJvjyOxmTIpOZUhm1iiehzEGA2pFdO
+FUHAKmfrugVTr8Gp3HL/tQ3MN08nB64LHkowD+j0+XGN1EEIurWSnwRwdXmEn26Y
+MSkGbXzT0GiibnkhwpdRxcZW4p33NC+idNBZtb4K8TIcdUdh2P4ZzeyTMYmxMKgp
+WVHxxKvLEom+E17SAb996Wesia4+gRo+2wK4cXCtnEn7nqz59y1mqBf1uALeTDLG
+D2/9N3nqGYZEu8WeMjSNYPmUvLMHKvffj9Z81+dBSq/IngZMYuXr6m+UGTce66N1
+jmb+4NApCJi3mhF4dUK6
+=3DT698
+-----END PGP SIGNATURE-----
