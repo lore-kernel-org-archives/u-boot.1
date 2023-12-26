@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1FCFC46CD4
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:53:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F23AEC46CD3
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:54:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3711387969;
-	Tue, 26 Dec 2023 10:50:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 71B988795D;
+	Tue, 26 Dec 2023 10:50:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bTQEji6A";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IhtftdiG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D25187951; Tue, 26 Dec 2023 10:50:32 +0100 (CET)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
+ id 15C3A87961; Tue, 26 Dec 2023 10:50:35 +0100 (CET)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D1D1878D1
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:50:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 51D738794F
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:50:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-59496704246so563105eaf.2
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:50:29 -0800 (PST)
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-594c7443cc5so4769eaf.2
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:50:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703584228; x=1704189028; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703584230; x=1704189030; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sWlg+YhpZUC5XcfjrvoxBuUlV9fRkynMRceBtwUcaPI=;
- b=bTQEji6AWM56IR8GJqBP2S8XmRNaYtHQBKATRRSV2ABOoA+4p8ACB8W7H9AP1DZwfB
- 8xWHFEoR/at1pueujLg7SI68TSKhNVxHL7a5u4pabHaTnEO4L8IPahCBTTDubHQR0jUg
- mbrDcLWZyEqtRZjpdWvkh7nHyNZgFHrdD3VjE=
+ bh=ltjrEMAj8rtyv0y+W7bXeFen0k2UOOvHbny0Aw+8v4g=;
+ b=IhtftdiGzXqKviycpu8oagdTg4VmVmvmy6VeoKL50OOPOXwVAAoLT4uR1Amgjz9OGO
+ J1PpnOxYxkve+UfVHf4ZJKseXPevM5t2HnsAAOARtJxbDovGWBLAw9wcQ5xfAWIpnsHh
+ tZwVBeQoDVXhEml9F9KUaQGNAfwHzA9f46NoA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703584228; x=1704189028;
+ d=1e100.net; s=20230601; t=1703584230; x=1704189030;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sWlg+YhpZUC5XcfjrvoxBuUlV9fRkynMRceBtwUcaPI=;
- b=mx4tEbUSdNdq2zv2TeCFYI232rilfQukk54kEeK9vtyCrF6vjpup+n0saUmAHGNuOl
- gGJhRUiZ4m6OAmKTyR7uujaLwQmVlGV/Bz67nEx8dv/u7EYMn1NDrmvYijrOb3FPiyZ6
- eZYE2xY1v1+72mqVUG3C2au2oexAfaoynxRlWvNd7TNe1wuFd/gomnyL6HTXVnWIdhAp
- aTs/hZ0c/K5RZqL3+gzzDrzUVnNUFsjddhP8ChBJD2Ijf+XfUQHbBUUmnErmTg9vEaPb
- akJ6YrAp+ubOOiq7si03/Flu7+sRH/DRuer/JoqcDLHpqZOCWNc2t6s+84rEeJnordUL
- odWw==
-X-Gm-Message-State: AOJu0Ywy76C53SiL+gR6IOzOEe2QTIUvWOCBl2gvRDX7bHcFOo5OJ0Kx
- X5XEBEbXo+2jC+5+ymEDnIZllc6TlRj+crnx7USQemx12knj
-X-Google-Smtp-Source: AGHT+IHi5ivS4eoTywQQDSbzy63nGpgpXZ03uLbQlV8Q9p8DwyqcABn+kVW/enS5Fh1MbkqiazHtAfB1ZsaJ4disD5M=
-X-Received: by 2002:a05:6358:7250:b0:172:d2ac:1e with SMTP id
- i16-20020a056358725000b00172d2ac001emr4741529rwa.5.1703584227865; Tue, 26 Dec
- 2023 01:50:27 -0800 (PST)
+ bh=ltjrEMAj8rtyv0y+W7bXeFen0k2UOOvHbny0Aw+8v4g=;
+ b=Kl/Peq8iakFA6BFj0Vag0sOsHIFoS8uo+tXsOLfjgFJzqlt/N8rX+ODabf5g+1WWOE
+ upsvf44OB70BDf+G82izQOmUjdBOKy+DH2aESSQUy0LIfFoNAutlMQCD+QYPjwnGLoqF
+ egAvs1GEwGp7LNIQ4fsWzgwPdUSiJFfKt7dAYsr+Ao+w5N4eaRFmp2NO1Xp6pw/6H4hJ
+ c7v31j+ZFMoASIC0ZvEEs0bf3JvFS24k52HcHEsS77Gk/5g5uL+SPrAKcxEzwJxEe9CJ
+ Hl4ep5wPHlT3d079CUAvssefyAOSwJMoOOBQOujsuHCMId3VOFQj92tX+jVTerQUT4+U
+ HXIg==
+X-Gm-Message-State: AOJu0YyGtQwnVkUA8TxusbCABFmVdY671MNji77vSBTLXhadjHAr5NPV
+ IsZZIb3ksrbs7U8n0a3jznTJglOrTf0y+0JTbD/7I2XmIkoi
+X-Google-Smtp-Source: AGHT+IEuSupUi5cXMS8P/+iOoeu8FtWwSXrRiBOBTPigZCMNX6EGXHeqLtID4ZNYiFcU8raXgu9o42soh/FrXM8nurk=
+X-Received: by 2002:a05:6358:71cd:b0:172:e3d3:4906 with SMTP id
+ u13-20020a05635871cd00b00172e3d34906mr5511800rwu.34.1703584229945; Tue, 26
+ Dec 2023 01:50:29 -0800 (PST)
 MIME-Version: 1.0
 References: <20231225153929.8284-1-maxim.uvarov@linaro.org>
- <20231225153929.8284-4-maxim.uvarov@linaro.org>
-In-Reply-To: <20231225153929.8284-4-maxim.uvarov@linaro.org>
+ <20231225153929.8284-7-maxim.uvarov@linaro.org>
+In-Reply-To: <20231225153929.8284-7-maxim.uvarov@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Dec 2023 09:50:12 +0000
-Message-ID: <CAFLszTi6SE6j29wSeLKTUMYVix9Ch641mM7f5xMwHYq4N2jpyw@mail.gmail.com>
-Subject: Re: [PATHv2 3/9] net/smc911x: fix return from smc911x_send
+Date: Tue, 26 Dec 2023 09:50:14 +0000
+Message-ID: <CAFLszTh168V4TQwxxFo_cwMic-W9BQ1kcP-pDVZ_wvrHAB55BA@mail.gmail.com>
+Subject: Re: [PATHv2 6/9] mach-socfpga: do not overlap defines with lwip
 To: Maxim Uvarov <maxim.uvarov@linaro.org>
 Cc: u-boot@lists.denx.de, simon.k.r.goldschmidt@gmail.com, 
  tien.fong.chee@intel.com, joe.hershberger@ni.com, rfried.dev@gmail.com, 
@@ -86,17 +86,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Dec 25, 2023 at 3:41=E2=80=AFPM Maxim Uvarov <maxim.uvarov@linaro.o=
+On Mon, Dec 25, 2023 at 3:42=E2=80=AFPM Maxim Uvarov <maxim.uvarov@linaro.o=
 rg> wrote:
 >
-> return value of smc911x_send is ignored, but on sucesseful
-> send we need return 0 and or error -ETIMEOUT, not opposite.
+> Fix compilation issue with overlapping lwip and march defines.
 >
 > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
 > ---
->  drivers/net/smc911x.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  arch/arm/mach-socfpga/include/mach/handoff_soc64.h | 6 ------
+>  arch/arm/mach-socfpga/wrap_handoff_soc64.c         | 9 +++++++++
+>  2 files changed, 9 insertions(+), 6 deletions(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
