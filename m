@@ -4,67 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84A5BC47072
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:47:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F6C9C46CD4
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:47:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0FE6878A5;
-	Tue, 26 Dec 2023 10:47:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3452A8789A;
+	Tue, 26 Dec 2023 10:47:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EM+IPh31";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MfCJm51U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DFC28787E; Tue, 26 Dec 2023 10:47:05 +0100 (CET)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id C4D8F87831; Tue, 26 Dec 2023 10:47:11 +0100 (CET)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94E8287895
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:47:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 17C4A8788C
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:47:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-67f5c0be04cso41073786d6.0
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:47:02 -0800 (PST)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-3bb9d54575cso1615433b6e.2
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:47:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703584021; x=1704188821; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703584027; x=1704188827; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bpfkBOyaHVntFbelvN7Hx1OAhGT5ZwJimPxvPfpcZmI=;
- b=EM+IPh31oD7f1bL2xImbBP+5Vdur6ym4PEQ4QrRMWyUMbuW4QzAmPkZpJdwl9zvtD7
- LNdo4wELiRuBGzNiORLxjFlas2ZiZe0fHKztA5j4QLlfyWoV2Cn4wbdmwBVAGyBhVFoC
- G7JArgtvzrffHPZOAgFfIflmpF1bU7I9RfnOA=
+ bh=JXvxet7LhQK8B3l/x/q+qwAIdnUBDhRKCwP19Xt8xfA=;
+ b=MfCJm51UETO+eBxvE3pnvZo7doIpHkkAJJpbh4qXPe8hK2QRC+Fz1EOcqfzHspd426
+ AYQpjQdZxAZHqRJHe7cbOUU17eWm6re8epPqx39lAKRxGgxauCYc3k9vPmwHj7d5NpuI
+ qGJim46mMZuhyuoXNNfISZ76tOo6pG3VyLR94=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703584021; x=1704188821;
+ d=1e100.net; s=20230601; t=1703584027; x=1704188827;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bpfkBOyaHVntFbelvN7Hx1OAhGT5ZwJimPxvPfpcZmI=;
- b=izdT4JPhTRtrWrpvusY1p68w+prM8Lj72jLTpLhMfUfbNEXp4pORR9o8vQ4YW8Gbgg
- rUT/3CZMCOEGtTSO0ZDxZrD0sjnU7NgPP7XDOoR370how3lTxzUhpAEFxky1NygDy/vz
- PGxa+CCGSLjMWLE4ufUoOGIAwinaQ6TeuoLE0m3GST7xm86lWxNU2MIzAZFwMldqO4JP
- YLtrGOEiSf9HgoSwVxwFD5IaihdKyFHfDmRSDj/oEO6wxtJGP26bzOUoeKxofGLu6aUW
- v3AsysVO+UFsN4CSPDrDiaHMMj3KFgZconhDUtJlBLt60DnglXDjegLXB7C47dUNNn4l
- t6Lg==
-X-Gm-Message-State: AOJu0YxE8wbxO8UYxllPFuSeU0Tp4L4D/22max03f42JUkLVIRefgrHa
- PUOHfiHfWFhxHMX3W6SOabtQU9I3Y2aDk+gjSc68jfRkyc2k
-X-Google-Smtp-Source: AGHT+IGJQFvVqpoqhwHqpGTyAtjPTfHj+DOgtx3bD0BCDT6/MUqpWVblS96BpGJwv5WUHDSnCQQSZSB88iCzXB6oreI=
-X-Received: by 2002:a0c:bec7:0:b0:67f:c73d:f6e0 with SMTP id
- f7-20020a0cbec7000000b0067fc73df6e0mr6036478qvj.32.1703584021315; Tue, 26 Dec
- 2023 01:47:01 -0800 (PST)
+ bh=JXvxet7LhQK8B3l/x/q+qwAIdnUBDhRKCwP19Xt8xfA=;
+ b=OIY1nxqZ7eqjg+ia9r/X2jCK63PSuZgMKKVOTZZw17iTkKVZCtc4/TBlZtSp5SsamK
+ xi/MYcG/J1Xe5QxvYQuihAWEMYHTsyQ0AAydO/MfOoqDTIbar+6SHHA6LIvs4J2c4fvt
+ EdJgoNIz30f9jBJ4F28a9d3s62aqXiHuR1C3Kr0Eyk68khGiGQ/m5IcpPJ+TTlZ4u70R
+ 6ltN0m373f+7J5CNyHMXC0URpaXJ9ZVMvaRK6GZNd+YWPFiGkW93DNsevTL6G9AZDmpk
+ NopVjptGZcHX0vRziatLERtZNuXZVazTP6Y4rZALlxWI2c2odPRC8RJWoGHyq1kApCGU
+ P2Lg==
+X-Gm-Message-State: AOJu0YweW4ViYTEA2S4deRdkEYcexNxgZ6cuO5ebBXzCF3hhxosjXLkE
+ 3SaKvCrMVHLJA4kBXYCAFIdaVXjegqJvERuUjoKwLKNUhBuh
+X-Google-Smtp-Source: AGHT+IFMLrnjtkmFZqDwrSZl4NTG50ENl7pfOhVHQasWpWkWhGEwUTS9BemGY0ObcLWHXezL10bGM+1u3AaqYExtjw8=
+X-Received: by 2002:a05:6808:4ce:b0:3ba:10b1:7a24 with SMTP id
+ a14-20020a05680804ce00b003ba10b17a24mr6873165oie.105.1703584027752; Tue, 26
+ Dec 2023 01:47:07 -0800 (PST)
 MIME-Version: 1.0
-References: <20231224181255.4954-1-kettenis@openbsd.org>
-In-Reply-To: <20231224181255.4954-1-kettenis@openbsd.org>
+References: <6ae238be-3c5f-5ef6-9e18-282be9ae24c2@gmail.com>
+ <16e633f9d4b1c426aaca510157479d65@manjaro.org>
+ <51121aee-faca-4196-8532-719fb6ec9bdc@prolan.hu>
+ <2c108e1ff92db2b74f5ccccd770872a7@manjaro.org>
+ <5e0e71a5-f3c8-413e-96a3-a0b6edee928f@prolan.hu>
+ <3900f4b15852d0af65635b3a794d34af@manjaro.org>
+ <f22f86ec-987f-4404-8722-82270f1e8da8@prolan.hu>
+ <d1350e2c5ff1da1cf10c92b1b49dec6b@manjaro.org>
+ <5fd64984-4715-4880-ba27-ef78094da6cb@prolan.hu>
+ <e37be8c4cfc8ed28aca43e35f752fc8b@manjaro.org>
+ <ZYOMY4Bs2KDyLmka@makrotopia.org>
+ <6b09b7423796689e86cf853809a8e471@manjaro.org>
+ <e5dfc1d7ec245897bf59ef1f14beb9cb@manjaro.org>
+ <4df006cb773186561a13ae37f1b88947@manjaro.org>
+In-Reply-To: <4df006cb773186561a13ae37f1b88947@manjaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Dec 2023 09:46:50 +0000
-Message-ID: <CAFLszTjdAVCUcneofANpjj_hVx7Qg_fS5akTkXxjik_V-ttRVw@mail.gmail.com>
-Subject: Re: [PATCH] arm: apple: Disable SMBIOS again
-To: Mark Kettenis <kettenis@openbsd.org>
-Cc: u-boot@lists.denx.de, bmeng.cn@gmail.com, trini@konsulko.com, 
- xypron.glpk@gmx.de
+Date: Tue, 26 Dec 2023 09:46:53 +0000
+Message-ID: <CAFLszThKisHAPM_oS3RE6J4d5LZGxQ-=PGpbCS3iuTsiKEjVdQ@mail.gmail.com>
+Subject: Re: Passing boot logs to Linux?
+To: Dragan Simic <dsimic@manjaro.org>
+Cc: Daniel Golle <daniel@makrotopia.org>,
+ =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <Csokas.Bence@prolan.hu>, 
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -83,18 +98,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Dec 24, 2023 at 6:12=E2=80=AFPM Mark Kettenis <kettenis@openbsd.org=
-> wrote:
->
-> Apple machines do not have memory below 4G.  Since U-Boot does
-> not support the SMBIOS 3 header structures this means we can't
-> support SMBIOS on these machines.  Unfortunately the refactoring
-> of the SMBIOS code this cycle accidentally enabled it again.
->
-> Fixes: 53fab13a7b1 ("efi: Use the installed SMBIOS tables")
-> Signed-off-by: Mark Kettenis <kettenis@openbsd.org>
-> ---
->  configs/apple_m1_defconfig | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+Hi,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Thu, Dec 21, 2023 at 2:23=E2=80=AFAM Dragan Simic <dsimic@manjaro.org> w=
+rote:
+>
+> On 2023-12-21 02:44, Dragan Simic wrote:
+> > On 2023-12-21 02:37, Dragan Simic wrote:
+> >> On 2023-12-21 02:03, Daniel Golle wrote:
+> >>> On Thu, Dec 21, 2023 at 12:55:20AM +0100, Dragan Simic wrote:
+> >>>> On 2023-12-21 00:27, Cs=C3=B3k=C3=A1s Bence wrote:
+> >>>> > Not every system has eMMC/uSD, and as you said, these arguments do=
+n't
+> >>>> > hold for a 4 MB SPI NAND, for example, one you might find in an Op=
+enWrt
+> >>>> > router for example. Whereas RAM is quite cheap nowadays.
+> >>>>
+> >>>> I see, but I also wonder how many such OpenWrt routers are still
+> >>>> used these
+> >>>> days, and, even more importantly, how many of them are regularly
+> >>>> updated and
+> >>>> can be expected to actually use this new feature?
+> >>>
+> >>> Avoid flash writes is a very important matter, even on systems with
+> >>> 128 MiB of SPI-NAND flash which is by far the most common setup you
+> >>> find on off-the-shelf plastic routers and access points nowadays.
+> >>
+> >> I agree, writing something to the SPI chips all the time, no matter
+> >> how small the writes are, is a big no-no, which I already clearly
+> >> expressed in one of my earlier posts.
+> >>
+> >>> Especially also as those devices often come without a local console,
+> >>> having U-Boot's output prepended to dmesg on boot would be a very big
+> >>> win.
+> >>
+> >> I was also thinking about that, but I'm not sure it would be accepted
+> >> to the Linux kernel.  Maybe we can try getting that accepted later.
+>
+> Maybe, but just _maybe,_ it could be possible to add a new command-line
+> option to dmesg(1) that would display the last recorded console output,
+> fetched from the pstore.  That _might_ get accepted to util-linux, while
+> being perfectly fine from the usability standpoint.
+>
+> I'm also willing to work on that, and I already contributed a few
+> dmesg(1) patches to util-linux.
+>
+> >>>> Please, don't get me wrong, I still support having both options
+> >>>> available,
+> >>>> but I'm also wondering about the target demographic.
+> >>>>
+> >>>> > > > Plus, I don't want the console subsystem to depend on any file=
+/disk
+> >>>> > > > operations/drivers.
+> >>>> > >
+> >>>> > > Well, the console would still work as usual even if logging to d=
+isk
+> >>>> > > would fail for any reason, which is similar to the serial consol=
+e
+> >>>> > > still
+> >>>> > > working if the graphical console fails.  Moreover, if the disk f=
+ails,
+> >>>> > > the system isn't be able to boot, so any RAM-based console logs
+> >>>> > > would be
+> >>>> > > lost in that case.  All this makes the RAM-based logging no more
+> >>>> > > resilient to disk failures.
+> >>>> >
+> >>>> > Correction: if disk *reads* fail, as well as writes, then the syst=
+em
+> >>>> > will not boot. However, typical failure of Flash media is that it
+> >>>> > becomes read-only.
+> >>>>
+> >>>> That's a good point, but having a read-only root filesystem usually
+> >>>> also
+> >>>> means having a non-operational system that can only have its stored
+> >>>> data
+> >>>> salvaged.  Unless the system is specifically crafted to survive such
+> >>>> scenarios, of course.
+> >>>
+> >>> ... which holds true for any decent embedded OS, which at least
+> >>> allows
+> >>> limited remote access and some kind of recovery even in this
+> >>> situation.
+> >>
+> >> Perhaps.  I'm more into running general-purpose Linux distributions on
+> >> single-board computers and derived embedded devices, which are on the
+> >> "thick" end of the embedded device spectrum, so to speak.
+> >>
+> >>>> > > I still think that using disk-based pstore is a better option.  =
+Just
+> >>>> > > as
+> >>>> > > you don't want to wear out your flash disks with 30-40 KB of dat=
+a, I
+> >>>> > > also don't want to waste 30-40 KB of RAM.
+> >>>> >
+> >>>> > As I said, you could just unload the log after you're done process=
+ing
+> >>>> > it. 40 KB RAM is less, than what `sshd` uses, for instance (860k o=
+n my
+> >>>> > laptop, but it can probably be less, maybe even 10x less, so 80-90=
+k?),
+> >>>> > so you could, in your init, process the in-RAM log, then unload it=
+, then
+> >>>> > start your other services, thereby reclaiming that RAM.
+> >>>>
+> >>>> Using pstore should have that unloading already covered, and the
+> >>>> already
+> >>>> existing systemd service is there to perform the archiving to the
+> >>>> primary
+> >>>> filesystem, if desired so.  It would all need to be tested in
+> >>>> detail, of
+> >>>> course.
+> >>>
+> >>> pstore/ramoops uses a statically assigned reserved memory region, so
+> >>> in
+> >>> the moment you want to use that feature you loose that amount of RAM
+> >>> (a
+> >>> few kB, so it doesn't really matter on modern systems).
+> >>> As in: there is *no* dynamic allocation.
+> >>>
+> >>> Imho using pstore/ramoops (which is a more or less Linux-specific
+> >>> debugging feature, meant to store one or more timestamped logs of
+> >>> crashes) might not be the most suitable choice. I understand the
+> >>> advantages of using existing infrastructure, but on the other hand
+> >>> we don't need most of the complexity of pstore for the task.
+> >>
+> >> Hmm, let me research all that a bit more in the next couple of days,
+> >> please, and I'll come back with a detailed insight.
+> >>
+> >>> What I'd like to see is having a couple of log lines from U-Boot
+> >>> prepended to Linux' dmesg buffer, and for that we anyway will have to
+> >>> come up with a way to hand over that buffer. Another reserved-memory
+> >>> region would be one way, embedding the buffer as a blob into the
+> >>> /chosen/ section of the device tree would be another way.
+> >>
+> >> As I already wrote above, it would be rather neat, but I'm afraid it
+> >> wouldn't be accepted upstream.
+> >
+> > Sorry, I forgot this...
+> >
+> > As I already explained in one of my earlier posts, not all devices and
+> > applications would benefit from having only "in-flight" console data
+> > available, i.e. made available through a reserved region of the RAM.
+> > Some devices actually need to have the recorded console outputs stored
+> > on their eMMC chips or microSD cards, for post-mortem analysis of the
+> > boot issues.
+> >
+> > That's why we actually need both options available, and that's also
+> > why pstore should fit well, even if it may seem as an overkill.  I
+> > hope you agree;  however, I'll do more research, as already promised.
+
+I did send this a while back, in case it is useful:
+
+https://www.spinics.net/lists/devicetree/msg573692.html
+
+Regards,
+Simon
