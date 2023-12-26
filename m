@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA13AC46CD3
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 16:11:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DBA1C46CD3
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 16:43:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E1748786A;
-	Tue, 26 Dec 2023 17:11:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9740987786;
+	Tue, 26 Dec 2023 17:43:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BkhMjHHo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="efEBGmzq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5761878AF; Tue, 26 Dec 2023 17:11:47 +0100 (CET)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id B1E8E87809; Tue, 26 Dec 2023 17:43:54 +0100 (CET)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A95F087869
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 17:11:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 870618772A
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 17:43:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-5e6c8b70766so36739487b3.3
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 08:11:45 -0800 (PST)
+ spf=pass smtp.mailfrom=sigmaris@gmail.com
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-68009cb4669so13402656d6.1
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 08:43:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703607104; x=1704211904; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=J9A4qPTOjA0s2Pj8/WnHNwYz7yDwIXvGEfeRQ5ddwr0=;
- b=BkhMjHHovcGNMV1jijzLlKwpAtRADQcdM8lP/NxmxWffUrq83ZrhSzI/9prx56bQUe
- 1UqnV7oZUsdY2g71M2VAx4gxaHqzX+NgeBGcPqe+BHuz8XA/3lY66ai54Zqx7k/Coaca
- /FfzLzI7eUzLWOK2eHxtQD5fbzRUbC2AEbqwo=
+ d=gmail.com; s=20230601; t=1703609031; x=1704213831; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ba4pyOaX09uGSocPIMFMwpa7Brm9vfB1iRXDGmFqJbg=;
+ b=efEBGmzqvTjDCRsNOnSv3aS9SA4YQw2ZDFbYVfkuu1wbIHnqcDVM54C4WyJvSaPGgI
+ /l5GuTT3wpq/EmHa2L+PmzYNo8IdFl0n/RFm1otFhkwzxOPc2KryWmFim5gq9D1v9jI9
+ GWqMK8DymVMDpxecc1Tw+2mX+A5Kxm7wTUFawwBFDO4ziVR1fKWGlX0sx1hsbPZl962T
+ XiQtEDXg+R70ZjfYQLDJ3c8zUdzfM9fKNDP8z0ZxjONo5IIfsupqaTzFtt0t1lOIc11S
+ 9jWf+nY+GUIlIn3/1QAlc2DYe8vk8ouUBp905NH0RGqoNKAbIzOBkHUXdnV2q41onecf
+ XixQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703607104; x=1704211904;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=J9A4qPTOjA0s2Pj8/WnHNwYz7yDwIXvGEfeRQ5ddwr0=;
- b=ZztFqvtbAAurmksYEzKY02xD4cNiwLwIqgIJvS16l3wb+j2E5usYn/DH8oBC9Ii9XB
- rEKd+KIeMc8LohMK1T/3SQUoGU3gXNHmy7wedLnyLOqCetpMDh0SEwqrvr/sM/hCl8Iw
- O78V+MsD9K9SD135XDTYuR455MvTmzi4SbTDijvj3aq8M3PnzeNN2ScOwlvAW87eewOD
- uUamGnpvH+skWH4AWtLILM8TGsxyTg5RYosfpGNq/n9fYzOc8Z4YmpfPBxR2rivgKkMr
- vdFkI1YcZqUFXUyYEsvOGEUgAgpYQzh8/V/JOHGJa2Eq8K+iFRXQrdMi/JcLMrhpGIb0
- cgwQ==
-X-Gm-Message-State: AOJu0YxLxfJR7NOmX/RsrykMQGiLcfs+akFdxAZpc8Lngack6+VAvaVO
- 4isUxnyjmtiJabROVH6lCfTi9AkS6iee5A==
-X-Google-Smtp-Source: AGHT+IGKKNEs5L5OY04AoGywlOJSz0suLVqgbMpYN0FrcQ0yzw0V8YvCtFEcttQekDMxcRmx1y/y+w==
-X-Received: by 2002:a0d:fc02:0:b0:5e8:c7e4:e7a6 with SMTP id
- m2-20020a0dfc02000000b005e8c7e4e7a6mr4353013ywf.71.1703607104340; 
- Tue, 26 Dec 2023 08:11:44 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- u66-20020a818445000000b005e6d6903934sm5580123ywf.9.2023.12.26.08.11.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Dec 2023 08:11:43 -0800 (PST)
-Date: Tue, 26 Dec 2023 11:11:41 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Maxim Uvarov <maxim.uvarov@linaro.org>
-Cc: u-boot@lists.denx.de, simon.k.r.goldschmidt@gmail.com,
- tien.fong.chee@intel.com, sjg@chromium.org, joe.hershberger@ni.com,
- rfried.dev@gmail.com, bharat.gooty@broadcom.com,
- rayagonda.kokatanur@broadcom.com
-Subject: Re: [PATHv3 8/8] Makefile: add dtbs to clean
-Message-ID: <20231226161141.GO2652760@bill-the-cat>
-References: <20231226154619.5071-1-maxim.uvarov@linaro.org>
- <20231226154619.5071-9-maxim.uvarov@linaro.org>
+ d=1e100.net; s=20230601; t=1703609031; x=1704213831;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ba4pyOaX09uGSocPIMFMwpa7Brm9vfB1iRXDGmFqJbg=;
+ b=R+jOV8k7Qm67yXfTrNn16qEzjEsPANoOPn72C+G1aG/NYTqmoDk/cQcgqRa2LzRuY2
+ cAW5dP65Gn8xWg0Jva/s7IJXv6LYq2jLln48ywC9gcDK+gN4sp+tvL0Q0x1MTz9DJFC5
+ tlKMHe6NmM1WKXS7XHgtgSYX+zJuw9a/TDoI908WDEdOXEwjB4ZvE+q/c7iAzw0c81lj
+ MgOHMHZLZycv6k//e544zTZcgvcK4f/z+8cjT/mpL2g7i6W2CB2FyQuvAmfu6NSrVk2F
+ 03RxylLP6ItjPnU9RpsJHd+dgNnggrfnFeR3AAlQaKQ9wghwowi2IlXbcq2u9jPyt1ZS
+ X4gQ==
+X-Gm-Message-State: AOJu0YzAqqQ/BTsxgZy2RpXD0vU++JqVnXrISbec2bVXoaw8ySBaJnlX
+ brvh8AVRXibiDa5eQhooN1hHoz+X5fMvug==
+X-Google-Smtp-Source: AGHT+IElIqW9b7uijH6D1C6arjYL4PIFE1QH+QiusJubieo2cRgQgAYQhWB73FZzx9sMK0Ht8MoKug==
+X-Received: by 2002:a05:6214:e8e:b0:67a:a5c3:8110 with SMTP id
+ hf14-20020a0562140e8e00b0067aa5c38110mr13522947qvb.3.1703609030844; 
+ Tue, 26 Dec 2023 08:43:50 -0800 (PST)
+Received: from localhost.localdomain ([31.111.4.202])
+ by smtp.gmail.com with ESMTPSA id
+ e14-20020a0cf74e000000b0067f0071e3a9sm4705812qvo.29.2023.12.26.08.43.48
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Tue, 26 Dec 2023 08:43:50 -0800 (PST)
+From: Hugh Cole-Baker <sigmaris@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ John Clark <inindev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Hugh Cole-Baker <sigmaris@gmail.com>
+Subject: [PATCH v2] rockchip: rk35xx: expand space for decompressed kernel
+Date: Tue, 26 Dec 2023 16:43:30 +0000
+Message-Id: <20231226164330.63725-1-sigmaris@gmail.com>
+X-Mailer: git-send-email 2.39.3 (Apple Git-145)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="6eALlFQRsBPz9qOX"
-Content-Disposition: inline
-In-Reply-To: <20231226154619.5071-9-maxim.uvarov@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,40 +91,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+An uncompressed 6.7.0-rc1 Linux kernel Image built with the arm64
+defconfig is about 40MB. This does not fit in to the space between
+kernel_comp_addr_r and fdt_addr_r, so when uncompressing an Image.gz
+to this size, the FDT will be overwritten. Rearrange addresses to have
+128MiB for the kernel and its decompression buffer, then devicetree,
+overlay and ramdisk at the end.
 
---6eALlFQRsBPz9qOX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Hugh Cole-Baker <sigmaris@gmail.com>
+---
+Changes from v1:
+Reorder things to have to have 128MiB for kernel and decompression space,
+then devicetree, overlays and ramdisk.
+Update kernel_comp_size to 128MiB.
 
-On Tue, Dec 26, 2023 at 09:46:19PM +0600, Maxim Uvarov wrote:
+ include/configs/rk3568_common.h | 12 ++++++------
+ include/configs/rk3588_common.h | 12 ++++++------
+ 2 files changed, 12 insertions(+), 12 deletions(-)
 
-> CI test checks that generated dtb has to be cleaned up.
-> Use the same clean procedure as Linux top level Makefile has.
->=20
-> Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+diff --git a/include/configs/rk3568_common.h b/include/configs/rk3568_common.h
+index 1b7d3437b1..48f93083de 100644
+--- a/include/configs/rk3568_common.h
++++ b/include/configs/rk3568_common.h
+@@ -20,12 +20,12 @@
+ 	"script_offset_f=0xffe000\0"	\
+ 	"script_size_f=0x2000\0"	\
+ 	"pxefile_addr_r=0x00e00000\0"	\
+-	"fdt_addr_r=0x0a100000\0"	\
+-	"fdtoverlay_addr_r=0x02000000\0"	\
+-	"kernel_addr_r=0x02080000\0"	\
+-	"ramdisk_addr_r=0x0a200000\0"	\
+-	"kernel_comp_addr_r=0x08000000\0"	\
+-	"kernel_comp_size=0x2000000\0"
++	"kernel_addr_r=0x02000000\0"	\
++	"kernel_comp_addr_r=0x0a000000\0"	\
++	"fdt_addr_r=0x12000000\0"	\
++	"fdtoverlay_addr_r=0x12100000\0"	\
++	"ramdisk_addr_r=0x12180000\0"	\
++	"kernel_comp_size=0x8000000\0"
+ 
+ #define CFG_EXTRA_ENV_SETTINGS		\
+ 	ENV_MEM_LAYOUT_SETTINGS			\
+diff --git a/include/configs/rk3588_common.h b/include/configs/rk3588_common.h
+index 46389d087d..70430612ef 100644
+--- a/include/configs/rk3588_common.h
++++ b/include/configs/rk3588_common.h
+@@ -19,12 +19,12 @@
+ 	"script_offset_f=0xffe000\0"	\
+ 	"script_size_f=0x2000\0"	\
+ 	"pxefile_addr_r=0x00e00000\0"	\
+-	"fdt_addr_r=0x0a100000\0"	\
+-	"fdtoverlay_addr_r=0x02000000\0"	\
+-	"kernel_addr_r=0x02080000\0"	\
+-	"ramdisk_addr_r=0x0a200000\0"	\
+-	"kernel_comp_addr_r=0x08000000\0"	\
+-	"kernel_comp_size=0x2000000\0"
++	"kernel_addr_r=0x02000000\0"	\
++	"kernel_comp_addr_r=0x0a000000\0"	\
++	"fdt_addr_r=0x12000000\0"	\
++	"fdtoverlay_addr_r=0x12100000\0"	\
++	"ramdisk_addr_r=0x12180000\0"	\
++	"kernel_comp_size=0x8000000\0"
+ 
+ #define CFG_EXTRA_ENV_SETTINGS \
+ 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
+-- 
+2.39.3 (Apple Git-145)
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---6eALlFQRsBPz9qOX
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWK+zYACgkQFHw5/5Y0
-tyw7PQv7B5VnsfNaOvf725BRbyRDPCAglsK5d4DoV/dUeYZUb2q1OIz1W9nEq+FP
-UFnkmWxjvkOs8KNRm9QXvM0et3iPCRrY3vaYow2EtnFSPKv9TD29IeSXAahzTVFs
-1JsNBvQiAdwXiYmevNiLISVJt8BE89Ux8s4vquoyOjAVe8XykXx6bSo5z0tpTKiF
-iDEh0dVW6o/bprHHQvGiuiIYF78QoOiAl2tI+n1bNGlhdGMa+P2EIa3h5YUFo8KH
-9V/4DNpRwtIqBeS14mOKoAiV9PvTaHEO/07C3AUsGDvGYdAJ3Km+zwarL4K9EK9Z
-7VmX8P84MLnfs80Bq2CR/nq0rho9zDbffXjTbsmhlmbcMUx5DdoDvJoH/WIBP9C+
-SyyMdwc8pW0FYMcyDBATQRMbjd+H5w21mQky8cJ8CJXJ9p1LbkxUqzSnpWnsS4zL
-MD0C7dKAINerJcL+tVDiPKV+CV15LzJddKq2xH8R6PYAl4PXFZ3F3bb+GZZ225wE
-de/UQUz9
-=QwoR
------END PGP SIGNATURE-----
-
---6eALlFQRsBPz9qOX--
