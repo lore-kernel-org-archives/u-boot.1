@@ -4,78 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC8E9C46CD3
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 08:50:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3FD3C46CD3
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 08:56:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B939087692;
-	Tue, 26 Dec 2023 09:50:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EAEB387692;
+	Tue, 26 Dec 2023 09:56:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Xy58aN3O";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="bFJ3iLRN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 965EA87725; Tue, 26 Dec 2023 09:50:38 +0100 (CET)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 42A1787725; Tue, 26 Dec 2023 09:56:16 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4601887480
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 09:50:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5914786D2E
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 09:56:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-33621d443a7so4362110f8f.3
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 00:50:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703580635; x=1704185435; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XGP/S7Vn6twYpz0F87DzjncWxmpc1NMofpfvYwGxjpE=;
- b=Xy58aN3OfEJtcJGnyjnFLQCXUi7zWVxBk3IifwvAhkUc0E7M/yQ20voWGfA33sJfm8
- lpXbZv8QeMVqhYtdp1xhAPPI7VO1r0csv9Aju+HGAj5+A68OIJOdNk4UuZiLhuj5kAG0
- eeY+11T5DB4ExkIVycqSFDGLztrsKpBiRwLk2a8ygeMGkPZJv07QM4vyPoh3SVACgNFz
- 9q2jvNWTTbz9cLVo0t4pqlX6MXSmUkMh7SSjeEzBjGOOUruumkhv5On3r9C3N+nlXgjZ
- zHNfUfr7nNRV2R55aWzbmXIEpHG1U4uREpxFIWWt0sNhKKz5ATpcsCT0qlBu/3ai0Pj9
- h8pA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703580635; x=1704185435;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=XGP/S7Vn6twYpz0F87DzjncWxmpc1NMofpfvYwGxjpE=;
- b=ZrRIG59c/3/vdtqDOOuBclwbhkSe/eo6DWy3aB0L6ug0jJrLHfr/XP1yzlwn7EOfCD
- ux/2bHKE8wJHf32w93GC+JgBa0laoAdLRNkGvQg5DUg/VAU+700O1n8rfRuc4zN8JbnS
- BrootD0z5Tpb5d7tm8az5bRqsSkMEbJeEScRQscZvubyzGlmjFTeAyEzCbsGwfK6+Myw
- zULPiKh4R232/XsOyNGQCHPILLSGAzOIfVos//mTExA7FWLDI9bll0EA4ESaUIAfXkBS
- a+bskY2iOxvTXByi7Ae9E0iYua8viVm0zzcsrplf2nyY1ShAcO9UNcDpleKPEck+s4oq
- Nysw==
-X-Gm-Message-State: AOJu0YxNceHOSYGMsnd3llRnEV/OsomSpN3H+FS9OuQQ++LXAWeK8PU6
- CIgRcqBTstU0N0olzO03Zmdzvpir0RE0n/7syZ754g4ABRE2vg==
-X-Google-Smtp-Source: AGHT+IEAwjeDhRvoD0EDakWJCkQpZWrQ0EmS01Q9E9YNqxwZWgAML1yt5bN2H+ePcQmRarBaa7RoprBAXfodsRbqiV4=
-X-Received: by 2002:a05:600c:2283:b0:40d:3b09:31c with SMTP id
- 3-20020a05600c228300b0040d3b09031cmr3638470wmf.30.1703580635660; Tue, 26 Dec
- 2023 00:50:35 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1703580973; x=1704185773; i=xypron.glpk@gmx.de;
+ bh=P1fkn2X86G8T7iT0Lyp5SgqYBbSh4ZamnD8O22zAQxk=;
+ h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
+ b=bFJ3iLRNib7SBWdV405ny1bH46ZwPO4qUc2nFvHZW8394ur0/Z4ZkVLsdklDVSxy
+ +PvLjnShMG/ybZcDDjTr26svH9AiNQHLnjTuM5yrjcN4byTGqXNypWbjZAkYNfN9g
+ bS5jK9ZkLq9Wh9zeNOIaeplTNazXIR14TuHt5aYp/8LWznFH1NEB6xUy7yatPADXn
+ uUAhmmHDHZp1Ji9ORs8X6v+n6XxSZ4VRvinG1BI7aDOQjn6MyVV/T7g541HLO/2FF
+ 0GJuqgGCJ24+CR08yDKhIJ3Q86si2L1Iww7+Lqo61ZikH3atex80O5Mp8EHV06GkT
+ 8ayQBpltsG9zkmVIzw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.152] ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MFKKX-1rTLlM1Rv7-00FjV8; Tue, 26
+ Dec 2023 09:56:13 +0100
+Message-ID: <9f681497-d13c-4ccc-9209-7a8b33e3195c@gmx.de>
+Date: Tue, 26 Dec 2023 09:56:04 +0100
 MIME-Version: 1.0
-References: <20231225153929.8284-1-maxim.uvarov@linaro.org>
- <20231225153929.8284-3-maxim.uvarov@linaro.org>
- <a45cbd9a-cfa2-7728-3c5f-1a21ebbcb068@gmail.com>
- <CAD8XO3Z5Ff5u=PS5H6jaxRcdnZGh28+m6wC48A3P_H=bd5GBKQ@mail.gmail.com>
- <6ec77ae5-a05e-a18d-0c65-99f141d3e6cb@gmail.com>
-In-Reply-To: <6ec77ae5-a05e-a18d-0c65-99f141d3e6cb@gmail.com>
-From: Maxim Uvarov <maxim.uvarov@linaro.org>
-Date: Tue, 26 Dec 2023 14:50:23 +0600
-Message-ID: <CAD8XO3YRh=TV+u45nNrJJLxn4u54Fb53T7arxFO7zW730XyzoA@mail.gmail.com>
-Subject: Re: [PATHv2 2/9] net: sandbox: fix NULL pointer derefences
-To: Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de, simon.k.r.goldschmidt@gmail.com, 
- tien.fong.chee@intel.com, sjg@chromium.org, joe.hershberger@ni.com, 
- rfried.dev@gmail.com, bharat.gooty@broadcom.com, 
- rayagonda.kokatanur@broadcom.com, trini@konsulko.com
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: ACPI: usage of sandbox virtual addresses
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:WtL0bsVcfxdlbXkYz/9WC/sDvacq/ys1Rxzl0NA0F6qKNrSdfdl
+ XQFApA152RnC5XyOP+i3u+P7uYL2KC1I3NYIWn5LzkvPMBuOTHBdjYYUuzmu9FSOi5hMr3u
+ wQv1XV/9dQvQmj6aXjJeoLZMedGqWMPQqYYV2qayIiJ70N/CveWHk00fbe+mB/PaYPY+wnB
+ W/hfYNTJ7oEMC5wzlMKKA==
+UI-OutboundReport: notjunk:1;M01:P0:ZDQrMFK5ElA=;QN2LhaJfDJgzRumwHCAoj8c7SYL
+ efu+jl8uKdM0R4wCj9jN6/gMgxE1WXcZUBb07+N/Y93bS4Rlru4Sgnb4k/6Dc7h1MFYoklApR
+ DjAmfLTChpQS76YYHD0OmX9aPA3Tczx5WjyOaO3TBlLeKbtOCFeTibm9f89ZGAaBGCdudS9R+
+ 3LbmTXiZUMgpYxCn+dwQTwpKjy7uDv3Qv1bX9qTW3JfKxFlvmlQkXlKs0tdXpLBS5+7FHVGib
+ RiURb8hIHsNtdh4tLwl18E1Uq0jqe38Gcps+PUz+WcHg8HIveGpczFUc73ZAy56Y+gCrFDDtm
+ P4sHt5NcWvdmCAK6iFd1Gl8J886jjIcacTHEgArSh380er26qmpDvf3RPWMkqSWogBclSapEy
+ odvsZl+PeOuXx2uFfYu1GZLuChwgsUCrixQ61rMhARb+PAacJaNKOGiWOqKkY33oNq0hKfMor
+ 7slhARbGCCoWTuCovJABLjACTKLsJzRX/vNCcP36hJh+SyJ4277hTaE4c+VA5HPKe1UR+eG+n
+ jCXGHt2D2OwgRlmWYSzEwiWutNWTue5yAjk1RScwjLvn9FrK/p9YB3lMeeXFEE4VX8aLfT7U+
+ imT9U6TEuCXAlTqDoIgx0KJzoOY6O/xDKMzI5Rqq4sRUepIGKRJ4eCJHO6Hh2Ageqk8c4fz7j
+ C3zFxOqdr5/OLzuxOhJnZQmZl6cMslKryXjXxY+iy+BhdKuwtKXoiUkOrJZpdQO5H4+yNmYOB
+ ikNRkV6/s6LrsSts7EOzskFaTkQ3WVOODsVVytrlqS/la01Oazj9SF5rN3tahJRdkwCTn+fGj
+ WiJAwgDDwvSJyTEyAdYGFHMkWFGtQwB8dOQ8lmmuZDFP526AWvu/wl1SXNifkB2E6W8K9t5tO
+ Vd++rCzNwn3/4x4e2XoyuL2gsDkogpxKT2pnlrpxqLLwQQzofps+xHWym3R0YVhS0ctzU3u0j
+ bbszyQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,59 +86,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 26 Dec 2023 at 12:25, Sean Anderson <seanga2@gmail.com> wrote:
+Hello Simon,
 
-> On 12/26/23 01:18, Maxim Uvarov wrote:
-> >
-> >
-> > On Tue, 26 Dec 2023 at 04:43, Sean Anderson <seanga2@gmail.com <mailto:
-> seanga2@gmail.com>> wrote:
-> >
-> >     On 12/25/23 10:39, Maxim Uvarov wrote:
-> >      > Add additional checks for NULL pointers.
-> >      >
-> >      > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org <mailto:
-> maxim.uvarov@linaro.org>>
-> >      > ---
-> >      >   drivers/net/sandbox.c | 3 +++
-> >      >   1 file changed, 3 insertions(+)
-> >      >
-> >      > diff --git a/drivers/net/sandbox.c b/drivers/net/sandbox.c
-> >      > index 13022addb6..d91935e032 100644
-> >      > --- a/drivers/net/sandbox.c
-> >      > +++ b/drivers/net/sandbox.c
-> >      > @@ -65,6 +65,9 @@ int sandbox_eth_arp_req_to_reply(struct udevice
-> *dev, void *packet,
-> >      >       struct ethernet_hdr *eth_recv;
-> >      >       struct arp_hdr *arp_recv;
-> >      >
-> >      > +     if (!priv)
-> >      > +             return -EAGAIN;
-> >      > +
-> >
-> >     When can priv be NULL?
-> >
-> >     --Sean
-> >
-> >
-> > Function
-> > struct eth_sandbox_priv *priv = dev_get_priv(dev)
-> > can return NULL. If you ask why it doesn't return NULL without lwip
-> patches and can return NULL with lwip patch while there is no clear code
-> dependency..
-> > Then I can not say right now and need additional investigation. But
-> anyway the return code of dev_dev_priv() has to be checked I think.
->
-> If you set priv_auto to a nonzero value, dev_get_priv will always return
-> non-null
-> and does not need to be checked. So this is a NACK from me until you can
-> justify this.
->
-> --Sean
->
+currently we use sandbox virtual addresses in all ACPI tables. This
+means that an application started by the U-Boot sandbox consuming these
+tables will crash due to accessing invalid addresses.
 
-Ok. I will remove this patch from v3 patchset and send it separately with a
-more detailed description.
+Shouldn't the ACPI tables be migrated to use valid pointers?
 
-BR,
-Maxim.
+Best regards
+
+Heinrich
