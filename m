@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E44D4C46CD3
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 10:06:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A87DFC46CD3
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 10:09:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CDBD8791F;
-	Tue, 26 Dec 2023 11:06:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 16CFC87911;
+	Tue, 26 Dec 2023 11:09:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RUWeedcf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KeJqbGj0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C61B8791D; Tue, 26 Dec 2023 11:06:51 +0100 (CET)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id 17A4E8783A; Tue, 26 Dec 2023 11:09:44 +0100 (CET)
+Received: from mail-vs1-xe36.google.com (mail-vs1-xe36.google.com
+ [IPv6:2607:f8b0:4864:20::e36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 898028791F
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 11:06:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D24A8786A
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 11:09:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3bbbd4d2b4aso110718b6e.0
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 02:06:46 -0800 (PST)
+Received: by mail-vs1-xe36.google.com with SMTP id
+ ada2fe7eead31-466df7eb9cdso543021137.2
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 02:09:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703585205; x=1704190005; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703585380; x=1704190180; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SwYqrVss4rx/3369ml/cHpUW6C+437xQ56QfarLX3/w=;
- b=RUWeedcf7cdUhCuLkxuYosmwb42MgCINuLnoZgyV9XndvwcuuUEu3ewN5oRDcjYYU8
- DT7dBrhI3t3drD0KSt4LIfOErTdVFNS+aMPs+/XmfaCGV4pDCT2HK4FdxhtFF1QNfynu
- 9cyZReU8p57AjD3y/Jzz0jucRGWfAaVLkJLM0A3Gqf/P+9Y0fD48slMLxWXOll/MDZQ5
- /1lGy0DaK7OeqfF+nBFVWq0P6GQMwIyRm5IebIc8nUnjWJ2DFLRpTb2b+vNkj2hBZjF7
- lZJl8DrgZxo1hxhYWDsvZHfJcwCaL/siagTAHWgm24I+nl8igXB1S+YTEJgS4ZbY9EAS
- 7A1Q==
+ bh=pM1adoCyOq4ljhY5ce4+5eZzlBSxkIQeb/I/Pvs9lF0=;
+ b=KeJqbGj0iHd4CDzpLH4G64jlEnCyjk9eNLmzGPKdhtV4adBWUsZ4P5FPCAFU/ILp+6
+ IWujTlIRfOlnoey72Z87sjM00JxGXlv7O1OyH0nahxYoetEWZb3S3V8+fXsYafYOgxMn
+ neRXaZ7EihNZCayAzsavA3o6TLWMI7oK3Vw0GKlQSW3GpSbz7gY1YhCbnNo1x/5XB1nx
+ VUxDVXJJwwoCh6IskBI8i91GZH6jB0BN9Qeu4+Hz68gHCb61WAcyDeWWSuZPc1ZQVOPx
+ 1z7ciyI8ZDwzHJi6yyGy5l/tzZgWcXGzQUwAT1+j7x051QyC5nPV1CRATnQqd3xgD4Cp
+ ktsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703585205; x=1704190005;
+ d=1e100.net; s=20230601; t=1703585380; x=1704190180;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SwYqrVss4rx/3369ml/cHpUW6C+437xQ56QfarLX3/w=;
- b=uT5TW+PfY3CDz6+oY8d0XZd36+vWG+p6VgO2w3Qpp4CKEdtAf0jeMssEup9K9S0BJP
- hKawvW/k+St/qfen7fR+l+P784pL2BWTAleJMcGDnox6mBd0AE85ZpsdL4YxytnN3DmW
- 0j05dDf5xWk/3/pk+QkoXwRnr9TUzJdZI9jdnxbM0j7aLK2laj3C4HIf/sv9qBF4ftuW
- mkPkCscRM8GSUhsweGAyYNdTXpJX2ZLQavDbRnNc9IAplfe65VVKH8Ne+K0pBJwY7RCv
- 0/izTiNPfshtN159OxZAicQcwJLMpEY4FlF4Evd02Beos0eyx3lxIK3xgVDhzA1+Mx8W
- gyBg==
-X-Gm-Message-State: AOJu0YxEsPgGQf4+a9kBP/f1zOj/oT8B4LV2fOkexaaST+szL0kNHkuy
- 2GCMCXxOyRm2gldgtzlvGo7sj7Qg57fbZeIlclMDsSg274IWVA==
-X-Google-Smtp-Source: AGHT+IGOCf6iyH9qDtCqhWkpbB2M9jH/KxGduWqYgcJv571IVFUd8od9vAceH2rervnApikYLj5wPxqv0jTgaXgIWVo=
-X-Received: by 2002:a9d:66c1:0:b0:6db:9eda:f989 with SMTP id
- t1-20020a9d66c1000000b006db9edaf989mr3484283otm.25.1703585205084; Tue, 26 Dec
- 2023 02:06:45 -0800 (PST)
+ bh=pM1adoCyOq4ljhY5ce4+5eZzlBSxkIQeb/I/Pvs9lF0=;
+ b=RVmWLAaoOU5rF//Uc/RQAU3V3af4tV67JXLjLKB7UsORBq5jwd6N8YbOQXxE17cLa5
+ d3bjOkJOyDcbyLKHEpbfYqgl+Ahm/Ukm8+2Le6n05fnw6LEidZzqPCZLEkxCam44n63q
+ CmHcFfRMWHpzmQiXO9byVKeHIVxg38fs5tiwhy79a7zdn1tpL7DwQPHPmqA1icS8cdyN
+ VEKxSD6dU0alQeaD+RGPu6dM/4QOk4QbBcKS7xYgMYnRGApdpjd78R3Sjx7JpyHwCcUL
+ xtdJfN1MkX0numWAbO05+n6u0mtIdVDHxEmPlKq+J7hpQ4cc3YdgV3axEvQTtnxABPIR
+ sMPw==
+X-Gm-Message-State: AOJu0Ywt3fQsjLQmbMajYCG1lau6Der0GJUhf9OOu7kb6x4+qzzw2PwK
+ HL4gP36qTXExUOkjmOXurcq/4Gr10utA60FH9BhQOXEZG6+sWQ==
+X-Google-Smtp-Source: AGHT+IE/UYcm/QEO3M+rUR7DbFRQP2Qoi23eeNOF23tiXaXRyBHalE9fOGAL8BmPaY8VAqlnwM0c++lDyC92ev4yvKw=
+X-Received: by 2002:a05:6102:209b:b0:467:5c0:132c with SMTP id
+ h27-20020a056102209b00b0046705c0132cmr410326vsr.5.1703585380236; Tue, 26 Dec
+ 2023 02:09:40 -0800 (PST)
 MIME-Version: 1.0
-References: <20231214135103.1606605-1-sumit.garg@linaro.org>
- <20231221150303.GI2513409@bill-the-cat>
- <CAFLszThCytoBrNEp8BqaNqe9FnzhAznC9dMHHP4g=FcZQH3zng@mail.gmail.com>
- <CAFA6WYOd858K3oMxYn3XqS=UhwjMggj3ugfHgk1Ux19DCxRjVg@mail.gmail.com>
- <CAFLszTh2hahzuKpwxs+cPBCVfA7TaXbNNjhEmz6-CC9rqHnf5Q@mail.gmail.com>
-In-Reply-To: <CAFLszTh2hahzuKpwxs+cPBCVfA7TaXbNNjhEmz6-CC9rqHnf5Q@mail.gmail.com>
+References: <20231222061208.3009970-1-sumit.garg@linaro.org>
+ <20231222061208.3009970-4-sumit.garg@linaro.org>
+ <CAFLszTiPbM-fofbNaTO3vtTWNTOee_pO7-_obKxmP=oChD-8oA@mail.gmail.com>
+In-Reply-To: <CAFLszTiPbM-fofbNaTO3vtTWNTOee_pO7-_obKxmP=oChD-8oA@mail.gmail.com>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 26 Dec 2023 15:36:33 +0530
-Message-ID: <CAFA6WYMGMADJc3RSbm+XFGGLLHhEhKRjzgovy5wFBQfjV9=Nkw@mail.gmail.com>
-Subject: Re: [PATCH 0/8] An effort to bring DT bindings compliance within
- U-boot
+Date: Tue, 26 Dec 2023 15:39:29 +0530
+Message-ID: <CAFA6WYO=2Ba7FsXh7=Eg_J77w=sVmxOC-_=XNQH4JaquQoBPSQ@mail.gmail.com>
+Subject: Re: [PATCH v2 3/8] scripts/Makefile.lib: Statically define
+ *-u-boot.dtsi files location
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Maxim Uvarov <maxim.uvarov@linaro.org>,
- u-boot@lists.denx.de, 
- u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de, robh+dt@kernel.org, 
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
+ u-boot-custodians@lists.denx.de, trini@konsulko.com, robh+dt@kernel.org, 
  krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
  neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
  daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de, 
- michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk, 
- peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de
+ ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
+ xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
+ rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
+ rfried.dev@gmail.com, marex@denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -99,100 +97,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
 On Tue, 26 Dec 2023 at 15:17, Simon Glass <sjg@chromium.org> wrote:
 >
 > Hi Sumit,
 >
-> On Fri, Dec 22, 2023 at 5:34=E2=80=AFAM Sumit Garg <sumit.garg@linaro.org=
+> On Fri, Dec 22, 2023 at 6:12=E2=80=AFAM Sumit Garg <sumit.garg@linaro.org=
 > wrote:
 > >
-> > On Thu, 21 Dec 2023 at 20:48, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi,
-> > >
-> > > On Thu, Dec 21, 2023 at 3:03=E2=80=AFPM Tom Rini <trini@konsulko.com>=
- wrote:
-> > > >
-> > > > On Thu, Dec 14, 2023 at 07:20:55PM +0530, Sumit Garg wrote:
-> > > >
-> > > > > Prerquisite
-> > > > > -----------
-> > > > >
-> > > > > This patch series requires devicetree-rebasing git repo to be add=
-ed as a
-> > > > > subtree to the main U-boot repo via:
-> > > > >
-> > > > > $ git subtree add --prefix devicetree-rebasing \
-> > > > >       git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/de=
-vicetree-rebasing.git \
-> > > > >       v6.6-dts --squash
-> > > >
-> > > > So, I've played with subtree a little and I think this is the right=
- way
-> > > > forward in these cases. If anyone wants to take a look at how this =
-works
-> > > > in practice, take a look at:
-> > > > https://source.denx.de/u-boot/u-boot/-/commits/WIP/u-boot-with-devi=
-cetree-rebasing-since-v6.1/?ref_type=3Dheads
-> > > > In that tree I started with the v6.1-dts tag, sync'd all the config=
-s (to
-> > > > have an example of a normal commit) and then did a merge of each ta=
-g
-> > > > until v6.6-dts, so provide some history. And git log looks like wha=
-t I
-> > > > want to see, the squash commit has clear references to what we are
-> > > > getting and I make a merge commit that says what I did. If you pull=
- the
-> > > > tree and checkout the branch, all the code is right there already,
-> > > > nothing further to do. Same with tarball releases. The only thing I
-> > > > don't like is the size growth there, but we'll reclaim some of it w=
-hen
-> > > > we delete our obsolete bindings, and then obsolete dts files.
-> > >
-> > > I spent a bit of time with subtree as well, as part of reviewing this
-> > > series, using the instructions Sumit provided. It seems OK to me. We
-> > > have to accept that it adds code and there will be changes/churn, but
-> > > it is not too different to accepting patches on those files within
-> > > U-Boot. We will bring in files which U-Boot doesn't use, but U-Boot
-> > > does support a good proportion of the boards supported by Linux, so I
-> > > don't see that as a big cost.
-> > >
-> > > From my experimentation, subtrees seem to have no impact on buildman,
-> > > which is great. Am I missing anything?
+> > Allow u-boot to build DTB from a different directory tree such that
+> > *-u-boot.dtsi files can be included from a common location. Currently
+> > that location is arch/$(ARCH)/dts/, so statically define that common
+> > location.
 > >
-> > No it shouldn't cause any regression on existing tools/CI/build
-> > systems. It is just a version controlled way of importing third party
-> > source code as a tarball.
+> > This is needed for platform owners to start building DTB files from
+> > devicetree-rebasing directory but still being able to include
+> > *-u-boot.dtsi files.
 > >
-> > >
-> > > I still worry about the board-level 'switch' between U-Boot DT and
-> > > upstream ones. I believe that should be at the SoC level instead.
-> > >
-> >
-> > Probably I wasn't clear enough in my earlier replies but this series
-> > motivates for a SoC level switch only. Patch #7 is essentially a
-> > switch for Amlogic meson-gxbb SoC and its derived boards.
 >
-> OK good...but that's not quite what I mean. You have a fragment like
-> this in multiple defconfig files:
+> This is a v2 patch but I don't see a change log?
+
+I usually prefer to keep change logs in the cover letter [1].
+
+[1] https://lore.kernel.org/all/20231222061208.3009970-1-sumit.garg@linaro.=
+org/
+
 >
-> +CONFIG_OF_UPSTREAM=3Dy
-> +CONFIG_DEFAULT_DEVICE_TREE=3D"amlogic/meson-gxbb-odroidc2"
+> > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> > ---
+> >  scripts/Makefile.lib | 25 ++++++++++++++-----------
+> >  1 file changed, 14 insertions(+), 11 deletions(-)
 >
-> instead, OF_UPSTREAM should be enabled via 'imply' for the SoC, in the
-> Kconfig.
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+>
 
-Okay I got your point. It makes sense to me. I will do that for v3.
-
-> We should not have to specify the filename like this. It is
-> laborious and error-prone.
-
-The only differentiation in naming here is just silicon vendor prefix
-addition (amlogic/ in this case). The reason for this being that I
-just want to mirror the whole silicon vendor directory from DT
-rebasing rather than mirroring individual DT files. Given this do you
-have any better alternatives?
-
+Thanks.
 -Sumit
+
+> Regards,
+> Simon
