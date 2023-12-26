@@ -4,86 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FDA2C46CD4
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 10:22:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3013C46CD3
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 10:41:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91095878EA;
-	Tue, 26 Dec 2023 11:22:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id B3BA387786;
+	Tue, 26 Dec 2023 11:41:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="BiM5Fgdi";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="I644c4B8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C97A878EE; Tue, 26 Dec 2023 11:22:35 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id D55C7878FF; Tue, 26 Dec 2023 11:41:45 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 263E687895
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 11:22:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E392586EF3
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 11:41:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 53EAC3F45F
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:22:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1703586152;
- bh=mlZKSKMo8nWL/6dRrSu5YC6odZv/G4B4PjQpv5UyQ0o=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=BiM5FgdiIax2BFS/t3BFM2cZanNastVjml1z34zYtmBuO6ETdQmkUjzmsVt+kGnfN
- OJv3upWL5VD7nAPEggiehULzp9lwX8oDPad2Mti7qAy6k8YnRgI3ZJW+smT8YTAYOl
- NzYXnG+Fg3ODHJReAG5fCaqCY6nwssP1fUD9zYnBBkIuXK7qSoqWavTxp3IHMW35vz
- eQQhMCW/jbX/63jx+AtVlHBf+XxHrfFVOm0Do/fFpRiFKOHQJXVBTIoleRNt9uDDvS
- FeHmvEYh4C7CTJ85mWrW82VfaeJ7kfhrEnjED4o0qpb7ibIAh9LYSiFWKZXZVtI2EV
- 18F4xJe+YL2wQ==
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-40d42061a35so39550725e9.0
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 02:22:32 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703586152; x=1704190952;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mlZKSKMo8nWL/6dRrSu5YC6odZv/G4B4PjQpv5UyQ0o=;
- b=BR/Kh/LBQGR0gjaPPcdc95gZwXbs3WlUQJtUkIoPZAzm06iScGq4DJwXh0UOhGjLZl
- VGeojckTy3AryhP5NZ+gyACbQjrEmVJp5iMLDWtMCu7AsHlOQK3eo7oOiqUk4A959zpF
- yPZgm5AcI7iJmCedhbvEdTGvM/ErQmdnU2aaL6kl6+UXDxQxG4lmohhHnCPftjpkRJLq
- sIOtuypeGZlWsem/E0hUKElyYMxwY82HjEKeKyKNfR7K/kSKoo+1+QBVGOKyUDcQhuBw
- y4aVVw9DWtTa/W3cvYG3jJ10p/Ke7P/Jg4Xk2mKB5PWE7ZNpRDhTHBl2EHg5xulmtthp
- YdrQ==
-X-Gm-Message-State: AOJu0YyuNGaqQMDkvsfCwPrIMllf/9U/BPPnWc+fmhMj/cJe5NR7mbjc
- hnALe9lPdqVyiwtIxZKzgAs2ahKmpWe7ZP4kdtrv60mULleeLcxkH3sihj2RgnYh4/HtcMUfFGV
- 4KMZ2d4sfhoHhPyCkmfM0K9leZsTJJdQoZ/ieJg==
-X-Received: by 2002:a05:600c:4d97:b0:40c:2c6d:c833 with SMTP id
- v23-20020a05600c4d9700b0040c2c6dc833mr4183537wmp.137.1703586151655; 
- Tue, 26 Dec 2023 02:22:31 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHW3ntInE/dIcWA0ns/ptal8Rbo6N94X63NpzY8/gYBoN8iznVN/X/wvh/UD0q/0TVsRqMEcg==
-X-Received: by 2002:a05:600c:4d97:b0:40c:2c6d:c833 with SMTP id
- v23-20020a05600c4d9700b0040c2c6dc833mr4183533wmp.137.1703586151325; 
- Tue, 26 Dec 2023 02:22:31 -0800 (PST)
-Received: from x13s.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de.
- [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
- s21-20020a05600c45d500b0040c3953cda5sm28075698wmo.45.2023.12.26.02.22.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Dec 2023 02:22:30 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Christian Gmeiner <christian.gmeiner@gmail.com>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/1] lib: smbios: verify_checksum() is duplicate
-Date: Tue, 26 Dec 2023 11:22:28 +0100
-Message-ID: <20231226102228.66338-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1703587303; x=1704192103; i=xypron.glpk@gmx.de;
+ bh=9CW/SbD5+XkRj70W+yDamOHQgar4q5+BSgmaDY08JME=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=I644c4B80/a9LtzEJ2YUX+gSkj9v1vbixKS3gbiNdltZTtTj7JVL5QOD8E21NwMI
+ ute4bPOvo+16M0xxkUVmCD2MjE9HxH6/XdHlu1jjwrlwbCyveoyrUOt0BNd3Auuo7
+ a//NmlMqviJ8vgZExAK0RslRTU+mb/w/mOGpmB4slaXi0w+nGmmlzPjxStltRogHK
+ d/gnKcqj5FaZkz/3GraeAfqrb8a3sCpak7l50RAeVxBsGQMZ34nyqdqI0xDq+zLph
+ Z03gjS0vZVBX/nkV193rsC27IMHRGvCtqrLjgDeRCcQyZooyzJ4YsOcmF7sEnjs1s
+ S2GI1TkgxFbHTGA0RA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.152] ([178.202.40.247]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MtwZ4-1qzIRW3sXE-00uGso; Tue, 26
+ Dec 2023 11:41:43 +0100
+Message-ID: <a22aa340-d355-45bc-a920-6b95f38a6364@gmx.de>
+Date: Tue, 26 Dec 2023 11:41:37 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/6] smbios: Refactor 32-bit code into an else statement
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20231015024511.3995580-1-sjg@chromium.org>
+ <20231015024511.3995580-2-sjg@chromium.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20231015024511.3995580-2-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:HljurtiubsqdGe4xKjtN6aPWoKdJ3WhUgsG/OJYCkEWUhcKO7oV
+ aHQGKbjmvfYHenI7Ax06Wluq8OGpmJ0eDTBbxpKS76aUafB+dMa132hFd4mR191F84H9Xds
+ 7K0YN3XkgRvc1ox45LWDDjdQjC2ANHNwu5rbPVY4+NSHhXCppiOzq3sMpCQmP97TMYUlaj9
+ teJlJJCn6V+70V+MsK0+g==
+UI-OutboundReport: notjunk:1;M01:P0:0DUWGKPdsvY=;TSv8iMNwwDmj305YjcpfhbLsPuB
+ xD71d0qD1pLpfUNjdimsJ1rjjHxisaN7lazqKHqm+Bs1pjHmDCEYpP1tzQPiiXjehPk3WCIZy
+ GFS5oXNFMLJHJKLmSX9vh3Ki56uvTHDxP09mTTvYb2gb2wWNOYci3L0UuOjx/AuhhAJqM9RjE
+ J+DvloaPwi53VhCrlKbFpA5lRz3OWLVj5LrmU9SQh0R80oM5HciybzYXZy1hXn5IFWQbzq1br
+ LY3T4GrJlXMxBmBASy0AYZeXbfYPzVdvR6dfnFVLUFvTLP3q5Wqy6nOPcfqdkx8eYCkmJGZXf
+ u6W3GAqPTDZlXe/runHGHr2lza8B6CjDyQauVAJMDlthupic/3GmHcY+nsxJhQ9StwXodWtDg
+ h5rBGo3n+Rax4GO7TwIBfzmWW3U9PtXOnWAXvm8ZBAlWYlGbiyBWig0lNsC+8MbAuYoNTdMh1
+ F2ygMXbQEyVxrBhNznsXtZ0OBnRABFHCaedmU0CFn22m5vNM4XuDXyKGjhLUexzhz7bZSYWmX
+ 67WTUZENUpCEe5WCC2UXZdSghUtVEjfw0L9JX+LmwPm3s8y5GueOUuFneemrUG6hUUNQjDfxO
+ PUKsM4caNMzqPDVP4DVP0uejga8r3gtj6mOMYEfjAK7+W0TaJvN5UHCx32V5iJwR51I5Wd8D+
+ uv2C+GTwEyDPg6iYtER3dWMnmt21n/W6IHt4kp9Rd0rVNzJnywBNbnF/5sRKyVKse64LVkJTI
+ Fb44wBxvWTUDHDtN9iLZCAuprK6u6T/ZesL5UMYoNfQd/vbxHV7xdrz4m0nnbnv8x60YkdE8G
+ Ez3rP7aUOmFAKvjlrRECnQ0jNbIrc0OhrMma1av6gljYs5JFZNxAxdMDafeaIRWyIr57GNEQY
+ D884u2fZ85qviT5VJ7Svwah+LPXAj6I3xhmUnMDjCPhqH8oFfT4xjJlorj3wTLBrOxwSCbQcj
+ qnLMtyYTH/K2VkU6Ji3JBJqwaYQ=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,57 +90,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The function verify_checksum() duplicates what table_compute_checksum()
-does. Replace it. table_compute_checksum() is always compiled.
+On 10/15/23 04:45, Simon Glass wrote:
+> In preparation for adding support for SMBIOS3 move this code into an
+> else statement. There is no functional change.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-Fixes: 415eab0655a8 ("smbios: add parsing API")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
-v2:
-	mention that table_compute_checksum() is always compiled
----
- lib/smbios-parser.c | 18 ++----------------
- 1 file changed, 2 insertions(+), 16 deletions(-)
-
-diff --git a/lib/smbios-parser.c b/lib/smbios-parser.c
-index b578c30840..110670343d 100644
---- a/lib/smbios-parser.c
-+++ b/lib/smbios-parser.c
-@@ -5,23 +5,9 @@
- 
- #define LOG_CATEGORY	LOGC_BOOT
- 
-+#include <tables_csum.h>
- #include <smbios.h>
- 
--static inline int verify_checksum(const struct smbios_entry *e)
--{
--	/*
--	 * Checksums for SMBIOS tables are calculated to have a value, so that
--	 * the sum over all bytes yields zero (using unsigned 8 bit arithmetic).
--	 */
--	u8 *byte = (u8 *)e;
--	u8 sum = 0;
--
--	for (int i = 0; i < e->length; i++)
--		sum += byte[i];
--
--	return sum;
--}
--
- const struct smbios_entry *smbios_entry(u64 address, u32 size)
- {
- 	const struct smbios_entry *entry = (struct smbios_entry *)(uintptr_t)address;
-@@ -32,7 +18,7 @@ const struct smbios_entry *smbios_entry(u64 address, u32 size)
- 	if (memcmp(entry->anchor, "_SM_", 4))
- 		return NULL;
- 
--	if (verify_checksum(entry))
-+	if (table_compute_checksum(entry, entry->length))
- 		return NULL;
- 
- 	return entry;
--- 
-2.43.0
-
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
