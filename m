@@ -4,70 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35A99C46CD4
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:55:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07B08C46CD4
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:55:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 845868798C;
-	Tue, 26 Dec 2023 10:51:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id E1C07878B8;
+	Tue, 26 Dec 2023 10:53:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nFofUdBM";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="TZwrYxts";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 116DF87872; Tue, 26 Dec 2023 10:51:06 +0100 (CET)
-Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
- [IPv6:2607:f8b0:4864:20::42e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A57F08786A; Tue, 26 Dec 2023 10:53:54 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0B5987872
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:51:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CD0B87835
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:53:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-6d9b3a967dbso1224197b3a.1
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:51:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703584261; x=1704189061; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JTOzg2frOsbtyz4y6O+jgfL505OT9ZKdQiymupuIWmU=;
- b=nFofUdBM7+B8x/ieDsIMZ7rOK/k5RlGCsXd0Zh9iEW+MIt3rhh6PuAqslcEb4BAkVy
- Ocr8K8GR/ilTeLWGJlexPWxQANxcHGpMeMnjNXlISD9FeTAG4QceQkhs7R3D4+iXA9LB
- 8pCWK1KdPy9VFmWZmNee8lwZfsq1ztQVVdl6s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703584261; x=1704189061;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=JTOzg2frOsbtyz4y6O+jgfL505OT9ZKdQiymupuIWmU=;
- b=C/ORbBDVIEctEda5H/UAFRIazEa/CS5OBJr90lJWLOb+l4ltMT5JCIo+8nwvrdBDgb
- NXcwQ/DS/CTy19DpSTbYwTpMCFLSrDe/mr1oXYDObcA3Cyk3m5Q8hCgc54MoJzDUdy5w
- pyWDmu9RQEjsw2IWWlY96KFtB+w5xuBHErkxSt07+igKUwGns212v73PTBDUUGXv9Hm9
- B7k/RmnOYYSiHqfzHYHOL+DcVurvuLTOExVAwrXb45qbs9tUwpStZWz6jNYQ9NiBypiM
- 5TISVEe55nKgnfTKiGxkjQLJghoXh3N38+Y6aBnBp1Fp0KdpVE0ZK7yB3nAiyTx7WAYG
- 1LpQ==
-X-Gm-Message-State: AOJu0YxVQYPlkhpZzP/aBgnS0pHCgg8vh/d93N7OV6xGO9xVephb1yHi
- 9e2LrgzVgTsgIM17TSAVrWq8P5jVpXlpyrEsrNafk9yJywF7+mllya94MjLcUA==
-X-Google-Smtp-Source: AGHT+IF3weyZ7ydaFvBWXvHEQlQ6q/Y5BKe/JPZD7y3yiuEvrwVcj5JmKv/PS3Ula9XnzNaRy4mN9Au0WiAil5bh380=
-X-Received: by 2002:a05:6a20:3c89:b0:187:c3db:8999 with SMTP id
- b9-20020a056a203c8900b00187c3db8999mr7691001pzj.45.1703584261454; Tue, 26 Dec
- 2023 01:51:01 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1703584430; x=1704189230; i=xypron.glpk@gmx.de;
+ bh=i4ZkGCM7ZRzPNgDCbJHes5GMfG9Sf3f9E5zjs9pBLMs=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=TZwrYxtsj9dpO7MVX3Q6O4ZW/ueQFua7ljZH2DOD1dHFmZy2JqPXisofI03DGZY7
+ dfCPY4BJ5s1OfvZF6iC2jI87Ec/KiP1BbeGGYblhn/ZLx7BYNqWWVG70HNjk5tnEs
+ 54+qK+nayOWr9BS9uN5/UafyLgNJ4BW0HiHqDQAAyEk1w7JxhlR3284I9Hwp24fuj
+ gu7k+4TMKd7TJ08VADj1oSzolLqbmsLPQFpC6c1nwt+MAj2OkUJ2bBUa30hGJAXtu
+ GjyUDtJeILN1+1be8vOVtez6/YVbV1E9dnUtZGpoP/Vvc9hG7DLLEHfIKJh08p/4s
+ ZYGngGcpd0SKW+kMEg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.152] ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M42jQ-1rI48E354C-0000jW; Tue, 26
+ Dec 2023 10:53:50 +0100
+Message-ID: <a838f7a0-d966-426c-b4bf-3d712b871de5@gmx.de>
+Date: Tue, 26 Dec 2023 10:53:50 +0100
 MIME-Version: 1.0
-References: <20231223004429.247301-1-xypron.glpk@gmx.de>
- <20231223004429.247301-5-xypron.glpk@gmx.de>
-In-Reply-To: <20231223004429.247301-5-xypron.glpk@gmx.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Dec 2023 09:50:48 +0000
-Message-ID: <CAFLszTj1tbJJPDdpf0sGLy9dou_=0py1Xcn40Eu4wNi3L9cfig@mail.gmail.com>
-Subject: Re: [PATCH 4/5] doc: man-page for smbios command
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/5] smbios: type2: contained object handles
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+References: <20231223004429.247301-1-xypron.glpk@gmx.de>
+ <20231223004429.247301-3-xypron.glpk@gmx.de>
+ <CAFLszTh5Vu9g5Z=ty17e1V-f-zLsKXnkP2wYAMYHfLKbCahG3A@mail.gmail.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAFLszTh5Vu9g5Z=ty17e1V-f-zLsKXnkP2wYAMYHfLKbCahG3A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:015JHP1541NVVx/DRAvHYhEE5ExKpmOFSByIr4MxrXbrc1Hm2/u
+ oU2UtgCWLrub5tofoTRDETeZjNJWBp+oM9ONxs2h9tfbxB+s7lSQ8ISorY2WoYKFbjRzGk8
+ HGRyecmSWAvxt3HyR3UCGLwlniCK5z4zyVUP25J8GskMC7pr1s/yobv4H2Z6bSSkYU3os4h
+ ByT6cK5pnr0UNA16F4yEw==
+UI-OutboundReport: notjunk:1;M01:P0:z8sWb5GcGPM=;4MKZNkqChSzNvReqRizO388FGm6
+ IX5jK1BF6uGaTrGrQcTB1BuVPrbU5l2/Ons14+C6NaryBOdbuu4WxW5cNK7ktve1h+J0u+fyo
+ 6ZM158jZV+wwWGPzHcSw+JCdomhCNF9VGSFGqTPrgYEl1JK9fR9xi348DSEGJlHMmcK0xN043
+ 0w7U35SxJ8XbNWtFy4nxqpRAZA5PcTRhaUwUweGs0Jf/fa9ROqGBauIMJ8j7kCU+MC9ueP2EY
+ YZOISMSIuTXXi5hnxqOUzR1CNzoPrAk3liikpt0aXdKmB4ay8aVCM2jgt400cfbCGffpYtbQM
+ kWhqsR4r9U3gGXoLdU/ow0qIkvHyidCqXifeJm08Ux7UP62oL7YMTi9mJebjbnWree/CjWNLr
+ pAsGIgTVjo2NSB03pfLsQKH2WnmRttBMaPgbylKJksxKuAM5M36CpY/BEdAyIp1R8kPZ848Fw
+ RJvnqiu+OT7C4xbkodpUXq2XQavmwkmQfVvH7LRVrvPBW5DxtFq1/+AjFki/org2Mowib2K0B
+ RIHbvyZFAQY2DOxlX9nywzJeb4NlQw8zKZEe587lyPLS7nN274unfThuUokiPtoMf7F+t7yND
+ AottfCnbXdi/1oKoC6b1s8X16yDudi0DWxrbzTzRgZZbWuzj2EgKyQhFUJk7zFPhb+P8GwxUj
+ E7CxAjWZrzF2smDJxXmKiG4TKY7fZUaNhA/uWCuxUwir7SzZwV0vYOORVVRzMsaVsLQclY/RV
+ LvF8aSpZsltNs0pv//CELuAZrej4WC+l2uAgGaCm+xqZ+YFNtP+IL13rOdpa8Qw9Xt5hiYaSj
+ 9JEtcytrTbDe20Z+w5/2JwaEIPFejLVyYg3vEdCTylptfRSVjkrKbQwpGiiAKLlBXmWXp7/lx
+ eVc5mpOhaK0eEOAoyv1LCtTrauawV75T7JiQIX+KV97IcqwUNu8HoM1PsXBqb3/0on/zwfgfj
+ a+NcMQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,138 +91,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Dec 23, 2023 at 12:49=E2=80=AFAM Heinrich Schuchardt <xypron.glpk@g=
-mx.de> wrote:
+On 12/26/23 10:50, Simon Glass wrote:
+> Hi Heinrich,
 >
-> Provide a man-page for the smbios command.
+> On Sat, Dec 23, 2023 at 12:49=E2=80=AFAM Heinrich Schuchardt <xypron.glp=
+k@gmx.de> wrote:
+>>
+>> The type 2 structure must include information about the contained objec=
+ts.
+>> It is fine to set the number of contained object handles to 0.
+>>
+>> Add the missing field.
+>>
+>> Fixes: 721e992a8af5 ("x86: Add SMBIOS table support")
+>> Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>> ---
+>>   include/smbios.h | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/include/smbios.h b/include/smbios.h
+>> index e601283d29..88c19ae062 100644
+>> --- a/include/smbios.h
+>> +++ b/include/smbios.h
+>> @@ -139,6 +139,7 @@ struct __packed smbios_type2 {
+>>          u8 chassis_location;
+>>          u16 chassis_handle;
+>>          u8 board_type;
+>> +       u8 number_contained_objects;
+>>          char eos[SMBIOS_STRUCT_EOS_BYTES];
+>>   };
+>>
+>> --
+>> 2.43.0
 >
-> Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> ---
->  doc/usage/cmd/smbios.rst | 93 ++++++++++++++++++++++++++++++++++++++++
->  doc/usage/index.rst      |  1 +
->  2 files changed, 94 insertions(+)
->  create mode 100644 doc/usage/cmd/smbios.rst
->
+> I thought I already saw this patch elsewhere, but this one is not a v2?
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+I should have marked it as re-sent.
 
-> diff --git a/doc/usage/cmd/smbios.rst b/doc/usage/cmd/smbios.rst
-> new file mode 100644
-> index 0000000000..1ffd706d7d
-> --- /dev/null
-> +++ b/doc/usage/cmd/smbios.rst
-> @@ -0,0 +1,93 @@
-> +.. SPDX-License-Identifier: GPL-2.0-or-later:
-> +
-> +smbios command
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +Synopsis
-> +--------
-> +
-> +::
-> +
-> +        smbios
-> +
-> +Description
-> +-----------
-> +
-> +The smbios command displays information from the SMBIOS tables.
-> +
-> +Examples
-> +--------
-> +
-> +The example below shows an example output of the smbios command.
-> +
-> +::
+Best regards
 
-It doesn't matter, but can't that :: go on the previous line?
-
-> +
-> +    =3D> smbios
-> +    SMBIOS 2.8.0 present.
-> +    8 structures occupying 81 bytes
-> +    Table at 0x6d35018
-> +
-> +    Handle 0x0100, DMI type 1, 27 bytes at 0x6d35018
-> +    System Information
-> +        Manufacturer: QEMU
-> +        Product Name: Standard PC (i440FX + PIIX, 1996)
-> +        Version: pc-i440fx-2.5
-> +        Serial Number:
-> +        UUID 00000000-0000-0000-0000-000000000000
-> +        Wake Up Type:
-> +        Serial Number:
-> +        SKU Number:
-> +
-> +    Handle 0x0300, DMI type 3, 22 bytes at 0x6d35069
-> +    Header and Data:
-> +        00000000: 03 16 00 03 01 01 02 00 00 03 03 03 02 00 00 00
-> +        00000010: 00 00 00 00 00 00
-> +    Strings:
-> +        String 1: QEMU
-> +        String 2: pc-i440fx-2.5
-> +
-> +    Handle 0x0400, DMI type 4, 42 bytes at 0x6d35093
-> +    Header and Data:
-> +        00000000: 04 2a 00 04 01 03 01 02 63 06 00 00 fd ab 81 07
-> +        00000010: 03 00 00 00 d0 07 d0 07 41 01 ff ff ff ff ff ff
-> +        00000020: 00 00 00 01 01 01 02 00 01 00
-> +    Strings:
-> +        String 1: CPU 0
-> +        String 2: QEMU
-> +        String 3: pc-i440fx-2.5
-> +
-> +    Handle 0x1000, DMI type 16, 23 bytes at 0x6d350d7
-> +    Header and Data:
-> +        00000000: 10 17 00 10 01 03 06 00 00 02 00 fe ff 01 00 00
-> +        00000010: 00 00 00 00 00 00 00
-> +
-> +    Handle 0x1100, DMI type 17, 40 bytes at 0x6d350f0
-> +    Header and Data:
-> +        00000000: 11 28 00 11 00 10 fe ff ff ff ff ff 80 00 09 00
-> +        00000010: 01 00 07 02 00 00 00 02 00 00 00 00 00 00 00 00
-> +        00000020: 00 00 00 00 00 00 00 00
-> +    Strings:
-> +        String 1: DIMM 0
-> +        String 2: QEMU
-> +
-> +    Handle 0x1300, DMI type 19, 31 bytes at 0x6d35125
-> +    Header and Data:
-> +        00000000: 13 1f 00 13 00 00 00 00 ff ff 01 00 00 10 01 00
-> +        00000010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-> +
-> +    Handle 0x2000, DMI type 32, 11 bytes at 0x6d35146
-> +    Header and Data:
-> +        00000000: 20 0b 00 20 00 00 00 00 00 00 00
-> +
-> +    Handle 0x7f00, DMI type 127, 4 bytes at 0x6d35153
-> +    End Of Table
-> +
-> +Configuration
-> +-------------
-> +
-> +The command is only available if CONFIG_CMD_SMBIOS=3Dy.
-> +
-> +Return value
-> +------------
-> +
-> +The return value $? is 0 (true) on success, 1 (false) otherwise.
-> diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-> index 1a626c03c2..eb2b2311f8 100644
-> --- a/doc/usage/index.rst
-> +++ b/doc/usage/index.rst
-> @@ -102,6 +102,7 @@ Shell commands
->     cmd/size
->     cmd/sleep
->     cmd/sm
-> +   cmd/smbios
->     cmd/sound
->     cmd/source
->     cmd/temperature
-> --
-> 2.43.0
->
-
-Regards,
-Simon
+Heinrich
