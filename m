@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 399D7C46CD3
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 15:48:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A826CC46CD4
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 15:48:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EA9886FCE;
-	Tue, 26 Dec 2023 16:48:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EE10C87855;
+	Tue, 26 Dec 2023 16:48:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yEnTuIur";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VNFAi/7M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA8A18758C; Tue, 26 Dec 2023 16:48:33 +0100 (CET)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id C9F2F878A7; Tue, 26 Dec 2023 16:48:37 +0100 (CET)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A44E086F56
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 16:48:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C235987855
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 16:48:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2ccae380df2so25846811fa.1
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 07:48:31 -0800 (PST)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-50e49a0b5caso4846319e87.0
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 07:48:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703605710; x=1704210510; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=FfcAiyThz87WqR8wR1kjDx0WteqKDikSsA0ZjALyDW4=;
- b=yEnTuIurenGs7cNKd35n1/z9gKbwy8vRpXD+Mrw0z8vY7iej09/flIsmaQr8bo9rr2
- IJqKu/bNBxff6BPITDBGNXKuO4bFxopvucPV9DcIqXx1M8qERQCpCCQBBTID4/b1JG+Q
- Ss1oat7Nn5z3Twayvrm1s7+7eqLWtgjS7frJdvTx+TW4ks/3NsnyMa13/dSrJcvh90dL
- kEBk8qgWjnODZBLZI9+9kaSpwtcE9g1OZPW5yd1SQ8f7fTcFpVJ2iVySDpwqOD1oZyz2
- 6FLTVwsjhux0Pr+r9yQ0LNsrcfeN1bAsLLL/8JAG2D1N1sQjKOhu+r6SuPPaYqV17y50
- n2eA==
+ d=linaro.org; s=google; t=1703605715; x=1704210515; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yEdkUVwCAxd+gHv8cv0J+cC7KraHKhGEvjOUuULM4yg=;
+ b=VNFAi/7MTHI79vAKBH/PyBSUMRIQGcatWeVmjscWqPAoyT3xa4EgAb7quAASGatnoX
+ n2g0ry21riKSY1d4XBaF+baC+1lGUXOVGm5G+OlxY0dJUj6BIfwLeSEEx8mfINx/j2aE
+ OW6CpitnMZdxu/4J7JbHDX47dgK1B6gb4L0QeBRQrInnzObJNfP/pgVnJRfRr/njL1gK
+ E/DTlfT0KXYsk9JeiUo78tcIq3YJALRqAZmEL/5QGSSwdPXdG/UP11SNJ2cVK9hRCi0N
+ W2wA2Z8HFjOcdfKhLQMnKtnFYwzwX8dU1chyxaTwn/sjYjh8EUwh63Ayi+YoLI5YGpQE
+ Mx4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703605710; x=1704210510;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=FfcAiyThz87WqR8wR1kjDx0WteqKDikSsA0ZjALyDW4=;
- b=BXHYPK7ih/landPUfN2PaOzOg5r489hcuQDzvuS9mMPwMLufx/jHg6K+cpAFwnfaro
- eMeBs+cY0iBHB/ktQnCpE3EBRbS18DNZTuVQNUzflGJMiwDLoX3nZDpKdgHtn0ednub5
- 3zmoToECHaTM/ozE20DkKwzNeTRkSXROFnp0rYs0acgwOA6wI4a6DOeutEJXxZ5sTV7q
- sKlQMUf8w62vJMwjPdp0M7IPiYlHrM0GPFKwlqQhBFrBq4DbeknYjdjOYgNO9Syk+BzU
- CoW/rFl2Ax6lG8OsoEZ/SEZCnMau1ZGRByfhS5L0x7dOHoWsQVCfM9pVcORWm4GJnzlJ
- atMg==
-X-Gm-Message-State: AOJu0Yz5zk6bFIpzHaF96JSz691mOF1qT87ool8IMBFxctS2UGlevyex
- PH1K2qMXL9IPuiUXWUeu8ExnyhRUACnNIdDPp9wzl7Z7ygY=
-X-Google-Smtp-Source: AGHT+IEItHdUfN8biRmcc2ZdYZ13pOHrC7qPQqbfQd80qhwCME6OXzaD/lTPLvPpC5GkJIzqNDc0VA==
-X-Received: by 2002:ac2:5d67:0:b0:50e:4d3c:c4dd with SMTP id
- h7-20020ac25d67000000b0050e4d3cc4ddmr2083496lft.105.1703605710208; 
- Tue, 26 Dec 2023 07:48:30 -0800 (PST)
+ d=1e100.net; s=20230601; t=1703605715; x=1704210515;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yEdkUVwCAxd+gHv8cv0J+cC7KraHKhGEvjOUuULM4yg=;
+ b=UxZIFguafOX2nGtL7LqWuku/2daCUUZfqKL9DsSafSwuFX+lX9gAYY5NA7W6qVlkYR
+ NXBbyX8ybYE5A/o9GY8xIKb4fKL15ZsxgrU6u75PuuI/UdG+kctWfEGwVX+04lfPOHHj
+ UU3lA0Rl/Ho9E0a0JcjVsZLDU4OCV61tPVYP5XYmB4bKsdiPNNSNkxuTt1wb44AyrKLK
+ r2++EIR4tk+gsCKw6CL/ECLqfCWADkxIja7oZFWvoLp/qFacNmV4tS5m6NJVPuj25Qyt
+ 4hpCvSxrkge7NAkc3QsectWhQXiMO1xPnGyS/1L+0ZBfFQ7dUC0UhqlHaUQGETZ7H9xG
+ 8mbQ==
+X-Gm-Message-State: AOJu0Yzy5MKlS7IbweB2e6ysCtP6Oeu/keZw2U7D9GzDCeTaD4dDkWXO
+ y3UDeKkxkX+R/G+6ufMyKHHOy1okBgCklEV09pP8qxMgtwo=
+X-Google-Smtp-Source: AGHT+IF2p6FTAJ0y3ez8BiwC/4VeueODUOZ625ZmandBHVywoIq/TdBa+1gL9QupTgnNnvAZ7+w7YA==
+X-Received: by 2002:ac2:5b03:0:b0:50e:6168:c99d with SMTP id
+ v3-20020ac25b03000000b0050e6168c99dmr2752607lfn.27.1703605714931; 
+ Tue, 26 Dec 2023 07:48:34 -0800 (PST)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- d25-20020a0565123d1900b0050e743b0b2csm1089336lfv.34.2023.12.26.07.48.26
+ d25-20020a0565123d1900b0050e743b0b2csm1089336lfv.34.2023.12.26.07.48.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Dec 2023 07:48:29 -0800 (PST)
+ Tue, 26 Dec 2023 07:48:34 -0800 (PST)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
  sjg@chromium.org, joe.hershberger@ni.com, rfried.dev@gmail.com,
  bharat.gooty@broadcom.com, rayagonda.kokatanur@broadcom.com,
  trini@konsulko.com, Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATHv3 0/8] net fixes prior lwip
-Date: Tue, 26 Dec 2023 21:46:11 +0600
-Message-Id: <20231226154619.5071-1-maxim.uvarov@linaro.org>
+Subject: [PATHv3 1/8] test_net: print out net list
+Date: Tue, 26 Dec 2023 21:46:12 +0600
+Message-Id: <20231226154619.5071-2-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20231226154619.5071-1-maxim.uvarov@linaro.org>
+References: <20231226154619.5071-1-maxim.uvarov@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,35 +94,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add small net fixes prior lwip patches.
+Printing net list is useful in CI log files.
 
-v3: - some small review fixes.
-v2: - rebase on the top of master tree with descriptions fixes
-      suggested in review comments.
-Maxim Uvarov (8):
-  test_net: print out net list
-  net/smc911x: fix return from smc911x_send
-  sandbox: eth-raw-os: successful return code is 0
-  driver/net/rtl8139: remove debug print
-  mach-socfpga: do not overlap defines with lwip
-  bcm_ns3: use device specific naming for variables
-  omap3: use device specific naming for mem_init
-  Makefile: add dtbs to clean
+Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+ test/py/tests/test_net.py | 2 ++
+ 1 file changed, 2 insertions(+)
 
- Makefile                                           | 2 ++
- arch/arm/include/asm/arch-omap3/mem.h              | 2 +-
- arch/arm/mach-omap2/omap3/board.c                  | 2 +-
- arch/arm/mach-omap2/omap3/emif4.c                  | 4 ++--
- arch/arm/mach-omap2/omap3/sdrc.c                   | 6 +++---
- arch/arm/mach-socfpga/include/mach/handoff_soc64.h | 6 ------
- arch/arm/mach-socfpga/wrap_handoff_soc64.c         | 9 +++++++++
- arch/sandbox/cpu/eth-raw-os.c                      | 2 +-
- drivers/net/rtl8139.c                              | 2 +-
- drivers/net/smc911x.c                              | 2 +-
- include/configs/bcm_ns3.h                          | 6 +++---
- test/py/tests/test_net.py                          | 2 ++
- 12 files changed, 26 insertions(+), 19 deletions(-)
-
+diff --git a/test/py/tests/test_net.py b/test/py/tests/test_net.py
+index b2241ae6a4..cd5b791a6a 100644
+--- a/test/py/tests/test_net.py
++++ b/test/py/tests/test_net.py
+@@ -96,6 +96,8 @@ def test_net_pre_commands(u_boot_console):
+     if init_pci:
+         u_boot_console.run_command('pci enum')
+ 
++    u_boot_console.run_command('net list')
++
+ @pytest.mark.buildconfigspec('cmd_dhcp')
+ def test_net_dhcp(u_boot_console):
+     """Test the dhcp command.
 -- 
 2.30.2
 
