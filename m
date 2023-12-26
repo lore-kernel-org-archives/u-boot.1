@@ -4,47 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BA15C46CD3
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 07:43:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EEF5C46CD4
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 07:44:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E02FE87646;
-	Tue, 26 Dec 2023 08:43:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A776686FCE;
+	Tue, 26 Dec 2023 08:44:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A21987032; Tue, 26 Dec 2023 08:43:36 +0100 (CET)
+ id 3051D87032; Tue, 26 Dec 2023 08:44:31 +0100 (CET)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C748F87032
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 08:43:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DA506807A7
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 08:44:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peterlin@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 3BQ7hUwO019569
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 15:43:30 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 3BQ7iLc7019731
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 15:44:21 +0800 (+08)
  (envelope-from peterlin@andestech.com)
 Received: from APC323 (10.0.12.98) by ATCPCS16.andestech.com (10.0.1.222) with
- Microsoft SMTP Server id 14.3.498.0; Tue, 26 Dec 2023 15:43:29 +0800
-Date: Tue, 26 Dec 2023 15:43:29 +0800
+ Microsoft SMTP Server id 14.3.498.0; Tue, 26 Dec 2023 15:44:18 +0800
+Date: Tue, 26 Dec 2023 15:44:18 +0800
 From: Yu-Chien Peter Lin <peterlin@andestech.com>
 To: Leo Yu-Chi Liang <ycliang@andestech.com>
 CC: <u-boot@lists.denx.de>, <randolph@andestech.com>
-Subject: Re: [PATCH v2 4/6] andes: cpu: Enable cache and TLB ECC support
-Message-ID: <ZYqEIfq_AQO3Mc99@APC323>
-References: <20231226061736.482416-1-ycliang@andestech.com>
- <20231226061736.482416-4-ycliang@andestech.com>
+Subject: Re: [PATCH v2 5/6] andes: ae350: Save cpu name to env
+Message-ID: <ZYqEUnDfTRkwNWfv@APC323>
+References: <20231226065427.1130286-1-ycliang@andestech.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20231226061736.482416-4-ycliang@andestech.com>
+In-Reply-To: <20231226065427.1130286-1-ycliang@andestech.com>
 User-Agent: Mutt/2.2.12 (2023-09-09)
 X-Originating-IP: [10.0.12.98]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 3BQ7hUwO019569
+X-MAIL: Atcsqr.andestech.com 3BQ7iLc7019731
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,52 +60,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Dec 26, 2023 at 02:17:35PM +0800, Leo Yu-Chi Liang wrote:
-> Andes CPU supports cache and TLB ECC.
-> Enable them by default.
+On Tue, Dec 26, 2023 at 02:54:27PM +0800, Leo Yu-Chi Liang wrote:
+> Detect CPU name through marchid and then save it to env.
 > 
 > Signed-off-by: Leo Yu-Chi Liang <ycliang@andestech.com>
 
 Reviewed-by: Yu Chien Peter Lin <peterlin@andestech.com>
 
 > ---
->  arch/riscv/cpu/andesv5/cpu.c            | 3 ++-
->  arch/riscv/include/asm/arch-andes/csr.h | 3 +++
->  2 files changed, 5 insertions(+), 1 deletion(-)
+>  board/AndesTech/ae350/ae350.c | 23 +++++++++++++++++++++++
+>  1 file changed, 23 insertions(+)
 > 
-> diff --git a/arch/riscv/cpu/andesv5/cpu.c b/arch/riscv/cpu/andesv5/cpu.c
-> index a23b7948d9..d25ecba0e8 100644
-> --- a/arch/riscv/cpu/andesv5/cpu.c
-> +++ b/arch/riscv/cpu/andesv5/cpu.c
-> @@ -35,7 +35,8 @@ void harts_early_init(void)
+> diff --git a/board/AndesTech/ae350/ae350.c b/board/AndesTech/ae350/ae350.c
+> index bef9e3149e..4e53fee5d2 100644
+> --- a/board/AndesTech/ae350/ae350.c
+> +++ b/board/AndesTech/ae350/ae350.c
+> @@ -13,7 +13,9 @@
+>  #if defined(CONFIG_FTMAC100) && !defined(CONFIG_DM_ETH)
+>  #include <netdev.h>
+>  #endif
+> +#include <asm/csr.h>
+>  #include <asm/global_data.h>
+> +#include <asm/sbi.h>
+>  #include <linux/io.h>
+>  #include <faraday/ftsmc020.h>
+>  #include <fdtdec.h>
+> @@ -27,6 +29,27 @@ DECLARE_GLOBAL_DATA_PTR;
+>  /*
+>   * Miscellaneous platform dependent initializations
+>   */
+> +#if IS_ENABLED(CONFIG_MISC_INIT_R)
+> +int misc_init_r(void)
+> +{
+> +    long csr_marchid = 0;
+> +    const long mask_64 = 0x8000;
+> +    const long mask_cpu = 0xff;
+> +    char cpu_name[10] = {};
+> +
+> +#if CONFIG_IS_ENABLED(RISCV_SMODE)
+> +    sbi_get_marchid(&csr_marchid);
+> +#elif CONFIG_IS_ENABLED(RISCV_MMODE)
+> +    csr_marchid = csr_read(CSR_MARCHID);
+> +#endif
+> +    if (mask_64 & csr_marchid)
+> +        snprintf(cpu_name, sizeof(cpu_name), "ax%lx", (mask_cpu & csr_marchid));
+> +    else
+> +        snprintf(cpu_name, sizeof(cpu_name), "a%lx", (mask_cpu & csr_marchid));
+> +
+> +    return env_set("cpu", cpu_name);
+> +}
+> +#endif
 >  
->  		mcache_ctl_val |= (MCACHE_CTL_CCTL_SUEN | \
->  				MCACHE_CTL_IC_PREFETCH_EN | MCACHE_CTL_DC_PREFETCH_EN | \
-> -				MCACHE_CTL_DC_WAROUND_EN | MCACHE_CTL_L2C_WAROUND_EN);
-> +				MCACHE_CTL_DC_WAROUND_EN | MCACHE_CTL_L2C_WAROUND_EN | \
-> +				MCACHE_CTL_IC_ECCEN | MCACHE_CTL_DC_ECCEN | MCACHE_CTL_TLB_ECCEN);
->  
->  		if (!CONFIG_IS_ENABLED(SYS_ICACHE_OFF))
->  			mcache_ctl_val |= MCACHE_CTL_IC_EN;
-> diff --git a/arch/riscv/include/asm/arch-andes/csr.h b/arch/riscv/include/asm/arch-andes/csr.h
-> index 3f3f05b348..028fd01c2f 100644
-> --- a/arch/riscv/include/asm/arch-andes/csr.h
-> +++ b/arch/riscv/include/asm/arch-andes/csr.h
-> @@ -18,11 +18,14 @@
->  
->  #define MCACHE_CTL_IC_EN		BIT(0)
->  #define MCACHE_CTL_DC_EN		BIT(1)
-> +#define MCACHE_CTL_IC_ECCEN		BIT(3)
-> +#define MCACHE_CTL_DC_ECCEN		BIT(5)
->  #define MCACHE_CTL_CCTL_SUEN		BIT(8)
->  #define MCACHE_CTL_IC_PREFETCH_EN	BIT(9)
->  #define MCACHE_CTL_DC_PREFETCH_EN	BIT(10)
->  #define MCACHE_CTL_DC_WAROUND_EN	BIT(13)
->  #define MCACHE_CTL_L2C_WAROUND_EN	BIT(15)
-> +#define MCACHE_CTL_TLB_ECCEN		BIT(18)
->  #define MCACHE_CTL_DC_COHEN		BIT(19)
->  #define MCACHE_CTL_DC_COHSTA		BIT(20)
->  
+>  #if CONFIG_IS_ENABLED(LOAD_FIT) || CONFIG_IS_ENABLED(LOAD_FIT_FULL)
+>  #define ANDES_SPL_FDT_ADDR	(CONFIG_TEXT_BASE - 0x100000)
 > -- 
 > 2.34.1
 > 
