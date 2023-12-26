@@ -4,77 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DBA1C46CD3
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 16:43:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2155C46CD3
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 18:10:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9740987786;
-	Tue, 26 Dec 2023 17:43:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C8AF58781A;
+	Tue, 26 Dec 2023 19:10:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="efEBGmzq";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="n1Xn2YnR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1E8E87809; Tue, 26 Dec 2023 17:43:54 +0100 (CET)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 43A4687846; Tue, 26 Dec 2023 19:10:05 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 870618772A
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 17:43:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A5FAA87786
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 19:10:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sigmaris@gmail.com
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-68009cb4669so13402656d6.1
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 08:43:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703609031; x=1704213831; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Ba4pyOaX09uGSocPIMFMwpa7Brm9vfB1iRXDGmFqJbg=;
- b=efEBGmzqvTjDCRsNOnSv3aS9SA4YQw2ZDFbYVfkuu1wbIHnqcDVM54C4WyJvSaPGgI
- /l5GuTT3wpq/EmHa2L+PmzYNo8IdFl0n/RFm1otFhkwzxOPc2KryWmFim5gq9D1v9jI9
- GWqMK8DymVMDpxecc1Tw+2mX+A5Kxm7wTUFawwBFDO4ziVR1fKWGlX0sx1hsbPZl962T
- XiQtEDXg+R70ZjfYQLDJ3c8zUdzfM9fKNDP8z0ZxjONo5IIfsupqaTzFtt0t1lOIc11S
- 9jWf+nY+GUIlIn3/1QAlc2DYe8vk8ouUBp905NH0RGqoNKAbIzOBkHUXdnV2q41onecf
- XixQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703609031; x=1704213831;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Ba4pyOaX09uGSocPIMFMwpa7Brm9vfB1iRXDGmFqJbg=;
- b=R+jOV8k7Qm67yXfTrNn16qEzjEsPANoOPn72C+G1aG/NYTqmoDk/cQcgqRa2LzRuY2
- cAW5dP65Gn8xWg0Jva/s7IJXv6LYq2jLln48ywC9gcDK+gN4sp+tvL0Q0x1MTz9DJFC5
- tlKMHe6NmM1WKXS7XHgtgSYX+zJuw9a/TDoI908WDEdOXEwjB4ZvE+q/c7iAzw0c81lj
- MgOHMHZLZycv6k//e544zTZcgvcK4f/z+8cjT/mpL2g7i6W2CB2FyQuvAmfu6NSrVk2F
- 03RxylLP6ItjPnU9RpsJHd+dgNnggrfnFeR3AAlQaKQ9wghwowi2IlXbcq2u9jPyt1ZS
- X4gQ==
-X-Gm-Message-State: AOJu0YzAqqQ/BTsxgZy2RpXD0vU++JqVnXrISbec2bVXoaw8ySBaJnlX
- brvh8AVRXibiDa5eQhooN1hHoz+X5fMvug==
-X-Google-Smtp-Source: AGHT+IElIqW9b7uijH6D1C6arjYL4PIFE1QH+QiusJubieo2cRgQgAYQhWB73FZzx9sMK0Ht8MoKug==
-X-Received: by 2002:a05:6214:e8e:b0:67a:a5c3:8110 with SMTP id
- hf14-20020a0562140e8e00b0067aa5c38110mr13522947qvb.3.1703609030844; 
- Tue, 26 Dec 2023 08:43:50 -0800 (PST)
-Received: from localhost.localdomain ([31.111.4.202])
- by smtp.gmail.com with ESMTPSA id
- e14-20020a0cf74e000000b0067f0071e3a9sm4705812qvo.29.2023.12.26.08.43.48
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 26 Dec 2023 08:43:50 -0800 (PST)
-From: Hugh Cole-Baker <sigmaris@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- John Clark <inindev@gmail.com>, Tom Rini <trini@konsulko.com>,
- Hugh Cole-Baker <sigmaris@gmail.com>
-Subject: [PATCH v2] rockchip: rk35xx: expand space for decompressed kernel
-Date: Tue, 26 Dec 2023 16:43:30 +0000
-Message-Id: <20231226164330.63725-1-sigmaris@gmail.com>
-X-Mailer: git-send-email 2.39.3 (Apple Git-145)
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1703614201;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=0Uk1e4ooVezfxTYj1Lk2SE18hrTVlanxp7mEffgT794=;
+ b=n1Xn2YnRAtoi+cL6I793tc+zCi8oxvRebgoYBzKi4UTZ+jEtg0nN+SQBWVEby3nHb0nkbs
+ Uys3bQagyl9u6V9GF4nGawONbIDGTV3h5mCCscELIjC2Ld0BG/sBdbwVj8+dbIh1nbGSZI
+ Jn+YOsJq9GnTzWPvIZEmKqM4qCOWqDV+WVlhlmtoHsuGEN01wXit9XJTyj5c2rRxsrl+0+
+ xQCJRDKYoDNaWaaKQ6adjbo8WJJwQEysRFdJ3rnYIem+t+JQ3ZmUeM+vqvMYUB/XA7PDSX
+ dNICMc97y2mxU6K3V9Vf0oUBgSucCQTIeKHanBqSi34XSiLH0IsxGyUgdufsaQ==
+Date: Tue, 26 Dec 2023 19:09:59 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: Daniel Golle <daniel@makrotopia.org>, =?UTF-8?Q?Cs=C3=B3k=C3=A1s_Benc?=
+ =?UTF-8?Q?e?= <Csokas.Bence@prolan.hu>, Sean Anderson <seanga2@gmail.com>,
+ u-boot@lists.denx.de, Mark Kettenis <mark.kettenis@xs4all.nl>
+Subject: Re: Passing boot logs to Linux?
+In-Reply-To: <CAFLszThKisHAPM_oS3RE6J4d5LZGxQ-=PGpbCS3iuTsiKEjVdQ@mail.gmail.com>
+References: <6ae238be-3c5f-5ef6-9e18-282be9ae24c2@gmail.com>
+ <16e633f9d4b1c426aaca510157479d65@manjaro.org>
+ <51121aee-faca-4196-8532-719fb6ec9bdc@prolan.hu>
+ <2c108e1ff92db2b74f5ccccd770872a7@manjaro.org>
+ <5e0e71a5-f3c8-413e-96a3-a0b6edee928f@prolan.hu>
+ <3900f4b15852d0af65635b3a794d34af@manjaro.org>
+ <f22f86ec-987f-4404-8722-82270f1e8da8@prolan.hu>
+ <d1350e2c5ff1da1cf10c92b1b49dec6b@manjaro.org>
+ <5fd64984-4715-4880-ba27-ef78094da6cb@prolan.hu>
+ <e37be8c4cfc8ed28aca43e35f752fc8b@manjaro.org>
+ <ZYOMY4Bs2KDyLmka@makrotopia.org>
+ <6b09b7423796689e86cf853809a8e471@manjaro.org>
+ <e5dfc1d7ec245897bf59ef1f14beb9cb@manjaro.org>
+ <4df006cb773186561a13ae37f1b88947@manjaro.org>
+ <CAFLszThKisHAPM_oS3RE6J4d5LZGxQ-=PGpbCS3iuTsiKEjVdQ@mail.gmail.com>
+Message-ID: <84a710c832d02f980c817d549894db7d@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
 Content-Transfer-Encoding: 8bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,70 +84,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-An uncompressed 6.7.0-rc1 Linux kernel Image built with the arm64
-defconfig is about 40MB. This does not fit in to the space between
-kernel_comp_addr_r and fdt_addr_r, so when uncompressing an Image.gz
-to this size, the FDT will be overwritten. Rearrange addresses to have
-128MiB for the kernel and its decompression buffer, then devicetree,
-overlay and ramdisk at the end.
+Hello,
 
-Signed-off-by: Hugh Cole-Baker <sigmaris@gmail.com>
----
-Changes from v1:
-Reorder things to have to have 128MiB for kernel and decompression space,
-then devicetree, overlays and ramdisk.
-Update kernel_comp_size to 128MiB.
+On 2023-12-26 10:46, Simon Glass wrote:
+> On Thu, Dec 21, 2023 at 2:23 AM Dragan Simic <dsimic@manjaro.org> 
+> wrote:
+>> On 2023-12-21 02:44, Dragan Simic wrote:
+>> > On 2023-12-21 02:37, Dragan Simic wrote:
+>> >> On 2023-12-21 02:03, Daniel Golle wrote:
+>> >>> On Thu, Dec 21, 2023 at 12:55:20AM +0100, Dragan Simic wrote:
+>> >>>> On 2023-12-21 00:27, Csókás Bence wrote:
+>> >>>> > Not every system has eMMC/uSD, and as you said, these arguments don't
+>> >>>> > hold for a 4 MB SPI NAND, for example, one you might find in an OpenWrt
+>> >>>> > router for example. Whereas RAM is quite cheap nowadays.
+>> >>>>
+>> >>>> I see, but I also wonder how many such OpenWrt routers are still
+>> >>>> used these
+>> >>>> days, and, even more importantly, how many of them are regularly
+>> >>>> updated and
+>> >>>> can be expected to actually use this new feature?
+>> >>>
+>> >>> Avoid flash writes is a very important matter, even on systems with
+>> >>> 128 MiB of SPI-NAND flash which is by far the most common setup you
+>> >>> find on off-the-shelf plastic routers and access points nowadays.
+>> >>
+>> >> I agree, writing something to the SPI chips all the time, no matter
+>> >> how small the writes are, is a big no-no, which I already clearly
+>> >> expressed in one of my earlier posts.
+>> >>
+>> >>> Especially also as those devices often come without a local console,
+>> >>> having U-Boot's output prepended to dmesg on boot would be a very big
+>> >>> win.
+>> >>
+>> >> I was also thinking about that, but I'm not sure it would be accepted
+>> >> to the Linux kernel.  Maybe we can try getting that accepted later.
+>> 
+>> Maybe, but just _maybe,_ it could be possible to add a new 
+>> command-line
+>> option to dmesg(1) that would display the last recorded console 
+>> output,
+>> fetched from the pstore.  That _might_ get accepted to util-linux, 
+>> while
+>> being perfectly fine from the usability standpoint.
+>> 
+>> I'm also willing to work on that, and I already contributed a few
+>> dmesg(1) patches to util-linux.
+>> 
+>> >>>> Please, don't get me wrong, I still support having both options
+>> >>>> available,
+>> >>>> but I'm also wondering about the target demographic.
+>> >>>>
+>> >>>> > > > Plus, I don't want the console subsystem to depend on any file/disk
+>> >>>> > > > operations/drivers.
+>> >>>> > >
+>> >>>> > > Well, the console would still work as usual even if logging to disk
+>> >>>> > > would fail for any reason, which is similar to the serial console
+>> >>>> > > still
+>> >>>> > > working if the graphical console fails.  Moreover, if the disk fails,
+>> >>>> > > the system isn't be able to boot, so any RAM-based console logs
+>> >>>> > > would be
+>> >>>> > > lost in that case.  All this makes the RAM-based logging no more
+>> >>>> > > resilient to disk failures.
+>> >>>> >
+>> >>>> > Correction: if disk *reads* fail, as well as writes, then the system
+>> >>>> > will not boot. However, typical failure of Flash media is that it
+>> >>>> > becomes read-only.
+>> >>>>
+>> >>>> That's a good point, but having a read-only root filesystem usually
+>> >>>> also
+>> >>>> means having a non-operational system that can only have its stored
+>> >>>> data
+>> >>>> salvaged.  Unless the system is specifically crafted to survive such
+>> >>>> scenarios, of course.
+>> >>>
+>> >>> ... which holds true for any decent embedded OS, which at least
+>> >>> allows
+>> >>> limited remote access and some kind of recovery even in this
+>> >>> situation.
+>> >>
+>> >> Perhaps.  I'm more into running general-purpose Linux distributions on
+>> >> single-board computers and derived embedded devices, which are on the
+>> >> "thick" end of the embedded device spectrum, so to speak.
+>> >>
+>> >>>> > > I still think that using disk-based pstore is a better option.  Just
+>> >>>> > > as
+>> >>>> > > you don't want to wear out your flash disks with 30-40 KB of data, I
+>> >>>> > > also don't want to waste 30-40 KB of RAM.
+>> >>>> >
+>> >>>> > As I said, you could just unload the log after you're done processing
+>> >>>> > it. 40 KB RAM is less, than what `sshd` uses, for instance (860k on my
+>> >>>> > laptop, but it can probably be less, maybe even 10x less, so 80-90k?),
+>> >>>> > so you could, in your init, process the in-RAM log, then unload it, then
+>> >>>> > start your other services, thereby reclaiming that RAM.
+>> >>>>
+>> >>>> Using pstore should have that unloading already covered, and the
+>> >>>> already
+>> >>>> existing systemd service is there to perform the archiving to the
+>> >>>> primary
+>> >>>> filesystem, if desired so.  It would all need to be tested in
+>> >>>> detail, of
+>> >>>> course.
+>> >>>
+>> >>> pstore/ramoops uses a statically assigned reserved memory region, so
+>> >>> in
+>> >>> the moment you want to use that feature you loose that amount of RAM
+>> >>> (a
+>> >>> few kB, so it doesn't really matter on modern systems).
+>> >>> As in: there is *no* dynamic allocation.
+>> >>>
+>> >>> Imho using pstore/ramoops (which is a more or less Linux-specific
+>> >>> debugging feature, meant to store one or more timestamped logs of
+>> >>> crashes) might not be the most suitable choice. I understand the
+>> >>> advantages of using existing infrastructure, but on the other hand
+>> >>> we don't need most of the complexity of pstore for the task.
+>> >>
+>> >> Hmm, let me research all that a bit more in the next couple of days,
+>> >> please, and I'll come back with a detailed insight.
+>> >>
+>> >>> What I'd like to see is having a couple of log lines from U-Boot
+>> >>> prepended to Linux' dmesg buffer, and for that we anyway will have to
+>> >>> come up with a way to hand over that buffer. Another reserved-memory
+>> >>> region would be one way, embedding the buffer as a blob into the
+>> >>> /chosen/ section of the device tree would be another way.
+>> >>
+>> >> As I already wrote above, it would be rather neat, but I'm afraid it
+>> >> wouldn't be accepted upstream.
+>> >
+>> > Sorry, I forgot this...
+>> >
+>> > As I already explained in one of my earlier posts, not all devices and
+>> > applications would benefit from having only "in-flight" console data
+>> > available, i.e. made available through a reserved region of the RAM.
+>> > Some devices actually need to have the recorded console outputs stored
+>> > on their eMMC chips or microSD cards, for post-mortem analysis of the
+>> > boot issues.
+>> >
+>> > That's why we actually need both options available, and that's also
+>> > why pstore should fit well, even if it may seem as an overkill.  I
+>> > hope you agree;  however, I'll do more research, as already promised.
+> 
+> I did send this a while back, in case it is useful:
+> 
+> https://www.spinics.net/lists/devicetree/msg573692.html
 
- include/configs/rk3568_common.h | 12 ++++++------
- include/configs/rk3588_common.h | 12 ++++++------
- 2 files changed, 12 insertions(+), 12 deletions(-)
+This looks quite informative, thank you.  I'll make sure to read the 
+entire thread carefully.
 
-diff --git a/include/configs/rk3568_common.h b/include/configs/rk3568_common.h
-index 1b7d3437b1..48f93083de 100644
---- a/include/configs/rk3568_common.h
-+++ b/include/configs/rk3568_common.h
-@@ -20,12 +20,12 @@
- 	"script_offset_f=0xffe000\0"	\
- 	"script_size_f=0x2000\0"	\
- 	"pxefile_addr_r=0x00e00000\0"	\
--	"fdt_addr_r=0x0a100000\0"	\
--	"fdtoverlay_addr_r=0x02000000\0"	\
--	"kernel_addr_r=0x02080000\0"	\
--	"ramdisk_addr_r=0x0a200000\0"	\
--	"kernel_comp_addr_r=0x08000000\0"	\
--	"kernel_comp_size=0x2000000\0"
-+	"kernel_addr_r=0x02000000\0"	\
-+	"kernel_comp_addr_r=0x0a000000\0"	\
-+	"fdt_addr_r=0x12000000\0"	\
-+	"fdtoverlay_addr_r=0x12100000\0"	\
-+	"ramdisk_addr_r=0x12180000\0"	\
-+	"kernel_comp_size=0x8000000\0"
- 
- #define CFG_EXTRA_ENV_SETTINGS		\
- 	ENV_MEM_LAYOUT_SETTINGS			\
-diff --git a/include/configs/rk3588_common.h b/include/configs/rk3588_common.h
-index 46389d087d..70430612ef 100644
---- a/include/configs/rk3588_common.h
-+++ b/include/configs/rk3588_common.h
-@@ -19,12 +19,12 @@
- 	"script_offset_f=0xffe000\0"	\
- 	"script_size_f=0x2000\0"	\
- 	"pxefile_addr_r=0x00e00000\0"	\
--	"fdt_addr_r=0x0a100000\0"	\
--	"fdtoverlay_addr_r=0x02000000\0"	\
--	"kernel_addr_r=0x02080000\0"	\
--	"ramdisk_addr_r=0x0a200000\0"	\
--	"kernel_comp_addr_r=0x08000000\0"	\
--	"kernel_comp_size=0x2000000\0"
-+	"kernel_addr_r=0x02000000\0"	\
-+	"kernel_comp_addr_r=0x0a000000\0"	\
-+	"fdt_addr_r=0x12000000\0"	\
-+	"fdtoverlay_addr_r=0x12100000\0"	\
-+	"ramdisk_addr_r=0x12180000\0"	\
-+	"kernel_comp_size=0x8000000\0"
- 
- #define CFG_EXTRA_ENV_SETTINGS \
- 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
--- 
-2.39.3 (Apple Git-145)
-
+Unfortunately, I've contracted some kind of flu that has rendered me 
+incapable of even thinking straight.  I'm hoping to get better in the 
+next few days.
