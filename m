@@ -4,77 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81B2CC46CD3
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 12:28:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47B0CC46CD4
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 13:54:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6415E8788E;
-	Tue, 26 Dec 2023 13:28:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 64670878DE;
+	Tue, 26 Dec 2023 14:54:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="w5Zur0sM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fMnfVgFU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B601587895; Tue, 26 Dec 2023 13:28:19 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id E8AD1878D5; Tue, 26 Dec 2023 14:54:19 +0100 (CET)
+Received: from mail-vk1-xa2d.google.com (mail-vk1-xa2d.google.com
+ [IPv6:2607:f8b0:4864:20::a2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55BCC8788D
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 13:28:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BEB10878B8
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 14:54:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a2340c803c6so494518366b.0
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 04:28:14 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-vk1-xa2d.google.com with SMTP id
+ 71dfb90a1353d-4b7480a80ceso466513e0c.0
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 05:54:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703593690; x=1704198490; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=X5by3ipExLY+mctIrnEPt1xGOEd7n2NgFcI5HdKwCXU=;
- b=w5Zur0sM9w/l1p7PpnfX9nYN69u82kZRqBKEh0oSP6LpU4Jp4EaWdsSu+TCQKeRHz8
- upxXO0NLgn+BQyDQu5cjymbZpoQaDcn75LBr24FQqRVg7Ih6i/2fba/aOCP7mTXJQ6ai
- EDj4P1Z30YqN3eykN44GlhElMhgFTyShwfozpmTDHNj0ok+wHfFvjoQ6cClbsvHIDC7s
- yPe1WGKoDo84TLW2hG68/tfkr3OWCBZVqxqDKAYP1s1kumi9ZEwcNNXbPWdVbvklSuhl
- XAwn7fRG0tmqR1tt181cErPowb7V8WGFmE4kPr9u5rB5j0eU1BV1EmZdUj0yWAJ7Nm8S
- ZTXQ==
+ d=konsulko.com; s=google; t=1703598856; x=1704203656; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Mb6jWKGLCkp2DPwuvf49zOzhN1MJRMp00Kh4+fo6vh8=;
+ b=fMnfVgFURhiXIFlNVPZJ42Qs0G1CbeNihfxtnGioU5jlC83bOc03iw88RY3Wob9PKM
+ ScbdbSopn46Kfu0pGZwLxot2zKSb20ffYer5yE8Ol48KN8On5hhNcL9OBdhtaHxjdvqZ
+ rSPi6G6VUcEnPSmMbhRUnrVvmV+j0kVOUYnpM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703593690; x=1704198490;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=X5by3ipExLY+mctIrnEPt1xGOEd7n2NgFcI5HdKwCXU=;
- b=WIoA11+IOCwSoBrA9TdXx3qK+sWY8gUQltndJne2jF6aMTBI7YD1NJT8Up52zbLuc7
- TEtxGKJDfkgsz/5RpO5B9n6w39ZDutuzDxHOVO6XjlyiY214GjBsRIA8sCfAgLpNld8v
- k5aB7wioJWYJafvb3OXFy5KtAzjGmz1m2un8DG/y9G2FsbZkd+SHpKc6dsWwwkmfnR35
- qUSBIviTod19vYnRYYb9vxiZNeUV6iWpiO4KZBrHx6se66A65wxbCaYgu7QkMD224emz
- AhbtKPGCSfzpWyxzRyPvYnFYkenQftVzCrKts/dAEwLFyRi7fhqJFp84Yx4u2qBI+naq
- AOxg==
-X-Gm-Message-State: AOJu0YzS3FFAgyAp7Jl4fjjd9CiEb9JNsybq/hPzDSfNNkfgNXASA6ap
- x8NCi1H7cPwDZtJq/+l1n+AQoByP6d+GZK0b8beo7zqOttPniA==
-X-Google-Smtp-Source: AGHT+IEeeMmCRli5j56jp966Wbq+def9BNEU/k+SUGyZEwQp3V+piQHS4ONxihUtdHho5jMNrvfrLaBT5u/crxW+iY0=
-X-Received: by 2002:a17:906:f910:b0:a26:965a:e866 with SMTP id
- lc16-20020a170906f91000b00a26965ae866mr3269892ejb.111.1703593690656; Tue, 26
- Dec 2023 04:28:10 -0800 (PST)
-MIME-Version: 1.0
-References: <20231225153929.8284-1-maxim.uvarov@linaro.org>
- <20231225153929.8284-10-maxim.uvarov@linaro.org>
- <CAFLszTjg2MTAfJZ17dQFe+Of0VTJVADemigh_gki8GSR07FEvQ@mail.gmail.com>
-In-Reply-To: <CAFLszTjg2MTAfJZ17dQFe+Of0VTJVADemigh_gki8GSR07FEvQ@mail.gmail.com>
-From: Maxim Uvarov <maxim.uvarov@linaro.org>
-Date: Tue, 26 Dec 2023 18:27:58 +0600
-Message-ID: <CAD8XO3bF3Xr=YTfB7Yjb7RydRkGdGXaV-k0Ep9OsxR=2SJnyvw@mail.gmail.com>
-Subject: Re: [PATHv2 9/9] Makefile: add dtbs to clean
+ d=1e100.net; s=20230601; t=1703598856; x=1704203656;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Mb6jWKGLCkp2DPwuvf49zOzhN1MJRMp00Kh4+fo6vh8=;
+ b=RYO+JKQywWgdL3d6SLNL7ucVaEJhtloqpzXFxAj+6tfKIQFuQHkNXNoDPK0oUjsd5i
+ w+0fbciEuMoKzmz5f8ajrINlv4UCv2HaaTlkZ7sWGN6/9L1oHwnBNf1hksq1DMW/ja58
+ CCFtQd3QKHxFjWVNRdwyXdbfjiXbf11pf8uAc7lFYQZ06W3OleamEykKgEW+yVsVe55G
+ kvFkT3/pcNO1n7DMiEwC4BN3/hL2OqF2yA7EZBWBhK7mPYruzz1iqKnsPMmmqFvmYCI0
+ D2yuLSQZdsr5wPFcfzS8RHhxcwGxF7FRwNRXQbBv79B0zW+5hvmEP/+Xsnn4UvIVgHin
+ JysQ==
+X-Gm-Message-State: AOJu0YxmnUHdQopxPt9cAPY1JXQl/Zem2zjJanhGuVjOw/QQyhX7L6wD
+ UyHov0S7aJNstvVWd0ca5unDzowaMzgqUXoCzNd5Bk34Urw=
+X-Google-Smtp-Source: AGHT+IE2RoF49UcSc9wNYCP0vr6dsYF73L0kpGtDMKIGD/MUjRgbIRKTvL9JzTeb0AeHpt8JBRb22w==
+X-Received: by 2002:a81:53c2:0:b0:5e5:3969:130a with SMTP id
+ h185-20020a8153c2000000b005e53969130amr5935437ywb.4.1703592433163; 
+ Tue, 26 Dec 2023 04:07:13 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ m187-20020a8171c4000000b005d781a2e123sm5378675ywc.109.2023.12.26.04.07.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 26 Dec 2023 04:07:12 -0800 (PST)
+Date: Tue, 26 Dec 2023 07:07:10 -0500
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, simon.k.r.goldschmidt@gmail.com, 
- tien.fong.chee@intel.com, joe.hershberger@ni.com, rfried.dev@gmail.com, 
- bharat.gooty@broadcom.com, rayagonda.kokatanur@broadcom.com, 
- trini@konsulko.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Baruch Siach <baruch@tkos.co.il>, Bin Meng <bmeng.cn@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerry Van Baren <vanbaren@cideas.com>, Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>,
+ Sean Anderson <seanga2@gmail.com>
+Subject: Re: [PATCH v4] fdt: Allow the devicetree to come from a bloblist
+Message-ID: <20231226120710.GH2652760@bill-the-cat>
+References: <20231226094625.221671-1-sjg@chromium.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="11tZBo3IeAoFNUfs"
+Content-Disposition: inline
+In-Reply-To: <20231226094625.221671-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,55 +98,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 26 Dec 2023 at 15:50, Simon Glass <sjg@chromium.org> wrote:
 
-> Hi Maxim,
->
-> On Mon, Dec 25, 2023 at 3:42=E2=80=AFPM Maxim Uvarov <maxim.uvarov@linaro=
-.org>
-> wrote:
-> >
-> > CI test checks that generated dtb has to be cleaned up.
-> >
-> > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
-> > ---
-> >  Makefile | 3 ++-
-> >  1 file changed, 2 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/Makefile b/Makefile
-> > index 220411a293..ab603191ad 100644
-> > --- a/Makefile
-> > +++ b/Makefile
-> > @@ -2165,7 +2165,8 @@ CLEAN_FILES +=3D include/autoconf.mk*
-> include/bmp_logo.h include/bmp_logo_data.h \
-> >                mkimage-out.spl.mkimage mkimage.spl.mkimage imx-boot.map=
- \
-> >                itb.fit.fit itb.fit.itb itb.map spl.map
-> mkimage-out.rom.mkimage \
-> >                mkimage.rom.mkimage mkimage-in-simple-bin* rom.map
-> simple-bin* \
-> > -              idbloader-spi.img lib/efi_loader/helloworld_efi.S *.itb
-> > +              idbloader-spi.img lib/efi_loader/helloworld_efi.S *.itb =
-\
-> > +              ./*/*.dtb *.dtb
-> >
-> >  # Directories & files removed with 'make mrproper'
-> >  MRPROPER_DIRS  +=3D include/config include/generated spl tpl vpl \
-> > --
-> > 2.30.2
-> >
->
-> Shouldn't this be handled with CLEAN_FILES in arch/xxx/dts ?
->
-> Regards,
-> Simon
->
+--11tZBo3IeAoFNUfs
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I don't know. It looks like CLEAN_FILES is almost not used inside ./arch
-directory. Only 1 place where it appears:
+On Tue, Dec 26, 2023 at 09:46:25AM +0000, Simon Glass wrote:
 
-fgrep -r CLEAN_FILES ./arch/
-./arch/arm/mach-rmobile/Makefile:CLEAN_FILES +=3D u-boot-spl.scif
+> Standard passage provides for a bloblist to be passed from one firmware
+> phase to the next. That can be used to pass the devicetree along as well.
+> Add an option to support this.
+>=20
+> Tests for this will be added as part of the Universal Payload work.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> The discussion on this was not resolved and is now important due to the
+> bloblist series from Raymond. So I am sending it again since I believe
+> this is a better starting point than building on OF_BOARD
 
-BR,
-Maxim.
+I really don't like adding another option for "DT is given to us". Why
+isn't adding another enum to fdt_source_t sufficient, and if we have
+bloblist enabled, that will look for and use if found? Maybe some other
+code needs to be restructured and cleaned up too?
+
+--=20
+Tom
+
+--11tZBo3IeAoFNUfs
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWKwesACgkQFHw5/5Y0
+tyzyYwv/dZacUeMyZvDZ7Ty/vmbfp5AiblluVqh72t82wKakv56DeHlKRbBidBsN
+4Edz0ix5BJRSed+rjzdyiaRf+VqEZZqF6amsbW1e5r+6jopisPg0v/pfrNBZph7p
+/eeCVfZ6/Lf3guZWcGsiRWAwHaoDZW8Cf8m45uif7Z5Lx1pjB/BafSO2NN0WQH+e
+HVcdLfk2VXT/jQTYnuXchS233lZiXjFojsrlcrt8lM1c6T3sIZTKaoG0oFugxiax
+O4fah9S+NqfR4l4nxLrnsLyQX8lrpFhv1Ol4DkeWIFQjr68dvUbdMppkrQ09sCyO
+q23UUeG7N4PJlwfTwtEadcy2FOCZ/BNY1kpCyYW8iOyI6OgHOl9R9C4Dyb+OXiwC
+iP3NTz+RzRtbqc/DogTSlcOQhgh8FDFDyT7PeWl8PAEqHjkJ/VPab/DZNW+4FGPS
+G98L/tWGKzx+Ks3ZXTqVzAR/2ClIazNFBQTdBXJGQG1PwnfUaRl6apujkeKYvmPW
+nfItRWoD
+=vcWt
+-----END PGP SIGNATURE-----
+
+--11tZBo3IeAoFNUfs--
