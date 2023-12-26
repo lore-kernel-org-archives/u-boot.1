@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8C72C46CD4
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:49:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 288A0C46CD3
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:49:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BF1087900;
-	Tue, 26 Dec 2023 10:48:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2B6F487907;
+	Tue, 26 Dec 2023 10:48:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HjvqCbSD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bCnHlFVU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AF418781A; Tue, 26 Dec 2023 10:48:01 +0100 (CET)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id 5CCA58789A; Tue, 26 Dec 2023 10:48:06 +0100 (CET)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D38078786E
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:47:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 224228781A
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:48:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-35fea35c432so27413165ab.0
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:47:58 -0800 (PST)
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-28c179bf45cso2179794a91.1
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:48:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703584077; x=1704188877; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703584080; x=1704188880; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=R7Vdt2ZrlarYYLjq+P2Sk/tSH1ncEI1leGSaCsmmEXA=;
- b=HjvqCbSDwtQO1hsmpNBAxaB7hAbrrpJsqNhvSVsWvYBlpUm/ND5DeYEvRYHxEuOYJk
- n+a6Qc85WceBHskLXeCjXm6CaY+1NAiwsGnn8BgVR/Q8QkfGjmV8KCZlAmpukCmeD7FB
- CjJOCtxpUsQ4E2mrpCwnB3yDfPOTajzSUxRBc=
+ bh=2aio9+Sp3WxMppB1UjG/3VvgLytnqxCL40Xwv4aBvww=;
+ b=bCnHlFVUTZ2cL6cjjEjz8QYRwViFz9K6vQnK8Pqu0f6aHkl2eEXBzZDt78A4MQj8vf
+ g7En/5edJsxz798Kpi3ZmVSdM1p7VwedxzYrpio3nSWWOcOnwfjTK6lsKc6/4gyNxx0j
+ dV0CQIBHePpxaHjrNheNHJ2J/WLK3dZkTbzpA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703584077; x=1704188877;
+ d=1e100.net; s=20230601; t=1703584080; x=1704188880;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=R7Vdt2ZrlarYYLjq+P2Sk/tSH1ncEI1leGSaCsmmEXA=;
- b=uOlniVOo709bOIuYl+SSW0KaM2dI2Cb55U2rGHShrmIS7JoyRIeVBG7L5I29WJzQSK
- chaojZCjYscBPw/PajXFx/30wv0ZrJ8G1ztI8vkOP/sS8SUVmUme8c9FD7oBCNWJ8Pgm
- aXb3Y8WWcDMBzUpZEAM9nR4kYGvS3a6wGeCql0/Yuj1CbqQ4HzOWZcwYF7NvZMs9WY7D
- 1g1JWHbUmhT5UpHqd/3bc9zNva+E4ILduuq1l6vsfn+JPB1EuWlpGedBMZLtLgsXEjws
- 7KllzdpzojrTiU1Bit4z65fJ9ExJXPAAdBB0nEYxNPERUQF+bP1VS4m+m6ctJ2sMCbD9
- xMlQ==
-X-Gm-Message-State: AOJu0YwmrqeWF2nrnotPe+oytr6GxrcLl13bF+QzRUEAx6jFl9tqdFJA
- m3kME/3RrvWiRxL6qa1FKRcasvrFcvhAV1iuXGoHKiiYSrn4
-X-Google-Smtp-Source: AGHT+IGCGHbNxZF+pfUyqO9mUQEPOqUQGfA6s/rjnfizl7yRe/Y5pZFAg9c15IeX470d2oUlt8J8KL5Dj7gQcpAsyAA=
-X-Received: by 2002:a05:6e02:3105:b0:360:18f:dc14 with SMTP id
- bg5-20020a056e02310500b00360018fdc14mr3914831ilb.54.1703584077507; Tue, 26
- Dec 2023 01:47:57 -0800 (PST)
+ bh=2aio9+Sp3WxMppB1UjG/3VvgLytnqxCL40Xwv4aBvww=;
+ b=QufqRt5ykimZyq8L5OPk6SMC7e7xDNW7c+SwJ7pP1Fz49aRLXBe/tf5D6cJwfD53yi
+ V+b2UXqpEDgO6/v8d/85czgM6w6B/iBDB/3fCUl9Hgi7Trz7tC6DSRX3ydCoYLLgwQzP
+ ypXxJds38LqWZ+6ghbB7oJlrpFRd/X1I8tTCjYcUwRp4jEcmKkIwQHECnbKCH/EfTRMw
+ C9B2GRVAiWmQ5AbZnBq8+m2H1OxEt+9qTcYq1uFEwh3rxAzwIuyCrYZB0Yr8P9RflVFN
+ zgaeseSrDNLHMOdK4R2pVFQQr1mrnLfYZV9onXK115BmWrh96A6E0unfojtnsapEshlm
+ OsLA==
+X-Gm-Message-State: AOJu0Yw5DUmplThsgIM4Yj3NSBUfZ2z68od2XrI2GTBeatzz54aw3km8
+ iHXJAJY1+fvVciNIrkD0rQtKe+dyUN9m1hZ1ZstWtz3yj+7G
+X-Google-Smtp-Source: AGHT+IFqEoquiodRRbT72giCy9T3140AEUj7FHm8YrMMVrl9HXLaPPiXfFClVRyNlElVToSBtq6qq7PqqfTOMDvGh5k=
+X-Received: by 2002:a17:90a:cb97:b0:28b:b425:b6e2 with SMTP id
+ a23-20020a17090acb9700b0028bb425b6e2mr2903179pju.74.1703584080544; Tue, 26
+ Dec 2023 01:48:00 -0800 (PST)
 MIME-Version: 1.0
 References: <20231222213110.660402-1-raymond.mao@linaro.org>
- <20231222213110.660402-3-raymond.mao@linaro.org>
-In-Reply-To: <20231222213110.660402-3-raymond.mao@linaro.org>
+ <20231222213110.660402-4-raymond.mao@linaro.org>
+In-Reply-To: <20231222213110.660402-4-raymond.mao@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Dec 2023 09:47:40 +0000
-Message-ID: <CAFLszTgW9Gqn8RhDN_2DBFJm4ZpLB6eHd07xhQmJQOMiiK59-g@mail.gmail.com>
-Subject: Re: [PATCH v3 2/9] bloblist: check bloblist with specified buffer size
+Date: Tue, 26 Dec 2023 09:47:41 +0000
+Message-ID: <CAFLszTgO_8UC9Wuaki6-vaFmgsqvovcLk813pZqR8TjyYgAf4Q@mail.gmail.com>
+Subject: Re: [PATCH v3 3/9] bloblist: refactor of bloblist_reloc()
 To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, jwerner@chromium.org, 
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Kevin Chen <kevin_chen@aspeedtech.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>, 
- Shiji Yang <yangshiji66@outlook.com>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nikhil M Jain <n-jain1@ti.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>, 
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Baruch Siach <baruch@tkos.co.il>, Michal Simek <michal.simek@amd.com>,
- Qu Wenruo <wqu@suse.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Sean Anderson <sean.anderson@seco.com>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Shiji Yang <yangshiji66@outlook.com>, 
+ Baruch Siach <baruch@tkos.co.il>, Michal Simek <michal.simek@amd.com>, 
+ Sean Anderson <sean.anderson@seco.com>, Stefan Roese <sr@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -93,60 +93,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
-
 On Fri, Dec 22, 2023 at 9:31=E2=80=AFPM Raymond Mao <raymond.mao@linaro.org=
 > wrote:
 >
-> Instead of expecting the bloblist total size to be the same as the
-> pre-allocated buffer size, practically we are more interested in
-> whether the pre-allocated buffer size is bigger than the bloblist
-> total size.
+> The current bloblist pointer and size can be retrieved from global
+> data, so we don't need to pass them from the function arguments.
+> This change also help to remove all external access of gd->bloblist
+> outside of bloblist module.
 >
 > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > ---
 > Changes in v2
 > - New patch file created for v2.
+> Changes in v3
+> - Check the space size before copying the bloblist.
+> - Add return code of bloblist_reloc().
 >
->  common/bloblist.c | 2 +-
->  test/bloblist.c   | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/common/bloblist.c b/common/bloblist.c
-> index ba17dd851a..db3fbb20cf 100644
-> --- a/common/bloblist.c
-> +++ b/common/bloblist.c
-> @@ -384,7 +384,7 @@ int bloblist_check(ulong addr, uint size)
+>  common/bloblist.c  | 10 ++++++++--
+>  common/board_f.c   |  8 ++------
+>  include/bloblist.h |  8 ++++----
+>  test/bloblist.c    |  6 ++----
+>  4 files changed, 16 insertions(+), 16 deletions(-)
 
-Can you please also update the function comment for bloblist_check() ?
-
->                 return log_msg_ret("Bad magic", -ENOENT);
->         if (hdr->version !=3D BLOBLIST_VERSION)
->                 return log_msg_ret("Bad version", -EPROTONOSUPPORT);
-> -       if (!hdr->total_size || (size && hdr->total_size !=3D size))
-> +       if (!hdr->total_size || (size && hdr->total_size > size))
->                 return log_msg_ret("Bad total size", -EFBIG);
->         if (hdr->used_size > hdr->total_size)
->                 return log_msg_ret("Bad used size", -ENOENT);
-> diff --git a/test/bloblist.c b/test/bloblist.c
-> index 17d9dd03d0..7dab9addf8 100644
-> --- a/test/bloblist.c
-> +++ b/test/bloblist.c
-> @@ -207,7 +207,7 @@ static int bloblist_test_checksum(struct unit_test_st=
-ate *uts)
->         hdr->flags++;
->
->         hdr->total_size--;
-> -       ut_asserteq(-EFBIG, bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE)=
-);
-> +       ut_asserteq(-EIO, bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
->         hdr->total_size++;
->
->         hdr->spare++;
-> --
-> 2.25.1
->
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
