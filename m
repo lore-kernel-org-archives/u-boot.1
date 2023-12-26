@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3D74C46CD4
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 15:30:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 399D7C46CD3
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 15:48:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F408887835;
-	Tue, 26 Dec 2023 16:30:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 7EA9886FCE;
+	Tue, 26 Dec 2023 16:48:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="uNYpX5L0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yEnTuIur";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1C9F87855; Tue, 26 Dec 2023 16:30:40 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AA8A18758C; Tue, 26 Dec 2023 16:48:33 +0100 (CET)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0212F807E4
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 16:30:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A44E086F56
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 16:48:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1703604638; x=1704209438; i=xypron.glpk@gmx.de;
- bh=n03r6RogWp7aXW3RyI1A3wtK9QlHszcLKCoYKORHpjg=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=uNYpX5L0OgMoR/krcU+IFOTOko2DyYiDYD93/RL3KZlCKy73BhcHPTQxDqypV0lg
- 3K1ZN5UlhG9239lxZqKu55wua5qNwjFF4KuBn/DGi5uYHUOfSOBgy820fVUVDR+yA
- EJkO9X55kubb3PUhXr3jlwaMjxS9fBvYYcH8QPSXGUaOV+tG4gjSTij5FY269tu0b
- XejVECEAPq/pvnWAx0lBYcHgPYtuBuHOZD4sjM0i391Ub0+HWqr4koYEFNEdqVvyO
- +kbge7BhYzh19AlJsiy347TJl/5KNRuI3fJKt8L/ogUPofVmM75rGVH+iwWsLNnZo
- N0+6nY7cfiBqvXU0Zg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.152] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MDysg-1rS2tP07Km-00A0jd; Tue, 26
- Dec 2023 13:41:11 +0100
-Message-ID: <ceeb1fd4-a469-4bde-b6e2-a49447b2020b@gmx.de>
-Date: Tue, 26 Dec 2023 13:41:10 +0100
+ spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2ccae380df2so25846811fa.1
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 07:48:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1703605710; x=1704210510; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=FfcAiyThz87WqR8wR1kjDx0WteqKDikSsA0ZjALyDW4=;
+ b=yEnTuIurenGs7cNKd35n1/z9gKbwy8vRpXD+Mrw0z8vY7iej09/flIsmaQr8bo9rr2
+ IJqKu/bNBxff6BPITDBGNXKuO4bFxopvucPV9DcIqXx1M8qERQCpCCQBBTID4/b1JG+Q
+ Ss1oat7Nn5z3Twayvrm1s7+7eqLWtgjS7frJdvTx+TW4ks/3NsnyMa13/dSrJcvh90dL
+ kEBk8qgWjnODZBLZI9+9kaSpwtcE9g1OZPW5yd1SQ8f7fTcFpVJ2iVySDpwqOD1oZyz2
+ 6FLTVwsjhux0Pr+r9yQ0LNsrcfeN1bAsLLL/8JAG2D1N1sQjKOhu+r6SuPPaYqV17y50
+ n2eA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703605710; x=1704210510;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=FfcAiyThz87WqR8wR1kjDx0WteqKDikSsA0ZjALyDW4=;
+ b=BXHYPK7ih/landPUfN2PaOzOg5r489hcuQDzvuS9mMPwMLufx/jHg6K+cpAFwnfaro
+ eMeBs+cY0iBHB/ktQnCpE3EBRbS18DNZTuVQNUzflGJMiwDLoX3nZDpKdgHtn0ednub5
+ 3zmoToECHaTM/ozE20DkKwzNeTRkSXROFnp0rYs0acgwOA6wI4a6DOeutEJXxZ5sTV7q
+ sKlQMUf8w62vJMwjPdp0M7IPiYlHrM0GPFKwlqQhBFrBq4DbeknYjdjOYgNO9Syk+BzU
+ CoW/rFl2Ax6lG8OsoEZ/SEZCnMau1ZGRByfhS5L0x7dOHoWsQVCfM9pVcORWm4GJnzlJ
+ atMg==
+X-Gm-Message-State: AOJu0Yz5zk6bFIpzHaF96JSz691mOF1qT87ool8IMBFxctS2UGlevyex
+ PH1K2qMXL9IPuiUXWUeu8ExnyhRUACnNIdDPp9wzl7Z7ygY=
+X-Google-Smtp-Source: AGHT+IEItHdUfN8biRmcc2ZdYZ13pOHrC7qPQqbfQd80qhwCME6OXzaD/lTPLvPpC5GkJIzqNDc0VA==
+X-Received: by 2002:ac2:5d67:0:b0:50e:4d3c:c4dd with SMTP id
+ h7-20020ac25d67000000b0050e4d3cc4ddmr2083496lft.105.1703605710208; 
+ Tue, 26 Dec 2023 07:48:30 -0800 (PST)
+Received: from localhost.localdomain ([45.82.14.220])
+ by smtp.gmail.com with ESMTPSA id
+ d25-20020a0565123d1900b0050e743b0b2csm1089336lfv.34.2023.12.26.07.48.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 26 Dec 2023 07:48:29 -0800 (PST)
+From: Maxim Uvarov <maxim.uvarov@linaro.org>
+To: u-boot@lists.denx.de
+Cc: simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
+ sjg@chromium.org, joe.hershberger@ni.com, rfried.dev@gmail.com,
+ bharat.gooty@broadcom.com, rayagonda.kokatanur@broadcom.com,
+ trini@konsulko.com, Maxim Uvarov <maxim.uvarov@linaro.org>
+Subject: [PATHv3 0/8] net fixes prior lwip
+Date: Tue, 26 Dec 2023 21:46:11 +0600
+Message-Id: <20231226154619.5071-1-maxim.uvarov@linaro.org>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 6/6] smbios: Require the caller to align the SMBIOS
- table
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20231015024511.3995580-1-sjg@chromium.org>
- <20231015024511.3995580-7-sjg@chromium.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231015024511.3995580-7-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:i8vkvuypSD3jNpyhasK48nqyOVt2VysBPGdKhiCQbQJYbitUsyu
- EkIHIeR6wx2jLYScMtCxo1pzRmXMEbiRbJYE7flEPaQDAb5rAtENUVdrDb3lJuVojpkr9Dj
- B+TyjTskkQxV+a/lf1mYM2afROnkaB1eGMH6iwI2TFxVWylWn11lXtAFFizmymY7D6ZFy+d
- M2w8Rq6kQxR/b13SkG1WA==
-UI-OutboundReport: notjunk:1;M01:P0:R6+yy/ESvYM=;54Dayvx7mflAYqB7DusXj/AY/bt
- F0ztLWUxVsx5LlKN3Do4LaOj+XTsfelq340EF2JM5BcGE8TcfjKww6OOp/BQEwhM9KmSzU2li
- 0cQ8tDssj8ZSMCLJ1S13+0k9FDpWNXF7Ysgqo962RLNUDpNjLLv7OtSHnUj5pTFD2gydITv1M
- H8NcPdGemQMkanhNzjqTACwxRhGgIrdzxFX8w8XtzSu0A3Hb7qwvCxbShMmNUzLeDUBXZiECb
- xFsKrU2+mMdcxTT4B1+EhCHxlvC9WUP3YWW+broDlBLtn+2Dy4VcBSYd2Z8Fcqe2CNxVvystt
- 2BcBZNi6bhfxfmVDz4JCA7nhvB6NzD0uInPTfqJS28tjW8033GugOcD17CeOr25EnJ0FONIwQ
- 4WXz8x/4/KfUuu62om1hPKiyOEARo/+GsCo2OmPI7sIjSrqSS3/7LT3Dufa9iyKsSkwEQDD1E
- sEQIBBaRiDTCP45yXq3bUdafeks7jHRjnTD6u1rf0TXl1sGUoE4acXenUptZ1dJHG+JTzwZvb
- gEYYP2D/+iUbCmASaUc9sAStoxOy9VjdEoCgXFN+9XweFAFFCZ2ZfCSVIy0bdfu17gAQIbsfb
- jZkjpt18Y+JdOoH5ZJ+UqT6tLWXmBV+pAxME4c6btf6uS+o1PM3RdmZdINd8q4VzPgnoZCTpX
- B4Z3rYrZTQR71ZQtnk+E7GQ4ykDxZ5XMRscf5zif1wwgiO/cB0L2a7TNb6hfd407px/ONQSOc
- Yns3c8nXYMBQY+1t9BCRsd+lEmyHtVXBPx6mIFxLiDF2o9fvdSz7eZwFYM+OajZe3ca8I+VHp
- oIU1zPwEXDJvxzDsfvsMe5BpVFAzNmWizN7FnhLBF3M+oRQpybQ62azeUDZnRUb9KHnawppJf
- ncr82UDCbYRrQH6a6l8F4axtzsWJJXb+eufuOH37VEWYWkgFLtvXX7x3olZvLWSDbWoTQo6EW
- hDWxMUqcdrNnHDwc+V3tdfq8k4o=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,53 +91,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/15/23 04:45, Simon Glass wrote:
-> All callers handle this alignment, so drop the unnecessary code. This
-> simplifies things a little.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+Add small net fixes prior lwip patches.
 
-Reviewed: Heinrich Schuchardt <xypron.glpk@gmx.de>
+v3: - some small review fixes.
+v2: - rebase on the top of master tree with descriptions fixes
+      suggested in review comments.
+Maxim Uvarov (8):
+  test_net: print out net list
+  net/smc911x: fix return from smc911x_send
+  sandbox: eth-raw-os: successful return code is 0
+  driver/net/rtl8139: remove debug print
+  mach-socfpga: do not overlap defines with lwip
+  bcm_ns3: use device specific naming for variables
+  omap3: use device specific naming for mem_init
+  Makefile: add dtbs to clean
 
-> ---
->
-> (no changes since v1)
->
->   include/smbios.h | 5 +----
->   lib/smbios.c     | 2 --
->   2 files changed, 1 insertion(+), 6 deletions(-)
->
-> diff --git a/include/smbios.h b/include/smbios.h
-> index ddabb558299e..31d997287588 100644
-> --- a/include/smbios.h
-> +++ b/include/smbios.h
-> @@ -248,12 +248,9 @@ static inline void fill_smbios_header(void *table, =
-int type,
->    *
->    * This writes SMBIOS table at a given address.
->    *
-> - * @addr:	start address to write SMBIOS table. If this is not
-> - *		16-byte-aligned then it will be aligned before the table is
-> - *		written.
-> + * @addr:	start address to write SMBIOS table (must be 16-byte-aligned)
->    * Return:	end address of SMBIOS table (and start address for next ent=
-ry)
->    *		or NULL in case of an error
-> - *
->    */
->   ulong write_smbios_table(ulong addr);
->
-> diff --git a/lib/smbios.c b/lib/smbios.c
-> index 92e98388084f..5c9f108496d6 100644
-> --- a/lib/smbios.c
-> +++ b/lib/smbios.c
-> @@ -483,8 +483,6 @@ ulong write_smbios_table(ulong addr)
->   		ctx.dev =3D NULL;
->   	}
->
-> -	/* 16 byte align the table address */
-> -	addr =3D ALIGN(addr, 16);
->   	start_addr =3D addr;
->
->   	/*
+ Makefile                                           | 2 ++
+ arch/arm/include/asm/arch-omap3/mem.h              | 2 +-
+ arch/arm/mach-omap2/omap3/board.c                  | 2 +-
+ arch/arm/mach-omap2/omap3/emif4.c                  | 4 ++--
+ arch/arm/mach-omap2/omap3/sdrc.c                   | 6 +++---
+ arch/arm/mach-socfpga/include/mach/handoff_soc64.h | 6 ------
+ arch/arm/mach-socfpga/wrap_handoff_soc64.c         | 9 +++++++++
+ arch/sandbox/cpu/eth-raw-os.c                      | 2 +-
+ drivers/net/rtl8139.c                              | 2 +-
+ drivers/net/smc911x.c                              | 2 +-
+ include/configs/bcm_ns3.h                          | 6 +++---
+ test/py/tests/test_net.py                          | 2 ++
+ 12 files changed, 26 insertions(+), 19 deletions(-)
+
+-- 
+2.30.2
 
