@@ -4,73 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF141C46CD3
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:48:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84B70C46CD3
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:49:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCC4B878D1;
-	Tue, 26 Dec 2023 10:47:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8893A878EA;
+	Tue, 26 Dec 2023 10:47:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dn4eZDi8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oabFWQCz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81FF9878F2; Tue, 26 Dec 2023 10:47:31 +0100 (CET)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
+ id 94893878F9; Tue, 26 Dec 2023 10:47:33 +0100 (CET)
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [IPv6:2607:f8b0:4864:20::1031])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EB47878DF
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:47:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C67B878CB
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:47:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-2043e721daaso2590155fac.2
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:47:29 -0800 (PST)
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-28c467446f0so892989a91.0
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:47:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1703584048; x=1704188848; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Av/p6/G0xj0+gBxddHv6XW1N32jKEKR2yPC7E5gz0QI=;
- b=dn4eZDi8moVw321oETIs5HRmOZL97/AnkYUyLdSdOIgVKhey8oHLBSf2ZTBw3kylzX
- 7qV6gfaSNfo3XBQ5rTTTDGeE9rI07atgddmEPfdOVbQWtTEHgMH8YmqWOvE8vrdHB5BE
- 03PU8bGLf40B4/GH56Lcw9xXLEqlC9RhQ7400=
+ bh=bVdFE3W3MBYd4mKaAdFZWM5RmzLe/CpmdAfQz5IEfW8=;
+ b=oabFWQCziLGSHTqCx3W6A238Yk6+tNOBMUXjh53nhvvqJYtrTsZvDSXltbmCTud/zz
+ Bw055puXK+D5M/8FS6NTvVUJ3KW1tSUYq7Rs3CXHFnHsoeXcJ4xDYVKwIGPOQkDGIoiK
+ iOowMWJVk4BhAi15EjrptLGVi3+RRG2s4yaZM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1703584048; x=1704188848;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Av/p6/G0xj0+gBxddHv6XW1N32jKEKR2yPC7E5gz0QI=;
- b=cWW9uZLCQSxRR2B9LYjkyCB0eDu89vYcZjAcyZK7lRBrJhsEkdiz3QSk0WHSEpGQIZ
- sC/AFDNWbV5dvu3R6gYwhNE6R5PJEHVWqGDBuTOLcyfljtMTKdwQe4UkrNj/50e/sR1B
- o0wD2ddiV6ovYbkvIbLhqaCFd2FyNz+8vrXtpyQuVLN12w/ivZ6qn0ZyW9sqRWpgZDvb
- wl9o/+0NcjAUIzwH32INmBNclY3ikQ1kMEXl0AAn+PDO8RJu50MkVzHaNeSR7v8t4Ejm
- s7U0wvtF/7/DzRYStLyUgj8zs2VVQqe4a+mpYrroXhCUkbZBg4E+3oaICcKje87UeO9M
- Y8TQ==
-X-Gm-Message-State: AOJu0Yye8k1uYgHN3X/RahypOJ/4YvIdK5M2D+12eCPZOGyDlinPSW6x
- BL0VNU54CVftDnr3d8hGkyvUVcpeIlnz6cNLjjq8VnGlbxNR
-X-Google-Smtp-Source: AGHT+IF7w4G0NRkSF+F4lNCYFB58J9qH/iI1YOedCNDOzspOjl8Gtut5HqfBvsMQxrQnh7ZHBFitP0ft81U7DHH/boc=
-X-Received: by 2002:a05:6870:a110:b0:1fb:75a:6d4a with SMTP id
- m16-20020a056870a11000b001fb075a6d4amr8131246oae.113.1703584047838; Tue, 26
- Dec 2023 01:47:27 -0800 (PST)
+ bh=bVdFE3W3MBYd4mKaAdFZWM5RmzLe/CpmdAfQz5IEfW8=;
+ b=cXlJyiEwtvw6FOB/nCn8WX36CfDCD2yeC6rYfztoj5TlKdukbgWilYseFCcETbPPY2
+ dXh0EfLn6AH/l+LzL0vmKdrHaJ4gUp0Emal128d6icQ6lJPOsmNZ1yF3nmsUnqfkdwKf
+ vBqfbvAqGgPjLPDxZr3wpx/yXjlfSP6PZTBhy56JpBwFxqz3MVsTDq9GU6a/wTxIlLyC
+ V4hSJV+tixYYyjX+Ul4yu83ho6hBwQiz7QREcrLjXRbngP3/o/XrhCMhtQfG7yPqG9/7
+ gWwlL6Qo+MpftcAA0fvqFHGCn0tV6/Y8KMn4d9OhQCcs3+ZXv82C1MZrp34UFcnTwVhT
+ sBmQ==
+X-Gm-Message-State: AOJu0YxcQ7OxzehCVR7ipbYw7vjI4XifiYPl96q7I8/hOHf17VMB3EI2
+ liQLqM2OgaZG+Zx6uk1nZ+H2b2WcWSr633dU8UYdC608YyAu
+X-Google-Smtp-Source: AGHT+IEoi09fPfTMdd1g8MxDSvBkHAKyZbreFRQqYfqMacKOZ3Zs/biPZYkC6w0QNPyRzQyBxaXsY8KnEWpS7U7DDiY=
+X-Received: by 2002:a17:90b:4a8b:b0:28b:e7fc:5060 with SMTP id
+ lp11-20020a17090b4a8b00b0028be7fc5060mr7235307pjb.11.1703584048497; Tue, 26
+ Dec 2023 01:47:28 -0800 (PST)
 MIME-Version: 1.0
-References: <20231218023842.281336-1-takahiro.akashi@linaro.org>
- <20231218023842.281336-5-takahiro.akashi@linaro.org>
- <CAPnjgZ0vq6kxiBNOwbi1JyMxV44S46uKXd1vbPNHFX5nwYLVtQ@mail.gmail.com>
- <14EA5E9B-23EB-4BD5-ACA9-7CEA6BC35453@gmx.de>
- <CAPnjgZ2n=yoL3GwUMsiL9dm-w8P88d_N5MUxMEHx+J9q666w0Q@mail.gmail.com>
- <20231220132503.GK2513409@bill-the-cat>
-In-Reply-To: <20231220132503.GK2513409@bill-the-cat>
+References: <20231214135103.1606605-1-sumit.garg@linaro.org>
+ <20231214135103.1606605-5-sumit.garg@linaro.org>
+ <CAPnjgZ37QMzyVNxd8608dMBXVPed-PAU39CAhOrMRHVedEnSkQ@mail.gmail.com>
+ <CAFA6WYMeLoD_z1W+iK3C6yj44dO_pdM71bhd6gK14gB==75gxw@mail.gmail.com>
+In-Reply-To: <CAFA6WYMeLoD_z1W+iK3C6yj44dO_pdM71bhd6gK14gB==75gxw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Dec 2023 09:46:52 +0000
-Message-ID: <CAFLszTicmvmK9zVuvNF3v2twgEMzxrdPRuaxDJaXnTEqMR5exA@mail.gmail.com>
-Subject: Re: [PATCH v3 4/4] fs: remove explicit efi configuration dependency
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>, 
- ilias.apalodimas@linaro.org, u-boot@lists.denx.de
+Date: Tue, 26 Dec 2023 09:46:54 +0000
+Message-ID: <CAFLszTgnOHQJGin-=32syDVPAkLXAni7QFd3WV_xtW0a2D84Bg@mail.gmail.com>
+Subject: Re: [PATCH 4/8] dts: Add alternative location for upstream DTB builds
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
+ u-boot-custodians@lists.denx.de, trini@konsulko.com, robh+dt@kernel.org, 
+ krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
+ ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
+ xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
+ rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
+ rfried.dev@gmail.com, marex@denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -89,110 +93,160 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Sumit,
 
-On Wed, Dec 20, 2023 at 1:25=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
+On Wed, Dec 20, 2023 at 12:01=E2=80=AFPM Sumit Garg <sumit.garg@linaro.org>=
+ wrote:
 >
-> On Tue, Dec 19, 2023 at 09:46:27PM -0700, Simon Glass wrote:
-> > Hi Heinrich,
-> >
-> > On Mon, 18 Dec 2023 at 15:16, Heinrich Schuchardt <xypron.glpk@gmx.de> =
-wrote:
-> > >
-> > >
-> > >
-> > > Am 18. Dezember 2023 16:01:40 MEZ schrieb Simon Glass <sjg@chromium.o=
-rg>:
-> > > >Hi AKASHI,
-> > > >
-> > > >On Sun, 17 Dec 2023 at 19:39, AKASHI Takahiro
-> > > ><takahiro.akashi@linaro.org> wrote:
-> > > >>
-> > > >> Now it is clear that the feature actually depends on efi interface=
-s,
-> > > >> not "bootefi" command. efi_set_bootdev() will automatically be nul=
-lified
-> > > >> if necessary efi component is disabled.
-> > > >>
-> > > >> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> > > >> ---
-> > > >>  fs/fs.c | 7 +++----
-> > > >>  1 file changed, 3 insertions(+), 4 deletions(-)
-> > > >>
-> > > >> diff --git a/fs/fs.c b/fs/fs.c
-> > > >> index f33b85f92b61..82ee03b160e9 100644
-> > > >> --- a/fs/fs.c
-> > > >> +++ b/fs/fs.c
-> > > >> @@ -791,10 +791,9 @@ int do_load(struct cmd_tbl *cmdtp, int flag, =
-int argc, char *const argv[],
-> > > >>                 return 1;
-> > > >>         }
-> > > >>
-> > > >> -       if (IS_ENABLED(CONFIG_CMD_BOOTEFI))
-> > > >> -               efi_set_bootdev(argv[1], (argc > 2) ? argv[2] : ""=
-,
-> > > >> -                               (argc > 4) ? argv[4] : "", map_sys=
-mem(addr, 0),
-> > > >> -                               len_read);
-> > > >> +       efi_set_bootdev(argv[1], (argc > 2) ? argv[2] : "",
-> > > >> +                       (argc > 4) ? argv[4] : "", map_sysmem(addr=
-, 0),
-> > > >> +                       len_read);
-> > > >
-> > > >As I understand it, this is setting the boot device so that (if it
-> > > >happens to be an efi application) it will know which device it came
-> > > >from. But this is a hack. For bootstd, the device is known as it loa=
-ds
-> > > >the kernel.
-> > >
-> > > Please, consider what happens when the user interactively executes th=
-e load and bootefi command from the console.
-
-Yes, that case needs to be handled.
-
-> > >
-> > > >
-> > > >Also it does not deal with memory allocation (nor can it).
-> > > >
-> > > >Where are we using the 'load' command to load a kernel? The distro
-> > > >scripts are deprecated.
-> > >
-> > > Some users use boot.scr scripts
-
-We will need to figure out that. But we should make bootstd do the right th=
-ing.
-
-> > >
-> > >
-> > > >
-> > > >At some point this code should be removed. Is it too early for that?
-> > >
-> > > Yes, as long as we allow users to invoke the bootefi command with an =
-address pointer.
-> >
-> > So how about we create the new path, with the info passed in as part
-> > of the bootefi call? Then we can remove the call from bootstd, at
-> > least.
+> Hi Simon,
 >
-> Why? It's not clear to me we'd have this information available at that
-> point unless we stored things to pass along at that point too.
+> On Wed, 20 Dec 2023 at 10:17, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Sumit,
+> >
+> > On Thu, 14 Dec 2023 at 06:52, Sumit Garg <sumit.garg@linaro.org> wrote:
+> > >
+> > > Allow platform owners to mirror devicetree files from devitree-rebasi=
+ng
+> > > directory into dts/arch/$(ARCH) (special case for dts/arch/arm64). Th=
+en
+> > > build then along with any *-u-boot.dtsi file present in arch/$(ARCH)/=
+dts
+> > > directory.
+> >
+> > Also add a new Makefile for arm64.
+>
+> I suppose you are referring to dts/arch/arm64/Makefile which has been
+> added by this patch.
 
-For the bootstd case, we know the device where the kernel came from.
-See distro_efi_boot() for this code. It calls efiload_read_file()
-which calls set_efi_bootdev().
+Yes, I just mean that you should mention this in the commit message
 
-We should instead pass the device information to efi_binary_run().
+>
+> >
+> > >
+> > > This will help easy migration for platforms which currently are compl=
+iant
+> > > with upstream Linux kernel devicetree files.
+> > >
+> > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> > > ---
+> > >  dts/Kconfig             | 11 +++++++++++
+> > >  dts/Makefile            | 17 ++++++++++++++---
+> > >  dts/arch/arm64/Makefile | 14 ++++++++++++++
+> > >  3 files changed, 39 insertions(+), 3 deletions(-)
+> > >  create mode 100644 dts/arch/arm64/Makefile
+> > >
+> > > diff --git a/dts/Kconfig b/dts/Kconfig
+> > > index 00c0aeff893..96396f12b67 100644
+> > > --- a/dts/Kconfig
+> > > +++ b/dts/Kconfig
+> > > @@ -85,6 +85,17 @@ config OF_LIVE
+> > >           enables a live tree which is available after relocation,
+> > >           and can be adjusted as needed.
+> > >
+> > > +config OF_UPSTREAM
+> > > +       bool "Enable use of devicetree imported from Linux kernel rel=
+ease"
+> > > +       help
+> > > +         Traditionally, U-boot platforms used to have their custom d=
+evicetree
+> >
+> > U-Boot
+> >
+> > (I think I mentioned this, but you thought I said U-boot...but it
+> > really is U-Boot). Perhaps grep your patches next time.
+>
+> Ah, I see. It looks like I missed that bit, and will take care of it
+> in the next revision.
+>
+> >
+> > > +         files or copy devicetree files from Linux kernel which are =
+hard to
+> > > +         maintain and can usually get out-of-sync from Linux kernel.=
+ This
+> > > +         option enables platforms to migrate to devicetree-rebasing =
+repo where
+> > > +         a regular sync will be maintained every major Linux kernel =
+release
+> > > +         cycle. However, platforms can still have some custom u-boot=
+ specific
+> > > +         bits maintained as part of *-u-boot.dtsi files.
+> >
+> > I'm a bit nervous about this. It means that boards chose between this
+> > dir of the local files. It means there is some effort to switch.
+> >
+> > I wonder if we could default to using the rebasing thing, with boards
+> > having to 'opt out'? So this should be 'default y' ?
+>
+> Ideally that should be our migration path going forward once we get
+> enough boards migrated to use rebasing repo. But at this initial stage
+> we have to put some effort on migrating boards to use rebasing
+> subtree, although effort should be just adding (given DT bindings
+> compliance) following to defconfig (see patch #7):
+>
+> CONFIG_OF_UPSTREAM=3Dy
+> CONFIG_DEFAULT_DEVICE_TREE=3D"amlogic/meson-gxbb-nanopi-k2"
+>
+> and create a mirrored copy of:
+> ../../../devicetree-rebasing/src/arm64/amlogic/ into
+> dts/arch/arm64/amlogic/ with modifications to add targets to
+> dts/arch/arm64/Makefile.
+>
+> I am happy to put in that effort but certainly for new board support
+> that would like to import DT from Linux it should be the default. That
+> stands true for the Qcom platform series for which Caleb is currently
+> working on.
 
-With that done, we can perhaps make the 'load' and 'tftp' commands
-record the device information somewhere, so that bootm can pick it up
-when it starts and put it in 'images'. Then at some point we can clean
-up the 'devnr' parameter, which should really be a partition number,
-since the 'dev' parameter tells you the device.
+The problem I see is that this is board-by-board, so will never
+happen. Changing one board (e.g. rockpro64-rk3399) typically involves
+changing the .dtsi files it includes (e.g. rk3399.dtsi) so it is
+hard/impossible to do one board without doing all.
 
-Anyway, this series is fine, so long as we can agree to the above.
+So this is why I believe the setting should be on an SoC basis, not on
+a board basis.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+>
+> >
+> >
+> > > +
+> > >  choice
+> > >         prompt "Provider of DTB for DT control"
+> > >         depends on OF_CONTROL
+> > > diff --git a/dts/Makefile b/dts/Makefile
+> > > index 3437e54033d..8098bf8191a 100644
+> > > --- a/dts/Makefile
+> > > +++ b/dts/Makefile
+> > > @@ -10,10 +10,20 @@ ifeq ($(DEVICE_TREE),)
+> > >  DEVICE_TREE :=3D unset
+> > >  endif
+> > >
+> > > +ifeq ($(CONFIG_OF_UPSTREAM),y)
+> > > +ifeq ($(CONFIG_ARM64),y)
+> > > +DEVICE_TREE_LOC :=3D dts/arch/arm64
+> >
+> > dt_dir ?
+>
+> Okay I will rename it.
+>
+> >
+> > Should we move the arm64 DTs to arch/arm64 ?
+>
+> IMO, the migration path should be to use rebasing subtree via
+> dts/arch/arm64/ and dropping DTs except *-u-boot.dtsi from
+> arch/$(ARCH)/dts. So moving DTs from arch/arm/ to arch/arm64/ seems
+> like a redundant change to me.
+
+I can see that argument, but having two different directory structures
+would be confusing.
+
+>
+> >
+> > What about the subdirs used in Linux?
+>
+> I hope I have described above regarding how subdirs are mirrored.
+> However, have a look at patch #7 for the amlogic/ subdir example.
+
+OK
 
 Regards,
 Simon
