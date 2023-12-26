@@ -4,68 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F3FAC46CD4
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:52:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7487EC46CD3
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:52:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66A33878CD;
-	Tue, 26 Dec 2023 10:49:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3E658878A5;
+	Tue, 26 Dec 2023 10:50:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GZrQYkJd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NRXUGFiX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48ECB8791D; Tue, 26 Dec 2023 10:49:05 +0100 (CET)
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
- [IPv6:2607:f8b0:4864:20::102a])
+ id 87E60878CB; Tue, 26 Dec 2023 10:50:20 +0100 (CET)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABCF1878CD
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:49:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E0DAC87687
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:50:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-28c4673aa30so908201a91.1
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:49:02 -0800 (PST)
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-3bbbc6bcc78so170933b6e.1
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:50:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703584140; x=1704188940; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703584214; x=1704189014; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8TWbzAYUbVaBMNOX5wjWxOITymJ8FplgDoY7fmLZ0tE=;
- b=GZrQYkJdfFWzBRk+L+NwLiva3G1QVLQowEwBrdvefaq8VPsNaGwQZfb3mG3BYqtnl2
- 5yh2+Om8tWEGRWeTpthRUgQqh8TLxlM0AOkg/VKV+jUjAg/0mIUVc1qcGdW23OmlSk01
- HoKzaNBR68ceV4fgx/AbYH9F2G948UrNVAvO4=
+ bh=ebs+hxlwQP7BNr/3r39Z9czd/6cHHpuTT2/pGZh0qK0=;
+ b=NRXUGFiXNWw+WA7se9euivDwQpjwwueji7Ao5AqOLi5xAAyTHcD4FS+o3HRJ8hB8uE
+ 2kXLRyV5Onh0FofJYBnPvK4zxmsphz1UtAs7KtY0uHe8920pT3F65C6fy+4UJZgiQvTA
+ 0Elfj5WRRqTN5PBKjtF1fysu9mCbp9zS7XiuQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703584140; x=1704188940;
+ d=1e100.net; s=20230601; t=1703584214; x=1704189014;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8TWbzAYUbVaBMNOX5wjWxOITymJ8FplgDoY7fmLZ0tE=;
- b=Qg4CJXh/i23vus9nb0nxb1Mea0+n0fgs2t7Ib87o7/HrWIXXAYgc8+h+J3NgXd/lvN
- 9gjbwR789UlgL1Bvp6L/BqrvEOMyzgExSRBbI6LmNAJ7WnsZjXOB5LxFVGgi64aVpE5A
- 2Ws2TSm2upBkyziK7zr27P+px+SSOW/TOQqDo5k5BHd+4O1aXzE6hCX8WWxYkyIfkBw5
- UvAamFPRpqyFLAjOl+siar+zscmZLi2t30RLemShYWtjq+JzbTNhok6Lul3CSh/wmXLO
- 9ppUdP5Qq04TuKoZlkOlDwrggPswSryStWmQlispPjaTBfOQ79GD7Y8UMTyr1PHafnpg
- Z9Hw==
-X-Gm-Message-State: AOJu0YzhOP4Msf0DUeqvlOCPSr6PE/lTswLcRWFlH5fG+HNtXpv7+lSJ
- w8nQarVbvlvtoHYXTuCw6YEkUof3Cqcyfvlp7eICvYQiuLYk
-X-Google-Smtp-Source: AGHT+IF9htByXXW1dg8WQ95JqE5W3abCvLbHJiP4BciE6FdgOmJKFxAsOA3aCt1i9F18/j8CRW1ljbRZC3CNrhtxPfU=
-X-Received: by 2002:a17:90b:4d86:b0:28b:e961:c416 with SMTP id
- oj6-20020a17090b4d8600b0028be961c416mr9253212pjb.10.1703584140069; Tue, 26
- Dec 2023 01:49:00 -0800 (PST)
+ bh=ebs+hxlwQP7BNr/3r39Z9czd/6cHHpuTT2/pGZh0qK0=;
+ b=bMXAHZU+hQ9KarYDnPpMsI4onJuytsY1dhC5yrCsBhp+hTbbzRYWrv9qn1BpzObvEG
+ qVe9zjLe79Hn1cGa68z992O87Wffq0VUZy0EURmj1WwX4gjod+LMpWTyi94U9f2rFnNG
+ N5/n61SNkPqG6LKMFuLmfkBTZ33edbtghd64SKljkZfGIQ2EUROGlvjIclS7nbopOuQD
+ a85ZNW6NDLNfg5AafOKcBMtI0bS8FiOiUaX6IGJa7vdlF7GSv1G0SmI29FnBYS/Fwvok
+ 4pxbQ8vPaN4XTkRAbnmO0DeX25VwnXMbnOMDGSpzorGxQIzK6CQjVIg1vDBW5NIAROWo
+ T/OQ==
+X-Gm-Message-State: AOJu0YxZGx0WbqgV/hQ7vTzK8+O001uHj0Hv+9qJeuqYcf31Zcn5OuvG
+ qAgtd+63XKj9/32Yy3w1ob2TbR56Em7YwRJvqaLjcm2I1xLp1RBMg1H4y6m8BA==
+X-Google-Smtp-Source: AGHT+IFbwMlru+UMDI18HTkjBndbqPXXUTSYS5Ss/vhCllpHjq/sivdzXxqtSXWeBptpiDf1VLxRE5CQwVScUwDV3WM=
+X-Received: by 2002:a05:6808:1886:b0:3bb:71c5:3265 with SMTP id
+ bi6-20020a056808188600b003bb71c53265mr8205468oib.59.1703584214553; Tue, 26
+ Dec 2023 01:50:14 -0800 (PST)
 MIME-Version: 1.0
-References: <20231223004429.247301-1-xypron.glpk@gmx.de>
- <20231223004429.247301-2-xypron.glpk@gmx.de>
-In-Reply-To: <20231223004429.247301-2-xypron.glpk@gmx.de>
+References: <20231206-binman-firewalling-v6-0-e7fce13a6dc1@ti.com>
+ <20231206-binman-firewalling-v6-5-e7fce13a6dc1@ti.com>
+In-Reply-To: <20231206-binman-firewalling-v6-5-e7fce13a6dc1@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Dec 2023 09:48:21 +0000
-Message-ID: <CAFLszTjgj3M4JQYWV4Vjz0KFM+14UMhs7nKL+vg_DOjHepSygg@mail.gmail.com>
-Subject: Re: [PATCH 1/5] smbios: correct definition of gd_smbios_start() macro
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
+Date: Tue, 26 Dec 2023 09:50:02 +0000
+Message-ID: <CAFLszTi2tnbHz_5Dsb7Q3H3NrB_KXq4zWL7fbYcOnF81xCv4xA@mail.gmail.com>
+Subject: Re: [PATCH v6 5/8] binman: j721s2: Add firewall configurations
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Andrew Davis <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ u-boot@lists.denx.de, 
+ Udit Kumar <u-kumar1@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, 
+ Nishanth Menon <nm@ti.com>, Thomas Richard <thomas.richard@bootlin.com>, 
+ Gregory CLEMENT <gregory.clement@bootlin.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -84,44 +90,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Manorit,
 
-On Sat, Dec 23, 2023 at 12:44=E2=80=AFAM Heinrich Schuchardt <xypron.glpk@g=
-mx.de> wrote:
+On Wed, Dec 6, 2023 at 9:51=E2=80=AFAM Manorit Chawdhry <m-chawdhry@ti.com>=
+ wrote:
 >
-> gd_smbios_start() currently points to a non-existent field.
-> It should return the field written by gd_set_smbios_start().
+> The following commits adds the configuration of firewalls required to
+> protect ATF and OP-TEE memory region from non-secure reads and
+> writes using master and slave firewalls present in our K3 SOCs.
 >
-> Fixes: 50834884a815 ("Record the position of the SMBIOS tables")
-> Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 > ---
->  include/asm-generic/global_data.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  arch/arm/dts/k3-j721s2-binman.dtsi | 217 +++++++++++++++++++++++++++++++=
+++++++
+>  1 file changed, 217 insertions(+)
 >
 
-See:
+Just a minor point, but could you please reserve the 'binman' tag for
+patches in tools/binman ?
 
-https://patchwork.ozlabs.org/project/uboot/patch/20231015024511.3995580-5-s=
-jg@chromium.org/
-
-> diff --git a/include/asm-generic/global_data.h b/include/asm-generic/glob=
-al_data.h
-> index e8c6412e3f..c1f7818817 100644
-> --- a/include/asm-generic/global_data.h
-> +++ b/include/asm-generic/global_data.h
-> @@ -553,7 +553,7 @@ static_assert(sizeof(struct global_data) =3D=3D GD_SI=
-ZE);
->  #endif
->
->  #ifdef CONFIG_SMBIOS
-> -#define gd_smbios_start()      gd->smbios_start
-> +#define gd_smbios_start()      gd->arch.smbios_start
->  #define gd_set_smbios_start(addr)      gd->arch.smbios_start =3D addr
->  #else
->  #define gd_smbios_start()      0UL
-> --
-> 2.43.0
->
-
-Regards,
-SImon
+Thanks,
+Simon
