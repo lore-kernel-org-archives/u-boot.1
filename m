@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 269C7C46CD4
-	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:51:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89117C47072
+	for <u-boot@archiver.kernel.org>; Tue, 26 Dec 2023 09:51:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D32F387931;
-	Tue, 26 Dec 2023 10:48:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8874987943;
+	Tue, 26 Dec 2023 10:48:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q/UUz9u7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e5MUcW7W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3CB0687923; Tue, 26 Dec 2023 10:48:28 +0100 (CET)
-Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
- [IPv6:2607:f8b0:4864:20::c2a])
+ id 57DA18792B; Tue, 26 Dec 2023 10:48:28 +0100 (CET)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 944628792B
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:48:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F46E8787E
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 10:48:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-594c7443cc5so4084eaf.2
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:48:23 -0800 (PST)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-1f5bd86ceb3so3235447fac.2
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 01:48:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703584102; x=1704188902; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703584104; x=1704188904; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=u6g7gZSuLHFLpC/n+Km97UBYtkRjIXLjJ5/J8WxCDg4=;
- b=Q/UUz9u7LD/Gu1Hj/2A8Pmkk66sxrfY4mX5JTJ5QyEnZZe1HuNkKzKXWpk+Sya/yaZ
- kN52GucJEKIn937N83KxgGnY9Etz7xSa/cJIZrnzjow1hJkIUojVCmv6b3SoZbwI0Ina
- znh08AfcNE0l9Q1RznFFerXtm4l/5n9IMhtM4=
+ bh=tRvG/QelpNKSqWsli3qKs09x1XqxDzvN3oTAcBQkbSA=;
+ b=e5MUcW7Wx+lC5n7EmmPg7KQC5WN5PEfn+3V2cmA04ygP0U0+/kY9BCsgTidQOt1dCH
+ hjg92gndM1uecKYyFTLBoYp9DDSNA7YdVapilTWhyN/cUZpKn/PvQqbD3zd5OVeIROdJ
+ gUqGzW88DF58qQhkHXHM2MyC1KjBn32tdVW+I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703584102; x=1704188902;
+ d=1e100.net; s=20230601; t=1703584104; x=1704188904;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=u6g7gZSuLHFLpC/n+Km97UBYtkRjIXLjJ5/J8WxCDg4=;
- b=fyz7VicHiF6dp4nlvS5XTbxzM+AzXIGWbLckQtlYXSlE4bFNnHZB85xuGJRHtWDC7/
- H1Wg2TCFuqAWSzOl8oQ7PcJMNh2aryg/Y3c2uDBt/neNxj6mOCqxfnYKmBukTl+5BZMo
- I44J+TJSApbdJVBGKM3kgRBoZ6KMCl1jFaATIiymVI9pPQx8Jg89DGkrjZQtm/FHcIBU
- 3F+ytM8bfex6sYcI5gF5szx+OTrD/gAhwo/Zi4H54UMGUCnKVnFvC+FaoWh2+cYm1jJt
- zSGMmdUBp1sjpiVT0y2UKLcMKcUAlsopuuVIY+KSMzkO7Btt0WywQuqrIXzuPLGTDD5q
- JJJQ==
-X-Gm-Message-State: AOJu0YxqD7qa4KgH+Dkg7kZbknJHPqSu0TT0o85V7CGbl3d/3qaIlMz7
- y6LxcBealBndFFSq0O1mgxFEJKCVWwx54Xfd8nyYpoXsmBQv
-X-Google-Smtp-Source: AGHT+IHHo9EohTa1ChrLEOsTry0oO5KlI5kR1ggC7D/BuMWIyl+Hkg2d30DxD2eJ7J0F/o8GeasBPIurjj1RagNp8Gg=
-X-Received: by 2002:a05:6358:e49d:b0:172:d66a:81c3 with SMTP id
- by29-20020a056358e49d00b00172d66a81c3mr4475176rwb.22.1703584102188; Tue, 26
- Dec 2023 01:48:22 -0800 (PST)
+ bh=tRvG/QelpNKSqWsli3qKs09x1XqxDzvN3oTAcBQkbSA=;
+ b=XBzbe+lle3nkM0mMk0hQXOlIfEt7qIkGvsW+xo8T9ClGdrGsVGBTsauZ6t5rWFr1qB
+ d1kzjvWw6dgulir49uM2wVDUEBHollfUJTZ2p9Ems+1OibrtIU1GaTasLdqCFuIzsTax
+ vY2nJJu1Tf2faeWiqJWu3UgkYI80pcTsufYhiAqkESCP00d65ALHJSYFNqHq7YwoDaPe
+ B9ObtHxbW7Hg/r3Q6bq3vD90VNptyRakZOkJBNqH0qRoWxwa4s3MsQGzI7ZeFogJ7NdY
+ jVS9m44L0GoYvwp8ge9WcPqCf39qu8qwxhPFBMChgpg9cq7Nxwb8cSxiKzFGpXdowhYo
+ x7kw==
+X-Gm-Message-State: AOJu0YytjbBu/zvwfMhXPkQp8UH4Z3qZrBbZIsj4VXyhGexZPmMWDUp1
+ a8gj5nwIb+UiSg7kRbGPo70+c3ZPkwV7UiwOEISRuMXHqMGR
+X-Google-Smtp-Source: AGHT+IGKZZ0tXKYrtov2ta0HxekcQbCYLpwBnQkSKXVax/J+MZEeaTztW+dwMw/GgpdeMUKHx0kdKFjZ02vbeaOBHFc=
+X-Received: by 2002:a05:6358:c111:b0:170:6eb2:783 with SMTP id
+ fh17-20020a056358c11100b001706eb20783mr6850080rwb.28.1703584104741; Tue, 26
+ Dec 2023 01:48:24 -0800 (PST)
 MIME-Version: 1.0
 References: <20231222213110.660402-1-raymond.mao@linaro.org>
- <20231222213110.660402-5-raymond.mao@linaro.org>
-In-Reply-To: <20231222213110.660402-5-raymond.mao@linaro.org>
+ <20231222213110.660402-2-raymond.mao@linaro.org>
+In-Reply-To: <20231222213110.660402-2-raymond.mao@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Dec 2023 09:47:42 +0000
-Message-ID: <CAFLszTgjj2+78qixAKQ5pK4PtLRTS4ckVLAptUZnV9+zFzaQ2A@mail.gmail.com>
-Subject: Re: [PATCH v3 4/9] arm: armv7: save boot arguments
+Date: Tue, 26 Dec 2023 09:47:44 +0000
+Message-ID: <CAFLszTh7f2oy_Aw5Oq1m0Eo4h496dZenhBeYrW9DbB_FxnFADA@mail.gmail.com>
+Subject: Re: [PATCH v3 1/9] bloblist: add API to check the register conventions
 To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, jwerner@chromium.org, 
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Kevin Chen <kevin_chen@aspeedtech.com>, 
- Nikhil M Jain <n-jain1@ti.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Shiji Yang <yangshiji66@outlook.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>, 
+ Shiji Yang <yangshiji66@outlook.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Sean Anderson <sean.anderson@seco.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Baruch Siach <baruch@tkos.co.il>, Michal Simek <michal.simek@amd.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Qu Wenruo <wqu@suse.com>, 
- Sean Anderson <sean.anderson@seco.com>
+ Baruch Siach <baruch@tkos.co.il>, Michal Simek <michal.simek@amd.com>,
+ Stefan Roese <sr@denx.de>, Qu Wenruo <wqu@suse.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -98,51 +97,70 @@ Hi Raymond,
 On Fri, Dec 22, 2023 at 9:31=E2=80=AFPM Raymond Mao <raymond.mao@linaro.org=
 > wrote:
 >
-> Save boot arguments r[0-3] into an array for handover of bloblist from
-> previous boot stage.
+> Add bloblist_check_reg_conv() to check whether the bloblist is compliant
+> to the register conventions defined in Firmware Handoff specification.
+> This API can be used for all Arm platforms.
 >
 > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 > ---
 > Changes in v2
-> - New patch file created for v2.
+> - Refactor of bloblist_check_reg_conv().
 > Changes in v3
-> - Swap value of r0 with r2.
+> - bloblist_check_reg_conv() returns -ENOENT if OF_BOARD is disabled.
 >
->  arch/arm/cpu/armv7/start.S | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
+>  common/bloblist.c  | 13 +++++++++++++
+>  include/bloblist.h | 12 ++++++++++++
+>  2 files changed, 25 insertions(+)
 >
-> diff --git a/arch/arm/cpu/armv7/start.S b/arch/arm/cpu/armv7/start.S
-> index 69e281b086..2ca63ca32c 100644
-> --- a/arch/arm/cpu/armv7/start.S
-> +++ b/arch/arm/cpu/armv7/start.S
-> @@ -152,9 +152,22 @@ ENDPROC(c_runtime_cpu_setup)
->   *
->   ***********************************************************************=
-**/
->  WEAK(save_boot_params)
-> +#if (IS_ENABLED(CONFIG_OF_BOARD) && IS_ENABLED(CONFIG_BLOBLIST))
-> +       ldr r12, =3Dsaved_args
-> +       /* Intentionally swapping r0 with r2 */
-> +       stm r12, {r2, r1, r0, r3}
-
-I thought the instruction was a bitmap, so what does the 'swapping'
-actually change?
-
-> +#endif
->         b       save_boot_params_ret            @ back to my caller
->  ENDPROC(save_boot_params)
+> diff --git a/common/bloblist.c b/common/bloblist.c
+> index 625e480f6b..ba17dd851a 100644
+> --- a/common/bloblist.c
+> +++ b/common/bloblist.c
+> @@ -542,3 +542,16 @@ int bloblist_maybe_init(void)
 >
-> +.section .data
-> +.global saved_args
-> +saved_args:
-> +       .rept 4
-> +       .word 0
-> +       .endr
-> +END(saved_args)
+>         return 0;
+>  }
 > +
->  #ifdef CONFIG_ARMV7_LPAE
->  WEAK(switch_to_hypervisor)
->         b       switch_to_hypervisor_ret
+> +int bloblist_check_reg_conv(ulong rfdt, ulong rzero)
+> +{
+> +       if (!IS_ENABLED(CONFIG_OF_BOARD))
+> +               return -ENOENT;
+> +
+> +       if (rzero || rfdt !=3D (ulong)bloblist_find(BLOBLISTT_CONTROL_FDT=
+, 0)) {
+> +               gd->bloblist =3D NULL;  /* Reset the gd bloblist pointer =
+*/
+> +               return -EIO;
+> +       }
+
+Where does the magic 4a0fb10b value get checked?
+
+> +
+> +       return 0;
+> +}
+> diff --git a/include/bloblist.h b/include/bloblist.h
+> index 84fc943819..bd32e38a06 100644
+> --- a/include/bloblist.h
+> +++ b/include/bloblist.h
+> @@ -461,4 +461,16 @@ static inline int bloblist_maybe_init(void)
+>  }
+>  #endif /* BLOBLIST */
+>
+> +/**
+> + * bloblist_check_reg_conv() - Check whether the bloblist is compliant t=
+o
+> + *                            the register conventions according to the
+> + *                            Firmware Handoff spec.
+> + *
+> + * @rfdt:  Register that holds the FDT base address.
+> + * @rzero: Register that must be zero.
+> + * Return: 0 if OK, -EIO if the bloblist is not compliant to the registe=
+r
+> + *        conventions, -ENOENT if OF_BOARD is disabled.
+> + */
+> +int bloblist_check_reg_conv(ulong rfdt, ulong rzero);
+> +
+>  #endif /* __BLOBLIST_H */
 > --
 > 2.25.1
 >
