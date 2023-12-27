@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DF74C46CD4
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 07:41:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEECDC4706F
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 07:41:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2DEC8789A;
-	Wed, 27 Dec 2023 08:40:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 17B08878AA;
+	Wed, 27 Dec 2023 08:40:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ot+BDdD6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CL3KVZUG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5B2C87872; Wed, 27 Dec 2023 08:40:51 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 4789D87855; Wed, 27 Dec 2023 08:40:52 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A82DA8760D
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 08:40:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 82C2C87855
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 08:40:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-40d5095834aso30339525e9.2
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 23:40:48 -0800 (PST)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-40d5336986cso33277965e9.1
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 23:40:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703662848; x=1704267648; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703662849; x=1704267649; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RbsdqRhX3WUqbngc6X5DRSlO+A2MBqb6wJxlBenbfU8=;
- b=Ot+BDdD6PtnBd1Eug8rjbL/3sRQ0iaaGRIB0dPQ7CbDCvZ4Dmr+tXKyD/dj1+UhQUC
- 3n7NtfSs5QEuTz1QBueYW1WAsu1/8sXgBMVDyTcuI/NO3B7BoljGQwgqqX4QLYO2HlCN
- 7JwKRlgH9py1g/NOGkjubqzVnjVNRXBirz6hw=
+ bh=7VhXZNcwRvuX5yDmpXj2zP3PSFGV4siTQBXHsURPbqo=;
+ b=CL3KVZUGu9BtfqTKbHNe7RhKmrWq7pVPDfsq/xI+KA9gLy5JlM67sCrPihLxI2CU/u
+ ju29vgo83yFiLMtijaBRBMpKiv/6Z4jRhI0HInA12w9YdZalKv8NuzEdYnZdswZU/ols
+ +i8Q+1hl+5cdkJRN0iOyaHHSCbKtwhw+ifnhw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703662848; x=1704267648;
+ d=1e100.net; s=20230601; t=1703662849; x=1704267649;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RbsdqRhX3WUqbngc6X5DRSlO+A2MBqb6wJxlBenbfU8=;
- b=ZCZ+2T8uofhzZcLUAIs4mzuwSgUlnGob8fEWKvWrAKxCt5jASqgMFwnw99j8G+Mvsf
- dJwfwyGsqjwyyp3ReAyyPegMr+Z2M2nYjNcko0sQevjlh7gFXV+d+oeFqK7Fgj8x219C
- 0VSUhMpVjIJyPDbr2Zw4scma/B592UJ/c95NOCDZUxPkpGXHcSLhZXvNHF9Yn1AAX+KU
- ak1gpaHsZqt4Ec0siWqSEh1G5y3VnKAiZihGzhCBB550Z/CpK5wWxBVl6pTpG6+p88m7
- FHWEQy6XQeQNR9u/Y2NVrUw5FCViCOihyBWp7mX2C7Hi7kfEWNyluY7233M5LSdmK0Nl
- G2xA==
-X-Gm-Message-State: AOJu0YwIuZJ75eBu6fvCvPUZ6ixvkaQEtnPRe0wGmLJweB1zB8JIgk3p
- /7+3CE3ybU03r/pceu0XBtXmt55uxowE9kEEM9BO87sIeJxk
-X-Google-Smtp-Source: AGHT+IFHuINa0wnyilSBu6wN1vUNWJtKnz6jnZoHa3VrFpVp3BHBGjza0z3w2sv5NBe1EJCrpiE4nw==
-X-Received: by 2002:a05:600c:ac5:b0:40d:5c8d:4947 with SMTP id
- c5-20020a05600c0ac500b0040d5c8d4947mr284237wmr.289.1703662847726; 
- Tue, 26 Dec 2023 23:40:47 -0800 (PST)
+ bh=7VhXZNcwRvuX5yDmpXj2zP3PSFGV4siTQBXHsURPbqo=;
+ b=ceaOmYjZdBuZEdVr6/o9uGGDPDhRZilSPCTGjzt+3Ep7ONJW+Nvvmx4rG7AFfa18H6
+ QIf9yigwJME5Ht46oaa+9zUn1hAMeqZYSyKNXj4qweS2r/hPmpR1FRkrzDU6Ege8gFCb
+ KQw2KSzalw+9yAgZFBD96Vp14mi5/2kUOsEorLYXcTANMH1TZuRMnl7jPJZNIbpZYXFt
+ Apfs5GftMrEYWbEEvqpsnSoR0u6EoJG6zspFNQWFZdn57XuX0KBVGQe9+oXaTVJ7o59l
+ L7WZH0MeOEp96QiE+oASmn78k/rI8sY/yjYpE1/97E20jPD5tOdYMzvN0UMuCA1tmqs9
+ zD6w==
+X-Gm-Message-State: AOJu0Yy8nnDUY186ZP6h36PJL4O9UqY3lUiEDZ30gKbAIa9Qzhu3oqAm
+ 5R1+2cGaP4gRcJoOZEJAptmaTuLt6j2lnIm8G8JT6DzA4a14
+X-Google-Smtp-Source: AGHT+IGp8G8tSqVkYgn26pNyh2pPfm76XtPFFFtFxJloRLMdfE9hZ1ujxKuD7L/Y6EKDQpKcHar7xw==
+X-Received: by 2002:a05:600c:450d:b0:40d:5722:2a44 with SMTP id
+ t13-20020a05600c450d00b0040d57222a44mr1763466wmo.144.1703662848804; 
+ Tue, 26 Dec 2023 23:40:48 -0800 (PST)
 Received: from tasman.chapterst.org (80-42-48-87.dynamic.dsl.as9105.com.
  [80.42.48.87]) by smtp.gmail.com with ESMTPSA id
  s23-20020adf9797000000b00336813bb588sm14314426wrb.111.2023.12.26.23.40.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Dec 2023 23:40:47 -0800 (PST)
+ Tue, 26 Dec 2023 23:40:48 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4 3/7] smbios: SMBIOS 3.0 (64-bit) Entry Point structure
-Date: Wed, 27 Dec 2023 07:40:20 +0000
-Message-Id: <20231227074025.2178825-4-sjg@chromium.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Peter Robinson <pbrobinson@gmail.com>
+Subject: [PATCH v4 4/7] smbios: Use SMBIOS 3.0 to support an address above 4GB
+Date: Wed, 27 Dec 2023 07:40:21 +0000
+Message-Id: <20231227074025.2178825-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231227074025.2178825-1-sjg@chromium.org>
 References: <20231227074025.2178825-1-sjg@chromium.org>
@@ -90,59 +89,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+When the SMBIOS table is written to an address above 4GB a 32-bit table
+address is not large enough.
 
-Add definition of the SMBIOS 3.0 (64-bit) Entry Point structure.
+Use an SMBIOS3 table in that case.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Note that we cannot use efi_allocate_pages() since this function has
+nothing to do with EFI. There is no equivalent function to allocate
+memory below 4GB in U-Boot. One solution would be to create a separate
+malloc() pool, or just always put the malloc() pool below 4GB.
+
+- Use log_debug() for warning
+- Rebase on Heinrich's smbios.h patch
+- Set the checksum for SMBIOS3
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v4:
-- Bring in this patch from Heinrich's series
+- Check the start of the table rather than the end
 
- include/smbios.h | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
+Changes in v2:
+- Check the end of the table rather than the start.
+
+ include/smbios.h |  6 +++++-
+ lib/smbios.c     | 30 +++++++++++++++++++++++++-----
+ 2 files changed, 30 insertions(+), 6 deletions(-)
 
 diff --git a/include/smbios.h b/include/smbios.h
-index c9df2706f5a..e601283d293 100644
+index e601283d293..77be58887a2 100644
 --- a/include/smbios.h
 +++ b/include/smbios.h
-@@ -54,6 +54,32 @@ struct __packed smbios_entry {
- 	u8 bcd_rev;
+@@ -12,7 +12,7 @@
+ 
+ /* SMBIOS spec version implemented */
+ #define SMBIOS_MAJOR_VER	3
+-#define SMBIOS_MINOR_VER	0
++#define SMBIOS_MINOR_VER	7
+ 
+ enum {
+ 	SMBIOS_STR_MAX	= 64,	/* Maximum length allowed for a string */
+@@ -80,6 +80,10 @@ struct __packed smbios3_entry {
+ 	u64 struct_table_address;
  };
  
-+/**
-+ * struct smbios3_entry - SMBIOS 3.0 (64-bit) Entry Point structure
-+ */
-+struct __packed smbios3_entry {
-+	/** @anchor: anchor string */
-+	u8 anchor[5];
-+	/** @checksum: checksum of the entry point structure */
-+	u8 checksum;
-+	/** @length: length of the entry point structure */
-+	u8 length;
-+	/** @major_ver: major version of the SMBIOS specification */
-+	u8 major_ver;
-+	/** @minor_ver: minor version of the SMBIOS specification */
-+	u8 minor_ver;
-+	/** @docrev: revision of the SMBIOS specification */
-+	u8 doc_rev;
-+	/** @entry_point_rev: revision of the entry point structure */
-+	u8 entry_point_rev;
-+	/** @reserved: reserved */
-+	u8 reserved;
-+	/** maximum size of SMBIOS table */
-+	u32 max_struct_size;
-+	/** @struct_table_address: 64-bit physical starting address */
-+	u64 struct_table_address;
-+};
++/* These two structures should use the same amount of 16-byte-aligned space */
++static_assert(ALIGN(16, sizeof(struct smbios_entry)) ==
++	      ALIGN(16, sizeof(struct smbios3_entry)));
 +
  /* BIOS characteristics */
  #define BIOS_CHARACTERISTICS_PCI_SUPPORTED	(1 << 7)
  #define BIOS_CHARACTERISTICS_UPGRADEABLE	(1 << 11)
+diff --git a/lib/smbios.c b/lib/smbios.c
+index eea72670bd9..7f79d969c92 100644
+--- a/lib/smbios.c
++++ b/lib/smbios.c
+@@ -567,7 +567,11 @@ ulong write_smbios_table(ulong addr)
+ 	addr = ALIGN(addr, 16);
+ 	start_addr = addr;
+ 
+-	addr += sizeof(struct smbios_entry);
++	/*
++	 * So far we don't know which struct will be used, but they both end
++	 * up using the same amount of 16-bit-aligned space
++	 */
++	addr += max(sizeof(struct smbios_entry), sizeof(struct smbios3_entry));
+ 	addr = ALIGN(addr, 16);
+ 	tables = addr;
+ 
+@@ -590,16 +594,32 @@ ulong write_smbios_table(ulong addr)
+ 	 * We must use a pointer here so things work correctly on sandbox. The
+ 	 * user of this table is not aware of the mapping of addresses to
+ 	 * sandbox's DRAM buffer.
++	 *
++	 * Check the address of the end of the tables. If it is above 4GB then
++	 * it is sensible to use SMBIOS3 even if the start of the table is below
++	 * 4GB (this case is very unlikely to happen in practice)
+ 	 */
+ 	table_addr = (ulong)map_sysmem(tables, 0);
+-	if (sizeof(table_addr) > sizeof(u32) && table_addr > (ulong)UINT_MAX) {
++	if (sizeof(table_addr) > sizeof(u32) && addr >= (ulong)UINT_MAX) {
++		struct smbios3_entry *se;
+ 		/*
+ 		 * We need to put this >32-bit pointer into the table but the
+ 		 * field is only 32 bits wide.
+ 		 */
+-		printf("WARNING: SMBIOS table_address overflow %llx\n",
+-		       (unsigned long long)table_addr);
+-		addr = 0;
++		log_debug("WARNING: Using SMBIOS3.0 due to table-address overflow %lx\n",
++			  table_addr);
++		se = map_sysmem(start_addr, sizeof(struct smbios_entry));
++		memset(se, '\0', sizeof(struct smbios_entry));
++		memcpy(se->anchor, "_SM3_", 5);
++		se->length = sizeof(struct smbios3_entry);
++		se->major_ver = SMBIOS_MAJOR_VER;
++		se->minor_ver = SMBIOS_MINOR_VER;
++		se->doc_rev = 0;
++		se->entry_point_rev = 1;
++		se->max_struct_size = len;
++		se->struct_table_address = table_addr;
++		se->checksum = table_compute_checksum(se,
++						sizeof(struct smbios3_entry));
+ 	} else {
+ 		struct smbios_entry *se;
+ 
 -- 
 2.34.1
 
