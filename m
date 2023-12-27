@@ -4,74 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADF83C46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 19:21:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BF1DC46CD4
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 19:48:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E385C877F3;
-	Wed, 27 Dec 2023 20:21:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9444A8776E;
+	Wed, 27 Dec 2023 20:48:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xI5b3MjT";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Tpio4egi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BC0487801; Wed, 27 Dec 2023 20:21:55 +0100 (CET)
-Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
- [IPv6:2607:f8b0:4864:20::536])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D413E87801; Wed, 27 Dec 2023 20:48:18 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32F2C86D37
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 20:21:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 61DB9807D9
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 20:48:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x536.google.com with SMTP id
- 41be03b00d2f7-5ca29c131ebso4247334a12.0
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 11:21:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703704911; x=1704309711; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Sw0l2ErV5qbiaZ10sK7ydij4Ybr3/CF/RyZNGZ1NdnA=;
- b=xI5b3MjTaBwnalqvOXxjNFqsl6omVgmg/LFr6NGuvQHUu/1qi4/sxzT/sWmTx20rGZ
- Ki91Q8bba+/RYAoraUUjinYOe3tV0x7E+3pm97mTeU3O+rDD+qy8oEHDWA//d9ovayg7
- Oi7Ouy9ltgX+NU29Un/8TjEfNH4SfRPYf8EhZdL5lVmt1bZ023knkYuCy2H+ApGJGO7u
- ShS+dj81cdbYUBt+62oFDD+akWaiygW5Leto+GSiTkjghDcqCsRq0apZYQL2ccfwc6Hh
- tvaXs3z26Rcy30TP2aUl+jdiyyrbiqrk4euAApRdc7HB7AM3k2ckwWGy2AoIfKdbUkvO
- KYPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703704911; x=1704309711;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Sw0l2ErV5qbiaZ10sK7ydij4Ybr3/CF/RyZNGZ1NdnA=;
- b=wrtVBa33XzvpR4fp3wT2gHWU9/GL8JT6tPjuiunJNVEPbBbT+FHr/JPXyRG0UmcRdm
- EWu5aO3CYQqXpqvbWmsX0oUZ3r5Cn+UJje5z7u8CW//DbmVwmvoDDF5jHrKBku6mS/EA
- +mmSf7VXK8NU9uVcuR6AEN/XICJRSnIs0zv5ZBHhB3b5twYhEA1JmFaAH956DwYfk9cy
- mexmEXhVY6SaqC/j5S1iKXSop709+Ds/qnDrnNYcHhgFEQwn34uJ0BjGIjQXYStwi5+9
- FrjTWCP1k2zfa8NmwR2DFFJ3woD/eBQkz+jQ1LKjGrjBStren1NomiCQpjybEVe+B9K8
- uEGg==
-X-Gm-Message-State: AOJu0YwpxTeFLLqJMIO02PCur/mcJ3gUCiKo/xRWgCzv4+ugkgYbhMd/
- BrpNTqe97vKoX3Z8dzSIh2FLRLxvQz5Fi+Gbf95VQeS6JP/b+Q==
-X-Google-Smtp-Source: AGHT+IEoucSk7KQo3NjR8bD9T/kIyvVW66qGzyyGUnhJ0s+d55seg4Pcdxmj7P+rJO6uZXydDX86/+QTrF/zS2nLIJY=
-X-Received: by 2002:a05:6a21:189:b0:196:5c5:186a with SMTP id
- le9-20020a056a21018900b0019605c5186amr2984003pzb.6.1703704911451; Wed, 27 Dec
- 2023 11:21:51 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BRJlxIM069185;
+ Wed, 27 Dec 2023 13:47:59 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1703706479;
+ bh=s/wo/CPs2BbLdKb+QA5yqmRn5+kT5KuuHVnf0KH3jlA=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=Tpio4egiq3hhrBD56TwjzVAAXo4GpEXefRmEEV8ZxcFSagSQaG6/WKjYGoSdTQsky
+ ZR3VtpHaRhgE5+fWpnNwbBLEf/nm+TYdxO5dY9U8PUNePr4jHg8kDy4CV/8+ktw8ym
+ mF21mktb9pU0mP0gJFcz54VUDUB9sYxSuKleAvx4=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BRJlx3D038128
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 27 Dec 2023 13:47:59 -0600
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
+ Dec 2023 13:47:59 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 27 Dec 2023 13:47:59 -0600
+Received: from localhost (dhruva.dhcp.ti.com [172.24.227.68])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BRJlwA5122221;
+ Wed, 27 Dec 2023 13:47:59 -0600
+Date: Thu, 28 Dec 2023 01:17:58 +0530
+From: Dhruva Gole <d-gole@ti.com>
+To: <tkuw584924@gmail.com>
+CC: <u-boot@lists.denx.de>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
+ <tudor.ambarus@linaro.org>, <pratyush@kernel.org>,
+ <Bacem.Daassi@infineon.com>, Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Subject: Re: [PATCH v2 9/9] mtd: spi-nor-ids: Add Infineon(Cypress) s28hs02gt
+ ID
+Message-ID: <20231227194758.b37l2vaxqynzj22i@dhruva>
+References: <cover.1703220284.git.Takahiro.Kuwano@infineon.com>
+ <1e205ee9275691afdc41129009a18dd715e6d1f2.1703220284.git.Takahiro.Kuwano@infineon.com>
 MIME-Version: 1.0
-References: <20231218181901.337515-1-raymond.mao@linaro.org>
- <20231218181901.337515-7-raymond.mao@linaro.org>
- <CAC_iWjLs3Tj25hr7zD4cWCsRRWhB=DNerOr6CjH2PQeOfAaBGg@mail.gmail.com>
-In-Reply-To: <CAC_iWjLs3Tj25hr7zD4cWCsRRWhB=DNerOr6CjH2PQeOfAaBGg@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Wed, 27 Dec 2023 14:21:41 -0500
-Message-ID: <CAEfUkULP4W+wp7Z7YebFuJwXmUvRxayuwbCqRg5jLBdp_QwVqg@mail.gmail.com>
-Subject: Re: [PATCH v3 06/14] bloblist: Drop spare value from bloblist record
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
- Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <1e205ee9275691afdc41129009a18dd715e6d1f2.1703220284.git.Takahiro.Kuwano@infineon.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,40 +81,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi!
 
-On Wed, 27 Dec 2023 at 04:43, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-wrote:
+On Dec 22, 2023 at 14:46:06 +0900, tkuw584924@gmail.com wrote:
+> From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+> 
+> Infineon(Cypress) S28HS02GT is 1.8V, 2Gb (256MB) NOR Flash memory with
+> Octal interface. It is a dual-die package parts and has same features
+> with existing S28 series.
+> 
+> Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+> ---
+>  drivers/mtd/spi/spi-nor-ids.c | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+> index f86e7ff8e5..949ceee375 100644
+> --- a/drivers/mtd/spi/spi-nor-ids.c
+> +++ b/drivers/mtd/spi/spi-nor-ids.c
+> @@ -370,6 +370,7 @@ const struct flash_info spi_nor_ids[] = {
+>  	{ INFO("s28hl01gt",  0x345a1b,      0, 256 * 1024, 512, SPI_NOR_OCTAL_DTR_READ) },
+>  	{ INFO("s28hs512t",  0x345b1a,      0, 256 * 1024, 256, SPI_NOR_OCTAL_DTR_READ) },
+>  	{ INFO("s28hs01gt",  0x345b1b,      0, 256 * 1024, 512, SPI_NOR_OCTAL_DTR_READ) },
+> +	{ INFO("s28hs02gt",  0x345b1c,      0, 256 * 1024, 1024, SPI_NOR_OCTAL_DTR_READ) },
 
-> Hi Raymond,
->
-> On Mon, 18 Dec 2023 at 20:20, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > From: Simon Glass <sjg@chromium.org>
-> >
-> > Drop spare value from bloblist record header.
-> >
-> > For now it is still present in the header, with an underscore, so that
-> > tests continue to pass.
->
-> I am not sure I understand the commit message. Doesn't the spec define
-> this as 'reserved' now?
-> On top of that, it's a better idea to follow the spec naming. It's
-> easier to map the spec -> code for new readers. So I would rename
->
-> tag -> tag_id
-> size -> data_size and
-> flags -> reserved.
->
-> Can we at least do the flags -> reserved in this patch?
->
-> The spec only defines a spare field for TL header (bloblist header) but
-not for a TE header
-(bloblist record header), so we just remove the spare field, no need to
-update this patch
-I think.
+Reviewed-by: Dhruva Gole <d-gole@ti.com>
 
-[...]
+>  #endif
+>  #endif
+>  #ifdef CONFIG_SPI_FLASH_SST		/* SST */
+> -- 
+> 2.34.1
+> 
 
-Regards,
-Raymond
+-- 
+Best regards,
+Dhruva Gole <d-gole@ti.com>
