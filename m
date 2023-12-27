@@ -4,72 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 960BCC46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 10:19:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31539C46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 10:20:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1765B87732;
-	Wed, 27 Dec 2023 11:19:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 816B387981;
+	Wed, 27 Dec 2023 11:20:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jPQ75CtG";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="onx3P5AB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1E9A8796E; Wed, 27 Dec 2023 11:19:41 +0100 (CET)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7049887980; Wed, 27 Dec 2023 11:19:59 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C22808770A
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 11:19:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C6738770A
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 11:19:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-50e7e6283bdso1451510e87.1
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 02:19:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703672379; x=1704277179; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ee1CsoNM0WDOReE7cSTtVaDRiiMF1Fow6RNehkmP5Nc=;
- b=jPQ75CtG7qgvC+edBNYV3n80yytP8VRC2GPCzOU0tuCsoTafnDM5WPOLgAFHFc7rUj
- 1V3eU+lAVb8dsYp4H2Rvbknm5dMff/BHB3+SkBc/vVEoxsxtdxWW1gCwni/QSwy65Kwv
- /AS78PagVQIy+4g3MqJ0t1muh6mB1RNqU+kkcTshzYhtiybm0pwK4I8yHYWZClEWL8gr
- NnLbkAfCtu7ZUtg3Ff6pNx+s2VFg518fMRvm/YWP+inHTJfSdnULwaWRiq0FtJLvPa47
- z/g2tMcjy4DBJnOf0fx9KRRnhz1d+UYC2YK7B6KKAGqrudTZsiruxoBAlM22wcRzRuk2
- Z9gg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703672379; x=1704277179;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ee1CsoNM0WDOReE7cSTtVaDRiiMF1Fow6RNehkmP5Nc=;
- b=WkGjnecGBjAx3dJZ54xW5LRbHg4iY/vgyLfHAsoUOdI5JUKJLzifkduNmIjboyuMq4
- UAcAyhsJ+3BIU10OyPJiyw0l5OM1pzZ+eV4aQswfvszMXrtxnygaYY8yuQ0OOQYqh7sP
- MjCvo1I+PrmBEMAZ8+Es28lPorWwfYOBM3gudnLPO8hS6L1vEjfwOtbqKD1RcdBu63xF
- +w33LHjGc89kIaTsEIljExOp7y4ANHc+Vlo1WHUkEdZafDqkV9YQBDRqDBNnuDTIB9OG
- wSFaPxIyE0nhcRymbS2ppzpNSFFQmeKyyaHtHK4QV76n3Fs77n+NUgGKEEUpDc6uVuOS
- pbzA==
-X-Gm-Message-State: AOJu0YwUhaAaCA90/GFM1dfkrurwvZymFai4IDx84Ep/HbMtMJpckfVY
- 6U05H8UuzFVGsd73gzB8atKXjdqH6atDKeTOpuyCNeks8ytVOA==
-X-Google-Smtp-Source: AGHT+IGcAHUZgToxqxuPLS1PF8TjMBrE7GML1sWQzlC2UvWK3GKZieXsjFazjh+MVL7/u7o622TqaBpY83uZ/wz5GHc=
-X-Received: by 2002:a05:6512:3d15:b0:50e:76e0:b9b3 with SMTP id
- d21-20020a0565123d1500b0050e76e0b9b3mr941349lfv.0.1703672379053; Wed, 27 Dec
- 2023 02:19:39 -0800 (PST)
+ spf=pass smtp.mailfrom=danishanwar@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BRAJgOW016224;
+ Wed, 27 Dec 2023 04:19:42 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1703672382;
+ bh=Pc4ePFHw0elJnXbbzAnyP9HHuZUECBf5CMbqBnF3/m8=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=onx3P5AB+WL41IqBjYMjpiaLT0Tdi5aIXkeZ1VFTxL+06tezdZnRbOjdi0PmAh/11
+ TBz2aNP4AB1p6zwxmZh6EHcejUzL54n6YFt6JgAJBmHYGv2fiE8XejcQPnKamuE7aX
+ LLioLwAgnOA+QaYgvts4oXpJ7cR6MaDdHp1FYmEA=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BRAJgsQ115212
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 27 Dec 2023 04:19:42 -0600
+Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
+ Dec 2023 04:19:42 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 27 Dec 2023 04:19:41 -0600
+Received: from [10.24.69.31] (dhcp-10-24-69-31.dhcp.ti.com [10.24.69.31])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BRAJaF7005168;
+ Wed, 27 Dec 2023 04:19:37 -0600
+Message-ID: <a5d94983-5b36-45d3-b1ef-92cc0da1a505@ti.com>
+Date: Wed, 27 Dec 2023 15:49:36 +0530
 MIME-Version: 1.0
-References: <20231223004429.247301-1-xypron.glpk@gmx.de>
- <20231223004429.247301-5-xypron.glpk@gmx.de>
-In-Reply-To: <20231223004429.247301-5-xypron.glpk@gmx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 27 Dec 2023 12:19:03 +0200
-Message-ID: <CAC_iWj+iXg+rSY5PgPMzHWfsr6rDvcagsXmaS9U0f+--j2YRjQ@mail.gmail.com>
-Subject: Re: [PATCH 4/5] doc: man-page for smbios command
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- u-boot@lists.denx.de
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 12/16] arm: dts: k3-am65x-binman: Add ICSSG2 overlay
+ and configuration
+Content-Language: en-US
+To: Roger Quadros <rogerq@kernel.org>, Maxime Ripard <mripard@kernel.org>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Matthias Schiffer
+ <matthias.schiffer@ew.tq-group.com>, Kamlesh Gurudasani <kamlesh@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Joe
+ Hershberger <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>, Tom
+ Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>
+References: <20231219103418.3445886-1-danishanwar@ti.com>
+ <20231219103418.3445886-13-danishanwar@ti.com>
+ <1745ec33-7446-41fc-886a-704eb6e53c7e@kernel.org>
+From: MD Danish Anwar <danishanwar@ti.com>
+In-Reply-To: <1745ec33-7446-41fc-886a-704eb6e53c7e@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,130 +91,197 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 23 Dec 2023 at 02:57, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> Provide a man-page for the smbios command.
->
-> Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> ---
->  doc/usage/cmd/smbios.rst | 93 ++++++++++++++++++++++++++++++++++++++++
->  doc/usage/index.rst      |  1 +
->  2 files changed, 94 insertions(+)
->  create mode 100644 doc/usage/cmd/smbios.rst
->
-> diff --git a/doc/usage/cmd/smbios.rst b/doc/usage/cmd/smbios.rst
-> new file mode 100644
-> index 0000000000..1ffd706d7d
-> --- /dev/null
-> +++ b/doc/usage/cmd/smbios.rst
-> @@ -0,0 +1,93 @@
-> +.. SPDX-License-Identifier: GPL-2.0-or-later:
-> +
-> +smbios command
-> +==============
-> +
-> +Synopsis
-> +--------
-> +
-> +::
-> +
-> +        smbios
-> +
-> +Description
-> +-----------
-> +
-> +The smbios command displays information from the SMBIOS tables.
-> +
-> +Examples
-> +--------
-> +
-> +The example below shows an example output of the smbios command.
-> +
-> +::
-> +
-> +    => smbios
-> +    SMBIOS 2.8.0 present.
-> +    8 structures occupying 81 bytes
-> +    Table at 0x6d35018
-> +
-> +    Handle 0x0100, DMI type 1, 27 bytes at 0x6d35018
-> +    System Information
-> +        Manufacturer: QEMU
-> +        Product Name: Standard PC (i440FX + PIIX, 1996)
-> +        Version: pc-i440fx-2.5
-> +        Serial Number:
-> +        UUID 00000000-0000-0000-0000-000000000000
-> +        Wake Up Type:
-> +        Serial Number:
-> +        SKU Number:
-> +
-> +    Handle 0x0300, DMI type 3, 22 bytes at 0x6d35069
-> +    Header and Data:
-> +        00000000: 03 16 00 03 01 01 02 00 00 03 03 03 02 00 00 00
-> +        00000010: 00 00 00 00 00 00
-> +    Strings:
-> +        String 1: QEMU
-> +        String 2: pc-i440fx-2.5
-> +
-> +    Handle 0x0400, DMI type 4, 42 bytes at 0x6d35093
-> +    Header and Data:
-> +        00000000: 04 2a 00 04 01 03 01 02 63 06 00 00 fd ab 81 07
-> +        00000010: 03 00 00 00 d0 07 d0 07 41 01 ff ff ff ff ff ff
-> +        00000020: 00 00 00 01 01 01 02 00 01 00
-> +    Strings:
-> +        String 1: CPU 0
-> +        String 2: QEMU
-> +        String 3: pc-i440fx-2.5
-> +
-> +    Handle 0x1000, DMI type 16, 23 bytes at 0x6d350d7
-> +    Header and Data:
-> +        00000000: 10 17 00 10 01 03 06 00 00 02 00 fe ff 01 00 00
-> +        00000010: 00 00 00 00 00 00 00
-> +
-> +    Handle 0x1100, DMI type 17, 40 bytes at 0x6d350f0
-> +    Header and Data:
-> +        00000000: 11 28 00 11 00 10 fe ff ff ff ff ff 80 00 09 00
-> +        00000010: 01 00 07 02 00 00 00 02 00 00 00 00 00 00 00 00
-> +        00000020: 00 00 00 00 00 00 00 00
-> +    Strings:
-> +        String 1: DIMM 0
-> +        String 2: QEMU
-> +
-> +    Handle 0x1300, DMI type 19, 31 bytes at 0x6d35125
-> +    Header and Data:
-> +        00000000: 13 1f 00 13 00 00 00 00 ff ff 01 00 00 10 01 00
-> +        00000010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-> +
-> +    Handle 0x2000, DMI type 32, 11 bytes at 0x6d35146
-> +    Header and Data:
-> +        00000000: 20 0b 00 20 00 00 00 00 00 00 00
-> +
-> +    Handle 0x7f00, DMI type 127, 4 bytes at 0x6d35153
-> +    End Of Table
-> +
-> +Configuration
-> +-------------
-> +
-> +The command is only available if CONFIG_CMD_SMBIOS=y.
-> +
-> +Return value
-> +------------
-> +
-> +The return value $? is 0 (true) on success, 1 (false) otherwise.
-> diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-> index 1a626c03c2..eb2b2311f8 100644
-> --- a/doc/usage/index.rst
-> +++ b/doc/usage/index.rst
-> @@ -102,6 +102,7 @@ Shell commands
->     cmd/size
->     cmd/sleep
->     cmd/sm
-> +   cmd/smbios
->     cmd/sound
->     cmd/source
->     cmd/temperature
-> --
-> 2.43.0
->
+On 20/12/23 4:10 pm, Roger Quadros wrote:
+> 
+> 
+> On 19/12/2023 12:34, MD Danish Anwar wrote:
+>> Add ICSSG2 overlay and configuration to tispl and u-boot images.
+>>
+>> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
+>> ---
+>>  arch/arm/dts/k3-am65x-binman.dtsi | 85 +++++++++++++++++++++++++++++++
+>>  1 file changed, 85 insertions(+)
+>>
+>> diff --git a/arch/arm/dts/k3-am65x-binman.dtsi b/arch/arm/dts/k3-am65x-binman.dtsi
+>> index 8cc24da1f3..9a0c0fca47 100644
+>> --- a/arch/arm/dts/k3-am65x-binman.dtsi
+>> +++ b/arch/arm/dts/k3-am65x-binman.dtsi
+>> @@ -98,6 +98,8 @@
+>>  #define SPL_AM654_EVM_DTB "spl/dts/k3-am654-base-board.dtb"
+>>  #define AM654_EVM_DTB "u-boot.dtb"
+>>  
+>> +#define AM654_EVM_ICSSG2_DTBO "arch/arm/dts/k3-am654-icssg2.dtbo"
+>> +
+>>  &binman {
+>>  	ti-spl {
+>>  		insert-template = <&ti_spl_template>;
+>> @@ -124,6 +126,20 @@
+>>  						filename = SPL_AM654_EVM_DTB;
+>>  					};
+>>  				};
+>> +
+>> +				fdt-1 {
+>> +					description = "k3-am654-icssg2 overlay";
+>> +					type = "flat_dt";
+>> +					arch = "arm";
+>> +					compression = "none";
+>> +					ti-secure {
+>> +						content = <&spl_am65x_evm_icssg2_dtb>;
+>> +						keyfile = "custMpk.pem";
+>> +					};
+>> +					spl_am65x_evm_icssg2_dtb: blob-ext {
+>> +						filename = AM654_EVM_ICSSG2_DTBO;
+>> +					};
+> 
+> This is wrong.
+> 
+> ICSSG2 Ethernet should be part of the fdt-0 configuration as the 2 Ethernet ports
+> on the board are hardwired to ICSSG2. Not having them working by default
+> is an invalid configuration.
+> 
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+ICSSG2 ethernet ports should be enabled by default. But the ICSSG2 nodes
+is added in the overlay file (k3-am654-icssg2.dtso) in kernel so they
+are added in same overlay file in u-boot as well.
+
+I am keeping,
+fdt-0  as k3-am654-base-board dtb,
+fdt-1  as k3-am654-icssg2 dtbo,
+conf-0 as k3-am654-base-board and
+conf-1 as k3-am654-icssg2.
+
+Do you want me to keep k3-am654-icssg2 dtbo as fdt-0 and
+k3-am654-base-board as fdt-1? I tried doing this but this results into
+u-boot getting stuck. The tispl and u-boot images are not able to load
+if I swap fdt-0 and fdt-1 , and conf-0 and conf-1.
+
+If the current combination doesn't look OK, please let me know what
+should be the correct combinations for fdt-0, fdt-1, conf-0 and conf-1.
+
+>> +				};
+>>  			};
+>>  
+>>  			configurations {
+>> @@ -135,6 +151,13 @@
+>>  					loadables = "tee", "dm", "spl";
+>>  					fdt = "fdt-0";
+>>  				};
+>> +
+>> +				conf-1 {
+>> +					description = "k3-am654-icssg2";
+>> +					firmware = "atf";
+>> +					loadables = "tee", "dm", "spl";
+>> +					fdt = "fdt-0", "fdt-1";
+>> +				};
+>>  			};
+>>  		};
+>>  	};s
+>> @@ -168,6 +191,24 @@
+>>  					};
+>>  				};
+>>  
+>> +				fdt-1 {
+>> +					description = "k3-am654-icssg2 overlay";
+>> +					type = "flat_dt";
+>> +					arch = "arm";
+>> +					compression = "none";
+>> +					ti-secure {
+>> +						content = <&am65x_evm_icssg2_dtb>;
+>> +						keyfile = "custMpk.pem";
+>> +
+>> +					};
+>> +					am65x_evm_icssg2_dtb: blob-ext {
+>> +						filename = AM654_EVM_ICSSG2_DTBO;
+>> +					};
+>> +					hash {
+>> +						algo = "crc32";
+>> +					};
+>> +				};
+>> +
+>>  			};
+>>  
+>>  			configurations {
+>> @@ -179,6 +220,13 @@
+>>  					loadables = "uboot";
+>>  					fdt = "fdt-0";
+>>  				};
+>> +
+>> +				conf-1 {
+>> +					description = "k3-am654-icssg2";
+>> +					firmware = "uboot";
+>> +					loadables = "uboot";
+>> +					fdt = "fdt-0", "fdt-1";
+>> +				};
+>>  			};
+>>  		};
+>>  	};
+>> @@ -205,6 +253,16 @@
+>>  						filename = SPL_AM654_EVM_DTB;
+>>  					};
+>>  				};
+>> +
+>> +				fdt-1 {
+>> +					description = "k3-am654-icssg2 overlay";
+>> +					type = "flat_dt";
+>> +					arch = "arm";
+>> +					compression = "none";
+>> +					blob {
+>> +						filename = AM654_EVM_ICSSG2_DTBO;
+>> +					};
+>> +				};
+>>  			};
+>>  
+>>  			configurations {
+>> @@ -216,6 +274,13 @@
+>>  					loadables = "tee", "dm", "spl";
+>>  					fdt = "fdt-0";
+>>  				};
+>> +
+>> +				conf-1 {
+>> +					description = "k3-am654-icssg2";
+>> +					firmware = "atf";
+>> +					loadables = "tee", "dm", "spl";
+>> +					fdt = "fdt-0", "fdt-1";
+>> +				};
+>>  			};
+>>  		};
+>>  	};
+>> @@ -243,6 +308,19 @@
+>>  						algo = "crc32";
+>>  					};
+>>  				};
+>> +
+>> +				fdt-1 {
+>> +					description = "k3-am654-icssg2";
+>> +					type = "flat_dt";
+>> +					arch = "arm";
+>> +					compression = "none";
+>> +					blob {
+>> +						filename = AM654_EVM_ICSSG2_DTBO;
+>> +					};
+>> +					hash {
+>> +						algo = "crc32";
+>> +					};
+>> +				};
+>>  			};
+>>  
+>>  			configurations {
+>> @@ -254,6 +332,13 @@
+>>  					loadables = "uboot";
+>>  					fdt = "fdt-0";
+>>  				};
+>> +
+>> +				conf-1 {
+>> +					description = "k3-am654-icssg2";
+>> +					firmware = "uboot";
+>> +					loadables = "uboot";
+>> +					fdt = "fdt-0", "fdt-1";
+>> +				};
+>>  			};
+>>  		};
+>>  	};
+> 
+
+-- 
+Thanks and Regards,
+Danish
