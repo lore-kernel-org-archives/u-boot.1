@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A2CBC46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 09:57:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC028C46CD4
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 09:58:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C25EE876F8;
-	Wed, 27 Dec 2023 10:57:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 59A00875BF;
+	Wed, 27 Dec 2023 10:58:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="h2q0JTIt";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DtqriZmy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDA808776E; Wed, 27 Dec 2023 10:57:49 +0100 (CET)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id 1FE858764D; Wed, 27 Dec 2023 10:58:56 +0100 (CET)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1AC58764D
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 10:57:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F9668744F
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 10:58:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2ccd4b743e2so10674391fa.0
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 01:57:47 -0800 (PST)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-50e7d6565b5so1636907e87.0
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 01:58:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703671067; x=1704275867; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703671133; x=1704275933; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DxbboORiDWpQSxAfHT7JN1b42fpeltxUuJRTiG8jBGs=;
- b=h2q0JTItTZzFp/MTnZNZigj6jzlOmDv6Vy6Jgi4ogUhJT26eLj80KOGhX0SCGxOXRt
- kKsbiP41ndtOnjjvZl5N4mTYs90q6TsY33tzMdOE24ZWWEsqONAsl9J2Vx7Oz2f4gsd+
- IntNdWG5QapLQdFDGaVHU6Y+SiuJKh2SnP5hNVyiHY1ERlxVp9s/+XZ5i/l+AuiLVcCq
- awChh2dst7IMA1xNsY+tI2L3hruokYYNdzMK3BjDSYgUKprowmsRBUZwy7LVuTofxVXF
- UQViW2qwiWUC3L46Um11ymvU+o4ghbuh3I6AbeBg+eLjWgdLPABjOZxZrknbNAWp7XCN
- MXmQ==
+ bh=ekoSlIiuT+rVmXK33BktGQl1z4l+bv82+vsA7jRtWfc=;
+ b=DtqriZmyXQY5BuRqL5jldpaVP3FhSfwc3J6jmmkkgEBqUD3DC1bcgTuKtve4CBusC1
+ 2FtkDV17uVUb8Zu5mwcDYsDBgEPJ8BF6SKjGiGdLDYhrqzriULWm9CTUcozyQKn3Bajz
+ FOarveDiJaZpow04KAUCblC2btZbbL9JDaTgZ8iwIE8RiktfgXsVsRuvh1KsnKUng/Kz
+ SZ5H/XGiNeIG78EMnmr/P2LdHcndt4kHHhYH0cvJVjWXmskw8o8vebmUevALQgDQVhWr
+ K15K7pnxKSd48hkWLd1M81DthxMoPhp80bAPlnJ85iZXmhZvghxzYRTIRmDcSH05Mijf
+ IfKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703671067; x=1704275867;
+ d=1e100.net; s=20230601; t=1703671133; x=1704275933;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DxbboORiDWpQSxAfHT7JN1b42fpeltxUuJRTiG8jBGs=;
- b=KOfPLjZNV4K7ND6lMiz7bwVVe4YkamhnG+c3xOy5z1cptEFmUEZmTqTq/ppq4Lomfm
- yl9KMmK9HzJ+uohd+aG8FMLD5DpgosMLn6LcH6USMeGWGMKzgldVaj8c0+0Pla3o7GEe
- +g9GsE6sG+Dx37ACGhta9SiaBC03askQnk7po0oCmp8KCV3Q0UQHWglrUqo56Uujjmq1
- 7uQh3lnx74F0ujCz07JCYGwpliKVFFuaw8rC3CXLAjsY41XcgdY5Mf2mY4xw0YKAumT/
- MmFRQCg31HNlQtSqLaPKSpte1bbr0HJUlcY/+Z8oq1sx+EEB1wLR2fjUvHfJsEuC1oMW
- /mzg==
-X-Gm-Message-State: AOJu0Yz4TAQDgzWIVlZk7vh4R9H9a8UU1DH7P022NM87HoAZfqcMDUR7
- 0m0F3+oJYf0Wf+yR3hx54gD7tIrz132YoLK/z6cC1RLI5vt5ZQ==
-X-Google-Smtp-Source: AGHT+IHE0kwswoXZLfq6JUYkGq4Orj8BRXqd7leoZIbfLkjlfAGzN2q1R1lf0ZUZhLGnGz3t/VHrOAJlELltB6Mr7cQ=
-X-Received: by 2002:ac2:4bcd:0:b0:50e:7702:a184 with SMTP id
- o13-20020ac24bcd000000b0050e7702a184mr1899770lfq.15.1703671066997; Wed, 27
- Dec 2023 01:57:46 -0800 (PST)
+ bh=ekoSlIiuT+rVmXK33BktGQl1z4l+bv82+vsA7jRtWfc=;
+ b=DZkOCNwhmjMxJ8pBQuyxr3IG2w3UPfAMJx/qheSepbgFyMaU7C4gN6jj7BAmpJZVBJ
+ eUu8VWPLzSFp/RJyFLWM0BUpwWtRDzoMg6QQBQ3Bt5/5jc6JNPyc1F3MeUcoCYeVeb4X
+ kPaebD1an7gvPfDp/6I5RX/NltZRx4ft9XH91GChkhG8OdY/zN6D59d7iGTQrV6C8zR7
+ SES5PLRMPPje5ZzOSA3GuL6Q71EUd6eBJ0d9AkYh4XL2amnmdmMhc8ZuGzvQ8L81gCy+
+ oWZ5LSY3xoXm/73K9t8qBl2Zts/ZS3kpQ2b2GZ4OnIgF1y+wjdJ/AH10DM6Kn3+90HX+
+ 0T8g==
+X-Gm-Message-State: AOJu0YzyuNIgVgzkrjVEZpgBpZDKgH/EkePi8nw/5OnQ0OhgRhvVafX4
+ XHBQHqO3aO5yrTjI2ggUXZvEBPi6cobDBHLdcdkBhRxym/GVvA==
+X-Google-Smtp-Source: AGHT+IF/9/m41nH29q7KAwpzemNw640FaP2w6aVJisSIAkjCxTlGMspnh3flm/FV/Td6nieJl+16dMeSwrzhNma5rDU=
+X-Received: by 2002:ac2:5b9b:0:b0:50e:71d4:c76d with SMTP id
+ o27-20020ac25b9b000000b0050e71d4c76dmr2329919lfn.109.1703671133438; Wed, 27
+ Dec 2023 01:58:53 -0800 (PST)
 MIME-Version: 1.0
 References: <20231218181901.337515-1-raymond.mao@linaro.org>
- <20231218181901.337515-9-raymond.mao@linaro.org>
-In-Reply-To: <20231218181901.337515-9-raymond.mao@linaro.org>
+ <20231218181901.337515-10-raymond.mao@linaro.org>
+In-Reply-To: <20231218181901.337515-10-raymond.mao@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 27 Dec 2023 11:57:10 +0200
-Message-ID: <CAC_iWjKEQyE+nmj16QVBLjnP5k3Wv+g4kYxXXAkzx_tPPhparw@mail.gmail.com>
-Subject: Re: [PATCH v3 08/14] bloblist: Checksum the entire bloblist
+Date: Wed, 27 Dec 2023 11:58:17 +0200
+Message-ID: <CAC_iWj+a=kTUm5Kp+tgtea6tG1XgkDC+V2JeZ3zjqTS-9T6-uw@mail.gmail.com>
+Subject: Re: [PATCH v3 09/14] bloblist: Handle alignment with a void entry
 To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
  Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>
@@ -86,50 +86,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
-
 On Mon, 18 Dec 2023 at 20:20, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
 > From: Simon Glass <sjg@chromium.org>
 >
-> Spec v0.9 specifies that the entire bloblist area is checksummed,
-> including unused portions. Update the code to follow this.
+> Rather than setting the alignment using the header size, add an entirely
+> new entry to cover the gap left by the alignment.
+
+Hmm, why? Does it make out life easier somehow if new entries get added?
+
+
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
 > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 > Reviewed-by: Simon Glass <sjg@chromium.org>
 > ---
->  common/bloblist.c |  9 +--------
->  test/bloblist.c   | 10 ++++++++--
->  2 files changed, 9 insertions(+), 10 deletions(-)
+>  common/bloblist.c | 23 +++++++++++++++++++----
+>  1 file changed, 19 insertions(+), 4 deletions(-)
 >
 > diff --git a/common/bloblist.c b/common/bloblist.c
-> index 32692d8319..705d9c6ae9 100644
+> index 705d9c6ae9..73dbbc01c0 100644
 > --- a/common/bloblist.c
 > +++ b/common/bloblist.c
-> @@ -319,17 +319,10 @@ int bloblist_resize(uint tag, int new_size)
->
->  static u32 bloblist_calc_chksum(struct bloblist_hdr *hdr)
+> @@ -142,7 +142,7 @@ static int bloblist_addrec(uint tag, int size, int align_log2,
 >  {
-> -       struct bloblist_rec *rec;
->         u8 chksum;
+>         struct bloblist_hdr *hdr = gd->bloblist;
+>         struct bloblist_rec *rec;
+> -       int data_start, new_alloced;
+> +       int data_start, aligned_start, new_alloced;
 >
-> -       chksum = table_compute_checksum(hdr, hdr->hdr_size);
-> +       chksum = table_compute_checksum(hdr, hdr->alloced);
->         chksum += hdr->chksum;
-> -       foreach_rec(rec, hdr) {
-> -               chksum -= table_compute_checksum((void *)rec,
-> -                                                rec_hdr_size(rec));
-> -               chksum -= table_compute_checksum((void *)rec +
-> -                                                rec_hdr_size(rec), rec->size);
-> -       }
-
-Why do we need patch #7 if it gets removed immediately after?
-Can't we just squash those two with a proper commit message, since the
-spec requires checksumming the entire list?
-
-[...]
-
-Thanks
-/Ilias
+>         if (!align_log2)
+>                 align_log2 = BLOBLIST_ALIGN_LOG2;
+> @@ -151,10 +151,25 @@ static int bloblist_addrec(uint tag, int size, int align_log2,
+>         data_start = map_to_sysmem(hdr) + hdr->alloced + sizeof(*rec);
+>
+>         /* Align the address and then calculate the offset from ->alloced */
+> -       data_start = ALIGN(data_start, 1U << align_log2) - map_to_sysmem(hdr);
+> +       aligned_start = ALIGN(data_start, 1U << align_log2) - data_start;
+> +
+> +       /* If we need to create a dummy record, create it */
+> +       if (aligned_start) {
+> +               int void_size = aligned_start - sizeof(*rec);
+> +               struct bloblist_rec *vrec;
+> +               int ret;
+> +
+> +               ret = bloblist_addrec(BLOBLISTT_VOID, void_size, 0, &vrec);
+> +               if (ret)
+> +                       return log_msg_ret("void", ret);
+> +
+> +               /* start the record after that */
+> +               data_start = map_to_sysmem(hdr) + hdr->alloced + sizeof(*vrec);
+> +       }
+>
+>         /* Calculate the new allocated total */
+> -       new_alloced = data_start + ALIGN(size, 1U << align_log2);
+> +       new_alloced = data_start - map_to_sysmem(hdr) +
+> +               ALIGN(size, 1U << align_log2);
+>
+>         if (new_alloced > hdr->size) {
+>                 log_err("Failed to allocate %x bytes size=%x, need size=%x\n",
+> @@ -164,7 +179,7 @@ static int bloblist_addrec(uint tag, int size, int align_log2,
+>         rec = (void *)hdr + hdr->alloced;
+>
+>         rec->tag = tag;
+> -       rec->hdr_size = data_start - hdr->alloced;
+> +       rec->hdr_size = sizeof(struct bloblist_rec);
+>         rec->size = size;
+>
+>         /* Zero the record data */
+> --
+> 2.25.1
+>
