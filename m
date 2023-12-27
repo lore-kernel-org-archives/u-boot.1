@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 928DCC46CD4
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 15:19:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD09BC46CD4
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 15:28:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16B1F877AF;
-	Wed, 27 Dec 2023 16:19:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2AA7A87956;
+	Wed, 27 Dec 2023 16:28:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QjIr/aem";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Uto4yITF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01FE287956; Wed, 27 Dec 2023 16:19:52 +0100 (CET)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
+ id 3F813879AA; Wed, 27 Dec 2023 16:28:33 +0100 (CET)
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
+ [IPv6:2607:f8b0:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C944F8775F
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 16:19:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 53B0487834
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 16:28:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-5bdb0be3591so4096353a12.2
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 07:19:49 -0800 (PST)
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-6d9bbf71bc8so537301b3a.1
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 07:28:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703690388; x=1704295188; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703690903; x=1704295703; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9S9vnAs94vQEoJGI1wp4VnJTgMRi2BuIHyhx9+0C9tU=;
- b=QjIr/aemW2805dpq3Vrx5IlcMr088zp1DAcrxojL4Mc8qr3g4V6a2/3Z/OAfuhkWuo
- 06fo4B21WTmaA/VuzaLPN9jpqzVbCFwfdOfpt8PTOVSS6roldM2DNk7jYOeZJP/6bztz
- ynEdU/D3DuX5/15Xn6nb5Ba99Oh/usKX86wc3EeCXQY7DDVg6cPpSMaKetuwK/Semzl0
- 4KTXi2dNOySjm9RRqxJE12wteKMfC1rUqobw9pPSzZijiqzXZ+oo1uj2v+sB5QuKsc4B
- db3T6hs+F1f010LGXTBHq1lYyaV49HFjDoJM+UIij91I6yW7nuF4nHU6zCl7XE5sW+FH
- Zp6A==
+ bh=Bk3QrsrxvAV+1Kou3Ym3ygR6iKSFA4cPJdcoFqlj3D4=;
+ b=Uto4yITFC7jsK9obwKdTRDk9NOGTtFkD8lKzzHeKCht1H81aFgEv1yTLGW0zty0fTy
+ g7ngY1XNc88DVAd1YlEB6zVBHSd3VTNGYQcXzqVEqBzWmcDZ3t2NzXb9iROI2XyUUWIp
+ ePwTdy5lzq4zeKRMuy6azy3NlJlYDKsTdBbpAAKaClGkz7nwg8AQJBGR9WbS38ou6BEB
+ B9Ytg1JGNer7r80LGMZOQzE3Lwor8+DPazf2CdkA+5ItJGDYc4kdyfsfYcr2WB4H11S4
+ MlgIRSqzYCzMDCHz2jFT5IM/bRUH2EElrMuSI2gv/F95PLc/YkiBzQNWB7Zd4sOlhm0H
+ zKDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703690388; x=1704295188;
+ d=1e100.net; s=20230601; t=1703690903; x=1704295703;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9S9vnAs94vQEoJGI1wp4VnJTgMRi2BuIHyhx9+0C9tU=;
- b=A8UPbFvW9NHq3vvsxUteGzWpCoGo9R7NQre82GiEJXJ04L9fEPL8k2cAaQ2L5hCuR7
- p4xKa4w3hsG3eNv7c5QUbDCHaogJ00siLw6Rk85zuksZgIDoWPbPZ5n8XB0OyavDObWs
- 25PRY1+LB/DKtw/VJAoU6WK/eXwuzRBE/cwVvt14ZBA4BIcL6WCE+J8fXKwy9BIrijU/
- M8DF07ptNP9qwNwLMNtXMPEgGw9g8QrnptJdF0Ra0PcsXMAKXojwwmU+N5k90VSYbZcL
- TF7tRAIfah2ifZQEWBG6tLIVYhN2zNabXK5VbzSWN1J2+pwnC70eHpIGpvX0JkZo1Uko
- 2GqA==
-X-Gm-Message-State: AOJu0Yws7uOSIDDSOG0pInLFIaBuaYzclIx6dZyMDaMYkSIA5c85XyXK
- 1lhfrGQgzi+URvxfnNevhf4aKoF+UoAvR1d++2C3b8s5Vf2Ftw==
-X-Google-Smtp-Source: AGHT+IGOlTl+JMrG5pV/MInzZajdnfyUyXFyoqEKM26tFMKVH1jn5nT77i1txrGQ+C6bJEdZJoGDLz735/0ErjyX44o=
-X-Received: by 2002:a05:6a20:9191:b0:196:3c48:e11a with SMTP id
- v17-20020a056a20919100b001963c48e11amr233977pzd.104.1703690388127; Wed, 27
- Dec 2023 07:19:48 -0800 (PST)
+ bh=Bk3QrsrxvAV+1Kou3Ym3ygR6iKSFA4cPJdcoFqlj3D4=;
+ b=p/KR+62VcgLyyjHOqckzeCzxdijZJZqbmMJ3C4UT3DQ7Od20lRRyU07/qjm7ifo1G8
+ KFBCQ0PrNvIMtSsdH/l5B6WEzdTItQ7Jm9uabwKLHASMlkEqWG4Gjz+EPlJE8V+LiVDg
+ Ez1gvFC7xm+uCyqnsxt1NMeRsQENPWPbxzLoIqWe8Dlhi8dw7MAVMdn5qdS1F5m/6DX9
+ ijFN2vfpKJZwfIwR2HuBPiUTshA2Ax4fst37BN7ugnDhNHgnsGx8vbjJHqmlUKQugKZo
+ uvc1uH/1rjcK2fiL66hmzGJxd+Mh8vFIYRTEqIPBRPqfJCXXIifmERFhbh67DhqUkXoV
+ QqvA==
+X-Gm-Message-State: AOJu0YwDn5vB3Jrw18c/iSE1Kr8cbuodNu4h8I1j0LSn2QiIAapjxl2m
+ DrbhwPso1u2sJ1sZuU53Uu4KJnRtHgNEWHqLkatMJfI19PqJ5g==
+X-Google-Smtp-Source: AGHT+IE4xdmhdAWAbWW1Gf745IOeKviCjAj6jpyD2PgmAZY5vHHJsohn/6boz//45zUeqbVrxlsm4Nj13cWy0Hnt+/w=
+X-Received: by 2002:a05:6a00:1404:b0:6d9:a9e9:28dd with SMTP id
+ l4-20020a056a00140400b006d9a9e928ddmr2460645pfu.51.1703690903634; Wed, 27 Dec
+ 2023 07:28:23 -0800 (PST)
 MIME-Version: 1.0
 References: <20231218181901.337515-1-raymond.mao@linaro.org>
- <20231218181901.337515-3-raymond.mao@linaro.org>
- <CAC_iWjKEeQ6V9O1EPfP1oR+CyZfEE-gANg_su=53QC=MdMkauw@mail.gmail.com>
-In-Reply-To: <CAC_iWjKEeQ6V9O1EPfP1oR+CyZfEE-gANg_su=53QC=MdMkauw@mail.gmail.com>
+ <20231218181901.337515-2-raymond.mao@linaro.org>
+ <CAC_iWjJ7AQ5_=yh-0FPcFOQ2-8XmZ24eT2WtWtQ8gmmEOiMuvg@mail.gmail.com>
+In-Reply-To: <CAC_iWjJ7AQ5_=yh-0FPcFOQ2-8XmZ24eT2WtWtQ8gmmEOiMuvg@mail.gmail.com>
 From: Raymond Mao <raymond.mao@linaro.org>
-Date: Wed, 27 Dec 2023 10:19:38 -0500
-Message-ID: <CAEfUkU+gEXLX7xbM98UCQKae+_d4tytOTurLP2o-wMFvom3cAA@mail.gmail.com>
-Subject: Re: [PATCH v3 02/14] bloblist: Adjust API to align in powers of 2
+Date: Wed, 27 Dec 2023 10:28:13 -0500
+Message-ID: <CAEfUkUKFguiGZGQinGKBfxwcc+DfcVgH2Xo4a+zo_-84HCux9Q@mail.gmail.com>
+Subject: Re: [PATCH v3 01/14] bloblist: Update the tag numbering
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
  Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>
@@ -90,29 +90,130 @@ X-Virus-Status: Clean
 
 Hi Ilias,
 
-On Wed, 27 Dec 2023 at 04:53, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On Wed, 27 Dec 2023 at 04:48, Ilias Apalodimas <ilias.apalodimas@linaro.org>
 wrote:
 
-> Hi,
+> Hi Raymond,
 >
 > On Mon, 18 Dec 2023 at 20:19, Raymond Mao <raymond.mao@linaro.org> wrote:
 > >
 > > From: Simon Glass <sjg@chromium.org>
 > >
-> > The updated bloblist structure stores the alignment as a power-of-two
-> > value in its structures. Adjust the API to use this, to avoid needing to
-> > calling ilog2().
+> > Align bloblist tags with the FW handoff spec v0.9.
+> > The most common ones are from 0.
+> > TF related ones are from 0x100.
+> > All non-standard ones from 0xfff000.
 > >
-> > Drop a stale comment while we are here.
+> > Added new defined tags:
+> > BLOBLISTT_OPTEE_PAGABLE_PART for TF.
+> > BLOBLISTT_TPM_EVLOG and BLOBLISTT_TPM_CRB_BASE for TPM.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> > Changes in v2
+> > - Align bloblist tags to FW handoff spec v0.9.
+> > Changes in v3
+> > - Add TPM related tags
+> >
+> >  common/bloblist.c  | 18 ++++++++++---
+> >  include/bloblist.h | 67 +++++++++++++++++++++++++---------------------
+> >  test/bloblist.c    |  4 +--
+> >  3 files changed, 52 insertions(+), 37 deletions(-)
+> >
+> > diff --git a/common/bloblist.c b/common/bloblist.c
+> > index a22f6c12b0..5606487f5b 100644
+> > --- a/common/bloblist.c
+> > +++ b/common/bloblist.c
+> > @@ -36,16 +36,26 @@ static struct tag_name {
+> >         enum bloblist_tag_t tag;
+> >         const char *name;
+> >  } tag_name[] = {
+> > -       { BLOBLISTT_NONE, "(none)" },
+> > +       { BLOBLISTT_VOID, "(void)" },
+> >
+> >         /* BLOBLISTT_AREA_FIRMWARE_TOP */
+> > +       { BLOBLISTT_CONTROL_FDT, "Control FDT" },
+> > +       { BLOBLISTT_HOB_BLOCK, "HOB block" },
+> > +       { BLOBLISTT_HOB_LIST, "HOB list" },
+> > +       { BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
+> > +       { BLOBLISTT_TPM_EVLOG, "TPM event log defined by TCG EFI" },
+> > +       { BLOBLISTT_TPM_CRB_BASE, "TPM Command Response Buffer address"
+> },
+> >
+> >         /* BLOBLISTT_AREA_FIRMWARE */
+> > -       { BLOBLISTT_ACPI_GNVS, "ACPI GNVS" },
+> > -       { BLOBLISTT_INTEL_VBT, "Intel Video-BIOS table" },
+> >         { BLOBLISTT_TPM2_TCG_LOG, "TPM v2 log space" },
+> >         { BLOBLISTT_TCPA_LOG, "TPM log space" },
+> > -       { BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
+> > +       { BLOBLISTT_ACPI_GNVS, "ACPI GNVS" },
+> > +
+> > +       /* BLOBLISTT_AREA_TF */
+> > +       { BLOBLISTT_OPTEE_PAGABLE_PART, "OP-TEE pagable part" },
+> > +
+> > +       /* BLOBLISTT_AREA_OTHER */
+> > +       { BLOBLISTT_INTEL_VBT, "Intel Video-BIOS table" },
+> >         { BLOBLISTT_SMBIOS_TABLES, "SMBIOS tables for x86" },
+> >         { BLOBLISTT_VBOOT_CTX, "Chrome OS vboot context" },
+> >
+> > diff --git a/include/bloblist.h b/include/bloblist.h
+> > index 080cc46a12..92dbfda21b 100644
+> > --- a/include/bloblist.h
+> > +++ b/include/bloblist.h
+> > @@ -81,7 +81,7 @@ enum {
+> >
+> >  /* Supported tags - add new ones to tag_name in bloblist.c */
+> >  enum bloblist_tag_t {
+> > -       BLOBLISTT_NONE = 0,
+> > +       BLOBLISTT_VOID = 0,
+> >
+> >         /*
+> >          * Standard area to allocate blobs used across firmware
+> components, for
+> > @@ -89,42 +89,36 @@ enum bloblist_tag_t {
+> >          * projects.
+> >          */
+> >         BLOBLISTT_AREA_FIRMWARE_TOP = 0x1,
+> > +       /*
+> > +        * Devicetree for use by firmware. On some platforms this is
+> passed to
+> > +        * the OS also
+> > +        */
+> > +       BLOBLISTT_CONTROL_FDT = 1,
+> > +       BLOBLISTT_HOB_BLOCK = 2,
+> > +       BLOBLISTT_HOB_LIST = 3,
+> > +       BLOBLISTT_ACPI_TABLES = 4,
+> > +       BLOBLISTT_TPM_EVLOG = 5,
+> > +       BLOBLISTT_TPM_CRB_BASE = 6,
+> >
+> >         /* Standard area to allocate blobs used across firmware
+> components */
+> > -       BLOBLISTT_AREA_FIRMWARE = 0x100,
+> > +       BLOBLISTT_AREA_FIRMWARE = 0x10,
+> > +       BLOBLISTT_TPM2_TCG_LOG = 0x10,  /* TPM v2 log space */
+> > +       BLOBLISTT_TCPA_LOG = 0x11,      /* TPM log space */
+> >         /*
+> >          * Advanced Configuration and Power Interface Global Non-Volatile
+> >          * Sleeping table. This forms part of the ACPI tables passed to
+> Linux.
+> >          */
+> > -       BLOBLISTT_ACPI_GNVS = 0x100,
+> > -       BLOBLISTT_INTEL_VBT = 0x101,    /* Intel Video-BIOS table */
+> > -       BLOBLISTT_TPM2_TCG_LOG = 0x102, /* TPM v2 log space */
+> > -       BLOBLISTT_TCPA_LOG = 0x103,     /* TPM log space */
+> > -       BLOBLISTT_ACPI_TABLES = 0x104,  /* ACPI tables for x86 */
+> > -       BLOBLISTT_SMBIOS_TABLES = 0x105, /* SMBIOS tables for x86 */
+> > -       BLOBLISTT_VBOOT_CTX = 0x106,    /* Chromium OS verified boot
+> context */
+> > +       BLOBLISTT_ACPI_GNVS = 0x12,
 >
-> The patch does more than what the description suggests. So either the
-> new 8b alignment is wrong or the commit message needs and update and
-> explain why we are changing this.
+> Any idea if we have users that would be affected by this value change?
 >
-> The 8-byte-alignment is correct and matching with the spec.
-I will update the commit message.
-
-[...]
+> BLOBLISTT_ACPI_TABLES, BLOBLISTT_TPM2_TCG_LOG and BLOBLISTT_ACPI_TABLES
+are being used by x86.
+BLOBLISTT_ACPI_GNVS is being used by x86 and chromebook.
 
 Regards,
 Raymond
