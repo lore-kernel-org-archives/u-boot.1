@@ -4,69 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C53A6C46CD4
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 08:31:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 614EDC46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 08:33:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EEB187935;
-	Wed, 27 Dec 2023 09:31:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 23D2C87935;
+	Wed, 27 Dec 2023 09:33:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KN56jIAE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tvfzVeeb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1011287944; Wed, 27 Dec 2023 09:31:08 +0100 (CET)
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
+ id 816B587964; Wed, 27 Dec 2023 09:33:08 +0100 (CET)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AABEA87729
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 09:31:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D23987729
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 09:33:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x829.google.com with SMTP id
- d75a77b69052e-427e7aa0207so4491311cf.2
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 00:31:05 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2ccae5719cfso31487131fa.1
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 00:33:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703665864; x=1704270664; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TcWYmVsXOxqKPA0vzcJxc54swf0BRsJILEJvwZ0l/5g=;
- b=KN56jIAEy7Z5dQDRTYmQ9lhNrZWuxfAzqM55FO8gxxEgS38yzP6XjRdQKF/d58seii
- K8R6jrQle8ZaqbqP7d4IeSlKus5tW66A6zOrtmzeIjQ8Qhk4eNOi6cqcJ7z0wqMj969e
- bLbp9e/561+7hxwz/Bjh20VZMDCGMGbmLo3bM=
+ d=linaro.org; s=google; t=1703665986; x=1704270786; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=2TrCWjvIigsGU5pEvpdMyQPSflEG8vohdtNHmetkimA=;
+ b=tvfzVeebJVVz+HpzwQ7Abmm0v4PA+Mf6/MkCUOPhc6IXt3kw8F9K9thE/nGXTRnxTv
+ CVCSXbG1tz7iVTE9TJmLKXQcRqANFe4KAsec+a7KSKY8ZRc6KB4w0zkY7fTTSr7tOrSG
+ Ki1gamPn5iQK68noI5usWDu/9S+wMBfQTMKmNKtPa7eC7CG+utF69mVjhGuRZ2VlM+1i
+ +CRbJqa/P3k3UWaOGMIZ2VtUiCqg7oX8s4TK+rGpdjA5wU/Eip3sH8pGn5lZdxtGM70j
+ mjJ7M8w7tbmAbNs4JEzstMwSL7rHDcIvK2D4DXVRd3khDKb8L+91csKc8cxttxMtaKP8
+ ZFQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703665864; x=1704270664;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TcWYmVsXOxqKPA0vzcJxc54swf0BRsJILEJvwZ0l/5g=;
- b=Q/uXQ4h2vFJnUaC9d1fC4TxL4bxjTWp7hE3rJuSNPYJl4v417m33Tirtc67tiujxZG
- q/g2D9e9fJJZZRAHmVnPEloKlbAm+9oCQFlTpdlO4Skcc2C1PFCcwFqcdOVfr5nyAk/b
- B733hmzfYDf1YW5i6y+YdkmLtCeFivTt7o5WbNAU6kKMr3cIugdk6vULcqS81NcMKfiz
- /ncNOxntuYvehZRND/gRtJW3ub7o8APHIi5ZQiKfljy2XWpztcL3bizc/tLjzvSgMYNd
- ADlBwEDO0ZqPAwJHEUGqWlGNVRtrY0fuZP60mIgDvkDQ9Pn6cQPeUR+dFiJXoJChS1sv
- mB8Q==
-X-Gm-Message-State: AOJu0YxB6ALvG7FgdGG/sPEMdXNEHTYgmNS/OnkbkKFMZX7e/A8nmsBP
- IInZmluOborGCo/Q0CK5VfhQpysWS6umZcL04IL+nsu10ZK2
-X-Google-Smtp-Source: AGHT+IGqXXeeFnGBNlgnvLqbhpi91fzlSg5bh0vLz8EZAmijkcKMR0pMXExfVDyD+V49r/XDOYG2HWzBzBbmu1b9P1Y=
-X-Received: by 2002:a05:6214:262f:b0:67e:aa84:b093 with SMTP id
- gv15-20020a056214262f00b0067eaa84b093mr12968971qvb.22.1703665864525; Wed, 27
- Dec 2023 00:31:04 -0800 (PST)
+ d=1e100.net; s=20230601; t=1703665986; x=1704270786;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2TrCWjvIigsGU5pEvpdMyQPSflEG8vohdtNHmetkimA=;
+ b=Dam/pE//skg4sNnuSmhfkGenFWv1/BhW5Of9wefqIjRyNKrsf49Rm3GOGdWrZx/veH
+ P6kOBiH8Hl8UefqCzlhpggUlMSgg3xofX+9nKS1spedP952vNZ8i7bGT9vfMZwMYBip4
+ emgUieP2Gg85d0ctfHIFsXIndLNCn+15rvXQ6EHzwySd9LfU6Oe3jVEQIIGYmQlMRQof
+ Qx4w4e8gRYZy7VgSlD8AwxCPmw6EIca94PXSWZ/+rxATOIuZGwrmy5BDuoPuMYBQDEVH
+ KbeWym3fi7h4yzfKnHzwl+/kKibG3udDdiZL/F7v8GtMOji69jdFBojNx/29NF7E60DF
+ Gk3w==
+X-Gm-Message-State: AOJu0YwNKC67/VzOk+igIXGE+pdS1Orv58BKZ8hap9Iq7yZDSDD2fNfK
+ d7OfGHFvtZrd1tlZRIY67PIM1hpp92dDRMuKrTc+yKCHl2pHrQ==
+X-Google-Smtp-Source: AGHT+IEBPInNxRlaIBzBabMIIVtXeXWGB+Oplq0z6isPGyc6owJ9xoUEp4XCDsrsGKaKyY7P4wwH0/oN44kTiVbd4UE=
+X-Received: by 2002:a19:ac0d:0:b0:50e:6f4f:63d7 with SMTP id
+ g13-20020a19ac0d000000b0050e6f4f63d7mr1053305lfc.73.1703665985865; Wed, 27
+ Dec 2023 00:33:05 -0800 (PST)
 MIME-Version: 1.0
-References: <GV2PR10MB669453D14DC8722F7ACA97FB8BBDA@GV2PR10MB6694.EURPRD10.PROD.OUTLOOK.COM>
-In-Reply-To: <GV2PR10MB669453D14DC8722F7ACA97FB8BBDA@GV2PR10MB6694.EURPRD10.PROD.OUTLOOK.COM>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 27 Dec 2023 08:30:54 +0000
-Message-ID: <CAFLszTjm4S64z6sSH-auGqDctTXzkh=aGp4vjR8orE0+FTZcZA@mail.gmail.com>
-Subject: Re: ACPI on Raspberry Pi
-To: Ba Gia Bao PHAN <bagiabao.phan@st.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20231222213110.660402-1-raymond.mao@linaro.org>
+ <20231222213110.660402-4-raymond.mao@linaro.org>
+In-Reply-To: <20231222213110.660402-4-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 27 Dec 2023 10:32:30 +0200
+Message-ID: <CAC_iWjLTmmiDq7oP-mS0kvpsCz-k=S5C=8xNeS6VvKK5AeA4EA@mail.gmail.com>
+Subject: Re: [PATCH v3 3/9] bloblist: refactor of bloblist_reloc()
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Kevin Chen <kevin_chen@aspeedtech.com>, 
+ Nikhil M Jain <n-jain1@ti.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>, 
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Shiji Yang <yangshiji66@outlook.com>, 
+ Baruch Siach <baruch@tkos.co.il>, Michal Simek <michal.simek@amd.com>, 
+ Sean Anderson <sean.anderson@seco.com>, Stefan Roese <sr@denx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,25 +95,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+U-Boot Mailing List as the attempt to send did not seem to arrive?
+Hi Raymond
 
-On Mon, Nov 27, 2023 at 4:51=E2=80=AFPM Ba Gia Bao PHAN <bagiabao.phan@st.c=
-om> wrote:
+On Fri, 22 Dec 2023 at 23:31, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
-> Dear Sir,
+> The current bloblist pointer and size can be retrieved from global
+> data, so we don't need to pass them from the function arguments.
+> This change also help to remove all external access of gd->bloblist
+> outside of bloblist module.
 >
-> I am trainee at STMicroelectronics France, and I am doing project "Settin=
-g up a boot chain ACPI" for STM32MPU. The objective of my project is to rep=
-lace the Device Tree by ACPI in STM32MPU.
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+> Changes in v2
+> - New patch file created for v2.
+> Changes in v3
+> - Check the space size before copying the bloblist.
+> - Add return code of bloblist_reloc().
 >
-> As my research on the Internet, specifically this website https://lore.ke=
-rnel.org/all/20211201160315.2203099-1-sjg@chromium.org/T/ , it seems that y=
-ou have succeeded in configuring ACPI on Raspberry Pi. I don't know exactly=
- whether it worked or not and how it worked. Can you explain me?
+>  common/bloblist.c  | 10 ++++++++--
+>  common/board_f.c   |  8 ++------
+>  include/bloblist.h |  8 ++++----
+>  test/bloblist.c    |  6 ++----
+>  4 files changed, 16 insertions(+), 16 deletions(-)
 >
-> Thank you very much if you could take a moment to reply to my email.
+> diff --git a/common/bloblist.c b/common/bloblist.c
+> index db3fbb20cf..5ad1db137a 100644
+> --- a/common/bloblist.c
+> +++ b/common/bloblist.c
+> @@ -472,13 +472,19 @@ void bloblist_show_list(void)
+>         }
+>  }
 >
-> Sincerely,
-> Phan Ba Gia Bao
+> -void bloblist_reloc(void *to, uint to_size, void *from, uint from_size)
+> +int bloblist_reloc(void *to, uint to_size)
+>  {
+>         struct bloblist_hdr *hdr;
 >
-> ST Restricted
+> -       memcpy(to, from, from_size);
+> +       if (to_size < gd->bloblist->total_size)
+> +               return -ENOSPC;
+> +
+> +       memcpy(to, gd->bloblist, gd->bloblist->total_size);
+>         hdr = to;
+>         hdr->total_size = to_size;
+> +       gd->bloblist = to;
+> +
+> +       return 0;
+>  }
+>
+>  int bloblist_init(void)
+> diff --git a/common/board_f.c b/common/board_f.c
+> index d4d7d01f8f..00b0430889 100644
+> --- a/common/board_f.c
+> +++ b/common/board_f.c
+> @@ -676,13 +676,9 @@ static int reloc_bloblist(void)
+>                 return 0;
+>         }
+>         if (gd->new_bloblist) {
+> -               int size = CONFIG_BLOBLIST_SIZE;
+> -
+>                 debug("Copying bloblist from %p to %p, size %x\n",
+> -                     gd->bloblist, gd->new_bloblist, size);
+> -               bloblist_reloc(gd->new_bloblist, CONFIG_BLOBLIST_SIZE_RELOC,
+> -                              gd->bloblist, size);
+> -               gd->bloblist = gd->new_bloblist;
+> +                     gd->bloblist, gd->new_bloblist, gd->bloblist->total_size);
+> +               bloblist_reloc(gd->new_bloblist, CONFIG_BLOBLIST_SIZE_RELOC);
+
+Why aren't we checking bloblist_reloc() for an error?
+
+>         }
+>  #endif
+>
+[...]
+
+Thanks
+/Ilias
