@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC7EFC46CD4
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 21:08:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC646C46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 21:08:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41889879E0;
-	Wed, 27 Dec 2023 22:08:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C2BE2879CE;
+	Wed, 27 Dec 2023 22:08:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZI/yattQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FTA+Mlxa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 085B7879E2; Wed, 27 Dec 2023 22:08:08 +0100 (CET)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
+ id A344D878FF; Wed, 27 Dec 2023 22:08:12 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6F19876D7
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 22:08:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 66A91879E8
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 22:08:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-78104f6f692so422705885a.1
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 13:08:05 -0800 (PST)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-78117e97becso361613585a.3
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 13:08:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703711284; x=1704316084; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703711289; x=1704316089; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2WZKJiUZpT3hVKZ6Ft6JJtw1JDFeG+xXrcJjolkRR/s=;
- b=ZI/yattQUk1vcK3REIf9M0lH2tJ4SbbS2N9og2eCzAPXcFvGeBEyl2YDyGVgm9m6G2
- chP6K1ZJ1w30GmjQNn/9Kgf0Daj+PET+jJJsoGIDOgxPhtVK7+MMUanJJNM+LVcM53EH
- 8IcxqV07YecyzM/q+l183qsonBp8ZC6NpiatalQjcPr5nNldNbYH8gL2bQx5IjsGJZc4
- MajG6TiHWsbh8ggFpZqC4BcFYJA+I9lsC0nqiz7+xDUJsACq67Q4c51GHNOKGcGmN6qP
- nZDEw+heUNlrSjj9BgGTRqK8ZgNW6Zs7twPo0Fj98TyUaup8nsgvWsjrZ06jfNScK7H9
- OgRg==
+ bh=wsJN3Xq1sz1J8fWmEStFmoSnVOgNER7GlBiOGQifkfc=;
+ b=FTA+MlxaSKciweeEyO+axtjaXKiIfzXyuRWuANvcS0DzWYtc0h+E6exDJDMijHpVtn
+ uLh4fJD4Y1ajTrL37bs0kKntrCoEDP8k95sHqjU1EHU3I9rGdfcXtwepCHYgzUMxB+0U
+ O7EKglJm4xo+2v2M7FL/MNtueuKPz62EidXOBu9oME9a4F8VgyiHdLekilliEIc0QH8q
+ YfvI/Oe8RLx+XkgniSuP8e4WP9kzKRuPW5H9FTqhagUKn6Sr24vTzFQ8Wwgvn+mdZIFf
+ 17ATikwUikuh4XSu7oA/JsCJpnsPP6G9tcKsrNEouza4yMKHY68H27A1zb8oz6jNgYZP
+ HA1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703711284; x=1704316084;
+ d=1e100.net; s=20230601; t=1703711289; x=1704316089;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2WZKJiUZpT3hVKZ6Ft6JJtw1JDFeG+xXrcJjolkRR/s=;
- b=dkwlJu+uOa4oVEXTZKaHNxjMc/Blq/iwd4mpf2sM2Ww39LtYsoX9mGoZUvwowZUFV7
- CNmQ9sGgmuJ/GxnyLRqjwpy6Ja9LpwzWgdBJdn8EsnH0Uf1fz3MaJqFxJkXjEj6G9YO1
- tO25MKovTaGNBQjC82T3IW1fMGKutOpCZfc2FU5mTXiTCvKmv2Mayh8TrST4I+V0Lxfm
- om/D0RVvYCIYPxGtXBiE4F6fGjL39JMPSwbDt6Kkw36GzQSL6DYi3o4yELZnk70P2Evb
- 5ZNpOf/TBoYaQtQi+iWbLAkx0EvllWAZIez1WQR0Xr7dLmIonT7sP209OecazrgsYWZN
- hySg==
-X-Gm-Message-State: AOJu0YxZNxeqZS59KTM3+JceAg7eJqr0C6vD1gU4fPBghwkw3U5B6Nkm
- VJo6LGvM/44d2n6WStrLK5EsJsPJfBSKwQo/Fr/f9piwSzo=
-X-Google-Smtp-Source: AGHT+IGYdxPneI/keNkgeiR+lnq3JvQpeAfRjXJYfs39UNEXKuEFQE41aD7r7BlEjpHcFZ62u0Dx0g==
-X-Received: by 2002:a05:620a:1587:b0:781:7332:4bd2 with SMTP id
- d7-20020a05620a158700b0078173324bd2mr156211qkk.66.1703711284360; 
- Wed, 27 Dec 2023 13:08:04 -0800 (PST)
+ bh=wsJN3Xq1sz1J8fWmEStFmoSnVOgNER7GlBiOGQifkfc=;
+ b=sdA1+IqmsU/F5EU4DW/6YF2VrzA4qPQgASdljnoGveDiXcvqnF/3Uv7OxXd9w140Tw
+ FkbMPvLsGMBjhodTUA/JIgxCLt+nLP+CXWwNTtyQdxetgYgjPVhGR6/L2jDCmQiEUTPU
+ Hy9+35Rn3OZ+sjj7/160iH+BZatinPJY95L3qKq7cW61yqWyNReexgPnNyvxLChwgbgc
+ UEcPzAB/5HBqdSnybwSZLMKDpR7xFLVo0IOVlm4k8J7POiOfcGYgvrzqJ8GQRUwuTIot
+ 3XoAILpRCFiUQhN0EBGcz5X52z995hND8qJ8OHRtG67jYSI+vbsUnhf4E6WZmnSeWlE0
+ gvtA==
+X-Gm-Message-State: AOJu0Yywm0oqUAYorEsu7Vb3nsmOV8pzsQum3VqNTaKTQcG0nTCumQas
+ qqD+JDVotptTXOLZW3qB81En3gKUnVpmd4cZJLIvZBWYGKk=
+X-Google-Smtp-Source: AGHT+IEVG6aE7Dzt+Vw8L0z1wM6FFAdAfiFbEReCt8QedV4Nu4YBkX/axYYCd+/nPkwPmwmA9Tm5RQ==
+X-Received: by 2002:a05:620a:2843:b0:77e:fba3:757f with SMTP id
+ h3-20020a05620a284300b0077efba3757fmr10866502qkp.119.1703711289084; 
+ Wed, 27 Dec 2023 13:08:09 -0800 (PST)
 Received: from ubuntu.localdomain
  (cpe688f2e182063-cm688f2e182060.sdns.net.rogers.com. [174.115.4.214])
  by smtp.gmail.com with ESMTPSA id
- c27-20020a05620a11bb00b0078161897afcsm637107qkk.109.2023.12.27.13.08.03
+ c27-20020a05620a11bb00b0078161897afcsm637107qkk.109.2023.12.27.13.08.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Dec 2023 13:08:03 -0800 (PST)
+ Wed, 27 Dec 2023 13:08:08 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
  jwerner@chromium.org
 Cc: Raymond Mao <raymond.mao@linaro.org>, Bin Meng <bmeng.cn@gmail.com>,
  Nikhil M Jain <n-jain1@ti.com>
-Subject: [PATCH v4 06/12] bloblist: Drop spare value from bloblist record
-Date: Wed, 27 Dec 2023 13:07:04 -0800
-Message-Id: <20231227210712.712937-7-raymond.mao@linaro.org>
+Subject: [PATCH v4 07/12] bloblist: Checksum the entire bloblist
+Date: Wed, 27 Dec 2023 13:07:05 -0800
+Message-Id: <20231227210712.712937-8-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231227210712.712937-1-raymond.mao@linaro.org>
 References: <20231227210712.712937-1-raymond.mao@linaro.org>
@@ -96,53 +96,98 @@ X-Virus-Status: Clean
 
 From: Simon Glass <sjg@chromium.org>
 
-Drop spare value from bloblist record header.
-
-For now it is still present in the header, with an underscore, so that
-tests continue to pass.
+Use a sinple 8-bit checksum for bloblist, as specified by the spec
+version 0.9.
+Spec v0.9 specifies that the entire bloblist area is checksummed,
+including unused portions. Update the code to follow this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
-Changes in v3
-- Keep the spare value in the bloblist header to align to FW handoff spec up to commit 3592349.
+Changes in v4
+- Patch #7 and #8 from v3 are squashed into this patch.
 
- common/bloblist.c  | 1 -
- include/bloblist.h | 3 +--
- 2 files changed, 1 insertion(+), 3 deletions(-)
+ common/bloblist.c  | 13 ++++---------
+ include/bloblist.h |  5 ++---
+ test/bloblist.c    | 10 ++++++++--
+ 3 files changed, 14 insertions(+), 14 deletions(-)
 
 diff --git a/common/bloblist.c b/common/bloblist.c
-index 168993e0a7..88e2a0f5c0 100644
+index 88e2a0f5c0..705d9c6ae9 100644
 --- a/common/bloblist.c
 +++ b/common/bloblist.c
-@@ -165,7 +165,6 @@ static int bloblist_addrec(uint tag, int size, int align_log2,
- 	rec->tag = tag;
- 	rec->hdr_size = data_start - hdr->alloced;
- 	rec->size = size;
--	rec->spare = 0;
+@@ -13,6 +13,7 @@
+ #include <malloc.h>
+ #include <mapmem.h>
+ #include <spl.h>
++#include <tables_csum.h>
+ #include <asm/global_data.h>
+ #include <u-boot/crc.h>
  
- 	/* Zero the record data */
- 	memset((void *)rec + rec_hdr_size(rec), '\0', rec->size);
+@@ -318,16 +319,10 @@ int bloblist_resize(uint tag, int new_size)
+ 
+ static u32 bloblist_calc_chksum(struct bloblist_hdr *hdr)
+ {
+-	struct bloblist_rec *rec;
+-	u32 chksum;
++	u8 chksum;
+ 
+-	chksum = crc32(0, (unsigned char *)hdr,
+-		       offsetof(struct bloblist_hdr, chksum));
+-	foreach_rec(rec, hdr) {
+-		chksum = crc32(chksum, (void *)rec, rec_hdr_size(rec));
+-		chksum = crc32(chksum, (void *)rec + rec_hdr_size(rec),
+-			       rec->size);
+-	}
++	chksum = table_compute_checksum(hdr, hdr->alloced);
++	chksum += hdr->chksum;
+ 
+ 	return chksum;
+ }
 diff --git a/include/bloblist.h b/include/bloblist.h
-index 7eff709ec8..68f97395b7 100644
+index 68f97395b7..d2dcad69a1 100644
 --- a/include/bloblist.h
 +++ b/include/bloblist.h
-@@ -205,13 +205,12 @@ struct bloblist_hdr {
-  *	record's data starts at this offset from the start of the record
-  * @size: Size of record in bytes, excluding the header size. This does not
-  *	need to be aligned (e.g. 3 is OK).
-- * @spare: Spare space for other things
+@@ -174,11 +174,10 @@ enum bloblist_tag_t {
+  *	sizeof(bloblist_hdr) since we need at least that much space to store a
+  *	valid bloblist
+  * @spare: Spare space (for future use)
+- * @chksum: CRC32 for the entire bloblist allocated area. Since any of the
++ * @chksum: checksum for the entire bloblist allocated area. Since any of the
+  *	blobs can be altered after being created, this checksum is only valid
+  *	when the bloblist is finalised before jumping to the next stage of boot.
+- *	Note that chksum is last to make it easier to exclude it from the
+- *	checksum calculation.
++ *	This is the value needed to make all checksummed bytes sum to 0
   */
- struct bloblist_rec {
- 	u32 tag;
- 	u32 hdr_size;
- 	u32 size;
--	u32 spare;
-+	u32 _spare;
- };
+ struct bloblist_hdr {
+ 	u32 magic;
+diff --git a/test/bloblist.c b/test/bloblist.c
+index 8b435e27ca..49ac4b92ae 100644
+--- a/test/bloblist.c
++++ b/test/bloblist.c
+@@ -237,12 +237,18 @@ static int bloblist_test_checksum(struct unit_test_state *uts)
+ 	*data2 -= 1;
  
- /**
+ 	/*
+-	 * Changing data outside the range of valid data should not affect
+-	 * the checksum.
++	 * Changing data outside the range of valid data should affect the
++	 * checksum.
+ 	 */
+ 	ut_assertok(bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
+ 	data[TEST_SIZE]++;
++	ut_asserteq(-EIO, bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
++	data[TEST_SIZE]--;
++	ut_assertok(bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
++
+ 	data2[TEST_SIZE2]++;
++	ut_asserteq(-EIO, bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
++	data[TEST_SIZE]--;
+ 	ut_assertok(bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
+ 
+ 	return 0;
 -- 
 2.25.1
 
