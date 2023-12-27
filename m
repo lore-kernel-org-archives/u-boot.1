@@ -4,83 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D885C46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 09:32:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CA7EC46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 09:43:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DA8C877CD;
-	Wed, 27 Dec 2023 10:32:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C331D8771E;
+	Wed, 27 Dec 2023 10:43:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kBLoGQGR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bnojz/ot";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E96FD877CD; Wed, 27 Dec 2023 10:32:48 +0100 (CET)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
+ id E240C877CD; Wed, 27 Dec 2023 10:43:19 +0100 (CET)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55A46876C8
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 10:32:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 87E0487718
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 10:43:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-50e759ece35so2376980e87.3
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 01:32:46 -0800 (PST)
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-50e7c76897dso1587650e87.2
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 01:43:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703669565; x=1704274365; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zk4lUEI6kWW9MMilP/6e1nt/8MQnmxevLaLAHUHjNQw=;
- b=kBLoGQGRGWDrJcjmu5aoXYdOK5aLGDNsEjtf8vTuad/SNXvFy7V+TbiNjYHWwZtYMH
- n8nL7KzL0iv9JwJbJ3OtmGGieTH950btENKTQ2zCF/rFzUo07AdlZPRDYuMUOndM5FkS
- NAc3Goqt9pFOm7fU0cfZKSi2v1WBpPuGut3fA9ZEFYbWacaBgOB5VTfTSsj063pel81W
- pvxkDqPhlMDAAyMWG+xJlGO7pN8uDnXDagvQpvvyaKOY/tbICgets+iKVIiXGxBZVVNM
- Vjr6bclobunVkBy5Umpah5zEkzecTzUdSy1PE9rznoodRFWhmbnS9C8BSws0ewbWOWdD
- 6WEg==
+ d=linaro.org; s=google; t=1703670197; x=1704274997; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=lnpG1EkLyR9g8kjXGobEPWfYNqMNDJdXfz00aCcqv0s=;
+ b=bnojz/otcMvLTYdeIo9V07iPOtyFTrouxLA5eWYgd7OSoJ9BYakYcfbYysqhvYG7E4
+ +QLOynNRSdYT90+62NPEAMvEPwCy+tmDPPxWG0TqvvMpw1TTTj+z8FvmdFPly557gEb2
+ 8zXaKYPHT7ATDtmUYhsLQc4IV6hAUUmiJbPnR1hb1racZTQkvLlc8ChcxiPmhj3h5Inv
+ 6cF31qJ7///J+0XqpdV1wH4wdHQoR5vYUyogAu45jD/obKvYDA/TpsGSrqjUzqHVfXdg
+ Gw1V3WKWQmjoq66Ukz/A0Hbq6gCWRCRrND/bM7IZKc5rT0xSVDocS3rnGhfMsvuSrBLg
+ dwHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703669565; x=1704274365;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zk4lUEI6kWW9MMilP/6e1nt/8MQnmxevLaLAHUHjNQw=;
- b=EmddQdx78AoREmmuoH9jexlWub/ikClD+53aybPquFuW/zibmN8lIYmiooIoWBWfcN
- iqKFpK9E1tlgCLBZq5m3GVoE6Tbs1+MDt0ngbT2OeEar+Ay7FPCtD2WZSkU5ALxx/vlu
- RmlivoVAyUq77E41GwclfOhgcbk39NvWbFUXBSf2xwi0KaUD7UZML+uJtvuroiZT1r2R
- 7d4JCg9s15h4t9b6n47HWME0w8GKYSplHjAuNnDcbalt7N8jDjiomfc/wa4H9cO93Y73
- 0sJf4XDJ/dQjXCHX09w4b3c8E5nK7HZocTA8Bbg8BGfbgiGEcCZ7aBZ0PdUsYWo/Lkb5
- pT5g==
-X-Gm-Message-State: AOJu0YzlASd77KzaYytGtMrjSLbPCrsqlKM33SxMhgxVOisi6Oun1bOt
- CWqx4yFhdGHosVlG6WRssuAGxzWXUwmcw2HIsZgMLjc0IiLrKemj2ujndFS5c0g=
-X-Google-Smtp-Source: AGHT+IFlJBtDJkJS+KzGtEDdq5DbrEcvM/pKxCjSPjFMVgN12ArUj8LI5QOEMl4RZM9CqrELSSxwi6fBEf1FwqwHmhk=
-X-Received: by 2002:a19:7016:0:b0:50e:696e:14b0 with SMTP id
- h22-20020a197016000000b0050e696e14b0mr2655913lfc.93.1703669565543; Wed, 27
- Dec 2023 01:32:45 -0800 (PST)
+ d=1e100.net; s=20230601; t=1703670197; x=1704274997;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lnpG1EkLyR9g8kjXGobEPWfYNqMNDJdXfz00aCcqv0s=;
+ b=U2Mm4LYOj4HZlTJ4yKDmO7rbKOqSZgDdYQFqJZl892bluMmvMvfRHJ4VQkA5c6lxCi
+ Its7urwSAldKtxt1pGEIhm7Io9VuHegDnO3TBxrvChnltdOe54FAiOfxYl5M565Esj6P
+ xj+eUsKzpB323h9yr6CHaaHfASBgs19jD7849UrUaZT+fDV+Jvc+eLVELv9YUP3FV21F
+ ASP9djEA8mxILUsTKRd4SzNPT41X1ieDBVfesRtvASqGNRuOrYFkhCLRxBnbKwSISki+
+ qoitm3y6tLSGEgRIa3tPuLqXXGZm92+jqCAmpmT6TP4QslZ6pUcyGgVk1mtQwXNikCqH
+ 4pXA==
+X-Gm-Message-State: AOJu0Yxjtjan39ewH6IhYPMdB7magRs87GbSxwZiHIxROA5A1jGttpll
+ xTdVrp/qLN0Eznf9JStnGNDMD1eaEE/7GTZgyUzBM+KgN2f+fQ==
+X-Google-Smtp-Source: AGHT+IHhLLBoEGG799f0XQyLeLa2bQTDKRIjA6tZ5f6s09erecfgMPkY72LtpCHMJxHYy451aGidWZqWsNbwCUaLDs4=
+X-Received: by 2002:a05:6512:ac7:b0:50e:7f67:b6a3 with SMTP id
+ n7-20020a0565120ac700b0050e7f67b6a3mr809836lfu.214.1703670196806; Wed, 27 Dec
+ 2023 01:43:16 -0800 (PST)
 MIME-Version: 1.0
-References: <20231222213110.660402-1-raymond.mao@linaro.org>
- <20231222213110.660402-10-raymond.mao@linaro.org>
- <CAFLszTjGejJm4XdCachiy5C-2i2L2XyWUschx+bNy+1YpYoOcQ@mail.gmail.com>
-In-Reply-To: <CAFLszTjGejJm4XdCachiy5C-2i2L2XyWUschx+bNy+1YpYoOcQ@mail.gmail.com>
+References: <20231218181901.337515-1-raymond.mao@linaro.org>
+ <20231218181901.337515-7-raymond.mao@linaro.org>
+In-Reply-To: <20231218181901.337515-7-raymond.mao@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 27 Dec 2023 11:32:09 +0200
-Message-ID: <CAC_iWjJdtqT8dUszq6G=Ak_W4n5U9m1dkq2FryidBYg0unKAPA@mail.gmail.com>
-Subject: Re: [PATCH v3 9/9] qemu-arm: get FDT from bloblist
-To: Simon Glass <sjg@chromium.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
- jwerner@chromium.org, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Kevin Chen <kevin_chen@aspeedtech.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Shiji Yang <yangshiji66@outlook.com>, 
- Baruch Siach <baruch@tkos.co.il>, Michal Simek <michal.simek@amd.com>,
- Stefan Roese <sr@denx.de>, Sean Anderson <sean.anderson@seco.com>
+Date: Wed, 27 Dec 2023 11:42:40 +0200
+Message-ID: <CAC_iWjLs3Tj25hr7zD4cWCsRRWhB=DNerOr6CjH2PQeOfAaBGg@mail.gmail.com>
+Subject: Re: [PATCH v3 06/14] bloblist: Drop spare value from bloblist record
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
+ Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,63 +86,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 26 Dec 2023 at 11:48, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi,
->
-> On Fri, Dec 22, 2023 at 9:32=E2=80=AFPM Raymond Mao <raymond.mao@linaro.o=
-rg> wrote:
-> >
-> > Get devicetree from a bloblist if it exists.
-> > If not, fallback to get FDT from the specified memory address.
-> >
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > ---
-> > Changes in v2
-> > - Refactor of board_fdt_blob_setup().
-> >
-> >  board/emulation/qemu-arm/qemu-arm.c | 12 ++++++++++--
-> >  1 file changed, 10 insertions(+), 2 deletions(-)
-> >
->
-> I believe this patch will not be needed, since we have fdtdec_setup()
-> to do this.
+Hi Raymond,
 
-Yep, it's not. The board-specific portion should be limited to what
-happens if the bloblist is *not* detected by fdtdec_setup() (assuming
-the user wants to allow a fallback)
+On Mon, 18 Dec 2023 at 20:20, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> From: Simon Glass <sjg@chromium.org>
+>
+> Drop spare value from bloblist record header.
+>
+> For now it is still present in the header, with an underscore, so that
+> tests continue to pass.
 
->
-> > diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu=
--arm/qemu-arm.c
-> > index e225011bf0..d326668caf 100644
-> > --- a/board/emulation/qemu-arm/qemu-arm.c
-> > +++ b/board/emulation/qemu-arm/qemu-arm.c
-> > @@ -149,9 +149,17 @@ int dram_init_banksize(void)
-> >
-> >  void *board_fdt_blob_setup(int *err)
-> >  {
-> > +       void *fdt =3D NULL;
-> >         *err =3D 0;
-> > -       /* QEMU loads a generated DTB for us at the start of RAM. */
-> > -       return (void *)CFG_SYS_SDRAM_BASE;
-> > +
-> > +       /* Check if a DTB exists in bloblist */
-> > +       if (IS_ENABLED(CONFIG_BLOBLIST) && !bloblist_maybe_init())
-> > +               fdt =3D bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-> > +       if (!fdt)
-> > +               /* QEMU loads a generated DTB for us at the start of RA=
-M. */
-> > +               return (void *)CFG_SYS_SDRAM_BASE;
-> > +
-> > +       return fdt;
-> >  }
-> >
-> >  int board_bloblist_from_boot_arg(unsigned long addr, unsigned long siz=
-e)
-> > --
-> > 2.25.1
-> >
->
-> Regards,
-> Simon
+I am not sure I understand the commit message. Doesn't the spec define
+this as 'reserved' now?
+On top of that, it's a better idea to follow the spec naming. It's
+easier to map the spec -> code for new readers. So I would rename
+
+tag -> tag_id
+size -> data_size and
+flags -> reserved.
+
+Can we at least do the flags -> reserved in this patch?
+
+[...]
+
+Thanks
+/Ilias
