@@ -4,87 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A3CFC46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 14:06:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1D02C46CD4
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 14:14:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8ECEC87823;
-	Wed, 27 Dec 2023 15:06:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 30279878A1;
+	Wed, 27 Dec 2023 15:14:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CZ/PDo8V";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Xv/shDoO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97D0787866; Wed, 27 Dec 2023 15:06:55 +0100 (CET)
+ id D262687866; Wed, 27 Dec 2023 15:14:47 +0100 (CET)
 Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
  [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63012877AF
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 15:06:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C238087866
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 15:14:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
 Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-55361b7f38eso6077025a12.0
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 06:06:53 -0800 (PST)
+ 4fb4d7f45d1cf-5537dd673e5so4164574a12.0
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 06:14:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703686013; x=1704290813; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703686485; x=1704291285; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=53hU5OW7S2+7LvrRycK9coVQfxgd0K6B/yDPvuojceQ=;
- b=CZ/PDo8VwQqW58sHuVHYhl4Te2gJ6EmBVORK7+MPTY4tcV4vl6WFqyxwfmcWZ/bG9J
- KENVCMvKHahxtX2LHDMdLIo0MF4uZRqVCxO9oY5dGlLGt8mMmUqJZwKWHIrIJNh6llKK
- G6djJ1yzrsYs8dhtnn+Ta5xYfrGmBS5DCqUY837U+KUz31LC/o+2vVZD9NPYDdgVFTvF
- zjpNiouXZ2UQrZc6U6KJggauaL9M7uLvwz0/sSmKKwkd7ZOmhVXwNO3aZge8jtKAD/FH
- /NQFRaacuRe2XJSTvHkgQZQWqWILoqQGVKjIih6+sq8yxPblr0wm0aZxNWqKxYRY9jb1
- NidA==
+ bh=nVkufvkxCDacOddpgF76wisy/91gP3aBDTsq3LbJu/A=;
+ b=Xv/shDoO4P4llwfLEMr1IXTkbY4ETpm9QlY4Oz63rxwR4m8LamP13u9oP9UxyVNT7K
+ hTjR2HyUL42NuvxeUnG8cSk7sEpd2MfbEIGajFmt5hcekYJ4j8RILs188EqCLIoLTkl7
+ 5/GsBp3CW3T8l7rj/Xn0nPhUL6I0RgOu7JkREUb9DlEf7sBImVNFHPchEJGnrwoVtP9h
+ D77qY3dillqokv7ZD0hFFBCEPuMG5gceuaOb5Q4iLENzfr1AWRWQt/TgvlATY6pK3M7n
+ +9mHVADxgdyDTewGmVRMcWlcGEsqHmD2DlKZqJqdx+W5gvKS3r6pdujCCB9KqeZMgqPg
+ cLdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703686013; x=1704290813;
+ d=1e100.net; s=20230601; t=1703686485; x=1704291285;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=53hU5OW7S2+7LvrRycK9coVQfxgd0K6B/yDPvuojceQ=;
- b=HjcFQywB1Ub6ssH8XsqibQyZJ5ScyyVCxK6fjaCDWBGDC+jNgX0KrXOeij2feI/+Xe
- Rzasgfs2wbaXl1xKM5twZC16Tsq/gFjVddIdLt8S9lOOTXlLDLPFJJXYboPyYhMvxs95
- h6mQ9KpUJlKVsfzhKZatEmjFrG+NJDJA9E0jDV55Aj6Yu0a0Os9mhLdm8lrtZP1UW4UT
- /i84zwrs7er8S7sA48ON6VXMBUGapOlls5EcSIu28qsdopYalGmRwSjP7MRDQJt5FaRF
- PebC8PWkl6ot6bafH2STL5p1qbnBQk/eXhNHmIBQPZ+x5ADh/6eOG+UzLu0UdiHKeUKV
- ROVA==
-X-Gm-Message-State: AOJu0YzcguDWVb4GRhs/Gve63IKuGwBG/isiwg2ujj81MCIyu/FxPIWy
- Lq/55WLDdM/rumrmOdcLoqx3M7RR32CwJg==
-X-Google-Smtp-Source: AGHT+IG8dMV6B+0gi0vpPzoBZldjhRNLrqf8wq+vKGeFs4ySqaufx9gswm3scb4WVbCYCpKfJFmUyg==
-X-Received: by 2002:a17:906:220b:b0:a23:5f0c:864a with SMTP id
- s11-20020a170906220b00b00a235f0c864amr2732191ejs.97.1703686012763; 
- Wed, 27 Dec 2023 06:06:52 -0800 (PST)
+ bh=nVkufvkxCDacOddpgF76wisy/91gP3aBDTsq3LbJu/A=;
+ b=MuccZHZWxRQ5J9oroIXUT6RCug1C0TAe4CoGz0dPxbtYaw/im0sdlskPn68R5I048L
+ x485idPhcrlo15enx3Pkb/UvY4lMJ9M2l2uhjcQTWaNFhLEjqRxXlGijJeKqx7ddPFYW
+ IlbbG0Sj7/BK42B1hFydjc8ACg4XCLgetWGzF7ViWPmB6hiipHaWNlIeHekvANkwkoFJ
+ PeTUvqsGKt4nT4M1f9RLJ8GRk83uLbCgRoVm7ZCtDXeTveSHPDrOUgYVrmSKtQUt4hKi
+ rcCo9RucGpLN248rz0oYmIJwCZIatJHZeS4sUYBmSQtTS3QTcz+9/es9ntiDrw9hEtrj
+ cm1w==
+X-Gm-Message-State: AOJu0Yx0jP/eqV19kRgcPULQLZusfHPl49J2+ZhO4MbbrF4Yj8orSj4W
+ C8emERhUu6WKuCazPLvWtVrOL9Em+lHfPA==
+X-Google-Smtp-Source: AGHT+IEvNUmRoR4dONYFf7xBFwH/6QWEa/H/Aww4Ag3n4skHA0B1JOVP2kpB9w0TYt4h/muPZzQEhQ==
+X-Received: by 2002:a05:6402:1cb3:b0:555:2ca8:5617 with SMTP id
+ cz19-20020a0564021cb300b005552ca85617mr1430359edb.71.1703686485335; 
+ Wed, 27 Dec 2023 06:14:45 -0800 (PST)
 Received: from hera (ppp089210121239.access.hol.gr. [89.210.121.239])
  by smtp.gmail.com with ESMTPSA id
- wh13-20020a170906fd0d00b00a2684d2e684sm6601415ejb.92.2023.12.27.06.06.51
+ et8-20020a056402378800b00554753ec02fsm6077524edb.86.2023.12.27.06.14.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Dec 2023 06:06:52 -0800 (PST)
-Date: Wed, 27 Dec 2023 16:06:49 +0200
+ Wed, 27 Dec 2023 06:14:45 -0800 (PST)
+Date: Wed, 27 Dec 2023 16:14:42 +0200
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Shantur Rathore <i@shantur.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>, Michael Walle <mwalle@kernel.org>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, xypron.glpk@gmx.de,
- Abdellatif.ElKhlifi@arm.com, Drew.Reed@arm.com, nd@arm.com,
- sjg@chromium.org, u-boot@lists.denx.de
-Subject: Re: Adding EFI runtime support to the Arm's FF-A bus
-Message-ID: <ZYwvefJyuMdKXGio@hera>
-References: <B06FB6F5-416C-440D-BC72-070673DF3177@gmx.de>
- <20231219101124.2847425-1-mwalle@kernel.org>
- <87plz2nzr1.fsf@bloch.sibelius.xs4all.nl>
- <f2eb636cd895aae348d4357537267fd2@kernel.org>
- <CAC_iWj+gPVEm3obJZ2rxr8wd7DD5P9bdadeqW22QmwL0=B825g@mail.gmail.com>
- <CALeDE9NZyAF5iFrbfA2BtWxWdB__cijaME7ppyaPk5Cf7Fd-ZQ@mail.gmail.com>
- <CABEcMwVvu7e9sr8oZKJN+s3DH4wz_+LFx9cADAFZQj4eG+7skw@mail.gmail.com>
- <CAC_iWjJOi3DmxVYx2X2aXtsFpvHDFOqskCYZu3s1U04ak5u7XQ@mail.gmail.com>
- <CABEcMwU==WKegXX0kKiVecAEmQQ=752Qiw8kFyF9oUC4w7_GEw@mail.gmail.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 2/5] smbios: type2: contained object handles
+Message-ID: <ZYwxUjhomuQYAk1s@hera>
+References: <20231223004429.247301-1-xypron.glpk@gmx.de>
+ <20231223004429.247301-3-xypron.glpk@gmx.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CABEcMwU==WKegXX0kKiVecAEmQQ=752Qiw8kFyF9oUC4w7_GEw@mail.gmail.com>
+In-Reply-To: <20231223004429.247301-3-xypron.glpk@gmx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,55 +92,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sat, Dec 23, 2023 at 01:44:26AM +0100, Heinrich Schuchardt wrote:
+> The type 2 structure must include information about the contained objects.
+> It is fine to set the number of contained object handles to 0.
+>
+> Add the missing field.
+>
+> Fixes: 721e992a8af5 ("x86: Add SMBIOS table support")
+> Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> ---
+>  include/smbios.h | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/include/smbios.h b/include/smbios.h
+> index e601283d29..88c19ae062 100644
+> --- a/include/smbios.h
+> +++ b/include/smbios.h
+> @@ -139,6 +139,7 @@ struct __packed smbios_type2 {
+>  	u8 chassis_location;
+>  	u16 chassis_handle;
+>  	u8 board_type;
+> +	u8 number_contained_objects;
+>  	char eos[SMBIOS_STRUCT_EOS_BYTES];
+>  };
+>
+> --
+> 2.43.0
+>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-[...]
-
-> > > > > > I know. Last time I checked CentOS (or was it Ubuntu?) tried to
-> > > > > > set EFI variables and the installer just failed. Might be fixed now,
-> > > > > > though.
-> > > > >
-> > > > > It's not. The error message is less scary in distros nowadays, but
-> > > > > setting the variable for Boot0000 is still not working. That being
-> > > > > said I have a plan to fix it for variables stored in a file, that's
-> > > > > why we standardized the efi variable format in EBBR.
-> > >
-> > > Does this mean supporting SetVariableRT for files ?
-> > > If yes, would it work without the driver model in runtime?
-> >
-> > Yes.
-> >
-> > The reasoning here is pretty simple. You can't keep alive drivers etc
-> > for devices that the *kernel* eventually owns. The proposal is to
-> > ignore the EFI spec and teach the kernel to write those directly. We
-> > already do that when the variables are stored in an RPMB, we need to
-> > figure out a decent scalable architecture for the rest.
-> >
-> Thanks for explaining this.
-> It would be a good idea to provide EFI var storage info like location,
-> offset, maxsize to linux
-> and linux can modify vars as required.
->
-> Eg.
->
-> location=espfile://u-boot-efi.vars offset=0 maxsize=-1
-> or
-> location=spi://0 offset=0x3D0000 maxsize=0xFFFF
->
-
-Yes, you need the flash, offset and size, but I as trying to figure out if
-we hand over those as an EFI config table. I haven't managed to do any
-coding though yet.
-
-/Ilias
-> Then the linux kernel is able to modify vars correctly.
-> I think SPI might be simpler to implement vs file as there can be.
-> many different
-> ESP partitions on multiple drives or no ESP partition at all.
->
-> Kind regards,
-> Shantur
->
-> > /Ilias
-> > >
-> > > Kind regards,
-> > > Shantur
