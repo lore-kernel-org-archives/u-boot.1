@@ -4,76 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34CC9C46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 17:49:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8077C46CD4
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 17:50:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93EB8879CE;
-	Wed, 27 Dec 2023 18:49:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3AA1D879D9;
+	Wed, 27 Dec 2023 18:49:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PmZ/Fa+l";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SGcMH1KW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86F44879C7; Wed, 27 Dec 2023 18:49:11 +0100 (CET)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
+ id 59E0A879C7; Wed, 27 Dec 2023 18:49:12 +0100 (CET)
+Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
+ [IPv6:2607:f8b0:4864:20::833])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96D7A879CB
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 18:49:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5AD3B879D5
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 18:49:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-3ba14203a34so5483278b6e.1
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 09:49:07 -0800 (PST)
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-427f5cc49afso70031cf.2
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 09:49:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703699346; x=1704304146; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703699347; x=1704304147; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dUhY3v5VuJP6kgEaMhWGkPyYoLLOvf5K7f5mkwVSyJU=;
- b=PmZ/Fa+lDh5p7XiXuRhv0bnWN37YDbqGee924Nl912HzYf+Q438cTkahMO/Eea/D9y
- sM+wvxm5E6QDGkp19HsBSFtrrY6dgUtZdtKtBYFWi85PgHbJPeENOlvNH+ZI43OniWcq
- fL7gUVEPc+Om344EAO9xTKCfQ8eOxfOa26pbg=
+ bh=ZmwsU4BbXPpXPXtQt59h7lUAokVDuDigTBVtGbC1Umo=;
+ b=SGcMH1KWHToFDEsebzzlW2jUsxi/TFN7ZPgcsrwFvL/FEL8mFrYPql3OCRR+1xzt+e
+ wXQk7v8F+hRDLWtALvS13MZJvv/WgDcQ/YRSJfKxc1FeI/xzUalzWo3wmlw0RMO15Ri8
+ XTmP0c4CMD2P4JUv941d8rUV4cAKBEoXnfsQ0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703699346; x=1704304146;
+ d=1e100.net; s=20230601; t=1703699347; x=1704304147;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dUhY3v5VuJP6kgEaMhWGkPyYoLLOvf5K7f5mkwVSyJU=;
- b=tWBp+ZJ/ohgvifjzJyJa+8pYYot1WEq9WwMi/KQrZMhHBrkQSU2RcaPlOxOHlNaQZN
- NFokqNdFbgFvLXzhXqrgrd6S86vIL5wO6RJ2pJK1vxeZ1gKE1424/JUs48mSdYKzM1kG
- JucA4Sl4MSX0/QmvxLYxz9mJyVvnFW6xEVk7ABFC+KK8qJswEdSWxK3SBJ7Y0GzQbMtN
- Uyxruk+SKot6c3WhSR8hJW1YYLAs8Te1ZN8hLrPq2zqgsh4zZTW2nBp6Ilzz6CaFLFnm
- eqQPSCmk76O3QEUM3nZLPwgZgi+PT/AR4+UC6Qlfo8O15hF5tqcaxOM3DlRha6oCrDji
- q7Jg==
-X-Gm-Message-State: AOJu0YzzNVRcYI0SjrpZm73jeWeIItPG/POB6Gb475Rn5SYcr8xtnuxF
- w39l/4gKxismjnd8W9BjtPA02NdtsrAd7VrRb54VfhIO5vLP
-X-Google-Smtp-Source: AGHT+IFOd0Z9OkSZlP6/Vhf6C3P7TjR+i5T4NyGtlb2AlTWD/Apcgu5PNZ4Ylt0+ennySRY9h4pHJBoo3fxdvFJ2DxA=
-X-Received: by 2002:a05:6808:2224:b0:3bb:cf5e:7833 with SMTP id
- bd36-20020a056808222400b003bbcf5e7833mr87610oib.85.1703699346175; Wed, 27 Dec
- 2023 09:49:06 -0800 (PST)
+ bh=ZmwsU4BbXPpXPXtQt59h7lUAokVDuDigTBVtGbC1Umo=;
+ b=UYEv8BJ5C15lQcBbN8VXCPKBih09YAtPDLeTBOF1yarPkkVyMkn0o2PD8aK8N5eZVZ
+ qXw4C859dea1HLpMQ2KtvIcASKOJ7uHnQw/UOQRuIlHLd2kHjB80V4cdvjzVNG/0kXZL
+ WJ4HE+zt22vxTtpvGcKJO5j9o8DY6pR0q/4ifyWpSWc8jkTw3vXEFW68WFms8vC8/nbN
+ TBpFczWutx2VqeQsi6/uvUZ6IBEJUW3GE7sHaDvnzPzL0FejJjA4jLquIw+xt9Qg1B6L
+ 4g0N9k2Rxenb/cjuYcEBz+dLRLk0zs78/HqG1FlNQiUozbfgHmxqNQ0gBlNxImA+uwq8
+ MW7w==
+X-Gm-Message-State: AOJu0YyRlog64hcs3sg+zWHvmAfo+PxevvYptgQ6i3PJubIzJvo+F8e0
+ q5uiP12ogyzO0Ux4X4IcVtZn2xgO2owZIEuylfWKnEDLXtGU
+X-Google-Smtp-Source: AGHT+IFgYU2mjKweKDQcYqBjtM9S9uwNryP/QFEL57KdbJH4euqYJnWF+X5g5QXXF2opUvdkJ7cC7zrFyWuUuHbI0ok=
+X-Received: by 2002:a05:6214:e8d:b0:67a:a002:70e6 with SMTP id
+ hf13-20020a0562140e8d00b0067aa00270e6mr17430181qvb.20.1703699347204; Wed, 27
+ Dec 2023 09:49:07 -0800 (PST)
 MIME-Version: 1.0
-References: <20231115153836.16537-1-clamor95@gmail.com>
- <20231115153836.16537-5-clamor95@gmail.com>
-In-Reply-To: <20231115153836.16537-5-clamor95@gmail.com>
+References: <20231218181901.337515-1-raymond.mao@linaro.org>
+ <20231218181901.337515-2-raymond.mao@linaro.org>
+ <CAC_iWjJ7AQ5_=yh-0FPcFOQ2-8XmZ24eT2WtWtQ8gmmEOiMuvg@mail.gmail.com>
+In-Reply-To: <CAC_iWjJ7AQ5_=yh-0FPcFOQ2-8XmZ24eT2WtWtQ8gmmEOiMuvg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 27 Dec 2023 17:48:55 +0000
-Message-ID: <CAFLszTjVb2U0sr3++LmocrFCJnTkThtEDuiziYv8Xcb5cBOaDQ@mail.gmail.com>
-Subject: Re: [PATCH v2 4/5] lib: membuff: fix readline not returning line in
- case of overflow
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
- Bin Meng <bmeng@tinylab.org>, Ion Agorria <ion@agorria.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
- Sean Anderson <sean.anderson@seco.com>, 
- Heiko Schocher <hs@denx.de>, Dmitrii Merkurev <dimorinny@google.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, u-boot@lists.denx.de
+Date: Wed, 27 Dec 2023 17:48:56 +0000
+Message-ID: <CAFLszTh=AZOYz5Ky3WdLZ1SjsmK9MAoYseUUA5T+uMaknKSsyg@mail.gmail.com>
+Subject: Re: [PATCH v3 01/14] bloblist: Update the tag numbering
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
+ jwerner@chromium.org, 
+ Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,102 +86,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Nov 15, 2023 at 3:39=E2=80=AFPM Svyatoslav Ryhel <clamor95@gmail.co=
-m> wrote:
->
-> From: Ion Agorria <ion@agorria.com>
->
-> If line overflows readline it will not be returned, fix this behavior,
-> make it optional and documented properly.
->
-> Signed-off-by: Ion Agorria <ion@agorria.com>
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> ---
->  boot/bootmeth_extlinux.c | 2 +-
->  common/console.c         | 2 +-
->  include/membuff.h        | 5 +++--
->  lib/membuff.c            | 4 ++--
->  4 files changed, 7 insertions(+), 6 deletions(-)
->
+Hi Ilias,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Wed, Dec 27, 2023 at 9:48=E2=80=AFAM Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Raymond,
+>
+> On Mon, 18 Dec 2023 at 20:19, Raymond Mao <raymond.mao@linaro.org> wrote:
+> >
+> > From: Simon Glass <sjg@chromium.org>
+> >
+> > Align bloblist tags with the FW handoff spec v0.9.
+> > The most common ones are from 0.
+> > TF related ones are from 0x100.
+> > All non-standard ones from 0xfff000.
+> >
+> > Added new defined tags:
+> > BLOBLISTT_OPTEE_PAGABLE_PART for TF.
+> > BLOBLISTT_TPM_EVLOG and BLOBLISTT_TPM_CRB_BASE for TPM.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> > Changes in v2
+> > - Align bloblist tags to FW handoff spec v0.9.
+> > Changes in v3
+> > - Add TPM related tags
+> >
+> >  common/bloblist.c  | 18 ++++++++++---
+> >  include/bloblist.h | 67 +++++++++++++++++++++++++---------------------
+> >  test/bloblist.c    |  4 +--
+> >  3 files changed, 52 insertions(+), 37 deletions(-)
+> >
+> > diff --git a/common/bloblist.c b/common/bloblist.c
+> > index a22f6c12b0..5606487f5b 100644
+> > --- a/common/bloblist.c
+> > +++ b/common/bloblist.c
+> > @@ -36,16 +36,26 @@ static struct tag_name {
+> >         enum bloblist_tag_t tag;
+> >         const char *name;
+> >  } tag_name[] =3D {
+> > -       { BLOBLISTT_NONE, "(none)" },
+> > +       { BLOBLISTT_VOID, "(void)" },
+> >
+> >         /* BLOBLISTT_AREA_FIRMWARE_TOP */
+> > +       { BLOBLISTT_CONTROL_FDT, "Control FDT" },
+> > +       { BLOBLISTT_HOB_BLOCK, "HOB block" },
+> > +       { BLOBLISTT_HOB_LIST, "HOB list" },
+> > +       { BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
+> > +       { BLOBLISTT_TPM_EVLOG, "TPM event log defined by TCG EFI" },
+> > +       { BLOBLISTT_TPM_CRB_BASE, "TPM Command Response Buffer address"=
+ },
+> >
+> >         /* BLOBLISTT_AREA_FIRMWARE */
+> > -       { BLOBLISTT_ACPI_GNVS, "ACPI GNVS" },
+> > -       { BLOBLISTT_INTEL_VBT, "Intel Video-BIOS table" },
+> >         { BLOBLISTT_TPM2_TCG_LOG, "TPM v2 log space" },
+> >         { BLOBLISTT_TCPA_LOG, "TPM log space" },
+> > -       { BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
+> > +       { BLOBLISTT_ACPI_GNVS, "ACPI GNVS" },
+> > +
+> > +       /* BLOBLISTT_AREA_TF */
+> > +       { BLOBLISTT_OPTEE_PAGABLE_PART, "OP-TEE pagable part" },
+> > +
+> > +       /* BLOBLISTT_AREA_OTHER */
+> > +       { BLOBLISTT_INTEL_VBT, "Intel Video-BIOS table" },
+> >         { BLOBLISTT_SMBIOS_TABLES, "SMBIOS tables for x86" },
+> >         { BLOBLISTT_VBOOT_CTX, "Chrome OS vboot context" },
+> >
+> > diff --git a/include/bloblist.h b/include/bloblist.h
+> > index 080cc46a12..92dbfda21b 100644
+> > --- a/include/bloblist.h
+> > +++ b/include/bloblist.h
+> > @@ -81,7 +81,7 @@ enum {
+> >
+> >  /* Supported tags - add new ones to tag_name in bloblist.c */
+> >  enum bloblist_tag_t {
+> > -       BLOBLISTT_NONE =3D 0,
+> > +       BLOBLISTT_VOID =3D 0,
+> >
+> >         /*
+> >          * Standard area to allocate blobs used across firmware compone=
+nts, for
+> > @@ -89,42 +89,36 @@ enum bloblist_tag_t {
+> >          * projects.
+> >          */
+> >         BLOBLISTT_AREA_FIRMWARE_TOP =3D 0x1,
+> > +       /*
+> > +        * Devicetree for use by firmware. On some platforms this is pa=
+ssed to
+> > +        * the OS also
+> > +        */
+> > +       BLOBLISTT_CONTROL_FDT =3D 1,
+> > +       BLOBLISTT_HOB_BLOCK =3D 2,
+> > +       BLOBLISTT_HOB_LIST =3D 3,
+> > +       BLOBLISTT_ACPI_TABLES =3D 4,
+> > +       BLOBLISTT_TPM_EVLOG =3D 5,
+> > +       BLOBLISTT_TPM_CRB_BASE =3D 6,
+> >
+> >         /* Standard area to allocate blobs used across firmware compone=
+nts */
+> > -       BLOBLISTT_AREA_FIRMWARE =3D 0x100,
+> > +       BLOBLISTT_AREA_FIRMWARE =3D 0x10,
+> > +       BLOBLISTT_TPM2_TCG_LOG =3D 0x10,  /* TPM v2 log space */
+> > +       BLOBLISTT_TCPA_LOG =3D 0x11,      /* TPM log space */
+> >         /*
+> >          * Advanced Configuration and Power Interface Global Non-Volati=
+le
+> >          * Sleeping table. This forms part of the ACPI tables passed to=
+ Linux.
+> >          */
+> > -       BLOBLISTT_ACPI_GNVS =3D 0x100,
+> > -       BLOBLISTT_INTEL_VBT =3D 0x101,    /* Intel Video-BIOS table */
+> > -       BLOBLISTT_TPM2_TCG_LOG =3D 0x102, /* TPM v2 log space */
+> > -       BLOBLISTT_TCPA_LOG =3D 0x103,     /* TPM log space */
+> > -       BLOBLISTT_ACPI_TABLES =3D 0x104,  /* ACPI tables for x86 */
+> > -       BLOBLISTT_SMBIOS_TABLES =3D 0x105, /* SMBIOS tables for x86 */
+> > -       BLOBLISTT_VBOOT_CTX =3D 0x106,    /* Chromium OS verified boot =
+context */
+> > +       BLOBLISTT_ACPI_GNVS =3D 0x12,
+>
+> Any idea if we have users that would be affected by this value change?
 
+I suppose it is possible, but bloblist has so far been intended for
+internal U-Boot use, so perhaps not? In any case, there isn't much we
+can do about it.
 
-> diff --git a/boot/bootmeth_extlinux.c b/boot/bootmeth_extlinux.c
-> index aa2a4591eb..ae0ad1d53e 100644
-> --- a/boot/bootmeth_extlinux.c
-> +++ b/boot/bootmeth_extlinux.c
-> @@ -82,7 +82,7 @@ static int extlinux_fill_info(struct bootflow *bflow)
->         log_debug("parsing bflow file size %x\n", bflow->size);
->         membuff_init(&mb, bflow->buf, bflow->size);
->         membuff_putraw(&mb, bflow->size, true, &data);
-> -       while (len =3D membuff_readline(&mb, line, sizeof(line) - 1, ' ')=
-, len) {
-> +       while (len =3D membuff_readline(&mb, line, sizeof(line) - 1, ' ',=
- true), len) {
->                 char *tok, *p =3D line;
->
->                 tok =3D strsep(&p, " ");
-> diff --git a/common/console.c b/common/console.c
-> index 8a869b137e..cd56035171 100644
-> --- a/common/console.c
-> +++ b/common/console.c
-> @@ -846,7 +846,7 @@ bool console_record_overflow(void)
->  int console_record_readline(char *str, int maxlen)
->  {
->         return membuff_readline((struct membuff *)&gd->console_out, str,
-> -                               maxlen, '\0');
-> +                               maxlen, '\0', false);
->  }
->
->  int console_record_avail(void)
-> diff --git a/include/membuff.h b/include/membuff.h
-> index 21051b0c54..4eba626ce1 100644
-> --- a/include/membuff.h
-> +++ b/include/membuff.h
-> @@ -192,10 +192,11 @@ int membuff_free(struct membuff *mb);
->   * @mb: membuff to adjust
->   * @str: Place to put the line
->   * @maxlen: Maximum line length (excluding terminator)
-> + * @must_fit: If true then str is empty if line doesn't fit
->   * Return: number of bytes read (including terminator) if a line has bee=
-n
-> - *        read, 0 if nothing was there
-> + *        read, 0 if nothing was there or line didn't fit when must_fit =
-is set
->   */
-> -int membuff_readline(struct membuff *mb, char *str, int maxlen, int minc=
-h);
-> +int membuff_readline(struct membuff *mb, char *str, int maxlen, int minc=
-h, bool must_fit);
->
->  /**
->   * membuff_extend_by() - expand a membuff
-> diff --git a/lib/membuff.c b/lib/membuff.c
-> index 36dc43a523..964e504d5b 100644
-> --- a/lib/membuff.c
-> +++ b/lib/membuff.c
-> @@ -288,7 +288,7 @@ int membuff_free(struct membuff *mb)
->                         (mb->end - mb->start) - 1 - membuff_avail(mb);
->  }
->
-> -int membuff_readline(struct membuff *mb, char *str, int maxlen, int minc=
-h)
-> +int membuff_readline(struct membuff *mb, char *str, int maxlen, int minc=
-h, bool must_fit)
->  {
->         int len;  /* number of bytes read (!=3D string length) */
->         char *s, *end;
-> @@ -310,7 +310,7 @@ int membuff_readline(struct membuff *mb, char *str, i=
-nt maxlen, int minch)
->         }
->
->         /* couldn't get the whole string */
-> -       if (!ok) {
-> +       if (!ok && must_fit) {
->                 if (maxlen)
->                         *orig =3D '\0';
->                 return 0;
-> --
-> 2.40.1
->
+Regards,
+Simon
