@@ -4,84 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 631F1C46CD4
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 16:24:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA8B3C46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 16:29:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA00B87956;
-	Wed, 27 Dec 2023 17:24:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3F98E877CD;
+	Wed, 27 Dec 2023 17:29:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="f6rULp6U";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="1qX9wk/p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 352D08798B; Wed, 27 Dec 2023 17:24:55 +0100 (CET)
-Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
- [IPv6:2607:f8b0:4864:20::52b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1DC74877F3; Wed, 27 Dec 2023 17:29:00 +0100 (CET)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2060e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe5a::60e])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E723C87956
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 17:24:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C44CB8764D
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 17:28:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-5cde7afa1d7so1640543a12.1
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 08:24:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703694291; x=1704299091; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=B1x4zZI5pGzVqFXyDVCC8TxiAvZHVtyipf1tG2j75Gc=;
- b=f6rULp6UgniD2lavf1mhXEDCgPjaRkALXQZ4QVCRpH9rOEJLKznX6WSaT0oPHQobo8
- pWlkDADrev+VqfSqqww8L+Ds862nRGAxlj+b8Jh8qMEpWjdXh1rLrJIrA3Zrq20fsllA
- tDgBloYEzQnM12fBEVy7SjJACEt1zMWHhiTWuqEb3sgjCxzOyXEzDrXKKbs7QDwElBJJ
- rFYhFerGP0qMOJ8nYzcOcfHH8FkPwPhD4fBn50YqxPTC3yDgQrN0wR3uzQUQ83kiCwGC
- TGVVtn0vSCFN/9mH+nNWR4H2UboJ3ii3mPvozNy8Z/T18D9PE3gzTU/rCx4/OHzhcjgx
- Ajdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703694291; x=1704299091;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=B1x4zZI5pGzVqFXyDVCC8TxiAvZHVtyipf1tG2j75Gc=;
- b=Cw1TemGJNOpJoPj1HiJNhSRFpHc/Jm3GigEOqDna7BPLGv3VL/Kuy2JJrBljKQ6EFl
- We+pa4YhfklLqIhLvVQRWzivE+yUXvAc/WbDKuiKqYzzPHLKuiuRnsOmOY1JOB1MhWUU
- hD87xliPjGqrQ1nRXI6Yuc0ZJhusV1AUYYGZy8xJcG3TsQSmkVP9NbuHVq4t1qaSu8l2
- z20i5D3JnTQEUPqGxNi5uBTIOJ0L7m6N7VTQN2kWXPdIHe092K9ztkdQRKJHPk4Q9JT5
- 95hJZp1oyHEcGVquvGYLdUc8xVcvH4Fvk//UGeuNAXdtHNhLlaq48F/V9aydxmjflxTm
- nXAQ==
-X-Gm-Message-State: AOJu0YzgCfHQ1A+oDqU10d+Te7jp4+CM1SLj6LM+XTVWLNA5fY1lXq0p
- fuSWam9i76fIDaHKpZqWT80VDovkJSFZ3hgpv81KZIUaEVcCIQ==
-X-Google-Smtp-Source: AGHT+IGsvk+Z9EmKhzsH9/ZdXAiTINDFyPH3+2B7ZBc6JWebNgVNcofwLMwRpqRxCZtcascqRDTLUMPeFyv+CE2v3tw=
-X-Received: by 2002:a05:6a20:728b:b0:196:3b76:9880 with SMTP id
- o11-20020a056a20728b00b001963b769880mr296469pzk.56.1703694291309; Wed, 27 Dec
- 2023 08:24:51 -0800 (PST)
+ spf=fail smtp.mailfrom=tejas.arvind.bhumkar@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=UEsHhkDcmaOUKfu62UZT3myr0qpDXmNVikk/3NYZcH3DxBR05pWiI/7GIiEv6esw5/Qp3ov/Bzm9OQY8R9DvEt8ZEyKbwgLm0MMNanfUXR0oAO321+TezyoszW/M65zufHa2UPz51vgF6weGrvq3ge/radALOon9eJ7wDWqTJu2pHMO10O977mRP9471/CDb9BrLCrB8vojEy3+FQmHoXB5sOoopKM4OTvempjx+H3bAViLlarmmLOl4ovlMBPvILJwakrGbwexTIAj3XWWOt4sM1Yf77TojEDWly4VQEbddQ+6+dzi/o2kRRRyBXVs2UwVxEsPy8I7wt7LFc5LUDg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=WYBJkY6rTNYh935Z1v8gGCm9x0R5cAPHLRTGN2GoRHE=;
+ b=AU8S2EKCt+8qRFF+QDVNfSgNanXQYxt8FwdCRm+lyb7DweYnHq3cDhY4P6lILnlImMYqHW8atII8UF9meskVzhcnp8JxqCzJ1Tk9IZAcFS1vao6scJS5BrEAC3EugTdtwk23uz0C6CDn+7M/LygXzYqzMNZcncc1NLPtAz9J4W4mc9D4eUOZq532QeC7+t3JgDOTXkaVCSATNZ5gEPUv9ff4A4udsVQSaep97Jh6s1SfGPK2uV6BmpRu+0RYjaX9Z/KS1doWR7jPKfsawiYpM7Gxj5xfk+8ONWkkyXi3xqCJcnOfTrCFYnGhTEnl2u3lmvAPBgvuLvurKgbwbfIOxQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=WYBJkY6rTNYh935Z1v8gGCm9x0R5cAPHLRTGN2GoRHE=;
+ b=1qX9wk/pmc9sjBAkbyKrssCIZcUppctPbciWapS6c4t1FMNhcfHULF5sTkGmfFOI2G2L8i2k9n5LXVSWSEaUR3SRjQ5t7wp8d+pNQT83wPF5qE2+eq6PFq9yftjLiGqSqgcZ7BsUx+PvZ1Rk146ZJhdyHKICBdxEZk9JX/hytUs=
+Received: from BY5PR13CA0004.namprd13.prod.outlook.com (2603:10b6:a03:180::17)
+ by CH0PR12MB5092.namprd12.prod.outlook.com (2603:10b6:610:bf::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7113.27; Wed, 27 Dec
+ 2023 16:28:54 +0000
+Received: from SJ5PEPF000001D5.namprd05.prod.outlook.com
+ (2603:10b6:a03:180:cafe::1c) by BY5PR13CA0004.outlook.office365.com
+ (2603:10b6:a03:180::17) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7135.19 via Frontend
+ Transport; Wed, 27 Dec 2023 16:28:53 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SJ5PEPF000001D5.mail.protection.outlook.com (10.167.242.57) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7135.14 via Frontend Transport; Wed, 27 Dec 2023 16:28:53 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Wed, 27 Dec
+ 2023 10:28:52 -0600
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Wed, 27 Dec
+ 2023 10:28:52 -0600
+Received: from xhdcl190040.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34 via Frontend
+ Transport; Wed, 27 Dec 2023 10:28:50 -0600
+From: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <jagan@amarulasolutions.com>, <vigneshr@ti.com>, <michal.simek@amd.com>,
+ <git@xilinx.com>
+Subject: [PATCH] mtd: spi-nor: ids: Add is25lx512 chip
+Date: Wed, 27 Dec 2023 21:58:39 +0530
+Message-ID: <20231227162839.858860-1-tejas.arvind.bhumkar@amd.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-References: <20231222213110.660402-1-raymond.mao@linaro.org>
- <20231222213110.660402-3-raymond.mao@linaro.org>
- <CAFLszTgW9Gqn8RhDN_2DBFJm4ZpLB6eHd07xhQmJQOMiiK59-g@mail.gmail.com>
-In-Reply-To: <CAFLszTgW9Gqn8RhDN_2DBFJm4ZpLB6eHd07xhQmJQOMiiK59-g@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Wed, 27 Dec 2023 11:24:41 -0500
-Message-ID: <CAEfUkUJsUUeKN=z0SNTVH_hrcmu872J5b=wHufyfbx2h_-0YRw@mail.gmail.com>
-Subject: Re: [PATCH v3 2/9] bloblist: check bloblist with specified buffer size
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, jwerner@chromium.org, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Kevin Chen <kevin_chen@aspeedtech.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>, 
- Shiji Yang <yangshiji66@outlook.com>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Baruch Siach <baruch@tkos.co.il>, Michal Simek <michal.simek@amd.com>,
- Qu Wenruo <wqu@suse.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Sean Anderson <sean.anderson@seco.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001D5:EE_|CH0PR12MB5092:EE_
+X-MS-Office365-Filtering-Correlation-Id: b27413a5-a50e-4899-d381-08dc06f8ea91
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: VJv4uJSViWu06qXff7RqJnfxUPxlya0mNhInBXDKKvFtf1dhbUcBIvliIj7FI4C9LbdXSNxMpZm5TvCA72nVHX52jdJQLNCyEIm3+uBNKm2ieziW/S/9xFxEvMtC03yDBbIh7tiVIa4LVlMu+WZ/SoLoGMIF3VuvcOewmDCgbqOLEBYyx1hhyzx4NCy5dc9gBsamm8HWxwRhSnZdUc0oCeAlY6+Kk6T2BTn6i62KKvdh5/A8gmxt1Zz/hZs9h5CajAKiRVhVsLrpusJAdXdGvTakvgDLHpl8JFawjVuDVIv9nOwfnQxm5GLML6i0mQshRhlgY8A2u1RTUMiM+xy9JkIoS8LwGl0W6ihCfKjYzY2q6GzSuP15zD87SvoFI3o/chM/YQgeIuQCdW0nJT7ZCJNc2hh7JMpzDX4qc4ul+iGJOVj/egRpD0FxYS5IcrChfhHgPt4k0eTeC5P0OzOHOG5B1Wlh6OEWkc5VDPfmpfEIv0FYKSx7DTx80HEphL9ddgNMC/FDq3armwHpmpGC8ILAL1+rgzWPvCTZXtlsEfEtCkevalNlokAkD8MZC9/48+B7XVy6cFjFLedIezWhuJC1unh80yMxfCEYfXsaqEh3iyCF41rphJ0TJqunDkpN7nS0pQnNsqLFQxBIdfUbE5wGRjobANK1dCz/kyJyuVT+TuzxMJUKr5gL8FAon6U/UpfTMbnbIve1itRl6Qb9FPEZmyw2l39V2rypWGRlExYX77TvkZ1Fl87sXTH9eKLub5AktFt+zd7QeZkz09N4FA==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(396003)(346002)(376002)(39860400002)(136003)(230922051799003)(82310400011)(186009)(64100799003)(1800799012)(451199024)(46966006)(36840700001)(40470700004)(40480700001)(2906002)(70206006)(70586007)(5660300002)(40460700003)(6916009)(4744005)(4326008)(8936002)(8676002)(316002)(54906003)(41300700001)(47076005)(103116003)(36756003)(478600001)(26005)(6666004)(86362001)(2616005)(1076003)(107886003)(356005)(336012)(426003)(36860700001)(82740400003)(81166007)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Dec 2023 16:28:53.5443 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b27413a5-a50e-4899-d381-08dc06f8ea91
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001D5.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR12MB5092
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,42 +123,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Added support for the ISSI OSPI flash part IS25LX512M.
+Initial testing was performed on the Tenzing-se1 board using
+SDR mode, covering basic erase, write, and readback operations.
 
-On Tue, 26 Dec 2023 at 04:47, Simon Glass <sjg@chromium.org> wrote:
+Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+---
+ drivers/mtd/spi/spi-nor-ids.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-> Hi Raymond,
->
-> On Fri, Dec 22, 2023 at 9:31=E2=80=AFPM Raymond Mao <raymond.mao@linaro.o=
-rg>
-> wrote:
-> >
-> > Instead of expecting the bloblist total size to be the same as the
-> > pre-allocated buffer size, practically we are more interested in
-> > whether the pre-allocated buffer size is bigger than the bloblist
-> > total size.
-> >
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> > Changes in v2
-> > - New patch file created for v2.
-> >
-> >  common/bloblist.c | 2 +-
-> >  test/bloblist.c   | 2 +-
-> >  2 files changed, 2 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/common/bloblist.c b/common/bloblist.c
-> > index ba17dd851a..db3fbb20cf 100644
-> > --- a/common/bloblist.c
-> > +++ b/common/bloblist.c
-> > @@ -384,7 +384,7 @@ int bloblist_check(ulong addr, uint size)
->
-> Can you please also update the function comment for bloblist_check() ?
->
-> Yes. I will update it.
+diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+index f86e7ff8e5..5ab1bc9ed3 100644
+--- a/drivers/mtd/spi/spi-nor-ids.c
++++ b/drivers/mtd/spi/spi-nor-ids.c
+@@ -234,6 +234,8 @@ const struct flash_info spi_nor_ids[] = {
+ 			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+ 	{ INFO("is25wx256",  0x9d5b19, 0, 128 * 1024, 256,
+ 			SECT_4K | USE_FSR | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES) },
++	{ INFO("is25lx512",  0x9d5a1a, 0, 64 * 1024, 1024,
++			SECT_4K | USE_FSR | SPI_NOR_4B_OPCODES | SPI_NOR_HAS_TB) },
+ #endif
+ #ifdef CONFIG_SPI_FLASH_MACRONIX	/* MACRONIX */
+ 	/* Macronix */
+-- 
+2.27.0
 
-[...]
-
-Regards,
-Raymond
