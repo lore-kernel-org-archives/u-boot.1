@@ -4,81 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ABE2C46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 08:30:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C53A6C46CD4
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 08:31:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDC72877CD;
-	Wed, 27 Dec 2023 09:30:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4EEB187935;
+	Wed, 27 Dec 2023 09:31:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tStrTNC3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KN56jIAE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7571877E5; Wed, 27 Dec 2023 09:30:37 +0100 (CET)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id 1011287944; Wed, 27 Dec 2023 09:31:08 +0100 (CET)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D43C087729
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 09:30:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AABEA87729
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 09:31:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-50e7b9cca2fso1748126e87.3
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 00:30:35 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-427e7aa0207so4491311cf.2
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 00:31:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703665835; x=1704270635; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fF7bmmqhLF6dflSFinOrlTXwdKQp5SGo240mVimWoJE=;
- b=tStrTNC3g5zDLYdY5vTzs8XIAq/RIyp+SNhI65TDAyfk+lxB20tkkGOzj06ZpqFYgB
- lwAtar1duIUppS2UuNCzby38hvyu9LNQHL6FkzewWAZek0zVyX+L8J0ZqV9iHV+mOjpr
- Iyx3KeNkcm64dJ+F5OQnM+PIynL3Unrx0UzyBDm4nEdEcWigT+EQaKAqyW80V/OvHLQY
- RDWo/HhSXwk1zwFH/uZUhrl0a1RnJnn3tADZ3SjbtXbZCi63W71XuKp2gi881BgeAqft
- dx8sdahkBlsX5ZGBrmhVU0sZ2uM+lCvBwIf7GnigksOZdVIzBycYi8GpSjpFy0DC9IpY
- KX5w==
+ d=chromium.org; s=google; t=1703665864; x=1704270664; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TcWYmVsXOxqKPA0vzcJxc54swf0BRsJILEJvwZ0l/5g=;
+ b=KN56jIAEy7Z5dQDRTYmQ9lhNrZWuxfAzqM55FO8gxxEgS38yzP6XjRdQKF/d58seii
+ K8R6jrQle8ZaqbqP7d4IeSlKus5tW66A6zOrtmzeIjQ8Qhk4eNOi6cqcJ7z0wqMj969e
+ bLbp9e/561+7hxwz/Bjh20VZMDCGMGbmLo3bM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703665835; x=1704270635;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fF7bmmqhLF6dflSFinOrlTXwdKQp5SGo240mVimWoJE=;
- b=FuErubihZgMQpzxIlp6ExjDVteRMDRRXuHW4XF75BTLZm7PeZOzXTrs45fODHgZmKC
- fBhy5KQxCepdk03pBSiqDIINBWMk5+a2WlwfTwNdVqBuBXo9lTD3QZvAKOrJOiCX8s2t
- wleTLb7s0TTdvlsbpHggxRb6w7h1MEUyEnM8iX0xN1xj0fWhzRDEefREKB+TZzNVcq8H
- +Sgc6zEkx+ei6hU0t6bnmBkNiEI8SjI/AgY/mwQU0/mKtXbMUtbBUaDL04L02qd7+SZg
- g0Grpl5H+PToNpsW8bFlCmAwcXa+u3gVCPG6GbX7qBk/80a2xd8JUMOazPTlkUauOUjL
- J3Hg==
-X-Gm-Message-State: AOJu0YxBXYFe1kXkNWOnbjQmzfP6Bvo+Sh2xGe5mYbyimSnkp16Vnuqi
- tUOlvYBuzpKpXux+y56ItuarpoBUKqzeWIAA5E5m2NL4ZxBAAQ==
-X-Google-Smtp-Source: AGHT+IEha/ym/2B4HyGxIlmEpWMVGAFKjIMyN1AkHsoTk3Ab7rkzqMVwWw0aP6n+1NYWq2kAhEtEVyO/viYsZH88WrE=
-X-Received: by 2002:a05:6512:3450:b0:50e:7124:8953 with SMTP id
- j16-20020a056512345000b0050e71248953mr1892990lfr.26.1703665835140; Wed, 27
- Dec 2023 00:30:35 -0800 (PST)
+ d=1e100.net; s=20230601; t=1703665864; x=1704270664;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TcWYmVsXOxqKPA0vzcJxc54swf0BRsJILEJvwZ0l/5g=;
+ b=Q/uXQ4h2vFJnUaC9d1fC4TxL4bxjTWp7hE3rJuSNPYJl4v417m33Tirtc67tiujxZG
+ q/g2D9e9fJJZZRAHmVnPEloKlbAm+9oCQFlTpdlO4Skcc2C1PFCcwFqcdOVfr5nyAk/b
+ B733hmzfYDf1YW5i6y+YdkmLtCeFivTt7o5WbNAU6kKMr3cIugdk6vULcqS81NcMKfiz
+ /ncNOxntuYvehZRND/gRtJW3ub7o8APHIi5ZQiKfljy2XWpztcL3bizc/tLjzvSgMYNd
+ ADlBwEDO0ZqPAwJHEUGqWlGNVRtrY0fuZP60mIgDvkDQ9Pn6cQPeUR+dFiJXoJChS1sv
+ mB8Q==
+X-Gm-Message-State: AOJu0YxB6ALvG7FgdGG/sPEMdXNEHTYgmNS/OnkbkKFMZX7e/A8nmsBP
+ IInZmluOborGCo/Q0CK5VfhQpysWS6umZcL04IL+nsu10ZK2
+X-Google-Smtp-Source: AGHT+IGqXXeeFnGBNlgnvLqbhpi91fzlSg5bh0vLz8EZAmijkcKMR0pMXExfVDyD+V49r/XDOYG2HWzBzBbmu1b9P1Y=
+X-Received: by 2002:a05:6214:262f:b0:67e:aa84:b093 with SMTP id
+ gv15-20020a056214262f00b0067eaa84b093mr12968971qvb.22.1703665864525; Wed, 27
+ Dec 2023 00:31:04 -0800 (PST)
 MIME-Version: 1.0
-References: <20231222213110.660402-1-raymond.mao@linaro.org>
- <20231222213110.660402-5-raymond.mao@linaro.org>
-In-Reply-To: <20231222213110.660402-5-raymond.mao@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 27 Dec 2023 10:29:59 +0200
-Message-ID: <CAC_iWjKcR6yC7yG7SLQz_QCbxjCC2Ai4qB8hyLq4QW8t1BN2EA@mail.gmail.com>
-Subject: Re: [PATCH v3 4/9] arm: armv7: save boot arguments
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Kevin Chen <kevin_chen@aspeedtech.com>, 
- Nikhil M Jain <n-jain1@ti.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Shiji Yang <yangshiji66@outlook.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Baruch Siach <baruch@tkos.co.il>, Michal Simek <michal.simek@amd.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Qu Wenruo <wqu@suse.com>, 
- Sean Anderson <sean.anderson@seco.com>
+References: <GV2PR10MB669453D14DC8722F7ACA97FB8BBDA@GV2PR10MB6694.EURPRD10.PROD.OUTLOOK.COM>
+In-Reply-To: <GV2PR10MB669453D14DC8722F7ACA97FB8BBDA@GV2PR10MB6694.EURPRD10.PROD.OUTLOOK.COM>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 27 Dec 2023 08:30:54 +0000
+Message-ID: <CAFLszTjm4S64z6sSH-auGqDctTXzkh=aGp4vjR8orE0+FTZcZA@mail.gmail.com>
+Subject: Re: ACPI on Raspberry Pi
+To: Ba Gia Bao PHAN <bagiabao.phan@st.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,56 +83,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
++U-Boot Mailing List as the attempt to send did not seem to arrive?
 
-On Fri, 22 Dec 2023 at 23:31, Raymond Mao <raymond.mao@linaro.org> wrote:
+On Mon, Nov 27, 2023 at 4:51=E2=80=AFPM Ba Gia Bao PHAN <bagiabao.phan@st.c=
+om> wrote:
 >
-> Save boot arguments r[0-3] into an array for handover of bloblist from
-> previous boot stage.
+> Dear Sir,
 >
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
-> Changes in v2
-> - New patch file created for v2.
-> Changes in v3
-> - Swap value of r0 with r2.
+> I am trainee at STMicroelectronics France, and I am doing project "Settin=
+g up a boot chain ACPI" for STM32MPU. The objective of my project is to rep=
+lace the Device Tree by ACPI in STM32MPU.
 >
->  arch/arm/cpu/armv7/start.S | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
+> As my research on the Internet, specifically this website https://lore.ke=
+rnel.org/all/20211201160315.2203099-1-sjg@chromium.org/T/ , it seems that y=
+ou have succeeded in configuring ACPI on Raspberry Pi. I don't know exactly=
+ whether it worked or not and how it worked. Can you explain me?
 >
-> diff --git a/arch/arm/cpu/armv7/start.S b/arch/arm/cpu/armv7/start.S
-> index 69e281b086..2ca63ca32c 100644
-> --- a/arch/arm/cpu/armv7/start.S
-> +++ b/arch/arm/cpu/armv7/start.S
-> @@ -152,9 +152,22 @@ ENDPROC(c_runtime_cpu_setup)
->   *
->   *************************************************************************/
->  WEAK(save_boot_params)
-> +#if (IS_ENABLED(CONFIG_OF_BOARD) && IS_ENABLED(CONFIG_BLOBLIST))
-> +       ldr r12, =saved_args
-> +       /* Intentionally swapping r0 with r2 */
-
-That isn't very helpful. It's obvious what the code does here. Add a
-comment on *why* (to keep the c function simpler etc)
-
-Thanks
-/Ilias
-> +       stm r12, {r2, r1, r0, r3}
-> +#endif
->         b       save_boot_params_ret            @ back to my caller
->  ENDPROC(save_boot_params)
+> Thank you very much if you could take a moment to reply to my email.
 >
-> +.section .data
-> +.global saved_args
-> +saved_args:
-> +       .rept 4
-> +       .word 0
-> +       .endr
-> +END(saved_args)
-> +
->  #ifdef CONFIG_ARMV7_LPAE
->  WEAK(switch_to_hypervisor)
->         b       switch_to_hypervisor_ret
-> --
-> 2.25.1
+> Sincerely,
+> Phan Ba Gia Bao
 >
+> ST Restricted
