@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 614EDC46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 08:33:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 888BAC46CD4
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 08:39:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23D2C87935;
-	Wed, 27 Dec 2023 09:33:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 14BBB878C1;
+	Wed, 27 Dec 2023 09:39:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tvfzVeeb";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="g+v60odq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 816B587964; Wed, 27 Dec 2023 09:33:08 +0100 (CET)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id 7B7F18792D; Wed, 27 Dec 2023 09:39:35 +0100 (CET)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D23987729
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 09:33:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BAB4877CD
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 09:39:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2ccae5719cfso31487131fa.1
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 00:33:06 -0800 (PST)
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-50e81761e43so1286009e87.2
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 00:39:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703665986; x=1704270786; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703666371; x=1704271171; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2TrCWjvIigsGU5pEvpdMyQPSflEG8vohdtNHmetkimA=;
- b=tvfzVeebJVVz+HpzwQ7Abmm0v4PA+Mf6/MkCUOPhc6IXt3kw8F9K9thE/nGXTRnxTv
- CVCSXbG1tz7iVTE9TJmLKXQcRqANFe4KAsec+a7KSKY8ZRc6KB4w0zkY7fTTSr7tOrSG
- Ki1gamPn5iQK68noI5usWDu/9S+wMBfQTMKmNKtPa7eC7CG+utF69mVjhGuRZ2VlM+1i
- +CRbJqa/P3k3UWaOGMIZ2VtUiCqg7oX8s4TK+rGpdjA5wU/Eip3sH8pGn5lZdxtGM70j
- mjJ7M8w7tbmAbNs4JEzstMwSL7rHDcIvK2D4DXVRd3khDKb8L+91csKc8cxttxMtaKP8
- ZFQg==
+ bh=T+71rxcQ4tKfwCLlKcqp3uUBwlFV73S+sxYa2p4O/HU=;
+ b=g+v60odqkqeeNq+hKXWOu5joxdf2xgU7DU7cE8+WRDmob0KRUdh6flKQUH4cvs6rM2
+ ou/xkBSU3iXglL1UOww9dWMjkNJp+BXyBaXQ8MhZgN1jBfgf63OwvLVj2vONRK0xeTQG
+ 17rFcA7ayIDNA6TUy+6l3dozZpTLfocgM/F7CR64+CLbqM0Z8j5uQLBXtqIoOBvKBJBI
+ kima5p986BoHINlOdTk3TCNFSIWQ4isbvXLJ+ydV5CEwG57RWzl53BxhtkHiC0rfVWYa
+ khFFu1xANu0JJdng1UFbzRjciQi8BcdrDvHu3iqYMmGJm9ekzFBI+eaLCdsqDNQnUUwN
+ nwEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703665986; x=1704270786;
+ d=1e100.net; s=20230601; t=1703666371; x=1704271171;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=2TrCWjvIigsGU5pEvpdMyQPSflEG8vohdtNHmetkimA=;
- b=Dam/pE//skg4sNnuSmhfkGenFWv1/BhW5Of9wefqIjRyNKrsf49Rm3GOGdWrZx/veH
- P6kOBiH8Hl8UefqCzlhpggUlMSgg3xofX+9nKS1spedP952vNZ8i7bGT9vfMZwMYBip4
- emgUieP2Gg85d0ctfHIFsXIndLNCn+15rvXQ6EHzwySd9LfU6Oe3jVEQIIGYmQlMRQof
- Qx4w4e8gRYZy7VgSlD8AwxCPmw6EIca94PXSWZ/+rxATOIuZGwrmy5BDuoPuMYBQDEVH
- KbeWym3fi7h4yzfKnHzwl+/kKibG3udDdiZL/F7v8GtMOji69jdFBojNx/29NF7E60DF
- Gk3w==
-X-Gm-Message-State: AOJu0YwNKC67/VzOk+igIXGE+pdS1Orv58BKZ8hap9Iq7yZDSDD2fNfK
- d7OfGHFvtZrd1tlZRIY67PIM1hpp92dDRMuKrTc+yKCHl2pHrQ==
-X-Google-Smtp-Source: AGHT+IEBPInNxRlaIBzBabMIIVtXeXWGB+Oplq0z6isPGyc6owJ9xoUEp4XCDsrsGKaKyY7P4wwH0/oN44kTiVbd4UE=
-X-Received: by 2002:a19:ac0d:0:b0:50e:6f4f:63d7 with SMTP id
- g13-20020a19ac0d000000b0050e6f4f63d7mr1053305lfc.73.1703665985865; Wed, 27
- Dec 2023 00:33:05 -0800 (PST)
+ bh=T+71rxcQ4tKfwCLlKcqp3uUBwlFV73S+sxYa2p4O/HU=;
+ b=IOKl/HDHFffZiVwHIKLkAnhrrr9oSRQnt/GopfnVJuLHMTYETZZ3eQxnn8ncEI/+iz
+ jRi26JVyKU3KMWY8/CMxRhECMH4R+fmakTm/SBqLaQJJwG9BCCgYdXnC7EhQEowBCM3o
+ 9fAIsGuac33Rmk43btpME8z6aMGHvSD/lFGf3RdeYsifFHkvPYVy+56iGnXMMkwXnc1C
+ L/6SzRTjWj532eAqnopxhlnmQDp/YSx/n32JRnA27Vqcxsa917eNqhbc7UKE1s3KnTHS
+ PrTsVHbpYQIN89ici3dHbheqX34WZSTGpXjzJefWq2Qn9laJMGDZ0aHjkIi9z+BhrKpm
+ vF+w==
+X-Gm-Message-State: AOJu0YxFxMtHJDHg5tCg0QUGBFaFfdXQbrNVlml35hmbVvf4uuD3JAR8
+ JkHHtId1xd+1tiHnyJoLRNUij0baSqls3sl/D26xR7ZXnh5URA==
+X-Google-Smtp-Source: AGHT+IF615JeVVQerag8IApiJkfg/Dol0flL4S4XWJANjO9y7DJgDj8neeZVt/XdD/tg2HOkNo8rnjztkn6RCJQCKCw=
+X-Received: by 2002:a05:6512:3093:b0:50e:7fdc:6eda with SMTP id
+ z19-20020a056512309300b0050e7fdc6edamr1211106lfd.93.1703666371524; Wed, 27
+ Dec 2023 00:39:31 -0800 (PST)
 MIME-Version: 1.0
-References: <20231222213110.660402-1-raymond.mao@linaro.org>
- <20231222213110.660402-4-raymond.mao@linaro.org>
-In-Reply-To: <20231222213110.660402-4-raymond.mao@linaro.org>
+References: <20231222061208.3009970-1-sumit.garg@linaro.org>
+ <20231222061208.3009970-4-sumit.garg@linaro.org>
+In-Reply-To: <20231222061208.3009970-4-sumit.garg@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 27 Dec 2023 10:32:30 +0200
-Message-ID: <CAC_iWjLTmmiDq7oP-mS0kvpsCz-k=S5C=8xNeS6VvKK5AeA4EA@mail.gmail.com>
-Subject: Re: [PATCH v3 3/9] bloblist: refactor of bloblist_reloc()
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Kevin Chen <kevin_chen@aspeedtech.com>, 
- Nikhil M Jain <n-jain1@ti.com>, Bin Meng <bmeng.cn@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>, 
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Shiji Yang <yangshiji66@outlook.com>, 
- Baruch Siach <baruch@tkos.co.il>, Michal Simek <michal.simek@amd.com>, 
- Sean Anderson <sean.anderson@seco.com>, Stefan Roese <sr@denx.de>
+Date: Wed, 27 Dec 2023 10:38:55 +0200
+Message-ID: <CAC_iWjL7A857Hdd8gdAC_XqV=kap_hDwEzPf6R77_QUpcKyzdw@mail.gmail.com>
+Subject: Re: [PATCH v2 3/8] scripts/Makefile.lib: Statically define
+ *-u-boot.dtsi files location
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
+ u-boot-custodians@lists.denx.de, trini@konsulko.com, sjg@chromium.org, 
+ robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
+ maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de, 
+ michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk, 
+ peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,79 +93,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond
+Hi Sumit,
 
-On Fri, 22 Dec 2023 at 23:31, Raymond Mao <raymond.mao@linaro.org> wrote:
+Thanks this looks great
+
+
+On Fri, 22 Dec 2023 at 08:12, Sumit Garg <sumit.garg@linaro.org> wrote:
 >
-> The current bloblist pointer and size can be retrieved from global
-> data, so we don't need to pass them from the function arguments.
-> This change also help to remove all external access of gd->bloblist
-> outside of bloblist module.
+> Allow u-boot to build DTB from a different directory tree such that
+> *-u-boot.dtsi files can be included from a common location. Currently
+> that location is arch/$(ARCH)/dts/, so statically define that common
+> location.
 >
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> This is needed for platform owners to start building DTB files from
+> devicetree-rebasing directory but still being able to include
+> *-u-boot.dtsi files.
+>
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 > ---
-> Changes in v2
-> - New patch file created for v2.
-> Changes in v3
-> - Check the space size before copying the bloblist.
-> - Add return code of bloblist_reloc().
+>  scripts/Makefile.lib | 25 ++++++++++++++-----------
+>  1 file changed, 14 insertions(+), 11 deletions(-)
 >
->  common/bloblist.c  | 10 ++++++++--
->  common/board_f.c   |  8 ++------
->  include/bloblist.h |  8 ++++----
->  test/bloblist.c    |  6 ++----
->  4 files changed, 16 insertions(+), 16 deletions(-)
+> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+> index 27b9437027c..09330421856 100644
+> --- a/scripts/Makefile.lib
+> +++ b/scripts/Makefile.lib
+> @@ -159,18 +159,20 @@ cpp_flags      = -Wp,-MD,$(depfile) $(NOSTDINC_FLAGS) $(UBOOTINCLUDE)     \
+>  ld_flags       = $(KBUILD_LDFLAGS) $(ldflags-y) $(LDFLAGS_$(@F))
 >
-> diff --git a/common/bloblist.c b/common/bloblist.c
-> index db3fbb20cf..5ad1db137a 100644
-> --- a/common/bloblist.c
-> +++ b/common/bloblist.c
-> @@ -472,13 +472,19 @@ void bloblist_show_list(void)
->         }
->  }
->
-> -void bloblist_reloc(void *to, uint to_size, void *from, uint from_size)
-> +int bloblist_reloc(void *to, uint to_size)
->  {
->         struct bloblist_hdr *hdr;
->
-> -       memcpy(to, from, from_size);
-> +       if (to_size < gd->bloblist->total_size)
-> +               return -ENOSPC;
+>  # Try these files in order to find the U-Boot-specific .dtsi include file
+> -u_boot_dtsi_options = $(strip $(wildcard $(dir $<)$(basename $(notdir $<))-u-boot.dtsi) \
+> -       $(wildcard $(dir $<)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi) \
+> -       $(wildcard $(dir $<)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi) \
+> -       $(wildcard $(dir $<)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi) \
+> -       $(wildcard $(dir $<)u-boot.dtsi))
+> +u_boot_dtsi_loc = $(srctree)/arch/$(ARCH)/dts/
 > +
-> +       memcpy(to, gd->bloblist, gd->bloblist->total_size);
->         hdr = to;
->         hdr->total_size = to_size;
-> +       gd->bloblist = to;
-> +
-> +       return 0;
->  }
+> +u_boot_dtsi_options = $(strip $(wildcard $(u_boot_dtsi_loc)$(basename $(notdir $<))-u-boot.dtsi) \
+> +       $(wildcard $(u_boot_dtsi_loc)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi) \
+> +       $(wildcard $(u_boot_dtsi_loc)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi) \
+> +       $(wildcard $(u_boot_dtsi_loc)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi) \
+> +       $(wildcard $(u_boot_dtsi_loc)u-boot.dtsi))
 >
->  int bloblist_init(void)
-> diff --git a/common/board_f.c b/common/board_f.c
-> index d4d7d01f8f..00b0430889 100644
-> --- a/common/board_f.c
-> +++ b/common/board_f.c
-> @@ -676,13 +676,9 @@ static int reloc_bloblist(void)
->                 return 0;
->         }
->         if (gd->new_bloblist) {
-> -               int size = CONFIG_BLOBLIST_SIZE;
-> -
->                 debug("Copying bloblist from %p to %p, size %x\n",
-> -                     gd->bloblist, gd->new_bloblist, size);
-> -               bloblist_reloc(gd->new_bloblist, CONFIG_BLOBLIST_SIZE_RELOC,
-> -                              gd->bloblist, size);
-> -               gd->bloblist = gd->new_bloblist;
-> +                     gd->bloblist, gd->new_bloblist, gd->bloblist->total_size);
-> +               bloblist_reloc(gd->new_bloblist, CONFIG_BLOBLIST_SIZE_RELOC);
-
-Why aren't we checking bloblist_reloc() for an error?
-
->         }
->  #endif
+>  u_boot_dtsi_options_raw = $(warning Automatic .dtsi inclusion: options: \
+> -       $(dir $<)$(basename $(notdir $<))-u-boot.dtsi \
+> -       $(dir $<)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi \
+> -       $(dir $<)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi \
+> -       $(dir $<)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi \
+> -       $(dir $<)u-boot.dtsi ... \
+> +       $(u_boot_dtsi_loc)$(basename $(notdir $<))-u-boot.dtsi \
+> +       $(u_boot_dtsi_loc)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi \
+> +       $(u_boot_dtsi_loc)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi \
+> +       $(u_boot_dtsi_loc)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi \
+> +       $(u_boot_dtsi_loc)u-boot.dtsi ... \
+>         found: $(if $(u_boot_dtsi_options),"$(u_boot_dtsi_options)",nothing!))
 >
-[...]
+>  # Uncomment for debugging
+> @@ -190,6 +192,7 @@ dtsi_include_list += $(CONFIG_DEVICE_TREE_INCLUDES)
+>  dtc_cpp_flags  = -Wp,-MD,$(depfile).pre.tmp -nostdinc                    \
+>                  $(UBOOTINCLUDE)                                         \
+>                  -I$(dir $<)                                             \
+> +                -I$(u_boot_dtsi_loc)                                     \
+>                  -I$(srctree)/arch/$(ARCH)/dts/include                   \
+>                  -I$(srctree)/include                                    \
+>                  -D__ASSEMBLY__                                          \
+> @@ -328,7 +331,7 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
+>           echo '$(pound)include "$(f)"' >> $(pre-tmp);) \
+>         $(HOSTCC) -E $(dtc_cpp_flags) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
+>         $(DTC) -O dtb -o $@ -b 0 \
+> -               -i $(dir $<) $(DTC_FLAGS) \
+> +               -i $(dir $<) -i $(u_boot_dtsi_loc) $(DTC_FLAGS) \
+>                 -d $(depfile).dtc.tmp $(dtc-tmp) || \
+>                 (echo "Check $(shell pwd)/$(pre-tmp) for errors" && false) \
+>                 ; \
+> --
+> 2.34.1
+>
 
-Thanks
-/Ilias
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
