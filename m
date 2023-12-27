@@ -4,67 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71310C47072
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 13:06:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62D3BC46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 13:08:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C372987980;
-	Wed, 27 Dec 2023 14:06:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B5691878ED;
+	Wed, 27 Dec 2023 14:08:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GiaWVOVy";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rgdwatZB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7DA08794F; Wed, 27 Dec 2023 14:06:26 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id EC54C87919; Wed, 27 Dec 2023 14:08:47 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E9B787866
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 14:06:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D178A87866
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 14:08:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BRD6I4V104340;
- Wed, 27 Dec 2023 07:06:18 -0600
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BRD8h3S017541;
+ Wed, 27 Dec 2023 07:08:43 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1703682378;
- bh=usrPLwC9cijDZi/QtTpYIykeroiVA5MF6ArMI8THt5U=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=GiaWVOVy27/4asyx1dSaHJOxIdS0QVd49hXa67kflf1XHLlPUAYj0oreCj951Bms2
- GIM93GoqwuaPA2baUYaXMi4d+vmNl3gQqnksqkdPC1/wQPEOT/I5jDiVHSsBjAL1U/
- 0y9ewZglp1HllqR7jB0+FnnaeY0fAibKCqa6M1YQ=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BRD6HZN101925
+ s=ti-com-17Q1; t=1703682523;
+ bh=B/kuROhiU+F4P33ZNkKOkQ3ra6LVPe2gxJSI8yIGrsk=;
+ h=From:To:CC:Subject:Date;
+ b=rgdwatZB+RHslvOor9aQvwC2MNlwmX01yuqNMsNlBH8Tp/NfUBUc3Y9YsGrUibsKO
+ uvDbs/KWOCvT3Kn6RNq3MfU/gU6OXaROe3ZyrJPzcfNZK1hHDXBbcRdMoSEKtt90bg
+ ld3mn1U0c/O39pg0aahEX6XnrRX1Nsf6YefW6rEY=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BRD8hKU029450
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 27 Dec 2023 07:06:17 -0600
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 27 Dec 2023 07:08:43 -0600
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
- Dec 2023 07:06:17 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2023 07:08:43 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 27 Dec 2023 07:06:17 -0600
+ Frontend Transport; Wed, 27 Dec 2023 07:08:43 -0600
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BRD6H7H040233;
- Wed, 27 Dec 2023 07:06:17 -0600
-Date: Wed, 27 Dec 2023 07:06:17 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BRD8htw042856;
+ Wed, 27 Dec 2023 07:08:43 -0600
 From: Nishanth Menon <nm@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Siddharth Vadapalli <s-vadapalli@ti.com>, <m-chawdhry@ti.com>,
- <bmeng.cn@gmail.com>, <sjg@chromium.org>, <afd@ti.com>,
- <mkorpershoek@baylibre.com>, <n-francis@ti.com>,
- <u-boot@lists.denx.de>, <vigneshr@ti.com>, <srk@ti.com>
-Subject: Re: [PATCH] include: env: ti: ti_common: Run
- main_cpsw0_qsgmii_phyinit conditionally
-Message-ID: <20231227130617.c4k32amcsyw447is@abide>
-References: <20231211104209.1078892-1-s-vadapalli@ti.com>
- <20231221210657.GO2513409@bill-the-cat>
+To: Tom Rini <trini@konsulko.com>, <n-francis@ti.com>
+CC: <sjg@chromium.org>, Jonathan Humphreys <j-humphreys@ti.com>,
+ <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>
+Subject: [PATCH] include: env: ti: default_findfdt: Follow the bootstd/distro
+ conventions
+Date: Wed, 27 Dec 2023 07:08:37 -0600
+Message-ID: <20231227130837.2624211-1-nm@ti.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20231221210657.GO2513409@bill-the-cat>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,28 +78,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 16:06-20231221, Tom Rini wrote:
-> On Mon, Dec 11, 2023 at 04:12:09PM +0530, Siddharth Vadapalli wrote:
-> 
-> > From: Manorit Chawdhry <m-chawdhry@ti.com>
-> > 
-> > The main_cpsw0_qsgmii_phyinit command is defined only for certain TI
-> > SoCs which have the do_main_cpsw0_qsgmii_phyinit variable set.
-> > 
-> > Add a check to ensure that the main_cpsw0_qsgmii_phyinit command is run
-> > only for such SoCs.
-> > 
-> > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> > Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> > Reviewed-by: Tom Rini <trini@konsulko.com>
-> > Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> 
-> Applied to u-boot/next, thanks!
+Distroboot and bootstd both mandate a findfdt variable pointing to the
+correct device tree blob. Current mechanism calls a find_fdt function
+to set this variable. We do not need a find_fdt command to set the
+environment variable to a single dtb. Simplify the default_findfdt to
+remove variable expansion while at it.
 
-Shouldn't main_cpsw0_qsgmii_phyinit be part of the driver?? why are we
-scripting up driver initialization?
+For legacy scripts depending on a TI convention of name_fdt, provide a
+find_fdt wrapper that behaves like before.
 
+NOTE: As part of this change, we also drop the cooked up
+default_device_tree_arch default_device_tree_subarch variables.
+
+Reported-by: Jonathan Humphreys <j-humphreys@ti.com>
+Signed-off-by: Nishanth Menon <nm@ti.com>
+---
+ include/env/ti/default_findfdt.env | 13 ++++---------
+ 1 file changed, 4 insertions(+), 9 deletions(-)
+
+diff --git a/include/env/ti/default_findfdt.env b/include/env/ti/default_findfdt.env
+index a2b51dd923bb..1a1ab8406c9e 100644
+--- a/include/env/ti/default_findfdt.env
++++ b/include/env/ti/default_findfdt.env
+@@ -1,12 +1,7 @@
+-default_device_tree=CONFIG_DEFAULT_DEVICE_TREE
+-default_device_tree_arch=ti
+ #ifdef CONFIG_ARM64
+-findfdt=
+-	setenv name_fdt ${default_device_tree_arch}/${default_device_tree}.dtb;
+-	setenv fdtfile ${name_fdt}
++fdtfile=ti/CONFIG_DEFAULT_DEVICE_TREE.dtb;
+ #else
+-default_device_tree_subarch=omap
+-findfdt=
+-	setenv name_fdt ${default_device_tree_arch}/${default_device_tree_subarch}/${default_device_tree}.dtb;
+-	setenv fdtfile ${name_fdt}
++fdtfile=ti/omap/CONFIG_DEFAULT_DEVICE_TREE.dtb;
+ #endif
++
++findfdt=setenv name_fdt ${fdt_file}
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+2.43.0
+
