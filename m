@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 012C2C46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 11:08:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D77A6C46CD4
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 11:12:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 086C587988;
-	Wed, 27 Dec 2023 12:08:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 41F4187837;
+	Wed, 27 Dec 2023 12:12:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HutP4UWT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JHl3WClO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27DFB8798B; Wed, 27 Dec 2023 12:08:08 +0100 (CET)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id DEA7A8795F; Wed, 27 Dec 2023 12:12:48 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A8A28795F
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 12:08:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E9EC8875C5
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 12:12:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-50e5a9bcec9so6104886e87.3
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 03:08:06 -0800 (PST)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-50e741123acso2596463e87.0
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 03:12:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703675285; x=1704280085; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703675566; x=1704280366; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oNyphCdXuK87wHrqz1LQy4kq1H40M5WCt/oHgjVyo9I=;
- b=HutP4UWT1gjlYrMNsf5JX/7hnPjEXeZL6fkbeORC0PCMa+I6RYUWNE/0fzRKAZo4ck
- WQ4lDcUwkreErqn00WYaJEIF1PQC1SgyHBvDZ7ZLmkYHUcj2FJxMzSe/9Kkx+iQMAepj
- vzXDJWATxAvmEfcnjnfa2R44gzCaM2M6uO9BUjfugd7Tdb0yqXs9SIam0BsToTQX2LgS
- +fbi+JM1B6rbuEISctXZkHoPIgX53acWAJsSxtEEHIKElIdLAMAevTJ/XjUEyYygWGsd
- 06qI7xk+v0oCoJluq6+UTNSUxHmQ8EPfeI4HumeZT7K+qMSuRUHhHBxPeXY5SVRDlC/L
- 1YcQ==
+ bh=avpX313uus4YmAQ8ucXPDwPQvHYIGxUcYLLy/VoExZA=;
+ b=JHl3WClOw9aisPgDFDpBNlSTzqh/d6+b4Bz8A+GNRVLljW9uGahMHxKi7eMoRYrQw4
+ 6Sn/+aYHZ6+zWp0K2jlU6DFrvYVYn/RNrcWl5KVnXeHy190JANPm2xYgRJ47fp/58JPU
+ BETworiW6Aj+ty00xWE60oIO/RS42RsI5DiRDYHflmcYSZ+2ku16ZM+P+18vPcYwghCl
+ fGWr9YKHyFVljFltjfsK6arBjvbifpGD7vz7ClrIPBr/tfZx8LKvDV6Gb7618e5SsMCB
+ fbUQG0dSax/gq1yvR91Kk5D+Fuxhv1vl5Q/U06453kN6XA3gKbWnTDed/vLB/r79y5fw
+ +3eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703675285; x=1704280085;
+ d=1e100.net; s=20230601; t=1703675566; x=1704280366;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=oNyphCdXuK87wHrqz1LQy4kq1H40M5WCt/oHgjVyo9I=;
- b=DYnooDaXN9w0WaVqWPUzkyk4eG8lCmgSJXexxT3Pe3Tz1JuD6N16Fwgl2nFTRs4e65
- wwm7DvfWNYCj5OiD/r8w5aOXosm3vJG0rOLk5SFI/tJAB2T72zP2XJVwh+5r1dXNRwNz
- 5l50DECKLfes48iXINnJcDuQ3hr3GCZ7xRO4VkIzwD0uGXH2j5WNvv/nBBKm3BD9aXX8
- tsR+dit9dE48T/1xN44qK+T51dWLQIsYZX26+UgRfhA8HvCHUw81dnP5OYiPLZlxkvzb
- uoqxkcVLft4ExGyHdwS48QUGMO2KGC4WuBdDk/ChGzytIU9lLUfGxLZvYywWvsLO0R9S
- sMMg==
-X-Gm-Message-State: AOJu0YyalutaxVlzq6MJaNM/thNxJ4M/0eA+cgGYeSC07rUcuPsBKQ+a
- 6ilRLJEQcxSFSIOYjxzOY/Yl2VofFJFLlN7d9m3WZ5OmFUtriQ==
-X-Google-Smtp-Source: AGHT+IFW9JtbwGVaQcNVoWCxrL3qR7Iqb/9nT9Jve1Ya1QVSuLMELYclaGt36/QxpJKj2gbzN7x8YfGaLBmFKmht4gc=
-X-Received: by 2002:a19:f50d:0:b0:50e:3b11:3b08 with SMTP id
- j13-20020a19f50d000000b0050e3b113b08mr3106735lfb.70.1703675285331; Wed, 27
- Dec 2023 03:08:05 -0800 (PST)
+ bh=avpX313uus4YmAQ8ucXPDwPQvHYIGxUcYLLy/VoExZA=;
+ b=c/HLTuZGPjxSle42yUPUQtf5klWhpD/fNXlBWMXRb62urepUi1b1eB86zGN5jR1RKt
+ eqhQUqBuN0NNxWR96oTNgBc85yPbo2HwsmtJZAmJYKabpQ+QwgkkoSAhpZJPVWct0xH7
+ /cIbGDtc6NpXHPLJ03hiv5rMD44PbDDGx8ZSFJSaT27dE0W1tyRALv0e/Fl4xtZDgR5m
+ qBcosMH8yNRpCfY+ehJBBWalUTLsM76aSkQRxiVfJMy8o8MSIS4l4x7pRvWu6E90GxcA
+ bM7AhmawdqMfz5VImeKqVUJNuRSEQABKsdK6s0DKpLSIvrTNTtNIshesRU6K2Z4hPbRo
+ JqVA==
+X-Gm-Message-State: AOJu0YwHc0qokT1+5Q7yNd909dR4C8XD+yk5V241ceh1uG97qiIG1Eld
+ 8fQDp9VH+GGW1hpox43ub2qBI6PT32HRYnsbnN+VrkukVVkoIycX1HMNXa3B
+X-Google-Smtp-Source: AGHT+IEDnk62qRFPmaVIohisDO9cl7GqLbbcfwd+NNRasO4Z0+AFScoipEB6VE3oX9oDFaZZufhRlpYuCThb0S26o/g=
+X-Received: by 2002:a05:6512:3ab:b0:50e:70b4:79d2 with SMTP id
+ v11-20020a05651203ab00b0050e70b479d2mr2151206lfp.41.1703675566242; Wed, 27
+ Dec 2023 03:12:46 -0800 (PST)
 MIME-Version: 1.0
 References: <20231227074025.2178825-1-sjg@chromium.org>
- <20231227074025.2178825-6-sjg@chromium.org>
-In-Reply-To: <20231227074025.2178825-6-sjg@chromium.org>
+ <20231227074025.2178825-8-sjg@chromium.org>
+In-Reply-To: <20231227074025.2178825-8-sjg@chromium.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 27 Dec 2023 13:07:29 +0200
-Message-ID: <CAC_iWjLa8mz0x-1gw7yvn7WMdz_adt6+AtFmDHjZrn6JF3D3Lw@mail.gmail.com>
-Subject: Re: [PATCH v4 5/7] smbios: Correct gd_smbios_start()
+Date: Wed, 27 Dec 2023 13:12:10 +0200
+Message-ID: <CAC_iWjK1pYu7YnQ09V3V=dngtOFpwFd3jFFA_+hkO=Zd7-oR9Q@mail.gmail.com>
+Subject: Re: [PATCH v4 7/7] smbios: Require the caller to align the SMBIOS
+ table
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Bin Meng <bmeng.cn@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Nikhil M Jain <n-jain1@ti.com>, Troy Kisky <troykiskyboundary@gmail.com>
+ Peter Robinson <pbrobinson@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,52 +88,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
+
+I commented on v3 as well, but in case you miss that
+
 On Wed, 27 Dec 2023 at 09:40, Simon Glass <sjg@chromium.org> wrote:
 >
-> This should access arch-specific properties. Fix it and update the
-> existing usage.
+> All callers handle this alignment, so drop the unnecessary code. This
+> simplifies things a little.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > ---
 >
-> (no changes since v2)
+> (no changes since v1)
 >
-> Changes in v2:
-> - Add a new patch to correct gd_smbios_start()
+>  include/smbios.h | 5 +----
+>  lib/smbios.c     | 2 --
+>  2 files changed, 1 insertion(+), 6 deletions(-)
 >
->  include/asm-generic/global_data.h | 2 +-
->  lib/efi_loader/efi_smbios.c       | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
+> diff --git a/include/smbios.h b/include/smbios.h
+> index 77be58887a2..879b8a814b8 100644
+> --- a/include/smbios.h
+> +++ b/include/smbios.h
+> @@ -258,12 +258,9 @@ static inline void fill_smbios_header(void *table, int type,
+>   *
+>   * This writes SMBIOS table at a given address.
+>   *
+> - * @addr:      start address to write SMBIOS table. If this is not
+> - *             16-byte-aligned then it will be aligned before the table is
+> - *             written.
+> + * @addr:      start address to write SMBIOS table (must be 16-byte-aligned)
+>   * Return:     end address of SMBIOS table (and start address for next entry)
+>   *             or NULL in case of an error
+> - *
+>   */
+>  ulong write_smbios_table(ulong addr);
 >
-> diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-> index e8c6412e3f8..c1f7818817f 100644
-> --- a/include/asm-generic/global_data.h
-> +++ b/include/asm-generic/global_data.h
-> @@ -553,7 +553,7 @@ static_assert(sizeof(struct global_data) == GD_SIZE);
->  #endif
+> diff --git a/lib/smbios.c b/lib/smbios.c
+> index 7f79d969c92..cfd451e4088 100644
+> --- a/lib/smbios.c
+> +++ b/lib/smbios.c
+> @@ -563,8 +563,6 @@ ulong write_smbios_table(ulong addr)
+>                 ctx.dev = NULL;
+>         }
 >
->  #ifdef CONFIG_SMBIOS
-> -#define gd_smbios_start()      gd->smbios_start
-> +#define gd_smbios_start()      gd->arch.smbios_start
->  #define gd_set_smbios_start(addr)      gd->arch.smbios_start = addr
->  #else
->  #define gd_smbios_start()      0UL
-> diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
-> index bbb8421ce14..49adc87e45a 100644
-> --- a/lib/efi_loader/efi_smbios.c
-> +++ b/lib/efi_loader/efi_smbios.c
-> @@ -28,7 +28,7 @@ efi_status_t efi_smbios_register(void)
->         ulong addr;
->         efi_status_t ret;
+> -       /* 16 byte align the table address */
+> -       addr = ALIGN(addr, 16);
+
+I think this is wrong.  It will break SMBIOS on a user error. I am
+fine replacing that with a check instead and error out if the address
+is not 16b aligned
+
+Thanks
+/Ilias
+>         start_addr = addr;
 >
-> -       addr = gd->arch.smbios_start;
-> +       addr = gd_smbios_start();
->         if (!addr) {
->                 log_err("No SMBIOS tables to install\n");
->                 return EFI_NOT_FOUND;
+>         /*
 > --
 > 2.34.1
 >
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
