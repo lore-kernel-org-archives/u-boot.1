@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A15CC46CD4
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 16:11:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55B81C46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 16:21:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C0D3877F3;
-	Wed, 27 Dec 2023 17:11:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 88B0E877CD;
+	Wed, 27 Dec 2023 17:21:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="u0KgmERf";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pS+GaGPh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFDD9879B6; Wed, 27 Dec 2023 17:11:18 +0100 (CET)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
+ id 89C72877F3; Wed, 27 Dec 2023 17:21:49 +0100 (CET)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78A0E877F3
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 17:11:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CB1B877B1
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 17:21:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-28b82dc11e6so2004819a91.1
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 08:11:16 -0800 (PST)
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-28bc7155755so2065506a91.2
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 08:21:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703693475; x=1704298275; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703694105; x=1704298905; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qQmIACnIyDqhlfBXm+dRNQ6T3TzMr9CywGvJaHMig1E=;
- b=u0KgmERfMPEEWn7fSZnOctOOKZHZ0aHi8k3RVxjO7PydwrW1DR2XNiv3kwacySbvwu
- bt5VtGq/d8EnlGBaXRcl8HEv89sVqUdBl14VY5NZT4c2UhKQjR7gKmV2EpS2ff9JhL6F
- Ap4MA4y/tZ7Iy0Hk0RVBN3oSl8siNgskvymVXxcZTN1Vr50MHRdHBqyeJz1+KCX/Hj/B
- uJl//O+MGN+Jd+90doRXGkNHULTB+8KZ977BVoBy1APuVsKpRq6zqrn5N/AD/c2yXkI8
- OE7F9ag5bFVGxF2Ilxm3B1ZjfRABYtqQ9laZ1xS4+UUzqFDWAEFCeI16WP4nRImj4kdu
- YlAQ==
+ bh=9Mhsi7S4/ATw4ohXL3Ob7oaJJQXGr+JTIzIzXm0RSe8=;
+ b=pS+GaGPhRjZYfIMZlNExYE+7ofYQN76ARdrVzO5csqLkAf85CcxYtwflZvsCVua1uv
+ WdJSC41uRD0mCkKUI4KT561ptCI9jzDwv+K/XaLqXnho78O652GAwpKEEydNpDqPn/3O
+ n5bYI9deaqYfoMsMH4Dew/87wD7Hzc4uIdw3ZDkKUnKmC7xaSoq3oDgtBhlv75u8GDiH
+ 1dfKv7pZwllCtCiAHMcqE4LSRXCybqQ9RcYEcVcHcly8NSXi371vUoe1dbmSw7lP2tjc
+ HglQDWC3QOp13HBpW9sto6De9G/xbMao91Hh/OVL1LEPnmItg5MO2MmnqPT7c9iOw4qw
+ inrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703693475; x=1704298275;
+ d=1e100.net; s=20230601; t=1703694105; x=1704298905;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qQmIACnIyDqhlfBXm+dRNQ6T3TzMr9CywGvJaHMig1E=;
- b=K7+/h7bI1F1Cz2Zrioq0VI21SyMlrepDIiIZ+9yBUoAo+BmfM2EEuA1c6PceP2gWRP
- H9EZtgAMn/8k40QQamOg07XG+OE+C3VyKUdxvMDKGSlGnWuLw3MQJgz2vHDa73LOAsUw
- /Sp+lRydMtpvSHBeL1T0gtjpAy436AozcUjW57oifJxTo97FXIW+rkJymho0wtSm1+mN
- WOhqWkAN8sni7LMoEfsVyXkYXg+KrRbeqzWhuKbcrV1BqoTjMtYRf5yjj5XXIh2zeRCU
- LL/gBA10wq4S+XSntGZVI9hscudfIAYdtBXeQiYf7wquLa6AS2aYK7KtTONpBW3R3DSn
- Ggew==
-X-Gm-Message-State: AOJu0YwWfmNMOyCgC40m7Aarx2xlYXXgEy8GkT6vgmvSRXNwlzrWCExQ
- Y0xu4HnSzm7+hF2MYfSesZtWG3ZIMUdMBg9JZdTUFDpvR2w1HA==
-X-Google-Smtp-Source: AGHT+IG+VWSLPGcEhh4iMK21p7AEfG76wTQEgI/E77e4uysn674hLbTc+iDCv7WirEq1mw3T1qT3Q7C2B+CEZUmqX30=
-X-Received: by 2002:a17:90a:be14:b0:28b:d983:a104 with SMTP id
- a20-20020a17090abe1400b0028bd983a104mr2568155pjs.39.1703693474795; Wed, 27
- Dec 2023 08:11:14 -0800 (PST)
+ bh=9Mhsi7S4/ATw4ohXL3Ob7oaJJQXGr+JTIzIzXm0RSe8=;
+ b=SccraMNltzyyLXlqsh65u1+lCkvndSsn9RfIvPcWasQ2uk0oOhv+AHAqBCqimAipgo
+ LUaU07d3VeRgk9gVzsEtfV+wIzBZJGE6AhOVe56W8PcFxHwTSVHOaTFCmQg4K7tlelWN
+ Oj2mu4FWtJTl6ecqTr+Bb2WIjLPFg5QutAcjgx0CnAir9NXSqUokD289SgJ1rsv0Di1b
+ DvG+qM/bPMpj++6sBdUDSsa3yip0K8d6cwKvcNw4pIXfO8RCixsW2Mb+Fra1zK8EuYna
+ +on4IbuHDcuZQv11+nUuXrGEZyoGf6n9ITvui/0cGcEM9r83RPP9TaIzKUKdakNgxcAi
+ lbRg==
+X-Gm-Message-State: AOJu0YxKHhffKe6+hoETy3Wi2QMtCt6N3bXRilOirCj+8I/MyVse403L
+ /EzEsiLE1pg36iNw2OzQz6EEQtuGcZHaftD2Atq6+95DTsv0TQ==
+X-Google-Smtp-Source: AGHT+IFHRBUheF1o7KRZKL+DSkBgVtChDLqm8KqDiZkNdBy/Uxh5ivwyN7InQBtxyZ/ngXs2jD4nZo8hF7s5xkJQi/U=
+X-Received: by 2002:a17:90b:33cc:b0:28a:f2cc:e008 with SMTP id
+ lk12-20020a17090b33cc00b0028af2cce008mr2881697pjb.54.1703694105586; Wed, 27
+ Dec 2023 08:21:45 -0800 (PST)
 MIME-Version: 1.0
 References: <20231222213110.660402-1-raymond.mao@linaro.org>
- <20231222213110.660402-9-raymond.mao@linaro.org>
- <CAFLszTg=TZaO-EKoqRf8dH1Kf9WHO-OGWzsg0k8-+riuyN8EDQ@mail.gmail.com>
-In-Reply-To: <CAFLszTg=TZaO-EKoqRf8dH1Kf9WHO-OGWzsg0k8-+riuyN8EDQ@mail.gmail.com>
+ <20231222213110.660402-7-raymond.mao@linaro.org>
+ <CAFLszTjoViZAxZy26k4aXuoBhvzt_P8zBwqx8Kr8wPHFns1RRQ@mail.gmail.com>
+In-Reply-To: <CAFLszTjoViZAxZy26k4aXuoBhvzt_P8zBwqx8Kr8wPHFns1RRQ@mail.gmail.com>
 From: Raymond Mao <raymond.mao@linaro.org>
-Date: Wed, 27 Dec 2023 11:11:04 -0500
-Message-ID: <CAEfUkUKe-JPHEN7bkrB+tkQnKbJdAkbqt3sC-Je8ox-9V++_sA@mail.gmail.com>
-Subject: Re: [PATCH v3 8/9] fdt: update the document and Kconfig description
+Date: Wed, 27 Dec 2023 11:21:35 -0500
+Message-ID: <CAEfUkUKfC380JOkuz+x_vRVr2R2KXfJQ6gzKaS4fW55BkW5EFg@mail.gmail.com>
+Subject: Re: [PATCH v3 6/9] qemu-arm: Get bloblist from boot arguments
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, jwerner@chromium.org, 
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Kevin Chen <kevin_chen@aspeedtech.com>, 
  Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <sean.anderson@seco.com>, 
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Shiji Yang <yangshiji66@outlook.com>, 
+ Shiji Yang <yangshiji66@outlook.com>, Devarsh Thakkar <devarsht@ti.com>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Baruch Siach <baruch@tkos.co.il>, 
- Michal Simek <michal.simek@amd.com>, Stefan Roese <sr@denx.de>
+ Michal Simek <michal.simek@amd.com>, Qu Wenruo <wqu@suse.com>, 
+ Sean Anderson <sean.anderson@seco.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
@@ -107,69 +105,104 @@ On Tue, 26 Dec 2023 at 04:48, Simon Glass <sjg@chromium.org> wrote:
 rg>
 > wrote:
 > >
-> > Update the document and Kconfig to describe the behavior of board
-> > specific custom functions when CONFIG_OF_BOARD is defined.
+> > Add platform custom function to get bloblist from boot arguments.
+> > Check whether boot arguments aligns with the register conventions
+> > defined in FW Handoff spec v0.9.
+> > Add bloblist related options into qemu default config.
 > >
 > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 > > ---
-> >  doc/develop/devicetree/control.rst | 6 +++---
-> >  dts/Kconfig                        | 7 +++++--
-> >  2 files changed, 8 insertions(+), 5 deletions(-)
+> > Changes in v2
+> > - Remove low level code for copying boot arguments.
+> > - Refactor board_fdt_blob_setup() and remove direct access of
+> gd->bloblist.
+> > Changes in v3
+> > - Optimize board_bloblist_from_boot_arg().
 > >
-> > diff --git a/doc/develop/devicetree/control.rst
-> b/doc/develop/devicetree/control.rst
-> > index cbb65c9b17..e061f4e812 100644
-> > --- a/doc/develop/devicetree/control.rst
-> > +++ b/doc/develop/devicetree/control.rst
-> > @@ -104,9 +104,9 @@ in u-boot.bin so you can still just flash u-boot.bi=
-n
-> onto your board. If you are
-> >  using CONFIG_SPL_FRAMEWORK, then u-boot.img will be built to include
-> the device
-> >  tree binary.
+> >  board/emulation/qemu-arm/qemu-arm.c | 30 +++++++++++++++++++++++++++++
+> >  configs/qemu_arm64_defconfig        |  3 +++
+> >  2 files changed, 33 insertions(+)
 > >
-> > -If CONFIG_OF_BOARD is defined, a board-specific routine will provide t=
-he
-> > -devicetree at runtime, for example if an earlier bootloader stage
-> creates
-> > -it and passes it to U-Boot.
-> > +If CONFIG_OF_BOARD is defined, board-specific routines will provide th=
-e
-> > +bloblist and devicetree at runtime, for example if an earlier
-> bootloader stage
-> > +creates it and passes it to U-Boot.
+> > diff --git a/board/emulation/qemu-arm/qemu-arm.c
+> b/board/emulation/qemu-arm/qemu-arm.c
+> > index 942f1fff57..e225011bf0 100644
+> > --- a/board/emulation/qemu-arm/qemu-arm.c
+> > +++ b/board/emulation/qemu-arm/qemu-arm.c
+> > @@ -4,6 +4,7 @@
+> >   */
 > >
-> >  If CONFIG_SANDBOX is defined, then it will be read from a file on
-> >  startup. Use the -d flag to U-Boot to specify the file to read, -D for
-> the
-> > diff --git a/dts/Kconfig b/dts/Kconfig
-> > index 00c0aeff89..12d61dc748 100644
-> > --- a/dts/Kconfig
-> > +++ b/dts/Kconfig
-> > @@ -110,8 +110,11 @@ config OF_BOARD
-> >         default y if SANDBOX || OF_HAS_PRIOR_STAGE
-> >         help
-> >           If this option is enabled, the device tree is provided at
-> runtime by
-> > -         a custom function called board_fdt_blob_setup(). The board mu=
-st
-> > -         implement this function if it wishes to provide special
-> behaviour.
-> > +         a custom function called board_fdt_blob_setup().
-> > +         If this option is enabled, bloblist is provided at runtime by=
- a
-> > +         custom function called board_bloblist_from_boot_arg().
-> > +         The board must implement these functions if it wishes to
-> provide
-> > +         special behaviour.
+> >  #include <common.h>
+> > +#include <bloblist.h>
+> >  #include <cpu_func.h>
+> >  #include <dm.h>
+> >  #include <efi.h>
+> > @@ -102,6 +103,15 @@ static struct mm_region qemu_arm64_mem_map[] =3D {
+> >  struct mm_region *mem_map =3D qemu_arm64_mem_map;
+> >  #endif
+> >
+> > +/*
+> > + * Boot parameters saved from start.S
+> > + * saved_args[0]: FDT base address
+> > + * saved_args[1]: Bloblist signature
+> > + * saved_args[2]: must be 0
+> > + * saved_args[3]: Bloblist base address
+> > + */
+> > +extern unsigned long saved_args[];
+> > +
+> >  int board_init(void)
+> >  {
+> >         return 0;
+> > @@ -144,6 +154,26 @@ void *board_fdt_blob_setup(int *err)
+> >         return (void *)CFG_SYS_SDRAM_BASE;
+> >  }
+> >
+> > +int board_bloblist_from_boot_arg(unsigned long addr, unsigned long siz=
+e)
+> > +{
+> > +       int ret =3D -ENOENT;
+> > +
+> > +       if (!IS_ENABLED(CONFIG_OF_BOARD) || !IS_ENABLED(CONFIG_BLOBLIST=
+))
+> > +               return -ENOENT;
+> > +
+> > +       ret =3D bloblist_check(saved_args[3], size);
+> > +       if (ret)
+> > +               return ret;
 >
-> Again, this spec is not board-specific, so it should work on any ARM
-> board, without board-specific code, just by enabling the feature.
+> What about saved_args[1] ?
 >
-> dts/Kconfig is for all platforms. And from the view of a non-ARM platform=
-,
-this is
-still platform-specific.
+> The magic and version of register conventions cannot be checked now since
+there is
+a bug in the spec. PSB:
+```
+X1[23:0]: set to the TL signature (4a0f_b10b)
+X1[31:24]: version of the register convention used. Set to 1 for the
+AArch64 convention specified in this document.
+```
+Signature (4a0f_b10b) takes all [31:0] and no space for version of the
+register convention.
+This needs to be updated on TF-A and OP-TEE as well after the spec is
+updated.
+For now I will just skip the checking.
+
+
+> > +
+> > +       /* Check the register conventions */
+> > +       ret =3D bloblist_check_reg_conv(saved_args[0], saved_args[2]);
+> > +       if (!ret)
+> > +               /* Relocate the bloblist to the fixed address */
+> > +               ret =3D bloblist_reloc((void *)addr, CONFIG_BLOBLIST_SI=
+ZE);
+> > +
+> > +       return ret;
+> > +}
+> > +
+>
+> This should be a generic function, e.g. in arch/arm
+>
+> I didn't find a place under arch/arm that is good for connect with the
+saved boot
+args. Do you have any suggestions?
 
 [...]
 
