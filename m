@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEB1BC46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 13:20:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 452C0C47072
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 13:22:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1297D87866;
-	Wed, 27 Dec 2023 14:20:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C16CF8790F;
+	Wed, 27 Dec 2023 14:22:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FpUD4ccK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pQQSfJkm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35FBB8789A; Wed, 27 Dec 2023 14:20:40 +0100 (CET)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+ id 9AFFA87919; Wed, 27 Dec 2023 14:22:02 +0100 (CET)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25C21876FF
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 14:20:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DC4F876FF
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 14:22:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-dbdb2433800so3659034276.3
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 05:20:38 -0800 (PST)
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-5e840338607so31328917b3.2
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 05:22:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703683236; x=1704288036; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1703683319; x=1704288119; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lt8BO5Uui/0Tg5e+NpDWxgaShaoE086aDrSe5Xc3nKY=;
- b=FpUD4ccKnWTfelyDfwBtK8/HFlkwJ2092SqrV6zKComOPua7UJmKvPRBAJL6pJC6yK
- FlKNTyOkle1hFchPDctkGaiqx1R3NSaZFyFOGgjzVDEnNFQKrTndURWuGoAbOdGnPSml
- GVSD7jMqbmSWOvG5fOgRv5P0D7DyCo+2ceMC8=
+ bh=B36Kgm8pWAig5nE18qyiRMBCaFZoL/1J1Wi5HW96qvo=;
+ b=pQQSfJkm8BfzhHUHPNBg6wd8k2ntf7J0GkvOxpUJ8T2HFngR2YdiQ1yZrAfqmLVy9D
+ O59sKAwFZ78Qu6gqGZBYzigTq2ofX+CwkA+3AFdKKCU4evyMm2ksC8kRb6pZQxdGbMM+
+ bT3b5O6J/VlC55s28X6tClDwUq2UCTaFT3smU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703683236; x=1704288036;
+ d=1e100.net; s=20230601; t=1703683319; x=1704288119;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lt8BO5Uui/0Tg5e+NpDWxgaShaoE086aDrSe5Xc3nKY=;
- b=jtmgguqP/mWM5hVHddfU4v+r8vhzOWJNAv/+swGgETCKwV3EDNUuIoNhsIi9NvFdvD
- KL6E7mGmpVUNqm6h+kWz7KMz6+QSH+DJcqLBKIRq+vmflHB9dlff7Fp3zgOGQygQTwtK
- t/1cOBmsycuYaUdi6hlfdH5v9wJ3qEsoMiis+d+W6z9cyFrMJLzF4boC/xrHBvjoqq1m
- e3764Ggc1SGrnTkwfS+Z33u4N9sdhMkro9qtYBNcuA+aUl5W0CDPZW8ZStLXJNnjoNpl
- Yqi5+cLzSPRfYtOqv905v6K2R7OUUPtVb4hFELeE4F42EGN9gqMLxOTJm9zgesci2kNu
- IZtg==
-X-Gm-Message-State: AOJu0Yyx6E0pGVqn5c5yDOmr1yd0376LTl6rOxWW0j4hiXM57HTINXGc
- tEZiWuLrKGzroaUFSjzC9d2xou2JnHb6fA==
-X-Google-Smtp-Source: AGHT+IEQVxR3KHMA5ZcXf1ilHX115tffCV1PytrS+UG7ZIbhw6J4L05niRcbDssi/gKqR9uv7A7fZw==
-X-Received: by 2002:a05:6902:1106:b0:db7:dacf:61fc with SMTP id
- o6-20020a056902110600b00db7dacf61fcmr3820705ybu.78.1703683236279; 
- Wed, 27 Dec 2023 05:20:36 -0800 (PST)
+ bh=B36Kgm8pWAig5nE18qyiRMBCaFZoL/1J1Wi5HW96qvo=;
+ b=XJRAVZF8dc2dsXaG7h6EOWu5Pjw5DmyJmm4sYkUlNImvYwmr7NfIeUf5tgT0l3+k/K
+ tVQCTcALjdfmNXG2H06NQLIepiosY6rC6qC25xRBZzGH+W92owpr3gRBqAhB2m53HWuC
+ mLYBg3o0K9qud72GWHFqYjDKAU7o6AVqgWk0JHot3s6WDD1bvOvD7WoEBnpUtZVULqtb
+ iD82NjDYVAXEnfck16Rf7WHMuozYEnmRyAT6UMijDdA2G5zTXnb2kEvigUhtkAfhC0aC
+ tLacU2bNRR874SFXZPN2lFBqm969yjzPV4/IH5MSL7NBxuALkHU8aCI0zshGKeilBgta
+ mqSA==
+X-Gm-Message-State: AOJu0YzVMjh2EeDlOi56ZxEOFAK5EASpVmfxUm0WYQyT/y1UahzCIVG1
+ 2tT/6XPgik2ozRnJdV2MHUJdSKsbajZXcQ==
+X-Google-Smtp-Source: AGHT+IH5TTSA3S9vuMv7POvGHUVJ6WvXlCMSsCmeMvENMuJEG7oI2U/EjLQVgLQ00Sv907mDKoRP+A==
+X-Received: by 2002:a81:a193:0:b0:5e9:9e43:2038 with SMTP id
+ y141-20020a81a193000000b005e99e432038mr2887590ywg.44.1703683319290; 
+ Wed, 27 Dec 2023 05:21:59 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- s103-20020a25aa70000000b00dbd0d4cca6bsm5273617ybi.58.2023.12.27.05.20.35
+ z12-20020a81ac4c000000b005ec2d763ae4sm2933904ywj.68.2023.12.27.05.21.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Dec 2023 05:20:35 -0800 (PST)
-Date: Wed, 27 Dec 2023 08:20:33 -0500
+ Wed, 27 Dec 2023 05:21:58 -0800 (PST)
+Date: Wed, 27 Dec 2023 08:21:56 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Sumit Garg <sumit.garg@linaro.org>, Michal Simek <michal.simek@amd.com>,
- Michal Simek <monstr@monstr.eu>
-Subject: Re: [PATCH 1/9] microblaze: dts: Use the normal build rule
-Message-ID: <20231227132033.GP2652760@bill-the-cat>
+ Sumit Garg <sumit.garg@linaro.org>,
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Andreas =?iso-8859-1?Q?Bie=DFmann?= <andreas@biessmann.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Michal Simek <monstr@monstr.eu>, Minkyu Kang <mk7.kang@samsung.com>,
+ Scott McNutt <smcnutt@psyent.com>, Thomas Chou <thomas@wytron.com.tw>
+Subject: Re: [PATCH 0/9] dts: Move to SoC-specific build rules
+Message-ID: <20231227132156.GQ2652760@bill-the-cat>
 References: <20231227082405.2202246-1-sjg@chromium.org>
- <20231227082405.2202246-2-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="QqhfLm6KXCQp4qxi"
+ protocol="application/pgp-signature"; boundary="TxQC1jORMt+qOs+q"
 Content-Disposition: inline
-In-Reply-To: <20231227082405.2202246-2-sjg@chromium.org>
+In-Reply-To: <20231227082405.2202246-1-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,58 +97,58 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---QqhfLm6KXCQp4qxi
+--TxQC1jORMt+qOs+q
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Dec 27, 2023 at 08:23:57AM +0000, Simon Glass wrote:
-> Build devicetree files using the normal SoC-generic rule. For
-> microblaze there is actually only one SoC and one board.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
->  arch/microblaze/dts/Makefile | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/arch/microblaze/dts/Makefile b/arch/microblaze/dts/Makefile
-> index 427a8f9aaca..adc76ddf21f 100644
-> --- a/arch/microblaze/dts/Makefile
-> +++ b/arch/microblaze/dts/Makefile
-> @@ -1,6 +1,6 @@
->  # SPDX-License-Identifier: GPL-2.0+
-> =20
-> -dtb-y +=3D $(shell echo $(CONFIG_DEFAULT_DEVICE_TREE)).dtb
-> +dtb-$(CONFIG_MICROBLAZE) +=3D microblaze-generic.dtb
-> =20
->  include $(srctree)/scripts/Makefile.dts
+On Wed, Dec 27, 2023 at 08:23:56AM +0000, Simon Glass wrote:
 
-This (and nios2 and perhaps a few other arches) show that it would be
-easier to just drop the dts- line as it adds nothing over what
-scripts/Makefile.dts gives us. I wonder how this will interact with
-OF_UPSTREAM and how it compares with arch/microblaze/boot/dts/system.dts
-in the linux kernel.
+> U-Boot builds devicetree binaries from its source tree. As part of the
+> Kconfig conversion, the Makefiles were updated to align with how this
+> is done in Linux: a single target for each SoC is used to build all the
+> .dtb files for that SoC.
+>=20
+> Since then, the Makefiles have devolved in some cases, resulting in
+> lots of target-specific build rules. Also Linux has moved to using
+> subdirectories for each vendor.
+>=20
+> Recent work aims to allow U-Boot to directly use devicetree files from
+> Linux. This would be easier if the directory structure were the same.
+> Another recent discussion involved dropping the build rules altogether.
+>=20
+> This series makes a start at cleaning up some of the build rules, to
+> reduce the amount of code and make it easier to add new boards for the
+> same SoC.
+>=20
+> One issue is that the ARCH_xxx Kconfig options between U-Boot and Linux
+> are not always the same. Given the large number of SoCs and boards
+> supported by U-Boot, it would be useful to align these where possible.
+
+I don't know why we should start with this now, and further not being on
+top of Sumit's series to remove our duplicate dts files. And that's
+where we can have the conversation about for which cases it even makes
+sense to build all of the dts files for a given SoC.
 
 --=20
 Tom
 
---QqhfLm6KXCQp4qxi
+--TxQC1jORMt+qOs+q
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWMJJ0ACgkQFHw5/5Y0
-tyzoDQv/QNgtq2CCBTK6AyA4EXpuU88wS3hOeBfI/YNBVhV/3yayMh2wqjXezLPO
-F45743jZ/7afPTzp31tSM5ggBYcCkkYjIHGnfnqeuQUeYEc6dZHa668ku5YsnpFY
-4Jx+8pH0KKldPSkEMz7C4tDTu+q5imx8wCahLmGvqmoyNyWOzkNczbwFK1pk4ylu
-xAmTylShd9a/M1JW3+WqqYIDzTrwX6sGNB8aTDrouQGbJ4ihBX0/GAO2TkXO0abN
-n18/wmx/WE+CdnIu79zUbG7uAqY85DZQU9Fnn11/VoEhEK9tVXiPEaCLd0HN/HOL
-RSj8pAifC2oBxRRPIBXl5MRxsTPUQ/uMiCukOPs5t36XkLM+QKEzsECi1WobH8us
-2OwFd98YB6gBipAX1Q0CWPw4IeVdsRrioHA6XomKZC+6m/EzPyJ3CPhWEjJBN23x
-jiN2mCdxnplriU8+ls9TP7HyMSLgEV++k8bm5CDg5OFUhNMhV/o7a8vzIwjhqmKe
-ynmEaTQb
-=HykE
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWMJPQACgkQFHw5/5Y0
+tyy92QwAthTbi0vYnAMFHAGbo9ADG5Y+4mbWDj4EG+6+U3XuKmQCtynXtcfVrG6H
+B4qltYnuQj4I6w4mdw6k+45HaxjXTgYeRfdJi2Kq0/tLDMUeAlBNH1E0Gk3Obd+7
+poNDtqRo4cR8YdlVOunIu+3ukyfW4hBRS5+7p3GyOER78lWcXVOU8BVbwpFcEHA8
+CMKDEmjsQbnLxevQwjKGp6Fh0vhzJdtuaSWqTKVha7MxMa2LLhfJYgro5IGO7Pid
+YG/7kFOvG22XECQPpqqIR0k0Nb8Tm0tg03DN2sEaU/WC+wmYyvYjCNql9n1m+tje
+PYO8jvG+2HoQKBkdgKht0tLyOyz78kdm5uL82SGliDr6wBhTJz8NxNiCVuoKN1Bt
+YDQ3CylZX20LR+BJkmin8ifEtqeSF814PcSlRR37tW+ZK1XJksVZhK9YM6xiR03e
+ZVTRatogYbzi/RyFk1YBRi4F/7gdaCm9wg46X9vbjy7wLvH+ngJAggAw/d0wm2Mj
+PLW2Egsz
+=zlHV
 -----END PGP SIGNATURE-----
 
---QqhfLm6KXCQp4qxi--
+--TxQC1jORMt+qOs+q--
