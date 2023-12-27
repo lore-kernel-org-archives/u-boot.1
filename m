@@ -4,71 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10ABBC46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 17:49:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34CC9C46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 17:49:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D9AD879C3;
+	by phobos.denx.de (Postfix) with ESMTP id 93EB8879CE;
 	Wed, 27 Dec 2023 18:49:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TcQgR8cO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PmZ/Fa+l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A46568794F; Wed, 27 Dec 2023 18:49:09 +0100 (CET)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id 86F44879C7; Wed, 27 Dec 2023 18:49:11 +0100 (CET)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A681F87946
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 18:49:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 96D7A879CB
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 18:49:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-67f7aa55bfeso46123906d6.2
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 09:49:06 -0800 (PST)
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-3ba14203a34so5483278b6e.1
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 09:49:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703699345; x=1704304145; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703699346; x=1704304146; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QYgTHtLXlZ4p/jVAFYLB0NJdrrjF2ketL9BPM1Sq3kU=;
- b=TcQgR8cOVrz7Gje6WpwICIGHRTpGrf80ZCjEajJ2BZ+gYiKd10kSPj7ZjCLU/A8PDS
- rSawjQpLpYZE3JoA9srQoy940X2yrlweyYEZlxX5GRzJOMfzqUVLgm3t85RhLVhMkksh
- GstmJFjLsnCSKlCOVN1DD3T4tBML7e30NW0Ys=
+ bh=dUhY3v5VuJP6kgEaMhWGkPyYoLLOvf5K7f5mkwVSyJU=;
+ b=PmZ/Fa+lDh5p7XiXuRhv0bnWN37YDbqGee924Nl912HzYf+Q438cTkahMO/Eea/D9y
+ sM+wvxm5E6QDGkp19HsBSFtrrY6dgUtZdtKtBYFWi85PgHbJPeENOlvNH+ZI43OniWcq
+ fL7gUVEPc+Om344EAO9xTKCfQ8eOxfOa26pbg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703699345; x=1704304145;
+ d=1e100.net; s=20230601; t=1703699346; x=1704304146;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QYgTHtLXlZ4p/jVAFYLB0NJdrrjF2ketL9BPM1Sq3kU=;
- b=LmZ0RkzEjOQyFWMptyCrjYE3Qa1MNAMDWuA/tdj5W+RyCGrRwegwzbw2VS7pgxPQBV
- EjPq3WoB9wGeYn/ueuwvNG+pAyGtTB7WNSZLOwvclou5D1UvOpe4nK6JMeQ+tMC9WP1R
- 7ZbyZ5nyPZ2jSEGTo49S9TwFKnFcWUpntN1vEstWhYGn+vIfi5376Puv456hPcASM996
- Fv4DrOJXyOp501KbcNfh+gaY1W+iZDsjsyks25B2U5qzgR3vGtIk0+zpL6DnKAbFV2Y8
- 11wJ3BSfmRM8s+ho2L0pSHBpL6VOWiVE7pt37tq5ezAWKf4tZaNFXclyZmNQNqQv9LWF
- PEzg==
-X-Gm-Message-State: AOJu0YxTzZ2h7ii6VX+8miy2tlRhORtB8obVvRbEpKNI0kWIdi7OACjE
- eZFd+AaZscKApAHccTTRLfdyfhVnTwa2pRhl3Q/7xQdVebO2+biluNgBGRBePw==
-X-Google-Smtp-Source: AGHT+IHobL9ZXw9zBZEAqVoYHskO+/kPnbkPlIP78ERxjDWxR4/c+EjPvd6ABZD2r/1ezzrvwImGLDLdlWkrS5VIA90=
-X-Received: by 2002:a0c:d646:0:b0:680:141:3aa8 with SMTP id
- e6-20020a0cd646000000b0068001413aa8mr6797353qvj.109.1703699345515; Wed, 27
- Dec 2023 09:49:05 -0800 (PST)
+ bh=dUhY3v5VuJP6kgEaMhWGkPyYoLLOvf5K7f5mkwVSyJU=;
+ b=tWBp+ZJ/ohgvifjzJyJa+8pYYot1WEq9WwMi/KQrZMhHBrkQSU2RcaPlOxOHlNaQZN
+ NFokqNdFbgFvLXzhXqrgrd6S86vIL5wO6RJ2pJK1vxeZ1gKE1424/JUs48mSdYKzM1kG
+ JucA4Sl4MSX0/QmvxLYxz9mJyVvnFW6xEVk7ABFC+KK8qJswEdSWxK3SBJ7Y0GzQbMtN
+ Uyxruk+SKot6c3WhSR8hJW1YYLAs8Te1ZN8hLrPq2zqgsh4zZTW2nBp6Ilzz6CaFLFnm
+ eqQPSCmk76O3QEUM3nZLPwgZgi+PT/AR4+UC6Qlfo8O15hF5tqcaxOM3DlRha6oCrDji
+ q7Jg==
+X-Gm-Message-State: AOJu0YzzNVRcYI0SjrpZm73jeWeIItPG/POB6Gb475Rn5SYcr8xtnuxF
+ w39l/4gKxismjnd8W9BjtPA02NdtsrAd7VrRb54VfhIO5vLP
+X-Google-Smtp-Source: AGHT+IFOd0Z9OkSZlP6/Vhf6C3P7TjR+i5T4NyGtlb2AlTWD/Apcgu5PNZ4Ylt0+ennySRY9h4pHJBoo3fxdvFJ2DxA=
+X-Received: by 2002:a05:6808:2224:b0:3bb:cf5e:7833 with SMTP id
+ bd36-20020a056808222400b003bbcf5e7833mr87610oib.85.1703699346175; Wed, 27 Dec
+ 2023 09:49:06 -0800 (PST)
 MIME-Version: 1.0
-References: <CAPnjgZ06s64C2ux1rABNAnMv3q4W++sjhNGCO_uPMH_9sTF7Mw@mail.gmail.com>
- <51c47679-32d8-45a7-9d9a-4c534ed98c32@gmx.de>
-In-Reply-To: <51c47679-32d8-45a7-9d9a-4c534ed98c32@gmx.de>
+References: <20231115153836.16537-1-clamor95@gmail.com>
+ <20231115153836.16537-5-clamor95@gmail.com>
+In-Reply-To: <20231115153836.16537-5-clamor95@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 27 Dec 2023 17:48:54 +0000
-Message-ID: <CAFLszThR79UyrqDai3U2Kb6mAvGOPAg_pTcSBoPvG8c4c7S+iA@mail.gmail.com>
-Subject: Re: Proposal: FIT support for extension boards / overlays
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Geert Uytterhoeven <geert@linux-m68k.org>, 
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Chen-Yu Tsai <wenst@chromium.org>, Tom Rini <trini@konsulko.com>,
- U-Boot Custodians <u-boot-custodians@lists.denx.de>, 
- Andrew Davis <afd@ti.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Wed, 27 Dec 2023 17:48:55 +0000
+Message-ID: <CAFLszTjVb2U0sr3++LmocrFCJnTkThtEDuiziYv8Xcb5cBOaDQ@mail.gmail.com>
+Subject: Re: [PATCH v2 4/5] lib: membuff: fix readline not returning line in
+ case of overflow
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Bin Meng <bmeng@tinylab.org>, Ion Agorria <ion@agorria.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
+ Sean Anderson <sean.anderson@seco.com>, 
+ Heiko Schocher <hs@denx.de>, Dmitrii Merkurev <dimorinny@google.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,167 +92,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On Tue, Dec 12, 2023 at 3:43=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@gm=
-x.de> wrote:
+On Wed, Nov 15, 2023 at 3:39=E2=80=AFPM Svyatoslav Ryhel <clamor95@gmail.co=
+m> wrote:
 >
-> On 12.12.23 15:05, Simon Glass wrote:
-> > Hi,
-> >
-> > The devicetree files for a board can be quite large, perhaps around
-> > 60KB. To boot on any supported board, many of them need to be
-> > provided, typically hundreds.
-> >
-> > All boards for a particular SoC share common parts.  It would be
-> > helpful to use overlays for common pieces, to reduce the overall size.
-> >
-> > Some boards have extension add-ons which have their own devicetree
-> > overlays. It would be helpful to know which ones should be applied for
-> > a particular extension.
-> >
-> > I propose implementing extensions in FIT. This has a new '/extensions'
-> > node, so you can specify what extensions are available for each FIT
-> > configuration.
-> >
-> > For example:
-> >
-> > / {
-> >    images {
-> >      kernel {
-> >        // common kernel
-> >      };
-> >
-> >      fdt-1 {
-> >        // FDT for board1
-> >      };
-> >
-> >      fdto-1 {
-> >        // FDT overlay
-> >      };
-> >
-> >      fdto-2 {
-> >        // FDT overlay
-> >      };
-> >
-> >      fdto-3 {
-> >        // FDT overlay
-> >      };
-> >    };
-> >
-> >    configurations {
-> >      conf-1 {
-> >          compatible =3D ...
-> >          fdt =3D "fdt-1";
-> >          extensions =3D "ext1", "ext-2";
+> From: Ion Agorria <ion@agorria.com>
 >
-> Shouldn't there be braces around the item list?
-
-I don't think so.
-
+> If line overflows readline it will not be returned, fix this behavior,
+> make it optional and documented properly.
 >
-> How do you specify optional and required but otherwise unrelated
-> extensions for a configuration?
-
-Do we actually need to know which extensions are required or optional?
-Do you have an example?
-
+> Signed-off-by: Ion Agorria <ion@agorria.com>
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> ---
+>  boot/bootmeth_extlinux.c | 2 +-
+>  common/console.c         | 2 +-
+>  include/membuff.h        | 5 +++--
+>  lib/membuff.c            | 4 ++--
+>  4 files changed, 7 insertions(+), 6 deletions(-)
 >
-> >      };
-> >    };
-> >
-> >    extensions {
-> >      ext-1 {
-> >          fdto =3D "fdto-1";   // FDT overlay for this 'cape' or 'hat'
-> >          kernel =3D "kernel-1";
-> >          compatible =3D "vendor,combined-device1";
-> >          extensions =3D "ext-3";
-> >      };
-> >
-> >      ext-2 {
-> >          fdto =3D "fdto-2";   // fdt overlay for this 'cape'
-> >          compatible =3D "vendor,device2";
-> >      };
-> >
-> >      ext-3 {
-> >          fdto =3D "fdto-3";
-> >          compatible =3D "vendor,device3";
-> >      };
-> >    };
-> > };
-> >
-> > So FIT configurations have a list of supported extensions. The
-> > extensions are hierarchical so that you can have ext-1 which can
-> > optionally have ext-2 as well. This allows boards to share a common
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+
+> diff --git a/boot/bootmeth_extlinux.c b/boot/bootmeth_extlinux.c
+> index aa2a4591eb..ae0ad1d53e 100644
+> --- a/boot/bootmeth_extlinux.c
+> +++ b/boot/bootmeth_extlinux.c
+> @@ -82,7 +82,7 @@ static int extlinux_fill_info(struct bootflow *bflow)
+>         log_debug("parsing bflow file size %x\n", bflow->size);
+>         membuff_init(&mb, bflow->buf, bflow->size);
+>         membuff_putraw(&mb, bflow->size, true, &data);
+> -       while (len =3D membuff_readline(&mb, line, sizeof(line) - 1, ' ')=
+, len) {
+> +       while (len =3D membuff_readline(&mb, line, sizeof(line) - 1, ' ',=
+ true), len) {
+>                 char *tok, *p =3D line;
 >
-> ext2 seems not to be related to ext-3. Do you mean ext-3 optionally
-> extending ext-1? How would you specify that ext-n is required for ext-m
-> to work?
-
-Yes, I mean "optionally extending ext2". Again, I don't consider
-required extensions here.
-
+>                 tok =3D strsep(&p, " ");
+> diff --git a/common/console.c b/common/console.c
+> index 8a869b137e..cd56035171 100644
+> --- a/common/console.c
+> +++ b/common/console.c
+> @@ -846,7 +846,7 @@ bool console_record_overflow(void)
+>  int console_record_readline(char *str, int maxlen)
+>  {
+>         return membuff_readline((struct membuff *)&gd->console_out, str,
+> -                               maxlen, '\0');
+> +                               maxlen, '\0', false);
+>  }
 >
-> The sequence of applying overlays may make a difference. I cannot see
-> that your current suggestion defines a sequence in which the overlays
-> are applied.
+>  int console_record_avail(void)
+> diff --git a/include/membuff.h b/include/membuff.h
+> index 21051b0c54..4eba626ce1 100644
+> --- a/include/membuff.h
+> +++ b/include/membuff.h
+> @@ -192,10 +192,11 @@ int membuff_free(struct membuff *mb);
+>   * @mb: membuff to adjust
+>   * @str: Place to put the line
+>   * @maxlen: Maximum line length (excluding terminator)
+> + * @must_fit: If true then str is empty if line doesn't fit
+>   * Return: number of bytes read (including terminator) if a line has bee=
+n
+> - *        read, 0 if nothing was there
+> + *        read, 0 if nothing was there or line didn't fit when must_fit =
+is set
+>   */
+> -int membuff_readline(struct membuff *mb, char *str, int maxlen, int minc=
+h);
+> +int membuff_readline(struct membuff *mb, char *str, int maxlen, int minc=
+h, bool must_fit);
 >
-> > SoC to add in overlays as needed by their board. It also allows common
-> > 'capes' or 'hats' to be specified only once and used by a group of
-> > boards which share the same interface.
-> >
-> > Within U-Boot, extensions actually present are declared by a sysinfo
-> > driver for the board, with new methods:
-> >
-> > get_compat() - determine the compatible strings for the current platfor=
-m
-> > get_ext() - get a list of compatible strings for extensions which are
-> > actually present
+>  /**
+>   * membuff_extend_by() - expand a membuff
+> diff --git a/lib/membuff.c b/lib/membuff.c
+> index 36dc43a523..964e504d5b 100644
+> --- a/lib/membuff.c
+> +++ b/lib/membuff.c
+> @@ -288,7 +288,7 @@ int membuff_free(struct membuff *mb)
+>                         (mb->end - mb->start) - 1 - membuff_avail(mb);
+>  }
 >
-> Do you expect U-Boot to have code that injects device-tree fragments
-> with a compatible string into the control FDT after discovering add-ons?
-
-Yes, that's right, by applying overlays.
-
+> -int membuff_readline(struct membuff *mb, char *str, int maxlen, int minc=
+h)
+> +int membuff_readline(struct membuff *mb, char *str, int maxlen, int minc=
+h, bool must_fit)
+>  {
+>         int len;  /* number of bytes read (!=3D string length) */
+>         char *s, *end;
+> @@ -310,7 +310,7 @@ int membuff_readline(struct membuff *mb, char *str, i=
+nt maxlen, int minch)
+>         }
 >
-> Why can't we simply write the compatible constraint into the overlay
-> definition (fdto-#) and enumerate the overlays in the configuration?
-
-Yes, that is the example quoted below.
-
+>         /* couldn't get the whole string */
+> -       if (!ok) {
+> +       if (!ok && must_fit) {
+>                 if (maxlen)
+>                         *orig =3D '\0';
+>                 return 0;
+> --
+> 2.40.1
 >
-> On some busses detection is problematic. Two alternative add-ons may use
-> the same SPI address but need different FDT overlays.
-
-If there is no way to detect the extension, then it cannot work anyway, rig=
-ht?
-
-BTW I am not suggesting that the bus is used for detection, although I
-suppose this is possible. More likely there are GPIOs which can be
-decoded to indicate the extension, or perhaps an I2C EEPROM.
-
-
->
-> Best regards
->
-> Heinrich
->
->
-> >
-> > The extension compatible-strings are used to select the correct things
-> > from the FIT, apply the overlays and produce the final DT.
-> >
-> > To make this simpler for the common case (without extensions), we can
-> > allow multiple FDT images for a configuration, with the first one
-> > being the base SoC .dtb and the others being the .dtbo overlay(s) for
-> > the board:
-> >
-> > confi-1 {
-> >          compatible =3D ...
-> >          fdt =3D "fdt-1", "fdto-1";
-> > };
-> >
-> > Comments welcome.
-
-Regards,
-Simon
