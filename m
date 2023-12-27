@@ -4,74 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09E51C46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 15:11:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A0FDC46CD4
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 15:14:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EAA487823;
-	Wed, 27 Dec 2023 16:11:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 581EE8775F;
+	Wed, 27 Dec 2023 16:14:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ux5yfP0Y";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tMx2m7HR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEFFA8793E; Wed, 27 Dec 2023 16:11:54 +0100 (CET)
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
- [IPv6:2607:f8b0:4864:20::430])
+ id C921D87823; Wed, 27 Dec 2023 16:14:31 +0100 (CET)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 844FD8775F
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 16:11:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C44678761B
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 16:14:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-6d99980b2e0so3012829b3a.2
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 07:11:52 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-50e7f58c5fbso1841283e87.1
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 07:14:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703689911; x=1704294711; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=14HSa+RtaqLdvWTFNsht9WY1c7jPP9I2/pZrgNA79xg=;
- b=Ux5yfP0YpDno7WiEpyTZWsIG64cTXjHnqiwCaPwaPgYVLepCXTPWnwhUJFOy6tSPvX
- ULflM3EmFwjWtWQzuxhY9LzobIXjEKcwT6lDCoTYdPWZtd/rsM5dWiKxT8+O933lKvm+
- SD+T9baw2d3DP/0F+JMPdYiDQVHnUSPc7V/ve+jH4jDfNcOok8HITiFEaH4Pp6E9ZMc0
- fWAXnqpxF+3j6YYK4OVEhZ7Wr11PnjHHOMfyqShhnICBfcMydYQ09SGDvIs+DGYVklKi
- sUO40BrNeHvAeQSTaDnmvLgWZapcJD7Ofbwp1WoAC5W5ZftqVzhoRCxyGYUdp7TCWJHr
- ltuw==
+ d=linaro.org; s=google; t=1703690069; x=1704294869; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=x6BOym9+Rrn79rtYcj8PE5RSdS6+MTSdJ9OflheT5X4=;
+ b=tMx2m7HR7pMhxsdVeB8eGs+9Cs+7CzP2aU//c7pqyQAYyJ7pqIN9AuMNFQTdT1Fh5D
+ WCGdSp3xyMVrGs3wt+BOwHF1CzX3a649SPV6wWQF0JaXBfA6OEJQFwWIdnHGXw3mn7Is
+ 4RyrceD6Z901wd4hGfttvTM+RI+eBp8eHQTqWkNeTFvaDJ9XNDXFb4Z8oZW7bzh6e71R
+ rXzRYcc8xVn5nnIO7c+dek7bTBeVeu7/5uOJnV2nyQLnh/b2UWrD/YbPMRExVWeECt0e
+ 8k/G4x0Z+WitN7nlXwV7M3K1pfoGjV34PGXxT+9ZLBCr9Q9Yy84+9xL/g3CkBtYB3J/Z
+ XXyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703689911; x=1704294711;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=14HSa+RtaqLdvWTFNsht9WY1c7jPP9I2/pZrgNA79xg=;
- b=EXTnMGa+bCtmwFT8V1ZBpISYBH5f8yVIk9dEIzF2s+AM0ZjGR1nnj5t8qF1SBQlPKm
- jpLeWgtw7amIm1yEhREK/BDm3mGhnwzbtDP5DZpjLpUYcqD0euVDJzl2EtPVmocYe9ZY
- 0RginH892MO1QHzaMpZ9BBXpoG2xJTdBrt+LHFfVuT5yR3onnr58PyQK3Kn5ihZT+EL2
- qrfEYPNsyjhVIX+qTVX8z4Yfg63MFMXtbszTY68IXHQ6IgFAHakAKBixG271GLQr4zRv
- HDazCyvDS5tWKBV2LqnZVC4K+JJcgOIz/7LXyQ7Y7/c+UJJ9vJMJJMntzTY7lU4y2xKE
- pUTw==
-X-Gm-Message-State: AOJu0Yw9SQJZFxMuJKvFRL1sijh/bRcm1OrGCDTWwsbnaBlE2qRKy1gE
- TOS0ZfqlTgvolUCJsdLcoz5JzYvlDH72ru5ewJbl2bsaGMWsQg==
-X-Google-Smtp-Source: AGHT+IFQDJuh9c9K9ITNOzQj5X0Qeu/WIzWd2lvFZ7L6YZH27dGTVJrTipdpsCpnIZrbd1AexuEZYiFXtkWq3JnJHgI=
-X-Received: by 2002:a62:5e03:0:b0:6d6:9bfb:c65b with SMTP id
- s3-20020a625e03000000b006d69bfbc65bmr9342184pfb.0.1703689910885; Wed, 27 Dec
- 2023 07:11:50 -0800 (PST)
+ d=1e100.net; s=20230601; t=1703690069; x=1704294869;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=x6BOym9+Rrn79rtYcj8PE5RSdS6+MTSdJ9OflheT5X4=;
+ b=FvgAqlnYN1TVf6ncHJvBhSDGL7sd6yEb+SNtOIx3v6RNR0ZH/aNfHbc5+cpPnzvKqi
+ ojtggqRPM5ET0mBgNBfmuInubMgy3rI+gSuSKPlTp2pocMh7y8S5WKtmAJ+pLwwjFsgk
+ 2d66uPYgaPpt9faXO7wq71MaulNHvb4JOT1oZ4E2gOrv+3lr6Cq/LHkPqtEm2OLB3pp5
+ RvBQR8Tt2jBBVYRXIfbNslOPo/ykBeve8hQ7UmXUEcjzXY/0itP8+IjDsIuY0BBdHJc+
+ v50ttM4RnywrOszguGb5NVw6HZyv/qwkIwGqxhrjqj1ZwUHyLK0Nj+UATMrw+ysNcJ5F
+ AvyA==
+X-Gm-Message-State: AOJu0Yw0lnI7uS1jqRB74i4uWLOT/1yrTUH2lmPX1rTp0cth80AYmMpG
+ nwMXN+4Ua6KUQCJw+T/6f+hHXoEodqeb9w==
+X-Google-Smtp-Source: AGHT+IFXgCLgPQum9a7qfHARH6J1xXvpX+v2tbYdO1TJ24RB1fBT+Z9iuRGsumgw6PdAcvh8WbWovQ==
+X-Received: by 2002:a05:6512:360e:b0:50e:7b7c:8593 with SMTP id
+ f14-20020a056512360e00b0050e7b7c8593mr1569032lfs.10.1703690069000; 
+ Wed, 27 Dec 2023 07:14:29 -0800 (PST)
+Received: from hera (ppp089210121239.access.hol.gr. [89.210.121.239])
+ by smtp.gmail.com with ESMTPSA id
+ z27-20020a17090674db00b00a26aa045d48sm6208669ejl.117.2023.12.27.07.14.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 27 Dec 2023 07:14:28 -0800 (PST)
+Date: Wed, 27 Dec 2023 17:14:26 +0200
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH v2 2/2] efi_loader: support fmp versioning for multi bank
+ update
+Message-ID: <ZYw_UqZ_wj-htZvI@hera>
+References: <20231221095258.592275-1-masahisa.kojima@linaro.org>
+ <20231221095258.592275-3-masahisa.kojima@linaro.org>
 MIME-Version: 1.0
-References: <20231218181901.337515-1-raymond.mao@linaro.org>
- <20231218181901.337515-13-raymond.mao@linaro.org>
- <CAC_iWj+xY7-JioFgU5XG3+cPmhGTmGN2_jdigHELAOD+XL=yHQ@mail.gmail.com>
-In-Reply-To: <CAC_iWj+xY7-JioFgU5XG3+cPmhGTmGN2_jdigHELAOD+XL=yHQ@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Wed, 27 Dec 2023 10:11:40 -0500
-Message-ID: <CAEfUkULxwgQ+=w7pnoGiFomprd9Ye=AUrH5uzM100sf-Hv52hA@mail.gmail.com>
-Subject: Re: [PATCH v3 12/14] bloblist: Add alignment to bloblist_new()
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
- Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231221095258.592275-3-masahisa.kojima@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,53 +93,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Kojima-san
 
-On Wed, 27 Dec 2023 at 05:10, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-wrote:
+On Thu, Dec 21, 2023 at 06:52:58PM +0900, Masahisa Kojima wrote:
+> This commit stores the firmware version into the array
+> of fmp_state structure to support the fmp versioning
+> for multi bank update. The index of the array is identified
+> by the bank index.
 
-> On Mon, 18 Dec 2023 at 20:20, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > From: Simon Glass <sjg@chromium.org>
-> >
-> > Allow the alignment to be specified when creating a bloblist.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > ---
-> > Changes in v3
-> > - Keep the flag argument to align to FW handoff spec up to commit
-> 3592349.
-> >
-> >  common/bloblist.c  |  5 +++--
-> >  include/bloblist.h |  3 ++-
-> >  test/bloblist.c    | 40 ++++++++++++++++++++++------------------
-> >  3 files changed, 27 insertions(+), 21 deletions(-)
-> >
-> > diff --git a/common/bloblist.c b/common/bloblist.c
-> > index 1c97d61e4a..6d079c58f7 100644
-> > --- a/common/bloblist.c
-> > +++ b/common/bloblist.c
-> > @@ -349,7 +349,7 @@ static u32 bloblist_calc_chksum(struct bloblist_hdr
-> *hdr)
-> >         return chksum;
-> >  }
-> >
-> > -int bloblist_new(ulong addr, uint size, uint flags)
-> > +int bloblist_new(ulong addr, uint size, uint flags, uint align_log2)
-> >  {
-> >         struct bloblist_hdr *hdr;
-> >
-> > @@ -365,6 +365,7 @@ int bloblist_new(ulong addr, uint size, uint flags)
-> >         hdr->magic = BLOBLIST_MAGIC;
-> >         hdr->size = size;
-> >         hdr->alloced = hdr->hdr_size;
-> > +       hdr->align_log2 = align_log2 ?: BLOBLIST_BLOB_ALIGN_LOG2;
+Why do we all of them? Can't we just always store/use the version of the active
+bank?
+
 >
-> nit, but can we write this as a full ternary operator in the next release.
+> This modification keeps the backward compatibility with
+> the existing versioning feature.
 >
-> Yes, I agree. Will change this in V4.
 
-Regards,
-Raymond
+Thanks
+/Ilias
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> ---
+>  lib/efi_loader/efi_firmware.c | 69 +++++++++++++++++++++++++++--------
+>  1 file changed, 54 insertions(+), 15 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
+> index 9b8630625f..5459f3d38d 100644
+> --- a/lib/efi_loader/efi_firmware.c
+> +++ b/lib/efi_loader/efi_firmware.c
+> @@ -207,18 +207,10 @@ void efi_firmware_fill_version_info(struct efi_firmware_image_descriptor *image_
+>  {
+>  	u16 varname[13]; /* u"FmpStateXXXX" */
+>  	efi_status_t ret;
+> -	efi_uintn_t size;
+> -	struct fmp_state var_state = { 0 };
+> -
+> -	efi_create_indexed_name(varname, sizeof(varname), "FmpState",
+> -				fw_array->image_index);
+> -	size = sizeof(var_state);
+> -	ret = efi_get_variable_int(varname, &fw_array->image_type_id,
+> -				   NULL, &size, &var_state, NULL);
+> -	if (ret == EFI_SUCCESS)
+> -		image_info->version = var_state.fw_version;
+> -	else
+> -		image_info->version = 0;
+> +	efi_uintn_t size, expected_size;
+> +	uint num_banks = 1;
+> +	uint active_index = 0;
+> +	struct fmp_state *var_state;
+>
+>  	efi_firmware_get_lsv_from_dtb(fw_array->image_index,
+>  				      &fw_array->image_type_id,
+> @@ -227,6 +219,31 @@ void efi_firmware_fill_version_info(struct efi_firmware_image_descriptor *image_
+>  	image_info->version_name = NULL; /* not supported */
+>  	image_info->last_attempt_version = 0;
+>  	image_info->last_attempt_status = LAST_ATTEMPT_STATUS_SUCCESS;
+> +	image_info->version = 0;
+> +
+> +	/* get the fw_version */
+> +	efi_create_indexed_name(varname, sizeof(varname), "FmpState",
+> +				fw_array->image_index);
+> +	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE)) {
+> +		ret = fwu_get_active_index(&active_index);
+> +		if (ret)
+> +			return;
+> +
+> +		num_banks = CONFIG_FWU_NUM_BANKS;
+> +	}
+> +
+> +	size = num_banks * sizeof(*var_state);
+> +	expected_size = size;
+> +	var_state = calloc(1, size);
+> +	if (!var_state)
+> +		return;
+> +
+> +	ret = efi_get_variable_int(varname, &fw_array->image_type_id,
+> +				   NULL, &size, var_state, NULL);
+> +	if (ret == EFI_SUCCESS && expected_size == size)
+> +		image_info->version = var_state[active_index].fw_version;
+> +
+> +	free(var_state);
+>  }
+>
+>  /**
+> @@ -362,8 +379,11 @@ efi_status_t efi_firmware_set_fmp_state_var(struct fmp_state *state, u8 image_in
+>  {
+>  	u16 varname[13]; /* u"FmpStateXXXX" */
+>  	efi_status_t ret;
+> +	uint num_banks = 1;
+> +	uint update_bank = 0;
+> +	efi_uintn_t size;
+>  	efi_guid_t *image_type_id;
+> -	struct fmp_state var_state = { 0 };
+> +	struct fmp_state *var_state;
+>
+>  	image_type_id = efi_firmware_get_image_type_id(image_index);
+>  	if (!image_type_id)
+> @@ -372,19 +392,38 @@ efi_status_t efi_firmware_set_fmp_state_var(struct fmp_state *state, u8 image_in
+>  	efi_create_indexed_name(varname, sizeof(varname), "FmpState",
+>  				image_index);
+>
+> +	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE)) {
+> +		ret = fwu_plat_get_update_index(&update_bank);
+> +		if (ret)
+> +			return EFI_INVALID_PARAMETER;
+> +
+> +		num_banks = CONFIG_FWU_NUM_BANKS;
+> +	}
+> +
+> +	size = num_banks * sizeof(*var_state);
+> +	var_state = calloc(1, size);
+> +	if (!var_state)
+> +		return EFI_OUT_OF_RESOURCES;
+> +
+> +	ret = efi_get_variable_int(varname, image_type_id, NULL, &size,
+> +				   var_state, NULL);
+> +
+>  	/*
+>  	 * Only the fw_version is set here.
+>  	 * lowest_supported_version in FmpState variable is ignored since
+>  	 * it can be tampered if the file based EFI variable storage is used.
+>  	 */
+> -	var_state.fw_version = state->fw_version;
+> +	var_state[update_bank].fw_version = state->fw_version;
+>
+> +	size = num_banks * sizeof(*var_state);
+>  	ret = efi_set_variable_int(varname, image_type_id,
+>  				   EFI_VARIABLE_READ_ONLY |
+>  				   EFI_VARIABLE_NON_VOLATILE |
+>  				   EFI_VARIABLE_BOOTSERVICE_ACCESS |
+>  				   EFI_VARIABLE_RUNTIME_ACCESS,
+> -				   sizeof(var_state), &var_state, false);
+> +				   size, var_state, false);
+> +
+> +	free(var_state);
+>
+>  	return ret;
+>  }
+> --
+> 2.34.1
+>
