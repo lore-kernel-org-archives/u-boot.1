@@ -4,72 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA4D6C46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 10:54:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D284FC46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 10:56:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECC5E8771E;
-	Wed, 27 Dec 2023 11:54:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 231938771E;
+	Wed, 27 Dec 2023 11:56:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jUtDIPn/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oTMew9Sf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 557DF87732; Wed, 27 Dec 2023 11:54:05 +0100 (CET)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
+ id CDE05878A1; Wed, 27 Dec 2023 11:56:12 +0100 (CET)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 175E387718
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 11:54:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B166587718
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 11:56:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2ccae380df2so32319121fa.1
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 02:54:03 -0800 (PST)
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-50e68e93be1so3767959e87.0
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 02:56:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703674442; x=1704279242; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703674569; x=1704279369; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8CdOZglGKScjgVf27d2es8cf5MXko/ZfzneGjlPlQgg=;
- b=jUtDIPn/Nzur1qS4daqdviUByH0F99l/DiESH0Ck6KwXaAj2Qr41cE4MhBLIQu2WE7
- nJhJJElQnEys/Uj+ik+k03lrme40/PmrZ7lIujRj35/pNKIk4bXm9ba31jd+6d+/ZHvH
- DQ6vfDsfDU/psTrjxIjTVkxkoVnST2HeXF+sEzUoA9cb5vcbriz7As8eVKErarquoN8r
- dIlfe3JTsxl6eVV6wJNe7RsLEpi0Y/FBj7kMNOhRXzM6lckHUK2nO8BCsfoC4uOLICxf
- MOlWXCPPNMUsYMN0jlVIM7+hF1ZT5VSfC5a1Uvdx362LCvErYTzTVNiHzbbhs4lwT5Za
- Rfeg==
+ bh=YFYPXDzO8ltiok1XMdAhx2apXLVutiMaH8ZaQUJcMqc=;
+ b=oTMew9Sfn7ZNSZ+94qMzXgBhW2Vr6R0HwWvWe3wuXsGCtzdunl7nvytmuTcbWePeEo
+ W0VUBScWFU5kWO7BF3GfohYm8/R72eCSKR83Ps5Eqx7Y8GY9f8YYn/WYytAeBn6x9hg1
+ mU71pdZUNdXuYLqIqT2tmjd99ywQ9MbjDtrghVm2LvfG6OwJsIQdaPChVosR65h9pCGt
+ q3qk8CLbaxXZC2vIPhhRbGzYkOJpGdUX63GvCECq4YzVi0RwX3Hl14ilcjkNJa4I7/kS
+ rsh3kbSR1QkPOD2bNr4LJ1sPGsMGeY0oFoafYRyuG0d1XS5IFohhAvnsxZxNR+8dxT3+
+ OU4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703674442; x=1704279242;
+ d=1e100.net; s=20230601; t=1703674569; x=1704279369;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=8CdOZglGKScjgVf27d2es8cf5MXko/ZfzneGjlPlQgg=;
- b=bBUZPujChiU8iB+2frqik//U6cnTXUVHwquJaC+jF/w24zsOoDVv+iSehCSuQaVuza
- Lj7e3+adz+sdzuk3D9CVImI7FUvjM18zM9f/7DmytkhoTL3rMU1gpUAtFYLKMC+Q+uEf
- Ah2KmHhBqMHRasxQ5xzJxLHC9raowBpKhHKK4WlCA0GQBOqgivwjDagKJxhaLAnJKMfB
- 1z+dyVc/vtO1CXLezvokAFqkzinXqVYcU5sAyVzgVjsLQoI82/mKwb72NwP3yYwlXy1U
- a+FtS3+kC4Ci+A23AUFAUJhlImTCSwd8A/GoLRSkUeeVTgSM3tNKZgYf/1UjEeULxHTP
- 1Omw==
-X-Gm-Message-State: AOJu0Yx3sZsaaYz+MxV6HcGu84PIg+HcWR6h/7AjGHN7qa+HWxLtSKl8
- ZYCcl2pcbiFo1NB7Ms3IsrS4YpyJ6ydbqPsv3eqR77KMi4NaeA==
-X-Google-Smtp-Source: AGHT+IEv0vTh/2GHTNoEnquEQdv3ZynQO2dUf67hX0/nECZSkJ1XzHf4ZGLAUVCLU7hOOSpN+ZpCvCjpL9256zBat0Q=
-X-Received: by 2002:ac2:4ac3:0:b0:50e:44c9:b83e with SMTP id
- m3-20020ac24ac3000000b0050e44c9b83emr2862144lfp.103.1703674440226; Wed, 27
- Dec 2023 02:54:00 -0800 (PST)
+ bh=YFYPXDzO8ltiok1XMdAhx2apXLVutiMaH8ZaQUJcMqc=;
+ b=kijhPan/ofRLvqFVCiOXS+amTUFZsK4TGib9J3TlxP1os/+UrbYjkt+q+VV3/bHm1Q
+ yF8+Zs2WkbzK2+UJ2jKBDGYYtHBIaKyW3PE2X4A42KviJViC1YIf5BDK5Eq5F/XTYjGv
+ QL/aPue0bGGiKe4jYA4KzxpN8CxKNOXntrjpyBBN+6AwvzRQjBLyfUPQNiM7qE198HVG
+ 0WpWBWpanWKxn3lNGS4O3ODhBuMdc2SCsgdt0xhnKa4My2z2PUNZpg/H14LE8ZAWTi8W
+ w1IJrBl+4jIgI19y4Qlo+gZDd9RrgCfrXQI5wkRws8EYQTihESVVLgDVSoTr8Pjoi1w9
+ lNbQ==
+X-Gm-Message-State: AOJu0Yyk/v2+lE0pW8Af7J42m9r3SqEaRmMuW7alHBRWl5pYPR5IS+X+
+ yPzNse/TAa/AErYMkbpzKzZRdgAunSArUchB9Q+jTJdkN1PDRg==
+X-Google-Smtp-Source: AGHT+IEIlqk2pt5EbGAoIFuXzTkMFIgKlwp6VsM8bKurVP4XtFQhysZHuJcjZu7axkKOQb31aW8YNjeqmKa+sBQfK3w=
+X-Received: by 2002:a05:6512:159a:b0:50e:7c0e:57d0 with SMTP id
+ bp26-20020a056512159a00b0050e7c0e57d0mr1554590lfb.7.1703674569652; Wed, 27
+ Dec 2023 02:56:09 -0800 (PST)
 MIME-Version: 1.0
-References: <20231015024511.3995580-1-sjg@chromium.org>
- <20231015024511.3995580-7-sjg@chromium.org>
- <ceeb1fd4-a469-4bde-b6e2-a49447b2020b@gmx.de>
-In-Reply-To: <ceeb1fd4-a469-4bde-b6e2-a49447b2020b@gmx.de>
+References: <20231223010334.248291-1-xypron.glpk@gmx.de>
+ <20231223010334.248291-2-xypron.glpk@gmx.de>
+In-Reply-To: <20231223010334.248291-2-xypron.glpk@gmx.de>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 27 Dec 2023 12:53:24 +0200
-Message-ID: <CAC_iWjJHUjce2ObV3bh3c2h0RYwnRfCE2ZfQAR17SHD0R34oPA@mail.gmail.com>
-Subject: Re: [PATCH v2 6/6] smbios: Require the caller to align the SMBIOS
- table
+Date: Wed, 27 Dec 2023 12:55:33 +0200
+Message-ID: <CAC_iWjLLUy0MCgYasnSGz9fb84z57Vv-agkw1yqpOUxT3BM8Nw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] smbios: SMBIOS 3.0 (64-bit) Entry Point structure
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ u-boot@lists.denx.de, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,60 +89,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 26 Dec 2023 at 14:46, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Sat, 23 Dec 2023 at 03:09, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> On 10/15/23 04:45, Simon Glass wrote:
-> > All callers handle this alignment, so drop the unnecessary code. This
-> > simplifies things a little.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 >
-> Reviewed: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Add definition of the SMBIOS 3.0 (64-bit) Entry Point structure.
 >
-> > ---
-> >
-> > (no changes since v1)
-> >
-> >   include/smbios.h | 5 +----
-> >   lib/smbios.c     | 2 --
-> >   2 files changed, 1 insertion(+), 6 deletions(-)
-> >
-> > diff --git a/include/smbios.h b/include/smbios.h
-> > index ddabb558299e..31d997287588 100644
-> > --- a/include/smbios.h
-> > +++ b/include/smbios.h
-> > @@ -248,12 +248,9 @@ static inline void fill_smbios_header(void *table, int type,
-> >    *
-> >    * This writes SMBIOS table at a given address.
-> >    *
-> > - * @addr:    start address to write SMBIOS table. If this is not
-> > - *           16-byte-aligned then it will be aligned before the table is
-> > - *           written.
-> > + * @addr:    start address to write SMBIOS table (must be 16-byte-aligned)
-> >    * Return:  end address of SMBIOS table (and start address for next entry)
-> >    *          or NULL in case of an error
-> > - *
-> >    */
-> >   ulong write_smbios_table(ulong addr);
-> >
-> > diff --git a/lib/smbios.c b/lib/smbios.c
-> > index 92e98388084f..5c9f108496d6 100644
-> > --- a/lib/smbios.c
-> > +++ b/lib/smbios.c
-> > @@ -483,8 +483,6 @@ ulong write_smbios_table(ulong addr)
-> >               ctx.dev = NULL;
-> >       }
-> >
-> > -     /* 16 byte align the table address */
-> > -     addr = ALIGN(addr, 16);
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> v2:
+>         no change
+> ---
+>  include/smbios.h | 26 ++++++++++++++++++++++++++
+>  1 file changed, 26 insertions(+)
+>
+> diff --git a/include/smbios.h b/include/smbios.h
+> index c9df2706f5..e601283d29 100644
+> --- a/include/smbios.h
+> +++ b/include/smbios.h
+> @@ -54,6 +54,32 @@ struct __packed smbios_entry {
+>         u8 bcd_rev;
+>  };
+>
+> +/**
+> + * struct smbios3_entry - SMBIOS 3.0 (64-bit) Entry Point structure
+> + */
+> +struct __packed smbios3_entry {
+> +       /** @anchor: anchor string */
+> +       u8 anchor[5];
+> +       /** @checksum: checksum of the entry point structure */
+> +       u8 checksum;
+> +       /** @length: length of the entry point structure */
+> +       u8 length;
+> +       /** @major_ver: major version of the SMBIOS specification */
+> +       u8 major_ver;
+> +       /** @minor_ver: minor version of the SMBIOS specification */
+> +       u8 minor_ver;
+> +       /** @docrev: revision of the SMBIOS specification */
+> +       u8 doc_rev;
+> +       /** @entry_point_rev: revision of the entry point structure */
+> +       u8 entry_point_rev;
+> +       /** @reserved: reserved */
+> +       u8 reserved;
+> +       /** maximum size of SMBIOS table */
+> +       u32 max_struct_size;
+> +       /** @struct_table_address: 64-bit physical starting address */
+> +       u64 struct_table_address;
+> +};
+> +
+>  /* BIOS characteristics */
+>  #define BIOS_CHARACTERISTICS_PCI_SUPPORTED     (1 << 7)
+>  #define BIOS_CHARACTERISTICS_UPGRADEABLE       (1 << 11)
+> --
+> 2.43.0
+>
 
-I don't think this is fine. Failing to do so would break the SMBIOS
-tables. It's fine to require this but in that case, we should have add
-a check for the 16b alignment
-
-Thanks
-/Ilias
-> >       start_addr = addr;
-> >
-> >       /*
->
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
