@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94D03C46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 14:50:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CF15C46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 14:58:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA9A3877E2;
-	Wed, 27 Dec 2023 15:50:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 62824877E2;
+	Wed, 27 Dec 2023 15:58:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="umpMJhTe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BMK6OAVr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24CA287823; Wed, 27 Dec 2023 15:50:51 +0100 (CET)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
+ id 98D9087823; Wed, 27 Dec 2023 15:58:45 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E35B58772A
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 15:50:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A866A877B1
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 15:58:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-28c467446f0so1575608a91.0
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 06:50:48 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-50e7dff3e9fso1930265e87.2
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 06:58:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703688647; x=1704293447; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703689123; x=1704293923; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Bi034tRwkoMBsbSBuRfBIquIPgmKB8QJ29utHfoOtGU=;
- b=umpMJhTe4d21mptD1xC6WbN5RQkvDJrrx7IgTpUTApX3eg1p4G8ZM/1Vx+QtaDBM1C
- Q4BzIJauAeysptsekBTVhuy8QEBrsqU8uDizrvTV3zR122fdTWmNQur4w8Nz0hEQErzC
- pf85J/F0qfC7cV/jeqYiu1Hpbhr7wp/Q0wx9ms/C/cfxw63WCwIs29zV0cqC2iPH+968
- 1tXUuVnWlNC2jAhkIyT+jpn63T7Wni2oBTsWMAci4PndheOl0KrNH0p2wSv1VAGWTx+U
- bffgG79r3sk2Fcj5iAUUba0UB3+a8aOjQhJN1tZcnWQIwkt1GWdGO9JXByd0/2LSpMOh
- e0fw==
+ bh=Ye9hxg/I539tPxsI8zfEVRYLWRTnYba5TjLGVHjh/bQ=;
+ b=BMK6OAVr3sHLyfEMBMM5YH5PsCQcCQHuhp3ON/KsaBMkScYNNWcHdyEzHFbsmDEKIm
+ oqKiGobFQuMHXv7VPexZfoZ6cWCASZCnwQxodG2TLHzcmJ/MB/CmvgRFW6ch5UQ4hEMM
+ 1kz4Vzv/S1vYA38xd+zorlt2NCu3ZJMF4TR8IkSKFyaXpL7v0X+0S4wh+TOCYGDCLWTe
+ dVEA0TV14IKeSILmVtIwPj//jMNNRrbwZaYcEXntqXNNulmLdvo9z8u057Lqls/akef+
+ VdLhDP/p9mYvpLDrLC6iL6aH82ChlmsseUvKSlMUQvk8sD5fwltP7Es4t+0anTX72/rq
+ afQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703688647; x=1704293447;
+ d=1e100.net; s=20230601; t=1703689123; x=1704293923;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Bi034tRwkoMBsbSBuRfBIquIPgmKB8QJ29utHfoOtGU=;
- b=ofyH6g6YrBhUJhaIaE109kV1SG/9thz3NbhqCkkY2bMX64MPqJvmSR4d1EOXGaJokB
- CpH4pzon1AVIo40ZyZzgIkVc4xllSpTf/xL1HGnCcFWfM2lxulUIFtTmuK+1IpL0ufXP
- EyUWQemVORLpV6IbWBPB5R2RwM+rI+f+wiScxS2PqeTvV6Bkgy++X7IS+wdp2y0GGj9U
- 8Xdyt7+2q5ThL9FMM9WJHn1tBTsamrHekApjQJFPIstj1P59h7H9+N+WcHWZG+vLwiGk
- zbWCqXZw8o1vvda+r1cdvKKIMkyPUbZyM8WaQ11s+R9ifexeIQJjDhTLzlYcFPwUpssC
- U81Q==
-X-Gm-Message-State: AOJu0Yy77hsZd4gYTuaLOvYqMjhFUulb7Ww962MiUakmpVVYaRTeRgjR
- uYTU5t1cXyDBqxIGxFHMPFtHwzlfHRHbQtkuENw8px0x93EWcQ==
-X-Google-Smtp-Source: AGHT+IGSA8rlBweI0w0D9tBA7+zgfNgW5QgoB8h7qh6xmIcaS/zhC2toqhJLWclhEbFv4OUuyQh+M58sFodvGOW0xQ4=
-X-Received: by 2002:a17:90a:9b11:b0:28c:9851:10dc with SMTP id
- f17-20020a17090a9b1100b0028c985110dcmr470264pjp.49.1703688647089; Wed, 27 Dec
- 2023 06:50:47 -0800 (PST)
+ bh=Ye9hxg/I539tPxsI8zfEVRYLWRTnYba5TjLGVHjh/bQ=;
+ b=oXdtT8kjmI6bWL1MLyPOJ1Ra187h+K/LPMRPKBxQdpmYECTc5/1L7DBL7bXMhuJqKY
+ fSdI1WpCf6OwxVh19nTBHJluEMHBpgPKg67gj/JZDxtI2ZGH47bBMU/BBlS5ZsyTDojz
+ 3cYliiEAA6dKLE0wXKnK0cqlRcsfSkzluAM1F00IC6o5yM58dULWz/GMU82i3TzqSMxB
+ eHeOT3GoL97PLAVc6NS/xKJb2XzL7yGs3fIj7xGg/W+pQ5XGEIAM5FSYbnrxVqCIP/A9
+ eSyOsY6UHxjVrk8jPcTy3RflYBFw4xydYXp1oS3gYp/4oJPCkkEMb5RCJVl/QT5MZbg0
+ n1Rw==
+X-Gm-Message-State: AOJu0YwfijpiePH7Bu7xNwa2p1rAZxbojbBSyM/9k/nbWBHQMnJ8oCWR
+ 2/l7ELlQV9/7bKDLmP3Ks30Lj7M4lVjEctjGInQ1H4jKBviekQ==
+X-Google-Smtp-Source: AGHT+IEIPgLqV1H4uJHgypDtgtDDImNN0W4T2RO1ZKfKJ0iShK93uxzHNNavpLnsi9bJD4wcM8SJbYd1t2oUr01rtEQ=
+X-Received: by 2002:ac2:5f67:0:b0:50e:4ec6:ed15 with SMTP id
+ c7-20020ac25f67000000b0050e4ec6ed15mr3326313lfc.107.1703689122886; Wed, 27
+ Dec 2023 06:58:42 -0800 (PST)
 MIME-Version: 1.0
 References: <20231218181901.337515-1-raymond.mao@linaro.org>
  <20231218181901.337515-12-raymond.mao@linaro.org> <ZYv5wc_D1VgRcQKw@hera>
-In-Reply-To: <ZYv5wc_D1VgRcQKw@hera>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Wed, 27 Dec 2023 09:50:36 -0500
-Message-ID: <CAEfUkU+4ePLot_81gx7JH4Fcs=qPxa-jCSEDrEXswwbHA+uyQQ@mail.gmail.com>
+ <CAEfUkU+4ePLot_81gx7JH4Fcs=qPxa-jCSEDrEXswwbHA+uyQQ@mail.gmail.com>
+In-Reply-To: <CAEfUkU+4ePLot_81gx7JH4Fcs=qPxa-jCSEDrEXswwbHA+uyQQ@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 27 Dec 2023 16:58:06 +0200
+Message-ID: <CAC_iWj+fU6kVZd2Eq6y+mw65Y3mRvq3GUkE=0Ci5WvJMvqUC+w@mail.gmail.com>
 Subject: Re: [PATCH v3 11/14] bloblist: Adjust the bloblist header
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
  Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,48 +87,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+On Wed, 27 Dec 2023 at 16:50, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Hi Ilias,
+>
+> On Wed, 27 Dec 2023 at 05:17, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
+>>
+>>
+>> [...]
+>>
+>> > - * @chksum: checksum for the entire bloblist allocated area. Since any of the
+>> > - *   blobs can be altered after being created, this checksum is only valid
+>> > - *   when the bloblist is finalised before jumping to the next stage of boot.
+>> > - *   This is the value needed to make all checksummed bytes sum to 0
+>> >   */
+>> >  struct bloblist_hdr {
+>> >       u32 magic;
+>> > -     u32 version;
+>> > -     u32 hdr_size;
+>> > -     u32 flags;
+>> > -
+>> > -     u32 size;
+>> > +     u8 chksum;
+>> > +     u8 version;
+>> > +     u8 hdr_size;
+>> > +     u8 align_log2;
+>> >       u32 alloced;
+>> > +     u32 size;
+>> > +     u32 flags;
+>> >       u32 spare;
+>> > -     u32 chksum;
+>> >  };
+>> >
+>>
+>> Aren't fields still missing from the current version?
+>> e.g max_size and reserved?
+>>
+> They are all in. Please see:
+> [PATCH v3 14/14] bloblist: Align bloblist used_size and total_size to spec
 
-On Wed, 27 Dec 2023 at 05:17, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-wrote:
+Ok. But why aren't we squashing this to #14 then?
 
+Thanks
+/Ilias
 >
 > [...]
 >
-> > - * @chksum: checksum for the entire bloblist allocated area. Since any
-> of the
-> > - *   blobs can be altered after being created, this checksum is only
-> valid
-> > - *   when the bloblist is finalised before jumping to the next stage of
-> boot.
-> > - *   This is the value needed to make all checksummed bytes sum to 0
-> >   */
-> >  struct bloblist_hdr {
-> >       u32 magic;
-> > -     u32 version;
-> > -     u32 hdr_size;
-> > -     u32 flags;
-> > -
-> > -     u32 size;
-> > +     u8 chksum;
-> > +     u8 version;
-> > +     u8 hdr_size;
-> > +     u8 align_log2;
-> >       u32 alloced;
-> > +     u32 size;
-> > +     u32 flags;
-> >       u32 spare;
-> > -     u32 chksum;
-> >  };
-> >
->
-> Aren't fields still missing from the current version?
-> e.g max_size and reserved?
->
-> They are all in. Please see:
-[PATCH v3 14/14] bloblist: Align bloblist used_size and total_size to spec
-
-[...]
-
-Regards,
-Raymond
+> Regards,
+> Raymond
