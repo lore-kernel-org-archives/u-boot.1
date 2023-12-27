@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87D5FC46CD4
-	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 07:41:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B292CC46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 27 Dec 2023 07:41:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7CF487872;
-	Wed, 27 Dec 2023 08:40:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 54634877CD;
+	Wed, 27 Dec 2023 08:40:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q0wzukqv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m15BI/sk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6965876D7; Wed, 27 Dec 2023 08:40:48 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 1FE6B87872; Wed, 27 Dec 2023 08:40:50 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0BCD876D7
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 08:40:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7670F877CD
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 08:40:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-40b5155e154so66748405e9.3
- for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 23:40:46 -0800 (PST)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-336746c7b6dso4519968f8f.0
+ for <u-boot@lists.denx.de>; Tue, 26 Dec 2023 23:40:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703662846; x=1704267646; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703662847; x=1704267647; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=k3bxu7VxhipZnEHjH2fk93Miso0D04ID4sOKOLBpxas=;
- b=Q0wzukqv0rxBVfFDfqJroRJWoLj/fUk3GoIeDjbPSF2U1NqvpNXr6FLJxbhhcb1BXJ
- 75jS587AzeVHCg8ViJ2ZU86gkDtHPW80UhXQ0utNTymbKSgown4Clv2nYpVdotBlre8S
- PNiYxP8MxP9faYKPDSx594vB4I6fe9KtlddJo=
+ bh=ZQwHQofarpB7Eqh9D/wuXyXaOOzYC9hIzq+xrFD4nMU=;
+ b=m15BI/skjV0SaxypwU0Jk6sB2riCLk2bIBcluZXvEodnLpBpIFr2f7MAI2sqRLx1aO
+ aUUb/BPDgelq/AoGEKtjuajWWTDFI2s+jQvKxeNT/VjrdqJMB/pK6oDlAq+sJWO+lIrA
+ VR4ijtYpQSTjsufrklFMkD4iVNQEmzzLoJaxk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703662846; x=1704267646;
+ d=1e100.net; s=20230601; t=1703662847; x=1704267647;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=k3bxu7VxhipZnEHjH2fk93Miso0D04ID4sOKOLBpxas=;
- b=G0OTgGJIOnoC51c8XNh/eIGtL7o0okaQCZQdic9p4nXpIhT6+0qqMeURJ8DcoZ9opm
- JmQDa/hFferpsTlnpt9VLhfg+BOB1iMm5lUt0uoH8oWTupw6ZaR0j5CxGw1ElpgWM1va
- 0zG6Aqi4hwQRt4NP+D32/z+fj7u8IWd2I9dKDu+rAumnV/tcnk2F0q6EYmcVjiKem5gI
- 7ITSCeqdT+FVHI4egb6ZKA7d3rOlDJNufqpX6WJx8OCkBs5ItwRWlsIxzLe7ps7JR3Iw
- BrNZ9v9QawM2g8/QEoCETutsmEtVrQqNHV+r08Pl2XcK8zUZxtuL66ecm1DhhIh+Kr3Z
- fE2A==
-X-Gm-Message-State: AOJu0Yz8DCk2NJVhi9+9pI2iU9ASrZ+Mm7MQujdf76QpFHrv92dD9lVM
- 0DFjqBDrtER5f7lomIygnz4ahXUSG5+shQtLxwv5v06tsuyo
-X-Google-Smtp-Source: AGHT+IEQ6Oet9st15QRi15TT5XIo6a/PqJdpr9EwOjpgLSQ3K3fbLi3wjBmIwM99B6d1BQjkn+troQ==
-X-Received: by 2002:a05:600c:3509:b0:40d:5a73:3682 with SMTP id
- h9-20020a05600c350900b0040d5a733682mr893684wmq.89.1703662846019; 
+ bh=ZQwHQofarpB7Eqh9D/wuXyXaOOzYC9hIzq+xrFD4nMU=;
+ b=f/Q7m+FBfJbFeyo6Z2XoTrGQ6Vc47L+ItAbv2yn05A11J1QavOUMrUM7sNTYKoCqAq
+ QVNRpoEf2/wG4Lg/5SGU8yg17oE0g/1KmbRv3JGdHQ4yvxUjGHrLdmeJ1+x2jEuOe+aN
+ WIe20gwivh6raJhkuRWl09a5L3kIaB/UM05OKaI2qpgCVJxEpLcknBPF2vH2kEqBtoDn
+ Ki7Y6cwxF4BoOllhRmsjlltEjufeSyI7wCL9m60phMcFFMkj56sWe09n5kdZttXdAAFG
+ kh1Ta6Vx3nFEsqpMj+SLrhxqgT/8wnQnMVv8iHb3BDVOid5MxWkwv64n4Hg3JhFvkrZt
+ iv2g==
+X-Gm-Message-State: AOJu0YyyuWvJ62S2gw5OSkXX+V4lbNnC4iG2kdkE0yie9axdrrJv7XJP
+ kO3jYAThfr1g74QNpUaVNE8dEAKvN8HQX86AJcwin4djbl4A
+X-Google-Smtp-Source: AGHT+IGno/sgYvW3bwV+8UGylMxAmOHhSNFF4qKjvAJ/w5rrO9jKdvUf49QaqoQcuKW07hK9N6bMAw==
+X-Received: by 2002:a05:600c:4d26:b0:40c:50d5:f7ac with SMTP id
+ u38-20020a05600c4d2600b0040c50d5f7acmr4307592wmp.60.1703662846899; 
  Tue, 26 Dec 2023 23:40:46 -0800 (PST)
 Received: from tasman.chapterst.org (80-42-48-87.dynamic.dsl.as9105.com.
  [80.42.48.87]) by smtp.gmail.com with ESMTPSA id
- s23-20020adf9797000000b00336813bb588sm14314426wrb.111.2023.12.26.23.40.45
+ s23-20020adf9797000000b00336813bb588sm14314426wrb.111.2023.12.26.23.40.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Dec 2023 23:40:45 -0800 (PST)
+ Tue, 26 Dec 2023 23:40:46 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Peter Robinson <pbrobinson@gmail.com>
-Subject: [PATCH v4 1/7] smbios: Refactor 32-bit code into an else statement
-Date: Wed, 27 Dec 2023 07:40:18 +0000
-Message-Id: <20231227074025.2178825-2-sjg@chromium.org>
+Subject: [PATCH v4 2/7] smbios: Move the rest of the SMBIOS2 code
+Date: Wed, 27 Dec 2023 07:40:19 +0000
+Message-Id: <20231227074025.2178825-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231227074025.2178825-1-sjg@chromium.org>
 References: <20231227074025.2178825-1-sjg@chromium.org>
@@ -89,8 +89,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In preparation for adding support for SMBIOS3 move this code into an
-else statement. There is no functional change.
+Move all of this logic into the else clause, since it will not be used
+for SMBIOS3
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -98,66 +98,59 @@ Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
 (no changes since v1)
 
- lib/smbios.c | 38 +++++++++++++++++++++-----------------
- 1 file changed, 21 insertions(+), 17 deletions(-)
+ lib/smbios.c | 15 +++++++--------
+ 1 file changed, 7 insertions(+), 8 deletions(-)
 
 diff --git a/lib/smbios.c b/lib/smbios.c
-index 45480b01af4..b417f8a9057 100644
+index b417f8a9057..eea72670bd9 100644
 --- a/lib/smbios.c
 +++ b/lib/smbios.c
-@@ -589,14 +589,6 @@ ulong write_smbios_table(ulong addr)
- 		len += tmp;
- 	}
+@@ -544,9 +544,8 @@ static struct smbios_write_method smbios_write_funcs[] = {
+ ulong write_smbios_table(ulong addr)
+ {
+ 	ofnode parent_node = ofnode_null();
+-	struct smbios_entry *se;
++	ulong table_addr, start_addr;
+ 	struct smbios_ctx ctx;
+-	ulong table_addr;
+ 	ulong tables;
+ 	int len = 0;
+ 	int max_struct_size = 0;
+@@ -566,9 +565,7 @@ ulong write_smbios_table(ulong addr)
  
--	memcpy(se->anchor, "_SM_", 4);
--	se->length = sizeof(struct smbios_entry);
--	se->major_ver = SMBIOS_MAJOR_VER;
--	se->minor_ver = SMBIOS_MINOR_VER;
--	se->max_struct_size = max_struct_size;
--	memcpy(se->intermediate_anchor, "_DMI_", 5);
--	se->struct_table_length = len;
+ 	/* 16 byte align the table address */
+ 	addr = ALIGN(addr, 16);
 -
- 	/*
- 	 * We must use a pointer here so things work correctly on sandbox. The
- 	 * user of this table is not aware of the mapping of addresses to
-@@ -612,16 +604,28 @@ ulong write_smbios_table(ulong addr)
+-	se = map_sysmem(addr, sizeof(struct smbios_entry));
+-	memset(se, 0, sizeof(struct smbios_entry));
++	start_addr = addr;
+ 
+ 	addr += sizeof(struct smbios_entry);
+ 	addr = ALIGN(addr, 16);
+@@ -603,8 +600,11 @@ ulong write_smbios_table(ulong addr)
+ 		printf("WARNING: SMBIOS table_address overflow %llx\n",
  		       (unsigned long long)table_addr);
  		addr = 0;
- 		goto out;
-+	} else {
-+		memcpy(se->anchor, "_SM_", 4);
-+		se->length = sizeof(struct smbios_entry);
-+		se->major_ver = SMBIOS_MAJOR_VER;
-+		se->minor_ver = SMBIOS_MINOR_VER;
-+		se->max_struct_size = max_struct_size;
-+		memcpy(se->intermediate_anchor, "_DMI_", 5);
-+		se->struct_table_length = len;
+-		goto out;
+ 	} else {
++		struct smbios_entry *se;
 +
-+		se->struct_table_address = table_addr;
-+
-+		se->struct_count = handle;
-+
-+		/* calculate checksums */
-+		istart = (char *)se + SMBIOS_INTERMEDIATE_OFFSET;
-+		isize = sizeof(struct smbios_entry) -
-+			SMBIOS_INTERMEDIATE_OFFSET;
-+		se->intermediate_checksum = table_compute_checksum(istart,
-+								   isize);
-+		se->checksum = table_compute_checksum(se,
-+					      sizeof(struct smbios_entry));
++		se = map_sysmem(start_addr, sizeof(struct smbios_entry));
++		memset(se, '\0', sizeof(struct smbios_entry));
+ 		memcpy(se->anchor, "_SM_", 4);
+ 		se->length = sizeof(struct smbios_entry);
+ 		se->major_ver = SMBIOS_MAJOR_VER;
+@@ -625,9 +625,8 @@ ulong write_smbios_table(ulong addr)
+ 								   isize);
+ 		se->checksum = table_compute_checksum(se,
+ 					      sizeof(struct smbios_entry));
++		unmap_sysmem(se);
  	}
--	se->struct_table_address = table_addr;
--
--	se->struct_count = handle;
--
--	/* calculate checksums */
--	istart = (char *)se + SMBIOS_INTERMEDIATE_OFFSET;
--	isize = sizeof(struct smbios_entry) - SMBIOS_INTERMEDIATE_OFFSET;
--	se->intermediate_checksum = table_compute_checksum(istart, isize);
--	se->checksum = table_compute_checksum(se, sizeof(struct smbios_entry));
- out:
- 	unmap_sysmem(se);
+-out:
+-	unmap_sysmem(se);
  
+ 	return addr;
+ }
 -- 
 2.34.1
 
