@@ -4,70 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DE7CC3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:38:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 479D2C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:38:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F379087A06;
-	Thu, 28 Dec 2023 14:37:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7CE8687A3D;
+	Thu, 28 Dec 2023 14:37:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ODD6Yv3I";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mi0x/owC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDB0887A34; Thu, 28 Dec 2023 14:37:29 +0100 (CET)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id CB29787A01; Thu, 28 Dec 2023 14:37:30 +0100 (CET)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4970087A01
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:37:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 47F0087A3E
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:37:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1d4414ec9c7so10235785ad.0
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:37:27 -0800 (PST)
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-35fea35c432so39701405ab.0
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:37:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703770645; x=1704375445; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703770643; x=1704375443; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HxVyGGFOZecFbHRa4Msw9FEQemnMAJDZ0rCN66Sncbg=;
- b=ODD6Yv3IeQrwnlcV+Sh3FfkVgXrfzzhyqz3DlZUC/vCLIjVTEHQW4R0ATfr8TpxCV7
- 3kiCdUq9lrSRNKXFtMzVyfCXos5IY2Q81gKlTHRNM9GoBFGlUBJquzb2YQ/g+OjqK4Np
- wlDPapCbTmvasVrheB6GC8hHxyDV9oHb8f+XA=
+ bh=naYq6txQt+TXBe6iYe9hRukySgIcUe32LFBMW26ugKo=;
+ b=mi0x/owClCle+0FyhdXTWfxW2y+fp+fD7U+8LLdUcrT7IiAzJJoPmIZRon7G52uH1H
+ 0FG1lpgsBSmQ2ANTIH6s8b99/f8SlISkuA1C1zqeCKV4UpObMG0l63HI7REPAkmqIgoE
+ wBt5XspgDodYsBFP4C1bLkuhqRGlmgk7KLH0k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703770645; x=1704375445;
+ d=1e100.net; s=20230601; t=1703770643; x=1704375443;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HxVyGGFOZecFbHRa4Msw9FEQemnMAJDZ0rCN66Sncbg=;
- b=YwBB6mSxye36NW+nyJTuT5cfVB8MStNohbD3YjLN5cXmahLdsNRbTR33kcFwCxyuV4
- gSsLa4AGiQIdUUj3WSlJkhxTlUtV+zEwpSTK8y6rzFwrYIggDRhzR4EEp4Fo1TCfcINw
- TtEx1b+zK9W2Jld6uGukhpMYCkE0SjIpgzQVZRi81v1e0DwE/Znj2WL9zGBnOhyPxy/E
- tEMcDM6Q92ibM4yF3R9zHNB6Js6d3FI0CKmU0SAeJzFMS/g1QcPm7nNY71fC0lBdiSdk
- FcV7LJwFMF3UKaE9Bv7E54g52r9jmIcLukOSkYiOwzxTNfYF7vxOF24LIbJblOx2C2Ri
- mqeA==
-X-Gm-Message-State: AOJu0YzaoDctmBF38OcHaS25er6Mot2Kms7BXcpV/mlfRskF+igBgJsN
- ysnBOX9ff4EcjTLEj02cPmv4JZ9urwpjoguE9rKJ8RAq0gZp
-X-Google-Smtp-Source: AGHT+IEvyxnVVkYf/GP80lY9Zum0VUX0+m5aFHvWralZOPS7dnad4rNHW9FCPgR8duNI2FQt6qxeGz/ijqugSUN/NXQ=
-X-Received: by 2002:a17:90a:5802:b0:28c:2623:c31a with SMTP id
- h2-20020a17090a580200b0028c2623c31amr2539204pji.94.1703770645642; Thu, 28 Dec
- 2023 05:37:25 -0800 (PST)
+ bh=naYq6txQt+TXBe6iYe9hRukySgIcUe32LFBMW26ugKo=;
+ b=fyt7PVudumVz2/vJkMcI+svjyhiikqKqF1XarMegUfb82MVWQXJswB8gC6pG7qgytU
+ BZN5TmBqLVnP85Sedor64VTuV5lXwEXwAlfakcbAtYLTXJNQ2cTtjfLlLI8+jvqBb+A0
+ LuESyWrxLAlU7ZW6GaJ7NOepXYEv3LMV4CVzGViQYja/PusjI1ROK1FdCa23wt6vQ69U
+ Yq5bGiWjNGkJvb9qoJl+R92+8bfsH6tMLSaVQoh7RCoKYGavQ8pasbSMlc9V73+K07kF
+ YHBCchKFk3DfJbKWrl8I4jYxuu1cToURQJ6bqRwFwHSMK7VURbPIcoRxpB3fK4YH95LJ
+ TX9w==
+X-Gm-Message-State: AOJu0Yzd+H3b1tmo71aO7Sab9tNWYUCuNrjN9RBiManNfhAD/B8wc86E
+ RMxCWEmnjw/KENdy6idXZ2nq/N8Rk2TvVJGJlwS+6cL5Afz3
+X-Google-Smtp-Source: AGHT+IHMX+lmDMPX7B/CjwaJCv86iPyZJd3KPoNVBY59Npy80BmlTaWdVrMxfG6YFxvkjSbWVTJjoOOs0gh7B6uEr6U=
+X-Received: by 2002:a92:c54d:0:b0:35f:ed80:9ce3 with SMTP id
+ a13-20020a92c54d000000b0035fed809ce3mr13548329ilj.50.1703770642981; Thu, 28
+ Dec 2023 05:37:22 -0800 (PST)
 MIME-Version: 1.0
-References: <20231227210712.712937-1-raymond.mao@linaro.org>
- <20231227210712.712937-9-raymond.mao@linaro.org>
- <CAC_iWjJ2GAOU93x1gHPYKXyiU0j6Tp0yHqeCtsctY3mOdz+9VA@mail.gmail.com>
-In-Reply-To: <CAC_iWjJ2GAOU93x1gHPYKXyiU0j6Tp0yHqeCtsctY3mOdz+9VA@mail.gmail.com>
+References: <20231228115804.3626579-1-sumit.garg@linaro.org>
+ <20231228115804.3626579-3-sumit.garg@linaro.org>
+In-Reply-To: <20231228115804.3626579-3-sumit.garg@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 28 Dec 2023 13:37:12 +0000
-Message-ID: <CAFLszTiWbdziP2NLGuFoGaJO4reU4MF+k7kLecDYL6KsS5ZaQQ@mail.gmail.com>
-Subject: Re: [PATCH v4 08/12] bloblist: Handle alignment with a void entry
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
- jwerner@chromium.org, 
- Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>
+Date: Thu, 28 Dec 2023 13:37:10 +0000
+Message-ID: <CAFLszTioYajRMo7DBhaVA_zJsB11bbsJQTSJFWaZDF+M76DO5Q@mail.gmail.com>
+Subject: Re: [PATCH v3 2/8] Makefile: Add support for DT bindings schema checks
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
+ u-boot-custodians@lists.denx.de, trini@konsulko.com, robh+dt@kernel.org, 
+ krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
+ ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
+ xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
+ rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
+ rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -86,109 +91,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
-
-On Thu, Dec 28, 2023 at 11:32=E2=80=AFAM Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Thu, Dec 28, 2023 at 11:58=E2=80=AFAM Sumit Garg <sumit.garg@linaro.org>=
+ wrote:
 >
-> Hi Raymond,
+> This adds the build infrastructure for checking DT binding schema
+> documents and validating dtb files using the binding schema. Here we use
+> devicetree-rebasing directory to provide the DT bindings.
 >
-> On Wed, 27 Dec 2023 at 23:08, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > From: Simon Glass <sjg@chromium.org>
-> >
-> > Rather than setting the alignment using the header size, add an entirel=
-y
-> > new entry to cover the gap left by the alignment.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >  common/bloblist.c | 23 +++++++++++++++++++----
-> >  1 file changed, 19 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/common/bloblist.c b/common/bloblist.c
-> > index 705d9c6ae9..73dbbc01c0 100644
-> > --- a/common/bloblist.c
-> > +++ b/common/bloblist.c
-> > @@ -142,7 +142,7 @@ static int bloblist_addrec(uint tag, int size, int =
-align_log2,
-> >  {
-> >         struct bloblist_hdr *hdr =3D gd->bloblist;
-> >         struct bloblist_rec *rec;
-> > -       int data_start, new_alloced;
-> > +       int data_start, aligned_start, new_alloced;
-> >
-> >         if (!align_log2)
-> >                 align_log2 =3D BLOBLIST_ALIGN_LOG2;
-> > @@ -151,10 +151,25 @@ static int bloblist_addrec(uint tag, int size, in=
-t align_log2,
-> >         data_start =3D map_to_sysmem(hdr) + hdr->alloced + sizeof(*rec)=
-;
-> >
-> >         /* Align the address and then calculate the offset from ->alloc=
-ed */
-> > -       data_start =3D ALIGN(data_start, 1U << align_log2) - map_to_sys=
-mem(hdr);
-> > +       aligned_start =3D ALIGN(data_start, 1U << align_log2) - data_st=
-art;
-> > +
-> > +       /* If we need to create a dummy record, create it */
-> > +       if (aligned_start) {
-> > +               int void_size =3D aligned_start - sizeof(*rec);
-> > +               struct bloblist_rec *vrec;
-> > +               int ret;
-> > +
-> > +               ret =3D bloblist_addrec(BLOBLISTT_VOID, void_size, 0, &=
-vrec);
+> Dependency:
+> -----------
 >
-> I just noticed the 'BLOBLISTT'. Is that on purpose? or a typo?
-
-It means 'bloblist tag'
-
+> The DT schema project must be installed in order to validate the DT schem=
+a
+> binding documents and validate DTS files using the DT schema. The DT sche=
+ma
+> project can be installed with pip::
 >
-> > +               if (ret)
-> > +                       return log_msg_ret("void", ret);
-> > +
-> > +               /* start the record after that */
-> > +               data_start =3D map_to_sysmem(hdr) + hdr->alloced + size=
-of(*vrec);
-> > +       }
-> >
-> >         /* Calculate the new allocated total */
-> > -       new_alloced =3D data_start + ALIGN(size, 1U << align_log2);
-> > +       new_alloced =3D data_start - map_to_sysmem(hdr) +
-> > +               ALIGN(size, 1U << align_log2);
+>     pip3 install dtschema
 >
-> So, wouldn't it make more sense to add the dummy record and align the
-> whole thing *after* we've added the entry?
-> Doing it like this might leave the last entry on an unaligned boundary, n=
-o?
-
-I will let Raymond respond as I'm not sure what this means.
-
+> Note that 'dtschema' installation requires 'swig' and Python development
+> files installed first. On Debian/Ubuntu systems::
 >
-> Thanks
-> /Ilias
-> >
-> >         if (new_alloced > hdr->size) {
-> >                 log_err("Failed to allocate %x bytes size=3D%x, need si=
-ze=3D%x\n",
-> > @@ -164,7 +179,7 @@ static int bloblist_addrec(uint tag, int size, int =
-align_log2,
-> >         rec =3D (void *)hdr + hdr->alloced;
-> >
-> >         rec->tag =3D tag;
-> > -       rec->hdr_size =3D data_start - hdr->alloced;
-> > +       rec->hdr_size =3D sizeof(struct bloblist_rec);
-> >         rec->size =3D size;
-> >
-> >         /* Zero the record data */
-> > --
-> > 2.25.1
-> >
+>     apt install swig python3-dev
+>
+> Testing:
+> --------
+>
+> Build dts files and check using DT binding schema:
+> $ make dtbs_check
+>
+> Optionally, DT_SCHEMA_FILES can be passed in with a schema file(s) to
+> use for validation. This makes it easier to find and fix errors
+> generated by a specific schema.
+>
+> Note, at this point dtbs_check is an optional build target as there are
+> many warnings generated due to custom DT properties used by many
+> platforms in u-boot. It is expected with these checks that compliance
+> with DT bindings to take place. Once that's done it can be added to CI
+> builds to remain compliant with DT bindings.
+>
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> ---
+>
+> Changes in v3:
+> --------------
+> - None
+>
+> Changes in v2:
+> --------------
+> - None
+>
+>  Makefile             | 20 ++++++++++++++++++--
+>  scripts/Makefile.lib | 17 +++++++++++++++--
+>  2 files changed, 33 insertions(+), 4 deletions(-)
 
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Tested-by: Simon Glass <sjg@chromium.org>
