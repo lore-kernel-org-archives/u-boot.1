@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9834CC3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 18:03:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 628DBC3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 18:03:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2618287A4B;
+	by phobos.denx.de (Postfix) with ESMTP id 8C61787B28;
 	Thu, 28 Dec 2023 19:02:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WuJxDc6J";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="naSTqkVE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E26087B40; Thu, 28 Dec 2023 19:02:24 +0100 (CET)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
+ id 5A61D879D8; Thu, 28 Dec 2023 19:02:25 +0100 (CET)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBC2E87B3F
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 19:02:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 62FDA87A75
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 19:02:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-50e7b9cca2fso3255834e87.3
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 10:02:21 -0800 (PST)
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-50e835800adso2345451e87.0
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 10:02:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703786541; x=1704391341; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1703786543; x=1704391343; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jhRsT3QaeHTYMTDPAyb6t52Hz6N4o/Q4q1p457fk69c=;
- b=WuJxDc6JhmpicPm2czpQENLBMBhfBytoou7VGdRqRve6zEI8YsI3BJZzKthDDM1xJW
- 6xgNsKxQYCXEGv6MMXZPmp+nTYkLviotNA6LAqkk0BlAqv9aFntLiVtByc4wiQ80V5m3
- ZUf3ccb0hiMt0QkRMw8S0GT7rdIrdgPAA3LSunjKHYfHJsubcsxBxrim6mNAPZceaA2d
- vOgYKiY7jQcSSvmcjtgkula5ZVCwzHDAQLl2RmmBm/6aTYDeul97VlQ5+A+NT5UGhHEG
- Bu9CLZbFML/fwL7mVr9ocPtw8BJAmiarnls3XFy+ak4CKwKyg0ZB6pRLzc6Gpw/lGzcX
- kK9Q==
+ bh=5nEO2kmexBaXs5lLihPLZiWHXXxGh6G9CrMdnSCsgTg=;
+ b=naSTqkVE1TanYX2+6ez/D38qUNC84un9bhoRgXL0uZp6sHy/huuQvc+dIfV4wN0FFm
+ yrVRh17wvYfFZ9J/FEAhv5NF5yVdea0QSkk27arrmKFkl+6o3Zp7dLqGA9AQh+4D/vsO
+ 7GEWjz/wBjoWZNPMzFln3k66LvJMwSxvyiMXebWn+PNnevu6eZlDkE51jbvwT80Tkn9c
+ Wc78T7BOSGc+6cehXxYfoU3Mq/AiljLkKnOsmQtjIwdfYdn6o4dOnn3J5n8uKmJFjAqF
+ 0UX2B87+cfC9u48jaCFgdsiiNlxs+FSwi3fLqK7GXQjZ7xCAUhJ5kJG8CbkKF5foQQul
+ LHsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703786541; x=1704391341;
+ d=1e100.net; s=20230601; t=1703786543; x=1704391343;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jhRsT3QaeHTYMTDPAyb6t52Hz6N4o/Q4q1p457fk69c=;
- b=EZrLs9zefG/QKJSsJnq/MNaf59zMy/LvChEZq2WdMExQYeWLUeba63LABM6A6FmQ6t
- PsQ3Rbe5qWEK1SKTnu+6hwo5ImRlP0UFLohq58po+TD0ZWDZACQNat+vYUEZnBBP0BAk
- UgqdiGw2ef+bSWuIWxdU0IWQIBfyl7dt6JpzsXqNgYsCwOrJMbO2bqop5SGyW+oH51Eg
- OnAERQV2CkuxUIOUviG0xtYlEIlsyOC9WbN9D0GfudQVBcx5F+Pj7Si9AG8rT/KcX75J
- dIsEq1zTDs5Z+jd7KwEf0A6nKgi4WhW59Nus1eOXiZ4m3zIS2inrK9Aa7Ok7EJk2hXl2
- UhZQ==
-X-Gm-Message-State: AOJu0YxjS+FnoVK3If0KHsxD8FvQYOA6Aw7ZkgPSZYX5fRd7Avt8HThY
- 9A8/pHLDl7ckox2jb7vR0e0=
-X-Google-Smtp-Source: AGHT+IEim89/3x65E9uSIfxfmDZ5VFiHF6JUaE17TnjTX4hnwxRjCkSjzXNhM39yfk2bCjcVA+NKVg==
-X-Received: by 2002:a05:6512:e98:b0:50e:7b20:3df3 with SMTP id
- bi24-20020a0565120e9800b0050e7b203df3mr2916894lfb.76.1703786541007; 
- Thu, 28 Dec 2023 10:02:21 -0800 (PST)
+ bh=5nEO2kmexBaXs5lLihPLZiWHXXxGh6G9CrMdnSCsgTg=;
+ b=bK0x1aRZXAXUic6t8QWwSeF2B3xOlfHi34u0FOhe+7VHaxmN+FKFTJhCU9GrHF4UMS
+ 5jRihDUkYu9uHddbOnLLJDVLeYy8gJ6UI6YB/ErAWYlNwRVbiTS3oh3HuMI6yxvJoH7e
+ CBNUXtd6/rumYb/E0E6RPOG7eNZD2fMW4XiiJrA566ZAVB+VQ7ENh94ixdbBRMn4iYiO
+ YJNeeNlod2nESqObbHYTR9VFkepRnhIC/etJk3roaTMYbhigVhsf4S7igw/TdkdjVzUh
+ J0x+OedTzFSmLXRENM2MezZFKRXy0ju/KZxXS3iQebNEy4PKgf3pAJAEolYHoxJm9jP+
+ xrAQ==
+X-Gm-Message-State: AOJu0YxjSpMF9UJeV8g+/FsbfRV1EkwBILLAqnjOAb0e2f/6OBQ2rgBO
+ uu/1pjnjRO8lvOQ3FNtzj3g=
+X-Google-Smtp-Source: AGHT+IFmbUaoI10T0/+zp8VCujsHoJdR3uLdhvFDJ288WHmkwAX3oWuOfsypWN7T0AZCFkYw3U8xeg==
+X-Received: by 2002:ac2:4e4c:0:b0:50d:f824:959a with SMTP id
+ f12-20020ac24e4c000000b0050df824959amr2556726lfr.206.1703786542400; 
+ Thu, 28 Dec 2023 10:02:22 -0800 (PST)
 Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
- s4-20020a056512314400b0050e6b04a5b2sm1955101lfi.251.2023.12.28.10.02.19
+ s4-20020a056512314400b0050e6b04a5b2sm1955101lfi.251.2023.12.28.10.02.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Dec 2023 10:02:20 -0800 (PST)
+ Thu, 28 Dec 2023 10:02:22 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
  Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
@@ -75,10 +75,9 @@ To: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v6 5/6] lib: membuff: fix readline not returning line in case
- of overflow
-Date: Thu, 28 Dec 2023 20:01:53 +0200
-Message-Id: <20231228180154.50473-6-clamor95@gmail.com>
+Subject: [PATCH v6 6/6] fastboot: add oem console command support
+Date: Thu, 28 Dec 2023 20:01:54 +0200
+Message-Id: <20231228180154.50473-7-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231228180154.50473-1-clamor95@gmail.com>
 References: <20231228180154.50473-1-clamor95@gmail.com>
@@ -102,86 +101,128 @@ X-Virus-Status: Clean
 
 From: Ion Agorria <ion@agorria.com>
 
-If line overflows readline it will not be returned, fix this behavior,
-make it optional and documented properly.
+"oem console" serves to read console record buffer.
 
 Signed-off-by: Ion Agorria <ion@agorria.com>
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- boot/bootmeth_extlinux.c | 2 +-
- common/console.c         | 2 +-
- include/membuff.h        | 5 +++--
- lib/membuff.c            | 4 ++--
- 4 files changed, 7 insertions(+), 6 deletions(-)
+ doc/android/fastboot.rst      |  1 +
+ drivers/fastboot/Kconfig      |  7 +++++++
+ drivers/fastboot/fb_command.c | 39 +++++++++++++++++++++++++++++++++++
+ include/fastboot.h            |  1 +
+ 4 files changed, 48 insertions(+)
 
-diff --git a/boot/bootmeth_extlinux.c b/boot/bootmeth_extlinux.c
-index aa2a4591eb..ae0ad1d53e 100644
---- a/boot/bootmeth_extlinux.c
-+++ b/boot/bootmeth_extlinux.c
-@@ -82,7 +82,7 @@ static int extlinux_fill_info(struct bootflow *bflow)
- 	log_debug("parsing bflow file size %x\n", bflow->size);
- 	membuff_init(&mb, bflow->buf, bflow->size);
- 	membuff_putraw(&mb, bflow->size, true, &data);
--	while (len = membuff_readline(&mb, line, sizeof(line) - 1, ' '), len) {
-+	while (len = membuff_readline(&mb, line, sizeof(line) - 1, ' ', true), len) {
- 		char *tok, *p = line;
+diff --git a/doc/android/fastboot.rst b/doc/android/fastboot.rst
+index 1ad8a897c8..05d8f77759 100644
+--- a/doc/android/fastboot.rst
++++ b/doc/android/fastboot.rst
+@@ -29,6 +29,7 @@ The following OEM commands are supported (if enabled):
+   with <arg> = boot_ack boot_partition
+ - ``oem bootbus``  - this executes ``mmc bootbus %x %s`` to configure eMMC
+ - ``oem run`` - this executes an arbitrary U-Boot command
++- ``oem console`` - this dumps U-Boot console record buffer
  
- 		tok = strsep(&p, " ");
-diff --git a/common/console.c b/common/console.c
-index e6d7ebe935..cad65891fc 100644
---- a/common/console.c
-+++ b/common/console.c
-@@ -848,7 +848,7 @@ int console_record_readline(char *str, int maxlen)
- 		return -ENOSPC;
+ Support for both eMMC and NAND devices is included.
  
- 	return membuff_readline((struct membuff *)&gd->console_out, str,
--				maxlen, '\0');
-+				maxlen, '\0', false);
+diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
+index 11fc0fe1c8..5e5855a76c 100644
+--- a/drivers/fastboot/Kconfig
++++ b/drivers/fastboot/Kconfig
+@@ -242,6 +242,13 @@ config FASTBOOT_OEM_RUN
+ 	  this feature if you are using verified boot, as it will allow an
+ 	  attacker to bypass any restrictions you have in place.
+ 
++config FASTBOOT_CMD_OEM_CONSOLE
++	bool "Enable the 'oem console' command"
++	depends on CONSOLE_RECORD
++	help
++	  Add support for the "oem console" command to input and read console
++	  record buffer.
++
+ endif # FASTBOOT
+ 
+ endmenu
+diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
+index 6f621df074..f95f4e4ae1 100644
+--- a/drivers/fastboot/fb_command.c
++++ b/drivers/fastboot/fb_command.c
+@@ -41,6 +41,7 @@ static void reboot_recovery(char *, char *);
+ static void oem_format(char *, char *);
+ static void oem_partconf(char *, char *);
+ static void oem_bootbus(char *, char *);
++static void oem_console(char *, char *);
+ static void run_ucmd(char *, char *);
+ static void run_acmd(char *, char *);
+ 
+@@ -108,6 +109,10 @@ static const struct {
+ 		.command = "oem run",
+ 		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_OEM_RUN, (run_ucmd), (NULL))
+ 	},
++	[FASTBOOT_COMMAND_OEM_CONSOLE] = {
++		.command = "oem console",
++		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_CONSOLE, (oem_console), (NULL))
++	},
+ 	[FASTBOOT_COMMAND_UCMD] = {
+ 		.command = "UCmd",
+ 		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_UUU_SUPPORT, (run_ucmd), (NULL))
+@@ -159,6 +164,23 @@ void fastboot_multiresponse(int cmd, char *response)
+ 	case FASTBOOT_COMMAND_GETVAR:
+ 		fastboot_getvar_all(response);
+ 		break;
++	case FASTBOOT_COMMAND_OEM_CONSOLE:
++		if (CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_CONSOLE)) {
++			char buf[FASTBOOT_RESPONSE_LEN] = { 0 };
++
++			if (console_record_isempty()) {
++				console_record_reset();
++				fastboot_okay(NULL, response);
++			} else {
++				int ret = console_record_readline(buf, sizeof(buf) - 5);
++
++				if (ret < 0)
++					fastboot_fail("Error reading console", response);
++				else
++					fastboot_response("INFO", response, "%s", buf);
++			}
++			break;
++		}
+ 	default:
+ 		fastboot_fail("Unknown multiresponse command", response);
+ 		break;
+@@ -503,3 +525,20 @@ static void __maybe_unused oem_bootbus(char *cmd_parameter, char *response)
+ 	else
+ 		fastboot_okay(NULL, response);
  }
- 
- int console_record_avail(void)
-diff --git a/include/membuff.h b/include/membuff.h
-index 21051b0c54..4eba626ce1 100644
---- a/include/membuff.h
-+++ b/include/membuff.h
-@@ -192,10 +192,11 @@ int membuff_free(struct membuff *mb);
-  * @mb: membuff to adjust
-  * @str: Place to put the line
-  * @maxlen: Maximum line length (excluding terminator)
-+ * @must_fit: If true then str is empty if line doesn't fit
-  * Return: number of bytes read (including terminator) if a line has been
-- *	   read, 0 if nothing was there
-+ *	   read, 0 if nothing was there or line didn't fit when must_fit is set
-  */
--int membuff_readline(struct membuff *mb, char *str, int maxlen, int minch);
-+int membuff_readline(struct membuff *mb, char *str, int maxlen, int minch, bool must_fit);
- 
- /**
-  * membuff_extend_by() - expand a membuff
-diff --git a/lib/membuff.c b/lib/membuff.c
-index 3c6c0ae125..b242a38ff1 100644
---- a/lib/membuff.c
-+++ b/lib/membuff.c
-@@ -287,7 +287,7 @@ int membuff_free(struct membuff *mb)
- 			(mb->end - mb->start) - 1 - membuff_avail(mb);
- }
- 
--int membuff_readline(struct membuff *mb, char *str, int maxlen, int minch)
-+int membuff_readline(struct membuff *mb, char *str, int maxlen, int minch, bool must_fit)
- {
- 	int len;  /* number of bytes read (!= string length) */
- 	char *s, *end;
-@@ -309,7 +309,7 @@ int membuff_readline(struct membuff *mb, char *str, int maxlen, int minch)
- 	}
- 
- 	/* couldn't get the whole string */
--	if (!ok) {
-+	if (!ok && must_fit) {
- 		if (maxlen)
- 			*orig = '\0';
- 		return 0;
++
++/**
++ * oem_console() - Execute the OEM console command
++ *
++ * @cmd_parameter: Pointer to command parameter
++ * @response: Pointer to fastboot response buffer
++ */
++static void __maybe_unused oem_console(char *cmd_parameter, char *response)
++{
++	if (cmd_parameter)
++		console_in_puts(cmd_parameter);
++
++	if (console_record_isempty())
++		fastboot_fail("Empty console", response);
++	else
++		fastboot_response(FASTBOOT_MULTIRESPONSE_START, response, NULL);
++}
+diff --git a/include/fastboot.h b/include/fastboot.h
+index 59cbea61ec..1e7920eb91 100644
+--- a/include/fastboot.h
++++ b/include/fastboot.h
+@@ -47,6 +47,7 @@ enum {
+ 	FASTBOOT_COMMAND_OEM_PARTCONF,
+ 	FASTBOOT_COMMAND_OEM_BOOTBUS,
+ 	FASTBOOT_COMMAND_OEM_RUN,
++	FASTBOOT_COMMAND_OEM_CONSOLE,
+ 	FASTBOOT_COMMAND_ACMD,
+ 	FASTBOOT_COMMAND_UCMD,
+ 	FASTBOOT_COMMAND_COUNT
 -- 
 2.40.1
 
