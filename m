@@ -4,80 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54E39C3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 19:49:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A7BCC3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 19:49:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99E2487B01;
-	Thu, 28 Dec 2023 20:48:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3F79887B47;
+	Thu, 28 Dec 2023 20:48:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Yx4TcqWc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lFhKfKiN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 867B3879E9; Thu, 28 Dec 2023 20:48:29 +0100 (CET)
-Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
- [IPv6:2607:f8b0:4864:20::82f])
+ id 2BD1A87B04; Thu, 28 Dec 2023 20:48:32 +0100 (CET)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0353887B49
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 20:48:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C37D687B43
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 20:48:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x82f.google.com with SMTP id
- d75a77b69052e-427e69f70afso15143291cf.0
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 11:48:24 -0800 (PST)
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-67f9f6ca479so43902646d6.3
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 11:48:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703792904; x=1704397704; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703792905; x=1704397705; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8nm3vgKsckklqjNzAO8oqsgXSj1huNJyVodZNruQUPA=;
- b=Yx4TcqWcyjhhBdsfDWYRuRisc5dZqAHMBWCr+jyLzvKRJnR1Z5EHa7cxGcJoTT6cQT
- 8OSuCLDNr7+BEqpvwud9v8Tr2t4Kngzjsts/IzuGQTqyy72Tf7cTQCXfzgxkMpXSqZfa
- TolHzSTeu3CAmYCip6eUDVhyczX8h6akhmJas=
+ bh=hVChoTkg0GPEdNb+PHTofz6a5+nvQfjIGWl/JAj4EhY=;
+ b=lFhKfKiNmKUFiQTqLwfc4WvG9ou4SV5ItMe65dHl6hVN88TbzTV/l4GcicZxKHvQFo
+ lKfFScIj0iQqq18rzZgVNEr04l4bZADlgimqQbM0TxoXW7b90FOFhyLuOmCGaWp+kDrJ
+ 9VROvLdDxfhA+EMXLXbLhbyK5Wikcc1ZyJLlM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703792904; x=1704397704;
+ d=1e100.net; s=20230601; t=1703792905; x=1704397705;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8nm3vgKsckklqjNzAO8oqsgXSj1huNJyVodZNruQUPA=;
- b=Z5CGbzY+LRsgapiXhVmFf27G5eR15wwxM7h/X4iZ8zdq6Zicm5ScV8goHri9hkadLk
- ZcOL3vSuz4ppe9LkZ/AXSctXN6enE48rmb+Uni9iLKJTXaE0Mi8xm1ilfaAO/0AALTib
- V+0kO4pi7zoByHBnmsc+yzyjV69h7JvBh/gSz4oIybSMUWRveVcWYz/o4crkX9nQirh2
- Ha33p3iiBbKMAQzzBjR9ZSuUHsBX3DPXwtCk0xt0ekC+/AYpee3EVwIMeGMMgA0SvisU
- ZyWMU8kAJeLNgoSiUHSVKVudlUe1ksS1ra9XuW81fILSuSJ+sgTgJjTv5qZUjlfCHTwR
- tPwg==
-X-Gm-Message-State: AOJu0Yxmn4hUj2MpXbPZDnIuiu7ScV7u0NcDmjfzBmIxQEbYgKyAtJ5q
- NIJMCcvFf7l/0x83v8pb8FguXjDDuaVRA6R22q+CdspeFHdE
-X-Google-Smtp-Source: AGHT+IFzWnbwyeVFfCQT35A1ZnwpYai9+l/Sy8oBOJnnbahIUDxN2eMlg5Jhm3dHZjgJ1O/MZtBseQdx8NaE1zMk7+I=
-X-Received: by 2002:a05:6214:caf:b0:67f:40eb:bfa7 with SMTP id
- s15-20020a0562140caf00b0067f40ebbfa7mr17380942qvs.48.1703792903810; Thu, 28
- Dec 2023 11:48:23 -0800 (PST)
+ bh=hVChoTkg0GPEdNb+PHTofz6a5+nvQfjIGWl/JAj4EhY=;
+ b=Eyf9srS/yIuMaA3ly7n5OuWDzzQMLLgrEWNS3nHjibbreDBiv0jhUmAjRlPoUCJlZP
+ fc9ylBK0uK1T7NZFZ9Sp14eNyGG1xb9kLs/FEIqA0xln8XZuIi+688o6rgvMN/6ousvZ
+ WxR3FJDCqLhY38AOQeNZQtRS5wNMngOf7yUtJRCDczNdKICs5dwf1jxL6k/0dkbQJ63a
+ G/vn6wyCrsQ7VtOq0r8sz3H/X2v7SktMD27ipacPf8G8ZPkn8VgzySDnmZh2uQQzLbyr
+ qarRlTMGjRk0MDmqqrYyRqM7e/2Xy0fhq5uR4UfuwOKtJos4/Sre13tAtefnsubfMKXg
+ S9QQ==
+X-Gm-Message-State: AOJu0YxOiD1Ur/B7LjzhP7Nf+YXQrYcOws2K+KUstvvbZbfD/8HW1zHn
+ 0L9Z6sHdEmkroFXI/Z3/KiQBHEd7CIbEydheQwe9SqbsRSXE
+X-Google-Smtp-Source: AGHT+IFEkAUlYENcJHfu0ub7cYDLmpvikfcDjVrQo1ZUcbUJspWSSt2nuNP69tQzTmErzLAWWMnW2pExkmShMzc6XpA=
+X-Received: by 2002:a05:6214:ac9:b0:67f:70f1:e3f with SMTP id
+ g9-20020a0562140ac900b0067f70f10e3fmr16614791qvi.96.1703792904962; Thu, 28
+ Dec 2023 11:48:24 -0800 (PST)
 MIME-Version: 1.0
-References: <20231228115804.3626579-1-sumit.garg@linaro.org>
- <20231228115804.3626579-8-sumit.garg@linaro.org>
- <CAFLszTg=CDfyTGG9c-t=98eFYvYy61L1kzmrssNKPSS6dZL3cg@mail.gmail.com>
- <20231228135642.GA2652760@bill-the-cat>
- <CAFLszThP+GJcPP_LJBva1M5mi9Wj-Nh-z7A6-fkSpPgOTtLmRQ@mail.gmail.com>
- <20231228152504.GF2652760@bill-the-cat>
-In-Reply-To: <20231228152504.GF2652760@bill-the-cat>
+References: <CA+1FSihxOraiDgHXcq=0oiJpSaGnJt+2fvvNGK7JKCkaPCv3jQ@mail.gmail.com>
+ <CAJaLiFxnbuxa6Svmf7BN86u2wgRJZJQR+cBGWrdyAXpPQSyKNg@mail.gmail.com>
+ <CA+1FSihKXuqLMTbZzSdKXwMKAnO0nKu1ne92UXS_m9A1f8jqYA@mail.gmail.com>
+ <CA+1FSigNkAcc=8PZQkOaD12HvS+y+TfP=urykBXUy8Ye2fUZtQ@mail.gmail.com>
+In-Reply-To: <CA+1FSigNkAcc=8PZQkOaD12HvS+y+TfP=urykBXUy8Ye2fUZtQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 28 Dec 2023 19:48:13 +0000
-Message-ID: <CAFLszTh24c1L4xfab7EmgSYJt6HhwfK+0h6quEMNt9QxW01DqA@mail.gmail.com>
-Subject: Re: [PATCH v3 7/8] dts: meson-gxbb: Switch to using upstream DT
-To: Tom Rini <trini@konsulko.com>
-Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
- u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, robh+dt@kernel.org, 
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
- rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com
+Date: Thu, 28 Dec 2023 19:48:14 +0000
+Message-ID: <CAFLszThG7egV+=vq2qm7Qu4UzDfgHGCQB=LFRSbnW9HH4pDF3A@mail.gmail.com>
+Subject: Re: I'm looking for the source code of a specific u-boot version.
+To: Mario Marietto <marietto2008@gmail.com>
+Cc: Tony Dinh <mibodhi@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -96,121 +86,221 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Mario,
 
-On Thu, Dec 28, 2023 at 3:25=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
+On Thu, Dec 28, 2023 at 3:48=E2=80=AFPM Mario Marietto <marietto2008@gmail.=
+com> wrote:
 >
-> On Thu, Dec 28, 2023 at 03:09:41PM +0000, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Thu, Dec 28, 2023 at 1:56=E2=80=AFPM Tom Rini <trini@konsulko.com> w=
-rote:
-> > >
-> > > On Thu, Dec 28, 2023 at 01:37:11PM +0000, Simon Glass wrote:
-> > > > Hi Sumit,
-> > > >
-> > > > On Thu, Dec 28, 2023 at 11:59=E2=80=AFAM Sumit Garg <sumit.garg@lin=
-aro.org> wrote:
-> > > > >
-> > > > > Although there were still some variations in board DTS files base=
-d on
-> > > > > meson-gxbb SoC but I think those were minor differences from upst=
-ream
-> > > > > and shouldn't impact boot on these devices.
-> > > > >
-> > > > > So switch to upstream DT via mirroring amlogic/ directory from
-> > > > > devicetree-rebasing/src/arm64/amlogic/ directory. And thereby dir=
-ectly
-> > > > > building DTB from there including *-u-boot.dtsi files from
-> > > > > arch/$(ARCH)/dts/ directory.
-> > > > >
-> > > > > Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> > > > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > > > > ---
-> > > > >
-> > > > > Changes in v3:
-> > > > > --------------
-> > > > > - Dropped Makefile portion and enabled OF_UPSTREAM for SoC instea=
-d.
-> > > > >
-> > > > > Changes in v2:
-> > > > > --------------
-> > > > > - Picked up review tag
-> > > > >
-> > > > >  arch/arm/mach-meson/Kconfig           | 1 +
-> > > > >  configs/nanopi-k2_defconfig           | 2 +-
-> > > > >  configs/odroid-c2_defconfig           | 2 +-
-> > > > >  configs/p200_defconfig                | 2 +-
-> > > > >  configs/p201_defconfig                | 2 +-
-> > > > >  configs/videostrong-kii-pro_defconfig | 2 +-
-> > > > >  configs/wetek-hub_defconfig           | 2 +-
-> > > > >  configs/wetek-play2_defconfig         | 2 +-
-> > > > >  dts/arch/arm64/amlogic                | 1 +
-> > > > >  9 files changed, 9 insertions(+), 7 deletions(-)
-> > > > >  create mode 120000 dts/arch/arm64/amlogic
-> > > > >
-> > > >
-> > > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > > >
-> > > > > diff --git a/arch/arm/mach-meson/Kconfig b/arch/arm/mach-meson/Kc=
-onfig
-> > > > > index d6c89058061..8ddb59161a0 100644
-> > > > > --- a/arch/arm/mach-meson/Kconfig
-> > > > > +++ b/arch/arm/mach-meson/Kconfig
-> > > > > @@ -25,6 +25,7 @@ choice
-> > > > >  config MESON_GXBB
-> > > > >         bool "GXBB"
-> > > > >         select MESON_GX
-> > > > > +       imply OF_UPSTREAM
-> > > > >         help
-> > > > >           Select this if your SoC is an S905
-> > > > >
-> > > > > diff --git a/configs/nanopi-k2_defconfig b/configs/nanopi-k2_defc=
-onfig
-> > > > > index 41dbf7981f8..2e1c756bf7a 100644
-> > > > > --- a/configs/nanopi-k2_defconfig
-> > > > > +++ b/configs/nanopi-k2_defconfig
-> > > > > @@ -6,7 +6,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
-> > > > >  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x20000000
-> > > > >  CONFIG_ENV_SIZE=3D0x2000
-> > > > >  CONFIG_DM_GPIO=3Dy
-> > > > > -CONFIG_DEFAULT_DEVICE_TREE=3D"meson-gxbb-nanopi-k2"
-> > > > > +CONFIG_DEFAULT_DEVICE_TREE=3D"amlogic/meson-gxbb-nanopi-k2"
-> > > > >  CONFIG_OF_LIBFDT_OVERLAY=3Dy
-> > > > >  CONFIG_DM_RESET=3Dy
-> > > > >  CONFIG_DEBUG_UART_BASE=3D0xc81004c0
-> > > >
-> > > > So now I am wondering if we can (later) have the SoC be implied whe=
-n
-> > > > using OF_UPSTREAM so we can do:
-> > > >
-> > > > CONFIG_DEFAULT_DEVICE_TREE=3D"meson-gxbb-nanopi-k2"
-> > > >
-> > > > and it will add the 'amlogic/' automatically?
-> > > >
-> > > > Perhaps that might be a way to bridge the gap in terms of file layo=
-ut?
-> > >
-> > > That's going to start to look real ugly real quick I suspect and I'm =
-not
-> > > sure what it really gets us? It seems to me that the convention of
-> > > "vendor/board" has already been well enough adapted outside of the
-> > > kernel, with the odd sticking point being getting everyone used to
-> > > whatever will be happening for 32bit boards long term. So I think hid=
-ing
-> > > the vendor part of the string here will be more, not less, confusing
-> > > long term.
-> >
-> > Now that I dig in a bit, I see that the devicetree-rebasing tree does
-> > not have any Makefiles in it. How does Linux build with it? Does
-> > anyone have instructions?
+> I tried to compile it,but If failed :
 >
-> Linux doesn't build with it, it's the relevant parts of the kernel tree
-> extracted for other projects to more easily use (more or less).
+> /mnt/zroot2/zroot2/OS/Chromebook/freebsd-xen/domU-freebsd/bootloaders/u-b=
+oot-2017.05#
+> ARCH=3Darm CROSS_COMPILE=3Darm-linux-gnueabihf- make snow_defconfig
+>
+>   HOSTCC  scripts/basic/fixdep
+>   HOSTCC  scripts/kconfig/conf.o
+>   HOSTCC  scripts/kconfig/zconf.tab.o
+> In file included from scripts/kconfig/zconf.tab.c:2470:
+> In function =E2=80=98dep_stack_insert=E2=80=99,
+>     inlined from =E2=80=98sym_check_print_recursive=E2=80=99 at scripts/k=
+config/symbol.c:1123:3,
+>     inlined from =E2=80=98sym_check_deps=E2=80=99 at scripts/kconfig/symb=
+ol.c:1300:3:
+> scripts/kconfig/symbol.c:1099:19: warning: storing the address of
+> local variable =E2=80=98cv_stack=E2=80=99 in =E2=80=98check_top=E2=80=99 =
+[-Wdangling-pointer=3D]
+>  1099 |         check_top =3D stack;
+>       |         ~~~~~~~~~~^~~~~~~
+> scripts/kconfig/symbol.c: In function =E2=80=98sym_check_deps=E2=80=99:
+> scripts/kconfig/symbol.c:1120:26: note: =E2=80=98cv_stack=E2=80=99 declar=
+ed here
+>  1120 |         struct dep_stack cv_stack;
+>       |                          ^~~~~~~~
+> scripts/kconfig/symbol.c:1090:4: note: =E2=80=98check_top=E2=80=99 declar=
+ed here
+>  1090 | } *check_top;
+>       |    ^~~~~~~~~
+>   HOSTLD  scripts/kconfig/conf
+> #
+> # configuration written to .config
+> #
+>
+> /mnt/zroot2/zroot2/OS/Chromebook/freebsd-xen/domU-freebsd/bootloaders/u-b=
+oot-2017.05#
+> ARCH=3Darm CROSS_COMPILE=3Darm-linux-gnueabihf- make
+>
+> scripts/kconfig/conf  --silentoldconfig Kconfig
+>   CHK     include/config.h
+>   CFG     u-boot.cfg
+>   GEN     include/autoconf.mk
+>   GEN     include/autoconf.mk.dep
+>   CFG     spl/u-boot.cfg
+>   GEN     spl/include/autoconf.mk
+>   CHK     include/config/uboot.release
+>   CHK     include/generated/version_autogenerated.h
+>   CHK     include/generated/timestamp_autogenerated.h
+>   UPD     include/generated/timestamp_autogenerated.h
+>   CC      lib/asm-offsets.s
+> arm-linux-gnueabihf-gcc: error: unrecognized -march target: armv5
+> arm-linux-gnueabihf-gcc: note: valid arguments are: armv4 armv4t
+> armv5t armv5te armv5tej armv6 armv6j armv6k armv6z armv6kz armv6zk
+> armv6t2 armv6-m armv6s-m armv7 armv7-a armv7ve armv7-r armv7-m
+> armv7e-m armv8-a armv8.1-a armv8.2-a armv8.3-a armv8.4-a armv8.5-a
+> armv8.6-a armv8-m.base armv8-m.main armv8-r armv8.1-m.main armv9-a
+> iwmmxt iwmmxt2; did you mean =E2=80=98armv4=E2=80=99?
+> arm-linux-gnueabihf-gcc: error: missing argument to =E2=80=98-march=3D=E2=
+=80=99
+> make[1]: *** [Kbuild:44: lib/asm-offsets.s] Error 1
+> make: *** [Makefile:1287: prepare0] Error 2
 
-Hmmm, in that case can we add Makefiles into the U-Boot version of the
-tree, for U-Boot use?
+You might need to compile with an old toolchain, e.g. gcc 4?
 
 Regards,
 Simon
+
+
+>
+> On Thu, Dec 28, 2023 at 3:47=E2=80=AFPM Mario Marietto <marietto2008@gmai=
+l.com> wrote:
+> >
+> > Hello.
+> >
+> > Can someone provide the right link to download u-boot-2017.0.5 , please=
+ ?
+> >
+> > I've found it here,but I'm not sure that it's the correct version :
+> >
+> > https://src.fedoraproject.org/repo/pkgs/uboot-tools/u-boot-2017.05.tar.=
+bz2/sha512/be270f9242a72b05463092a022bbabd54996762de1ff23bf7575124ac02e62f4=
+9572a4e2f6f571a5019047d40027e56e35593b5cc373c4a5a39b100c3377ba93/
+> >
+> > Can you confirm it ? thanks.
+> >
+> > On Thu, Dec 28, 2023 at 1:14=E2=80=AFAM Tony Dinh <mibodhi@gmail.com> w=
+rote:
+> > >
+> > > Hi Mario and Heinrich,
+> > >
+> > > On Wed, Dec 27, 2023 at 12:23=E2=80=AFPM Mario Marietto <marietto2008=
+@gmail.com> wrote:
+> > > >
+> > > > Hello.
+> > > >
+> > > > I'm trying to boot FreeBSD for arm32 bit as DomU on my ARM Chromebo=
+ok
+> > > > SNOW with xen. Basically there are two ways to accomplish this task=
+ :
+> > > >
+> > > >
+> > > > 1) to write a patch that allows the FreeBSD kernel to boot as a zIm=
+age
+> > > > file. This could be accomplished applying this patch to a specific
+> > > > file that's on the source code of FreeBSD :
+> > > >
+> > > >
+> > > > https://xenbits.xen.org/gitweb/?p=3Dp...8;hb=3D0782e25d98cc13914727=
+17035f986c979edef0c9
+> > > >
+> > > >
+> > > >
+> > > > This patch was written by Julien Grall a lot of time ago and now it
+> > > > does not work anymore. This is the reason explain by the xen
+> > > > developers :
+> > > >
+> > > >
+> > > >
+> > > > It appears FreeBSD-CURRENT removed the last step converting the ker=
+nel
+> > > > file to kernel.bin.The patch can be readily rebased, but without
+> > > > kernel.bin that doesn't do too much.
+> > > >
+> > > >
+> > > >
+> > > > So,without a rebase of that patch the first option is not applicabl=
+e.
+> > > > And I'm not able to fix it.
+> > > >
+> > > >
+> > > > 2) booting FreeBSD using U-Boot,as explained to me by a xen develop=
+er :
+> > > >
+> > > >
+> > > > I was trying to explain why and how Julien's patch works so that yo=
+u
+> > > > could be the one to re-do something similar or fix the patch on the
+> > > > FreeBSD kernel that you are working with. I am happy to help review
+> > > > and write patches but I don't work with the FreeBSD kernel so I
+> > > > wouldn't be able to help you quickly. However, I might have a
+> > > > suggestion. Do you know if FreeBSD can be booted by U-Boot ?
+> > > > Because
+> > > > U-Boot definitely boots as Xen on ARM guest firmware/bootloader. Yo=
+u
+> > > > should be able to build U-Boot and use the U-Boot binary as Xen gue=
+st
+> > > > kernel, then U-Boot could load FreeBSD from disk or network and sta=
+rt
+> > > > it. For instance as domU config file:
+> > > >
+> > > > kernel=3D"/home/petalinux/u-boot.bin"
+> > > > disk =3D [ '/home/petalinux/test.img,raw,xvda' ]
+> > > >
+> > > >
+> > > > Actually I'm working on the idea n. 2. Basically I need to find the
+> > > > proper u-boot file that's able to boot the image of FreeBSD that I
+> > > > have installed (13.2 for arm32 bit). Maybe I found it here :
+> > > >
+> > > >
+> > > > http://commondatastorage.googleapis.com/chromeos-localmirror/distfi=
+les/nv_uboot-snow-simplefb.kpart.bz2
+> > > >
+> > > >
+> > > > I found that link inside this tutorial :
+> > > >
+> > > >
+> > > > https://wiki.freebsd.org/arm/Chromebook
+> > > >
+> > > >
+> > > > the version of u-boot that has been embedded in that file is the fo=
+llowing one :
+> > > >
+> > > >
+> > > > # strings nv_uboot-snow-simplefb.kpart | grep U-Boot
+> > > > U-Boot 2011.12-gc1f6280 (May 27 2013 - 15:06:59) for SMDK5250
+> > > >
+> > > >
+> > > > So the question is easy : I need to find the source code of that ol=
+d
+> > > > version of u-boot,because once compiled,it will give me the proper
+> > > > u-boot.bin kernel / bootloader file that maybe will be able to boot
+> > > > FreeBSD.
+> > >
+> > > Yes, it can boot a 32-bit ARM board. I'm not a FreeBSD person, but
+> > > I've helped a FreeBSD user booting a 32-bit ARM box with u-boot
+> > > (GoFlexHome Marvell Kirkwood 6281). The u-boot version was 2017.05. I
+> > > used an out-of-tree u-boot build. This u-boot executed the ubldr to
+> > > boot FreeBSD.
+> > >
+> > > Please see here:
+> > > https://forum.doozan.com/read.php?3,49039,82059#msg-82059
+> > >
+> > > It's been so long, I don't remember the details. Just to confirm what
+> > > Heinrich said that u-boot can indeed boot 32-bit FreeBSD, since many
+> > > years ago.
+> > >
+> > > All the best,
+> > > Tony
+> > >
+> > > >
+> > > >
+> > > > --
+> > > > Mario.
+> >
+> >
+> >
+> > --
+> > Mario.
+>
+>
+>
+> --
+> Mario.
