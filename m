@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2F5AC3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 15:10:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71390C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 15:10:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 928E487A92;
-	Thu, 28 Dec 2023 16:09:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1C25A879F9;
+	Thu, 28 Dec 2023 16:10:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a2Z1q26L";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c1Qq/BjC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32876879E5; Thu, 28 Dec 2023 16:09:56 +0100 (CET)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id 165F487A9C; Thu, 28 Dec 2023 16:09:59 +0100 (CET)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBA1987976
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 16:09:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D778C87A68
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 16:09:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-67f9f6caabcso44333096d6.3
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 07:09:53 -0800 (PST)
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-67f8d9fe99fso45945786d6.2
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 07:09:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703776192; x=1704380992; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703776195; x=1704380995; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JXDah+Baey+RzKWosb0cwvIW97t/+dQttjj6rkLr0bE=;
- b=a2Z1q26LseohO5ooMNGSEK9onymP44L2jt2qDGE3BnURSHXDqSGXmAFEipgASVNKV7
- J6RV5Qd+U95QuUho5Y7UqCSI0rT+X01WJCygxbp5JmCGlZDVRgyITMCRUjsPzSaIfOrM
- c2bZ0qvKCfah4Iqsj49rwUkdJt1xQdclj6ATA=
+ bh=Pkz4J/8+nVEQpXVgepevNMHhqJX8dafT9AM54x7SEto=;
+ b=c1Qq/BjCUDkCPoG8xXAYuwwSvrMu3zuukVO/z0wk+36975sPpPGMyFg4xBBnY5Q7Jv
+ 16DG07sZ7B3coIna2F+ZCC08XEzjn0pSGFIaBbYJGosSKcLDIRI8FWT3jKV/NqDaKVOv
+ nE8Rb5w2vy2FE05ZVXPaLQkT4MunjPluE2KbI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703776192; x=1704380992;
+ d=1e100.net; s=20230601; t=1703776195; x=1704380995;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JXDah+Baey+RzKWosb0cwvIW97t/+dQttjj6rkLr0bE=;
- b=PCK4ZmuP92eUt1lD/e9IB+/O6+4u+z3g8E3gfHR5lhomLFwjCW2kDuAy7dYH4mb8Zn
- mjbpWC1r8akSGy8NYbxlrpRJ37BSsnZwFwJdFdd/ffQtTHCGeUOfIID8cdEYrCfryRK6
- Nw1/qCIj1fA74u0ISU+9pWduVx/slrOIG5Rs1ADYYJ4tQ/jsJkBW6XHPcAy4z3qIIcgy
- eCHIBI631ySb6WABnHphmdwwrChs5F1WpUDvmMSDuekBcZttLr4znDNX+TZYdM6aG1TY
- KaLW9S2330wyR2G+8ZBaWXv1PFDCZPHUdzhUKKNYFNwLBjOFspUYii0wYCKpo98dkovE
- zjNw==
-X-Gm-Message-State: AOJu0Yx9PJpScmTgX/54sTJ0fDQ7A6pMj1rvzeu93z5y3Kl9tHViZZqf
- m+x922TYLPRmUXIOzFv2iJsGgCacLNFg6GfAryxUQoqISyR8
-X-Google-Smtp-Source: AGHT+IHsxFeVosMLiGVAAEImtUldTw1mENA2v0yLlx6YCQoyexQ6sR8AfZU8e1avzcx4cRvOjiFY698AtxyYR0bUP5c=
-X-Received: by 2002:a05:6214:21e4:b0:67f:78e4:ed55 with SMTP id
- p4-20020a05621421e400b0067f78e4ed55mr14821944qvj.106.1703776192589; Thu, 28
- Dec 2023 07:09:52 -0800 (PST)
+ bh=Pkz4J/8+nVEQpXVgepevNMHhqJX8dafT9AM54x7SEto=;
+ b=DBPDZfa7Ky5nwBLAFTwdalUOZXGUdLsHv6KTl4FrTYHJU6HiPDCshb83wKAClTSlGE
+ vYtDu9Qj3eKBXCAw5xUTnj7UXMBbeI9Zrz9SiTxvRtKTmp1wH+TwdaHEvDE7knXndO7g
+ 0tVEBc/BciY4yoOFqQfT7pD13nPI0tplyZ4ZsfAMPDE/ehCnSh9zTeyk9aLDqkDsp8zf
+ 2qE/kSSKcuQIYQ/8Abje8/a71bGffGczsxRDFPBdnU2XcBEzXSMZAkXK1aorzMIqs4pq
+ ypljwt21+mAJJLiIEtXkEgNRZrZRq2hg5r6BRGGxsRCZ0mm8jpBLvYYsGjEoqpUeLwia
+ HmeA==
+X-Gm-Message-State: AOJu0Yx7gkRYm1Wd4GiQLdvuWNY3jcDIoFBg30x2dJziz0dwOwLW+TwH
+ cUDd5BGUaoBxAauGgXsgSmQ4Vplvu20nYUhgGUaSMw7t4SYy
+X-Google-Smtp-Source: AGHT+IF+EUmIQBbgYA2yZyw1wByyIN6OJC1V+ePchYDe52P3I/7IDQbErrr8UDjUdCIjF1FB4PuRBLS7YCrwQPQ/gSs=
+X-Received: by 2002:a0c:d7cd:0:b0:67f:f29f:93d6 with SMTP id
+ g13-20020a0cd7cd000000b0067ff29f93d6mr6213099qvj.129.1703776195637; Thu, 28
+ Dec 2023 07:09:55 -0800 (PST)
 MIME-Version: 1.0
-References: <20231228115804.3626579-1-sumit.garg@linaro.org>
- <20231228115804.3626579-8-sumit.garg@linaro.org>
- <CAFLszTg=CDfyTGG9c-t=98eFYvYy61L1kzmrssNKPSS6dZL3cg@mail.gmail.com>
- <20231228135642.GA2652760@bill-the-cat>
-In-Reply-To: <20231228135642.GA2652760@bill-the-cat>
+References: <20231226094625.221671-1-sjg@chromium.org>
+ <20231226120710.GH2652760@bill-the-cat>
+ <CAC_iWjLy1E9wEW3zX2waN9mc=tz7PTKE0gJ4RucqMmZR2cA6_Q@mail.gmail.com>
+ <CAFLszTgqS9TF1F-RxO1dpZPZGG6QBiKm0n_e0yVHAume+xT3eA@mail.gmail.com>
+ <20231227201130.GV2652760@bill-the-cat>
+ <CAFLszThJc04Zh1tFA4Cp7+oKVv2oKtk2015F37eMzPcXgqW7bw@mail.gmail.com>
+ <20231228134809.GZ2652760@bill-the-cat>
+In-Reply-To: <20231228134809.GZ2652760@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 28 Dec 2023 15:09:41 +0000
-Message-ID: <CAFLszThP+GJcPP_LJBva1M5mi9Wj-Nh-z7A6-fkSpPgOTtLmRQ@mail.gmail.com>
-Subject: Re: [PATCH v3 7/8] dts: meson-gxbb: Switch to using upstream DT
+Date: Thu, 28 Dec 2023 15:09:45 +0000
+Message-ID: <CAFLszTj+gVLyGr82mf5VT3KS86pkH+gjpM525o973WKYQcNv4w@mail.gmail.com>
+Subject: Re: [PATCH v4] fdt: Allow the devicetree to come from a bloblist
 To: Tom Rini <trini@konsulko.com>
-Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
- u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, robh+dt@kernel.org, 
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
- rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Marek Vasut <marex@denx.de>, Raymond Mao <raymond.mao@linaro.org>,
+ Baruch Siach <baruch@tkos.co.il>, 
+ Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jerry Van Baren <vanbaren@cideas.com>, Michal Simek <michal.simek@amd.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Nikhil M Jain <n-jain1@ti.com>,
+ Qu Wenruo <wqu@suse.com>, Sean Anderson <seanga2@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -96,100 +97,173 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Thu, Dec 28, 2023 at 1:56=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+On Thu, Dec 28, 2023 at 1:48=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
 :
 >
-> On Thu, Dec 28, 2023 at 01:37:11PM +0000, Simon Glass wrote:
-> > Hi Sumit,
+> On Thu, Dec 28, 2023 at 01:37:39PM +0000, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > On Thu, Dec 28, 2023 at 11:59=E2=80=AFAM Sumit Garg <sumit.garg@linaro.=
-org> wrote:
-> > >
-> > > Although there were still some variations in board DTS files based on
-> > > meson-gxbb SoC but I think those were minor differences from upstream
-> > > and shouldn't impact boot on these devices.
-> > >
-> > > So switch to upstream DT via mirroring amlogic/ directory from
-> > > devicetree-rebasing/src/arm64/amlogic/ directory. And thereby directl=
-y
-> > > building DTB from there including *-u-boot.dtsi files from
-> > > arch/$(ARCH)/dts/ directory.
-> > >
-> > > Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > > ---
-> > >
-> > > Changes in v3:
-> > > --------------
-> > > - Dropped Makefile portion and enabled OF_UPSTREAM for SoC instead.
-> > >
-> > > Changes in v2:
-> > > --------------
-> > > - Picked up review tag
-> > >
-> > >  arch/arm/mach-meson/Kconfig           | 1 +
-> > >  configs/nanopi-k2_defconfig           | 2 +-
-> > >  configs/odroid-c2_defconfig           | 2 +-
-> > >  configs/p200_defconfig                | 2 +-
-> > >  configs/p201_defconfig                | 2 +-
-> > >  configs/videostrong-kii-pro_defconfig | 2 +-
-> > >  configs/wetek-hub_defconfig           | 2 +-
-> > >  configs/wetek-play2_defconfig         | 2 +-
-> > >  dts/arch/arm64/amlogic                | 1 +
-> > >  9 files changed, 9 insertions(+), 7 deletions(-)
-> > >  create mode 120000 dts/arch/arm64/amlogic
-> > >
 > >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> >
-> > > diff --git a/arch/arm/mach-meson/Kconfig b/arch/arm/mach-meson/Kconfi=
-g
-> > > index d6c89058061..8ddb59161a0 100644
-> > > --- a/arch/arm/mach-meson/Kconfig
-> > > +++ b/arch/arm/mach-meson/Kconfig
-> > > @@ -25,6 +25,7 @@ choice
-> > >  config MESON_GXBB
-> > >         bool "GXBB"
-> > >         select MESON_GX
-> > > +       imply OF_UPSTREAM
-> > >         help
-> > >           Select this if your SoC is an S905
+> > On Wed, Dec 27, 2023 at 8:06=E2=80=AFPM Tom Rini <trini@konsulko.com> w=
+rote:
 > > >
-> > > diff --git a/configs/nanopi-k2_defconfig b/configs/nanopi-k2_defconfi=
-g
-> > > index 41dbf7981f8..2e1c756bf7a 100644
-> > > --- a/configs/nanopi-k2_defconfig
-> > > +++ b/configs/nanopi-k2_defconfig
-> > > @@ -6,7 +6,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
-> > >  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x20000000
-> > >  CONFIG_ENV_SIZE=3D0x2000
-> > >  CONFIG_DM_GPIO=3Dy
-> > > -CONFIG_DEFAULT_DEVICE_TREE=3D"meson-gxbb-nanopi-k2"
-> > > +CONFIG_DEFAULT_DEVICE_TREE=3D"amlogic/meson-gxbb-nanopi-k2"
-> > >  CONFIG_OF_LIBFDT_OVERLAY=3Dy
-> > >  CONFIG_DM_RESET=3Dy
-> > >  CONFIG_DEBUG_UART_BASE=3D0xc81004c0
+> > > On Wed, Dec 27, 2023 at 05:48:42PM +0000, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Tue, Dec 26, 2023 at 12:07=E2=80=AFPM Tom Rini <trini@konsulko.c=
+om> wrote:
+> > > > >
+> > > > > On Tue, Dec 26, 2023 at 09:46:25AM +0000, Simon Glass wrote:
+> > > > >
+> > > > > > Standard passage provides for a bloblist to be passed from one =
+firmware
+> > > > > > phase to the next. That can be used to pass the devicetree alon=
+g as well.
+> > > > > > Add an option to support this.
+> > > > > >
+> > > > > > Tests for this will be added as part of the Universal Payload w=
+ork.
+> > > > > >
+> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > ---
+> > > > > > The discussion on this was not resolved and is now important du=
+e to the
+> > > > > > bloblist series from Raymond. So I am sending it again since I =
+believe
+> > > > > > this is a better starting point than building on OF_BOARD
+> > > > >
+> > > > > I really don't like adding another option for "DT is given to us"=
+. Why
+> > > > > isn't adding another enum to fdt_source_t sufficient
+> > > >
+> > > > That is added by this patch, but...
+> > > >
+> > > > >, and if we have
+> > > > > bloblist enabled, that will look for and use if found?
+> > > >
+> > > > ...this is the question. I would like to be able to enable bloblist
+> > > > without *requiring* the DT to come from there, hence the separate
+> > > > Kconfig option.
+> > > >
+> > > > > Maybe some other
+> > > > > code needs to be restructured and cleaned up too?
+> > > >
+> > > > Possibly, but I really am not keen on this board-specific solution.=
+ I
+> > > > believe Ilias & I agreed that OF_BOARD should fade away, so I don't
+> > > > like adding another thing onto it.
+> > >
+> > > I think you're missing something then. It should not be board specifi=
+c
+> > > to just find the dtb via bloblist, without a new CONFIG.
 > >
-> > So now I am wondering if we can (later) have the SoC be implied when
-> > using OF_UPSTREAM so we can do:
+> > Yes, that is what I am looking for.
 > >
-> > CONFIG_DEFAULT_DEVICE_TREE=3D"meson-gxbb-nanopi-k2"
+> > > Whatever is
+> > > stopping that is what needs to be refactored and then you can just
+> > > extend fdt_source_t without a new CONFIG option.
 > >
-> > and it will add the 'amlogic/' automatically?
+> > OK, but I need a way to turn it off, at least for development.
 > >
-> > Perhaps that might be a way to bridge the gap in terms of file layout?
+> > [merging in the other thread:]
+> >
+> > On Wed, Dec 27, 2023 at 8:11=E2=80=AFPM Tom Rini <trini@konsulko.com> w=
+rote:
+> > >
+> > > On Wed, Dec 27, 2023 at 05:48:44PM +0000, Simon Glass wrote:
+> > > > Hi Ilias,
+> > > >
+> > > > On Wed, Dec 27, 2023 at 6:44=E2=80=AFAM Ilias Apalodimas
+> > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > >
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Tue, 26 Dec 2023 at 14:07, Tom Rini <trini@konsulko.com> wrote=
+:
+> > > > > >
+> > > > > > On Tue, Dec 26, 2023 at 09:46:25AM +0000, Simon Glass wrote:
+> > > > > >
+> > > > > > > Standard passage provides for a bloblist to be passed from on=
+e firmware
+> > > > > > > phase to the next. That can be used to pass the devicetree al=
+ong as well.
+> > > > > > > Add an option to support this.
+> > > > > > >
+> > > > > > > Tests for this will be added as part of the Universal Payload=
+ work.
+> > > > > > >
+> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > ---
+> > > > > > > The discussion on this was not resolved and is now important =
+due to the
+> > > > > > > bloblist series from Raymond. So I am sending it again since =
+I believe
+> > > > > > > this is a better starting point than building on OF_BOARD
+> > > > > >
+> > > > > > I really don't like adding another option for "DT is given to u=
+s". Why
+> > > > > > isn't adding another enum to fdt_source_t sufficient, and if we=
+ have
+> > > > > > bloblist enabled, that will look for and use if found? Maybe so=
+me other
+> > > > > > code needs to be restructured and cleaned up too?
+> > > > >
+> > > > > Same here. On top of that the bloblist has a few items in there, =
+e.g a
+> > > > > TPM eventlog. What are we going to do? Add a Kconfig for each ite=
+m?
+> > > >
+> > > > No, but that is just a straw man. The DT is special and U-Boot repo=
+rts
+> > > > where it comes from.
+> > > >
+> > > > >
+> > > > > This has been going back and forth for a while. I've lost count o=
+f how
+> > > > > many times I repeated the same proposal, but here it goes again. =
+We
+> > > > > have OF_BOARD and BLOBLIST options. The bloblist and its properti=
+es
+> > > > > are scannable at runtime. Can't we use the combination of these 2=
+ can
+> > > > > be used to imply we expect things from a bloblist. If we want to =
+be
+> > > > > stricter in the future and explicitly expect the DT from a blobli=
+st,
+> > > > > we could add a Kconfig option failing the boot if that's missing.
+> > > >
+> > > > I would like to have that Kconfig option now, not later. In my mind=
+,
+> > > > the boot must be deterministic, so that if OF_BLOBLIST is enabled, =
+the
+> > > > DT must come from there, or it is an error.
+> > >
+> > > Determinism doesn't require a CONFIG option, it just requires an if/e=
+lse
+> > > tree where we say what the "correct" priority list should be and then
+> > > set a flag so that we can tell the user where we found it too. This a=
+lso
+> > > means that we can get whatever is going to use this mechanism to
+> > > migrate over, and have less of a chicken-and-egg type of problem.
+> >
+> > OK I think I understand what is going on here. We need a way to enable
+> > OF_BLOBLIST while still allowing the prior stage to NOT provide a
+> > bloblist, at least for a transition period (=3D forever, I suspect, but
+> > that's another discussion).
+> >
+> > How about if OF_BLOBLIST enables the option, but we allow a fallback
+> > to OF_BOARD if the DT is not there?
 >
-> That's going to start to look real ugly real quick I suspect and I'm not
-> sure what it really gets us? It seems to me that the convention of
-> "vendor/board" has already been well enough adapted outside of the
-> kernel, with the odd sticking point being getting everyone used to
-> whatever will be happening for 32bit boards long term. So I think hiding
-> the vendor part of the string here will be more, not less, confusing
-> long term.
+> Oh, OK, so your use case is development. Why don't we just make
+> OF_EMBEDDED be the first clause in the if/else (and yes, if
+> (IS_ENABLED(CONFIG_OF_EMBEDDED) :)) and move on still not needing a knob
+> for "bloblist has it"?
 
-Now that I dig in a bit, I see that the devicetree-rebasing tree does
-not have any Makefiles in it. How does Linux build with it? Does
-anyone have instructions?
+Because OF_EMBED doesn't work with binman, and takes a lot of
+different code paths, etc. It is somewhat useful when loading U-Boot
+using a debugger, but that is about it.
+
+I sent a v5 that I hope does what is needed.
 
 Regards,
 Simon
