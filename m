@@ -4,72 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92A95C3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 11:32:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F193DC3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 11:58:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0465987845;
-	Thu, 28 Dec 2023 12:32:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 34814879F0;
+	Thu, 28 Dec 2023 12:58:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vzPHev8f";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="P6jn3UK1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52061879F0; Thu, 28 Dec 2023 12:32:06 +0100 (CET)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id 8240D879F0; Thu, 28 Dec 2023 12:58:35 +0100 (CET)
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 473238773E
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 12:32:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F4214879F6
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 12:58:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2cca9a9362aso46247621fa.3
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 03:32:04 -0800 (PST)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-1d420aaa2abso18230985ad.3
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 03:58:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703763123; x=1704367923; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=s0ZgkYH7VzFWUORUf8rQyjVahPld5j4HlSFoRlTBFsg=;
- b=vzPHev8fxpc6CbM6ZTQ354lrj9gB60MN9JCTYl20ETdaxHUANQqNU8GsjiaPS1qDes
- vYYmpuNrU49esltbBtwHL/ss7BsZbhC2GDSC8l15Ur9EF1rwI4K7jP03hleu7kQSFg/S
- wQIoZwZAoth66DzDFRndpFiqA4rxhhjENzZhCOlGf0ySyEtBxKf3+0L0Ute2TIzpheNz
- oHwU87t3xQINdtXDNjUuBSQqh//JfVQnbq46b8tqVYMmLTrdBrqRkaLlfV9ra8Wt5xna
- LVjp8jSavrUaY0mq7UbFxfRSL95ZsXZUV4r7GlZ9Wyd7akbRSLVZcdw3iqHomgn2fd/r
- 9DpQ==
+ d=linaro.org; s=google; t=1703764707; x=1704369507; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=GxMXClwD9vUmpuV83YCdcBGWcfgC711sy1kH6OqMoaM=;
+ b=P6jn3UK1zI+8fSd6SBwFpiP4msxoU33/maoHS2Nzwg3Q7TWlurM2Kb92bjIoPRm68M
+ JI0GYtWmBoeAAoXGUgFp7zwsF9T+sfV161JgZyJoExAbVYBI58UmdbVg4pdMDnc6+tTd
+ CT0VUmEibswRrhKYFgbaDu6IaSvhzP4kpY7dIfLDk2sReb8O6pNJOiG3ouex4NYhGnpv
+ 6+ZVJxk0iLAzV9jgHYlRWbYm22fMXaVEjuBIgWGap7NFh0hXgpntHhmgTsLj0+ePQQLn
+ utOBzdGb8+UBNXj4Rh3TuxE6JWf5jQsETTXZdNIgzIBmNVezNeaOkp+F/UTBqyITq6l+
+ nhKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703763123; x=1704367923;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1703764707; x=1704369507;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=s0ZgkYH7VzFWUORUf8rQyjVahPld5j4HlSFoRlTBFsg=;
- b=eG0G811HqHRRK20CLvrCSwIbzLF6o3aftdddnm1/fHtDT4NLpUuzSBikHJDusJlvXL
- qytc3xFtCnngfBTqK10Nq0Txn0LmsD/QAIUBV7IllyP8x7qeLGFdWFnGhgRcTYTiLo1I
- bhw29oxl+20sORdf1q6UMNJjVCpI1w4MwvfJovHluQmGJ22qnP2ex21FXwRZUAnCpNVP
- LbKDJSKrmxU2QRkb/nSh7LopbElJew91lzM735IMLIQkacRkbWbSFQS60trBXoN3ZsJq
- iUP4SrpcgtvjUYixzrwNC2AxZEcTuTG3T1jdSfUwE8x6oEvqgCWe4u+xCzLU1gb/hHf5
- w6Rw==
-X-Gm-Message-State: AOJu0YyWiAdGWs+xWKuFsSi2iUzl3/2c/19pIwdLY+CrosV0FeMc5imH
- IWQd4QOdquSkgy0nrv7weBG0No9f6MA80SXJ11QFRXK4ekGdlw==
-X-Google-Smtp-Source: AGHT+IG8pzQTT9r6gAbDNxE8szFlAsYljFTwTR6ZgqNYeU/CFrYJ3NUSHrvDtP5M75u6cwqw2V51H5Azp27JCaERats=
-X-Received: by 2002:a05:6512:110a:b0:50e:7b4d:cc86 with SMTP id
- l10-20020a056512110a00b0050e7b4dcc86mr1826844lfg.69.1703763123393; Thu, 28
- Dec 2023 03:32:03 -0800 (PST)
+ bh=GxMXClwD9vUmpuV83YCdcBGWcfgC711sy1kH6OqMoaM=;
+ b=kMzpKeDYXrFez4EODL+JWJMW7+idFHM5R6rsJddEbl8+BPrhZ5muLyt84tVfnP85dE
+ 7opgMNU6RLQZkTK00dE9TCMpApbjVTrgPS0Ga+9BrniTrhkXQ89wxQCs0ozSMjq28e1L
+ UFklRScyBbGxuJuAxiUegXRIssLnv7DuRFL7mw7TBsqHm6Suyxmq/iAX7ZYfPoKwMfDr
+ kT4WemGw+EVCwSPjxU9JM0EF3ZmTSdDWK8fk3RWuuq1kVYH9Ypk2g3YXiLSyEIJOR6SD
+ 0muqQIzbeQoSn3/1j4xA1dlji31RYKdcAUY+u+v+YDE1Gb/YX3OfskVBQLAeXXssWQ5N
+ y6Jg==
+X-Gm-Message-State: AOJu0Yxeo7vEFc0wX5qLs1Vqo0mzpDGKd4YMJq7UfVOqV0j6rsnITr/w
+ iBEo1WeN6k4hQKLF51wRm1co+Qzks/t+5ty1DigkbMO0Uk4N9Q==
+X-Google-Smtp-Source: AGHT+IG0lp3hgLaDMnlNqdMBZERyvpdgRXZZpRUygA0Zn2dBjUAmeMT6uXldD1OEUeCR2L3N701d7A==
+X-Received: by 2002:a17:902:f689:b0:1d4:87c8:1cfa with SMTP id
+ l9-20020a170902f68900b001d487c81cfamr1465825plg.35.1703764707076; 
+ Thu, 28 Dec 2023 03:58:27 -0800 (PST)
+Received: from sumit-X1.. ([223.178.209.202]) by smtp.gmail.com with ESMTPSA id
+ r4-20020a170902ea4400b001d3f285157dsm13700579plg.124.2023.12.28.03.58.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 28 Dec 2023 03:58:26 -0800 (PST)
+From: Sumit Garg <sumit.garg@linaro.org>
+To: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
+ u-boot-custodians@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, robh+dt@kernel.org,
+ krzysztof.kozlowski+dt@linaro.org, conor@kernel.org,
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech,
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
+ pbrobinson@gmail.com, ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org,
+ b.galvani@gmail.com, xypron.glpk@gmx.de, michal.simek@amd.com,
+ seanga2@gmail.com, rasmus.villemoes@prevas.dk, peng.fan@nxp.com,
+ jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de,
+ mibodhi@gmail.com, Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH v3 0/8] An effort to bring DT bindings compliance within U-Boot
+Date: Thu, 28 Dec 2023 17:27:56 +0530
+Message-Id: <20231228115804.3626579-1-sumit.garg@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20231227210712.712937-1-raymond.mao@linaro.org>
- <20231227210712.712937-9-raymond.mao@linaro.org>
-In-Reply-To: <20231227210712.712937-9-raymond.mao@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 28 Dec 2023 13:31:27 +0200
-Message-ID: <CAC_iWjJ2GAOU93x1gHPYKXyiU0j6Tp0yHqeCtsctY3mOdz+9VA@mail.gmail.com>
-Subject: Re: [PATCH v4 08/12] bloblist: Handle alignment with a void entry
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
- Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,83 +96,184 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
+Changes in v3:
+--------------
+- Patch #4: Minor commit message update
+- Patch #5: Replace CONFIG_* with Kconfig options
+- Patch #7: Dropped Makefile portion and enabled OF_UPSTREAM for SoC
+  instead.
+- Patch #1, #3, #6 and #8: Picked up review tags
 
-On Wed, 27 Dec 2023 at 23:08, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> From: Simon Glass <sjg@chromium.org>
->
-> Rather than setting the alignment using the header size, add an entirely
-> new entry to cover the gap left by the alignment.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
->  common/bloblist.c | 23 +++++++++++++++++++----
->  1 file changed, 19 insertions(+), 4 deletions(-)
->
-> diff --git a/common/bloblist.c b/common/bloblist.c
-> index 705d9c6ae9..73dbbc01c0 100644
-> --- a/common/bloblist.c
-> +++ b/common/bloblist.c
-> @@ -142,7 +142,7 @@ static int bloblist_addrec(uint tag, int size, int align_log2,
->  {
->         struct bloblist_hdr *hdr = gd->bloblist;
->         struct bloblist_rec *rec;
-> -       int data_start, new_alloced;
-> +       int data_start, aligned_start, new_alloced;
->
->         if (!align_log2)
->                 align_log2 = BLOBLIST_ALIGN_LOG2;
-> @@ -151,10 +151,25 @@ static int bloblist_addrec(uint tag, int size, int align_log2,
->         data_start = map_to_sysmem(hdr) + hdr->alloced + sizeof(*rec);
->
->         /* Align the address and then calculate the offset from ->alloced */
-> -       data_start = ALIGN(data_start, 1U << align_log2) - map_to_sysmem(hdr);
-> +       aligned_start = ALIGN(data_start, 1U << align_log2) - data_start;
-> +
-> +       /* If we need to create a dummy record, create it */
-> +       if (aligned_start) {
-> +               int void_size = aligned_start - sizeof(*rec);
-> +               struct bloblist_rec *vrec;
-> +               int ret;
-> +
-> +               ret = bloblist_addrec(BLOBLISTT_VOID, void_size, 0, &vrec);
+Changes in v2:
+--------------
+- Patch #1: excluded gitab CI config check and added commit description.
+- Patch #3: s/UBOOT_DTSI_LOC/u_boot_dtsi_loc/
+- Patch #4: s/DEVICE_TREE_LOC/dt_dir/ and s/U-boot/U-Boot/
+- Patch #5: s/U-boot/U-Boot/
+- Patch #6 and #7: Picked up review tags
 
-I just noticed the 'BLOBLISTT'. Is that on purpose? or a typo?
+Prerequisite
+------------
 
-> +               if (ret)
-> +                       return log_msg_ret("void", ret);
-> +
-> +               /* start the record after that */
-> +               data_start = map_to_sysmem(hdr) + hdr->alloced + sizeof(*vrec);
-> +       }
->
->         /* Calculate the new allocated total */
-> -       new_alloced = data_start + ALIGN(size, 1U << align_log2);
-> +       new_alloced = data_start - map_to_sysmem(hdr) +
-> +               ALIGN(size, 1U << align_log2);
+This patch series requires devicetree-rebasing git repo to be added as a
+subtree to the main U-Boot repo via:
 
-So, wouldn't it make more sense to add the dummy record and align the
-whole thing *after* we've added the entry?
-Doing it like this might leave the last entry on an unaligned boundary, no?
+$ git subtree add --prefix devicetree-rebasing \
+      git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git \
+      v6.6-dts --squash
 
-Thanks
-/Ilias
->
->         if (new_alloced > hdr->size) {
->                 log_err("Failed to allocate %x bytes size=%x, need size=%x\n",
-> @@ -164,7 +179,7 @@ static int bloblist_addrec(uint tag, int size, int align_log2,
->         rec = (void *)hdr + hdr->alloced;
->
->         rec->tag = tag;
-> -       rec->hdr_size = data_start - hdr->alloced;
-> +       rec->hdr_size = sizeof(struct bloblist_rec);
->         rec->size = size;
->
->         /* Zero the record data */
-> --
-> 2.25.1
->
+Background
+----------
+
+This effort started while I was reviewing patch series corresponding to
+Qcom platforms [1] which was about to import modified devicetree source
+files from Linux kernel. I suppose keeping devicetree files sync with
+Linux kernel without any DT bindings schema validation has been a pain
+for U-Boot SoC/platform maintainers. There has been past discussions
+about a single DT repo but that hasn't come up and Linux kernel remained
+the place where DT source files as well as bindings are placed and
+maintained.
+
+However, Linux kernel DT maintainers proposed [2] for U-Boot to rather
+use devicetree-rebasing repo [3] which is a forked copy from Linux
+kernel for DT source files as well as bindings. It is tagged at every
+Linux kernel major release or intermideate release candidates. So here I
+have tried to reuse that to bring DT bingings compliance as well as a
+standard way to maintain a regular sync of DT source files with Linux
+kernel.
+
+In order to maintain devicetree files sync, U-Boot will maintains a Git
+subtree for devicetee-rebasing repo as `devicetee-rebasing/` sub-directory.
+It will be regularly updated with every new kernel major release via
+subtree pull as follows:
+
+$ git subtree pull --prefix devicetree-rebasing \
+      git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git \
+      <release-tag> --squash
+
+The RFC/prototype for this series has been discussed with Linux DT
+maintainers as well as U-Boot maintainers here [4]. Now we would like to
+reach out to wider U-Boot community to seek feedback.
+
+[1] https://lore.kernel.org/all/CAFA6WYMLUD9cnkr=R0Uur+1UeTMkKjM2zDdMJtXb3nmrLk+pDg@mail.gmail.com/
+[2] https://lore.kernel.org/all/CAL_JsqKEjv2tSGmT+0ZiO7_qbBfhTycbGnhJhYpKDFzfO9jzDg@mail.gmail.com/
+[3] https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git/
+[4] https://github.com/u-boot/u-boot/pull/451
+
+Changes
+-------
+
+Traditionally, U-Boot placed copies of devicetree source files from Linux
+kernel into `arch/<arch>/dts/<name>.dts`, which can be selected via:
+ 
+CONFIG_DEFAULT_DEVICE_TREE "<name>"
+ 
+SoC/board maintainers are encouraged to migrate to using mirrored copies
+from `devicetree-rebasing/` into `dts/arch/<arch>/<vendor>` via:
+ 
+CONFIG_OF_UPSTREAM=y
+CONFIG_DEFAULT_DEVICE_TREE "<vendor>/<name>"
+
+An example have been shown for Amlogic meson-gxbb SoC and corresponding
+derived boards via patch #7 and #8.
+
+Devicetree bindings schema checks
+---------------------------------
+
+With devicetee-rebasing Git subtree, the devicetree bindings are also
+regularly synced with Linux kernel as `devicetree-rebasing/Bindings/`
+sub-directory. This allows U-Boot to run devicetree bindings schema checks
+which will bring compliance to U-Boot core/drivers regarding usage of
+devicetree.
+
+Dependencies
+------------
+
+The DT schema project must be installed in order to validate the DT schema
+binding documents and validate DTS files using the DT schema. The DT schema
+project can be installed with pip:
+
+$ pip3 install dtschema
+
+Note that 'dtschema' installation requires 'swig' and Python development
+files installed first. On Debian/Ubuntu systems:
+
+$ apt install swig python3-dev
+
+Several executables (dt-doc-validate, dt-mk-schema, dt-validate) will be
+installed. Ensure they are in your PATH (~/.local/bin by default).
+
+Recommended is also to install yamllint (used by dtschema when present).
+
+Running checks
+--------------
+
+In order to perform validation of DTB files, use the ``dtbs_check`` target:
+
+$ make dtbs_check
+
+It is also possible to run checks with a subset of matching schema files by
+setting the ``DT_SCHEMA_FILES`` variable to 1 or more specific schema files
+or patterns (partial match of a fixed string). Each file or pattern should
+be separated by ':'.
+
+$ make dtbs_check DT_SCHEMA_FILES=trivial-devices.yaml:rtc.yaml
+$ make dtbs_check DT_SCHEMA_FILES=/gpio/
+$ make dtbs_check DT_SCHEMA_FILES=trivial-devices.yaml
+
+Sumit Garg (8):
+  CI: Exclude devicetree-rebasing subtree for CONFIG checks
+  Makefile: Add support for DT bindings schema checks
+  scripts/Makefile.lib: Statically define *-u-boot.dtsi files location
+  dts: Add alternative location for upstream DTB builds
+  doc: devicetree: Updates for devicetree-rebasing subtree
+  MAINTAINERS: Add myself as devicetree-rebasing maintainer
+  dts: meson-gxbb: Switch to using upstream DT
+  dts: meson-gxbb: Drop redundant devicetree files
+
+ .azure-pipelines.yml                    |   3 +-
+ .gitlab-ci.yml                          |   3 +-
+ MAINTAINERS                             |   6 +
+ Makefile                                |  20 +-
+ arch/arm/dts/Makefile                   |   8 -
+ arch/arm/dts/meson-gxbb-kii-pro.dts     | 140 ----
+ arch/arm/dts/meson-gxbb-nanopi-k2.dts   | 415 ------------
+ arch/arm/dts/meson-gxbb-odroidc2.dts    | 418 ------------
+ arch/arm/dts/meson-gxbb-p200.dts        | 100 ---
+ arch/arm/dts/meson-gxbb-p201.dts        |  26 -
+ arch/arm/dts/meson-gxbb-p20x.dtsi       | 250 -------
+ arch/arm/dts/meson-gxbb-wetek-hub.dts   |  58 --
+ arch/arm/dts/meson-gxbb-wetek-play2.dts | 119 ----
+ arch/arm/dts/meson-gxbb-wetek.dtsi      | 292 --------
+ arch/arm/dts/meson-gxbb.dtsi            | 856 ------------------------
+ arch/arm/mach-meson/Kconfig             |   1 +
+ configs/nanopi-k2_defconfig             |   2 +-
+ configs/odroid-c2_defconfig             |   2 +-
+ configs/p200_defconfig                  |   2 +-
+ configs/p201_defconfig                  |   2 +-
+ configs/videostrong-kii-pro_defconfig   |   2 +-
+ configs/wetek-hub_defconfig             |   2 +-
+ configs/wetek-play2_defconfig           |   2 +-
+ doc/develop/devicetree/control.rst      | 131 +++-
+ dts/Kconfig                             |  11 +
+ dts/Makefile                            |  17 +-
+ dts/arch/arm64/Makefile                 |  14 +
+ dts/arch/arm64/amlogic                  |   1 +
+ scripts/Makefile.lib                    |  42 +-
+ 29 files changed, 201 insertions(+), 2744 deletions(-)
+ delete mode 100644 arch/arm/dts/meson-gxbb-kii-pro.dts
+ delete mode 100644 arch/arm/dts/meson-gxbb-nanopi-k2.dts
+ delete mode 100644 arch/arm/dts/meson-gxbb-odroidc2.dts
+ delete mode 100644 arch/arm/dts/meson-gxbb-p200.dts
+ delete mode 100644 arch/arm/dts/meson-gxbb-p201.dts
+ delete mode 100644 arch/arm/dts/meson-gxbb-p20x.dtsi
+ delete mode 100644 arch/arm/dts/meson-gxbb-wetek-hub.dts
+ delete mode 100644 arch/arm/dts/meson-gxbb-wetek-play2.dts
+ delete mode 100644 arch/arm/dts/meson-gxbb-wetek.dtsi
+ delete mode 100644 arch/arm/dts/meson-gxbb.dtsi
+ create mode 100644 dts/arch/arm64/Makefile
+ create mode 120000 dts/arch/arm64/amlogic
+
+-- 
+2.34.1
+
