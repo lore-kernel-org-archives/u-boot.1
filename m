@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E937C3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 19:48:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D36B6C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 19:48:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0E8A87A5F;
-	Thu, 28 Dec 2023 20:48:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 54F3087AD2;
+	Thu, 28 Dec 2023 20:48:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SR97H9Ml";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y17VUEdq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 827D387A7F; Thu, 28 Dec 2023 20:48:18 +0100 (CET)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id B22B287AA9; Thu, 28 Dec 2023 20:48:19 +0100 (CET)
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [IPv6:2607:f8b0:4864:20::72d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6001D87A53
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 20:48:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C3AE87A4E
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 20:48:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-67f85fe5632so45414936d6.0
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 11:48:16 -0800 (PST)
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-781716c1291so66923185a.1
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 11:48:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703792895; x=1704397695; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703792896; x=1704397696; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4TM0f89if0T9TXrSbNg9LTy6+LRjytVD8rCrafPCdzo=;
- b=SR97H9MlCykIlFZpD6XxLwuUobZli/8Cr5TeumQ2sosjdivIhMQc4dyXtfbgVGSu5Q
- getuX/Cp5wu9GRZ0apfT6JrBN2o8VjFOoye/iMv8cyWxaPgLSnjTz8f4f6mTgrOo8kWp
- mSbPxoXfLIdS3y13uQgvWMqjCLg83nEMfBgAQ=
+ bh=bXR5tSaLnEwOMFIOL0bmleYg6TyrZm/Udv2kA1UZikw=;
+ b=Y17VUEdqDQcZLTWRnNzGAMj1nc3aps4oqG758SAJ1hCrGTGQEcMoQjnuJtxd0Mnadl
+ WHH9D/I7UqRiouPUupszXNOn3Ip50V5G4N3u+61Ku1Eia1rHfYjv1gv1Oj6VaZ9yNdGF
+ sLxRbO7chwHgLZqu3kzaVfSg3F/9QJBuNgHI8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703792895; x=1704397695;
+ d=1e100.net; s=20230601; t=1703792896; x=1704397696;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4TM0f89if0T9TXrSbNg9LTy6+LRjytVD8rCrafPCdzo=;
- b=MTNqMjZq60YPoG6wh5a4SRkXJ8CwAu76YCQAI9VkccGejWEK2UKga35pzTTwr8CZXX
- AEoNYB2dA3L4eTpH8zQQRGR0fU+pt1g2/m8rfAUhWpr/jSIOLJgh+LrDPu8ClQk5wbYJ
- UqSFnhwZvWS8GbI6kkeNkaigNHPcR3PH2D/TABUpzRtLKTUF/5KHYy9NDtj5IlI80/CK
- uWE5AEDb3PgLu1rsingoT0/qHZnh80rKrdrn1tdAHiD4Ls5POets+PuS5nIG5CI1xpDx
- V57v5jsVftSowGdVW1yXqSK6G+IKvuCqbq3dPfi3P/1Hd0uCNZPBRoj9L3qta4lRq37A
- qMfQ==
-X-Gm-Message-State: AOJu0YwY/2rRUtXsQAdT+hLye1TVIBioXAd43HSHJ05GdUqMbHzYLqf6
- j/SufkhTJGBQInmlwhkZxY0Tg4guW57/GW259tj5BRCHqcbz
-X-Google-Smtp-Source: AGHT+IGV1J/7RTKeHPL0iZyJut5l+fE+QaCKxmSsezRAXGeqPD/zwAco8oWau10jiu8UdKExGJLLXEMo6r6p0F1Kwt8=
-X-Received: by 2002:ad4:5d47:0:b0:67f:4833:2168 with SMTP id
- jk7-20020ad45d47000000b0067f48332168mr21198928qvb.32.1703792894837; Thu, 28
- Dec 2023 11:48:14 -0800 (PST)
+ bh=bXR5tSaLnEwOMFIOL0bmleYg6TyrZm/Udv2kA1UZikw=;
+ b=UO2xLg9+fZmSeRVNtxNw+igua022GG10q7Z0sYpG4ZKBqjtb44OtEcojMS/1TBSGcn
+ 7Q4/ow5tWcO4I6Y5eTcUI1jiyabU27Rkw0jLsjOm0uvb2Zt+G6JrtrUgb/SUaT/GI4WB
+ 9he16NripqH+IlIqNjNz5/rm0mMMhddLq2BXUPDWokaiWgM43Rpj1igPOYlh4HPe4lhu
+ /zIJw8ndu8T2TxgYxY7pxNXuxa5YO9yRGS7d0Go4rJcnDz+C72JfCP4ob64Aa1fwQ6zu
+ 0DejZPP9JWh7CX/D89pFKcSpmf0JWSMu4JC//UklvaeWVYiy27xeVjNnAFmtup0Dx9cn
+ mI5A==
+X-Gm-Message-State: AOJu0Yzx7bivu+PyBfHD+MFJSZE+F18SvvzYMfoAEQjitvpxiCyYtZqW
+ fOXx1pKG3MdZlZViZvQRM5fCCNiZRMOtKt0b6ooX2zoTZ0Ln
+X-Google-Smtp-Source: AGHT+IEW6NjsGOvVzOr6jRrK+QoyvfZbkh/O8ifcWEr3eXLrdMkzzAtIzLTp+czIPHKB3TuDr1gz2k6krnq51XPsqkA=
+X-Received: by 2002:a05:6214:416:b0:67f:20b3:aeb with SMTP id
+ z22-20020a056214041600b0067f20b30aebmr18508588qvx.60.1703792896047; Thu, 28
+ Dec 2023 11:48:16 -0800 (PST)
 MIME-Version: 1.0
-References: <20231227074025.2178825-1-sjg@chromium.org>
- <20231227074025.2178825-8-sjg@chromium.org>
- <CAC_iWjK1pYu7YnQ09V3V=dngtOFpwFd3jFFA_+hkO=Zd7-oR9Q@mail.gmail.com>
- <CAFLszTgko0C42Zc8wHJO5c20SSR-1pcCotEHi7AcuYEOacCGQA@mail.gmail.com>
- <690A2210-C523-4A53-8E1A-DF565F183630@gmx.de>
-In-Reply-To: <690A2210-C523-4A53-8E1A-DF565F183630@gmx.de>
+References: <20231223004429.247301-1-xypron.glpk@gmx.de>
+ <20231223004429.247301-6-xypron.glpk@gmx.de>
+ <CAFLszThrHODfu-ZhHEzRe5wT-nMpXAp=UCBJC3FipTi9owhajQ@mail.gmail.com>
+ <f66c51bb-7dd8-432b-9579-598eb3619c04@gmx.de>
+ <CAFLszTimwDXjbQrER+808pezWD_1UaMk+g56RzNmo9Bwc9Uuew@mail.gmail.com>
+ <15E00D56-2FB7-4905-832E-447090CF9EE3@gmx.de>
+In-Reply-To: <15E00D56-2FB7-4905-832E-447090CF9EE3@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 28 Dec 2023 19:48:04 +0000
-Message-ID: <CAFLszTgxgJM9xm_-RXG64SD0jsg5cRh=OVOVfgy=23Wu0hZ8Yw@mail.gmail.com>
-Subject: Re: [PATCH v4 7/7] smbios: Require the caller to align the SMBIOS
- table
+Date: Thu, 28 Dec 2023 19:48:05 +0000
+Message-ID: <CAFLszTihGp1pd=tv7rjC2viJj5-XvSWy_=-v8deJPC7CvhQ15w@mail.gmail.com>
+Subject: Re: [PATCH 5/5] test: unit test for smbios command
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Peter Robinson <pbrobinson@gmail.com>
+ Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -91,84 +90,62 @@ X-Virus-Status: Clean
 
 Hi Heinrich,
 
-On Thu, Dec 28, 2023 at 5:36=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@gm=
+On Thu, Dec 28, 2023 at 5:11=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@gm=
 x.de> wrote:
 >
 >
 >
-> Am 28. Dezember 2023 14:37:19 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> >Hi Ilias,
+> Am 27. Dezember 2023 08:40:40 MEZ schrieb Simon Glass <sjg@chromium.org>:
+> >Hi Heinrich,
 > >
-> >On Wed, Dec 27, 2023 at 11:12=E2=80=AFAM Ilias Apalodimas
-> ><ilias.apalodimas@linaro.org> wrote:
+> >On Tue, Dec 26, 2023 at 10:11=E2=80=AFAM Heinrich Schuchardt <xypron.glp=
+k@gmx.de> wrote:
 > >>
-> >> Hi Simon,
+> >> On 12/26/23 10:47, Simon Glass wrote:
+> >> > Hi Heinrich,
+> >> >
+> >> > On Sat, Dec 23, 2023 at 12:49=E2=80=AFAM Heinrich Schuchardt <xypron=
+.glpk@gmx.de> wrote:
+> >> >>
+> >> >> Provide a unit test for the smbios command.
+> >> >>
+> >> >> Provide different test functions for QEMU, sandbox, and other syste=
+ms.
+> >> >>
+> >> >> Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> >> >> ---
+> >> >>   test/py/tests/test_smbios.py | 47 +++++++++++++++++++++++++++++++=
++++++
+> >> >>   1 file changed, 47 insertions(+)
+> >> >>   create mode 100644 test/py/tests/test_smbios.py
+> >> >
+> >> > Can you please write this test in C?
+> >> >
+> >> > Regards,
+> >> > Simon
 > >>
-> >> I commented on v3 as well, but in case you miss that
-> >>
-> >> On Wed, 27 Dec 2023 at 09:40, Simon Glass <sjg@chromium.org> wrote:
-> >> >
-> >> > All callers handle this alignment, so drop the unnecessary code. Thi=
-s
-> >> > simplifies things a little.
-> >> >
-> >> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> >> > Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> >> > ---
-> >> >
-> >> > (no changes since v1)
-> >> >
-> >> >  include/smbios.h | 5 +----
-> >> >  lib/smbios.c     | 2 --
-> >> >  2 files changed, 1 insertion(+), 6 deletions(-)
-> >> >
-> >> > diff --git a/include/smbios.h b/include/smbios.h
-> >> > index 77be58887a2..879b8a814b8 100644
-> >> > --- a/include/smbios.h
-> >> > +++ b/include/smbios.h
-> >> > @@ -258,12 +258,9 @@ static inline void fill_smbios_header(void *tab=
-le, int type,
-> >> >   *
-> >> >   * This writes SMBIOS table at a given address.
-> >> >   *
-> >> > - * @addr:      start address to write SMBIOS table. If this is not
-> >> > - *             16-byte-aligned then it will be aligned before the t=
-able is
-> >> > - *             written.
-> >> > + * @addr:      start address to write SMBIOS table (must be 16-byte=
--aligned)
-> >> >   * Return:     end address of SMBIOS table (and start address for n=
-ext entry)
-> >> >   *             or NULL in case of an error
-> >> > - *
-> >> >   */
-> >> >  ulong write_smbios_table(ulong addr);
-> >> >
-> >> > diff --git a/lib/smbios.c b/lib/smbios.c
-> >> > index 7f79d969c92..cfd451e4088 100644
-> >> > --- a/lib/smbios.c
-> >> > +++ b/lib/smbios.c
-> >> > @@ -563,8 +563,6 @@ ulong write_smbios_table(ulong addr)
-> >> >                 ctx.dev =3D NULL;
-> >> >         }
-> >> >
-> >> > -       /* 16 byte align the table address */
-> >> > -       addr =3D ALIGN(addr, 16);
-> >>
-> >> I think this is wrong.  It will break SMBIOS on a user error. I am
-> >> fine replacing that with a check instead and error out if the address
-> >> is not 16b aligned
+> >> According to our documentation we can use either Python or C tests.
+> >> We generally use Python tests for testing the CLI.
 > >
-> >Well this is why the comment says it must be aligned. This function is
-> >not called willy nilly,from code we control. Checking for alignment
-> >at runtime creates confusion and adds to code size.
+> >Not really...there are lots of C tests for the CLI. It is actually
+> >easier to code, in most cases.
+> >
+> >>
+> >> I cannot see any benefit in trying to write this in C.
+> >
+> >I did go to some effort to document this:
+> >
+> >https://docs.u-boot.org/en/latest/develop/tests_writing.html#test-types
 >
-> The SMBIOS tables themself have no alignment requirement. Only on non UEF=
-I x86 system presenting a UEFI entry point in the range 000F0000h to 000FFF=
-FFh this copy of the entry point has to be 16 byte aligned.
+> As described in that document C is most adequate for testing on the sandb=
+ox. I want to run this test on QEMU and real boards with release U-Boot fir=
+mware, i.e. without deviating configuration.
 
-OK. So perhaps I should reword the comment to say that any
-arch-specific alignment must be respected by the caller?
+Are you checking that the compiler works? Most such tests are a waste
+of time, IMO. Anyway, any test is better than no test, as Tom says,
+so:
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
-Simon
+SImon
