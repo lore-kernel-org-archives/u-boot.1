@@ -4,81 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD75EC3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:58:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 041EAC3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 14:03:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EA3087A37;
-	Thu, 28 Dec 2023 14:58:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 61C7987A23;
+	Thu, 28 Dec 2023 15:03:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fsC9WyEh";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AzZohCWl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D81887A3A; Thu, 28 Dec 2023 14:58:38 +0100 (CET)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
+ id 6FF178773E; Thu, 28 Dec 2023 15:03:23 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 059EA8751B
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:58:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A3B6487A23
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 15:03:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-50e7c6e3c63so2820286e87.3
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:58:35 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-5d05ff42db0so52205177b3.2
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 06:03:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703771915; x=1704376715; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RntlsIPMA1khaCQN55BlrFgfoIDkHb3fP6ppWH7HNzE=;
- b=fsC9WyEh2JBOxBh7brM1Fxw8ZwTwebX9gF9jM6UsrqUYWMnXORhxuUZ/FrdY6ofvGB
- pwcDZS0ns206ciZrYjfsCEyYOBdwJ82wa9UnMjgpfhPpurRVXRRAixnQp0YY+fy9PIXi
- 4OVA7aJqjxYg3SEdook39116Xsj9fysb06Q2xUdH1Y27rTiosI2k57Pu4qJLhIgdms+Q
- JO3tebKbaooYklVC+Y7XBP7YKLGPOSkXDdlkLO8AUtO8glize2YPjqtEBLRnvQvSrcqA
- qGxzKpss9AZlgDJJcdsyPgDOirjx26LQkiNq2d+03DF7tIQXvbpJx4C++4Jgc8b8XFvF
- vBXg==
+ d=konsulko.com; s=google; t=1703772197; x=1704376997; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=cy2OJGLQtp+A18eN3S211Lj0BausteOE9g4bZBrchOY=;
+ b=AzZohCWlktTC3/VuHhqrBZUqewPuBWL1RXAgRr34K84/mmzVFM8Ou1U+HICJqE1D7Z
+ QpQXquUS0Nl2kzSrmb2NQQgIK1LsnrLUpEIClP8tgdu+tlbNVHaoqREKKoQSnsKSjoK0
+ ZT+ZNJprOKp41T//k2SoEtoxzEb1DsXo4wIDE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703771915; x=1704376715;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RntlsIPMA1khaCQN55BlrFgfoIDkHb3fP6ppWH7HNzE=;
- b=fLlo820hcbmYs9X/Mni0l5wuJxpuNn6haGswSd93qToCrbVObhYMoxxmct7dhg0bUr
- ois9UTY7jxBGKnGc9w28YJGgN7xfrJdDCglz8jmplnCUbGsJtnTpNNN/Osidkn0m2w5L
- KSs1KOXqXe1Qi3G6nBZYm1qYCg/mKN5xl0h0Y1aR5LFf9KqlMcXFSlkR/74AXWLACwRY
- XxYHe/1u3pwC9ssFS5kEOvTFyKN5UMrKMh2xJIMoh4kCKVRE5Tj4VA0hcZU03NNOqto4
- C/u3FFh7kyCaprAHWFaj590NUAm6bg3vxaqUPkfYlU4o4ilfVlu7XZi/PTCjKppEcOrv
- 4TpA==
-X-Gm-Message-State: AOJu0YzavlmGy6nwAQtVbg4Xb4XzyPiBV8Pt/u/pnJp1W2R/+1AX3mEL
- zjLYYCqCFqocvGzQfYVJ7o9AR3hROQ9CPkadZQdcCiD4qRzCgw==
-X-Google-Smtp-Source: AGHT+IFRKimDV9SwIH43SiCBujGzITfSKpoxjrUzHXpYVpQGXWPGZtv6nlm0iqTsi68SKE/ytM+uLEQNqHvo3V709A0=
-X-Received: by 2002:ac2:4836:0:b0:50e:7dfe:fe7c with SMTP id
- 22-20020ac24836000000b0050e7dfefe7cmr1022727lft.278.1703771915093; Thu, 28
- Dec 2023 05:58:35 -0800 (PST)
-MIME-Version: 1.0
-References: <20231226094625.221671-1-sjg@chromium.org>
- <20231226120710.GH2652760@bill-the-cat>
- <CAC_iWjLy1E9wEW3zX2waN9mc=tz7PTKE0gJ4RucqMmZR2cA6_Q@mail.gmail.com>
- <CAFLszTgqS9TF1F-RxO1dpZPZGG6QBiKm0n_e0yVHAume+xT3eA@mail.gmail.com>
- <CAC_iWjKTmG=16_PZr-5TgmmPL8e4VStX3E4nLGXSxt0pJzUS3g@mail.gmail.com>
- <CAFLszTi7DpEjRUcX3vaSJKRe1sBeZOWwgkGpjtoLYJ+_=_pw0g@mail.gmail.com>
-In-Reply-To: <CAFLszTi7DpEjRUcX3vaSJKRe1sBeZOWwgkGpjtoLYJ+_=_pw0g@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 28 Dec 2023 15:57:59 +0200
-Message-ID: <CAC_iWjJvOxt6Lhr7phYgEb8=jk_DrJzOD+W7ZT3vQoRkosC1pw@mail.gmail.com>
-Subject: Re: [PATCH v4] fdt: Allow the devicetree to come from a bloblist
+ d=1e100.net; s=20230601; t=1703772197; x=1704376997;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cy2OJGLQtp+A18eN3S211Lj0BausteOE9g4bZBrchOY=;
+ b=ZR7JPEc+CAiTftagE6cKBM9aKhdKykQACf5jDDKUqH7HKjLmA8/0LnNqLdJk+xK4GO
+ eAxaHXegS5W2iFfzrHlvJj/mUomUoiS7GhvogDcaT71vrJ/4SI9oW8TqgcmiLrpxURwR
+ ONJYfcail4LKbKLuGaDy/PrDlccIIzxoABthY3yWcfwfUTu6xinaHqZY3udSfZzrMpuc
+ sRHntiBdlVCCQWVxvVnFnxJicbZQNFcqGHtclKUSDyk3szBUohlkQevl999zVEJReOjl
+ gwu7K1G8ZLyt+s02QSh/tB/1CkXwQAOo4zdB+uA6Qfenw7BAJfcJTTpvyuB28dSlUcsb
+ v6gQ==
+X-Gm-Message-State: AOJu0Yz232BaEqrT7N03kt7dMigq1Tiq+wBonwVuK+kpYDIfEWJp9Qvh
+ 8THMvniiPXCmd7An0LU3TFHl3XemTcUIMSe0rkl8BnVBeG4=
+X-Google-Smtp-Source: AGHT+IFMfXNrU0Duv74ybafmJpndQ7l4D7di3ydQ5oc+x0wVeR5/vizK1gdBNCC0TxgxrfdjEYLN5w==
+X-Received: by 2002:a81:8a42:0:b0:5e8:dcdd:973e with SMTP id
+ a63-20020a818a42000000b005e8dcdd973emr6916929ywg.39.1703772197166; 
+ Thu, 28 Dec 2023 06:03:17 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ et18-20020a05690c2e1200b005e9276a4cdcsm7456587ywb.7.2023.12.28.06.03.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 28 Dec 2023 06:03:16 -0800 (PST)
+Date: Thu, 28 Dec 2023 09:03:13 -0500
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Marek Vasut <marex@denx.de>, Raymond Mao <raymond.mao@linaro.org>,
- Baruch Siach <baruch@tkos.co.il>, 
- Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jerry Van Baren <vanbaren@cideas.com>, Michal Simek <michal.simek@amd.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Nikhil M Jain <n-jain1@ti.com>,
- Qu Wenruo <wqu@suse.com>, Sean Anderson <seanga2@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de,
+ robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org,
+ conor@kernel.org, neil.armstrong@linaro.org,
+ caleb.connolly@linaro.org, ff@shokubai.tech,
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
+ pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
+ maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de,
+ michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk,
+ peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com,
+ marex@denx.de, mibodhi@gmail.com
+Subject: Re: [PATCH v3 4/8] dts: Add alternative location for upstream DTB
+ builds
+Message-ID: <20231228140313.GB2652760@bill-the-cat>
+References: <20231228115804.3626579-1-sumit.garg@linaro.org>
+ <20231228115804.3626579-5-sumit.garg@linaro.org>
+ <CAFLszThfxe_n02auF+vZ1u7FynKkrWEYFU3SdkRTLgBVuiv+Hw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="yuVxJM5RvknI8FGo"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThfxe_n02auF+vZ1u7FynKkrWEYFU3SdkRTLgBVuiv+Hw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,110 +103,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-[...]
 
-> > > >
-> > > > Same here. On top of that the bloblist has a few items in there, e.g a
-> > > > TPM eventlog. What are we going to do? Add a Kconfig for each item?
-> > >
-> > > No, but that is just a straw man. The DT is special and U-Boot reports
-> > > where it comes from.
+--yuVxJM5RvknI8FGo
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Dec 28, 2023 at 01:37:26PM +0000, Simon Glass wrote:
+> Hi Sumit,
+>=20
+> On Thu, Dec 28, 2023 at 11:58=E2=80=AFAM Sumit Garg <sumit.garg@linaro.or=
+g> wrote:
 > >
-> > The story is identical to the EventLog. It's 'special' as well and
-> > U-Boot has to pick it up, otherwise the hardware and the EventLog will
-> > end up with different values
->
-> Why are you talking about event log? Let's stick to the topic at hand.
-
-We are. The reason I bring this up is pretty obvious. It has identical
-properties to the DT, and I *dont* want a Kconfig option to enable or
-disable it.
-
->
+> > Allow platform owners to mirror devicetree files from devitree-rebasing
+> > directory into dts/arch/$(ARCH) (special case for dts/arch/arm64). Then
+> > build then along with any *-u-boot.dtsi file present in arch/$(ARCH)/dts
+> > directory. Also add a new Makefile for arm64.
 > >
-> > >
-> > > >
-> > > > This has been going back and forth for a while. I've lost count of how
-> > > > many times I repeated the same proposal, but here it goes again. We
-> > > > have OF_BOARD and BLOBLIST options. The bloblist and its properties
-> > > > are scannable at runtime. Can't we use the combination of these 2 can
-> > > > be used to imply we expect things from a bloblist. If we want to be
-> > > > stricter in the future and explicitly expect the DT from a bloblist,
-> > > > we could add a Kconfig option failing the boot if that's missing.
-> > >
-> > > I would like to have that Kconfig option now, not later. In my mind,
-> > > the boot must be deterministic, so that if OF_BLOBLIST is enabled, the
-> > > DT must come from there, or it is an error.
+> > This will help easy migration for platforms which currently are complia=
+nt
+> > with upstream Linux kernel devicetree files.
 > >
-> > And how is what I proposed not deterministic? What prevents us from
-> > adding that Kconfig option now?
-> > The only difference is that by default, U-Boot will try bloblist ->
-> > board-specific method unless a Kconfig option prevents the fallback.
-> > I've been working with vendors and helping them implement the firmware
-> > handoff spec in their proprietary bootloaders and Raymond contributed
-> > the implementation for TF-A. At the same time, I am pretty sure
-> > vendors will need time to implement this properly. I don't see how
-> > adding an implicit Kconfig option will help them push this forward.
+> > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> > ---
 > >
-> > IOW I prefer U-Boot to *always* scan for a bloblist as the first
-> > discovery DT method (unless the DT comes bundled with U-Boot), rather
-> > than expecting users to turn a Kconfig knob.
->
-> It is the 'unless the DT comes bundled with U-Boot' which I am talking
-> about, but I now have a better understanding of the problem here.
->
-> I don't want CONFIG_BLOBLIST to mean that the DT comes from a
-> bloblist.
-
-But it doesn't mean that. It means 'try to scan the bloblist for a DT first'.
-
-> Simply put, I want to be able to use the U-Boot DT during
-> development, without needing to rebuild some prior stage or update
-> some other project. So I would like the use of bloblist to be behind
-> an OF_BLOBLIST option.
-
-That's easy instead of OF_BOARD use OF_EMBED or OF_SEPARATE?
-
->
-> From Tom's email and your other reply, it seems that we could all live
-> with an OF_BLOBLIST option to enable DT-in-bloblist, making it
-> optional but default 'y'?
->
+> > Changes in v3:
+> > --------------
+> > - Minor commit message update
 > >
-> > >
-> > > Also, repeating it doesn't make the proposal good. We agreed that
-> > > OF_BOARD would eventually go away, so building on top of it is not
-> > > setting us up for the future.
+> > Changes in v2:
+> > --------------
+> > - s/DEVICE_TREE_LOC/dt_dir/ and s/U-boot/U-Boot/
 > >
-> > No, we didn't [0]. In fact, I said I don't see OF_BOARD *ever* going
-> > away. The only thing I suggested was to rename it
->
-> Well I'm just not sure what is going on. Use of bloblist should not
-> require board-specific code. It should be a generic mechanism, in
-> fdtdec_setup()
-
-It doesn't, we never asked for that. There's even code in a previous
-iteration from me showing exactly what I had in mind. We always said
-scan for a bloblist if OF_BOARD is selected, in priority, and if you
-don't find a DT try a board-specific method (and add a Kconfig option
-to fail the boot if required).
-
->
-> There are too many cooks in this kitchen right now, I'll try another
-> spin of my patch.
-
-I really don't like another OF_XXXXXXX for determining where the DT
-comes from, but I've explained my opinion way too many times.  I'll
-let you and Tom decide on this
-
-Thanks
-/Ilias
->
+> >  dts/Kconfig             | 11 +++++++++++
+> >  dts/Makefile            | 17 ++++++++++++++---
+> >  dts/arch/arm64/Makefile | 14 ++++++++++++++
+> >  3 files changed, 39 insertions(+), 3 deletions(-)
+> >  create mode 100644 dts/arch/arm64/Makefile
 > >
-> > [...]
+> > diff --git a/dts/Kconfig b/dts/Kconfig
+> > index 00c0aeff893..e58c1c6f2ab 100644
+> > --- a/dts/Kconfig
+> > +++ b/dts/Kconfig
+> > @@ -85,6 +85,17 @@ config OF_LIVE
+> >           enables a live tree which is available after relocation,
+> >           and can be adjusted as needed.
 > >
-> > [0] https://lore.kernel.org/u-boot/CAC_iWjKrkTM4spyXpoDDartJ41a553VDE+XM5gz3+jsNTFqtbg@mail.gmail.com/
-> >
->
-> Regards,
-> Simon
+> > +config OF_UPSTREAM
+> > +       bool "Enable use of devicetree imported from Linux kernel relea=
+se"
+> > +       help
+> > +         Traditionally, U-Boot platforms used to have their custom dev=
+icetree
+> > +         files or copy devicetree files from Linux kernel which are ha=
+rd to
+> > +         maintain and can usually get out-of-sync from Linux kernel. T=
+his
+> > +         option enables platforms to migrate to devicetree-rebasing re=
+po where
+> > +         a regular sync will be maintained every major Linux kernel re=
+lease
+> > +         cycle. However, platforms can still have some custom u-boot s=
+pecific
+> > +         bits maintained as part of *-u-boot.dtsi files.
+>=20
+> My only other suggestion here is to mention that this should be set in
+> Kconfig, for the SoC as a whole. So I believe that means that it
+> should be hidden, with no string for the 'bool':
+>=20
+>       bool  # Enable use of devicetree imported from Linux kernel release
+
+I think we can just keep prompting for it now, to make the transition
+easier, before this option just goes away in time, hopefully.
+
+> Also, this doesn't seem to work for me. Before this series I get these
+> files when building firefly-rk3399:
+>=20
+> rk3399-eaidk-610.dtb            rk3399-khadas-edge-v.dtb
+> rk3399-orangepi.dtb        rk3399-rock-pi-4a.dtb
+> rk3399-evb.dtb                  rk3399-leez-p710.dtb
+> rk3399-pinebook-pro.dtb    rk3399-rock-pi-4c.dtb
+> rk3399-ficus.dtb                rk3399-nanopc-t4.dtb
+> rk3399-pinephone-pro.dtb   rk3399-rockpro64.dtb
+> rk3399-firefly.dtb              rk3399-nanopi-m4-2gb.dtb
+> rk3399pro-rock-pi-n10.dtb  rk3399-roc-pc.dtb
+> rk3399-gru-bob.dtb              rk3399-nanopi-m4b.dtb
+> rk3399-puma-haikou.dtb     rk3399-roc-pc-mezzanine.dtb
+> rk3399-gru-kevin.dtb            rk3399-nanopi-m4.dtb
+> rk3399-rock-4c-plus.dtb
+> rk3399-khadas-edge-captain.dtb  rk3399-nanopi-neo4.dtb    rk3399-rock-4se=
+=2Edtb
+> rk3399-khadas-edge.dtb          rk3399-nanopi-r4s.dtb     rk3399-rock960.=
+dtb
+>=20
+> Afterwards I get this:
+>=20
+> make[3]: *** No rule to make target
+> 'dts/arch/arm64/rk3399-firefly.dtb', needed by 'dtbs'.  Stop.
+>=20
+> So I set this manually for that one board:
+>=20
+> CONFIG_DEFAULT_DEVICE_TREE=3D"rockchip/rk3399-firefly"
+>=20
+> and get:
+>=20
+> make[3]: *** No rule to make target
+> 'dts/arch/arm64/rockchip/rk3399-firefly.dtb', needed by 'dtbs'.  Stop.
+>=20
+> I am not sure how to fix this, nor how this can be made to build all
+> the DTs for rk3399, as it does today.
+
+Looking at the patch for amlogic boards, you need to make the link to
+devicetree-rebasing inside dts/...
+
+> > diff --git a/dts/arch/arm64/Makefile b/dts/arch/arm64/Makefile
+> > new file mode 100644
+> > index 00000000000..16e9fea622d
+> > --- /dev/null
+> > +++ b/dts/arch/arm64/Makefile
+> > @@ -0,0 +1,14 @@
+> > +# SPDX-License-Identifier: GPL-2.0+
+> > +
+> > +include $(srctree)/scripts/Makefile.dts
+> > +
+> > +targets +=3D $(dtb-y)
+> > +
+> > +# Add any required device tree compiler flags here
+> > +DTC_FLAGS +=3D -a 0x8
+> > +
+> > +PHONY +=3D dtbs
+> > +dtbs: $(addprefix $(obj)/, $(dtb-y))
+> > +       @:
+> > +
+> > +clean-files :=3D */*.dtb */*.dtbo */*_HS
+>=20
+> What is _HS for?
+
+Should we even need the clean-files part here? I think this is fixed
+with:
+https://patchwork.ozlabs.org/project/uboot/patch/20231226154619.5071-9-maxi=
+m.uvarov@linaro.org/
+
+--=20
+Tom
+
+--yuVxJM5RvknI8FGo
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWNgCEACgkQFHw5/5Y0
+tyzp+gv/XfEU2yysR4a2Tjfoa5Qw6wODpyqezTXZAvIOIGkcDVizZjuSHwrSYa6y
+/1REvKlhvnRj341r174g4EEkTvj0mZ+YuROHpBLz43yp0Tau0acpBvGAuFDZpmxn
+cBr5MojseoIyz24jKpE/lqM5hX/TIRAZuUQx4UUrmgL9jRv+Zbi+h8OhYTLbKhyL
+LNOEfkLQSnhU9KdipjZcl0CnAo5N7IVwpN4eZyrYmrOZGP7ajN6Ra5QJIlfewici
+RXn1KX5fws296kSsIVboeHwCY8I0DlSKM7Em/LvYoK2bYZfYG4Wes01jJOmSIJlb
+ct7uU5uDmB4KkVtisJio/avDTclpNzF5iOZjApFCP47e3k9gV8RvmExPPJCQCORq
+Q0Yatvc1Jq+oniMtLhefhCKjEQ2o7q0EcKurwoGASS1nK2o8uaD5EyETnLJPfEsH
+UitMd8QAg1Vt9U6F/8OsWk60VC3pQM7+QvFH/CQ54vrTWz2oQF4hKSL0KBDVnN+/
+Auis/xgb
+=HIFb
+-----END PGP SIGNATURE-----
+
+--yuVxJM5RvknI8FGo--
