@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EC1EC3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:40:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FC06C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:40:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F0B287A8A;
-	Thu, 28 Dec 2023 14:37:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1914D87A59;
+	Thu, 28 Dec 2023 14:38:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kCiRdYx2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jSdwYXQr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11C8487A8E; Thu, 28 Dec 2023 14:37:55 +0100 (CET)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
+ id 084EC87A15; Thu, 28 Dec 2023 14:37:57 +0100 (CET)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC82F87A89
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:37:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 508CB87A5F
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:37:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-28c7e30c83fso1162504a91.1
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:37:51 -0800 (PST)
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-28be8ebcdc1so3098486a91.0
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:37:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703770670; x=1704375470; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703770672; x=1704375472; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rQFGXpLrk6kSnjFKU1ozfQPXzl29UyLg+epm/ZpWMUs=;
- b=kCiRdYx2ghqBZJL+XGfpCDUeMW71MaU/x+arIk90IGF4lhuyW8ivE5h5O8jmLeK5Gr
- J7GwolqqGwT8pUwG78vGwQ8e5m7Lc5mYNlefH93W8kB3dCXXKn4HqNmDK0QpMdM5AefF
- yk++bZEC8A1k7lNHfxSdjJUY+9b0Fr2+GBnXI=
+ bh=QETjF5M5IWWckq3528nc9+DvyMlYXh5vE3tcSOFnFMg=;
+ b=jSdwYXQrNK/YkTQ3zpnSVMumuiyRSkLEh0Qd4E9WSvhohr+5okAHiQv89/1/VWzYcx
+ 03Ox5lr7oy2+Bs3B39oOTcyrctgNFEH2+ssU8C+n22K5KDd1O1TLJmm0vLwTWh3xw+sS
+ LEEEg202iaJT8e/ilfP7xn8V6SLrll8hXQcSU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703770670; x=1704375470;
+ d=1e100.net; s=20230601; t=1703770672; x=1704375472;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rQFGXpLrk6kSnjFKU1ozfQPXzl29UyLg+epm/ZpWMUs=;
- b=dCkwtKoQ2ZY3RfE0gOS3LCrtwi1wTkj8zvk4GSPUlNJZE5CFsrnZscymzRzpPg/9gp
- 2fV7P7p375c1wCLtds08iYJCtGt55rsgxbmff1RY/D15VNDQ/tGdIuXa3pbJb+sE5SIq
- 3xeft7E/Pj4/5olSnzS9PNiWMW6uCy7BGgRLVToLIvg5apnlqKCqlongq6/ALxjW2Z65
- /3slsdO1v7nVKjGVrfa3hXABdZBC+xd5dlRdZxWzsT9lEhjBC5BV2DfIqq5HPKOS4CcA
- We4nUYE6Gf4nf6wXBWAFLPZNNCkvf8Q+b3CYPp74py+zeCNZVmxDxoEYmBDeNy1iFya/
- 34Kg==
-X-Gm-Message-State: AOJu0Yy6oZgAKK8kAFVdGJSeZ4qApWHdzlQgex7da09tN/jmOt7t5REl
- HamOPst9+9z/0Z9+ok5le0UGspmi4HI/iEvpppUe1RrUj8Uv
-X-Google-Smtp-Source: AGHT+IFsZJrO/VHQntphMGWANN0xKKbMOIfKxR/oUyuYHulsQcR0pMpVjVgmGFqTHxzmy8950SPO+/RLE4luoQ7eSok=
-X-Received: by 2002:a17:90a:8b88:b0:28c:a634:e4b9 with SMTP id
- z8-20020a17090a8b8800b0028ca634e4b9mr324745pjn.34.1703770670068; Thu, 28 Dec
- 2023 05:37:50 -0800 (PST)
+ bh=QETjF5M5IWWckq3528nc9+DvyMlYXh5vE3tcSOFnFMg=;
+ b=vhUfscUQP7cgkyPUx0eNchQWc0FYj82K1PSKZp8sL0Z4aW8k6lgSmTmkjtQBO7pE+F
+ vnOQK1ytZsD/6sXxJlkwwduTsmm6wuLkX36Ro8XtM61cNw6qXgfBIG1zyvH0uUyTdAR2
+ 5PubTnUPUtWSl61yZmOIC8peM+x+eqwni7sKZjbLKEwKmLRd75ato3+RwFiYS5ql4JCv
+ KTpeNs5uohVvJYkjVHOFQtmCv0+oZpQLHobYrcHxd27NJ+cg15xcCYaZGzcnuZXq7cF7
+ rR6a5fFB0nCKHoYtMIqEwwJUdoqiMfaVzdgM8aSi2W44zIFSf+yQKtoHiFLG6AMOss6A
+ pc+g==
+X-Gm-Message-State: AOJu0YyV7vXBIn2m8X2KvSuR8KKdIllCu68/+s613a6MLgD8G+ZDZPC2
+ bRhZlo2+bxNLnWMCEZUC/6PbRA1UIGlZY3iEs1QqnyM6zYVl
+X-Google-Smtp-Source: AGHT+IHQ8MduAgkfipk56kbaTtknEYyQgkQeFZ86UB2BDutH4PGyPlJPh5x3rzDFGEUfv/YgthNEvH9lBMtN57FGE0c=
+X-Received: by 2002:a17:90a:ae09:b0:28c:6529:ecb4 with SMTP id
+ t9-20020a17090aae0900b0028c6529ecb4mr1791545pjq.98.1703770672688; Thu, 28 Dec
+ 2023 05:37:52 -0800 (PST)
 MIME-Version: 1.0
-References: <20231214135103.1606605-1-sumit.garg@linaro.org>
- <20231214135103.1606605-5-sumit.garg@linaro.org>
- <CAPnjgZ37QMzyVNxd8608dMBXVPed-PAU39CAhOrMRHVedEnSkQ@mail.gmail.com>
- <CAFA6WYMeLoD_z1W+iK3C6yj44dO_pdM71bhd6gK14gB==75gxw@mail.gmail.com>
- <CAFLszTgnOHQJGin-=32syDVPAkLXAni7QFd3WV_xtW0a2D84Bg@mail.gmail.com>
- <CAFA6WYO6Q9s0x+-N0XV+Hyw-07nuwR8ib9-p4=P15JHccb5avw@mail.gmail.com>
-In-Reply-To: <CAFA6WYO6Q9s0x+-N0XV+Hyw-07nuwR8ib9-p4=P15JHccb5avw@mail.gmail.com>
+References: <20231226094625.221671-1-sjg@chromium.org>
+ <20231226120710.GH2652760@bill-the-cat>
+ <CAC_iWjLy1E9wEW3zX2waN9mc=tz7PTKE0gJ4RucqMmZR2cA6_Q@mail.gmail.com>
+ <CAFLszTgqS9TF1F-RxO1dpZPZGG6QBiKm0n_e0yVHAume+xT3eA@mail.gmail.com>
+ <20231227201130.GV2652760@bill-the-cat>
+In-Reply-To: <20231227201130.GV2652760@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 28 Dec 2023 13:37:18 +0000
-Message-ID: <CAFLszTi0DsJQx++de=bLreUtKhnchzH63e=wgF+9WQe+vD6VAQ@mail.gmail.com>
-Subject: Re: [PATCH 4/8] dts: Add alternative location for upstream DTB builds
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, trini@konsulko.com, robh+dt@kernel.org, 
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
- rfried.dev@gmail.com, marex@denx.de
+Date: Thu, 28 Dec 2023 13:37:39 +0000
+Message-ID: <CAFLszThJc04Zh1tFA4Cp7+oKVv2oKtk2015F37eMzPcXgqW7bw@mail.gmail.com>
+Subject: Re: [PATCH v4] fdt: Allow the devicetree to come from a bloblist
+To: Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Marek Vasut <marex@denx.de>, Raymond Mao <raymond.mao@linaro.org>,
+ Baruch Siach <baruch@tkos.co.il>, 
+ Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jerry Van Baren <vanbaren@cideas.com>, Michal Simek <michal.simek@amd.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Nikhil M Jain <n-jain1@ti.com>,
+ Qu Wenruo <wqu@suse.com>, Sean Anderson <seanga2@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -95,177 +93,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sumit,
+Hi Tom,
 
-On Tue, Dec 26, 2023 at 10:20=E2=80=AFAM Sumit Garg <sumit.garg@linaro.org>=
- wrote:
+
+On Wed, Dec 27, 2023 at 8:06=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
 >
-> On Tue, 26 Dec 2023 at 15:17, Simon Glass <sjg@chromium.org> wrote:
+> On Wed, Dec 27, 2023 at 05:48:42PM +0000, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > Hi Sumit,
-> >
-> > On Wed, Dec 20, 2023 at 12:01=E2=80=AFPM Sumit Garg <sumit.garg@linaro.=
-org> wrote:
+> > On Tue, Dec 26, 2023 at 12:07=E2=80=AFPM Tom Rini <trini@konsulko.com> =
+wrote:
 > > >
-> > > Hi Simon,
+> > > On Tue, Dec 26, 2023 at 09:46:25AM +0000, Simon Glass wrote:
 > > >
-> > > On Wed, 20 Dec 2023 at 10:17, Simon Glass <sjg@chromium.org> wrote:
+> > > > Standard passage provides for a bloblist to be passed from one firm=
+ware
+> > > > phase to the next. That can be used to pass the devicetree along as=
+ well.
+> > > > Add an option to support this.
 > > > >
-> > > > Hi Sumit,
+> > > > Tests for this will be added as part of the Universal Payload work.
 > > > >
-> > > > On Thu, 14 Dec 2023 at 06:52, Sumit Garg <sumit.garg@linaro.org> wr=
-ote:
-> > > > >
-> > > > > Allow platform owners to mirror devicetree files from devitree-re=
-basing
-> > > > > directory into dts/arch/$(ARCH) (special case for dts/arch/arm64)=
-. Then
-> > > > > build then along with any *-u-boot.dtsi file present in arch/$(AR=
-CH)/dts
-> > > > > directory.
-> > > >
-> > > > Also add a new Makefile for arm64.
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > ---
+> > > > The discussion on this was not resolved and is now important due to=
+ the
+> > > > bloblist series from Raymond. So I am sending it again since I beli=
+eve
+> > > > this is a better starting point than building on OF_BOARD
 > > >
-> > > I suppose you are referring to dts/arch/arm64/Makefile which has been
-> > > added by this patch.
+> > > I really don't like adding another option for "DT is given to us". Wh=
+y
+> > > isn't adding another enum to fdt_source_t sufficient
 > >
-> > Yes, I just mean that you should mention this in the commit message
+> > That is added by this patch, but...
 > >
+> > >, and if we have
+> > > bloblist enabled, that will look for and use if found?
+> >
+> > ...this is the question. I would like to be able to enable bloblist
+> > without *requiring* the DT to come from there, hence the separate
+> > Kconfig option.
+> >
+> > > Maybe some other
+> > > code needs to be restructured and cleaned up too?
+> >
+> > Possibly, but I really am not keen on this board-specific solution. I
+> > believe Ilias & I agreed that OF_BOARD should fade away, so I don't
+> > like adding another thing onto it.
 >
-> Okay, I will append the commit message.
+> I think you're missing something then. It should not be board specific
+> to just find the dtb via bloblist, without a new CONFIG.
+
+Yes, that is what I am looking for.
+
+> Whatever is
+> stopping that is what needs to be refactored and then you can just
+> extend fdt_source_t without a new CONFIG option.
+
+OK, but I need a way to turn it off, at least for development.
+
+[merging in the other thread:]
+
+On Wed, Dec 27, 2023 at 8:11=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
 >
+> On Wed, Dec 27, 2023 at 05:48:44PM +0000, Simon Glass wrote:
+> > Hi Ilias,
+> >
+> > On Wed, Dec 27, 2023 at 6:44=E2=80=AFAM Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
 > > >
+> > > Hi Tom,
+> > >
+> > > On Tue, 26 Dec 2023 at 14:07, Tom Rini <trini@konsulko.com> wrote:
 > > > >
+> > > > On Tue, Dec 26, 2023 at 09:46:25AM +0000, Simon Glass wrote:
+> > > >
+> > > > > Standard passage provides for a bloblist to be passed from one fi=
+rmware
+> > > > > phase to the next. That can be used to pass the devicetree along =
+as well.
+> > > > > Add an option to support this.
 > > > > >
-> > > > > This will help easy migration for platforms which currently are c=
-ompliant
-> > > > > with upstream Linux kernel devicetree files.
+> > > > > Tests for this will be added as part of the Universal Payload wor=
+k.
 > > > > >
-> > > > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > > > > ---
-> > > > >  dts/Kconfig             | 11 +++++++++++
-> > > > >  dts/Makefile            | 17 ++++++++++++++---
-> > > > >  dts/arch/arm64/Makefile | 14 ++++++++++++++
-> > > > >  3 files changed, 39 insertions(+), 3 deletions(-)
-> > > > >  create mode 100644 dts/arch/arm64/Makefile
-> > > > >
-> > > > > diff --git a/dts/Kconfig b/dts/Kconfig
-> > > > > index 00c0aeff893..96396f12b67 100644
-> > > > > --- a/dts/Kconfig
-> > > > > +++ b/dts/Kconfig
-> > > > > @@ -85,6 +85,17 @@ config OF_LIVE
-> > > > >           enables a live tree which is available after relocation=
-,
-> > > > >           and can be adjusted as needed.
-> > > > >
-> > > > > +config OF_UPSTREAM
-> > > > > +       bool "Enable use of devicetree imported from Linux kernel=
- release"
-> > > > > +       help
-> > > > > +         Traditionally, U-boot platforms used to have their cust=
-om devicetree
+> > > > > The discussion on this was not resolved and is now important due =
+to the
+> > > > > bloblist series from Raymond. So I am sending it again since I be=
+lieve
+> > > > > this is a better starting point than building on OF_BOARD
 > > > >
-> > > > U-Boot
-> > > >
-> > > > (I think I mentioned this, but you thought I said U-boot...but it
-> > > > really is U-Boot). Perhaps grep your patches next time.
-> > >
-> > > Ah, I see. It looks like I missed that bit, and will take care of it
-> > > in the next revision.
-> > >
-> > > >
-> > > > > +         files or copy devicetree files from Linux kernel which =
-are hard to
-> > > > > +         maintain and can usually get out-of-sync from Linux ker=
-nel. This
-> > > > > +         option enables platforms to migrate to devicetree-rebas=
-ing repo where
-> > > > > +         a regular sync will be maintained every major Linux ker=
-nel release
-> > > > > +         cycle. However, platforms can still have some custom u-=
-boot specific
-> > > > > +         bits maintained as part of *-u-boot.dtsi files.
-> > > >
-> > > > I'm a bit nervous about this. It means that boards chose between th=
-is
-> > > > dir of the local files. It means there is some effort to switch.
-> > > >
-> > > > I wonder if we could default to using the rebasing thing, with boar=
-ds
-> > > > having to 'opt out'? So this should be 'default y' ?
-> > >
-> > > Ideally that should be our migration path going forward once we get
-> > > enough boards migrated to use rebasing repo. But at this initial stag=
+> > > > I really don't like adding another option for "DT is given to us". =
+Why
+> > > > isn't adding another enum to fdt_source_t sufficient, and if we hav=
 e
-> > > we have to put some effort on migrating boards to use rebasing
-> > > subtree, although effort should be just adding (given DT bindings
-> > > compliance) following to defconfig (see patch #7):
+> > > > bloblist enabled, that will look for and use if found? Maybe some o=
+ther
+> > > > code needs to be restructured and cleaned up too?
 > > >
-> > > CONFIG_OF_UPSTREAM=3Dy
-> > > CONFIG_DEFAULT_DEVICE_TREE=3D"amlogic/meson-gxbb-nanopi-k2"
-> > >
-> > > and create a mirrored copy of:
-> > > ../../../devicetree-rebasing/src/arm64/amlogic/ into
-> > > dts/arch/arm64/amlogic/ with modifications to add targets to
-> > > dts/arch/arm64/Makefile.
-> > >
-> > > I am happy to put in that effort but certainly for new board support
-> > > that would like to import DT from Linux it should be the default. Tha=
-t
-> > > stands true for the Qcom platform series for which Caleb is currently
-> > > working on.
+> > > Same here. On top of that the bloblist has a few items in there, e.g =
+a
+> > > TPM eventlog. What are we going to do? Add a Kconfig for each item?
 > >
-> > The problem I see is that this is board-by-board, so will never
-> > happen. Changing one board (e.g. rockpro64-rk3399) typically involves
-> > changing the .dtsi files it includes (e.g. rk3399.dtsi) so it is
-> > hard/impossible to do one board without doing all.
+> > No, but that is just a straw man. The DT is special and U-Boot reports
+> > where it comes from.
 > >
-> > So this is why I believe the setting should be on an SoC basis, not on
-> > a board basis.
+> > >
+> > > This has been going back and forth for a while. I've lost count of ho=
+w
+> > > many times I repeated the same proposal, but here it goes again. We
+> > > have OF_BOARD and BLOBLIST options. The bloblist and its properties
+> > > are scannable at runtime. Can't we use the combination of these 2 can
+> > > be used to imply we expect things from a bloblist. If we want to be
+> > > stricter in the future and explicitly expect the DT from a bloblist,
+> > > we could add a Kconfig option failing the boot if that's missing.
+> >
+> > I would like to have that Kconfig option now, not later. In my mind,
+> > the boot must be deterministic, so that if OF_BLOBLIST is enabled, the
+> > DT must come from there, or it is an error.
 >
-> Sure, I will enable OF_UPSTREAM on a per SoC basis.
->
-> >
-> > >
-> > > >
-> > > >
-> > > > > +
-> > > > >  choice
-> > > > >         prompt "Provider of DTB for DT control"
-> > > > >         depends on OF_CONTROL
-> > > > > diff --git a/dts/Makefile b/dts/Makefile
-> > > > > index 3437e54033d..8098bf8191a 100644
-> > > > > --- a/dts/Makefile
-> > > > > +++ b/dts/Makefile
-> > > > > @@ -10,10 +10,20 @@ ifeq ($(DEVICE_TREE),)
-> > > > >  DEVICE_TREE :=3D unset
-> > > > >  endif
-> > > > >
-> > > > > +ifeq ($(CONFIG_OF_UPSTREAM),y)
-> > > > > +ifeq ($(CONFIG_ARM64),y)
-> > > > > +DEVICE_TREE_LOC :=3D dts/arch/arm64
-> > > >
-> > > > dt_dir ?
-> > >
-> > > Okay I will rename it.
-> > >
-> > > >
-> > > > Should we move the arm64 DTs to arch/arm64 ?
-> > >
-> > > IMO, the migration path should be to use rebasing subtree via
-> > > dts/arch/arm64/ and dropping DTs except *-u-boot.dtsi from
-> > > arch/$(ARCH)/dts. So moving DTs from arch/arm/ to arch/arm64/ seems
-> > > like a redundant change to me.
-> >
-> > I can see that argument, but having two different directory structures
-> > would be confusing.
->
-> I can see your point but U-Boot arch arm64 code is also contained in
-> arch/arm/. However, I would suggest first migrating to DT rebasing and
-> then we can do a move for the leftovers (*-u-boot.dtsi and such). A
-> double move won't add much value.
+> Determinism doesn't require a CONFIG option, it just requires an if/else
+> tree where we say what the "correct" priority list should be and then
+> set a flag so that we can tell the user where we found it too. This also
+> means that we can get whatever is going to use this mechanism to
+> migrate over, and have less of a chicken-and-egg type of problem.
 
-OK, so long as you are planning to do that next?
+OK I think I understand what is going on here. We need a way to enable
+OF_BLOBLIST while still allowing the prior stage to NOT provide a
+bloblist, at least for a transition period (=3D forever, I suspect, but
+that's another discussion).
+
+How about if OF_BLOBLIST enables the option, but we allow a fallback
+to OF_BOARD if the DT is not there?
+
+>
+> > Also, repeating it doesn't make the proposal good. We agreed that
+> > OF_BOARD would eventually go away, so building on top of it is not
+> > setting us up for the future.
+>
+> I wonder if OF_BOARD will ever go away, and I'm not convinced it will
+> either. Unless you just mean re-naming it and making a few ad-hoc
+> standards more easily re-usable, which also will need to happen
+> regardless.
 
 Regards,
 Simon
