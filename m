@@ -4,109 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15176C3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 06:34:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC499C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 06:53:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49536874D5;
-	Thu, 28 Dec 2023 07:34:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 0A46587716;
+	Thu, 28 Dec 2023 07:53:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="00JpZEt7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oJO7CuBi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA2F3874D9; Thu, 28 Dec 2023 07:34:37 +0100 (CET)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::601])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 227CD87873; Thu, 28 Dec 2023 07:53:13 +0100 (CET)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 655F786DEE
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 07:34:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DE53687716
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 07:53:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=tejas.arvind.bhumkar@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=BM/eiiMOhMxYlmgRVJsN+6DG+Towo3HfhX/3hK8yLbNMvI+RsfHf+O6lQb6+kbGCmMsAroNGAyek7O2Gog52e0CSUgN3R7ZnuTUfjPjpLjLP1xuJkT6r7/oDQ34kMveZdzcuyPi8ACPEtF+hu1B9ZxDIOkC6RC3XL1GWUik275EU/lkO82V85YOL9r6tZS7ysRfyepJzW2GUoYHy6cYv7zAGMczAoJnSf9RWCXcqXWNu7Un3ClinAJ5aq1QZudQSvM8BBATIriobF4KwdYxMeFpyBCOkc3RIixxD6UpkuENkhyC0ck4dfta9MUH7fuM+cgHjskC8c8n4nWLuUzqafg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HZgRtO5XMMxpbQp9JqFKsIXoY17eWlULzY9FNAQAmjA=;
- b=ai5Dk1diESij3TIGxRPwYMCxq4CdFAIGoiynEAYUW6ExgQNIN/PneZTjlMJFpygrKiJ2KALR3SCjBLe0M8lsKORtwbAG7VBeP39O78jeVeOS0SB9WZkMxLst7EDNG8Hmc4l3mElnfu/xugxn14mAXnXYlqhDLP3hXGVf6YlpOZyzw+rly3yo5HHuSa2VpihpYJMlyQwxcPRfH6P1Wt4iRjckA5UULJwriCGSexJ2e99lEe05VkXmTuDaNbMuRTluY44qc82mAqzDKdRaI7mLcElFrttMvKJse3vJ+oA1hGf/xkOlgpw9G3+LN3InAGAgPzUy9TdN+46XAfwsmKbhEQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HZgRtO5XMMxpbQp9JqFKsIXoY17eWlULzY9FNAQAmjA=;
- b=00JpZEt7r8lvwDcPSQUGGdDSOfZr2bpsy864iL0ZSqNT9eGeJSYtdPYwaJWx56Q/W8zjcp2bwbm1KATP+gNQUqygJ/s5xTSuuMJtkoZLRSaXtNmF512TJa49hb97nFWtuQjAdkgn2CCX718XqezDh35ny+lFhWG4iFlly3BptJI=
-Received: from BYAPR05CA0086.namprd05.prod.outlook.com (2603:10b6:a03:e0::27)
- by CH0PR12MB5202.namprd12.prod.outlook.com (2603:10b6:610:b9::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7113.27; Thu, 28 Dec
- 2023 06:34:32 +0000
-Received: from SJ5PEPF000001D0.namprd05.prod.outlook.com
- (2603:10b6:a03:e0:cafe::db) by BYAPR05CA0086.outlook.office365.com
- (2603:10b6:a03:e0::27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.7 via Frontend
- Transport; Thu, 28 Dec 2023 06:34:32 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ5PEPF000001D0.mail.protection.outlook.com (10.167.242.52) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7135.14 via Frontend Transport; Thu, 28 Dec 2023 06:34:31 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Thu, 28 Dec
- 2023 00:34:30 -0600
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Thu, 28 Dec
- 2023 00:34:21 -0600
-Received: from xhdcl190040.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34 via Frontend
- Transport; Thu, 28 Dec 2023 00:34:19 -0600
-From: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <sjg@chromium.org>, <bmeng.cn@gmail.com>, <michal.simek@amd.com>,
- <git@xilinx.com>
-Subject: [PATCH] cmd: net: nfs: Enable the NFS command by default
-Date: Thu, 28 Dec 2023 12:04:12 +0530
-Message-ID: <20231228063412.1370372-1-tejas.arvind.bhumkar@amd.com>
-X-Mailer: git-send-email 2.27.0
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-50e759ece35so3330482e87.3
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 22:53:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1703746390; x=1704351190; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zINjG7Xub0/Gd9sijbWoOrYIztlJAq4kWSH5a1TN310=;
+ b=oJO7CuBiBU5bR9KMp6o1fsu3rd3I/x8olek/GJj1tjJyG15191tuf6aGNy866W19/p
+ 0ef86wojWvvVh97m4haRYg7Ki7Q+7/8XAl0e7hw0XbicVzhGkUWM+O7MqfCUcVcptWhh
+ mTZk3qSy4mE55tF+MzwVg3PTn00f6XtkBHRfhvC8MY46Ju8rWoycH29UKo0sptGVh/c3
+ zLYpoZR44Eg1rufISf6vnXqM6w6mTxiz/4fxLwt20SE2ab8PMcqfAlvl5MOtkdQlKJrV
+ KZ5pDPThC9sww6zPo4wYBYE/pVP7cwJP4klYSn30ulwKf7GHAxwLCZBETBtW4x4VatDu
+ Msng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703746390; x=1704351190;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zINjG7Xub0/Gd9sijbWoOrYIztlJAq4kWSH5a1TN310=;
+ b=oI95SvOJ8thNljwgUpgpNQ5Sqv6k++BF86sxmMpppDKsGFwx9fZPUFEs8oAHnvvBqo
+ rweyK5ss5eZdTJLW9Ki1VL25yMysp7JNrdOFTaysemQDpO64TRglOnHyqllY+pRdjbBZ
+ jYUINAOHsVumUx8DcuoEG83Anv+oO75NiuBYFlcV/ubFCCXmwSZ0aHrO+MrfFaeDVFN5
+ +CmXEIR3GWXRKl3U5Hnd3NtKwoQ0ZCGHsy7x/qtSZb925WnOMKqEBA9kfh9d5/QpqXVp
+ M8BTh/0LBykpc5VUwgoWp26kJPQ99iHtsVGrjJQkBfpYHK6MSw/LNqEv5G38Z2dZNE8Z
+ buMg==
+X-Gm-Message-State: AOJu0YxdhTDfqekHBgs8EBcv1l6UNCBvQ+nf4JC29THZ2dizaocOU5v3
+ 5U0a6UqUuWvi64Uj+8sEHcviVJAaiCGa+ABl1hsZkgC82MMkxA==
+X-Google-Smtp-Source: AGHT+IHkSZX/WzCEbJ863vQFT1xr7SAwoUyR5+iA2AyYDu3D8enpY/JZRMYt1ILrwnq0M3pVbBIBg0p3F+3ft1F5e0w=
+X-Received: by 2002:ac2:4c14:0:b0:50e:698c:3426 with SMTP id
+ t20-20020ac24c14000000b0050e698c3426mr3645498lfq.118.1703746389896; Wed, 27
+ Dec 2023 22:53:09 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001D0:EE_|CH0PR12MB5202:EE_
-X-MS-Office365-Filtering-Correlation-Id: c28f418e-7a22-4869-b35e-08dc076f0ca7
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: VRJcTMZNvb1drRQf5Qj3ruXHlBdngO+7IYoNvko05HPOEEg5xohq5l456FrCOmGdLVgJuo8cKc2tv3TYV+WU72W8LySY+MS4O514//pNK/VK1V4/z3gKE7jxQkmp/SW84YaVFtD0bIBv+eCtiWghjt4af+ic1JFdRCvSRQi+4IVwc04dsvWbMA+1HusN7MifQ/xeotTS6YzP/cyuzJuU44cmXEix2/lINvHMs0+7/UQMiPYF/twdpDdcpKh1/A66XtAKnUi25TmqvB3oMzVmCvk3rBgabcBey/U7D5/FXzeVfqoz/XlKbluW/fTqHe7qLgGvX9Qi7GhpbUvYXQDSpUyeakbjnAyNPV1vb3oGvmD+opUmZQjqDnfjqSO7Z7GnrMus2Zp9PhRZXFRTn77E2LkBsWpzYaHzneYolDoijDny+InqQ9uJWYWpk2LjsesKvOWsPZOCJzXLxGKYY969eTCCejboQ/ZCAjmys032GFsQFjHmySBQqOPZ/XlmV+GWE7FJehfzBQFZq2HBuDaPBegHqRiWWapW8LhGp/2tlQm8z5HwLVQASFdk+aCsAr27eM1n3OnEtiAWO09fNwhnB+bwI7nbvJw8uq01nHTdGN25Pq52UCTQ3LokeNkpOSYKit4CeTZpYEZwiAYOtLEHOeL6yuCdvbkVuyCFZobWPTGY+ly8/CDbYnMDS22O50om7r3V/EY85/2RWfT4BQ+Rr91+aPf0d9i9OZmppmh/qGCO19TDNjt1D920LalRo1NkJbZi0plQVmG9hVcUD7UhtQ==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(346002)(376002)(396003)(136003)(39860400002)(230922051799003)(1800799012)(451199024)(82310400011)(186009)(64100799003)(46966006)(40470700004)(36840700001)(83380400001)(2616005)(8936002)(41300700001)(5660300002)(316002)(81166007)(356005)(82740400003)(1076003)(47076005)(107886003)(26005)(36860700001)(4744005)(8676002)(336012)(54906003)(4326008)(478600001)(2906002)(426003)(6666004)(70206006)(70586007)(86362001)(6916009)(103116003)(40480700001)(36756003)(40460700003)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Dec 2023 06:34:31.3755 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c28f418e-7a22-4869-b35e-08dc076f0ca7
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001D0.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR12MB5202
+References: <20231226094625.221671-1-sjg@chromium.org>
+ <20231226120710.GH2652760@bill-the-cat>
+ <CAC_iWjLy1E9wEW3zX2waN9mc=tz7PTKE0gJ4RucqMmZR2cA6_Q@mail.gmail.com>
+ <CAFLszTgqS9TF1F-RxO1dpZPZGG6QBiKm0n_e0yVHAume+xT3eA@mail.gmail.com>
+In-Reply-To: <CAFLszTgqS9TF1F-RxO1dpZPZGG6QBiKm0n_e0yVHAume+xT3eA@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 28 Dec 2023 08:52:33 +0200
+Message-ID: <CAC_iWjKTmG=16_PZr-5TgmmPL8e4VStX3E4nLGXSxt0pJzUS3g@mail.gmail.com>
+Subject: Re: [PATCH v4] fdt: Allow the devicetree to come from a bloblist
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Marek Vasut <marex@denx.de>, Raymond Mao <raymond.mao@linaro.org>,
+ Baruch Siach <baruch@tkos.co.il>, 
+ Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jerry Van Baren <vanbaren@cideas.com>, Michal Simek <michal.simek@amd.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Nikhil M Jain <n-jain1@ti.com>,
+ Qu Wenruo <wqu@suse.com>, Sean Anderson <seanga2@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,26 +95,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Activated the default use of NFS command for booting
-images via network using the NFS protocol.
+On Wed, 27 Dec 2023 at 19:48, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Ilias,
+>
+> On Wed, Dec 27, 2023 at 6:44=E2=80=AFAM Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Hi Tom,
+> >
+> > On Tue, 26 Dec 2023 at 14:07, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Dec 26, 2023 at 09:46:25AM +0000, Simon Glass wrote:
+> > >
+> > > > Standard passage provides for a bloblist to be passed from one firm=
+ware
+> > > > phase to the next. That can be used to pass the devicetree along as=
+ well.
+> > > > Add an option to support this.
+> > > >
+> > > > Tests for this will be added as part of the Universal Payload work.
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > ---
+> > > > The discussion on this was not resolved and is now important due to=
+ the
+> > > > bloblist series from Raymond. So I am sending it again since I beli=
+eve
+> > > > this is a better starting point than building on OF_BOARD
+> > >
+> > > I really don't like adding another option for "DT is given to us". Wh=
+y
+> > > isn't adding another enum to fdt_source_t sufficient, and if we have
+> > > bloblist enabled, that will look for and use if found? Maybe some oth=
+er
+> > > code needs to be restructured and cleaned up too?
+> >
+> > Same here. On top of that the bloblist has a few items in there, e.g a
+> > TPM eventlog. What are we going to do? Add a Kconfig for each item?
+>
+> No, but that is just a straw man. The DT is special and U-Boot reports
+> where it comes from.
 
-Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
----
- cmd/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+The story is identical to the EventLog. It's 'special' as well and
+U-Boot has to pick it up, otherwise the hardware and the EventLog will
+end up with different values
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index df6d71c103..a51b2d532f 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1905,6 +1905,7 @@ config CMD_RARP
- 
- config CMD_NFS
- 	bool "nfs"
-+	default y
- 	help
- 	  Boot image via network using NFS protocol.
- 
--- 
-2.27.0
+>
+> >
+> > This has been going back and forth for a while. I've lost count of how
+> > many times I repeated the same proposal, but here it goes again. We
+> > have OF_BOARD and BLOBLIST options. The bloblist and its properties
+> > are scannable at runtime. Can't we use the combination of these 2 can
+> > be used to imply we expect things from a bloblist. If we want to be
+> > stricter in the future and explicitly expect the DT from a bloblist,
+> > we could add a Kconfig option failing the boot if that's missing.
+>
+> I would like to have that Kconfig option now, not later. In my mind,
+> the boot must be deterministic, so that if OF_BLOBLIST is enabled, the
+> DT must come from there, or it is an error.
 
+And how is what I proposed not deterministic? What prevents us from
+adding that Kconfig option now?
+The only difference is that by default, U-Boot will try bloblist ->
+board-specific method unless a Kconfig option prevents the fallback.
+I've been working with vendors and helping them implement the firmware
+handoff spec in their proprietary bootloaders and Raymond contributed
+the implementation for TF-A. At the same time, I am pretty sure
+vendors will need time to implement this properly. I don't see how
+adding an implicit Kconfig option will help them push this forward.
+
+IOW I prefer U-Boot to *always* scan for a bloblist as the first
+discovery DT method (unless the DT comes bundled with U-Boot), rather
+than expecting users to turn a Kconfig knob.
+
+>
+> Also, repeating it doesn't make the proposal good. We agreed that
+> OF_BOARD would eventually go away, so building on top of it is not
+> setting us up for the future.
+
+No, we didn't [0]. In fact, I said I don't see OF_BOARD *ever* going
+away. The only thing I suggested was to rename it
+
+[...]
+
+[0] https://lore.kernel.org/u-boot/CAC_iWjKrkTM4spyXpoDDartJ41a553VDE+XM5gz=
+3+jsNTFqtbg@mail.gmail.com/
+
+Thanks
+/Ilias
