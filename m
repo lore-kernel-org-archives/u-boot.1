@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2331C4706F
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 18:02:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C244C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 18:03:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DD8187A81;
+	by phobos.denx.de (Postfix) with ESMTP id A3AB987B41;
 	Thu, 28 Dec 2023 19:02:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dhYF5Q5z";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FpBcgmvW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD6AF879D8; Thu, 28 Dec 2023 19:02:22 +0100 (CET)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id 15663879D8; Thu, 28 Dec 2023 19:02:23 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6315487A75
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 19:02:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 77A5387B06
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 19:02:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-50e67f70f34so5094016e87.0
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 10:02:19 -0800 (PST)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-50e72e3d435so3753487e87.2
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 10:02:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703786538; x=1704391338; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1703786540; x=1704391340; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iRS6sOV0jKQVRZhOLv/3vtOvmLtv4dNgOuCr7yiIelg=;
- b=dhYF5Q5z1WIJuAtOhu2gZVW+sF0fInnW5s0+00dwy0rufGf7lTX5D8EBQbedml2BjM
- RsBsxPXStLh2PoEEvE0oR4qw1wK0H563DScDuh2jr6lnbw9KsQaetA/SDKePgqlyuHKT
- LdL+mGAneCTrYZ3OD5Am3APMtMqMcl32BObpQDETeks6VzdJpvWgPt1z6IZH34aJAFSr
- 9ezY9clrP9Xywqtcz9rK/VabuRJHl0DskQHCSOke02cPIOArLVQjWvxJbTGM9Z3Fyzmp
- tDdMSJppkXhTXUCFB+h1wmctip+KwinCVJLefnnkPIjZ55lSpQYyu0HYdu+gdmhcUcVo
- tKYg==
+ bh=9W9W32Y1/i3q8FnsMLifXorFA4pb7qPKubD9mQ5V1hI=;
+ b=FpBcgmvWFH9kqQN9hSdV8kUyw0E7ORDovoR2hDJxANLmvF4hhmE5THi8zFrK8EA9Wh
+ qke6ZW8yrN6r/bRmVn2WNPhveet3xY0OJLb/ouEeFP+YvaFhSzIat/ZJ0+xqTlJkjDAq
+ IRfhOFlUs/EvgIEG+D4F21WEuSmqlkJZsszJuYKHg1FMidOAhz0Pd2+cNhM0ztjF3MH7
+ Frz7O3Pvp5CeQw4rt2QOV0iMP5tMfQA5K8jqrQcOXKDNjWPOVHFRYAXaFIaP6A35vkl3
+ jSrJUg9C2QgBWAaKqv454vLwal/Hgpgd4EYJkpbp1I3HnEATpmbLs4ZrtYVW9oqG88Hm
+ HBww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703786538; x=1704391338;
+ d=1e100.net; s=20230601; t=1703786540; x=1704391340;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iRS6sOV0jKQVRZhOLv/3vtOvmLtv4dNgOuCr7yiIelg=;
- b=EBegZNfffcncpdqoFDtqpCFUYhS5934KzAvNRqgACWcUvuB8ROm8KCBD+siAs061p7
- 2KSxsrJ/Datlkad6POMbAQ+VT58PwF3EvE3coR2RCSnxahGBY4Us/s1nP1Y9SPDDTDXC
- fVcu0oVQyxUNjbXUkKa+zRm5+R+4o47ISzjtsl4rJIlRhE115ycxi1VQ8g2Vj46eMRx4
- l15+sA8FJ32Dvs8sEncsSX7vLkbf4wI+9GNox2dkjP0PAfax4ol9rRPmYxUxyoxpOh1S
- pll76aX9gxvwY8c4NbgDCxJvgcZNLMzEUVmJ+qanlysu+2yruZrnkvxmO/qrjwNXpsvk
- vTpw==
-X-Gm-Message-State: AOJu0Yzgq6HOoj0PPzBr2NmfYAf3R/KXD9hVojdZSHXPaJ1H50aVAqfr
- sIMQxMjiC78cXJmnbHAmcYs=
-X-Google-Smtp-Source: AGHT+IEPqdl9ur1jxCji+joleXaz1V878fzCR6ThaRKKcdXra6Ltiy/Bx60ogp0W32xz8UwkA9nabg==
-X-Received: by 2002:a05:6512:3131:b0:50e:8ed1:cf10 with SMTP id
- p17-20020a056512313100b0050e8ed1cf10mr283544lfd.42.1703786538408; 
- Thu, 28 Dec 2023 10:02:18 -0800 (PST)
+ bh=9W9W32Y1/i3q8FnsMLifXorFA4pb7qPKubD9mQ5V1hI=;
+ b=idTMf7XgkxLFth6euJsRdS3sDHQwcn0PxFfmkAnKp0gveRvdMY38HA9QOPU2bPP7hn
+ /o2loDYZeEb5/mrQPjo7/P/yOZsgdDOYQMPcICrw626zUsNK6kUhCHvnUH68QfCxVb+W
+ J1R9T5xNw9PFtms0hIidE6/o+uCcQ3w62s8+dooRwS5GtF2ApJbp8joC33nSxwvYSXHI
+ Zf4p+y/yyyLwwz0k8GqyIvhW2BJvR6XSASKvo2+mg17HesZ/BEp4T5rKjQpGsYfhp8bM
+ Jwn+7b6yLkaQuUTrm+rqqdfT66adc8VbxQK/BTj16cuGebJmhdutIL6O4a6YdjvRpj/0
+ 0jEw==
+X-Gm-Message-State: AOJu0YxmfKr6r5BeCe5+ztCiGGNuYIVHirH77v3sx8mAxTIKClGwL2ij
+ xfQszu/nLAjl8MnM4FwWelY=
+X-Google-Smtp-Source: AGHT+IEUCcOMJTAPmkN4nGO9Udyj5s6ZfLdnCQvPTP5uz6LhsCb2VcqKkxErO2B8RkUn+v+YzzBOdA==
+X-Received: by 2002:a05:6512:11d0:b0:50e:6e7b:1acc with SMTP id
+ h16-20020a05651211d000b0050e6e7b1accmr1858408lfr.129.1703786539684; 
+ Thu, 28 Dec 2023 10:02:19 -0800 (PST)
 Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
- s4-20020a056512314400b0050e6b04a5b2sm1955101lfi.251.2023.12.28.10.02.16
+ s4-20020a056512314400b0050e6b04a5b2sm1955101lfi.251.2023.12.28.10.02.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Dec 2023 10:02:17 -0800 (PST)
+ Thu, 28 Dec 2023 10:02:19 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
  Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
@@ -75,10 +75,9 @@ To: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v6 3/6] common: console: introduce console_record_isempty
- helper
-Date: Thu, 28 Dec 2023 20:01:51 +0200
-Message-Id: <20231228180154.50473-4-clamor95@gmail.com>
+Subject: [PATCH v6 4/6] common: console: record console from the beginning
+Date: Thu, 28 Dec 2023 20:01:52 +0200
+Message-Id: <20231228180154.50473-5-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231228180154.50473-1-clamor95@gmail.com>
 References: <20231228180154.50473-1-clamor95@gmail.com>
@@ -102,64 +101,32 @@ X-Virus-Status: Clean
 
 From: Ion Agorria <ion@agorria.com>
 
-Add console_record_isempty to check if console record buffer
-contains any data.
+Set flag to enable console record on console_record_init
+and not only on console_record_reset_enable. This fixes
+missing start of U-Boot log for fastboot oem console
+command.
 
 Signed-off-by: Ion Agorria <ion@agorria.com>
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
- common/console.c  |  5 +++++
- include/console.h | 13 +++++++++++++
- 2 files changed, 18 insertions(+)
+ common/console.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/common/console.c b/common/console.c
-index 1ffda49c87..6f2089caa0 100644
+index 6f2089caa0..e6d7ebe935 100644
 --- a/common/console.c
 +++ b/common/console.c
-@@ -853,6 +853,11 @@ int console_record_avail(void)
- 	return membuff_avail((struct membuff *)&gd->console_out);
+@@ -821,6 +821,9 @@ int console_record_init(void)
+ 	ret = membuff_new((struct membuff *)&gd->console_in,
+ 			  CONFIG_CONSOLE_RECORD_IN_SIZE);
+ 
++	/* Start recording from the beginning */
++	gd->flags |= GD_FLG_RECORD;
++
+ 	return ret;
  }
  
-+bool console_record_isempty(void)
-+{
-+	return membuff_isempty((struct membuff *)&gd->console_out);
-+}
-+
- int console_in_puts(const char *str)
- {
- 	return membuff_put((struct membuff *)&gd->console_in, str, strlen(str));
-diff --git a/include/console.h b/include/console.h
-index e29817e57b..2617e16007 100644
---- a/include/console.h
-+++ b/include/console.h
-@@ -84,6 +84,13 @@ int console_record_readline(char *str, int maxlen);
-  */
- int console_record_avail(void);
- 
-+/**
-+ * console_record_isempty() - Returns if console output is empty
-+ *
-+ * Return: true if empty
-+ */
-+bool console_record_isempty(void);
-+
- /**
-  * console_in_puts() - Write a string to the console input buffer
-  *
-@@ -131,6 +138,12 @@ static inline int console_in_puts(const char *str)
- 	return 0;
- }
- 
-+static inline bool console_record_isempty(void)
-+{
-+	/* Always empty */
-+	return true;
-+}
-+
- #endif /* !CONFIG_CONSOLE_RECORD */
- 
- /**
 -- 
 2.40.1
 
