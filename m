@@ -4,83 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 628DBC3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 18:03:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74332C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 19:48:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C61787B28;
-	Thu, 28 Dec 2023 19:02:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 52504879FF;
+	Thu, 28 Dec 2023 20:48:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="naSTqkVE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PHCU7mQY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A61D879D8; Thu, 28 Dec 2023 19:02:25 +0100 (CET)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id 018DF879FF; Thu, 28 Dec 2023 20:48:06 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62FDA87A75
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 19:02:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 921D887A01
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 20:47:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-50e835800adso2345451e87.0
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 10:02:23 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-40d5aa35b60so22076105e9.0
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 11:47:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703786543; x=1704391343; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5nEO2kmexBaXs5lLihPLZiWHXXxGh6G9CrMdnSCsgTg=;
- b=naSTqkVE1TanYX2+6ez/D38qUNC84un9bhoRgXL0uZp6sHy/huuQvc+dIfV4wN0FFm
- yrVRh17wvYfFZ9J/FEAhv5NF5yVdea0QSkk27arrmKFkl+6o3Zp7dLqGA9AQh+4D/vsO
- 7GEWjz/wBjoWZNPMzFln3k66LvJMwSxvyiMXebWn+PNnevu6eZlDkE51jbvwT80Tkn9c
- Wc78T7BOSGc+6cehXxYfoU3Mq/AiljLkKnOsmQtjIwdfYdn6o4dOnn3J5n8uKmJFjAqF
- 0UX2B87+cfC9u48jaCFgdsiiNlxs+FSwi3fLqK7GXQjZ7xCAUhJ5kJG8CbkKF5foQQul
- LHsw==
+ d=chromium.org; s=google; t=1703792878; x=1704397678; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8b0SFvIriQu94uzJSZKZR+40PCsBG+7zMCB4GXTieMw=;
+ b=PHCU7mQY7CBaqzmFlXXRq1WN5L8F4Ufy1gKUz/PEok1d6KfNpm7ghy+ATgAfK9wpdD
+ zoQM1JTxjIhheRn1kcLxECtrVFaqGtP2NzjvjM+ufxoLDuR/KLudNVfmNdmS3/93pOlh
+ geMK4Pd6WCVd39ODxnElgLHTgeNdFWSsMVIIk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703786543; x=1704391343;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5nEO2kmexBaXs5lLihPLZiWHXXxGh6G9CrMdnSCsgTg=;
- b=bK0x1aRZXAXUic6t8QWwSeF2B3xOlfHi34u0FOhe+7VHaxmN+FKFTJhCU9GrHF4UMS
- 5jRihDUkYu9uHddbOnLLJDVLeYy8gJ6UI6YB/ErAWYlNwRVbiTS3oh3HuMI6yxvJoH7e
- CBNUXtd6/rumYb/E0E6RPOG7eNZD2fMW4XiiJrA566ZAVB+VQ7ENh94ixdbBRMn4iYiO
- YJNeeNlod2nESqObbHYTR9VFkepRnhIC/etJk3roaTMYbhigVhsf4S7igw/TdkdjVzUh
- J0x+OedTzFSmLXRENM2MezZFKRXy0ju/KZxXS3iQebNEy4PKgf3pAJAEolYHoxJm9jP+
- xrAQ==
-X-Gm-Message-State: AOJu0YxjSpMF9UJeV8g+/FsbfRV1EkwBILLAqnjOAb0e2f/6OBQ2rgBO
- uu/1pjnjRO8lvOQ3FNtzj3g=
-X-Google-Smtp-Source: AGHT+IFmbUaoI10T0/+zp8VCujsHoJdR3uLdhvFDJ288WHmkwAX3oWuOfsypWN7T0AZCFkYw3U8xeg==
-X-Received: by 2002:ac2:4e4c:0:b0:50d:f824:959a with SMTP id
- f12-20020ac24e4c000000b0050df824959amr2556726lfr.206.1703786542400; 
- Thu, 28 Dec 2023 10:02:22 -0800 (PST)
-Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
- s4-20020a056512314400b0050e6b04a5b2sm1955101lfi.251.2023.12.28.10.02.21
+ d=1e100.net; s=20230601; t=1703792878; x=1704397678;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8b0SFvIriQu94uzJSZKZR+40PCsBG+7zMCB4GXTieMw=;
+ b=NcfSLd5VwtCq8+kBG5Jc63HhyLffGDlBKfpEaiBs1jzs7oIp4RQyr63REoswH0Lwzv
+ wnW6SsOBQ9hU7KXi1mF4ec3YsBRgxuRSQHcirvgcVquopqKbJQJ4VokAHsjyfddzGo7O
+ Iobc9/4eeXuaYVuGy8Ucp7YMySG9bjJ2nVD94ti+2Dr1QgZTrkqBjK3LBxYeNcABc3GW
+ Zx+OLvdNRR70H4lP2MNqjwrFTT7AqRDiYU0pmYEctB/z7Rvi1jychbTXI3HO+rey8zb6
+ XctcLXosZ425n+VJ/IuMTgvH7H79WtmvMGqtEtoyK5coWPIFBoc85XKBsq2CLBIgVrP/
+ tuuw==
+X-Gm-Message-State: AOJu0Yz5/rsMr+isprzwNlzhaYJfiVbX8M7/PSt+Fc2KDbimxKMem78g
+ WlG2r7JzL31in7uNDIG6htAO9A/mWkIpzerMDrgzmzmvlw==
+X-Google-Smtp-Source: AGHT+IENJ5KB+uZ5T/bvRrbF0PD+hzjNcLRhJAkP+KerKjlcC/kVmHA4Cs+m5lvNnzSXsFWe0p9j1g==
+X-Received: by 2002:a05:600c:3d85:b0:40d:5575:a17f with SMTP id
+ bi5-20020a05600c3d8500b0040d5575a17fmr2015075wmb.128.1703792877651; 
+ Thu, 28 Dec 2023 11:47:57 -0800 (PST)
+Received: from tasman.chapterst.org (80-42-48-87.dynamic.dsl.as9105.com.
+ [80.42.48.87]) by smtp.gmail.com with ESMTPSA id
+ p2-20020a05600c1d8200b0040596352951sm37337685wms.5.2023.12.28.11.47.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Dec 2023 10:02:22 -0800 (PST)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Bin Meng <bmeng@tinylab.org>,
- Ion Agorria <ion@agorria.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
- Sean Anderson <sean.anderson@seco.com>, Heiko Schocher <hs@denx.de>,
- Dmitrii Merkurev <dimorinny@google.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v6 6/6] fastboot: add oem console command support
-Date: Thu, 28 Dec 2023 20:01:54 +0200
-Message-Id: <20231228180154.50473-7-clamor95@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20231228180154.50473-1-clamor95@gmail.com>
-References: <20231228180154.50473-1-clamor95@gmail.com>
+ Thu, 28 Dec 2023 11:47:57 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Raymond Mao <raymond.mao@linaro.org>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Baruch Siach <baruch@tkos.co.il>,
+ Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerry Van Baren <vanbaren@cideas.com>, Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Nikhil M Jain <n-jain1@ti.com>,
+ Qu Wenruo <wqu@suse.com>, Sean Anderson <seanga2@gmail.com>,
+ Stefan Roese <sr@denx.de>
+Subject: [PATCH v6] fdt: Allow the devicetree to come from a bloblist
+Date: Thu, 28 Dec 2023 19:47:25 +0000
+Message-Id: <20231228194725.2482268-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -99,130 +92,209 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ion Agorria <ion@agorria.com>
+Standard passage provides for a bloblist to be passed from one firmware
+phase to the next. That can be used to pass the devicetree along as well.
+Add an option to support this.
 
-"oem console" serves to read console record buffer.
+Tests for this will be added as part of the Universal Payload work.
 
-Signed-off-by: Ion Agorria <ion@agorria.com>
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
- doc/android/fastboot.rst      |  1 +
- drivers/fastboot/Kconfig      |  7 +++++++
- drivers/fastboot/fb_command.c | 39 +++++++++++++++++++++++++++++++++++
- include/fastboot.h            |  1 +
- 4 files changed, 48 insertions(+)
+The discussion on this was not resolved and is now important due to the
+bloblist series from Raymond. So I am sending it again since I believe
+this is a better starting point than building on OF_BOARD
 
-diff --git a/doc/android/fastboot.rst b/doc/android/fastboot.rst
-index 1ad8a897c8..05d8f77759 100644
---- a/doc/android/fastboot.rst
-+++ b/doc/android/fastboot.rst
-@@ -29,6 +29,7 @@ The following OEM commands are supported (if enabled):
-   with <arg> = boot_ack boot_partition
- - ``oem bootbus``  - this executes ``mmc bootbus %x %s`` to configure eMMC
- - ``oem run`` - this executes an arbitrary U-Boot command
-+- ``oem console`` - this dumps U-Boot console record buffer
+Changes in v6:
+- Don't allow bloblist with OF_EMBED
+
+Changes in v5:
+- Make OF_BLOBLIST default y
+- Make OF_BLOBLIST optional at runtime
+
+Changes in v4:
+- Rebase to -next
+
+ common/bloblist.c                  |  1 +
+ doc/develop/devicetree/control.rst |  3 ++
+ dts/Kconfig                        | 13 +++++++++
+ include/bloblist.h                 |  5 ++++
+ include/fdtdec.h                   |  6 ++--
+ lib/fdtdec.c                       | 44 +++++++++++++++++++++++-------
+ 6 files changed, 60 insertions(+), 12 deletions(-)
+
+diff --git a/common/bloblist.c b/common/bloblist.c
+index a22f6c12b0c..b07ede11cfe 100644
+--- a/common/bloblist.c
++++ b/common/bloblist.c
+@@ -48,6 +48,7 @@ static struct tag_name {
+ 	{ BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
+ 	{ BLOBLISTT_SMBIOS_TABLES, "SMBIOS tables for x86" },
+ 	{ BLOBLISTT_VBOOT_CTX, "Chrome OS vboot context" },
++	{ BLOBLISTT_CONTROL_FDT, "Control FDT" },
  
- Support for both eMMC and NAND devices is included.
+ 	/* BLOBLISTT_PROJECT_AREA */
+ 	{ BLOBLISTT_U_BOOT_SPL_HANDOFF, "SPL hand-off" },
+diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
+index cbb65c9b177..444c55de4e4 100644
+--- a/doc/develop/devicetree/control.rst
++++ b/doc/develop/devicetree/control.rst
+@@ -108,6 +108,9 @@ If CONFIG_OF_BOARD is defined, a board-specific routine will provide the
+ devicetree at runtime, for example if an earlier bootloader stage creates
+ it and passes it to U-Boot.
  
-diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-index 11fc0fe1c8..5e5855a76c 100644
---- a/drivers/fastboot/Kconfig
-+++ b/drivers/fastboot/Kconfig
-@@ -242,6 +242,13 @@ config FASTBOOT_OEM_RUN
- 	  this feature if you are using verified boot, as it will allow an
- 	  attacker to bypass any restrictions you have in place.
++If CONFIG_OF_BLOBLIST is defined, the devicetree comes from a bloblist passed
++from a previous stage, if present.
++
+ If CONFIG_SANDBOX is defined, then it will be read from a file on
+ startup. Use the -d flag to U-Boot to specify the file to read, -D for the
+ default and -T for the test devicetree, used to run sandbox unit tests.
+diff --git a/dts/Kconfig b/dts/Kconfig
+index 00c0aeff893..ae451b9caf7 100644
+--- a/dts/Kconfig
++++ b/dts/Kconfig
+@@ -105,6 +105,19 @@ config OF_EMBED
  
-+config FASTBOOT_CMD_OEM_CONSOLE
-+	bool "Enable the 'oem console' command"
-+	depends on CONSOLE_RECORD
+ endchoice
+ 
++config OF_BLOBLIST
++	bool "Provided by a bloblist at runtime"
++	depends on BLOBLIST && OF_SEPARATE
++	default y
 +	help
-+	  Add support for the "oem console" command to input and read console
-+	  record buffer.
++	  Select this to read the devicetree from the bloblist. This allows
++	  using a bloblist to transfer the devicetree between  U-Boot phases.
++	  The devicetree is stored in the bloblist by an early phase so that
++	  U-Boot can read it.
 +
- endif # FASTBOOT
- 
- endmenu
-diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
-index 6f621df074..f95f4e4ae1 100644
---- a/drivers/fastboot/fb_command.c
-+++ b/drivers/fastboot/fb_command.c
-@@ -41,6 +41,7 @@ static void reboot_recovery(char *, char *);
- static void oem_format(char *, char *);
- static void oem_partconf(char *, char *);
- static void oem_bootbus(char *, char *);
-+static void oem_console(char *, char *);
- static void run_ucmd(char *, char *);
- static void run_acmd(char *, char *);
- 
-@@ -108,6 +109,10 @@ static const struct {
- 		.command = "oem run",
- 		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_OEM_RUN, (run_ucmd), (NULL))
- 	},
-+	[FASTBOOT_COMMAND_OEM_CONSOLE] = {
-+		.command = "oem console",
-+		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_CONSOLE, (oem_console), (NULL))
-+	},
- 	[FASTBOOT_COMMAND_UCMD] = {
- 		.command = "UCmd",
- 		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_UUU_SUPPORT, (run_ucmd), (NULL))
-@@ -159,6 +164,23 @@ void fastboot_multiresponse(int cmd, char *response)
- 	case FASTBOOT_COMMAND_GETVAR:
- 		fastboot_getvar_all(response);
- 		break;
-+	case FASTBOOT_COMMAND_OEM_CONSOLE:
-+		if (CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_CONSOLE)) {
-+			char buf[FASTBOOT_RESPONSE_LEN] = { 0 };
++	  If the bloblist does not contain a devicetree, then other methods will
++	  be used.
 +
-+			if (console_record_isempty()) {
-+				console_record_reset();
-+				fastboot_okay(NULL, response);
+ config OF_BOARD
+ 	bool "Provided by the board (e.g a previous loader) at runtime"
+ 	default y if SANDBOX || OF_HAS_PRIOR_STAGE
+diff --git a/include/bloblist.h b/include/bloblist.h
+index 080cc46a126..e16d122f4fb 100644
+--- a/include/bloblist.h
++++ b/include/bloblist.h
+@@ -103,6 +103,11 @@ enum bloblist_tag_t {
+ 	BLOBLISTT_ACPI_TABLES = 0x104,	/* ACPI tables for x86 */
+ 	BLOBLISTT_SMBIOS_TABLES = 0x105, /* SMBIOS tables for x86 */
+ 	BLOBLISTT_VBOOT_CTX = 0x106,	/* Chromium OS verified boot context */
++	/*
++	 * Devicetree for use by firmware. On some platforms this is passed to
++	 * the OS also
++	 */
++	BLOBLISTT_CONTROL_FDT = 0x107,
+ 
+ 	/*
+ 	 * Project-specific tags are permitted here. Projects can be open source
+diff --git a/include/fdtdec.h b/include/fdtdec.h
+index bd1149f46d0..e80de24076c 100644
+--- a/include/fdtdec.h
++++ b/include/fdtdec.h
+@@ -72,7 +72,7 @@ struct bd_info;
+  *	U-Boot is packaged as an ELF file, e.g. for debugging purposes
+  * @FDTSRC_ENV: Provided by the fdtcontroladdr environment variable. This should
+  *	be used for debugging/development only
+- * @FDTSRC_NONE: No devicetree at all
++ * @FDTSRC_BLOBLIST: Provided by a bloblist from an earlier phase
+  */
+ enum fdt_source_t {
+ 	FDTSRC_SEPARATE,
+@@ -80,6 +80,7 @@ enum fdt_source_t {
+ 	FDTSRC_BOARD,
+ 	FDTSRC_EMBED,
+ 	FDTSRC_ENV,
++	FDTSRC_BLOBLIST,
+ };
+ 
+ /*
+@@ -1190,7 +1191,8 @@ int fdtdec_resetup(int *rescan);
+  *
+  * The existing devicetree is available at gd->fdt_blob
+  *
+- * @err internal error code if we fail to setup a DTB
++ * @err: 0 on success, -EEXIST if the devicetree is already correct, or other
++ * internal error code if we fail to setup a DTB
+  * @returns new devicetree blob pointer
+  */
+ void *board_fdt_blob_setup(int *err);
+diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+index 4016bf3c113..af3026dd42b 100644
+--- a/lib/fdtdec.c
++++ b/lib/fdtdec.c
+@@ -7,6 +7,10 @@
+  */
+ 
+ #ifndef USE_HOSTCC
++
++#define LOG_CATEGORY	LOGC_DT
++
++#include <bloblist.h>
+ #include <boot_fit.h>
+ #include <display_options.h>
+ #include <dm.h>
+@@ -86,6 +90,7 @@ static const char *const fdt_src_name[] = {
+ 	[FDTSRC_BOARD] = "board",
+ 	[FDTSRC_EMBED] = "embed",
+ 	[FDTSRC_ENV] = "env",
++	[FDTSRC_BLOBLIST] = "bloblist",
+ };
+ 
+ const char *fdtdec_get_srcname(void)
+@@ -1662,23 +1667,42 @@ static void setup_multi_dtb_fit(void)
+ 
+ int fdtdec_setup(void)
+ {
+-	int ret;
++	int ret = -ENOENT;
++
++	/* If allowing a bloblist, check that first */
++	if (CONFIG_IS_ENABLED(OF_BLOBLIST)) {
++		ret = bloblist_maybe_init();
++		if (!ret) {
++			gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
++			if (gd->fdt_blob) {
++				gd->fdt_src = FDTSRC_BLOBLIST;
++				log_debug("Devicetree is in bloblist at %p\n",
++					  gd->fdt_blob);
 +			} else {
-+				int ret = console_record_readline(buf, sizeof(buf) - 5);
-+
-+				if (ret < 0)
-+					fastboot_fail("Error reading console", response);
-+				else
-+					fastboot_response("INFO", response, "%s", buf);
++				log_debug("No FDT found in bloblist\n");
++				ret = -ENOENT;
 +			}
-+			break;
 +		}
- 	default:
- 		fastboot_fail("Unknown multiresponse command", response);
- 		break;
-@@ -503,3 +525,20 @@ static void __maybe_unused oem_bootbus(char *cmd_parameter, char *response)
- 	else
- 		fastboot_okay(NULL, response);
- }
-+
-+/**
-+ * oem_console() - Execute the OEM console command
-+ *
-+ * @cmd_parameter: Pointer to command parameter
-+ * @response: Pointer to fastboot response buffer
-+ */
-+static void __maybe_unused oem_console(char *cmd_parameter, char *response)
-+{
-+	if (cmd_parameter)
-+		console_in_puts(cmd_parameter);
-+
-+	if (console_record_isempty())
-+		fastboot_fail("Empty console", response);
-+	else
-+		fastboot_response(FASTBOOT_MULTIRESPONSE_START, response, NULL);
-+}
-diff --git a/include/fastboot.h b/include/fastboot.h
-index 59cbea61ec..1e7920eb91 100644
---- a/include/fastboot.h
-+++ b/include/fastboot.h
-@@ -47,6 +47,7 @@ enum {
- 	FASTBOOT_COMMAND_OEM_PARTCONF,
- 	FASTBOOT_COMMAND_OEM_BOOTBUS,
- 	FASTBOOT_COMMAND_OEM_RUN,
-+	FASTBOOT_COMMAND_OEM_CONSOLE,
- 	FASTBOOT_COMMAND_ACMD,
- 	FASTBOOT_COMMAND_UCMD,
- 	FASTBOOT_COMMAND_COUNT
++	}
+ 
+-	/* The devicetree is typically appended to U-Boot */
+-	if (IS_ENABLED(CONFIG_OF_SEPARATE)) {
+-		gd->fdt_blob = fdt_find_separate();
+-		gd->fdt_src = FDTSRC_SEPARATE;
+-	} else { /* embed dtb in ELF file for testing / development */
+-		gd->fdt_blob = dtb_dt_embedded();
+-		gd->fdt_src = FDTSRC_EMBED;
++	/* Otherwise, the devicetree is typically appended to U-Boot */
++	if (ret) {
++		if (IS_ENABLED(CONFIG_OF_SEPARATE)) {
++			gd->fdt_blob = fdt_find_separate();
++			gd->fdt_src = FDTSRC_SEPARATE;
++		} else { /* embed dtb in ELF file for testing / development */
++			gd->fdt_blob = dtb_dt_embedded();
++			gd->fdt_src = FDTSRC_EMBED;
++		}
+ 	}
+ 
+ 	/* Allow the board to override the fdt address. */
+ 	if (IS_ENABLED(CONFIG_OF_BOARD)) {
+ 		gd->fdt_blob = board_fdt_blob_setup(&ret);
+-		if (ret)
++		if (!ret)
++			gd->fdt_src = FDTSRC_BOARD;
++		else if (ret != -EEXIST)
+ 			return ret;
+-		gd->fdt_src = FDTSRC_BOARD;
+ 	}
+ 
+ 	/* Allow the early environment to override the fdt address */
 -- 
-2.40.1
+2.34.1
 
