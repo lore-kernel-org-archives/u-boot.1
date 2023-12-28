@@ -4,71 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73A9AC4706F
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 14:48:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D54CC3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 15:09:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCB5E87A13;
-	Thu, 28 Dec 2023 15:48:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 74D5E87954;
+	Thu, 28 Dec 2023 16:09:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LlWQxvHv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bikWXHem";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14FDC87A52; Thu, 28 Dec 2023 15:48:23 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 348B987A27; Thu, 28 Dec 2023 16:09:27 +0100 (CET)
+Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
+ [IPv6:2607:f8b0:4864:20::82c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1319879E8
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 15:48:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A9D66879E5
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 16:09:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marietto2008@gmail.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a26f73732c5so298451966b.3
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 06:48:20 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qt1-x82c.google.com with SMTP id
+ d75a77b69052e-427f0f75cf0so6308521cf.1
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 07:09:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703774900; x=1704379700; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703776163; x=1704380963; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=R1vdkOQXPTb8UjBP5A0Qht5YPuLeDxQIHX0n8l1EzrI=;
- b=LlWQxvHveWTWMiVLK1NHyboykG2Yyi9ImQ9SBKXeOzdCrfDduua9QxUJ96MiHHQq2g
- YegxfL+4Sgzm4z5r7Z12v/zqcX/J2X094UE1kMs6cDTd2qZcsNhzg3qOaODDK2devsjL
- MPuPsVbXhezC4wvNuufgjPsU2XqCfKTXPx1bMTyAgBPIpjWnM4Y5ECgKfwjQfTdUGj6O
- n4+0IAAElnHP8bP9zWD0WQtAVUQHRNgKkI3p4R/A8ojSdrygPkDx72ErJUz6+LS8enC6
- soGHkB5aEbr0F9u0DykNki8ONE18k3kD05mOqpjGYrpHF+TCkg8ra8IPb6/dwDrI9TmX
- b0Aw==
+ bh=no58KO7DxbMxIZ5ojulTOZwDRMrp2Sexn2Z6gScpYu8=;
+ b=bikWXHemqKD4qtxXB4cIiwO71+cU3CCA5pM9X9yQ5HJqCTMap9av0wluYWT5LqoiZQ
+ xqe9Z7MiOYDUWtsunRqD5k/L+yshwlvpUOy5mcp+gLNVBSKjUWwN5Hv6xMxFEaPUF7Sw
+ syP0eLF4pY3Iy1fQXpcP3T/5PwG98uVtf8gs0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703774900; x=1704379700;
+ d=1e100.net; s=20230601; t=1703776163; x=1704380963;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=R1vdkOQXPTb8UjBP5A0Qht5YPuLeDxQIHX0n8l1EzrI=;
- b=UDZ0l21RcWBZ1InKtxSep0E0AFMLEoOenXrA8ww7NSzhz/g5meMMFNQXPOLXt6KQoZ
- EXhdBf9siWPLuSBxYxkx0KQjJccAc1/FFKpOw9O+bTgiauOiN9dA0kUhiF7L25C+i9TL
- ScVM/aaHbvrIb57ZcjJK9SPl1y6v4G7VIUMjmt2vxI0pbySULKDhuf0RAwn0kpDJ1YwG
- Exl1QN0YN9ggL0czqh+D8Ddlw3zbFSZPp1I6JY37y39gRBg0XTgo8zgnTo/vf1OgRj7+
- N8MyJ8rdkth1spyhz9HO17JN8sb1uNm/2VJ5itFHo3MP0onM9QtuojPpz3jQjUnAdTm+
- vWNg==
-X-Gm-Message-State: AOJu0YyxoakKZgKG1GfdOr5BNd87ND0RtDCoMQM7W/rjZ82GhLmit66R
- x37qlD7H/Lpb3rVedVJyK7ZJTLHy6n48DSJ8i/k=
-X-Google-Smtp-Source: AGHT+IGLBiKcF1HfS5ox50TJ+cwboeZNYFDzQAzkWGT7EoKVb5kJ2VY0c1Zm4JnnEwLEESRmZaUc88vQGD5nXeb0Uwc=
-X-Received: by 2002:a17:906:b385:b0:a26:8f35:7130 with SMTP id
- uh5-20020a170906b38500b00a268f357130mr4188714ejc.48.1703774899775; Thu, 28
- Dec 2023 06:48:19 -0800 (PST)
+ bh=no58KO7DxbMxIZ5ojulTOZwDRMrp2Sexn2Z6gScpYu8=;
+ b=whZHG/BPrPJhlhphnZsPW24zmG3Yup0lR0K4W6rOgBGzkdV9DYWz4oMfahbLS2l5DV
+ h/yGJhjm7x57Cxa87GOigSAxQhe81dlDimLghUPHIOqI6xW0ygb0/SoV5nGOWxCVJ7co
+ RJUN9HF6k/xm681WemqeAcT6bkf+C66bTNk9jfEppK8Z3a0QfxuueTuVOg54GxGl6Mu+
+ PouKGDtYZbGiXGIXjNRu3hTLV0Voo6Y+vIQzRl9zp1Zzceddv4PBo7yaxWXzdzu3Ngz7
+ c6KYseicxw7Wvy2BoKawO8xjmu90Jrgl/fEAktHXkPhce54+8N4F0AkBA8RPT68bY9gB
+ lF/A==
+X-Gm-Message-State: AOJu0YwFJ49xC9FtJ+3GFqy901v1720iNepJI7nz8/D68XtSa/FSySxJ
+ ky5PLIQ1A5GYwnVCsq8CIVXuSBPUOqdw5pQr1VTo63eNGYPP
+X-Google-Smtp-Source: AGHT+IGXobipWD9AF+Dr6vuXuZ8xSzaJ16THTAe2IDx5kjzf4GRn6OHi0yl+naUUwM1p7INNs75ruJWacCShFzs2Deo=
+X-Received: by 2002:ad4:530d:0:b0:67f:ac30:6256 with SMTP id
+ y13-20020ad4530d000000b0067fac306256mr8275485qvr.104.1703776163433; Thu, 28
+ Dec 2023 07:09:23 -0800 (PST)
 MIME-Version: 1.0
-References: <CA+1FSihxOraiDgHXcq=0oiJpSaGnJt+2fvvNGK7JKCkaPCv3jQ@mail.gmail.com>
- <CAJaLiFxnbuxa6Svmf7BN86u2wgRJZJQR+cBGWrdyAXpPQSyKNg@mail.gmail.com>
-In-Reply-To: <CAJaLiFxnbuxa6Svmf7BN86u2wgRJZJQR+cBGWrdyAXpPQSyKNg@mail.gmail.com>
-From: Mario Marietto <marietto2008@gmail.com>
-Date: Thu, 28 Dec 2023 15:47:43 +0100
-Message-ID: <CA+1FSihKXuqLMTbZzSdKXwMKAnO0nKu1ne92UXS_m9A1f8jqYA@mail.gmail.com>
-Subject: Re: I'm looking for the source code of a specific u-boot version.
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
+References: <20231228115804.3626579-1-sumit.garg@linaro.org>
+ <20231228115804.3626579-5-sumit.garg@linaro.org>
+ <CAFLszThfxe_n02auF+vZ1u7FynKkrWEYFU3SdkRTLgBVuiv+Hw@mail.gmail.com>
+ <20231228140313.GB2652760@bill-the-cat>
+In-Reply-To: <20231228140313.GB2652760@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 28 Dec 2023 15:09:12 +0000
+Message-ID: <CAFLszTiPFyRQZtrKhETjMzn6JukFJaBYMugdL-RPO3LJB9XUMA@mail.gmail.com>
+Subject: Re: [PATCH v3 4/8] dts: Add alternative location for upstream DTB
+ builds
+To: Tom Rini <trini@konsulko.com>
+Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io, 
+ u-boot-custodians@lists.denx.de, robh+dt@kernel.org, 
+ krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
+ ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
+ xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
+ rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
+ rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,127 +95,180 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello.
+Hi Tom, Sumit,
 
-Can someone provide the right link to download u-boot-2017.0.5 , please ?
-
-I've found it here,but I'm not sure that it's the correct version :
-
-https://src.fedoraproject.org/repo/pkgs/uboot-tools/u-boot-2017.05.tar.bz2/=
-sha512/be270f9242a72b05463092a022bbabd54996762de1ff23bf7575124ac02e62f49572=
-a4e2f6f571a5019047d40027e56e35593b5cc373c4a5a39b100c3377ba93/
-
-Can you confirm it ? thanks.
-
-On Thu, Dec 28, 2023 at 1:14=E2=80=AFAM Tony Dinh <mibodhi@gmail.com> wrote=
+On Thu, Dec 28, 2023 at 2:03=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
 :
 >
-> Hi Mario and Heinrich,
+> On Thu, Dec 28, 2023 at 01:37:26PM +0000, Simon Glass wrote:
+> > Hi Sumit,
+> >
+> > On Thu, Dec 28, 2023 at 11:58=E2=80=AFAM Sumit Garg <sumit.garg@linaro.=
+org> wrote:
+> > >
+> > > Allow platform owners to mirror devicetree files from devitree-rebasi=
+ng
+> > > directory into dts/arch/$(ARCH) (special case for dts/arch/arm64). Th=
+en
+> > > build then along with any *-u-boot.dtsi file present in arch/$(ARCH)/=
+dts
+> > > directory. Also add a new Makefile for arm64.
+> > >
+> > > This will help easy migration for platforms which currently are compl=
+iant
+> > > with upstream Linux kernel devicetree files.
+> > >
+> > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> > > ---
+> > >
+> > > Changes in v3:
+> > > --------------
+> > > - Minor commit message update
+> > >
+> > > Changes in v2:
+> > > --------------
+> > > - s/DEVICE_TREE_LOC/dt_dir/ and s/U-boot/U-Boot/
+> > >
+> > >  dts/Kconfig             | 11 +++++++++++
+> > >  dts/Makefile            | 17 ++++++++++++++---
+> > >  dts/arch/arm64/Makefile | 14 ++++++++++++++
+> > >  3 files changed, 39 insertions(+), 3 deletions(-)
+> > >  create mode 100644 dts/arch/arm64/Makefile
+> > >
+> > > diff --git a/dts/Kconfig b/dts/Kconfig
+> > > index 00c0aeff893..e58c1c6f2ab 100644
+> > > --- a/dts/Kconfig
+> > > +++ b/dts/Kconfig
+> > > @@ -85,6 +85,17 @@ config OF_LIVE
+> > >           enables a live tree which is available after relocation,
+> > >           and can be adjusted as needed.
+> > >
+> > > +config OF_UPSTREAM
+> > > +       bool "Enable use of devicetree imported from Linux kernel rel=
+ease"
+> > > +       help
+> > > +         Traditionally, U-Boot platforms used to have their custom d=
+evicetree
+> > > +         files or copy devicetree files from Linux kernel which are =
+hard to
+> > > +         maintain and can usually get out-of-sync from Linux kernel.=
+ This
+> > > +         option enables platforms to migrate to devicetree-rebasing =
+repo where
+> > > +         a regular sync will be maintained every major Linux kernel =
+release
+> > > +         cycle. However, platforms can still have some custom u-boot=
+ specific
+> > > +         bits maintained as part of *-u-boot.dtsi files.
+> >
+> > My only other suggestion here is to mention that this should be set in
+> > Kconfig, for the SoC as a whole. So I believe that means that it
+> > should be hidden, with no string for the 'bool':
+> >
+> >       bool  # Enable use of devicetree imported from Linux kernel relea=
+se
 >
-> On Wed, Dec 27, 2023 at 12:23=E2=80=AFPM Mario Marietto <marietto2008@gma=
-il.com> wrote:
-> >
-> > Hello.
-> >
-> > I'm trying to boot FreeBSD for arm32 bit as DomU on my ARM Chromebook
-> > SNOW with xen. Basically there are two ways to accomplish this task :
-> >
-> >
-> > 1) to write a patch that allows the FreeBSD kernel to boot as a zImage
-> > file. This could be accomplished applying this patch to a specific
-> > file that's on the source code of FreeBSD :
-> >
-> >
-> > https://xenbits.xen.org/gitweb/?p=3Dp...8;hb=3D0782e25d98cc139147271703=
-5f986c979edef0c9
-> >
-> >
-> >
-> > This patch was written by Julien Grall a lot of time ago and now it
-> > does not work anymore. This is the reason explain by the xen
-> > developers :
-> >
-> >
-> >
-> > It appears FreeBSD-CURRENT removed the last step converting the kernel
-> > file to kernel.bin.The patch can be readily rebased, but without
-> > kernel.bin that doesn't do too much.
-> >
-> >
-> >
-> > So,without a rebase of that patch the first option is not applicable.
-> > And I'm not able to fix it.
-> >
-> >
-> > 2) booting FreeBSD using U-Boot,as explained to me by a xen developer :
-> >
-> >
-> > I was trying to explain why and how Julien's patch works so that you
-> > could be the one to re-do something similar or fix the patch on the
-> > FreeBSD kernel that you are working with. I am happy to help review
-> > and write patches but I don't work with the FreeBSD kernel so I
-> > wouldn't be able to help you quickly. However, I might have a
-> > suggestion. Do you know if FreeBSD can be booted by U-Boot ?
-> > Because
-> > U-Boot definitely boots as Xen on ARM guest firmware/bootloader. You
-> > should be able to build U-Boot and use the U-Boot binary as Xen guest
-> > kernel, then U-Boot could load FreeBSD from disk or network and start
-> > it. For instance as domU config file:
-> >
-> > kernel=3D"/home/petalinux/u-boot.bin"
-> > disk =3D [ '/home/petalinux/test.img,raw,xvda' ]
-> >
-> >
-> > Actually I'm working on the idea n. 2. Basically I need to find the
-> > proper u-boot file that's able to boot the image of FreeBSD that I
-> > have installed (13.2 for arm32 bit). Maybe I found it here :
-> >
-> >
-> > http://commondatastorage.googleapis.com/chromeos-localmirror/distfiles/=
-nv_uboot-snow-simplefb.kpart.bz2
-> >
-> >
-> > I found that link inside this tutorial :
-> >
-> >
-> > https://wiki.freebsd.org/arm/Chromebook
-> >
-> >
-> > the version of u-boot that has been embedded in that file is the follow=
-ing one :
-> >
-> >
-> > # strings nv_uboot-snow-simplefb.kpart | grep U-Boot
-> > U-Boot 2011.12-gc1f6280 (May 27 2013 - 15:06:59) for SMDK5250
-> >
-> >
-> > So the question is easy : I need to find the source code of that old
-> > version of u-boot,because once compiled,it will give me the proper
-> > u-boot.bin kernel / bootloader file that maybe will be able to boot
-> > FreeBSD.
+> I think we can just keep prompting for it now, to make the transition
+> easier, before this option just goes away in time, hopefully.
 >
-> Yes, it can boot a 32-bit ARM board. I'm not a FreeBSD person, but
-> I've helped a FreeBSD user booting a 32-bit ARM box with u-boot
-> (GoFlexHome Marvell Kirkwood 6281). The u-boot version was 2017.05. I
-> used an out-of-tree u-boot build. This u-boot executed the ubldr to
-> boot FreeBSD.
->
-> Please see here:
-> https://forum.doozan.com/read.php?3,49039,82059#msg-82059
->
-> It's been so long, I don't remember the details. Just to confirm what
-> Heinrich said that u-boot can indeed boot 32-bit FreeBSD, since many
-> years ago.
->
-> All the best,
-> Tony
->
+> > Also, this doesn't seem to work for me. Before this series I get these
+> > files when building firefly-rk3399:
 > >
+> > rk3399-eaidk-610.dtb            rk3399-khadas-edge-v.dtb
+> > rk3399-orangepi.dtb        rk3399-rock-pi-4a.dtb
+> > rk3399-evb.dtb                  rk3399-leez-p710.dtb
+> > rk3399-pinebook-pro.dtb    rk3399-rock-pi-4c.dtb
+> > rk3399-ficus.dtb                rk3399-nanopc-t4.dtb
+> > rk3399-pinephone-pro.dtb   rk3399-rockpro64.dtb
+> > rk3399-firefly.dtb              rk3399-nanopi-m4-2gb.dtb
+> > rk3399pro-rock-pi-n10.dtb  rk3399-roc-pc.dtb
+> > rk3399-gru-bob.dtb              rk3399-nanopi-m4b.dtb
+> > rk3399-puma-haikou.dtb     rk3399-roc-pc-mezzanine.dtb
+> > rk3399-gru-kevin.dtb            rk3399-nanopi-m4.dtb
+> > rk3399-rock-4c-plus.dtb
+> > rk3399-khadas-edge-captain.dtb  rk3399-nanopi-neo4.dtb    rk3399-rock-4=
+se.dtb
+> > rk3399-khadas-edge.dtb          rk3399-nanopi-r4s.dtb     rk3399-rock96=
+0.dtb
 > >
-> > --
-> > Mario.
+> > Afterwards I get this:
+> >
+> > make[3]: *** No rule to make target
+> > 'dts/arch/arm64/rk3399-firefly.dtb', needed by 'dtbs'.  Stop.
+> >
+> > So I set this manually for that one board:
+> >
+> > CONFIG_DEFAULT_DEVICE_TREE=3D"rockchip/rk3399-firefly"
+> >
+> > and get:
+> >
+> > make[3]: *** No rule to make target
+> > 'dts/arch/arm64/rockchip/rk3399-firefly.dtb', needed by 'dtbs'.  Stop.
+> >
+> > I am not sure how to fix this, nor how this can be made to build all
+> > the DTs for rk3399, as it does today.
+>
+> Looking at the patch for amlogic boards, you need to make the link to
+> devicetree-rebasing inside dts/...
 
+OK, let me give up on rk3399 for now...that doesn't seem to work even
+with the link.
 
+Using odroid-c2 with -next I see:
 
---=20
-Mario.
+$ ls /tmp/b/odroid-c2/arch/arm/dts/
+meson-a1-ad401.dtb                 meson-g12b-odroid-n2l.dtb
+    meson-gxl-s905x-libretech-cc.dtb
+meson-axg-jethome-jethub-j100.dtb  meson-g12b-odroid-n2-plus.dtb
+    meson-gxl-s905x-libretech-cc-v2.dtb
+meson-axg-s400.dtb                 meson-g12b-radxa-zero2.dtb
+    meson-gxl-s905x-p212.dtb
+meson-g12a-radxa-zero.dtb          meson-gxbb-kii-pro.dtb
+    meson-gxm-gt1-ultimate.dtb
+meson-g12a-sei510.dtb              meson-gxbb-nanopi-k2.dtb
+    meson-gxm-khadas-vim2.dtb
+meson-g12a-u200.dtb                meson-gxbb-odroidc2.dtb
+    meson-gxm-s912-libretech-pc.dtb
+meson-g12b-a311d-bananapi-m2s.dtb  meson-gxbb-p200.dtb
+    meson-gxm-wetek-core2.dtb
+meson-g12b-a311d-khadas-vim3.dtb   meson-gxbb-p201.dtb
+    meson-sm1-bananapi-m2-pro.dtb
+meson-g12b-bananapi-cm4-cm4io.dtb  meson-gxbb-wetek-hub.dtb
+    meson-sm1-bananapi-m5.dtb
+meson-g12b-gsking-x.dtb            meson-gxbb-wetek-play2.dtb
+    meson-sm1-khadas-vim3l.dtb
+meson-g12b-gtking.dtb              meson-gxl-s805x-libretech-ac.dtb
+    meson-sm1-odroid-c4.dtb
+meson-g12b-gtking-pro.dtb          meson-gxl-s905d-libretech-pc.dtb
+    meson-sm1-odroid-hc4.dtb
+meson-g12b-odroid-go-ultra.dtb
+meson-gxl-s905w-jethome-jethub-j80.dtb  meson-sm1-sei610.dtb
+meson-g12b-odroid-n2.dtb           meson-gxl-s905x-khadas-vim.dtb
+$
+With this series (sort of, since I am really not sure how to
+cherry-pick the commits from the PR) I see nothing:
+
+$ ls /tmp/b/odroid-c2/arch/arm/dts/
+$
+
+This shows some of the files:
+
+$ find /tmp/b/odroid-c2/ -name "*.dtb"
+/tmp/b/odroid-c2/dts/dt.dtb
+/tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-odroidc2.dtb
+/tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-nanopi-k2.dtb
+/tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-wetek-play2.dtb
+/tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-kii-pro.dtb
+/tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-p200.dtb
+/tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-p201.dtb
+/tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-wetek-hub.dtb
+/tmp/b/odroid-c2/u-boot.dtb
+
+but where are the rest? Also, is it possible to put the output .dtb
+files into the same directory? Otherwise we may have some pain with
+binman.
+
+[..]
+
+Regards,
+Simon
