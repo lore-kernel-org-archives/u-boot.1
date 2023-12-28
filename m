@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 176AEC3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 09:03:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94858C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 09:03:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA9C6879E5;
-	Thu, 28 Dec 2023 10:03:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 28208879DC;
+	Thu, 28 Dec 2023 10:03:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="c0iOrJPw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IvzIR9Gc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52A91879D8; Thu, 28 Dec 2023 10:03:04 +0100 (CET)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id 86BB2879D4; Thu, 28 Dec 2023 10:03:05 +0100 (CET)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9012879A3
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 10:03:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BC5187509
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 10:03:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2ccbf8cbf3aso36351311fa.3
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 01:03:00 -0800 (PST)
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2cca5e7b390so53551091fa.3
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 01:03:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703754180; x=1704358980; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1703754182; x=1704358982; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Y/7nIXEtXr0tT37tdyDEAdtwYEWCpaz7ODmuC1pkxAQ=;
- b=c0iOrJPwZKPJAdvasapy1DKt+jfCQR4QLZ1LIJTjvyg8/gjnRznPOaMRQ4FNz9N04w
- /opSQvNi+Vqm6yhFVM+CSd+Qp+e+G89HsH+pf3d16PuRGUar86h5CIxrE+FPm4Ke+Qo6
- WQt+FMfHRftHf2S41sC4G4wznR5AGNygckLWjI0Ds3rEIzaADqpHQb2d3vB0wcbvneJU
- qDfybLF0zhUsXM01JiSiZEE7maYZZ2sQnBN6AC6GY3Gk0W3YVqbrp+4dKbyuRLeO1a7Y
- +Klo08Urh79VjnUezVSrSPGqD7UGLF+v/XWEuCHXF6vDBaeeT+8ckRfzWFNsLpppWg5J
- ydhQ==
+ bh=7CKQ5bqrxmvZF0BN2ybdCYuR+/Wf9nXbyVM/Z5pRChE=;
+ b=IvzIR9GcvQ0FKJUkuIb/eRGsVWUJjWcSxhaErzHQZvXqFIz6XPFfVxZZKMInT3lgZ6
+ KK7CHy2cz7AGIc40sGi355Bs05HZFt8sQ4PKpX55MYnHyaFi/71VoSJ969UDdzstwhvx
+ TSiB6OZ03EynkSrkJw1ivdhszD52bdhAHGjGAhd9ms1tQmF6G4rpxyW3vkySlXTY2/fD
+ xzVhb3TvT6fV3dlIFIV5jWAeDg69hO/ADOxDrLwsbe8/oDs8S5XcUGLa8c6sCNXFeNv9
+ XVICaYPjddJdlO4E+BLmc0Xec1r/AYLqakzlMq7Vp2dV7LI5PFI4SyCGnVAgczKEB+5y
+ 3BIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703754180; x=1704358980;
+ d=1e100.net; s=20230601; t=1703754182; x=1704358982;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Y/7nIXEtXr0tT37tdyDEAdtwYEWCpaz7ODmuC1pkxAQ=;
- b=sx8JsnItZxiqmbKmA+3W0srCPqowyfp9QoNUUf5MnfzSzpavT013L75NXkHhD0z5//
- ZcSHyp5E46zw8enG9AGZGadbAFKJy+fqR3h68Ji/ydfRTRkPQW/HgOip2IRC1iL/zRr2
- 3A345yjQHjcPi6EU55Gn3z1rqYWFz9PR1taBKeNV5jDWoUR/WMeCPZtb0plv6wrBWGMj
- qhsz7f5lkiXwhWmvgajWhfocIthHDFZ76VT/o2KIxTXGoTNJFDXA1N1TjkHMAt2515i+
- biFiJ/HXbVP3V6i1xMw8MKEebYub3oE5i0LaEEjoOnNRoJI+ro1nKAcgmTh+RIMVezBh
- D0Lw==
-X-Gm-Message-State: AOJu0YyjQ6QtqR7EivOxm7HrhlxBPRt/Vw4ARUWYxRQJtllAHfaWCJdI
- Cfx46poweUVcZ0El3qPYfP8=
-X-Google-Smtp-Source: AGHT+IHA0XIgHWnNHSAbIk2WXFteTZeaq7ZzQah5XN3GGTCumlTpX2Os4ZU7ueA0b7fm2nR/jJry/Q==
-X-Received: by 2002:a2e:9898:0:b0:2cc:9882:4cb5 with SMTP id
- b24-20020a2e9898000000b002cc98824cb5mr4576442ljj.45.1703754179796; 
- Thu, 28 Dec 2023 01:02:59 -0800 (PST)
+ bh=7CKQ5bqrxmvZF0BN2ybdCYuR+/Wf9nXbyVM/Z5pRChE=;
+ b=fn+XMNaPmXINYqvKZsqBc54Z30dddkZ5OHPzBNzGfLzwf7GXefmWjYSjSIKHGVz+bI
+ HEBnaOepEJgKUIx/miqsL7a7VbPpwOjyfDVkJ8Xo6XVHSe0bGYWAuPvizRsq0jEL5jUu
+ 0nKNhsmojXgCt8Q9iTTLPSiuXHZRobpW/Y/eZI+ZvuD2jWaAgXEzkCD6BFropDnVPPo2
+ DCOzGhSQn1ESTGKlCjLH0s7k64/SqAUv1/6Ij1Aw7aHq00gGITHiqh7LkPYB+iFrqdxn
+ VZ+8vdxPpePT7E6zebbnyHo4vU1OayZLdtnSAoh+J+zIHuYsGEIT7jMv/gNM5Xu+IDct
+ 892A==
+X-Gm-Message-State: AOJu0Yym6cBL74g62fKe9b+JuzuLvtMBn9fGNmQ+73K7y/p1dj4m9aqV
+ mqg9Xun8JLIyU/JDHzFdays=
+X-Google-Smtp-Source: AGHT+IFQxD0pbcJCG7AmDRVGl6DYwc9mDF9s4NN0PvBBDKuEJncHlzIVteAtzc/+CqyujwInpscEpA==
+X-Received: by 2002:a2e:8606:0:b0:2cc:6bbf:ea95 with SMTP id
+ a6-20020a2e8606000000b002cc6bbfea95mr3896705lji.62.1703754182378; 
+ Thu, 28 Dec 2023 01:03:02 -0800 (PST)
 Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
- n18-20020a2ebd12000000b002ccabe13852sm2475708ljq.85.2023.12.28.01.02.58
+ n18-20020a2ebd12000000b002ccabe13852sm2475708ljq.85.2023.12.28.01.03.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Dec 2023 01:02:59 -0800 (PST)
+ Thu, 28 Dec 2023 01:03:02 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
  Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
@@ -75,9 +75,9 @@ To: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v5 1/5] fastboot: multiresponse support
-Date: Thu, 28 Dec 2023 11:02:36 +0200
-Message-Id: <20231228090240.18011-2-clamor95@gmail.com>
+Subject: [PATCH v5 3/5] common: console: introduce overflow and isempty calls
+Date: Thu, 28 Dec 2023 11:02:38 +0200
+Message-Id: <20231228090240.18011-4-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231228090240.18011-1-clamor95@gmail.com>
 References: <20231228090240.18011-1-clamor95@gmail.com>
@@ -101,206 +101,143 @@ X-Virus-Status: Clean
 
 From: Ion Agorria <ion@agorria.com>
 
-Currently u-boot fastboot can only send one message back to host,
-so if there is a need to print more than one line messages must be
-kept sending until all the required data is obtained. This behavior
-can be adjusted using multiresponce ability (getting multiple lines
-of response) proposed in this patch.
+Separate record overflow logic and add console_record_isempty
+as available calls don't serve to know output has been read
+fully with readline's.
 
 Signed-off-by: Ion Agorria <ion@agorria.com>
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
- drivers/fastboot/fb_command.c   | 10 ++++++++++
- drivers/usb/gadget/f_fastboot.c | 29 +++++++++++++++++++++++++++++
- include/fastboot.h              | 18 ++++++++++++++++++
- net/fastboot_udp.c              | 29 +++++++++++++++++++++++------
- 4 files changed, 80 insertions(+), 6 deletions(-)
+ common/console.c  | 15 ++++++++++++---
+ include/console.h | 26 ++++++++++++++++++++++++++
+ test/ut.c         |  9 ++++-----
+ 3 files changed, 42 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
-index 5fcadcdf50..ab72d8c781 100644
---- a/drivers/fastboot/fb_command.c
-+++ b/drivers/fastboot/fb_command.c
-@@ -5,6 +5,7 @@
+diff --git a/common/console.c b/common/console.c
+index 1ffda49c87..833da61733 100644
+--- a/common/console.c
++++ b/common/console.c
+@@ -821,6 +821,8 @@ int console_record_init(void)
+ 	ret = membuff_new((struct membuff *)&gd->console_in,
+ 			  CONFIG_CONSOLE_RECORD_IN_SIZE);
  
- #include <common.h>
- #include <command.h>
-+#include <console.h>
- #include <env.h>
- #include <fastboot.h>
- #include <fastboot-internal.h>
-@@ -152,6 +153,15 @@ int fastboot_handle_command(char *cmd_string, char *response)
- 	return -1;
++	gd->flags |= GD_FLG_RECORD;
++
+ 	return ret;
  }
  
-+void fastboot_multiresponse(int cmd, char *response)
-+{
-+	switch (cmd) {
-+	default:
-+		fastboot_fail("Unknown multiresponse command", response);
-+		break;
-+	}
-+}
-+
- /**
-  * okay() - Send bare OKAY response
-  *
-diff --git a/drivers/usb/gadget/f_fastboot.c b/drivers/usb/gadget/f_fastboot.c
-index 9f322c9550..09e740cc96 100644
---- a/drivers/usb/gadget/f_fastboot.c
-+++ b/drivers/usb/gadget/f_fastboot.c
-@@ -497,6 +497,25 @@ static void do_bootm_on_complete(struct usb_ep *ep, struct usb_request *req)
- 	do_exit_on_complete(ep, req);
+@@ -839,11 +841,13 @@ int console_record_reset_enable(void)
+ 	return 0;
  }
  
-+static int multiresponse_cmd = -1;
-+static void multiresponse_on_complete(struct usb_ep *ep, struct usb_request *req)
-+{
-+	char response[FASTBOOT_RESPONSE_LEN] = {0};
-+
-+	if (multiresponse_cmd == -1)
-+		return;
-+
-+	/* Call handler to obtain next response */
-+	fastboot_multiresponse(multiresponse_cmd, response);
-+	fastboot_tx_write_str(response);
-+
-+	/* If response is final OKAY/FAIL response disconnect this handler and unset cmd */
-+	if (!strncmp("OKAY", response, 4) || !strncmp("FAIL", response, 4)) {
-+		multiresponse_cmd = -1;
-+		fastboot_func->in_req->complete = fastboot_complete;
-+	}
-+}
-+
- static void do_acmd_complete(struct usb_ep *ep, struct usb_request *req)
+-int console_record_readline(char *str, int maxlen)
++bool console_record_overflow(void)
  {
- 	/* When usb dequeue complete will be called
-@@ -524,6 +543,16 @@ static void rx_handler_command(struct usb_ep *ep, struct usb_request *req)
- 		fastboot_fail("buffer overflow", response);
- 	}
+-	if (gd->flags & GD_FLG_RECORD_OVF)
+-		return -ENOSPC;
++	return gd->flags & GD_FLG_RECORD_OVF ? true : false;
++}
  
-+	if (!strncmp(FASTBOOT_MULTIRESPONSE_START, response, 4)) {
-+		multiresponse_cmd = cmd;
-+		fastboot_multiresponse(multiresponse_cmd, response);
-+
-+		/* Only add complete callback if first is not a final OKAY/FAIL response */
-+		if (strncmp("OKAY", response, 4) && strncmp("FAIL", response, 4)) {
-+			fastboot_func->in_req->complete = multiresponse_on_complete;
-+		}
-+	}
-+
- 	if (!strncmp("DATA", response, 4)) {
- 		req->complete = rx_handler_dl_image;
- 		req->length = rx_bytes_expected(ep);
-diff --git a/include/fastboot.h b/include/fastboot.h
-index 296451f89d..59cbea61ec 100644
---- a/include/fastboot.h
-+++ b/include/fastboot.h
-@@ -14,6 +14,16 @@
++int console_record_readline(char *str, int maxlen)
++{
+ 	return membuff_readline((struct membuff *)&gd->console_out, str,
+ 				maxlen, '\0');
+ }
+@@ -853,6 +857,11 @@ int console_record_avail(void)
+ 	return membuff_avail((struct membuff *)&gd->console_out);
+ }
  
- #define FASTBOOT_VERSION	"0.4"
- 
-+/*
-+ * Signals u-boot fastboot code to send multiple responses by
-+ * calling response generating function repeatedly until a OKAY/FAIL
-+ * is generated as final response.
-+ *
-+ * This status code is only used internally to signal, must NOT
-+ * be sent to host.
-+ */
-+#define FASTBOOT_MULTIRESPONSE_START	("MORE")
++bool console_record_isempty(void)
++{
++	return membuff_isempty((struct membuff *)&gd->console_out);
++}
 +
- /* The 64 defined bytes plus \0 */
- #define FASTBOOT_COMMAND_LEN	(64 + 1)
- #define FASTBOOT_RESPONSE_LEN	(64 + 1)
-@@ -172,5 +182,13 @@ void fastboot_data_download(const void *fastboot_data,
+ int console_in_puts(const char *str)
+ {
+ 	return membuff_put((struct membuff *)&gd->console_in, str, strlen(str));
+diff --git a/include/console.h b/include/console.h
+index e29817e57b..21466d51a9 100644
+--- a/include/console.h
++++ b/include/console.h
+@@ -64,6 +64,13 @@ void console_record_reset(void);
   */
- void fastboot_data_complete(char *response);
+ int console_record_reset_enable(void);
  
 +/**
-+ * fastboot_handle_multiresponse() - Called for each response to send
++ * console_record_overflow() - returns state of buffers overflow
 + *
-+ * @cmd: Command id that requested multiresponse
-+ * @response: Pointer to fastboot response buffer
++ * Return: true if the console buffer was overflowed
 + */
-+void fastboot_multiresponse(int cmd, char *response);
++bool console_record_overflow(void);
 +
- void fastboot_acmd_complete(void);
- #endif /* _FASTBOOT_H_ */
-diff --git a/net/fastboot_udp.c b/net/fastboot_udp.c
-index d690787478..6fee441ab3 100644
---- a/net/fastboot_udp.c
-+++ b/net/fastboot_udp.c
-@@ -42,16 +42,15 @@ static int fastboot_remote_port;
- static int fastboot_our_port;
- 
  /**
-- * fastboot_udp_send_info() - Send an INFO packet during long commands.
-+ * fastboot_udp_send_response() - Send an response into UDP
+  * console_record_readline() - Read a line from the console output
   *
-- * @msg: String describing the reason for waiting
-+ * @response: Response to send
+@@ -84,6 +91,13 @@ int console_record_readline(char *str, int maxlen);
   */
--static void fastboot_udp_send_info(const char *msg)
-+static void fastboot_udp_send_response(const char *response)
- {
- 	uchar *packet;
- 	uchar *packet_base;
- 	int len = 0;
--	char response[FASTBOOT_RESPONSE_LEN] = {0};
+ int console_record_avail(void);
  
- 	struct fastboot_header response_header = {
- 		.id = FASTBOOT_FASTBOOT,
-@@ -66,7 +65,6 @@ static void fastboot_udp_send_info(const char *msg)
- 	memcpy(packet, &response_header, sizeof(response_header));
- 	packet += sizeof(response_header);
- 	/* Write response */
--	fastboot_response("INFO", response, "%s", msg);
- 	memcpy(packet, response, strlen(response));
- 	packet += strlen(response);
- 
-@@ -91,6 +89,7 @@ static void fastboot_udp_send_info(const char *msg)
- static void fastboot_timed_send_info(const char *msg)
- {
- 	static ulong start;
-+	char response[FASTBOOT_RESPONSE_LEN] = {0};
- 
- 	/* Initialize timer */
- 	if (start == 0)
-@@ -99,7 +98,8 @@ static void fastboot_timed_send_info(const char *msg)
- 	/* Send INFO packet to host every 30 seconds */
- 	if (time >= 30000) {
- 		start = get_timer(0);
--		fastboot_udp_send_info(msg);
-+		fastboot_response("INFO", response, "%s", msg);
-+		fastboot_udp_send_response(response);
- 	}
++/**
++ * console_record_isempty() - Returns if console output is empty
++ *
++ * Return: true if empty
++ */
++bool console_record_isempty(void);
++
+ /**
+  * console_in_puts() - Write a string to the console input buffer
+  *
+@@ -113,6 +127,12 @@ static inline int console_record_reset_enable(void)
+ 	return -ENOSYS;
  }
  
-@@ -180,6 +180,23 @@ static void fastboot_send(struct fastboot_header header, char *fastboot_data,
- 		} else {
- 			cmd = fastboot_handle_command(command, response);
- 			pending_command = false;
++static inline bool console_record_overflow(void)
++{
++	/* No overflow */
++	return false;
++}
 +
-+			if (!strncmp(FASTBOOT_MULTIRESPONSE_START, response, 4)) {
-+				while (1) {
-+					/* Call handler to obtain next response */
-+					fastboot_multiresponse(cmd, response);
+ static inline int console_record_readline(char *str, int maxlen)
+ {
+ 	/* Nothing to read */
+@@ -131,6 +151,12 @@ static inline int console_in_puts(const char *str)
+ 	return 0;
+ }
+ 
++static inline bool console_record_isempty(void)
++{
++	/* Always empty */
++	return true;
++}
 +
-+					/*
-+					 * Send more responses or break to send
-+					 * final OKAY/FAIL response
-+					 */
-+					if (strncmp("OKAY", response, 4) &&
-+					    strncmp("FAIL", response, 4))
-+						fastboot_udp_send_response(response);
-+					else
-+						break;
-+				}
-+			}
- 		}
- 		/*
- 		 * Sent some INFO packets, need to update sequence number in
+ #endif /* !CONFIG_CONSOLE_RECORD */
+ 
+ /**
+diff --git a/test/ut.c b/test/ut.c
+index 628e9dc980..2a3bb8133a 100644
+--- a/test/ut.c
++++ b/test/ut.c
+@@ -53,15 +53,14 @@ long ut_check_delta(ulong last)
+ 
+ static int readline_check(struct unit_test_state *uts)
+ {
+-	int ret;
+-
+-	ret = console_record_readline(uts->actual_str, sizeof(uts->actual_str));
+-	if (ret == -ENOSPC) {
++	if (console_record_overflow()) {
+ 		ut_fail(uts, __FILE__, __LINE__, __func__,
+ 			"Console record buffer too small - increase CONFIG_CONSOLE_RECORD_OUT_SIZE");
+-		return ret;
++		return -ENOSPC;
+ 	}
+ 
++	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
++
+ 	return 0;
+ }
+ 
 -- 
 2.40.1
 
