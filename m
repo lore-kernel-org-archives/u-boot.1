@@ -4,80 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28B3DC3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 12:03:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF9DFC3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 12:58:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C7FB8774E;
-	Thu, 28 Dec 2023 13:03:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E650F87A0B;
+	Thu, 28 Dec 2023 13:58:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d4DcKxCP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SelAGr0G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7CFD87A35; Thu, 28 Dec 2023 13:03:32 +0100 (CET)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id 9B5AD86FFD; Thu, 28 Dec 2023 13:58:09 +0100 (CET)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B79B8774E
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 13:03:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 690BB87995
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 13:58:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-50e7aed08f4so2773334e87.0
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 04:03:29 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-5e74b4d5445so48590627b3.1
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 04:58:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703765008; x=1704369808; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hedqUp2ogf8l6RLIdXQ6yk8zmoNyrw8t2xabdfAVsM4=;
- b=d4DcKxCPahXqqbv6MHhMoxq7pbY8b2aqr27sH3OYlhqDYNvmU4O77I/cey1o901j8E
- O9KAjzRbw8GkQldbvFKllW8YG+3KVHrrwK/cNqf8aj/jveKrXtOEsDajSLsM6bDRH07U
- TCsudx0mTi0jY0QQ2a0+VdeA+NzesxdAG7hsgPXt5kj8FKMBUKNJQa2Zgi5I9z+gbCtZ
- 4gSAnapfayQG8Gk4ioZIQSpZCxV6Mi0hcHClc9+OcxGqRWuCTrEHGjFOvvaKDiLhg7pD
- RWfOP3i10yJX/ouFzIQuZDZR7kLwJKEKwCPkJqIIJomg6CPkfPYKcu0MEFtZqQFfY9cl
- XiuA==
+ d=konsulko.com; s=google; t=1703768285; x=1704373085; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=amGZzSpLKwTB1scP384G40wOwvm2zayj6NHN4DcVBeM=;
+ b=SelAGr0G/+Nr/96dlTsNJY9jGqlpC8xped47B7Mgu/U3GCEU0CyfWscBVc/VEJM5WM
+ dZBJ9N6ys4SZFW/8cBu3Ni4vJ7Xdh5C/VgcSpesLn+Raktf6YT+bEnX0K+y3qCMBcyI3
+ i0FLd6RPoIZVO+l9E7gC6gIYYybCYmW0xTZik=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703765008; x=1704369808;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hedqUp2ogf8l6RLIdXQ6yk8zmoNyrw8t2xabdfAVsM4=;
- b=tyEuvAxjiTdCBg88CAJYgAJWls2Df3rZpoXq3G10fbh1ygWvSSk95FVNamDbkj23/4
- A+3qV2TYYWTAL56w2w6b4tBMtRALJA5KVfWA2Tgp5DcpSORITiGR7a+SPTS2XNV/xZkT
- fNdxipaOSbMYGG550TJ4zMNe29YnCflvc+a85/E13jxhHeta9Y0VlTSdbW5bTFhTWDag
- A+Xu0hmi1QgXUCXM0B9M1UzN2WVsG/8pSkehXK/8U4hsCQ2Ce28VJzs2zvEsRW6kf1kJ
- g4pp4H4O9lTu7xproxW3T3oR+LbERwkMZ5v2Gfy6tLcQLYMqHeBo2ug4tO4qGszQsYzq
- ASzw==
-X-Gm-Message-State: AOJu0YzKHHRsUd5KDoqVbWxujVpM5kSe/XZx+wcCVgYs7p607LpY7u8b
- +bCMqPdTpOaziW8fCuA3Iw1TVBtsiE6eJyxf6KHiKbZNS6mkMQ==
-X-Google-Smtp-Source: AGHT+IErF2d+J8Xs176+dkns5eNkMPe2m7zXasK5RNInmjMdOs9GmKvcdwZtN1xfGagA7bEte/D0n7MhOze0qomUAR4=
-X-Received: by 2002:ac2:4c8f:0:b0:50e:70b9:8600 with SMTP id
- d15-20020ac24c8f000000b0050e70b98600mr4197585lfl.0.1703765008599; Thu, 28 Dec
- 2023 04:03:28 -0800 (PST)
-MIME-Version: 1.0
-References: <20231228115804.3626579-1-sumit.garg@linaro.org>
- <20231228115804.3626579-2-sumit.garg@linaro.org>
-In-Reply-To: <20231228115804.3626579-2-sumit.garg@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 28 Dec 2023 14:02:52 +0200
-Message-ID: <CAC_iWjJJX+Vuicy__sxqc__9nqLHf8A7v6Lr56=wSLEpieai4g@mail.gmail.com>
-Subject: Re: [PATCH v3 1/8] CI: Exclude devicetree-rebasing subtree for CONFIG
- checks
+ d=1e100.net; s=20230601; t=1703768285; x=1704373085;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=amGZzSpLKwTB1scP384G40wOwvm2zayj6NHN4DcVBeM=;
+ b=jmvyxU2KsbIKMHNHem7z2+HbhNPGv/2xrI1vKsVmjK6a+D30tgWmY+KOx5z6mvuVgW
+ dLrJevmHuplcgp5dZO8n4cZj8KgY9a46Bv1uhiBgwjo4KtqOrxKw1ssNAPE9pdRjfLcO
+ XAk6KjpP7OnCQ6HcqZFl8j3K1hl8yQt0u028x1VUuBgpVjGIea4RXdo+VqmffsfdCZRk
+ dVZdDpw4v8gSWH/20hiPHyNO+3EX0Re7VzewzTMLEQ5HTtk1AzTo/i6ea1OlLzGzlLsH
+ ++5zhGXcMW78VK9P/jK+4gFpi8Z+fnne3NKbnbTdoHanSdYIMSJzZ3xPIePhqz5DKdbe
+ 67JA==
+X-Gm-Message-State: AOJu0YynJw7y4RpQp2k/qV4+05mxlExVOq3Hgsvfgtzt1679W0qB1t7e
+ 1ZwQxEPJBdDK1L6Zx18YlRLPQMOmwdmzvw==
+X-Google-Smtp-Source: AGHT+IGivtlp0J6uDiVS/Gf3hInJCMufR2yO20/iIEwDO3PD3U7VhdvZIpbe2s9+gAPkZZCgLiccTA==
+X-Received: by 2002:a81:b503:0:b0:5ee:6ad3:b0b1 with SMTP id
+ t3-20020a81b503000000b005ee6ad3b0b1mr1837524ywh.4.1703768285190; 
+ Thu, 28 Dec 2023 04:58:05 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ u124-20020a0deb82000000b005de8c10f283sm7348864ywe.102.2023.12.28.04.58.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 28 Dec 2023 04:58:04 -0800 (PST)
+Date: Thu, 28 Dec 2023 07:58:00 -0500
+From: Tom Rini <trini@konsulko.com>
 To: Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, trini@konsulko.com, sjg@chromium.org, 
- robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de, 
- michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk, 
- peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de, 
- mibodhi@gmail.com
-Content-Type: text/plain; charset="UTF-8"
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
+ u-boot-custodians@lists.denx.de, sjg@chromium.org,
+ robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org,
+ conor@kernel.org, neil.armstrong@linaro.org,
+ caleb.connolly@linaro.org, ff@shokubai.tech,
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
+ pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
+ maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de,
+ michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk,
+ peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com,
+ marex@denx.de, mibodhi@gmail.com
+Subject: Re: [PATCH v3 5/8] doc: devicetree: Updates for devicetree-rebasing
+ subtree
+Message-ID: <20231228125800.GY2652760@bill-the-cat>
+References: <20231228115804.3626579-1-sumit.garg@linaro.org>
+ <20231228115804.3626579-6-sumit.garg@linaro.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="aqwKPGuxDCKaGK1S"
+Content-Disposition: inline
+In-Reply-To: <20231228115804.3626579-6-sumit.garg@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,57 +102,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 28 Dec 2023 at 13:58, Sumit Garg <sumit.garg@linaro.org> wrote:
->
-> Since devicetree-rebasing is an external repo with its own coding style,
-> exclude it from Azure and gitlab CI CONFIG checks.
->
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> ---
->
-> Changes in v3:
-> --------------
-> - Picked up review tag
->
-> Changes in v2:
-> --------------
-> - Excluded gitab CI config check and added commit description.
->
->  .azure-pipelines.yml | 3 ++-
->  .gitlab-ci.yml       | 3 ++-
->  2 files changed, 4 insertions(+), 2 deletions(-)
->
-> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-> index d6f3fa423c6..f100c4493e6 100644
-> --- a/.azure-pipelines.yml
-> +++ b/.azure-pipelines.yml
-> @@ -65,7 +65,8 @@ stages:
->        # have no matches.
->        - script: git grep -E '^#[[:blank:]]*(define|undef)[[:blank:]]*CONFIG_'
->                    :^doc/ :^arch/arm/dts/ :^scripts/kconfig/lkc.h
-> -                  :^include/linux/kconfig.h :^tools/ && exit 1 || exit 0
-> +                  :^include/linux/kconfig.h :^tools/ :^devicetree-rebasing/ &&
-> +                  exit 1 || exit 0
->
->    - job: docs
->      displayName: 'Build documentation'
-> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> index fee165198ae..96ca9f72bbc 100644
-> --- a/.gitlab-ci.yml
-> +++ b/.gitlab-ci.yml
-> @@ -161,7 +161,8 @@ check for new CONFIG symbols outside Kconfig:
->      # have no matches.
->      - git grep -E '^#[[:blank:]]*(define|undef)[[:blank:]]*CONFIG_'
->          :^doc/ :^arch/arm/dts/ :^scripts/kconfig/lkc.h
-> -        :^include/linux/kconfig.h :^tools/ && exit 1 || exit 0
-> +        :^include/linux/kconfig.h :^tools/ :^devicetree-rebasing/ &&
-> +        exit 1 || exit 0
->
->  # build documentation
->  docs:
-> --
-> 2.34.1
->
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+--aqwKPGuxDCKaGK1S
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Dec 28, 2023 at 05:28:01PM +0530, Sumit Garg wrote:
+
+> Encourage SoC/board maintainers to migrate to using devicetree-rebasing
+> subtree and maintain a regular sync with Linux kernel devicetree files
+> and bindings.
+>=20
+> Along with that add documentation regarding how to run DT bindings
+> schema checks.
+>=20
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+
+Thanks for the related cleanups in there.
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--aqwKPGuxDCKaGK1S
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWNcNUACgkQFHw5/5Y0
+tyxeEQv+JFUxK6fePvqRO08hexX80jvOaBwfjxYnsT4M5kTQy1zmldJeqm5ybhuS
+SaKtxdU2UPK7cOmry77gHOaEHN5tEZ4GU1vl8G0FumPrpe95xY/vtNkgEStpudHS
+eLUV4mTfhS8MAe9QvEOIiDygaZLm8pMEdHtM/liW2t0N9QbD+WZeyNrxyguy++N5
+1+XIg/7kW/m2XB9i40u+YdOeA9Le+8y1qPoWj647t/Mk0SPDd03lp2vF8zNnb9sb
+jv7fD1GsD20n6qVp6pBulFGPzbmAtbMWqB2qVIsiN6RiKn+8yFSGdaLSNO2JdtPV
+kqS3XCD6N35/kszkmMF6GZO674spcoj/bYPhnDSUGM2pt5FidBNC4fPGOfDo4fnY
+8aQxK4XMioVZ6WV8dI+GJiuzGbNo+xH87CApDqpNuXvY9p9RrxRWxEmmfoliFMFv
+Wz3WXm5b1swfYE18MoFRJOJeJ4v55YKgnL3tcf+rAPyJDnh8COtn08aIgQh92Vnx
+ouf2mUGj
+=+12a
+-----END PGP SIGNATURE-----
+
+--aqwKPGuxDCKaGK1S--
