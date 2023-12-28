@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4F00C3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:39:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8B22C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:39:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BEA1287A6A;
-	Thu, 28 Dec 2023 14:37:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4377187A62;
+	Thu, 28 Dec 2023 14:37:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e8TPSCOR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oI3bRcti";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BEC387A5F; Thu, 28 Dec 2023 14:37:43 +0100 (CET)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id 3B84787A51; Thu, 28 Dec 2023 14:37:47 +0100 (CET)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77F2B87A4F
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:37:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CE37887A71
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:37:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3bbd6e37a9bso199483b6e.0
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:37:41 -0800 (PST)
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1d3dee5f534so46509715ad.1
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:37:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703770660; x=1704375460; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703770663; x=1704375463; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NQPieDva8iHY9uEqpW2B+Z/FOTOBqm9XKG4CWlnJXyk=;
- b=e8TPSCORBzboBB3mlVcjButaRQTrSPgA5B6wFfjoeqpYWi0eHIU27Be1etP2ybGG6N
- z3/7mLBPEnstAgXSSs9Miv1Dcg4afsg6PhyP8X/1zfpmzu4p2MGh7OMaE0HvAYYQFT09
- OxnXkxlr9K0YFuy2jj/JO1feArBa5rQLQlgjg=
+ bh=Uy84thRsphcaIQxe/QfNnfX2G1q2+y/VW1q+OS51VcI=;
+ b=oI3bRctiryQ4o4EJFLIR6gb6wjDE3qIYpsgUpO/zvJrb9CwGzrIYBdfjBfhiZD/aUr
+ MfO5APZSfNUQkRDhKc0o6GBKeTOvLz0/KBaODzY1D77dl2Adl/rM3Nl2WYRtOndnddVv
+ ltSO6HBaajwOuE5+xPxsI2CWyXYhgUc/0Or+Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703770660; x=1704375460;
+ d=1e100.net; s=20230601; t=1703770663; x=1704375463;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NQPieDva8iHY9uEqpW2B+Z/FOTOBqm9XKG4CWlnJXyk=;
- b=bNCfNx6t13pBdGUFWicU1apUJZDkzMGA8hB+XB07QSq4bhInjATuwToCQntsMqhas6
- EFDNcxJcNAquhY+dZy+762Yg3oS28Cp5Wq8VRZsbK7zeZI2jYq67Bf7IcdWwDHCxHGez
- aAi6zZ4cWDY10VjeX1fqqBYWzQGZuRvHjesxS+fvxqTUTQlWGKDrVJ9EL7WLoHAzG1B5
- aJ9WPZvmQd06A4bfDYSJyvl9Q3j7/xZwIUya4WeMV7+DOTLkDRB0ESJEV96TAeK5txvo
- hAAoixBokv6zWgKVoFTqDOfXI59abu8Hgi3V4FVLnGLnaOYY/cerQ05q5H4wi0Vds+lh
- oZ7Q==
-X-Gm-Message-State: AOJu0Yz62EfgTbKUaWrOlZqczw8VjjZzorjTwMRsbDM+W53L+OkwDzOU
- jcAUmF+3IuO0zM6BHFjJW7QUDQthTJTxF5KcMK4xM2KaACA6
-X-Google-Smtp-Source: AGHT+IFEDtbt//4uEDrgAl7NnvTRSyG649sV3g+y82UoCAPwgoh6jnW6gWJinzbCm2OE+bUrwEMFgBER7k/gt7YILXY=
-X-Received: by 2002:a05:6358:71cd:b0:172:e3d3:4906 with SMTP id
- u13-20020a05635871cd00b00172e3d34906mr8762159rwu.34.1703770660074; Thu, 28
- Dec 2023 05:37:40 -0800 (PST)
+ bh=Uy84thRsphcaIQxe/QfNnfX2G1q2+y/VW1q+OS51VcI=;
+ b=LENt8Ut/s97hh3R2AUPQIMSGrxgxPhvb8b0S9bbT6yUptW3q7ceYF8BB/gvW9gXK0m
+ iy/9re0G3VoLaRwox1lGJLvBhbZO2vfSRXKOQTbK8B3YsLa/FQoSHqeLv93KAxm1V3Nn
+ iEU14i0QDi2CPKGfAi7fgmq5NuWxhBIMnzlOOsEy/o8i+Ya2q+Ys2uc61GaUTd/GuLJL
+ rxsIC96aUTR2Z2mKjERf/dBWwkgNfXBCNvFQuXwQ10BU8axJ+cqYrV9ijM5jM7eMf9Zm
+ nOconzbTH/v5cWP8FpSvV6DRZftze942xAXoqtLhUHGjFwX8Ttp48ayBZbZGkjqpGN5I
+ axMQ==
+X-Gm-Message-State: AOJu0YxByaIDIF73v7AThfBJ3FTbXjX4qkn7V1/gcLYTy+P5z+a6vvoP
+ P8wC0R/+FjXssPdSdiAcLhZKZYTjPfpL6eZoTwYAS1QEkLyQ
+X-Google-Smtp-Source: AGHT+IFf1Vv8Be804vdB8DOuJBlD3TbwNqBsdpaZD2pEpVGoF03u+veiLHPfctGlB+7ADpPNfj48lYm7klQqcYO3dGA=
+X-Received: by 2002:a17:90a:d2c4:b0:28c:3620:b5ee with SMTP id
+ dj4-20020a17090ad2c400b0028c3620b5eemr9908325pjb.28.1703770663297; Thu, 28
+ Dec 2023 05:37:43 -0800 (PST)
 MIME-Version: 1.0
 References: <20231228115804.3626579-1-sumit.garg@linaro.org>
- <20231228115804.3626579-2-sumit.garg@linaro.org>
- <CAC_iWjJJX+Vuicy__sxqc__9nqLHf8A7v6Lr56=wSLEpieai4g@mail.gmail.com>
-In-Reply-To: <CAC_iWjJJX+Vuicy__sxqc__9nqLHf8A7v6Lr56=wSLEpieai4g@mail.gmail.com>
+ <20231228115804.3626579-7-sumit.garg@linaro.org>
+In-Reply-To: <20231228115804.3626579-7-sumit.garg@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 28 Dec 2023 13:37:08 +0000
-Message-ID: <CAFLszTgLDtunJxmwVTQ9NJXH48=dHeiyXghKmGbDDzw3fbZhTA@mail.gmail.com>
-Subject: Re: [PATCH v3 1/8] CI: Exclude devicetree-rebasing subtree for CONFIG
- checks
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
- u-boot-amlogic@groups.io, 
+Date: Thu, 28 Dec 2023 13:37:11 +0000
+Message-ID: <CAFLszTiLyy6GNOnvYa_8OsAC0mN1p63QWQtf2-toA0AJFhm3EA@mail.gmail.com>
+Subject: Re: [PATCH v3 6/8] MAINTAINERS: Add myself as devicetree-rebasing
+ maintainer
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
  u-boot-custodians@lists.denx.de, trini@konsulko.com, robh+dt@kernel.org, 
  krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
  neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
  daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de, 
- michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk, 
- peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de, 
- mibodhi@gmail.com
+ ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
+ xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
+ rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
+ rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -94,29 +92,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Dec 28, 2023 at 12:03=E2=80=AFPM Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> On Thu, 28 Dec 2023 at 13:58, Sumit Garg <sumit.garg@linaro.org> wrote:
-> >
-> > Since devicetree-rebasing is an external repo with its own coding style=
-,
-> > exclude it from Azure and gitlab CI CONFIG checks.
-> >
-> > Reviewed-by: Tom Rini <trini@konsulko.com>
-> > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > ---
-> >
-> > Changes in v3:
-> > --------------
-> > - Picked up review tag
-> >
-> > Changes in v2:
-> > --------------
-> > - Excluded gitab CI config check and added commit description.
-> >
-> >  .azure-pipelines.yml | 3 ++-
-> >  .gitlab-ci.yml       | 3 ++-
-> >  2 files changed, 4 insertions(+), 2 deletions(-)
+Hi Sumit,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Thu, Dec 28, 2023 at 11:59=E2=80=AFAM Sumit Garg <sumit.garg@linaro.org>=
+ wrote:
+>
+
+Please can you add a commit message?
+
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> ---
+>
+> Changes in v3:
+> --------------
+> - Picked up review tag
+
+BTW 'patman status' does this for you.
+
+>
+> Changes in v2:
+> --------------
+> - Picked up review tag
+>
+>  MAINTAINERS | 6 ++++++
+>  1 file changed, 6 insertions(+)
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 969514468cb..253092c345c 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -951,6 +951,12 @@ F: cmd/cyclic.c
+>  F:     common/cyclic.c
+>  F:     include/cyclic.h
+>
+> +DEVICETREE REBASING SUBTREE
+> +M:     Sumit Garg <sumit.garg@linaro.org>
+> +S:     Maintained
+> +F:     devicetree-rebasing/
+> +F:     dts/arch/
+> +
+>  DFU
+>  M:     Lukasz Majewski <lukma@denx.de>
+>  M:     Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> --
+> 2.34.1
+>
+
+Regards,
+Simon
