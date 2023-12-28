@@ -4,85 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5E0CC3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 09:03:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A35EC3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 10:20:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1098879F7;
-	Thu, 28 Dec 2023 10:03:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 66F5F87960;
+	Thu, 28 Dec 2023 11:20:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XaLzqVZJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CwVJPPvC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 181DF87509; Thu, 28 Dec 2023 10:03:08 +0100 (CET)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id DDDC4879C9; Thu, 28 Dec 2023 11:20:30 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B136C876B2
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 10:03:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D5F2387946
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 11:20:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2cc7b9281d1so71797701fa.1
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 01:03:05 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-50e7b273352so2720053e87.1
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 02:20:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703754185; x=1704358985; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5nEO2kmexBaXs5lLihPLZiWHXXxGh6G9CrMdnSCsgTg=;
- b=XaLzqVZJtfUjU1Q3reSpb0i8T0ENQ5VeH4uJWixfw3fmlH1Upig07VjhA5FoYuAxaC
- wWCvC5b4NAfo4Q0bXL0gLXnwdmlc4JoG4R45lkVz6tDXD2pmsxq/vEeigINGbO4JVyo4
- Yn8fHCfMY1XO1CmOpHq9wHCW8vuxa78ALoREa3PUHmk+eqyWyDt+q720jPCSux0K53s4
- WKv30AiiGvudyXne1IrP9pj8Fn9un/6mcJ7LsGIRI3auMCBvt2Ir9bMYlKZWUI4dWLBb
- lF3S0XqBIHCjviEgN6gYdFOCh5LLEHAqPVC9jlAibGGRTWCsJhJuun68Um5YStC0/l1Q
- zqfg==
+ d=linaro.org; s=google; t=1703758827; x=1704363627; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=wk7CQK3uW/xYXJtfTG9Va7rSylvrgAU1C+pkpml6Lcc=;
+ b=CwVJPPvCZzTQR0stkIbLUTYTBLlo5wZSeJTqbimZtIplh1w23f4waWr92BFk/gZHR9
+ 6yeEhBz56U33aEDY51uvwXeU59APQgvkMM8xmiolV894hAgrQAxObORLfoMKRjcbmkZq
+ MWKAaOQk9gAiHJ0X7WV66SXWzmJxNfXJdwHCAecF4m4GEdoizgCh4peSws3LcmnNc6cb
+ 6GuG0CxQ1lmnYQNJPywPf6/hMf4OAZpcJG/YoFT8SExxhlU4dIF/F/S2nHtGVAJzI35V
+ QYA3gQGJJVsRpvKqITWj3BLpbX9WRgzEDQoebZVV8wiwnGbKmEsZgJE9aQoHjQ+cUAP5
+ GYrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703754185; x=1704358985;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5nEO2kmexBaXs5lLihPLZiWHXXxGh6G9CrMdnSCsgTg=;
- b=D+ZUxSEuCj2B86THfnzUlq8XMyjbRXZt0QNr6ZZkzDcLAba7r29TC7ZgfaFtRi7abr
- 2suW3bgaYntuCAiSOGnKsu5eFvvYezt7g3PcgJa/ib/XodGYw8PUwbW6wJRSzxDcSFAN
- 8ycha1OqZFbRbWobS5Oc8PSnfEDSAo2s/Epy6/GGunP8O1GG1uq/+IdNJbjeoFBkRW5s
- ZSLxsiXrsQrGKWNZ2MromtXWn0Cynh8UVxWdgHV17JOaSEBwBoIT8pXeFp0C1vF6AEGZ
- 9ZLgAmehCOlZXqkyoyqkwlXEDlT/lImj3DQGdyBR9XE0JkMeKC9lUdB1M9/0BEHr37iO
- 6Lmw==
-X-Gm-Message-State: AOJu0YwC7a5EGNVJVdVzFymTFEwnQsJjpxF4nt8mO+S/s2Crq6QEN+h7
- xlaQupwMVtnt10IcIrrmRl8=
-X-Google-Smtp-Source: AGHT+IEjvVDIZzVA9jwTK0GyMcK7b2Vx/dxOHrEEUQNJESCy+j05rAjExiloNbFiYkGARh4greMweQ==
-X-Received: by 2002:a2e:9009:0:b0:2cc:2fcc:c589 with SMTP id
- h9-20020a2e9009000000b002cc2fccc589mr4436640ljg.34.1703754184914; 
- Thu, 28 Dec 2023 01:03:04 -0800 (PST)
-Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
- n18-20020a2ebd12000000b002ccabe13852sm2475708ljq.85.2023.12.28.01.03.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Dec 2023 01:03:04 -0800 (PST)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Bin Meng <bmeng@tinylab.org>,
- Ion Agorria <ion@agorria.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
- Sean Anderson <sean.anderson@seco.com>, Heiko Schocher <hs@denx.de>,
- Dmitrii Merkurev <dimorinny@google.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v5 5/5] fastboot: add oem console command support
-Date: Thu, 28 Dec 2023 11:02:40 +0200
-Message-Id: <20231228090240.18011-6-clamor95@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20231228090240.18011-1-clamor95@gmail.com>
-References: <20231228090240.18011-1-clamor95@gmail.com>
+ d=1e100.net; s=20230601; t=1703758827; x=1704363627;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wk7CQK3uW/xYXJtfTG9Va7rSylvrgAU1C+pkpml6Lcc=;
+ b=cNvgV3MUIt8BdpyeKrX6yljkJjqB84JkNlTfuouAMOjkz2MB4CYmzaUwx22/0GpNpE
+ tFgTSUocPh21n48yqt2TParhCvphmlOp/xeCN1wlVbuyZqL4VAv1zRwrTX/6W57eP2J5
+ awm+YGs7FWH1P0dxYFE7IRwd3mhIaWHT+HTZGmXhxzqkFHCQ0G33SbR/j4AWm8IHePLk
+ hvidhaUG1GYWGGK7F4c6ZwKGsxreu1yYDkh/jP2AZIJKqjvdwYKTHaCdzEZnWmricv5/
+ GnrrKqHAEYMqxdbzQqQSTHFhB+6QUKnm0ug/96zFOrgmYWN/F1tFvCQ5ePW2HV6u22r/
+ W4+w==
+X-Gm-Message-State: AOJu0YyVr/zIm08bGhLKbupAvyV3yutPY0niOUT7ttGJoqELaOYESMWi
+ ulnLSxRQFihmAF8I0PXOuoY3cQrFCBODzUz6MA8UvNiMZEsAGA==
+X-Google-Smtp-Source: AGHT+IGTPO8wTzkZuc/08ismRYVxzj+UdKl6VtYP5LqGQ/3K74ZjDB7LhaqDKQ21D/8sPXG1kHkm5jPkyEiByvLIST4=
+X-Received: by 2002:a05:6512:696:b0:50e:7e29:b0e9 with SMTP id
+ t22-20020a056512069600b0050e7e29b0e9mr2509141lfe.73.1703758826956; Thu, 28
+ Dec 2023 02:20:26 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231227210712.712937-1-raymond.mao@linaro.org>
+ <20231227210712.712937-8-raymond.mao@linaro.org>
+In-Reply-To: <20231227210712.712937-8-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 28 Dec 2023 12:19:51 +0200
+Message-ID: <CAC_iWj+FqqoORXp9T=+qjGcYyTEWFy3t72_Jc2oQdNo-tUbqGg@mail.gmail.com>
+Subject: Re: [PATCH v4 07/12] bloblist: Checksum the entire bloblist
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
+ Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,130 +86,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ion Agorria <ion@agorria.com>
+On Wed, 27 Dec 2023 at 23:08, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> From: Simon Glass <sjg@chromium.org>
+>
+> Use a sinple 8-bit checksum for bloblist, as specified by the spec
+> version 0.9.
+> Spec v0.9 specifies that the entire bloblist area is checksummed,
+> including unused portions. Update the code to follow this.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+> Changes in v4
+> - Patch #7 and #8 from v3 are squashed into this patch.
+>
+>  common/bloblist.c  | 13 ++++---------
+>  include/bloblist.h |  5 ++---
+>  test/bloblist.c    | 10 ++++++++--
+>  3 files changed, 14 insertions(+), 14 deletions(-)
+>
+> diff --git a/common/bloblist.c b/common/bloblist.c
+> index 88e2a0f5c0..705d9c6ae9 100644
+> --- a/common/bloblist.c
+> +++ b/common/bloblist.c
+> @@ -13,6 +13,7 @@
+>  #include <malloc.h>
+>  #include <mapmem.h>
+>  #include <spl.h>
+> +#include <tables_csum.h>
+>  #include <asm/global_data.h>
+>  #include <u-boot/crc.h>
+>
+> @@ -318,16 +319,10 @@ int bloblist_resize(uint tag, int new_size)
+>
+>  static u32 bloblist_calc_chksum(struct bloblist_hdr *hdr)
+>  {
+> -       struct bloblist_rec *rec;
+> -       u32 chksum;
+> +       u8 chksum;
+>
+> -       chksum = crc32(0, (unsigned char *)hdr,
+> -                      offsetof(struct bloblist_hdr, chksum));
+> -       foreach_rec(rec, hdr) {
+> -               chksum = crc32(chksum, (void *)rec, rec_hdr_size(rec));
+> -               chksum = crc32(chksum, (void *)rec + rec_hdr_size(rec),
+> -                              rec->size);
+> -       }
+> +       chksum = table_compute_checksum(hdr, hdr->alloced);
+> +       chksum += hdr->chksum;
+>
+>         return chksum;
+>  }
+> diff --git a/include/bloblist.h b/include/bloblist.h
+> index 68f97395b7..d2dcad69a1 100644
+> --- a/include/bloblist.h
+> +++ b/include/bloblist.h
+> @@ -174,11 +174,10 @@ enum bloblist_tag_t {
+>   *     sizeof(bloblist_hdr) since we need at least that much space to store a
+>   *     valid bloblist
+>   * @spare: Spare space (for future use)
+> - * @chksum: CRC32 for the entire bloblist allocated area. Since any of the
+> + * @chksum: checksum for the entire bloblist allocated area. Since any of the
+>   *     blobs can be altered after being created, this checksum is only valid
+>   *     when the bloblist is finalised before jumping to the next stage of boot.
+> - *     Note that chksum is last to make it easier to exclude it from the
+> - *     checksum calculation.
+> + *     This is the value needed to make all checksummed bytes sum to 0
+>   */
+>  struct bloblist_hdr {
+>         u32 magic;
+> diff --git a/test/bloblist.c b/test/bloblist.c
+> index 8b435e27ca..49ac4b92ae 100644
+> --- a/test/bloblist.c
+> +++ b/test/bloblist.c
+> @@ -237,12 +237,18 @@ static int bloblist_test_checksum(struct unit_test_state *uts)
+>         *data2 -= 1;
+>
+>         /*
+> -        * Changing data outside the range of valid data should not affect
+> -        * the checksum.
+> +        * Changing data outside the range of valid data should affect the
+> +        * checksum.
+>          */
+>         ut_assertok(bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
+>         data[TEST_SIZE]++;
+> +       ut_asserteq(-EIO, bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
+> +       data[TEST_SIZE]--;
+> +       ut_assertok(bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
+> +
+>         data2[TEST_SIZE2]++;
+> +       ut_asserteq(-EIO, bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
+> +       data[TEST_SIZE]--;
+>         ut_assertok(bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
+>
+>         return 0;
+> --
+> 2.25.1
+>
 
-"oem console" serves to read console record buffer.
-
-Signed-off-by: Ion Agorria <ion@agorria.com>
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
----
- doc/android/fastboot.rst      |  1 +
- drivers/fastboot/Kconfig      |  7 +++++++
- drivers/fastboot/fb_command.c | 39 +++++++++++++++++++++++++++++++++++
- include/fastboot.h            |  1 +
- 4 files changed, 48 insertions(+)
-
-diff --git a/doc/android/fastboot.rst b/doc/android/fastboot.rst
-index 1ad8a897c8..05d8f77759 100644
---- a/doc/android/fastboot.rst
-+++ b/doc/android/fastboot.rst
-@@ -29,6 +29,7 @@ The following OEM commands are supported (if enabled):
-   with <arg> = boot_ack boot_partition
- - ``oem bootbus``  - this executes ``mmc bootbus %x %s`` to configure eMMC
- - ``oem run`` - this executes an arbitrary U-Boot command
-+- ``oem console`` - this dumps U-Boot console record buffer
- 
- Support for both eMMC and NAND devices is included.
- 
-diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-index 11fc0fe1c8..5e5855a76c 100644
---- a/drivers/fastboot/Kconfig
-+++ b/drivers/fastboot/Kconfig
-@@ -242,6 +242,13 @@ config FASTBOOT_OEM_RUN
- 	  this feature if you are using verified boot, as it will allow an
- 	  attacker to bypass any restrictions you have in place.
- 
-+config FASTBOOT_CMD_OEM_CONSOLE
-+	bool "Enable the 'oem console' command"
-+	depends on CONSOLE_RECORD
-+	help
-+	  Add support for the "oem console" command to input and read console
-+	  record buffer.
-+
- endif # FASTBOOT
- 
- endmenu
-diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
-index 6f621df074..f95f4e4ae1 100644
---- a/drivers/fastboot/fb_command.c
-+++ b/drivers/fastboot/fb_command.c
-@@ -41,6 +41,7 @@ static void reboot_recovery(char *, char *);
- static void oem_format(char *, char *);
- static void oem_partconf(char *, char *);
- static void oem_bootbus(char *, char *);
-+static void oem_console(char *, char *);
- static void run_ucmd(char *, char *);
- static void run_acmd(char *, char *);
- 
-@@ -108,6 +109,10 @@ static const struct {
- 		.command = "oem run",
- 		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_OEM_RUN, (run_ucmd), (NULL))
- 	},
-+	[FASTBOOT_COMMAND_OEM_CONSOLE] = {
-+		.command = "oem console",
-+		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_CONSOLE, (oem_console), (NULL))
-+	},
- 	[FASTBOOT_COMMAND_UCMD] = {
- 		.command = "UCmd",
- 		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_UUU_SUPPORT, (run_ucmd), (NULL))
-@@ -159,6 +164,23 @@ void fastboot_multiresponse(int cmd, char *response)
- 	case FASTBOOT_COMMAND_GETVAR:
- 		fastboot_getvar_all(response);
- 		break;
-+	case FASTBOOT_COMMAND_OEM_CONSOLE:
-+		if (CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_CONSOLE)) {
-+			char buf[FASTBOOT_RESPONSE_LEN] = { 0 };
-+
-+			if (console_record_isempty()) {
-+				console_record_reset();
-+				fastboot_okay(NULL, response);
-+			} else {
-+				int ret = console_record_readline(buf, sizeof(buf) - 5);
-+
-+				if (ret < 0)
-+					fastboot_fail("Error reading console", response);
-+				else
-+					fastboot_response("INFO", response, "%s", buf);
-+			}
-+			break;
-+		}
- 	default:
- 		fastboot_fail("Unknown multiresponse command", response);
- 		break;
-@@ -503,3 +525,20 @@ static void __maybe_unused oem_bootbus(char *cmd_parameter, char *response)
- 	else
- 		fastboot_okay(NULL, response);
- }
-+
-+/**
-+ * oem_console() - Execute the OEM console command
-+ *
-+ * @cmd_parameter: Pointer to command parameter
-+ * @response: Pointer to fastboot response buffer
-+ */
-+static void __maybe_unused oem_console(char *cmd_parameter, char *response)
-+{
-+	if (cmd_parameter)
-+		console_in_puts(cmd_parameter);
-+
-+	if (console_record_isempty())
-+		fastboot_fail("Empty console", response);
-+	else
-+		fastboot_response(FASTBOOT_MULTIRESPONSE_START, response, NULL);
-+}
-diff --git a/include/fastboot.h b/include/fastboot.h
-index 59cbea61ec..1e7920eb91 100644
---- a/include/fastboot.h
-+++ b/include/fastboot.h
-@@ -47,6 +47,7 @@ enum {
- 	FASTBOOT_COMMAND_OEM_PARTCONF,
- 	FASTBOOT_COMMAND_OEM_BOOTBUS,
- 	FASTBOOT_COMMAND_OEM_RUN,
-+	FASTBOOT_COMMAND_OEM_CONSOLE,
- 	FASTBOOT_COMMAND_ACMD,
- 	FASTBOOT_COMMAND_UCMD,
- 	FASTBOOT_COMMAND_COUNT
--- 
-2.40.1
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
