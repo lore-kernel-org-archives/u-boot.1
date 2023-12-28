@@ -4,81 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CAF0C3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 14:26:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0546CC3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 14:46:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72DD887A52;
-	Thu, 28 Dec 2023 15:26:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 21D6287A13;
+	Thu, 28 Dec 2023 15:46:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Zcup99i2";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="OmWd7Dn2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B16D987A59; Thu, 28 Dec 2023 15:26:19 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EA4B287A17; Thu, 28 Dec 2023 15:46:12 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A42B87995
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 15:26:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EF3BD879E8
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 15:46:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-5e75005bd0cso56039087b3.1
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 06:26:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703773576; x=1704378376; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lgtV38ysqWCuDKZMbm/MC8vYwjTKRlrOtLK2MTJdI9M=;
- b=Zcup99i2DOCqcXivT+sa0s/V3+SLfpL50mi4HkJ05momoXDLZT+UB3OHaBep/r9wZL
- 2WJFIZZ0/BVRVj2cWK0DX7uXkjAobpeZiJWJAkeU619cDDxvAM2kJ8zQ8+oi+b1oTmr1
- YbdqOsRsgfAxQ2FM1mWBD16Cy54E+rnVS7ei0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703773576; x=1704378376;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lgtV38ysqWCuDKZMbm/MC8vYwjTKRlrOtLK2MTJdI9M=;
- b=eIx7xrDL/KN27EbBgoxEHjp+t+GwpPGckRTAr5ltKGjlX1wy4/984kHeANbFOV5JJo
- 24wv9Fyvm6wKCsMy/RgQmpnH1kE+N78+csxkdoZhmFvh84arnyqSLc4NTfe1YEvhntzo
- bUD93opVy69rTysxSgsGnSs7kcZ3MBuJaRzhYMNV3x3a/cocEj+wU+Fie/VYy6X15DKj
- 0ghIa4JcynK1pCxD4SJ60zwSWvpqQad3JXIDDKq0Y+boVOL1pIIWrEpgJlYMEPvz4fTw
- XEXDhqnL5Gnjx9HHchzskJM9ULgGmlL7SHLUmQxalp3Y2ZiY2XHwXM84tswbx7VU1Lve
- LC7g==
-X-Gm-Message-State: AOJu0Ywo3IwaM9wVycYAilXkmMFgxDr8YlCGHKUk8O/dKqiObBAhBrRp
- NTf8vk+dD2m/TNSoHxQhgjVIM5HCZM+Dtg==
-X-Google-Smtp-Source: AGHT+IFq5JzfcTJDBog89hqFVSkIDBzhsUkSonJMHiHWo5ZNXBEkneKY4+wptHckO/nwn/ZbjoDOOA==
-X-Received: by 2002:a05:690c:ed4:b0:5e8:960a:187 with SMTP id
- cs20-20020a05690c0ed400b005e8960a0187mr8323234ywb.2.1703773576342; 
- Thu, 28 Dec 2023 06:26:16 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- o190-20020a0de5c7000000b005e6ea0165dasm7561255ywe.56.2023.12.28.06.26.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Dec 2023 06:26:15 -0800 (PST)
-Date: Thu, 28 Dec 2023 09:26:14 -0500
-From: Tom Rini <trini@konsulko.com>
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: d3edf317-a58f-11ee-91e7-005056994fde
+Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id d3edf317-a58f-11ee-91e7-005056994fde;
+ Thu, 28 Dec 2023 15:46:04 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=content-type:mime-version:subject:to:from:message-id:date;
+ bh=VCaRH5/4tBfUk1thcWt5ere2wiS75NRWYHyAyY3HPL4=;
+ b=OmWd7Dn2QbVluGgQZukEnYtnWqysTpwmhGgX0IKFAmGvR9zeWfiz63S4OS4qn4l0c6V9CLMhpfkCJ
+ L1t+rLnCmF1o50XaAZ7BL/wJxD1R47+8g1YnHsws7XjxPpcJQGrJhmkzYV63EsiaVTOhOZZ2a324LE
+ nf2+xVTe5sVkbq4ufgsi2oVZ8k892QEc7MtLfXm6ltA+3ynphbJHRpRTO83GtzEne2JcjZOITprVUL
+ jXZ2gWATuWt88vBmAQjfMD3SEfSmJzKt/xj4HVvkMRLzOGEZKbzeH6xvEH4NWQTOInZcxmVIX8TZK5
+ M1MRb6ZJDxmjRIPs+fZTTj74z47b8PQ==
+X-KPN-MID: 33|CVlDgFphuoWQiW/+RSz9OTdlnJs8vIT2RI1A9eyQK//fg4Wh1ktH9KviAIxg82X
+ pK3XAtrpD5e1mgNSX17vxArl7L2S8kTDbA0mYkVb18Ao=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|l0mbTFtBajIR8vHmo89KD2iUoEyUNxBtMJ1kXnOoCP3mXQ5CmCHKg5ca0NBEl7P
+ 3KegZ4+HvkJtU2K66bYlswQ==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id d6a3726a-a58f-11ee-9dc8-00505699772e;
+ Thu, 28 Dec 2023 15:46:10 +0100 (CET)
+Date: Thu, 28 Dec 2023 15:46:09 +0100
+Message-Id: <87edf6mlla.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Sumit Garg <sumit.garg@linaro.org>, Michal Simek <michal.simek@amd.com>,
- Michal Simek <monstr@monstr.eu>
-Subject: Re: [PATCH 1/9] microblaze: dts: Use the normal build rule
-Message-ID: <20231228142614.GE2652760@bill-the-cat>
-References: <20231227082405.2202246-1-sjg@chromium.org>
- <20231227082405.2202246-2-sjg@chromium.org>
- <20231227132033.GP2652760@bill-the-cat>
- <CAFLszTjLVv0P2Q-pwEZvBkmHEWYX=Gg=wvPAvKpKFjiYJwPEeA@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oxkqFXvJ2Bkaixyw"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjLVv0P2Q-pwEZvBkmHEWYX=Gg=wvPAvKpKFjiYJwPEeA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Cc: ilias.apalodimas@linaro.org, u-boot@lists.denx.de,
+ xypron.glpk@gmx.de, pbrobinson@gmail.com
+In-Reply-To: <CAFLszTgXZ3fMZkuYRJUzSBv-VT659Q5bYLyVkEh4=-36TM3+Bw@mail.gmail.com>
+ (message from Simon Glass on Thu, 28 Dec 2023 13:37:03 +0000)
+Subject: Re: [PATCH v4 4/7] smbios: Use SMBIOS 3.0 to support an address above
+ 4GB
+References: <20231227074025.2178825-1-sjg@chromium.org>
+ <20231227074025.2178825-5-sjg@chromium.org>
+ <CAC_iWj+yGhUVFh+vJ14C2htibdd289SrPjz0Y_r3GL4uF4Zdog@mail.gmail.com>
+ <CAFLszTgXZ3fMZkuYRJUzSBv-VT659Q5bYLyVkEh4=-36TM3+Bw@mail.gmail.com>
+MIME-version: 1.0
+Content-type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,80 +81,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---oxkqFXvJ2Bkaixyw
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Dec 28, 2023 at 01:37:49PM +0000, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Wed, Dec 27, 2023 at 1:20=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
-te:
+> From: Simon Glass <sjg@chromium.org>
+> Date: Thu, 28 Dec 2023 13:37:03 +0000
+> 
+> Hi Ilias,
+> 
+> On Wed, Dec 27, 2023 at 11:05 AM Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
 > >
-> > On Wed, Dec 27, 2023 at 08:23:57AM +0000, Simon Glass wrote:
-> > > Build devicetree files using the normal SoC-generic rule. For
-> > > microblaze there is actually only one SoC and one board.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > >  arch/microblaze/dts/Makefile | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > >
-> > > diff --git a/arch/microblaze/dts/Makefile b/arch/microblaze/dts/Makef=
-ile
-> > > index 427a8f9aaca..adc76ddf21f 100644
-> > > --- a/arch/microblaze/dts/Makefile
-> > > +++ b/arch/microblaze/dts/Makefile
-> > > @@ -1,6 +1,6 @@
-> > >  # SPDX-License-Identifier: GPL-2.0+
-> > >
-> > > -dtb-y +=3D $(shell echo $(CONFIG_DEFAULT_DEVICE_TREE)).dtb
-> > > +dtb-$(CONFIG_MICROBLAZE) +=3D microblaze-generic.dtb
-> > >
-> > >  include $(srctree)/scripts/Makefile.dts
+> > Hi Simon,
 > >
-> > This (and nios2 and perhaps a few other arches) show that it would be
-> > easier to just drop the dts- line as it adds nothing over what
-> > scripts/Makefile.dts gives us.
->=20
-> For consistency I like to see a rule for each .dtb in the directory.
+> > On Wed, 27 Dec 2023 at 09:40, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > When the SMBIOS table is written to an address above 4GB a 32-bit table
+> > > address is not large enough.
+> > >
+> > > Use an SMBIOS3 table in that case.
+> >
+> > Maybe I missed this on the previous revisions, but is there a reason
+> > we don't always use SMBIOS3 now?
+> 
+> I am not sure...there was some comment about it not being supported in
+> some cases, so I have tried to accommodate that.
+> 
+> >  And perhaps try to install SMBIOS2 if
+> > 1. we fail
+> 
+> due to?
+> 
+> > 2. and the address is < 4GB
+> 
+> We could, I suppose. Effectively we would drop generation of SMBIOS2.
+> 
+> I really don't mind. This whole SMBIOS thing is a bit ridiculous, if
+> you ask me.
 
-Yes, and for consistency I'd like to see Makefiles be as minimal as
-required.
+Linux added support for the SMBIOS 3.0 64-bit entry point in 2014.  I
+doubt anyone who cares about SMBIOS cares about kernels that old.
 
-> > I wonder how this will interact with
-> > OF_UPSTREAM and how it compares with arch/microblaze/boot/dts/system.dts
-> > in the linux kernel.
->=20
-> I don't see any interaction. Perhaps the maintainer can move this to
-> OF_UPSTREAM?
-
-Well, that's the big question here, how exactly does microblaze work
-with device trees? The U-Boot one is basically empty. I think we're both
-going to be waiting on Michal now :)
-
---=20
-Tom
-
---oxkqFXvJ2Bkaixyw
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWNhYYACgkQFHw5/5Y0
-tyxjxgv/U9DkoNaNNvuH4IHQdIJDNM5t9tJlb5RtU+DJZZxu24ldTrAAr/OOtw2r
-wgMzAHnWzbAOsZ4w59dfhRL2TkRWMZNa3nKV+livF/FP9Bc/faUqmw8GUqQeCFbu
-rYwDw9P0e4D7fcMIpUhhgIBSo/ZZBEN30gDpcIbKJXD4yYkaaZL8n+FUuFjM7nbf
-y7+3Rfnp20x05ICxPSALBZkZ66dneK8QhAZjCjLMO+Q4W3nNFK7iVdEpKqK33bMt
-FcXvabTpr96XAJUzUcejjILDgccem4sZx3tbNhtBc0sZ7cxUb3E/kfrsrmMacp2/
-1hVwUldK8xz/p6Aiek/rfPFRT5+0YsHWiaApuUdh2geN6kYET9Rt7JtCTj+4wZh+
-Iq6uveRlgnM07XBYIRbo+WX91n8XxkJ5xYG9pgRkivVLD7R/7vh7soFZxy3MQqsN
-IZYBTR/W1fLP5p76/vWTWoIZK09NbqiMjhtVZpE+Oc5KslUpg8u1zWqYRPWm8aRa
-XJc/cy4h
-=JdoI
------END PGP SIGNATURE-----
-
---oxkqFXvJ2Bkaixyw--
+So if it simplifies things, I'd drop support for the 32-bit SMBIOS
+entry point.
