@@ -4,75 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78C77C3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 11:26:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92A95C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 11:32:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D65CC87845;
-	Thu, 28 Dec 2023 12:26:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0465987845;
+	Thu, 28 Dec 2023 12:32:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XrpZarb4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vzPHev8f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C98CB8706B; Thu, 28 Dec 2023 06:29:25 +0100 (CET)
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
- [IPv6:2607:f8b0:4864:20::631])
+ id 52061879F0; Thu, 28 Dec 2023 12:32:06 +0100 (CET)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42B3886E05
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 06:29:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 473238773E
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 12:32:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=gch981213@gmail.com
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1d4006b251aso47324925ad.0
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 21:29:23 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2cca9a9362aso46247621fa.3
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 03:32:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703741361; x=1704346161; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jORddDTX2J6d1+QdjLP/aZgFTNGpy/DmzspQazGD2to=;
- b=XrpZarb4PIoYmzLxG6LUr1hoa/6aj3YUaiX0NQJ8PO9rTza57VRB2IXCGRDRbeJJkO
- eo8+8CYd8g+i+M+8mFQupi2uNbDFicDgVTbSzq1yuLy9jnQI4FYj8YLp0NzlkqkBLzju
- p8mXzdV7j9boOrfYtrAb4VPOOAq7TCaSruk61aZ1QHOdK9QcUAblmptzbL6EVVphUI6l
- Z3N4Ka4N3kf2dDOVuIQxU8z883qKCqFzA7mdmeqLweHmb5mGpiIHeMW2WTutd5OD2oAM
- M4tKTJfDDPhwYXHo+7qAu4WTUuK8rJOtsatXp5cpe9OGYr9alty9Ce4NbGJnVa3zrg8O
- 5YoA==
+ d=linaro.org; s=google; t=1703763123; x=1704367923; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=s0ZgkYH7VzFWUORUf8rQyjVahPld5j4HlSFoRlTBFsg=;
+ b=vzPHev8fxpc6CbM6ZTQ354lrj9gB60MN9JCTYl20ETdaxHUANQqNU8GsjiaPS1qDes
+ vYYmpuNrU49esltbBtwHL/ss7BsZbhC2GDSC8l15Ur9EF1rwI4K7jP03hleu7kQSFg/S
+ wQIoZwZAoth66DzDFRndpFiqA4rxhhjENzZhCOlGf0ySyEtBxKf3+0L0Ute2TIzpheNz
+ oHwU87t3xQINdtXDNjUuBSQqh//JfVQnbq46b8tqVYMmLTrdBrqRkaLlfV9ra8Wt5xna
+ LVjp8jSavrUaY0mq7UbFxfRSL95ZsXZUV4r7GlZ9Wyd7akbRSLVZcdw3iqHomgn2fd/r
+ 9DpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703741361; x=1704346161;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1703763123; x=1704367923;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=jORddDTX2J6d1+QdjLP/aZgFTNGpy/DmzspQazGD2to=;
- b=JyoE2Xq0M9IB0W6VqX2YvlonkHVfCWeucvD/vysH8YIzBSTpqN0f37mKcXN10EmjTW
- BTZmKEbdsWsMDwaOZuGlXJAas628aYDwTSuOFAW8d/oLVGI3LqJKJJIIa6rcLKb7T098
- 28vVleRUa5A2QawjzUU42hzAU+X+gdibFqzTU11J6LUZlv/A/pODrtlLI6hJANLULrb1
- FM+38h9FOhJw+OQWErk7rj7als/9w9HLGngYSuzGxsV5OFeviZShISjep0xjpSmbxWdI
- tIfcLX7xw3vL006LWsQjt4J4YbNhbSdjzMO15YsIM4s5rKYbcYE00wMPGrogXkztKl2D
- epxA==
-X-Gm-Message-State: AOJu0YxqIzry+TvAu4OcTf6jZqssHlkH5lZqHQgLXHoNDZO4aClKV5Pt
- xXbmw7Bq/XwVAOAlOalQeS1iRxYbvxwqdQ==
-X-Google-Smtp-Source: AGHT+IEspTdlT6pHXy0BSkpEcyuYpA0VCkmLzt8SIT6Vw8+pYnQyfgg5AD4zOPAZB4OnX0jOgSOz0Q==
-X-Received: by 2002:a17:903:234f:b0:1d4:2dfe:215b with SMTP id
- c15-20020a170903234f00b001d42dfe215bmr12333881plh.116.1703741361081; 
- Wed, 27 Dec 2023 21:29:21 -0800 (PST)
-Received: from guoguo-thinkbook.lan ([2001:250:3000:2b31:13b1:8229:957c:159f])
- by smtp.gmail.com with ESMTPSA id
- g5-20020a170902868500b001d096757ac1sm12899534plo.47.2023.12.27.21.29.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Dec 2023 21:29:20 -0800 (PST)
-From: Chuanhong Guo <gch981213@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Chuanhong Guo <gch981213@gmail.com>
-Subject: [PATCH] sunxi: add defconfig for nanopi_duo2
-Date: Thu, 28 Dec 2023 13:29:15 +0800
-Message-ID: <20231228052915.121433-1-gch981213@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ bh=s0ZgkYH7VzFWUORUf8rQyjVahPld5j4HlSFoRlTBFsg=;
+ b=eG0G811HqHRRK20CLvrCSwIbzLF6o3aftdddnm1/fHtDT4NLpUuzSBikHJDusJlvXL
+ qytc3xFtCnngfBTqK10Nq0Txn0LmsD/QAIUBV7IllyP8x7qeLGFdWFnGhgRcTYTiLo1I
+ bhw29oxl+20sORdf1q6UMNJjVCpI1w4MwvfJovHluQmGJ22qnP2ex21FXwRZUAnCpNVP
+ LbKDJSKrmxU2QRkb/nSh7LopbElJew91lzM735IMLIQkacRkbWbSFQS60trBXoN3ZsJq
+ iUP4SrpcgtvjUYixzrwNC2AxZEcTuTG3T1jdSfUwE8x6oEvqgCWe4u+xCzLU1gb/hHf5
+ w6Rw==
+X-Gm-Message-State: AOJu0YyWiAdGWs+xWKuFsSi2iUzl3/2c/19pIwdLY+CrosV0FeMc5imH
+ IWQd4QOdquSkgy0nrv7weBG0No9f6MA80SXJ11QFRXK4ekGdlw==
+X-Google-Smtp-Source: AGHT+IG8pzQTT9r6gAbDNxE8szFlAsYljFTwTR6ZgqNYeU/CFrYJ3NUSHrvDtP5M75u6cwqw2V51H5Azp27JCaERats=
+X-Received: by 2002:a05:6512:110a:b0:50e:7b4d:cc86 with SMTP id
+ l10-20020a056512110a00b0050e7b4dcc86mr1826844lfg.69.1703763123393; Thu, 28
+ Dec 2023 03:32:03 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 28 Dec 2023 12:26:55 +0100
+References: <20231227210712.712937-1-raymond.mao@linaro.org>
+ <20231227210712.712937-9-raymond.mao@linaro.org>
+In-Reply-To: <20231227210712.712937-9-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 28 Dec 2023 13:31:27 +0200
+Message-ID: <CAC_iWjJ2GAOU93x1gHPYKXyiU0j6Tp0yHqeCtsctY3mOdz+9VA@mail.gmail.com>
+Subject: Re: [PATCH v4 08/12] bloblist: Handle alignment with a void entry
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
+ Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,33 +86,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-FriendlyElec NanoPi Duo2 is a tiny SBC with Allwinner H3 and
-Ampak AP6212 WiFi module. The device-tree for it is already
-available in u-boot source tree. Add a default config for it.
+Hi Raymond,
 
-Signed-off-by: Chuanhong Guo <gch981213@gmail.com>
----
- configs/nanopi_duo2_defconfig | 11 +++++++++++
- 1 file changed, 11 insertions(+)
- create mode 100644 configs/nanopi_duo2_defconfig
+On Wed, 27 Dec 2023 at 23:08, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> From: Simon Glass <sjg@chromium.org>
+>
+> Rather than setting the alignment using the header size, add an entirely
+> new entry to cover the gap left by the alignment.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> ---
+>  common/bloblist.c | 23 +++++++++++++++++++----
+>  1 file changed, 19 insertions(+), 4 deletions(-)
+>
+> diff --git a/common/bloblist.c b/common/bloblist.c
+> index 705d9c6ae9..73dbbc01c0 100644
+> --- a/common/bloblist.c
+> +++ b/common/bloblist.c
+> @@ -142,7 +142,7 @@ static int bloblist_addrec(uint tag, int size, int align_log2,
+>  {
+>         struct bloblist_hdr *hdr = gd->bloblist;
+>         struct bloblist_rec *rec;
+> -       int data_start, new_alloced;
+> +       int data_start, aligned_start, new_alloced;
+>
+>         if (!align_log2)
+>                 align_log2 = BLOBLIST_ALIGN_LOG2;
+> @@ -151,10 +151,25 @@ static int bloblist_addrec(uint tag, int size, int align_log2,
+>         data_start = map_to_sysmem(hdr) + hdr->alloced + sizeof(*rec);
+>
+>         /* Align the address and then calculate the offset from ->alloced */
+> -       data_start = ALIGN(data_start, 1U << align_log2) - map_to_sysmem(hdr);
+> +       aligned_start = ALIGN(data_start, 1U << align_log2) - data_start;
+> +
+> +       /* If we need to create a dummy record, create it */
+> +       if (aligned_start) {
+> +               int void_size = aligned_start - sizeof(*rec);
+> +               struct bloblist_rec *vrec;
+> +               int ret;
+> +
+> +               ret = bloblist_addrec(BLOBLISTT_VOID, void_size, 0, &vrec);
 
-diff --git a/configs/nanopi_duo2_defconfig b/configs/nanopi_duo2_defconfig
-new file mode 100644
-index 0000000000..5a2069789f
---- /dev/null
-+++ b/configs/nanopi_duo2_defconfig
-@@ -0,0 +1,11 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_SUNXI=y
-+CONFIG_DEFAULT_DEVICE_TREE="sun8i-h3-nanopi-duo2"
-+CONFIG_SPL=y
-+CONFIG_MACH_SUN8I_H3=y
-+CONFIG_DRAM_CLK=408
-+# CONFIG_VIDEO_DE2 is not set
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_CONSOLE_MUX=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_OHCI_HCD=y
--- 
-2.43.0
+I just noticed the 'BLOBLISTT'. Is that on purpose? or a typo?
 
+> +               if (ret)
+> +                       return log_msg_ret("void", ret);
+> +
+> +               /* start the record after that */
+> +               data_start = map_to_sysmem(hdr) + hdr->alloced + sizeof(*vrec);
+> +       }
+>
+>         /* Calculate the new allocated total */
+> -       new_alloced = data_start + ALIGN(size, 1U << align_log2);
+> +       new_alloced = data_start - map_to_sysmem(hdr) +
+> +               ALIGN(size, 1U << align_log2);
+
+So, wouldn't it make more sense to add the dummy record and align the
+whole thing *after* we've added the entry?
+Doing it like this might leave the last entry on an unaligned boundary, no?
+
+Thanks
+/Ilias
+>
+>         if (new_alloced > hdr->size) {
+>                 log_err("Failed to allocate %x bytes size=%x, need size=%x\n",
+> @@ -164,7 +179,7 @@ static int bloblist_addrec(uint tag, int size, int align_log2,
+>         rec = (void *)hdr + hdr->alloced;
+>
+>         rec->tag = tag;
+> -       rec->hdr_size = data_start - hdr->alloced;
+> +       rec->hdr_size = sizeof(struct bloblist_rec);
+>         rec->size = size;
+>
+>         /* Zero the record data */
+> --
+> 2.25.1
+>
