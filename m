@@ -4,66 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8B22C3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:39:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51FBFC3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:39:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4377187A62;
-	Thu, 28 Dec 2023 14:37:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B75DA87A51;
+	Thu, 28 Dec 2023 14:37:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oI3bRcti";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C3rp1u0y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B84787A51; Thu, 28 Dec 2023 14:37:47 +0100 (CET)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id 1775487A76; Thu, 28 Dec 2023 14:37:49 +0100 (CET)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE37887A71
+ by phobos.denx.de (Postfix) with ESMTPS id EA6D287A79
  for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:37:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1d3dee5f534so46509715ad.1
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-3bbbdf0b859so1737607b6e.3
  for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:37:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1703770663; x=1704375463; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Uy84thRsphcaIQxe/QfNnfX2G1q2+y/VW1q+OS51VcI=;
- b=oI3bRctiryQ4o4EJFLIR6gb6wjDE3qIYpsgUpO/zvJrb9CwGzrIYBdfjBfhiZD/aUr
- MfO5APZSfNUQkRDhKc0o6GBKeTOvLz0/KBaODzY1D77dl2Adl/rM3Nl2WYRtOndnddVv
- ltSO6HBaajwOuE5+xPxsI2CWyXYhgUc/0Or+Q=
+ bh=HXIfu2zwGi5PSmS89IaRTH3LaPRA77gIis4zue7UwM4=;
+ b=C3rp1u0yb5u5Ssc3o+1KZ+ktwJ1WW670PwGKm8fs8tdhZ0IlcstVwwNi7b8dyyX0vG
+ IJOZANpNTyQ5uNjPh2szxoLqO99XC5z8tVr7OzwwcUFdJWzQgjrmPi9oLH1+bs70FeyX
+ WBMerosgzEqBsPqA9irAp+ScFeioc+T5NooVM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1703770663; x=1704375463;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Uy84thRsphcaIQxe/QfNnfX2G1q2+y/VW1q+OS51VcI=;
- b=LENt8Ut/s97hh3R2AUPQIMSGrxgxPhvb8b0S9bbT6yUptW3q7ceYF8BB/gvW9gXK0m
- iy/9re0G3VoLaRwox1lGJLvBhbZO2vfSRXKOQTbK8B3YsLa/FQoSHqeLv93KAxm1V3Nn
- iEU14i0QDi2CPKGfAi7fgmq5NuWxhBIMnzlOOsEy/o8i+Ya2q+Ys2uc61GaUTd/GuLJL
- rxsIC96aUTR2Z2mKjERf/dBWwkgNfXBCNvFQuXwQ10BU8axJ+cqYrV9ijM5jM7eMf9Zm
- nOconzbTH/v5cWP8FpSvV6DRZftze942xAXoqtLhUHGjFwX8Ttp48ayBZbZGkjqpGN5I
- axMQ==
-X-Gm-Message-State: AOJu0YxByaIDIF73v7AThfBJ3FTbXjX4qkn7V1/gcLYTy+P5z+a6vvoP
- P8wC0R/+FjXssPdSdiAcLhZKZYTjPfpL6eZoTwYAS1QEkLyQ
-X-Google-Smtp-Source: AGHT+IFf1Vv8Be804vdB8DOuJBlD3TbwNqBsdpaZD2pEpVGoF03u+veiLHPfctGlB+7ADpPNfj48lYm7klQqcYO3dGA=
-X-Received: by 2002:a17:90a:d2c4:b0:28c:3620:b5ee with SMTP id
- dj4-20020a17090ad2c400b0028c3620b5eemr9908325pjb.28.1703770663297; Thu, 28
+ bh=HXIfu2zwGi5PSmS89IaRTH3LaPRA77gIis4zue7UwM4=;
+ b=tjJU+Df9palC3ZgiQjdd9z9E7AePwgB4VmCnM+V0amTmqaOe0+ImAlLq8cHlCqO+7B
+ uE4fpAQRl+mzKfTLMgGcSayc/zoIRsgh4TGFmQZuoz18XQDdl+lMggJVMj/aF23yUpwM
+ jeqyqpUOjpFDO8w4EPqTKMIyuy+8lQ5WyEvOxFERYafjXvakfFgXATJQAaeW1BVSw765
+ rBnBAGgBz4rEC4rQ2Q+TKXSmhgHBO6CNdHHZ5FB7/25JNyMEYQtyLKwvufBmdqzFPtu3
+ aVl70nh/GW92b5RhAPj5g6sC5daWlol3RRCY1oWZJXHcwW0y31bAdX3da1GHliVk6Afy
+ 1Ydg==
+X-Gm-Message-State: AOJu0YyHxCl4y6YI8+7MyEByfsTH9iKaymb5ObkFRiwGKt/URU402ksr
+ iFiUcSXCgGDdNAdnQJ9RnX5cgSIYtiaR4MxN/gC6RyA5LYbk
+X-Google-Smtp-Source: AGHT+IGs2yZ1tGr8DO69t5wRi2GMQtl0BbEkfOYnJdI4sRgNR8uqJRhZz+za737p46Z5M3Ig/kUfmiEI/wAKN3g1E4o=
+X-Received: by 2002:a05:6359:4c06:b0:172:f31a:6bfb with SMTP id
+ kj6-20020a0563594c0600b00172f31a6bfbmr13714110rwc.51.1703770663578; Thu, 28
  Dec 2023 05:37:43 -0800 (PST)
 MIME-Version: 1.0
 References: <20231228115804.3626579-1-sumit.garg@linaro.org>
- <20231228115804.3626579-7-sumit.garg@linaro.org>
-In-Reply-To: <20231228115804.3626579-7-sumit.garg@linaro.org>
+ <20231228115804.3626579-8-sumit.garg@linaro.org>
+In-Reply-To: <20231228115804.3626579-8-sumit.garg@linaro.org>
 From: Simon Glass <sjg@chromium.org>
 Date: Thu, 28 Dec 2023 13:37:11 +0000
-Message-ID: <CAFLszTiLyy6GNOnvYa_8OsAC0mN1p63QWQtf2-toA0AJFhm3EA@mail.gmail.com>
-Subject: Re: [PATCH v3 6/8] MAINTAINERS: Add myself as devicetree-rebasing
- maintainer
+Message-ID: <CAFLszTg=CDfyTGG9c-t=98eFYvYy61L1kzmrssNKPSS6dZL3cg@mail.gmail.com>
+Subject: Re: [PATCH v3 7/8] dts: meson-gxbb: Switch to using upstream DT
 To: Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
  u-boot-custodians@lists.denx.de, trini@konsulko.com, robh+dt@kernel.org, 
@@ -97,48 +96,78 @@ Hi Sumit,
 On Thu, Dec 28, 2023 at 11:59=E2=80=AFAM Sumit Garg <sumit.garg@linaro.org>=
  wrote:
 >
-
-Please can you add a commit message?
-
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Although there were still some variations in board DTS files based on
+> meson-gxbb SoC but I think those were minor differences from upstream
+> and shouldn't impact boot on these devices.
+>
+> So switch to upstream DT via mirroring amlogic/ directory from
+> devicetree-rebasing/src/arm64/amlogic/ directory. And thereby directly
+> building DTB from there including *-u-boot.dtsi files from
+> arch/$(ARCH)/dts/ directory.
+>
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 > ---
 >
 > Changes in v3:
 > --------------
-> - Picked up review tag
-
-BTW 'patman status' does this for you.
-
+> - Dropped Makefile portion and enabled OF_UPSTREAM for SoC instead.
 >
 > Changes in v2:
 > --------------
 > - Picked up review tag
 >
->  MAINTAINERS | 6 ++++++
->  1 file changed, 6 insertions(+)
+>  arch/arm/mach-meson/Kconfig           | 1 +
+>  configs/nanopi-k2_defconfig           | 2 +-
+>  configs/odroid-c2_defconfig           | 2 +-
+>  configs/p200_defconfig                | 2 +-
+>  configs/p201_defconfig                | 2 +-
+>  configs/videostrong-kii-pro_defconfig | 2 +-
+>  configs/wetek-hub_defconfig           | 2 +-
+>  configs/wetek-play2_defconfig         | 2 +-
+>  dts/arch/arm64/amlogic                | 1 +
+>  9 files changed, 9 insertions(+), 7 deletions(-)
+>  create mode 120000 dts/arch/arm64/amlogic
 >
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 969514468cb..253092c345c 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -951,6 +951,12 @@ F: cmd/cyclic.c
->  F:     common/cyclic.c
->  F:     include/cyclic.h
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+> diff --git a/arch/arm/mach-meson/Kconfig b/arch/arm/mach-meson/Kconfig
+> index d6c89058061..8ddb59161a0 100644
+> --- a/arch/arm/mach-meson/Kconfig
+> +++ b/arch/arm/mach-meson/Kconfig
+> @@ -25,6 +25,7 @@ choice
+>  config MESON_GXBB
+>         bool "GXBB"
+>         select MESON_GX
+> +       imply OF_UPSTREAM
+>         help
+>           Select this if your SoC is an S905
 >
-> +DEVICETREE REBASING SUBTREE
-> +M:     Sumit Garg <sumit.garg@linaro.org>
-> +S:     Maintained
-> +F:     devicetree-rebasing/
-> +F:     dts/arch/
-> +
->  DFU
->  M:     Lukasz Majewski <lukma@denx.de>
->  M:     Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> --
-> 2.34.1
->
+> diff --git a/configs/nanopi-k2_defconfig b/configs/nanopi-k2_defconfig
+> index 41dbf7981f8..2e1c756bf7a 100644
+> --- a/configs/nanopi-k2_defconfig
+> +++ b/configs/nanopi-k2_defconfig
+> @@ -6,7 +6,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x20000000
+>  CONFIG_ENV_SIZE=3D0x2000
+>  CONFIG_DM_GPIO=3Dy
+> -CONFIG_DEFAULT_DEVICE_TREE=3D"meson-gxbb-nanopi-k2"
+> +CONFIG_DEFAULT_DEVICE_TREE=3D"amlogic/meson-gxbb-nanopi-k2"
+>  CONFIG_OF_LIBFDT_OVERLAY=3Dy
+>  CONFIG_DM_RESET=3Dy
+>  CONFIG_DEBUG_UART_BASE=3D0xc81004c0
+
+So now I am wondering if we can (later) have the SoC be implied when
+using OF_UPSTREAM so we can do:
+
+CONFIG_DEFAULT_DEVICE_TREE=3D"meson-gxbb-nanopi-k2"
+
+and it will add the 'amlogic/' automatically?
+
+Perhaps that might be a way to bridge the gap in terms of file layout?
+
+[..]
 
 Regards,
 Simon
