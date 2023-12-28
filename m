@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A0D2C3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 15:10:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2F5AC3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 15:10:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 287A487A88;
-	Thu, 28 Dec 2023 16:09:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 928E487A92;
+	Thu, 28 Dec 2023 16:09:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BWDMAyTq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a2Z1q26L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E3F887A88; Thu, 28 Dec 2023 16:09:54 +0100 (CET)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id 32876879E5; Thu, 28 Dec 2023 16:09:56 +0100 (CET)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6447387A6E
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 16:09:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BBA1987976
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 16:09:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-781600ab3d8so101523185a.0
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 07:09:52 -0800 (PST)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-67f9f6caabcso44333096d6.3
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 07:09:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703776191; x=1704380991; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703776192; x=1704380992; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TYnhnt+sxtOocTMdqnptKxdJ0m9SJpYhIGQV3XxI1zc=;
- b=BWDMAyTquuV1lPjqLPnZNoi3h0H3Zlp9KXO3Q2YSF4sHCfRWqHCNhYSQDu8F1JYcLg
- ThFLq1I3w9ccJwnMcL1CzSYNC2ztmxsX4+P+L35wLfGmErfGsLaEK4EOwUgZgZYLieNl
- X33TuYD39WzCTEXOyS4yVJS+g+rdqsz4WUVbM=
+ bh=JXDah+Baey+RzKWosb0cwvIW97t/+dQttjj6rkLr0bE=;
+ b=a2Z1q26LseohO5ooMNGSEK9onymP44L2jt2qDGE3BnURSHXDqSGXmAFEipgASVNKV7
+ J6RV5Qd+U95QuUho5Y7UqCSI0rT+X01WJCygxbp5JmCGlZDVRgyITMCRUjsPzSaIfOrM
+ c2bZ0qvKCfah4Iqsj49rwUkdJt1xQdclj6ATA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703776191; x=1704380991;
+ d=1e100.net; s=20230601; t=1703776192; x=1704380992;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TYnhnt+sxtOocTMdqnptKxdJ0m9SJpYhIGQV3XxI1zc=;
- b=oj23fcISN7V+SS9+VkOOlTtYoM4kj6sTLsS6ei/Gk53RkdQn9ZO/PYttPqc4RsYrKs
- /11ddLJ4cjoI0qfnGVpOTFZ3Jy+d0lCy7xEYsqITJAHOtdppHM3pQNOPJ9ikf/vnKykJ
- wz9Ux87dOVwaFTxgUZgeNQ1eDL/UcGLepzrxFJmT2YnPbF3WbSeKVjtlFcULarozZVjM
- M+n+NdApJYOfTZWoZiaArmOIQklLAWaDGqlMoNNkaBeG+ZbxQqKCceFsAldqSjbuZv5D
- ja5zmwmQ/vYQuuPFoYGvgXqycwunAP6u46TRg+CG4/u5Rx2i+dh6In9x7fhCmtZiOsZ7
- Zb2g==
-X-Gm-Message-State: AOJu0YzZc6C9V38o/1mPqyz73TBB1Pkv+sVSujR1umQQSIGKEAvmuT4n
- 24fTXgumFE+5Lrdb37aH139kFBSlieek1+SyGiphgQjXycgO
-X-Google-Smtp-Source: AGHT+IElELxUyV5AEdtRIG/GiIYdh4LuSnFw/TiLYCG6u12pjG+bXb3iUOt+dWcKii8Ho6MHpd6p7cE0Kr1/r6IL0O8=
-X-Received: by 2002:a05:6214:e63:b0:67f:40f0:acb1 with SMTP id
- jz3-20020a0562140e6300b0067f40f0acb1mr15924657qvb.63.1703776191199; Thu, 28
- Dec 2023 07:09:51 -0800 (PST)
+ bh=JXDah+Baey+RzKWosb0cwvIW97t/+dQttjj6rkLr0bE=;
+ b=PCK4ZmuP92eUt1lD/e9IB+/O6+4u+z3g8E3gfHR5lhomLFwjCW2kDuAy7dYH4mb8Zn
+ mjbpWC1r8akSGy8NYbxlrpRJ37BSsnZwFwJdFdd/ffQtTHCGeUOfIID8cdEYrCfryRK6
+ Nw1/qCIj1fA74u0ISU+9pWduVx/slrOIG5Rs1ADYYJ4tQ/jsJkBW6XHPcAy4z3qIIcgy
+ eCHIBI631ySb6WABnHphmdwwrChs5F1WpUDvmMSDuekBcZttLr4znDNX+TZYdM6aG1TY
+ KaLW9S2330wyR2G+8ZBaWXv1PFDCZPHUdzhUKKNYFNwLBjOFspUYii0wYCKpo98dkovE
+ zjNw==
+X-Gm-Message-State: AOJu0Yx9PJpScmTgX/54sTJ0fDQ7A6pMj1rvzeu93z5y3Kl9tHViZZqf
+ m+x922TYLPRmUXIOzFv2iJsGgCacLNFg6GfAryxUQoqISyR8
+X-Google-Smtp-Source: AGHT+IHsxFeVosMLiGVAAEImtUldTw1mENA2v0yLlx6YCQoyexQ6sR8AfZU8e1avzcx4cRvOjiFY698AtxyYR0bUP5c=
+X-Received: by 2002:a05:6214:21e4:b0:67f:78e4:ed55 with SMTP id
+ p4-20020a05621421e400b0067f78e4ed55mr14821944qvj.106.1703776192589; Thu, 28
+ Dec 2023 07:09:52 -0800 (PST)
 MIME-Version: 1.0
-References: <20231227082405.2202246-1-sjg@chromium.org>
- <20231227132156.GQ2652760@bill-the-cat>
- <CAFLszThBrAVSH2jYxhxFSETqr4za+BqjZBBjLaDokc1ZdrXXRw@mail.gmail.com>
- <20231228142311.GD2652760@bill-the-cat>
-In-Reply-To: <20231228142311.GD2652760@bill-the-cat>
+References: <20231228115804.3626579-1-sumit.garg@linaro.org>
+ <20231228115804.3626579-8-sumit.garg@linaro.org>
+ <CAFLszTg=CDfyTGG9c-t=98eFYvYy61L1kzmrssNKPSS6dZL3cg@mail.gmail.com>
+ <20231228135642.GA2652760@bill-the-cat>
+In-Reply-To: <20231228135642.GA2652760@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 28 Dec 2023 15:09:40 +0000
-Message-ID: <CAFLszTghB1ZObpxUe+afAp2zzQOfn2M9198ofsgnyW9cseG2Ew@mail.gmail.com>
-Subject: Re: [PATCH 0/9] dts: Move to SoC-specific build rules
+Date: Thu, 28 Dec 2023 15:09:41 +0000
+Message-ID: <CAFLszThP+GJcPP_LJBva1M5mi9Wj-Nh-z7A6-fkSpPgOTtLmRQ@mail.gmail.com>
+Subject: Re: [PATCH v3 7/8] dts: meson-gxbb: Switch to using upstream DT
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Sumit Garg <sumit.garg@linaro.org>, 
- Albert Aribaud <albert.u.boot@aribaud.net>,
- =?UTF-8?Q?Andreas_Bie=C3=9Fmann?= <andreas@biessmann.org>, 
- Michal Simek <michal.simek@amd.com>, Michal Simek <monstr@monstr.eu>, 
- Minkyu Kang <mk7.kang@samsung.com>, Scott McNutt <smcnutt@psyent.com>, 
- Thomas Chou <thomas@wytron.com.tw>
+Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io, 
+ u-boot-custodians@lists.denx.de, robh+dt@kernel.org, 
+ krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
+ ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
+ xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
+ rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
+ rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -93,68 +96,100 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Thu, Dec 28, 2023 at 2:23=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+On Thu, Dec 28, 2023 at 1:56=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
 :
 >
-> On Thu, Dec 28, 2023 at 01:37:07PM +0000, Simon Glass wrote:
-> > Hi Tom,
+> On Thu, Dec 28, 2023 at 01:37:11PM +0000, Simon Glass wrote:
+> > Hi Sumit,
 > >
-> > On Wed, Dec 27, 2023 at 1:21=E2=80=AFPM Tom Rini <trini@konsulko.com> w=
-rote:
+> > On Thu, Dec 28, 2023 at 11:59=E2=80=AFAM Sumit Garg <sumit.garg@linaro.=
+org> wrote:
 > > >
-> > > On Wed, Dec 27, 2023 at 08:23:56AM +0000, Simon Glass wrote:
+> > > Although there were still some variations in board DTS files based on
+> > > meson-gxbb SoC but I think those were minor differences from upstream
+> > > and shouldn't impact boot on these devices.
 > > >
-> > > > U-Boot builds devicetree binaries from its source tree. As part of =
-the
-> > > > Kconfig conversion, the Makefiles were updated to align with how th=
-is
-> > > > is done in Linux: a single target for each SoC is used to build all=
- the
-> > > > .dtb files for that SoC.
-> > > >
-> > > > Since then, the Makefiles have devolved in some cases, resulting in
-> > > > lots of target-specific build rules. Also Linux has moved to using
-> > > > subdirectories for each vendor.
-> > > >
-> > > > Recent work aims to allow U-Boot to directly use devicetree files f=
-rom
-> > > > Linux. This would be easier if the directory structure were the sam=
-e.
-> > > > Another recent discussion involved dropping the build rules altoget=
-her.
-> > > >
-> > > > This series makes a start at cleaning up some of the build rules, t=
-o
-> > > > reduce the amount of code and make it easier to add new boards for =
-the
-> > > > same SoC.
-> > > >
-> > > > One issue is that the ARCH_xxx Kconfig options between U-Boot and L=
-inux
-> > > > are not always the same. Given the large number of SoCs and boards
-> > > > supported by U-Boot, it would be useful to align these where possib=
-le.
+> > > So switch to upstream DT via mirroring amlogic/ directory from
+> > > devicetree-rebasing/src/arm64/amlogic/ directory. And thereby directl=
+y
+> > > building DTB from there including *-u-boot.dtsi files from
+> > > arch/$(ARCH)/dts/ directory.
 > > >
-> > > I don't know why we should start with this now, and further not being=
- on
-> > > top of Sumit's series to remove our duplicate dts files. And that's
-> > > where we can have the conversation about for which cases it even make=
-s
-> > > sense to build all of the dts files for a given SoC.
+> > > Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+> > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> > > ---
+> > >
+> > > Changes in v3:
+> > > --------------
+> > > - Dropped Makefile portion and enabled OF_UPSTREAM for SoC instead.
+> > >
+> > > Changes in v2:
+> > > --------------
+> > > - Picked up review tag
+> > >
+> > >  arch/arm/mach-meson/Kconfig           | 1 +
+> > >  configs/nanopi-k2_defconfig           | 2 +-
+> > >  configs/odroid-c2_defconfig           | 2 +-
+> > >  configs/p200_defconfig                | 2 +-
+> > >  configs/p201_defconfig                | 2 +-
+> > >  configs/videostrong-kii-pro_defconfig | 2 +-
+> > >  configs/wetek-hub_defconfig           | 2 +-
+> > >  configs/wetek-play2_defconfig         | 2 +-
+> > >  dts/arch/arm64/amlogic                | 1 +
+> > >  9 files changed, 9 insertions(+), 7 deletions(-)
+> > >  create mode 120000 dts/arch/arm64/amlogic
+> > >
 > >
-> > This is a completely different series - there are no conflicts with
-> > Sumit's series so it can be applied before or after it.
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
 > >
-> > My goal here is to clean up our build rules, rather than just throwing
-> > them all away, for reasons we have discussed previously. I filed [1]
-> > to track that.
+> > > diff --git a/arch/arm/mach-meson/Kconfig b/arch/arm/mach-meson/Kconfi=
+g
+> > > index d6c89058061..8ddb59161a0 100644
+> > > --- a/arch/arm/mach-meson/Kconfig
+> > > +++ b/arch/arm/mach-meson/Kconfig
+> > > @@ -25,6 +25,7 @@ choice
+> > >  config MESON_GXBB
+> > >         bool "GXBB"
+> > >         select MESON_GX
+> > > +       imply OF_UPSTREAM
+> > >         help
+> > >           Select this if your SoC is an S905
+> > >
+> > > diff --git a/configs/nanopi-k2_defconfig b/configs/nanopi-k2_defconfi=
+g
+> > > index 41dbf7981f8..2e1c756bf7a 100644
+> > > --- a/configs/nanopi-k2_defconfig
+> > > +++ b/configs/nanopi-k2_defconfig
+> > > @@ -6,7 +6,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+> > >  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x20000000
+> > >  CONFIG_ENV_SIZE=3D0x2000
+> > >  CONFIG_DM_GPIO=3Dy
+> > > -CONFIG_DEFAULT_DEVICE_TREE=3D"meson-gxbb-nanopi-k2"
+> > > +CONFIG_DEFAULT_DEVICE_TREE=3D"amlogic/meson-gxbb-nanopi-k2"
+> > >  CONFIG_OF_LIBFDT_OVERLAY=3Dy
+> > >  CONFIG_DM_RESET=3Dy
+> > >  CONFIG_DEBUG_UART_BASE=3D0xc81004c0
+> >
+> > So now I am wondering if we can (later) have the SoC be implied when
+> > using OF_UPSTREAM so we can do:
+> >
+> > CONFIG_DEFAULT_DEVICE_TREE=3D"meson-gxbb-nanopi-k2"
+> >
+> > and it will add the 'amlogic/' automatically?
+> >
+> > Perhaps that might be a way to bridge the gap in terms of file layout?
 >
-> Yes, I'm saying we shouldn't be doing anything this series does until
-> after Sumit's series has landed. Along with the fact that I don't like
-> what's going on in this series.
+> That's going to start to look real ugly real quick I suspect and I'm not
+> sure what it really gets us? It seems to me that the convention of
+> "vendor/board" has already been well enough adapted outside of the
+> kernel, with the odd sticking point being getting everyone used to
+> whatever will be happening for 32bit boards long term. So I think hiding
+> the vendor part of the string here will be more, not less, confusing
+> long term.
 
-This seems to again be the disagreement over whether a single DT
-should be build for each board, or all the DTs for an SoC?
+Now that I dig in a bit, I see that the devicetree-rebasing tree does
+not have any Makefiles in it. How does Linux build with it? Does
+anyone have instructions?
 
 Regards,
 Simon
