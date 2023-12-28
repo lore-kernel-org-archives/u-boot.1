@@ -4,77 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93DDEC3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:41:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9CEDC3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:48:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF87F876CA;
-	Thu, 28 Dec 2023 14:39:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 490D1879A7;
+	Thu, 28 Dec 2023 14:48:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SkfRmLnk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tVkVBdQp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D06BC87A06; Thu, 28 Dec 2023 14:39:06 +0100 (CET)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id C0AB7876CA; Thu, 28 Dec 2023 14:48:16 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCB1187A3B
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:39:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 50100879A7
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:48:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-40d5adef341so19203305e9.3
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:39:03 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-5e784ce9bb8so45899377b3.0
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:48:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703770743; x=1704375543; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gI2XCqFWBcZnUrKYK7hdhVv+5mPnIGL9ZpRCezrzXq4=;
- b=SkfRmLnkVWQ9LhG0AxhInt5lRCiYCJyebdmaOZuQzID2SYLeJK39xzxI9yS/C7flls
- woDSwvPClcLduUrLzbvOtOjFbuJIEGUbcOpyFeky45ycRt+01QAK0a5pWu1M7ZkXmfUw
- nvjLWEXbRgva5ke+bshrDmfrDmLvEI2OX25Bw=
+ d=konsulko.com; s=google; t=1703771293; x=1704376093; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Pl/Kzh6EnhJdxFrygZd20GNNdtn/Vi60D2eN9TGxT94=;
+ b=tVkVBdQpbIh4c8KJJTFgR/aHQ7DVrrYfbBVucWBxcSwLub3vAz9oxfZFC/buHsSoiL
+ z1gJxS7a5NOGAQqAju1hT5aJC77sgw2OkzyFnG1NWkaAjQpN7xdrgxbpctk84Kl31Vca
+ 4y3H4Ze+dcL69+fCqMu0/JMWbiiVFhSseIRLw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703770743; x=1704375543;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gI2XCqFWBcZnUrKYK7hdhVv+5mPnIGL9ZpRCezrzXq4=;
- b=w2acBnccaIdViGIHtKupjhMcDz/6mzuVGilP80dC5LLh4x4SH4lR0OubTtjDP/g3ZU
- KduozQtstfwl4OLiBtw883ycNj8C/jThLn/V8ORQ82mh9TMeINRtqB2+F9rt7nvX6Q4G
- +dwWu4K3slsstEn54mAhwBlGu5p01ulx2dhL4QVNikPctCeDP3jjJh0qONou7w3LlA2K
- Rl9FMgVm7xNyEkYQgN52suBoCfklVqLQZxC0HpMZxIMlIOjLwosR/j2ZWTxqhPq50+14
- mt9Nz9aCTKMRX6+XrnaNcLmmGIFSr4uswB9fJVs3eAbvX3Z6Kfoj5LmAyYGJ3n6rMcr3
- YXpg==
-X-Gm-Message-State: AOJu0YzSZbKyKf6ybSt6W5AZhJ6NFwHTYGkGrjBWt0TOBxx9Q6t2hsdW
- Km0oqjwrz18SFuvB1igT3fzIUhj2FLhxnKLgX7LBuvhxBA==
-X-Google-Smtp-Source: AGHT+IGQWeXIzq4lkPfHVl4UEVdUcNuJ/OwplAfDPSD+BU3e0zfQ1sPQ29Pynp48T7XfR6SnU6+I4Q==
-X-Received: by 2002:a05:600c:19d1:b0:40d:5f5b:48a6 with SMTP id
- u17-20020a05600c19d100b0040d5f5b48a6mr622016wmq.102.1703770742574; 
- Thu, 28 Dec 2023 05:39:02 -0800 (PST)
-Received: from tasman.chapterst.org (80-42-48-87.dynamic.dsl.as9105.com.
- [80.42.48.87]) by smtp.gmail.com with ESMTPSA id
- m5-20020adfe945000000b003366c058509sm17096421wrn.23.2023.12.28.05.39.01
+ d=1e100.net; s=20230601; t=1703771293; x=1704376093;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Pl/Kzh6EnhJdxFrygZd20GNNdtn/Vi60D2eN9TGxT94=;
+ b=s8UP4LfvKE/ZoCGw4DS4/eXiU3IKGqVQRirbMxxCvcf18V5QPa6jFTySdj37n2XywY
+ 4QhPTVF4TI54ZbtE1SCEHwnbjMSWWsf8sQG+TDAH87f/Vab6wOsQaC8/9LwezUMfgTIC
+ X1Q5o1DIoTRWtzuPNbyVpsKYCeuIZKVBKGD0xG2IRK9u3STTx2dr3NrooEmtAmcoqrkV
+ zbnUItBdIueZWMD94SDIJuTleHf975cVJBUjnnTTfOjIrD2FXqLFQKxYSJi9D57TSacy
+ uirTwjTymf3/0AShP60IKZ5aRKGjYYWGgaoSjX2Y/BOUIpxPykx+EcyBdIiO86kH7Dnx
+ PLfA==
+X-Gm-Message-State: AOJu0Yw1r4RUL+yBPaeqdQboE5ev4klwv1haKI/VoQ8J+EyQD+7xpGul
+ HSHVq1d/2BzR6HVhsxZu+XAdHOWmdFJ98Q==
+X-Google-Smtp-Source: AGHT+IHXYwHSr0JPoH8ZQRR/qxcu4hn5wS7FsLIeJ2LRH4AU/nP+gGU4JI9rGZRd68syoR/zwmuCQg==
+X-Received: by 2002:a0d:d590:0:b0:5e5:200e:8816 with SMTP id
+ x138-20020a0dd590000000b005e5200e8816mr5654753ywd.33.1703771292945; 
+ Thu, 28 Dec 2023 05:48:12 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ n127-20020a817285000000b005ca99793930sm7416178ywc.20.2023.12.28.05.48.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Dec 2023 05:39:02 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Thu, 28 Dec 2023 05:48:12 -0800 (PST)
+Date: Thu, 28 Dec 2023 08:48:09 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Marek Vasut <marex@denx.de>, Raymond Mao <raymond.mao@linaro.org>,
  Baruch Siach <baruch@tkos.co.il>, Bin Meng <bmeng.cn@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Jerry Van Baren <vanbaren@cideas.com>, Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
  Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>,
- Sean Anderson <seanga2@gmail.com>, Stefan Roese <sr@denx.de>
-Subject: [PATCH v5] fdt: Allow the devicetree to come from a bloblist
-Date: Thu, 28 Dec 2023 13:36:54 +0000
-Message-Id: <20231228133654.2356023-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
+ Sean Anderson <seanga2@gmail.com>
+Subject: Re: [PATCH v4] fdt: Allow the devicetree to come from a bloblist
+Message-ID: <20231228134809.GZ2652760@bill-the-cat>
+References: <20231226094625.221671-1-sjg@chromium.org>
+ <20231226120710.GH2652760@bill-the-cat>
+ <CAC_iWjLy1E9wEW3zX2waN9mc=tz7PTKE0gJ4RucqMmZR2cA6_Q@mail.gmail.com>
+ <CAFLszTgqS9TF1F-RxO1dpZPZGG6QBiKm0n_e0yVHAume+xT3eA@mail.gmail.com>
+ <20231227201130.GV2652760@bill-the-cat>
+ <CAFLszThJc04Zh1tFA4Cp7+oKVv2oKtk2015F37eMzPcXgqW7bw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="M64qE/8WyiJllNIL"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThJc04Zh1tFA4Cp7+oKVv2oKtk2015F37eMzPcXgqW7bw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,206 +103,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Standard passage provides for a bloblist to be passed from one firmware
-phase to the next. That can be used to pass the devicetree along as well.
-Add an option to support this.
 
-Tests for this will be added as part of the Universal Payload work.
+--M64qE/8WyiJllNIL
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
-The discussion on this was not resolved and is now important due to the
-bloblist series from Raymond. So I am sending it again since I believe
-this is a better starting point than building on OF_BOARD
+On Thu, Dec 28, 2023 at 01:37:39PM +0000, Simon Glass wrote:
+> Hi Tom,
+>=20
+>=20
+> On Wed, Dec 27, 2023 at 8:06=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
+> >
+> > On Wed, Dec 27, 2023 at 05:48:42PM +0000, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Tue, Dec 26, 2023 at 12:07=E2=80=AFPM Tom Rini <trini@konsulko.com=
+> wrote:
+> > > >
+> > > > On Tue, Dec 26, 2023 at 09:46:25AM +0000, Simon Glass wrote:
+> > > >
+> > > > > Standard passage provides for a bloblist to be passed from one fi=
+rmware
+> > > > > phase to the next. That can be used to pass the devicetree along =
+as well.
+> > > > > Add an option to support this.
+> > > > >
+> > > > > Tests for this will be added as part of the Universal Payload wor=
+k.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
+> > > > > The discussion on this was not resolved and is now important due =
+to the
+> > > > > bloblist series from Raymond. So I am sending it again since I be=
+lieve
+> > > > > this is a better starting point than building on OF_BOARD
+> > > >
+> > > > I really don't like adding another option for "DT is given to us". =
+Why
+> > > > isn't adding another enum to fdt_source_t sufficient
+> > >
+> > > That is added by this patch, but...
+> > >
+> > > >, and if we have
+> > > > bloblist enabled, that will look for and use if found?
+> > >
+> > > ...this is the question. I would like to be able to enable bloblist
+> > > without *requiring* the DT to come from there, hence the separate
+> > > Kconfig option.
+> > >
+> > > > Maybe some other
+> > > > code needs to be restructured and cleaned up too?
+> > >
+> > > Possibly, but I really am not keen on this board-specific solution. I
+> > > believe Ilias & I agreed that OF_BOARD should fade away, so I don't
+> > > like adding another thing onto it.
+> >
+> > I think you're missing something then. It should not be board specific
+> > to just find the dtb via bloblist, without a new CONFIG.
+>=20
+> Yes, that is what I am looking for.
+>=20
+> > Whatever is
+> > stopping that is what needs to be refactored and then you can just
+> > extend fdt_source_t without a new CONFIG option.
+>=20
+> OK, but I need a way to turn it off, at least for development.
+>=20
+> [merging in the other thread:]
+>=20
+> On Wed, Dec 27, 2023 at 8:11=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
+> >
+> > On Wed, Dec 27, 2023 at 05:48:44PM +0000, Simon Glass wrote:
+> > > Hi Ilias,
+> > >
+> > > On Wed, Dec 27, 2023 at 6:44=E2=80=AFAM Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > > Hi Tom,
+> > > >
+> > > > On Tue, 26 Dec 2023 at 14:07, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Tue, Dec 26, 2023 at 09:46:25AM +0000, Simon Glass wrote:
+> > > > >
+> > > > > > Standard passage provides for a bloblist to be passed from one =
+firmware
+> > > > > > phase to the next. That can be used to pass the devicetree alon=
+g as well.
+> > > > > > Add an option to support this.
+> > > > > >
+> > > > > > Tests for this will be added as part of the Universal Payload w=
+ork.
+> > > > > >
+> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > ---
+> > > > > > The discussion on this was not resolved and is now important du=
+e to the
+> > > > > > bloblist series from Raymond. So I am sending it again since I =
+believe
+> > > > > > this is a better starting point than building on OF_BOARD
+> > > > >
+> > > > > I really don't like adding another option for "DT is given to us"=
+=2E Why
+> > > > > isn't adding another enum to fdt_source_t sufficient, and if we h=
+ave
+> > > > > bloblist enabled, that will look for and use if found? Maybe some=
+ other
+> > > > > code needs to be restructured and cleaned up too?
+> > > >
+> > > > Same here. On top of that the bloblist has a few items in there, e.=
+g a
+> > > > TPM eventlog. What are we going to do? Add a Kconfig for each item?
+> > >
+> > > No, but that is just a straw man. The DT is special and U-Boot reports
+> > > where it comes from.
+> > >
+> > > >
+> > > > This has been going back and forth for a while. I've lost count of =
+how
+> > > > many times I repeated the same proposal, but here it goes again. We
+> > > > have OF_BOARD and BLOBLIST options. The bloblist and its properties
+> > > > are scannable at runtime. Can't we use the combination of these 2 c=
+an
+> > > > be used to imply we expect things from a bloblist. If we want to be
+> > > > stricter in the future and explicitly expect the DT from a bloblist,
+> > > > we could add a Kconfig option failing the boot if that's missing.
+> > >
+> > > I would like to have that Kconfig option now, not later. In my mind,
+> > > the boot must be deterministic, so that if OF_BLOBLIST is enabled, the
+> > > DT must come from there, or it is an error.
+> >
+> > Determinism doesn't require a CONFIG option, it just requires an if/else
+> > tree where we say what the "correct" priority list should be and then
+> > set a flag so that we can tell the user where we found it too. This also
+> > means that we can get whatever is going to use this mechanism to
+> > migrate over, and have less of a chicken-and-egg type of problem.
+>=20
+> OK I think I understand what is going on here. We need a way to enable
+> OF_BLOBLIST while still allowing the prior stage to NOT provide a
+> bloblist, at least for a transition period (=3D forever, I suspect, but
+> that's another discussion).
+>=20
+> How about if OF_BLOBLIST enables the option, but we allow a fallback
+> to OF_BOARD if the DT is not there?
 
-Changes in v5:
-- Make OF_BLOBLIST default y
-- Make OF_BLOBLIST optional at runtime
+Oh, OK, so your use case is development. Why don't we just make
+OF_EMBEDDED be the first clause in the if/else (and yes, if
+(IS_ENABLED(CONFIG_OF_EMBEDDED) :)) and move on still not needing a knob
+for "bloblist has it"?
 
-Changes in v4:
-- Rebase to -next
+--=20
+Tom
 
- common/bloblist.c                  |  1 +
- doc/develop/devicetree/control.rst |  3 ++
- dts/Kconfig                        | 13 +++++++++
- include/bloblist.h                 |  5 ++++
- include/fdtdec.h                   |  6 ++--
- lib/fdtdec.c                       | 44 +++++++++++++++++++++++-------
- 6 files changed, 60 insertions(+), 12 deletions(-)
+--M64qE/8WyiJllNIL
+Content-Type: application/pgp-signature; name="signature.asc"
 
-diff --git a/common/bloblist.c b/common/bloblist.c
-index a22f6c12b0c..b07ede11cfe 100644
---- a/common/bloblist.c
-+++ b/common/bloblist.c
-@@ -48,6 +48,7 @@ static struct tag_name {
- 	{ BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
- 	{ BLOBLISTT_SMBIOS_TABLES, "SMBIOS tables for x86" },
- 	{ BLOBLISTT_VBOOT_CTX, "Chrome OS vboot context" },
-+	{ BLOBLISTT_CONTROL_FDT, "Control FDT" },
- 
- 	/* BLOBLISTT_PROJECT_AREA */
- 	{ BLOBLISTT_U_BOOT_SPL_HANDOFF, "SPL hand-off" },
-diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
-index cbb65c9b177..444c55de4e4 100644
---- a/doc/develop/devicetree/control.rst
-+++ b/doc/develop/devicetree/control.rst
-@@ -108,6 +108,9 @@ If CONFIG_OF_BOARD is defined, a board-specific routine will provide the
- devicetree at runtime, for example if an earlier bootloader stage creates
- it and passes it to U-Boot.
- 
-+If CONFIG_OF_BLOBLIST is defined, the devicetree comes from a bloblist passed
-+from a previous stage, if present.
-+
- If CONFIG_SANDBOX is defined, then it will be read from a file on
- startup. Use the -d flag to U-Boot to specify the file to read, -D for the
- default and -T for the test devicetree, used to run sandbox unit tests.
-diff --git a/dts/Kconfig b/dts/Kconfig
-index 00c0aeff893..352431d59a3 100644
---- a/dts/Kconfig
-+++ b/dts/Kconfig
-@@ -105,6 +105,19 @@ config OF_EMBED
- 
- endchoice
- 
-+config OF_BLOBLIST
-+	bool "Provided by a bloblist at runtime"
-+	depends on BLOBLIST
-+	default y
-+	help
-+	  Select this to read the devicetree from the bloblist. This allows
-+	  using a bloblist to transfer the devicetree between  U-Boot phases.
-+	  The devicetree is stored in the bloblist by an early phase so that
-+	  U-Boot can read it.
-+
-+	  If the bloblist does not contain a devicetree, then other methods will
-+	  be used.
-+
- config OF_BOARD
- 	bool "Provided by the board (e.g a previous loader) at runtime"
- 	default y if SANDBOX || OF_HAS_PRIOR_STAGE
-diff --git a/include/bloblist.h b/include/bloblist.h
-index 080cc46a126..e16d122f4fb 100644
---- a/include/bloblist.h
-+++ b/include/bloblist.h
-@@ -103,6 +103,11 @@ enum bloblist_tag_t {
- 	BLOBLISTT_ACPI_TABLES = 0x104,	/* ACPI tables for x86 */
- 	BLOBLISTT_SMBIOS_TABLES = 0x105, /* SMBIOS tables for x86 */
- 	BLOBLISTT_VBOOT_CTX = 0x106,	/* Chromium OS verified boot context */
-+	/*
-+	 * Devicetree for use by firmware. On some platforms this is passed to
-+	 * the OS also
-+	 */
-+	BLOBLISTT_CONTROL_FDT = 0x107,
- 
- 	/*
- 	 * Project-specific tags are permitted here. Projects can be open source
-diff --git a/include/fdtdec.h b/include/fdtdec.h
-index bd1149f46d0..e80de24076c 100644
---- a/include/fdtdec.h
-+++ b/include/fdtdec.h
-@@ -72,7 +72,7 @@ struct bd_info;
-  *	U-Boot is packaged as an ELF file, e.g. for debugging purposes
-  * @FDTSRC_ENV: Provided by the fdtcontroladdr environment variable. This should
-  *	be used for debugging/development only
-- * @FDTSRC_NONE: No devicetree at all
-+ * @FDTSRC_BLOBLIST: Provided by a bloblist from an earlier phase
-  */
- enum fdt_source_t {
- 	FDTSRC_SEPARATE,
-@@ -80,6 +80,7 @@ enum fdt_source_t {
- 	FDTSRC_BOARD,
- 	FDTSRC_EMBED,
- 	FDTSRC_ENV,
-+	FDTSRC_BLOBLIST,
- };
- 
- /*
-@@ -1190,7 +1191,8 @@ int fdtdec_resetup(int *rescan);
-  *
-  * The existing devicetree is available at gd->fdt_blob
-  *
-- * @err internal error code if we fail to setup a DTB
-+ * @err: 0 on success, -EEXIST if the devicetree is already correct, or other
-+ * internal error code if we fail to setup a DTB
-  * @returns new devicetree blob pointer
-  */
- void *board_fdt_blob_setup(int *err);
-diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-index 4016bf3c113..af3026dd42b 100644
---- a/lib/fdtdec.c
-+++ b/lib/fdtdec.c
-@@ -7,6 +7,10 @@
-  */
- 
- #ifndef USE_HOSTCC
-+
-+#define LOG_CATEGORY	LOGC_DT
-+
-+#include <bloblist.h>
- #include <boot_fit.h>
- #include <display_options.h>
- #include <dm.h>
-@@ -86,6 +90,7 @@ static const char *const fdt_src_name[] = {
- 	[FDTSRC_BOARD] = "board",
- 	[FDTSRC_EMBED] = "embed",
- 	[FDTSRC_ENV] = "env",
-+	[FDTSRC_BLOBLIST] = "bloblist",
- };
- 
- const char *fdtdec_get_srcname(void)
-@@ -1662,23 +1667,42 @@ static void setup_multi_dtb_fit(void)
- 
- int fdtdec_setup(void)
- {
--	int ret;
-+	int ret = -ENOENT;
-+
-+	/* If allowing a bloblist, check that first */
-+	if (CONFIG_IS_ENABLED(OF_BLOBLIST)) {
-+		ret = bloblist_maybe_init();
-+		if (!ret) {
-+			gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-+			if (gd->fdt_blob) {
-+				gd->fdt_src = FDTSRC_BLOBLIST;
-+				log_debug("Devicetree is in bloblist at %p\n",
-+					  gd->fdt_blob);
-+			} else {
-+				log_debug("No FDT found in bloblist\n");
-+				ret = -ENOENT;
-+			}
-+		}
-+	}
- 
--	/* The devicetree is typically appended to U-Boot */
--	if (IS_ENABLED(CONFIG_OF_SEPARATE)) {
--		gd->fdt_blob = fdt_find_separate();
--		gd->fdt_src = FDTSRC_SEPARATE;
--	} else { /* embed dtb in ELF file for testing / development */
--		gd->fdt_blob = dtb_dt_embedded();
--		gd->fdt_src = FDTSRC_EMBED;
-+	/* Otherwise, the devicetree is typically appended to U-Boot */
-+	if (ret) {
-+		if (IS_ENABLED(CONFIG_OF_SEPARATE)) {
-+			gd->fdt_blob = fdt_find_separate();
-+			gd->fdt_src = FDTSRC_SEPARATE;
-+		} else { /* embed dtb in ELF file for testing / development */
-+			gd->fdt_blob = dtb_dt_embedded();
-+			gd->fdt_src = FDTSRC_EMBED;
-+		}
- 	}
- 
- 	/* Allow the board to override the fdt address. */
- 	if (IS_ENABLED(CONFIG_OF_BOARD)) {
- 		gd->fdt_blob = board_fdt_blob_setup(&ret);
--		if (ret)
-+		if (!ret)
-+			gd->fdt_src = FDTSRC_BOARD;
-+		else if (ret != -EEXIST)
- 			return ret;
--		gd->fdt_src = FDTSRC_BOARD;
- 	}
- 
- 	/* Allow the early environment to override the fdt address */
--- 
-2.34.1
+-----BEGIN PGP SIGNATURE-----
 
+iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWNfJYACgkQFHw5/5Y0
+tyxPeQv0Ch7cHroUQNsGI5yDirAUs2dClvQLrH06KLrNBgyJEw65rIJf3mmM07DT
+TlHCx5YE1RCL8yQ97ghZX1f61bqOLiNnzxh51XVhNo3qxHQ2GJZI6EG9iDd3rXlM
+OWtn9/ArPbzIdzrZxuB9HAqrPq/qYK4g+8Bq2a45I78SHq0HK0TGuxLmVyQK64uD
+LruyPRvmnoDfPQM0VGKmntoYLeYjubYY08zw/Dpa+eNC78U6e1GL04hldhDkQFki
+Ou1WsaqaUx+UvOpqg1db1orCxhnm8aVIKCMGNbUnkx3GkHy76Y6907KIOpyvxGul
+Esxqim9ik4xujUwBwM9I/Q3XnERU48+DQ27g1Pw7AQR1rgeuaTO1/bdjVbP6c6dq
+2o/k4cPCmXy+cOEXBZo4xOk5wnzbJ/vuJnfWvpTTgOHeWtMXX0QQ9xR3fC4/ASt8
+J6IYyYaDHHH4HplBTbghmDdCOTgEjZX96RGDMe0aOp1uX49Lq7j8qfDFjXOB6ett
+UzbGTnk=
+=bWZG
+-----END PGP SIGNATURE-----
+
+--M64qE/8WyiJllNIL--
