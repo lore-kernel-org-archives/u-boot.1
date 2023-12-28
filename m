@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01889C3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 11:58:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0E27C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 11:58:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2254879FF;
-	Thu, 28 Dec 2023 12:58:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3E77187A0B;
+	Thu, 28 Dec 2023 12:58:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AWkGFIA8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DxBoE7CZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EBF587A01; Thu, 28 Dec 2023 12:58:41 +0100 (CET)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id B2BE287A07; Thu, 28 Dec 2023 12:58:47 +0100 (CET)
+Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
+ [IPv6:2607:f8b0:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0584987895
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 12:58:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 191FE87A05
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 12:58:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1d4414ec9c7so9912555ad.0
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 03:58:36 -0800 (PST)
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-5c239897895so1777619a12.2
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 03:58:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703764715; x=1704369515; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703764723; x=1704369523; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=i3W8sVu0jjxpWWQ933Uj3U3rjnY6OkWb8wvQvg7blCM=;
- b=AWkGFIA8Rh01g6xD2r8O/yb7aMaUGQmtlkrjZyby51S8rLhNf56E3rZYZf1ZKYA0gU
- Pa3H4Fwzcv7NJKWaHI9k0dwdQAk52y/Hovh6F0Y4zSIfEYaFjf2NfuM/GjRtXT8xQmFp
- 7F8oawIgc80azFUX5liyHIiG7qCfzRzsnYi4WH41QjYJZqYEw1rCRsXrjcpkzisIYA4X
- K2irY4fSfcOT10IQQSIHAzkqBd5J/NYS0Q1Hs1NMMwd5OOOl6i+vhiVCl7EyuutM2vWD
- 3UIF3edKwbo4x0dWnFTnQyOaS75PxgViBcmyVOsZBV9CZV5MAWk+QjIi/vBjq2POYFPv
- x8bg==
+ bh=iDPS55DFd0c8Rb3rEcH+LRja5l5dvTmJa9ZgRbve2Rc=;
+ b=DxBoE7CZLyejDMrsEnoCq9/7YqtZ6ECCF61lkFtuW0hJJf2rcjFXJXVs6au+r24BVk
+ vEDiJUZ/AAHLEXUnd9lj58swZdUeTYThyYTCVRzyAAiKr+aGdoVJV9EJX524ngJTe1Po
+ erW21YROIQheATtVs/aKgzDzq75txMsjcSe7SVdXhZCIqf+lfQHwEu0S1HLbagw//twy
+ dntmHPtn5LMZ6WStH2UCunhAg04jjdMEHrVeiU+24KWeeWiTOUGPgLCluKEYXpIVEAhk
+ YSHX02eKz2Pkxq2Wx3ukJavO5Nw9TSPWWtHkGG/1bDTyCNyapnTVCO18rZlgbqc+DBiR
+ kEoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703764715; x=1704369515;
+ d=1e100.net; s=20230601; t=1703764723; x=1704369523;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=i3W8sVu0jjxpWWQ933Uj3U3rjnY6OkWb8wvQvg7blCM=;
- b=vfpfghGLAWOprwNXIZpak/43b67rJ29ccFAhBCrxH0U3pXK6jSMxX14POnn3Vkt6k+
- DgKqn8xWS+9fyot9eRt8t08Ya27MYCXjR8wCa72XIWHZ+ek/90stV2U2dTPz8NzptDBr
- XsXj9T5TS82PPN0IzCktc7OR/dsgcM7X4SQEUzEMopA4itnUeRMAAo8s+MF9Dmg0/r11
- hcG75E+fgH8gUqGP2821seJSXtg9NFTJZs+Cdm3Vzj3CLWihdGjUMuLg/P4P0JdyhjaA
- w37yz3VZRiSFdGFB7CUlUOzslrX9/U7qRPvUOiK0gYiQl6anY8+LDm49OcgBt2VpJkJz
- Nw9Q==
-X-Gm-Message-State: AOJu0YxYxx+NHQ19yyDcnAdNwKjWq9HdLp+pp2PRTaJAPUUcpKWrbAHl
- PnrGeroCftOXamoad0/Cd0hPUEtbeUzzfHNxSw+EHpMxbVMsQw==
-X-Google-Smtp-Source: AGHT+IEPnf+HylEaD69SjNL6H5NDpIh1Qutsch41q0LOQUQWicnXl9IvgAIgsw+41xD5iDycNi2T1g==
-X-Received: by 2002:a17:903:28f:b0:1d4:35ad:41de with SMTP id
- j15-20020a170903028f00b001d435ad41demr4482702plr.60.1703764715137; 
- Thu, 28 Dec 2023 03:58:35 -0800 (PST)
+ bh=iDPS55DFd0c8Rb3rEcH+LRja5l5dvTmJa9ZgRbve2Rc=;
+ b=hRWM2oWTQ8IB7XZCTYEwmQBiBLvs0InRV6YSodhXt3aP5DqIw9zHOQ0/f/savNj1fP
+ PwJJW+YrRg0snl7+NdJj0+DeVmSyUz37xt9tYhyelJCU7Q3tx8G9QuI91rUFPOZMPPrZ
+ noF4JK79oLBw18s6tGP7JAgopPpBa1/hX+DFg9yW21rPf7PkogvOHWEuc0XCi0Ob+GgW
+ eylU4UbnDJ3CxRvx0iSk1u7WVNbIIGknmt/l4QZ+unUW9xjbICsXKZ83BaxM2D/kyZ31
+ eyNsJUQqz2kAJ3xhNrUzFoBHxL40xCeC5WCZJ4/F//C3dD0Cm/9Yf0Q46MhXuXME/FY7
+ rirw==
+X-Gm-Message-State: AOJu0YzNxzsDd4qioJyndUA4ze7cGsnMd7IpxBJmHY8ElquN8pwP7X6Y
+ bMvcWj2XsUUM4Xqff0WuET9VaQnkcEb55kakOwLa2tWf7DF5QA==
+X-Google-Smtp-Source: AGHT+IFknfFK4DxHGi4VZ9OBEQWoEqVOP3Ebnhx3FOf+JQd1uBV6f7pvdteVYwjCfYSK7aeEwn3R6A==
+X-Received: by 2002:a05:6a21:a58c:b0:196:47b1:9a34 with SMTP id
+ gd12-20020a056a21a58c00b0019647b19a34mr649619pzc.56.1703764723185; 
+ Thu, 28 Dec 2023 03:58:43 -0800 (PST)
 Received: from sumit-X1.. ([223.178.209.202]) by smtp.gmail.com with ESMTPSA id
- r4-20020a170902ea4400b001d3f285157dsm13700579plg.124.2023.12.28.03.58.27
+ r4-20020a170902ea4400b001d3f285157dsm13700579plg.124.2023.12.28.03.58.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Dec 2023 03:58:34 -0800 (PST)
+ Thu, 28 Dec 2023 03:58:42 -0800 (PST)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
  u-boot-custodians@lists.denx.de
@@ -75,10 +75,9 @@ Cc: trini@konsulko.com, sjg@chromium.org, robh+dt@kernel.org,
  seanga2@gmail.com, rasmus.villemoes@prevas.dk, peng.fan@nxp.com,
  jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de,
  mibodhi@gmail.com, Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v3 1/8] CI: Exclude devicetree-rebasing subtree for CONFIG
- checks
-Date: Thu, 28 Dec 2023 17:27:57 +0530
-Message-Id: <20231228115804.3626579-2-sumit.garg@linaro.org>
+Subject: [PATCH v3 2/8] Makefile: Add support for DT bindings schema checks
+Date: Thu, 28 Dec 2023 17:27:58 +0530
+Message-Id: <20231228115804.3626579-3-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231228115804.3626579-1-sumit.garg@linaro.org>
 References: <20231228115804.3626579-1-sumit.garg@linaro.org>
@@ -100,53 +99,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since devicetree-rebasing is an external repo with its own coding style,
-exclude it from Azure and gitlab CI CONFIG checks.
+This adds the build infrastructure for checking DT binding schema
+documents and validating dtb files using the binding schema. Here we use
+devicetree-rebasing directory to provide the DT bindings.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Dependency:
+-----------
+
+The DT schema project must be installed in order to validate the DT schema
+binding documents and validate DTS files using the DT schema. The DT schema
+project can be installed with pip::
+
+    pip3 install dtschema
+
+Note that 'dtschema' installation requires 'swig' and Python development
+files installed first. On Debian/Ubuntu systems::
+
+    apt install swig python3-dev
+
+Testing:
+--------
+
+Build dts files and check using DT binding schema:
+$ make dtbs_check
+
+Optionally, DT_SCHEMA_FILES can be passed in with a schema file(s) to
+use for validation. This makes it easier to find and fix errors
+generated by a specific schema.
+
+Note, at this point dtbs_check is an optional build target as there are
+many warnings generated due to custom DT properties used by many
+platforms in u-boot. It is expected with these checks that compliance
+with DT bindings to take place. Once that's done it can be added to CI
+builds to remain compliant with DT bindings.
+
 Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 ---
 
 Changes in v3:
 --------------
-- Picked up review tag
+- None
 
 Changes in v2:
 --------------
-- Excluded gitab CI config check and added commit description.
+- None
 
- .azure-pipelines.yml | 3 ++-
- .gitlab-ci.yml       | 3 ++-
- 2 files changed, 4 insertions(+), 2 deletions(-)
+ Makefile             | 20 ++++++++++++++++++--
+ scripts/Makefile.lib | 17 +++++++++++++++--
+ 2 files changed, 33 insertions(+), 4 deletions(-)
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index d6f3fa423c6..f100c4493e6 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -65,7 +65,8 @@ stages:
-       # have no matches.
-       - script: git grep -E '^#[[:blank:]]*(define|undef)[[:blank:]]*CONFIG_'
-                   :^doc/ :^arch/arm/dts/ :^scripts/kconfig/lkc.h
--                  :^include/linux/kconfig.h :^tools/ && exit 1 || exit 0
-+                  :^include/linux/kconfig.h :^tools/ :^devicetree-rebasing/ &&
-+                  exit 1 || exit 0
+diff --git a/Makefile b/Makefile
+index 750bbdb1b71..d8d168cd4c3 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1158,12 +1158,28 @@ endif
+ 	@# disabling OF_BOARD.
+ 	$(call cmd,ofcheck,$(KCONFIG_CONFIG))
  
-   - job: docs
-     displayName: 'Build documentation'
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index fee165198ae..96ca9f72bbc 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -161,7 +161,8 @@ check for new CONFIG symbols outside Kconfig:
-     # have no matches.
-     - git grep -E '^#[[:blank:]]*(define|undef)[[:blank:]]*CONFIG_'
-         :^doc/ :^arch/arm/dts/ :^scripts/kconfig/lkc.h
--        :^include/linux/kconfig.h :^tools/ && exit 1 || exit 0
-+        :^include/linux/kconfig.h :^tools/ :^devicetree-rebasing/ &&
-+        exit 1 || exit 0
+-PHONY += dtbs
++PHONY += dtbs dtbs_check
+ dtbs: dts/dt.dtb
+ 	@:
+-dts/dt.dtb: u-boot
++dts/dt.dtb: dtbs_prepare u-boot
+ 	$(Q)$(MAKE) $(build)=dts dtbs
  
- # build documentation
- docs:
++dtbs_prepare: prepare3
++
++ifneq ($(filter dtbs_check, $(MAKECMDGOALS)),)
++export CHECK_DTBS=y
++endif
++
++ifneq ($(CHECK_DTBS),)
++dtbs_prepare: dt_binding_check
++endif
++
++dtbs_check: dt_binding_check dtbs
++
++DT_BINDING_DIR := devicetree-rebasing/Bindings
++dt_binding_check: scripts_dtc
++	$(Q)$(MAKE) $(build)=$(DT_BINDING_DIR) $(DT_BINDING_DIR)/processed-schema.json
++
+ quiet_cmd_copy = COPY    $@
+       cmd_copy = cp $< $@
+ 
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index 16bbc277a9f..27b9437027c 100644
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -356,8 +356,21 @@ endif
+ 
+ dtsi_include_list_deps = $(addprefix $(obj)/,$(subst $(quote),,$(dtsi_include_list)))
+ 
+-$(obj)/%.dtb: $(src)/%.dts $(DTC) $(dtsi_include_list_deps) FORCE
+-	$(call if_changed_dep,dtc)
++ifneq ($(CHECK_DTBS),)
++DT_CHECKER ?= dt-validate
++DT_CHECKER_FLAGS ?= $(if $(DT_SCHEMA_FILES),-l $(DT_SCHEMA_FILES),-m)
++DT_BINDING_DIR := devicetree-rebasing/Bindings
++DT_TMP_SCHEMA := $(objtree)/$(DT_BINDING_DIR)/processed-schema.json
++
++quiet_cmd_dtb = DTC_CHK $@
++      cmd_dtb = $(cmd_dtc) ; $(DT_CHECKER) $(DT_CHECKER_FLAGS) -u $(srctree)/$(DT_BINDING_DIR) -p $(DT_TMP_SCHEMA) $@ || true
++else
++quiet_cmd_dtb = $(quiet_cmd_dtc)
++      cmd_dtb = $(cmd_dtc)
++endif
++
++$(obj)/%.dtb: $(src)/%.dts $(DTC) $(dtsi_include_list_deps) $(DT_TMP_SCHEMA) FORCE
++	$(call if_changed_dep,dtb)
+ 
+ pre-tmp = $(subst $(comma),_,$(dot-target).pre.tmp)
+ dtc-tmp = $(subst $(comma),_,$(dot-target).dts.tmp)
 -- 
 2.34.1
 
