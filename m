@@ -4,84 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F2CEC3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 16:01:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E2F7C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 16:04:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBC4887ACD;
-	Thu, 28 Dec 2023 17:01:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B892487ACD;
+	Thu, 28 Dec 2023 17:04:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XXXXl5OG";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hRFpBhnO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1763987ACD; Thu, 28 Dec 2023 17:01:51 +0100 (CET)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id 127D587ACD; Thu, 28 Dec 2023 17:04:53 +0100 (CET)
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E117387AC9
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 17:01:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AA10587A84
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 17:04:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-5e74b4d5445so49802947b3.1
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 08:01:48 -0800 (PST)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-28c17b6f91bso1520854a91.0
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 08:04:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703779307; x=1704384107; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=LTcBehAaWjNhU9yAiYDtTVrGguEtk+11Zn9OIzkvCoo=;
- b=XXXXl5OGCvfdL16/Y+bSd2J9u/MvrkRIz/Nc2leNIhR5QXPkOA1zhqq4XBY2zSLvwH
- W0G3Jwotz0QG6ZEEu/v2LoXmqy0GijjxPMkPQjAYkB9yUe/b8gD/QCFmmuWmnHm9PBUT
- fxrxrr0tElVoBTBGJeNPrOBlFhBJahPjlNXhg=
+ d=linaro.org; s=google; t=1703779489; x=1704384289; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=R7oYFXIf/ND9F86BZ4HVg9BqeukEVZiXMqPi/63CRFI=;
+ b=hRFpBhnO3n2u6oUBYsCXtO3Wr57is2wQU48KPkk6wVwcTIgrpv+VI5OLahIkJO3GgP
+ AXnRz4Kmokl95864OY/GyUdMNVZdNl7xxZE3OjHaQg5SpTKkDF76O33ctfk0a3dx/xRM
+ PdKiClUaagrG5zuuoawZxWWk3W3JlmaEx8g8JLxOYt1nD+6tjMLqLTtaKDVsF3tw2e3x
+ r5AXGwOl+mLCHVp7SzNzQ3Kw4iokSd5bisw3YdVTTMMN1qZk3l3QpMkPuXPoDKR3x8t7
+ gDKxOgsVtfDruMh7dxgA9xUEndhLCQLhFHqWcD1d5+kn9uT+MkZE0S0E//sKXa8B1e9W
+ KTPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703779307; x=1704384107;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LTcBehAaWjNhU9yAiYDtTVrGguEtk+11Zn9OIzkvCoo=;
- b=YxpUFrXw05ujNPWkhCblh9Sc0iwICiCNARROmcvUDHJvOXrpr/M+f1M9s4NkMA+RCX
- fOPaq30e5nOJrEzejvyRyknhzbpp0RKZtXL4Sx+bVuTPdWXOOnWjIN47kB7d7cKpGmXC
- ctuXVO5oMZ+EibkW0gjcgfNFtIWccQMj6qkSBBzbccc4WC8bebUbORxuxVYF25hWZhrj
- ejT9PHmFi00Sus28ZIcvVvzQFfwDzoSM3V/sUmrruJSIho9PERhvjhA3lvx6MuOlZDQj
- /DFltXzKublNUuy1iqa4BAZ5h15L9XnY9sJJsXOKojpcIobCMwxrKh41pj2sM+pakEZM
- gukg==
-X-Gm-Message-State: AOJu0YyxyqFNAlLQmbOB1Ve1D4phgEmuGgQK0sg0PNm5Q4VBq51BJ6tJ
- GhTV9YUj3B0ZzUSHzOCKv4uLeTUkYemUtA==
-X-Google-Smtp-Source: AGHT+IFWo2GclHjYNj0wdgX9yDf7f/AwR0vyCEIhv81SibnHlaiFQQNUdLAy6/2KkZgoDm/wHZ9SIA==
-X-Received: by 2002:a81:be12:0:b0:5ef:d5e2:eae2 with SMTP id
- i18-20020a81be12000000b005efd5e2eae2mr116905ywn.21.1703779307615; 
- Thu, 28 Dec 2023 08:01:47 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- w126-20020a817b84000000b005e79f80959bsm7630097ywc.112.2023.12.28.08.01.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Dec 2023 08:01:47 -0800 (PST)
-Date: Thu, 28 Dec 2023 11:01:44 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>,
- Baruch Siach <baruch@tkos.co.il>, Bin Meng <bmeng.cn@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerry Van Baren <vanbaren@cideas.com>,
- Michal Simek <michal.simek@amd.com>, Nikhil M Jain <n-jain1@ti.com>,
- Qu Wenruo <wqu@suse.com>, Sean Anderson <seanga2@gmail.com>,
- Stefan Roese <sr@denx.de>
-Subject: Re: [PATCH v5] fdt: Allow the devicetree to come from a bloblist
-Message-ID: <20231228160144.GJ2652760@bill-the-cat>
-References: <20231228133654.2356023-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1703779489; x=1704384289;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=R7oYFXIf/ND9F86BZ4HVg9BqeukEVZiXMqPi/63CRFI=;
+ b=uYRD8KZxRThhaMS3c51bSSj1AUzAs46VD7As1S6UKKmsAwseK6ACWzpeUOYio/Dfuh
+ iJuz+Mxn0FlPt5H4PZY7fqNeD6TVKCqZF0JmhUz44bNFLI3579p9kdMSsp1WrXCQYvJ1
+ +qbsvdzIVG6b9EtZd/6+TUeUFCtK8umr6DXlrqk3pBllYACqboPTN0zBohO5nIJei0CY
+ dhRYwEnKVssx3/q97IJ9rDTL4fxB61If5qZhrlsJxM1Qi0+cSOziepqljLUA4KjyYfXm
+ /ir9T6uyEzM61gtd/gZeEiJKIQuICTh9YtGKbHJXEPMsza7RJOrxjiCGonmG5JCJ27cv
+ mJ9g==
+X-Gm-Message-State: AOJu0Yx0JItvcf996Zu3X/16sCKpQsw1LiL5gqkZrpzDJ28JCidOUZ1a
+ C6uEw6/cas+gId6EvyQwgY/pl2k0peJkibnTFV3SCKJMy9pIPQ==
+X-Google-Smtp-Source: AGHT+IGWWjy6U6Kk4N7G7J+hi9KR1xt/blnsodNCkEcu2yU3etJoQmiYArRhTsWOcWBRe0mlZE1KIdDsI9tHtKekC7k=
+X-Received: by 2002:a17:90a:d56:b0:28c:10b:82 with SMTP id
+ 22-20020a17090a0d5600b0028c010b0082mr3376755pju.89.1703779488957; 
+ Thu, 28 Dec 2023 08:04:48 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="jyKLbjQJEw9cbRvU"
-Content-Disposition: inline
-In-Reply-To: <20231228133654.2356023-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231227210712.712937-1-raymond.mao@linaro.org>
+ <20231227210712.712937-9-raymond.mao@linaro.org>
+ <CAC_iWjJ2GAOU93x1gHPYKXyiU0j6Tp0yHqeCtsctY3mOdz+9VA@mail.gmail.com>
+In-Reply-To: <CAC_iWjJ2GAOU93x1gHPYKXyiU0j6Tp0yHqeCtsctY3mOdz+9VA@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Thu, 28 Dec 2023 11:04:37 -0500
+Message-ID: <CAEfUkU+wUZJ2cb98sHAcbF-4HbN5-G2NVCSjX3ehpAkHNKUgUw@mail.gmail.com>
+Subject: Re: [PATCH v4 08/12] bloblist: Handle alignment with a void entry
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
+ Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,95 +88,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Ilias,
 
---jyKLbjQJEw9cbRvU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 28 Dec 2023 at 06:32, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+wrote:
 
-On Thu, Dec 28, 2023 at 01:36:54PM +0000, Simon Glass wrote:
+> Hi Raymond,
+>
+> On Wed, 27 Dec 2023 at 23:08, Raymond Mao <raymond.mao@linaro.org> wrote:
+> >
+> > From: Simon Glass <sjg@chromium.org>
+> >
+> > Rather than setting the alignment using the header size, add an entirely
+> > new entry to cover the gap left by the alignment.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >  common/bloblist.c | 23 +++++++++++++++++++----
+> >  1 file changed, 19 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/common/bloblist.c b/common/bloblist.c
+> > index 705d9c6ae9..73dbbc01c0 100644
+> > --- a/common/bloblist.c
+> > +++ b/common/bloblist.c
+> > @@ -142,7 +142,7 @@ static int bloblist_addrec(uint tag, int size, int
+> align_log2,
+> >  {
+> >         struct bloblist_hdr *hdr = gd->bloblist;
+> >         struct bloblist_rec *rec;
+> > -       int data_start, new_alloced;
+> > +       int data_start, aligned_start, new_alloced;
+> >
+> >         if (!align_log2)
+> >                 align_log2 = BLOBLIST_ALIGN_LOG2;
+> > @@ -151,10 +151,25 @@ static int bloblist_addrec(uint tag, int size, int
+> align_log2,
+> >         data_start = map_to_sysmem(hdr) + hdr->alloced + sizeof(*rec);
+> >
+> >         /* Align the address and then calculate the offset from
+> ->alloced */
+> > -       data_start = ALIGN(data_start, 1U << align_log2) -
+> map_to_sysmem(hdr);
+> > +       aligned_start = ALIGN(data_start, 1U << align_log2) - data_start;
+> > +
+> > +       /* If we need to create a dummy record, create it */
+> > +       if (aligned_start) {
+> > +               int void_size = aligned_start - sizeof(*rec);
+> > +               struct bloblist_rec *vrec;
+> > +               int ret;
+> > +
+> > +               ret = bloblist_addrec(BLOBLISTT_VOID, void_size, 0,
+> &vrec);
+>
+> I just noticed the 'BLOBLISTT'. Is that on purpose? or a typo?
+>
+> > +               if (ret)
+> > +                       return log_msg_ret("void", ret);
+> > +
+> > +               /* start the record after that */
+> > +               data_start = map_to_sysmem(hdr) + hdr->alloced +
+> sizeof(*vrec);
+> > +       }
+> >
+> >         /* Calculate the new allocated total */
+> > -       new_alloced = data_start + ALIGN(size, 1U << align_log2);
+> > +       new_alloced = data_start - map_to_sysmem(hdr) +
+> > +               ALIGN(size, 1U << align_log2);
+>
+> So, wouldn't it make more sense to add the dummy record and align the
+> whole thing *after* we've added the entry?
+> Doing it like this might leave the last entry on an unaligned boundary, no?
+>
+> The spec just cares about the TE *data* starts at an aligned address but
+not the TE header.
+Not sure if I fully understand your question but each TE *data* will start
+at an aligned address
+after calling `bloblist_addrec()`.
+And each TE is allowed to have its own alignment value, so we have to do
+the padding when
+a TE is being added but cannot predict the alignment value for the next TE
+- that means we
+cannot do the padding after each TE is added.
 
-> Standard passage provides for a bloblist to be passed from one firmware
-> phase to the next. That can be used to pass the devicetree along as well.
-> Add an option to support this.
->=20
-> Tests for this will be added as part of the Universal Payload work.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> The discussion on this was not resolved and is now important due to the
-> bloblist series from Raymond. So I am sending it again since I believe
-> this is a better starting point than building on OF_BOARD
-[snip]
-> @@ -1662,23 +1667,42 @@ static void setup_multi_dtb_fit(void)
-> =20
->  int fdtdec_setup(void)
->  {
-> -	int ret;
-> +	int ret =3D -ENOENT;
-> +
-> +	/* If allowing a bloblist, check that first */
-> +	if (CONFIG_IS_ENABLED(OF_BLOBLIST)) {
-> +		ret =3D bloblist_maybe_init();
-> +		if (!ret) {
-> +			gd->fdt_blob =3D bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-> +			if (gd->fdt_blob) {
-> +				gd->fdt_src =3D FDTSRC_BLOBLIST;
-> +				log_debug("Devicetree is in bloblist at %p\n",
-> +					  gd->fdt_blob);
-> +			} else {
-> +				log_debug("No FDT found in bloblist\n");
-> +				ret =3D -ENOENT;
-> +			}
-> +		}
-> +	}
-> =20
-> -	/* The devicetree is typically appended to U-Boot */
-> -	if (IS_ENABLED(CONFIG_OF_SEPARATE)) {
-> -		gd->fdt_blob =3D fdt_find_separate();
-> -		gd->fdt_src =3D FDTSRC_SEPARATE;
-> -	} else { /* embed dtb in ELF file for testing / development */
-> -		gd->fdt_blob =3D dtb_dt_embedded();
-> -		gd->fdt_src =3D FDTSRC_EMBED;
-> +	/* Otherwise, the devicetree is typically appended to U-Boot */
-> +	if (ret) {
-> +		if (IS_ENABLED(CONFIG_OF_SEPARATE)) {
-> +			gd->fdt_blob =3D fdt_find_separate();
-> +			gd->fdt_src =3D FDTSRC_SEPARATE;
-> +		} else { /* embed dtb in ELF file for testing / development */
-> +			gd->fdt_blob =3D dtb_dt_embedded();
-> +			gd->fdt_src =3D FDTSRC_EMBED;
-> +		}
->  	}
+[...]
 
-This whole if/else tree looks wrong today, and then wrong with this
-patch. If we have an embedded device tree, which should only be used for
-development (or special case needs, I _think_ some users today are using
-this for security type needs), it must win and be used. The over-ride
-switch was set, and should be used. Then, I don't know if we should be
-saying "the user provided a tree via OF_SEPARATE, it should be used" or
-"the device has passed us a tree via standard mechanism, it should be
-used" is the higher priority. I really don't know which is more valid.
-
---=20
-Tom
-
---jyKLbjQJEw9cbRvU
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWNm+gACgkQFHw5/5Y0
-tyy8kAwAmbVuuRyfUyQsD19EnXobY9LOMYnFWHzAiV5bLhuYL1v/xfXKwXz7hOXR
-5itBndX5wiZfDllZScOv0p/Glr1nB4u7VX/4zPtx2tEoWK45wQeG3i1cm5TEcTkp
-nGYSSZEyFjQu0SqgG9Mi037rVdUX5vPfOzlOEXISLoUCa0IQ0udPl7+c2mG3jFFd
-tPH59tkRFCaLPoyB9/s6SCuizrXM+mCdIroxNtHT8+YqrlxpJ/Ej4sjbptXMNwH3
-wEAar4wEhfeIyeqZmfeFMzfdBAKJesXNiEd7pZWUlsY/xk0ykQrY7jprIYTKmBj7
-KhakRM9HoADMjGWoF48MBwdp4Rrf4j0orFtkylPh7VWDrBoWpwrKGzkcrNaQd2oo
-PF3hzhWsxi6pdjntnQvasVadS4yXMngSegHnI3d3EkZZDdbkznxGR44pxq6wgM6b
-8aGYnbCAHv1Z0wnI9863Ia2//1KmFhRc3pxF1wJ9ZYZy7aJvnysCAI4MnAkWBvXx
-iWQ0awac
-=eCpO
------END PGP SIGNATURE-----
-
---jyKLbjQJEw9cbRvU--
+Thanks and regards,
+Raymond
