@@ -4,89 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1710BC47072
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 07:30:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09DA8C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 07:37:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1ECE0879A8;
-	Thu, 28 Dec 2023 08:30:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 5500E874E0;
+	Thu, 28 Dec 2023 08:37:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ErDC+6Rn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KKRugHRl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73C0F8798A; Thu, 28 Dec 2023 08:30:34 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F2872874DD; Thu, 28 Dec 2023 08:37:23 +0100 (CET)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4E92878FC
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 08:30:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CC1D187745
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 08:37:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 02AFE3F73C
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 07:30:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1703748630;
- bh=mQyPqLDTYu+79m785nHXXP8xI7VMaQZ5NdyhSd6xc8k=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=ErDC+6RnNefz8b3uJ3+WV7VxTmOO45mU0Pwf9FuZILTbfAJSx6BeCeiu0OoUS49cN
- lbCuKgU15lSY3LbTK7AkceRA8G8tj6v+FWvzHmE8RXCIlA0EcqKMVCetWgLo3UWsBU
- fAshrmf9sltH7b3PWjDRO02E60TLxH0fDdhxUspgpCnQI/PF+mfEgNnEHcPTKfL6g8
- P1/N7aWBnQ594uesvciuuB5EfE3VPs4V9J2cLlx4NX1zKK5oIUvRu52bLxGhSHmY4l
- N+OhgTAnoiBas6O+iRR5LoIbzoXKWfWe7lRv9n6W257B8jeztQZqCdDrwBfOoNi2/+
- DXx8SGBLm2VPg==
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-3369724e899so3632504f8f.1
- for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 23:30:30 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2ccc5fca3f6so27334511fa.1
+ for <u-boot@lists.denx.de>; Wed, 27 Dec 2023 23:37:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1703749041; x=1704353841; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=dqdbKFYm4jW0Qbvus3uFBjVDd/WBd+Adjje9LXdA+No=;
+ b=KKRugHRlHQcINNRaX3rKqAH2Vf5HaxEfHLWexcsnD39sR0iSdIrjGgUm3QOI3S4Wqw
+ 5y4CqL55E0L3mqAXHMP9eg2CwTU77/KY82i71UjpNGfSxO8Kdz8XmejvBzATBE2bgaOg
+ rK9t+uEdvu/SmJrxfj+WWRsGf+PeQNS2GqbzoqH/NDD9z2xE8r8qP48+ngyNppDzi0s7
+ wa7gnThhZVYPsUctaxN8H5Kq1PV0m7MzHnhHPNLz3MojgnBvFx2NlvUKZap5RD7vV2fr
+ bfe5bQOYBQeE+ckHiouz/3YWKNaWTc0ejOmlndN/mgPwllD4PO6d/dGIn0zIc0tnQTQh
+ Q4Dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703748629; x=1704353429;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mQyPqLDTYu+79m785nHXXP8xI7VMaQZ5NdyhSd6xc8k=;
- b=EYGN0i4pabUhOwfhxX0x6issijywvb54dhPlnx425dkqRBRm61jaFtHJtioC92JQRb
- svbBHk+nDhbCgMRM+m4Zv2/I/7R5FVPVwChwjtJTuwCpQGhYrRgQTQ0d2IDRxS0qOWJd
- w9C5LMxF6c3kRH2J0sEp1iodev+aUoYOjbMsRPmu4K7CEyUr//ZrSDW96yCyXd5QHJ4N
- 1Wae4VA4dPxTocDcmJv+xcUDsV2+tPGHDgam2OE7+GupXBeO1LyB0NQrS1tF1hr5Uns8
- WRX3sUBAvsIyrnJzdUnYvthfsjZlXp/dmrPV8VM6eugf7RybAen4JardOl1NOMPGeuiB
- cFNg==
-X-Gm-Message-State: AOJu0YyN19e8aACXqDdPYBPMV1brg0baStFVAtiyL5eCQT5KoyC3FuFc
- OzZxg/0laAMOU2i4EWMvfgpKwnf2vafv83ipBlRc28XjyurKAIvHJbOBoWr5sKXn6ARKKSOY3L1
- AF+9+qnVWVsMz1pP93h62BWFu0TaEaU8XyHsCmRGivKwzYg==
-X-Received: by 2002:a05:600c:4450:b0:40c:1db4:3a53 with SMTP id
- v16-20020a05600c445000b0040c1db43a53mr5265894wmn.157.1703748629362; 
- Wed, 27 Dec 2023 23:30:29 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IF9b2z9hyfblHO8b1VJ8ywYR2eiPUgNC5grpRnRWcxHaRzYyB2yQ540xyp+FcVjis+p/Y9kmA==
-X-Received: by 2002:a05:600c:4450:b0:40c:1db4:3a53 with SMTP id
- v16-20020a05600c445000b0040c1db43a53mr5265888wmn.157.1703748629146; 
- Wed, 27 Dec 2023 23:30:29 -0800 (PST)
-Received: from x13s.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de.
- [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
- bg42-20020a05600c3caa00b0040d6b91efd9sm967191wmb.44.2023.12.27.23.30.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Dec 2023 23:30:28 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 2/2] cpu: riscv: set correct SMBIOS processor family value
-Date: Thu, 28 Dec 2023 08:30:24 +0100
-Message-ID: <20231228073024.6508-3-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20231228073024.6508-1-heinrich.schuchardt@canonical.com>
-References: <20231228073024.6508-1-heinrich.schuchardt@canonical.com>
+ d=1e100.net; s=20230601; t=1703749041; x=1704353841;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dqdbKFYm4jW0Qbvus3uFBjVDd/WBd+Adjje9LXdA+No=;
+ b=YAujAxb9I1kSwXk93lLjnHMzSCqEnut0y6iHimfDby2Zar76V7OzFuvtUmTLCAD1Op
+ 3IivgQx0gr+qLa1LjUHF8jzu7UWmMmW+JbXBKonF2RxSdZ0akEJCnYeKnWUScpg6C4eW
+ qgjiZdpBGk4b54hfjpSakGcIig3i4N21RKKMqNNuumN/75Al8yTfkO3DS3pDmMbVHAsi
+ XZLj/9EeM1A/kjr2viH8g6QnUIGrJ9ovQX4jI9cqxz5WqYP0tLfv73FBCKOkKgBkew3l
+ l4/SqdZyTVts7ux+lyuY0XyPvt0/unUZyA5Wkkn4d2tdN66nevLQJllXBHDiPcrl7oTj
+ SjKQ==
+X-Gm-Message-State: AOJu0Yz69rtm7DMdgeJ2/rV5TEDx0X66goXNq/eTZrElaeO/+I+95aqG
+ y+MY36cZzxaxIqaOdSbykGg0WlSnHGq4xBzQY+xEZWJT1htY0A==
+X-Google-Smtp-Source: AGHT+IERmGFR4dO6hI8sxchpIkv2H3aIODz8F6C84jxfSjF6aQowgHA7v0IJmAOWFZFVzdsR+BdfEv6+Td+RvFiU5IA=
+X-Received: by 2002:ac2:5dd5:0:b0:50e:4f64:9c78 with SMTP id
+ x21-20020ac25dd5000000b0050e4f649c78mr3550735lfq.129.1703749041103; Wed, 27
+ Dec 2023 23:37:21 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231227210712.712937-1-raymond.mao@linaro.org>
+ <20231227210712.712937-11-raymond.mao@linaro.org>
+In-Reply-To: <20231227210712.712937-11-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 28 Dec 2023 09:36:45 +0200
+Message-ID: <CAC_iWjJ4JA3yQ4NFG=NYMRQX7esqCfOYQaySjojgUyhjJTgXfw@mail.gmail.com>
+Subject: Re: [PATCH v4 10/12] bloblist: Adjust the bloblist header
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
+ Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,40 +86,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The SMBIOS specification requires to set the processor family in the type 4
-(Processor Information) table to specific values depending only on the
-bitness of the system (0x200 for RV32 and 0x201 for RV64).
+Hi Raymond,
 
-With this patch dmidecode shows
+[...]
 
-    Handle 0x0004, DMI type 4, 48 bytes
-    Processor Information
-	Socket Designation: Not Specified
-	Type: Central Processor
-	Family: RV64
+>
+>  void bloblist_show_list(void)
+> @@ -463,7 +477,7 @@ void bloblist_reloc(void *to, uint to_size, void *from, uint from_size)
+>
+>         memcpy(to, from, from_size);
+>         hdr = to;
+> -       hdr->size = to_size;
+> +       hdr->total_size = to_size;
+>  }
+>
+>  int bloblist_init(void)
+> @@ -493,7 +507,7 @@ int bloblist_init(void)
+>                                     addr, ret);
+>                 } else {
+>                         /* Get the real size, if it is not what we expected */
+> -                       size = gd->bloblist->size;
+> +                       size = gd->bloblist->total_size;
+>                 }
+>         }
+>         if (ret) {
+> diff --git a/include/bloblist.h b/include/bloblist.h
+> index 7024d7bf9e..4ec4b3d449 100644
+> --- a/include/bloblist.h
+> +++ b/include/bloblist.h
+> @@ -166,32 +166,33 @@ enum bloblist_tag_t {
+>   * from the last.
+>   *
+>   * @magic: BLOBLIST_MAGIC
+> + * @chksum: checksum for the entire bloblist allocated area. Since any of the
+> + *     blobs can be altered after being created, this checksum is only valid
+> + *     when the bloblist is finalized before jumping to the next stage of boot.
+> + *     This is the value needed to make all checksummed bytes sum to 0
+>   * @version: BLOBLIST_VERSION
+>   * @hdr_size: Size of this header, normally sizeof(struct bloblist_hdr). The
+>   *     first bloblist_rec starts at this offset from the start of the header
+> - * @flags: Space for BLOBLISTF... flags (none yet)
+> - * @size: Total size of the bloblist (non-zero if valid) including this header.
+> - *     The bloblist extends for this many bytes from the start of this header.
+> - *     When adding new records, the bloblist can grow up to this size.
+> - * @alloced: Total size allocated so far for this bloblist. This starts out as
+> + * @align_log2: Power of two of the maximum alignment required by this list
+> + * @used_size: Size allocated so far for this bloblist. This starts out as
+>   *     sizeof(bloblist_hdr) since we need at least that much space to store a
+>   *     valid bloblist
+> + * @total_size: The number of total bytes that the bloblist can occupy.
+> + *     Any blob producer must check if there is sufficient space before adding
+> + *     a record to the bloblist.
+> + * @flags: Space for BLOBLISTF... flags (none yet)
+>   * @spare: Spare space (for future use)
+> - * @chksum: checksum for the entire bloblist allocated area. Since any of the
+> - *     blobs can be altered after being created, this checksum is only valid
+> - *     when the bloblist is finalised before jumping to the next stage of boot.
+> - *     This is the value needed to make all checksummed bytes sum to 0
+>   */
+>  struct bloblist_hdr {
+>         u32 magic;
+> -       u32 version;
+> -       u32 hdr_size;
+> +       u8 chksum;
+> +       u8 version;
+> +       u8 hdr_size;
+> +       u8 align_log2;
+> +       u32 used_size;
+> +       u32 total_size;
+>         u32 flags;
+> -
+> -       u32 size;
+> -       u32 alloced;
+>         u32 spare;
+> -       u32 chksum;
+>  };
 
-for qemu-riscv64_smode_defconfig.
+The patch generally looks ok, but while we are renaming things, can't
+we just copy what the spec says instead of slightly changing the
+names?
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- drivers/cpu/riscv_cpu.c | 4 ++++
- 1 file changed, 4 insertions(+)
+With this applied we end up with
+  struct bloblist_hdr {
+         u32 magic;
+         u8 chksum;
+         u8 version;
+         u8 hdr_size;
+         u8 align_log2;
+         u32 used_size;
+         u32 total_size;
+         u32 flags;
+         u32 spare;
+  };
 
-diff --git a/drivers/cpu/riscv_cpu.c b/drivers/cpu/riscv_cpu.c
-index d6484d7f4b..034b9b49c0 100644
---- a/drivers/cpu/riscv_cpu.c
-+++ b/drivers/cpu/riscv_cpu.c
-@@ -98,6 +98,10 @@ static int riscv_cpu_bind(struct udevice *dev)
- 
- 	/* save the hart id */
- 	plat->cpu_id = dev_read_addr(dev);
-+	if (IS_ENABLED(CONFIG_64BIT))
-+		plat->family = 0x201;
-+	else
-+		plat->family = 0x200;
- 	/* first examine the property in current cpu node */
- 	ret = dev_read_u32(dev, "timebase-frequency", &plat->timebase_freq);
- 	/* if not found, then look at the parent /cpus node */
--- 
-2.43.0
+Can you at least rename the ones you touch here properly?
+- Drop the patch that renames spare to _spare
+- used_size -> size
+- total_size -> max_size (which btw mean different things)
+- spare -> reserved
 
+
+Thanks
+/Ilias
+
+[...]
+
+Thanks
+/Ilias
