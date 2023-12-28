@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D18BCC3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 15:41:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DA96C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 15:41:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 429E187AD4;
+	by phobos.denx.de (Postfix) with ESMTP id A982687AD9;
 	Thu, 28 Dec 2023 16:40:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="H8D9kkga";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="aylhxlqm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B9E187AB4; Thu, 28 Dec 2023 16:39:36 +0100 (CET)
+ id 6DA0C87AA4; Thu, 28 Dec 2023 16:39:37 +0100 (CET)
 Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72B9B87A83
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 16:39:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B57A287AB6
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 16:39:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id B9D0110003A;
- Thu, 28 Dec 2023 18:39:31 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru B9D0110003A
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 365A110003B;
+ Thu, 28 Dec 2023 18:39:33 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 365A110003B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1703777971;
- bh=991fraxlfZvbzzsVn1BOrHM4o74vwGG99h9CuOHl1kQ=;
+ s=mail; t=1703777973;
+ bh=G1cy7ILkTIxV6Fpb2oF9IP+W04BIObpaGXEDSxmlrSM=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=H8D9kkga6PSB48Q8j0ROx8za/4szbFw5vdA6GlbvzJLlQHwrb3engQSw70j+HjcO+
- 3TsKhnvn2OuA63A6+fHnNN3JBSc0B07TBsozsro2fyDzTmUgIZ/MZh8UVH02zCvMSU
- zaBG8OfQ6NyhLkHz+WtLUsicy+oXVwkht+o4uQM0Hq1Fs+QtvyZlO3PR9adwRUbzAO
- mjr6cIqDYVEmKQu5s1b50Zsfkdhsen7+u3j7bVc+b200pSPh51MovUj6wip2/PP9Jk
- 3qYEzUPzAKt47A3lDWdankRfZbP1SzEZZfmDa+NBdkkGXeDfZ2Qno1CXSQO0kZc61i
- lXOZTOcARiwqg==
+ b=aylhxlqmjFfEPSp/FOkCoClatHN9OP/ciZPuXZgZcuR7G8/0BC8BB2E0kzW+yjyCv
+ sKWX0Ip7wRupCokJkomG7ZhvzkuVg2es9dTUEl4mJblLzVK9oujoDeV6h0bZ0cENhV
+ 10kVHvWFfpc9ey8c8eLCuArQc4UOTkOc3rLj4OwGGjGraSyMKNPZBsIHV/srpXVQQy
+ CYKkDNxXvNdlyAVbAKFGZkABUXE9jHs/8N4urmXjDQhgoj5tWxNmUZIc1wvvlWt7MV
+ 1tFIUSiHiuurlx9ZPwCILmB3+Nd3RXSH/VVEdhEHohQNWdEDb5aioMeaWlTSVZt3qr
+ CV8QfFR1F+Zcg==
 Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu, 28 Dec 2023 18:39:31 +0300 (MSK)
+ Thu, 28 Dec 2023 18:39:32 +0300 (MSK)
 Received: from cab-wsm-0029881.sberdevices.ru (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Thu, 28 Dec 2023 18:39:30 +0300
+ 15.2.1118.40; Thu, 28 Dec 2023 18:39:32 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <michal.simek@amd.com>, <marex@denx.de>, <michael@walle.cc>,
  <stcarlso@linux.microsoft.com>, <tobias@waldekranz.com>,
@@ -60,9 +60,9 @@ To: <michal.simek@amd.com>, <marex@denx.de>, <michael@walle.cc>,
  <mkorpershoek@baylibre.com>, <patrick.delaunay@foss.st.com>
 CC: <u-boot@lists.denx.de>, <kernel@salutedevices.com>, Alexey Romanov
  <avromanov@salutedevices.com>
-Subject: [PATCH v1 01/12] nand: move NAND initialization API to nand/core.c
-Date: Thu, 28 Dec 2023 18:39:04 +0300
-Message-ID: <20231228153922.84323-2-avromanov@salutedevices.com>
+Subject: [PATCH v1 03/12] nand: move nand_util.c to NAND core folder
+Date: Thu, 28 Dec 2023 18:39:06 +0300
+Message-ID: <20231228153922.84323-4-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231228153922.84323-1-avromanov@salutedevices.com>
 References: <20231228153922.84323-1-avromanov@salutedevices.com>
@@ -111,412 +111,1106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-nand_register() and nand_init() is generic API for both
-RAW and SPI NAND's. We have to move this functions
-from drivers/mtd/nand/raw/nand.c to drivers/mtd/nand/core.c.
-
-Functions designed to work with RAW NAND should remain
-in drivers/mtd/nand/raw/nand.c.
+This is right place for this API. Now, fastboot code uses this
+API: these functions should be available regardless of the
+selected NAND type (RAW / SPI).
 
 Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 ---
- drivers/mtd/Kconfig          |   2 +-
- drivers/mtd/nand/Kconfig     |  10 +++
- drivers/mtd/nand/core.c      | 136 +++++++++++++++++++++++++++++++++++
- drivers/mtd/nand/raw/Kconfig |  10 ---
- drivers/mtd/nand/raw/nand.c  | 134 ----------------------------------
- include/nand.h               |   2 +
- 6 files changed, 149 insertions(+), 145 deletions(-)
+ drivers/mtd/nand/Makefile        |   2 +-
+ drivers/mtd/nand/raw/nand_util.c | 511 -----------------------------
+ drivers/mtd/nand/util.c          | 543 +++++++++++++++++++++++++++++++
+ 3 files changed, 544 insertions(+), 512 deletions(-)
+ create mode 100644 drivers/mtd/nand/util.c
 
-diff --git a/drivers/mtd/Kconfig b/drivers/mtd/Kconfig
-index c56840c849..1902351719 100644
---- a/drivers/mtd/Kconfig
-+++ b/drivers/mtd/Kconfig
-@@ -260,7 +260,7 @@ config SYS_NAND_MAX_ECCPOS
+diff --git a/drivers/mtd/nand/Makefile b/drivers/mtd/nand/Makefile
+index 96e186600a..301b1bceff 100644
+--- a/drivers/mtd/nand/Makefile
++++ b/drivers/mtd/nand/Makefile
+@@ -1,7 +1,7 @@
+ # SPDX-License-Identifier: GPL-2.0+
  
- config SYS_NAND_MAX_CHIPS
- 	int "NAND max chips"
--	depends on MTD_RAW_NAND || CMD_ONENAND || TARGET_S5PC210_UNIVERSAL || \
-+	depends on MTD_RAW_NAND || MTD_SPI_NAND || CMD_ONENAND || TARGET_S5PC210_UNIVERSAL || \
- 		SPL_OMAP3_ID_NAND
- 	default 1
- 	help
-diff --git a/drivers/mtd/nand/Kconfig b/drivers/mtd/nand/Kconfig
-index 78ae04bdcb..9a1d4ac0dc 100644
---- a/drivers/mtd/nand/Kconfig
-+++ b/drivers/mtd/nand/Kconfig
-@@ -1,6 +1,16 @@
- config MTD_NAND_CORE
- 	tristate
+ ifeq ($(CONFIG_SPL_BUILD)$(CONFIG_TPL_BUILD),)
+-nandcore-objs := core.o bbt.o
++nandcore-objs := core.o bbt.o util.o
+ obj-$(CONFIG_MTD_NAND_CORE) += nandcore.o
+ obj-$(CONFIG_MTD_RAW_NAND) += raw/
+ obj-$(CONFIG_MTD_SPI_NAND) += spi/
+diff --git a/drivers/mtd/nand/raw/nand_util.c b/drivers/mtd/nand/raw/nand_util.c
+index 72cc24f403..9c18ce63b9 100644
+--- a/drivers/mtd/nand/raw/nand_util.c
++++ b/drivers/mtd/nand/raw/nand_util.c
+@@ -35,7 +35,6 @@
+ #include <jffs2/jffs2.h>
  
-+config SYS_MAX_NAND_DEVICE
-+	int "Maximum number of NAND devices to support"
-+	default 1
-+
-+config SYS_NAND_SELF_INIT
-+	bool
-+	help
-+	  This option, if enabled, provides more flexible and linux-like
-+	  NAND initialization process.
-+
- source "drivers/mtd/nand/raw/Kconfig"
+ typedef struct erase_info	erase_info_t;
+-typedef struct mtd_info		mtd_info_t;
  
- source "drivers/mtd/nand/spi/Kconfig"
-diff --git a/drivers/mtd/nand/core.c b/drivers/mtd/nand/core.c
-index 4b9dd6a926..ff298e3a0f 100644
---- a/drivers/mtd/nand/core.c
-+++ b/drivers/mtd/nand/core.c
-@@ -10,6 +10,7 @@
- #define pr_fmt(fmt)	"nand: " fmt
- 
- #include <common.h>
-+#include <nand.h>
- #include <watchdog.h>
- #ifndef __UBOOT__
- #include <linux/compat.h>
-@@ -18,6 +19,12 @@
- #include <linux/bitops.h>
- #include <linux/mtd/nand.h>
- 
-+int nand_curr_device = -1;
-+
-+static struct mtd_info *nand_info[CONFIG_SYS_MAX_NAND_DEVICE];
-+static char dev_name[CONFIG_SYS_MAX_NAND_DEVICE][8];
-+static unsigned long total_nand_size; /* in kiB */
-+
- /**
-  * nanddev_isbad() - Check if a block is bad
-  * @nand: NAND device
-@@ -250,6 +257,135 @@ void nanddev_cleanup(struct nand_device *nand)
+ /* support only for native endian JFFS2 */
+ #define cpu_to_je16(x) (x)
+@@ -395,513 +394,3 @@ int nand_unlock(struct mtd_info *mtd, loff_t start, size_t length,
+ 	return ret;
  }
- EXPORT_SYMBOL_GPL(nanddev_cleanup);
- 
-+struct mtd_info *get_nand_dev_by_index(int dev)
-+{
-+	if (dev < 0 || dev >= CONFIG_SYS_MAX_NAND_DEVICE || !nand_info[dev] ||
-+	    !nand_info[dev]->name)
-+		return NULL;
-+
-+	return nand_info[dev];
-+}
-+EXPORT_SYMBOL_GPL(get_nand_dev_by_index);
-+
-+int nand_mtd_to_devnum(struct mtd_info *mtd)
-+{
-+	int i;
-+
-+	for (i = 0; i < CONFIG_SYS_MAX_NAND_DEVICE; i++) {
-+		if (mtd && get_nand_dev_by_index(i) == mtd)
-+			return i;
-+	}
-+
-+	return -ENODEV;
-+}
-+EXPORT_SYMBOL_GPL(nand_mtd_to_devnum);
-+
-+/* Register an initialized NAND mtd device with the U-Boot NAND command. */
-+int nand_register(int devnum, struct mtd_info *mtd)
-+{
-+	if (devnum >= CONFIG_SYS_MAX_NAND_DEVICE)
-+		return -EINVAL;
-+
-+	nand_info[devnum] = mtd;
-+
-+	sprintf(dev_name[devnum], "nand%d", devnum);
-+	mtd->name = dev_name[devnum];
-+
-+#ifdef CONFIG_MTD
-+	/*
-+	 * Add MTD device so that we can reference it later
-+	 * via the mtdcore infrastructure (e.g. ubi).
-+	 */
-+	add_mtd_device(mtd);
-+#endif
-+
-+	total_nand_size += mtd->size / 1024;
-+
-+	if (nand_curr_device == -1)
-+		nand_curr_device = devnum;
-+
-+	return 0;
-+}
-+EXPORT_SYMBOL_GPL(nand_register);
-+
-+#ifdef CONFIG_MTD_CONCAT
-+static void create_mtd_concat(void)
-+{
-+	struct mtd_info *nand_info_list[CONFIG_SYS_MAX_NAND_DEVICE];
-+	int nand_devices_found = 0;
-+	int i;
-+
-+	for (i = 0; i < CONFIG_SYS_MAX_NAND_DEVICE; i++) {
-+		struct mtd_info *mtd = get_nand_dev_by_index(i);
-+		if (mtd != NULL) {
-+			nand_info_list[nand_devices_found] = mtd;
-+			nand_devices_found++;
-+		}
-+	}
-+	if (nand_devices_found > 1) {
-+		struct mtd_info *mtd;
-+		char c_mtd_name[16];
-+
-+		/*
-+		 * We detected multiple devices. Concatenate them together.
-+		 */
-+		sprintf(c_mtd_name, "nand%d", nand_devices_found);
-+		mtd = mtd_concat_create(nand_info_list, nand_devices_found,
-+					c_mtd_name);
-+
-+		if (mtd == NULL)
-+			return;
-+
-+		nand_register(nand_devices_found, mtd);
-+	}
-+
-+	return;
-+}
-+#else
-+static void create_mtd_concat(void)
-+{
-+}
-+#endif
-+
-+unsigned long nand_size(void)
-+{
-+	return total_nand_size;
-+}
-+EXPORT_SYMBOL_GPL(nand_size);
-+
-+void nand_init(void)
-+{
-+	static int initialized;
-+
-+	/*
-+	 * Avoid initializing NAND Flash multiple times,
-+	 * otherwise it will calculate a wrong total size.
-+	 */
-+	if (initialized)
-+		return;
-+	initialized = 1;
-+
-+#if CONFIG_IS_ENABLED(SYS_NAND_SELF_INIT)
-+	board_nand_init();
-+#else
-+	int i;
-+
-+	for (i = 0; i < CONFIG_SYS_MAX_NAND_DEVICE; i++)
-+		nand_init_chip(i);
-+#endif
-+
-+#ifdef CONFIG_SYS_NAND_SELECT_DEVICE
-+	/*
-+	 * Select the chip in the board/cpu specific driver
-+	 */
-+	board_nand_select_device(mtd_to_nand(get_nand_dev_by_index(nand_curr_device)),
-+				 nand_curr_device);
-+#endif
-+
-+	create_mtd_concat();
-+}
-+EXPORT_SYMBOL_GPL(nand_init);
-+
- MODULE_DESCRIPTION("Generic NAND framework");
- MODULE_AUTHOR("Boris Brezillon <boris.brezillon@free-electrons.com>");
- MODULE_LICENSE("GPL v2");
-diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
-index f0100a601d..31949f1dff 100644
---- a/drivers/mtd/nand/raw/Kconfig
-+++ b/drivers/mtd/nand/raw/Kconfig
-@@ -3,12 +3,6 @@ menuconfig MTD_RAW_NAND
- 	bool "Raw NAND Device Support"
- if MTD_RAW_NAND
- 
--config SYS_NAND_SELF_INIT
--	bool
--	help
--	  This option, if enabled, provides more flexible and linux-like
--	  NAND initialization process.
--
- config SPL_SYS_NAND_SELF_INIT
- 	bool
- 	depends on !SPL_NAND_SIMPLE
-@@ -29,10 +23,6 @@ config TPL_NAND_INIT
- config SPL_NAND_INIT
- 	bool
- 
--config SYS_MAX_NAND_DEVICE
--	int "Maximum number of NAND devices to support"
--	default 1
--
- config SYS_NAND_DRIVER_ECC_LAYOUT
- 	bool "Omit standard ECC layouts to save space"
- 	help
-diff --git a/drivers/mtd/nand/raw/nand.c b/drivers/mtd/nand/raw/nand.c
-index eacd99c4e2..edca824d77 100644
---- a/drivers/mtd/nand/raw/nand.c
-+++ b/drivers/mtd/nand/raw/nand.c
-@@ -15,68 +15,10 @@
- #define CFG_SYS_NAND_BASE_LIST { CFG_SYS_NAND_BASE }
  #endif
- 
--int nand_curr_device = -1;
 -
--static struct mtd_info *nand_info[CONFIG_SYS_MAX_NAND_DEVICE];
--
- #if !CONFIG_IS_ENABLED(SYS_NAND_SELF_INIT)
- static struct nand_chip nand_chip[CONFIG_SYS_MAX_NAND_DEVICE];
- static ulong base_address[CONFIG_SYS_MAX_NAND_DEVICE] = CFG_SYS_NAND_BASE_LIST;
--#endif
--
--static char dev_name[CONFIG_SYS_MAX_NAND_DEVICE][8];
--
--static unsigned long total_nand_size; /* in kiB */
--
--struct mtd_info *get_nand_dev_by_index(int dev)
+-/**
+- * check_skip_len
+- *
+- * Check if there are any bad blocks, and whether length including bad
+- * blocks fits into device
+- *
+- * @param mtd nand mtd instance
+- * @param offset offset in flash
+- * @param length image length
+- * @param used length of flash needed for the requested length
+- * Return: 0 if the image fits and there are no bad blocks
+- *         1 if the image fits, but there are bad blocks
+- *        -1 if the image does not fit
+- */
+-static int check_skip_len(struct mtd_info *mtd, loff_t offset, size_t length,
+-			  size_t *used)
 -{
--	if (dev < 0 || dev >= CONFIG_SYS_MAX_NAND_DEVICE || !nand_info[dev] ||
--	    !nand_info[dev]->name)
--		return NULL;
- 
--	return nand_info[dev];
--}
+-	size_t len_excl_bad = 0;
+-	int ret = 0;
 -
--int nand_mtd_to_devnum(struct mtd_info *mtd)
--{
--	int i;
+-	while (len_excl_bad < length) {
+-		size_t block_len, block_off;
+-		loff_t block_start;
 -
--	for (i = 0; i < CONFIG_SYS_MAX_NAND_DEVICE; i++) {
--		if (mtd && get_nand_dev_by_index(i) == mtd)
--			return i;
+-		if (offset >= mtd->size)
+-			return -1;
+-
+-		block_start = offset & ~(loff_t)(mtd->erasesize - 1);
+-		block_off = offset & (mtd->erasesize - 1);
+-		block_len = mtd->erasesize - block_off;
+-
+-		if (!nand_block_isbad(mtd, block_start))
+-			len_excl_bad += block_len;
+-		else
+-			ret = 1;
+-
+-		offset += block_len;
+-		*used += block_len;
 -	}
 -
--	return -ENODEV;
+-	/* If the length is not a multiple of block_len, adjust. */
+-	if (len_excl_bad > length)
+-		*used -= (len_excl_bad - length);
+-
+-	return ret;
 -}
 -
--/* Register an initialized NAND mtd device with the U-Boot NAND command. */
--int nand_register(int devnum, struct mtd_info *mtd)
+-#ifdef CONFIG_CMD_NAND_TRIMFFS
+-static size_t drop_ffs(const struct mtd_info *mtd, const u_char *buf,
+-			const size_t *len)
 -{
--	if (devnum >= CONFIG_SYS_MAX_NAND_DEVICE)
--		return -EINVAL;
+-	size_t l = *len;
+-	ssize_t i;
 -
--	nand_info[devnum] = mtd;
+-	for (i = l - 1; i >= 0; i--)
+-		if (buf[i] != 0xFF)
+-			break;
 -
--	sprintf(dev_name[devnum], "nand%d", devnum);
--	mtd->name = dev_name[devnum];
+-	/* The resulting length must be aligned to the minimum flash I/O size */
+-	l = i + 1;
+-	l = (l + mtd->writesize - 1) / mtd->writesize;
+-	l *=  mtd->writesize;
 -
--#ifdef CONFIG_MTD
 -	/*
--	 * Add MTD device so that we can reference it later
--	 * via the mtdcore infrastructure (e.g. ubi).
+-	 * since the input length may be unaligned, prevent access past the end
+-	 * of the buffer
 -	 */
--	add_mtd_device(mtd);
+-	return min(l, *len);
+-}
 -#endif
 -
--	total_nand_size += mtd->size / 1024;
+-/**
+- * nand_verify_page_oob:
+- *
+- * Verify a page of NAND flash, including the OOB.
+- * Reads page of NAND and verifies the contents and OOB against the
+- * values in ops.
+- *
+- * @param mtd		nand mtd instance
+- * @param ops		MTD operations, including data to verify
+- * @param ofs		offset in flash
+- * Return:		0 in case of success
+- */
+-int nand_verify_page_oob(struct mtd_info *mtd, struct mtd_oob_ops *ops,
+-			 loff_t ofs)
+-{
+-	int rval;
+-	struct mtd_oob_ops vops;
+-	size_t verlen = mtd->writesize + mtd->oobsize;
 -
--	if (nand_curr_device == -1)
--		nand_curr_device = devnum;
+-	memcpy(&vops, ops, sizeof(vops));
+-
+-	vops.datbuf = memalign(ARCH_DMA_MINALIGN, verlen);
+-
+-	if (!vops.datbuf)
+-		return -ENOMEM;
+-
+-	vops.oobbuf = vops.datbuf + mtd->writesize;
+-
+-	rval = mtd_read_oob(mtd, ofs, &vops);
+-	if (!rval)
+-		rval = memcmp(ops->datbuf, vops.datbuf, vops.len);
+-	if (!rval)
+-		rval = memcmp(ops->oobbuf, vops.oobbuf, vops.ooblen);
+-
+-	free(vops.datbuf);
+-
+-	return rval ? -EIO : 0;
+-}
+-
+-/**
+- * nand_verify:
+- *
+- * Verify a region of NAND flash.
+- * Reads NAND in page-sized chunks and verifies the contents against
+- * the contents of a buffer.  The offset into the NAND must be
+- * page-aligned, and the function doesn't handle skipping bad blocks.
+- *
+- * @param mtd		nand mtd instance
+- * @param ofs		offset in flash
+- * @param len		buffer length
+- * @param buf		buffer to read from
+- * Return:		0 in case of success
+- */
+-int nand_verify(struct mtd_info *mtd, loff_t ofs, size_t len, u_char *buf)
+-{
+-	int rval = 0;
+-	size_t verofs;
+-	size_t verlen = mtd->writesize;
+-	uint8_t *verbuf = memalign(ARCH_DMA_MINALIGN, verlen);
+-
+-	if (!verbuf)
+-		return -ENOMEM;
+-
+-	/* Read the NAND back in page-size groups to limit malloc size */
+-	for (verofs = ofs; verofs < ofs + len;
+-	     verofs += verlen, buf += verlen) {
+-		verlen = min(mtd->writesize, (uint32_t)(ofs + len - verofs));
+-		rval = nand_read(mtd, verofs, &verlen, verbuf);
+-		if (!rval || (rval == -EUCLEAN))
+-			rval = memcmp(buf, verbuf, verlen);
+-
+-		if (rval)
+-			break;
+-	}
+-
+-	free(verbuf);
+-
+-	return rval ? -EIO : 0;
+-}
+-
+-/**
+- * nand_write_skip_bad:
+- *
+- * Write image to NAND flash.
+- * Blocks that are marked bad are skipped and the is written to the next
+- * block instead as long as the image is short enough to fit even after
+- * skipping the bad blocks.  Due to bad blocks we may not be able to
+- * perform the requested write.  In the case where the write would
+- * extend beyond the end of the NAND device, both length and actual (if
+- * not NULL) are set to 0.  In the case where the write would extend
+- * beyond the limit we are passed, length is set to 0 and actual is set
+- * to the required length.
+- *
+- * @param mtd		nand mtd instance
+- * @param offset	offset in flash
+- * @param length	buffer length
+- * @param actual	set to size required to write length worth of
+- *			buffer or 0 on error, if not NULL
+- * @param lim		maximum size that actual may be in order to not
+- *			exceed the buffer
+- * @param buffer        buffer to read from
+- * @param flags		flags modifying the behaviour of the write to NAND
+- * Return:		0 in case of success
+- */
+-int nand_write_skip_bad(struct mtd_info *mtd, loff_t offset, size_t *length,
+-			size_t *actual, loff_t lim, u_char *buffer, int flags)
+-{
+-	int rval = 0, blocksize;
+-	size_t left_to_write = *length;
+-	size_t used_for_write = 0;
+-	u_char *p_buffer = buffer;
+-	int need_skip;
+-
+-	if (actual)
+-		*actual = 0;
+-
+-	blocksize = mtd->erasesize;
+-
+-	/*
+-	 * nand_write() handles unaligned, partial page writes.
+-	 *
+-	 * We allow length to be unaligned, for convenience in
+-	 * using the $filesize variable.
+-	 *
+-	 * However, starting at an unaligned offset makes the
+-	 * semantics of bad block skipping ambiguous (really,
+-	 * you should only start a block skipping access at a
+-	 * partition boundary).  So don't try to handle that.
+-	 */
+-	if ((offset & (mtd->writesize - 1)) != 0) {
+-		printf("Attempt to write non page-aligned data\n");
+-		*length = 0;
+-		return -EINVAL;
+-	}
+-
+-	need_skip = check_skip_len(mtd, offset, *length, &used_for_write);
+-
+-	if (actual)
+-		*actual = used_for_write;
+-
+-	if (need_skip < 0) {
+-		printf("Attempt to write outside the flash area\n");
+-		*length = 0;
+-		return -EINVAL;
+-	}
+-
+-	if (used_for_write > lim) {
+-		puts("Size of write exceeds partition or device limit\n");
+-		*length = 0;
+-		return -EFBIG;
+-	}
+-
+-	if (!need_skip && !(flags & WITH_DROP_FFS)) {
+-		rval = nand_write(mtd, offset, length, buffer);
+-
+-		if ((flags & WITH_WR_VERIFY) && !rval)
+-			rval = nand_verify(mtd, offset, *length, buffer);
+-
+-		if (rval == 0)
+-			return 0;
+-
+-		*length = 0;
+-		printf("NAND write to offset %llx failed %d\n",
+-			offset, rval);
+-		return rval;
+-	}
+-
+-	while (left_to_write > 0) {
+-		loff_t block_start = offset & ~(loff_t)(mtd->erasesize - 1);
+-		size_t block_offset = offset & (mtd->erasesize - 1);
+-		size_t write_size, truncated_write_size;
+-
+-		schedule();
+-
+-		if (nand_block_isbad(mtd, block_start)) {
+-			printf("Skip bad block 0x%08llx\n", block_start);
+-			offset += mtd->erasesize - block_offset;
+-			continue;
+-		}
+-
+-		if (left_to_write < (blocksize - block_offset))
+-			write_size = left_to_write;
+-		else
+-			write_size = blocksize - block_offset;
+-
+-		truncated_write_size = write_size;
+-#ifdef CONFIG_CMD_NAND_TRIMFFS
+-		if (flags & WITH_DROP_FFS)
+-			truncated_write_size = drop_ffs(mtd, p_buffer,
+-					&write_size);
+-#endif
+-
+-		rval = nand_write(mtd, offset, &truncated_write_size,
+-				p_buffer);
+-
+-		if ((flags & WITH_WR_VERIFY) && !rval)
+-			rval = nand_verify(mtd, offset,
+-				truncated_write_size, p_buffer);
+-
+-		offset += write_size;
+-		p_buffer += write_size;
+-
+-		if (rval != 0) {
+-			printf("NAND write to offset %llx failed %d\n",
+-				offset, rval);
+-			*length -= left_to_write;
+-			return rval;
+-		}
+-
+-		left_to_write -= write_size;
+-	}
 -
 -	return 0;
 -}
 -
--#if !CONFIG_IS_ENABLED(SYS_NAND_SELF_INIT)
- static void nand_init_chip(int i)
- {
- 	struct nand_chip *nand = &nand_chip[i];
-@@ -98,79 +40,3 @@ static void nand_init_chip(int i)
- 	nand_register(i, mtd);
- }
- #endif
--
--#ifdef CONFIG_MTD_CONCAT
--static void create_mtd_concat(void)
+-/**
+- * nand_read_skip_bad:
+- *
+- * Read image from NAND flash.
+- * Blocks that are marked bad are skipped and the next block is read
+- * instead as long as the image is short enough to fit even after
+- * skipping the bad blocks.  Due to bad blocks we may not be able to
+- * perform the requested read.  In the case where the read would extend
+- * beyond the end of the NAND device, both length and actual (if not
+- * NULL) are set to 0.  In the case where the read would extend beyond
+- * the limit we are passed, length is set to 0 and actual is set to the
+- * required length.
+- *
+- * @param mtd nand mtd instance
+- * @param offset offset in flash
+- * @param length buffer length, on return holds number of read bytes
+- * @param actual set to size required to read length worth of buffer or 0
+- * on error, if not NULL
+- * @param lim maximum size that actual may be in order to not exceed the
+- * buffer
+- * @param buffer buffer to write to
+- * Return: 0 in case of success
+- */
+-int nand_read_skip_bad(struct mtd_info *mtd, loff_t offset, size_t *length,
+-		       size_t *actual, loff_t lim, u_char *buffer)
 -{
--	struct mtd_info *nand_info_list[CONFIG_SYS_MAX_NAND_DEVICE];
--	int nand_devices_found = 0;
+-	int rval;
+-	size_t left_to_read = *length;
+-	size_t used_for_read = 0;
+-	u_char *p_buffer = buffer;
+-	int need_skip;
+-
+-	if ((offset & (mtd->writesize - 1)) != 0) {
+-		printf("Attempt to read non page-aligned data\n");
+-		*length = 0;
+-		if (actual)
+-			*actual = 0;
+-		return -EINVAL;
+-	}
+-
+-	need_skip = check_skip_len(mtd, offset, *length, &used_for_read);
+-
+-	if (actual)
+-		*actual = used_for_read;
+-
+-	if (need_skip < 0) {
+-		printf("Attempt to read outside the flash area\n");
+-		*length = 0;
+-		return -EINVAL;
+-	}
+-
+-	if (used_for_read > lim) {
+-		puts("Size of read exceeds partition or device limit\n");
+-		*length = 0;
+-		return -EFBIG;
+-	}
+-
+-	if (!need_skip) {
+-		rval = nand_read(mtd, offset, length, buffer);
+-		if (!rval || rval == -EUCLEAN)
+-			return 0;
+-
+-		*length = 0;
+-		printf("NAND read from offset %llx failed %d\n",
+-			offset, rval);
+-		return rval;
+-	}
+-
+-	while (left_to_read > 0) {
+-		size_t block_offset = offset & (mtd->erasesize - 1);
+-		size_t read_length;
+-
+-		schedule();
+-
+-		if (nand_block_isbad(mtd, offset & ~(mtd->erasesize - 1))) {
+-			printf("Skipping bad block 0x%08llx\n",
+-				offset & ~(mtd->erasesize - 1));
+-			offset += mtd->erasesize - block_offset;
+-			continue;
+-		}
+-
+-		if (left_to_read < (mtd->erasesize - block_offset))
+-			read_length = left_to_read;
+-		else
+-			read_length = mtd->erasesize - block_offset;
+-
+-		rval = nand_read(mtd, offset, &read_length, p_buffer);
+-		if (rval && rval != -EUCLEAN) {
+-			printf("NAND read from offset %llx failed %d\n",
+-				offset, rval);
+-			*length -= left_to_read;
+-			return rval;
+-		}
+-
+-		left_to_read -= read_length;
+-		offset       += read_length;
+-		p_buffer     += read_length;
+-	}
+-
+-	return 0;
+-}
+-
+-#ifdef CONFIG_CMD_NAND_TORTURE
+-
+-/**
+- * check_pattern:
+- *
+- * Check if buffer contains only a certain byte pattern.
+- *
+- * @param buf buffer to check
+- * @param patt the pattern to check
+- * @param size buffer size in bytes
+- * Return: 1 if there are only patt bytes in buf
+- *         0 if something else was found
+- */
+-static int check_pattern(const u_char *buf, u_char patt, int size)
+-{
 -	int i;
 -
--	for (i = 0; i < CONFIG_SYS_MAX_NAND_DEVICE; i++) {
--		struct mtd_info *mtd = get_nand_dev_by_index(i);
--		if (mtd != NULL) {
--			nand_info_list[nand_devices_found] = mtd;
--			nand_devices_found++;
+-	for (i = 0; i < size; i++)
+-		if (buf[i] != patt)
+-			return 0;
+-	return 1;
+-}
+-
+-/**
+- * nand_torture:
+- *
+- * Torture a block of NAND flash.
+- * This is useful to determine if a block that caused a write error is still
+- * good or should be marked as bad.
+- *
+- * @param mtd nand mtd instance
+- * @param offset offset in flash
+- * Return: 0 if the block is still good
+- */
+-int nand_torture(struct mtd_info *mtd, loff_t offset)
+-{
+-	u_char patterns[] = {0xa5, 0x5a, 0x00};
+-	struct erase_info instr = {
+-		.mtd = mtd,
+-		.addr = offset,
+-		.len = mtd->erasesize,
+-	};
+-	size_t retlen;
+-	int err, ret = -1, i, patt_count;
+-	u_char *buf;
+-
+-	if ((offset & (mtd->erasesize - 1)) != 0) {
+-		puts("Attempt to torture a block at a non block-aligned offset\n");
+-		return -EINVAL;
+-	}
+-
+-	if (offset + mtd->erasesize > mtd->size) {
+-		puts("Attempt to torture a block outside the flash area\n");
+-		return -EINVAL;
+-	}
+-
+-	patt_count = ARRAY_SIZE(patterns);
+-
+-	buf = malloc_cache_aligned(mtd->erasesize);
+-	if (buf == NULL) {
+-		puts("Out of memory for erase block buffer\n");
+-		return -ENOMEM;
+-	}
+-
+-	for (i = 0; i < patt_count; i++) {
+-		err = mtd_erase(mtd, &instr);
+-		if (err) {
+-			printf("%s: erase() failed for block at 0x%llx: %d\n",
+-				mtd->name, instr.addr, err);
+-			goto out;
+-		}
+-
+-		/* Make sure the block contains only 0xff bytes */
+-		err = mtd_read(mtd, offset, mtd->erasesize, &retlen, buf);
+-		if ((err && err != -EUCLEAN) || retlen != mtd->erasesize) {
+-			printf("%s: read() failed for block at 0x%llx: %d\n",
+-				mtd->name, instr.addr, err);
+-			goto out;
+-		}
+-
+-		err = check_pattern(buf, 0xff, mtd->erasesize);
+-		if (!err) {
+-			printf("Erased block at 0x%llx, but a non-0xff byte was found\n",
+-				offset);
+-			ret = -EIO;
+-			goto out;
+-		}
+-
+-		/* Write a pattern and check it */
+-		memset(buf, patterns[i], mtd->erasesize);
+-		err = mtd_write(mtd, offset, mtd->erasesize, &retlen, buf);
+-		if (err || retlen != mtd->erasesize) {
+-			printf("%s: write() failed for block at 0x%llx: %d\n",
+-				mtd->name, instr.addr, err);
+-			goto out;
+-		}
+-
+-		err = mtd_read(mtd, offset, mtd->erasesize, &retlen, buf);
+-		if ((err && err != -EUCLEAN) || retlen != mtd->erasesize) {
+-			printf("%s: read() failed for block at 0x%llx: %d\n",
+-				mtd->name, instr.addr, err);
+-			goto out;
+-		}
+-
+-		err = check_pattern(buf, patterns[i], mtd->erasesize);
+-		if (!err) {
+-			printf("Pattern 0x%.2x checking failed for block at "
+-					"0x%llx\n", patterns[i], offset);
+-			ret = -EIO;
+-			goto out;
 -		}
 -	}
--	if (nand_devices_found > 1) {
--		struct mtd_info *mtd;
--		char c_mtd_name[16];
 -
--		/*
--		 * We detected multiple devices. Concatenate them together.
--		 */
--		sprintf(c_mtd_name, "nand%d", nand_devices_found);
--		mtd = mtd_concat_create(nand_info_list, nand_devices_found,
--					c_mtd_name);
+-	ret = 0;
 -
--		if (mtd == NULL)
--			return;
--
--		nand_register(nand_devices_found, mtd);
--	}
--
--	return;
+-out:
+-	free(buf);
+-	return ret;
 -}
--#else
--static void create_mtd_concat(void)
--{
--}
+-
 -#endif
--
--unsigned long nand_size(void)
--{
--	return total_nand_size;
--}
--
--void nand_init(void)
--{
--	static int initialized;
--
--	/*
--	 * Avoid initializing NAND Flash multiple times,
--	 * otherwise it will calculate a wrong total size.
--	 */
--	if (initialized)
--		return;
--	initialized = 1;
--
--#if CONFIG_IS_ENABLED(SYS_NAND_SELF_INIT)
--	board_nand_init();
--#else
--	int i;
--
--	for (i = 0; i < CONFIG_SYS_MAX_NAND_DEVICE; i++)
--		nand_init_chip(i);
--#endif
--
--#ifdef CONFIG_SYS_NAND_SELECT_DEVICE
--	/*
--	 * Select the chip in the board/cpu specific driver
--	 */
--	board_nand_select_device(mtd_to_nand(get_nand_dev_by_index(nand_curr_device)),
--				 nand_curr_device);
--#endif
--
--	create_mtd_concat();
--}
-diff --git a/include/nand.h b/include/nand.h
-index 70c1286ccb..16cfc2a24a 100644
---- a/include/nand.h
-+++ b/include/nand.h
-@@ -25,6 +25,8 @@ int nand_register(int devnum, struct mtd_info *mtd);
- struct nand_chip;
- 
- extern int board_nand_init(struct nand_chip *nand);
+diff --git a/drivers/mtd/nand/util.c b/drivers/mtd/nand/util.c
+new file mode 100644
+index 0000000000..4a372bb67d
+--- /dev/null
++++ b/drivers/mtd/nand/util.c
+@@ -0,0 +1,543 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * drivers/mtd/nand/util.c
++ *
++ * Copyright (C) 2006 by Weiss-Electronic GmbH.
++ * All rights reserved.
++ *
++ * @author:	Guido Classen <clagix@gmail.com>
++ * @descr:	NAND Flash support
++ * @references: borrowed heavily from Linux mtd-utils code:
++ *		flash_eraseall.c by Arcom Control System Ltd
++ *		nandwrite.c by Steven J. Hill (sjhill@realitydiluted.com)
++ *			       and Thomas Gleixner (tglx@linutronix.de)
++ *
++ * Copyright (C) 2008 Nokia Corporation: drop_ffs() function by
++ * Artem Bityutskiy <dedekind1@gmail.com> from mtd-utils
++ *
++ * Copyright 2010 Freescale Semiconductor
++ */
 +
-+void nand_init_chip(int index);
- #endif
- 
- extern int nand_curr_device;
++#include <common.h>
++#include <command.h>
++#include <log.h>
++#include <watchdog.h>
++#include <malloc.h>
++#include <memalign.h>
++#include <div64.h>
++#include <asm/cache.h>
++#include <dm/devres.h>
++
++#include <linux/errno.h>
++#include <linux/mtd/mtd.h>
++#include <nand.h>
++
++/**
++ * check_skip_len
++ *
++ * Check if there are any bad blocks, and whether length including bad
++ * blocks fits into device
++ *
++ * @param mtd nand mtd instance
++ * @param offset offset in flash
++ * @param length image length
++ * @param used length of flash needed for the requested length
++ * Return: 0 if the image fits and there are no bad blocks
++ *         1 if the image fits, but there are bad blocks
++ *        -1 if the image does not fit
++ */
++static int check_skip_len(struct mtd_info *mtd, loff_t offset, size_t length,
++			  size_t *used)
++{
++	size_t len_excl_bad = 0;
++	int ret = 0;
++
++	while (len_excl_bad < length) {
++		size_t block_len, block_off;
++		loff_t block_start;
++
++		if (offset >= mtd->size)
++			return -1;
++
++		block_start = offset & ~(loff_t)(mtd->erasesize - 1);
++		block_off = offset & (mtd->erasesize - 1);
++		block_len = mtd->erasesize - block_off;
++
++		if (!nand_block_isbad(mtd, block_start))
++			len_excl_bad += block_len;
++		else
++			ret = 1;
++
++		offset += block_len;
++		*used += block_len;
++	}
++
++	/* If the length is not a multiple of block_len, adjust. */
++	if (len_excl_bad > length)
++		*used -= (len_excl_bad - length);
++
++	return ret;
++}
++
++#ifdef CONFIG_CMD_NAND_TRIMFFS
++static size_t drop_ffs(const struct mtd_info *mtd, const u_char *buf,
++			const size_t *len)
++{
++	size_t l = *len;
++	ssize_t i;
++
++	for (i = l - 1; i >= 0; i--)
++		if (buf[i] != 0xFF)
++			break;
++
++	/* The resulting length must be aligned to the minimum flash I/O size */
++	l = i + 1;
++	l = (l + mtd->writesize - 1) / mtd->writesize;
++	l *=  mtd->writesize;
++
++	/*
++	 * since the input length may be unaligned, prevent access past the end
++	 * of the buffer
++	 */
++	return min(l, *len);
++}
++#endif
++
++/**
++ * nand_verify_page_oob:
++ *
++ * Verify a page of NAND flash, including the OOB.
++ * Reads page of NAND and verifies the contents and OOB against the
++ * values in ops.
++ *
++ * @param mtd		nand mtd instance
++ * @param ops		MTD operations, including data to verify
++ * @param ofs		offset in flash
++ * Return:		0 in case of success
++ */
++int nand_verify_page_oob(struct mtd_info *mtd, struct mtd_oob_ops *ops,
++			 loff_t ofs)
++{
++	int rval;
++	struct mtd_oob_ops vops;
++	size_t verlen = mtd->writesize + mtd->oobsize;
++
++	memcpy(&vops, ops, sizeof(vops));
++
++	vops.datbuf = memalign(ARCH_DMA_MINALIGN, verlen);
++
++	if (!vops.datbuf)
++		return -ENOMEM;
++
++	vops.oobbuf = vops.datbuf + mtd->writesize;
++
++	rval = mtd_read_oob(mtd, ofs, &vops);
++	if (!rval)
++		rval = memcmp(ops->datbuf, vops.datbuf, vops.len);
++	if (!rval)
++		rval = memcmp(ops->oobbuf, vops.oobbuf, vops.ooblen);
++
++	free(vops.datbuf);
++
++	return rval ? -EIO : 0;
++}
++
++/**
++ * nand_verify:
++ *
++ * Verify a region of NAND flash.
++ * Reads NAND in page-sized chunks and verifies the contents against
++ * the contents of a buffer.  The offset into the NAND must be
++ * page-aligned, and the function doesn't handle skipping bad blocks.
++ *
++ * @param mtd		nand mtd instance
++ * @param ofs		offset in flash
++ * @param len		buffer length
++ * @param buf		buffer to read from
++ * Return:		0 in case of success
++ */
++int nand_verify(struct mtd_info *mtd, loff_t ofs, size_t len, u_char *buf)
++{
++	int rval = 0;
++	size_t verofs;
++	size_t verlen = mtd->writesize;
++	uint8_t *verbuf = memalign(ARCH_DMA_MINALIGN, verlen);
++
++	if (!verbuf)
++		return -ENOMEM;
++
++	/* Read the NAND back in page-size groups to limit malloc size */
++	for (verofs = ofs; verofs < ofs + len;
++	     verofs += verlen, buf += verlen) {
++		verlen = min(mtd->writesize, (uint32_t)(ofs + len - verofs));
++		rval = nand_read(mtd, verofs, &verlen, verbuf);
++		if (!rval || (rval == -EUCLEAN))
++			rval = memcmp(buf, verbuf, verlen);
++
++		if (rval)
++			break;
++	}
++
++	free(verbuf);
++
++	return rval ? -EIO : 0;
++}
++
++/**
++ * nand_write_skip_bad:
++ *
++ * Write image to NAND flash.
++ * Blocks that are marked bad are skipped and the is written to the next
++ * block instead as long as the image is short enough to fit even after
++ * skipping the bad blocks.  Due to bad blocks we may not be able to
++ * perform the requested write.  In the case where the write would
++ * extend beyond the end of the NAND device, both length and actual (if
++ * not NULL) are set to 0.  In the case where the write would extend
++ * beyond the limit we are passed, length is set to 0 and actual is set
++ * to the required length.
++ *
++ * @param mtd		nand mtd instance
++ * @param offset	offset in flash
++ * @param length	buffer length
++ * @param actual	set to size required to write length worth of
++ *			buffer or 0 on error, if not NULL
++ * @param lim		maximum size that actual may be in order to not
++ *			exceed the buffer
++ * @param buffer        buffer to read from
++ * @param flags		flags modifying the behaviour of the write to NAND
++ * Return:		0 in case of success
++ */
++int nand_write_skip_bad(struct mtd_info *mtd, loff_t offset, size_t *length,
++			size_t *actual, loff_t lim, u_char *buffer, int flags)
++{
++	int rval = 0, blocksize;
++	size_t left_to_write = *length;
++	size_t used_for_write = 0;
++	u_char *p_buffer = buffer;
++	int need_skip;
++
++	if (actual)
++		*actual = 0;
++
++	blocksize = mtd->erasesize;
++
++	/*
++	 * nand_write() handles unaligned, partial page writes.
++	 *
++	 * We allow length to be unaligned, for convenience in
++	 * using the $filesize variable.
++	 *
++	 * However, starting at an unaligned offset makes the
++	 * semantics of bad block skipping ambiguous (really,
++	 * you should only start a block skipping access at a
++	 * partition boundary).  So don't try to handle that.
++	 */
++	if ((offset & (mtd->writesize - 1)) != 0) {
++		printf("Attempt to write non page-aligned data\n");
++		*length = 0;
++		return -EINVAL;
++	}
++
++	need_skip = check_skip_len(mtd, offset, *length, &used_for_write);
++
++	if (actual)
++		*actual = used_for_write;
++
++	if (need_skip < 0) {
++		printf("Attempt to write outside the flash area\n");
++		*length = 0;
++		return -EINVAL;
++	}
++
++	if (used_for_write > lim) {
++		puts("Size of write exceeds partition or device limit\n");
++		*length = 0;
++		return -EFBIG;
++	}
++
++	if (!need_skip && !(flags & WITH_DROP_FFS)) {
++		rval = nand_write(mtd, offset, length, buffer);
++
++		if ((flags & WITH_WR_VERIFY) && !rval)
++			rval = nand_verify(mtd, offset, *length, buffer);
++
++		if (rval == 0)
++			return 0;
++
++		*length = 0;
++		printf("NAND write to offset %llx failed %d\n",
++			offset, rval);
++		return rval;
++	}
++
++	while (left_to_write > 0) {
++		loff_t block_start = offset & ~(loff_t)(mtd->erasesize - 1);
++		size_t block_offset = offset & (mtd->erasesize - 1);
++		size_t write_size, truncated_write_size;
++
++		schedule();
++
++		if (nand_block_isbad(mtd, block_start)) {
++			printf("Skip bad block 0x%08llx\n", block_start);
++			offset += mtd->erasesize - block_offset;
++			continue;
++		}
++
++		if (left_to_write < (blocksize - block_offset))
++			write_size = left_to_write;
++		else
++			write_size = blocksize - block_offset;
++
++		truncated_write_size = write_size;
++#ifdef CONFIG_CMD_NAND_TRIMFFS
++		if (flags & WITH_DROP_FFS)
++			truncated_write_size = drop_ffs(mtd, p_buffer,
++					&write_size);
++#endif
++
++		rval = nand_write(mtd, offset, &truncated_write_size,
++				p_buffer);
++
++		if ((flags & WITH_WR_VERIFY) && !rval)
++			rval = nand_verify(mtd, offset,
++				truncated_write_size, p_buffer);
++
++		offset += write_size;
++		p_buffer += write_size;
++
++		if (rval != 0) {
++			printf("NAND write to offset %llx failed %d\n",
++				offset, rval);
++			*length -= left_to_write;
++			return rval;
++		}
++
++		left_to_write -= write_size;
++	}
++
++	return 0;
++}
++
++/**
++ * nand_read_skip_bad:
++ *
++ * Read image from NAND flash.
++ * Blocks that are marked bad are skipped and the next block is read
++ * instead as long as the image is short enough to fit even after
++ * skipping the bad blocks.  Due to bad blocks we may not be able to
++ * perform the requested read.  In the case where the read would extend
++ * beyond the end of the NAND device, both length and actual (if not
++ * NULL) are set to 0.  In the case where the read would extend beyond
++ * the limit we are passed, length is set to 0 and actual is set to the
++ * required length.
++ *
++ * @param mtd nand mtd instance
++ * @param offset offset in flash
++ * @param length buffer length, on return holds number of read bytes
++ * @param actual set to size required to read length worth of buffer or 0
++ * on error, if not NULL
++ * @param lim maximum size that actual may be in order to not exceed the
++ * buffer
++ * @param buffer buffer to write to
++ * Return: 0 in case of success
++ */
++int nand_read_skip_bad(struct mtd_info *mtd, loff_t offset, size_t *length,
++		       size_t *actual, loff_t lim, u_char *buffer)
++{
++	int rval;
++	size_t left_to_read = *length;
++	size_t used_for_read = 0;
++	u_char *p_buffer = buffer;
++	int need_skip;
++
++	if ((offset & (mtd->writesize - 1)) != 0) {
++		printf("Attempt to read non page-aligned data\n");
++		*length = 0;
++		if (actual)
++			*actual = 0;
++		return -EINVAL;
++	}
++
++	need_skip = check_skip_len(mtd, offset, *length, &used_for_read);
++
++	if (actual)
++		*actual = used_for_read;
++
++	if (need_skip < 0) {
++		printf("Attempt to read outside the flash area\n");
++		*length = 0;
++		return -EINVAL;
++	}
++
++	if (used_for_read > lim) {
++		puts("Size of read exceeds partition or device limit\n");
++		*length = 0;
++		return -EFBIG;
++	}
++
++	if (!need_skip) {
++		rval = nand_read(mtd, offset, length, buffer);
++		if (!rval || rval == -EUCLEAN)
++			return 0;
++
++		*length = 0;
++		printf("NAND read from offset %llx failed %d\n",
++			offset, rval);
++		return rval;
++	}
++
++	while (left_to_read > 0) {
++		size_t block_offset = offset & (mtd->erasesize - 1);
++		size_t read_length;
++
++		schedule();
++
++		if (nand_block_isbad(mtd, offset & ~(mtd->erasesize - 1))) {
++			printf("Skipping bad block 0x%08llx\n",
++				offset & ~(mtd->erasesize - 1));
++			offset += mtd->erasesize - block_offset;
++			continue;
++		}
++
++		if (left_to_read < (mtd->erasesize - block_offset))
++			read_length = left_to_read;
++		else
++			read_length = mtd->erasesize - block_offset;
++
++		rval = nand_read(mtd, offset, &read_length, p_buffer);
++		if (rval && rval != -EUCLEAN) {
++			printf("NAND read from offset %llx failed %d\n",
++				offset, rval);
++			*length -= left_to_read;
++			return rval;
++		}
++
++		left_to_read -= read_length;
++		offset       += read_length;
++		p_buffer     += read_length;
++	}
++
++	return 0;
++}
++
++#ifdef CONFIG_CMD_NAND_TORTURE
++
++/**
++ * check_pattern:
++ *
++ * Check if buffer contains only a certain byte pattern.
++ *
++ * @param buf buffer to check
++ * @param patt the pattern to check
++ * @param size buffer size in bytes
++ * Return: 1 if there are only patt bytes in buf
++ *         0 if something else was found
++ */
++static int check_pattern(const u_char *buf, u_char patt, int size)
++{
++	int i;
++
++	for (i = 0; i < size; i++)
++		if (buf[i] != patt)
++			return 0;
++	return 1;
++}
++
++/**
++ * nand_torture:
++ *
++ * Torture a block of NAND flash.
++ * This is useful to determine if a block that caused a write error is still
++ * good or should be marked as bad.
++ *
++ * @param mtd nand mtd instance
++ * @param offset offset in flash
++ * Return: 0 if the block is still good
++ */
++int nand_torture(struct mtd_info *mtd, loff_t offset)
++{
++	u_char patterns[] = {0xa5, 0x5a, 0x00};
++	struct erase_info instr = {
++		.mtd = mtd,
++		.addr = offset,
++		.len = mtd->erasesize,
++	};
++	size_t retlen;
++	int err, ret = -1, i, patt_count;
++	u_char *buf;
++
++	if ((offset & (mtd->erasesize - 1)) != 0) {
++		puts("Attempt to torture a block at a non block-aligned offset\n");
++		return -EINVAL;
++	}
++
++	if (offset + mtd->erasesize > mtd->size) {
++		puts("Attempt to torture a block outside the flash area\n");
++		return -EINVAL;
++	}
++
++	patt_count = ARRAY_SIZE(patterns);
++
++	buf = malloc_cache_aligned(mtd->erasesize);
++	if (buf == NULL) {
++		puts("Out of memory for erase block buffer\n");
++		return -ENOMEM;
++	}
++
++	for (i = 0; i < patt_count; i++) {
++		err = mtd_erase(mtd, &instr);
++		if (err) {
++			printf("%s: erase() failed for block at 0x%llx: %d\n",
++				mtd->name, instr.addr, err);
++			goto out;
++		}
++
++		/* Make sure the block contains only 0xff bytes */
++		err = mtd_read(mtd, offset, mtd->erasesize, &retlen, buf);
++		if ((err && err != -EUCLEAN) || retlen != mtd->erasesize) {
++			printf("%s: read() failed for block at 0x%llx: %d\n",
++				mtd->name, instr.addr, err);
++			goto out;
++		}
++
++		err = check_pattern(buf, 0xff, mtd->erasesize);
++		if (!err) {
++			printf("Erased block at 0x%llx, but a non-0xff byte was found\n",
++				offset);
++			ret = -EIO;
++			goto out;
++		}
++
++		/* Write a pattern and check it */
++		memset(buf, patterns[i], mtd->erasesize);
++		err = mtd_write(mtd, offset, mtd->erasesize, &retlen, buf);
++		if (err || retlen != mtd->erasesize) {
++			printf("%s: write() failed for block at 0x%llx: %d\n",
++				mtd->name, instr.addr, err);
++			goto out;
++		}
++
++		err = mtd_read(mtd, offset, mtd->erasesize, &retlen, buf);
++		if ((err && err != -EUCLEAN) || retlen != mtd->erasesize) {
++			printf("%s: read() failed for block at 0x%llx: %d\n",
++				mtd->name, instr.addr, err);
++			goto out;
++		}
++
++		err = check_pattern(buf, patterns[i], mtd->erasesize);
++		if (!err) {
++			printf("Pattern 0x%.2x checking failed for block at "
++					"0x%llx\n", patterns[i], offset);
++			ret = -EIO;
++			goto out;
++		}
++	}
++
++	ret = 0;
++
++out:
++	free(buf);
++	return ret;
++}
++
++#endif
 -- 
 2.30.1
 
