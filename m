@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 529F8C4706F
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 08:51:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E9D6C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 09:03:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4AEA87516;
-	Thu, 28 Dec 2023 09:51:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DDB00879E0;
+	Thu, 28 Dec 2023 10:03:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x+N8Cvur";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CtcmqMVu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9E9887250; Thu, 28 Dec 2023 09:51:19 +0100 (CET)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id 4006A879DF; Thu, 28 Dec 2023 10:03:02 +0100 (CET)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6530087516
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 09:51:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 885A287509
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 10:02:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-50e7f58c5fbso2625189e87.1
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 00:51:16 -0800 (PST)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2cce70ad1a3so2484541fa.1
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 01:02:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703753475; x=1704358275; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rwEpRFJLohgqsLSQvNRCy5hwo/Bl4FnKv3OeGS6Xe84=;
- b=x+N8CvurIBU0PlUkj0yZnAKrxUeCnp0vL//cNfXYZJg+AkTJdRjekG03+iDO10NNOV
- UH+qIugbPMZ98fFTv86ivBFzkeYZi1VjjsbKV09A86VUu0/LcTwS2X5hUhS5H1/dygx6
- AZ0pu+y+agI72igPL7yc6glMJoms7hjd2BZR8JDx5Q1hoV9o9W9FMCnL474sxHGez6nQ
- my68knYmL8JMjRjEPjx+/9+hF27AviLheePFBZSWYn19r/S6qwXQcO9JD0rzyFJO/5Ex
- Gg4E3Ec9O80utddCwJ2f1sA4wBOZ4oc3DC8gREN85+bXJm135hcmpTChehOjxGE/86O9
- Eb4w==
+ d=gmail.com; s=20230601; t=1703754179; x=1704358979; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=w5LFq1GrH5d3R7tAz8TvI+RrVtsFiiM6d9QDE+AbM/k=;
+ b=CtcmqMVuhsD5dGP03GTXiyzpK3whEJj0HMN8tUl4Nb53qLdqqiSpVYaWLeGR6OaM3d
+ MMM9EBmXLw+2E0eLEgEU+RRjLjKYLY/JMXo8DGPKWPHqnr/FRQCV+0Scn3GJbeTxEASI
+ BMI22EPE8cTTG+D26Jpn9Vp85kYKa7nvlDV/M6neKtrWzKG19AAhOrbWtDw9eZLvVmBF
+ pMp8zEGsLEtXFZi+4ioQyA6YV1p0Wk4Hoy0lf0bB5290WQFyq9CVXkQTzZYn0w1vuW5V
+ zCCRGLKC4TfiEt2cx1wOnEieSR54KniS0FjkRQFscIfWEUAJGd4PgXmhhA0BqVYx7jMG
+ gxeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703753475; x=1704358275;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rwEpRFJLohgqsLSQvNRCy5hwo/Bl4FnKv3OeGS6Xe84=;
- b=bfrgwr2eFg/OQCuFxS2hzr0euO5o6P3OhMqs6kOMepl6t11imsYkhGpLNJEVwHsjr2
- bRb4dwlnwTAF/rEexMRqx+0pG0PgTTmYEJuu4+HdbTEgxJvtn91TQJiQ5dUDpSQcudA5
- EyiBb4sRD4KUA5dx3vrdw5l6srCQsacUnTO3VhXepMKknpt9+JKtwaAfDnlHrTmBSrSh
- 3V79r2FLfR86BlIK4Ao++KmEOYcKe5grjAzEnCulJzrCNFgmFoRZWLK/fi1Qn14J3OkC
- b2Hx+5Dvzy5ViNNrFUeIJCG/afv/eVvKVWWdTXmoR3VXRvBfWGg7Nqw7EFhkaljanOsp
- 1ppA==
-X-Gm-Message-State: AOJu0YxIzK5BTJxf1mbp+/Tx4kQ/SlonAiXj+IZeZ2AR4FxGF11FZh4N
- VhUGt7A5Jnqun05R9Z4jaq3cZtpUTvDZAHWHKROIhhhr41/D1g==
-X-Google-Smtp-Source: AGHT+IEod8aWF0zb8FHvCcLQlXeuE6ZEDiTR2MMV0KQ7A+lZnUax3EUS6vZOvUuzRBHComDBDgY1M+Kceoi4ecE3WhE=
-X-Received: by 2002:a05:6512:348c:b0:50e:7c73:f4ba with SMTP id
- v12-20020a056512348c00b0050e7c73f4bamr2101830lfr.91.1703753475597; Thu, 28
- Dec 2023 00:51:15 -0800 (PST)
+ d=1e100.net; s=20230601; t=1703754179; x=1704358979;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=w5LFq1GrH5d3R7tAz8TvI+RrVtsFiiM6d9QDE+AbM/k=;
+ b=p/6sS7P2+SDB55dILPT3RQw1SdFthJAHPtKGj/DkG7B7RszKySYYqj8bHfakRvr5F2
+ gIIKDr+ydLk6qQL9Fv6VC5j2R5ldnQywt0cWlrzn3I/9LKmWb7mHtNS8pcZAzz9E6R/b
+ MyW1Cdh1bX/qtJFyb7XJfIsxeLVxehRRSpLuLzZIl30Z/VsnhGa8InYssciJMu2aAIUB
+ D5sHRqszAxwYet/P3bksLeTRdOunLaKKg+e7c0tnCy8EzaHqVU3M48CVoC3fors2/LSE
+ MTNb8ugRLguSeKTb/QIsluSpU14mFm7TizOgajuMx9aqxZEGkpG/ZiX8JUeqOQ5qmUrq
+ Qm8Q==
+X-Gm-Message-State: AOJu0Yzzny2E80BH0IWrswjccbWWLLFu6vZiEIjlD/WEu3vkDu650JDJ
+ M1zusKbf8BG25f5NvvyqtaM=
+X-Google-Smtp-Source: AGHT+IFxuYSKRwTE+R937Xe0Gp+ZZGIzFWuKUVuPtpfm12PQOuS05KEwK9/KlU3J3ztJsMB0xhnKeQ==
+X-Received: by 2002:a2e:938e:0:b0:2cc:7171:8d6f with SMTP id
+ g14-20020a2e938e000000b002cc71718d6fmr3599717ljh.10.1703754178456; 
+ Thu, 28 Dec 2023 01:02:58 -0800 (PST)
+Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
+ n18-20020a2ebd12000000b002ccabe13852sm2475708ljq.85.2023.12.28.01.02.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 28 Dec 2023 01:02:58 -0800 (PST)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Bin Meng <bmeng@tinylab.org>,
+ Ion Agorria <ion@agorria.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
+ Sean Anderson <sean.anderson@seco.com>, Heiko Schocher <hs@denx.de>,
+ Dmitrii Merkurev <dimorinny@google.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v5 0/5] Implement fastboot multiresponce
+Date: Thu, 28 Dec 2023 11:02:35 +0200
+Message-Id: <20231228090240.18011-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20231222213110.660402-1-raymond.mao@linaro.org>
- <20231222213110.660402-10-raymond.mao@linaro.org>
- <CAFLszTjGejJm4XdCachiy5C-2i2L2XyWUschx+bNy+1YpYoOcQ@mail.gmail.com>
- <CAC_iWjJdtqT8dUszq6G=Ak_W4n5U9m1dkq2FryidBYg0unKAPA@mail.gmail.com>
- <CAEfUkUJStL=GH4hnOG8NJfAUK1Eom2uT2W9tFt6ak28LXracFA@mail.gmail.com>
-In-Reply-To: <CAEfUkUJStL=GH4hnOG8NJfAUK1Eom2uT2W9tFt6ak28LXracFA@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 28 Dec 2023 10:50:39 +0200
-Message-ID: <CAC_iWj+6RdcBBpRxOE_-YUFAqfs=f31fxU1pXixrXYDD+t5pCA@mail.gmail.com>
-Subject: Re: [PATCH v3 9/9] qemu-arm: get FDT from bloblist
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, jwerner@chromium.org,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Kevin Chen <kevin_chen@aspeedtech.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Shiji Yang <yangshiji66@outlook.com>, 
- Baruch Siach <baruch@tkos.co.il>, Michal Simek <michal.simek@amd.com>,
- Stefan Roese <sr@denx.de>, Sean Anderson <sean.anderson@seco.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,62 +96,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 27 Dec 2023 at 17:43, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> Hi Ilias and Simon,
->
-> On Wed, 27 Dec 2023 at 04:32, Ilias Apalodimas <ilias.apalodimas@linaro.o=
-rg> wrote:
->>
->> On Tue, 26 Dec 2023 at 11:48, Simon Glass <sjg@chromium.org> wrote:
->> >
->> > Hi,
->> >
->> > On Fri, Dec 22, 2023 at 9:32=E2=80=AFPM Raymond Mao <raymond.mao@linar=
-o.org> wrote:
->> > >
->> > > Get devicetree from a bloblist if it exists.
->> > > If not, fallback to get FDT from the specified memory address.
->> > >
->> > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
->> > > ---
->> > > Changes in v2
->> > > - Refactor of board_fdt_blob_setup().
->> > >
->> > >  board/emulation/qemu-arm/qemu-arm.c | 12 ++++++++++--
->> > >  1 file changed, 10 insertions(+), 2 deletions(-)
->> > >
->> >
->> > I believe this patch will not be needed, since we have fdtdec_setup()
->> > to do this.
->>
->> Yep, it's not. The board-specific portion should be limited to what
->> happens if the bloblist is *not* detected by fdtdec_setup() (assuming
->> the user wants to allow a fallback)
->>
-> But I think whether we allow a fallback or not is really something that s=
-hould be
-> considered by a board vendor other than a common logic in fdtdec_setup().
+Currently u-boot fastboot can only send one message back to host,
+so if there is a need to print more than one line messages must be
+kept sending until all the required data is obtained. This behavior
+can be adjusted using multiresponce ability (getting multiple lines
+of response) proposed in this patch set.
 
-It's not. The bloblist is coming from the standard register calling
-convention. Doesn't it make more sense to have the code
-- Scan for a bloblist if BLOBLIST is enabled
-- Fallback to board-specific methods if that register does not contain
-a bloblist, or contains one without a DT entry
+Implementation of multiresponce leads to ability to dump content of
+console buffer which, with use of "oem run", allows to entirely avoid
+need in UART.
 
-> And a board vendor can also decide whether to allow a FDT that comes from=
- bloblist
-> by this custom function.
+---
+Changes in v5:
+ - restored membuff_readline behavior changed in v4
 
-I am not sure I understand this one. That decision should be in u-boot
-proper, the vendor should only be allowed to provide his special DT if
-we dont find it in a transfer list
+Changes in v4:
+ - adjust membuff_readline behavior with overflow
 
+Changes in v3:
+ - fix missing function calls if CONFIG_CONSOLE_RECORD is not enabled
 
-Thanks
-/Ilias
->
-> [...]
->
-> Regards,
-> Raymond
+Changes in v2:
+ - changed variables to static
+ - fixed multiresponce for udp
+ - documented use of "MORE"
+ - converted #if to if (...)
+---
+
+Ion Agorria (5):
+  fastboot: multiresponse support
+  fastboot: implement "getvar all"
+  common: console: introduce overflow and isempty calls
+  lib: membuff: fix readline not returning line in case of overflow
+  fastboot: add oem console command support
+
+ boot/bootmeth_extlinux.c          |  2 +-
+ common/console.c                  | 17 +++++--
+ doc/android/fastboot-protocol.rst |  3 ++
+ doc/android/fastboot.rst          |  1 +
+ drivers/fastboot/Kconfig          |  7 +++
+ drivers/fastboot/fb_command.c     | 52 +++++++++++++++++++++
+ drivers/fastboot/fb_getvar.c      | 77 +++++++++++++++++++++++++------
+ drivers/usb/gadget/f_fastboot.c   | 29 ++++++++++++
+ include/console.h                 | 26 +++++++++++
+ include/fastboot-internal.h       |  7 +++
+ include/fastboot.h                | 19 ++++++++
+ include/membuff.h                 |  5 +-
+ lib/membuff.c                     |  4 +-
+ net/fastboot_udp.c                | 29 +++++++++---
+ test/ut.c                         |  9 ++--
+ 15 files changed, 254 insertions(+), 33 deletions(-)
+
+-- 
+2.40.1
+
