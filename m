@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31348C3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:39:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69609C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:39:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45F0387A61;
+	by phobos.denx.de (Postfix) with ESMTP id BB19687A92;
 	Thu, 28 Dec 2023 14:37:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Sjd/77TN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kzA80U/S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1269087A84; Thu, 28 Dec 2023 14:37:51 +0100 (CET)
-Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
- [IPv6:2607:f8b0:4864:20::536])
+ id EF0BF87A01; Thu, 28 Dec 2023 14:37:52 +0100 (CET)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62C3B87A70
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:37:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C004B87A61
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:37:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x536.google.com with SMTP id
- 41be03b00d2f7-5cd68a0de49so4391527a12.2
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:37:48 -0800 (PST)
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-594faa235e3so213743eaf.3
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:37:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703770666; x=1704375466; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703770669; x=1704375469; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Gma/ydfZ8aeBRPViM2E/0C3wBGaMzHueiyT6FzBcoI4=;
- b=Sjd/77TNCZD2t6uVMecq8wjs4GDoZkT853nREpLQBxoHzdcEmi1ZqTN1cwXosXEx4u
- C5AE23Fy6oN6S0FKkUmVY3PtCWI1s8dHL8Ejai4WjWNV3bsY6qVWUFcn7KebOHFcCPFX
- n9NTmdQ/ez11JTNA1rA9JuBU869Ieydb6b4fU=
+ bh=T2Wueqh+gYEsEyYUtNgwNsUEFNpzfMBqbrbno1ULJjk=;
+ b=kzA80U/SNn/DHrNBRbd78ru4rcMVcdVDgzle3UK/aNgj5CLcOfaW2Vat4Fnwxzx5SD
+ gkAgaohrkcSCzEgTNb+6iETrqmYLzpTmqsmBlOTUA2a5eypavUD/wYXu3zy1Kbe7kyO3
+ GtGq3oDvMzzZM8mKykEBv/o075Bf4T+0gnWEg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703770666; x=1704375466;
+ d=1e100.net; s=20230601; t=1703770669; x=1704375469;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Gma/ydfZ8aeBRPViM2E/0C3wBGaMzHueiyT6FzBcoI4=;
- b=tCsyXhhDT0Oy45dLjMn+8jgTQK5PGft2ID9Rj0jsajJB9Brz2QZYmOc6iMEFnNAlDq
- TmYsqzE/PwT7S6K0qXEmQCAYqmd01ySwP9G5cdZoCNAota68HxcGECC+A29nHjJBJPDX
- Bo5vfVSYDx4o7o+dODi5iyjX0JN+lzZGf54+7AKt2+Z+dIW+we53kU/7Cz+RBE/5nQDz
- 2tcMPwumVZh2bPWOpfu4BkFRaXTX5M/2dkPU46HiyygOGuUp6k6f96RKg4pnaSii+8RN
- bKbufU0/ZOow1cHde53E4fC6k22sShUIyhthFoKPQ189NNtNsbhfc2/ElrKvNGwhulYc
- Wz1Q==
-X-Gm-Message-State: AOJu0YyiO5G8RUsvmW2km3TPy9CaHrtul3JZsYxCy3n2uu/K1GrDjAgT
- Zr0T6su3r631xwzg2voW3TR9ynMjvHthXNi+OekkcI/iuM/u
-X-Google-Smtp-Source: AGHT+IGc8N40uqDXV2QYzafb64DJyZ4HmSt75LGoB2KDr8FaCDesUxEURgd19PsAl48CrLyQXfqu9afruBxY5UFD1H4=
-X-Received: by 2002:a05:6a21:612:b0:194:f17b:f877 with SMTP id
- ll18-20020a056a21061200b00194f17bf877mr9702550pzb.61.1703770666438; Thu, 28
- Dec 2023 05:37:46 -0800 (PST)
+ bh=T2Wueqh+gYEsEyYUtNgwNsUEFNpzfMBqbrbno1ULJjk=;
+ b=u6a/c71HlkF1t5MMvdZXb0KrDn0A5uxYLbic9NE5vBObPIIT2Pcpp1jyjDaPV5dI7l
+ O3eMERvrRRCvLtb1itf2qR4WssiCcoKu+a7Atypl5kXDYAYUyF09AufJHYri2DLnruzv
+ FTgTX0OgutIT9Lt7HT94r4GiCE4vnRkKuydjbvKzCyCreBxw2gjSUsklGB8c2Wr6pbaA
+ 9SVx6MSMHRAhx0KVTy5iQQZ3enGHl3vZ4tpFEOGh0maLbKiqPpiyej/V6Yf2xNdv56C4
+ kD1pXU5/yRUaSyXK7iScO1koNtckEs3bTi1HQZjKQd+5twDRlAWPo9g0TpvDffI245Fm
+ KZ1w==
+X-Gm-Message-State: AOJu0YwCKyBcKQ/ZvcWXgkrOcYiaDrQIDGIWZ+0W/YAZHyxC7a4Fw36Z
+ ZgLDaTJgYa7S7jjfpZQZOsCcc6+AJrOw4NmjwXFzsjcYjxMefRqN0LHKGzU=
+X-Google-Smtp-Source: AGHT+IEVqzlcjhNnA55dS+rvQ2fIHuLYTT5PtWpLfkDSAu06n5Ab//ZMc0TG0cF4aXPqgGeLiCkByUxP2+1sWmF61Wo=
+X-Received: by 2002:a05:6358:514d:b0:170:17eb:9c45 with SMTP id
+ 13-20020a056358514d00b0017017eb9c45mr11333072rwj.38.1703770669363; Thu, 28
+ Dec 2023 05:37:49 -0800 (PST)
 MIME-Version: 1.0
-References: <20231228115804.3626579-1-sumit.garg@linaro.org>
- <20231228115804.3626579-5-sumit.garg@linaro.org>
-In-Reply-To: <20231228115804.3626579-5-sumit.garg@linaro.org>
+References: <20231222213110.660402-1-raymond.mao@linaro.org>
+ <20231222213110.660402-7-raymond.mao@linaro.org>
+ <CAFLszTjoViZAxZy26k4aXuoBhvzt_P8zBwqx8Kr8wPHFns1RRQ@mail.gmail.com>
+ <CAEfUkUKfC380JOkuz+x_vRVr2R2KXfJQ6gzKaS4fW55BkW5EFg@mail.gmail.com>
+In-Reply-To: <CAEfUkUKfC380JOkuz+x_vRVr2R2KXfJQ6gzKaS4fW55BkW5EFg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 28 Dec 2023 13:37:26 +0000
-Message-ID: <CAFLszThfxe_n02auF+vZ1u7FynKkrWEYFU3SdkRTLgBVuiv+Hw@mail.gmail.com>
-Subject: Re: [PATCH v3 4/8] dts: Add alternative location for upstream DTB
- builds
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, trini@konsulko.com, robh+dt@kernel.org, 
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
- rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com
+Date: Thu, 28 Dec 2023 13:37:16 +0000
+Message-ID: <CAFLszTjg3nomL7AU-3_+-DdG4_=aS54g9GBzx6fPZvbTSwH4WQ@mail.gmail.com>
+Subject: Re: [PATCH v3 6/9] qemu-arm: Get bloblist from boot arguments
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, jwerner@chromium.org, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Kevin Chen <kevin_chen@aspeedtech.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>, 
+ Shiji Yang <yangshiji66@outlook.com>, Devarsh Thakkar <devarsht@ti.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Baruch Siach <baruch@tkos.co.il>, 
+ Michal Simek <michal.simek@amd.com>, Qu Wenruo <wqu@suse.com>, 
+ Sean Anderson <sean.anderson@seco.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,181 +92,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sumit,
+Hi Raymond,
 
-On Thu, Dec 28, 2023 at 11:58=E2=80=AFAM Sumit Garg <sumit.garg@linaro.org>=
- wrote:
+On Wed, Dec 27, 2023 at 4:21=E2=80=AFPM Raymond Mao <raymond.mao@linaro.org=
+> wrote:
 >
-> Allow platform owners to mirror devicetree files from devitree-rebasing
-> directory into dts/arch/$(ARCH) (special case for dts/arch/arm64). Then
-> build then along with any *-u-boot.dtsi file present in arch/$(ARCH)/dts
-> directory. Also add a new Makefile for arm64.
+> Hi Simon,
 >
-> This will help easy migration for platforms which currently are compliant
-> with upstream Linux kernel devicetree files.
+> On Tue, 26 Dec 2023 at 04:48, Simon Glass <sjg@chromium.org> wrote:
+>>
+>> Hi Raymond,
+>>
+>> On Fri, Dec 22, 2023 at 9:32=E2=80=AFPM Raymond Mao <raymond.mao@linaro.=
+org> wrote:
+>> >
+>> > Add platform custom function to get bloblist from boot arguments.
+>> > Check whether boot arguments aligns with the register conventions
+>> > defined in FW Handoff spec v0.9.
+>> > Add bloblist related options into qemu default config.
+>> >
+>> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+>> > ---
+>> > Changes in v2
+>> > - Remove low level code for copying boot arguments.
+>> > - Refactor board_fdt_blob_setup() and remove direct access of gd->blob=
+list.
+>> > Changes in v3
+>> > - Optimize board_bloblist_from_boot_arg().
+>> >
+>> >  board/emulation/qemu-arm/qemu-arm.c | 30 ++++++++++++++++++++++++++++=
++
+>> >  configs/qemu_arm64_defconfig        |  3 +++
+>> >  2 files changed, 33 insertions(+)
+>> >
+>> > diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qem=
+u-arm/qemu-arm.c
+>> > index 942f1fff57..e225011bf0 100644
+>> > --- a/board/emulation/qemu-arm/qemu-arm.c
+>> > +++ b/board/emulation/qemu-arm/qemu-arm.c
+>> > @@ -4,6 +4,7 @@
+>> >   */
+>> >
+>> >  #include <common.h>
+>> > +#include <bloblist.h>
+>> >  #include <cpu_func.h>
+>> >  #include <dm.h>
+>> >  #include <efi.h>
+>> > @@ -102,6 +103,15 @@ static struct mm_region qemu_arm64_mem_map[] =3D =
+{
+>> >  struct mm_region *mem_map =3D qemu_arm64_mem_map;
+>> >  #endif
+>> >
+>> > +/*
+>> > + * Boot parameters saved from start.S
+>> > + * saved_args[0]: FDT base address
+>> > + * saved_args[1]: Bloblist signature
+>> > + * saved_args[2]: must be 0
+>> > + * saved_args[3]: Bloblist base address
+>> > + */
+>> > +extern unsigned long saved_args[];
+>> > +
+>> >  int board_init(void)
+>> >  {
+>> >         return 0;
+>> > @@ -144,6 +154,26 @@ void *board_fdt_blob_setup(int *err)
+>> >         return (void *)CFG_SYS_SDRAM_BASE;
+>> >  }
+>> >
+>> > +int board_bloblist_from_boot_arg(unsigned long addr, unsigned long si=
+ze)
+>> > +{
+>> > +       int ret =3D -ENOENT;
+>> > +
+>> > +       if (!IS_ENABLED(CONFIG_OF_BOARD) || !IS_ENABLED(CONFIG_BLOBLIS=
+T))
+>> > +               return -ENOENT;
+>> > +
+>> > +       ret =3D bloblist_check(saved_args[3], size);
+>> > +       if (ret)
+>> > +               return ret;
+>>
+>> What about saved_args[1] ?
+>>
+> The magic and version of register conventions cannot be checked now since=
+ there is
+> a bug in the spec. PSB:
+> ```
+> X1[23:0]: set to the TL signature (4a0f_b10b)
+> X1[31:24]: version of the register convention used. Set to 1 for the AArc=
+h64 convention specified in this document.
+> ```
+> Signature (4a0f_b10b) takes all [31:0] and no space for version of the re=
+gister convention.
+> This needs to be updated on TF-A and OP-TEE as well after the spec is upd=
+ated.
+> For now I will just skip the checking.
 >
-> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> ---
+>>
+>> > +
+>> > +       /* Check the register conventions */
+>> > +       ret =3D bloblist_check_reg_conv(saved_args[0], saved_args[2]);
+>> > +       if (!ret)
+>> > +               /* Relocate the bloblist to the fixed address */
+>> > +               ret =3D bloblist_reloc((void *)addr, CONFIG_BLOBLIST_S=
+IZE);
+>> > +
+>> > +       return ret;
+>> > +}
+>> > +
+>>
+>> This should be a generic function, e.g. in arch/arm
+>>
+> I didn't find a place under arch/arm that is good for connect with the sa=
+ved boot
+> args. Do you have any suggestions?
+
+How about arch/arm/lib/bloblist.c ?
+
 >
-> Changes in v3:
-> --------------
-> - Minor commit message update
->
-> Changes in v2:
-> --------------
-> - s/DEVICE_TREE_LOC/dt_dir/ and s/U-boot/U-Boot/
->
->  dts/Kconfig             | 11 +++++++++++
->  dts/Makefile            | 17 ++++++++++++++---
->  dts/arch/arm64/Makefile | 14 ++++++++++++++
->  3 files changed, 39 insertions(+), 3 deletions(-)
->  create mode 100644 dts/arch/arm64/Makefile
->
-> diff --git a/dts/Kconfig b/dts/Kconfig
-> index 00c0aeff893..e58c1c6f2ab 100644
-> --- a/dts/Kconfig
-> +++ b/dts/Kconfig
-> @@ -85,6 +85,17 @@ config OF_LIVE
->           enables a live tree which is available after relocation,
->           and can be adjusted as needed.
->
-> +config OF_UPSTREAM
-> +       bool "Enable use of devicetree imported from Linux kernel release=
-"
-> +       help
-> +         Traditionally, U-Boot platforms used to have their custom devic=
-etree
-> +         files or copy devicetree files from Linux kernel which are hard=
- to
-> +         maintain and can usually get out-of-sync from Linux kernel. Thi=
-s
-> +         option enables platforms to migrate to devicetree-rebasing repo=
- where
-> +         a regular sync will be maintained every major Linux kernel rele=
-ase
-> +         cycle. However, platforms can still have some custom u-boot spe=
-cific
-> +         bits maintained as part of *-u-boot.dtsi files.
-
-My only other suggestion here is to mention that this should be set in
-Kconfig, for the SoC as a whole. So I believe that means that it
-should be hidden, with no string for the 'bool':
-
-      bool  # Enable use of devicetree imported from Linux kernel release
-
-Also, this doesn't seem to work for me. Before this series I get these
-files when building firefly-rk3399:
-
-rk3399-eaidk-610.dtb            rk3399-khadas-edge-v.dtb
-rk3399-orangepi.dtb        rk3399-rock-pi-4a.dtb
-rk3399-evb.dtb                  rk3399-leez-p710.dtb
-rk3399-pinebook-pro.dtb    rk3399-rock-pi-4c.dtb
-rk3399-ficus.dtb                rk3399-nanopc-t4.dtb
-rk3399-pinephone-pro.dtb   rk3399-rockpro64.dtb
-rk3399-firefly.dtb              rk3399-nanopi-m4-2gb.dtb
-rk3399pro-rock-pi-n10.dtb  rk3399-roc-pc.dtb
-rk3399-gru-bob.dtb              rk3399-nanopi-m4b.dtb
-rk3399-puma-haikou.dtb     rk3399-roc-pc-mezzanine.dtb
-rk3399-gru-kevin.dtb            rk3399-nanopi-m4.dtb
-rk3399-rock-4c-plus.dtb
-rk3399-khadas-edge-captain.dtb  rk3399-nanopi-neo4.dtb    rk3399-rock-4se.d=
-tb
-rk3399-khadas-edge.dtb          rk3399-nanopi-r4s.dtb     rk3399-rock960.dt=
-b
-
-Afterwards I get this:
-
-make[3]: *** No rule to make target
-'dts/arch/arm64/rk3399-firefly.dtb', needed by 'dtbs'.  Stop.
-
-So I set this manually for that one board:
-
-CONFIG_DEFAULT_DEVICE_TREE=3D"rockchip/rk3399-firefly"
-
-and get:
-
-make[3]: *** No rule to make target
-'dts/arch/arm64/rockchip/rk3399-firefly.dtb', needed by 'dtbs'.  Stop.
-
-I am not sure how to fix this, nor how this can be made to build all
-the DTs for rk3399, as it does today.
-
-> +
->  choice
->         prompt "Provider of DTB for DT control"
->         depends on OF_CONTROL
-> diff --git a/dts/Makefile b/dts/Makefile
-> index 3437e54033d..68daaf45ec7 100644
-> --- a/dts/Makefile
-> +++ b/dts/Makefile
-> @@ -10,10 +10,20 @@ ifeq ($(DEVICE_TREE),)
->  DEVICE_TREE :=3D unset
->  endif
->
-> +ifeq ($(CONFIG_OF_UPSTREAM),y)
-> +ifeq ($(CONFIG_ARM64),y)
-> +dt_dir :=3D dts/arch/arm64
-> +else
-> +dt_dir :=3D dts/arch/$(ARCH)
-> +endif
-> +else
-> +dt_dir :=3D arch/$(ARCH)/dts
-> +endif
-> +
->  ifneq ($(EXT_DTB),)
->  DTB :=3D $(EXT_DTB)
->  else
-> -DTB :=3D arch/$(ARCH)/dts/$(DEVICE_TREE).dtb
-> +DTB :=3D $(dt_dir)/$(DEVICE_TREE).dtb
->  endif
->
->  $(obj)/dt-$(SPL_NAME).dtb: dts/dt.dtb $(objtree)/tools/fdtgrep FORCE
-> @@ -41,7 +51,7 @@ $(DTB): arch-dtbs
->
->  PHONY +=3D arch-dtbs
->  arch-dtbs:
-> -       $(Q)$(MAKE) $(build)=3Darch/$(ARCH)/dts dtbs
-> +       $(Q)$(MAKE) $(build)=3D$(dt_dir) dtbs
->
->  ifeq ($(CONFIG_SPL_BUILD),y)
->  obj-$(CONFIG_OF_EMBED) :=3D dt-spl.dtb.o
-> @@ -65,4 +75,5 @@ clean-files :=3D dt.dtb.S
->  # Let clean descend into dts directories
->  subdir- +=3D ../arch/arc/dts ../arch/arm/dts ../arch/m68k/dts ../arch/mi=
-croblaze/dts     \
->            ../arch/mips/dts ../arch/nios2/dts ../arch/powerpc/dts ../arch=
-/riscv/dts     \
-> -          ../arch/sandbox/dts ../arch/sh/dts ../arch/x86/dts ../arch/xte=
-nsa/dts
-> +          ../arch/sandbox/dts ../arch/sh/dts ../arch/x86/dts ../arch/xte=
-nsa/dts        \
-> +          ./arch/arm64 ./arch/$(ARCH)
-> diff --git a/dts/arch/arm64/Makefile b/dts/arch/arm64/Makefile
-> new file mode 100644
-> index 00000000000..16e9fea622d
-> --- /dev/null
-> +++ b/dts/arch/arm64/Makefile
-> @@ -0,0 +1,14 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +
-> +include $(srctree)/scripts/Makefile.dts
-> +
-> +targets +=3D $(dtb-y)
-> +
-> +# Add any required device tree compiler flags here
-> +DTC_FLAGS +=3D -a 0x8
-> +
-> +PHONY +=3D dtbs
-> +dtbs: $(addprefix $(obj)/, $(dtb-y))
-> +       @:
-> +
-> +clean-files :=3D */*.dtb */*.dtbo */*_HS
-
-What is _HS for?
-
-> --
-> 2.34.1
->
+> [...]
 
 Regards,
 Simon
