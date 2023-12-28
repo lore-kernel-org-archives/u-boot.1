@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57A56C3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 11:59:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EA67C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 11:59:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6E9087895;
-	Thu, 28 Dec 2023 12:58:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 229BB87A13;
+	Thu, 28 Dec 2023 12:59:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L/eP7SJC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZY48fx4T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D44687895; Thu, 28 Dec 2023 12:58:56 +0100 (CET)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id 1BF7D87A15; Thu, 28 Dec 2023 12:59:11 +0100 (CET)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3233C87A13
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 12:58:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D47987A14
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 12:59:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1d4751dcb56so8760725ad.1
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 03:58:53 -0800 (PST)
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-1d3cfb1568eso48918365ad.1
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 03:59:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703764731; x=1704369531; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703764739; x=1704369539; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zTn3lEgWvkPzpoWGXtAVVa9kdn3+sVlfns5CTBdgKPs=;
- b=L/eP7SJC2R7mJprXnjsLpaT3mqf1yZZ8GblqteP++1ci3J3Qp7IJNROghnrLsIl3U/
- rhzgONHbV08xDvyGGddFoFPJpqqyckhbXHUQB1GBkdIroeisUxv8TmDK39iOpZOP27/2
- kWfv/l4Es/ncW0Icq+Ua7ZUIP7mO53qZy+vEhoAgdeZK+sMxPnxAc67ZACXItELxABjA
- X2Y8Qw8vnSh/FFBmiR+cXvhpBAqHNnmLXX3PSoR4eJN2YLwoxKBo5ThS6ztO/cBkMtgy
- eT9FXILiMMHApxK5U2LHSsfwoLyLzHPaysVZuBcwL7nnbdza1L6uSNYJdosWxFcKVyu3
- Hmfg==
+ bh=rDY4LuoQYDY5N67u0lAxETqq9+/+EJV+L03/SvHFfXg=;
+ b=ZY48fx4TW7Db8kD7p8l9m7CY1VqtsYqce40d72tTCUiU+JWv8AY14CqBpYFzSIun7Z
+ ota9L2ch+/gA2ZKbzd761RpS2H7NR2+HtuNdBOOJzPA7R7CBHxfkUo8HDzXaIDy8Ulb5
+ U6EVneP8s33nJ595uF4tUZ4TnAE+jzWxcnN00S5Ta6/2M3Rqq35rut4hGNUeaAkPhYEW
+ urXJVTch74eKYmE3jdeJmyFRvTZfqgb98SMwE02nEovbp5vxm6h/DgSVvPNwJwgr/B6Q
+ N8S6f5GlU41OjU/OiPwSFRVToX0XHn5wUjg8ms0aG0luDN8Y1OWumH+nQLCIK8XDhLnX
+ nvmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703764731; x=1704369531;
+ d=1e100.net; s=20230601; t=1703764739; x=1704369539;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zTn3lEgWvkPzpoWGXtAVVa9kdn3+sVlfns5CTBdgKPs=;
- b=FY64y9RCkPtE/cjLnCi8bamdvRnVH7snScOQVoDWj5XVWcmjd0f7SZUFdqxdEWOFbb
- NyzAPnp9xaY34ic8M4AdM1tPVsUDOoBPbfPV6AO31zSeNSchcQYNIYKXWCPFO50Huz7q
- 2KDTwS8FpjfpmJNPOckP5LNv74n5Z0SnmLQ08CBjCgXLEt7Vv2lynZKkb2PoH/b5mkqh
- aQKNkauuJs0U/3U1AJfWFnFlzFfoQUNJiys87LbW1DggCqbPGEeZNCXM4O7vYAOIVj10
- 25OxsExq1SErz3UCeMh9luXhreqcksbSP1R9VF0bdvjNqFjyWbxF0EEKuGvCixaIH9NF
- bcEQ==
-X-Gm-Message-State: AOJu0YwWIYtsMZ6/rbhuM6camyk+npRVbrp4vNf4yk0FV9BaGysiMjVL
- 3sg1Jd/0Q7bYw4UqWbaQ0Bpv/R8RRWz8ViycEcDcm67vXf8fHw==
-X-Google-Smtp-Source: AGHT+IFwB/MyfVD86ZFnAtY9v1ON7OVFrcbCn8p4ydVaO8awQmN65X7/QpDYKBFN6Jybozh90nFWzg==
-X-Received: by 2002:a17:903:184:b0:1d3:c8cb:4000 with SMTP id
- z4-20020a170903018400b001d3c8cb4000mr6430196plg.26.1703764731301; 
- Thu, 28 Dec 2023 03:58:51 -0800 (PST)
+ bh=rDY4LuoQYDY5N67u0lAxETqq9+/+EJV+L03/SvHFfXg=;
+ b=Cpm8z6FEZ9fZEUP1KVjExGvuuWZsBMPkWiVVJ97OKmIUTOQXJ8WTmzO9mdnlSHuXEk
+ uKZXvxSBjYVqw0xubuqZOvRYCkyzcH5hbVD2XtBmWClTIIhW8kqyjzCT/Z4nAj+pyaG0
+ 8TGzX7iC5j9wr7FIIPSeuONZaxNNup7iXKmPcn3gB8SoX+/xyYdo5lEMY4E8cU88BSFs
+ G6RA1tPcKz09K94lTZA+y02A9V58VyYvWjFGHLv9jSt/gKdZPZLxnQbTkP/V1f4zuhaZ
+ zeeqzuijKEi3z2H/ftv6NHoPtIOt+PtQhJuX7S/l/0ZHv55xKwz5CpnOUid1FJcyUprz
+ LknQ==
+X-Gm-Message-State: AOJu0YzS9HIBqLnqtcF6fSV8Y0N5XT+ZfZpD1WB1hfzDh7L8i9w8LRtH
+ aStL1AUdryyORUfIxsulNYIcLfJYDdYGqcX6fVc/VdNFOVTymw==
+X-Google-Smtp-Source: AGHT+IEsbjJaFAIUXLFFmQoH5Dxurq/NSEyK2fddLKJ4sXkhSOVPvpPsHKF+r3IbisCnm2Pmqy1q+w==
+X-Received: by 2002:a17:902:e750:b0:1d4:59ab:36b0 with SMTP id
+ p16-20020a170902e75000b001d459ab36b0mr5095698plf.75.1703764739371; 
+ Thu, 28 Dec 2023 03:58:59 -0800 (PST)
 Received: from sumit-X1.. ([223.178.209.202]) by smtp.gmail.com with ESMTPSA id
- r4-20020a170902ea4400b001d3f285157dsm13700579plg.124.2023.12.28.03.58.43
+ r4-20020a170902ea4400b001d3f285157dsm13700579plg.124.2023.12.28.03.58.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Dec 2023 03:58:50 -0800 (PST)
+ Thu, 28 Dec 2023 03:58:59 -0800 (PST)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
  u-boot-custodians@lists.denx.de
@@ -75,10 +75,9 @@ Cc: trini@konsulko.com, sjg@chromium.org, robh+dt@kernel.org,
  seanga2@gmail.com, rasmus.villemoes@prevas.dk, peng.fan@nxp.com,
  jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de,
  mibodhi@gmail.com, Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v3 3/8] scripts/Makefile.lib: Statically define *-u-boot.dtsi
- files location
-Date: Thu, 28 Dec 2023 17:27:59 +0530
-Message-Id: <20231228115804.3626579-4-sumit.garg@linaro.org>
+Subject: [PATCH v3 4/8] dts: Add alternative location for upstream DTB builds
+Date: Thu, 28 Dec 2023 17:28:00 +0530
+Message-Id: <20231228115804.3626579-5-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231228115804.3626579-1-sumit.garg@linaro.org>
 References: <20231228115804.3626579-1-sumit.garg@linaro.org>
@@ -100,84 +99,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allow u-boot to build DTB from a different directory tree such that
-*-u-boot.dtsi files can be included from a common location. Currently
-that location is arch/$(ARCH)/dts/, so statically define that common
-location.
+Allow platform owners to mirror devicetree files from devitree-rebasing
+directory into dts/arch/$(ARCH) (special case for dts/arch/arm64). Then
+build then along with any *-u-boot.dtsi file present in arch/$(ARCH)/dts
+directory. Also add a new Makefile for arm64.
 
-This is needed for platform owners to start building DTB files from
-devicetree-rebasing directory but still being able to include
-*-u-boot.dtsi files.
+This will help easy migration for platforms which currently are compliant
+with upstream Linux kernel devicetree files.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 ---
 
 Changes in v3:
 --------------
-- Picked up review tags
+- Minor commit message update
 
 Changes in v2:
 --------------
-- s/UBOOT_DTSI_LOC/u_boot_dtsi_loc/
+- s/DEVICE_TREE_LOC/dt_dir/ and s/U-boot/U-Boot/
 
- scripts/Makefile.lib | 25 ++++++++++++++-----------
- 1 file changed, 14 insertions(+), 11 deletions(-)
+ dts/Kconfig             | 11 +++++++++++
+ dts/Makefile            | 17 ++++++++++++++---
+ dts/arch/arm64/Makefile | 14 ++++++++++++++
+ 3 files changed, 39 insertions(+), 3 deletions(-)
+ create mode 100644 dts/arch/arm64/Makefile
 
-diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-index 27b9437027c..09330421856 100644
---- a/scripts/Makefile.lib
-+++ b/scripts/Makefile.lib
-@@ -159,18 +159,20 @@ cpp_flags      = -Wp,-MD,$(depfile) $(NOSTDINC_FLAGS) $(UBOOTINCLUDE)     \
- ld_flags       = $(KBUILD_LDFLAGS) $(ldflags-y) $(LDFLAGS_$(@F))
+diff --git a/dts/Kconfig b/dts/Kconfig
+index 00c0aeff893..e58c1c6f2ab 100644
+--- a/dts/Kconfig
++++ b/dts/Kconfig
+@@ -85,6 +85,17 @@ config OF_LIVE
+ 	  enables a live tree which is available after relocation,
+ 	  and can be adjusted as needed.
  
- # Try these files in order to find the U-Boot-specific .dtsi include file
--u_boot_dtsi_options = $(strip $(wildcard $(dir $<)$(basename $(notdir $<))-u-boot.dtsi) \
--	$(wildcard $(dir $<)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi) \
--	$(wildcard $(dir $<)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi) \
--	$(wildcard $(dir $<)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi) \
--	$(wildcard $(dir $<)u-boot.dtsi))
-+u_boot_dtsi_loc = $(srctree)/arch/$(ARCH)/dts/
++config OF_UPSTREAM
++	bool "Enable use of devicetree imported from Linux kernel release"
++	help
++	  Traditionally, U-Boot platforms used to have their custom devicetree
++	  files or copy devicetree files from Linux kernel which are hard to
++	  maintain and can usually get out-of-sync from Linux kernel. This
++	  option enables platforms to migrate to devicetree-rebasing repo where
++	  a regular sync will be maintained every major Linux kernel release
++	  cycle. However, platforms can still have some custom u-boot specific
++	  bits maintained as part of *-u-boot.dtsi files.
 +
-+u_boot_dtsi_options = $(strip $(wildcard $(u_boot_dtsi_loc)$(basename $(notdir $<))-u-boot.dtsi) \
-+	$(wildcard $(u_boot_dtsi_loc)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi) \
-+	$(wildcard $(u_boot_dtsi_loc)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi) \
-+	$(wildcard $(u_boot_dtsi_loc)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi) \
-+	$(wildcard $(u_boot_dtsi_loc)u-boot.dtsi))
+ choice
+ 	prompt "Provider of DTB for DT control"
+ 	depends on OF_CONTROL
+diff --git a/dts/Makefile b/dts/Makefile
+index 3437e54033d..68daaf45ec7 100644
+--- a/dts/Makefile
++++ b/dts/Makefile
+@@ -10,10 +10,20 @@ ifeq ($(DEVICE_TREE),)
+ DEVICE_TREE := unset
+ endif
  
- u_boot_dtsi_options_raw = $(warning Automatic .dtsi inclusion: options: \
--	$(dir $<)$(basename $(notdir $<))-u-boot.dtsi \
--	$(dir $<)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi \
--	$(dir $<)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi \
--	$(dir $<)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi \
--	$(dir $<)u-boot.dtsi ... \
-+	$(u_boot_dtsi_loc)$(basename $(notdir $<))-u-boot.dtsi \
-+	$(u_boot_dtsi_loc)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi \
-+	$(u_boot_dtsi_loc)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi \
-+	$(u_boot_dtsi_loc)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi \
-+	$(u_boot_dtsi_loc)u-boot.dtsi ... \
- 	found: $(if $(u_boot_dtsi_options),"$(u_boot_dtsi_options)",nothing!))
++ifeq ($(CONFIG_OF_UPSTREAM),y)
++ifeq ($(CONFIG_ARM64),y)
++dt_dir := dts/arch/arm64
++else
++dt_dir := dts/arch/$(ARCH)
++endif
++else
++dt_dir := arch/$(ARCH)/dts
++endif
++
+ ifneq ($(EXT_DTB),)
+ DTB := $(EXT_DTB)
+ else
+-DTB := arch/$(ARCH)/dts/$(DEVICE_TREE).dtb
++DTB := $(dt_dir)/$(DEVICE_TREE).dtb
+ endif
  
- # Uncomment for debugging
-@@ -190,6 +192,7 @@ dtsi_include_list += $(CONFIG_DEVICE_TREE_INCLUDES)
- dtc_cpp_flags  = -Wp,-MD,$(depfile).pre.tmp -nostdinc                    \
- 		 $(UBOOTINCLUDE)                                         \
- 		 -I$(dir $<)                                             \
-+		 -I$(u_boot_dtsi_loc)                                     \
- 		 -I$(srctree)/arch/$(ARCH)/dts/include                   \
- 		 -I$(srctree)/include                                    \
- 		 -D__ASSEMBLY__                                          \
-@@ -328,7 +331,7 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
- 	  echo '$(pound)include "$(f)"' >> $(pre-tmp);) \
- 	$(HOSTCC) -E $(dtc_cpp_flags) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
- 	$(DTC) -O dtb -o $@ -b 0 \
--		-i $(dir $<) $(DTC_FLAGS) \
-+		-i $(dir $<) -i $(u_boot_dtsi_loc) $(DTC_FLAGS) \
- 		-d $(depfile).dtc.tmp $(dtc-tmp) || \
- 		(echo "Check $(shell pwd)/$(pre-tmp) for errors" && false) \
- 		; \
+ $(obj)/dt-$(SPL_NAME).dtb: dts/dt.dtb $(objtree)/tools/fdtgrep FORCE
+@@ -41,7 +51,7 @@ $(DTB): arch-dtbs
+ 
+ PHONY += arch-dtbs
+ arch-dtbs:
+-	$(Q)$(MAKE) $(build)=arch/$(ARCH)/dts dtbs
++	$(Q)$(MAKE) $(build)=$(dt_dir) dtbs
+ 
+ ifeq ($(CONFIG_SPL_BUILD),y)
+ obj-$(CONFIG_OF_EMBED) := dt-spl.dtb.o
+@@ -65,4 +75,5 @@ clean-files := dt.dtb.S
+ # Let clean descend into dts directories
+ subdir- += ../arch/arc/dts ../arch/arm/dts ../arch/m68k/dts ../arch/microblaze/dts	\
+ 	   ../arch/mips/dts ../arch/nios2/dts ../arch/powerpc/dts ../arch/riscv/dts	\
+-	   ../arch/sandbox/dts ../arch/sh/dts ../arch/x86/dts ../arch/xtensa/dts
++	   ../arch/sandbox/dts ../arch/sh/dts ../arch/x86/dts ../arch/xtensa/dts	\
++	   ./arch/arm64 ./arch/$(ARCH)
+diff --git a/dts/arch/arm64/Makefile b/dts/arch/arm64/Makefile
+new file mode 100644
+index 00000000000..16e9fea622d
+--- /dev/null
++++ b/dts/arch/arm64/Makefile
+@@ -0,0 +1,14 @@
++# SPDX-License-Identifier: GPL-2.0+
++
++include $(srctree)/scripts/Makefile.dts
++
++targets += $(dtb-y)
++
++# Add any required device tree compiler flags here
++DTC_FLAGS += -a 0x8
++
++PHONY += dtbs
++dtbs: $(addprefix $(obj)/, $(dtb-y))
++	@:
++
++clean-files := */*.dtb */*.dtbo */*_HS
 -- 
 2.34.1
 
