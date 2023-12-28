@@ -4,84 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89D98C3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 21:24:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E257C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 21:55:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C449A87A08;
-	Thu, 28 Dec 2023 22:24:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B695E879FE;
+	Thu, 28 Dec 2023 22:55:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="G5+T2nmV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eWheoNEL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A771587A39; Thu, 28 Dec 2023 22:24:37 +0100 (CET)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id 3BE2F87A08; Thu, 28 Dec 2023 22:54:59 +0100 (CET)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C999987A28
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 22:24:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BE1A7879E9
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 22:54:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-5e86fc3f1e2so44150707b3.0
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 13:24:33 -0800 (PST)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-50e7c6e3c63so3216801e87.3
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 13:54:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703798672; x=1704403472; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0TT+WqyqhN/B9rMZk/iNRXfUp5vXa9a6RJpciPZaqSs=;
- b=G5+T2nmVt2jkOq/f/15tBjW6yBAjLs4hQox4SzT9w1HTjF0ZsMZ11kgdT6f0Li/n1v
- Lh/ySaSxWLKREnUuOfb2wOI2QMefYhOS1aZEdiBpn0jQ94xulWw6U4LSPRtsDQDn04w9
- S7dhj1c5F0QsyBvzmQK/SzraqAJk5AA4qvNQ0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703798672; x=1704403472;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1703800496; x=1704405296; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0TT+WqyqhN/B9rMZk/iNRXfUp5vXa9a6RJpciPZaqSs=;
- b=ET+NCTQdKwSNKcyhEXoN7dh0Db/tW1GOY96wb4iF4tWU5hzxYgAcEcsOeINShEXsqh
- 6qtjfE2L4e2cd9QwQA4HMM6vmlD1eh6UZIXYqtaq9YtbC7pXulCfi3IfBJIp+3FXl14K
- KrswcDUJzrGDtsj2L1WqSNOMOhVOv+RWsYMLnkFG9A4tuk5N4IDEc5DQ77wbR1UT0iJR
- 1HJbKFUrKWg4qOeiCeNjk+2kGsfPJcPwjFOb6Lj1mTmCuuu1qganoV0RwTJX/n/+LvKx
- e/VLwcvMVl5fyTQgVJMZQCdGuWGoppt1zYsXLmVnOtK/v58Tl55usdqW3gfoYHx2RxLW
- 4PMA==
-X-Gm-Message-State: AOJu0YyrBmSKyt8l7jcxPUCSbRfhmT+BwBNErroYNt7JxctZiAsz6KBV
- Bjs2Wi0BMIjeYWyihcZ/JVqYDb+09Tmbug==
-X-Google-Smtp-Source: AGHT+IFSSxLH7frBLzoJXHLp9lqywwevNR8ESuYJYZgeFSskN907efXvZJUPDyMuHFuLcXF9setC3w==
-X-Received: by 2002:a81:5b05:0:b0:5e7:6b24:4a38 with SMTP id
- p5-20020a815b05000000b005e76b244a38mr7487834ywb.56.1703798672516; 
- Thu, 28 Dec 2023 13:24:32 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- c67-20020a814e46000000b005e4d89b4520sm7797295ywb.47.2023.12.28.13.24.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Dec 2023 13:24:31 -0800 (PST)
-Date: Thu, 28 Dec 2023 16:24:29 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Raymond Mao <raymond.mao@linaro.org>, Marek Vasut <marex@denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Baruch Siach <baruch@tkos.co.il>, Bin Meng <bmeng.cn@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerry Van Baren <vanbaren@cideas.com>, Michal Simek <michal.simek@amd.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>,
- Sean Anderson <seanga2@gmail.com>, Stefan Roese <sr@denx.de>
-Subject: Re: [PATCH v6] fdt: Allow the devicetree to come from a bloblist
-Message-ID: <20231228212429.GR2652760@bill-the-cat>
-References: <20231228194725.2482268-1-sjg@chromium.org>
+ bh=ZMnzS6PUNcJoVP87B3uX09j4z9DJsvzD75Z1c8dBGfw=;
+ b=eWheoNELKek9oiRjlT1HxRdRV13hHskzKw7Sa4EzZttZ11FANk1Pp7WF6lWeXVo9qf
+ cqfzjgYfiDGxqW1N2RSAVcQpJVPf38wuIUCtGak9kvH1W2WvZ66TuYUCp3FslKJ1EcYC
+ RDdKAMwWxpBVgUxsoaPIxLMqACnsBLqcg1qB1o2Hj1zLmwJQrj/Ey61xDsi93gnX712m
+ 9u68DjgEGjgPwr3XazCpn+SG4YKHKgf4tOyppEHT1GwS7qUvsjk0UWk+nxgLhSGhOl9v
+ fPJPjF9aXoO2QvumIqyHajREZtkSLoHqh5u8arXj2YoGqWkr8p1CV8Azqrzo+akHn5qf
+ qQ2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703800496; x=1704405296;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ZMnzS6PUNcJoVP87B3uX09j4z9DJsvzD75Z1c8dBGfw=;
+ b=H8JsxDhJkQeAahcn3h0icZwa8H5Nhl+s8mu+XP4mTAkxOVkcohAgyBeEA/I4nwLust
+ LM3IrJABXc/w8t0oKx8tO3BZQIrp4w7xxJjCYDuRfD7SeyWndlAO4IVwvBaDAho4oC9T
+ 45W2Eg/kEhTpa/obYr2IxAX+x3jjwKG/tLwJW7doCIpu+ArOS+ZTUwewMDjQA2w3v77v
+ +t/QdXj45aSKsKZBzKyXE1nOZXeiLpP3M3R6C6hEm3hJ3yX1mR3GTZBWM712GkAzMDk0
+ fJhODLay5WFijsPreWHpTr7RYoVHtmFui8nhvn0wOYeB9tZf8vAJkEfpW09XwTEuA08D
+ XSMg==
+X-Gm-Message-State: AOJu0YyozEzsc3aJH2f6pnIgVpoBqyf4YlZRcF2RtcrtFQwWmjlsXuOf
+ gcW0Wu0FcLdLGQ9RWQzw+8+vvGinBOgvMY8iKgY=
+X-Google-Smtp-Source: AGHT+IFKETtnOgByW8FFncXBzR5GuoCRxdwEtP0M+3z/iCFuxCe6d1XzTBq4UsDuHBqSZAai34UcpeaJ7iuZS0DKsyE=
+X-Received: by 2002:a05:6512:33d5:b0:50e:7e4b:4f7a with SMTP id
+ d21-20020a05651233d500b0050e7e4b4f7amr1517101lfg.96.1703800495482; Thu, 28
+ Dec 2023 13:54:55 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="F2Ms8lg+30CX4lih"
-Content-Disposition: inline
-In-Reply-To: <20231228194725.2482268-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CA+1FSihxOraiDgHXcq=0oiJpSaGnJt+2fvvNGK7JKCkaPCv3jQ@mail.gmail.com>
+ <CAJaLiFxnbuxa6Svmf7BN86u2wgRJZJQR+cBGWrdyAXpPQSyKNg@mail.gmail.com>
+ <CA+1FSihKXuqLMTbZzSdKXwMKAnO0nKu1ne92UXS_m9A1f8jqYA@mail.gmail.com>
+ <CA+1FSigNkAcc=8PZQkOaD12HvS+y+TfP=urykBXUy8Ye2fUZtQ@mail.gmail.com>
+ <CAFLszThG7egV+=vq2qm7Qu4UzDfgHGCQB=LFRSbnW9HH4pDF3A@mail.gmail.com>
+In-Reply-To: <CAFLszThG7egV+=vq2qm7Qu4UzDfgHGCQB=LFRSbnW9HH4pDF3A@mail.gmail.com>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Thu, 28 Dec 2023 13:54:43 -0800
+Message-ID: <CAJaLiFxRBB0bxCY3Og+MeQ5F=57J7eVKP_Besmhd9dA0jKCJow@mail.gmail.com>
+Subject: Re: I'm looking for the source code of a specific u-boot version.
+To: Simon Glass <sjg@chromium.org>
+Cc: Mario Marietto <marietto2008@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,86 +91,264 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Dec 28, 2023 at 11:48=E2=80=AFAM Simon Glass <sjg@chromium.org> wro=
+te:
+>
+> Hi Mario,
+>
+> On Thu, Dec 28, 2023 at 3:48=E2=80=AFPM Mario Marietto <marietto2008@gmai=
+l.com> wrote:
+> >
+> > I tried to compile it,but If failed :
+> >
+> > /mnt/zroot2/zroot2/OS/Chromebook/freebsd-xen/domU-freebsd/bootloaders/u=
+-boot-2017.05#
+> > ARCH=3Darm CROSS_COMPILE=3Darm-linux-gnueabihf- make snow_defconfig
+> >
+> >   HOSTCC  scripts/basic/fixdep
+> >   HOSTCC  scripts/kconfig/conf.o
+> >   HOSTCC  scripts/kconfig/zconf.tab.o
+> > In file included from scripts/kconfig/zconf.tab.c:2470:
+> > In function =E2=80=98dep_stack_insert=E2=80=99,
+> >     inlined from =E2=80=98sym_check_print_recursive=E2=80=99 at scripts=
+/kconfig/symbol.c:1123:3,
+> >     inlined from =E2=80=98sym_check_deps=E2=80=99 at scripts/kconfig/sy=
+mbol.c:1300:3:
+> > scripts/kconfig/symbol.c:1099:19: warning: storing the address of
+> > local variable =E2=80=98cv_stack=E2=80=99 in =E2=80=98check_top=E2=80=
+=99 [-Wdangling-pointer=3D]
+> >  1099 |         check_top =3D stack;
+> >       |         ~~~~~~~~~~^~~~~~~
+> > scripts/kconfig/symbol.c: In function =E2=80=98sym_check_deps=E2=80=99:
+> > scripts/kconfig/symbol.c:1120:26: note: =E2=80=98cv_stack=E2=80=99 decl=
+ared here
+> >  1120 |         struct dep_stack cv_stack;
+> >       |                          ^~~~~~~~
+> > scripts/kconfig/symbol.c:1090:4: note: =E2=80=98check_top=E2=80=99 decl=
+ared here
+> >  1090 | } *check_top;
+> >       |    ^~~~~~~~~
+> >   HOSTLD  scripts/kconfig/conf
+> > #
+> > # configuration written to .config
+> > #
+> >
+> > /mnt/zroot2/zroot2/OS/Chromebook/freebsd-xen/domU-freebsd/bootloaders/u=
+-boot-2017.05#
+> > ARCH=3Darm CROSS_COMPILE=3Darm-linux-gnueabihf- make
+> >
+> > scripts/kconfig/conf  --silentoldconfig Kconfig
+> >   CHK     include/config.h
+> >   CFG     u-boot.cfg
+> >   GEN     include/autoconf.mk
+> >   GEN     include/autoconf.mk.dep
+> >   CFG     spl/u-boot.cfg
+> >   GEN     spl/include/autoconf.mk
+> >   CHK     include/config/uboot.release
+> >   CHK     include/generated/version_autogenerated.h
+> >   CHK     include/generated/timestamp_autogenerated.h
+> >   UPD     include/generated/timestamp_autogenerated.h
+> >   CC      lib/asm-offsets.s
+> > arm-linux-gnueabihf-gcc: error: unrecognized -march target: armv5
+> > arm-linux-gnueabihf-gcc: note: valid arguments are: armv4 armv4t
+> > armv5t armv5te armv5tej armv6 armv6j armv6k armv6z armv6kz armv6zk
+> > armv6t2 armv6-m armv6s-m armv7 armv7-a armv7ve armv7-r armv7-m
+> > armv7e-m armv8-a armv8.1-a armv8.2-a armv8.3-a armv8.4-a armv8.5-a
+> > armv8.6-a armv8-m.base armv8-m.main armv8-r armv8.1-m.main armv9-a
+> > iwmmxt iwmmxt2; did you mean =E2=80=98armv4=E2=80=99?
+> > arm-linux-gnueabihf-gcc: error: missing argument to =E2=80=98-march=3D=
+=E2=80=99
+> > make[1]: *** [Kbuild:44: lib/asm-offsets.s] Error 1
+> > make: *** [Makefile:1287: prepare0] Error 2
+>
+> You might need to compile with an old toolchain, e.g. gcc 4?
 
---F2Ms8lg+30CX4lih
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I think Simon is right. I could not rebuild that 2017.05 u-boot with
+gcc 12 now. So I looked at the old log, and it was built with gcc 6.3.
 
-On Thu, Dec 28, 2023 at 07:47:25PM +0000, Simon Glass wrote:
+  gcc -Wp,-MD,disk/.part_efi.o.d  -nostdinc -isystem
+/usr/lib/gcc/arm-linux-gnueabi/6/include -Iinclude
+-I./arch/arm/include -include ./include/linux/kconfig.h -D__KERNEL__
+-D__UBOOT__ -Wall -Wstrict-prototypes -Wno-format-security
+-fno-builtin -ffreestanding -Os -fno-stack-protector
+-fno-delete-null-pointer-checks -g -fstack-usage
+-Wno-format-nonliteral -Werror=3Ddate-time -D__ARM__ -marm
+-mno-thumb-interwork -mabi=3Daapcs-linux -mword-relocations -fno-pic
+-ffunction-sections -fdata-sections -fno-common -ffixed-r9
+-msoft-float -pipe -march=3Darmv5te -D__LINUX_ARM_ARCH__=3D5
+-I./arch/arm/mach-kirkwood/include    -D"KBUILD_STR(s)=3D#s"
+-D"KBUILD_BASENAME=3DKBUILD_STR(part_efi)"
+-D"KBUILD_MODNAME=3DKBUILD_STR(part_efi)" -c -o disk/part_efi.o
+disk/part_efi.c
 
-> Standard passage provides for a bloblist to be passed from one firmware
-> phase to the next. That can be used to pass the devicetree along as well.
-> Add an option to support this.
->=20
-> Tests for this will be added as part of the Universal Payload work.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-[snip]
-> diff --git a/dts/Kconfig b/dts/Kconfig
-> index 00c0aeff893..ae451b9caf7 100644
-> --- a/dts/Kconfig
-> +++ b/dts/Kconfig
-> @@ -105,6 +105,19 @@ config OF_EMBED
-> =20
->  endchoice
-> =20
-> +config OF_BLOBLIST
-> +	bool "Provided by a bloblist at runtime"
-> +	depends on BLOBLIST && OF_SEPARATE
+# ll /usr/lib/gcc/arm-linux-gnueabi/6* -d
+drwxr-xr-x 5 root root 4096 Apr 14  2019 /usr/lib/gcc/arm-linux-gnueabi/6
+lrwxrwxrwx 1 root root    1 May 16  2017
+/usr/lib/gcc/arm-linux-gnueabi/6.3.0 -> 6
 
-This is now even more confusing, frankly. The help for OF_SEPARATE says:
-If this option is enabled, the device tree will be built and placed as a
-separate u-boot.dtb file alongside the U-Boot image.
+Hope this helps.
 
-So why would you enable that to then have a device tree passed via
-bloblist instead?
+All the best,
+Tony
 
-We should probably start by fixing all of this confusing naming / logic
-and then correct things such that:
-- OF_EMBED wins if set. This is the override-has-been-set we-must-use-it
-  switch. First choice, not last choice. If binman needs tweaks so that
-  it will still generate images for platforms in this case, that needs
-  to happen.
-- If we have a bloblist, we scan the bloblist for DT and if found, use
-  it.
-- If it looks like we've been booted as a fake Linux kernel, and we can
-  start with just aarch64 and let riscv come in as a follow up, so
-  what's documented within
-  https://www.kernel.org/doc/html/latest/arch/arm64/booting.html#call-the-k=
-ernel-image
-  then we use that device tree.
-  - This _may_ just end up having to be "Does x0 (or similar) point to a
-    valid DT?" as I don't know how correct everything using this method
-    today is too what the spec above lists.
-- If we have a dtb appended to use by what we call today OF_SEPARATE but
-  should really stop calling it that we use that.
-
-At that point, we can probably have zero "totally board specific kludge
-for device tree location", and kill off OF_HAS_PRIOR_STAGE too (since
-that's really just bloblist or fake-linux-kernel). We'll also be able to
-support migration from fake-linux-kernel to bloblist
-
---=20
-Tom
-
---F2Ms8lg+30CX4lih
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWN54IACgkQFHw5/5Y0
-tyyznwv/dPia540TCvR8ML0ygLemtiZ+ztj19CNSFM96YC5ieKzcZioNYc3XCE8m
-tn/GJ4Fl6jG+F8swvJBYOclmXd2Yxy25JTLss8IRNfiSVNtyczUp6Yam/GDEqcQc
-tVZPQWkiQm0IElfYD52zv5GukcZjZrrKdkCHlve8FyLZGrunPfN3X+beUhwT9VNi
-25/ih72GswJYH/UYI5xzsZb4S7ru534HcC+ML66KgsLyH1dKLGXQ8eyVOlKEPUWl
-XeRFupRLwXjkWJFlAFJ9HvWnbTRRr0fQBABHfzcnaddlD9aU9KdSaKVi8pqw4dYp
-ujbWrCPEE+MCaa9UOwcjpNbXzcbYO4H8Hz8+iU+WW2TXYj7EGoTuDY3vQJWCdbo2
-lfvL0A31L2vcEH7yUenPp7VE3+4uuoyAtat8OCvyETESypJgEQxU6jijR5XHDiiH
-3JyzzPvTsaXVXFXkUB1IKrlQJt7UZZ5oK+s5UiUAu/xi7iPZOMiVntkKyFh0cWPM
-Prj9AKB9
-=P6WX
------END PGP SIGNATURE-----
-
---F2Ms8lg+30CX4lih--
+>
+> Regards,
+> Simon
+>
+>
+> >
+> > On Thu, Dec 28, 2023 at 3:47=E2=80=AFPM Mario Marietto <marietto2008@gm=
+ail.com> wrote:
+> > >
+> > > Hello.
+> > >
+> > > Can someone provide the right link to download u-boot-2017.0.5 , plea=
+se ?
+> > >
+> > > I've found it here,but I'm not sure that it's the correct version :
+> > >
+> > > https://src.fedoraproject.org/repo/pkgs/uboot-tools/u-boot-2017.05.ta=
+r.bz2/sha512/be270f9242a72b05463092a022bbabd54996762de1ff23bf7575124ac02e62=
+f49572a4e2f6f571a5019047d40027e56e35593b5cc373c4a5a39b100c3377ba93/
+> > >
+> > > Can you confirm it ? thanks.
+> > >
+> > > On Thu, Dec 28, 2023 at 1:14=E2=80=AFAM Tony Dinh <mibodhi@gmail.com>=
+ wrote:
+> > > >
+> > > > Hi Mario and Heinrich,
+> > > >
+> > > > On Wed, Dec 27, 2023 at 12:23=E2=80=AFPM Mario Marietto <marietto20=
+08@gmail.com> wrote:
+> > > > >
+> > > > > Hello.
+> > > > >
+> > > > > I'm trying to boot FreeBSD for arm32 bit as DomU on my ARM Chrome=
+book
+> > > > > SNOW with xen. Basically there are two ways to accomplish this ta=
+sk :
+> > > > >
+> > > > >
+> > > > > 1) to write a patch that allows the FreeBSD kernel to boot as a z=
+Image
+> > > > > file. This could be accomplished applying this patch to a specifi=
+c
+> > > > > file that's on the source code of FreeBSD :
+> > > > >
+> > > > >
+> > > > > https://xenbits.xen.org/gitweb/?p=3Dp...8;hb=3D0782e25d98cc139147=
+2717035f986c979edef0c9
+> > > > >
+> > > > >
+> > > > >
+> > > > > This patch was written by Julien Grall a lot of time ago and now =
+it
+> > > > > does not work anymore. This is the reason explain by the xen
+> > > > > developers :
+> > > > >
+> > > > >
+> > > > >
+> > > > > It appears FreeBSD-CURRENT removed the last step converting the k=
+ernel
+> > > > > file to kernel.bin.The patch can be readily rebased, but without
+> > > > > kernel.bin that doesn't do too much.
+> > > > >
+> > > > >
+> > > > >
+> > > > > So,without a rebase of that patch the first option is not applica=
+ble.
+> > > > > And I'm not able to fix it.
+> > > > >
+> > > > >
+> > > > > 2) booting FreeBSD using U-Boot,as explained to me by a xen devel=
+oper :
+> > > > >
+> > > > >
+> > > > > I was trying to explain why and how Julien's patch works so that =
+you
+> > > > > could be the one to re-do something similar or fix the patch on t=
+he
+> > > > > FreeBSD kernel that you are working with. I am happy to help revi=
+ew
+> > > > > and write patches but I don't work with the FreeBSD kernel so I
+> > > > > wouldn't be able to help you quickly. However, I might have a
+> > > > > suggestion. Do you know if FreeBSD can be booted by U-Boot ?
+> > > > > Because
+> > > > > U-Boot definitely boots as Xen on ARM guest firmware/bootloader. =
+You
+> > > > > should be able to build U-Boot and use the U-Boot binary as Xen g=
+uest
+> > > > > kernel, then U-Boot could load FreeBSD from disk or network and s=
+tart
+> > > > > it. For instance as domU config file:
+> > > > >
+> > > > > kernel=3D"/home/petalinux/u-boot.bin"
+> > > > > disk =3D [ '/home/petalinux/test.img,raw,xvda' ]
+> > > > >
+> > > > >
+> > > > > Actually I'm working on the idea n. 2. Basically I need to find t=
+he
+> > > > > proper u-boot file that's able to boot the image of FreeBSD that =
+I
+> > > > > have installed (13.2 for arm32 bit). Maybe I found it here :
+> > > > >
+> > > > >
+> > > > > http://commondatastorage.googleapis.com/chromeos-localmirror/dist=
+files/nv_uboot-snow-simplefb.kpart.bz2
+> > > > >
+> > > > >
+> > > > > I found that link inside this tutorial :
+> > > > >
+> > > > >
+> > > > > https://wiki.freebsd.org/arm/Chromebook
+> > > > >
+> > > > >
+> > > > > the version of u-boot that has been embedded in that file is the =
+following one :
+> > > > >
+> > > > >
+> > > > > # strings nv_uboot-snow-simplefb.kpart | grep U-Boot
+> > > > > U-Boot 2011.12-gc1f6280 (May 27 2013 - 15:06:59) for SMDK5250
+> > > > >
+> > > > >
+> > > > > So the question is easy : I need to find the source code of that =
+old
+> > > > > version of u-boot,because once compiled,it will give me the prope=
+r
+> > > > > u-boot.bin kernel / bootloader file that maybe will be able to bo=
+ot
+> > > > > FreeBSD.
+> > > >
+> > > > Yes, it can boot a 32-bit ARM board. I'm not a FreeBSD person, but
+> > > > I've helped a FreeBSD user booting a 32-bit ARM box with u-boot
+> > > > (GoFlexHome Marvell Kirkwood 6281). The u-boot version was 2017.05.=
+ I
+> > > > used an out-of-tree u-boot build. This u-boot executed the ubldr to
+> > > > boot FreeBSD.
+> > > >
+> > > > Please see here:
+> > > > https://forum.doozan.com/read.php?3,49039,82059#msg-82059
+> > > >
+> > > > It's been so long, I don't remember the details. Just to confirm wh=
+at
+> > > > Heinrich said that u-boot can indeed boot 32-bit FreeBSD, since man=
+y
+> > > > years ago.
+> > > >
+> > > > All the best,
+> > > > Tony
+> > > >
+> > > > >
+> > > > >
+> > > > > --
+> > > > > Mario.
+> > >
+> > >
+> > >
+> > > --
+> > > Mario.
+> >
+> >
+> >
+> > --
+> > Mario.
