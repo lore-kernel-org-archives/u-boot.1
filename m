@@ -4,89 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8158CC3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 15:25:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76E02C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 15:28:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0450387AB6;
-	Thu, 28 Dec 2023 16:25:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4DAD587A7B;
+	Thu, 28 Dec 2023 16:28:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RlUMFTCU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JM2oP6Js";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59F4E87AB6; Thu, 28 Dec 2023 16:25:13 +0100 (CET)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 9DACB87A68; Thu, 28 Dec 2023 16:28:08 +0100 (CET)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 799ED87A7B
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 16:25:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 54AA987A7B
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 16:28:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-5e745891a69so48384917b3.2
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 07:25:09 -0800 (PST)
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-5e54d40cca2so39183647b3.3
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 07:28:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703777108; x=1704381908; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1703777284; x=1704382084; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=P5pPQAOFZvjdwYbvIJmTtI3GibSN+hHRfK0LXP8QNxE=;
- b=RlUMFTCUWk7cB+D1svOBRSlY9561SxwHaGB91Ts4TT7DNx/hx6s4yghj041EN/Bqda
- e7vFJz2NkxOQ9+bkamRpnsmNauRNhhDl9a2Vahpn/FuqjA2JvJ7OJxDip1zANLSwi4W6
- 5q3CTIJ5Fx7sxUkJhibDYf9utkxXJ/Bxq16Hg=
+ bh=pcCtoMnC633/H4UVqMronBhB5HLHozMMuBeKo2ZII5I=;
+ b=JM2oP6JsbtddR2ZCUkdIhBuPdlNQRSkih99kSHDLRLBNY/l24HvjYdxezHYysFJyK0
+ pYg87ntsf6xMslqZBhu/IHnpXjpGHYoyZx8hGJhecdDrJ1gLJE2kneFfwQeZcudgpO0O
+ eEIi4IuYV9L/64DL9jP8eFjr8boyTj2usnBJY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703777108; x=1704381908;
+ d=1e100.net; s=20230601; t=1703777284; x=1704382084;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P5pPQAOFZvjdwYbvIJmTtI3GibSN+hHRfK0LXP8QNxE=;
- b=AstZb1GxLoUgQo9D5ljUpExldeew8DgQUUQcXajuwYQPBbQyDzbvg9WPByDq+XYg+T
- dpxBCASlm5w9I3yFxC8cO0o8P0pMCs8gVgAi+5rEnxEXywzJMJgWxOWo2zStdeg5IgzE
- KmG8fPDgBEM4RAqDPnkASOAbj89WJ1TZgOsGeL0x4gUpyh3Z/H2EQJ76m4kzQk0m8BRJ
- Ckt67JFwZKixBW0LlMuJ0ZkFqOOTCLSa0s6Blj11oLaM23DgPaepm4W0G0iaHbOYKClf
- cjVRUM9J1RTUtN5QMYlKEEipH6Bf6S1ZNdIF4iJ5tJyKQtYexBZjZWMmqRpeiTTCcrzi
- kYvA==
-X-Gm-Message-State: AOJu0YwLBzRDD40EC5Rg9dIGyfFzW4DEsyosbPR16nu4tugo67njLwWz
- d4HS8Up7lmvr3tONUD850aFg6ojy5rpvYg==
-X-Google-Smtp-Source: AGHT+IF6qVORWiEfQSthAdjihIjx2lnsV46lpKAuIwz8bK+VtVq0r7ic5RCm4QJ8Cxev4ivs41TJQg==
-X-Received: by 2002:a81:48d4:0:b0:5e9:f02a:5a23 with SMTP id
- v203-20020a8148d4000000b005e9f02a5a23mr5579752ywa.68.1703777108172; 
- Thu, 28 Dec 2023 07:25:08 -0800 (PST)
+ bh=pcCtoMnC633/H4UVqMronBhB5HLHozMMuBeKo2ZII5I=;
+ b=f9OJAxbQ9JHXueEEcnEomLMVH58RhNGccCj4FMaxT4BAKtC0hUwbYK6wdEB7q9HGGq
+ ZWhaxQIxSx10is2yuDuCTD6jpa1Utq8YXVH5m2zqbAf7FrenzU66KU7+sp543rU6SePX
+ VgU4T3z9kRDAsaPhvKYYUQ1QXmtUlLY1+uFjM6JvljLTgYQ0kkv1VNET91rz2ENyWOTZ
+ wP5xwGwVSa/K4HhoUh4merZtMY6qMhwJTEASz+hr+9lm+i1aNMkzc/8x16P/L2Nzdrhj
+ BG+EtROHTgYLzRVejL+Jts0SViACZe0XGhGm4mDcwhZx7AWZUCK/F288lwf+ufltvrxe
+ pjTA==
+X-Gm-Message-State: AOJu0YwfGsYe0V9XMlFWn1dD5AydTiP8Q3f6Fw+rq0D1LxvDjJcfaYfJ
+ N+bpc5+bgyBq/VW3Osaz2TrzxkQAdJPKLQ==
+X-Google-Smtp-Source: AGHT+IGpCAL4dgIBykxbq4KbSsMpVV6iBNoHHuER2PG10x+tvZIE3XdBwEOkMVYhQIM7pVeJzifEWw==
+X-Received: by 2002:a81:dc07:0:b0:5ee:5daa:2426 with SMTP id
+ h7-20020a81dc07000000b005ee5daa2426mr1400941ywj.45.1703777283991; 
+ Thu, 28 Dec 2023 07:28:03 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- c5-20020a81c945000000b005ea9425db98sm5788251ywl.8.2023.12.28.07.25.06
+ p84-20020a0de657000000b005e1a5593c0csm7476987ywe.60.2023.12.28.07.28.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Dec 2023 07:25:07 -0800 (PST)
-Date: Thu, 28 Dec 2023 10:25:04 -0500
+ Thu, 28 Dec 2023 07:28:03 -0800 (PST)
+Date: Thu, 28 Dec 2023 10:28:01 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
- u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de,
- robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org,
- conor@kernel.org, neil.armstrong@linaro.org,
- caleb.connolly@linaro.org, ff@shokubai.tech,
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
- pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
- maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de,
- michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk,
- peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com,
- marex@denx.de, mibodhi@gmail.com
-Subject: Re: [PATCH v3 7/8] dts: meson-gxbb: Switch to using upstream DT
-Message-ID: <20231228152504.GF2652760@bill-the-cat>
-References: <20231228115804.3626579-1-sumit.garg@linaro.org>
- <20231228115804.3626579-8-sumit.garg@linaro.org>
- <CAFLszTg=CDfyTGG9c-t=98eFYvYy61L1kzmrssNKPSS6dZL3cg@mail.gmail.com>
- <20231228135642.GA2652760@bill-the-cat>
- <CAFLszThP+GJcPP_LJBva1M5mi9Wj-Nh-z7A6-fkSpPgOTtLmRQ@mail.gmail.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Marek Vasut <marex@denx.de>, Raymond Mao <raymond.mao@linaro.org>,
+ Baruch Siach <baruch@tkos.co.il>, Bin Meng <bmeng.cn@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerry Van Baren <vanbaren@cideas.com>, Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>,
+ Sean Anderson <seanga2@gmail.com>
+Subject: Re: [PATCH v4] fdt: Allow the devicetree to come from a bloblist
+Message-ID: <20231228152801.GG2652760@bill-the-cat>
+References: <20231226094625.221671-1-sjg@chromium.org>
+ <20231226120710.GH2652760@bill-the-cat>
+ <CAC_iWjLy1E9wEW3zX2waN9mc=tz7PTKE0gJ4RucqMmZR2cA6_Q@mail.gmail.com>
+ <CAFLszTgqS9TF1F-RxO1dpZPZGG6QBiKm0n_e0yVHAume+xT3eA@mail.gmail.com>
+ <20231227201130.GV2652760@bill-the-cat>
+ <CAFLszThJc04Zh1tFA4Cp7+oKVv2oKtk2015F37eMzPcXgqW7bw@mail.gmail.com>
+ <20231228134809.GZ2652760@bill-the-cat>
+ <CAFLszTj+gVLyGr82mf5VT3KS86pkH+gjpM525o973WKYQcNv4w@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0z+czaZUpOOm8ORG"
+ protocol="application/pgp-signature"; boundary="o9m7EVg3Wx7cLBJw"
 Content-Disposition: inline
-In-Reply-To: <CAFLszThP+GJcPP_LJBva1M5mi9Wj-Nh-z7A6-fkSpPgOTtLmRQ@mail.gmail.com>
+In-Reply-To: <CAFLszTj+gVLyGr82mf5VT3KS86pkH+gjpM525o973WKYQcNv4w@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,133 +106,217 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---0z+czaZUpOOm8ORG
+--o9m7EVg3Wx7cLBJw
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 28, 2023 at 03:09:41PM +0000, Simon Glass wrote:
+On Thu, Dec 28, 2023 at 03:09:45PM +0000, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Thu, Dec 28, 2023 at 1:56=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+> On Thu, Dec 28, 2023 at 1:48=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
 te:
 > >
-> > On Thu, Dec 28, 2023 at 01:37:11PM +0000, Simon Glass wrote:
-> > > Hi Sumit,
+> > On Thu, Dec 28, 2023 at 01:37:39PM +0000, Simon Glass wrote:
+> > > Hi Tom,
 > > >
-> > > On Thu, Dec 28, 2023 at 11:59=E2=80=AFAM Sumit Garg <sumit.garg@linar=
-o.org> wrote:
-> > > >
-> > > > Although there were still some variations in board DTS files based =
-on
-> > > > meson-gxbb SoC but I think those were minor differences from upstre=
-am
-> > > > and shouldn't impact boot on these devices.
-> > > >
-> > > > So switch to upstream DT via mirroring amlogic/ directory from
-> > > > devicetree-rebasing/src/arm64/amlogic/ directory. And thereby direc=
-tly
-> > > > building DTB from there including *-u-boot.dtsi files from
-> > > > arch/$(ARCH)/dts/ directory.
-> > > >
-> > > > Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> > > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > > > ---
-> > > >
-> > > > Changes in v3:
-> > > > --------------
-> > > > - Dropped Makefile portion and enabled OF_UPSTREAM for SoC instead.
-> > > >
-> > > > Changes in v2:
-> > > > --------------
-> > > > - Picked up review tag
-> > > >
-> > > >  arch/arm/mach-meson/Kconfig           | 1 +
-> > > >  configs/nanopi-k2_defconfig           | 2 +-
-> > > >  configs/odroid-c2_defconfig           | 2 +-
-> > > >  configs/p200_defconfig                | 2 +-
-> > > >  configs/p201_defconfig                | 2 +-
-> > > >  configs/videostrong-kii-pro_defconfig | 2 +-
-> > > >  configs/wetek-hub_defconfig           | 2 +-
-> > > >  configs/wetek-play2_defconfig         | 2 +-
-> > > >  dts/arch/arm64/amlogic                | 1 +
-> > > >  9 files changed, 9 insertions(+), 7 deletions(-)
-> > > >  create mode 120000 dts/arch/arm64/amlogic
-> > > >
 > > >
-> > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > >
-> > > > diff --git a/arch/arm/mach-meson/Kconfig b/arch/arm/mach-meson/Kcon=
-fig
-> > > > index d6c89058061..8ddb59161a0 100644
-> > > > --- a/arch/arm/mach-meson/Kconfig
-> > > > +++ b/arch/arm/mach-meson/Kconfig
-> > > > @@ -25,6 +25,7 @@ choice
-> > > >  config MESON_GXBB
-> > > >         bool "GXBB"
-> > > >         select MESON_GX
-> > > > +       imply OF_UPSTREAM
-> > > >         help
-> > > >           Select this if your SoC is an S905
+> > > On Wed, Dec 27, 2023 at 8:06=E2=80=AFPM Tom Rini <trini@konsulko.com>=
+ wrote:
 > > > >
-> > > > diff --git a/configs/nanopi-k2_defconfig b/configs/nanopi-k2_defcon=
-fig
-> > > > index 41dbf7981f8..2e1c756bf7a 100644
-> > > > --- a/configs/nanopi-k2_defconfig
-> > > > +++ b/configs/nanopi-k2_defconfig
-> > > > @@ -6,7 +6,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
-> > > >  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x20000000
-> > > >  CONFIG_ENV_SIZE=3D0x2000
-> > > >  CONFIG_DM_GPIO=3Dy
-> > > > -CONFIG_DEFAULT_DEVICE_TREE=3D"meson-gxbb-nanopi-k2"
-> > > > +CONFIG_DEFAULT_DEVICE_TREE=3D"amlogic/meson-gxbb-nanopi-k2"
-> > > >  CONFIG_OF_LIBFDT_OVERLAY=3Dy
-> > > >  CONFIG_DM_RESET=3Dy
-> > > >  CONFIG_DEBUG_UART_BASE=3D0xc81004c0
+> > > > On Wed, Dec 27, 2023 at 05:48:42PM +0000, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Tue, Dec 26, 2023 at 12:07=E2=80=AFPM Tom Rini <trini@konsulko=
+=2Ecom> wrote:
+> > > > > >
+> > > > > > On Tue, Dec 26, 2023 at 09:46:25AM +0000, Simon Glass wrote:
+> > > > > >
+> > > > > > > Standard passage provides for a bloblist to be passed from on=
+e firmware
+> > > > > > > phase to the next. That can be used to pass the devicetree al=
+ong as well.
+> > > > > > > Add an option to support this.
+> > > > > > >
+> > > > > > > Tests for this will be added as part of the Universal Payload=
+ work.
+> > > > > > >
+> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > ---
+> > > > > > > The discussion on this was not resolved and is now important =
+due to the
+> > > > > > > bloblist series from Raymond. So I am sending it again since =
+I believe
+> > > > > > > this is a better starting point than building on OF_BOARD
+> > > > > >
+> > > > > > I really don't like adding another option for "DT is given to u=
+s". Why
+> > > > > > isn't adding another enum to fdt_source_t sufficient
+> > > > >
+> > > > > That is added by this patch, but...
+> > > > >
+> > > > > >, and if we have
+> > > > > > bloblist enabled, that will look for and use if found?
+> > > > >
+> > > > > ...this is the question. I would like to be able to enable blobli=
+st
+> > > > > without *requiring* the DT to come from there, hence the separate
+> > > > > Kconfig option.
+> > > > >
+> > > > > > Maybe some other
+> > > > > > code needs to be restructured and cleaned up too?
+> > > > >
+> > > > > Possibly, but I really am not keen on this board-specific solutio=
+n. I
+> > > > > believe Ilias & I agreed that OF_BOARD should fade away, so I don=
+'t
+> > > > > like adding another thing onto it.
+> > > >
+> > > > I think you're missing something then. It should not be board speci=
+fic
+> > > > to just find the dtb via bloblist, without a new CONFIG.
 > > >
-> > > So now I am wondering if we can (later) have the SoC be implied when
-> > > using OF_UPSTREAM so we can do:
+> > > Yes, that is what I am looking for.
 > > >
-> > > CONFIG_DEFAULT_DEVICE_TREE=3D"meson-gxbb-nanopi-k2"
+> > > > Whatever is
+> > > > stopping that is what needs to be refactored and then you can just
+> > > > extend fdt_source_t without a new CONFIG option.
 > > >
-> > > and it will add the 'amlogic/' automatically?
+> > > OK, but I need a way to turn it off, at least for development.
 > > >
-> > > Perhaps that might be a way to bridge the gap in terms of file layout?
+> > > [merging in the other thread:]
+> > >
+> > > On Wed, Dec 27, 2023 at 8:11=E2=80=AFPM Tom Rini <trini@konsulko.com>=
+ wrote:
+> > > >
+> > > > On Wed, Dec 27, 2023 at 05:48:44PM +0000, Simon Glass wrote:
+> > > > > Hi Ilias,
+> > > > >
+> > > > > On Wed, Dec 27, 2023 at 6:44=E2=80=AFAM Ilias Apalodimas
+> > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > >
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Tue, 26 Dec 2023 at 14:07, Tom Rini <trini@konsulko.com> wro=
+te:
+> > > > > > >
+> > > > > > > On Tue, Dec 26, 2023 at 09:46:25AM +0000, Simon Glass wrote:
+> > > > > > >
+> > > > > > > > Standard passage provides for a bloblist to be passed from =
+one firmware
+> > > > > > > > phase to the next. That can be used to pass the devicetree =
+along as well.
+> > > > > > > > Add an option to support this.
+> > > > > > > >
+> > > > > > > > Tests for this will be added as part of the Universal Paylo=
+ad work.
+> > > > > > > >
+> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > ---
+> > > > > > > > The discussion on this was not resolved and is now importan=
+t due to the
+> > > > > > > > bloblist series from Raymond. So I am sending it again sinc=
+e I believe
+> > > > > > > > this is a better starting point than building on OF_BOARD
+> > > > > > >
+> > > > > > > I really don't like adding another option for "DT is given to=
+ us". Why
+> > > > > > > isn't adding another enum to fdt_source_t sufficient, and if =
+we have
+> > > > > > > bloblist enabled, that will look for and use if found? Maybe =
+some other
+> > > > > > > code needs to be restructured and cleaned up too?
+> > > > > >
+> > > > > > Same here. On top of that the bloblist has a few items in there=
+, e.g a
+> > > > > > TPM eventlog. What are we going to do? Add a Kconfig for each i=
+tem?
+> > > > >
+> > > > > No, but that is just a straw man. The DT is special and U-Boot re=
+ports
+> > > > > where it comes from.
+> > > > >
+> > > > > >
+> > > > > > This has been going back and forth for a while. I've lost count=
+ of how
+> > > > > > many times I repeated the same proposal, but here it goes again=
+=2E We
+> > > > > > have OF_BOARD and BLOBLIST options. The bloblist and its proper=
+ties
+> > > > > > are scannable at runtime. Can't we use the combination of these=
+ 2 can
+> > > > > > be used to imply we expect things from a bloblist. If we want t=
+o be
+> > > > > > stricter in the future and explicitly expect the DT from a blob=
+list,
+> > > > > > we could add a Kconfig option failing the boot if that's missin=
+g.
+> > > > >
+> > > > > I would like to have that Kconfig option now, not later. In my mi=
+nd,
+> > > > > the boot must be deterministic, so that if OF_BLOBLIST is enabled=
+, the
+> > > > > DT must come from there, or it is an error.
+> > > >
+> > > > Determinism doesn't require a CONFIG option, it just requires an if=
+/else
+> > > > tree where we say what the "correct" priority list should be and th=
+en
+> > > > set a flag so that we can tell the user where we found it too. This=
+ also
+> > > > means that we can get whatever is going to use this mechanism to
+> > > > migrate over, and have less of a chicken-and-egg type of problem.
+> > >
+> > > OK I think I understand what is going on here. We need a way to enable
+> > > OF_BLOBLIST while still allowing the prior stage to NOT provide a
+> > > bloblist, at least for a transition period (=3D forever, I suspect, b=
+ut
+> > > that's another discussion).
+> > >
+> > > How about if OF_BLOBLIST enables the option, but we allow a fallback
+> > > to OF_BOARD if the DT is not there?
 > >
-> > That's going to start to look real ugly real quick I suspect and I'm not
-> > sure what it really gets us? It seems to me that the convention of
-> > "vendor/board" has already been well enough adapted outside of the
-> > kernel, with the odd sticking point being getting everyone used to
-> > whatever will be happening for 32bit boards long term. So I think hiding
-> > the vendor part of the string here will be more, not less, confusing
-> > long term.
+> > Oh, OK, so your use case is development. Why don't we just make
+> > OF_EMBEDDED be the first clause in the if/else (and yes, if
+> > (IS_ENABLED(CONFIG_OF_EMBEDDED) :)) and move on still not needing a knob
+> > for "bloblist has it"?
 >=20
-> Now that I dig in a bit, I see that the devicetree-rebasing tree does
-> not have any Makefiles in it. How does Linux build with it? Does
-> anyone have instructions?
+> Because OF_EMBED doesn't work with binman, and takes a lot of
+> different code paths, etc. It is somewhat useful when loading U-Boot
+> using a debugger, but that is about it.
+>=20
+> I sent a v5 that I hope does what is needed.
 
-Linux doesn't build with it, it's the relevant parts of the kernel tree
-extracted for other projects to more easily use (more or less).
+It sounds like binman needs to be fixed to just handle the case of not
+needing to do something with the device tree, since it's already
+embedded? I'll look again at v5, but since you sent it out while we were
+still talking about v4 and only just now understanding what your use
+case is, I don't think it's right, still.
+
+As you've said your use case is development and needing to ensure you
+get the device tree you want (because you're modifying it), and OF_EMBED
+is supposed to be used only for that exact use case, that's how we
+should solve this problem.
 
 --=20
 Tom
 
---0z+czaZUpOOm8ORG
+--o9m7EVg3Wx7cLBJw
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWNk0oACgkQFHw5/5Y0
-tywn5Qv/aQMBqT8pVUc8tFmt6cT4+DscisoSl+Ncrm9MYzWD3yGcfq4me3VJQbbE
-3QK6fmj95e3CgTYCz4slvtSqdqIP/7i+t1/5s2c4IVs82m/u4NTLymBOwOzDkUoE
-kQXTtZ9Ayqhe3lT2B6nD1QpyKbHuq86qOo2AyWk2beFh0rQI4GwT+jCp9RBNC6IH
-+4Q8RO9wvs3O8SzYKnVhYXzfAMhdoCr46Og14vZq1HdX7z7/0VU4jI/M+275wyHO
-T8UR/U1cHypSGz0R3X9Rm5M/YYdXelvathWlEqFCiMzZJcEyTrpU/0KvYFk0s+Gr
-WTlLQd6dXIKIV+dbeWtj0bI0Ah02qGJiu2VgJ2fPND+riStZVXYJ4KEVWqX6PrHN
-qrbVS9FhDmtjZBgSPDv/MJ491qaMiVWuOQGHadQm5EswBpmF8VoE8yteZ0fbCP/o
-JpVQwDYjR6EAw5mytdDjl0LXT7UegmgVUr3Uohp8pvWuf12UIrb/hHvxEzLzoCSy
-GLN9eVwo
-=Xzm8
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWNlAEACgkQFHw5/5Y0
+tywcNAv6A4/9SOWIVuB3A7bcUyyk2jbk8sL71uFjnby91aj0opo6JMYjNt00gUzJ
+QB4KfKjC59t7zO+EYbYY+nRNOgKaWhjB/Kn+ovqN4aNJvWPYQJzosVYPOeL9/hQk
+zlFrajcIBT6vpl2VpxWnMTfnQ/NvwVZm7g3BVuFvAm+wYd7nE9uDILumWT+rruee
+ffkCm3madHllNnc+VKoYOg6u0m6o9VfE2aGKscmyjhvmuLEBDo72Nb32GS0NT0QU
+84x2I3Diy4rGHEXRokKXMVgLGqGHDj4qDGcieoyratR7Cil2idqE9mi+ZwKqbddc
+WF0JchQDlEry0jKvFtw7CCovCK10srys5uiJZMELH6Zf7vNKA/NDoNXnAWwc883b
+1d4WcTMXtmtry+r7SWgasYUgp/Fmfo28MAnNzOraX0EQM9x1e77ZnciRbyV3G/wj
+bf+C44PtHtxtHtjyJZf3lH1+zqA1+Em34/omsmk8JgAvBenHFkFq5w0AyZfXQ3i1
+WRTBB6N/
+=pbwi
 -----END PGP SIGNATURE-----
 
---0z+czaZUpOOm8ORG--
+--o9m7EVg3Wx7cLBJw--
