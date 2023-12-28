@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1F71C3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 11:59:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37957C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 11:59:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5273C87A15;
-	Thu, 28 Dec 2023 12:59:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2E92087A1E;
+	Thu, 28 Dec 2023 12:59:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UcR3JAv7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jH8lYIPv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 756DA879DF; Thu, 28 Dec 2023 12:59:20 +0100 (CET)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
+ id 6FD7B879DF; Thu, 28 Dec 2023 12:59:30 +0100 (CET)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6167387A1B
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 12:59:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F24C87A24
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 12:59:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-1d408c2908cso14227365ad.1
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 03:59:17 -0800 (PST)
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1d3e416f303so15929595ad.0
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 03:59:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703764755; x=1704369555; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703764764; x=1704369564; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cb3XFZL1wSgCUb0IUdl2uX0NzUG6r5NYkoUBmB8V16g=;
- b=UcR3JAv7k+7LWh2Esj/LHENy9leD6QcS/hxJj93XeygdoWdXxMfhKx3DHvS4SmhlJN
- e3NVF4ihj3yPVYfKiYM23xgJV3AcV3GAh07IYsWw5miT1XVO+MPxLQCF2rI2PSA5UJA0
- qRKVtZmtdJLpjJAdjG8je51YoW7gS9LjNBoX+2LrwZmcqermXvmAdaSbCrOtfQ4ds29l
- jscx3lb4/Pid7JfVPoOmTa3I0qK7KGUbwvBYv8H8pzABB3Q+f3RvDefzkiGL1nfXTwXp
- KnUvSE4H5QYCMmCIxw3MeKwFi8SwcLLSSI/0jOTzOkrZ1wowkKJvhfGYORu9iK1AFgxS
- wYfw==
+ bh=JRa24nieggPUU/gxVv7l19ecxHbCFdXumOWZ0Q+D7RI=;
+ b=jH8lYIPvgAyJTHQsoHZ0tFEpWMlvB4dwgdITAx91fr2qGK1sdZjfm4944UfCcGwbbI
+ oJ4pa0CIou1jnT+Y1+R+v9syiw3lwQ3rQUD3wlOLLu4co/CO1uWIS97J8iOMOXfJCJlh
+ vU162izYXuGDpMpUDPq22amciRe9ijiG2lUyaU0+voABMFvkDpiAcMFBIPIfW89R6NiX
+ BskRlmsn5+BUo/hea/BGc2Vd/GQNq7u15wJ28NSYoUSx1Ei4snNzS/FMOxwBJT2ZzKYG
+ qHkUkKROU7k0lcVRWxc3incOLTNU75XoI99q5f/t/ZLrrDbgwOblIUyQTIzt8Eo7fo5g
+ ujkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703764755; x=1704369555;
+ d=1e100.net; s=20230601; t=1703764764; x=1704369564;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cb3XFZL1wSgCUb0IUdl2uX0NzUG6r5NYkoUBmB8V16g=;
- b=gWGLcwrXoNfEfqYoD/5DAh5Y1dAGMy3KiyfezmN7DH8rvXLfvT9ijW+tBoY1gC4HJe
- FkN92drfbT/GMHqtF/g7BfRBIfR9fmiCmqnp19yJbXb7guGdeVVFxF9MTxLEqr21qNIk
- 8vJUc6gQ0DLRVfs6/92PvtTWIPONzucwJyldMhSDJQDVOjA0lmyeZO68uIgKtcdECH4J
- OvP+GRLlro1yVzbRhxOp0iP2H1bl9RUACDXaccrH46qRTb6CZ5OpA2O/s+khE8JZFNO9
- LUTwvrT0ByN0a4VZjJNSKJTJCoTKg3c2f4iuqhxQ+jYr7V3bTIMglDo99QVH1tbWAZs2
- nPtA==
-X-Gm-Message-State: AOJu0YyUGIB4XS7QwkaZMmpg1D/mJx4Dv/Ws5QZXDtixs/vCteY4OhRt
- 7l+R4fl2Ej9YHeepPxUPVVjQtxGhkSRGD0A0dG2wyGpjqQjk3Q==
-X-Google-Smtp-Source: AGHT+IG+qwCl9JEvkkwXfKVIdd8GU4hSRu9OFp1L197yJrWbeK5tzFIki33ekqUXMGBBMx+6F+bWJg==
-X-Received: by 2002:a17:902:7ec9:b0:1d4:2330:8590 with SMTP id
- p9-20020a1709027ec900b001d423308590mr3674193plb.40.1703764755514; 
- Thu, 28 Dec 2023 03:59:15 -0800 (PST)
+ bh=JRa24nieggPUU/gxVv7l19ecxHbCFdXumOWZ0Q+D7RI=;
+ b=SB84SdCf5U4ZhN+0DbMWRD23SVM5LJEsUhdOfViAL8KRJmqQ/sAyXODk73H6WAFyNh
+ 5U5TXEMzqL0AhheC+DGii+U2ojTeMReeZAuMzQhbmpN1cZa6UdZVmXRMo3K0bcIuankw
+ JmlEOdLp8u7a2KtY835Ofh+xfINoF2dwp7EbViCzKiP54DMwoffpDO/Wc5TTuxAdYx9P
+ 2XTp/xDMccBiY6s/ZHV1Q8votFHjmKtEDL3UlGBW0WCPOmg+TC/S9zoGGQjwn4dhWZNL
+ J+uoqptnJs4JylzhfSzNxyvXTPWoM0pXVO9jFzvqaaWvhH9ePT2DoDya4/dlaNEbne37
+ 6dyg==
+X-Gm-Message-State: AOJu0YyQlOZl9CPGeemXxa5aQbi8jKFg8a0yI3jVbAXlAR61pwNvuwm/
+ 1J4lZy56rgMGBJT8m1OVrqJ/nqHjO7q2Py1JcwY96k0vhoYH5g==
+X-Google-Smtp-Source: AGHT+IFoj9Tz8c1MeGJJaAJxbFs9PUAvg7SjbF8ojRZ//Fj/cD2r6pq4R72l70FurlRyZGXfD4bXhw==
+X-Received: by 2002:a17:902:c406:b0:1d3:fa3f:668a with SMTP id
+ k6-20020a170902c40600b001d3fa3f668amr6012928plk.58.1703764763708; 
+ Thu, 28 Dec 2023 03:59:23 -0800 (PST)
 Received: from sumit-X1.. ([223.178.209.202]) by smtp.gmail.com with ESMTPSA id
- r4-20020a170902ea4400b001d3f285157dsm13700579plg.124.2023.12.28.03.59.07
+ r4-20020a170902ea4400b001d3f285157dsm13700579plg.124.2023.12.28.03.59.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Dec 2023 03:59:15 -0800 (PST)
+ Thu, 28 Dec 2023 03:59:23 -0800 (PST)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
  u-boot-custodians@lists.denx.de
@@ -75,10 +75,9 @@ Cc: trini@konsulko.com, sjg@chromium.org, robh+dt@kernel.org,
  seanga2@gmail.com, rasmus.villemoes@prevas.dk, peng.fan@nxp.com,
  jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de,
  mibodhi@gmail.com, Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v3 6/8] MAINTAINERS: Add myself as devicetree-rebasing
- maintainer
-Date: Thu, 28 Dec 2023 17:28:02 +0530
-Message-Id: <20231228115804.3626579-7-sumit.garg@linaro.org>
+Subject: [PATCH v3 7/8] dts: meson-gxbb: Switch to using upstream DT
+Date: Thu, 28 Dec 2023 17:28:03 +0530
+Message-Id: <20231228115804.3626579-8-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231228115804.3626579-1-sumit.garg@linaro.org>
 References: <20231228115804.3626579-1-sumit.garg@linaro.org>
@@ -100,39 +99,150 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Although there were still some variations in board DTS files based on
+meson-gxbb SoC but I think those were minor differences from upstream
+and shouldn't impact boot on these devices.
+
+So switch to upstream DT via mirroring amlogic/ directory from
+devicetree-rebasing/src/arm64/amlogic/ directory. And thereby directly
+building DTB from there including *-u-boot.dtsi files from
+arch/$(ARCH)/dts/ directory.
+
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 ---
 
 Changes in v3:
 --------------
-- Picked up review tag
+- Dropped Makefile portion and enabled OF_UPSTREAM for SoC instead.
 
 Changes in v2:
 --------------
 - Picked up review tag
 
- MAINTAINERS | 6 ++++++
- 1 file changed, 6 insertions(+)
+ arch/arm/mach-meson/Kconfig           | 1 +
+ configs/nanopi-k2_defconfig           | 2 +-
+ configs/odroid-c2_defconfig           | 2 +-
+ configs/p200_defconfig                | 2 +-
+ configs/p201_defconfig                | 2 +-
+ configs/videostrong-kii-pro_defconfig | 2 +-
+ configs/wetek-hub_defconfig           | 2 +-
+ configs/wetek-play2_defconfig         | 2 +-
+ dts/arch/arm64/amlogic                | 1 +
+ 9 files changed, 9 insertions(+), 7 deletions(-)
+ create mode 120000 dts/arch/arm64/amlogic
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 969514468cb..253092c345c 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -951,6 +951,12 @@ F:	cmd/cyclic.c
- F:	common/cyclic.c
- F:	include/cyclic.h
+diff --git a/arch/arm/mach-meson/Kconfig b/arch/arm/mach-meson/Kconfig
+index d6c89058061..8ddb59161a0 100644
+--- a/arch/arm/mach-meson/Kconfig
++++ b/arch/arm/mach-meson/Kconfig
+@@ -25,6 +25,7 @@ choice
+ config MESON_GXBB
+ 	bool "GXBB"
+ 	select MESON_GX
++	imply OF_UPSTREAM
+ 	help
+ 	  Select this if your SoC is an S905
  
-+DEVICETREE REBASING SUBTREE
-+M:	Sumit Garg <sumit.garg@linaro.org>
-+S:	Maintained
-+F:	devicetree-rebasing/
-+F:	dts/arch/
-+
- DFU
- M:	Lukasz Majewski <lukma@denx.de>
- M:	Mattijs Korpershoek <mkorpershoek@baylibre.com>
+diff --git a/configs/nanopi-k2_defconfig b/configs/nanopi-k2_defconfig
+index 41dbf7981f8..2e1c756bf7a 100644
+--- a/configs/nanopi-k2_defconfig
++++ b/configs/nanopi-k2_defconfig
+@@ -6,7 +6,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20000000
+ CONFIG_ENV_SIZE=0x2000
+ CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="meson-gxbb-nanopi-k2"
++CONFIG_DEFAULT_DEVICE_TREE="amlogic/meson-gxbb-nanopi-k2"
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_DEBUG_UART_BASE=0xc81004c0
+diff --git a/configs/odroid-c2_defconfig b/configs/odroid-c2_defconfig
+index 5f9f323e06e..ce5eaec3cd2 100644
+--- a/configs/odroid-c2_defconfig
++++ b/configs/odroid-c2_defconfig
+@@ -6,7 +6,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20000000
+ CONFIG_ENV_SIZE=0x2000
+ CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="meson-gxbb-odroidc2"
++CONFIG_DEFAULT_DEVICE_TREE="amlogic/meson-gxbb-odroidc2"
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_DEBUG_UART_BASE=0xc81004c0
+diff --git a/configs/p200_defconfig b/configs/p200_defconfig
+index cd579ef5f14..b6946034795 100644
+--- a/configs/p200_defconfig
++++ b/configs/p200_defconfig
+@@ -6,7 +6,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20000000
+ CONFIG_ENV_SIZE=0x2000
+ CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="meson-gxbb-p200"
++CONFIG_DEFAULT_DEVICE_TREE="amlogic/meson-gxbb-p200"
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_DEBUG_UART_BASE=0xc81004c0
+diff --git a/configs/p201_defconfig b/configs/p201_defconfig
+index b2f0a0ccdb4..dcc1454be16 100644
+--- a/configs/p201_defconfig
++++ b/configs/p201_defconfig
+@@ -7,7 +7,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20000000
+ CONFIG_ENV_SIZE=0x2000
+ CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="meson-gxbb-p201"
++CONFIG_DEFAULT_DEVICE_TREE="amlogic/meson-gxbb-p201"
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_DEBUG_UART_BASE=0xc81004c0
+diff --git a/configs/videostrong-kii-pro_defconfig b/configs/videostrong-kii-pro_defconfig
+index 3eda8f14a21..7a5af234471 100644
+--- a/configs/videostrong-kii-pro_defconfig
++++ b/configs/videostrong-kii-pro_defconfig
+@@ -6,7 +6,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20000000
+ CONFIG_ENV_SIZE=0x2000
+ CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="meson-gxbb-kii-pro"
++CONFIG_DEFAULT_DEVICE_TREE="amlogic/meson-gxbb-kii-pro"
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_DEBUG_UART_BASE=0xc81004c0
+diff --git a/configs/wetek-hub_defconfig b/configs/wetek-hub_defconfig
+index fd92b041e73..85cff73f50f 100644
+--- a/configs/wetek-hub_defconfig
++++ b/configs/wetek-hub_defconfig
+@@ -6,7 +6,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20000000
+ CONFIG_ENV_SIZE=0x2000
+ CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="meson-gxbb-wetek-hub"
++CONFIG_DEFAULT_DEVICE_TREE="amlogic/meson-gxbb-wetek-hub"
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_DEBUG_UART_BASE=0xc81004c0
+diff --git a/configs/wetek-play2_defconfig b/configs/wetek-play2_defconfig
+index b887419a6ba..efdf820165b 100644
+--- a/configs/wetek-play2_defconfig
++++ b/configs/wetek-play2_defconfig
+@@ -6,7 +6,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20000000
+ CONFIG_ENV_SIZE=0x2000
+ CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="meson-gxbb-wetek-play2"
++CONFIG_DEFAULT_DEVICE_TREE="amlogic/meson-gxbb-wetek-play2"
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+ CONFIG_DEBUG_UART_BASE=0xc81004c0
+diff --git a/dts/arch/arm64/amlogic b/dts/arch/arm64/amlogic
+new file mode 120000
+index 00000000000..73f7c3e7bd0
+--- /dev/null
++++ b/dts/arch/arm64/amlogic
+@@ -0,0 +1 @@
++../../../devicetree-rebasing/src/arm64/amlogic/
+\ No newline at end of file
 -- 
 2.34.1
 
