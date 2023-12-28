@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 839D6C3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 19:49:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 852BBC3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 19:52:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AACCE87B52;
-	Thu, 28 Dec 2023 20:48:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id DC50F87A5F;
+	Thu, 28 Dec 2023 20:52:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m32plq4i";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="inBdF2WX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03069879E9; Thu, 28 Dec 2023 20:48:33 +0100 (CET)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id 770C087A4E; Thu, 28 Dec 2023 20:52:32 +0100 (CET)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8685787B4D
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 20:48:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E99D87A5F
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 20:52:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-3bbbdf0b859so1965178b6e.3
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 11:48:27 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-32f8441dfb5so5959711f8f.0
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 11:52:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703792906; x=1704397706; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1703793148; x=1704397948; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JJ1gFYDQP+AovV6oNL/V6WI6PdlYN3TsuI6+jNROYPA=;
- b=m32plq4ihY9Z1ioqAkjMN6KJAa7aLbgK80aEB3CEgqua4Yz0PmtFbvVP9zWE9e2OC1
- V2DnmYCqR+WukOR4rpoYPxBYz3gqYhozfwNru1R7MOTHsZDzDQR9NnWxgg+xPNhtdG6p
- sTmpZFb1B7QHb8ep86NTPrj5MQQk8MXa4NPbI=
+ bh=aYBRQBpXv65HIzw7QE5lWi6YcuJ8juwq0/xoWaFS1p4=;
+ b=inBdF2WXw1zyBh3zA2cGmV+Ix0VleotVarPmLk+wp652eXw4qdvkU5z6rVukc5mHx+
+ 18ZCqJ4XUbahUL4Bu1Spx20uWsvCx8z4At/ODKdOjVtQITcKeQt6qdMmx9SlDwnaIRAh
+ n8X2DnCDVoPP55kZXO8vtTEe8whUzYoNqhRexbL2jjITWgqlaLqPgoj2wSDTVvKLIjKc
+ /0lYoc6GlSwTyHl/ZcED09lToQm0GKA+dnxjZVsi37/0erd36xbLbfH/ELf2Wm9wx7MQ
+ 818zYo7x2pugF7vHOO3wFO1sJInltAagh8Dr7Dqwq/EHhBoFRSaVXday2eFAJUTytM5b
+ iw6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703792906; x=1704397706;
+ d=1e100.net; s=20230601; t=1703793148; x=1704397948;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JJ1gFYDQP+AovV6oNL/V6WI6PdlYN3TsuI6+jNROYPA=;
- b=FEbITM47KVTLyNC6lhaJhzUkihO8RUnxVTus5h9+j2zXCkOVtk88ORKkMOcRVqbivJ
- mevq4Ym/TO9Y1dHK177ywPn3C3kqtsh3z3j9jhSg9ulyKu9W3C1DC9bHNYiMm356h2Ro
- 1dCLNoG0UjWpN/1O0xgjoJNNr3s5DJUOhkeJgrcKKgcGWma+xLKvLw436ANFtOt2/sat
- HBbcZ1L3ZOCciXGLvDpHVYbDbIQ43GsBrfk8ROJ9yF3n9pb+affwR5c4vCUQH9PfQGCN
- gLBogFmREJWJFpJJmFNDND4/BUjt50UGLnqaJalKNbiDHwd6jxAgs87e46zhTs6eJMxz
- oyQA==
-X-Gm-Message-State: AOJu0Yyk5Vt/RO25NrojEBzerGW7ZokdI6MyOnGKfFtmLjsfomPOe/oO
- rXKr/JsjNmqyppL5BUUqFYBTFtHt7czt7PsKRYKBTbSQuwt1
-X-Google-Smtp-Source: AGHT+IECH9ZOEVQsUHGvwv0GHkMyWH8TUcZX/vYvZdBBP9F6WFR2tD3QH68L6tBBgLl7SIfXLGDUH0RUdx3UsF6eL+U=
-X-Received: by 2002:a05:6808:3847:b0:3bb:c5df:ffe0 with SMTP id
- ej7-20020a056808384700b003bbc5dfffe0mr4833975oib.107.1703792906318; Thu, 28
- Dec 2023 11:48:26 -0800 (PST)
+ bh=aYBRQBpXv65HIzw7QE5lWi6YcuJ8juwq0/xoWaFS1p4=;
+ b=dgNLg1X+ndFsx3jIrB7ia11KYvs+1umnk50a/SKi5e6kAjsBNTD6nwRFmq2RDaiujq
+ ya/uoiiahvjHdvsmxv9RQREdGCUUnONVUxw5Fn54CJZKo9XaHmDMT7H3bVWWxjUg2xzX
+ aWk6GYSI9I2qn/OCTKxVUJhOBzFLf6VN2hE05dImTDZ3dFvQ+lMzqxu8SXsT7E2ercF6
+ vTgeUwmz8Od6g7AavMXaO1omcDIoGuZxEYFQ0ud/ykeGdNsjPATnlq1J4MDDBD1A45iC
+ hUr1kqAKNWQ2r/0VKA3v3V3E3UstjgCARckwmkhv8jXs4y/nJaX1as3tw7a4BYnNwB5W
+ ltGw==
+X-Gm-Message-State: AOJu0YwF5A1r9wATjBZu9T8D2l8RQiSYc9PYWNjyY6+57OFo+ndDD4l3
+ mjPCoNmqTjCVNMOmJ6dkBJVpiAezKrKYTTHWFKxwaOCQ
+X-Google-Smtp-Source: AGHT+IFXjT7lflllWVL+XsQA+rZ/1uGfzDBFuGELcbTTnednf9TA1NOAZWIILmFe8DZrJ+xRbGr32gtUmGiAs4+7zyM=
+X-Received: by 2002:adf:ee87:0:b0:333:2ace:9747 with SMTP id
+ b7-20020adfee87000000b003332ace9747mr5017784wro.11.1703793148211; Thu, 28 Dec
+ 2023 11:52:28 -0800 (PST)
 MIME-Version: 1.0
-References: <20231222213110.660402-1-raymond.mao@linaro.org>
- <20231222213110.660402-2-raymond.mao@linaro.org>
- <CAFLszTh7f2oy_Aw5Oq1m0Eo4h496dZenhBeYrW9DbB_FxnFADA@mail.gmail.com>
- <CAEfUkUKWUA7Y=4oyo=E-yV-3hFc-dAyLykrZgfY6_v3HwuwKpA@mail.gmail.com>
- <CAFLszThvqUQpL3zBPsKQkPKcKZz1RUtyVAgE6EOLAvmrHtwJMQ@mail.gmail.com>
- <CAEfUkUJvL2o3=4a8mXGK4+T3LWXh6bhNmQMz+ybZUAziuKrL=g@mail.gmail.com>
-In-Reply-To: <CAEfUkUJvL2o3=4a8mXGK4+T3LWXh6bhNmQMz+ybZUAziuKrL=g@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 28 Dec 2023 19:48:15 +0000
-Message-ID: <CAFLszTgJhutKUc91yYDSc1pih7K-ReEA2m-b1UdJfVzKBPFdtw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/9] bloblist: add API to check the register conventions
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, jwerner@chromium.org, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Kevin Chen <kevin_chen@aspeedtech.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>, 
- Shiji Yang <yangshiji66@outlook.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Sean Anderson <sean.anderson@seco.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Baruch Siach <baruch@tkos.co.il>, Michal Simek <michal.simek@amd.com>,
- Stefan Roese <sr@denx.de>, Qu Wenruo <wqu@suse.com>
+References: <20231228180154.50473-1-clamor95@gmail.com>
+ <20231228180154.50473-5-clamor95@gmail.com>
+ <CAFLszThd95iSPMOBr_21_Zckg74BtgA23EVpfXQKqnArFc-UDQ@mail.gmail.com>
+In-Reply-To: <CAFLszThd95iSPMOBr_21_Zckg74BtgA23EVpfXQKqnArFc-UDQ@mail.gmail.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Thu, 28 Dec 2023 21:52:17 +0200
+Message-ID: <CAPVz0n3OwhrW41tV9x32UXyL6yZdLr8CU9S7XuTneDiwUQY7AQ@mail.gmail.com>
+Subject: Re: [PATCH v6 4/6] common: console: record console from the beginning
+To: Simon Glass <sjg@chromium.org>
+Cc: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Bin Meng <bmeng@tinylab.org>, Ion Agorria <ion@agorria.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
+ Sean Anderson <sean.anderson@seco.com>, 
+ Heiko Schocher <hs@denx.de>, Dmitrii Merkurev <dimorinny@google.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -96,91 +96,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
-
-On Thu, Dec 28, 2023 at 3:13=E2=80=AFPM Raymond Mao <raymond.mao@linaro.org=
-> wrote:
+=D1=87=D1=82, 28 =D0=B3=D1=80=D1=83=D0=B4. 2023=E2=80=AF=D1=80. =D0=BE 21:4=
+8 Simon Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
 >
-> Hi Simon,
+> On Thu, Dec 28, 2023 at 6:02=E2=80=AFPM Svyatoslav Ryhel <clamor95@gmail.=
+com> wrote:
+> >
+> > From: Ion Agorria <ion@agorria.com>
+> >
+> > Set flag to enable console record on console_record_init
+> > and not only on console_record_reset_enable. This fixes
+> > missing start of U-Boot log for fastboot oem console
+> > command.
+> >
+> > Signed-off-by: Ion Agorria <ion@agorria.com>
+> > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> > Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> > ---
+> >  common/console.c | 3 +++
+> >  1 file changed, 3 insertions(+)
 >
-> On Thu, 28 Dec 2023 at 08:38, Simon Glass <sjg@chromium.org> wrote:
->>
->> Hi Raymond,
->>
->> On Wed, Dec 27, 2023 at 4:06=E2=80=AFPM Raymond Mao <raymond.mao@linaro.=
-org> wrote:
->> >
->> > Hi Simon,
->> >
->> > On Tue, 26 Dec 2023 at 04:48, Simon Glass <sjg@chromium.org> wrote:
->> >>
->> >> Hi Raymond,
->> >>
->> >> On Fri, Dec 22, 2023 at 9:31=E2=80=AFPM Raymond Mao <raymond.mao@lina=
-ro.org> wrote:
->> >> >
->> >> > Add bloblist_check_reg_conv() to check whether the bloblist is comp=
-liant
->> >> > to the register conventions defined in Firmware Handoff specificati=
-on.
->> >> > This API can be used for all Arm platforms.
->> >> >
->> >> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
->> >> > ---
->> >> > Changes in v2
->> >> > - Refactor of bloblist_check_reg_conv().
->> >> > Changes in v3
->> >> > - bloblist_check_reg_conv() returns -ENOENT if OF_BOARD is disabled=
-.
->> >> >
->> >> >  common/bloblist.c  | 13 +++++++++++++
->> >> >  include/bloblist.h | 12 ++++++++++++
->> >> >  2 files changed, 25 insertions(+)
->> >> >
->> >> > diff --git a/common/bloblist.c b/common/bloblist.c
->> >> > index 625e480f6b..ba17dd851a 100644
->> >> > --- a/common/bloblist.c
->> >> > +++ b/common/bloblist.c
->> >> > @@ -542,3 +542,16 @@ int bloblist_maybe_init(void)
->> >> >
->> >> >         return 0;
->> >> >  }
->> >> > +
->> >> > +int bloblist_check_reg_conv(ulong rfdt, ulong rzero)
->> >> > +{
->> >> > +       if (!IS_ENABLED(CONFIG_OF_BOARD))
->> >> > +               return -ENOENT;
->> >> > +
->> >> > +       if (rzero || rfdt !=3D (ulong)bloblist_find(BLOBLISTT_CONTR=
-OL_FDT, 0)) {
->> >> > +               gd->bloblist =3D NULL;  /* Reset the gd bloblist po=
-inter */
->> >> > +               return -EIO;
->> >> > +       }
->> >>
->> >> Where does the magic 4a0fb10b value get checked?
->> >>
->> > The magic and version of register conventions cannot be checked now si=
-nce there is
->> > a bug in the spec. PSB:
->> > ```
->> > X1[23:0]: set to the TL signature (4a0f_b10b)
->>
->> That should say 0f_b10b
->>
-> However, currently we have switched to `4a0f_b10b` in both TF-A and OP-TE=
-E.
-> I don't want to break the dataflow that is currently working.
-> I prefer to make patches to TF-A, OP-TEE and U-Boot at the same time when=
- spec v1.0 is ready.
-
-Yes, sure, but we should fix them too!
-
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 >
-> [...]
+> OK, I can see the use of this...but I wonder if we can now get rid of
+> the same line of code from console_record_reset_enable() ?
 >
-> Thanks and regards,
-> Raymond
 
-Regards,
-Simon
+Interesting question but let's leave it to a dedicated patch :)
+
+Best Regards,
+Svyatoslav R.
+
+> >
+> > diff --git a/common/console.c b/common/console.c
+> > index 6f2089caa0..e6d7ebe935 100644
+> > --- a/common/console.c
+> > +++ b/common/console.c
+> > @@ -821,6 +821,9 @@ int console_record_init(void)
+> >         ret =3D membuff_new((struct membuff *)&gd->console_in,
+> >                           CONFIG_CONSOLE_RECORD_IN_SIZE);
+> >
+> > +       /* Start recording from the beginning */
+> > +       gd->flags |=3D GD_FLG_RECORD;
+> > +
+> >         return ret;
+> >  }
+> >
+> > --
+> > 2.40.1
+> >
+>
+> Regards,
+> Simon
