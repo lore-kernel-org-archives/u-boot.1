@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51FBFC3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:39:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31348C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:39:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B75DA87A51;
-	Thu, 28 Dec 2023 14:37:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 45F0387A61;
+	Thu, 28 Dec 2023 14:37:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C3rp1u0y";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Sjd/77TN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1775487A76; Thu, 28 Dec 2023 14:37:49 +0100 (CET)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id 1269087A84; Thu, 28 Dec 2023 14:37:51 +0100 (CET)
+Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
+ [IPv6:2607:f8b0:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA6D287A79
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:37:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 62C3B87A70
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:37:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-3bbbdf0b859so1737607b6e.3
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:37:44 -0800 (PST)
+Received: by mail-pg1-x536.google.com with SMTP id
+ 41be03b00d2f7-5cd68a0de49so4391527a12.2
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:37:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703770663; x=1704375463; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703770666; x=1704375466; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HXIfu2zwGi5PSmS89IaRTH3LaPRA77gIis4zue7UwM4=;
- b=C3rp1u0yb5u5Ssc3o+1KZ+ktwJ1WW670PwGKm8fs8tdhZ0IlcstVwwNi7b8dyyX0vG
- IJOZANpNTyQ5uNjPh2szxoLqO99XC5z8tVr7OzwwcUFdJWzQgjrmPi9oLH1+bs70FeyX
- WBMerosgzEqBsPqA9irAp+ScFeioc+T5NooVM=
+ bh=Gma/ydfZ8aeBRPViM2E/0C3wBGaMzHueiyT6FzBcoI4=;
+ b=Sjd/77TNCZD2t6uVMecq8wjs4GDoZkT853nREpLQBxoHzdcEmi1ZqTN1cwXosXEx4u
+ C5AE23Fy6oN6S0FKkUmVY3PtCWI1s8dHL8Ejai4WjWNV3bsY6qVWUFcn7KebOHFcCPFX
+ n9NTmdQ/ez11JTNA1rA9JuBU869Ieydb6b4fU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703770663; x=1704375463;
+ d=1e100.net; s=20230601; t=1703770666; x=1704375466;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HXIfu2zwGi5PSmS89IaRTH3LaPRA77gIis4zue7UwM4=;
- b=tjJU+Df9palC3ZgiQjdd9z9E7AePwgB4VmCnM+V0amTmqaOe0+ImAlLq8cHlCqO+7B
- uE4fpAQRl+mzKfTLMgGcSayc/zoIRsgh4TGFmQZuoz18XQDdl+lMggJVMj/aF23yUpwM
- jeqyqpUOjpFDO8w4EPqTKMIyuy+8lQ5WyEvOxFERYafjXvakfFgXATJQAaeW1BVSw765
- rBnBAGgBz4rEC4rQ2Q+TKXSmhgHBO6CNdHHZ5FB7/25JNyMEYQtyLKwvufBmdqzFPtu3
- aVl70nh/GW92b5RhAPj5g6sC5daWlol3RRCY1oWZJXHcwW0y31bAdX3da1GHliVk6Afy
- 1Ydg==
-X-Gm-Message-State: AOJu0YyHxCl4y6YI8+7MyEByfsTH9iKaymb5ObkFRiwGKt/URU402ksr
- iFiUcSXCgGDdNAdnQJ9RnX5cgSIYtiaR4MxN/gC6RyA5LYbk
-X-Google-Smtp-Source: AGHT+IGs2yZ1tGr8DO69t5wRi2GMQtl0BbEkfOYnJdI4sRgNR8uqJRhZz+za737p46Z5M3Ig/kUfmiEI/wAKN3g1E4o=
-X-Received: by 2002:a05:6359:4c06:b0:172:f31a:6bfb with SMTP id
- kj6-20020a0563594c0600b00172f31a6bfbmr13714110rwc.51.1703770663578; Thu, 28
- Dec 2023 05:37:43 -0800 (PST)
+ bh=Gma/ydfZ8aeBRPViM2E/0C3wBGaMzHueiyT6FzBcoI4=;
+ b=tCsyXhhDT0Oy45dLjMn+8jgTQK5PGft2ID9Rj0jsajJB9Brz2QZYmOc6iMEFnNAlDq
+ TmYsqzE/PwT7S6K0qXEmQCAYqmd01ySwP9G5cdZoCNAota68HxcGECC+A29nHjJBJPDX
+ Bo5vfVSYDx4o7o+dODi5iyjX0JN+lzZGf54+7AKt2+Z+dIW+we53kU/7Cz+RBE/5nQDz
+ 2tcMPwumVZh2bPWOpfu4BkFRaXTX5M/2dkPU46HiyygOGuUp6k6f96RKg4pnaSii+8RN
+ bKbufU0/ZOow1cHde53E4fC6k22sShUIyhthFoKPQ189NNtNsbhfc2/ElrKvNGwhulYc
+ Wz1Q==
+X-Gm-Message-State: AOJu0YyiO5G8RUsvmW2km3TPy9CaHrtul3JZsYxCy3n2uu/K1GrDjAgT
+ Zr0T6su3r631xwzg2voW3TR9ynMjvHthXNi+OekkcI/iuM/u
+X-Google-Smtp-Source: AGHT+IGc8N40uqDXV2QYzafb64DJyZ4HmSt75LGoB2KDr8FaCDesUxEURgd19PsAl48CrLyQXfqu9afruBxY5UFD1H4=
+X-Received: by 2002:a05:6a21:612:b0:194:f17b:f877 with SMTP id
+ ll18-20020a056a21061200b00194f17bf877mr9702550pzb.61.1703770666438; Thu, 28
+ Dec 2023 05:37:46 -0800 (PST)
 MIME-Version: 1.0
 References: <20231228115804.3626579-1-sumit.garg@linaro.org>
- <20231228115804.3626579-8-sumit.garg@linaro.org>
-In-Reply-To: <20231228115804.3626579-8-sumit.garg@linaro.org>
+ <20231228115804.3626579-5-sumit.garg@linaro.org>
+In-Reply-To: <20231228115804.3626579-5-sumit.garg@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 28 Dec 2023 13:37:11 +0000
-Message-ID: <CAFLszTg=CDfyTGG9c-t=98eFYvYy61L1kzmrssNKPSS6dZL3cg@mail.gmail.com>
-Subject: Re: [PATCH v3 7/8] dts: meson-gxbb: Switch to using upstream DT
+Date: Thu, 28 Dec 2023 13:37:26 +0000
+Message-ID: <CAFLszThfxe_n02auF+vZ1u7FynKkrWEYFU3SdkRTLgBVuiv+Hw@mail.gmail.com>
+Subject: Re: [PATCH v3 4/8] dts: Add alternative location for upstream DTB
+ builds
 To: Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
  u-boot-custodians@lists.denx.de, trini@konsulko.com, robh+dt@kernel.org, 
@@ -93,81 +94,179 @@ X-Virus-Status: Clean
 
 Hi Sumit,
 
-On Thu, Dec 28, 2023 at 11:59=E2=80=AFAM Sumit Garg <sumit.garg@linaro.org>=
+On Thu, Dec 28, 2023 at 11:58=E2=80=AFAM Sumit Garg <sumit.garg@linaro.org>=
  wrote:
 >
-> Although there were still some variations in board DTS files based on
-> meson-gxbb SoC but I think those were minor differences from upstream
-> and shouldn't impact boot on these devices.
+> Allow platform owners to mirror devicetree files from devitree-rebasing
+> directory into dts/arch/$(ARCH) (special case for dts/arch/arm64). Then
+> build then along with any *-u-boot.dtsi file present in arch/$(ARCH)/dts
+> directory. Also add a new Makefile for arm64.
 >
-> So switch to upstream DT via mirroring amlogic/ directory from
-> devicetree-rebasing/src/arm64/amlogic/ directory. And thereby directly
-> building DTB from there including *-u-boot.dtsi files from
-> arch/$(ARCH)/dts/ directory.
+> This will help easy migration for platforms which currently are compliant
+> with upstream Linux kernel devicetree files.
 >
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 > ---
 >
 > Changes in v3:
 > --------------
-> - Dropped Makefile portion and enabled OF_UPSTREAM for SoC instead.
+> - Minor commit message update
 >
 > Changes in v2:
 > --------------
-> - Picked up review tag
+> - s/DEVICE_TREE_LOC/dt_dir/ and s/U-boot/U-Boot/
 >
->  arch/arm/mach-meson/Kconfig           | 1 +
->  configs/nanopi-k2_defconfig           | 2 +-
->  configs/odroid-c2_defconfig           | 2 +-
->  configs/p200_defconfig                | 2 +-
->  configs/p201_defconfig                | 2 +-
->  configs/videostrong-kii-pro_defconfig | 2 +-
->  configs/wetek-hub_defconfig           | 2 +-
->  configs/wetek-play2_defconfig         | 2 +-
->  dts/arch/arm64/amlogic                | 1 +
->  9 files changed, 9 insertions(+), 7 deletions(-)
->  create mode 120000 dts/arch/arm64/amlogic
+>  dts/Kconfig             | 11 +++++++++++
+>  dts/Makefile            | 17 ++++++++++++++---
+>  dts/arch/arm64/Makefile | 14 ++++++++++++++
+>  3 files changed, 39 insertions(+), 3 deletions(-)
+>  create mode 100644 dts/arch/arm64/Makefile
 >
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-> diff --git a/arch/arm/mach-meson/Kconfig b/arch/arm/mach-meson/Kconfig
-> index d6c89058061..8ddb59161a0 100644
-> --- a/arch/arm/mach-meson/Kconfig
-> +++ b/arch/arm/mach-meson/Kconfig
-> @@ -25,6 +25,7 @@ choice
->  config MESON_GXBB
->         bool "GXBB"
->         select MESON_GX
-> +       imply OF_UPSTREAM
->         help
->           Select this if your SoC is an S905
+> diff --git a/dts/Kconfig b/dts/Kconfig
+> index 00c0aeff893..e58c1c6f2ab 100644
+> --- a/dts/Kconfig
+> +++ b/dts/Kconfig
+> @@ -85,6 +85,17 @@ config OF_LIVE
+>           enables a live tree which is available after relocation,
+>           and can be adjusted as needed.
 >
-> diff --git a/configs/nanopi-k2_defconfig b/configs/nanopi-k2_defconfig
-> index 41dbf7981f8..2e1c756bf7a 100644
-> --- a/configs/nanopi-k2_defconfig
-> +++ b/configs/nanopi-k2_defconfig
-> @@ -6,7 +6,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
->  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x20000000
->  CONFIG_ENV_SIZE=3D0x2000
->  CONFIG_DM_GPIO=3Dy
-> -CONFIG_DEFAULT_DEVICE_TREE=3D"meson-gxbb-nanopi-k2"
-> +CONFIG_DEFAULT_DEVICE_TREE=3D"amlogic/meson-gxbb-nanopi-k2"
->  CONFIG_OF_LIBFDT_OVERLAY=3Dy
->  CONFIG_DM_RESET=3Dy
->  CONFIG_DEBUG_UART_BASE=3D0xc81004c0
+> +config OF_UPSTREAM
+> +       bool "Enable use of devicetree imported from Linux kernel release=
+"
+> +       help
+> +         Traditionally, U-Boot platforms used to have their custom devic=
+etree
+> +         files or copy devicetree files from Linux kernel which are hard=
+ to
+> +         maintain and can usually get out-of-sync from Linux kernel. Thi=
+s
+> +         option enables platforms to migrate to devicetree-rebasing repo=
+ where
+> +         a regular sync will be maintained every major Linux kernel rele=
+ase
+> +         cycle. However, platforms can still have some custom u-boot spe=
+cific
+> +         bits maintained as part of *-u-boot.dtsi files.
 
-So now I am wondering if we can (later) have the SoC be implied when
-using OF_UPSTREAM so we can do:
+My only other suggestion here is to mention that this should be set in
+Kconfig, for the SoC as a whole. So I believe that means that it
+should be hidden, with no string for the 'bool':
 
-CONFIG_DEFAULT_DEVICE_TREE=3D"meson-gxbb-nanopi-k2"
+      bool  # Enable use of devicetree imported from Linux kernel release
 
-and it will add the 'amlogic/' automatically?
+Also, this doesn't seem to work for me. Before this series I get these
+files when building firefly-rk3399:
 
-Perhaps that might be a way to bridge the gap in terms of file layout?
+rk3399-eaidk-610.dtb            rk3399-khadas-edge-v.dtb
+rk3399-orangepi.dtb        rk3399-rock-pi-4a.dtb
+rk3399-evb.dtb                  rk3399-leez-p710.dtb
+rk3399-pinebook-pro.dtb    rk3399-rock-pi-4c.dtb
+rk3399-ficus.dtb                rk3399-nanopc-t4.dtb
+rk3399-pinephone-pro.dtb   rk3399-rockpro64.dtb
+rk3399-firefly.dtb              rk3399-nanopi-m4-2gb.dtb
+rk3399pro-rock-pi-n10.dtb  rk3399-roc-pc.dtb
+rk3399-gru-bob.dtb              rk3399-nanopi-m4b.dtb
+rk3399-puma-haikou.dtb     rk3399-roc-pc-mezzanine.dtb
+rk3399-gru-kevin.dtb            rk3399-nanopi-m4.dtb
+rk3399-rock-4c-plus.dtb
+rk3399-khadas-edge-captain.dtb  rk3399-nanopi-neo4.dtb    rk3399-rock-4se.d=
+tb
+rk3399-khadas-edge.dtb          rk3399-nanopi-r4s.dtb     rk3399-rock960.dt=
+b
 
-[..]
+Afterwards I get this:
+
+make[3]: *** No rule to make target
+'dts/arch/arm64/rk3399-firefly.dtb', needed by 'dtbs'.  Stop.
+
+So I set this manually for that one board:
+
+CONFIG_DEFAULT_DEVICE_TREE=3D"rockchip/rk3399-firefly"
+
+and get:
+
+make[3]: *** No rule to make target
+'dts/arch/arm64/rockchip/rk3399-firefly.dtb', needed by 'dtbs'.  Stop.
+
+I am not sure how to fix this, nor how this can be made to build all
+the DTs for rk3399, as it does today.
+
+> +
+>  choice
+>         prompt "Provider of DTB for DT control"
+>         depends on OF_CONTROL
+> diff --git a/dts/Makefile b/dts/Makefile
+> index 3437e54033d..68daaf45ec7 100644
+> --- a/dts/Makefile
+> +++ b/dts/Makefile
+> @@ -10,10 +10,20 @@ ifeq ($(DEVICE_TREE),)
+>  DEVICE_TREE :=3D unset
+>  endif
+>
+> +ifeq ($(CONFIG_OF_UPSTREAM),y)
+> +ifeq ($(CONFIG_ARM64),y)
+> +dt_dir :=3D dts/arch/arm64
+> +else
+> +dt_dir :=3D dts/arch/$(ARCH)
+> +endif
+> +else
+> +dt_dir :=3D arch/$(ARCH)/dts
+> +endif
+> +
+>  ifneq ($(EXT_DTB),)
+>  DTB :=3D $(EXT_DTB)
+>  else
+> -DTB :=3D arch/$(ARCH)/dts/$(DEVICE_TREE).dtb
+> +DTB :=3D $(dt_dir)/$(DEVICE_TREE).dtb
+>  endif
+>
+>  $(obj)/dt-$(SPL_NAME).dtb: dts/dt.dtb $(objtree)/tools/fdtgrep FORCE
+> @@ -41,7 +51,7 @@ $(DTB): arch-dtbs
+>
+>  PHONY +=3D arch-dtbs
+>  arch-dtbs:
+> -       $(Q)$(MAKE) $(build)=3Darch/$(ARCH)/dts dtbs
+> +       $(Q)$(MAKE) $(build)=3D$(dt_dir) dtbs
+>
+>  ifeq ($(CONFIG_SPL_BUILD),y)
+>  obj-$(CONFIG_OF_EMBED) :=3D dt-spl.dtb.o
+> @@ -65,4 +75,5 @@ clean-files :=3D dt.dtb.S
+>  # Let clean descend into dts directories
+>  subdir- +=3D ../arch/arc/dts ../arch/arm/dts ../arch/m68k/dts ../arch/mi=
+croblaze/dts     \
+>            ../arch/mips/dts ../arch/nios2/dts ../arch/powerpc/dts ../arch=
+/riscv/dts     \
+> -          ../arch/sandbox/dts ../arch/sh/dts ../arch/x86/dts ../arch/xte=
+nsa/dts
+> +          ../arch/sandbox/dts ../arch/sh/dts ../arch/x86/dts ../arch/xte=
+nsa/dts        \
+> +          ./arch/arm64 ./arch/$(ARCH)
+> diff --git a/dts/arch/arm64/Makefile b/dts/arch/arm64/Makefile
+> new file mode 100644
+> index 00000000000..16e9fea622d
+> --- /dev/null
+> +++ b/dts/arch/arm64/Makefile
+> @@ -0,0 +1,14 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +
+> +include $(srctree)/scripts/Makefile.dts
+> +
+> +targets +=3D $(dtb-y)
+> +
+> +# Add any required device tree compiler flags here
+> +DTC_FLAGS +=3D -a 0x8
+> +
+> +PHONY +=3D dtbs
+> +dtbs: $(addprefix $(obj)/, $(dtb-y))
+> +       @:
+> +
+> +clean-files :=3D */*.dtb */*.dtbo */*_HS
+
+What is _HS for?
+
+> --
+> 2.34.1
+>
 
 Regards,
 Simon
