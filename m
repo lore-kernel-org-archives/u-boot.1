@@ -4,76 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FE0EC3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:37:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0554C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:37:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F3A78774E;
-	Thu, 28 Dec 2023 14:37:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6BC7087A13;
+	Thu, 28 Dec 2023 14:37:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Hsi0DgVJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="chvYwrIo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA86587A29; Thu, 28 Dec 2023 14:37:19 +0100 (CET)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id 7E5C4879A7; Thu, 28 Dec 2023 14:37:20 +0100 (CET)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35A60879A7
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:37:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4528E8774E
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:37:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7815fc8dd17so77614985a.1
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:37:17 -0800 (PST)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3b9f727d94cso2102933b6e.1
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:37:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703770636; x=1704375436; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703770637; x=1704375437; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gHrfLwjsRKP+YEanEfeiEWJEcNMlgpGFaXT0epKq6PQ=;
- b=Hsi0DgVJlJZA7QfhrzO0KOPrVgjYRLsl8OdEtYsQUoZgvQz5HhJmxnnE6dipN28fT7
- 48+ukCpYuW1b6ByMT4WuEFSOCCG8+WNYrf0vpp+m40HtK9XNFeOZbX3O8jNk6vqUAFNx
- AyMC3v21BpwG5THSyZHUg6Rd2vULWZm8vT5bg=
+ bh=Q5YYTirAnNtXnKXp6arC7jkHo6esLZWis8R9ROsTDII=;
+ b=chvYwrIopg+sT6QY1oKdQfZo8eLFU2+yrwZJXR0RHtnXeDOkFMrXLkqodhbXH0j5eR
+ R2uAPkHkOrFcp4PoyRcnMx78IGisJN1y/3jzxPcDvpmlqilvcYESFHqDksjl3jt1Fcpx
+ EnAzsu3eLOXo3Z6B53l2DLaEk3rjWv8acxu4g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703770636; x=1704375436;
+ d=1e100.net; s=20230601; t=1703770637; x=1704375437;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gHrfLwjsRKP+YEanEfeiEWJEcNMlgpGFaXT0epKq6PQ=;
- b=ZafvaS1yz2fm7g21rQUVd5WIkohd8CaV6onK1gOlV4xh0NEe2089fODUettaDHUApM
- RwkkkgfWwo7bPSukNWlB6Ntc3LI/0GMs41oU83HbpKhRlMwlR/aUqiA3zvWF4xqcTEkE
- ZIvl33Pov6mJ9DtCjil+kE23ifa8ZSdi92/aG8OxFHXGqT62Cw9AOKsRzbYvlbBZ2iPL
- ckHB+Ux2h45n67k5CqszaN2C4Jd5pswDB9TZXJDipa82n2/69ZwuMVi/nxju2VMtaBtz
- oX3juJ8lLTLeMSJ9sP8N5A4eI7HocEEJf29wztp52n6OXeP8PeRGNkL2Mr7kpAVnrM8z
- 1VCw==
-X-Gm-Message-State: AOJu0YxukAgAacD5h9AbN+uvdotn/JIsb1t1TlPbvxGlDeRA3ZT+Xu8I
- ssL+xnyvmuiSXogQhNMz20Wr7FYdR+eMhwXNAB8/p1so2BG7
-X-Google-Smtp-Source: AGHT+IFX8bZTZt9KnNjzY25rBkwozpJcFGw5+x0cpxyoN1/EYPh4Y+3t3QUS0cGJyMsc70ij1wd4DMLZGe4pECXC1vg=
-X-Received: by 2002:ad4:58af:0:b0:67f:abe2:9c1d with SMTP id
- ea15-20020ad458af000000b0067fabe29c1dmr7224229qvb.87.1703770635910; Thu, 28
- Dec 2023 05:37:15 -0800 (PST)
+ bh=Q5YYTirAnNtXnKXp6arC7jkHo6esLZWis8R9ROsTDII=;
+ b=rtWWCmaxHs0wyqa2nZZlvqV/fQei0VutDI1MdhNGC0TnaYmJKKvEX1URPqo+V23GRd
+ RuGc2qwBx9gRGXXpBwZJDDTGmsx/7B+ch2bapoVD+UuZzUSBRlIkacBPf2HQWBvr5O0r
+ 4bAV+NVDH+8iKxu44t1sStKXX1CsAgNVhaJNCebPwxWidK9dECU0C+7MVPCPTclI1kvZ
+ GlZwMrA3fNPlAwhJBX+hCoPv44c6zvskxZVdkgE36bwD9e36Hjhh3RIBqBCk86XqD7g3
+ z16QtqsiHD/lxIykiapGRdeL884L3IdXmIBqy+AxDrN2jN50xZVn6Xaa6ULvfdDiUyHU
+ yjrA==
+X-Gm-Message-State: AOJu0Ywq/pjpyjL82gj31FrkfiGn84Kn0Gv6UbvHvXXucr5Gaq+xCNlc
+ fqQT+kDcbGSfdWkigFA0OUwpDEK91rg7BlIX+k3qivKBpwPC
+X-Google-Smtp-Source: AGHT+IFQShbleGBgHXJWzpEYc4/8yRtmB8l6mOEJnlIpGfLTOYNDzOuy1Nw1cxMd1OLlNYCASwgk6vtZvMNNrrOioIA=
+X-Received: by 2002:a05:6808:215:b0:3bb:bd2b:4ee9 with SMTP id
+ l21-20020a056808021500b003bbbd2b4ee9mr2415631oie.19.1703770636850; Thu, 28
+ Dec 2023 05:37:16 -0800 (PST)
 MIME-Version: 1.0
-References: <20231226094625.221671-1-sjg@chromium.org>
- <20231226120710.GH2652760@bill-the-cat>
- <CAC_iWjLy1E9wEW3zX2waN9mc=tz7PTKE0gJ4RucqMmZR2cA6_Q@mail.gmail.com>
- <CAFLszTgqS9TF1F-RxO1dpZPZGG6QBiKm0n_e0yVHAume+xT3eA@mail.gmail.com>
- <CAC_iWjKTmG=16_PZr-5TgmmPL8e4VStX3E4nLGXSxt0pJzUS3g@mail.gmail.com>
-In-Reply-To: <CAC_iWjKTmG=16_PZr-5TgmmPL8e4VStX3E4nLGXSxt0pJzUS3g@mail.gmail.com>
+References: <20231227210712.712937-1-raymond.mao@linaro.org>
+ <20231227210712.712937-11-raymond.mao@linaro.org>
+ <CAC_iWjJ4JA3yQ4NFG=NYMRQX7esqCfOYQaySjojgUyhjJTgXfw@mail.gmail.com>
+In-Reply-To: <CAC_iWjJ4JA3yQ4NFG=NYMRQX7esqCfOYQaySjojgUyhjJTgXfw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 28 Dec 2023 13:37:04 +0000
-Message-ID: <CAFLszTi7DpEjRUcX3vaSJKRe1sBeZOWwgkGpjtoLYJ+_=_pw0g@mail.gmail.com>
-Subject: Re: [PATCH v4] fdt: Allow the devicetree to come from a bloblist
+Date: Thu, 28 Dec 2023 13:37:05 +0000
+Message-ID: <CAFLszTgbpXY_9ZYbL2oG9sq9nGqtH-x_igqy_KRq=E8NKdFyDw@mail.gmail.com>
+Subject: Re: [PATCH v4 10/12] bloblist: Adjust the bloblist header
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Marek Vasut <marex@denx.de>, Raymond Mao <raymond.mao@linaro.org>,
- Baruch Siach <baruch@tkos.co.il>, 
- Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jerry Van Baren <vanbaren@cideas.com>, Michal Simek <michal.simek@amd.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Nikhil M Jain <n-jain1@ti.com>,
- Qu Wenruo <wqu@suse.com>, Sean Anderson <seanga2@gmail.com>
+Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
+ jwerner@chromium.org, 
+ Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -94,125 +88,131 @@ X-Virus-Status: Clean
 
 Hi Ilias,
 
-On Thu, Dec 28, 2023 at 6:53=E2=80=AFAM Ilias Apalodimas
+On Thu, Dec 28, 2023 at 7:37=E2=80=AFAM Ilias Apalodimas
 <ilias.apalodimas@linaro.org> wrote:
 >
-> On Wed, 27 Dec 2023 at 19:48, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Ilias,
-> >
-> > On Wed, Dec 27, 2023 at 6:44=E2=80=AFAM Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> > >
-> > > Hi Tom,
-> > >
-> > > On Tue, 26 Dec 2023 at 14:07, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Tue, Dec 26, 2023 at 09:46:25AM +0000, Simon Glass wrote:
-> > > >
-> > > > > Standard passage provides for a bloblist to be passed from one fi=
-rmware
-> > > > > phase to the next. That can be used to pass the devicetree along =
-as well.
-> > > > > Add an option to support this.
-> > > > >
-> > > > > Tests for this will be added as part of the Universal Payload wor=
-k.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > ---
-> > > > > The discussion on this was not resolved and is now important due =
-to the
-> > > > > bloblist series from Raymond. So I am sending it again since I be=
-lieve
-> > > > > this is a better starting point than building on OF_BOARD
-> > > >
-> > > > I really don't like adding another option for "DT is given to us". =
-Why
-> > > > isn't adding another enum to fdt_source_t sufficient, and if we hav=
-e
-> > > > bloblist enabled, that will look for and use if found? Maybe some o=
-ther
-> > > > code needs to be restructured and cleaned up too?
-> > >
-> > > Same here. On top of that the bloblist has a few items in there, e.g =
-a
-> > > TPM eventlog. What are we going to do? Add a Kconfig for each item?
-> >
-> > No, but that is just a straw man. The DT is special and U-Boot reports
-> > where it comes from.
->
-> The story is identical to the EventLog. It's 'special' as well and
-> U-Boot has to pick it up, otherwise the hardware and the EventLog will
-> end up with different values
-
-Why are you talking about event log? Let's stick to the topic at hand.
-
->
-> >
-> > >
-> > > This has been going back and forth for a while. I've lost count of ho=
-w
-> > > many times I repeated the same proposal, but here it goes again. We
-> > > have OF_BOARD and BLOBLIST options. The bloblist and its properties
-> > > are scannable at runtime. Can't we use the combination of these 2 can
-> > > be used to imply we expect things from a bloblist. If we want to be
-> > > stricter in the future and explicitly expect the DT from a bloblist,
-> > > we could add a Kconfig option failing the boot if that's missing.
-> >
-> > I would like to have that Kconfig option now, not later. In my mind,
-> > the boot must be deterministic, so that if OF_BLOBLIST is enabled, the
-> > DT must come from there, or it is an error.
->
-> And how is what I proposed not deterministic? What prevents us from
-> adding that Kconfig option now?
-> The only difference is that by default, U-Boot will try bloblist ->
-> board-specific method unless a Kconfig option prevents the fallback.
-> I've been working with vendors and helping them implement the firmware
-> handoff spec in their proprietary bootloaders and Raymond contributed
-> the implementation for TF-A. At the same time, I am pretty sure
-> vendors will need time to implement this properly. I don't see how
-> adding an implicit Kconfig option will help them push this forward.
->
-> IOW I prefer U-Boot to *always* scan for a bloblist as the first
-> discovery DT method (unless the DT comes bundled with U-Boot), rather
-> than expecting users to turn a Kconfig knob.
-
-It is the 'unless the DT comes bundled with U-Boot' which I am talking
-about, but I now have a better understanding of the problem here.
-
-I don't want CONFIG_BLOBLIST to mean that the DT comes from a
-bloblist. Simply put, I want to be able to use the U-Boot DT during
-development, without needing to rebuild some prior stage or update
-some other project. So I would like the use of bloblist to be behind
-an OF_BLOBLIST option.
-
-From Tom's email and your other reply, it seems that we could all live
-with an OF_BLOBLIST option to enable DT-in-bloblist, making it
-optional but default 'y'?
-
->
-> >
-> > Also, repeating it doesn't make the proposal good. We agreed that
-> > OF_BOARD would eventually go away, so building on top of it is not
-> > setting us up for the future.
->
-> No, we didn't [0]. In fact, I said I don't see OF_BOARD *ever* going
-> away. The only thing I suggested was to rename it
-
-Well I'm just not sure what is going on. Use of bloblist should not
-require board-specific code. It should be a generic mechanism, in
-fdtdec_setup()
-
-There are too many cooks in this kitchen right now, I'll try another
-spin of my patch.
-
+> Hi Raymond,
 >
 > [...]
 >
-> [0] https://lore.kernel.org/u-boot/CAC_iWjKrkTM4spyXpoDDartJ41a553VDE+XM5=
-gz3+jsNTFqtbg@mail.gmail.com/
+> >
+> >  void bloblist_show_list(void)
+> > @@ -463,7 +477,7 @@ void bloblist_reloc(void *to, uint to_size, void *f=
+rom, uint from_size)
+> >
+> >         memcpy(to, from, from_size);
+> >         hdr =3D to;
+> > -       hdr->size =3D to_size;
+> > +       hdr->total_size =3D to_size;
+> >  }
+> >
+> >  int bloblist_init(void)
+> > @@ -493,7 +507,7 @@ int bloblist_init(void)
+> >                                     addr, ret);
+> >                 } else {
+> >                         /* Get the real size, if it is not what we expe=
+cted */
+> > -                       size =3D gd->bloblist->size;
+> > +                       size =3D gd->bloblist->total_size;
+> >                 }
+> >         }
+> >         if (ret) {
+> > diff --git a/include/bloblist.h b/include/bloblist.h
+> > index 7024d7bf9e..4ec4b3d449 100644
+> > --- a/include/bloblist.h
+> > +++ b/include/bloblist.h
+> > @@ -166,32 +166,33 @@ enum bloblist_tag_t {
+> >   * from the last.
+> >   *
+> >   * @magic: BLOBLIST_MAGIC
+> > + * @chksum: checksum for the entire bloblist allocated area. Since any=
+ of the
+> > + *     blobs can be altered after being created, this checksum is only=
+ valid
+> > + *     when the bloblist is finalized before jumping to the next stage=
+ of boot.
+> > + *     This is the value needed to make all checksummed bytes sum to 0
+> >   * @version: BLOBLIST_VERSION
+> >   * @hdr_size: Size of this header, normally sizeof(struct bloblist_hdr=
+). The
+> >   *     first bloblist_rec starts at this offset from the start of the =
+header
+> > - * @flags: Space for BLOBLISTF... flags (none yet)
+> > - * @size: Total size of the bloblist (non-zero if valid) including thi=
+s header.
+> > - *     The bloblist extends for this many bytes from the start of this=
+ header.
+> > - *     When adding new records, the bloblist can grow up to this size.
+> > - * @alloced: Total size allocated so far for this bloblist. This start=
+s out as
+> > + * @align_log2: Power of two of the maximum alignment required by this=
+ list
+> > + * @used_size: Size allocated so far for this bloblist. This starts ou=
+t as
+> >   *     sizeof(bloblist_hdr) since we need at least that much space to =
+store a
+> >   *     valid bloblist
+> > + * @total_size: The number of total bytes that the bloblist can occupy=
+.
+> > + *     Any blob producer must check if there is sufficient space befor=
+e adding
+> > + *     a record to the bloblist.
+> > + * @flags: Space for BLOBLISTF... flags (none yet)
+> >   * @spare: Spare space (for future use)
+> > - * @chksum: checksum for the entire bloblist allocated area. Since any=
+ of the
+> > - *     blobs can be altered after being created, this checksum is only=
+ valid
+> > - *     when the bloblist is finalised before jumping to the next stage=
+ of boot.
+> > - *     This is the value needed to make all checksummed bytes sum to 0
+> >   */
+> >  struct bloblist_hdr {
+> >         u32 magic;
+> > -       u32 version;
+> > -       u32 hdr_size;
+> > +       u8 chksum;
+> > +       u8 version;
+> > +       u8 hdr_size;
+> > +       u8 align_log2;
+> > +       u32 used_size;
+> > +       u32 total_size;
+> >         u32 flags;
+> > -
+> > -       u32 size;
+> > -       u32 alloced;
+> >         u32 spare;
+> > -       u32 chksum;
+> >  };
 >
+> The patch generally looks ok, but while we are renaming things, can't
+> we just copy what the spec says instead of slightly changing the
+> names?
+>
+> With this applied we end up with
+>   struct bloblist_hdr {
+>          u32 magic;
+>          u8 chksum;
+>          u8 version;
+>          u8 hdr_size;
+>          u8 align_log2;
+>          u32 used_size;
+>          u32 total_size;
+>          u32 flags;
+>          u32 spare;
+>   };
+>
+> Can you at least rename the ones you touch here properly?
+> - Drop the patch that renames spare to _spare
+> - used_size -> size
+> - total_size -> max_size (which btw mean different things)
+> - spare -> reserved
+
+Yes that would be good, but since the spec only recently changed the
+names, how about a 'rename' patch on top, if that is easier?
+
+I was hoping that this series could be applied as is, or close to it.
+It looks like a good base to me.
 
 Regards,
 Simon
