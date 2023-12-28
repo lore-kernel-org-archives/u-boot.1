@@ -4,73 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87001C3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:38:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DE7CC3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:38:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 427B287A3B;
-	Thu, 28 Dec 2023 14:37:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F379087A06;
+	Thu, 28 Dec 2023 14:37:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lLcvbD1K";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ODD6Yv3I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02ABB8781C; Thu, 28 Dec 2023 14:37:22 +0100 (CET)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id CDB0887A34; Thu, 28 Dec 2023 14:37:29 +0100 (CET)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4ED5487A24
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:37:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4970087A01
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:37:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-78106c385a1so568836585a.0
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:37:19 -0800 (PST)
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1d4414ec9c7so10235785ad.0
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:37:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703770638; x=1704375438; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703770645; x=1704375445; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Y/jTSGyE+wejWaHVrCuh5sTmDVT+nds20AexhZ99JCo=;
- b=lLcvbD1KVrmxAxHa4jEd4u8VdKMImkL7lHeZztjqravWlJ8BU/kYANyjBOl1Vkmxcl
- AZim4MXprsSlbahbNcq+VhvimOO/68BYfoAgd1s7uVGNA/OsFC1o0OrzmbG6lBmzWUIU
- HnQt0+aFp05cICOnb1V/vzGjycYQSOHQsGgRg=
+ bh=HxVyGGFOZecFbHRa4Msw9FEQemnMAJDZ0rCN66Sncbg=;
+ b=ODD6Yv3IeQrwnlcV+Sh3FfkVgXrfzzhyqz3DlZUC/vCLIjVTEHQW4R0ATfr8TpxCV7
+ 3kiCdUq9lrSRNKXFtMzVyfCXos5IY2Q81gKlTHRNM9GoBFGlUBJquzb2YQ/g+OjqK4Np
+ wlDPapCbTmvasVrheB6GC8hHxyDV9oHb8f+XA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703770638; x=1704375438;
+ d=1e100.net; s=20230601; t=1703770645; x=1704375445;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Y/jTSGyE+wejWaHVrCuh5sTmDVT+nds20AexhZ99JCo=;
- b=ZXCuEB67xtEHtUSHZ+yzdx/heDFd96R6S4CYR5o7q7iCZVzUUG5BJquJ5cy3aqrK8o
- rGfheqVk+ztyTO6UbuKWS6+XGi6McXdNUVoG2gIGCW0a88Hh+6iQMr6xl6ZQlbE/vsI4
- 7nQ077jeVMm8A24XgELj/7H21cmCgIK92gPa+QYoVIkejjKsnrrQS7eVuHLUXxLk/ZIy
- tQ/iM/fYTKqx+EtWj0zaCdaz8tRiWcuiylKYte6jYEw8hlbNOyR8CLQ7JeFYFY6SCKTk
- zlwZ//WlCB4LNoz9vzmYrOb4yAAbTrYzwjuOsfULYgfNEW2/GftrNcC9oeYZx4yqn65T
- gpfw==
-X-Gm-Message-State: AOJu0YxlZXKBOZXv1NV71+JeBk4sxWxigckANVg+4rqm8oAKogDWldPm
- y8Ay/IStvLj6S1C6rdG/zwtjRWUF929G+UbfyvQxfMC4buow
-X-Google-Smtp-Source: AGHT+IEO9uU+6W9roXmL4gr8bHbNKnFt4AXr+fAMO0Pxoi20H2/Q47YSlI5TL+Dc5afuhpRO6ZuPFm3X9GJTseHzumY=
-X-Received: by 2002:ad4:5cab:0:b0:67a:b1f1:9c57 with SMTP id
- q11-20020ad45cab000000b0067ab1f19c57mr17815479qvh.26.1703770638088; Thu, 28
- Dec 2023 05:37:18 -0800 (PST)
+ bh=HxVyGGFOZecFbHRa4Msw9FEQemnMAJDZ0rCN66Sncbg=;
+ b=YwBB6mSxye36NW+nyJTuT5cfVB8MStNohbD3YjLN5cXmahLdsNRbTR33kcFwCxyuV4
+ gSsLa4AGiQIdUUj3WSlJkhxTlUtV+zEwpSTK8y6rzFwrYIggDRhzR4EEp4Fo1TCfcINw
+ TtEx1b+zK9W2Jld6uGukhpMYCkE0SjIpgzQVZRi81v1e0DwE/Znj2WL9zGBnOhyPxy/E
+ tEMcDM6Q92ibM4yF3R9zHNB6Js6d3FI0CKmU0SAeJzFMS/g1QcPm7nNY71fC0lBdiSdk
+ FcV7LJwFMF3UKaE9Bv7E54g52r9jmIcLukOSkYiOwzxTNfYF7vxOF24LIbJblOx2C2Ri
+ mqeA==
+X-Gm-Message-State: AOJu0YzaoDctmBF38OcHaS25er6Mot2Kms7BXcpV/mlfRskF+igBgJsN
+ ysnBOX9ff4EcjTLEj02cPmv4JZ9urwpjoguE9rKJ8RAq0gZp
+X-Google-Smtp-Source: AGHT+IEvyxnVVkYf/GP80lY9Zum0VUX0+m5aFHvWralZOPS7dnad4rNHW9FCPgR8duNI2FQt6qxeGz/ijqugSUN/NXQ=
+X-Received: by 2002:a17:90a:5802:b0:28c:2623:c31a with SMTP id
+ h2-20020a17090a580200b0028c2623c31amr2539204pji.94.1703770645642; Thu, 28 Dec
+ 2023 05:37:25 -0800 (PST)
 MIME-Version: 1.0
-References: <20231227082405.2202246-1-sjg@chromium.org>
- <20231227132156.GQ2652760@bill-the-cat>
-In-Reply-To: <20231227132156.GQ2652760@bill-the-cat>
+References: <20231227210712.712937-1-raymond.mao@linaro.org>
+ <20231227210712.712937-9-raymond.mao@linaro.org>
+ <CAC_iWjJ2GAOU93x1gHPYKXyiU0j6Tp0yHqeCtsctY3mOdz+9VA@mail.gmail.com>
+In-Reply-To: <CAC_iWjJ2GAOU93x1gHPYKXyiU0j6Tp0yHqeCtsctY3mOdz+9VA@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 28 Dec 2023 13:37:07 +0000
-Message-ID: <CAFLszThBrAVSH2jYxhxFSETqr4za+BqjZBBjLaDokc1ZdrXXRw@mail.gmail.com>
-Subject: Re: [PATCH 0/9] dts: Move to SoC-specific build rules
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Sumit Garg <sumit.garg@linaro.org>, 
- Albert Aribaud <albert.u.boot@aribaud.net>,
- =?UTF-8?Q?Andreas_Bie=C3=9Fmann?= <andreas@biessmann.org>, 
- Michal Simek <michal.simek@amd.com>, Michal Simek <monstr@monstr.eu>, 
- Minkyu Kang <mk7.kang@samsung.com>, Scott McNutt <smcnutt@psyent.com>, 
- Thomas Chou <thomas@wytron.com.tw>
+Date: Thu, 28 Dec 2023 13:37:12 +0000
+Message-ID: <CAFLszTiWbdziP2NLGuFoGaJO4reU4MF+k7kLecDYL6KsS5ZaQQ@mail.gmail.com>
+Subject: Re: [PATCH v4 08/12] bloblist: Handle alignment with a void entry
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
+ jwerner@chromium.org, 
+ Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -89,47 +86,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Ilias,
 
-On Wed, Dec 27, 2023 at 1:21=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
+On Thu, Dec 28, 2023 at 11:32=E2=80=AFAM Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> On Wed, Dec 27, 2023 at 08:23:56AM +0000, Simon Glass wrote:
+> Hi Raymond,
 >
-> > U-Boot builds devicetree binaries from its source tree. As part of the
-> > Kconfig conversion, the Makefiles were updated to align with how this
-> > is done in Linux: a single target for each SoC is used to build all the
-> > .dtb files for that SoC.
+> On Wed, 27 Dec 2023 at 23:08, Raymond Mao <raymond.mao@linaro.org> wrote:
 > >
-> > Since then, the Makefiles have devolved in some cases, resulting in
-> > lots of target-specific build rules. Also Linux has moved to using
-> > subdirectories for each vendor.
+> > From: Simon Glass <sjg@chromium.org>
 > >
-> > Recent work aims to allow U-Boot to directly use devicetree files from
-> > Linux. This would be easier if the directory structure were the same.
-> > Another recent discussion involved dropping the build rules altogether.
+> > Rather than setting the alignment using the header size, add an entirel=
+y
+> > new entry to cover the gap left by the alignment.
 > >
-> > This series makes a start at cleaning up some of the build rules, to
-> > reduce the amount of code and make it easier to add new boards for the
-> > same SoC.
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >  common/bloblist.c | 23 +++++++++++++++++++----
+> >  1 file changed, 19 insertions(+), 4 deletions(-)
 > >
-> > One issue is that the ARCH_xxx Kconfig options between U-Boot and Linux
-> > are not always the same. Given the large number of SoCs and boards
-> > supported by U-Boot, it would be useful to align these where possible.
+> > diff --git a/common/bloblist.c b/common/bloblist.c
+> > index 705d9c6ae9..73dbbc01c0 100644
+> > --- a/common/bloblist.c
+> > +++ b/common/bloblist.c
+> > @@ -142,7 +142,7 @@ static int bloblist_addrec(uint tag, int size, int =
+align_log2,
+> >  {
+> >         struct bloblist_hdr *hdr =3D gd->bloblist;
+> >         struct bloblist_rec *rec;
+> > -       int data_start, new_alloced;
+> > +       int data_start, aligned_start, new_alloced;
+> >
+> >         if (!align_log2)
+> >                 align_log2 =3D BLOBLIST_ALIGN_LOG2;
+> > @@ -151,10 +151,25 @@ static int bloblist_addrec(uint tag, int size, in=
+t align_log2,
+> >         data_start =3D map_to_sysmem(hdr) + hdr->alloced + sizeof(*rec)=
+;
+> >
+> >         /* Align the address and then calculate the offset from ->alloc=
+ed */
+> > -       data_start =3D ALIGN(data_start, 1U << align_log2) - map_to_sys=
+mem(hdr);
+> > +       aligned_start =3D ALIGN(data_start, 1U << align_log2) - data_st=
+art;
+> > +
+> > +       /* If we need to create a dummy record, create it */
+> > +       if (aligned_start) {
+> > +               int void_size =3D aligned_start - sizeof(*rec);
+> > +               struct bloblist_rec *vrec;
+> > +               int ret;
+> > +
+> > +               ret =3D bloblist_addrec(BLOBLISTT_VOID, void_size, 0, &=
+vrec);
 >
-> I don't know why we should start with this now, and further not being on
-> top of Sumit's series to remove our duplicate dts files. And that's
-> where we can have the conversation about for which cases it even makes
-> sense to build all of the dts files for a given SoC.
+> I just noticed the 'BLOBLISTT'. Is that on purpose? or a typo?
 
-This is a completely different series - there are no conflicts with
-Sumit's series so it can be applied before or after it.
+It means 'bloblist tag'
 
-My goal here is to clean up our build rules, rather than just throwing
-them all away, for reasons we have discussed previously. I filed [1]
-to track that.
+>
+> > +               if (ret)
+> > +                       return log_msg_ret("void", ret);
+> > +
+> > +               /* start the record after that */
+> > +               data_start =3D map_to_sysmem(hdr) + hdr->alloced + size=
+of(*vrec);
+> > +       }
+> >
+> >         /* Calculate the new allocated total */
+> > -       new_alloced =3D data_start + ALIGN(size, 1U << align_log2);
+> > +       new_alloced =3D data_start - map_to_sysmem(hdr) +
+> > +               ALIGN(size, 1U << align_log2);
+>
+> So, wouldn't it make more sense to add the dummy record and align the
+> whole thing *after* we've added the entry?
+> Doing it like this might leave the last entry on an unaligned boundary, n=
+o?
+
+I will let Raymond respond as I'm not sure what this means.
+
+>
+> Thanks
+> /Ilias
+> >
+> >         if (new_alloced > hdr->size) {
+> >                 log_err("Failed to allocate %x bytes size=3D%x, need si=
+ze=3D%x\n",
+> > @@ -164,7 +179,7 @@ static int bloblist_addrec(uint tag, int size, int =
+align_log2,
+> >         rec =3D (void *)hdr + hdr->alloced;
+> >
+> >         rec->tag =3D tag;
+> > -       rec->hdr_size =3D data_start - hdr->alloced;
+> > +       rec->hdr_size =3D sizeof(struct bloblist_rec);
+> >         rec->size =3D size;
+> >
+> >         /* Zero the record data */
+> > --
+> > 2.25.1
+> >
 
 Regards,
 Simon
-
-[1] https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/15
