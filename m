@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F6FBC3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:37:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87001C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 13:38:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA18587A37;
-	Thu, 28 Dec 2023 14:37:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 427B287A3B;
+	Thu, 28 Dec 2023 14:37:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l3ynNzEs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lLcvbD1K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D967887A06; Thu, 28 Dec 2023 14:37:21 +0100 (CET)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
+ id 02ABB8781C; Thu, 28 Dec 2023 14:37:22 +0100 (CET)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CE398781C
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:37:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4ED5487A24
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 14:37:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-78158569dc6so159315985a.3
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:37:18 -0800 (PST)
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-78106c385a1so568836585a.0
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 05:37:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703770637; x=1704375437; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703770638; x=1704375438; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lYWyJixRy1gR9yFzz2DTPy2yBFJLAMtHYx6KIZg5qKI=;
- b=l3ynNzEsf4CGrJ6j5ffuTo/Rg2j0qFftWI/uVfOSseonLOlzAXrEQdiHeIHvxXT0DO
- AhZfzQU5mrnr2g9HgaptbqUdYB4wnhpWVXYAMS+Zt582otRMQoIR/WSQfeMVEcYIMkmg
- yFc2l+d7rpwWrNk7/b0Cn7/r8InxO9/kThhxU=
+ bh=Y/jTSGyE+wejWaHVrCuh5sTmDVT+nds20AexhZ99JCo=;
+ b=lLcvbD1KVrmxAxHa4jEd4u8VdKMImkL7lHeZztjqravWlJ8BU/kYANyjBOl1Vkmxcl
+ AZim4MXprsSlbahbNcq+VhvimOO/68BYfoAgd1s7uVGNA/OsFC1o0OrzmbG6lBmzWUIU
+ HnQt0+aFp05cICOnb1V/vzGjycYQSOHQsGgRg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703770637; x=1704375437;
+ d=1e100.net; s=20230601; t=1703770638; x=1704375438;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lYWyJixRy1gR9yFzz2DTPy2yBFJLAMtHYx6KIZg5qKI=;
- b=Y8OTrcHbCyGpTzuiFNSAdGgGxxgcsf7ZEwpnp/xTK/HYcMg0XKrWlYrxuYDjkcKNZA
- +Dd/9w9erLt9pqlUr1QKoKAoOAxTEJhOK/IMJloc9FfUA5Cr857sHTrnsP1RajxDQudq
- R48VFNUk6s/lX9SKR8QEhDgDgPJG0lQB7CV+nsU1cFT0TAiUaiD0iDXSkOmx/yED7job
- S3ksSJYKY9+dqq096Ym+mXT2bBi0eKssrRrd44jOHSJ3oEY/puYuFuk+uuX6IvAKCjfz
- aAqD6NLqcaflp8+0CSykDsbS7vqwlYf4CfAL/+fbU0G2lbT/9jYWsZ7YfGRIrJauH+Aa
- iVuQ==
-X-Gm-Message-State: AOJu0YylTPaAcWNasT+s1E7l/2b0m7q3Ebr3p66eXqI+WnLJXhMT3/hp
- ZsGUW/4TRz0yJhAPJmVupbMWUSgWnJfr9Bhx6q9Sa8AjVuIE
-X-Google-Smtp-Source: AGHT+IG92DVToIolXamhGwvaXFJOsXV4tlnirNFjO7ysSmrhZYqlHdCEj6w9iqt0CJntNzc8vh2i7czFRnOOpSILzbI=
-X-Received: by 2002:a05:6214:c27:b0:67f:434c:3e22 with SMTP id
- a7-20020a0562140c2700b0067f434c3e22mr12450979qvd.64.1703770637206; Thu, 28
- Dec 2023 05:37:17 -0800 (PST)
+ bh=Y/jTSGyE+wejWaHVrCuh5sTmDVT+nds20AexhZ99JCo=;
+ b=ZXCuEB67xtEHtUSHZ+yzdx/heDFd96R6S4CYR5o7q7iCZVzUUG5BJquJ5cy3aqrK8o
+ rGfheqVk+ztyTO6UbuKWS6+XGi6McXdNUVoG2gIGCW0a88Hh+6iQMr6xl6ZQlbE/vsI4
+ 7nQ077jeVMm8A24XgELj/7H21cmCgIK92gPa+QYoVIkejjKsnrrQS7eVuHLUXxLk/ZIy
+ tQ/iM/fYTKqx+EtWj0zaCdaz8tRiWcuiylKYte6jYEw8hlbNOyR8CLQ7JeFYFY6SCKTk
+ zlwZ//WlCB4LNoz9vzmYrOb4yAAbTrYzwjuOsfULYgfNEW2/GftrNcC9oeYZx4yqn65T
+ gpfw==
+X-Gm-Message-State: AOJu0YxlZXKBOZXv1NV71+JeBk4sxWxigckANVg+4rqm8oAKogDWldPm
+ y8Ay/IStvLj6S1C6rdG/zwtjRWUF929G+UbfyvQxfMC4buow
+X-Google-Smtp-Source: AGHT+IEO9uU+6W9roXmL4gr8bHbNKnFt4AXr+fAMO0Pxoi20H2/Q47YSlI5TL+Dc5afuhpRO6ZuPFm3X9GJTseHzumY=
+X-Received: by 2002:ad4:5cab:0:b0:67a:b1f1:9c57 with SMTP id
+ q11-20020ad45cab000000b0067ab1f19c57mr17815479qvh.26.1703770638088; Thu, 28
+ Dec 2023 05:37:18 -0800 (PST)
 MIME-Version: 1.0
-References: <20231227210712.712937-1-raymond.mao@linaro.org>
- <20231227210712.712937-7-raymond.mao@linaro.org>
- <CAC_iWj+bo2gq6wuV1aQdWHybe2MhG_46DsMLBGpNbADEQnHHVQ@mail.gmail.com>
-In-Reply-To: <CAC_iWj+bo2gq6wuV1aQdWHybe2MhG_46DsMLBGpNbADEQnHHVQ@mail.gmail.com>
+References: <20231227082405.2202246-1-sjg@chromium.org>
+ <20231227132156.GQ2652760@bill-the-cat>
+In-Reply-To: <20231227132156.GQ2652760@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 28 Dec 2023 13:37:06 +0000
-Message-ID: <CAFLszTjtFzVGFNQS1suMKB4RVPc9rUB_a778pv7yiOBrYwj3Ag@mail.gmail.com>
-Subject: Re: [PATCH v4 06/12] bloblist: Drop spare value from bloblist record
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
- jwerner@chromium.org, 
- Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>
+Date: Thu, 28 Dec 2023 13:37:07 +0000
+Message-ID: <CAFLszThBrAVSH2jYxhxFSETqr4za+BqjZBBjLaDokc1ZdrXXRw@mail.gmail.com>
+Subject: Re: [PATCH 0/9] dts: Move to SoC-specific build rules
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ =?UTF-8?Q?Andreas_Bie=C3=9Fmann?= <andreas@biessmann.org>, 
+ Michal Simek <michal.simek@amd.com>, Michal Simek <monstr@monstr.eu>, 
+ Minkyu Kang <mk7.kang@samsung.com>, Scott McNutt <smcnutt@psyent.com>, 
+ Thomas Chou <thomas@wytron.com.tw>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -86,30 +89,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Tom,
 
-On Thu, Dec 28, 2023 at 7:29=E2=80=AFAM Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Wed, Dec 27, 2023 at 1:21=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
 >
-> Hi Raymond,
+> On Wed, Dec 27, 2023 at 08:23:56AM +0000, Simon Glass wrote:
 >
-> On Wed, 27 Dec 2023 at 23:08, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > U-Boot builds devicetree binaries from its source tree. As part of the
+> > Kconfig conversion, the Makefiles were updated to align with how this
+> > is done in Linux: a single target for each SoC is used to build all the
+> > .dtb files for that SoC.
 > >
-> > From: Simon Glass <sjg@chromium.org>
+> > Since then, the Makefiles have devolved in some cases, resulting in
+> > lots of target-specific build rules. Also Linux has moved to using
+> > subdirectories for each vendor.
 > >
-> > Drop spare value from bloblist record header.
+> > Recent work aims to allow U-Boot to directly use devicetree files from
+> > Linux. This would be easier if the directory structure were the same.
+> > Another recent discussion involved dropping the build rules altogether.
 > >
-> > For now it is still present in the header, with an underscore, so that
-> > tests continue to pass.
+> > This series makes a start at cleaning up some of the build rules, to
+> > reduce the amount of code and make it easier to add new boards for the
+> > same SoC.
 > >
+> > One issue is that the ARCH_xxx Kconfig options between U-Boot and Linux
+> > are not always the same. Given the large number of SoCs and boards
+> > supported by U-Boot, it would be useful to align these where possible.
 >
-> Looking at it again, this commit makes no sense to me. Why is this
-> needed in the series? And why can't we just fold it into patch #10?
+> I don't know why we should start with this now, and further not being on
+> top of Sumit's series to remove our duplicate dts files. And that's
+> where we can have the conversation about for which cases it even makes
+> sense to build all of the dts files for a given SoC.
 
-So that the tests pass and we can keep the patches small.
+This is a completely different series - there are no conflicts with
+Sumit's series so it can be applied before or after it.
 
-This is on v4 already so I don't think it is a good idea to
-restructure things at this point.
+My goal here is to clean up our build rules, rather than just throwing
+them all away, for reasons we have discussed previously. I filed [1]
+to track that.
 
 Regards,
 Simon
+
+[1] https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/15
