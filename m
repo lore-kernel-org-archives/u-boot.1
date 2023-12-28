@@ -4,66 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88943C3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 19:49:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B917C3DA6E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Dec 2023 19:49:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BB9187B34;
-	Thu, 28 Dec 2023 20:48:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 35F9687A81;
+	Thu, 28 Dec 2023 20:48:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fp9TtUNJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KFx4KL8U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCBB887B48; Thu, 28 Dec 2023 20:48:24 +0100 (CET)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id 3D00487B4D; Thu, 28 Dec 2023 20:48:27 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B88ED87ABA
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 20:48:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D3DC87B01
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 20:48:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-3bbd9cda1b1so261019b6e.2
- for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 11:48:21 -0800 (PST)
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-781045f1d23so577155085a.1
+ for <u-boot@lists.denx.de>; Thu, 28 Dec 2023 11:48:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703792900; x=1704397700; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703792902; x=1704397702; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kuBniDVNVXNFhbMj9GqRH6+3uFkvYnVn8Q8JTMqr3TY=;
- b=Fp9TtUNJj1CTQ5fvYwrPKeGaGOiuedDdLkmQh0TpPFQq32YtZgXsqRlEXn5j8ewdjz
- h/mYwD+8vm690TSsQ77pVuQOPkKoNUQ3FU0IhxGtZaf2AFXMDtoKwt8oyNDKd3AFS9sx
- kzEeVNkGz9JM3vpxvMq/y5URqmTwLZn7ttvng=
+ bh=/sCYaa/a4H3qyIlbnjXbbkUKsUurR9aiL2gqkLLx0XQ=;
+ b=KFx4KL8ULPj9dfPvR1SksNAmhQvZteExUK9t0iTYk68sLMiv3JbNpKFO6bMzth8W65
+ 4PTWM+kDEltD4VJrkqbZuxLMmU41FnnTbxW+V/6hIWovoyDfffT7m2NxyQpxcDIfyIRc
+ 8FNwYhFjLkkmD2a6r/7waLMuCTAeg0cvvOwR4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703792900; x=1704397700;
+ d=1e100.net; s=20230601; t=1703792902; x=1704397702;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kuBniDVNVXNFhbMj9GqRH6+3uFkvYnVn8Q8JTMqr3TY=;
- b=Soez4PSC/BRPl2Op/B64xvxCNdotg6JxVxj5+Ke3dI+0QSNuXNQeTAzioLwY4YCLO2
- cE8Fv4Y14z/RWG1iVjVDXn0c7t84Iomne5jdnyqxx47YWIMHkRAeLMvjEMjCh90VZkYS
- 8UWQlv0FJ1stgqazdz5NIiSGET5gPhN4ZyQdS2tZaVxF/y3bJ0Uibsb4XTh9pOAwcRpE
- +49dt07cXx55Cg5FckZYTBtxF7nl2glG/xBoZ7sPjl8suxjamNsROJCdi7lN6kJoZwA0
- 98kWZ/kp4O5RYQKig6mmpX+VgD1E6E6IP9bLGkhRyACskkVEe9AP1GwmjLphnPSD5O6F
- OCiA==
-X-Gm-Message-State: AOJu0YxYJ5l9chJeJG6B6e+ystYlHBVVNO8jdpk+sk4sQ7toZTmVixpq
- Ij93PlSjBRxOEvrjib5SdSfhQDcbk27stCaYlI0Fyfn7neJr
-X-Google-Smtp-Source: AGHT+IFZn6P16VOMrp9AvfTOTaptLJze/mE6WjR1Oi1CLdVHneXPeMDIgQegSjeB93zryK36VbynIAdjbwZgPFyV6tY=
-X-Received: by 2002:a05:6808:f89:b0:3bb:dd16:a709 with SMTP id
- o9-20020a0568080f8900b003bbdd16a709mr453514oiw.42.1703792900414; Thu, 28 Dec
- 2023 11:48:20 -0800 (PST)
+ bh=/sCYaa/a4H3qyIlbnjXbbkUKsUurR9aiL2gqkLLx0XQ=;
+ b=E0DXgeA5VyHZzsa7LINs/JOlqQrpdCWXCePujBfrDUvrCWqjhdSlwOwTwY8gLrB4f3
+ sQoqx/ZsX8VSRrhx+vN3jxOpgMd6QoI06xzMJGM1NNsW2Rzk32W2zLP0ENcHn1XoAUt/
+ y/YZVRrfhW+SofgdGyyblBSUfKXMQv5RS/kwzSfT4LF9A1pwa+LhLcgcXvECxU7QqFhf
+ HqgqcZEOQWwkvQEOb0y43DkW9QA5AG9xhUQ2eG6qmmvEVpFFWINqJTq/hnu0JQiuKGAj
+ 1kc2LeZHAUklsSjS0Fif0Na/MKdoegZcgYv5sGC097F1C2GxPl7+RhWT9/cpseZXQuMj
+ BshA==
+X-Gm-Message-State: AOJu0YwoqGKDSA6PsISKk6EDYyfs23dDB6AluroQ1UfL1Snkn9Bw2qMR
+ MtIn0hi/iLv4Wy3Y4Db3f1U8J29H/X61MlOXWVtwaqmGRo60
+X-Google-Smtp-Source: AGHT+IFU5N1hG6VVmd3ODXpsTWdPxOWduCYxZPgbSAG9dQ4GbrCDbZBR5IoVzUyY1d8833yIhdU2Hbm+QkpHt6c7jBA=
+X-Received: by 2002:a05:6214:20c7:b0:67a:52c7:b181 with SMTP id
+ 7-20020a05621420c700b0067a52c7b181mr20710081qve.32.1703792902339; Thu, 28 Dec
+ 2023 11:48:22 -0800 (PST)
 MIME-Version: 1.0
 References: <20231228180154.50473-1-clamor95@gmail.com>
- <20231228180154.50473-4-clamor95@gmail.com>
-In-Reply-To: <20231228180154.50473-4-clamor95@gmail.com>
+ <20231228180154.50473-5-clamor95@gmail.com>
+In-Reply-To: <20231228180154.50473-5-clamor95@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 28 Dec 2023 19:48:09 +0000
-Message-ID: <CAFLszTj0QfuQA-1XO7nmRP9JUZP_Yt8-gOK8wcVmCgvT=csmgQ@mail.gmail.com>
-Subject: Re: [PATCH v6 3/6] common: console: introduce console_record_isempty
- helper
+Date: Thu, 28 Dec 2023 19:48:11 +0000
+Message-ID: <CAFLszThd95iSPMOBr_21_Zckg74BtgA23EVpfXQKqnArFc-UDQ@mail.gmail.com>
+Subject: Re: [PATCH v6 4/6] common: console: record console from the beginning
 To: Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, 
  Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
@@ -97,16 +96,41 @@ m> wrote:
 >
 > From: Ion Agorria <ion@agorria.com>
 >
-> Add console_record_isempty to check if console record buffer
-> contains any data.
+> Set flag to enable console record on console_record_init
+> and not only on console_record_reset_enable. This fixes
+> missing start of U-Boot log for fastboot oem console
+> command.
 >
 > Signed-off-by: Ion Agorria <ion@agorria.com>
 > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 > Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 > ---
->  common/console.c  |  5 +++++
->  include/console.h | 13 +++++++++++++
->  2 files changed, 18 insertions(+)
->
+>  common/console.c | 3 +++
+>  1 file changed, 3 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+OK, I can see the use of this...but I wonder if we can now get rid of
+the same line of code from console_record_reset_enable() ?
+
+>
+> diff --git a/common/console.c b/common/console.c
+> index 6f2089caa0..e6d7ebe935 100644
+> --- a/common/console.c
+> +++ b/common/console.c
+> @@ -821,6 +821,9 @@ int console_record_init(void)
+>         ret =3D membuff_new((struct membuff *)&gd->console_in,
+>                           CONFIG_CONSOLE_RECORD_IN_SIZE);
+>
+> +       /* Start recording from the beginning */
+> +       gd->flags |=3D GD_FLG_RECORD;
+> +
+>         return ret;
+>  }
+>
+> --
+> 2.40.1
+>
+
+Regards,
+Simon
