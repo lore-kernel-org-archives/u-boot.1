@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52B20C47072
-	for <u-boot@archiver.kernel.org>; Fri, 29 Dec 2023 15:43:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15FF1C47072
+	for <u-boot@archiver.kernel.org>; Fri, 29 Dec 2023 15:53:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9FF687AA2;
-	Fri, 29 Dec 2023 16:43:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 60B998309D;
+	Fri, 29 Dec 2023 16:53:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WOkcK7SC";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="kmYlBFZ1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F16987AC9; Fri, 29 Dec 2023 16:43:14 +0100 (CET)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 309BC87A54; Fri, 29 Dec 2023 16:53:32 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A663B87A54
- for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 16:43:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D2258082A
+ for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 16:53:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-dbd990ad852so5025374276.1
- for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 07:43:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703864590; x=1704469390; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=XMLNMfW9J7XdrO54hxngyIne7O3DACimhu1QICOSz5s=;
- b=WOkcK7SCXAuk3HEab1sXCDrrQhhj1PKHnOyIFjnfjS+FQsTuyEJ40L+RAOtnulnfEh
- znuPKQIlK3otWVYQy0e5/sVF9S31xjFudfBijA5Ez67IfoVfX19AkB94tRwGCbzFIufn
- rSt0xnSWFJ0AmpITUU2stDXm+ICJlusHCm93k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703864590; x=1704469390;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XMLNMfW9J7XdrO54hxngyIne7O3DACimhu1QICOSz5s=;
- b=JbnybWUZAy3H8DIiBfdEBhvooXJehQi5htqXrnqoViz5MLg1I1H8qbkNpAHHILJkxs
- zlbCM4M3PjlqwO0oiEJ6swQiMzzK387R76kDhR0BG2luzed37YAXBjX2f9dWT1zK1iZM
- QyjtNBgZ7iIYygB34ilMVDXMTPxHQPFgxaLlsABSrQWJQM8oYjAjhAPA061eqcMXTvP1
- pzL875VUX9zdQZOGEkjyeAJxiJEyrI1U4PzIaV/e4opveM7md/W4X2FVtm9op9VIw7ku
- 2TK+qPfgc7VyLuWxum3Dp6mVILDHGSqV37vXjn99HOKxilaFj2LBWNvMEMBXogwJi+oY
- wPfg==
-X-Gm-Message-State: AOJu0Yy9h8sKCgJDVR3P/e759K85RsJTTcZTA5A3engH30wVG6PVnYyL
- 0yqh+8bV+MUzxIQLvBKo1HsalJUn97kF4g==
-X-Google-Smtp-Source: AGHT+IF4uPcE3sr5pNi548f76ogYZCqaP8ejV38HPYSNsb2Aa2xkv+Mg0Q8f0kMrGw+0APjup0fMSw==
-X-Received: by 2002:a25:3615:0:b0:dbd:c1f1:4ff8 with SMTP id
- d21-20020a253615000000b00dbdc1f14ff8mr6820398yba.44.1703864590248; 
- Fri, 29 Dec 2023 07:43:10 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- h17-20020a258a91000000b00dbd5b48cce1sm6912065ybl.2.2023.12.29.07.43.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 Dec 2023 07:43:09 -0800 (PST)
-Date: Fri, 29 Dec 2023 10:43:07 -0500
-From: Tom Rini <trini@konsulko.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1703865209; x=1704470009; i=xypron.glpk@gmx.de;
+ bh=bwnvVWawi+rlVV6HHDe+cva9Zh/fs8aqZ03RhCQDiNA=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
+ References;
+ b=kmYlBFZ1uLk3Tabk1tA46/cvjjxoP07PPdEPwh/wh6X1bjmT8kY8sRnl0vNcoKLi
+ oXFvbv0fdlDe6RBIb/wIuHudPvzGC/GvpRj9+OGZ79YgGlBPedT8HTLO3C8odRxzH
+ 0/k/2SDyOqRMuJOr4nXh8qtR4AcAC+V+NXEj8Q+3U5729f9RFwaz4j4HkUEedlxe9
+ BwxGLckulL/lhq1u62HDLaSunuuGiO4rcuKu21eBOt4E9VYJ50hGDhi7W34Qo1pVE
+ Hcn9PWKt9oLIfeHAuWR+jaU10UVmxEgNJ5zXSx235fsu7cUoaxCIuL+D9ztWJ6e10
+ yR8bHCu/IO3mDyl+8g==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MYNJg-1rnP471Cx0-00VOqB; Fri, 29
+ Dec 2023 16:53:29 +0100
+Date: Fri, 29 Dec 2023 16:53:28 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+CC: U-Boot Mailing List <u-boot@lists.denx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: Proposal: U-Boot memory management
-Message-ID: <20231229154307.GS2652760@bill-the-cat>
-References: <CAFLszTicT2yzsm+KAjRyqzV3bt1_W2XYJaCExX-LHNZ6+tFUkA@mail.gmail.com>
- <CAFLszThqH01GOqnTxucVE7s+wJU-dz7uqUtkb4iKxs6GgX6tqw@mail.gmail.com>
+Subject: Re: ACPI: usage of sandbox virtual addresses
+User-Agent: K-9 Mail for Android
+In-Reply-To: <CAFLszTj1npgL8F0H2prS_iBS-Kj2p+-Ena_ccQSe4dXPLGAM7w@mail.gmail.com>
+References: <9f681497-d13c-4ccc-9209-7a8b33e3195c@gmx.de>
+ <CAFLszThsThxhWCgP+UHmA5BxRUUBfDP7SDahtAm5WOrHoT0xhQ@mail.gmail.com>
+ <e9a835ea-ea99-4db2-b5ad-ba7742397d46@gmx.de>
+ <CAFLszTg17_xPGWMDG=1X+q2UTdJ_kO2pUshmDLt+cv9uPPcgJg@mail.gmail.com>
+ <08e7b3cc-9588-46ab-844e-6edbe1154e43@gmx.de>
+ <CAFLszTj1npgL8F0H2prS_iBS-Kj2p+-Ena_ccQSe4dXPLGAM7w@mail.gmail.com>
+Message-ID: <AA53366A-42EF-4F81-B1BC-C4408ED066B6@gmx.de>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="p+3roYuRee6gGero"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThqH01GOqnTxucVE7s+wJU-dz7uqUtkb4iKxs6GgX6tqw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:9yS6zMx+bgPACm8cUYxveBEy887o/0o4QtAwwbGtJklzVYo6PgM
+ zIN5ZV0LNomndOEyHj20Cjr7ZToB2rvTwgU7JVPc+0SdNjUF7XV8mf+sqlTiwoeYuqX0cMY
+ 96IwfIFq+78HtPxUeFbr2PGL5WeXSowV/BShMHdETIW+XUhA+uMzPmF57nQJUrT9/hXQSw5
+ D36HhTAQbKFpA24OgKiVg==
+UI-OutboundReport: notjunk:1;M01:P0:jCVhLdYdW0s=;2+5jUC/U2EBu3Knn06w4aYZXkMC
+ cefma/HcLnpOBHKeHcGg/aSU37jzOLiHT8P6kdQSBKMTjfnxJhrNDoRwhIfUYLjUym+JJPfcu
+ IAo5DP9vsO0KHiNZztJq/w+2KnxcV1kpiA6i9zl6VAKFGW+vPZR3h7CA72fdaG601RC+AW0rc
+ cSZeBI3tOYrB9Q2Wj3uK735OAsfuIG3I+Fl1GyeokWwkKuUb/hyLVtrq8ibi62sV/QoFftW9C
+ MyvXiayMuA1iEaxgGCYZ549E4SAoc0Sj7dIL3QiDAguP97CAtAzbQQPTbgf1jtNsIkBtWo7Rb
+ CPg78Ptxgky2nhWwjE+qwDrNGcsQOrEX/XCTLpYn1387nZDxEvXkWbpDNruNFVpuvNnXxLn8J
+ fNavT1jNtuHYoih0/DvmBhERdq7Dg5dskYfca/yjZwoR5WGn/zKORrQkaUGjFcRSoICqw+c9B
+ GXAj6MDGOoO9CFSB1QE8hbN69v2G9gnIkyU8YYdLJK+1j9Nr2+/Pyhv9aL0CmdF1WY4UEz1F5
+ T6e1SE0WCMInLnoy25VwynYbQKeo8PB4nBogcfk+dp/y/jBFOAFHZ5IdvWAAVe8IFy4kmNgGq
+ jwBKBxaTimER8hD3NdJ74IvlLgZY2lWFfW8r9hzrop57Eo6YRn1Af7o8lilG9mtajH3Aci2hQ
+ +y1sCJMKIMB0QvHTbPYr2ZfiT8JkV5iBMAh5d6g5cqP9d3xz6gDVts0n5RLkcUiNLRNUiqpWV
+ 7duVbqa0BCJgVksUSC03z8/Iu1ysChYRlKq2aM9S6BDgTRTT5myDmNKbpcyNdzhmyPFydHBpE
+ Ha1uq633XFQw+q8Z4gdEAx2WKcJE1WREzAWpPZXl0zT7H7VRODX3tQAs3h9tLX3q6garS8O+y
+ BVfuio7oD8Xr2nguStF31sN6aQsT5ZfZbFcPLuaYqvqHfclo/PTUK+t3HYJOuKyP1FeDp6MSw
+ 9wsEO4IZdDXl//Xm09d00e40J0E=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,240 +95,106 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---p+3roYuRee6gGero
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Dec 29, 2023 at 05:36:09AM +0000, Simon Glass wrote:
-> Hi,
->=20
-> On Sat, Dec 16, 2023 at 6:01=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
-ote:
-> >
-> > Hi,
-> >
-> > This records my thoughts after a discussion with Ilias & Heinrich re
-> > memory allocation in U-Boot.
-> >
-> > 1. malloc()
-> >
-> > malloc() is used for programmatic memory allocation. It allows memory
-> > to be freed. It is not designed for very large allocations (e.g. a
-> > 10MB kernel or 100MB ramdisk).
-> >
-> > 2. lmb
-> >
-> > lmb is used for large blocks of memory, such as those needed for a
-> > kernel or ramdisk. Allocation is only transitory, for the purposes of
-> > loading some images and booting. If the boot fails, then all lmb
-> > allocations go away.
-> >
-> > lmb is set up by getting all available memory and then removing what
-> > is used by U-Boot (code, data, malloc() space, etc.)
-> >
-> > lmb reservations have a few flags so that areas of memory can be
-> > provided with attributes
-> >
-> > There are some corner cases...e.g. loading a file does an lmb
-> > allocation but only for the purpose of avoiding a file being loaded
-> > over U-Boot code/data. The allocation is dropped immediately after the
-> > file is loaded. Within the bootm command, or when using standard boot,
-> > this would be fairly easy to solve.
-> >
-> > Linux has renamed lmb to memblock. We should consider doing the same.
-> >
-> > 3. EFI
-> >
-> > EFI has its own memory-allocation tables.
-> >
-> > Like lmb, EFI is able to deal with large allocations. But via a 'pool'
-> > function it can also do smaller allocations similar to malloc(),
-> > although each one uses at least 4KB at present.
-> >
-> > EFI allocations do not go away when a boot fails.
-> >
-> > With EFI it is possible to add allocations post facto, in which case
-> > they are added to the allocation table just as if the memory was
-> > allocated with EFI to begin with.
-> >
-> > The EFI allocations and the lmb allocations use the same memory, so in
-> > principle could conflict.
-> >
-> > EFI allocations are sometimes used to allocate internal U-Boot data as
-> > well, if needed by the EFI app. For example, while efi_image_parse()
-> > uses malloc(), efi_var_mem.c uses EFI allocations since the code runs
-> > in the app context and may need to access the memory after U-Boot has
-> > exited. Also efi_smbios.c uses allocate_pages() and then adds a new
-> > mapping as well.
-> >
-> > EFI memory has attributes, including what the memory is used for (to
-> > some degree of granularity). See enum efi_memory_type and struct
-> > efi_mem_desc. In the latter there are also attribute flags - whether
-> > memory is cacheable, etc.
-> >
-> > EFI also has the x86 idea of 'conventional' memory, meaning (I
-> > believe) that below 4GB that isn't reserved for the hardware/system.
-> > This is meaningless, or at least confusing, on ARM systems.
-> >
-> > 4. reservations
-> >
-> > It is perhaps worth mentioning a fourth method of memory management,
-> > where U-Boot reserves chunks of memory before relocation (in
-> > board_init_f.c), e.g. for the framebuffer, U-Boot code, the malloc()
-> > region, etc.
-> >
-> >
-> > Problems
-> > =E2=80=94-------
-> >
-> > There are no urgent problems, but here are some things that could be im=
-proved:
-> >
-> > 1. EFI should attach most of its data structures to driver model. This
-> > work has started, with the partition support, but more effort would
-> > help. This would make it easier to see which memory is related to
-> > devices and which is separate.
-> >
-> > 2. Some drivers do EFI reservations today, whether EFI is used for
-> > booting or not (e.g. rockchip video rk_vop_probe()).
-> >
-> > 3. U-Boot doesn't really map arch-specific memory attributes (e.g.
-> > armv8's struct mm_region) to EFI ones.
-> >
-> > 4. EFI duplicates some code from bootm, some of which relates to
-> > memory allocation (e.g. FDT fixup).
-> >
-> > 5. EFI code is used even if EFI is never used to boot
-> >
-> > 6. EFI allocations can result in the same memory being used as has
-> > already been allocated by lmb. Users may load files which overwrite
-> > memory allocated by EFI.
->=20
-> 7. We need to support doing an allocation when a file is loaded (to
-> ensure files do not overlap), without making it too difficult to load
-> multiple files to the same place, if desired.
->=20
-> >
-> >
-> > Lifetime
-> > --------
-> >
-> > We have three different memory allocators with different purposes. Can
-> > we unify them a little?
-> >
-> > Within U-Boot:
-> > - malloc() space lives forever
-> > - lmb lives while setting out images for booting
-> > - EFI (mostly) lives while booting an EFI app
-> >
-> > In practice, EFI is set up early in U-Boot. Some of this is necessary,
-> > some not. EFI allocations stay around forever. This works OK since
-> > large allocations are normally not done in EFI, so memory isn't really
-> > consumed to any great degree by the boot process.
-> >
-> > What happens to EFI allocations if the app returns? They are still
-> > present, in case another app is run. This seems fine.
-> >
-> > API
-> > =E2=80=93--
-> > Can we unify some APIs?
-> >
-> > It should be possible to use lmb for large EFI memory allocations, so
-> > long as they are only needed for booting. We effectively do this
-> > today, since EFI does not manage the arrangement of loaded images in
-> > memory. for the most part.
-> >
-> > It would not make sense to use EFI allocation to replace lmb and
-> > malloc(), of course.
-> >
-> > Could we use a common (lower-level) API for allocation, used by both
-> > lmb and EFI? They do have some similarities. However they have
-> > different lifetime constraints (EFI allocations are never dropped,
-> > unlikely lmb).
-> >
-> > ** Overall, it seems that the existence of memory allocation in
-> > boot-time services has created confusion. Memory allocation is
-> > muddled, with both U-Boot code and boot-time services calling the same
-> > memory allocator. This just has not been clearly thought out.
-> >
-> >
-> > Proposal
-> > =E2=80=94-------
-> >
-> > Here are some ideas:
-> >
-> > 1. For video, use the driver model API to locate the video regions, or
-> > block off the entire framebuffer memory, for all devices as a whole.
-> > Use efi_add_memory_map()
-> >
-> > 2. Add memory attributes to UCLASS_RAM and use them in EFI, mapping to
-> > the EFI_MEMORY_... attributes in struct efi_mem_desc.
-> >
-> > 3. Add all EFI reservations just before booting the app, as we do with
-> > devicetree fixup. With this model, malloc() and lmb are used for all
-> > allocation. Then efi_add_memory_map() is called for each region in
-> > turn just before booting. Memory attributes are dealt with above. The
-> > type (enum efi_memory_type) can be determined simply by the data
-> > structure stored in it, as is done today. For example, SMBIOS tables
-> > can use EFI_ACPI_RECLAIM_MEMORY. Very few types are used and EFI code
-> > understands the meaning of each.
-> >
-> > 4. Avoid setting up EFI memory at the start of U-Boot. Do it only when
-> > booting. This looks to require very little effort.
-> >
-> > 5. Avoid calling efi_allocate_pages() and efi_allocate_pool() outside
-> > boot-time services. This solves the problem 6. If memory is needed by
-> > an app, allocate it with malloc() and see 3. There are only two
-> > efi_allocate_pages() (smbios and efi_runtime). There are more calls of
-> > efi_allocate_pool(), but most of these seem easy to fix up. For
-> > example, efi_init_event_log() allocates a buffer, but this can be
-> > allocated in normal malloc() space or in a bloblist.
-> >
-> > 6. Don't worry too much about whether EFI will be used for booting.
-> > The cost is likely not that great: use bootstage to measure it as is
-> > done for driver model. Try to minmise the cost of its tables,
-> > particularly for execution time, but otherwise just rely on the
-> > ability to disable EFI_LOADER.
->=20
-> 7. Add a flag to the 'load' command:
->=20
-> -m <type> - make an lmb allocation for the file
->    <type> is the image type to use (kernel, ramdisk, flat_dt)
->=20
-> any existing allocation for that type will be automatically freed
-> first. If <type> is "none" then no freeing is possible: any loaded
-> images just stack up in lmb.
->=20
-> Add an 'lmb' (or memblock) command to allow listing and clearing allocati=
-ons.
+Am 29=2E Dezember 2023 15:31:24 MEZ schrieb Simon Glass <sjg@chromium=2Eor=
+g>:
+>Hi Heinrich,
+>
+>On Fri, Dec 29, 2023 at 11:14=E2=80=AFAM Heinrich Schuchardt <xypron=2Egl=
+pk@gmx=2Ede> wrote:
+>>
+>> On 12/29/23 09:26, Simon Glass wrote:
+>> > Hi Heinrich,
+>> >
+>> > On Tue, Dec 26, 2023 at 10:03=E2=80=AFAM Heinrich Schuchardt <xypron=
+=2Eglpk@gmx=2Ede> wrote:
+>> >>
+>> >> On 12/26/23 10:50, Simon Glass wrote:
+>> >>> Hi Heinrich,
+>> >>>
+>> >>> On Tue, Dec 26, 2023 at 8:56=E2=80=AFAM Heinrich Schuchardt <xypron=
+=2Eglpk@gmx=2Ede> wrote:
+>> >>>>
+>> >>>> Hello Simon,
+>> >>>>
+>> >>>> currently we use sandbox virtual addresses in all ACPI tables=2E T=
+his
+>> >>>> means that an application started by the U-Boot sandbox consuming =
+these
+>> >>>> tables will crash due to accessing invalid addresses=2E
+>> >>>>
+>> >>>> Shouldn't the ACPI tables be migrated to use valid pointers?
+>> >>>
+>> >>> The confusion arises due to the difference between addresses and
+>> >>> pointers=2E If we store addresses in the ACPI tables, then things s=
+hould
+>> >>> work=2E
+>> >>>
+>> >>> My approach has been to avoid using casts, but instead use
+>> >>> map_sysmem() and mem_to_sysmem()=2E
+>> >>>
+>> >>> Which particular piece of code is wrong in this case?
+>> >>
+>> >> Tables DSDT, XSDT, RSDP, FADT in the sandbox contain sandbox virtual
+>> >> addresses instead of pointers to real host memory=2E
+>> >>
+>> >> All code referring to these tables should be changed=2E433:         =
+                   *gnvs =3D map_to_sysmem(ctx->current);
+>> >
+>> > I'm still not quite clear on this=2E=2E=2Ecan you point to functions =
+or
+>> > lines of code? When I look at acpi_add_table() it does use memmap, bu=
+t
+>> > perhaps some parts are wrong?
+>> >
+>> > Regards,
+>> > Simon
+>>
+>> Here are some examples where the wrong values are set=2E We must get ri=
+d
+>> of all map_to_sysmem() calls where writing ACPI tables=2E
+>>
+>> lib/acpi/acpi_table=2Ec:
+>> 170         rsdt->entry[i] =3D map_to_sysmem(table);
+>> 188         xsdt->entry[i] =3D map_to_sysmem(table);
+>>
+>> lib/acpi/base=2Ec:
+>> 27:             rsdp->rsdt_address =3D map_to_sysmem(rsdt);
+>> 30:             rsdp->xsdt_address =3D map_to_sysmem(xsdt);
+>>
+>> arch/x86/cpu/baytrail/acpi=2Ec:
+>> 81:     fadt->x_firmware_ctrl =3D map_to_sysmem(ctx->facs);
+>> 82:     fadt->x_dsdt =3D map_to_sysmem(ctx->dsdt);
+>>
+>> arch/x86/cpu/quark/acpi=2Ec:
+>> 76:     fadt->x_firmware_ctrl =3D map_to_sysmem(ctx->facs);
+>> 77:     fadt->x_dsdt =3D map_to_sysmem(ctx->dsdt);
+>>
+>> arch/x86/cpu/tangier/acpi=2Ec:
+>> 47:     fadt->x_firmware_ctrl =3D map_to_sysmem(ctx->facs);
+>> 48:     fadt->x_dsdt =3D map_to_sysmem(ctx->dsdt);
+>>
+>> arch/x86/lib/acpi_table=2Ec:
+>> 200:    tcpa->lasa =3D map_to_sysmem(log);
+>> 271:    tpm2->lasa =3D map_to_sysmem(lasa);
+>> 433:                            *gnvs =3D map_to_sysmem(ctx->current);
+>> 575:    fadt->x_firmware_ctrl =3D map_to_sysmem(facs);
+>> 576:    fadt->x_dsdt =3D map_to_sysmem(dsdt);
+>
+>OK, I see=2E But at least within sandbox, the address is what we want to
+>store, not the pointer=2E Are you worried about what an EFI app will do
+>in that case, when we run an app from sandbox? If so, then yes it is
+>definitely a problem=2E
+>
+>Regards,
+>Simon
 
-I would really not like to change the user interface and instead simply
-handle this with flags to whatever mark/allocation function is called.
-You can always overwrite things that are brought in to memory, you
-cannot overwrite U-Boot or our internals. Optionally noting that some
-previous load to memory has been at least partially overwritten could be
-helpful, if it's not too much extra logic.
+The sandbox is an environment to run EFI binaries inside an OS=2E So the A=
+CPI tables must contain pointers=2E
 
---=20
-Tom
+The acpi command should display sandbox virtual addresses=2E All conversio=
+ns should be moved to the command=2E
 
---p+3roYuRee6gGero
-Content-Type: application/pgp-signature; name="signature.asc"
+Best regards
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWO6QEACgkQFHw5/5Y0
-tyzQWQv+N//tuhPGY3/HWjZuaOvCl4f+1E5YYfD1IAHemMn3pdw5kSKjj57dMUSi
-M280kwN7lMX5y6Jrg8/8fU0ylABodfDavMZ6rQjVTDEF89AEfLkhKXvqLtZ+Yv9E
-2JPnOvOooSey0Iq5BKujizF9miqNCdRYd5bLqekD0dpReYTepN2wKULbzYH48VMW
-TF0peDshG20NlZUsASLHtSHPQnJqYi3MUvhRcUoOBzNVvPDTslTHlCULBqTYZCGx
-C49mrrkp9iNYb0no1F23Sp1Rrd3LipeW1OSF4FofdKANALYLQiGUwcegnGKVghQL
-j39XvNTD5nFPFu5KqjpzGa5BYNCCZhXiC6jtBwLvlCgqTbu0pHW3t85kaa8PHYBf
-SdctYlbY196MK680OqS/pq163pbhsBdso7YLg1m04C9qA/BEENB5PJ5sSWz37dgR
-riCnsWUsjvb+CZhJCG3I/JwLBK+1eJzlkVWdsWqsJLVHKzLtp8DCxkErJakAfnIZ
-VZaeqVwl
-=Lgmc
------END PGP SIGNATURE-----
-
---p+3roYuRee6gGero--
+Heinrich
