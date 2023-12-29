@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3316FC47074
-	for <u-boot@archiver.kernel.org>; Fri, 29 Dec 2023 17:52:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ED13C47073
+	for <u-boot@archiver.kernel.org>; Fri, 29 Dec 2023 18:55:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9AB387BAC;
-	Fri, 29 Dec 2023 18:52:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A354187B31;
+	Fri, 29 Dec 2023 19:55:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Id6kWJTa";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="VDMy3z6v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A58387BAF; Fri, 29 Dec 2023 18:52:21 +0100 (CET)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
+ id BC99987B31; Fri, 29 Dec 2023 19:55:10 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC86987B8F
- for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 18:52:18 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-dbd7248ac28so4719950276.2
- for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 09:52:18 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id B238887B34
+ for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 19:55:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=francis.laniel@amarulasolutions.com
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-40d5ae89c7bso25319215e9.2
+ for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 10:55:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703872337; x=1704477137; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3ZTCYy3xYLXJNjF7aBVbeeQSbN9IitfsKOjpVs91vt8=;
- b=Id6kWJTaJqx2q+OAS0aaHW3ZPwlunAAlVbGS/J68qfN1hmHqIirE38KE63JMauFXPM
- xB2adqdPK/iop4re35l8g1zYbNmtGmKe//TCsSW86mBk2yLOtXGMcBjpKO0IKrxcNH/p
- /g9kAhAJSK7d1M1tmisdyHO8nCEucnoZJcte8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703872337; x=1704477137;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=amarulasolutions.com; s=google; t=1703876106; x=1704480906;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3ZTCYy3xYLXJNjF7aBVbeeQSbN9IitfsKOjpVs91vt8=;
- b=MuqHrybTgP9X2Su+lywKuxsVPvA7IoVIx5HACApeBwxwFzrBBpINf6IKHUyO/cfDMQ
- nGMNwWY9+Yj/FYEzmlJbIc5QUNV035TDia9JR8sm5jrxHJ/uQEPHkJKCXg/D/mjr/dR6
- DJW6PjDeZSp6+qatb1GqEHgGaIHBbt/3j+zn9IWpCH1wLPmvlquYK48QY03gbjJxtcL8
- jsaCMP+Jcx0oJNfUM8vA4nDmQmKy9JE8vrzd//gsKMfxgUC00Za3n9Pge1Imp61EpDhs
- 7LV8oGuE8lKNVuPa54lqAXUzFYp4C07aA5Mfuv9YiKl9gAMQi+cI7cSg5ArxBIaE/8wY
- +s8w==
-X-Gm-Message-State: AOJu0Yx20mc4Xsh8K+OnV9zPsvjuxtK8AidDcOwwcHx8QiurrW8T7C0r
- GEYxT72tW0h/gMDGX9s/671Arnd+OMGxWfnQ7hF9x7Uxalk=
-X-Google-Smtp-Source: AGHT+IG+vWa/Bf6JFAFqPYHl9IoU38pAv0mcpNO01VK/FAyScloUFPNHb/UKydHh09xXlb+ErzS3ig==
-X-Received: by 2002:a05:690c:3745:b0:5ea:e8d:df7f with SMTP id
- fw5-20020a05690c374500b005ea0e8ddf7fmr6996456ywb.22.1703872337310; 
- Fri, 29 Dec 2023 09:52:17 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- q133-20020a815c8b000000b005e4e79d4921sm8633789ywb.94.2023.12.29.09.52.16
+ bh=nRfefyBHlApr0E3xvs0/GgMOamf4k0jCS1eMwI201eI=;
+ b=VDMy3z6vIxtsxto4RebW+3oRmO96F8Ydf4i4NI8bAmS6WFn9bd4Dps0SdDWX2eXWCb
+ IoaE9Bp89C3JwOZfoC6qi/dNsKIlfFFxyHLunoh8kmd+9yOXvInwg1YInuYFqs4s7CTK
+ fyJg4D4SiQ/cuyqw91fUXLaLQXN/RLotYI2vY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703876106; x=1704480906;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nRfefyBHlApr0E3xvs0/GgMOamf4k0jCS1eMwI201eI=;
+ b=vmgml8eocAO2qFtw32WaqoCbm3mkSlGUTZZYjn5vc8MwMHH1Rm+LW/L5w9kSJjSAlB
+ sJRPiIAE3M+qwmdoadHz01JLBo+/BlcFZCn5jySIZgEsWRCbMj9JRgcu8mXdWIoXTSQm
+ L4DstzjMurAA8j9S8hDINqnIEfcWkpZCUyisJyRGOt0BmtQe/ffxat8DVtTDQoUpPXYI
+ z0GKZMT/Ufrq3UyG1urLpnarxMfFXhXSRTiYf0ajVEc8R3GaD7ixViiKT1xrmHSjqPFH
+ gas80J9O6+JWw0F36x846UqcITy9DnlK7lzNzW3NliwPownCSvJrC6Yd4ef+S3pEBUg+
+ lyaQ==
+X-Gm-Message-State: AOJu0YxcABbFjEtXzcYMcPWHzYz2fdPYOrFWlBMGz8wY5mVJAQVzNW16
+ 8Kl4yQfHcYNUnNcX1wwm2UT96daH/mdspQ==
+X-Google-Smtp-Source: AGHT+IFq5Crg5b4ldJSiVWX29GKkyC8h9LrGCu2hUOrDSENxxUEv9uMGaTgqEZCzIsp4zpxAXnhqhw==
+X-Received: by 2002:a05:600c:ca:b0:40d:376b:c640 with SMTP id
+ u10-20020a05600c00ca00b0040d376bc640mr8602134wmm.102.1703876105502; 
+ Fri, 29 Dec 2023 10:55:05 -0800 (PST)
+Received: from pwmachine.localnet (85-170-33-133.rev.numericable.fr.
+ [85.170.33.133]) by smtp.gmail.com with ESMTPSA id
+ jh3-20020a05600ca08300b0040d81d16711sm187565wmb.16.2023.12.29.10.55.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 Dec 2023 09:52:16 -0800 (PST)
-Date: Fri, 29 Dec 2023 12:52:15 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: xypron.glpk@gmx.de, sjg@chromium.org, u-boot@lists.denx.de,
- ilias.apalodimas@linaro.org
-Subject: Re: Proposal: U-Boot memory management
-Message-ID: <20231229175215.GY2652760@bill-the-cat>
-References: <CAFLszTicT2yzsm+KAjRyqzV3bt1_W2XYJaCExX-LHNZ6+tFUkA@mail.gmail.com>
- <CAFLszThqH01GOqnTxucVE7s+wJU-dz7uqUtkb4iKxs6GgX6tqw@mail.gmail.com>
- <20231229154307.GS2652760@bill-the-cat>
- <7CDAA354-803C-4AFD-BD38-F432B811DB96@gmx.de>
- <20231229161744.GU2652760@bill-the-cat>
- <871qb4nbtc.fsf@bloch.sibelius.xs4all.nl>
+ Fri, 29 Dec 2023 10:55:05 -0800 (PST)
+From: Francis Laniel <francis.laniel@amarulasolutions.com>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de,
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Harald Seiler <hws@denx.de>, Evgeny Bachinin <EABachinin@sberdevices.ru>,
+ Marek Vasut <marex@denx.de>, Hector Palacios <hector.palacios@digi.com>
+Subject: Re: [PATCH v13 15/24] cli: add modern hush as parser for
+ run_command*()
+Date: Fri, 29 Dec 2023 19:55:04 +0100
+Message-ID: <2712762.mvXUDI8C0e@pwmachine>
+In-Reply-To: <CAFLszTi_S4Q+=i-1=-UjBN7RWUOSC+FF1B3p8z7rU8spMh2YXQ@mail.gmail.com>
+References: <20231222210244.91830-1-francis.laniel@amarulasolutions.com>
+ <20231222212312.GE2652760@bill-the-cat>
+ <CAFLszTi_S4Q+=i-1=-UjBN7RWUOSC+FF1B3p8z7rU8spMh2YXQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="QuC3BUkNgyz7GI05"
-Content-Disposition: inline
-In-Reply-To: <871qb4nbtc.fsf@bloch.sibelius.xs4all.nl>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,336 +95,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi!
 
---QuC3BUkNgyz7GI05
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Dec 29, 2023 at 06:44:15PM +0100, Mark Kettenis wrote:
-> > Date: Fri, 29 Dec 2023 11:17:44 -0500
-> > From: Tom Rini <trini@konsulko.com>
-> >=20
-> > On Fri, Dec 29, 2023 at 05:05:17PM +0100, Heinrich Schuchardt wrote:
-> > >=20
-> > >=20
-> > > Am 29. Dezember 2023 16:43:07 MEZ schrieb Tom Rini <trini@konsulko.co=
-m>:
-> > > >On Fri, Dec 29, 2023 at 05:36:09AM +0000, Simon Glass wrote:
-> > > >> Hi,
-> > > >>=20
-> > > >> On Sat, Dec 16, 2023 at 6:01=E2=80=AFPM Simon Glass <sjg@chromium.=
-org> wrote:
-> > > >> >
-> > > >> > Hi,
-> > > >> >
-> > > >> > This records my thoughts after a discussion with Ilias & Heinric=
-h re
-> > > >> > memory allocation in U-Boot.
-> > > >> >
-> > > >> > 1. malloc()
-> > > >> >
-> > > >> > malloc() is used for programmatic memory allocation. It allows m=
-emory
-> > > >> > to be freed. It is not designed for very large allocations (e.g.=
- a
-> > > >> > 10MB kernel or 100MB ramdisk).
-> > > >> >
-> > > >> > 2. lmb
-> > > >> >
-> > > >> > lmb is used for large blocks of memory, such as those needed for=
- a
-> > > >> > kernel or ramdisk. Allocation is only transitory, for the purpos=
-es of
-> > > >> > loading some images and booting. If the boot fails, then all lmb
-> > > >> > allocations go away.
-> > > >> >
-> > > >> > lmb is set up by getting all available memory and then removing =
-what
-> > > >> > is used by U-Boot (code, data, malloc() space, etc.)
-> > > >> >
-> > > >> > lmb reservations have a few flags so that areas of memory can be
-> > > >> > provided with attributes
-> > > >> >
-> > > >> > There are some corner cases...e.g. loading a file does an lmb
-> > > >> > allocation but only for the purpose of avoiding a file being loa=
-ded
-> > > >> > over U-Boot code/data. The allocation is dropped immediately aft=
-er the
-> > > >> > file is loaded. Within the bootm command, or when using standard=
- boot,
-> > > >> > this would be fairly easy to solve.
-> > > >> >
-> > > >> > Linux has renamed lmb to memblock. We should consider doing the =
-same.
-> > > >> >
-> > > >> > 3. EFI
-> > > >> >
-> > > >> > EFI has its own memory-allocation tables.
-> > > >> >
-> > > >> > Like lmb, EFI is able to deal with large allocations. But via a =
-'pool'
-> > > >> > function it can also do smaller allocations similar to malloc(),
-> > > >> > although each one uses at least 4KB at present.
-> > > >> >
-> > > >> > EFI allocations do not go away when a boot fails.
-> > > >> >
-> > > >> > With EFI it is possible to add allocations post facto, in which =
-case
-> > > >> > they are added to the allocation table just as if the memory was
-> > > >> > allocated with EFI to begin with.
-> > > >> >
-> > > >> > The EFI allocations and the lmb allocations use the same memory,=
- so in
-> > > >> > principle could conflict.
-> > > >> >
-> > > >> > EFI allocations are sometimes used to allocate internal U-Boot d=
-ata as
-> > > >> > well, if needed by the EFI app. For example, while efi_image_par=
-se()
-> > > >> > uses malloc(), efi_var_mem.c uses EFI allocations since the code=
- runs
-> > > >> > in the app context and may need to access the memory after U-Boo=
-t has
-> > > >> > exited. Also efi_smbios.c uses allocate_pages() and then adds a =
-new
-> > > >> > mapping as well.
-> > > >> >
-> > > >> > EFI memory has attributes, including what the memory is used for=
- (to
-> > > >> > some degree of granularity). See enum efi_memory_type and struct
-> > > >> > efi_mem_desc. In the latter there are also attribute flags - whe=
-ther
-> > > >> > memory is cacheable, etc.
-> > > >> >
-> > > >> > EFI also has the x86 idea of 'conventional' memory, meaning (I
-> > > >> > believe) that below 4GB that isn't reserved for the hardware/sys=
-tem.
-> > > >> > This is meaningless, or at least confusing, on ARM systems.
-> > > >> >
-> > > >> > 4. reservations
-> > > >> >
-> > > >> > It is perhaps worth mentioning a fourth method of memory managem=
-ent,
-> > > >> > where U-Boot reserves chunks of memory before relocation (in
-> > > >> > board_init_f.c), e.g. for the framebuffer, U-Boot code, the mall=
-oc()
-> > > >> > region, etc.
-> > > >> >
-> > > >> >
-> > > >> > Problems
-> > > >> > =E2=80=94-------
-> > > >> >
-> > > >> > There are no urgent problems, but here are some things that coul=
-d be improved:
-> > > >> >
-> > > >> > 1. EFI should attach most of its data structures to driver model=
-=2E This
-> > > >> > work has started, with the partition support, but more effort wo=
-uld
-> > > >> > help. This would make it easier to see which memory is related to
-> > > >> > devices and which is separate.
-> > > >> >
-> > > >> > 2. Some drivers do EFI reservations today, whether EFI is used f=
-or
-> > > >> > booting or not (e.g. rockchip video rk_vop_probe()).
-> > > >> >
-> > > >> > 3. U-Boot doesn't really map arch-specific memory attributes (e.=
-g.
-> > > >> > armv8's struct mm_region) to EFI ones.
-> > > >> >
-> > > >> > 4. EFI duplicates some code from bootm, some of which relates to
-> > > >> > memory allocation (e.g. FDT fixup).
-> > > >> >
-> > > >> > 5. EFI code is used even if EFI is never used to boot
-> > > >> >
-> > > >> > 6. EFI allocations can result in the same memory being used as h=
-as
-> > > >> > already been allocated by lmb. Users may load files which overwr=
-ite
-> > > >> > memory allocated by EFI.
-> > > >>=20
-> > > >> 7. We need to support doing an allocation when a file is loaded (to
-> > > >> ensure files do not overlap), without making it too difficult to l=
-oad
-> > > >> multiple files to the same place, if desired.
-> > > >>=20
-> > > >> >
-> > > >> >
-> > > >> > Lifetime
-> > > >> > --------
-> > > >> >
-> > > >> > We have three different memory allocators with different purpose=
-s. Can
-> > > >> > we unify them a little?
-> > > >> >
-> > > >> > Within U-Boot:
-> > > >> > - malloc() space lives forever
-> > > >> > - lmb lives while setting out images for booting
-> > > >> > - EFI (mostly) lives while booting an EFI app
-> > > >> >
-> > > >> > In practice, EFI is set up early in U-Boot. Some of this is nece=
-ssary,
-> > > >> > some not. EFI allocations stay around forever. This works OK sin=
-ce
-> > > >> > large allocations are normally not done in EFI, so memory isn't =
-really
-> > > >> > consumed to any great degree by the boot process.
-> > > >> >
-> > > >> > What happens to EFI allocations if the app returns? They are sti=
-ll
-> > > >> > present, in case another app is run. This seems fine.
-> > > >> >
-> > > >> > API
-> > > >> > =E2=80=93--
-> > > >> > Can we unify some APIs?
-> > > >> >
-> > > >> > It should be possible to use lmb for large EFI memory allocation=
-s, so
-> > > >> > long as they are only needed for booting. We effectively do this
-> > > >> > today, since EFI does not manage the arrangement of loaded image=
-s in
-> > > >> > memory. for the most part.
-> > > >> >
-> > > >> > It would not make sense to use EFI allocation to replace lmb and
-> > > >> > malloc(), of course.
-> > > >> >
-> > > >> > Could we use a common (lower-level) API for allocation, used by =
-both
-> > > >> > lmb and EFI? They do have some similarities. However they have
-> > > >> > different lifetime constraints (EFI allocations are never droppe=
-d,
-> > > >> > unlikely lmb).
-> > > >> >
-> > > >> > ** Overall, it seems that the existence of memory allocation in
-> > > >> > boot-time services has created confusion. Memory allocation is
-> > > >> > muddled, with both U-Boot code and boot-time services calling th=
-e same
-> > > >> > memory allocator. This just has not been clearly thought out.
-> > > >> >
-> > > >> >
-> > > >> > Proposal
-> > > >> > =E2=80=94-------
-> > > >> >
-> > > >> > Here are some ideas:
-> > > >> >
-> > > >> > 1. For video, use the driver model API to locate the video regio=
-ns, or
-> > > >> > block off the entire framebuffer memory, for all devices as a wh=
-ole.
-> > > >> > Use efi_add_memory_map()
-> > > >> >
-> > > >> > 2. Add memory attributes to UCLASS_RAM and use them in EFI, mapp=
-ing to
-> > > >> > the EFI_MEMORY_... attributes in struct efi_mem_desc.
-> > > >> >
-> > > >> > 3. Add all EFI reservations just before booting the app, as we d=
-o with
-> > > >> > devicetree fixup. With this model, malloc() and lmb are used for=
- all
-> > > >> > allocation. Then efi_add_memory_map() is called for each region =
-in
-> > > >> > turn just before booting. Memory attributes are dealt with above=
-=2E The
-> > > >> > type (enum efi_memory_type) can be determined simply by the data
-> > > >> > structure stored in it, as is done today. For example, SMBIOS ta=
-bles
-> > > >> > can use EFI_ACPI_RECLAIM_MEMORY. Very few types are used and EFI=
- code
-> > > >> > understands the meaning of each.
-> > > >> >
-> > > >> > 4. Avoid setting up EFI memory at the start of U-Boot. Do it onl=
-y when
-> > > >> > booting. This looks to require very little effort.
-> > > >> >
-> > > >> > 5. Avoid calling efi_allocate_pages() and efi_allocate_pool() ou=
-tside
-> > > >> > boot-time services. This solves the problem 6. If memory is need=
-ed by
-> > > >> > an app, allocate it with malloc() and see 3. There are only two
-> > > >> > efi_allocate_pages() (smbios and efi_runtime). There are more ca=
-lls of
-> > > >> > efi_allocate_pool(), but most of these seem easy to fix up. For
-> > > >> > example, efi_init_event_log() allocates a buffer, but this can be
-> > > >> > allocated in normal malloc() space or in a bloblist.
-> > > >> >
-> > > >> > 6. Don't worry too much about whether EFI will be used for booti=
-ng.
-> > > >> > The cost is likely not that great: use bootstage to measure it a=
-s is
-> > > >> > done for driver model. Try to minmise the cost of its tables,
-> > > >> > particularly for execution time, but otherwise just rely on the
-> > > >> > ability to disable EFI_LOADER.
-> > > >>=20
-> > > >> 7. Add a flag to the 'load' command:
-> > > >>=20
-> > > >> -m <type> - make an lmb allocation for the file
-> > > >>    <type> is the image type to use (kernel, ramdisk, flat_dt)
-> > > >>=20
-> > > >> any existing allocation for that type will be automatically freed
-> > > >> first. If <type> is "none" then no freeing is possible: any loaded
-> > > >> images just stack up in lmb.
-> > > >>=20
-> > > >> Add an 'lmb' (or memblock) command to allow listing and clearing a=
-llocations.
-> > > >
-> > > >I would really not like to change the user interface and instead sim=
-ply
-> > > >handle this with flags to whatever mark/allocation function is calle=
-d.
-> > > >You can always overwrite things that are brought in to memory, you
-> > > >cannot overwrite U-Boot or our internals. Optionally noting that some
-> > > >previous load to memory has been at least partially overwritten coul=
-d be
-> > > >helpful, if it's not too much extra logic.
-> > > >
-> > >=20
-> > > In most use cases users load exactly one file at  each address. An
-> > > unload command would be the cleanest way for a user to indicate that
-> > > he wants to reuse the memory.
-> >=20
-> > I very much do not want to change the API. There's untold numbers of
-> > scripts out there and they should continue to work. I mentioned to Ilias
-> > off list just now that I'm not against adding a command to add flags to
-> > these areas, but I don't think it's worthwhile to prevent overwrites the
-> > user did early. The biggest long running problem in this space was that
-> > for 32bit ARM we couldn't know where the kernel BSS was going to be and
-> > so would have ramdisk at the wrong spot and get partially eaten, and
-> > this was hard to figure out. The current example is "ooops,
-> > decompression buffer for Image.gz/etc is too close to other things"
-> > which ends up failing nice and loudly, and in the future once this
-> > proposal is done we can just dynamically find and use a spot, since
-> > we'll have that ability finally.
+Le mardi 26 d=C3=A9cembre 2023, 10:46:48 CET Simon Glass a =C3=A9crit :
+> Hi,
 >=20
-> In order to keep the existing interfaces we need lmb to keep track of
-> (at least ) three different states.  I think of those as "free",
-> "allocated" and "reserved".  The load command would "reserve" memory
-> insteaf "allocate".  And it would pass a flag to lmb when reserving
-> memory to indicate that reserving memory that is already reserved is
-> ok.  Both "reserved" and "allocated" memory should show up as not free
-> in the EFI memory map (probably as EfiLoaderData).
+> On Fri, Dec 22, 2023 at 9:23=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
+> > On Fri, Dec 22, 2023 at 10:10:42PM +0100, Francis Laniel wrote:
+> > > Hi!
+> > >=20
+> > > Le vendredi 22 d=C3=A9cembre 2023, 22:02:35 CET Francis Laniel a =C3=
+=A9crit :
+> > > > Enables using, in code, modern hush as parser for run_command funct=
+ion
+> > > > family. It also enables the command run to be used by CLI user of
+> > > > modern
+> > > > hush.
+> > > >=20
+> > > > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > > > Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
+> >=20
+> > [snip]
+> >=20
+> > > > diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+> > > > index a9b555c779..104f49deef 100644
+> > > > --- a/test/boot/bootflow.c
+> > > > +++ b/test/boot/bootflow.c
+> > > > @@ -710,7 +710,21 @@ static int bootflow_scan_menu_boot(struct
+> > > > unit_test_state *uts) ut_assert_skip_to_line("(2 bootflows, 2
+> > > > valid)");
+> > > >=20
+> > > >     ut_assert_nextline("Selected: Armbian");
+> > > >=20
+> > > > -   ut_assert_skip_to_line("Boot failed (err=3D-14)");
+> > > > +
+> > > > +   if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
+> > > > +           /*
+> > > > +            * With old hush, despite booti failing to boot, i.e.
+> > > > returning
+> > > > +            * CMD_RET_FAILURE, run_command() returns 0 which leads
+> > >=20
+> > > bootflow_boot(),
+> > >=20
+> > > > as +                 * we are using bootmeth_script here, to return
+> > > > -EFAULT. +            */
+> > > > +           ut_assert_skip_to_line("Boot failed (err=3D-14)");
+> > > > +   } else if (gd->flags & GD_FLG_HUSH_MODERN_PARSER) {
+> > > > +           /*
+> > > > +            * While with modern one, run_command() propagates
+> > >=20
+> > > CMD_RET_FAILURE
+> > >=20
+> > > > returned +           * by booti, so we get 1 here.
+> > > > +            */
+> > > > +           ut_assert_skip_to_line("Boot failed (err=3D1)");
+> > > > +   }
+> > >=20
+> > > I would like to give a bit of context here.
+> > > With the following patch:
+> > > diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
+> > > index c169c835e3..cc5adda0a3 100644
+> > > --- a/test/py/tests/test_ut.py
+> > > +++ b/test/py/tests/test_ut.py
+> > > @@ -173,7 +173,7 @@ else
+> > >=20
+> > >         fi
+> > > =20
+> > >  fi
+> > >  booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
+> > >=20
+> > > -
+> > > +echo $?
+> > >=20
+> > >  # Recompile with:
+> > >  # mkimage -C none -A arm -T script -d /boot/boot.cmd /boot/boot.scr
+> > >  ''' % (mmc_dev)
+> > >=20
+> > > We can easily see that booti is failing while running the test:
+> > > $ ./test/py/test.py -o log_cli=3Dtrue -s --build -v -k
+> > > 'test_ut[ut_bootstd_bootflow_scan_menu_boot'
+> > > ...
+> > > Aborting!
+> > > Failed to load '/boot/dtb/rockchip/overlay/-fixup.scr'
+> > > 1
+> > >=20
+> > > The problem with old hush, is that the 1 returned here, which
+> > > corresponds to CMD_RET_FAILURE, is not propagated as the return value
+> > > of run_command(). So, this lead the -EFAULT branch here to be taken:
+> > > int bootflow_boot(struct bootflow *bflow)
+> > > {
+> > >=20
+> > >       /* ... */
+> > >      =20
+> > >       ret =3D bootmeth_boot(bflow->method, bflow);
+> > >       if (ret)
+> > >      =20
+> > >               return log_msg_ret("boot", ret);
+> > >      =20
+> > >       /*
+> > >      =20
+> > >        * internal error, should not get here since we should have boo=
+ted
+> > >        * something or returned an error
+> > >        */
+> > >      =20
+> > >       return log_msg_ret("end", -EFAULT);
+> > >=20
+> > > }
+> > >=20
+> > > With modern hush, CMD_RET_FAILURE is propagated as the return value of
+> > > run_command().
+> > > As a consequence, we return with log_mst_ret("boot", 1), which leaded=
+ to
+> > > this test to fail.
+> > > The above modification consists in adapting the expected output to the
+> > > current shell flavor.
+> > > I think this is the good thing to do, as I find modern hush behavior
+> > > better
+> > > than the old one, i.e. it propagates CMD_RET_FAILURE as return of
+> > > run_command().
+> >=20
+> > Oh very nice, thanks for digging in to this and explaining!
+>=20
+> Yes, thank you from me too!
 
-Yes, something like this is what I was getting at, thanks.
+You are welcome!
+=20
+>=20
+> - Simon
 
---=20
-Tom
+Best regards and have a nice end of the year!
 
---QuC3BUkNgyz7GI05
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWPB04ACgkQFHw5/5Y0
-tyzPxgwApJjLBZ8V08SH434lYhYCri4Vtx0+LM51kXv3Y3LeN7/KOqpN41sOvbc7
-YuGv06iyA2iaLiLdwWjEObvnL8vyAjAUZFXH9SZDr//QwHfKwbNbETRuQ9my2vqt
-hD2tCFLs5lLL37g0eDgnY/VyURMJ4WG1HoNq7qxWMtqjZ97UW/xnbGHitalLLFCs
-zUEpORIw66koyffUn2/vITo08mdWUeRqbIGatJbJef2xGISXJhd7j37oPLSWHWzI
-VFhHtXQIJX9YqwwLV8QBdPUPx+/T2vKQ4fXSgmAyJ7B5HeZIqOyykgeBLSq/yxf2
-ngpl5tA5OzcAkSt8p/9m204tnOcphe3EJb14kj99x0SGMUYTcb2on7eTV2ItgXd2
-fYXkCeiVRainc3+L5omFFt+K0sx38B+iVUk11AKpSDqZ2bClJyHLe7wzjxTDu40T
-qEOEWWRUK6Nsjs7Ndyh6om5XL9sZfk037nViptoG0k4Q2DORRH5KLDNb2/8RKAmp
-VEdxCQ4K
-=62zX
------END PGP SIGNATURE-----
-
---QuC3BUkNgyz7GI05--
