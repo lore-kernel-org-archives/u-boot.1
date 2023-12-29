@@ -4,88 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BD83C47072
-	for <u-boot@archiver.kernel.org>; Fri, 29 Dec 2023 15:30:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D129BC47073
+	for <u-boot@archiver.kernel.org>; Fri, 29 Dec 2023 15:42:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F417A87A54;
-	Fri, 29 Dec 2023 16:30:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2428A87A71;
+	Fri, 29 Dec 2023 16:42:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MBUVekkn";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="moIBl3nQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78D4487A35; Fri, 29 Dec 2023 16:30:49 +0100 (CET)
-Received: from mail-ua1-x92e.google.com (mail-ua1-x92e.google.com
- [IPv6:2607:f8b0:4864:20::92e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C4DD187A54; Fri, 29 Dec 2023 16:42:45 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5015087A54
- for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 16:30:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A3A7687A78
+ for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 16:42:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x92e.google.com with SMTP id
- a1e0cc1a2514c-7cbeaacbcb8so1844672241.0
- for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 07:30:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703863844; x=1704468644; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VBgD3orp86If1o7MCJIVrPcw8CS9enSQNQwjkVuJfcg=;
- b=MBUVekknAvbxHsVI3xm+hvxgnsEyh9hyItymDyj+LM53Md+CqpKXYmbX6AjVChI6wg
- gfElS6FPi6NZ0sUJTwW6440lta/zuTn55cSPUa6mA6EZMKb41iApqE7+zk5Px0rSa19k
- FlbxUkSsZSpkA3GzDCzb3FqWszrDfVJh3JNB6GTwBUDO0QWwzfl+e/nTLcXFr1N4LKw8
- 0DNGAusj/Ei2xxEGBgTtuKD7tBg44DTiQLhAg+GrQaS/e/ZNW8TKsEFTNbPZVos433XO
- XDoX9Fd73o2hClW9XKBp5FA+/NTOrji2Bb6H6LgkvoTwNLhAbrZEsgw1U0XamMg4vOk4
- l97A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703863844; x=1704468644;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VBgD3orp86If1o7MCJIVrPcw8CS9enSQNQwjkVuJfcg=;
- b=M+xblN69qHVIS0PmnEqL9222y7/c+uP+whoiPF0WTujT/oTd8Y/3OiLgytqF2ZLXIS
- luG0d0T71QFyRt+d8oDOiuojkDV3g1WcZ7vrj8LZPmMVeiAAURnTlEuh21qTvTEo/YSl
- a1vAN8/cXtdWs2k+rJ8n08Xm9dlh1XclH7hAKCYnPzFOGqwOT0NqqM11Ow0H+mYKE6BZ
- 23heKlb8I2QoM0QeAe0XpmBuBqqhXXwLZxHxJG9zJ4AEhw8jhpKSnPOd7jApaCJGFUQK
- 4aPrQqO9+tQHpbz1DaiKXzr68w1L31IFtQi5dXW0PuJInmKon3EM5T7ffEdGp2HA6LlJ
- LRtg==
-X-Gm-Message-State: AOJu0YyAURMtu383TpcIbk9wy0KshDRjMpeBqz8qUeOTtocMawM+PNbh
- btctg8+jS1Go4lseI6vX1TsVrWWXRbifTy1iaDSoU6WKam4Hew==
-X-Google-Smtp-Source: AGHT+IFyPJWi9k3ZOM7X7tLU3POtslko9T7YoXzvGBO6/lHK7orZZ/TWIVPu5aWBo7g9guLFMkTScu10I4fLruMWB9I=
-X-Received: by 2002:a05:6102:ccd:b0:467:5e74:fa25 with SMTP id
- g13-20020a0561020ccd00b004675e74fa25mr593721vst.26.1703863843881; Fri, 29 Dec
- 2023 07:30:43 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1703864562; x=1704469362; i=xypron.glpk@gmx.de;
+ bh=Vx33CEq8Z4hSlEEqLH9M8WZF2WOZ9Rapoyxam6rEWTQ=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
+ References;
+ b=moIBl3nQr8LO2IOQ6V+h1ybQAWGxZ9X/rk1QXJFfTykWiakBGLUBP4s65n/KaYFv
+ vavu+TtDv2Ndo80hmzrud0mRHwcKu/TFw9fjYRg8Rt+3F6b1Xx3uzs6OP686/IKZX
+ 3U1xHyzkvqMnc95uBXMEOgf9Du/DxuFza1SQ7egUjtTHBLseCUkbDUi4jGjDEpx8k
+ GuImI3F8O9Mz8hYuA8ATigF1hrOfsdOJH61U8QJQ7g3EakNkVqceL9F2apcQvMyYy
+ gxeK5oXlq0oX98TTBOkPhlANRQbDdwvWBgzZQ5i6evvGq4PvxGVRB7D+dn+lw0qWE
+ kIQz4CJWA3iLzBo7kg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M2f9h-1rFfJ70QAx-004CPz; Fri, 29
+ Dec 2023 16:42:42 +0100
+Date: Fri, 29 Dec 2023 16:42:41 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: Proposal: U-Boot memory management
+User-Agent: K-9 Mail for Android
+In-Reply-To: <CAFLszThqH01GOqnTxucVE7s+wJU-dz7uqUtkb4iKxs6GgX6tqw@mail.gmail.com>
+References: <CAFLszTicT2yzsm+KAjRyqzV3bt1_W2XYJaCExX-LHNZ6+tFUkA@mail.gmail.com>
+ <CAFLszThqH01GOqnTxucVE7s+wJU-dz7uqUtkb4iKxs6GgX6tqw@mail.gmail.com>
+Message-ID: <A5970853-6611-4726-8D9F-E92C5E18A103@gmx.de>
 MIME-Version: 1.0
-References: <20231228115804.3626579-1-sumit.garg@linaro.org>
- <20231228115804.3626579-5-sumit.garg@linaro.org>
- <CAFLszThfxe_n02auF+vZ1u7FynKkrWEYFU3SdkRTLgBVuiv+Hw@mail.gmail.com>
- <20231228140313.GB2652760@bill-the-cat>
- <CAFLszTiPFyRQZtrKhETjMzn6JukFJaBYMugdL-RPO3LJB9XUMA@mail.gmail.com>
- <20231228155428.GI2652760@bill-the-cat>
- <CAFLszTjqcJouv7Dyasjfx4FiNy378fFA+A-DP292yvPk8xOzjw@mail.gmail.com>
-In-Reply-To: <CAFLszTjqcJouv7Dyasjfx4FiNy378fFA+A-DP292yvPk8xOzjw@mail.gmail.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 29 Dec 2023 21:00:32 +0530
-Message-ID: <CAFA6WYME_0-s4aBbaKOS3Q+q9+5553qSWcL9pDMvC9VaAfAz0w@mail.gmail.com>
-Subject: Re: [PATCH v3 4/8] dts: Add alternative location for upstream DTB
- builds
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, robh+dt@kernel.org, 
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
- rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain;
+ charset=utf-8
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:5ZSvCcf25MGbIFzfs/o7iXo+GFb7RnSmH3tCDAImQJ+0or7G/Fr
+ U5kYFNmtKRRqVuMDuZAfnOT9lh6/DFxp2KVIvveLgrvMyUdhEI2RAIg5n2VwOHhZxxJctLR
+ oO/hMAROKiF8RBGps8ddYa6wk1fAYsubBCE2K8xbnaxcbnrUbz6lmyaedEpEP7FlX4rBsYZ
+ bIFc5G/oXoUmzqZvnDqyg==
+UI-OutboundReport: notjunk:1;M01:P0:d218iNoQnqg=;blpB0zC3Utzr9oc/LSbvYH4WKmy
+ wAx/F60FxfWnM/ARmEak6kek7/w2XypxjB91Wt44orypnKTOwi+F9LFaznk6t47N7kRvvWEQt
+ ijq94cb5wNFO9JIgLyEOPhbASPGKq9NpvlDMePhWLICScUV4zD4Q5n4Ghnv/INRrHq6fJzp1L
+ SILt12h2J2upceft/eaRvdbJlo9dCW4uUPfAoBZqBdiZpdDdfTOuTy2BALwNmqIL060qohHbb
+ 4OA2tID4ag22qVCFuzC8ufjQqE35i+Ar8GHToRAaPqQ6DZep4qcOvv1KPiJNsedp8iKNXpbtp
+ 1E8Jns5uuJExhXq5A3DPzbkIdihbaDvyss8wo0GnjkX24NvsNA7u3szzGb2LFYR5WC4f0ij4K
+ voBUHxVndomz5QBWw8FN0jMtUH+cm2I5i+2NtIzAd5uzC5OaMytNyjJtE1/yOJC59GxiStlS3
+ A6ByIKjImQsztPOFvQmyPC05/yBwNn1LWdPky5Kfu9gUHLK/INZ3C3F0x0j8qx5LrpHDpBHf2
+ gi0stKxCWn9M0cVXVmL1uhIheAYo7IOX2uJODOn2sKRnwTmpwU81i067Kxr33ZfRSn3kLwAhY
+ pp4pJNsWiaHu8mFO/RQSpp51WB5RschrTicB5A9dlt3iE0lWqM6UFmWLoExyUKfNI8jf2ALj9
+ aJoqgXHmS3gNuzKC9QLtzD7Z/9ubogkYo6V7GrrZJpHuaDy6BTc/gsSxPih1HbqXms/1mWI1n
+ drIneVGOIjhtkKTMbpixIwSQBq/o48+1Pw/8Bmd7+llOYIKf1xiawzvKToPl1BkzItzZevsgY
+ ZC2XSG4RvyYZUTCmGyFwHCv36wp01FVTLSMcKkCFEvtpQ+AweCPKlp1+Oq5/jiN1EItUWr0/e
+ ZzsopWSXpVade4v07iGhjVPfgd2HseDaccCWnXy6XFYhdduYKLsZxnUATn5tLTnMCULblfhVO
+ vUP8ZAIEBzmVcHIXr531QqSWtMk=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,253 +90,241 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 29 Dec 2023 at 01:18, Simon Glass <sjg@chromium.org> wrote:
+
+
+Am 29=2E Dezember 2023 06:36:09 MEZ schrieb Simon Glass <sjg@chromium=2Eor=
+g>:
+>Hi,
 >
-> Hi Tom,
+>On Sat, Dec 16, 2023 at 6:01=E2=80=AFPM Simon Glass <sjg@chromium=2Eorg> =
+wrote:
+>>
+>> Hi,
+>>
+>> This records my thoughts after a discussion with Ilias & Heinrich re
+>> memory allocation in U-Boot=2E
+>>
+>> 1=2E malloc()
+>>
+>> malloc() is used for programmatic memory allocation=2E It allows memory
+>> to be freed=2E It is not designed for very large allocations (e=2Eg=2E =
+a
+>> 10MB kernel or 100MB ramdisk)=2E
+>>
+>> 2=2E lmb
+>>
+>> lmb is used for large blocks of memory, such as those needed for a
+>> kernel or ramdisk=2E Allocation is only transitory, for the purposes of
+>> loading some images and booting=2E If the boot fails, then all lmb
+>> allocations go away=2E
+>>
+>> lmb is set up by getting all available memory and then removing what
+>> is used by U-Boot (code, data, malloc() space, etc=2E)
+>>
+>> lmb reservations have a few flags so that areas of memory can be
+>> provided with attributes
+>>
+>> There are some corner cases=2E=2E=2Ee=2Eg=2E loading a file does an lmb
+>> allocation but only for the purpose of avoiding a file being loaded
+>> over U-Boot code/data=2E The allocation is dropped immediately after th=
+e
+>> file is loaded=2E Within the bootm command, or when using standard boot=
+,
+>> this would be fairly easy to solve=2E
+>>
+>> Linux has renamed lmb to memblock=2E We should consider doing the same=
+=2E
+>>
+>> 3=2E EFI
+>>
+>> EFI has its own memory-allocation tables=2E
+>>
+>> Like lmb, EFI is able to deal with large allocations=2E But via a 'pool=
+'
+>> function it can also do smaller allocations similar to malloc(),
+>> although each one uses at least 4KB at present=2E
+>>
+>> EFI allocations do not go away when a boot fails=2E
+>>
+>> With EFI it is possible to add allocations post facto, in which case
+>> they are added to the allocation table just as if the memory was
+>> allocated with EFI to begin with=2E
+>>
+>> The EFI allocations and the lmb allocations use the same memory, so in
+>> principle could conflict=2E
+>>
+>> EFI allocations are sometimes used to allocate internal U-Boot data as
+>> well, if needed by the EFI app=2E For example, while efi_image_parse()
+>> uses malloc(), efi_var_mem=2Ec uses EFI allocations since the code runs
+>> in the app context and may need to access the memory after U-Boot has
+>> exited=2E Also efi_smbios=2Ec uses allocate_pages() and then adds a new
+>> mapping as well=2E
+>>
+>> EFI memory has attributes, including what the memory is used for (to
+>> some degree of granularity)=2E See enum efi_memory_type and struct
+>> efi_mem_desc=2E In the latter there are also attribute flags - whether
+>> memory is cacheable, etc=2E
+>>
+>> EFI also has the x86 idea of 'conventional' memory, meaning (I
+>> believe) that below 4GB that isn't reserved for the hardware/system=2E
+>> This is meaningless, or at least confusing, on ARM systems=2E
+>>
+>> 4=2E reservations
+>>
+>> It is perhaps worth mentioning a fourth method of memory management,
+>> where U-Boot reserves chunks of memory before relocation (in
+>> board_init_f=2Ec), e=2Eg=2E for the framebuffer, U-Boot code, the mallo=
+c()
+>> region, etc=2E
+>>
+>>
+>> Problems
+>> =E2=80=94-------
+>>
+>> There are no urgent problems, but here are some things that could be im=
+proved:
+>>
+>> 1=2E EFI should attach most of its data structures to driver model=2E T=
+his
+>> work has started, with the partition support, but more effort would
+>> help=2E This would make it easier to see which memory is related to
+>> devices and which is separate=2E
+>>
+>> 2=2E Some drivers do EFI reservations today, whether EFI is used for
+>> booting or not (e=2Eg=2E rockchip video rk_vop_probe())=2E
+>>
+>> 3=2E U-Boot doesn't really map arch-specific memory attributes (e=2Eg=
+=2E
+>> armv8's struct mm_region) to EFI ones=2E
+>>
+>> 4=2E EFI duplicates some code from bootm, some of which relates to
+>> memory allocation (e=2Eg=2E FDT fixup)=2E
+>>
+>> 5=2E EFI code is used even if EFI is never used to boot
+>>
+>> 6=2E EFI allocations can result in the same memory being used as has
+>> already been allocated by lmb=2E Users may load files which overwrite
+>> memory allocated by EFI=2E
 >
-> On Thu, Dec 28, 2023 at 3:54=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
-te:
-> >
-> > On Thu, Dec 28, 2023 at 03:09:12PM +0000, Simon Glass wrote:
-> > > Hi Tom, Sumit,
-> > >
-> > > On Thu, Dec 28, 2023 at 2:03=E2=80=AFPM Tom Rini <trini@konsulko.com>=
- wrote:
-> > > >
-> > > > On Thu, Dec 28, 2023 at 01:37:26PM +0000, Simon Glass wrote:
-> > > > > Hi Sumit,
-> > > > >
-> > > > > On Thu, Dec 28, 2023 at 11:58=E2=80=AFAM Sumit Garg <sumit.garg@l=
-inaro.org> wrote:
-> > > > > >
-> > > > > > Allow platform owners to mirror devicetree files from devitree-=
-rebasing
-> > > > > > directory into dts/arch/$(ARCH) (special case for dts/arch/arm6=
-4). Then
-> > > > > > build then along with any *-u-boot.dtsi file present in arch/$(=
-ARCH)/dts
-> > > > > > directory. Also add a new Makefile for arm64.
-> > > > > >
-> > > > > > This will help easy migration for platforms which currently are=
- compliant
-> > > > > > with upstream Linux kernel devicetree files.
-> > > > > >
-> > > > > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > > > > > ---
-> > > > > >
-> > > > > > Changes in v3:
-> > > > > > --------------
-> > > > > > - Minor commit message update
-> > > > > >
-> > > > > > Changes in v2:
-> > > > > > --------------
-> > > > > > - s/DEVICE_TREE_LOC/dt_dir/ and s/U-boot/U-Boot/
-> > > > > >
-> > > > > >  dts/Kconfig             | 11 +++++++++++
-> > > > > >  dts/Makefile            | 17 ++++++++++++++---
-> > > > > >  dts/arch/arm64/Makefile | 14 ++++++++++++++
-> > > > > >  3 files changed, 39 insertions(+), 3 deletions(-)
-> > > > > >  create mode 100644 dts/arch/arm64/Makefile
-> > > > > >
-> > > > > > diff --git a/dts/Kconfig b/dts/Kconfig
-> > > > > > index 00c0aeff893..e58c1c6f2ab 100644
-> > > > > > --- a/dts/Kconfig
-> > > > > > +++ b/dts/Kconfig
-> > > > > > @@ -85,6 +85,17 @@ config OF_LIVE
-> > > > > >           enables a live tree which is available after relocati=
-on,
-> > > > > >           and can be adjusted as needed.
-> > > > > >
-> > > > > > +config OF_UPSTREAM
-> > > > > > +       bool "Enable use of devicetree imported from Linux kern=
-el release"
-> > > > > > +       help
-> > > > > > +         Traditionally, U-Boot platforms used to have their cu=
-stom devicetree
-> > > > > > +         files or copy devicetree files from Linux kernel whic=
-h are hard to
-> > > > > > +         maintain and can usually get out-of-sync from Linux k=
-ernel. This
-> > > > > > +         option enables platforms to migrate to devicetree-reb=
-asing repo where
-> > > > > > +         a regular sync will be maintained every major Linux k=
-ernel release
-> > > > > > +         cycle. However, platforms can still have some custom =
-u-boot specific
-> > > > > > +         bits maintained as part of *-u-boot.dtsi files.
-> > > > >
-> > > > > My only other suggestion here is to mention that this should be s=
-et in
-> > > > > Kconfig, for the SoC as a whole. So I believe that means that it
-> > > > > should be hidden, with no string for the 'bool':
-> > > > >
-> > > > >       bool  # Enable use of devicetree imported from Linux kernel=
- release
-> > > >
-> > > > I think we can just keep prompting for it now, to make the transiti=
-on
-> > > > easier, before this option just goes away in time, hopefully.
-> > > >
-> > > > > Also, this doesn't seem to work for me. Before this series I get =
-these
-> > > > > files when building firefly-rk3399:
-> > > > >
-> > > > > rk3399-eaidk-610.dtb            rk3399-khadas-edge-v.dtb
-> > > > > rk3399-orangepi.dtb        rk3399-rock-pi-4a.dtb
-> > > > > rk3399-evb.dtb                  rk3399-leez-p710.dtb
-> > > > > rk3399-pinebook-pro.dtb    rk3399-rock-pi-4c.dtb
-> > > > > rk3399-ficus.dtb                rk3399-nanopc-t4.dtb
-> > > > > rk3399-pinephone-pro.dtb   rk3399-rockpro64.dtb
-> > > > > rk3399-firefly.dtb              rk3399-nanopi-m4-2gb.dtb
-> > > > > rk3399pro-rock-pi-n10.dtb  rk3399-roc-pc.dtb
-> > > > > rk3399-gru-bob.dtb              rk3399-nanopi-m4b.dtb
-> > > > > rk3399-puma-haikou.dtb     rk3399-roc-pc-mezzanine.dtb
-> > > > > rk3399-gru-kevin.dtb            rk3399-nanopi-m4.dtb
-> > > > > rk3399-rock-4c-plus.dtb
-> > > > > rk3399-khadas-edge-captain.dtb  rk3399-nanopi-neo4.dtb    rk3399-=
-rock-4se.dtb
-> > > > > rk3399-khadas-edge.dtb          rk3399-nanopi-r4s.dtb     rk3399-=
-rock960.dtb
-> > > > >
-> > > > > Afterwards I get this:
-> > > > >
-> > > > > make[3]: *** No rule to make target
-> > > > > 'dts/arch/arm64/rk3399-firefly.dtb', needed by 'dtbs'.  Stop.
-> > > > >
-> > > > > So I set this manually for that one board:
-> > > > >
-> > > > > CONFIG_DEFAULT_DEVICE_TREE=3D"rockchip/rk3399-firefly"
-> > > > >
-> > > > > and get:
-> > > > >
-> > > > > make[3]: *** No rule to make target
-> > > > > 'dts/arch/arm64/rockchip/rk3399-firefly.dtb', needed by 'dtbs'.  =
-Stop.
-> > > > >
-> > > > > I am not sure how to fix this, nor how this can be made to build =
-all
-> > > > > the DTs for rk3399, as it does today.
-> > > >
-> > > > Looking at the patch for amlogic boards, you need to make the link =
-to
-> > > > devicetree-rebasing inside dts/...
-> > >
-> > > OK, let me give up on rk3399 for now...that doesn't seem to work even
-> > > with the link.
-> > >
-> > > Using odroid-c2 with -next I see:
-> > >
-> > > $ ls /tmp/b/odroid-c2/arch/arm/dts/
-> > > meson-a1-ad401.dtb                 meson-g12b-odroid-n2l.dtb
-> > >     meson-gxl-s905x-libretech-cc.dtb
-> > > meson-axg-jethome-jethub-j100.dtb  meson-g12b-odroid-n2-plus.dtb
-> > >     meson-gxl-s905x-libretech-cc-v2.dtb
-> > > meson-axg-s400.dtb                 meson-g12b-radxa-zero2.dtb
-> > >     meson-gxl-s905x-p212.dtb
-> > > meson-g12a-radxa-zero.dtb          meson-gxbb-kii-pro.dtb
-> > >     meson-gxm-gt1-ultimate.dtb
-> > > meson-g12a-sei510.dtb              meson-gxbb-nanopi-k2.dtb
-> > >     meson-gxm-khadas-vim2.dtb
-> > > meson-g12a-u200.dtb                meson-gxbb-odroidc2.dtb
-> > >     meson-gxm-s912-libretech-pc.dtb
-> > > meson-g12b-a311d-bananapi-m2s.dtb  meson-gxbb-p200.dtb
-> > >     meson-gxm-wetek-core2.dtb
-> > > meson-g12b-a311d-khadas-vim3.dtb   meson-gxbb-p201.dtb
-> > >     meson-sm1-bananapi-m2-pro.dtb
-> > > meson-g12b-bananapi-cm4-cm4io.dtb  meson-gxbb-wetek-hub.dtb
-> > >     meson-sm1-bananapi-m5.dtb
-> > > meson-g12b-gsking-x.dtb            meson-gxbb-wetek-play2.dtb
-> > >     meson-sm1-khadas-vim3l.dtb
-> > > meson-g12b-gtking.dtb              meson-gxl-s805x-libretech-ac.dtb
-> > >     meson-sm1-odroid-c4.dtb
-> > > meson-g12b-gtking-pro.dtb          meson-gxl-s905d-libretech-pc.dtb
-> > >     meson-sm1-odroid-hc4.dtb
-> > > meson-g12b-odroid-go-ultra.dtb
-> > > meson-gxl-s905w-jethome-jethub-j80.dtb  meson-sm1-sei610.dtb
-> > > meson-g12b-odroid-n2.dtb           meson-gxl-s905x-khadas-vim.dtb
-> > > $
-> > > With this series (sort of, since I am really not sure how to
-> > > cherry-pick the commits from the PR) I see nothing:
-> > >
-> > > $ ls /tmp/b/odroid-c2/arch/arm/dts/
-> > > $
-> > >
-> > > This shows some of the files:
-> > >
-> > > $ find /tmp/b/odroid-c2/ -name "*.dtb"
-> > > /tmp/b/odroid-c2/dts/dt.dtb
-> > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-odroidc2.dtb
-> > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-nanopi-k2.dtb
-> > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-wetek-play2.dtb
-> > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-kii-pro.dtb
-> > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-p200.dtb
-> > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-p201.dtb
-> > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-wetek-hub.dtb
-> > > /tmp/b/odroid-c2/u-boot.dtb
-> > >
-> > > but where are the rest? Also, is it possible to put the output .dtb
-> > > files into the same directory? Otherwise we may have some pain with
-> > > binman.
-> >
-> > What do you mean by same directory? But maybe also, what's an example o=
+>7=2E We need to support doing an allocation when a file is loaded (to
+>ensure files do not overlap), without making it too difficult to load
+>multiple files to the same place, if desired=2E
+>
+>>
+>>
+>> Lifetime
+>> --------
+>>
+>> We have three different memory allocators with different purposes=2E Ca=
+n
+>> we unify them a little?
+>>
+>> Within U-Boot:
+>> - malloc() space lives forever
+>> - lmb lives while setting out images for booting
+>> - EFI (mostly) lives while booting an EFI app
+>>
+>> In practice, EFI is set up early in U-Boot=2E Some of this is necessary=
+,
+>> some not=2E EFI allocations stay around forever=2E This works OK since
+>> large allocations are normally not done in EFI, so memory isn't really
+>> consumed to any great degree by the boot process=2E
+>>
+>> What happens to EFI allocations if the app returns? They are still
+>> present, in case another app is run=2E This seems fine=2E
+>>
+>> API
+>> =E2=80=93--
+>> Can we unify some APIs?
+>>
+>> It should be possible to use lmb for large EFI memory allocations, so
+>> long as they are only needed for booting=2E We effectively do this
+>> today, since EFI does not manage the arrangement of loaded images in
+>> memory=2E for the most part=2E
+>>
+>> It would not make sense to use EFI allocation to replace lmb and
+>> malloc(), of course=2E
+>>
+>> Could we use a common (lower-level) API for allocation, used by both
+>> lmb and EFI? They do have some similarities=2E However they have
+>> different lifetime constraints (EFI allocations are never dropped,
+>> unlikely lmb)=2E
+>>
+>> ** Overall, it seems that the existence of memory allocation in
+>> boot-time services has created confusion=2E Memory allocation is
+>> muddled, with both U-Boot code and boot-time services calling the same
+>> memory allocator=2E This just has not been clearly thought out=2E
+>>
+>>
+>> Proposal
+>> =E2=80=94-------
+>>
+>> Here are some ideas:
+>>
+>> 1=2E For video, use the driver model API to locate the video regions, o=
+r
+>> block off the entire framebuffer memory, for all devices as a whole=2E
+>> Use efi_add_memory_map()
+>>
+>> 2=2E Add memory attributes to UCLASS_RAM and use them in EFI, mapping t=
+o
+>> the EFI_MEMORY_=2E=2E=2E attributes in struct efi_mem_desc=2E
+>>
+>> 3=2E Add all EFI reservations just before booting the app, as we do wit=
+h
+>> devicetree fixup=2E With this model, malloc() and lmb are used for all
+>> allocation=2E Then efi_add_memory_map() is called for each region in
+>> turn just before booting=2E Memory attributes are dealt with above=2E T=
+he
+>> type (enum efi_memory_type) can be determined simply by the data
+>> structure stored in it, as is done today=2E For example, SMBIOS tables
+>> can use EFI_ACPI_RECLAIM_MEMORY=2E Very few types are used and EFI code
+>> understands the meaning of each=2E
+>>
+>> 4=2E Avoid setting up EFI memory at the start of U-Boot=2E Do it only w=
+hen
+>> booting=2E This looks to require very little effort=2E
+>>
+>> 5=2E Avoid calling efi_allocate_pages() and efi_allocate_pool() outside
+>> boot-time services=2E This solves the problem 6=2E If memory is needed =
+by
+>> an app, allocate it with malloc() and see 3=2E There are only two
+>> efi_allocate_pages() (smbios and efi_runtime)=2E There are more calls o=
 f
-> > a board you think might end up having problems? Converting that in a
-> > follow-up series is likely a good idea, to highlight and address these
-> > issues sooner rather than later.#
+>> efi_allocate_pool(), but most of these seem easy to fix up=2E For
+>> example, efi_init_event_log() allocates a buffer, but this can be
+>> allocated in normal malloc() space or in a bloblist=2E
+>>
+>> 6=2E Don't worry too much about whether EFI will be used for booting=2E
+>> The cost is likely not that great: use bootstage to measure it as is
+>> done for driver model=2E Try to minmise the cost of its tables,
+>> particularly for execution time, but otherwise just rely on the
+>> ability to disable EFI_LOADER=2E
 >
-> Today the .dtb files go into arch/arm/dts - so it would be easier if
-> this series could do the same.
-
-The kbuild infrastructure keeps the dtb alongside dts files which is
-the preferred way too as otherwise it would be complicated to locate
-DT files for the users. Also, we have to move towards Linux DT
-directory structure and thereby the tools like binman have to be
-adjusted. I will do that when I get to migrating SoCs supporting
-binman.
-
+>7=2E Add a flag to the 'load' command:
 >
-> The problem I have described above applied to meson, so I believe it
-> is clear enough with that. I wasn't able to get rk3399 going, but I am
-> sure it would have the same problem.
+>-m <type> - make an lmb allocation for the file
+>   <type> is the image type to use (kernel, ramdisk, flat_dt)
 >
-> The fundamental question is (I believe) whether to:
->
-> 1. Build only a single DT for a board
-> 2. Build all DTs for the SoC the board uses
->
-> This series seems to head towards (1),
+>any existing allocation for that type will be automatically freed
+>first=2E If <type> is "none" then no freeing is possible: any loaded
+>images just stack up in lmb=2E
 
-v2 of this series had the Makefile rules [1] for meson gxbb SoC but..
+It is unclear what your suggestion means for the address field=2E
 
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20231222061208.3009970=
--8-sumit.garg@linaro.org/
+If you still specify an address, what would be the benefit of such a flag?
 
-> which worries me. We are
-> currently mostly at (2).
+If -m replaces the address, how do you refer to different loaded files of =
+the same type, e=2Eg=2E two EFI binaries?
 
-..after discussion with Tom, the Makefile rules are already coming via
-Kconfig options like DEFAULT_DEVICE_TREE, OF_LIST etc. So having
-redundant rules in Makefile doesn't add any value, so I took them off
-in v3.
+Best regards
 
-However, I am very much in favour of having a generalized U-Boot
-image. This might become true in some cases like U-Boot acts as a
-second stage bootloader for a particular SoC which is a unified image
-where the prior stage passes the DT to it. The Qcom effort in this
-direction can be an example here. I am not sure at this point how we
-can enable different U-Boot features since there are many board
-specific bits needed currently not covered by DT.
+Heinrich
 
-The other common method is to embed board DT in U-Boot image
-especially where U-Boot acts as a first stage bootloader. Once that's
-done I don't see how we can call that a generic U-Boot image.
-
-BTW, as Tom said we can very well add those Makefile rules later on a
-use case basis if a particular SoC requires a truly generic U-Boot
-image and the rules don't come via Kconfig options.
-
--Sumit
 
 >
-> Regards,
-> Simon
+>Add an 'lmb' (or memblock) command to allow listing and clearing allocati=
+ons=2E
+>
+>Regards,
+>Simon
