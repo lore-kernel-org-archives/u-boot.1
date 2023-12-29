@@ -4,78 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E9F0C46CD3
-	for <u-boot@archiver.kernel.org>; Fri, 29 Dec 2023 11:09:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7EBFC46CD4
+	for <u-boot@archiver.kernel.org>; Fri, 29 Dec 2023 11:18:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEB5687B03;
-	Fri, 29 Dec 2023 12:09:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id D6C8A87B25;
+	Fri, 29 Dec 2023 12:18:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="p3GVhe4u";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="N4IlqzJB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C407587B03; Fri, 29 Dec 2023 12:09:14 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id BFB1B87B03; Fri, 29 Dec 2023 12:18:41 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 954928715A
- for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 12:09:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CA75687A78
+ for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 12:18:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1703848151; x=1704452951; i=xypron.glpk@gmx.de;
- bh=F5H7LxCAv1raN8fGhiXwE1hFVULZIQJyEn/DMTcdebo=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=p3GVhe4uVefeQGXMVMP+XrkRIyBHDGHe3RkFYw3zkcf4bgMmvBiVQMPa9BLMUWuj
- TOTRxo+PqOuee9G7++KeOhSxC44bSDWmOWsPQ9jBQ8xcHOy0plM4Pc6gvcZsVc7Ks
- u2CgbYdB2eBxpn05DkpJ/+qx/IcS1qH+rLImWAjb6I3ynNSAtM8czKJYmiRFsdJoy
- 881Ckw9zo3a4Dw2Z3d8HJ+Mq7J7Iseso1vdRqjRB1v+RBjpCPZi6PBTyFjpMWaqhE
- FRjZIpo8avDTTVZRcbPvrsDBUcWs1LQpi/P0+Vf6ckTWCYpVIjqxZdrZH82TOKFSe
- IHzk9SkNZF8RKFgIPg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.176] ([178.202.40.247]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mlw3N-1qsKVo2ifL-00j2nL; Fri, 29
- Dec 2023 12:09:11 +0100
-Message-ID: <08e7b3cc-9588-46ab-844e-6edbe1154e43@gmx.de>
-Date: Fri, 29 Dec 2023 12:09:06 +0100
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
+ [209.85.208.198])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 1E0073F0CB
+ for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 11:18:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1703848719;
+ bh=JTOVeGMGNF/a61+417vkdtfL+5T5laAELg2K8NBoX58=;
+ h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
+ In-Reply-To:Content-Type;
+ b=N4IlqzJBrcVKQGjp3QKZ156kgEk2EoT295ZJdXGvPJl1UiAmDPnFTXcpEdvfNXWjR
+ FI7FMU3dxr4i+87LDd5Qx6x4NVVaqLFKRFUoJZ+QLHaLHCWx++DCiNhjHuTqydeav/
+ f8gXLTnYPh4YvW+UcR4CC84ZcV1BkyD3Ol8Z4MiemUo1zEpFbKZvbgsNW7K+P5cfCh
+ C2mK82F8DpQEJy8SVYbERJE6dN0B0WgL5/BngIS2BX2YK7UA7DhCXLhAokZIIqIkqe
+ pkEh9QOO5GD0rYiAXBIs6olwIMkYXpd9WPYvzmYKT77UL4Bw7cAawG6ILpcubu8ooZ
+ o5R67C7akOslw==
+Received: by mail-lj1-f198.google.com with SMTP id
+ 38308e7fff4ca-2ccb53bc5ceso28663351fa.3
+ for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 03:18:39 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703848718; x=1704453518;
+ h=content-transfer-encoding:in-reply-to:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=JTOVeGMGNF/a61+417vkdtfL+5T5laAELg2K8NBoX58=;
+ b=hJ/zige9KYspJ75HI9j/tQJRXo64YeRLrthJQJm+9pFTraUx89WWRtScola8/FsCJ+
+ 8DyHAcZUB8MBhCIAKgyB4QxTl+j7GzOoITR91b5XJREWSrzP0Cex20CBhMPgU9ealHZK
+ Qgi7hY7RC4kqhIXip12bU7LcehM6o1uYIYK11zwwaDkC0B6yI0aAcIjlHnED9GzDTGGq
+ bnKiq7Y8KO0ysSRFqccD2XqhxC9uYFQco23cKz87ZUzl1xHUvseHiTShOa/BTqqRun95
+ 1SrSvY1iFwSCPE32JN7krjOAfP1O+RI+IcTSfH9G7YG2UBM/Qm4gKS4OvJOSvE8pBThZ
+ zDnw==
+X-Gm-Message-State: AOJu0Yy02Bvj5pYL9mRxVZNS5K2XUFZpVBwDagqC9E+RnGbj2bkrW54a
+ di8OHtFVeKw1VfV/XMmjpqALAzMy0qipmGnrnpFWFJwT/CEmknxFbRZeiDsdxcphRQEHcbf4BQd
+ ahkx6cU48h++5JL90wOnUS2lf+hTA+Z+bzEObgg==
+X-Received: by 2002:a2e:9f0a:0:b0:2cc:89f4:1590 with SMTP id
+ u10-20020a2e9f0a000000b002cc89f41590mr4247181ljk.101.1703848718561; 
+ Fri, 29 Dec 2023 03:18:38 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHWm9DjpIkQN05j8dLFWKzFcgwjjAYMUPBEgXCt/FwvAcgNNn0AwbLe+PFvMB5qcQar93IBQA==
+X-Received: by 2002:a2e:9f0a:0:b0:2cc:89f4:1590 with SMTP id
+ u10-20020a2e9f0a000000b002cc89f41590mr4247171ljk.101.1703848718098; 
+ Fri, 29 Dec 2023 03:18:38 -0800 (PST)
+Received: from [192.168.123.176]
+ (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
+ by smtp.gmail.com with ESMTPSA id
+ i11-20020aa7c9cb000000b005551853c91esm4508166edt.12.2023.12.29.03.18.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 29 Dec 2023 03:18:37 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+X-Google-Original-From: Heinrich Schuchardt <heinrich.schuchardt@canoncial.com>
+Message-ID: <7a8a842e-234c-4a79-b0d9-7a9ae544c13b@canoncial.com>
+Date: Fri, 29 Dec 2023 12:18:36 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: ACPI: usage of sandbox virtual addresses
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <9f681497-d13c-4ccc-9209-7a8b33e3195c@gmx.de>
- <CAFLszThsThxhWCgP+UHmA5BxRUUBfDP7SDahtAm5WOrHoT0xhQ@mail.gmail.com>
- <e9a835ea-ea99-4db2-b5ad-ba7742397d46@gmx.de>
- <CAFLszTg17_xPGWMDG=1X+q2UTdJ_kO2pUshmDLt+cv9uPPcgJg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] smbios: enable setting processor family > 0xff
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAFLszTg17_xPGWMDG=1X+q2UTdJ_kO2pUshmDLt+cv9uPPcgJg@mail.gmail.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20231228073024.6508-1-heinrich.schuchardt@canonical.com>
+ <20231228073024.6508-2-heinrich.schuchardt@canonical.com>
+ <CAFLszTikYxynGe3o3Sg2qTUgy-oXot=9BJ9F8vxCYF3-puDC4g@mail.gmail.com>
+In-Reply-To: <CAFLszTikYxynGe3o3Sg2qTUgy-oXot=9BJ9F8vxCYF3-puDC4g@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:6KPm5PweQi9BRrnF8trGvO4LfprnNhHHjqZ0K0oaN4SCComzJ+K
- +Ovx3+CiadeTCBqZsMr9n6odExW9UpWDHrskku/9E4oTN/RmrT6P8Eoxe4AavrQa8Uy5Y4O
- nFMXiLyHKn4BfhWnSflm5s0rXw6hb1PjNZ5sPooGkOQSU1QXz5pB0aaKDo7kvlnjwiNGeul
- hpZtfWk+sM5bzkEECcZVw==
-UI-OutboundReport: notjunk:1;M01:P0:atel53f0/Iw=;HSIGci8xaDhHGng1nBShbHpMLjf
- KyZf5oMGX2wQ3XNxWs9V5VxE8TLeAcTcUVNFvPZW3SH5ISA/VbP5D4n8n/sBmRq4DrxhghEJR
- DLmD/HeLAWzHUlpAod7oAx0oq+Lc+C0+ARAyrcl7h3RPS8M3Pa9fBiJxZ7b98Y0/c+DWnqelq
- bb8O21eezgHkhIprHvrped3tMIIWgcsPbrp7r//3LZjCX4G5oDIdw9hmAW3+2vHqzTSBEoURO
- ZZTS93rBYs4cJvBk9fqIwVmIMbhUmVulKNkucI4TTLJgo2dPLxmqHqKqQPy5cHwnWVno0axwr
- 3RBE1sSxO2Iu/AHg+i6soEjRLosOh412whP87pivJzS6yT9q8ucrA5xx9IwEWxihtW1FE5iwV
- CU6wn0PMZ0vPW9JJkYYo3MBfKDgM0iGEWIoJ49Z7oqExA0jGniTdgir996t9Nujgnih1VB9Cv
- 6pigSdBq+Vr/84WHkXDFgL52NbqCHAI6Ow38Q9UPurrlkY2dCmOSykijM2ORyp0dnbwbEMwHL
- FFKJ5nOiAYxKTk4ND0ELO702UCG1/d+HNtOfaJXeX6vUDuuR7WtFGzagjkhuKGtqT+NG9zjhw
- jYlo5L2LTxNAX9BoFtxesiGA1tiQjSmHb4axdiJKujemnwxYzj5fyoP7wUut3OYIVYZrY7BNP
- PdOsilne5Pkt0Azb40bWOswdCc+JYM5uDUr7NKK6ZhSkxosjmGCyXxGR/FLz6ZIEIilppNrEs
- azbhnxJCfJ38J7Aivbb63vDTDkRGbjxqlHmNDOcnzthYoHfW1QGRK14tpx4EVf2GZANteh+M4
- e/9EzG0rPV0xgBWYoLfFsHbb1h7zosLEg0xpS81u80s1FLmzR9MYDN/AABklXiCqpTMtk1YN1
- G6YuzisXLFSa6+E0RdJ/C9q2FAefE+0ZYcbRRgjzcwpfjoxseBGV2skW6/tN1Up0Qi1rfIcGQ
- 8lwBQw==
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,85 +108,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/29/23 09:26, Simon Glass wrote:
+On 12/28/23 14:37, Simon Glass wrote:
 > Hi Heinrich,
->
-> On Tue, Dec 26, 2023 at 10:03=E2=80=AFAM Heinrich Schuchardt <xypron.glp=
-k@gmx.de> wrote:
+> 
+> On Thu, Dec 28, 2023 at 7:30 AM Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
 >>
->> On 12/26/23 10:50, Simon Glass wrote:
->>> Hi Heinrich,
->>>
->>> On Tue, Dec 26, 2023 at 8:56=E2=80=AFAM Heinrich Schuchardt <xypron.gl=
-pk@gmx.de> wrote:
->>>>
->>>> Hello Simon,
->>>>
->>>> currently we use sandbox virtual addresses in all ACPI tables. This
->>>> means that an application started by the U-Boot sandbox consuming the=
-se
->>>> tables will crash due to accessing invalid addresses.
->>>>
->>>> Shouldn't the ACPI tables be migrated to use valid pointers?
->>>
->>> The confusion arises due to the difference between addresses and
->>> pointers. If we store addresses in the ACPI tables, then things should
->>> work.
->>>
->>> My approach has been to avoid using casts, but instead use
->>> map_sysmem() and mem_to_sysmem().
->>>
->>> Which particular piece of code is wrong in this case?
+>> Many value of processor type exceed 0xff and have to be stored as u16
+>> value. In the type 4 table set processor_family = 0xfe signaling that
+>> field processor_family2 is used and write the actual value into the
+>> processor_family2 field.
 >>
->> Tables DSDT, XSDT, RSDP, FADT in the sandbox contain sandbox virtual
->> addresses instead of pointers to real host memory.
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>>   lib/smbios.c | 4 ++--
+>>   1 file changed, 2 insertions(+), 2 deletions(-)
 >>
->> All code referring to these tables should be changed.433:				*gnvs =3D =
-map_to_sysmem(ctx->current);
->
-> I'm still not quite clear on this...can you point to functions or
-> lines of code? When I look at acpi_add_table() it does use memmap, but
-> perhaps some parts are wrong?
->
+> 
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> 
+>> diff --git a/lib/smbios.c b/lib/smbios.c
+>> index 45480b01af..550b2471f9 100644
+>> --- a/lib/smbios.c
+>> +++ b/lib/smbios.c
+>> @@ -467,7 +467,8 @@ static void smbios_write_type4_dm(struct smbios_type4 *t,
+>>          }
+>>   #endif
+>>
+>> -       t->processor_family = processor_family;
+>> +       t->processor_family = 0xfe;
+>> +       t->processor_family2 = processor_family;
+> 
+> Why not use 'family' if it fits?
+
+Using family for values less then 0x100 is allowable.
+But there would be no benefit in making our code more complicated.
+
+Best regards
+
+Heinrich
+
+> 
+>>          t->processor_manufacturer = smbios_add_prop(ctx, NULL, vendor);
+>>          t->processor_version = smbios_add_prop(ctx, NULL, name);
+>>   }
+>> @@ -489,7 +490,6 @@ static int smbios_write_type4(ulong *current, int handle,
+>>          t->l1_cache_handle = 0xffff;
+>>          t->l2_cache_handle = 0xffff;
+>>          t->l3_cache_handle = 0xffff;
+>> -       t->processor_family2 = t->processor_family;
+>>
+>>          len = t->length + smbios_string_table_len(ctx);
+>>          *current += len;
+>> --
+>> 2.43.0
+>>
+> 
 > Regards,
 > Simon
 
-Here are some examples where the wrong values are set. We must get rid
-of all map_to_sysmem() calls where writing ACPI tables.
-
-lib/acpi/acpi_table.c:
-170 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0rsdt->entry[i] =3D map=
-_to_sysmem(table);
-188 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0xsdt->entry[i] =3D map=
-_to_sysmem(table);
-
-lib/acpi/base.c:
-27:             rsdp->rsdt_address =3D map_to_sysmem(rsdt);
-30:             rsdp->xsdt_address =3D map_to_sysmem(xsdt);
-
-arch/x86/cpu/baytrail/acpi.c:
-81:	fadt->x_firmware_ctrl =3D map_to_sysmem(ctx->facs);
-82:	fadt->x_dsdt =3D map_to_sysmem(ctx->dsdt);
-
-arch/x86/cpu/quark/acpi.c:
-76:	fadt->x_firmware_ctrl =3D map_to_sysmem(ctx->facs);
-77:	fadt->x_dsdt =3D map_to_sysmem(ctx->dsdt);
-
-arch/x86/cpu/tangier/acpi.c:
-47:	fadt->x_firmware_ctrl =3D map_to_sysmem(ctx->facs);
-48:	fadt->x_dsdt =3D map_to_sysmem(ctx->dsdt);
-
-arch/x86/lib/acpi_table.c:
-200:	tcpa->lasa =3D map_to_sysmem(log);
-271:	tpm2->lasa =3D map_to_sysmem(lasa);
-433:				*gnvs =3D map_to_sysmem(ctx->current);
-575:	fadt->x_firmware_ctrl =3D map_to_sysmem(facs);
-576:	fadt->x_dsdt =3D map_to_sysmem(dsdt);
-
-Best regards
-
-Heinrich
-
-Best regards
-
-Heinrich
