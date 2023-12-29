@@ -4,65 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACBBEC46CD4
-	for <u-boot@archiver.kernel.org>; Fri, 29 Dec 2023 10:46:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F215C46CD4
+	for <u-boot@archiver.kernel.org>; Fri, 29 Dec 2023 10:46:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C00968788D;
-	Fri, 29 Dec 2023 11:46:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6114A87ADE;
+	Fri, 29 Dec 2023 11:46:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UugqRTfO";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pzkaHct9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75F9887A27; Fri, 29 Dec 2023 11:46:43 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 0ED9B87A23; Fri, 29 Dec 2023 11:46:45 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 366DD876B2
- for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 11:46:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B32F287A23
+ for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 11:46:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=m-chawdhry@ti.com
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BTAkXTV075590;
- Fri, 29 Dec 2023 04:46:33 -0600
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BTAkb3U085054;
+ Fri, 29 Dec 2023 04:46:37 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1703846793;
- bh=ebigwehaD3RfwLmN+/4zDLpScEwNr++VFy4+uE1TeWo=;
- h=From:Subject:Date:To:CC;
- b=UugqRTfOdtMY29S/DMPuUIifr4affSYcstHNCot8c+VXyK6MGqqjVbDD0Qz9ZK9Xv
- Jr8pJFVG0GVknEUn9q61/H7xT6VvpVLxxTRc/+29dOBbjUu6cW7RTDT4UaKf9NMUt9
- ZnuOyCeFaBaWX0mjm8j2jue1uPluCWdMmnsXw0R0=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BTAkXPV065681
+ s=ti-com-17Q1; t=1703846797;
+ bh=dPxU5DKcIrTTqTyM+5SvX3u9aifVhQHKUQDdVdck3b8=;
+ h=From:Date:Subject:References:In-Reply-To:To:CC;
+ b=pzkaHct9Xq0KcclJgeYzHGwGkUr2XYMbdcnXOIQo1M+vrPQDygfarmSN55K2zgq4D
+ HsH3Go/ocNUZ5wtxDfePkV8jisfCJlK6ca8ezlS5FOSpn/1apaTLFJ44ZdL+Ejgec8
+ KXYRRexH2PWfGzsvYYWissa/Rh/azBSPm7NA+Lcw=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BTAkbBl065716
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 29 Dec 2023 04:46:33 -0600
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 29 Dec 2023 04:46:37 -0600
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 29
- Dec 2023 04:46:33 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2023 04:46:37 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 29 Dec 2023 04:46:33 -0600
+ Frontend Transport; Fri, 29 Dec 2023 04:46:37 -0600
 Received: from [127.0.1.1] (uda0497581.dhcp.ti.com [10.24.69.44])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BTAkT7e072641;
- Fri, 29 Dec 2023 04:46:30 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BTAkT7f072641;
+ Fri, 29 Dec 2023 04:46:33 -0600
 From: Manorit Chawdhry <m-chawdhry@ti.com>
-Subject: [PATCH v7 0/9] ATF and OP-TEE Firewalling for K3 devices.
-Date: Fri, 29 Dec 2023 16:16:24 +0530
-Message-ID: <20231229-binman-firewalling-v7-0-47ed4af303fe@ti.com>
+Date: Fri, 29 Dec 2023 16:16:25 +0530
+Subject: [PATCH v7 1/9] dtoc: Change dst to self in debug message
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAICjjmUC/23PTW7DIBAF4KtErEs1/NrOqveougA8xEgxjsB1U
- 0W+eyGVkljycoCP9+ZGMqaAmRwPN5JwCTlMsQzN24G4wcQT0tCXmXDgAhouqQ1xNJH6kPDHnM8
- hnqhW6HrLBTowpEBrMlKbTHRDpd+XPCc0I414nev9JaEP13vo51eZh5DnKf3eOyysnv7HdaD24
- hZGgYq2k4qD9b41H3N4d9NI6l8Lf/Fc73pevGUGWolOC9lvvHh4BrC77iKKR2lYecMlMr/x8sU
- ztutl8SUdWtULAOw2Xj09Y2LXq9pfWKN9KzoNeuP103PY31/X/o13yITRvWMPv67rH8YW0eARA
- gAA
+Message-ID: <20231229-binman-firewalling-v7-1-47ed4af303fe@ti.com>
+References: <20231229-binman-firewalling-v7-0-47ed4af303fe@ti.com>
+In-Reply-To: <20231229-binman-firewalling-v7-0-47ed4af303fe@ti.com>
 To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
  <alpernebiyasak@gmail.com>, Neha Malcom Francis <n-francis@ti.com>, Andrew
  Davis <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>
@@ -71,11 +67,11 @@ CC: <u-boot@lists.denx.de>, Udit Kumar <u-kumar1@ti.com>, Praneeth Bajjuri
  <nm@ti.com>, Thomas Richard <thomas.richard@bootlin.com>, Gregory CLEMENT
  <gregory.clement@bootlin.com>, Manorit Chawdhry <m-chawdhry@ti.com>
 X-Mailer: b4 0.13-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1703846789; l=2991;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1703846789; l=1047;
  i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
- bh=xE/J+ENCO3rhkn95a1nNbKUlri5yBSby20C2TJG9oL4=;
- b=NpfzIFqu9YtMbXnYRtjtk7f91VU4OrRHwRC5gNPYKQYrTY/wWtjos9VwZwml0PE8mEJTe1hnR
- mTl+ZJJaNKwCMUQVlpWOnbBpZZw2u2iQWp9F8ujVEpLX+g7LD52SCAm
+ bh=63IdThCkt/ImmB+LDAzznO3LpZAZH8s2A52LisxTU/k=;
+ b=TPpzLsfOVv+r5Eja97nZPdNrFWR16tADaN9PicmC6YgFd0bF7mm1qaba0DtxReQqxpmMeXZzb
+ 277Gi1E4zXuC7Q/G2dcMfIyORzAYOwdjKx9q9Cu68+avMOPFgKaPDuI
 X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
  pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -95,71 +91,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-K3 devices have firewalls that are used to prevent illegal accesses to
-memory regions that are deemed secure. The series prevents the illegal
-accesses to ATF and OP-TEE regions that are present in different K3
-devices. 
+Fix the error message to not use dst and use self as it is copying the
+properties to self.
 
-AM62X, AM62AX and AM64X are currently in hold due to some firewall
-configurations that our System Controller (TIFS) needs to handle. 
-The devices that are not configured with the firewalling nodes will not
-be affected and can continue to work fine until the firewall nodes are
-added so will be a non-blocking merge. 
+While using templating if there are no subnodes defined, we end up in
+this situation where "dst" isn't defined and it tries to print the error
+message and fails.
 
-Test Logs: https://gist.github.com/manorit2001/4cead2fb3a19eb5d19005b3f54682627
-CICD Run: https://github.com/u-boot/u-boot/pull/442
+'UnboundLocalError: local variable 'dst' referenced before assignment'
+
+Fixes: 55e1278d5eca ("dtoc: Allow inserting a list of nodes into another")
 
 Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 ---
-Changes in v7:
+ tools/dtoc/fdt.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-* Andrew
-- Update documentation
-- Incorporate templating 
+diff --git a/tools/dtoc/fdt.py b/tools/dtoc/fdt.py
+index 5963925146a5..991a36b98796 100644
+--- a/tools/dtoc/fdt.py
++++ b/tools/dtoc/fdt.py
+@@ -782,7 +782,7 @@ class Node:
+             for node in parent.subnodes.__reversed__():
+                 dst = self.copy_node(node)
+ 
+-            tout.debug(f'merge props from {parent.path} to {dst.path}')
++            tout.debug(f'merge props from {parent.path} to {self.path}')
+             self.merge_props(parent, False)
+ 
+ 
 
-* Simon
-- Change the prefix for -binman.dtsi files
-
-* Jon
-- Remove the unintentional dependency on python3.9+
-  (https://lore.kernel.org/all/CADL8D3ZWoZpMidBTy+iSs-KOB6+LRAFVcDa-n_fVqvd00Z0=nw@mail.gmail.com/)
-
-- Add another patch to fix templating inclusion log
-- Change headings level for secure boot documentation
-- Populate 3 priv id slots for the background firewalls that require it
-- Link to v6: https://lore.kernel.org/r/20231206-binman-firewalling-v6-0-e7fce13a6dc1@ti.com
-
----
-Manorit Chawdhry (9):
-      dtoc: Change dst to self in debug message
-      binman: ti-secure: Add support for firewalling entities
-      binman: ftest: Add test for ti-secure firewall node
-      arm: dts: k3-binman: Add k3-security.h and include it in k3-binman.dtsi
-      arm: dts: k3-j721e-binman: Add firewall configurations
-      arm: dts: k3-j721s2-binman: Add firewall configurations
-      arm: dts: k3-j7200-binman: Add firewall configurations
-      docs: board: ti: k3: Cleanup FIT signature documentation
-      docs: board: ti: k3: Add secure booting documentation
-
- arch/arm/dts/k3-binman.dtsi                        |  49 ++++
- arch/arm/dts/k3-j7200-binman.dtsi                  |  90 ++++++
- arch/arm/dts/k3-j721e-binman.dtsi                  | 116 ++++++++
- arch/arm/dts/k3-j721s2-binman.dtsi                 | 123 ++++++++
- arch/arm/dts/k3-security.h                         |  58 ++++
- doc/board/ti/k3.rst                                | 313 ++++++++++++++-------
- tools/binman/btool/openssl.py                      |  16 +-
- tools/binman/etype/ti_secure.py                    |  95 +++++++
- tools/binman/etype/x509_cert.py                    |   4 +-
- tools/binman/ftest.py                              |  23 ++
- tools/binman/test/324_ti_secure_firewall.dts       |  28 ++
- .../325_ti_secure_firewall_missing_property.dts    |  28 ++
- tools/dtoc/fdt.py                                  |   2 +-
- 13 files changed, 842 insertions(+), 103 deletions(-)
----
-base-commit: 2b28c3b871cd5d55b19f0a86cef970139f8ab952
-change-id: 20230724-binman-firewalling-65ecdb23ec0a
-
-Best regards,
 -- 
-Manorit Chawdhry <m-chawdhry@ti.com>
+2.43.0
 
