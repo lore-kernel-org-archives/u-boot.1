@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C451C47074
-	for <u-boot@archiver.kernel.org>; Fri, 29 Dec 2023 17:51:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95635C47073
+	for <u-boot@archiver.kernel.org>; Fri, 29 Dec 2023 17:51:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC53787C24;
-	Fri, 29 Dec 2023 18:47:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 322AA87C2B;
+	Fri, 29 Dec 2023 18:47:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RE1yCKAl";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NIQwKHKw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3368687B82; Fri, 29 Dec 2023 18:47:22 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id DF46A87B92; Fri, 29 Dec 2023 18:47:22 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A59A87BC6
+ by phobos.denx.de (Postfix) with ESMTPS id 431D587BBB
  for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 18:47:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BTHl1tq025732;
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BTHl1WB006036;
  Fri, 29 Dec 2023 11:47:01 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1703872021;
- bh=okjgfNjXIyXAvxSoLkCId9UkgJQ4qtBpojpT6BFRE1I=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=RE1yCKAl/rpFgUXYghJjMmA1WbteNZBvQ4s7/95agT2IzCBYjHq+JqPW9sPsT4Q5z
- 8aWby9ZAbsc+W5/YO0SpOArl6RbQQmSHgrSbg+ToVusYhTUfKrNuldctzPewArN0Vv
- ZwUwA3Phe+FpIch6X732jK6qEdhgAlKf27NlhwUg=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BTHl1J8066047
+ bh=uq/8cnWM2voxb4gO8Dnd8YJ87O+GfvybLpvoHgA1YPs=;
+ h=From:To:CC:Subject:Date;
+ b=NIQwKHKwmOHU/aHp425dZt9xrBN9Nzx6HIGv2MmPRHLbIWpewoHphLsQ5QR94FWz9
+ ta4+Kw3lrimFK5SX8GAlTUmffzXRHXuDFLD83F2NVWLI4lDIHULahJ7Np0laoxbz7j
+ arL1EebzeUoi5R8MpRbEVTnQ+FQBrUaTU4usrfSg=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BTHl1Yp063418
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Fri, 29 Dec 2023 11:47:01 -0600
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 29
- Dec 2023 11:47:01 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2023 11:47:00 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 29 Dec 2023 11:47:01 -0600
+ Frontend Transport; Fri, 29 Dec 2023 11:47:00 -0600
 Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BTHl1oS005076;
- Fri, 29 Dec 2023 11:47:01 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BTHl0uU122665;
+ Fri, 29 Dec 2023 11:47:00 -0600
 From: Bryan Brattlof <bb@ti.com>
 To: Tom Rini <trini@konsulko.com>
 CC: UBoot Mailing List <u-boot@lists.denx.de>, Vignesh Raghavendra
@@ -59,25 +59,23 @@ CC: UBoot Mailing List <u-boot@lists.denx.de>, Vignesh Raghavendra
  <clamor95@gmail.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>, Simon
  Glass <sjg@chromium.org>, Jan Kiszka <jan.kiszka@siemens.com>,
  Bryan Brattlof <bb@ti.com>
-Subject: [PATCH v2 13/26] arm: dts: k3-am654: remove duplicate mcu_uart0 node
-Date: Fri, 29 Dec 2023 11:47:10 -0600
-Message-ID: <20231229174656.634065-41-bb@ti.com>
+Subject: [PATCH v2 00/26] sync am65x device tree with Linux v6.7-rc1
+Date: Fri, 29 Dec 2023 11:46:57 -0600
+Message-ID: <20231229174656.634065-28-bb@ti.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20231229174656.634065-28-bb@ti.com>
-References: <20231229174656.634065-28-bb@ti.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1552; i=bb@ti.com;
- h=from:subject; bh=XMs0cGmPRC/Hi42pED30lyVFkdcWepe9hqQHNGpGpCY=;
- b=owNCWmg5MUFZJlNZ0TRHZQAAYv////d7l733brr3k56K+zvv3L6v296jv/a7/v7P3Xd/r/ewA
- Rq2B2oyA0aMQAANDRoAaGgBoaaAaA0AAAAGQyAADQyNNNMhjSNA9TIyYaaaiDJpoZANMIxGQDRi
- ZNDJhBpoAZNNAGEwjEGQxGQ0DQAMjTQA0aAANBoAGRHqA9IAaaAaaaNGhp6mjQBoaA0GRkAZA09
- Q0aNAA0AaGnqaGjIAZMmjE0GQNAAIIoVO6IjIL4FMvyAt4IwIx3syf8EOsewe/gCq14wklyKXdP
- k+cSYZjAbmWIJVBkJ/MIC5YEqMaSRzj2F64EjNqSt0LZpjaZV0FDsusCerlLalGKE6OVIL9hr3T
- cUpCSYabQjgCoh11aaLfxczIeB7FdIOVtxrNPjCfHJDd1gqRU0aaJVQ2J01JfWu9e//PZy9aqzi
- WJVuWObeVL55VPcbJ3hWm3Zlxm736PG6cbHm6fm7z3y2hNj8ElEikbVyMrem/dZGGzXstWrhAjA
- NEIAPZ9KP0bZL8yPNkiFar3BvDgauJduR+kGN5ayIYxFqrBMkPDxmfxUz+WRsKwOVA8kir0x4+3
- mtFF+sQ+xgHHQIA1CvqV4Egdyk4qfzZNODU1ywGR1qRwjUmK4Cj84S4/iZc7BuBdM0HoB07fkWA
- bQlDYjRBRc//F3JFOFCQ0TRHZQ=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3261; i=bb@ti.com;
+ h=from:subject; bh=E6kgDLfKFXD89MAKhow25uqwUkIIPfraR3mnKR1fnR0=;
+ b=owNCWmg5MUFZJlNZq4PqzgAAZf////5Lb2fw6p/22577dtr2e/T34d7O38b/6bvrz95u13+wA
+ Rsyh2oAAABpoAAaeUGgNNAGgAaaANAAGjQaAA0aGgNB6jJp6j1NG00Q9Rpsj1Q6NAAyDRoABkDQ
+ NM1A0ANNPUekBoPUA0NqMh6hoGyjQAPSAGh6gB6h6R6mjTQaHCaAxGmmmEyAGmgaYmTCA0GgZBo
+ ANDJkYCZGJiNGgZNGmQANABoyDRk0AgRuFtQsckExoh3E15QVh0sNUAn5LtFJtJ4InvZ2PGAGhd
+ t1gWDOhqXvkBZ2xa5bD3FKw4TwoZONQQDLlahbRO6NapwJxcWT1N0SJ0PZLsInwgGxQKUhAbP4A
+ DRk00RMcaZDLVn57mCQN2P5oamD7jnUMTnhjJu0hGb4EKNimCSMxbPjSmlBRiVkwK71SKtTZ6M6
+ kUx00M41Qe7sj/KihOpRoBmbvl3sOROjqzUEHZOw/iaJtT3IYsvxeVYQjPw7Jvx0wqO2GViC1ZZ
+ tV4MfVp2ZyQdMFaLV6F3MTlsTi8wpmaMWKrrL7MTSB4nGL9HI/xiFTURSVRVcUkBradQZ87yk4d
+ kyHF6s9C1d+5KQHGBIQbM6e9C3DHIBtrWwR9cUhBv6H9mCaorRrPPjZQW9AlYxuIAIDXIMidxOi
+ ATl/4u5IpwoSFXB9WcA
 X-Developer-Key: i=bb@ti.com; a=openpgp;
  fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
 Content-Transfer-Encoding: 8bit
@@ -99,52 +97,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the Linux and U-Boot board dtb files unified we now have a
-duplicate mcu_uart0 node. Remove it
+Hello Again Everyone!
 
-Tested-by: Tom Rini <trini@konsulko.com>
-Signed-off-by: Bryan Brattlof <bb@ti.com>
----
- arch/arm/dts/k3-am654-r5-base-board.dts | 12 ------------
- 1 file changed, 12 deletions(-)
+This series gets the am65x booting again along with syncing the device
+tree files with v6.7-rc1 Linux.
 
-diff --git a/arch/arm/dts/k3-am654-r5-base-board.dts b/arch/arm/dts/k3-am654-r5-base-board.dts
-index 19806ec4e2309..bdee47802b047 100644
---- a/arch/arm/dts/k3-am654-r5-base-board.dts
-+++ b/arch/arm/dts/k3-am654-r5-base-board.dts
-@@ -18,7 +18,6 @@
- 		ethernet0 = &cpsw_port1;
- 		remoteproc0 = &sysctrler;
- 		remoteproc1 = &a53_0;
--		serial1 = &mcu_uart0;
- 		serial2 = &main_uart0;
- 		spi0 = &ospi0;
- 		spi1 = &ospi1;
-@@ -98,8 +97,6 @@
- };
- 
- &mcu_uart0 {
--	pinctrl-names = "default";
--	pinctrl-0 = <&mcu_uart0_pins_default>;
- 	clock-frequency = <48000000>;
- 	/delete-property/ power-domains;
- 	status = "okay";
-@@ -126,15 +123,6 @@
- 		>;
- 	};
- 
--	mcu_uart0_pins_default: mcu_uart0_pins_default {
--		pinctrl-single,pins = <
--			AM65X_WKUP_IOPAD(0x0044, PIN_INPUT, 4)	/* (P4) MCU_OSPI1_D1.MCU_UART0_RXD */
--			AM65X_WKUP_IOPAD(0x0048, PIN_OUTPUT, 4)	/* (P5) MCU_OSPI1_D2.MCU_UART0_TXD */
--			AM65X_WKUP_IOPAD(0x004C, PIN_INPUT, 4)	/* (P1) MCU_OSPI1_D3.MCU_UART0_CTSn */
--			AM65X_WKUP_IOPAD(0x0054, PIN_OUTPUT, 4)	/* (N3) MCU_OSPI1_CSn1.MCU_UART0_RTSn */
--		>;
--	};
--
- 	wkup_i2c0_pins_default: wkup-i2c0-pins-default {
- 		pinctrl-single,pins = <
- 			AM65X_WKUP_IOPAD(0x00e0, PIN_INPUT, 0) /* (AC7) WKUP_I2C0_SCL */
+The bulk of these patches unify the WKUP SPL board file with the arm64
+files to make future syncs from Linux much easier. In the end the DTBs
+should look a lot like what the DTBs look like for the am64x which
+is fairly similar to the am65x.
+
+For those interested in what UART boot looks like:
+   https://paste.sr.ht/~bryanb/7df8a645dc548912cd806abd5ecab967ef3287bc
+
+Changes from v1: [0]
+- fixed multi-line comment format
+- moved wkup_uart0 and mcu_uart0 U-Boot overrides to the r5 board file
+  as they are not needed for a53/main domain U-Boot builds
+- corrected a bad wkup_i2c0_pins_default fixup in PATCH 6/26
+- spelling fix (s/Libux/Linux/) in commit body for PATCH 6/26
+- added trailers from Tom
+
+Thanks for reviewing and happy holidays
+~Bryan
+
+[0] https://lore.kernel.org/u-boot/20231221174412.210807-1-bb@ti.com/
+
+Bryan Brattlof (26):
+  configs: am65x_evm_r5: enable driver for fixed regulators
+  configs: am65x_evm_a53: disable CONSOLE_MUX
+  arm: dts: k3-am654-r5: Merge board file and U-Boot overlay
+  arm: dts: k3-am654: pull in dtb update from Linux
+  arm: dts: k3-am654: copy bootph properties to a53 dts
+  arm: dts: k3-am654: include a53 board dtb for r5 build
+  arm: dts: k3-am654: remove duplicate vtt_supply
+  arm: dts: k3-am654: remove duplicate wkup_uart0
+  arm: dts: k3-am654: remove duplicate timer
+  arm: dts: k3-am654: remove duplicate mcu_ringacc
+  arm: dts: k3-am654: remove duplicate mcu_udmap
+  arm: dts: k3-am654: add needed regs to udmap nodes
+  arm: dts: k3-am654: remove duplicate mcu_uart0 node
+  arm: dts: k3-am654: remove duplicate main_uart0
+  arm: dts: k3-am654: remove duplicate sdhci0 pinmux node
+  arm: dts: k3-am654: remove duplicate sdhci1 pinmux node
+  arm: dts: k3-am654: remove duplicate wkup_i2c0
+  arm: dts: k3-am654: remove duplicate ospi0 node
+  arm: dts: k3-am654: remove usb0
+  arm: dts: k3-am654: remove duplicate mdio
+  arm: dts: k3-am654: remove duplicate vtt pinmux
+  arm: dts: k3-am654: remove duplicate root properties
+  arm: dts: k3-am654: remove un-needed aliases
+  arm: dts: k3-am654: move dummy_clock to root node
+  arm: dts: k3-am654: remove duplicate mcu secure proxy node
+  arm: dts: k3-am654: convert bootph-pre-ram to bootph-all
+
+ arch/arm/dts/k3-am65-main.dtsi                | 342 +++++++++++++++---
+ arch/arm/dts/k3-am65-mcu.dtsi                 | 156 +++++++-
+ arch/arm/dts/k3-am65-wakeup.dtsi              |  10 +-
+ arch/arm/dts/k3-am65.dtsi                     |  19 +-
+ arch/arm/dts/k3-am654-base-board-u-boot.dtsi  | 195 +++++++++-
+ arch/arm/dts/k3-am654-base-board.dts          | 301 +++++++++------
+ .../dts/k3-am654-r5-base-board-u-boot.dtsi    | 208 -----------
+ arch/arm/dts/k3-am654-r5-base-board.dts       | 303 ++++------------
+ arch/arm/dts/k3-am654.dtsi                    |   7 +
+ configs/am65x_evm_a53_defconfig               |   1 -
+ configs/am65x_evm_r5_defconfig                |   2 +
+ 11 files changed, 886 insertions(+), 658 deletions(-)
+ delete mode 100644 arch/arm/dts/k3-am654-r5-base-board-u-boot.dtsi
+
+
+base-commit: 0a0ceea2269b983e736b80104f03cc800d1a5e2a
 -- 
 2.43.0
 
