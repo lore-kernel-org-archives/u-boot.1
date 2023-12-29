@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D129BC47073
-	for <u-boot@archiver.kernel.org>; Fri, 29 Dec 2023 15:42:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52B20C47072
+	for <u-boot@archiver.kernel.org>; Fri, 29 Dec 2023 15:43:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2428A87A71;
-	Fri, 29 Dec 2023 16:42:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id C9FF687AA2;
+	Fri, 29 Dec 2023 16:43:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="moIBl3nQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WOkcK7SC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4DD187A54; Fri, 29 Dec 2023 16:42:45 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3F16987AC9; Fri, 29 Dec 2023 16:43:14 +0100 (CET)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3A7687A78
- for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 16:42:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A663B87A54
+ for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 16:43:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1703864562; x=1704469362; i=xypron.glpk@gmx.de;
- bh=Vx33CEq8Z4hSlEEqLH9M8WZF2WOZ9Rapoyxam6rEWTQ=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
- References;
- b=moIBl3nQr8LO2IOQ6V+h1ybQAWGxZ9X/rk1QXJFfTykWiakBGLUBP4s65n/KaYFv
- vavu+TtDv2Ndo80hmzrud0mRHwcKu/TFw9fjYRg8Rt+3F6b1Xx3uzs6OP686/IKZX
- 3U1xHyzkvqMnc95uBXMEOgf9Du/DxuFza1SQ7egUjtTHBLseCUkbDUi4jGjDEpx8k
- GuImI3F8O9Mz8hYuA8ATigF1hrOfsdOJH61U8QJQ7g3EakNkVqceL9F2apcQvMyYy
- gxeK5oXlq0oX98TTBOkPhlANRQbDdwvWBgzZQ5i6evvGq4PvxGVRB7D+dn+lw0qWE
- kIQz4CJWA3iLzBo7kg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M2f9h-1rFfJ70QAx-004CPz; Fri, 29
- Dec 2023 16:42:42 +0100
-Date: Fri, 29 Dec 2023 16:42:41 +0100
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-dbd990ad852so5025374276.1
+ for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 07:43:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1703864590; x=1704469390; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=XMLNMfW9J7XdrO54hxngyIne7O3DACimhu1QICOSz5s=;
+ b=WOkcK7SCXAuk3HEab1sXCDrrQhhj1PKHnOyIFjnfjS+FQsTuyEJ40L+RAOtnulnfEh
+ znuPKQIlK3otWVYQy0e5/sVF9S31xjFudfBijA5Ez67IfoVfX19AkB94tRwGCbzFIufn
+ rSt0xnSWFJ0AmpITUU2stDXm+ICJlusHCm93k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703864590; x=1704469390;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XMLNMfW9J7XdrO54hxngyIne7O3DACimhu1QICOSz5s=;
+ b=JbnybWUZAy3H8DIiBfdEBhvooXJehQi5htqXrnqoViz5MLg1I1H8qbkNpAHHILJkxs
+ zlbCM4M3PjlqwO0oiEJ6swQiMzzK387R76kDhR0BG2luzed37YAXBjX2f9dWT1zK1iZM
+ QyjtNBgZ7iIYygB34ilMVDXMTPxHQPFgxaLlsABSrQWJQM8oYjAjhAPA061eqcMXTvP1
+ pzL875VUX9zdQZOGEkjyeAJxiJEyrI1U4PzIaV/e4opveM7md/W4X2FVtm9op9VIw7ku
+ 2TK+qPfgc7VyLuWxum3Dp6mVILDHGSqV37vXjn99HOKxilaFj2LBWNvMEMBXogwJi+oY
+ wPfg==
+X-Gm-Message-State: AOJu0Yy9h8sKCgJDVR3P/e759K85RsJTTcZTA5A3engH30wVG6PVnYyL
+ 0yqh+8bV+MUzxIQLvBKo1HsalJUn97kF4g==
+X-Google-Smtp-Source: AGHT+IF4uPcE3sr5pNi548f76ogYZCqaP8ejV38HPYSNsb2Aa2xkv+Mg0Q8f0kMrGw+0APjup0fMSw==
+X-Received: by 2002:a25:3615:0:b0:dbd:c1f1:4ff8 with SMTP id
+ d21-20020a253615000000b00dbdc1f14ff8mr6820398yba.44.1703864590248; 
+ Fri, 29 Dec 2023 07:43:10 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ h17-20020a258a91000000b00dbd5b48cce1sm6912065ybl.2.2023.12.29.07.43.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 29 Dec 2023 07:43:09 -0800 (PST)
+Date: Fri, 29 Dec 2023 10:43:07 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Subject: Re: Proposal: U-Boot memory management
-User-Agent: K-9 Mail for Android
-In-Reply-To: <CAFLszThqH01GOqnTxucVE7s+wJU-dz7uqUtkb4iKxs6GgX6tqw@mail.gmail.com>
+Message-ID: <20231229154307.GS2652760@bill-the-cat>
 References: <CAFLszTicT2yzsm+KAjRyqzV3bt1_W2XYJaCExX-LHNZ6+tFUkA@mail.gmail.com>
  <CAFLszThqH01GOqnTxucVE7s+wJU-dz7uqUtkb4iKxs6GgX6tqw@mail.gmail.com>
-Message-ID: <A5970853-6611-4726-8D9F-E92C5E18A103@gmx.de>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:5ZSvCcf25MGbIFzfs/o7iXo+GFb7RnSmH3tCDAImQJ+0or7G/Fr
- U5kYFNmtKRRqVuMDuZAfnOT9lh6/DFxp2KVIvveLgrvMyUdhEI2RAIg5n2VwOHhZxxJctLR
- oO/hMAROKiF8RBGps8ddYa6wk1fAYsubBCE2K8xbnaxcbnrUbz6lmyaedEpEP7FlX4rBsYZ
- bIFc5G/oXoUmzqZvnDqyg==
-UI-OutboundReport: notjunk:1;M01:P0:d218iNoQnqg=;blpB0zC3Utzr9oc/LSbvYH4WKmy
- wAx/F60FxfWnM/ARmEak6kek7/w2XypxjB91Wt44orypnKTOwi+F9LFaznk6t47N7kRvvWEQt
- ijq94cb5wNFO9JIgLyEOPhbASPGKq9NpvlDMePhWLICScUV4zD4Q5n4Ghnv/INRrHq6fJzp1L
- SILt12h2J2upceft/eaRvdbJlo9dCW4uUPfAoBZqBdiZpdDdfTOuTy2BALwNmqIL060qohHbb
- 4OA2tID4ag22qVCFuzC8ufjQqE35i+Ar8GHToRAaPqQ6DZep4qcOvv1KPiJNsedp8iKNXpbtp
- 1E8Jns5uuJExhXq5A3DPzbkIdihbaDvyss8wo0GnjkX24NvsNA7u3szzGb2LFYR5WC4f0ij4K
- voBUHxVndomz5QBWw8FN0jMtUH+cm2I5i+2NtIzAd5uzC5OaMytNyjJtE1/yOJC59GxiStlS3
- A6ByIKjImQsztPOFvQmyPC05/yBwNn1LWdPky5Kfu9gUHLK/INZ3C3F0x0j8qx5LrpHDpBHf2
- gi0stKxCWn9M0cVXVmL1uhIheAYo7IOX2uJODOn2sKRnwTmpwU81i067Kxr33ZfRSn3kLwAhY
- pp4pJNsWiaHu8mFO/RQSpp51WB5RschrTicB5A9dlt3iE0lWqM6UFmWLoExyUKfNI8jf2ALj9
- aJoqgXHmS3gNuzKC9QLtzD7Z/9ubogkYo6V7GrrZJpHuaDy6BTc/gsSxPih1HbqXms/1mWI1n
- drIneVGOIjhtkKTMbpixIwSQBq/o48+1Pw/8Bmd7+llOYIKf1xiawzvKToPl1BkzItzZevsgY
- ZC2XSG4RvyYZUTCmGyFwHCv36wp01FVTLSMcKkCFEvtpQ+AweCPKlp1+Oq5/jiN1EItUWr0/e
- ZzsopWSXpVade4v07iGhjVPfgd2HseDaccCWnXy6XFYhdduYKLsZxnUATn5tLTnMCULblfhVO
- vUP8ZAIEBzmVcHIXr531QqSWtMk=
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="p+3roYuRee6gGero"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThqH01GOqnTxucVE7s+wJU-dz7uqUtkb4iKxs6GgX6tqw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,240 +94,240 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--p+3roYuRee6gGero
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Am 29=2E Dezember 2023 06:36:09 MEZ schrieb Simon Glass <sjg@chromium=2Eor=
-g>:
->Hi,
->
->On Sat, Dec 16, 2023 at 6:01=E2=80=AFPM Simon Glass <sjg@chromium=2Eorg> =
-wrote:
->>
->> Hi,
->>
->> This records my thoughts after a discussion with Ilias & Heinrich re
->> memory allocation in U-Boot=2E
->>
->> 1=2E malloc()
->>
->> malloc() is used for programmatic memory allocation=2E It allows memory
->> to be freed=2E It is not designed for very large allocations (e=2Eg=2E =
-a
->> 10MB kernel or 100MB ramdisk)=2E
->>
->> 2=2E lmb
->>
->> lmb is used for large blocks of memory, such as those needed for a
->> kernel or ramdisk=2E Allocation is only transitory, for the purposes of
->> loading some images and booting=2E If the boot fails, then all lmb
->> allocations go away=2E
->>
->> lmb is set up by getting all available memory and then removing what
->> is used by U-Boot (code, data, malloc() space, etc=2E)
->>
->> lmb reservations have a few flags so that areas of memory can be
->> provided with attributes
->>
->> There are some corner cases=2E=2E=2Ee=2Eg=2E loading a file does an lmb
->> allocation but only for the purpose of avoiding a file being loaded
->> over U-Boot code/data=2E The allocation is dropped immediately after th=
-e
->> file is loaded=2E Within the bootm command, or when using standard boot=
-,
->> this would be fairly easy to solve=2E
->>
->> Linux has renamed lmb to memblock=2E We should consider doing the same=
-=2E
->>
->> 3=2E EFI
->>
->> EFI has its own memory-allocation tables=2E
->>
->> Like lmb, EFI is able to deal with large allocations=2E But via a 'pool=
-'
->> function it can also do smaller allocations similar to malloc(),
->> although each one uses at least 4KB at present=2E
->>
->> EFI allocations do not go away when a boot fails=2E
->>
->> With EFI it is possible to add allocations post facto, in which case
->> they are added to the allocation table just as if the memory was
->> allocated with EFI to begin with=2E
->>
->> The EFI allocations and the lmb allocations use the same memory, so in
->> principle could conflict=2E
->>
->> EFI allocations are sometimes used to allocate internal U-Boot data as
->> well, if needed by the EFI app=2E For example, while efi_image_parse()
->> uses malloc(), efi_var_mem=2Ec uses EFI allocations since the code runs
->> in the app context and may need to access the memory after U-Boot has
->> exited=2E Also efi_smbios=2Ec uses allocate_pages() and then adds a new
->> mapping as well=2E
->>
->> EFI memory has attributes, including what the memory is used for (to
->> some degree of granularity)=2E See enum efi_memory_type and struct
->> efi_mem_desc=2E In the latter there are also attribute flags - whether
->> memory is cacheable, etc=2E
->>
->> EFI also has the x86 idea of 'conventional' memory, meaning (I
->> believe) that below 4GB that isn't reserved for the hardware/system=2E
->> This is meaningless, or at least confusing, on ARM systems=2E
->>
->> 4=2E reservations
->>
->> It is perhaps worth mentioning a fourth method of memory management,
->> where U-Boot reserves chunks of memory before relocation (in
->> board_init_f=2Ec), e=2Eg=2E for the framebuffer, U-Boot code, the mallo=
-c()
->> region, etc=2E
->>
->>
->> Problems
->> =E2=80=94-------
->>
->> There are no urgent problems, but here are some things that could be im=
+On Fri, Dec 29, 2023 at 05:36:09AM +0000, Simon Glass wrote:
+> Hi,
+>=20
+> On Sat, Dec 16, 2023 at 6:01=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
+ote:
+> >
+> > Hi,
+> >
+> > This records my thoughts after a discussion with Ilias & Heinrich re
+> > memory allocation in U-Boot.
+> >
+> > 1. malloc()
+> >
+> > malloc() is used for programmatic memory allocation. It allows memory
+> > to be freed. It is not designed for very large allocations (e.g. a
+> > 10MB kernel or 100MB ramdisk).
+> >
+> > 2. lmb
+> >
+> > lmb is used for large blocks of memory, such as those needed for a
+> > kernel or ramdisk. Allocation is only transitory, for the purposes of
+> > loading some images and booting. If the boot fails, then all lmb
+> > allocations go away.
+> >
+> > lmb is set up by getting all available memory and then removing what
+> > is used by U-Boot (code, data, malloc() space, etc.)
+> >
+> > lmb reservations have a few flags so that areas of memory can be
+> > provided with attributes
+> >
+> > There are some corner cases...e.g. loading a file does an lmb
+> > allocation but only for the purpose of avoiding a file being loaded
+> > over U-Boot code/data. The allocation is dropped immediately after the
+> > file is loaded. Within the bootm command, or when using standard boot,
+> > this would be fairly easy to solve.
+> >
+> > Linux has renamed lmb to memblock. We should consider doing the same.
+> >
+> > 3. EFI
+> >
+> > EFI has its own memory-allocation tables.
+> >
+> > Like lmb, EFI is able to deal with large allocations. But via a 'pool'
+> > function it can also do smaller allocations similar to malloc(),
+> > although each one uses at least 4KB at present.
+> >
+> > EFI allocations do not go away when a boot fails.
+> >
+> > With EFI it is possible to add allocations post facto, in which case
+> > they are added to the allocation table just as if the memory was
+> > allocated with EFI to begin with.
+> >
+> > The EFI allocations and the lmb allocations use the same memory, so in
+> > principle could conflict.
+> >
+> > EFI allocations are sometimes used to allocate internal U-Boot data as
+> > well, if needed by the EFI app. For example, while efi_image_parse()
+> > uses malloc(), efi_var_mem.c uses EFI allocations since the code runs
+> > in the app context and may need to access the memory after U-Boot has
+> > exited. Also efi_smbios.c uses allocate_pages() and then adds a new
+> > mapping as well.
+> >
+> > EFI memory has attributes, including what the memory is used for (to
+> > some degree of granularity). See enum efi_memory_type and struct
+> > efi_mem_desc. In the latter there are also attribute flags - whether
+> > memory is cacheable, etc.
+> >
+> > EFI also has the x86 idea of 'conventional' memory, meaning (I
+> > believe) that below 4GB that isn't reserved for the hardware/system.
+> > This is meaningless, or at least confusing, on ARM systems.
+> >
+> > 4. reservations
+> >
+> > It is perhaps worth mentioning a fourth method of memory management,
+> > where U-Boot reserves chunks of memory before relocation (in
+> > board_init_f.c), e.g. for the framebuffer, U-Boot code, the malloc()
+> > region, etc.
+> >
+> >
+> > Problems
+> > =E2=80=94-------
+> >
+> > There are no urgent problems, but here are some things that could be im=
 proved:
->>
->> 1=2E EFI should attach most of its data structures to driver model=2E T=
-his
->> work has started, with the partition support, but more effort would
->> help=2E This would make it easier to see which memory is related to
->> devices and which is separate=2E
->>
->> 2=2E Some drivers do EFI reservations today, whether EFI is used for
->> booting or not (e=2Eg=2E rockchip video rk_vop_probe())=2E
->>
->> 3=2E U-Boot doesn't really map arch-specific memory attributes (e=2Eg=
-=2E
->> armv8's struct mm_region) to EFI ones=2E
->>
->> 4=2E EFI duplicates some code from bootm, some of which relates to
->> memory allocation (e=2Eg=2E FDT fixup)=2E
->>
->> 5=2E EFI code is used even if EFI is never used to boot
->>
->> 6=2E EFI allocations can result in the same memory being used as has
->> already been allocated by lmb=2E Users may load files which overwrite
->> memory allocated by EFI=2E
->
->7=2E We need to support doing an allocation when a file is loaded (to
->ensure files do not overlap), without making it too difficult to load
->multiple files to the same place, if desired=2E
->
->>
->>
->> Lifetime
->> --------
->>
->> We have three different memory allocators with different purposes=2E Ca=
-n
->> we unify them a little?
->>
->> Within U-Boot:
->> - malloc() space lives forever
->> - lmb lives while setting out images for booting
->> - EFI (mostly) lives while booting an EFI app
->>
->> In practice, EFI is set up early in U-Boot=2E Some of this is necessary=
-,
->> some not=2E EFI allocations stay around forever=2E This works OK since
->> large allocations are normally not done in EFI, so memory isn't really
->> consumed to any great degree by the boot process=2E
->>
->> What happens to EFI allocations if the app returns? They are still
->> present, in case another app is run=2E This seems fine=2E
->>
->> API
->> =E2=80=93--
->> Can we unify some APIs?
->>
->> It should be possible to use lmb for large EFI memory allocations, so
->> long as they are only needed for booting=2E We effectively do this
->> today, since EFI does not manage the arrangement of loaded images in
->> memory=2E for the most part=2E
->>
->> It would not make sense to use EFI allocation to replace lmb and
->> malloc(), of course=2E
->>
->> Could we use a common (lower-level) API for allocation, used by both
->> lmb and EFI? They do have some similarities=2E However they have
->> different lifetime constraints (EFI allocations are never dropped,
->> unlikely lmb)=2E
->>
->> ** Overall, it seems that the existence of memory allocation in
->> boot-time services has created confusion=2E Memory allocation is
->> muddled, with both U-Boot code and boot-time services calling the same
->> memory allocator=2E This just has not been clearly thought out=2E
->>
->>
->> Proposal
->> =E2=80=94-------
->>
->> Here are some ideas:
->>
->> 1=2E For video, use the driver model API to locate the video regions, o=
-r
->> block off the entire framebuffer memory, for all devices as a whole=2E
->> Use efi_add_memory_map()
->>
->> 2=2E Add memory attributes to UCLASS_RAM and use them in EFI, mapping t=
-o
->> the EFI_MEMORY_=2E=2E=2E attributes in struct efi_mem_desc=2E
->>
->> 3=2E Add all EFI reservations just before booting the app, as we do wit=
-h
->> devicetree fixup=2E With this model, malloc() and lmb are used for all
->> allocation=2E Then efi_add_memory_map() is called for each region in
->> turn just before booting=2E Memory attributes are dealt with above=2E T=
-he
->> type (enum efi_memory_type) can be determined simply by the data
->> structure stored in it, as is done today=2E For example, SMBIOS tables
->> can use EFI_ACPI_RECLAIM_MEMORY=2E Very few types are used and EFI code
->> understands the meaning of each=2E
->>
->> 4=2E Avoid setting up EFI memory at the start of U-Boot=2E Do it only w=
-hen
->> booting=2E This looks to require very little effort=2E
->>
->> 5=2E Avoid calling efi_allocate_pages() and efi_allocate_pool() outside
->> boot-time services=2E This solves the problem 6=2E If memory is needed =
-by
->> an app, allocate it with malloc() and see 3=2E There are only two
->> efi_allocate_pages() (smbios and efi_runtime)=2E There are more calls o=
-f
->> efi_allocate_pool(), but most of these seem easy to fix up=2E For
->> example, efi_init_event_log() allocates a buffer, but this can be
->> allocated in normal malloc() space or in a bloblist=2E
->>
->> 6=2E Don't worry too much about whether EFI will be used for booting=2E
->> The cost is likely not that great: use bootstage to measure it as is
->> done for driver model=2E Try to minmise the cost of its tables,
->> particularly for execution time, but otherwise just rely on the
->> ability to disable EFI_LOADER=2E
->
->7=2E Add a flag to the 'load' command:
->
->-m <type> - make an lmb allocation for the file
->   <type> is the image type to use (kernel, ramdisk, flat_dt)
->
->any existing allocation for that type will be automatically freed
->first=2E If <type> is "none" then no freeing is possible: any loaded
->images just stack up in lmb=2E
+> >
+> > 1. EFI should attach most of its data structures to driver model. This
+> > work has started, with the partition support, but more effort would
+> > help. This would make it easier to see which memory is related to
+> > devices and which is separate.
+> >
+> > 2. Some drivers do EFI reservations today, whether EFI is used for
+> > booting or not (e.g. rockchip video rk_vop_probe()).
+> >
+> > 3. U-Boot doesn't really map arch-specific memory attributes (e.g.
+> > armv8's struct mm_region) to EFI ones.
+> >
+> > 4. EFI duplicates some code from bootm, some of which relates to
+> > memory allocation (e.g. FDT fixup).
+> >
+> > 5. EFI code is used even if EFI is never used to boot
+> >
+> > 6. EFI allocations can result in the same memory being used as has
+> > already been allocated by lmb. Users may load files which overwrite
+> > memory allocated by EFI.
+>=20
+> 7. We need to support doing an allocation when a file is loaded (to
+> ensure files do not overlap), without making it too difficult to load
+> multiple files to the same place, if desired.
+>=20
+> >
+> >
+> > Lifetime
+> > --------
+> >
+> > We have three different memory allocators with different purposes. Can
+> > we unify them a little?
+> >
+> > Within U-Boot:
+> > - malloc() space lives forever
+> > - lmb lives while setting out images for booting
+> > - EFI (mostly) lives while booting an EFI app
+> >
+> > In practice, EFI is set up early in U-Boot. Some of this is necessary,
+> > some not. EFI allocations stay around forever. This works OK since
+> > large allocations are normally not done in EFI, so memory isn't really
+> > consumed to any great degree by the boot process.
+> >
+> > What happens to EFI allocations if the app returns? They are still
+> > present, in case another app is run. This seems fine.
+> >
+> > API
+> > =E2=80=93--
+> > Can we unify some APIs?
+> >
+> > It should be possible to use lmb for large EFI memory allocations, so
+> > long as they are only needed for booting. We effectively do this
+> > today, since EFI does not manage the arrangement of loaded images in
+> > memory. for the most part.
+> >
+> > It would not make sense to use EFI allocation to replace lmb and
+> > malloc(), of course.
+> >
+> > Could we use a common (lower-level) API for allocation, used by both
+> > lmb and EFI? They do have some similarities. However they have
+> > different lifetime constraints (EFI allocations are never dropped,
+> > unlikely lmb).
+> >
+> > ** Overall, it seems that the existence of memory allocation in
+> > boot-time services has created confusion. Memory allocation is
+> > muddled, with both U-Boot code and boot-time services calling the same
+> > memory allocator. This just has not been clearly thought out.
+> >
+> >
+> > Proposal
+> > =E2=80=94-------
+> >
+> > Here are some ideas:
+> >
+> > 1. For video, use the driver model API to locate the video regions, or
+> > block off the entire framebuffer memory, for all devices as a whole.
+> > Use efi_add_memory_map()
+> >
+> > 2. Add memory attributes to UCLASS_RAM and use them in EFI, mapping to
+> > the EFI_MEMORY_... attributes in struct efi_mem_desc.
+> >
+> > 3. Add all EFI reservations just before booting the app, as we do with
+> > devicetree fixup. With this model, malloc() and lmb are used for all
+> > allocation. Then efi_add_memory_map() is called for each region in
+> > turn just before booting. Memory attributes are dealt with above. The
+> > type (enum efi_memory_type) can be determined simply by the data
+> > structure stored in it, as is done today. For example, SMBIOS tables
+> > can use EFI_ACPI_RECLAIM_MEMORY. Very few types are used and EFI code
+> > understands the meaning of each.
+> >
+> > 4. Avoid setting up EFI memory at the start of U-Boot. Do it only when
+> > booting. This looks to require very little effort.
+> >
+> > 5. Avoid calling efi_allocate_pages() and efi_allocate_pool() outside
+> > boot-time services. This solves the problem 6. If memory is needed by
+> > an app, allocate it with malloc() and see 3. There are only two
+> > efi_allocate_pages() (smbios and efi_runtime). There are more calls of
+> > efi_allocate_pool(), but most of these seem easy to fix up. For
+> > example, efi_init_event_log() allocates a buffer, but this can be
+> > allocated in normal malloc() space or in a bloblist.
+> >
+> > 6. Don't worry too much about whether EFI will be used for booting.
+> > The cost is likely not that great: use bootstage to measure it as is
+> > done for driver model. Try to minmise the cost of its tables,
+> > particularly for execution time, but otherwise just rely on the
+> > ability to disable EFI_LOADER.
+>=20
+> 7. Add a flag to the 'load' command:
+>=20
+> -m <type> - make an lmb allocation for the file
+>    <type> is the image type to use (kernel, ramdisk, flat_dt)
+>=20
+> any existing allocation for that type will be automatically freed
+> first. If <type> is "none" then no freeing is possible: any loaded
+> images just stack up in lmb.
+>=20
+> Add an 'lmb' (or memblock) command to allow listing and clearing allocati=
+ons.
 
-It is unclear what your suggestion means for the address field=2E
+I would really not like to change the user interface and instead simply
+handle this with flags to whatever mark/allocation function is called.
+You can always overwrite things that are brought in to memory, you
+cannot overwrite U-Boot or our internals. Optionally noting that some
+previous load to memory has been at least partially overwritten could be
+helpful, if it's not too much extra logic.
 
-If you still specify an address, what would be the benefit of such a flag?
+--=20
+Tom
 
-If -m replaces the address, how do you refer to different loaded files of =
-the same type, e=2Eg=2E two EFI binaries?
+--p+3roYuRee6gGero
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Best regards
+-----BEGIN PGP SIGNATURE-----
 
-Heinrich
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWO6QEACgkQFHw5/5Y0
+tyzQWQv+N//tuhPGY3/HWjZuaOvCl4f+1E5YYfD1IAHemMn3pdw5kSKjj57dMUSi
+M280kwN7lMX5y6Jrg8/8fU0ylABodfDavMZ6rQjVTDEF89AEfLkhKXvqLtZ+Yv9E
+2JPnOvOooSey0Iq5BKujizF9miqNCdRYd5bLqekD0dpReYTepN2wKULbzYH48VMW
+TF0peDshG20NlZUsASLHtSHPQnJqYi3MUvhRcUoOBzNVvPDTslTHlCULBqTYZCGx
+C49mrrkp9iNYb0no1F23Sp1Rrd3LipeW1OSF4FofdKANALYLQiGUwcegnGKVghQL
+j39XvNTD5nFPFu5KqjpzGa5BYNCCZhXiC6jtBwLvlCgqTbu0pHW3t85kaa8PHYBf
+SdctYlbY196MK680OqS/pq163pbhsBdso7YLg1m04C9qA/BEENB5PJ5sSWz37dgR
+riCnsWUsjvb+CZhJCG3I/JwLBK+1eJzlkVWdsWqsJLVHKzLtp8DCxkErJakAfnIZ
+VZaeqVwl
+=Lgmc
+-----END PGP SIGNATURE-----
 
-
->
->Add an 'lmb' (or memblock) command to allow listing and clearing allocati=
-ons=2E
->
->Regards,
->Simon
+--p+3roYuRee6gGero--
