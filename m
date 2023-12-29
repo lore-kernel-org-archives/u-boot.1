@@ -4,94 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7EBFC46CD4
-	for <u-boot@archiver.kernel.org>; Fri, 29 Dec 2023 11:18:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02B3BC46CD3
+	for <u-boot@archiver.kernel.org>; Fri, 29 Dec 2023 12:05:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6C8A87B25;
-	Fri, 29 Dec 2023 12:18:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id C2BC987AFE;
+	Fri, 29 Dec 2023 13:05:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="N4IlqzJB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Hx1DbbyF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFB1B87B03; Fri, 29 Dec 2023 12:18:41 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2861787A78; Fri, 29 Dec 2023 13:05:40 +0100 (CET)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA75687A78
- for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 12:18:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E67687AFE
+ for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 13:05:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
- [209.85.208.198])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 1E0073F0CB
- for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 11:18:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1703848719;
- bh=JTOVeGMGNF/a61+417vkdtfL+5T5laAELg2K8NBoX58=;
- h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
- In-Reply-To:Content-Type;
- b=N4IlqzJBrcVKQGjp3QKZ156kgEk2EoT295ZJdXGvPJl1UiAmDPnFTXcpEdvfNXWjR
- FI7FMU3dxr4i+87LDd5Qx6x4NVVaqLFKRFUoJZ+QLHaLHCWx++DCiNhjHuTqydeav/
- f8gXLTnYPh4YvW+UcR4CC84ZcV1BkyD3Ol8Z4MiemUo1zEpFbKZvbgsNW7K+P5cfCh
- C2mK82F8DpQEJy8SVYbERJE6dN0B0WgL5/BngIS2BX2YK7UA7DhCXLhAokZIIqIkqe
- pkEh9QOO5GD0rYiAXBIs6olwIMkYXpd9WPYvzmYKT77UL4Bw7cAawG6ILpcubu8ooZ
- o5R67C7akOslw==
-Received: by mail-lj1-f198.google.com with SMTP id
- 38308e7fff4ca-2ccb53bc5ceso28663351fa.3
- for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 03:18:39 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-28bae84fc2eso1218358a91.1
+ for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 04:05:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1703851535; x=1704456335; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sVFBGrzsabw9Sb++toQd7fQ2nNWxZthbYPTn6BZf4go=;
+ b=Hx1DbbyFHYbT/4SBBHG/wGgIFsFGfKhORc/M7p196OFwkva6s318UlcSwQbuI3hwbR
+ y0RbRO2nKaDV9vTboWFUXvNwnbZBycIm1BDxHfgsKI62Qn3Gnj5dYQVcbhcl6yEyqxaY
+ 6bs8xfkOjD3hUkMMkIaKv+ni3b5cNUhlqfRhxk9tZVsqbaoE16AbQ0QpL6IyXk1pHkWe
+ ewgrGzuJL/GYZ6jS1x/3OQ9+ssD8c+sXrmuyMmr0fp7IuO5Crh46+FYut7c7Vv/LvJN0
+ VMIxQHemnWDh5nl+MHYoHb7qr+vgQJrTI26ZUVK2/lqup+NmAEE7aGw3pqZ7NUSbkur0
+ d9KA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703848718; x=1704453518;
- h=content-transfer-encoding:in-reply-to:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JTOVeGMGNF/a61+417vkdtfL+5T5laAELg2K8NBoX58=;
- b=hJ/zige9KYspJ75HI9j/tQJRXo64YeRLrthJQJm+9pFTraUx89WWRtScola8/FsCJ+
- 8DyHAcZUB8MBhCIAKgyB4QxTl+j7GzOoITR91b5XJREWSrzP0Cex20CBhMPgU9ealHZK
- Qgi7hY7RC4kqhIXip12bU7LcehM6o1uYIYK11zwwaDkC0B6yI0aAcIjlHnED9GzDTGGq
- bnKiq7Y8KO0ysSRFqccD2XqhxC9uYFQco23cKz87ZUzl1xHUvseHiTShOa/BTqqRun95
- 1SrSvY1iFwSCPE32JN7krjOAfP1O+RI+IcTSfH9G7YG2UBM/Qm4gKS4OvJOSvE8pBThZ
- zDnw==
-X-Gm-Message-State: AOJu0Yy02Bvj5pYL9mRxVZNS5K2XUFZpVBwDagqC9E+RnGbj2bkrW54a
- di8OHtFVeKw1VfV/XMmjpqALAzMy0qipmGnrnpFWFJwT/CEmknxFbRZeiDsdxcphRQEHcbf4BQd
- ahkx6cU48h++5JL90wOnUS2lf+hTA+Z+bzEObgg==
-X-Received: by 2002:a2e:9f0a:0:b0:2cc:89f4:1590 with SMTP id
- u10-20020a2e9f0a000000b002cc89f41590mr4247181ljk.101.1703848718561; 
- Fri, 29 Dec 2023 03:18:38 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHWm9DjpIkQN05j8dLFWKzFcgwjjAYMUPBEgXCt/FwvAcgNNn0AwbLe+PFvMB5qcQar93IBQA==
-X-Received: by 2002:a2e:9f0a:0:b0:2cc:89f4:1590 with SMTP id
- u10-20020a2e9f0a000000b002cc89f41590mr4247171ljk.101.1703848718098; 
- Fri, 29 Dec 2023 03:18:38 -0800 (PST)
-Received: from [192.168.123.176]
- (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
- by smtp.gmail.com with ESMTPSA id
- i11-20020aa7c9cb000000b005551853c91esm4508166edt.12.2023.12.29.03.18.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 29 Dec 2023 03:18:37 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-X-Google-Original-From: Heinrich Schuchardt <heinrich.schuchardt@canoncial.com>
-Message-ID: <7a8a842e-234c-4a79-b0d9-7a9ae544c13b@canoncial.com>
-Date: Fri, 29 Dec 2023 12:18:36 +0100
+ d=1e100.net; s=20230601; t=1703851535; x=1704456335;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=sVFBGrzsabw9Sb++toQd7fQ2nNWxZthbYPTn6BZf4go=;
+ b=q4F9kyQrXjKiwEiiXPOvUtBq70KX/yHHrVF1ofFpZ/u0t+7B516b+Mc3+7/VdNlU61
+ WEth90jWHqrh/9BsZH5xg7/fRsW9nQUFHQXNNUZHGnYhf5ZQginTxt91It7NluEWGGLY
+ nsKCffb0mpydN1oIbudBze+bpnUH/TAjZMVlmUhSnoZpGWpNdHaMykenImJSB9yMZcOi
+ akRiUhXtBUAToTpxx4CURwZ1DdPHTgtVol25rVaAI+AIIerzV46V70Gl5aakl8nb72wY
+ JJWFetQr2Pwh1PzT0JULx0YtuG6zFE1GxBxvymwJPJRTFWampFLd15rhCNNhOGLuYcQ2
+ WBAw==
+X-Gm-Message-State: AOJu0Yy7mTCz8LX1T1lpLVCK7yTTvKz3o6lMCgbgd4KJVd7wAfuWKwmD
+ OwzYwvwfzeN9mdpVWKXnlb8/LhpZvgOtqet97Ik=
+X-Google-Smtp-Source: AGHT+IHzPNFxx+GGf/1NfSn7FjWZPBQwYgozKQoNm8pOMIuYVJIGmAMJ8h/dOPNTZzLieBBDVBd6r8fN1dVgnLBYRRs=
+X-Received: by 2002:a17:90a:4b0f:b0:28b:9a2d:c1c5 with SMTP id
+ g15-20020a17090a4b0f00b0028b9a2dc1c5mr17635503pjh.2.1703851535308; Fri, 29
+ Dec 2023 04:05:35 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] smbios: enable setting processor family > 0xff
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-References: <20231228073024.6508-1-heinrich.schuchardt@canonical.com>
- <20231228073024.6508-2-heinrich.schuchardt@canonical.com>
- <CAFLszTikYxynGe3o3Sg2qTUgy-oXot=9BJ9F8vxCYF3-puDC4g@mail.gmail.com>
-In-Reply-To: <CAFLszTikYxynGe3o3Sg2qTUgy-oXot=9BJ9F8vxCYF3-puDC4g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20231229111701.10696-1-othacehe@gnu.org>
+In-Reply-To: <20231229111701.10696-1-othacehe@gnu.org>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 29 Dec 2023 09:05:23 -0300
+Message-ID: <CAOMZO5AUyFzzYqk2cZV=W_+-EmY_zNaT2EyjWdLcMKodvZ4kHw@mail.gmail.com>
+Subject: Re: [PATCH v3 0/3] Add imx93-var-som support
+To: Mathieu Othacehe <othacehe@gnu.org>
+Cc: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Stefano Babic <sbabic@denx.de>, 
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ Mathieu Othacehe <m.othacehe@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,62 +89,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/28/23 14:37, Simon Glass wrote:
-> Hi Heinrich,
-> 
-> On Thu, Dec 28, 2023 at 7:30 AM Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->>
->> Many value of processor type exceed 0xff and have to be stored as u16
->> value. In the type 4 table set processor_family = 0xfe signaling that
->> field processor_family2 is used and write the actual value into the
->> processor_family2 field.
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>   lib/smbios.c | 4 ++--
->>   1 file changed, 2 insertions(+), 2 deletions(-)
->>
-> 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
->> diff --git a/lib/smbios.c b/lib/smbios.c
->> index 45480b01af..550b2471f9 100644
->> --- a/lib/smbios.c
->> +++ b/lib/smbios.c
->> @@ -467,7 +467,8 @@ static void smbios_write_type4_dm(struct smbios_type4 *t,
->>          }
->>   #endif
->>
->> -       t->processor_family = processor_family;
->> +       t->processor_family = 0xfe;
->> +       t->processor_family2 = processor_family;
-> 
-> Why not use 'family' if it fits?
+Hi Mathieu,
 
-Using family for values less then 0x100 is allowable.
-But there would be no benefit in making our code more complicated.
+On Fri, Dec 29, 2023 at 8:17=E2=80=AFAM Mathieu Othacehe <othacehe@gnu.org>=
+ wrote:
+>
+> From: Mathieu Othacehe <m.othacehe@gmail.com>
+>
+> Hello,
+>
+> This v3 adds support for binman and documents how to build and flash a
+> bootloader for the i.MX93 Variscite Symphony evaluation board.
 
-Best regards
+Nice work! Thanks for adding i.MX93 binman support.
 
-Heinrich
+From a glance, the whole series looks good. I will take a closer look soon.
 
-> 
->>          t->processor_manufacturer = smbios_add_prop(ctx, NULL, vendor);
->>          t->processor_version = smbios_add_prop(ctx, NULL, name);
->>   }
->> @@ -489,7 +490,6 @@ static int smbios_write_type4(ulong *current, int handle,
->>          t->l1_cache_handle = 0xffff;
->>          t->l2_cache_handle = 0xffff;
->>          t->l3_cache_handle = 0xffff;
->> -       t->processor_family2 = t->processor_family;
->>
->>          len = t->length + smbios_string_table_len(ctx);
->>          *current += len;
->> --
->> 2.43.0
->>
-> 
-> Regards,
-> Simon
-
+Cheers
