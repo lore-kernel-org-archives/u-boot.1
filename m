@@ -4,48 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69DADC46CD3
-	for <u-boot@archiver.kernel.org>; Fri, 29 Dec 2023 12:16:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F6A9C46CD3
+	for <u-boot@archiver.kernel.org>; Fri, 29 Dec 2023 12:16:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DE6F87AFE;
-	Fri, 29 Dec 2023 13:16:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4BA7787B49;
+	Fri, 29 Dec 2023 13:16:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="E+Zr2OD0";
+	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="InnRN77i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF01787B4F; Fri, 29 Dec 2023 12:17:17 +0100 (CET)
+ id 9E27087AFE; Fri, 29 Dec 2023 12:17:19 +0100 (CET)
 Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 363DA87AFE
- for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 12:17:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8193987B26
+ for <u-boot@lists.denx.de>; Fri, 29 Dec 2023 12:17:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
 Received: from fencepost.gnu.org ([2001:470:142:3::e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
- id 1rJArZ-0007gq-8l; Fri, 29 Dec 2023 06:17:13 -0500
+ id 1rJArb-0007h8-I6; Fri, 29 Dec 2023 06:17:15 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
- s=fencepost-gnu-org; h=MIME-Version:Date:Subject:To:From:in-reply-to:
- references; bh=OoHhU+rqLjhpibXavZM27Iw7XK36/vPUIZtwscrnGuQ=; b=E+Zr2OD06OGg14
- LU9RPLHjU/9Y3vlexmtOWMeJ1d8+re1dGSJaAA1W7womlMI8dpnpYhvHswlTEJmnweG3D9kZY/lMn
- jwA4RplBiilvDEeqflS/z8rGm8w6e87yvbUxsLC9QJDDCK3ZlvC4Z2uVMA7TnVjh6EM00AWRQf86j
- MSdS8P2XlHr3JxbBTBSPInvMQP1jF2BnZb58BN224FIWybORmXXkOBDfDIfmzf8qHr9pVjsBl5a/a
- heaMjL9VKGp/XutQ06h0xfdysAeaIog7pY8Vl8FwczzjLXsronS1jipba+rY3lPUmQXuZdM131vqk
- taf4i0EzVXMjW/viQ1eA==;
+ s=fencepost-gnu-org; h=MIME-Version:References:In-Reply-To:Date:Subject:To:
+ From; bh=7wu+RM97qxDtokFHGxolptcWpipnTGB0/8EczKtPgS0=; b=InnRN77iXijcesI+1x4C
+ xrEb30CWt3gdTC0s/elPLnHHTgObfqmJdEugtXMiI630gmVNVjU22W9DHzJS3uTjLDM8ZF2+n6JJ3
+ BIGFuDtfIxqO+UGxHNjRJ5yVHqGN4+vAbUEG/V/cWVYQv55HkG7Ay/tOc+oIyYi52FCLmpgMyQtjq
+ abGa63z/7O8yAZTwOMYd81AiVJoRNqe3h2AQZrxO9K+Q5HhYNAXEJvC93eTfUdsjgyaT8SLIboUDn
+ 70QqYdSwFM+CkPV/wKB+8Vb4iP9FCcthQOfndaQM86/JbagMQ3ITLudmwmcpYX6KpV6UnNzmyTHT7
+ n0sXYGYDV/8d+w==;
 From: Mathieu Othacehe <othacehe@gnu.org>
 To: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
  Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
  "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
  Mathieu Othacehe <m.othacehe@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v3 0/3] Add imx93-var-som support
-Date: Fri, 29 Dec 2023 12:16:58 +0100
-Message-ID: <20231229111701.10696-1-othacehe@gnu.org>
+Subject: [PATCH v3 1/3] spl: binman: Disable u_boot_any symbols for i.MX93
+ boards
+Date: Fri, 29 Dec 2023 12:16:59 +0100
+Message-ID: <20231229111701.10696-2-othacehe@gnu.org>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20231229111701.10696-1-othacehe@gnu.org>
+References: <20231229111701.10696-1-othacehe@gnu.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 29 Dec 2023 13:16:20 +0100
@@ -67,74 +70,55 @@ X-Virus-Status: Clean
 
 From: Mathieu Othacehe <m.othacehe@gmail.com>
 
-Hello,
+This is extending commit 6516c9b349b3 ("spl: binman: Disable u_boot_any
+symbols for i.MX8M boards") to i.MX93 boards.
 
-This v3 adds support for binman and documents how to build and flash a
-bootloader for the i.MX93 Variscite Symphony evaluation board.
+Signed-off-by: Mathieu Othacehe <m.othacehe@gmail.com>
+---
+ common/spl/Kconfig     | 2 +-
+ common/spl/Kconfig.tpl | 2 +-
+ common/spl/Kconfig.vpl | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-Thanks,
-
-Mathieu
-
-v2: https://lists.denx.de/pipermail/u-boot/2023-December/542001.html
-
-Mathieu Othacehe (3):
-  spl: binman: Disable u_boot_any symbols for i.MX93 boards
-  mach-imx: Add i.MX93 binman support.
-  Add imx93-var-som support
-
- arch/arm/dts/Makefile                         |    3 +-
- arch/arm/dts/imx93-u-boot.dtsi                |   88 +
- .../dts/imx93-var-som-symphony-u-boot.dtsi    |  253 +++
- arch/arm/dts/imx93-var-som-symphony.dts       |  305 ++++
- arch/arm/dts/imx93-var-som.dtsi               |  111 ++
- arch/arm/include/asm/arch-imx9/clock.h        |    1 +
- arch/arm/mach-imx/Makefile                    |   22 +-
- arch/arm/mach-imx/imx9/Kconfig                |    7 +
- board/variscite/common/eth.c                  |   59 +
- board/variscite/common/eth.h                  |   12 +
- board/variscite/common/imx9_eeprom.c          |  190 +++
- board/variscite/common/imx9_eeprom.h          |   83 +
- board/variscite/common/mmc.c                  |   47 +
- board/variscite/imx93_var_som/Kconfig         |   12 +
- board/variscite/imx93_var_som/MAINTAINERS     |    7 +
- board/variscite/imx93_var_som/Makefile        |   17 +
- board/variscite/imx93_var_som/container.cfg   |   10 +
- board/variscite/imx93_var_som/imx93_var_som.c |  126 ++
- .../variscite/imx93_var_som/imx93_var_som.env |  104 ++
- board/variscite/imx93_var_som/imximage.cfg    |   10 +
- .../variscite/imx93_var_som/lpddr4x_timing.c  | 1489 +++++++++++++++++
- board/variscite/imx93_var_som/spl.c           |  144 ++
- common/spl/Kconfig                            |    2 +-
- common/spl/Kconfig.tpl                        |    2 +-
- common/spl/Kconfig.vpl                        |    2 +-
- configs/imx93_var_som_defconfig               |  156 ++
- doc/board/variscite/imx93_var_som.rst         |   68 +
- doc/board/variscite/index.rst                 |    1 +
- include/configs/imx93_var_som.h               |   48 +
- 29 files changed, 3374 insertions(+), 5 deletions(-)
- create mode 100644 arch/arm/dts/imx93-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx93-var-som-symphony-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx93-var-som-symphony.dts
- create mode 100644 arch/arm/dts/imx93-var-som.dtsi
- create mode 100644 board/variscite/common/eth.c
- create mode 100644 board/variscite/common/eth.h
- create mode 100644 board/variscite/common/imx9_eeprom.c
- create mode 100644 board/variscite/common/imx9_eeprom.h
- create mode 100644 board/variscite/common/mmc.c
- create mode 100644 board/variscite/imx93_var_som/Kconfig
- create mode 100644 board/variscite/imx93_var_som/MAINTAINERS
- create mode 100644 board/variscite/imx93_var_som/Makefile
- create mode 100644 board/variscite/imx93_var_som/container.cfg
- create mode 100644 board/variscite/imx93_var_som/imx93_var_som.c
- create mode 100644 board/variscite/imx93_var_som/imx93_var_som.env
- create mode 100644 board/variscite/imx93_var_som/imximage.cfg
- create mode 100644 board/variscite/imx93_var_som/lpddr4x_timing.c
- create mode 100644 board/variscite/imx93_var_som/spl.c
- create mode 100644 configs/imx93_var_som_defconfig
- create mode 100644 doc/board/variscite/imx93_var_som.rst
- create mode 100644 include/configs/imx93_var_som.h
-
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index c5dd476db58..322e6fe882f 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -206,7 +206,7 @@ config SPL_BINMAN_SYMBOLS
+ config SPL_BINMAN_UBOOT_SYMBOLS
+ 	bool "Declare binman symbols for U-Boot phases in SPL"
+ 	depends on SPL_BINMAN_SYMBOLS
+-	default n if ARCH_IMX8M
++	default n if ARCH_IMX8M || ARCH_IMX9
+ 	default y
+ 	help
+ 	  This enables use of symbols in SPL which refer to U-Boot phases,
+diff --git a/common/spl/Kconfig.tpl b/common/spl/Kconfig.tpl
+index 3d6cf1e59f3..9bb57e6fbff 100644
+--- a/common/spl/Kconfig.tpl
++++ b/common/spl/Kconfig.tpl
+@@ -23,7 +23,7 @@ config TPL_BINMAN_SYMBOLS
+ config TPL_BINMAN_UBOOT_SYMBOLS
+ 	bool "Declare binman symbols for U-Boot phases in TPL"
+ 	depends on TPL_BINMAN_SYMBOLS
+-	default n if ARCH_IMX8M
++	default n if ARCH_IMX8M || ARCH_IMX9
+ 	default y
+ 	help
+ 	  This enables use of symbols in TPL which refer to U-Boot phases,
+diff --git a/common/spl/Kconfig.vpl b/common/spl/Kconfig.vpl
+index ae1a3c724f3..f1993026bba 100644
+--- a/common/spl/Kconfig.vpl
++++ b/common/spl/Kconfig.vpl
+@@ -243,7 +243,7 @@ config VPL_BINMAN_SYMBOLS
+ config VPL_BINMAN_UBOOT_SYMBOLS
+ 	bool "Declare binman symbols for U-Boot phases in VPL"
+ 	depends on VPL_BINMAN_SYMBOLS
+-	default n if ARCH_IMX8M
++	default n if ARCH_IMX8M || ARCH_IMX9
+ 	default y
+ 	help
+ 	  This enables use of symbols in VPL which refer to U-Boot phases,
 -- 
 2.25.1
 
