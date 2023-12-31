@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1409FC3DA6E
-	for <u-boot@archiver.kernel.org>; Sun, 31 Dec 2023 15:44:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A35FEC3DA6E
+	for <u-boot@archiver.kernel.org>; Sun, 31 Dec 2023 15:57:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2673587885;
-	Sun, 31 Dec 2023 16:44:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E074F875A0;
+	Sun, 31 Dec 2023 16:57:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="gB+Zx6Nz";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Dpz99qeh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53DF1878BA; Sun, 31 Dec 2023 16:44:39 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id 53D2A877DA; Sun, 31 Dec 2023 16:57:02 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A53687883
- for <u-boot@lists.denx.de>; Sun, 31 Dec 2023 16:44:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0162A870FF
+ for <u-boot@lists.denx.de>; Sun, 31 Dec 2023 16:56:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1704037473; x=1704642273; i=xypron.glpk@gmx.de;
- bh=GiXXgWSItvApxdp2A/zy8V6+7F6TpxhsmyqM7K7yIgU=;
+ t=1704038202; x=1704643002; i=xypron.glpk@gmx.de;
+ bh=enUIX3+9bxab3kPZAzHUY13BGuI8ToZNosluoiClsBQ=;
  h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
  References;
- b=gB+Zx6Nz+0ybUcX/5Qoa9VTM3DHv9aaizfFpkgp5AyVEm+jpHaMjCKqGn5mKVV/k
- +v3mZPxtwAr9uJLDjHE0eafYZ0i6mWxe6tXMwSHhos+vAlNCBNnU2KHDRUv+OqkfF
- n6Xi1qbST5XLlS+3+rd6Ke6umdPILglJIBH0ueoGgmN/NC7xH4ZGmfYpelHTpPI7Y
- B1HzVJtl3B5DtE5gD48Ftq8YYTDMZJOOrHXEVBcsXHR0yIu4l7L9l9cYhUh+WivNn
- N6tB4A1jYNFqiebnGqMEB+pk7P+641+iVPpTaEkpFKI2bli8+LCDhctTY+MKJfJ/3
- FYsmuv1j/m5OJX55JA==
+ b=Dpz99qeh1jLofJduYTKh+4tKRFii1muwuc3wmTvkF4PeUs+9EFgbFPN9RtBTBJtE
+ g2KkrHUN00ritZNUoW7CVAFyM5MDoyU9b2298u/F6bz+iMh9x+jBLcAe7T22H/nDv
+ uwblkLrbryKpT4BiyPUVP4ZIiyUe6lJlMftmSp1bDcmcv6ta3V19rCTjP7ELF0DQ4
+ HfkmlaXAZKOeznfGfLNfKf6HZy2xxrV8cOp7yf71BaV5hQZO12Tkmp7w58cd455Wt
+ rhoS7H4oKR6DgCxux4LupR+Y+rP99+UW2N3LJXq5mVGe/TcWA5Z125g2fsKdXyftk
+ gLSkIgtVQlAOfGhxhg==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MJVDW-1rdpE10MrQ-00JoTR; Sun, 31
- Dec 2023 16:44:33 +0100
-Date: Sun, 31 Dec 2023 16:44:32 +0100
+Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M1HZi-1rMi000Wpm-002l93; Sun, 31
+ Dec 2023 16:56:42 +0100
+Date: Sun, 31 Dec 2023 16:56:39 +0100
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v5_10/12=5D_acpi=3A_Rename_tes?=
- =?US-ASCII?Q?t_dm=5Ftest=5Fsetup=5Fctx=5Fand=5Fbase=5Ftables=28=29?=
+CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Bin Meng <bmeng.cn@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Igor Prusov <ivprusov@salutedevices.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Troy Kisky <troykiskyboundary@gmail.com>
+Subject: Re: [PATCH v5 00/12] smbios: Deal with tables beyond 4GB
 User-Agent: K-9 Mail for Android
-In-Reply-To: <20231231152555.464874-11-sjg@chromium.org>
+In-Reply-To: <20231231152555.464874-1-sjg@chromium.org>
 References: <20231231152555.464874-1-sjg@chromium.org>
- <20231231152555.464874-11-sjg@chromium.org>
-Message-ID: <1E62ECDE-F9C4-4035-A51B-53A083D61C62@gmx.de>
+Message-ID: <4683F3D9-7D61-4D26-B1F2-3DB07D009AE1@gmx.de>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:A9z4mtL/X1GQqNiqEAjrOwrhAAJJh+8RPctj4W3j1k/TYdFbiHw
- rGamgqNzSdnGsu6d+Y25kZgcwEZyCKcub6pH482x9TLlrsm+JFT7OvSCV26lrIc3dphE0AU
- ztyB8ltjhvPkmsMYcjFVSqhnHCojfKGcnXSWksd+vyqxvgVH8UlwFmam/MrC6NA9EDnr0Hq
- Oa89Mn+k0kSyUi79N1ywg==
-UI-OutboundReport: notjunk:1;M01:P0:SM0kNpMkhqI=;L7eHCxQ0J1fddA9rZgpCQvKFv5w
- kYNx8VLJuGIPlTJ/BETdBkwo5RVLeZniEXfiP7+eef7Rrszrn57PahCcjgBlam8j0GE6WMuSV
- eMNmJNKekfmIseEMXBcH2xfKDWbhFUyA6pjhTKuIe2M1z7B2RWMO7TemfI4x0EAHNSwnoi0G8
- 827fRhQWQ8zCF/BrDrCD/dzLeAVhysjINqOdRrHiGOSniLIpzvJ8n6WRqiFRlBKjHpxoGG5Wa
- kKnVyUfR9TwLkoRnhysfCBVIfvnysOFnW2oZcP8CfPXfUEZDSkmSdcSk4zQPlYk6dHcnxTUFr
- yMbQCmRCQvtfcrpq02+m9BKnyC4cjkKL8B1EYbpytHCr8/ZG526qHaHZOgEz92VSKsynvwWao
- 28BdBhtOZO/WxhO/w6A4oOf5eKWVQHlvKcdxhseVbmzfeE6dHlm+DG9SaSZ5pIrdTgzfJESki
- LNA7dMpaFHZX9Fl0cO4PHi1LFFBn9QpBTVr8RqcOCUbv40jHVX1ASvW6bC876KoHwQMcCSnj+
- ii1m0m9/ZXWqG01QDJbegoW1p5RmjY/sB1+f6GozAWceS1xBn8ypjpS4Tkym6/eKAesMp4vuJ
- xEgvVEuq3iepwMnJvRfOUNdFljDtpjDooSAta5Mht3XPm464qDER9PYQu5yBYNlKmkuEn2bvg
- MIs8sRCLdlVmdCvoJn/7gSnZlw65mvCXZpcepOqxug6U+pV2YYNu2QQafAkAstO9Bw9VmTVGt
- lU8K0pTsjb8FhjEXZjbG7893wjIcdF/VR2as35y4dcSNrN1wW5u9hC5IFhm6myU0NRS4vtFn2
- 52UVIK5wNNFpvgeE3Uk2gGqD+33uSCiFTFxObA+DGR3Sj7i+mxCqlT9jgK8L7aDWMs8bWI0GH
- NzybuYyE8CHgBY6ong1gSwnJF+MQwJITAmr71qJaF/4vPRgv6CTtfWUGKQnAXXhsYNkzIPGxE
- AaXA+bhKxppJ1b+YZ0KWBZ6XPOI=
+X-Provags-ID: V03:K1:1dWrCdHa+yBxobScdtEzv2DXLH9lwN1XoLU3drzCM+9ZGzf1C6w
+ HEDdzReuDgk9ymbpEzmMzXBLR+g9GWBTJFh35LaqXxW2yUnZuf0wDj0kLEgdn0QvXlcadje
+ uY6mi0g4g/hZOecbx6vuXbVIamYZQHGxzkD0bWYD/yJVDn9q5/1XENewigqu4EP690Exrnv
+ R3NzWDzOirOnvcu9+VQ+g==
+UI-OutboundReport: notjunk:1;M01:P0:4/E1YMYR0tQ=;B+XdnZL/J/FaKIJ7V+RVgv4QRBq
+ Oaz+myRLt7s++cp0UW0YIvwld+oxH+BeAMpTxHwZAXYLmK38UETSHe8FDxusHQRzoV3iO8vZV
+ xInQHvCFi6zFrMEZySFoh2jIJJ/5SwKsYEbrLEE7kQ4l1zhy09BSVih3ES4VdKb98OTd1Xbx3
+ LSjqWu5T92Zz+Rh93pSGdVm5qLrVpc02RkpOPtC06DHT8l6WzcVhzfZP/pIHFXUSWr3Vi9TFe
+ Ziqa9YA3SXG1JVxhjDLjN6JU13EnBBpfBBpaO9UTxpfk+O9FUzZCss7tkHoCcAWQ6w0ezX374
+ ltJhHiROckE9QiSTmB947racJNia2YbZ5mbMy9joM1tLQQwjvRnaSdN/TKfO0K07kC3LQWd1v
+ pt4WLfDkyI/wTdQOg8Ix70DfeiaXF7kv/fMo7xql/+I/SxjhVsoH5WYcTUZqlfhN74OL9CFi+
+ y6/pMZl0QGARbAEW9XzWdOZ11fJ5FMS+VCdISemkE24PleyPlJX5Mx55SkkzfrvNMAO2AeT17
+ mo8CMNeyLnthE5aMBA7rsaOcHgKtspYiJCbpNk+bxp4uGltFuiD8drroSNyiCsdSMZV902GT/
+ KIGeZTJDyBFFdjEKSUbvL97bC42pgnQfA+N5aGfaXLXxJZjbwbdfZxyrP1Y3ggP3aLkWGaMJu
+ x4eWSAzvh04wsJHKeE40xbKL5ByZTRbyAoclucEDuubU7z+HMgz+bHtkdtDL+8lqiVet9hhew
+ pmI8j5E3PSEjYMtN2Uy25xBA15Y6Spqp6qIjdZ7aeDYGQ9aF3+loFDKtcVSciuNhr8o72m9M2
+ 2MIyqTIkw5cLSdNAqqyASsHJBsEIahxaKdhy53/tNMiQlJjiYvSCdhKYjA/dhPvYa+SGqhpgf
+ Yj/8jZo64qZXCCD+j6FWQuR36cAeU7BSNNCiaQorVL8+VbO9ufZBdAi0DVmlVY7NfPZx7TL3H
+ 1GQwoQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,46 +97,80 @@ X-Virus-Status: Clean
 
 
 
-Am 31=2E Dezember 2023 16:25:53 MEZ schrieb Simon Glass <sjg@chromium=2Eor=
+Am 31=2E Dezember 2023 16:25:43 MEZ schrieb Simon Glass <sjg@chromium=2Eor=
 g>:
->Use the word 'acpi' in this test so that it runs along with all the
->other ACPI tests=2E
+>When the malloc() region extends beyond 4GB on ARM we may end up with
+>an SMBIOS table in that region=2E
 >
->Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
+>Add support for writing an SMBIOS3 table, which supports a 64-bit
+>address=2E
+>
+>Note that this problem does not happen on x86 since it requires the
+>tables to be placed just below 1MB in memory, unless
+>CONFIG_BLOBLIST_TABLES is enabled=2E
+
+The ACPI specification only requires that a low memory RSDP exists on non-=
+UEFI x86 systems=2E
+
+Nothing stops us from copying the RSDP only to low memory when not booting=
+ via EFI=2E Maybe that way we could have more common code=2E But this is be=
+yond the scope of this series=2E
+
+Best regards
+
+Heinrich
 
 
-Reviewed-by: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
-
->---
+>
+>v5 drops support for SMBIOS2 tables as well=2E It also adds some changes
+>to memory mapping which should allow an EFI app (launched from sandbox)
+>to read the ACPI tables correctly=2E
 >
 >Changes in v5:
+>- Update comment to mention x86 alignment
+>- Add new patch to drop support for SMBIOS2 tables
+>- Add new patch to drop support for SMBIOS2 tables with EFI
 >- Add new patch to rename test dm_test_setup_ctx_and_base_tables()
+>- Add new patch to write pointers to tables instead of addresses
+>- Add new patch to correct smbios-table installation
 >
-> test/dm/acpi=2Ec | 4 ++--
-> 1 file changed, 2 insertions(+), 2 deletions(-)
+>Changes in v4:
+>- Bring in this patch from Heinrich's series
+>- Check the start of the table rather than the end
 >
->diff --git a/test/dm/acpi=2Ec b/test/dm/acpi=2Ec
->index fb071902b45=2E=2E1211e2f0e7f 100644
->--- a/test/dm/acpi=2Ec
->+++ b/test/dm/acpi=2Ec
->@@ -330,7 +330,7 @@ static int dm_test_acpi_basic(struct unit_test_state =
-*uts)
-> DM_TEST(dm_test_acpi_basic, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
->=20
-> /* Test setup_ctx_and_base_tables */
->-static int dm_test_setup_ctx_and_base_tables(struct unit_test_state *uts=
-)
->+static int dm_test_acpi_ctx_and_base_tables(struct unit_test_state *uts)
-> {
-> 	struct acpi_rsdp *rsdp;
-> 	struct acpi_rsdt *rsdt;
->@@ -376,7 +376,7 @@ static int dm_test_setup_ctx_and_base_tables(struct u=
-nit_test_state *uts)
->=20
-> 	return 0;
-> }
->-DM_TEST(dm_test_setup_ctx_and_base_tables,
->+DM_TEST(dm_test_acpi_ctx_and_base_tables,
-> 	UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
->=20
-> /* Test 'acpi list' command */
+>Changes in v2:
+>- Check the end of the table rather than the start=2E
+>- Add a new patch to correct gd_smbios_start()
+>- Add a note about why unmap_system() is called
+>
+>Heinrich Schuchardt (1):
+>  smbios: SMBIOS 3=2E0 (64-bit) Entry Point structure
+>
+>Simon Glass (11):
+>  smbios: Refactor 32-bit code into an else statement
+>  smbios: Move the rest of the SMBIOS2 code
+>  smbios: Use SMBIOS 3=2E0 to support an address above 4GB
+>  smbios: Correct gd_smbios_start()
+>  efi: Use the correct GUID for the SMBIOS table
+>  smbios: Require the caller to align the SMBIOS table
+>  smbios: Drop support for SMBIOS2 tables
+>  efi: smbios: Drop support for SMBIOS2 tables
+>  acpi: Rename test dm_test_setup_ctx_and_base_tables()
+>  acpi: Write pointers to tables instead of addresses
+>  efi: Correct smbios-table installation
+>
+> arch/sandbox/include/asm/io=2Eh     | 16 +++++++++
+> arch/x86/lib/acpi_table=2Ec         |  6 ++--
+> cmd/acpi=2Ec                        | 12 +++----
+> include/asm-generic/global_data=2Eh |  2 +-
+> include/efi_api=2Eh                 |  4 +++
+> include/mapmem=2Eh                  | 18 ++++++++++
+> include/smbios=2Eh                  | 41 ++++++++++++++++++++---
+> lib/acpi/acpi=2Ec                   | 12 +++----
+> lib/acpi/acpi_table=2Ec             |  4 +--
+> lib/acpi/base=2Ec                   |  4 +--
+> lib/efi_loader/efi_smbios=2Ec       | 28 +++++++++-------
+> lib/smbios=2Ec                      | 55 ++++++++++---------------------
+> test/dm/acpi=2Ec                    | 14 ++++----
+> 13 files changed, 134 insertions(+), 82 deletions(-)
+>
