@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 592FDC3DA6E
-	for <u-boot@archiver.kernel.org>; Sun, 31 Dec 2023 14:29:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57FB6C3DA6E
+	for <u-boot@archiver.kernel.org>; Sun, 31 Dec 2023 14:29:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CAD9187859;
-	Sun, 31 Dec 2023 15:29:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D420487613;
+	Sun, 31 Dec 2023 15:29:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OqjlsR5d";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="trV8jeFx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74A5F8785E; Sun, 31 Dec 2023 15:29:07 +0100 (CET)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id 0D50987613; Sun, 31 Dec 2023 15:29:31 +0100 (CET)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69954875A0
- for <u-boot@lists.denx.de>; Sun, 31 Dec 2023 15:29:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 34E47875A0
+ for <u-boot@lists.denx.de>; Sun, 31 Dec 2023 15:29:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-67ff310622eso43916576d6.2
- for <u-boot@lists.denx.de>; Sun, 31 Dec 2023 06:29:04 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-67f83812a32so45040296d6.3
+ for <u-boot@lists.denx.de>; Sun, 31 Dec 2023 06:29:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704032943; x=1704637743; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sv7DZty0SDcsSVyWLvPzg+7U+e0WwCsE/Ya66yJjvjE=;
- b=OqjlsR5dn+hb8n05EMz1GQzD9VB0Bsl2FPtq+Yn9qUJJupyd2SgLxInNGJcxZ0Pk8G
- tul2WzW6J1oDE4FrEy3PgUZmhJRZ3CqormqGgVJk2DUkcW7IwmDSebhhG8qLdQx3Onld
- d5ZKr9CZRb/GEp6UfvM6+h+z1ljzk9ybiLGuI=
+ d=konsulko.com; s=google; t=1704032965; x=1704637765; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=RkyvzXjmYtpzNYGCWdHMYcRLVd5pMUyUZDEsD9y0O6w=;
+ b=trV8jeFxbYCBFa6rUqEAOqIC78dUZ0QWITjYb0St/T6d9gzT7Rm37MYCfEpeCTEVDW
+ dk6/tvAkxZHq8QCcrnmMAGNb6+RFiLWPsMcSW1w1EFMI4PINGENHCnA6xY5+WlU2ibvS
+ LZQwmr2BbH7yu4CtvPnGkNRS81z0BraJwkQ1M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704032943; x=1704637743;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sv7DZty0SDcsSVyWLvPzg+7U+e0WwCsE/Ya66yJjvjE=;
- b=llyEE8kndil9m3JukeimStaz/pkcupkYosSaN/9UAGNoFPsJ5Jl3lLf0IQ0n7RHm4M
- dXE2gldvhBuq4N1oKJU8bS8sMhQhqQK6T4BtC6F6vlXzNcRbPLl8Tn5KUZOcSyLyES7B
- WGGP/t7nIVaIoG7PvoEvYuQ2cQoUNlTa5XZnxu3ktSDfFolat+pZyDXGs4/fjiVLEnP/
- YgVzVN5HVt4ucX7NOIw9t93oA49vUJEA/5mD7b4CZoHGG1B1zpox0stRVe/WJNF1/VUs
- 6gzIcbk7oqNq7ytkH0k58H5houy5yvdNRWMM/8nRbzfbajFPUH417lG/P0dnA4ARVJes
- +8ZQ==
-X-Gm-Message-State: AOJu0YysZtnT5YzLZSZt792fMYXi9c19yAisridyVlOvP4qQAsJd+2iu
- bSY/XyJUFc07jj13HvGHBE4L//K/WkUxk8Gw+QiQNhCOs/V1
-X-Google-Smtp-Source: AGHT+IHrnK2Phqwe62iauL+8GEjvMh2pHWDTJj7EfQKDrzJaED8YWpSlFw3npsl/saSNqDVg1+NNhRK97grvk0BhT1g=
-X-Received: by 2002:ad4:5946:0:b0:680:b0f1:a952 with SMTP id
- eo6-20020ad45946000000b00680b0f1a952mr723804qvb.85.1704032943144; Sun, 31 Dec
- 2023 06:29:03 -0800 (PST)
+ d=1e100.net; s=20230601; t=1704032965; x=1704637765;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RkyvzXjmYtpzNYGCWdHMYcRLVd5pMUyUZDEsD9y0O6w=;
+ b=QNvNcr/mzz1cXBcmM3Vh8PFCOVKhEZ/OXAs+MkihULaFRfUEN42YAQ0E06mM/XNKPi
+ klrtn9/DvEvjRnWcla/KWpR+YABEkDHf8oBiWqy0FVIq/rUbFmS/x6E/dEiDAlDtrVMg
+ z8v3XeOVoDevFISbHymrBHwqbpAeh9VpkPM0xu6R3hGrl/vAdAgutjYJU700eHDHtwqc
+ x732nAYQXDFY2Fs8DWETYf4RAMMeMmFupuvapFGObF/puBhSiSCq0942/gKGLazrZUTA
+ Pie2Bj8msZtYyupCfOTzzBQyAjjVbfN6n5/Rw6QagwYfzkeld33fArABj4hiH9llMWey
+ HJ0Q==
+X-Gm-Message-State: AOJu0YzSK1ro09vcM/5n7FRZ5w60ewPCu9GZDH929n1PdEVi/B/tmqs/
+ ScX5SOcbMkhMF1QoIolhXGdrcJ9Ra9g37cRlmlPegkL3SF4=
+X-Google-Smtp-Source: AGHT+IGyV/OFLhkkbNeXX8ZNY3JQlSCuLb1HLaCh1zGTU3mmDQju9L3STu2Fd4YLQjFYe4laNqZDUA==
+X-Received: by 2002:a05:6214:248d:b0:67e:b7ce:9668 with SMTP id
+ gi13-20020a056214248d00b0067eb7ce9668mr17803220qvb.23.1704032964979; 
+ Sun, 31 Dec 2023 06:29:24 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ bd18-20020ad45692000000b0067eff6713a8sm8713638qvb.87.2023.12.31.06.29.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 31 Dec 2023 06:29:24 -0800 (PST)
+Date: Sun, 31 Dec 2023 09:29:22 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Raymond Mao <raymond.mao@linaro.org>, Marek Vasut <marex@denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Baruch Siach <baruch@tkos.co.il>, Bin Meng <bmeng.cn@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerry Van Baren <vanbaren@cideas.com>, Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>,
+ Sean Anderson <seanga2@gmail.com>, Stefan Roese <sr@denx.de>
+Subject: Re: [PATCH v6] fdt: Allow the devicetree to come from a bloblist
+Message-ID: <20231231142922.GB2652760@bill-the-cat>
+References: <20231228194725.2482268-1-sjg@chromium.org>
+ <20231228212429.GR2652760@bill-the-cat>
+ <CAFLszTif8GwJYdKF5Mq=gBB-ZW4wjJ7B9cjHRJdNi=QVAxMo=w@mail.gmail.com>
 MIME-Version: 1.0
-References: <20231228115804.3626579-1-sumit.garg@linaro.org>
- <20231228115804.3626579-5-sumit.garg@linaro.org>
- <CAFLszThfxe_n02auF+vZ1u7FynKkrWEYFU3SdkRTLgBVuiv+Hw@mail.gmail.com>
- <20231228140313.GB2652760@bill-the-cat>
- <CAFLszTiPFyRQZtrKhETjMzn6JukFJaBYMugdL-RPO3LJB9XUMA@mail.gmail.com>
- <20231228155428.GI2652760@bill-the-cat>
- <CAFLszTjqcJouv7Dyasjfx4FiNy378fFA+A-DP292yvPk8xOzjw@mail.gmail.com>
- <CAFA6WYME_0-s4aBbaKOS3Q+q9+5553qSWcL9pDMvC9VaAfAz0w@mail.gmail.com>
-In-Reply-To: <CAFA6WYME_0-s4aBbaKOS3Q+q9+5553qSWcL9pDMvC9VaAfAz0w@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 31 Dec 2023 07:28:52 -0700
-Message-ID: <CAFLszTj0ptH7K2Y4Fc1FR1_OmK5OzAaAReR1KT5R8OZvbgrP-Q@mail.gmail.com>
-Subject: Re: [PATCH v3 4/8] dts: Add alternative location for upstream DTB
- builds
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, robh+dt@kernel.org, 
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
- rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="DlR1KQtjqFIAHrAV"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTif8GwJYdKF5Mq=gBB-ZW4wjJ7B9cjHRJdNi=QVAxMo=w@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,337 +100,189 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sumit,
 
-On Fri, Dec 29, 2023 at 8:30=E2=80=AFAM Sumit Garg <sumit.garg@linaro.org> =
-wrote:
->
-> On Fri, 29 Dec 2023 at 01:18, Simon Glass <sjg@chromium.org> wrote:
+--DlR1KQtjqFIAHrAV
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sun, Dec 31, 2023 at 05:47:30AM -0700, Simon Glass wrote:
+> Hi,
+>=20
+> On Thu, Dec 28, 2023 at 2:24=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
 > >
-> > Hi Tom,
+> > On Thu, Dec 28, 2023 at 07:47:25PM +0000, Simon Glass wrote:
 > >
-> > On Thu, Dec 28, 2023 at 3:54=E2=80=AFPM Tom Rini <trini@konsulko.com> w=
-rote:
+> > > Standard passage provides for a bloblist to be passed from one firmwa=
+re
+> > > phase to the next. That can be used to pass the devicetree along as w=
+ell.
+> > > Add an option to support this.
 > > >
-> > > On Thu, Dec 28, 2023 at 03:09:12PM +0000, Simon Glass wrote:
-> > > > Hi Tom, Sumit,
-> > > >
-> > > > On Thu, Dec 28, 2023 at 2:03=E2=80=AFPM Tom Rini <trini@konsulko.co=
-m> wrote:
-> > > > >
-> > > > > On Thu, Dec 28, 2023 at 01:37:26PM +0000, Simon Glass wrote:
-> > > > > > Hi Sumit,
-> > > > > >
-> > > > > > On Thu, Dec 28, 2023 at 11:58=E2=80=AFAM Sumit Garg <sumit.garg=
-@linaro.org> wrote:
-> > > > > > >
-> > > > > > > Allow platform owners to mirror devicetree files from devitre=
-e-rebasing
-> > > > > > > directory into dts/arch/$(ARCH) (special case for dts/arch/ar=
-m64). Then
-> > > > > > > build then along with any *-u-boot.dtsi file present in arch/=
-$(ARCH)/dts
-> > > > > > > directory. Also add a new Makefile for arm64.
-> > > > > > >
-> > > > > > > This will help easy migration for platforms which currently a=
-re compliant
-> > > > > > > with upstream Linux kernel devicetree files.
-> > > > > > >
-> > > > > > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > > > > > > ---
-> > > > > > >
-> > > > > > > Changes in v3:
-> > > > > > > --------------
-> > > > > > > - Minor commit message update
-> > > > > > >
-> > > > > > > Changes in v2:
-> > > > > > > --------------
-> > > > > > > - s/DEVICE_TREE_LOC/dt_dir/ and s/U-boot/U-Boot/
-> > > > > > >
-> > > > > > >  dts/Kconfig             | 11 +++++++++++
-> > > > > > >  dts/Makefile            | 17 ++++++++++++++---
-> > > > > > >  dts/arch/arm64/Makefile | 14 ++++++++++++++
-> > > > > > >  3 files changed, 39 insertions(+), 3 deletions(-)
-> > > > > > >  create mode 100644 dts/arch/arm64/Makefile
-> > > > > > >
-> > > > > > > diff --git a/dts/Kconfig b/dts/Kconfig
-> > > > > > > index 00c0aeff893..e58c1c6f2ab 100644
-> > > > > > > --- a/dts/Kconfig
-> > > > > > > +++ b/dts/Kconfig
-> > > > > > > @@ -85,6 +85,17 @@ config OF_LIVE
-> > > > > > >           enables a live tree which is available after reloca=
-tion,
-> > > > > > >           and can be adjusted as needed.
-> > > > > > >
-> > > > > > > +config OF_UPSTREAM
-> > > > > > > +       bool "Enable use of devicetree imported from Linux ke=
-rnel release"
-> > > > > > > +       help
-> > > > > > > +         Traditionally, U-Boot platforms used to have their =
-custom devicetree
-> > > > > > > +         files or copy devicetree files from Linux kernel wh=
-ich are hard to
-> > > > > > > +         maintain and can usually get out-of-sync from Linux=
- kernel. This
-> > > > > > > +         option enables platforms to migrate to devicetree-r=
-ebasing repo where
-> > > > > > > +         a regular sync will be maintained every major Linux=
- kernel release
-> > > > > > > +         cycle. However, platforms can still have some custo=
-m u-boot specific
-> > > > > > > +         bits maintained as part of *-u-boot.dtsi files.
-> > > > > >
-> > > > > > My only other suggestion here is to mention that this should be=
- set in
-> > > > > > Kconfig, for the SoC as a whole. So I believe that means that i=
-t
-> > > > > > should be hidden, with no string for the 'bool':
-> > > > > >
-> > > > > >       bool  # Enable use of devicetree imported from Linux kern=
-el release
-> > > > >
-> > > > > I think we can just keep prompting for it now, to make the transi=
-tion
-> > > > > easier, before this option just goes away in time, hopefully.
-> > > > >
-> > > > > > Also, this doesn't seem to work for me. Before this series I ge=
-t these
-> > > > > > files when building firefly-rk3399:
-> > > > > >
-> > > > > > rk3399-eaidk-610.dtb            rk3399-khadas-edge-v.dtb
-> > > > > > rk3399-orangepi.dtb        rk3399-rock-pi-4a.dtb
-> > > > > > rk3399-evb.dtb                  rk3399-leez-p710.dtb
-> > > > > > rk3399-pinebook-pro.dtb    rk3399-rock-pi-4c.dtb
-> > > > > > rk3399-ficus.dtb                rk3399-nanopc-t4.dtb
-> > > > > > rk3399-pinephone-pro.dtb   rk3399-rockpro64.dtb
-> > > > > > rk3399-firefly.dtb              rk3399-nanopi-m4-2gb.dtb
-> > > > > > rk3399pro-rock-pi-n10.dtb  rk3399-roc-pc.dtb
-> > > > > > rk3399-gru-bob.dtb              rk3399-nanopi-m4b.dtb
-> > > > > > rk3399-puma-haikou.dtb     rk3399-roc-pc-mezzanine.dtb
-> > > > > > rk3399-gru-kevin.dtb            rk3399-nanopi-m4.dtb
-> > > > > > rk3399-rock-4c-plus.dtb
-> > > > > > rk3399-khadas-edge-captain.dtb  rk3399-nanopi-neo4.dtb    rk339=
-9-rock-4se.dtb
-> > > > > > rk3399-khadas-edge.dtb          rk3399-nanopi-r4s.dtb     rk339=
-9-rock960.dtb
-> > > > > >
-> > > > > > Afterwards I get this:
-> > > > > >
-> > > > > > make[3]: *** No rule to make target
-> > > > > > 'dts/arch/arm64/rk3399-firefly.dtb', needed by 'dtbs'.  Stop.
-> > > > > >
-> > > > > > So I set this manually for that one board:
-> > > > > >
-> > > > > > CONFIG_DEFAULT_DEVICE_TREE=3D"rockchip/rk3399-firefly"
-> > > > > >
-> > > > > > and get:
-> > > > > >
-> > > > > > make[3]: *** No rule to make target
-> > > > > > 'dts/arch/arm64/rockchip/rk3399-firefly.dtb', needed by 'dtbs'.=
-  Stop.
-> > > > > >
-> > > > > > I am not sure how to fix this, nor how this can be made to buil=
-d all
-> > > > > > the DTs for rk3399, as it does today.
-> > > > >
-> > > > > Looking at the patch for amlogic boards, you need to make the lin=
-k to
-> > > > > devicetree-rebasing inside dts/...
-> > > >
-> > > > OK, let me give up on rk3399 for now...that doesn't seem to work ev=
-en
-> > > > with the link.
-> > > >
-> > > > Using odroid-c2 with -next I see:
-> > > >
-> > > > $ ls /tmp/b/odroid-c2/arch/arm/dts/
-> > > > meson-a1-ad401.dtb                 meson-g12b-odroid-n2l.dtb
-> > > >     meson-gxl-s905x-libretech-cc.dtb
-> > > > meson-axg-jethome-jethub-j100.dtb  meson-g12b-odroid-n2-plus.dtb
-> > > >     meson-gxl-s905x-libretech-cc-v2.dtb
-> > > > meson-axg-s400.dtb                 meson-g12b-radxa-zero2.dtb
-> > > >     meson-gxl-s905x-p212.dtb
-> > > > meson-g12a-radxa-zero.dtb          meson-gxbb-kii-pro.dtb
-> > > >     meson-gxm-gt1-ultimate.dtb
-> > > > meson-g12a-sei510.dtb              meson-gxbb-nanopi-k2.dtb
-> > > >     meson-gxm-khadas-vim2.dtb
-> > > > meson-g12a-u200.dtb                meson-gxbb-odroidc2.dtb
-> > > >     meson-gxm-s912-libretech-pc.dtb
-> > > > meson-g12b-a311d-bananapi-m2s.dtb  meson-gxbb-p200.dtb
-> > > >     meson-gxm-wetek-core2.dtb
-> > > > meson-g12b-a311d-khadas-vim3.dtb   meson-gxbb-p201.dtb
-> > > >     meson-sm1-bananapi-m2-pro.dtb
-> > > > meson-g12b-bananapi-cm4-cm4io.dtb  meson-gxbb-wetek-hub.dtb
-> > > >     meson-sm1-bananapi-m5.dtb
-> > > > meson-g12b-gsking-x.dtb            meson-gxbb-wetek-play2.dtb
-> > > >     meson-sm1-khadas-vim3l.dtb
-> > > > meson-g12b-gtking.dtb              meson-gxl-s805x-libretech-ac.dtb
-> > > >     meson-sm1-odroid-c4.dtb
-> > > > meson-g12b-gtking-pro.dtb          meson-gxl-s905d-libretech-pc.dtb
-> > > >     meson-sm1-odroid-hc4.dtb
-> > > > meson-g12b-odroid-go-ultra.dtb
-> > > > meson-gxl-s905w-jethome-jethub-j80.dtb  meson-sm1-sei610.dtb
-> > > > meson-g12b-odroid-n2.dtb           meson-gxl-s905x-khadas-vim.dtb
-> > > > $
-> > > > With this series (sort of, since I am really not sure how to
-> > > > cherry-pick the commits from the PR) I see nothing:
-> > > >
-> > > > $ ls /tmp/b/odroid-c2/arch/arm/dts/
-> > > > $
-> > > >
-> > > > This shows some of the files:
-> > > >
-> > > > $ find /tmp/b/odroid-c2/ -name "*.dtb"
-> > > > /tmp/b/odroid-c2/dts/dt.dtb
-> > > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-odroidc2.dtb
-> > > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-nanopi-k2.dtb
-> > > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-wetek-play2.dtb
-> > > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-kii-pro.dtb
-> > > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-p200.dtb
-> > > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-p201.dtb
-> > > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxbb-wetek-hub.dtb
-> > > > /tmp/b/odroid-c2/u-boot.dtb
-> > > >
-> > > > but where are the rest? Also, is it possible to put the output .dtb
-> > > > files into the same directory? Otherwise we may have some pain with
-> > > > binman.
+> > > Tests for this will be added as part of the Universal Payload work.
 > > >
-> > > What do you mean by same directory? But maybe also, what's an example=
- of
-> > > a board you think might end up having problems? Converting that in a
-> > > follow-up series is likely a good idea, to highlight and address thes=
-e
-> > > issues sooner rather than later.#
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > [snip]
+> > > diff --git a/dts/Kconfig b/dts/Kconfig
+> > > index 00c0aeff893..ae451b9caf7 100644
+> > > --- a/dts/Kconfig
+> > > +++ b/dts/Kconfig
+> > > @@ -105,6 +105,19 @@ config OF_EMBED
+> > >
+> > >  endchoice
+> > >
+> > > +config OF_BLOBLIST
+> > > +     bool "Provided by a bloblist at runtime"
+> > > +     depends on BLOBLIST && OF_SEPARATE
 > >
-> > Today the .dtb files go into arch/arm/dts - so it would be easier if
-> > this series could do the same.
->
-> The kbuild infrastructure keeps the dtb alongside dts files which is
-> the preferred way too as otherwise it would be complicated to locate
-> DT files for the users. Also, we have to move towards Linux DT
-> directory structure and thereby the tools like binman have to be
-> adjusted. I will do that when I get to migrating SoCs supporting
-> binman.
-
-OK, I want to stop here and rethink this. This is the path taken so
-far, I believe:
-
-1. We want to use devicetree files taken from Linux and
-devicetree-rebasing provides these
-2. We want to use 'git subtree' to avoid needing a script to do the
-sync / create a commit
-3. But this leaves us with a directory structure which doesn't match
-U-Boot (no script to fix it up)
-4. So we deal with that by skipping the build rules and using CONFIG
-options to select what is built
-5. So now we cannot build all the files for an SoC, just the ones that
-are in the CONFIG options
-6. Linux doesn't actually use devicetree-rebasing itself, so doesn't
-have this problem
-
-So this is heading in the wrong direction. Nor is it clear that this
-would just be a temporary problem.
-
-Possible options I see are:
-
-a. Adjust U-Boot's dir structure to match Linux, first (but this might
-be painful?)
-b. Create a script to sync the files, so we can sync into a dir
-structure that matches U-Boot
-c. Add build rules to U-Boot's version of the devicetree-rebasing dir
-(this seems to be supported)
-d. Give up and just live with having boards (not SoCs) specify the
-devicetree files they want to build
-
-I would like to do this series properly, maintaining the SoC-specific
-build rules, not removing what I see as an important feature. It
-should not be that difficult to figure out and I am happy to help with
-it.
-
->
+> > This is now even more confusing, frankly. The help for OF_SEPARATE says:
+> > If this option is enabled, the device tree will be built and placed as a
+> > separate u-boot.dtb file alongside the U-Boot image.
 > >
-> > The problem I have described above applied to meson, so I believe it
-> > is clear enough with that. I wasn't able to get rk3399 going, but I am
-> > sure it would have the same problem.
-> >
-> > The fundamental question is (I believe) whether to:
-> >
-> > 1. Build only a single DT for a board
-> > 2. Build all DTs for the SoC the board uses
-> >
-> > This series seems to head towards (1),
->
-> v2 of this series had the Makefile rules [1] for meson gxbb SoC but..
->
-> [1] https://patchwork.ozlabs.org/project/uboot/patch/20231222061208.30099=
-70-8-sumit.garg@linaro.org/
->
-> > which worries me. We are
-> > currently mostly at (2).
->
-> ..after discussion with Tom, the Makefile rules are already coming via
-> Kconfig options like DEFAULT_DEVICE_TREE, OF_LIST etc. So having
-> redundant rules in Makefile doesn't add any value, so I took them off
-> in v3.
+> > So why would you enable that to then have a device tree passed via
+> > bloblist instead?
+>=20
+> Historical....
 
-Yes, I see that you did that.
+Sorry, I mean the help text doesn't make any sense, with your patch. So
+that needs to be fixed. That's part of how everyone else is going to try
+and understand this mess of options afterwards.
 
-This seems to be a fundamental point of disagreement. I would like all
-boards for an SoC to have mostly the same defconfig and just use a
-devicetree for differences, at least in U-Boot proper. That is what
-devicetree is for. In fact, I would like to see a lot more defaults in
-U-Boot, so that defconfig files are just a few lines like [2] and
-there is no board-specific C code not gated by a compatible string.
+> > We should probably start by fixing all of this confusing naming / logic
+> > and then correct things such that:
+> > - OF_EMBED wins if set. This is the override-has-been-set we-must-use-it
+> >   switch. First choice, not last choice. If binman needs tweaks so that
+> >   it will still generate images for platforms in this case, that needs
+> >   to happen.
+>=20
+> Perhaps we should rename this to OF_EMBED_DEBUG ? Really it should not
+> be used by any board.
 
->
-> However, I am very much in favour of having a generalized U-Boot
-> image. This might become true in some cases like U-Boot acts as a
-> second stage bootloader for a particular SoC which is a unified image
-> where the prior stage passes the DT to it. The Qcom effort in this
-> direction can be an example here.
+It may or may not be appropriate for use by boards, in production. Maybe
+future designs can avoid this, but I think current ones cannot. But
+that's also a separate thread an cleanup task to bring up. Again, I
+suspect one of the use cases here is "embed the DTB so that we secure
+boot check and validate a single memory range".
 
-Not relevant to the topic at hand, perhaps, but Qualcomm uses a
-closed-source blob to jump to U-Boot and is certainly not an example
-we should emulate. But yes, passing a DT to U-Boot proper can be
-useful.
+> > - If we have a bloblist, we scan the bloblist for DT and if found, use
+> >   it.
+>=20
+> unless we don't want to, e.g. because that DT has a bug or we want to
+> use a different one during development.
 
->I am not sure at this point how we
-> can enable different U-Boot features since there are many board
-> specific bits needed currently not covered by DT.
+Nope. If the bloblist has a bug we either have to perform a fixup (the
+bloblist can't be changed but it's a situation where we're less strict)
+or for development go back up to OF_EMBED. That's the switch for
+development where you changed the device tree.
 
-I certainly see many examples of that, but the majority of features
-are covered. It was of course the same in Linux until someone put his
-foot down.
+> > - If it looks like we've been booted as a fake Linux kernel, and we can
+> >   start with just aarch64 and let riscv come in as a follow up, so
+> >   what's documented within
+> >   https://www.kernel.org/doc/html/latest/arch/arm64/booting.html#call-t=
+he-kernel-image
+> >   then we use that device tree.
+>=20
+> Eek, really? Is this the rpi case and you are trying to make it
+> generic? I would rather that be a board-specific thing, calling into a
+> generic implementation. We should encourage bloblist.
 
->
-> The other common method is to embed board DT in U-Boot image
-> especially where U-Boot acts as a first stage bootloader. Once that's
-> done I don't see how we can call that a generic U-Boot image.
+No, it's the generic case. It's not board specific. It's what we do,
+iirc, on Apple M1/M2/etc, some subsets of Tegra I believe (I know I've
+done it for xavier-based systems, but then abandoned the effort),
+certainly some of the older qualcomm platforms, and I believe that's one
+of the entry points for the newer qualcomm platforms.
 
-If you mean OF_EMBED, then I don't think that is much used. It is just
-for using a JTAG debugger and these days, it is barely useful for
-that.
+I spelled out the case above the way that I did because it's a valid
+case that's not going away. In addition to the places where we can't
+change the firmware chain, it's also for the places where people don't
+want to change the firmware chain, or because it's an important bringup
+path.
 
-We do use fdtgrep to create a smaller FDT for SPL, though. In general,
-it will be harder to create a general SPL for an SoC. But it is also
-less beneficial, since SPL is small. Also, it is possible, as shown by
-rockchip.
+And part of the problem here is that we've just done it ad-hoc so many
+times that it's scattered about the tree.
 
->
-> BTW, as Tom said we can very well add those Makefile rules later on a
-> use case basis if a particular SoC requires a truly generic U-Boot
-> image and the rules don't come via Kconfig options.
+> >   - This _may_ just end up having to be "Does x0 (or similar) point to a
+> >     valid DT?" as I don't know how correct everything using this method
+> >     today is too what the spec above lists.
+>=20
+> OK, well a generic impl would be good I suppose, but dereferencing
+> pointers to look for a magic number might not end well.
 
-We mostly have them already, so we should not remove them.
+It's a long standing ad-hoc standard.
 
-We are setting policy here. The policy should bias towards the
-generic, not to make that hard. There are over 900 arm64 devicetree
-files in Linux but only a few dozen SoCs and only one build. We should
-not have 900 arm64 U-Boots, only a few dozen and perhaps one day in
-the dim, distant future, if the tradeoffs make sense, one.
+> > - If we have a dtb appended to use by what we call today OF_SEPARATE but
+> >   should really stop calling it that we use that.
+>=20
+> Yes it is a complete misnomer now. I will try to think of a better
+> name. It really just controls generation of u-boot.dtb and what goes
+> in u-boot.bin so perhaps we can just drop it and have OF_EMBED be
+> false in the normal case. Or rename to OF_STANDARD ?
 
-Regards,
-Simon
+I'm not sure about the name either.
 
-[2] https://patchwork.ozlabs.org/project/uboot/patch/20210619081645.42660-2=
--mtwget@gmail.com/
+> > At that point, we can probably have zero "totally board specific kludge
+> > for device tree location", and kill off OF_HAS_PRIOR_STAGE too (since
+> > that's really just bloblist or fake-linux-kernel). We'll also be able to
+> > support migration from fake-linux-kernel to bloblist
+>=20
+> OF_HAS_PRIOR_STAGE controls things like building the DT
+
+No, it doesn't.  Please re-read the code as it stands today. What it
+does control is..
+
+> and OF_BOARD
+
+Yes, it then has OF_BOARD be enabled by default. And also OF_OMIT_DTB,
+which is a funny negative symbol (enable OF_OMIT_DTB to not perform
+action).
+
+> ... which from what you say above can perhaps go away. But there are
+> quite a lot of board_fdt_blob_setup() functions...it doesn't look like
+> they are all the same.
+
+Looks fairly common to me, I see a handful of "implement arm64 linux
+kernel boot", then "whatever riscv is doing", and "get dtb from ATF".
+Where that last one should be able to migrate to bloblist if I
+understand things right and so we'll need to ask the maintainers what
+they need long term here. There's very few "grab dtb from NOR flash",
+but they do exist.
+
+> Automatic is OK I suppose. I just want to make sure that these things
+> can be disabled easily so it is possible to use the DT built by U-Boot
+> without hacking the code. That is my goal with having a Kconfig to
+> enable this mechanisms.
+
+But the rest of us still don't understand your use case, or all of your
+use cases, is the sticking point. Ideally, if a bloblist is possible, it
+should have the dtb. Otherwise, if we're passed a DTB because something
+thinks it's booting the OS, that's the DTB the OS must get (or at least
+the starting point of it). Otherwise, yes, if we have our own DTB, we
+can give that to the OS. To try and rephrase something you've said,
+BLOBLIST=3Dy && OF_BLOBLIST=3Dn should only be a developer option. So why
+can't we just use the developer option we have today? Other than that
+it's currently last-case, not first-case, which is wrong.
+
+--=20
+Tom
+
+--DlR1KQtjqFIAHrAV
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWRercACgkQFHw5/5Y0
+tyyplAv/cQh6LIX12JCrmLInHCzBBNpFznUdr9Lj63RWi5NI22RxSwSlS9AbN23j
+zvJX21oNSF42op3/VEvUypDlS8umvGc9nmwZi17XAuqPnWC70fhTstYiTO96Sz/V
+n4o8bWAmC7XzviJopeRjExkDXawy7L4D3V7SiL4ceVl2O0YKD40G5+OevLFNuW5Z
+C7J6Oi9T6vypgkzXsVNjtatWtfvFNT1DLGjD5iqbdndDmYxoojVqL+DRL2Nm/XqQ
+prwu7hvyH6AhcSjqwra3ic2JsYleBOlS2hSJnUWBXJB52BYP8vt6mP6qxQnPmuCP
+eq9lhCdB2Smi6csG3sxmd+6M68kBXXy6n6bnnedEN/0OTKlaPhGw01QE8O6Wc0Y7
+DhYHXU9II2K69waCuwf2tErkhQpAK3poQsLpKImUuGvs5vrsgkmbdYLEg2zSYwpQ
+Y48gnZ4nUVzdW6cx8EFYR7yLgmaV/oMCwrsEC7qbAEjI4sJfqhdUblMzvx4OPvH6
+l6IwSPzO
+=bj1Q
+-----END PGP SIGNATURE-----
+
+--DlR1KQtjqFIAHrAV--
