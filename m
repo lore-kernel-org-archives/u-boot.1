@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57FB6C3DA6E
-	for <u-boot@archiver.kernel.org>; Sun, 31 Dec 2023 14:29:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEF44C3DA6E
+	for <u-boot@archiver.kernel.org>; Sun, 31 Dec 2023 15:11:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D420487613;
-	Sun, 31 Dec 2023 15:29:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 05F6987120;
+	Sun, 31 Dec 2023 16:11:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="trV8jeFx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jMf0xfH7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D50987613; Sun, 31 Dec 2023 15:29:31 +0100 (CET)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id 3FE5D87561; Sun, 31 Dec 2023 16:11:52 +0100 (CET)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34E47875A0
- for <u-boot@lists.denx.de>; Sun, 31 Dec 2023 15:29:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 615FD86F42
+ for <u-boot@lists.denx.de>; Sun, 31 Dec 2023 16:11:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-67f83812a32so45040296d6.3
- for <u-boot@lists.denx.de>; Sun, 31 Dec 2023 06:29:26 -0800 (PST)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-67fe0210665so38985236d6.1
+ for <u-boot@lists.denx.de>; Sun, 31 Dec 2023 07:11:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1704032965; x=1704637765; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1704035508; x=1704640308; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RkyvzXjmYtpzNYGCWdHMYcRLVd5pMUyUZDEsD9y0O6w=;
- b=trV8jeFxbYCBFa6rUqEAOqIC78dUZ0QWITjYb0St/T6d9gzT7Rm37MYCfEpeCTEVDW
- dk6/tvAkxZHq8QCcrnmMAGNb6+RFiLWPsMcSW1w1EFMI4PINGENHCnA6xY5+WlU2ibvS
- LZQwmr2BbH7yu4CtvPnGkNRS81z0BraJwkQ1M=
+ bh=2kcm+hmnxnhMGwalE3cgGiOro6iqP/vlGsuNe1r42UU=;
+ b=jMf0xfH7MpwZkaaCHLsrNPE2FEtxGw98oYHO5WbLBMsJ/gx915EAdDhww6QJR0frc4
+ 2K1J+gfZbJzhjlpgFmto7G7KXF+SDmsiGit7Vpomx5KhoxJSTkJBv0hw9GqJWh34tWTc
+ OCQcui1qHU83CfzaTj29F/n8Dkx4LXcQm9UTE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704032965; x=1704637765;
+ d=1e100.net; s=20230601; t=1704035508; x=1704640308;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RkyvzXjmYtpzNYGCWdHMYcRLVd5pMUyUZDEsD9y0O6w=;
- b=QNvNcr/mzz1cXBcmM3Vh8PFCOVKhEZ/OXAs+MkihULaFRfUEN42YAQ0E06mM/XNKPi
- klrtn9/DvEvjRnWcla/KWpR+YABEkDHf8oBiWqy0FVIq/rUbFmS/x6E/dEiDAlDtrVMg
- z8v3XeOVoDevFISbHymrBHwqbpAeh9VpkPM0xu6R3hGrl/vAdAgutjYJU700eHDHtwqc
- x732nAYQXDFY2Fs8DWETYf4RAMMeMmFupuvapFGObF/puBhSiSCq0942/gKGLazrZUTA
- Pie2Bj8msZtYyupCfOTzzBQyAjjVbfN6n5/Rw6QagwYfzkeld33fArABj4hiH9llMWey
- HJ0Q==
-X-Gm-Message-State: AOJu0YzSK1ro09vcM/5n7FRZ5w60ewPCu9GZDH929n1PdEVi/B/tmqs/
- ScX5SOcbMkhMF1QoIolhXGdrcJ9Ra9g37cRlmlPegkL3SF4=
-X-Google-Smtp-Source: AGHT+IGyV/OFLhkkbNeXX8ZNY3JQlSCuLb1HLaCh1zGTU3mmDQju9L3STu2Fd4YLQjFYe4laNqZDUA==
-X-Received: by 2002:a05:6214:248d:b0:67e:b7ce:9668 with SMTP id
- gi13-20020a056214248d00b0067eb7ce9668mr17803220qvb.23.1704032964979; 
- Sun, 31 Dec 2023 06:29:24 -0800 (PST)
+ bh=2kcm+hmnxnhMGwalE3cgGiOro6iqP/vlGsuNe1r42UU=;
+ b=Bnlye3ndzB8soGw5+ZMrwGk0Oe6qBo0sxQvxpKd3nW+MTytyduXsusu3Ptpu0bd0nm
+ Sz/WebUTXgMv2OhSdDEAkrTvpHEL3ebPiTIzzBUTb2JfHnPfo62EBbpeDb/miykF7my/
+ nyarZfy1aBSbIS/DlaGeAwNE6UZbDslL3mCgXQhcenbAvfg6vqXyto55WuKocZb8E9TP
+ eAXgdYUHRAl0oitUVgi7uRwXB3t2XRVDWbJFXSmiYTDjWR0wVkTlNOA70aBJgeCSqd9N
+ 7xwamg++vLAV+9EatVSc/mHlFYK5BOqe2uZfrVF9Mb+SfYS7HLjAHMqEdEbw/8spB8gc
+ miRg==
+X-Gm-Message-State: AOJu0YzpLS7XqMzW9FAbcabC0gEVV81ItEmdDrRfJC8fdvmY1gW9xT9n
+ W9d/K6Llkv2Nf32YqupmRleu6WvKaG9VEg==
+X-Google-Smtp-Source: AGHT+IFB1X9c/bn7/3QGtn3Y4uTRUTNGkYRlGMAenf3paTYToFpsPlwNkp5jJ2rY19QDdv44tLgCpg==
+X-Received: by 2002:a05:6214:413:b0:67a:4f43:e130 with SMTP id
+ z19-20020a056214041300b0067a4f43e130mr19018461qvx.18.1704035508009; 
+ Sun, 31 Dec 2023 07:11:48 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- bd18-20020ad45692000000b0067eff6713a8sm8713638qvb.87.2023.12.31.06.29.23
+ z16-20020a0ce610000000b0067f0d8cf418sm8682096qvm.70.2023.12.31.07.11.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 31 Dec 2023 06:29:24 -0800 (PST)
-Date: Sun, 31 Dec 2023 09:29:22 -0500
+ Sun, 31 Dec 2023 07:11:46 -0800 (PST)
+Date: Sun, 31 Dec 2023 10:11:44 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Raymond Mao <raymond.mao@linaro.org>, Marek Vasut <marex@denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Baruch Siach <baruch@tkos.co.il>, Bin Meng <bmeng.cn@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerry Van Baren <vanbaren@cideas.com>, Michal Simek <michal.simek@amd.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>,
- Sean Anderson <seanga2@gmail.com>, Stefan Roese <sr@denx.de>
-Subject: Re: [PATCH v6] fdt: Allow the devicetree to come from a bloblist
-Message-ID: <20231231142922.GB2652760@bill-the-cat>
-References: <20231228194725.2482268-1-sjg@chromium.org>
- <20231228212429.GR2652760@bill-the-cat>
- <CAFLszTif8GwJYdKF5Mq=gBB-ZW4wjJ7B9cjHRJdNi=QVAxMo=w@mail.gmail.com>
+Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, xypron.glpk@gmx.de,
+ u-boot@lists.denx.de, ilias.apalodimas@linaro.org
+Subject: Re: Proposal: U-Boot memory management
+Message-ID: <20231231151144.GD2652760@bill-the-cat>
+References: <CAFLszTicT2yzsm+KAjRyqzV3bt1_W2XYJaCExX-LHNZ6+tFUkA@mail.gmail.com>
+ <CAFLszThqH01GOqnTxucVE7s+wJU-dz7uqUtkb4iKxs6GgX6tqw@mail.gmail.com>
+ <20231229154307.GS2652760@bill-the-cat>
+ <7CDAA354-803C-4AFD-BD38-F432B811DB96@gmx.de>
+ <20231229161744.GU2652760@bill-the-cat>
+ <871qb4nbtc.fsf@bloch.sibelius.xs4all.nl>
+ <20231229175215.GY2652760@bill-the-cat>
+ <CAFLszTjXrmhOBeMvGfpy3mfZujNrCu2BKmUbEYz-rmxwyWdg3A@mail.gmail.com>
+ <20231231135357.GZ2652760@bill-the-cat>
+ <CAFLszTgCSDsobu9ak495vnRP-bjakK5Ytxd5YXro0-7GmYj9vA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="DlR1KQtjqFIAHrAV"
+ protocol="application/pgp-signature"; boundary="T+ZuoWqoWyMVnMYr"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTif8GwJYdKF5Mq=gBB-ZW4wjJ7B9cjHRJdNi=QVAxMo=w@mail.gmail.com>
+In-Reply-To: <CAFLszTgCSDsobu9ak495vnRP-bjakK5Ytxd5YXro0-7GmYj9vA@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,188 +101,421 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---DlR1KQtjqFIAHrAV
+--T+ZuoWqoWyMVnMYr
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Dec 31, 2023 at 05:47:30AM -0700, Simon Glass wrote:
-> Hi,
+On Sun, Dec 31, 2023 at 07:22:10AM -0700, Simon Glass wrote:
+> Hi Tom,
 >=20
-> On Thu, Dec 28, 2023 at 2:24=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+> On Sun, Dec 31, 2023 at 6:54=E2=80=AFAM Tom Rini <trini@konsulko.com> wro=
 te:
 > >
-> > On Thu, Dec 28, 2023 at 07:47:25PM +0000, Simon Glass wrote:
+> > On Sun, Dec 31, 2023 at 05:48:23AM -0700, Simon Glass wrote:
+> > > Hi,
+> > >
+> > > On Fri, Dec 29, 2023 at 10:52=E2=80=AFAM Tom Rini <trini@konsulko.com=
+> wrote:
+> > > >
+> > > > On Fri, Dec 29, 2023 at 06:44:15PM +0100, Mark Kettenis wrote:
+> > > > > > Date: Fri, 29 Dec 2023 11:17:44 -0500
+> > > > > > From: Tom Rini <trini@konsulko.com>
+> > > > > >
+> > > > > > On Fri, Dec 29, 2023 at 05:05:17PM +0100, Heinrich Schuchardt w=
+rote:
+> > > > > > >
+> > > > > > >
+> > > > > > > Am 29. Dezember 2023 16:43:07 MEZ schrieb Tom Rini <trini@kon=
+sulko.com>:
+> > > > > > > >On Fri, Dec 29, 2023 at 05:36:09AM +0000, Simon Glass wrote:
+> > > > > > > >> Hi,
+> > > > > > > >>
+> > > > > > > >> On Sat, Dec 16, 2023 at 6:01=E2=80=AFPM Simon Glass <sjg@c=
+hromium.org> wrote:
+> > > > > > > >> >
+> > > > > > > >> > Hi,
+> > > > > > > >> >
+> > > > > > > >> > This records my thoughts after a discussion with Ilias &=
+ Heinrich re
+> > > > > > > >> > memory allocation in U-Boot.
+> > > > > > > >> >
+> > > > > > > >> > 1. malloc()
+> > > > > > > >> >
+> > > > > > > >> > malloc() is used for programmatic memory allocation. It =
+allows memory
+> > > > > > > >> > to be freed. It is not designed for very large allocatio=
+ns (e.g. a
+> > > > > > > >> > 10MB kernel or 100MB ramdisk).
+> > > > > > > >> >
+> > > > > > > >> > 2. lmb
+> > > > > > > >> >
+> > > > > > > >> > lmb is used for large blocks of memory, such as those ne=
+eded for a
+> > > > > > > >> > kernel or ramdisk. Allocation is only transitory, for th=
+e purposes of
+> > > > > > > >> > loading some images and booting. If the boot fails, then=
+ all lmb
+> > > > > > > >> > allocations go away.
+> > > > > > > >> >
+> > > > > > > >> > lmb is set up by getting all available memory and then r=
+emoving what
+> > > > > > > >> > is used by U-Boot (code, data, malloc() space, etc.)
+> > > > > > > >> >
+> > > > > > > >> > lmb reservations have a few flags so that areas of memor=
+y can be
+> > > > > > > >> > provided with attributes
+> > > > > > > >> >
+> > > > > > > >> > There are some corner cases...e.g. loading a file does a=
+n lmb
+> > > > > > > >> > allocation but only for the purpose of avoiding a file b=
+eing loaded
+> > > > > > > >> > over U-Boot code/data. The allocation is dropped immedia=
+tely after the
+> > > > > > > >> > file is loaded. Within the bootm command, or when using =
+standard boot,
+> > > > > > > >> > this would be fairly easy to solve.
+> > > > > > > >> >
+> > > > > > > >> > Linux has renamed lmb to memblock. We should consider do=
+ing the same.
+> > > > > > > >> >
+> > > > > > > >> > 3. EFI
+> > > > > > > >> >
+> > > > > > > >> > EFI has its own memory-allocation tables.
+> > > > > > > >> >
+> > > > > > > >> > Like lmb, EFI is able to deal with large allocations. Bu=
+t via a 'pool'
+> > > > > > > >> > function it can also do smaller allocations similar to m=
+alloc(),
+> > > > > > > >> > although each one uses at least 4KB at present.
+> > > > > > > >> >
+> > > > > > > >> > EFI allocations do not go away when a boot fails.
+> > > > > > > >> >
+> > > > > > > >> > With EFI it is possible to add allocations post facto, i=
+n which case
+> > > > > > > >> > they are added to the allocation table just as if the me=
+mory was
+> > > > > > > >> > allocated with EFI to begin with.
+> > > > > > > >> >
+> > > > > > > >> > The EFI allocations and the lmb allocations use the same=
+ memory, so in
+> > > > > > > >> > principle could conflict.
+> > > > > > > >> >
+> > > > > > > >> > EFI allocations are sometimes used to allocate internal =
+U-Boot data as
+> > > > > > > >> > well, if needed by the EFI app. For example, while efi_i=
+mage_parse()
+> > > > > > > >> > uses malloc(), efi_var_mem.c uses EFI allocations since =
+the code runs
+> > > > > > > >> > in the app context and may need to access the memory aft=
+er U-Boot has
+> > > > > > > >> > exited. Also efi_smbios.c uses allocate_pages() and then=
+ adds a new
+> > > > > > > >> > mapping as well.
+> > > > > > > >> >
+> > > > > > > >> > EFI memory has attributes, including what the memory is =
+used for (to
+> > > > > > > >> > some degree of granularity). See enum efi_memory_type an=
+d struct
+> > > > > > > >> > efi_mem_desc. In the latter there are also attribute fla=
+gs - whether
+> > > > > > > >> > memory is cacheable, etc.
+> > > > > > > >> >
+> > > > > > > >> > EFI also has the x86 idea of 'conventional' memory, mean=
+ing (I
+> > > > > > > >> > believe) that below 4GB that isn't reserved for the hard=
+ware/system.
+> > > > > > > >> > This is meaningless, or at least confusing, on ARM syste=
+ms.
+> > > > > > > >> >
+> > > > > > > >> > 4. reservations
+> > > > > > > >> >
+> > > > > > > >> > It is perhaps worth mentioning a fourth method of memory=
+ management,
+> > > > > > > >> > where U-Boot reserves chunks of memory before relocation=
+ (in
+> > > > > > > >> > board_init_f.c), e.g. for the framebuffer, U-Boot code, =
+the malloc()
+> > > > > > > >> > region, etc.
+> > > > > > > >> >
+> > > > > > > >> >
+> > > > > > > >> > Problems
+> > > > > > > >> > =E2=80=94-------
+> > > > > > > >> >
+> > > > > > > >> > There are no urgent problems, but here are some things t=
+hat could be improved:
+> > > > > > > >> >
+> > > > > > > >> > 1. EFI should attach most of its data structures to driv=
+er model. This
+> > > > > > > >> > work has started, with the partition support, but more e=
+ffort would
+> > > > > > > >> > help. This would make it easier to see which memory is r=
+elated to
+> > > > > > > >> > devices and which is separate.
+> > > > > > > >> >
+> > > > > > > >> > 2. Some drivers do EFI reservations today, whether EFI i=
+s used for
+> > > > > > > >> > booting or not (e.g. rockchip video rk_vop_probe()).
+> > > > > > > >> >
+> > > > > > > >> > 3. U-Boot doesn't really map arch-specific memory attrib=
+utes (e.g.
+> > > > > > > >> > armv8's struct mm_region) to EFI ones.
+> > > > > > > >> >
+> > > > > > > >> > 4. EFI duplicates some code from bootm, some of which re=
+lates to
+> > > > > > > >> > memory allocation (e.g. FDT fixup).
+> > > > > > > >> >
+> > > > > > > >> > 5. EFI code is used even if EFI is never used to boot
+> > > > > > > >> >
+> > > > > > > >> > 6. EFI allocations can result in the same memory being u=
+sed as has
+> > > > > > > >> > already been allocated by lmb. Users may load files whic=
+h overwrite
+> > > > > > > >> > memory allocated by EFI.
+> > > > > > > >>
+> > > > > > > >> 7. We need to support doing an allocation when a file is l=
+oaded (to
+> > > > > > > >> ensure files do not overlap), without making it too diffic=
+ult to load
+> > > > > > > >> multiple files to the same place, if desired.
+> > > > > > > >>
+> > > > > > > >> >
+> > > > > > > >> >
+> > > > > > > >> > Lifetime
+> > > > > > > >> > --------
+> > > > > > > >> >
+> > > > > > > >> > We have three different memory allocators with different=
+ purposes. Can
+> > > > > > > >> > we unify them a little?
+> > > > > > > >> >
+> > > > > > > >> > Within U-Boot:
+> > > > > > > >> > - malloc() space lives forever
+> > > > > > > >> > - lmb lives while setting out images for booting
+> > > > > > > >> > - EFI (mostly) lives while booting an EFI app
+> > > > > > > >> >
+> > > > > > > >> > In practice, EFI is set up early in U-Boot. Some of this=
+ is necessary,
+> > > > > > > >> > some not. EFI allocations stay around forever. This work=
+s OK since
+> > > > > > > >> > large allocations are normally not done in EFI, so memor=
+y isn't really
+> > > > > > > >> > consumed to any great degree by the boot process.
+> > > > > > > >> >
+> > > > > > > >> > What happens to EFI allocations if the app returns? They=
+ are still
+> > > > > > > >> > present, in case another app is run. This seems fine.
+> > > > > > > >> >
+> > > > > > > >> > API
+> > > > > > > >> > =E2=80=93--
+> > > > > > > >> > Can we unify some APIs?
+> > > > > > > >> >
+> > > > > > > >> > It should be possible to use lmb for large EFI memory al=
+locations, so
+> > > > > > > >> > long as they are only needed for booting. We effectively=
+ do this
+> > > > > > > >> > today, since EFI does not manage the arrangement of load=
+ed images in
+> > > > > > > >> > memory. for the most part.
+> > > > > > > >> >
+> > > > > > > >> > It would not make sense to use EFI allocation to replace=
+ lmb and
+> > > > > > > >> > malloc(), of course.
+> > > > > > > >> >
+> > > > > > > >> > Could we use a common (lower-level) API for allocation, =
+used by both
+> > > > > > > >> > lmb and EFI? They do have some similarities. However the=
+y have
+> > > > > > > >> > different lifetime constraints (EFI allocations are neve=
+r dropped,
+> > > > > > > >> > unlikely lmb).
+> > > > > > > >> >
+> > > > > > > >> > ** Overall, it seems that the existence of memory alloca=
+tion in
+> > > > > > > >> > boot-time services has created confusion. Memory allocat=
+ion is
+> > > > > > > >> > muddled, with both U-Boot code and boot-time services ca=
+lling the same
+> > > > > > > >> > memory allocator. This just has not been clearly thought=
+ out.
+> > > > > > > >> >
+> > > > > > > >> >
+> > > > > > > >> > Proposal
+> > > > > > > >> > =E2=80=94-------
+> > > > > > > >> >
+> > > > > > > >> > Here are some ideas:
+> > > > > > > >> >
+> > > > > > > >> > 1. For video, use the driver model API to locate the vid=
+eo regions, or
+> > > > > > > >> > block off the entire framebuffer memory, for all devices=
+ as a whole.
+> > > > > > > >> > Use efi_add_memory_map()
+> > > > > > > >> >
+> > > > > > > >> > 2. Add memory attributes to UCLASS_RAM and use them in E=
+FI, mapping to
+> > > > > > > >> > the EFI_MEMORY_... attributes in struct efi_mem_desc.
+> > > > > > > >> >
+> > > > > > > >> > 3. Add all EFI reservations just before booting the app,=
+ as we do with
+> > > > > > > >> > devicetree fixup. With this model, malloc() and lmb are =
+used for all
+> > > > > > > >> > allocation. Then efi_add_memory_map() is called for each=
+ region in
+> > > > > > > >> > turn just before booting. Memory attributes are dealt wi=
+th above. The
+> > > > > > > >> > type (enum efi_memory_type) can be determined simply by =
+the data
+> > > > > > > >> > structure stored in it, as is done today. For example, S=
+MBIOS tables
+> > > > > > > >> > can use EFI_ACPI_RECLAIM_MEMORY. Very few types are used=
+ and EFI code
+> > > > > > > >> > understands the meaning of each.
+> > > > > > > >> >
+> > > > > > > >> > 4. Avoid setting up EFI memory at the start of U-Boot. D=
+o it only when
+> > > > > > > >> > booting. This looks to require very little effort.
+> > > > > > > >> >
+> > > > > > > >> > 5. Avoid calling efi_allocate_pages() and efi_allocate_p=
+ool() outside
+> > > > > > > >> > boot-time services. This solves the problem 6. If memory=
+ is needed by
+> > > > > > > >> > an app, allocate it with malloc() and see 3. There are o=
+nly two
+> > > > > > > >> > efi_allocate_pages() (smbios and efi_runtime). There are=
+ more calls of
+> > > > > > > >> > efi_allocate_pool(), but most of these seem easy to fix =
+up. For
+> > > > > > > >> > example, efi_init_event_log() allocates a buffer, but th=
+is can be
+> > > > > > > >> > allocated in normal malloc() space or in a bloblist.
+> > > > > > > >> >
+> > > > > > > >> > 6. Don't worry too much about whether EFI will be used f=
+or booting.
+> > > > > > > >> > The cost is likely not that great: use bootstage to meas=
+ure it as is
+> > > > > > > >> > done for driver model. Try to minmise the cost of its ta=
+bles,
+> > > > > > > >> > particularly for execution time, but otherwise just rely=
+ on the
+> > > > > > > >> > ability to disable EFI_LOADER.
+> > > > > > > >>
+> > > > > > > >> 7. Add a flag to the 'load' command:
+> > > > > > > >>
+> > > > > > > >> -m <type> - make an lmb allocation for the file
+> > > > > > > >>    <type> is the image type to use (kernel, ramdisk, flat_=
+dt)
+> > > > > > > >>
+> > > > > > > >> any existing allocation for that type will be automaticall=
+y freed
+> > > > > > > >> first. If <type> is "none" then no freeing is possible: an=
+y loaded
+> > > > > > > >> images just stack up in lmb.
+> > > > > > > >>
+> > > > > > > >> Add an 'lmb' (or memblock) command to allow listing and cl=
+earing allocations.
+> > > > > > > >
+> > > > > > > >I would really not like to change the user interface and ins=
+tead simply
+> > > > > > > >handle this with flags to whatever mark/allocation function =
+is called.
+> > > > > > > >You can always overwrite things that are brought in to memor=
+y, you
+> > > > > > > >cannot overwrite U-Boot or our internals. Optionally noting =
+that some
+> > > > > > > >previous load to memory has been at least partially overwrit=
+ten could be
+> > > > > > > >helpful, if it's not too much extra logic.
+> > > > > > > >
+> > > > > > >
+> > > > > > > In most use cases users load exactly one file at  each addres=
+s. An
+> > > > > > > unload command would be the cleanest way for a user to indica=
+te that
+> > > > > > > he wants to reuse the memory.
+> > > > > >
+> > > > > > I very much do not want to change the API. There's untold numbe=
+rs of
+> > > > > > scripts out there and they should continue to work. I mentioned=
+ to Ilias
+> > > > > > off list just now that I'm not against adding a command to add =
+flags to
+> > > > > > these areas, but I don't think it's worthwhile to prevent overw=
+rites the
+> > > > > > user did early. The biggest long running problem in this space =
+was that
+> > > > > > for 32bit ARM we couldn't know where the kernel BSS was going t=
+o be and
+> > > > > > so would have ramdisk at the wrong spot and get partially eaten=
+, and
+> > > > > > this was hard to figure out. The current example is "ooops,
+> > > > > > decompression buffer for Image.gz/etc is too close to other thi=
+ngs"
+> > > > > > which ends up failing nice and loudly, and in the future once t=
+his
+> > > > > > proposal is done we can just dynamically find and use a spot, s=
+ince
+> > > > > > we'll have that ability finally.
+> > > > >
+> > > > > In order to keep the existing interfaces we need lmb to keep trac=
+k of
+> > > > > (at least ) three different states.  I think of those as "free",
+> > > > > "allocated" and "reserved".  The load command would "reserve" mem=
+ory
+> > > > > insteaf "allocate".  And it would pass a flag to lmb when reservi=
+ng
+> > > > > memory to indicate that reserving memory that is already reserved=
+ is
+> > > > > ok.  Both "reserved" and "allocated" memory should show up as not=
+ free
+> > > > > in the EFI memory map (probably as EfiLoaderData).
+> > > >
+> > > > Yes, something like this is what I was getting at, thanks.
+> > >
+> > > Yes, that is a good way of putting it. There is definitely a distinct=
+ion there.
+> > >
+> > > If we don't want this flag, we could make U-Boot always do a
+> > > reservation on load, with a '-f' command to force loading over an
+> > > existing reservation / releasing it first?
 > >
-> > > Standard passage provides for a bloblist to be passed from one firmwa=
-re
-> > > phase to the next. That can be used to pass the devicetree along as w=
-ell.
-> > > Add an option to support this.
-> > >
-> > > Tests for this will be added as part of the Universal Payload work.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > [snip]
-> > > diff --git a/dts/Kconfig b/dts/Kconfig
-> > > index 00c0aeff893..ae451b9caf7 100644
-> > > --- a/dts/Kconfig
-> > > +++ b/dts/Kconfig
-> > > @@ -105,6 +105,19 @@ config OF_EMBED
-> > >
-> > >  endchoice
-> > >
-> > > +config OF_BLOBLIST
-> > > +     bool "Provided by a bloblist at runtime"
-> > > +     depends on BLOBLIST && OF_SEPARATE
-> >
-> > This is now even more confusing, frankly. The help for OF_SEPARATE says:
-> > If this option is enabled, the device tree will be built and placed as a
-> > separate u-boot.dtb file alongside the U-Boot image.
-> >
-> > So why would you enable that to then have a device tree passed via
-> > bloblist instead?
+> > Again, this is an API change and I don't want to change the API.
 >=20
-> Historical....
-
-Sorry, I mean the help text doesn't make any sense, with your patch. So
-that needs to be fixed. That's part of how everyone else is going to try
-and understand this mess of options afterwards.
-
-> > We should probably start by fixing all of this confusing naming / logic
-> > and then correct things such that:
-> > - OF_EMBED wins if set. This is the override-has-been-set we-must-use-it
-> >   switch. First choice, not last choice. If binman needs tweaks so that
-> >   it will still generate images for platforms in this case, that needs
-> >   to happen.
+> The flag is only needed to drop a reservation, since we apparently
+> want the 'load' command to create a permanent reservation. It should
+> not affect existing boot scripts since they won't load overlapping
+> images.
 >=20
-> Perhaps we should rename this to OF_EMBED_DEBUG ? Really it should not
-> be used by any board.
+> Anyway, what do you suggest?
 
-It may or may not be appropriate for use by boards, in production. Maybe
-future designs can avoid this, but I think current ones cannot. But
-that's also a separate thread an cleanup task to bring up. Again, I
-suspect one of the use cases here is "embed the DTB so that we secure
-boot check and validate a single memory range".
+That "load" (and sf read and nand read and tftp and wget and ...)
+"reserve" memory but not "allocate" memory and "reserve" means something
+is there and "allocate" means that it can't be modified again. For
+example, running U-Boot and our malloc pool are "allocated" but just
+loading a file to memory is "reserved".  And then yes, I can see use for
+the command where some cases might want to "reserve" memory to fiddle
+with it and then "allocate" it so something else can't change it.
 
-> > - If we have a bloblist, we scan the bloblist for DT and if found, use
-> >   it.
->=20
-> unless we don't want to, e.g. because that DT has a bug or we want to
-> use a different one during development.
-
-Nope. If the bloblist has a bug we either have to perform a fixup (the
-bloblist can't be changed but it's a situation where we're less strict)
-or for development go back up to OF_EMBED. That's the switch for
-development where you changed the device tree.
-
-> > - If it looks like we've been booted as a fake Linux kernel, and we can
-> >   start with just aarch64 and let riscv come in as a follow up, so
-> >   what's documented within
-> >   https://www.kernel.org/doc/html/latest/arch/arm64/booting.html#call-t=
-he-kernel-image
-> >   then we use that device tree.
->=20
-> Eek, really? Is this the rpi case and you are trying to make it
-> generic? I would rather that be a board-specific thing, calling into a
-> generic implementation. We should encourage bloblist.
-
-No, it's the generic case. It's not board specific. It's what we do,
-iirc, on Apple M1/M2/etc, some subsets of Tegra I believe (I know I've
-done it for xavier-based systems, but then abandoned the effort),
-certainly some of the older qualcomm platforms, and I believe that's one
-of the entry points for the newer qualcomm platforms.
-
-I spelled out the case above the way that I did because it's a valid
-case that's not going away. In addition to the places where we can't
-change the firmware chain, it's also for the places where people don't
-want to change the firmware chain, or because it's an important bringup
-path.
-
-And part of the problem here is that we've just done it ad-hoc so many
-times that it's scattered about the tree.
-
-> >   - This _may_ just end up having to be "Does x0 (or similar) point to a
-> >     valid DT?" as I don't know how correct everything using this method
-> >     today is too what the spec above lists.
->=20
-> OK, well a generic impl would be good I suppose, but dereferencing
-> pointers to look for a magic number might not end well.
-
-It's a long standing ad-hoc standard.
-
-> > - If we have a dtb appended to use by what we call today OF_SEPARATE but
-> >   should really stop calling it that we use that.
->=20
-> Yes it is a complete misnomer now. I will try to think of a better
-> name. It really just controls generation of u-boot.dtb and what goes
-> in u-boot.bin so perhaps we can just drop it and have OF_EMBED be
-> false in the normal case. Or rename to OF_STANDARD ?
-
-I'm not sure about the name either.
-
-> > At that point, we can probably have zero "totally board specific kludge
-> > for device tree location", and kill off OF_HAS_PRIOR_STAGE too (since
-> > that's really just bloblist or fake-linux-kernel). We'll also be able to
-> > support migration from fake-linux-kernel to bloblist
->=20
-> OF_HAS_PRIOR_STAGE controls things like building the DT
-
-No, it doesn't.  Please re-read the code as it stands today. What it
-does control is..
-
-> and OF_BOARD
-
-Yes, it then has OF_BOARD be enabled by default. And also OF_OMIT_DTB,
-which is a funny negative symbol (enable OF_OMIT_DTB to not perform
-action).
-
-> ... which from what you say above can perhaps go away. But there are
-> quite a lot of board_fdt_blob_setup() functions...it doesn't look like
-> they are all the same.
-
-Looks fairly common to me, I see a handful of "implement arm64 linux
-kernel boot", then "whatever riscv is doing", and "get dtb from ATF".
-Where that last one should be able to migrate to bloblist if I
-understand things right and so we'll need to ask the maintainers what
-they need long term here. There's very few "grab dtb from NOR flash",
-but they do exist.
-
-> Automatic is OK I suppose. I just want to make sure that these things
-> can be disabled easily so it is possible to use the DT built by U-Boot
-> without hacking the code. That is my goal with having a Kconfig to
-> enable this mechanisms.
-
-But the rest of us still don't understand your use case, or all of your
-use cases, is the sticking point. Ideally, if a bloblist is possible, it
-should have the dtb. Otherwise, if we're passed a DTB because something
-thinks it's booting the OS, that's the DTB the OS must get (or at least
-the starting point of it). Otherwise, yes, if we have our own DTB, we
-can give that to the OS. To try and rephrase something you've said,
-BLOBLIST=3Dy && OF_BLOBLIST=3Dn should only be a developer option. So why
-can't we just use the developer option we have today? Other than that
-it's currently last-case, not first-case, which is wrong.
+This is one of those cases where english is terrible to discuss things
+in as both reserve and allocate can mean similar things.
 
 --=20
 Tom
 
---DlR1KQtjqFIAHrAV
+--T+ZuoWqoWyMVnMYr
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWRercACgkQFHw5/5Y0
-tyyplAv/cQh6LIX12JCrmLInHCzBBNpFznUdr9Lj63RWi5NI22RxSwSlS9AbN23j
-zvJX21oNSF42op3/VEvUypDlS8umvGc9nmwZi17XAuqPnWC70fhTstYiTO96Sz/V
-n4o8bWAmC7XzviJopeRjExkDXawy7L4D3V7SiL4ceVl2O0YKD40G5+OevLFNuW5Z
-C7J6Oi9T6vypgkzXsVNjtatWtfvFNT1DLGjD5iqbdndDmYxoojVqL+DRL2Nm/XqQ
-prwu7hvyH6AhcSjqwra3ic2JsYleBOlS2hSJnUWBXJB52BYP8vt6mP6qxQnPmuCP
-eq9lhCdB2Smi6csG3sxmd+6M68kBXXy6n6bnnedEN/0OTKlaPhGw01QE8O6Wc0Y7
-DhYHXU9II2K69waCuwf2tErkhQpAK3poQsLpKImUuGvs5vrsgkmbdYLEg2zSYwpQ
-Y48gnZ4nUVzdW6cx8EFYR7yLgmaV/oMCwrsEC7qbAEjI4sJfqhdUblMzvx4OPvH6
-l6IwSPzO
-=bj1Q
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWRhLAACgkQFHw5/5Y0
+tyxnNAwAiZwIA0HIXTubZvwoN0lMkgZRHqoqhLB9mAFHD1KoHjglKOhyy3xqflre
+iWny8hBQSvqDqoLFMaLqdOV/hdTsdt6BufqHKwdB0t47C6U35xVALJkx2kga0+66
+33DmOgn3gFT/6e3I3ON4MvxtOpH5nLp2PsZr7T9IHAYnOo+EOprRjTzEMcr7q2nV
+2VWjnbY3CpzljP7orlhb4d69zyBu11daHxmrtCruiZij1AYPM8hy3rK9Fa4lHoSZ
+B9qx38dlLHvhhsVy80vjXPq9uHNG1Svqr+P9lcEsiaRZnHkWK4OWXb8HXGX1zqW8
+X5Kr4nPDfWlIuQsQVX5s7JYFk+EEJ0ns5PxRAQBaLO0dc/KiAz4VIoqUDBhukCR0
+US6rqx7sCvpzoHhc0NN0MdpTpS3xyCDGrCHFNN/XFolZWchSQOCR3R4Ay2QPzW3K
+3EHK6RXL8tChjZVXqQQGgfXkcCWVwt2eaNFciUW8yBhoVmX2eXiC8uxIPYWU5saM
+gaXPF4bk
+=o0ap
 -----END PGP SIGNATURE-----
 
---DlR1KQtjqFIAHrAV--
+--T+ZuoWqoWyMVnMYr--
