@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00791C3DA6E
-	for <u-boot@archiver.kernel.org>; Sun, 31 Dec 2023 15:28:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C463C47079
+	for <u-boot@archiver.kernel.org>; Sun, 31 Dec 2023 15:28:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B17C878E8;
-	Sun, 31 Dec 2023 16:26:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0112587909;
+	Sun, 31 Dec 2023 16:26:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mbSmLCV9";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QhDrKZ7/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85F0687887; Sun, 31 Dec 2023 16:26:23 +0100 (CET)
-Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
- [IPv6:2607:f8b0:4864:20::d2d])
+ id 77788878F0; Sun, 31 Dec 2023 16:26:23 +0100 (CET)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB2B18788A
- for <u-boot@lists.denx.de>; Sun, 31 Dec 2023 16:26:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A018878A5
+ for <u-boot@lists.denx.de>; Sun, 31 Dec 2023 16:26:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2d.google.com with SMTP id
- ca18e2360f4ac-7bb0af58134so208151939f.3
- for <u-boot@lists.denx.de>; Sun, 31 Dec 2023 07:26:20 -0800 (PST)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-7ba903342c2so589725839f.3
+ for <u-boot@lists.denx.de>; Sun, 31 Dec 2023 07:26:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704036378; x=1704641178; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1704036374; x=1704641174; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4yngB+cgy3jxjYzkffqrDQtaSLub4L+b+ccLCH7nDEg=;
- b=mbSmLCV9S7OL5gV30BnQ8nTuPpV5vlF92PfiGjY1x6EUihL5DYTtgKwaaSIUVwQyC1
- tod0aMjWnQSeq4w465+fAqY7Slk5DJRqWFO9bsNQa4J95Cjom1ls+CAwVcEX6keU18m6
- XAhUCIgbYMp4jO4gj3s4Y2ypOJxt2opsdWP5o=
+ bh=rstqArcNelG3IVr1yF1v1ESKHomY5lRGyhdl5dvysQY=;
+ b=QhDrKZ7/+CyIyzoag1We0KrVc/Nx5evJ84cMpq9h9cAmaZ7/YYLd9lKS4Ub0O+ZRuD
+ pJi4xnyvAmEegRPzsOUz51jS0fDZZ3dzVDI2DeEyf5Ou7KtHgIdLEs9eR3Hlb8cwA8zD
+ k2aatLp8US+/eZ42G+fr0VJwwrv8JjrQ3zNqw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704036378; x=1704641178;
+ d=1e100.net; s=20230601; t=1704036374; x=1704641174;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4yngB+cgy3jxjYzkffqrDQtaSLub4L+b+ccLCH7nDEg=;
- b=xJ09T/9l69arPjymDV2HcjtyzDrTH1zEUn58Mr4AHoviDaC4OlcPwYuZPNJEgF5byp
- /6Z21xoyrd9MSQquin/9jlDWAuWUE5zK0B6EdzBKPqxdspGnAQx191K0RbLpxKQiPcYn
- opgLgyWmCzfmI4sHJSbtMAFxeADpJjOS1zKOPUoF9PhVR1n1u9NDFjyJqyaw/ytxo9KJ
- 0wSGRRYCvxKeQOoqanqP5dfDJvScIZ/dMHzMpTlydYpRTEhl+6jwfJeeYDWauPybxXVR
- I57cVTemjCwumwHUgnsX9dzOxI8dlI/c1UMJ/d/f1LR2/Wrxt1ECMI4pBbYhGaBtlu/e
- ik9Q==
-X-Gm-Message-State: AOJu0YwU8ICg03ScENGToqn81jScUdGrd2+PstRSabsVX94aUlkTtONc
- jihQyfOSm1be0kHouGwg4YDBN8Qd57PPkz2jbLi/WNkFpEHS
-X-Google-Smtp-Source: AGHT+IE7rdLFGxP0ffJvkdXJzHMDzu+S1b8Twi1e1sUAAzjnTqYhfl+6E+uylxhJuK+U+SIAbhIcrw==
-X-Received: by 2002:a05:6602:1492:b0:7ba:9707:67ad with SMTP id
- a18-20020a056602149200b007ba970767admr26879600iow.28.1704036378490; 
- Sun, 31 Dec 2023 07:26:18 -0800 (PST)
+ bh=rstqArcNelG3IVr1yF1v1ESKHomY5lRGyhdl5dvysQY=;
+ b=jhG8lDS6Fe82Udvpm9jhsI5aymY+YkN3pXdU2YarddE852P3sdadGFNSCbZwIuR8zC
+ lsq2kGQJUsmFK0GfZXr5A7sHTeLszieuHpeGbVsXmOf9fvco4DfbapGEGGeOs4ko9CsI
+ xoSKV/2pBzEhSQRl4O3ITigc0NMTVf0LsubLKch57TeaSQuWN2MKGoNesseeJyqwLqvp
+ dO8LNMVBtZYb2w+DxhoBkyBRQw3T6SFvAW1rLjMAzHuxf6lGO8RPpggJDlea/KcLO8Nn
+ sdlTQnnSKwIRMf8eUM9lNDY/7oRe5fLCxLjhXU46OK9t3Kc6TuV2Z4+RMzYn93Gi72X1
+ v/dw==
+X-Gm-Message-State: AOJu0YwtKPyDbkK2aAi8cBpO/c95dsIHHMf34Dxu1VNEYZuflIftiYav
+ jWevQD+Lwsgfubs0aPPnLms08GRXBV2GV9v2SaD3/e2Tgixj
+X-Google-Smtp-Source: AGHT+IGhDBwECfnxZHC3OHlJADb0Un65TEn6ZoYVL/NjBEmc0DfXk/pTd3M8lEe3ASJunjWUtZCtJw==
+X-Received: by 2002:a6b:e00c:0:b0:7b7:bc01:3723 with SMTP id
+ z12-20020a6be00c000000b007b7bc013723mr21268874iog.20.1704036374803; 
+ Sun, 31 Dec 2023 07:26:14 -0800 (PST)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- cz9-20020a0566384a0900b0046b482039ecsm5632625jab.55.2023.12.31.07.26.18
+ cz9-20020a0566384a0900b0046b482039ecsm5632625jab.55.2023.12.31.07.26.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 31 Dec 2023 07:26:18 -0800 (PST)
+ Sun, 31 Dec 2023 07:26:14 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v5 12/12] efi: Correct smbios-table installation
-Date: Sun, 31 Dec 2023 08:25:55 -0700
-Message-Id: <20231231152555.464874-13-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>
+Subject: [PATCH v5 07/12] smbios: Require the caller to align the SMBIOS table
+Date: Sun, 31 Dec 2023 08:25:50 -0700
+Message-Id: <20231231152555.464874-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231231152555.464874-1-sjg@chromium.org>
 References: <20231231152555.464874-1-sjg@chromium.org>
@@ -89,64 +89,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present this code allocates memory when writing the tables and
-then unnecessarily adds another memory map when installing it.
-
-Adjust the code to allocate the tables using the normal U-Boot
-mechanism. This avoids doing an EFI memory allocation early in
-U-Boot, which may use memory that would be overwritten by a
-'load' command, for example.
+All callers handle this alignment, so drop the unnecessary code. This
+simplifies things a little.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
-I believe this is the fix we agreed on for after the release, so I am
-including it in this series.
 
 Changes in v5:
-- Add new patch to correct smbios-table installation
+- Update comment to mention x86 alignment
 
- lib/efi_loader/efi_smbios.c | 16 +++++++---------
- 1 file changed, 7 insertions(+), 9 deletions(-)
+ include/smbios.h | 9 +++++----
+ lib/smbios.c     | 2 --
+ 2 files changed, 5 insertions(+), 6 deletions(-)
 
-diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
-index 5db342ee0d7..eb6d2ba43c9 100644
---- a/lib/efi_loader/efi_smbios.c
-+++ b/lib/efi_loader/efi_smbios.c
-@@ -54,27 +54,25 @@ efi_status_t efi_smbios_register(void)
+diff --git a/include/smbios.h b/include/smbios.h
+index 77be58887a2..49de32fec2d 100644
+--- a/include/smbios.h
++++ b/include/smbios.h
+@@ -258,12 +258,13 @@ static inline void fill_smbios_header(void *table, int type,
+  *
+  * This writes SMBIOS table at a given address.
+  *
+- * @addr:	start address to write SMBIOS table. If this is not
+- *		16-byte-aligned then it will be aligned before the table is
+- *		written.
++ * @addr:	start address to write SMBIOS table, 16-byte-alignment
++ * recommended. Note that while the SMBIOS tables themself have no alignment
++ * requirement, some systems may requires alignment. For example x86 systems
++ * which put tables at f0000 require 16-byte alignment
++ *
+  * Return:	end address of SMBIOS table (and start address for next entry)
+  *		or NULL in case of an error
+- *
+  */
+ ulong write_smbios_table(ulong addr);
  
- static int install_smbios_table(void)
- {
--	u64 addr;
--	efi_status_t ret;
-+	ulong addr;
-+	void *buf;
- 
- 	if (!IS_ENABLED(CONFIG_GENERATE_SMBIOS_TABLE) || IS_ENABLED(CONFIG_X86))
- 		return 0;
- 
--	addr = SZ_4G;
--	ret = efi_allocate_pages(EFI_ALLOCATE_MAX_ADDRESS,
--				 EFI_RUNTIME_SERVICES_DATA,
--				 efi_size_in_pages(TABLE_SIZE), &addr);
--	if (ret != EFI_SUCCESS)
-+	/* Align the table to a 4KB boundary to keep EFI happy */
-+	buf = memalign(SZ_4K, TABLE_SIZE);
-+	if (!buf)
- 		return log_msg_ret("mem", -ENOMEM);
- 
--	addr = map_to_sysmem((void *)(uintptr_t)addr);
-+	addr = map_to_sysmem(buf);
- 	if (!write_smbios_table(addr)) {
- 		log_err("Failed to write SMBIOS table\n");
- 		return log_msg_ret("smbios", -EINVAL);
+diff --git a/lib/smbios.c b/lib/smbios.c
+index 7f79d969c92..cfd451e4088 100644
+--- a/lib/smbios.c
++++ b/lib/smbios.c
+@@ -563,8 +563,6 @@ ulong write_smbios_table(ulong addr)
+ 		ctx.dev = NULL;
  	}
  
- 	/* Make a note of where we put it */
--	log_debug("SMBIOS tables written to %llx\n", addr);
-+	log_debug("SMBIOS tables written to %lx\n", addr);
- 	gd->arch.smbios_start = addr;
+-	/* 16 byte align the table address */
+-	addr = ALIGN(addr, 16);
+ 	start_addr = addr;
  
- 	return 0;
+ 	/*
 -- 
 2.34.1
 
