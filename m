@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CF27C3DA6E
-	for <u-boot@archiver.kernel.org>; Sun, 31 Dec 2023 14:03:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEFD5C3DA6E
+	for <u-boot@archiver.kernel.org>; Sun, 31 Dec 2023 14:22:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5036986C68;
-	Sun, 31 Dec 2023 15:03:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2E75887282;
+	Sun, 31 Dec 2023 15:22:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Dfer06Or";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Azgy5GLT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCFAD877DA; Sun, 31 Dec 2023 15:03:44 +0100 (CET)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 807D987084; Sun, 31 Dec 2023 15:22:29 +0100 (CET)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D3A987687
- for <u-boot@lists.denx.de>; Sun, 31 Dec 2023 15:03:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0185087084
+ for <u-boot@lists.denx.de>; Sun, 31 Dec 2023 15:22:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-55569b59f81so3770886a12.1
- for <u-boot@lists.denx.de>; Sun, 31 Dec 2023 06:03:38 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-67f9f6ca479so61488706d6.3
+ for <u-boot@lists.denx.de>; Sun, 31 Dec 2023 06:22:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704031418; x=1704636218; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1704032542; x=1704637342; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=h4S7owcWhQYL4lRr+rSEa/IgnBJzJ0fiw4v8wc3Cnyc=;
- b=Dfer06OrstLg+MOcZxNF1mK9vDm7TEHc56Shucp1Z3HaFttIupIMPmfv1QptQelNAD
- uiLRUJ3MrCqt3kPDaJPALsHPbPWnN83CNhdqKZ/9WqxRoeYWPH2ihStj0dJ0ES/CLt3Z
- 6w5WvYF7rEelq3sYApRBRzLZ7bPHfpYDI0Xh23eeYi6eqRiBSa/sTH9EzDNQg8bQWT+C
- tmF484uZ6svOh88UnHQ94Axilu1HteSs2H+ZmuvBQKT1QSZ6U1r6uBThYq7VHVkTDoFL
- BP3DeNRB8FfJoafD7n6hGKHg/hMmkyd/LjvuA4GnTy/DnWjahXooJytU1dGXOWQga4lo
- 4xhg==
+ bh=DIuRYb3z05y5Wo/keRNo/JLjYCc3r0qjXYWJJWN8UXk=;
+ b=Azgy5GLTahkTv+SHjG0bCM2dztfaHXaJcvL4a2iI0G231u0CWFS6wDFQL8ek061m7v
+ SMsJ9XMWXVcgzWysAWKoUdSdyRQsdaz09Su2KPF+QfXtEKuKwsNEl9UJLyi5jArmyFKk
+ CegUejjO1+m1F9+u8d5H17FazxkIXm/l432gQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704031418; x=1704636218;
+ d=1e100.net; s=20230601; t=1704032542; x=1704637342;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=h4S7owcWhQYL4lRr+rSEa/IgnBJzJ0fiw4v8wc3Cnyc=;
- b=eX1Zrmhsrf8L3PcBKCumeRjdwynNHLJ1Qe0lHcnf4W4IR/kM5dGSWgtQo0f5uEg8AZ
- ORhMH0eqmjEgnGimvDDEC4A6lPILZZKpzmhxuWoMWmOPmgy4kIQ+loLKJsNJaIf7ZyAQ
- wQ/bVn9oyJB/mqI5SbSoxlOzfJh/L7g+FtWT0jMNFtxxiJpPVTkJqRbaP09JfhlHHuNO
- 4pWN6e58f6zpZGntHU1PWbiFziANgY+jrB+zTqMXWE1qN+QlH5ywF/86nZDx1/2rMyxC
- KbAwR2uJjSP7CzAoWB7zyyu26Q8cvTvoUHksk7R/NSOQw9UcNVnL2vhM63mUThPRFNk9
- V9rA==
-X-Gm-Message-State: AOJu0Ywhb/hjk4OL4Dj7v632U6EHCa22SzD7By7UGfo3ACgEpu5R/47Z
- nBdfOZHs8t6Lde5bIdmbpyFZhcgGjnnuNBAXxTkoaHDK
-X-Google-Smtp-Source: AGHT+IHbZ5THRZD8hdQ/J6Mg4IYf/gdZhTgUenIal4tEdPXwCRPeeqdMqRW1ZFs55a/W4rfd0UpFESk7bAaK4e8/0Qg=
-X-Received: by 2002:a50:cd56:0:b0:54b:5a6:d083 with SMTP id
- d22-20020a50cd56000000b0054b05a6d083mr8584461edj.11.1704031417677; Sun, 31
- Dec 2023 06:03:37 -0800 (PST)
+ bh=DIuRYb3z05y5Wo/keRNo/JLjYCc3r0qjXYWJJWN8UXk=;
+ b=ZSxbqFvC9HrsEM5gogjdvdV9nI9oTZKAWsDnG3PL9ah4IS2W8TZSn2dJs3joUBHllT
+ gxD0F4thUKrVyRIYQIWu19IL1+ozLBDR3oZ/+nSnIgbqNqbE/XpGQLpE3Fy/f+ch1yf/
+ +OqL6c9NdL5Vd7/LSntn1VufPZtzlODFCu7Wzik4+I6ZS3WpKpUNS7jhuzZFUn+u5vyz
+ qbwBf7u97IicLrD630LM3tDWnW9H3fNvs57R9piB1myvA9cAp44nQ2Vle4hByHWv4lqv
+ L/UuoztlVGKjzPQuKGpPG8cJKbs3GwFKN9xrUYDNdvs2JizaDSXtRP/Vjm7SmCw1pBF5
+ dg0A==
+X-Gm-Message-State: AOJu0Yz40DSCNbY0JtS7LBjhmvJMXkBbpbEFMj3qDXGAeVW1b4OyLmgA
+ qFAm1lCYE2pbAEDFqXbkvi3iMacfIcyjXCCifw00+K7UzSpbaUzzRyLPqF0=
+X-Google-Smtp-Source: AGHT+IH8wtYAtiagn4zQzBDh8SjhWRxirvMJfjk7Xak+J92wg91tpLVrFmXuF42Uw5OZ/ba7amggJjN3Pn0lno7KBgU=
+X-Received: by 2002:a05:6214:248c:b0:67f:63a5:b37f with SMTP id
+ gi12-20020a056214248c00b0067f63a5b37fmr23483854qvb.21.1704032541710; Sun, 31
+ Dec 2023 06:22:21 -0800 (PST)
 MIME-Version: 1.0
-References: <20231223004429.247301-1-xypron.glpk@gmx.de>
- <20231223004429.247301-4-xypron.glpk@gmx.de>
-In-Reply-To: <20231223004429.247301-4-xypron.glpk@gmx.de>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Sun, 31 Dec 2023 14:03:26 +0000
-Message-ID: <CALeDE9MpOngV-_BGKSm+D+bguKSX+e1NcdgQfa4PCDFb3e6mRw@mail.gmail.com>
-Subject: Re: [PATCH 3/5] cmd: provide command to display SMBIOS information
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
+References: <CAFLszTicT2yzsm+KAjRyqzV3bt1_W2XYJaCExX-LHNZ6+tFUkA@mail.gmail.com>
+ <CAFLszThqH01GOqnTxucVE7s+wJU-dz7uqUtkb4iKxs6GgX6tqw@mail.gmail.com>
+ <20231229154307.GS2652760@bill-the-cat>
+ <7CDAA354-803C-4AFD-BD38-F432B811DB96@gmx.de>
+ <20231229161744.GU2652760@bill-the-cat>
+ <871qb4nbtc.fsf@bloch.sibelius.xs4all.nl>
+ <20231229175215.GY2652760@bill-the-cat>
+ <CAFLszTjXrmhOBeMvGfpy3mfZujNrCu2BKmUbEYz-rmxwyWdg3A@mail.gmail.com>
+ <20231231135357.GZ2652760@bill-the-cat>
+In-Reply-To: <20231231135357.GZ2652760@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 31 Dec 2023 07:22:10 -0700
+Message-ID: <CAFLszTgCSDsobu9ak495vnRP-bjakK5Ytxd5YXro0-7GmYj9vA@mail.gmail.com>
+Subject: Re: Proposal: U-Boot memory management
+To: Tom Rini <trini@konsulko.com>
+Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, xypron.glpk@gmx.de,
+ u-boot@lists.denx.de, ilias.apalodimas@linaro.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -89,269 +91,395 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Dec 23, 2023 at 12:53=E2=80=AFAM Heinrich Schuchardt <xypron.glpk@g=
-mx.de> wrote:
->
-> U-Boot can either generated an SMBIOS table or copy it from a prior boot
-> stage, e.g. QEMU.
->
-> Provide a command to display the SMBIOS information.
->
-> Currently only type 1 and 2 are translated to human readable text.
-> Other types may be added later. Currently only a hexdump and the list of
-> strings is provided for these.
->
-> Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> ---
->  cmd/Kconfig  |   7 ++
->  cmd/Makefile |   1 +
->  cmd/smbios.c | 191 +++++++++++++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 199 insertions(+)
->  create mode 100644 cmd/smbios.c
->
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 5a7678f0ac..580aeec8ee 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -206,6 +206,13 @@ config CMD_SBI
->         help
->           Display information about the SBI implementation.
->
-> +config CMD_SMBIOS
-> +       bool "smbios"
-> +       depends on SMBIOS
-> +       default y
+Hi Tom,
 
-Should this be default? Maybe default if SMBIOS or similar?
+On Sun, Dec 31, 2023 at 6:54=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> On Sun, Dec 31, 2023 at 05:48:23AM -0700, Simon Glass wrote:
+> > Hi,
+> >
+> > On Fri, Dec 29, 2023 at 10:52=E2=80=AFAM Tom Rini <trini@konsulko.com> =
+wrote:
+> > >
+> > > On Fri, Dec 29, 2023 at 06:44:15PM +0100, Mark Kettenis wrote:
+> > > > > Date: Fri, 29 Dec 2023 11:17:44 -0500
+> > > > > From: Tom Rini <trini@konsulko.com>
+> > > > >
+> > > > > On Fri, Dec 29, 2023 at 05:05:17PM +0100, Heinrich Schuchardt wro=
+te:
+> > > > > >
+> > > > > >
+> > > > > > Am 29. Dezember 2023 16:43:07 MEZ schrieb Tom Rini <trini@konsu=
+lko.com>:
+> > > > > > >On Fri, Dec 29, 2023 at 05:36:09AM +0000, Simon Glass wrote:
+> > > > > > >> Hi,
+> > > > > > >>
+> > > > > > >> On Sat, Dec 16, 2023 at 6:01=E2=80=AFPM Simon Glass <sjg@chr=
+omium.org> wrote:
+> > > > > > >> >
+> > > > > > >> > Hi,
+> > > > > > >> >
+> > > > > > >> > This records my thoughts after a discussion with Ilias & H=
+einrich re
+> > > > > > >> > memory allocation in U-Boot.
+> > > > > > >> >
+> > > > > > >> > 1. malloc()
+> > > > > > >> >
+> > > > > > >> > malloc() is used for programmatic memory allocation. It al=
+lows memory
+> > > > > > >> > to be freed. It is not designed for very large allocations=
+ (e.g. a
+> > > > > > >> > 10MB kernel or 100MB ramdisk).
+> > > > > > >> >
+> > > > > > >> > 2. lmb
+> > > > > > >> >
+> > > > > > >> > lmb is used for large blocks of memory, such as those need=
+ed for a
+> > > > > > >> > kernel or ramdisk. Allocation is only transitory, for the =
+purposes of
+> > > > > > >> > loading some images and booting. If the boot fails, then a=
+ll lmb
+> > > > > > >> > allocations go away.
+> > > > > > >> >
+> > > > > > >> > lmb is set up by getting all available memory and then rem=
+oving what
+> > > > > > >> > is used by U-Boot (code, data, malloc() space, etc.)
+> > > > > > >> >
+> > > > > > >> > lmb reservations have a few flags so that areas of memory =
+can be
+> > > > > > >> > provided with attributes
+> > > > > > >> >
+> > > > > > >> > There are some corner cases...e.g. loading a file does an =
+lmb
+> > > > > > >> > allocation but only for the purpose of avoiding a file bei=
+ng loaded
+> > > > > > >> > over U-Boot code/data. The allocation is dropped immediate=
+ly after the
+> > > > > > >> > file is loaded. Within the bootm command, or when using st=
+andard boot,
+> > > > > > >> > this would be fairly easy to solve.
+> > > > > > >> >
+> > > > > > >> > Linux has renamed lmb to memblock. We should consider doin=
+g the same.
+> > > > > > >> >
+> > > > > > >> > 3. EFI
+> > > > > > >> >
+> > > > > > >> > EFI has its own memory-allocation tables.
+> > > > > > >> >
+> > > > > > >> > Like lmb, EFI is able to deal with large allocations. But =
+via a 'pool'
+> > > > > > >> > function it can also do smaller allocations similar to mal=
+loc(),
+> > > > > > >> > although each one uses at least 4KB at present.
+> > > > > > >> >
+> > > > > > >> > EFI allocations do not go away when a boot fails.
+> > > > > > >> >
+> > > > > > >> > With EFI it is possible to add allocations post facto, in =
+which case
+> > > > > > >> > they are added to the allocation table just as if the memo=
+ry was
+> > > > > > >> > allocated with EFI to begin with.
+> > > > > > >> >
+> > > > > > >> > The EFI allocations and the lmb allocations use the same m=
+emory, so in
+> > > > > > >> > principle could conflict.
+> > > > > > >> >
+> > > > > > >> > EFI allocations are sometimes used to allocate internal U-=
+Boot data as
+> > > > > > >> > well, if needed by the EFI app. For example, while efi_ima=
+ge_parse()
+> > > > > > >> > uses malloc(), efi_var_mem.c uses EFI allocations since th=
+e code runs
+> > > > > > >> > in the app context and may need to access the memory after=
+ U-Boot has
+> > > > > > >> > exited. Also efi_smbios.c uses allocate_pages() and then a=
+dds a new
+> > > > > > >> > mapping as well.
+> > > > > > >> >
+> > > > > > >> > EFI memory has attributes, including what the memory is us=
+ed for (to
+> > > > > > >> > some degree of granularity). See enum efi_memory_type and =
+struct
+> > > > > > >> > efi_mem_desc. In the latter there are also attribute flags=
+ - whether
+> > > > > > >> > memory is cacheable, etc.
+> > > > > > >> >
+> > > > > > >> > EFI also has the x86 idea of 'conventional' memory, meanin=
+g (I
+> > > > > > >> > believe) that below 4GB that isn't reserved for the hardwa=
+re/system.
+> > > > > > >> > This is meaningless, or at least confusing, on ARM systems=
+.
+> > > > > > >> >
+> > > > > > >> > 4. reservations
+> > > > > > >> >
+> > > > > > >> > It is perhaps worth mentioning a fourth method of memory m=
+anagement,
+> > > > > > >> > where U-Boot reserves chunks of memory before relocation (=
+in
+> > > > > > >> > board_init_f.c), e.g. for the framebuffer, U-Boot code, th=
+e malloc()
+> > > > > > >> > region, etc.
+> > > > > > >> >
+> > > > > > >> >
+> > > > > > >> > Problems
+> > > > > > >> > =E2=80=94-------
+> > > > > > >> >
+> > > > > > >> > There are no urgent problems, but here are some things tha=
+t could be improved:
+> > > > > > >> >
+> > > > > > >> > 1. EFI should attach most of its data structures to driver=
+ model. This
+> > > > > > >> > work has started, with the partition support, but more eff=
+ort would
+> > > > > > >> > help. This would make it easier to see which memory is rel=
+ated to
+> > > > > > >> > devices and which is separate.
+> > > > > > >> >
+> > > > > > >> > 2. Some drivers do EFI reservations today, whether EFI is =
+used for
+> > > > > > >> > booting or not (e.g. rockchip video rk_vop_probe()).
+> > > > > > >> >
+> > > > > > >> > 3. U-Boot doesn't really map arch-specific memory attribut=
+es (e.g.
+> > > > > > >> > armv8's struct mm_region) to EFI ones.
+> > > > > > >> >
+> > > > > > >> > 4. EFI duplicates some code from bootm, some of which rela=
+tes to
+> > > > > > >> > memory allocation (e.g. FDT fixup).
+> > > > > > >> >
+> > > > > > >> > 5. EFI code is used even if EFI is never used to boot
+> > > > > > >> >
+> > > > > > >> > 6. EFI allocations can result in the same memory being use=
+d as has
+> > > > > > >> > already been allocated by lmb. Users may load files which =
+overwrite
+> > > > > > >> > memory allocated by EFI.
+> > > > > > >>
+> > > > > > >> 7. We need to support doing an allocation when a file is loa=
+ded (to
+> > > > > > >> ensure files do not overlap), without making it too difficul=
+t to load
+> > > > > > >> multiple files to the same place, if desired.
+> > > > > > >>
+> > > > > > >> >
+> > > > > > >> >
+> > > > > > >> > Lifetime
+> > > > > > >> > --------
+> > > > > > >> >
+> > > > > > >> > We have three different memory allocators with different p=
+urposes. Can
+> > > > > > >> > we unify them a little?
+> > > > > > >> >
+> > > > > > >> > Within U-Boot:
+> > > > > > >> > - malloc() space lives forever
+> > > > > > >> > - lmb lives while setting out images for booting
+> > > > > > >> > - EFI (mostly) lives while booting an EFI app
+> > > > > > >> >
+> > > > > > >> > In practice, EFI is set up early in U-Boot. Some of this i=
+s necessary,
+> > > > > > >> > some not. EFI allocations stay around forever. This works =
+OK since
+> > > > > > >> > large allocations are normally not done in EFI, so memory =
+isn't really
+> > > > > > >> > consumed to any great degree by the boot process.
+> > > > > > >> >
+> > > > > > >> > What happens to EFI allocations if the app returns? They a=
+re still
+> > > > > > >> > present, in case another app is run. This seems fine.
+> > > > > > >> >
+> > > > > > >> > API
+> > > > > > >> > =E2=80=93--
+> > > > > > >> > Can we unify some APIs?
+> > > > > > >> >
+> > > > > > >> > It should be possible to use lmb for large EFI memory allo=
+cations, so
+> > > > > > >> > long as they are only needed for booting. We effectively d=
+o this
+> > > > > > >> > today, since EFI does not manage the arrangement of loaded=
+ images in
+> > > > > > >> > memory. for the most part.
+> > > > > > >> >
+> > > > > > >> > It would not make sense to use EFI allocation to replace l=
+mb and
+> > > > > > >> > malloc(), of course.
+> > > > > > >> >
+> > > > > > >> > Could we use a common (lower-level) API for allocation, us=
+ed by both
+> > > > > > >> > lmb and EFI? They do have some similarities. However they =
+have
+> > > > > > >> > different lifetime constraints (EFI allocations are never =
+dropped,
+> > > > > > >> > unlikely lmb).
+> > > > > > >> >
+> > > > > > >> > ** Overall, it seems that the existence of memory allocati=
+on in
+> > > > > > >> > boot-time services has created confusion. Memory allocatio=
+n is
+> > > > > > >> > muddled, with both U-Boot code and boot-time services call=
+ing the same
+> > > > > > >> > memory allocator. This just has not been clearly thought o=
+ut.
+> > > > > > >> >
+> > > > > > >> >
+> > > > > > >> > Proposal
+> > > > > > >> > =E2=80=94-------
+> > > > > > >> >
+> > > > > > >> > Here are some ideas:
+> > > > > > >> >
+> > > > > > >> > 1. For video, use the driver model API to locate the video=
+ regions, or
+> > > > > > >> > block off the entire framebuffer memory, for all devices a=
+s a whole.
+> > > > > > >> > Use efi_add_memory_map()
+> > > > > > >> >
+> > > > > > >> > 2. Add memory attributes to UCLASS_RAM and use them in EFI=
+, mapping to
+> > > > > > >> > the EFI_MEMORY_... attributes in struct efi_mem_desc.
+> > > > > > >> >
+> > > > > > >> > 3. Add all EFI reservations just before booting the app, a=
+s we do with
+> > > > > > >> > devicetree fixup. With this model, malloc() and lmb are us=
+ed for all
+> > > > > > >> > allocation. Then efi_add_memory_map() is called for each r=
+egion in
+> > > > > > >> > turn just before booting. Memory attributes are dealt with=
+ above. The
+> > > > > > >> > type (enum efi_memory_type) can be determined simply by th=
+e data
+> > > > > > >> > structure stored in it, as is done today. For example, SMB=
+IOS tables
+> > > > > > >> > can use EFI_ACPI_RECLAIM_MEMORY. Very few types are used a=
+nd EFI code
+> > > > > > >> > understands the meaning of each.
+> > > > > > >> >
+> > > > > > >> > 4. Avoid setting up EFI memory at the start of U-Boot. Do =
+it only when
+> > > > > > >> > booting. This looks to require very little effort.
+> > > > > > >> >
+> > > > > > >> > 5. Avoid calling efi_allocate_pages() and efi_allocate_poo=
+l() outside
+> > > > > > >> > boot-time services. This solves the problem 6. If memory i=
+s needed by
+> > > > > > >> > an app, allocate it with malloc() and see 3. There are onl=
+y two
+> > > > > > >> > efi_allocate_pages() (smbios and efi_runtime). There are m=
+ore calls of
+> > > > > > >> > efi_allocate_pool(), but most of these seem easy to fix up=
+. For
+> > > > > > >> > example, efi_init_event_log() allocates a buffer, but this=
+ can be
+> > > > > > >> > allocated in normal malloc() space or in a bloblist.
+> > > > > > >> >
+> > > > > > >> > 6. Don't worry too much about whether EFI will be used for=
+ booting.
+> > > > > > >> > The cost is likely not that great: use bootstage to measur=
+e it as is
+> > > > > > >> > done for driver model. Try to minmise the cost of its tabl=
+es,
+> > > > > > >> > particularly for execution time, but otherwise just rely o=
+n the
+> > > > > > >> > ability to disable EFI_LOADER.
+> > > > > > >>
+> > > > > > >> 7. Add a flag to the 'load' command:
+> > > > > > >>
+> > > > > > >> -m <type> - make an lmb allocation for the file
+> > > > > > >>    <type> is the image type to use (kernel, ramdisk, flat_dt=
+)
+> > > > > > >>
+> > > > > > >> any existing allocation for that type will be automatically =
+freed
+> > > > > > >> first. If <type> is "none" then no freeing is possible: any =
+loaded
+> > > > > > >> images just stack up in lmb.
+> > > > > > >>
+> > > > > > >> Add an 'lmb' (or memblock) command to allow listing and clea=
+ring allocations.
+> > > > > > >
+> > > > > > >I would really not like to change the user interface and inste=
+ad simply
+> > > > > > >handle this with flags to whatever mark/allocation function is=
+ called.
+> > > > > > >You can always overwrite things that are brought in to memory,=
+ you
+> > > > > > >cannot overwrite U-Boot or our internals. Optionally noting th=
+at some
+> > > > > > >previous load to memory has been at least partially overwritte=
+n could be
+> > > > > > >helpful, if it's not too much extra logic.
+> > > > > > >
+> > > > > >
+> > > > > > In most use cases users load exactly one file at  each address.=
+ An
+> > > > > > unload command would be the cleanest way for a user to indicate=
+ that
+> > > > > > he wants to reuse the memory.
+> > > > >
+> > > > > I very much do not want to change the API. There's untold numbers=
+ of
+> > > > > scripts out there and they should continue to work. I mentioned t=
+o Ilias
+> > > > > off list just now that I'm not against adding a command to add fl=
+ags to
+> > > > > these areas, but I don't think it's worthwhile to prevent overwri=
+tes the
+> > > > > user did early. The biggest long running problem in this space wa=
+s that
+> > > > > for 32bit ARM we couldn't know where the kernel BSS was going to =
+be and
+> > > > > so would have ramdisk at the wrong spot and get partially eaten, =
+and
+> > > > > this was hard to figure out. The current example is "ooops,
+> > > > > decompression buffer for Image.gz/etc is too close to other thing=
+s"
+> > > > > which ends up failing nice and loudly, and in the future once thi=
+s
+> > > > > proposal is done we can just dynamically find and use a spot, sin=
+ce
+> > > > > we'll have that ability finally.
+> > > >
+> > > > In order to keep the existing interfaces we need lmb to keep track =
+of
+> > > > (at least ) three different states.  I think of those as "free",
+> > > > "allocated" and "reserved".  The load command would "reserve" memor=
+y
+> > > > insteaf "allocate".  And it would pass a flag to lmb when reserving
+> > > > memory to indicate that reserving memory that is already reserved i=
+s
+> > > > ok.  Both "reserved" and "allocated" memory should show up as not f=
+ree
+> > > > in the EFI memory map (probably as EfiLoaderData).
+> > >
+> > > Yes, something like this is what I was getting at, thanks.
+> >
+> > Yes, that is a good way of putting it. There is definitely a distinctio=
+n there.
+> >
+> > If we don't want this flag, we could make U-Boot always do a
+> > reservation on load, with a '-f' command to force loading over an
+> > existing reservation / releasing it first?
+>
+> Again, this is an API change and I don't want to change the API.
 
-> +       help
-> +         Display the SMBIOS information.
-> +
->  endmenu
+The flag is only needed to drop a reservation, since we apparently
+want the 'load' command to create a permanent reservation. It should
+not affect existing boot scripts since they won't load overlapping
+images.
+
+Anyway, what do you suggest?
+
 >
->  menu "Boot commands"
-> diff --git a/cmd/Makefile b/cmd/Makefile
-> index 5ed0e4011d..8a5dfd8ca9 100644
-> --- a/cmd/Makefile
-> +++ b/cmd/Makefile
-> @@ -168,6 +168,7 @@ obj-$(CONFIG_CMD_SETEXPR) +=3D setexpr.o
->  obj-$(CONFIG_CMD_SETEXPR_FMT) +=3D printf.o
->  obj-$(CONFIG_CMD_SPI) +=3D spi.o
->  obj-$(CONFIG_CMD_STRINGS) +=3D strings.o
-> +obj-$(CONFIG_CMD_SMBIOS) +=3D smbios.o
->  obj-$(CONFIG_CMD_SMC) +=3D smccc.o
->  obj-$(CONFIG_CMD_SYSBOOT) +=3D sysboot.o
->  obj-$(CONFIG_CMD_STACKPROTECTOR_TEST) +=3D stackprot_test.o
-> diff --git a/cmd/smbios.c b/cmd/smbios.c
-> new file mode 100644
-> index 0000000000..63f908e92c
-> --- /dev/null
-> +++ b/cmd/smbios.c
-> @@ -0,0 +1,191 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * The 'smbios' command displays information from the SMBIOS table.
-> + *
-> + * Copyright (c) 2023, Heinrich Schuchardt <xypron.glpk@gmx.de>
-> + */
-> +
-> +#include <command.h>
-> +#include <hexdump.h>
-> +#include <mapmem.h>
-> +#include <smbios.h>
-> +#include <tables_csum.h>
-> +#include <asm/global_data.h>
-> +
-> +DECLARE_GLOBAL_DATA_PTR;
-> +
-> +/**
-> + * smbios_get_string() - get SMBIOS string from table
-> + *
-> + * @table:     SMBIOS table
-> + * @index:     index of the string
-> + * Return:     address of string, may point to empty string
-> + */
-> +static const char *smbios_get_string(void *table, int index)
-> +{
-> +       const char *str =3D (char *)table +
-> +                         ((struct smbios_header *)table)->length;
-> +
-> +       if (!*str)
-> +               ++str;
-> +       for (--index; *str && index; --index)
-> +               str +=3D strlen(str) + 1;
-> +
-> +       return str;
-> +}
-> +
-> +static struct smbios_header *next_table(struct smbios_header *table)
-> +{
-> +       const char *str;
-> +
-> +       if (table->type =3D=3D SMBIOS_END_OF_TABLE)
-> +               return NULL;
-> +
-> +       str =3D smbios_get_string(table, 0);
-> +       return (struct smbios_header *)(++str);
-> +}
-> +
-> +static void smbios_print_generic(struct smbios_header *table)
-> +{
-> +       char *str =3D (char *)table + table->length;
-> +
-> +       if (CONFIG_IS_ENABLED(HEXDUMP)) {
-> +               printf("Header and Data:\n");
-> +               print_hex_dump("\t", DUMP_PREFIX_OFFSET, 16, 1,
-> +                              table, table->length, false);
-> +       }
-> +       if (*str) {
-> +               printf("Strings:\n");
-> +               for (int index =3D 1; *str; ++index) {
-> +                       printf("\tString %u: %s\n", index, str);
-> +                       str +=3D strlen(str) + 1;
-> +               }
-> +       }
-> +}
-> +
-> +void smbios_print_str(const char *label, void *table, u8 index)
-> +{
-> +       printf("\t%s: %s\n", label, smbios_get_string(table, index));
-> +}
-> +
-> +static void smbios_print_type1(struct smbios_type1 *table)
-> +{
-> +       printf("System Information\n");
-> +       smbios_print_str("Manufacturer", table, table->manufacturer);
-> +       smbios_print_str("Product Name", table, table->product_name);
-> +       smbios_print_str("Version", table, table->version);
-> +       smbios_print_str("Serial Number", table, table->serial_number);
-> +       if (table->length >=3D 0x19) {
-> +               printf("\tUUID %pUl\n", table->uuid);
-> +               smbios_print_str("Wake Up Type", table, table->serial_num=
-ber);
-> +       }
-> +       if (table->length >=3D 0x1b) {
-> +               smbios_print_str("Serial Number", table, table->serial_nu=
-mber);
-> +               smbios_print_str("SKU Number", table, table->sku_number);
-> +       }
-> +}
-> +
-> +static void smbios_print_type2(struct smbios_type2 *table)
-> +{
-> +       u16 *handle;
-> +
-> +       printf("Base Board Information\n");
-> +       smbios_print_str("Manufacturer", table, table->manufacturer);
-> +       smbios_print_str("Product Name", table, table->product_name);
-> +       smbios_print_str("Version", table, table->version);
-> +       smbios_print_str("Serial Number", table, table->serial_number);
-> +       smbios_print_str("Asset Tag", table, table->asset_tag_number);
-> +       printf("\tFeature Flags: 0x%2x\n", table->feature_flags);
-> +       smbios_print_str("Chassis Location", table, table->chassis_locati=
-on);
-> +       printf("\tChassis Handle: 0x%2x\n", table->chassis_handle);
-> +       smbios_print_str("Board Type", table, table->board_type);
-> +       printf("\tContained Object Handles: ");
-> +       handle =3D (void *)table->eos;
-> +       for (int i =3D 0; i < table->number_contained_objects; ++i)
-> +               printf("0x%04x ", handle[i]);
-> +       printf("\n");
-> +}
-> +
-> +static void smbios_print_type127(struct smbios_type127 *table)
-> +{
-> +       printf("End Of Table\n");
-> +}
-> +
-> +static int do_smbios(struct cmd_tbl *cmdtp, int flag, int argc,
-> +                    char *const argv[])
-> +{
-> +       ulong addr;
-> +       void *entry;
-> +       u32 size;
-> +       char version[12];
-> +       struct smbios_header *table;
-> +       static const char smbios_sig[] =3D "_SM_";
-> +       static const char smbios3_sig[] =3D "_SM3_";
-> +       size_t count =3D 0;
-> +       u32 max_struct_size;
-> +
-> +       addr =3D gd_smbios_start();
-> +       if (!addr) {
-> +               log_warning("SMBIOS not available\n");
-> +               return CMD_RET_FAILURE;
-> +       }
-> +       entry =3D map_sysmem(addr, 0);
-> +       if (!memcmp(entry, smbios3_sig, sizeof(smbios3_sig) - 1)) {
-> +               struct smbios3_entry *entry3 =3D entry;
-> +
-> +               table =3D (void *)(uintptr_t)entry3->struct_table_address=
-;
-> +               snprintf(version, sizeof(version), "%d.%d.%d",
-> +                        entry3->major_ver, entry3->minor_ver, entry3->do=
-c_rev);
-> +               table =3D (void *)(uintptr_t)entry3->struct_table_address=
-;
-> +               size =3D entry3->length;
-> +               max_struct_size =3D entry3->max_struct_size;
-> +       } else if (!memcmp(entry, smbios_sig, sizeof(smbios_sig) - 1)) {
-> +               struct smbios_entry *entry2 =3D entry;
-> +
-> +               snprintf(version, sizeof(version), "%d.%d",
-> +                        entry2->major_ver, entry2->minor_ver);
-> +               table =3D (void *)(uintptr_t)entry2->struct_table_address=
-;
-> +               size =3D entry2->length;
-> +               max_struct_size =3D entry2->max_struct_size;
-> +       } else {
-> +               log_err("Unknown SMBIOS anchor format\n");
-> +               return CMD_RET_FAILURE;
-> +       }
-> +       if (table_compute_checksum(entry, size)) {
-> +               log_err("Invalid anchor checksum\n");
-> +               return CMD_RET_FAILURE;
-> +       }
-> +       printf("SMBIOS %s present.\n", version);
-> +
-> +       for (struct smbios_header *pos =3D table; pos; pos =3D next_table=
-(pos))
-> +               ++count;
-> +       printf("%zd structures occupying %d bytes\n", count, max_struct_s=
-ize);
-> +       printf("Table at 0x%llx\n", (unsigned long long)map_to_sysmem(tab=
-le));
-> +
-> +       for (struct smbios_header *pos =3D table; pos; pos =3D next_table=
-(pos)) {
-> +               printf("\nHandle 0x%04x, DMI type %d, %d bytes at 0x%llx\=
-n",
-> +                      pos->handle, pos->type, pos->length,
-> +                      (unsigned long long)map_to_sysmem(pos));
-> +               switch (pos->type) {
-> +               case 1:
-> +                       smbios_print_type1((struct smbios_type1 *)pos);
-> +                       break;
-> +               case 2:
-> +                       smbios_print_type2((struct smbios_type2 *)pos);
-> +                       break;
-> +               case 127:
-> +                       smbios_print_type127((struct smbios_type127 *)pos=
-);
-> +                       break;
-> +               default:
-> +                       smbios_print_generic(pos);
-> +                       break;
-> +               }
-> +       }
-> +
-> +       return CMD_RET_SUCCESS;
-> +}
-> +
-> +U_BOOT_LONGHELP(smbios, "- display SMBIOS information");
-> +
-> +U_BOOT_CMD(smbios, 1, 0, do_smbios, "display SMBIOS information",
-> +          smbios_help_text);
-> --
-> 2.43.0
+> > I'm not sure if we still want the proposed lmb command? Perhaps it is
+> > not needed.
 >
+> Please lets not call it "lmb" because the current lmb isn't what we want
+> anymore and it's otherwise probably leading to some of the confusion.
+> The kernel evolved it to memblocks, so perhaps that terminology too
+> here. And yes, a command for if nothing else debug / investigation would
+> be good.
+
+OK, I would prefer memblock too.
+
+Regards,
+Simon
