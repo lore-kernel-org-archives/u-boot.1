@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 288D9C4706F
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jan 2024 16:53:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19081C47073
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jan 2024 16:53:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81122876C9;
+	by phobos.denx.de (Postfix) with ESMTP id ED320878CB;
 	Mon,  1 Jan 2024 17:53:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fYqIw6/P";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ga7bxHFD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA484878B8; Mon,  1 Jan 2024 17:53:17 +0100 (CET)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id 2D46D86FFD; Mon,  1 Jan 2024 17:53:18 +0100 (CET)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D398E86FFD
- for <u-boot@lists.denx.de>; Mon,  1 Jan 2024 17:53:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F7C9877B0
+ for <u-boot@lists.denx.de>; Mon,  1 Jan 2024 17:53:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-680a06cc763so19172426d6.1
- for <u-boot@lists.denx.de>; Mon, 01 Jan 2024 08:53:15 -0800 (PST)
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-781251ed685so716135985a.3
+ for <u-boot@lists.denx.de>; Mon, 01 Jan 2024 08:53:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704127994; x=1704732794; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1704127995; x=1704732795; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=i5AsNIMS7b5Lc0uQf/Ldcovm46zJKKuDkeXS9kFv8gk=;
- b=fYqIw6/PWdi/dVpFOMF3mmMdzDHFQo1KzK4l03pmzHqb3wVYwzhMGWjVKz8bUOIULq
- TZODi7CHdNG1h0N7fJIU29d/XqBHDNdoOixGd+M6QwmmAfEOfP7EOg64glAgPlI9Yiat
- zmaHaEfYSpCnAG+3xPwCD5dKSe18ylrql1q8c=
+ bh=F5KPHKV6HwNq6FUbBosZLDf3g0fqBLbVb2Af6c4W5lo=;
+ b=ga7bxHFDSnJE9ZHx4ahPJzJspqcrRtj436m1hy166ApAWFdQNOb9lPF3H31v/Ny6KF
+ GDZjfGnoHNlX3RjHtTjWvxYMWh/xj80LDKpH1a38XbhIh4Ro1oKo3G5cVAhk7rhGFxsp
+ dihFwj2kCm2Zyg6gHBgjFxVkjIAA15X3K8+1w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704127994; x=1704732794;
+ d=1e100.net; s=20230601; t=1704127995; x=1704732795;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=i5AsNIMS7b5Lc0uQf/Ldcovm46zJKKuDkeXS9kFv8gk=;
- b=IiUo7K2bk2xSY/XjzqjSpqOkQUYZqsUSb9E3btxs+1bWDj8STRpusgzdOye2LQjAX0
- jJNOGQjFXqn+p1s1nuu8wiTKZIP9Mx/+a9HMqXsro4WA5oS7wI9xg3l4jJXYGVyZ+2KW
- 0rk3eGhpIrH18JUDG54JBT9NkDbsf2REBrxDmQDQ3cXdaeI38EVXvN2g6HJ16jgud33/
- hwu4xpAtzMymrUX+rMgi0b4/wa4xvuSBYSLP3sBUNaUvWDhroiOAcIMMgEjTp2BH+dZl
- AJoR2+xO8ew8z1kKsiPSkSbYTUR25LARJmwtlTqDrz2WToYrMEXYCaHBWxPuVYv4osBn
- Ce4w==
-X-Gm-Message-State: AOJu0Yxopp76zLhP3dybBVps5rWsqb6ZkSojhii2xHGUeK0uaeTYTK3t
- /DTzUZ0IrLgtok1x76oJtHsb5AlN4Rhmevj5+EItFvwH1PhU
-X-Google-Smtp-Source: AGHT+IEfcLQKhqplxstt1mK9INhn1HCOo81DIR9AZpK6toEPqCbgSmCLn+lvKRxjJkDGdonDmOvW99wUuJjAQefDtO8=
-X-Received: by 2002:a05:6214:2341:b0:67a:a721:d782 with SMTP id
- hu1-20020a056214234100b0067aa721d782mr23408082qvb.104.1704127994675; Mon, 01
+ bh=F5KPHKV6HwNq6FUbBosZLDf3g0fqBLbVb2Af6c4W5lo=;
+ b=g7vxwrs0WeLU1qfmqZTSY9TCHkEFpA3AtkplyEnE1WTKm3DChXFKLE6duvae1hjRcN
+ MGiUlQwjeGctg7JvgCZKTv2kQgb0pdn17ULCKWEyatXVPdJN0WBIbIRLL4/GqPyYb5X9
+ M6fVomLFVCstFg/dmL9BoIf43lQTsmYeRZ7DnIE1bCR7RhhG1NsoCZCLts1AdO+MOLhr
+ 1ZiNZhzVzORFWqa0I7CZEzF0oKeATyOtzIR7GSYJltXjqYQcjU8m5gaga68hBWh19wp8
+ prWjqs2+3kPqSUXNu/fSC3rTyUNexGiyzWN9/rL6J+CNPfxqqaEZ5twtbtUpQhhBLnBn
+ z3+g==
+X-Gm-Message-State: AOJu0YxQidjh7134H6ttLMnw+HMFu54ZwQ0RRQVa7tPR0bm5Y8Uvo1SN
+ gy7zbcBMJP7qI/QFvKCE2pR25ZtGVPiwZMWY8/OUU/1Kqo9N
+X-Google-Smtp-Source: AGHT+IGhHB0c+YpgOYP87wI/1zp1WgmyEyBMXZci8An8b6z6Yn/bFWNGE5izW+z7Wqt/CrJ1pk91NeWrNHR6Zw29X7k=
+X-Received: by 2002:ad4:4f2c:0:b0:680:810b:983c with SMTP id
+ fc12-20020ad44f2c000000b00680810b983cmr7438792qvb.71.1704127994971; Mon, 01
  Jan 2024 08:53:14 -0800 (PST)
 Received: from 798914943136 named unknown by gmailapi.google.com with
  HTTPREST; Mon, 1 Jan 2024 11:53:14 -0500
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20231229174244.892818-12-raymond.mao@linaro.org>
-References: <20231229174244.892818-12-raymond.mao@linaro.org>
+In-Reply-To: <20231229174244.892818-11-raymond.mao@linaro.org>
+References: <20231229174244.892818-11-raymond.mao@linaro.org>
  <20231229174244.892818-1-raymond.mao@linaro.org>
 Date: Mon, 1 Jan 2024 11:53:14 -0500
-X-Google-Sender-Auth: bPCCYEQoidio-suKbpeZK8vfosc
-Message-ID: <CAFLszTjMfdzL=C9imZP6fFpuxbpDGLLcxVR9Dnk3fUkyfH=1QA@mail.gmail.com>
-Subject: Re: [PATCH v5 11/11] bloblist: Update documentation and header comment
+X-Google-Sender-Auth: Pa_E9hkJEyf2b2pqQyWyYLyoybY
+Message-ID: <CAFLszTh3WjQ6ODAfbdwceDa4Aygc9GLrXCszPEPj5ioOzMUXjA@mail.gmail.com>
+Subject: Re: [PATCH v5 10/11] bloblist: Add alignment to bloblist_new()
 To: Raymond Mao <raymond.mao@linaro.org>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
  u-boot@lists.denx.de, 
@@ -88,14 +88,21 @@ X-Virus-Status: Clean
 
 From: Simon Glass <sjg@chromium.org>
 
-Align the documentation with the v0.9 spec.
+Allow the alignment to be specified when creating a bloblist.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- doc/develop/bloblist.rst | 4 +++-
- include/bloblist.h       | 1 +
- 2 files changed, 4 insertions(+), 1 deletion(-)
+Changes in v3
+- Keep the flag argument to align to FW handoff spec up to commit 3592349.
+Changes in v4
+- Minor fix to use a full ternary operator in function bloblist_new().
+
+ common/bloblist.c  |  5 +++--
+ include/bloblist.h |  3 ++-
+ test/bloblist.c    | 40 ++++++++++++++++++++++------------------
+ 3 files changed, 27 insertions(+), 21 deletions(-)
 
 Applied to u-boot-dm/next, thanks!
