@@ -4,77 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78850C3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jan 2024 00:38:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89AE5C47074
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jan 2024 07:48:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A54F28785E;
-	Mon,  1 Jan 2024 01:37:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 2D78A876A6;
+	Mon,  1 Jan 2024 08:48:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A+MRSHML";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="kl77Xxbe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 479E58785D; Mon,  1 Jan 2024 01:37:53 +0100 (CET)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A88E1876DE; Mon,  1 Jan 2024 08:48:05 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EE9987786
- for <u-boot@lists.denx.de>; Mon,  1 Jan 2024 01:37:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BC2BF871CC
+ for <u-boot@lists.denx.de>; Mon,  1 Jan 2024 08:47:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-78104f6f692so642154685a.1
- for <u-boot@lists.denx.de>; Sun, 31 Dec 2023 16:37:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704069469; x=1704674269; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fdRzxw2IqNCdNyj1Kjb1rHEaVem8fObQXFy+Ee+Z/ro=;
- b=A+MRSHML/CH8qBoj56ro20ukXTUWBQbg/7vXh10SOHE+4WI6CzGeWEw84JbzKGtdJt
- lJS12ADy4/w3pGnOFqyjz3k5Dl3lbH3Ey79Y+TMuT9H7Vuv/Fo4PvgjlD0eFc0Rz3vA2
- RHkA/JOkJHn+YGmN44W9qKnSoukiBrU/OWp5Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704069469; x=1704674269;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=fdRzxw2IqNCdNyj1Kjb1rHEaVem8fObQXFy+Ee+Z/ro=;
- b=HzygCgDORIvo3EvevEj9TK+WuVXN1Is4C9Agnsq4STAq3II0J0WNMWBG/aGTIBESJq
- wBBQQh8s5gofDczC1hsBCsGWHXtC8bhQxa3sw8FylykgzogTT+7fjO0/7npCWos8gtZD
- Fay7DxbQP8VlLg0NgITSJG4HeteKc2GJfSPvMh3x72XgxXG0s6QWdA+48K8v5/lfr1Iz
- ZCcW8NCc69WBS26xUfcDyCNHjNyBM1fudHWtogCnT47V8O/dgN/lRteoMj2I0RKCkwwf
- PMUDx2b7OY2xG/Os/5q+05V3uuBBM2I6GF8grDXm3NDezQbV/M2PfsdlJNuoT4K9zjf2
- zfkw==
-X-Gm-Message-State: AOJu0YzxkXtJzGW3rxhFTX22XgL1RzvH6gVF2zkVWrad0l9nQi/hREGf
- Df3jH7+Z+/jnhoTqJL2j0Tr5322Jdrbjp99Bclp/Qu7nmPAf
-X-Google-Smtp-Source: AGHT+IHSZHMryvY3egHjoC2eb0O5ND5Q1mTgEpkCh1TbZsRD9IJ9y7iflwe8gPQWNyiP85Nzv6prbwUui9BOdvVzdoc=
-X-Received: by 2002:a05:620a:4952:b0:77f:289c:bb05 with SMTP id
- vz18-20020a05620a495200b0077f289cbb05mr22594628qkn.75.1704069469591; Sun, 31
- Dec 2023 16:37:49 -0800 (PST)
-MIME-Version: 1.0
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1704095265; x=1704700065; i=xypron.glpk@gmx.de;
+ bh=P05rjC6VIo6Z5xKy3egSPyzN7yww9KZvX6iorDxd8HA=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
+ References;
+ b=kl77Xxbesxr71gPfvE+gashMVOd947K/2XCeGnBwXBDw8wkCuFfzP0ITSrTjAn1x
+ PEitdmDuSwRN6lZ//TkEKFPdksSRQGhaeRTccK/EZx+kMiduA2Dw6p/SWzhd1TrlP
+ mgPr4NTt45OJxDSrOXEvGRYs0QQIMI1kaWZqWF9oohksDtYPqaka/67XczdLOPr2J
+ jBgRac5VVGJuY3zreJMeSQmIMGsZvxRnZX54KbLbVLuByP8KIRq2gjJxYkAj9JG2M
+ qglQOSnLPP7aUOpjtiip+Kv7JqXLPIX4ud037hnCE/PdTLLGvZziVGxKzlA6q/6Kg
+ IBoDN7FCIgDVKexdVQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MBDnI-1rVi0c3wUQ-00CjFJ; Mon, 01
+ Jan 2024 08:47:45 +0100
+Date: Mon, 01 Jan 2024 08:47:42 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Simon Glass <sjg@chromium.org>
+CC: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Bin Meng <bmeng.cn@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Igor Prusov <ivprusov@salutedevices.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Troy Kisky <troykiskyboundary@gmail.com>
+Subject: Re: [PATCH v5 00/12] smbios: Deal with tables beyond 4GB
+User-Agent: K-9 Mail for Android
+In-Reply-To: <CAFLszTj0Ef1VQMA2nc7xN4i8hyZbkLVZ+gMyybSPKOcjfpy14A@mail.gmail.com>
 References: <20231231152555.464874-1-sjg@chromium.org>
  <4683F3D9-7D61-4D26-B1F2-3DB07D009AE1@gmx.de>
  <54057bef-4466-43cb-a832-4b904f03b559@gmx.de>
-In-Reply-To: <54057bef-4466-43cb-a832-4b904f03b559@gmx.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 31 Dec 2023 17:37:39 -0700
-Message-ID: <CAFLszTj0Ef1VQMA2nc7xN4i8hyZbkLVZ+gMyybSPKOcjfpy14A@mail.gmail.com>
-Subject: Re: [PATCH v5 00/12] smbios: Deal with tables beyond 4GB
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Bin Meng <bmeng.cn@gmail.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Igor Prusov <ivprusov@salutedevices.com>, Nikhil M Jain <n-jain1@ti.com>, 
- Peter Robinson <pbrobinson@gmail.com>, Troy Kisky <troykiskyboundary@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+ <CAFLszTj0Ef1VQMA2nc7xN4i8hyZbkLVZ+gMyybSPKOcjfpy14A@mail.gmail.com>
+Message-ID: <22301360-DB0C-4361-A3AC-658FEC35F382@gmx.de>
+MIME-Version: 1.0
+Content-Type: text/plain;
+ charset=utf-8
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:72mXpeE1/4DpcmDi0+0niIEba60Gw9/v+Q/m8LcwASmvsC41gHj
+ CBmCxuIk1Trr9Gfc1xFEV8J9+NPcg03TvcFRCrWhvu/esBF+iJv+YRHbSq7pEPhDozqfM1b
+ 607zSqIdD3vVXfv/n5TT6t63dlU3CTApv0OeYHDhTjvfJlCKuQ6Tp0cdw5TW7mXeMJkqN+7
+ Gcw3FUzoVXW3jdFijaquQ==
+UI-OutboundReport: notjunk:1;M01:P0:UFdkHJqhVOI=;kWNKy4cqPnn9LOXkHM+s0IZDK2b
+ NATWsve4RSGFs9jejM88JzvtH77tJ7Ghaqi7BYUyV7PxTrtmC9VdKvLKiFehzWTMgYDXifVNH
+ m19XxruCsm8Fy+YncP9sa1fLEZjtjMgCwKSzLgFzxNKE37Iw84qstAC7yT+Xm0xuj2PRiSGGs
+ P3WRnRvOSHSS9tQlPGiv2vGGfUzd7unutKjmMaafdmaiuSn89wFYkuzW4VfS8cqiHOqt+UdLa
+ HFnr9aAw4kgMH1V+oFSS1+aLl9Zq4cM9pKMArB5a5yLjaJFx7sENunfnz83l2cRc4pv+PgvuN
+ Z3l5yivrS2UgPCdo5AemU2GsRkGzWGpHa8sTXPWEDsNcbUwh5FRvR5HKLRcyNyQQG0tCzmAh6
+ LEqkloEjHfQFyfQ8/YfjI7Zqh4FfbhER3zoYKnZtUvNUBd2Qr+6D7vToWQ35jTFAhs26LdymQ
+ H9qSNM+DG4gCXq+qW3sguHmJW10dufCHXH27QJxkGdRGntIeNAAdhoYb99lZAU1pkeNXcOuzy
+ DKZRfQfp7gCOZ+xCd4efejIQIzH9GjjYlR6vylKzHAhDffIbxa6grk0wdvLe+qJUFV+uVmX1p
+ LAo6+9MNMu7qtpTGrcp8fPQx4j7lnWZ3ffSRq1A1OK6C4FFIlB3CHwpduztI9W3qHHyfqamLL
+ G2ywBlw+GGdplA3twHAC1bXR0BJhgjW13tSIynpS8lX2451RPTJVTHxtTtctKNA+mX7Vk4GYe
+ Bgea9PotBgXawZCNhykdHf5uPXGHT1rN9O4+DjR/+1iL0MWHPmRKYxoIKychvziibJ6fGfaTf
+ VZEju3h7nzh7F1MThepvD4i8v9TkLRPvdUZvUSZlH7Nns0mO+CdMx16u9LteZJwWlfoWyXyx3
+ D8I0XvHrZ17MNq1H1DyLsEm0EKKTvK46wd6Ex/DxyzUEwYWPbDWZ5IfXc49joR2Vl3ZGa/ZPU
+ +UcLd4C/bbUuayAUuY1lR0DBTio=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,40 +99,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
 
-On Sun, Dec 31, 2023 at 9:07=E2=80=AFAM Heinrich Schuchardt <xypron.glpk@gm=
-x.de> wrote:
+
+Am 1=2E Januar 2024 01:37:39 MEZ schrieb Simon Glass <sjg@chromium=2Eorg>:
+>Hi Heinrich,
 >
-> On 12/31/23 16:56, Heinrich Schuchardt wrote:
-> >
-> >
-> > Am 31. Dezember 2023 16:25:43 MEZ schrieb Simon Glass <sjg@chromium.org=
->:
-> >> When the malloc() region extends beyond 4GB on ARM we may end up with
-> >> an SMBIOS table in that region.
-> >>
-> >> Add support for writing an SMBIOS3 table, which supports a 64-bit
-> >> address.
-> >>
-> >> Note that this problem does not happen on x86 since it requires the
-> >> tables to be placed just below 1MB in memory, unless
-> >> CONFIG_BLOBLIST_TABLES is enabled.
-> >
-> > The ACPI specification only requires that a low memory RSDP exists on n=
-on-UEFI x86 systems.
-> >
-> > Nothing stops us from copying the RSDP only to low memory when not boot=
-ing via EFI. Maybe that way we could have more common code. But this is bey=
-ond the scope of this series.
-> >
+>On Sun, Dec 31, 2023 at 9:07=E2=80=AFAM Heinrich Schuchardt <xypron=2Eglp=
+k@gmx=2Ede> wrote:
+>>
+>> On 12/31/23 16:56, Heinrich Schuchardt wrote:
+>> >
+>> >
+>> > Am 31=2E Dezember 2023 16:25:43 MEZ schrieb Simon Glass <sjg@chromium=
+=2Eorg>:
+>> >> When the malloc() region extends beyond 4GB on ARM we may end up wit=
+h
+>> >> an SMBIOS table in that region=2E
+>> >>
+>> >> Add support for writing an SMBIOS3 table, which supports a 64-bit
+>> >> address=2E
+>> >>
+>> >> Note that this problem does not happen on x86 since it requires the
+>> >> tables to be placed just below 1MB in memory, unless
+>> >> CONFIG_BLOBLIST_TABLES is enabled=2E
+>> >
+>> > The ACPI specification only requires that a low memory RSDP exists on=
+ non-UEFI x86 systems=2E
+>> >
+>> > Nothing stops us from copying the RSDP only to low memory when not bo=
+oting via EFI=2E Maybe that way we could have more common code=2E But this =
+is beyond the scope of this series=2E
+>> >
+>>
+>> Same is true for the SMBIOS anchor=2E You could have all tables in high
+>> memory and only copy the anchor to low memory when booting non-UEFI x86=
+=2E
 >
-> Same is true for the SMBIOS anchor. You could have all tables in high
-> memory and only copy the anchor to low memory when booting non-UEFI x86.
+>Yes, that's right=2E=2E=2Edo you think it is worth mentioning that, thoug=
+h?
 
-Yes, that's right...do you think it is worth mentioning that, though?
+Reducing the x86 speific code is something we   should investigate in futu=
+re=2E The current patch series looks good to me and hopefully will be merge=
+d soon=2E
 
-[..]
+Regards
 
-Regards,
-Simon
+Heinrich
+
+
+>
+>[=2E=2E]
+>
+>Regards,
+>Simon
