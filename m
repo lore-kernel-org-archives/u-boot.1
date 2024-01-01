@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F2ACC47073
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jan 2024 16:51:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 288D9C4706F
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jan 2024 16:53:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1C54878C8;
-	Mon,  1 Jan 2024 17:49:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 81122876C9;
+	Mon,  1 Jan 2024 17:53:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M5xB0od5";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fYqIw6/P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5ACD88785A; Mon,  1 Jan 2024 17:49:36 +0100 (CET)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id DA484878B8; Mon,  1 Jan 2024 17:53:17 +0100 (CET)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DAD287805
- for <u-boot@lists.denx.de>; Mon,  1 Jan 2024 17:49:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D398E86FFD
+ for <u-boot@lists.denx.de>; Mon,  1 Jan 2024 17:53:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-78154f49182so339527385a.2
- for <u-boot@lists.denx.de>; Mon, 01 Jan 2024 08:49:33 -0800 (PST)
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-680a06cc763so19172426d6.1
+ for <u-boot@lists.denx.de>; Mon, 01 Jan 2024 08:53:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704127772; x=1704732572; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1704127994; x=1704732794; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ajCKhqeCqMAJjNOhdH9Mlz4rTEK8FshXeAhyaQ/Ztbs=;
- b=M5xB0od5GmMxZKduCv6I3Y67QFcczP/rDtu+/VNrhgJxuB0IM7yeZbIl8ycPo0AM7P
- 8QfLm03Y9JIEzpXyBTnMyY4c6SinlOGdTRmI2Cncor8RVVpIM+YE69ONX8B3APDGdhkV
- T1fBLF6rWH8X6mVid7Kp8wHhC09LtjmqBeyzw=
+ bh=i5AsNIMS7b5Lc0uQf/Ldcovm46zJKKuDkeXS9kFv8gk=;
+ b=fYqIw6/PWdi/dVpFOMF3mmMdzDHFQo1KzK4l03pmzHqb3wVYwzhMGWjVKz8bUOIULq
+ TZODi7CHdNG1h0N7fJIU29d/XqBHDNdoOixGd+M6QwmmAfEOfP7EOg64glAgPlI9Yiat
+ zmaHaEfYSpCnAG+3xPwCD5dKSe18ylrql1q8c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704127772; x=1704732572;
+ d=1e100.net; s=20230601; t=1704127994; x=1704732794;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ajCKhqeCqMAJjNOhdH9Mlz4rTEK8FshXeAhyaQ/Ztbs=;
- b=F5ZIHcA5JQr7u3runu+opEa8MVLIJA18C4JG58xSsNfeG3oU1JU5h8yxqXGrZne6RC
- NlyrE+9kiFAdZcup2hACt4TXmbBeJBJ0c+aiihALjv3e5F00oR++rEXxyVLNSkB8gqMk
- GRdjwG5KrECFGlOliNrLX5e39KahOoWNzMZ01mKWeniRPfuK1uaX6BH7n1x4my8plXgy
- sSYqCSLqdVdAHUdq0hIce5nxF5A4sppdedgGkBgbQ5RFZ5jsofkBgVryo7I3A9H0CZAh
- aisqVqc2EgDPkWOIvNwYEqq8nxMLJwB+7RC+mgKssQR1nO2FIcmQ4bwAGuT4ui5NZjmK
- ZR3g==
-X-Gm-Message-State: AOJu0Yx2JvP+k0YIqkPcqN3GS+SmIBykSfFjGYbuu/8+jMH3rHdaPg18
- 2eC6ltmK5oAAi98CrOE7DpxJ5+FPOYtnKTIvEO2/eUKXeShq
-X-Google-Smtp-Source: AGHT+IHkeHOLGfMRiKb5hadX25YqN/odf6YIdJinNYNE0Ul0zvhSR/HeSK9qOhTuXzBqd//8MaB8omRR3yN+PtQlF8E=
-X-Received: by 2002:a05:6214:23c8:b0:680:925f:da04 with SMTP id
- hr8-20020a05621423c800b00680925fda04mr4724895qvb.94.1704127772257; Mon, 01
- Jan 2024 08:49:32 -0800 (PST)
+ bh=i5AsNIMS7b5Lc0uQf/Ldcovm46zJKKuDkeXS9kFv8gk=;
+ b=IiUo7K2bk2xSY/XjzqjSpqOkQUYZqsUSb9E3btxs+1bWDj8STRpusgzdOye2LQjAX0
+ jJNOGQjFXqn+p1s1nuu8wiTKZIP9Mx/+a9HMqXsro4WA5oS7wI9xg3l4jJXYGVyZ+2KW
+ 0rk3eGhpIrH18JUDG54JBT9NkDbsf2REBrxDmQDQ3cXdaeI38EVXvN2g6HJ16jgud33/
+ hwu4xpAtzMymrUX+rMgi0b4/wa4xvuSBYSLP3sBUNaUvWDhroiOAcIMMgEjTp2BH+dZl
+ AJoR2+xO8ew8z1kKsiPSkSbYTUR25LARJmwtlTqDrz2WToYrMEXYCaHBWxPuVYv4osBn
+ Ce4w==
+X-Gm-Message-State: AOJu0Yxopp76zLhP3dybBVps5rWsqb6ZkSojhii2xHGUeK0uaeTYTK3t
+ /DTzUZ0IrLgtok1x76oJtHsb5AlN4Rhmevj5+EItFvwH1PhU
+X-Google-Smtp-Source: AGHT+IEfcLQKhqplxstt1mK9INhn1HCOo81DIR9AZpK6toEPqCbgSmCLn+lvKRxjJkDGdonDmOvW99wUuJjAQefDtO8=
+X-Received: by 2002:a05:6214:2341:b0:67a:a721:d782 with SMTP id
+ hu1-20020a056214234100b0067aa721d782mr23408082qvb.104.1704127994675; Mon, 01
+ Jan 2024 08:53:14 -0800 (PST)
 Received: from 798914943136 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 1 Jan 2024 11:49:31 -0500
+ HTTPREST; Mon, 1 Jan 2024 11:53:14 -0500
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAPnjgZ1gNb2Vaanjw8--0n=QPYnWwfWdexHFE7zS7cPhCop_+g@mail.gmail.com>
-References: <CAPnjgZ1gNb2Vaanjw8--0n=QPYnWwfWdexHFE7zS7cPhCop_+g@mail.gmail.com>
- <20231215094230.130121-1-heinrich.schuchardt@canonical.com>
-Date: Mon, 1 Jan 2024 11:49:31 -0500
-X-Google-Sender-Auth: 6IkqwwDD0PR21JFhBjJODK9Cgi0
-Message-ID: <CAFLszThM5EUyD9XSQMDStTyTOyVZM98ZTsoLx2gbx3piDf4v-Q@mail.gmail.com>
-Subject: Re: [PATCH 1/1] buildman: type cotaining
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, 
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231229174244.892818-12-raymond.mao@linaro.org>
+References: <20231229174244.892818-12-raymond.mao@linaro.org>
+ <20231229174244.892818-1-raymond.mao@linaro.org>
+Date: Mon, 1 Jan 2024 11:53:14 -0500
+X-Google-Sender-Auth: bPCCYEQoidio-suKbpeZK8vfosc
+Message-ID: <CAFLszTjMfdzL=C9imZP6fFpuxbpDGLLcxVR9Dnk3fUkyfH=1QA@mail.gmail.com>
+Subject: Re: [PATCH v5 11/11] bloblist: Update documentation and header comment
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
+ u-boot@lists.denx.de, 
+ ilias.apalodimas@linaro.org, sjg@chromium.org, jwerner@chromium.org
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,14 +86,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 15 Dec 2023 at 02:42, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> %s/cotaining/containing/
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  tools/buildman/boards.py | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
+From: Simon Glass <sjg@chromium.org>
+
+Align the documentation with the v0.9 spec.
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ doc/develop/bloblist.rst | 4 +++-
+ include/bloblist.h       | 1 +
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+
 Applied to u-boot-dm/next, thanks!
