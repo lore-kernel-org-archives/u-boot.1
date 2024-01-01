@@ -4,71 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E0A0C4706F
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jan 2024 16:55:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DB61C4706F
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jan 2024 17:32:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 386588793A;
-	Mon,  1 Jan 2024 17:53:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 499AB86F64;
+	Mon,  1 Jan 2024 18:32:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C2KOn5WB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P3h/Zb9d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B554B87931; Mon,  1 Jan 2024 17:53:31 +0100 (CET)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id C5EBE86FFD; Mon,  1 Jan 2024 18:32:11 +0100 (CET)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84C3A87920
- for <u-boot@lists.denx.de>; Mon,  1 Jan 2024 17:53:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 23BFA86F39
+ for <u-boot@lists.denx.de>; Mon,  1 Jan 2024 18:32:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-680285e7ce8so44438886d6.0
- for <u-boot@lists.denx.de>; Mon, 01 Jan 2024 08:53:28 -0800 (PST)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-67fb9df3699so62357356d6.2
+ for <u-boot@lists.denx.de>; Mon, 01 Jan 2024 09:32:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704128007; x=1704732807; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6wdrAA3EvXZdvoiJCvXroEYyeHrwjVJ1/BtOav28cBM=;
- b=C2KOn5WBmqvYCbBkA9ClsgfyAsob4kkpXT5cdMNd/dVhPXD9P+VPeXAQ4roW2/CBAX
- LTuNYF0GhkiWWadu4vhYQR/ex5GIGdGMyBZ6DzoL2XVOMJ3BBVVzUsmGjNkyHxVlYBrp
- uXOYyjkAIVZ4HwwVQv1RtFTC29V++4WMgK2mw=
+ d=chromium.org; s=google; t=1704130328; x=1704735128; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=o4onirU2klJxT3yXtKD3DC3AhUKtQpKFc35RVxsn0yA=;
+ b=P3h/Zb9dqzTwUQWxaoHp1Yw/fxM4gr4DdFbkWDQkr6TYMrQHdRp+ZD81Frx2smrvNz
+ trblonZ5Emt5QR82QAwuavhYpRE6j2zLh+TNjuSo71WvHlTd1cKJ0H7zmVtVT9Nnqwgl
+ pWIa8SG33ocU8FvYpJe/rdv/pOQ75p5DcP8uQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704128007; x=1704732807;
- h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6wdrAA3EvXZdvoiJCvXroEYyeHrwjVJ1/BtOav28cBM=;
- b=OH8d4sS7UH9FQYlGCi7bWSoY7mRGbr2RPeHZrnn4/Ria4WTL7pmuYZt5jBJ4yUcRFH
- wl9sbDvO4mmJSXKW/Y3B2SLCKAjY/vr41sRNiV4Bbnnrw8A9q0HGbM6MmrAB1B0GCJr1
- MbozzdziaVGQw60s9M21OChuhYnFFUv7FW1XF+Nf2iFoOfSWkR0+SbrfVJxIPvsburnj
- XmwI+M+/Xb+q+01rx4S/0eQK6LwRYBBlC4qEvRvR1lHPfqMyIVtSnTT4QnF3aHSIqkFW
- 0Tl9D/4Vgw084y6JBMxqXEzRmmlcjxIcGEC627LeN44bH8UgKSA75W6MP8MwqxCkjahQ
- Bcug==
-X-Gm-Message-State: AOJu0Yz5EgBDy/B6ezTe4JT30XifYVhqKwKWtRjjclfT0Wf7ZyDjJ8/P
- 6rtYkZKbMFDAtxprzpI/MQXFC1h3tXtrzPz7MjTrkAfgEmk8RQrUlAwbQhDj6A==
-X-Google-Smtp-Source: AGHT+IE6oZe8QtbVcdIL4DtzQbS/Qwqtv9TG7nEcqsCAIf5TBuAndxaEaVfjCkj+WzOKrJibDojWMTNsFW2RKMzH0rM=
-X-Received: by 2002:a05:6214:23cc:b0:680:b917:feb2 with SMTP id
- hr12-20020a05621423cc00b00680b917feb2mr1428160qvb.44.1704128007432; Mon, 01
- Jan 2024 08:53:27 -0800 (PST)
-Received: from 798914943136 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 1 Jan 2024 11:53:26 -0500
+ d=1e100.net; s=20230601; t=1704130328; x=1704735128;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=o4onirU2klJxT3yXtKD3DC3AhUKtQpKFc35RVxsn0yA=;
+ b=lsinLxPlAOc7B0O9AOhvl+IiXG7iti2SsITDMPTaG6N4rJe4uEvP3NaIzk5dDFvcYx
+ QHLuyM9Mj1zRd83CltA/RpNiOmi8tMnNCRy42IrhUlrhz8yLgL1aw7zcGJdxBjVvMxIH
+ sGEcidGQMPvaZs0GVTeREFJZX3Nr54QceWyYFbyxGPPFmlPIN3orY5AqQI21od9cfJcE
+ YmeFOK+7Qman05JQpMjuo9en1fjqJsM/HxWxFD5KJDZieFtl75Dc4hg0OVc9J1FD45ip
+ YHZiarn6YGooqFXlZ9tqcm7kpEFgYk4dPV4fk73SSxQ43KiosFsmiDRwEEHQT8+HEr71
+ QukQ==
+X-Gm-Message-State: AOJu0Yw/qiWsZzWXFK4sVfGtTRbSYQvkQZuYUKe5U20WTPKkQSSZhE5V
+ I+rO4qRwTi2DWfCQRq4q8QXqpYEpltiM/vGMKX9zdVL9kgaWb2lszF8nH9XYRw==
+X-Google-Smtp-Source: AGHT+IF8ufwQ2FCPycAUky3QTUXVKuysxz8Xk1GubvGZ3uJLp0mmcgfTOmHf+KFGO7bqhLw/FtueasQEDQJM0pB5DqU=
+X-Received: by 2002:ad4:5aec:0:b0:67f:179c:e1a2 with SMTP id
+ c12-20020ad45aec000000b0067f179ce1a2mr22830848qvh.22.1704130327833; Mon, 01
+ Jan 2024 09:32:07 -0800 (PST)
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20231229174244.892818-2-raymond.mao@linaro.org>
-References: <20231229174244.892818-2-raymond.mao@linaro.org>
- <20231229174244.892818-1-raymond.mao@linaro.org>
-Date: Mon, 1 Jan 2024 11:53:26 -0500
-X-Google-Sender-Auth: YiPdBZr2YXAgb9mIJ4R23FIi2aI
-Message-ID: <CAFLszThumJVrxAqj+tkK6DOrqXV+G1T0c6LUpApHjHkwBs-trQ@mail.gmail.com>
-Subject: Re: [PATCH v5 01/11] bloblist: Update the tag numbering
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
- u-boot@lists.denx.de, 
- ilias.apalodimas@linaro.org, sjg@chromium.org, jwerner@chromium.org
+Date: Mon, 1 Jan 2024 10:31:57 -0700
+Message-ID: <CAFLszTiz8oT9tTA-w+qVnxy2=mjCya8RMXdbswS1GtoxV+hO8w@mail.gmail.com>
+Subject: Please pull u-boot-dm next
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,30 +77,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Simon Glass <sjg@chromium.org>
+Hi Tom,
 
-Align bloblist tags with the FW handoff spec v0.9.
-The most common ones are from 0.
-TF related ones are from 0x100.
-All non-standard ones from 0xfff000.
+This is for -next
 
-Added new defined tags:
-BLOBLISTT_OPTEE_PAGABLE_PART for TF.
-BLOBLISTT_TPM_EVLOG and BLOBLISTT_TPM_CRB_BASE for TPM.
+https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/19131
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
-Changes in v2
-- Align bloblist tags to FW handoff spec v0.9.
-Changes in v3
-- Add TPM related tags
+https://dev.azure.com/simon0972/u-boot/_build/results?buildId=57&view=results
 
- common/bloblist.c  | 18 ++++++++++---
- include/bloblist.h | 67 +++++++++++++++++++++++++---------------------
- test/bloblist.c    |  4 +--
- 3 files changed, 52 insertions(+), 37 deletions(-)
 
-Applied to u-boot-dm/next, thanks!
+The following changes since commit 2b28c3b871cd5d55b19f0a86cef970139f8ab952:
+
+  Merge patch series "Modernize U-Boot shell" (2023-12-28 14:38:25 -0500)
+
+are available in the Git repository at:
+
+  git://git.denx.de/u-boot-dm.git tags/dm-next-1124
+
+for you to fetch changes up to e266d2731145681a55d862360f1b61690b0c6820:
+
+  bloblist: Update documentation and header comment (2023-12-31 07:21:02 -0700)
+
+----------------------------------------------------------------
+support propagating supernode properties with bootph schema
+align bloblist with v0.9 of Firmware Handoff spec
+
+----------------------------------------------------------------
+Heinrich Schuchardt (2):
+      buildman: type cotaining
+      binman: used-before-assignment in ftest.py
+
+Simon Glass (22):
+      x86: coral: Align bootph SPI-flash subnodes with parent
+      fdtgrep: Tidy up a few type warnings and comments
+      fdtgrep: Correct ordering of flags
+      fdtgrep: Correct references to fdt_find_regions()
+      fdtgrep: Tidy up comment for h_include()
+      fdtgrep: Simplify code to inverting the match
+      fdtgrep: Move property checking into a function
+      sandbox: Correct SPL condition for building devicetree
+      fdtgrep: Allow propagating properties up to supernodes
+      Makefile: Use the fdtgrep -u flag
+      bloblist: Update the tag numbering
+      bloblist: Adjust API to align in powers of 2
+      bloblist: Change the magic value
+      bloblist: Set version to 1
+      bloblist: Access record hdr_size and tag via a function
+      bloblist: Drop spare value from bloblist record
+      bloblist: Checksum the entire bloblist
+      bloblist: Handle alignment with a void entry
+      bloblist: Reduce blob-header size
+      bloblist: Adjust the bloblist header
+      bloblist: Add alignment to bloblist_new()
+      bloblist: Update documentation and header comment
+
+ arch/x86/dts/chromebook_coral.dts |   6 ++-
+ arch/x86/lib/tables.c             |   3 +-
+ common/bloblist.c                 | 205
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-------------------------------------
+ doc/develop/bloblist.rst          |   4 +-
+ include/bloblist.h                | 166
++++++++++++++++++++++++++++++++++++++++++++++---------------------------------
+ scripts/Makefile.lib              |  13 ++++++-
+ scripts/Makefile.spl              |   2 +-
+ test/bloblist.c                   | 105
++++++++++++++++++++++++++++-----------------------
+ tools/binman/ftest.py             |  20 +++++++---
+ tools/buildman/boards.py          |   2 +-
+ tools/fdtgrep.c                   | 123
+++++++++++++++++++++++++++++++++++++++--------------------
+
+Regards,
+Simon
