@@ -4,56 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68529C47073
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jan 2024 18:50:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7640C47073
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jan 2024 21:07:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB7348785F;
-	Mon,  1 Jan 2024 19:50:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 8AC9B8780C;
+	Mon,  1 Jan 2024 22:07:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="BrLcu6tr";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id ECA018780C; Mon,  1 Jan 2024 19:50:19 +0100 (CET)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1704143225;
+	bh=3Lvk/NFfcktnOgVMyGz/GAp65+YhUeXxwggIKS266N8=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=KfIrQj1tML2jCGvwwX+Z5owUhoF/nAV06FCsEY24pbLCs1VnJepzoIS0Q51Zb4+vA
+	 w69bytAxo2l/L8K5Ddezf97UsvxXsAaYuvzRucnHYywaPmNF/pv9ZABNS1615JmKAo
+	 GgcrTAytr/JKa4cCrf7LggQgpusWAG7n/hd9UOzgmEMqEPTyePcnIiI2nX5HZh9qFd
+	 XUBs55/ECvB2881dagNoA2BnVgtuh6TyC+xQCDX+SFGxjoo2PlKJgkCUPR2Nhf1JI4
+	 F0pxchTM9rELCBZMGRB2/OVBEx/nB17fzSz8uicsLpvaoSuxK6oXv8y7Mh6F42+Ptl
+	 PBW7vzH7TWdFg==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D924E877DE
- for <u-boot@lists.denx.de>; Mon,  1 Jan 2024 19:50:15 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
- [178.202.40.247])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 46280420ED; 
- Mon,  1 Jan 2024 18:50:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1704135015;
- bh=5MSxqQt9UtVcrDwZqjRS+iRnrdZd5O70HHEiG7/IFtw=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=BrLcu6trC/9O6emCtUClZ0pJ9wvSXsEH09v7PhzXshND/mj0n51jh0C9kfCV3CI8i
- 8tHHpTjulxHeo0i/Ltr/3bIn8mEprIYs5ZGhka6cJ0BLFkvo1pca9ISjM350gnS3Fg
- P12/sQOiLTpvwI/z12TLar0zOESSytjod1lj4iUDTRrlUbaDm0JYX03UdxysvYnBqA
- lcCr0IKoWiOmQLoxNL4syRfcKdPR3XCA4U/WdEcLva/buAsAiHnQA02XTabrvbMBcR
- xplnOSttVb3r79ESR5Jwju6hrkDDOh+r0KDoT+bOK4Ksk525S3KbopGlOzaOXKhKnU
- n15n/ubhcfhTg==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 2/2] efi_loader: provide tool to dump SMBIOS table
-Date: Mon,  1 Jan 2024 19:50:04 +0100
-Message-ID: <20240101185004.268790-3-heinrich.schuchardt@canonical.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 173A5877EC;
+ Mon,  1 Jan 2024 22:07:04 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1704143224;
+ bh=3Lvk/NFfcktnOgVMyGz/GAp65+YhUeXxwggIKS266N8=;
+ h=From:To:Cc:Subject:Date:From;
+ b=Ln0+6L6MdjIsLWG15W21fKS6LT6feadu/IAcbyMkJe5GmMdHcSJASxzfZ9FFTc25V
+ XKEuLq1RCHTp2mmN9JCJQBGVQ8SspbgcySYFyaQYOQZBAcMZsyZ+vXNOJCSRKET5AD
+ EKad4XZIbbdb7t7xj+7CNpLd6ggJCDO65gQJBCKZxlCWy3K/TRhcFqZxAaQ9t03j+x
+ GK+Sl4jNG5GXpxogIluk0Fc6iRtcuQRk/Uo+kK7RtSE2rT0S7aZ3cLzf7suFKfvexH
+ zb9sDO4BAMfTAxj2N9S3IqBPZaSeiMlIGXsyKftcH3c+a8PTWzxFrxW3tzd3x45Ge4
+ 9/W4Qh3nQ/8xg==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>
+Subject: [PATCH] ARM: imx: Auto-detect PHY on Data Modul i.MX8M Mini/Plus eDM
+ SBC
+Date: Mon,  1 Jan 2024 22:05:54 +0100
+Message-ID: <20240101210650.87314-1-marex@denx.de>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240101185004.268790-1-heinrich.schuchardt@canonical.com>
-References: <20240101185004.268790-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,665 +65,208 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-An EFI binary dmidump.efi is provided that can be used to check the SMBIOS
-table for consistency and to dump it as a file.
+Implement fdtdec_board_setup() auto-detection of ethernet PHY.
+This uses properties of the hardware and pull resistor placement.
 
-The tool provides the following commands:
+If GPIO1_16 RGMII_MDC is HIGH, then R530 (MX8MM eDM SBC) or
+R390 (MX8MP eDM SBC) is populated. R530 or R390 is populated
+only on boards with AR8031 PHY.
 
-check
-    Check the SMBIOS table for consistency.
+If GPIO1_16 RGMII_MDC is LOW, then the in-SoM pull down is the
+dominant pull resistor. This is the case on boards with BCM54213PE
+PHY.
 
-exit
-    Leave the tool.
+In case AR8031 PHY is populated, the PHY MDIO address is 0, in
+case BCM54213PE PHY is populated, the PHY MDIO address is 1, the
+fdtdec_board_setup() is used to patch the correct address into
+the U-Boot control DT.
 
-help
-    Show available commands.
+Enable broadcom PHY support to support both PHYs.
 
-save
-    Save the SMBIOS table to a file on the EFI system partition. The file
-    can be further analyzed with the dmidecode command line tool::
-
-        dmidecode --from-dump <filename>
-
-Specifying 'nocolor' as load option data suppresses colored output and
-clearing of the screen.
-
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Signed-off-by: Marek Vasut <marex@denx.de>
 ---
-v2:
-	fix an incorrect variable usage when checking the result of memcmp
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Stefano Babic <sbabic@denx.de>
 ---
- lib/efi_loader/Makefile  |   7 +
- lib/efi_loader/dmidump.c | 595 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 602 insertions(+)
- create mode 100644 lib/efi_loader/dmidump.c
+ .../dts/imx8mp-data-modul-edm-sbc-u-boot.dtsi |  6 ---
+ .../imx8mm_data_modul_edm_sbc.c               | 42 ++++++++++++++++
+ .../imx8mp_data_modul_edm_sbc.c               | 50 +++++++++++++++++++
+ configs/imx8mm_data_modul_edm_sbc_defconfig   |  1 +
+ configs/imx8mp_data_modul_edm_sbc_defconfig   |  1 +
+ 5 files changed, 94 insertions(+), 6 deletions(-)
 
-diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-index 24d33d5409..71880d330e 100644
---- a/lib/efi_loader/Makefile
-+++ b/lib/efi_loader/Makefile
-@@ -16,6 +16,8 @@ CFLAGS_boothart.o := $(CFLAGS_EFI) -Os -ffreestanding
- CFLAGS_REMOVE_boothart.o := $(CFLAGS_NON_EFI)
- CFLAGS_helloworld.o := $(CFLAGS_EFI) -Os -ffreestanding
- CFLAGS_REMOVE_helloworld.o := $(CFLAGS_NON_EFI)
-+CFLAGS_dmidump.o := $(CFLAGS_EFI) -Os -ffreestanding
-+CFLAGS_REMOVE_dmidump.o := $(CFLAGS_NON_EFI)
- CFLAGS_dtbdump.o := $(CFLAGS_EFI) -Os -ffreestanding
- CFLAGS_REMOVE_dtbdump.o := $(CFLAGS_NON_EFI)
- CFLAGS_initrddump.o := $(CFLAGS_EFI) -Os -ffreestanding
-@@ -31,6 +33,11 @@ always += helloworld.efi
- targets += helloworld.o
- endif
+diff --git a/arch/arm/dts/imx8mp-data-modul-edm-sbc-u-boot.dtsi b/arch/arm/dts/imx8mp-data-modul-edm-sbc-u-boot.dtsi
+index a2b5976b6bd..cb6ea356fd7 100644
+--- a/arch/arm/dts/imx8mp-data-modul-edm-sbc-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-data-modul-edm-sbc-u-boot.dtsi
+@@ -51,12 +51,6 @@
+ 	};
+ };
  
-+ifneq ($(CONFIG_GENERATE_SMBIOS_TABLE),)
-+always += dmidump.efi
-+targets += dmidump.o
-+endif
+-&eqos {
+-	/delete-property/ assigned-clocks;
+-	/delete-property/ assigned-clock-parents;
+-	/delete-property/ assigned-clock-rates;
+-};
+-
+ &gpio1 {
+ 	bootph-pre-ram;
+ };
+diff --git a/board/data_modul/imx8mm_edm_sbc/imx8mm_data_modul_edm_sbc.c b/board/data_modul/imx8mm_edm_sbc/imx8mm_data_modul_edm_sbc.c
+index ff89333b732..bfb2bddc1d1 100644
+--- a/board/data_modul/imx8mm_edm_sbc/imx8mm_data_modul_edm_sbc.c
++++ b/board/data_modul/imx8mm_edm_sbc/imx8mm_data_modul_edm_sbc.c
+@@ -5,9 +5,11 @@
+ 
+ #include <common.h>
+ #include <asm/arch/clock.h>
++#include <asm/arch/imx8mm_pins.h>
+ #include <asm/io.h>
+ #include <dm.h>
+ #include <dm/device-internal.h>
++#include <linux/bitfield.h>
+ #include <malloc.h>
+ #include <spl.h>
+ 
+@@ -34,3 +36,43 @@ int board_late_init(void)
+ 
+ 	return 0;
+ }
 +
- ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
- always += dtbdump.efi
- targets += dtbdump.o
-diff --git a/lib/efi_loader/dmidump.c b/lib/efi_loader/dmidump.c
-new file mode 100644
-index 0000000000..2a43a2808c
---- /dev/null
-+++ b/lib/efi_loader/dmidump.c
-@@ -0,0 +1,595 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright 2023, Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-+ *
-+ * dmidump.efi saves the SMBIOS table as file.
-+ *
-+ * Specifying 'nocolor' as load option data suppresses colored output and
-+ * clearing of the screen.
-+ */
-+
-+#include <efi_api.h>
-+#include <part.h>
-+#include <smbios.h>
-+#include <string.h>
-+
-+#define BUFFER_SIZE 64
-+
-+static struct efi_simple_text_output_protocol *cerr;
-+static struct efi_simple_text_output_protocol *cout;
-+static struct efi_simple_text_input_protocol *cin;
-+static struct efi_boot_services *bs;
-+static efi_handle_t handle;
-+static struct efi_system_table *systable;
-+static const efi_guid_t smbios_guid = SMBIOS_TABLE_GUID;
-+static const efi_guid_t smbios3_guid = SMBIOS3_TABLE_GUID;
-+static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
-+static const efi_guid_t guid_simple_file_system_protocol =
-+					EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
-+static const efi_guid_t efi_system_partition_guid = PARTITION_SYSTEM_GUID;
-+static bool nocolor;
-+
-+/**
-+ * color() - set foreground color
-+ *
-+ * @color:	foreground color
-+ */
-+static void color(u8 color)
++int fdtdec_board_setup(const void *fdt_blob)
 +{
-+	if (!nocolor)
-+		cout->set_attribute(cout, color | EFI_BACKGROUND_BLACK);
-+}
++	const void __iomem *mux = (void __iomem *)IOMUXC_BASE_ADDR +
++		FIELD_GET(MUX_CTRL_OFS_MASK, IMX8MM_PAD_ENET_MDC_GPIO1_IO16);
++	const char *phy_compat = "ethernet-phy-ieee802.3-c22";
++	bool is_bcmphy;
++	int phy_node;
++	int ret;
 +
-+/**
-+ * print() - print string
-+ *
-+ * @string:	text
-+ */
-+static void print(u16 *string)
++	/* Do nothing if not i.MX8MM eDM SBC */
++	ret = fdt_node_check_compatible(fdt_blob, 0, "dmo,imx8mm-data-modul-edm-sbc");
++	if (ret)
++		return 0;
++
++	/*
++	 * If GPIO1_16 RGMII_MDC is HIGH, then R530 is populated.
++	 * R530 is populated only on boards with AR8031 PHY.
++	 *
++	 * If GPIO1_16 RGMII_MDC is LOW, then the in-SoM pull down
++	 * is the dominant pull resistor. This is the case on boards
++	 * with BCM54213PE PHY.
++	 */
++	setbits_le32(mux, IOMUX_CONFIG_SION);
++	is_bcmphy = !(readl(GPIO1_BASE_ADDR) & BIT(16));
++	clrbits_le32(mux, IOMUX_CONFIG_SION);
++
++	phy_node = fdt_node_offset_by_compatible(fdt_blob, -1, phy_compat);
++	if (phy_node < 0)
++		return 0;
++
++	/*
++	 * Update PHY MDC address in control DT based on the populated
++	 * PHY type. AR8031 is at address 0, BCM54213PE is at address 1.
++	 */
++	fdt_setprop_inplace_u32((void *)fdt_blob, phy_node,
++				"reg", is_bcmphy ? 1 : 0);
++
++	return 0;
++}
+diff --git a/board/data_modul/imx8mp_edm_sbc/imx8mp_data_modul_edm_sbc.c b/board/data_modul/imx8mp_edm_sbc/imx8mp_data_modul_edm_sbc.c
+index 9fbbbc1b77e..f0f373aa280 100644
+--- a/board/data_modul/imx8mp_edm_sbc/imx8mp_data_modul_edm_sbc.c
++++ b/board/data_modul/imx8mp_edm_sbc/imx8mp_data_modul_edm_sbc.c
+@@ -5,11 +5,13 @@
+ 
+ #include <common.h>
+ #include <asm/arch/clock.h>
++#include <asm/arch/imx8mp_pins.h>
+ #include <asm/io.h>
+ #include <dm.h>
+ #include <dm/device-internal.h>
+ #include <env.h>
+ #include <env_internal.h>
++#include <linux/bitfield.h>
+ #include <malloc.h>
+ #include <net.h>
+ #include <spl.h>
+@@ -65,3 +67,51 @@ int board_late_init(void)
+ 
+ 	return 0;
+ }
++
++int fdtdec_board_setup(const void *fdt_blob)
 +{
-+	cout->output_string(cout, string);
++	const void __iomem *mux = (void __iomem *)IOMUXC_BASE_ADDR +
++		FIELD_GET(MUX_CTRL_OFS_MASK, MX8MP_PAD_ENET_MDC__ENET_QOS_MDC);
++	const char *phy_compat = "ethernet-phy-ieee802.3-c22";
++	bool is_bcmphy;
++	int phy_node;
++	int ret;
++
++	/* Do nothing if not i.MX8MP eDM SBC */
++	ret = fdt_node_check_compatible(fdt_blob, 0, "dmo,imx8mp-data-modul-edm-sbc");
++	if (ret)
++		return 0;
++
++	/*
++	 * If GPIO1_16 RGMII_MDC is HIGH, then R390 is populated.
++	 * R390 is populated only on boards with AR8031 PHY.
++	 *
++	 * If GPIO1_16 RGMII_MDC is LOW, then the in-SoM pull down
++	 * is the dominant pull resistor. This is the case on boards
++	 * with BCM54213PE PHY.
++	 */
++	setbits_le32(mux, IOMUX_CONFIG_SION);
++	is_bcmphy = !(readl(GPIO1_BASE_ADDR) & BIT(16));
++	clrbits_le32(mux, IOMUX_CONFIG_SION);
++
++	phy_node = fdt_node_offset_by_compatible(fdt_blob, -1, phy_compat);
++	if (phy_node < 0)
++		return 0;
++
++	/*
++	 * Update PHY MDC address in control DT based on the populated
++	 * PHY type. AR8031 is at address 0, BCM54213PE is at address 1.
++	 */
++	fdt_setprop_inplace_u32((void *)fdt_blob, phy_node,
++				"reg", is_bcmphy ? 1 : 0);
++
++	/* Apply the same modification to EQoS PHY */
++	phy_node = fdt_node_offset_by_compatible(fdt_blob, phy_node, phy_compat);
++	if (phy_node < 0)
++		return 0;
++
++	fdt_setprop_inplace_u32((void *)fdt_blob, phy_node,
++				"reg", is_bcmphy ? 1 : 0);
++
++	return 0;
 +}
-+
-+/**
-+ * cls() - clear screen
-+ */
-+static void cls(void)
-+{
-+	if (nocolor)
-+		print(u"\r\n");
-+	else
-+		cout->clear_screen(cout);
-+}
-+
-+/**
-+ * error() - print error string
-+ *
-+ * @string:	error text
-+ */
-+static void error(u16 *string)
-+{
-+	color(EFI_LIGHTRED);
-+	print(string);
-+	color(EFI_LIGHTBLUE);
-+}
-+
-+/**
-+ * efi_input_yn() - get answer to yes/no question
-+ *
-+ * Return:
-+ * y or Y
-+ *     EFI_SUCCESS
-+ * n or N
-+ *     EFI_ACCESS_DENIED
-+ * ESC
-+ *     EFI_ABORTED
-+ */
-+static efi_status_t efi_input_yn(void)
-+{
-+	struct efi_input_key key = {0};
-+	efi_uintn_t index;
-+	efi_status_t ret;
-+
-+	/* Drain the console input */
-+	ret = cin->reset(cin, true);
-+	for (;;) {
-+		ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
-+		if (ret != EFI_SUCCESS)
-+			continue;
-+		ret = cin->read_key_stroke(cin, &key);
-+		if (ret != EFI_SUCCESS)
-+			continue;
-+		switch (key.scan_code) {
-+		case 0x17: /* Escape */
-+			return EFI_ABORTED;
-+		default:
-+			break;
-+		}
-+		/* Convert to lower case */
-+		switch (key.unicode_char | 0x20) {
-+		case 'y':
-+			return EFI_SUCCESS;
-+		case 'n':
-+			return EFI_ACCESS_DENIED;
-+		default:
-+			break;
-+		}
-+	}
-+}
-+
-+/**
-+ * efi_input() - read string from console
-+ *
-+ * @buffer:		input buffer
-+ * @buffer_size:	buffer size
-+ * Return:		status code
-+ */
-+static efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
-+{
-+	struct efi_input_key key = {0};
-+	efi_uintn_t index;
-+	efi_uintn_t pos = 0;
-+	u16 outbuf[2] = u" ";
-+	efi_status_t ret;
-+
-+	/* Drain the console input */
-+	ret = cin->reset(cin, true);
-+	*buffer = 0;
-+	for (;;) {
-+		ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
-+		if (ret != EFI_SUCCESS)
-+			continue;
-+		ret = cin->read_key_stroke(cin, &key);
-+		if (ret != EFI_SUCCESS)
-+			continue;
-+		switch (key.scan_code) {
-+		case 0x17: /* Escape */
-+			print(u"\r\nAborted\r\n");
-+			return EFI_ABORTED;
-+		default:
-+			break;
-+		}
-+		switch (key.unicode_char) {
-+		case 0x08: /* Backspace */
-+			if (pos) {
-+				buffer[pos--] = 0;
-+				print(u"\b \b");
-+			}
-+			break;
-+		case 0x0a: /* Linefeed */
-+		case 0x0d: /* Carriage return */
-+			print(u"\r\n");
-+			return EFI_SUCCESS;
-+		default:
-+			break;
-+		}
-+		/* Ignore surrogate codes */
-+		if (key.unicode_char >= 0xD800 && key.unicode_char <= 0xDBFF)
-+			continue;
-+		if (key.unicode_char >= 0x20 &&
-+		    pos < buffer_size - 1) {
-+			*outbuf = key.unicode_char;
-+			buffer[pos++] = key.unicode_char;
-+			buffer[pos] = 0;
-+			print(outbuf);
-+		}
-+	}
-+}
-+
-+/**
-+ * skip_whitespace() - skip over leading whitespace
-+ *
-+ * @pos:	UTF-16 string
-+ * Return:	pointer to first non-whitespace
-+ */
-+static u16 *skip_whitespace(u16 *pos)
-+{
-+	for (; *pos && *pos <= 0x20; ++pos)
-+		;
-+	return pos;
-+}
-+
-+/**
-+ * starts_with() - check if @string starts with @keyword
-+ *
-+ * @string:	string to search for keyword
-+ * @keyword:	keyword to be searched
-+ * Return:	true fi @string starts with the keyword
-+ */
-+static bool starts_with(u16 *string, u16 *keyword)
-+{
-+	for (; *keyword; ++string, ++keyword) {
-+		if (*string != *keyword)
-+			return false;
-+	}
-+	return true;
-+}
-+
-+/**
-+ * open_file_system() - open simple file system protocol
-+ *
-+ * file_system:	interface of the simple file system protocol
-+ * Return:	status code
-+ */
-+static efi_status_t
-+open_file_system(struct efi_simple_file_system_protocol **file_system)
-+{
-+	struct efi_loaded_image *loaded_image;
-+	efi_status_t ret;
-+	efi_handle_t *handle_buffer = NULL;
-+	efi_uintn_t count;
-+
-+	ret = bs->open_protocol(handle, &loaded_image_guid,
-+				(void **)&loaded_image, NULL, NULL,
-+				EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Loaded image protocol not found\r\n");
-+		return ret;
-+	}
-+
-+	/* Open the simple file system protocol on the same partition */
-+	ret = bs->open_protocol(loaded_image->device_handle,
-+				&guid_simple_file_system_protocol,
-+				(void **)file_system, NULL, NULL,
-+				EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+	if (ret == EFI_SUCCESS)
-+		return ret;
-+
-+	/* Open the simple file system protocol on the UEFI system partition */
-+	ret = bs->locate_handle_buffer(BY_PROTOCOL, &efi_system_partition_guid,
-+				       NULL, &count, &handle_buffer);
-+	if (ret == EFI_SUCCESS && handle_buffer)
-+		ret = bs->open_protocol(handle_buffer[0],
-+					&guid_simple_file_system_protocol,
-+					(void **)file_system, NULL, NULL,
-+					EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+	if (ret != EFI_SUCCESS)
-+		error(u"Failed to open simple file system protocol\r\n");
-+	if (handle)
-+		bs->free_pool(handle_buffer);
-+
-+	return ret;
-+}
-+
-+/**
-+ * do_help() - print help
-+ */
-+static void do_help(void)
-+{
-+	error(u"check       - check SMBIOS table\r\n");
-+	error(u"save <file> - save SMBIOS table to file\r\n");
-+	error(u"exit        - exit the shell\r\n");
-+}
-+
-+/**
-+ * get_config_table() - get configuration table
-+ *
-+ * @guid:	GUID of the configuration table
-+ * Return:	pointer to configuration table or NULL
-+ */
-+static void *get_config_table(const efi_guid_t *guid)
-+{
-+	size_t i;
-+
-+	for (i = 0; i < systable->nr_tables; ++i) {
-+		if (!memcmp(guid, &systable->tables[i].guid, 16))
-+			return systable->tables[i].table;
-+	}
-+
-+	return NULL;
-+}
-+
-+/**
-+ * checksum() - calculate checksum
-+ *
-+ * @buf:	buffer to checksum
-+ * @len:	length of buffer
-+ * Return:	checksum
-+ */
-+u8 checksum(void *buf, int len)
-+{
-+	u8 ret = 0;
-+
-+	for (u8 *ptr = buf; len; --len, ++ptr)
-+		ret -= *ptr;
-+
-+	return ret;
-+}
-+
-+/**
-+ * do_check() - check SMBIOS table
-+ *
-+ * Return:	status code
-+ */
-+efi_status_t do_check(void)
-+{
-+	struct smbios3_entry *smbios3_anchor;
-+	void *table, *table_end;
-+	u32 len;
-+
-+	smbios3_anchor = get_config_table(&smbios3_guid);
-+	if (smbios3_anchor) {
-+		int r;
-+
-+		r = memcmp(smbios3_anchor->anchor, "_SM3_", 5);
-+		if (r) {
-+			error(u"Invalid anchor string\n");
-+			return EFI_LOAD_ERROR;
-+		}
-+		print(u"Found SMBIOS 3 entry point\n");
-+		if (smbios3_anchor->length != 0x18) {
-+			error(u"Invalid anchor length\n");
-+			return EFI_LOAD_ERROR;
-+		}
-+		if (checksum(smbios3_anchor, smbios3_anchor->length)) {
-+			error(u"Invalid anchor checksum\n");
-+			return EFI_LOAD_ERROR;
-+		}
-+		table = (void *)(uintptr_t)smbios3_anchor->struct_table_address;
-+		len = smbios3_anchor->max_struct_size;
-+	} else {
-+		struct smbios_entry *smbios_anchor;
-+		int r;
-+
-+		smbios_anchor = get_config_table(&smbios_guid);
-+		if (!smbios_anchor) {
-+			error(u"No SMBIOS table\n");
-+			return EFI_NOT_FOUND;
-+		}
-+		r = memcmp(smbios_anchor->anchor, "_SM_", 4);
-+		if (r) {
-+			error(u"Invalid anchor string\n");
-+			return EFI_LOAD_ERROR;
-+		}
-+		print(u"Found SMBIOS 2.1 entry point\n");
-+		if (smbios_anchor->length != 0x1f) {
-+			error(u"Invalid anchor length\n");
-+			return EFI_LOAD_ERROR;
-+		}
-+		if (checksum(smbios_anchor, smbios_anchor->length)) {
-+			error(u"Invalid anchor checksum\n");
-+			return EFI_LOAD_ERROR;
-+		}
-+		r = memcmp(smbios_anchor->intermediate_anchor, "_DMI_", 5);
-+		if (r) {
-+			error(u"Invalid intermediate anchor string\n");
-+			return EFI_LOAD_ERROR;
-+		}
-+		if (checksum(&smbios_anchor->intermediate_anchor, 0xf)) {
-+			error(u"Invalid intermediate anchor checksum\n");
-+			return EFI_LOAD_ERROR;
-+		}
-+		table = (void *)(uintptr_t)smbios_anchor->struct_table_address;
-+		len = smbios_anchor->struct_table_length;
-+	}
-+
-+	table_end = (void *)((u8 *)table + len);
-+	for (struct smbios_header *pos = table; ;) {
-+		u8 *str = (u8 *)pos + pos->length;
-+
-+		if (!*str)
-+			++str;
-+		while (*str) {
-+			for (; *str; ++str) {
-+				if ((void *)str >= table_end) {
-+					error(u"Structure table length exceeded\n");
-+					return EFI_LOAD_ERROR;
-+				}
-+			}
-+			++str;
-+		}
-+		++str;
-+		if ((void *)str > table_end) {
-+			error(u"Structure table length exceeded\n");
-+			return EFI_LOAD_ERROR;
-+		}
-+		if (pos->type == 0x7f) /* End of table */
-+			break;
-+		pos = (struct smbios_header *)str;
-+	}
-+
-+	return EFI_SUCCESS;
-+}
-+
-+/**
-+ * do_save() - save SMBIOS table
-+ *
-+ * @filename:	file name
-+ * Return:	status code
-+ */
-+static efi_status_t do_save(u16 *filename)
-+{
-+	struct smbios3_entry *smbios3_anchor;
-+	u8 *buf;
-+	struct efi_simple_file_system_protocol *file_system;
-+	efi_uintn_t size;
-+	struct efi_file_handle *root, *file;
-+	efi_uintn_t ret;
-+
-+	ret = do_check();
-+	if (ret != EFI_SUCCESS)
-+		return ret;
-+
-+	smbios3_anchor = get_config_table(&smbios3_guid);
-+	if (smbios3_anchor) {
-+		size = 0x20 + smbios3_anchor->max_struct_size;
-+		ret = bs->allocate_pool(EFI_LOADER_DATA, size, (void **)&buf);
-+		if (ret != EFI_SUCCESS) {
-+			error(u"Out of memory\n");
-+			return ret;
-+		}
-+
-+		memset(buf, 0, size);
-+		memcpy(buf, smbios3_anchor, smbios3_anchor->length);
-+		memcpy(buf + 0x20,
-+		       (void *)(uintptr_t)smbios3_anchor->struct_table_address,
-+		       smbios3_anchor->max_struct_size);
-+
-+		smbios3_anchor = (struct smbios3_entry *)buf;
-+		smbios3_anchor->struct_table_address = 0x20;
-+		smbios3_anchor->checksum +=
-+			checksum(smbios3_anchor, smbios3_anchor->length);
-+	} else {
-+		struct smbios_entry *smbios_anchor;
-+
-+		smbios_anchor = get_config_table(&smbios_guid);
-+		if (!smbios_anchor) {
-+			/* Should not be reached after successful do_check() */
-+			error(u"No SMBIOS table\n");
-+			return EFI_NOT_FOUND;
-+		}
-+
-+		size = 0x20 + smbios_anchor->struct_table_length;
-+
-+		ret = bs->allocate_pool(EFI_LOADER_DATA, size, (void **)&buf);
-+		if (ret != EFI_SUCCESS) {
-+			error(u"Out of memory\n");
-+			return ret;
-+		}
-+
-+		memset(buf, 0, size);
-+		memcpy(buf, smbios_anchor, smbios_anchor->length);
-+		memcpy(buf + 0x20,
-+		       (void *)(uintptr_t)smbios_anchor->struct_table_address,
-+		       smbios_anchor->struct_table_length);
-+
-+		smbios_anchor = (struct smbios_entry *)buf;
-+		smbios_anchor->struct_table_address = 0x20;
-+		smbios_anchor->intermediate_checksum +=
-+			checksum(&smbios_anchor->intermediate_anchor, 0xf);
-+		smbios_anchor->checksum +=
-+			checksum(smbios_anchor, smbios_anchor->length);
-+	}
-+
-+	filename = skip_whitespace(filename);
-+
-+	ret = open_file_system(&file_system);
-+	if (ret != EFI_SUCCESS)
-+		return ret;
-+
-+	/* Open volume */
-+	ret = file_system->open_volume(file_system, &root);
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Failed to open volume\r\n");
-+		return ret;
-+	}
-+	/* Check if file already exists */
-+	ret = root->open(root, &file, filename, EFI_FILE_MODE_READ, 0);
-+	if (ret == EFI_SUCCESS) {
-+		file->close(file);
-+		print(u"Overwrite existing file (y/n)? ");
-+		ret = efi_input_yn();
-+		print(u"\r\n");
-+		if (ret != EFI_SUCCESS) {
-+			root->close(root);
-+			error(u"Aborted by user\r\n");
-+			bs->free_pool(buf);
-+			return ret;
-+		}
-+	}
-+
-+	/* Create file */
-+	ret = root->open(root, &file, filename,
-+			 EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE |
-+			 EFI_FILE_MODE_CREATE, EFI_FILE_ARCHIVE);
-+	if (ret == EFI_SUCCESS) {
-+		/* Write file */
-+		ret = file->write(file, &size, buf);
-+		if (ret != EFI_SUCCESS)
-+			error(u"Failed to write file\r\n");
-+		file->close(file);
-+	} else {
-+		error(u"Failed to open file\r\n");
-+	}
-+	root->close(root);
-+
-+	if (ret == EFI_SUCCESS) {
-+		print(filename);
-+		print(u" written\r\n");
-+	}
-+
-+	bs->free_pool(buf);
-+
-+	return ret;
-+}
-+
-+/**
-+ * get_load_options() - get load options
-+ *
-+ * Return:	load options or NULL
-+ */
-+static u16 *get_load_options(void)
-+{
-+	efi_status_t ret;
-+	struct efi_loaded_image *loaded_image;
-+
-+	ret = bs->open_protocol(handle, &loaded_image_guid,
-+				(void **)&loaded_image, NULL, NULL,
-+				EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+	if (ret != EFI_SUCCESS) {
-+		error(u"Loaded image protocol not found\r\n");
-+		return NULL;
-+	}
-+
-+	if (!loaded_image->load_options_size || !loaded_image->load_options)
-+		return NULL;
-+
-+	return loaded_image->load_options;
-+}
-+
-+/**
-+ * efi_main() - entry point of the EFI application.
-+ *
-+ * @handle:	handle of the loaded image
-+ * @systab:	system table
-+ * Return:	status code
-+ */
-+efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
-+			     struct efi_system_table *systab)
-+{
-+	u16 *load_options;
-+
-+	handle = image_handle;
-+	systable = systab;
-+	cerr = systable->std_err;
-+	cout = systable->con_out;
-+	cin = systable->con_in;
-+	bs = systable->boottime;
-+	load_options = get_load_options();
-+
-+	if (starts_with(load_options, u"nocolor"))
-+		nocolor = true;
-+
-+	color(EFI_WHITE);
-+	cls();
-+	print(u"DMI Dump\r\n========\r\n\r\n");
-+	color(EFI_LIGHTBLUE);
-+
-+	for (;;) {
-+		u16 command[BUFFER_SIZE];
-+		u16 *pos;
-+		efi_uintn_t ret;
-+
-+		print(u"=> ");
-+		ret = efi_input(command, sizeof(command));
-+		if (ret == EFI_ABORTED)
-+			break;
-+		pos = skip_whitespace(command);
-+		if (starts_with(pos, u"exit")) {
-+			break;
-+		} else if (starts_with(pos, u"check")) {
-+			ret = do_check();
-+			if (ret == EFI_SUCCESS)
-+				print(u"OK\n");
-+		} else if (starts_with(pos, u"save ")) {
-+			do_save(pos + 5);
-+		} else {
-+			do_help();
-+		}
-+	}
-+
-+	color(EFI_LIGHTGRAY);
-+	cls();
-+
-+	return EFI_SUCCESS;
-+}
+diff --git a/configs/imx8mm_data_modul_edm_sbc_defconfig b/configs/imx8mm_data_modul_edm_sbc_defconfig
+index 6a4244e3084..3f3a79e55af 100644
+--- a/configs/imx8mm_data_modul_edm_sbc_defconfig
++++ b/configs/imx8mm_data_modul_edm_sbc_defconfig
+@@ -197,6 +197,7 @@ CONFIG_SPI_FLASH_WINBOND=y
+ CONFIG_SPI_FLASH_MTD=y
+ CONFIG_PHYLIB=y
+ CONFIG_PHY_ATHEROS=y
++CONFIG_PHY_BROADCOM=y
+ CONFIG_DM_MDIO=y
+ CONFIG_DM_ETH_PHY=y
+ CONFIG_FEC_MXC=y
+diff --git a/configs/imx8mp_data_modul_edm_sbc_defconfig b/configs/imx8mp_data_modul_edm_sbc_defconfig
+index f5914ac2a80..c4e39ff9cb8 100644
+--- a/configs/imx8mp_data_modul_edm_sbc_defconfig
++++ b/configs/imx8mp_data_modul_edm_sbc_defconfig
+@@ -209,6 +209,7 @@ CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+ CONFIG_SPI_FLASH_WINBOND=y
+ CONFIG_SPI_FLASH_MTD=y
+ CONFIG_PHY_ATHEROS=y
++CONFIG_PHY_BROADCOM=y
+ CONFIG_PHY_MICREL=y
+ CONFIG_PHY_MICREL_KSZ90X1=y
+ CONFIG_DM_MDIO=y
 -- 
 2.43.0
 
