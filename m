@@ -4,63 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DB61C4706F
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jan 2024 17:32:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5351C4706F
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jan 2024 17:34:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 499AB86F64;
-	Mon,  1 Jan 2024 18:32:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 34D8687073;
+	Mon,  1 Jan 2024 18:34:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P3h/Zb9d";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="CmRjWNyA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5EBE86FFD; Mon,  1 Jan 2024 18:32:11 +0100 (CET)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 26495877EC; Mon,  1 Jan 2024 18:34:21 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23BFA86F39
- for <u-boot@lists.denx.de>; Mon,  1 Jan 2024 18:32:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DEB1386FF7
+ for <u-boot@lists.denx.de>; Mon,  1 Jan 2024 18:34:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-67fb9df3699so62357356d6.2
- for <u-boot@lists.denx.de>; Mon, 01 Jan 2024 09:32:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704130328; x=1704735128; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=o4onirU2klJxT3yXtKD3DC3AhUKtQpKFc35RVxsn0yA=;
- b=P3h/Zb9dqzTwUQWxaoHp1Yw/fxM4gr4DdFbkWDQkr6TYMrQHdRp+ZD81Frx2smrvNz
- trblonZ5Emt5QR82QAwuavhYpRE6j2zLh+TNjuSo71WvHlTd1cKJ0H7zmVtVT9Nnqwgl
- pWIa8SG33ocU8FvYpJe/rdv/pOQ75p5DcP8uQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704130328; x=1704735128;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=o4onirU2klJxT3yXtKD3DC3AhUKtQpKFc35RVxsn0yA=;
- b=lsinLxPlAOc7B0O9AOhvl+IiXG7iti2SsITDMPTaG6N4rJe4uEvP3NaIzk5dDFvcYx
- QHLuyM9Mj1zRd83CltA/RpNiOmi8tMnNCRy42IrhUlrhz8yLgL1aw7zcGJdxBjVvMxIH
- sGEcidGQMPvaZs0GVTeREFJZX3Nr54QceWyYFbyxGPPFmlPIN3orY5AqQI21od9cfJcE
- YmeFOK+7Qman05JQpMjuo9en1fjqJsM/HxWxFD5KJDZieFtl75Dc4hg0OVc9J1FD45ip
- YHZiarn6YGooqFXlZ9tqcm7kpEFgYk4dPV4fk73SSxQ43KiosFsmiDRwEEHQT8+HEr71
- QukQ==
-X-Gm-Message-State: AOJu0Yw/qiWsZzWXFK4sVfGtTRbSYQvkQZuYUKe5U20WTPKkQSSZhE5V
- I+rO4qRwTi2DWfCQRq4q8QXqpYEpltiM/vGMKX9zdVL9kgaWb2lszF8nH9XYRw==
-X-Google-Smtp-Source: AGHT+IF8ufwQ2FCPycAUky3QTUXVKuysxz8Xk1GubvGZ3uJLp0mmcgfTOmHf+KFGO7bqhLw/FtueasQEDQJM0pB5DqU=
-X-Received: by 2002:ad4:5aec:0:b0:67f:179c:e1a2 with SMTP id
- c12-20020ad45aec000000b0067f179ce1a2mr22830848qvh.22.1704130327833; Mon, 01
- Jan 2024 09:32:07 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1704130457; x=1704735257; i=xypron.glpk@gmx.de;
+ bh=/Ozctm96UxEQDZtJsVbnp5SU8CbGB3IdNp3PeDOcf6E=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=CmRjWNyAobTrwIP5an5CErw/Yu+oITXfA13aCQJ+Yec/hgpb307pVyCCWhqGqBkg
+ eWWAYTLRLcwfntmE/W5ODL7oAVus223vscXweaHDzM/6u1chAfX8B+S3g4Ga9+uSR
+ Z7U8SPZqxFxw6xkras06vo/pbqa3sa3UMY8w8t+ZjgadEP+KssolwoN/eLzUDpKfF
+ igDG4grfs41e4XKzMtsn17vFs6g6dkuci+9CE6FLYWbWHrW3anL9YQujOLfCS52Le
+ jUD6bTA0TjVCIsP7nZ0AZdrjYL/3dYHJRj2JUvw8RbQgI15y98leokcYLf+e8j5kr
+ BJGTOHdkahWm/gAmXg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MTiTt-1roEL61Uvl-00U4r4; Mon, 01
+ Jan 2024 18:34:17 +0100
+Message-ID: <3ea1e2b4-8a52-4e20-beb8-6520f7df0139@gmx.de>
+Date: Mon, 1 Jan 2024 18:34:13 +0100
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 1 Jan 2024 10:31:57 -0700
-Message-ID: <CAFLszTiz8oT9tTA-w+qVnxy2=mjCya8RMXdbswS1GtoxV+hO8w@mail.gmail.com>
-Subject: Please pull u-boot-dm next
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 04/12] smbios: Use SMBIOS 3.0 to support an address
+ above 4GB
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20231231152555.464874-1-sjg@chromium.org>
+ <20231231152555.464874-5-sjg@chromium.org>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20231231152555.464874-5-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:33sTEcIQH0BagRWYBTD4eT76Pk1yUHoVBCKwaWoiIfXYjeIWbqq
+ jZ0KW9eUK+sC7mhKJVu+GZv+a77mvEDN/vPZBPBFh6/rm7HsFhW7GO0eQicxP+I2g1IQYgI
+ mS3B3IWXikdM9ypJ87nbhlTildUvmjX1NVuh4ESHCgWkr6YCJ90SVjarTlQS2W2+Zlf6pFl
+ pVSNyB8r/G8co4zRcFtDA==
+UI-OutboundReport: notjunk:1;M01:P0:PY+Mup87cwc=;oBC8qrQZhEdIs9mtdwi974cr3XU
+ WW1bQ/gjFrbyo+1NMQrHSwuEPvPTL2HVEVWCna8jDLGFFD4ItiEACQ9rg/dU3DhIP6E6f8LsT
+ 4ouIxwvHV1ULqLW301CvsWmkZwJXiPZFscsI4Cle+feWQq2DlXfWXHDyWBJc1Mh+GfZGb69tT
+ aA7MIgIW056n/9CM9Qmveos3lJRqkMYiTAI6Z+hiNB48ncOzK2Yj83V3c/qwW8nT5OpDZ2b7C
+ wAqsjYSmh2b4o2bCrNKZCixFQTpzGYc5sWc2ErD9syOcLEcPLFqmDFgWcmKOt70299/Q4ILxz
+ mg54NruwhnpRJgTaDRr+wjmVnf27kRfFLM9hcPqjj4jlGe/wo8CeOVcXE9u2Yy77ZXCMlPzWQ
+ SwxtKVJcK5FzhsVnOFfIWHYXUw3ZIrokdR0Nfa8MO4VEK1UjtlkCsNL3lOfGsRUz9vzgFHTVk
+ 5KCrEV5rQhaLPTnXB+vmkjA/+ECllXchbJ43sSVr3sJnGWRQLzLqKzqXimY9JXNwyEnWnpCuq
+ lrQtWq0+M0W7H5uZog5O1MY2Hu1nso6o9Y9MNaPkcdZLibEZGl6zH2auhyFUkx7KJae6Qz4NM
+ 0Y9HEvllNXT23w6Znq3AfFZkRQYuTOfuRZhgTQw103rqrmxNw7/U6tbqmQfM4N+1cjq7j9MAY
+ wQBRVUfG30LC48XmbSQ1Ch06YaasHDDKRpPAy05IeyLg9xeKRWLnHWVmNdTsYWV4w7MEPq9Sw
+ wz0R6rMq6f/ShEi0hSdreiKQ4gK0tIFfhCuT30SVNPWaeKrI0bYuHiOA/qMOyyiWTcirp7bcX
+ dVf4L6Pobk8ksz5kdSlyA4iXBaik0HuJ+KllmeFUw7dCWmbuaRJlorzv0o0sPDIsX68f5ONJ7
+ KAIXNKhAp9DwF3Z5Rc+oK5z7D7ddRA10I0/wvpmUn3eZI9sA9IbgK5y6G1lH9679Ks7L8l/GR
+ VbZiqQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,75 +92,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 12/31/23 16:25, Simon Glass wrote:
+> When the SMBIOS table is written to an address above 4GB a 32-bit table
+> address is not large enough.
+>
+> Use an SMBIOS3 table in that case.
+>
+> Note that we cannot use efi_allocate_pages() since this function has
+> nothing to do with EFI. There is no equivalent function to allocate
+> memory below 4GB in U-Boot. One solution would be to create a separate
+> malloc() pool, or just always put the malloc() pool below 4GB.
+>
+> - Use log_debug() for warning
+> - Rebase on Heinrich's smbios.h patch
+> - Set the checksum for SMBIOS3
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> (no changes since v4)
+>
+> Changes in v4:
+> - Check the start of the table rather than the end
+>
+> Changes in v2:
+> - Check the end of the table rather than the start.
+>
+>   include/smbios.h |  6 +++++-
+>   lib/smbios.c     | 30 +++++++++++++++++++++++++-----
+>   2 files changed, 30 insertions(+), 6 deletions(-)
+>
+> diff --git a/include/smbios.h b/include/smbios.h
+> index e601283d293..77be58887a2 100644
+> --- a/include/smbios.h
+> +++ b/include/smbios.h
+> @@ -12,7 +12,7 @@
+>
+>   /* SMBIOS spec version implemented */
+>   #define SMBIOS_MAJOR_VER	3
+> -#define SMBIOS_MINOR_VER	0
+> +#define SMBIOS_MINOR_VER	7
+>
+>   enum {
+>   	SMBIOS_STR_MAX	=3D 64,	/* Maximum length allowed for a string */
+> @@ -80,6 +80,10 @@ struct __packed smbios3_entry {
+>   	u64 struct_table_address;
+>   };
+>
+> +/* These two structures should use the same amount of 16-byte-aligned s=
+pace */
 
-This is for -next
+I cannot see from where you take such a requirement.
+By chance it is fulfilled by the current definitions.
+If this a leftover from debugging we should remove it.
 
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/19131
+Best regards
 
-https://dev.azure.com/simon0972/u-boot/_build/results?buildId=57&view=results
+Heinrich
 
+> +static_assert(ALIGN(16, sizeof(struct smbios_entry)) =3D=3D
+> +	      ALIGN(16, sizeof(struct smbios3_entry)));
+> +
+>   /* BIOS characteristics */
+>   #define BIOS_CHARACTERISTICS_PCI_SUPPORTED	(1 << 7)
+>   #define BIOS_CHARACTERISTICS_UPGRADEABLE	(1 << 11)
+> diff --git a/lib/smbios.c b/lib/smbios.c
+> index eea72670bd9..7f79d969c92 100644
+> --- a/lib/smbios.c
+> +++ b/lib/smbios.c
+> @@ -567,7 +567,11 @@ ulong write_smbios_table(ulong addr)
+>   	addr =3D ALIGN(addr, 16);
+>   	start_addr =3D addr;
+>
+> -	addr +=3D sizeof(struct smbios_entry);
+> +	/*
+> +	 * So far we don't know which struct will be used, but they both end
+> +	 * up using the same amount of 16-bit-aligned space
+> +	 */
+> +	addr +=3D max(sizeof(struct smbios_entry), sizeof(struct smbios3_entry=
+));
+>   	addr =3D ALIGN(addr, 16);
+>   	tables =3D addr;
+>
+> @@ -590,16 +594,32 @@ ulong write_smbios_table(ulong addr)
+>   	 * We must use a pointer here so things work correctly on sandbox. Th=
+e
+>   	 * user of this table is not aware of the mapping of addresses to
+>   	 * sandbox's DRAM buffer.
+> +	 *
+> +	 * Check the address of the end of the tables. If it is above 4GB then
+> +	 * it is sensible to use SMBIOS3 even if the start of the table is bel=
+ow
+> +	 * 4GB (this case is very unlikely to happen in practice)
+>   	 */
+>   	table_addr =3D (ulong)map_sysmem(tables, 0);
+> -	if (sizeof(table_addr) > sizeof(u32) && table_addr > (ulong)UINT_MAX) =
+{
+> +	if (sizeof(table_addr) > sizeof(u32) && addr >=3D (ulong)UINT_MAX) {
+> +		struct smbios3_entry *se;
+>   		/*
+>   		 * We need to put this >32-bit pointer into the table but the
+>   		 * field is only 32 bits wide.
+>   		 */
+> -		printf("WARNING: SMBIOS table_address overflow %llx\n",
+> -		       (unsigned long long)table_addr);
+> -		addr =3D 0;
+> +		log_debug("WARNING: Using SMBIOS3.0 due to table-address overflow %lx=
+\n",
+> +			  table_addr);
+> +		se =3D map_sysmem(start_addr, sizeof(struct smbios_entry));
+> +		memset(se, '\0', sizeof(struct smbios_entry));
+> +		memcpy(se->anchor, "_SM3_", 5);
+> +		se->length =3D sizeof(struct smbios3_entry);
+> +		se->major_ver =3D SMBIOS_MAJOR_VER;
+> +		se->minor_ver =3D SMBIOS_MINOR_VER;
+> +		se->doc_rev =3D 0;
+> +		se->entry_point_rev =3D 1;
+> +		se->max_struct_size =3D len;
+> +		se->struct_table_address =3D table_addr;
+> +		se->checksum =3D table_compute_checksum(se,
+> +						sizeof(struct smbios3_entry));
+>   	} else {
+>   		struct smbios_entry *se;
+>
 
-The following changes since commit 2b28c3b871cd5d55b19f0a86cef970139f8ab952:
-
-  Merge patch series "Modernize U-Boot shell" (2023-12-28 14:38:25 -0500)
-
-are available in the Git repository at:
-
-  git://git.denx.de/u-boot-dm.git tags/dm-next-1124
-
-for you to fetch changes up to e266d2731145681a55d862360f1b61690b0c6820:
-
-  bloblist: Update documentation and header comment (2023-12-31 07:21:02 -0700)
-
-----------------------------------------------------------------
-support propagating supernode properties with bootph schema
-align bloblist with v0.9 of Firmware Handoff spec
-
-----------------------------------------------------------------
-Heinrich Schuchardt (2):
-      buildman: type cotaining
-      binman: used-before-assignment in ftest.py
-
-Simon Glass (22):
-      x86: coral: Align bootph SPI-flash subnodes with parent
-      fdtgrep: Tidy up a few type warnings and comments
-      fdtgrep: Correct ordering of flags
-      fdtgrep: Correct references to fdt_find_regions()
-      fdtgrep: Tidy up comment for h_include()
-      fdtgrep: Simplify code to inverting the match
-      fdtgrep: Move property checking into a function
-      sandbox: Correct SPL condition for building devicetree
-      fdtgrep: Allow propagating properties up to supernodes
-      Makefile: Use the fdtgrep -u flag
-      bloblist: Update the tag numbering
-      bloblist: Adjust API to align in powers of 2
-      bloblist: Change the magic value
-      bloblist: Set version to 1
-      bloblist: Access record hdr_size and tag via a function
-      bloblist: Drop spare value from bloblist record
-      bloblist: Checksum the entire bloblist
-      bloblist: Handle alignment with a void entry
-      bloblist: Reduce blob-header size
-      bloblist: Adjust the bloblist header
-      bloblist: Add alignment to bloblist_new()
-      bloblist: Update documentation and header comment
-
- arch/x86/dts/chromebook_coral.dts |   6 ++-
- arch/x86/lib/tables.c             |   3 +-
- common/bloblist.c                 | 205
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-------------------------------------
- doc/develop/bloblist.rst          |   4 +-
- include/bloblist.h                | 166
-+++++++++++++++++++++++++++++++++++++++++++++---------------------------------
- scripts/Makefile.lib              |  13 ++++++-
- scripts/Makefile.spl              |   2 +-
- test/bloblist.c                   | 105
-+++++++++++++++++++++++++++-----------------------
- tools/binman/ftest.py             |  20 +++++++---
- tools/buildman/boards.py          |   2 +-
- tools/fdtgrep.c                   | 123
-++++++++++++++++++++++++++++++++++++++--------------------
-
-Regards,
-Simon
