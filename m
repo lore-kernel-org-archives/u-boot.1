@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A752C4706F
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jan 2024 16:50:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9450BC47073
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jan 2024 16:50:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 522E98784B;
-	Mon,  1 Jan 2024 17:49:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E22BB8789A;
+	Mon,  1 Jan 2024 17:49:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="k2PGd3Q1";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nB2zSpQK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A76D987837; Mon,  1 Jan 2024 17:49:31 +0100 (CET)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id 2C3AC87084; Mon,  1 Jan 2024 17:49:34 +0100 (CET)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACC7A876C9
- for <u-boot@lists.denx.de>; Mon,  1 Jan 2024 17:49:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 23E1F8772E
+ for <u-boot@lists.denx.de>; Mon,  1 Jan 2024 17:49:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-67f95d69115so72524356d6.1
- for <u-boot@lists.denx.de>; Mon, 01 Jan 2024 08:49:27 -0800 (PST)
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-7815aad83acso324945785a.0
+ for <u-boot@lists.denx.de>; Mon, 01 Jan 2024 08:49:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704127766; x=1704732566; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1704127771; x=1704732571; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UYfj9WGkqMZwZDwbH62uk5HGS9bmaVOypeHNawVDXEo=;
- b=k2PGd3Q1TvNnAYIUQnvyra1cabhJrbLfgR+GsAxcbJ+OR605ANKHVvhCxu2CfakKsX
- fCj5gMRztNIa/kXFb6Sk8oif8oyilPwt6O5K5OTnJEXEGucpElUP8HSLSCHtaW+P0DP9
- GgLmScAwPs2WeSPQdtiqD4SooVN6jTOxw3sM4=
+ bh=bqwPyoSYZRvH/EcHaH7A9frby2UFcbjXLveH/FFJjhg=;
+ b=nB2zSpQKyk5q2SN0L3BtZhbYQA5Cbzeu10XkXj6IxDjQp32Nl2IugxMTkXvTMR5EUE
+ INI04mOH9agffhw4QkcAaIbO8MHjd+TwkglfJGwAhdfrZurIX8Ny4MD7xmio4I7fisa6
+ VuylX3HND6c/jIkgrdD4bCidMDainNh/iZXUM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704127766; x=1704732566;
+ d=1e100.net; s=20230601; t=1704127771; x=1704732571;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UYfj9WGkqMZwZDwbH62uk5HGS9bmaVOypeHNawVDXEo=;
- b=QQ/m5Kx3DmXUZ0XwXamFSlLJeLdJy14PipIEXCM7DJuEBI+3oUOTSNonXg6AjKRXP6
- uMohRlruYqmifhXG6+FAbNvX7rcGNpSzuo0g086WHsPgEzsV8jDGbKMfuKeMxGyOfKFd
- Rd8XXzwCaY33ErHemxhVRwsWHtfRMvc0O7ABu2u0WE8aBnGO6ybmQMp4gXJTHvJ7Xr7r
- t56151IzFr5adyJwUnna4qmysDrfbJu+fjEKKnx43ja8BW3/N/g2OaK7ztpMKKXPpW9l
- DZ81Ut0uTj3eA92nPnvbSQARdQs6oTs3tS6/PqYhylOe53MyOcRDCjVseBJ7pnkGgBrB
- 5csQ==
-X-Gm-Message-State: AOJu0YwCkzkDJHhVH6uAPXRBjBst5HgcExmlRRnlM3dUz7GmHkelc5VD
- WXSyAqqokr+W82SHDP5vV818yKOCV1qj1EcPeFxslNwPzDVq
-X-Google-Smtp-Source: AGHT+IEzNbm1yUCdKi5LQw1d8peKYUS+YRaWClvHvddWuIdS686jVpuBNREp0agwm0tpiDGJQarF9v0KmV2Jp5iWUlM=
-X-Received: by 2002:a05:6214:23cb:b0:680:b912:688d with SMTP id
- hr11-20020a05621423cb00b00680b912688dmr1275397qvb.91.1704127766120; Mon, 01
- Jan 2024 08:49:26 -0800 (PST)
+ bh=bqwPyoSYZRvH/EcHaH7A9frby2UFcbjXLveH/FFJjhg=;
+ b=FJtJ5P3JnLo2WQmKJEoMdLkJzNcXvPzowhD0BOLDG52Wek84CSYFO/Lyp54cFei/GP
+ FmSGDpxdu9v1FuNzgEXHY6GXVFmKGG/yuYsQtLXzMe7orq9Cze5yDtOyL7+mhFlfcyIy
+ TwUFv7Eq4Dgs4+/JpgoTqiqhsxXgesonwZ88q55zPeevv0U4BvHPHFzdNSgzSx00SnFS
+ 0nQ89JEwxSJJuhxOlcb13rg+aQ4vEw0/GRSvsX5WsncjLgEWrGDxvR8v06b5qkJnhCJB
+ Fy+Wkp0QZmwjWPLFxsH7NessC4ptBkz9qByuj6ZnwPjUPm5LJPqHXvFrLr9tOE7hgld2
+ s7EQ==
+X-Gm-Message-State: AOJu0YyG4+IWD4C2kYQ3EUANZ/CqTNd2qVOlhtQgXQDTZrmGl258EKRO
+ FqhJRCy8gFd6TRTUDJ2OlbSk7DhUv4ADTe2peFZqBOfSOADt
+X-Google-Smtp-Source: AGHT+IHyfWUmZ92c9YV4jgAI6hm9QKH4yv2IVKvug+1fsheB+2+GhQE6lIRzCoQ27zfQ8AXzWu2sz3DumGrgQmaef6o=
+X-Received: by 2002:a05:6214:c44:b0:67f:2f0e:af53 with SMTP id
+ r4-20020a0562140c4400b0067f2f0eaf53mr24197392qvj.50.1704127771000; Mon, 01
+ Jan 2024 08:49:31 -0800 (PST)
 Received: from 798914943136 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 1 Jan 2024 11:49:25 -0500
+ HTTPREST; Mon, 1 Jan 2024 11:49:30 -0500
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20231217163627.2339802-7-sjg@chromium.org>
-References: <20231217163627.2339802-7-sjg@chromium.org>
+In-Reply-To: <20231217163627.2339802-3-sjg@chromium.org>
+References: <20231217163627.2339802-3-sjg@chromium.org>
  <20231217163627.2339802-1-sjg@chromium.org>
-Date: Mon, 1 Jan 2024 11:49:25 -0500
-X-Google-Sender-Auth: EWbvSUL3GMa6OdHn_78FrNI-WwY
-Message-ID: <CAFLszTg=1mRS80TUEj1X_7Teh5TNxEsH0Sh1VCrNDC4cTPiEaQ@mail.gmail.com>
-Subject: Re: [PATCH 06/10] fdtgrep: Simplify code to inverting the match
+Date: Mon, 1 Jan 2024 11:49:30 -0500
+X-Google-Sender-Auth: bdGfWBa9qF51EK-qTBWlUz_9ILY
+Message-ID: <CAFLszThR3Qd24zAvH6i+SMSoYDeFc=PHHatYogGfnWX++cKO_A@mail.gmail.com>
+Subject: Re: [PATCH 02/10] fdtgrep: Tidy up a few type warnings and comments
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
@@ -84,13 +84,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The code to invert the match in h_include() is a bit convoluted.
-Simplify it by using disp->invert only once.
+Align the code with the upstream version at fdt-tools which had a few
+tweaks before being applied.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/fdtgrep.c | 10 ++--------
- 1 file changed, 2 insertions(+), 8 deletions(-)
+ tools/fdtgrep.c | 19 ++++++++++---------
+ 1 file changed, 10 insertions(+), 9 deletions(-)
 
 Applied to u-boot-dm/next, thanks!
