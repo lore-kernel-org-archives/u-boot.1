@@ -4,70 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 666ADC4706F
-	for <u-boot@archiver.kernel.org>; Mon,  1 Jan 2024 16:49:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22E63C47073
+	for <u-boot@archiver.kernel.org>; Mon,  1 Jan 2024 16:49:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6EB887705;
-	Mon,  1 Jan 2024 17:49:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BA7A4877A1;
+	Mon,  1 Jan 2024 17:49:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JI4EcQSY";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O4G3/wKT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 107E68779D; Mon,  1 Jan 2024 17:49:25 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id 2D5CF87076; Mon,  1 Jan 2024 17:49:25 +0100 (CET)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B61F987076
+ by phobos.denx.de (Postfix) with ESMTPS id B41E486FFD
  for <u-boot@lists.denx.de>; Mon,  1 Jan 2024 17:49:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-78104f6f692so669946485a.1
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-680b1956ca4so8338526d6.3
  for <u-boot@lists.denx.de>; Mon, 01 Jan 2024 08:49:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1704127761; x=1704732561; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=eYm9t4uhD2ntzp4Ep7ZFAzW15itl9wwNHoKvHkaTfl4=;
- b=JI4EcQSY/z7CTHl333nO4NgGxgHBhd8nsJ6s0HBpFSClhl56sNxoWIeM+19jyEGdNM
- GGHIFDLm/hRKi4MEgPhp9N933QwG4P7F2cB4pg/9yVKpOGdv/4IG7SxEgehVgDO8u1s1
- /3wYdQ4dW3Xa5+7FU9gsYS4fUrMXYgtq53Nqc=
+ bh=lW+AanX8PCO5LWLsOavsEE4z4d7xTq7FlkHIoqqHlSw=;
+ b=O4G3/wKTTGQGBPWZtBgkQftoDv+2LcFR8p6HBo8DZiBqkbo+tFD2LK0MvycLRzQ0KQ
+ FG4Ay1WuE7iLRYle7Kz020FbA9ijnTMNW0LCpzI1vTzs8THohcWjXn/8iqFNqVpiLhyX
+ TtIhK9ID8DEKpYMAkx8HSEAiMozUuQwfr3Md8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1704127761; x=1704732561;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=eYm9t4uhD2ntzp4Ep7ZFAzW15itl9wwNHoKvHkaTfl4=;
- b=POMaZDDsjPuzlQhZ6sTJh2S7hOC+pF9XowXT5WE+q8xznCLd2h7ckVXgz3N5+xu+hm
- i7Dvx3VM5Z30sl9oJPm2hFsSSUTPDVFYK18+q4JTZ9tQwRyjD7w5OpBNoGKLmfx6iUl7
- TiHCJS2/IMFQP91ru5Kb0xffBfNVYInte/ypqJK7hhqAhjciB4sHPl4azej00gBhLoOl
- 3ccV7EhmuVGiTgk7tiYkSwuBKrBJgJ5GUxnZJYnqPZY+bMyWeTczLZu9bo0CsadXMZVs
- qNu5qaVOyYOygCxQcSyPo4PnYDANWnC95IXma1eXQwxCINVCyG0R5wHRQiboUHhg/jtz
- uu/Q==
-X-Gm-Message-State: AOJu0YyLVRQN9a3brL1kC4ioyyhFG5LykZT2Q7U67yz8GgYR8dcjt+R7
- zee2kn+Cea+uY7j0sLQ7rVd6ZKRCtmyxzGjiu2r+of2seAjt
-X-Google-Smtp-Source: AGHT+IHJBQiVQWTNo4YpZvnkB41twVKdGZUVlIqKLXWs7N6fWaKX6BjxGRtz6ti+zIUUog1IvSzmnGB2TxJCzrwnG7A=
-X-Received: by 2002:a05:620a:8429:b0:77f:ab06:b896 with SMTP id
- pc41-20020a05620a842900b0077fab06b896mr22111730qkn.29.1704127761470; Mon, 01
+ bh=lW+AanX8PCO5LWLsOavsEE4z4d7xTq7FlkHIoqqHlSw=;
+ b=kZMzfy9KYqcS48x4yiSNLWrar3iobRxw6K/geTW2iZ23yNmajC+ljrT8kgWLHCE4Wy
+ cr+D1XBWc5EvSd8g9Ho5/gKq8BGgrpZ3cz/gPenr5aNZCMABc8lq6quEFuNRp7E/sit6
+ q0F6GkUvDR9XH8JjAu7/TNI2qUHk5tIpqGxTojsrYNztI2XPeTWmCfpcvEMszZ2Dk/pd
+ B7OrUn7mIar2NiOGkeXFa6hjnuRJiPbjK48UENo27OTMdcuUggKHyL/kAlqACy+RKq6c
+ XEUX63A7zOia2j0hFk85gXk2eYXoa84CCsixCiOTR1wSNP8ij1hxqDaHXm2Pn4F47Tiy
+ 830A==
+X-Gm-Message-State: AOJu0YxzgBGd1TgVKQzzoITPT6mh0PdiaRsQTUHTQVBKff2cCDoCEEP0
+ PO2zfGeYpMQtMOpxIzTt5DP0uPK5T72iPrbUa9FvZT+3A+o9
+X-Google-Smtp-Source: AGHT+IGBgOf9meArayDUNxXJjDj6senr8uN2GsVPIOnlyqEvIyIDKPf69VxYn4294G1vJvdNMxmKZpJOoAVH4E6gECQ=
+X-Received: by 2002:a05:6214:300b:b0:680:b3b9:66e3 with SMTP id
+ ke11-20020a056214300b00b00680b3b966e3mr2261373qvb.78.1704127761473; Mon, 01
  Jan 2024 08:49:21 -0800 (PST)
 Received: from 798914943136 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 1 Jan 2024 11:49:21 -0500
+ HTTPREST; Mon, 1 Jan 2024 11:49:20 -0500
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20231217163627.2339802-10-sjg@chromium.org>
-References: <20231217163627.2339802-10-sjg@chromium.org>
- <20231217163627.2339802-1-sjg@chromium.org>
-Date: Mon, 1 Jan 2024 11:49:21 -0500
-X-Google-Sender-Auth: _MvWdWBUfqeOmfbuGWBS7wtBalY
-Message-ID: <CAFLszTiGtVYPj6hb=0cDiTafRB3VdePS0-Rj8BVpKC9dRz=wjw@mail.gmail.com>
-Subject: Re: [PATCH 09/10] fdtgrep: Allow propagating properties up to
- supernodes
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+In-Reply-To: <20231219174528.GW2513409@bill-the-cat>
+References: <20231219174528.GW2513409@bill-the-cat>
+ <20231219142128.2388562-11-sjg@chromium.org>
+Date: Mon, 1 Jan 2024 11:49:20 -0500
+X-Google-Sender-Auth: Rf78bTNHf5LInql93vjWEx6wmzs
+Message-ID: <CAFLszTieUe0QodqjA7Eby4WPorrhS2vODTbQkQ12sfJ73Qhq=Q@mail.gmail.com>
+Subject: Re: [PATCH v2 10/10] Makefile: Use the fdtgrep -u flag
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Masahiro Yamada <masahiroy@kernel.org>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,26 +90,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The existing bootph binding is defined such that properties in a
-subnode are also implied in the supernode also, as in this example:
+On Tue, Dec 19, 2023 at 07:21:25AM -0700, Simon Glass wrote:
 
-   buttons {
-      /* bootph,pre-ram is implied by btn1 */
-      compatible = "gpio-keys";
+> Use this flag so that the bootph binding is obeyed correctly.
+>
+> Add a comment about what is going on.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Fixes: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/12
 
-      btn1 {
-         bootph,pre-ram;
-         gpios = <&gpio_a 3 0>;
-         label = "button1";
-         linux,code = <BTN_1>;
-      };
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-Provide an option to implement this in fdtgrep.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
-
- tools/fdtgrep.c | 18 +++++++++++++++++-
- 1 file changed, 17 insertions(+), 1 deletion(-)
+-- 
+Tom
 
 Applied to u-boot-dm/next, thanks!
