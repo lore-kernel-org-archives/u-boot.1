@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76B72C46CD2
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 15:47:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1750BC46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 15:47:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9595887906;
-	Tue,  2 Jan 2024 16:47:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 206F6878F9;
+	Tue,  2 Jan 2024 16:47:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EP7l99Cp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UQEZamaR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65AC1878FF; Tue,  2 Jan 2024 16:47:05 +0100 (CET)
+ id 8F7BF878EB; Tue,  2 Jan 2024 16:47:06 +0100 (CET)
 Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
  [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2F59876C0
- for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 16:47:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C1310878EB
+ for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 16:47:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=macroalpha82@gmail.com
 Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-59446cd46e9so4501308eaf.3
- for <u-boot@lists.denx.de>; Tue, 02 Jan 2024 07:47:02 -0800 (PST)
+ 006d021491bc7-5955764ea9bso175259eaf.1
+ for <u-boot@lists.denx.de>; Tue, 02 Jan 2024 07:47:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704210421; x=1704815221; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=OEP8aPGLomnQRqIX9ME4ZGP8Lf1M4kcuk6jNJuI9PQ8=;
- b=EP7l99Cp7j4caMkT7+YwWnVm8V/IBpGWMd6e9ql8TM1jMid3/Kgo8EPw7QdtwbHCvo
- GiZkiBqnWqaz0NO3ie9CORLPkXWQydzHpQE9DE4NmqwnXPzmowXoX0/T7743RldBoFIH
- Vh/D2nRgV/a7gndYIBs45QMl7irY/bfCf/4QAwFR1JbScLaMqZXyxcfG6xCeSImiHehk
- 1z8nHWdTMychDumXrf0FSCpUEVwuZefvTfkEb5YwqgxMwcKRXE8ioSbK56ul4RRfHnyU
- nIRlKzl3I6h/XTQ79iJbWFOxIBsoz5fTTlMsK88cmoVLG2qdKFyWy1JH97r/f61MXqBQ
- fFiA==
+ d=gmail.com; s=20230601; t=1704210422; x=1704815222; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=w/gYMJ6pegZY2reuOvRvPqOctDiX5Us81kSa+j+kj7U=;
+ b=UQEZamaRVQIHoY0WDJzFv/FQGOtlZqjFGX9PAGB4JRPCpo+RxMrFLoajBf45JQDxsx
+ 4zd4Y/OSV4GsITJ+KY2Ef2MgVUHWG7OcVjsWtvBk99t2gFSVjmWzqYAR/27iK3cRBVKG
+ xc8EWZRK/fw494ylrT020BRDOEL8sskk5S8Kb5FAk/73M56Cw1B2WRTbJlYf2KmHFLpO
+ vxVFIBb8ecIPTh2UwxfXTODCnbJ7+/iXn4onPg51e4qAMD/S7f4LfzJizB+epZjBSmIL
+ +X36jCaVIT5nDkpfdAoTosIcMmGROlyc11ew7cnfLNye7dHe8P+x2DEil7PPvDmgya6h
+ f8JQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704210421; x=1704815221;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=OEP8aPGLomnQRqIX9ME4ZGP8Lf1M4kcuk6jNJuI9PQ8=;
- b=Djzl3lgSuWNKesSjhr3xbUNo1tMUZLMEyHftIb3ixWQjFiPROCefI7dW2NxzNCRVCS
- xAQAhsQJ0PJGsnmDo03fPThfoCIzpczPeeQTVnrYV1yRQnsT7YYqHSygi8X6n/FmNma+
- qfWyqymnRKx02QnyLdoWgQavW16BcSh5t1gmj80CjKT70UIBOyIIIazvZ3ZLnnpBYo0U
- H8Mp/aGJ/sLdDkIERSykZiinKs/JBuKVAetIn7kuy1kHSAlsNn2iFcydK099+9v9xbuD
- H5dKkNtm8NNMUTENCN/vbl4ca1MeDFnd9jgyUZirIWQ52scYoAE0yYB/4knsGPxYyMZw
- oUDQ==
-X-Gm-Message-State: AOJu0YyRo3OUf2JroKnDleGl0oMTq3/b5Nx1yWIo6ugR/UoiXXx+U7iO
- s7mCawCAnmHt3X73OkT7zf1ZZMMGUg9YOQ==
-X-Google-Smtp-Source: AGHT+IGJqPwS7TX1uN48RkHdKtqQr/6IB6ArRUUfUn2AgIkVqumTV0XwY5B38x82x0wfKwsIFEdkXg==
-X-Received: by 2002:a05:6820:1687:b0:590:8217:b060 with SMTP id
- bc7-20020a056820168700b005908217b060mr9154088oob.12.1704210421263; 
- Tue, 02 Jan 2024 07:47:01 -0800 (PST)
+ d=1e100.net; s=20230601; t=1704210422; x=1704815222;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=w/gYMJ6pegZY2reuOvRvPqOctDiX5Us81kSa+j+kj7U=;
+ b=OFhsF48Wz54H/jKAqyxTg8YcYd1NClKLsfMwdOB+eAkfDDjMjndkbDXVJu+V9D2LgL
+ CHDSHPRVi7o/X6bue3Ht0JDrSISXAv7EOjERZuFuhr/O49IISVM5f8Wui/FATPcHOoSy
+ qLa72xDYVQmTM7+HcB9VaihoxJ6he+XVRwsiUsmOxNSuPK1Pls/heLHJ2EOdMz3NDnng
+ lh0ZHSNe4qp/Yxj8hzNdh1b+KZCG9HjctIewiFwOCHd4szyGTEU8n2QN6Db+bdzIV4sq
+ tYwyN4YSpr8dP3qriHGIwGpxzGlCUfonGb9XApD/E1ZUze/cGgc5PRNg0ZbQMg3C44dH
+ vAFg==
+X-Gm-Message-State: AOJu0YxG4yYUXGfUuuFbnBuUF0QGMiVUE9GFw/EyqaHiMU7L8ZDSES/J
+ e5c+HFX2gPmMExYNwdvZcNEFRJ/N3q+uKg==
+X-Google-Smtp-Source: AGHT+IETVtgJi9gzl5o1qypWPsEbiDxW62v6SrpWaRXUgdhExmuA9p2rKHEt7wGz/8rb80kn8T2L6A==
+X-Received: by 2002:a4a:988e:0:b0:595:c337:6f with SMTP id
+ a14-20020a4a988e000000b00595c337006fmr645024ooj.12.1704210422105; 
+ Tue, 02 Jan 2024 07:47:02 -0800 (PST)
 Received: from localhost.localdomain ([75.28.21.198])
  by smtp.gmail.com with ESMTPSA id
- 127-20020a4a0d85000000b005958af24e84sm843197oob.42.2024.01.02.07.47.00
+ 127-20020a4a0d85000000b005958af24e84sm843197oob.42.2024.01.02.07.47.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jan 2024 07:47:00 -0800 (PST)
+ Tue, 02 Jan 2024 07:47:01 -0800 (PST)
 From: Chris Morgan <macroalpha82@gmail.com>
 To: u-boot@lists.denx.de
 Cc: andre.przywara@arm.com, kever.yang@rock-chips.com,
  philipp.tomsich@vrull.eu, sjg@chromium.org, jagan@edgeble.ai,
  jonas@kwiboo.se, Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH V4 0/7] Add Additional Boards and Features to RGxx3
-Date: Tue,  2 Jan 2024 09:46:47 -0600
-Message-Id: <20240102154654.191055-1-macroalpha82@gmail.com>
+Subject: [PATCH V4 1/7] board: rockchip: Refactor panel auto-detect code
+Date: Tue,  2 Jan 2024 09:46:48 -0600
+Message-Id: <20240102154654.191055-2-macroalpha82@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240102154654.191055-1-macroalpha82@gmail.com>
+References: <20240102154654.191055-1-macroalpha82@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,56 +95,221 @@ X-Virus-Status: Clean
 
 From: Chris Morgan <macromorgan@hotmail.com>
 
-The RGxx3 is a pseudo-device for U-Boot that works for every Anbernic
-RGxx3 series device on the market. Add support for another series of
-very similar devices from Powkiddy.
+Make the inability to detect a panel using the auto detection code not
+fail the entire boot process. This means that if the panel ID cannot
+be read we don't set an environment variable for the panel, and if an
+environment variable for the panel is not set we don't attempt to
+update the compatible string. Changes to the code also ensure that
+when there are multiple compatible strings required for the panel
+we use them both, which solves some issues that will pop up soon
+for the Linux driver.
 
-Changes since V3:
- - Fixed a bug with else/else if logic for board detection (changed
-   a second incorrect "if" to the proper "else if").
+Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
+---
+ board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c | 115 +++++++++++++--------
+ 1 file changed, 74 insertions(+), 41 deletions(-)
 
-Changes since V2:
- - Modify the mach-rockchip level rockchip_dnl_key_pressed() so that
-   we can also call it in SPL mode and eliminate the board specific
-   function. This requires adding ADC support to SPL. Additionally,
-   I had to change the regulator for the saradc to a fixed regulator
-   and add GPIO and regulator support to SPL.
- - Move the board specific board_rng_seed to the mach-rockchip level
-   board file so that other rockchip boards with a hardware RNG can
-   benefit. This should only be called if both the Rockchip
-   hardware RNG as well as the rng seed functions are enabled.
- - Add two new boards (the RG-ARC-D and RG-ARC-S). I removed the
-   previous code review due to the extensive changes made.
-
-Changes since V1:
- - Update verbiage around function button to say "recovery" mode
-   instead of calling it "maskrom" mode, which has a specific
-   meaning. Also note that recovery function was done in a board
-   specific manner to ensure it can run early.
- - Update board level documentation for the RGxx3.
-
-Chris Morgan (7):
-  board: rockchip: Refactor panel auto-detect code
-  spl: Add Kconfig options for ADC
-  rockchip: boot_mode: Allow rockchip_dnl_key_pressed() in SPL
-  board: rockchip: Add Recovery Button for Anbernic RGxx3
-  rockchip: board: Add board_rng_seed() for all Rockchip devices
-  board: rockchip: Add support for new boards to RGxx3
-  doc: board: anbernic: Update rgxx3 to add new boards
-
- .../arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi |  11 +
- arch/arm/mach-rockchip/Makefile               |   4 +-
- arch/arm/mach-rockchip/board.c                |  32 +++
- arch/arm/mach-rockchip/boot_mode.c            |  11 +-
- board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c    | 194 +++++++++++-------
- common/spl/Kconfig                            |   7 +
- configs/anbernic-rgxx3-rk3566_defconfig       |  16 +-
- doc/board/anbernic/rgxx3.rst                  |  20 +-
- drivers/Makefile                              |   1 +
- drivers/adc/Makefile                          |   2 +-
- include/configs/anbernic-rgxx3-rk3566.h       |   2 +
- 11 files changed, 210 insertions(+), 90 deletions(-)
-
+diff --git a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+index 3f1a42d184..3d0c614623 100644
+--- a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
++++ b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+@@ -40,6 +40,7 @@ struct rg3xx_model {
+ 	const char *board;
+ 	const char *board_name;
+ 	const char *fdtfile;
++	const bool detect_panel;
+ };
+ 
+ enum rgxx3_device_id {
+@@ -54,52 +55,67 @@ enum rgxx3_device_id {
+ 
+ static const struct rg3xx_model rg3xx_model_details[] = {
+ 	[RG353M] = {
+-		517, /* Observed average from device */
+-		"rk3566-anbernic-rg353m",
+-		"RG353M",
+-		DTB_DIR "rk3566-anbernic-rg353p.dtb", /* Identical devices */
++		.adc_value = 517, /* Observed average from device */
++		.board = "rk3566-anbernic-rg353m",
++		.board_name = "RG353M",
++		/* Device is identical to RG353P. */
++		.fdtfile = DTB_DIR "rk3566-anbernic-rg353p.dtb",
++		.detect_panel = 1,
+ 	},
+ 	[RG353P] = {
+-		860, /* Documented value of 860 */
+-		"rk3566-anbernic-rg353p",
+-		"RG353P",
+-		DTB_DIR "rk3566-anbernic-rg353p.dtb",
++		.adc_value = 860, /* Documented value of 860 */
++		.board = "rk3566-anbernic-rg353p",
++		.board_name = "RG353P",
++		.fdtfile = DTB_DIR "rk3566-anbernic-rg353p.dtb",
++		.detect_panel = 1,
+ 	},
+ 	[RG353V] = {
+-		695, /* Observed average from device */
+-		"rk3566-anbernic-rg353v",
+-		"RG353V",
+-		DTB_DIR "rk3566-anbernic-rg353v.dtb",
++		.adc_value = 695, /* Observed average from device */
++		.board = "rk3566-anbernic-rg353v",
++		.board_name = "RG353V",
++		.fdtfile = DTB_DIR "rk3566-anbernic-rg353v.dtb",
++		.detect_panel = 1,
+ 	},
+ 	[RG503] = {
+-		1023, /* Observed average from device */
+-		"rk3566-anbernic-rg503",
+-		"RG503",
+-		DTB_DIR "rk3566-anbernic-rg503.dtb",
++		.adc_value = 1023, /* Observed average from device */
++		.board = "rk3566-anbernic-rg503",
++		.board_name = "RG503",
++		.fdtfile = DTB_DIR "rk3566-anbernic-rg503.dtb",
++		.detect_panel = 0,
+ 	},
+ 	/* Devices with duplicate ADC value */
+ 	[RG353PS] = {
+-		860, /* Observed average from device */
+-		"rk3566-anbernic-rg353ps",
+-		"RG353PS",
+-		DTB_DIR "rk3566-anbernic-rg353ps.dtb",
++		.adc_value = 860, /* Observed average from device */
++		.board = "rk3566-anbernic-rg353ps",
++		.board_name = "RG353PS",
++		.fdtfile = DTB_DIR "rk3566-anbernic-rg353ps.dtb",
++		.detect_panel = 1,
+ 	},
+ 	[RG353VS] = {
+-		695, /* Gathered from second hand information */
+-		"rk3566-anbernic-rg353vs",
+-		"RG353VS",
+-		DTB_DIR "rk3566-anbernic-rg353vs.dtb",
++		.adc_value = 695, /* Gathered from second hand information */
++		.board = "rk3566-anbernic-rg353vs",
++		.board_name = "RG353VS",
++		.fdtfile = DTB_DIR "rk3566-anbernic-rg353vs.dtb",
++		.detect_panel = 1,
+ 	},
+ };
+ 
+ struct rg353_panel {
+ 	const u16 id;
+-	const char *panel_compat;
++	const char *panel_compat[2];
+ };
+ 
+ static const struct rg353_panel rg353_panel_details[] = {
+-	{ .id = 0x3052, .panel_compat = "newvision,nv3051d"},
+-	{ .id = 0x3821, .panel_compat = "anbernic,rg353v-panel-v2"},
++	{
++		.id = 0x3052,
++		.panel_compat[0] = "anbernic,rg353p-panel",
++		.panel_compat[1] = "newvision,nv3051d",
++	},
++	{
++		.id = 0x3821,
++		.panel_compat[0] = "anbernic,rg353v-panel-v2",
++		.panel_compat[1] = NULL,
++	},
+ };
+ 
+ /*
+@@ -298,11 +314,10 @@ int rgxx3_detect_display(void)
+ 	if (!panel) {
+ 		printf("Unable to identify panel_id %x\n",
+ 		       (panel_id[0] << 8) | panel_id[1]);
+-		env_set("panel", "unknown");
+ 		return -EINVAL;
+ 	}
+ 
+-	env_set("panel", panel->panel_compat);
++	env_set("panel", panel->panel_compat[0]);
+ 
+ 	return 0;
+ }
+@@ -367,13 +382,14 @@ int rgxx3_detect_device(void)
+ 		rg3xx_model_details[board_id].board_name);
+ 	env_set("fdtfile", rg3xx_model_details[board_id].fdtfile);
+ 
+-	/* Detect the panel type for any device that isn't a 503. */
+-	if (board_id == RG503)
++	/* Skip panel detection for when it is not needed. */
++	if (!rg3xx_model_details[board_id].detect_panel)
+ 		return 0;
+ 
++	/* Warn but don't fail for errors in auto-detection of the panel. */
+ 	ret = rgxx3_detect_display();
+ 	if (ret)
+-		return ret;
++		printf("Failed to detect panel type\n");
+ 
+ 	return 0;
+ }
+@@ -400,7 +416,8 @@ int rk_board_late_init(void)
+ 
+ int ft_board_setup(void *blob, struct bd_info *bd)
+ {
+-	int node, ret;
++	const struct rg353_panel *panel = NULL;
++	int node, ret, i;
+ 	char *env;
+ 
+ 	/* No fixups necessary for the RG503 */
+@@ -414,6 +431,12 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ 			    rg3xx_model_details[RG353M].board_name,
+ 			    sizeof(rg3xx_model_details[RG353M].board_name));
+ 
++	env = env_get("panel");
++	if (!env) {
++		printf("Can't get panel env\n");
++		return 0;
++	}
++
+ 	/*
+ 	 * Check if the environment variable doesn't equal the panel.
+ 	 * If it doesn't, update the devicetree to the correct panel.
+@@ -424,12 +447,6 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ 		return -ENODEV;
+ 	}
+ 
+-	env = env_get("panel");
+-	if (!env) {
+-		printf("Can't get panel env\n");
+-		return -ENODEV;
+-	}
+-
+ 	ret = fdt_node_check_compatible(blob, node, env);
+ 	if (ret < 0)
+ 		return -ENODEV;
+@@ -438,8 +455,24 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ 	if (!ret)
+ 		return 0;
+ 
+-	do_fixup_by_path_string(blob, "/dsi@fe060000/panel@0",
+-				"compatible", env);
++	/* Panels don't match, search by first compatible value. */
++	for (i = 0; i < ARRAY_SIZE(rg353_panel_details); i++) {
++		if (!strcmp(env, rg353_panel_details[i].panel_compat[0])) {
++			panel = &rg353_panel_details[i];
++			break;
++		}
++	}
++
++	if (!panel) {
++		printf("Unable to identify panel by compat string\n");
++		return -ENODEV;
++	}
++
++	/* Set the compatible with the auto-detected values */
++	fdt_setprop_string(blob, node, "compatible", panel->panel_compat[0]);
++	if (panel->panel_compat[1])
++		fdt_appendprop_string(blob, node, "compatible",
++				      panel->panel_compat[1]);
+ 
+ 	return 0;
+ }
 -- 
 2.34.1
 
