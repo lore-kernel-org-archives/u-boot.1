@@ -4,79 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 782C3C47074
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 15:48:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CB95C46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 15:53:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8F8A8794B;
-	Tue,  2 Jan 2024 16:47:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EEEBF878C9;
+	Tue,  2 Jan 2024 16:53:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H9L7lOdu";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63536878DB; Tue,  2 Jan 2024 16:47:11 +0100 (CET)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 05883878F9; Tue,  2 Jan 2024 16:53:24 +0100 (CET)
+Received: from metis.whiteo.stw.pengutronix.de
+ (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07ACE87923
- for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 16:47:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C26C68770A
+ for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 16:53:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=pengutronix.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=macroalpha82@gmail.com
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-594bea92494so3382722eaf.2
- for <u-boot@lists.denx.de>; Tue, 02 Jan 2024 07:47:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704210427; x=1704815227; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=k5CXCYUczBUQjKQamPloqkUsFz2d5ZVu36134TsC2t4=;
- b=H9L7lOduZcyMBHQfO3tjWHVgYOmhD4smrRImISCL/fCOtHkK4a24vKXiOBdqQiFYAq
- d5qx/LDgmjFgipVfLOjXatcTtOH2k+QfKBZcoqIbtqvNEyYSiruh7dJNFTVxA/YhxMn3
- kNMvzkjQQuYeuhki5Nw2G1xNu3cv3DnswNh8Epl2r+P5xgBCiSPloKZ5s59vSQapnl/D
- f2vjULMe7FE/ge9viRwJAP2XTU0Eu/VNUWnGqp2jSOBRxufxCMLl9dbYO2d4936fMduV
- qTcn4r1kJDDLz83ilmD0B4Z0mDuPnUDgdPfgUOv9X4zImo9fo2iHPXeOBrssxKF0WvsX
- 3V5Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704210427; x=1704815227;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=k5CXCYUczBUQjKQamPloqkUsFz2d5ZVu36134TsC2t4=;
- b=eQlO8havFt97u1LZ+XxN6b+gRpO96xNHWv47VoSFjjRFndbN1QwJ7ouOZc+mmv0t9p
- tchh3CqOsRHK8uVYOgxTjMlvGguxTMex37Z9x+r0a06Z5/KZ7Q9JQ1hsUDg/2mG9Wnea
- Z7DZSbDvggh1aac98ar+H+PZBbYauoN40sx1MW/U4C0TRQ6FMeQq/msti124eLjpKlKB
- bbvaO73FCV3GXRkfKEM/5m3hzVMdXNOapfhQRtsjifuwzglcycFAwJSQt0+dMeuArNou
- coR9PpjpxW+rNPXab2f9yH2kmiYns+IQom/JCX4Kep5gNpj9r6XprcHz5gMa3+is02cK
- tWlg==
-X-Gm-Message-State: AOJu0YwTyIXEH48TYASzmxD5AkD8ciGO7Xg0iCI+eSZXGeFHeisE8C+w
- wTKe9i7tZ/TnZyMB+xvJIWWbyvpTyGtyoA==
-X-Google-Smtp-Source: AGHT+IG3P6LXnNFfsTkbEiW30t44RiGzB7zfFya0DQfFfkD2QJM+HK+/hMSG6xF+M+V6s+8aYYUy6w==
-X-Received: by 2002:a4a:ab84:0:b0:595:e14c:6aee with SMTP id
- m4-20020a4aab84000000b00595e14c6aeemr562931oon.6.1704210427557; 
- Tue, 02 Jan 2024 07:47:07 -0800 (PST)
-Received: from localhost.localdomain ([75.28.21.198])
- by smtp.gmail.com with ESMTPSA id
- 127-20020a4a0d85000000b005958af24e84sm843197oob.42.2024.01.02.07.47.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jan 2024 07:47:06 -0800 (PST)
-From: Chris Morgan <macroalpha82@gmail.com>
-To: u-boot@lists.denx.de
-Cc: andre.przywara@arm.com, kever.yang@rock-chips.com,
- philipp.tomsich@vrull.eu, sjg@chromium.org, jagan@edgeble.ai,
- jonas@kwiboo.se, Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH V4 7/7] doc: board: anbernic: Update rgxx3 to add new boards
-Date: Tue,  2 Jan 2024 09:46:54 -0600
-Message-Id: <20240102154654.191055-8-macroalpha82@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240102154654.191055-1-macroalpha82@gmail.com>
-References: <20240102154654.191055-1-macroalpha82@gmail.com>
+ spf=pass smtp.mailfrom=a.fatoum@pengutronix.de
+Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77]
+ helo=[127.0.0.1])
+ by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
+ (envelope-from <a.fatoum@pengutronix.de>)
+ id 1rKh4q-0001xX-4T; Tue, 02 Jan 2024 16:53:12 +0100
+Message-ID: <cfb9c01a-7af6-42ff-9056-e64c8c29bfdb@pengutronix.de>
+Date: Tue, 2 Jan 2024 16:53:09 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 2/2] arm64: boot: Support Flat Image Tree
+Content-Language: en-US
+To: Masahiro Yamada <masahiroy@kernel.org>, Chen-Yu Tsai <wenst@chromium.org>
+Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Simon Glass <sjg@chromium.org>, linux-arm-kernel@lists.infradead.org,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Nicolas Schier <nicolas@fjasle.eu>, Tom Rini <trini@konsulko.com>,
+ Catalin Marinas <catalin.marinas@arm.com>, Jonathan Corbet <corbet@lwn.net>,
+ Nathan Chancellor <nathan@kernel.org>, Nick Terrell <terrelln@fb.com>,
+ Will Deacon <will@kernel.org>, linux-doc@vger.kernel.org,
+ linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org,
+ workflows@vger.kernel.org
+References: <20231202035511.487946-1-sjg@chromium.org>
+ <20231202035511.487946-3-sjg@chromium.org>
+ <20231203153401.GV8402@pendragon.ideasonboard.com>
+ <20231207142723.GA3187877@google.com>
+ <20231207143814.GD15521@pendragon.ideasonboard.com>
+ <CAGXv+5Go_0pEVAOLQmRCc_a9-YUtZEmBfXtMuBupX_nb9iqwbw@mail.gmail.com>
+ <20231209152946.GC13421@pendragon.ideasonboard.com>
+ <CAMuHMdVMZs6mnwWBgFwktO=8o=QzROv60cfZe085MhD6HxQjpQ@mail.gmail.com>
+ <CAGXv+5Est3FL-XcEL-vB-6zVNas0mqb2cNYa==Yb7W2SQU9xVQ@mail.gmail.com>
+ <CAK7LNATyD-PeNbaLTjJmU9=koqqE+V6QvFe09c2VrXopWvjpcw@mail.gmail.com>
+ <CAK7LNAR7Fm-1yaZmyH78vG5yNbbW2Avjj5F63u+aST6JQoMd5A@mail.gmail.com>
+From: Ahmad Fatoum <a.fatoum@pengutronix.de>
+In-Reply-To: <CAK7LNAR7Fm-1yaZmyH78vG5yNbbW2Avjj5F63u+aST6JQoMd5A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
+X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
+ SAEximRunCond expanded to false
+X-PTX-Original-Recipient: u-boot@lists.denx.de
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,62 +81,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Chris Morgan <macromorgan@hotmail.com>
+Hello Yamada-san,
 
-Update the RGxx3 documentation to note that it now supports the
-RG-ARC-D, RG-ARC-S, Powkiddy RK2023, and Powkiddy RGB30. Also update
-verbiage around panel detection to note that it is no longer hard coded
-to the RG503.
+On 14.12.23 08:33, Masahiro Yamada wrote:
+>> The FIT spec allows the "fdt" property to list
+>> multiple image nodes.
+>>
+>>
+>> o config-1
+>>  |- description = "configuration description"
+>>  |- kernel = "kernel sub-node unit name"
+>>  |- fdt = "fdt sub-node unit-name" [, "fdt overlay sub-node unit-name", ...]
+>>  |- loadables = "loadables sub-node unit-name"
+>>  |- script = "
+>>  |- compatible = "vendor
+> 
+> 
+> 
+> 
+> 
+> This is a question for U-Boot (and barebox).
+> 
+> 
+> 
+> 
+>    images {
+>           base {
+>                 ...
+>           };
+> 
+>           addon1 {
+>                 ...
+>           };
+> 
+>           addon2 {
+>                 ...
+>           };
+>     };
+> 
+>     configurations {
+>           ...
+>           fdt = "base", "addon1", "addon2";
+>     };
+> 
+> 
+> 
+> 
+> Is U-Boot's "bootm" command able to dynamically construct
+> the full DTB from "base" + "addon1" + "addon2"
+> and pass to the kernel?
 
-Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
----
- doc/board/anbernic/rgxx3.rst | 20 ++++++++++++++------
- 1 file changed, 14 insertions(+), 6 deletions(-)
+barebox can apply overlays to the DT, but doesn't do so yet from
+the extra entries in configuration fdt properties.
 
-diff --git a/doc/board/anbernic/rgxx3.rst b/doc/board/anbernic/rgxx3.rst
-index 7d1beb423c..d159ed2f76 100644
---- a/doc/board/anbernic/rgxx3.rst
-+++ b/doc/board/anbernic/rgxx3.rst
-@@ -5,6 +5,8 @@ U-Boot for Anbernic RGxx3 Devices
- 
- This allows U-Boot to boot the following Anbernic devices:
- 
-+ - Anbernic RG-ARC-D
-+ - Anbernic RG-ARC-S
-  - Anbernic RG353M
-  - Anbernic RG353P
-  - Anbernic RG353PS
-@@ -12,18 +14,24 @@ This allows U-Boot to boot the following Anbernic devices:
-  - Anbernic RG353VS
-  - Anbernic RG503
- 
-+Additionally, the following very similar non-Anbernic devices are also
-+supported:
-+
-+ - Powkiddy RGB30
-+ - Powkiddy RK2023
-+
- The correct device is detected automatically by comparing ADC values
- from ADC channel 1. In the event of an RG353V or RG353P, an attempt
- is then made to probe for an eMMC and if it fails the device is assumed
- to be an RG353VS or RG353PS. Based on the detected device, the
- environment variables "board", "board_name", and "fdtfile" are set to
- the correct values corresponding to the board which can be read by a
--boot script to boot with the correct device tree. If the board detected
--is not of type RG503 (which currently has only 1 panel revision) a
--panel detect is then performed by probing a "dummy" display on the DSI
--bus and then querying the display ID. The display ID is then compared
--to a table to get the known compatible string for use in Linux, and
--this string is saved as an environment variable of "panel".
-+boot script to boot with the correct device tree. If a board is defined
-+as requiring panel detection, a panel detect is then performed by
-+probing a "dummy" display on the DSI bus and then querying the display
-+ID. The display ID is then compared to a table to get the known
-+compatible string for use in Linux, and this string is saved as an
-+environment variable of "panel".
- 
- FDT fixups are performed in the event of an RG353M to change the device
- name, or in the event the panel detected does not match the devicetree.
+This should be straight-forward to add though, if the need arises.
+
+> Is U-Boot able to handle FIT (includes kernel + DTs)
+> and a separate initrd?
+> 
+>   # bootm  <fit-address>:<conf-name>  <ramdisk-address>
+
+This is possible in barebox, provided that the FIT image doesn't
+already have a ramdisk and that CONFIG_BOOTM_FORCE_SIGNED_IMAGES=n:
+
+  bootm -r /mnt/nfs/ramdisk.gz /mnt/nfs/image.fit
+
+(Or the equivalent variables if not wanting to use the shell.)
+
+> Presumably, it would be difficult to inject initramdisk
+> into image.fit later, so I am hoping bootm would work like that,
+> but I did not delve into U-Boot code.
+> 
+> 
+> 
+> If it works, is it possible to verify the integrity of initrd?
+> The kernel and DTs inside FIT will be verified, but not sure
+> if it is possible for ramdisk.
+
+If one wants to preclude mix & match attacks, the configuration needs
+to be verified fully, so if signing is required, it's probably better to
+amend the FIT later on with the new configuration instead of signing
+the initrd separately and combining them at runtime.
+
+Cheers,
+Ahmad
+
+> 
+> 
+> 
+> 
+> 
+
 -- 
-2.34.1
+Pengutronix e.K.                           |                             |
+Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
 
