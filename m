@@ -4,88 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2FC2C46CD2
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 14:07:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B167C46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 14:07:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02CD88786E;
+	by phobos.denx.de (Postfix) with ESMTP id 6F300878DD;
 	Tue,  2 Jan 2024 15:06:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="T2Ebhk7W";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mbEfUVmp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98673878AF; Tue,  2 Jan 2024 15:06:47 +0100 (CET)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id E460E876BF; Tue,  2 Jan 2024 15:06:47 +0100 (CET)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5297B876FB
- for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 15:06:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FB3887823
+ for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 15:06:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6806914dba7so37001176d6.2
- for <u-boot@lists.denx.de>; Tue, 02 Jan 2024 06:06:44 -0800 (PST)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-3bbbc6bcc78so4894394b6e.1
+ for <u-boot@lists.denx.de>; Tue, 02 Jan 2024 06:06:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704204403; x=1704809203; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1704204404; x=1704809204; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GmdoAo6dmjYw4joKajxKRaTRjUBjT8AZB0O7XUxkYs0=;
- b=T2Ebhk7WeguIC/ml207Y81If91Lk7yTByD6sxGjeCz3003eZnZDj/rhaQuvJ3DhI4L
- 4sS5uWOYckPlUgbj8wZbokQlzyl35nCBQ6C9r/NyI+ziOudiY+p8WFs0SmigWRiRFJTS
- Pt+n+vkySC2BCBsQ/bBzgFN6cGaYoszezVqc8=
+ bh=HW4HBzqhZNwTwCuDRK9mnwtAwVBsJkZI/a9yd0gvsFs=;
+ b=mbEfUVmp45oilKb8zrysW/Z6lwYNXzIjaYuyph25Un5AOxqT+Wz5RL2WKFmAVIs1Q1
+ kE/xILzYApG10g/U0uYRgonUXdm1ue8Pn+Oqs87bYhwxqlCbWORiVwZuDo+DA3TiJVs0
+ fr12I/XR9TxJNUi/qoeE/s1ClljVSAAQ0Hmco=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704204403; x=1704809203;
+ d=1e100.net; s=20230601; t=1704204404; x=1704809204;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GmdoAo6dmjYw4joKajxKRaTRjUBjT8AZB0O7XUxkYs0=;
- b=wV45dALOLO0MmMDSaG+DuRnade5KJotMCNbdQv0ADA4NhVWqus00X7mwEsv8hYsPfH
- STEYWgBml6/o7spV/N1iDhb/MBeZsle06nv4ulsGSJRmdT1QzNHSwhCAXH71T5Xp53aH
- 0pJanYhoSILupGoTl5YBjh2Akag1AP7gu437pdKoZZ6YDhgwLZ8lQc4dYV3jWp38Ovgw
- EKYvsWsaUFkIUarnFrNyNCdOvIksDqUrTYplG249sE4A1iakUMJq8h1h83QTrzeE1OdQ
- 8qDdx4xPW2BzlnfchmVUIdUz4anFpFttgEM97HguoUxB2shUclPFWNJvZuPpeegSjV7J
- hxKA==
-X-Gm-Message-State: AOJu0YxhZDAixpjfy5n7Wkt6v3VbsZngOJ0SMRYHmDIi0Sp4EW+13MPa
- KE/7da4EWxblW3iT5AtJnFAgL1mz82W5BNdmVhTSbyv6xrBe
-X-Google-Smtp-Source: AGHT+IHby67AYBwvpEgYCsSMb+cWARlW8Qe5f/SRGQkp3NvWu/Dc7xKUYLUANlnUenEPSaTnLfVzTvm9kHN2yCRVVJQ=
-X-Received: by 2002:a05:6214:2308:b0:67f:4926:60cd with SMTP id
- gc8-20020a056214230800b0067f492660cdmr25302344qvb.83.1704204403112; Tue, 02
- Jan 2024 06:06:43 -0800 (PST)
+ bh=HW4HBzqhZNwTwCuDRK9mnwtAwVBsJkZI/a9yd0gvsFs=;
+ b=D/pUOrzV25oLGvF5ZXl1xFRRmArqjUnUcwtOOmx138Gr1GV80dmy5iqknbHusCRUdw
+ oWv0Er1tU6WK1Fxd6tm8auIp9K8NriAQud/yWPjbiP5+Sm3xBCi32gjSMSCJ4ITgE0BF
+ 8eu5EPe5qW4VyIao9fuoW8nBAc3JPB76aEamxM25IZzqjAqKLZ+KQUgBeqtMf/9oz4PO
+ 7/V7xlCXgjOXUCskSryiuYFHMJJ2RVMVm6xJQkpiljKenw9jfv+QfJ24OAUtyXUvnbSL
+ p4YXiSLVznW+c9z8PBDfXPKD0uWgzhhyrtS7RvqQq3r4D3Jza4GUgIDZLQkyGFo3uEF4
+ UM+g==
+X-Gm-Message-State: AOJu0Yxtb4Yf4Cx/t3iPMvsKtJIL4FDQcnhs2j74kriNzwrSc4Nbatr9
+ oRMTnV90AcmDA3JHo7KIFMFEFhQuuoST4OHEf4AW61+rJyCw
+X-Google-Smtp-Source: AGHT+IE1Z+ywFouMlJ6+izjN9U7Ucgl/G66eI21/VqYSwAYbRX2k/i2sr/uJmNXaQOHKajNfb56LWBqHa9poi53bXmo=
+X-Received: by 2002:a05:6808:3189:b0:3bc:19ea:4019 with SMTP id
+ cd9-20020a056808318900b003bc19ea4019mr892805oib.75.1704204404030; Tue, 02 Jan
+ 2024 06:06:44 -0800 (PST)
 MIME-Version: 1.0
-References: <20231228115804.3626579-1-sumit.garg@linaro.org>
- <20231228115804.3626579-5-sumit.garg@linaro.org>
- <CAFLszThfxe_n02auF+vZ1u7FynKkrWEYFU3SdkRTLgBVuiv+Hw@mail.gmail.com>
- <20231228140313.GB2652760@bill-the-cat>
- <CAFLszTiPFyRQZtrKhETjMzn6JukFJaBYMugdL-RPO3LJB9XUMA@mail.gmail.com>
- <20231228155428.GI2652760@bill-the-cat>
- <CAFLszTjqcJouv7Dyasjfx4FiNy378fFA+A-DP292yvPk8xOzjw@mail.gmail.com>
- <CAFA6WYME_0-s4aBbaKOS3Q+q9+5553qSWcL9pDMvC9VaAfAz0w@mail.gmail.com>
- <CAFLszTj0ptH7K2Y4Fc1FR1_OmK5OzAaAReR1KT5R8OZvbgrP-Q@mail.gmail.com>
- <20231231203953.GG2652760@bill-the-cat>
- <87ttnxlwon.fsf@bloch.sibelius.xs4all.nl>
- <CAFLszThKEW7rvkfiV=Y_bYtBCC2=Ue1vKOnb4a+EN4=EEYNfng@mail.gmail.com>
- <a2393800-ea34-48f4-9300-5a2821cec7e7@linaro.org>
-In-Reply-To: <a2393800-ea34-48f4-9300-5a2821cec7e7@linaro.org>
+References: <CAK9R8u_QmcHLv6KbNm8+8EDvnmgehFZfoPNVCVn8n5P17ArErw@mail.gmail.com>
+ <CAPnjgZ2JUCWjr35yL6pb2XSEs7659A1Sjh4CgQ6B=vXCLhRvtA@mail.gmail.com>
+ <CAK9R8u_MQtmYcPwiYwXmqse+1yfPaE1ZEHZVtrgHAP-KgPAT+g@mail.gmail.com>
+In-Reply-To: <CAK9R8u_MQtmYcPwiYwXmqse+1yfPaE1ZEHZVtrgHAP-KgPAT+g@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 2 Jan 2024 07:06:32 -0700
-Message-ID: <CAFLszTgL90qVQ7RFoYuOW-YMXPeN=gjW4D-w0-zYKi3ynyvkJQ@mail.gmail.com>
-Subject: Re: [PATCH v3 4/8] dts: Add alternative location for upstream DTB
- builds
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, Tom Rini <trini@konsulko.com>,
- sumit.garg@linaro.org, u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, robh+dt@kernel.org, 
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- neil.armstrong@linaro.org, ff@shokubai.tech, daniel.thompson@linaro.org, 
- dgilmore@fedoraproject.org, pbrobinson@gmail.com, ilias.apalodimas@linaro.org, 
- maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de, 
- michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk, 
- peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de, 
- mibodhi@gmail.com
+Date: Tue, 2 Jan 2024 07:06:33 -0700
+Message-ID: <CAFLszTgNit2-K4BJ31UZs_xS9HUanCMm2Gr14xxAUkmo90tEuQ@mail.gmail.com>
+Subject: Re: Setting up boot chain ACPI on ARM with STM32MPU
+To: Ba Gia Bao Phan <phanbagiabao2001@gmail.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ andy.shevchenko@gmail.com, trini@konsulko.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -104,92 +85,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+Hi Ba,
 
-On Tue, Jan 2, 2024 at 5:51=E2=80=AFAM Caleb Connolly <caleb.connolly@linar=
-o.org> wrote:
+On Mon, Dec 4, 2023 at 2:47=E2=80=AFAM Ba Gia Bao Phan
+<phanbagiabao2001@gmail.com> wrote:
+>>
+>> Sort-of...the refactoring to allow ACPI tables on ARM is completed,
+>> but I don't think any U-Boot board uses this.
 >
-> [snip]
-> >>>
-> >>>>> However, I am very much in favour of having a generalized U-Boot
-> >>>>> image. This might become true in some cases like U-Boot acts as a
-> >>>>> second stage bootloader for a particular SoC which is a unified ima=
-ge
-> >>>>> where the prior stage passes the DT to it. The Qcom effort in this
-> >>>>> direction can be an example here.
-> >>>>
-> >>>> Not relevant to the topic at hand, perhaps, but Qualcomm uses a
-> >>>> closed-source blob to jump to U-Boot and is certainly not an example
-> >>>> we should emulate. But yes, passing a DT to U-Boot proper can be
-> >>>> useful.
->
-> Just to chime in here, this limitation is true for production Qualcomm
-> devices where all of the bootloader blobs are signed by the OEM (true
-> for most phones). But for development platforms we can do better. I
-> expect this is a topic we will keep on coming back to, so I'd like to
-> just take the time to explain some of the technical details on Qualcomm
-> platforms, as there is a lot more nuance than you might be aware of.
->
-> The modern Qualcomm boot chain is (roughly) PBL (bootrom) -> TZ/el3 ->
-> sbl1 (secondary bootloader) -> hypervisor -> XBL_Core (UEFI impl) -> ABL
-> (LinuxLoader.efi app) -> Linux
->
-> On production devices the best we can do is replace "Linux" with U-Boot,
-> and if we're lucky then we can leverage features of ABL to simplify
-> things like DTB selection (it supports picking from a bunch of
-> concatenated DTBs, but we can just as easily implement some similar
-> feature in U-Boot ourselves).
->
-> On a development board I have been successful in replacing the
-> hypervisor with a stub and replacing XBL_Core with U-Boot - giving us
-> EL2 and removing the entire proprietary UEFI stack. There is no reason
-> that we can't go further than this.
->
-> The Qualcomm Chromebooks all run Coreboot, for sure on those it would be
-> possible to use U-Boot much earlier (although there is still the
-> proprietary XBL_Sec TZ blob).
->
-> The Dragonboard410c (and MSM8916 SoC overall) has been pretty much
-> entirely ripped open thanks to Stephan Gerhold and the msm8916-mainline
-> project. On these devices it is easily possible to run U-Boot as a
-> first-stage bootloader (at least to the same extent one can on the more
-> open ARM platforms, or even more open if you wish). Although the
-> bootloader of choice for most of these devices is a home-grown fork of lk=
-.
->
-> For new SoCs, with the number of Qualcomm devices out there, and
-> communities like postmarketOS enabling support on so many of them... My
-> hope is that we will quickly see phones being the most common Qualcomm
-> devices supported by U-Boot. While it is indeed extremely unfortunate
-> that we can't replace the bootloader entirely, using U-Boot as a fresh
-> slate is still extremely liberating (EFI! Firmware updates! No need for
-> distro hacks to update the kernel! Multi-boot! etc...). I wish we could
-> focus more on how U-Boot will make supporting Linux on these devices SO
-> SO much easier, and less on how broken the (usually impossible to
-> modify) bootloader they shipped with is.
->
-> While almost all of the boot chain I explained above is proprietary, the
-> ABL source code is publicly available (although most device vendors
-> don't publish their modified production version, I suppose for fear of
-> embarrassment). The statement "Qualcomm uses a closed-source blob to
-> jump to U-Boot" is at the very least an oversimplification.
->
-> To be contrarian, here is an example of a phone vendor who do publish
-> their ABL source code, here is the code that runs Linux (or U-Boot in
-> our case).
->
-> https://github.com/SHIFTPHONES/android_bootable_bootloader_edk2/blob/sos-=
-3.x/QcomModulePkg/Library/BootLib/BootLinux.c#L1039
->
-> My point is, there is a lot of nuance and complexity here, and we need
-> to be careful about what exactly we're referring to.
+> Hello, could you tell me more details about this topic? Which platform AR=
+M are ACPI tables enabled for?
 
-Thank you very much for the information, it is a great read. Yes my
-comment was wide of the mark and I am pleased to hear it.
+There are some patches to enable it for qemu on ARM here:
 
-BTW, I would very much like to see Linaro ensuring that new 96boards
-have open source firmware before they are released. Before release
-seems to be the only time that the vendor can devote time to it.
+http://patchwork.ozlabs.org/project/uboot/list/?series=3D388154
 
 Regards,
 Simon
+
+
+>
+> Le mer. 29 nov. 2023 =C3=A0 20:28, Simon Glass <sjg@chromium.org> a =C3=
+=A9crit :
+>>
+>> +Heinrich Schuchardt
+>>
+>> Hi,
+>>
+>> On Wed, 29 Nov 2023 at 08:29, Ba Gia Bao Phan
+>> <phanbagiabao2001@gmail.com> wrote:
+>> >
+>> > Hello everyone,
+>> >
+>> > I am a trainee at STMicroelectronics France. I am working on a project=
+ "Setting up a boot chain ACPI" for STM32MPU, which is based on ARM Cortex-=
+A . The objective of my project is to add a way of booting (with ACPI) besi=
+des Device Tree available on STM32MPU.
+>> >
+>> > I found that ACPI was enabled on some x86 platforms but I don't know w=
+hether it was set up on ARM or not. I found a PATCH that discussed Enabling=
+ ACPI booting on ARM with Raspberry Pi 4 but I don't know if it functioned =
+or not. Did anyone here succeed in setting up ACPI on ARM by U-boot?
+>>
+>> Sort-of...the refactoring to allow ACPI tables on ARM is completed,
+>> but I don't think any U-Boot board uses this.
+>>
+>> >
+>> > What are the differences between x86 and ARM platforms when enabling A=
+CPI? The architecture of my board STM32PMU is ARM so can I apply the techni=
+que used on platform x86 for my board?
+>>
+>> Firstly I wonder why you want ACPI?
+>>
+>> Secondly, if you have the tables somewhere it should be easy enough to
+>> build them, building on the series you pointed to. Heinrich is
+>> interested in this, I think. I can help with advice. I have been
+>> toying with going back to that rpi series but have not done so yet.
+>>
+>> Regards,
+>> Simon
+>
+>
+>
+> --
+> PHAN Ba Gia Bao
+> Etudiant en 5A STI - INSA Centre Val de Loire
