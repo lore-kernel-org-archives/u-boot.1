@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B167C46CD2
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 14:07:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42650C47074
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 14:07:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F300878DD;
-	Tue,  2 Jan 2024 15:06:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0191E878F4;
+	Tue,  2 Jan 2024 15:06:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mbEfUVmp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E8NxVy/G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E460E876BF; Tue,  2 Jan 2024 15:06:47 +0100 (CET)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id 8651187834; Tue,  2 Jan 2024 15:06:48 +0100 (CET)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FB3887823
- for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 15:06:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C20D8783D
+ for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 15:06:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-3bbbc6bcc78so4894394b6e.1
- for <u-boot@lists.denx.de>; Tue, 02 Jan 2024 06:06:45 -0800 (PST)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-67f85fe5632so68681946d6.0
+ for <u-boot@lists.denx.de>; Tue, 02 Jan 2024 06:06:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704204404; x=1704809204; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1704204405; x=1704809205; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HW4HBzqhZNwTwCuDRK9mnwtAwVBsJkZI/a9yd0gvsFs=;
- b=mbEfUVmp45oilKb8zrysW/Z6lwYNXzIjaYuyph25Un5AOxqT+Wz5RL2WKFmAVIs1Q1
- kE/xILzYApG10g/U0uYRgonUXdm1ue8Pn+Oqs87bYhwxqlCbWORiVwZuDo+DA3TiJVs0
- fr12I/XR9TxJNUi/qoeE/s1ClljVSAAQ0Hmco=
+ bh=3rx7y/MjYOoZlRc6zUP3oQqp/74TRCkyTXWoGqDG9/4=;
+ b=E8NxVy/GSg+lVeftTU2rOrL+mfJNDiQsm0X41KCtGLx4uDt8ay2+gKTk7l0xxlaHEF
+ sB2WaZH+RsK0mE4gQ2FMYNV6JNXMh0nGye1Xfoy5ITQWRhsIq/x/qv1yphN9adPnyQZ5
+ ZEi2eAZF/rOZcG4/HcaCAR0RmFUlCr3zElY2M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704204404; x=1704809204;
+ d=1e100.net; s=20230601; t=1704204405; x=1704809205;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HW4HBzqhZNwTwCuDRK9mnwtAwVBsJkZI/a9yd0gvsFs=;
- b=D/pUOrzV25oLGvF5ZXl1xFRRmArqjUnUcwtOOmx138Gr1GV80dmy5iqknbHusCRUdw
- oWv0Er1tU6WK1Fxd6tm8auIp9K8NriAQud/yWPjbiP5+Sm3xBCi32gjSMSCJ4ITgE0BF
- 8eu5EPe5qW4VyIao9fuoW8nBAc3JPB76aEamxM25IZzqjAqKLZ+KQUgBeqtMf/9oz4PO
- 7/V7xlCXgjOXUCskSryiuYFHMJJ2RVMVm6xJQkpiljKenw9jfv+QfJ24OAUtyXUvnbSL
- p4YXiSLVznW+c9z8PBDfXPKD0uWgzhhyrtS7RvqQq3r4D3Jza4GUgIDZLQkyGFo3uEF4
- UM+g==
-X-Gm-Message-State: AOJu0Yxtb4Yf4Cx/t3iPMvsKtJIL4FDQcnhs2j74kriNzwrSc4Nbatr9
- oRMTnV90AcmDA3JHo7KIFMFEFhQuuoST4OHEf4AW61+rJyCw
-X-Google-Smtp-Source: AGHT+IE1Z+ywFouMlJ6+izjN9U7Ucgl/G66eI21/VqYSwAYbRX2k/i2sr/uJmNXaQOHKajNfb56LWBqHa9poi53bXmo=
-X-Received: by 2002:a05:6808:3189:b0:3bc:19ea:4019 with SMTP id
- cd9-20020a056808318900b003bc19ea4019mr892805oib.75.1704204404030; Tue, 02 Jan
- 2024 06:06:44 -0800 (PST)
+ bh=3rx7y/MjYOoZlRc6zUP3oQqp/74TRCkyTXWoGqDG9/4=;
+ b=HqlpHbXQY2rgg/4Nqj1yDEeWrtLuMCoPsUVdlvG8KWkc5R7qcyVA1YxHTdOf+CVxG0
+ QrI99s9bvRZUm75S2vS8NXXhDCbaxGUYVSTgGRetDdp2T6ZKeTEB0YU2dSBEH/t9PjCd
+ 1OzpVNmDYTOlvDhdtiNDOz4tAs0P8uB/E8kxySDcSqRbvUVn7avDhqnwzC3owug9U42D
+ hcpJlfr9v8tqNxd9XTMWm5PGAJ/ElpuxFKxn3LEC4VZ9xQC91eNKauguZhvSy+RCM5jn
+ okbFmk7USlMVQl8bXC1mpr0MZvNPD+QgZR/oXII6QDLZ/eDGW/gKmQxBmJd83v41ywDc
+ XGfg==
+X-Gm-Message-State: AOJu0YwKOudg2hMJrGN3r5uFy+QP/DMLYuAXUkFLSqslOGn8zZwYFNxa
+ NNKQ8KxyFBY2Avp4Qzd+dEteNfsI4KuGQ+HUdPo5DxlIUw0L
+X-Google-Smtp-Source: AGHT+IF4KhHEy9iXP9p9W4ICeJv95qvcO+1vv7fWjiLAixsrqiXfkT/zEZJHaQoIvi4CXxOr/PRa61/JqHUYmEPBZdc=
+X-Received: by 2002:a05:6214:2b06:b0:67f:2bf8:28ad with SMTP id
+ jx6-20020a0562142b0600b0067f2bf828admr28391727qvb.12.1704204405242; Tue, 02
+ Jan 2024 06:06:45 -0800 (PST)
 MIME-Version: 1.0
-References: <CAK9R8u_QmcHLv6KbNm8+8EDvnmgehFZfoPNVCVn8n5P17ArErw@mail.gmail.com>
- <CAPnjgZ2JUCWjr35yL6pb2XSEs7659A1Sjh4CgQ6B=vXCLhRvtA@mail.gmail.com>
- <CAK9R8u_MQtmYcPwiYwXmqse+1yfPaE1ZEHZVtrgHAP-KgPAT+g@mail.gmail.com>
-In-Reply-To: <CAK9R8u_MQtmYcPwiYwXmqse+1yfPaE1ZEHZVtrgHAP-KgPAT+g@mail.gmail.com>
+References: <20240101185004.268790-1-heinrich.schuchardt@canonical.com>
+ <20240101185004.268790-3-heinrich.schuchardt@canonical.com>
+ <CAFLszTiH6awH9jt514b0Tod-dB0jigYa3vo2gtTRxZHRk2nNkw@mail.gmail.com>
+ <c2f78de7-9dc7-47f2-a3f7-3ce84917ac99@canonical.com>
+In-Reply-To: <c2f78de7-9dc7-47f2-a3f7-3ce84917ac99@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 2 Jan 2024 07:06:33 -0700
-Message-ID: <CAFLszTgNit2-K4BJ31UZs_xS9HUanCMm2Gr14xxAUkmo90tEuQ@mail.gmail.com>
-Subject: Re: Setting up boot chain ACPI on ARM with STM32MPU
-To: Ba Gia Bao Phan <phanbagiabao2001@gmail.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- andy.shevchenko@gmail.com, trini@konsulko.com
+Date: Tue, 2 Jan 2024 07:06:34 -0700
+Message-ID: <CAFLszTgdkgDM-uM+iWyLMoe+2qWEybotyCdvC6YEAxyuvp=sQA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] efi_loader: provide tool to dump SMBIOS table
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -85,68 +85,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ba,
+Hi Heinrich,
 
-On Mon, Dec 4, 2023 at 2:47=E2=80=AFAM Ba Gia Bao Phan
-<phanbagiabao2001@gmail.com> wrote:
->>
->> Sort-of...the refactoring to allow ACPI tables on ARM is completed,
->> but I don't think any U-Boot board uses this.
+On Mon, Jan 1, 2024 at 4:23=E2=80=AFPM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Hello, could you tell me more details about this topic? Which platform AR=
-M are ACPI tables enabled for?
+> On 1/1/24 23:41, Simon Glass wrote:
+> > Hi Heinrich,
+> >
+> > On Mon, Jan 1, 2024 at 11:50=E2=80=AFAM Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com> wrote:
+> >>
+> >> An EFI binary dmidump.efi is provided that can be used to check the SM=
+BIOS
+> >> table for consistency and to dump it as a file.
+> >>
+> >> The tool provides the following commands:
+> >>
+> >> check
+> >>      Check the SMBIOS table for consistency.
+> >>
+> >> exit
+> >>      Leave the tool.
+> >>
+> >> help
+> >>      Show available commands.
+> >>
+> >> save
+> >>      Save the SMBIOS table to a file on the EFI system partition. The =
+file
+> >>      can be further analyzed with the dmidecode command line tool::
+> >>
+> >>          dmidecode --from-dump <filename>
+> >>
+> >> Specifying 'nocolor' as load option data suppresses colored output and
+> >> clearing of the screen.
+> >>
+> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >> ---
+> >> v2:
+> >>          fix an incorrect variable usage when checking the result of m=
+emcmp
+> >> ---
+> >>   lib/efi_loader/Makefile  |   7 +
+> >>   lib/efi_loader/dmidump.c | 595 +++++++++++++++++++++++++++++++++++++=
+++
+> >>   2 files changed, 602 insertions(+)
+> >>   create mode 100644 lib/efi_loader/dmidump.c
+> >
+> > Does this tool need tests?
+>
+> Once we have all the SMBIOS stuff in, we could use the tool in a test to
+> verify that the SMBIOS tables are correctly installed.
 
-There are some patches to enable it for qemu on ARM here:
+Yes that is useful for the EFI side of things, along with your new
+test for smbios within U-Boot.
 
-http://patchwork.ozlabs.org/project/uboot/list/?series=3D388154
+>
+> >
+> > Can you please split up do_save() a bit and also move the command loop
+> > into its own function? Otherwise it looks good to me.
+> >
+> >>
+> >> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> >> index 24d33d5409..71880d330e 100644
+> >> --- a/lib/efi_loader/Makefile
+> >> +++ b/lib/efi_loader/Makefile
+> >> @@ -16,6 +16,8 @@ CFLAGS_boothart.o :=3D $(CFLAGS_EFI) -Os -ffreestand=
+ing
+> >>   CFLAGS_REMOVE_boothart.o :=3D $(CFLAGS_NON_EFI)
+> >>   CFLAGS_helloworld.o :=3D $(CFLAGS_EFI) -Os -ffreestanding
+> >>   CFLAGS_REMOVE_helloworld.o :=3D $(CFLAGS_NON_EFI)
+> >> +CFLAGS_dmidump.o :=3D $(CFLAGS_EFI) -Os -ffreestanding
+> >> +CFLAGS_REMOVE_dmidump.o :=3D $(CFLAGS_NON_EFI)
+> >>   CFLAGS_dtbdump.o :=3D $(CFLAGS_EFI) -Os -ffreestanding
+> >>   CFLAGS_REMOVE_dtbdump.o :=3D $(CFLAGS_NON_EFI)
+> >>   CFLAGS_initrddump.o :=3D $(CFLAGS_EFI) -Os -ffreestanding
+> >
+> > Is there a way to have a list of these tools such that the flags stuff
+> > is done automatically and doesn't need to be repeated each time?
+>
+> Looking at
+>
+> scripts/Makefile.lib:102:
+> _c_flags =3D $(filter-out $(CFLAGS_REMOVE_$(basetarget).o), $(orig_c_flag=
+s))
+>
+> this is not possible.
+
+Not with that rule, but perhaps another could be added. Anyway, I
+suppose we can put up with it for now.
+
+>
+> >
+> >> @@ -31,6 +33,11 @@ always +=3D helloworld.efi
+> >>   targets +=3D helloworld.o
+> >>   endif
+> >>
+> >> +ifneq ($(CONFIG_GENERATE_SMBIOS_TABLE),)
+> >> +always +=3D dmidump.efi
+> >> +targets +=3D dmidump.o
+> >
+> > How about smbios_tool ? I think 'dmi' is a bit of an obfuscation.
+>
+> We can call it smbiosdump.efi.
+
+Yes that is better.
+
+
+>
+> Thanks for reviewing.
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> >> +endif
+> >> +
+> >>   ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
+> >>   always +=3D dtbdump.efi
+> >>   targets +=3D dtbdump.o
+> >
+> > [..]
 
 Regards,
 Simon
-
-
->
-> Le mer. 29 nov. 2023 =C3=A0 20:28, Simon Glass <sjg@chromium.org> a =C3=
-=A9crit :
->>
->> +Heinrich Schuchardt
->>
->> Hi,
->>
->> On Wed, 29 Nov 2023 at 08:29, Ba Gia Bao Phan
->> <phanbagiabao2001@gmail.com> wrote:
->> >
->> > Hello everyone,
->> >
->> > I am a trainee at STMicroelectronics France. I am working on a project=
- "Setting up a boot chain ACPI" for STM32MPU, which is based on ARM Cortex-=
-A . The objective of my project is to add a way of booting (with ACPI) besi=
-des Device Tree available on STM32MPU.
->> >
->> > I found that ACPI was enabled on some x86 platforms but I don't know w=
-hether it was set up on ARM or not. I found a PATCH that discussed Enabling=
- ACPI booting on ARM with Raspberry Pi 4 but I don't know if it functioned =
-or not. Did anyone here succeed in setting up ACPI on ARM by U-boot?
->>
->> Sort-of...the refactoring to allow ACPI tables on ARM is completed,
->> but I don't think any U-Boot board uses this.
->>
->> >
->> > What are the differences between x86 and ARM platforms when enabling A=
-CPI? The architecture of my board STM32PMU is ARM so can I apply the techni=
-que used on platform x86 for my board?
->>
->> Firstly I wonder why you want ACPI?
->>
->> Secondly, if you have the tables somewhere it should be easy enough to
->> build them, building on the series you pointed to. Heinrich is
->> interested in this, I think. I can help with advice. I have been
->> toying with going back to that rpi series but have not done so yet.
->>
->> Regards,
->> Simon
->
->
->
-> --
-> PHAN Ba Gia Bao
-> Etudiant en 5A STI - INSA Centre Val de Loire
