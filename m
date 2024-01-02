@@ -4,76 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EF61C4706F
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 00:03:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EF58C47074
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 00:54:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 990C6876E2;
-	Tue,  2 Jan 2024 01:03:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 49032876C0;
+	Tue,  2 Jan 2024 01:54:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hxkAMvhu";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="GqSpT+D5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4FC287708; Tue,  2 Jan 2024 01:03:11 +0100 (CET)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5907D87792; Tue,  2 Jan 2024 01:54:34 +0100 (CET)
+Received: from mail-m121148.qiye.163.com (mail-m121148.qiye.163.com
+ [115.236.121.148])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44E0B86FFD
- for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 01:03:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7040586FD5
+ for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 01:54:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-5e7c1012a42so71621217b3.3
- for <u-boot@lists.denx.de>; Mon, 01 Jan 2024 16:03:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1704153788; x=1704758588; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=5e3lWbc0cYk3/BpOcUnwfZ0cwqBI16UmiLkkhbtLPbA=;
- b=hxkAMvhui35U8tmg/6IwBVIgBXl11Hwl0CQ6Fl3z+8Ns6B3z44CCGTnXYC/maKtK2A
- rJ0lyENUnl0pdYuc7RMQza8a+v3RmoX4nEju9e9VQy0focpu1IKKEEoufZuWVvG6Bi0U
- IAM+6F7iNRM/YxsuguUGPTLV1eQ1vhm/5TfRY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704153788; x=1704758588;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5e3lWbc0cYk3/BpOcUnwfZ0cwqBI16UmiLkkhbtLPbA=;
- b=IGMU9+GQuJhepmPKpQsEfd0wsc2F376QE6tIGlK4ypbmeGUo9Pq1Qgs0MI+dYXDClj
- CqDKrEu/HHkSnTPOxVXv6JTFGtK/JF2kay+jCgRTjZunqbmKCKZoE/63XwxIV0JgOZeo
- XMa9bwQ5jv21nqVdQexp25p4bZlnDtrNZqMi6ymk19iotdKqo9XHDa+SiMETjJWsV6Sb
- NZzcqbab15x7oiDn/Mpqwo1doig5UMlnQ8R4yq6n92YLTRESiiRH3OUSMhjd7O+4LZds
- mkyOXebPMfkPkrO6DK+jI1xcdGjOCoc8XPcRPNgMsNodHnc5F8itQur0cttHbAP2fSjG
- sMAg==
-X-Gm-Message-State: AOJu0YyHRJBxb/KEngJBThZc127lBa7Z3AkAUusT7Fj8PHz8Bu2cN0fF
- 99mKnGAspBLaXevUeukrNBTOvwCmkcxI7A==
-X-Google-Smtp-Source: AGHT+IGv5aq8NmUPCkVyycHTnIgYWeSw1TRYmkyqZajGKayKHjyNasci/3iQ62xhw58QFxg6D/gJhg==
-X-Received: by 2002:a0d:eb52:0:b0:5e4:8583:b52d with SMTP id
- u79-20020a0deb52000000b005e48583b52dmr8634049ywe.58.1704153787986; 
- Mon, 01 Jan 2024 16:03:07 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- z17-20020a81c211000000b005e71fbbc660sm11503631ywc.137.2024.01.01.16.03.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Jan 2024 16:03:07 -0800 (PST)
-Date: Mon, 1 Jan 2024 19:03:05 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Please pull u-boot-dm next
-Message-ID: <20240102000305.GJ2652760@bill-the-cat>
-References: <CAFLszTiz8oT9tTA-w+qVnxy2=mjCya8RMXdbswS1GtoxV+hO8w@mail.gmail.com>
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=GqSpT+D54VyzFW2V0xAWlrVRLVDq9VyIVP7qqOqWPDAoHbhBEi6RHf90eH9maM26/cJTDZr2rDTlx9LVhauMKTLrSiNKlOv+qh3kkxR0mjlQIVlvAu6zzS3kDOK3OOd+J91IsymqXNgdnEK1VPBzfrDp8imz7eIp/nN6f6cwsr8=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
+ bh=3hJiqd/SMg0UwQeVg0h5sYw7sXJP3QWhYNQg5mNgG7w=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.93] (unknown [58.22.7.114])
+ by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 866E74001B1;
+ Tue,  2 Jan 2024 08:54:25 +0800 (CST)
+Message-ID: <c12ac7d6-6ac5-42f4-a9d8-7e4d758145a1@rock-chips.com>
+Date: Tue, 2 Jan 2024 08:54:25 +0800
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="cyK32UjSfIAUuhqw"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTiz8oT9tTA-w+qVnxy2=mjCya8RMXdbswS1GtoxV+hO8w@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rockchip: rk3568: add support of all UART
+Content-Language: en-US
+To: Arseniy Mescheryakov <arseney300@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de
+References: <20231230112050.90014-1-Arseney300@gmail.com>
+ <9cdfedb2-d88c-4687-ac25-6680ba0088c4@kwiboo.se>
+ <CANLA-xx8PS_mv4QTDeof5ReeK9WhosnRhRP=3XhwQJcrd76uFg@mail.gmail.com>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <CANLA-xx8PS_mv4QTDeof5ReeK9WhosnRhRP=3XhwQJcrd76uFg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGR5KHlZMHhhDSUJPQx1NQ0pVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8cc7aa245d2eb3kusn866e74001b1
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MhA6Ijo4HDwzSkorDk0ZKD1O
+ Sj0KChFVSlVKTEtPSk5NQ01NSEJJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJT0pKTzcG
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,60 +75,565 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Arseniy,
 
---cyK32UjSfIAUuhqw
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2024/1/1 21:43, Arseniy Mescheryakov wrote:
+> Thanks for the answer.
+> I think developers should have the opportunity to configure UART from
+> the u-boot directly (via configuration) without any additional
+> proprietary blobs.
+The soc driver source code is used for hardware, I think soc vendor has 
+a recommend hardware design which is UART2
+for debug uart in RK3568, and the board vendor may change this design if 
+the board has special requirement,
+please add the driver based on real hardware.
+Th key reason is that the bootloader only add driver it needs for 
+hardware, not adding all the drivers, or else the size
+will be very big.
 
-On Mon, Jan 01, 2024 at 10:31:57AM -0700, Simon Glass wrote:
-
-> Hi Tom,
->=20
-> This is for -next
->=20
-> https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/19131
->=20
-> https://dev.azure.com/simon0972/u-boot/_build/results?buildId=3D57&view=
-=3Dresults
->=20
->=20
-> The following changes since commit 2b28c3b871cd5d55b19f0a86cef970139f8ab9=
-52:
->=20
->   Merge patch series "Modernize U-Boot shell" (2023-12-28 14:38:25 -0500)
->=20
-> are available in the Git repository at:
->=20
->   git://git.denx.de/u-boot-dm.git tags/dm-next-1124
->=20
-> for you to fetch changes up to e266d2731145681a55d862360f1b61690b0c6820:
->=20
->   bloblist: Update documentation and header comment (2023-12-31 07:21:02 =
--0700)
->=20
-
-Applied to u-boot/next, thanks!
-
---=20
-Tom
-
---cyK32UjSfIAUuhqw
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWTUrMACgkQFHw5/5Y0
-tywe8Av+PbcFpP2OLHbItJ1U/1+e2CbZVZUjwT/8vM8KbbUyh7ZrgJtBfrdeExka
-nVQUc2lLyqTCxfyIGZ+lsgJlULzDdpAdGR1I3dfem73MMgcwfksWLLv87GkEoRey
-Gaurcn74o1eKfPdTm7OoHywY1MunfbZ9LfKcd61/DiTrsulj79xFP4Ha2TiQx7uD
-DV2lVOmH1xmJdrD0C+Qe0fN1h4j/m1pyWrj9VkOI8p7iCX5lEBTT712GnIMrRftQ
-va+jxz3AXI59KLoBmnuibNxlNftn3qqJ2AdHYhnnoSNUmdxEAK5/hJkXTpFLy8eO
-Zu6k3pYI/nKfVq6LFsaL2A18vURqnLjG45pig7I7Pjui1/lGvCQYZS4aDaM7wfb3
-zUhdcrlkpsfS22gOADb0YfheGEtU+yhAjBZGmpNLCIG/E+W6bfyDCCBNtNC7rvax
-s3Cu4HrtIZFodWZzVEw7zunoJLxhddVhu0u3bXcuP66XtsVM6Qv/ZReyKBP6JIck
-cX4w59Dh
-=1pLV
------END PGP SIGNATURE-----
-
---cyK32UjSfIAUuhqw--
+Thanks,
+- Kever
+>
+> There is https://github.com/rockchip-linux/u-boot/blob/next-dev/arch/arm/mach-rockchip/rk3568/rk3568.c
+> , that has same functionality as my patch, but it has a lot of code
+> duplication and because of it i add a lot of macroses.
+> Maybe there is any target that has a lot of UARTs instances and its
+> configuration going in other way than mine and hasn't a lot of code
+> duplication.
+>
+>
+> On Sun, Dec 31, 2023 at 3:31 AM Jonas Karlman <jonas@kwiboo.se> wrote:
+>> Hi Arseniy,
+>>
+>> On 2023-12-30 12:20, Arseniy Meshcheryakov wrote:
+>>> This patch add support of all UARTs for rk3568, which can be used in console.
+>> Please explain why this is needed, on rk35xx the rockchip ddr init blob
+>> is required and can setup correct uart iomux with rkbin/tools/ddrbin_tool [1].
+>>
+>> And U-Boot SPL and proper can use the serial, gpio and pinctrl drivers
+>> to configure correct uart iomux for any board not using uart2.
+>>
+>> We should be able to remove the current code that configures uart2 M0
+>> iomux and still have a working debug console.
+>>
+>> Please provide more details why and on what board you need this.
+>>
+>> [1] https://github.com/rockchip-linux/rkbin/blob/master/tools/ddrbin_tool_user_guide.txt#L72-L75
+>>
+>>> Signed-off-by: Arseniy Meshcheryakov <Arseney300@gmail.com>
+>>> ---
+>>>   arch/arm/mach-rockchip/rk3568/rk3568.c | 470 ++++++++++++++++++++++++-
+>>>   1 file changed, 452 insertions(+), 18 deletions(-)
+>>>
+>>> diff --git a/arch/arm/mach-rockchip/rk3568/rk3568.c b/arch/arm/mach-rockchip/rk3568/rk3568.c
+>>> index 69ef19cc85..f79b47ee5b 100644
+>>> --- a/arch/arm/mach-rockchip/rk3568/rk3568.c
+>>> +++ b/arch/arm/mach-rockchip/rk3568/rk3568.c
+>>> @@ -34,26 +34,468 @@
+>>>   #define CPU_GRF_BASE         0xfdc30000
+>>>   #define GRF_CORE_PVTPLL_CON0 (0x10)
+>>>
+>>> -/* PMU_GRF_GPIO0D_IOMUX_L */
+>>>   enum {
+>>> +     /* PMU_GRF_GPIO0C_IOMUX_L */
+>>> +     GPIO0C1_SHIFT           = 4,
+>>> +     GPIO0C1_MASK            = GENMASK(6, 4),
+>>> +     GPIO0C1_GPIO            = 0,
+>>> +     GPIO0C1_UART0_M0_TX     = 3,
+>>> +
+>>> +     GPIO0C0_SHIFT           = 0,
+>>> +     GPIO0C0_MASK            = GENMASK(2, 0),
+>>> +     GPIO0C0_GPIO            = 0,
+>>> +     GPIO0C0_UART0_M0_RX     = 3,
+>>> +
+>>> +     /* PMU_GRF_GPIO0D_IOMUX_L */
+>>>        GPIO0D1_SHIFT           = 4,
+>>>        GPIO0D1_MASK            = GENMASK(6, 4),
+>>>        GPIO0D1_GPIO            = 0,
+>>> -     GPIO0D1_UART2_TXM0,
+>>> +     GPIO0D1_UART2_M0_TX,
+>>>
+>>>        GPIO0D0_SHIFT           = 0,
+>>>        GPIO0D0_MASK            = GENMASK(2, 0),
+>>>        GPIO0D0_GPIO            = 0,
+>>> -     GPIO0D0_UART2_RXM0,
+>>> -};
+>>> +     GPIO0D0_UART2_M0_RX,
+>>> +
+>>> +     /* GRF_GPIO1A_IOMUX_L */
+>>> +     GPIO1A1_SHIFT           = 4,
+>>> +     GPIO1A1_MASK            = GENMASK(6, 4),
+>>> +     GPIO1A1_GPIO            = 0,
+>>> +     GPIO1A1_UART3_M0_TX     = 2,
+>>> +
+>>> +     GPIO1A0_SHIFT           = 0,
+>>> +     GPIO1A0_MASK            = GENMASK(2, 0),
+>>> +     GPIO1A0_GPIO            = 0,
+>>> +     GPIO1A0_UART3_M0_RX     = 2,
+>>> +
+>>> +     /* GRF_GPIO1A_IOMUX_H */
+>>> +     GPIO1A6_SHIFT           = 8,
+>>> +     GPIO1A6_MASK            = GENMASK(10, 8),
+>>> +     GPIO1A6_GPIO            = 0,
+>>> +     GPIO1A6_UART4_M0_TX     = 2,
+>>> +
+>>> +
+>>> +     GPIO1A4_SHIFT           = 0,
+>>> +     GPIO1A4_MASK            = GENMASK(2, 0),
+>>> +     GPIO1A4_GPIO            = 0,
+>>> +     GPIO1A4_UART4_M0_RX     = 2,
+>>> +
+>>> +     /* GRF_GPIO1D_IOMUX_H */
+>>> +     GPIO1D6_SHIFT           = 8,
+>>> +     GPIO1D6_MASK            = GENMASK(10, 8),
+>>> +     GPIO1D6_GPIO            = 0,
+>>> +     GPIO1D6_UART2_M1_RX     = 2,
+>>> +     GPIO1D6_UART6_M1_RX,
+>>> +
+>>> +     GPIO1D5_SHIFT           = 4,
+>>> +     GPIO1D5_MASK            = GENMASK(6, 4),
+>>> +     GPIO1D5_GPIO            = 0,
+>>> +     GPIO1D5_UART2_M1_TX     = 2,
+>>> +     GPIO1D5_UART6_M1_TX,
+>>> +
+>>> +     /* GRF_GPIO2A_IOMUX_L */
+>>> +     GPIO2A3_SHIFT           = 12,
+>>> +     GPIO2A3_MASK            = GENMASK(14, 12),
+>>> +     GPIO2A3_GPIO            = 0,
+>>> +     GPIO2A3_UART6_M0_RX     = 3,
+>>> +
+>>> +     GPIO2A2_SHIFT           = 8,
+>>> +     GPIO2A2_MASK            = GENMASK(10, 8),
+>>> +     GPIO2A2_GPIO            = 0,
+>>> +     GPIO2A2_UART5_M0_TX     = 3,
+>>> +
+>>> +     GPIO2A1_SHIFT           = 4,
+>>> +     GPIO2A1_MASK            = GENMASK(6, 4),
+>>> +     GPIO2A1_GPIO            = 0,
+>>> +     GPIO2A1_UART5_M0_RX     = 3,
+>>> +
+>>> +     /* GRF_GPIO2A_IOMUX_H */
+>>> +     GPIO2A7_SHIFT           = 12,
+>>> +     GPIO2A7_MASK            = GENMASK(14, 12),
+>>> +     GPIO2A7_GPIO            = 0,
+>>> +     GPIO2A7_UART9_M0_RX     = 3,
+>>> +
+>>> +     GPIO2A6_SHIFT           = 8,
+>>> +     GPIO2A6_MASK            = GENMASK(10, 8),
+>>> +     GPIO2A6_GPIO            = 0,
+>>> +     GPIO2A6_UART7_M0_TX     = 3,
+>>> +
+>>> +     GPIO2A5_SHIFT           = 4,
+>>> +     GPIO2A5_MASK            = GENMASK(6, 4),
+>>> +     GPIO2A5_GPIO            = 0,
+>>> +     GPIO2A5_UART7_M0_RX     = 3,
+>>> +
+>>> +     GPIO2A4_SHIFT           = 0,
+>>> +     GPIO2A4_MASK            = GENMASK(2, 0),
+>>> +     GPIO2A4_GPIO            = 0,
+>>> +     GPIO2A4_UART6_M0_TX     = 3,
+>>> +
+>>> +     /* GRF_GPIO2B_IOMUX_L */
+>>> +     GPIO2B3_SHIFT           = 12,
+>>> +     GPIO2B3_MASK            = GENMASK(14, 12),
+>>> +     GPIO2B3_GPIO            = 0,
+>>> +     GPIO2B3_UART1_M0_RX     = 2,
+>>> +
+>>> +     GPIO2B0_SHIFT           = 0,
+>>> +     GPIO2B0_MASK            = GENMASK(2, 0),
+>>> +     GPIO2B0_GPIO            = 0,
+>>> +     GPIO2B0_UART9_M0_TX     = 3,
+>>> +
+>>> +     /* GRF_GPIO2B_IOMUX_H */
+>>> +     GPIO2B4_SHIFT           = 0,
+>>> +     GPIO2B4_MASK            = GENMASK(2, 0),
+>>> +     GPIO2B4_GPIO            = 0,
+>>> +     GPIO2B4_UART1_M0_TX     = 2,
+>>> +
+>>> +     /* GRF_GPIO2C_IOMUX_H */
+>>> +     GPIO2C6_SHIFT           = 8,
+>>> +     GPIO2C6_MASK            = GENMASK(10, 8),
+>>> +     GPIO2C6_GPIO            = 0,
+>>> +     GPIO2C6_UART8_M0_RX     = 2,
+>>> +
+>>> +     GPIO2C5_SHIFT           = 4,
+>>> +     GPIO2C5_MASK            = GENMASK(6, 4),
+>>> +     GPIO2C5_GPIO            = 0,
+>>> +     GPIO2C5_UART8_M0_TX     = 3,
+>>> +
+>>> +     /* GRF_GPIO2D_IOMUX_H */
+>>> +     GPIO2D7_SHIFT           = 12,
+>>> +     GPIO2D7_MASK            = GENMASK(14, 12),
+>>> +     GPIO2D7_GPIO            = 0,
+>>> +     GPIO2D7_UART8_M1_TX     = 4,
+>>> +
+>>> +     /* GRF_GPIO3A_IOMUX_L */
+>>> +     GPIO3A0_SHIFT           = 0,
+>>> +     GPIO3A0_MASK            = GENMASK(2, 0),
+>>> +     GPIO3A0_GPIO            = 0,
+>>> +     GPIO3A0_UART8_M1_RX     =4,
+>>> +
+>>> +     /* GRF_GPIO3B_IOMUX_L */
+>>> +     GPIO3B2_SHIFT           = 8,
+>>> +     GPIO3B2_MASK            = GENMASK(10, 8),
+>>> +     GPIO3B2_GPIO            = 0,
+>>> +     GPIO3B2_UART4_M1_TX     =4,
+>>> +
+>>> +     GPIO3B1_SHIFT           = 4,
+>>> +     GPIO3B1_MASK            = GENMASK(6, 4),
+>>> +     GPIO3B1_GPIO            = 0,
+>>> +     GPIO3B1_UART4_M1_RX     = 4,
+>>> +
+>>> +     /* GRF_GPIO3B_IOMUX_H */
+>>> +     GPIO3B7_SHIFT           = 12,
+>>> +     GPIO3B7_MASK            = GENMASK(14, 12),
+>>> +     GPIO3B7_GPIO            = 0,
+>>> +     GPIO3B7_UART3_M1_TX     = 4,
+>>> +
+>>> +     /* GRF_GPIO3C_IOMUX_L */
+>>> +     GPIO3C3_SHIFT           = 12,
+>>> +     GPIO3C3_MASK            = GENMASK(14, 12),
+>>> +     GPIO3C3_GPIO            = 0,
+>>> +     GPIO3C3_UART5_M1_RX     = 4,
+>>> +
+>>> +     GPIO3C2_SHIFT           = 8,
+>>> +     GPIO3C2_MASK            = GENMASK(10, 8),
+>>> +     GPIO3C2_GPIO            = 0,
+>>> +     GPIO3C2_UART5_M1_TX     = 4,
+>>> +
+>>> +     GPIO3C0_SHIFT           = 0,
+>>> +     GPIO3C0_MASK            = GENMASK(2, 0),
+>>> +     GPIO3C0_GPIO            = 0,
+>>> +     GPIO3C0_UART3_M1_RX     = 4,
+>>> +
+>>> +     /* GRF_GPIO3C_IOMUX_H */
+>>> +     GPIO3C5_SHIFT           = 4,
+>>> +     GPIO3C5_MASK            = GENMASK(6, 4),
+>>> +     GPIO3C5_GPIO            = 0,
+>>> +     GPIO3C5_UART7_M1_RX     =4 ,
+>>> +
+>>> +     GPIO3C4_SHIFT           = 0,
+>>> +     GPIO3C4_MASK            = GENMASK(2, 0),
+>>> +     GPIO3C4_GPIO            = 0,
+>>> +     GPIO3C4_UART7_M1_TX     = 4,
+>>> +
+>>> +     /* GRF_GPIO3D_IOMUX_H */
+>>> +     GPIO3D7_SHIFT           = 12,
+>>> +     GPIO3D7_MASK            = GENMASK(14, 12),
+>>> +     GPIO3D7_GPIO            = 0,
+>>> +     GPIO3D7_UART1_M1_RX     = 4,
+>>> +
+>>> +     GPIO3D6_SHIFT           = 8,
+>>> +     GPIO3D6_MASK            = GENMASK(10, 8),
+>>> +     GPIO3D6_GPIO            = 0,
+>>> +     GPIO3D6_UART1_M1_TX     = 4,
+>>> +
+>>> +     /* GRF_GPIO4A_IOMUX_L */
+>>> +     GPIO4A3_SHIFT           = 12,
+>>> +     GPIO4A3_MASK            = GENMASK(14, 12),
+>>> +     GPIO4A3_GPIO            = 0,
+>>> +     GPIO4A3_UART7_M2_RX     = 4,
+>>> +
+>>> +     GPIO4A2_SHIFT           = 8,
+>>> +     GPIO4A2_MASK            = GENMASK(10, 8),
+>>> +     GPIO4A2_GPIO            = 0,
+>>> +     GPIO4A2_UART7_M2_TX     = 4,
+>>> +
+>>> +     /* GRF_GPIO4A_IOMUX_H */
+>>> +     GPIO4A5_SHIFT           = 4,
+>>> +     GPIO4A5_MASK            = GENMASK(6, 4),
+>>> +     GPIO4A5_GPIO            = 0,
+>>> +     GPIO4A5_UART9_M2_RX     = 4,
+>>> +
+>>> +     GPIO4A4_SHIFT           = 0,
+>>> +     GPIO4A4_MASK            = GENMASK(2, 0),
+>>> +     GPIO4A4_GPIO            = 0,
+>>> +     GPIO4A4_UART9_M2_TX     = 4,
+>>> +
+>>> +     /* GRF_GPIO4C_IOMUX_H */
+>>> +     GPIO4C6_SHIFT           = 8,
+>>> +     GPIO4C6_MASK            = GENMASK(10, 8),
+>>> +     GPIO4C6_GPIO            = 0,
+>>> +     GPIO4C6_UART9_M1_RX     = 4,
+>>> +
+>>> +     GPIO4C5_SHIFT           = 4,
+>>> +     GPIO4C5_MASK            = GENMASK(6, 4),
+>>> +     GPIO4C5_GPIO            = 0,
+>>> +     GPIO4C5_UART9_M1_TX     = 4,
+>>> +
+>>> +     /* GRF_IOFUNC_SEL3 */
+>>> +     UART4_IO_SEL_SHIFT      = 14,
+>>> +     UART4_IO_SEL_MASK       = GENMASK(14, 14),
+>>> +     UART4_IO_SEL_M0         = 0,
+>>> +     UART4_IO_SEL_M1,
+>>> +
+>>> +     UART3_IO_SEL_SHIFT      = 12,
+>>> +     UART3_IO_SEL_MASK       = GENMASK(12, 12),
+>>> +     UART3_IO_SEL_M0         = 0,
+>>> +     UART3_IO_SEL_M1,
+>>>
+>>> -/* GRF_IOFUNC_SEL3 */
+>>> -enum {
+>>>        UART2_IO_SEL_SHIFT      = 10,
+>>>        UART2_IO_SEL_MASK       = GENMASK(11, 10),
+>>>        UART2_IO_SEL_M0         = 0,
+>>> +     UART2_IO_SEL_M1,
+>>> +
+>>> +     UART1_IO_SEL_SHIFT      = 8,
+>>> +     UART1_IO_SEL_MASK       = GENMASK(8, 8),
+>>> +     UART1_IO_SEL_M0         = 0,
+>>> +     UART1_IO_SEL_M1,
+>>> +
+>>> +     /* GRF_IOFUNC_SEL4 */
+>>> +     UART9_IO_SEL_SHIFT      = 8,
+>>> +     UART9_IO_SEL_MASK       = GENMASK(9, 8),
+>>> +     UART9_IO_SEL_M0         = 0,
+>>> +     UART9_IO_SEL_M1,
+>>> +     UART9_IO_SEL_M2,
+>>> +
+>>> +     UART8_IO_SEL_SHIFT      = 6,
+>>> +     UART8_IO_SEL_MASK       = GENMASK(6, 6),
+>>> +     UART8_IO_SEL_M0         = 0,
+>>> +     UART8_IO_SEL_M1,
+>>> +
+>>> +     UART7_IO_SEL_SHIFT      = 4,
+>>> +     UART7_IO_SEL_MASK       = GENMASK(5, 4),
+>>> +     UART7_IO_SEL_M0         = 0,
+>>> +     UART7_IO_SEL_M1,
+>>> +     UART7_IO_SEL_M2,
+>>> +
+>>> +     UART6_IO_SEL_SHIFT      = 2,
+>>> +     UART6_IO_SEL_MASK       = GENMASK(2, 2),
+>>> +     UART6_IO_SEL_M0         = 0,
+>>> +     UART6_IO_SEL_M1,
+>>> +
+>>> +     UART5_IO_SEL_SHIFT      = 0,
+>>> +     UART5_IO_SEL_MASK       = GENMASK(0, 0),
+>>> +     UART5_IO_SEL_M0         = 0,
+>>> +     UART5_IO_SEL_M1,
+>>> +
+>>> +     /* PMU_GRF_SOC_CON0 */
+>>> +     UART0_IO_SEL_SHIFT      = 8,
+>>> +     UART0_IO_SEL_MASK       = GENMASK(9, 8),
+>>> +     UART0_IO_SEL_M0         = 0,
+>>> +     UART0_IO_SEL_M1,
+>>> +     UART0_IO_SEL_M2,
+>>>   };
+>>>
+>>> +
+>>> +#define GLUE2(a,b) a##b
+>>> +#define GLUE3(a,b,c) a##b##c
+>>> +#define GLUE4(a,b,c,d) a##b##c##d
+>>> +#define SELECT_UART(name, name_m) \
+>>> +      rk_clrsetreg(&GLUE4(name,_,name_m,_SEL_REGISTER), GLUE2(name,_IO_SEL_MASK), \
+>>> +         GLUE3(name,_IO_SEL_,name_m) << GLUE2(name,_IO_SEL_SHIFT));
+>>> +
+>>> +#define SWITCH_IOMUX_RX_GPIO(name, name_m) \
+>>> +    GLUE4(name,_,name_m,_RX_GPIO)
+>>> +
+>>> +#define SWITCH_IOMUX_TX_GPIO(name, name_m) \
+>>> +    GLUE4(name,_,name_m,_TX_GPIO)
+>>> +
+>>> +#define SWITCH_IOMUX_GPIO_UART_M(gpio, name, name_m) \
+>>> +  GLUE2(gpio,_##name##_##name_m)
+>>> +
+>>> +#define SWITCH_IOMUX_GPIO_UART_M_RX(gpio_uart_m) \
+>>> +  GLUE2(gpio_uart_m, _RX)
+>>> +
+>>> +#define SWITCH_IOMUX_GPIO_UART_M_TX(gpio_uart_m) \
+>>> +  GLUE2(gpio_uart_m, _TX)
+>>> +
+>>> +#define SWITCH_IOMUX_MASK(name) \
+>>> +    GLUE2(name, _MASK)
+>>> +
+>>> +#define SWITCH_IOMUX_SHIFT(name) \
+>>> +  GLUE2(name, _SHIFT)
+>>> +
+>>> +#define SWITCH_IOMUX_RX(name, name_m) \
+>>> +      rk_clrsetreg(&GLUE4(name,_,name_m,_RX_IOMUX_REGISTER), \
+>>> +         SWITCH_IOMUX_MASK(SWITCH_IOMUX_RX_GPIO(name, name_m)), \
+>>> +             SWITCH_IOMUX_GPIO_UART_M_RX(SWITCH_IOMUX_GPIO_UART_M(SWITCH_IOMUX_RX_GPIO(name, name_m), name, name_m)) \
+>>> +                       << SWITCH_IOMUX_SHIFT(SWITCH_IOMUX_RX_GPIO(name, name_m)));
+>>> +
+>>> +#define SWITCH_IOMUX_TX(name, name_m) \
+>>> +      rk_clrsetreg(&GLUE4(name,_,name_m,_RX_IOMUX_REGISTER), \
+>>> +         SWITCH_IOMUX_MASK(SWITCH_IOMUX_TX_GPIO(name, name_m)), \
+>>> +             SWITCH_IOMUX_GPIO_UART_M_TX(SWITCH_IOMUX_GPIO_UART_M(SWITCH_IOMUX_TX_GPIO(name, name_m), name, name_m)) \
+>>> +                      << SWITCH_IOMUX_SHIFT(SWITCH_IOMUX_TX_GPIO(name, name_m)));
+>>> +
+>>> +#define UART0_M0_RX_GPIO GPIO0C0
+>>> +#define UART0_M0_TX_GPIO GPIO0C1
+>>> +#define UART1_M0_RX_GPIO GPIO2B3
+>>> +#define UART1_M0_TX_GPIO GPIO2B4
+>>> +#define UART1_M1_RX_GPIO GPIO3D7
+>>> +#define UART1_M1_TX_GPIO GPIO3D6
+>>> +#define UART2_M0_RX_GPIO GPIO0D0
+>>> +#define UART2_M0_TX_GPIO GPIO0D1
+>>> +#define UART2_M1_RX_GPIO GPIO1D6
+>>> +#define UART2_M1_TX_GPIO GPIO1D5
+>>> +#define UART3_M0_RX_GPIO GPIO1A0
+>>> +#define UART3_M0_TX_GPIO GPIO1A1
+>>> +#define UART3_M1_RX_GPIO GPIO3C0
+>>> +#define UART3_M1_TX_GPIO GPIO3B7
+>>> +#define UART4_M0_RX_GPIO GPIO1A4
+>>> +#define UART4_M0_TX_GPIO GPIO1A6
+>>> +#define UART4_M1_RX_GPIO GPIO3B1
+>>> +#define UART4_M1_TX_GPIO GPIO3B2
+>>> +#define UART5_M0_RX_GPIO GPIO2A1
+>>> +#define UART5_M0_TX_GPIO GPIO2A2
+>>> +#define UART5_M1_RX_GPIO GPIO3C3
+>>> +#define UART5_M1_TX_GPIO GPIO3C2
+>>> +#define UART6_M0_RX_GPIO GPIO2A3
+>>> +#define UART6_M0_TX_GPIO GPIO2A4
+>>> +#define UART6_M1_RX_GPIO GPIO1D6
+>>> +#define UART6_M1_TX_GPIO GPIO1D5
+>>> +#define UART7_M0_RX_GPIO GPIO2A5
+>>> +#define UART7_M0_TX_GPIO GPIO2A6
+>>> +#define UART7_M1_RX_GPIO GPIO3C5
+>>> +#define UART7_M1_TX_GPIO GPIO3C4
+>>> +#define UART7_M2_RX_GPIO GPIO4A3
+>>> +#define UART7_M2_TX_GPIO GPIO4A2
+>>> +#define UART8_M0_RX_GPIO GPIO2C6
+>>> +#define UART8_M0_TX_GPIO GPIO2C5
+>>> +#define UART8_M1_RX_GPIO GPIO3A0
+>>> +#define UART8_M1_TX_GPIO GPIO2D7
+>>> +#define UART9_M0_RX_GPIO GPIO2A7
+>>> +#define UART9_M0_TX_GPIO GPIO2B0
+>>> +#define UART9_M1_RX_GPIO GPIO4C6
+>>> +#define UART9_M1_TX_GPIO GPIO4C5
+>>> +#define UART9_M2_RX_GPIO GPIO4A5
+>>> +#define UART9_M2_TX_GPIO GPIO4A4
+>>> +
+>>> +#define GRF_PTR ((struct rk3568_grf * const)(GRF_BASE))
+>>> +#define PMUGRF_PTR ((struct rk3568_pmugrf * const)(PMUGRF_BASE))
+>>> +
+>>> +#define UART0_M0_SEL_REGISTER PMUGRF_PTR->pmu_soc_con0
+>>> +#define UART1_M0_SEL_REGISTER GRF_PTR->iofunc_sel3
+>>> +#define UART1_M1_SEL_REGISTER GRF_PTR->iofunc_sel3
+>>> +#define UART2_M0_SEL_REGISTER GRF_PTR->iofunc_sel3
+>>> +#define UART2_M1_SEL_REGISTER GRF_PTR->iofunc_sel3
+>>> +#define UART3_M0_SEL_REGISTER GRF_PTR->iofunc_sel3
+>>> +#define UART3_M1_SEL_REGISTER GRF_PTR->iofunc_sel3
+>>> +#define UART4_M0_SEL_REGISTER GRF_PTR->iofunc_sel3
+>>> +#define UART4_M1_SEL_REGISTER GRF_PTR->iofunc_sel3
+>>> +#define UART5_M0_SEL_REGISTER GRF_PTR->iofunc_sel4
+>>> +#define UART5_M1_SEL_REGISTER GRF_PTR->iofunc_sel4
+>>> +#define UART6_M0_SEL_REGISTER GRF_PTR->iofunc_sel4
+>>> +#define UART6_M1_SEL_REGISTER GRF_PTR->iofunc_sel4
+>>> +#define UART7_M0_SEL_REGISTER GRF_PTR->iofunc_sel4
+>>> +#define UART7_M1_SEL_REGISTER GRF_PTR->iofunc_sel4
+>>> +#define UART7_M2_SEL_REGISTER GRF_PTR->iofunc_sel4
+>>> +#define UART8_M0_SEL_REGISTER GRF_PTR->iofunc_sel4
+>>> +#define UART8_M1_SEL_REGISTER GRF_PTR->iofunc_sel4
+>>> +#define UART9_M0_SEL_REGISTER GRF_PTR->iofunc_sel4
+>>> +#define UART9_M1_SEL_REGISTER GRF_PTR->iofunc_sel4
+>>> +#define UART9_M2_SEL_REGISTER GRF_PTR->iofunc_sel4
+>>> +
+>>> +#define UART0_M0_RX_IOMUX_REGISTER PMUGRF_PTR->pmu_gpio0c_iomux_l
+>>> +#define UART0_M0_TX_IOMUX_REGISTER PMUGRF_PTR->pmu_gpio0c_iomux_l
+>>> +#define UART1_M0_RX_IOMUX_REGISTER GRF_PTR->gpio2b_iomux_l
+>>> +#define UART1_M0_TX_IOMUX_REGISTER GRF_PTR->gpio2b_iomux_h
+>>> +#define UART1_M1_RX_IOMUX_REGISTER GRF_PTR->gpio3d_iomux_h
+>>> +#define UART1_M1_TX_IOMUX_REGISTER GRF_PTR->gpio3d_iomux_h
+>>> +#define UART2_M0_RX_IOMUX_REGISTER PMUGRF_PTR->pmu_gpio0d_iomux_l
+>>> +#define UART2_M0_TX_IOMUX_REGISTER GRF_PTR->gpio0d_iomux_l
+>>> +#define UART2_M1_RX_IOMUX_REGISTER GRF_PTR->gpio1d_iomux_h
+>>> +#define UART2_M1_TX_IOMUX_REGISTER GRF_PTR->gpio1d_iomux_h
+>>> +#define UART3_M0_RX_IOMUX_REGISTER GRF_PTR->gpio1a_iomux_l
+>>> +#define UART3_M0_TX_IOMUX_REGISTER GRF_PTR->gpio1a_iomux_l
+>>> +#define UART3_M1_RX_IOMUX_REGISTER GRF_PTR->gpio3c_iomux_l
+>>> +#define UART3_M1_TX_IOMUX_REGISTER GRF_PTR->gpio3b_iomux_h
+>>> +#define UART4_M0_RX_IOMUX_REGISTER GRF_PTR->gpio1a_iomux_h
+>>> +#define UART4_M0_TX_IOMUX_REGISTER GRF_PTR->gpio1a_iomux_h
+>>> +#define UART4_M1_RX_IOMUX_REGISTER GRF_PTR->gpio3b_iomux_l
+>>> +#define UART4_M1_TX_IOMUX_REGISTER GRF_PTR->gpio3b_iomux_l
+>>> +#define UART5_M0_RX_IOMUX_REGISTER GRF_PTR->gpio2a_iomux_l
+>>> +#define UART5_M0_TX_IOMUX_REGISTER GRF_PTR->gpio2a_iomux_l
+>>> +#define UART5_M1_RX_IOMUX_REGISTER GRF_PTR->gpio3c_iomux_l
+>>> +#define UART5_M1_TX_IOMUX_REGISTER GRF_PTR->gpio3c_iomux_l
+>>> +#define UART6_M0_RX_IOMUX_REGISTER GRF_PTR->gpio2a_iomux_l
+>>> +#define UART6_M0_TX_IOMUX_REGISTER GRF_PTR->gpio2a_iomux_h
+>>> +#define UART6_M1_RX_IOMUX_REGISTER GRF_PTR->gpio1d_iomux_h
+>>> +#define UART6_M1_TX_IOMUX_REGISTER GRF_PTR->gpio1d_iomux_h
+>>> +#define UART7_M0_RX_IOMUX_REGISTER GRF_PTR->gpio2a_iomux_h
+>>> +#define UART7_M0_TX_IOMUX_REGISTER GRF_PTR->gpio2a_iomux_h
+>>> +#define UART7_M1_RX_IOMUX_REGISTER GRF_PTR->gpio3c_iomux_h
+>>> +#define UART7_M1_TX_IOMUX_REGISTER GRF_PTR->gpio3c_iomux_h
+>>> +#define UART7_M2_RX_IOMUX_REGISTER GRF_PTR->gpio4a_iomux_l
+>>> +#define UART7_M2_TX_IOMUX_REGISTER GRF_PTR->gpio4a_iomux_l
+>>> +#define UART8_M0_RX_IOMUX_REGISTER GRF_PTR->gpio2c_iomux_h
+>>> +#define UART8_M0_TX_IOMUX_REGISTER GRF_PTR->gpio2c_iomux_h
+>>> +#define UART8_M1_RX_IOMUX_REGISTER GRF_PTR->gpio2d_iomux_h
+>>> +#define UART8_M1_TX_IOMUX_REGISTER GRF_PTR->gpio2d_iomux_h
+>>> +#define UART9_M0_RX_IOMUX_REGISTER GRF_PTR->gpio2a_iomux_h
+>>> +#define UART9_M0_TX_IOMUX_REGISTER GRF_PTR->gpio2b_iomux_l
+>>> +#define UART9_M1_RX_IOMUX_REGISTER GRF_PTR->gpio4c_iomux_h
+>>> +#define UART9_M1_TX_IOMUX_REGISTER GRF_PTR->gpio4c_iomux_h
+>>> +#define UART9_M2_RX_IOMUX_REGISTER GRF_PTR->gpio4a_iomux_h
+>>> +#define UART9_M2_TX_IOMUX_REGISTER GRF_PTR->gpio4a_iomux_h
+>>> +
+>>> +#if defined(CONFIG_DEBUG_UART_BASE) && (CONFIG_DEBUG_UART_BASE == 0xfdd50000)
+>>> +#define UART UART0
+>>> +#elif defined(CONFIG_DEBUG_UART_BASE) && (CONFIG_DEBUG_UART_BASE == 0xfe650000)
+>>> +#define UART UART1
+>>> +#elif defined(CONFIG_DEBUG_UART_BASE) && (CONFIG_DEBUG_UART_BASE == 0xfe660000)
+>>> +#define UART UART2
+>>> +#elif defined(CONFIG_DEBUG_UART_BASE) && (CONFIG_DEBUG_UART_BASE == 0xfe670000)
+>>> +#define UART UART3
+>>> +#elif defined(CONFIG_DEBUG_UART_BASE) && (CONFIG_DEBUG_UART_BASE == 0xfe680000)
+>>> +#define UART UART4
+>>> +#elif defined(CONFIG_DEBUG_UART_BASE) && (CONFIG_DEBUG_UART_BASE == 0xfe690000)
+>>> +#define UART UART5
+>>> +#elif defined(CONFIG_DEBUG_UART_BASE) && (CONFIG_DEBUG_UART_BASE == 0xfe6a0000)
+>>> +#define UART UART6
+>>> +#elif defined(CONFIG_DEBUG_UART_BASE) && (CONFIG_DEBUG_UART_BASE == 0xfe6b0000)
+>>> +#define UART UART7
+>>> +#elif defined(CONFIG_DEBUG_UART_BASE) && (CONFIG_DEBUG_UART_BASE == 0xfe6c0000)
+>>> +#define UART UART8
+>>> +#elif defined(CONFIG_DEBUG_UART_BASE) && (CONFIG_DEBUG_UART_BASE == 0xfe6d0000)
+>>> +#define UART UART9
+>>> +#endif
+>>> +#if defined(CONFIG_ROCKCHIP_UART_MUX_SEL_M) && (CONFIG_ROCKCHIP_UART_MUX_SEL_M == 2)
+>>> +#define UART_M M2
+>>> +#elif defined(CONFIG_ROCKCHIP_UART_MUX_SEL_M) && (CONFIG_ROCKCHIP_UART_MUX_SEL_M == 1)
+>>> +#define UART_M M1
+>>> +#else
+>>> +#define UART_M M0
+>>> +#endif
+>>> +
+>> All these macros hide away what is happening and makes the code too
+>> complex. I would prefer something more verbose like the commit
+>> "HACK: rk3566-quartz64-b: Use UART5 as serial console" at [2].
+>>
+>> [2] https://github.com/Kwiboo/u-boot-rockchip/commit/dcdedd104c0404ebcaee68f6c496f70966a0ad57
+>>
+>> Regards,
+>> Jonas
+>>
+>>>   static struct mm_region rk3568_mem_map[] = {
+>>>        {
+>>>                .virt = 0x0UL,
+>>> @@ -91,18 +533,10 @@ struct mm_region *mem_map = rk3568_mem_map;
+>>>
+>>>   void board_debug_uart_init(void)
+>>>   {
+>>> -     static struct rk3568_pmugrf * const pmugrf = (void *)PMUGRF_BASE;
+>>> -     static struct rk3568_grf * const grf = (void *)GRF_BASE;
+>>> -
+>>> -     /* UART2 M0 */
+>>> -     rk_clrsetreg(&grf->iofunc_sel3, UART2_IO_SEL_MASK,
+>>> -                  UART2_IO_SEL_M0 << UART2_IO_SEL_SHIFT);
+>>> -
+>>> -     /* Switch iomux */
+>>> -     rk_clrsetreg(&pmugrf->pmu_gpio0d_iomux_l,
+>>> -                  GPIO0D1_MASK | GPIO0D0_MASK,
+>>> -                  GPIO0D1_UART2_TXM0 << GPIO0D1_SHIFT |
+>>> -                  GPIO0D0_UART2_RXM0 << GPIO0D0_SHIFT);
+>>> +     SELECT_UART(UART, UART_M);
+>>> +
+>>> +     SWITCH_IOMUX_RX(UART, UART_M);
+>>> +     SWITCH_IOMUX_TX(UART, UART_M);
+>>>   }
+>>>
+>>>   int arch_cpu_init(void)
+>
