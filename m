@@ -4,61 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9DF7C4706F
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 01:00:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2246C46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 06:45:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36E8886EA6;
-	Tue,  2 Jan 2024 02:00:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id BAFFD86EF3;
+	Tue,  2 Jan 2024 07:45:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="j5TcYoHD";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="j0Swy1M3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB8F8876C0; Tue,  2 Jan 2024 02:00:49 +0100 (CET)
-Received: from mail-m17208.xmail.ntesmail.com (mail-m17208.xmail.ntesmail.com
- [45.195.17.208])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0927786F28; Tue,  2 Jan 2024 07:45:02 +0100 (CET)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2009::601])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 608BE86C72
- for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 02:00:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 3EB0286BF7
+ for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 07:44:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=j5TcYoHDCRxj/ChgMxCT0cawaVdwPa2J3FDKt/RcMRg7uu20epaL5UCX8bgqJumTxmTknSofV7hqbwwkRUWgZxy9QatfRwzlNkTUzl+ZsbzmDIaE/0grfgcRmHULPoG+y4tDMIOX9/2kt6WMPZm7VdddkR/z0tadyZdjVLzsRNU=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=vuY5blBNftKjqQGHgHESygM7OLchiGZhfbE5P6adOPU=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 214754001B1;
- Tue,  2 Jan 2024 09:00:35 +0800 (CST)
-Message-ID: <a4fc159c-7119-4656-a820-7e1e216b3564@rock-chips.com>
-Date: Tue, 2 Jan 2024 09:00:35 +0800
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=love.kumar@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Y8IniIfYIa6o7znOmPEaXkQUKWxMwkF5xsdVqaxZN5Y2t+e+6fvCuVJDwjNlj+VzzOonAM4H86YyM3YfnweIAEnaXOQ7zdII60waZkpRCrlQtK32TPpHFpKNuK9CaNU0hxrooB45WZ+k3/Cj9ZeW7Yh+Rx+od9fcUYta05l60cYQPEzUnTF6NOUrh5tqH7T6tQEg7Sz94CYmohwV59kR7TvxqMZ16qKivSgPmz8IkBLyGijsPOlZ51xVUbhtcSgVX/gs5v2drMRt+k18TgrOu4Fa0zQd4peC8Kcvw5wu7kPRIZ6+IcpJNN9kkrhIxknM1TIEp2B4qGrhWhVooWOq0Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=eOQZzEs1DZuvFDZee9upuikNPChPaE0CgPFXHS34B8U=;
+ b=frBuJTxRtRjxBChc6zApYrXi9HT5CFquauxH9vCUD1rGzaoqpEiHE4iPtuzUPkYHSVOJBvd9P968BOxNsdAWUaeiMFvn4dTIMdNdbtTvW0/HxGIAXH78plQmZYlpUsJ9U5DyScVuQxnY716ooW0tdJRw9u48MGhwIrcPqg7ohXx/WXxGzcE9phFwPSx0m9b8+9zhPzgaVUPYe9IhZh+rgII48dtFhYOMCxMpLlS6hVIOa/UuNeLeinpvLPOsacg2WDDpvkFMFCJ43k6lCii8zflSi8btM8HBD0xe04l4P+iPCDtMEPhoOFJ30kZ7EPere/VXtU3xxOtDj+Ge9mnnjQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=eOQZzEs1DZuvFDZee9upuikNPChPaE0CgPFXHS34B8U=;
+ b=j0Swy1M3hpbMrsEWU8q/EVg9LZIwnu0DuT4sk+3tQShxwk8dbfUuwlFa23CkrqpdqNts+8ZMihpgVTJSEuDLSdrtn2ASk8z/ONQXeTSsE+SQ36O7M5rp76gdfMHYdY0sojLBr+OEpdkbq3y0YuylOFTZyBaphaqpe4ZqLdyUNW8=
+Received: from BL0PR02CA0100.namprd02.prod.outlook.com (2603:10b6:208:51::41)
+ by DM4PR12MB5183.namprd12.prod.outlook.com (2603:10b6:5:396::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7135.25; Tue, 2 Jan
+ 2024 06:44:53 +0000
+Received: from BL6PEPF0001AB4C.namprd04.prod.outlook.com
+ (2603:10b6:208:51:cafe::67) by BL0PR02CA0100.outlook.office365.com
+ (2603:10b6:208:51::41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7135.20 via Frontend
+ Transport; Tue, 2 Jan 2024 06:44:53 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ BL6PEPF0001AB4C.mail.protection.outlook.com (10.167.242.70) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7159.9 via Frontend Transport; Tue, 2 Jan 2024 06:44:52 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Tue, 2 Jan
+ 2024 00:44:52 -0600
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Tue, 2 Jan
+ 2024 00:44:42 -0600
+Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.34 via Frontend
+ Transport; Tue, 2 Jan 2024 00:44:41 -0600
+From: Love Kumar <love.kumar@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <git@xilinx.com>
+Subject: [PATCH v3] test/py: mii: Add tests for mii command
+Date: Tue, 2 Jan 2024 12:14:35 +0530
+Message-ID: <a6b464aff98b7ddcfa076c2155a1be51beec8583.1704177781.git.love.kumar@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] board: rockchip: Add support for FriendlyARM NanoPi R2C
- Plus
-Content-Language: en-US
-To: Tianling Shen <cnsztl@gmail.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Jonas Karlman <jonas@kwiboo.se>,
- Jagan Teki <jagan@edgeble.ai>
-Cc: u-boot@lists.denx.de
-References: <20231223040007.72997-1-cnsztl@gmail.com>
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20231223040007.72997-1-cnsztl@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQklJSFYZHkIdTxlPSB9CH0NVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
- tLWQY+
-X-HM-Tid: 0a8cc7afc83b2eb3kusn214754001b1
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PT46Txw*Fzw9CUoRKypKEA4y
- QygwFEJVSlVKTEtPSk5MSUhOQ01DVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFDTkpINwY+
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB4C:EE_|DM4PR12MB5183:EE_
+X-MS-Office365-Filtering-Correlation-Id: b2b89c37-3bda-4b08-2533-08dc0b5e532c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: IARPJCQl+Q4rGK/uvnc7YJkPOpmemBhxeyzBXQmiW6cPyt5XRWdBAUukn/j235nbCD9PY7gE5mMhAL38+vb5TVHHUAKj/zoTQWh6Uel7X0cf+Qq5xqqiqDsLlCc5tu3uEDkLyXOtZwrl5Z5j6oqUAplkEHXBDor7WOSWSROgJpOgc1mUtY06XNcoe7Lf2LRH1MfAgH/222hbp9L8rYUdFuiCs/VvtICjflwVj5nEmi2oHU5ixBBJVRqT4CHILnBIKBN2VNOSO8KtvlK/L5vZdh+tbivEd+icsOuUt5GZuNhGnZor2cIMgXpNsHwnExXhOCf2e+A5IZhOBgeFi7L0DuiCYzaux17Now7hqgOcd6nIimsqDQmSgFkPzyZU1GAPDsQ0m79nJalapG9c6isHnOQPsS9gFcDsLgthf3pZv0e15oOwAOJFF/bS3heHhYJcmKxhU1yO10qIKu49gNuwpomcSaxgAZ8muIW4bgio26+rHqH8EAF3bM4/Dtdy3ue6wOseCqCdGgJkx0/DnramQ+A8zbbA2R8T1Hnym1b2udyT7IzCtQvEAOkckgutMwydGIlIaEIPVoKGs1dV8l51f51Tt8gSK+9AQsrOogQUuRx3u75BKXBmBgk+vwHcmCNI3iuN9MWZAQENO21t/Vtm9VHyZ2Ddk8FLD3W11iCsUyeSnVCZIUtzWdHsCjC0DKawQGkmHHBkxgY0BYYWHwmR/mQ6ZHtTnOxOZFOHFyWmoB0c+EHuiqhWZfVryU5a5ZBsrgXWu4VhLpTON2kJSkIe2g==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(346002)(136003)(39860400002)(376002)(396003)(230922051799003)(64100799003)(186009)(82310400011)(451199024)(1800799012)(36840700001)(40470700004)(46966006)(316002)(478600001)(8676002)(8936002)(4326008)(54906003)(6916009)(70206006)(70586007)(83380400001)(47076005)(36860700001)(6666004)(336012)(426003)(2616005)(107886003)(26005)(44832011)(5660300002)(2906002)(41300700001)(36756003)(82740400003)(81166007)(356005)(86362001)(40480700001)(40460700003)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jan 2024 06:44:52.9532 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b2b89c37-3bda-4b08-2533-08dc0b5e532c
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB4C.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5183
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,234 +121,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tianling,
+Add below test cases for mii commands:
+mii_info -To display MII PHY info
+mii_list - To list MII devices
+mii_set_device - To set MII device
+mii_read - To reads register from MII PHY address
+mii_dump - To display data from MII PHY address
 
-On 2023/12/23 12:00, Tianling Shen wrote:
-> The NanoPi R2C Plus is a small variant of NanoPi R2C with a on-board
-> eMMC flash (8G) included.
->
-> The device tree is taken from the kernel v6.5.
->
-> Signed-off-by: Tianling Shen <cnsztl@gmail.com>
-> ---
->   arch/arm/dts/Makefile                         |   1 +
->   .../dts/rk3328-nanopi-r2c-plus-u-boot.dtsi    |   9 ++
->   arch/arm/dts/rk3328-nanopi-r2c-plus.dts       |  33 +++++
->   board/rockchip/evb_rk3328/MAINTAINERS         |   6 +
->   configs/nanopi-r2c-plus-rk3328_defconfig      | 114 ++++++++++++++++++
->   5 files changed, 163 insertions(+)
->   create mode 100644 arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi
->   create mode 100644 arch/arm/dts/rk3328-nanopi-r2c-plus.dts
->   create mode 100644 configs/nanopi-r2c-plus-rk3328_defconfig
->
-> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index 9d28a485bec..6909f95e084 100644
-> --- a/arch/arm/dts/Makefile
-> +++ b/arch/arm/dts/Makefile
-> @@ -126,6 +126,7 @@ dtb-$(CONFIG_ROCKCHIP_RK3308) += \
->   dtb-$(CONFIG_ROCKCHIP_RK3328) += \
->   	rk3328-evb.dtb \
->   	rk3328-nanopi-r2c.dtb \
-> +	rk3328-nanopi-r2c-plus.dtb \
->   	rk3328-nanopi-r2s.dtb \
->   	rk3328-orangepi-r1-plus.dtb \
->   	rk3328-orangepi-r1-plus-lts.dtb \
-> diff --git a/arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi b/arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi
-> new file mode 100644
-> index 00000000000..f8adb9e5e1f
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi
-> @@ -0,0 +1,9 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +
-> +#include "rk3328-nanopi-r2c-u-boot.dtsi"
-> +
-> +/ {
-> +	chosen {
-> +		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &emmc;
-> +	};
-> +};
-> diff --git a/arch/arm/dts/rk3328-nanopi-r2c-plus.dts b/arch/arm/dts/rk3328-nanopi-r2c-plus.dts
-> new file mode 100644
-> index 00000000000..16a1958e457
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3328-nanopi-r2c-plus.dts
-> @@ -0,0 +1,33 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
-> +/*
-> + * Copyright (c) 2021 FriendlyElec Computer Tech. Co., Ltd.
-> + * (http://www.friendlyarm.com)
-> + *
-> + * Copyright (c) 2023 Tianling Shen <cnsztl@gmail.com>
-> + */
-> +
-> +/dts-v1/;
-> +#include "rk3328-nanopi-r2c.dts"
-> +
-> +/ {
-> +	model = "FriendlyElec NanoPi R2C Plus";
-> +	compatible = "friendlyarm,nanopi-r2c-plus", "rockchip,rk3328";
-> +
-> +	aliases {
-> +		mmc1 = &emmc;
-> +	};
-> +};
-> +
-> +&emmc {
-> +	bus-width = <8>;
-> +	cap-mmc-highspeed;
-> +	max-frequency = <150000000>;
-> +	mmc-ddr-1_8v;
-> +	mmc-hs200-1_8v;
-> +	non-removable;
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&emmc_clk &emmc_cmd &emmc_bus8>;
-> +	vmmc-supply = <&vcc_io_33>;
-> +	vqmmc-supply = <&vcc18_emmc>;
-> +	status = "okay";
-> +};
-> diff --git a/board/rockchip/evb_rk3328/MAINTAINERS b/board/rockchip/evb_rk3328/MAINTAINERS
-> index 8a19eb373d0..5fc114a63f6 100644
-> --- a/board/rockchip/evb_rk3328/MAINTAINERS
-> +++ b/board/rockchip/evb_rk3328/MAINTAINERS
-> @@ -11,6 +11,12 @@ S:      Maintained
->   F:      configs/nanopi-r2c-rk3328_defconfig
->   F:      arch/arm/dts/rk3328-nanopi-r2c-u-boot.dtsi
->   
-> +NANOPI-R2C-PLUS-RK3328
-> +M:      Tianling Shen <cnsztl@gmail.com>
-> +S:      Maintained
-> +F:      configs/nanopi-r2c-plus-rk3328_defconfig
-> +F:      arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi
-> +
->   NANOPI-R2S-RK3328
->   M:      David Bauer <mail@david-bauer.net>
->   S:      Maintained
-> diff --git a/configs/nanopi-r2c-plus-rk3328_defconfig b/configs/nanopi-r2c-plus-rk3328_defconfig
-> new file mode 100644
-> index 00000000000..320ed8b434a
-> --- /dev/null
-> +++ b/configs/nanopi-r2c-plus-rk3328_defconfig
-> @@ -0,0 +1,114 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_TEXT_BASE=0x00200000
-> +CONFIG_SPL_GPIO=y
-> +CONFIG_NR_DRAM_BANKS=1
-> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
-> +CONFIG_SF_DEFAULT_SPEED=20000000
-> +CONFIG_ENV_OFFSET=0x3F8000
-> +CONFIG_DEFAULT_DEVICE_TREE="rk3328-nanopi-r2c-plus"
-> +CONFIG_DM_RESET=y
-> +CONFIG_ROCKCHIP_RK3328=y
-> +CONFIG_TPL_ROCKCHIP_COMMON_BOARD=y
-> +CONFIG_TPL_LIBCOMMON_SUPPORT=y
-> +CONFIG_TPL_LIBGENERIC_SUPPORT=y
-> +CONFIG_SPL_DRIVERS_MISC=y
-> +CONFIG_SPL_STACK_R_ADDR=0x600000
-> +CONFIG_SPL_STACK=0x400000
-> +CONFIG_TPL_SYS_MALLOC_F_LEN=0x800
+Signed-off-by: Love Kumar <love.kumar@amd.com>
+---
+Changes in v2:
+- Get MII device list from env instead of auto-detecting it
+- Set the MII device to its current device after testing so that it
+won't impact next cases
+Changes in v3:
+ - Use single quote in env to maintain consistency
+---
+ test/py/tests/test_mii.py | 92 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 92 insertions(+)
+ create mode 100644 test/py/tests/test_mii.py
 
-     Did you test both TPL and SPL?
+diff --git a/test/py/tests/test_mii.py b/test/py/tests/test_mii.py
+new file mode 100644
+index 000000000000..7b6816d1089e
+--- /dev/null
++++ b/test/py/tests/test_mii.py
+@@ -0,0 +1,92 @@
++# SPDX-License-Identifier: GPL-2.0
++# (C) Copyright 2023, Advanced Micro Devices, Inc.
++
++import pytest
++import re
++
++"""
++Note: This test doesn't rely on boardenv_* configuration value but they can
++change test behavior.
++
++For example:
++
++# Setup env__mii_deive_test_skip to True if tests with ethernet PHY devices
++# should be skipped. For example: Missing PHY device
++env__mii_device_test_skip = True
++
++# Setup env__mii_device_test to set the MII device names. Test will be skipped
++# if env_mii_device_test is not set
++env__mii_device_test = {
++    'device_list': ['eth0', 'eth1'],
++}
++"""
++
++@pytest.mark.buildconfigspec("cmd_mii")
++def test_mii_info(u_boot_console):
++    if u_boot_console.config.env.get("env__mii_device_test_skip", False):
++        pytest.skip("MII device test is not enabled!")
++    expected_output = "PHY"
++    output = u_boot_console.run_command("mii info")
++    if not re.search(r"PHY (.+?):", output):
++        pytest.skip("PHY device does not exist!")
++    assert expected_output in output
++
++@pytest.mark.buildconfigspec("cmd_mii")
++def test_mii_list(u_boot_console):
++    if u_boot_console.config.env.get("env__mii_device_test_skip", False):
++        pytest.skip("MII device test is not enabled!")
++
++    f = u_boot_console.config.env.get("env__mii_device_test", None)
++    if not f:
++        pytest.skip("No MII device to test!")
++
++    dev_list = f.get("device_list")
++    if not dev_list:
++        pytest.fail("No MII device list provided via env__mii_device_test!")
++
++    expected_output = "Current device"
++    output = u_boot_console.run_command("mii device")
++    mii_devices = (
++        re.search(r"MII devices: '(.+)'", output).groups()[0].replace("'", "").split()
++    )
++
++    assert len([x for x in dev_list if x in mii_devices]) == len(dev_list)
++    assert expected_output in output
++
++@pytest.mark.buildconfigspec("cmd_mii")
++def test_mii_set_device(u_boot_console):
++    test_mii_list(u_boot_console)
++    f = u_boot_console.config.env.get("env__mii_device_test", None)
++    dev_list = f.get("device_list")
++    output = u_boot_console.run_command("mii device")
++    current_dev = re.search(r"Current device: '(.+?)'", output).groups()[0]
++
++    for dev in dev_list:
++        u_boot_console.run_command(f"mii device {dev}")
++        output = u_boot_console.run_command("echo $?")
++        assert output.endswith("0")
++
++    u_boot_console.run_command(f"mii device {current_dev}")
++    output = u_boot_console.run_command("mii device")
++    dev = re.search(r"Current device: '(.+?)'", output).groups()[0]
++    assert current_dev == dev
++
++@pytest.mark.buildconfigspec("cmd_mii")
++def test_mii_read(u_boot_console):
++    test_mii_list(u_boot_console)
++    output = u_boot_console.run_command("mii info")
++    eth_addr = hex(int(re.search(r"PHY (.+?):", output).groups()[0], 16))
++    u_boot_console.run_command(f"mii read {eth_addr} 0")
++    output = u_boot_console.run_command("echo $?")
++    assert output.endswith("0")
++
++@pytest.mark.buildconfigspec("cmd_mii")
++def test_mii_dump(u_boot_console):
++    test_mii_list(u_boot_console)
++    expected_response = "PHY control register"
++    output = u_boot_console.run_command("mii info")
++    eth_addr = hex(int(re.search(r"PHY (.+?):", output).groups()[0], 16))
++    response = u_boot_console.run_command(f"mii dump {eth_addr} 0")
++    assert expected_response in response
++    output = u_boot_console.run_command("echo $?")
++    assert output.endswith("0")
+-- 
+2.25.1
 
-
-Thanks,
-
-- Kever
-
-> +CONFIG_DEBUG_UART_BASE=0xFF130000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SYS_LOAD_ADDR=0x800800
-> +CONFIG_DEBUG_UART=y
-> +# CONFIG_ANDROID_BOOT_IMAGE is not set
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-nanopi-r2c-plus.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_MISC_INIT_R=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-> +CONFIG_SPL_BSS_START_ADDR=0x2000000
-> +CONFIG_SPL_BSS_MAX_SIZE=0x2000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-> +CONFIG_SPL_STACK_R=y
-> +CONFIG_SPL_I2C=y
-> +CONFIG_SPL_POWER=y
-> +CONFIG_SPL_ATF=y
-> +CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
-> +CONFIG_TPL_SYS_MALLOC_SIMPLE=y
-> +CONFIG_CMD_BOOTZ=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_USB=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_TIME=y
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_TPL_OF_CONTROL=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_TPL_OF_PLATDATA=y
-> +CONFIG_ENV_IS_IN_MMC=y
-> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-> +CONFIG_SYS_MMC_ENV_DEV=1
-> +CONFIG_NET_RANDOM_ETHADDR=y
-> +CONFIG_TPL_DM=y
-> +CONFIG_REGMAP=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_TPL_REGMAP=y
-> +CONFIG_SYSCON=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_TPL_SYSCON=y
-> +CONFIG_CLK=y
-> +CONFIG_SPL_CLK=y
-> +CONFIG_FASTBOOT_BUF_ADDR=0x800800
-> +CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_MISC=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_ETH_DESIGNWARE=y
-> +CONFIG_GMAC_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PINCTRL=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_PMIC_RK8XX=y
-> +CONFIG_SPL_PMIC_RK8XX=y
-> +CONFIG_SPL_DM_REGULATOR=y
-> +CONFIG_REGULATOR_PWM=y
-> +CONFIG_DM_REGULATOR_FIXED=y
-> +CONFIG_SPL_DM_REGULATOR_FIXED=y
-> +CONFIG_REGULATOR_RK8XX=y
-> +CONFIG_PWM_ROCKCHIP=y
-> +CONFIG_RAM=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_TPL_RAM=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_SYSINFO=y
-> +CONFIG_SYSRESET=y
-> +# CONFIG_TPL_SYSRESET is not set
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_DWC2=y
-> +CONFIG_USB_DWC3=y
-> +# CONFIG_USB_DWC3_GADGET is not set
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_USB_GADGET=y
-> +CONFIG_USB_GADGET_DWC2_OTG=y
-> +CONFIG_SPL_TINY_MEMSET=y
-> +CONFIG_TPL_TINY_MEMSET=y
-> +CONFIG_ERRNO_STR=y
