@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D966FC46CD2
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 18:48:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7575C46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 18:49:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5691B87952;
-	Tue,  2 Jan 2024 19:48:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F3833876E2;
+	Tue,  2 Jan 2024 19:49:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="R8ejA9jy";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hfv2Zlu2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44A2F87952; Tue,  2 Jan 2024 19:48:57 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id A9A0B87128; Tue,  2 Jan 2024 19:49:13 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 472038794A
- for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 19:48:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AD21B8795E
+ for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 19:49:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 402Imp9f005870;
- Tue, 2 Jan 2024 12:48:51 -0600
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 402In1Vw071716;
+ Tue, 2 Jan 2024 12:49:01 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704221331;
- bh=Fqvce3Z3y8SYE5Y0pFe9vGoqI6SJ8QsC7T4Up41klY0=;
+ s=ti-com-17Q1; t=1704221341;
+ bh=XlErA+61YM2/Tstc9M3OMdpCiltIKty9rJHDNGy091k=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=R8ejA9jyp/4x/gnoAVj33XDTbsWoOnduIGXagm9Bnm02rNMkR9VQDdBplEwP+uTmJ
- WyjFROXJe7FUlM4uYRV0ZPnnqKvNpewgmX0BZvYAyt94e2RZ5OpsYqp8dGeWp8/hnC
- mQULr9w9C6UYPO7j60gEiup1qLGecv92BwXP1Fig=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 402ImpKG022711
+ b=hfv2Zlu2sDr/0Fhk8FQFPrskejyYvBRLf8XVPHtsbkYsDni9c5l8tXDTxZ3i0xj0g
+ 6Oti/gTWsQK8dhnZbB8zmCSWa4kN6NBHA0xl3Qt1m2XziDcr5Y8CiVDUc3qNW+Flem
+ 7AezUTRBiTLvNWc00xVGAvAMLQYUQz89vAYRMwxE=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 402In1dn108201
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 2 Jan 2024 12:48:51 -0600
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 2 Jan 2024 12:49:01 -0600
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 2
- Jan 2024 12:48:50 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 12:49:01 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 2 Jan 2024 12:48:50 -0600
+ Frontend Transport; Tue, 2 Jan 2024 12:49:01 -0600
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 402Imoq4116380;
- Tue, 2 Jan 2024 12:48:50 -0600
-Date: Tue, 2 Jan 2024 12:48:50 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 402In12k116535;
+ Tue, 2 Jan 2024 12:49:01 -0600
+Date: Tue, 2 Jan 2024 12:49:01 -0600
 From: Nishanth Menon <nm@ti.com>
 To: Bryan Brattlof <bb@ti.com>
 CC: Tom Rini <trini@konsulko.com>, UBoot Mailing List <u-boot@lists.denx.de>, 
@@ -59,14 +59,14 @@ CC: Tom Rini <trini@konsulko.com>, UBoot Mailing List <u-boot@lists.denx.de>,
  Welch <martyn.welch@collabora.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Simon Glass
  <sjg@chromium.org>, Jan Kiszka <jan.kiszka@siemens.com>
-Subject: Re: [PATCH v2 08/26] arm: dts: k3-am654: remove duplicate wkup_uart0
-Message-ID: <20240102184850.7qphq36iffhftcrb@embolism>
+Subject: Re: [PATCH v2 09/26] arm: dts: k3-am654: remove duplicate timer
+Message-ID: <20240102184901.ncnuldisb3ldmtmj@splendor>
 References: <20231229174656.634065-28-bb@ti.com>
- <20231229174656.634065-36-bb@ti.com>
+ <20231229174656.634065-37-bb@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20231229174656.634065-36-bb@ti.com>
+In-Reply-To: <20231229174656.634065-37-bb@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,14 +85,13 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 11:47-20231229, Bryan Brattlof wrote:
-> With the Linux and U-Boot board files unified, we now have a duplicate
-> wkup_uart0 node. Remove it
+> timer1 is really just the mcu_timer0 node redefined for the WKUP SPL.
+> Remove the timer1 and replace it with the mcu_timer0 from the Linux
+> device tree we imported into U-Boot.
 > 
 > Tested-by: Tom Rini <trini@konsulko.com>
 > Signed-off-by: Bryan Brattlof <bb@ti.com>
 > ---
->  arch/arm/dts/k3-am654-r5-base-board.dts | 12 ------------
->  1 file changed, 12 deletions(-)
 [...]
 Reviewed-by: Nishanth Menon <nm@ti.com>
 -- 
