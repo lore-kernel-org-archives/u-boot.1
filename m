@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7837C46CD2
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 18:46:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 578D9C46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 18:47:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB4AE876E2;
-	Tue,  2 Jan 2024 19:46:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8714587908;
+	Tue,  2 Jan 2024 19:47:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vgN7aJGa";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GlSjPYQo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A564878C9; Tue,  2 Jan 2024 19:46:49 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id A8A198790A; Tue,  2 Jan 2024 19:47:19 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98B0686F42
- for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 19:46:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F89D86F42
+ for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 19:47:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 402IkcrN005607;
- Tue, 2 Jan 2024 12:46:38 -0600
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 402IlDSg103995;
+ Tue, 2 Jan 2024 12:47:13 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704221198;
- bh=3AYJL45CJ8zgsEvH3AJAa+xrVryYDslJRCg6OVBstGM=;
+ s=ti-com-17Q1; t=1704221233;
+ bh=evIkDurncoKcXnugCFz0mu9UeZatR5d6LvpsZxJM51o=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=vgN7aJGaaS7K89bVA4suhmJwMad/Mbw7l4sVknqJdU1qIvxdMr1WJzd/Ql+Epjxvn
- CgtFnQuF6+NLZ8Ly7TWimC6HnJFGJCZOcl0YkqpaVRR1luTyEB4v1+jizNNCj2dPLZ
- bCwIVGgFbkcZavjx8gMVigXONbLRhE7t5yG45yXU=
-Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 402IkcR6015999
+ b=GlSjPYQopGF3OKuCtCAMhD82hoF85igLNUNwRiovt4Lp+vSkmD3pJnfsEWofDBUpb
+ 4qkRIC5ZQ+56rxn3mhoxFtL8+VW5paglgzWtLcWLci2hBmp2rVnloqPdhKjwF5IypR
+ fScYnF2oZGZE53fEEeBlqKkiTaqHTOlApGHlgKOY=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 402IlDfO021412
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 2 Jan 2024 12:46:38 -0600
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 2 Jan 2024 12:47:13 -0600
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 2
- Jan 2024 12:46:37 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 12:47:12 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 2 Jan 2024 12:46:38 -0600
+ Frontend Transport; Tue, 2 Jan 2024 12:47:12 -0600
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 402IkcH9025253;
- Tue, 2 Jan 2024 12:46:38 -0600
-Date: Tue, 2 Jan 2024 12:46:38 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 402IlCEp114408;
+ Tue, 2 Jan 2024 12:47:12 -0600
+Date: Tue, 2 Jan 2024 12:47:12 -0600
 From: Nishanth Menon <nm@ti.com>
 To: Bryan Brattlof <bb@ti.com>
 CC: Tom Rini <trini@konsulko.com>, UBoot Mailing List <u-boot@lists.denx.de>, 
@@ -59,15 +59,14 @@ CC: Tom Rini <trini@konsulko.com>, UBoot Mailing List <u-boot@lists.denx.de>,
  Welch <martyn.welch@collabora.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Simon Glass
  <sjg@chromium.org>, Jan Kiszka <jan.kiszka@siemens.com>
-Subject: Re: [PATCH v2 01/26] configs: am65x_evm_r5: enable driver for fixed
- regulators
-Message-ID: <20240102184638.zgm66nu6g5qzjlf3@cavity>
+Subject: Re: [PATCH v2 02/26] configs: am65x_evm_a53: disable CONSOLE_MUX
+Message-ID: <20240102184712.5cfelkpigum5mtzr@startling>
 References: <20231229174656.634065-28-bb@ti.com>
- <20231229174656.634065-29-bb@ti.com>
+ <20231229174656.634065-30-bb@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20231229174656.634065-29-bb@ti.com>
+In-Reply-To: <20231229174656.634065-30-bb@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,15 +85,17 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 11:46-20231229, Bryan Brattlof wrote:
-> Some of the regulators we need to successfully boot are fixed
-> regulators. Enable the driver to properly probe them.
+> We do not have a need to share a single console with the evaluation
+> board and disabling this option reduces the complexity of configuring
+> the consoles. Disable CONSOLE_MUX
 > 
 > Tested-by: Tom Rini <trini@konsulko.com>
 > Signed-off-by: Bryan Brattlof <bb@ti.com>
 > ---
->  configs/am65x_evm_r5_defconfig | 2 ++
->  1 file changed, 2 insertions(+)
+>  configs/am65x_evm_a53_defconfig | 1 -
+>  1 file changed, 1 deletion(-)
 > 
+
 [...]
 Reviewed-by: Nishanth Menon <nm@ti.com>
 -- 
