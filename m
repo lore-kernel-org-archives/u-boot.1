@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5876AC47074
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 15:48:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 782C3C47074
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 15:48:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0320087944;
+	by phobos.denx.de (Postfix) with ESMTP id D8F8A8794B;
 	Tue,  2 Jan 2024 16:47:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Pm4DUL/d";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H9L7lOdu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49DB5878DB; Tue,  2 Jan 2024 16:47:10 +0100 (CET)
-Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
- [IPv6:2607:f8b0:4864:20::c2a])
+ id 63536878DB; Tue,  2 Jan 2024 16:47:11 +0100 (CET)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 199C2876C0
- for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 16:47:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 07ACE87923
+ for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 16:47:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=macroalpha82@gmail.com
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-59574cbcd50so419079eaf.2
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-594bea92494so3382722eaf.2
  for <u-boot@lists.denx.de>; Tue, 02 Jan 2024 07:47:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704210426; x=1704815226; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1704210427; x=1704815227; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UJhSCYRgS5TwE24+2YJfWeVs9zEBA+O1bqP3d5jKlAo=;
- b=Pm4DUL/dlmPYByq2ilaxETV0fz5X9CU6MYa1dyNQvm/4COp8YLN7AT4+0oPeSv5H3E
- fwv9E/n84Z+bR99W51hNqKNj+1+mpdWMpiR+R8hCohHKJMB9BZoNFMR4tcbytRA3Z0/N
- yDiHl/FC+hOXPV8mZZu5CMnzU9fH3hlfCjiZEgtCLZbRN4cXzU2ZXbk4NOA/M+k1n6o0
- 6JDdIC07sFqjdFC8qywikoLRvOzWG9xKDJCEWAgQv1Rbz//0NsweSjyq0w0xPW35fJrP
- a6vs5nm6yx8XCxmBsD+26lBmUMeAMmn0OLeNyylfC4ilmU7db1Bwi/FiRXi3EzQIpTkc
- IODQ==
+ bh=k5CXCYUczBUQjKQamPloqkUsFz2d5ZVu36134TsC2t4=;
+ b=H9L7lOduZcyMBHQfO3tjWHVgYOmhD4smrRImISCL/fCOtHkK4a24vKXiOBdqQiFYAq
+ d5qx/LDgmjFgipVfLOjXatcTtOH2k+QfKBZcoqIbtqvNEyYSiruh7dJNFTVxA/YhxMn3
+ kNMvzkjQQuYeuhki5Nw2G1xNu3cv3DnswNh8Epl2r+P5xgBCiSPloKZ5s59vSQapnl/D
+ f2vjULMe7FE/ge9viRwJAP2XTU0Eu/VNUWnGqp2jSOBRxufxCMLl9dbYO2d4936fMduV
+ qTcn4r1kJDDLz83ilmD0B4Z0mDuPnUDgdPfgUOv9X4zImo9fo2iHPXeOBrssxKF0WvsX
+ 3V5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704210426; x=1704815226;
+ d=1e100.net; s=20230601; t=1704210427; x=1704815227;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UJhSCYRgS5TwE24+2YJfWeVs9zEBA+O1bqP3d5jKlAo=;
- b=t3svYUyNztiao0vhFDTe8AAoYa72e9IafzteEbi1KP/aI/ght3WmE5+3rilcKrYZGT
- 1SwdXvCTrb/2RFiqu6EPSk0X2ZlN7t7mXYzopni/++Ftvt6TbR5+07u+0I6EUC/7k7Vr
- Ic8YNUexxg6i/0oTBX9VMPuz0zqweJAGDIjiPMMgYKRckLeIMC+dPl30Eh0ShHIHKwVS
- qRbQbkLCdp5zf0Ez47pQyQYSbOQmf3wNJi+GXCzEYB1JlhWXr/SiVskzDW4BkNeB/ldd
- oocRm/9y6BvVqSWPjUHGxixDUHg9QZ/EsdIPT8D57AH/+0vVvcWrXEEQrnotqXa/uedq
- jdZA==
-X-Gm-Message-State: AOJu0YwGlfIbCeUQzf8vPfTJQKu2VisgWWWZybzGXQnM1l4BtVbyysa0
- jdXZHUQGGBZ1QWsLmDdVNqV88HTvUniDMQ==
-X-Google-Smtp-Source: AGHT+IHTgNtfupM+yqflhk+1K2rENb+UpCO8Bp0BJ0172t9EigvYzIM+wDC+fxHMlaxys7TvJW1BTQ==
-X-Received: by 2002:a4a:57c1:0:b0:594:35b8:5fb9 with SMTP id
- u184-20020a4a57c1000000b0059435b85fb9mr6486113ooa.15.1704210426586; 
- Tue, 02 Jan 2024 07:47:06 -0800 (PST)
+ bh=k5CXCYUczBUQjKQamPloqkUsFz2d5ZVu36134TsC2t4=;
+ b=eQlO8havFt97u1LZ+XxN6b+gRpO96xNHWv47VoSFjjRFndbN1QwJ7ouOZc+mmv0t9p
+ tchh3CqOsRHK8uVYOgxTjMlvGguxTMex37Z9x+r0a06Z5/KZ7Q9JQ1hsUDg/2mG9Wnea
+ Z7DZSbDvggh1aac98ar+H+PZBbYauoN40sx1MW/U4C0TRQ6FMeQq/msti124eLjpKlKB
+ bbvaO73FCV3GXRkfKEM/5m3hzVMdXNOapfhQRtsjifuwzglcycFAwJSQt0+dMeuArNou
+ coR9PpjpxW+rNPXab2f9yH2kmiYns+IQom/JCX4Kep5gNpj9r6XprcHz5gMa3+is02cK
+ tWlg==
+X-Gm-Message-State: AOJu0YwTyIXEH48TYASzmxD5AkD8ciGO7Xg0iCI+eSZXGeFHeisE8C+w
+ wTKe9i7tZ/TnZyMB+xvJIWWbyvpTyGtyoA==
+X-Google-Smtp-Source: AGHT+IG3P6LXnNFfsTkbEiW30t44RiGzB7zfFya0DQfFfkD2QJM+HK+/hMSG6xF+M+V6s+8aYYUy6w==
+X-Received: by 2002:a4a:ab84:0:b0:595:e14c:6aee with SMTP id
+ m4-20020a4aab84000000b00595e14c6aeemr562931oon.6.1704210427557; 
+ Tue, 02 Jan 2024 07:47:07 -0800 (PST)
 Received: from localhost.localdomain ([75.28.21.198])
  by smtp.gmail.com with ESMTPSA id
- 127-20020a4a0d85000000b005958af24e84sm843197oob.42.2024.01.02.07.47.05
+ 127-20020a4a0d85000000b005958af24e84sm843197oob.42.2024.01.02.07.47.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 02 Jan 2024 07:47:06 -0800 (PST)
 From: Chris Morgan <macroalpha82@gmail.com>
@@ -69,9 +69,9 @@ To: u-boot@lists.denx.de
 Cc: andre.przywara@arm.com, kever.yang@rock-chips.com,
  philipp.tomsich@vrull.eu, sjg@chromium.org, jagan@edgeble.ai,
  jonas@kwiboo.se, Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH V4 6/7] board: rockchip: Add support for new boards to RGxx3
-Date: Tue,  2 Jan 2024 09:46:53 -0600
-Message-Id: <20240102154654.191055-7-macroalpha82@gmail.com>
+Subject: [PATCH V4 7/7] doc: board: anbernic: Update rgxx3 to add new boards
+Date: Tue,  2 Jan 2024 09:46:54 -0600
+Message-Id: <20240102154654.191055-8-macroalpha82@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240102154654.191055-1-macroalpha82@gmail.com>
 References: <20240102154654.191055-1-macroalpha82@gmail.com>
@@ -95,103 +95,60 @@ X-Virus-Status: Clean
 
 From: Chris Morgan <macromorgan@hotmail.com>
 
-Add support for the Anbernic RG-ARC-D, Anbernic RG-ARC-S, Powkiddy
-RK2023, and Powkiddy RGB30 to the Anbernic RGxx3. While the Powkiddy
-devices are manufactured by Powkiddy instead of Anbernic,
-the hardware is so similar they can all use the same bootloader.
+Update the RGxx3 documentation to note that it now supports the
+RG-ARC-D, RG-ARC-S, Powkiddy RK2023, and Powkiddy RGB30. Also update
+verbiage around panel detection to note that it is no longer hard coded
+to the RG503.
 
 Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
 ---
- board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c | 44 +++++++++++++++++++---
- 1 file changed, 39 insertions(+), 5 deletions(-)
+ doc/board/anbernic/rgxx3.rst | 20 ++++++++++++++------
+ 1 file changed, 14 insertions(+), 6 deletions(-)
 
-diff --git a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
-index 7bef5a53f0..e12a85a02a 100644
---- a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
-+++ b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
-@@ -48,9 +48,13 @@ enum rgxx3_device_id {
- 	RG353P,
- 	RG353V,
- 	RG503,
-+	RGB30,
-+	RK2023,
-+	RGARCD,
- 	/* Devices with duplicate ADC value */
- 	RG353PS,
- 	RG353VS,
-+	RGARCS,
- };
+diff --git a/doc/board/anbernic/rgxx3.rst b/doc/board/anbernic/rgxx3.rst
+index 7d1beb423c..d159ed2f76 100644
+--- a/doc/board/anbernic/rgxx3.rst
++++ b/doc/board/anbernic/rgxx3.rst
+@@ -5,6 +5,8 @@ U-Boot for Anbernic RGxx3 Devices
  
- static const struct rg3xx_model rg3xx_model_details[] = {
-@@ -83,6 +87,27 @@ static const struct rg3xx_model rg3xx_model_details[] = {
- 		.fdtfile = DTB_DIR "rk3566-anbernic-rg503.dtb",
- 		.detect_panel = 0,
- 	},
-+	[RGB30] = {
-+		.adc_value = 383, /* Gathered from second hand information */
-+		.board = "rk3566-powkiddy-rgb30",
-+		.board_name = "RGB30",
-+		.fdtfile = DTB_DIR "rk3566-powkiddy-rgb30.dtb",
-+		.detect_panel = 0,
-+	},
-+	[RK2023] = {
-+		.adc_value = 635, /* Observed average from device */
-+		.board = "rk3566-powkiddy-rk2023",
-+		.board_name = "RK2023",
-+		.fdtfile = DTB_DIR "rk3566-powkiddy-rk2023.dtb",
-+		.detect_panel = 0,
-+	},
-+	[RGARCD] = {
-+		.adc_value = 183, /* Observed average from device */
-+		.board = "rk3566-anbernic-rg-arc-d",
-+		.board_name = "Anbernic RG ARC-D",
-+		.fdtfile = DTB_DIR "rk3566-anbernic-rg-arc-d.dtb",
-+		.detect_panel = 0,
-+	},
- 	/* Devices with duplicate ADC value */
- 	[RG353PS] = {
- 		.adc_value = 860, /* Observed average from device */
-@@ -98,6 +123,13 @@ static const struct rg3xx_model rg3xx_model_details[] = {
- 		.fdtfile = DTB_DIR "rk3566-anbernic-rg353vs.dtb",
- 		.detect_panel = 1,
- 	},
-+	[RGARCS] = {
-+		.adc_value = 183, /* Observed average from device */
-+		.board = "rk3566-anbernic-rg-arc-s",
-+		.board_name = "Anbernic RG ARC-S",
-+		.fdtfile = DTB_DIR "rk3566-anbernic-rg-arc-s.dtb",
-+		.detect_panel = 0,
-+	},
- };
+ This allows U-Boot to boot the following Anbernic devices:
  
- struct rg353_panel {
-@@ -332,19 +364,21 @@ int rgxx3_detect_device(void)
- 	}
++ - Anbernic RG-ARC-D
++ - Anbernic RG-ARC-S
+  - Anbernic RG353M
+  - Anbernic RG353P
+  - Anbernic RG353PS
+@@ -12,18 +14,24 @@ This allows U-Boot to boot the following Anbernic devices:
+  - Anbernic RG353VS
+  - Anbernic RG503
  
- 	/*
--	 * Try to access the eMMC on an RG353V or RG353P. If it's
--	 * missing, it's an RG353VS or RG353PS. Note we could also
--	 * check for a touchscreen at 0x1a on i2c2.
-+	 * Try to access the eMMC on an RG353V, RG353P, or RG Arc D.
-+	 * If it's missing, it's an RG353VS, RG353PS, or RG Arc S.
-+	 * Note we could also check for a touchscreen at 0x1a on i2c2.
- 	 */
--	if (board_id == RG353V || board_id == RG353P) {
-+	if (board_id == RG353V || board_id == RG353P || board_id == RGARCD) {
- 		mmc = find_mmc_device(0);
- 		if (mmc) {
- 			ret = mmc_init(mmc);
- 			if (ret) {
- 				if (board_id == RG353V)
- 					board_id = RG353VS;
--				else
-+				else if (board_id == RG353P)
- 					board_id = RG353PS;
-+				else
-+					board_id = RGARCS;
- 			}
- 		}
- 	}
++Additionally, the following very similar non-Anbernic devices are also
++supported:
++
++ - Powkiddy RGB30
++ - Powkiddy RK2023
++
+ The correct device is detected automatically by comparing ADC values
+ from ADC channel 1. In the event of an RG353V or RG353P, an attempt
+ is then made to probe for an eMMC and if it fails the device is assumed
+ to be an RG353VS or RG353PS. Based on the detected device, the
+ environment variables "board", "board_name", and "fdtfile" are set to
+ the correct values corresponding to the board which can be read by a
+-boot script to boot with the correct device tree. If the board detected
+-is not of type RG503 (which currently has only 1 panel revision) a
+-panel detect is then performed by probing a "dummy" display on the DSI
+-bus and then querying the display ID. The display ID is then compared
+-to a table to get the known compatible string for use in Linux, and
+-this string is saved as an environment variable of "panel".
++boot script to boot with the correct device tree. If a board is defined
++as requiring panel detection, a panel detect is then performed by
++probing a "dummy" display on the DSI bus and then querying the display
++ID. The display ID is then compared to a table to get the known
++compatible string for use in Linux, and this string is saved as an
++environment variable of "panel".
+ 
+ FDT fixups are performed in the event of an RG353M to change the device
+ name, or in the event the panel detected does not match the devicetree.
 -- 
 2.34.1
 
