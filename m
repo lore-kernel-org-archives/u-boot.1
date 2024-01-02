@@ -4,71 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBCA9C46CD2
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 18:55:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AD52C46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 22:12:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DAB978773E;
-	Tue,  2 Jan 2024 19:55:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 950A887787;
+	Tue,  2 Jan 2024 23:12:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YdeFIObv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QQCzapEW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72F84878C9; Tue,  2 Jan 2024 19:55:26 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DCBDC878F9; Tue,  2 Jan 2024 23:12:52 +0100 (CET)
+Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
+ [IPv6:2607:f8b0:4864:20::835])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5170A86314
- for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 19:55:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D10198756F
+ for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 23:12:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 402ItKkj021652;
- Tue, 2 Jan 2024 12:55:20 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704221720;
- bh=ICTT052kNvK+hhBKfIuNqaLA9PFK2tp5TG/J7w6Gv74=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=YdeFIObvfZTRE1QfHbyqKdu9NmmIZq4gud/qsy7a04c+IK2HXyov4z2K3I8PlX3Dr
- kWbCVyOb5JPKrFsjKLgl1C5G+Ua25zOe8SwNMJONTYsYSmEJfma0temDN52KVY8/3b
- 43l6WrDapao+ja45zBnheV2QNUSsbdv7rUdWsueM=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 402ItKbi022216
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 2 Jan 2024 12:55:20 -0600
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 2
- Jan 2024 12:55:19 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 2 Jan 2024 12:55:19 -0600
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 402ItJJ1035529;
- Tue, 2 Jan 2024 12:55:19 -0600
-Date: Tue, 2 Jan 2024 12:55:19 -0600
-From: Nishanth Menon <nm@ti.com>
-To: Bryan Brattlof <bb@ti.com>
-CC: Tom Rini <trini@konsulko.com>, UBoot Mailing List <u-boot@lists.denx.de>, 
- Vignesh Raghavendra <vigneshr@ti.com>, Andrew Davis <afd@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Martyn
- Welch <martyn.welch@collabora.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Simon Glass
- <sjg@chromium.org>, Jan Kiszka <jan.kiszka@siemens.com>
-Subject: Re: [PATCH v2 26/26] arm: dts: k3-am654: convert bootph-pre-ram to
- bootph-all
-Message-ID: <20240102185519.cx4tbkzcy7wmew7v@lyrically>
-References: <20231229174656.634065-28-bb@ti.com>
- <20231229174656.634065-54-bb@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-qt1-x835.google.com with SMTP id
+ d75a77b69052e-42836ebe0a8so112871cf.1
+ for <u-boot@lists.denx.de>; Tue, 02 Jan 2024 14:12:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1704233569; x=1704838369; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=V8pCsbXJXFYlRuk9ZiJ48ay2k0aEzORT6/EvreOqUyg=;
+ b=QQCzapEWvyA00AZwfgUfBLH53xdBFKLd+jriadfO2Cxh53g7O/z1NOAmBFpEcpjHPo
+ +AiIysXVMnarxR0NnJCZKUonBn1wB7kIut5fZ9CxQgl5ics9kYF2dMoFSOC+iNt1fTqP
+ PvOlmcENwHx7kXfniI6p9qqLcXB3lIadBt7aOAJn4oua4osQOdf14yR2s5/fmIx4J5Hs
+ 17xPChuwDXXYwkywbrPcUM4QZW/hYjOQ3EcpR5M/+zQpfOD4LDguSjxFNr7kYCOW5wzv
+ nMSTAfdObliw0tNXmBcqt/dEODybC8PPYt9nL7pGweNAmk1Q24esepFzuZxqhq8jh0h4
+ 0OeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704233569; x=1704838369;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=V8pCsbXJXFYlRuk9ZiJ48ay2k0aEzORT6/EvreOqUyg=;
+ b=TRfftChZc8W1M9Jloh8d0Nj6lay8XQob8Ov6fbaMsv6ZOgpiDCpTBk4kjFAd1B+Cm2
+ VdqQDMCliWbQfd8OdeMWSgThV8GP/KkKNCYFIhApbDriLdNOzjIsUbnIf34Ql9eCG09q
+ v47XDbiRkvr+gOxbEqIYFW5TGQKWlbGhGnSKfYyo8xo10bSPKr+2w/DxfktRGYl2pQ0c
+ B0GNXQ6i9vUGT9DaaJ7huO5Fm5KFLZsSRSEk/HTtgEDMSS8fvmLQ3mDWkgSCrclJ9x1N
+ PKWzJlr3lDzNaJobuAPi/ebNyHwuQT8syeyCL/7/Uwi+XDSp3U7n2LKYwSvC5gG5R0jQ
+ SikQ==
+X-Gm-Message-State: AOJu0YzD/tSlZUDc6HPPC3VkLuF/c3m87s2JN2EDGoFBzb9/5fBtGAg4
+ Pl54TgJGGUy9MumCByw+fN7w5M7E4YYC1R7bGRHcEiSxoWU=
+X-Google-Smtp-Source: AGHT+IHfMmDKOt4xdC6ofO+ymuQDvPmp1Le8ONydRO1UxWlwf22KL5yjG/1gtBr6CpiyCIwW/QpoHQ==
+X-Received: by 2002:a05:6214:23cc:b0:680:b917:feb2 with SMTP id
+ hr12-20020a05621423cc00b00680b917feb2mr3752028qvb.44.1704233569235; 
+ Tue, 02 Jan 2024 14:12:49 -0800 (PST)
+Received: from ubuntu.localdomain
+ (cpe688f2e182063-cm688f2e182060.sdns.net.rogers.com. [174.115.4.214])
+ by smtp.gmail.com with ESMTPSA id
+ mg14-20020a056214560e00b0067f70cc986asm10431487qvb.92.2024.01.02.14.12.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 02 Jan 2024 14:12:48 -0800 (PST)
+From: Raymond Mao <raymond.mao@linaro.org>
+To: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
+ jwerner@chromium.org
+Cc: Raymond Mao <raymond.mao@linaro.org>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Kevin Chen <kevin_chen@aspeedtech.com>,
+ Sean Anderson <sean.anderson@seco.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Shiji Yang <yangshiji66@outlook.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Baruch Siach <baruch@tkos.co.il>, Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH v4 0/9] Handoff bloblist from previous boot stage
+Date: Tue,  2 Jan 2024 14:12:25 -0800
+Message-Id: <20240102221237.1007090-1-raymond.mao@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20231229174656.634065-54-bb@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,18 +100,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11:47-20231229, Bryan Brattlof wrote:
-> Many nodes are reused between WKUP SPL, MAIN SPL, and U-Boot. Using
-> bootph-pre-ram is causing these nodes to be present in SPL builds but
-> pruned away during the U-Boot build. Convert these nodes to bootph-all
-> so they will remain no matter which dtb build is happening.
-> 
-> Tested-by: Tom Rini <trini@konsulko.com>
-> Signed-off-by: Bryan Brattlof <bb@ti.com>
-> ---
-[...]
-Reviewed-by: Nishanth Menon <nm@ti.com>
+This patch set depends on another series:
+"[PATCH v5 00/11] Support Firmware Handoff spec via bloblist".
+
+This patch set adds/adapts a few bloblist APIs and implements Arm arch
+custom function to retrieve the bloblist (aka. Transfer List) from
+previous loader via boot arguments when OF_BOARD option is enabled and
+all boot arguments are compliant to the register conventions defined
+in the Firmware Handoff spec v0.9.
+
+FDT library function will load the FDT from the bloblist if it exists.
+Otherwise it fallbacks to get the FDT from the board custom function.
+
+If an arch wishes to have different behaviors for loading bloblist
+from the previous boot stage, it is required to implement the custom
+function xferlist_from_boot_arg().
+
+Raymond Mao (9):
+  bloblist: add API to check the register conventions
+  bloblist: check bloblist with specified buffer size
+  bloblist: refactor of bloblist_reloc()
+  arm: armv7: save boot arguments
+  arm: armv8: save boot arguments
+  arm: Get bloblist from boot arguments
+  bloblist: Load the bloblist from the previous loader
+  fdt: update the document and Kconfig description
+  fdt: get FDT from bloblist
+
+ arch/arm/cpu/armv7/start.S         | 19 ++++++
+ arch/arm/cpu/armv8/start.S         | 14 +++++
+ arch/arm/lib/Makefile              |  4 ++
+ arch/arm/lib/xferlist.c            | 38 ++++++++++++
+ common/bloblist.c                  | 92 +++++++++++++++++++++++-------
+ common/board_f.c                   |  9 +--
+ configs/qemu_arm64_defconfig       |  3 +
+ doc/develop/devicetree/control.rst |  6 +-
+ dts/Kconfig                        |  7 ++-
+ include/bloblist.h                 | 47 ++++++++++++---
+ lib/fdtdec.c                       |  9 ++-
+ test/bloblist.c                    |  8 +--
+ 12 files changed, 210 insertions(+), 46 deletions(-)
+ create mode 100644 arch/arm/lib/xferlist.c
+
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+2.25.1
+
