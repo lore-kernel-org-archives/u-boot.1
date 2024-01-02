@@ -4,175 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B251C46CD2
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 13:02:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B2DFC46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 13:56:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABE268756F;
-	Tue,  2 Jan 2024 14:02:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 006A6876FF;
+	Tue,  2 Jan 2024 14:56:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="pzABLsjP";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ga7NA8DQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50861877B3; Tue,  2 Jan 2024 14:02:36 +0100 (CET)
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com
- (mail-bn1nam02on2061f.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eb2::61f])
+ id 29D54877B3; Tue,  2 Jan 2024 14:56:57 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F0518747A
- for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 14:02:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 698858743A
+ for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 14:56:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=VsKhI56VwB+nxeZKA/BT74ivENANYbFRknH8m5hE6ICZiMOsSOubQvuN2J7tVQOoeXSytmRTJyRxkYHQzmwGaZ3AnUujxvez1VsMKraf72Alo/4sJh12CMM6MNnFD7iPFP5Gd7A7ADMC3NdHOn48Zrf9fLkLvDC+tG6JD4mnGbKPnK9/MCuh/PBTUQe4zKABZuzofscJm1rtVKF9aw3FA2IecaHggh2IbHtBeo28uAT/+i5o40nEi5f/X9sKQg4sqaLVTYgglB2SuJM0fsZdo+Vnr94Fg2jbu+GAR9EMuYcmGyITRR2vM5VKbnxYxbl+vM8ovbHNdmxWGGyCyQFN7w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JPzj+OMlgWXNkQYagh9B03UHcbi9hGVyTTnLTxBsvRY=;
- b=jc8VjuGXjXoYHO8LsRA/3/z48HLHVOuHs9ehy4To9AexkxPPu8Mh+5sNcku7zpyblgSE15oyTsxBVU022w26QUuLQEWnslna4lyiHNfrRzG1qVAKxPc74f6pSodMc/d4NSMJ4p0e6SJwkP+ugHTQjbn54n8z+kxxHqwjn/lyzpdOScI9r9iRe10X6vkb3nzFmD5QQGhanfqqwgLXXf/0CrhtzvAKJAvaF7jeZasSRwENoQt2Bont9UaZKrDM6PPhEcV8U1LjXwfeTR2CebQA5jCizHv7Juh30b3+DZyolfCDlwfncGly3yJqFro7xM2nJ7W+YpvrgH5REzEnmwUm8g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JPzj+OMlgWXNkQYagh9B03UHcbi9hGVyTTnLTxBsvRY=;
- b=pzABLsjP8vuD0U3OS92LkmY74hFTdFCm9kqitDiC1l28agPb0chc7upYLC9wldWT5/1JMlteQzXXx2xDxNXUnQXCez3TXR8JjomNy/8CZ+Zzc8IoIqAef/Vjk5AYviLOp3TMHuJZGc4j55B1lEXfg7BQ/ArlVwhVEgwmchNAGBQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from CYXPR12MB9337.namprd12.prod.outlook.com (2603:10b6:930:d8::20)
- by SJ1PR12MB6073.namprd12.prod.outlook.com (2603:10b6:a03:488::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.13; Tue, 2 Jan
- 2024 13:01:27 +0000
-Received: from CYXPR12MB9337.namprd12.prod.outlook.com
- ([fe80::2b19:2045:59c7:cde2]) by CYXPR12MB9337.namprd12.prod.outlook.com
- ([fe80::2b19:2045:59c7:cde2%7]) with mapi id 15.20.7135.023; Tue, 2 Jan 2024
- 13:01:27 +0000
-Message-ID: <e49cfe4d-cb3c-4779-a906-223c82c1b60d@amd.com>
-Date: Tue, 2 Jan 2024 14:01:14 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/9] microblaze: dts: Use the normal build rule
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List
- <u-boot@lists.denx.de>, "Hatle, Mark" <mark.hatle@amd.com>
-Cc: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>,
- Michal Simek <monstr@monstr.eu>
-References: <20231227082405.2202246-1-sjg@chromium.org>
- <20231227082405.2202246-2-sjg@chromium.org>
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20231227082405.2202246-2-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR04CA0053.eurprd04.prod.outlook.com
- (2603:10a6:802:2::24) To CYXPR12MB9337.namprd12.prod.outlook.com
- (2603:10b6:930:d8::20)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 402DuWfH025192;
+ Tue, 2 Jan 2024 07:56:32 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1704203792;
+ bh=0k+q9yXEbhYg4ctMJjDMsu57P6nfqdSnH8MTf/MszZ8=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=Ga7NA8DQsQ750AjC+fWPzoLF7SjYORaRgWymIOWbM3/84neLcRD9c+JT2HoBFRcU+
+ 6jfz0GM9EyRvjXHqjK0Ob/m5xAXF9X3cYD0hP//rMReP7sfqTRckKytjhRTvTHAo5J
+ BXMzTGlF/s+tbMT4r5LaNq5baldKkq9aXC/6/69M=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 402DuWTC104567
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 2 Jan 2024 07:56:32 -0600
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 2
+ Jan 2024 07:56:31 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 2 Jan 2024 07:56:31 -0600
+Received: from [10.249.40.136] ([10.249.40.136])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 402DuTBt045950;
+ Tue, 2 Jan 2024 07:56:29 -0600
+Message-ID: <036c3423-4205-4d9e-9779-ecd3a49f8a47@ti.com>
+Date: Tue, 2 Jan 2024 07:56:27 -0600
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CYXPR12MB9337:EE_|SJ1PR12MB6073:EE_
-X-MS-Office365-Filtering-Correlation-Id: e3746d4e-7bc3-4e3f-9b64-08dc0b92edfd
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: YRLfmvKQ8rS2GbSgocn+y3BLDBlknmvL4ksBCC0uKaWUYtNHs5qHqH0QUB8s8rM4DdhtTLSOGLWJeuKRePXoVlfpST85YYuDaJ6NdNHbIZeb+dIDjN+5LeH37QbNza6xEw6wYYxbsjaLvrhasDMydNNclAsM3NNw1yXY7F3UubnN5KbUfR8aWVhnyaX/Hj6dNOE4fcxiIReRWdPWgsc7IDPbFagEvwPvjYjJhImWwHcWw0HuNLIY41hT70QBP6RsiFX64do3P6dgd9jFyeuuzeDisZ4PWuH0v7zZxdabi2Z72kRBm8cNAWjV1aPDvGC8CVeLRlJih6nlzKfHQVrgz/hm+E7BR/3KLwW8f1SI05hgMEyAbr1OeiXcnIyzyLmw2fIwNtdAzJAR6vRtYw7VczsrV/Hm4f5CEwCsSIJlzSwd9aXl9KVVqfc9idJX8CQO66HeXmKFa9awmlilfZY8c0inLsNHrEmtjy6bTgXgJiEzMgMrpne4xt19N1cyGijnv7tXHDzA8vvtrOZK18p2/8f//849C5O4agj1glVKh7YCEk1grc5okj8Y75932Vw9lwNYNPdlyyGdZwNVjHvx3XyfmcOpyPA1eS7ftz+0eHO0sNVsTusJbNuPbl7VEJN+4JiYmRv+HT1Nrd4BoOj2Tg==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CYXPR12MB9337.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(396003)(39860400002)(136003)(376002)(346002)(366004)(230922051799003)(186009)(64100799003)(451199024)(1800799012)(36756003)(31686004)(66556008)(53546011)(6512007)(6506007)(66476007)(66946007)(6486002)(86362001)(31696002)(38100700002)(83380400001)(26005)(2616005)(41300700001)(2906002)(6666004)(5660300002)(4326008)(478600001)(44832011)(6636002)(54906003)(110136005)(316002)(8936002)(8676002)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YWk0bWZ0eG1qaXZCVU9veUZJdUE5ZWdScTRFV2hJc3RiNnlsN2E4eGd3c2V6?=
- =?utf-8?B?a2NITkFEdFl5ZTI2Nk1VcFVRV1RIUTRSQ24xLy8xYndFZnJyZE5tSk5MRmE2?=
- =?utf-8?B?cFVMNDBLc25YVVc3U0N4eUNzeFFyRzV0b2tnRW1HMVJkOFFNUHRzNnVvYmF2?=
- =?utf-8?B?VEdxWTBsaFJTRVFCemI3Wm11bW5WR2tKVHRwOWdYMTQ4NGRaMnBNVXNxclRY?=
- =?utf-8?B?dERYbUwzSExVb2VldEt3c1dBVjJqLzJzaFJFMTZLWHE4VzMyK1NVWkEyS3Yy?=
- =?utf-8?B?cmZSOTMzQ3JITHhtTnl4ckdZNzdFbi9KaTdHS1VPdDNxTXlKMUVyT3RGZWxQ?=
- =?utf-8?B?UzZHWVBIT0FzSTdqSEZ4SGE2MGt6TWVwTjZZOG5KSjFWeVVveGwwN3dZUEJr?=
- =?utf-8?B?a3g2S2d2dmFxL3V6cHowR3dWenhYcjRMTkpHdnRhRVhsVmFvNVR5RkhVM3hl?=
- =?utf-8?B?TEN1ajV6M2RDTUtidHRqTDFDOUhZTWEwdHp2NHBQd2ZyMjFoNW1WL0dISzBS?=
- =?utf-8?B?TTFNREJSaHl4RVFWNTJsZVJTRU8yQ3N3cSs3KzRlOG5qSHNmdkRnc2lKT2d3?=
- =?utf-8?B?WnlOL0xYQ3pXM0tQQjd2QUE3a2xaWUtnaXh0Y2VkaVM2SkNUNUExckkxVzBO?=
- =?utf-8?B?aGdjMEdyczBEZ3c3ZkpFV3NFcUVaRGZROU1pcHdKNFU0WkxGckdpMTNlK05B?=
- =?utf-8?B?RlQzUVJ2K1Bhb1JJTlRMaVc4K08vSm1acUliNXhtSkVGbC9aSDI3eG9VK2Qw?=
- =?utf-8?B?T2JLV0tEc3hFNDdyZzZLUVg1T1AzSWtRWW1kR2RER0VzZytVR0JrL2E2cXMy?=
- =?utf-8?B?c3pKdTV3R0c4Y1BCWUhPa0l2Q084bmpxVCt1THlCcmRKOW5aOWZKMS82cVlo?=
- =?utf-8?B?bFpKSjdmRjJjR1pRVGRrRXNGYk13NUdHaVNrMmpKWjBJaC8rY2lZTkx1THVk?=
- =?utf-8?B?a09oQTJ0SDE5QlR2OE9WbCtLTWp1TUtxd291WGkrcFYySFdkalUzdldOc0Q2?=
- =?utf-8?B?enZsYldJRkhJeklJZW1Fcm1rdUFucFdhcysvYTcxWjJJaGlaS1N6RjRqRmxV?=
- =?utf-8?B?cnVkYSthYW5pWGRqdUFkZ2tyUFJzT2NNRHQ4TUFwdHkzNjRNUlFyMmd0d1ZI?=
- =?utf-8?B?cHJJZC9CTGxSWVhvazdHV0NJNm1qWndqVXJWb1ozTHdUV1VPN3Q4aGNlYWI2?=
- =?utf-8?B?SnhzdTVnNVNXTmF4TWZxak1hWUdrOHVqWWNpSndIMHJQMzhMdktNL3BxQ3Yx?=
- =?utf-8?B?UU9jVXBITGFIVCs4TWcreVh0MGI5bnhjZlFzVWNUSk5NVERhT2cyMWNIMXQ5?=
- =?utf-8?B?N2IrOElKVzVSaG5NZXNWaHNXUThISy8xeWl4NFFHVWNma3FTT0RYZ2N6TEF2?=
- =?utf-8?B?M2c4UlpGdjEvRlB2VE5Na0VMTWF1UFhOMENaOVVmUFZieXVoT2R2d3N1OTB6?=
- =?utf-8?B?Q09yWHJwSWR4N25OdHZVTUpJR1MzQ21vRlRiTTUwd1AxVnk0RklRSnZLMUFl?=
- =?utf-8?B?ZGpPNzNSS0FZeVd3dVdsVjFnbGo3UDZrT0x3bDFsM0xaaWlpRnA1R0RKODhk?=
- =?utf-8?B?dDhSejVkM2RLdzRENmtwNFcrR0VtcmY2eFhOMGFDYW1Ka0YyWWpFUE1pTlc5?=
- =?utf-8?B?bU1GRnRwdENvSHR6NWRLeHBIUmlINjVoS2VFa2dkeDBkRDJiTWg3Y1NaOU9R?=
- =?utf-8?B?ZUtDNTRyWlFSamNLUjU1Q0dYRDJrZVVOclBudTFGYnhGNzRGblZiNm12SEVX?=
- =?utf-8?B?M2FDR05HaXR5SmR4b1B6NmJvUW8zcldnbUdtZ1dVMGRldjlPOHNOMXhKOU5J?=
- =?utf-8?B?ODRJYTlobHpMblZHa0Uzd0kwVHo4UFBNTXdKcm0zclpBSDZJeGxFbGVXYVlV?=
- =?utf-8?B?N2dTTisyWVhqMVVzQmw3alYrR2tMMGFFQ050OGFVUWlzb1BwU0F3QzdSVUl4?=
- =?utf-8?B?a3JyTVFzVXc3dnBqbVdRb0JYczRpTi80OFNCVEFaQjFUeDNJY3cvaldOL2R0?=
- =?utf-8?B?NWJvWXhQNTEwa2NDenk0NTJMdVc3UFVLelEzQXBKbUJzZklWQ2h4RldWajVw?=
- =?utf-8?B?cmdSYzVCcUZkN0U2MGRjOXA5UTdzc0tVSmV0T0ZyMS9iSGdRQ1hnYXd3eUor?=
- =?utf-8?Q?4CSFzeGKWti1Cw1PfUg/605kY?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e3746d4e-7bc3-4e3f-9b64-08dc0b92edfd
-X-MS-Exchange-CrossTenant-AuthSource: CYXPR12MB9337.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jan 2024 13:01:26.8031 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: RGLHfnYzzrKJcdTG5sfLA8kWEBypVz47K6afvcfvc9WDI7vFetPXuXls855P+DAP
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6073
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 00/16] Introduce ICSSG Ethernet driver
+To: MD Danish Anwar <danishanwar@ti.com>, Roger Quadros <rogerq@kernel.org>,
+ Maxime Ripard <mripard@kernel.org>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Matthias
+ Schiffer <matthias.schiffer@ew.tq-group.com>, Kamlesh Gurudasani
+ <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger
+ <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>
+References: <20231219101225.3443978-1-danishanwar@ti.com>
+ <6d9456ec-a483-4721-8713-626aacdc9f81@kernel.org>
+ <4ccd7db1-533a-4243-9087-7e7c2e85b917@ti.com>
+ <d841b7b8-80f8-467d-afed-1170a2627724@kernel.org>
+ <46c69c28-09c3-4e60-92f5-1f91d795a22a@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <46c69c28-09c3-4e60-92f5-1f91d795a22a@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -189,53 +91,925 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 12/27/23 09:23, Simon Glass wrote:
-> Build devicetree files using the normal SoC-generic rule. For
-> microblaze there is actually only one SoC and one board.
+On 12/27/23 12:56 AM, MD Danish Anwar wrote:
 > 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
 > 
->   arch/microblaze/dts/Makefile | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+> On 22/12/23 6:13 pm, Roger Quadros wrote:
+>>
+>> On 22/12/2023 12:26, MD Danish Anwar wrote:
+>>> Hi Roger,
+>>>
+>>> On 20/12/23 3:29 pm, Roger Quadros wrote:
+>>>> Hi,
+>>>>
+>>>> On 19/12/2023 12:11, MD Danish Anwar wrote:
+>>>>> Introduce ICSSG PRUETH support in uboot. The ICSSG driver is used in TI
+>>>>> AM654 SR2.0.
+>>>>>
+>>>>> The ICSSG PRU Sub-system runs on EMAC firmware. This series Introduces
+>>>>> support for ICSSG driver in uboot. This series also adds the driver's
+>>>>> dependencies.
+>>>>>
+>>>>> The ICSSG2 node is added in device tree overlay so that it remains in
+>>>>> sync with linux kernel.
+>>>>>
+>>>>> The series introduces device tree and config changes and AM65x
+>>>>> to enable ICSSG driver. The series also enables SPL_LOAD_FIT_APPLY_OVERLAY
+>>>>> for AM65x in order to load overlay over spl.
+>>>>>
+>>>>> This series has been tested on AM65x SR2.0, and the ICSSG interface is
+>>>>> able to ping / dhcp and boot kernel using tftp in uboot.
+>>>>>
+>>>>> To use ICSSG2 ethernet, the ICSSG firmware needs to be loaded to PRU RPROC
+>>>>> cores and RPROC cores need to be booted with the firmware. This step is
+>>>>> done inside driver in kernel as kernel supports APIs like
+>>>>> rproc_set_firmware() and rproc_fw_boot(). But as u-boot doesn't have these
+>>>>> APIs, the same needs to be done via u-boot cmds.
+>>>>>
+>>>>> To make sure icssg-eth works we need to do below steps.
+>>>>>
+>>>>> 1. Initialize rproc cores i.e. rproc_init()
+>>>>> 2. Load $firmware_file from partition '1:2' (root) on device (mmc in this
+>>>>>     example)
+>>>>> 3. Load the firmware file to rproc cores passing. i.e. rproc_load()
+>>>>>     taking rproc_id, loadaddr and file size as arguments.
+>>>>> 4. Start rproc cores. i.e. rproc_start() taking rproc_id as arguments
+>>>>>
+>>>>> The above steps are done by running the below commands at u-boot prompt.
+>>>>>
+>>>>> => setenv start_icssg2 'rproc start 14; rproc start 15; rproc start 16; rproc start 17; rproc start 18; rproc start 19'
+>>>>> => setenv stop_icssg2 'rproc stop 14; rproc stop 15; rproc stop 16; rproc stop 17; rproc stop 18; rproc stop 19'
+>>>>> => setenv firmware_dir '/lib/firmware/ti-pruss'
+>>>>> => setenv get_firmware_mmc 'load mmc ${bootpart} ${loadaddr} ${firmware_dir}/${firmware_file}'
+>>>>>
+>>>>> => setenv init_icssg2 'setenv ethact icssg2-eth; setenv autoload no; rproc init; setenv loadaddr 0x80000000; \
+>>>>>      setenv firmware_file am65x-sr2-pru0-prueth-fw.elf; run get_firmware_mmc;  rproc load 14 0x80000000 ${filesize}; \
+>>>>>      setenv loadaddr 0x89000000; setenv firmware_file am65x-sr2-rtu0-prueth-fw.elf; run get_firmware_mmc; rproc load 15 0x89000000 ${filesize}; \
+>>>>>      setenv loadaddr 0x90000000; setenv firmware_file am65x-sr2-txpru0-prueth-fw.elf; run get_firmware_mmc; rproc load 16 0x90000000 ${filesize}; \
+>>>>>      setenv loadaddr 0x80000000; setenv firmware_file am65x-sr2-pru1-prueth-fw.elf; run get_firmware_mmc; rproc load 17 0x80000000 ${filesize}; \
+>>>>>      setenv loadaddr 0x89000000; setenv firmware_file am65x-sr2-rtu1-prueth-fw.elf; run get_firmware_mmc; rproc load 18 0x89000000 ${filesize}; \
+>>>>>      setenv loadaddr 0x90000000; setenv firmware_file am65x-sr2-txpru1-prueth-fw.elf; run get_firmware_mmc; rproc load 19 0x90000000 ${filesize}; \
+>>>>>      run start_icssg2;'
+>>>>
+>>>> A whole bunch of commands are required to get ethernet functional.
+>>>> This is not at all user friendly and will be a maintenance nightmare.
+>>>> What worries me is tracking the 6 different rproc cores and the 6 different firmware files to start 1 ethernet device.
+>>>> This will get even more interesting when we have to deal with different ICSSG instances on different boards.
+>>>>
+>>>> What is preventing the driver from starting the rproc cores it needs so user doesn't need to care about it?
+>>>> All the necessary information is in the Device tree. At least this is how it is done on Linux.
+>>>>
+>>>
+>>> I tried removing the need for these commands and implementing them
+>>> inside the driver only. I am able to load the firmware from driver using
+>>> the fs_loader API request_firmware_into_buf(). It requires changes to
+>>> dt. A DT node called fs-loader needs to be added also CONFIG_FS_LOADER
+>>> needs to enabled. In the DT node we need to specify the storage media
+>>> that we are using i.e. mmc, ospi, usb. It's upto user to modify the
+>>> storage media, the driver will take the media from DT and try to laod
+>>> firmware from their.
+>>>
+>>> For loading firmwares to rproc cores, rproc_load() API is needed. Now
+>>> this API takes rproc_id, loadaddr and firmware_size as arguments.
+>>> loadaddr is fixed for all three pru cores. firmware_size is obtained
+>>> from request_firmware_into_buf() but I couldn't find a way to get the
+>>> rproc_id. For now based on the ICSSG instance and slice number I am
+>>> figuring out the rproc_id and passing it to rproc_load() and
+>>> rproc_start() APIs. Please let me know if you have any other / better
+>>> way of finding rproc_id.
+>>>
+>>> Below is the entire diff to remove these commands and move their
+>>> functionality to driver. Please have a look and let me know if this is ok.
+>>>
+>>
+>> Good to see you got something working so quickly.
+>> It has some rough edges but nothing that is blocking.
+>>
+>>>
+>>> Save New Duplicate & Edit Just Text Twitter
+>>> diff --git a/arch/arm/dts/k3-am654-base-board.dts
+>>> b/arch/arm/dts/k3-am654-base-board.dts
+>>> index cfbcebfa37..c8da72e49c 100644
+>>> --- a/arch/arm/dts/k3-am654-base-board.dts
+>>> +++ b/arch/arm/dts/k3-am654-base-board.dts
+>>> @@ -16,6 +16,13 @@
+>>>   	chosen {
+>>>   		stdout-path = "serial2:115200n8";
+>>>   		bootargs = "earlycon=ns16550a,mmio32,0x02800000";
+>>> +		firmware-loader = <&fs_loader0>;
+>>> +	};
+>>> +
+>>> +	fs_loader0: fs-loader {
+>>> +		bootph-all;
+>>> +		compatible = "u-boot,fs-loader";
+>>> +		phandlepart = <&sdhci1 2>;
+>>>   	};
+>>
+>> This is has 2 issues
+>> 1) It will not be accepted in Kernel DT. Maybe it could be done in -u-boot.dtsi file.
 > 
-> diff --git a/arch/microblaze/dts/Makefile b/arch/microblaze/dts/Makefile
-> index 427a8f9aaca..adc76ddf21f 100644
-> --- a/arch/microblaze/dts/Makefile
-> +++ b/arch/microblaze/dts/Makefile
-> @@ -1,6 +1,6 @@
->   # SPDX-License-Identifier: GPL-2.0+
->   
-> -dtb-y += $(shell echo $(CONFIG_DEFAULT_DEVICE_TREE)).dtb
-> +dtb-$(CONFIG_MICROBLAZE) += microblaze-generic.dtb
->   
->   include $(srctree)/scripts/Makefile.dts
->   
+> Sure. I'll move this to k3-am654-base-board-u-boot.dtsi
+> 
+>> 2) You cannot assume boot medium is always sdhci1 2
+>>
+> 
+> Yes. It's upto user to provide the boot medium and boot partition for
+> loading firmware. By default the firmware is loacated in root partion of
+> shdci1 on am65x so I am adding this as default. But user can easily
+> modify this to any other medium / partition needed.
+> 
 
-This feature was added by Nathan likely for yocto purpose.
+Users should not have to modify DT to pick a boot medium/partition.
+What would you do for complex cases or non block devices like eth/uart
+booting? This is one reason kernel moved firmware loading to
+userspace. The equivalant in U-Boot is the shell and scripts. Your
+original command based loading was the correct solution IMHO.
 
-commit 41f59f6853915291c7451c9e38c196fd5a90bf6a
-Author:     Michal Simek <michal.simek@amd.com>
-AuthorDate: Wed Feb 15 08:22:04 2017 +0100
-Commit:     Michal Simek <michal.simek@amd.com>
-CommitDate: Mon Jun 19 15:52:39 2017 +0200
+If we want to try to hide some of that then we need a way to
+run a user provided script from the environement to handle
+the general cases for firmware loading.
 
-     microblaze: Build only DTBs for selected target
+Andrew
 
-     Adding more targets to repository requires some additional
-     changes not simply just adding config file, defconfig and dts.
-     This patch makes this process easier by building only
-     particular DTB which is selected via defconfig
-     that Makefile doesn't need to contain all dts files in the repository.
-
-     Reported-by: Nathan Rossi <nathan@nathanrossi.com>
-     Signed-off-by: Michal Simek <michal.simek@xilinx.com>
-
-Mark: Can you please double check what Yocto is doing for supporting multiple 
-microblaze based DTs? If you are copying dtses to u-boot source code and then 
-using CONFIG_DEFAULT_DEVICE_TREE to select DT to build?
-
-Thanks,
-Michal
+>>>
+>>>   	memory@80000000 {
+>>> diff --git a/configs/am65x_evm_a53_defconfig
+>>> b/configs/am65x_evm_a53_defconfig
+>>> index 2755d7082f..c53e938abb 100644
+>>> --- a/configs/am65x_evm_a53_defconfig
+>>> +++ b/configs/am65x_evm_a53_defconfig
+>>> @@ -112,6 +112,7 @@ CONFIG_DM_I2C_GPIO=y
+>>>   CONFIG_SYS_I2C_OMAP24XX=y
+>>>   CONFIG_DM_MAILBOX=y
+>>>   CONFIG_K3_SEC_PROXY=y
+>>> +CONFIG_FS_LOADER=y
+>>>   CONFIG_SUPPORT_EMMC_BOOT=y
+>>>   CONFIG_MMC_IO_VOLTAGE=y
+>>>   CONFIG_MMC_UHS_SUPPORT=y
+>>> diff --git a/configs/am65x_evm_r5_defconfig b/configs/am65x_evm_r5_defconfig
+>>> index b2f1e721b3..2d19935a41 100644
+>>> --- a/configs/am65x_evm_r5_defconfig
+>>> +++ b/configs/am65x_evm_r5_defconfig
+>>> @@ -98,6 +98,7 @@ CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+>>>   CONFIG_SYS_I2C_OMAP24XX=y
+>>>   CONFIG_DM_MAILBOX=y
+>>>   CONFIG_K3_SEC_PROXY=y
+>>> +CONFIG_FS_LOADER=y
+>>>   CONFIG_K3_AVS0=y
+>>>   CONFIG_SUPPORT_EMMC_BOOT=y
+>>>   CONFIG_MMC_HS200_SUPPORT=y
+>>> diff --git a/drivers/net/ti/icssg_prueth.c b/drivers/net/ti/icssg_prueth.c
+>>> index 40ad827e49..1c4edeb7b7 100644
+>>> --- a/drivers/net/ti/icssg_prueth.c
+>>> +++ b/drivers/net/ti/icssg_prueth.c
+>>> @@ -227,6 +227,10 @@ static int prueth_start(struct udevice *dev)
+>>>   	void *config;
+>>>   	int ret, i;
+>>>
+>>> +	ret = icssg_start_pru_cores(dev);
+>>> +	if (ret)
+>>> +		return ret;
+>>> +
+>>>   	/* To differentiate channels for SLICE0 vs SLICE1 */
+>>>   	snprintf(chn_name, sizeof(chn_name), "tx%d-0", priv->slice);
+>>>
+>>> @@ -355,9 +359,11 @@ static void prueth_stop(struct udevice *dev)
+>>>   	phy_shutdown(priv->phydev);
+>>>
+>>>   	dma_disable(&priv->dma_tx);
+>>> -	dma_free(&priv->dma_tx);
+>>> -
+>>>   	dma_disable(&priv->dma_rx);
+>>> +
+>>> +	icssg_stop_pru_cores(dev);
+>>> +
+>>> +	dma_free(&priv->dma_tx);
+>>>   	dma_free(&priv->dma_rx);
+>>>   }
+>>>
+>>> @@ -434,6 +440,181 @@ static const struct soc_attr k3_mdio_soc_data[] = {
+>>>   	{ /* sentinel */ },
+>>>   };
+>>>
+>>> +struct icssg_firmware_load_address {
+>>> +	u32 pru;
+>>> +	u32 rtu;
+>>> +	u32 txpru;
+>>> +};
+>>> +
+>>> +struct icssg_firmwares {
+>>> +	char *pru;
+>>> +	char *rtu;
+>>> +	char *txpru;
+>>> +};
+>>> +
+>>> +static struct icssg_firmwares icssg_emac_firmwares[] = {
+>>> +	{
+>>> +		.pru = "/lib/firmware/ti-pruss/am65x-sr2-pru0-prueth-fw.elf",
+>>> +		.rtu = "/lib/firmware/ti-pruss/am65x-sr2-rtu0-prueth-fw.elf",
+>>> +		.txpru = "/lib/firmware/ti-pruss/am65x-sr2-txpru0-prueth-fw.elf",
+>>> +	},
+>>> +	{
+>>> +		.pru = "/lib/firmware/ti-pruss/am65x-sr2-pru1-prueth-fw.elf",
+>>> +		.rtu = "/lib/firmware/ti-pruss/am65x-sr2-rtu1-prueth-fw.elf",
+>>> +		.txpru = "/lib/firmware/ti-pruss/am65x-sr2-txpru1-prueth-fw.elf",
+>>> +	}
+>>> +};
+>>
+>> This information is contained in the DT.
+>>
+>> 		firmware-name = "ti-pruss/am65x-sr2-pru0-prueth-fw.elf",
+>> 				"ti-pruss/am65x-sr2-rtu0-prueth-fw.elf",
+>> 				"ti-pruss/am65x-sr2-txpru0-prueth-fw.elf",
+>> 				"ti-pruss/am65x-sr2-pru1-prueth-fw.elf",
+>> 				"ti-pruss/am65x-sr2-rtu1-prueth-fw.elf",
+>> 				"ti-pruss/am65x-sr2-txpru1-prueth-fw.elf";
+>>
+> 
+> Yes it is. But the linux driver uses the firmware strcuture inside
+> driver only. The firmware-name property is not being used. The firmware
+> names for all applicable SoCs (AM65x and AM64x) is same so instead of
+> reading it from DT, the driver hardcodes the firmware names in linux. I
+> think the thought here was to use firmware-name property from DT when
+> different firmwares are needed for different SoCs. I am just following
+> the same here in uboot as well.
+> 
+>> You will need to introduce a rproc_set_firmware() API so clients can
+>> set their own firmware names.
+>>
+> 
+> Sure. I will add an element 'fw_name' in struct dm_rproc_uclass_pdata
+> and set this fw_name to the firmware name requested by client using
+> rproc_set_firmware().
+> 
+> The client drivers can call rproc_set_firmware(dev, firmware_name) to
+> set the firmware name.
+> 
+>>> +
+>>> +int load_firmware(char *name_fw, u32 *loadaddr)
+>>> +{
+>>> +	struct udevice *fsdev;
+>>> +	int size = 0;
+>>> +
+>>> +	if (!IS_ENABLED(CONFIG_FS_LOADER))
+>>> +		return -EINVAL;
+>>> +
+>>> +	if (!*loadaddr)
+>>> +		return -EINVAL;
+>>> +
+>>> +	if (!get_fs_loader(&fsdev))
+>>> +		size = request_firmware_into_buf(fsdev, name_fw, (void *)*loadaddr,
+>>> 40524, 0);
+>>> +
+>>> +	return size;
+>>> +}
+>>
+>> On Linux rproc_boot() does both loading the firmware and starting the rproc
+>> as that is farely generic.
+>> You should introduce rproc_boot() API so loading is taken care of at rproc driver.
+>> All you need to do is call rproc_set_firmware() before rproc_boot().
+>>
+> 
+> Sure. I'll introduce rproc_boot() which will load the firmware to a
+> buffer and then load the firmware / buffer to rproc core usinig rproc_load.
+> 
+> For allocating memory for reading firmware we need to provide the size
+> of memory required as well. So rproc_boot will take two arguments.
+> 1. dev (rproc device)
+> 2. size (Maximum memory required to read firmware)
+> 
+>>> +
+>>> +static int icssg_get_instance(struct udevice *dev)
+>>> +{
+>>> +	if (!strcmp(dev->name, "icssg2-eth"))
+>>> +		return 2;
+>>> +	else if (!strcmp(dev->name, "icssg1-eth"))
+>>> +		return 1;
+>>> +	else if (!strcmp(dev->name, "icssg0-eth"))
+>>> +		return 0;
+>>> +
+>>> +	dev_err(dev, "Invalid icssg instance\n");
+>>> +	return -EINVAL;
+>>> +}
+>>> +
+>>> +static int icssg_get_pru_core_number(struct udevice *dev, int slice)
+>>> +{
+>>> +	int instance, num_r5_cores;
+>>> +
+>>> +	instance = icssg_get_instance(dev);
+>>> +	if (instance < 0)
+>>> +		return instance;
+>>> +
+>>> +	if (IS_ENABLED(CONFIG_REMOTEPROC_TI_K3_R5F))
+>>> +		num_r5_cores = 2;
+>>> +
+>>> +	return num_r5_cores +
+>>> +	       instance * PRU_TYPE_MAX * PRUETH_NUM_MACS +
+>>> +	       slice * PRU_TYPE_MAX;
+>>
+>> All this doesn't look right. What we need is the rproc device
+>> that matches the PRU/RTU rprocs that we are interested in.
+>>
+>> The DT already has this information
+>>
+>> 		ti,prus = <&pru2_0>, <&rtu2_0>, <&tx_pru2_0>,
+>> 			<&pru2_1>, <&rtu2_1>, <&tx_pru2_1>;
+>>
+>>
+>> All the current rproc APIs use the below to get rproc device from ID
+>> ret = uclass_get_device_by_seq(UCLASS_REMOTEPROC, id, &dev);
+>>
+>> You just need to introduce APIs that takes rproc device directly as argument.
+>>
+>> In your driver you can call uclass_get_device_by_phandle_id() to get the
+>> rproc device from the rproc phandle?
+> 
+> Sure. I'll do that. Based on the icssg slice first I will get the
+> phandle for prus.
+> 
+> Index will be 0,1,2 for slice 0 and 3,4,5 for slice 1.
+> 
+> ofnode_read_u32_index(dev_ofnode(dev), "ti,prus", index, &phandle);
+> 
+> Then for each phandle I can call uclass_get_device_by_phandle_id() and
+> get the rproc device.
+> 
+>>
+>>
+>>> +}
+>>> +
+>>> +int icssg_start_pru_cores(struct udevice *dev)
+>>> +{
+>>> +	struct prueth *prueth = dev_get_priv(dev);
+>>> +	struct icssg_firmwares *firmwares;
+>>> +	u32 pru_fw_loadaddr = 0x80000000;
+>>> +	u32 rtu_fw_loadaddr = 0x89000000;
+>>> +	u32 txpru_fw_loadaddr = 0x90000000;
+>>
+>> Please avoid hardcoding. You can use malloc to get a temporary buffer area?
+>>
+>> Why do you need 3 different addresses?
+>> Once you do a rproc_load isn't the buffer already copied to rproc's memory
+>> so you can discard it or use it for the other rprocs?
+>>
+> 
+> Sure I'll use malloc to get temporary buffer. Only thing is that to get
+> temporary buffer I will need to provide size as well.
+> 
+> void *addr = malloc(fw_size);
+> 
+> User needs to provide this fw_size to rproc_boot(). In my case the max
+> size the firmware can have is 64KB so I will be passing 64K as size to
+> rproc driver.
+> 
+>>> +	int slice, ret, core_id;
+>>> +
+>>> +	firmwares = icssg_emac_firmwares;
+>>> +	slice = prueth->slice;
+>>> +
+>>> +	core_id = icssg_get_pru_core_number(dev, slice);
+>>> +	if (core_id < 0)
+>>> +		return core_id;
+>>> +
+>>> +	/* Initialize all rproc cores */
+>>> +	rproc_init();
+>>> +
+>>> +	/* Loading PRU firmware to PRU core */
+>>> +	ret = load_firmware(firmwares[slice].pru, &pru_fw_loadaddr);
+>>
+>> On Linux, loading the firmware is the responsibility of the rproc driver.
+>> Shouldn't it be the same in u-boot?
+>>
+> 
+> Sure I'll move this to rproc driver.
+> 
+>>> +
+>>> +	if (ret < 0) {
+>>> +		dev_err(dev, "Unable to load_firmware %s at addr 0x%x err %d\n",
+>>> +			firmwares[slice].pru, pru_fw_loadaddr, ret);
+>>> +		return ret;
+>>> +	}
+>>> +
+>>> +	dev_info(dev, "Loaded FW %s successfully at addr 0x%x Size = %d Bytes\n",
+>>> +		firmwares[slice].pru, pru_fw_loadaddr, ret);
+>>
+>> dev_dbg() here an at all dev_info().
+>>
+>>> +	rproc_load(core_id + PRU_TYPE_PRU, pru_fw_loadaddr, ret);
+>>> +
+>>> +	/* Loading RTU firmware to RTU core */
+>>> +	ret = load_firmware(firmwares[slice].rtu, &rtu_fw_loadaddr);
+>>> +
+>>> +	if (ret < 0) {
+>>> +		dev_err(dev, "Unable to load_firmware %s at addr 0x%x err %d\n",
+>>> +			firmwares[slice].rtu, rtu_fw_loadaddr, ret);
+>>> +		return ret;
+>>> +	}
+>>> +
+>>> +	dev_info(dev, "Loaded FW %s successfully at addr 0x%x Size = %d Bytes\n",
+>>> +		firmwares[slice].rtu, rtu_fw_loadaddr, ret);
+>>> +	rproc_load(core_id + PRU_TYPE_RTU, rtu_fw_loadaddr, ret);
+>>> +
+>>> +	/* Loading TX_PRU firmware to TX_PRU core */
+>>> +	ret = load_firmware(firmwares[slice].txpru, &txpru_fw_loadaddr);
+>>> +
+>>> +	if (ret < 0) {
+>>> +		dev_err(dev, "Unable to load_firmware %s at addr 0x%x err %d\n",
+>>> +			firmwares[slice].txpru, txpru_fw_loadaddr, ret);
+>>> +		return ret;
+>>> +	}
+>>> +
+>>> +	dev_info(dev, "Loaded FW %s successfully at addr 0x%x Size = %d Bytes\n",
+>>> +		firmwares[slice].txpru, txpru_fw_loadaddr, ret);
+>>> +	rproc_load(core_id + PRU_TYPE_TX_PRU, txpru_fw_loadaddr, ret);
+>>> +
+>>> +	ret = rproc_start(core_id + PRU_TYPE_PRU);
+>>> +	if (ret) {
+>>> +		dev_err(dev, "failed to start PRU%d: %d\n", slice, ret);
+>>> +		return ret;
+>>> +	}
+>>> +
+>>> +	ret = rproc_start(core_id + PRU_TYPE_RTU);
+>>> +	if (ret) {
+>>> +		dev_err(dev, "failed to start RTU%d: %d\n", slice, ret);
+>>> +		goto halt_pru;
+>>> +	}
+>>> +
+>>> +	ret = rproc_start(core_id + PRU_TYPE_TX_PRU);
+>>> +	if (ret) {
+>>> +		dev_err(dev, "failed to start TX_PRU%d: %d\n", slice, ret);
+>>> +		goto halt_rtu;
+>>> +	}
+>>> +
+>>> +	return 0;
+>>> +
+>>> +halt_rtu:
+>>> +	rproc_stop(core_id + PRU_TYPE_RTU);
+>>> +
+>>> +halt_pru:
+>>> +	rproc_stop(PRU_TYPE_PRU);
+>>> +	return ret;
+>>> +}
+>>> +
+>>> +int icssg_stop_pru_cores(struct udevice *dev)
+>>> +{
+>>> +	struct prueth *prueth = dev_get_priv(dev);
+>>> +	int slice, core_id;
+>>> +
+>>> +	slice = prueth->slice;
+>>> +
+>>> +	core_id = icssg_get_pru_core_number(dev, slice);
+>>> +	if (core_id < 0)
+>>> +		return core_id;
+>>> +
+>>> +	rproc_stop(core_id + PRU_TYPE_PRU);
+>>> +	rproc_stop(core_id + PRU_TYPE_RTU);
+>>> +	rproc_stop(core_id + PRU_TYPE_TX_PRU);
+>>> +
+>>> +	return 0;
+>>> +}
+>>> +
+>>>   static int prueth_probe(struct udevice *dev)
+>>>   {
+>>>   	ofnode eth_ports_node, eth0_node, eth1_node, eth_node;
+>>> diff --git a/include/linux/pruss_driver.h b/include/linux/pruss_driver.h
+>>> index 25272e850e..f17fe8bf58 100644
+>>> --- a/include/linux/pruss_driver.h
+>>> +++ b/include/linux/pruss_driver.h
+>>> @@ -114,6 +114,21 @@ enum pru_ctable_idx {
+>>>   	PRU_C31,
+>>>   };
+>>>
+>>> +/**
+>>> + * enum pru_type - PRU core type identifier
+>>> + *
+>>> + * @PRU_TYPE_PRU: Programmable Real-time Unit
+>>> + * @PRU_TYPE_RTU: Auxiliary Programmable Real-Time Unit
+>>> + * @PRU_TYPE_TX_PRU: Transmit Programmable Real-Time Unit
+>>> + * @PRU_TYPE_MAX: just keep this one at the end
+>>> + */
+>>> +enum pru_type {
+>>> +	PRU_TYPE_PRU,
+>>> +	PRU_TYPE_RTU,
+>>> +	PRU_TYPE_TX_PRU,
+>>> +	PRU_TYPE_MAX,
+>>> +};
+>>> +
+>>>   /**
+>>>    * enum pruss_mem - PRUSS memory range identifiers
+>>>    */
+>>>
+>>> with this diff, user don't need to run any extra commands at u-boot.
+>>> Once u-boot prompt is reached, just running ping / dhcp will suffice.
+>>>
+>> Great!
+>>
+>> <snip>
+>>
+> 
+> I have addressed all the above comments and made the changes needed.
+> below is the diff. Please have a look at it and let me know if it looks OK.
+> 
+> diff --git a/arch/arm/dts/k3-am654-base-board-u-boot.dtsi
+> b/arch/arm/dts/k3-am654-base-board-u-boot.dtsi
+> index 11d83927ac..0b2b72b2c5 100644
+> --- a/arch/arm/dts/k3-am654-base-board-u-boot.dtsi
+> +++ b/arch/arm/dts/k3-am654-base-board-u-boot.dtsi
+> @@ -6,6 +6,18 @@
+>   #include "k3-am654-r5-base-board-u-boot.dtsi"
+>   #include "k3-am65x-binman.dtsi"
+> 
+> +/ {
+> +	chosen {
+> +		firmware-loader = <&fs_loader0>;
+> +	};
+> +
+> +	fs_loader0: fs-loader {
+> +		bootph-all;
+> +		compatible = "u-boot,fs-loader";
+> +		phandlepart = <&sdhci1 2>;
+> +	};
+> +};
+> +
+>   &pru0_0 {
+>   	remoteproc-name = "pru0_0";
+>   };
+> diff --git a/configs/am65x_evm_a53_defconfig
+> b/configs/am65x_evm_a53_defconfig
+> index 2755d7082f..c53e938abb 100644
+> --- a/configs/am65x_evm_a53_defconfig
+> +++ b/configs/am65x_evm_a53_defconfig
+> @@ -112,6 +112,7 @@ CONFIG_DM_I2C_GPIO=y
+>   CONFIG_SYS_I2C_OMAP24XX=y
+>   CONFIG_DM_MAILBOX=y
+>   CONFIG_K3_SEC_PROXY=y
+> +CONFIG_FS_LOADER=y
+>   CONFIG_SUPPORT_EMMC_BOOT=y
+>   CONFIG_MMC_IO_VOLTAGE=y
+>   CONFIG_MMC_UHS_SUPPORT=y
+> diff --git a/configs/am65x_evm_r5_defconfig b/configs/am65x_evm_r5_defconfig
+> index b2f1e721b3..2d19935a41 100644
+> --- a/configs/am65x_evm_r5_defconfig
+> +++ b/configs/am65x_evm_r5_defconfig
+> @@ -98,6 +98,7 @@ CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+>   CONFIG_SYS_I2C_OMAP24XX=y
+>   CONFIG_DM_MAILBOX=y
+>   CONFIG_K3_SEC_PROXY=y
+> +CONFIG_FS_LOADER=y
+>   CONFIG_K3_AVS0=y
+>   CONFIG_SUPPORT_EMMC_BOOT=y
+>   CONFIG_MMC_HS200_SUPPORT=y
+> diff --git a/drivers/net/ti/icssg_prueth.c b/drivers/net/ti/icssg_prueth.c
+> index 40ad827e49..a2e3595956 100644
+> --- a/drivers/net/ti/icssg_prueth.c
+> +++ b/drivers/net/ti/icssg_prueth.c
+> @@ -62,6 +62,9 @@
+>   /* Management packet type */
+>   #define PRUETH_PKT_TYPE_CMD		0x10
+> 
+> +/* Number of PRU Cores per Slice */
+> +#define ICSSG_NUM_PRU_CORES		3
+> +
+>   static int icssg_phy_init(struct udevice *dev)
+>   {
+>   	struct prueth *priv = dev_get_priv(dev);
+> @@ -218,6 +221,116 @@ static int icssg_update_link(struct prueth *priv)
+>   	return phy->link;
+>   }
+> 
+> +struct icssg_firmwares {
+> +	char *pru;
+> +	char *rtu;
+> +	char *txpru;
+> +};
+> +
+> +static struct icssg_firmwares icssg_emac_firmwares[] = {
+> +	{
+> +		.pru = "/lib/firmware/ti-pruss/am65x-sr2-pru0-prueth-fw.elf",
+> +		.rtu = "/lib/firmware/ti-pruss/am65x-sr2-rtu0-prueth-fw.elf",
+> +		.txpru = "/lib/firmware/ti-pruss/am65x-sr2-txpru0-prueth-fw.elf",
+> +	},
+> +	{
+> +		.pru = "/lib/firmware/ti-pruss/am65x-sr2-pru1-prueth-fw.elf",
+> +		.rtu = "/lib/firmware/ti-pruss/am65x-sr2-rtu1-prueth-fw.elf",
+> +		.txpru = "/lib/firmware/ti-pruss/am65x-sr2-txpru1-prueth-fw.elf",
+> +	}
+> +};
+> +
+> +static int icssg_start_pru_cores(struct udevice *dev)
+> +{
+> +	struct prueth *prueth = dev_get_priv(dev);
+> +	struct icssg_firmwares *firmwares;
+> +	struct udevice *rproc_dev = NULL;
+> +	int ret, slice;
+> +	u32 phandle;
+> +	u8 index;
+> +
+> +	slice = prueth->slice;
+> +	index = slice * ICSSG_NUM_PRU_CORES;
+> +	firmwares = icssg_emac_firmwares;
+> +
+> +	ofnode_read_u32_index(dev_ofnode(dev), "ti,prus", index, &phandle);
+> +	ret = uclass_get_device_by_phandle_id(UCLASS_REMOTEPROC, phandle,
+> &rproc_dev);
+> +	if (ret) {
+> +		dev_err(dev, "Unknown remote processor with phandle '0x%x'
+> requested(%d)\n",
+> +		       phandle, ret);
+> +		return ret;
+> +	}
+> +
+> +	prueth->pru_core_id = dev_seq(rproc_dev);
+> +	ret = rproc_set_firmware(rproc_dev, firmwares[slice].pru);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = rproc_boot(rproc_dev, SZ_64K);
+> +	if (ret) {
+> +		dev_err(dev, "failed to boot PRU%d: %d\n", slice, ret);
+> +		return -EINVAL;
+> +	}
+> +
+> +	ofnode_read_u32_index(dev_ofnode(dev), "ti,prus", index + 1, &phandle);
+> +	ret = uclass_get_device_by_phandle_id(UCLASS_REMOTEPROC, phandle,
+> &rproc_dev);
+> +	if (ret) {
+> +		dev_err(dev, "Unknown remote processor with phandle '0x%x'
+> requested(%d)\n",
+> +		       phandle, ret);
+> +		goto halt_pru;
+> +	}
+> +
+> +	prueth->rtu_core_id = dev_seq(rproc_dev);
+> +	ret = rproc_set_firmware(rproc_dev, firmwares[slice].rtu);
+> +	if (ret)
+> +		goto halt_pru;
+> +
+> +	ret = rproc_boot(rproc_dev, SZ_64K);
+> +	if (ret) {
+> +		dev_err(dev, "failed to boot RTU%d: %d\n", slice, ret);
+> +		goto halt_pru;
+> +	}
+> +
+> +	ofnode_read_u32_index(dev_ofnode(dev), "ti,prus", index + 2, &phandle);
+> +	ret = uclass_get_device_by_phandle_id(UCLASS_REMOTEPROC, phandle,
+> &rproc_dev);
+> +	if (ret) {
+> +		dev_err(dev, "Unknown remote processor with phandle '0x%x'
+> requested(%d)\n",
+> +		       phandle, ret);
+> +		goto halt_rtu;
+> +	}
+> +
+> +	prueth->txpru_core_id = dev_seq(rproc_dev);
+> +	ret = rproc_set_firmware(rproc_dev, firmwares[slice].txpru);
+> +	if (ret)
+> +		goto halt_rtu;
+> +
+> +	ret = rproc_boot(rproc_dev, SZ_64K);
+> +	if (ret) {
+> +		dev_err(dev, "failed to boot TXPRU%d: %d\n", slice, ret);
+> +		goto halt_rtu;
+> +	}
+> +
+> +	return 0;
+> +
+> +halt_rtu:
+> +	rproc_stop(prueth->rtu_core_id);
+> +
+> +halt_pru:
+> +	rproc_stop(prueth->pru_core_id);
+> +	return ret;
+> +}
+> +
+> +static int icssg_stop_pru_cores(struct udevice *dev)
+> +{
+> +	struct prueth *prueth = dev_get_priv(dev);
+> +
+> +	rproc_stop(prueth->pru_core_id);
+> +	rproc_stop(prueth->rtu_core_id);
+> +	rproc_stop(prueth->txpru_core_id);
+> +
+> +	return 0;
+> +}
+> +
+>   static int prueth_start(struct udevice *dev)
+>   {
+>   	struct ti_udma_drv_chan_cfg_data *dma_rx_cfg_data;
+> @@ -227,6 +340,10 @@ static int prueth_start(struct udevice *dev)
+>   	void *config;
+>   	int ret, i;
+> 
+> +	ret = icssg_start_pru_cores(dev);
+> +	if (ret)
+> +		return ret;
+> +
+>   	/* To differentiate channels for SLICE0 vs SLICE1 */
+>   	snprintf(chn_name, sizeof(chn_name), "tx%d-0", priv->slice);
+> 
+> @@ -355,9 +472,11 @@ static void prueth_stop(struct udevice *dev)
+>   	phy_shutdown(priv->phydev);
+> 
+>   	dma_disable(&priv->dma_tx);
+> -	dma_free(&priv->dma_tx);
+> -
+>   	dma_disable(&priv->dma_rx);
+> +
+> +	icssg_stop_pru_cores(dev);
+> +
+> +	dma_free(&priv->dma_tx);
+>   	dma_free(&priv->dma_rx);
+>   }
+> 
+> diff --git a/drivers/net/ti/icssg_prueth.h b/drivers/net/ti/icssg_prueth.h
+> index e41ed16a05..c92660401b 100644
+> --- a/drivers/net/ti/icssg_prueth.h
+> +++ b/drivers/net/ti/icssg_prueth.h
+> @@ -69,6 +69,9 @@ struct prueth {
+>   	int			speed;
+>   	int			duplex;
+>   	u8			icssg_hwcmdseq;
+> +	u8 			pru_core_id;
+> +	u8 			rtu_core_id;
+> +	u8 			txpru_core_id;
+>   };
+> 
+>   /* config helpers */
+> diff --git a/drivers/remoteproc/rproc-uclass.c
+> b/drivers/remoteproc/rproc-uclass.c
+> index 28b362c887..a085c44eaa 100644
+> --- a/drivers/remoteproc/rproc-uclass.c
+> +++ b/drivers/remoteproc/rproc-uclass.c
+> @@ -13,6 +13,7 @@
+>   #include <log.h>
+>   #include <malloc.h>
+>   #include <virtio_ring.h>
+> +#include <fs_loader.h>
+>   #include <remoteproc.h>
+>   #include <asm/io.h>
+>   #include <dm/device-internal.h>
+> @@ -961,3 +962,90 @@ unsigned long rproc_parse_resource_table(struct
+> udevice *dev, struct rproc *cfg)
+> 
+>   	return 1;
+>   }
+> +
+> +int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name)
+> +{
+> +	struct dm_rproc_uclass_pdata *uc_pdata;
+> +	int len;
+> +	char *p;
+> +
+> +	if (!rproc_dev || !fw_name)
+> +		return -EINVAL;
+> +
+> +	uc_pdata = dev_get_uclass_plat(rproc_dev);
+> +
+> +	len = strcspn(fw_name, "\n");
+> +	if (!len) {
+> +		debug("can't provide empty string for firmware name\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	p = strndup(fw_name, len);
+> +	if (!p)
+> +		return -ENOMEM;
+> +
+> +	uc_pdata->fw_name = p;
+> +
+> +	return 0;
+> +}
+> +
+> +int rproc_boot(struct udevice *rproc_dev, size_t fw_size)
+> +{
+> +	struct dm_rproc_uclass_pdata *uc_pdata;
+> +	struct udevice *fs_loader;
+> +	void *addr = malloc(fw_size);
+> +	int core_id, ret = 0;
+> +	char *firmware;
+> +	ulong rproc_addr;
+> +
+> +	if (!rproc_dev)
+> +		return -EINVAL;
+> +
+> +	if (!addr)
+> +		return -ENOMEM;
+> +
+> +	uc_pdata = dev_get_uclass_plat(rproc_dev);
+> +	core_id = dev_seq(rproc_dev);
+> +	firmware = uc_pdata->fw_name;
+> +
+> +	if (!firmware) {
+> +		debug("No firmware set for rproc core %d\n", core_id);
+> +		return -EINVAL;
+> +	}
+> +
+> +	/* Initialize all rproc cores */
+> +	rproc_init();
+> +
+> +	/* Loading firmware to a given address */
+> +	ret = get_fs_loader(&fs_loader);
+> +	if (ret) {
+> +		debug("could not get fs loader: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	ret = request_firmware_into_buf(fs_loader, firmware, addr, fw_size, 0);
+> +	if (ret < 0) {
+> +		debug("could not request %s: %d\n", firmware, ret);
+> +		return ret;
+> +	}
+> +
+> +	rproc_addr = (ulong)addr;
+> +
+> +	debug("Loaded %s to 0x%08lX size = %d Bytes\n",
+> +		uc_pdata->fw_name, rproc_addr, ret);
+> +
+> +	ret = rproc_load(core_id, rproc_addr, ret);
+> +	if (ret) {
+> +		debug("failed to load %s to rproc core %d from addr 0x%08lX err %d\n",
+> +		       uc_pdata->fw_name, core_id, rproc_addr, ret);
+> +		return ret;
+> +	}
+> +
+> +	ret = rproc_start(core_id);
+> +	if (ret) {
+> +		debug("failed to start rproc core %d\n", core_id);
+> +		return ret;
+> +	}
+> +
+> +	return ret;
+> +}
+> diff --git a/include/remoteproc.h b/include/remoteproc.h
+> index a11dc8a9b6..65b0ff7477 100644
+> --- a/include/remoteproc.h
+> +++ b/include/remoteproc.h
+> @@ -402,6 +402,7 @@ enum rproc_mem_type {
+>    * @name: Platform-specific way of naming the Remote proc
+>    * @mem_type: one of 'enum rproc_mem_type'
+>    * @driver_plat_data: driver specific platform data that may be needed.
+> + * @fw_name: firmware name
+>    *
+>    * This can be accessed with dev_get_uclass_plat() for any
+> UCLASS_REMOTEPROC
+>    * device.
+> @@ -411,6 +412,7 @@ struct dm_rproc_uclass_pdata {
+>   	const char *name;
+>   	enum rproc_mem_type mem_type;
+>   	void *driver_plat_data;
+> +	char *fw_name;
+>   };
+> 
+>   /**
+> @@ -704,6 +706,35 @@ unsigned long rproc_parse_resource_table(struct
+> udevice *dev,
+>   struct resource_table *rproc_find_resource_table(struct udevice *dev,
+>   						 unsigned int addr,
+>   						 int *tablesz);
+> +/**
+> + * rproc_set_firmware() - assign a new firmware
+> + * @rproc_dev: device for wich new firmware is being assigned
+> + * @fw_name: new firmware name to be assigned
+> + *
+> + * This function allows remoteproc drivers or clients to configure a custom
+> + * firmware name. The function does not trigger a remote processor boot,
+> + * only sets the firmware name used for a subsequent boot.
+> + *
+> + * This function sets the fw_name field in uclass pdata of the Remote proc
+> + *
+> + * Return: 0 on success or a negative value upon failure
+> + */
+> +int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name);
+> +
+> +/**
+> + * rproc_boot() - boot a remote processor
+> + * @rproc_dev: rproc device to boot
+> + * @fw_size: Size of the memory to allocate for firmeware
+> + *
+> + * Boot a remote processor (i.e. load its firmware, power it on, ...).
+> + *
+> + * This function first loads the firmware set in the uclass pdata of Remote
+> + * processor to a buffer and then loads firmware to the remote processor
+> + * using rproc_load().
+> + *
+> + * Return: 0 on success, and an appropriate error value otherwise
+> + */
+> +int rproc_boot(struct udevice *rproc_dev, size_t fw_size);
+>   #else
+>   static inline int rproc_init(void) { return -ENOSYS; }
+>   static inline int rproc_dev_init(int id) { return -ENOSYS; }
+> @@ -743,6 +774,10 @@ static inline int rproc_elf_load_rsc_table(struct
+> udevice *dev, ulong fw_addr,
+>   					   ulong fw_size, ulong *rsc_addr,
+>   					   ulong *rsc_size)
+>   { return -ENOSYS; }
+> +static inline int rproc_set_firmware(struct udevice *rproc_dev, const
+> char *fw_name)
+> +{ return -ENOSYS; }
+> +static inline int rproc_boot(struct udevice *rproc_dev, size_t fw_size)
+> +{ return -ENOSYS; }
+>   #endif
+> 
+>   #endif	/* _RPROC_H_ */
+> 
+> 
