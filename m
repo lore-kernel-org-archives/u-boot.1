@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B45A6C47073
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 18:51:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34D6FC4707B
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 18:51:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DED887962;
-	Tue,  2 Jan 2024 19:51:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AC6AE87967;
+	Tue,  2 Jan 2024 19:51:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Cy2tp57T";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pnoD8BZB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4C6B8793C; Tue,  2 Jan 2024 19:51:25 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 2EAD187968; Tue,  2 Jan 2024 19:51:37 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B69B687964
- for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 19:51:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 27B1D8793C
+ for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 19:51:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 402IpJfV019535;
- Tue, 2 Jan 2024 12:51:19 -0600
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 402IpVAV072763;
+ Tue, 2 Jan 2024 12:51:31 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704221479;
- bh=8/z/ew0B0sbAihzzzxD/hu2VY5+GACXgr6Cv45N6IUw=;
+ s=ti-com-17Q1; t=1704221491;
+ bh=NTl9FlRVa+GoHLlmrsmT2vfliur0JQ3vahLfIrkwlfY=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=Cy2tp57T18DsaeiMX522jbIABbpWEPecZD4zYc/P1apwakmeYJR3CN9lVw7bHBMlC
- FKlrsHYScLK2qCvWAXlJx6lvTApZ9tlvmEImY1WrF05URsAozrl0yoJLLL1T6Je+O9
- g5Vy7tlf23LSjn3jooAwGWzZBsRaP0J8l4VnXo4s=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 402IpJrD090824
+ b=pnoD8BZBCmwkRCmwGeRs0YGMjB1Q0RhSlFxiJZTXVH4DF0SbwAzX+O8RloRpRYHxC
+ IkpkqDUU9TJAFlTNW0OpWKmHBEx9BU9ud+h6Pf4p9Z8eoXmil4w70ZQpdsiLumzk61
+ Cm1LX+Z+dWbktvG9bED+tM1mQJBZ2LQIkePeKucQ=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 402IpVfP019677
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 2 Jan 2024 12:51:19 -0600
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 2 Jan 2024 12:51:31 -0600
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 2
- Jan 2024 12:51:19 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 12:51:30 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 2 Jan 2024 12:51:19 -0600
+ Frontend Transport; Tue, 2 Jan 2024 12:51:30 -0600
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 402IpJOA030851;
- Tue, 2 Jan 2024 12:51:19 -0600
-Date: Tue, 2 Jan 2024 12:51:19 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 402IpUM8119950;
+ Tue, 2 Jan 2024 12:51:30 -0600
+Date: Tue, 2 Jan 2024 12:51:30 -0600
 From: Nishanth Menon <nm@ti.com>
 To: Bryan Brattlof <bb@ti.com>
 CC: Tom Rini <trini@konsulko.com>, UBoot Mailing List <u-boot@lists.denx.de>, 
@@ -59,15 +59,14 @@ CC: Tom Rini <trini@konsulko.com>, UBoot Mailing List <u-boot@lists.denx.de>,
  Welch <martyn.welch@collabora.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Simon Glass
  <sjg@chromium.org>, Jan Kiszka <jan.kiszka@siemens.com>
-Subject: Re: [PATCH v2 13/26] arm: dts: k3-am654: remove duplicate mcu_uart0
- node
-Message-ID: <20240102185119.xofry7qiswoeatqj@stencil>
+Subject: Re: [PATCH v2 14/26] arm: dts: k3-am654: remove duplicate main_uart0
+Message-ID: <20240102185130.bfxiduks5oskbywz@salary>
 References: <20231229174656.634065-28-bb@ti.com>
- <20231229174656.634065-41-bb@ti.com>
+ <20231229174656.634065-42-bb@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20231229174656.634065-41-bb@ti.com>
+In-Reply-To: <20231229174656.634065-42-bb@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,8 +85,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 11:47-20231229, Bryan Brattlof wrote:
-> With the Linux and U-Boot board dtb files unified we now have a
-> duplicate mcu_uart0 node. Remove it
+> With the Linux and U-Boot board dtb files unified, we now have a
+> duplicate main_uart0 node. Remove it
 > 
 > Tested-by: Tom Rini <trini@konsulko.com>
 > Signed-off-by: Bryan Brattlof <bb@ti.com>
