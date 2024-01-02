@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03418C47073
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 18:52:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91E03C46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 18:53:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70D0387994;
-	Tue,  2 Jan 2024 19:52:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C096787990;
+	Tue,  2 Jan 2024 19:53:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="aeSh7XQc";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PXs+PLO4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 299EE87990; Tue,  2 Jan 2024 19:52:47 +0100 (CET)
+ id 1191D879A1; Tue,  2 Jan 2024 19:53:00 +0100 (CET)
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 737E98799B
- for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 19:52:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F70C8799C
+ for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 19:52:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 402Iqebb019698;
- Tue, 2 Jan 2024 12:52:40 -0600
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 402Iqrjx019737;
+ Tue, 2 Jan 2024 12:52:53 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704221560;
- bh=A4fhSeVIZMAAiUo2U+NmvjmsY285iLOo2BB2iGDA+YQ=;
+ s=ti-com-17Q1; t=1704221573;
+ bh=eylSczoU5IENAsFmK728MHrFs04IOv/N9zfNl0wPncY=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=aeSh7XQcmjW42WoZBLelf8zOS2Ov+zEpjYIxAubZdNJMax7Fj0Y/o3g/VXFtw9ylW
- QCzLdgCdpBR4l4/spg7E2kdgg8qOc6Lj657mmt4mBmrBxob/nTfM4h2s87z8kDVUc1
- aOXDp+pKPLHaexDI0GBgV7vhHiqBu+C6pe8S1hy4=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 402IqeEg111005
+ b=PXs+PLO4wrgT5fEhq5alKWHZQKEe3LwZl+AJv5knp8o19yFDG+OB4tkWU48nxJKw+
+ N6o5E9Pxm4L/GUDY7ZgrxRmqHCOGBX7k2tCynHtyO0Nhv6/sWyRnelNWrSKTsZpCz2
+ uEg5kmqXtV7W5fTdnZiE1JJ+qId6RuYlPCcdVvPI=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 402IqrIb025600
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 2 Jan 2024 12:52:40 -0600
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 2 Jan 2024 12:52:53 -0600
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 2
- Jan 2024 12:52:40 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 12:52:53 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 2 Jan 2024 12:52:40 -0600
+ Frontend Transport; Tue, 2 Jan 2024 12:52:53 -0600
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 402Iqe0D121029;
- Tue, 2 Jan 2024 12:52:40 -0600
-Date: Tue, 2 Jan 2024 12:52:40 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 402IqrtO121217;
+ Tue, 2 Jan 2024 12:52:53 -0600
+Date: Tue, 2 Jan 2024 12:52:53 -0600
 From: Nishanth Menon <nm@ti.com>
 To: Bryan Brattlof <bb@ti.com>
 CC: Tom Rini <trini@konsulko.com>, UBoot Mailing List <u-boot@lists.denx.de>, 
@@ -59,14 +59,14 @@ CC: Tom Rini <trini@konsulko.com>, UBoot Mailing List <u-boot@lists.denx.de>,
  Welch <martyn.welch@collabora.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Simon Glass
  <sjg@chromium.org>, Jan Kiszka <jan.kiszka@siemens.com>
-Subject: Re: [PATCH v2 20/26] arm: dts: k3-am654: remove duplicate mdio
-Message-ID: <20240102185240.o6okr2iz524edgni@delicate>
+Subject: Re: [PATCH v2 21/26] arm: dts: k3-am654: remove duplicate vtt pinmux
+Message-ID: <20240102185253.vez37oowjqv4mssf@enforcer>
 References: <20231229174656.634065-28-bb@ti.com>
- <20231229174656.634065-48-bb@ti.com>
+ <20231229174656.634065-49-bb@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20231229174656.634065-48-bb@ti.com>
+In-Reply-To: <20231229174656.634065-49-bb@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,10 +86,11 @@ X-Virus-Status: Clean
 
 On 11:47-20231229, Bryan Brattlof wrote:
 > With the Linux and U-Boot board dtb files unified, we now have a
-> duplicate mdio node. Remove it
+> duplicate vtt_pinmux node. Remove it
 > 
 > Tested-by: Tom Rini <trini@konsulko.com>
 > Signed-off-by: Bryan Brattlof <bb@ti.com>
+> ---
 [...]
 Reviewed-by: Nishanth Menon <nm@ti.com>
 -- 
