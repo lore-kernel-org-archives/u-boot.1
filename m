@@ -4,60 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10D00C4706F
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 00:58:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9DF7C4706F
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 01:00:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 767BD878C9;
-	Tue,  2 Jan 2024 01:58:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 36E8886EA6;
+	Tue,  2 Jan 2024 02:00:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="YBvOi8VP";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="j5TcYoHD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DED6878DD; Tue,  2 Jan 2024 01:58:06 +0100 (CET)
-Received: from mail-m25467.xmail.ntesmail.com (mail-m25467.xmail.ntesmail.com
- [103.129.254.67])
+ id CB8F8876C0; Tue,  2 Jan 2024 02:00:49 +0100 (CET)
+Received: from mail-m17208.xmail.ntesmail.com (mail-m17208.xmail.ntesmail.com
+ [45.195.17.208])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2EEB86FD5
- for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 01:58:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 608BE86C72
+ for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 02:00:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=YBvOi8VPP+4AghlFI6iBacj4fSKJY7iXbV7MuxWZCrCuDznCVZGksW7/49GXxpH9VW4zuc4QH30bIYdswlqQ7gb10YH94an0Yh8urqpF2Hqtarb3zH+BKIKDpg2yFn751+S7KgDtzELnagzX6sawHPdVR0TSNPQKD4d6TDXMe58=;
+ b=j5TcYoHDCRxj/ChgMxCT0cawaVdwPa2J3FDKt/RcMRg7uu20epaL5UCX8bgqJumTxmTknSofV7hqbwwkRUWgZxy9QatfRwzlNkTUzl+ZsbzmDIaE/0grfgcRmHULPoG+y4tDMIOX9/2kt6WMPZm7VdddkR/z0tadyZdjVLzsRNU=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=35qYD2EqogGa7S7kUVome9lFz8pobLpRb5Wml8MxAxU=;
+ bh=vuY5blBNftKjqQGHgHESygM7OLchiGZhfbE5P6adOPU=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 0EC0240019C;
- Tue,  2 Jan 2024 08:57:52 +0800 (CST)
-Message-ID: <eb40c776-1b4f-46d1-bf9a-015399dccbd4@rock-chips.com>
-Date: Tue, 2 Jan 2024 08:57:52 +0800
+ by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 214754001B1;
+ Tue,  2 Jan 2024 09:00:35 +0800 (CST)
+Message-ID: <a4fc159c-7119-4656-a820-7e1e216b3564@rock-chips.com>
+Date: Tue, 2 Jan 2024 09:00:35 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] rockchip: rk35xx: expand space for decompressed kernel
+Subject: Re: [PATCH] board: rockchip: Add support for FriendlyARM NanoPi R2C
+ Plus
 Content-Language: en-US
-To: Hugh Cole-Baker <sigmaris@gmail.com>, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Jonas Karlman <jonas@kwiboo.se>,
- John Clark <inindev@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20231226164330.63725-1-sigmaris@gmail.com>
+To: Tianling Shen <cnsztl@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Jonas Karlman <jonas@kwiboo.se>,
+ Jagan Teki <jagan@edgeble.ai>
+Cc: u-boot@lists.denx.de
+References: <20231223040007.72997-1-cnsztl@gmail.com>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20231226164330.63725-1-sigmaris@gmail.com>
+In-Reply-To: <20231223040007.72997-1-cnsztl@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGR1MTFYYHk5OHxoaTUlOHxpVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQklJSFYZHkIdTxlPSB9CH0NVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8cc7ad4b9b2eb3kusn0ec0240019c
+X-HM-Tid: 0a8cc7afc83b2eb3kusn214754001b1
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pgg6Nzo5DTw9EUo5DTJMOSoT
- FBBPCxZVSlVKTEtPSk5MS0xJQ0tLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFIQkJJNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PT46Txw*Fzw9CUoRKypKEA4y
+ QygwFEJVSlVKTEtPSk5MSUhOQ01DVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFDTkpINwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,74 +75,234 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tianling,
 
-On 2023/12/27 00:43, Hugh Cole-Baker wrote:
-> An uncompressed 6.7.0-rc1 Linux kernel Image built with the arm64
-> defconfig is about 40MB. This does not fit in to the space between
-> kernel_comp_addr_r and fdt_addr_r, so when uncompressing an Image.gz
-> to this size, the FDT will be overwritten. Rearrange addresses to have
-> 128MiB for the kernel and its decompression buffer, then devicetree,
-> overlay and ramdisk at the end.
+On 2023/12/23 12:00, Tianling Shen wrote:
+> The NanoPi R2C Plus is a small variant of NanoPi R2C with a on-board
+> eMMC flash (8G) included.
 >
-> Signed-off-by: Hugh Cole-Baker <sigmaris@gmail.com>
+> The device tree is taken from the kernel v6.5.
+>
+> Signed-off-by: Tianling Shen <cnsztl@gmail.com>
+> ---
+>   arch/arm/dts/Makefile                         |   1 +
+>   .../dts/rk3328-nanopi-r2c-plus-u-boot.dtsi    |   9 ++
+>   arch/arm/dts/rk3328-nanopi-r2c-plus.dts       |  33 +++++
+>   board/rockchip/evb_rk3328/MAINTAINERS         |   6 +
+>   configs/nanopi-r2c-plus-rk3328_defconfig      | 114 ++++++++++++++++++
+>   5 files changed, 163 insertions(+)
+>   create mode 100644 arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi
+>   create mode 100644 arch/arm/dts/rk3328-nanopi-r2c-plus.dts
+>   create mode 100644 configs/nanopi-r2c-plus-rk3328_defconfig
+>
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index 9d28a485bec..6909f95e084 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -126,6 +126,7 @@ dtb-$(CONFIG_ROCKCHIP_RK3308) += \
+>   dtb-$(CONFIG_ROCKCHIP_RK3328) += \
+>   	rk3328-evb.dtb \
+>   	rk3328-nanopi-r2c.dtb \
+> +	rk3328-nanopi-r2c-plus.dtb \
+>   	rk3328-nanopi-r2s.dtb \
+>   	rk3328-orangepi-r1-plus.dtb \
+>   	rk3328-orangepi-r1-plus-lts.dtb \
+> diff --git a/arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi b/arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..f8adb9e5e1f
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi
+> @@ -0,0 +1,9 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +
+> +#include "rk3328-nanopi-r2c-u-boot.dtsi"
+> +
+> +/ {
+> +	chosen {
+> +		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &emmc;
+> +	};
+> +};
+> diff --git a/arch/arm/dts/rk3328-nanopi-r2c-plus.dts b/arch/arm/dts/rk3328-nanopi-r2c-plus.dts
+> new file mode 100644
+> index 00000000000..16a1958e457
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3328-nanopi-r2c-plus.dts
+> @@ -0,0 +1,33 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+> +/*
+> + * Copyright (c) 2021 FriendlyElec Computer Tech. Co., Ltd.
+> + * (http://www.friendlyarm.com)
+> + *
+> + * Copyright (c) 2023 Tianling Shen <cnsztl@gmail.com>
+> + */
+> +
+> +/dts-v1/;
+> +#include "rk3328-nanopi-r2c.dts"
+> +
+> +/ {
+> +	model = "FriendlyElec NanoPi R2C Plus";
+> +	compatible = "friendlyarm,nanopi-r2c-plus", "rockchip,rk3328";
+> +
+> +	aliases {
+> +		mmc1 = &emmc;
+> +	};
+> +};
+> +
+> +&emmc {
+> +	bus-width = <8>;
+> +	cap-mmc-highspeed;
+> +	max-frequency = <150000000>;
+> +	mmc-ddr-1_8v;
+> +	mmc-hs200-1_8v;
+> +	non-removable;
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&emmc_clk &emmc_cmd &emmc_bus8>;
+> +	vmmc-supply = <&vcc_io_33>;
+> +	vqmmc-supply = <&vcc18_emmc>;
+> +	status = "okay";
+> +};
+> diff --git a/board/rockchip/evb_rk3328/MAINTAINERS b/board/rockchip/evb_rk3328/MAINTAINERS
+> index 8a19eb373d0..5fc114a63f6 100644
+> --- a/board/rockchip/evb_rk3328/MAINTAINERS
+> +++ b/board/rockchip/evb_rk3328/MAINTAINERS
+> @@ -11,6 +11,12 @@ S:      Maintained
+>   F:      configs/nanopi-r2c-rk3328_defconfig
+>   F:      arch/arm/dts/rk3328-nanopi-r2c-u-boot.dtsi
+>   
+> +NANOPI-R2C-PLUS-RK3328
+> +M:      Tianling Shen <cnsztl@gmail.com>
+> +S:      Maintained
+> +F:      configs/nanopi-r2c-plus-rk3328_defconfig
+> +F:      arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi
+> +
+>   NANOPI-R2S-RK3328
+>   M:      David Bauer <mail@david-bauer.net>
+>   S:      Maintained
+> diff --git a/configs/nanopi-r2c-plus-rk3328_defconfig b/configs/nanopi-r2c-plus-rk3328_defconfig
+> new file mode 100644
+> index 00000000000..320ed8b434a
+> --- /dev/null
+> +++ b/configs/nanopi-r2c-plus-rk3328_defconfig
+> @@ -0,0 +1,114 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_TEXT_BASE=0x00200000
+> +CONFIG_SPL_GPIO=y
+> +CONFIG_NR_DRAM_BANKS=1
+> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
+> +CONFIG_SF_DEFAULT_SPEED=20000000
+> +CONFIG_ENV_OFFSET=0x3F8000
+> +CONFIG_DEFAULT_DEVICE_TREE="rk3328-nanopi-r2c-plus"
+> +CONFIG_DM_RESET=y
+> +CONFIG_ROCKCHIP_RK3328=y
+> +CONFIG_TPL_ROCKCHIP_COMMON_BOARD=y
+> +CONFIG_TPL_LIBCOMMON_SUPPORT=y
+> +CONFIG_TPL_LIBGENERIC_SUPPORT=y
+> +CONFIG_SPL_DRIVERS_MISC=y
+> +CONFIG_SPL_STACK_R_ADDR=0x600000
+> +CONFIG_SPL_STACK=0x400000
+> +CONFIG_TPL_SYS_MALLOC_F_LEN=0x800
 
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+     Did you test both TPL and SPL?
+
 
 Thanks,
+
 - Kever
-> ---
-> Changes from v1:
-> Reorder things to have to have 128MiB for kernel and decompression space,
-> then devicetree, overlays and ramdisk.
-> Update kernel_comp_size to 128MiB.
->
->   include/configs/rk3568_common.h | 12 ++++++------
->   include/configs/rk3588_common.h | 12 ++++++------
->   2 files changed, 12 insertions(+), 12 deletions(-)
->
-> diff --git a/include/configs/rk3568_common.h b/include/configs/rk3568_common.h
-> index 1b7d3437b1..48f93083de 100644
-> --- a/include/configs/rk3568_common.h
-> +++ b/include/configs/rk3568_common.h
-> @@ -20,12 +20,12 @@
->   	"script_offset_f=0xffe000\0"	\
->   	"script_size_f=0x2000\0"	\
->   	"pxefile_addr_r=0x00e00000\0"	\
-> -	"fdt_addr_r=0x0a100000\0"	\
-> -	"fdtoverlay_addr_r=0x02000000\0"	\
-> -	"kernel_addr_r=0x02080000\0"	\
-> -	"ramdisk_addr_r=0x0a200000\0"	\
-> -	"kernel_comp_addr_r=0x08000000\0"	\
-> -	"kernel_comp_size=0x2000000\0"
-> +	"kernel_addr_r=0x02000000\0"	\
-> +	"kernel_comp_addr_r=0x0a000000\0"	\
-> +	"fdt_addr_r=0x12000000\0"	\
-> +	"fdtoverlay_addr_r=0x12100000\0"	\
-> +	"ramdisk_addr_r=0x12180000\0"	\
-> +	"kernel_comp_size=0x8000000\0"
->   
->   #define CFG_EXTRA_ENV_SETTINGS		\
->   	ENV_MEM_LAYOUT_SETTINGS			\
-> diff --git a/include/configs/rk3588_common.h b/include/configs/rk3588_common.h
-> index 46389d087d..70430612ef 100644
-> --- a/include/configs/rk3588_common.h
-> +++ b/include/configs/rk3588_common.h
-> @@ -19,12 +19,12 @@
->   	"script_offset_f=0xffe000\0"	\
->   	"script_size_f=0x2000\0"	\
->   	"pxefile_addr_r=0x00e00000\0"	\
-> -	"fdt_addr_r=0x0a100000\0"	\
-> -	"fdtoverlay_addr_r=0x02000000\0"	\
-> -	"kernel_addr_r=0x02080000\0"	\
-> -	"ramdisk_addr_r=0x0a200000\0"	\
-> -	"kernel_comp_addr_r=0x08000000\0"	\
-> -	"kernel_comp_size=0x2000000\0"
-> +	"kernel_addr_r=0x02000000\0"	\
-> +	"kernel_comp_addr_r=0x0a000000\0"	\
-> +	"fdt_addr_r=0x12000000\0"	\
-> +	"fdtoverlay_addr_r=0x12100000\0"	\
-> +	"ramdisk_addr_r=0x12180000\0"	\
-> +	"kernel_comp_size=0x8000000\0"
->   
->   #define CFG_EXTRA_ENV_SETTINGS \
->   	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
+
+> +CONFIG_DEBUG_UART_BASE=0xFF130000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SYS_LOAD_ADDR=0x800800
+> +CONFIG_DEBUG_UART=y
+> +# CONFIG_ANDROID_BOOT_IMAGE is not set
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-nanopi-r2c-plus.dtb"
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_MISC_INIT_R=y
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +CONFIG_SPL_PAD_TO=0x7f8000
+> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> +CONFIG_SPL_BSS_START_ADDR=0x2000000
+> +CONFIG_SPL_BSS_MAX_SIZE=0x2000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+> +CONFIG_SPL_STACK_R=y
+> +CONFIG_SPL_I2C=y
+> +CONFIG_SPL_POWER=y
+> +CONFIG_SPL_ATF=y
+> +CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+> +CONFIG_TPL_SYS_MALLOC_SIMPLE=y
+> +CONFIG_CMD_BOOTZ=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_USB=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_TIME=y
+> +CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_TPL_OF_CONTROL=y
+> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> +CONFIG_TPL_OF_PLATDATA=y
+> +CONFIG_ENV_IS_IN_MMC=y
+> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> +CONFIG_SYS_MMC_ENV_DEV=1
+> +CONFIG_NET_RANDOM_ETHADDR=y
+> +CONFIG_TPL_DM=y
+> +CONFIG_REGMAP=y
+> +CONFIG_SPL_REGMAP=y
+> +CONFIG_TPL_REGMAP=y
+> +CONFIG_SYSCON=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_TPL_SYSCON=y
+> +CONFIG_CLK=y
+> +CONFIG_SPL_CLK=y
+> +CONFIG_FASTBOOT_BUF_ADDR=0x800800
+> +CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+> +CONFIG_ROCKCHIP_GPIO=y
+> +CONFIG_SYS_I2C_ROCKCHIP=y
+> +CONFIG_MISC=y
+> +CONFIG_MMC_DW=y
+> +CONFIG_MMC_DW_ROCKCHIP=y
+> +CONFIG_ETH_DESIGNWARE=y
+> +CONFIG_GMAC_ROCKCHIP=y
+> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+> +CONFIG_PINCTRL=y
+> +CONFIG_SPL_PINCTRL=y
+> +CONFIG_DM_PMIC=y
+> +CONFIG_PMIC_RK8XX=y
+> +CONFIG_SPL_PMIC_RK8XX=y
+> +CONFIG_SPL_DM_REGULATOR=y
+> +CONFIG_REGULATOR_PWM=y
+> +CONFIG_DM_REGULATOR_FIXED=y
+> +CONFIG_SPL_DM_REGULATOR_FIXED=y
+> +CONFIG_REGULATOR_RK8XX=y
+> +CONFIG_PWM_ROCKCHIP=y
+> +CONFIG_RAM=y
+> +CONFIG_SPL_RAM=y
+> +CONFIG_TPL_RAM=y
+> +CONFIG_BAUDRATE=1500000
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_SYSINFO=y
+> +CONFIG_SYSRESET=y
+> +# CONFIG_TPL_SYSRESET is not set
+> +CONFIG_USB=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_EHCI_GENERIC=y
+> +CONFIG_USB_OHCI_HCD=y
+> +CONFIG_USB_OHCI_GENERIC=y
+> +CONFIG_USB_DWC2=y
+> +CONFIG_USB_DWC3=y
+> +# CONFIG_USB_DWC3_GADGET is not set
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_USB_GADGET=y
+> +CONFIG_USB_GADGET_DWC2_OTG=y
+> +CONFIG_SPL_TINY_MEMSET=y
+> +CONFIG_TPL_TINY_MEMSET=y
+> +CONFIG_ERRNO_STR=y
