@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E271BC46CD2
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 11:55:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7366FC46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 11:55:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 021E3876BF;
-	Tue,  2 Jan 2024 12:55:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DF601876BF;
+	Tue,  2 Jan 2024 12:55:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="o2LY7lRK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aAl1PqhZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8722876E2; Tue,  2 Jan 2024 12:54:58 +0100 (CET)
-Received: from mail-vs1-xe2c.google.com (mail-vs1-xe2c.google.com
- [IPv6:2607:f8b0:4864:20::e2c])
+ id 32566876BF; Tue,  2 Jan 2024 12:55:35 +0100 (CET)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 067BB876BF
- for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 12:54:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 42DAF876DD
+ for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 12:55:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe2c.google.com with SMTP id
- ada2fe7eead31-466eb1aeb6eso772280137.2
- for <u-boot@lists.denx.de>; Tue, 02 Jan 2024 03:54:55 -0800 (PST)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3373a30af67so1819068f8f.0
+ for <u-boot@lists.denx.de>; Tue, 02 Jan 2024 03:55:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704196494; x=1704801294; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xxifxQvJmpXMLX2mNKIquWVHr6WSXXk6V8epaNwPrKY=;
- b=o2LY7lRKbtlwqCDf4a4t/ZFrYhQk/N27b91MqEb43X397eCN/XgmhOy5iN52Gtn1yj
- o3WcUKzuAqD03/7j0gpXyETbZwfhbj8uNxONqNdL+F0qb/74O8AwaQCTvKX4zwXbMX1y
- PSk0hSprR7LkH4NxEM1PjGrNNb09lCsEv+s88Xisp6RBXGAI7lww9m82PnvpVri1ri6l
- F9he/T6oxlkX9WiYwtS41ZkYT1QjEnD7gf+n5Ih9mhaINDQMMatqqrncckcRmT9gPUtH
- KSiGb6Kri/a/FcQrSIIV7aGArYjd+ifiuL7fkMavkEuBSqWGxae9FY1+Ag8Txy0jn/lu
- 5juQ==
+ d=linaro.org; s=google; t=1704196531; x=1704801331; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=NhhPCSPsK7/aXANE7adVogeu2jWO+gPc7u9TKdIw9yk=;
+ b=aAl1PqhZn9FEqSQ5HiLL+K93TX8XCJ3PFm+KglWuY6ZkuZ3C667Y1abxCaNEAIZ702
+ eIhYoAeckYs5y6AbeGwN09nnpootgcfMdV0E/p3aYbIztDutQvYVfzaNf83dG1vwUMwr
+ 51PzT78WZMZODIdlDH1hVLTOvz1ze7sb5JHbbMN9MR1DtG9BrLRk1Jag/qnoUsg/Dyws
+ fGG8b9jcXk55cOReWLBmbGRcvRIMS/mqKtcYbsXhqn4Nn/rBw40KhLrHsrXrYs/f4qP9
+ hbq76IVbztwm1k08s2YcwQNOFTOD3MYXAHr+sKLW2IoNTOetPS26a71uhQwIhwC9h9Dw
+ ROiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704196494; x=1704801294;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1704196531; x=1704801331;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xxifxQvJmpXMLX2mNKIquWVHr6WSXXk6V8epaNwPrKY=;
- b=ghTs/DzjzEWam1skYBYFk7l4AAtinqbGZ0AZbnXmdmkLqv6wqhOEZ23AJS2mpuUV3j
- xUqG5NZMDkj69Q9w5Nv3F2mMm0O9XbtyjAIcLm9cvgdzsKcxIdqVM9Jdf21CT5rp9KVA
- apr+aEC3P9b/xU+wc3T/mCDF84JhXhnx56Zw83nAWmMaqtN2nkLwscCnVwtQfrcxcD/E
- LmxFVMDphEC0ne51qa2GSPUn1i3vUArKHxFh0x+9TTpdl3+Vstg7ZRWI5Kf8JkcDzH14
- bL/6Z7COZ7uUYNlSrd31SVM5inicfTaLOgKZdQOY4oRAhMnMcFaB+gxSPDhMyQT1DyxE
- ihJg==
-X-Gm-Message-State: AOJu0YwQYLrruqF0Tw37iPqPjOFTffQBzvOGW/dcH6tL/ZeEhs9+8asI
- vsHMj4llC8ciNMcYu2FACiJMpSI0ERyLV7KR2d07e8rfZuv7kw==
-X-Google-Smtp-Source: AGHT+IGLQKTzGoZx61Grxn/fvTVx4wYjV/ObXoZ3llV3wWvfKYmLLTKuHE67Gj1eBApvT6N7AiYN2NZdqpVtHAqGnyA=
-X-Received: by 2002:a05:6102:1516:b0:466:c07b:6afa with SMTP id
- f22-20020a056102151600b00466c07b6afamr8025115vsv.4.1704196494109; Tue, 02 Jan
- 2024 03:54:54 -0800 (PST)
+ bh=NhhPCSPsK7/aXANE7adVogeu2jWO+gPc7u9TKdIw9yk=;
+ b=P/oWzLUTfDMgjLMAp2DAI0ODivmX5p2OOtJICgWsLcOYtgE8DtEDErAkv1K10rvS8k
+ ugoSWYtstf+bm8U3IOEqFBNW8VWJw8hJ+kpKs2qZ/OqGhg18xY0q0mitynaO+jU7pU/a
+ 1OMfToh5yKcGu8g6DypjtoZo1JOAsroKJQqF/lgXByALq5g9v3H68sRHEvcFqkzxaQOU
+ IH18Ny7u+rT2OVd9pMMbYiSllU/6nPUtj4Bmwn+702/V7/s2H4iw0CxPnQx7Nrq0yxH9
+ ddKAty0wBIFEBpOw3x9tfRYyigX+ogoYYVXMlUw4WtKPQkgteUQ4QLJAl67vt6Y+//8F
+ iMPQ==
+X-Gm-Message-State: AOJu0YwVUUUPD9g8tn6pPi9vcO6S5hFTJD4XyERwTC34Cm2wLhAC5Ors
+ tGiKZDtdSI3SHGWbvCdY2IGHEj/CR9UVfANdsxL3jEw0MG4nDJQa
+X-Google-Smtp-Source: AGHT+IHgRGBD8Rduo/2x+XFIbapLYbj52EqMf+Nlfav007POHkvHk0mcnny+3P3pxPvxRsKPJIJ3qg==
+X-Received: by 2002:a05:600c:8519:b0:40d:4eed:fd63 with SMTP id
+ gw25-20020a05600c851900b0040d4eedfd63mr5289900wmb.40.1704196531484; 
+ Tue, 02 Jan 2024 03:55:31 -0800 (PST)
+Received: from lion.localdomain (host-92-17-96-230.as13285.net. [92.17.96.230])
+ by smtp.gmail.com with ESMTPSA id
+ q11-20020a05600c46cb00b0040d2d33312csm44177645wmo.2.2024.01.02.03.55.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 02 Jan 2024 03:55:31 -0800 (PST)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Date: Tue, 02 Jan 2024 11:55:30 +0000
+Subject: [PATCH] pytest: update requirements.txt
 MIME-Version: 1.0
-References: <20231219-b4-qcom-common-target-v2-0-b6dd9704219e@linaro.org>
- <20231219-b4-qcom-common-target-v2-12-b6dd9704219e@linaro.org>
- <CAFA6WYMvb230qm95QLPW4iNOXPk0fhxDCP-OFN1FWLCsx9P2yA@mail.gmail.com>
- <e45ca070-82fc-4e5b-a7e9-eb44e956b98f@linaro.org>
- <CAFA6WYNn0PDxikfVNnACiT2HZ=zge=O7XnpynPVfe61rKiedDA@mail.gmail.com>
- <5b833208-49b9-4cff-8160-930bf26172b0@linaro.org>
-In-Reply-To: <5b833208-49b9-4cff-8160-930bf26172b0@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 2 Jan 2024 17:24:42 +0530
-Message-ID: <CAFA6WYPN+oEXCB3dS4EcBrOy6hKNhPawXhhx3x+FvTZ6Nb-b1g@mail.gmail.com>
-Subject: Re: [PATCH v2 12/32] board: dragonboard410c: upstream DT compat
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, 
- Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240102-pytest-requirements-update-v1-1-8840af19df70@linaro.org>
+X-B4-Tracking: v=1; b=H4sIALH5k2UC/x3MQQ6CMBAF0KuQWTtJWxTRqxgWBD44C2udKQZCu
+ LuNy7d5OxlUYHSvdlJ8xeQdC/ypouHZxxksYzEFF87Ou8Bpy7DMis8iihdiNl7S2Gewu9xCW9e
+ +ma4tlSApJln/+aM7jh83bcN8bAAAAA==
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>
+X-Mailer: b4 0.13-dev-4bd13
+X-Developer-Signature: v=1; a=openpgp-sha256; l=916;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=NhhPCSPsK7/aXANE7adVogeu2jWO+gPc7u9TKdIw9yk=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtTJPze9lj708MSxinC2u//nB8ReYHyh6Sxd6Mlwfyqzm
+ YTJJoG9HaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAiWb2MDO1udW61m87+8TAq
+ OTW7+ftqr4tcqf6H/gbstvx3Ytf1lBkM/6x+1a6pWfPr04Sc0IVBq+Yqzr69UfPXW/ONlrFMW49
+ UK18AAA==
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,87 +101,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 2 Jan 2024 at 14:43, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
->
->
-> On 26/12/2023 10:30, Sumit Garg wrote:
-> > On Fri, 22 Dec 2023 at 21:43, Caleb Connolly <caleb.connolly@linaro.org> wrote:
-> >>
-> >> Hi Sumit,
-> >>
-> >> [...]
-> >>>> -       if (init == USB_INIT_HOST) {
-> >>>> -               /* Start USB Hub */
-> >>>> -               dm_gpio_set_dir_flags(&hub_reset,
-> >>>> -                                     GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
-> >>>> -               mdelay(100);
-> >>>> -               /* Switch usb to host connectors */
-> >>>> -               dm_gpio_set_dir_flags(&usb_sel,
-> >>>> -                                     GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
-> >>>> -               mdelay(100);
-> >>>> -       } else { /* Device */
-> >>>> -               /* Disable hub */
-> >>>> -               dm_gpio_set_dir_flags(&hub_reset, GPIOD_IS_OUT);
-> >>>> -               /* Switch back to device connector */
-> >>>> -               dm_gpio_set_dir_flags(&usb_sel, GPIOD_IS_OUT);
-> >>>> +       /* Select "default" or "device" pinctrl */
-> >>>> +       switch (init) {
-> >>>> +       case USB_INIT_HOST:
-> >>>> +               pinctrl_select_state(usb, "default");
-> >>>> +               break;
-> >>>> +       case USB_INIT_DEVICE:
-> >>>> +               pinctrl_select_state(usb, "device");
-> >>>> +               break;
-> >>>> +       default:
-> >>>> +               debug("Unknown usb_init_type %d\n", init);
-> >>>> +               break;
-> >>>
-> >>> Can this pinctrl configuration move to the corresponding USB driver instead?
-> >>
-> >> Possibly, this is definitely something where DT is currently lacking,
-> >> similar discussions in Linux resulted in the USB onboard_hub driver, it
-> >> would be nice to add support for that U-Boot at some point.
-> >>
-> >> I don't think putting the pinctrl code directly into the USB driver is
-> >> the right way to go, as it definitely wouldn't be accepted in upstream
-> >> DT bindings.
-> >
-> > As discussed in the other thread,
-> > arch/arm/mach-snapdragon/board_apq8016.c would be a better place for
-> > the time being.
->
-> I would instead prefer this go in mach-snapdragon/board.c and include a
-> conditional to check for a named pinctrl on the USB device, using
-> "uclass_find_device_by_seq()" to fetch the device would then make this
-> properly generic.
+Update pygit2 and py to their latest versions. Even in the venv pygit2
+still links against the system libgit2 library which is failing on
+latest Arch Linux.
 
-Yes, that can be a further step and I don't expect that to be part of
-this series. But since this patch is moving stuff, we should move SoC
-specific bits to mach-snapdragon/board_apq8016.c rather than its
-opposite to the db410c specific file.
+The py library also needs updating to fix a KeyNotFound exception during
+test initialisation.
 
->
-> This is really not relevant to this patch series, but is a change that
-> makes sense when introducing support for new boards, let's limit
-> discussion to the other thread [1].
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+---
+base-commit: 7f4c3400d5991d2314036de1f92235a209b4f294
 
-But why? The USB stuff we are discussing here is relevant to existing
-board support, right?
+// Caleb (they/them)
+---
+ test/py/requirements.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
--Sumit
+diff --git a/test/py/requirements.txt b/test/py/requirements.txt
+index f7e76bdb9181..62f3e4ccad04 100644
+--- a/test/py/requirements.txt
++++ b/test/py/requirements.txt
+@@ -11,10 +11,10 @@ more-itertools==7.2.0
+ packaging==21.3
+ pbr==5.4.3
+ pluggy==0.13.0
+-py==1.10.0
++py==1.11.0
+ pycryptodomex==3.9.8
+ pyelftools==0.27
+-pygit2==1.9.2
++pygit2==1.13.3
+ pyparsing==3.0.7
+ pytest==6.2.5
+ pytest-xdist==2.5.0
 
->
-> [1]:
-> https://lore.kernel.org/u-boot/f805111d-106e-4904-ae9d-e63596f7db4e@linaro.org/
-> >
-> > -Sumit
-> >
-> >>>
-> >>> -Sumit
-> >>>
-> >> --
-> >> // Caleb (they/them)
->
-> --
-> // Caleb (they/them)
