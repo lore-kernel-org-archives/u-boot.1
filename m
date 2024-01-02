@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17C7CC46CD2
-	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 22:13:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0A14C46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  2 Jan 2024 22:13:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E8128796C;
-	Tue,  2 Jan 2024 23:13:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 09EA087955;
+	Tue,  2 Jan 2024 23:13:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J+tS6C97";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AQUk6XEz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 006D08795F; Tue,  2 Jan 2024 23:13:10 +0100 (CET)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id E409A8794F; Tue,  2 Jan 2024 23:13:16 +0100 (CET)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8EC88756F
- for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 23:13:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B6B728756F
+ for <u-boot@lists.denx.de>; Tue,  2 Jan 2024 23:13:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-781df3bc08fso53137985a.2
- for <u-boot@lists.denx.de>; Tue, 02 Jan 2024 14:13:07 -0800 (PST)
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-5e7409797a1so83222597b3.0
+ for <u-boot@lists.denx.de>; Tue, 02 Jan 2024 14:13:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704233586; x=1704838386; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1704233593; x=1704838393; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8supzDilxoS7RxR0deSo6Vi5bEnEygDYrUO3d/EF5Io=;
- b=J+tS6C97yk1QmY9v4+Zz4YcgON6/8Pm+g3pvMZalO0X+wApkXM5enW8WeRuy9DIdiM
- Xq16VAnFK3juDew8rh3sOR0eSCo6v0XM0pXAnMjMJwOe+KfpWP/toiVNZ0HYS+vY2CDD
- QQewS1CJan4eDbbz3t6DwZToedHVE5vRy2U9WkFBjxmQn/Y+7W/L1KcclGku1A1aZBEL
- xSdAv4XKPTrsjbLRwTL09HyuQ+urJnpU1/IYO1gfCYojloYjh51AsH0OMqMRuqG/vr8G
- u6YoXKoMMROigVmoaqhKdZ0wqtma0nYMnPY+uVfvp2zCDZLEaE7fesC9/zLhsm4SxWD2
- aRjA==
+ bh=1GU8LkBhSue5G42jSI2uFhEPmyOBDFLPpcfO0o2sEe8=;
+ b=AQUk6XEz/4wrAmS92Vi8wE8JHueMWXhK9i8r8SmPLHMsjuDeS1cNYqDMU9X5LZZoER
+ 4tYaff53AiKF1hZ+5/aGc2UnlC+l/rUNb8PolYM2K2CJNFU4QhhS0Va16ci2dp27aMb1
+ hVYgVbGcWMGgkuXQJZm87CC16KPomsRV+pQIUC+UZiGagVyn1Hy3TsXsx/JIH0t9VLLq
+ r83L6odPFMnj0jBWcqPuGxZQf0ELTKy3/hZNawxiQtNbr+fgArupy0JtNfuv9Y0IUeLb
+ KHFJDpP5/XMA+DzRBsauRCBMxAXQR/2x22vveimmZxiG7TF5jQHAENzo6arlHX5Pjiyx
+ edBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704233586; x=1704838386;
+ d=1e100.net; s=20230601; t=1704233593; x=1704838393;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8supzDilxoS7RxR0deSo6Vi5bEnEygDYrUO3d/EF5Io=;
- b=xJ2/veFJbGd7QMQnSnKBL/SQupVm9q+KH7f2X3Q0qtuBKPc3xD0WWRjTt1OL7zJVaP
- ZbCwE7tJgHziS8+AMGQ2ACbnSlIVtWnVjjJ4A3bCCy35JOyNPS1IKyWdfhwQO+Si0kGC
- 0AfTtNz6oLXz75zGCiHI7th1KkBh1w5sgKTnFsvRoDBvtqTM5MZY4zV1Al8zfwgTQzIo
- RyFBCzsRnfnY3/JdOnmQJDCWTEaJ9cB89uQ56nU207wf3LXgKd8DmnhdCegmwqrz7Xqx
- dFscF3YBuKsSMWLnw4T//8Euu37FoCGwozbzsun85zqmc9RJRql4mqpv3e0cIa7Z4Gq7
- SxWw==
-X-Gm-Message-State: AOJu0YzZMManqviFqG74u6sBhlNVrvgkL9W8lWdC2FPVbJRZHU0/uejM
- gfZVdfxvLGs+WXmeZ7PDBjlxb5/NfK6Ip7vjfH2wu1J+GLc=
-X-Google-Smtp-Source: AGHT+IFCxVuDjErYGMhwtHCGBbXN3SHj1Ypcp2DjMU57/Scpy5xFSBEgXa3pAbUm1EeJCJzNGtKbAw==
-X-Received: by 2002:ad4:5c87:0:b0:67f:516b:c275 with SMTP id
- o7-20020ad45c87000000b0067f516bc275mr27226412qvh.40.1704233586296; 
- Tue, 02 Jan 2024 14:13:06 -0800 (PST)
+ bh=1GU8LkBhSue5G42jSI2uFhEPmyOBDFLPpcfO0o2sEe8=;
+ b=HomL2NnOIVvDDe/lnp83UwzeoULQoykN6HPM+h5ZMzlpgh9RxbKKCU6pL6mbLRyS+W
+ da4xulhNbO4+l6eiCEcH+s2KxemaBt1bOYk3Svk/qSRoKWWzIlWB3Vww5eIbG1L3TXTe
+ j9k9LXvfFoU2ROuZIN9xedMFNxLH2JWykq/saADhScaVvVfVfIHdIDYzGBbK2LOaRMFO
+ T3fKON+BY0e+F2CA1QqUHwkzn9D5gKKZZQeU5GKsHlMlXcjBtHTSYOs8zT1trl5oyACU
+ 7OWwOL67zcpdmLiI8DJwCIGnYkA94+4nSE+nIYwS6qAi9duetQux3X6B0CsvPh70g3lD
+ d0pw==
+X-Gm-Message-State: AOJu0YxXvCXHp7Gmv/4JbFAmNc6xj6KbWUlQNcLm0TJ0IdF5OkHHDW2s
+ WQlHLqswzEjNd/DBR0Spf6jaZgCHWfjWZ8zG9TibTRjHJZk=
+X-Google-Smtp-Source: AGHT+IEY5GhrE2qhwK2kcvlYrmX9IdUf6ZvK2/cjLvIW8wAq5tdhT9l7ogHTNizmu8EpWyvLlJ1CGw==
+X-Received: by 2002:a0d:e28b:0:b0:5e6:ee0e:ba04 with SMTP id
+ l133-20020a0de28b000000b005e6ee0eba04mr10069531ywe.21.1704233593136; 
+ Tue, 02 Jan 2024 14:13:13 -0800 (PST)
 Received: from ubuntu.localdomain
  (cpe688f2e182063-cm688f2e182060.sdns.net.rogers.com. [174.115.4.214])
  by smtp.gmail.com with ESMTPSA id
- mg14-20020a056214560e00b0067f70cc986asm10431487qvb.92.2024.01.02.14.13.05
+ mg14-20020a056214560e00b0067f70cc986asm10431487qvb.92.2024.01.02.14.13.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Jan 2024 14:13:06 -0800 (PST)
+ Tue, 02 Jan 2024 14:13:12 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
  jwerner@chromium.org
 Cc: Raymond Mao <raymond.mao@linaro.org>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Kevin Chen <kevin_chen@aspeedtech.com>,
- Sean Anderson <sean.anderson@seco.com>, Nikhil M Jain <n-jain1@ti.com>,
- Bin Meng <bmeng.cn@gmail.com>,
+ Sean Anderson <sean.anderson@seco.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Nikhil M Jain <n-jain1@ti.com>,
  Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Shiji Yang <yangshiji66@outlook.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Baruch Siach <baruch@tkos.co.il>,
- Michal Simek <michal.simek@amd.com>
-Subject: [PATCH v4 2/9] bloblist: check bloblist with specified buffer size
-Date: Tue,  2 Jan 2024 14:12:27 -0800
-Message-Id: <20240102221237.1007090-3-raymond.mao@linaro.org>
+ Shiji Yang <yangshiji66@outlook.com>, Baruch Siach <baruch@tkos.co.il>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Michal Simek <michal.simek@amd.com>, Qu Wenruo <wqu@suse.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH v4 3/9] bloblist: refactor of bloblist_reloc()
+Date: Tue,  2 Jan 2024 14:12:28 -0800
+Message-Id: <20240102221237.1007090-4-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240102221237.1007090-1-raymond.mao@linaro.org>
 References: <20240102221237.1007090-1-raymond.mao@linaro.org>
@@ -102,71 +104,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Instead of expecting the bloblist total size to be the same as the
-pre-allocated buffer size, practically we are more interested in
-whether the pre-allocated buffer size is bigger than the bloblist
-total size.
+The current bloblist pointer and size can be retrieved from global
+data, so we don't need to pass them from the function arguments.
+This change also help to remove all external access of gd->bloblist
+outside of bloblist module.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
 Changes in v2
 - New patch file created for v2.
+Changes in v3
+- Check the space size before copying the bloblist.
+- Add return code of bloblist_reloc().
 Changes in v4
-- Update function header of bloblist_check().
+- return error code from bloblist_reloc().
 
- common/bloblist.c  | 2 +-
- include/bloblist.h | 9 +++++----
- test/bloblist.c    | 2 +-
- 3 files changed, 7 insertions(+), 6 deletions(-)
+ common/bloblist.c  | 10 ++++++++--
+ common/board_f.c   |  9 +++------
+ include/bloblist.h |  8 ++++----
+ test/bloblist.c    |  6 ++----
+ 4 files changed, 17 insertions(+), 16 deletions(-)
 
 diff --git a/common/bloblist.c b/common/bloblist.c
-index acf67304d0..4039eb3a03 100644
+index 4039eb3a03..4e76975627 100644
 --- a/common/bloblist.c
 +++ b/common/bloblist.c
-@@ -384,7 +384,7 @@ int bloblist_check(ulong addr, uint size)
- 		return log_msg_ret("Bad magic", -ENOENT);
- 	if (hdr->version != BLOBLIST_VERSION)
- 		return log_msg_ret("Bad version", -EPROTONOSUPPORT);
--	if (!hdr->total_size || (size && hdr->total_size != size))
-+	if (!hdr->total_size || (size && hdr->total_size > size))
- 		return log_msg_ret("Bad total size", -EFBIG);
- 	if (hdr->used_size > hdr->total_size)
- 		return log_msg_ret("Bad used size", -ENOENT);
+@@ -472,13 +472,19 @@ void bloblist_show_list(void)
+ 	}
+ }
+ 
+-void bloblist_reloc(void *to, uint to_size, void *from, uint from_size)
++int bloblist_reloc(void *to, uint to_size)
+ {
+ 	struct bloblist_hdr *hdr;
+ 
+-	memcpy(to, from, from_size);
++	if (to_size < gd->bloblist->total_size)
++		return -ENOSPC;
++
++	memcpy(to, gd->bloblist, gd->bloblist->total_size);
+ 	hdr = to;
+ 	hdr->total_size = to_size;
++	gd->bloblist = to;
++
++	return 0;
+ }
+ 
+ int bloblist_init(void)
+diff --git a/common/board_f.c b/common/board_f.c
+index d4d7d01f8f..f4145a2698 100644
+--- a/common/board_f.c
++++ b/common/board_f.c
+@@ -676,13 +676,10 @@ static int reloc_bloblist(void)
+ 		return 0;
+ 	}
+ 	if (gd->new_bloblist) {
+-		int size = CONFIG_BLOBLIST_SIZE;
+-
+ 		debug("Copying bloblist from %p to %p, size %x\n",
+-		      gd->bloblist, gd->new_bloblist, size);
+-		bloblist_reloc(gd->new_bloblist, CONFIG_BLOBLIST_SIZE_RELOC,
+-			       gd->bloblist, size);
+-		gd->bloblist = gd->new_bloblist;
++		      gd->bloblist, gd->new_bloblist, gd->bloblist->total_size);
++		return bloblist_reloc(gd->new_bloblist,
++				      CONFIG_BLOBLIST_SIZE_RELOC);
+ 	}
+ #endif
+ 
 diff --git a/include/bloblist.h b/include/bloblist.h
-index bf9e12ebf8..1906847c15 100644
+index 1906847c15..81f1dfa027 100644
 --- a/include/bloblist.h
 +++ b/include/bloblist.h
-@@ -348,12 +348,13 @@ int bloblist_new(ulong addr, uint size, uint flags, uint align_log2);
-  * bloblist_check() - Check if a bloblist exists
+@@ -426,11 +426,11 @@ const char *bloblist_tag_name(enum bloblist_tag_t tag);
+  * bloblist_reloc() - Relocate the bloblist and optionally resize it
   *
-  * @addr: Address of bloblist
-- * @size: Expected size of blobsize, or 0 to detect the size
-+ * @size: Reserved space size for blobsize, or 0 to use the total size
-  * Return: 0 if OK, -ENOENT if the magic number doesn't match (indicating that
-- * there problem is no bloblist at the given address), -EPROTONOSUPPORT
-+ * there problem is no bloblist at the given address) or any fields for header
-+ * size, used size and total size do not match, -EPROTONOSUPPORT
-  * if the version does not match, -EIO if the checksum does not match,
-- * -EFBIG if the expected size does not match the detected size, -ENOSPC
-- * if the size is not large enough to hold the headers
-+ * -EFBIG if the reserved space size is small than the total size or total size
-+ * is 0
+  * @to: Pointer to new bloblist location (must not overlap old location)
+- * @to_size: New size for bloblist (must be larger than from_size)
+- * @from: Pointer to bloblist to relocate
+- * @from_size: Size of bloblist to relocate
++ * @to_size: New size for bloblist
++ * Return: 0 if OK, -ENOSPC if the new size is small than the bloblist total
++ *	   size.
   */
- int bloblist_check(ulong addr, uint size);
+-void bloblist_reloc(void *to, uint to_size, void *from, uint from_size);
++int bloblist_reloc(void *to, uint to_size);
  
+ /**
+  * bloblist_init() - Init the bloblist system with a single bloblist
 diff --git a/test/bloblist.c b/test/bloblist.c
-index 17d9dd03d0..7dab9addf8 100644
+index 7dab9addf8..1c60bbac36 100644
 --- a/test/bloblist.c
 +++ b/test/bloblist.c
-@@ -207,7 +207,7 @@ static int bloblist_test_checksum(struct unit_test_state *uts)
- 	hdr->flags++;
+@@ -376,13 +376,12 @@ static int bloblist_test_reloc(struct unit_test_state *uts)
+ {
+ 	const uint large_size = TEST_BLOBLIST_SIZE;
+ 	const uint small_size = 0x20;
+-	void *old_ptr, *new_ptr;
++	void *new_ptr;
+ 	void *blob1, *blob2;
+ 	ulong new_addr;
+ 	ulong new_size;
  
- 	hdr->total_size--;
--	ut_asserteq(-EFBIG, bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
-+	ut_asserteq(-EIO, bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
- 	hdr->total_size++;
+ 	ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0, 0));
+-	old_ptr = map_sysmem(TEST_ADDR, TEST_BLOBLIST_SIZE);
  
- 	hdr->spare++;
+ 	/* Add one blob and then one that won't fit */
+ 	blob1 = bloblist_add(TEST_TAG, small_size, 0);
+@@ -394,8 +393,7 @@ static int bloblist_test_reloc(struct unit_test_state *uts)
+ 	new_addr = TEST_ADDR + TEST_BLOBLIST_SIZE;
+ 	new_size = TEST_BLOBLIST_SIZE + 0x100;
+ 	new_ptr = map_sysmem(new_addr, TEST_BLOBLIST_SIZE);
+-	bloblist_reloc(new_ptr, new_size, old_ptr, TEST_BLOBLIST_SIZE);
+-	gd->bloblist = new_ptr;
++	ut_assertok(bloblist_reloc(new_ptr, new_size));
+ 
+ 	/* Check the old blob is there and that we can now add the bigger one */
+ 	ut_assertnonnull(bloblist_find(TEST_TAG, small_size));
 -- 
 2.25.1
 
