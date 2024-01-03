@@ -4,36 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98BFFC46CD2
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 00:13:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9456DC46CD2
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 00:13:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B94C68793C;
-	Wed,  3 Jan 2024 01:13:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2DD3187980;
+	Wed,  3 Jan 2024 01:13:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD6DC87962; Wed,  3 Jan 2024 01:13:33 +0100 (CET)
+ id 8BB6C878D3; Wed,  3 Jan 2024 01:13:34 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 858428785D
- for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 01:13:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 6803E87927
+ for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 01:13:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EF8B1C15;
- Tue,  2 Jan 2024 16:14:15 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0648614BF;
+ Tue,  2 Jan 2024 16:14:17 -0800 (PST)
 Received: from localhost.localdomain (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0F4013F5A1;
- Tue,  2 Jan 2024 16:13:28 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1B7583F5A1;
+ Tue,  2 Jan 2024 16:13:29 -0800 (PST)
 From: Andre Przywara <andre.przywara@arm.com>
 To: Jagan Teki <jagan@amarulasolutions.com>
 Cc: Samuel Holland <samuel@sholland.org>, linux-sunxi@lists.linux.dev,
  u-boot@lists.denx.de
-Subject: [PATCH 00/19] sunxi: SPL cleanup part 1
-Date: Wed,  3 Jan 2024 00:12:20 +0000
-Message-Id: <20240103001239.17482-1-andre.przywara@arm.com>
+Subject: [PATCH 01/19] sunxi: cleanup sunxi-common.h
+Date: Wed,  3 Jan 2024 00:12:21 +0000
+Message-Id: <20240103001239.17482-2-andre.przywara@arm.com>
 X-Mailer: git-send-email 2.35.8
+In-Reply-To: <20240103001239.17482-1-andre.przywara@arm.com>
+References: <20240103001239.17482-1-andre.przywara@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -52,104 +54,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is the first part of a series to clean up the Allwinner SPL a bit.
-One big driver for this whole clean up is to eventually accommodate the
-RISC-V chips, which share most platform devices, but cannot use any code
-that currently lives under arch/arm. So the idea is to disentangle the
-code, to get a cleaner separation between ARM specific and platform
-specific code. Another related reason is that the RISC-V port aims to
-use a DM SPL, so we want to split off code bits that won't be needed when
-we have the DM framework in the SPL.
+The sunxi-common.h configs header used to contain a lot of random
+Allwinner platform related constants, but over the years we moved a lot
+of those definitions out there.
 
-This first part of the series is mostly preparation, and some smaller
-cleanups, of code that was around for a long time and missed some
-updates.
-We start with some removal of no longer needed definitions, in the first
-seven patches. The next seven patches tighten the SPL clock code: quite
-some functions were compiled for U-Boot proper, however were not needed
-there. Sorting this out helps to identify legacy code.
-The final five patches move the SPL pinmux setup code into separate
-functions and files, and convert the #ifdef hell into proper C "if"
-statements.
+Clean up the file to remove outdated comments which are leftovers from
+the olden days. Also remove the definition of LOW_LEVEL_SRAM_STACK,
+which is actually used nowhere in the whole source tree.
 
-It would be great if Samuel can have a look and say whether this is
-helpful or not. For instance I don't really know how much of the SPL
-clock code will be needed for the RISC-V port, since we don't really
-model the bus clocks in the DT at all, and currently don't support PLLs
-in the DM clock code.
+This also uses the opportunity to add some section comments that helps
+structuring the header file and improving readability.
 
-Much of this first series should be good regardless, for instance the
-replacement of #ifdef's with C "if" statements, since that became
-tedious to expand for new SoCs and boards. But if some parts should live
-in a different directory, or should be grouped differently, this can
-certainly be factored in.
+Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+---
+ include/configs/sunxi-common.h | 56 ++++++++--------------------------
+ 1 file changed, 12 insertions(+), 44 deletions(-)
 
-Please have a look, review and test!
-
-Cheers,
-Andre
-
-Andre Przywara (19):
-  sunxi: cleanup sunxi-common.h
-  sunxi: sun50i-h6: remove unneeded base addresses from header
-  sunxi: sun4i: remove unneeded base addresses from header
-  sunxi: sun9i: remove unneeded base addresses from header
-  sunxi: move #ifdef guards around tzpc_init() to header file
-  sunxi: remove common.h inclusion
-  sunxi: simplify U-Boot proper only builds
-  sunxi: remove unneeded i2c_init_board() call for U-Boot proper
-  sunxi: compile clock.c for SPL only
-  sunxi: sun4i: make more clock functions SPL only
-  sunxi: sun6i: make more clock functions SPL only
-  sunxi: sun50i_h6: make more clock functions SPL only
-  sunxi: sun8i_a83t: make more clock functions SPL only
-  sunxi: sun9i: make more clock functions SPL only
-  sunxi: move pinmux setup into separate SPL only file
-  sunxi: SPL pinmux: rewrite without #ifdefs
-  sunxi: move UART pinmux setup into separate file
-  sunxi: SPL pinmux: split out UART pinmux per port
-  sunxi: SPL pinmux: rewrite UART setup without #ifdefs
-
- arch/arm/Kconfig                              |   4 +-
- arch/arm/include/asm/arch-sunxi/clock_sun9i.h |   3 -
- arch/arm/include/asm/arch-sunxi/cpu_sun4i.h   |  47 ---
- .../include/asm/arch-sunxi/cpu_sun50i_h6.h    |  21 --
- arch/arm/include/asm/arch-sunxi/cpu_sun9i.h   |  41 ---
- arch/arm/include/asm/arch-sunxi/tzpc.h        |   6 +
- arch/arm/mach-sunxi/Kconfig                   |  16 +-
- arch/arm/mach-sunxi/Makefile                  |   4 +-
- arch/arm/mach-sunxi/board.c                   | 113 +------
- arch/arm/mach-sunxi/clock.c                   |   3 -
- arch/arm/mach-sunxi/clock_sun4i.c             |   6 +-
- arch/arm/mach-sunxi/clock_sun50i_h6.c         |  58 ++--
- arch/arm/mach-sunxi/clock_sun6i.c             |   4 +-
- arch/arm/mach-sunxi/clock_sun8i_a83t.c        |   6 +-
- arch/arm/mach-sunxi/clock_sun9i.c             |  98 +++---
- arch/arm/mach-sunxi/cpu_info.c                |   1 -
- arch/arm/mach-sunxi/dram_helpers.c            |   3 +-
- arch/arm/mach-sunxi/dram_sun4i.c              |   1 -
- arch/arm/mach-sunxi/dram_sun50i_h6.c          |   1 -
- arch/arm/mach-sunxi/dram_sun50i_h616.c        |   1 -
- arch/arm/mach-sunxi/dram_sun6i.c              |   1 -
- arch/arm/mach-sunxi/dram_sun8i_a23.c          |   1 -
- arch/arm/mach-sunxi/dram_sun8i_a33.c          |   1 -
- arch/arm/mach-sunxi/dram_sun8i_a83t.c         |   1 -
- arch/arm/mach-sunxi/dram_sun9i.c              |   1 -
- arch/arm/mach-sunxi/dram_suniv.c              |   2 +-
- arch/arm/mach-sunxi/dram_sunxi_dw.c           |   1 -
- arch/arm/mach-sunxi/gtbus_sun9i.c             |   1 -
- arch/arm/mach-sunxi/pmic_bus.c                |   1 -
- arch/arm/mach-sunxi/prcm.c                    |   1 -
- arch/arm/mach-sunxi/spl_pinmux.c              | 312 +++++++++++++++++
- arch/arm/mach-sunxi/spl_spi_sunxi.c           |   1 -
- arch/arm/mach-sunxi/timer.c                   |   1 -
- arch/arm/mach-sunxi/uart_pinmux.c             | 158 +++++++++
- board/sunxi/board.c                           | 318 +-----------------
- include/configs/sunxi-common.h                |  56 +--
- 36 files changed, 592 insertions(+), 702 deletions(-)
- create mode 100644 arch/arm/mach-sunxi/spl_pinmux.c
- create mode 100644 arch/arm/mach-sunxi/uart_pinmux.c
-
+diff --git a/include/configs/sunxi-common.h b/include/configs/sunxi-common.h
+index b8ca77d031d..b29a25d5617 100644
+--- a/include/configs/sunxi-common.h
++++ b/include/configs/sunxi-common.h
+@@ -14,8 +14,9 @@
+ 
+ #include <linux/stringify.h>
+ 
+-/* Serial & console */
+-/* ns16550 reg in the low bits of cpu reg */
++/****************************************************************************
++ *                  base addresses for the SPL UART driver                  *
++ ****************************************************************************/
+ #ifdef CONFIG_MACH_SUNIV
+ /* suniv doesn't have apb2 and uart is connected to apb1 */
+ #define CFG_SYS_NS16550_CLK		100000000
+@@ -31,8 +32,9 @@
+ # define CFG_SYS_NS16550_COM5		SUNXI_R_UART_BASE
+ #endif
+ 
+-/* CPU */
+-
++/****************************************************************************
++ *                             DRAM base address                            *
++ ****************************************************************************/
+ /*
+  * The DRAM Base differs between some models. We cannot use macros for the
+  * CONFIG_FOO defines which contain the DRAM base address since they end
+@@ -52,16 +54,6 @@
+ /* V3s do not have enough memory to place code at 0x4a000000 */
+ #endif
+ 
+-/*
+- * The A80's A1 sram starts at 0x00010000 rather then at 0x00000000 and is
+- * slightly bigger. Note that it is possible to map the first 32 KiB of the
+- * A1 at 0x00000000 like with older SoCs by writing 0x16aa0001 to the
+- * undocumented 0x008000e0 SYS_CTRL register. Where the 16aa is a key and
+- * the 1 actually activates the mapping of the first 32 KiB to 0x00000000.
+- * A64 and H5 also has SRAM A1 at 0x00010000, but no magic remap register
+- * is known yet.
+- * H6 has SRAM A1 at 0x00020000.
+- */
+ #define CFG_SYS_INIT_RAM_ADDR	CONFIG_SUNXI_SRAM_ADDRESS
+ /* FIXME: this may be larger on some SoCs */
+ #define CFG_SYS_INIT_RAM_SIZE	0x8000 /* 32 KiB */
+@@ -69,36 +61,13 @@
+ #define PHYS_SDRAM_0			CFG_SYS_SDRAM_BASE
+ #define PHYS_SDRAM_0_SIZE		0x80000000 /* 2 GiB */
+ 
+-/*
+- * Miscellaneous configurable options
+- */
+-
+-/* FLASH and environment organization */
+-
++/****************************************************************************
++ *           environment variables holding default load addresses           *
++ ****************************************************************************/
+ /*
+  * We cannot use expressions here, because expressions won't be evaluated in
+  * autoconf.mk.
+  */
+-#if CONFIG_SUNXI_SRAM_ADDRESS == 0x10000
+-#ifdef CONFIG_ARM64
+-/* end of SRAM A2 for now, as SRAM A1 is pretty tight for an ARM64 build */
+-#define LOW_LEVEL_SRAM_STACK		0x00054000
+-#else
+-#define LOW_LEVEL_SRAM_STACK		0x00018000
+-#endif /* !CONFIG_ARM64 */
+-#elif CONFIG_SUNXI_SRAM_ADDRESS == 0x20000
+-#ifdef CONFIG_MACH_SUN50I_H616
+-#define LOW_LEVEL_SRAM_STACK		0x52a00		/* below FEL buffers */
+-#else
+-/* end of SRAM A2 on H6 for now */
+-#define LOW_LEVEL_SRAM_STACK		0x00118000
+-#endif
+-#else
+-#define LOW_LEVEL_SRAM_STACK		0x00008000	/* End of sram */
+-#endif
+-
+-/* Ethernet support */
+-
+ #ifdef CONFIG_ARM64
+ /*
+  * Boards seem to come with at least 512MB of DRAM.
+@@ -174,15 +143,11 @@
+ 	"ramdisk_addr_r=" RAMDISK_ADDR_R "\0"
+ 
+ #ifdef CONFIG_ARM64
+-
+ #define MEM_LAYOUT_ENV_EXTRA_SETTINGS \
+ 	"kernel_comp_addr_r=" KERNEL_COMP_ADDR_R "\0" \
+ 	"kernel_comp_size=" KERNEL_COMP_SIZE "\0"
+-
+ #else
+-
+ #define MEM_LAYOUT_ENV_EXTRA_SETTINGS ""
+-
+ #endif
+ 
+ #define DFU_ALT_INFO_RAM \
+@@ -191,6 +156,9 @@
+ 	"fdt ram " FDT_ADDR_R " 0x100000;" \
+ 	"ramdisk ram " RAMDISK_ADDR_R " 0x4000000\0"
+ 
++/****************************************************************************
++ *                  definitions for the distro boot system                  *
++ ****************************************************************************/
+ #ifdef CONFIG_MMC
+ #if CONFIG_MMC_SUNXI_SLOT_EXTRA != -1
+ #define BOOTENV_DEV_MMC_AUTO(devtypeu, devtypel, instance)		\
 -- 
 2.35.8
 
