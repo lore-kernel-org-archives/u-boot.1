@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9D8EC47077
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 08:18:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0C4CC3DA6E
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 08:21:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2E5B87988;
-	Wed,  3 Jan 2024 09:18:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=northern.tech
+	by phobos.denx.de (Postfix) with ESMTP id 14B0587988;
+	Wed,  3 Jan 2024 09:21:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=northern.tech header.i=@northern.tech header.b="KEKaipSw";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="r3qS2XdJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B1D087988; Wed,  3 Jan 2024 09:18:13 +0100 (CET)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id D1F6287987; Wed,  3 Jan 2024 09:21:25 +0100 (CET)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E993787987
- for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 09:18:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=northern.tech
+ by phobos.denx.de (Postfix) with ESMTPS id 075C7879B3
+ for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 09:21:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kristian.amlie@northern.tech
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-50e7abe4be4so8240635e87.2
- for <u-boot@lists.denx.de>; Wed, 03 Jan 2024 00:18:10 -0800 (PST)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-50e7abe4be4so8243508e87.2
+ for <u-boot@lists.denx.de>; Wed, 03 Jan 2024 00:21:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=northern.tech; s=google; t=1704269890; x=1704874690; darn=lists.denx.de;
- h=in-reply-to:content-language:from:references:to:subject:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=CaQBcJsW1GLzjhAHwDTMWPmRX5XXC7vP1+ybKpuLAgk=;
- b=KEKaipSw4UT0+Lr1eK4Iuu4MNd0skkwmGN39nlAYA/sZJ0S56bd3m9ltlmoRUlq8FD
- tgHhejTzLJZ1kSIO13qfbx+4+rAtxm1w9nYC57TJ1ra5zFpFkjf2uddWNPs135UHNGJu
- q2Z5vSvkivuqwVooFdD6soAh5gg3R2366I+JBL7YqdmtHJ2OBemtI8CK7KTTWtufKu0o
- gNN0J86VwQrLjyX6gCRXXSv1nml/3z+Y2kI9Zm3SZulR0yWsI6RF9gRSKc71ptqGwPeR
- u5OQVRZkgZ/GrFRFshwkzg391LocQaOIoCIJl5xK+8LRJJz/DV+Zkl0VN7tTZsktLPRj
- xa9w==
+ d=amarulasolutions.com; s=google; t=1704270080; x=1704874880;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XsrfLQ0ypsNlO2pN+0hMO97g3rnjB55GT4En5+zhAnc=;
+ b=r3qS2XdJx+jvkRV4xmPc8k9zgP2ocua+HGzC8+tWMT8Slxxu828RyegL6kj8aJix0b
+ rkVtemMOrcJkT1tQn7V/ZmvuNslYvoYjOkyBuk8oNJWPWlWDromcTTvuB0Tg+6mnBza5
+ 6+Q35gYWpCarvW0Ve7UC4KWIKMhKS1w6XLrwo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704269890; x=1704874690;
- h=in-reply-to:content-language:from:references:to:subject:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=CaQBcJsW1GLzjhAHwDTMWPmRX5XXC7vP1+ybKpuLAgk=;
- b=hPcIn0bv487Y2gQ9Z3p4ElEljCPIbLShYyMgjC3BKV6s5TnV5GasUVMd411CKCZN9E
- y0U0CMKUnGHMYgQTc4y1fJSZOpVf40vxfNqrCKgCHH4cWQ1fpNm9EwLNDdYPKGkR/i1y
- YZWLv/nB7ecneDo7QqQql9jxU+kWOAzHGcJHd67Rgzwto8NYvS2oDIjqpWV3wyr9ai6Q
- Q38N46z46XaxfTqh8QjYjzg1kTna1OtAkhDMvAZOgzYVg2G8MRqeQ72+T29hbdZo8P6W
- wjiH7HYu4CkCwVCWKkL1nTR1fHcLsWBYwVXH1+1L7LE7LMW3NhYX9j9tmoXdmEsy8wr1
- W07g==
-X-Gm-Message-State: AOJu0Yw3aSaCnVQFz8XnxCfW4Kj0w9LXe1E8/EymxXVEOhhwKUN6KjF+
- jBwIjhRPBeGfMR0EkfotKItnsKiJE/+1ls5QwdnX7Kmilfi3px41EefJI9nTH/1/pVr1ZOADy0j
- 8cgW6L/QbM2otVDhwfelgXODeX18=
-X-Google-Smtp-Source: AGHT+IH6u8U5bxCa/JiCgo2mfqwtx9+nUkfad2CBEcg1W5RKAwPk80ru9qvjabF0BmZCs3NvHGQaYQ==
-X-Received: by 2002:a05:6512:3b08:b0:50e:7c70:f8da with SMTP id
- f8-20020a0565123b0800b0050e7c70f8damr7389988lfv.16.1704269890031; 
- Wed, 03 Jan 2024 00:18:10 -0800 (PST)
-Received: from [10.180.37.239] ([91.232.32.37])
- by smtp.googlemail.com with ESMTPSA id
- su14-20020a17090703ce00b00a235b1e81b4sm12343240ejb.114.2024.01.03.00.18.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Jan 2024 00:18:09 -0800 (PST)
-Message-ID: <4cea9f42-9948-45a0-8f0a-31cd41e7095d@northern.tech>
-Date: Wed, 3 Jan 2024 09:18:08 +0100
+ d=1e100.net; s=20230601; t=1704270080; x=1704874880;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=XsrfLQ0ypsNlO2pN+0hMO97g3rnjB55GT4En5+zhAnc=;
+ b=SIQq5hzzcf3ZttcphCzsA1zEfTFRFPK1O2I9Yq/44YEk/RynwLyMXTA+wSMzI7uQSJ
+ kCT12/FeKxqUZJNz0aUmEPRMIoD62qg35lTf7grXCsfLBLCrmf3AMJriE9uZVW5a6KvY
+ vuaY5sML8t2sxDT6X232U/gvmbxZuKZwYhx4NF6oHV/6tWjfLGEFlPENcZEz3Ksm3B1t
+ IwXhmFQCkBqTl+1B3xfiM5MYrVbjdfdkFrlWU7zFYcqRYZrx+6nNyUErVJr4rRdNm+tf
+ eU0BkfiPHJFe2XZv5FcPL0qkL1q236BgUutKKsTeVT31UbeCdCtxr2x4CfIMLvibLQRT
+ LloA==
+X-Gm-Message-State: AOJu0Yxqbt58IWmkNoQ86hk2NY8fL7VR3dM7yAD0vi2kkPEhKK/DNwy/
+ 6IqWtAvykOZBVrI3h/pfgF3jefkK3ZrRhN+w1MUWB3oMizVpwQ==
+X-Google-Smtp-Source: AGHT+IGXxdp8waGuDb7jNO4DqDk6bSwynkgCtskEWsGki6UMpiwCDFMzFEnLD/mcBdpT99rijmQ3so+8m8yPNPK/Lgo=
+X-Received: by 2002:a05:6512:1107:b0:50e:7e13:811b with SMTP id
+ l7-20020a056512110700b0050e7e13811bmr8344182lfg.8.1704270079743; Wed, 03 Jan
+ 2024 00:21:19 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: vexpress and DM_SERIAL
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-References: <CAFLszTjvFWYNJGK_cAo6UuGNcBqO1KSGWUS4j58DHM_fu6V_Tw@mail.gmail.com>
-From: Kristian Amlie <kristian.amlie@northern.tech>
-Content-Language: en-US, nb-NO
-In-Reply-To: <CAFLszTjvFWYNJGK_cAo6UuGNcBqO1KSGWUS4j58DHM_fu6V_Tw@mail.gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------2MEaoE2KNDgr3csReSrmvyb2"
+References: <20231228153922.84323-1-avromanov@salutedevices.com>
+ <20231228153922.84323-5-avromanov@salutedevices.com>
+In-Reply-To: <20231228153922.84323-5-avromanov@salutedevices.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Wed, 3 Jan 2024 09:21:08 +0100
+Message-ID: <CAOf5uwmr9CvdthHEf2Jx+H7Jm+5vQht7f2t5-V+dkQBO68k6hw@mail.gmail.com>
+Subject: Re: [PATCH v1 04/12] nand: move nand_erase_opts() to core NAND folder
+To: Alexey Romanov <avromanov@salutedevices.com>
+Cc: michal.simek@amd.com, marex@denx.de, michael@walle.cc, 
+ stcarlso@linux.microsoft.com, tobias@waldekranz.com, seanedmond@microsoft.com, 
+ abdellatif.elkhlifi@arm.com, neil.armstrong@linaro.org, n-jain1@ti.com, 
+ xypron.glpk@gmx.de, dario.binacchi@amarulasolutions.com, 
+ frieder.schrempf@kontron.de, sjg@chromium.org, hs@denx.de, 
+ sean.anderson@seco.com, dimorinny@google.com, mkorpershoek@baylibre.com, 
+ patrick.delaunay@foss.st.com, u-boot@lists.denx.de, kernel@salutedevices.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,51 +91,390 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------2MEaoE2KNDgr3csReSrmvyb2
-Content-Type: multipart/mixed; boundary="------------1V90kgyyx6IPZraF77n35c0Y";
- protected-headers="v1"
-From: Kristian Amlie <kristian.amlie@northern.tech>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Message-ID: <4cea9f42-9948-45a0-8f0a-31cd41e7095d@northern.tech>
-Subject: Re: vexpress and DM_SERIAL
-References: <CAFLszTjvFWYNJGK_cAo6UuGNcBqO1KSGWUS4j58DHM_fu6V_Tw@mail.gmail.com>
-In-Reply-To: <CAFLszTjvFWYNJGK_cAo6UuGNcBqO1KSGWUS4j58DHM_fu6V_Tw@mail.gmail.com>
+Hi Alexey
 
---------------1V90kgyyx6IPZraF77n35c0Y
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+On Thu, Dec 28, 2023 at 4:39=E2=80=AFPM Alexey Romanov
+<avromanov@salutedevices.com> wrote:
+>
+> Currently nand_erase_opts() placed in the nand/raw/ folder,
+> because it uses the RAW NAND specific API (struct nand_chip).
+> This patch move it to core NAND folder and make function generic,
+> for both RAW/SPI NAND's usage.
+>
+> Also, nand_erase_opts() used in fastboot/fb_nand.c, cmd/nand.c
+> and env/nand.c code. This is also the reason why we should move
+> it to core folder and make it more general.
+>
+> Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
+> ---
+>  drivers/mtd/nand/raw/nand_util.c | 153 ----------------------------
+>  drivers/mtd/nand/util.c          | 166 +++++++++++++++++++++++++++++++
+>  2 files changed, 166 insertions(+), 153 deletions(-)
+>
+> diff --git a/drivers/mtd/nand/raw/nand_util.c b/drivers/mtd/nand/raw/nand=
+_util.c
+> index 9c18ce63b9..f7704d4697 100644
+> --- a/drivers/mtd/nand/raw/nand_util.c
+> +++ b/drivers/mtd/nand/raw/nand_util.c
+> @@ -32,159 +32,6 @@
+>  #include <linux/mtd/mtd.h>
+>  #include <linux/mtd/rawnand.h>
+>  #include <nand.h>
+> -#include <jffs2/jffs2.h>
+> -
+> -typedef struct erase_info      erase_info_t;
+> -
+> -/* support only for native endian JFFS2 */
+> -#define cpu_to_je16(x) (x)
+> -#define cpu_to_je32(x) (x)
+> -
+> -/**
+> - * nand_erase_opts: - erase NAND flash with support for various options
+> - *                   (jffs2 formatting)
+> - *
+> - * @param mtd          nand mtd instance to erase
+> - * @param opts         options,  @see struct nand_erase_options
+> - * Return:             0 in case of success
+> - *
+> - * This code is ported from flash_eraseall.c from Linux mtd utils by
+> - * Arcom Control System Ltd.
+> - */
+> -int nand_erase_opts(struct mtd_info *mtd,
+> -                   const nand_erase_options_t *opts)
+> -{
+> -       struct jffs2_unknown_node cleanmarker;
+> -       erase_info_t erase;
+> -       unsigned long erase_length, erased_length; /* in blocks */
+> -       int result;
+> -       int percent_complete =3D -1;
+> -       const char *mtd_device =3D mtd->name;
+> -       struct mtd_oob_ops oob_opts;
+> -       struct nand_chip *chip =3D mtd_to_nand(mtd);
+> -
+> -       if ((opts->offset & (mtd->erasesize - 1)) !=3D 0) {
+> -               printf("Attempt to erase non block-aligned data\n");
+> -               return -1;
+> -       }
+> -
+> -       memset(&erase, 0, sizeof(erase));
+> -       memset(&oob_opts, 0, sizeof(oob_opts));
+> -
+> -       erase.mtd =3D mtd;
+> -       erase.len =3D mtd->erasesize;
+> -       erase.addr =3D opts->offset;
+> -       erase_length =3D lldiv(opts->length + mtd->erasesize - 1,
+> -                            mtd->erasesize);
+> -
+> -       cleanmarker.magic =3D cpu_to_je16(JFFS2_MAGIC_BITMASK);
+> -       cleanmarker.nodetype =3D cpu_to_je16(JFFS2_NODETYPE_CLEANMARKER);
+> -       cleanmarker.totlen =3D cpu_to_je32(8);
+> -
+> -       /* scrub option allows to erase badblock. To prevent internal
+> -        * check from erase() method, set block check method to dummy
+> -        * and disable bad block table while erasing.
+> -        */
+> -       if (opts->scrub) {
+> -               erase.scrub =3D opts->scrub;
+> -               /*
+> -                * We don't need the bad block table anymore...
+> -                * after scrub, there are no bad blocks left!
+> -                */
+> -               if (chip->bbt) {
+> -                       kfree(chip->bbt);
+> -               }
+> -               chip->bbt =3D NULL;
+> -               chip->options &=3D ~NAND_BBT_SCANNED;
+> -       }
+> -
+> -       for (erased_length =3D 0;
+> -            erased_length < erase_length;
+> -            erase.addr +=3D mtd->erasesize) {
+> -
+> -               schedule();
+> -
+> -               if (opts->lim && (erase.addr >=3D (opts->offset + opts->l=
+im))) {
+> -                       puts("Size of erase exceeds limit\n");
+> -                       return -EFBIG;
+> -               }
+> -               if (!opts->scrub) {
+> -                       int ret =3D mtd_block_isbad(mtd, erase.addr);
+> -                       if (ret > 0) {
+> -                               if (!opts->quiet)
+> -                                       printf("\rSkipping %s at  "
+> -                                              "0x%08llx                 =
+"
+> -                                              "                         =
+\n",
+> -                                              ret =3D=3D 1 ? "bad block"=
+ : "bbt reserved",
+> -                                              erase.addr);
+> -
+> -                               if (!opts->spread)
+> -                                       erased_length++;
+> -
+> -                               continue;
+> -
+> -                       } else if (ret < 0) {
+> -                               printf("\n%s: MTD get bad block failed: %=
+d\n",
+> -                                      mtd_device,
+> -                                      ret);
+> -                               return -1;
+> -                       }
+> -               }
+> -
+> -               erased_length++;
+> -
+> -               result =3D mtd_erase(mtd, &erase);
+> -               if (result !=3D 0) {
+> -                       printf("\n%s: MTD Erase failure: %d\n",
+> -                              mtd_device, result);
+> -                       continue;
+> -               }
+> -
+> -               /* format for JFFS2 ? */
+> -               if (opts->jffs2 && chip->ecc.layout->oobavail >=3D 8) {
+> -                       struct mtd_oob_ops ops;
+> -                       ops.ooblen =3D 8;
+> -                       ops.datbuf =3D NULL;
+> -                       ops.oobbuf =3D (uint8_t *)&cleanmarker;
+> -                       ops.ooboffs =3D 0;
+> -                       ops.mode =3D MTD_OPS_AUTO_OOB;
+> -
+> -                       result =3D mtd_write_oob(mtd, erase.addr, &ops);
+> -                       if (result !=3D 0) {
+> -                               printf("\n%s: MTD writeoob failure: %d\n"=
+,
+> -                                      mtd_device, result);
+> -                               continue;
+> -                       }
+> -               }
+> -
+> -               if (!opts->quiet) {
+> -                       unsigned long long n =3D erased_length * 100ULL;
+> -                       int percent;
+> -
+> -                       do_div(n, erase_length);
+> -                       percent =3D (int)n;
+> -
+> -                       /* output progress message only at whole percent
+> -                        * steps to reduce the number of messages printed
+> -                        * on (slow) serial consoles
+> -                        */
+> -                       if (percent !=3D percent_complete) {
+> -                               percent_complete =3D percent;
+> -
+> -                               printf("\rErasing at 0x%llx -- %3d%% comp=
+lete.",
+> -                                      erase.addr, percent);
+> -
+> -                               if (opts->jffs2 && result =3D=3D 0)
+> -                                       printf(" Cleanmarker written at 0=
+x%llx.",
+> -                                              erase.addr);
+> -                       }
+> -               }
+> -       }
+> -       if (!opts->quiet)
+> -               printf("\n");
+> -
+> -       return 0;
+> -}
+>
+>  #ifdef CONFIG_CMD_NAND_LOCK_UNLOCK
+>
+> diff --git a/drivers/mtd/nand/util.c b/drivers/mtd/nand/util.c
+> index 4a372bb67d..f02c1ef4ca 100644
+> --- a/drivers/mtd/nand/util.c
+> +++ b/drivers/mtd/nand/util.c
+> @@ -28,10 +28,176 @@
+>  #include <asm/cache.h>
+>  #include <dm/devres.h>
+>
+> +#include <jffs2/jffs2.h>
+>  #include <linux/errno.h>
+>  #include <linux/mtd/mtd.h>
+> +#include <linux/mtd/nand.h>
+> +#include <linux/mtd/rawnand.h>
+>  #include <nand.h>
+>
+> +typedef struct erase_info      erase_info_t;
+> +
+> +/* support only for native endian JFFS2 */
+> +#define cpu_to_je16(x) (x)
+> +#define cpu_to_je32(x) (x)
+> +
+> +/**
+> + * nand_erase_opts: - erase NAND flash with support for various options
+> + *                   (jffs2 formatting)
+> + *
+> + * @param mtd          nand mtd instance to erase
+> + * @param opts         options,  @see struct nand_erase_options
+> + * Return:             0 in case of success
+> + *
+> + * This code is ported from flash_eraseall.c from Linux mtd utils by
+> + * Arcom Control System Ltd.
+> + */
+> +int nand_erase_opts(struct mtd_info *mtd,
+> +                   const nand_erase_options_t *opts)
+> +{
+> +       struct jffs2_unknown_node cleanmarker;
+> +       erase_info_t erase;
+> +       unsigned long erase_length, erased_length; /* in blocks */
+> +       int result;
+> +       int percent_complete =3D -1;
+> +       const char *mtd_device =3D mtd->name;
+> +       struct mtd_oob_ops oob_opts;
+> +       u32 oobavail =3D mtd->oobavail;
+> +#if CONFIG_IS_ENABLED(MTD_RAW_NAND)
+> +       struct nand_chip *chip =3D mtd_to_nand(mtd);
+> +#elif CONFIG_IS_ENABLED(MTD_SPI_NAND)
+> +       struct nand_device *nand =3D mtd_to_nanddev(mtd);
+> +#endif
+> +
+> +       if ((opts->offset & (mtd->erasesize - 1)) !=3D 0) {
+> +               printf("Attempt to erase non block-aligned data\n");
+> +               return -1;
+> +       }
+> +
+> +       memset(&erase, 0, sizeof(erase));
+> +       memset(&oob_opts, 0, sizeof(oob_opts));
+> +
+> +       erase.mtd =3D mtd;
+> +       erase.len =3D mtd->erasesize;
+> +       erase.addr =3D opts->offset;
+> +       erase_length =3D lldiv(opts->length + mtd->erasesize - 1,
+> +                            mtd->erasesize);
+> +
+> +       cleanmarker.magic =3D cpu_to_je16(JFFS2_MAGIC_BITMASK);
+> +       cleanmarker.nodetype =3D cpu_to_je16(JFFS2_NODETYPE_CLEANMARKER);
+> +       cleanmarker.totlen =3D cpu_to_je32(8);
+> +
+> +       /* scrub option allows to erase badblock. To prevent internal
+> +        * check from erase() method, set block check method to dummy
+> +        * and disable bad block table while erasing.
+> +        */
+> +       if (opts->scrub) {
+> +               erase.scrub =3D opts->scrub;
+> +
+> +               /*
+> +                * We don't need the bad block table anymore...
+> +                * after scrub, there are no bad blocks left!
+> +                */
+> +#if CONFIG_IS_ENABLED(MTD_RAW_NAND)
+> +               if (chip->bbt) {
+> +                       kfree(chip->bbt);
+> +               }
+> +               chip->bbt =3D NULL;
+> +               chip->options &=3D ~NAND_BBT_SCANNED;
+> +#elif CONFIG_IS_ENABLED(MTD_SPI_NAND)
+> +               if (nanddev_bbt_is_initialized(nand))
+> +                       nanddev_bbt_cleanup(nand);
+> +#endif
+> +       }
+> +
+> +       for (erased_length =3D 0;
+> +            erased_length < erase_length;
+> +            erase.addr +=3D mtd->erasesize) {
+> +
+> +               schedule();
+> +
+> +               if (opts->lim && (erase.addr >=3D (opts->offset + opts->l=
+im))) {
+> +                       puts("Size of erase exceeds limit\n");
+> +                       return -EFBIG;
+> +               }
+> +               if (!opts->scrub) {
+> +                       int ret =3D mtd_block_isbad(mtd, erase.addr);
+> +                       if (ret > 0) {
+> +                               if (!opts->quiet)
+> +                                       printf("\rSkipping %s at  "
+> +                                              "0x%08llx                 =
+"
+> +                                              "                         =
+\n",
+> +                                              ret =3D=3D 1 ? "bad block"=
+ : "bbt reserved",
+> +                                              erase.addr);
+> +
+> +                               if (!opts->spread)
+> +                                       erased_length++;
+> +
+> +                               continue;
+> +
+> +                       } else if (ret < 0) {
+> +                               printf("\n%s: MTD get bad block failed: %=
+d\n",
+> +                                      mtd_device,
+> +                                      ret);
+> +                               return -1;
+> +                       }
+> +               }
+> +
+> +               erased_length++;
+> +
+> +               result =3D mtd_erase(mtd, &erase);
+> +               if (result !=3D 0) {
+> +                       printf("\n%s: MTD Erase failure: %d\n",
+> +                              mtd_device, result);
+> +                       continue;
+> +               }
+> +
+> +               /* format for JFFS2 ? */
+> +               if (opts->jffs2 && oobavail >=3D 8) {
+> +                       struct mtd_oob_ops ops;
+> +                       ops.ooblen =3D 8;
+> +                       ops.datbuf =3D NULL;
+> +                       ops.oobbuf =3D (uint8_t *)&cleanmarker;
+> +                       ops.ooboffs =3D 0;
+> +                       ops.mode =3D MTD_OPS_AUTO_OOB;
+> +
+> +                       result =3D mtd_write_oob(mtd, erase.addr, &ops);
+> +                       if (result !=3D 0) {
+> +                               printf("\n%s: MTD writeoob failure: %d\n"=
+,
+> +                                      mtd_device, result);
+> +                               continue;
+> +                       }
+> +               }
+> +
+> +               if (!opts->quiet) {
+> +                       unsigned long long n =3D erased_length * 100ULL;
+> +                       int percent;
+> +
+> +                       do_div(n, erase_length);
+> +                       percent =3D (int)n;
+> +
+> +                       /* output progress message only at whole percent
+> +                        * steps to reduce the number of messages printed
+> +                        * on (slow) serial consoles
+> +                        */
+> +                       if (percent !=3D percent_complete) {
+> +                               percent_complete =3D percent;
+> +
+> +                               printf("\rErasing at 0x%llx -- %3d%% comp=
+lete.",
+> +                                      erase.addr, percent);
+> +
+> +                               if (opts->jffs2 && result =3D=3D 0)
+> +                                       printf(" Cleanmarker written at 0=
+x%llx.",
+> +                                              erase.addr);
+> +                       }
+> +               }
+> +       }
+> +       if (!opts->quiet)
+> +               printf("\n");
+> +
+> +       return 0;
+> +}
+> +
+>  /**
+>   * check_skip_len
+>   *
+> --
+> 2.30.1
+>
 
-T24gMjcvMTIvMjAyMyAwODo1NSwgU2ltb24gR2xhc3Mgd3JvdGU6DQo+IEhpIEtyaXN0aWFu
-LA0KPiANCj4gRG8geW91IHRoaW5rIGl0IHdvdWxkIGJlIHBvc3NpYmxlIHRvIG1pZ3JhdGUg
-dGhlIHZleHByZXNzX2NhOXg0IGJvYXJkDQo+IHRvIHVzZSBETV9TRVJJQUw/DQoNClllcyEg
-VGhpcyBoYXMgdGFrZW4gdGhlIGJhY2tzZWF0IGZvciBhIHdoaWxlIGR1ZSB0byBvdGhlciBw
-cmlvcml0aWVzLCANCmJ1dCBpdCdzIGJhY2sgbmVhciB0aGUgdG9wIG9mIG91ciBiYWNrbG9n
-IG5vdy4gT3VyIGdvYWwgaXMgdG8gaGF2ZSB0aGlzIA0Kc29sdmVkIGluIHRoZSBmaXJzdCBx
-dWFydGVyLg0KDQotLSANCgkqS3Jpc3RpYW4gQW1saWUqDQpTb2Z0d2FyZSBFbmdpbmVlciB8
-IE1lbmRlciA8aHR0cHM6Ly9tZW5kZXIuaW8+DQpPc2xvLCBOb3J3YXkNCjxodHRwczovL3d3
-dy5saW5rZWRpbi5jb20vY29tcGFueS9ub3J0aGVybi50ZWNoPjxodHRwczovL3R3aXR0ZXIu
-Y29tL25vcnRoZXJudGVjaGhxPjxodHRwczovL25vcnRoZXJuLnRlY2g+DQoJTm9ydGhlcm4u
-dGVjaCA8aHR0cHM6Ly9ub3J0aGVybi50ZWNoPiB8IFNlY3VyaW5nIHRoZSB3b3JsZCdzIGNv
-bm5lY3RlZA0KZGV2aWNlcw0KDQoNCg==
-
---------------1V90kgyyx6IPZraF77n35c0Y--
-
---------------2MEaoE2KNDgr3csReSrmvyb2
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEENCehelwanxwH18S/9GRAfJlq8D8FAmWVGEAACgkQ9GRAfJlq
-8D/vWgf/S6ccQydgp0HIaTVKGg5ayrfS+PMJ+NAmVQ4q+qHZHJNRsoVkL4E0vUty
-XfM7e9FVLa1A71OP3dSQ1JRVAwUtqFdu+prskDsrF+CYUkG3GbhXvUiIxsffyJdY
-P3ns71w9Dq4KER/8+HFqeNtdW3nSqr/q/cv9MlluvpbAcvtNfYkNMa2c8TemnKgi
-fA9ckBK4gS63UrdTEBs80er8+6Aa6DXCiJWpoOlxucLUljl8OTleDyltKN1pbiyx
-eyYxVv9uVb2s/SUzYIVdcGaGcdo2wg96aOw/uEQz+eqbwLZd/z0cTfSMLg4ugEzV
-OI0QypoWiXaqAODeuZtW46U0yBtazw==
-=sT1W
------END PGP SIGNATURE-----
-
---------------2MEaoE2KNDgr3csReSrmvyb2--
+Reviewed-By: Michael Trimarchi <michael@amarulasolutions.com>
