@@ -4,183 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78F90C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 10:46:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39913C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 10:47:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61D6A86F39;
-	Wed,  3 Jan 2024 11:46:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id A005787120;
+	Wed,  3 Jan 2024 11:47:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="rPLIyuNB";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="hGIiIvTs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88BBB86EEC; Wed,  3 Jan 2024 11:46:28 +0100 (CET)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20614.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe59::614])
+ id B6AB386F64; Wed,  3 Jan 2024 11:47:24 +0100 (CET)
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur04on070a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe0d::70a])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 993EB86F39
- for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 11:46:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 61FB487076
+ for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 11:47:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ENyv8chfTRVk5wT4XnWMqZ10Jo11D2mjdk338nFrfU3cSfttnu4edhuVod3g0M2kovhrzf4xLVCBCBV+Pwk+nFGndIOT5YLeHSvp2XASi87+8hZQQFeBKXIfp1y3s8EU4iEy93ZaqCPeHGkmaTHf/LfSIPceXXEpd7IdGZaaC4hei+zzvExmOyefkoqJMhCCF+HB33MPrlQg0Bov5RtSvK5eshWq3k4uhToIZh2VXNOB2oUwLEMWjAo4i5xiDeYMJXrUuTuR0SdMkB/z426t3PqW2OwLPPJIihpRrH8aeEM7UXK796dt07oxhP+f553Gc2fdDjJIXEIXS0SgyIUExA==
+ b=bQkfbgABS/fjj4/w8VU8Rbzpeeku92sBZ8F1iIeF5IHD5yQg6Qb+psLmKoyNE+/bhAr+p9d9nwdYhE/a87KWu8oMDaOvoKlPjOQE4Z0Zh3rBP2WhH59oZijksNiFhKzJFKiIIfIAR5J2E68yCISUtRWsV2zLYgMzrKGi9+55AAR/dMQ8mxaQOfJuyDZ16Rb6VCAmmM4QJr7GlmzFMsTsNZXlWVe3DyRbF+kewGnOGoGmuUWlyd9vcRcwe6STtlsbU9OgZCEBPWzyQ8++h9b530gVTkulwcGN6p3bq2+NoDaiI9cK5uYq60cRLaH9ikKbj/XuRvCHprxR9mnOf1wDbw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=w7LPxlMX1h3XVvoKen0swcriyvuM0tq05QoIhztVt3w=;
- b=HpKGXo6MbSJTW6AJs1s3OyNmdmh0jN9zLltog51O8sHGIco8ihmGbEwCvqMUpjcbeIhIsL23P6dLpCrF9Oyel/N8/yg1Moptf4zN1acjvmUaBmeukqhffZWGGnIsoyq5rkWgmxyyCFgMNqsYX/nI6FNTGsDtZEQLgTyMCVb4tTsuZWk7aoY4rB22Y1kt4bcN92a0DTCD32DgWMqb7OD88iSpAJMLVsp9odxpAGWL9OtAcagGOBA3qgqfjApAp2uAILrtvII4jpEj5wvya00n843EPO7ujk070CcNwoleUbLEjy6ULzP/kRcQpy5VvWcgQrcGKjEZFOA3JW7QXpKoEg==
+ bh=X5rDPd7FEntFZafWvimhE80fbPhIKfkq4hiID7HGJp4=;
+ b=Tq1w+iioid1eJ4aHS5afrDvlL+ZWYTvGhCGQnGPnfp7SfgG+c0JrkI00euJfJxQV7eSBiF5MDzWSIsWCRZIqdAETr8AQdW9MN7Im5+0kvwzW7/Khg+kd3v9NZDMBqNb2OHeG3vOUHyDnHpOzcDHQhmsj9RatyxfPIVRgh+ZMeX9HyfPBR60sJODvCG6rDmLPR4Vx6YZSjmtktr73h68qN0IEKddPAbek+AOfkkN+AStoP5FaH5B/J83loWF0D4708nZ+a29tv4MxRYgNRQV3melUEq4t8LzT4I2Rk0o0DA1M8ljZSiqHaHe+N83KkRRBa/3PEha/RHisUZ0yJdB7Vg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=w7LPxlMX1h3XVvoKen0swcriyvuM0tq05QoIhztVt3w=;
- b=rPLIyuNBTcHXk5bUwQsRnKcOCgo3pb6pcHYJGF2RgUqEN0UKgLTN8zzbwJnfvIFz1l5WnsY99rMjdmfokGo0x33pCF1gmtyKyogLjm8V8z3B1FQtS3c8gAXZOqJ96maF+KFnAQWply5kwWDqfgcVD7xSpHhxWrLQ/EAC27MO66g=
+ bh=X5rDPd7FEntFZafWvimhE80fbPhIKfkq4hiID7HGJp4=;
+ b=hGIiIvTsYoipNevNX7Ig7CsjI+YO83B7Mb+gQnlgxR5Ou2vRtl4/o0IEWH+OhDA8Oh57A2JxNLR7g3jAjN9VHBuUp7kulJBAyjX39V3mzn/MDtsEEpx7kkHYm/OR0waIcA6OV6S86o1XMOdkoEmpHl2wxIpGM/sCGOZ59D4FrGE=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from CYXPR12MB9337.namprd12.prod.outlook.com (2603:10b6:930:d8::20)
- by DS7PR12MB6213.namprd12.prod.outlook.com (2603:10b6:8:97::13) with
- Microsoft SMTP Server (version=TLS1_2,
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
+ by AS2PR10MB7575.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:546::19)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7135.25; Wed, 3 Jan
- 2024 10:46:22 +0000
-Received: from CYXPR12MB9337.namprd12.prod.outlook.com
- ([fe80::2b19:2045:59c7:cde2]) by CYXPR12MB9337.namprd12.prod.outlook.com
- ([fe80::2b19:2045:59c7:cde2%7]) with mapi id 15.20.7159.013; Wed, 3 Jan 2024
- 10:46:22 +0000
-Message-ID: <f7cb982f-66f2-47f1-aeb2-f3fa8e8b8912@amd.com>
-Date: Wed, 3 Jan 2024 11:46:01 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 6/9] arm: Get bloblist from boot arguments
-Content-Language: en-US
-To: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
- ilias.apalodimas@linaro.org, sjg@chromium.org, jwerner@chromium.org
-Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Kevin Chen <kevin_chen@aspeedtech.com>,
- Sean Anderson <sean.anderson@seco.com>, Bin Meng <bmeng.cn@gmail.com>,
- Nikhil M Jain <n-jain1@ti.com>, Devarsh Thakkar <devarsht@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Shiji Yang <yangshiji66@outlook.com>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Baruch Siach <baruch@tkos.co.il>, Neil Armstrong
- <neil.armstrong@linaro.org>, Stefan Roese <sr@denx.de>
-References: <20240102221237.1007090-1-raymond.mao@linaro.org>
- <20240102221237.1007090-7-raymond.mao@linaro.org>
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20240102221237.1007090-7-raymond.mao@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1P191CA0005.EURP191.PROD.OUTLOOK.COM
- (2603:10a6:800:1ba::12) To CYXPR12MB9337.namprd12.prod.outlook.com
- (2603:10b6:930:d8::20)
+ 2024 10:47:20 +0000
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::f059:23ad:b039:15de]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::f059:23ad:b039:15de%7]) with mapi id 15.20.7135.023; Wed, 3 Jan 2024
+ 10:47:20 +0000
+From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Subject: [PATCH v2 0/8] cmd/mem.c fixups
+Date: Wed,  3 Jan 2024 11:47:02 +0100
+Message-Id: <20240103104710.4185383-1-rasmus.villemoes@prevas.dk>
+X-Mailer: git-send-email 2.40.1.1.g1c60b9335d
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: MM0P280CA0069.SWEP280.PROD.OUTLOOK.COM (2603:10a6:190:8::6)
+ To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:45a::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CYXPR12MB9337:EE_|DS7PR12MB6213:EE_
-X-MS-Office365-Filtering-Correlation-Id: b9ff2f11-93fb-49cc-be7f-08dc0c493a11
+X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|AS2PR10MB7575:EE_
+X-MS-Office365-Filtering-Correlation-Id: 169e125c-6bea-4223-e593-08dc0c495c62
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 4UHFRFKlZBPm/Kev7QQ0yFdPaYFZhtzOBcWHyGGLSYEf5Vr06pbLsX5j12CiFI8R//ZmwysWRlepx9w5ARncA+VWH5mOomDZUHc26AmbQj1/qBA4kxT6aErcRMw+Ig4QhUh5wes/LkC6IyvkAZP04DmIWazFWv8ftWNtHRcUGFmI6Lo4OQbWQSBzGMi/Oq/H6bX0lq0/NDY+5RZRQiqDJ+zeRfTd2t0fgrOaSQvJSz8YSVyHIaJ6HhZpHsSuyLVqYBBsnpDbOLSdZqFco8aUkVRD7LYaRaiiigRtmefgIpEq92eK4tT9sU7wVrNzgawNYbPosr1tnEhacv5GGZsaKvflc0VpXZ5rPHH+9rKyCvHyGhp9NkdV1HltvJNXc1Bg6eOaSLribynEv5iVGMGA2HVghDO/dVA3IvJc92QUhKt3gIrSzaPJ9hqq6cS8Ee4HKk2FEpx56T/eQcn3iD/+0Kp7ApxwJEhMm3J5ZXAlsH+XiTaGgZJZr7s7AVAjPAOlIfyd0gHCKykuXORfckNZNRIdTqIQKf/SY5xevnLVYQpLyDe3O242EPQiA0XWsk64sQsnPndpWJft4O6D0bdalwceOOpnrENPDH002MHPEa8BMXguVO5I3Ji77fJAKiWLN54p3etN+FYwj8Ft0G5glQ==
+X-Microsoft-Antispam-Message-Info: eFpxCim2syIF0sE63hxMRzoob7n4STrTIVLZReOyJHz3ESPN+DdQztnnBgQH9eBIxdvnotuUZomLIYSGJ+bxWqVAaQ4OfeDfkILz2Cctzdp2Jn9mtcc7VF4TPSO8S6Qh40pNH5jOdBurklNAMLsjXuLQYolZiLpMIIJkZsSBoj8c8bhdFq6GrxTaGTlwgVl4uRudO+heP0WuPELuatmQcbgMOJnfmfEOwA0cZwVUfNDCJsL2kDbBP45W3cL9U4bBywKd1HihY+ZN1IRnRuSI3QqJKvSClZSQV3sPJTIr7UCftnoDqub1EKMorlFpl6UCMXwW2ezYSQsvG6udmA/OaI9V09XKagm5ozo/phkRr33HVGpIuWIp4zVbFgjm5dhV1gV8u9Ogdm6Lm68L6493nGzcOuTU8827AppWrDaTNQr2PS7RJClf+AbIgcBn21v5vdnvXr4FaioDOrlTaTPIskhRgjhjiMXKkO1mCdAQvD5nxy/RMNLMo3U6xOsGuEcL4KHJZ/dlfS8Mclps4CtTndcoVspSbQTJbOaAO+CLQIDs/QLFslho3pIRbgIoTGk26PujeMZ2iWVbeod08KUOdaSyEF5q87xjoasn4abC16ztO1UzB7p8O5Xi7oDSU0XW
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CYXPR12MB9337.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376002)(366004)(346002)(39860400002)(136003)(396003)(230922051799003)(451199024)(1800799012)(186009)(64100799003)(38100700002)(36756003)(31686004)(31696002)(86362001)(2616005)(26005)(53546011)(6506007)(6666004)(6512007)(66946007)(6486002)(316002)(478600001)(54906003)(8936002)(8676002)(66556008)(66476007)(4326008)(83380400001)(5660300002)(41300700001)(44832011)(7416002)(2906002)(43740500002)(45980500001);
- DIR:OUT; SFP:1101; 
+ IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(39850400004)(346002)(366004)(376002)(396003)(136003)(230922051799003)(1800799012)(64100799003)(451199024)(186009)(1076003)(26005)(2616005)(107886003)(66556008)(83380400001)(38100700002)(66946007)(36756003)(54906003)(6916009)(316002)(66476007)(6486002)(478600001)(86362001)(5660300002)(2906002)(44832011)(8676002)(8976002)(8936002)(4326008)(38350700005)(41300700001)(6666004)(6506007)(6512007)(52116002);
+ DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?clhEbEdMeFkrSU9ra1NBK0p3cys5akRLaWdzQXYyS0ExaE1oTFV4Ukd2M0Zz?=
- =?utf-8?B?ZXVReVJvUm14TjVWY3EvL3RJNkUvdm01ODR3aDNTRzRqZmt1MUVXWUdSUlpm?=
- =?utf-8?B?aHYyK0xibmZiSTA0Zm9LME1uUVFDWnoxd1lTRUNBZTBYTTdtM1UvS1VOLzdU?=
- =?utf-8?B?NVpka20vRStTOWZZclFYYzhoWHZuRXV1YW81cVo1c3pQM1g2QmlFZkFlMEFV?=
- =?utf-8?B?Mnp1MmsvRHMxYi9ybHBlYVJMb1J6N0NpajlXckU2VnQvWHNMelZFMktEdzF4?=
- =?utf-8?B?SWV3TUF6elJ1aHkrc1JGVit1WnVCTGNpV1M1Qkx2QzdoaHljRVU1a0FPZ3FR?=
- =?utf-8?B?eG5DTXF3TUFJZFg0d0hvd2FneFlyQVFmTlY3MzNaYitjaFNiaCtQRmpYSXVz?=
- =?utf-8?B?TEpTUGdHbXpESnRxZFpYWnVzYnJNQitlV3RaM1NPVGZaaEtMMnZMMFd0Wk5u?=
- =?utf-8?B?QTZnWXZhSVJPelZCWHp3YndFajdxTHltUEJ2aStGeTdXZnl1ZHdCSFhMQkI0?=
- =?utf-8?B?VDh6SCsyU20xd1hWSXMvZUNmbjRlNUhZdEV1TDhwbEVUTUk1elpZdjNVbEJU?=
- =?utf-8?B?SG1DMGUvakJMOU1abHpnWllVM2xmRERRMmRqUjFORnFKdHE4ckgvTkZDSHpE?=
- =?utf-8?B?cHVkbUpJOTBMTmtFanJuSDh2ci9ybnlGWHB3dVJjdmVWWHc2cTJIckhoNGNi?=
- =?utf-8?B?bDV4bXBxVWdaMzVJMW1YTnl1VVBVOXNzRXUwR3ZxeTJHYVhUaG03dDJZS0tO?=
- =?utf-8?B?MTJ2UHpLSzFHMyt1TUVTSGxITmU1MDlRY1FHME0rWGJSV2FaVm93M1F5T2ta?=
- =?utf-8?B?M0grOEk1YWt1VFMxenE5WWMwV016b2huc0x4UmZsczBXQlE2dEdnQmdhYnhW?=
- =?utf-8?B?ekR2MllKbkhCaEJITUFGSWJQemM2QWFJeTFTN2FjaXdwa2ZnUlh2aDFDQmdh?=
- =?utf-8?B?RjBxNStMRDZpOGVrTHhiRlZjMlA0NTRRRlVKUFlyaEV3YTk5NW5QMyswSnpZ?=
- =?utf-8?B?b3kvbk9sVXRwa1d2UkhEVE1sZE0xUUFjMXlFamtScFN6Um1XV0w5Qmd1QSsr?=
- =?utf-8?B?NHpaK3RYazYyNGZMMmtsSGhHamtSazhYQ1dWZ2hxbmZubWtBM2w3b0VuMTdt?=
- =?utf-8?B?eUdSK0dObk1MOGlEQkw0NGNsZWJOdzViRTl3Uks1b1k1dThVYTc3V0FGQUVG?=
- =?utf-8?B?SkFuV0UyVWRFeERTMWdYSmhLUDZad1ZUVWhKckl6WHB2WDNrcG1zT09iSnNq?=
- =?utf-8?B?cTJGSGFFNG5BTnNpOGlWMmJCbEZ1UVRCeGRHZjNiZVRqOFc0NXd0Ym1lUXQ2?=
- =?utf-8?B?KzAvM0JsUGxNQThFdlFGTnlyMEdZYkcvWVRBaXpMNlRpVjhlM1c0b1krS2ph?=
- =?utf-8?B?RUwzWGNNM1dTbG0vK1h4YTVDZEJTTnBaMzVoakVaeWRRS285RDNVNHcxclRM?=
- =?utf-8?B?Z2lWSm5LZXN6WGhkQ2l1L2o5QTRPMTB4VXRsU2dtcU5OQXRhRWFTMEkvWlBZ?=
- =?utf-8?B?bXVmY0poeWNtTFVLV0NiUFdLWG9VaGd5UGY4eUtMK0Nyak5YZEU1d3pTcVoz?=
- =?utf-8?B?MC80ODMveDYrbG9oRkx1MU9IUXpIbTVQWEhPUnM0SklMN05KT1Z6UTFXeXYw?=
- =?utf-8?B?bW1EWkpUYnNRYXRTRlM4MUlXQ2s0Y0YrV1pVZ0RUN3c5ZWJGbFluSWFScTg5?=
- =?utf-8?B?djBaQ2J6ZEUwbU9hejVxZzBHMmlROUVHejJrZ2tYc1RZK1JzU2Exem50dytK?=
- =?utf-8?B?Y1RJcXovRTIwcXdBRjJwdEZ6OW5vbE9pYmpad1ByNktZUG4xOHAvcWNaK2xn?=
- =?utf-8?B?RGorK3RsRk9wMTJpOVg1TnBKQmdHWGRDY1BaMW5jZkZ2Q1JvWVhlaGE0UmRu?=
- =?utf-8?B?S243NlNQcWRBQXJ0bXRNZFVxbmVBaktZQlMyQTJ2eDVyMTZITnVnK0lVd1c1?=
- =?utf-8?B?RGFlUEVQTkJwbnpFWkpUeFB2ejVhRWhlSWd4aUxVdm8rT2svTnl5aVVpaDU5?=
- =?utf-8?B?bnJQWnNycnNWNmRqckJpRWU0M0l0UCszWXBGOUFFYktiSlQ5MEJ6S2N3cTBZ?=
- =?utf-8?B?aW9NTGtEN09WNlF2cThBbmY5WGlmSTRMYTQ4dks3YjdyWlQ3ZmNkYlB5NHpn?=
- =?utf-8?Q?sgJQwbM+zCpT1bvIyu3cKbMjR?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b9ff2f11-93fb-49cc-be7f-08dc0c493a11
-X-MS-Exchange-CrossTenant-AuthSource: CYXPR12MB9337.namprd12.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?HOv3hiPbb2LrWoyTHIZnfqca3ystu+0pS0S35HeTXMPKX1MVQHqWoHX3okrq?=
+ =?us-ascii?Q?PdlRyajIuinWG25z4rsy4BNmoVzDsX54xdhtRawnl+uw39FkbxuL8AigkyGs?=
+ =?us-ascii?Q?fh2LoFHalXVm9yYHMGYnOfRTxAQzanzseK+M9JH1nBgP/eojSB9JLGDHViaX?=
+ =?us-ascii?Q?9nT00EEYXEtsvq3VHgEoOa6fhDuLmsf4/0BPYyQznzoMdKtrWv/uPfoqKs2d?=
+ =?us-ascii?Q?WPklS0u+HrzbADKfGcSP4O5qr0Ip63JC49WdcdXXezdMiRWZYxxoF69BERpx?=
+ =?us-ascii?Q?SgJdLsH3ZCOkQmn6HS91HU3gFgYNxacY6vF6PJN/u+9JTtTdblEsoUPMQS/y?=
+ =?us-ascii?Q?iEj0Q+eLW4AL9d55epYZfBGFGS2IbVfg43V6YOfyqQMNsAO90aKp7L4dVgAb?=
+ =?us-ascii?Q?tYpavt1uQh+KcIz1na3uMqjkK9zL7y3mqZz0Ule+TvK4+72gW9UK+B0uRBiq?=
+ =?us-ascii?Q?8/3leuxBRNUHPt5bV6dFu4mHWU2W5Lta3sH06VJwi7KfpObAnQjog9vqKWbM?=
+ =?us-ascii?Q?UGok/Z6fduPD2lNXf0x1y23aiLXyzrhjRemgl7JCPuhJb8YEGR6Y8pZKVN/8?=
+ =?us-ascii?Q?uDC4gTTt33R5UJkUBr6A/yhrunTNfK3ke3jJXjjh8r5kpcAJl8UV0mMwcQRn?=
+ =?us-ascii?Q?skqS+u/1hdUqvD/uO8Mf/6OfOvDnQNT4KKyv9bdofHGUYwH8/bkyWxjjfKZY?=
+ =?us-ascii?Q?zPMJB45oxZeEMkNjcOqiTTUcV7Mv611QUZTP26C+KNYuF5DKqbsMs76779j7?=
+ =?us-ascii?Q?nb7O/QfAq0YcW2ki21AvBPob7wBf/blTIGrWrBfDwW8boHTh4+iahQU6ZZod?=
+ =?us-ascii?Q?rKciUS3fHsmDacJoGXg23Iregm1jfXnsC8apLGzaE79yHnv1YKvPL7HH7f0n?=
+ =?us-ascii?Q?aG620zTjb689uU2OCpf34XT/VB1bsGKiGBJWCAIk5cmtQapkjisU/r8xPwCX?=
+ =?us-ascii?Q?cd+gh71g7gKHzdmq3PyMZ1ygJ03FstTBhRWzpvYxdRomN6WVfcjie9Ke1WBi?=
+ =?us-ascii?Q?6BUxdQKv++Y7Gb4TqczGJ6eaisI9ZGTnuz8COZdfaqupihDgNHIJf/gy4U7Y?=
+ =?us-ascii?Q?RezLkQpC/7DylS9B8BNAnv74kbK2iwIg2mZM6jWqsrjsO1VAIRrkR3QVlUEk?=
+ =?us-ascii?Q?1Yrvuxwcf6lG2CJs2eUiZHYRVxpqswdPUUt+S2dAQ0hD+H4CphgFQkDZa44U?=
+ =?us-ascii?Q?KMm0ExW6WEyKU+iJn1fr8inV8PlSd+xUQHfspfCpGzshnjSnBZQmc9339Y+l?=
+ =?us-ascii?Q?mSTxm2iilYQ4oOffMVdt59G+wfS0Sqa8+CeqfnbnU/SKgxIXCXy9z4HLnObu?=
+ =?us-ascii?Q?EL5Mm+YhpNO2cdouLR0j84zORI9YpCGaZNkPhh4KpUlmQ5emxUgk3trzU23J?=
+ =?us-ascii?Q?0B2WLSnKvNv2b6eh8Lx/QKauRys+r1iUsZ35tBc9bgYx3TLXxnwAUGLUXovF?=
+ =?us-ascii?Q?i/LP3Fgn/733/uSnm4A/zQWcYO6qHXFk50GCCEUXRYL+66sBJh0mWOpy0lkZ?=
+ =?us-ascii?Q?Z+JcFOmWLOE4f9QPvN3FDvzAxGt2IxPz08ZkkKI6JP9pLWIGS6WbxYMACn5J?=
+ =?us-ascii?Q?zYRY3h6UKFqiVi8mT3zUpUHrc/HCoZ1xQEsREQhgMeFNOiVqiQbgNZdIYAee?=
+ =?us-ascii?Q?1A=3D=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 169e125c-6bea-4223-e593-08dc0c495c62
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jan 2024 10:46:22.7300 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jan 2024 10:47:20.2985 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: EBpZCeQOK8hxgZAZGwPXGp6OUQ+UKhJMrvc0JmuydfjUft203/R9vkA8YZY0DaVh
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6213
+X-MS-Exchange-CrossTenant-UserPrincipalName: RDsU0P1IbiEm5gLdSw1AQjfC/4tOuFIQlXLua3NDIb7k5LiNsnp2QhrlKv/O6xsPhOxxBtqUU3/yWjfoX8GSA5MN20n041xSpB7u2apVars=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB7575
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -197,109 +132,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+v2: Add Simon's R-b to patch 1. Patches 2-8 are new.
 
+This started as a simple one-liner (still patch 1), but when Simon
+asked me to update the documentation and add some test cases I
+stumbled on some things that might as well also get fixed.
 
-On 1/2/24 23:12, Raymond Mao wrote:
-> Add arch custom function to get bloblist from boot arguments.
-> Check whether boot arguments aligns with the register conventions
-> defined in FW Handoff spec v0.9.
-> Add bloblist related options into qemu-arm default config.
-> 
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
-> Changes in v2
-> - Remove low level code for copying boot arguments.
-> - Refactor board_fdt_blob_setup() and remove direct access of gd->bloblist.
-> Changes in v3
-> - Optimize board_bloblist_from_boot_arg().
-> Changes in v4
-> - Move the function as an Arm-arch library instead of a board-specific one.
-> 
->   arch/arm/lib/xferlist.c      | 38 ++++++++++++++++++++++++++++++++++++
->   configs/qemu_arm64_defconfig |  3 +++
->   3 files changed, 45 insertions(+)
->   create mode 100644 arch/arm/lib/xferlist.c
-> 
-> diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
-> index b1bcd37466..0023c55d0d 100644
-> --- a/arch/arm/lib/Makefile
-> +++ b/arch/arm/lib/Makefile
-> @@ -85,6 +85,10 @@ obj-y	+= psci-dt.o
->   
->   obj-$(CONFIG_DEBUG_LL)	+= debug.o
->   
-> +ifdef CONFIG_BLOBLIST
-> +obj-$(CONFIG_OF_BOARD)  += xferlist.o
-> +endif
-> +
->   # For EABI conformant tool chains, provide eabi_compat()
->   ifneq (,$(findstring -mabi=aapcs-linux,$(PLATFORM_CPPFLAGS)))
->   extra-y	+= eabi_compat.o
-> diff --git a/arch/arm/lib/xferlist.c b/arch/arm/lib/xferlist.c
-> new file mode 100644
-> index 0000000000..163d20c11c
-> --- /dev/null
-> +++ b/arch/arm/lib/xferlist.c
-> @@ -0,0 +1,38 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2023 Linaro Limited
-> + * Author: Raymond Mao <raymond.mao@linaro.org>
-> + */
-> +#include <linux/types.h>
-> +#include <errno.h>
-> +#include <bloblist.h>
-> +
-> +/*
-> + * Boot parameters saved from start.S
-> + * saved_args[0]: FDT base address
-> + * saved_args[1]: Bloblist signature
-> + * saved_args[2]: must be 0
-> + * saved_args[3]: Bloblist base address
-> + */
-> +extern unsigned long saved_args[];
+Patch 2 is the documentation update, might be folded into patch 1.
+3 and 4 are preparations for the test cases added in patch 5.
 
-you should put this to bloblist.h. I would say it should be the part of 4/9 
-where you define saved_args for armv7.
+6 is an actual fix; 32 bit targets wrongly list .q in their help texts.
 
+7 and 8 fix stale documentation.
 
-> +
-> +int xferlist_from_boot_arg(ulong addr, ulong size)
-> +{
-> +	int ret = -ENOENT;
+Rasmus Villemoes (8):
+  cmd/mem.c: use memmove in do_mem_cp()
+  doc/usage/cmd/cp.rst: document that overlapping regions are supported
+  cmd/command.c: constify "arg" argument of cmd_get_data_size()
+  cmd/command.c: relax length check in cmd_get_data_size()
+  test: add test of "cp" shell command
+  cmd/mem.c: fix wrong use of ifdef, drop pointless SUPPORT_64BIT_DATA
+    macro
+  README: drop mention of MEM_SUPPORT_64BIT_DATA
+  doc: drop references to non-existing CONFIG_MEM_SUPPORT_64BIT_DATA
 
-There is no value to initialize it here.
+ README                |   3 -
+ cmd/mem.c             |  40 +++++-----
+ common/command.c      |   4 +-
+ doc/usage/cmd/cmp.rst |   2 +-
+ doc/usage/cmd/cp.rst  |   5 +-
+ include/command.h     |   2 +-
+ test/cmd/Makefile     |   1 +
+ test/cmd/mem_copy.c   | 169 ++++++++++++++++++++++++++++++++++++++++++
+ 8 files changed, 196 insertions(+), 30 deletions(-)
+ create mode 100644 test/cmd/mem_copy.c
 
-> +
-> +	if (!IS_ENABLED(CONFIG_OF_BOARD) || !IS_ENABLED(CONFIG_BLOBLIST))
-> +		return -ENOENT;
-> +
-> +	ret = bloblist_check(saved_args[3], size);
-> +	if (ret)
-> +		return ret;
-> +
-> +	/* Check the register conventions */
-> +	ret = bloblist_check_reg_conv(saved_args[0], saved_args[2],
-> +				      saved_args[1]);
-> +	if (!ret)
-> +		/* Relocate the bloblist to the fixed address */
-> +		ret = bloblist_reloc((void *)addr, size);
-> +
-> +	return ret;
-> +}
-> diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-> index c010c25a92..418f48001c 100644
-> --- a/configs/qemu_arm64_defconfig
-> +++ b/configs/qemu_arm64_defconfig
-> @@ -69,3 +69,6 @@ CONFIG_USB_EHCI_HCD=y
->   CONFIG_USB_EHCI_PCI=y
->   CONFIG_SEMIHOSTING=y
->   CONFIG_TPM=y
-> +CONFIG_BLOBLIST=y
-> +CONFIG_BLOBLIST_ADDR=0x40004000
-> +CONFIG_BLOBLIST_SIZE=0x4000
+-- 
+2.40.1.1.g1c60b9335d
 
-This is likely not the right position in defconfig. make savedefconfig; cp 
-defconfig configs/qemu_arm64_defconfig.
-
-M
