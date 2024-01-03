@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4819C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 19:32:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27DBAC3DA6E
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 19:32:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 046E68773D;
-	Wed,  3 Jan 2024 20:32:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 987A38780F;
+	Wed,  3 Jan 2024 20:32:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="V8hGBcX+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Xt6+Try0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EBB987809; Wed,  3 Jan 2024 20:32:23 +0100 (CET)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
+ id 667118783C; Wed,  3 Jan 2024 20:32:41 +0100 (CET)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 101B0874AC
- for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 20:32:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB8F88783B
+ for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 20:32:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-2866b15b013so2420567a91.0
- for <u-boot@lists.denx.de>; Wed, 03 Jan 2024 11:32:20 -0800 (PST)
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-1d4c91a9adcso2048315ad.1
+ for <u-boot@lists.denx.de>; Wed, 03 Jan 2024 11:32:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704310335; x=1704915135; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1704310355; x=1704915155; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=y2rYUjAP0HYQwaqfxPSEJ+Hw5g4KJVXx1UPmluum3So=;
- b=V8hGBcX+S/zXK1tyvKaokb09iTKJcMoovlNs/tT8CRiZpt269bh/Bw3+Iyv9OQb6a5
- 1+wrWjlsIcHFdeLEN8fxmTqNTUBQ/g7GQu1bMoL8Zas5agyi+XRaeDiMgqSkv/gn3bWG
- lEgR2HKwnEV1iA9l+q+Jhy0YsTsQFHP1zPZEGf/CSnz36ERPcmTuzxg3vXnHqYMJnP3b
- F7qvwKbC2BLNp3fuNf8frbVpESZ0P2LNn2424cavJvLupqWxKBuoyRrgG/aMsy3lf2QO
- THmy7rPNMEFFim/C+Wkl+PDDgrB6YMkcThTs8mI8N5R8M6SVGAVSjDe5pLf8ujtlQqBe
- Ipew==
+ bh=OqQG+00V1H/fHgLNVJ35UKswgXZqcFBQVtNLk97/VNA=;
+ b=Xt6+Try0fBiTGGAOO6jN7yJY90l6uTOHmaKJAtOqwF33b6yoDFW/fDIUZhCAsRFqAv
+ zPzTHo+NqliUgvL/cXC/RG8S+LYdaVmJB/0+ZzAu13ILdLwqqJrTq1B5Id4y7q4eVFBE
+ f/31Iut6P2zOJuchlsr3QFiwrjQEzIMD7CwZpRXC5/ukn/LFnlPfI03lN7CBik43z4mX
+ tizl1xM/tkShQBxjC1EXbb5cSW2hBku5CHPvXYotpVJmf1R/nUjY0U2w4tB3b7L/s+ES
+ 0syyb75ATlWrr+Sfc8NUiUByr/Cg+DImN1Nlzt2dc/LaJHER9LFWKpbkfsK+SURvrH1w
+ Zd5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704310335; x=1704915135;
+ d=1e100.net; s=20230601; t=1704310355; x=1704915155;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=y2rYUjAP0HYQwaqfxPSEJ+Hw5g4KJVXx1UPmluum3So=;
- b=eFJtDRLdm/13yK98UgQn0k19yu0DIyff87azMQOJdQbkhICqlsJLplP2SYEYneqerx
- 4puKHNDdhNtR9cYANNv2nvK7m1WTYNax+wAKc4NOA30QECz/GGjSFvOJ892TRCKAnY97
- rgtEW9S/W1rSOW1rzewu3I2xsVGBY+CT6x1rBAOqsFUy3SiOyxWiYYw4QY+KKs1yDaIV
- 7HtSKm1kR0qpWkaz5jY3lRn1Mo8F3BzAPnPDUNgWfpUI/vUq+Qx9a2nIpwhLaXzkfD9p
- 1is/zzN927jTAO/OyVjI36iWuqvr5xtesT42PNakeX02bSoeP04w7gW5yRcvi5+9Ml8B
- duEw==
-X-Gm-Message-State: AOJu0YyHdPisbeHofaTx7lTgjTENhLavt1G4XUPD23Hts2AfbRPYcADe
- 9lxmfQU5XTx1hkTpXY6nzV1+KA/DRe859Xcvh+w=
-X-Google-Smtp-Source: AGHT+IFzPS9s+xg4kw8wbzy9yzQ/Fpt/7Ih+WLcZI7JeWYmXgB0EjyRwEUqPdiHUyVxkuZ2zeLR36HNXqysoenHwwuw=
-X-Received: by 2002:a17:90a:bd17:b0:28c:113a:9678 with SMTP id
- y23-20020a17090abd1700b0028c113a9678mr27666232pjr.4.1704310335657; Wed, 03
- Jan 2024 11:32:15 -0800 (PST)
+ bh=OqQG+00V1H/fHgLNVJ35UKswgXZqcFBQVtNLk97/VNA=;
+ b=HrfuNi21S2zxaZs8EuYlL7GWESXTKwLhZ4ppwlOw/eN4uDJvbD0S2RaCTMEY7m/IO4
+ HcIJHVSbaSLz23evraKte0d6k+3JriyqweMpQGw7Pk7aDlLP/YlFJTWSp/mZVNC82jLk
+ /7OXqCWFRFNPqDS8pRT9/KBAH27oo6wlnAZMYKaKcTM29WCEfcC+cBxW8/Y8g4GR8S6N
+ TQU9yG8WjfefLbyiU3fvdBkue2ZWkOc4+eRFAuUpmQ+DVIx1gm10nYih3L6zU0/8WDyb
+ 6BzuBhpaan4u/Tp9J0+kD0lwJCVKb1w4QcSagYAnWwuqxnUmxdJk6i4PxRG4Uk9fxQyp
+ 1F9w==
+X-Gm-Message-State: AOJu0Yw8pr7sOst1P4jm8H3QBTd8jn9hvbWZEQkxkvI+G1RPwszgvp1G
+ RDmrcA3kdhFk/ixOQhYx5CpsT9/9IcJsWW11bq0=
+X-Google-Smtp-Source: AGHT+IH//n8Gh6OigaShDCWlYMErzi5+lMR+yHr1KYDsWeICxsAc6cl3FdSMZbQ9E5oWZwQIoT2LnCkLE4R6atq4Dkg=
+X-Received: by 2002:a17:90a:e0f:b0:28c:5a9:de71 with SMTP id
+ v15-20020a17090a0e0f00b0028c05a9de71mr29034395pje.4.1704310355563; Wed, 03
+ Jan 2024 11:32:35 -0800 (PST)
 MIME-Version: 1.0
 References: <20231229111701.10696-1-othacehe@gnu.org>
- <20231229111701.10696-2-othacehe@gnu.org>
-In-Reply-To: <20231229111701.10696-2-othacehe@gnu.org>
+ <20231229111701.10696-3-othacehe@gnu.org>
+In-Reply-To: <20231229111701.10696-3-othacehe@gnu.org>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 3 Jan 2024 16:32:03 -0300
-Message-ID: <CAOMZO5AhbA70_0K44jdTi40LS5WgwMc9Y3REAgQaf_Xmdj9wag@mail.gmail.com>
-Subject: Re: [PATCH v3 1/3] spl: binman: Disable u_boot_any symbols for i.MX93
- boards
+Date: Wed, 3 Jan 2024 16:32:23 -0300
+Message-ID: <CAOMZO5D6KMp1qRvJgETSChsinv5eRMxXUT5x3uvYri6isxNW-A@mail.gmail.com>
+Subject: Re: [PATCH v3 2/3] mach-imx: Add i.MX93 binman support.
 To: Mathieu Othacehe <othacehe@gnu.org>
 Cc: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
  Stefano Babic <sbabic@denx.de>, 
@@ -96,8 +95,8 @@ On Fri, Dec 29, 2023 at 8:17=E2=80=AFAM Mathieu Othacehe <othacehe@gnu.org>=
 >
 > From: Mathieu Othacehe <m.othacehe@gmail.com>
 >
-> This is extending commit 6516c9b349b3 ("spl: binman: Disable u_boot_any
-> symbols for i.MX8M boards") to i.MX93 boards.
+> Add dedicated Makefile targets for the i.MX93 and a new imx93-u-boot.dtsi
+> device-tree to create binman images.
 >
 > Signed-off-by: Mathieu Othacehe <m.othacehe@gmail.com>
 
