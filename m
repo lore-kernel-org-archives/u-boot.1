@@ -4,76 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9701CC3DA6E
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 18:41:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79C98C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 19:09:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDCE487727;
-	Wed,  3 Jan 2024 19:41:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 629D187509;
+	Wed,  3 Jan 2024 20:09:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ovI95VEE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tVyMiVG9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9D318773D; Wed,  3 Jan 2024 19:41:27 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AAE1A87509; Wed,  3 Jan 2024 20:09:00 +0100 (CET)
+Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
+ [IPv6:2607:f8b0:4864:20::833])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC7ED87705
- for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 19:41:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 78A588747A
+ for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 20:08:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 403IfG5Z123369;
- Wed, 3 Jan 2024 12:41:16 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704307276;
- bh=YS7HrJqUUkC/HZfNxORskXEV1fXdhUHYFKqUXsw99G8=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=ovI95VEEihkMbIdlAkjxKTf1Lr12UHticu6QmXh5TfbtXU0dk17/aerbgqfXeKTAK
- OIyhaZHTmi+yG98+RAGj/AyBR2j0p5m99g7KhyicbWsRy1M7qQKDzmq9mOg3NGCbuq
- A1SumpsX/4ahxEL0x/zmV+QN29bAgiHPV28V5UXc=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 403IfFTR000489
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 3 Jan 2024 12:41:15 -0600
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 3
- Jan 2024 12:41:15 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 3 Jan 2024 12:41:15 -0600
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 403IfF1l080272;
- Wed, 3 Jan 2024 12:41:15 -0600
-Date: Wed, 3 Jan 2024 12:41:15 -0600
-From: Nishanth Menon <nm@ti.com>
-To: Apurva Nandan <a-nandan@ti.com>
-CC: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean
- Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Neha
- Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Andrew
- Davis <afd@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya
- <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Aradhya Bhatia
- <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>, Christian Gmeiner
- <christian.gmeiner@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Roger Quadros
- <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>, Ralph Siemsen
- <ralph.siemsen@linaro.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>,
- Sinthu Raja M <sinthu.raja@mistralsolutions.com>,
- Udit Kumar <u-kumar1@ti.com>
-Subject: Re: [PATCH v7 17/17] board: ti: j784s4: Add MAINTAINERS file
-Message-ID: <20240103184115.ytufvuiimuxjc6a5@arguable>
-References: <20231219191537.4039361-1-a-nandan@ti.com>
- <20231219191537.4039361-18-a-nandan@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-4281f6400feso5415341cf.1
+ for <u-boot@lists.denx.de>; Wed, 03 Jan 2024 11:08:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1704308937; x=1704913737; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=y3TZtnKnnfFp09ug1Rfah8dFCbISzdChVvCGrQL2O/w=;
+ b=tVyMiVG9TuGdPhhnkcJAfus8RQY4AvkHcheJQIxltvxGhozvQCV9RZWQwAel4ThVW3
+ XMcgGzEktFPOLnS+GkdWzLMnesLO8F83kzWS43i3uiSCNbWpSazicgPHmmaQX0cLyIKn
+ fKFxqHkqByOpmRfEk9HOBxE8ezhumh1QeiPb8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704308937; x=1704913737;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=y3TZtnKnnfFp09ug1Rfah8dFCbISzdChVvCGrQL2O/w=;
+ b=F1k23yabTGbe06Js6vzunUN6QV+JR2HosNbGdjMe0C0HI4MLBXARPArurfui6rhfdL
+ 7yLOIiphIvd9ioQm4IFZeGVrQx56wUCatOMPN3klgDKIfSfvxk9hcBCtV7/7lkBPGVzW
+ o7tjP81i7JbiK8GsAQ7kzGP6/3HJ/jntd3gNwPLsS8c6j1c7i3Xw1XoZ0jISqwNFLBWp
+ bbAnUTt7I6DL7Ax4js4QpazEluJquLP6B2Wim59987ln1BWqWUfBt8n6icT6131RCp+u
+ 14kzMO6bkLGuAFQDtiAMoaVwgSMzRto0IDJNC9E4f4qXvpLkDI8vwWXskHsnjWwj1M+a
+ Perg==
+X-Gm-Message-State: AOJu0Yxcxoeztdh5C1zz2KTJL2r89QDCvyoHTBbNzQO5qX5NmFZll3zd
+ 9bMWYcUGcQNZ3TWQ3qqYvFEinGrOb0xrPw==
+X-Google-Smtp-Source: AGHT+IED30IoLxLsC3FhqkOn+l3te2t1pvg2SEemV2XCuwszwRLmCBWY5yKCIN1MQ701Edvp0o1BrA==
+X-Received: by 2002:ac8:598a:0:b0:423:780f:593f with SMTP id
+ e10-20020ac8598a000000b00423780f593fmr2656244qte.6.1704308937034; 
+ Wed, 03 Jan 2024 11:08:57 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
+ [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
+ hb3-20020a05622a2b4300b00427774ecbd6sm10830070qtb.32.2024.01.03.11.08.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Jan 2024 11:08:56 -0800 (PST)
+Date: Wed, 3 Jan 2024 14:08:54 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
+ jwerner@chromium.org, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Kevin Chen <kevin_chen@aspeedtech.com>,
+ Sean Anderson <sean.anderson@seco.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Shiji Yang <yangshiji66@outlook.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Baruch Siach <baruch@tkos.co.il>,
+ Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Qu Wenruo <wqu@suse.com>
+Subject: Re: [PATCH v4 4/9] arm: armv7: save boot arguments
+Message-ID: <20240103190854.GN1610741@bill-the-cat>
+References: <20240102221237.1007090-1-raymond.mao@linaro.org>
+ <20240102221237.1007090-5-raymond.mao@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Jmq5OfSFYtKcn05y"
 Content-Disposition: inline
-In-Reply-To: <20231219191537.4039361-18-a-nandan@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+In-Reply-To: <20240102221237.1007090-5-raymond.mao@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,58 +101,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 00:45-20231220, Apurva Nandan wrote:
-> Add maintainership for new J784S4 files added.
-> 
-> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
+
+--Jmq5OfSFYtKcn05y
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Jan 02, 2024 at 02:12:29PM -0800, Raymond Mao wrote:
+
+> Save boot arguments r[0-3] into an array for handover of bloblist from
+> previous boot stage.
+>=20
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 > ---
->  board/ti/j784s4/MAINTAINERS | 25 +++++++++++++++++++++++++
->  1 file changed, 25 insertions(+)
->  create mode 100644 board/ti/j784s4/MAINTAINERS
+> Changes in v2
+> - New patch file created for v2.
+> Changes in v3
+> - Swap value of r0 with r2.
+> Changes in v4
+> - Fix a bug when saving the boot args.
+>=20
+>  arch/arm/cpu/armv7/start.S | 19 +++++++++++++++++++
+>  1 file changed, 19 insertions(+)
 
-NAK - Introduce the same as part of each of the board support being
-introduced.
+So on platforms with SAVE_PREV_BL_INITRAMFS_START_ADDR /
+SAVE_PREV_BL_FDT_ADDR we have this same logic, but in C, and it's
+working and fine, given what we do. So could we not follow the example
+of arch/arm/lib/save_prev_bl_data.c and have
+arch/arm/lib/bloblist.c and have just one implementation for arm32/64?
 
-> 
-> diff --git a/board/ti/j784s4/MAINTAINERS b/board/ti/j784s4/MAINTAINERS
-> new file mode 100644
-> index 0000000000..d3f0e50391
-> --- /dev/null
-> +++ b/board/ti/j784s4/MAINTAINERS
-> @@ -0,0 +1,25 @@
-> +J784S4 BOARD
+--=20
+Tom
 
-J784S4 EVM BOARD
+--Jmq5OfSFYtKcn05y
+Content-Type: application/pgp-signature; name="signature.asc"
 
-> +M:	Apurva Nandan <a-nandan@ti.com>
-> +S:	Maintained
-> +F:	board/ti/j784s4
-> +F:	arch/arm/mach-k3/j784s4
-> +F:	include/configs/j784s4_evm.h
-> +F:	configs/j784s4_evm_r5_defconfig
-> +F:	configs/j784s4_evm_a72_defconfig
-> +F:	arch/arm/dts/k3-j784s4.dtsi
-> +F:	arch/arm/dts/k3-j784s4-main.dtsi
-> +F:	arch/arm/dts/k3-j784s4-mcu-wakeup.dtsi
-> +F:	arch/arm/dts/k3-j784s4-thermal.dtsi
-> +F:	arch/arm/dts/k3-j784s4-evm.dts
-> +F:	arch/arm/dts/k3-j784s4-evm-u-boot.dtsi
-> +F:	arch/arm/dts/k3-j784s4-r5-evm.dts
-> +F:	arch/arm/dts/k3-j784s4-ddr.dtsi
-> +F:	arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi
-> +F:	doc/board/ti/j784s4_evm.rst
-> +
-> +AM69 BOARD
+-----BEGIN PGP SIGNATURE-----
 
-AM69 SK BOARD please
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWVsMMACgkQFHw5/5Y0
+tyxwQgv/ZV/Cy1lbFptO2Pwt7QMXyW+IyhFOO0f90IAR/4NgfDEeWXxECx70bh+v
+ZESH7PBxyTYccCcoCzEoX+JemsPtzB3siijwOYVBVWHcJH/YifbjsIderjcHK4cK
+6vSdq0srRFZzimC9RJ3/aYoCqGyesIbN3rh6HZMimHCYzp8Fg6KtZwupN8sQhASd
+1dWO8z0dktM6gTF+YjecK4z6nEjWzuusTEvNq4Hxq0JR5aDPCzqPWnMMSvqkIaMz
+hnxwcR9sPoQW/awLyGGCgzH6fHgdcJ9+/W7/DmuSpGaGErgn4kRAlkOqkezMlr9D
+Rezc5FkNLxS5hhMmH389v2et1nwlp8uBW6NVAynFRgmh/emhPXLZIgfjfHNrr2OF
+I06Vi+XjVlMwzDyjjlAKwFPIfGruCV9XzCvI+wE/xU77b/0cPHLtDBOJjQ+Z+As7
+/zCOmQzzG0BFTOQ8zqJ7lJNYidm0UOG+6ULlaX+A2RiXSlQylo0SUAnbME4y80u4
+If766g4t
+=1rQC
+-----END PGP SIGNATURE-----
 
-> +F:	arch/arm/dts/k3-am69-sk.dts
-> +F:	arch/arm/dts/k3-am69-sk-u-boot.dtsi
-> +F:	arch/arm/dts/k3-am69-r5-sk.dts
-> +F:	configs/am69_sk_r5.config
-> +F:	configs/am69_sk_a72.config
-
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+--Jmq5OfSFYtKcn05y--
