@@ -4,71 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54D1FC3DA6E
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 12:54:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F013C47073
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 13:05:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94C4B86758;
-	Wed,  3 Jan 2024 13:54:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D2D2C807EC;
+	Wed,  3 Jan 2024 14:05:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="odXHmQBU";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="3OJ37aqo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B95986F39; Wed,  3 Jan 2024 13:54:13 +0100 (CET)
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam04on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2409::600])
+ id 2954286335; Wed,  3 Jan 2024 14:05:12 +0100 (CET)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20619.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe5b::619])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F83686758;
- Wed,  3 Jan 2024 13:54:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A88A0807E2
+ for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 14:05:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fJezamiYlIsEWPI3GfxsH3XNkdJND0c1Nr752K4BPDFdzMny7QQNJJQJUDAYMEi0SnTyk1gqb4PCBhmZm4eTLgLKVcg6cdthlH0Dkmez1XBKD/tYRc+3eCSAm6pPl8cvndRi7dDIDqzyPomDZ2hHOueIesr6KoJyYl4CAKoLGVNFBZCPCfKqFB41Ko+9kwX+NA2dqnH8W3OFmBYAaz9IgY6COPeVdUobk+oPxmvB5N+oQM7Cm11ZnZaN3EL+c0umzSG0IByZdgmILHr1lqNqcNisg3Z0OOICXf8BuSSZLLsqcT9uq+rPkOajrj3XBv/Q6LYmz/3wehX7c/t2mcpHqA==
+ b=Hd3xuOVZdegKC8QHXMi/M2CO1fTBiQT3NP7R2D7V5NIlJh8GLvzBMbSWs4c9IRAQ+V6P2CoazihguaowpvLSdgU3UkgjbT2Sxsn6IXJf+Iik/j52XNeDdTabf1DIfW8pSix/p5LxotKB6zjgWSaP9fWZlFbpf+dVGEGNFc29ohP/urERXYumUD2kCY606jttOniynd3uRS6GqpZVcXL6vl9EayE/LFfm/uAoIsJZvpC4HTO2gcRi1HYet7T7Kn0NW9F4jUTx+asDskNGO7FpWXf3Q7xpOIckFMzNOhrkSyB7GZvOJfVNEWiYNXLGzj3fYFua3z2DcYKJvcx6994l7A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8muDJNNxGnl4rb2aIkxr4ZVHWeZEcUj8/awoIkoQp38=;
- b=aQGwWynjzNcEytWuBTVrScy1jxv0VT6V5yt8IRAHlKxScJTHDjRpWG2TkwRHN0Bh1+NpoCUacUuWckvmOGEnyZTkzVtBRdbJaMYs7xyZ7RFMhDmhUnHCcczUoqHMB4l3uVApAipcy9hXAzZ6f7DVK2HxMOTVStVVCuw7TkmV5V1VNkIA6IEuG8SBytVLJDAuEX1QorZBIpYtjZA3dar1Rt30Zxz02jE1Cc6kNL+CGATUpHYR58jiFMuc79tv3RgIUSK4dU/euEnwOUxulKR5LU+cRCIh3kVqlq3lei1E0XYCqdXG2Q1fdjhUpxisPU6JMMkfoQ0IJyBNzapoh3WGCA==
+ bh=BdlyTo+DxqFXjAr7C08DjyDcAnnLKFKOTUuzL37pYcA=;
+ b=EztCkx5+dzx+13QdmUG3Vi6PuLHEVqdX8QdoHmKj0uTaximDb22hukSukYRLdl56Xr8togHvRSAdriMxmCWhYhjrBeAF14esQIwfRrw+HaMJDyGR3RDRZQxdLAFuoivT8ZaTDnm0/SwJ1fmE4yPBZndsXpPlxNiUCIja21eq5ksuhgTFJfYmdS4Aee00ZFww8WN4SPItGHmKdVdjn1+siSgRO8viwxyKaz06i4mwH1cJbB+ny5cZcGtAx9sExVxnQZt44mbRi8Pafz1g6UTPt6c5PR7Z8U5DOB4C6Kf1KpMRfWYWp6Q5UxwmEttEQRwlhtToNjsmDFEz+1SFqIS7nQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8muDJNNxGnl4rb2aIkxr4ZVHWeZEcUj8/awoIkoQp38=;
- b=odXHmQBUzM0nKnUMGvvIMP0Re97TlUOaH0k6791Vkvj9rRrDUA8F9HglLjOwHp3PIF5yEOT0sN7rJMeCLu6RPnKc9Jpu88wQexTMNTP16jmITknUbD8YsRuI5SBdx+OrI5TmugAJC2HO86z5svYyVxs/Gfe7sjGYyyd7VjFm0nI=
+ bh=BdlyTo+DxqFXjAr7C08DjyDcAnnLKFKOTUuzL37pYcA=;
+ b=3OJ37aqo/LglTNGxcU5rOe2xBmSlXJbk1Ecan2ssPYVByRXE8kFp/JQPrMxmHD7a+nAHm/zdSkMI7TimDNmigYzRWov4ZnlJR3v/bK7ntPeD3MSTtyAiB02RdcChi2gEH11VUfibunZqAykBGfO4didrZSEcOx8EJKq9puI4hdM=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from CYXPR12MB9337.namprd12.prod.outlook.com (2603:10b6:930:d8::20)
- by DM4PR12MB7693.namprd12.prod.outlook.com (2603:10b6:8:103::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7135.25; Wed, 3 Jan
- 2024 12:54:07 +0000
+ by SA3PR12MB8803.namprd12.prod.outlook.com (2603:10b6:806:317::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.13; Wed, 3 Jan
+ 2024 13:05:06 +0000
 Received: from CYXPR12MB9337.namprd12.prod.outlook.com
  ([fe80::2b19:2045:59c7:cde2]) by CYXPR12MB9337.namprd12.prod.outlook.com
  ([fe80::2b19:2045:59c7:cde2%7]) with mapi id 15.20.7159.013; Wed, 3 Jan 2024
- 12:54:07 +0000
-Message-ID: <5602ebb2-25c9-4f0e-88b7-64662874d0f4@amd.com>
-Date: Wed, 3 Jan 2024 13:53:50 +0100
+ 13:05:06 +0000
+Message-ID: <cf13a860-d628-4374-82b3-3cc660197b91@amd.com>
+Date: Wed, 3 Jan 2024 14:05:01 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/8] An effort to bring DT bindings compliance within
- U-Boot
+Subject: Re: [PATCH] xilinx: Enable the NFS command by default
 Content-Language: en-US
-To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
- u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, robh+dt@kernel.org,
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org,
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech,
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
- pbrobinson@gmail.com, ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org,
- b.galvani@gmail.com, xypron.glpk@gmx.de, seanga2@gmail.com,
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com,
- rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com
-References: <20231228115804.3626579-1-sumit.garg@linaro.org>
+To: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>, u-boot@lists.denx.de
+Cc: venkatesh.abbarapu@amd.com, git@xilinx.com
+References: <20240103061258.959110-1-tejas.arvind.bhumkar@amd.com>
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -114,71 +105,71 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <20231228115804.3626579-1-sumit.garg@linaro.org>
+In-Reply-To: <20240103061258.959110-1-tejas.arvind.bhumkar@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PH7PR10CA0012.namprd10.prod.outlook.com
- (2603:10b6:510:23d::26) To CYXPR12MB9337.namprd12.prod.outlook.com
+X-ClientProxiedBy: SJ0PR03CA0067.namprd03.prod.outlook.com
+ (2603:10b6:a03:331::12) To CYXPR12MB9337.namprd12.prod.outlook.com
  (2603:10b6:930:d8::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CYXPR12MB9337:EE_|DM4PR12MB7693:EE_
-X-MS-Office365-Filtering-Correlation-Id: baad2317-9eb4-4087-0990-08dc0c5b128b
+X-MS-TrafficTypeDiagnostic: CYXPR12MB9337:EE_|SA3PR12MB8803:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4623c105-558a-4f77-9bef-08dc0c5c9b87
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: r8S1wEsYO4dMCahg9O3AwL6RiKHQ0nv18p6FsT19nSkHUNizw8jJtSa7CKe1B1tbgVWBkWtqSmUA1oT/QRtWfEqXI82Q+hmMGT/nMKGkFQxuylVIw6PRrjTROcv8LkrsxM20evaqm7LxL41Nq64Yakz1s/paLo7zN7gCdrK593Oc8Jotsn2llGi8j8Tspg17svruO4FI5w6fvKxr6xlN93auGNGyxuWHGGqgRaOHvKMPeCLUOLg7lj4kDVHQ8vl259XJ8gE4B+0dcu7L4bL8CQPmRgyaPEEKcUX+m2RRxBtGxKGskXUakb/CyMZjyNF7RmNIUHM17sEWd6gb56TYGnOb9WWFm7a/faVQ39lP4BnI2zFZ0wxSseU00SLb77rQDlPNUpslmWMLitYE5rfiP5CaDo03aupJjOWB4skRrnAYyRfgmbjIltEqmFDyMPiBgS25+J8HaoGzdvfC4MZy1UxoLgommRPyh8CjISsjTlegUeyuoE5jlcq/NqwBp2xaN9wq7kRbvwpFFO8btGtMYsjYWEZ15VdlFvlX7jKcl7tnjEm6RN7YNf07bh48VM8vkVO4h8v5k+SwVGjsQejt3deZzWKyRXhnrWgI96IxUeJGFFEhapm+IVfQXiTNJsWVBeCB4xBNfJzSloYLs5XhtYub5mxIeemIAePmgeWoRrNJIDQxrrFXb4Rw3Q5Cl/rD
+X-Microsoft-Antispam-Message-Info: Z8Bwp7xTn7dps32sWCCEsHQb8hGNVqTOi/LYXWE1uAdj4PonNs5PYkbxdpq/A0RN47xKxCQzNB/0MU9Z4uqQBjZJkaS3gbgfUUNHgpQKuwfyUSKkY/qvUx0W0iWrB1NWuvo8ZSikJdxUlzMBs9r9phfzktD/KsxvykUDfZs7HZnXzYKiEGUYMBccg8cu5ruKlr425W9Fh/KdxD6rA5LxzHZtzlnqW4MLYSWNt7Iclr7VCJReoQvdEJtZ9GfyuvEig/EwwcxRQ0lgWP6FcfeLBdYUT2w9JKAqUgiU3Gg1oMxAhHQ6zCqzXdWAp215ZoLwz/4bTDlaomORc1xCpSlGZljYpX8LXGSQDOMETF0K2DLOMBkbo6srAba1QCWQC18YNEpDrfap4b5iC12CblKlbYLA5HZ3/oA1EpFFamNVa3A5rHl6HQUKV1TND0SyfO6n+s5IMEvS8W59djpxTexmO42GGDqMcv/Ty45VD3Hn78sntoSZ5BIJwKMon9XdO4saut2XKJ7kgBLPHAFXxx9L+Hmrz8EsR2jmTKNXVE4/WEeiJcxjQNNESfOefWMvQ2hjS3uBnw5YGGrxbHmzw8heLamAiVtU1nuOe06gcHTYtgQN6nJ4bDt4GC32pMcQYc4JtOX/9mFz6VUr8edfYK630A==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:CYXPR12MB9337.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(396003)(39860400002)(366004)(346002)(136003)(376002)(230922051799003)(64100799003)(1800799012)(186009)(451199024)(36756003)(31686004)(53546011)(66556008)(66476007)(66946007)(6506007)(6486002)(31696002)(86362001)(6512007)(6666004)(38100700002)(2616005)(41300700001)(83380400001)(2906002)(5660300002)(4326008)(44832011)(478600001)(966005)(8936002)(7416002)(26005)(8676002)(316002)(45980500001)(43740500002);
+ SFS:(13230031)(136003)(346002)(366004)(39860400002)(396003)(376002)(230922051799003)(186009)(64100799003)(451199024)(1800799012)(66556008)(66476007)(6486002)(4326008)(44832011)(66946007)(316002)(8676002)(8936002)(478600001)(26005)(2616005)(6666004)(41300700001)(5660300002)(2906002)(36756003)(53546011)(38100700002)(31696002)(6512007)(6506007)(86362001)(31686004)(43740500002)(45980500001);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZmtaRDJSM2poQjVLWE1FQUtGSHc0bGhTR0IxZUxudElualJZM3hxQUJQYWRz?=
- =?utf-8?B?UUl1UnV2WmE2SStndERGd2h6WmxpbzdoeEVCMWU2Y3Vpc0VGdEFEZkRHbTB5?=
- =?utf-8?B?NTZ0cGZ0ejFubnhLWGFXeCtUSi9SOVNBem1MQ2M3NmxhTVc4ekR4b0FGTU83?=
- =?utf-8?B?NXZEaXRHWi9DTWlIVTZOdGkxSGtsZUJKVi9NemdQb284cTU0dVNBSGU5TkR3?=
- =?utf-8?B?L3g1RDVjK1BRUG9JS3pobGo5OFhVTjlCK212TGR1SkJRNjM2aWNSRHlTYUtm?=
- =?utf-8?B?K2pkVWt0TDV3SWYzeDBsUkREbkw2WHppQ1BsTmZpbUh0TFpUb0dvZmJ4WVZn?=
- =?utf-8?B?QldwUTVSN0l0MS9LODZKWjlMaEp6NDYwQzJFQytaZlM3R1JFYUNqYU5TMFl6?=
- =?utf-8?B?SDJNZjMyTEVwVzc4Tm5IS0s2SnlERWR3bE5TWlgzalIwMnUraEZIRUcrZ0d5?=
- =?utf-8?B?MFBYMkJvVTFLUTg2MmJoTk5pNXBMNEJJUWNXU0w2dENnVHBoNnNUU1ptZVRW?=
- =?utf-8?B?VTBkcmFBV29IRXhBdWpLcEVYbXBXaEZ2SEUvUXF6NFFhM0lnRzhPWVJYM0JX?=
- =?utf-8?B?RnZhTzRzRXdQRk9MNjdzaDMyR25sMm1HNE83bmJDT202N1JhS012ZklRYWFQ?=
- =?utf-8?B?aHNDcVM1bHZNK0szSk9jUGZxMGsvMEJxeHpvZUhDTmtZd2I4b0tMWmdxSkRH?=
- =?utf-8?B?TzJoNGlhaGR3WkxHSHVpVmVLYkxxQ05NOStUdTQ5N3NQcU1uNVd4czlaTFhM?=
- =?utf-8?B?d0J4YnZoTnF5Q0VlSUoyVVlYdGNuMmVReWpZWGFRNnU0YjRjNGFYU0ZTRTBm?=
- =?utf-8?B?QXFqU1MzSjVoQU1PNit6NWt6ZEQyUUpsOFdrVFJ1YzRORGFjd1FCU1ByWC9R?=
- =?utf-8?B?SzZCWkdTdGNLaTliV2xXYzU4dmswNEhxblFaZDJ6aHN6bGhWU1ZJTGdjTEdZ?=
- =?utf-8?B?dy8xOS9wMGRGcjR6U1lLdmxvL0UrLzgvQWh1NFVaQU5sYjZBMGt5RU9YV0xp?=
- =?utf-8?B?UW1ZT2l0K1Q0aWhqS3ZWYXIra0MvUXBLNlZvZStZNkhwODNxR25sRmR5OWg0?=
- =?utf-8?B?SXdOanpxaTk5a2tmUXpYckZyOTM3UFNZWUVFVi84QmFBOFQ4ZEdqL09OM0w0?=
- =?utf-8?B?QW5vSDhQcG5TK09KaEJxSjVNRndsOE1jaXl2UkJqZFI5QWdQWDN2R29RSklv?=
- =?utf-8?B?UUZ2dnlLOEF0elJNSU9ZM0tpL2Z3a0tPNnMxdGxqWHRjY3VTcWhwa3haU205?=
- =?utf-8?B?NjBwckVMWktWK0l1Q2NOT21DN090a2QwRnJqOC80L3BJdC9UZzg4Y1IydGpx?=
- =?utf-8?B?c0dYVkhMTDVwdFB6Z0t0UXRxSkdYcEZySWFmbzlFL0xWTjhLZ1dMMzRIbXM0?=
- =?utf-8?B?WUhWY2Q0RFBrVEwrTG80blFhZ2N5clNRbmtvSnBTcVo1WDFQelZFK1g1VDNE?=
- =?utf-8?B?MkYvQVJHTklvNjRrSWJqa3hFWTlhbkxxMVZqNFliTmpPUHhKMmdEYUlQa2x6?=
- =?utf-8?B?MW9PU252N3IxYjA4amdRSDkwZ2wzdXVaV2NzZFhESjlPMm5DUGRkaHN1ZzJa?=
- =?utf-8?B?ZjAydUF2V01MUEZrMnczRjF0eFhjQ29DcmxvMEhDdVd6d3ErQWh0UGtJUG1M?=
- =?utf-8?B?SGRtVEtrRzlFcUIxUDF6dXkxTU9QZ3dUT3YvR3dVcWhMWE5aM05SV1BZMUs4?=
- =?utf-8?B?WS8zTWM5QTZRRkJpdDlHRHo5VDZYdDJVN1JCQUVQVzBPY2NuNi9iaTllQit0?=
- =?utf-8?B?YjVYL1JJNkVDUkJLcFMwNGJZSWxGNVpEM2R0eGZ4ZUtJWmZKZUtPUDZNdHZT?=
- =?utf-8?B?dWI5Y1RNYnR2N0IwZUZLL2c0SnFsc2ZteTJKVnVlMkFiNEVYZEwrUitzYkIy?=
- =?utf-8?B?OHgweFJwS0M3UlBGYWliemNkNzJqRkhLZm5vYStIZnYwWVA3T090c1RXVDZy?=
- =?utf-8?B?UlZyWmswL3hDNTdXWlE4WHBGeTJGeFRCenFZRzh6Z05yVmpITUxFS0VVWXRD?=
- =?utf-8?B?bE4yYWlzN0hsZis0NSs4ejZMazBxN0p4Uld5VThjeFZ4cmt4SUpQSlR3WHh6?=
- =?utf-8?B?SDVhUnE0Qkw0SDBLaVFXWTFmRE5vcEZZWFBQNmpRUHFTMm9WVzRLcEg3UmFD?=
- =?utf-8?Q?eQvhldkegA/y3DpxHGMyNBY3X?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RE9ja09PZzFlSDFvaHRraDY1SXgzUXJpT3cvS2ltYWowUG5STW5HLzQ1bGRk?=
+ =?utf-8?B?c3NtUnQ2bVZGYnNkM01oQUw1bXlvZ1REZ0Q2ODhteU9teFd2SnZzRk56eW16?=
+ =?utf-8?B?Uk9GVmtQUmNNYlU0SHNpK1Bvd3hOQkRpMmM3U0ZxbS9RVkNzU1k4emZhMWh1?=
+ =?utf-8?B?VFQwZC9jL0tkWm93T3E1UVhMclgrR0NsWHVkZEozeTNOb21pYk12QTZKNTJF?=
+ =?utf-8?B?NklPNEIyaXl4NERrNk0rYTBoWHNmbmp1dWZrdko1eXU3MjkydGhuSEVWdnV6?=
+ =?utf-8?B?bDBhL3pDRExjU3NXMXFiRGZqZmQwSlk4RGJoTmJ0Tm5HUk9EK1djMTJpMUpE?=
+ =?utf-8?B?SDkxSUljQ0hvOTRQSnJhZitGUmorOER5bWk3UFlWTjFXZHNIQzh5bjVZZGUv?=
+ =?utf-8?B?azB5djkwL2FrdUU1N0JGdmpNQkNtdTMwWGpvbzc3Q09BbWp0TjlCMlJoUXpq?=
+ =?utf-8?B?WmN3U2Q2S2RSdEtFODNybE9hQmVKRmlQZlV5TndSeXg5NDdraVRPYW0rWkZU?=
+ =?utf-8?B?aytndWVtMnluZlJyMFNQSnVBNmtMV29wR25HRzdBTTNjM0R0RGd5NEJMdEU4?=
+ =?utf-8?B?ZWNKZVJrdXh5VFl2bjVWUnJsY2R4blRJK1NpVUVVeUZBa2h5UTNyQkhiaGVx?=
+ =?utf-8?B?QTVIYmZZRUJyM3BNVE1lcko1L1Frdk5rTmxjaUVyenhzVGhObEQzeDg3VWZi?=
+ =?utf-8?B?KzlLOVgxNlRjN1l4Ty8rQmxmVkxXY01ia1dvRW1IMTZMYmtpMG1XVmJxSXEz?=
+ =?utf-8?B?RlduU3JtSkY2dkNTN0dMQmlOMkdTd0txSUx3RkdydTVOMFNEd2hlTDY4OFc0?=
+ =?utf-8?B?TStlRVBEYTNxeWxhVG5IS0xOdGdwQVR1L3htSlhLNk5zYWZLUVBkWjNFWGd1?=
+ =?utf-8?B?dm9nOFFndTE4TnBIRlZ3ZGVlU0Y1Z3BoYzRCeVJWT2V0bktoY0RRdE93dkdF?=
+ =?utf-8?B?UTRPMi93elcxSDFxZ1RMUDViZWRueFowVS9tY2lEQ1YzZWhCTkhMTDhCeEx3?=
+ =?utf-8?B?UHh1ajRnQno2MDZleTYwRG8vZlYzNW41cFhDQVZHU2wyWDdDTGFRS21Va1k2?=
+ =?utf-8?B?VWtNOEVQcGxHTzM1RFhJLzhleW03OEYxdkFGMzZOdWZpT3hmaEpkZForYVQz?=
+ =?utf-8?B?ODZGTjBQMGN4Y1AxbGhqZllEZGxrTmZtY09hZU1Qa2NvQS9rMllRM1lJYko4?=
+ =?utf-8?B?ZjkrV1VlUjVvWC9EdE9VWTJoZzU3dTRsVDR6YjJJZEFnZ3JVSkwwS0xHTnhF?=
+ =?utf-8?B?ZUMwajZ0SUhCZzlEbkM0dVZMRVhZMU81Wkp5U3RTbSs0em4rNVIwdlgzQUlZ?=
+ =?utf-8?B?b1FIYzQ4STB0V096bHh0TkhncS9VMlkvYVgzcTAxN1hKSWo3TmQwVWRiMDJo?=
+ =?utf-8?B?VmJUbVhXR2ZabkpBVERMTmQ4NC9XZXFjZmRPQXcva3RRcDd0bVBsOU1sZWZJ?=
+ =?utf-8?B?L1FIYzZXZ0p6cFZXaVNqT3JjRWhRcTB5U1BWZFhRU25qTGdxa1phWFVXeC9E?=
+ =?utf-8?B?aGY3eVVjVlE3UUl1aFMyQVI5ZHExN2d6L1NlMUdySnpHTjlEejY5YncwWXVB?=
+ =?utf-8?B?L1BEaG5XM2FoaFRvWlRvT1FHNERQT2Iyb2ZINXFqOGwxOGhHekJJTWV1cmhF?=
+ =?utf-8?B?dXNQQWRpcGhaenJLYkNWakhjaEFvSEh0emNPMHBzc0RreHRVVno4eFY1emxR?=
+ =?utf-8?B?bVA5M2FPQkRJSHdlTXdxSGFpMkdGMmkyaXJoeXNDVlZ6MEJHS0s0T1BBSWFh?=
+ =?utf-8?B?Q3NFeTl3R0pUNFkzRXBSQ0lFdng3VTVvSnpYL2JUZU1vOU9ncEtYdDJUVVBB?=
+ =?utf-8?B?L3JuNHIzRisvb29HVVBXSW1TMHNCbEx5b2lSeE92azJxOS9iVjZaZ0IrS1pY?=
+ =?utf-8?B?TVVrRHBvQkk2MytKeHpSeWJLSWZNZlVtVytIb20wY1N5Ujd1bzExQU5IYkd5?=
+ =?utf-8?B?Ymt1VjNTZGF2RFRWZjErM1JsTFNNcHF4ZSt0eHlXSTJId1ArSDA1ekNFdURu?=
+ =?utf-8?B?aXlpdXFFUHV4RHNxYk03RWFTeWdLcGFuZlgzTTBxRTR2WFFjTTVyWTBDYmNx?=
+ =?utf-8?B?WGw1eFgzSS9reVQvL2ZoT01sWThFNUU4MFBhWDFQVitlZ09xSWcxZkp0S01i?=
+ =?utf-8?Q?f1fTyhi/d/ZlUCH3d/Ij87nkl?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: baad2317-9eb4-4087-0990-08dc0c5b128b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4623c105-558a-4f77-9bef-08dc0c5c9b87
 X-MS-Exchange-CrossTenant-AuthSource: CYXPR12MB9337.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jan 2024 12:54:07.3952 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jan 2024 13:05:06.7834 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: bdjNxwXpK0qspY1YY65f1zlR7Az5WddceQIkNvNBzzaXpU60FW/uG1DL4BPaRWgy
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7693
+X-MS-Exchange-CrossTenant-UserPrincipalName: bn4IOAfajk5eKx/6Bz2ZARQZh4+77NizJ/CnYYct/8kE4ebVxCvSodxDbb1UuAOH
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB8803
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -197,144 +188,34 @@ X-Virus-Status: Clean
 
 
 
-On 12/28/23 12:57, Sumit Garg wrote:
-> Changes in v3:
-> --------------
-> - Patch #4: Minor commit message update
-> - Patch #5: Replace CONFIG_* with Kconfig options
-> - Patch #7: Dropped Makefile portion and enabled OF_UPSTREAM for SoC
->    instead.
-> - Patch #1, #3, #6 and #8: Picked up review tags
-> 
-> Changes in v2:
-> --------------
-> - Patch #1: excluded gitab CI config check and added commit description.
-> - Patch #3: s/UBOOT_DTSI_LOC/u_boot_dtsi_loc/
-> - Patch #4: s/DEVICE_TREE_LOC/dt_dir/ and s/U-boot/U-Boot/
-> - Patch #5: s/U-boot/U-Boot/
-> - Patch #6 and #7: Picked up review tags
-> 
-> Prerequisite
-> ------------
-> 
-> This patch series requires devicetree-rebasing git repo to be added as a
-> subtree to the main U-Boot repo via:
-> 
-> $ git subtree add --prefix devicetree-rebasing \
->        git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git \
->        v6.6-dts --squash
-> 
-> Background
-> ----------
-> 
-> This effort started while I was reviewing patch series corresponding to
-> Qcom platforms [1] which was about to import modified devicetree source
-> files from Linux kernel. I suppose keeping devicetree files sync with
-> Linux kernel without any DT bindings schema validation has been a pain
-> for U-Boot SoC/platform maintainers. There has been past discussions
-> about a single DT repo but that hasn't come up and Linux kernel remained
-> the place where DT source files as well as bindings are placed and
-> maintained.
-> 
-> However, Linux kernel DT maintainers proposed [2] for U-Boot to rather
-> use devicetree-rebasing repo [3] which is a forked copy from Linux
-> kernel for DT source files as well as bindings. It is tagged at every
-> Linux kernel major release or intermideate release candidates. So here I
-> have tried to reuse that to bring DT bingings compliance as well as a
-> standard way to maintain a regular sync of DT source files with Linux
-> kernel.
-> 
-> In order to maintain devicetree files sync, U-Boot will maintains a Git
-> subtree for devicetee-rebasing repo as `devicetee-rebasing/` sub-directory.
-> It will be regularly updated with every new kernel major release via
-> subtree pull as follows:
-> 
-> $ git subtree pull --prefix devicetree-rebasing \
->        git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git \
->        <release-tag> --squash
-> 
-> The RFC/prototype for this series has been discussed with Linux DT
-> maintainers as well as U-Boot maintainers here [4]. Now we would like to
-> reach out to wider U-Boot community to seek feedback.
-> 
-> [1] https://lore.kernel.org/all/CAFA6WYMLUD9cnkr=R0Uur+1UeTMkKjM2zDdMJtXb3nmrLk+pDg@mail.gmail.com/
-> [2] https://lore.kernel.org/all/CAL_JsqKEjv2tSGmT+0ZiO7_qbBfhTycbGnhJhYpKDFzfO9jzDg@mail.gmail.com/
-> [3] https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git/
-> [4] https://github.com/u-boot/u-boot/pull/451
-> 
-> Changes
-> -------
-> 
-> Traditionally, U-Boot placed copies of devicetree source files from Linux
-> kernel into `arch/<arch>/dts/<name>.dts`, which can be selected via:
->   
-> CONFIG_DEFAULT_DEVICE_TREE "<name>"
->   
-> SoC/board maintainers are encouraged to migrate to using mirrored copies
-> from `devicetree-rebasing/` into `dts/arch/<arch>/<vendor>` via:
->   
-> CONFIG_OF_UPSTREAM=y
-> CONFIG_DEFAULT_DEVICE_TREE "<vendor>/<name>"
-> 
-> An example have been shown for Amlogic meson-gxbb SoC and corresponding
-> derived boards via patch #7 and #8.
-> 
-> Devicetree bindings schema checks
-> ---------------------------------
-> 
-> With devicetee-rebasing Git subtree, the devicetree bindings are also
-> regularly synced with Linux kernel as `devicetree-rebasing/Bindings/`
-> sub-directory. This allows U-Boot to run devicetree bindings schema checks
-> which will bring compliance to U-Boot core/drivers regarding usage of
-> devicetree.
-> 
-> Dependencies
-> ------------
-> 
-> The DT schema project must be installed in order to validate the DT schema
-> binding documents and validate DTS files using the DT schema. The DT schema
-> project can be installed with pip:
-> 
-> $ pip3 install dtschema
-> 
-> Note that 'dtschema' installation requires 'swig' and Python development
-> files installed first. On Debian/Ubuntu systems:
-> 
-> $ apt install swig python3-dev
-> 
-> Several executables (dt-doc-validate, dt-mk-schema, dt-validate) will be
-> installed. Ensure they are in your PATH (~/.local/bin by default).
-> 
-> Recommended is also to install yamllint (used by dtschema when present).
-> 
-> Running checks
-> --------------
-> 
-> In order to perform validation of DTB files, use the ``dtbs_check`` target:
-> 
-> $ make dtbs_check
+On 1/3/24 07:12, Tejas Bhumkar wrote:
+> Enabled the default utilization of the NFS command across all
+> Xilinx platforms to facilitate the booting of images through
+> the network using the NFS protocol.
 
-I have been following your guidance here and I have also seen it to work but not 
-sure why. Anyway I have strong suspicious that any Makefile rule is not right.
+you should reference to 10de1257079905ac383e7abf346a04221cafa620 which 
+introduced regression and disable NFS
 
-I am getting this issue.
+> 
+> Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+> ---
+>   configs/xilinx_versal_net_virt_defconfig | 2 ++
+>   configs/xilinx_versal_virt_defconfig     | 2 ++
+>   configs/xilinx_zynq_virt_defconfig       | 2 ++
+>   configs/xilinx_zynqmp_virt_defconfig     | 2 ++
+>   4 files changed, 8 insertions(+)
+> 
+> diff --git a/configs/xilinx_versal_net_virt_defconfig b/configs/xilinx_versal_net_virt_defconfig
+> index 0553ac6b17..3095e402ff 100644
+> --- a/configs/xilinx_versal_net_virt_defconfig
+> +++ b/configs/xilinx_versal_net_virt_defconfig
+> @@ -46,6 +46,8 @@ CONFIG_CMD_USB=y
+>   CONFIG_BOOTP_MAY_FAIL=y
+>   CONFIG_BOOTP_BOOTFILESIZE=y
+>   CONFIG_CMD_TFTPPUT=y
+> +CONFIG_CMD_NFS=y
+> +CONFIG_NFS_TIMEOUT=2000
 
-/bin/sh: line 1: @: command not found
-make[1]: *** [devicetree-rebasing/Bindings/Makefile:68: 
-devicetree-rebasing/Bindings/processed-schema.json] Error 127
-make: *** [Makefile:1181: dt_binding_check] Error 2
+Did you run savedefconfig? Because 2000 is default value.
 
-
-devicetree-rebasing/Bindings/processed-schema.json is not generated properly
-
-I am using the latest dt schema
-$ dt-validate -V
-2023.12.dev6+gfb80ec43c204
-
-and no issue to run it from Linux source code that's why I expect it is not 
-issue with my PC in general.
-Do you know what can be wrong?
-
-Thanks,
-Michal
-
+M
