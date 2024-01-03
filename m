@@ -4,84 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02884C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 14:13:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01029C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 14:30:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D38B876A6;
-	Wed,  3 Jan 2024 15:13:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 025EB870EA;
+	Wed,  3 Jan 2024 15:30:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="puvKa3L4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FXYnODSF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00D4C876C9; Wed,  3 Jan 2024 15:13:13 +0100 (CET)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id 91FED87631; Wed,  3 Jan 2024 15:30:42 +0100 (CET)
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [IPv6:2607:f8b0:4864:20::1031])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A78168771E
- for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 15:13:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0354086758
+ for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 15:30:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-3bbd1f9e0b8so3681601b6e.0
- for <u-boot@lists.denx.de>; Wed, 03 Jan 2024 06:13:10 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-28ba5cca7fdso1482161a91.0
+ for <u-boot@lists.denx.de>; Wed, 03 Jan 2024 06:30:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1704291189; x=1704895989; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=2lRdJmQ+ZB4vet5e3Guur7A+2GSeHMW89SkjabVe6qM=;
- b=puvKa3L4b60ExBXvD+qIcP+8lC2Ll2NWaqnYB+4vkigfqFW5OrFk8hUodjHEOXgxFn
- qhJtHxFvv7KXVzS4hfWOZrMhkzL2GUsUyrOImYR0Dqn9r64dQcHzq3QlogF6NloJ8Jwp
- tC4ePWhFOVvLA0fUoYLvkLruelWkJrGnuyvC0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704291189; x=1704895989;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1704292238; x=1704897038; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2lRdJmQ+ZB4vet5e3Guur7A+2GSeHMW89SkjabVe6qM=;
- b=FXidEpMQoLZ1N71lYM9QcYE68SY49JEtYG7oU6ObZORB1Zr1UHvbsZ2IB2UI/a7HK0
- zGuH2UMdp04MWSn7AC/E4Y3qHpizYdSWhaj5vCsZMOxKC4fNBWO/RbVKzYUknQJ2jkPo
- yFaoA9Ayz/JAHFm3ZgCWD/1epvBtSvEdCOSUQRm7kKU/u0DF83l/V/or62pkQzUsK8Jx
- ceYEfdzi5R3XRUby9Kqpks7x0T1vA1JKNOCqZuP0Odjr5G+3L4w0hG8qNApzMY0LJAk+
- 9IkHG+Vhfkrd37w/mYZnwmRiKj/Hr2JTNo68gEkPQXU/gIiW94DSNqes2RnwmaSkXHYx
- w6jQ==
-X-Gm-Message-State: AOJu0YwjPbr8dpXeZvBAHP0Gex00gM76hfzCUXyOo5XStyjyb8oG42Vn
- V8EygPrzK2n8MYpDqoBWADe6TepfCWVoZQ==
-X-Google-Smtp-Source: AGHT+IEKlhUKAuaXPekLpdfOq3S4sS6Un/sBCpejIFqFV0U8S0Iroi3SiqXVDvKeQVigMdLJZVOIBA==
-X-Received: by 2002:a05:6808:ec2:b0:3b8:b72c:cbaf with SMTP id
- q2-20020a0568080ec200b003b8b72ccbafmr18777260oiv.101.1704291189245; 
- Wed, 03 Jan 2024 06:13:09 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
- [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
- mn1-20020a0562145ec100b00680c7c14d4bsm935239qvb.129.2024.01.03.06.13.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jan 2024 06:13:08 -0800 (PST)
-Date: Wed, 3 Jan 2024 09:13:06 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Sumit Garg <sumit.garg@linaro.org>, sjg@chromium.org,
- caleb.connolly@linaro.org, neil.armstrong@linaro.org,
- rfried.dev@gmail.com, dsankouski@gmail.com, seanga2@gmail.com,
- marex@denx.de, laetitia.mariottini@se.com, pascal.eberhard@se.com,
- abdou.saker@se.com, jimmy.lalande@se.com,
- benjamin.missey@non.se.com, daniel.thompson@linaro.org,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] mach-snapdragon: Move APQ8016 SoC derived board code
-Message-ID: <20240103141306.GJ1610741@bill-the-cat>
-References: <20240103130716.4144892-1-sumit.garg@linaro.org>
- <20240103132611.GH1610741@bill-the-cat>
- <CALeDE9MTYhc0DN3q8SWRqqqe4M0v23kd8WpmkCPoA=UzPKcvbg@mail.gmail.com>
+ bh=TptG4wx/Mr3LyWDSEDVxwhKn416PFqH2bUm3tONanL0=;
+ b=FXYnODSF4un4CUDkjGrl4nWvzHDeR/CCTZRQ5si5P0slaiAsPStxpakuMsIf3FuXnG
+ iC/4PXvkViIaK6n1dh8OcQZMaPRkG42SG0XUNe4ldDHwz8UkAUkOo4P47RK/NiVzh/FQ
+ 51/l6l6Xe3eWrroKzewLVSE6HgbuZ6nOagvpoxQzN5cxutJFKN5EbDmKqJgILNPDb68e
+ h4/z1Z4k3Ec1UUANNgC4vdqpHeNXG1X8zKy1I7idMUKElLW24XcheP5Dm2xUFfS/4guC
+ gSOZiWStZymkP3J0RSjF3Y4NPfhMdr12JICfvCvmjAJRvXhEnomvAucOolPjnZOlLKBA
+ KTzA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704292238; x=1704897038;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TptG4wx/Mr3LyWDSEDVxwhKn416PFqH2bUm3tONanL0=;
+ b=wXia/ZtWEnXz+cVm2Y5GDxt24GvMT/s2bG3Ou2vagn4W0ge13+a2kOwqLyy7bA7nbT
+ pXO/GsbRAzDr8LvtvrAQuYIK1wn3bmK5l5jsKlnWTe34SxTYZHg0Y/KktMzzGAs0w93m
+ ZtclzPqgb3P1D8yH0URhmbSruyWStPhpUWz3BCzRTZUJN4racVbifTvcLtg/bn4QeJVd
+ SdLxxc4r0aKLi+AaXkPGWMrlWCtQUZiIMJ3jq892apGN7uRk258P9jww9vlmraSqEVQw
+ e+KiApSBX/zZVVhCdoXFS/lsmPhIT11Zr0oCkeJUmExc5fn8EtYLj3fPYED8t8qmyVNE
+ n0nA==
+X-Gm-Message-State: AOJu0Yzx43gto8A2Pi0V6tTmSztiurZk0xt50LhRAnuS0gJHXjLKXYkr
+ tk9YKlxYIQF7i9+4y89fXKk6M/AG7czPlf9OaCpMk9fbGwg=
+X-Google-Smtp-Source: AGHT+IGFOoAUpnVCESMrrSmKkemCfP611MjZ9W4beRJjB0rkc4fU8diyiW7PdREQJwdAUKjnURh0LL/v+B7aTVwRs4M=
+X-Received: by 2002:a17:90a:8b11:b0:28b:a5ea:732e with SMTP id
+ y17-20020a17090a8b1100b0028ba5ea732emr28111132pjn.2.1704292238207; Wed, 03
+ Jan 2024 06:30:38 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="4LmsDXsznahLkBmi"
-Content-Disposition: inline
-In-Reply-To: <CALeDE9MTYhc0DN3q8SWRqqqe4M0v23kd8WpmkCPoA=UzPKcvbg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
+ <20231219-49026ec51e53dffb0c4d4e20@thorsis.com>
+ <CAD8XO3buXi_0dJQzh2HSirym3VD1C-rugCsmbrsE-nuN-VVS7Q@mail.gmail.com>
+In-Reply-To: <CAD8XO3buXi_0dJQzh2HSirym3VD1C-rugCsmbrsE-nuN-VVS7Q@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 3 Jan 2024 11:30:26 -0300
+Message-ID: <CAOMZO5BWibgnQKTreqCfTOioaUYnEZPoUVs4290OSs3k82x8bQ@mail.gmail.com>
+Subject: Re: [PATHv11 00/43] net/lwip: add lwip library for the network stack
+To: Maxim Uvarov <maxim.uvarov@linaro.org>
+Cc: u-boot@lists.denx.de, pbrobinson@gmail.com, ilias.apalodimas@linaro.org, 
+ trini@konsulko.com, goldsimon@gmx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,56 +89,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Maxim,
 
---4LmsDXsznahLkBmi
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, Jan 2, 2024 at 2:31=E2=80=AFPM Maxim Uvarov <maxim.uvarov@linaro.or=
+g> wrote:
+>
+> Small update here. I made changes without any board limit size changes.
+> Reordered patches to make them compile in sequence. I think I will do one
+> more clean up and more testing,
+> and after that will be able to send an updated version.
+> Working tree is here: https://github.com/u-boot/u-boot/pull/434
 
-On Wed, Jan 03, 2024 at 02:05:55PM +0000, Peter Robinson wrote:
-> On Wed, Jan 3, 2024 at 2:03=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
-e:
-> >
-> > On Wed, Jan 03, 2024 at 06:37:16PM +0530, Sumit Garg wrote:
-> >
-> > [snip]
-> > > Tom, Simon,
-> > >
-> > > Is there any U-Boot policy in regards to board code going forward? Are
-> > > we moving in a direction to get rid of most board specific stubs from
-> > > generic U-Boot code?
-> >
-> > There's not a policy, no. But this brings this platform more in to line
-> > with others (assorted TI SoCs) that already have "board" files under
-> > arch/arm/mach-foo as most of the board hooks are already abstracted such
-> > that it's per-SoC with only an occasional further hook for true
-> > board-specific changes.
->=20
-> I think AQP8016 is a QCom device (db410c) not a TI device.
+In which boards have you tested the series?
 
-Yes, sorry. My point is that other SoCs already have board_foo hooks
-under arch/arm/ and so what's being done here is a normal way of
-handling the question.
+I built from https://github.com/muvarov/u-boot/tree/master_lwip_test_v10, b=
+ut
+it does not work reliably on an imx8mn-evk board. (Actualy tftp worked
+only once):
 
---=20
-Tom
+u-boot=3D> ping 192.168.0.16
+init already done for ethernet@30be0000
+Using ethernet@30be0000 device
+pinging addr: 192.168.0.16
+host 192.168.0.16 is alive
+ 3 ms
+u-boot=3D> dhcp Image
+init already done for ethernet@30be0000
+dhcp using: 0:ethernet@30be0000
+dhcp_tmo 20/20
+dhcp_tmo 19/20
+dhcp_tmo 18/20
+dhcp_tmo 17/20
+dhcp_tmo 16/20
+dhcp_tmo 15/20
+dhcp_tmo 14/20
+dhcp_tmo 13/20
+dhcp_tmo 12/20
+dhcp_tmo 11/20
+dhcp_tmo 10/20
+dhcp_tmo 9/20
+dhcp_tmo 8/20
+dhcp_tmo 7/20
+dhcp_tmo 6/20
+dhcp_tmo 5/20
+dhcp_tmo 4/20
+dhcp_tmo 3/20
+dhcp_tmo 2/20
+dhcp_tmo 1/20
+dhcp_tmo 0/20
+DHCP client timeout
+u-boot=3D> tftp Image
+init already done for ethernet@30be0000
+TFTP from server 192.168.0.16; our IP address is <NULL>
+Filename 'Image'.
+Load address: 0x42000000
+Loading:########################################################
+done
+Bytes transferred =3D 19808768 (0x12e4200 hex)
+u-boot=3D> tftp Image
+init already done for ethernet@30be0000
+TFTP from server 192.168.0.16; our IP address is <NULL>
+Filename 'Image'.
+Load address: 0x42000000
+Loading:eth_send error -22
+tftp_get err=3D-13
+u-boot=3D> tftp Image
+init already done for ethernet@30be0000
+TFTP from server 192.168.0.16; our IP address is <NULL>
+Filename 'Image'.
+Load address: 0x42000000
+Loading:eth_send error -22
+tftp_get err=3D-13
+u-boot=3D> tftp Image
+init already done for ethernet@30be0000
+TFTP from server 192.168.0.16; our IP address is <NULL>
+Filename 'Image'.
+Load address: 0x42000000
+Loading:eth_send error -22
+tftp_get err=3D-13
 
---4LmsDXsznahLkBmi
-Content-Type: application/pgp-signature; name="signature.asc"
+Rebooted the board and tried again:
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWVa3IACgkQFHw5/5Y0
-tyzn0Av/YYK5m/XrR3C9bkRrRwEsIFBBXt1V8xLZGQXy5ujH8zuGZ5hJKiyM6QFr
-whA+VI/RVG3FBEop+gwpd3zrFbeAVBbuW3OPkmBXOWNW7nEhu2PcP0J95m+OdG9+
-r2ef1sdN2hon5QvqeGkPhShDDSJ0v/ksR4JqIIU/ukEPKI/M2KBPuYMkHdVbzQ6Q
-K1CStKd4yd7LVQ6sZQz423EOfkprpnh+OfZIqCC9UU3Hdc4031hey+uwP1kZJS0L
-41wwviwqXeeR2EdGckZhS2HC1ti47WEx5fCgFSncBu13k1hec2wRW0PG258erqqh
-AS0qHrhJSCtbAth02dIOsljKUT0U4cIC7J0AP6Hw63+bQNGoxtkNRukNcgcv2emL
-icCaodjclanu+TXrj/InnnxH9YH7KBtskYu2EuG6DigpwLuha+MWc5K+oB5Xa0ri
-q3nHtoFBLimxk/FNvlmm0AGNaXZ/QbUY0KBWNhiyzagtLCwGFG1q9N2l1lM5kbid
-oHX5W+m2
-=qTg5
------END PGP SIGNATURE-----
-
---4LmsDXsznahLkBmi--
+u-boot=3D> ping 192.168.0.16
+eth0: ethernet@30be0000 00:04:9f:06:33:d3 active
+Using ethernet@30be0000 device
+pinging addr: 192.168.0.16
+ping_tmo: ping failed; host 192.168.0.16 is not alive
+u-boot=3D>
