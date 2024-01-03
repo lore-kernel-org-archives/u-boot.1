@@ -4,71 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B840CC3DA6E
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 12:22:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB7F0C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 12:41:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD26587516;
-	Wed,  3 Jan 2024 13:22:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=prolan.hu
+	by phobos.denx.de (Postfix) with ESMTP id 00C1E875EB;
+	Wed,  3 Jan 2024 13:41:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=prolan.hu header.i=@prolan.hu header.b="WkPYw7Jb";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="CioSbTkO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB17886EF3; Wed,  3 Jan 2024 11:11:20 +0100 (CET)
-Received: from fw2.prolan.hu (fw2.prolan.hu [193.68.50.107])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D710387661; Wed,  3 Jan 2024 13:41:45 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5279386EE2
- for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 11:11:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C70F87516
+ for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 13:41:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=prolan.hu
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Csokas.Bence@prolan.hu
-Received: from proxmox-mailgw.intranet.prolan.hu (localhost.localdomain
- [127.0.0.1])
- by proxmox-mailgw.intranet.prolan.hu (Proxmox) with ESMTP id D1E10A11F5;
- Wed,  3 Jan 2024 11:11:15 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prolan.hu; h=cc
- :cc:content-transfer-encoding:content-type:content-type:date
- :from:from:in-reply-to:message-id:mime-version:references
- :reply-to:subject:subject:to:to; s=mail; bh=XZm3ZgKDyxI/wwKUIS+D
- EZCd5R7AL6UAKSEqwAPMZHg=; b=WkPYw7JbVOyAHnqf4gh43y4LXXYS/dDUDMjb
- MSl7hjvlpFVVKkURRGRmBlsZasZXpcT3A/GwROkccscQZiNSdHboSEETwJmERuOk
- mz3/x6pXdzM57uHhhzk6ViX455gobYDk6LYqbaTnxDpTDNpRZoZgsFedPrp2/rgg
- YPRNBv9DN81Y3iYr4jUKxYa7NbI2exvkwii8lOxygUK38QHDw6+MlZHC8unxAoXl
- Vi7BIYwztpSYGx5yvAMzq8s6fjKqOUJiCzgzuY07Vd/cXG/MM+s+3SEfn4D4PaHc
- s62sjf6BHa3HiXGPyhVPzRXKa4sl69embUVz7vwiuHoLlahW6qfeIjOjvS3I4Hpr
- 6rNF/GNu8VSe2DcrT1h+wQtjUNXBDEZXl5mZx03L0uUGuUO4YZ4yFKGqATT6Py2v
- 68V/MpcxwxOygqpojwnQO03uKeTA5HZdTRGdy93agdh+nO3gd0DMx7ApTWqsmZrF
- n2LNa/vcxuCsFpybbUg/+Dv2Aw+3vp1vUy/mTa4FWydsRoYmgLTpdau9FwR52RbG
- KaSYmO7c3guCuO4uN78uT/gBmH9rlUKLKXLBBBpjNti7+SNq7z1gm3sjcMJRiigR
- gv5EvUoV8DcM7iPk4paZSJ1KCghyT2bq3CIj2lCGZm5NW4u575oEkVTyOnqWJm5i
- A6CEVc0=
-Message-ID: <f78b464a-5d9f-4552-bd2f-700a0cbe3ddf@prolan.hu>
-Date: Wed, 3 Jan 2024 11:11:06 +0100
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-40d41555f9dso105055965e9.2
+ for <u-boot@lists.denx.de>; Wed, 03 Jan 2024 04:41:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1704285703; x=1704890503;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=64OK9B4RlnKch4oYUUbGmsB30a2mwA4DZacMOjA6svk=;
+ b=CioSbTkOBXUhc7UZ2dpzBQWksl+1x1O0lIuzveGRZxGjc33G4GSXCzZQjfoWge4gE0
+ kcAicw5GpJOSiz8yiLFrdOfX4PRNXfO5H0exOvpcvhmPysRgD9cn/uTPgO74DHKWngL9
+ LRH9xUPCuRso+ZWQL1v4YPq64sNeOlFaq5emgZINzbnaEfKYumDmHt72aLYXOrH5oi2u
+ VMoXcdq4mU8vjaH8h+hp6Ovv7FXCPYa9ndAMMVQTYBzyNMHjCrW3AFu8MSxIf+vmqWP2
+ EBOq57Wn4C6BFwWiG/9psx5TNK7aPj56EDc1EnQ8SiqafoNumhMZsJKfNqr1dV4R4CLV
+ muew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704285703; x=1704890503;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=64OK9B4RlnKch4oYUUbGmsB30a2mwA4DZacMOjA6svk=;
+ b=dbpVe7J0iz1kkLE3Sf9hCQ80HaHWsOn5oERBaIguViw/OfBnz6PWTt75Wn0lGGWNJQ
+ +u33mJFe0jaNcruoca7R+l+4iSvIGg2XoKX58N864VSSk/939ARwAKdKHHcVei751wTU
+ QvzimDlozkEwr6CbKQ0VgyBEACSHKltMpGFqxcsrVqDRO5yncZ0x/JexvqCG9FygdoKW
+ pNjrRaPtWn5Vpb9HywO3gwrfG6DscgFDg4AK2ZO3dhGiQkDu/ILVk9tG1xBlv0pP16Pp
+ E2gKRvmNc/Cu5A0D3Rz2Sp8G0UAvWDtzVQFJkZOuoa+Qd1crwJS/VddJ+Z6slw4Zs5oK
+ 36Zg==
+X-Gm-Message-State: AOJu0Yxbsboqs48x2MP7wAd7n2j5ocBcV9x4CB1/Y8VZIEHIXJ5A0dc3
+ aS74ZSfmXd4qusGb5cufohtQFZ791X7vtg==
+X-Google-Smtp-Source: AGHT+IEyHb1mHzvNkj06ucV7tWmIFIJ6722hBCV3wccYLFgUjejp2iIisfR2i0frYqkFlP8kF7R54g==
+X-Received: by 2002:a05:600c:3411:b0:40c:7103:d9c6 with SMTP id
+ y17-20020a05600c341100b0040c7103d9c6mr10564262wmp.183.1704285702570; 
+ Wed, 03 Jan 2024 04:41:42 -0800 (PST)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ t16-20020a05600c199000b0040d5fcaefcesm2186462wmq.19.2024.01.03.04.41.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Jan 2024 04:41:42 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Svyatoslav Ryhel <clamor95@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Bin Meng <bmeng@tinylab.org>, Ion
+ Agorria <ion@agorria.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Harald Seiler <hws@denx.de>, Sean Anderson <sean.anderson@seco.com>, Heiko
+ Schocher <hs@denx.de>, Dmitrii Merkurev <dimorinny@google.com>, Patrick
+ Delaunay <patrick.delaunay@foss.st.com>, Matthias Schiffer
+ <matthias.schiffer@ew.tq-group.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v6 4/6] common: console: record console from the beginning
+In-Reply-To: <CAFLszTjmvpbxGguK+FuXZLO=kpYR4pVr4E27BGn1u0B-6uB2eQ@mail.gmail.com>
+References: <20231228180154.50473-1-clamor95@gmail.com>
+ <20231228180154.50473-5-clamor95@gmail.com>
+ <CAFLszThd95iSPMOBr_21_Zckg74BtgA23EVpfXQKqnArFc-UDQ@mail.gmail.com>
+ <CAPVz0n3OwhrW41tV9x32UXyL6yZdLr8CU9S7XuTneDiwUQY7AQ@mail.gmail.com>
+ <8734vg5afv.fsf@baylibre.com>
+ <CAFLszTjmvpbxGguK+FuXZLO=kpYR4pVr4E27BGn1u0B-6uB2eQ@mail.gmail.com>
+Date: Wed, 03 Jan 2024 13:41:41 +0100
+Message-ID: <87le964mii.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Passing boot logs to Linux?
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Daniel Golle
- <daniel@makrotopia.org>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Simon Glass
- <sjg@chromium.org>, Dragan Simic <dsimic@manjaro.org>
-References: <6fd0dd4c-4bce-47cf-a669-7d093b9a1f10@prolan.hu>
- <ZYH-K_UGat0yWMVH@makrotopia.org>
- <CAPnjgZ3sNBuaNkbTF2d=E2JD4sQOaA5QRfzDfz1KSV==nOWbTw@mail.gmail.com>
- <514fe736-5122-41f2-bb1b-ee1a42ec2cb2@gmx.de>
-Content-Language: en-US
-From: =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>
-In-Reply-To: <514fe736-5122-41f2-bb1b-ee1a42ec2cb2@gmx.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.254.7.28]
-X-ClientProxiedBy: ATLAS.intranet.prolan.hu (10.254.0.229) To
- sinope.intranet.prolan.hu (10.254.0.237)
-X-EsetResult: clean, is OK
-X-EsetId: 37303A29916D3B55657064
-X-Mailman-Approved-At: Wed, 03 Jan 2024 13:22:38 +0100
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,79 +103,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Simon,
 
-2023. 12. 31. 0:54 keltezéssel, Heinrich Schuchardt írta:
-> On 12/20/23 05:11, Simon Glass wrote:
->> +Heinrich Schuchardt
+On Tue, Jan 02, 2024 at 07:06, Simon Glass <sjg@chromium.org> wrote:
+
+> Hi Mattijs,
+>
+> On Tue, Jan 2, 2024 at 2:52=E2=80=AFAM Mattijs Korpershoek
+> <mkorpershoek@baylibre.com> wrote:
 >>
->> On Tue, 19 Dec 2023 at 13:33, Daniel Golle <daniel@makrotopia.org> wrote:
->>>
->>> Hi Bence,
->>>
->>> On Tue, Dec 19, 2023 at 08:08:48PM +0000, Csókás Bence wrote:
->>>> Hi!
->>>>
->>>> Is passing the U-Boot boot log to Linux supported yet? We are working
->>>> with a third-party solution, which works, but is a bit hacky, so I was
->>>> wondering if an official solution has been merged yet.
-> 
-> U-Boot supports writing log messages to an rsyslog server via broadcast
-> to UDP port 514 (CONFIG_LOG_SYSLOG=y).
-> 
-> The device name can be set via environment variable log_hostname.
-> 
-> If you have a log server for your devices in the same network segment,
-> you can consolidate all your logs there.
-> 
-> A driver writing log messages to a file could be created in U-Boot.
+>> Hi Simon, Svyatoslav,
+>>
+>> On Thu, Dec 28, 2023 at 21:52, Svyatoslav Ryhel <clamor95@gmail.com> wro=
+te:
+>>
+>> > =D1=87=D1=82, 28 =D0=B3=D1=80=D1=83=D0=B4. 2023=E2=80=AF=D1=80. =D0=BE=
+ 21:48 Simon Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
+>> >>
+>> >> On Thu, Dec 28, 2023 at 6:02=E2=80=AFPM Svyatoslav Ryhel <clamor95@gm=
+ail.com> wrote:
+>> >> >
+>> >> > From: Ion Agorria <ion@agorria.com>
+>> >> >
+>> >> > Set flag to enable console record on console_record_init
+>> >> > and not only on console_record_reset_enable. This fixes
+>> >> > missing start of U-Boot log for fastboot oem console
+>> >> > command.
+>> >> >
+>> >> > Signed-off-by: Ion Agorria <ion@agorria.com>
+>> >> > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+>> >> > Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>> >> > ---
+>> >> >  common/console.c | 3 +++
+>> >> >  1 file changed, 3 insertions(+)
+>> >>
+>> >> Reviewed-by: Simon Glass <sjg@chromium.org>
+>> >>
+>> >> OK, I can see the use of this...but I wonder if we can now get rid of
+>> >> the same line of code from console_record_reset_enable() ?
+>> >>
+>> >
+>> > Interesting question but let's leave it to a dedicated patch :)
+>>
+>> I've looked a little more into to this, and I'm not so sure we can get
+>> rid of the gd->flags |=3D GD_FLG_RECORD; in console_record_reset_enable(=
+).
+>>
+>> Removing the flag seems to break quite some tests in
+>> test/py/tests/test_ut.py.
+>>
+>> The breakage can be explained that various unit tests clear the
+>> GD_FLG_RECORD with:
+>>
+>>         gd->flags &=3D ~GD_FLG_RECORD;
+>>
+>> Therefore, I would suggest we keep the flag in
+>> console_record_reset_enable().
+>
+> From my look all of those are not needed in tests, i.e. are bugs. If
+> you are able to do a patch to remove those lines, it would avoid the
+> confusion.
 
-I am aware, however, this is not what we want to do right now. We want 
-to pass the logs to the booted up OS on the *same* machine.
+With gd->flags |=3D GD_FLG_RECORD removed from
+console_record_reset_enable(),
 
->>>> I saw that there was an option CONFIG_CONSOLE_RECORD that saves
->>>> everything to a membuff, but I don't know if that can be exported to
->>>> Linux yet. And if not in the tree yet, would such a patch be welcome?
-> 
-> It is not enough to export a memory buffer. There must be support in the
-> operating system to read it.
+When I run:
+$ ./test/py/test.py --bd sandbox --build -k ut
 
-Of course. But it should be trivial to add a driver to Linux and other 
-FOSS OSes to support reading these records from memory.
+It produces this list of the the tests that fail:
+https://paste.debian.net/1302906/
 
-> Linux supports the common platform error record (CPER) format defined in
-> the UEFI specification. See
-> 
-> * https://www.dmtf.org/sites/default/files/PMCI_CPEREvent_Proposal_v3.pdf
+I can also reproduce individually with a bootflow test, for example:
+$ ./test/py/test.py --bd sandbox --build -k ut_bootstd_bootflow_cmd_boot
 
-According to page 16, records can be of the following types:
-* error, recovered
-* previous error
-* simulated error
+Produces:
+https://paste.debian.net/1302907/
 
-There is no type that is an operational condition (even though you can 
-append informational sections to an error record). So what we could do 
-is mark everything as "recovered", but that is misleading, booting is 
-not an "error condition".
+I did not investigate more on detail but it seems not trivial to me.
 
- > * 
-https://uefi.org/sites/default/files/resources/Spike%20Yuan-%20Server%20RAS%20and%20UEFI%20CPER_final.pdf
+I can continue the investigation in the coming weeks but I would like
+to apply this series this week.
 
-This looks like some promo material, not very useful from an 
-implementation standpoint. Plus, this talks about Intel-based cloud 
-computing/HPC, not exactly the embedded systems we are targeting.
+>
+> Also, by setting UT_TESTF_CONSOLE_REC for a test, console recording is
+> set up automatically, so the console_record_reset_enable() is not
+> needed at the start of the test.
 
-> Boot errors can be reported via the ACPI BERT table. But that won't help
-> you in OpenWRT which uses device-trees.
+I was not aware of that, thank you.
 
-Exactly. I would avoid depending on ACPI/UEFI. Having a simple in-memory 
-struct can be supported on all platforms, even without ACPI, UEFI, 
-writable filesystem, even DT is not needed if you can pass the base 
-pointer to the OS via other means (ie. command line).
-
-> Best regards
-> 
-> Heinrich
-
-Bence
-
+>
+> Regards,
+> Simon
