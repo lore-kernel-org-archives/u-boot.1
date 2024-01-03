@@ -4,83 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 399CEC47073
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 17:01:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9026C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 17:07:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C0BC86A81;
-	Wed,  3 Jan 2024 18:01:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2316D86F1E;
+	Wed,  3 Jan 2024 18:07:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dK64MMdS";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TBkMO+R4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83107877D9; Wed,  3 Jan 2024 18:01:46 +0100 (CET)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5243187727; Wed,  3 Jan 2024 18:07:33 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B10B186A81
- for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 18:01:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EC2481EC8
+ for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 18:07:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-6d9b050e88cso2530796b3a.0
- for <u-boot@lists.denx.de>; Wed, 03 Jan 2024 09:01:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704301302; x=1704906102; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0pKdlSW7QSmCgKhNbeEDxT//Y2VIvni3ILKUhM8WmPE=;
- b=dK64MMdSEdMSDdJXuin4PtpMOoa7ACsXJmApU9MumcVx7ZNLUtapbVyonAoxjr8mkD
- oS8FrvQXpaBIT6BtSAUaSfCqzVmDz+1vP4wmweFiEiswSgF6fwnMMMkv03UEqVACq6UU
- 006f92pPV2yVzOuIC9OefPTDsXwblC/He6SlzKO3WJscG/VxVsEXwwkcTT8X2Oc+gZDL
- WsRj1Y5KQ2dpp0BPfnaUD1ddBNKKSDxu6rIQMclT3sQvsulvtFQ/cTF5KGf7heAPeAyx
- 1f1kM6M7AVq8hO//sTBds5LoPgRU0/xij5HG3jFEaGDBaLuhXdkj4fqEhzlFpXu10vve
- sztA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704301302; x=1704906102;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0pKdlSW7QSmCgKhNbeEDxT//Y2VIvni3ILKUhM8WmPE=;
- b=MXpNBefVzi647ajB32tdlzg7+U+w71TB4CQLOlTIpd5JagZyTrLmX1JFQQEMX9WwbU
- XlsWIPhnpeCZ+mqQ8aHHW/9cXTURKR6h0P5EOj5L6oo3fYz6JDk1+g8fSiZ+JPSTYWXE
- yoayGE+/gtVsU6V9YmVQMe16F9BLHSeNUvAo9XIdHr/cdAmogXcFuGfltCBB49vDcgd1
- B6+D8V61OA8mi422iCHmpyvE+6b0BmyTlTMF9b2AXF8G2GW0Zt0XBtWAS7omdow7DzOk
- fPgHRvEoqjMUox7oI/u7YHu20bFVqVeEabrzP/ohegQFXnKoaCdZwdbKYPuMTA9FTfNF
- kxUg==
-X-Gm-Message-State: AOJu0Yyn2clDch3yir6iEEjHkNge37jDKphgObJkaJOzQ2m0U6NE2M7f
- zQziIVxmwtTTZMbyveyeQwfTjQ+4qkJ1QYF+94CXdr9q9fN0Gg==
-X-Google-Smtp-Source: AGHT+IF/Zx3nJYRoQJo5Dj5VLXSMLvir3LX1Ihbm1jpICPVJxMz+p/zaLaIfTnUaK2aJj9xk5rV+FSzZrdvVAaMQCbs=
-X-Received: by 2002:a05:6a00:2e9b:b0:6da:27f1:b8dd with SMTP id
- fd27-20020a056a002e9b00b006da27f1b8ddmr4805729pfb.0.1704301301964; Wed, 03
- Jan 2024 09:01:41 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 403H7Fs5050307;
+ Wed, 3 Jan 2024 11:07:15 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1704301635;
+ bh=Uevjs9gCxJ3W9egL0UtYVQmjvCKpLs0YObjg5VtzXmc=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=TBkMO+R4f2hIvkBu6StJhP6I8JDeoWPmdjeRj4UxZz9rJqj9zHj/sg2NwADgzEzbV
+ rrm3jQUxVlNlTFic7qCDT1xDSG5JuMJtL3TJx+EFBo+E3++ZKFQavGNOWg7FrnV4Yx
+ J89tV7NHqLoep7WK28HlEJJfbH3o8QPqfu/q0Yew=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 403H7FYl012303
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 3 Jan 2024 11:07:15 -0600
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 3
+ Jan 2024 11:07:14 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 3 Jan 2024 11:07:14 -0600
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 403H7EiH070611;
+ Wed, 3 Jan 2024 11:07:14 -0600
+Date: Wed, 3 Jan 2024 11:07:14 -0600
+From: Nishanth Menon <nm@ti.com>
+To: Apurva Nandan <a-nandan@ti.com>
+CC: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean
+ Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Neha
+ Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Andrew
+ Davis <afd@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya
+ <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Aradhya Bhatia
+ <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>, Christian Gmeiner
+ <christian.gmeiner@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Roger Quadros
+ <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>, Ralph Siemsen
+ <ralph.siemsen@linaro.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>,
+ Sinthu Raja M <sinthu.raja@mistralsolutions.com>,
+ Udit Kumar <u-kumar1@ti.com>
+Subject: Re: [PATCH v7 05/17] soc: ti: k3-socinfo: Add entry for J784S4 SoC
+Message-ID: <20240103170714.zouma5aydz4bdrtd@arrest>
+References: <20231219191537.4039361-1-a-nandan@ti.com>
+ <20231219191537.4039361-6-a-nandan@ti.com>
 MIME-Version: 1.0
-References: <20240102221237.1007090-1-raymond.mao@linaro.org>
- <20240102221237.1007090-7-raymond.mao@linaro.org>
- <f7cb982f-66f2-47f1-aeb2-f3fa8e8b8912@amd.com>
-In-Reply-To: <f7cb982f-66f2-47f1-aeb2-f3fa8e8b8912@amd.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Wed, 3 Jan 2024 12:01:31 -0500
-Message-ID: <CAEfUkUL9viRAcWMyjd_=BVVru4hRPV7D9rHhggSBHEEX_D-zDQ@mail.gmail.com>
-Subject: Re: [PATCH v4 6/9] arm: Get bloblist from boot arguments
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, sjg@chromium.org, 
- jwerner@chromium.org, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Kevin Chen <kevin_chen@aspeedtech.com>, Sean Anderson <sean.anderson@seco.com>,
- Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
- Devarsh Thakkar <devarsht@ti.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Shiji Yang <yangshiji66@outlook.com>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
- Baruch Siach <baruch@tkos.co.il>, Neil Armstrong <neil.armstrong@linaro.org>,
- Stefan Roese <sr@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20231219191537.4039361-6-a-nandan@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,85 +90,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
+On 00:45-20231220, Apurva Nandan wrote:
+> Add support for J784S4 SoC Identification.
+> 
+> Signed-off-by: Hari Nagalla <hnagalla@ti.com>
+> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
+> ---
+>  arch/arm/mach-k3/include/mach/hardware.h | 1 +
+>  drivers/soc/soc_ti_k3.c                  | 3 +++
+>  2 files changed, 4 insertions(+)
+> 
+> diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
+> index 7e143c6bdc..74692b745a 100644
+> --- a/arch/arm/mach-k3/include/mach/hardware.h
+> +++ b/arch/arm/mach-k3/include/mach/hardware.h
+> @@ -50,6 +50,7 @@
+>  #define JTAG_ID_PARTNO_J7200	0xbb6d
+>  #define JTAG_ID_PARTNO_J721E	0xbb64
+>  #define JTAG_ID_PARTNO_J721S2	0xbb75
+> +#define JTAG_ID_PARTNO_J784S4	0xbb80
+>  
+>  #define K3_SOC_ID(id, ID) \
+>  static inline bool soc_is_##id(void) \
+> diff --git a/drivers/soc/soc_ti_k3.c b/drivers/soc/soc_ti_k3.c
+> index 355a5368dd..d176980915 100644
+> --- a/drivers/soc/soc_ti_k3.c
+> +++ b/drivers/soc/soc_ti_k3.c
+> @@ -45,6 +45,9 @@ static const char *get_family_string(u32 idreg)
+>  	case JTAG_ID_PARTNO_AM62AX:
+>  		family = "AM62AX";
+>  		break;
+> +	case JTAG_ID_PARTNO_J784S4:
+> +		family = "J784S4";
+> +		break;
+>  	default:
+>  		family = "Unknown Silicon";
+>  	};
 
-On Wed, 3 Jan 2024 at 05:46, Michal Simek <michal.simek@amd.com> wrote:
+Reviewed-by: Nishanth Menon <nm@ti.com>
 
->
->
-> On 1/2/24 23:12, Raymond Mao wrote:
-> > Add arch custom function to get bloblist from boot arguments.
-> > Check whether boot arguments aligns with the register conventions
-> > defined in FW Handoff spec v0.9.
-> > Add bloblist related options into qemu-arm default config.
-> >
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > ---
-> > Changes in v2
-> > - Remove low level code for copying boot arguments.
-> > - Refactor board_fdt_blob_setup() and remove direct access of
-> gd->bloblist.
-> > Changes in v3
-> > - Optimize board_bloblist_from_boot_arg().
-> > Changes in v4
-> > - Move the function as an Arm-arch library instead of a board-specific
-> one.
-> >
-> >   arch/arm/lib/xferlist.c      | 38 ++++++++++++++++++++++++++++++++++++
-> >   configs/qemu_arm64_defconfig |  3 +++
-> >   3 files changed, 45 insertions(+)
-> >   create mode 100644 arch/arm/lib/xferlist.c
-> >
-> > diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
-> > index b1bcd37466..0023c55d0d 100644
-> > --- a/arch/arm/lib/Makefile
-> > +++ b/arch/arm/lib/Makefile
-> > @@ -85,6 +85,10 @@ obj-y      += psci-dt.o
-> >
-> >   obj-$(CONFIG_DEBUG_LL)      += debug.o
-> >
-> > +ifdef CONFIG_BLOBLIST
-> > +obj-$(CONFIG_OF_BOARD)  += xferlist.o
-> > +endif
-> > +
-> >   # For EABI conformant tool chains, provide eabi_compat()
-> >   ifneq (,$(findstring -mabi=aapcs-linux,$(PLATFORM_CPPFLAGS)))
-> >   extra-y     += eabi_compat.o
-> > diff --git a/arch/arm/lib/xferlist.c b/arch/arm/lib/xferlist.c
-> > new file mode 100644
-> > index 0000000000..163d20c11c
-> > --- /dev/null
-> > +++ b/arch/arm/lib/xferlist.c
-> > @@ -0,0 +1,38 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +/*
-> > + * Copyright (C) 2023 Linaro Limited
-> > + * Author: Raymond Mao <raymond.mao@linaro.org>
-> > + */
-> > +#include <linux/types.h>
-> > +#include <errno.h>
-> > +#include <bloblist.h>
-> > +
-> > +/*
-> > + * Boot parameters saved from start.S
-> > + * saved_args[0]: FDT base address
-> > + * saved_args[1]: Bloblist signature
-> > + * saved_args[2]: must be 0
-> > + * saved_args[3]: Bloblist base address
-> > + */
-> > +extern unsigned long saved_args[];
->
-> you should put this to bloblist.h. I would say it should be the part of
-> 4/9
-> where you define saved_args for armv7.
->
-> Not sure if I understand your point but this part is for Arm only (v7 and
-v8) and should
-not be in bloblist.h. It works following the spec from Arm. Other arches
-should implement
-their own way if they want to load the bloblist from the previous loader.
-
-[...]
-
-Thanks and regards,
-Raymond
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
