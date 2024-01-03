@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C5A0C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 08:25:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC3F3C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 10:28:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 796FA87787;
-	Wed,  3 Jan 2024 09:25:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id C024986EEC;
+	Wed,  3 Jan 2024 11:28:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="nDO7ueKi";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cHbgsYl7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABC6487745; Wed,  3 Jan 2024 09:25:08 +0100 (CET)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EDDF886EF3; Wed,  3 Jan 2024 11:28:12 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5681D879BB
- for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 09:25:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 3CD7D86EE2
+ for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 11:28:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5569472f775so1498723a12.2
- for <u-boot@lists.denx.de>; Wed, 03 Jan 2024 00:25:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1704270301; x=1704875101;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PdZ4e23+MAjwdg8upm0boVPGU0zNETUGHj7Q3qXfkDY=;
- b=nDO7ueKiLMGFBnAA3mAGiH8vLzbkL0+x8CGS6PZj8OLUZvFiB8omAdZPqUWt5Bz+GV
- e6r+MJ3p79OvCwQmRHrEe2FSSBTodig4857avRpkmg4gSPPy339n3U3SWW6mO55VBliz
- Y5dMXTAd125leKEvlajTTpDnCMbXfJquszF84=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704270301; x=1704875101;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PdZ4e23+MAjwdg8upm0boVPGU0zNETUGHj7Q3qXfkDY=;
- b=jYfwAiRTtMJIO/SXIQSBjhAgDsBYxVxa6MmSQ30rfw818yLIQ1/XyCtoKeiYoIJcVz
- idadO4zPYPkdgpfoADoyfY106iH9IXoXXp9VPsIX39DAmWTnzECBVUq4c8XtwFT94EjW
- GrtwZtnsMKF88WyZbrkzf2ettje3VdCZ2RIXFcWF33oLERLqxpZ/yY8dmhDnNKeE9eUo
- AqM3c2OIQQUtNKjuO56rDLBiACmxSFEHmQ5X3PcX/cxA9b4OhH8oPpK2Iue4+IYV4cG+
- TuaA4MoPz7o9DF6BEL8A6Ac8dMUGsdL3awH+8o8k4lRGS3ovtdCbxQBO7B3rlJOFaC1E
- h42Q==
-X-Gm-Message-State: AOJu0YztzrPPDaNvSn+4/iNNXm/5yuiJ4lvA9jNjQK29lNRzTuHXXjgk
- qhLvT3G/MM0uUG9gouaaesj9KmP3HTEDUM19mZiIaB4nYQZALg==
-X-Google-Smtp-Source: AGHT+IGeDbRZDC7RT4QbDLszwAAQuN43uR9+Dp7PSkhsJrXemyabO7nOLWogo7Y0krMGl54Gdf9R6T9/zUM4fFELrU0=
-X-Received: by 2002:a17:906:c35a:b0:a26:85ed:78dc with SMTP id
- ci26-20020a170906c35a00b00a2685ed78dcmr8257242ejb.133.1704270300943; Wed, 03
- Jan 2024 00:25:00 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=danishanwar@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 403ARrSm056472;
+ Wed, 3 Jan 2024 04:27:53 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1704277673;
+ bh=mjIOfYi2N5j7h68F9E5EV8SRXoZsx3a+DL9vk/z3zIc=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=cHbgsYl7IzBdJIoqQxwF7T7XCY2JlnQl+lmJmsEY/gsQxQB81kGDgSzcqMRFu0pu4
+ zI42y7xD8zeCsujtF/aIEi61xkhtV1g0awUkl2iaEO1pLOQN6L5vTsYRH1nLsluERB
+ IdfF1tHUuQKKnJGzileiTnB9aSSrHGLfN8FLFJII=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 403ARrQd082007
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 3 Jan 2024 04:27:53 -0600
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 3
+ Jan 2024 04:27:53 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 3 Jan 2024 04:27:52 -0600
+Received: from [10.24.69.25] (danish-tpc.dhcp.ti.com [10.24.69.25])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 403ARlnx091656;
+ Wed, 3 Jan 2024 04:27:48 -0600
+Message-ID: <64a18d0a-294d-4e11-a867-4191e99f2437@ti.com>
+Date: Wed, 3 Jan 2024 15:57:47 +0530
 MIME-Version: 1.0
-References: <20231228153922.84323-1-avromanov@salutedevices.com>
- <20231228153922.84323-8-avromanov@salutedevices.com>
-In-Reply-To: <20231228153922.84323-8-avromanov@salutedevices.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Wed, 3 Jan 2024 09:24:49 +0100
-Message-ID: <CAOf5uw=hdzOjja5ZwK0X_5K5YyFpfvSViE2b33QDQWcdDKu7hA@mail.gmail.com>
-Subject: Re: [PATCH v1 07/12] mtdparts: use negative error codes
-To: Alexey Romanov <avromanov@salutedevices.com>
-Cc: michal.simek@amd.com, marex@denx.de, michael@walle.cc, 
- stcarlso@linux.microsoft.com, tobias@waldekranz.com, seanedmond@microsoft.com, 
- abdellatif.elkhlifi@arm.com, neil.armstrong@linaro.org, n-jain1@ti.com, 
- xypron.glpk@gmx.de, dario.binacchi@amarulasolutions.com, 
- frieder.schrempf@kontron.de, sjg@chromium.org, hs@denx.de, 
- sean.anderson@seco.com, dimorinny@google.com, mkorpershoek@baylibre.com, 
- patrick.delaunay@foss.st.com, u-boot@lists.denx.de, kernel@salutedevices.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 00/16] Introduce ICSSG Ethernet driver
+Content-Language: en-US
+To: Andrew Davis <afd@ti.com>, Roger Quadros <rogerq@kernel.org>, Maxime
+ Ripard <mripard@kernel.org>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Matthias
+ Schiffer <matthias.schiffer@ew.tq-group.com>, Kamlesh Gurudasani
+ <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger
+ <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>
+References: <20231219101225.3443978-1-danishanwar@ti.com>
+ <6d9456ec-a483-4721-8713-626aacdc9f81@kernel.org>
+ <4ccd7db1-533a-4243-9087-7e7c2e85b917@ti.com>
+ <d841b7b8-80f8-467d-afed-1170a2627724@kernel.org>
+ <46c69c28-09c3-4e60-92f5-1f91d795a22a@ti.com>
+ <036c3423-4205-4d9e-9779-ecd3a49f8a47@ti.com>
+From: MD Danish Anwar <danishanwar@ti.com>
+In-Reply-To: <036c3423-4205-4d9e-9779-ecd3a49f8a47@ti.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,738 +93,1014 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
 
-On Thu, Dec 28, 2023 at 4:39=E2=80=AFPM Alexey Romanov
-<avromanov@salutedevices.com> wrote:
->
-> It is bad practice to use such error codes. Error codes
-> must be negative.
->
-> Also, fastboot code expects that if successful, mtdparts
-> functions will return a value greater than 0. You can see
-> fastboot_nand_get_part_info() functions calls inside
-> getvar_get_part_info().
->
-> And use 'return CMD_RET_FAILURE' define instead of 'return 1'.
->
 
-Can you split the CMD_RET_FAILURE in a separate patch?
+On 02/01/24 7:26 pm, Andrew Davis wrote:
+> On 12/27/23 12:56 AM, MD Danish Anwar wrote:
+>>
+>>
+>> On 22/12/23 6:13 pm, Roger Quadros wrote:
+>>>
+>>> On 22/12/2023 12:26, MD Danish Anwar wrote:
+>>>> Hi Roger,
+>>>>
+>>>> On 20/12/23 3:29 pm, Roger Quadros wrote:
+>>>>> Hi,
+>>>>>
+>>>>> On 19/12/2023 12:11, MD Danish Anwar wrote:
+>>>>>> Introduce ICSSG PRUETH support in uboot. The ICSSG driver is used
+>>>>>> in TI
+>>>>>> AM654 SR2.0.
+>>>>>>
+>>>>>> The ICSSG PRU Sub-system runs on EMAC firmware. This series
+>>>>>> Introduces
+>>>>>> support for ICSSG driver in uboot. This series also adds the driver's
+>>>>>> dependencies.
+>>>>>>
+>>>>>> The ICSSG2 node is added in device tree overlay so that it remains in
+>>>>>> sync with linux kernel.
+>>>>>>
+>>>>>> The series introduces device tree and config changes and AM65x
+>>>>>> to enable ICSSG driver. The series also enables
+>>>>>> SPL_LOAD_FIT_APPLY_OVERLAY
+>>>>>> for AM65x in order to load overlay over spl.
+>>>>>>
+>>>>>> This series has been tested on AM65x SR2.0, and the ICSSG
+>>>>>> interface is
+>>>>>> able to ping / dhcp and boot kernel using tftp in uboot.
+>>>>>>
+>>>>>> To use ICSSG2 ethernet, the ICSSG firmware needs to be loaded to
+>>>>>> PRU RPROC
+>>>>>> cores and RPROC cores need to be booted with the firmware. This
+>>>>>> step is
+>>>>>> done inside driver in kernel as kernel supports APIs like
+>>>>>> rproc_set_firmware() and rproc_fw_boot(). But as u-boot doesn't
+>>>>>> have these
+>>>>>> APIs, the same needs to be done via u-boot cmds.
+>>>>>>
+>>>>>> To make sure icssg-eth works we need to do below steps.
+>>>>>>
+>>>>>> 1. Initialize rproc cores i.e. rproc_init()
+>>>>>> 2. Load $firmware_file from partition '1:2' (root) on device (mmc
+>>>>>> in this
+>>>>>>     example)
+>>>>>> 3. Load the firmware file to rproc cores passing. i.e. rproc_load()
+>>>>>>     taking rproc_id, loadaddr and file size as arguments.
+>>>>>> 4. Start rproc cores. i.e. rproc_start() taking rproc_id as arguments
+>>>>>>
+>>>>>> The above steps are done by running the below commands at u-boot
+>>>>>> prompt.
+>>>>>>
+>>>>>> => setenv start_icssg2 'rproc start 14; rproc start 15; rproc
+>>>>>> start 16; rproc start 17; rproc start 18; rproc start 19'
+>>>>>> => setenv stop_icssg2 'rproc stop 14; rproc stop 15; rproc stop
+>>>>>> 16; rproc stop 17; rproc stop 18; rproc stop 19'
+>>>>>> => setenv firmware_dir '/lib/firmware/ti-pruss'
+>>>>>> => setenv get_firmware_mmc 'load mmc ${bootpart} ${loadaddr}
+>>>>>> ${firmware_dir}/${firmware_file}'
+>>>>>>
+>>>>>> => setenv init_icssg2 'setenv ethact icssg2-eth; setenv autoload
+>>>>>> no; rproc init; setenv loadaddr 0x80000000; \
+>>>>>>      setenv firmware_file am65x-sr2-pru0-prueth-fw.elf; run
+>>>>>> get_firmware_mmc;  rproc load 14 0x80000000 ${filesize}; \
+>>>>>>      setenv loadaddr 0x89000000; setenv firmware_file
+>>>>>> am65x-sr2-rtu0-prueth-fw.elf; run get_firmware_mmc; rproc load 15
+>>>>>> 0x89000000 ${filesize}; \
+>>>>>>      setenv loadaddr 0x90000000; setenv firmware_file
+>>>>>> am65x-sr2-txpru0-prueth-fw.elf; run get_firmware_mmc; rproc load
+>>>>>> 16 0x90000000 ${filesize}; \
+>>>>>>      setenv loadaddr 0x80000000; setenv firmware_file
+>>>>>> am65x-sr2-pru1-prueth-fw.elf; run get_firmware_mmc; rproc load 17
+>>>>>> 0x80000000 ${filesize}; \
+>>>>>>      setenv loadaddr 0x89000000; setenv firmware_file
+>>>>>> am65x-sr2-rtu1-prueth-fw.elf; run get_firmware_mmc; rproc load 18
+>>>>>> 0x89000000 ${filesize}; \
+>>>>>>      setenv loadaddr 0x90000000; setenv firmware_file
+>>>>>> am65x-sr2-txpru1-prueth-fw.elf; run get_firmware_mmc; rproc load
+>>>>>> 19 0x90000000 ${filesize}; \
+>>>>>>      run start_icssg2;'
+>>>>>
+>>>>> A whole bunch of commands are required to get ethernet functional.
+>>>>> This is not at all user friendly and will be a maintenance nightmare.
+>>>>> What worries me is tracking the 6 different rproc cores and the 6
+>>>>> different firmware files to start 1 ethernet device.
+>>>>> This will get even more interesting when we have to deal with
+>>>>> different ICSSG instances on different boards.
+>>>>>
+>>>>> What is preventing the driver from starting the rproc cores it
+>>>>> needs so user doesn't need to care about it?
+>>>>> All the necessary information is in the Device tree. At least this
+>>>>> is how it is done on Linux.
+>>>>>
+>>>>
+>>>> I tried removing the need for these commands and implementing them
+>>>> inside the driver only. I am able to load the firmware from driver
+>>>> using
+>>>> the fs_loader API request_firmware_into_buf(). It requires changes to
+>>>> dt. A DT node called fs-loader needs to be added also CONFIG_FS_LOADER
+>>>> needs to enabled. In the DT node we need to specify the storage media
+>>>> that we are using i.e. mmc, ospi, usb. It's upto user to modify the
+>>>> storage media, the driver will take the media from DT and try to laod
+>>>> firmware from their.
+>>>>
+>>>> For loading firmwares to rproc cores, rproc_load() API is needed. Now
+>>>> this API takes rproc_id, loadaddr and firmware_size as arguments.
+>>>> loadaddr is fixed for all three pru cores. firmware_size is obtained
+>>>> from request_firmware_into_buf() but I couldn't find a way to get the
+>>>> rproc_id. For now based on the ICSSG instance and slice number I am
+>>>> figuring out the rproc_id and passing it to rproc_load() and
+>>>> rproc_start() APIs. Please let me know if you have any other / better
+>>>> way of finding rproc_id.
+>>>>
+>>>> Below is the entire diff to remove these commands and move their
+>>>> functionality to driver. Please have a look and let me know if this
+>>>> is ok.
+>>>>
+>>>
+>>> Good to see you got something working so quickly.
+>>> It has some rough edges but nothing that is blocking.
+>>>
+>>>>
+>>>> Save New Duplicate & Edit Just Text Twitter
+>>>> diff --git a/arch/arm/dts/k3-am654-base-board.dts
+>>>> b/arch/arm/dts/k3-am654-base-board.dts
+>>>> index cfbcebfa37..c8da72e49c 100644
+>>>> --- a/arch/arm/dts/k3-am654-base-board.dts
+>>>> +++ b/arch/arm/dts/k3-am654-base-board.dts
+>>>> @@ -16,6 +16,13 @@
+>>>>       chosen {
+>>>>           stdout-path = "serial2:115200n8";
+>>>>           bootargs = "earlycon=ns16550a,mmio32,0x02800000";
+>>>> +        firmware-loader = <&fs_loader0>;
+>>>> +    };
+>>>> +
+>>>> +    fs_loader0: fs-loader {
+>>>> +        bootph-all;
+>>>> +        compatible = "u-boot,fs-loader";
+>>>> +        phandlepart = <&sdhci1 2>;
+>>>>       };
+>>>
+>>> This is has 2 issues
+>>> 1) It will not be accepted in Kernel DT. Maybe it could be done in
+>>> -u-boot.dtsi file.
+>>
+>> Sure. I'll move this to k3-am654-base-board-u-boot.dtsi
+>>
+>>> 2) You cannot assume boot medium is always sdhci1 2
+>>>
+>>
+>> Yes. It's upto user to provide the boot medium and boot partition for
+>> loading firmware. By default the firmware is loacated in root partion of
+>> shdci1 on am65x so I am adding this as default. But user can easily
+>> modify this to any other medium / partition needed.
+>>
+> 
+> Users should not have to modify DT to pick a boot medium/partition.
+> What would you do for complex cases or non block devices like eth/uart
 
-> Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
-> ---
->  cmd/mtdparts.c | 154 ++++++++++++++++++++++++-------------------------
->  1 file changed, 77 insertions(+), 77 deletions(-)
->
-> diff --git a/cmd/mtdparts.c b/cmd/mtdparts.c
-> index 0984158f41..08e5b794db 100644
-> --- a/cmd/mtdparts.c
-> +++ b/cmd/mtdparts.c
-> @@ -299,7 +299,7 @@ static void current_save(void)
->   * @param type mtd type
->   * @param num mtd number
->   * @param mtd a pointer to an mtd_info instance (output)
-> - * Return: 0 if device is valid, 1 otherwise
-> + * Return: 0 if device is valid, -errno otherwise
->   */
->  static int get_mtd_info(u8 type, u8 num, struct mtd_info **mtd)
->  {
-> @@ -309,7 +309,7 @@ static int get_mtd_info(u8 type, u8 num, struct mtd_i=
-nfo **mtd)
->         *mtd =3D get_mtd_device_nm(mtd_dev);
->         if (IS_ERR(*mtd)) {
->                 printf("Device %s not found!\n", mtd_dev);
-> -               return 1;
-> +               return -ENODEV;
->         }
->         put_mtd_device(*mtd);
->
-> @@ -323,7 +323,7 @@ static int get_mtd_info(u8 type, u8 num, struct mtd_i=
-nfo **mtd)
->   *
->   * @param id of the parent device
->   * @param part partition to validate
-> - * Return: 0 if partition is valid, 1 otherwise
-> + * Return: 0 if partition is valid, -errno otherwise
->   */
->  static int part_validate_eraseblock(struct mtdids *id, struct part_info =
-*part)
->  {
-> @@ -333,7 +333,7 @@ static int part_validate_eraseblock(struct mtdids *id=
-, struct part_info *part)
->         u64 offset, size;
->
->         if (get_mtd_info(id->type, id->num, &mtd))
-> -               return 1;
-> +               return -EINVAL;
->
->         part->sector_size =3D mtd->erasesize;
->
-> @@ -347,14 +347,14 @@ static int part_validate_eraseblock(struct mtdids *=
-id, struct part_info *part)
->                         printf("%s%d: partition (%s) start offset"
->                                "alignment incorrect\n",
->                                MTD_DEV_TYPE(id->type), id->num, part->nam=
-e);
-> -                       return 1;
-> +                       return -EINVAL;
->                 }
->
->                 size =3D part->size;
->                 if (do_div(size, mtd->erasesize)) {
->                         printf("%s%d: partition (%s) size alignment incor=
-rect\n",
->                                MTD_DEV_TYPE(id->type), id->num, part->nam=
-e);
-> -                       return 1;
-> +                       return -EINVAL;
->                 }
->         } else {
->                 /*
-> @@ -374,7 +374,7 @@ static int part_validate_eraseblock(struct mtdids *id=
-, struct part_info *part)
->
->                 printf("%s%d: partition (%s) start offset alignment incor=
-rect\n",
->                        MTD_DEV_TYPE(id->type), id->num, part->name);
-> -               return 1;
-> +               return -EINVAL;
->
->         start_ok:
->
-> @@ -393,7 +393,7 @@ static int part_validate_eraseblock(struct mtdids *id=
-, struct part_info *part)
->
->                 printf("%s%d: partition (%s) size alignment incorrect\n",
->                        MTD_DEV_TYPE(id->type), id->num, part->name);
-> -               return 1;
-> +               return -EINVAL;
->
->         end_ok:
->                 return 0;
-> @@ -410,7 +410,7 @@ static int part_validate_eraseblock(struct mtdids *id=
-, struct part_info *part)
->   *
->   * @param id of the parent device
->   * @param part partition to validate
-> - * Return: 0 if partition is valid, 1 otherwise
-> + * Return: 0 if partition is valid, -errno otherwise
->   */
->  static int part_validate(struct mtdids *id, struct part_info *part)
->  {
-> @@ -420,18 +420,18 @@ static int part_validate(struct mtdids *id, struct =
-part_info *part)
->         if (part->offset > id->size) {
->                 printf("%s: offset %08llx beyond flash size %08llx\n",
->                                 id->mtd_id, part->offset, id->size);
-> -               return 1;
-> +               return -EINVAL;
->         }
->
->         if ((part->offset + part->size) <=3D part->offset) {
->                 printf("%s%d: partition (%s) size too big\n",
->                                 MTD_DEV_TYPE(id->type), id->num, part->na=
-me);
-> -               return 1;
-> +               return -EINVAL;
->         }
->
->         if (part->offset + part->size > id->size) {
->                 printf("%s: partitioning exceeds flash size\n", id->mtd_i=
-d);
-> -               return 1;
-> +               return -EINVAL;
->         }
->
->         /*
-> @@ -446,7 +446,7 @@ static int part_validate(struct mtdids *id, struct pa=
-rt_info *part)
->   *
->   * @param dev device to delete partition from
->   * @param part partition to delete
-> - * Return: 0 on success, 1 otherwise
-> + * Return: 0 on success, -ernno otherwise
->   */
->  static int part_del(struct mtd_device *dev, struct part_info *part)
->  {
-> @@ -544,7 +544,7 @@ static int part_sort_add(struct mtd_device *dev, stru=
-ct part_info *part)
->                 /* be compliant with kernel cmdline, allow only one parti=
-tion at offset zero */
->                 if ((new_pi->offset =3D=3D pi->offset) && (pi->offset =3D=
-=3D 0)) {
->                         printf("cannot add second partition at offset 0\n=
-");
-> -                       return 1;
-> +                       return -EINVAL;
->                 }
->
->                 if (new_pi->offset <=3D pi->offset) {
-> @@ -574,17 +574,17 @@ static int part_sort_add(struct mtd_device *dev, st=
-ruct part_info *part)
->   *
->   * @param dev device to which partition is added
->   * @param part partition to be added
-> - * Return: 0 on success, 1 otherwise
-> + * Return: 0 on success, -errno otherwise
->   */
->  static int part_add(struct mtd_device *dev, struct part_info *part)
->  {
->         /* verify alignment and size */
->         if (part_validate(dev->id, part) !=3D 0)
-> -               return 1;
-> +               return -EINVAL;
->
->         /* partition is ok, add it to the list */
->         if (part_sort_add(dev, part) !=3D 0)
-> -               return 1;
-> +               return -EINVAL;
->
->         return 0;
->  }
-> @@ -596,7 +596,7 @@ static int part_add(struct mtd_device *dev, struct pa=
-rt_info *part)
->   * @param partdef pointer to the partition definition string i.e. <part-=
-def>
->   * @param ret output pointer to next char after parse completes (output)
->   * @param retpart pointer to the allocated partition (output)
-> - * Return: 0 on success, 1 otherwise
-> + * Return: 0 on success, -errno otherwise
->   */
->  static int part_parse(const char *const partdef, const char **ret, struc=
-t part_info **retpart)
->  {
-> @@ -622,7 +622,7 @@ static int part_parse(const char *const partdef, cons=
-t char **ret, struct part_i
->                 size =3D memsize_parse(p, &p);
->                 if (size < MIN_PART_SIZE) {
->                         printf("partition size too small (%llx)\n", size)=
-;
-> -                       return 1;
-> +                       return -EINVAL;
->                 }
->         }
->
-> @@ -638,12 +638,12 @@ static int part_parse(const char *const partdef, co=
-nst char **ret, struct part_i
->                 name =3D ++p;
->                 if ((p =3D strchr(name, ')')) =3D=3D NULL) {
->                         printf("no closing ) found in partition name\n");
-> -                       return 1;
-> +                       return -EINVAL;
->                 }
->                 name_len =3D p - name + 1;
->                 if ((name_len - 1) =3D=3D 0) {
->                         printf("empty partition name\n");
-> -                       return 1;
-> +                       return -EINVAL;
->                 }
->                 p++;
->         } else {
-> @@ -664,7 +664,7 @@ static int part_parse(const char *const partdef, cons=
-t char **ret, struct part_i
->                 if (size =3D=3D SIZE_REMAINING) {
->                         *ret =3D NULL;
->                         printf("no partitions allowed after a fill-up par=
-tition\n");
-> -                       return 1;
-> +                       return -EINVAL;
->                 }
->                 *ret =3D ++p;
->         } else if ((*p =3D=3D ';') || (*p =3D=3D '\0')) {
-> @@ -672,14 +672,14 @@ static int part_parse(const char *const partdef, co=
-nst char **ret, struct part_i
->         } else {
->                 printf("unexpected character '%c' at the end of partition=
-\n", *p);
->                 *ret =3D NULL;
-> -               return 1;
-> +               return -EINVAL;
->         }
->
->         /*  allocate memory */
->         part =3D (struct part_info *)malloc(sizeof(struct part_info) + na=
-me_len);
->         if (!part) {
->                 printf("out of memory\n");
-> -               return 1;
-> +               return -ENOMEM;
->         }
->         memset(part, 0, sizeof(struct part_info) + name_len);
->         part->size =3D size;
-> @@ -714,14 +714,14 @@ static int part_parse(const char *const partdef, co=
-nst char **ret, struct part_i
->   * @param type mtd type
->   * @param num mtd number
->   * @param size a pointer to the size of the mtd device (output)
-> - * Return: 0 if device is valid, 1 otherwise
-> + * Return: 0 if device is valid, -errno otherwise
->   */
->  static int mtd_device_validate(u8 type, u8 num, u64 *size)
->  {
->         struct mtd_info *mtd =3D NULL;
->
->         if (get_mtd_info(type, num, &mtd))
-> -               return 1;
-> +               return -EINVAL;
->
->         *size =3D mtd->size;
->
-> @@ -732,7 +732,7 @@ static int mtd_device_validate(u8 type, u8 num, u64 *=
-size)
->   * Delete all mtd devices from a supplied devices list, free memory allo=
-cated for
->   * each device and delete all device partitions.
->   *
-> - * Return: 0 on success, 1 otherwise
-> + * Return: 0 on success, -errno otherwise
->   */
->  static int device_delall(struct list_head *head)
->  {
-> @@ -756,7 +756,7 @@ static int device_delall(struct list_head *head)
->   * from device list and device memory is freed.
->   *
->   * @param dev device to be deleted
-> - * Return: 0 on success, 1 otherwise
-> + * Return: 0 on success, -errno otherwise
->   */
->  static int device_del(struct mtd_device *dev)
->  {
-> @@ -835,7 +835,7 @@ static void device_add(struct mtd_device *dev)
->   * @param mtd_dev pointer to the device definition string i.e. <mtd-dev>
->   * @param ret output pointer to next char after parse completes (output)
->   * @param retdev pointer to the allocated device (output)
-> - * Return: 0 on success, 1 otherwise
-> + * Return: 0 on success, -errno otherwise
->   */
->  static int device_parse(const char *const mtd_dev, const char **ret, str=
-uct mtd_device **retdev)
->  {
-> @@ -864,7 +864,7 @@ static int device_parse(const char *const mtd_dev, co=
-nst char **ret, struct mtd_
->         mtd_id =3D p =3D mtd_dev;
->         if (!(p =3D strchr(mtd_id, ':'))) {
->                 printf("no <mtd-id> identifier\n");
-> -               return 1;
-> +               return -EINVAL;
->         }
->         mtd_id_len =3D p - mtd_id + 1;
->         p++;
-> @@ -872,7 +872,7 @@ static int device_parse(const char *const mtd_dev, co=
-nst char **ret, struct mtd_
->         /* verify if we have a valid device specified */
->         if ((id =3D id_find_by_mtd_id(mtd_id, mtd_id_len - 1)) =3D=3D NUL=
-L) {
->                 printf("invalid mtd device '%.*s'\n", mtd_id_len - 1, mtd=
-_id);
-> -               return 1;
-> +               return -ENODEV;
->         }
->
->         pend =3D strchr(p, ';');
-> @@ -915,7 +915,7 @@ static int device_parse(const char *const mtd_dev, co=
-nst char **ret, struct mtd_
->         }
->         if (err =3D=3D 1) {
->                 part_delall(&tmp_list);
-> -               return 1;
-> +               return -EINVAL;
->         }
->
->         debug("\ntotal partitions: %d\n", num_parts);
-> @@ -932,14 +932,14 @@ static int device_parse(const char *const mtd_dev, =
-const char **ret, struct mtd_
->                         printf("unexpected character '%c' at the end of d=
-evice\n", *p);
->                         if (ret)
->                                 *ret =3D NULL;
-> -                       return 1;
-> +                       return -EINVAL;
->                 }
->         }
->
->         /* allocate memory for mtd_device structure */
->         if ((dev =3D (struct mtd_device *)malloc(sizeof(struct mtd_device=
-))) =3D=3D NULL) {
->                 printf("out of memory\n");
-> -               return 1;
-> +               return -ENOMEM;
->         }
->         memset(dev, 0, sizeof(struct mtd_device));
->         dev->id =3D id;
-> @@ -953,7 +953,7 @@ static int device_parse(const char *const mtd_dev, co=
-nst char **ret, struct mtd_
->                 list_del(entry);
->                 if (part_sort_add(dev, part) !=3D 0) {
->                         device_del(dev);
-> -                       return 1;
-> +                       return -EINVAL;
->                 }
->         }
->
-> @@ -966,7 +966,7 @@ static int device_parse(const char *const mtd_dev, co=
-nst char **ret, struct mtd_
->  /**
->   * Initialize global device list.
->   *
-> - * Return: 0 on success, 1 otherwise
-> + * Return: 0 on success, -errno otherwise
->   */
->  static int mtd_devices_init(void)
->  {
-> @@ -1037,7 +1037,7 @@ static struct mtdids* id_find_by_mtd_id(const char =
-*mtd_id, unsigned int mtd_id_
->   * @param ret_id output pointer to next char after parse completes (outp=
-ut)
->   * @param dev_type parsed device type (output)
->   * @param dev_num parsed device number (output)
-> - * Return: 0 on success, 1 otherwise
-> + * Return: 0 on success, -errno otherwise
->   */
->  int mtd_id_parse(const char *id, const char **ret_id, u8 *dev_type,
->                  u8 *dev_num)
-> @@ -1059,12 +1059,12 @@ int mtd_id_parse(const char *id, const char **ret=
-_id, u8 *dev_type,
->                 p +=3D 8;
->         } else {
->                 printf("incorrect device type in %s\n", id);
-> -               return 1;
-> +               return -EINVAL;
->         }
->
->         if (!isdigit(*p)) {
->                 printf("incorrect device number in %s\n", id);
-> -               return 1;
-> +               return -EINVAL;
->         }
->
->         *dev_num =3D simple_strtoul(p, (char **)&p, 0);
-> @@ -1079,7 +1079,7 @@ int mtd_id_parse(const char *id, const char **ret_i=
-d, u8 *dev_type,
->   *
->   * @param buf output buffer holding generated mtdparts string (output)
->   * @param buflen buffer size
-> - * Return: 0 on success, 1 otherwise
-> + * Return: 0 on success, -errno otherwise
->   */
->  static int generate_mtdparts(char *buf, u32 buflen)
->  {
-> @@ -1195,7 +1195,7 @@ static int generate_mtdparts(char *buf, u32 buflen)
->
->  cleanup:
->         last_parts[0] =3D '\0';
-> -       return 1;
-> +       return -EINVAL;
->  }
->
->  /**
-> @@ -1204,7 +1204,7 @@ cleanup:
->   *
->   * @param buf output buffer holding generated mtdparts string (output)
->   * @param buflen buffer size
-> - * Return: 0 on success, 1 otherwise
-> + * Return: 0 on success, -errno otherwise
->   */
->  static int generate_mtdparts_save(char *buf, u32 buflen)
->  {
-> @@ -1342,7 +1342,7 @@ static void list_partitions(void)
->   * @param dev pointer to the requested device (output)
->   * @param part_num verified partition number (output)
->   * @param part pointer to requested partition (output)
-> - * Return: 0 on success, 1 otherwise
-> + * Return: 0 on success, -errno otherwise
->   */
->  int find_dev_and_part(const char *id, struct mtd_device **dev,
->                 u8 *part_num, struct part_info **part)
-> @@ -1370,27 +1370,27 @@ int find_dev_and_part(const char *id, struct mtd_=
-device **dev,
->         *part_num =3D 0;
->
->         if (mtd_id_parse(p, &p, &type, &dnum) !=3D 0)
-> -               return 1;
-> +               return -EINVAL;
->
->         if ((*p++ !=3D ',') || (*p =3D=3D '\0')) {
->                 printf("no partition number specified\n");
-> -               return 1;
-> +               return -EINVAL;
->         }
->         pnum =3D simple_strtoul(p, (char **)&p, 0);
->         if (*p !=3D '\0') {
->                 printf("unexpected trailing character '%c'\n", *p);
-> -               return 1;
-> +               return -EINVAL;
->         }
->
->         if ((*dev =3D device_find(type, dnum)) =3D=3D NULL) {
->                 printf("no such device %s%d\n", MTD_DEV_TYPE(type), dnum)=
-;
-> -               return 1;
-> +               return -ENODEV;
->         }
->
->         if ((*part =3D mtd_part_info(*dev, pnum)) =3D=3D NULL) {
->                 printf("no such partition\n");
->                 *dev =3D NULL;
-> -               return 1;
-> +               return -EINVAL;
->         }
->
->         *part_num =3D pnum;
-> @@ -1402,7 +1402,7 @@ int find_dev_and_part(const char *id, struct mtd_de=
-vice **dev,
->   * Find and delete partition. For partition id format see find_dev_and_p=
-art().
->   *
->   * @param id string describing device and partition
-> - * Return: 0 on success, 1 otherwise
-> + * Return: 0 on success, -errno otherwise
->   */
->  static int delete_partition(const char *id)
->  {
-> @@ -1417,17 +1417,17 @@ static int delete_partition(const char *id)
->                                 part->name, part->size, part->offset);
->
->                 if (part_del(dev, part) !=3D 0)
-> -                       return 1;
-> +                       return -EINVAL;
->
->                 if (generate_mtdparts_save(last_parts, MTDPARTS_MAXLEN) !=
-=3D 0) {
->                         printf("generated mtdparts too long, resetting to=
- null\n");
-> -                       return 1;
-> +                       return -EINVAL;
->                 }
->                 return 0;
->         }
->
->         printf("partition %s not found\n", id);
-> -       return 1;
-> +       return -ENOENT;
->  }
->
->  #if defined(CONFIG_CMD_MTDPARTS_SPREAD)
-> @@ -1478,7 +1478,7 @@ static void spread_partition(struct mtd_info *mtd, =
-struct part_info *part,
->   * as big as their mtdparts environment variable sizes and they each sta=
-rt
->   * on a good block.
->   *
-> - * Return: 0 on success, 1 otherwise
-> + * Return: 0 on success, -errno otherwise
->   */
->  static int spread_partitions(void)
->  {
-> @@ -1493,7 +1493,7 @@ static int spread_partitions(void)
->                 dev =3D list_entry(dentry, struct mtd_device, link);
->
->                 if (get_mtd_info(dev->id->type, dev->id->num, &mtd))
-> -                       return 1;
-> +                       return -EINVAL;
->
->                 part_num =3D 0;
->                 cur_offs =3D 0;
-> @@ -1519,7 +1519,7 @@ static int spread_partitions(void)
->
->         if (generate_mtdparts_save(last_parts, MTDPARTS_MAXLEN) !=3D 0) {
->                 printf("generated mtdparts too long, resetting to null\n"=
-);
-> -               return 1;
-> +               return -EINVAL;
->         }
->         return 0;
->  }
-> @@ -1547,7 +1547,7 @@ static const char *env_get_mtdparts(char *buf)
->   * for each entry. Add created devices to the global devices list.
->   *
->   * @param mtdparts string specifing mtd partitions
-> - * Return: 0 on success, 1 otherwise
-> + * Return: 0 on success, -errno otherwise
->   */
->  static int parse_mtdparts(const char *const mtdparts)
->  {
-> @@ -1605,7 +1605,7 @@ static int parse_mtdparts(const char *const mtdpart=
-s)
->   * to the global mtdids list.
->   *
->   * @param ids mapping string
-> - * Return: 0 on success, 1 otherwise
-> + * Return: 0 on success, -errno otherwise
->   */
->  static int parse_mtdids(const char *const ids)
->  {
-> @@ -1646,7 +1646,7 @@ static int parse_mtdids(const char *const ids)
->
->                 /* check if requested device exists */
->                 if (mtd_device_validate(type, num, &size) !=3D 0)
-> -                       return 1;
-> +                       return -EINVAL;
->
->                 /* locate <mtd-id> */
->                 mtd_id =3D p;
-> @@ -1704,7 +1704,7 @@ static int parse_mtdids(const char *const ids)
->                         list_del(entry);
->                         free(id_tmp);
->                 }
-> -               return 1;
-> +               return -EINVAL;
->         }
->
->         return 0;
-> @@ -1715,7 +1715,7 @@ static int parse_mtdids(const char *const ids)
->   * Parse and initialize global mtdids mapping and create global
->   * device/partition list.
->   *
-> - * Return: 0 on success, 1 otherwise
-> + * Return: 0 on success, -errno otherwise
->   */
->  int mtdparts_init(void)
->  {
-> @@ -1768,12 +1768,12 @@ int mtdparts_init(void)
->                         env_set("mtdids", (char *)ids);
->                 } else {
->                         printf("mtdids not defined, no default present\n"=
-);
-> -                       return 1;
-> +                       return -ENXIO;
->                 }
->         }
->         if (strlen(ids) > MTDIDS_MAXLEN - 1) {
->                 printf("mtdids too long (> %d)\n", MTDIDS_MAXLEN);
-> -               return 1;
-> +               return -EINVAL;
->         }
->
->         /* use defaults when mtdparts variable is not defined
-> @@ -1789,7 +1789,7 @@ int mtdparts_init(void)
->
->         if (parts && (strlen(parts) > MTDPARTS_MAXLEN - 1)) {
->                 printf("mtdparts too long (> %d)\n", MTDPARTS_MAXLEN);
-> -               return 1;
-> +               return -EINVAL;
->         }
->
->         /* check if we have already parsed those mtdids */
-> @@ -1800,7 +1800,7 @@ int mtdparts_init(void)
->
->                 if (parse_mtdids(ids) !=3D 0) {
->                         mtd_devices_init();
-> -                       return 1;
-> +                       return -EINVAL;
->                 }
->
->                 /* ok it's good, save new ids */
-> @@ -1810,11 +1810,11 @@ int mtdparts_init(void)
->         /* parse partitions if either mtdparts or mtdids were updated */
->         if (parts && ((last_parts[0] =3D=3D '\0') || ((strcmp(last_parts,=
- parts) !=3D 0)) || ids_changed)) {
->                 if (parse_mtdparts(parts) !=3D 0)
-> -                       return 1;
-> +                       return -EINVAL;
->
->                 if (list_empty(&devices)) {
->                         printf("mtdparts_init: no valid partitions\n");
-> -                       return 1;
-> +                       return -ENXIO;
->                 }
->
->                 /* ok it's good, save new parts */
-> @@ -1923,15 +1923,15 @@ static int do_chpart(struct cmd_tbl *cmdtp, int f=
-lag, int argc,
->         u8 pnum;
->
->         if (mtdparts_init() !=3D0)
-> -               return 1;
-> +               return CMD_RET_FAILURE;
->
->         if (argc < 2) {
->                 printf("no partition id specified\n");
-> -               return 1;
-> +               return CMD_RET_FAILURE;
->         }
->
->         if (find_dev_and_part(argv[1], &dev, &pnum, &part) !=3D 0)
-> -               return 1;
-> +               return CMD_RET_FAILURE;
->
->         current_mtd_dev =3D dev;
->         current_mtd_partnum =3D pnum;
-> @@ -1978,7 +1978,7 @@ static int do_mtdparts(struct cmd_tbl *cmdtp, int f=
-lag, int argc,
->
->         /* make sure we are in sync with env variables */
->         if (mtdparts_init() !=3D 0)
-> -               return 1;
-> +               return CMD_RET_FAILURE;
->
->         if (argc =3D=3D 1) {
->                 list_partitions();
-> @@ -2000,11 +2000,11 @@ static int do_mtdparts(struct cmd_tbl *cmdtp, int=
- flag, int argc,
->                 struct part_info *p;
->
->                 if (mtd_id_parse(argv[2], NULL, &type, &num) !=3D 0)
-> -                       return 1;
-> +                       return CMD_RET_FAILURE;
->
->                 if ((id =3D id_find(type, num)) =3D=3D NULL) {
->                         printf("no such device %s defined in mtdids varia=
-ble\n", argv[2]);
-> -                       return 1;
-> +                       return CMD_RET_FAILURE;
->                 }
->
->                 len =3D strlen(id->mtd_id) + 1;   /* 'mtd_id:' */
-> @@ -2015,14 +2015,14 @@ static int do_mtdparts(struct cmd_tbl *cmdtp, int=
- flag, int argc,
->
->                 if (len >=3D PART_ADD_DESC_MAXLEN) {
->                         printf("too long partition description\n");
-> -                       return 1;
-> +                       return CMD_RET_FAILURE;
->                 }
->                 sprintf(tmpbuf, "%s:%s(%s)%s",
->                                 id->mtd_id, argv[3], argv[4], argv[5] ? a=
-rgv[5] : "");
->                 debug("add tmpbuf: %s\n", tmpbuf);
->
->                 if ((device_parse(tmpbuf, NULL, &dev) !=3D 0) || (!dev))
-> -                       return 1;
-> +                       return -EINVAL;
->
->                 debug("+ %s\t%d\t%s\n", MTD_DEV_TYPE(dev->id->type),
->                                 dev->id->num, dev->id->mtd_id);
-> @@ -2031,7 +2031,7 @@ static int do_mtdparts(struct cmd_tbl *cmdtp, int f=
-lag, int argc,
->
->  #if defined(CONFIG_CMD_MTDPARTS_SPREAD)
->                 if (get_mtd_info(dev->id->type, dev->id->num, &mtd))
-> -                       return 1;
-> +                       return CMD_RET_FAILURE;
->
->                 if (!strcmp(&argv[1][3], ".spread")) {
->                         spread_partition(mtd, p, &next_offset);
-> @@ -2045,12 +2045,12 @@ static int do_mtdparts(struct cmd_tbl *cmdtp, int=
- flag, int argc,
->                 } else if (part_add(dev_tmp, p) !=3D 0) {
->                         /* merge new partition with existing ones*/
->                         device_del(dev);
-> -                       return 1;
-> +                       return CMD_RET_FAILURE;
->                 }
->
->                 if (generate_mtdparts_save(last_parts, MTDPARTS_MAXLEN) !=
-=3D 0) {
->                         printf("generated mtdparts too long, resetting to=
- null\n");
-> -                       return 1;
-> +                       return CMD_RET_FAILURE;
->                 }
->
->                 return 0;
-> --
-> 2.30.1
->
+In order to load firmware files from driver, we need to add the node for
+fs-loader. The fs-loader has a phandlepart property which takes the boot
+medium and the partition as input. Based on the medium and partition it
+looks for the requested file and loads it to a given address. I am not
+sure if there is any other way to load firmware from driver without
+using the fs-loader.
 
-Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+
+> booting? This is one reason kernel moved firmware loading to
+> userspace. The equivalant in U-Boot is the shell and scripts. Your
+> original command based loading was the correct solution IMHO.
+
+I intended to go ahead with command base approach only but as Roger
+pointed out the command based approach is not very user friendly.
+
+We need to align on what should be the correct approach for loading
+firmware.
+
+Roger, can you please chime in here.
+
+> 
+> If we want to try to hide some of that then we need a way to
+> run a user provided script from the environement to handle
+> the general cases for firmware loading.
+> 
+> Andrew
+> 
+>>>>
+>>>>       memory@80000000 {
+>>>> diff --git a/configs/am65x_evm_a53_defconfig
+>>>> b/configs/am65x_evm_a53_defconfig
+>>>> index 2755d7082f..c53e938abb 100644
+>>>> --- a/configs/am65x_evm_a53_defconfig
+>>>> +++ b/configs/am65x_evm_a53_defconfig
+>>>> @@ -112,6 +112,7 @@ CONFIG_DM_I2C_GPIO=y
+>>>>   CONFIG_SYS_I2C_OMAP24XX=y
+>>>>   CONFIG_DM_MAILBOX=y
+>>>>   CONFIG_K3_SEC_PROXY=y
+>>>> +CONFIG_FS_LOADER=y
+>>>>   CONFIG_SUPPORT_EMMC_BOOT=y
+>>>>   CONFIG_MMC_IO_VOLTAGE=y
+>>>>   CONFIG_MMC_UHS_SUPPORT=y
+>>>> diff --git a/configs/am65x_evm_r5_defconfig
+>>>> b/configs/am65x_evm_r5_defconfig
+>>>> index b2f1e721b3..2d19935a41 100644
+>>>> --- a/configs/am65x_evm_r5_defconfig
+>>>> +++ b/configs/am65x_evm_r5_defconfig
+>>>> @@ -98,6 +98,7 @@ CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+>>>>   CONFIG_SYS_I2C_OMAP24XX=y
+>>>>   CONFIG_DM_MAILBOX=y
+>>>>   CONFIG_K3_SEC_PROXY=y
+>>>> +CONFIG_FS_LOADER=y
+>>>>   CONFIG_K3_AVS0=y
+>>>>   CONFIG_SUPPORT_EMMC_BOOT=y
+>>>>   CONFIG_MMC_HS200_SUPPORT=y
+>>>> diff --git a/drivers/net/ti/icssg_prueth.c
+>>>> b/drivers/net/ti/icssg_prueth.c
+>>>> index 40ad827e49..1c4edeb7b7 100644
+>>>> --- a/drivers/net/ti/icssg_prueth.c
+>>>> +++ b/drivers/net/ti/icssg_prueth.c
+>>>> @@ -227,6 +227,10 @@ static int prueth_start(struct udevice *dev)
+>>>>       void *config;
+>>>>       int ret, i;
+>>>>
+>>>> +    ret = icssg_start_pru_cores(dev);
+>>>> +    if (ret)
+>>>> +        return ret;
+>>>> +
+>>>>       /* To differentiate channels for SLICE0 vs SLICE1 */
+>>>>       snprintf(chn_name, sizeof(chn_name), "tx%d-0", priv->slice);
+>>>>
+>>>> @@ -355,9 +359,11 @@ static void prueth_stop(struct udevice *dev)
+>>>>       phy_shutdown(priv->phydev);
+>>>>
+>>>>       dma_disable(&priv->dma_tx);
+>>>> -    dma_free(&priv->dma_tx);
+>>>> -
+>>>>       dma_disable(&priv->dma_rx);
+>>>> +
+>>>> +    icssg_stop_pru_cores(dev);
+>>>> +
+>>>> +    dma_free(&priv->dma_tx);
+>>>>       dma_free(&priv->dma_rx);
+>>>>   }
+>>>>
+>>>> @@ -434,6 +440,181 @@ static const struct soc_attr
+>>>> k3_mdio_soc_data[] = {
+>>>>       { /* sentinel */ },
+>>>>   };
+>>>>
+>>>> +struct icssg_firmware_load_address {
+>>>> +    u32 pru;
+>>>> +    u32 rtu;
+>>>> +    u32 txpru;
+>>>> +};
+>>>> +
+>>>> +struct icssg_firmwares {
+>>>> +    char *pru;
+>>>> +    char *rtu;
+>>>> +    char *txpru;
+>>>> +};
+>>>> +
+>>>> +static struct icssg_firmwares icssg_emac_firmwares[] = {
+>>>> +    {
+>>>> +        .pru = "/lib/firmware/ti-pruss/am65x-sr2-pru0-prueth-fw.elf",
+>>>> +        .rtu = "/lib/firmware/ti-pruss/am65x-sr2-rtu0-prueth-fw.elf",
+>>>> +        .txpru =
+>>>> "/lib/firmware/ti-pruss/am65x-sr2-txpru0-prueth-fw.elf",
+>>>> +    },
+>>>> +    {
+>>>> +        .pru = "/lib/firmware/ti-pruss/am65x-sr2-pru1-prueth-fw.elf",
+>>>> +        .rtu = "/lib/firmware/ti-pruss/am65x-sr2-rtu1-prueth-fw.elf",
+>>>> +        .txpru =
+>>>> "/lib/firmware/ti-pruss/am65x-sr2-txpru1-prueth-fw.elf",
+>>>> +    }
+>>>> +};
+>>>
+>>> This information is contained in the DT.
+>>>
+>>>         firmware-name = "ti-pruss/am65x-sr2-pru0-prueth-fw.elf",
+>>>                 "ti-pruss/am65x-sr2-rtu0-prueth-fw.elf",
+>>>                 "ti-pruss/am65x-sr2-txpru0-prueth-fw.elf",
+>>>                 "ti-pruss/am65x-sr2-pru1-prueth-fw.elf",
+>>>                 "ti-pruss/am65x-sr2-rtu1-prueth-fw.elf",
+>>>                 "ti-pruss/am65x-sr2-txpru1-prueth-fw.elf";
+>>>
+>>
+>> Yes it is. But the linux driver uses the firmware strcuture inside
+>> driver only. The firmware-name property is not being used. The firmware
+>> names for all applicable SoCs (AM65x and AM64x) is same so instead of
+>> reading it from DT, the driver hardcodes the firmware names in linux. I
+>> think the thought here was to use firmware-name property from DT when
+>> different firmwares are needed for different SoCs. I am just following
+>> the same here in uboot as well.
+>>
+>>> You will need to introduce a rproc_set_firmware() API so clients can
+>>> set their own firmware names.
+>>>
+>>
+>> Sure. I will add an element 'fw_name' in struct dm_rproc_uclass_pdata
+>> and set this fw_name to the firmware name requested by client using
+>> rproc_set_firmware().
+>>
+>> The client drivers can call rproc_set_firmware(dev, firmware_name) to
+>> set the firmware name.
+>>
+>>>> +
+>>>> +int load_firmware(char *name_fw, u32 *loadaddr)
+>>>> +{
+>>>> +    struct udevice *fsdev;
+>>>> +    int size = 0;
+>>>> +
+>>>> +    if (!IS_ENABLED(CONFIG_FS_LOADER))
+>>>> +        return -EINVAL;
+>>>> +
+>>>> +    if (!*loadaddr)
+>>>> +        return -EINVAL;
+>>>> +
+>>>> +    if (!get_fs_loader(&fsdev))
+>>>> +        size = request_firmware_into_buf(fsdev, name_fw, (void
+>>>> *)*loadaddr,
+>>>> 40524, 0);
+>>>> +
+>>>> +    return size;
+>>>> +}
+>>>
+>>> On Linux rproc_boot() does both loading the firmware and starting the
+>>> rproc
+>>> as that is farely generic.
+>>> You should introduce rproc_boot() API so loading is taken care of at
+>>> rproc driver.
+>>> All you need to do is call rproc_set_firmware() before rproc_boot().
+>>>
+>>
+>> Sure. I'll introduce rproc_boot() which will load the firmware to a
+>> buffer and then load the firmware / buffer to rproc core usinig
+>> rproc_load.
+>>
+>> For allocating memory for reading firmware we need to provide the size
+>> of memory required as well. So rproc_boot will take two arguments.
+>> 1. dev (rproc device)
+>> 2. size (Maximum memory required to read firmware)
+>>
+>>>> +
+>>>> +static int icssg_get_instance(struct udevice *dev)
+>>>> +{
+>>>> +    if (!strcmp(dev->name, "icssg2-eth"))
+>>>> +        return 2;
+>>>> +    else if (!strcmp(dev->name, "icssg1-eth"))
+>>>> +        return 1;
+>>>> +    else if (!strcmp(dev->name, "icssg0-eth"))
+>>>> +        return 0;
+>>>> +
+>>>> +    dev_err(dev, "Invalid icssg instance\n");
+>>>> +    return -EINVAL;
+>>>> +}
+>>>> +
+>>>> +static int icssg_get_pru_core_number(struct udevice *dev, int slice)
+>>>> +{
+>>>> +    int instance, num_r5_cores;
+>>>> +
+>>>> +    instance = icssg_get_instance(dev);
+>>>> +    if (instance < 0)
+>>>> +        return instance;
+>>>> +
+>>>> +    if (IS_ENABLED(CONFIG_REMOTEPROC_TI_K3_R5F))
+>>>> +        num_r5_cores = 2;
+>>>> +
+>>>> +    return num_r5_cores +
+>>>> +           instance * PRU_TYPE_MAX * PRUETH_NUM_MACS +
+>>>> +           slice * PRU_TYPE_MAX;
+>>>
+>>> All this doesn't look right. What we need is the rproc device
+>>> that matches the PRU/RTU rprocs that we are interested in.
+>>>
+>>> The DT already has this information
+>>>
+>>>         ti,prus = <&pru2_0>, <&rtu2_0>, <&tx_pru2_0>,
+>>>             <&pru2_1>, <&rtu2_1>, <&tx_pru2_1>;
+>>>
+>>>
+>>> All the current rproc APIs use the below to get rproc device from ID
+>>> ret = uclass_get_device_by_seq(UCLASS_REMOTEPROC, id, &dev);
+>>>
+>>> You just need to introduce APIs that takes rproc device directly as
+>>> argument.
+>>>
+>>> In your driver you can call uclass_get_device_by_phandle_id() to get the
+>>> rproc device from the rproc phandle?
+>>
+>> Sure. I'll do that. Based on the icssg slice first I will get the
+>> phandle for prus.
+>>
+>> Index will be 0,1,2 for slice 0 and 3,4,5 for slice 1.
+>>
+>> ofnode_read_u32_index(dev_ofnode(dev), "ti,prus", index, &phandle);
+>>
+>> Then for each phandle I can call uclass_get_device_by_phandle_id() and
+>> get the rproc device.
+>>
+>>>
+>>>
+>>>> +}
+>>>> +
+>>>> +int icssg_start_pru_cores(struct udevice *dev)
+>>>> +{
+>>>> +    struct prueth *prueth = dev_get_priv(dev);
+>>>> +    struct icssg_firmwares *firmwares;
+>>>> +    u32 pru_fw_loadaddr = 0x80000000;
+>>>> +    u32 rtu_fw_loadaddr = 0x89000000;
+>>>> +    u32 txpru_fw_loadaddr = 0x90000000;
+>>>
+>>> Please avoid hardcoding. You can use malloc to get a temporary buffer
+>>> area?
+>>>
+>>> Why do you need 3 different addresses?
+>>> Once you do a rproc_load isn't the buffer already copied to rproc's
+>>> memory
+>>> so you can discard it or use it for the other rprocs?
+>>>
+>>
+>> Sure I'll use malloc to get temporary buffer. Only thing is that to get
+>> temporary buffer I will need to provide size as well.
+>>
+>> void *addr = malloc(fw_size);
+>>
+>> User needs to provide this fw_size to rproc_boot(). In my case the max
+>> size the firmware can have is 64KB so I will be passing 64K as size to
+>> rproc driver.
+>>
+>>>> +    int slice, ret, core_id;
+>>>> +
+>>>> +    firmwares = icssg_emac_firmwares;
+>>>> +    slice = prueth->slice;
+>>>> +
+>>>> +    core_id = icssg_get_pru_core_number(dev, slice);
+>>>> +    if (core_id < 0)
+>>>> +        return core_id;
+>>>> +
+>>>> +    /* Initialize all rproc cores */
+>>>> +    rproc_init();
+>>>> +
+>>>> +    /* Loading PRU firmware to PRU core */
+>>>> +    ret = load_firmware(firmwares[slice].pru, &pru_fw_loadaddr);
+>>>
+>>> On Linux, loading the firmware is the responsibility of the rproc
+>>> driver.
+>>> Shouldn't it be the same in u-boot?
+>>>
+>>
+>> Sure I'll move this to rproc driver.
+>>
+>>>> +
+>>>> +    if (ret < 0) {
+>>>> +        dev_err(dev, "Unable to load_firmware %s at addr 0x%x err
+>>>> %d\n",
+>>>> +            firmwares[slice].pru, pru_fw_loadaddr, ret);
+>>>> +        return ret;
+>>>> +    }
+>>>> +
+>>>> +    dev_info(dev, "Loaded FW %s successfully at addr 0x%x Size = %d
+>>>> Bytes\n",
+>>>> +        firmwares[slice].pru, pru_fw_loadaddr, ret);
+>>>
+>>> dev_dbg() here an at all dev_info().
+>>>
+>>>> +    rproc_load(core_id + PRU_TYPE_PRU, pru_fw_loadaddr, ret);
+>>>> +
+>>>> +    /* Loading RTU firmware to RTU core */
+>>>> +    ret = load_firmware(firmwares[slice].rtu, &rtu_fw_loadaddr);
+>>>> +
+>>>> +    if (ret < 0) {
+>>>> +        dev_err(dev, "Unable to load_firmware %s at addr 0x%x err
+>>>> %d\n",
+>>>> +            firmwares[slice].rtu, rtu_fw_loadaddr, ret);
+>>>> +        return ret;
+>>>> +    }
+>>>> +
+>>>> +    dev_info(dev, "Loaded FW %s successfully at addr 0x%x Size = %d
+>>>> Bytes\n",
+>>>> +        firmwares[slice].rtu, rtu_fw_loadaddr, ret);
+>>>> +    rproc_load(core_id + PRU_TYPE_RTU, rtu_fw_loadaddr, ret);
+>>>> +
+>>>> +    /* Loading TX_PRU firmware to TX_PRU core */
+>>>> +    ret = load_firmware(firmwares[slice].txpru, &txpru_fw_loadaddr);
+>>>> +
+>>>> +    if (ret < 0) {
+>>>> +        dev_err(dev, "Unable to load_firmware %s at addr 0x%x err
+>>>> %d\n",
+>>>> +            firmwares[slice].txpru, txpru_fw_loadaddr, ret);
+>>>> +        return ret;
+>>>> +    }
+>>>> +
+>>>> +    dev_info(dev, "Loaded FW %s successfully at addr 0x%x Size = %d
+>>>> Bytes\n",
+>>>> +        firmwares[slice].txpru, txpru_fw_loadaddr, ret);
+>>>> +    rproc_load(core_id + PRU_TYPE_TX_PRU, txpru_fw_loadaddr, ret);
+>>>> +
+>>>> +    ret = rproc_start(core_id + PRU_TYPE_PRU);
+>>>> +    if (ret) {
+>>>> +        dev_err(dev, "failed to start PRU%d: %d\n", slice, ret);
+>>>> +        return ret;
+>>>> +    }
+>>>> +
+>>>> +    ret = rproc_start(core_id + PRU_TYPE_RTU);
+>>>> +    if (ret) {
+>>>> +        dev_err(dev, "failed to start RTU%d: %d\n", slice, ret);
+>>>> +        goto halt_pru;
+>>>> +    }
+>>>> +
+>>>> +    ret = rproc_start(core_id + PRU_TYPE_TX_PRU);
+>>>> +    if (ret) {
+>>>> +        dev_err(dev, "failed to start TX_PRU%d: %d\n", slice, ret);
+>>>> +        goto halt_rtu;
+>>>> +    }
+>>>> +
+>>>> +    return 0;
+>>>> +
+>>>> +halt_rtu:
+>>>> +    rproc_stop(core_id + PRU_TYPE_RTU);
+>>>> +
+>>>> +halt_pru:
+>>>> +    rproc_stop(PRU_TYPE_PRU);
+>>>> +    return ret;
+>>>> +}
+>>>> +
+>>>> +int icssg_stop_pru_cores(struct udevice *dev)
+>>>> +{
+>>>> +    struct prueth *prueth = dev_get_priv(dev);
+>>>> +    int slice, core_id;
+>>>> +
+>>>> +    slice = prueth->slice;
+>>>> +
+>>>> +    core_id = icssg_get_pru_core_number(dev, slice);
+>>>> +    if (core_id < 0)
+>>>> +        return core_id;
+>>>> +
+>>>> +    rproc_stop(core_id + PRU_TYPE_PRU);
+>>>> +    rproc_stop(core_id + PRU_TYPE_RTU);
+>>>> +    rproc_stop(core_id + PRU_TYPE_TX_PRU);
+>>>> +
+>>>> +    return 0;
+>>>> +}
+>>>> +
+>>>>   static int prueth_probe(struct udevice *dev)
+>>>>   {
+>>>>       ofnode eth_ports_node, eth0_node, eth1_node, eth_node;
+>>>> diff --git a/include/linux/pruss_driver.h
+>>>> b/include/linux/pruss_driver.h
+>>>> index 25272e850e..f17fe8bf58 100644
+>>>> --- a/include/linux/pruss_driver.h
+>>>> +++ b/include/linux/pruss_driver.h
+>>>> @@ -114,6 +114,21 @@ enum pru_ctable_idx {
+>>>>       PRU_C31,
+>>>>   };
+>>>>
+>>>> +/**
+>>>> + * enum pru_type - PRU core type identifier
+>>>> + *
+>>>> + * @PRU_TYPE_PRU: Programmable Real-time Unit
+>>>> + * @PRU_TYPE_RTU: Auxiliary Programmable Real-Time Unit
+>>>> + * @PRU_TYPE_TX_PRU: Transmit Programmable Real-Time Unit
+>>>> + * @PRU_TYPE_MAX: just keep this one at the end
+>>>> + */
+>>>> +enum pru_type {
+>>>> +    PRU_TYPE_PRU,
+>>>> +    PRU_TYPE_RTU,
+>>>> +    PRU_TYPE_TX_PRU,
+>>>> +    PRU_TYPE_MAX,
+>>>> +};
+>>>> +
+>>>>   /**
+>>>>    * enum pruss_mem - PRUSS memory range identifiers
+>>>>    */
+>>>>
+>>>> with this diff, user don't need to run any extra commands at u-boot.
+>>>> Once u-boot prompt is reached, just running ping / dhcp will suffice.
+>>>>
+>>> Great!
+>>>
+>>> <snip>
+>>>
+>>
+>> I have addressed all the above comments and made the changes needed.
+>> below is the diff. Please have a look at it and let me know if it
+>> looks OK.
+>>
+>> diff --git a/arch/arm/dts/k3-am654-base-board-u-boot.dtsi
+>> b/arch/arm/dts/k3-am654-base-board-u-boot.dtsi
+>> index 11d83927ac..0b2b72b2c5 100644
+>> --- a/arch/arm/dts/k3-am654-base-board-u-boot.dtsi
+>> +++ b/arch/arm/dts/k3-am654-base-board-u-boot.dtsi
+>> @@ -6,6 +6,18 @@
+>>   #include "k3-am654-r5-base-board-u-boot.dtsi"
+>>   #include "k3-am65x-binman.dtsi"
+>>
+>> +/ {
+>> +    chosen {
+>> +        firmware-loader = <&fs_loader0>;
+>> +    };
+>> +
+>> +    fs_loader0: fs-loader {
+>> +        bootph-all;
+>> +        compatible = "u-boot,fs-loader";
+>> +        phandlepart = <&sdhci1 2>;
+>> +    };
+>> +};
+>> +
+>>   &pru0_0 {
+>>       remoteproc-name = "pru0_0";
+>>   };
+>> diff --git a/configs/am65x_evm_a53_defconfig
+>> b/configs/am65x_evm_a53_defconfig
+>> index 2755d7082f..c53e938abb 100644
+>> --- a/configs/am65x_evm_a53_defconfig
+>> +++ b/configs/am65x_evm_a53_defconfig
+>> @@ -112,6 +112,7 @@ CONFIG_DM_I2C_GPIO=y
+>>   CONFIG_SYS_I2C_OMAP24XX=y
+>>   CONFIG_DM_MAILBOX=y
+>>   CONFIG_K3_SEC_PROXY=y
+>> +CONFIG_FS_LOADER=y
+>>   CONFIG_SUPPORT_EMMC_BOOT=y
+>>   CONFIG_MMC_IO_VOLTAGE=y
+>>   CONFIG_MMC_UHS_SUPPORT=y
+>> diff --git a/configs/am65x_evm_r5_defconfig
+>> b/configs/am65x_evm_r5_defconfig
+>> index b2f1e721b3..2d19935a41 100644
+>> --- a/configs/am65x_evm_r5_defconfig
+>> +++ b/configs/am65x_evm_r5_defconfig
+>> @@ -98,6 +98,7 @@ CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+>>   CONFIG_SYS_I2C_OMAP24XX=y
+>>   CONFIG_DM_MAILBOX=y
+>>   CONFIG_K3_SEC_PROXY=y
+>> +CONFIG_FS_LOADER=y
+>>   CONFIG_K3_AVS0=y
+>>   CONFIG_SUPPORT_EMMC_BOOT=y
+>>   CONFIG_MMC_HS200_SUPPORT=y
+>> diff --git a/drivers/net/ti/icssg_prueth.c
+>> b/drivers/net/ti/icssg_prueth.c
+>> index 40ad827e49..a2e3595956 100644
+>> --- a/drivers/net/ti/icssg_prueth.c
+>> +++ b/drivers/net/ti/icssg_prueth.c
+>> @@ -62,6 +62,9 @@
+>>   /* Management packet type */
+>>   #define PRUETH_PKT_TYPE_CMD        0x10
+>>
+>> +/* Number of PRU Cores per Slice */
+>> +#define ICSSG_NUM_PRU_CORES        3
+>> +
+>>   static int icssg_phy_init(struct udevice *dev)
+>>   {
+>>       struct prueth *priv = dev_get_priv(dev);
+>> @@ -218,6 +221,116 @@ static int icssg_update_link(struct prueth *priv)
+>>       return phy->link;
+>>   }
+>>
+>> +struct icssg_firmwares {
+>> +    char *pru;
+>> +    char *rtu;
+>> +    char *txpru;
+>> +};
+>> +
+>> +static struct icssg_firmwares icssg_emac_firmwares[] = {
+>> +    {
+>> +        .pru = "/lib/firmware/ti-pruss/am65x-sr2-pru0-prueth-fw.elf",
+>> +        .rtu = "/lib/firmware/ti-pruss/am65x-sr2-rtu0-prueth-fw.elf",
+>> +        .txpru =
+>> "/lib/firmware/ti-pruss/am65x-sr2-txpru0-prueth-fw.elf",
+>> +    },
+>> +    {
+>> +        .pru = "/lib/firmware/ti-pruss/am65x-sr2-pru1-prueth-fw.elf",
+>> +        .rtu = "/lib/firmware/ti-pruss/am65x-sr2-rtu1-prueth-fw.elf",
+>> +        .txpru =
+>> "/lib/firmware/ti-pruss/am65x-sr2-txpru1-prueth-fw.elf",
+>> +    }
+>> +};
+>> +
+>> +static int icssg_start_pru_cores(struct udevice *dev)
+>> +{
+>> +    struct prueth *prueth = dev_get_priv(dev);
+>> +    struct icssg_firmwares *firmwares;
+>> +    struct udevice *rproc_dev = NULL;
+>> +    int ret, slice;
+>> +    u32 phandle;
+>> +    u8 index;
+>> +
+>> +    slice = prueth->slice;
+>> +    index = slice * ICSSG_NUM_PRU_CORES;
+>> +    firmwares = icssg_emac_firmwares;
+>> +
+>> +    ofnode_read_u32_index(dev_ofnode(dev), "ti,prus", index, &phandle);
+>> +    ret = uclass_get_device_by_phandle_id(UCLASS_REMOTEPROC, phandle,
+>> &rproc_dev);
+>> +    if (ret) {
+>> +        dev_err(dev, "Unknown remote processor with phandle '0x%x'
+>> requested(%d)\n",
+>> +               phandle, ret);
+>> +        return ret;
+>> +    }
+>> +
+>> +    prueth->pru_core_id = dev_seq(rproc_dev);
+>> +    ret = rproc_set_firmware(rproc_dev, firmwares[slice].pru);
+>> +    if (ret)
+>> +        return ret;
+>> +
+>> +    ret = rproc_boot(rproc_dev, SZ_64K);
+>> +    if (ret) {
+>> +        dev_err(dev, "failed to boot PRU%d: %d\n", slice, ret);
+>> +        return -EINVAL;
+>> +    }
+>> +
+>> +    ofnode_read_u32_index(dev_ofnode(dev), "ti,prus", index + 1,
+>> &phandle);
+>> +    ret = uclass_get_device_by_phandle_id(UCLASS_REMOTEPROC, phandle,
+>> &rproc_dev);
+>> +    if (ret) {
+>> +        dev_err(dev, "Unknown remote processor with phandle '0x%x'
+>> requested(%d)\n",
+>> +               phandle, ret);
+>> +        goto halt_pru;
+>> +    }
+>> +
+>> +    prueth->rtu_core_id = dev_seq(rproc_dev);
+>> +    ret = rproc_set_firmware(rproc_dev, firmwares[slice].rtu);
+>> +    if (ret)
+>> +        goto halt_pru;
+>> +
+>> +    ret = rproc_boot(rproc_dev, SZ_64K);
+>> +    if (ret) {
+>> +        dev_err(dev, "failed to boot RTU%d: %d\n", slice, ret);
+>> +        goto halt_pru;
+>> +    }
+>> +
+>> +    ofnode_read_u32_index(dev_ofnode(dev), "ti,prus", index + 2,
+>> &phandle);
+>> +    ret = uclass_get_device_by_phandle_id(UCLASS_REMOTEPROC, phandle,
+>> &rproc_dev);
+>> +    if (ret) {
+>> +        dev_err(dev, "Unknown remote processor with phandle '0x%x'
+>> requested(%d)\n",
+>> +               phandle, ret);
+>> +        goto halt_rtu;
+>> +    }
+>> +
+>> +    prueth->txpru_core_id = dev_seq(rproc_dev);
+>> +    ret = rproc_set_firmware(rproc_dev, firmwares[slice].txpru);
+>> +    if (ret)
+>> +        goto halt_rtu;
+>> +
+>> +    ret = rproc_boot(rproc_dev, SZ_64K);
+>> +    if (ret) {
+>> +        dev_err(dev, "failed to boot TXPRU%d: %d\n", slice, ret);
+>> +        goto halt_rtu;
+>> +    }
+>> +
+>> +    return 0;
+>> +
+>> +halt_rtu:
+>> +    rproc_stop(prueth->rtu_core_id);
+>> +
+>> +halt_pru:
+>> +    rproc_stop(prueth->pru_core_id);
+>> +    return ret;
+>> +}
+>> +
+>> +static int icssg_stop_pru_cores(struct udevice *dev)
+>> +{
+>> +    struct prueth *prueth = dev_get_priv(dev);
+>> +
+>> +    rproc_stop(prueth->pru_core_id);
+>> +    rproc_stop(prueth->rtu_core_id);
+>> +    rproc_stop(prueth->txpru_core_id);
+>> +
+>> +    return 0;
+>> +}
+>> +
+>>   static int prueth_start(struct udevice *dev)
+>>   {
+>>       struct ti_udma_drv_chan_cfg_data *dma_rx_cfg_data;
+>> @@ -227,6 +340,10 @@ static int prueth_start(struct udevice *dev)
+>>       void *config;
+>>       int ret, i;
+>>
+>> +    ret = icssg_start_pru_cores(dev);
+>> +    if (ret)
+>> +        return ret;
+>> +
+>>       /* To differentiate channels for SLICE0 vs SLICE1 */
+>>       snprintf(chn_name, sizeof(chn_name), "tx%d-0", priv->slice);
+>>
+>> @@ -355,9 +472,11 @@ static void prueth_stop(struct udevice *dev)
+>>       phy_shutdown(priv->phydev);
+>>
+>>       dma_disable(&priv->dma_tx);
+>> -    dma_free(&priv->dma_tx);
+>> -
+>>       dma_disable(&priv->dma_rx);
+>> +
+>> +    icssg_stop_pru_cores(dev);
+>> +
+>> +    dma_free(&priv->dma_tx);
+>>       dma_free(&priv->dma_rx);
+>>   }
+>>
+>> diff --git a/drivers/net/ti/icssg_prueth.h
+>> b/drivers/net/ti/icssg_prueth.h
+>> index e41ed16a05..c92660401b 100644
+>> --- a/drivers/net/ti/icssg_prueth.h
+>> +++ b/drivers/net/ti/icssg_prueth.h
+>> @@ -69,6 +69,9 @@ struct prueth {
+>>       int            speed;
+>>       int            duplex;
+>>       u8            icssg_hwcmdseq;
+>> +    u8             pru_core_id;
+>> +    u8             rtu_core_id;
+>> +    u8             txpru_core_id;
+>>   };
+>>
+>>   /* config helpers */
+>> diff --git a/drivers/remoteproc/rproc-uclass.c
+>> b/drivers/remoteproc/rproc-uclass.c
+>> index 28b362c887..a085c44eaa 100644
+>> --- a/drivers/remoteproc/rproc-uclass.c
+>> +++ b/drivers/remoteproc/rproc-uclass.c
+>> @@ -13,6 +13,7 @@
+>>   #include <log.h>
+>>   #include <malloc.h>
+>>   #include <virtio_ring.h>
+>> +#include <fs_loader.h>
+>>   #include <remoteproc.h>
+>>   #include <asm/io.h>
+>>   #include <dm/device-internal.h>
+>> @@ -961,3 +962,90 @@ unsigned long rproc_parse_resource_table(struct
+>> udevice *dev, struct rproc *cfg)
+>>
+>>       return 1;
+>>   }
+>> +
+>> +int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name)
+>> +{
+>> +    struct dm_rproc_uclass_pdata *uc_pdata;
+>> +    int len;
+>> +    char *p;
+>> +
+>> +    if (!rproc_dev || !fw_name)
+>> +        return -EINVAL;
+>> +
+>> +    uc_pdata = dev_get_uclass_plat(rproc_dev);
+>> +
+>> +    len = strcspn(fw_name, "\n");
+>> +    if (!len) {
+>> +        debug("can't provide empty string for firmware name\n");
+>> +        return -EINVAL;
+>> +    }
+>> +
+>> +    p = strndup(fw_name, len);
+>> +    if (!p)
+>> +        return -ENOMEM;
+>> +
+>> +    uc_pdata->fw_name = p;
+>> +
+>> +    return 0;
+>> +}
+>> +
+>> +int rproc_boot(struct udevice *rproc_dev, size_t fw_size)
+>> +{
+>> +    struct dm_rproc_uclass_pdata *uc_pdata;
+>> +    struct udevice *fs_loader;
+>> +    void *addr = malloc(fw_size);
+>> +    int core_id, ret = 0;
+>> +    char *firmware;
+>> +    ulong rproc_addr;
+>> +
+>> +    if (!rproc_dev)
+>> +        return -EINVAL;
+>> +
+>> +    if (!addr)
+>> +        return -ENOMEM;
+>> +
+>> +    uc_pdata = dev_get_uclass_plat(rproc_dev);
+>> +    core_id = dev_seq(rproc_dev);
+>> +    firmware = uc_pdata->fw_name;
+>> +
+>> +    if (!firmware) {
+>> +        debug("No firmware set for rproc core %d\n", core_id);
+>> +        return -EINVAL;
+>> +    }
+>> +
+>> +    /* Initialize all rproc cores */
+>> +    rproc_init();
+>> +
+>> +    /* Loading firmware to a given address */
+>> +    ret = get_fs_loader(&fs_loader);
+>> +    if (ret) {
+>> +        debug("could not get fs loader: %d\n", ret);
+>> +        return ret;
+>> +    }
+>> +
+>> +    ret = request_firmware_into_buf(fs_loader, firmware, addr,
+>> fw_size, 0);
+>> +    if (ret < 0) {
+>> +        debug("could not request %s: %d\n", firmware, ret);
+>> +        return ret;
+>> +    }
+>> +
+>> +    rproc_addr = (ulong)addr;
+>> +
+>> +    debug("Loaded %s to 0x%08lX size = %d Bytes\n",
+>> +        uc_pdata->fw_name, rproc_addr, ret);
+>> +
+>> +    ret = rproc_load(core_id, rproc_addr, ret);
+>> +    if (ret) {
+>> +        debug("failed to load %s to rproc core %d from addr 0x%08lX
+>> err %d\n",
+>> +               uc_pdata->fw_name, core_id, rproc_addr, ret);
+>> +        return ret;
+>> +    }
+>> +
+>> +    ret = rproc_start(core_id);
+>> +    if (ret) {
+>> +        debug("failed to start rproc core %d\n", core_id);
+>> +        return ret;
+>> +    }
+>> +
+>> +    return ret;
+>> +}
+>> diff --git a/include/remoteproc.h b/include/remoteproc.h
+>> index a11dc8a9b6..65b0ff7477 100644
+>> --- a/include/remoteproc.h
+>> +++ b/include/remoteproc.h
+>> @@ -402,6 +402,7 @@ enum rproc_mem_type {
+>>    * @name: Platform-specific way of naming the Remote proc
+>>    * @mem_type: one of 'enum rproc_mem_type'
+>>    * @driver_plat_data: driver specific platform data that may be needed.
+>> + * @fw_name: firmware name
+>>    *
+>>    * This can be accessed with dev_get_uclass_plat() for any
+>> UCLASS_REMOTEPROC
+>>    * device.
+>> @@ -411,6 +412,7 @@ struct dm_rproc_uclass_pdata {
+>>       const char *name;
+>>       enum rproc_mem_type mem_type;
+>>       void *driver_plat_data;
+>> +    char *fw_name;
+>>   };
+>>
+>>   /**
+>> @@ -704,6 +706,35 @@ unsigned long rproc_parse_resource_table(struct
+>> udevice *dev,
+>>   struct resource_table *rproc_find_resource_table(struct udevice *dev,
+>>                            unsigned int addr,
+>>                            int *tablesz);
+>> +/**
+>> + * rproc_set_firmware() - assign a new firmware
+>> + * @rproc_dev: device for wich new firmware is being assigned
+>> + * @fw_name: new firmware name to be assigned
+>> + *
+>> + * This function allows remoteproc drivers or clients to configure a
+>> custom
+>> + * firmware name. The function does not trigger a remote processor boot,
+>> + * only sets the firmware name used for a subsequent boot.
+>> + *
+>> + * This function sets the fw_name field in uclass pdata of the Remote
+>> proc
+>> + *
+>> + * Return: 0 on success or a negative value upon failure
+>> + */
+>> +int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name);
+>> +
+>> +/**
+>> + * rproc_boot() - boot a remote processor
+>> + * @rproc_dev: rproc device to boot
+>> + * @fw_size: Size of the memory to allocate for firmeware
+>> + *
+>> + * Boot a remote processor (i.e. load its firmware, power it on, ...).
+>> + *
+>> + * This function first loads the firmware set in the uclass pdata of
+>> Remote
+>> + * processor to a buffer and then loads firmware to the remote processor
+>> + * using rproc_load().
+>> + *
+>> + * Return: 0 on success, and an appropriate error value otherwise
+>> + */
+>> +int rproc_boot(struct udevice *rproc_dev, size_t fw_size);
+>>   #else
+>>   static inline int rproc_init(void) { return -ENOSYS; }
+>>   static inline int rproc_dev_init(int id) { return -ENOSYS; }
+>> @@ -743,6 +774,10 @@ static inline int rproc_elf_load_rsc_table(struct
+>> udevice *dev, ulong fw_addr,
+>>                          ulong fw_size, ulong *rsc_addr,
+>>                          ulong *rsc_size)
+>>   { return -ENOSYS; }
+>> +static inline int rproc_set_firmware(struct udevice *rproc_dev, const
+>> char *fw_name)
+>> +{ return -ENOSYS; }
+>> +static inline int rproc_boot(struct udevice *rproc_dev, size_t fw_size)
+>> +{ return -ENOSYS; }
+>>   #endif
+>>
+>>   #endif    /* _RPROC_H_ */
+>>
+>>
+
+-- 
+Thanks and Regards,
+Danish
