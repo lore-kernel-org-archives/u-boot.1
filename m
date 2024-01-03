@@ -4,79 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8743C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 13:07:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 768A2C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 13:24:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25266807EC;
-	Wed,  3 Jan 2024 14:07:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D2BFC86335;
+	Wed,  3 Jan 2024 14:23:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cdGdbEC0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uX3wwsit";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F252786F39; Wed,  3 Jan 2024 14:07:31 +0100 (CET)
-Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
- [IPv6:2607:f8b0:4864:20::d2d])
+ id B2A7C86FD8; Wed,  3 Jan 2024 14:23:58 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF609807E2
- for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 14:07:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3708D864F3
+ for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 14:23:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-io1-xd2d.google.com with SMTP id
- ca18e2360f4ac-7b7f2c72846so515379639f.2
- for <u-boot@lists.denx.de>; Wed, 03 Jan 2024 05:07:28 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7815fc8dd17so373924585a.1
+ for <u-boot@lists.denx.de>; Wed, 03 Jan 2024 05:23:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704287247; x=1704892047; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=6l2MJjGaGtsiyYkbcBGwmQWO9qaFabV1WMuqad5D+1g=;
- b=cdGdbEC00Yt5F/OmriViNhhHBJIBzpCP9qTFrqo4jTc2yoUxHHrcyzWBKuubleOSFj
- 85JoE/YT/x2tgPJhlOJKw5qMsF9zJT2y/0NgONQC5LVXg8RRy6eKqwfkvX3nDT2W0nki
- hzjXVQ9YmHBmoW/h8rhzEnxUm66vRXVP4HF7uSFP/GGU6MjsO26zJEa330KaK89CHl3J
- R2VRw9PuaONtIz3UOXVVci2qbYaG5HGz9l9m3dn5NF4gsbuUnSI86J92DLrD1AumUcE/
- 587QfrtPQiOaRLem6bEc8GFUvNhVAqBqRyYy+bzC/qD54oNLFfc3CB/Fvs6qTg5Y07AD
- Yl/w==
+ d=konsulko.com; s=google; t=1704288235; x=1704893035; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=OBM8xf6Pst9Vw+gDDwC+iZqU5Pa/v+w3tl5tpStgzxQ=;
+ b=uX3wwsit8Iaa4k5M9fFi2QdwcHWbWyiq2tqyV4JAVYVzIHANiIR1Nhmb6GlE+O72zZ
+ +QuzuTW+Fsgf43LcD8LSfx9OrTToAhumhYL7M7jMRCmZxF27HkgeTWD5ybIAwYwtu9Pu
+ S7ltGvOaYygEYmsZl6l0MjBoiCTQ1B7DixdlI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704287247; x=1704892047;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6l2MJjGaGtsiyYkbcBGwmQWO9qaFabV1WMuqad5D+1g=;
- b=JdIGltD64MLkNLFvg3n+lF5AVFT2nTBLEpirhDzgZMOUnZsHLt0ymeqkY3f1+zmRa2
- /WQw8S5e/yEqEnpYGXbHQyA7OwDe5cl3zq57oGl4r2yUYzuJnBVsGknQMNJw35wIB2PK
- hbQMLfbq1/umSKIS3kINkeW+K1CWRo5PdNfSCbV/6BLkOvhfOEUW1ixqb2+65vzSPybh
- UiSrCxzRxbRzxGlIPynd13Iix+X0qUvATTYj9lHLtialN11IZCSNQ4l32v3gVn8menya
- 1hIyuFgfbsnkIRiQcMxfgCRnBlHJ0ZkBXcIBWkvPkMepiWUlX3XwOfJFBtcajqHSrPOl
- i5sQ==
-X-Gm-Message-State: AOJu0YzbYNwE3/HAJNF4NpRLxJ4aGEa4RHQQ4njrV5WLYkHuEH34tfWJ
- wGQLFuAJ6JJcsjZpikPSNhQKfven7wo7CA==
-X-Google-Smtp-Source: AGHT+IEjKlLQfBLgcp3Nf3qBnrSFMyyOxVSONUL9Ex8ClzP/PC37O8BD47ElEVTJUm8UwXRhVWtE1w==
-X-Received: by 2002:a5d:930c:0:b0:7bb:b6d3:8f with SMTP id
- l12-20020a5d930c000000b007bbb6d3008fmr3281747ion.11.1704287247397; 
- Wed, 03 Jan 2024 05:07:27 -0800 (PST)
-Received: from sumit-X1.. ([223.178.208.87]) by smtp.gmail.com with ESMTPSA id
- q7-20020aa79827000000b006d9a94a03a8sm18649860pfl.77.2024.01.03.05.07.22
+ d=1e100.net; s=20230601; t=1704288235; x=1704893035;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OBM8xf6Pst9Vw+gDDwC+iZqU5Pa/v+w3tl5tpStgzxQ=;
+ b=JNluSATblSWRlE/7/7EbIbnHfoYJhr5bEPaoVqPdmlPZDUD97pxihr6yHTg0gzybbu
+ dtqwHNfk2lvUYchohs38KnGhrIa5kOWlnLFncQ9CAHINxF9x1qnnhAjHj9p9mFV2Wx13
+ KbHGuTqrPNBJOPwRfS95Om7tt92oZ+o0IPT+JLoHlIwJrrsYzgBh2fjB5Z9QPLLLSEEC
+ S0TiMOBHcnQ4CVgSucbXCtzhjqOPL0k/v7ztcC7BPIsoUUSd0LmR42+rW/SF9dNPKEkH
+ FIQ8HFDpLvslj6pivaPnu0aMNpkKG2yyRV8JOfb0DXzwciWZOc6ewQSPR7je/jqSM0Em
+ R0DA==
+X-Gm-Message-State: AOJu0Yxo428PzazHqriiqsPmK5cyq5yPUhd9O14B2s7GGPxNe8WEK5h0
+ +hJO9hZY/bqSjIgrXOOUEiXvOPMM7CsggA==
+X-Google-Smtp-Source: AGHT+IEX90VHBcrHhcxJM1nGmEDSt0eNw1nzyHyhoANaNhS6zbuqJYljavqw+5iZ2Os8jD0JQjO9Kg==
+X-Received: by 2002:a0c:d6c8:0:b0:680:857:1bb4 with SMTP id
+ l8-20020a0cd6c8000000b0068008571bb4mr14389645qvi.120.1704288234914; 
+ Wed, 03 Jan 2024 05:23:54 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
+ [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
+ qh1-20020a0562144c0100b00680d39626fcsm8344qvb.47.2024.01.03.05.23.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jan 2024 05:07:26 -0800 (PST)
-From: Sumit Garg <sumit.garg@linaro.org>
-To: trini@konsulko.com,
-	sjg@chromium.org,
-	caleb.connolly@linaro.org
-Cc: neil.armstrong@linaro.org, rfried.dev@gmail.com, dsankouski@gmail.com,
- seanga2@gmail.com, marex@denx.de, laetitia.mariottini@se.com,
- pascal.eberhard@se.com, abdou.saker@se.com, jimmy.lalande@se.com,
- benjamin.missey@non.se.com, daniel.thompson@linaro.org,
- u-boot@lists.denx.de, Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH] mach-snapdragon: Move APQ8016 SoC derived board code
-Date: Wed,  3 Jan 2024 18:37:16 +0530
-Message-Id: <20240103130716.4144892-1-sumit.garg@linaro.org>
-X-Mailer: git-send-email 2.34.1
+ Wed, 03 Jan 2024 05:23:54 -0800 (PST)
+Date: Wed, 3 Jan 2024 08:23:51 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, Mark Kettenis <mark.kettenis@xs4all.nl>,
+ u-boot@lists.denx.de, u-boot-amlogic@groups.io,
+ u-boot-custodians@lists.denx.de, robh+dt@kernel.org,
+ krzysztof.kozlowski+dt@linaro.org, conor@kernel.org,
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org,
+ ff@shokubai.tech, daniel.thompson@linaro.org,
+ dgilmore@fedoraproject.org, pbrobinson@gmail.com,
+ ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org,
+ b.galvani@gmail.com, xypron.glpk@gmx.de, michal.simek@amd.com,
+ seanga2@gmail.com, rasmus.villemoes@prevas.dk, peng.fan@nxp.com,
+ jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de,
+ mibodhi@gmail.com
+Subject: Re: [PATCH v3 4/8] dts: Add alternative location for upstream DTB
+ builds
+Message-ID: <20240103132351.GG1610741@bill-the-cat>
+References: <CAFA6WYME_0-s4aBbaKOS3Q+q9+5553qSWcL9pDMvC9VaAfAz0w@mail.gmail.com>
+ <CAFLszTj0ptH7K2Y4Fc1FR1_OmK5OzAaAReR1KT5R8OZvbgrP-Q@mail.gmail.com>
+ <20231231203953.GG2652760@bill-the-cat>
+ <87ttnxlwon.fsf@bloch.sibelius.xs4all.nl>
+ <CAFLszThKEW7rvkfiV=Y_bYtBCC2=Ue1vKOnb4a+EN4=EEYNfng@mail.gmail.com>
+ <20240101233545.GI2652760@bill-the-cat>
+ <CAFLszTg1F6O2MZh3Ui_ux_aQZkzvx_eY3HprFDqm0ZETwYMGfw@mail.gmail.com>
+ <CAFA6WYP5Ko+VJ1MLN3W2Y9-B2osiL40PcMpqwiN0=F-k=FowjA@mail.gmail.com>
+ <20240102180643.GA1610741@bill-the-cat>
+ <CAFA6WYPfey+Si29eGAyaUaiacCBwGBR+f3+o8hjFRSU_j504Wg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="D7RyIR6lNbPmxCL4"
+Content-Disposition: inline
+In-Reply-To: <CAFA6WYPfey+Si29eGAyaUaiacCBwGBR+f3+o8hjFRSU_j504Wg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,233 +111,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In order to avoid duplication of APQ8016 derived boards specific code,
-move common bits like USB pinctrl and fastboot to board-apq8016.c file.
-This will allow future board support like SE HMIBSC board etc to reuse it.
 
-Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
----
+--D7RyIR6lNbPmxCL4
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This patch is based on Caleb's Qcom common target branch [1]. As per
-Caleb's comments here [2], there is no scope for people to add board
-code for new board support. And even people can't reuse existing board
-code like for db410c for further new board support but rather they have
-to make db410c generic first.
+On Wed, Jan 03, 2024 at 12:27:24PM +0530, Sumit Garg wrote:
+> Hi Tom,
+>=20
+> On Tue, 2 Jan 2024 at 23:36, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Tue, Jan 02, 2024 at 09:07:48PM +0530, Sumit Garg wrote:
+> > > On Tue, 2 Jan 2024 at 19:36, Simon Glass <sjg@chromium.org> wrote:
+> > [snip]
+> > > > 2. Choose a directory target for devicetree-rebasing. I see that
+> > > > 'barebox' uses 'dts' which seems better to me than
+> > > > 'devicetree-rebasing/src/'.
+> > >
+> > > Actually as part of this patch-set we try to reuse the U-Boot 'dts'
+> > > directory (via dts/arch/arm64/<vendor> soft links) since it was
+> > > already taken for U-Boot specific DT Makefile. However, I am open to
+> > > renaming 'devicetree-rebasing' but to me that sounds more clear that
+> > > we maintain a specific subtree within U-Boot.
+> >
+> > Looking at what little is in dts/ here today could we just use subtree
+> > and pop the contents under there, and basically ignore the
+> > project-provided Makefile? Or is that not really worth it?
+> >
+>=20
+> If we really want to avoid soft links then I did try to add the subree
+> with the prefix as dts/upstream here [1]. It works well with the
+> downside that we will pollute the subtree source code with U-Boot
+> specific Makefiles [2]. However, the subtree pull works fine still. If
+> this sounds better to you and Simon then let me know I will use this
+> approach for v4.
+>=20
+> [1] https://github.com/b49020/u-boot/commits/use_dts_dir/
+> [2] https://github.com/b49020/u-boot/commit/90eabe614e77bc30a437e7d5559c1=
+ac414ac07b3
 
-I fear this would be couter productive and motivate OEM vendors (which
-aren't Qcom reference designs) to keep their board support code
-downstream. IMO, the approach should be to allow board code reuse which
-this patch is all about. The next steps should be to make the underlying
-board features to rather come from DT but that as you know requires
-bindings to be accepted first.
+I think the symlink stuff was part of what was making it more confusing
+to add new SoCs to OF_UPSTREAM so yes this looks good to me, and I
+appreciate the demo commit showing an update is still easy. Thanks!
 
-Tom, Simon,
+--=20
+Tom
 
-Is there any U-Boot policy in regards to board code going forward? Are
-we moving in a direction to get rid of most board specific stubs from
-generic U-Boot code?
+--D7RyIR6lNbPmxCL4
+Content-Type: application/pgp-signature; name="signature.asc"
 
-[1] https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commits/b4%2Fqcom-common-target
-[2] https://lore.kernel.org/all/824be245-60c9-4a1a-a386-be765e8eba91@linaro.org/
+-----BEGIN PGP SIGNATURE-----
 
- arch/arm/mach-snapdragon/Kconfig              |  5 ++
- arch/arm/mach-snapdragon/Makefile             |  1 +
- arch/arm/mach-snapdragon/board-apq8016.c      | 64 +++++++++++++++++++
- .../dragonboard410c/dragonboard410c.c         | 62 ------------------
- configs/dragonboard410c_defconfig             |  1 +
- 5 files changed, 71 insertions(+), 62 deletions(-)
- create mode 100644 arch/arm/mach-snapdragon/board-apq8016.c
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWVX+EACgkQFHw5/5Y0
+tyy61wwAhrYTcyzinZPYNNlwNwL1+CevGl/YHfLDGZSWdatx3UdAYkH42RHYDMod
+Hxw7DKZ4ghldohR79eqkuDYrjRX+pFC0jSoWyG2TnoUeYgxWeyOcZjGBk7nb1KkK
+Eia2v9j+OkBPpLjzQmdPLUs4KRgalQsyrEAbRJPgywU9zFVL+luoUJv2zIeWAvET
+03zvCvmazJJPfURRs3OxzM/WvN5zotchQfmYJL3BbtcCkIWrXIxdBBkrKIgPjIGA
+9EvXTZ7ySuNgg+fuOUJEayGQsHv0Jf+Ji/MOwJdc6mq6gC262SPfPv/4GGtYTldu
+GVWkRAYKHq6+FbX39Mm1XQOeMM/GsZnCgjUsbrnR0OSN57vjb+5pyIprKWE6wnGp
+/ACMHMl3FHFVONhe5hyyiDV00eFTPAuG/zaLBkgsWiHXisEjKojxCH42tc/NP/kY
+PO/MRLofhZyPnpRM44onizNwe9we1KiVPRm2prSXJTSDWI966bnM995krLg6cwe9
+9tUYjqOy
+=Skr5
+-----END PGP SIGNATURE-----
 
-diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-index 96e44e2c549..8069a89bf78 100644
---- a/arch/arm/mach-snapdragon/Kconfig
-+++ b/arch/arm/mach-snapdragon/Kconfig
-@@ -3,6 +3,11 @@ if ARCH_SNAPDRAGON
- config SYS_SOC
- 	default "snapdragon"
- 
-+config SOC_APQ8016
-+	bool "APQ8016"
-+	help
-+	  Select this if your SoC is an APQ8016
-+
- config SYS_VENDOR
- 	default "qualcomm"
- 
-diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-snapdragon/Makefile
-index 857171e593d..7d210e6d872 100644
---- a/arch/arm/mach-snapdragon/Makefile
-+++ b/arch/arm/mach-snapdragon/Makefile
-@@ -3,3 +3,4 @@
- # (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
- 
- obj-y += board.o
-+obj-$(CONFIG_SOC_APQ8016) += board-apq8016.o
-diff --git a/arch/arm/mach-snapdragon/board-apq8016.c b/arch/arm/mach-snapdragon/board-apq8016.c
-new file mode 100644
-index 00000000000..bb9a3a9f0fb
---- /dev/null
-+++ b/arch/arm/mach-snapdragon/board-apq8016.c
-@@ -0,0 +1,64 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Board init file for APQ8016 SoC derived boards
-+ *
-+ * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
-+ */
-+
-+#include <button.h>
-+#include <dm.h>
-+#include <dm/pinctrl.h>
-+#include <env.h>
-+#include <init.h>
-+#include <usb.h>
-+#include <fdt_support.h>
-+
-+int board_usb_init(int index, enum usb_init_type init)
-+{
-+	struct udevice *usb;
-+	int ret = 0;
-+
-+	/* USB device */
-+	ret = device_find_global_by_ofnode(ofnode_path("/soc/usb"), &usb);
-+	if (ret) {
-+		printf("Cannot find USB device\n");
-+		return ret;
-+	}
-+
-+	/* Select "default" or "device" pinctrl */
-+	switch (init) {
-+	case USB_INIT_HOST:
-+		pinctrl_select_state(usb, "default");
-+		break;
-+	case USB_INIT_DEVICE:
-+		pinctrl_select_state(usb, "device");
-+		break;
-+	default:
-+		debug("Unknown usb_init_type %d\n", init);
-+		break;
-+	}
-+
-+	return 0;
-+}
-+
-+/* Check for vol- button - if pressed - stop autoboot */
-+int misc_init_r(void)
-+{
-+	struct udevice *btn;
-+	int ret;
-+	enum button_state_t state;
-+
-+	ret = button_get_by_label("vol_down", &btn);
-+	if (ret < 0) {
-+		printf("Couldn't find power button!\n");
-+		return ret;
-+	}
-+
-+	state = button_get_state(btn);
-+	if (state == BUTTON_ON) {
-+		env_set("preboot", "setenv preboot; fastboot 0");
-+		printf("vol_down pressed - Starting fastboot.\n");
-+	}
-+
-+	return 0;
-+}
-diff --git a/board/qualcomm/dragonboard410c/dragonboard410c.c b/board/qualcomm/dragonboard410c/dragonboard410c.c
-index 2a502c7c284..f7c6a6cbc0a 100644
---- a/board/qualcomm/dragonboard410c/dragonboard410c.c
-+++ b/board/qualcomm/dragonboard410c/dragonboard410c.c
-@@ -5,78 +5,16 @@
-  * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
-  */
- 
--#include <button.h>
- #include <common.h>
--#include <cpu_func.h>
- #include <dm.h>
--#include <dm/pinctrl.h>
- #include <env.h>
- #include <init.h>
- #include <net.h>
--#include <usb.h>
--#include <asm/cache.h>
--#include <asm/global_data.h>
--#include <asm/gpio.h>
- #include <fdt_support.h>
- #include <linux/delay.h>
- 
- #include "misc.h"
- 
--DECLARE_GLOBAL_DATA_PTR;
--
--#define USB_HUB_RESET_GPIO 2
--#define USB_SW_SELECT_GPIO 3
--
--int board_usb_init(int index, enum usb_init_type init)
--{
--	struct udevice *usb;
--	int ret = 0;
--
--	/* USB device */
--	ret = device_find_global_by_ofnode(ofnode_path("/soc/usb"), &usb);
--	if (ret) {
--		printf("Cannot find USB device\n");
--		return ret;
--	}
--
--	/* Select "default" or "device" pinctrl */
--	switch (init) {
--	case USB_INIT_HOST:
--		pinctrl_select_state(usb, "default");
--		break;
--	case USB_INIT_DEVICE:
--		pinctrl_select_state(usb, "device");
--		break;
--	default:
--		debug("Unknown usb_init_type %d\n", init);
--		break;
--	}
--
--	return 0;
--}
--
--/* Check for vol- button - if pressed - stop autoboot */
--int misc_init_r(void)
--{
--	struct udevice *btn;
--	int ret;
--	enum button_state_t state;
--
--	ret = button_get_by_label("vol_down", &btn);
--	if (ret < 0) {
--		printf("Couldn't find power button!\n");
--		return ret;
--	}
--
--	state = button_get_state(btn);
--	if (state == BUTTON_ON) {
--		env_set("preboot", "setenv preboot; fastboot 0");
--		printf("vol_down pressed - Starting fastboot.\n");
--	}
--
--	return 0;
--}
--
- int qcom_late_init(void)
- {
- 	char serial[16];
-diff --git a/configs/dragonboard410c_defconfig b/configs/dragonboard410c_defconfig
-index 453cb9d04c7..23024066f82 100644
---- a/configs/dragonboard410c_defconfig
-+++ b/configs/dragonboard410c_defconfig
-@@ -3,6 +3,7 @@ CONFIG_SYS_BOARD="dragonboard410c"
- CONFIG_COUNTER_FREQUENCY=19000000
- CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
- CONFIG_ARCH_SNAPDRAGON=y
-+CONFIG_SOC_APQ8016=y
- CONFIG_TEXT_BASE=0x8f600000
- CONFIG_SYS_MALLOC_LEN=0x802000
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--- 
-2.34.1
-
+--D7RyIR6lNbPmxCL4--
