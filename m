@@ -4,92 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58035C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 07:06:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7E26C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 07:29:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63F1D8773F;
-	Wed,  3 Jan 2024 08:06:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BF17687963;
+	Wed,  3 Jan 2024 08:29:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fZln10r4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RreIXjvo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C02087745; Wed,  3 Jan 2024 08:06:42 +0100 (CET)
-Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
- [IPv6:2607:f8b0:4864:20::e32])
+ id A464387963; Wed,  3 Jan 2024 08:29:51 +0100 (CET)
+Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
+ [IPv6:2607:f8b0:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B60B8773F
- for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 08:06:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B9F18788F
+ for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 08:29:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe32.google.com with SMTP id
- ada2fe7eead31-46777099deeso426844137.0
- for <u-boot@lists.denx.de>; Tue, 02 Jan 2024 23:06:37 -0800 (PST)
+ spf=pass smtp.mailfrom=jim.t90615@gmail.com
+Received: by mail-pg1-x536.google.com with SMTP id
+ 41be03b00d2f7-517ab9a4a13so7938006a12.1
+ for <u-boot@lists.denx.de>; Tue, 02 Jan 2024 23:29:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704265596; x=1704870396; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=H9iZV2kIycubkmLu8d5N7ka3Gkkzpn2prTWz5v3x4AI=;
- b=fZln10r4q34HVB3YrMkuo/sFTfLLZKT4K53zQ60UrFsi+uSbkbXM/lRntR+M5ieMJU
- fIM+WnLpFmGJQ1gu4QWXbwGUEtMNet/FXIBBzX/XXrGvjs0ASHzBuWiHnWtElOuzh8YH
- W2OQDtVU8acTGkW6Sd2kuKDrXgnPN00BSSkjOE6xGpZJU12Z5dHbdxr9S1SF03OspH4u
- MOxTO7Hxfmr1bfmn2R55VhFQGhYoJOXXhu+PMeuFpijmob5ow2U3YTOVHh31JPo4LAo4
- krsPJ3H+EDECVfpFBrWdgtkZzm0P7sAL3vzSwSPH6RWH0Zg2ARIteprIQzTY+AGkhHuM
- y4XQ==
+ d=gmail.com; s=20230601; t=1704266987; x=1704871787; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9ZwL4i5GkaWkVq5rrf4nGUr9BuSFHc2Ikl+5KhP/tMQ=;
+ b=RreIXjvoft4bQCiPR0z23l7XEf9q2lt1oo8602spyfHoGekzYVl1rXOhK+rONIEEvs
+ Ii4kAYlpKHIONGn7PnXHKv+5Jj4hscIe17imano1OhBYcpxnTJ5KU0flgOA78p8we0YR
+ 9vKHm01QYdLCK2q5OvjeAh314yvgQAlWyzunuQiv/WHp0JxL1HTW0sTpmyuydeBv4ypm
+ xgTQfps5wjzhOS9rmIRTkJDZj9veUHe16tvQn+MdIxa1MLOZckWCVjHoK4zN7LI5ykNT
+ VXsiCQFbCE6x7NdPQqmSLMXxyVptWS1T0SkOjiAdOMfTwbOt8J4J0lpkuWdhR+DlUPoO
+ 5PCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704265596; x=1704870396;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1704266987; x=1704871787;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=H9iZV2kIycubkmLu8d5N7ka3Gkkzpn2prTWz5v3x4AI=;
- b=IV6ZMD7KACHFwFiWjJ/zUMFjoHcz6VIOhbEskjWpO/3wUxN7xwhSS6XynTi1UxESKn
- 4iZMdE+dreEpJXyLdCYGZsgImjsef92yaL4fFig7cMOrju5q853lQC8wAiZpiz7nzdhn
- b93eCLE6RJd+wffrJxdDvumyUqf+WF/Nyd9uCtB+18eWuO4h00QAW3klrDTYq4ZDblZb
- MfkTfJZk4OqT7RLQwTsZtRkj+fEDnjKLc2d8hr0HGIbwpsHFiXemWO5oK8Yw0bnW9kGo
- JbcQVfeOEXnvuQBLwPcxdAehjKIfbNDLWrpMo0zYMI3K3rB6wG7Xyd58kJgAUBxvc54/
- DNOw==
-X-Gm-Message-State: AOJu0Yws+5FWe0dxOBqAeRPmctMiZ9xgyyTlbdBHcmCWOiyqvvMoLgb9
- c9CldFi0BlDfZ8Itc4VL0FE35bFKzynFKGAp2XU9DXroGp0Rzg==
-X-Google-Smtp-Source: AGHT+IGn+0QI9GuO8rpjzWKrXtA/t1PwArbspMNxFYdG5JXnmsgx1krhFOwzYhCtl6/Deh7/FpmcNmz6aYN78bYRtKE=
-X-Received: by 2002:a05:6102:3d84:b0:467:2212:a42c with SMTP id
- h4-20020a0561023d8400b004672212a42cmr6835062vsv.26.1704265595932; Tue, 02 Jan
- 2024 23:06:35 -0800 (PST)
+ bh=9ZwL4i5GkaWkVq5rrf4nGUr9BuSFHc2Ikl+5KhP/tMQ=;
+ b=Bli21uN5JAgxAdN3UUgN4BM3w1JbLZsC9jIbczJ2xLiWVAlmrYavNdwydnJYQWM5BR
+ ZhNdeWd71UQpVt8uyVghuRN/yVvizmstoTNCzywTFDFxVRQaBPEJWGEHpIpqjyyob9a1
+ VpW74v4IqILxBhoKnIgc+XuKVDkZcRC7WjK1a5w294dte4d1KIwZ0SBbfRX1Ku5vB04R
+ QmMoNRLD7PBI65gb1hWur9/1ggku4V30HX2mLtCRGyQlnDrYtS4gg/Xbvm9Nrm81VF2n
+ +tYAVzQ51+44uQFbAmY76d1b0BmIp7Gr2IJGx/pJ4Tif76lhF8Fa7k8kNK++502tOL+K
+ nLPw==
+X-Gm-Message-State: AOJu0Yw2wOkBaLRIS8+Gs10mK9BJunaEMocnOluoooXBDqWUefZgkm4c
+ voM+REqlIqQpHQEowO3YVLU=
+X-Google-Smtp-Source: AGHT+IG4DAx5+imfDAbZf4epHhVosA9yc9IdDWhwkEmTSexZSmcCGTq7vuHUEhHEZMgw4s4Z7pb35g==
+X-Received: by 2002:a05:6a20:36a8:b0:195:ad6f:4548 with SMTP id
+ s40-20020a056a2036a800b00195ad6f4548mr14689799pze.47.1704266987260; 
+ Tue, 02 Jan 2024 23:29:47 -0800 (PST)
+Received: from localhost.localdomain ([1.200.155.255])
+ by smtp.gmail.com with ESMTPSA id
+ gn2-20020a17090ac78200b0028bd9f88576sm879395pjb.26.2024.01.02.23.29.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 02 Jan 2024 23:29:46 -0800 (PST)
+From: Jim Liu <jim.t90615@gmail.com>
+X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
+To: JJLIU0@nuvoton.com, YSCHU@nuvoton.com, KWLIU@nuvoton.com,
+ jim.t90615@gmail.com, trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v2] reset: npcm: Add support for Nuvoton NPCM BMC family
+Date: Wed,  3 Jan 2024 15:29:33 +0800
+Message-Id: <20240103072933.1319033-1-JJLIU0@nuvoton.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <CAFLszThfxe_n02auF+vZ1u7FynKkrWEYFU3SdkRTLgBVuiv+Hw@mail.gmail.com>
- <20231228140313.GB2652760@bill-the-cat>
- <CAFLszTiPFyRQZtrKhETjMzn6JukFJaBYMugdL-RPO3LJB9XUMA@mail.gmail.com>
- <20231228155428.GI2652760@bill-the-cat>
- <CAFLszTjqcJouv7Dyasjfx4FiNy378fFA+A-DP292yvPk8xOzjw@mail.gmail.com>
- <CAFA6WYME_0-s4aBbaKOS3Q+q9+5553qSWcL9pDMvC9VaAfAz0w@mail.gmail.com>
- <CAFLszTj0ptH7K2Y4Fc1FR1_OmK5OzAaAReR1KT5R8OZvbgrP-Q@mail.gmail.com>
- <20231231203953.GG2652760@bill-the-cat>
- <87ttnxlwon.fsf@bloch.sibelius.xs4all.nl>
- <CAFLszThKEW7rvkfiV=Y_bYtBCC2=Ue1vKOnb4a+EN4=EEYNfng@mail.gmail.com>
- <20240101233545.GI2652760@bill-the-cat>
- <CAFLszTg1F6O2MZh3Ui_ux_aQZkzvx_eY3HprFDqm0ZETwYMGfw@mail.gmail.com>
- <CAFA6WYP5Ko+VJ1MLN3W2Y9-B2osiL40PcMpqwiN0=F-k=FowjA@mail.gmail.com>
-In-Reply-To: <CAFA6WYP5Ko+VJ1MLN3W2Y9-B2osiL40PcMpqwiN0=F-k=FowjA@mail.gmail.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 3 Jan 2024 12:36:24 +0530
-Message-ID: <CAFA6WYNS03gLmOoPb7tawkD__MJ7NW_iewg5w3hWvwnQu-iw0Q@mail.gmail.com>
-Subject: Re: [PATCH v3 4/8] dts: Add alternative location for upstream DTB
- builds
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <mark.kettenis@xs4all.nl>,
- u-boot@lists.denx.de, 
- u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de, robh+dt@kernel.org, 
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
- rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,70 +90,205 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 2 Jan 2024 at 21:07, Sumit Garg <sumit.garg@linaro.org> wrote:
->
-> On Tue, 2 Jan 2024 at 19:36, Simon Glass <sjg@chromium.org> wrote:
-<snip>
->
-> > 3. Adjust the build system to use the dts/ directory for .dts files
-> > when OF_UPSTREAM is enabled
-> >
-> > Then it will be easy. People can enable OF_UPSTREAM for an SoC
-> > (without changing DEFAULT_DEVICE_TREE)
->
-> I am still not sure what we will gain via keeping DEFAULT_DEVICE_TREE
-> the same. However, without a per vendor directory Makefile like:
-> dts/arch/arm64/<vendor>/Makefile it won't be possible. But to do that
-> we won't be able to softlink vendor directories from DT rebasing tree
-> but rather have to softlink every board DTS file which is much more
-> painful.
+Add reset controller driver for Nuvoton BMCs.
+The npcm reset driver not only supports reset each module reset
+but setting initial value of reset Control Registers.
 
-Even after this you have to tell <vendor> name via DEFAULT_DEVICE_TREE
-because the DTB path is constructed via:
+And The driver support each module reset.
 
-DEVICE_TREE ?= $(CONFIG_DEFAULT_DEVICE_TREE:"%"=%)
-ifeq ($(DEVICE_TREE),)
-DEVICE_TREE := unset
-endif
+Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
+---
+Changes for v2:
+   - Use probe function to initialize priv struct.
+     Set priv->base in the driver probe.
+---
+ drivers/reset/Kconfig      |   7 ++
+ drivers/reset/Makefile     |   1 +
+ drivers/reset/reset-npcm.c | 145 +++++++++++++++++++++++++++++++++++++
+ 3 files changed, 153 insertions(+)
+ create mode 100644 drivers/reset/reset-npcm.c
 
-ifeq ($(CONFIG_OF_UPSTREAM),y)
-ifeq ($(CONFIG_ARM64),y)
-dt_dir := dts/arch/arm64
-else
-dt_dir := dts/arch/$(ARCH)
-endif
-else
-dt_dir := arch/$(ARCH)/dts
-endif
+diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
+index 73bbd30692..e09e625542 100644
+--- a/drivers/reset/Kconfig
++++ b/drivers/reset/Kconfig
+@@ -135,6 +135,13 @@ config RESET_MTMIPS
+ 	help
+ 	  Support for reset controller on MediaTek MIPS platform.
+ 
++config RESET_NPCM
++	bool "Reset controller driver for Nuvoton BMCs"
++	depends on DM_RESET && ARCH_NPCM
++	default y
++	help
++	  Support for reset controller on Nuvotom BMCs.
++
+ config RESET_SUNXI
+ 	bool "RESET support for Allwinner SoCs"
+ 	depends on DM_RESET && ARCH_SUNXI
+diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
+index e2239a250a..daa4553cca 100644
+--- a/drivers/reset/Makefile
++++ b/drivers/reset/Makefile
+@@ -21,6 +21,7 @@ obj-$(CONFIG_RESET_MESON) += reset-meson.o
+ obj-$(CONFIG_RESET_SOCFPGA) += reset-socfpga.o
+ obj-$(CONFIG_RESET_MEDIATEK) += reset-mediatek.o
+ obj-$(CONFIG_RESET_MTMIPS) += reset-mtmips.o
++obj-$(CONFIG_RESET_NPCM) += reset-npcm.o
+ obj-$(CONFIG_RESET_SUNXI) += reset-sunxi.o
+ obj-$(CONFIG_RESET_HISILICON) += reset-hisilicon.o
+ obj-$(CONFIG_RESET_IMX7) += reset-imx7.o
+diff --git a/drivers/reset/reset-npcm.c b/drivers/reset/reset-npcm.c
+new file mode 100644
+index 0000000000..3bf4514c1b
+--- /dev/null
++++ b/drivers/reset/reset-npcm.c
+@@ -0,0 +1,145 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright 2023 Nuvoton Technology Corp.
++ */
++
++#include <dm.h>
++#include <reset-uclass.h>
++#include <asm/io.h>
++#include <dm/device_compat.h>
++
++struct npcm_reset_priv {
++	void __iomem *base;
++};
++
++static int npcm_reset_request(struct reset_ctl *rst)
++{
++	return 0;
++}
++
++static int npcm_reset_free(struct reset_ctl *rst)
++{
++	return 0;
++}
++
++static int npcm_reset_assert(struct reset_ctl *rst)
++{
++	struct npcm_reset_priv *priv = dev_get_priv(rst->dev);
++	u32 val;
++
++	debug("%s: id 0x%lx, data %ld\n", __func__, rst->id, rst->data);
++	val = readl(priv->base + rst->id);
++	val |= BIT(rst->data);
++	writel(val, priv->base + rst->id);
++
++	return 0;
++}
++
++static int npcm_reset_deassert(struct reset_ctl *rst)
++{
++	struct npcm_reset_priv *priv = dev_get_priv(rst->dev);
++	u32 val;
++
++	debug("%s: id 0x%lx, data %ld\n", __func__, rst->id, rst->data);
++	val = readl(priv->base + rst->id);
++	val &= ~BIT(rst->data);
++	writel(val, priv->base + rst->id);
++
++	return 0;
++}
++
++static int npcm_reset_xlate(struct reset_ctl *rst,
++			    struct ofnode_phandle_args *args)
++{
++	if (args->args_count != 2) {
++		dev_err(rst->dev, "Invalid args_count: %d\n", args->args_count);
++		return -EINVAL;
++	}
++
++	/* Use id field as register offset and data field as reset bit positiion */
++	rst->id = args->args[0];
++	rst->data = args->args[1];
++
++	return 0;
++}
++
++static int npcm_reset_probe(struct udevice *dev)
++{
++	struct npcm_reset_priv *priv = dev_get_priv(dev);
++
++	priv->base = dev_remap_addr(dev);
++	if (!priv->base)
++		return -EINVAL;
++
++	return 0;
++}
++
++static int npcm_reset_bind(struct udevice *dev)
++{
++	void __iomem *reg_base;
++	u32 *rcr_values;
++	int num_fields;
++	u32 reg, val;
++	int ret, i;
++
++	reg_base = dev_remap_addr(dev);
++	if (!reg_base)
++		return -EINVAL;
++
++	/*
++	 * Set RCR initial value
++	 * The rcr-initial-values cell is <reg_offset val>
++	 */
++	num_fields = dev_read_size(dev, "rcr-initial-values");
++	if (num_fields < 2)
++		return 0;
++
++	num_fields /= sizeof(u32);
++	if (num_fields % 2)
++		return -EINVAL;
++
++	num_fields = num_fields / 2;
++	rcr_values = malloc(num_fields * 2 * sizeof(u32));
++	if (!rcr_values)
++		return -ENOMEM;
++
++	ret = dev_read_u32_array(dev, "rcr-initial-values", rcr_values,
++				 num_fields * 2);
++	if (ret < 0) {
++		free(rcr_values);
++		return -EINVAL;
++	}
++
++	for (i = 0; i < num_fields; i++) {
++		reg = rcr_values[2 * i];
++		val = rcr_values[2 * i + 1];
++		writel(val, reg_base + reg);
++	}
++	free(rcr_values);
++
++	return 0;
++}
++
++static const struct udevice_id npcm_reset_ids[] = {
++	{ .compatible = "nuvoton,npcm845-reset" },
++	{ .compatible = "nuvoton,npcm750-reset" },
++	{ }
++};
++
++struct reset_ops npcm_reset_ops = {
++	.request = npcm_reset_request,
++	.rfree = npcm_reset_free,
++	.rst_assert = npcm_reset_assert,
++	.rst_deassert = npcm_reset_deassert,
++	.of_xlate = npcm_reset_xlate,
++};
++
++U_BOOT_DRIVER(npcm_reset) = {
++	.name = "npcm_reset",
++	.id = UCLASS_RESET,
++	.of_match = npcm_reset_ids,
++	.bind = npcm_reset_bind,
++	.probe = npcm_reset_probe,
++	.ops = &npcm_reset_ops,
++	.priv_auto = sizeof(struct npcm_reset_priv),
++};
+-- 
+2.25.1
 
-ifneq ($(EXT_DTB),)
-DTB := $(EXT_DTB)
-else
-DTB := $(dt_dir)/$(DEVICE_TREE).dtb
-endif
-
-So with a move to Linux directory structure for dts directory,
-DEFAULT_DEVICE_TREE have to specify <vendor>/<name> as DT filename.
-
--Sumit
-
->
-> > and will get the same behaviour
-> > as now, just with upstream .dts files. All the .dts files for an SoC
-> > are built, as now, just as Linux does. We can continue cleaning up the
-> > DT build rules as time permits.
->
-> I will reiterate here, we can decide to add Makefile rules on a case
-> by case basis. If there is a need (from packaging perspective or a
-> particular SoC supports a generic U-Boot image) then we should be able
-> to add them. The cleanup would be automatically part of the process as
-> we switch SoCs to OF_UPSTREAM.
->
-> -Sumit
->
-> >
-> > Regards,
-> > Simon
-> >
-> > [1] http://patchwork.ozlabs.org/project/uboot/list/?series=388154
-> > [2] https://git.pengutronix.de/cgit/barebox/tree/dts
