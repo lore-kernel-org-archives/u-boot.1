@@ -4,108 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02787C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 06:13:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B8B1C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 06:57:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06B4F87933;
-	Wed,  3 Jan 2024 07:13:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 7A06E876FF;
+	Wed,  3 Jan 2024 07:57:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Aa3SsEbq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yFERWkgc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A54B687940; Wed,  3 Jan 2024 07:13:36 +0100 (CET)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20607.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe5b::607])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5E750876C8; Wed,  3 Jan 2024 07:57:42 +0100 (CET)
+Received: from mail-vs1-xe33.google.com (mail-vs1-xe33.google.com
+ [IPv6:2607:f8b0:4864:20::e33])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBE6187929
- for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 07:13:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FC6987705
+ for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 07:57:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=tejas.arvind.bhumkar@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Xhy7CRAiyTp7OOfLTb+yjTkBLvUMg/cb+M9pydAbl33AQIvGfe6zHy/m42FCw2RMbSqk1Kp7XtVDOam2W8EOm44oZ7BlQxPjYlqISMLSkMuk1mb6ivc3n3zuGmC1NiowLZHOWH0VwKkd7PDU1t5hjaMGHUoZZ8Ub2jBxBQS4vxVQHG0SQ78B6Zp4lFOueH1QIFQ6dCENybpwUG8zzU2hc7gmY8Ej0kNJQlxkipkk1pdEHonDhmZR4rj7/imn13kL7mnS8zsoWWYrCoLuCCxAWWOVzFhggdZNndfkha+0Xt+uWWZRsLWR2wOiHqj7du6Ew+YsLYLPyJVpi2RwR/otZQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qBc62Elrk3a41brdpd+5pFtExq0x5+OUT1mj0oj8r+E=;
- b=kwHfyO07UCtHD1rEa4pHrAk7LxNYFPXO8Ap3ikBSbCC87y9JKCwGw/kyZSETMpDMtAYIUuGGRLiWDrqNMaAd6Dopqt7xyqMu6YCDkb0NYbOOvUsXaxeTh/0lrX3IwvHeno1MTts6mb3p1YGHht7xCFEcBBJR8yNhLLUKuvuPt2iDkWX2HLHa3n3aI/y/rPSSIXmuzzmvVhtoMaeVMefHpkR4YtG/z2POuoXn6kQn+fvR1HBeAJ9Kx4SBE7srKOpojUsd58BdO34rSOXq9CmYmZpPL812M4kPSueoiVhesfzEuPOwHoHb2sf9dvLxn6KraBm2RPYpIEcpepFwz7N/gQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qBc62Elrk3a41brdpd+5pFtExq0x5+OUT1mj0oj8r+E=;
- b=Aa3SsEbqOQe5IZptUTn8CB41t5r+XTU0AfDCo34YGX66PTO7gdTn9G+YpKXcrgsi2dTsG4q5psJf5KH3wbIuALxyIeT5gpxZnWe7hLCNGhvs/orMEe8mvCtHQz9nVjMs+gtgwd8hEZKsUYLghBWSepKXC24AoZRqz8kpJ2aSUUY=
-Received: from MN2PR07CA0015.namprd07.prod.outlook.com (2603:10b6:208:1a0::25)
- by DM4PR12MB5086.namprd12.prod.outlook.com (2603:10b6:5:389::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7135.25; Wed, 3 Jan
- 2024 06:13:31 +0000
-Received: from BL02EPF0001A107.namprd05.prod.outlook.com
- (2603:10b6:208:1a0:cafe::3d) by MN2PR07CA0015.outlook.office365.com
- (2603:10b6:208:1a0::25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7135.25 via Frontend
- Transport; Wed, 3 Jan 2024 06:13:31 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BL02EPF0001A107.mail.protection.outlook.com (10.167.241.136) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7159.9 via Frontend Transport; Wed, 3 Jan 2024 06:13:30 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Wed, 3 Jan
- 2024 00:13:28 -0600
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Wed, 3 Jan
- 2024 00:13:06 -0600
-Received: from xhdcl190040.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34 via Frontend
- Transport; Wed, 3 Jan 2024 00:13:05 -0600
-From: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>, <git@xilinx.com>
-Subject: [PATCH] xilinx: Enable the NFS command by default
-Date: Wed, 3 Jan 2024 11:42:58 +0530
-Message-ID: <20240103061258.959110-1-tejas.arvind.bhumkar@amd.com>
-X-Mailer: git-send-email 2.27.0
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-vs1-xe33.google.com with SMTP id
+ ada2fe7eead31-466faf5846eso1210166137.0
+ for <u-boot@lists.denx.de>; Tue, 02 Jan 2024 22:57:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1704265056; x=1704869856; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=wgJFm4Um3PEf73Z4AZDUS14+UdEI1LHfnLwZFGcRY84=;
+ b=yFERWkgcfSQ3OeCBt49WOltBbPQzdn323Zk4TNTTJgsd89FGLMV5aPJRWyBzTPVc56
+ pk63cFVX0DpqJll1InFm2ylDYafUy+1juB1lmbT65zfnkZbBmh+ssclYy1VZQp014ktu
+ NFXJp2CE4C+DbzdslklrG9z0izKc68kBtrR8sNI0IfL+XvoaQVQXKQVKcHFsCuBeHg10
+ 28/7/XsfgFXlYYECqsr0IvWESedNOQw/1k227WwFRRrNd4iwPx2nx0U6oa+12wviR0+6
+ rdXXleYdVBC+sy+tXCxVeXKM3Tlp31ZXZ7CZGR1LGOs2VmIJyuV2elNFXSFYA9rvUmq5
+ +bCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704265056; x=1704869856;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wgJFm4Um3PEf73Z4AZDUS14+UdEI1LHfnLwZFGcRY84=;
+ b=DwJXQGLIeOztoj/VA2dNezukdUSC0VPaWyvjR54ZE2RJbrLuK/whJrqEUAFn74iw/F
+ yAObmo2LsFijew4bhZoz5UiJsTfNiPf0xsOOe7xECUiuV/JJSnTGQVu3EVD3cO0PzhhW
+ KF6Hfrlgztbgn73lZHKZBvBvd2iDcnQDD/1npqyjv6mb9MtsBl9mFy/DCJ6W8VEJ2nXl
+ V55HgCeULNJpfomSqOYgANo7ZVdbPAA3XAEIwGaIktteJLrSPHfIOiTQCV9qyV8Sid8E
+ w4p6ZRLw1bEZNCFsKWga9t1d+gFRF1E8vgqhLuXQnfdb4FivcncbYklz9Las1hC5YTj6
+ gYAg==
+X-Gm-Message-State: AOJu0YzE5ymqmVdENb07rhfDTGrRrLP3xlm8E3DoWyIovGxSVvrhptrQ
+ uNOu3stWR+A5/l8r4uoDgrqok52o50tHwGhMxj8dZp5Z8ZPM+g==
+X-Google-Smtp-Source: AGHT+IFAXcyRZL8XSxIcbu4nGOcqPdCs7pG3KUN99aX65ATCtCGdMio9//f0JP3e8lV+wTLouXdzLLqfMYD6AD0+g74=
+X-Received: by 2002:a05:6102:55a3:b0:464:89f2:801e with SMTP id
+ dc35-20020a05610255a300b0046489f2801emr10508375vsb.29.1704265055877; Tue, 02
+ Jan 2024 22:57:35 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0001A107:EE_|DM4PR12MB5086:EE_
-X-MS-Office365-Filtering-Correlation-Id: 972b35ec-e785-4f24-6653-08dc0c231bb8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: WwVp4YZvJsNe1txpjRkMm4Jp0yPN6O7C6uWi/NZs7LAqydLOBU7vN+m+q+WBckNg99J418Zj0Acjnr334obT+yGbVo1xjBi4nBt+HNLwGGu9BS5Umyh5fyomK/eNlx4TdaT0h0F6tJVPj8rcJxSV3BliaupJ3n/bZsuQOsAFTDIErUwXObpp+AWc0Xj1ml/499Rkx3hkBDJ+r9sCzBP7qc6bp6/qCvt33B0N1zE4fsax4VNnHKVfYMvj8sRnl2A5lJmj7VVBvVY0PX1C6S6V+PWewFvEIGM8qfJO8ZsQfVFilDR/2EQ4ANmakez1bSw1wIW0kQyGCuBjVs8u/ewyglniFquDjwDJL7zhMok1FtRB6iCNWEq+FliqyyS2OmuMU3Vh2a/HTbz2nQAzMHKqlpuvZwdMvhuFHYA8hKiAGh0Djz523gLC+IQpmJSFm8XD+3ODBHMGhJsHepeUjOCIadkhm3vOzml0trlSwme6WaDQ8CNT3/xWQLvvDOTS5k3bHAySW8X/gEjR16Za36aRCzcjoW9/SHFHMSaXNZa1Qu/N0QSbdYw6fTLDRA5tMre4IIG8d3Y5oprsngZKMfn7bnCRaY9AhpGYHT4k8U97JOkY+h6zAbKUo61gDE4FJtl69n6/t5BaYrx9O9Uqr+zywuGEbaccMBbku6hJHeEki2UPRHcFnE3w2P2+hXaAFhLdeI9NzwN16LA53yGBlKADU/h0TLzGR35Z9g1M3vA30LJ0cqYSq3IMpUuLhw/5qLKBwATjQdi3XWbdOiJdYyx2GA==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(396003)(346002)(376002)(39860400002)(136003)(230922051799003)(186009)(451199024)(1800799012)(82310400011)(64100799003)(36840700001)(46966006)(40470700004)(41300700001)(1076003)(6666004)(47076005)(2616005)(26005)(107886003)(5660300002)(81166007)(316002)(36860700001)(54906003)(8676002)(4326008)(478600001)(2906002)(82740400003)(8936002)(6916009)(70206006)(70586007)(356005)(336012)(426003)(86362001)(103116003)(40480700001)(40460700003)(36756003)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jan 2024 06:13:30.7757 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 972b35ec-e785-4f24-6653-08dc0c231bb8
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A107.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5086
+References: <20231228155428.GI2652760@bill-the-cat>
+ <CAFLszTjqcJouv7Dyasjfx4FiNy378fFA+A-DP292yvPk8xOzjw@mail.gmail.com>
+ <CAFA6WYME_0-s4aBbaKOS3Q+q9+5553qSWcL9pDMvC9VaAfAz0w@mail.gmail.com>
+ <CAFLszTj0ptH7K2Y4Fc1FR1_OmK5OzAaAReR1KT5R8OZvbgrP-Q@mail.gmail.com>
+ <20231231203953.GG2652760@bill-the-cat>
+ <87ttnxlwon.fsf@bloch.sibelius.xs4all.nl>
+ <CAFLszThKEW7rvkfiV=Y_bYtBCC2=Ue1vKOnb4a+EN4=EEYNfng@mail.gmail.com>
+ <20240101233545.GI2652760@bill-the-cat>
+ <CAFLszTg1F6O2MZh3Ui_ux_aQZkzvx_eY3HprFDqm0ZETwYMGfw@mail.gmail.com>
+ <CAFA6WYP5Ko+VJ1MLN3W2Y9-B2osiL40PcMpqwiN0=F-k=FowjA@mail.gmail.com>
+ <20240102180643.GA1610741@bill-the-cat>
+In-Reply-To: <20240102180643.GA1610741@bill-the-cat>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Wed, 3 Jan 2024 12:27:24 +0530
+Message-ID: <CAFA6WYPfey+Si29eGAyaUaiacCBwGBR+f3+o8hjFRSU_j504Wg@mail.gmail.com>
+Subject: Re: [PATCH v3 4/8] dts: Add alternative location for upstream DTB
+ builds
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io, 
+ u-boot-custodians@lists.denx.de, robh+dt@kernel.org, 
+ krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
+ ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
+ xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
+ rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
+ rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,70 +104,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enabled the default utilization of the NFS command across all
-Xilinx platforms to facilitate the booting of images through
-the network using the NFS protocol.
+Hi Tom,
 
-Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
----
- configs/xilinx_versal_net_virt_defconfig | 2 ++
- configs/xilinx_versal_virt_defconfig     | 2 ++
- configs/xilinx_zynq_virt_defconfig       | 2 ++
- configs/xilinx_zynqmp_virt_defconfig     | 2 ++
- 4 files changed, 8 insertions(+)
+On Tue, 2 Jan 2024 at 23:36, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Jan 02, 2024 at 09:07:48PM +0530, Sumit Garg wrote:
+> > On Tue, 2 Jan 2024 at 19:36, Simon Glass <sjg@chromium.org> wrote:
+> [snip]
+> > > 2. Choose a directory target for devicetree-rebasing. I see that
+> > > 'barebox' uses 'dts' which seems better to me than
+> > > 'devicetree-rebasing/src/'.
+> >
+> > Actually as part of this patch-set we try to reuse the U-Boot 'dts'
+> > directory (via dts/arch/arm64/<vendor> soft links) since it was
+> > already taken for U-Boot specific DT Makefile. However, I am open to
+> > renaming 'devicetree-rebasing' but to me that sounds more clear that
+> > we maintain a specific subtree within U-Boot.
+>
+> Looking at what little is in dts/ here today could we just use subtree
+> and pop the contents under there, and basically ignore the
+> project-provided Makefile? Or is that not really worth it?
+>
 
-diff --git a/configs/xilinx_versal_net_virt_defconfig b/configs/xilinx_versal_net_virt_defconfig
-index 0553ac6b17..3095e402ff 100644
---- a/configs/xilinx_versal_net_virt_defconfig
-+++ b/configs/xilinx_versal_net_virt_defconfig
-@@ -46,6 +46,8 @@ CONFIG_CMD_USB=y
- CONFIG_BOOTP_MAY_FAIL=y
- CONFIG_BOOTP_BOOTFILESIZE=y
- CONFIG_CMD_TFTPPUT=y
-+CONFIG_CMD_NFS=y
-+CONFIG_NFS_TIMEOUT=2000
- CONFIG_CMD_CACHE=y
- CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_TIME=y
-diff --git a/configs/xilinx_versal_virt_defconfig b/configs/xilinx_versal_virt_defconfig
-index 6a2c03ccdd..080d0b2f34 100644
---- a/configs/xilinx_versal_virt_defconfig
-+++ b/configs/xilinx_versal_virt_defconfig
-@@ -48,6 +48,8 @@ CONFIG_CMD_USB=y
- CONFIG_BOOTP_MAY_FAIL=y
- CONFIG_BOOTP_BOOTFILESIZE=y
- CONFIG_CMD_TFTPPUT=y
-+CONFIG_CMD_NFS=y
-+CONFIG_NFS_TIMEOUT=2000
- CONFIG_CMD_CACHE=y
- CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_TIME=y
-diff --git a/configs/xilinx_zynq_virt_defconfig b/configs/xilinx_zynq_virt_defconfig
-index c3ee9beaef..7aa278c25f 100644
---- a/configs/xilinx_zynq_virt_defconfig
-+++ b/configs/xilinx_zynq_virt_defconfig
-@@ -70,6 +70,8 @@ CONFIG_CMD_SF_TEST=y
- CONFIG_CMD_USB=y
- CONFIG_BOOTP_MAY_FAIL=y
- CONFIG_CMD_TFTPPUT=y
-+CONFIG_CMD_NFS=y
-+CONFIG_NFS_TIMEOUT=2000
- CONFIG_CMD_CACHE=y
- CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_TIME=y
-diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
-index 239bb1f5cc..62e37309aa 100644
---- a/configs/xilinx_zynqmp_virt_defconfig
-+++ b/configs/xilinx_zynqmp_virt_defconfig
-@@ -82,6 +82,8 @@ CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_BOOTP_MAY_FAIL=y
- CONFIG_BOOTP_BOOTFILESIZE=y
- CONFIG_CMD_TFTPPUT=y
-+CONFIG_CMD_NFS=y
-+CONFIG_NFS_TIMEOUT=2000
- CONFIG_CMD_BMP=y
- CONFIG_CMD_CACHE=y
- CONFIG_CMD_EFIDEBUG=y
--- 
-2.27.0
+If we really want to avoid soft links then I did try to add the subree
+with the prefix as dts/upstream here [1]. It works well with the
+downside that we will pollute the subtree source code with U-Boot
+specific Makefiles [2]. However, the subtree pull works fine still. If
+this sounds better to you and Simon then let me know I will use this
+approach for v4.
 
+[1] https://github.com/b49020/u-boot/commits/use_dts_dir/
+[2] https://github.com/b49020/u-boot/commit/90eabe614e77bc30a437e7d5559c1ac414ac07b3
+
+-Sumit
+
+> --
+> Tom
