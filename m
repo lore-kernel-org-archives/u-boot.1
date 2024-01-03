@@ -4,81 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FD1CC3DA6E
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 13:26:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E498C47073
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 13:32:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E85D88701D;
-	Wed,  3 Jan 2024 14:26:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BE3AC8766D;
+	Wed,  3 Jan 2024 14:32:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fvlaMvUH";
+	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=enrico.leto@siemens.com header.b="f/2rbecy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A183387516; Wed,  3 Jan 2024 14:26:18 +0100 (CET)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B34F0876BF; Wed,  3 Jan 2024 14:32:02 +0100 (CET)
+Received: from mta-64-226.siemens.flowmailer.net
+ (mta-64-226.siemens.flowmailer.net [185.136.64.226])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96BD286FD8
- for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 14:26:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 844AF871CF
+ for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 14:31:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-7818ab57d7dso391572685a.2
- for <u-boot@lists.denx.de>; Wed, 03 Jan 2024 05:26:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1704288374; x=1704893174; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lRHLvDgAtREN0jwN+hEvxoCN7BzPSK76gHPpF3i6djk=;
- b=fvlaMvUHhEqOfzD+HxQZgnDeNvuXGu+Prz+nUiU8A08gf7hUBxz11RWBM9LkXRE/8B
- nLHGFdiuarnnNo9hn+c7TbyR6kZHC1Dj0j3SnYkaF9x2y8zsblNeXBmGDFhIl8aW2iK7
- ThVFdixCn/jYOU/+dJmi2qetSU0qFHy0dktD8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704288374; x=1704893174;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lRHLvDgAtREN0jwN+hEvxoCN7BzPSK76gHPpF3i6djk=;
- b=tlZojXP63xdOj3yYHCcz9rXacfaMVknEuMGtwGvB8xD2Gm5OJTr+nZwY26AhlBTj3R
- 3hL9bnKNDoj4yPASGMVrx2D37kyEs9/2JaUCH3VJnWKW7K2c23ko8qe9YqFPAaVF8fQR
- obu3NLfvZ+bqSYnvFJeepDZgIrNtWnik7EQxQp4/nEGAen9HtKJZhyS8gJoGqq0Nirzg
- Q41S6eSk3szMlHClhR3VRKWvZ8GTGWfFDvvbh1ThhLBld6z8uFpg9XDG7CzFiM6SvKoU
- cBP7At/0PpZdlIxhclIqDCMQAZtHDjrvqXuKxxZaodhbDtersZfXMMZE/EcM3KMot/Qf
- LOSg==
-X-Gm-Message-State: AOJu0YyrX+7wuHkFbm0xcbYU/L+lM9CnJhwYqves4HdIQlLtuSr+S6+f
- sI7xWiIuezlKpcOGkotwCsKxrwbUUxBEFQ==
-X-Google-Smtp-Source: AGHT+IHdh9Dlx6ibXTkFXVDH+5oj5p9ghrXnp/C8/kQYR+SvZf8rSMQf+vDKRA1HtmJPLJJK2L/hUw==
-X-Received: by 2002:a05:6214:4103:b0:680:c86d:3f6c with SMTP id
- kc3-20020a056214410300b00680c86d3f6cmr1537840qvb.36.1704288374306; 
- Wed, 03 Jan 2024 05:26:14 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
- [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
- b12-20020a0cfe6c000000b006806114a111sm5747006qvv.66.2024.01.03.05.26.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jan 2024 05:26:13 -0800 (PST)
-Date: Wed, 3 Jan 2024 08:26:11 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: sjg@chromium.org, caleb.connolly@linaro.org, neil.armstrong@linaro.org,
- rfried.dev@gmail.com, dsankouski@gmail.com, seanga2@gmail.com,
- marex@denx.de, laetitia.mariottini@se.com, pascal.eberhard@se.com,
- abdou.saker@se.com, jimmy.lalande@se.com,
- benjamin.missey@non.se.com, daniel.thompson@linaro.org,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] mach-snapdragon: Move APQ8016 SoC derived board code
-Message-ID: <20240103132611.GH1610741@bill-the-cat>
-References: <20240103130716.4144892-1-sumit.garg@linaro.org>
+ spf=pass smtp.mailfrom=enrico.leto@siemens.com
+Received: by mta-64-226.siemens.flowmailer.net with ESMTPSA id
+ 20240103133158b40eab55506161d935 for <u-boot@lists.denx.de>;
+ Wed, 03 Jan 2024 14:31:58 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=enrico.leto@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
+ bh=vlY+i7x5nXNmEuTmNKRL2JVoNmMHpHUeT1wDeZk7+m0=;
+ b=f/2rbecy30vU8o0jkCQE+GJTeSdgOpxUQ/O29NzYhHNAIqRYAJsEphsJlb3IRl6Ca6tB00
+ V9Y195G9epT53jO/vEsMi//PQ6X0lGIEApzcfZHrlzZFROCQXscCWcVs9wggSDf9tknc63ka
+ fiQ0Mk2IWOmYljW9YiLiFeBiMDdXA=;
+From: Enrico Leto <enrico.leto@siemens.com>
+To: u-boot@lists.denx.de,
+	alexander.sverdlin@siemens.com
+Cc: trini@konsulko.com,
+	Enrico Leto <enrico.leto@siemens.com>
+Subject: [PATCH v4 1/6] siemens: eeprom: clean up definitions
+Date: Wed,  3 Jan 2024 14:31:49 +0100
+Message-Id: <20240103133154.152886-2-enrico.leto@siemens.com>
+In-Reply-To: <20240103133154.152886-1-enrico.leto@siemens.com>
+References: <20240103133154.152886-1-enrico.leto@siemens.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="QnnDbjmyKyNg1rX2"
-Content-Disposition: inline
-In-Reply-To: <20240103130716.4144892-1-sumit.garg@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-1320603:519-21489:flowmailer
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,46 +66,248 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Move the I2C and EEPROM address definitions in common board header.
 
---QnnDbjmyKyNg1rX2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+Signed-off-by: Enrico Leto <enrico.leto@siemens.com>
+---
+ board/siemens/capricorn/board.c   |  5 ++---
+ board/siemens/common/board.c      |  6 +++---
+ board/siemens/common/board.h      | 21 +++++++++++++++++++++
+ board/siemens/common/factoryset.c | 12 ++++++------
+ board/siemens/draco/board.c       | 13 +++++--------
+ include/configs/draco-etamin.h    |  3 ---
+ include/configs/draco-rastaban.h  |  3 ---
+ include/configs/draco-thuban.h    |  3 ---
+ 8 files changed, 37 insertions(+), 29 deletions(-)
+ create mode 100644 board/siemens/common/board.h
 
-On Wed, Jan 03, 2024 at 06:37:16PM +0530, Sumit Garg wrote:
+diff --git a/board/siemens/capricorn/board.c b/board/siemens/capricorn/board.c
+index 924c88e8fab..81fa340ca42 100644
+--- a/board/siemens/capricorn/board.c
++++ b/board/siemens/capricorn/board.c
+@@ -28,6 +28,7 @@
+ #include <asm/arch-imx8/clock.h>
+ #endif
+ #include <linux/delay.h>
++#include "../common/board.h"
+ #include "../common/factoryset.h"
+ 
+ #define GPIO_PAD_CTRL \
+@@ -337,13 +338,11 @@ void board_late_mmc_env_init(void)
+ }
+ 
+ #ifndef CONFIG_SPL_BUILD
+-int factoryset_read_eeprom(int i2c_addr);
+-
+ static int load_parameters_from_factoryset(void)
+ {
+ 	int ret;
+ 
+-	ret = factoryset_read_eeprom(EEPROM_I2C_ADDR);
++	ret = factoryset_read_eeprom(SIEMENS_EE_I2C_ADDR);
+ 	if (ret)
+ 		return ret;
+ 
+diff --git a/board/siemens/common/board.c b/board/siemens/common/board.c
+index d077751cbe1..7ad367439c1 100644
+--- a/board/siemens/common/board.c
++++ b/board/siemens/common/board.c
+@@ -34,7 +34,8 @@
+ #include <cpsw.h>
+ #include <watchdog.h>
+ #include <asm/mach-types.h>
+-#include "../common/factoryset.h"
++#include "board.h"
++#include "factoryset.h"
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -70,7 +71,6 @@ void sdram_init(void)
+ #endif /* #ifdef CONFIG_SPL_BUILD */
+ 
+ #ifndef CONFIG_SPL_BUILD
+-#define FACTORYSET_EEPROM_ADDR		0x50
+ /*
+  * Basic board specific setup.  Pinmux has been handled already.
+  */
+@@ -88,7 +88,7 @@ int board_init(void)
+ 	gd->bd->bi_boot_params = CFG_SYS_SDRAM_BASE + 0x100;
+ 
+ #ifdef CONFIG_FACTORYSET
+-	factoryset_read_eeprom(FACTORYSET_EEPROM_ADDR);
++	factoryset_read_eeprom(SIEMENS_EE_I2C_ADDR);
+ #endif
+ 
+ 	gpmc_init();
+diff --git a/board/siemens/common/board.h b/board/siemens/common/board.h
+new file mode 100644
+index 00000000000..0d5b369028f
+--- /dev/null
++++ b/board/siemens/common/board.h
+@@ -0,0 +1,21 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright Siemens AG 2023
++ *
++ * Common board definitions for siemens boards
++ */
++
++#ifndef _BOARD_COMMON_H_
++#define _BOARD_COMMON_H_
++
++/* EEPROM @ I2C */
++#define SIEMENS_EE_I2C_BUS	0
++#define SIEMENS_EE_I2C_ADDR	0x50
++
++/* EEPROM mapping */
++#define SIEMENS_EE_ADDR_NAND_GEO	0x80
++#define SIEMENS_EE_ADDR_DDR3		0x90
++#define SIEMENS_EE_ADDR_CHIP		0x120
++#define SIEMENS_EE_ADDR_FACTORYSET	0x400
++
++#endif /* _BOARD_COMMON_H_ */
+diff --git a/board/siemens/common/factoryset.c b/board/siemens/common/factoryset.c
+index 4e36a6f3199..94c671389dc 100644
+--- a/board/siemens/common/factoryset.c
++++ b/board/siemens/common/factoryset.c
+@@ -22,11 +22,11 @@
+ #include <net.h>
+ #include <errno.h>
+ #include <g_dnl.h>
++#include "board.h"
+ #include "factoryset.h"
+ 
+-#define EEPR_PG_SZ		0x80
+-#define EEPROM_FATORYSET_OFFSET	0x400
+-#define OFF_PG            EEPROM_FATORYSET_OFFSET/EEPR_PG_SZ
++#define EEPR_PG_SZ	0x80
++#define OFF_PG		(SIEMENS_EE_ADDR_FACTORYSET / EEPR_PG_SZ)
+ 
+ /* Global variable that contains necessary information from FactorySet */
+ struct factorysetcontainer factory_dat;
+@@ -159,7 +159,7 @@ int factoryset_read_eeprom(int i2c_addr)
+ #endif
+ 
+ #if CONFIG_IS_ENABLED(DM_I2C)
+-	ret = uclass_get_device_by_seq(UCLASS_I2C, EEPROM_I2C_BUS, &bus);
++	ret = uclass_get_device_by_seq(UCLASS_I2C, SIEMENS_EE_I2C_BUS, &bus);
+ 	if (ret)
+ 		goto err;
+ 
+@@ -171,14 +171,14 @@ int factoryset_read_eeprom(int i2c_addr)
+ 	if (ret)
+ 		goto err;
+ 
+-	ret = dm_i2c_read(dev, EEPROM_FATORYSET_OFFSET, hdr, sizeof(hdr));
++	ret = dm_i2c_read(dev, SIEMENS_EE_ADDR_FACTORYSET, hdr, sizeof(hdr));
+ 	if (ret)
+ 		goto err;
+ #else
+ 	if (i2c_probe(i2c_addr))
+ 		goto err;
+ 
+-	if (i2c_read(i2c_addr, EEPROM_FATORYSET_OFFSET, 2, hdr, sizeof(hdr)))
++	if (i2c_read(i2c_addr, SIEMENS_EE_ADDR_FACTORYSET, 2, hdr, sizeof(hdr)))
+ 		goto err;
+ #endif
+ 
+diff --git a/board/siemens/draco/board.c b/board/siemens/draco/board.c
+index 8b13d23aca7..814959583f7 100644
+--- a/board/siemens/draco/board.c
++++ b/board/siemens/draco/board.c
+@@ -37,6 +37,7 @@
+ #include <watchdog.h>
+ #include <linux/delay.h>
+ #include "board.h"
++#include "../common/board.h"
+ #include "../common/factoryset.h"
+ #include <nand.h>
+ 
+@@ -132,16 +133,12 @@ struct am335x_nand_geometry {
+ 	u8 nand_bus;
+ };
+ 
+-#define EEPROM_ADDR		0x50
+-#define EEPROM_ADDR_DDR3	0x90
+-#define EEPROM_ADDR_CHIP	0x120
+-
+ static int draco_read_nand_geometry(void)
+ {
+ 	struct am335x_nand_geometry geo;
+ 
+ 	/* Read NAND geometry */
+-	if (i2c_read(EEPROM_ADDR, 0x80, 2,
++	if (i2c_read(SIEMENS_EE_I2C_ADDR, SIEMENS_EE_ADDR_NAND_GEO, 2,
+ 		     (uchar *)&geo, sizeof(struct am335x_nand_geometry))) {
+ 		printf("Could not read the NAND geomtery; something fundamentally wrong on the I2C bus.\n");
+ 		return -EIO;
+@@ -164,20 +161,20 @@ static int draco_read_nand_geometry(void)
+ static int read_eeprom(void)
+ {
+ 	/* Check if baseboard eeprom is available */
+-	if (i2c_probe(EEPROM_ADDR)) {
++	if (i2c_probe(SIEMENS_EE_I2C_ADDR)) {
+ 		printf("Could not probe the EEPROM; something fundamentally wrong on the I2C bus.\n");
+ 		return 1;
+ 	}
+ 
+ #ifdef CONFIG_SPL_BUILD
+ 	/* Read Siemens eeprom data (DDR3) */
+-	if (i2c_read(EEPROM_ADDR, EEPROM_ADDR_DDR3, 2,
++	if (i2c_read(SIEMENS_EE_I2C_ADDR, SIEMENS_EE_ADDR_DDR3, 2,
+ 		     (uchar *)&settings.ddr3, sizeof(struct ddr3_data))) {
+ 		printf("Could not read the EEPROM; something fundamentally wrong on the I2C bus.\nUse default DDR3 timings\n");
+ 		set_default_ddr3_timings();
+ 	}
+ 	/* Read Siemens eeprom data (CHIP) */
+-	if (i2c_read(EEPROM_ADDR, EEPROM_ADDR_CHIP, 2,
++	if (i2c_read(SIEMENS_EE_I2C_ADDR, SIEMENS_EE_ADDR_CHIP, 2,
+ 		     (uchar *)&settings.chip, sizeof(settings.chip)))
+ 		printf("Could not read chip settings\n");
+ 
+diff --git a/include/configs/draco-etamin.h b/include/configs/draco-etamin.h
+index 97585a4fd12..6ae85b575b7 100644
+--- a/include/configs/draco-etamin.h
++++ b/include/configs/draco-etamin.h
+@@ -69,9 +69,6 @@
+ /* Physical Memory Map */
+ #define CFG_MAX_RAM_BANK_SIZE       (1024 << 20)    /* 1GB */
+ 
+-#define EEPROM_ADDR_DDR3 0x90
+-#define EEPROM_ADDR_CHIP 0x120
+-
+ /* nedded by compliance test in read mode */
+ 
+ #undef COMMON_ENV_DFU_ARGS
+diff --git a/include/configs/draco-rastaban.h b/include/configs/draco-rastaban.h
+index 0991ebfd00c..1b95606cca9 100644
+--- a/include/configs/draco-rastaban.h
++++ b/include/configs/draco-rastaban.h
+@@ -34,9 +34,6 @@
+  /* Physical Memory Map */
+ #define CFG_MAX_RAM_BANK_SIZE	(1024 << 20)	/* 1GB */
+ 
+-#define EEPROM_ADDR_DDR3 0x90
+-#define EEPROM_ADDR_CHIP 0x120
+-
+ /* Default env settings */
+ #define CFG_EXTRA_ENV_SETTINGS \
+ 	"hostname=rastaban\0" \
+diff --git a/include/configs/draco-thuban.h b/include/configs/draco-thuban.h
+index f4c04c55ebf..629558e27ec 100644
+--- a/include/configs/draco-thuban.h
++++ b/include/configs/draco-thuban.h
+@@ -27,9 +27,6 @@
+  /* Physical Memory Map */
+ #define CFG_MAX_RAM_BANK_SIZE	(1024 << 20)	/* 1GB */
+ 
+-#define EEPROM_ADDR_DDR3 0x90
+-#define EEPROM_ADDR_CHIP 0x120
+-
+ /* Default env settings */
+ #define CFG_EXTRA_ENV_SETTINGS \
+ 	"hostname=thuban\0" \
+-- 
+2.30.2
 
-[snip]
-> Tom, Simon,
->=20
-> Is there any U-Boot policy in regards to board code going forward? Are
-> we moving in a direction to get rid of most board specific stubs from
-> generic U-Boot code?
-
-There's not a policy, no. But this brings this platform more in to line
-with others (assorted TI SoCs) that already have "board" files under
-arch/arm/mach-foo as most of the board hooks are already abstracted such
-that it's per-SoC with only an occasional further hook for true
-board-specific changes.
-
---=20
-Tom
-
---QnnDbjmyKyNg1rX2
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWVYHMACgkQFHw5/5Y0
-tyyifgv/epKucR/sMZqWDIzktO0nDMS6qIHOMhXLiXsUNMccIxzC20QtkJwcizpb
-R84oHe+YNYpci+AqgOhVL8HkAdB9gWVF6daQ4K34evH2UQU2DNgm6N/mEKZAuyrb
-F198fyhZo7qc3799lFSnJxBSSRudeHlCaa8yY4pMKSPKAi9DMNT5WR4pnSkuKIvM
-uJa23f70uNhU1M1Qie1Urf6Tz/knqHhm5OeesqzJHNwS6Ry5+d89bP2tG68NUO1V
-sRB098nHeqZc08N5SHeToYHZIpxchOqWwQkQ+GFXi7LNJAKxO920rpEEwG1ScNnW
-X7OMexv65PCL+B0pNJw8Gz8jwVa+ic/lyu6YclxeCpFoYslp9OwNcNtpL/p5gyyp
-+H/25tH9FXJxIqTJAaDtSS3br1DrT+cNBb8oDyxevWWScQI/oBNEuTZuqPzIKWCZ
-nvZw6b1P6kygN82h6nYFAGfZlB4yJ2ilofHm7zONi+ue9AjXD66OD4nYaiOjW/mI
-ZegMiGah
-=AUnu
------END PGP SIGNATURE-----
-
---QnnDbjmyKyNg1rX2--
