@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DE97C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 17:52:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD6B6C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed,  3 Jan 2024 17:58:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40EB087811;
-	Wed,  3 Jan 2024 18:52:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 28A26877FA;
+	Wed,  3 Jan 2024 18:58:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="K5gscUkn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gNDZVyTH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A66887823; Wed,  3 Jan 2024 18:52:34 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 84B3F8775A; Wed,  3 Jan 2024 18:57:58 +0100 (CET)
+Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
+ [IPv6:2607:f8b0:4864:20::82a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0571C86EEC
- for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 18:52:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 50BCA877FA
+ for <u-boot@lists.denx.de>; Wed,  3 Jan 2024 18:57:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 403HqLcb081191;
- Wed, 3 Jan 2024 11:52:21 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704304341;
- bh=W6WJthw9HuGS10yMTxFCkti6ZcXqFz7HyJBSHupMuU0=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=K5gscUknDDT1xqbKZtDNVJ0bu27xOG7JaQGUMLWrpjRKR5CLsaV58rClW1RBCG0FH
- Oahtp7F0ZnfRZMfXcc7RD7h7Q1wGwvoLRgKluB6NUzp7v02wxHwhBVCd6kf//7vE5y
- sFALodxpPGDFULjHoe+47ffYZjkGHYjymWXxGRYk=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 403HqLc1085921
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 3 Jan 2024 11:52:21 -0600
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 3
- Jan 2024 11:52:21 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 3 Jan 2024 11:52:21 -0600
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 403HqLxO125817;
- Wed, 3 Jan 2024 11:52:21 -0600
-Date: Wed, 3 Jan 2024 11:52:21 -0600
-From: Nishanth Menon <nm@ti.com>
-To: Apurva Nandan <a-nandan@ti.com>
-CC: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean
- Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Neha
- Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Andrew
- Davis <afd@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya
- <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Aradhya Bhatia
- <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>, Christian Gmeiner
- <christian.gmeiner@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Roger Quadros
- <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>, Ralph Siemsen
- <ralph.siemsen@linaro.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>,
- Sinthu Raja M <sinthu.raja@mistralsolutions.com>,
- Udit Kumar <u-kumar1@ti.com>
-Subject: Re: [PATCH v7 13/17] arm: dts: Add bootph-all for memory node
-Message-ID: <20240103175221.ovjzcwwljnjhka2n@expire>
-References: <20231219191537.4039361-1-a-nandan@ti.com>
- <20231219191537.4039361-14-a-nandan@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82a.google.com with SMTP id
+ d75a77b69052e-4283ad9e7cfso2777781cf.2
+ for <u-boot@lists.denx.de>; Wed, 03 Jan 2024 09:57:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1704304675; x=1704909475; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=UmOwZgkAsKV1ex8l6cUP9enhXnSgPuoUcT4Hw5Gx62k=;
+ b=gNDZVyTHlaipENq1QCCIQt+DMkAs0VGgibyOvV/sgLwlXwOp+gILmM4euDfBKVCfr+
+ u46/zOysunZRhaRMR8lxvfcsRZK3IQTS3xLIVKLLt6f0lkKXpULryWg2zspjmO3EroEl
+ IFMRT1yvTDx+I4aVu6rQMN8jL9A/LpACeGv58=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704304675; x=1704909475;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UmOwZgkAsKV1ex8l6cUP9enhXnSgPuoUcT4Hw5Gx62k=;
+ b=uHE3kLaLAqjQnzstWPNgAS4W0X3FDdAbQLm8JKvekeQOW0WwqpvfHky4JRmV+O4e2a
+ boVAiOrSbXef8vAiQ0tK5Ey55T4JvqNPs7R/HUP/poI3BfXtEspkV1PH28FuMaumW0Ao
+ lGexpY+BrnDHQXxg4zr0hrDYFpjDAzq/iEn6jMZtcM0LdgjHdqpfZQR6gjFEUzbwWcEQ
+ e/s/AuJ0rDOC01rZnpsbrl8Ot5r8QHbxb/3Kui0A46EsRRJ0/776W65ZeoRqjvP3+pjL
+ kzPUrNuJOU3WruKRWzqws/sF9CcifcasBTHGN9eFSErVfx7TEXcETgt658bE//CwzeZH
+ 8g6Q==
+X-Gm-Message-State: AOJu0YxLnZmD3P+YtEc65ZCI0PcOqzAf60u45ludVPt08MiCTzUR2nOU
+ UwlD8et2E8BGgB9bC2e5vSLKGLBDKZie0Q==
+X-Google-Smtp-Source: AGHT+IHwl0bK8ZGjysiQwQ2J834l+1YIVzaG8OwfqJjz71n6QQVt1uTTmO3p3KukCJJzr6iVMIc+Cw==
+X-Received: by 2002:ac8:7f94:0:b0:428:205d:d2df with SMTP id
+ z20-20020ac87f94000000b00428205dd2dfmr6921439qtj.134.1704304675100; 
+ Wed, 03 Jan 2024 09:57:55 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
+ [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
+ cb17-20020a05622a1f9100b00427f358116csm7213984qtb.10.2024.01.03.09.57.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Jan 2024 09:57:54 -0800 (PST)
+Date: Wed, 3 Jan 2024 12:57:51 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Love Kumar <love.kumar@amd.com>, u-boot@lists.denx.de,
+ michal.simek@amd.com, git@xilinx.com
+Subject: Re: [PATCH v3] test/py: i2c: Add tests for i2c command
+Message-ID: <20240103175751.GM1610741@bill-the-cat>
+References: <f7ff13475bbd3f0471bee709dc6a805d3da5915d.1704176360.git.love.kumar@amd.com>
+ <CAFLszTgFS5CPZAioNLRFQCispoHKLS8V8Mc0B1YYqRcJ15WmYg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="0WSVJZftAYZI10dw"
 Content-Disposition: inline
-In-Reply-To: <20231219191537.4039361-14-a-nandan@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+In-Reply-To: <CAFLszTgFS5CPZAioNLRFQCispoHKLS8V8Mc0B1YYqRcJ15WmYg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,62 +92,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 00:45-20231220, Apurva Nandan wrote:
-> memory node is used by fdtdec_setup_mem_size_base() and
-> fdtdec_setup_memory_banksize() during dram_init(), so use
-> bootph-all to enable for all stages.
-> 
-> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
-> ---
->  arch/arm/dts/k3-am69-sk-u-boot.dtsi    | 6 ++++++
->  arch/arm/dts/k3-j784s4-evm-u-boot.dtsi | 6 ++++++
->  2 files changed, 12 insertions(+)
-> 
-> diff --git a/arch/arm/dts/k3-am69-sk-u-boot.dtsi b/arch/arm/dts/k3-am69-sk-u-boot.dtsi
-> index d1623b6bbe..6d848ba6bc 100644
-> --- a/arch/arm/dts/k3-am69-sk-u-boot.dtsi
-> +++ b/arch/arm/dts/k3-am69-sk-u-boot.dtsi
-> @@ -5,6 +5,12 @@
->  
->  #include "k3-j784s4-binman.dtsi"
->  
-> +/ {
-> +	memory@80000000 {
-> +		bootph-all;
-> +	};
-> +};
-> +
->  &mcu_udmap {
->  	reg =   <0x0 0x285c0000 0x0 0x100>,
->  		<0x0 0x284c0000 0x0 0x4000>,
-> diff --git a/arch/arm/dts/k3-j784s4-evm-u-boot.dtsi b/arch/arm/dts/k3-j784s4-evm-u-boot.dtsi
-> index 74de8a4db8..ac749782bf 100644
-> --- a/arch/arm/dts/k3-j784s4-evm-u-boot.dtsi
-> +++ b/arch/arm/dts/k3-j784s4-evm-u-boot.dtsi
-> @@ -5,6 +5,12 @@
->  
->  #include "k3-j784s4-binman.dtsi"
->  
-> +/ {
-> +	memory@80000000 {
-> +		bootph-all;
-> +	};
-> +};
-> +
->  &mcu_udmap {
->  	reg =   <0x0 0x285c0000 0x0 0x100>,
->  		<0x0 0x284c0000 0x0 0x4000>,
 
-Is there a patch submitted for upstream kernel?
+--0WSVJZftAYZI10dw
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This should be part of your patch for board.dts instead of a
-patch that fixes multiple board.dts after introducing the dts in the
-same series.
+On Tue, Jan 02, 2024 at 07:06:29AM -0700, Simon Glass wrote:
+> Hi Love,
+>=20
+> On Mon, Jan 1, 2024 at 11:47=E2=80=AFPM Love Kumar <love.kumar@amd.com> w=
+rote:
+> >
+> > Add below test cases for i2c commands:
+> > i2c_bus - To show i2c bus info,
+> > i2c_dev - To set or show the current bus,
+> > i2c_probe - To probe the i2c device,
+> > i2c_eeprom - To test i2c eeprom device,
+> > i2c_probe_all_buses - To list down all the buses and probes it
+> >
+> > Signed-off-by: Love Kumar <love.kumar@amd.com>
+> > ---
+> > Changes in v2:
+> > - Take the configured eeprom value from env to read back and compare
+> > Changes in v3:
+> > - Add test env dependency to run it for provided i2c bus list
+> > ---
+> >  test/py/tests/test_i2c.py | 116 ++++++++++++++++++++++++++++++++++++++
+> >  1 file changed, 116 insertions(+)
+> >  create mode 100644 test/py/tests/test_i2c.py
+>=20
+> It is OK to write these in Python, but you might also consider some C
+> tests for the commands. See test/dm/i2c.c for some examples which use
+> an eeprom.
 
-So squash this change to relevant patches please and please refer to
-upstream kernel patch so that we can drop this later on.
+But part of the problem is that test/dm/ is only run on sandbox, and
+these tests are being run on real hardware.
 
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+--=20
+Tom
+
+--0WSVJZftAYZI10dw
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWVoBkACgkQFHw5/5Y0
+tyytlQwAuY8L8mjiXq6igzXKo2W2iFyDx0R2MJAlvDUqY1SemYVyOUUWcE8pjCbu
+dyngGwjW8x4ZL8VkrV5yJanayG1Z8Oyq9WcNiDbJQxTIlfuqM6mxbiZN8uf+S31C
+ubs18mA9LxTNd9M9MUikE9q0MnEXo3XuPsiUeBjM/pCbML2Lkp1lvsObkUK5KZXD
+76FJ5FndJ3JGHdyD32hR5gqbIeGghVhYfE8zA5S4Kk9ITqpS8pvycLQmzzQiSeOR
+je1/H2SxDnP9olZNGjWUdL0NXNkmzJeO9RpJ4fEN/hOgo3m/FRhnAF6KCRC+vl1H
+wJPGY72vNEDY6im+yIHJ7oXMYWhPs2+7vHzy4rBBbU8gZ1CXvkyYNLCUvAEukfml
+JGdzAmOjfq4/KEumyENbCYqXhGErBg4CsdFqtE87WJtYi31jxcBVcoMEHFEAANQA
+2/izOvDCvYQkbdDVQjVO4yK5YL674VaE6qpV98bGfk1zsGth3jBT9TUn4A3hN/mQ
+1vW6j2LP
+=F+rw
+-----END PGP SIGNATURE-----
+
+--0WSVJZftAYZI10dw--
