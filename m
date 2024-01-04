@@ -4,89 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7CE3C47073
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:06:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0B01C47074
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:10:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28EE08797B;
-	Thu,  4 Jan 2024 16:06:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id D1A198796F;
+	Thu,  4 Jan 2024 16:10:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="CNUople3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mAqGSimz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C77F8796B; Thu,  4 Jan 2024 16:06:47 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id B0C098796B; Thu,  4 Jan 2024 16:10:43 +0100 (CET)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 180A68797D
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:06:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BFC687977
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:10:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-40d4a7f0c4dso5820875e9.1
- for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 07:06:43 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-7815547f2c5so38069385a.3
+ for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 07:10:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1704380802; x=1704985602;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=hzQA0qfQqV4TQeCv8+sXMcpOdwwpO+ssUqed51yCVfM=;
- b=CNUople33hm74ZcyX+QdMdzOzJDWDSXUK+4aIiUdHjspBn+LW5z7dSTPP5yp/sEs+b
- 2TqPwEJzeTRYVsS9UUJY/mlEWjyXbIgsOMZTTYh/eNVVqRL+29/yEho/J9F8vDeOtVbx
- wJ8lPemv/otV7L3cDx2AGGetADG07/ZGN4cnLSkdbeoiWpfAFFIqUFkGzPpx11Q3LbKY
- ZnM9ILjGJH/DOEQ7DuRPlvD0xaISMlQ6XPBtp8oXqq+pYqwgODMB5wru5EUol4LA9xTS
- tI9LVMtT52Svuy1JwrjpzvpGN2/llhHUalCzYPjP6Vx4yeQh9XjSqbRNpoqBvZrX17F1
- BMFw==
+ d=chromium.org; s=google; t=1704381037; x=1704985837; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=t41rNPmd6X+JSbqYY4lnL73dQVJ7yu4WjKvKX2kHE6g=;
+ b=mAqGSimzqWPN5G3HnwuCRFXD7rW/Cb3h87U4PWDKEIQtXPuFKKZ56Rg6OfJvCQ/d50
+ HpTpPMfX2brduo5HPMendileLsUZjPWTvLf6cRfjAbXx1NKX0EH7d0mAmU0tK2tFfbzA
+ 49H6T0nokKrcyyHZNDxBPVWrtuQCW65S9aMZI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704380802; x=1704985602;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1704381037; x=1704985837;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hzQA0qfQqV4TQeCv8+sXMcpOdwwpO+ssUqed51yCVfM=;
- b=czGKnFPzx91TvxwFc32caNFFOmoW5d6jmmeD1KlYnUjokN0RQir9dQnNsya2unvkUk
- bzVwoT52KmXLud0TY5fCWr3D9XpEXfdRw9hA+VvdexxHH+kp982RchX7+sji2XS0MSFq
- QBKM57YHe/AT/hDDBdXfz4vQwxiWLu6JSmHP9GRJBr5ScnQ6sfLMRTAukv2PTv/MUPJ4
- 4iRaCp9HPtNznlQXcCag5nOVhBcsbOsHmy+rP+LrfcZV9KbvWXIjO+k7ZKkKwj/dtKBv
- 7xApTmhSCYfvZ9Y0SL4jJ/NOdF/V3/QUxBK557FWanqGJZ/JZHGoj3yd3Wv1K7hwlIvv
- kRQw==
-X-Gm-Message-State: AOJu0Yy8eCe3fJYzFj24QuQH9XF87ZIehkx9+C7mCO7GVwj36WXj9TDS
- uyQfmZRnWGzE/drk5NsGl/MsaH8yjVavGA==
-X-Google-Smtp-Source: AGHT+IEdjO6Z+2hx6C9+Yx6/TByuhpdpUVN0hIb9QKV1DTfFrIoC5IhfxPq3xBJb2kmfLPv6hf+fIA==
-X-Received: by 2002:a05:600c:350b:b0:40d:8987:eb06 with SMTP id
- h11-20020a05600c350b00b0040d8987eb06mr458236wmq.43.1704380802406; 
- Thu, 04 Jan 2024 07:06:42 -0800 (PST)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- m1-20020a05600c4f4100b0040d5b849f38sm6102166wmq.0.2024.01.04.07.06.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jan 2024 07:06:42 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Bin Meng <bmeng@tinylab.org>, Ion
- Agorria <ion@agorria.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Harald Seiler <hws@denx.de>, Sean Anderson <sean.anderson@seco.com>, Heiko
- Schocher <hs@denx.de>, Dmitrii Merkurev <dimorinny@google.com>, Patrick
- Delaunay <patrick.delaunay@foss.st.com>, Matthias Schiffer
- <matthias.schiffer@ew.tq-group.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v6 4/6] common: console: record console from the beginning
-In-Reply-To: <CAFLszTjA0_Cteg-L7VGQHysHBq5QH5YVgiVs3h2ODF532VpqoA@mail.gmail.com>
-References: <20231228180154.50473-1-clamor95@gmail.com>
- <20231228180154.50473-5-clamor95@gmail.com>
- <CAFLszThd95iSPMOBr_21_Zckg74BtgA23EVpfXQKqnArFc-UDQ@mail.gmail.com>
- <CAPVz0n3OwhrW41tV9x32UXyL6yZdLr8CU9S7XuTneDiwUQY7AQ@mail.gmail.com>
- <8734vg5afv.fsf@baylibre.com>
- <CAFLszTjmvpbxGguK+FuXZLO=kpYR4pVr4E27BGn1u0B-6uB2eQ@mail.gmail.com>
- <87le964mii.fsf@baylibre.com>
- <CAFLszTjA0_Cteg-L7VGQHysHBq5QH5YVgiVs3h2ODF532VpqoA@mail.gmail.com>
-Date: Thu, 04 Jan 2024 16:06:41 +0100
-Message-ID: <87ttntm932.fsf@baylibre.com>
+ bh=t41rNPmd6X+JSbqYY4lnL73dQVJ7yu4WjKvKX2kHE6g=;
+ b=fc3qvJEIUnb25cGrJmFUnSikkz72+Q+9DVFFw6Ta8YnQiKs+0bm1vVp9ItiSa9Qghl
+ voJcmnJLrJ4dlOoI10l5bvIszgVZVJRtE0BMc7Q+TpwHLFf2+B4rwBouW3WK0sTdSbQa
+ Jl7Jzl0h6QnJJu+thSx9KVWlSO3dbySZTrKLiT/up45KqoJ74US1PueCqT3pydklrMEz
+ noNUFjVzt2P27JLgjjV+YRMQ6D00IZ5WoGKUMjZetoUqLAw65awhA7EfjdFVsJB5L47/
+ yviiCCXquUv9PI4/6HSSQsve2h1NrrRlIKvEvfkBhtSrs226dLTzvHw3UWvPGHNSiUkz
+ NfUA==
+X-Gm-Message-State: AOJu0YxI4Hw38vuQNjVHP9kOg8LaXIJ/4vm2oY8OqTFS+BYklXVQ8LX4
+ G/PseR4/aWr0iNcQZapyacn7bNE8ZNn80JPJow45z7ci3x30
+X-Google-Smtp-Source: AGHT+IG9fjeWPrKiy//AKPsyFHPeXtbOC09DXd1oc8681XEpkJbgw/2bhdA72fU6h4muNEt20QnN3icC/UlJBkjchVY=
+X-Received: by 2002:ad4:5f07:0:b0:680:c741:2661 with SMTP id
+ fo7-20020ad45f07000000b00680c7412661mr747113qvb.92.1704381037162; Thu, 04 Jan
+ 2024 07:10:37 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+References: <20231002011553.463514-1-sjg@chromium.org>
+ <CAPnjgZ2Fnr7Pt6td29qbuLdWM+rO+Qm0_fsKt4d8y53J6z3KrA@mail.gmail.com>
+ <CAEUhbmWmYCjGgJdA7nNin+ObTq5-6kMNnSynuncWLB7Jg+3K5g@mail.gmail.com>
+ <CAFLszTgdzmGMC-mLNSYEtJGs4OstSSyV_qRk5c3WxWfFGdeLqw@mail.gmail.com>
+ <CAEUhbmUzvsHkP_GGFF4jjkSjZvsxsUU9Q2QhZuPWwb1ZY_VXxQ@mail.gmail.com>
+In-Reply-To: <CAEUhbmUzvsHkP_GGFF4jjkSjZvsxsUU9Q2QhZuPWwb1ZY_VXxQ@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 4 Jan 2024 08:10:26 -0700
+Message-ID: <CAFLszTgxaagXJBta_hL7C76zYp=x7=pjsB5eFc-i2RqgVi4msQ@mail.gmail.com>
+Subject: Re: [PATCH 00/34] x86: expo: Add support for editing coreboot CMOS
+ RAM settings
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Anatolij Gustschin <agust@denx.de>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Bin Meng <bmeng@tinylab.org>, Brandon Maier <brandon.maier@collins.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>, 
+ Dzmitry Sankouski <dsankouski@gmail.com>,
+ Evgeny Bachinin <EABachinin@sberdevices.ru>, 
+ Harald Seiler <hws@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerry Van Baren <vanbaren@cideas.com>, 
+ Linus Walleij <linus.walleij@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Michal Suchanek <msuchanek@suse.de>, Nikhil M Jain <n-jain1@ti.com>,
+ Peter Hoyes <Peter.Hoyes@arm.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Robert Marko <robimarko@gmail.com>, Sean Anderson <sean.anderson@seco.com>, 
+ Sean Edmond <seanedmond@microsoft.com>, Stefan Roese <sr@denx.de>, 
+ Stephen Carlson <stcarlso@linux.microsoft.com>,
+ Tobias Waldekranz <tobias@waldekranz.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,156 +106,187 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Bin,
 
-On mer., janv. 03, 2024 at 18:38, Simon Glass <sjg@chromium.org> wrote:
-
-> Hi Mattijs,
+On Thu, Jan 4, 2024 at 5:06=E2=80=AFAM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> On Wed, Jan 3, 2024 at 5:41=E2=80=AFAM Mattijs Korpershoek
-> <mkorpershoek@baylibre.com> wrote:
->>
->> Hi Simon,
->>
->> On Tue, Jan 02, 2024 at 07:06, Simon Glass <sjg@chromium.org> wrote:
->>
->> > Hi Mattijs,
->> >
->> > On Tue, Jan 2, 2024 at 2:52=E2=80=AFAM Mattijs Korpershoek
->> > <mkorpershoek@baylibre.com> wrote:
->> >>
->> >> Hi Simon, Svyatoslav,
->> >>
->> >> On Thu, Dec 28, 2023 at 21:52, Svyatoslav Ryhel <clamor95@gmail.com> =
-wrote:
->> >>
->> >> > =D1=87=D1=82, 28 =D0=B3=D1=80=D1=83=D0=B4. 2023=E2=80=AF=D1=80. =D0=
-=BE 21:48 Simon Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
->> >> >>
->> >> >> On Thu, Dec 28, 2023 at 6:02=E2=80=AFPM Svyatoslav Ryhel <clamor95=
-@gmail.com> wrote:
->> >> >> >
->> >> >> > From: Ion Agorria <ion@agorria.com>
->> >> >> >
->> >> >> > Set flag to enable console record on console_record_init
->> >> >> > and not only on console_record_reset_enable. This fixes
->> >> >> > missing start of U-Boot log for fastboot oem console
->> >> >> > command.
->> >> >> >
->> >> >> > Signed-off-by: Ion Agorria <ion@agorria.com>
->> >> >> > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
->> >> >> > Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->> >> >> > ---
->> >> >> >  common/console.c | 3 +++
->> >> >> >  1 file changed, 3 insertions(+)
->> >> >>
->> >> >> Reviewed-by: Simon Glass <sjg@chromium.org>
->> >> >>
->> >> >> OK, I can see the use of this...but I wonder if we can now get rid=
- of
->> >> >> the same line of code from console_record_reset_enable() ?
->> >> >>
->> >> >
->> >> > Interesting question but let's leave it to a dedicated patch :)
->> >>
->> >> I've looked a little more into to this, and I'm not so sure we can get
->> >> rid of the gd->flags |=3D GD_FLG_RECORD; in console_record_reset_enab=
-le().
->> >>
->> >> Removing the flag seems to break quite some tests in
->> >> test/py/tests/test_ut.py.
->> >>
->> >> The breakage can be explained that various unit tests clear the
->> >> GD_FLG_RECORD with:
->> >>
->> >>         gd->flags &=3D ~GD_FLG_RECORD;
->> >>
->> >> Therefore, I would suggest we keep the flag in
->> >> console_record_reset_enable().
->> >
->> > From my look all of those are not needed in tests, i.e. are bugs. If
->> > you are able to do a patch to remove those lines, it would avoid the
->> > confusion.
->>
->> With gd->flags |=3D GD_FLG_RECORD removed from
->> console_record_reset_enable(),
->>
->> When I run:
->> $ ./test/py/test.py --bd sandbox --build -k ut
->>
->> It produces this list of the the tests that fail:
->> https://paste.debian.net/1302906/
->>
->> I can also reproduce individually with a bootflow test, for example:
->> $ ./test/py/test.py --bd sandbox --build -k ut_bootstd_bootflow_cmd_boot
->>
->> Produces:
->> https://paste.debian.net/1302907/
->>
->> I did not investigate more on detail but it seems not trivial to me.
+> Hi Simon,
 >
-> Did you add UT_TESTF_CONSOLE_REC to each test as well?
-
-Here are the steps I did:
-1. Take base commit dffa6d0210f5 ("Merge tag 'dm-next-1124' of https://sour=
-ce.denx.de/u-boot/custodians/u-boot-dm into next")
-2. Apply series: b4 shazam 20231228180154.50473-1-clamor95@gmail.com
-3. Run bootflow_cmd_boot test, which passes.
-4. Apply the following diff:
-
-diff --git a/common/console.c b/common/console.c
-index cad65891fc9f..1bff80029266 100644
---- a/common/console.c
-+++ b/common/console.c
-@@ -837,7 +837,6 @@ void console_record_reset(void)
- int console_record_reset_enable(void)
- {
-        console_record_reset();
--       gd->flags |=3D GD_FLG_RECORD;
-=20
-        return 0;
- }
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 104f49deef2a..6a98f42f2707 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -482,7 +482,6 @@ BOOTSTD_TEST(bootflow_scan_glob_bootmeth, UT_TESTF_DM |=
- UT_TESTF_SCAN_FDT);
- /* Check 'bootflow boot' to boot a selected bootflow */
- static int bootflow_cmd_boot(struct unit_test_state *uts)
- {
--       console_record_reset_enable();
-        ut_assertok(run_command("bootdev select 1", 0));
-        ut_assert_console_end();
-        ut_assertok(run_command("bootflow scan", 0));
-@@ -506,7 +505,7 @@ static int bootflow_cmd_boot(struct unit_test_state *ut=
-s)
-=20
-        return 0;
- }
--BOOTSTD_TEST(bootflow_cmd_boot, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
-+BOOTSTD_TEST(bootflow_cmd_boot, UT_TESTF_DM | UT_TESTF_SCAN_FDT | UT_TESTF=
-_CONSOLE_REC);
-=20
- /**
-  * prep_mmc_bootdev() - Set up an mmc bootdev so we can access other distr=
-os
-
-5. Run bootflow_cmd_boot test, which now fails.
-
+> On Sun, Dec 31, 2023 at 8:43=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
+ote:
+> >
+> > Hi Bin,
+> >
+> > On Sun, Dec 31, 2023 at 2:59=E2=80=AFAM Bin Meng <bmeng.cn@gmail.com> w=
+rote:
+> > >
+> > > Hi Simon,
+> > >
+> > > On Wed, Nov 15, 2023 at 9:24=E2=80=AFPM Simon Glass <sjg@chromium.org=
+> wrote:
+> > > >
+> > > > Hi Bin,
+> > > >
+> > > > On Sun, 1 Oct 2023 at 19:16, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > U-Boot provides support for editing settings with an 'expo', as w=
+ell as
+> > > > > reading and writing settings to CMOS RAM.
+> > > > >
+> > > > > This series integrates expo functionality with coreboot, using th=
+e
+> > > > > sysinfo table to get a list of settings, creating an expo with th=
+em and
+> > > > > allowing them to be edited.
+> > > > >
+> > > > > A new CI test provides coverage for some coreboot-related command=
+s. For
+> > > > > this to work, a number of minor tweaks are made to existing tests=
+, so
+> > > > > that they pass on coreboot (x86) or at least are skipped when the=
+y
+> > > > > cannot pass. Likely most of these fixes will apply to other board=
+s too.
+> > > > >
+> > > > > It includes several other fixes and improvements:
+> > > > > - new -m flag for 'bootflow scan' so it can display a menu automa=
+tically
+> > > > > - Fix for video-scrolling crash with Truetype
+> > > > > - menu items can now have individual integer values
+> > > > > - menu items are lined up according to the width of all menu labe=
+ls
+> > > > >
+> > > > >
+> > > > > Simon Glass (34):
+> > > > >   test: Run tests that don't need devices
+> > > > >   test: Add a new suite for commands
+> > > > >   test: Add helper to skip to partial console line
+> > > > >   test: Make UT_LIB_ASN1 depend on sandbox
+> > > > >   test: Run bootstd tests only on sandbox
+> > > > >   test: Handle use of stack pointer in bdinfo
+> > > > >   test: bdinfo: Add missing asserts
+> > > > >   test: fdt: Add a special case for real boards
+> > > > >   test: font: Add dependencies on fonts
+> > > > >   test: event: Only run test_event_probe() on sandbox
+> > > > >   test: lmb: Move tests into the lib suite
+> > > > >   test: print: Skip test on x86
+> > > > >   video: Add a function to clear the display
+> > > > >   sandbox: Add a dummy booti command
+> > > > >   bootstd: Add a menu option to bootflow scan
+> > > > >   video: Add a dark-grey console colour
+> > > > >   video: Avoid starting a new line to close to the bottom
+> > > > >   expo: Place menu items to the right of all labels
+> > > > >   expo: Set the initial next_id to 1
+> > > > >   expo: Use standard numbering for save and discard
+> > > > >   expo: Allow menu items to have values
+> > > > >   expo: Add a little more cedit CMOS logging
+> > > > >   expo: Support menu-item values in cedit
+> > > > >   expo: Drop unneceesary calls to expo_str()
+> > > > >   expo: Drop scene_title_set()
+> > > > >   expo: Add forward declaration for udevice to cedit
+> > > > >   x86: coreboot: Enable unit tests
+> > > > >   x86: CI: Update coreboot
+> > > > >   x86: coreboot: Add a test for cbsysinfo command
+> > > > >   x86: coreboot: Show the option table
+> > > > >   x86: coreboot: Enable support for the configuration editor
+> > > > >   x86: coreboot: Add a command to check and update CMOS RAM
+> > > > >   x86: coreboot: Allow building an expo for editing CMOS config
+> > > > >   x86: Enable RTC command by default
+> > > > >
+> > > > >  .azure-pipelines.yml              |   2 +-
+> > > > >  .gitlab-ci.yml                    |   2 +-
+> > > > >  arch/sandbox/dts/cedit.dtsi       |   3 +
+> > > > >  arch/sandbox/lib/bootm.c          |   7 +
+> > > > >  arch/x86/dts/coreboot.dts         |   7 +
+> > > > >  boot/Makefile                     |   4 +
+> > > > >  boot/cedit.c                      | 191 +++++++++++++++--------
+> > > > >  boot/expo.c                       |   3 +
+> > > > >  boot/expo_build.c                 |  36 ++---
+> > > > >  boot/expo_build_cb.c              | 244 ++++++++++++++++++++++++=
+++++++
+> > > > >  boot/scene.c                      |  61 ++++++--
+> > > > >  boot/scene_internal.h             |  30 +++-
+> > > > >  boot/scene_menu.c                 |  26 +++-
+> > > > >  boot/scene_textline.c             |   3 +-
+> > > > >  cmd/Kconfig                       |  14 +-
+> > > > >  cmd/bootflow.c                    |  27 +++-
+> > > > >  cmd/booti.c                       |   2 +-
+> > > > >  cmd/cedit.c                       |  28 ++++
+> > > > >  cmd/cls.c                         |  25 +--
+> > > > >  cmd/x86/Makefile                  |   1 +
+> > > > >  cmd/x86/cbcmos.c                  | 141 +++++++++++++++++
+> > > > >  cmd/x86/cbsysinfo.c               |  73 ++++++++-
+> > > > >  common/console.c                  |  31 ++++
+> > > > >  configs/coreboot64_defconfig      |   2 +
+> > > > >  configs/coreboot_defconfig        |   6 +
+> > > > >  configs/tools-only_defconfig      |   3 +-
+> > > > >  doc/board/coreboot/coreboot.rst   |   6 +
+> > > > >  doc/develop/cedit.rst             |   9 +-
+> > > > >  doc/develop/expo.rst              |  26 +++-
+> > > > >  doc/usage/cmd/bootflow.rst        |   5 +
+> > > > >  doc/usage/cmd/cbcmos.rst          |  45 ++++++
+> > > > >  doc/usage/cmd/cbsysinfo.rst       |  99 ++++++++++++
+> > > > >  doc/usage/cmd/cedit.rst           |  91 ++++++++++-
+> > > > >  doc/usage/index.rst               |   1 +
+> > > > >  drivers/video/vidconsole-uclass.c |   4 +-
+> > > > >  drivers/video/video-uclass.c      |   3 +
+> > > > >  include/cedit.h                   |   1 +
+> > > > >  include/console.h                 |  10 ++
+> > > > >  include/expo.h                    |  51 +++++--
+> > > > >  include/test/cedit-test.h         |  30 ++--
+> > > > >  include/test/cmd.h                |  15 ++
+> > > > >  include/test/suites.h             |   1 +
+> > > > >  include/test/ut.h                 |  30 ++++
+> > > > >  include/video.h                   |   4 +-
+> > > > >  include/video_console.h           |   8 +
+> > > > >  test/Kconfig                      |   6 +
+> > > > >  test/Makefile                     |   2 +-
+> > > > >  test/boot/bootflow.c              |  82 ++++++++++
+> > > > >  test/boot/cedit.c                 |  22 ++-
+> > > > >  test/boot/expo.c                  |  26 +++-
+> > > > >  test/boot/files/expo_ids.h        |   3 +-
+> > > > >  test/boot/files/expo_layout.dts   |   5 +-
+> > > > >  test/cmd/Makefile                 |   3 +
+> > > > >  test/cmd/bdinfo.c                 |  23 ++-
+> > > > >  test/cmd/cmd_ut_cmd.c             |  21 +++
+> > > > >  test/cmd/coreboot.c               | 120 +++++++++++++++
+> > > > >  test/cmd/fdt.c                    |   8 +-
+> > > > >  test/cmd/font.c                   |   6 +-
+> > > > >  test/cmd_ut.c                     |   8 +-
+> > > > >  test/common/event.c               |   3 +
+> > > > >  test/lib/lmb.c                    |  36 ++---
+> > > > >  test/print_ut.c                   |   8 +
+> > > > >  test/test-main.c                  |   3 +-
+> > > > >  test/ut.c                         |  27 ++++
+> > > > >  tools/expo.py                     |  33 +++-
+> > > > >  65 files changed, 1640 insertions(+), 216 deletions(-)
+> > > > >  create mode 100644 boot/expo_build_cb.c
+> > > > >  create mode 100644 cmd/x86/cbcmos.c
+> > > > >  create mode 100644 doc/usage/cmd/cbcmos.rst
+> > > > >  create mode 100644 include/test/cmd.h
+> > > > >  create mode 100644 test/cmd/cmd_ut_cmd.c
+> > > > >  create mode 100644 test/cmd/coreboot.c
+> > > > >
+> > > > > --
+> > > > > 2.42.0.582.g8ccd20d70d-goog
+> > > > >
+> > > >
+> > > > Any thoughts on this series, please?
+> > >
+> > > applied patch#16-26 on u-boot-x86, thanks!
+> > >
+> > > Would you please rebase patch#27-34?
+> >
+> > The series is based on things applied to -next and it is a bit late
+> > for master. Can you try on that?
+> >
 >
->
->>
->> I can continue the investigation in the coming weeks but I would like
->> to apply this series this week.
->>
->> >
->> > Also, by setting UT_TESTF_CONSOLE_REC for a test, console recording is
->> > set up automatically, so the console_record_reset_enable() is not
->> > needed at the start of the test.
->>
->> I was not aware of that, thank you.
->>
->> >
->> > Regards,
->> > Simon
+> I tried that but it still fails at applying patch #27.
+
+I think you are missing the prior series[1]. I will resent both,
+rebased to -next
+
+Regards,
+Simon
+
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=3D382863
