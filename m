@@ -4,175 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1BBAC47074
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 12:00:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F26F7C47074
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 12:06:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11A9287952;
-	Thu,  4 Jan 2024 13:00:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 10E0387952;
+	Thu,  4 Jan 2024 13:06:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="tiSRf6Zx";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XYQIKayN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D77887950; Thu,  4 Jan 2024 13:00:28 +0100 (CET)
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com
- (mail-bn1nam02on20606.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eb2::606])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8BD0A87949; Thu,  4 Jan 2024 13:06:03 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4A1487954
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 13:00:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 74F6487952
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 13:06:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fwjGIxqLFhPnnXYGbQ7SQ7KBWEk4muB1wWtnJ6sW3tgvQjV4T8OjU/sVIU2KURnoasH/vuBDUyih43GF8OPRcsWG6gw2I6JYt2O+ldvahNsO2DA0yVKbVGKbQ3v9lNLg08jSpUpvlQw6q2M2y0OlOl4CYkF7rUurZLkq6hNAplSF+qU7DwOQ8jYtehfrK1rZQm6NU3mX2aSECSXphFgHrDHsbDbA7dlibivIp+bcJ6icwwjeZEDLwVnDw4Eo3VzupqDdv/gOqC2tRXnuRxijFKLdnLQ1cQrYPgNWJrQwSkFFheHZSNEDPNGv11iitvKmffdNcgeebdZQJ2ChSKVxSg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CLUSyKwaVmKw4LruhrylMtaHUQ+ClHNizdy5kpleW4A=;
- b=QaJ6wQEyUIPtrKCa5ryL/pqpj+nj/xzkduxm8/JeD1pDlGr1J6h/PEeg0Sy8UZuh09yfrGX1Qgw5P1ADk0sbOLK4EbNvkK/gof2rJYdXkR9/KAt6Tz294v3Pdm/ULs2zxVoYPZmhf3XMlIQBZqBCSoh7Gp39M5h6naP3renDOl2CW+c+4TtjBheTbcb/JYVsOHJuNariR5sKy4VHwsujKoL+gTS/wKPVXXo1XD1Mn2j6/s8CgsKpwIEOB+32Gej290Zq2VUx5LdrGb0ZmCR9WoGFfAta7bC8ESGAfkhCMAA4AGmr5bWjh4HJDuE38UgN430Jqsa+jzf56gFvNDISnA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CLUSyKwaVmKw4LruhrylMtaHUQ+ClHNizdy5kpleW4A=;
- b=tiSRf6Zx19lhSo4+26c2GQmp8atA/vVHFhWzGej0o1S75l2aWnT/1JtLSnhMLvnzJ4PQrN60Dy49M+4CBmlqFwAbY2SJow735a6p/8Tr6ZKVszmSfshS30RGW6Fr5RYDW5oL5k/wRRJlxgV4KYAGlUk9f5S84HCvT0qqXet3MkI=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from CYXPR12MB9337.namprd12.prod.outlook.com (2603:10b6:930:d8::20)
- by DM4PR12MB7598.namprd12.prod.outlook.com (2603:10b6:8:10a::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.16; Thu, 4 Jan
- 2024 12:00:19 +0000
-Received: from CYXPR12MB9337.namprd12.prod.outlook.com
- ([fe80::2b19:2045:59c7:cde2]) by CYXPR12MB9337.namprd12.prod.outlook.com
- ([fe80::2b19:2045:59c7:cde2%7]) with mapi id 15.20.7159.013; Thu, 4 Jan 2024
- 12:00:19 +0000
-Message-ID: <45cc3cf3-4120-460d-b275-fc019156ce20@amd.com>
-Date: Thu, 4 Jan 2024 13:00:08 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] cmd: sf: Fix sf probe crash
-Content-Language: en-US
-To: Weizhao Ouyang <o451686892@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
-References: <20240104114619.280513-1-o451686892@gmail.com>
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20240104114619.280513-1-o451686892@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR09CA0095.eurprd09.prod.outlook.com
- (2603:10a6:803:78::18) To CYXPR12MB9337.namprd12.prod.outlook.com
- (2603:10b6:930:d8::20)
+ spf=pass smtp.mailfrom=bmeng.cn@gmail.com
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a28cc85e6b5so52258666b.1
+ for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 04:06:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1704369960; x=1704974760; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fscfIVaJqM2BoUzF6kTD5W6hPRmElGQO730dQIRNmFk=;
+ b=XYQIKayNrrZfLI8jgd6kAM+VLPpyVnR3cL26c/ds+cMa2N4pPIy3xQ2nAlFEofPsmD
+ tYEGiU7k9jl39Yn3bkgz5SxNAmPMXuA3m8HmkEtro1JGhAT8h9QeK54dDNrYdqehMtJq
+ QI7uM1vmyaqmxrM7uhMvBvqHQXZzEWq4W0ZdcOPGJKtJAMW814fdgFQch0LpkQ3FuI9p
+ DbM97A61jDhjeUtXU3L0E7OPecOPB/qgbOOAYXXe160435aUfekZ8eETnLRV6Rclt1vA
+ F8rAk2fvgg4vYkkwohUnJ5vVVf20I5vZqob98lCOpoW97BnyFny5iAT/oZY/e2Nev6fQ
+ ykLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704369960; x=1704974760;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=fscfIVaJqM2BoUzF6kTD5W6hPRmElGQO730dQIRNmFk=;
+ b=ktgRnZkHjysPaQvSS7FNNGtrY+iwMW4BEaixroI9lrixPgcgri1gfeoKwlcEzf3xar
+ 0/sqaW5+oMNhAPbcarM1PzKuLJQ7qxVbO/azHgnWgcXDJyHf+0lxYMXSJVcwfhNVvoXA
+ Rw8ePfIyIhPd40n7w9G1Nijo5S/kzkBuNwpJ3ZGhTUtAYX4rWMC1fXvkSG+vniOJljU3
+ BVi9rhWIevs/f0PBYIaizQDIEWb3gUdUcDZ36AnGW+JzJLlPdPHCl6/BOQcmnj7PDNzX
+ 58tmOcsRV45KWHegZ+AyDA7k7NPVrXFwLp73fa5YHjPibvANSCOUGO3UMrpwgl/VuZqn
+ S8iA==
+X-Gm-Message-State: AOJu0Yx7lx0vR2tt76VvceKuuJ4gtTcTnxEbvnnR6pSfj4Qbgj1xCm1g
+ oPOGcexiZouWkgwC365sVHVvXdqM+OFmHpCJ1yY=
+X-Google-Smtp-Source: AGHT+IGVGUC0mNZXW/3xoiyzwv+mPgX3GaoaKR4H+6iX5O9Ga5ZKZVlBxJZtFdnd//o4tl8VA0fdz+oSGgUCY1FCs8U=
+X-Received: by 2002:a17:906:c291:b0:a28:b12:58f9 with SMTP id
+ r17-20020a170906c29100b00a280b1258f9mr197643ejz.136.1704369959558; Thu, 04
+ Jan 2024 04:05:59 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CYXPR12MB9337:EE_|DM4PR12MB7598:EE_
-X-MS-Office365-Filtering-Correlation-Id: ceb754e6-a704-4fae-5895-08dc0d1cb91d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: SY8jAp9q0icJxM86NE5ulUfYa73zK5FGwrkBvohWzGci7cNZf/XwMIPa7h0tVVRUAb5A/QZr2vcD3kv/HFIC0pmsa9/x6noxKUd1ySPCmEvxJkWQdHPPE5TQajZ6QsyKdoFVwfdO3SwH8ape9l69l49ZlYnxMxjmnsfyyzeALgNUGJKTUtpXi4WwW5CrTbyrAFbr2nVuNa66ZaNn2DS+fGyJzBw9uKkyQ3R+La8aoZO2YZUhrspWFYCeTao+EhBaBc9vDVmocvqJ2NW7U5U1A+VLbEqSjla+VwIOsWkZAOBqO31lp68JMzT4f8OJBonM3NjWsgGNkD6dJS3d77hokRYNAAv4d12MMNuFqp0tmnWlDAJZlywdL0O9/YUYZkgp7/xhebxMooRIit5KMcKxuiSsIizCVD3fhuNuOgjzpkCZLBCg/f8uKf5CBrD1Tt6PR6Yih/CfDZfzUbGzAYuMDyM35sYp4mEBeXxcFfzXOA6ZXDkVdePNReBVDots8H1eizLt0d/9w0kRWr6YiycFacB/FfXfpc3781OkCWs7hc7ugu1o684h0IB4i1iEd5ZixeB8Wq9x9vcTqtNYEDThyg7v3AeFT9ygNzpMcRKW3f79HF2O3EDsJrag4hgv/TZhtO9abYTpKFgRSbNctRMmlw==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CYXPR12MB9337.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(346002)(366004)(39860400002)(396003)(376002)(136003)(230922051799003)(64100799003)(451199024)(186009)(1800799012)(31686004)(2616005)(53546011)(6506007)(6666004)(6512007)(478600001)(6486002)(26005)(38100700002)(36756003)(86362001)(31696002)(4744005)(2906002)(5660300002)(41300700001)(83380400001)(66946007)(66556008)(66476007)(316002)(110136005)(44832011)(8676002)(8936002)(43740500002)(45980500001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Q01ETEtuKzVpWFdwSmxIMjJpYy9abWN1a044VTFvbkRXVW55MGFSVThZQ3pY?=
- =?utf-8?B?eGY4L0N4UEg2VlNsRU5BTzUvNGhyQWxYOStRaGs2NW9wM0JmV3lybGRXZDhQ?=
- =?utf-8?B?ejR3NFZVdG55NmlNeHdRNDc4aks5S3FnWUkxZHZZMVo0MkdNbFEweVQyYkxu?=
- =?utf-8?B?S1V5R1o4cC9zeU9XZHYwRUNtQlpVWnh6SVF3bVNjU0NpVDIxaGpCMU9VdUMx?=
- =?utf-8?B?N3duaWwyN25NS2RyOFN1OWZjUitsYjdrYjBhM1JHOEpQeFpRMDVvRFJTVUdD?=
- =?utf-8?B?MFNyRHM0WlRFNnl1bjNFZEJGczZheWlnWXBYNVhRUnRTcFJxeUJIb0VONzZo?=
- =?utf-8?B?S3NVOG9PZ2QrcGlPZVdnUjJuYmdrYzBiYTZrZkdjZFVXeWdQdm8xSStucm1H?=
- =?utf-8?B?YUo5UDBRK2p6aURMQjFsY0RiQURwaThVQVNiRFU3QmQzR2l3MENrWEx4R0lJ?=
- =?utf-8?B?OVZvcXQ4NnFHY0ZWdXRBUFg0eWZyR0YwQnpkeVZNNy9CSW8vRjBkQVFQVmpW?=
- =?utf-8?B?QUowT3crc0wzRXAvQlV3b3FaeFhZK0g3TE5ZNitKZGtqOXQzN2VkNVJ4Qk00?=
- =?utf-8?B?KzN4dHdlMEdNaUQwR0xmSUV1OVpXS2JIK1g4UkxBdTQ5Q0VhV2dFQmZxT1JC?=
- =?utf-8?B?NnA5WC80RE1PSG00eXZwMVVjanBrMk8wR1NicmJNVUZzbDFQVXA5UlRCUFJY?=
- =?utf-8?B?eXRPWjl3MERZVHI1a1ArcjFlNzhGTFJUMXJDdzVFTUlLSnBrbWdXL2wyQ21G?=
- =?utf-8?B?UTJnWEpsOEVoS1FTN2FQZ3RteEQxbG8wb3QxS3B1c2FkUUJRWWJ0QllqTStJ?=
- =?utf-8?B?T014dytHQTg4SVBrOC9xM0ozR2JyL1k0SWlLV0xLL0tZWGtEREE1cU9JcXBj?=
- =?utf-8?B?b2IrdnFDLzBqS3V4UkcxSFhzUEcxMUx0aE9MYjBLN2UrdDFNTXdCN215R0Ru?=
- =?utf-8?B?K0M5WG9YUXBYSnYyVUtuSHJFRDhmd28vMFdaUHYvWHNyZ3JoOUtvRHJaa1V4?=
- =?utf-8?B?N2d4bW1rT1VBa01xbU1QV3FqejNnTVJ5OWgwU2FJY0RWZTJkMStaMUhoQ0ZO?=
- =?utf-8?B?WFFxNm05STFvYWFYVm5RK3lkdTFoLzJPYVJvSmpDampTSHMxZkVVRzIvS1Jr?=
- =?utf-8?B?YjhTcFlnVDhOSlhYajJXQXorWDdzWm92T0NCVGU0bDY2ZzVOb3RCQTJhK0pN?=
- =?utf-8?B?VjNyTG5BN3VoWk9OckN4NVA2RGwwSjdIR2pyQjF5ekw3ZmdUZisyOW5HYWtT?=
- =?utf-8?B?WUcxWk5qZ1NUWDVvVE9LbUFySkRaWFc0RU1tOWNXekFVOEx2K0dHUXhaeFIx?=
- =?utf-8?B?V2kwbFkyRWw4SXl6Tm5OanVpSEh3U3h5VVdjMjM0L1BJb1Y3UlFvSm14VFRs?=
- =?utf-8?B?NWtPc1p1dTZkdG84bkpjcjkxZ2dyN3I4SFlvaTZSSmlQWUk3dSs2cGpjdHlM?=
- =?utf-8?B?T2JKOUJTYW91SVpMaktnQWRFa29FdXJGTmxZd3JON2s1MDJFTjM5eHZnL0tN?=
- =?utf-8?B?R01pdHladzU5dnFLZHlFS1hGUWI4MnhNY3g4L1NlSVY0V25SRTZ0UDBMc1o5?=
- =?utf-8?B?MUttc21wWXVFSlFjZjZaT0VqeFltWXFvQ1VycE1iV0RWL2ZNZHBxSTIxWFcy?=
- =?utf-8?B?aEY5c0VWbTNQN1d2NldkOHQzK0xWaVJjQyszQkxmazdSRVM5MDVjV2liL1pL?=
- =?utf-8?B?MVlpWjhGVWlIYUVPMUxMRHc1NHp5U3pxRHlLY3BvRzFaTVdWUFB6ODlhRmtn?=
- =?utf-8?B?c2FnU1M2VGdSWXF0ekpvVkxsamg2cG1QTXRWOTZmL3Zwb09vMTRoYWhHd1dQ?=
- =?utf-8?B?ZmlsTGFLdXJjYm5HNFRoM0JMbEl0TVJ6NnlhTVNTWUo1R00rcHZRQXJHVVNs?=
- =?utf-8?B?cGN5elVpN2VXQm9CVFBoM25zSWJxOGRIZGZ3Y0J0aEJ4TW1NTVFxNVZmcXpx?=
- =?utf-8?B?UWZtUkhUUjRCWDNBTmp1Vk9EeGhjNG1TYUJOYnFvYkF6eDJBNjZSbkUzTCsw?=
- =?utf-8?B?WWpldjhtUDV4eFNHb1AzaWo1UUtKUElHdi9VQjBMcmhFeC96WDdJZHdxdUdE?=
- =?utf-8?B?ZDNuaUtiUDkvTDNMdExEWms0Y0xkU0dPazZIbGlEUFVnUkhTSkNpMHM0Q2Y5?=
- =?utf-8?Q?yjAXQSyENssXnGPCqR5ZJhmYY?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ceb754e6-a704-4fae-5895-08dc0d1cb91d
-X-MS-Exchange-CrossTenant-AuthSource: CYXPR12MB9337.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jan 2024 12:00:19.8288 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 6hRZplT+wsBxSGY6F+0bUEv5qKezYcb97ctVI4h+27GIsBkWFaqiOqkefZrM9Y+w
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7598
+References: <20231002011553.463514-1-sjg@chromium.org>
+ <CAPnjgZ2Fnr7Pt6td29qbuLdWM+rO+Qm0_fsKt4d8y53J6z3KrA@mail.gmail.com>
+ <CAEUhbmWmYCjGgJdA7nNin+ObTq5-6kMNnSynuncWLB7Jg+3K5g@mail.gmail.com>
+ <CAFLszTgdzmGMC-mLNSYEtJGs4OstSSyV_qRk5c3WxWfFGdeLqw@mail.gmail.com>
+In-Reply-To: <CAFLszTgdzmGMC-mLNSYEtJGs4OstSSyV_qRk5c3WxWfFGdeLqw@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 4 Jan 2024 20:05:47 +0800
+Message-ID: <CAEUhbmUzvsHkP_GGFF4jjkSjZvsxsUU9Q2QhZuPWwb1ZY_VXxQ@mail.gmail.com>
+Subject: Re: [PATCH 00/34] x86: expo: Add support for editing coreboot CMOS
+ RAM settings
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Anatolij Gustschin <agust@denx.de>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Bin Meng <bmeng@tinylab.org>, Brandon Maier <brandon.maier@collins.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>, 
+ Dzmitry Sankouski <dsankouski@gmail.com>,
+ Evgeny Bachinin <EABachinin@sberdevices.ru>, 
+ Harald Seiler <hws@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerry Van Baren <vanbaren@cideas.com>, 
+ Linus Walleij <linus.walleij@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Michal Suchanek <msuchanek@suse.de>, Nikhil M Jain <n-jain1@ti.com>,
+ Peter Hoyes <Peter.Hoyes@arm.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Robert Marko <robimarko@gmail.com>, Sean Anderson <sean.anderson@seco.com>, 
+ Sean Edmond <seanedmond@microsoft.com>, Stefan Roese <sr@denx.de>, 
+ Stephen Carlson <stcarlso@linux.microsoft.com>,
+ Tobias Waldekranz <tobias@waldekranz.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -189,34 +109,175 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
+On Sun, Dec 31, 2023 at 8:43=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi Bin,
+>
+> On Sun, Dec 31, 2023 at 2:59=E2=80=AFAM Bin Meng <bmeng.cn@gmail.com> wro=
+te:
+> >
+> > Hi Simon,
+> >
+> > On Wed, Nov 15, 2023 at 9:24=E2=80=AFPM Simon Glass <sjg@chromium.org> =
+wrote:
+> > >
+> > > Hi Bin,
+> > >
+> > > On Sun, 1 Oct 2023 at 19:16, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > U-Boot provides support for editing settings with an 'expo', as wel=
+l as
+> > > > reading and writing settings to CMOS RAM.
+> > > >
+> > > > This series integrates expo functionality with coreboot, using the
+> > > > sysinfo table to get a list of settings, creating an expo with them=
+ and
+> > > > allowing them to be edited.
+> > > >
+> > > > A new CI test provides coverage for some coreboot-related commands.=
+ For
+> > > > this to work, a number of minor tweaks are made to existing tests, =
+so
+> > > > that they pass on coreboot (x86) or at least are skipped when they
+> > > > cannot pass. Likely most of these fixes will apply to other boards =
+too.
+> > > >
+> > > > It includes several other fixes and improvements:
+> > > > - new -m flag for 'bootflow scan' so it can display a menu automati=
+cally
+> > > > - Fix for video-scrolling crash with Truetype
+> > > > - menu items can now have individual integer values
+> > > > - menu items are lined up according to the width of all menu labels
+> > > >
+> > > >
+> > > > Simon Glass (34):
+> > > >   test: Run tests that don't need devices
+> > > >   test: Add a new suite for commands
+> > > >   test: Add helper to skip to partial console line
+> > > >   test: Make UT_LIB_ASN1 depend on sandbox
+> > > >   test: Run bootstd tests only on sandbox
+> > > >   test: Handle use of stack pointer in bdinfo
+> > > >   test: bdinfo: Add missing asserts
+> > > >   test: fdt: Add a special case for real boards
+> > > >   test: font: Add dependencies on fonts
+> > > >   test: event: Only run test_event_probe() on sandbox
+> > > >   test: lmb: Move tests into the lib suite
+> > > >   test: print: Skip test on x86
+> > > >   video: Add a function to clear the display
+> > > >   sandbox: Add a dummy booti command
+> > > >   bootstd: Add a menu option to bootflow scan
+> > > >   video: Add a dark-grey console colour
+> > > >   video: Avoid starting a new line to close to the bottom
+> > > >   expo: Place menu items to the right of all labels
+> > > >   expo: Set the initial next_id to 1
+> > > >   expo: Use standard numbering for save and discard
+> > > >   expo: Allow menu items to have values
+> > > >   expo: Add a little more cedit CMOS logging
+> > > >   expo: Support menu-item values in cedit
+> > > >   expo: Drop unneceesary calls to expo_str()
+> > > >   expo: Drop scene_title_set()
+> > > >   expo: Add forward declaration for udevice to cedit
+> > > >   x86: coreboot: Enable unit tests
+> > > >   x86: CI: Update coreboot
+> > > >   x86: coreboot: Add a test for cbsysinfo command
+> > > >   x86: coreboot: Show the option table
+> > > >   x86: coreboot: Enable support for the configuration editor
+> > > >   x86: coreboot: Add a command to check and update CMOS RAM
+> > > >   x86: coreboot: Allow building an expo for editing CMOS config
+> > > >   x86: Enable RTC command by default
+> > > >
+> > > >  .azure-pipelines.yml              |   2 +-
+> > > >  .gitlab-ci.yml                    |   2 +-
+> > > >  arch/sandbox/dts/cedit.dtsi       |   3 +
+> > > >  arch/sandbox/lib/bootm.c          |   7 +
+> > > >  arch/x86/dts/coreboot.dts         |   7 +
+> > > >  boot/Makefile                     |   4 +
+> > > >  boot/cedit.c                      | 191 +++++++++++++++--------
+> > > >  boot/expo.c                       |   3 +
+> > > >  boot/expo_build.c                 |  36 ++---
+> > > >  boot/expo_build_cb.c              | 244 ++++++++++++++++++++++++++=
+++++
+> > > >  boot/scene.c                      |  61 ++++++--
+> > > >  boot/scene_internal.h             |  30 +++-
+> > > >  boot/scene_menu.c                 |  26 +++-
+> > > >  boot/scene_textline.c             |   3 +-
+> > > >  cmd/Kconfig                       |  14 +-
+> > > >  cmd/bootflow.c                    |  27 +++-
+> > > >  cmd/booti.c                       |   2 +-
+> > > >  cmd/cedit.c                       |  28 ++++
+> > > >  cmd/cls.c                         |  25 +--
+> > > >  cmd/x86/Makefile                  |   1 +
+> > > >  cmd/x86/cbcmos.c                  | 141 +++++++++++++++++
+> > > >  cmd/x86/cbsysinfo.c               |  73 ++++++++-
+> > > >  common/console.c                  |  31 ++++
+> > > >  configs/coreboot64_defconfig      |   2 +
+> > > >  configs/coreboot_defconfig        |   6 +
+> > > >  configs/tools-only_defconfig      |   3 +-
+> > > >  doc/board/coreboot/coreboot.rst   |   6 +
+> > > >  doc/develop/cedit.rst             |   9 +-
+> > > >  doc/develop/expo.rst              |  26 +++-
+> > > >  doc/usage/cmd/bootflow.rst        |   5 +
+> > > >  doc/usage/cmd/cbcmos.rst          |  45 ++++++
+> > > >  doc/usage/cmd/cbsysinfo.rst       |  99 ++++++++++++
+> > > >  doc/usage/cmd/cedit.rst           |  91 ++++++++++-
+> > > >  doc/usage/index.rst               |   1 +
+> > > >  drivers/video/vidconsole-uclass.c |   4 +-
+> > > >  drivers/video/video-uclass.c      |   3 +
+> > > >  include/cedit.h                   |   1 +
+> > > >  include/console.h                 |  10 ++
+> > > >  include/expo.h                    |  51 +++++--
+> > > >  include/test/cedit-test.h         |  30 ++--
+> > > >  include/test/cmd.h                |  15 ++
+> > > >  include/test/suites.h             |   1 +
+> > > >  include/test/ut.h                 |  30 ++++
+> > > >  include/video.h                   |   4 +-
+> > > >  include/video_console.h           |   8 +
+> > > >  test/Kconfig                      |   6 +
+> > > >  test/Makefile                     |   2 +-
+> > > >  test/boot/bootflow.c              |  82 ++++++++++
+> > > >  test/boot/cedit.c                 |  22 ++-
+> > > >  test/boot/expo.c                  |  26 +++-
+> > > >  test/boot/files/expo_ids.h        |   3 +-
+> > > >  test/boot/files/expo_layout.dts   |   5 +-
+> > > >  test/cmd/Makefile                 |   3 +
+> > > >  test/cmd/bdinfo.c                 |  23 ++-
+> > > >  test/cmd/cmd_ut_cmd.c             |  21 +++
+> > > >  test/cmd/coreboot.c               | 120 +++++++++++++++
+> > > >  test/cmd/fdt.c                    |   8 +-
+> > > >  test/cmd/font.c                   |   6 +-
+> > > >  test/cmd_ut.c                     |   8 +-
+> > > >  test/common/event.c               |   3 +
+> > > >  test/lib/lmb.c                    |  36 ++---
+> > > >  test/print_ut.c                   |   8 +
+> > > >  test/test-main.c                  |   3 +-
+> > > >  test/ut.c                         |  27 ++++
+> > > >  tools/expo.py                     |  33 +++-
+> > > >  65 files changed, 1640 insertions(+), 216 deletions(-)
+> > > >  create mode 100644 boot/expo_build_cb.c
+> > > >  create mode 100644 cmd/x86/cbcmos.c
+> > > >  create mode 100644 doc/usage/cmd/cbcmos.rst
+> > > >  create mode 100644 include/test/cmd.h
+> > > >  create mode 100644 test/cmd/cmd_ut_cmd.c
+> > > >  create mode 100644 test/cmd/coreboot.c
+> > > >
+> > > > --
+> > > > 2.42.0.582.g8ccd20d70d-goog
+> > > >
+> > >
+> > > Any thoughts on this series, please?
+> >
+> > applied patch#16-26 on u-boot-x86, thanks!
+> >
+> > Would you please rebase patch#27-34?
+>
+> The series is based on things applied to -next and it is a bit late
+> for master. Can you try on that?
+>
 
-On 1/4/24 12:46, Weizhao Ouyang wrote:
-> Handle the return value of spi_flash_probe_bus_cs() to avoid sf probe
-> crashes.
-> 
-> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
-> ---
->   cmd/sf.c | 5 +++--
->   1 file changed, 3 insertions(+), 2 deletions(-)
-> 
-> diff --git a/cmd/sf.c b/cmd/sf.c
-> index 730996c02b..e3866899f6 100644
-> --- a/cmd/sf.c
-> +++ b/cmd/sf.c
-> @@ -135,8 +135,9 @@ static int do_spi_flash_probe(int argc, char *const argv[])
->   	}
->   	flash = NULL;
->   	if (use_dt) {
-> -		spi_flash_probe_bus_cs(bus, cs, &new);
-> -		flash = dev_get_uclass_priv(new);
-> +		ret = spi_flash_probe_bus_cs(bus, cs, &new);
+I tried that but it still fails at applying patch #27.
 
-if (ret)
-	return ret;
-
-don't you want to rather propagate that error?
-
-
-Thanks,
-Michal
+Regards,
+Bin
