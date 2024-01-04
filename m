@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0F6DC47074
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 16:11:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6A87C47073
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 16:11:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E53C879FD;
-	Thu,  4 Jan 2024 17:10:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 199BA87A0B;
+	Thu,  4 Jan 2024 17:10:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="jM7BTMkT";
+	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="H/d1vmzl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 409F587949; Thu,  4 Jan 2024 16:54:14 +0100 (CET)
+ id 56032879A9; Thu,  4 Jan 2024 16:54:16 +0100 (CET)
 Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEF18879AB
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:54:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C949879BE
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:54:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
 Received: from fencepost.gnu.org ([2001:470:142:3::e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
- id 1rLQ2r-00034X-W3; Thu, 04 Jan 2024 10:54:10 -0500
+ id 1rLQ2t-0003As-27; Thu, 04 Jan 2024 10:54:11 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
  s=fencepost-gnu-org; h=MIME-Version:References:In-Reply-To:Date:Subject:To:
- From; bh=D0SGFSmFRQFk2Fym2EArLUxw/VEBM2QfQutuhjnwbPI=; b=jM7BTMkTvJeOPtftsbk2
- 8r6URAsnQuZTkT7FGZrJOdzT1Vw3Y7a6FhgtJ5bq46IXJpTyFGYsN+Vh6Jy/G45KcYknZ2epHlzvr
- TLnmohgmrN9nNlSRXswFOZeiy2bZk4DMKwjvT1bF4VvqicQYcSShiUbWJp2m5dHPX1KzLpRYxn9pK
- nIle150O31+KIK9AM2Mbb+19eb/kqugojAW0C5NfX5lXSZhNAawscza3rnuBN+sJRJVcJTf+oKVkq
- RrRAGbBMdJTSICqd+13YrOfrTIKvakLHaPGU6urLtRqf1O+pBObEYTGEuGvmZc/1VgckrNqiEl/Oz
- vEQtU3LL48FvbA==;
+ From; bh=e6093ZPEKRoQToZmeYfo5J02ZfJ3ZopPfWHChblNbOM=; b=H/d1vmzlnbkCEJtJPjEh
+ OFm8yXR9UCruomt4J8No9mA1Z5KQGOTQmw6FS9rkIHYompSJ1K8E081uhLZvivShiVHEAsqmy2huX
+ Py5Pg09RnPiVRqAIscCxLbMdWERy3SJnn3Q4k3u23uvhgKywWpmWF7YDVmUdH8p83L5+TljgmCX+u
+ 8e6/uIN5JMWAYZ7nGxMElEc+dH9x7G5F4XeiTzWs8LwT+92/9Dh4rZnlQVv3wO0NGUiosVBjzC9GJ
+ HLbfXoAgIBMkXZ3+6HkcCEftAK1mWxG3n2XNRJDQbcrdiH0k9E6xF+OJSknnTV+NHf99g9UVn7ycs
+ 5x6yXgwbR3esng==;
 From: Mathieu Othacehe <othacehe@gnu.org>
 To: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
  Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
  "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
  Mathieu Othacehe <m.othacehe@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v5 2/4] mach-imx: Add i.MX93 binman support.
-Date: Thu,  4 Jan 2024 16:53:55 +0100
-Message-ID: <20240104155357.21865-3-othacehe@gnu.org>
+Subject: [PATCH v5 3/4] imx9: imx93_evk: Add binman support.
+Date: Thu,  4 Jan 2024 16:53:56 +0100
+Message-ID: <20240104155357.21865-4-othacehe@gnu.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240104155357.21865-1-othacehe@gnu.org>
 References: <20240104155357.21865-1-othacehe@gnu.org>
@@ -69,188 +69,154 @@ X-Virus-Status: Clean
 
 From: Mathieu Othacehe <m.othacehe@gmail.com>
 
-Add dedicated Makefile targets for the i.MX93 and a new imx93-u-boot.dtsi
-device-tree to create binman images.
-
 Signed-off-by: Mathieu Othacehe <m.othacehe@gmail.com>
 ---
- arch/arm/dts/imx93-u-boot.dtsi       | 88 ++++++++++++++++++++++++++++
- arch/arm/mach-imx/Makefile           | 22 ++++++-
- arch/arm/mach-imx/imx9/container.cfg | 10 ++++
- arch/arm/mach-imx/imx9/imximage.cfg  | 10 ++++
- 4 files changed, 129 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/dts/imx93-u-boot.dtsi
- create mode 100644 arch/arm/mach-imx/imx9/container.cfg
- create mode 100644 arch/arm/mach-imx/imx9/imximage.cfg
+ arch/arm/dts/imx93-11x11-evk-u-boot.dtsi |  2 +
+ arch/arm/mach-imx/imx9/Kconfig           |  1 +
+ configs/imx93_11x11_evk_defconfig        |  2 +
+ configs/imx93_11x11_evk_ld_defconfig     |  2 +
+ doc/board/nxp/imx93_11x11_evk.rst        | 68 ++++++++++++++++++++++++
+ doc/board/nxp/index.rst                  |  1 +
+ 6 files changed, 76 insertions(+)
+ create mode 100644 doc/board/nxp/imx93_11x11_evk.rst
 
-diff --git a/arch/arm/dts/imx93-u-boot.dtsi b/arch/arm/dts/imx93-u-boot.dtsi
-new file mode 100644
-index 00000000000..40e17bbc5ae
---- /dev/null
-+++ b/arch/arm/dts/imx93-u-boot.dtsi
-@@ -0,0 +1,88 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2023 Mathieu Othacehe <m.othacehe@gmail.com>
-+ */
-+
-+/ {
-+	binman: binman {
-+		multiple-images;
-+	};
-+};
-+
-+&binman {
-+	u-boot-spl-ddr {
-+		align = <4>;
-+		align-size = <4>;
-+		filename = "u-boot-spl-ddr.bin";
-+		pad-byte = <0xff>;
-+
-+		u-boot-spl {
-+			align-end = <4>;
-+			filename = "u-boot-spl.bin";
-+		};
-+
-+		ddr-1d-imem-fw {
-+			filename = "lpddr4_imem_1d_v202201.bin";
-+			align-end = <4>;
-+			type = "blob-ext";
-+		};
-+
-+		ddr-1d-dmem-fw {
-+			filename = "lpddr4_dmem_1d_v202201.bin";
-+			align-end = <4>;
-+			type = "blob-ext";
-+		};
-+
-+		ddr-2d-imem-fw {
-+			filename = "lpddr4_imem_2d_v202201.bin";
-+			align-end = <4>;
-+			type = "blob-ext";
-+		};
-+
-+		ddr-2d-dmem-fw {
-+			filename = "lpddr4_dmem_2d_v202201.bin";
-+			align-end = <4>;
-+			type = "blob-ext";
-+		};
-+	};
-+
-+	spl {
-+		filename = "spl.bin";
-+
-+		mkimage {
-+			args = "-n spl/u-boot-spl.cfgout -T imx8image -e 0x2049A000";
-+
-+			blob {
-+				filename = "u-boot-spl-ddr.bin";
-+			};
-+		};
-+	};
-+
-+	u-boot-container {
-+		filename = "u-boot-container.bin";
-+
-+		mkimage {
-+			args = "-n u-boot-container.cfgout -T imx8image -e 0x0";
-+
-+			blob {
-+				filename = "u-boot.bin";
-+			};
-+		};
-+	};
-+
-+	imx-boot {
-+		filename = "flash.bin";
-+		pad-byte = <0x00>;
-+
-+		spl: blob-ext@1 {
-+			filename = "spl.bin";
-+			offset = <0x0>;
-+			align-size = <0x400>;
-+			align = <0x400>;
-+		};
-+
-+		uboot: blob-ext@2 {
-+			filename = "u-boot-container.bin";
-+		};
-+	};
-+};
-diff --git a/arch/arm/mach-imx/Makefile b/arch/arm/mach-imx/Makefile
-index a3b44c93e3d..b87f44193c3 100644
---- a/arch/arm/mach-imx/Makefile
-+++ b/arch/arm/mach-imx/Makefile
-@@ -129,6 +129,9 @@ DEPFILE_EXISTS := $(shell $(CPP) $(cpp_flags) -x c -o u-boot-dtb.cfgout $(srctre
- else ifeq ($(CONFIG_ARCH_IMX8M), y)
- IMAGE_TYPE := imx8mimage
- DEPFILE_EXISTS := 0
-+else ifeq ($(CONFIG_ARCH_IMX9), y)
-+IMAGE_TYPE := imx8image
-+DEPFILE_EXISTS := 0
- else
- IMAGE_TYPE := imximage
- DEPFILE_EXISTS := 0
-@@ -213,7 +216,24 @@ endif
- endif
+diff --git a/arch/arm/dts/imx93-11x11-evk-u-boot.dtsi b/arch/arm/dts/imx93-11x11-evk-u-boot.dtsi
+index 4ecb53ed8be..a99ba99bfb4 100644
+--- a/arch/arm/dts/imx93-11x11-evk-u-boot.dtsi
++++ b/arch/arm/dts/imx93-11x11-evk-u-boot.dtsi
+@@ -3,6 +3,8 @@
+  * Copyright 2022 NXP
+  */
  
- ifeq ($(CONFIG_ARCH_IMX9), y)
--SPL:
++#include "imx93-u-boot.dtsi"
 +
-+SPL: spl/u-boot-spl.bin spl/u-boot-spl.cfgout u-boot-container.cfgout FORCE
-+
-+MKIMAGEFLAGS_flash.bin = -n spl/u-boot-spl.cfgout -T $(IMAGE_TYPE) -e $(CONFIG_SPL_TEXT_BASE)
-+flash.bin: MKIMAGEOUTPUT = flash.log
-+
-+spl/u-boot-spl.cfgout: $(IMX_CONFIG) FORCE
-+	$(Q)mkdir -p $(dir $@)
-+	$(call if_changed_dep,cpp_cfg)
-+
-+spl/u-boot-spl-ddr.bin: spl/u-boot-spl.bin spl/u-boot-spl.cfgout FORCE
-+
-+u-boot-container.cfgout: $(IMX_CONTAINER_CFG) FORCE
-+	$(Q)mkdir -p $(dir $@)
-+	$(call if_changed_dep,cpp_cfg)
-+
-+flash.bin: spl/u-boot-spl-ddr.bin container.cfgout FORCE
-+	$(call if_changed,mkimage)
- endif
+ / {
+ 	wdt-reboot {
+ 		compatible = "wdt-reboot";
+diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
+index c51f80f311a..7ba38355398 100644
+--- a/arch/arm/mach-imx/imx9/Kconfig
++++ b/arch/arm/mach-imx/imx9/Kconfig
+@@ -29,6 +29,7 @@ choice
  
- else
-diff --git a/arch/arm/mach-imx/imx9/container.cfg b/arch/arm/mach-imx/imx9/container.cfg
+ config TARGET_IMX93_11X11_EVK
+ 	bool "imx93_11x11_evk"
++        select BINMAN
+ 	select IMX93
+ 
+ endchoice
+diff --git a/configs/imx93_11x11_evk_defconfig b/configs/imx93_11x11_evk_defconfig
+index 3c9b09eec7a..e53eea120d7 100644
+--- a/configs/imx93_11x11_evk_defconfig
++++ b/configs/imx93_11x11_evk_defconfig
+@@ -8,6 +8,8 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
+ CONFIG_NR_DRAM_BANKS=2
+ CONFIG_ENV_SIZE=0x4000
+ CONFIG_ENV_OFFSET=0x700000
++CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx9/imximage.cfg"
++CONFIG_IMX_CONTAINER_CFG="arch/arm/mach-imx/imx9/container.cfg"
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="imx93-11x11-evk"
+ CONFIG_SPL_TEXT_BASE=0x2049A000
+diff --git a/configs/imx93_11x11_evk_ld_defconfig b/configs/imx93_11x11_evk_ld_defconfig
+index 37aa1efa7fd..c24b722600c 100644
+--- a/configs/imx93_11x11_evk_ld_defconfig
++++ b/configs/imx93_11x11_evk_ld_defconfig
+@@ -8,6 +8,8 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
+ CONFIG_NR_DRAM_BANKS=2
+ CONFIG_ENV_SIZE=0x4000
+ CONFIG_ENV_OFFSET=0x400000
++CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx9/imximage.cfg"
++CONFIG_IMX_CONTAINER_CFG="arch/arm/mach-imx/imx9/container.cfg"
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="imx93-11x11-evk"
+ CONFIG_SPL_TEXT_BASE=0x2049A000
+diff --git a/doc/board/nxp/imx93_11x11_evk.rst b/doc/board/nxp/imx93_11x11_evk.rst
 new file mode 100644
-index 00000000000..f268bc9eb2c
+index 00000000000..fb0ecf8af58
 --- /dev/null
-+++ b/arch/arm/mach-imx/imx9/container.cfg
-@@ -0,0 +1,10 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright 2023 Mathieu Othacehe <m.othacehe@gmail.com>
-+ */
++++ b/doc/board/nxp/imx93_11x11_evk.rst
+@@ -0,0 +1,68 @@
++.. SPDX-License-Identifier: GPL-2.0+
 +
-+BOOT_FROM SD 0x400
-+SOC_TYPE IMX9
-+CONTAINER
-+IMAGE A55 bl31.bin 0x204E0000
-+IMAGE A55 u-boot.bin CONFIG_TEXT_BASE
-\ No newline at end of file
-diff --git a/arch/arm/mach-imx/imx9/imximage.cfg b/arch/arm/mach-imx/imx9/imximage.cfg
-new file mode 100644
-index 00000000000..3e440465b23
---- /dev/null
-+++ b/arch/arm/mach-imx/imx9/imximage.cfg
-@@ -0,0 +1,10 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright 2023 Mathieu Othacehe <m.othacehe@gmail.com>
-+ */
++imx93_11x11_evk
++=======================
 +
-+BOOT_FROM SD 0x400
-+SOC_TYPE IMX9
-+APPEND mx93a0-ahab-container.img
-+CONTAINER
-+IMAGE A55 u-boot-spl-ddr.bin 0x2049A000
-\ No newline at end of file
++U-Boot for the NXP i.MX93 EVK on the 11x11mm board
++
++Quick Start
++-----------
++
++- Get and Build the ARM Trusted firmware
++- Get the DDR firmware
++- Get ahab-container.img
++- Build U-Boot
++- Boot
++
++Get and Build the ARM Trusted firmware
++--------------------------------------
++
++Note: srctree is U-Boot source directory
++Get ATF from: https://github.com/nxp-imx/imx-atf/
++branch: lf_v2.8
++
++.. code-block:: bash
++
++   $ unset LDFLAGS
++   $ make PLAT=imx93 bl31
++   $ cp build/imx93/release/bl31.bin $(srctree)
++
++Get the DDR firmware
++--------------------
++
++.. code-block:: bash
++
++   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-imx-8.21.bin
++   $ chmod +x firmware-imx-8.21.bin
++   $ ./firmware-imx-8.21.bin
++   $ cp firmware-imx-8.21/firmware/ddr/synopsys/lpddr4*.bin $(srctree)
++
++Get ahab-container.img
++---------------------------------------
++
++.. code-block:: bash
++
++   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-sentinel-0.10.bin
++   $ chmod +x firmware-sentinel-0.10.bin
++   $ ./firmware-sentinel-0.10.bin
++   $ cp firmware-sentinel-0.10/mx93a0-ahab-container.img $(srctree)
++
++Build U-Boot
++------------
++
++.. code-block:: bash
++
++   $ export CROSS_COMPILE=aarch64-poky-linux-
++   $ make imx93_11x11_evk_defconfig
++   $ make
++
++Burn the flash.bin to MicroSD card offset 32KB:
++
++.. code-block:: bash
++
++   $ dd if=flash.bin of=/dev/sd[x] bs=1024 seek=32 conv=notrunc
++
++Boot
++----
++
++Set Boot switch to SD boot
+diff --git a/doc/board/nxp/index.rst b/doc/board/nxp/index.rst
+index 4514b8951ba..3bd9ed3c873 100644
+--- a/doc/board/nxp/index.rst
++++ b/doc/board/nxp/index.rst
+@@ -11,6 +11,7 @@ NXP Semiconductors
+    imx8mp_evk
+    imx8mq_evk
+    imx8qxp_mek
++   imx93_11x11_evk
+    imxrt1020-evk
+    imxrt1050-evk
+    ls1046ardb
 -- 
 2.25.1
 
