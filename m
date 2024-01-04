@@ -4,62 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 367D0C47073
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 07:54:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43238C4706F
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 07:54:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52716877F8;
-	Thu,  4 Jan 2024 08:54:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B1006878FC;
+	Thu,  4 Jan 2024 08:54:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SS7Ctvyb";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YW+VGfYm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 875F88787B; Thu,  4 Jan 2024 08:54:10 +0100 (CET)
+ id A9E51878FC; Thu,  4 Jan 2024 08:54:18 +0100 (CET)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BEFD8775F
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 08:54:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8502E8793F
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 08:54:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4047s2F6037498;
- Thu, 4 Jan 2024 01:54:02 -0600
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4047sAwI037516;
+ Thu, 4 Jan 2024 01:54:10 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704354842;
- bh=vLZEAIl9rviQxnJMzW2RlhcbCiz71ln4cL+PeTOYOsY=;
- h=From:To:CC:Subject:Date;
- b=SS7CtvybeMUPMJNyJigkmv4Uay1KkwFq5q4FDMtCAqx+UNAyZovnrkc5XUGt6NLoJ
- Wssk9dI8JKwnwhktU0kefdJWamnYrNV2zTD58pv55+9ivsCE2XWMPYnO+7L/sWol35
- VCf5NzNau9O/J8IX8a6LbLZuu9AN7rfWcArKpqv8=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4047s2Eh029178
+ s=ti-com-17Q1; t=1704354850;
+ bh=TZbRiIyF0x4msZwEqqn8pf27r8uy11P28p8h7Fx0Ik0=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=YW+VGfYmE7u7yUme7TGuQvfs4ga/9G6BuXRRHghzKyic+n3C/zCyT/kZYTyLDWTtS
+ rQpEvBB7pYlO62/qoYO09mbAC2so1CxLRNiTacbvatKKDaSNlIrksonxLWrvshg2QT
+ g9DVJt1D3IejjlKKB3u43Qx4N8Em6t96/AhVdPEQ=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4047sAgZ098373
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 4 Jan 2024 01:54:02 -0600
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 4 Jan 2024 01:54:10 -0600
+Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 4
- Jan 2024 01:54:02 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 01:54:10 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 4 Jan 2024 01:54:02 -0600
+ Frontend Transport; Thu, 4 Jan 2024 01:54:10 -0600
 Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4047rvgV099627;
- Thu, 4 Jan 2024 01:53:58 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4047rvgX099627;
+ Thu, 4 Jan 2024 01:54:06 -0600
 From: Neha Malcom Francis <n-francis@ti.com>
 To: <sjg@chromium.org>, <vigneshr@ti.com>, <bb@ti.com>, <m-chawdhry@ti.com>,
  <alpernebiyasak@gmail.com>, <nm@ti.com>
 CC: <u-boot@lists.denx.de>, <vishalm@ti.com>, <jonas@kwiboo.se>,
  <sughosh.ganu@linaro.org>, <lukas.funke@weidmueller.com>,
  <fr0st61te@gmail.com>, <u-kumar1@ti.com>, <n-francis@ti.com>
-Subject: [PATCH 0/2] binman: ti_board_cfg: Add yamllint support
-Date: Thu, 4 Jan 2024 13:23:55 +0530
-Message-ID: <20240104075357.638983-1-n-francis@ti.com>
+Subject: [PATCH 2/2] tools: binman: ti_board_cfg: Check for linting problems
+Date: Thu, 4 Jan 2024 13:23:57 +0530
+Message-ID: <20240104075357.638983-3-n-francis@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240104075357.638983-1-n-francis@ti.com>
+References: <20240104075357.638983-1-n-francis@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -80,55 +82,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds support for checking and raising an error if a
-configuration file does not adhere to the default yamllint rules. This is
-based on the mailing-list suggestion [1].
+Use yamllint for checking whether YAML configuration files are adhering
+to default yamllint rules.
 
-Boot logs:
-https://gist.github.com/nehamalcom/9f98d7d17dd19b61a0ad27fdea3bc18e
-
-[1]: https://lore.kernel.org/all/20240103173637.fdhfwgmsmqrfpzdp@manmade/
-
-Neha Malcom Francis (2):
-  board: ti: *-cfg.yaml: Adhere to yamllint rules
-  tools: binman: ti_board_cfg: Check for linting problems
-
- board/ti/am62ax/board-cfg.yaml               |   20 +-
- board/ti/am62ax/pm-cfg.yaml                  |    4 +-
- board/ti/am62ax/rm-cfg.yaml                  | 1664 +++----
- board/ti/am62ax/sec-cfg.yaml                 |  212 +-
- board/ti/am62ax/tifs-rm-cfg.yaml             | 1484 +++----
- board/ti/am62x/board-cfg.yaml                |   20 +-
- board/ti/am62x/pm-cfg.yaml                   |    4 +-
- board/ti/am62x/rm-cfg.yaml                   | 1532 +++----
- board/ti/am62x/sec-cfg.yaml                  |  212 +-
- board/ti/am64x/board-cfg.yaml                |   20 +-
- board/ti/am64x/pm-cfg.yaml                   |    4 +-
- board/ti/am64x/rm-cfg.yaml                   | 2386 +++++-----
- board/ti/am64x/sec-cfg.yaml                  |  216 +-
- board/ti/am65x/board-cfg.yaml                |   20 +-
- board/ti/am65x/pm-cfg.yaml                   |    4 +-
- board/ti/am65x/rm-cfg.yaml                   | 2994 ++++++-------
- board/ti/am65x/sec-cfg.yaml                  |  212 +-
- board/ti/j721e/board-cfg_j7200.yaml          |   20 +-
- board/ti/j721e/pm-cfg_j7200.yaml             |    4 +-
- board/ti/j721e/rm-cfg.yaml                   |   64 +-
- board/ti/j721e/rm-cfg_j7200.yaml             |  134 +-
- board/ti/j721e/sec-cfg.yaml                  |  192 +-
- board/ti/j721e/sec-cfg_j7200.yaml            |  216 +-
- board/ti/j721s2/board-cfg.yaml               |   20 +-
- board/ti/j721s2/pm-cfg.yaml                  |    4 +-
- board/ti/j721s2/rm-cfg.yaml                  | 4184 +++++++++---------
- board/ti/j721s2/sec-cfg.yaml                 |  212 +-
- tools/binman/etype/ti_board_config.py        |    5 +
- tools/binman/ftest.py                        |    6 +
- tools/binman/test/323_ti_board_cfg_phony.dts |   14 +
- tools/binman/test/yaml/config.yaml           |    4 +-
- tools/binman/test/yaml/config_phony.yaml     |   18 +
- 32 files changed, 8074 insertions(+), 8031 deletions(-)
+Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+Suggested-by: Nishanth Menon <nm@ti.com>
+---
+ tools/binman/etype/ti_board_config.py        |  5 +++++
+ tools/binman/ftest.py                        |  6 ++++++
+ tools/binman/test/323_ti_board_cfg_phony.dts | 14 ++++++++++++++
+ tools/binman/test/yaml/config.yaml           |  4 ++--
+ tools/binman/test/yaml/config_phony.yaml     | 18 ++++++++++++++++++
+ 5 files changed, 45 insertions(+), 2 deletions(-)
  create mode 100644 tools/binman/test/323_ti_board_cfg_phony.dts
  create mode 100644 tools/binman/test/yaml/config_phony.yaml
 
+diff --git a/tools/binman/etype/ti_board_config.py b/tools/binman/etype/ti_board_config.py
+index 94f894c281..2c3bb8f7b5 100644
+--- a/tools/binman/etype/ti_board_config.py
++++ b/tools/binman/etype/ti_board_config.py
+@@ -9,6 +9,7 @@
+ import os
+ import struct
+ import yaml
++import yamllint
+ 
+ from collections import OrderedDict
+ from jsonschema import validate
+@@ -18,6 +19,7 @@ from binman.entry import Entry
+ from binman.etype.section import Entry_section
+ from dtoc import fdt_util
+ from u_boot_pylib import tools
++from yamllint import config
+ 
+ BOARDCFG = 0xB
+ BOARDCFG_SEC = 0xD
+@@ -244,6 +246,9 @@ class Entry_ti_board_config(Entry_section):
+             with open(self._schema_file, 'r') as sch:
+                 self.schema_yaml = yaml.safe_load(sch)
+ 
++            yaml_config = config.YamlLintConfig("extends: default")
++            for p in yamllint.linter.run(open(self._config_file, "r"), yaml_config):
++                self.Raise(f"Yamllint error: {p.line}: {p.rule}")
+             try:
+                 validate(self.file_yaml, self.schema_yaml)
+             except Exception as e:
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index a4ac520cbb..1fbb0fef1a 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -7030,6 +7030,12 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         data = self._DoReadFile('293_ti_board_cfg.dts')
+         self.assertEqual(TI_BOARD_CONFIG_DATA, data)
+ 
++    def testTIBoardConfigLint(self):
++        """Test that an incorrectly linted config file would generate error"""
++        with self.assertRaises(ValueError) as e:
++            data = self._DoReadFile('323_ti_board_cfg_phony.dts')
++        self.assertIn("Yamllint error", str(e.exception))
++
+     def testTIBoardConfigCombined(self):
+         """Test that a schema validated combined board config file can be generated"""
+         data = self._DoReadFile('294_ti_board_cfg_combined.dts')
+diff --git a/tools/binman/test/323_ti_board_cfg_phony.dts b/tools/binman/test/323_ti_board_cfg_phony.dts
+new file mode 100644
+index 0000000000..441296de4f
+--- /dev/null
++++ b/tools/binman/test/323_ti_board_cfg_phony.dts
+@@ -0,0 +1,14 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		ti-board-config {
++			config = "yaml/config_phony.yaml";
++			schema = "yaml/schema.yaml";
++		};
++	};
++};
+diff --git a/tools/binman/test/yaml/config.yaml b/tools/binman/test/yaml/config.yaml
+index 5f799a6e3a..c2be32128b 100644
+--- a/tools/binman/test/yaml/config.yaml
++++ b/tools/binman/test/yaml/config.yaml
+@@ -10,9 +10,9 @@ main-branch:
+     b: 0
+   arr: [0, 0, 0, 0]
+   another-arr:
+-    - #1
++    -  # 1
+       c: 0
+       d: 0
+-    - #2
++    -  # 2
+       c: 0
+       d: 0
+diff --git a/tools/binman/test/yaml/config_phony.yaml b/tools/binman/test/yaml/config_phony.yaml
+new file mode 100644
+index 0000000000..d76fcb3b82
+--- /dev/null
++++ b/tools/binman/test/yaml/config_phony.yaml
+@@ -0,0 +1,18 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Test config
++#
++---
++
++main-branch :
++  obj :
++    a : 0x0
++    b: 0
++  arr: [0, 0, 0, 0]
++  another-arr:
++    -  # 1
++      c: 0
++      d: 0
++    -  # 2
++      c: 0
++      d: 0
 -- 
 2.34.1
 
