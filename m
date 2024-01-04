@@ -4,68 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 503C7C47074
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 12:19:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DC54C47073
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 12:19:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DF4587967;
-	Thu,  4 Jan 2024 13:19:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EBFEC87976;
+	Thu,  4 Jan 2024 13:19:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Pt3uxU7K";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nDxI4TNr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09B0387852; Thu,  4 Jan 2024 08:05:10 +0100 (CET)
-Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
- [IPv6:2607:f8b0:4864:20::92c])
+ id CA66F87954; Thu,  4 Jan 2024 10:08:15 +0100 (CET)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D763087823
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 08:05:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 289B68795B
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 10:08:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-ua1-x92c.google.com with SMTP id
- a1e0cc1a2514c-7cd5ab5d5bbso79553241.3
- for <u-boot@lists.denx.de>; Wed, 03 Jan 2024 23:05:07 -0800 (PST)
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m.othacehe@gmail.com
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3368b9bbeb4so253090f8f.2
+ for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 01:08:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704351906; x=1704956706; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=dDTrIsByYt3jwrYFfF8jPL05pabRIXDszYCWYNaa4G0=;
- b=Pt3uxU7KWjN7Jn8imBK7u/IntXO3we5tpRW+mtndgWhjBV+zobqODrH08jPkoUZIZs
- vIm30G7rjGkCBdf4wabYAojjxZqv83n5VTNr/GoQRGKt3SnCvkWA9t+KZnS6PmBqQEY1
- Ajuujgz1sdvw7tJJOdQwZMHEG2OuqmuqilSgG6QCw7X546PTIeM7fzTCwWhxhfcJ3oqO
- 3MsTBgvVzgZoEtfItfZYX5b6daW0yw7lnVrezsjeBneSLZvTEBg//oD56kZ5rnPfiEAG
- t7Rcclny98BPrkVCqIPyhsRm0waO4Ng51VYyDwf3Z2oCCTmdArJnodNAwi4iF269fD+m
- +qjQ==
+ d=gmail.com; s=20230601; t=1704359292; x=1704964092; darn=lists.denx.de;
+ h=mime-version:user-agent:message-id:date:references:in-reply-to
+ :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=OZm4xe6O1q8ldLyGW4x/p7Spnpbh1d9SZIxdlC6z3ko=;
+ b=nDxI4TNrSNxTQkVqrGwYjWCBssJsvNXjM30+ue7bFxE+4udb2KWZwcu3rOvrLHagMQ
+ IE7aF1Zvh/f2FHzcvaRfuVYLJJr/2YTRVoSQIlbrvO770yjqVgGB5/rsFl9ZA6JNwXOf
+ 7AwdqwMx+D8VcP/Ez+UF/WJ9uf9ir5zPN/fgRe1p2Ob95AY2ptFCCdsHezL64jnPRq3t
+ 5/cG4j7tjUJNJ4AaOcdiXAxR5xO7M+Y3JEgFWYZs1fSD+U6kxWkLTGzbvBIPt9jfTXKk
+ c1vvLJkLj11AMeFPgm6Dy7QVP+7RcxJOc3RjkQcg7yE29ciX0Eh6MvVQgb5RgxLES2Ju
+ a7QA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704351906; x=1704956706;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=dDTrIsByYt3jwrYFfF8jPL05pabRIXDszYCWYNaa4G0=;
- b=KzJb8/4yRrprjN6TaMdvUuUykyR2oBJR6rjwxlmR9xPMIlbsEs3GEKxb/zn4fVVI3r
- PKIqLGZFNwtJ1Gt38Hs/V9o2VrstE0oYcoG4VDJP/9MEGj+1PnRmrJfZxzPX4D9jqaS5
- dwJp1AjSIlzapvcH+KgQlD0vNKwgNknEad2bFy+o6wOg1LhhBPDBC5FBT8jrY1retKqh
- M7QPnFy6TdrRjDJxIcIgSJfJX4EEK+IBPpoR2iffF+vvzSB9/oyI9Y8rSqIClFWz4oXc
- IfUndtsJrf2jGE+sydKFNbfzsiC3REy7pGYADeWI3v9oDBijt+p96z1OweDXe7XtQaxT
- cZLQ==
-X-Gm-Message-State: AOJu0YyJZyRL2pokK1bORnCaZZds5fF/a/UugYTBfv1ouI7Jdt/UnVM6
- m73KHa/QM3JUSP6xNWl3egJlDbW/hEGazyuQI1OrrkZnz5g=
-X-Google-Smtp-Source: AGHT+IG8j2J9lpDDpNuXVuwm01IUf973e3UTuVHCJ4Wzf9Af1UM57zjyxODU/AP0zOD5NcYAW84G11Aaf40j+xeLh2Y=
-X-Received: by 2002:a05:6102:512a:b0:467:2737:4d52 with SMTP id
- bm42-20020a056102512a00b0046727374d52mr76693vsb.24.1704351904903; Wed, 03 Jan
- 2024 23:05:04 -0800 (PST)
+ d=1e100.net; s=20230601; t=1704359292; x=1704964092;
+ h=mime-version:user-agent:message-id:date:references:in-reply-to
+ :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OZm4xe6O1q8ldLyGW4x/p7Spnpbh1d9SZIxdlC6z3ko=;
+ b=jAlHQxtOzbNB7d03OoMzsM2WUsXjKcPx1y0G1TUT6McpNd6Wo7ve0waIMB2uwuwwCv
+ GNUPqw44I7nzZXd/zK7y5ngD5mpWLXmTJCuaFBaHVuynJDaJWvxUEY4M2ghRbPxen6ew
+ uWA6eOhKE0wChoG+aNr6vEw4AwPkvoi4G3kISXLaWwbBwtILNqo8X0AIF0fjYo0Ea4fq
+ auYKjAYr4A7spa5vH5lFf094zDeln103tKA9v/iZ+6ySlPb4kabYhkAITXhSLoYTZd/A
+ a1/Uz+YyBjjGALyBU16v6DYl62EBgubnalwQ4Eqq4sVuGvD/g+MxallKaI9m13sfQgmx
+ 9+ag==
+X-Gm-Message-State: AOJu0YwEYpljGeYqp4BFhQN42PrEnhUA6qKWtkv60r9XyIjX+HpXTLS+
+ PVv15W/PgIDxRO6fEAtApBh8r2rLyWo=
+X-Google-Smtp-Source: AGHT+IHiPqT/LMLJd9MKzhlwr3IriyFRPvk/2mfnI2N6uDRvQI/ziT2YnRpCrh3qrVLRMFZzcGZxMA==
+X-Received: by 2002:adf:e8c7:0:b0:334:b2da:ef43 with SMTP id
+ k7-20020adfe8c7000000b00334b2daef43mr101660wrn.252.1704359291835; 
+ Thu, 04 Jan 2024 01:08:11 -0800 (PST)
+Received: from meije ([2a01:e0a:ab1:5c70:ddd3:fad7:e5a6:7e01])
+ by smtp.gmail.com with ESMTPSA id
+ c6-20020adfe706000000b0033342338a24sm32699794wrm.6.2024.01.04.01.08.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 Jan 2024 01:08:10 -0800 (PST)
+From: Mathieu Othacehe <m.othacehe@gmail.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Peng Fan <peng.fan@nxp.com>,  Tom Rini <trini@konsulko.com>,  Stefano
+ Babic <sbabic@denx.de>,  "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v3 3/3] Add imx93-var-som support
+In-Reply-To: <CAOMZO5B-mrLdm1yYMEZq8+Gbn64VNua3fcmB2LfQ6AzOi5B8xg@mail.gmail.com>
+ (Fabio Estevam's message of "Wed, 3 Jan 2024 16:31:34 -0300")
+References: <20231229111701.10696-1-othacehe@gnu.org>
+ <20231229111701.10696-4-othacehe@gnu.org>
+ <CAOMZO5B-mrLdm1yYMEZq8+Gbn64VNua3fcmB2LfQ6AzOi5B8xg@mail.gmail.com>
+Date: Thu, 04 Jan 2024 10:08:09 +0100
+Message-ID: <87a5pl31qe.fsf@gmail.com>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-From: E Shattow <lucent@gmail.com>
-Date: Wed, 3 Jan 2024 23:04:54 -0800
-Message-ID: <CANV2PTOD+cY55ES5HDrSZuGjqee3fvfXKORWg8bJFT64mFdg8A@mail.gmail.com>
-Subject: booti usage offset requirements for compressed kernel and initrd with
- dtb
-To: u-boot@lists.denx.de
+Content-Type: text/plain
 X-Mailman-Approved-At: Thu, 04 Jan 2024 13:19:13 +0100
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,70 +96,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
 
-There is data corruption when using booti on a JH7110 (riscv64) board to
-load (over tftp or ymodem) a compressed kernel, compressed initrd, and
-device tree blob, when the data are too close together (even though not
-overlapping). In the adjustments I have tried it seems to be consistent but
-not clear "why?" by how much for each adjustment is needed to observe the
-failure versus success.
+Hello Fabio,
 
-My question is simple enough, what are the intended offset requirements for
-loading these data into memory for use with booti ?
+> I applied this patch against U-Boot's next branch.
+>
+> I had to manually add:
 
-For example:
+I was testing on 2023.10. I rebased the series on `next` on my side. I
+had to do something similar to fb2bdc4efcb in order to fix booting.
 
-setenv ip 192.168.2.216
-setenv loadaddr 0x60000000  # default from Milk-V vendor for Mars CM product
-setenv kernel_uncomp_size 24193024  # uncompressed size of
-vmlinuz-5.15.0-gpu117 from file command information
-setenv kernel_comp_addr_r $loadaddr
-setenv kernel_addr_r 0x61712800  # $kernel_comp_addr_r + $kernel_uncomp_size
-dhcp $kernel_addr_r
-$ip:mars-cm_debian-desktop_sdk-boot/vmlinuz-5.15.0-gpu117
-setenv kernel_comp_size 0x$filesize
-setenv dtb_addr 0x62e25000  # $kernel_addr_r + $kernel_uncomp_size
-dhcp $dtb_addr
-$ip:mars-cm_debian-desktop_sdk-boot/dtbs/starfive/jh7110-visionfive-v2.dtb
-setenv initrd_addr 0x62e31d7f  # $dtb_addr + 0x$filesize
-dhcp $initrd_addr $ip:debian-installer-netboot/initrd.gz; setenv
-initrd_size 0x$filesize
-booti $kernel_addr_r $initrd_addr:$initrd_size $dtb_addr
+> $ git am ~/Downloads/Add-imx93-var-som-support.patch
+> Applying: spl: binman: Disable u_boot_any symbols for i.MX93 boards
+> Applying: mach-imx: Add i.MX93 binman support.
+> Applying: Add imx93-var-som support
+> .git/rebase-apply/patch:3025: new blank line at EOF.
+> +
+> warning: 1 line adds whitespace errors.
 
-Waiting for root device ...
+Fixed.
 
-(and nothing else, this is a failure)
+>> +#include "imx93-u-boot.dtsi"
+>
+> This file should be included by default. No need to manually include it.
 
-If 0x62e31d7f is replaced by 0x62e31ec6 then the boot is successful and
-dmesg from debian-installer shows the additional information:
+I am not sure why but without this include, I have the following
+warning:
 
- Freeing unused kernel image (initmem) memory: 2196K
- Run /init as init process
-   with arguments:
-     /init
-   with environment:
-     HOME=/
-     TERM=linux
+binman: Device tree 'u-boot.dtb' does not have a 'binman' node
 
+which seem to indicate that this include is needed.
 
-So in this the kernel boots and all works normally. Even if that address is
-0x62e31ec5 one byte earlier it is a failure.
+> Not needed to be done in this series, but in the future, it would be
+> nice to convert this wdog driver to DM.
 
-In other attempts I would change the ordering i.e. so the initrd is first
-at $loadaddr and then kernel and DTB, or DTB and kernel. If I learned
-anything it is that compressed initrd must be loaded to a span of memory at
-least the size of its uncompressed length, and this is also true of the
-compressed kernel vmlinuz even though booti documentation vaguely infers
-that there is an area of memory specified for decompression - so a
-compressed kernel needs two times its uncompressed size is that correct?
-Also there's no hint anywhere if the device tree blob has special memory
-constraints but if it is not starting on some 16byte aligned address at
-least my superstition from observations in testing is that it is not
-successful... and now, where it ends (in the above example) and initrd
-begins seems arbitrary.
+Noted.
 
-Sure I could pad things out, they tend to work that way, but I would like
-to know "why?"
+I will send a v4 that should take all remarks into account.
 
-E Shattow  (kindly reply-all off-list I am not subscriber)
+Thanks,
+
+Mathieu
