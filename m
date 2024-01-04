@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A03FC3DA6E
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 01:41:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F016FC3DA6E
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 01:43:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F02DC876FF;
-	Thu,  4 Jan 2024 02:41:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5EBC687866;
+	Thu,  4 Jan 2024 02:43:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="moE+PYFx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="juNL2yB4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE4E3876F6; Thu,  4 Jan 2024 02:41:04 +0100 (CET)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id C6B01876F6; Thu,  4 Jan 2024 02:43:00 +0100 (CET)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 492C1876F6
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 02:41:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F52887866
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 02:42:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-680d4584a81so171686d6.1
- for <u-boot@lists.denx.de>; Wed, 03 Jan 2024 17:41:01 -0800 (PST)
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-67fa018c116so207746d6.3
+ for <u-boot@lists.denx.de>; Wed, 03 Jan 2024 17:42:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704332460; x=1704937260; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1704332574; x=1704937374; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3WEzbsnGce+aMru0gJZvwhsQOVaaH/4xCVorMel7D44=;
- b=moE+PYFxkn5kaxEZ6J7OprNgO3+3M4uenZS+gYZenrzFLEDthnWXPbTIX3sKZEsC/7
- dNFIf5SUG7BnhNaxHgAcApTGBAz9uwVnQ2xczw00QKsB2pLFtBG1/dQuqGpTg9BiUAuq
- IvzAJvyfjFmPynBCPOAVfjyWpPl0YktO2HVtU=
+ bh=7ubiBpFwLdj+EPXJKjieqfKpC5SttKd+jHD+pLrGEd0=;
+ b=juNL2yB467gdA2akyc9bPtjzI00tQYgN7TmNtwmFR/3iVpgBTXS1ghFQsUEYCrOJ2D
+ pnD9iIFAu6dndp5cPGI7c0H1hJsEfbun02iXuYBlACd9Gan/BA7AurC8YrMKtExyY2Vm
+ 1RpZHpxyLGDUvT+3BzV9NHH6grajJmwSayeLo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704332460; x=1704937260;
+ d=1e100.net; s=20230601; t=1704332574; x=1704937374;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3WEzbsnGce+aMru0gJZvwhsQOVaaH/4xCVorMel7D44=;
- b=nFgpGqVbzCJAURn5336lEf/TSMfHLpXY8xcExrs5mnfy0OxjxY5xYVCPB8kecUdT9/
- lgMNePAvTBnzbK94mppvaO9jEYZpOyqeBYAvzIqcKxgGFN1V7Y8es5mMcmxlcmmoIjSJ
- kXlA4+qMp2rCbmw1KLCWxoFir6iry3fyuSdX4uDbzFOo6D5cLAwFPsr7VZJihZ/Qoqz9
- POMoFPcCXUdgb274aKCTCBj22c5ZxhZK20rIpq/HYAd7w1v3gcZyvgxSQuNSv+IlkM0E
- 6TIQIW/ayVSSCVQ4gLNh7bWUWuI332M79F0s0E0nEf0ZJHV13DNnPjgoLwvVnmowhDuW
- 26vg==
-X-Gm-Message-State: AOJu0YzD5ghWSZM0HbfKbzhItoembLu3+oLzlrDqh/12ytMnojbGE4Ih
- qqjSD6Jtrq7oygw4JcTUkd89xYpZjB4Qf6ARGxDoWirOZylU
-X-Google-Smtp-Source: AGHT+IGxqUOtR3NIjlSKtZbDmcYLcvgj/R9RV+HSC9HPkHL7E0Wzob4owdL5HA29oThIhO3Hbg2EErrISlQln8+jkAQ=
-X-Received: by 2002:a0c:e78b:0:b0:680:d21b:19d4 with SMTP id
- x11-20020a0ce78b000000b00680d21b19d4mr1931924qvn.38.1704332459962; Wed, 03
- Jan 2024 17:40:59 -0800 (PST)
+ bh=7ubiBpFwLdj+EPXJKjieqfKpC5SttKd+jHD+pLrGEd0=;
+ b=ZbB8Y5zR8hT7P/0rCaFL1Fjb8sDriTxQa0GJXttbkVi57shKpbTN0ekL/I7OHWqX+9
+ nN8jm/3KqTSOEdli6Qbwm7+we8bNZviOFKm8/VdY98LMr5zxZtNFXfQi3IY2AiihGgg2
+ KPHCqlxelCg/+SmmWNa3BedWDvCHKF7qle5V4u3jTzbtXTxInEoHkB73MS43k8ChDsxx
+ //EaGPXxhgYQGScsOD4/iUr9JFEp3Nk0suod1LZxVmd12xjNqPm/VvJ0bKIH19iWHcUP
+ rT9rZRijA/eyPB41/ZmUnaaXTW/zChqruYcnxTM2j4giTDHzXGQSOsbi3qy8jhlWA+3s
+ dr1g==
+X-Gm-Message-State: AOJu0Yzl8xo24RO28mw0cRGllFuMS4tDacnmQMujnsil3QHtehzq4kmo
+ 5hpYgzRSPHvmRJ9DmA5Q/Z67BJ91PAwwzvfp9AHkBG8Ko8X/
+X-Google-Smtp-Source: AGHT+IEr58OVmgUpe//wZwE4NMMx5aAr6zU/VQw8AkDypWIdniUrFLCzrqYeigYw2Hh2W7lXB8by/lKaXNGFETsIFiU=
+X-Received: by 2002:a0c:e889:0:b0:67f:935c:3b22 with SMTP id
+ b9-20020a0ce889000000b0067f935c3b22mr18380750qvo.108.1704332573759; Wed, 03
+ Jan 2024 17:42:53 -0800 (PST)
 MIME-Version: 1.0
-References: <CAFLszTghB1ZObpxUe+afAp2zzQOfn2M9198ofsgnyW9cseG2Ew@mail.gmail.com>
- <20231228154019.GH2652760@bill-the-cat>
- <CAFLszTgZfAHATieERE1x8hhoFHpYDK4Vq4=VVmQapKEn63diyA@mail.gmail.com>
- <20231228204425.GQ2652760@bill-the-cat>
- <CALeDE9MfEd=xjwekR+oVPuWNR7TBPCMU6mc+Z7ig7tc1nhKu_Q@mail.gmail.com>
- <CAFLszTj0MQGUBcNqVTLZuOL=1YBD2pqL2+P8oLKqc5PnLq3GdA@mail.gmail.com>
- <20231231140127.GA2652760@bill-the-cat>
- <CAFLszTj0vdkZ+ch5-crygw7i3Mj8DO5=4naOWAwYMFNqGe0WWA@mail.gmail.com>
- <20240102145536.GK2652760@bill-the-cat>
- <CAFLszTgC6utx_hSOvO7VYubgbUS3CaWaPMnOnTXsvTD41mEVVA@mail.gmail.com>
- <20240103010340.GD1610741@bill-the-cat>
-In-Reply-To: <20240103010340.GD1610741@bill-the-cat>
+References: <CAFLszTjqcJouv7Dyasjfx4FiNy378fFA+A-DP292yvPk8xOzjw@mail.gmail.com>
+ <CAFA6WYME_0-s4aBbaKOS3Q+q9+5553qSWcL9pDMvC9VaAfAz0w@mail.gmail.com>
+ <CAFLszTj0ptH7K2Y4Fc1FR1_OmK5OzAaAReR1KT5R8OZvbgrP-Q@mail.gmail.com>
+ <20231231203953.GG2652760@bill-the-cat>
+ <87ttnxlwon.fsf@bloch.sibelius.xs4all.nl>
+ <CAFLszThKEW7rvkfiV=Y_bYtBCC2=Ue1vKOnb4a+EN4=EEYNfng@mail.gmail.com>
+ <20240101233545.GI2652760@bill-the-cat>
+ <CAFLszTg1F6O2MZh3Ui_ux_aQZkzvx_eY3HprFDqm0ZETwYMGfw@mail.gmail.com>
+ <20240102151046.GL2652760@bill-the-cat>
+ <CAFLszThysDjASn4U7CpBmmp4axjE-CrFk1x6TLhLpmVicpwGbQ@mail.gmail.com>
+ <20240103004138.GC1610741@bill-the-cat>
+In-Reply-To: <20240103004138.GC1610741@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 3 Jan 2024 18:40:49 -0700
-Message-ID: <CAFLszTiOSPyi9q1RatRyYZ1-7v7qKrwJommTFRh_o5z5kkbmRA@mail.gmail.com>
-Subject: Re: [PATCH 0/9] dts: Move to SoC-specific build rules
+Date: Wed, 3 Jan 2024 18:42:42 -0700
+Message-ID: <CAFLszTgiARqxr+J1zt+q9kTrBoU=nrCbZ=QRzUMzmxztSawjfg@mail.gmail.com>
+Subject: Re: [PATCH v3 4/8] dts: Add alternative location for upstream DTB
+ builds
 To: Tom Rini <trini@konsulko.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Sumit Garg <sumit.garg@linaro.org>, Albert Aribaud <albert.u.boot@aribaud.net>,
- =?UTF-8?Q?Andreas_Bie=C3=9Fmann?= <andreas@biessmann.org>, 
- Michal Simek <michal.simek@amd.com>, Michal Simek <monstr@monstr.eu>, 
- Minkyu Kang <mk7.kang@samsung.com>, Thomas Chou <thomas@wytron.com.tw>
+Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, sumit.garg@linaro.org,
+ u-boot@lists.denx.de, 
+ u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de, robh+dt@kernel.org, 
+ krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
+ ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
+ xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
+ rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
+ rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -99,436 +104,695 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Tue, Jan 2, 2024 at 6:03=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
+On Tue, Jan 2, 2024 at 5:41=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
 >
-> On Tue, Jan 02, 2024 at 04:51:34PM -0700, Simon Glass wrote:
+> On Tue, Jan 02, 2024 at 04:54:15PM -0700, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Tue, Jan 2, 2024 at 7:55=E2=80=AFAM Tom Rini <trini@konsulko.com> wr=
+> > On Tue, Jan 2, 2024 at 8:10=E2=80=AFAM Tom Rini <trini@konsulko.com> wr=
 ote:
 > > >
-> > > On Tue, Jan 02, 2024 at 07:06:36AM -0700, Simon Glass wrote:
+> > > On Tue, Jan 02, 2024 at 07:06:40AM -0700, Simon Glass wrote:
 > > > > Hi Tom,
 > > > >
-> > > > On Sun, Dec 31, 2023 at 7:01=E2=80=AFAM Tom Rini <trini@konsulko.co=
-m> wrote:
+> > > > On Mon, Jan 1, 2024 at 4:35=E2=80=AFPM Tom Rini <trini@konsulko.com=
+> wrote:
 > > > > >
-> > > > > On Sun, Dec 31, 2023 at 05:45:00AM -0700, Simon Glass wrote:
-> > > > > > -Scott as it is bouncing
+> > > > > On Mon, Jan 01, 2024 at 03:32:41PM -0700, Simon Glass wrote:
+> > > > > > Hi Mark, Tom,
 > > > > > >
-> > > > > > Hi,
-> > > > > >
-> > > > > > On Fri, Dec 29, 2023 at 9:46=E2=80=AFAM Peter Robinson <pbrobin=
-son@gmail.com> wrote:
+> > > > > > On Sun, Dec 31, 2023 at 5:33=E2=80=AFPM Mark Kettenis <mark.ket=
+tenis@xs4all.nl> wrote:
 > > > > > > >
-> > > > > > > On Fri, Dec 29, 2023 at 12:23=E2=80=AFAM Tom Rini <trini@kons=
-ulko.com> wrote:
+> > > > > > > > Date: Sun, 31 Dec 2023 15:39:53 -0500
+> > > > > > > > From: Tom Rini <trini@konsulko.com>
 > > > > > > > >
-> > > > > > > > On Thu, Dec 28, 2023 at 07:48:08PM +0000, Simon Glass wrote=
+> > > > > > > > On Sun, Dec 31, 2023 at 07:28:52AM -0700, Simon Glass wrote=
 :
-> > > > > > > > > Hi Tom,
+> > > > > > > > > Hi Sumit,
 > > > > > > > > >
-> > > > > > > > > On Thu, Dec 28, 2023 at 3:40=E2=80=AFPM Tom Rini <trini@k=
-onsulko.com> wrote:
+> > > > > > > > > On Fri, Dec 29, 2023 at 8:30=E2=80=AFAM Sumit Garg <sumit=
+.garg@linaro.org> wrote:
 > > > > > > > > > >
-> > > > > > > > > > On Thu, Dec 28, 2023 at 03:09:40PM +0000, Simon Glass w=
-rote:
+> > > > > > > > > > On Fri, 29 Dec 2023 at 01:18, Simon Glass <sjg@chromium=
+.org> wrote:
+> > > > > > > > > > >
 > > > > > > > > > > > Hi Tom,
 > > > > > > > > > > >
-> > > > > > > > > > > On Thu, Dec 28, 2023 at 2:23=E2=80=AFPM Tom Rini <tri=
+> > > > > > > > > > > On Thu, Dec 28, 2023 at 3:54=E2=80=AFPM Tom Rini <tri=
 ni@konsulko.com> wrote:
 > > > > > > > > > > > >
-> > > > > > > > > > > > On Thu, Dec 28, 2023 at 01:37:07PM +0000, Simon Gla=
+> > > > > > > > > > > > On Thu, Dec 28, 2023 at 03:09:12PM +0000, Simon Gla=
 ss wrote:
-> > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > > Hi Tom, Sumit,
 > > > > > > > > > > > > >
-> > > > > > > > > > > > > On Wed, Dec 27, 2023 at 1:21=E2=80=AFPM Tom Rini =
+> > > > > > > > > > > > > On Thu, Dec 28, 2023 at 2:03=E2=80=AFPM Tom Rini =
 <trini@konsulko.com> wrote:
 > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > On Wed, Dec 27, 2023 at 08:23:56AM +0000, Simon=
+> > > > > > > > > > > > > > On Thu, Dec 28, 2023 at 01:37:26PM +0000, Simon=
  Glass wrote:
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > U-Boot builds devicetree binaries from its so=
-urce tree. As part of the
-> > > > > > > > > > > > > > > Kconfig conversion, the Makefiles were update=
-d to align with how this
-> > > > > > > > > > > > > > > is done in Linux: a single target for each So=
-C is used to build all the
-> > > > > > > > > > > > > > > .dtb files for that SoC.
+> > > > > > > > > > > > > > > Hi Sumit,
 > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > Since then, the Makefiles have devolved in so=
-me cases, resulting in
-> > > > > > > > > > > > > > > lots of target-specific build rules. Also Lin=
-ux has moved to using
-> > > > > > > > > > > > > > > subdirectories for each vendor.
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > Recent work aims to allow U-Boot to directly =
-use devicetree files from
-> > > > > > > > > > > > > > > Linux. This would be easier if the directory =
-structure were the same.
-> > > > > > > > > > > > > > > Another recent discussion involved dropping t=
-he build rules altogether.
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > This series makes a start at cleaning up some=
- of the build rules, to
-> > > > > > > > > > > > > > > reduce the amount of code and make it easier =
-to add new boards for the
-> > > > > > > > > > > > > > > same SoC.
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > One issue is that the ARCH_xxx Kconfig option=
-s between U-Boot and Linux
-> > > > > > > > > > > > > > > are not always the same. Given the large numb=
-er of SoCs and boards
-> > > > > > > > > > > > > > > supported by U-Boot, it would be useful to al=
-ign these where possible.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > I don't know why we should start with this now,=
- and further not being on
-> > > > > > > > > > > > > > top of Sumit's series to remove our duplicate d=
-ts files. And that's
-> > > > > > > > > > > > > > where we can have the conversation about for wh=
-ich cases it even makes
-> > > > > > > > > > > > > > sense to build all of the dts files for a given=
- SoC.
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > This is a completely different series - there are=
- no conflicts with
-> > > > > > > > > > > > > Sumit's series so it can be applied before or aft=
-er it.
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > My goal here is to clean up our build rules, rath=
-er than just throwing
-> > > > > > > > > > > > > them all away, for reasons we have discussed prev=
-iously. I filed [1]
-> > > > > > > > > > > > > to track that.
-> > > > > > > > > > > >
-> > > > > > > > > > > > Yes, I'm saying we shouldn't be doing anything this=
- series does until
-> > > > > > > > > > > > after Sumit's series has landed. Along with the fac=
-t that I don't like
-> > > > > > > > > > > > what's going on in this series.
-> > > > > > > > > > >
-> > > > > > > > > > > This seems to again be the disagreement over whether =
-a single DT
-> > > > > > > > > > > should be build for each board, or all the DTs for an=
- SoC?
-> > > > > > > > > >
-> > > > > > > > > > It's about the disagreement on what we should be buildi=
-ng, and what that
-> > > > > > > > > > infrastructure looks like. I do not like adding extra r=
-ules for
-> > > > > > > > > > "clarity" because they don't make things clearer, they =
-lead to the
-> > > > > > > > > > unclear mess we have today getting worse. Most instruct=
-ions are _not_
-> > > > > > > > > > "now take this dtb and this binary and .." but just "ta=
-ke this binary",
-> > > > > > > > > > because we already have the rules and logic to ensure w=
-e build the
-> > > > > > > > > > required dtbs. I also don't like the parts of this seri=
-es that amount
-> > > > > > > > > > to deck shuffling when we should just be taking the cha=
-irs away. There's
-> > > > > > > > > > just not nor will there be a case for omap3/4/5 platfor=
-ms of "change the
-> > > > > > > > > > dtb", so building more is pointless. For other SoCs, th=
-ere may be some
-> > > > > > > > > > cases of "this could have been just a DT change", like
-> > > > > > > > > > rock5b-rk3588_defconfig / rock5a-rk3588s_defconfig coul=
-d share a board
-> > > > > > > > > > dir, but the configs are different and the dts are diff=
-erent, so I don't
-> > > > > > > > > > know that you could really just swap the dtbs.
-> > > > > > > > >
-> > > > > > > > > It is true that we have a different defconfig for each bo=
-ard, but IMO
-> > > > > > > > > that is not good. It is an artifact of the way the build =
-system works.
-> > > > > > > > > IMO Kconfig should be used to define sensible defaults so=
- that the
-> > > > > > > > > defconfigs are nearly empty. Perhaps config fragments can=
- be part of
-> > > > > > > > > the mix, if we can agree on [1].
-> > > > > > > > >
-> > > > > > > > > But if we let this genie out of the bottle, it will be im=
-possible to
-> > > > > > > > > put back in. The devicetree should control the hardware i=
-n U-Boot and
-> > > > > > > > > it should be possible to use the same U-Boot proper on al=
-l boards
-> > > > > > > > > which use the same SoC.
-> > > > > > > >
-> > > > > > > > We've never been past the point where a few examples of clo=
-sely related
-> > > > > > > > boards can re-use the same U-Boot build and just change the=
- device tree.
-> > > > > > > >
-> > > > > > > > It's going to be very SoC specific if we can ever do things=
- like that,
-> > > > > > > > and it will also likely in turn become a question of where =
-did the
-> > > > > > > > tricky bits that U-Boot used to do get shoved instead. You'=
-re not going
-> > > > > > > > to combine board/beagle/beagle/beagle.c and board/ti/omap3e=
-vm/evm.c (and
-> > > > > > > > ignoring all of the other omap3 boards) and get one binary =
-that works on
-> > > > > > > > both, and just uses DT. Let alone that no one wants to do t=
-hat work.
-> > > > > > > >
-> > > > > > > > You've mentioned Rockchip before as maybe a better example,=
- but
-> > > > > > > > https://patchwork.ozlabs.org/project/uboot/list/?series=3D3=
-83579&state=3D* was
-> > > > > > > > leading me to think that no, there's too much "this is what=
- THIS
-> > > > > > > > hardware does" that means that no, there's going to be hard=
-ware
-> > > > > > > > variation that one must just handle in C. Or get more and n=
-ew bindings
-> > > > > > > > accepted upstream to try and make that be data driven, and =
-also possibly
-> > > > > > > > have to deal with "that's policy, not hardware" type argume=
-nts and so
-> > > > > > > > forth.
-> > > > > >
-> > > > > > Oh wow yes that is crazy! But you can always check the compatib=
-le
-> > > > > > string if really necessary. It would be nice to use a sysinfo d=
-river
-> > > > > > for this sort of thing. I should just be a full-time code revie=
-wer...
-> > > > > >
-> > > > > > >
-> > > > > > > Related I've seen issues with nearly identical rockchips devi=
-ces that
-> > > > > > > use different memory chips that as a result need different U-=
-Boot
-> > > > > > > builds because the early boot part needs to initialise a comp=
-letely
-> > > > > > > different set of memory and the two different sets of rules a=
-ren't
-> > > > > > > detectable at run-time nor are they even small enough to fit =
-into
-> > > > > > > smem.
-> > > > > >
-> > > > > > Some of the differences are real/important, like memory setting=
-s, some
-> > > > > > are not. For boards with enough SRAM that SPL can use DM/DT, we=
- can
-> > > > > > deal with these.
-> > > > > >
-> > > > > > But even if SPL does need to be custom, that is better than hav=
-ing a
-> > > > > > full, separate U-Boot for every single board.
-> > > > >
-> > > > > I'm not sure that's a use case anyone else has or wants, and I di=
-sagree
-> > > > > that building a unique SPL and then more generic U-Boot is a win,=
- in
-> > > > > practical and effort terms.
-> > > >
-> > > > Think about firmware update where you could have an update that
-> > > > supports all rk3399 boards, rather than 110 separate (and duplicate=
-)
-> > > > firmware updates.
-> > >
-> > > I don't know who wants that actually is the problem I keep trying to
-> > > bring up. In other words, you're saying that the differences between
-> > > rock-pi-4c-rk3399_defconfig and khadas-edge-v-rk3399_defconfig are
-> > > unintentional and it's just due to different device trees and I say
-> > > they're intentional and the desire is not for a "kitchen sink" type
-> > > rk3399 primary U-Boot build. My evidence for this goes back to the So=
-Cs
-> > > where we do have both "kitchen sink" and then board specific builds.
-> > > This would be things like how there's the am65x_evm configs, which
-> > > support all of the TI reference platforms (and others which follow th=
-e
-> > > EEPROM spec TI uses) and then also iot2050_defconfig, which also uses
-> > > the am65x SoC, but does not (would not) support the TI EEPROM layout =
-and
-> > > instead does what it needs to do for their custom hardware revisions =
-and
-> > > support all of those, instead.
-> >
-> > OK, but this code should be in drivers which we can enable or disable,
-> > wouldn't it?
->
-> No, it's the board specific code. I mean I guess a few of the things
-> like "read EEPROM and see if it follows $my layout spec" could be
-> counted as a driver rather than board/$vendor/common/ code.  But the
-> rest of it isn't. Please look at the board examples I've listed above.
-
-Yes I agree those are unpleasant...but that is not the way it should
-be done. We should have proper APIs and drivers for board-specific
-things. If we can't do that, at least depend on a compatible string.
-That sort of code would never be allowed in Linux, right?
-
->
-> > We are trying to move away from board.c files.
->
-> We are? I didn't know that. We're trying to get rid of board.h, yes. And
-> some platforms where the rest of the firmware stack does everything else
-> needed, yes, we can avoid having dummy board.c files. That's the kind of
-> case where _maybe_ we could even have a generic-aarch64_defconfig (and
-> other platforms too? I _think_ the most recent example that maybe you're
-> thinking of was a MIPS-based router).
-
-Maybe we could for U-Boot proper, yes. But think of all the drivers
-you would have to enable...
-
->
-> > I am not saying that all the defconfig differences are unintentional,
-> > just that we should really rationalise them, so it is clear what needs
-> > to be enabled for each board, and what is just by accident. Part of
-> > that is using Kconfig more than defconfig.
->
-> Yes, there might be some cases where the differences don't need to be
-> there, and maybe rk3399 is an example where more vendor boards could be
-> supported by a single config. But maybe not, there's a lot of annoying
-> board specific things that we need to care about that the OS then just
-> gets to inherit as having been handled.
-
-Sure.
-
->
-> > Another part might be
-> > fragments if we can agree a way to describe a defconfig made up of
-> > fragments ([2] is still hanging about).
->
-> Yes, I'm confused by what you're saying now here since the series here
-> is doing the opposite of what I thought you keep saying. This is making
-> "am62x_beagleplay_a53" be a specific thing to build for instead of just
-> making it be part of "am62x_evm_a53" as the only thing it changes is the
-> default device tree. And we're already always building the beagleplay
-> dtbs under the SoC name. That said, I'm not sure where functionally that
-> series ended up since beagleplay wants a different environment for LED
-> flashing and so forth.
-
-I just think we are a bit lost here. To my reading that series creates
-a fairly generic defconfig and then uses it on a few boards, with
-minor variations. My point was that many of the differences are
-unintentional or unnecessary. Yours is that many are intentional or
-necessary. So I suspect we are in agreement, actually?
-
-Any design decision involves tradeoffs and people have their own
-weights on the things they care about, so will reach different
-decisions or have different preferences. It is when one path is
-completely closed off that things get difficult.
-
->
-> > > What I think you keep wanting to aim for is fine and good and somethi=
-ng
-> > > platforms can opt in to, and we have some doing it today. But it's st=
-ill
-> > > at the end of the day a choice for the designers.
-> >
-> > Indeed. I just want to make it easier to be generic than to be specific=
+> > > > > > > > > > > > > > > On Thu, Dec 28, 2023 at 11:58=E2=80=AFAM Sumi=
+t Garg <sumit.garg@linaro.org> wrote:
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > Allow platform owners to mirror devicetree =
+files from devitree-rebasing
+> > > > > > > > > > > > > > > > directory into dts/arch/$(ARCH) (special ca=
+se for dts/arch/arm64). Then
+> > > > > > > > > > > > > > > > build then along with any *-u-boot.dtsi fil=
+e present in arch/$(ARCH)/dts
+> > > > > > > > > > > > > > > > directory. Also add a new Makefile for arm6=
+4.
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > This will help easy migration for platforms=
+ which currently are compliant
+> > > > > > > > > > > > > > > > with upstream Linux kernel devicetree files=
 .
->
-> And in turn I don't know why we're hung up on "build more device trees"
-> when the first problem I see is "make some generic faux-boards and prove
-> them out".
-
-OK
-
->
-> > > You say "110 separate (and duplicate)" and I disagree with the "(and
-> > > duplicate)" part of that. Could some platforms be condensed? Yes,
-> > > likely. But figuring out how to do that starts with figuring out why
-> > > they're separate to start with.
-> >
-> > I mean there are 110 rk3399 devicetree files in Linux. I count only 29
-> > in U-Boot.
->
-> I only see 41 dts files in v6.7-rc8 for "rk3399" and 27 defconfigs. So
-> yes, there's probably some level already of one U-Boot defconfig handles
-> N board revs. I agree there likely could be more.
-
-Yes.
-
->
-> > If we were to support Mediatek 8195, for example, we would ideally
-> > like to support the Chromebooks and use a single Kconfig for all of
-> > them. In general, if we make it easy, newer platforms will need to
-> > follow the path of least resistance. The reason rk3399 is mostly
-> > generic is that it was based on rk3288, which was written that way
-> > from the start.
->
-> Okay? A lot of the newer SoCs are done more generic than before,
-> especially on aarch64 compared with arm32 as some of the very board
-> specific stuff has been shoved to other parts of the stack already. I
-> keep bringing up TI K3 stuff because it too is done generically but also
-> we have in tree examples of intentionally NOT copying the reference
-> hardware platform and having true unique changes that need to be
-> handled.
-
-OK. I see those as things to address, not fundamental flaws in the idea.
-
->
-> > > > > The only win I see there is it would be part
-> > > > > of what I've said before about how I do not want the "XPL" series=
- you've
-> > > > > talked about before, but instead think Yamada-san was right in hi=
-ndsight
-> > > > > and in short we should have "fooboard_defconfig",
-> > > > > "fooboard_spl_defconfig" and "fooboard_tpl_defconfig" and you mak=
-e each
-> > > > > config and build each config by itself. In that context, yes, you=
- could
-> > > > > have barvend-fooboard_rev1_spl_defconfig,
-> > > > > barvend-fooboard_rev2_spl_defconfig and barvend-fooboard_defconfi=
-g to
-> > > > > get a more generic U-Boot build.  But nothing so much like an OS =
-kernel
-> > > > > because we care about binary size and rarely does the OS vendor (=
-but
-> > > > > some production cases in turn do), so outside of SoC-vendor where
-> > > > > showing off features is more important than size, most of the tim=
-e, will
-> > > > > you see an actual use for SoC-generic U-Boot build.
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > Signed-off-by: Sumit Garg <sumit.garg@linar=
+o.org>
+> > > > > > > > > > > > > > > > ---
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > Changes in v3:
+> > > > > > > > > > > > > > > > --------------
+> > > > > > > > > > > > > > > > - Minor commit message update
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > Changes in v2:
+> > > > > > > > > > > > > > > > --------------
+> > > > > > > > > > > > > > > > - s/DEVICE_TREE_LOC/dt_dir/ and s/U-boot/U-=
+Boot/
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > >  dts/Kconfig             | 11 +++++++++++
+> > > > > > > > > > > > > > > >  dts/Makefile            | 17 +++++++++++++=
++---
+> > > > > > > > > > > > > > > >  dts/arch/arm64/Makefile | 14 +++++++++++++=
++
+> > > > > > > > > > > > > > > >  3 files changed, 39 insertions(+), 3 delet=
+ions(-)
+> > > > > > > > > > > > > > > >  create mode 100644 dts/arch/arm64/Makefile
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > diff --git a/dts/Kconfig b/dts/Kconfig
+> > > > > > > > > > > > > > > > index 00c0aeff893..e58c1c6f2ab 100644
+> > > > > > > > > > > > > > > > --- a/dts/Kconfig
+> > > > > > > > > > > > > > > > +++ b/dts/Kconfig
+> > > > > > > > > > > > > > > > @@ -85,6 +85,17 @@ config OF_LIVE
+> > > > > > > > > > > > > > > >           enables a live tree which is avai=
+lable after relocation,
+> > > > > > > > > > > > > > > >           and can be adjusted as needed.
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > +config OF_UPSTREAM
+> > > > > > > > > > > > > > > > +       bool "Enable use of devicetree impo=
+rted from Linux kernel release"
+> > > > > > > > > > > > > > > > +       help
+> > > > > > > > > > > > > > > > +         Traditionally, U-Boot platforms u=
+sed to have their custom devicetree
+> > > > > > > > > > > > > > > > +         files or copy devicetree files fr=
+om Linux kernel which are hard to
+> > > > > > > > > > > > > > > > +         maintain and can usually get out-=
+of-sync from Linux kernel. This
+> > > > > > > > > > > > > > > > +         option enables platforms to migra=
+te to devicetree-rebasing repo where
+> > > > > > > > > > > > > > > > +         a regular sync will be maintained=
+ every major Linux kernel release
+> > > > > > > > > > > > > > > > +         cycle. However, platforms can sti=
+ll have some custom u-boot specific
+> > > > > > > > > > > > > > > > +         bits maintained as part of *-u-bo=
+ot.dtsi files.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > My only other suggestion here is to mention t=
+hat this should be set in
+> > > > > > > > > > > > > > > Kconfig, for the SoC as a whole. So I believe=
+ that means that it
+> > > > > > > > > > > > > > > should be hidden, with no string for the 'boo=
+l':
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > >       bool  # Enable use of devicetree import=
+ed from Linux kernel release
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > I think we can just keep prompting for it now, =
+to make the transition
+> > > > > > > > > > > > > > easier, before this option just goes away in ti=
+me, hopefully.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > Also, this doesn't seem to work for me. Befor=
+e this series I get these
+> > > > > > > > > > > > > > > files when building firefly-rk3399:
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > rk3399-eaidk-610.dtb            rk3399-khadas=
+-edge-v.dtb
+> > > > > > > > > > > > > > > rk3399-orangepi.dtb        rk3399-rock-pi-4a.=
+dtb
+> > > > > > > > > > > > > > > rk3399-evb.dtb                  rk3399-leez-p=
+710.dtb
+> > > > > > > > > > > > > > > rk3399-pinebook-pro.dtb    rk3399-rock-pi-4c.=
+dtb
+> > > > > > > > > > > > > > > rk3399-ficus.dtb                rk3399-nanopc=
+-t4.dtb
+> > > > > > > > > > > > > > > rk3399-pinephone-pro.dtb   rk3399-rockpro64.d=
+tb
+> > > > > > > > > > > > > > > rk3399-firefly.dtb              rk3399-nanopi=
+-m4-2gb.dtb
+> > > > > > > > > > > > > > > rk3399pro-rock-pi-n10.dtb  rk3399-roc-pc.dtb
+> > > > > > > > > > > > > > > rk3399-gru-bob.dtb              rk3399-nanopi=
+-m4b.dtb
+> > > > > > > > > > > > > > > rk3399-puma-haikou.dtb     rk3399-roc-pc-mezz=
+anine.dtb
+> > > > > > > > > > > > > > > rk3399-gru-kevin.dtb            rk3399-nanopi=
+-m4.dtb
+> > > > > > > > > > > > > > > rk3399-rock-4c-plus.dtb
+> > > > > > > > > > > > > > > rk3399-khadas-edge-captain.dtb  rk3399-nanopi=
+-neo4.dtb    rk3399-rock-4se.dtb
+> > > > > > > > > > > > > > > rk3399-khadas-edge.dtb          rk3399-nanopi=
+-r4s.dtb     rk3399-rock960.dtb
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > Afterwards I get this:
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > make[3]: *** No rule to make target
+> > > > > > > > > > > > > > > 'dts/arch/arm64/rk3399-firefly.dtb', needed b=
+y 'dtbs'.  Stop.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > So I set this manually for that one board:
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > CONFIG_DEFAULT_DEVICE_TREE=3D"rockchip/rk3399=
+-firefly"
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > and get:
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > make[3]: *** No rule to make target
+> > > > > > > > > > > > > > > 'dts/arch/arm64/rockchip/rk3399-firefly.dtb',=
+ needed by 'dtbs'.  Stop.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > I am not sure how to fix this, nor how this c=
+an be made to build all
+> > > > > > > > > > > > > > > the DTs for rk3399, as it does today.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > Looking at the patch for amlogic boards, you ne=
+ed to make the link to
+> > > > > > > > > > > > > > devicetree-rebasing inside dts/...
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > OK, let me give up on rk3399 for now...that doesn=
+'t seem to work even
+> > > > > > > > > > > > > with the link.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Using odroid-c2 with -next I see:
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > $ ls /tmp/b/odroid-c2/arch/arm/dts/
+> > > > > > > > > > > > > meson-a1-ad401.dtb                 meson-g12b-odr=
+oid-n2l.dtb
+> > > > > > > > > > > > >     meson-gxl-s905x-libretech-cc.dtb
+> > > > > > > > > > > > > meson-axg-jethome-jethub-j100.dtb  meson-g12b-odr=
+oid-n2-plus.dtb
+> > > > > > > > > > > > >     meson-gxl-s905x-libretech-cc-v2.dtb
+> > > > > > > > > > > > > meson-axg-s400.dtb                 meson-g12b-rad=
+xa-zero2.dtb
+> > > > > > > > > > > > >     meson-gxl-s905x-p212.dtb
+> > > > > > > > > > > > > meson-g12a-radxa-zero.dtb          meson-gxbb-kii=
+-pro.dtb
+> > > > > > > > > > > > >     meson-gxm-gt1-ultimate.dtb
+> > > > > > > > > > > > > meson-g12a-sei510.dtb              meson-gxbb-nan=
+opi-k2.dtb
+> > > > > > > > > > > > >     meson-gxm-khadas-vim2.dtb
+> > > > > > > > > > > > > meson-g12a-u200.dtb                meson-gxbb-odr=
+oidc2.dtb
+> > > > > > > > > > > > >     meson-gxm-s912-libretech-pc.dtb
+> > > > > > > > > > > > > meson-g12b-a311d-bananapi-m2s.dtb  meson-gxbb-p20=
+0.dtb
+> > > > > > > > > > > > >     meson-gxm-wetek-core2.dtb
+> > > > > > > > > > > > > meson-g12b-a311d-khadas-vim3.dtb   meson-gxbb-p20=
+1.dtb
+> > > > > > > > > > > > >     meson-sm1-bananapi-m2-pro.dtb
+> > > > > > > > > > > > > meson-g12b-bananapi-cm4-cm4io.dtb  meson-gxbb-wet=
+ek-hub.dtb
+> > > > > > > > > > > > >     meson-sm1-bananapi-m5.dtb
+> > > > > > > > > > > > > meson-g12b-gsking-x.dtb            meson-gxbb-wet=
+ek-play2.dtb
+> > > > > > > > > > > > >     meson-sm1-khadas-vim3l.dtb
+> > > > > > > > > > > > > meson-g12b-gtking.dtb              meson-gxl-s805=
+x-libretech-ac.dtb
+> > > > > > > > > > > > >     meson-sm1-odroid-c4.dtb
+> > > > > > > > > > > > > meson-g12b-gtking-pro.dtb          meson-gxl-s905=
+d-libretech-pc.dtb
+> > > > > > > > > > > > >     meson-sm1-odroid-hc4.dtb
+> > > > > > > > > > > > > meson-g12b-odroid-go-ultra.dtb
+> > > > > > > > > > > > > meson-gxl-s905w-jethome-jethub-j80.dtb  meson-sm1=
+-sei610.dtb
+> > > > > > > > > > > > > meson-g12b-odroid-n2.dtb           meson-gxl-s905=
+x-khadas-vim.dtb
+> > > > > > > > > > > > > $
+> > > > > > > > > > > > > With this series (sort of, since I am really not =
+sure how to
+> > > > > > > > > > > > > cherry-pick the commits from the PR) I see nothin=
+g:
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > $ ls /tmp/b/odroid-c2/arch/arm/dts/
+> > > > > > > > > > > > > $
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > This shows some of the files:
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > $ find /tmp/b/odroid-c2/ -name "*.dtb"
+> > > > > > > > > > > > > /tmp/b/odroid-c2/dts/dt.dtb
+> > > > > > > > > > > > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxb=
+b-odroidc2.dtb
+> > > > > > > > > > > > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxb=
+b-nanopi-k2.dtb
+> > > > > > > > > > > > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxb=
+b-wetek-play2.dtb
+> > > > > > > > > > > > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxb=
+b-kii-pro.dtb
+> > > > > > > > > > > > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxb=
+b-p200.dtb
+> > > > > > > > > > > > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxb=
+b-p201.dtb
+> > > > > > > > > > > > > /tmp/b/odroid-c2/dts/arch/arm64/amlogic/meson-gxb=
+b-wetek-hub.dtb
+> > > > > > > > > > > > > /tmp/b/odroid-c2/u-boot.dtb
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > but where are the rest? Also, is it possible to p=
+ut the output .dtb
+> > > > > > > > > > > > > files into the same directory? Otherwise we may h=
+ave some pain with
+> > > > > > > > > > > > > binman.
+> > > > > > > > > > > >
+> > > > > > > > > > > > What do you mean by same directory? But maybe also,=
+ what's an example of
+> > > > > > > > > > > > a board you think might end up having problems? Con=
+verting that in a
+> > > > > > > > > > > > follow-up series is likely a good idea, to highligh=
+t and address these
+> > > > > > > > > > > > issues sooner rather than later.#
+> > > > > > > > > > >
+> > > > > > > > > > > Today the .dtb files go into arch/arm/dts - so it wou=
+ld be easier if
+> > > > > > > > > > > this series could do the same.
+> > > > > > > > > >
+> > > > > > > > > > The kbuild infrastructure keeps the dtb alongside dts f=
+iles which is
+> > > > > > > > > > the preferred way too as otherwise it would be complica=
+ted to locate
+> > > > > > > > > > DT files for the users. Also, we have to move towards L=
+inux DT
+> > > > > > > > > > directory structure and thereby the tools like binman h=
+ave to be
+> > > > > > > > > > adjusted. I will do that when I get to migrating SoCs s=
+upporting
+> > > > > > > > > > binman.
+> > > > > > > > >
+> > > > > > > > > OK, I want to stop here and rethink this. This is the pat=
+h taken so
+> > > > > > > > > far, I believe:
+> > > > > > > > >
+> > > > > > > > > 1. We want to use devicetree files taken from Linux and
+> > > > > > > > > devicetree-rebasing provides these
+> > > > > > > >
+> > > > > > > > Yes.
+> > > > > > > >
+> > > > > > > > > 2. We want to use 'git subtree' to avoid needing a script=
+ to do the
+> > > > > > > > > sync / create a commit
+> > > > > > > >
+> > > > > > > > No. We want to use 'git subtree' to avoid having to use git=
+ submodules.
+> > > > > >
+> > > > > > Well that is what I understood from Sumit, when I asked about a
+> > > > > > script. I imagine a 100-line Python script could do the same as=
+:
+> > > > > >
+> > > > > >    git subtree pull --prefix devicetree-rebasing
+> > > > > > git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/device=
+tree-rebasing.git
+> > > > > > <release-tag> --squash
+> > > > > >
+> > > > > > and it could also put the files in the right place for U-Boot.
+> > > > >
+> > > > > I've been saying in various places for years that I want to move =
+away
+> > > > > from arch/*/dts being where we have the "just a copy" dts files a=
+nd have
+> > > > > them somewhere else so they are easier to manage and differentiat=
+e our
+> > > > > changes / additions. So arch/*/dts cannot be some hard-coded "rig=
+ht"
+> > > > > path.
 > > > >
-> > > > We'll see. The size cost for making things generic across an SoC is
-> > > > likely very small, particularly if the settings are in the DT where
-> > > > they belong. But I do accept we are not seeing the pressure yet.
+> > > > OK
+> > > >
+> > > > >
+> > > > > > > > > 3. But this leaves us with a directory structure which do=
+esn't match
+> > > > > > > > > U-Boot (no script to fix it up)
+> > > > > > > >
+> > > > > > > > No. We intentionally abandon arch/*/dts because it's so ful=
+l of
+> > > > > > > > out of date files and never fully re-synced, only re-synced=
+ ad-hoc.
+> > > > > >
+> > > > > > I mean that the dir structure doesn't match. I am not worried a=
+bout
+> > > > > > keeping arch/*/dts but I want the same structure somewhere else=
+, e.g.
+> > > > > > dtr/arch/*/dts
+> > > > >
+> > > > > And what I want here is to match the same structure everyone that=
+'s not
+> > > > > U-Boot uses. For better or worse no one else seems to have gone w=
+ith
+> > > > > "treat aarch64 as just another ARM", and then the vendor director=
+y
+> > > > > structure only makes that more obviously a mismatch. We need to f=
+ollow
+> > > > > what everyone else uses, and developers familiar with other proje=
+cts
+> > > > > will expect to see.
+> > > >
+> > > > So you are saying that U-Boot should move to what Linux uses. I agr=
+ee
+> > > > that seems like the best approach, so let's do it.
+> > > >
+> > > > >
+> > > > > > > > > 4. So we deal with that by skipping the build rules and u=
+sing CONFIG
+> > > > > > > > > options to select what is built
+> > > > > > > > > 5. So now we cannot build all the files for an SoC, just =
+the ones that
+> > > > > > > > > are in the CONFIG options
+> > > > > > > > > 6. Linux doesn't actually use devicetree-rebasing itself,=
+ so doesn't
+> > > > > > > > > have this problem
+> > > > > > > >
+> > > > > > > > No. devicetree-rebasing skips the Makefiles because they're=
+ part of the
+> > > > > > > > kernel. We couldn't re-use them ourselves because we don't =
+have the same
+> > > > > > > > CONFIG names the kernel does. And Sumit has not replicated =
+the logic we
+> > > > > > > > have under arch/*/dts/Makefile today because I've asked him=
+ not to, and
+> > > > > > > > we'll figure out what subsets of that logic make sense to a=
+dd back in as
+> > > > > > > > a second step not a first step.
+> > > > > >
+> > > > > > Again, you are missing my point. I am not suggesting using Linu=
+x's
+> > > > > > build rules, just explaining why Linux doesn't have the problem=
+ we
+> > > > > > would be creating here.
+> > > > > >
+> > > > > > > > > So this is heading in the wrong direction. Nor is it clea=
+r that this
+> > > > > > > > > would just be a temporary problem.
+> > > > > > > >
+> > > > > > > > A previous iteration of this series built all of the dtb fi=
+les for the
+> > > > > > > > SoC that Sumit has migrated with this series, but then drop=
+ped it.
+> > > > > >
+> > > > > > Oh.
+> > > > > >
+> > > > > > > >
+> > > > > > > > [snip]
+> > > > > > > > > I would like to do this series properly, maintaining the =
+SoC-specific
+> > > > > > > > > build rules, not removing what I see as an important feat=
+ure. It
+> > > > > > > > > should not be that difficult to figure out and I am happy=
+ to help with
+> > > > > > > > > it.
+> > > > > > > >
+> > > > > > > > The problem is that the rest of us do not understand the us=
+e case you're
+> > > > > > > > describing where a dtb file that would be useful in a build=
+ is not
+> > > > > > > > already in the list to build. The only one of those use cas=
+es I
+> > > > > > > > understand thus far is the exynos4 (iirc) case you mentione=
+d previously
+> > > > > > > > where yes, really, one defconfig + appending board.dtb is f=
+ine, or fine
+> > > > > > > > enough. It's not that far off of the SPL_LOAD_FIT case, but=
+ there we
+> > > > > > > > know what to build already.
+> > > > > >
+> > > > > > Perhaps the problem is that the rest of you think of the build =
+as all
+> > > > > > happening in U-Boot, similar to the proposed 'make image.fit' t=
+hat I
+> > > > > > am trying to add to Linux.
+> > > > > >
+> > > > > > But packaging can be (and often is) a separate step from buildi=
+ng.
+> > > > > > Linux has no packaging mechanism today...it just builds everyth=
+ing
+> > > > > > (including all DTs) and stops.
+> > > > > >
+> > > > > > We should be able to pick up whatever .dtb files we want and us=
+e them
+> > > > > > in an image.
+> > > > > >
+> > > > > > > > And I guess trying to tie things up, that's my puzzle. SPL_=
+LOAD_FIT is
+> > > > > > > > how I see the use case you talk about being solved, if a fu=
+ll U-Boot is
+> > > > > > > > generic enough for N boards, SPL_LOAD_FIT does the right th=
+ing (in this
+> > > > > > > > non-bloblist DTB, non-reusing-OS-inntended DTB world). I re=
+ally don't
+> > > > > > > > knnow how many modern SoCs can take a literal concatenated =
+DTB and even
+> > > > > > > > in those cases I don't get why that's the win we want now? =
+1 build to N
+> > > > > > > > binaries?
+> > > > > >
+> > > > > > Yes SPL_LOAD_FIT is fine although in practice we will likely ne=
+ed SPL
+> > > > > > to use the correct DT as well, so the DT will need to be determ=
+ined in
+> > > > > > TPL, perhaps.
+> > > > >
+> > > > > I mean, SPL_LOAD_FIT still can handle this case, with a call to t=
+he
+> > > > > function to re-parse the tree, when needed. I thought we did this=
+ today
+> > > > > even, but perhaps I'm confusing my options here.
+> > > > >
+> > > > > > But anyway, this works OK with rk3399, for example. We need to =
+support
+> > > > > > this use case.
+> > > > > >
+> > > > > > Also, it is pretty easy. We just need to stick with the dir str=
+ucture
+> > > > > > we have today and copy our existing Makefiles into that dir. Or=
+ change
+> > > > > > to the kernel dir structure and use that. Or do one, then the o=
+ther.
+> > > > >
+> > > > > I'm sorry, I don't understand what directory structure has to do =
+with
+> > > > > "build more dtbs". For the cases where it makes sense to, yes, we=
+ can
+> > > > > build more dtbs, based on the SoC. I'm setting aside entirely the
+> > > > > discussion on what SoCs that works for, for another thread.
+> > > >
+> > > > Well you said above that we should switch to the kernel dir structu=
+re,
+> > > > so I believe that issue is resolved.
+> > > >
+> > > > 'build more dtbs' means build all the DTBs for an SoC, not just a
+> > > > selection that a particular board vendor decided on.
 > > >
-> > > Yes, I think we're well past the point where it's a case of needing t=
-o
-> > > see the implementation rather than talking about it over and over.
+> > > Yes, what other dtbs to build is the sticking point, in a number of
+> > > threads now.
 > >
-> > Yes, that is [1]. If you'd like to set a timeline I can take a look.
-> > But we already have lots of examples, e.g. chromebook_bob/kevin, 4
-> > chromebook/bits for rk3299. Quite a few of the sunxi boards are very
-> > common, from what I can tell.
+> > All of the ones for the SoC.
 >
-> As soon as you're able, yes, please test and show multi platform builds
-> that extend beyond the multi platform builds we have today that
-> specify the N platforms they're able to function on.
+> Yes, that's your position, and it's not anyone elses position.
+
+Indeed, I seem to be in a minority of one.
+
+>
+> > > > > Perhaps an issue here is that much like the kernel "install" targ=
+et, we
+> > > > > need an "install" target too, so that whatever dtbs we build can =
+be
+> > > > > more easily found for external packaging, but whatever tooling it=
+ is
+> > > > > that wants it? And perhaps this is part of the problem, tooling t=
+hat
+> > > > > expects to pull things out of the object directory rather than an
+> > > > > "installed" directory?
+> > > >
+> > > > This is where binman comes in. It can run as part of U-Boot build, =
+to
+> > > > build a few default firmware images. Then it can be run *later*,
+> > > > outside the U-Boot build, with an augmented or more targeted image
+> > > > definition, with mostly the same input files, to pull together imag=
+es
+> > > > for specific uses. As you say, the input files need to be in a defi=
+ned
+> > > > location, which they are today, for the most part.
+> > > >
+> > > > So even if a particular board only uses one DT, all the DTs for tha=
+t
+> > > > SoC are built and so can be used in that final-packaging step. With=
+out
+> > > > that build, there is no way to get the required .dtb files, other t=
+han
+> > > > building every board one by one and then pulling out the .dtb files=
+ or
+> > > > something weird like that.
+> > > >
+> > > > Note that this works independently of whether OF_LIST is used, etc.
+> > >
+> > > How about this. When you introduce generic-rk3399_defconfig is when w=
+e
+> > > can also have dts-$(CONFIG_ROCKCHIP_RK3399) list everything, and insi=
+st
+> > > it be kept up to date. That to me feels like the right order to go in=
+.
+> > > And we can have all of the implementation details be hashed out
+> > > elsewhere, not in the thread about fixing our nightmare about dts fil=
+e
+> > > resync.
+> >
+> > So long as Sumit can put it back so we can use build rules, that's
+> > fine. But removing the build rules is the sticking point for me.
+>
+> But it's not a sticking point for anyone else for the series. Because
+> no one else gets the point you're trying to make.
 
 OK
 
 >
-> > > > For XPL, there are pros and cons, but I thought we talked about tha=
-t
-> > > > at the time and agreed that the need for Kconfig dependencies betwe=
-en
-> > > > phases makes having separate defconfigs too painful?
+> > > > > > > > But even then, I don't object to adding those rules to the =
+Makefiles. If
+> > > > > > > > it works it works. I object to adding them when they don't =
+work.
+> > > > > >
+> > > > > > What do you mean by 'work'? With this series as is, it simply i=
+sn't
+> > > > > > possible to add Makefile rules, as they are ignored. Am I missi=
+ng
+> > > > > > something?
+> > > > >
+> > > > > Yes, I think you're missing something. Perhaps you need to publis=
+h a WIP
+> > > > > tree somewhere so someone can see what you're doing as it sounds =
+like
+> > > > > you're not able to add another SoC of any type on top of Sumit's =
+tree
+> > > > > and have it work.
+> > > >
+> > > > The current -next source builds dtb files based on the SoC, for the
+> > > > most part. I sent a series to clean that up a bit[1], but it is mos=
+tly
+> > > > there.
 > > >
-> > > I recall there being a large number of issues.
+> > > Yes, and that relied on Rasmus' series having been merged ages ago wh=
+ich
+> > > fixed up a number of "people just copypasta'd something here,
+> > > incorrectly".  Keep that in mind as part of why I have objections her=
+e.
 > >
-> > My memory is pretty dim about those, but I am sure there are issues to
-> > resolve, as with anything new. I still believe it is the best way
-> > forward. We should be able to add a new phase with a few build
-> > changes, not the large effort needed today. Most of the prereqs were
-> > applied, so perhaps it would not be a large series these days?
+> > OK.
 >
-> I believe the first few patches were adding some very large number of
-> "bool SPL_FOO" entries and that was a hard NAK from me as showing why
-> this makes life worse, not better.
+> And since I think you're missing the point I was raising, because no one
+> else has the "any dtb from the SoC with this binary", we'll just be
+> getting back to re-introducing those kind of problems with what you're
+> demanding.
+>
+> > > > From the above it seems like the plan could be:
+> > > > 1. Move arm64 .dts files to arch/arm64/dts/<vendor>/... and adjust
+> > > > Makefiles accordingly
+> > >
+> > > Since we're going to move everyone to being from the upstream kernel,
+> > > that seems like unneeded churn.
+> >
+> > What is the timeline for that move?
+>
+> It could probably, largely, be done in 2024, for the platforms that
+> actively sync. For the ones that aren't behaving well right now? I don't
+> know, it'll depend on when someone shows up being active about them
+> again.
+>
+> > We are talking about 1700 lines of Makefies and I already made a good
+> > start on part of it. So if we are going to be a few months with two
+> > different paths, fine, but this is going to drag on for a year, I
+> > would rather clean it up now and have a unified path for both sets of
+> > DTs.
+>
+> The sticking point for migration is going to be the testing of the
+> platforms that are not well in sync at all.
+>
+> > > > 2. Choose a directory target for devicetree-rebasing. I see that
+> > > > 'barebox' uses 'dts' which seems better to me than
+> > > > 'devicetree-rebasing/src/'. Actually barebox even seems to have
+> > > > scripts for handling all of this [2]??
+> > >
+> > > They've been doing this since longer than git subtree has existed I
+> > > believe. I suspect that much like how Rob would like to move the
+> > > in-kernel devicetree compiler sync from a script to git subtree, bare=
+box
+> > > will too.
+> >
+> > Maybe, although the first barebox dts/ commit was 2014 and subtree is
+> > claimed to come out in 2012...but then devicetree-rebasing might be
+> > newer, which would explain why they have 'git filter-branch' stuff in
+> > the script.
+>
+> Well, it was just a guess on my part. It took a while for subtree to
+> catch on, and yes, it's taken a while for everything to reach the state
+> it's in today, for dts sources outside of the linux kernel itself.
+>
+> > I thought devicetree-rebasing came from Linux. Is it its own repo? So
+> > what is the DT upstream these days??
+>
+> I'll let Rob chime in again here if he likes. In short,
+> devicetree-rebasing is the kernel dts files/bindings copied out and
+> tagged, matching upstream kernel tags, and with assorted useful bits of
+> git history available.
+>
+> > If subtree does what we want without making U-Boot look like
+> > Franekstein's monster, that's fine. But I don't mind having a script.
+>
+> Yes, everyone else thus far seems fine with what we get via this series.
+>
+> > > > 3. Adjust the build system to use the dts/ directory for .dts files
+> > > > when OF_UPSTREAM is enabled
+> > > >
+> > > > Then it will be easy. People can enable OF_UPSTREAM for an SoC
+> > > > (without changing DEFAULT_DEVICE_TREE) and will get the same behavi=
+our
+> > > > as now, just with upstream .dts files. All the .dts files for an So=
+C
+> > > > are built, as now, just as Linux does. We can continue cleaning up =
+the
+> > > > DT build rules as time permits.
+> > >
+> > > Maybe the unasked / unanswered question here is, why don't we put the
+> > > subtree in to dts/ ? Just because it would make us more likely to mak=
+e
+> > > changes rather than treat it as read only?
+> >
+> > It is an easy checkpatch check, if that is your only concern.
+>
+> Yeah, checkpatch isn't great for catching and stopping things. I don't
+> know how many other custodians check their PRs before I get to them. So
+> if it's not a fatal CI thing, it's not going to always be caught before
+> I see it, and I don't always catch "ERROR" things in checkpatch in a PR
+> either. But it might still be more annoying than not to have subtree be
+> shoved in to "dts". I'm hoping for some feedback from Sumit on this
+> point since I think he's played around.
 
-I believe that was an earlier version. The later versions used a
-'nospl' file to mark things that were 'global' across all builds. But
-another look and a rebase would be needed to check that.
+It seems to me that the base issue here (in various threads both now
+and in previous months) is whether U-Boot should control over the
+devicetree it uses, either through managing to get schema upstream, or
+by having its own local pieces. That question is relevant both at
+build time and at runtime.
+
+Anway, I think I have said my piece. Please go ahead with whatever you
+think makes sense.
+
+I would like to continue to clean up the existing Makefile rules though.
 
 Regards,
 Simon
