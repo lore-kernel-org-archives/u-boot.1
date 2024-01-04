@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 307C4C47073
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:13:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9C36C47074
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:13:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2F08879C0;
-	Thu,  4 Jan 2024 16:12:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8260287A14;
+	Thu,  4 Jan 2024 16:12:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZZw3pA7C";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Sd1jjqi+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC197879DF; Thu,  4 Jan 2024 16:12:16 +0100 (CET)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id 84350879B5; Thu,  4 Jan 2024 16:12:17 +0100 (CET)
+Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
+ [IPv6:2607:f8b0:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6987879CE
+ by phobos.denx.de (Postfix) with ESMTPS id D69E8879D1
  for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:12:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-35fa08df8afso1961475ab.3
+Received: by mail-il1-x130.google.com with SMTP id
+ e9e14a558f8ab-35ff53a78a3so2193935ab.3
  for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 07:12:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704381117; x=1704985917; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=e7OFYXUoGsSQawoF7E2nOCOmo1YQUGe0e+G7xI/qfDM=;
- b=ZZw3pA7CvnRZ5asuJo1biKa0gLm9YikCORHhMxPUaCJxO7+81PSUj8V1JHeahM4HYq
- icZqVvSd2kZd8TSzVMBx2GWzje0Yoa8uTOWDGPqeJ9lIZZYksFe5gOs+6IVyguZ2/B7M
- PZufMABJ0ZfzlCFg+frUW1wf9MmjPdz7MJRI0=
+ d=chromium.org; s=google; t=1704381119; x=1704985919; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zpqcU1Y7mDH9IuYja2MIELbGLSPNmWdDNZnaHD5YzMM=;
+ b=Sd1jjqi+qwM1Gx8jIvvBP+7IRH82Zne3qvFm8gJ9tFWr7ykNcHr3uEGTiQRGHV83et
+ fh/dhPQhlbQYTeI/I2zxG1omNNiaDbGTbZ9n0EXfpqFYIHIfE/S6HvVqqnzndps5IFWr
+ r2PUV8rN0ualQ8SbTFvvJ41GxSkm+oNxaZ/0U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704381117; x=1704985917;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=e7OFYXUoGsSQawoF7E2nOCOmo1YQUGe0e+G7xI/qfDM=;
- b=tYvtCSoxTkyUa/5y/193iFHKqfYxl2YLmhLpv8jbJYDDdRbdTvDPcdOqCyu1eeL+CP
- CCKDBgAtJ2la8G98JfJ3U+tftS8KcKWZ/KV3Mc4mqRjNnZwPTZ+xMVLS5RoMr+GxGA3A
- dUMF88MzwanFVoiQz/dDgIkw3gbD/ySEf7eGfOPoY1fL1AlW1xwXl5Y5phfcmKFQypQs
- DcxaF9VVXDbPEvjJc2FsUy5sTNNYkWoXmYWXx8f25DYI38DbA0Cx7DRDB5JGMeadXWsE
- neFZ6bpTxS3fqJi3u6IfRheFPtxoH0DN1Zi7CZKVc18iu//t3oeWcxWNkQOpszeBl09p
- inog==
-X-Gm-Message-State: AOJu0Yzq+bLPqsywtf/QcSMiDdExId7Ms/nnmppuDxaKGrnsaMLrPePu
- WNXOU/mrhpQoxYNT222j9ieVV8mA0hnVy07UX/Ck6RTDpJDr
-X-Google-Smtp-Source: AGHT+IHlqtYzn2h0Ptb9n5gFj+BG0ZoW6Ehfnnkkw23ZLr7Yo8nMOubbmzsdJ932QrIrbL0a1B/dng==
-X-Received: by 2002:a05:6e02:741:b0:35f:c98f:b191 with SMTP id
- x1-20020a056e02074100b0035fc98fb191mr906476ils.42.1704381117238; 
- Thu, 04 Jan 2024 07:11:57 -0800 (PST)
+ d=1e100.net; s=20230601; t=1704381119; x=1704985919;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zpqcU1Y7mDH9IuYja2MIELbGLSPNmWdDNZnaHD5YzMM=;
+ b=Z+WpvbpyKaDQuIVwA3Df6CE8KqiL+1FXBOA4mUeJmr2YA0gxD3sIiItFUbaOa5AmiK
+ T67WG+g6YozX4OIBTRXX6ScGrJgyIsQzG5VZMXqDeVdN99L3fU7XgaaNOS68n5s+OA12
+ kqJXb7YNKScnKN6dKU1tOYwnLcn4xEhXwCFy8rtG4sxBeNrtxSgqCjjukTnDo5qs/Qyq
+ u/VJPMkPPtcMJijL7iUs53LMnvmJRFjoJUj6NiJQR3/OjdUo+Dfqz4MUMotVV6mGT3yg
+ aJBO3mmQ0RE42fArH+c36qvM7bCc7RaNpvnEk8SnrrrNwSFJ7+7OiG3DIDiNJ/mKpJgn
+ IRLQ==
+X-Gm-Message-State: AOJu0YzUnDct6jCXge0aYVuOkrNTTCgqMOhe8AH9q7GOfBT2JadhAa+8
+ GS3dXQ4BhnsbhBQqrGUHMWxLChDgyWNPkpKe0XX/GYNde/Wr
+X-Google-Smtp-Source: AGHT+IE1LpImjGSh44ZIWEVtsXCfzD555soRQm09gfLrl7Ol+jQ5j2iN/VNT4jiDKEUgYm5lLs2YOA==
+X-Received: by 2002:a05:6e02:216d:b0:35f:e7e7:52af with SMTP id
+ s13-20020a056e02216d00b0035fe7e752afmr761934ilv.37.1704381118898; 
+ Thu, 04 Jan 2024 07:11:58 -0800 (PST)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- cv4-20020a056e023b8400b0035fb79100cesm9260742ilb.59.2024.01.04.07.11.56
+ cv4-20020a056e023b8400b0035fb79100cesm9260742ilb.59.2024.01.04.07.11.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jan 2024 07:11:57 -0800 (PST)
+ Thu, 04 Jan 2024 07:11:58 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Bin Meng <bmeng.cn@gmail.com>, Anatolij Gustschin <agust@denx.de>
-Subject: [PATCH v2 00/19] x86: expo: Add support for editing coreboot CMOS RAM
- settings
-Date: Thu,  4 Jan 2024 08:11:33 -0700
-Message-Id: <20240104151152.697855-1-sjg@chromium.org>
+Subject: [PATCH v2 01/19] video: Add a dark-grey console colour
+Date: Thu,  4 Jan 2024 08:11:34 -0700
+Message-Id: <20240104151152.697855-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240104151152.697855-1-sjg@chromium.org>
+References: <20240104151152.697855-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -86,97 +88,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot provides support for editing settings with an 'expo', as well as
-reading and writing settings to CMOS RAM.
+This is useful for highlighting something with a black background, as
+is needed with cedit when using a white-on-black console. Add this as
+a new colour.
 
-This series integrates expo functionality with coreboot, using the
-sysinfo table to get a list of settings, creating an expo with them and
-allowing them to be edited.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-A new CI test provides coverage for some coreboot-related commands. For
-this to work, a number of minor tweaks are made to existing tests, so
-that they pass on coreboot (x86) or at least are skipped when they
-cannot pass. Likely most of these fixes will apply to other boards too.
+(no changes since v1)
 
-It includes several other fixes and improvements:
-- new -m flag for 'bootflow scan' so it can display a menu automatically
-- Fix for video-scrolling crash with Truetype
-- menu items can now have individual integer values
-- menu items are lined up according to the width of all menu labels
+ boot/scene.c                 | 2 +-
+ drivers/video/video-uclass.c | 3 +++
+ include/video.h              | 1 +
+ 3 files changed, 5 insertions(+), 1 deletion(-)
 
-Changes in v2:
-- Avoid using common.h
-- Avoid using common.h
-- Rebase to -next
-
-Simon Glass (19):
-  video: Add a dark-grey console colour
-  video: Avoid starting a new line to close to the bottom
-  expo: Place menu items to the right of all labels
-  expo: Set the initial next_id to 1
-  expo: Use standard numbering for save and discard
-  expo: Allow menu items to have values
-  expo: Add a little more cedit CMOS logging
-  expo: Support menu-item values in cedit
-  expo: Drop unneceesary calls to expo_str()
-  expo: Drop scene_title_set()
-  expo: Add forward declaration for udevice to cedit
-  x86: coreboot: Enable unit tests
-  x86: CI: Update coreboot
-  x86: coreboot: Add a test for cbsysinfo command
-  x86: coreboot: Show the option table
-  x86: coreboot: Enable support for the configuration editor
-  x86: coreboot: Add a command to check and update CMOS RAM
-  x86: coreboot: Allow building an expo for editing CMOS config
-  x86: Enable RTC command by default
-
- .azure-pipelines.yml              |   2 +-
- .gitlab-ci.yml                    |   2 +-
- arch/sandbox/dts/cedit.dtsi       |   3 +
- arch/x86/dts/coreboot.dts         |   7 +
- boot/Makefile                     |   4 +
- boot/cedit.c                      | 191 +++++++++++++++--------
- boot/expo.c                       |   3 +
- boot/expo_build.c                 |  36 ++---
- boot/expo_build_cb.c              | 245 ++++++++++++++++++++++++++++++
- boot/scene.c                      |  61 ++++++--
- boot/scene_internal.h             |  30 +++-
- boot/scene_menu.c                 |  26 +++-
- boot/scene_textline.c             |   3 +-
- cmd/Kconfig                       |  12 ++
- cmd/cedit.c                       |  28 ++++
- cmd/x86/Makefile                  |   1 +
- cmd/x86/cbcmos.c                  | 139 +++++++++++++++++
- cmd/x86/cbsysinfo.c               |  73 ++++++++-
- configs/coreboot64_defconfig      |   2 +
- configs/coreboot_defconfig        |   6 +
- doc/board/coreboot/coreboot.rst   |   6 +
- doc/develop/cedit.rst             |   9 +-
- doc/develop/expo.rst              |  26 +++-
- doc/usage/cmd/cbcmos.rst          |  45 ++++++
- doc/usage/cmd/cbsysinfo.rst       |  99 ++++++++++++
- doc/usage/cmd/cedit.rst           |  91 ++++++++++-
- doc/usage/index.rst               |   1 +
- drivers/video/vidconsole-uclass.c |   4 +-
- drivers/video/video-uclass.c      |   3 +
- include/cedit.h                   |   2 +
- include/expo.h                    |  51 +++++--
- include/test/cedit-test.h         |  30 ++--
- include/video.h                   |   4 +-
- include/video_console.h           |   8 +
- test/boot/cedit.c                 |  22 ++-
- test/boot/expo.c                  |  26 +++-
- test/boot/files/expo_ids.h        |   3 +-
- test/boot/files/expo_layout.dts   |   5 +-
- test/cmd/Makefile                 |   1 +
- test/cmd/coreboot.c               | 119 +++++++++++++++
- tools/expo.py                     |  33 +++-
- 41 files changed, 1309 insertions(+), 153 deletions(-)
- create mode 100644 boot/expo_build_cb.c
- create mode 100644 cmd/x86/cbcmos.c
- create mode 100644 doc/usage/cmd/cbcmos.rst
- create mode 100644 test/cmd/coreboot.c
-
+diff --git a/boot/scene.c b/boot/scene.c
+index d4dfb49ada1..0b37971b1ff 100644
+--- a/boot/scene.c
++++ b/boot/scene.c
+@@ -346,7 +346,7 @@ static void scene_render_background(struct scene_obj *obj, bool box_only)
+ 
+ 	/* draw a background for the object */
+ 	if (CONFIG_IS_ENABLED(SYS_WHITE_ON_BLACK)) {
+-		fore = VID_BLACK;
++		fore = VID_DARK_GREY;
+ 		back = VID_WHITE;
+ 	} else {
+ 		fore = VID_LIGHT_GRAY;
+diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
+index f743ed74c81..51fafbb2174 100644
+--- a/drivers/video/video-uclass.c
++++ b/drivers/video/video-uclass.c
+@@ -281,6 +281,9 @@ static const struct vid_rgb colours[VID_COLOUR_COUNT] = {
+ 	{ 0xff, 0x00, 0xff },  /* bright magenta */
+ 	{ 0x00, 0xff, 0xff },  /* bright cyan */
+ 	{ 0xff, 0xff, 0xff },  /* white */
++
++	/* an extra one for menus */
++	{ 0x40, 0x40, 0x40 },  /* dark gray */
+ };
+ 
+ u32 video_index_to_colour(struct video_priv *priv, enum colour_idx idx)
+diff --git a/include/video.h b/include/video.h
+index 4d8df9baaad..ae9ce03f5bf 100644
+--- a/include/video.h
++++ b/include/video.h
+@@ -179,6 +179,7 @@ enum colour_idx {
+ 	VID_LIGHT_MAGENTA,
+ 	VID_LIGHT_CYAN,
+ 	VID_WHITE,
++	VID_DARK_GREY,
+ 
+ 	VID_COLOUR_COUNT
+ };
 -- 
 2.34.1
 
