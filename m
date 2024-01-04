@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2B5BC47073
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 03:50:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43DC3C4706F
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 04:28:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C999C877FE;
-	Thu,  4 Jan 2024 04:49:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 695388784E;
+	Thu,  4 Jan 2024 05:28:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="s9+KcCpa";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="XoYaFtax";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 403A587866; Thu,  4 Jan 2024 04:49:57 +0100 (CET)
+ id 8538587866; Thu,  4 Jan 2024 05:28:49 +0100 (CET)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E01BB8771E
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 04:49:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB1F38784E
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 05:28:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,26 +31,26 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id EB8C1413BB; 
- Thu,  4 Jan 2024 03:49:53 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 0CA0E3F289; 
+ Thu,  4 Jan 2024 04:28:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1704340194;
- bh=w+ShWYVe5J9PdDbKE1YROLH/2RmUtdaOZrM5QJPpVV4=;
+ s=20210705; t=1704342526;
+ bh=uJb8ZtNXzVhzBWsGXvMnxHEriphxM4kP67Pn8g+MCPA=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=s9+KcCpaZ0efgzWXCSqaFI/loHiC9JFUoIdqy1ZxoRVH0g17eBfpXzmq5Z+Qs/xa6
- /QRdE9MQf58lk6qM4rw/FWUh0Ll7zI8DwcBWHUmV62DAoGEnvFY+S6prihVs2DVsm8
- 3de7dJYlAH3vzoc99Xh3258Pywa4C8Cyvz5p9dRxLUtiJqlSTXmVIb0vRRm6EYWe9Q
- x806dANy7d+6mBgUoMumVcRLFaQA2mDv2xh/cHQ4o2eeKIXXqIAqFBe1ue5S4KXYPN
- a30gTarLH/ohFcb2p83mFexyNiTn2vDAyovV2Dqopx28+TD78japCJynu6WtDWa0DK
- W2hdrG+zgby4A==
+ b=XoYaFtaxup0DDCbl2Kj/Kh/uNHo8joT0PZQALqDeWtdcpriKffUjDYo7GM4C5yska
+ gh2IJEWl5C74RoZROzoF+wrW2oIv+R1hINWT5uCiSInZ7XR5VbXS1lBmhgdsM/QXX6
+ NcwhGwiMZiafDq0ZQOYN0Xf4SXCyY2Wsdz/990/76mSB6lq1g1bXG25BemvZV//R9h
+ lTkQtOC2bJwce9S4OCf011sR23aARLALylwNqO6P2lLtBNjdlRgpwx6Vhi3MyjDEAb
+ bvPx6mmdP4LqTuWnpuAH13ooy/+1nUY0c8janEfdJaDt8WP6497DGrZ4VCAt/s6EJ3
+ CgPvvPVShqRdQ==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Peng Fan <peng.fan@nxp.com>,
-	Jaehoon Chung <jh80.chung@samsung.com>
-Cc: u-boot@lists.denx.de, Eugeniu Rosca <erosca@de.adit-jv.com>,
+To: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Ramon Fried <rfried.dev@gmail.com>, u-boot@lists.denx.de,
+ Eugeniu Rosca <erosca@de.adit-jv.com>,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] mmc: Avoid buffer overrun in mmc_startup()
-Date: Thu,  4 Jan 2024 04:49:42 +0100
-Message-ID: <20240104034942.102500-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] net: phy: Fix signed shift overflow
+Date: Thu,  4 Jan 2024 05:26:23 +0100
+Message-ID: <20240104042623.103398-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -70,56 +70,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If the CSD register contains a reserved value (4 - 7) in bits 0:2 of the
-TRAN_SPEED field, a buffer overrun occurs. Resize the mapping table.
+From: Eugeniu Rosca <erosca@de.adit-jv.com>
 
-According to the original report
-https://lore.kernel.org/u-boot/20180826231332.2491-11-erosca@de.adit-jv.com/
-reserved values have been observed resulting in a buffer overrun.
+Booting R-Car Gen3 arm64 U-Boot with CONFIG_UBSAN=y resulted in:
 
-Reported-by: Eugeniu Rosca <erosca@de.adit-jv.com>
-Fixes: 272cc70b211e ("Add MMC Framework")
+ =====================================================================
+ UBSAN: Undefined behaviour in drivers/net/phy/phy.c:728:19
+ left shift of 1 by 31 places cannot be represented in type 'int'
+ =====================================================================
+
+Fix it by appending the UL suffix to the numeric literal. While at it,
+convert the type of "addr" variable from signed to unsigned, to protect
+against shifting the numeric literal by a negative value (which would
+lead to yet another undefined behavior).
+
+Fixes: 1adb406b0141 ("phy: add phy_find_by_mask/phy_connect_dev")
+Signed-off-by: Eugeniu Rosca <erosca@de.adit-jv.com>
+
+* Using U-suffix for integer is sufficient.
+* ffs() of non-zero value cannot be 0. But addr being unsigned is
+* preferable.
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- drivers/mmc/mmc.c | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
+ drivers/net/phy/phy.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
-index d96db7a0f8..00f4964aae 100644
---- a/drivers/mmc/mmc.c
-+++ b/drivers/mmc/mmc.c
-@@ -1570,13 +1570,20 @@ static int sd_read_ssr(struct mmc *mmc)
- 	return 0;
+diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
+index 63b3e46f10..f39ca942f6 100644
+--- a/drivers/net/phy/phy.c
++++ b/drivers/net/phy/phy.c
+@@ -642,12 +642,12 @@ static struct phy_device *search_for_existing_phy(struct mii_dev *bus,
+ {
+ 	/* If we have one, return the existing device, with new interface */
+ 	while (phy_mask) {
+-		int addr = ffs(phy_mask) - 1;
++		unsigned int addr = ffs(phy_mask) - 1;
+ 
+ 		if (bus->phymap[addr])
+ 			return bus->phymap[addr];
+ 
+-		phy_mask &= ~(1 << addr);
++		phy_mask &= ~(1U << addr);
+ 	}
+ 	return NULL;
  }
- #endif
--/* frequency bases */
--/* divided by 10 to be nice to platforms without floating point */
-+/*
-+ * TRAN_SPEED bits 0:2 encode the frequency unit:
-+ * 0 = 100KHz, 1 = 1MHz, 2 = 10MHz, 3 = 100MHz, values 4 - 7 are reserved.
-+ * The values in fbase[] are divided by 10 to avoid floats in multiplier[].
-+ */
- static const int fbase[] = {
- 	10000,
- 	100000,
- 	1000000,
- 	10000000,
-+	0,	/* reserved */
-+	0,	/* reserved */
-+	0,	/* reserved */
-+	0,	/* reserved */
- };
- 
- /* Multiplier values for TRAN_SPEED.  Multiplied by 10 to be nice
-@@ -2560,6 +2567,8 @@ static int mmc_startup(struct mmc *mmc)
- 	mult = multipliers[((cmd.response[0] >> 3) & 0xf)];
- 
- 	mmc->legacy_speed = freq * mult;
-+	if (!mmc->legacy_speed)
-+		log_debug("TRAN_SPEED: reserved value");
- 	mmc_select_mode(mmc, MMC_LEGACY);
- 
- 	mmc->dsr_imp = ((cmd.response[1] >> 12) & 0x1);
 -- 
 2.43.0
 
