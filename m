@@ -4,80 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E95AEC47074
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 16:10:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05A9DC47074
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 16:11:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 596F787930;
+	by phobos.denx.de (Postfix) with ESMTP id BECDB879D3;
 	Thu,  4 Jan 2024 17:10:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y/lTeFj7";
+	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="bjc2g5x/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 156AD879A9; Thu,  4 Jan 2024 16:53:40 +0100 (CET)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 54D59862DA; Thu,  4 Jan 2024 16:54:12 +0100 (CET)
+Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0364287937
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:53:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 899FF87756
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:54:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m.othacehe@gmail.com
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3373a30af67so529490f8f.0
- for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 07:53:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704383617; x=1704988417; darn=lists.denx.de;
- h=mime-version:user-agent:message-id:date:references:in-reply-to
- :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=3EdByaSOyqAsAc9uGsnAQpBCGoHUyBDSglHBDHMx3xU=;
- b=Y/lTeFj7gQ3XfsXE6xvdgB7S1I4krVuwjPqEhBJWfHCuC8KeAelROJtMOiX9KhLfWP
- rzO5lOXJGmSKEkjWo/zuPQh5lDJIl/ZUOPYcbJTKoAqvv0TQINPF6cJsmFJESHgdrjyr
- D3aONV8d1uOdWOoEGKIbHAsCgG5s9HLC3mfjrjANmDReFAx1B74vFix6E+++QawjPE9z
- TagVf82A+0+iom1aaBYmxxUtuOhQ9+MyJg1uvEoc2wXRoMtBgnvCfrmH6gOSjUEiVE/w
- Wm5kXYi5vICVArDsLWDAm7ZWrx0q5mgbkWcuGGBXNTUnRqPQWkDk6qkg/XtENZTRa9PR
- io8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704383617; x=1704988417;
- h=mime-version:user-agent:message-id:date:references:in-reply-to
- :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3EdByaSOyqAsAc9uGsnAQpBCGoHUyBDSglHBDHMx3xU=;
- b=a/jRlFmGKJjQgpoIH7JJOF9B8fyI82uKLbXMgsybk92OOmBNMPaMbEhMnoiKRGwpPw
- XRsuOI/CfV5d4kF7toJymoa37B/JkcI5FGEEm8BJz4cTAhDIXcSIgVbZOG51sMnAVMQ+
- 0QYLDkg/RO7mwH5PQCS/maQIrPtwArSpmZ2NKuOVDA/+Hsy9BrGvpcMSCkJFvA6Cowye
- VNMt3tpFu/GVydGlQCewDJMAix+5qPrAh96rpp5DCNPMT3z+2r9TucR7xEPBtY36kNdF
- OdY44eyfRbbEutwZsy/KXHaX2tEfFoliUbIBjke/h5N0X0LOBekJHC8y6mlnQEgkTY/O
- EVQg==
-X-Gm-Message-State: AOJu0YwRsyMC3+/BZ0verUfRXi5XCTg2i9FB2Y/LOniIFo3xIBXdhmc+
- 4X+gJDdIbOCLdz2p5UPHwe0Ujgsx07E=
-X-Google-Smtp-Source: AGHT+IGy15KYJvAbFZrFd/NXcN4DRP9edT7wKWftUM/XYJwZP7vBTgQgszqliGY0AYd2pHvlUpsXlA==
-X-Received: by 2002:adf:e50b:0:b0:336:c876:a417 with SMTP id
- j11-20020adfe50b000000b00336c876a417mr310125wrm.99.1704383617077; 
- Thu, 04 Jan 2024 07:53:37 -0800 (PST)
-Received: from meije ([2a01:e0a:ab1:5c70:ddd3:fad7:e5a6:7e01])
- by smtp.gmail.com with ESMTPSA id
- r8-20020a5d4948000000b003367a5b6b69sm32976221wrs.106.2024.01.04.07.53.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jan 2024 07:53:36 -0800 (PST)
-From: Mathieu Othacehe <m.othacehe@gmail.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Peng Fan <peng.fan@nxp.com>,  Tom Rini <trini@konsulko.com>,  Stefano
- Babic <sbabic@denx.de>,  "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v4 0/3] Add imx93-var-som support
-In-Reply-To: <CAOMZO5DPuTmvM9_tFDytC4xVENZH_z6Rin5eJ_tHu6Uer2HaAg@mail.gmail.com>
- (Fabio Estevam's message of "Thu, 4 Jan 2024 11:29:06 -0300")
-References: <20240104091350.18252-1-othacehe@gnu.org>
- <CAOMZO5DPuTmvM9_tFDytC4xVENZH_z6Rin5eJ_tHu6Uer2HaAg@mail.gmail.com>
-Date: Thu, 04 Jan 2024 16:53:35 +0100
-Message-ID: <87sf3d14e8.fsf@gmail.com>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ dmarc=pass (p=none dis=none) header.from=gnu.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
+Received: from fencepost.gnu.org ([2001:470:142:3::e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
+ id 1rLQ2p-0002va-Sz; Thu, 04 Jan 2024 10:54:07 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
+ s=fencepost-gnu-org; h=MIME-Version:Date:Subject:To:From:in-reply-to:
+ references; bh=roeTm6KpS+wSYUbaSzsOIWFOL8NuN4EBk3wpaxCo+zs=; b=bjc2g5x/oumQSN
+ v7st/L/ZXGUDTUpINVdhBlTaCK4Cb/VFY8JM8JR86e9cyk0N+oyrawEBfEVCrej4kkiZOZfgdaIms
+ 8SAHKf8I/LL9/askULsEoepXZZ6QIboO1Jst+arqlb869/tjhYd8ZHWNs/+bRgFuMj4u/kLTsAllD
+ 3eOsOiMRCF3UMgp18yssvF695DvSJghFE+c/XhYgeyG5pNdKmF39xhDWWN16YiFKka0664xWOVU26
+ TZKVC4u+WpDwlIjeCa2haEBt/6yTqefGc3DF42UMM12cRNGfoDJ8zJLhYtMTUCxIFjQPLPIe5p1GF
+ sMQIYMFGfyHOaMN6vJWA==;
+From: Mathieu Othacehe <othacehe@gnu.org>
+To: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ Mathieu Othacehe <m.othacehe@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v5 0/3] Add imx93-var-som support
+Date: Thu,  4 Jan 2024 16:53:53 +0100
+Message-ID: <20240104155357.21865-1-othacehe@gnu.org>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 04 Jan 2024 17:10:51 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,35 +65,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Mathieu Othacehe <m.othacehe@gmail.com>
 
 Hello,
 
-> https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/764727
->
-> Take a look at the xilinx_zynqmp_virt and imx8mm-cl-iot-gate errors,
-> for example.
-
-Due to multi-threaded testing the output is a bit hard to read but I
-think that those configs are working fine.
-
-The faulty config seems to be imx93_11x11_[ld]_evk and I can reproduce
-the issue locally.
-
-The problem is the following line in mach-imx Makefile:
-
---8<---------------cut here---------------start------------->8---
-u-boot-container.cfgout: $(IMX_CONTAINER_CFG) FORCE
-	$(Q)mkdir -p $(dir $@)
---8<---------------cut here---------------end--------------->8---
-
-We are expecting CONFIG_IMX_CONTAINER_CFG to be set for all the IMX9
-boards which is not the case for the existing IMX9 boards:
-imx93_11x11_[ld]_evk.
-
-In v5, I propose to fix that by adding binman support for the
-imx93_11x11_[ld]_evk boards. I cannot test that but I expect those
-boards to behave the same way as the imx93_var_som.
+This v5 fixes imx93_evk compilation by enabling binman support for this board.
 
 Thanks,
 
 Mathieu
+
+v4: https://lists.denx.de/pipermail/u-boot/2024-January/542515.html
+
+Mathieu Othacehe (4):
+  spl: binman: Disable u_boot_any symbols for i.MX93 boards
+  mach-imx: Add i.MX93 binman support.
+  imx9: imx93_evk: Add binman support.
+  Add imx93-var-som support
+
+ arch/arm/dts/Makefile                         |    3 +-
+ arch/arm/dts/imx93-11x11-evk-u-boot.dtsi      |    2 +
+ arch/arm/dts/imx93-u-boot.dtsi                |   88 +
+ .../dts/imx93-var-som-symphony-u-boot.dtsi    |  266 +++
+ arch/arm/dts/imx93-var-som-symphony.dts       |  305 ++++
+ arch/arm/dts/imx93-var-som.dtsi               |  111 ++
+ arch/arm/include/asm/arch-imx9/clock.h        |    1 +
+ arch/arm/mach-imx/Makefile                    |   22 +-
+ arch/arm/mach-imx/imx9/Kconfig                |    8 +
+ arch/arm/mach-imx/imx9/container.cfg          |   10 +
+ arch/arm/mach-imx/imx9/imximage.cfg           |   10 +
+ board/variscite/common/eth.c                  |   58 +
+ board/variscite/common/eth.h                  |   12 +
+ board/variscite/common/imx9_eeprom.c          |  190 +++
+ board/variscite/common/imx9_eeprom.h          |   83 +
+ board/variscite/common/mmc.c                  |   47 +
+ board/variscite/imx93_var_som/Kconfig         |   12 +
+ board/variscite/imx93_var_som/MAINTAINERS     |    7 +
+ board/variscite/imx93_var_som/Makefile        |   17 +
+ board/variscite/imx93_var_som/imx93_var_som.c |  126 ++
+ .../variscite/imx93_var_som/imx93_var_som.env |   99 ++
+ .../variscite/imx93_var_som/lpddr4x_timing.c  | 1488 +++++++++++++++++
+ board/variscite/imx93_var_som/spl.c           |  143 ++
+ common/spl/Kconfig                            |    2 +-
+ common/spl/Kconfig.tpl                        |    2 +-
+ common/spl/Kconfig.vpl                        |    2 +-
+ configs/imx93_11x11_evk_defconfig             |    2 +
+ configs/imx93_11x11_evk_ld_defconfig          |    2 +
+ configs/imx93_var_som_defconfig               |  156 ++
+ doc/board/nxp/imx93_11x11_evk.rst             |   68 +
+ doc/board/nxp/index.rst                       |    1 +
+ doc/board/variscite/imx93_var_som.rst         |   68 +
+ doc/board/variscite/index.rst                 |    1 +
+ include/configs/imx93_var_som.h               |   48 +
+ 34 files changed, 3455 insertions(+), 5 deletions(-)
+ create mode 100644 arch/arm/dts/imx93-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx93-var-som-symphony-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx93-var-som-symphony.dts
+ create mode 100644 arch/arm/dts/imx93-var-som.dtsi
+ create mode 100644 arch/arm/mach-imx/imx9/container.cfg
+ create mode 100644 arch/arm/mach-imx/imx9/imximage.cfg
+ create mode 100644 board/variscite/common/eth.c
+ create mode 100644 board/variscite/common/eth.h
+ create mode 100644 board/variscite/common/imx9_eeprom.c
+ create mode 100644 board/variscite/common/imx9_eeprom.h
+ create mode 100644 board/variscite/common/mmc.c
+ create mode 100644 board/variscite/imx93_var_som/Kconfig
+ create mode 100644 board/variscite/imx93_var_som/MAINTAINERS
+ create mode 100644 board/variscite/imx93_var_som/Makefile
+ create mode 100644 board/variscite/imx93_var_som/imx93_var_som.c
+ create mode 100644 board/variscite/imx93_var_som/imx93_var_som.env
+ create mode 100644 board/variscite/imx93_var_som/lpddr4x_timing.c
+ create mode 100644 board/variscite/imx93_var_som/spl.c
+ create mode 100644 configs/imx93_var_som_defconfig
+ create mode 100644 doc/board/nxp/imx93_11x11_evk.rst
+ create mode 100644 doc/board/variscite/imx93_var_som.rst
+ create mode 100644 include/configs/imx93_var_som.h
+
+-- 
+2.25.1
+
