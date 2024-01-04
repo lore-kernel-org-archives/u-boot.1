@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B89EC47073
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:15:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 308D6C47073
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:15:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 810DF879E0;
+	by phobos.denx.de (Postfix) with ESMTP id F1F7A879E7;
 	Thu,  4 Jan 2024 16:12:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Pxhzb8A4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SraCA1+I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEC7D879ED; Thu,  4 Jan 2024 16:12:38 +0100 (CET)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id 6DF6B879C3; Thu,  4 Jan 2024 16:12:37 +0100 (CET)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D3051879EE
+ by phobos.denx.de (Postfix) with ESMTPS id D439D879EF
  for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:12:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-7bb97d5ee3aso23183739f.2
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-3605cc59228so2148455ab.1
  for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 07:12:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704381128; x=1704985928; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1704381127; x=1704985927; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WL7i8nOizrI1uQPdh3NwdQABRjBriTLuTABRwhAMesw=;
- b=Pxhzb8A4iT82IkdNyVuZQxxOKdVQd62SjnoC1OBWirAWy4Q+rL1ucTL3YW2gYpOx62
- kcfMYLvh74Jv/S4WopDpeW1X+9+P1Qdjy3wd91tGN27rB/AxmestqnAXmi1hpAxLIqvo
- YBn/nhUMCP4wNNyrsumrpL1vXvriq6+nm6gsg=
+ bh=pL5Rc9ZILNnSbZaVemGrqnxQG7qz+PTzseL1FPHaQw0=;
+ b=SraCA1+I2m7m2J1DvPYfEiPEQA+swvUkVLBLh7IFFrGJtarHVTNMgQBXom112J4+ht
+ SpHtUe1HJM+cRVj+l6JhGwhB/5qtCTnPKt+eG1NROY+3fTU9O6oLpyB1swY1tUrpKPEh
+ jyx3/fDxj3m/fovuumYysYSTm5y8cqqUYoMsY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704381128; x=1704985928;
+ d=1e100.net; s=20230601; t=1704381127; x=1704985927;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WL7i8nOizrI1uQPdh3NwdQABRjBriTLuTABRwhAMesw=;
- b=AKokVwz9Ky2rK+h+Cf9VeBoqSXvnYhA/bs9K8GR69nNnhdOLdc6sOtYtaOI8G8+IFM
- a59P2E2AbZyIifRDlJFSz79UZWuW8Q5DR87/Lj0JUbNO2lDu5/arxrkCtxqnwHi2i6HU
- evDHBZ6L24638CQr38yfVG3UjtwL+FQxi6lXNlVxXDUVI0Cjsm+pw9Q8grocuzcY3Q2d
- P/xt2mBJS578CyigAnAIbcHCb7f74hHgQb3H5k+viTnapFtET03SS3SMrQ0wJPVZ7zlm
- 4EstFGZBm8w7THPTLiqgLkzM+4y+fLKopoPWff4bRUdAb2xW8N3Kie4A9N86yTixQl/a
- lLtg==
-X-Gm-Message-State: AOJu0YyB+fc+szMigWxg5AyF/3Jomx6/TjV86EjWHy46DgduK1+Z7+7u
- KhoETPXRpfzvGJQswIbDInjQshJLtuT+iUM3hZ6u4MTPOIWa
-X-Google-Smtp-Source: AGHT+IGMs1XKu4QDAUf6eFdhPkNVW6Iqo2NFb9X3QvBz/IGiQoYAf13H542fx9WajPnUTvUKjkfgaA==
-X-Received: by 2002:a05:6e02:1707:b0:35f:af8f:de2e with SMTP id
- u7-20020a056e02170700b0035faf8fde2emr811174ill.42.1704381127798; 
+ bh=pL5Rc9ZILNnSbZaVemGrqnxQG7qz+PTzseL1FPHaQw0=;
+ b=HmsEjBjEd1jgYKzicaBYywgvG7goHIhwlSZf55m3xSK4mTBjKMd1OpWSU9lvDFHQWA
+ ib2WGvvAb8/cE3ThdAR7QcYHRLFkysZD5gTOT1kuvxfX7P0J6+B0H5rKbxSIB3rgxmE3
+ YgHDvpZztfX65kGmoGNjh2A5jS36JU2CVJwdWtKVkqkRuR+CsoPWEsXcHSQDDBEslVrH
+ nmnUpr1w7muucF4+d7Jd21izgZbaXeoGsuLNzFxrxl/hHLTauyYpN0vug0ZczkP6L0/7
+ FhsjI8pVVS3LU+WUi+Z/j1QmygLL9WRt7VqI9hrTwPxb28JmPiSrjEYkpg/X78jIInLL
+ lsLg==
+X-Gm-Message-State: AOJu0Yzykw0qPkcJiFkHvYQluD6w5t9tn1iubYPOJgHQd7ByaDpvIUaN
+ pgGIGaV+/AXQuNRZDypz3++7uYNI6hXYJYiSjAV91DIp84gI
+X-Google-Smtp-Source: AGHT+IEL2xmVXz0Oo0szrhlBjHv2C3f2ULbtP3AtcLARo/Fq8wutlV2ezYP3dAs15tHZqwClXYSmcg==
+X-Received: by 2002:a05:6e02:1a6b:b0:35f:766d:3570 with SMTP id
+ w11-20020a056e021a6b00b0035f766d3570mr831163ilv.1.1704381127067; 
  Thu, 04 Jan 2024 07:12:07 -0800 (PST)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- cv4-20020a056e023b8400b0035fb79100cesm9260742ilb.59.2024.01.04.07.12.07
+ cv4-20020a056e023b8400b0035fb79100cesm9260742ilb.59.2024.01.04.07.12.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jan 2024 07:12:07 -0800 (PST)
+ Thu, 04 Jan 2024 07:12:06 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Bin Meng <bmeng.cn@gmail.com>, Anatolij Gustschin <agust@denx.de>
-Subject: [PATCH v2 10/19] expo: Drop scene_title_set()
-Date: Thu,  4 Jan 2024 08:11:43 -0700
-Message-Id: <20240104151152.697855-11-sjg@chromium.org>
+Subject: [PATCH v2 09/19] expo: Drop unneceesary calls to expo_str()
+Date: Thu,  4 Jan 2024 08:11:42 -0700
+Message-Id: <20240104151152.697855-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240104151152.697855-1-sjg@chromium.org>
 References: <20240104151152.697855-1-sjg@chromium.org>
@@ -88,93 +88,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function is really just an assignment, so serves no useful
-purpose. Drop it.
+The scene_txt_str() function calls expo_str() so there is no need to
+call it beforehand. Drop this unnecessary code.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/expo_build.c | 4 ++--
- boot/scene.c      | 7 -------
- include/expo.h    | 9 ---------
- test/boot/expo.c  | 2 +-
- 4 files changed, 3 insertions(+), 19 deletions(-)
+ boot/expo_build.c | 16 ++--------------
+ 1 file changed, 2 insertions(+), 14 deletions(-)
 
 diff --git a/boot/expo_build.c b/boot/expo_build.c
-index 71aa03f2826..ae0ffd225b3 100644
+index 3458bf12c67..71aa03f2826 100644
 --- a/boot/expo_build.c
 +++ b/boot/expo_build.c
-@@ -405,7 +405,7 @@ static int scene_build(struct build_info *info, ofnode scn_node,
- 	if (ret < 0)
- 		return log_msg_ret("tit", ret);
- 	title_id = ret;
--	scene_title_set(scn, title_id);
-+	scn->title_id = title_id;
- 
- 	ret = add_txt_str(info, scn_node, scn, "prompt", 0);
- 	if (ret < 0)
-@@ -421,7 +421,7 @@ static int scene_build(struct build_info *info, ofnode scn_node,
- 	return 0;
- }
- 
--int build_it(struct build_info *info, ofnode root, struct expo **expp)
-+static int build_it(struct build_info *info, ofnode root, struct expo **expp)
+@@ -47,7 +47,6 @@ int add_txt_str(struct build_info *info, ofnode node, struct scene *scn,
+ 		const char *find_name, uint obj_id)
  {
- 	ofnode scenes, node;
- 	struct expo *exp;
-diff --git a/boot/scene.c b/boot/scene.c
-index 56569e76e9f..1369bcda13b 100644
---- a/boot/scene.c
-+++ b/boot/scene.c
-@@ -71,13 +71,6 @@ void scene_destroy(struct scene *scn)
- 	free(scn);
- }
+ 	const char *text;
+-	uint str_id;
+ 	int ret;
  
--int scene_title_set(struct scene *scn, uint id)
--{
--	scn->title_id = id;
+ 	info->err_prop = find_name;
+@@ -68,12 +67,7 @@ int add_txt_str(struct build_info *info, ofnode node, struct scene *scn,
+ 			return log_msg_ret("id", -EINVAL);
+ 	}
+ 
+-	ret = expo_str(scn->expo, find_name, 0, text);
+-	if (ret < 0)
+-		return log_msg_ret("add", ret);
+-	str_id = ret;
 -
--	return 0;
--}
--
- int scene_obj_count(struct scene *scn)
+-	ret = scene_txt_str(scn, find_name, obj_id, str_id, text, NULL);
++	ret = scene_txt_str(scn, find_name, obj_id, 0, text, NULL);
+ 	if (ret < 0)
+ 		return log_msg_ret("add", ret);
+ 
+@@ -95,7 +89,6 @@ int add_txt_str_list(struct build_info *info, ofnode node, struct scene *scn,
+ 		     const char *find_name, int index, uint obj_id)
  {
- 	struct scene_obj *obj;
-diff --git a/include/expo.h b/include/expo.h
-index 658ff003835..8e834b50e4f 100644
---- a/include/expo.h
-+++ b/include/expo.h
-@@ -540,15 +540,6 @@ void scene_set_highlight_id(struct scene *scn, uint id);
-  */
- int scene_set_open(struct scene *scn, uint id, bool open);
+ 	const char *text;
+-	uint str_id;
+ 	int ret;
  
--/**
-- * scene_title_set() - set the scene title
-- *
-- * @scn: Scene to update
-- * @title_id: Title ID to set
-- * Returns: 0 if OK
-- */
--int scene_title_set(struct scene *scn, uint title_id);
+ 	ret = ofnode_read_string_index(node, find_name, index, &text);
+@@ -115,12 +108,7 @@ int add_txt_str_list(struct build_info *info, ofnode node, struct scene *scn,
+ 			return log_msg_ret("id", -EINVAL);
+ 	}
+ 
+-	ret = expo_str(scn->expo, find_name, 0, text);
+-	if (ret < 0)
+-		return log_msg_ret("add", ret);
+-	str_id = ret;
 -
- /**
-  * scene_obj_count() - Count the number of objects in a scene
-  *
-diff --git a/test/boot/expo.c b/test/boot/expo.c
-index 75f31fe6690..c7b8e9ba674 100644
---- a/test/boot/expo.c
-+++ b/test/boot/expo.c
-@@ -152,7 +152,7 @@ static int expo_scene(struct unit_test_state *uts)
- 	scn = NULL;
- 	id = scene_new(exp, SCENE_NAME2, 0, &scn);
- 	ut_assertnonnull(scn);
--	ut_assertok(scene_title_set(scn, title_id));
-+	scn->title_id = title_id;
- 	ut_asserteq(STR_SCENE_TITLE + 1, id);
- 	ut_asserteq(STR_SCENE_TITLE + 2, exp->next_id);
- 	ut_asserteq_ptr(exp, scn->expo);
+-	ret = scene_txt_str(scn, find_name, obj_id, str_id, text, NULL);
++	ret = scene_txt_str(scn, find_name, obj_id, 0, text, NULL);
+ 	if (ret < 0)
+ 		return log_msg_ret("add", ret);
+ 
 -- 
 2.34.1
 
