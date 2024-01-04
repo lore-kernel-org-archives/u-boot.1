@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE1EAC47073
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:15:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4729AC47074
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:16:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EBCF879E4;
+	by phobos.denx.de (Postfix) with ESMTP id CEB27879F2;
 	Thu,  4 Jan 2024 16:12:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c1ctkT0L";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DVZJqbGt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACD3D879BE; Thu,  4 Jan 2024 16:12:41 +0100 (CET)
-Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
- [IPv6:2607:f8b0:4864:20::d2b])
+ id 146DC879D1; Thu,  4 Jan 2024 16:12:46 +0100 (CET)
+Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
+ [IPv6:2607:f8b0:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8600879F3
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:12:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 022EA87A11
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:12:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-7b7f9fdc14dso30250639f.0
- for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 07:12:11 -0800 (PST)
+Received: by mail-il1-x130.google.com with SMTP id
+ e9e14a558f8ab-3605cc59228so2148765ab.1
+ for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 07:12:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704381124; x=1704985924; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1704381132; x=1704985932; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AJC43zeQq7PM145NfoJFb3EW4rMGb6CWX2sKXuTGJUQ=;
- b=c1ctkT0L7p3FqdErql24WeDaZz7b68+3eVEAgsB2KD2NXhV4IjOs6jCBxwZG4gOnKv
- dxJkZiS+EAJsswiYDr66+HIlaZXMxVQBhAt6rozB45b3oryFiLv3MQfAmiCsH3mPYgCS
- hy7uFWlYQa1O2P0cAawCFD0S/Nkk7NTFwefRQ=
+ bh=isbsGWiw9CkPDGAPPP9tuoikJuqPCWC/Gw5mzJgvAfQ=;
+ b=DVZJqbGtCfmcm0CRpoeoICyQhuJblxYESbrS5LMdEo9IWoqbwE3kSpzSudmCizSj9v
+ C/3vVKipA63At9EkhODcIEuHK5owFwI0qD61Bc1VbspQ/4QW6kAjiGYlG1uF0xlhikmV
+ 41i6RufIb2Q1TvugWE8h8kicjrRXT6HL7yU9o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704381124; x=1704985924;
+ d=1e100.net; s=20230601; t=1704381132; x=1704985932;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AJC43zeQq7PM145NfoJFb3EW4rMGb6CWX2sKXuTGJUQ=;
- b=RNcvTDtQvbY6mmvBwkgEPGxOur1UYWWrGQs7+OMUqZx9169/tBCHzOQjCSFaChKFW+
- qIwpI5d76M1Uwwo8vlIPnhekubsXKOr65du1B9pAD2RTQjtMEcNuoAcAXW0i1LKqVRLf
- Paxy0G4WhmFM2k9/wi5p6JBT41mJojQg+9QyajtChiYCuihG2seuc4vu191oFFf9Dgd4
- MZosCDsUc6P9Sog5RdmsOZiCjx4d9Bofu4KXGny1O5Af6Lt4g+jR/ibA/TmBEn4ZF2yK
- Ekaq2khcWgVliqNT+kci7Y7hePNsPWSS4j2gRycHGWVnudy+A5xLxKmwNnd/BI+e3AC4
- x5Gg==
-X-Gm-Message-State: AOJu0YyTpSY34ToBFrfsvh3jFTNGw+/UaW9qsStkP5XGq52ZoTDBurUk
- vlzTHC0SmcF1tiPprnonxmhjKM+d0AYffsWjZR6gQY7oNDU1
-X-Google-Smtp-Source: AGHT+IFnUh0aso7C7tXD6J9SC1TO5OnpntrR6G0a4aI1zSTwehKtUN+9LG9NJBLo98yKQWirxDroww==
-X-Received: by 2002:a05:6e02:148d:b0:35f:f707:3ebc with SMTP id
- n13-20020a056e02148d00b0035ff7073ebcmr843629ilk.74.1704381124686; 
- Thu, 04 Jan 2024 07:12:04 -0800 (PST)
+ bh=isbsGWiw9CkPDGAPPP9tuoikJuqPCWC/Gw5mzJgvAfQ=;
+ b=G6laeDF9kqB8kDl92tbqdla2Jzh270bEOUi6jVDR7XXqs/V87H8Dy/Mynhl/XhhD67
+ VWjJcRKFxFQWoZh8KdSf1hISbzIYTczdYFbLeIb+tBumQdtQRE8DjiqNkQnOsTbdRlVi
+ 7BwdkTuZBaTTL1H8ZnX+GfHk1NbsBozwJvaVEszhQjZUgBYaTegCG6FzirFw0/WV66m6
+ j2LyhW6VOTNgzdWDJ9hjdpYriQJluoMwrZlA6KQS+9DoRA2C56+cr+4wKzHUGo12mU1B
+ wkUpz03ZmQj6LuTx86Oqml8KcG4qU1xQRNLS+3QAxODJByL2RrIJK0nt61zVu6geQKut
+ 1YCQ==
+X-Gm-Message-State: AOJu0YwS/n0wMwyR7wZczZtqZEw8YNR/fZK+rMPeaon41p53evFtn3Hb
+ 6qpxnkML24sP6Ly8AsE7wD6r2f0iVKDRP5Unir8ZHhhLtrYJ
+X-Google-Smtp-Source: AGHT+IGqOIkDbU0TAgoMIP545EhdVPeai9E4fXOAb/VDXouT/77pIIHS5bD2xHW2s+guzEdULcG+Ow==
+X-Received: by 2002:a05:6e02:2195:b0:35f:e864:f84 with SMTP id
+ j21-20020a056e02219500b0035fe8640f84mr853655ila.34.1704381131803; 
+ Thu, 04 Jan 2024 07:12:11 -0800 (PST)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- cv4-20020a056e023b8400b0035fb79100cesm9260742ilb.59.2024.01.04.07.12.04
+ cv4-20020a056e023b8400b0035fb79100cesm9260742ilb.59.2024.01.04.07.12.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jan 2024 07:12:04 -0800 (PST)
+ Thu, 04 Jan 2024 07:12:11 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Bin Meng <bmeng.cn@gmail.com>, Anatolij Gustschin <agust@denx.de>
-Subject: [PATCH v2 06/19] expo: Allow menu items to have values
-Date: Thu,  4 Jan 2024 08:11:39 -0700
-Message-Id: <20240104151152.697855-7-sjg@chromium.org>
+Subject: [PATCH v2 15/19] x86: coreboot: Show the option table
+Date: Thu,  4 Jan 2024 08:11:48 -0700
+Message-Id: <20240104151152.697855-16-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240104151152.697855-1-sjg@chromium.org>
 References: <20240104151152.697855-1-sjg@chromium.org>
@@ -88,217 +88,238 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present menu items are stored according to their sequence number in
-the menu. In some cases we may want to have holes in that sequence, or
-not use a sequence at all.
+Update the cbsysinfo command to show the contents of the CMOS option
+table.
 
-Add a new 'value' property for menu items. This will be used for
-reading and writing, if present. If there is no 'value' property, then
-the normal sequence number will be used instead.
+While we are here, add some example output for this command, along with
+mention of what the unimplemented tags are.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/sandbox/dts/cedit.dtsi     |  3 +++
- boot/expo_build.c               | 16 ++++++++++++----
- boot/scene_internal.h           | 10 ++++++++++
- boot/scene_menu.c               | 17 +++++++++++++++++
- doc/develop/expo.rst            | 10 ++++++++++
- include/expo.h                  |  2 ++
- test/boot/expo.c                |  1 +
- test/boot/files/expo_layout.dts |  3 +++
- 8 files changed, 58 insertions(+), 4 deletions(-)
+ cmd/x86/cbsysinfo.c         | 73 ++++++++++++++++++++++++++-
+ doc/usage/cmd/cbsysinfo.rst | 99 +++++++++++++++++++++++++++++++++++++
+ test/cmd/coreboot.c         |  7 +++
+ 3 files changed, 178 insertions(+), 1 deletion(-)
 
-diff --git a/arch/sandbox/dts/cedit.dtsi b/arch/sandbox/dts/cedit.dtsi
-index 9bd84e62936..facd7a49bef 100644
---- a/arch/sandbox/dts/cedit.dtsi
-+++ b/arch/sandbox/dts/cedit.dtsi
-@@ -39,6 +39,9 @@
- 				/* IDs for the menu items */
- 				item-id = <ID_CPU_SPEED_1 ID_CPU_SPEED_2
- 					ID_CPU_SPEED_3>;
-+
-+				/* values for the menu items */
-+				item-value = <0 3 6>;
- 			};
- 
- 			power-loss {
-diff --git a/boot/expo_build.c b/boot/expo_build.c
-index 04d88a2c308..3458bf12c67 100644
---- a/boot/expo_build.c
-+++ b/boot/expo_build.c
-@@ -228,10 +228,10 @@ static void list_strings(struct build_info *info)
- static int menu_build(struct build_info *info, ofnode node, struct scene *scn,
- 		      uint id, struct scene_obj **objp)
- {
-+	const u32 *item_ids, *item_values;
- 	struct scene_obj_menu *menu;
-+	int ret, size, i, num_items;
- 	uint title_id, menu_id;
--	const u32 *item_ids;
--	int ret, size, i;
- 	const char *name;
- 
- 	name = ofnode_get_name(node);
-@@ -255,9 +255,15 @@ static int menu_build(struct build_info *info, ofnode node, struct scene *scn,
- 		return log_msg_ret("itm", -EINVAL);
- 	if (!size || size % sizeof(u32))
- 		return log_msg_ret("isz", -EINVAL);
--	size /= sizeof(u32);
-+	num_items = size / sizeof(u32);
- 
--	for (i = 0; i < size; i++) {
-+	item_values = ofnode_read_prop(node, "item-value", &size);
-+	if (item_values) {
-+		if (size != num_items * sizeof(u32))
-+			return log_msg_ret("vsz", -EINVAL);
-+	}
-+
-+	for (i = 0; i < num_items; i++) {
- 		struct scene_menitem *item;
- 		uint label, key, desc;
- 
-@@ -281,6 +287,8 @@ static int menu_build(struct build_info *info, ofnode node, struct scene *scn,
- 				     desc, 0, 0, &item);
- 		if (ret < 0)
- 			return log_msg_ret("mi", ret);
-+		if (item_values)
-+			item->value = fdt32_to_cpu(item_values[i]);
- 	}
- 	*objp = &menu->obj;
- 
-diff --git a/boot/scene_internal.h b/boot/scene_internal.h
-index be25f6a8b96..ec9008ea593 100644
---- a/boot/scene_internal.h
-+++ b/boot/scene_internal.h
-@@ -281,6 +281,16 @@ struct scene_menitem *scene_menuitem_find(const struct scene_obj_menu *menu,
- struct scene_menitem *scene_menuitem_find_seq(const struct scene_obj_menu *menu,
- 					      uint seq);
- 
-+/**
-+ * scene_menuitem_find_val() - Find the menu item with a given value
-+ *
-+ * @menu: Menu to check
-+ * @find_val: Value to look for
-+ * Return: menu item if found, else NULL
-+ */
-+struct scene_menitem *scene_menuitem_find_val(const struct scene_obj_menu *menu,
-+					      int val);
-+
- /**
-  * scene_bbox_union() - update bouding box with the demensions of an object
-  *
-diff --git a/boot/scene_menu.c b/boot/scene_menu.c
-index dbf6eacb298..002821ec1f5 100644
---- a/boot/scene_menu.c
-+++ b/boot/scene_menu.c
-@@ -62,6 +62,22 @@ struct scene_menitem *scene_menuitem_find_seq(const struct scene_obj_menu *menu,
- 	return NULL;
+diff --git a/cmd/x86/cbsysinfo.c b/cmd/x86/cbsysinfo.c
+index 84822a3e321..8c46203e1af 100644
+--- a/cmd/x86/cbsysinfo.c
++++ b/cmd/x86/cbsysinfo.c
+@@ -185,6 +185,77 @@ static const char *timestamp_name(uint32_t id)
+ 	return "<unknown>";
  }
  
-+struct scene_menitem *scene_menuitem_find_val(const struct scene_obj_menu *menu,
-+					      int val)
++static void show_option_vals(const struct cb_cmos_option_table *tab,
++			     uint id)
 +{
-+	struct scene_menitem *item;
-+	uint i;
++	const void *ptr, *end;
++	bool found = false;
 +
-+	i = 0;
-+	list_for_each_entry(item, &menu->item_head, sibling) {
-+		if (item->value == val)
-+			return item;
-+		i++;
++	end = (void *)tab + tab->size;
++	for (ptr = (void *)tab + tab->header_length; ptr < end;) {
++		const struct cb_record *rec = ptr;
++
++		switch (rec->tag) {
++		case CB_TAG_OPTION_ENUM: {
++			const struct cb_cmos_enums *enums = ptr;
++
++			if (enums->config_id == id) {
++				if (!found)
++					printf("  ");
++				printf(" %d:%s", enums->value, enums->text);
++				found = true;
++			}
++			break;
++		}
++			break;
++		case CB_TAG_OPTION_DEFAULTS:
++		case CB_TAG_OPTION_CHECKSUM:
++		case CB_TAG_OPTION:
++			break;
++		default:
++			printf("tag %x\n", rec->tag);
++			break;
++		}
++		ptr += rec->size;
 +	}
-+
-+	return NULL;
 +}
 +
- /**
-  * update_pointers() - Update the pointer object and handle highlights
-  *
-@@ -417,6 +433,7 @@ int scene_menuitem(struct scene *scn, uint menu_id, const char *name, uint id,
- 	item->desc_id = desc_id;
- 	item->preview_id = preview_id;
- 	item->flags = flags;
-+	item->value = INT_MAX;
- 	list_add_tail(&item->sibling, &menu->item_head);
- 
- 	if (itemp)
-diff --git a/doc/develop/expo.rst b/doc/develop/expo.rst
-index d8115c463c1..cc7c36173db 100644
---- a/doc/develop/expo.rst
-+++ b/doc/develop/expo.rst
-@@ -361,6 +361,13 @@ item-id
-     Specifies the ID for each menu item. These are used for checking which item
-     has been selected.
- 
-+item-value
-+    type: u32 list, optional
++static void show_option_table(const struct cb_cmos_option_table *tab)
++{
++	const void *ptr, *end;
 +
-+    Specifies the value for each menu item. These are used for saving and
-+    loading. If this is omitted the value is its position in the menu (0..n-1).
-+    Valid values are positive and negative integers INT_MIN...(INT_MAX - 1).
++	print_ptr("option_table", tab);
++	if (!tab->size)
++		return;
 +
- item-label / item-label-id
-     type: string list / u32 list, required
- 
-@@ -474,6 +481,9 @@ strings are provided inline in the nodes where they are used.
-                     /* IDs for the menu items */
-                     item-id = <ID_CPU_SPEED_1 ID_CPU_SPEED_2
-                         ID_CPU_SPEED_3>;
++	printf(" Bit  Len  Cfg  ID  Name\n");
++	end = (void *)tab + tab->size;
++	for (ptr = (void *)tab + tab->header_length; ptr < end;) {
++		const struct cb_record *rec = ptr;
 +
-+                    /* values for the menu items */
-+                    item-value = <(-1) 3 6>;
-                 };
- 
-                 power-loss {
-diff --git a/include/expo.h b/include/expo.h
-index 6c2e9437b73..658ff003835 100644
---- a/include/expo.h
-+++ b/include/expo.h
-@@ -330,6 +330,7 @@ enum scene_menuitem_flags_t {
-  * @desc_id: ID of text object to use as the description text
-  * @preview_id: ID of the preview object, or 0 if none
-  * @flags: Flags for this item
-+ * @value: Value for this item, or INT_MAX to use sequence
-  * @sibling: Node to link this item to its siblings
-  */
- struct scene_menitem {
-@@ -340,6 +341,7 @@ struct scene_menitem {
- 	uint desc_id;
- 	uint preview_id;
- 	uint flags;
-+	int value;
- 	struct list_head sibling;
- };
- 
-diff --git a/test/boot/expo.c b/test/boot/expo.c
-index 2e8acac0731..75f31fe6690 100644
---- a/test/boot/expo.c
-+++ b/test/boot/expo.c
-@@ -719,6 +719,7 @@ static int expo_test_build(struct unit_test_state *uts)
- 	ut_asserteq(0, item->desc_id);
- 	ut_asserteq(0, item->preview_id);
- 	ut_asserteq(0, item->flags);
-+	ut_asserteq(0, item->value);
- 
- 	txt = scene_obj_find(scn, item->label_id, SCENEOBJT_NONE);
- 	ut_asserteq_str("2 GHz", expo_get_str(exp, txt->str_id));
-diff --git a/test/boot/files/expo_layout.dts b/test/boot/files/expo_layout.dts
-index bed552288f4..ebe5adb27bb 100644
---- a/test/boot/files/expo_layout.dts
-+++ b/test/boot/files/expo_layout.dts
-@@ -39,6 +39,9 @@
- 				item-id = <ID_CPU_SPEED_1 ID_CPU_SPEED_2
- 					ID_CPU_SPEED_3>;
- 
-+				/* values for the menu items */
-+				item-value = <(-1) 3 6>;
++		switch (rec->tag) {
++		case CB_TAG_OPTION: {
++			const struct cb_cmos_entries *entry = ptr;
 +
- 				start-bit = <0x400>;
- 				bit-length = <2>;
- 			};
++			printf("%4x %4x  %3c %3x  %-20s", entry->bit,
++			       entry->length, entry->config, entry->config_id,
++			       entry->name);
++			show_option_vals(tab, entry->config_id);
++			printf("\n");
++			break;
++		}
++		case CB_TAG_OPTION_ENUM:
++		case CB_TAG_OPTION_DEFAULTS:
++		case CB_TAG_OPTION_CHECKSUM:
++			break;
++		default:
++			printf("tag %x\n", rec->tag);
++			break;
++		}
++		ptr += rec->size;
++	}
++}
++
+ static void show_table(struct sysinfo_t *info, bool verbose)
+ {
+ 	struct cb_serial *ser = info->serial;
+@@ -219,7 +290,7 @@ static void show_table(struct sysinfo_t *info, bool verbose)
+ 		printf("%12d: %02x:%-8s %016llx %016llx\n", i, mr->type,
+ 		       get_mem_name(mr->type), mr->base, mr->size);
+ 	}
+-	print_ptr("option_table", info->option_table);
++	show_option_table(info->option_table);
+ 
+ 	print_hex("CMOS start", info->cmos_range_start);
+ 	if (info->cmos_range_start) {
+diff --git a/doc/usage/cmd/cbsysinfo.rst b/doc/usage/cmd/cbsysinfo.rst
+index 8c03a85169d..ea6878e5423 100644
+--- a/doc/usage/cmd/cbsysinfo.rst
++++ b/doc/usage/cmd/cbsysinfo.rst
+@@ -23,3 +23,102 @@ Example
+ ::
+ 
+     => cbsysinfo
++    Coreboot table at 500, size 5c4, records 1d (dec 29), decoded to 000000007dce4520, forwarded to 000000007ff9a000
++
++    CPU KHz     : 0
++    Serial I/O port: 00000000
++       base        : 00000000
++       pointer     : 000000007ff9a370
++       type        : 1
++       base        : 000003f8
++       baud        : 0d115200
++       regwidth    : 1
++       input_hz    : 0d1843200
++       PCI addr    : 00000010
++    Mem ranges  : 7
++              id: type               ||   base        ||   size
++               0: 10:table    0000000000000000 0000000000001000
++               1: 01:ram      0000000000001000 000000000009f000
++               2: 02:reserved 00000000000a0000 0000000000060000
++               3: 01:ram      0000000000100000 000000007fe6d000
++               4: 10:table    000000007ff6d000 0000000000093000
++               5: 02:reserved 00000000fec00000 0000000000001000
++               6: 02:reserved 00000000ff800000 0000000000800000
++    option_table: 000000007ff9a018
++     Bit  Len  Cfg  ID  Name
++       0  180    r   0  reserved_memory
++     180    1    e   4  boot_option            0:Fallback 1:Normal
++     184    4    h   0  reboot_counter
++     190    8    r   0  reserved_century
++     1b8    8    r   0  reserved_ibm_ps2_century
++     1c0    1    e   1  power_on_after_fail    0:Disable 1:Enable
++     1c4    4    e   6  debug_level            5:Notice 6:Info 7:Debug 8:Spew
++     1d0   80    r   0  vbnv
++     3f0   10    h   0  check_sum
++    CMOS start  : 1c0
++       CMOS end    : 1cf
++       CMOS csum loc: 3f0
++    VBNV start  : ffffffff
++    VBNV size   : ffffffff
++    CB version  : 4.21-5-g7e6eae9679e3-dirty
++       Extra       :
++       Build       : Thu Sep 07 14:52:41 UTC 2023
++       Time        : 14:52:41
++    Framebuffer : 000000007ff9a410
++       Phys addr   :         fd000000
++       X res       : 0d800
++       X res       : 0d600
++       Bytes / line: c80
++       Bpp         : 0d32
++       pos/size      red 16/8, green 8/8, blue 0/8, reserved 24/8
++    GPIOs       : 0
++              id: port     polarity val name
++    MACs        : 0d10
++               0: 12:00:00:00:28:00
++               1: 00:00:00:fd:00:00
++               2: 20:03:00:00:58:02
++               3: 80:0c:00:00:20:10
++               4: 08:00:08:18:08:00
++               5: 16:00:00:00:10:00
++               6: 00:d0:fd:7f:00:00
++               7: 17:00:00:00:10:00
++               8: 00:e0:fd:7f:00:00
++               9: 37:00:00:00:10:00
++    Multiboot tab: 0000000000000000
++    CB header   : 000000007ff9a000
++    CB mainboard: 000000007ff9a344
++       vendor      : 0: Emulation
++       part_number : 10: QEMU x86 i440fx/piix4
++    vboot handoff: 0000000000000000
++       size        : 0
++       vdat addr   : 0000000000000000
++       size        : 0
++    SMBIOS      :         7ff6d000
++       size        : 8000
++    ROM MTRR    : 0
++    Tstamp table: 000000007ffdd000
++    CBmem cons  : 000000007ffde000
++    Size        : 1fff8
++    Cursor      : 3332
++    MRC cache   : 0000000000000000
++    ACPI GNVS   : 0000000000000000
++    Board ID    : ffffffff
++    RAM code    : ffffffff
++    WiFi calib  : 0000000000000000
++    Ramoops buff:                0
++       size        : 0
++    SF size     : 0
++    SF sector   : 0
++    SF erase cmd: 0
++    FMAP offset :                0
++    CBFS offset :              200
++    CBFS size   :           3ffe00
++    Boot media size:           400000
++    MTC start   :                0
++    MTC size    : 0
++    Chrome OS VPD: 0000000000000000
++    RSDP        : 000000007ff75000
++    Unimpl.     : 10 37 40
++    =>
++
++Note that "Unimpl." shows tags which U-Boot does not currently implement.
+diff --git a/test/cmd/coreboot.c b/test/cmd/coreboot.c
+index 054fe2d7950..1feca1e5075 100644
+--- a/test/cmd/coreboot.c
++++ b/test/cmd/coreboot.c
+@@ -22,6 +22,13 @@ static int test_cmd_cbsysinfo(struct unit_test_state *uts)
+ 	ut_assertok(run_command("cbsysinfo", 0));
+ 	ut_assert_nextlinen("Coreboot table at");
+ 
++	/* Make sure CMOS options are enabled */
++	ut_assert_skip_to_line(
++		" 1c0    1    e   1  power_on_after_fail    0:Disable 1:Enable");
++	ut_assert_skip_to_line("CMOS start  : 1c0");
++	ut_assert_nextline("   CMOS end    : 1cf");
++	ut_assert_nextline("   CMOS csum loc: 3f0");
++
+ 	/* Make sure the linear frame buffer is enabled */
+ 	ut_assert_skip_to_linen("Framebuffer");
+ 	ut_assert_nextlinen("   Phys addr");
 -- 
 2.34.1
 
