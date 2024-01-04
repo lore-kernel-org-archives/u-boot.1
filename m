@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE570C47074
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 21:54:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5AA6C47074
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 22:23:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12AFA877AC;
-	Thu,  4 Jan 2024 22:54:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 04864877D5;
+	Thu,  4 Jan 2024 23:23:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bZ9XrBqY";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="x36uBsqz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9372687866; Thu,  4 Jan 2024 22:54:51 +0100 (CET)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0DA0687866; Thu,  4 Jan 2024 23:23:33 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1232F876C4
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 22:54:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AE42F877D5
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 23:23:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-680a9796b38so4345016d6.0
- for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 13:54:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704405288; x=1705010088; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UHu/9yYjuNs9M6rsUIsCrmi3APbGPXR8WfnnSC4pWIc=;
- b=bZ9XrBqYl9peC3v3bL9HNxn9opKA/7Xr10NQ59dY3dK0Gxma/JBTI1bXnbCZ0Mwxes
- c21GyfVn9zyL7DaXz13mPqTczozdkDiHolVMEMbxyhEjtZw3vrKNOnFQC1v6th728MZs
- 1Cr1mCelRwtESkLywtRAUZdLQUqk2VOz+UoL0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704405288; x=1705010088;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UHu/9yYjuNs9M6rsUIsCrmi3APbGPXR8WfnnSC4pWIc=;
- b=Zek3KxnnpPxnrQwQ4OLouVJomZrKwpWT4/H11Ok058FAv9Y1f1Bft3a4JfGCJ7uUM6
- Ys5upPsxewZFo3PxiVE3g6gr6yGBoa06T36pFFuVAlSCb5e/vFm4uMaG+E67qev0Xns1
- LXoS5876LDB/yIcdIMCuy1GO68rOFghaWW6wGAITBwm3cCHa2thIM9vP1ZFI9DW/Dli3
- 7c+ew7whAmTBFUbaz8JG7KGgKkI/m0HOE5OEv0igNXoAOu/i+vaVmQ6WkdNECaS6TvqC
- PeKeSNQ993kbXojDgwu1PyfIsRJo01+XXfjp/vxN6/Izh1UfjomBQsHoYU+8tbM4lepx
- LJIw==
-X-Gm-Message-State: AOJu0YySZeHUuy1MB4fmmNO8vdsffpIpVCRw2prXCl7kxrkA9soJO0Nh
- 5DAMHaYLo2HJXoaK11NiBKDDfAexR6ElJuE2hmc2TGPuJmtB
-X-Google-Smtp-Source: AGHT+IFuqeDMdG4zBQldI5XyvT6/jarUq5+fL5rEaozsnTJloLarXEyiTxEWhTea3tqeSV9UrqYBu0DbQI4IMlO5FpU=
-X-Received: by 2002:a05:6214:2305:b0:67f:7c5c:3434 with SMTP id
- gc5-20020a056214230500b0067f7c5c3434mr1242635qvb.73.1704405287791; Thu, 04
- Jan 2024 13:54:47 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 404MNK2x069621;
+ Thu, 4 Jan 2024 16:23:20 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1704407000;
+ bh=NbBINHG/PG7ZNDH6iV2RvY1Y66hb89NZYqSlwsSwQ1k=;
+ h=From:To:CC:Subject:In-Reply-To:References:Date;
+ b=x36uBsqzH6QkWeVUirzU59BmU7Ba5sGQmO7V97oDlEO9oUBekbm+CAGVDuQCBhnbP
+ SGEdXTmOtlBrSuuF2WryXGhk8op+a+vThTgYkKj1tj5d1fT56PCjSsO62Wzy93vyBm
+ gAIp7+it+4lPyFuVkWp8xgPcJwmHiUGeAreP1G1E=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 404MNK0G001601
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 4 Jan 2024 16:23:20 -0600
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 4
+ Jan 2024 16:23:20 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 4 Jan 2024 16:23:20 -0600
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 404MNK3b116978;
+ Thu, 4 Jan 2024 16:23:20 -0600
+From: Jon Humphreys <j-humphreys@ti.com>
+To: Andrew Davis <afd@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
+CC: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, "Nishanth
+ Menon" <nm@ti.com>, Roger Quadros <rogerq@kernel.org>,
+ <vigneshr@ti.com>, <jonas@kwiboo.se>, <srk@ti.com>, <bb@ti.com>,
+ <praneeth@ti.com>, <u-boot@lists.denx.de>,
+ Roger Quadros <rogerq@kernel.org>, MD Danish Anwar <danishanwar@ti.com>
+Subject: Re: [PATCH 1/2] board: ti: am62x: am62x.env: Fix boot_targets
+In-Reply-To: <7e7dde90-0711-4cce-b2ca-ab7369f36ae4@ti.com>
+References: <20231005171614.yiatmyczip2jnmf4@surround>
+ <CAPnjgZ1fnqgk5W_8-jkJL1keXGM4CfnK-jPnFtQcFcV+y89+cA@mail.gmail.com>
+ <20231106055351.f2fny5ys6avi5qnk@ula0497581>
+ <20231106153159.GH496310@bill-the-cat>
+ <736c04ab-9c48-4957-b242-fcbde0ace68b@ti.com>
+ <CAPnjgZ1JTcybX9sRFQtddcwefLum6_+ynQSWbQ=4NVdO6eAxhg@mail.gmail.com>
+ <7df59596-ac84-4e26-844f-3f3ad4bb0b7f@ti.com>
+ <CAPnjgZ06tDBGko7RxO_ec1hKYqOhfhY9D7FdPiaVcDxaomeUDA@mail.gmail.com>
+ <CAFLszTiNruYVsRjAaKdtpvjuK3YfQN92DDArRofUOnWo-1jXUw@mail.gmail.com>
+ <e6e305c1-a233-4b0c-9f2f-ae3339b9688f@ti.com>
+ <20240104075245.wkirozn7ifoxinbn@uda0497581>
+ <7e7dde90-0711-4cce-b2ca-ab7369f36ae4@ti.com>
+Date: Thu, 4 Jan 2024 16:23:20 -0600
+Message-ID: <86il48wxev.fsf@udb0321960.dhcp.ti.com>
 MIME-Version: 1.0
-References: <20231116172859.393744-1-sjg@chromium.org>
- <20231208150042.GA1278773-robh@kernel.org>
- <CAPnjgZ2i4gvgiUeHPOfHuOdBooV4e=QQEq6iMo0JbDwOS6dCwA@mail.gmail.com>
- <CAL_Jsq+xMZ8yz4H9D59uCSyX4h5W+4ruGF++=wVA=msXz+Y01A@mail.gmail.com>
- <CAPnjgZ1uW8T6woXSqFUNm301=W3zBYOrADREkrz=DuwSW87qZg@mail.gmail.com>
- <20231214172702.GA617226-robh@kernel.org>
- <CAPnjgZ2oJSGPO91Y_aLbe+v250WFrND4n3T0mOvhERYidVu=eQ@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2oJSGPO91Y_aLbe+v250WFrND4n3T0mOvhERYidVu=eQ@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 4 Jan 2024 14:54:36 -0700
-Message-ID: <CAFLszTizRRVbRO6_ygE2X-Lp5dENWSc4uMGL5GPJAFGAbRdCyQ@mail.gmail.com>
-Subject: Re: [PATCH v6 1/3] dt-bindings: mtd: partitions: Add binman compatible
-To: Rob Herring <robh@kernel.org>
-Cc: devicetree@vger.kernel.org, Miquel Raynal <miquel.raynal@bootlin.com>, 
- linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>, 
- Michael Walle <mwalle@kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Pratyush Yadav <ptyadav@amazon.de>, 
- =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Mailman-Approved-At: Thu, 04 Jan 2024 23:23:55 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,149 +93,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rob,
+Andrew Davis <afd@ti.com> writes:
 
-On Thu, Dec 14, 2023 at 2:09=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
-e:
+>>>>>>>>      * uEnv.txt processing
+>>>>>>>
+>>>>>>> What command can do this?
+>>>>>>>
+>>>>>>
+>>>>>> run envboot;
+>>>>>>
+>>>>>> https://source.denx.de/u-boot/u-boot/-/blob/master/include/env/ti/mmc.env?ref_type=heads#L20
+>>>>>
+>>>>> This could be a new bootmeth which looks for uenv.txt on available
+>>>>> devices. It might be better to put the env in a FIT or something with
+>>>>> a checksum.
+>> 
+>> We use non-FIT boot as well for our non HS platforms, I think the new
+>> bootmeth might be helpful as you mentioned, would have to look at this
+>> more as I thought bootmeth is supposed to boot a platform at the end
+>> only but it seems like here we'll be combining this bootmeth ( that'll
+>> just import the env ) and then other bootmeth will actually boot Linux.
+>> 
 >
-> Hi Rob,
+> As long as bootmeths can perform an action then continue with other
+> bootmeths that could work. This might require complex logic though.
+> For instance the uenv.txt bootmeth would only need run on some subset
+> of available bootdevs, and it should scan all those devs for uenv.txt
+> first, before the Linux finding bootmeths start.
 >
-> On Thu, 14 Dec 2023 at 10:27, Rob Herring <robh@kernel.org> wrote:
-> >
-> > On Fri, Dec 08, 2023 at 03:58:10PM -0700, Simon Glass wrote:
-> > > Hi Rob,
-> > >
-> > > On Fri, 8 Dec 2023 at 14:56, Rob Herring <robh@kernel.org> wrote:
-> > > >
-> > > > On Fri, Dec 8, 2023 at 11:47=E2=80=AFAM Simon Glass <sjg@chromium.o=
-rg> wrote:
-> > > > >
-> > > > > Hi Rob,
-> > > > >
-> > > > > On Fri, 8 Dec 2023 at 08:00, Rob Herring <robh@kernel.org> wrote:
-> > > > > >
-> > > > > > On Thu, Nov 16, 2023 at 10:28:50AM -0700, Simon Glass wrote:
-> > > > > > > Add a compatible string for binman, so we can extend fixed-pa=
-rtitions
-> > > > > > > in various ways.
-> > > > > > >
-> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > ---
-> > > > > > >
-> > > > > > > (no changes since v5)
-> > > > > > >
-> > > > > > > Changes in v5:
-> > > > > > > - Add #address/size-cells and parternProperties
-> > > > > > > - Drop $ref to fixed-partitions.yaml
-> > > > > > > - Drop 'select: false'
-> > > > > > >
-> > > > > > > Changes in v4:
-> > > > > > > - Change subject line
-> > > > > > >
-> > > > > > > Changes in v3:
-> > > > > > > - Drop fixed-partition additional compatible string
-> > > > > > > - Drop fixed-partitions from the example
-> > > > > > > - Mention use of compatible instead of label
-> > > > > > >
-> > > > > > > Changes in v2:
-> > > > > > > - Drop mention of 'enhanced features' in fixed-partitions.yam=
-l
-> > > > > > > - Mention Binman input and output properties
-> > > > > > > - Use plain partition@xxx for the node name
-> > > > > > >
-> > > > > > >  .../bindings/mtd/partitions/binman.yaml       | 68 +++++++++=
-++++++++++
-> > > > > > >  .../bindings/mtd/partitions/partitions.yaml   |  1 +
-> > > > > > >  MAINTAINERS                                   |  5 ++
-> > > > > > >  3 files changed, 74 insertions(+)
-> > > > > > >  create mode 100644 Documentation/devicetree/bindings/mtd/par=
-titions/binman.yaml
-> > > > > > >
-> > > > > > > diff --git a/Documentation/devicetree/bindings/mtd/partitions=
-/binman.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
-> > > > > > > new file mode 100644
-> > > > > > > index 000000000000..329217550a98
-> > > > > > > --- /dev/null
-> > > > > > > +++ b/Documentation/devicetree/bindings/mtd/partitions/binman=
-.yaml
-> > > > > > > @@ -0,0 +1,68 @@
-> > > > > > > +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-> > > > > > > +# Copyright 2023 Google LLC
-> > > > > > > +
-> > > > > > > +%YAML 1.2
-> > > > > > > +---
-> > > > > > > +$id: http://devicetree.org/schemas/mtd/partitions/binman.yam=
-l#
-> > > > > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > > > > > > +
-> > > > > > > +title: Binman firmware layout
-> > > > > > > +
-> > > > > > > +maintainers:
-> > > > > > > +  - Simon Glass <sjg@chromium.org>
-> > > > > > > +
-> > > > > > > +description: |
-> > > > > > > +  The binman node provides a layout for firmware, used when =
-packaging firmware
-> > > > > > > +  from multiple projects. It is based on fixed-partitions, w=
-ith some
-> > > > > > > +  extensions, but uses 'compatible' to indicate the contents=
- of the node, to
-> > > > > > > +  avoid perturbing or confusing existing installations which=
- use 'label' for a
-> > > > > > > +  particular purpose.
-> > > > > > > +
-> > > > > > > +  Binman supports properties used as inputs to the firmware-=
-packaging process,
-> > > > > > > +  such as those which control alignment of partitions. This =
-binding addresses
-> > > > > > > +  these 'input' properties. For example, it is common for th=
-e 'reg' property
-> > > > > > > +  (an 'output' property) to be set by Binman, based on the a=
-lignment requested
-> > > > > > > +  in the input.
-> > > > > > > +
-> > > > > > > +  Once processing is complete, input properties have mostly =
-served their
-> > > > > > > +  purpose, at least until the firmware is repacked later, e.=
-g. due to a
-> > > > > > > +  firmware update. The 'fixed-partitions' binding should pro=
-vide enough
-> > > > > > > +  information to read the firmware at runtime, including dec=
-ompression if
-> > > > > > > +  needed.
-> > > > > >
-> > > > > > How is this going to work exactly? binman reads these nodes and=
- then
-> > > > > > writes out 'fixed-partitions' nodes. But then you've lost the b=
-inman
-> > > > > > specifc parts needed for repacking.
-> > > > >
-> > > > > No, they are the same node. I do want the extra information to st=
-ick
-> > > > > around. So long as it is compatible with fixed-partition as well,=
- this
-> > > > > should work OK.
-> > > >
-> > > > How can it be both? The partitions node compatible can be either
-> > > > 'fixed-partitions' or 'binman'.
-> > >
-> > > Can we not allow it to be both? I have tried to adjust things in
-> > > response to feedback but perhaps the feedback was leading me down the
-> > > wrong path?
-> >
-> > Sure, but then the schema has to and that means extending
-> > fixed-partitions.
->
-> Can we cross that bridge later? There might be resistance to it. I'm
-> not sure. For now, perhaps just a binman compatible works well enough
-> to make progress.
 
-Is there any way to make progress on this? I would like to have
-software which doesn't understand the binman compatible to at least be
-able to understand the fixed-partition compatible. Is that acceptable?
-If not, what is?
+It doesn't make sense to treat envboot as a bootmeth because it's really
+not about a way of booting but more often just used to modify
+environment variables before going through another boot flow (although
+you could define/run env variables that performs it's own boot).  It may be
+better to think of it as a preprocessing step before a bootflow scan.
 
-In any case, please can you help with this?
+Some other thoughts - envboot is more of a hacky way to solve things:
+1) As we move more towards secure boot as the standard, we should
+   understand what use cases the hacks are working around and properly
+   support those use cases.
+2) But I don't think we should just remove it altogether because it is a
+   very powerful 'feature' during the development phases to try out
+   changes without modifying/rebuilding/reflashing u-boot.
+3) This is a TI feature.  Are others solving this need in a better way?
 
-Regards,
-Simon
+Jon
