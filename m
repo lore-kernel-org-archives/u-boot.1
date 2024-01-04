@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5132AC47073
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:12:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1FB3C47074
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:12:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3046879A3;
-	Thu,  4 Jan 2024 16:11:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 95C7A879BD;
+	Thu,  4 Jan 2024 16:11:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i1NwI1Ex";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E3xNF+Lw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3625887977; Thu,  4 Jan 2024 16:11:06 +0100 (CET)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id 6E226879B5; Thu,  4 Jan 2024 16:11:09 +0100 (CET)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19DEF8799E
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:10:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C8D8A87994
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:10:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-3606ad5f1ffso842695ab.1
- for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 07:10:50 -0800 (PST)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-7bb982d0f12so43107539f.0
+ for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 07:10:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704381048; x=1704985848; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1704381052; x=1704985852; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+IhfFkdtwmc+x40dlRQ9yQLO2Il+xbK0ZEs/XXDGabc=;
- b=i1NwI1Ex9MEGIxdrWvdiJXqw9jo6ib6xMa+QQTUd5vbQTWRyZ/MQLX0jxW+MVXcKWo
- Igcxyxabe6Sq4qItaBpWK8dCzucN4U9ALGvmG8dWCAakRHj1hq8Zk8fNVWQPYuMp7mJQ
- w++0V+OHLHZGjmYTYYXuC/RZ1/xkBG6sOpzzI=
+ bh=jAQCA2+L8S+5OKFmSgZPF3WL7XCVJOyD3jGB9qjlr1Q=;
+ b=E3xNF+LwqEdJL0/wuthMyQqg98dJlycBfgQIQx3RdMGXloDMlIGaeNHp9dj031I3EY
+ eauiPkK1PmczWAwNKkFAKqCgj4N4zJ+vFEXx/QFEh0pzdhH8EBlquIwKCLh5/7+0v5CO
+ YmezRDovoSdEosvr4QY8xX3yQUllZ9BGXrKu4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704381048; x=1704985848;
+ d=1e100.net; s=20230601; t=1704381052; x=1704985852;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+IhfFkdtwmc+x40dlRQ9yQLO2Il+xbK0ZEs/XXDGabc=;
- b=WmaAX4GYAhM4ALwlf0to3qoS5tRbztr9KkEBSyjm3JiNd5KXN/+lg4okzY2J8U5VDs
- OPxAgXkyvuc9oNhUdAbZ2ZJ8EssCt6lE+OfLjsIr33wa9AnIsD5/3Eco8elUbRAR7Ikw
- 6hsg2K43xYoDd4jQIKVFuy1cQOOkgBLfeywPewvb3acUbRZPiucFYPK7B+iFb8is6mKE
- mJ7NW/2hzy6k6D4OiMAQ4FY7cn1KhKgMrjj0SwFcI0r+tdEeg4Thr3ibNNI39/nLFzyV
- yGSYpTMeHDwn0IEimSZ5rO/+g96OJ5h8lWuQiatrTCkzaEW22uI2nUHnAD5X6QxEyL/I
- VHEg==
-X-Gm-Message-State: AOJu0Yxt8f6TC7BTneXzAZgxcGeaK1pQR1LwA/YMbWyRjAFCsIPSzsIb
- LeTXmif4d+aF7sv+wcCj5UsMdIaDnnvnkDtu0oQiSrdxEk1H
-X-Google-Smtp-Source: AGHT+IGGPWoJMpaQ0gGyx58wOJxbZ/AWMs5Qrtk+sHNGs2xaEX0rSeLVUrAZ8o8diHn63N+eM7K9cw==
-X-Received: by 2002:a05:6e02:1bc5:b0:360:1914:49b with SMTP id
- x5-20020a056e021bc500b003601914049bmr788892ilv.47.1704381048597; 
- Thu, 04 Jan 2024 07:10:48 -0800 (PST)
+ bh=jAQCA2+L8S+5OKFmSgZPF3WL7XCVJOyD3jGB9qjlr1Q=;
+ b=o2EjVeeSi2A2qTc105utF99BBqDu6qLw04N76VGmojhfVnRqnNAjRNoWoVEGA4dCQV
+ rsSpfkEAo19d0ZoWW/MBE077eqe8Gj3ObyEVE0hhNp1t3JgzjABzXRxJv4JngBFBYtg7
+ Baz2McsL1B1wLt228oDr79iiP1G7TIBLLr7q+Z6+sRWHgWgxbvnS/gRlFeqvDAcBp46l
+ P8Sw1K73LD/MFxPPt++D5Rs9JTo1YL7T6jdA0LZQMCJgNV7/Dqg81m4eodBtTADYfUGR
+ 9v1mMa2vGSSo5rsTTFevCtrkfEwoZ3ioCtGdyzeBc3st8cvULMnVt/Bqf6Xn59P6kXI6
+ r0Tw==
+X-Gm-Message-State: AOJu0Yz6GVnKNGNmgLaRpV30OlQAzuE91go8U13t1gdPsBjLyVVGBXqj
+ XqQTE3kCelj8kcIb99I5rQpphjew24zK8YJqYMZgOb4i2wNz
+X-Google-Smtp-Source: AGHT+IHKGtjhho94H8XlnF5DxIDBQI5UgRF5OICVleGRtK1i58J6OfSiw9pqYrEh0W7htYlJzoE8Dw==
+X-Received: by 2002:a05:6e02:20eb:b0:360:142:3fec with SMTP id
+ q11-20020a056e0220eb00b0036001423fecmr359057ilv.6.1704381052163; 
+ Thu, 04 Jan 2024 07:10:52 -0800 (PST)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- z14-20020a02938e000000b0046d710cef38sm4937310jah.159.2024.01.04.07.10.48
+ z14-20020a02938e000000b0046d710cef38sm4937310jah.159.2024.01.04.07.10.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jan 2024 07:10:48 -0800 (PST)
+ Thu, 04 Jan 2024 07:10:51 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Anatolij Gustschin <agust@denx.de>,
- Dzmitry Sankouski <dsankouski@gmail.com>
-Subject: [PATCH v6 3/7] video: Drop unnecessary truetype operations from SPL
-Date: Thu,  4 Jan 2024 08:10:38 -0700
-Message-Id: <20240104151042.695717-3-sjg@chromium.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>, qemu-devel@nongnu.org
+Subject: [PATCH v6 7/7] x86: qemu: Enable truetype fonts
+Date: Thu,  4 Jan 2024 08:10:42 -0700
+Message-Id: <20240104151042.695717-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240104151042.695717-1-sjg@chromium.org>
 References: <20240104151042.695717-1-sjg@chromium.org>
@@ -89,64 +90,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Saving and restoring entries is used for expo and for the command line,
-which we don't use in SPL. Drop these methods.
+Enable this feature to provide a larger font choice and more attractive
+menus. Expand the ROM for x86_64 to 2MB to make space for the font.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-Reviewed-by: Anatolij Gustschin <agust@denx.de>
 ---
 
-(no changes since v3)
+Changes in v6:
+- Move 'Avoid unbinding devices in use by bootflows' to another series
 
 Changes in v3:
-- Add new patch to drop unnecessary truetype operations from SPL
+- Add new patch to enable truetype fonts in qemu-x86 and qemu-x86_64
 
- drivers/video/console_truetype.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ configs/qemu-x86_64_defconfig | 1 +
+ configs/qemu-x86_defconfig    | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/drivers/video/console_truetype.c b/drivers/video/console_truetype.c
-index 14fb81e9563..602133575f8 100644
---- a/drivers/video/console_truetype.c
-+++ b/drivers/video/console_truetype.c
-@@ -8,6 +8,7 @@
- #include <dm.h>
- #include <log.h>
- #include <malloc.h>
-+#include <spl.h>
- #include <video.h>
- #include <video_console.h>
- 
-@@ -799,6 +800,9 @@ static int truetype_entry_save(struct udevice *dev, struct abuf *buf)
- 	struct console_tt_store store;
- 	const uint size = sizeof(store);
- 
-+	if (spl_phase() <= PHASE_SPL)
-+		return -ENOSYS;
-+
- 	/*
- 	 * store the whole priv structure as it is simpler that picking out
- 	 * what we need
-@@ -820,6 +824,9 @@ static int truetype_entry_restore(struct udevice *dev, struct abuf *buf)
- 	struct console_tt_priv *priv = dev_get_priv(dev);
- 	struct console_tt_store store;
- 
-+	if (spl_phase() <= PHASE_SPL)
-+		return -ENOSYS;
-+
- 	memcpy(&store, abuf_data(buf), sizeof(store));
- 
- 	vc_priv->xcur_frac = store.cur.xpos_frac;
-@@ -844,6 +851,9 @@ static int truetype_set_cursor_visible(struct udevice *dev, bool visible,
- 	uint out, val;
- 	int ret;
- 
-+	if (spl_phase() <= PHASE_SPL)
-+		return -ENOSYS;
-+
- 	if (!visible)
- 		return 0;
- 
+diff --git a/configs/qemu-x86_64_defconfig b/configs/qemu-x86_64_defconfig
+index 79cdb0bddb2..f084f8e2989 100644
+--- a/configs/qemu-x86_64_defconfig
++++ b/configs/qemu-x86_64_defconfig
+@@ -81,6 +81,7 @@ CONFIG_SPL_DM_RTC=y
+ CONFIG_SYS_NS16550_PORT_MAPPED=y
+ CONFIG_SPI=y
+ CONFIG_USB_KEYBOARD=y
++CONFIG_CONSOLE_TRUETYPE=y
+ CONFIG_FRAMEBUFFER_SET_VESA_MODE=y
+ CONFIG_FRAMEBUFFER_VESA_MODE_USER=y
+ CONFIG_FRAMEBUFFER_VESA_MODE=0x144
+diff --git a/configs/qemu-x86_defconfig b/configs/qemu-x86_defconfig
+index 9bcf06c137f..b0d397bae08 100644
+--- a/configs/qemu-x86_defconfig
++++ b/configs/qemu-x86_defconfig
+@@ -58,6 +58,7 @@ CONFIG_NVME_PCI=y
+ CONFIG_SYS_NS16550_PORT_MAPPED=y
+ CONFIG_SPI=y
+ CONFIG_USB_KEYBOARD=y
++CONFIG_CONSOLE_TRUETYPE=y
+ CONFIG_FRAMEBUFFER_SET_VESA_MODE=y
+ CONFIG_FRAMEBUFFER_VESA_MODE_USER=y
+ CONFIG_FRAMEBUFFER_VESA_MODE=0x144
 -- 
 2.34.1
 
