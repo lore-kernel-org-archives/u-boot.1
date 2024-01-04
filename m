@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 441B6C47073
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:14:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9DA3C47073
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:14:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A3F587A1A;
-	Thu,  4 Jan 2024 16:12:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B3E86879FA;
+	Thu,  4 Jan 2024 16:12:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QCBK8vKT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KkgoSyUk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA8F7879D2; Thu,  4 Jan 2024 16:12:18 +0100 (CET)
-Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
- [IPv6:2607:f8b0:4864:20::133])
+ id 20D6487996; Thu,  4 Jan 2024 16:12:21 +0100 (CET)
+Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
+ [IPv6:2607:f8b0:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DC5B879E2
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:12:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D0113879E1
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:12:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-3606aa2c7a4so979475ab.0
- for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 07:12:04 -0800 (PST)
+Received: by mail-il1-x135.google.com with SMTP id
+ e9e14a558f8ab-35fff16827fso2454195ab.0
+ for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 07:12:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704381119; x=1704985919; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1704381128; x=1704985928; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BhdroLYbcuqBNiUtfldnvUzTcstwUhxxDpTLs62CM78=;
- b=QCBK8vKTOQ0sjW5LD6e7e0Im8SnvxfTHHHkg0B479EGTayIl43OYxzCQjwGSQX/cW6
- boSTexRXR8wOJ8AJyOTlpMoENTTY0WkLOgGjGmBxguH/Nl2GFby8Vy+ZH0+b/6LPLAYQ
- j6WesFF+IKUjA3AxlUSATeT3y/ID3QClQ9iYQ=
+ bh=3EmRuX4GGUumpaDDZfaBjd5VIp1c9BDXmBE/S030AUw=;
+ b=KkgoSyUkWwj7L/OX3qgz31YsJlRXYsD4WV9N4m/zvfZsliQEPnmnlXBi8leCnhhQHR
+ 5hrOXobSZTH3OO6bgIBURG2hmmb86+FmIUvYVU2ec44httF9atrpsiyPDMVMo98bLsBP
+ 43BQio5rNHvI4Kp7oY8KXiL2faAdk5x4B+x8I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704381119; x=1704985919;
+ d=1e100.net; s=20230601; t=1704381128; x=1704985928;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BhdroLYbcuqBNiUtfldnvUzTcstwUhxxDpTLs62CM78=;
- b=TY7E1WZV0YCq7Ox88Sx6fUAAYBok0CahYHvAth7WWJIMRFRhA1y3te5kU7m5z6R5Hi
- tQms8em37xmO0HGFP8p0PIsxcWDQXH5EPvVIbwNLrjwLuSJnmaMdTU7j9iY+nkYPr+LP
- QLVzOCvzvvNxQ++w2rVq/HTE0iSHfox2a55YSH6Pn/fAQhzuMwnX8hXZ+TsOjUV+64Pt
- tdn0nSO5eZBQYrBAsSeultwt4+1IHekcqktk9rIy1CVk+xVZ+mkenhtbJfk3YJ7Fkgzm
- GFkEXV0Ich3KEUyBqYgyjCHslUkFmfnvs4VS9x1IL+4mVOl3EShL0vbFCZsJkM0q1CYR
- MA+g==
-X-Gm-Message-State: AOJu0YyJMQfL0vjw4/HXPIJvsmK5dsGfoFhuKR4JMurDkOA7m3wZYq5Q
- IWbbczDn3Krk1+8PlriWB4z49o1ndBMbOjkEvzcgfp5QAxNa
-X-Google-Smtp-Source: AGHT+IGkd0xvBZhKhR+5Zxu3VVLm/0cCaAX4cu3i0LtYEvU80suYMw9ewIvMrGiNYhoVponGP3JKWA==
-X-Received: by 2002:a05:6e02:330e:b0:35f:eb65:166 with SMTP id
- bm14-20020a056e02330e00b0035feb650166mr715851ilb.47.1704381119618; 
- Thu, 04 Jan 2024 07:11:59 -0800 (PST)
+ bh=3EmRuX4GGUumpaDDZfaBjd5VIp1c9BDXmBE/S030AUw=;
+ b=LMk1QaolUhr8c1zJfpTEux7RLgq5IMkJc/biyT+bKcT/gec3W1NlN9YJ0Mt5Z+mL6l
+ MTQACcKmQlNcPognuO6ZO2Mqa9Lq0N9Os1i1n2tSSx+KVGmOqcAlDiAk2mGhMXAHz0xQ
+ ghuO5mlg3YZ/aw38gz0z6GhEw/AIFVyZYJ5KBjIVtFitgT/iGq3f2xNK2/1dRU6XveMW
+ T0ru9t8fFoGnRYthzuLKWdgbY94oL3NlbbExXy/saE1B6JBoToYi+XgiObvFtUunoECd
+ Yy1vfimbyE5NPvMq6LaDscHAARZEJjRzQbe2etLoVVDkcooc+v5ADF+8oSmP5AFwlSmN
+ NJ5w==
+X-Gm-Message-State: AOJu0YwL+oaqcpeqpBcyDO1dgEArA9u35AP7zJYWVPWgMrNG2eEHYMyi
+ BlwAGbOPPgSFaCo9cUWQz1sJ4LNOKXrIfGQ+rCN76xHneTMg
+X-Google-Smtp-Source: AGHT+IE6MsnhC9z/0Jp2nkIPMoVgZMS0VIKKpoibvYqBarIyI0ljuFwjjWQJUeLsWKHNi3RWRSkAbg==
+X-Received: by 2002:a05:6e02:1568:b0:360:dd5:4060 with SMTP id
+ k8-20020a056e02156800b003600dd54060mr642767ilu.2.1704381128581; 
+ Thu, 04 Jan 2024 07:12:08 -0800 (PST)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- cv4-20020a056e023b8400b0035fb79100cesm9260742ilb.59.2024.01.04.07.11.59
+ cv4-20020a056e023b8400b0035fb79100cesm9260742ilb.59.2024.01.04.07.12.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jan 2024 07:11:59 -0800 (PST)
+ Thu, 04 Jan 2024 07:12:08 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Bin Meng <bmeng.cn@gmail.com>, Anatolij Gustschin <agust@denx.de>
-Subject: [PATCH v2 02/19] video: Avoid starting a new line to close to the
- bottom
-Date: Thu,  4 Jan 2024 08:11:35 -0700
-Message-Id: <20240104151152.697855-3-sjg@chromium.org>
+Subject: [PATCH v2 11/19] expo: Add forward declaration for udevice to cedit
+Date: Thu,  4 Jan 2024 08:11:44 -0700
+Message-Id: <20240104151152.697855-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240104151152.697855-1-sjg@chromium.org>
 References: <20240104151152.697855-1-sjg@chromium.org>
@@ -89,75 +88,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When starting a new text line, an assumption is made that the current
-vertical position is a multiple of the character height. When this is
-not true, characters can be written after the end of the framebuffer.
-
-This can causes crashes and strange errors from QEMU.
-
-Adjust the scrolling check when processing a newline character, to
-avoid any problems.
-
-Add some comments to make things a little clearer.
+Some files may include this header file without first including dm.h
+so add a forward declaration.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- drivers/video/vidconsole-uclass.c | 4 +++-
- include/video.h                   | 3 ++-
- include/video_console.h           | 8 ++++++++
- 3 files changed, 13 insertions(+), 2 deletions(-)
+ include/cedit.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/video/vidconsole-uclass.c b/drivers/video/vidconsole-uclass.c
-index a312a198524..a8d2199147d 100644
---- a/drivers/video/vidconsole-uclass.c
-+++ b/drivers/video/vidconsole-uclass.c
-@@ -94,7 +94,9 @@ static void vidconsole_newline(struct udevice *dev)
- 	priv->ycur += priv->y_charsize;
+diff --git a/include/cedit.h b/include/cedit.h
+index f43cafa5aa2..f9a4a6d9e8e 100644
+--- a/include/cedit.h
++++ b/include/cedit.h
+@@ -12,6 +12,7 @@
+ struct abuf;
+ struct expo;
+ struct scene;
++struct udevice;
+ struct video_priv;
  
- 	/* Check if we need to scroll the terminal */
--	if ((priv->ycur + priv->y_charsize) / priv->y_charsize > priv->rows) {
-+	if (vid_priv->rot % 2 ?
-+	    priv->ycur + priv->x_charsize > vid_priv->xsize :
-+	    priv->ycur + priv->y_charsize > vid_priv->ysize) {
- 		vidconsole_move_rows(dev, 0, rows, priv->rows - rows);
- 		for (i = 0; i < rows; i++)
- 			vidconsole_set_row(dev, priv->rows - i - 1,
-diff --git a/include/video.h b/include/video.h
-index ae9ce03f5bf..e20f1173762 100644
---- a/include/video.h
-+++ b/include/video.h
-@@ -78,7 +78,8 @@ enum video_format {
-  *
-  * @xsize:	Number of pixel columns (e.g. 1366)
-  * @ysize:	Number of pixels rows (e.g.. 768)
-- * @rot:	Display rotation (0=none, 1=90 degrees clockwise, etc.)
-+ * @rot:	Display rotation (0=none, 1=90 degrees clockwise, etc.). THis
-+ *		does not affect @xsize and @ysize
-  * @bpix:	Encoded bits per pixel (enum video_log2_bpp)
-  * @format:	Pixel format (enum video_format)
-  * @vidconsole_drv_name:	Driver to use for the text console, NULL to
-diff --git a/include/video_console.h b/include/video_console.h
-index bde67fa9a5a..ecbf183b3d0 100644
---- a/include/video_console.h
-+++ b/include/video_console.h
-@@ -27,6 +27,14 @@ enum {
-  * Drivers must set up @rows, @cols, @x_charsize, @y_charsize in their probe()
-  * method. Drivers may set up @xstart_frac if desired.
-  *
-+ * Note that these values relate to the rotated console, so that an 80x25
-+ * console which is rotated 90 degrees will have rows=80 and cols=25
-+ *
-+ * The xcur_frac and ycur values refer to the unrotated coordinates, that is
-+ * xcur_frac always advances with each character, even if its limit might be
-+ * vid_priv->ysize instead of vid_priv->xsize if the console is rotated 90 or
-+ * 270 degrees.
-+ *
-  * @sdev:		stdio device, acting as an output sink
-  * @xcur_frac:		Current X position, in fractional units (VID_TO_POS(x))
-  * @ycur:		Current Y position in pixels (0=top)
+ enum {
 -- 
 2.34.1
 
