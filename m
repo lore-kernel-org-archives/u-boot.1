@@ -4,74 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0DE1C47073
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:13:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 307C4C47073
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:13:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFEF8879C8;
-	Thu,  4 Jan 2024 16:11:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F2F08879C0;
+	Thu,  4 Jan 2024 16:12:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eKSfzlkf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZZw3pA7C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2874879A5; Thu,  4 Jan 2024 16:11:09 +0100 (CET)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id AC197879DF; Thu,  4 Jan 2024 16:12:16 +0100 (CET)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB6DD8798F
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:10:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D6987879CE
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:12:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-7b7f6caf047so23220539f.3
- for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 07:10:53 -0800 (PST)
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-35fa08df8afso1961475ab.3
+ for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 07:12:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704381051; x=1704985851; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FuMMyoINzgyasVsmgJvWqqRoYWhwNtTQTkUs2Hh1jgE=;
- b=eKSfzlkf/0aKgTSxu+iwNdXyOlZ4KonxOXEjtTfXiI5IwgvA4Jsi1OpF6mGQVHTBbi
- DNykbRViMgBa5AnHCiKVIsDGJSrRS6633vRodeJQhWuj4RjZeNwed3z1Lubjr7co+ibg
- NEq9brlzaVBdDybXuaCQHyFFQxUuIm+/Is6x0=
+ d=chromium.org; s=google; t=1704381117; x=1704985917; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=e7OFYXUoGsSQawoF7E2nOCOmo1YQUGe0e+G7xI/qfDM=;
+ b=ZZw3pA7CvnRZ5asuJo1biKa0gLm9YikCORHhMxPUaCJxO7+81PSUj8V1JHeahM4HYq
+ icZqVvSd2kZd8TSzVMBx2GWzje0Yoa8uTOWDGPqeJ9lIZZYksFe5gOs+6IVyguZ2/B7M
+ PZufMABJ0ZfzlCFg+frUW1wf9MmjPdz7MJRI0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704381051; x=1704985851;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FuMMyoINzgyasVsmgJvWqqRoYWhwNtTQTkUs2Hh1jgE=;
- b=qvn2Bt3AHUdz0OOpNqsVTYtgukxjnq5ZLrZD3q1WayMxbhqKhw8Mm2Nz9jQ+4NVo96
- kcqgMum18iYYLCJ4wpLwTJhTk0TcZKX6ccK5MWHWWft8RTr4PySs+LvCUQaW99HwdMFR
- aMxREVjgrjKPR4Lm6oC/VPmU0vcscDzQ8//GZ5Xj5qXVMuK0vfldnJ/UxTdE8MwTvl34
- CWKzGbyk4HZCP0re6kwt4kmKQFVEVXaan0fNuNrenYJMb1oRMxPtsKhQEeo05CYiwdxZ
- tsnJRfOqVuNzsgwpV5iXFHTUNH4wx6r/K0WYxqWRoXWA0jyOPKV+aMgw70FHnVSnvDVa
- nleg==
-X-Gm-Message-State: AOJu0YwhgWUh4HuEw4QvxyM2toWSQ+VhmnamxAdhriuGsKwg4+Qz3ekb
- 7bu4bAYebt/qAs8t126wtDZdG/Bi1SP1N0SICJUR7STjTAdW
-X-Google-Smtp-Source: AGHT+IFo2r70CszJhQXRkbPSgMxKTc6yfWpbIsalJibBOmJUapJ4euuS1cQY3ScUfCnrwiJ92gtaWQ==
-X-Received: by 2002:a5d:8704:0:b0:7ba:9c04:2e03 with SMTP id
- u4-20020a5d8704000000b007ba9c042e03mr739674iom.27.1704381051365; 
- Thu, 04 Jan 2024 07:10:51 -0800 (PST)
+ d=1e100.net; s=20230601; t=1704381117; x=1704985917;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=e7OFYXUoGsSQawoF7E2nOCOmo1YQUGe0e+G7xI/qfDM=;
+ b=tYvtCSoxTkyUa/5y/193iFHKqfYxl2YLmhLpv8jbJYDDdRbdTvDPcdOqCyu1eeL+CP
+ CCKDBgAtJ2la8G98JfJ3U+tftS8KcKWZ/KV3Mc4mqRjNnZwPTZ+xMVLS5RoMr+GxGA3A
+ dUMF88MzwanFVoiQz/dDgIkw3gbD/ySEf7eGfOPoY1fL1AlW1xwXl5Y5phfcmKFQypQs
+ DcxaF9VVXDbPEvjJc2FsUy5sTNNYkWoXmYWXx8f25DYI38DbA0Cx7DRDB5JGMeadXWsE
+ neFZ6bpTxS3fqJi3u6IfRheFPtxoH0DN1Zi7CZKVc18iu//t3oeWcxWNkQOpszeBl09p
+ inog==
+X-Gm-Message-State: AOJu0Yzq+bLPqsywtf/QcSMiDdExId7Ms/nnmppuDxaKGrnsaMLrPePu
+ WNXOU/mrhpQoxYNT222j9ieVV8mA0hnVy07UX/Ck6RTDpJDr
+X-Google-Smtp-Source: AGHT+IHlqtYzn2h0Ptb9n5gFj+BG0ZoW6Ehfnnkkw23ZLr7Yo8nMOubbmzsdJ932QrIrbL0a1B/dng==
+X-Received: by 2002:a05:6e02:741:b0:35f:c98f:b191 with SMTP id
+ x1-20020a056e02074100b0035fc98fb191mr906476ils.42.1704381117238; 
+ Thu, 04 Jan 2024 07:11:57 -0800 (PST)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- z14-20020a02938e000000b0046d710cef38sm4937310jah.159.2024.01.04.07.10.50
+ cv4-20020a056e023b8400b0035fb79100cesm9260742ilb.59.2024.01.04.07.11.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jan 2024 07:10:51 -0800 (PST)
+ Thu, 04 Jan 2024 07:11:57 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>, qemu-devel@nongnu.org
-Subject: [PATCH v6 6/7] x86: qemu: Expand ROM size
-Date: Thu,  4 Jan 2024 08:10:41 -0700
-Message-Id: <20240104151042.695717-6-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Anatolij Gustschin <agust@denx.de>
+Subject: [PATCH v2 00/19] x86: expo: Add support for editing coreboot CMOS RAM
+ settings
+Date: Thu,  4 Jan 2024 08:11:33 -0700
+Message-Id: <20240104151152.697855-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240104151042.695717-1-sjg@chromium.org>
-References: <20240104151042.695717-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -90,54 +86,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Expand the ROM for x86_64 to 2MB to make space for the font, as it is
-already on the edge.
+U-Boot provides support for editing settings with an 'expo', as well as
+reading and writing settings to CMOS RAM.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+This series integrates expo functionality with coreboot, using the
+sysinfo table to get a list of settings, creating an expo with them and
+allowing them to be edited.
 
-(no changes since v1)
+A new CI test provides coverage for some coreboot-related commands. For
+this to work, a number of minor tweaks are made to existing tests, so
+that they pass on coreboot (x86) or at least are skipped when they
+cannot pass. Likely most of these fixes will apply to other boards too.
 
- board/emulation/qemu-x86/Kconfig | 3 ++-
- configs/qemu-x86_64_defconfig    | 4 ++--
- 2 files changed, 4 insertions(+), 3 deletions(-)
+It includes several other fixes and improvements:
+- new -m flag for 'bootflow scan' so it can display a menu automatically
+- Fix for video-scrolling crash with Truetype
+- menu items can now have individual integer values
+- menu items are lined up according to the width of all menu labels
 
-diff --git a/board/emulation/qemu-x86/Kconfig b/board/emulation/qemu-x86/Kconfig
-index 01dc1d497ae..34d665a3e4c 100644
---- a/board/emulation/qemu-x86/Kconfig
-+++ b/board/emulation/qemu-x86/Kconfig
-@@ -21,7 +21,8 @@ config BOARD_SPECIFIC_OPTIONS # dummy
- 	select X86_RESET_VECTOR
- 	select QEMU
- 	select QFW_PIO if CMD_QFW
--	select BOARD_ROMSIZE_KB_1024
-+	select BOARD_ROMSIZE_KB_1024 if TARGET_QEMU_X86
-+	select BOARD_ROMSIZE_KB_2048 if TARGET_QEMU_X86_64
- 	imply VIRTIO_PCI
- 	imply VIRTIO_NET
- 	imply VIRTIO_BLK
-diff --git a/configs/qemu-x86_64_defconfig b/configs/qemu-x86_64_defconfig
-index 8b4c5aff7f6..79cdb0bddb2 100644
---- a/configs/qemu-x86_64_defconfig
-+++ b/configs/qemu-x86_64_defconfig
-@@ -6,7 +6,7 @@ CONFIG_ENV_SIZE=0x40000
- CONFIG_MAX_CPUS=2
- CONFIG_SPL_DM_SPI=y
- CONFIG_DEFAULT_DEVICE_TREE="qemu-x86_i440fx"
--CONFIG_SPL_TEXT_BASE=0xfffd8000
-+CONFIG_SPL_TEXT_BASE=0xfffd4000
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000
- CONFIG_DEBUG_UART_BASE=0x3f8
- CONFIG_DEBUG_UART_CLOCK=1843200
-@@ -17,7 +17,7 @@ CONFIG_DEBUG_UART=y
- CONFIG_SMP=y
- CONFIG_GENERATE_PIRQ_TABLE=y
- CONFIG_GENERATE_MP_TABLE=y
--CONFIG_X86_OFFSET_U_BOOT=0xfff00000
-+CONFIG_X86_OFFSET_U_BOOT=0xffe00000
- CONFIG_SYS_MONITOR_BASE=0x01110000
- CONFIG_FIT=y
- CONFIG_SPL_LOAD_FIT=y
+Changes in v2:
+- Avoid using common.h
+- Avoid using common.h
+- Rebase to -next
+
+Simon Glass (19):
+  video: Add a dark-grey console colour
+  video: Avoid starting a new line to close to the bottom
+  expo: Place menu items to the right of all labels
+  expo: Set the initial next_id to 1
+  expo: Use standard numbering for save and discard
+  expo: Allow menu items to have values
+  expo: Add a little more cedit CMOS logging
+  expo: Support menu-item values in cedit
+  expo: Drop unneceesary calls to expo_str()
+  expo: Drop scene_title_set()
+  expo: Add forward declaration for udevice to cedit
+  x86: coreboot: Enable unit tests
+  x86: CI: Update coreboot
+  x86: coreboot: Add a test for cbsysinfo command
+  x86: coreboot: Show the option table
+  x86: coreboot: Enable support for the configuration editor
+  x86: coreboot: Add a command to check and update CMOS RAM
+  x86: coreboot: Allow building an expo for editing CMOS config
+  x86: Enable RTC command by default
+
+ .azure-pipelines.yml              |   2 +-
+ .gitlab-ci.yml                    |   2 +-
+ arch/sandbox/dts/cedit.dtsi       |   3 +
+ arch/x86/dts/coreboot.dts         |   7 +
+ boot/Makefile                     |   4 +
+ boot/cedit.c                      | 191 +++++++++++++++--------
+ boot/expo.c                       |   3 +
+ boot/expo_build.c                 |  36 ++---
+ boot/expo_build_cb.c              | 245 ++++++++++++++++++++++++++++++
+ boot/scene.c                      |  61 ++++++--
+ boot/scene_internal.h             |  30 +++-
+ boot/scene_menu.c                 |  26 +++-
+ boot/scene_textline.c             |   3 +-
+ cmd/Kconfig                       |  12 ++
+ cmd/cedit.c                       |  28 ++++
+ cmd/x86/Makefile                  |   1 +
+ cmd/x86/cbcmos.c                  | 139 +++++++++++++++++
+ cmd/x86/cbsysinfo.c               |  73 ++++++++-
+ configs/coreboot64_defconfig      |   2 +
+ configs/coreboot_defconfig        |   6 +
+ doc/board/coreboot/coreboot.rst   |   6 +
+ doc/develop/cedit.rst             |   9 +-
+ doc/develop/expo.rst              |  26 +++-
+ doc/usage/cmd/cbcmos.rst          |  45 ++++++
+ doc/usage/cmd/cbsysinfo.rst       |  99 ++++++++++++
+ doc/usage/cmd/cedit.rst           |  91 ++++++++++-
+ doc/usage/index.rst               |   1 +
+ drivers/video/vidconsole-uclass.c |   4 +-
+ drivers/video/video-uclass.c      |   3 +
+ include/cedit.h                   |   2 +
+ include/expo.h                    |  51 +++++--
+ include/test/cedit-test.h         |  30 ++--
+ include/video.h                   |   4 +-
+ include/video_console.h           |   8 +
+ test/boot/cedit.c                 |  22 ++-
+ test/boot/expo.c                  |  26 +++-
+ test/boot/files/expo_ids.h        |   3 +-
+ test/boot/files/expo_layout.dts   |   5 +-
+ test/cmd/Makefile                 |   1 +
+ test/cmd/coreboot.c               | 119 +++++++++++++++
+ tools/expo.py                     |  33 +++-
+ 41 files changed, 1309 insertions(+), 153 deletions(-)
+ create mode 100644 boot/expo_build_cb.c
+ create mode 100644 cmd/x86/cbcmos.c
+ create mode 100644 doc/usage/cmd/cbcmos.rst
+ create mode 100644 test/cmd/coreboot.c
+
 -- 
 2.34.1
 
