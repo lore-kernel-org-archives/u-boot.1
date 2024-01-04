@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92270C47073
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:10:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EED3C47073
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:11:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 532C8879AC;
-	Thu,  4 Jan 2024 16:10:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7E6AF8799D;
+	Thu,  4 Jan 2024 16:10:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QSyNswsA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DndJZP/B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A3A4879AC; Thu,  4 Jan 2024 16:10:51 +0100 (CET)
-Received: from mail-il1-x144.google.com (mail-il1-x144.google.com
- [IPv6:2607:f8b0:4864:20::144])
+ id A9EE78798C; Thu,  4 Jan 2024 16:10:51 +0100 (CET)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C69E48798B
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:10:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C2B18798D
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:10:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x144.google.com with SMTP id
- e9e14a558f8ab-35fc1a1b52bso2164375ab.2
- for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 07:10:47 -0800 (PST)
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-35fd5a13285so1685625ab.3
+ for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 07:10:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704381046; x=1704985846; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Xk4V+RgnmIvm4289rEIMHbfKRp6GgKqVfQM6XVzmUSk=;
- b=QSyNswsAK/wvG7QU38Q3itQHjDMpJgAz05bWz3VmT1ysZfq509QHyhOESJSvD2C6tp
- w7/jOm6GjESs04TsdMVk78XOhJU9q2bgJ+xqm/Wb5ckCCfDdOgLkSMv/MmnzEvsxdUM6
- rWQ47CbZn4k6IvVIRWkNZJI2ehvjYa/UZCX+I=
+ d=chromium.org; s=google; t=1704381047; x=1704985847; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8IaGA6AvloKPwvMT5+83EeXKKUMvAVdPHvlUKKiFDok=;
+ b=DndJZP/ByJyd80FoV7mhqB0ECcvlVCx+UnN1EUuiEHd8K7OWPBcvFdlZ/iqL/3HOqr
+ Bgc7lB26GJ87uJAKE9/LmMre1P3+/KkB5AjdJ9McK4tc61bB74lkiHvfXRBx1Ut1PToo
+ bVEYsrqFO4GBWBHum9yDpxj4v0jgup7p8qhzc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704381046; x=1704985846;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Xk4V+RgnmIvm4289rEIMHbfKRp6GgKqVfQM6XVzmUSk=;
- b=UWy6t7Z1bZl2aRjh0r0qRg3+YC4q77NyZJeXVivYZSFWVGzJC8NStu01o91sKqBNhw
- cy8wyYjA1lWHgroqCZp2l26HpKQSdVMcSr8FfG/Upfa0TdQ2qxJ1ci9E6upL1xANMkNB
- IS2IdlX+1Y1YT8yfuMJinOVgrU3VS7nnpnsOCdiUbjwyX9JFc524MEv0aLGNkLM434FP
- BqJhZ45H47NA0uIJ9Ysk/cwQPgP+smkQfAk86SGqRJU2tq3ZOS3YjRGmC68UAnpXWXSM
- /nWvo4rTxynrWddPe2mFB7ARPF/MaqaJtav0ViKXP+AdTj+PGe7k/MNAACQ/e20928H+
- OXUA==
-X-Gm-Message-State: AOJu0YwkoyZCPglc0xF61VqrPCJ4c5GZQqVsJZkZqjrH4rLrDrIz/s4h
- 2pFbOHCaDLDsDxTQxEgDV7F4dt86k4TTiwm6byy/ImY80UdxAAU=
-X-Google-Smtp-Source: AGHT+IEqMsL1f4qAlYMsnUqwgziAjnjUGbryPAN30yCZV7UZoKgOtCzNywsHZ9CWzrAfqLqA7iEjBg==
-X-Received: by 2002:a5e:de0a:0:b0:7b7:fe53:ebdb with SMTP id
- e10-20020a5ede0a000000b007b7fe53ebdbmr749099iok.32.1704381046142; 
+ d=1e100.net; s=20230601; t=1704381047; x=1704985847;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8IaGA6AvloKPwvMT5+83EeXKKUMvAVdPHvlUKKiFDok=;
+ b=F/W79+1//s2GOQCpCHmOWygEGHaVAIpN/aUhfnuJG8L4HpbgO4sqkoLJadSMQApMVK
+ Y2GGjSmBaAnDhnt0vjXjS2ZnrScmlkoJWcZUpIbrL6q935szPeOYVm42Y0Usv+cMV95D
+ /6Xjfrwp9EouNrc81maWFkjWlOD41939qS+wJDKm0xze00+IR8k3RSlO/ztApO4jtLvZ
+ ERa99H7+8mTyhfQvKpZEzvOatP5pUK48JVx8fC0c42M1bi+MQ+sn5qFI3yypJAMaUou7
+ zstKGsNijme6qbdeIe8kZjpgTByOOuzJqO5fhLzLnkGfTTnULEn/h/IvfbGRXcj9OkMN
+ IFOg==
+X-Gm-Message-State: AOJu0Yzy6CEAIoViOiLwQav+HhaeisYaji/4KF637fvSFJNZ8PEdMHO8
+ wQ55kluw3o18eaYdvVrYZQgbOkVUuXEPYFJA7kYUMkAWq52H
+X-Google-Smtp-Source: AGHT+IFHEC3ZisonGCdCGLWuOva4lLwp14H4WygUpWh06ZO300oz5jpHbeM5sC7xyn1LzQoejakIpA==
+X-Received: by 2002:a05:6e02:1a45:b0:35f:eb9f:cf93 with SMTP id
+ u5-20020a056e021a4500b0035feb9fcf93mr640752ilv.22.1704381046903; 
  Thu, 04 Jan 2024 07:10:46 -0800 (PST)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- z14-20020a02938e000000b0046d710cef38sm4937310jah.159.2024.01.04.07.10.45
+ z14-20020a02938e000000b0046d710cef38sm4937310jah.159.2024.01.04.07.10.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jan 2024 07:10:45 -0800 (PST)
+ Thu, 04 Jan 2024 07:10:46 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Anatolij Gustschin <agust@denx.de>,
- Bin Meng <bmeng.cn@gmail.com>, Bin Meng <bmeng@tinylab.org>,
- Devarsh Thakkar <devarsht@ti.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>, Fabio Estevam <festevam@denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Nikhil M Jain <n-jain1@ti.com>, Peter Robinson <pbrobinson@gmail.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- qemu-devel@nongnu.org
-Subject: [PATCH v6 0/7] Resolve issues with booting distros on x86
-Date: Thu,  4 Jan 2024 08:10:35 -0700
-Message-Id: <20240104151042.695717-1-sjg@chromium.org>
+ Peter Robinson <pbrobinson@gmail.com>
+Subject: [PATCH v6 1/7] x86: coreboot: Add a boot script
+Date: Thu,  4 Jan 2024 08:10:36 -0700
+Message-Id: <20240104081037.v6.1.I134d949e881ebcd532e927119703b28747fe4c53@changeid>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240104151042.695717-1-sjg@chromium.org>
+References: <20240104151042.695717-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -93,55 +89,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This little series reprises the EFI-video fix, fixes a USB problem and
-enables a boot script for coreboot.
+Provide the user with a list of available boot options. Selecting one
+causes it to be booted. Pressing <ESC> causes U-Boot to return to the
+command-line prompt.
 
-It also moves to truetype fonts for coreboot and qemu-x86, since the
-menus look much better and there are no strong size constraints.
-
-With these changes it is possible to boot a Linux distro automatically
-with U-Boot on x86, including when U-Boot is the second-stage
-bootloader.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+---
 
 Changes in v6:
 - Rebase to -next
-- Move 'Avoid unbinding devices in use by bootflows' to another series
-
-Changes in v4:
-- Use a Kconfig option
 
 Changes in v3:
 - Clear the screen before booting
-- Add new patch to drop unnecessary truetype operations from SPL
-- Add new patch to enable truetype fonts in coreboot
-- Add new patch to enable truetype fonts in qemu-x86 and qemu-x86_64
 
 Changes in v2:
 - Add new patch to add a coreboot boot script
 
-Simon Glass (7):
-  x86: coreboot: Add a boot script
-  video: Correct setting of cursor position
-  video: Drop unnecessary truetype operations from SPL
-  x86: Enable SSE in 64-bit mode
-  x86: coreboot: Enable truetype fonts
-  x86: qemu: Expand ROM size
-  x86: qemu: Enable truetype fonts
+ configs/coreboot64_defconfig | 1 +
+ configs/coreboot_defconfig   | 1 +
+ 2 files changed, 2 insertions(+)
 
- arch/x86/Kconfig                  |  8 ++++++++
- arch/x86/config.mk                |  4 ++++
- arch/x86/cpu/x86_64/cpu.c         | 12 ++++++++++++
- arch/x86/dts/coreboot.dts         | 10 ++++++++++
- board/emulation/qemu-x86/Kconfig  |  3 ++-
- configs/coreboot64_defconfig      |  2 ++
- configs/coreboot_defconfig        |  2 ++
- configs/qemu-x86_64_defconfig     |  5 +++--
- configs/qemu-x86_defconfig        |  1 +
- drivers/video/Kconfig             |  1 +
- drivers/video/console_truetype.c  | 10 ++++++++++
- drivers/video/vidconsole-uclass.c | 15 ++++++++-------
- 12 files changed, 63 insertions(+), 10 deletions(-)
-
+diff --git a/configs/coreboot64_defconfig b/configs/coreboot64_defconfig
+index dec9b40a2b3..ace3b63dfd4 100644
+--- a/configs/coreboot64_defconfig
++++ b/configs/coreboot64_defconfig
+@@ -17,6 +17,7 @@ CONFIG_BOOTSTD_DEFAULTS=y
+ CONFIG_SHOW_BOOT_PROGRESS=y
+ CONFIG_USE_BOOTARGS=y
+ CONFIG_BOOTARGS="root=/dev/sdb3 init=/sbin/init rootwait ro"
++CONFIG_BOOTCOMMAND="bootflow scan -l; if bootflow menu; then cls; bootflow boot; fi"
+ CONFIG_SYS_PBSIZE=532
+ CONFIG_PRE_CONSOLE_BUFFER=y
+ CONFIG_SYS_CONSOLE_INFO_QUIET=y
+diff --git a/configs/coreboot_defconfig b/configs/coreboot_defconfig
+index 8356bc12659..3762cde6f3a 100644
+--- a/configs/coreboot_defconfig
++++ b/configs/coreboot_defconfig
+@@ -15,6 +15,7 @@ CONFIG_BOOTSTD_DEFAULTS=y
+ CONFIG_SHOW_BOOT_PROGRESS=y
+ CONFIG_USE_BOOTARGS=y
+ CONFIG_BOOTARGS="root=/dev/sdb3 init=/sbin/init rootwait ro"
++CONFIG_BOOTCOMMAND="bootflow scan -l; if bootflow menu; then cls; bootflow boot; fi"
+ CONFIG_PRE_CONSOLE_BUFFER=y
+ CONFIG_SYS_CONSOLE_INFO_QUIET=y
+ CONFIG_LOG=y
 -- 
 2.34.1
 
