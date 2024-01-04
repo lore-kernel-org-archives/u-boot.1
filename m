@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C1CCC47074
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:11:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A31BC47255
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:11:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 949388799E;
-	Thu,  4 Jan 2024 16:11:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 717D48798C;
+	Thu,  4 Jan 2024 16:11:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aRaRZK9n";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H75rPUk3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C87EA879B0; Thu,  4 Jan 2024 16:10:51 +0100 (CET)
-Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
- [IPv6:2607:f8b0:4864:20::12c])
+ id AEB1B8796B; Thu,  4 Jan 2024 16:11:05 +0100 (CET)
+Received: from mail-io1-xd42.google.com (mail-io1-xd42.google.com
+ [IPv6:2607:f8b0:4864:20::d42])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32C6F87994
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:10:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 56A5A879A5
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:10:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-3606ad581a5so918285ab.1
- for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 07:10:49 -0800 (PST)
+Received: by mail-io1-xd42.google.com with SMTP id
+ ca18e2360f4ac-7b7fdde8b98so22679239f.1
+ for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 07:10:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704381047; x=1704985847; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1704381050; x=1704985850; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=adceXGFHmnmuz954gBoxGe3m1Jb9++mO62kVOT4lwho=;
- b=aRaRZK9n+VTES6JbIZrtLy4/+Kjg5ErqlNagTV4adEy4fM+Hcg7LyHYKFSsT3n7Uqx
- xW+j1ePxxa2lDGP2Jdr9IdLkDLp+wNBbUNtc9nB8SSjy8qQsjYMkcuhUApclVYZju/RF
- ksp/7r8xV1CirhZCBsSctMVW4zCQSDP6dXGh4=
+ bh=37EbUCUpA2uiD8JW7BW15+qfeqzZ+3vxmFHC7zbTRMY=;
+ b=H75rPUk3zGFQMXlVSwZfWlRl4+3y9uvw0z0+V6V2CcjFpEf1mm8TPiwHiMEhDpZGYA
+ HHSv+A7OpGMcqUUzYC+Q7C3ylmHDCOOU2CGeRIR+eZSRwlNbVtd78uCO3aexRJbaSm0f
+ CLl6iti6PSSg7RL5GQS38lNvr6aVk2+uq0CZM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704381047; x=1704985847;
+ d=1e100.net; s=20230601; t=1704381050; x=1704985850;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=adceXGFHmnmuz954gBoxGe3m1Jb9++mO62kVOT4lwho=;
- b=BRCA6pDAkkuTbb9O+JrfF+fxghstzJQpr+OhDjM/ItZIdwknCZNptwlqSp4nfrA65C
- vEqOFk+SZSstsXbaucDm6wEjCOeZMC88B6twi3j5wsynTlVnhkDF7ErR0TvteB1JdrDe
- YkUcDbOB1c6w4hkuZj1QsMh+hg9hMmSHc+ZB7jG7sWw2Uc5Vfr6nrAoISm/zTynaPmBO
- WvYSXImFWRGnKxOKijREuIDYlD5HWRz//nW4pzXW09iaPYZ9LfpyiF9/ByJ+dqQeoqXg
- 1KYUvfiEfwc0JnENky1nMDhmqzmCb5UOgWwVu/KxiIVF+tDMp3LKrZ9Ncl0sq+99oTAN
- 96SQ==
-X-Gm-Message-State: AOJu0YxoBNfoIWfDDOUa8m55BMHb4qvWh7ylCc7xEJXHa16PmHg3rcJ/
- nXGRNurlSHeLfbIdsrB3v9yRJlLW5A7a95WyEkG2hr5NV+90
-X-Google-Smtp-Source: AGHT+IE9K0/t82z0Gcmtqq9wcuoJYRpbjmv9hvdt+ugqSs9ThWRs7a/Ddx7Ql9m0Sbuxt03eJrtwdw==
-X-Received: by 2002:a5e:de0a:0:b0:7b7:fe53:ebdb with SMTP id
- e10-20020a5ede0a000000b007b7fe53ebdbmr749145iok.32.1704381047738; 
- Thu, 04 Jan 2024 07:10:47 -0800 (PST)
+ bh=37EbUCUpA2uiD8JW7BW15+qfeqzZ+3vxmFHC7zbTRMY=;
+ b=R83YWncmnZ35vMR4hXDqSCHKjFrH7CJ4Tz/ANFSjp1OpnIBN+g22AuDbq9OlhcOfsR
+ FO8KR5KFEwXh3J5rBNTBOGh9Q7iPkY5mIsRzRuoNiOM8R0CwPygN5KFt/ykGvXq/hoAe
+ CBZP/2H37m0lYf29Tn0XbVeJ3XBmeowyqsK+Tf47ysO8KXRzCUZjdGbyY6RZJtye+Rhj
+ dnY+wJrPWHDJnzCI6e4Bwzubf95QiZviFz8aTzwEskXFdRSnom/o2OEIMaoEMrzt1o2H
+ jV3BgY8JOgzX2Sq0J37/gkDN7e+nW92NJZpJRcJ7KT/420AaiugCpvjsVZziUgFBD/Tb
+ eMmg==
+X-Gm-Message-State: AOJu0Yx7jil0BDgdWSmG995XXLWQLYaf0rMh5ueh6ByP7oAMtAJeE1wH
+ BrGGmEJT6TUlEu35jluDwkdYykTo4adwMFwOr+ElFiZC7R3wf/g=
+X-Google-Smtp-Source: AGHT+IGSRVv8p/jBi+L6hDp0HhLIiBefap28dOqYuMi+6JWHWq/4ETaAQaR/Mu3sDheQiKJ6Ppk8sQ==
+X-Received: by 2002:a6b:912:0:b0:7b7:fb2a:aa29 with SMTP id
+ t18-20020a6b0912000000b007b7fb2aaa29mr789152ioi.25.1704381049836; 
+ Thu, 04 Jan 2024 07:10:49 -0800 (PST)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- z14-20020a02938e000000b0046d710cef38sm4937310jah.159.2024.01.04.07.10.47
+ z14-20020a02938e000000b0046d710cef38sm4937310jah.159.2024.01.04.07.10.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jan 2024 07:10:47 -0800 (PST)
+ Thu, 04 Jan 2024 07:10:49 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Anatolij Gustschin <agust@denx.de>,
- Bin Meng <bmeng@tinylab.org>, Devarsh Thakkar <devarsht@ti.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>, Nikhil M Jain <n-jain1@ti.com>
-Subject: [PATCH v6 2/7] video: Correct setting of cursor position
-Date: Thu,  4 Jan 2024 08:10:37 -0700
-Message-Id: <20240104151042.695717-2-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Anatolij Gustschin <agust@denx.de>,
+ Dzmitry Sankouski <dsankouski@gmail.com>, Fabio Estevam <festevam@denx.de>,
+ Nikhil M Jain <n-jain1@ti.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: [PATCH v6 4/7] x86: Enable SSE in 64-bit mode
+Date: Thu,  4 Jan 2024 08:10:39 -0700
+Message-Id: <20240104151042.695717-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240104151042.695717-1-sjg@chromium.org>
 References: <20240104151042.695717-1-sjg@chromium.org>
@@ -89,83 +91,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The ANSI codes are not correctly handled at present, in that the
-requested X position is added to the current one.
-
-Correct this and also call vidconsole_entry_start() to start a new text
-line.
+This is needed to support Truetype fonts. In any case, the compiler
+expects SSE to be available in 64-bit mode. Provide an option to enable
+SSE so that hardware floating-point arithmetic works.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Anatolij Gustschin <agust@denx.de>
+Reviewed-by: Tom Rini <trini@konsulko.com>
+Suggested-by: Bin Meng <bmeng.cn@gmail.com>
 ---
 
-(no changes since v1)
+(no changes since v4)
 
- drivers/video/vidconsole-uclass.c | 15 ++++++++-------
- 1 file changed, 8 insertions(+), 7 deletions(-)
+Changes in v4:
+- Use a Kconfig option
 
-diff --git a/drivers/video/vidconsole-uclass.c b/drivers/video/vidconsole-uclass.c
-index 22d55df71f6..a312a198524 100644
---- a/drivers/video/vidconsole-uclass.c
-+++ b/drivers/video/vidconsole-uclass.c
-@@ -125,6 +125,7 @@ void vidconsole_set_cursor_pos(struct udevice *dev, int x, int y)
- 	priv->xcur_frac = VID_TO_POS(x);
- 	priv->xstart_frac = priv->xcur_frac;
- 	priv->ycur = y;
-+	vidconsole_entry_start(dev);
- }
+ arch/x86/Kconfig          |  8 ++++++++
+ arch/x86/config.mk        |  4 ++++
+ arch/x86/cpu/x86_64/cpu.c | 12 ++++++++++++
+ drivers/video/Kconfig     |  1 +
+ 4 files changed, 25 insertions(+)
+
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index 99e59d94c60..6b532d712ee 100644
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -723,6 +723,14 @@ config ROM_TABLE_SIZE
+ 	hex
+ 	default 0x10000
  
- /**
-@@ -134,8 +135,10 @@ void vidconsole_set_cursor_pos(struct udevice *dev, int x, int y)
-  * @row:	new row
-  * @col:	new column
-  */
--static void set_cursor_position(struct vidconsole_priv *priv, int row, int col)
-+static void set_cursor_position(struct udevice *dev, int row, int col)
- {
-+	struct vidconsole_priv *priv = dev_get_uclass_priv(dev);
++config X86_HARDFP
++	bool "Support hardware floating point"
++	help
++	  U-Boot generally does not make use of floating point. Where this is
++	  needed, it can be enabled using this option. This adjusts the
++	  start-up code for 64-bit mode and changes the compiler options for
++	  64-bit to enable SSE.
 +
- 	/*
- 	 * Ensure we stay in the bounds of the screen.
- 	 */
-@@ -144,9 +147,7 @@ static void set_cursor_position(struct vidconsole_priv *priv, int row, int col)
- 	if (col >= priv->cols)
- 		col = priv->cols - 1;
+ config HAVE_ITSS
+ 	bool "Enable ITSS"
+ 	help
+diff --git a/arch/x86/config.mk b/arch/x86/config.mk
+index 26ec1af2f0b..2e3a7119e79 100644
+--- a/arch/x86/config.mk
++++ b/arch/x86/config.mk
+@@ -27,9 +27,13 @@ ifeq ($(IS_32BIT),y)
+ PLATFORM_CPPFLAGS += -march=i386 -m32
+ else
+ PLATFORM_CPPFLAGS += $(if $(CONFIG_SPL_BUILD),,-fpic) -fno-common -march=core2 -m64
++
++ifndef CONFIG_X86_HARDFP
+ PLATFORM_CPPFLAGS += -mno-mmx -mno-sse
+ endif
  
--	priv->ycur = row * priv->y_charsize;
--	priv->xcur_frac = priv->xstart_frac +
--			  VID_TO_POS(col * priv->x_charsize);
-+	vidconsole_position_cursor(dev, col, row);
++endif # IS_32BIT
++
+ PLATFORM_RELFLAGS += -fdata-sections -ffunction-sections -fvisibility=hidden
+ 
+ KBUILD_LDFLAGS += -Bsymbolic -Bsymbolic-functions
+diff --git a/arch/x86/cpu/x86_64/cpu.c b/arch/x86/cpu/x86_64/cpu.c
+index 2647bff891f..5ea746ecce4 100644
+--- a/arch/x86/cpu/x86_64/cpu.c
++++ b/arch/x86/cpu/x86_64/cpu.c
+@@ -10,6 +10,7 @@
+ #include <init.h>
+ #include <asm/cpu.h>
+ #include <asm/global_data.h>
++#include <asm/processor-flags.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -39,11 +40,22 @@ int x86_mp_init(void)
+ 	return 0;
  }
  
- /**
-@@ -193,7 +194,7 @@ static void vidconsole_escape_char(struct udevice *dev, char ch)
- 			int row = priv->row_saved;
- 			int col = priv->col_saved;
++/* enable SSE features for hardware floating point */
++static void setup_sse_features(void)
++{
++	asm ("mov %%cr4, %%rax\n" \
++	"or  %0, %%rax\n" \
++	"mov %%rax, %%cr4\n" \
++	: : "i" (X86_CR4_OSFXSR | X86_CR4_OSXMMEXCPT) : "eax");
++}
++
+ int x86_cpu_reinit_f(void)
+ {
+ 	/* set the vendor to Intel so that native_calibrate_tsc() works */
+ 	gd->arch.x86_vendor = X86_VENDOR_INTEL;
+ 	gd->arch.has_mtrr = true;
++	if (IS_ENABLED(CONFIG_X86_HARDFP))
++		setup_sse_features();
  
--			set_cursor_position(priv, row, col);
-+			set_cursor_position(dev, row, col);
- 			priv->escape = 0;
- 			return;
- 		}
-@@ -255,7 +256,7 @@ static void vidconsole_escape_char(struct udevice *dev, char ch)
- 		if (row < 0)
- 			row = 0;
- 		/* Right and bottom overflows are handled in the callee. */
--		set_cursor_position(priv, row, col);
-+		set_cursor_position(dev, row, col);
- 		break;
- 	}
- 	case 'H':
-@@ -279,7 +280,7 @@ static void vidconsole_escape_char(struct udevice *dev, char ch)
- 		if (col)
- 			--col;
+ 	return 0;
+ }
+diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+index 6f319ba0d54..39c82521be1 100644
+--- a/drivers/video/Kconfig
++++ b/drivers/video/Kconfig
+@@ -180,6 +180,7 @@ config CONSOLE_ROTATION
  
--		set_cursor_position(priv, row, col);
-+		set_cursor_position(dev, row, col);
- 
- 		break;
- 	}
+ config CONSOLE_TRUETYPE
+ 	bool "Support a console that uses TrueType fonts"
++	select X86_HARDFP if X86
+ 	help
+ 	  TrueTrype fonts can provide outline-drawing capability rather than
+ 	  needing to provide a bitmap for each font and size that is needed.
 -- 
 2.34.1
 
