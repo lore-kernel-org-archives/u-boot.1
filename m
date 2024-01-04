@@ -4,79 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51452C47074
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 08:19:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C5C1C47073
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 08:43:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1324877F8;
-	Thu,  4 Jan 2024 09:19:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 48B24878AD;
+	Thu,  4 Jan 2024 09:43:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PQsa8hJW";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qJdBw/vI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E424870FF; Thu,  4 Jan 2024 09:19:17 +0100 (CET)
-Received: from mail-ua1-x932.google.com (mail-ua1-x932.google.com
- [IPv6:2607:f8b0:4864:20::932])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1520F878E7; Thu,  4 Jan 2024 09:43:21 +0100 (CET)
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9A67877F8
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 09:19:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B9EA87716
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 09:43:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x932.google.com with SMTP id
- a1e0cc1a2514c-7cbf98dd9efso672873241.1
- for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 00:19:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704356351; x=1704961151; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UO5DwziMROSBF5JJMhyVc2R3+UJvQpROvonbnYACnks=;
- b=PQsa8hJW+OgSdDwQvac0ldDmj0+u+PXvRMleTkIsRf36Ec/OqBeE0aUfytY09pEIBG
- zTRf8m4TjGUXLjexRRmL3tuH8ovNswc0OJ2SdBmdrpa3ScS5lbbfMqrdq0aIDMoAqjTu
- vFFOIN06Oo6woIb+DiJQJY2HyTK4/l3iMW1UizIlNabSS7+GPMbkb5WURdGctS7OkQYA
- jlpKKwLpv/CMT+JXCbNWH1s4/5R+ZMWhM/TosUyXsX+KQfzZ1Ba9Cz56ywKfDVVVt0Lt
- y9GFVuqhLcnt9xyanmMesqn7tQTy3xD2lM78OOTpwPZcIahIkLFdCNKKMma8Y6UF5SAz
- 254Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704356351; x=1704961151;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=UO5DwziMROSBF5JJMhyVc2R3+UJvQpROvonbnYACnks=;
- b=CIf9ztatkpQ17J8tQwO4iPoqhdGnFnXs13sW6QeMCCvkUXZKpPrA1UZX/rHAaOfIoO
- MwUToJ7+efjR69IiS6j587OSbhW8PBsPKO2GyEnJiYUhPyyyT5o9yDUSJqco806eaFYq
- Fr54GQiwOxqOTaXMrz/qkgbF64tolv7FMpItiNaB18hwYDIuhHVyOkwTSTK/9u2+8/Is
- BO7T2OWwycNY0JlSn4Djz07bEl/2MtFPFQClKuMYqnzxyFYiG6K1ib7VyQDWMvvakAwt
- 7kJzsbneQSKI3BXgLDx+oB5EMK/BxH1uXtoVihlftMCNqfmZ/DUSBeQ8PC5izE8g2e3B
- YLyQ==
-X-Gm-Message-State: AOJu0YyIB1EHCgnFButbcIeqVzGh89KZdTrCyABQclKK8gUeYAKtTnDg
- lnW4nVTeXkCkytKnB3zrzr7Q1AvduDFRbveoLG63M3ZuOEkehw==
-X-Google-Smtp-Source: AGHT+IG1DZl6hNTwiB9EwnWnCaTBuxo9OIISjjaSRlyQ70lOkSZKysiQTsn7hbcTBqtR1IXG1KPs3TUoNxRznj0Z+Jw=
-X-Received: by 2002:a05:6102:440a:b0:467:85d1:2732 with SMTP id
- df10-20020a056102440a00b0046785d12732mr75513vsb.3.1704356350933; Thu, 04 Jan
- 2024 00:19:10 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ardb@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by ams.source.kernel.org (Postfix) with ESMTP id E5DEEB811F3
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 08:43:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D911FC43395
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 08:43:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1704357796;
+ bh=tgi3mkIBg3dOw+vpGLogCyrV9K4HSGEkt+fxfTZNQhU=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=qJdBw/vI90Q5CRe/TAi6MU8mdn/4mIknHLFsQzkmxPM7JC7sF1tynQ4LBs7tTbdmp
+ 6lbInQoCrunuWQoBjZ75FPvd+Vu023++Kmv4SkSvRgK1KghPnKaoEKg6Wahval0vbW
+ l7XL6Ejyu+k8AJVkEbOYr47GWSXiaFFLM1q1LCqxyxfmiyvG6GNkzhzTD1jpe3nbhj
+ Hsfu0kW95ri8IqiIrW7U9z4MjYoHdCxiVdsH6JdvPHYpV1Md8diNWxbEGE05wuMyaA
+ 2AAA97c0RrpmmgdXKAhfPNjys7/HuGhPc0YPoo6fxTBIlRHNvUVCKBfpbOiYHD/j36
+ mW+l+lph4t3Ow==
+Received: by mail-lf1-f41.google.com with SMTP id
+ 2adb3069b0e04-50e80d14404so1173865e87.1
+ for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 00:43:16 -0800 (PST)
+X-Gm-Message-State: AOJu0YxG9tw/oZfnFrSplrnBMKQ/uq9pD57KBjIWVqxO6ium0JmwV0lI
+ 1VwO+EIGhlBsKZ+zwm290DR2tJbfqDncwWIiJSc=
+X-Google-Smtp-Source: AGHT+IF3K1WbzpDH4QpESSatpPZeT/IrAbAWh3EtWXLKRBaCAxr4+3CtctEKxI/ye+1KEPMiHID3l1e86+RMUADVJhc=
+X-Received: by 2002:ac2:4885:0:b0:50e:73e8:8d05 with SMTP id
+ x5-20020ac24885000000b0050e73e88d05mr134459lfc.30.1704357795023; Thu, 04 Jan
+ 2024 00:43:15 -0800 (PST)
 MIME-Version: 1.0
-References: <20231228115804.3626579-1-sumit.garg@linaro.org>
- <5602ebb2-25c9-4f0e-88b7-64662874d0f4@amd.com>
-In-Reply-To: <5602ebb2-25c9-4f0e-88b7-64662874d0f4@amd.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Thu, 4 Jan 2024 13:48:59 +0530
-Message-ID: <CAFA6WYNeVq9pM9Uau6bQdUMNw40-1sMHOGuYs4mfa3bX6Ob2TA@mail.gmail.com>
-Subject: Re: [PATCH v3 0/8] An effort to bring DT bindings compliance within
- U-Boot
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, trini@konsulko.com, sjg@chromium.org, 
- robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
- xypron.glpk@gmx.de, seanga2@gmail.com, rasmus.villemoes@prevas.dk, 
- peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de, 
- mibodhi@gmail.com
+References: <20230926194242.2732127-1-sjg@chromium.org>
+ <20230926194242.2732127-2-sjg@chromium.org>
+ <BN9PR11MB5483FF3039913334C7EA83E1E6AEA@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAMj1kXFG92NpL7T7YocOup0xLKyopt3MnSCp0RL8cLzozzJz7A@mail.gmail.com>
+ <BN9PR11MB548303B09536EB1577472029E6B3A@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAPnjgZ36t8g7E=0MSJyaV8-QKv9RVYe47Jd5E=NU-mFM4LWBQA@mail.gmail.com>
+ <CAMj1kXHAEeK7x2f13k_JV3Xcw61nNLasyvXQf+mKwKekQ48EpQ@mail.gmail.com>
+ <BN9PR11MB548334E0DA6495C438FBFDE1E6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <BN9PR11MB548314DDE8D4C9503103D51CE6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAMj1kXHbM+ArLgNZgnmiok4gOfv6QLYxzyB9OCwfhEkJ2xGK_g@mail.gmail.com>
+ <BN9PR11MB5483C2FBCD07DE61DCCDB523E6BCA@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAMj1kXHmu=ykgBMRiFqG4_ra3FJtHa=GASoMUJswdMFa9v4Xgw@mail.gmail.com>
+ <BN9PR11MB54837EEB391CC2A8FA6C0BF5E695A@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAMj1kXEQL9n1Adedow5KEyZ5gdFQY3Fn+Fz8vSK3mHib_vDFig@mail.gmail.com>
+ <BN9PR11MB5483E191F1906641565A1337E694A@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAMj1kXGcZP99hyURXFAZfwKmYqj-xBN9BcW7R3h9Mm2k937Buw@mail.gmail.com>
+ <BN9PR11MB548370E8181B1BB3C6FB9A20E667A@BN9PR11MB5483.namprd11.prod.outlook.com>
+In-Reply-To: <BN9PR11MB548370E8181B1BB3C6FB9A20E667A@BN9PR11MB5483.namprd11.prod.outlook.com>
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Thu, 4 Jan 2024 09:43:03 +0100
+X-Gmail-Original-Message-ID: <CAMj1kXH9z0fvWc5UgzDQ=HfYKkh=YudjL-yoZwKX93baiMgZ8w@mail.gmail.com>
+Message-ID: <CAMj1kXH9z0fvWc5UgzDQ=HfYKkh=YudjL-yoZwKX93baiMgZ8w@mail.gmail.com>
+Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
+To: "Chiu, Chasel" <chasel.chiu@intel.com>
+Cc: Simon Glass <sjg@chromium.org>, 
+ "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+ Mark Rutland <mark.rutland@arm.com>, 
+ Rob Herring <robh@kernel.org>, "Tan, Lean Sheng" <sheng.tan@9elements.com>, 
+ lkml <linux-kernel@vger.kernel.org>, Dhaval Sharma <dhaval@rivosinc.com>, 
+ "Brune, Maximilian" <maximilian.brune@9elements.com>,
+ Yunhui Cui <cuiyunhui@bytedance.com>, 
+ "Dong, Guo" <guo.dong@intel.com>, Tom Rini <trini@konsulko.com>, 
+ ron minnich <rminnich@gmail.com>, "Guo, Gua" <gua.guo@intel.com>, 
+ "linux-acpi@vger.kernel.org" <linux-acpi@vger.kernel.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,191 +101,211 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
-
-On Wed, 3 Jan 2024 at 18:24, Michal Simek <michal.simek@amd.com> wrote:
+On Thu, 4 Jan 2024 at 01:25, Chiu, Chasel <chasel.chiu@intel.com> wrote:
 >
 >
 >
-> On 12/28/23 12:57, Sumit Garg wrote:
-> > Changes in v3:
-> > --------------
-> > - Patch #4: Minor commit message update
-> > - Patch #5: Replace CONFIG_* with Kconfig options
-> > - Patch #7: Dropped Makefile portion and enabled OF_UPSTREAM for SoC
-> >    instead.
-> > - Patch #1, #3, #6 and #8: Picked up review tags
+> > -----Original Message-----
+> > From: Ard Biesheuvel <ardb@kernel.org>
+> > Sent: Wednesday, January 3, 2024 7:22 AM
+> > To: Chiu, Chasel <chasel.chiu@intel.com>
+> > Cc: Simon Glass <sjg@chromium.org>; devicetree@vger.kernel.org; Mark Rutland
+> > <mark.rutland@arm.com>; Rob Herring <robh@kernel.org>; Tan, Lean Sheng
+> > <sheng.tan@9elements.com>; lkml <linux-kernel@vger.kernel.org>; Dhaval
+> > Sharma <dhaval@rivosinc.com>; Brune, Maximilian
+> > <maximilian.brune@9elements.com>; Yunhui Cui <cuiyunhui@bytedance.com>;
+> > Dong, Guo <guo.dong@intel.com>; Tom Rini <trini@konsulko.com>; ron minnich
+> > <rminnich@gmail.com>; Guo, Gua <gua.guo@intel.com>; linux-
+> > acpi@vger.kernel.org; U-Boot Mailing List <u-boot@lists.denx.de>
+> > Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory
+> > usages
 > >
-> > Changes in v2:
-> > --------------
-> > - Patch #1: excluded gitab CI config check and added commit description.
-> > - Patch #3: s/UBOOT_DTSI_LOC/u_boot_dtsi_loc/
-> > - Patch #4: s/DEVICE_TREE_LOC/dt_dir/ and s/U-boot/U-Boot/
-> > - Patch #5: s/U-boot/U-Boot/
-> > - Patch #6 and #7: Picked up review tags
+> > On Fri, 22 Dec 2023 at 20:52, Chiu, Chasel <chasel.chiu@intel.com> wrote:
+> > >
+> > >
+> > > Please see my reply below inline.
+> > >
+> > > Thanks,
+> > > Chasel
+> > >
+> > ...
+> > > > > > The gEfiMemoryTypeInformationGuid HOB typically carries platform
+> > > > > > defaults, and the actual memory type information is kept in a
+> > > > > > non-volatile EFI variable, which gets updated when the memory
+> > > > > > usage changes. Is this different for UefiPayloadPkg?
+> > > > > >
+> > > > > > (For those among the cc'ees less versed in EFI/EDK2: when you
+> > > > > > get the 'config changed -rebooting' message from the boot
+> > > > > > firmware, it typically means that this memory type table has
+> > > > > > changed, and a reboot is necessary.)
+> > > > > >
+> > > > > > So the platform init needs to read this variable, or get the
+> > > > > > information in a different way. I assume it is the payload, not
+> > > > > > the platform init that updates the variable when necessary. This
+> > > > > > means the information flows from payload(n) to platform
+> > > > > > init(n+1), where n is a monotonic index tracking consecutive boots of the
+> > system.
+> > > > > >
+> > > > > > Can you explain how the DT fits into this? How are the
+> > > > > > runtime-code and runtime-data memory reservation nodes under
+> > > > > > /reserved-memory used to implement this information exchange
+> > > > > > between platform init and payload? And how do the HOB and the EFI
+> > variable fit into this picture?
+> > > > >
+> > > > >
+> > > > > 1. With some offline discussion, we would move
+> > > > > gEfiMemoryTypeInformationGuid usage to FDT->upl-custom node. This
+> > > > > is because it is edk2 implementation choice and non-edk2
+> > > > > PlatformInit or Payload may not have such memory optimization
+> > > > > implementation. (not a generic usage/requirement for PlatformInit
+> > > > > and Payload)
+> > > > >
+> > > > > The edk2 example flow will be like below:
+> > > > >
+> > > > > PlatformInit to GetVariable of gEfiMemoryTypeInformationGuid and
+> > > > > create Hob-
+> > > > >
+> > > > >   PlatformInit to initialize FDT->upl-custom node to report
+> > > > gEfiMemoryTypeInformationGuid HOB information ->
+> > > > >     UefiPayload entry to re-create gEfiMemoryTypeInformationGuid
+> > > > > HOB basing
+> > > > on FDT input (instead of the default MemoryType inside UefiPayload)
+> > > > ->
+> > > > >       UefiPayload DxeMain/Gcd will consume
+> > > > > gEfiMemoryTypeInformationGuid
+> > > > Hob for memory type information ->
+> > > > >         UefiPayload to initialize UEFI environment (mainly DXE dispatcher) ->
+> > > > >           (additional FV binary appended to common UefiPayload
+> > > > > binary)
+> > > > PlatformPayload to provide VariableService which is platform
+> > > > specific ->
+> > > > >             UefiPayload UefiBootManager will SetVariable if memory
+> > > > > type change
+> > > > needed and request a warm reset ->
+> > > > >               Back to PlatformInit ...
+> > > > >
+> > > >
+> > > > OK so the upl-custom node can do whatever it needs to. I imagine
+> > > > these will include the memory descriptor attribute field, and other
+> > > > parts that may be missing from the /reserved-memory DT node specification?
+> > >
+> > >
+> > > Yes, if needed by edk2 specific implementation, not generic enough, we may
+> > consider to use upl-custom node to pass those data.
+> > >
+> > >
+> > > >
+> > > > >
+> > > > > 2. Now the proposed reserved-memory node usages will be for
+> > > > > PlatformInit to
+> > > > provide data which may be used by Payload or OS. This is not edk2
+> > > > specific and any PlatformInit/Payload could have same support.
+> > > > > Note: all of below are optional and PlatformInit may choose to
+> > > > > implement some
+> > > > of them or not.
+> > > > >
+> > > > >       - acpi
+> > > > > If PlatformInit created some ACPI tables, this will report a
+> > > > > memory region which
+> > > > contains all the tables to Payload and Payload may base on this to
+> > > > add some more tables if required.
+> > > > >
+> > > > >       - acpi-nvs
+> > > > > If PlatformInit has created some ACPI tables which having ACPI NVS
+> > > > > memory
+> > > > dependency, this will be that nvs region.
+> > > > >
+> > > >
+> > > > These make sense.
+> > > >
+> > > > >       - boot-code
+> > > > > When PlatformInit having some FW boot phase code that could be
+> > > > > freed for OS to use when payload transferring control to UEFI OS
+> > > > >
+> > > > >       - boot-data
+> > > > > When PlatformInit having some FW boot phase data that could be
+> > > > > freed for OS
+> > > > to use when payload transferring control to UEFI OS.
+> > > > >
+> > > > >       - runtime-code
+> > > > > PlatformInit may provide some services code that can be used for
+> > > > > Payload to
+> > > > initialize UEFI Runtime Services for supporting UEFI OS.
+> > > > >
+> > > > >       - runtime-data
+> > > > > PlatformInit may provide some services data that can be used for
+> > > > > Payload to
+> > > > Initialize UEFI Runtime Services for supporting UEFI OS.
+> > > > >
+> > > >
+> > > > A UEFI OS must consume this information from the UEFI memory map,
+> > > > not from the /reserved-memory nodes. So these nodes must either not
+> > > > be visible to the OS at all, or carry an annotation that the OS must ignore
+> > them.
+> > > >
+> > > > Would it be possible to include a restriction in the DT schema that
+> > > > these are only valid in the firmware boot phase?
+> > >
+> > >
+> > > https://uefi.org/specs/UEFI/2.10/07_Services_Boot_Services.html#efi-bo
+> > > ot-services-exitbootservices Per UEFI specification, UEFI OS will
+> > > always call UEFI GetMemoryMap function to retrieve memory map, so FDT
+> > node present or not does not matter to UEFI OS. We probably could have
+> > annotation in UPL specification to emphasize this.
+> > > I'm not familiar with Linux FDT boot, but if non-UEFI OS does not call UEFI
+> > GetMemoryMap() and does not know what is runtime-code/data, boot-
+> > code/data, it might just treat such reserved-memory nodes as 'regular' reserved
+> > memory nodes, and that's still ok because non-UEFI OS will not call to any
+> > runtime service or re-purpose boot-code/data memory regions.
+> > >
 > >
-> > Prerequisite
-> > ------------
+> > You are saying the same thing but in a different way. A UEFI OS must only rely on
+> > GetMemoryMap(), and not on the /reserved-memory node to obtain this
+> > information. But this requirement needs to be stated
+> > somewhere: the UEFI spec does not reason about other sources of EFI memory
+> > information at all, and this DT schema does not mention any of this either.
 > >
-> > This patch series requires devicetree-rebasing git repo to be added as a
-> > subtree to the main U-Boot repo via:
+> > > Would you provide a real OS case which will be impacted by this reserved-
+> > memory schema so we can discuss basing on real case?
+> > >
 > >
-> > $ git subtree add --prefix devicetree-rebasing \
-> >        git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git \
-> >        v6.6-dts --squash
+> > Funny, that is what I have been trying to get from you :-)
 > >
-> > Background
-> > ----------
-> >
-> > This effort started while I was reviewing patch series corresponding to
-> > Qcom platforms [1] which was about to import modified devicetree source
-> > files from Linux kernel. I suppose keeping devicetree files sync with
-> > Linux kernel without any DT bindings schema validation has been a pain
-> > for U-Boot SoC/platform maintainers. There has been past discussions
-> > about a single DT repo but that hasn't come up and Linux kernel remained
-> > the place where DT source files as well as bindings are placed and
-> > maintained.
-> >
-> > However, Linux kernel DT maintainers proposed [2] for U-Boot to rather
-> > use devicetree-rebasing repo [3] which is a forked copy from Linux
-> > kernel for DT source files as well as bindings. It is tagged at every
-> > Linux kernel major release or intermideate release candidates. So here I
-> > have tried to reuse that to bring DT bingings compliance as well as a
-> > standard way to maintain a regular sync of DT source files with Linux
-> > kernel.
-> >
-> > In order to maintain devicetree files sync, U-Boot will maintains a Git
-> > subtree for devicetee-rebasing repo as `devicetee-rebasing/` sub-directory.
-> > It will be regularly updated with every new kernel major release via
-> > subtree pull as follows:
-> >
-> > $ git subtree pull --prefix devicetree-rebasing \
-> >        git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git \
-> >        <release-tag> --squash
-> >
-> > The RFC/prototype for this series has been discussed with Linux DT
-> > maintainers as well as U-Boot maintainers here [4]. Now we would like to
-> > reach out to wider U-Boot community to seek feedback.
-> >
-> > [1] https://lore.kernel.org/all/CAFA6WYMLUD9cnkr=R0Uur+1UeTMkKjM2zDdMJtXb3nmrLk+pDg@mail.gmail.com/
-> > [2] https://lore.kernel.org/all/CAL_JsqKEjv2tSGmT+0ZiO7_qbBfhTycbGnhJhYpKDFzfO9jzDg@mail.gmail.com/
-> > [3] https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git/
-> > [4] https://github.com/u-boot/u-boot/pull/451
-> >
-> > Changes
-> > -------
-> >
-> > Traditionally, U-Boot placed copies of devicetree source files from Linux
-> > kernel into `arch/<arch>/dts/<name>.dts`, which can be selected via:
-> >
-> > CONFIG_DEFAULT_DEVICE_TREE "<name>"
-> >
-> > SoC/board maintainers are encouraged to migrate to using mirrored copies
-> > from `devicetree-rebasing/` into `dts/arch/<arch>/<vendor>` via:
-> >
-> > CONFIG_OF_UPSTREAM=y
-> > CONFIG_DEFAULT_DEVICE_TREE "<vendor>/<name>"
-> >
-> > An example have been shown for Amlogic meson-gxbb SoC and corresponding
-> > derived boards via patch #7 and #8.
-> >
-> > Devicetree bindings schema checks
-> > ---------------------------------
-> >
-> > With devicetee-rebasing Git subtree, the devicetree bindings are also
-> > regularly synced with Linux kernel as `devicetree-rebasing/Bindings/`
-> > sub-directory. This allows U-Boot to run devicetree bindings schema checks
-> > which will bring compliance to U-Boot core/drivers regarding usage of
-> > devicetree.
-> >
-> > Dependencies
-> > ------------
-> >
-> > The DT schema project must be installed in order to validate the DT schema
-> > binding documents and validate DTS files using the DT schema. The DT schema
-> > project can be installed with pip:
-> >
-> > $ pip3 install dtschema
-> >
-> > Note that 'dtschema' installation requires 'swig' and Python development
-> > files installed first. On Debian/Ubuntu systems:
-> >
-> > $ apt install swig python3-dev
-> >
-> > Several executables (dt-doc-validate, dt-mk-schema, dt-validate) will be
-> > installed. Ensure they are in your PATH (~/.local/bin by default).
-> >
-> > Recommended is also to install yamllint (used by dtschema when present).
-> >
-> > Running checks
-> > --------------
-> >
-> > In order to perform validation of DTB files, use the ``dtbs_check`` target:
-> >
-> > $ make dtbs_check
+> > The problem I am anticipating here is that the information in /reserved-memory
+> > may be out of sync with the EFI memory map. It needs to be made clear that the
+> > EFI memory map is the only source of truth when the OS is involved, and this
+> > /reserved-memory mechanism should only be used by other firmware stages. But
+> > the schema does not mention this at all. The schema also does not mention that
+> > the information in /reserved-memory is not actually sufficient to reconstruct the
+> > EFI memory map that the firmware payload expects (which is why the upl-
+> > custom-node exists too)
 >
-> I have been following your guidance here and I have also seen it to work but not
-> sure why. Anyway I have strong suspicious that any Makefile rule is not right.
+>
+>
+> Does below solve your concerns if we mention those in schema description? (please feel free to add more if you have)
+> . boot-code/boot-data and runtime-code/runtime-data usages are following UEFI specification
+>   . before ExitBootServices: https://uefi.org/specs/UEFI/2.10/07_Services_Boot_Services.html#memory-type-usage-before-exitbootservices
+>   . after ExitBootServices: https://uefi.org/specs/UEFI/2.10/07_Services_Boot_Services.html#memory-type-usage-after-exitbootservices
+> . These usages do not intend to construct full UEFI memory map, it is only for PlatformInit to pass pre-installed tables or services to Payload for supporting UEFI OS boot.
+> . These usages are optional
+> . Typically UEFI OS boot will always call GetMemoryMap() to retrieve memory map following UEFI spec, no matter DT nodes present or not (https://uefi.org/specs/UEFI/2.10/07_Services_Boot_Services.html#efi-boot-services-exitbootservices)
+> . Typically Non-UEFI OS boot will treat those  boot* or runtime* reserved-memory as 'regular' reserved memory if present.
 >
 
-Thanks for taking time to test DT schema checks. It looks like your
-suspicion is correct.
+This already helps quite a lot, thanks.
 
-> I am getting this issue.
->
-> /bin/sh: line 1: @: command not found
-> make[1]: *** [devicetree-rebasing/Bindings/Makefile:68:
-> devicetree-rebasing/Bindings/processed-schema.json] Error 127
-> make: *** [Makefile:1181: dt_binding_check] Error 2
->
+But why should a non-UEFI OS be required to keep boot* or runtime*
+regions reserved? The firmware stage that boots the OS knows whether
+it is performing an UEFI boot or a non-UEFI boot, and it should only
+present the information that goes along with that. The OS should never
+have to worry about reconciling two sources of truth.
 
-I was able to reproduce this issue once I installed yamllint on my
-Ubuntu machine.
+And to Rob's point about boot / runtime being ill-defined: I would
+argue that 'runtime' quite clearly implies 'under the OS', and so UEFI
+runtime* reservations are assumed to always be relevant to UEFI OSes.
 
->
-> devicetree-rebasing/Bindings/processed-schema.json is not generated properly
->
-> I am using the latest dt schema
-> $ dt-validate -V
-> 2023.12.dev6+gfb80ec43c204
->
-> and no issue to run it from Linux source code that's why I expect it is not
-> issue with my PC in general.
-> Do you know what can be wrong?
-
-The issue here is basically due to old U-Boot Kbuild infrastructure
-which isn't in sync with Linux kernel. This Kbuild commit [1] changes
-aren't present in U-Boot leading to this issue.
-
-[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=3a2429e1faf40b2aaa481aa4b001a74d222c7e8b
-
-Following change to adapt bindings Makefile to old U-Boot Kbuild
-expectation should resolve this issue:
-
-diff --git a/devicetree-rebasing/Bindings/Makefile
-b/devicetree-rebasing/Bindings/Makefile
-index 8b395893bd8..7d08372691c 100644
---- a/devicetree-rebasing/Bindings/Makefile
-+++ b/devicetree-rebasing/Bindings/Makefile
-@@ -47,9 +47,9 @@ quiet_cmd_mk_schema = SCHEMA  $@
-                      rm -f $$f
-
- define rule_chkdt
--       $(if $(DT_SCHEMA_LINT),$(call cmd,yamllint),)
--       $(call cmd,chk_bindings)
--       $(call cmd,mk_schema)
-+       $(if $(DT_SCHEMA_LINT),$(call echo-cmd,yamllint) $(cmd_yamllint),); \
-+       $(call echo-cmd,chk_bindings) $(cmd_chk_bindings); \
-+       $(call echo-cmd,mk_schema) $(cmd_mk_schema)
- endef
-
- DT_DOCS = $(patsubst $(srctree)/%,%,$(shell $(find_all_cmd)))
-
-If this works for you then I will include it as a separate patch for v4.
-
--Sumit
-
->
-> Thanks,
-> Michal
->
+I think there is a fundamental difference of opinion here, where the
+position of the firmware developers is that the DT should be the same
+across all boot stages, while my position reasoning from the OS side
+is that the OS should be able to observe only the abstractions that
+are part of the contract between firmware and OS.
