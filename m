@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF533C3DA6E
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 01:49:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8744AC47073
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 03:46:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 439C3876FF;
-	Thu,  4 Jan 2024 02:49:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B2948877FE;
+	Thu,  4 Jan 2024 04:46:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iWGyTA4r";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HHeFvYxQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B969876F6; Thu,  4 Jan 2024 02:49:26 +0100 (CET)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4ADA987811; Thu,  4 Jan 2024 04:46:43 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEFA8876FF
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 02:49:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DAE38771E
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 04:46:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-7b7a9f90f34so805539f.2
- for <u-boot@lists.denx.de>; Wed, 03 Jan 2024 17:49:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704332962; x=1704937762; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=cMvA6i5vJg3KqzltALIcm/N9z8r9WfYE9Wsfhry5Pas=;
- b=iWGyTA4r2es9KjO9s6GfJtCLNvYt2XkY/CbkFrV+nTrqy3gn4INlbHNn/+M5lUBq3l
- 2k1CMSNb11G71VO6mg8Fif7gpHMlLnXS9aMRMRMuv3dtXWSmYO8Bb+U1L0DYayOCeWo0
- KApmnoHnFnONt6sc1b6m9r78v3ESUEZRM38SU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704332962; x=1704937762;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cMvA6i5vJg3KqzltALIcm/N9z8r9WfYE9Wsfhry5Pas=;
- b=g3Gm/Bp3+3Aih3HjyaKKe9rNPG34IlkM9Wm43UdJPNVpPQZqdMYxovJeJQHCD/x+Xy
- HdVojyHny8et0CW0HMwe6aaq+YFRXsurhoRwvmgs/d6/JjLKCpXkGxLrGz+A86ljC7/i
- oEOgzDFNwbJTpNUJ+hzsiwwUAWFIIwBXmBqrQ8Ay3+/kLCLmG4/CfpSh26t1HwF2I0nS
- kk6nTot3uSrY5nseiWnDRcuLId5K6IA4RFepDa/ofeWUq46U9g6s/Ae624Iw9khHspET
- NRSIUKv+OiecjiwZc1LOnwng4BekuA1WU5/8B9e0VG6BPlrm8fDIHFwePZu0MEwLlLSG
- HtgQ==
-X-Gm-Message-State: AOJu0YzWL67AkXg1OOzfK0CX1PHkpQZgvtzf/TYYqTHFW/ynetl2GVYU
- A62cEEY15KsASBqbuHnCeocJ9QcC+4azOAXCvgkojahGx2t8sTA=
-X-Google-Smtp-Source: AGHT+IGcug6wFQR7Lji+VJj+9YlO/aesrLIHizjUfP+9Wpr4uHpzMle9BMYCxMJXPJmFV8F1PLv8ng==
-X-Received: by 2002:a05:6602:e46:b0:7ba:9b51:413d with SMTP id
- gq6-20020a0566020e4600b007ba9b51413dmr16361784iob.8.1704332962333; 
- Wed, 03 Jan 2024 17:49:22 -0800 (PST)
-Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
- [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- bv13-20020a056638448d00b0046b68ee8fd6sm7524003jab.116.2024.01.03.17.49.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Jan 2024 17:49:22 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
- Marek Vasut <marex@denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>,
- Baruch Siach <baruch@tkos.co.il>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerry Van Baren <vanbaren@cideas.com>, Johan Jonker <jbx6244@gmail.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Samuel Holland <samuel@sholland.org>, Shiji Yang <yangshiji66@outlook.com>
-Subject: [PATCH v7] fdt: Allow the devicetree to come from a bloblist
-Date: Wed,  3 Jan 2024 18:49:19 -0700
-Message-Id: <20240104014919.413568-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4043kRAx063196;
+ Wed, 3 Jan 2024 21:46:27 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1704339988;
+ bh=bYTk3lfp+zFGDz40hvILIjpM7HEWaDtDNDsOVtAPWUU=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=HHeFvYxQIj9OERLDmcSYKIzGv4fCzIdx4VekZzHBtfOmz6M5ion1CrfzUtZEhCxVq
+ PgfcwKJBDuW4HTKygPH/5jCV3JGcC2oYi7nXpMwTHKHwtjj8DqMxQta7U6yJfZR/cQ
+ zHSLFcuNiJ2wio5zceGQ9thtsOSWiArUAfAVlc74=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4043kRuP092300
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 3 Jan 2024 21:46:27 -0600
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 3
+ Jan 2024 21:46:27 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 3 Jan 2024 21:46:27 -0600
+Received: from [172.24.227.36]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4043kL09033573;
+ Wed, 3 Jan 2024 21:46:21 -0600
+Message-ID: <e4fdf6f6-db02-4d85-8745-69f999781d82@ti.com>
+Date: Thu, 4 Jan 2024 09:16:20 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 09/17] board: ti: j748s4: Add board config yaml files
+Content-Language: en-US
+To: Nishanth Menon <nm@ti.com>, Apurva Nandan <a-nandan@ti.com>
+CC: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean
+ Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Simon
+ Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>, Kamlesh Gurudasani
+ <kamlesh@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>, Manorit Chawdhry
+ <m-chawdhry@ti.com>, Aradhya Bhatia <a-bhatia1@ti.com>, Bryan Brattlof
+ <bb@ti.com>, Christian Gmeiner <christian.gmeiner@gmail.com>, Heinrich
+ Schuchardt <xypron.glpk@gmx.de>, Marcel Ziswiler
+ <marcel.ziswiler@toradex.com>, Roger Quadros <rogerq@kernel.org>, Jayesh
+ Choudhary <j-choudhary@ti.com>, Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
+ <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
+References: <20231219191537.4039361-1-a-nandan@ti.com>
+ <20231219191537.4039361-10-a-nandan@ti.com>
+ <20240103173637.fdhfwgmsmqrfpzdp@manmade>
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20240103173637.fdhfwgmsmqrfpzdp@manmade>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,157 +93,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Standard passage provides for a bloblist to be passed from one firmware
-phase to the next. That can be used to pass the devicetree along as well.
-Add an option to support this.
+Hi Nishanth
 
-Tests for this will be added as part of the Universal Payload work.
+On 03/01/24 23:06, Nishanth Menon wrote:
+> On 00:45-20231220, Apurva Nandan wrote:
+>> Add board-cfg, rm-cfg, pm-cfg, sec-cfg, tifs-rm-cfg yaml for buidling
+>> u-boot sysfw data.
+>>
+>> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
+>> ---
+>>   board/ti/j784s4/board-cfg.yaml   |   37 +
+>>   board/ti/j784s4/pm-cfg.yaml      |   13 +
+>>   board/ti/j784s4/rm-cfg.yaml      | 3058 ++++++++++++++++++++++++++++++
+>>   board/ti/j784s4/sec-cfg.yaml     |  380 ++++
+>>   board/ti/j784s4/tifs-rm-cfg.yaml | 2656 ++++++++++++++++++++++++++
+>>   5 files changed, 6144 insertions(+)
+>>   create mode 100644 board/ti/j784s4/board-cfg.yaml
+>>   create mode 100644 board/ti/j784s4/pm-cfg.yaml
+>>   create mode 100644 board/ti/j784s4/rm-cfg.yaml
+>>   create mode 100644 board/ti/j784s4/sec-cfg.yaml
+>>   create mode 100644 board/ti/j784s4/tifs-rm-cfg.yaml
+>>
+> 
+> Cursory review.. but btw, when I run:
+> $ yamllint board/ti/j784s4/rm-cfg.yaml
+> 
+> it throws a bunch of warnings, but it does the same for other yamls as
+> well. Not sure it was supposed to be yamlinted - Neha? Might be good
+> idea than manual review to ensure some basic checks are done?
+> 
+> Either way,
+> 
+> Reviewed-by: Nishanth Menon <nm@ti.com>
+> 
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
-The discussion on this was not resolved and is now important due to the
-bloblist series from Raymond. So I am sending it again since I believe
-this is a better starting point than building on OF_BOARD
+Yeah I didn't have any other checks in place for the YAML files, thanks for 
+noticing this, will target a quick clean up patch.
 
-Changes in v7:
-- Drop use of OF_BLOBLIST
+> 
+> Ref - I used yamllint 1.26.3
 
-Changes in v6:
-- Don't allow bloblist with OF_EMBED
-
-Changes in v5:
-- Make OF_BLOBLIST default y
-- Make OF_BLOBLIST optional at runtime
-
-Changes in v4:
-- Rebase to -next
-
- doc/develop/devicetree/control.rst |  3 ++
- include/fdtdec.h                   |  6 ++--
- lib/fdtdec.c                       | 44 +++++++++++++++++++++++-------
- 3 files changed, 41 insertions(+), 12 deletions(-)
-
-diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
-index cbb65c9b177..11c92d440f4 100644
---- a/doc/develop/devicetree/control.rst
-+++ b/doc/develop/devicetree/control.rst
-@@ -108,6 +108,9 @@ If CONFIG_OF_BOARD is defined, a board-specific routine will provide the
- devicetree at runtime, for example if an earlier bootloader stage creates
- it and passes it to U-Boot.
- 
-+If CONFIG_BLOBLIST is defined, the devicetree may come from a bloblist passed
-+from a previous stage, if present.
-+
- If CONFIG_SANDBOX is defined, then it will be read from a file on
- startup. Use the -d flag to U-Boot to specify the file to read, -D for the
- default and -T for the test devicetree, used to run sandbox unit tests.
-diff --git a/include/fdtdec.h b/include/fdtdec.h
-index bd1149f46d0..e80de24076c 100644
---- a/include/fdtdec.h
-+++ b/include/fdtdec.h
-@@ -72,7 +72,7 @@ struct bd_info;
-  *	U-Boot is packaged as an ELF file, e.g. for debugging purposes
-  * @FDTSRC_ENV: Provided by the fdtcontroladdr environment variable. This should
-  *	be used for debugging/development only
-- * @FDTSRC_NONE: No devicetree at all
-+ * @FDTSRC_BLOBLIST: Provided by a bloblist from an earlier phase
-  */
- enum fdt_source_t {
- 	FDTSRC_SEPARATE,
-@@ -80,6 +80,7 @@ enum fdt_source_t {
- 	FDTSRC_BOARD,
- 	FDTSRC_EMBED,
- 	FDTSRC_ENV,
-+	FDTSRC_BLOBLIST,
- };
- 
- /*
-@@ -1190,7 +1191,8 @@ int fdtdec_resetup(int *rescan);
-  *
-  * The existing devicetree is available at gd->fdt_blob
-  *
-- * @err internal error code if we fail to setup a DTB
-+ * @err: 0 on success, -EEXIST if the devicetree is already correct, or other
-+ * internal error code if we fail to setup a DTB
-  * @returns new devicetree blob pointer
-  */
- void *board_fdt_blob_setup(int *err);
-diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-index 4016bf3c113..b2c59ab3818 100644
---- a/lib/fdtdec.c
-+++ b/lib/fdtdec.c
-@@ -7,6 +7,10 @@
-  */
- 
- #ifndef USE_HOSTCC
-+
-+#define LOG_CATEGORY	LOGC_DT
-+
-+#include <bloblist.h>
- #include <boot_fit.h>
- #include <display_options.h>
- #include <dm.h>
-@@ -86,6 +90,7 @@ static const char *const fdt_src_name[] = {
- 	[FDTSRC_BOARD] = "board",
- 	[FDTSRC_EMBED] = "embed",
- 	[FDTSRC_ENV] = "env",
-+	[FDTSRC_BLOBLIST] = "bloblist",
- };
- 
- const char *fdtdec_get_srcname(void)
-@@ -1662,23 +1667,42 @@ static void setup_multi_dtb_fit(void)
- 
- int fdtdec_setup(void)
- {
--	int ret;
-+	int ret = -ENOENT;
-+
-+	/* If allowing a bloblist, check that first */
-+	if (CONFIG_IS_ENABLED(BLOBLIST)) {
-+		ret = bloblist_maybe_init();
-+		if (!ret) {
-+			gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-+			if (gd->fdt_blob) {
-+				gd->fdt_src = FDTSRC_BLOBLIST;
-+				log_debug("Devicetree is in bloblist at %p\n",
-+					  gd->fdt_blob);
-+			} else {
-+				log_debug("No FDT found in bloblist\n");
-+				ret = -ENOENT;
-+			}
-+		}
-+	}
- 
--	/* The devicetree is typically appended to U-Boot */
--	if (IS_ENABLED(CONFIG_OF_SEPARATE)) {
--		gd->fdt_blob = fdt_find_separate();
--		gd->fdt_src = FDTSRC_SEPARATE;
--	} else { /* embed dtb in ELF file for testing / development */
--		gd->fdt_blob = dtb_dt_embedded();
--		gd->fdt_src = FDTSRC_EMBED;
-+	/* Otherwise, the devicetree is typically appended to U-Boot */
-+	if (ret) {
-+		if (IS_ENABLED(CONFIG_OF_SEPARATE)) {
-+			gd->fdt_blob = fdt_find_separate();
-+			gd->fdt_src = FDTSRC_SEPARATE;
-+		} else { /* embed dtb in ELF file for testing / development */
-+			gd->fdt_blob = dtb_dt_embedded();
-+			gd->fdt_src = FDTSRC_EMBED;
-+		}
- 	}
- 
- 	/* Allow the board to override the fdt address. */
- 	if (IS_ENABLED(CONFIG_OF_BOARD)) {
- 		gd->fdt_blob = board_fdt_blob_setup(&ret);
--		if (ret)
-+		if (!ret)
-+			gd->fdt_src = FDTSRC_BOARD;
-+		else if (ret != -EEXIST)
- 			return ret;
--		gd->fdt_src = FDTSRC_BOARD;
- 	}
- 
- 	/* Allow the early environment to override the fdt address */
 -- 
-2.34.1
-
+Thanking You
+Neha Malcom Francis
