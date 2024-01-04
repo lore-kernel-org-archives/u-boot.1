@@ -4,84 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30711C47074
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 12:23:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20362C47074
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 12:28:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 457328793B;
-	Thu,  4 Jan 2024 13:23:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 38FD987961;
+	Thu,  4 Jan 2024 13:28:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PpXbWdZg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="i2rfiWdz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 578958793B; Thu,  4 Jan 2024 13:23:38 +0100 (CET)
-Received: from mail-vs1-xe29.google.com (mail-vs1-xe29.google.com
- [IPv6:2607:f8b0:4864:20::e29])
+ id 6B2AA87966; Thu,  4 Jan 2024 13:28:40 +0100 (CET)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E734E87967
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 13:23:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FEE3876B2
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 13:28:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe29.google.com with SMTP id
- ada2fe7eead31-46746edb7bcso78311137.0
- for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 04:23:35 -0800 (PST)
+ spf=pass smtp.mailfrom=o451686892@gmail.com
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2cc7d2c1ff0so5222321fa.3
+ for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 04:28:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704371014; x=1704975814; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1704371318; x=1704976118; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8FGiciZ7OX5H3bVBZ2+/aeu3RFl4bMDdqAfCTjNAYrA=;
- b=PpXbWdZgftc9otUXjz/lkbqIYWZZdmoFZ02apDMCmcWh2ZFpLYt0g1x4SFbedAkTxH
- pm1F3jQ8O5eWkpw7maJhloCb7HOei4PdpdNQ9p6PcUIVyW/JTEwYgLNwR571/JmVytuW
- DTee5b9Zrwj0OnP+iTcDB3pOIs13rUxlnNWnTR1w1FosSWoXvc9SihxPJ3dgLNdr6YMW
- zvpW7rJgHl1hjWkhiWj8PuZj+QswE30nsAmR/pmjUwkrL/FidIh3o+9Pfu5cGM5+BWqR
- nHnXlIEpRdY53vNYxdoq+6terRz757s7sO0pHqdfzwyymvwH/JFGOvw4cL2bPCpYJr/m
- hA/g==
+ bh=/U4gVFOQ2IifrGzPn7/n0N7s8JOQEVeXSojBR9V3HV0=;
+ b=i2rfiWdzcx2izMz88KNzHQud1lJvRfT7ekk7yktm2SQzPNDnyd4VB8bQ1FIW8Ko6XD
+ sUe8NXJrrCFkZYhQsxgd+4UY8bd2FHWvB6tQrd42LT4k3CFNx2RyqLak2seNFs62yGsD
+ l2rv8ii6yxwc1Onzhil9vky+jM2MhZYCcy1hJ+b+E5awM2e/k6XFEIOTtCxD754Ksl2l
+ lgdq4awQNV5W6vtBhCsfeLz+oXKAO0qrWIYKiVKkx+1MVWi7STKlhoPe/vZxOVq7QXi5
+ IfCsTHmKFGxjTpqTiU4vT4ERc34xRNoKy6iF2r+uQUbMU/zREYPHAvJf5cLbxsXZc1Lr
+ Zk4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704371014; x=1704975814;
+ d=1e100.net; s=20230601; t=1704371318; x=1704976118;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8FGiciZ7OX5H3bVBZ2+/aeu3RFl4bMDdqAfCTjNAYrA=;
- b=Kj+yVWLzCFcXKjOaMrTuAhmeOD4w41kozhO1azqb5sfTl4FCYXFSs7NyAUbNOpmLX1
- dUhFdkxsw/bdF0mSB0JBsdKp5x86n6kpgQ79LiaQV5djzUQnWCv7HgE9D4lXFI6Sx1GH
- u+Lmg6dqSLuFR40QzJRAiQCivoQyA6A4ZhsSXBVkHxM+0BId6fQAxXlW1FWSApNaryMX
- fRlUQi69/E/ddTr1T8RaUHNVuiD28PK6p/KKE2bqIC7YN5mHI7F0sxZs0RLAQzfBwfZz
- A0FnGTcraMLEaZ1favi/uAq1qSpnYpme9VnSERsiS/UOjpljtzXk8fceiMKkE+txNDkv
- TgLQ==
-X-Gm-Message-State: AOJu0Yxo8JrFxf5f6HD7YDYhmV8IX7teu2Kg9G2b7Fnw4iNODGAHYruM
- 3mlM9vv0reFsaEF4JVnJBe8Esl+K2v6HXVHVlXwmKbe82GmS7Q==
-X-Google-Smtp-Source: AGHT+IFjfdhwG/IdaT+z8UTJJzNgXMAqQWPRnQDtnBC8kVfZPGGaJ/dv4b3xeODJ25teCDPbSPERpXTnfUQB289wifg=
-X-Received: by 2002:a05:6102:6690:b0:467:810:b410 with SMTP id
- gw16-20020a056102669000b004670810b410mr369327vsb.21.1704371014664; Thu, 04
- Jan 2024 04:23:34 -0800 (PST)
+ bh=/U4gVFOQ2IifrGzPn7/n0N7s8JOQEVeXSojBR9V3HV0=;
+ b=hHFbC8TTcVSVoqNXtYHjWkp7e9ujpnXmI2P69h6wkinNBDAoeY8+Dq3I8q5yhj3kx9
+ FGpddersnC7YwoVktI2yx62Iw8skynmY1eRBMA+oUUR8dKZt4v2G7XyxJk5xq8GoQc8J
+ ylGLdi6SqB96OJwh6OriVZ/dIDxUJIwC9+nasbITCg34Xzbppc72suwaumuYMzcNCKE/
+ XnWuTqelaU+cqhZeBjyCj1Z7KdIre3UDkA90K7ZdSdoW9Qo9kQN/SQFCiqV/PE2KKm8K
+ iqVAeK2y3QICbrNsitISp+mHOM5a6vsXarPbSsqA+b2oZyafs98sZiAL3mf8P4a/ddo6
+ ikhg==
+X-Gm-Message-State: AOJu0YyB0A2AxRH4L1eakWqEmrwp+wUJcFKWlMsgf1tvMVRtb0g3HVnS
+ vwGUoCqheWbYS6NALIdAzxhfsUptNMtal3lWAWo=
+X-Google-Smtp-Source: AGHT+IHW77Zp1gvURyFMg8C2wu4DLnxMQZ7zM5Zs2leWRF06tWtAvEzH1BV4QVSXRhqV+aaTF6oMNvcwxIoG0uJVBnQ=
+X-Received: by 2002:a05:6512:239c:b0:50e:7c08:1a55 with SMTP id
+ c28-20020a056512239c00b0050e7c081a55mr485481lfv.18.1704371317151; Thu, 04 Jan
+ 2024 04:28:37 -0800 (PST)
 MIME-Version: 1.0
-References: <20231228115804.3626579-1-sumit.garg@linaro.org>
- <20231228115804.3626579-5-sumit.garg@linaro.org>
- <CAFLszThfxe_n02auF+vZ1u7FynKkrWEYFU3SdkRTLgBVuiv+Hw@mail.gmail.com>
- <20231228140313.GB2652760@bill-the-cat>
- <CAFLszTiPFyRQZtrKhETjMzn6JukFJaBYMugdL-RPO3LJB9XUMA@mail.gmail.com>
-In-Reply-To: <CAFLszTiPFyRQZtrKhETjMzn6JukFJaBYMugdL-RPO3LJB9XUMA@mail.gmail.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Thu, 4 Jan 2024 17:53:23 +0530
-Message-ID: <CAFA6WYMtpZowkhXccj+R5Teop11XbA26DzKadV0x25GCVPMDaQ@mail.gmail.com>
-Subject: Re: [PATCH v3 4/8] dts: Add alternative location for upstream DTB
- builds
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, robh+dt@kernel.org, 
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
- rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com
+References: <20240104114619.280513-1-o451686892@gmail.com>
+ <45cc3cf3-4120-460d-b275-fc019156ce20@amd.com>
+ <CAHk0HosXQ8iU0G3tZcQUf44FPdSzGOh7X9mH85Ja6nCEe46drA@mail.gmail.com>
+ <7bb9480d-ccd1-4717-8083-b007efd7567e@amd.com>
+In-Reply-To: <7bb9480d-ccd1-4717-8083-b007efd7567e@amd.com>
+From: Weizhao Ouyang <o451686892@gmail.com>
+Date: Thu, 4 Jan 2024 20:28:25 +0800
+Message-ID: <CAHk0HovT5XbejLHaTdpOTkR=dXhK=Q-GAO+=sXgdvfE4fyTuag@mail.gmail.com>
+Subject: Re: [PATCH] cmd: sf: Fix sf probe crash
+To: Michal Simek <michal.simek@amd.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -100,153 +92,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
-On Thu, 28 Dec 2023 at 20:39, Simon Glass <sjg@chromium.org> wrote:
+On Thu, Jan 4, 2024 at 8:21=E2=80=AFPM Michal Simek <michal.simek@amd.com> =
+wrote:
 >
-> Hi Tom, Sumit,
 >
-> On Thu, Dec 28, 2023 at 2:03=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
-te:
-> >
-> > On Thu, Dec 28, 2023 at 01:37:26PM +0000, Simon Glass wrote:
-> > > Hi Sumit,
-> > >
-> > > On Thu, Dec 28, 2023 at 11:58=E2=80=AFAM Sumit Garg <sumit.garg@linar=
-o.org> wrote:
-> > > >
-> > > > Allow platform owners to mirror devicetree files from devitree-reba=
-sing
-> > > > directory into dts/arch/$(ARCH) (special case for dts/arch/arm64). =
-Then
-> > > > build then along with any *-u-boot.dtsi file present in arch/$(ARCH=
-)/dts
-> > > > directory. Also add a new Makefile for arm64.
-> > > >
-> > > > This will help easy migration for platforms which currently are com=
-pliant
-> > > > with upstream Linux kernel devicetree files.
-> > > >
-> > > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > > > ---
-> > > >
-> > > > Changes in v3:
-> > > > --------------
-> > > > - Minor commit message update
-> > > >
-> > > > Changes in v2:
-> > > > --------------
-> > > > - s/DEVICE_TREE_LOC/dt_dir/ and s/U-boot/U-Boot/
-> > > >
-> > > >  dts/Kconfig             | 11 +++++++++++
-> > > >  dts/Makefile            | 17 ++++++++++++++---
-> > > >  dts/arch/arm64/Makefile | 14 ++++++++++++++
-> > > >  3 files changed, 39 insertions(+), 3 deletions(-)
-> > > >  create mode 100644 dts/arch/arm64/Makefile
-> > > >
-> > > > diff --git a/dts/Kconfig b/dts/Kconfig
-> > > > index 00c0aeff893..e58c1c6f2ab 100644
-> > > > --- a/dts/Kconfig
-> > > > +++ b/dts/Kconfig
-> > > > @@ -85,6 +85,17 @@ config OF_LIVE
-> > > >           enables a live tree which is available after relocation,
-> > > >           and can be adjusted as needed.
-> > > >
-> > > > +config OF_UPSTREAM
-> > > > +       bool "Enable use of devicetree imported from Linux kernel r=
-elease"
-> > > > +       help
-> > > > +         Traditionally, U-Boot platforms used to have their custom=
- devicetree
-> > > > +         files or copy devicetree files from Linux kernel which ar=
-e hard to
-> > > > +         maintain and can usually get out-of-sync from Linux kerne=
-l. This
-> > > > +         option enables platforms to migrate to devicetree-rebasin=
-g repo where
-> > > > +         a regular sync will be maintained every major Linux kerne=
-l release
-> > > > +         cycle. However, platforms can still have some custom u-bo=
-ot specific
-> > > > +         bits maintained as part of *-u-boot.dtsi files.
-> > >
-> > > My only other suggestion here is to mention that this should be set i=
-n
-> > > Kconfig, for the SoC as a whole. So I believe that means that it
-> > > should be hidden, with no string for the 'bool':
-> > >
-> > >       bool  # Enable use of devicetree imported from Linux kernel rel=
-ease
-> >
-> > I think we can just keep prompting for it now, to make the transition
-> > easier, before this option just goes away in time, hopefully.
-> >
-> > > Also, this doesn't seem to work for me. Before this series I get thes=
-e
-> > > files when building firefly-rk3399:
-> > >
-> > > rk3399-eaidk-610.dtb            rk3399-khadas-edge-v.dtb
-> > > rk3399-orangepi.dtb        rk3399-rock-pi-4a.dtb
-> > > rk3399-evb.dtb                  rk3399-leez-p710.dtb
-> > > rk3399-pinebook-pro.dtb    rk3399-rock-pi-4c.dtb
-> > > rk3399-ficus.dtb                rk3399-nanopc-t4.dtb
-> > > rk3399-pinephone-pro.dtb   rk3399-rockpro64.dtb
-> > > rk3399-firefly.dtb              rk3399-nanopi-m4-2gb.dtb
-> > > rk3399pro-rock-pi-n10.dtb  rk3399-roc-pc.dtb
-> > > rk3399-gru-bob.dtb              rk3399-nanopi-m4b.dtb
-> > > rk3399-puma-haikou.dtb     rk3399-roc-pc-mezzanine.dtb
-> > > rk3399-gru-kevin.dtb            rk3399-nanopi-m4.dtb
-> > > rk3399-rock-4c-plus.dtb
-> > > rk3399-khadas-edge-captain.dtb  rk3399-nanopi-neo4.dtb    rk3399-rock=
--4se.dtb
-> > > rk3399-khadas-edge.dtb          rk3399-nanopi-r4s.dtb     rk3399-rock=
-960.dtb
-> > >
-> > > Afterwards I get this:
-> > >
-> > > make[3]: *** No rule to make target
-> > > 'dts/arch/arm64/rk3399-firefly.dtb', needed by 'dtbs'.  Stop.
-> > >
-> > > So I set this manually for that one board:
-> > >
-> > > CONFIG_DEFAULT_DEVICE_TREE=3D"rockchip/rk3399-firefly"
-> > >
-> > > and get:
-> > >
-> > > make[3]: *** No rule to make target
-> > > 'dts/arch/arm64/rockchip/rk3399-firefly.dtb', needed by 'dtbs'.  Stop=
-.
-> > >
-> > > I am not sure how to fix this, nor how this can be made to build all
-> > > the DTs for rk3399, as it does today.
-> >
-> > Looking at the patch for amlogic boards, you need to make the link to
-> > devicetree-rebasing inside dts/...
 >
-> OK, let me give up on rk3399 for now...that doesn't seem to work even
-> with the link.
+> On 1/4/24 13:15, Weizhao Ouyang wrote:
+> > On Thu, Jan 4, 2024 at 8:00=E2=80=AFPM Michal Simek <michal.simek@amd.c=
+om> wrote:
+> >>
+> >>
+> >>
+> >> On 1/4/24 12:46, Weizhao Ouyang wrote:
+> >>> Handle the return value of spi_flash_probe_bus_cs() to avoid sf probe
+> >>> crashes.
+> >>>
+> >>> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
+> >>> ---
+> >>>    cmd/sf.c | 5 +++--
+> >>>    1 file changed, 3 insertions(+), 2 deletions(-)
+> >>>
+> >>> diff --git a/cmd/sf.c b/cmd/sf.c
+> >>> index 730996c02b..e3866899f6 100644
+> >>> --- a/cmd/sf.c
+> >>> +++ b/cmd/sf.c
+> >>> @@ -135,8 +135,9 @@ static int do_spi_flash_probe(int argc, char *con=
+st argv[])
+> >>>        }
+> >>>        flash =3D NULL;
+> >>>        if (use_dt) {
+> >>> -             spi_flash_probe_bus_cs(bus, cs, &new);
+> >>> -             flash =3D dev_get_uclass_priv(new);
+> >>> +             ret =3D spi_flash_probe_bus_cs(bus, cs, &new);
+> >>
+> >> if (ret)
+> >>          return ret;
+> >>
+> >> don't you want to rather propagate that error?
+> >>
+> >
+> > Well, since the spi_flash is empty, the following code will
+> > print the error message and return.
+>
+> And you return 0 which means everything is fine. But is everything fine i=
+n this
+> case? Or do you want to see the error?
+>
+> This is command it means you can simply use && and if previous command su=
+cceed
+> you can call something else.
+>
 
-I went ahead to debug this rk3399 issue. It turned out to be a subtle
-Makefile dependency corner case that I missed in v3. Following change
-should fix the issue, I will incorporate it in v4. However, while
-switching rk3399 to upstream DT I noticed many gaps from upstream DT,
-one that occured to me was difference in clk id SCLK_DDRCLK (U-Boot)
-vs SCLK_DDRC (upstream DT).
+Hi Michal,
 
-diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-index bdc1da43e7a..9526eb073f1 100644
---- a/scripts/Makefile.lib
-+++ b/scripts/Makefile.lib
-@@ -358,7 +359,7 @@ ifdef CONFIG_EFI_CAPSULE_AUTHENTICATE
- dtsi_include_list +=3D $(capsule_esl_dtsi)
- endif
+Please check the code that follows this commit snippet:
 
--dtsi_include_list_deps =3D $(addprefix $(obj)/,$(subst
-$(quote),,$(dtsi_include_list)))
-+dtsi_include_list_deps =3D $(addprefix $(u_boot_dtsi_loc)/,$(subst
-$(quote),,$(dtsi_include_list)))
+if (!flash) {
+    printf("Failed to initialize SPI flash at %u:%u (error %d)\n",
+        bus, cs, ret);
+    return 1;
+}
 
- ifneq ($(CHECK_DTBS),)
- DT_CHECKER ?=3D dt-validate
+it will print the error and return 1 as the return value.
 
--Sumit
+BR,
+Weizhao
