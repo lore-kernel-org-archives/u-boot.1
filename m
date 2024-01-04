@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09745C47074
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:15:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49033C47079
+	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 15:15:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F2C9879F0;
-	Thu,  4 Jan 2024 16:12:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 19DBB87A0A;
+	Thu,  4 Jan 2024 16:12:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oJI5g8gk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ErOZmUeU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1C69879AB; Thu,  4 Jan 2024 16:12:35 +0100 (CET)
-Received: from mail-il1-x141.google.com (mail-il1-x141.google.com
- [IPv6:2607:f8b0:4864:20::141])
+ id 808F7879AB; Thu,  4 Jan 2024 16:12:39 +0100 (CET)
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0068879DC
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:12:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F2A40879E4
+ for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 16:12:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x141.google.com with SMTP id
- e9e14a558f8ab-35fff22678eso1971065ab.3
- for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 07:12:11 -0800 (PST)
+Received: by mail-io1-xd2d.google.com with SMTP id
+ ca18e2360f4ac-7bb0af58134so27970339f.3
+ for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 07:12:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704381126; x=1704985926; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1704381129; x=1704985929; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EtkAuzlpI7tYlx9G07pos73/36A6fuSXmPkFXvZeMS8=;
- b=oJI5g8gkuu9dyt25irkg8xeEO2lSkByHx72KqmysAkWiOmteLSHLg4IOTIXKNi/Mwa
- wfX4uL7riE0N+NI5yUV/Jl9tb6bU+K6m+r00tQHUfzkMmE4XpkfvnG2C+jF+SWXxdpub
- uQYLR2lLMKj7laqp1ICjCqlXGwL+zNxxNzcEY=
+ bh=IjIsIQEuTVNW370g0hsTvPEuHNQ0mYcMS4YRQeDoxMs=;
+ b=ErOZmUeUTfhhdfaorD4cfSeqILFOoyXVxKp8Lbo9JZte3N+DTB0SMP7MJ52D4sxAB4
+ ZDHgQ3GFBMyuu361bZN32zNAocsn4Opbuu6ttQqn5W5cN1ivWsbrHb4niaf+IOP6EOO5
+ KOW82MkwJg+FpdGDqpohA841BCI3hV5bRVxSc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704381126; x=1704985926;
+ d=1e100.net; s=20230601; t=1704381129; x=1704985929;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EtkAuzlpI7tYlx9G07pos73/36A6fuSXmPkFXvZeMS8=;
- b=NZgxXXnfrre8zq7bFEr7X8J9aC0sm3gMdBVnHoDFYV2NHMZ5NnCkZS3tZxlGdxtyL5
- OsBTM9OOxPPkAIPHxisv2raf+xsxz9GFzjENY4PM8hQFzRCOuDo/RmBO22uCZJCLK7OO
- 1pylPDQvT93zmXtIq/DToQ8yFAD1oIj/P1ovb/Pu4wfSVbKuZgz4YuOB7abxteJTcZ/Y
- WLIU2xhDxdzxTVg2LUKhyjd4Q2FLmLuIAu8rrnp/vcgoEFAoHLvzewqWRCL7g4qLUgr/
- BO3IQ8g9svugxCkdL1OF3FgsClaembS97vMwVKUVEf8ETF9y0vCOVZcIcfsZS3cIjaOe
- 7RJA==
-X-Gm-Message-State: AOJu0Yxzld/IsLdAY9UHE175YJ6St7Wuddxl8wzCLrRZ4b92HtSZbkha
- ekKEl2FheNO6x8o1DNDFoQH11yFTB/pSydUU5RDGp4k9m2PQJDE=
-X-Google-Smtp-Source: AGHT+IF6bVR87u5lAt0WeAixGnFaShDY7qrTwB54h/nX0wByggp0SNFYLa+OXy2rqlBf6uV93V6TPw==
-X-Received: by 2002:a05:6e02:1aa5:b0:35d:a39f:8ff9 with SMTP id
- l5-20020a056e021aa500b0035da39f8ff9mr868645ilv.11.1704381126283; 
- Thu, 04 Jan 2024 07:12:06 -0800 (PST)
+ bh=IjIsIQEuTVNW370g0hsTvPEuHNQ0mYcMS4YRQeDoxMs=;
+ b=rA5U4j146D2sFr9BGq+fdbq7Jq67OQb9d2Kez5hCD9xWC5mxXNvpIROid50YYtmgRy
+ 3HegalJzY2Q56P8yX00NgQIiiKGRSpIx2QQpNBIPrcp9Buu+mRIjGn+C/3bTXvuiyOQ7
+ qYOLVzHlr4rXfV1IqYNLub3P6XOJXalwofiDjxS2d/IGE4JzkmygEz3uEB4WG3/paRDu
+ CojmSvVDVsM/Q/4RV4ZkpVm/0d8J4NmoQ6K0Spoa2q9UgOG+gVukY4UWnoKLm7CwNDf4
+ js6FXJkzUcX8O4tDJFWDUgkZK7K9AF4RCxqZ3mnx/UnkePXF/7lkhFNTk40kGOU6T0Dw
+ AlLQ==
+X-Gm-Message-State: AOJu0Ywdi67tF04C4rN+++YQjZX7ElzjTAi3zu7n5YUYC42F1glUakPP
+ eggh+0NHXAaNqdVV5+MX6YZT7AZto7CjoRbnTsSHrqt87FFA
+X-Google-Smtp-Source: AGHT+IFLUZdPKzM+rP3u3LZS40vEN1A/RBwpPs19cx+5NZPoQ6cs/qomBxxT+j0AIZLu3jzyG02KNw==
+X-Received: by 2002:a05:6e02:2163:b0:35f:b0d1:985b with SMTP id
+ s3-20020a056e02216300b0035fb0d1985bmr817797ilv.3.1704381129467; 
+ Thu, 04 Jan 2024 07:12:09 -0800 (PST)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- cv4-20020a056e023b8400b0035fb79100cesm9260742ilb.59.2024.01.04.07.12.05
+ cv4-20020a056e023b8400b0035fb79100cesm9260742ilb.59.2024.01.04.07.12.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jan 2024 07:12:06 -0800 (PST)
+ Thu, 04 Jan 2024 07:12:09 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Bin Meng <bmeng.cn@gmail.com>, Anatolij Gustschin <agust@denx.de>
-Subject: [PATCH v2 08/19] expo: Support menu-item values in cedit
-Date: Thu,  4 Jan 2024 08:11:41 -0700
-Message-Id: <20240104151152.697855-9-sjg@chromium.org>
+Subject: [PATCH v2 12/19] x86: coreboot: Enable unit tests
+Date: Thu,  4 Jan 2024 08:11:45 -0700
+Message-Id: <20240104151152.697855-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240104151152.697855-1-sjg@chromium.org>
 References: <20240104151152.697855-1-sjg@chromium.org>
@@ -88,353 +88,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the cedit read/write functions to support menu items with
-values.
+Enable unit tests so we can run command-line tests in coreboot. Enable
+console recording, with enough space for the 'cbsysinfo' command. Add
+to the pre-relocation malloc() space to make room for this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/cedit.c                    | 148 +++++++++++++++++++++-----------
- boot/scene_menu.c               |   2 +-
- doc/usage/cmd/cedit.rst         |  15 +++-
- test/boot/cedit.c               |   8 +-
- test/boot/files/expo_layout.dts |   4 +-
- 5 files changed, 117 insertions(+), 60 deletions(-)
+ configs/coreboot_defconfig | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/boot/cedit.c b/boot/cedit.c
-index cc1d5b76357..7fc800940fb 100644
---- a/boot/cedit.c
-+++ b/boot/cedit.c
-@@ -294,11 +294,49 @@ static int get_cur_menuitem_text(const struct scene_obj_menu *menu,
- 	return 0;
- }
- 
-+/**
-+ * get_cur_menuitem_val() - Get the value of a menu's current item
-+ *
-+ * Obtains the value of the current item in the menu. If no value, then
-+ * enumerates the items of a menu (0, 1, 2) and returns the sequence number of
-+ * the currently selected item. If the first item is selected, this returns 0;
-+ * if the second, 1; etc.
-+ *
-+ * @menu: Menu to check
-+ * @valp: Returns current-item value / sequence number
-+ * Return: 0 on success, else -ve error value
-+ */
-+static int get_cur_menuitem_val(const struct scene_obj_menu *menu, int *valp)
-+{
-+	const struct scene_menitem *mi;
-+	int seq;
-+
-+	seq = 0;
-+	list_for_each_entry(mi, &menu->item_head, sibling) {
-+		if (mi->id == menu->cur_item_id) {
-+			*valp = mi->value == INT_MAX ? seq : mi->value;
-+			return 0;
-+		}
-+		seq++;
-+	}
-+
-+	return log_msg_ret("nf", -ENOENT);
-+}
-+
-+/**
-+ * write_dt_string() - Write a string to the devicetree, expanding if needed
-+ *
-+ * If this fails, it tries again after expanding the devicetree a little
-+ *
-+ * @buf: Buffer containing the devicetree
-+ * @name: Property name to use
-+ * @str: String value
-+ * Return: 0 if OK, -EFAULT if something went horribly wrong
-+ */
- static int write_dt_string(struct abuf *buf, const char *name, const char *str)
- {
- 	int ret, i;
- 
--	/* write the text of the current item */
- 	ret = -EAGAIN;
- 	for (i = 0; ret && i < 2; i++) {
- 		ret = fdt_property_string(abuf_data(buf), name, str);
-@@ -316,6 +354,38 @@ static int write_dt_string(struct abuf *buf, const char *name, const char *str)
- 	return 0;
- }
- 
-+/**
-+ * write_dt_u32() - Write an int to the devicetree, expanding if needed
-+ *
-+ * If this fails, it tries again after expanding the devicetree a little
-+ *
-+ * @buf: Buffer containing the devicetree
-+ * @name: Property name to use
-+ * @lva: Integer value
-+ * Return: 0 if OK, -EFAULT if something went horribly wrong
-+ */
-+static int write_dt_u32(struct abuf *buf, const char *name, uint val)
-+{
-+	int ret, i;
-+
-+	/* write the text of the current item */
-+	ret = -EAGAIN;
-+	for (i = 0; ret && i < 2; i++) {
-+		ret = fdt_property_u32(abuf_data(buf), name, val);
-+		if (!i) {
-+			ret = check_space(ret, buf);
-+			if (ret)
-+				return log_msg_ret("rs2", -ENOMEM);
-+		}
-+	}
-+
-+	/* this should not happen */
-+	if (ret)
-+		return log_msg_ret("str", -EFAULT);
-+
-+	return 0;
-+}
-+
- static int h_write_settings(struct scene_obj *obj, void *vpriv)
- {
- 	struct cedit_iter_priv *priv = vpriv;
-@@ -340,23 +410,21 @@ static int h_write_settings(struct scene_obj *obj, void *vpriv)
- 		const struct scene_obj_menu *menu;
- 		const char *str;
- 		char name[80];
--		int i;
-+		int val;
- 
- 		/* write the ID of the current item */
- 		menu = (struct scene_obj_menu *)obj;
--		ret = -EAGAIN;
--		for (i = 0; ret && i < 2; i++) {
--			ret = fdt_property_u32(abuf_data(buf), obj->name,
--					       menu->cur_item_id);
--			if (!i) {
--				ret = check_space(ret, buf);
--				if (ret)
--					return log_msg_ret("res", -ENOMEM);
--			}
--		}
--		/* this should not happen */
-+		ret = write_dt_u32(buf, obj->name, menu->cur_item_id);
- 		if (ret)
--			return log_msg_ret("wrt", -EFAULT);
-+			return log_msg_ret("wrt", ret);
-+
-+		snprintf(name, sizeof(name), "%s-value", obj->name);
-+		ret = get_cur_menuitem_val(menu, &val);
-+		if (ret < 0)
-+			return log_msg_ret("cur", ret);
-+		ret = write_dt_u32(buf, name, val);
-+		if (ret)
-+			return log_msg_ret("wr2", ret);
- 
- 		ret = get_cur_menuitem_text(menu, &str);
- 		if (ret)
-@@ -522,6 +590,14 @@ static int h_write_settings_env(struct scene_obj *obj, void *vpriv)
- 		ret = env_set(name, str);
- 		if (ret)
- 			return log_msg_ret("st2", ret);
-+
-+		ret = get_cur_menuitem_val(menu, &val);
-+		if (ret < 0)
-+			return log_msg_ret("cur", ret);
-+		snprintf(name, sizeof(name), "c.%s-value", obj->name);
-+		if (priv->verbose)
-+			printf("%s=%d\n", name, val);
-+
- 		break;
- 	case SCENEOBJT_TEXTLINE: {
- 		const struct scene_obj_textline *tline;
-@@ -625,43 +701,12 @@ int cedit_read_settings_env(struct expo *exp, bool verbose)
- 	return 0;
- }
- 
--/**
-- * get_cur_menuitem_seq() - Get the sequence number of a menu's current item
-- *
-- * Enumerates the items of a menu (0, 1, 2) and returns the sequence number of
-- * the currently selected item. If the first item is selected, this returns 0;
-- * if the second, 1; etc.
-- *
-- * @menu: Menu to check
-- * Return: Sequence number on success, else -ve error value
-- */
--static int get_cur_menuitem_seq(const struct scene_obj_menu *menu)
--{
--	const struct scene_menitem *mi;
--	int seq, found;
--
--	seq = 0;
--	found = -1;
--	list_for_each_entry(mi, &menu->item_head, sibling) {
--		if (mi->id == menu->cur_item_id) {
--			found = seq;
--			break;
--		}
--		seq++;
--	}
--
--	if (found == -1)
--		return log_msg_ret("nf", -ENOENT);
--
--	return found;
--}
--
- static int h_write_settings_cmos(struct scene_obj *obj, void *vpriv)
- {
- 	const struct scene_obj_menu *menu;
- 	struct cedit_iter_priv *priv = vpriv;
- 	int val, ret;
--	uint i, seq;
-+	uint i;
- 
- 	if (obj->type != SCENEOBJT_MENU || obj->id < EXPOID_BASE_ID)
- 		return 0;
-@@ -669,11 +714,10 @@ static int h_write_settings_cmos(struct scene_obj *obj, void *vpriv)
- 	menu = (struct scene_obj_menu *)obj;
- 	val = menu->cur_item_id;
- 
--	ret = get_cur_menuitem_seq(menu);
-+	ret = get_cur_menuitem_val(menu, &val);
- 	if (ret < 0)
- 		return log_msg_ret("cur", ret);
--	seq = ret;
--	log_debug("%s: seq=%d\n", menu->obj.name, seq);
-+	log_debug("%s: val=%d\n", menu->obj.name, val);
- 
- 	/* figure out where to place this item */
- 	if (!obj->bit_length)
-@@ -681,11 +725,11 @@ static int h_write_settings_cmos(struct scene_obj *obj, void *vpriv)
- 	if (obj->start_bit + obj->bit_length > CMOS_MAX_BITS)
- 		return log_msg_ret("bit", -E2BIG);
- 
--	for (i = 0; i < obj->bit_length; i++, seq >>= 1) {
-+	for (i = 0; i < obj->bit_length; i++, val >>= 1) {
- 		uint bitnum = obj->start_bit + i;
- 
- 		priv->mask[CMOS_BYTE(bitnum)] |= 1 << CMOS_BIT(bitnum);
--		if (seq & 1)
-+		if (val & 1)
- 			priv->value[CMOS_BYTE(bitnum)] |= BIT(CMOS_BIT(bitnum));
- 		log_debug("bit %x %x %x\n", bitnum,
- 			  priv->mask[CMOS_BYTE(bitnum)],
-@@ -788,7 +832,7 @@ static int h_read_settings_cmos(struct scene_obj *obj, void *vpriv)
- 
- 	/* update the current item */
- 	log_debug("look for menuitem value %d in menu %d\n", val, menu->obj.id);
--	mi = scene_menuitem_find_seq(menu, val);
-+	mi = scene_menuitem_find_val(menu, val);
- 	if (!mi)
- 		return log_msg_ret("seq", -ENOENT);
- 
-diff --git a/boot/scene_menu.c b/boot/scene_menu.c
-index 002821ec1f5..86f5fd88804 100644
---- a/boot/scene_menu.c
-+++ b/boot/scene_menu.c
-@@ -70,7 +70,7 @@ struct scene_menitem *scene_menuitem_find_val(const struct scene_obj_menu *menu,
- 
- 	i = 0;
- 	list_for_each_entry(item, &menu->item_head, sibling) {
--		if (item->value == val)
-+		if (item->value == INT_MAX ? val == i : item->value == val)
- 			return item;
- 		i++;
- 	}
-diff --git a/doc/usage/cmd/cedit.rst b/doc/usage/cmd/cedit.rst
-index f415b48699e..0f0cc26e74b 100644
---- a/doc/usage/cmd/cedit.rst
-+++ b/doc/usage/cmd/cedit.rst
-@@ -104,8 +104,10 @@ That results in::
-     / {
-         cedit-values {
-             cpu-speed = <0x00000006>;
-+            cpu-speed-value = <0x00000003>;
-             cpu-speed-str = "2 GHz";
-             power-loss = <0x0000000a>;
-+            power-loss-value = <0x00000000>;
-             power-loss-str = "Always Off";
-         };
-     }
-@@ -115,16 +117,23 @@ That results in::
- This shows settings being stored in the environment::
- 
-     => cedit write_env -v
--    c.cpu-speed=7
-+    c.cpu-speed=11
-     c.cpu-speed-str=2.5 GHz
--    c.power-loss=12
--    c.power-loss-str=Memory
-+    c.cpu-speed-value=3
-+    c.power-loss=14
-+    c.power-loss-str=Always Off
-+    c.power-loss-value=0
-+    c.machine-name=my-machine
-+    c.cpu-speed=11
-+    c.power-loss=14
-+    c.machine-name=my-machine
-     => print
-     ...
-     c.cpu-speed=6
-     c.cpu-speed-str=2 GHz
-     c.power-loss=10
-     c.power-loss-str=Always Off
-+    c.machine-name=my-machine
-     ...
- 
-     => cedit read_env -v
-diff --git a/test/boot/cedit.c b/test/boot/cedit.c
-index 37807f9a981..876503befe0 100644
---- a/test/boot/cedit.c
-+++ b/test/boot/cedit.c
-@@ -100,14 +100,16 @@ static int cedit_fdt(struct unit_test_state *uts)
- 
- 	ut_asserteq(ID_CPU_SPEED_2,
- 		    ofnode_read_u32_default(node, "cpu-speed", 0));
-+	ut_asserteq(3,
-+		    ofnode_read_u32_default(node, "cpu-speed-value", 0));
- 	ut_asserteq_str("2.5 GHz", ofnode_read_string(node, "cpu-speed-str"));
- 	ut_asserteq_str("my-machine", ofnode_read_string(node, "machine-name"));
- 
--	/* There should only be 5 properties */
-+	/* There should only be 7 properties */
- 	for (i = 0, ofnode_first_property(node, &prop); ofprop_valid(&prop);
- 	     i++, ofnode_next_property(&prop))
- 		;
--	ut_asserteq(5, i);
-+	ut_asserteq(7, i);
- 
- 	ut_assert_console_end();
- 
-@@ -156,8 +158,10 @@ static int cedit_env(struct unit_test_state *uts)
- 	ut_assertok(run_command("cedit write_env -v", 0));
- 	ut_assert_nextlinen("c.cpu-speed=11");
- 	ut_assert_nextlinen("c.cpu-speed-str=2.5 GHz");
-+	ut_assert_nextlinen("c.cpu-speed-value=3");
- 	ut_assert_nextlinen("c.power-loss=14");
- 	ut_assert_nextlinen("c.power-loss-str=Always Off");
-+	ut_assert_nextlinen("c.power-loss-value=0");
- 	ut_assert_nextlinen("c.machine-name=my-machine");
- 	ut_assert_console_end();
- 
-diff --git a/test/boot/files/expo_layout.dts b/test/boot/files/expo_layout.dts
-index ebe5adb27bb..9bc1e4950b9 100644
---- a/test/boot/files/expo_layout.dts
-+++ b/test/boot/files/expo_layout.dts
-@@ -40,10 +40,10 @@
- 					ID_CPU_SPEED_3>;
- 
- 				/* values for the menu items */
--				item-value = <(-1) 3 6>;
-+				item-value = <0 3 6>;
- 
- 				start-bit = <0x400>;
--				bit-length = <2>;
-+				bit-length = <3>;
- 			};
- 
- 			power-loss {
+diff --git a/configs/coreboot_defconfig b/configs/coreboot_defconfig
+index 7d744e9962a..5433a5ae0c2 100644
+--- a/configs/coreboot_defconfig
++++ b/configs/coreboot_defconfig
+@@ -1,6 +1,7 @@
+ CONFIG_X86=y
+ CONFIG_TEXT_BASE=0x1110000
+ CONFIG_SYS_MALLOC_LEN=0x2000000
++CONFIG_SYS_MALLOC_F_LEN=0x1000
+ CONFIG_NR_DRAM_BANKS=8
+ CONFIG_ENV_SIZE=0x1000
+ CONFIG_DEFAULT_DEVICE_TREE="coreboot"
+@@ -16,6 +17,8 @@ CONFIG_SHOW_BOOT_PROGRESS=y
+ CONFIG_USE_BOOTARGS=y
+ CONFIG_BOOTARGS="root=/dev/sdb3 init=/sbin/init rootwait ro"
+ CONFIG_BOOTCOMMAND="bootflow scan -l; if bootflow menu; then cls; bootflow boot; fi"
++CONFIG_CONSOLE_RECORD=y
++CONFIG_CONSOLE_RECORD_OUT_SIZE=0x1000
+ CONFIG_PRE_CONSOLE_BUFFER=y
+ CONFIG_SYS_CONSOLE_INFO_QUIET=y
+ CONFIG_LOG=y
+@@ -60,3 +63,4 @@ CONFIG_CONSOLE_SCROLL_LINES=5
+ CONFIG_CMD_DHRYSTONE=y
+ # CONFIG_GZIP is not set
+ CONFIG_SMBIOS_PARSER=y
++CONFIG_UNIT_TEST=y
 -- 
 2.34.1
 
