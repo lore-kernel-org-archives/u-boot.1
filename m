@@ -4,59 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 902B8C3DA6E
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jan 2024 19:12:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB010C3DA6E
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jan 2024 19:19:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4180871CF;
-	Fri,  5 Jan 2024 20:12:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 4CE5887967;
+	Fri,  5 Jan 2024 20:19:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="S2nK4jfH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kZqmmuar";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 417048787B; Fri,  5 Jan 2024 20:12:18 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 4D5BE8796E; Fri,  5 Jan 2024 20:19:17 +0100 (CET)
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8283787254
- for <u-boot@lists.denx.de>; Fri,  5 Jan 2024 20:12:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2A5218787B
+ for <u-boot@lists.denx.de>; Fri,  5 Jan 2024 20:19:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a28bd9ca247so199194366b.1
- for <u-boot@lists.denx.de>; Fri, 05 Jan 2024 11:12:14 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-6d9ac0521c6so223916b3a.0
+ for <u-boot@lists.denx.de>; Fri, 05 Jan 2024 11:19:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1704481934; x=1705086734;
- darn=lists.denx.de; 
+ d=gmail.com; s=20230601; t=1704482353; x=1705087153; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3X8yNZ9RcC+2Vpm/XMhWOlvG0Hr/meatcxW5AOY6NLw=;
- b=S2nK4jfHXcy0ZJPhpuKOscy6pWWhkR/x3v4v4bzbBMxEjfbnGDEUHPaT/VVW+fxyY0
- tHL0USQaOq42DnKaF3lLXy8cXlqEsHW53Q/CTU/LmfKSycKQ4LwGbi9Is/egVwwut1QF
- tJUu5lEYy8yW67NLQ58TegHtm2acXvgTjUe3U=
+ bh=jKmokWA6Lrj7KczgzuY+UNy5+L69reFVhDrGwLDMUzY=;
+ b=kZqmmuarDZImFnMBGNrpl2GJEJJKfD7/pDTd5BwAAwQfvRJsGmR60HZfQ+JfLCQNEH
+ 5ptJi7p7GPwTYw2O3V7M1kskFYxG1fhHz1eV4Y6JCw99wq96fyz/bP3UsMMGGfjA8ezs
+ pGziLfDeMTK8+Lxq/0AS8yp5iWEn/9HqFcP6wdsHdFv2bbmFWr0FSb5I7GSw/nFCXNoZ
+ 9v/wJ91J8XO9+6xpu7LDXvSscHUl0aUmwcw7CqC+CdNRgcnIVsDYE26FIH1JJdgq5beY
+ XZZkr3nKk8VvwZl9H7vYd3eyjWig4o9g6KZ6kjKKCRgz6WvneEMS/FzpxTnMovNZYet+
+ 6edA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704481934; x=1705086734;
+ d=1e100.net; s=20230601; t=1704482353; x=1705087153;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3X8yNZ9RcC+2Vpm/XMhWOlvG0Hr/meatcxW5AOY6NLw=;
- b=UoGIR/YMGoeFGC21J4dl7mVla3tfvvLbGewjCVolkvwev61zAK8FjtkiAYFwxeAgm6
- I5G/aAiLHbW3u9S5PSv712NbUFXVFOY+b2rpfjPC7wgfG7+7UzGaqgzJ8VXjcz139nyF
- yR7wmQAEVRbnrfB/b6pYf6arA3sIMjn9DHi4u9bm7W51abkLGhLO2mNssOFzeRQBIaEf
- xHE/eUiNvLokGYmTe9e2ukH/Am9TMHbBKNGVYmiAPM211D/bJ7xCF+zfsGfMjEAKuw4R
- PCgZBTgBjZSeuzpbLAbojv3GHlgx7ua00F9si9yZWJzMGaD83Qm0AuplpPLTin7MH9H2
- Ha4A==
-X-Gm-Message-State: AOJu0YwmRoU0KPgdFTvVjoT9ddXA5ZaXUFETAmP0W67TdkvCQeGGczv/
- jFyODsrjFP0nnmLUAxc8r1q5J91wsMUvj1P43FoJ/BeMse2srA==
-X-Google-Smtp-Source: AGHT+IHGGR1ZpPihou8FRjF4vgyVWbrubIlKq3ro3/kkH0buA8w+e3WhV1FL5H7HdJmyoXbDbopcM1vvSFlaje+rQCg=
-X-Received: by 2002:a17:907:50a3:b0:a28:31aa:5879 with SMTP id
- fv35-20020a17090750a300b00a2831aa5879mr1108132ejc.96.1704481933895; Fri, 05
- Jan 2024 11:12:13 -0800 (PST)
+ bh=jKmokWA6Lrj7KczgzuY+UNy5+L69reFVhDrGwLDMUzY=;
+ b=jxy0VkAF+SvKKBRixCikaXiQ2GQoa4Zd4vrwQdrXDA+gUlA3JRaYRSEZoEnhBLaFqa
+ X6qDyEULx6ECXXg9IdrVfpk+qOExF7kUILTn3Rj8zgumXiMUGibM6iTSUjsPwBA6ZykY
+ 443m4nKmMRFqk/WzUmri3oajvBKv3JY7EnPRuY8tzM7q57YySKo4NGarCjGYKrv0Zwjs
+ +7qQagzLxvpmc+sGTAzf2iz52GDyjQ01OPTziTJyF4E0iZBYlqc7HC4egUAcR53qwTYm
+ RPc3NZnyJVOTjwheSbLbdm4168Ievixrm99tiQUUD65Mxk+rIqj3HzZiUiyP8G4Nxt4x
+ wuRw==
+X-Gm-Message-State: AOJu0YwtYDtLtAgiZKStZXTrBkL5uCGP6hoOsG5YjZRDatRpiB1klbdB
+ 6b0iastCGgN6X9t0YkizZ7d4mERVXkJxnwMMFjw=
+X-Google-Smtp-Source: AGHT+IHiX7I09mIOszu03MEeaftcetaJ2k+/+cAwZneaXvV0H8BK6nFjzg0MmzioN/PnRfUtWhxcYHD8rWEBl0PCHS0=
+X-Received: by 2002:a05:6a20:ae18:b0:199:3815:307 with SMTP id
+ dp24-20020a056a20ae1800b0019938150307mr2225049pzb.4.1704482353462; Fri, 05
+ Jan 2024 11:19:13 -0800 (PST)
 MIME-Version: 1.0
 References: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
  <CAOMZO5C+Pvv429sHPyKuznyvdPv217q=a8uTeNNTSyVmn1EoXw@mail.gmail.com>
@@ -67,14 +69,13 @@ References: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
  <CAOMZO5C4qF4A8uLdRfMeDVosA2NLNU=+WvidGR7QGeSyYJOTmw@mail.gmail.com>
  <CALG-KHwHxdd_7wz6L+6VDGS04LggyqhTZUoqgV+euSqPn9D2KQ@mail.gmail.com>
 In-Reply-To: <CALG-KHwHxdd_7wz6L+6VDGS04LggyqhTZUoqgV+euSqPn9D2KQ@mail.gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Fri, 5 Jan 2024 20:12:00 +0100
-Message-ID: <CAOf5uwmDZ5DtAhe-GauhuyYwSSXQnavVNfzaJkdSG3TWE1N2FA@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 5 Jan 2024 16:19:01 -0300
+Message-ID: <CAOMZO5C02Fwe0ci1RW64E2Gxi4BbdDfhDAJx4ycczE_6oW-oxg@mail.gmail.com>
 Subject: Re: inconsistent wget behavior
 To: Paul Liu <paul.liu@linaro.org>
-Cc: Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Tim Harvey <tharvey@gateworks.com>, Marek Vasut <marex@denx.de>,
- u-boot <u-boot@lists.denx.de>, 
+Cc: Tom Rini <trini@konsulko.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Marek Vasut <marex@denx.de>, u-boot <u-boot@lists.denx.de>, 
  Duncan Hare <DuncanCHare@yahoo.com>, Simon Glass <sjg@chromium.org>, 
  Christian Gmeiner <christian.gmeiner@gmail.com>,
  Joe Hershberger <joe.hershberger@ni.com>, 
@@ -97,22 +98,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Hi Paul,
 
-On Fri, Jan 5, 2024 at 7:57=E2=80=AFPM Paul Liu <paul.liu@linaro.org> wrote=
+On Fri, Jan 5, 2024 at 3:57=E2=80=AFPM Paul Liu <paul.liu@linaro.org> wrote=
 :
 >
 > Hi Fabio,
 >
-> I tried to investigate this by U-boot sandbox. But it seems to me that I
-> cannot reproduce this issue.
-> I put a file on localhost apache server and tried to download it from
-> localhost.
+> I tried to investigate this by U-boot sandbox. But it seems to me that I =
+cannot reproduce this issue.
+> I put a file on localhost apache server and tried to download it from loc=
+alhost.
 > I might need a more persistent way to reproduce this bug.
->
 
-Can you reproduce with dcache off?
+Do you still have access to the imx8mm-cl-iot-gate board?
 
-Where are the patches to test?
+I am sure you would be able to reproduce it with it.
 
-Michael
+Thanks
