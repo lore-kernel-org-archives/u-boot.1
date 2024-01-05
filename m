@@ -4,82 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0C2DC47074
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jan 2024 01:37:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 405C7C3DA6E
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jan 2024 03:41:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B897C876F3;
-	Fri,  5 Jan 2024 02:37:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4596587702;
+	Fri,  5 Jan 2024 04:41:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="daEe+6ir";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uvhcOpv7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FCA987756; Fri,  5 Jan 2024 02:37:14 +0100 (CET)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 517D987702; Fri,  5 Jan 2024 04:41:13 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 057C887575
- for <u-boot@lists.denx.de>; Fri,  5 Jan 2024 02:37:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AF91876C4
+ for <u-boot@lists.denx.de>; Fri,  5 Jan 2024 04:41:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-680d1908fb2so4905216d6.3
- for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 17:37:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1704418631; x=1705023431; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AmrdpnMgkA/LOYkPGRYxY2cQLSow8Fc1xtaaO6+oxbM=;
- b=daEe+6irVJUE5BqPSgRM8ZZ5J3sdMOovNZaH87rMi0E4tPzgthS9ZhFtrI11UK8Trs
- pfyFwFsV/txtRhn41r9yXu8pr7K2iYNDIPe7mQdclf7tS0Z9/k9c0Fa70q6mJl2T9FKQ
- 0NhfjdwxK2L5GtUNgSFbIaWiYyRXfwAdRStxg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704418631; x=1705023431;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=AmrdpnMgkA/LOYkPGRYxY2cQLSow8Fc1xtaaO6+oxbM=;
- b=OvYcHQ1gNKbgLSwU6SzD8Gkt5Qmg1UK1570CYloELUWOl7a6hOFbOwKCiM+p8McAwl
- Og/bgFlwjVKCdAZiKQih/2IWRJ0At2AxuzAHDXULlEo3c2mn8RMUmK9o8reU5UA3rD1j
- Bu8zmaQncfzoqVrLeeboCGR5CVFODOFhK8Rpu0bLVFWI1gK06bZSXRCJl3PoMTQVxMRD
- f+f55764Ey71hpyY7zjQgcPEQNuNa0iszuym+1cmaAX8cfMnEjYaPxgI3EW4/5lRMeEk
- zxPLJb0w0x60Ip9+9xUQ3/FzGEnXrw78PKRuc5zFFEiPjuv/Cb1CAlgCcvmAb7NAbdtg
- irhA==
-X-Gm-Message-State: AOJu0YzT/tjflgaAEqjqeQamF+eXzgEZjbM5jEm/tBXT/K09Qr6wOXAs
- C13fpQB+xITXrI3CpZjAkFG2ZSlPUUfRoA==
-X-Google-Smtp-Source: AGHT+IHyO2+pyK/8oXX7zzzGfM4Bo3JTLdRtuML43bM9chm9MA0XLIXMJXf2LYWZesRuXp06w9D1HQ==
-X-Received: by 2002:a05:6214:1c45:b0:67f:c4ab:dd with SMTP id
- if5-20020a0562141c4500b0067fc4ab00ddmr1588256qvb.70.1704418630771; 
- Thu, 04 Jan 2024 17:37:10 -0800 (PST)
-Received: from [127.0.1.1]
- (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
- [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
- jh22-20020a0562141fd600b0067f9ab3564asm234573qvb.68.2024.01.04.17.37.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jan 2024 17:37:10 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
-Cc: u-boot@lists.denx.de, Udit Kumar <u-kumar1@ti.com>, 
- Praneeth Bajjuri <praneeth@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, 
- Nishanth Menon <nm@ti.com>, Thomas Richard <thomas.richard@bootlin.com>, 
- Gregory CLEMENT <gregory.clement@bootlin.com>
-In-Reply-To: <20231229-binman-firewalling-v7-0-47ed4af303fe@ti.com>
-References: <20231229-binman-firewalling-v7-0-47ed4af303fe@ti.com>
-Subject: Re: [PATCH v7 0/9] ATF and OP-TEE Firewalling for K3 devices.
-Message-Id: <170441862950.1760516.17763206127183556188.b4-ty@konsulko.com>
-Date: Thu, 04 Jan 2024 20:37:09 -0500
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4053ewK8088116;
+ Thu, 4 Jan 2024 21:40:58 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1704426058;
+ bh=Ua0RSaTLn6PPmJv/LfXU1lRY1ASIZ2Zk68UZLcbrJNM=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=uvhcOpv7VfdodmktNF/XjDJHJ3XDaFtAVOSyN1ufcjbPgdz+ZBTootxYVfBBPUuA/
+ NxIJ07OmiyP9edQxMVZbzJJq86L4EpkNxO0gIDpWvQ3m8v3PBo5umIgafwiJfhu1Pn
+ NxvvPhMUObHgqtH3kckphvMmc75iWzBlpB1OvymI=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4053ewh9118478
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 4 Jan 2024 21:40:58 -0600
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 4
+ Jan 2024 21:40:58 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 4 Jan 2024 21:40:58 -0600
+Received: from [172.24.227.36]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4053esTc102376;
+ Thu, 4 Jan 2024 21:40:54 -0600
+Message-ID: <a96db127-5880-42b1-8736-518356696314@ti.com>
+Date: Fri, 5 Jan 2024 09:10:53 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] tools: binman: ti_board_cfg: Check for linting
+ problems
+To: Nishanth Menon <nm@ti.com>
+CC: <sjg@chromium.org>, <vigneshr@ti.com>, <bb@ti.com>, <m-chawdhry@ti.com>,
+ <alpernebiyasak@gmail.com>, <u-boot@lists.denx.de>, <vishalm@ti.com>,
+ <jonas@kwiboo.se>, <sughosh.ganu@linaro.org>,
+ <lukas.funke@weidmueller.com>, <fr0st61te@gmail.com>, <u-kumar1@ti.com>
+References: <20240104075357.638983-1-n-francis@ti.com>
+ <20240104075357.638983-3-n-francis@ti.com>
+ <20240104152140.hn5rblwcngunir3g@comply>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20240104152140.hn5rblwcngunir3g@comply>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.4
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,24 +86,143 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 29 Dec 2023 16:16:24 +0530, Manorit Chawdhry wrote:
+Hi Nishanth
 
-> K3 devices have firewalls that are used to prevent illegal accesses to
-> memory regions that are deemed secure. The series prevents the illegal
-> accesses to ATF and OP-TEE regions that are present in different K3
-> devices.
+On 04/01/24 20:51, Nishanth Menon wrote:
+> On 13:23-20240104, Neha Malcom Francis wrote:
+>> Use yamllint for checking whether YAML configuration files are adhering
+>> to default yamllint rules.
+>>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> Suggested-by: Nishanth Menon <nm@ti.com>
+>> ---
+>>   tools/binman/etype/ti_board_config.py        |  5 +++++
+>>   tools/binman/ftest.py                        |  6 ++++++
+>>   tools/binman/test/323_ti_board_cfg_phony.dts | 14 ++++++++++++++
+>>   tools/binman/test/yaml/config.yaml           |  4 ++--
+>>   tools/binman/test/yaml/config_phony.yaml     | 18 ++++++++++++++++++
+>>   5 files changed, 45 insertions(+), 2 deletions(-)
+>>   create mode 100644 tools/binman/test/323_ti_board_cfg_phony.dts
+>>   create mode 100644 tools/binman/test/yaml/config_phony.yaml
+>>
+>> diff --git a/tools/binman/etype/ti_board_config.py b/tools/binman/etype/ti_board_config.py
+>> index 94f894c281..2c3bb8f7b5 100644
+>> --- a/tools/binman/etype/ti_board_config.py
+>> +++ b/tools/binman/etype/ti_board_config.py
+>> @@ -9,6 +9,7 @@
+>>   import os
+>>   import struct
+>>   import yaml
+>> +import yamllint
 > 
-> AM62X, AM62AX and AM64X are currently in hold due to some firewall
-> configurations that our System Controller (TIFS) needs to handle.
-> The devices that are not configured with the firewalling nodes will not
-> be affected and can continue to work fine until the firewall nodes are
-> added so will be a non-blocking merge.
+> Don't you need to add this to requirements.txt?
 > 
-> [...]
 
-Applied to u-boot/next, thanks!
+Yes I do... thanks for catching that!
+
+>>   
+>>   from collections import OrderedDict
+>>   from jsonschema import validate
+>> @@ -18,6 +19,7 @@ from binman.entry import Entry
+>>   from binman.etype.section import Entry_section
+>>   from dtoc import fdt_util
+>>   from u_boot_pylib import tools
+>> +from yamllint import config
+>>   
+>>   BOARDCFG = 0xB
+>>   BOARDCFG_SEC = 0xD
+>> @@ -244,6 +246,9 @@ class Entry_ti_board_config(Entry_section):
+>>               with open(self._schema_file, 'r') as sch:
+>>                   self.schema_yaml = yaml.safe_load(sch)
+>>   
+>> +            yaml_config = config.YamlLintConfig("extends: default")
+>> +            for p in yamllint.linter.run(open(self._config_file, "r"), yaml_config):
+>> +                self.Raise(f"Yamllint error: {p.line}: {p.rule}")
+>>               try:
+>>                   validate(self.file_yaml, self.schema_yaml)
+>>               except Exception as e:
+>> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+>> index a4ac520cbb..1fbb0fef1a 100644
+>> --- a/tools/binman/ftest.py
+>> +++ b/tools/binman/ftest.py
+>> @@ -7030,6 +7030,12 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+>>           data = self._DoReadFile('293_ti_board_cfg.dts')
+>>           self.assertEqual(TI_BOARD_CONFIG_DATA, data)
+>>   
+>> +    def testTIBoardConfigLint(self):
+>> +        """Test that an incorrectly linted config file would generate error"""
+>> +        with self.assertRaises(ValueError) as e:
+>> +            data = self._DoReadFile('323_ti_board_cfg_phony.dts')
+>> +        self.assertIn("Yamllint error", str(e.exception))
+>> +
+>>       def testTIBoardConfigCombined(self):
+>>           """Test that a schema validated combined board config file can be generated"""
+>>           data = self._DoReadFile('294_ti_board_cfg_combined.dts')
+>> diff --git a/tools/binman/test/323_ti_board_cfg_phony.dts b/tools/binman/test/323_ti_board_cfg_phony.dts
+>> new file mode 100644
+>> index 0000000000..441296de4f
+>> --- /dev/null
+>> +++ b/tools/binman/test/323_ti_board_cfg_phony.dts
+>> @@ -0,0 +1,14 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/dts-v1/;
+>> +
+>> +/ {
+>> +	#address-cells = <1>;
+>> +	#size-cells = <1>;
+>> +
+>> +	binman {
+>> +		ti-board-config {
+>> +			config = "yaml/config_phony.yaml";
+>> +			schema = "yaml/schema.yaml";
+>> +		};
+>> +	};
+>> +};
+>> diff --git a/tools/binman/test/yaml/config.yaml b/tools/binman/test/yaml/config.yaml
+>> index 5f799a6e3a..c2be32128b 100644
+>> --- a/tools/binman/test/yaml/config.yaml
+>> +++ b/tools/binman/test/yaml/config.yaml
+>> @@ -10,9 +10,9 @@ main-branch:
+>>       b: 0
+>>     arr: [0, 0, 0, 0]
+>>     another-arr:
+>> -    - #1
+>> +    -  # 1
+>>         c: 0
+>>         d: 0
+>> -    - #2
+>> +    -  # 2
+>>         c: 0
+>>         d: 0
+>> diff --git a/tools/binman/test/yaml/config_phony.yaml b/tools/binman/test/yaml/config_phony.yaml
+>> new file mode 100644
+>> index 0000000000..d76fcb3b82
+>> --- /dev/null
+>> +++ b/tools/binman/test/yaml/config_phony.yaml
+>> @@ -0,0 +1,18 @@
+>> +# SPDX-License-Identifier: GPL-2.0+
+>> +#
+>> +# Test config
+>> +#
+>> +---
+>> +
+>> +main-branch :
+>> +  obj :
+>> +    a : 0x0
+>> +    b: 0
+>> +  arr: [0, 0, 0, 0]
+>> +  another-arr:
+>> +    -  # 1
+>> +      c: 0
+>> +      d: 0
+>> +    -  # 2
+>> +      c: 0
+>> +      d: 0
+>> -- 
+>> 2.34.1
+>>
+> 
 
 -- 
-Tom
-
-
+Thanking You
+Neha Malcom Francis
