@@ -2,69 +2,69 @@ Return-Path: <u-boot-bounces@lists.denx.de>
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FC3EC47073
-	for <u-boot@archiver.kernel.org>; Thu,  4 Jan 2024 12:19:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0933C3DA6E
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jan 2024 13:16:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 659138796C;
-	Thu,  4 Jan 2024 13:19:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7FA9F8799C;
+	Fri,  5 Jan 2024 14:16:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="blorf4SM";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SaS2plCN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D3CB87917; Thu,  4 Jan 2024 08:54:13 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id B847A8798C; Fri,  5 Jan 2024 12:39:35 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9ED3E878FC
- for <u-boot@lists.denx.de>; Thu,  4 Jan 2024 08:54:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A782687720
+ for <u-boot@lists.denx.de>; Fri,  5 Jan 2024 12:39:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4047s7Bv037510;
- Thu, 4 Jan 2024 01:54:07 -0600
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 405BdRl4044001;
+ Fri, 5 Jan 2024 05:39:27 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704354847;
+ s=ti-com-17Q1; t=1704454767;
  bh=z5Jg+Xl1ib83aypzzW+KmgnpK/A9aVW2kCv2ui8Lv4M=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=blorf4SMvz6PFlQOVfaaQgOlauwH2H7PRLOZbw1Du47cPaHHTsgvnnzKnT+LO5Xeb
- uuLmBTf+B/iylNuxMaIeeQJLjS4SymkvHWJCUtrEXQwymei4/Vdho2daAYy3HUz7dr
- /ZqIW6EfjawBL4DLLgLeTHZIQLwtYxXtCvCE2w7E=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4047s7Qt009265
+ b=SaS2plCNeFBWJmWSfBQ0b9JeMZhlkNj54GYicNtLF1y4GBD48lDT9ChD0jCpl5MHg
+ XLPnldknC2pMhamJNMdwiq/tC96RXODYH9dMKU3aI9zSyJ6/K5CSVGuJ8xWVRj/PeQ
+ rxA/EPTD3xzsuV/qnWf796HAzR8WyqDrQjh0T5uY=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 405BdRD4014031
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 4 Jan 2024 01:54:07 -0600
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 4
- Jan 2024 01:54:06 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 5 Jan 2024 05:39:27 -0600
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 5
+ Jan 2024 05:39:26 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 4 Jan 2024 01:54:06 -0600
+ Frontend Transport; Fri, 5 Jan 2024 05:39:25 -0600
 Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4047rvgW099627;
- Thu, 4 Jan 2024 01:54:02 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 405BdHEH095665;
+ Fri, 5 Jan 2024 05:39:22 -0600
 From: Neha Malcom Francis <n-francis@ti.com>
 To: <sjg@chromium.org>, <vigneshr@ti.com>, <bb@ti.com>, <m-chawdhry@ti.com>,
  <alpernebiyasak@gmail.com>, <nm@ti.com>
 CC: <u-boot@lists.denx.de>, <vishalm@ti.com>, <jonas@kwiboo.se>,
  <sughosh.ganu@linaro.org>, <lukas.funke@weidmueller.com>,
  <fr0st61te@gmail.com>, <u-kumar1@ti.com>, <n-francis@ti.com>
-Subject: [PATCH 1/2] board: ti: *-cfg.yaml: Adhere to yamllint rules
-Date: Thu, 4 Jan 2024 13:23:56 +0530
-Message-ID: <20240104075357.638983-2-n-francis@ti.com>
+Subject: [PATCH v2 1/2] board: ti: *-cfg.yaml: Adhere to yamllint rules
+Date: Fri, 5 Jan 2024 17:09:16 +0530
+Message-ID: <20240105113917.1117945-2-n-francis@ti.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240104075357.638983-1-n-francis@ti.com>
-References: <20240104075357.638983-1-n-francis@ti.com>
+In-Reply-To: <20240105113917.1117945-1-n-francis@ti.com>
+References: <20240105113917.1117945-1-n-francis@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-Mailman-Approved-At: Thu, 04 Jan 2024 13:19:13 +0100
+X-Mailman-Approved-At: Fri, 05 Jan 2024 14:16:22 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
