@@ -4,68 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A45D3C3DA6E
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jan 2024 11:39:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A854C3DA6E
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jan 2024 13:15:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4380487996;
-	Fri,  5 Jan 2024 12:39:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 44DEF87981;
+	Fri,  5 Jan 2024 14:15:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IYaVKBjD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cfztVCzx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9327877D5; Fri,  5 Jan 2024 12:39:40 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7F15F8749F; Fri,  5 Jan 2024 14:14:58 +0100 (CET)
+Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
+ [IPv6:2607:f8b0:4864:20::e32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D669987981
- for <u-boot@lists.denx.de>; Fri,  5 Jan 2024 12:39:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4992687980
+ for <u-boot@lists.denx.de>; Fri,  5 Jan 2024 14:14:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 405BdUk9079137;
- Fri, 5 Jan 2024 05:39:30 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704454770;
- bh=A9qxywr9X07eM2hyzMTDO4ktZXxWCa5m39LZm03ZXwc=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=IYaVKBjD6h5XSMzHq/O7WVva294uRSBllZizVG+Ep0TTd30QpVnSXzHYWb5QXAF8T
- sQ1/2XyLHz9JWMC0o1sslkHatpkgfx6nro9q6eb8MW+M4t5gSmRA7PgVPMopYAEV15
- 4kasv0ZK9Zpx7RQ5MwBYVkJTSAgtda9hBDkzlI0Q=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 405BdU4n062185
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 5 Jan 2024 05:39:30 -0600
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 5
- Jan 2024 05:39:29 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 5 Jan 2024 05:39:29 -0600
-Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 405BdHEI095665;
- Fri, 5 Jan 2024 05:39:26 -0600
-From: Neha Malcom Francis <n-francis@ti.com>
-To: <sjg@chromium.org>, <vigneshr@ti.com>, <bb@ti.com>, <m-chawdhry@ti.com>,
- <alpernebiyasak@gmail.com>, <nm@ti.com>
-CC: <u-boot@lists.denx.de>, <vishalm@ti.com>, <jonas@kwiboo.se>,
- <sughosh.ganu@linaro.org>, <lukas.funke@weidmueller.com>,
- <fr0st61te@gmail.com>, <u-kumar1@ti.com>, <n-francis@ti.com>
-Subject: [PATCH v2 2/2] tools: binman: ti_board_cfg: Check for linting problems
-Date: Fri, 5 Jan 2024 17:09:17 +0530
-Message-ID: <20240105113917.1117945-3-n-francis@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240105113917.1117945-1-n-francis@ti.com>
-References: <20240105113917.1117945-1-n-francis@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-vs1-xe32.google.com with SMTP id
+ ada2fe7eead31-467b6844af2so101457137.2
+ for <u-boot@lists.denx.de>; Fri, 05 Jan 2024 05:14:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1704460494; x=1705065294; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=VHJqUBGaVTsuFdKQRY9TeXb16hXa9lJMAdmsOLeAjCE=;
+ b=cfztVCzx9P6ujbfMeMVZB53qpMThMxP6EzPzNNgQwJMEW/J3JGngHnPl/vUhy5CRfR
+ eOYVZkADtU3syFJlkuje/reFlizMekw8wIzae5+lQvtiuwDfuy+X+c0//UKjNZ1lfBle
+ YYbaV6Po2PidL55wjG0EhWdo2++LCoNVr/+9Am0ybkn7QmAkGDIILNWUUTt2D9mTGBFo
+ W4D2n3VoRy7ps5/XCltb+mGhuIjUoWUsRhQNeaUs8yjPa1311zhQgWp3IVkhrGmDhSEX
+ k2jodxAhI4JwcQuUlvKvuApysM4OP3V1BAZE39vQiwSUufYKXOy/UgD8Q9A+NDI/VjJU
+ hisQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704460494; x=1705065294;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VHJqUBGaVTsuFdKQRY9TeXb16hXa9lJMAdmsOLeAjCE=;
+ b=n14TEbDCGU13Vwp7qAnu5LLBRLnp9h0+tB/OEWp+QPp+hQVtF5oz2xgrkiJDK7t7e4
+ aeM65ZYzXg8PyBeZV4W7jzeJhff9BayL8OZBzXbXWoMETTL5telDoXoHUNjxxOsxd8g0
+ 0ns+oH2uPpPtGAH53YlSed6SuMDm0bfxQUx2/hhEAAivGtguIYMSZXE+W2Q7NHvEr6Zm
+ C0ReGPi1s/Jdohrf9vVQ9VuZmaIWNu7nY2bQs20t3Ghi8ZQy+FXQ1SNidaqzqwxytbLG
+ jh2K7cpIYAyapcbSBq+9GHOWOiZHq8+wQ8nJbdS6tOKX7T6SEJRSUB37Lq8W+Knq9Q7m
+ af6Q==
+X-Gm-Message-State: AOJu0YxEFNtmZDU75/h4SdlmpwCQpKa2lnS2D+bPYTqmRlmA/8wEjdVO
+ hJgzjdj8uLRtzXMp5PZNNZNc2kARmDcL4O1ODnjfXFNxVa/MoA==
+X-Google-Smtp-Source: AGHT+IGJTP+cSca97dVkr5EhdkP5n21+E/BB341A4CULTto92hOoFT5Am7WFAl5/Z7rhSCw6iFpgRuTgkamLvvhqhBs=
+X-Received: by 2002:a05:6122:3116:b0:4b7:393e:10b7 with SMTP id
+ cg22-20020a056122311600b004b7393e10b7mr1792909vkb.17.1704460493937; Fri, 05
+ Jan 2024 05:14:53 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20231219-b4-qcom-common-target-v2-0-b6dd9704219e@linaro.org>
+In-Reply-To: <20231219-b4-qcom-common-target-v2-0-b6dd9704219e@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Fri, 5 Jan 2024 18:44:42 +0530
+Message-ID: <CAFA6WYPo6kET7DA12iZQ=RJRtxs295hWTAr9YVcuB1so56JJTQ@mail.gmail.com>
+Subject: Re: [PATCH v2 00/32] Qualcomm generic board support
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Ramon Fried <rfried.dev@gmail.com>, 
+ Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de, 
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,140 +93,333 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use yamllint for checking whether YAML configuration files are adhering
-to default yamllint rules.
+Hi Caleb,
 
-Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-Suggested-by: Nishanth Menon <nm@ti.com>
----
-Changes since v1:
-	- add yamllint to requirements.txt (Nishanth)
+On Tue, 19 Dec 2023 at 21:34, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+> Historically, Qualcomm boards in U-Boot have all had their own
+> board/qualcomm/xyz directory, their own CONFIG_TARGET_XYZ option, their
+> own hardcoded sysmap-xyz.c file, and their own U-Boot specific
+> devicetree with little/no compatibility with upstream DT.
+>
+> This series makes a few final prepatory changes, and then replaces
+> almost all of the board specific code with generic alternatives. The end
+> result is that all Qualcomm boards both current and future (with the
+> exception of the db410c and db820c) can be supported by a single U-Boot
+> binary by just providing the correct DT. New boards can be added without
+> introducing any addition mach/ or board/ code or config options.
+>
+> Due to the nature of this change, the patch ("mach-snapdragon:
+> generalise board support") has become pretty big, I tried a few
+> different ways to represent this in git history, but the other methods
+> (e.g. adding a stub "generic" target and removing it again) were more
+> confusing and made for much messier git history. The current patch is
+> mostly atomic, but requires regenerating the config.
+>
+> The QCS404 EVB board had some code to enable the USB VBUS regulator,
+> this is dropped in favour of a adding a new vbus-supply property to the
+> dwc3-generic driver. This will also be used by the dragonboard845c in a
+> future patch. This handles the common case of a board requiring some
+> regulator be enabled for USB host mode.
+>
+> A more detailed description of the changes is below.
+>
+> == Memory map ==
+>
+> The memory map was historically hardcoded into U-Boot, this meant that
+> U-Boot had to be built for a specific variant of a device. This is
+> changed to instead read the memory map from the DT /memory node.
+>
+> Additionally, most boards mapped addresss 0x0 as valid, as a result if a
+> null pointer access happens then it will cause a bus stall (and board
+> hang). This is fixed so that null pointer accesses will now correctly
+> throw an exception.
+>
+> == DT loading ==
+>
+> Previously, boards used the FDT blob embedded into U-Boot (via
+> OF_SEPARATE). However, most Qualcomm boards run U-Boot as a secondary
+> bootloader, so we can instead rely on the first-stage bootloader to
+> populate some useful FDT properties for us (notably the /memory node and
+> KASLR seed) and fetch the DTB that it provides. Combined with the memory
+> map changes above, this let's us entirely avoid configuring the memory
+> map explicitly.
+>
+> == defconfig ==
+>
+> Most of the board defconfigs and config headers were quite similar, to
+> simplify maintenance going forward, all the fully generic boards (sdm845
+> and qcs404-evb so far) are adapted to use the new qcom_defconfig. Going
+> forward, all new Qualcomm boards should be supported by this defconfig.
+> A notable exception is for specific usecases (like U-Boot as the primary
+> bootloader).
+>
+> == The older dragonboards ==
+>
+> The db410c and db820c both have some custom board init code, as a result
+> they aren't yet binary compatible. mach-snapdragon is adjusted so
+> that all the necessary config options (e.g. CONFIG_SYS_BOARD) can be set
+> from their defconfigs, this makes it possible to enable support for new
+> boards without introducing additional config options.
+>
+> The db410c can run U-Boot either chainloaded like the other boards, or
+> as a first-stage bootloader replacing aboot. However it was hardcoded to
+> only build for the latter option. This series introduces a new
+> "chainloaded" defconfig to enable easier testing via fastboot.
+>
+> == dynamic environment variables ==
+>
+> This series also introduces runtime-allocated load addresses via the lmb
+> allocator. This allows for booting on boards with vastly different
+> memory layouts without any pre-calculation or macro magic in the config
+> header. This feature is based on similar code in mach-apple.
+>
+> The soc, board, and fdtfile environment variables are also generated
+> automatically. Many Qualcomm boards follow a similar scheme for DTB
+> naming such that the name can often be derived from the root compatible
+> properties. This is intended to cover the most common cases and be a
+> simple solution for booting generic distro images without having to
+> explicitly choose the right DTB. The U-Boot DTS can be tweaked if
+> necessary to produce the correct name, the variable can be overwritten,
+> or a bootloader like GRUB can load the devicetree instead.
+>
+> == Upstream DT ==
+>
+> All Qualcomm boards have had their devicetree files replaced with the
+> upstream versions. Previous patch series made the necessary driver
+> adjustments to fully support the upstream DT format. All future
+> Qualcomm boards should use upstream DTS by default.
+>
+> Once Sumit's work to import dt-rebasing has been merged, we will drop
+> the imported DT and bindings again.
+>
+> ---
+> I have tested this series on the Dragonboard410c, Dragonboard820c, and
 
- tools/binman/etype/ti_board_config.py        |  5 +++++
- tools/binman/ftest.py                        |  6 ++++++
- tools/binman/test/323_ti_board_cfg_phony.dts | 14 ++++++++++++++
- tools/binman/test/yaml/config.yaml           |  4 ++--
- tools/binman/test/yaml/config_phony.yaml     | 18 ++++++++++++++++++
- tools/buildman/requirements.txt              |  1 +
- 6 files changed, 46 insertions(+), 2 deletions(-)
- create mode 100644 tools/binman/test/323_ti_board_cfg_phony.dts
- create mode 100644 tools/binman/test/yaml/config_phony.yaml
+This series fails to boot (without any U-Boot console print) on
+db410c. I even added below pinctrl change but without any success:
 
-diff --git a/tools/binman/etype/ti_board_config.py b/tools/binman/etype/ti_board_config.py
-index 94f894c281..2c3bb8f7b5 100644
---- a/tools/binman/etype/ti_board_config.py
-+++ b/tools/binman/etype/ti_board_config.py
-@@ -9,6 +9,7 @@
- import os
- import struct
- import yaml
-+import yamllint
- 
- from collections import OrderedDict
- from jsonschema import validate
-@@ -18,6 +19,7 @@ from binman.entry import Entry
- from binman.etype.section import Entry_section
- from dtoc import fdt_util
- from u_boot_pylib import tools
-+from yamllint import config
- 
- BOARDCFG = 0xB
- BOARDCFG_SEC = 0xD
-@@ -244,6 +246,9 @@ class Entry_ti_board_config(Entry_section):
-             with open(self._schema_file, 'r') as sch:
-                 self.schema_yaml = yaml.safe_load(sch)
- 
-+            yaml_config = config.YamlLintConfig("extends: default")
-+            for p in yamllint.linter.run(open(self._config_file, "r"), yaml_config):
-+                self.Raise(f"Yamllint error: {p.line}: {p.rule}")
-             try:
-                 validate(self.file_yaml, self.schema_yaml)
-             except Exception as e:
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index a4ac520cbb..1fbb0fef1a 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -7030,6 +7030,12 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         data = self._DoReadFile('293_ti_board_cfg.dts')
-         self.assertEqual(TI_BOARD_CONFIG_DATA, data)
- 
-+    def testTIBoardConfigLint(self):
-+        """Test that an incorrectly linted config file would generate error"""
-+        with self.assertRaises(ValueError) as e:
-+            data = self._DoReadFile('323_ti_board_cfg_phony.dts')
-+        self.assertIn("Yamllint error", str(e.exception))
-+
-     def testTIBoardConfigCombined(self):
-         """Test that a schema validated combined board config file can be generated"""
-         data = self._DoReadFile('294_ti_board_cfg_combined.dts')
-diff --git a/tools/binman/test/323_ti_board_cfg_phony.dts b/tools/binman/test/323_ti_board_cfg_phony.dts
-new file mode 100644
-index 0000000000..441296de4f
---- /dev/null
-+++ b/tools/binman/test/323_ti_board_cfg_phony.dts
-@@ -0,0 +1,14 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
-+		ti-board-config {
-+			config = "yaml/config_phony.yaml";
-+			schema = "yaml/schema.yaml";
-+		};
-+	};
-+};
-diff --git a/tools/binman/test/yaml/config.yaml b/tools/binman/test/yaml/config.yaml
-index 5f799a6e3a..c2be32128b 100644
---- a/tools/binman/test/yaml/config.yaml
-+++ b/tools/binman/test/yaml/config.yaml
-@@ -10,9 +10,9 @@ main-branch:
-     b: 0
-   arr: [0, 0, 0, 0]
-   another-arr:
--    - #1
-+    -  # 1
-       c: 0
-       d: 0
--    - #2
-+    -  # 2
-       c: 0
-       d: 0
-diff --git a/tools/binman/test/yaml/config_phony.yaml b/tools/binman/test/yaml/config_phony.yaml
-new file mode 100644
-index 0000000000..d76fcb3b82
---- /dev/null
-+++ b/tools/binman/test/yaml/config_phony.yaml
-@@ -0,0 +1,18 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Test config
-+#
-+---
-+
-+main-branch :
-+  obj :
-+    a : 0x0
-+    b: 0
-+  arr: [0, 0, 0, 0]
-+  another-arr:
-+    -  # 1
-+      c: 0
-+      d: 0
-+    -  # 2
-+      c: 0
-+      d: 0
-diff --git a/tools/buildman/requirements.txt b/tools/buildman/requirements.txt
-index a1efcb9d4b..4a31e69e4c 100644
---- a/tools/buildman/requirements.txt
-+++ b/tools/buildman/requirements.txt
-@@ -1,2 +1,3 @@
- jsonschema==4.17.3
- pyyaml==6.0
-+yamllint==1.26.3
--- 
-2.34.1
+diff --git a/drivers/pinctrl/qcom/pinctrl-apq8016.c
+b/drivers/pinctrl/qcom/pinctrl-apq8016.c
+index 8e698085d78..88518845952 100644
+--- a/drivers/pinctrl/qcom/pinctrl-apq8016.c
++++ b/drivers/pinctrl/qcom/pinctrl-apq8016.c
+@@ -42,7 +42,7 @@ static const char *apq8016_get_pin_name(struct udevice *dev,
+                                        unsigned int selector)
+ {
+        if (selector < 122) {
+-               snprintf(pin_name, MAX_PIN_NAME_LEN, "GPIO_%u", selector);
++               snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
+                return pin_name;
+        } else {
+                return msm_pinctrl_pins[selector - 122];
 
+
+> Dragonboard845c. I unfortunately don't have access to a QCS404 EVB board
+> to test.
+
+db820c and qcs404 require a similar pinctrl change though.
+
+-Sumit
+
+>
+> This series is based on the qcom-next branch [1] and depends on my PMIC
+> fixes series [2], an integration branch for testing can be found at [3].
+> The non-qualcomm-specific changes (patches 1 and 2) don't have any
+> dependencies.
+>
+> [1]: https://source.denx.de/u-boot/custodians/u-boot-snapdragon
+> [2]: https://lore.kernel.org/u-boot/20231114-b4-qcom-dt-compat-v3-0-88a92f8f00ba@linaro.org/
+> [3]: https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/tree/b4/qcom-common-target
+>
+> ---
+> Changes in v2:
+> - Split DTS changes to reduce patch size.
+> - Import full board DTS files from Linux too, and introduce -u-boot.dtsi
+>   files where necessary to make any U-Boot specific changes.
+> - Add a pinctrl driver for qcom PMIC GPIOs
+> - Always enable LINUX_KERNEL_IMAGE_HEADER
+> - Link to v1: https://lore.kernel.org/r/20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org
+>
+> To: Neil Armstrong <neil.armstrong@linaro.org>
+> To: Sumit Garg <sumit.garg@linaro.org>
+> To: Ramon Fried <rfried.dev@gmail.com>
+> Cc: Marek Vasut <marex@denx.de>
+> To: Dzmitry Sankouski <dsankouski@gmail.com>
+> To: Caleb Connolly <caleb.connolly@linaro.org>
+> To: Peng Fan <peng.fan@nxp.com>
+> To: Jaehoon Chung <jh80.chung@samsung.com>
+> To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
+> To: Lukasz Majewski <lukma@denx.de>
+> To: Sean Anderson <seanga2@gmail.com>
+> To: Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
+> To: Stephan Gerhold <stephan@gerhold.net>
+> Cc:  <u-boot@lists.denx.de>
+>
+> ---
+> Caleb Connolly (32):
+>       arm: init: export prev_bl_fdt_addr
+>       usb: dwc3-generic: support external vbus regulator
+>       mmc: msm_sdhci: use modern clock handling
+>       dt-bindings: drop msm_sdhci binding
+>       clk/qcom: use upstream compatible properties
+>       serial: msm: add debug UART
+>       serial: msm: fix clock handling
+>       gpio: qcom_pmic: 1-based GPIOs
+>       gpio: qcom_pmic: add a quirk to skip GPIO configuration
+>       gpio: qcom_pmic: add pinctrl driver
+>       board: dragonboard410c: add chainloaded config fragment
+>       board: dragonboard410c: upstream DT compat
+>       board: dragonboard410c: import board code from mach-snapdragon
+>       board: dragonboard820c: use LINUX_KERNEL_IMAGE_HEADER
+>       mach-snapdragon: generalise board support
+>       mach-snapdragon: dynamic load addresses
+>       mach-snapdragon: generate fdtfile automatically
+>       doc: board/qualcomm: document generic targets
+>       dt-bindings: import headers for SDM845
+>       dts: sdm845: import supporting dtsi files
+>       dts: sdm845: replace with upstream DTS
+>       dt-bindings: import headers for MSM8916
+>       dts: msm8916: import PMIC dtsi files
+>       dts: msm8916: replace with upstream DTS
+>       dt-bindings: import headers for MSM8996
+>       dts: msm8996: import PMIC dtsi files
+>       dts: dragonboard820c: use correct bindings for clocks
+>       dts: msm8996: replace with upstream DTS
+>       dt-bindings: import headers for qcs404
+>       dts: qcs404-evb: replace with upstream DT
+>       board: qcs404-evb: drop board code
+>       MAINTAINERS: Qualcomm: add some missing paths
+>
+>  MAINTAINERS                                        |   12 +-
+>  arch/arm/Kconfig                                   |    4 +
+>  arch/arm/dts/Makefile                              |    9 +-
+>  arch/arm/dts/apq8016-sbc.dts                       |  729 +++
+>  arch/arm/dts/apq8096-db820c-u-boot.dtsi            |   10 +
+>  arch/arm/dts/apq8096-db820c.dts                    | 1137 ++++
+>  arch/arm/dts/dragonboard410c-uboot.dtsi            |   44 -
+>  arch/arm/dts/dragonboard410c.dts                   |  199 +-
+>  arch/arm/dts/dragonboard820c-uboot.dtsi            |   32 -
+>  arch/arm/dts/dragonboard820c.dts                   |  151 -
+>  arch/arm/dts/dragonboard845c-uboot.dtsi            |   26 -
+>  arch/arm/dts/dragonboard845c.dts                   |   48 -
+>  arch/arm/dts/msm8916-pm8916.dtsi                   |  157 +
+>  arch/arm/dts/msm8916.dtsi                          | 2702 +++++++++
+>  arch/arm/dts/msm8996.dtsi                          | 3884 +++++++++++++
+>  arch/arm/dts/pm8916.dtsi                           |  178 +
+>  arch/arm/dts/pm8994.dtsi                           |  152 +
+>  arch/arm/dts/pm8998.dtsi                           |  130 +
+>  arch/arm/dts/pmi8994.dtsi                          |   65 +
+>  arch/arm/dts/pmi8998.dtsi                          |   98 +
+>  arch/arm/dts/pms405.dtsi                           |  149 +
+>  arch/arm/dts/qcs404-evb-4000-u-boot.dtsi           |   26 +
+>  arch/arm/dts/qcs404-evb-4000.dts                   |   96 +
+>  arch/arm/dts/qcs404-evb-uboot.dtsi                 |   30 -
+>  arch/arm/dts/qcs404-evb.dts                        |  390 --
+>  arch/arm/dts/qcs404-evb.dtsi                       |  389 ++
+>  arch/arm/dts/qcs404.dtsi                           | 1829 ++++++
+>  arch/arm/dts/sdm845-db845c.dts                     | 1190 ++++
+>  .../arm/dts/sdm845-samsung-starqltechn-u-boot.dtsi |   16 +
+>  arch/arm/dts/sdm845-samsung-starqltechn.dts        |  624 +++
+>  arch/arm/dts/sdm845-wcd9340.dtsi                   |   86 +
+>  arch/arm/dts/sdm845.dtsi                           | 5801 +++++++++++++++++++-
+>  arch/arm/dts/starqltechn-uboot.dtsi                |   27 -
+>  arch/arm/dts/starqltechn.dts                       |   68 -
+>  arch/arm/lib/save_prev_bl_data.c                   |    5 +
+>  arch/arm/mach-snapdragon/Kconfig                   |   95 +-
+>  arch/arm/mach-snapdragon/Makefile                  |    8 +-
+>  arch/arm/mach-snapdragon/board.c                   |  304 +
+>  arch/arm/mach-snapdragon/include/mach/dram.h       |   12 -
+>  arch/arm/mach-snapdragon/init_sdm845.c             |   73 -
+>  arch/arm/mach-snapdragon/misc.c                    |   55 -
+>  arch/arm/mach-snapdragon/sysmap-apq8016.c          |   31 -
+>  arch/arm/mach-snapdragon/sysmap-apq8096.c          |   31 -
+>  arch/arm/mach-snapdragon/sysmap-qcs404.c           |   43 -
+>  arch/arm/mach-snapdragon/sysmap-sdm845.c           |   31 -
+>  board/qualcomm/dragonboard410c/Kconfig             |   15 -
+>  board/qualcomm/dragonboard410c/Makefile            |    3 +-
+>  .../dragonboard410c/configs/chainloaded.config     |    7 +
+>  board/qualcomm/dragonboard410c/dragonboard410c.c   |  109 +-
+>  .../qualcomm/dragonboard410c/misc.c                |   51 +-
+>  .../mach => board/qualcomm/dragonboard410c}/misc.h |    1 +
+>  board/qualcomm/dragonboard820c/Kconfig             |   15 -
+>  board/qualcomm/dragonboard820c/Makefile            |    1 -
+>  board/qualcomm/dragonboard820c/dragonboard820c.c   |   39 +-
+>  board/qualcomm/dragonboard820c/head.S              |   33 -
+>  board/qualcomm/dragonboard820c/u-boot.lds          |  111 -
+>  board/qualcomm/dragonboard845c/Kconfig             |   12 -
+>  board/qualcomm/qcs404-evb/Kconfig                  |   15 -
+>  board/qualcomm/qcs404-evb/Makefile                 |    6 -
+>  board/qualcomm/qcs404-evb/qcs404-evb.c             |   62 -
+>  configs/dragonboard410c_defconfig                  |    8 +-
+>  configs/dragonboard820c_defconfig                  |    8 +-
+>  configs/dragonboard845c_defconfig                  |   29 -
+>  configs/qcom_defconfig                             |   73 +
+>  configs/qcs404evb_defconfig                        |   55 -
+>  configs/starqltechn_defconfig                      |   41 -
+>  doc/board/qualcomm/board.rst                       |  119 +
+>  doc/board/qualcomm/debugging.rst                   |   61 +
+>  doc/board/qualcomm/index.rst                       |    4 +-
+>  doc/board/qualcomm/qcs404.rst                      |   79 -
+>  doc/board/qualcomm/sdm845.rst                      |  162 -
+>  doc/device-tree-bindings/mmc/msm_sdhci.txt         |   25 -
+>  doc/device-tree-bindings/usb/ehci-msm.txt          |   10 -
+>  drivers/clk/qcom/clock-apq8016.c                   |    9 +-
+>  drivers/clk/qcom/clock-apq8096.c                   |    7 +-
+>  drivers/gpio/qcom_pmic_gpio.c                      |  232 +-
+>  drivers/mmc/msm_sdhci.c                            |   69 +-
+>  drivers/phy/qcom/msm8916-usbh-phy.c                |    4 +-
+>  drivers/pinctrl/qcom/pinctrl-apq8016.c             |    2 +-
+>  drivers/serial/Kconfig                             |    8 +
+>  drivers/serial/serial_msm.c                        |   56 +-
+>  drivers/usb/dwc3/dwc3-generic.c                    |   12 +
+>  drivers/usb/host/ehci-msm.c                        |   24 +-
+>  include/configs/dragonboard845c.h                  |   20 -
+>  include/configs/qcom.h                             |   21 +
+>  include/configs/qcs404-evb.h                       |   20 -
+>  include/configs/sdm845.h                           |   26 -
+>  include/dt-bindings/arm/coresight-cti-dt.h         |   37 +
+>  include/dt-bindings/clock/qcom,camcc-sdm845.h      |  116 +
+>  include/dt-bindings/clock/qcom,dispcc-sdm845.h     |   56 +
+>  include/dt-bindings/clock/qcom,gcc-msm8916.h       |  179 +
+>  include/dt-bindings/clock/qcom,gcc-msm8996.h       |  360 ++
+>  include/dt-bindings/clock/qcom,gpucc-sdm845.h      |   24 +
+>  include/dt-bindings/clock/qcom,lpass-sdm845.h      |   15 +
+>  include/dt-bindings/clock/qcom,mmcc-msm8996.h      |  295 +
+>  include/dt-bindings/clock/qcom,rpmcc.h             |  174 +
+>  include/dt-bindings/clock/qcom,rpmh.h              |   37 +
+>  include/dt-bindings/clock/qcom,turingcc-qcs404.h   |   15 +
+>  include/dt-bindings/clock/qcom,videocc-sdm845.h    |   35 +
+>  include/dt-bindings/dma/qcom-gpi.h                 |   11 +
+>  include/dt-bindings/firmware/qcom,scm.h            |   18 +
+>  include/dt-bindings/iio/qcom,spmi-vadc.h           |  300 +
+>  include/dt-bindings/interconnect/qcom,msm8916.h    |  100 +
+>  .../dt-bindings/interconnect/qcom,msm8996-cbf.h    |   12 +
+>  include/dt-bindings/interconnect/qcom,msm8996.h    |  163 +
+>  include/dt-bindings/interconnect/qcom,osm-l3.h     |   15 +
+>  include/dt-bindings/interconnect/qcom,sdm845.h     |  150 +
+>  include/dt-bindings/phy/phy-qcom-qmp.h             |   20 +
+>  include/dt-bindings/phy/phy-qcom-qusb2.h           |   37 +
+>  include/dt-bindings/pinctrl/qcom,pmic-gpio.h       |  164 +
+>  include/dt-bindings/pinctrl/qcom,pmic-mpp.h        |  106 +
+>  include/dt-bindings/power/qcom-rpmpd.h             |  412 ++
+>  include/dt-bindings/qcom,q6asm.h                   |   26 +
+>  .../dt-bindings/regulator/qcom,rpmh-regulator.h    |   36 +
+>  include/dt-bindings/reset/qcom,gcc-msm8916.h       |  100 +
+>  include/dt-bindings/reset/qcom,sdm845-aoss.h       |   17 +
+>  include/dt-bindings/reset/qcom,sdm845-pdc.h        |   22 +
+>  include/dt-bindings/soc/qcom,apr.h                 |   28 +
+>  include/dt-bindings/soc/qcom,rpmh-rsc.h            |   14 +
+>  include/dt-bindings/sound/apq8016-lpass.h          |    9 +
+>  include/dt-bindings/sound/qcom,lpass.h             |   46 +
+>  include/dt-bindings/sound/qcom,q6afe.h             |    9 +
+>  include/dt-bindings/sound/qcom,q6asm.h             |   26 +
+>  include/dt-bindings/sound/qcom,q6dsp-lpass-ports.h |  234 +
+>  include/dt-bindings/sound/qcom,wcd9335.h           |   15 +
+>  include/init.h                                     |   11 +
+>  126 files changed, 23909 insertions(+), 2375 deletions(-)
+> ---
+> base-commit: bcb4a9ddbd21a61b5b421ba374a785757bd28c80
+>
+> // Caleb (they/them)
+>
