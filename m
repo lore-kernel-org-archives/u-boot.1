@@ -4,64 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A969C3DA6E
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jan 2024 07:22:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70561C3DA6E
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jan 2024 07:22:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CF1187967;
-	Fri,  5 Jan 2024 08:22:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 28EB98795E;
+	Fri,  5 Jan 2024 08:22:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RRcw8p3c";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QkKOTt/1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 882B287941; Fri,  5 Jan 2024 08:22:36 +0100 (CET)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id A367C8792D; Fri,  5 Jan 2024 08:22:38 +0100 (CET)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49B6A8792D
- for <u-boot@lists.denx.de>; Fri,  5 Jan 2024 08:22:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C825B8793F
+ for <u-boot@lists.denx.de>; Fri,  5 Jan 2024 08:22:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5573a920ca3so95304a12.1
- for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 23:22:32 -0800 (PST)
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-50e6ee8e911so1444600e87.1
+ for <u-boot@lists.denx.de>; Thu, 04 Jan 2024 23:22:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704439352; x=1705044152; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=l2XhcbcErHjnPahfx9h3ZSBiYuyG3Kj7YHjKPPlySms=;
- b=RRcw8p3cOgZ7H5+Ab1Zz3s7CmFoSopnpxusLoPLJ4rmWfnfLkC5kD7oEWT+ksViyYY
- A2D4an0KPm8Wa7Sy9WbAkj5P+rAdnDI67EHRtr/0pQUEWEB9fjqgYeHJPDKw5AJYS4CA
- Iyv7h+tFWDG1RK90un2qM04PYclbk2j4t/KQOx7e21um2TgqxpTlBP6Ii3q+Nsxo/dVp
- fu16oqLDk06cOCNGga5zMO/Dm6Z575hUOFSNzojhjvRGVyEQWmOQFmjY4mPtJn3ZmUeR
- yZPywNocmbfkaJ1uSliSNVWo1add3G9twMfCpaZFyQp7dbSm5ZsJ+2Zx7SjDjHJ77SgV
- q7rQ==
+ d=gmail.com; s=20230601; t=1704439354; x=1705044154; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Y/7nIXEtXr0tT37tdyDEAdtwYEWCpaz7ODmuC1pkxAQ=;
+ b=QkKOTt/14jTGf6IuJLr/lLgCk7rHc67W95WnU+1dCCB6Fwo6j1Ju0P+00vaC8pW+/e
+ Qe/PD9iqXSrO4LF/upN/PN2XgjSEqaknDEx7lziprbJlIeALphJ8M/ven3G+xKWpT76C
+ ziphWOoM6cUEmIt3uwvpQ4jRSoAmdhAJK2288ijeOZjIp9skAop0yhManrTJ3yTYZ8by
+ ooTj56OUzEZVzRdd5INjSR9SuEqNhXE21oBqaeT0s/X8rm+gTWi0+rs4mGfUuXUrJJyw
+ pdj8Wv9RqRzd4tqBcMV+YVjMYE43VQUiSMn4wa7dWEnejwHo3NJ/bX3ZaFEf731i/Lgr
+ OwSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704439352; x=1705044152;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=l2XhcbcErHjnPahfx9h3ZSBiYuyG3Kj7YHjKPPlySms=;
- b=TqK0agU7KaHgfbFv3qMQOAc2DlZJHp8LIdoLJMd2mxRGIxk41uaK0skD1vFUKZdHme
- +BzXcwgg8W9+cp6yw+OrtfibdYk2Sw+rwkFP9Dmf0CxdBA1MnDmuBtkjr4/2+LnE2dIN
- O+40OehZewRYPiXybAl6zMoFad70Ok3aGhJCExy2rNDH1phCFLv0s3azLemgUHjzAmb1
- Ux9Wq19qPbChiHNHHWEYgpRm++CK75RBEW6lKD4YmEDeirRg38t+jNtKQJ2G+3RvrB3V
- VYGKVoW23pGrZ986omK6sRV02Fs9nL/yf1U4dpe9lP8T02eslp6R8VJd6uHaN5uT57NO
- KWHw==
-X-Gm-Message-State: AOJu0Yy+MT91diHs8th0DMcBK9GAFyeXPywRGsiToNOClL4qycBNyFvA
- d5fCP5PMGGqmO0NFd9uI/yU=
-X-Google-Smtp-Source: AGHT+IGSdv5WZv8+s1PdVXBC7nAHtAwrLDZa2CTuJnwv71pqcMHXBAhH+rgmWS4EUsS7f2KFvwOpAg==
-X-Received: by 2002:a50:99d7:0:b0:554:4bb2:9a6e with SMTP id
- n23-20020a5099d7000000b005544bb29a6emr1530678edb.11.1704439351524; 
- Thu, 04 Jan 2024 23:22:31 -0800 (PST)
+ d=1e100.net; s=20230601; t=1704439354; x=1705044154;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Y/7nIXEtXr0tT37tdyDEAdtwYEWCpaz7ODmuC1pkxAQ=;
+ b=ifAjO2C2qeSKeFGOerQ0V+d8g2m10OsIEyPYd1rcU6q4EIzB/Yq9CS/yHn8I0Tp2nd
+ hvhNLrkfwdW8JcB1J5Oho/XGDVHaPC0yNKRqLbZbZlxtl/16nQht/BqXCaFmQmMlxIUu
+ SuIu7mINmJG5XTcO8oGewdIR3o6lx1anldEd5jLP74gA5zc8f8gUU6nXIcr5Pa0OPQD0
+ ttZeSEgoWyLvfMTFzV21EkkPzaUHOQsMB5EopWHVXDWzYt+yANcxwn3QFTeOCe2op+iT
+ ntzO2gFGGo9Hj/HmVY5BW2PvOotiSfd0JMswhixHqJCWpPrbs853pWAOwA3RrPtpeUWF
+ 2iMQ==
+X-Gm-Message-State: AOJu0YyzJDeShxPfzzj8X52xbszbvNdAaE5SZC55XsOK0n9eIcjWKNOx
+ gP9KyXrLB/rsfxw8RNb/tFo=
+X-Google-Smtp-Source: AGHT+IFJVDoWKjwOt946RMUVjo4/k/XdtjiGoNK/D9Hq7qliOvVmdJxYdu0oQkRPE/XFReSTsHOVsw==
+X-Received: by 2002:a05:6512:51c:b0:50e:5b95:948 with SMTP id
+ o28-20020a056512051c00b0050e5b950948mr849012lfb.103.1704439353696; 
+ Thu, 04 Jan 2024 23:22:33 -0800 (PST)
 Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
- dd5-20020a056402312500b0055627eeb8b9sm636471edb.32.2024.01.04.23.22.29
+ dd5-20020a056402312500b0055627eeb8b9sm636471edb.32.2024.01.04.23.22.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Jan 2024 23:22:30 -0800 (PST)
+ Thu, 04 Jan 2024 23:22:32 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
@@ -75,10 +76,12 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v7 0/7] Implement fastboot multiresponce
-Date: Fri,  5 Jan 2024 09:22:05 +0200
-Message-Id: <20240105072212.6615-1-clamor95@gmail.com>
+Subject: [PATCH v7 1/7] fastboot: multiresponse support
+Date: Fri,  5 Jan 2024 09:22:06 +0200
+Message-Id: <20240105072212.6615-2-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20240105072212.6615-1-clamor95@gmail.com>
+References: <20240105072212.6615-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,67 +100,208 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Ion Agorria <ion@agorria.com>
+
 Currently u-boot fastboot can only send one message back to host,
 so if there is a need to print more than one line messages must be
 kept sending until all the required data is obtained. This behavior
 can be adjusted using multiresponce ability (getting multiple lines
-of response) proposed in this patch set.
+of response) proposed in this patch.
 
-Implementation of multiresponce leads to ability to dump content of
-console buffer which, with use of "oem run", allows to entirely avoid
-need in UART.
-
+Signed-off-by: Ion Agorria <ion@agorria.com>
+Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
-Changes in v7:
- - fix hush/dollar bugs introduced in u-boot/next
+ drivers/fastboot/fb_command.c   | 10 ++++++++++
+ drivers/usb/gadget/f_fastboot.c | 29 +++++++++++++++++++++++++++++
+ include/fastboot.h              | 18 ++++++++++++++++++
+ net/fastboot_udp.c              | 29 +++++++++++++++++++++++------
+ 4 files changed, 80 insertions(+), 6 deletions(-)
 
-Changes in v6:
- - remove prev console changes
- - add console_record_isempty helper
- - set record flag on init
-
-Changes in v5:
- - restored membuff_readline behavior changed in v4
-
-Changes in v4:
- - adjust membuff_readline behavior with overflow
-
-Changes in v3:
- - fix missing function calls if CONFIG_CONSOLE_RECORD is not enabled
-
-Changes in v2:
- - changed variables to static
- - fixed multiresponce for udp
- - documented use of "MORE"
- - converted #if to if (...)
----
-
-Ion Agorria (7):
-  fastboot: multiresponse support
-  fastboot: implement "getvar all"
-  common: console: introduce console_record_isempty helper
-  common: console: record console from the beginning
-  lib: membuff: fix readline not returning line in case of overflow
-  fastboot: add oem console command support
-  test: hush: dollar: fix bagous behavior
-
- boot/bootmeth_extlinux.c          |  2 +-
- common/console.c                  | 10 +++-
- doc/android/fastboot-protocol.rst |  3 ++
- doc/android/fastboot.rst          |  1 +
- drivers/fastboot/Kconfig          |  7 +++
- drivers/fastboot/fb_command.c     | 52 +++++++++++++++++++++
- drivers/fastboot/fb_getvar.c      | 77 +++++++++++++++++++++++++------
- drivers/usb/gadget/f_fastboot.c   | 29 ++++++++++++
- include/console.h                 | 13 ++++++
- include/fastboot-internal.h       |  7 +++
- include/fastboot.h                | 19 ++++++++
- include/membuff.h                 |  5 +-
- lib/membuff.c                     |  4 +-
- net/fastboot_udp.c                | 29 +++++++++---
- test/hush/dollar.c                | 23 ++-------
- 15 files changed, 236 insertions(+), 45 deletions(-)
-
+diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
+index 5fcadcdf50..ab72d8c781 100644
+--- a/drivers/fastboot/fb_command.c
++++ b/drivers/fastboot/fb_command.c
+@@ -5,6 +5,7 @@
+ 
+ #include <common.h>
+ #include <command.h>
++#include <console.h>
+ #include <env.h>
+ #include <fastboot.h>
+ #include <fastboot-internal.h>
+@@ -152,6 +153,15 @@ int fastboot_handle_command(char *cmd_string, char *response)
+ 	return -1;
+ }
+ 
++void fastboot_multiresponse(int cmd, char *response)
++{
++	switch (cmd) {
++	default:
++		fastboot_fail("Unknown multiresponse command", response);
++		break;
++	}
++}
++
+ /**
+  * okay() - Send bare OKAY response
+  *
+diff --git a/drivers/usb/gadget/f_fastboot.c b/drivers/usb/gadget/f_fastboot.c
+index 9f322c9550..09e740cc96 100644
+--- a/drivers/usb/gadget/f_fastboot.c
++++ b/drivers/usb/gadget/f_fastboot.c
+@@ -497,6 +497,25 @@ static void do_bootm_on_complete(struct usb_ep *ep, struct usb_request *req)
+ 	do_exit_on_complete(ep, req);
+ }
+ 
++static int multiresponse_cmd = -1;
++static void multiresponse_on_complete(struct usb_ep *ep, struct usb_request *req)
++{
++	char response[FASTBOOT_RESPONSE_LEN] = {0};
++
++	if (multiresponse_cmd == -1)
++		return;
++
++	/* Call handler to obtain next response */
++	fastboot_multiresponse(multiresponse_cmd, response);
++	fastboot_tx_write_str(response);
++
++	/* If response is final OKAY/FAIL response disconnect this handler and unset cmd */
++	if (!strncmp("OKAY", response, 4) || !strncmp("FAIL", response, 4)) {
++		multiresponse_cmd = -1;
++		fastboot_func->in_req->complete = fastboot_complete;
++	}
++}
++
+ static void do_acmd_complete(struct usb_ep *ep, struct usb_request *req)
+ {
+ 	/* When usb dequeue complete will be called
+@@ -524,6 +543,16 @@ static void rx_handler_command(struct usb_ep *ep, struct usb_request *req)
+ 		fastboot_fail("buffer overflow", response);
+ 	}
+ 
++	if (!strncmp(FASTBOOT_MULTIRESPONSE_START, response, 4)) {
++		multiresponse_cmd = cmd;
++		fastboot_multiresponse(multiresponse_cmd, response);
++
++		/* Only add complete callback if first is not a final OKAY/FAIL response */
++		if (strncmp("OKAY", response, 4) && strncmp("FAIL", response, 4)) {
++			fastboot_func->in_req->complete = multiresponse_on_complete;
++		}
++	}
++
+ 	if (!strncmp("DATA", response, 4)) {
+ 		req->complete = rx_handler_dl_image;
+ 		req->length = rx_bytes_expected(ep);
+diff --git a/include/fastboot.h b/include/fastboot.h
+index 296451f89d..59cbea61ec 100644
+--- a/include/fastboot.h
++++ b/include/fastboot.h
+@@ -14,6 +14,16 @@
+ 
+ #define FASTBOOT_VERSION	"0.4"
+ 
++/*
++ * Signals u-boot fastboot code to send multiple responses by
++ * calling response generating function repeatedly until a OKAY/FAIL
++ * is generated as final response.
++ *
++ * This status code is only used internally to signal, must NOT
++ * be sent to host.
++ */
++#define FASTBOOT_MULTIRESPONSE_START	("MORE")
++
+ /* The 64 defined bytes plus \0 */
+ #define FASTBOOT_COMMAND_LEN	(64 + 1)
+ #define FASTBOOT_RESPONSE_LEN	(64 + 1)
+@@ -172,5 +182,13 @@ void fastboot_data_download(const void *fastboot_data,
+  */
+ void fastboot_data_complete(char *response);
+ 
++/**
++ * fastboot_handle_multiresponse() - Called for each response to send
++ *
++ * @cmd: Command id that requested multiresponse
++ * @response: Pointer to fastboot response buffer
++ */
++void fastboot_multiresponse(int cmd, char *response);
++
+ void fastboot_acmd_complete(void);
+ #endif /* _FASTBOOT_H_ */
+diff --git a/net/fastboot_udp.c b/net/fastboot_udp.c
+index d690787478..6fee441ab3 100644
+--- a/net/fastboot_udp.c
++++ b/net/fastboot_udp.c
+@@ -42,16 +42,15 @@ static int fastboot_remote_port;
+ static int fastboot_our_port;
+ 
+ /**
+- * fastboot_udp_send_info() - Send an INFO packet during long commands.
++ * fastboot_udp_send_response() - Send an response into UDP
+  *
+- * @msg: String describing the reason for waiting
++ * @response: Response to send
+  */
+-static void fastboot_udp_send_info(const char *msg)
++static void fastboot_udp_send_response(const char *response)
+ {
+ 	uchar *packet;
+ 	uchar *packet_base;
+ 	int len = 0;
+-	char response[FASTBOOT_RESPONSE_LEN] = {0};
+ 
+ 	struct fastboot_header response_header = {
+ 		.id = FASTBOOT_FASTBOOT,
+@@ -66,7 +65,6 @@ static void fastboot_udp_send_info(const char *msg)
+ 	memcpy(packet, &response_header, sizeof(response_header));
+ 	packet += sizeof(response_header);
+ 	/* Write response */
+-	fastboot_response("INFO", response, "%s", msg);
+ 	memcpy(packet, response, strlen(response));
+ 	packet += strlen(response);
+ 
+@@ -91,6 +89,7 @@ static void fastboot_udp_send_info(const char *msg)
+ static void fastboot_timed_send_info(const char *msg)
+ {
+ 	static ulong start;
++	char response[FASTBOOT_RESPONSE_LEN] = {0};
+ 
+ 	/* Initialize timer */
+ 	if (start == 0)
+@@ -99,7 +98,8 @@ static void fastboot_timed_send_info(const char *msg)
+ 	/* Send INFO packet to host every 30 seconds */
+ 	if (time >= 30000) {
+ 		start = get_timer(0);
+-		fastboot_udp_send_info(msg);
++		fastboot_response("INFO", response, "%s", msg);
++		fastboot_udp_send_response(response);
+ 	}
+ }
+ 
+@@ -180,6 +180,23 @@ static void fastboot_send(struct fastboot_header header, char *fastboot_data,
+ 		} else {
+ 			cmd = fastboot_handle_command(command, response);
+ 			pending_command = false;
++
++			if (!strncmp(FASTBOOT_MULTIRESPONSE_START, response, 4)) {
++				while (1) {
++					/* Call handler to obtain next response */
++					fastboot_multiresponse(cmd, response);
++
++					/*
++					 * Send more responses or break to send
++					 * final OKAY/FAIL response
++					 */
++					if (strncmp("OKAY", response, 4) &&
++					    strncmp("FAIL", response, 4))
++						fastboot_udp_send_response(response);
++					else
++						break;
++				}
++			}
+ 		}
+ 		/*
+ 		 * Sent some INFO packets, need to update sequence number in
 -- 
 2.40.1
 
