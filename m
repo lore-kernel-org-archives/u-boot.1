@@ -4,75 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82A04C3DA6E
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jan 2024 16:04:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ED8EC3DA6E
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jan 2024 16:09:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2848C87646;
-	Fri,  5 Jan 2024 17:04:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9386387756;
+	Fri,  5 Jan 2024 17:09:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kDHA3xtP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GtExa8Vh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11560877CD; Fri,  5 Jan 2024 17:04:07 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 24659877D5; Fri,  5 Jan 2024 17:09:50 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78E418761C
- for <u-boot@lists.denx.de>; Fri,  5 Jan 2024 17:04:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 989928745E
+ for <u-boot@lists.denx.de>; Fri,  5 Jan 2024 17:09:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-40e3a67ca9fso4039335e9.0
- for <u-boot@lists.denx.de>; Fri, 05 Jan 2024 08:04:04 -0800 (PST)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-40d87df95ddso15137235e9.0
+ for <u-boot@lists.denx.de>; Fri, 05 Jan 2024 08:09:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704470644; x=1705075444; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=nh+g78OdcKB9P8k62/pfi3iJzyGRmniCRGTOIUXmHJY=;
- b=kDHA3xtPSTlVIqS59NnBWZx0e9zIrIBJlWmZq8s/e4jR2IWzaMsOm8s1flmtvnHpjY
- xr9fdR7goj/jSFxt5VRAHfGXn63szYWqmHJShvxsudm3SHA8pB90fiEXfHp2ksq+2stQ
- GcvLJO/HPZ9i/4YTXnw0mqeJG7OS02BLKlPVp6LnSrZu9n1ttyGpGDBZzWUbJETWxEZ/
- eQkwrlGLxPylozQ+NiBOWdj9M6/chJoXpsYAojptxwjGjtDaXgxeXqzUKbdInQhhMXkZ
- GaISFHHHpLWKwfVtLpN8nCvnrcCDOSolTwFFge1dFy9cyRrl7X7ojgxVZEf+Mlm1HRke
- qFWw==
+ d=linaro.org; s=google; t=1704470987; x=1705075787; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=r3PDwOqCCsGO1He4aseZCHhOubgDYqReWnCun570430=;
+ b=GtExa8Vh7ow0AKxsRQD6fSovp/bu8F3kIYXmkGst/gijAr4bcA60fHZclgENV+9h2q
+ Q8WFbhkg6zcYpnjyMW8f4HYntwiWm6h5+0JI8bIzsjHVi2eepLCFX3uzV+KljhCwdoUa
+ 1u3Ds0EkLJC7l8LaLKZW2tu1VmoVqu9v2roy7urqqFjMLvwg409r8Dr1ZLOwHf2MyJqh
+ g1LcgvPPUJg4E+O1f2J9sVA22q6teeyZHEj+V54FAqdS+ItnJIWZZZpCKdl5X8yne/qh
+ mXtFk4O+9WWwIyQ2mIogYLPaHR7X+7nXquGO16OO/ligu0l+2WQvnYx6uyXhnFIDku1t
+ Of7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704470644; x=1705075444;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=nh+g78OdcKB9P8k62/pfi3iJzyGRmniCRGTOIUXmHJY=;
- b=GPKfURBoQjIgO1VpTxbAODClsdTrAXB1oGXf4gdgX+UMt6kh4UZX7336oSYlvvhX1/
- AZlsO8yEExK+QSjxUxDfKcpDp2cn1HSqYFudhn6jGJIlRb/vfSoOBQq0oF5LbCbFxXVt
- jYzBlEMoxprjB8L0GZGkusHWbgRSTCIL8qwqC/DXfVoxteHddn641BZP9UOQkcGIMbLE
- jJf/560hLZtkJA7eEBe5I7wg4C44NyxezLpua2vM1N9hpkFzzCEYJvC6ckjqwsVD9X3V
- pQETXW5BEFRMcIjbpRjJsNs1QUJLKZq5r8DP7MKDurKMVZN9RnWN58l+312CdjNmE6zK
- 7UZg==
-X-Gm-Message-State: AOJu0YygsHg0hOii0LRVV9dWuMeuRPsbcGc7W716IckMU+vHYEwjIKAA
- mIqbzbp36JTKNSNhXk1FgvNrAIUpPIRhrA==
-X-Google-Smtp-Source: AGHT+IH3Bzx3jDHpvlDJB7DThhjWpwJodt2kPVekOjDH4mDTPgz7aFtRz1Aeevjt9HPJR+iyLL8CPA==
-X-Received: by 2002:a05:600c:45cd:b0:40d:38ba:544e with SMTP id
- s13-20020a05600c45cd00b0040d38ba544emr1398819wmo.60.1704470643765; 
- Fri, 05 Jan 2024 08:04:03 -0800 (PST)
-Received: from lion.caleb.rex.connolly.tech (host-92-17-96-230.as13285.net.
- [92.17.96.230]) by smtp.gmail.com with ESMTPSA id
- m39-20020a05600c3b2700b0040d85a304desm1977372wms.35.2024.01.05.08.04.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Jan 2024 08:04:03 -0800 (PST)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
- Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PATCH] boot: add support for button commands
-Date: Fri,  5 Jan 2024 16:03:58 +0000
-Message-ID: <20240105160359.634310-1-caleb.connolly@linaro.org>
-X-Mailer: git-send-email 2.42.1
+ d=1e100.net; s=20230601; t=1704470987; x=1705075787;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=r3PDwOqCCsGO1He4aseZCHhOubgDYqReWnCun570430=;
+ b=kbzoSBUX+2GK9fCWI4l20p6i5Qk0GUppkUGdoqauJIz28KFfdmEHo7umEfn+d8p3Ko
+ Zz+Urv/N2fNB3kSR0S7z4AtDSr+laRwnKp3ekFXPbNwSDxB2vuf1t67j6OUnvmZ8NRCN
+ GyW3VPXLgTJf9zMqd9RJR5mwFFzjag5489f3+ZRyL/cvmoG3nwx2xLgQBzfzy5cq+qw6
+ D4FTDmTDvxoRH4QfoLiUdOdokwPn9SZ3o5HRYtlmkmHkCkmIB10a7aAd3athXR8LPgim
+ RRdaGCRKJ8vNXvpl5/0KttOSTaHzfojK76D3pI9rOY+4UYyG1yVKRo0z86LPJ/LnTNti
+ cUqg==
+X-Gm-Message-State: AOJu0Yz/twVyRB7TSkSjyJAaEwD3DpW6j0PNS09/HTXYdu0AT8u947GY
+ LUTvLqIAZ+wXoWUUUS1zoI9k/AsYsNIdtA==
+X-Google-Smtp-Source: AGHT+IEBq788eHQBW/RSd+n6/+gFiGnBRP21QpmL+8Zdi3Kx7Q0R6AP5ggDh3gTch7PI4QCvSC2QjA==
+X-Received: by 2002:a05:600c:6a89:b0:40d:9205:791b with SMTP id
+ jl9-20020a05600c6a8900b0040d9205791bmr688178wmb.197.1704470986997; 
+ Fri, 05 Jan 2024 08:09:46 -0800 (PST)
+Received: from [192.168.1.83] (host-92-17-96-230.as13285.net. [92.17.96.230])
+ by smtp.gmail.com with ESMTPSA id
+ c3-20020a5d4f03000000b00336344c3c3fsm1638769wru.90.2024.01.05.08.09.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 05 Jan 2024 08:09:46 -0800 (PST)
+Message-ID: <88e77866-aa47-4b11-a576-c27b9478c902@linaro.org>
+Date: Fri, 5 Jan 2024 16:09:45 +0000
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] iommu: dont fail silently
+Content-Language: en-US
+To: Dragan Simic <dsimic@manjaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>,
+ u-boot@lists.denx.de
+References: <20240104171335.342540-1-caleb.connolly@linaro.org>
+ <60f78ec8b817790733b37f9ba92628b8@manjaro.org>
+ <a220fa60-8560-4185-8c4d-a41dc0c455ce@linaro.org>
+ <48910a6211deb853ac93c42291f2283d@manjaro.org>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <48910a6211deb853ac93c42291f2283d@manjaro.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,226 +97,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the relatively new button API in U-Boot, it's now much easier to
-model the common usecase of mapping arbitrary actions to different
-buttons during boot - for example entering fastboot mode, setting some
-additional kernel cmdline arguments, or booting with a custom recovery
-ramdisk, to name a few.
 
-Historically, this functionality has been implemented in board code,
-making it fixed for a given U-Boot binary and requiring the code be
-duplicated and modified for every board.
 
-Implement a generic abstraction to run an arbitrary command during boot
-when a specific button is pressed. The button -> command mapping is
-configured via environment variables with the following format:
+On 05/01/2024 14:47, Dragan Simic wrote:
+> On 2024-01-05 14:55, Caleb Connolly wrote:
+>> On 04/01/2024 17:47, Dragan Simic wrote:
+>>> On 2024-01-04 18:12, Caleb Connolly wrote:
+>>>> When attempting to probe a device which has an associated IOMMU, if the
+>>>> IOMMU device can't be found (no driver, disabled driver, driver failed
+>>>> to probe, etc) then we currently fail to probe the device with no
+>>>> discernable error.
+>>>>
+>>>> If we fail to hook the device up to its IOMMU, we should make sure that
+>>>> the user knows about it. Write some better error messages for
+>>>> dev_iommu_enable() to facilitate this.
+>>>
+>>> Quite frankly, I think those should remain as debug-only error messages,
+>>> but of course with the additional details you added.  The reasoning
+>>> behind it would be to use debug builds while testing, to be able to see
+>>> any error messages, and then use production, size-optimized builds
+>>> later.  I hope you agree.
+>>>
+>>> There are many other places where using log messages instead of debug
+>>> messages would be really useful in the field, such as in the MMC
+>>> drivers, but we'd quickly start increasing the image sizes if we start
+>>> converting those from debug to log messages.
+>>
+>> The problem is that with a debug build there are SO MANY messages, it's
+>> hard to spot actual errors in the midst of the other stuff. I would
+>> rather see some actual numbers to justify breaking ease-of-use like this.
+> 
+> As a reminder, debugging can be enabled on a per-file basis, which is
+> usually the way it's performed.  In other words, debug messages usually
+> get enabled during development only on the files you're actually working
+> on, and perhaps on a few more related files.
 
-  button_cmd_N_name=<button label>
-  button_cmd_N=<command to run>
+Yes, and this would be fine, but when I need to know to add "#define
+LOG_DEBUG" specifically to drivers/iommu/iommu-uclass.c to know that my
+driver failed to probe due to the IOMMU device not being found... Well,
+you can see how that isn't super useful in this case.
 
-Where N is the mapping number starting from 0. For example:
+Maybe adding a single error message to device_probe() if the call to
+dev_iommu_enable() fails would be a sensible middleground here?
+> 
+>> I can definitely foresee folks hitting this error path when using an
+>> incompatible devicetree, having absolutely no idea where to start
+>> debugging is pretty frustrating and I don't think it's the right
+>> tradeoff to make in this case.
+> 
+> I see.  Perhaps we should hear opinions from other people as well.
 
-  button_cmd_0_name=vol_down
-  button_cmd_0=fastboot usb 0
+Yeah, I'm curious to know how others feel about this.
+> 
+>> If you're really space constrained then wouldn't you disable log
+>> messages altogether?
+> 
+> Of course not, but there aren't _that_ many log messages already. 
+> Actually, "oh, logging that would be nice" has crossed my mind many
+> times, while either debug messages were already in place, or there was
+> nothing logged at all.
 
-This will cause the device to enter fastboot mode if volume down is held
-during boot.
+Well, you can disable logging but still get printf() outputs I mean...
+> 
+>>>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>>>> ---
+>>>>  drivers/iommu/iommu-uclass.c | 13 ++++++++-----
+>>>>  1 file changed, 8 insertions(+), 5 deletions(-)
+>>>>
+>>>> diff --git a/drivers/iommu/iommu-uclass.c
+>>>> b/drivers/iommu/iommu-uclass.c
+>>>> index 6babc0e3a672..dff3239cccb1 100644
+>>>> --- a/drivers/iommu/iommu-uclass.c
+>>>> +++ b/drivers/iommu/iommu-uclass.c
+>>>> @@ -86,16 +86,16 @@ int dev_iommu_enable(struct udevice *dev)
+>>>>          ret = dev_read_phandle_with_args(dev, "iommus",
+>>>>                           "#iommu-cells", 0, i, &args);
+>>>>          if (ret) {
+>>>> -            debug("%s: dev_read_phandle_with_args failed: %d\n",
+>>>> -                  __func__, ret);
+>>>> +            log_err("%s: Failed to parse 'iommus' property for '%s':
+>>>> %d\n",
+>>>> +                __func__, dev->name, ret);
+>>>>              return ret;
+>>>>          }
+>>>>
+>>>>          ret = uclass_get_device_by_ofnode(UCLASS_IOMMU, args.node,
+>>>>                            &dev_iommu);
+>>>>          if (ret) {
+>>>> -            debug("%s: uclass_get_device_by_ofnode failed: %d\n",
+>>>> -                  __func__, ret);
+>>>> +            log_err("%s: Failed to find IOMMU device for '%s': %d\n",
+>>>> +                __func__, dev->name, ret);
+>>>>              return ret;
+>>>>          }
+>>>>          dev->iommu = dev_iommu;
+>>>> @@ -106,8 +106,11 @@ int dev_iommu_enable(struct udevice *dev)
+>>>>          ops = device_get_ops(dev->iommu);
+>>>>          if (ops && ops->connect) {
+>>>>              ret = ops->connect(dev);
+>>>> -            if (ret)
+>>>> +            if (ret) {
+>>>> +                log_err("%s: Failed to connect '%s' to IOMMU '%s':
+>>>> %d\n",
+>>>> +                    __func__, dev->name, dev->iommu->name, ret);
+>>>>                  return ret;
+>>>> +            }
+>>>>          }
+>>>>      }
 
-After we enter the cli loop the button commands are no longer valid,
-this allows the buttons to additionally be used for navigating a boot
-menu.
-
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- boot/Kconfig              | 14 +++++++
- common/Makefile           |  1 +
- common/button_cmd.c       | 83 +++++++++++++++++++++++++++++++++++++++
- common/main.c             |  3 ++
- doc/usage/environment.rst |  4 ++
- include/button.h          |  9 +++++
- 6 files changed, 114 insertions(+)
- create mode 100644 common/button_cmd.c
-
-diff --git a/boot/Kconfig b/boot/Kconfig
-index fbc49c5bca47..9580ef1cfca4 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -20,6 +20,20 @@ config TIMESTAMP
- 	  loaded that does not, the message 'Wrong FIT format: no timestamp'
- 	  is shown.
- 
-+config BUTTON_CMD
-+	bool "Support for running a command if a button is held during boot"
-+	default n
-+	help
-+	  For many embedded devices it's useful to enter a special flashing mode
-+	  such as fastboot mode when a button is held during boot. This option
-+	  allows arbitrary commands to be assigned to specific buttons. These will
-+	  be run after "preboot" if the button is held. Configuration is done via
-+	  the environment variables "button_cmd_N_name" and "button_cmd_N" where n is
-+	  the button number (starting from 0). e.g:
-+
-+	    "button_cmd_0_name=vol_down"
-+	    "button_cmd_0=fastboot usb 0"
-+
- menuconfig FIT
- 	bool "Flattened Image Tree (FIT)"
- 	select HASH
-diff --git a/common/Makefile b/common/Makefile
-index cdeadf72026c..53105a6ce12a 100644
---- a/common/Makefile
-+++ b/common/Makefile
-@@ -10,6 +10,7 @@ obj-y += main.o
- obj-y += exports.o
- obj-$(CONFIG_HUSH_PARSER) += cli_hush.o
- obj-$(CONFIG_AUTOBOOT) += autoboot.o
-+obj-$(CONFIG_BUTTON_CMD) += button_cmd.o
- 
- # # boards
- obj-y += board_f.o
-diff --git a/common/button_cmd.c b/common/button_cmd.c
-new file mode 100644
-index 000000000000..1caea50d3f84
---- /dev/null
-+++ b/common/button_cmd.c
-@@ -0,0 +1,83 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2023 Linaro Ltd.
-+ *   Author: Caleb Connolly <caleb.connolly@linaro.org>
-+ */
-+
-+#include <button.h>
-+#include <command.h>
-+#include <env.h>
-+#include <log.h>
-+#include <vsprintf.h>
-+
-+/* Some sane limit "just in case" */
-+#define MAX_BTN_CMDS 32
-+
-+struct button_cmd {
-+	bool pressed;
-+	const char *btn_name;
-+	const char *cmd;
-+};
-+
-+/*
-+ * Button commands are set via environment variables, e.g.:
-+ * button_cmd_N_name=Volume Up
-+ * button_cmd_N=fastboot usb 0
-+ *
-+ * This function will retrieve the command for the given button N
-+ * and populate the cmd struct with the command string and pressed
-+ * state of the button.
-+ *
-+ * Returns 1 if a command was found, 0 otherwise.
-+ */
-+int get_button_cmd(int n, struct button_cmd *cmd)
-+{
-+	const char *cmd_str;
-+	struct udevice *btn;
-+	char buf[24];
-+
-+	snprintf(buf, sizeof(buf), "button_cmd_%d_name", n);
-+	cmd->btn_name = env_get(buf);
-+	if (!cmd->btn_name)
-+		return 0;
-+
-+	button_get_by_label(cmd->btn_name, &btn);
-+	if (!btn) {
-+		log_err("No button labelled '%s'\n", cmd->btn_name);
-+		return 0;
-+	}
-+
-+	cmd->pressed = button_get_state(btn) == BUTTON_ON;
-+	/* If the button isn't pressed then cmd->cmd will be unused so don't waste
-+	 * cycles reading it
-+	 */
-+	if (!cmd->pressed)
-+		return 1;
-+
-+	snprintf(buf, sizeof(buf), "button_cmd_%d", n);
-+	cmd_str = env_get(buf);
-+	if (!cmd_str) {
-+		log_err("No command set for button '%s'\n", cmd->btn_name);
-+		return 0;
-+	}
-+
-+	cmd->cmd = cmd_str;
-+
-+	return 1;
-+}
-+
-+void process_button_cmds(void)
-+{
-+	struct button_cmd cmd = {0};
-+	int i = 0;
-+
-+	while (get_button_cmd(i++, &cmd) && i < MAX_BTN_CMDS) {
-+		if (!cmd.pressed)
-+			continue;
-+
-+		log_info("BTN '%s'> %s\n", cmd.btn_name, cmd.cmd);
-+		run_command(cmd.cmd, CMD_FLAG_ENV);
-+		/* Don't run commands for multiple buttons */
-+		return;
-+	}
-+}
-diff --git a/common/main.c b/common/main.c
-index 7c70de2e59a8..717e8b7e8bd2 100644
---- a/common/main.c
-+++ b/common/main.c
-@@ -8,6 +8,7 @@
- 
- #include <common.h>
- #include <autoboot.h>
-+#include <button.h>
- #include <bootstage.h>
- #include <cli.h>
- #include <command.h>
-@@ -61,6 +62,8 @@ void main_loop(void)
- 			efi_launch_capsules();
- 	}
- 
-+	process_button_cmds();
-+
- 	s = bootdelay_process();
- 	if (cli_process_fdt(&s))
- 		cli_secure_boot_cmd(s);
-diff --git a/doc/usage/environment.rst b/doc/usage/environment.rst
-index c57b717caaf3..ce5a9627f025 100644
---- a/doc/usage/environment.rst
-+++ b/doc/usage/environment.rst
-@@ -190,6 +190,10 @@ bootm_size
- bootstopkeysha256, bootdelaykey, bootstopkey
-     See README.autoboot
- 
-+button_cmd_0, button_cmd_0_name ... button_cmd_N, button_cmd_N_name
-+    Used to map commands to run when a button is held during boot.
-+    See CONFIG_BUTTON_CMD.
-+
- updatefile
-     Location of the software update file on a TFTP server, used
-     by the automatic software update feature. Please refer to
-diff --git a/include/button.h b/include/button.h
-index 207f4a0f4dbd..43e4ffdca1e7 100644
---- a/include/button.h
-+++ b/include/button.h
-@@ -74,4 +74,13 @@ enum button_state_t button_get_state(struct udevice *dev);
-  */
- int button_get_code(struct udevice *dev);
- 
-+#ifdef CONFIG_BUTTON_CMD
-+/* Process button command mappings specified in the environment,
-+ * running the commands for buttons which are pressed
-+ */
-+void process_button_cmds(void);
-+#else
-+static inline void process_button_cmds(void) {}
-+#endif /* CONFIG_BUTTON_CMD */
-+
- #endif
 -- 
-2.42.1
-
+// Caleb (they/them)
