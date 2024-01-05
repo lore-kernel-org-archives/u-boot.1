@@ -4,82 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C26DAC3DA6E
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jan 2024 16:17:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0A9FC3DA6E
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jan 2024 16:49:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0064B879A5;
-	Fri,  5 Jan 2024 17:17:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DC6EC87756;
+	Fri,  5 Jan 2024 17:49:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E+hxZaCi";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="c+7gw7EP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47D5B879B3; Fri,  5 Jan 2024 17:17:34 +0100 (CET)
-Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
- [IPv6:2607:f8b0:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8B67F87756; Fri,  5 Jan 2024 17:49:01 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC619879A5
- for <u-boot@lists.denx.de>; Fri,  5 Jan 2024 17:17:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EA28887646
+ for <u-boot@lists.denx.de>; Fri,  5 Jan 2024 17:48:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-5cdbc42f5efso172574a12.0
- for <u-boot@lists.denx.de>; Fri, 05 Jan 2024 08:17:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704471450; x=1705076250; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mhBsrCBoVC2/bO7suG3n7+nliBC/nrh6gvtPVB19gqM=;
- b=E+hxZaCistwsNvpS+L/vAjmG6xo0VaAB5r+tBETmOUOeLqDbu9EOfwLftRGYWYQy9x
- mGLGWNZr31KxcAd2ck/lmzxkWqG8Q9qH1N1xWB7XrsZrjdlJjZeR0fP9UU1eFcshWxkX
- gxijPekLQbYGHaepJfXOXp4DlcUy50sNYdAR27s3QvqyCMuokyX1krv7amM3Oj3jDk6l
- fYEVrA4YPDIl/aatPwetiJGchGH4GhWrJo9AJBuzSKxCp0tMybpcN/3L+YuejVZaxZvf
- vIOkN5c/4CDvqvW78Zj6ErMCd2+YdU5JwayCIRf0h6n7ekjb2k5nuqHvctLNiTUFJjE8
- A3+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704471450; x=1705076250;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mhBsrCBoVC2/bO7suG3n7+nliBC/nrh6gvtPVB19gqM=;
- b=TOcuWW4GkZ9GhF6to5nlto0xaw/OJKQOoLNTsRq2gz/Le0JKg7LUGHs8CVNHNDtuh2
- 5JXyI5AXyEX6uP+kZJUAKhV64Lbfm/Emv4+oPs7E4KXPWlMzOA6Trv14j3cREvImlZlL
- cSeUs3aYs5Hn7UBll5bOwBxFwc8RytIVBTzugdUQlBo9s72VsoTIFxIjK3oElx46Rme+
- 2vuXHYCy06OB8HPj1juxshNj2Jhkq+Dl1rTOigiNrAqaNO8gG7VIaakwuj6wG/uLBM0l
- 5fugptRPvP0t3XoLE3U2vwva4V6BVEWacmbT8IsjCw88g8HuLHtQe7W4Ag62I2T8UrH5
- /gsA==
-X-Gm-Message-State: AOJu0YxizqxLNL0X6FmUNNxJVLaBQJAp7NIOXLAzjJ7PJve9XhB9hJ0Y
- CRnIcpyMLxsFcktDElBPjV2L9dvYZxBiKlhlDyw=
-X-Google-Smtp-Source: AGHT+IHxfco9mZuc80ItjrBgxLzaIWL9wWRiakcYO7cI9itdjX7WJmq6lPu6wPnbE5ydZQn8B74wC6W+0VMygmDbvWk=
-X-Received: by 2002:a17:90a:43c1:b0:28c:ee93:7575 with SMTP id
- r59-20020a17090a43c100b0028cee937575mr4074512pjg.1.1704471449920; Fri, 05 Jan
- 2024 08:17:29 -0800 (PST)
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-References: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
- <CAOMZO5C+Pvv429sHPyKuznyvdPv217q=a8uTeNNTSyVmn1EoXw@mail.gmail.com>
- <20231109001746.GX6601@bill-the-cat>
- <CAOMZO5DtKc72Zv+Q6J3P6JY8jWVbu7KDbr-AViw1hPcm0N92QQ@mail.gmail.com>
- <CAOMZO5C0ZR=DgXkGHyG-Fgt9HEr3Z_x4qhgkfmObBpTTXUmpAQ@mail.gmail.com>
- <CALG-KHx081qs+_LHTSu7ssAOd0AX-N64OPht8M8nGufU778SbQ@mail.gmail.com>
-In-Reply-To: <CALG-KHx081qs+_LHTSu7ssAOd0AX-N64OPht8M8nGufU778SbQ@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 5 Jan 2024 13:17:17 -0300
-Message-ID: <CAOMZO5C4qF4A8uLdRfMeDVosA2NLNU=+WvidGR7QGeSyYJOTmw@mail.gmail.com>
-Subject: Re: inconsistent wget behavior
-To: Paul Liu <paul.liu@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Tim Harvey <tharvey@gateworks.com>, 
- Marek Vasut <marex@denx.de>, u-boot <u-boot@lists.denx.de>, 
- Duncan Hare <DuncanCHare@yahoo.com>, Simon Glass <sjg@chromium.org>, 
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Michal Simek <michal.simek@xilinx.com>, Ramon Fried <rfried.dev@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1704473338;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=lTo2v53U7Ncc4gMW+Sbbt+kRLQ7SsKIo8NoqdG36OdA=;
+ b=c+7gw7EPWO1M+/P9IjxJKAZmQqf+tzWtfI33pEpiSwlWn4XJbPjuFqRHr9HxyAI3w2FTIq
+ DqlQ8SytNneFMfQstHQvStV4BPmeMWY+COaVLR756B6OBzpnQ6xd0OsNaqf+CbmfFzL9vp
+ YaFRxVaJeOIXbAfgZn3CERJhJwDkHR3cYcxfuec7YCRpW5a33MM1xEWp68FJVlj2jOq0EH
+ PoekA6UZRd1C7MiKbkoO/8q49PLZg0LRM2niZF2m/yeP++LUxXgqhe0F4dMu0WqXd/N1Iu
+ 4NriO1gRJB0EQjhqIGlUir5tbGC0Rvt3jvegGTM97Ghil2l8aH5gWjtenl8wQw==
+Date: Fri, 05 Jan 2024 17:48:58 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] iommu: dont fail silently
+In-Reply-To: <88e77866-aa47-4b11-a576-c27b9478c902@linaro.org>
+References: <20240104171335.342540-1-caleb.connolly@linaro.org>
+ <60f78ec8b817790733b37f9ba92628b8@manjaro.org>
+ <a220fa60-8560-4185-8c4d-a41dc0c455ce@linaro.org>
+ <48910a6211deb853ac93c42291f2283d@manjaro.org>
+ <88e77866-aa47-4b11-a576-c27b9478c902@linaro.org>
+Message-ID: <48e3291e9108fe2642552975191aa6a1@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,15 +73,150 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Paul,
+On 2024-01-05 17:09, Caleb Connolly wrote:
+> On 05/01/2024 14:47, Dragan Simic wrote:
+>> On 2024-01-05 14:55, Caleb Connolly wrote:
+>>> On 04/01/2024 17:47, Dragan Simic wrote:
+>>>> On 2024-01-04 18:12, Caleb Connolly wrote:
+>>>>> When attempting to probe a device which has an associated IOMMU, if 
+>>>>> the
+>>>>> IOMMU device can't be found (no driver, disabled driver, driver 
+>>>>> failed
+>>>>> to probe, etc) then we currently fail to probe the device with no
+>>>>> discernable error.
+>>>>> 
+>>>>> If we fail to hook the device up to its IOMMU, we should make sure 
+>>>>> that
+>>>>> the user knows about it. Write some better error messages for
+>>>>> dev_iommu_enable() to facilitate this.
+>>>> 
+>>>> Quite frankly, I think those should remain as debug-only error 
+>>>> messages,
+>>>> but of course with the additional details you added.  The reasoning
+>>>> behind it would be to use debug builds while testing, to be able to 
+>>>> see
+>>>> any error messages, and then use production, size-optimized builds
+>>>> later.  I hope you agree.
+>>>> 
+>>>> There are many other places where using log messages instead of 
+>>>> debug
+>>>> messages would be really useful in the field, such as in the MMC
+>>>> drivers, but we'd quickly start increasing the image sizes if we 
+>>>> start
+>>>> converting those from debug to log messages.
+>>> 
+>>> The problem is that with a debug build there are SO MANY messages, 
+>>> it's
+>>> hard to spot actual errors in the midst of the other stuff. I would
+>>> rather see some actual numbers to justify breaking ease-of-use like 
+>>> this.
+>> 
+>> As a reminder, debugging can be enabled on a per-file basis, which is
+>> usually the way it's performed.  In other words, debug messages 
+>> usually
+>> get enabled during development only on the files you're actually 
+>> working
+>> on, and perhaps on a few more related files.
+> 
+> Yes, and this would be fine, but when I need to know to add "#define
+> LOG_DEBUG" specifically to drivers/iommu/iommu-uclass.c to know that my
+> driver failed to probe due to the IOMMU device not being found... Well,
+> you can see how that isn't super useful in this case.
 
-On Thu, Nov 16, 2023 at 6:41=E2=80=AFAM Paul Liu <paul.liu@linaro.org> wrot=
-e:
->
-> Hi Fabio,
->
-> Yes. I'll look into this problem.
+Oh, I see and I know it very well first hand.  For example, I spent ages 
+once debugging some MMC-related issue, just because no logs were 
+produced unless debugging was enabled.  On the other hand, pinpointing 
+the issue with the debugging enabled was a five-minute job.  That was 
+the hard way for me to learn to enable debugging first where it's 
+required during development.
 
-Did you have a chance to investigate this problem?
+> Maybe adding a single error message to device_probe() if the call to
+> dev_iommu_enable() fails would be a sensible middleground here?
 
-Thanks
+Please, don't get me wrong, I'm not opposing an approach like that, but 
+how about maybe going one step further and introducing another debug 
+level at the same time?  That new debug level would include a 
+small-enough subset of highly important debug messages so that it could 
+be enabled at the top level during development, without breaking the 
+image size constraints.
+
+Of course, it would take time for various parts of U-Boot to migrate to 
+using that new debug level, but given enough time and taking the 
+usability into account, it probably should happen eventually.  It would 
+be highly useful during development, IMHO, while still keeping the 
+production image sizes down.
+
+>>> I can definitely foresee folks hitting this error path when using an
+>>> incompatible devicetree, having absolutely no idea where to start
+>>> debugging is pretty frustrating and I don't think it's the right
+>>> tradeoff to make in this case.
+>> 
+>> I see.  Perhaps we should hear opinions from other people as well.
+> 
+> Yeah, I'm curious to know how others feel about this.
+
+Yes, and I'd love to also hear opinions about the new debug level, 
+described above.  Maybe it would simply be too convoluted;  if deemed 
+so, I'm fine with the middle ground that you proposed above.
+
+>>> If you're really space constrained then wouldn't you disable log
+>>> messages altogether?
+>> 
+>> Of course not, but there aren't _that_ many log messages already. 
+>> Actually, "oh, logging that would be nice" has crossed my mind many
+>> times, while either debug messages were already in place, or there was
+>> nothing logged at all.
+> 
+> Well, you can disable logging but still get printf() outputs I mean...
+
+Quite frankly, I've always felt that simply using printf() is a bit out 
+of place.  We should instead aim toward having granular and manageable 
+log levels, if you agree.
+
+>>>>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>>>>> ---
+>>>>>  drivers/iommu/iommu-uclass.c | 13 ++++++++-----
+>>>>>  1 file changed, 8 insertions(+), 5 deletions(-)
+>>>>> 
+>>>>> diff --git a/drivers/iommu/iommu-uclass.c
+>>>>> b/drivers/iommu/iommu-uclass.c
+>>>>> index 6babc0e3a672..dff3239cccb1 100644
+>>>>> --- a/drivers/iommu/iommu-uclass.c
+>>>>> +++ b/drivers/iommu/iommu-uclass.c
+>>>>> @@ -86,16 +86,16 @@ int dev_iommu_enable(struct udevice *dev)
+>>>>>          ret = dev_read_phandle_with_args(dev, "iommus",
+>>>>>                           "#iommu-cells", 0, i, &args);
+>>>>>          if (ret) {
+>>>>> -            debug("%s: dev_read_phandle_with_args failed: %d\n",
+>>>>> -                  __func__, ret);
+>>>>> +            log_err("%s: Failed to parse 'iommus' property for 
+>>>>> '%s':
+>>>>> %d\n",
+>>>>> +                __func__, dev->name, ret);
+>>>>>              return ret;
+>>>>>          }
+>>>>> 
+>>>>>          ret = uclass_get_device_by_ofnode(UCLASS_IOMMU, args.node,
+>>>>>                            &dev_iommu);
+>>>>>          if (ret) {
+>>>>> -            debug("%s: uclass_get_device_by_ofnode failed: %d\n",
+>>>>> -                  __func__, ret);
+>>>>> +            log_err("%s: Failed to find IOMMU device for '%s': 
+>>>>> %d\n",
+>>>>> +                __func__, dev->name, ret);
+>>>>>              return ret;
+>>>>>          }
+>>>>>          dev->iommu = dev_iommu;
+>>>>> @@ -106,8 +106,11 @@ int dev_iommu_enable(struct udevice *dev)
+>>>>>          ops = device_get_ops(dev->iommu);
+>>>>>          if (ops && ops->connect) {
+>>>>>              ret = ops->connect(dev);
+>>>>> -            if (ret)
+>>>>> +            if (ret) {
+>>>>> +                log_err("%s: Failed to connect '%s' to IOMMU '%s':
+>>>>> %d\n",
+>>>>> +                    __func__, dev->name, dev->iommu->name, ret);
+>>>>>                  return ret;
+>>>>> +            }
+>>>>>          }
+>>>>>      }
