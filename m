@@ -4,59 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51B5DC3DA6E
-	for <u-boot@archiver.kernel.org>; Fri,  5 Jan 2024 19:49:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6338C3DA6E
+	for <u-boot@archiver.kernel.org>; Fri,  5 Jan 2024 19:53:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64BB08795E;
-	Fri,  5 Jan 2024 20:49:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 8D5A287142;
+	Fri,  5 Jan 2024 20:53:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="jNR3ojX0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CgeQzLXW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A22987967; Fri,  5 Jan 2024 20:49:35 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 1561C8749F; Fri,  5 Jan 2024 20:53:46 +0100 (CET)
+Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
+ [IPv6:2607:f8b0:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5FD78795E
- for <u-boot@lists.denx.de>; Fri,  5 Jan 2024 20:49:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 3B73E8795E
+ for <u-boot@lists.denx.de>; Fri,  5 Jan 2024 20:53:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a28a6cef709so211178266b.1
- for <u-boot@lists.denx.de>; Fri, 05 Jan 2024 11:49:32 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-58962bf3f89so342469a12.0
+ for <u-boot@lists.denx.de>; Fri, 05 Jan 2024 11:53:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1704484172; x=1705088972;
- darn=lists.denx.de; 
+ d=gmail.com; s=20230601; t=1704484420; x=1705089220; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZHtFrsaZUsx4vWpg2YQliRHYMMny/gg8znjzNdFDrx8=;
- b=jNR3ojX0Op5aPcwdNqHgpXITpDwLk2+UuRxxOf4awwAKD3NdX4GKGoIdrHKzbdVqWM
- N0o+f7D/nj8rXemC5CZ6oVUD7F0HYmadm3GwmuQKUgTbvDka9dvlIDwbW7Sr26Sd7PYL
- hsliJgaDGCn9WTkpMdoa89h0m2BquNwME7ipE=
+ bh=arnH2TfOBTrALyRjBpFwbrDhQIwvciOQ2cDF4K5CeHo=;
+ b=CgeQzLXWi+3WAt5xAWpeYiX5LTLioi8enBzzHzh4Yie9x/zFrQZXAq68Qf6N1PaI+j
+ nzNBjhvxMZk+4cX2dSQTzwZD/lnFZhQiB6DNDZHsnmFlHEWhSCnYD5IOymUNe2AwXf6V
+ b+99z4u2KNjbOKO9XNB87yR7vPfsmbzDDo2HBwZuud+5Z36y6blhuJZdOTrJ159vWQzA
+ LUsBvV0h7H1IkjPb6Oos9C92Osk7kNT/xxvvkYpv1RcanzZMEcsZSuLwF1h4eDJLYMtq
+ K6wGwngEisnGyKWpF4gthf50eMLQokUoLiHiWg+Dx935FqSj2YwlOXV1jfNCLG9i8ajG
+ PiZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704484172; x=1705088972;
+ d=1e100.net; s=20230601; t=1704484420; x=1705089220;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZHtFrsaZUsx4vWpg2YQliRHYMMny/gg8znjzNdFDrx8=;
- b=PGR6tYgzxBMkME7oRm79qb7HvMlsQX9/wYqqCKsitoM9oaX0897pd0dIC7boWXUAzv
- rHIyONA+6tr/zFsWzWP5bOuBhkhQm1qCftc1kJx17Cd5cPMBi9ExOMaozAkldZcMmkr9
- IVkCmq6Pk9kq+1kU4HXzvPkZSM6kuq1YPJAcKaHshFF318RtKbz7fjXeuMqn63Ie+B04
- oKxfYWcrpAbWcJdZdC5mf5pEe+muUyHpR+fXUBx1iZX3ts3c9VwwlLdtH5kEFOscoB3d
- iLckw4UrriC4A+n4/ADpzMrlMwykgIfKjwb/a1GHKqMcPwlBtBqNSlYoNi3xmVK+RKTv
- 88UA==
-X-Gm-Message-State: AOJu0YwP/6GG4iage7uGbTo8U979MdoDabVE/BVtyq2nW32BwILYkCId
- 0WNuMWQlc2N3SMKgElvii+1wqB5rMvusNrsemYx9+ndBrw7HyQ==
-X-Google-Smtp-Source: AGHT+IF7iKIuOtVnZhrtCksl8SMEacso3CQMgczwVQqWsAIqB9KfhEJk+xtFr6N5wkvJkX5nnIhSOH9t7gqVySE3tWE=
-X-Received: by 2002:a17:906:360d:b0:a27:ee21:58c with SMTP id
- q13-20020a170906360d00b00a27ee21058cmr1304978ejb.155.1704484172094; Fri, 05
- Jan 2024 11:49:32 -0800 (PST)
+ bh=arnH2TfOBTrALyRjBpFwbrDhQIwvciOQ2cDF4K5CeHo=;
+ b=rRNmPXiV9K4ZaC/61o3Iwagx7b6rcZD/PlyvkuVPHYmXVb1fjdWP0xV3JfchrwwPBQ
+ /3O6Sf8znaPjHTH78h96UjPohIUde7JVjCtFt2qGtJByTQROBZOVe0u+j5w6x22b1MJr
+ /Uz6NZbki64Zl/u+Z700gsjPQM4M3lLMGico+lb2HV8eAG2WUtS4lRkS6wsr3DgHWcdK
+ mIzveQ+yOHJt5HfRQn5Azm1FOLimXmPsUfkE7JsEHA2pRfYKjf4So2IHIPzt6Z6MTQbj
+ sAW9EOb3PvJn6DBU1UWjyCtdIa1p7251jJonTaAtn6rUfJ7CgKyu8MAv+sFKBr7f4H8y
+ q5QQ==
+X-Gm-Message-State: AOJu0YyyAdKEs2Q9HOBYi33RebdNPVwbxZxvIjcsHUJ737W3IEOHgt6M
+ 1zGIMSGPGVd+dUYh3t2LZrG5hHs7/CApwVFXPSU=
+X-Google-Smtp-Source: AGHT+IF/SJ01OUygWDDK7JkMFGFMCoVWnHLx4nfXhY1YDzInHb+gkYuOkdwWZfEHYl9YKdxXiFQ82/gO1YaygHPe2GE=
+X-Received: by 2002:a05:6a20:96d6:b0:199:428f:9a61 with SMTP id
+ hq22-20020a056a2096d600b00199428f9a61mr2067640pzc.0.1704484420569; Fri, 05
+ Jan 2024 11:53:40 -0800 (PST)
 MIME-Version: 1.0
 References: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
  <CAOMZO5C+Pvv429sHPyKuznyvdPv217q=a8uTeNNTSyVmn1EoXw@mail.gmail.com>
@@ -68,12 +70,13 @@ References: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
  <CALG-KHwHxdd_7wz6L+6VDGS04LggyqhTZUoqgV+euSqPn9D2KQ@mail.gmail.com>
  <CAOf5uwmDZ5DtAhe-GauhuyYwSSXQnavVNfzaJkdSG3TWE1N2FA@mail.gmail.com>
  <CAOMZO5DtCDe-VzY1yx2f+LTz0tCqmtiLemrH=xTnPQs7=07aSw@mail.gmail.com>
-In-Reply-To: <CAOMZO5DtCDe-VzY1yx2f+LTz0tCqmtiLemrH=xTnPQs7=07aSw@mail.gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Fri, 5 Jan 2024 20:49:19 +0100
-Message-ID: <CAOf5uwn1LuN6uFQe9d7zXWDFnvOAqwb-etQow96fzAR0qim5Hg@mail.gmail.com>
+ <CAOf5uwn1LuN6uFQe9d7zXWDFnvOAqwb-etQow96fzAR0qim5Hg@mail.gmail.com>
+In-Reply-To: <CAOf5uwn1LuN6uFQe9d7zXWDFnvOAqwb-etQow96fzAR0qim5Hg@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 5 Jan 2024 16:53:28 -0300
+Message-ID: <CAOMZO5AqatVOGsJGwxXJCoF+tBemrfM8+pgrRCvDwHNHv1caFw@mail.gmail.com>
 Subject: Re: inconsistent wget behavior
-To: Fabio Estevam <festevam@gmail.com>
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
 Cc: Paul Liu <paul.liu@linaro.org>, Tom Rini <trini@konsulko.com>, 
  Tim Harvey <tharvey@gateworks.com>, Marek Vasut <marex@denx.de>,
  u-boot <u-boot@lists.denx.de>, 
@@ -99,40 +102,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio
+On Fri, Jan 5, 2024 at 4:49=E2=80=AFPM Michael Nazzareno Trimarchi
+<michael@amarulasolutions.com> wrote:
 
-On Fri, Jan 5, 2024 at 8:32=E2=80=AFPM Fabio Estevam <festevam@gmail.com> w=
-rote:
->
-> Hi Michael,
->
-> On Fri, Jan 5, 2024 at 4:12=E2=80=AFPM Michael Nazzareno Trimarchi
-> <michael@amarulasolutions.com> wrote:
->
-> > Can you reproduce with dcache off?
->
-> I haven't tried it.
->
-> > Where are the patches to test?
->
-> The wget issue can be reproduced with U-Boot master.
->
-> No need for extra patches. Please see the first message of this thread
-> where Tim explains how to reproduce it.
+> I was thinking that was lwip integration
 
-I was thinking that was lwip integration
+That's a different issue.
 
-Michael
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+If you want to test lwip integration, you can try it from:
+https://github.com/muvarov/u-boot/tree/master_lwip_test_v10
