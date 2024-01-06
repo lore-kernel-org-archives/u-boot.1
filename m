@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1297C46CD2
-	for <u-boot@archiver.kernel.org>; Sat,  6 Jan 2024 17:42:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83E02C47077
+	for <u-boot@archiver.kernel.org>; Sat,  6 Jan 2024 17:42:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C1D587A18;
-	Sat,  6 Jan 2024 18:41:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BE39187A23;
+	Sat,  6 Jan 2024 18:41:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iqhr3yDA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QnOzThWF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE064879E5; Sat,  6 Jan 2024 18:41:36 +0100 (CET)
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
- [IPv6:2607:f8b0:4864:20::82c])
+ id 3384187A17; Sat,  6 Jan 2024 18:41:42 +0100 (CET)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7189487A09
- for <u-boot@lists.denx.de>; Sat,  6 Jan 2024 18:41:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB3B887A1E
+ for <u-boot@lists.denx.de>; Sat,  6 Jan 2024 18:41:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82c.google.com with SMTP id
- d75a77b69052e-4280e3ab14fso6020751cf.2
- for <u-boot@lists.denx.de>; Sat, 06 Jan 2024 09:41:34 -0800 (PST)
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-204500454fcso283946fac.3
+ for <u-boot@lists.denx.de>; Sat, 06 Jan 2024 09:41:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1704562892; x=1705167692; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1704562897; x=1705167697; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=P00p3YwIzvDKZE9hOxMwiU9kVhEVuN915mtSadDkN8Y=;
- b=iqhr3yDAPHZV1uz3mu0NILcKcoU+X/enppjGZ7jeocwAWI+qix8HWnAJ43D2CCzZTD
- YJqGji30dl/L3BxCWpQKCYPjgO35f0o+/vPvxqO/OUNTXI52nAvDntXc0MRdesqZRiq3
- OyhHMRaotO3RltRkiu+2ZOY/fbnjzXbhwyY9M=
+ bh=Gj2gdnl8UzKQ5sQg6A88I+igwC9iw7OrT/+IDvvuInU=;
+ b=QnOzThWFvf/er2+EZHQs7gPQPvwm+4AWfbiv2xHeI4AILxBXetgyYZ/HS31XA4YGjC
+ MzTIo52kEP1fY1mfk1K333SPoryKBteAvJ/+iInY7HQDVmubL8HodMAEg9FJ4mTpyRRW
+ ytJLy+M4/ck3y6gXOOBrcyLNsu41vijnLlre8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704562892; x=1705167692;
+ d=1e100.net; s=20230601; t=1704562897; x=1705167697;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P00p3YwIzvDKZE9hOxMwiU9kVhEVuN915mtSadDkN8Y=;
- b=Y2pQeowjmNyAj26CruIliMtp+FwJOAKnI4KRVgMLowkEkjZZqglI1f9LkVylTDteRC
- movfqGqQJi3nFk6COW6+5r6N4wbv5UMLqMSAItwIOwoWYJ9lp1XL3oraWKhkmmtGoFfA
- w/B9Xj3ZsSrqqAl9tG8DbhlD4ci6hpgoiR0IHyqb+6ujjF+aRWx94cNcv+FAaow6QgGR
- dMAflOVzJYDOQ+PS1J/iUbya4YNZOm2YhfXmcIFVqz00wyRBXotCajkcqmN79W0K/TO0
- uaeRioW9H0Hh1HH3Fhmzs2C+3KWEOX3LpdL9Nb398XFnUGB52DUlx9guGUY7moGbGctc
- Wvcw==
-X-Gm-Message-State: AOJu0Ywc9MTj9IQFIOTXYB/zHxrAgOzOXozE09CD3Sip9k9BLPI9dRyb
- d3Uelx/GMdpMDsuq6746ieAEbaVuzeDDq5CGrk2tqaMfnnM=
-X-Google-Smtp-Source: AGHT+IERtYMKRtFwPulWaJnX7FjQ3/Uj35ajioZCFWW2tB8qJA5bN+mU2La6ntow4pRexzqVEfneVg==
-X-Received: by 2002:a05:620a:2949:b0:782:b6a1:cc97 with SMTP id
- n9-20020a05620a294900b00782b6a1cc97mr1651294qkp.19.1704562892000; 
- Sat, 06 Jan 2024 09:41:32 -0800 (PST)
+ bh=Gj2gdnl8UzKQ5sQg6A88I+igwC9iw7OrT/+IDvvuInU=;
+ b=k/eYozUrRBBZjBJB7y7IkOtz62UQig6qZajpfHIcULk1PpiD+V0aD079Bbmut8vxMO
+ pyicsWUvhO03UditF+iLVwj63hr7s4kFNHtklm4Pw5zhRaUT+HjvEnJmLeZkn1lIrE4H
+ DdnmkmePcHmcj8aw3X3ykgeXrHtr43tOR21D5vEihYHpWjsX8Oj7+KzAWufbechVC2Sl
+ tDjX3JkHTgj/G5iaGbcmBfh0Oy9Qi2F9hK1aVr+vubz6LwCkjZ4oCUEZILeq7ym9sPkX
+ allvlO59y2itdHPYSZ+kAGnJ37V8DPW8fvkdoUrasxH+m+46HczwFee0WVNTrIsF4Hxt
+ vfHQ==
+X-Gm-Message-State: AOJu0Ywbfp2F/ZWcJZOREOfsI/7MxZ2/8eT2tvWGSrvTWQFitfwyKoG6
+ Ua+AKfnRoOLxEAltM1ZJFACHR9ONo2Qt2w==
+X-Google-Smtp-Source: AGHT+IF0dzAzVMRo9POv6BHy5ISPu1QcXfgdecCDtPESAJOXwCKH0BgdW5srYMOyWS4PtYScDqXFww==
+X-Received: by 2002:a05:6870:14ce:b0:203:d54f:8aa9 with SMTP id
+ l14-20020a05687014ce00b00203d54f8aa9mr1024048oab.28.1704562897485; 
+ Sat, 06 Jan 2024 09:41:37 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
  [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
- bs44-20020a05620a472c00b007815d11eab5sm1446039qkb.26.2024.01.06.09.41.30
+ g15-20020ae9e10f000000b0077d7cfde46csm1449615qkm.106.2024.01.06.09.41.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 06 Jan 2024 09:41:31 -0800 (PST)
-Date: Sat, 6 Jan 2024 12:41:29 -0500
+ Sat, 06 Jan 2024 09:41:36 -0800 (PST)
+Date: Sat, 6 Jan 2024 12:41:34 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Anthony Loiseau <anthony@loiseau.fr>
-Cc: u-boot@lists.denx.de, Anthony Loiseau <anthony.loiseau@allcircuits.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Stefan Agner <stefan@agner.ch>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Subject: Re: [PATCH v2 1/1] fw_env: autodetect NAND erase size and env sectors
-Message-ID: <20240106174129.GC1610741@bill-the-cat>
-References: <20231221224438.21247-1-anthony@loiseau.fr>
- <20231221224438.21247-2-anthony@loiseau.fr>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: Please pull u-boot-tegra staging
+Message-ID: <20240106174134.GD1610741@bill-the-cat>
+References: <20240106092645.8901-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="T1ws8jTRMLMYrCeV"
+ protocol="application/pgp-signature"; boundary="T09eWcBGZ9xVpAXm"
 Content-Disposition: inline
-In-Reply-To: <20231221224438.21247-2-anthony@loiseau.fr>
+In-Reply-To: <20240106092645.8901-1-clamor95@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,44 +91,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---T1ws8jTRMLMYrCeV
+--T09eWcBGZ9xVpAXm
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 21, 2023 at 11:44:38PM +0100, Anthony Loiseau wrote:
+On Sat, Jan 06, 2024 at 11:26:45AM +0200, Svyatoslav Ryhel wrote:
 
-> From: Anthony Loiseau <anthony.loiseau@allcircuits.com>
+> Dear Tom,
 >=20
-> As already done for NOR chips, if device ESIZE and ENVSECTORS static
-> configurations are both zero, then autodetect them at runtime.
+> The following changes since commit 4b151562bb8e54160adedbc6a1c0c749c00a2f=
+84:
 >=20
-> Cc: Joe Hershberger <joe.hershberger@ni.com>
-> cc: Stefan Agner <stefan@agner.ch>
-> cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-> Signed-off-by: Anthony Loiseau <anthony.loiseau@allcircuits.com>
+>   bootmeth: pass size to efi_binary_run() (2023-12-22 10:36:50 -0500)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-tegra.git staging
+>=20
+> for you to fetch changes up to 86e581a5609dc4b2876e5c3e2e458c91879b353c:
+>=20
+>   board: htc: endeavoru: add an early SPL RCM hook (2024-01-05 18:05:42 +=
+0200)
+>=20
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---T1ws8jTRMLMYrCeV
+--T09eWcBGZ9xVpAXm
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWZkMkACgkQFHw5/5Y0
-tyxBuAv/dHeeTUZyPdZgbel8sTYGh32h1wvcmMMPD16M5lywrr97UPGCPmEHJiHW
-IeClGELg4/iMfx05q90FEWXlA59mOZtNVP1RQ93JqmUOprwNuWuLeO7mQkUX7hsZ
-lShSipj4Zpz9NFRnDGKffSK7e8SQHBT6tNpkynYLPh2jHWOROZPupnzfUt4qCu6h
-6xhdkaHGf5K6Ve/JfxTGHtYCQUDBYznHwZSepRquf4trU+u8bXwgAY19G/eUuTjQ
-EYJKVKLaJdLpdF8UQcH6X7NO9fvc2AJbUSVS4K1ZrKD4rlZU4QdbxTa5zxoebZ4s
-YyBbtIzhF2g/6mjGLUZyGMnuizqrX7S1/i/GDoVkWsy8XbW09IFBKuFl/Oxq4BUR
-15SSI0DzaSUT6Qn8cHIdYUZd/PWyBEuGCdCsOSRFBg8JF6mAAPyMGdemK6azCb73
-ezgMg3adBfuGueqY1sNTZ9QceXw3y5c/QP7BpFLgEKlTpY5Vszmpt//eFYOfMzp6
-2ZRiCpAV
-=3N8+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWZkM4ACgkQFHw5/5Y0
+tyyUJwwApTV5JjHTKWQNisS6VU5Ws9Jsd4Bsaa/XU6JD6Obd4b1hXOB8mwxe0CTc
+zX8btfkG9x96mWmdXJEmv9n2CuqAZ6QGXqedBefA5NtMrBiwvQQXX0KzfxlOTn6c
+VgGvpjc4YRj1b4j9zPSV7tKU3ZN8DdP23EYqKIa+P/nFzLlhBXEsMPWPkgNeZLbM
+9qEZ0wKvWIRZc1blE+yHW0kV+peWYeQUbUYUlJlKBv57tkZtq2vaJblZDIO1qCH5
+OmlgdzDrjUZx2/s9h3pV9Me/qCG2DiVLem3Q0WgktkhVlj/trGGif/15AqZyrDNI
+VRBoTp7PGzw4YzHZCyrCZ69EZhweRn17tZVrIxCNvoiraZskYsSgc0hI+2YfrdWr
+OENDo8dFG+Zz1+fQJc1oh/TDDFuCpjgh6vCcr8Igzx/e8DA49Z2tCF7osHoaRMwB
+zuKhXaSOaTFn7aqECsc9QdSSHq85XscGWeDBe2DWMSn+ABb5lldpH0uYfsKniptL
+4DZWB3L6
+=enHn
 -----END PGP SIGNATURE-----
 
---T1ws8jTRMLMYrCeV--
+--T09eWcBGZ9xVpAXm--
