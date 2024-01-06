@@ -4,73 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14D98C46CD2
-	for <u-boot@archiver.kernel.org>; Sat,  6 Jan 2024 09:27:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16F94C46CD2
+	for <u-boot@archiver.kernel.org>; Sat,  6 Jan 2024 10:37:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CB03876E4;
-	Sat,  6 Jan 2024 10:27:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0B0DD87756;
+	Sat,  6 Jan 2024 11:37:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=short.pl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eNM8Vwp+";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A01B877D8; Sat,  6 Jan 2024 10:27:09 +0100 (CET)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 227C9878AA; Sat,  6 Jan 2024 11:37:04 +0100 (CET)
+Received: from mx01.ayax.eu (mx01.ayax.eu [188.137.98.110])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4EE9A87227
- for <u-boot@lists.denx.de>; Sat,  6 Jan 2024 10:27:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EBD7387227
+ for <u-boot@lists.denx.de>; Sat,  6 Jan 2024 11:37:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=short.pl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-50e67e37661so429520e87.0
- for <u-boot@lists.denx.de>; Sat, 06 Jan 2024 01:27:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704533225; x=1705138025; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=bRiPhvZUXu8GI1TvJs2LTq2m0/RIsOHCayQD9nCmr6Q=;
- b=eNM8Vwp+weDqpA5yYeeCXtZEFrKzXnkvjrExPWqgwFGjH9iWgmNnz9Defjsj6eeFwA
- UkPxthop5VIBvP61OqXwv5rwApc9ihO61/ZRpdEDXVMBn4RiplD2JY6LUELjtC3/kwdT
- gQ1+JBqZuWKbFn4JqvekmaukNHdXdC1Lk12vgNlV4E4TqSSarPe4yZ4ZjfXdv/Xiqg65
- nQI36gnALOV0/hQGJ9IFSIMcE7g+O1ViaWhYdTiUBQa/dz7lH/ovMAIp6HY0V46wYJh1
- oqAVqUX9DgVtp2HccqlDCwy2xqKYwsMam0zVGcRb7xgcVjShVJfreq4S4o01cABAWVkv
- g9LQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704533225; x=1705138025;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bRiPhvZUXu8GI1TvJs2LTq2m0/RIsOHCayQD9nCmr6Q=;
- b=XLUK+VZhvVg4vqYlNnZA8UCXVEmY8Zfg1fBSjBNP1LZZrF9x3HtaWxISF0l3XFFLbf
- O2dBM2nPMlx4XE2aUJMAMZ0BjIpvJ1ddKDbfJFYYhPNMxjiHWV87K/Fl2KLnLo1AulPq
- ya7qMjmTmriF8SZVSsjZR+75uJ3t0+4gJzJIXzNYMTzY+lin9QRVlq4KH8n0wNPPjNPZ
- QjaMyiiMtOXJ3JnTCphilYJ76e/amJONB+lklFxjfLjBjG6zzXqkmL5u8kxrHBTQWknB
- G2wY4gshfwNpfkxqtcK/0N1GdeC9IJ4BAnZbygmawbgL3+aqiJwKPLgEEFwcF+WlQv55
- br1Q==
-X-Gm-Message-State: AOJu0YxFd1PDe+jbTrxUCXHisHWBWwxaGzeXUr5UrFXBhoDjJ2JcjDFv
- TI282f4IMgu+U5uR+HSlmTbTpF5swrQ=
-X-Google-Smtp-Source: AGHT+IG7zK7rOrEHijAA0/PGBkE8031P2PhVHTytgOtkYFT/oVdE4Zz/j71+NYW8/tSHKNtTpR+BNw==
-X-Received: by 2002:a05:6512:1387:b0:50e:7e52:1739 with SMTP id
- fc7-20020a056512138700b0050e7e521739mr404334lfb.17.1704533224954; 
- Sat, 06 Jan 2024 01:27:04 -0800 (PST)
-Received: from xeon.. ([188.163.112.64]) by smtp.gmail.com with ESMTPSA id
- bt6-20020a0564020a4600b0055510f6527dsm1910935edb.26.2024.01.06.01.27.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 06 Jan 2024 01:27:04 -0800 (PST)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: Please pull u-boot-tegra staging
-Date: Sat,  6 Jan 2024 11:26:45 +0200
-Message-Id: <20240106092645.8901-1-clamor95@gmail.com>
-X-Mailer: git-send-email 2.40.1
+ spf=pass smtp.mailfrom=gszymaszek@short.pl
+Received: from [192.168.192.146] (port=52250 helo=nx64de-df6d00)
+ by mx01.ayax.eu with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <gszymaszek@short.pl>)
+ id 1rM42x-000gV5-S6; Sat, 06 Jan 2024 11:36:56 +0100
+Date: Sat, 6 Jan 2024 11:36:54 +0100
+From: Grzegorz Szymaszek <gszymaszek@short.pl>
+To: u-boot@lists.denx.de
+Cc: Grzegorz Szymaszek <gszymaszek@short.pl>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Cournoyer <maxim.cournoyer@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] doc: fix three-dash references in reStructuredText
+Message-ID: <ZZktRm3O89FnozlD@nx64de-df6d00>
+Mail-Followup-To: u-boot@lists.denx.de,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Cournoyer <maxim.cournoyer@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,48 +61,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+The "Sending patches" and "Patman patch manager" documents refer to the
+three-dash, "---", that separates patch parts. The symbol is written in
+the documentation in the same form as it is in actual patches: as three
+U+002D HYPHEN-MINUS characters. When building the documentation, Sphinx
+converts this symbol to a U+2014 EM DASH, that is invalid in this case.
 
-The following changes since commit 4b151562bb8e54160adedbc6a1c0c749c00a2f84:
+Make the three-dash symbol a reStructuredText inline literal to prevent
+its conversion; that is, enclose it in a pair of double backquotes (`).
 
-  bootmeth: pass size to efi_binary_run() (2023-12-22 10:36:50 -0500)
+Signed-off-by: Grzegorz Szymaszek <gszymaszek@short.pl>
+---
+ doc/develop/sending_patches.rst | 4 ++--
+ tools/patman/patman.rst         | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-tegra.git staging
-
-for you to fetch changes up to 86e581a5609dc4b2876e5c3e2e458c91879b353c:
-
-  board: htc: endeavoru: add an early SPL RCM hook (2024-01-05 18:05:42 +0200)
-
-----------------------------------------------------------------
-Svyatoslav Ryhel (6):
-      doc: board: tegra30: update information in board documents
-      tegra114: clock: define MIPI calibration peripheral clock
-      ARM: tegra124: convert TEGRA_SUPPORT_NON_SECURE into Kconfig
-      ARM: tegra114: expand MC register map
-      ARM: tegra114: support nonsecure state detection
-      board: htc: endeavoru: add an early SPL RCM hook
-
- README                                            |   7 ---
- arch/arm/include/asm/arch-tegra114/clock-tables.h |   2 +-
- arch/arm/include/asm/arch-tegra114/mc.h           |  29 ++++++++++-
- arch/arm/mach-tegra/Kconfig                       |   7 +++
- arch/arm/mach-tegra/board.c                       |   3 --
- arch/arm/mach-tegra/tegra114/clock.c              |   3 +-
- board/htc/endeavoru/endeavoru-spl.c               |  56 ++++++++++++++++++++
- doc/board/asus/grouper_common.rst                 | 128 +++++++++++++++++++++++++++++----------------
- doc/board/asus/transformer_t30.rst                | 171 +++++++++++++++++++++++++++++++++++++-----------------------
- doc/board/htc/endeavoru.rst                       | 120 +++++++++++++++++++++++++++---------------
- doc/board/lg/x3_t30.rst                           | 121 +++++++++++++++++++++++++++---------------
- 11 files changed, 436 insertions(+), 211 deletions(-)
-
-Branch contains documentation updates for endeavoru, lg_x3, grouper and
-transformers, addition of MIPI calibration clock name for T114 (inline with
-T124+), convertion of TEGRA_SUPPORT_NON_SECURE into Kconfig and endeavoru
-stability improvements.
-
-All commits passed U-Boot checks and buildman for tegra.
-
-Thanks,
-Svyatoslav Ryhel.
+diff --git a/doc/develop/sending_patches.rst b/doc/develop/sending_patches.rst
+index 5a6962f102..3f25b1d046 100644
+--- a/doc/develop/sending_patches.rst
++++ b/doc/develop/sending_patches.rst
+@@ -121,7 +121,7 @@ General Patch Submission Rules
+    * For new features: a description of the feature and your implementation.
+ 
+ * Additional comments which you don't want included in U-Boot's history can be
+-  included below the first "---" in the message body.
++  included below the first "``---``" in the message body.
+ 
+ * If your description gets too long, that's a strong indication that you should
+   split up your patch.
+@@ -253,7 +253,7 @@ to observe the following rules.
+ 
+ * Please make sure to keep a "change log", i.e. a description of what you have
+   changed compared to previous versions of this patch. This change log should
+-  be added below the "---" line in the patch, which starts the "comment
++  be added below the "``---``" line in the patch, which starts the "comment
+   section", i.e. which contains text that does not get included into the
+   actual commit message.
+   Note: it is *not* sufficient to provide a change log in some cover letter
+diff --git a/tools/patman/patman.rst b/tools/patman/patman.rst
+index a8b317eed6..e01355824c 100644
+--- a/tools/patman/patman.rst
++++ b/tools/patman/patman.rst
+@@ -280,7 +280,7 @@ Series-notes:
+ 
+ Commit-notes:
+     Similar, but for a single commit (patch). These notes will appear
+-    immediately below the --- cut in the patch file::
++    immediately below the ``---`` cut in the patch file::
+ 
+         Commit-notes:
+         blah blah
+-- 
+2.43.0
