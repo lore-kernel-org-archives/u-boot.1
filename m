@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85876C46CD2
-	for <u-boot@archiver.kernel.org>; Sat,  6 Jan 2024 17:41:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7102BC46CD2
+	for <u-boot@archiver.kernel.org>; Sat,  6 Jan 2024 17:42:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67F5987A05;
-	Sat,  6 Jan 2024 18:41:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2E6BB87A07;
+	Sat,  6 Jan 2024 18:41:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gf3sjyr0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qfO5D7PM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F4F0879E5; Sat,  6 Jan 2024 18:41:28 +0100 (CET)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id 21BA8879E5; Sat,  6 Jan 2024 18:41:36 +0100 (CET)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F26FF87A06
- for <u-boot@lists.denx.de>; Sat,  6 Jan 2024 18:41:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A330287A1D
+ for <u-boot@lists.denx.de>; Sat,  6 Jan 2024 18:41:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-67f7bd86cafso5913896d6.0
- for <u-boot@lists.denx.de>; Sat, 06 Jan 2024 09:41:25 -0800 (PST)
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-595559ab71eso366463eaf.3
+ for <u-boot@lists.denx.de>; Sat, 06 Jan 2024 09:41:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1704562882; x=1705167682; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1704562887; x=1705167687; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Y1fazHjnzcXhhSY47h8f3CozLWcEme3Smjhtnc2oqXE=;
- b=gf3sjyr0DOLlQ+c7N3FUFWTJ3qZ4En97DEjpCotk1grRWDSfKQ3Fglc+SvDGtb8OUB
- nc1bvyjYdTKiV7nri4Q1BX1bkRYz+phi1H7HF17LbCyCd7GsDBPCK81LZz1nH0ljFos+
- iXYT6IZIxhNFLC9QkHeOzQh3OCswZtWyCNjS8=
+ bh=xDE3BZKG9fCWEVGIuynmm2TCsYRdTQJzm148i6tIjRU=;
+ b=qfO5D7PM6QeIGbeZGvWP8+O265a7FUgwy2KjkeIaHYLHLVbx7E8orPfvdWswPlxVNY
+ S8MySetEBfm31IvOvAhRVQNrj7lc9FT+qHK3bDa+crUsMkyMynMsgm0voxwpqxzQ2Qg5
+ 1G0MVYv4Oq7/LXj2prIu/ZnWj5z7M/sfxStXA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704562882; x=1705167682;
+ d=1e100.net; s=20230601; t=1704562887; x=1705167687;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Y1fazHjnzcXhhSY47h8f3CozLWcEme3Smjhtnc2oqXE=;
- b=w1z6UHJPfh3QGOpsQyAA8qcE7ulsm3CW0PrscHUe8j0lzeE2HzsCqTwuXPbJ0PCATW
- xot1zNi2dfGitEXaPA9uIzfsTgfpy4m9SKzkVQFwyVzZ2e2CRWbJQBpD3e7U/E9T2kb7
- 7aBHiYuTlFw4LTYlGA0wxDBHTWHhpwf8NAEJWcyD12rGFhCzogFa9sMvM22V6cZgLFo3
- ibMO4shN7TQuE5N+sPoGsPkiqFbtoBSiMNZpAi0XiupCdqAY/sumgbbmPlwOWnm3ytB4
- 0TiEwfRkBAx2DxzdWabdUkPibAth1M8zGEKIHHBLR24atHxyDwguhIX+/AUJnqjFp8/w
- akYg==
-X-Gm-Message-State: AOJu0YxgVt6kqOLXtL3ONPw2egGBkJcANnfFJxmKM/xvTVUQ8zjm+Yhf
- 1BGLu+bvINVEdF6LGbQkrmEE/0g93+dicA==
-X-Google-Smtp-Source: AGHT+IGIa6tk0CV40McnZ9OkY9vUiuOsXyefsHEqsIq0Ri5JykcGDlKyWfa9X29yDHhlSRlLW/uuJQ==
-X-Received: by 2002:a05:620a:849:b0:781:eb46:ace5 with SMTP id
- u9-20020a05620a084900b00781eb46ace5mr1401220qku.73.1704562882082; 
- Sat, 06 Jan 2024 09:41:22 -0800 (PST)
+ bh=xDE3BZKG9fCWEVGIuynmm2TCsYRdTQJzm148i6tIjRU=;
+ b=MR663zGWIxSgSbUzKZGwuDzs2bcqcf2fjtY3jV2SZIlK1z9Yhn48KjZ1i0HEJP8cvq
+ XMaQ2sD8CjrlIt9isS9xigWQNSGKw2AEHDoGoK2ig8GuKQI7yXVFSFgJxyGeGZXj5Hg0
+ IXnRNr7ZW7KoKPSoAv3Ou5VLtM2QGjLnfRh5w4W8Aotb0ysPF3MjZD3oG3Yvb2RFOcCS
+ 0cUeAn1YwMtLghlOyFOAIA/xera0Asr+xczzyx2H01bKSsAs2qLwcAIEE89FinVlxJyO
+ URMfovIg/fR/dSorp5l23zStTB84xAbAN7jJim2v5QmPgoEeAJmYvOBiHN+Ork7tOBnt
+ 49IA==
+X-Gm-Message-State: AOJu0Yy4oez+btwoCp0dh54jiIR6dmH6R7fjdHyJQhi4UJMY7MeKCpLy
+ khfLB9iuvYRwaBHiaq6zx7ACw2K8vPoipA==
+X-Google-Smtp-Source: AGHT+IFXP9jcT6yLOI3em6egbpV9k+YrjChD8igUc8NXKXhItSguUwFMObYOBT6QnDEy6XoonSskOQ==
+X-Received: by 2002:a05:6359:3093:b0:175:5d72:5f6a with SMTP id
+ rg19-20020a056359309300b001755d725f6amr804650rwb.36.1704562886623; 
+ Sat, 06 Jan 2024 09:41:26 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
  [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
- k16-20020a05620a07f000b0078168e10166sm1446971qkk.86.2024.01.06.09.41.21
+ b2-20020a0cfb42000000b0067f0d8cf418sm1504263qvq.70.2024.01.06.09.41.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 06 Jan 2024 09:41:21 -0800 (PST)
-Date: Sat, 6 Jan 2024 12:41:19 -0500
+ Sat, 06 Jan 2024 09:41:26 -0800 (PST)
+Date: Sat, 6 Jan 2024 12:41:24 -0500
 From: Tom Rini <trini@konsulko.com>
 To: =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>
 Cc: u-boot@lists.denx.de, =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>
-Subject: Re: [PATCH] fw_env: rename variables holding env data content
-Message-ID: <20240106174119.GA1610741@bill-the-cat>
-References: <20231213092344.17024-1-zajec5@gmail.com>
+Subject: Re: [PATCH] fw_env: keep calling read() until whole flash block is
+ read
+Message-ID: <20240106174124.GB1610741@bill-the-cat>
+References: <20231213121354.13303-1-zajec5@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="UKcMaLqDZGNuF5da"
+ protocol="application/pgp-signature"; boundary="MRQ9AljPQpKjuSH4"
 Content-Disposition: inline
-In-Reply-To: <20231213092344.17024-1-zajec5@gmail.com>
+In-Reply-To: <20231213121354.13303-1-zajec5@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,21 +92,32 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---UKcMaLqDZGNuF5da
+--MRQ9AljPQpKjuSH4
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Dec 13, 2023 at 10:23:44AM +0100, Rafa=C5=82 Mi=C5=82ecki wrote:
+On Wed, Dec 13, 2023 at 01:13:54PM +0100, Rafa=C5=82 Mi=C5=82ecki wrote:
 
 > From: Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.pl>
 >=20
-> Rename "addr0" and "addr1" to "buf0" and "buf1" accordingly. Name "addr"
-> suggests that variable contains a numeric value being some kind of
-> address. Name "buf" is de facto a standard name for pointer to allocated
-> memory for reading data to.
+> It's totally valid for read() to provide less bytes than requested
+> maximum. It may happen if there is no more data available yet or source
+> pushes data in small chunks.
 >=20
-> While at it drop redundant checks for NULL before calling free().
+> This actually happens when trying to read env data from NVMEM device.
+> Kernel may provide NVMEM content in page size parts (like 4096 B).
+>=20
+> This fixes warnings like:
+> Warning on /sys/bus/nvmem/devices/u-boot-env0/nvmem: Attempted to read 16=
+384 bytes but got 4096
+> Warning on /sys/bus/nvmem/devices/u-boot-env0/nvmem: Attempted to read 12=
+288 bytes but got 4096
+> Warning on /sys/bus/nvmem/devices/u-boot-env0/nvmem: Attempted to read 81=
+92 bytes but got 4096
+>=20
+> Since the main loop in flash_read_buf() is used to read blocks this
+> patch adds a new nested one.
 >=20
 > Signed-off-by: Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.pl>
 
@@ -114,22 +126,22 @@ Applied to u-boot/next, thanks!
 --=20
 Tom
 
---UKcMaLqDZGNuF5da
+--MRQ9AljPQpKjuSH4
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWZkL8ACgkQFHw5/5Y0
-tyxvYQv9HCQZQkIM4LVvJNYiPP+IdI9ozC6Zpw/OcQM2F8rwiNpsvR9gZBJ7BCaL
-ssE0A5klWWZH3qsVeX/jo3wafYerBCM8aDTx4T9nT87FVx1Xtp4o9eAfyixE8mex
-I7lO9FPIE6fy+fMMwQGv7wXfm7gnV0GoWHOE7BWS5DC7DrMqlgk38IFeCgTgPF1T
-VBBwfzwBfZLkEsoXla0vAQnZP9cNNuIRTYoWAPILsKvVdNToNNhhdgdjeVuedvJ6
-vgiB992e7/f7QsVw7twUySDuCdjRTfUod7WGrdgWKvVAjZoeO3DthmffjtKpWZy3
-rxu5IGW3mu2CzzWsBAfUQWJFpvghHiuSS4CQ/rzrWYenDTeuJgh2dGEGloyTF4HZ
-NAxd+SN8bSxfiKT+OcC4Bv1kFIEtg6nUjM1wKVE3esScsqKu1EfT/XQgBkt2MY+i
-byZXTI+gvpOBW3/rr9gcmU7LVfSardHc07TrsHlWMaeljTcGgnQ7XOQELbtlQKTR
-c+WbQzVp
-=ZX2a
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWZkMQACgkQFHw5/5Y0
+tyzmLgwAlAFDZJYmW51T0P9wWVzfVhx2kzJfMiZwNl37lqwjbCYa8Xu+n4VONn8d
+Xs5v93F0bCktnPYdOzV10nrldFNBDuKyYs/ZqmxJDvgJzcM1W8jeKSsfVY/dgwrI
+fNSIgj7TpAB9LzqeJ2LQBCVl4kAaaWug7WztnIkOwYLAUclkWlq3JYyv3bWirjyq
+sN4oapMRa3pk7JMVCw0Pv6yZMTqtmdWB1Qd6CbvO8jeffYelLqS5Cx37tUg0r1u7
+Sp9QLVUMBFSCH2gm8qHmY2cijiFRbSkRWLxxUuBPzPsf7gRoby/JmGG9eotmHhPJ
+/FsqKGkkaNmCtjZfACkGwjPn4yJQcLKEbptGoonEvEjeVlRWk6AOoo5LaVzE3tbm
+IflrLXWFyTSZSZonKcbFdrRJRSR/f9SnPDbbImSmjYBnoUe420qkdSwMbMNrDk/E
+ztPYX2dI4r1IDz+1yWXTpe0el4EyjvF3xQ3lEhZYlEEr1IS3AmI69y7oVoElv3NZ
+scUYcevD
+=ubbL
 -----END PGP SIGNATURE-----
 
---UKcMaLqDZGNuF5da--
+--MRQ9AljPQpKjuSH4--
