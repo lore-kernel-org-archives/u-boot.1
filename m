@@ -4,129 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE6EFC47077
-	for <u-boot@archiver.kernel.org>; Sat,  6 Jan 2024 17:29:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D95F2C46CD2
+	for <u-boot@archiver.kernel.org>; Sat,  6 Jan 2024 17:41:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE64287A0B;
-	Sat,  6 Jan 2024 18:29:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=solid-run.com
+	by phobos.denx.de (Postfix) with ESMTP id 70F71879EF;
+	Sat,  6 Jan 2024 18:41:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=solidrn.onmicrosoft.com header.i=@solidrn.onmicrosoft.com header.b="KVxzr+BB";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aWeLRi+/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B62F879E5; Sat,  6 Jan 2024 18:29:33 +0100 (CET)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20614.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7d00::614])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7D7FE879FD; Sat,  6 Jan 2024 18:41:15 +0100 (CET)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2354287A03
- for <u-boot@lists.denx.de>; Sat,  6 Jan 2024 18:29:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 806C4879E5
+ for <u-boot@lists.denx.de>; Sat,  6 Jan 2024 18:41:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=solid-run.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=josua@solid-run.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=goBRAMVTbWQmumZlSfN2EYWxWq9+W1yNYIeGrzUa1TeYN9O8Su7AEO/z7nLVaae9NG1G0WZ7VdqNaVWTCKy5Ah8r2wl2b4ZMAJASW0Knp/wrSTKIxc5bcJYWhBdtMKOTnqhK6mmgdEEH+lNRoNWwHdRipqzNC5Q3QglfR+/NdtatQ/qI2hSvp31OAkUXuzYmnywsv55gMCScxa8rDjupS7/GzFctm/l6Us2GHFf+vFJ0UhLbdM3lFWSyQT4mLOCX9xxyGUMe/I82xaahW7TIYj12TCB7nYUUoPoMb9c1TvoUA0cpNID9+iKQlMkfPmeeyYEORKM1b6/VIhU9w3mfCg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=eKXUxjAZ1yvj5Llpm/rjvTY5yJAoK2+dU6bFA731Efg=;
- b=kf5d48C8aE2G5wYfS7lFrBR9g2jol6xOiBbeoNKj1wtK0XGEVAc4e7JIgYEw89K+QaUC7YieDQ/2Uvn78vtV+Bql1ZzuWVMSG6YiCksgb5ueyWitZeJmOcJBXJw7HFMmRA7SDdTuFUQLxVMUsovLSu756YmD3HxuwxQkHIZUGzTHtErfYB1OK6cgbd4EdDWDPqwBwCwTIzHkTqOm4Me2atojb/GVzpQR9E1GcMBGfucsWIdHeyGGMKx8TDRzyZibarSI2uD8fb/Us7bBAqaF1gsn2eDx9Wukh8zotYYx/6SjIkbR4olqcfhmEUbXs2GX2FzppBnCs04S3JdFQbNKMw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=solid-run.com; dmarc=pass action=none
- header.from=solid-run.com; dkim=pass header.d=solid-run.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-3bbd6e37af4so572578b6e.1
+ for <u-boot@lists.denx.de>; Sat, 06 Jan 2024 09:41:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=solidrn.onmicrosoft.com; s=selector1-solidrn-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eKXUxjAZ1yvj5Llpm/rjvTY5yJAoK2+dU6bFA731Efg=;
- b=KVxzr+BBGjUU+/GYutINa8dttXSjy5/SeN8sAfHE917q3M1cDe5UEZrgNi77xZl22IoiAbvl/BI1RAkZaV5Q3MPZCkEc27xhyLcH0PpWHR83crBOOKBpjSwUlQre42ckNvU9igVufn+0GzRFM3AtEcYtBUYUuQ/816A3wH+xHZk=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=solid-run.com;
-Received: from AS8PR04MB8963.eurprd04.prod.outlook.com (2603:10a6:20b:42e::18)
- by AS8PR04MB7944.eurprd04.prod.outlook.com (2603:10a6:20b:28a::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.20; Sat, 6 Jan
- 2024 17:29:24 +0000
-Received: from AS8PR04MB8963.eurprd04.prod.outlook.com
- ([fe80::daf2:8c54:d469:793d]) by AS8PR04MB8963.eurprd04.prod.outlook.com
- ([fe80::daf2:8c54:d469:793d%6]) with mapi id 15.20.7159.018; Sat, 6 Jan 2024
- 17:29:24 +0000
-From: Josua Mayer <josua@solid-run.com>
-Date: Sat, 06 Jan 2024 18:29:18 +0100
-Subject: [PATCH 2/2] board: solidrun: clearfog: fix serdes 1 / eth2 speed
- for clearfog gtr
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240106-clearfog-gtr-serdes-v1-2-66cbc350c58d@solid-run.com>
-References: <20240106-clearfog-gtr-serdes-v1-0-66cbc350c58d@solid-run.com>
-In-Reply-To: <20240106-clearfog-gtr-serdes-v1-0-66cbc350c58d@solid-run.com>
-To: Stefan Roese <sr@denx.de>
-Cc: u-boot@lists.denx.de, Josua Mayer <josua@solid-run.com>
-X-Mailer: b4 0.12.4
-X-ClientProxiedBy: FR0P281CA0101.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a9::19) To AS8PR04MB8963.eurprd04.prod.outlook.com
- (2603:10a6:20b:42e::18)
+ d=konsulko.com; s=google; t=1704562871; x=1705167671; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=baPpc50YsvReUs7nFWxTneWIuHRr4ghFgBEEpT7fPP8=;
+ b=aWeLRi+/1WHQ/0F6HfXi5kDpyJPsl6GS+b+lrKUJKEHjSqen7LmyOaJ7Sy0Xps9Ao0
+ NEe5FAOkqI1242GTBm7GCXOr/9350Po/0B1DC9iJeSR724EeqrBiq+21NPqnJ2OY/3pA
+ IHcfvDMTIFRtd//A9npDoVlHdE1s5eztVRODI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704562871; x=1705167671;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=baPpc50YsvReUs7nFWxTneWIuHRr4ghFgBEEpT7fPP8=;
+ b=bDVVLyayel4P9slAQ5Kk3vRYBXyHY6zZeD5KEPCkhtLB1IgpLiGr7+dSC/rSGG8UBb
+ A+8WlNO4BLLN+ZDLh+inWFy4E5tyMeM88CsyN4nggyv/fX/DREJpzNUYGTKTcVDxaIew
+ TjXV99q7urvVqaFY8wt3B16MsfOput/CVmQ9A+kGwJXxBOUXOeIPTVAalR/Ts9s6898N
+ vC8RQN33VWogtMPUBkAyrGEsSwPW+W0LXWbG2ZE0w0rrKhd759CFdNjgl6Bg1e26Tlhf
+ BnrSDDHCI3sD9LoTbNQPCYA00CvQUbNAEG3iLM36zw/SNvK3EEnMtK20OEomf1m/OnnJ
+ s/Ew==
+X-Gm-Message-State: AOJu0YwAhHPWKn84UHFFNm+vHnSJkLJB//DBspg3F0atVLIoyEtdZlRu
+ ARY/+RLWp0FGAL3ORHTN+FR4PITdOggr9bAVZpYEg6nfl4A=
+X-Google-Smtp-Source: AGHT+IGVTLeH24eh2GH5fwWf0dTKdTdsevl257qL/+zcDJlXl065uCrtt8KrGK9effp9oJdNICa8+w==
+X-Received: by 2002:a05:6808:1489:b0:3b9:dd70:7660 with SMTP id
+ e9-20020a056808148900b003b9dd707660mr1399411oiw.11.1704562870995; 
+ Sat, 06 Jan 2024 09:41:10 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
+ [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
+ cx7-20020a056214188700b0067f4e2ad746sm1519468qvb.44.2024.01.06.09.41.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 06 Jan 2024 09:41:10 -0800 (PST)
+Date: Sat, 6 Jan 2024 12:41:08 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Bin Meng <bmeng@tinylab.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] tools: docker: Drop the git user name and email
+ configuration
+Message-ID: <20240106174108.GY1610741@bill-the-cat>
+References: <20240104132817.278079-1-bmeng@tinylab.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8963:EE_|AS8PR04MB7944:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4956a05b-43fb-433c-e8bd-08dc0edd06bb
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: MgAFUnahrGhtHcoY1CNLn2/iPfVuqzd8fWo4ORnKx4NBmLAll81Nu1Js37cmGJPq/7yIexGpPog/N71O9e2iDywtjE0CbNF3az9cwxPRomdcpdhaZRayZjobl5//0tzcfysJCH/VUX6lmQU1guLsg8BhjGmMjakEuQ5PBXCG8uResNGQaenvG4dClOS4N/YQUq22zR/OluYDZua0FPAyfEJYhJNOoqGRhTxVnov+yp9qbI1F4NKEQF+y2GKRuXK/PHNlTAW7fsO7ed3R/H3HxG48C+l27/xD59EAIprJn9xQqOYewafsHhnCzjH2/zWljkk0pzeatAnil2chr8VpPD0YXloeHgo0SpSxenRUHjQO0tyktxANm1ylWNtvRTE+HIr5RAvYN0/KfSs/xx32/wFUzlaELpotSCCD2Ie2W92/QeDZymw6QlaxMkMd/kODFwFIZSliOApYqEjqQwZYZiRlbuGVKoINQ3CoKP1IJ6txMSXdTtfeFCq3PdkYU/adOeQ7fZINZ+JondHJvExUBUWaFLAvSx0ZHXMADMmMnWFcUlYqkyqHmUoW6NT6P2e5HXoBluKc2Fy8pH76XZQf3RKh/9UeiOt57DXsUsDZDzqDOvvUa+QTJg5CTsH+PIDn
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8963.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(39830400003)(136003)(376002)(346002)(396003)(366004)(230922051799003)(1800799012)(64100799003)(186009)(451199024)(38100700002)(41300700001)(2906002)(52116002)(6916009)(5660300002)(38350700005)(6486002)(36756003)(86362001)(6666004)(6512007)(6506007)(316002)(8676002)(8936002)(4326008)(66946007)(66556008)(66476007)(83380400001)(26005)(478600001)(107886003)(2616005);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NGRqSERlSUUvdmorcDl6S1ZGbGZDNXZVOVdLdHlPZW5QM3lLSjUrazAxYUxl?=
- =?utf-8?B?cEVDaHV0a2hOeXc2QjB2cjcvRFAwVTdWWWhJcnhTL0FHdDQ0cE42bWNmNVJ1?=
- =?utf-8?B?ZVcyVVkxVnlDVm5hUXlNUVVyV0szd2pWUEZqT3hOdDFJd09yd0xJcXNJVnJj?=
- =?utf-8?B?MFhwaGdPb1hleDM1bkxMMGJWaGYzVnFkNHRWd3ZXVEJmRFhDZHRzVkRYNldj?=
- =?utf-8?B?a1NQVmRTSUFCdzVmVjNhV2l3amR5NTliU3I5bTdpa01ZNmFLSnlNSlI0SXF2?=
- =?utf-8?B?N0dhdkNJL0RPMi9tSVdmS2dYS25vek5pL1EzaHl0bzkwMWNsVmNKc1JrZmJt?=
- =?utf-8?B?dWMvVU4waUkzaFlBWmxyNDlzc2VJdjFndHdWbmJBSzRLZFYyR0Z6RVJ6U3ZM?=
- =?utf-8?B?emZNU1hSdkRHRlBHTXNDL0NRbVloeWdBSXdrZ2R5ZXg0QWNFUGdZNHJXNzFq?=
- =?utf-8?B?cWhySXFpcmlnQlNHS1pYY0dyN3VITStqcXlJWWF4SEVRcmI5WHVmd2Zmam9x?=
- =?utf-8?B?VTRJMlUvSXk4dHorN0QxMCt4bmprbEsxdWdQMHk0bzAvNVhrZEhVa1p6VmR0?=
- =?utf-8?B?d1NWeFFQNUtFVHM1VGdMMC80bDM3ejFLeFBpL2pWNUtzN0p0UlY4ZHpVRWUr?=
- =?utf-8?B?eHN1MzdCb0k3OElrTkt6a2JxOEtGcHd1U0JhbEFXVEFmMnplb0ZCZkVUMEJG?=
- =?utf-8?B?Tm1HS1diZXUzQ1B3ZWxOQjVHNnlQbE84TWN1OEg1V2VCTE96amh5V1A3U245?=
- =?utf-8?B?TmMvNG9wQnkwZlVsY0NlelNkMDIxMGRjZjBCWkVTTUNlOStTYVRySHJZUWg4?=
- =?utf-8?B?b3dVeHRTMXA0N3AwUTJCeFhkQ1YwUWFMVjJqck0wb0J6RjNjenYyMGxJOXJr?=
- =?utf-8?B?OEZxOGdBYmVRZjQyU1h3MUN5dW9sWTJwSVVvNm9hUkJCeGV5V296TDFVRUJN?=
- =?utf-8?B?OGc1YnhDMFZGbHExN1pUVEVtZzZKNUFXVzh1cXZrN3FmWmVpS0JhczJqTkts?=
- =?utf-8?B?OEdrbjNxc0JuZklpMENicEJtdW0xL2lkNzlJc1c3OXliR0ZYTjk3LytDZWZP?=
- =?utf-8?B?YTNDdkZOckRJVEVDcnhnYTlHcEp6Q0dGMC9HTFczWVpuTnpHVHpwaVNZUk02?=
- =?utf-8?B?Wm81SnJUQVY0U05vRXh1Y1htdkl2em1DZmpFZmN5cjMrM05kRG5WaTgxTWdn?=
- =?utf-8?B?eDYrVE16ZU9sbDBVcEJFWk9EUHBDekxyQVpyT1VtbDA0aVBscWFiME5WSXlG?=
- =?utf-8?B?VUtlZ1ZtWndSOWpsWEFOeFRPRDl1b2xQN1l3VkNZQWg4QVVPZWZzOUNEZU1X?=
- =?utf-8?B?TDQ0MWwzSCtpUTZZSmJ3RDV4L3grQjlzVjdlYkwvQ2tRM1JlenYyUlBDeVR3?=
- =?utf-8?B?cEZMRDRrbXhIVnIxV3RSSWdKWU83MG9lSktLbExabGNJRGx2QWJpZVZ0Vm95?=
- =?utf-8?B?VFRVdUhMUUxMT1VHNGNYcnpPSk9wRU1FU1F4RUZjWFB6dFhGYng4SUk3MmZU?=
- =?utf-8?B?bUo3QVRYT1NrZ3YzaVFyV3NJMXoxRkJVdm5IZmFJUWo3VURCY0FBM2prb1E3?=
- =?utf-8?B?S3pRRncvZ2dWRnRLck1FbUY5UUdKRUtLeEw3REJZcjZyZ1lFSUtSTFNsM0Yy?=
- =?utf-8?B?YVRiSm83bkRicXJRUjg5dDlmSTlodVM3R2pMVFlyRkhtdHRPRTNFdFp0VVVX?=
- =?utf-8?B?YUdFTWFJSXdzT3IvZ0Q4V3Z1Qm4vQlNLN29NeGFVMmdOWXY2bXFEY0N2UUFI?=
- =?utf-8?B?b1cvWUJ4SlNEVTlJUGRwbW40RVhWaEdDSVVQU1BZVWM1c1hNRlJwYVJ6TXVT?=
- =?utf-8?B?YlFlSDQ4RitDVG5yYnBOU3FONzJqUUNFbmJjenNmN3FHRE5mQi85UEwxU0tM?=
- =?utf-8?B?UDUrWng5dTRVSVpMaWt2enZGWVR2bTM4bGt4RnFTOW42Q0ZBVUd6akZscnRG?=
- =?utf-8?B?aGNBNVRNSEpvMlVyME9pemlTanI2RGFVRVVmVHBUR0VNY2xyT0NhWGkzWmtl?=
- =?utf-8?B?aEFUb3RJWVliamJVUjVWbVZyK1BpZDhrSEJpUTdpc3RPcGkydXB1L1hDNFBL?=
- =?utf-8?B?SUZQTHFaOGt0UU51RUNzRSs3ZlRJV2Z3ZVkrYU5Yc3lFRDV3d2tHQW44VmZw?=
- =?utf-8?Q?LG3YWjjW1KX04J/Uh1sR2qkN3?=
-X-OriginatorOrg: solid-run.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4956a05b-43fb-433c-e8bd-08dc0edd06bb
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8963.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jan 2024 17:29:24.4214 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: a4a8aaf3-fd27-4e27-add2-604707ce5b82
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cdxjYBgowRKbmcgT/uJsnCrJXosBs0CZfV95xrO0tpFzXZFh8yLoybTWWFAsi4X0vvEfL3vP2lb87I21YyQcbw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7944
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="tcHr0Rt7czDdsmFc"
+Content-Disposition: inline
+In-Reply-To: <20240104132817.278079-1-bmeng@tinylab.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -143,40 +91,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Clearfog GTR connects eth2 / serdes 1 to a 2.5Gbps capable ethernet
-switch port. Linux already configures a fixed-link at speed 2500 from
-device-tree.
 
-Upgrade serdes 1 rate to 3.125Gbps to support a 2.5Gbps link.
+--tcHr0Rt7czDdsmFc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Additionally add comments documenting each serdes' function of clearfog
-gtr, which are shared with clearfog pro.
+On Thu, Jan 04, 2024 at 09:28:17PM +0800, Bin Meng wrote:
 
-Signed-off-by: Josua Mayer <josua@solid-run.com>
----
- board/solidrun/clearfog/clearfog.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+> Since commit b45ab9ca6621 ("CI: Update to QEMU 8.0.3"), the manual
+> patch applying was removed, hence there is no need to do a git user
+> name and email configuration.
+>=20
+> Signed-off-by: Bin Meng <bmeng@tinylab.org>
+>=20
+> ---
+>=20
+>  tools/docker/Dockerfile | 3 ---
+>  1 file changed, 3 deletions(-)
+>=20
+> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+> index c4a2596b48..c12ed0fd9b 100644
+> --- a/tools/docker/Dockerfile
+> +++ b/tools/docker/Dockerfile
+> @@ -179,9 +179,6 @@ RUN git clone git://git.savannah.gnu.org/grub.git /tm=
+p/grub && \
+>  RUN git clone https://gitlab.com/qemu-project/qemu.git /tmp/qemu && \
+>  	cd /tmp/qemu && \
+>  	git checkout v8.0.3 && \
+> -	# config user.name and user.email to make 'git am' happy
+> -	git config user.name u-boot && \
+> -	git config user.email u-boot@denx.de && \
+>  	./configure --prefix=3D/opt/qemu --target-list=3D"aarch64-softmmu,arm-s=
+oftmmu,i386-softmmu,m68k-softmmu,mips-softmmu,mips64-softmmu,mips64el-softm=
+mu,mipsel-softmmu,ppc-softmmu,riscv32-softmmu,riscv64-softmmu,sh4-softmmu,x=
+86_64-softmmu,xtensa-softmmu" && \
+>  	make -j$(nproc) all install && \
+>  	rm -rf /tmp/qemu
 
-diff --git a/board/solidrun/clearfog/clearfog.c b/board/solidrun/clearfog/clearfog.c
-index 51c5be518a..6977db0a9e 100644
---- a/board/solidrun/clearfog/clearfog.c
-+++ b/board/solidrun/clearfog/clearfog.c
-@@ -98,6 +98,14 @@ int hws_board_topology_load(struct serdes_map **serdes_map_array, u8 *count)
- 			board_serdes_map[0].serdes_speed = SERDES_SPEED_5_GBPS;
- 			board_serdes_map[0].serdes_mode = PEX_ROOT_COMPLEX_X1;
- 		}
-+		/* serdes 1 is 2.5Gbps fixed link to ethernet switch */
-+		board_serdes_map[1].serdes_type = SGMII1;
-+		board_serdes_map[1].serdes_speed = SERDES_SPEED_3_125_GBPS;
-+		board_serdes_map[1].serdes_mode = SERDES_DEFAULT_MODE;
-+		/* serdes 2 is pci (like clearfog pro) */
-+		/* serdes 3 is usb-3 (like clearfog pro) */
-+		/* serdes 4 is pci (like clearfog pro) */
-+		/* serdes 5 is sfp connector (like clearfog pro) */
- 	} else if (sr_product_is(&cf_tlv_data, "Clearfog Pro")) {
- 		/* handle recognized product as noop, no adjustment required */
- 	} else if (sr_product_is(&cf_tlv_data, "Clearfog Base")) {
+I'll apply this next time I update / respin the images but I hadn't
+dropped this part just to make the next time we do need to backport a
+patch easier.
 
--- 
-2.35.3
+--=20
+Tom
 
+--tcHr0Rt7czDdsmFc
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWZkLEACgkQFHw5/5Y0
+tyyRYQv/TDdoBBuhECdMDHPYANsn6DrHtZkDMh8KcsXf6oE0qvqKiNJ/IjSGeBJy
+PUpdD6FfuCL+QfcCPTjF/PGp6j/EYNWVhweWTU6+q0d+ShpEl1Z3YUe1SN/kAIq9
+Af5JS3zKkUDDYL3keBv/qjgCdK9AajqVfTK1atrPgCleLsjEz3NDKQ+7x4ibK0F4
+3ygAit1cTSx9Si56ff7rWjQYoFOsJXYr2oucwnZgkclDtMUprazYqepGdVgQVWiV
+DPYQ85gkCiBtnb8VTysdNbYLzSFXQKyNvUvTouvl9tI0nh7ffnIIUmIePekOVT0D
+Ykxds6TF9XH6sapPFyFzp9Jw/7n8K1kqSuqYy4zmEOQSJqoSanzQQPt1ICztUpvC
+lBZsrNTXVjZJlxfjPMcsJHAnYoq228+o3O+3BF8PeTmvmhGYL7ixf8E+1N7Hkqrh
+b/aZ/BY9vzsf6ulgbhlWRyCpOQ+RluOgqYlEtxY/OmDH3NrmdEppHKQsgU9eHfuF
+mPWfwOFS
+=KUra
+-----END PGP SIGNATURE-----
+
+--tcHr0Rt7czDdsmFc--
