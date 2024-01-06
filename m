@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4526C46CD2
-	for <u-boot@archiver.kernel.org>; Sat,  6 Jan 2024 17:29:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0363DC46CD2
+	for <u-boot@archiver.kernel.org>; Sat,  6 Jan 2024 17:29:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3A2687A0D;
-	Sat,  6 Jan 2024 18:29:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 41BC987A05;
+	Sat,  6 Jan 2024 18:29:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=solid-run.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=solidrn.onmicrosoft.com header.i=@solidrn.onmicrosoft.com header.b="NgIyYHE0";
+	dkim=pass (1024-bit key; unprotected) header.d=solidrn.onmicrosoft.com header.i=@solidrn.onmicrosoft.com header.b="PRh12zSB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64FBC87A0A; Sat,  6 Jan 2024 18:29:29 +0100 (CET)
+ id 9024B879FA; Sat,  6 Jan 2024 18:29:33 +0100 (CET)
 Received: from EUR05-VI1-obe.outbound.protection.outlook.com
  (mail-vi1eur05on20614.outbound.protection.outlook.com
  [IPv6:2a01:111:f400:7d00::614])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA092879EF
- for <u-boot@lists.denx.de>; Sat,  6 Jan 2024 18:29:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E0D287A08
+ for <u-boot@lists.denx.de>; Sat,  6 Jan 2024 18:29:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=solid-run.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=josua@solid-run.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YZzJOD3gLWjJGquppq2vn6NxahrUwizP9V6u+VoO4xN5N05NOkN5Gry9fnILjVPysfTZk+g6acbkKHwgFl8IEntJP0kkpxYi+hm2L8t80S0IyKOc6x+iWeUQ/a6RxUkMODwuQVMH11nkQYlsBfv5tKhwGITAEsd+NMHuhH1VDnSMGcpjp4VscimTCcqKVKO2QgqIDYhb+oiW9b8dERK7+w1xgQN73HTEYdNIcKYJw8hNXvA264mBfYMRQi0Kg/kIwjyRO/bhKQufvoKOamupRBM1f3YESc0AupSwzYUZhyY1OWIsW17uzOl3TtaH71yUMB8goSYuxpK/O4UIw8azNw==
+ b=Il4KgSyRlBHZBHlrhJUqqAR1fnVxRxU4i5L0gGbxI/UjhkA35MXr79gKHIlDrFqmSX+WLvtVux5oOlXw7VfRILqG+lGq7Y2Fa74ZPucF7aE5vsgZhEmwIXp652TJ7KsyaMzg7rM7fPhIKHnDc3w/EhUQTVgVIjPpVwxBGjl1eaomi8SbQqZWwJgneECS5eu4P20j7gZTdzkVYCdh+Jl5Hnovg5z0odKq82SQQTwnBpo+oc2SdTGvIeio0steV0y8ynHizxx6RPgWArmAb1YHn/cYvemh6tVbURaETwUbosMzSWX7j9LHUhRUTgTsForYAL3uwNCUufq/5qHwnQIDcw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xYce9+N2We3gWi79/PQWdIV4W4HvhRgmehSoO12te44=;
- b=OqGTj6ey4gJ9vr8aZL+e1fSaf5tquePOZu4Lo6sLqNwYfmpKZhg+yCA0GXfe06Hv3zi5KLet5mpiG8cyneWwD/PkiJWdNS8u2IUkyEbXh1WfmQmI5vjR040+V7FCdihtIpo3TenMKfU368CzmPXYcG7PxglBDj8pKX885St0+9+M8gnJqeh7K4hFATXc6iPTuz91oLdcEUi00HpNxPIFekOyjakyp2TlFiwnxIdadrgnIl4X/iKnOFuw2yWk9KOF6atZghjL3wn9JcKUVuOQLud1wm0nzBlIrKwJFRH0o3K0TERUuNs4FnWiSq2UXZ25S8VKqorgxSKpFeMIH99rRA==
+ bh=PpDNGEVwva/xCxznxj/CXCYhsuxevLDsXKLeNjMwZQ0=;
+ b=Eb0aOgO8luXm+HIQgYU829E4+t8yDafy9Xc3JOp+V4DeFRd0wsxSBwjZ7ndgfmSnhl/ywcFKnyTMiKFlJT+v8NBXRDpglZ7LwjBRO2OZ+b/xRWSSSlBakEz+qnpB15zVEo1MGssrlA61DmArW/Pih35bO7SKfrKN0RNedGtvtijkcumaFgXyYPdVA6Qst0qKnfR6Z6rmUK3G/bLyCOT5rpjPDzxUBpPCNPuNEtLL/6UWPD0ULLNC++DUpdn7xHjdPI5ePRYi7N3lw4K1DoX8Qp03WaLoYRISGUsdDlXO3psxoEH2CdXvKIt1LRdXTAVRg7x0Y0sDicit9uT1zS4AgQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=solid-run.com; dmarc=pass action=none
  header.from=solid-run.com; dkim=pass header.d=solid-run.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=solidrn.onmicrosoft.com; s=selector1-solidrn-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xYce9+N2We3gWi79/PQWdIV4W4HvhRgmehSoO12te44=;
- b=NgIyYHE0oTeBaIpK+HSiyL1JojRq+4QXrtznfZ39NVzMxIK07Zs/gDMDy6DCFaZD5SbGgNyAfPCoGIVABGKc61f8+SZfPVijVCipBE8dvXJwOZge+ngK4xQ0Oo5cfJlhlBTild8/uRa+TL6NE1SSySroDCW+Z0eunM146d9GcYI=
+ bh=PpDNGEVwva/xCxznxj/CXCYhsuxevLDsXKLeNjMwZQ0=;
+ b=PRh12zSBKMeF5pQyUG86QfXiTK/BXHaMr9L/nAYDjp5v6k7apD4Un2CN+GuA4JS+0SqrCL57ZsdrKW6VFYryNO8rz9A0CRrptnvapwM1fYnWCkMKGa3VMqCzP1YB/2/EhGm8RnSf2eIf00ezNM16iSc/Wb9JRUlam+EC8SKCn+4=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=solid-run.com;
 Received: from AS8PR04MB8963.eurprd04.prod.outlook.com (2603:10a6:20b:42e::18)
  by AS8PR04MB7944.eurprd04.prod.outlook.com (2603:10a6:20b:28a::19)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.20; Sat, 6 Jan
- 2024 17:29:23 +0000
+ 2024 17:29:24 +0000
 Received: from AS8PR04MB8963.eurprd04.prod.outlook.com
  ([fe80::daf2:8c54:d469:793d]) by AS8PR04MB8963.eurprd04.prod.outlook.com
  ([fe80::daf2:8c54:d469:793d%6]) with mapi id 15.20.7159.018; Sat, 6 Jan 2024
- 17:29:23 +0000
+ 17:29:24 +0000
 From: Josua Mayer <josua@solid-run.com>
-Subject: [PATCH 0/2] board: solidrun: clearfog gtr: add serdes
- configuration
-Date: Sat, 06 Jan 2024 18:29:16 +0100
-Message-Id: <20240106-clearfog-gtr-serdes-v1-0-66cbc350c58d@solid-run.com>
+Date: Sat, 06 Jan 2024 18:29:17 +0100
+Subject: [PATCH 1/2] arm: mvebu: clearfog gtr: add config option to select
+ serdes0 interface
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAOyNmWUC/x3MTQqAIBBA4avErBswkf6uEi0sRxuIijEiEO+et
- HyL7yWIJEwRxiqB0MORz6NEU1ewbvYIhOxKg1baqEa1uO5kxZ8Bwy1YsKOIvR10583QLs5CkZe
- Q5/e/TnPOH9mQVO5lAAAA
+Message-Id: <20240106-clearfog-gtr-serdes-v1-1-66cbc350c58d@solid-run.com>
+References: <20240106-clearfog-gtr-serdes-v1-0-66cbc350c58d@solid-run.com>
+In-Reply-To: <20240106-clearfog-gtr-serdes-v1-0-66cbc350c58d@solid-run.com>
 To: Stefan Roese <sr@denx.de>
 Cc: u-boot@lists.denx.de, Josua Mayer <josua@solid-run.com>
 X-Mailer: b4 0.12.4
@@ -72,61 +71,61 @@ X-ClientProxiedBy: FR0P281CA0101.DEUP281.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS8PR04MB8963:EE_|AS8PR04MB7944:EE_
-X-MS-Office365-Filtering-Correlation-Id: 10ac5368-ff9f-46a2-d6e9-08dc0edd066a
+X-MS-Office365-Filtering-Correlation-Id: 6fadeb8f-de77-46f0-5de3-08dc0edd0693
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: SJO+XEsXcACRLLeP2jDROvJuYZ2bGkcC2o3R2YEEJ2GALxf7Vqu080w7X4hmY2ykInsJJyXeXn5CTh3e3vybR1do331xxwqW7ahGyArVChv5bF6UWVn06JuSc2i/psftja/RTkWTSqnQpAUQ2C55cEjfHeR2LkPvkqpANUXqJajE6WoxvX73/SB3Fi1pyRgNS6Fl4SDi0QEVbOpskBvtBO7PjSAAPYie9tqvv1e/P1S5nmfJ//eFnqJJFVTYiksNnBXKh7/y46VFmJSmtU65QTCUmx4dBegby0tFI8JTwSIfZRUcC0HyyFAXVvVEFYQEfR0WJBJZ6YReIgBLk+Jv6k9hcRT7VPUn+Pp4yPnY+qe0wameEXfq7ri/g7iEzsNc9jMjaD51JGLpQdchA3vCvl9HD9S2wEYKeBLYMTkpL49XSYo2ab6l/NZDXcGq35uGKDJV1LMVvwRaqaLDD84b9WG+fpCgCssbBSYqetfYXOTDZ/MtUcEkG5/HF/GLHWPIDqNUkld15aOBEdZaT7gzoDVinSZm5w1WYKGM5Ep1vimX5MYO4O9FNmk2kTTEPbKOXHS/k3Ed/rX+091ouH/pTHdhj+bRODTdQnKSOtBT9n7niCwiuePAxdf51bcMwtow
+X-Microsoft-Antispam-Message-Info: N888ADR+XRmdFzUD/aw3ohF5E4PfwRroPOdMrfF4DO+3v1hDyqVUFNiqXlj/uuqTQqV59c5UhHcq5LsoNZX8eo4iXrX7J47s+BWhtCA0TIUmni2BOddsm4nCNjs3PEY6WGSoxdMQ2dYECIAD5AzmsmqJdp9t3RFztBqHkd1lwFrpaMem7ZTIBM/3TpIEAgdsXApcHbktg7BMmbqy+gJ8bv+3KOVpQ4Tq+zt1f96iGsU5vKWKWwiuwbK1h4VkUIM4ogan+g1l9q+zEeHFr5CB/xNViNLf4OJ4+GjmS/oAUL9HvcK/C7JIWzoa4lr6uv9CZRz4VvB9S8+BVdD5PXI3UmTCt32t+0eESEgLmOmT1QGK31BMWCCa4S+g/R0mVA2S7uCFs1yp9wi33NVgA9qeITGGE3jdqJGdYsi7kjkIZjzTz12ZGgi5vtGOqzQgesNF2pxfVtGxZmD+RFD1coBE2+/UFybylfMgauuTRKtX826Hkan7AJOGnOTYrBDD2a130RfIKao38uA/nd+g8PMHUgeRebUnUNrvvk7ga+Tv2AeHgxgJeFMP2OKeR4PnF/sZf6MYRXbXik2ktZbuJ8F7EHVPdjUsIWypDuoTwB7oz4VgDr5LzGYNdtwfaGtqw9sp
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS8PR04MB8963.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(39830400003)(136003)(376002)(346002)(396003)(366004)(230922051799003)(1800799012)(64100799003)(186009)(451199024)(38100700002)(4744005)(41300700001)(2906002)(52116002)(6916009)(5660300002)(38350700005)(6486002)(36756003)(86362001)(6666004)(6512007)(6506007)(316002)(8676002)(8936002)(4326008)(66946007)(66556008)(66476007)(83380400001)(26005)(478600001)(107886003)(2616005);
+ SFS:(13230031)(39830400003)(136003)(376002)(346002)(396003)(366004)(230922051799003)(1800799012)(64100799003)(186009)(451199024)(38100700002)(41300700001)(2906002)(52116002)(6916009)(5660300002)(38350700005)(6486002)(36756003)(86362001)(6666004)(6512007)(6506007)(316002)(8676002)(8936002)(4326008)(66946007)(66556008)(66476007)(83380400001)(26005)(478600001)(107886003)(2616005);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QkswZzB4eHZlQWtRa1dBa25EQ3NhdGxVVmhBTldNclAwQVVJd0VrWm52bWpG?=
- =?utf-8?B?UkxOVzZWNnk1TVdISXdnSnduUXRlWUgrZnZRRWxrMFRmY3h0NEtYMlZqL2xv?=
- =?utf-8?B?Z1grVytxdUVodDYxbmE5MDlKVTI5NVR5QjJKWldVZk11bzdsVlU1WVZmOHZ6?=
- =?utf-8?B?eHI5czIzNWlHQldsM0hQd2MzVFVBU1MwaWdUZUpsdTlZNFhNYnBKeE5JbjFI?=
- =?utf-8?B?RFJYVnY2Si9WaDQzOXQxRGF2ZjZkSUhiSjl3K2traDBTUUxEc0dSbXBGMXNT?=
- =?utf-8?B?N2JaZUNDL0sySEJpZlVBd04rKzJmaHNwOGZVakFZTU84OFFIT211dUNuWnlz?=
- =?utf-8?B?Z0VoSFJNUEpkNnJaZE9DcGpLbEpPQnA0NzJ2ZllxVDk5d2t3Z2lnc2k1bW9Z?=
- =?utf-8?B?L2xrM1dZTWVpcm5STXNEcFpaYVVoTXZaTUJ2MGtCZnE3L3NiZzlkejZsaDlG?=
- =?utf-8?B?N0ZHbzYxZlNXRjcwSU1nejQvMzVOUHdFQ0xwdzZGdWU0VW4rVU83dG82aUJS?=
- =?utf-8?B?Yk0wUEpha1Bhb3U4Z1E2S0w2Z2JZYmlQSmlsMzZIUlU1WnU5TUZ2M3hXSUJO?=
- =?utf-8?B?MktVZGFXZTIrZkhqQy8xVVZoZHlBZUIzM3hkcUJNQkdIVWxBN0hFNDVmaS9z?=
- =?utf-8?B?c25oWE45SzhscWN4eDEzQThtbzYyUjZSQnFPTGdQVmRFVGlRSEhLZUJwZFNk?=
- =?utf-8?B?S09NSFd2YTNKUlRzVTZERmFINjZ4WThoUFFDT2lCMXJ5OXN2QVBjTFB3ckpD?=
- =?utf-8?B?eTF2Qy85UERPdjJHQ3RiV1BHenN4Ym5UUzJKUmZiUG8xTVh1aGdlT2FhR2Q3?=
- =?utf-8?B?L0hYSUpoZGF3TVVtcWdxWXNXT1lOY1FWZFlLeFVoWjlzV0JTS05uNlcvUlhT?=
- =?utf-8?B?NlRrR0xKOVZiYnBQTkN1VWFlQ252ajV2bk5oQ29ldGJKRXB6UytkckJJMGIz?=
- =?utf-8?B?dVE5Zk5hSTNZNFpJZlNFVFZwaXpSQTZHNk5HNDhsZHNvVVdEQTZnZWtZdk9N?=
- =?utf-8?B?ZmsxeDlIYWlNUjY5aFFSOVVkQ3htNXN6RjAwTk9pK3ZiK1NQWnF5bVhFd1E2?=
- =?utf-8?B?encrWXNQUG5NT1A3ZTFUc2tib21ZclRhUkxkY2tmQ2Z4YXJDbEJtci9VU2E3?=
- =?utf-8?B?UTZJSU9HRno4bDVXcXVMRlpnTHcwMmFrK3Q2MkdhMmFaWmNkUHZpUGtQQ051?=
- =?utf-8?B?YW9aREU3RWgzZk5VbytaTWd0MGpab2Q2aDA2clZ4VVUvOGorTmo3ZXN2RnNs?=
- =?utf-8?B?K0FyYmVPVGViOHVQRU1lNnZQTjlVOFFja2JjL0lxNFlzRnZUQ2Izd0pNVzkw?=
- =?utf-8?B?VU9aTHhYQ3pWM24rZXBESEU5UkZkNTR4MkVGbmhWYVkrYUM1WVdnWXlPTXdl?=
- =?utf-8?B?SGZHRmtvZiszTGo5Z1k4TjNqYXdYeXZ1UW01UmN5SnhRWUZzcFZ1eHljaTV5?=
- =?utf-8?B?RkszWnFJUnptR2ZHR2UrdUlwaDdRekd4WWhHWlBKd0pjeDBCSG52ZE9PWnZF?=
- =?utf-8?B?c1NmZG05NDQ0Vm8rRlU4cU1CS1BxeTMrQUlpQTB0Z0JlR09rNG5PUFpJYXo5?=
- =?utf-8?B?cWVQWDE1bDlLbldxMnYxT1FaUFREdExEY3lUdzErcjUwY3V0RGhVZGZqRVEv?=
- =?utf-8?B?OW9PdW1DQnE2QWo1ditzSFJxdTA3YkR3TGY5Wm0rbVlRZ3pyVDB1UWVFeEdl?=
- =?utf-8?B?NzRWK0pjZFNkMkNBVmN5TzgyNllHbGNrYWZDOVNvOHRXSk1yL2hrMnhiNFZM?=
- =?utf-8?B?SWdLancwL3pYcmMzR3Nma040bmRjZlBaSCtNUHFVZWVkbTlWVlVTMyt1bGx3?=
- =?utf-8?B?TXNFUDBZMmRTNk1ZaXpnalVqZXFDRTFzL1gyZXI2T1JscTJYWmF5UHFOZ3Bp?=
- =?utf-8?B?ZHhzZ043NDVKVmhOVVVlUmtIUVdqZGIwYmFwQ01qbkx2dTRjRVEzWCsrQWZP?=
- =?utf-8?B?Y1lmRkVlSll4TVFDMktSOU9jNEtuTnV4aWZoOGJPdGFVaTZmNkhGL3drMzFl?=
- =?utf-8?B?YThTNEl1WjFrZUMxMm1JdlFzaW5vS29yS2RHZi9IVWowcTlVV0Yzck5yZWov?=
- =?utf-8?B?T3Rld2xkNEZVUmlDajlVZy9UcnNhbi9pY2pOT3BNK1M5V2RSZWZJYktvTG9X?=
- =?utf-8?Q?g4p3cBCBV/Mp70Ow+YOteT3px?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aUV4OWxkcXhzRnlGSFdDblRBNnBtdFJHakZYeGtjcGJ2TjVNMTFmYkVEcWVK?=
+ =?utf-8?B?QUUrMEdYYTlzU3lQcVFiZ2lGMmt0MjFsWFlrdkwvdVkvcnFITlJSSzNLOE9G?=
+ =?utf-8?B?UWpoL3ZVRU5vb0pRZXEvVmVsc0ZCYklXZGw2ZVEycGVQMVA0MTlNWERNd2Mz?=
+ =?utf-8?B?bkJ6c1E0eUNVSlUzQUFDN2owalo1c3RWWHUwWnpuSE1Sc1dXaXFTTTBqSjNN?=
+ =?utf-8?B?L2xJR3l4OGthYkVGa1BlVjBwcXlmZDExcVAvTUg4cTB1cGFhL0l3aFd5M1dI?=
+ =?utf-8?B?NENhT2tGTStEU2xEM2ZPbm5tWG93TkJhbEpFSENUUDZJR0wxenAzcXBsTU1C?=
+ =?utf-8?B?TDY2TUtCWmtPZFplOUdQbUxGMjBtTzNkREsxeGYrdlZUSmw2S0ZJa0N1VFZm?=
+ =?utf-8?B?MzgzNzBCM04zd2tLU2gwMDBrcHR2akNRZ2sxNEFnYllTMHpJYkl0cC9uTlFu?=
+ =?utf-8?B?cnBacXl4YVhWbDU4MUZQQ25uRXBkcmtPRXJFRlMveXoxY3NBUnR1U3pTZXNM?=
+ =?utf-8?B?M3JKMjgzTW5oc0ZPZTRUajdjSDJNT2ttelpJRUZkc2VXNXR0dTQ4bjhvZzB2?=
+ =?utf-8?B?MHBvMkliVEZMRWlzSlMwdkt0cGVicEsxekNoV0VhczJhVnNaWEQrdkVsZHdF?=
+ =?utf-8?B?dFlCbVBiNmZEeHU0OFVTZGdyVm5RcUJScWNjWmw2U3p1S3NqMHgyMUxYQ3dS?=
+ =?utf-8?B?OWJEUnRzSWZHNDJmcEhIV2E3azlwVVF1OXkxRkpVcUp2ajNTdFRqamNDWGZO?=
+ =?utf-8?B?dzB4Q2NWQXU2VTNHcEJoa2V6YjNrOTBxaXZhRTZaWGVtcWxITG1tSTByYVhU?=
+ =?utf-8?B?bE0zQ2pid0FxcmlGRjdtMDZ5QXVqMWZBTlNneVNPeHhnVGJpcFJFOFRSaFlY?=
+ =?utf-8?B?ZTZTd0l5WGNndENlMldwMjJjeCtrMW5xb0lWd2I4bDVqTzlWTm1DejZvWG0z?=
+ =?utf-8?B?dVFTMFgyK0dmS3ZxL1dsSEdEa1V6V3VTQyt4UytMVnl4U0xXTU1FR0drNW1J?=
+ =?utf-8?B?V2tNSjJiekNwSnFJWkl1Z3Nmb0FkUDhtSDJaSHVkQTYvRnBIWERjWktIM0Fh?=
+ =?utf-8?B?MUF3clhjREludzdXaUROZWhHdnI1RW9WaXNvM1JaZjhsREJqK1FmT0NPTTVq?=
+ =?utf-8?B?WElsem5Fbjc4Mk94WGpyTFZyYWxGb1N2UXJVZHNnQXR5UVd1MjIrekgyb3RD?=
+ =?utf-8?B?dTRiT3RVR1h4UTN6WDNnaXhnRlFSTUNtdTJyOHpOc3FZUGJUNDZTS2RxT2ZE?=
+ =?utf-8?B?aW5RNllVSnhCVzFZZEVjYk8yL3hDQVlZV1M1OWlERFFxVFF5ZlN6OVNTekFo?=
+ =?utf-8?B?RkdQZUJsdEtCSFoxblh0SmtUK3BLdUYyUTlvZjM0cmNza1h6SjVUbDJaMXFv?=
+ =?utf-8?B?T0hRaC92Z3Q2Wmk2TDlFWnQ0TWljMDFCQUszcHFQTVhWbStLL1RsQ2NwVlZ4?=
+ =?utf-8?B?Y2F6N3JNZTFkVEFZYnQ0dW51QmJUbUQweDVxbVZPNnNXbkRvcENTQnBqajhD?=
+ =?utf-8?B?Y0QvWVVoZzEvZkQ4UVREUHZnY1FnZUdGZzh3TjN6eGMxRktxSVhuVjNWUm1s?=
+ =?utf-8?B?VkE5MXQ3dnF6UmowZkt6MFBJTW9pcFh4UDlpRTRaOWE3empXYjdHd01iR2RR?=
+ =?utf-8?B?RDg4TitwcVlRdWlySmluYXhMNDBpdzZGR0UrQUFsdjhWazlnMFFPdnZRYXpu?=
+ =?utf-8?B?L0h6ckkxWmFBNzJMdFpWdk1xYlp2Q1JiclZaK3Z2YVV5QXVTcmtUTzlwK0Np?=
+ =?utf-8?B?QUhPM2FKMVJtdW5QZzhNellrblNjVndEeVB5Um84UGthY1EyeEdNamNsaVlu?=
+ =?utf-8?B?WFplUE45ZkNTSHVhNkErMkYvZHhsMUt5N2pLSm1LZW9aUE5yZ21tTkU0RXpN?=
+ =?utf-8?B?ZHBGVUxPTmxQOU1FUnQvaGxqeHI4UXVXdGZGMkdSUUdsNzJ1VzBaUVpkZFQ3?=
+ =?utf-8?B?QlhlSE1GTFZ0bU5xU0VPYWVNWkFaSkRZQ0pJUHlHK3NKbi9GOXRLT1dscUxQ?=
+ =?utf-8?B?YmhndERZbnJYM2lIOVNwV3EvVTdmYVlsOHFXdWVqclQ0SERmSlVUK3pEeXhj?=
+ =?utf-8?B?Y3B0eVBXWVJZRXJMTkdEQXZpMXhGaGlEYndWVFl3Q2NwN0kxcjg5bDc3WmdV?=
+ =?utf-8?Q?WnkT/s85zZfSzXCXB3obiYvUW?=
 X-OriginatorOrg: solid-run.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 10ac5368-ff9f-46a2-d6e9-08dc0edd066a
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6fadeb8f-de77-46f0-5de3-08dc0edd0693
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8963.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jan 2024 17:29:23.8776 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jan 2024 17:29:24.1355 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: a4a8aaf3-fd27-4e27-add2-604707ce5b82
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: out9sp6N3Dh2m+m93QYAkQvRQry6utRQnYoSwKmOSKdtuEHx3VYp9vSIB1hCKdTDBDlS7eM89fX3ygl1pVj3og==
+X-MS-Exchange-CrossTenant-UserPrincipalName: akKH4UO8CiGOGQpyJLMnUOGc8kfJTXwdXmP7NE1PW/42uo6qJWeowzQZsu4RUx5eFg9+Ux8dDHutB2Sfk9UwVQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7944
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -144,25 +143,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add missing configuration options for clearog gtr serdes:
+Clearfog GTR has an assembly option for a SATA connector, CON18.
+It shares the serdes with mini-pcie connector CON3.
 
-1. select between sata and pci-e for serdes 0
-2. configure serdes 2 for 2.5Gbps link with managed switch
+Add new kconfig option to select betweenata and pci, defaulting to pci
+as it was previously configured in board-file.
+
+Clearfog GTR connects eth2 / serdes 1 to a 2.5Gbps capable ethernet
+switch port. Linux already configures a fixed-link at speed 2500 from
+device-tree.
+Upgrade serdes 1 rate to 3.125Gbps to support a 2.5Gbps network link on
+Clearfog GTR.
 
 Signed-off-by: Josua Mayer <josua@solid-run.com>
 ---
-Josua Mayer (2):
-      arm: mvebu: clearfog gtr: add config option to select serdes0 interface
-      board: solidrun: clearfog: fix serdes 1 / eth2 speed for clearfog gtr
-
  board/solidrun/clearfog/Kconfig    | 19 +++++++++++++++++++
- board/solidrun/clearfog/clearfog.c | 19 ++++++++++++++++---
- 2 files changed, 35 insertions(+), 3 deletions(-)
----
-base-commit: 82750ce44226e5f2b3bbcd79cf7b3ba3dfd3de4d
-change-id: 20240106-clearfog-gtr-serdes-8a927f496bda
+ board/solidrun/clearfog/clearfog.c | 11 ++++++++---
+ 2 files changed, 27 insertions(+), 3 deletions(-)
 
-Sincerely,
+diff --git a/board/solidrun/clearfog/Kconfig b/board/solidrun/clearfog/Kconfig
+index 60d3921307..765d8a6355 100644
+--- a/board/solidrun/clearfog/Kconfig
++++ b/board/solidrun/clearfog/Kconfig
+@@ -39,6 +39,25 @@ config CLEARFOG_SFP_25GB
+ 	  SGMII connection (requires a supporting SFP). By default, transfer speed
+ 	  of 1.25 Gbps is used, suitable for a more common 1 Gbps SFP module.
+ 
++choice CLEARFOG_GTR_SERDES0
++	prompt "Select Clearfog GTR SerDes 0 Function"
++	help
++	  Select function for SerDes 0 which is shared between CON3 and CON18
++	  for either pci-e or sata.
++
++config CLEARFOG_GTR_SERDES0_PCIE
++	bool "PCI-E on CON3"
++	default y
++	help
++	  Configure SerDes 0 for PCI-E to enable CON3 mini-PCI-E connector.
++
++config CLEARFOG_GTR_SERDES0_SATA
++	bool "SATA on CON18"
++	help
++	  Configure SerDes 0 for SATA to enable CON18 SATA connector.
++
++endchoice
++
+ config ENV_SIZE
+ 	hex "Environment Size"
+ 	default 0x10000
+diff --git a/board/solidrun/clearfog/clearfog.c b/board/solidrun/clearfog/clearfog.c
+index 6fa2fe5fe3..51c5be518a 100644
+--- a/board/solidrun/clearfog/clearfog.c
++++ b/board/solidrun/clearfog/clearfog.c
+@@ -90,9 +90,14 @@ int hws_board_topology_load(struct serdes_map **serdes_map_array, u8 *count)
+ 
+ 	/* Apply runtime detection changes */
+ 	if (sr_product_is(&cf_tlv_data, "Clearfog GTR")) {
+-		board_serdes_map[0].serdes_type = PEX0;
+-		board_serdes_map[0].serdes_speed = SERDES_SPEED_5_GBPS;
+-		board_serdes_map[0].serdes_mode = PEX_ROOT_COMPLEX_X1;
++		if (IS_ENABLED(CONFIG_CLEARFOG_GTR_SERDES0_SATA)) {
++			/* serdes 0 is sata (like clearfog pro) */
++		} else if (IS_ENABLED(CONFIG_CLEARFOG_GTR_SERDES0_PCIE)) {
++			/* serdes 0 is pci */
++			board_serdes_map[0].serdes_type = PEX0;
++			board_serdes_map[0].serdes_speed = SERDES_SPEED_5_GBPS;
++			board_serdes_map[0].serdes_mode = PEX_ROOT_COMPLEX_X1;
++		}
+ 	} else if (sr_product_is(&cf_tlv_data, "Clearfog Pro")) {
+ 		/* handle recognized product as noop, no adjustment required */
+ 	} else if (sr_product_is(&cf_tlv_data, "Clearfog Base")) {
+
 -- 
-Josua Mayer <josua@solid-run.com>
+2.35.3
 
