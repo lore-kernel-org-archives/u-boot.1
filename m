@@ -4,53 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E993C47073
-	for <u-boot@archiver.kernel.org>; Sun,  7 Jan 2024 18:18:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D5B7C47074
+	for <u-boot@archiver.kernel.org>; Sun,  7 Jan 2024 18:35:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 871AD86EF1;
-	Sun,  7 Jan 2024 19:18:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 8AC78879AC;
+	Sun,  7 Jan 2024 19:35:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="hvN7lLbo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MGyemCKn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26686879AC; Sun,  7 Jan 2024 19:18:55 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 477FB87A06; Sun,  7 Jan 2024 19:35:32 +0100 (CET)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C00A8309D
- for <u-boot@lists.denx.de>; Sun,  7 Jan 2024 19:18:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CDA2E87640
+ for <u-boot@lists.denx.de>; Sun,  7 Jan 2024 19:35:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=248a=IS=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1704651521;
- bh=mNOM8fSCrih1rdp3gHa98xcJ75mFZHwvJkhJ/8ZcI9o=;
- b=hvN7lLbowR99pFtcVGcAcLNFQ/PaMiFrnVEGiruhia9BdG5OEPvd/3IWaV8m9W0vtKU/7HTXw
- LZR9BEljvGfZjLM9lZfT+Nx3zsVUXqD/X+KktvPal5U3A1LFk1OUGc0ERYZEP1EI+iYKqJZQTzt
- XcmEdvAbJUYEFU20uDzoF3wvYOY3k/Ng+0YGjCN4pum8Cm5dZJYElCg3YqhFYxhzXRpRgiI1tNs
- W1iTqaGHjyhOMKpAxdKeva9QjuXcm2mVK3r7GvVsKuinkB9fotVQd2hhAen+B8JwG0xDD2LRue5
- sg5sjFHZPxYR9x7rA/zeeuAfce3sKjPSUMnMkoC3G8qQ==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2] rockchip: rk3328: Set efuse auto mode and timing control
-Date: Sun,  7 Jan 2024 18:18:33 +0000
-Message-ID: <20240107181834.1589988-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-33678156e27so1239142f8f.1
+ for <u-boot@lists.denx.de>; Sun, 07 Jan 2024 10:35:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1704652529; x=1705257329; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=khatjvfxdu6BR/Y39r6RfBntKMwBgaEZNA3KIDSO8hQ=;
+ b=MGyemCKnqqusNLh2qVFi0qAFFbnVu+YebCfNQXO0YQKNQfJzVkztn/dceoQ5W4YA+X
+ 23pFUYU9IKN7xPaAVuOfh+q/BphNIIIc6+uNBvfx/NeczrdZf4w9/HbF5FqUYRA+5gPs
+ N9QF12vJX/l1pXE7AE/NpqrpEgB2ijFNh34XMCY4fRywvMoIUy+c2DHoNV5UHjhMFekE
+ fq+rhf+/BAcrKXBHSfepGuxcSbHBbg0tJQAQMZIyYUmz0euyNgjfoPEyeMv5Jh+19FQ7
+ qsjNQSOO+vsKznpLaij3kKGhuFyN9TpepUYx0tW+fgwLV9FAp9P8lccP/rxgizl2sWFo
+ 0DUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704652529; x=1705257329;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=khatjvfxdu6BR/Y39r6RfBntKMwBgaEZNA3KIDSO8hQ=;
+ b=H/ut3inbVrTNbkA4LB8BS8FwdQ6JqDbCLGjEB5kGg8tnRk3tOUD7qrJYMrOc4dq3qb
+ CypBmLZOq0BKJ5xemTEfG1FkJDLKYJnz3pBdZ3TY5OO+N4r6FItva0ow+H83nKyEaePd
+ LXzCjT8Jlm41gOlzNz+ENwl7iV3EyqaR8bxvIxWndF86+HOjL9itDoGzE3Fl2ZNOcnjB
+ jo2h/HAYrA0b8FEH1zKu/V9q0tllzIIE8CB2SAOTIPZxncQ16x0/HJx2DI59GmrBifoQ
+ 4XQWjyCjYOO3M1KaznSOadsj6+Xvqw4fLklh27a5bz+SlnbrAkzHwbeTocBnDAIFYUqi
+ oGiw==
+X-Gm-Message-State: AOJu0YwVFzrrNWho8W5d6p9iJ6dYF8h0JUx2366lXW8/f/NfVlr3AMcA
+ bFB5XN3IDSQSPMkIovAzQVJwq5+x1F1yFCcZquA=
+X-Google-Smtp-Source: AGHT+IEjyfMXknVqwDj39PkUjjWtxt/drtFNww7MMdNrL3oNI/shpC1Wkfp+oGwr78aa1M+rHnj1GMI3+3QxkMRHv3c=
+X-Received: by 2002:adf:f6c3:0:b0:336:8485:d870 with SMTP id
+ y3-20020adff6c3000000b003368485d870mr1210388wrp.65.1704652528822; Sun, 07 Jan
+ 2024 10:35:28 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 659aeb016bac4da560885c23
+References: <20240105160359.634310-1-caleb.connolly@linaro.org>
+In-Reply-To: <20240105160359.634310-1-caleb.connolly@linaro.org>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Sun, 7 Jan 2024 20:35:17 +0200
+Message-ID: <CAPVz0n2Z1s12A+EjbLNG95RUSU6new+=OhcXZOr8zNmWGs2AgQ@mail.gmail.com>
+Subject: Re: [PATCH] boot: add support for button commands
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,105 +87,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Reading from efuse return zero when mainline TF-A is used.
+=D0=BF=D1=82, 5 =D1=81=D1=96=D1=87. 2024=E2=80=AF=D1=80. =D0=BE 18:03 Caleb=
+ Connolly <caleb.connolly@linaro.org> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> With the relatively new button API in U-Boot, it's now much easier to
+> model the common usecase of mapping arbitrary actions to different
+> buttons during boot - for example entering fastboot mode, setting some
+> additional kernel cmdline arguments, or booting with a custom recovery
+> ramdisk, to name a few.
+>
+> Historically, this functionality has been implemented in board code,
+> making it fixed for a given U-Boot binary and requiring the code be
+> duplicated and modified for every board.
+>
+> Implement a generic abstraction to run an arbitrary command during boot
+> when a specific button is pressed. The button -> command mapping is
+> configured via environment variables with the following format:
+>
+>   button_cmd_N_name=3D<button label>
+>   button_cmd_N=3D<command to run>
+>
+> Where N is the mapping number starting from 0. For example:
+>
+>   button_cmd_0_name=3Dvol_down
+>   button_cmd_0=3Dfastboot usb 0
+>
+> This will cause the device to enter fastboot mode if volume down is held
+> during boot.
+>
+> After we enter the cli loop the button commands are no longer valid,
+> this allows the buttons to additionally be used for navigating a boot
+> menu.
+>
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>  boot/Kconfig              | 14 +++++++
+>  common/Makefile           |  1 +
+>  common/button_cmd.c       | 83 +++++++++++++++++++++++++++++++++++++++
+>  common/main.c             |  3 ++
+>  doc/usage/environment.rst |  4 ++
+>  include/button.h          |  9 +++++
+>  6 files changed, 114 insertions(+)
+>  create mode 100644 common/button_cmd.c
+>
+I wonder how I lived without this patch! I hope to see it in the mainline A=
+SAP.
 
-  => dump_efuse
-  00000000: 00 00 00 00  ....
-  00000004: 00 00 00 00  ....
-  00000008: 00 00 00 00  ....
-  0000000c: 00 00 00 00  ....
-  00000010: 00 00 00 00  ....
-  00000014: 00 00 00 00  ....
-  00000018: 00 00 00 00  ....
-  0000001c: 00 00 00 00  ....
-
-However, when vendor TF-A blobs is used reading from efuse works.
-
-Change to use auto mode, enable finish and auto access err interrupts
-and set timing control using same values that vendor TF-A blob use to
-fix this.
-
-With this efuse can be read when either of mainline TF-A or vendor blob
-is used.
-
-  => dump_efuse
-  00000000: 52 4b 33 82  RK3.
-  00000004: 00 fe 21 55  ..!U
-  00000008: 52 4b 57 34  RKW4
-  0000000c: 35 30 32 39  5029
-  00000010: 00 00 00 00  ....
-  00000014: 08 25 0c 0f  .%..
-  00000018: 02 0d 08 00  ....
-  0000001c: 00 00 f0 00  ....
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
-Changes in v2:
-- Read and mask user mode flag instead of force 0x46 value
-
- arch/arm/mach-rockchip/rk3328/rk3328.c | 38 ++++++++++++++++++++++++++
- 1 file changed, 38 insertions(+)
-
-diff --git a/arch/arm/mach-rockchip/rk3328/rk3328.c b/arch/arm/mach-rockchip/rk3328/rk3328.c
-index de17b8868273..ca623c0d3d03 100644
---- a/arch/arm/mach-rockchip/rk3328/rk3328.c
-+++ b/arch/arm/mach-rockchip/rk3328/rk3328.c
-@@ -19,6 +19,23 @@ DECLARE_GLOBAL_DATA_PTR;
- #define GRF_BASE		0xFF100000
- #define UART2_BASE		0xFF130000
- #define FW_DDR_CON_REG		0xFF7C0040
-+#define EFUSE_NS_BASE		0xFF260000
-+
-+#define EFUSE_MOD		0x0000
-+#define EFUSE_INT_CON		0x0014
-+#define EFUSE_T_CSB_P		0x0028
-+#define EFUSE_T_PGENB_P		0x002C
-+#define EFUSE_T_LOAD_P		0x0030
-+#define EFUSE_T_ADDR_P		0x0034
-+#define EFUSE_T_STROBE_P	0x0038
-+#define EFUSE_T_CSB_R		0x003C
-+#define EFUSE_T_PGENB_R		0x0040
-+#define EFUSE_T_LOAD_R		0x0044
-+#define EFUSE_T_ADDR_R		0x0048
-+#define EFUSE_T_STROBE_R	0x004C
-+
-+#define EFUSE_USER_MODE		0x1
-+#define EFUSE_TIMING(s, l)	(((s) << 16) | (l))
- 
- const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
- 	[BROM_BOOTSOURCE_EMMC] = "/mmc@ff520000",
-@@ -50,10 +67,31 @@ struct mm_region *mem_map = rk3328_mem_map;
- int arch_cpu_init(void)
- {
- #ifdef CONFIG_SPL_BUILD
-+	u32 reg;
-+
- 	/* We do some SoC one time setting here. */
- 
- 	/* Disable the ddr secure region setting to make it non-secure */
- 	rk_setreg(FW_DDR_CON_REG, 0x200);
-+
-+	/* Use efuse auto mode */
-+	reg = readl(EFUSE_NS_BASE + EFUSE_MOD);
-+	writel(reg & ~EFUSE_USER_MODE, EFUSE_NS_BASE + EFUSE_MOD);
-+
-+	/* Enable efuse finish and auto access err interrupt */
-+	writel(0x07, EFUSE_NS_BASE + EFUSE_INT_CON);
-+
-+	/* Set efuse timing control */
-+	writel(EFUSE_TIMING(1, 241), EFUSE_NS_BASE + EFUSE_T_CSB_P);
-+	writel(EFUSE_TIMING(1, 241), EFUSE_NS_BASE + EFUSE_T_PGENB_P);
-+	writel(EFUSE_TIMING(1, 241), EFUSE_NS_BASE + EFUSE_T_LOAD_P);
-+	writel(EFUSE_TIMING(1, 241), EFUSE_NS_BASE + EFUSE_T_ADDR_P);
-+	writel(EFUSE_TIMING(2, 240), EFUSE_NS_BASE + EFUSE_T_STROBE_P);
-+	writel(EFUSE_TIMING(1, 4), EFUSE_NS_BASE + EFUSE_T_CSB_R);
-+	writel(EFUSE_TIMING(1, 4), EFUSE_NS_BASE + EFUSE_T_PGENB_R);
-+	writel(EFUSE_TIMING(1, 4), EFUSE_NS_BASE + EFUSE_T_LOAD_R);
-+	writel(EFUSE_TIMING(1, 4), EFUSE_NS_BASE + EFUSE_T_ADDR_R);
-+	writel(EFUSE_TIMING(2, 3), EFUSE_NS_BASE + EFUSE_T_STROBE_R);
- #endif
- 	return 0;
- }
--- 
-2.43.0
-
+Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # Tegra30
