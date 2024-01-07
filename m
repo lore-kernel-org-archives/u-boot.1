@@ -4,90 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FF37C47074
-	for <u-boot@archiver.kernel.org>; Sun,  7 Jan 2024 16:36:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C252C47074
+	for <u-boot@archiver.kernel.org>; Sun,  7 Jan 2024 17:35:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70D0787A06;
-	Sun,  7 Jan 2024 17:36:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id F39CD8781C;
+	Sun,  7 Jan 2024 18:35:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="BSMxJjtf";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="BLGl7Gv3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83F4A877FC; Sun,  7 Jan 2024 17:36:27 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 84D8F87831; Sun,  7 Jan 2024 18:35:35 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D94F877FC
- for <u-boot@lists.denx.de>; Sun,  7 Jan 2024 17:36:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id BE11D877FC
+ for <u-boot@lists.denx.de>; Sun,  7 Jan 2024 18:35:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-557535489d0so1169766a12.2
- for <u-boot@lists.denx.de>; Sun, 07 Jan 2024 08:36:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1704645385; x=1705250185;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UfHifqQsp8RM7p6WXGLqV5ojDTH/adlHLdXhGvVNzeg=;
- b=BSMxJjtf/7uwGezVzYawWM3qmf5TWVp9x3sws3xLCl67WAHUK03RUkdUchVLhAlmRW
- HGlVXC1CVyax471X5ywXM3wGOSp3sGZ2jsRMKsnG8LsdMM3YNjUdrChMGPhl1+s29tw+
- HQEYzcXRxXsH1xqXvX6y1Vh4ych7ZMxKBK/B0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704645385; x=1705250185;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UfHifqQsp8RM7p6WXGLqV5ojDTH/adlHLdXhGvVNzeg=;
- b=qV3qYto0BIZzaPdqirhagERFJcmiAnjZGpjo1syfPJK7LXQkfJvLiWrGg5vt3fCG9n
- K05s0sIoohc28uC+s6pn7XJFazVnENKIlZk6BHoAwBR4F8FQnU5sCornPD85YKevIK4o
- O2+CkPxRovB5FdwHloCZM1OUQqirJZInjI6q+gOYWFwLNQFY67/JsKEabUQw8mBA+VB2
- ZcNMGexEVif8tfl/k3IN0rBjVsi9+XHWYyE90+e2uZEZCLoDl4oBA25HgtoOuK15DHBS
- bWvfw2axWZZuxppjqU42wuwpNRd9TM6hUqu3U6AfD2Y1ZJGIEDZPbi+GBN/askMPqNCo
- j5xA==
-X-Gm-Message-State: AOJu0YwIwyHdk7UnQNXMCospkOKZttqeR5ArwMWjhfI5/RN0nuFnENVC
- rHH0CDjfrSZacxXRdAhXN1F0oIhIyrOiwW72jb3alofvkeEvlQ==
-X-Google-Smtp-Source: AGHT+IHgU/MKIG5Vba9FsNN4hpsjUGbMLe05tozWQanLWpnAX3AEtgoIB+tLlgX+zaCYgnn4Jbld3Tq8M5ycFBZLiqY=
-X-Received: by 2002:a17:906:187:b0:a28:f817:f46a with SMTP id
- 7-20020a170906018700b00a28f817f46amr965272ejb.6.1704645385045; Sun, 07 Jan
- 2024 08:36:25 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=248a=IS=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: References: Cc:
+ To: Subject: From: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1704648918;
+ bh=0Hkcqu1s3GcCWuPHrZ5YzjIYzlyYugYEraZNrb0BsnE=;
+ b=BLGl7Gv3zNYoZbe4t8rjaIp0M73qYAQIGbW7EWXGVvJ4nTOAPVtFLI58ZH77Dug/rtgA9hzYB
+ LgJwQcOMRSH254W9K5zBpuzTQZsdyNryerA4rHhTQDr+jrZ9CazY/YIP1kuaTE4OpZikN1lUaic
+ YSF633EgYH1yZoHEmlx+JsZn0vjDvi5LT5f4yKBhgdWu9lP33MIxF+qa2XDSq1HHIC4EcAvyLRF
+ HdkdHQaB5wqaAMJ8qBGiHecDQ93+CQdcHVtUx3nPiNYMnSCYd7uLHgUCqeiXjng0ozMDTfI5Y0J
+ YPuc4OP2R1ZYPXKjMiIYbfcM/BD8GeAu1/li054VYqWQ==
+Message-ID: <c52fb0c8-411f-4f97-8998-913e4da79d2b@kwiboo.se>
+Date: Sun, 7 Jan 2024 18:35:12 +0100
 MIME-Version: 1.0
-References: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
- <CAOMZO5C+Pvv429sHPyKuznyvdPv217q=a8uTeNNTSyVmn1EoXw@mail.gmail.com>
- <20231109001746.GX6601@bill-the-cat>
- <CAOMZO5DtKc72Zv+Q6J3P6JY8jWVbu7KDbr-AViw1hPcm0N92QQ@mail.gmail.com>
- <CAOMZO5C0ZR=DgXkGHyG-Fgt9HEr3Z_x4qhgkfmObBpTTXUmpAQ@mail.gmail.com>
- <CALG-KHx081qs+_LHTSu7ssAOd0AX-N64OPht8M8nGufU778SbQ@mail.gmail.com>
- <CAOMZO5C4qF4A8uLdRfMeDVosA2NLNU=+WvidGR7QGeSyYJOTmw@mail.gmail.com>
- <CALG-KHwHxdd_7wz6L+6VDGS04LggyqhTZUoqgV+euSqPn9D2KQ@mail.gmail.com>
- <CAOf5uwmDZ5DtAhe-GauhuyYwSSXQnavVNfzaJkdSG3TWE1N2FA@mail.gmail.com>
- <CAOMZO5DtCDe-VzY1yx2f+LTz0tCqmtiLemrH=xTnPQs7=07aSw@mail.gmail.com>
- <CAOf5uwn1LuN6uFQe9d7zXWDFnvOAqwb-etQow96fzAR0qim5Hg@mail.gmail.com>
- <CAOMZO5AqatVOGsJGwxXJCoF+tBemrfM8+pgrRCvDwHNHv1caFw@mail.gmail.com>
- <CAOf5uwmb0vJOwSj81KvfWpK6yobyz0Ozm5vDGCa9K0rZejbZLA@mail.gmail.com>
- <CAOMZO5Aa4ynpHqfqiAF6qAJmTJeAPQCmT4wyTz6H+UE3yX0jpg@mail.gmail.com>
- <CAOf5uwmBdtUBQbgKncLBBV0XC06JqOOKmgOrwxbt=oSZ6mhqKQ@mail.gmail.com>
-In-Reply-To: <CAOf5uwmBdtUBQbgKncLBBV0XC06JqOOKmgOrwxbt=oSZ6mhqKQ@mail.gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Sun, 7 Jan 2024 17:36:13 +0100
-Message-ID: <CAOf5uwk4U-o-KwVyDqNy_9vQA6q6Ms0JiB=pth4o7ZsEdMcz-g@mail.gmail.com>
-Subject: Re: inconsistent wget behavior
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Paul Liu <paul.liu@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Tim Harvey <tharvey@gateworks.com>, Marek Vasut <marex@denx.de>,
- u-boot <u-boot@lists.denx.de>, 
- Duncan Hare <DuncanCHare@yahoo.com>, Simon Glass <sjg@chromium.org>, 
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Michal Simek <michal.simek@xilinx.com>, Ramon Fried <rfried.dev@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+From: Jonas Karlman <jonas@kwiboo.se>
+Subject: Re: [PATCH v2] rockchip: rk35xx: expand space for decompressed kernel
+To: "Hugh Cole-Baker" <sigmaris@gmail.com>, Kever Yang
+ <kever.yang@rock-chips.com>
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, John Clark <inindev@gmail.com>, Tom Rini
+ <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20231226164330.63725-1-sigmaris@gmail.com>
+Content-Language: en-US
+In-Reply-To: <20231226164330.63725-1-sigmaris@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 659ae0d56bac4da560885a30
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,61 +74,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio
+Hi Hugh,
 
-On Sun, Jan 7, 2024 at 5:19=E2=80=AFPM Michael Nazzareno Trimarchi
-<michael@amarulasolutions.com> wrote:
->
-> Hi
->
-> Il dom 7 gen 2024, 17:08 Fabio Estevam <festevam@gmail.com> ha scritto:
->>
->> Hi Michael,
->>
->> On Sat, Jan 6, 2024 at 5:49=E2=80=AFAM Michael Nazzareno Trimarchi
->> <michael@amarulasolutions.com> wrote:
->> >
->> > Hi
->> >
->> > Is this code correct?
->> >
->> >     if (tcp_seq_num >=3D initial_data_seq_num &&
->> >                     store_block(pkt, tcp_seq_num - initial_data_seq_nu=
-m,
->> >                                 len) !=3D 0) {
->> >                         wget_fail("wget: store error\n",
->> >                                   tcp_seq_num, tcp_ack_num, action);
->> >                         return;
->> >                 }
->> >
->> > Can not be seq_num wrap around? Another point seems that is not
->> > guarantee packet reassembly
->>
->> If you submit a patch, I will be glad to test it.
->>
->> Cheers
->
->
-> I have already wrote something but I can not test. Will send tonight. My =
-feeling is that sometime the initial sequence number of TCP ip is next to w=
-rap around but not sure.
->
+On 2023-12-26 17:43, Hugh Cole-Baker wrote:
+> An uncompressed 6.7.0-rc1 Linux kernel Image built with the arm64
+> defconfig is about 40MB. This does not fit in to the space between
+> kernel_comp_addr_r and fdt_addr_r, so when uncompressing an Image.gz
+> to this size, the FDT will be overwritten. Rearrange addresses to have
+> 128MiB for the kernel and its decompression buffer, then devicetree,
+> overlay and ramdisk at the end.
+> 
+> Signed-off-by: Hugh Cole-Baker <sigmaris@gmail.com>
+> ---
+> Changes from v1:
+> Reorder things to have to have 128MiB for kernel and decompression space,
+> then devicetree, overlays and ramdisk.
+> Update kernel_comp_size to 128MiB.
+> 
+>  include/configs/rk3568_common.h | 12 ++++++------
+>  include/configs/rk3588_common.h | 12 ++++++------
+>  2 files changed, 12 insertions(+), 12 deletions(-)
+> 
+> diff --git a/include/configs/rk3568_common.h b/include/configs/rk3568_common.h
+> index 1b7d3437b1..48f93083de 100644
+> --- a/include/configs/rk3568_common.h
+> +++ b/include/configs/rk3568_common.h
+> @@ -20,12 +20,12 @@
+>  	"script_offset_f=0xffe000\0"	\
+>  	"script_size_f=0x2000\0"	\
+>  	"pxefile_addr_r=0x00e00000\0"	\
+> -	"fdt_addr_r=0x0a100000\0"	\
+> -	"fdtoverlay_addr_r=0x02000000\0"	\
+> -	"kernel_addr_r=0x02080000\0"	\
+> -	"ramdisk_addr_r=0x0a200000\0"	\
+> -	"kernel_comp_addr_r=0x08000000\0"	\
+> -	"kernel_comp_size=0x2000000\0"
+> +	"kernel_addr_r=0x02000000\0"	\
+> +	"kernel_comp_addr_r=0x0a000000\0"	\
+> +	"fdt_addr_r=0x12000000\0"	\
+> +	"fdtoverlay_addr_r=0x12100000\0"	\
+> +	"ramdisk_addr_r=0x12180000\0"	\
+> +	"kernel_comp_size=0x8000000\0"
 
-I have sent but not sure about it, just compile for now ;)
+This (and the prior) memory layout extend over the possible memory
+region that OPTEE may use, 32 MiB at 132 MiB offset.
 
-> Michael
+The following regions is typically reserved for TF-A and OPTEE:
+
+0x00000000 - 0x00200000 - reserved for TF-A, pstore, shmem, etc (0-2 MiB)
+0x08400000 - 0x0a400000 - reserved for OPTEE (132-164 MiB)
+
+Following offsets are used by U-Boot on rockchip rk35xx:
+
+@0       - U-Boot SPL
+@40000   - TF-A (@256 KiB)
+@a00000  - U-Boot proper (@10 MiB)
+@c00000  - scriptaddr (@12 MiB)
+@c00800  - loadaddr (@12 MiB + 2 KiB)
+@e00000  - pxefile_addr_r (@14 MiB)
+@8400000 - optional OPTEE (@132 MiB)
+
+May I suggest a memory layout similar to the following be used:
+
+@1800000  - fdtoverlay_addr_r (@24 MiB)
+@1c00000  - fdt_addr_r (@28 MiB)
+@2000000  - kernel_addr_r (@32 MiB)
+@a800000  - kernel_comp_addr_r (@168 MiB) // could also be a400000 (@164 MiB)
+@12c00000 - ramdisk_addr_r (@300 MiB) // kernel_comp_addr_r + kernel_comp_size
+and kernel_comp_size = 0x8000000 (128 MiB)
+
+With that it should allow for a 100-136 MiB kernel starting at @32 MiB,
+depending on if memory is reserved for OPTEE or not. It also leave 4 MiB
+for FDT and FDT overlay in memory just before the kernel. And finally do
+not overlap kernel_comp_addr_r with possible OPTEE memory.
+
+If we need more space then 2 MiB for U-Boot proper we should also
+revise the offsets used for loadaddr, scriptaddr and pxefile_addr_r.
+
+Regards,
+Jonas
+
+>  
+>  #define CFG_EXTRA_ENV_SETTINGS		\
+>  	ENV_MEM_LAYOUT_SETTINGS			\
+> diff --git a/include/configs/rk3588_common.h b/include/configs/rk3588_common.h
+> index 46389d087d..70430612ef 100644
+> --- a/include/configs/rk3588_common.h
+> +++ b/include/configs/rk3588_common.h
+> @@ -19,12 +19,12 @@
+>  	"script_offset_f=0xffe000\0"	\
+>  	"script_size_f=0x2000\0"	\
+>  	"pxefile_addr_r=0x00e00000\0"	\
+> -	"fdt_addr_r=0x0a100000\0"	\
+> -	"fdtoverlay_addr_r=0x02000000\0"	\
+> -	"kernel_addr_r=0x02080000\0"	\
+> -	"ramdisk_addr_r=0x0a200000\0"	\
+> -	"kernel_comp_addr_r=0x08000000\0"	\
+> -	"kernel_comp_size=0x2000000\0"
+> +	"kernel_addr_r=0x02000000\0"	\
+> +	"kernel_comp_addr_r=0x0a000000\0"	\
+> +	"fdt_addr_r=0x12000000\0"	\
+> +	"fdtoverlay_addr_r=0x12100000\0"	\
+> +	"ramdisk_addr_r=0x12180000\0"	\
+> +	"kernel_comp_size=0x8000000\0"
+>  
+>  #define CFG_EXTRA_ENV_SETTINGS \
+>  	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
 
 
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
