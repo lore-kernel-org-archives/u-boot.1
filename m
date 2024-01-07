@@ -4,108 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1409FC47074
-	for <u-boot@archiver.kernel.org>; Sun,  7 Jan 2024 10:54:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B700CC47074
+	for <u-boot@archiver.kernel.org>; Sun,  7 Jan 2024 12:25:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BD3D87A05;
-	Sun,  7 Jan 2024 11:54:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=web.de
+	by phobos.denx.de (Postfix) with ESMTP id 1919D876E4;
+	Sun,  7 Jan 2024 13:25:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=web.de header.i=jan.kiszka@web.de header.b="LuzDMd6V";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H7LaS2mR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FAEA87A07; Sun,  7 Jan 2024 11:54:29 +0100 (CET)
-Received: from mout.web.de (mout.web.de [212.227.15.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EA0BA87463; Sun,  7 Jan 2024 12:27:47 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8017D87837
- for <u-boot@lists.denx.de>; Sun,  7 Jan 2024 11:54:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D6BFB87A0D
+ for <u-boot@lists.denx.de>; Sun,  7 Jan 2024 12:27:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=web.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jan.kiszka@web.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de; s=s29768273;
- t=1704624861; x=1705229661; i=jan.kiszka@web.de;
- bh=/YIUvI4XmutSOcJJiIaWD9afOyzHLsZe1On430r8Aik=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=LuzDMd6VUNFoU5OXU+9cjdBoMHfJdV+webXMxQcN+EqKlx1cf8bSAFa0HEkjP1vh
- xGPHPRjIh0wWguXXA8K1CKCc0WIe3AH7OS3Wyr2D3i7zt95qbYmpgSpdR7/uNMffM
- y3bQ7ORPa6+UR7/qVnesmz1rktoqmixSfeb87iduc3bl9RII0dWhgkNlm1YYa2etG
- Hxnro9TgYb2QyWhX9lGcD0tduEszDGq7GJLaMKJNLgNFU7fjXrKAWrCaNVz3FplqD
- THWZsxjfgNasheb4v8VhRPalzYVdosJR2dJni3vGzLwZVnYlVa7GlmwOApcatIGX2
- hm+Zw63OkxcqUaDeDQ==
-X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
-Received: from [192.168.10.10] ([46.128.89.130]) by smtp.web.de (mrweb006
- [213.165.67.108]) with ESMTPSA (Nemesis) id 1M59n6-1rNXFx0m9M-001XU9; Sun, 07
- Jan 2024 11:54:21 +0100
-Message-ID: <c9fa0e1e-58e1-4ecb-b6f0-1b868e6d3793@web.de>
-Date: Sun, 7 Jan 2024 11:54:20 +0100
+ spf=pass smtp.mailfrom=seashell11234455@gmail.com
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-6dbb7d80df8so806918a34.1
+ for <u-boot@lists.denx.de>; Sun, 07 Jan 2024 03:27:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1704626864; x=1705231664; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=olePy2yX8zHrx2BzFMR0pIdMtPLcXfnrTuUUBTAchmk=;
+ b=H7LaS2mR4C9wSYAYJ7W2XIfv8jMSGo6BJaDHZHh3bMOFjzE5eeJ9sv1Hm5N2XABcZR
+ Gg0+upJrM0ND7z3qoLopqsuvRyOnsLvm+y19QErqyBrfQjsic+p0ieB970nCJukZIZQL
+ /NLQjtssURm6wKflMJFqIupUUf5wr+tS3WZhl6RQQdggQKREIUqgrItjBEqwlGPO0bIx
+ SYkESBTATwNfZ1d7TEhvj/dnESTSY80QuBlzdQ3nyhTGjymTcu3kZzQUVfgcO599mLbX
+ FAF0KR68AkxOLJ2daM46rh72v+wUs3Q9RPtcYFaEPwTaEn1eUBV8DgaL4xCyJ3IhCMwJ
+ lZZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704626864; x=1705231664;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=olePy2yX8zHrx2BzFMR0pIdMtPLcXfnrTuUUBTAchmk=;
+ b=IBdihJ2Uu/pz8t8sQmwkqjXaSAi/1vQt/V2Mf7WNozzWLhN8ot6Khp7TGMR/dc7SBe
+ esnjvvaQMc8i50WJWYhpbHAlH8OILM1io4fFPUHWSTmTUaL2sUhgi+wojlOIAJdbkAJj
+ bN7cRGe9mgvv3h9DGoWbMGcAa/KFaOCpONGNtMemF7ia76IULyxC3wgojPb8C/pr73hQ
+ qCHaRaSJtoCri8o7ZtL8h2jW1a3MHWm/aS4VhK7fX2ExRvijYlIuSeipwgVplrW7KWC/
+ LcdpLu+1QryuEF6TyIVH7iJzJEh4FxHT5RDEidS8wN5uZJJsWlpbGohEzKKznOXOoBKg
+ ghyg==
+X-Gm-Message-State: AOJu0YwO0tZQHwNKZejasKWozV5Qlyuu8jxoFn1/DXjJMbQ2zkNCdtyI
+ v3p6By/4fCOn9J52TptCUexvq+TJbfKkyhnTSgM=
+X-Google-Smtp-Source: AGHT+IEPzfVWCh+Z8RLZp585eE4J9OerxEKfT6IJUFkMkZuunw3JvTeARov48j6Ipoj1zQKyQhdPvA==
+X-Received: by 2002:a05:6358:9195:b0:175:6ffc:2cc0 with SMTP id
+ j21-20020a056358919500b001756ffc2cc0mr1457837rwa.8.1704626863471; 
+ Sun, 07 Jan 2024 03:27:43 -0800 (PST)
+Received: from localhost.localdomain ([120.204.188.187])
+ by smtp.gmail.com with ESMTPSA id
+ sf15-20020a17090b51cf00b0028d435cc2cbsm1279253pjb.15.2024.01.07.03.27.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 07 Jan 2024 03:27:42 -0800 (PST)
+From: Kongyang Liu <seashell11234455@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Adam Ford <aford173@gmail.com>, Bin Meng <bmeng@tinylab.org>,
+ Chris Morgan <macromorgan@hotmail.com>,
+ Conor Dooley <conor.dooley@microchip.com>,
+ Fabio Estevam <festevam@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Leo <ycliang@andestech.com>, Michal Simek <michal.simek@amd.com>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>,
+ Samuel Holland <samuel@sholland.org>, Shengyu Qu <wiagn233@outlook.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
+ Tim Harvey <tharvey@gateworks.com>, Wei Fu <wefu@redhat.com>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>,
+ Yannic Moog <y.moog@phytec.de>, Yixun Lan <dlan@gentoo.org>,
+ Yu Chien Peter Lin <peterlin@andestech.com>
+Subject: [PATCH 0/4] riscv: sophgo: milkv_duo: add support for Milk-V Duo board
+Date: Sun,  7 Jan 2024 19:27:06 +0800
+Message-ID: <20240107112713.61966-1-seashell11234455@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/6] board: ti: am62x: Add basic initialization for usb
- voltage, 32k crystal, debounce
-Content-Language: en-US
-To: Nishanth Menon <nm@ti.com>, Francesco Dolcini <francesco@dolcini.it>
-Cc: Tom Rini <trini@konsulko.com>, Neha Malcom Francis <n-francis@ti.com>,
- Bryan Brattlof <bb@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
- Andrew Davis <afd@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
- Vignesh R <vigneshr@ti.com>, u-boot@lists.denx.de
-References: <20230725185253.2123433-1-nm@ti.com>
- <20230725185253.2123433-4-nm@ti.com> <20230725212504.GH3630934@bill-the-cat>
- <20230725213755.kc6qcvmkmt2yzzqz@perfected>
- <20230725214210.GL3630934@bill-the-cat>
- <20230725220328.fruxsldln7o5geil@tassel>
- <ZMBJtRFu4mnGPSja@francesco-nb.int.toradex.com>
- <ZMBOONYlgGWMVK7h@francesco-nb.int.toradex.com>
- <20230726111019.gotprceqsrmpwgyg@stopwatch>
-From: Jan Kiszka <jan.kiszka@web.de>
-Autocrypt: addr=jan.kiszka@web.de; keydata=
- xsDhBEq0i8QRBAD2wOxlC9m/8t/vqjm1U9yQCT6OJ2Wbv/qys9DYM0CvcOTDMWQwmV1/VsZj
- KR5YgB5NPt+To7X6x5cjz15AGnx5Fb8Wnrq8EF9ZfHMwb7YMx1LdPYPDnXr37wE3XupFmkHB
- Mes4htyX7Dz8LvKDLnli4IsAmWG+kV1JI6LWKXLpSwCg8JRq4SWoB4VCQxbH3GjntgvwNc8D
- /2q5Dj0urJ7s7sdXhrH0hcFkpSFRmU5Yd6MCwcbFHm2paL5gqVjNNUUwDBKAL9eZaQVIHKwC
- 44BvNGO2gcQ26R3AuCHUQ+pZHg34tok1JCNZ6IEZccb+33Qq0qbcDMJJiDYp7ppp6ozifvc4
- YaqJECX48IydxfE9+41oV7T5vNAzA/QL/UMJyTnu5jiOXcyn5iFQw535lXkwKsqeXzCowLho
- HICZ2jITJPdTT/+9pGWwMQqST/SS35Tx4EnS3z2BWsNMCLuXCPkxF1elaMJqMfMJxFD8rAgS
- 9GK6zP6fJlsA1wq/UvKSL8v4QPOnTNCVOsyqJVasGV0ZPcDfcj+ClNO4zR5KYW4gS2lzemth
- IDxqYW4ua2lzemthQHdlYi5kZT7CYAQTEQIAIAUCSrSLxAIbIwYLCQgHAwIEFQIIAwQWAgMB
- Ah4BAheAAAoJEIrUrG965ecUhIMAnR6DDCW5cx+cVdYhydbhQXqeief6AJ4p+z4+nrmZLdfU
- 7V6nKqKeHeTtj87BTQRKtIvEEAgA2/PlX6oyi7dToH0CJCHq0eKmZaa7CmGaVnxyeepKvIfi
- M8n8Td76AbG64fjREMwgSpb4F/UytF3z/03tj4e49W/zKjbBRB2/wmFRlZBC9crg22Q+bgvM
- OsxnC6uHXaWN8fL+jVei/5OoHOoFqaMsX8EvploitlI/BPj+VgW26jksf3YZyk1hnclsZ/IY
- hXzgRmVJo4RiTW/YLQAkwndwc+fKPa/IYLEDW1Jc4kNLoK0P90b45zju0hpl0C00pVORTOtz
- FK9G5Ha7qOAWJfAVJORHKAkkvwftf3hkpPdLyvZUWRHXvUexmA61fLvDBAFhRxYGD8t5gz88
- SF5Tzq+0ywADBQf/YSkaYrEslPWiCA2wU6EW0yaqBQAobFsOMvsufJ6o2ntq5Ncq37VI3KCT
- 67eHPE9x+zPcENoZWsRrC9S9PCf1LOsi7ybZsR13AJqDFlRzJZ4klh9QwgwFZxUBzOdIvttw
- zG1QkzHx06RKZluFYpPF3DRduSMukdIJ2wmWCU+ohB+mYefe65JGjYQfHVs8mgYVFOPxbRea
- 9VJACCMuspoZWpj43UdR1lLLyIUFYz+jqcPW7Hd/GTIw4N67pYl0dwPDmFd4ohJ5g4Zpq61t
- oNysBGEuEm5GCcn0VmGtQpSYnR5cVm5b2yPz4bIuFOSuZUo/l7vitdY0iy0/wvKbBC+NK8JJ
- BBgRAgAJBQJKtIvEAhsMAAoJEIrUrG965ecULvAAoKGvxs5T3IhyQT8I8sMsyAvCE4wHAJ46
- S16yab+OxNkvOeoOEX0EnHVHaA==
-In-Reply-To: <20230726111019.gotprceqsrmpwgyg@stopwatch>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:CFjSCyAT/uRpWSR2BbG6x/NDEfrdm41QHRLiSb9+5S1iRHB5oIF
- BWzlqY2SbviYKHtIuP/5bdmM/lvqBLbAgbwn3gUI1dYREDkB5haVkxLTUuvGuheO7LbDD3N
- YRpHdrEcOlcMp30ad2xN7dT70I7tR5/LjAxonyJ1w2avMVI0LxwOYUSjjjx09nGGs6PaC/q
- 91IYooyUY3hrJ++slrW/Q==
-UI-OutboundReport: notjunk:1;M01:P0:dRfiGKNP0A4=;szH2IbQQtehrK19mwrMd6tV9V9+
- iS0tu+uVDwN6jJd4fTnGGwegGBKk3Bq/7aJi/WE1VUn1ujYV5Ffa8loJrZrzMSmzi3DqXtkuz
- 6IQggUd5U6EyJYo8AemiV0yGDVGw7gELMRDV5G0SHX5HRzi07BBqCfAzBjhX5SAxG+8mp1hXj
- P8H2I4FtI4oZ6cduxZv42mgMZ+aCDfricUtsWbSkrg92l9uCT7QeCdD3nKsW0/hCa905M8TAP
- vxVTdbU+O6VScywRr2iA6OTR4IcMm4NlaQ6Hf+Tc5IlQ2eRLbDwP1/EAh7sA2Hi0Tnt1PZ2ob
- lGBw1rXV66Zkm+TM+tJ/DzRGIUWXjCMs4PcFopTu0AF8bXwvKMXVxGTKO/LyRkJUSBkOqutfC
- 3E/+oip3ZtND4UwMlanH3Pgy3WRe5UgjoVkATaQizOr5bznv/s0CHTEFYCwmiFp9cVN96+yVw
- z9V8D4m3m46+TqPZRm0619cafbOV14brQTdzoY4bqn8ljmcUsceey9mn1RgMJtUf24HjCRDaS
- O7W4co+g/Nl45cK6Sc9nQYm6/6YEDpC1kwPz7tYNcCUOJLHHch6wtf6zj28vAzTsEVKDkSSmc
- UVEXdnFYdAe+H18/8X6MiMUuXaL0/vJyWazKo3Zx1k3qPBn7YCmNpx3s7mP2iVnG1EdhvOVD0
- g/vK5qli0/LDldDJNqekKKBwA99EO+iyH52cx94yeqpQXT2McyhZSxXM5Oa/cOFLn6uQSwr2V
- GbU5LG+kBZdti16CqEOzoFd+JN/RqnkGV8aHbTomKUTMI1ZgxmAJRZGg9Ld95/E94xpgyJYkQ
- zbOqUtzpcK55TVyIHgDzYX5OKbxOrc3OMMccKHrXj0z8GoDTtOjoxFdijzXm6y3yVrJwyfHM2
- HMMwATty2Z8q9k4u5oapD7vp/ysr/L9WWPvCumg+kbN0JjUR2Afd/D8hgyhKFZfGD0oMKiQI0
- zqynjHgVkB2ZOaSctKFcHYOgZ3E=
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 07 Jan 2024 13:25:04 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,70 +101,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 26.07.23 13:10, Nishanth Menon wrote:
-> On 00:35-20230726, Francesco Dolcini wrote:
-> [...]
->>>>
->>>> At least the ones we have currently (I am not sure about toradex,
->>>> phytech etc), seem to operate the vdd_core at 0.85V .. (which is what
->>>> USB is dependent upon).
->>>
->>> For Toradex, we do have the equivalent code in our board file, see
->>> https://git.toradex.com/cgit/u-boot-toradex.git/tree/board/toradex/ver=
-din-am62/verdin-am62.c?h=3Dtoradex_ti-u-boot-2023.04#n92
->>>
->>> The 32kHz configuration is just different for us, we do not re-use the
->>> same you have here.
->
-> True, you are hitting the bypass control and not powering on the
-> oscillator control since the 32k is incoming from RTC, in my case, since
-> I have an actual 32k crystal, I am clearing the powerdown.
->
->
->>>
->>> The debounce conf registers I have no idea what they are about,
->>> something we should have also on our board? Any additional details?
->>
->> So, I got curious and checked on the datasheet/TRM on this debounce. If
->> I understood correctly this is to have debounce on GPIO and/or EQEP.
->
-> Typically, yes - input signals more useful for eQEP or GPIO. but the
-> implementation is at pin level which, technically could be used for
-> other purposes (but I have'nt seen any).
->
->>
->> However to my understanding this would need to have the corresponding
->> DEBOUNCE_SEL register written on the pad configuration, and by default =
-it's 0.
->>
->> What's the use case for this debounce configuration you have here?
->
-> TRM was a bit of a crap (internal ticket was filed to improve), but long
-> story short:
-> * bootloader configures delays per index
-> * in the pinmux configuration, we pick which index to use for the pin
->
-> On Beagleplay, for example, the HDMI hot plug detect GPIO benefited from
-> this[1]. Corresponding pinctrl.h macros were posted in [2].
->
-> Why do it in the bootloader? since gpio inputs could also used in u-boot
-> (e.g. MMC/CD)
->
->
-> All said, Tom's question is very valid - we'd rather not modify evm.c
-> for these specific configurations (popcorn as they might be), and we
-> need to figure out a better option to introduce this kind of variation
-> cleanly. For now, I will try dropping this patch.
->
->
-> [1] https://git.beagleboard.org/beagleboard/linux/-/blob/v6.1.33-ti-rt-a=
-rm64-r6/arch/arm64/boot/dts/ti/k3-am625-beagleplay.dts#L311
-> [2] https://lore.kernel.org/all/20230619131620.3286650-1-nm@ti.com/
->
+The Milk-V Duo board is built upon Sophgo's CV1800B SoC, featuring two
+XuanTie C906 CPUs running at 1.0GHz and 700MHz, respectively.
 
-What happened to this? I still need something like this patch (a version
-that has the CFG register writes correctly ordered) on top of current
-master in order to get WIFI on the Beagleplay.
+This series introduces fundamental support for the Milk-V Duo board,
+encompassing UART, CPU, and PLIC support. This ensures that U-Boot can
+operate in serial console mode.
 
-Jan
+
+Kongyang Liu (4):
+  riscv: sophgo: milkv_duo: initial support added
+  riscv: dts: sophgo: Add basic device tree for Milk-V Duo board
+  configs: milkv_duo_defconfig: Add initial config
+  doc: sophgo: milkv_duo: document Milk-V Duo board
+
+ arch/riscv/Kconfig                   |   4 +
+ arch/riscv/dts/Makefile              |   1 +
+ arch/riscv/dts/cv1800b-milkv-duo.dts |  38 +++++++++
+ arch/riscv/dts/cv1800b.dtsi          | 123 +++++++++++++++++++++++++++
+ board/sophgo/milkv_duo/Kconfig       |  28 ++++++
+ board/sophgo/milkv_duo/MAINTAINERS   |   6 ++
+ board/sophgo/milkv_duo/Makefile      |   5 ++
+ board/sophgo/milkv_duo/board.c       |   9 ++
+ configs/milkv_duo_defconfig          |  24 ++++++
+ doc/board/index.rst                  |   1 +
+ doc/board/sophgo/index.rst           |   8 ++
+ doc/board/sophgo/milkv_duo.rst       |  50 +++++++++++
+ include/configs/milkv_duo.h          |  16 ++++
+ 13 files changed, 313 insertions(+)
+ create mode 100644 arch/riscv/dts/cv1800b-milkv-duo.dts
+ create mode 100644 arch/riscv/dts/cv1800b.dtsi
+ create mode 100644 board/sophgo/milkv_duo/Kconfig
+ create mode 100644 board/sophgo/milkv_duo/MAINTAINERS
+ create mode 100644 board/sophgo/milkv_duo/Makefile
+ create mode 100644 board/sophgo/milkv_duo/board.c
+ create mode 100644 configs/milkv_duo_defconfig
+ create mode 100644 doc/board/sophgo/index.rst
+ create mode 100644 doc/board/sophgo/milkv_duo.rst
+ create mode 100644 include/configs/milkv_duo.h
+
+-- 
+2.41.0
 
