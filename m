@@ -4,93 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FA4CC47073
-	for <u-boot@archiver.kernel.org>; Sun,  7 Jan 2024 17:52:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E993C47073
+	for <u-boot@archiver.kernel.org>; Sun,  7 Jan 2024 18:18:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C31F87831;
-	Sun,  7 Jan 2024 18:52:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 871AD86EF1;
+	Sun,  7 Jan 2024 19:18:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fOIQuE05";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="hvN7lLbo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E371F87A0A; Sun,  7 Jan 2024 18:52:35 +0100 (CET)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 26686879AC; Sun,  7 Jan 2024 19:18:55 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 400A48781C
- for <u-boot@lists.denx.de>; Sun,  7 Jan 2024 18:52:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C00A8309D
+ for <u-boot@lists.denx.de>; Sun,  7 Jan 2024 19:18:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-28c5af37d3aso333578a91.0
- for <u-boot@lists.denx.de>; Sun, 07 Jan 2024 09:52:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704649951; x=1705254751; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pHqIaH0Mp5dFQY18qAMpLorn/TY/30HKaxXib5YUY4E=;
- b=fOIQuE05dM3DQy/cwuIuHPzmaMdEXweksu0dSTqmtaRn4UWjDaC6JmOKKzUjnf8Upt
- iD/+c1wpjuCouCy7sDWbisrVTeUDP9G7fSJ8mG8O5OxgFIbYUkL4wnK45O18bCHGCBcT
- GjHMQCyUXUp/vXmpQ5wbvAa3KqROhqRNLnp0KwhOUbO8f/yfc1LixL4mvcLA+HiZUauX
- RvLgxGFuCs+djSxjb9T3VmKGKr3TOApTGzgDftnJVRnzsM8jkbwsb5VfFdGPMMPOHuU2
- xgN9HoQQ0ttqg8+/GJWj2+sBw47cCjPptm4pm4ZG8/Rh9j1tpOZjOrCAl80WooYUS/yN
- cr0g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704649951; x=1705254751;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=pHqIaH0Mp5dFQY18qAMpLorn/TY/30HKaxXib5YUY4E=;
- b=GxAVdfRXcA5Ox8RG21H7bnzewXvFNYEaMg0QXIEeAV69Vy0H56Dg7u+DgoY6GGiPT+
- iNJqODYMzSo2my8luvZXi/HpXsUc7sKk+uB77/hNie97DrtEfYaFq6E2PGZZceZYkZyU
- 3L2fXl/S5r8g9aFFtE6j5eqOHcei+RRKUmGTvVoPbnPPnTim1pFiOMoyIvarvwVlIGht
- 4VVn1f6ITO60KnVwCxyE+HkXeoJv3/IkROpCPgh2vspza+cu+nroguBDYp97yyfM7Mgz
- pv+a+Ey40+OdS0e4AWmqmTy0ucQxDY1oHWpLB+H2UoOjXaYovf0Katv+ZJ4i4jY2Zpgw
- bPTA==
-X-Gm-Message-State: AOJu0Yx3mm8yGHfb7hlLFUuj4lWUM9VigzCKZrf2DrRq/mJmdnMtNDP+
- rBGfBKswr2uemqJK7rxvlbH9tvyUqpKS0S4CJoQ=
-X-Google-Smtp-Source: AGHT+IEDhQx8Wab71ByzgjrnsAmZ8bsm6WWeDnkxoGeIQksLmYE+10zVV8hgkSUQShVwP2xqw+hW0k06aI3HWTtsv78=
-X-Received: by 2002:a17:90a:4962:b0:28c:5a9:de71 with SMTP id
- c89-20020a17090a496200b0028c05a9de71mr3716395pjh.4.1704649951427; Sun, 07 Jan
- 2024 09:52:31 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=248a=IS=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1704651521;
+ bh=mNOM8fSCrih1rdp3gHa98xcJ75mFZHwvJkhJ/8ZcI9o=;
+ b=hvN7lLbowR99pFtcVGcAcLNFQ/PaMiFrnVEGiruhia9BdG5OEPvd/3IWaV8m9W0vtKU/7HTXw
+ LZR9BEljvGfZjLM9lZfT+Nx3zsVUXqD/X+KktvPal5U3A1LFk1OUGc0ERYZEP1EI+iYKqJZQTzt
+ XcmEdvAbJUYEFU20uDzoF3wvYOY3k/Ng+0YGjCN4pum8Cm5dZJYElCg3YqhFYxhzXRpRgiI1tNs
+ W1iTqaGHjyhOMKpAxdKeva9QjuXcm2mVK3r7GvVsKuinkB9fotVQd2hhAen+B8JwG0xDD2LRue5
+ sg5sjFHZPxYR9x7rA/zeeuAfce3sKjPSUMnMkoC3G8qQ==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v2] rockchip: rk3328: Set efuse auto mode and timing control
+Date: Sun,  7 Jan 2024 18:18:33 +0000
+Message-ID: <20240107181834.1589988-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
- <CAOMZO5C+Pvv429sHPyKuznyvdPv217q=a8uTeNNTSyVmn1EoXw@mail.gmail.com>
- <20231109001746.GX6601@bill-the-cat>
- <CAOMZO5DtKc72Zv+Q6J3P6JY8jWVbu7KDbr-AViw1hPcm0N92QQ@mail.gmail.com>
- <CAOMZO5C0ZR=DgXkGHyG-Fgt9HEr3Z_x4qhgkfmObBpTTXUmpAQ@mail.gmail.com>
- <CALG-KHx081qs+_LHTSu7ssAOd0AX-N64OPht8M8nGufU778SbQ@mail.gmail.com>
- <CAOMZO5C4qF4A8uLdRfMeDVosA2NLNU=+WvidGR7QGeSyYJOTmw@mail.gmail.com>
- <CALG-KHwHxdd_7wz6L+6VDGS04LggyqhTZUoqgV+euSqPn9D2KQ@mail.gmail.com>
- <CAOf5uwmDZ5DtAhe-GauhuyYwSSXQnavVNfzaJkdSG3TWE1N2FA@mail.gmail.com>
- <CAOMZO5DtCDe-VzY1yx2f+LTz0tCqmtiLemrH=xTnPQs7=07aSw@mail.gmail.com>
- <CAOf5uwn1LuN6uFQe9d7zXWDFnvOAqwb-etQow96fzAR0qim5Hg@mail.gmail.com>
- <CAOMZO5AqatVOGsJGwxXJCoF+tBemrfM8+pgrRCvDwHNHv1caFw@mail.gmail.com>
- <CAOf5uwmb0vJOwSj81KvfWpK6yobyz0Ozm5vDGCa9K0rZejbZLA@mail.gmail.com>
- <CAOMZO5Aa4ynpHqfqiAF6qAJmTJeAPQCmT4wyTz6H+UE3yX0jpg@mail.gmail.com>
- <CAOf5uwmBdtUBQbgKncLBBV0XC06JqOOKmgOrwxbt=oSZ6mhqKQ@mail.gmail.com>
- <CAOf5uwk4U-o-KwVyDqNy_9vQA6q6Ms0JiB=pth4o7ZsEdMcz-g@mail.gmail.com>
-In-Reply-To: <CAOf5uwk4U-o-KwVyDqNy_9vQA6q6Ms0JiB=pth4o7ZsEdMcz-g@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sun, 7 Jan 2024 14:52:19 -0300
-Message-ID: <CAOMZO5AtdU5yDRvvDwO_HW4EfKLG7Y7ypokK08_Sm+zwrFGg7w@mail.gmail.com>
-Subject: Re: inconsistent wget behavior
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Paul Liu <paul.liu@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Tim Harvey <tharvey@gateworks.com>, Marek Vasut <marex@denx.de>,
- u-boot <u-boot@lists.denx.de>, 
- Duncan Hare <DuncanCHare@yahoo.com>, Simon Glass <sjg@chromium.org>, 
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Michal Simek <michal.simek@xilinx.com>, Ramon Fried <rfried.dev@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 659aeb016bac4da560885c23
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,93 +67,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
+Reading from efuse return zero when mainline TF-A is used.
 
-On Sun, Jan 7, 2024 at 1:36=E2=80=AFPM Michael Nazzareno Trimarchi
-<michael@amarulasolutions.com> wrote:
+  => dump_efuse
+  00000000: 00 00 00 00  ....
+  00000004: 00 00 00 00  ....
+  00000008: 00 00 00 00  ....
+  0000000c: 00 00 00 00  ....
+  00000010: 00 00 00 00  ....
+  00000014: 00 00 00 00  ....
+  00000018: 00 00 00 00  ....
+  0000001c: 00 00 00 00  ....
 
-> I have sent but not sure about it, just compile for now ;)
+However, when vendor TF-A blobs is used reading from efuse works.
 
-It didn't work:
+Change to use auto mode, enable finish and auto access err interrupts
+and set timing control using same values that vendor TF-A blob use to
+fix this.
 
-u-boot=3D> wget 192.168.0.16:/test
-HTTP/1.0 200 OK| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-Packets received 298384, Transfer Successful
-Bytes transferred =3D 1448 (5a8 hex)
-u-boot=3D> wget 192.168.0.16:/Image
-HTTP/1.0 200 OK| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | |
-Packets received 13692, Transfer Successful
-Bytes transferred =3D 1448 (5a8 hex)
-u-boot=3D>
+With this efuse can be read when either of mainline TF-A or vendor blob
+is used.
 
-Sent two different files, with different sizes, but Bytes transferred
-reports 1448 in both cases.
+  => dump_efuse
+  00000000: 52 4b 33 82  RK3.
+  00000004: 00 fe 21 55  ..!U
+  00000008: 52 4b 57 34  RKW4
+  0000000c: 35 30 32 39  5029
+  00000010: 00 00 00 00  ....
+  00000014: 08 25 0c 0f  .%..
+  00000018: 02 0d 08 00  ....
+  0000001c: 00 00 f0 00  ....
+
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+Changes in v2:
+- Read and mask user mode flag instead of force 0x46 value
+
+ arch/arm/mach-rockchip/rk3328/rk3328.c | 38 ++++++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
+
+diff --git a/arch/arm/mach-rockchip/rk3328/rk3328.c b/arch/arm/mach-rockchip/rk3328/rk3328.c
+index de17b8868273..ca623c0d3d03 100644
+--- a/arch/arm/mach-rockchip/rk3328/rk3328.c
++++ b/arch/arm/mach-rockchip/rk3328/rk3328.c
+@@ -19,6 +19,23 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define GRF_BASE		0xFF100000
+ #define UART2_BASE		0xFF130000
+ #define FW_DDR_CON_REG		0xFF7C0040
++#define EFUSE_NS_BASE		0xFF260000
++
++#define EFUSE_MOD		0x0000
++#define EFUSE_INT_CON		0x0014
++#define EFUSE_T_CSB_P		0x0028
++#define EFUSE_T_PGENB_P		0x002C
++#define EFUSE_T_LOAD_P		0x0030
++#define EFUSE_T_ADDR_P		0x0034
++#define EFUSE_T_STROBE_P	0x0038
++#define EFUSE_T_CSB_R		0x003C
++#define EFUSE_T_PGENB_R		0x0040
++#define EFUSE_T_LOAD_R		0x0044
++#define EFUSE_T_ADDR_R		0x0048
++#define EFUSE_T_STROBE_R	0x004C
++
++#define EFUSE_USER_MODE		0x1
++#define EFUSE_TIMING(s, l)	(((s) << 16) | (l))
+ 
+ const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
+ 	[BROM_BOOTSOURCE_EMMC] = "/mmc@ff520000",
+@@ -50,10 +67,31 @@ struct mm_region *mem_map = rk3328_mem_map;
+ int arch_cpu_init(void)
+ {
+ #ifdef CONFIG_SPL_BUILD
++	u32 reg;
++
+ 	/* We do some SoC one time setting here. */
+ 
+ 	/* Disable the ddr secure region setting to make it non-secure */
+ 	rk_setreg(FW_DDR_CON_REG, 0x200);
++
++	/* Use efuse auto mode */
++	reg = readl(EFUSE_NS_BASE + EFUSE_MOD);
++	writel(reg & ~EFUSE_USER_MODE, EFUSE_NS_BASE + EFUSE_MOD);
++
++	/* Enable efuse finish and auto access err interrupt */
++	writel(0x07, EFUSE_NS_BASE + EFUSE_INT_CON);
++
++	/* Set efuse timing control */
++	writel(EFUSE_TIMING(1, 241), EFUSE_NS_BASE + EFUSE_T_CSB_P);
++	writel(EFUSE_TIMING(1, 241), EFUSE_NS_BASE + EFUSE_T_PGENB_P);
++	writel(EFUSE_TIMING(1, 241), EFUSE_NS_BASE + EFUSE_T_LOAD_P);
++	writel(EFUSE_TIMING(1, 241), EFUSE_NS_BASE + EFUSE_T_ADDR_P);
++	writel(EFUSE_TIMING(2, 240), EFUSE_NS_BASE + EFUSE_T_STROBE_P);
++	writel(EFUSE_TIMING(1, 4), EFUSE_NS_BASE + EFUSE_T_CSB_R);
++	writel(EFUSE_TIMING(1, 4), EFUSE_NS_BASE + EFUSE_T_PGENB_R);
++	writel(EFUSE_TIMING(1, 4), EFUSE_NS_BASE + EFUSE_T_LOAD_R);
++	writel(EFUSE_TIMING(1, 4), EFUSE_NS_BASE + EFUSE_T_ADDR_R);
++	writel(EFUSE_TIMING(2, 3), EFUSE_NS_BASE + EFUSE_T_STROBE_R);
+ #endif
+ 	return 0;
+ }
+-- 
+2.43.0
+
