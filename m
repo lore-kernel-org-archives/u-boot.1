@@ -4,89 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FC66C47074
-	for <u-boot@archiver.kernel.org>; Sun,  7 Jan 2024 16:19:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94DE6C47074
+	for <u-boot@archiver.kernel.org>; Sun,  7 Jan 2024 16:34:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 398878781C;
-	Sun,  7 Jan 2024 17:19:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id C020B8781C;
+	Sun,  7 Jan 2024 17:34:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="psil/e4g";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="BapRrjW8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F239877FC; Sun,  7 Jan 2024 17:19:33 +0100 (CET)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id 6E99487831; Sun,  7 Jan 2024 17:34:32 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B52B8781C
- for <u-boot@lists.denx.de>; Sun,  7 Jan 2024 17:19:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C591877FC
+ for <u-boot@lists.denx.de>; Sun,  7 Jan 2024 17:34:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-50e7ddd999bso1047267e87.1
- for <u-boot@lists.denx.de>; Sun, 07 Jan 2024 08:19:26 -0800 (PST)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a28f66dc7ffso367159866b.0
+ for <u-boot@lists.denx.de>; Sun, 07 Jan 2024 08:34:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1704644365; x=1705249165;
+ d=amarulasolutions.com; s=google; t=1704645270; x=1705250070;
  darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=60MfkMjLtlUoXZ/4Ob0gQEEszuQ9z8dJQMtrAFjSuDI=;
- b=psil/e4gziaNXayhWL2JpVt/a3Bqfab/i3ifw6tgEBC1D0Z4ZTkkRtZrldVQJuErnR
- CUWiMgHMEZlYil2uB62vr9gzEqb0xDBge9D8PFp/s87/NEPaG8UVigZVor3cwEDPg/Ci
- JAHmz3XIaeTWIb21EZ+45K6Sj8qK2imQ9uQzY=
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=VEO9s5KE4fzvAc72PBTqi3K8rhyuGHpZ3HzmToAhb0M=;
+ b=BapRrjW8HCX39ptrcBZUiZUv9vPJh/qcEW827F2v/oN8sssubufbGfiU7V6mTa+0Ps
+ jgnw9q5nDxRRDE+Q/y3gjgu7i7+rkKDtf92s8s7Ug3LEbDeHuRut63FHuOnn6Xs57dZX
+ Olt9ketlsDcLvVy7354gWsky7p2gq1STLBMdc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704644365; x=1705249165;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1704645270; x=1705250070;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=60MfkMjLtlUoXZ/4Ob0gQEEszuQ9z8dJQMtrAFjSuDI=;
- b=L8vKfoQQGwVClrwAAay/jAOjFJrFPinBGGL0D9Vi26/o6gfMDIeGMrJMWwEx+jrnlA
- jo23npEDrio2GMhWj4jxHzbTZAfxwGB6oy3oTf8RWo9gEha05ilbL6dRUABAcvobAilm
- GIWjXdkmvZ7niKU9w9isn2c9+n9+gJSOigPvola7DXvDCIFBDB+Ns9Mo+cOf/ac21x58
- DnFsW9yG4FMEsmtqSd+Ry6agzLXwXACeT2n4PGBpef+oXdAkNXIiOJiiHhhfksfFxOtw
- MNj9mLs+LRjlXtarq5K8aN254lVTl2Z889enqsYbfEZlOIzSYlCVczI49Hr5l4OKV4G+
- hzlQ==
-X-Gm-Message-State: AOJu0YyBYqm78LsE8//RyUjb9wVufgmWfAAWHTgcWvJD72XUmGxM3s/t
- l6WtVOExN0ePnJRjDUJ29mY4uwx1oPlK9XeVyb+XVS7QF8yyRg==
-X-Google-Smtp-Source: AGHT+IH8U7Uo64mJpe8NoeDjcLWLH93NHf+uCc4NbuFQzwHz7jyhYk2tDOJ1K3cC6lcZw2jao9uHzQGmHWCCk9ooJdY=
-X-Received: by 2002:a05:6512:3f25:b0:50e:398b:3946 with SMTP id
- y37-20020a0565123f2500b0050e398b3946mr1203015lfa.70.1704644365268; Sun, 07
- Jan 2024 08:19:25 -0800 (PST)
-MIME-Version: 1.0
-References: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
- <CAOMZO5C+Pvv429sHPyKuznyvdPv217q=a8uTeNNTSyVmn1EoXw@mail.gmail.com>
- <20231109001746.GX6601@bill-the-cat>
- <CAOMZO5DtKc72Zv+Q6J3P6JY8jWVbu7KDbr-AViw1hPcm0N92QQ@mail.gmail.com>
- <CAOMZO5C0ZR=DgXkGHyG-Fgt9HEr3Z_x4qhgkfmObBpTTXUmpAQ@mail.gmail.com>
- <CALG-KHx081qs+_LHTSu7ssAOd0AX-N64OPht8M8nGufU778SbQ@mail.gmail.com>
- <CAOMZO5C4qF4A8uLdRfMeDVosA2NLNU=+WvidGR7QGeSyYJOTmw@mail.gmail.com>
- <CALG-KHwHxdd_7wz6L+6VDGS04LggyqhTZUoqgV+euSqPn9D2KQ@mail.gmail.com>
- <CAOf5uwmDZ5DtAhe-GauhuyYwSSXQnavVNfzaJkdSG3TWE1N2FA@mail.gmail.com>
- <CAOMZO5DtCDe-VzY1yx2f+LTz0tCqmtiLemrH=xTnPQs7=07aSw@mail.gmail.com>
- <CAOf5uwn1LuN6uFQe9d7zXWDFnvOAqwb-etQow96fzAR0qim5Hg@mail.gmail.com>
- <CAOMZO5AqatVOGsJGwxXJCoF+tBemrfM8+pgrRCvDwHNHv1caFw@mail.gmail.com>
- <CAOf5uwmb0vJOwSj81KvfWpK6yobyz0Ozm5vDGCa9K0rZejbZLA@mail.gmail.com>
- <CAOMZO5Aa4ynpHqfqiAF6qAJmTJeAPQCmT4wyTz6H+UE3yX0jpg@mail.gmail.com>
-In-Reply-To: <CAOMZO5Aa4ynpHqfqiAF6qAJmTJeAPQCmT4wyTz6H+UE3yX0jpg@mail.gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Sun, 7 Jan 2024 17:19:12 +0100
-Message-ID: <CAOf5uwmBdtUBQbgKncLBBV0XC06JqOOKmgOrwxbt=oSZ6mhqKQ@mail.gmail.com>
-Subject: Re: inconsistent wget behavior
+ bh=VEO9s5KE4fzvAc72PBTqi3K8rhyuGHpZ3HzmToAhb0M=;
+ b=OabNP5us7S27tmygTg/yFVhAJQojCK2ZDI/rsYPN/h0HLRG1krakeeBcVlHAvFHXUu
+ 9Onr8S1L5W5XqhytWAdQkvZEjKVBjshxM1q5W1Rr+tWJms9/q/ANPvzTEdLLnCrSeYFY
+ 1v+lBxv6n6uaelGByfFGb3XZTyGoYgm8XO3+rDVQCIIkMP9cGTLRtVWsO0ZgzFYEm2gl
+ yPspG9a6eXEWDrpyWy978whqhpnPiz9TgjqixREEteTHWxZQugTrs1WX4UjrwQQstb8H
+ 06BQ6UPwR1uOzVW+gqId3L0ovHvaRdQGZ1zvi1qkPIoCvXWcHYiI9O56ylCsrYcDOCuw
+ q4MQ==
+X-Gm-Message-State: AOJu0YyKV9fay9F0rpsjrvW5cVERjIMBoNttBzt43eulAVL/lFIGSaiM
+ N1k1mlpq0hHPQ3ao697iTWCmYBWxqeFmMQ==
+X-Google-Smtp-Source: AGHT+IFVRVF+OTPowwVGMsQrnqemzaDlVy9gP9MkOUezU3WwupNCNHPJWQtKPfuqzn8ho8CScabJWg==
+X-Received: by 2002:a17:906:c289:b0:a28:ac22:7575 with SMTP id
+ r9-20020a170906c28900b00a28ac227575mr4846441ejz.4.1704645269773; 
+ Sun, 07 Jan 2024 08:34:29 -0800 (PST)
+Received: from panicking.. (mob-2-41-169-92.net.vodafone.it. [2.41.169.92])
+ by smtp.gmail.com with ESMTPSA id
+ fb20-20020a1709073a1400b00a2a9ddd15b8sm203578ejc.173.2024.01.07.08.34.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 07 Jan 2024 08:34:29 -0800 (PST)
+From: Michael Trimarchi <michael@amarulasolutions.com>
 To: Fabio Estevam <festevam@gmail.com>
-Cc: Paul Liu <paul.liu@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Tim Harvey <tharvey@gateworks.com>, Marek Vasut <marex@denx.de>,
- u-boot <u-boot@lists.denx.de>, 
- Duncan Hare <DuncanCHare@yahoo.com>, Simon Glass <sjg@chromium.org>, 
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Michal Simek <michal.simek@xilinx.com>, Ramon Fried <rfried.dev@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Cc: linux-amarula@amarulasolutions.com, u-boot@lists.denx.de,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Subject: [RFC PATCH] net: wget: Take in account tcp sequence number wrap around
+Date: Sun,  7 Jan 2024 17:34:24 +0100
+Message-Id: <20240107163424.25074-1-michael@amarulasolutions.com>
+X-Mailer: git-send-email 2.40.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,40 +87,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Coming from some discussion on mailing about wget unconsistent. It's
+just and idea to play around
 
-Il dom 7 gen 2024, 17:08 Fabio Estevam <festevam@gmail.com> ha scritto:
+Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+---
 
-> Hi Michael,
->
-> On Sat, Jan 6, 2024 at 5:49=E2=80=AFAM Michael Nazzareno Trimarchi
-> <michael@amarulasolutions.com> wrote:
-> >
-> > Hi
-> >
-> > Is this code correct?
-> >
-> >     if (tcp_seq_num >=3D initial_data_seq_num &&
-> >                     store_block(pkt, tcp_seq_num - initial_data_seq_num=
-,
-> >                                 len) !=3D 0) {
-> >                         wget_fail("wget: store error\n",
-> >                                   tcp_seq_num, tcp_ack_num, action);
-> >                         return;
-> >                 }
-> >
-> > Can not be seq_num wrap around? Another point seems that is not
-> > guarantee packet reassembly
->
-> If you submit a patch, I will be glad to test it.
->
-> Cheers
->
+I'm on a train ;). No board to test
 
-I have already wrote something but I can not test. Will send tonight. My
-feeling is that sometime the initial sequence number of TCP ip is next to
-wrap around but not sure.
+---
+ include/net/tcp.h | 10 ++++++++++
+ net/wget.c        |  8 ++++----
+ 2 files changed, 14 insertions(+), 4 deletions(-)
 
-Michael
+diff --git a/include/net/tcp.h b/include/net/tcp.h
+index c29d4ce24a..584813b637 100644
+--- a/include/net/tcp.h
++++ b/include/net/tcp.h
+@@ -88,6 +88,16 @@ struct ip_tcp_hdr {
+ #define TCP_MSS		1460		/* Max segment size		*/
+ #define TCP_SCALE	0x01		/* Scale			*/
+ 
++/*
++ * The next routines deal with comparing 32 bit unsigned ints
++ * and worry about wraparound (automatic with unsigned arithmetic).
++ */
++static inline bool before(__u32 seq1, __u32 seq2)
++{
++	return (__s32)(seq1-seq2) < 0;
++}
++#define after(seq2, seq1)	before(seq1, seq2)
++
+ /**
+  * struct tcp_mss - TCP option structure for MSS (Max segment size)
+  * @kind: Field ID
+diff --git a/net/wget.c b/net/wget.c
+index 8bb4d72db1..99a688846f 100644
+--- a/net/wget.c
++++ b/net/wget.c
+@@ -260,8 +260,8 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
+ 					(phys_addr_t)(pkt_q[i].pkt),
+ 					pkt_q[i].len);
+ 				store_block(ptr1,
+-					    pkt_q[i].tcp_seq_num -
+-					    initial_data_seq_num,
++					    (unsigned int)((s32)pkt_q[i].tcp_seq_num -
++					    (s32)initial_data_seq_num),
+ 					    pkt_q[i].len);
+ 				unmap_sysmem(ptr1);
+ 				debug_cond(DEBUG_WGET,
+@@ -333,8 +333,8 @@ static void wget_handler(uchar *pkt, u16 dport,
+ 			   "wget: Transferring, seq=%x, ack=%x,len=%x\n",
+ 			   tcp_seq_num, tcp_ack_num, len);
+ 
+-		if (tcp_seq_num >= initial_data_seq_num &&
+-		    store_block(pkt, tcp_seq_num - initial_data_seq_num,
++		if (!before(initial_data_seq_num, tcp_seq_num) &&
++		    store_block(pkt, (unsigned int)((s32)tcp_seq_num - (s32)initial_data_seq_num),
+ 				len) != 0) {
+ 			wget_fail("wget: store error\n",
+ 				  tcp_seq_num, tcp_ack_num, action);
+-- 
+2.40.1
 
->
