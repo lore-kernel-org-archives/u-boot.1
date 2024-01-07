@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DC1DC46CD2
-	for <u-boot@archiver.kernel.org>; Sat,  6 Jan 2024 22:46:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1F55C47077
+	for <u-boot@archiver.kernel.org>; Sun,  7 Jan 2024 03:27:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29EA587A01;
-	Sat,  6 Jan 2024 23:46:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A16578764D;
+	Sun,  7 Jan 2024 04:27:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QbqlOC6P";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g7ow1gPj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4254787A03; Sat,  6 Jan 2024 23:46:07 +0100 (CET)
-Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
- [IPv6:2607:f8b0:4864:20::82d])
+ id C46CC87987; Sun,  7 Jan 2024 04:27:15 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2C198743A
- for <u-boot@lists.denx.de>; Sat,  6 Jan 2024 23:46:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 63734870AB
+ for <u-boot@lists.denx.de>; Sun,  7 Jan 2024 04:27:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-qt1-x82d.google.com with SMTP id
- d75a77b69052e-427ca22a680so7594931cf.3
- for <u-boot@lists.denx.de>; Sat, 06 Jan 2024 14:46:00 -0800 (PST)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=cnsztl@gmail.com
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a28ab7ae504so68233966b.3
+ for <u-boot@lists.denx.de>; Sat, 06 Jan 2024 19:27:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704581159; x=1705185959; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7vgwox/jv50PVTP+hWEVcjK3mLYJ1iRYBIgMNwbA+Ps=;
- b=QbqlOC6PpUKcw4+aO8r2y+pxApXviRBi5Xnxm6jbUZloAxqIciXHPdK74+r9MDpc7+
- IZ3s6N8RSAHTpVjdsd5wREuTQcmwzLHldaX9hqz3l6lxvWvqIKto1xKDpQDPM0cVRlMN
- XwDNld8C4gxvgnOqX/2j7/QM1Cg+iKthhGXmp1IR9h3A37+lPdzoyTAcBEukuDsB8w9s
- piAA8LUEbWTuFS4N3HZ8GzWudh5l7UkO0TEMGs3esZfV4CJHzvfyxZaGN7eGQe1vZ9zT
- XnXK3d+VNF/Xm8tvlTihwwvOBOW+DkUQdVrQvAGR5iaQPPK0bbZXa5rnKNozdkvOgcC4
- HieA==
+ d=gmail.com; s=20230601; t=1704598033; x=1705202833; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JDzNmgV2DB/79GS6rGKg13x6aGlGfdJM918qhU96pYY=;
+ b=g7ow1gPjvIKTHz2zDWh5RjC7kLLEM3g6r9Sgb7zKKfbtVZgXSlu5dDtIg5R5GdkNx5
+ obpRFBdCWQHrY3sT3sHcrhWcMm//zSu4lfUKqUefFFYE/CA2Beh5X7N9MSVLULfno1Fq
+ 7UeP+nXLMCKbfxikQnpQFPLAjHJ532RMJkUYuymd3zijNtciUxgwlUfqQa+D3AyRKovB
+ esPiuqWQ/+wVL2jeUtgwP9yu1VgYik+vidRexvfNVAz6N01kFA7Ft32rGYhmgKF1CsGV
+ JkzswmYj0b+O1izdcmSaqepTz4yAuSI1PNxpMRRCcA2+UuxnQROQ2HO9cAQNy8JPrz9R
+ 237w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704581159; x=1705185959;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7vgwox/jv50PVTP+hWEVcjK3mLYJ1iRYBIgMNwbA+Ps=;
- b=eXcSCeAfsBpb7Bk+zmbvOS8SGu1guDSB7Z4Am0g/OrivrZQlkXdftoDS1Iyw/QZ0sV
- G4vn15EwLt154U9It+pfkzknOoXbrJpk0hCEG6pxRywpBFXCOx+2rG57LcnG3ZcfqnAZ
- ktO7pmeBYxZgGA+4zcdheuAwtKvLvmdD7mHXLmnYulCFLOIgWnOwME7JFFu+2GUu/FTg
- EqPKjIaFrQ5FNojexPdYxplw5SOLwBw/2HExpmG7RrcKplEYmlVLRekqQCkjKuwy55dS
- idCFGZGKb7vddrekzx2+tiwWiw6xbzRrN5JLOzsKm/gIWSHwLKaURk/K99J2nXOa2PFy
- xAqA==
-X-Gm-Message-State: AOJu0YwYIeZM0mKCATmdm5As1eVsJRrKw4EGtdXcsFCpIBvkM+xRxXAY
- GNWv+aN/wUsYUWGOqXo6BwSGWWEICk+9jJ4vu30=
-X-Google-Smtp-Source: AGHT+IGMmxpFcqgnvvrxCMy5vWtuhiXYHgakvYj6ZjjZfMQKfycLD4oFSexqt9NzpzTCC2+5fdXIN6Ts0TJ9mtAvI+8=
-X-Received: by 2002:a05:622a:1a8d:b0:429:8bdc:d024 with SMTP id
- s13-20020a05622a1a8d00b004298bdcd024mr803052qtc.95.1704581159336; Sat, 06 Jan
- 2024 14:45:59 -0800 (PST)
+ d=1e100.net; s=20230601; t=1704598033; x=1705202833;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JDzNmgV2DB/79GS6rGKg13x6aGlGfdJM918qhU96pYY=;
+ b=YRhelbvC+1fFUkR7ZbjbdfqNJTV/wG4jyoGqqs88Kf8Cmx5iDlwD4L3yo493UF7KWB
+ BOOmbeQGVuh+XCkMN5LiNDoOoBTtnBjtUIjNDLH12mBBJjJTTfziBq0mvN9ECzkudgl3
+ jLmt8bdQ1Lc2W4oXNLWFchhsAP12C0OyQmGbkq9Il63oWCVAwaTOxeJxJV8P2UK6e5Yo
+ RZhjWh1F2zgC5ovLT2yCQ0nplVv88uFJlvicADVlMv6R4Vg5oNKGjUXL9B67NM3I3200
+ F/iX0uj2znB4diqO8SXlSmKDMR5X5yyq3EXglWEvHRlnxqzemgR3qHWpMGuSCJBpxGiS
+ 071Q==
+X-Gm-Message-State: AOJu0Yz1rQZ63OK74q9z35kOxgjbGfTdmhNBquSZ6r/LB1tw9TxDBCIo
+ AZQEP7YxwzKgHpDOfDNqwmFRpirCAt8a7BKCoTM=
+X-Google-Smtp-Source: AGHT+IGFTP5eeYUz4LMoVBv4omF43igxTE1ozkL41SJdILNkZ55f7x7DAqBzUjMkW0xmQUGbJISIeIHzAqy4uLUa4B0=
+X-Received: by 2002:a17:906:1995:b0:a28:aab9:656 with SMTP id
+ g21-20020a170906199500b00a28aab90656mr640696ejd.94.1704598032450; Sat, 06 Jan
+ 2024 19:27:12 -0800 (PST)
 MIME-Version: 1.0
-References: <CANV2PTOD+cY55ES5HDrSZuGjqee3fvfXKORWg8bJFT64mFdg8A@mail.gmail.com>
- <CAFLszTiEfCDGTRHiVQDzb+9KqpKi-EQuS77bOK-LYThZxTTb4g@mail.gmail.com>
-In-Reply-To: <CAFLszTiEfCDGTRHiVQDzb+9KqpKi-EQuS77bOK-LYThZxTTb4g@mail.gmail.com>
-From: E Shattow <lucent@gmail.com>
-Date: Sat, 6 Jan 2024 14:45:47 -0800
-Message-ID: <CANV2PTPXDfZ84PGxEvwqRHnScMcwwy-Amgmg-eJxq0R_b4Gn=w@mail.gmail.com>
-Subject: Re: booti usage offset requirements for compressed kernel and initrd
- with dtb
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
+References: <20231223040007.72997-1-cnsztl@gmail.com>
+ <a4fc159c-7119-4656-a820-7e1e216b3564@rock-chips.com>
+In-Reply-To: <a4fc159c-7119-4656-a820-7e1e216b3564@rock-chips.com>
+From: Tianling Shen <cnsztl@gmail.com>
+Date: Sun, 7 Jan 2024 11:27:00 +0800
+Message-ID: <CAOP2_TgpuqsiF=v_YD8iw7GXtZt+DJ4ofanZzuA_Z-tk12WwZQ@mail.gmail.com>
+Subject: Re: [PATCH] board: rockchip: Add support for FriendlyARM NanoPi R2C
+ Plus
+To: Kever Yang <kever.yang@rock-chips.com>
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Jonas Karlman <jonas@kwiboo.se>, Jagan Teki <jagan@edgeble.ai>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,145 +89,251 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Kever,
 
-"If this [fdt_high environment variable] is set to the special value
-0xffffffff (32-bit machines) or 0xffffffffffffffff (64-bit machines) then
-the fdt will not be copied at all on boot. For this to work it must reside
-in writable memory, have sufficient padding on the end of it for U-Boot to
-add the information it needs into it, and the memory must be accessible by
-the kernel. This usage is strongly discouraged however as it also stops
-U-Boot from ensuring the device tree starting address is properly aligned
-and a misaligned tree will cause OS failures."
-
-https://docs.u-boot.org/en/latest/usage/environment.html
-
-"The device tree blob (dtb) must be placed on an 8-byte boundary"
-
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Doc=
-umentation/arch/arm64/booting.rst
-
-No mention of dtb alignment requirement at the similar documentation for
-riscv64, but there is this mention:
-"The RISC-V kernel expects to be placed at a PMD boundary (2MB aligned for
-rv64 and 4MB aligned for rv32)."
-
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Doc=
-umentation/arch/riscv/boot.rst
-
-Perhaps then it is both a dtb alignment issue (not mentioned in the
-documentation?) and the spurious extra requirement after the transferred
-data length?
-
-If yes, how much is enough to pad after the end of devicetree blob?
-
-Thanks!
-
-E Shattow
-
-
-
-On Thu, Jan 4, 2024 at 8:02=E2=80=AFAM Simon Glass <sjg@chromium.org> wrote=
-:
-
-> Hi,
+On Tue, Jan 2, 2024 at 9:00=E2=80=AFAM Kever Yang <kever.yang@rock-chips.co=
+m> wrote:
 >
-> On Thu, Jan 4, 2024 at 5:19=E2=80=AFAM E Shattow <lucent@gmail.com> wrote=
-:
-> >
-> > Hello,
-> >
-> > There is data corruption when using booti on a JH7110 (riscv64) board t=
-o
-> > load (over tftp or ymodem) a compressed kernel, compressed initrd, and
-> > device tree blob, when the data are too close together (even though not
-> > overlapping). In the adjustments I have tried it seems to be consistent
-> but
-> > not clear "why?" by how much for each adjustment is needed to observe t=
-he
-> > failure versus success.
-> >
-> > My question is simple enough, what are the intended offset requirements
-> for
-> > loading these data into memory for use with booti ?
-> >
-> > For example:
-> >
-> > setenv ip 192.168.2.216
-> > setenv loadaddr 0x60000000  # default from Milk-V vendor for Mars CM
-> product
-> > setenv kernel_uncomp_size 24193024  # uncompressed size of
-> > vmlinuz-5.15.0-gpu117 from file command information
-> > setenv kernel_comp_addr_r $loadaddr
-> > setenv kernel_addr_r 0x61712800  # $kernel_comp_addr_r +
-> $kernel_uncomp_size
-> > dhcp $kernel_addr_r
-> > $ip:mars-cm_debian-desktop_sdk-boot/vmlinuz-5.15.0-gpu117
-> > setenv kernel_comp_size 0x$filesize
-> > setenv dtb_addr 0x62e25000  # $kernel_addr_r + $kernel_uncomp_size
-> > dhcp $dtb_addr
-> >
-> $ip:mars-cm_debian-desktop_sdk-boot/dtbs/starfive/jh7110-visionfive-v2.dt=
-b
-> > setenv initrd_addr 0x62e31d7f  # $dtb_addr + 0x$filesize
-> > dhcp $initrd_addr $ip:debian-installer-netboot/initrd.gz; setenv
-> > initrd_size 0x$filesize
-> > booti $kernel_addr_r $initrd_addr:$initrd_size $dtb_addr
-> >
-> > Waiting for root device ...
-> >
-> > (and nothing else, this is a failure)
-> >
-> > If 0x62e31d7f is replaced by 0x62e31ec6 then the boot is successful and
-> > dmesg from debian-installer shows the additional information:
-> >
-> >  Freeing unused kernel image (initmem) memory: 2196K
-> >  Run /init as init process
-> >    with arguments:
-> >      /init
-> >    with environment:
-> >      HOME=3D/
-> >      TERM=3Dlinux
-> >
-> >
-> > So in this the kernel boots and all works normally. Even if that addres=
-s
-> is
-> > 0x62e31ec5 one byte earlier it is a failure.
-> >
-> > In other attempts I would change the ordering i.e. so the initrd is fir=
-st
-> > at $loadaddr and then kernel and DTB, or DTB and kernel. If I learned
-> > anything it is that compressed initrd must be loaded to a span of memor=
-y
-> at
-> > least the size of its uncompressed length, and this is also true of the
-> > compressed kernel vmlinuz even though booti documentation vaguely infer=
-s
-> > that there is an area of memory specified for decompression - so a
-> > compressed kernel needs two times its uncompressed size is that correct=
-?
-> > Also there's no hint anywhere if the device tree blob has special memor=
-y
-> > constraints but if it is not starting on some 16byte aligned address at
-> > least my superstition from observations in testing is that it is not
-> > successful... and now, where it ends (in the above example) and initrd
-> > begins seems arbitrary.
-> >
-> > Sure I could pad things out, they tend to work that way, but I would li=
-ke
-> > to know "why?"
+> Hi Tianling,
 >
-> I don't know why, but I imagine that Linux finds the initrd in one
-> case and not inthe other...does the kernel log give you any clues?
+> On 2023/12/23 12:00, Tianling Shen wrote:
+> > The NanoPi R2C Plus is a small variant of NanoPi R2C with a on-board
+> > eMMC flash (8G) included.
+> >
+> > The device tree is taken from the kernel v6.5.
+> >
+> > Signed-off-by: Tianling Shen <cnsztl@gmail.com>
+> > ---
+> >   arch/arm/dts/Makefile                         |   1 +
+> >   .../dts/rk3328-nanopi-r2c-plus-u-boot.dtsi    |   9 ++
+> >   arch/arm/dts/rk3328-nanopi-r2c-plus.dts       |  33 +++++
+> >   board/rockchip/evb_rk3328/MAINTAINERS         |   6 +
+> >   configs/nanopi-r2c-plus-rk3328_defconfig      | 114 +++++++++++++++++=
++
+> >   5 files changed, 163 insertions(+)
+> >   create mode 100644 arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi
+> >   create mode 100644 arch/arm/dts/rk3328-nanopi-r2c-plus.dts
+> >   create mode 100644 configs/nanopi-r2c-plus-rk3328_defconfig
+> >
+> > diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> > index 9d28a485bec..6909f95e084 100644
+> > --- a/arch/arm/dts/Makefile
+> > +++ b/arch/arm/dts/Makefile
+> > @@ -126,6 +126,7 @@ dtb-$(CONFIG_ROCKCHIP_RK3308) +=3D \
+> >   dtb-$(CONFIG_ROCKCHIP_RK3328) +=3D \
+> >       rk3328-evb.dtb \
+> >       rk3328-nanopi-r2c.dtb \
+> > +     rk3328-nanopi-r2c-plus.dtb \
+> >       rk3328-nanopi-r2s.dtb \
+> >       rk3328-orangepi-r1-plus.dtb \
+> >       rk3328-orangepi-r1-plus-lts.dtb \
+> > diff --git a/arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi b/arch/arm=
+/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi
+> > new file mode 100644
+> > index 00000000000..f8adb9e5e1f
+> > --- /dev/null
+> > +++ b/arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi
+> > @@ -0,0 +1,9 @@
+> > +// SPDX-License-Identifier: GPL-2.0-or-later
+> > +
+> > +#include "rk3328-nanopi-r2c-u-boot.dtsi"
+> > +
+> > +/ {
+> > +     chosen {
+> > +             u-boot,spl-boot-order =3D "same-as-spl", &sdmmc, &emmc;
+> > +     };
+> > +};
+> > diff --git a/arch/arm/dts/rk3328-nanopi-r2c-plus.dts b/arch/arm/dts/rk3=
+328-nanopi-r2c-plus.dts
+> > new file mode 100644
+> > index 00000000000..16a1958e457
+> > --- /dev/null
+> > +++ b/arch/arm/dts/rk3328-nanopi-r2c-plus.dts
+> > @@ -0,0 +1,33 @@
+> > +// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+> > +/*
+> > + * Copyright (c) 2021 FriendlyElec Computer Tech. Co., Ltd.
+> > + * (http://www.friendlyarm.com)
+> > + *
+> > + * Copyright (c) 2023 Tianling Shen <cnsztl@gmail.com>
+> > + */
+> > +
+> > +/dts-v1/;
+> > +#include "rk3328-nanopi-r2c.dts"
+> > +
+> > +/ {
+> > +     model =3D "FriendlyElec NanoPi R2C Plus";
+> > +     compatible =3D "friendlyarm,nanopi-r2c-plus", "rockchip,rk3328";
+> > +
+> > +     aliases {
+> > +             mmc1 =3D &emmc;
+> > +     };
+> > +};
+> > +
+> > +&emmc {
+> > +     bus-width =3D <8>;
+> > +     cap-mmc-highspeed;
+> > +     max-frequency =3D <150000000>;
+> > +     mmc-ddr-1_8v;
+> > +     mmc-hs200-1_8v;
+> > +     non-removable;
+> > +     pinctrl-names =3D "default";
+> > +     pinctrl-0 =3D <&emmc_clk &emmc_cmd &emmc_bus8>;
+> > +     vmmc-supply =3D <&vcc_io_33>;
+> > +     vqmmc-supply =3D <&vcc18_emmc>;
+> > +     status =3D "okay";
+> > +};
+> > diff --git a/board/rockchip/evb_rk3328/MAINTAINERS b/board/rockchip/evb=
+_rk3328/MAINTAINERS
+> > index 8a19eb373d0..5fc114a63f6 100644
+> > --- a/board/rockchip/evb_rk3328/MAINTAINERS
+> > +++ b/board/rockchip/evb_rk3328/MAINTAINERS
+> > @@ -11,6 +11,12 @@ S:      Maintained
+> >   F:      configs/nanopi-r2c-rk3328_defconfig
+> >   F:      arch/arm/dts/rk3328-nanopi-r2c-u-boot.dtsi
+> >
+> > +NANOPI-R2C-PLUS-RK3328
+> > +M:      Tianling Shen <cnsztl@gmail.com>
+> > +S:      Maintained
+> > +F:      configs/nanopi-r2c-plus-rk3328_defconfig
+> > +F:      arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi
+> > +
+> >   NANOPI-R2S-RK3328
+> >   M:      David Bauer <mail@david-bauer.net>
+> >   S:      Maintained
+> > diff --git a/configs/nanopi-r2c-plus-rk3328_defconfig b/configs/nanopi-=
+r2c-plus-rk3328_defconfig
+> > new file mode 100644
+> > index 00000000000..320ed8b434a
+> > --- /dev/null
+> > +++ b/configs/nanopi-r2c-plus-rk3328_defconfig
+> > @@ -0,0 +1,114 @@
+> > +CONFIG_ARM=3Dy
+> > +CONFIG_SKIP_LOWLEVEL_INIT=3Dy
+> > +CONFIG_COUNTER_FREQUENCY=3D24000000
+> > +CONFIG_ARCH_ROCKCHIP=3Dy
+> > +CONFIG_TEXT_BASE=3D0x00200000
+> > +CONFIG_SPL_GPIO=3Dy
+> > +CONFIG_NR_DRAM_BANKS=3D1
+> > +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+> > +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x300000
+> > +CONFIG_SF_DEFAULT_SPEED=3D20000000
+> > +CONFIG_ENV_OFFSET=3D0x3F8000
+> > +CONFIG_DEFAULT_DEVICE_TREE=3D"rk3328-nanopi-r2c-plus"
+> > +CONFIG_DM_RESET=3Dy
+> > +CONFIG_ROCKCHIP_RK3328=3Dy
+> > +CONFIG_TPL_ROCKCHIP_COMMON_BOARD=3Dy
+> > +CONFIG_TPL_LIBCOMMON_SUPPORT=3Dy
+> > +CONFIG_TPL_LIBGENERIC_SUPPORT=3Dy
+> > +CONFIG_SPL_DRIVERS_MISC=3Dy
+> > +CONFIG_SPL_STACK_R_ADDR=3D0x600000
+> > +CONFIG_SPL_STACK=3D0x400000
+> > +CONFIG_TPL_SYS_MALLOC_F_LEN=3D0x800
 >
-> Also, can you use U-Boot's 'md5sum' command or similar to check that
-> the initrd and DT are the same in each case?
+>      Did you test both TPL and SPL?
+
+Yes, I have confirmed both TPL and SPL are working fine.
+
+Thanks,
+Tianling.
+
 >
-> Also, you could use a FIT [1] rather than booti.
 >
-> Regards,
-> Simon
+> Thanks,
 >
-> [1] https://docs.u-boot.org/en/latest/usage/fit/index.html
+> - Kever
 >
+> > +CONFIG_DEBUG_UART_BASE=3D0xFF130000
+> > +CONFIG_DEBUG_UART_CLOCK=3D24000000
+> > +CONFIG_SYS_LOAD_ADDR=3D0x800800
+> > +CONFIG_DEBUG_UART=3Dy
+> > +# CONFIG_ANDROID_BOOT_IMAGE is not set
+> > +CONFIG_FIT=3Dy
+> > +CONFIG_FIT_VERBOSE=3Dy
+> > +CONFIG_SPL_LOAD_FIT=3Dy
+> > +CONFIG_DEFAULT_FDT_FILE=3D"rockchip/rk3328-nanopi-r2c-plus.dtb"
+> > +# CONFIG_DISPLAY_CPUINFO is not set
+> > +CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
+> > +CONFIG_MISC_INIT_R=3Dy
+> > +CONFIG_SPL_MAX_SIZE=3D0x40000
+> > +CONFIG_SPL_PAD_TO=3D0x7f8000
+> > +CONFIG_SPL_HAS_BSS_LINKER_SECTION=3Dy
+> > +CONFIG_SPL_BSS_START_ADDR=3D0x2000000
+> > +CONFIG_SPL_BSS_MAX_SIZE=3D0x2000
+> > +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> > +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+> > +CONFIG_SPL_STACK_R=3Dy
+> > +CONFIG_SPL_I2C=3Dy
+> > +CONFIG_SPL_POWER=3Dy
+> > +CONFIG_SPL_ATF=3Dy
+> > +CONFIG_SPL_ATF_NO_PLATFORM_PARAM=3Dy
+> > +CONFIG_TPL_SYS_MALLOC_SIMPLE=3Dy
+> > +CONFIG_CMD_BOOTZ=3Dy
+> > +CONFIG_CMD_GPT=3Dy
+> > +CONFIG_CMD_MMC=3Dy
+> > +CONFIG_CMD_USB=3Dy
+> > +# CONFIG_CMD_SETEXPR is not set
+> > +CONFIG_CMD_TIME=3Dy
+> > +CONFIG_SPL_OF_CONTROL=3Dy
+> > +CONFIG_TPL_OF_CONTROL=3Dy
+> > +CONFIG_OF_SPL_REMOVE_PROPS=3D"clock-names interrupt-parent assigned-cl=
+ocks assigned-clock-rates assigned-clock-parents"
+> > +CONFIG_TPL_OF_PLATDATA=3Dy
+> > +CONFIG_ENV_IS_IN_MMC=3Dy
+> > +CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
+> > +CONFIG_SYS_MMC_ENV_DEV=3D1
+> > +CONFIG_NET_RANDOM_ETHADDR=3Dy
+> > +CONFIG_TPL_DM=3Dy
+> > +CONFIG_REGMAP=3Dy
+> > +CONFIG_SPL_REGMAP=3Dy
+> > +CONFIG_TPL_REGMAP=3Dy
+> > +CONFIG_SYSCON=3Dy
+> > +CONFIG_SPL_SYSCON=3Dy
+> > +CONFIG_TPL_SYSCON=3Dy
+> > +CONFIG_CLK=3Dy
+> > +CONFIG_SPL_CLK=3Dy
+> > +CONFIG_FASTBOOT_BUF_ADDR=3D0x800800
+> > +CONFIG_FASTBOOT_CMD_OEM_FORMAT=3Dy
+> > +CONFIG_ROCKCHIP_GPIO=3Dy
+> > +CONFIG_SYS_I2C_ROCKCHIP=3Dy
+> > +CONFIG_MISC=3Dy
+> > +CONFIG_MMC_DW=3Dy
+> > +CONFIG_MMC_DW_ROCKCHIP=3Dy
+> > +CONFIG_ETH_DESIGNWARE=3Dy
+> > +CONFIG_GMAC_ROCKCHIP=3Dy
+> > +CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
+> > +CONFIG_PINCTRL=3Dy
+> > +CONFIG_SPL_PINCTRL=3Dy
+> > +CONFIG_DM_PMIC=3Dy
+> > +CONFIG_PMIC_RK8XX=3Dy
+> > +CONFIG_SPL_PMIC_RK8XX=3Dy
+> > +CONFIG_SPL_DM_REGULATOR=3Dy
+> > +CONFIG_REGULATOR_PWM=3Dy
+> > +CONFIG_DM_REGULATOR_FIXED=3Dy
+> > +CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
+> > +CONFIG_REGULATOR_RK8XX=3Dy
+> > +CONFIG_PWM_ROCKCHIP=3Dy
+> > +CONFIG_RAM=3Dy
+> > +CONFIG_SPL_RAM=3Dy
+> > +CONFIG_TPL_RAM=3Dy
+> > +CONFIG_BAUDRATE=3D1500000
+> > +CONFIG_DEBUG_UART_SHIFT=3D2
+> > +CONFIG_SYS_NS16550_MEM32=3Dy
+> > +CONFIG_SYSINFO=3Dy
+> > +CONFIG_SYSRESET=3Dy
+> > +# CONFIG_TPL_SYSRESET is not set
+> > +CONFIG_USB=3Dy
+> > +CONFIG_USB_XHCI_HCD=3Dy
+> > +CONFIG_USB_EHCI_HCD=3Dy
+> > +CONFIG_USB_EHCI_GENERIC=3Dy
+> > +CONFIG_USB_OHCI_HCD=3Dy
+> > +CONFIG_USB_OHCI_GENERIC=3Dy
+> > +CONFIG_USB_DWC2=3Dy
+> > +CONFIG_USB_DWC3=3Dy
+> > +# CONFIG_USB_DWC3_GADGET is not set
+> > +CONFIG_USB_DWC3_GENERIC=3Dy
+> > +CONFIG_USB_GADGET=3Dy
+> > +CONFIG_USB_GADGET_DWC2_OTG=3Dy
+> > +CONFIG_SPL_TINY_MEMSET=3Dy
+> > +CONFIG_TPL_TINY_MEMSET=3Dy
+> > +CONFIG_ERRNO_STR=3Dy
