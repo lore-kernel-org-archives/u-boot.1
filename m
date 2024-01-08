@@ -4,73 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E258AC3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 17:35:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D71AEC3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 17:36:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5608287B32;
-	Mon,  8 Jan 2024 18:33:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 5807E87ABA;
+	Mon,  8 Jan 2024 18:36:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SUVFMmtZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JTZoWsFJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F78887AFF; Mon,  8 Jan 2024 18:33:27 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id EF65E87AC7; Mon,  8 Jan 2024 18:36:19 +0100 (CET)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90AFD87AD9
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 18:33:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B1EB987AB4
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 18:36:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 408HX92b100196;
- Mon, 8 Jan 2024 11:33:09 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704735189;
- bh=QNARSK9gqxSs8uieTTKZx/L4g08ps9bWjFW3rTsE/6s=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=SUVFMmtZZOn3LxFtIOF/Ie2+msTKUkhUlA8a8/temZmXVmupgpNa/+xUSUZS8JKb2
- oyoBqykiaxg/oIWe8uZwujm8p8iBayJfBYqwNHBePTxWkpK+XHSQv9EwDqGLkvzWqG
- 9Sk0WK88fdHebREVlBVhgxRt0mr7fqw2tlIKlwwQ=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 408HX96p001651
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 8 Jan 2024 11:33:09 -0600
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
- Jan 2024 11:33:08 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 8 Jan 2024 11:33:08 -0600
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 408HX8Xp045329;
- Mon, 8 Jan 2024 11:33:08 -0600
-From: Nishanth Menon <nm@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu Raja <sinthu.raja@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Roger Quadros <rogerq@kernel.org>, Simon Glass
- <sjg@chromium.org>, Andrew Davis <afd@ti.com>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>,
- Nikhil M Jain <n-jain1@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Bryan Brattlof <bb@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
- <u-boot@lists.denx.de>, Jon Humphreys <j-humphreys@ti.com>,
- Nishanth Menon <nm@ti.com>
-Subject: [PATCH 02/10] board: ti: am62ax: Set fdtfile from C code instead of
- findfdt script
-Date: Mon, 8 Jan 2024 11:32:53 -0600
-Message-ID: <20240108173301.2692332-3-nm@ti.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240108173301.2692332-1-nm@ti.com>
-References: <20240108173301.2692332-1-nm@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-6dc83674972so1445768a34.1
+ for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 09:36:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1704735375; x=1705340175; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=8jFZmOXiqqb7DwGpU9sZAi0SCmEqpos2k5c8pAkDMfM=;
+ b=JTZoWsFJTA4lNUMNv/ZYhrYcrNnCtxZVgl0CVuWPpd/Oq4yootJrwX047enuhQVKA0
+ X9WZ7rhhBAwQHKAM5PDPw67RELDvNmHjC2mXOaOQUlVdKey3GMZz0EXuYIY+pU90ObJg
+ 5UJenlwEVoIRgAzO6mjKMcqG47FRdhEn6EgbY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704735375; x=1705340175;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8jFZmOXiqqb7DwGpU9sZAi0SCmEqpos2k5c8pAkDMfM=;
+ b=iTlmPLgt1w9hO61ZTKiiINz1epUc0rNdhZ40cdSy0abqTW/peArHXz1ZIwjTVv+bi/
+ YaoFx0EOr7u3JZXHYGXryN8bmQoSYE5EoCCGREuTbj1X0pheJjw5cTlFekA43L3bTk3b
+ aaC3h0ek2fP1UyI8em3y5ntcJmaTouJ/q/Ug9CiGFosfHURydcYiBCuxrDI6VLSzdUyw
+ kA6ItuY8a08J/Vn7gwXe1+AdLKfInuJhKOZv56Dk769r5PaZHHX1BYgSRjkP6EVTfo/T
+ Ra/wMfkqAgZyNaXtjzL59I6ML0juOfePtVmAXSqCytpAMuT+zkU/o9aKHWC9tYyNNDuI
+ OUhw==
+X-Gm-Message-State: AOJu0YzyDXadrlTPA16bVy4KX9MGbMS14pcz6INHJnYNqKywZqahMLWb
+ nP9tAW/9IM7blWeHdbu4Z5tNtX3+bK5Ltg==
+X-Google-Smtp-Source: AGHT+IEGKtAAp/ce7povKsX4vl3Mahva+nuKxATE5EHCZlD2ONd/qPxdmWbylpOiSYEbPmE/x9yPNA==
+X-Received: by 2002:a9d:6c90:0:b0:6dd:da1a:fdb1 with SMTP id
+ c16-20020a9d6c90000000b006ddda1afdb1mr821585otr.12.1704735375287; 
+ Mon, 08 Jan 2024 09:36:15 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
+ [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
+ o7-20020a05620a228700b0078322dc4f97sm63146qkh.26.2024.01.08.09.36.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Jan 2024 09:36:14 -0800 (PST)
+Date: Mon, 8 Jan 2024 12:36:12 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] boot: add support for button commands
+Message-ID: <20240108173612.GK1610741@bill-the-cat>
+References: <20240105160359.634310-1-caleb.connolly@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Oal9ESuxblzfs5kC"
+Content-Disposition: inline
+In-Reply-To: <20240105160359.634310-1-caleb.connolly@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,66 +91,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Stop using the findfdt script and switch to setting the fdtfile from
-C code.
 
-While at this, replace findfdt in environment with a warning as it is
-no longer needed
+--Oal9ESuxblzfs5kC
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Nishanth Menon <nm@ti.com>
----
- board/ti/am62ax/am62ax.env       |  1 -
- board/ti/am62ax/evm.c            | 10 ++++++++++
- configs/am62ax_evm_a53_defconfig |  1 +
- 3 files changed, 11 insertions(+), 1 deletion(-)
+On Fri, Jan 05, 2024 at 04:03:58PM +0000, Caleb Connolly wrote:
 
-diff --git a/board/ti/am62ax/am62ax.env b/board/ti/am62ax/am62ax.env
-index a6d967e982d4..334374abb73e 100644
---- a/board/ti/am62ax/am62ax.env
-+++ b/board/ti/am62ax/am62ax.env
-@@ -1,5 +1,4 @@
- #include <env/ti/ti_common.env>
--#include <env/ti/default_findfdt.env>
- #include <env/ti/mmc.env>
- 
- name_kern=Image
-diff --git a/board/ti/am62ax/evm.c b/board/ti/am62ax/evm.c
-index cd3360a43029..62d3664936e7 100644
---- a/board/ti/am62ax/evm.c
-+++ b/board/ti/am62ax/evm.c
-@@ -13,6 +13,8 @@
- #include <fdt_support.h>
- #include <spl.h>
- 
-+#include "../common/fdt_ops.h"
-+
- int board_init(void)
- {
- 	return 0;
-@@ -27,3 +29,11 @@ int dram_init_banksize(void)
- {
- 	return fdtdec_setup_memory_banksize();
- }
-+
-+#ifdef CONFIG_BOARD_LATE_INIT
-+int board_late_init(void)
-+{
-+	ti_set_fdt_env(NULL, NULL);
-+	return 0;
-+}
-+#endif
-diff --git a/configs/am62ax_evm_a53_defconfig b/configs/am62ax_evm_a53_defconfig
-index 38083586a3ec..e5fcd8cc5b6f 100644
---- a/configs/am62ax_evm_a53_defconfig
-+++ b/configs/am62ax_evm_a53_defconfig
-@@ -24,6 +24,7 @@ CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
- CONFIG_BOOTSTD_FULL=y
- CONFIG_BOOTSTD_DEFAULTS=y
- CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
-+CONFIG_BOARD_LATE_INIT=y
- CONFIG_SPL_MAX_SIZE=0x58000
- CONFIG_SPL_PAD_TO=0x0
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--- 
-2.43.0
+> With the relatively new button API in U-Boot, it's now much easier to
+> model the common usecase of mapping arbitrary actions to different
+> buttons during boot - for example entering fastboot mode, setting some
+> additional kernel cmdline arguments, or booting with a custom recovery
+> ramdisk, to name a few.
+[snip]
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index fbc49c5bca47..9580ef1cfca4 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -20,6 +20,20 @@ config TIMESTAMP
+>  	  loaded that does not, the message 'Wrong FIT format: no timestamp'
+>  	  is shown.
+> =20
+> +config BUTTON_CMD
+> +	bool "Support for running a command if a button is held during boot"
+> +	default n
 
+Generally fine, only problem I see is here. "default n" is redundant,
+and this should also depend on CMDLINE.
+
+--=20
+Tom
+
+--Oal9ESuxblzfs5kC
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWcMowACgkQFHw5/5Y0
+tyy5swv/aAgszCOVYeouZQNayCtoG/Th0dmI7tNzCX1LUyfTUjVHSDdLzDqtdQbO
+HUBb13AebLd1Xgpg8lmY/MO+KxNN5AvHVRBF6s4RutzIcBj7xo1vULRPwyLmOzXM
+i9LCqtzPafKMEBA5NBDyreanChbSyGD+zW0TwQtcnp5vUioeeqF2TzQUqM88Gt2n
+D2JEOadase34Ia1mD8q79AaAzzsE+LajU22oIaDrCfPbfn8q3jY9rchENghqx+fN
+rifr4UNFoUBb9hPCNtxnacgEt4RzkilkWiJJPLg3aBf8ECuQesJQbazX9T1NrYhw
+rKgDollxS295BrkQJXtvbHqWrL4cWnzBccTk/B6A1LxGeuvDQAbGjRHUjBIiATVz
+oPv+OD9TFVmHBT92CsZVSXs9igvymoW2UmC5VlqsSpXgZfbFN0y8RdnK01QOk6iG
+a6+JFRTwQlXgeZOvUit1ddqeYa/5zFYeJhiJBOA/Fm6coOhVmQzaMMf8lyILobHS
+DrcBhQ2P
+=lxQH
+-----END PGP SIGNATURE-----
+
+--Oal9ESuxblzfs5kC--
