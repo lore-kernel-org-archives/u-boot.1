@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 574E0C47079
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 14:24:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB7C5C4707C
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 14:27:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05D4587A86;
-	Mon,  8 Jan 2024 15:24:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=essensium.com
+	by phobos.denx.de (Postfix) with ESMTP id 17EAD87A18;
+	Mon,  8 Jan 2024 15:27:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=essensium.com header.i=@essensium.com header.b="FM0htBVx";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="klvkaBcL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACD3987A84; Mon,  8 Jan 2024 15:24:44 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5C28387A75; Mon,  8 Jan 2024 15:27:24 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38A0287A75
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 15:24:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=essensium.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1102D86C72
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 15:27:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hugo.cornelis@essensium.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-556c60c3f9aso2267649a12.3
- for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 06:24:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=essensium.com; s=google; t=1704723881; x=1705328681; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sEIQju2Arh5ej/YmKZ90GMcoQ6bw6zUTzlu6DMUZ9SQ=;
- b=FM0htBVxo7BF9m9jDt9+yOyvJTp7zplNEG0zh0V1u8sq3T4SKms3XCOWpiZFsBjHZL
- uAUMCn+aV2ENKl7vUqOVWv++i8oguuX07yRSbtBBIAramiinVrK5l6VB7xUvBSAPYrhh
- svh1w8HbvO7gvqqlZ20iQEoUeNrjlU0ME0qd9OJ5NHMNde5DtcRr5nSB22YMMCnHV5hk
- okchhoxsW0BQKotAM94vKwGtJVvzxqWSVAchDw8EyEOGNEselfaVNcKm28UG9PPpU39h
- nkpXXdjJfR3OhoBYI6rveeNfATCR07PoHyGMGa7pyQ1Wd1Q/MiGW+pk2oCob79WB7t8s
- vgLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704723881; x=1705328681;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sEIQju2Arh5ej/YmKZ90GMcoQ6bw6zUTzlu6DMUZ9SQ=;
- b=b4mzRUcQKvZZrqd3jstpn4B+mQSba2BMcR6h70CnOC8JSMJseOIActpZUKz+Hhgr8s
- QdXPIlbAb64aExeEsbmOkimipBqdORX7DH3Zr5xaPlQf9ToJFxVRBPhTSZa29Zu+rhj9
- 21qSncCSiaNYqCA8yOakaer5hAAFTJee0JLmgMdEaQFpwLDWeR+s08MhFTycnCPK31B+
- 25Sodr8ph+/inreHfwG5X7sM0rT8Hu56r1blzOADLEJyJ9BVfGZywDFcetaVyPPFoxpN
- VLwAEwftTnNlS7m07uwYe1usnNPOUPczAcX8B8BTCkt0+apfqKdf6COnmjvFRXdWy8rL
- qLGA==
-X-Gm-Message-State: AOJu0YzCshsMypAud1oNPujj8u8h2YCr6PIQOVUIeyjY7UtjceDfxmlA
- VRyAGqAS7HNR42U2oGgBYCZqK8G9SavP0Vyqgaj6Frmk2X8=
-X-Google-Smtp-Source: AGHT+IF4xPv4M06Y34adkoL77N+s/ndeo/DMSY3K5fmQaynD7Dm2aWPIXPLS3bL9ftF4R+jMal/+qA==
-X-Received: by 2002:a50:8ac2:0:b0:552:e43d:cc7c with SMTP id
- k2-20020a508ac2000000b00552e43dcc7cmr2174028edk.16.1704723881547; 
- Mon, 08 Jan 2024 06:24:41 -0800 (PST)
-Received: from hugo-IdeaPad-3-15ALC6.. (ip-188-118-3-185.reverse.destiny.be.
- [188.118.3.185]) by smtp.gmail.com with ESMTPSA id
- u15-20020aa7d54f000000b0055678085e27sm4298471edr.20.2024.01.08.06.24.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jan 2024 06:24:41 -0800 (PST)
-From: Hugo Cornelis <hugo.cornelis@essensium.com>
-To: u-boot@lists.denx.de
-Cc: Hugo Cornelis <hugo.cornelis@essensium.com>
-Subject: [PATCH] image-host: refactor and protect for very long filenames
-Date: Mon,  8 Jan 2024 15:24:30 +0100
-Message-Id: <20240108142430.301659-2-hugo.cornelis@essensium.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240108142430.301659-1-hugo.cornelis@essensium.com>
-References: <CAFLszTgUwDUWSRwJZ0Jk8Bw6UUXDt72vnaj4rB72bLFoo3Lozw@mail.gmail.com>
- <20240108142430.301659-1-hugo.cornelis@essensium.com>
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1704724040; x=1705328840; i=xypron.glpk@gmx.de;
+ bh=xT+2SLcZDIkxmV25X2HA0EllCykFX8ui/JFRtLf/X5E=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=klvkaBcLgrUUDw5F/gAncKcqNyml/6GTmGTpS19j4iI3CyQW1TwXcrKTerls5lPv
+ 0BMFbm6p/XHaKYdaFLkxyRRtnFFhiCrFqBZwYf5eBgCvDJdVhPV8qzi9PFIQdTlz6
+ y9hrgjUyTymKFCDespKcKs9L7H5RbE8L/ioKcqNuWlhmW2OTEr5N9wmspGORNUCzs
+ j6tCEVbocuL0FvNdxH6D0NPzbSAKYHMNNOuqtQzXaNV4hWMKY8ro8PehEsWe0HyrF
+ hH78hwjOug3kBv8piPkNIsg9fSVtiJxmNH0WXOpSeRSJcAwwUlBXSpOpESubxMVg+
+ GLVh8eVFOCzi6Yi9XA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MqJqD-1qt3xz276p-00nUeD; Mon, 08
+ Jan 2024 15:27:20 +0100
+Message-ID: <4244abf5-49b4-43ac-a52e-5ebc8c1aa658@gmx.de>
+Date: Mon, 8 Jan 2024 15:27:04 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: Adding EFI runtime support to the Arm's FF-A bus
+Content-Language: en-US
+To: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+Cc: sjg@chromium.org, mark.kettenis@xs4all.nl, Drew.Reed@arm.com,
+ u-boot@lists.denx.de, nd@arm.com,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20231214155346.GB295924@e130802.arm.com>
+ <87ttok689d.fsf@bloch.sibelius.xs4all.nl>
+ <CAC_iWjKYa1_GrU3XPKqbnOf6VJxx426qTfD1WcSMkmj982ECSw@mail.gmail.com>
+ <20231218165909.GA313366@e130802.arm.com>
+ <20240108141256.GA236096@e130802.arm.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240108141256.GA236096@e130802.arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:zZQJcKNQLA4Nf8WyvVymPpa2gtZ5Ra5ch5J72XUhbo8WF2bru7c
+ 4lF3AOSuUmWrvT8pNhRGTjgJx9vtWefqMpFRRMmOtQF/Z+76dM/ZaVgRfo3pMdkguSUo0kj
+ /Z02X2+VqdxYk5Rdgk/ZQVFQiylD7UFolA0lMV+kgS0QPRKEPprAm3G6M2tDSG+TjS84HFd
+ Gb955efjCBAcl19MHIDfw==
+UI-OutboundReport: notjunk:1;M01:P0:I5VGbbi6GBw=;77tFK3/918Tr/XdAKsEdMjHSUDE
+ l0G+611kXUccNlY2lLmcx01foIUIM4t3OVa2Vj2p+jHmJhf8vlaH4MoL9I0y6aARQ5WJlLfR3
+ JKYYnN668Gz98abRd3lLVmOAls0OKOLjLrqtoV9TNsFy77dMvtQY9bYQ7/brrep08LydUcP6+
+ J8J4oo551b3OHI/a5K38TnbgRWXFnZIVFJMLJ84dsYen6I+imDIVeXsysy5ZtTQyFQ+nSKoqD
+ 2kuLPYQVBouAhacaFkM3HMjn6TGpckX5J58QtNc7e6kHCPkJH93wc6ghWsOBit5n/sAddb2Kc
+ XfjUPgbltUjPbOSIIXqDHwhcSkUmgjhWM+HqXSMvIMeSfb7KtivNDEAYfVuHQs9k8wqhAm4dK
+ nPJFtMDr8uChwsTD9E4WMwnXgX5CjlxQL9BUc+MJyGF7w36THfxm/KbzAjNSgw/Q0XxfG4N8J
+ ZV7+WbLEic1FYwM1XLNLAxvE92gFcdVdu/CzORDDBkzU+4LnnynrBL+w+Ju6/Wo949C145FTf
+ eUYQMTU8TL3vri0lNMlcSC0OeGDDpnN61dCDVWQz8k6FB55xZkT7fsOCLFSpHoOwu5JYZcCER
+ JslGaeh0vWOMC0z867yVNL8zpOX7RIS+B15GAs8vYfFncGMvX3N7bCw2SUI7ca60TLLZ6fNvG
+ 4Di1QoFbj/bZq3fEc8EJA6XRM00c9UZJaoav4JRqwU8gE7wwTTKGTBsFO5rxUD3KI8YXpfM4O
+ +Es170//LBChiY0RFVPzCzYcRO51G9CJ+RrUO2/6E8YvpHx+KsLzfojLINP+Nzj5gHNltATry
+ 76RwDIDJ5569YuBBNYOUQzgMfc0JAVD+zNn0tfoTwwbizFKvjcAubUEZNzIliwbfOW71NB1sG
+ VjAt7kRSnIPQuF+BooBnrWUD2KP8IIWcR8nX/5nBN5Ysev19RKjCBGKczleB9xpqMEsMNj7NP
+ 3GVtMQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,99 +94,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds a function fit_image_read_key_iv_data that checks the
-return value of snprintf and allows to generate a sensible error
-message when generating binary images using filenames that are too
-long for the OS to handle.
+On 08.01.24 15:12, Abdellatif El Khlifi wrote:
+> Happy new year Ilias,
+>
+> On Mon, Dec 18, 2023 at 04:59:09PM +0000, Abdellatif El Khlifi wrote:
+>> Hi Ilias
+>>
+>> On Thu, Dec 14, 2023 at 09:47:13PM +0200, Ilias Apalodimas wrote:
+>>> Hi Mark, Abdellatif
+>>>
+>>> On Thu, 14 Dec 2023 at 18:47, Mark Kettenis <mark.kettenis@xs4all.nl> =
+wrote:
+>>>>
+>>>>> Date: Thu, 14 Dec 2023 15:53:46 +0000
+>>>>> From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+>>>>
+>>>> Hi Abdellatif,
+>>>>
+>>>>> Hi guys,
+>>>>>
+>>>>> I'd like to ask for advice regarding adding EFI RT support to the Ar=
+m's FF-A bus
+>>>>> in U-Boot.
+>>>>>
+>>>>> The objective is to enable the FF-A messaging APIs in EFI RT to be
+>>>>> used for comms with the secure world. This will help getting/setting
+>>>>> EFI variables through FF-A.
+>>>>>
+>>>>> The existing FF-A APIs in U-Boot call the DM APIs (which are not ava=
+ilable at RT).
+>>>>>
+>>>>> Two possible solutions:
+>>>>>
+>>>>> 1/ having the entire U-Boot in RT space (as Simon stated in this dis=
+cussion[1])
+>>>>
+>>>> I don't think this is a terribly good idea.  With this approach order=
+s
+>>>> of magnitude more code will be present in kernel address space one th=
+e
+>>>> OS kernel is running and calling into the EFI runtime.  Including cod=
+e
+>>>> that may access hardware devices that are now under OS control.  It
+>>>> will be nigh impossible to audit all that code and make sure that onl=
+y
+>>>> a safe subset of it gets called.  So...
+>>>
+>>> +100
+>>> I think we should draw a line here. I mentioned it on another thread,
+>>> but I did a shot BoF in Plumbers discussing issues like this,
+>>> problems, and potential solutions [0] [1]. Since that talk patches for
+>>> the kernel that 'solve' the problem for RPMBs got pulled into
+>>> linux-next [2].
+>>
+>> I watched your talk. Great work, thanks :)
+>>
+>>> The TL;DR of that talk is that if the kernel ends up being in control
+>>> of the hardware that stores the EFI variables, we need to find elegant
+>>> ways to teach the kernel how to store those directly. The EFI
+>>> requirement of an isolated flash is something that mostly came from
+>>> the x86 world and is not a reality on the majority of embedded boards.
+>>> I also think we should give up on Authenticated EFI variables in that
+>>> case. We get zero guarantees unless the medium has similar properties
+>>> to an RPMB.
+>>> If a vendor cares about proper UEFI secure boot he can implement
+>>> proper hardware.
+>>>
+>>>>
+>>>>>
+>>>>> 2/ Create an RT variant for the FF-A APIs needed.
+>>>>>        These RT variant don't call the DM APIs
+>>>>>        (e.g: ffa_mm_communicate_runtime, ffa_sync_send_receive_runti=
+me, ...)
+>>>>>
+>>>>> What do you recommend please ?
+>>>>
+>>>> ...this is what I would recommend.  Preferably in a way that refactor=
+s
+>>>> the code such that the low-level functionality is shared between the
+>>>> DM and non-DM APIs.
+>>>
+>>> Yes. The only thing you need to keep alive is the machinery to talk to
+>>> the secure world. The bus, flash driver etc should all be running
+>>> isolated in there. In that case you can implement SetVariableRT as
+>>> described the the EFI spec.
+>>
+>> Cool, thanks. That's my preferred solution too.
+>>
+>> mm_communicate() should be able to detect runtime mode so it calls ffa_=
+mm_communicate_runtime().
+>>
+>> Is there a way to check whether we are in EFI runtime or not ?
 
-This is especially relevant for automated builds such as Buildroot and
-Yocto builds.
+Relevant UEFI event groups for the transition to the OS are:
 
-Signed-off-by: Hugo Cornelis <hugo.cornelis@essensium.com>
----
- tools/image-host.c | 42 ++++++++++++++++++++++++++++++++----------
- 1 file changed, 32 insertions(+), 10 deletions(-)
+EFI_EVENT_GROUP_BEFORE_EXIT_BOOT_SERVICES
+EFI_EVENT_GROUP_EXIT_BOOT_SERVICES
+EFI_EVENT_GROUP_VIRTUAL_ADDRESS_CHANGE
 
-diff --git a/tools/image-host.c b/tools/image-host.c
-index ca4950312f..0092fa830f 100644
---- a/tools/image-host.c
-+++ b/tools/image-host.c
-@@ -340,6 +340,28 @@ err:
- 	return ret;
- }
- 
-+static int fit_image_read_key_iv_data(const char *keydir, const char *key_iv_name,
-+				      unsigned char *key_iv_data, int expected_size)
-+{
-+	char filename[PATH_MAX];
-+	int ret = -1;
-+
-+	ret = snprintf(filename, sizeof(filename), "%s/%s%s",
-+		       keydir, key_iv_name, ".bin");
-+	if (ret >= sizeof(filename)) {
-+		printf("Can't format the key or IV filename when setting up the cipher: insufficient buffer space\n");
-+		ret = -1;
-+	}
-+	if (ret < 0) {
-+		printf("Can't format the key or IV filename when setting up the cipher: snprintf error\n");
-+		ret = -1;
-+	}
-+
-+	ret = fit_image_read_data(filename, key_iv_data, expected_size);
-+
-+	return ret;
-+}
-+
- static int get_random_data(void *data, int size)
- {
- 	unsigned char *tmp = data;
-@@ -376,7 +398,6 @@ static int fit_image_setup_cipher(struct image_cipher_info *info,
- 				  int noffset)
- {
- 	char *algo_name;
--	char filename[128];
- 	int ret = -1;
- 
- 	if (fit_image_cipher_get_algo(fit, noffset, &algo_name)) {
-@@ -413,17 +434,17 @@ static int fit_image_setup_cipher(struct image_cipher_info *info,
- 		goto out;
- 	}
- 
--	/* Read the key in the file */
--	snprintf(filename, sizeof(filename), "%s/%s%s",
--		 info->keydir, info->keyname, ".bin");
- 	info->key = malloc(info->cipher->key_len);
- 	if (!info->key) {
- 		fprintf(stderr, "Can't allocate memory for key\n");
- 		ret = -1;
- 		goto out;
- 	}
--	ret = fit_image_read_data(filename, (unsigned char *)info->key,
--				  info->cipher->key_len);
-+
-+	/* Read the key in the file */
-+	ret = fit_image_read_key_iv_data(info->keydir, info->keyname,
-+					 (unsigned char *)info->key,
-+					 info->cipher->key_len);
- 	if (ret < 0)
- 		goto out;
- 
-@@ -436,10 +457,11 @@ static int fit_image_setup_cipher(struct image_cipher_info *info,
- 
- 	if (info->ivname) {
- 		/* Read the IV in the file */
--		snprintf(filename, sizeof(filename), "%s/%s%s",
--			 info->keydir, info->ivname, ".bin");
--		ret = fit_image_read_data(filename, (unsigned char *)info->iv,
--					  info->cipher->iv_len);
-+		ret = fit_image_read_key_iv_data(info->keydir, info->ivname,
-+						 (unsigned char *)info->iv,
-+						 info->cipher->iv_len);
-+		if (ret < 0)
-+			goto out;
- 	} else {
- 		/* Generate an ramdom IV */
- 		ret = get_random_data((void *)info->iv, info->cipher->iv_len);
--- 
-2.34.1
+Once EFI_EVENT_GROUP_EXIT_BOOT_SERVICES is signaled you are at runtime.
+
+Use CreateEventEx() to create an event for the group.
+
+Best regards
+
+Heinrich
+
+>>
+>> Suggested changes (pseudo-code):
+>>
+>> __efi_runtime mm_communicate () {
+>> #if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
+>> if (RT) { /* NEW */
+>>  =C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D ffa_mm_communicate_runtime(comm_bu=
+f, dsize); /* NEW */
+>> } else {
+>>  =C2=A0 =C2=A0 mm_comms =3D get_mm_comms();
+>>  =C2=A0 =C2=A0 if (mm_comms =3D=3D MM_COMMS_FFA)
+>>  =C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D ffa_mm_communicate(comm_buf, dsize=
+);
+>>  =C2=A0 =C2=A0 else
+>>  =C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D optee_mm_communicate(comm_buf, dsi=
+ze);
+>> }
+>> #else
+>> ...
+>> #endif
+>>
+>> Existing code:  https://github.com/u-boot/u-boot/blob/master/lib/efi_lo=
+ader/efi_variable_tee.c#L417
+>
+> A gentle reminder about the question above please (Is there a way to che=
+ck whether we are in EFI runtime or not).
+>
+> Cheers,
+> Abdellatif
 
