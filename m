@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2077FC3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 17:35:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E258AC3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 17:35:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C758887B28;
-	Mon,  8 Jan 2024 18:33:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5608287B32;
+	Mon,  8 Jan 2024 18:33:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="zIeakZTm";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SUVFMmtZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D422E87AC7; Mon,  8 Jan 2024 18:33:26 +0100 (CET)
+ id 7F78887AFF; Mon,  8 Jan 2024 18:33:27 +0100 (CET)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 515FE87AE5
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 18:33:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 90AFD87AD9
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 18:33:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 408HX99q100200;
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 408HX92b100196;
  Mon, 8 Jan 2024 11:33:09 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1704735189;
- bh=ofSUlSEG83EtnosmhexXeF8L30C7B2aaDOp83OJ0nN8=;
+ bh=QNARSK9gqxSs8uieTTKZx/L4g08ps9bWjFW3rTsE/6s=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=zIeakZTmC0sAAYfSXHn3wrZYGsb/BYurGICEXB8ex0zRwQUG7A6xePzoSXQgdv094
- slGMZyEhoISDYRkbzteLQ2g3bqu69Ssxe+5T4e0HJltiWCoCLRM1LfiIhj8Ps1mFds
- xxQIBDifagQWUslzrtrLcjfkHFD8EVD9/Ol8gElU=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 408HX9ps072369
+ b=SUVFMmtZZOn3LxFtIOF/Ie2+msTKUkhUlA8a8/temZmXVmupgpNa/+xUSUZS8JKb2
+ oyoBqykiaxg/oIWe8uZwujm8p8iBayJfBYqwNHBePTxWkpK+XHSQv9EwDqGLkvzWqG
+ 9Sk0WK88fdHebREVlBVhgxRt0mr7fqw2tlIKlwwQ=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 408HX96p001651
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Mon, 8 Jan 2024 11:33:09 -0600
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
  Jan 2024 11:33:08 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Mon, 8 Jan 2024 11:33:08 -0600
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 408HX8gi109335;
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 408HX8Xp045329;
  Mon, 8 Jan 2024 11:33:08 -0600
 From: Nishanth Menon <nm@ti.com>
 To: Tom Rini <trini@konsulko.com>
@@ -60,10 +60,10 @@ CC: Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu Raja <sinthu.raja@ti.com>,
  Bryan Brattlof <bb@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
  <u-boot@lists.denx.de>, Jon Humphreys <j-humphreys@ti.com>,
  Nishanth Menon <nm@ti.com>
-Subject: [PATCH 09/10] board: beagle: beagleplay: Set fdtfile from C code
- instead of findfdt script
-Date: Mon, 8 Jan 2024 11:33:00 -0600
-Message-ID: <20240108173301.2692332-10-nm@ti.com>
+Subject: [PATCH 02/10] board: ti: am62ax: Set fdtfile from C code instead of
+ findfdt script
+Date: Mon, 8 Jan 2024 11:32:53 -0600
+Message-ID: <20240108173301.2692332-3-nm@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240108173301.2692332-1-nm@ti.com>
 References: <20240108173301.2692332-1-nm@ti.com>
@@ -87,24 +87,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Stop using the findfdt script and switch to setting the fdtfile from C
-code.
+Stop using the findfdt script and switch to setting the fdtfile from
+C code.
 
 While at this, replace findfdt in environment with a warning as it is
-no longer needed.
+no longer needed
 
 Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
- board/beagle/beagleplay/beagleplay.c   | 14 ++++++++++++++
- board/beagle/beagleplay/beagleplay.env |  1 -
- configs/am62x_beagleplay_a53_defconfig |  3 ++-
- 3 files changed, 16 insertions(+), 2 deletions(-)
+ board/ti/am62ax/am62ax.env       |  1 -
+ board/ti/am62ax/evm.c            | 10 ++++++++++
+ configs/am62ax_evm_a53_defconfig |  1 +
+ 3 files changed, 11 insertions(+), 1 deletion(-)
 
-diff --git a/board/beagle/beagleplay/beagleplay.c b/board/beagle/beagleplay/beagleplay.c
-index 1c376dea372f..00ff86165790 100644
---- a/board/beagle/beagleplay/beagleplay.c
-+++ b/board/beagle/beagleplay/beagleplay.c
-@@ -27,3 +27,17 @@ int dram_init_banksize(void)
+diff --git a/board/ti/am62ax/am62ax.env b/board/ti/am62ax/am62ax.env
+index a6d967e982d4..334374abb73e 100644
+--- a/board/ti/am62ax/am62ax.env
++++ b/board/ti/am62ax/am62ax.env
+@@ -1,5 +1,4 @@
+ #include <env/ti/ti_common.env>
+-#include <env/ti/default_findfdt.env>
+ #include <env/ti/mmc.env>
+ 
+ name_kern=Image
+diff --git a/board/ti/am62ax/evm.c b/board/ti/am62ax/evm.c
+index cd3360a43029..62d3664936e7 100644
+--- a/board/ti/am62ax/evm.c
++++ b/board/ti/am62ax/evm.c
+@@ -13,6 +13,8 @@
+ #include <fdt_support.h>
+ #include <spl.h>
+ 
++#include "../common/fdt_ops.h"
++
+ int board_init(void)
+ {
+ 	return 0;
+@@ -27,3 +29,11 @@ int dram_init_banksize(void)
  {
  	return fdtdec_setup_memory_banksize();
  }
@@ -112,40 +131,22 @@ index 1c376dea372f..00ff86165790 100644
 +#ifdef CONFIG_BOARD_LATE_INIT
 +int board_late_init(void)
 +{
-+	char fdtfile[50];
-+
-+	snprintf(fdtfile, sizeof(fdtfile), "%s/%s.dtb",
-+		 CONFIG_TI_EVM_FDT_FOLDER_PATH, CONFIG_DEFAULT_DEVICE_TREE);
-+
-+	env_set("fdtfile", fdtfile);
-+
++	ti_set_fdt_env(NULL, NULL);
 +	return 0;
 +}
 +#endif
-diff --git a/board/beagle/beagleplay/beagleplay.env b/board/beagle/beagleplay/beagleplay.env
-index 4f0a94a8113e..647b25d14c8e 100644
---- a/board/beagle/beagleplay/beagleplay.env
-+++ b/board/beagle/beagleplay/beagleplay.env
-@@ -1,5 +1,4 @@
- #include <env/ti/ti_common.env>
--#include <env/ti/default_findfdt.env>
- #include <env/ti/mmc.env>
- 
- name_kern=Image
-diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
-index 0be20045a974..1f43891d10bb 100644
---- a/configs/am62x_beagleplay_a53_defconfig
-+++ b/configs/am62x_beagleplay_a53_defconfig
-@@ -33,7 +33,8 @@ CONFIG_AUTOBOOT_KEYED=y
- CONFIG_AUTOBOOT_PROMPT="Press SPACE to abort autoboot in %d seconds\n"
- CONFIG_AUTOBOOT_DELAY_STR="d"
- CONFIG_AUTOBOOT_STOP_STR=" "
--CONFIG_BOOTCOMMAND="run set_led_state_start_load;run findfdt; run envboot; bootflow scan -lb;run set_led_state_fail_load"
-+CONFIG_BOOTCOMMAND="run set_led_state_start_load; run envboot; bootflow scan -lb;run set_led_state_fail_load"
+diff --git a/configs/am62ax_evm_a53_defconfig b/configs/am62ax_evm_a53_defconfig
+index 38083586a3ec..e5fcd8cc5b6f 100644
+--- a/configs/am62ax_evm_a53_defconfig
++++ b/configs/am62ax_evm_a53_defconfig
+@@ -24,6 +24,7 @@ CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
+ CONFIG_BOOTSTD_FULL=y
+ CONFIG_BOOTSTD_DEFAULTS=y
+ CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
 +CONFIG_BOARD_LATE_INIT=y
  CONFIG_SPL_MAX_SIZE=0x58000
+ CONFIG_SPL_PAD_TO=0x0
  CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x80c80000
 -- 
 2.43.0
 
