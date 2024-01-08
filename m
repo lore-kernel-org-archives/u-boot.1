@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56C6CC47073
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 00:19:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE848C47073
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 00:20:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 972EA87AAD;
-	Mon,  8 Jan 2024 01:16:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 169D087ABA;
+	Mon,  8 Jan 2024 01:16:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DNd9RBOb";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R/Yt+QxC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6868387A4E; Mon,  8 Jan 2024 01:16:38 +0100 (CET)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id C8AC587A89; Mon,  8 Jan 2024 01:16:38 +0100 (CET)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FD2287A97
+ by phobos.denx.de (Postfix) with ESMTPS id 5831587AB3
  for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 01:16:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-680b1956ca4so13694376d6.3
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-680fdf7d52fso9106996d6.3
  for <u-boot@lists.denx.de>; Sun, 07 Jan 2024 16:16:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704672986; x=1705277786; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1704672992; x=1705277792; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wgf1RzVTqfvjKgVp/XBjMRMSEQm4p1MSriitKb3VVvQ=;
- b=DNd9RBObf7Jq/3rSrJmyYpbV4QyVhdcNIKlAenO9qr0a2pU+ATgMV9ZCFlpt/zRTKY
- yqLrxCRaLVerrHCajnnyWcrmoZdCnG+el/cLqknQ6ciC825HSvq4hznoPQwNGErr40ze
- 0CIUTXO22nK4gFCGRCGuf3SN0Ljg/t946JoNw=
+ bh=e/TclRv1S9ddxfrj2hqSMzH7jRGaU4pwjoJlxDmDNtY=;
+ b=R/Yt+QxCsWXspvJ1Z0Z6S1HnPv36UQu/NKjcP3bGUsVioyc+JbBALawREkuKbheO/e
+ Z1Jc2SNPXLghgC/p3StwMmktdCT4x/qHzdJvX06fZojVzrynZ9LX3tLKy0OfnKm+At/m
+ Yx3ebcD4jU02PYX9LdCBF7QMjXcXZaJYSWcWw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704672986; x=1705277786;
+ d=1e100.net; s=20230601; t=1704672992; x=1705277792;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=wgf1RzVTqfvjKgVp/XBjMRMSEQm4p1MSriitKb3VVvQ=;
- b=MafILUC6xs5adJ8Ir+S9RiIcgcnaxPNbomn3BHhcN7RPsGJZmSxBs8NqGjV0SUdOVw
- fWVQbmpgGqt4lDjN1oeKsvtOORDHTbYbBQIeasaqXbEu+gGgXN3WqWKyR2cRD6CvjOIA
- ZQidWz6bRuPbcR4n0WAoRzhuAIsi91QhO52ylgXQ+orGagVZRCu471JBkROej0bK8VXG
- EIt0YnPn/zcSPupPt5PITxCXHvM48Pb+LxU0H1NFZ27nxdZsoirl5U12PJyxXR8fdoPJ
- PdasJj2SYGuUARmxkR/OIsG6IBW6DyFf3KIjyhfNA907OrPXaQar3aaKy28qXQBvHOOI
- 4myw==
-X-Gm-Message-State: AOJu0Yymf+D007t+OfbJwhBCAnvAjNOcJhdcQ6W0LembttQXHuUv82tW
- nkJtjlQNjAg/RhcZJxJulVvPUvan0COrtB6tJkNxAD7R+Gm4
-X-Google-Smtp-Source: AGHT+IEQHiWMUwVkmZqh3GTmAgGoqzeEshjwwW2d9SNLwNA+e+byQxceEt2fPsOU/H29sdOt82UKwAfwWG7gIAvJzHw=
-X-Received: by 2002:a05:6214:cc9:b0:680:d151:229 with SMTP id
- 9-20020a0562140cc900b00680d1510229mr4490385qvx.104.1704672986729; Sun, 07 Jan
- 2024 16:16:26 -0800 (PST)
+ bh=e/TclRv1S9ddxfrj2hqSMzH7jRGaU4pwjoJlxDmDNtY=;
+ b=t0wCDWFmdOHLIRvI+mc5PGeTOuy7GfrmDB9d5vm72nlRbWVio8w/t2nbHaDJz8IP0j
+ gnlsePK9lWFzuINmpmkUDRlrK+LI2/uFlIxtwIum4n1KN9pLzQDnQmIwErZg1jcLwXQE
+ KV/88cBGk0LMxN/FvZev10Y4YnaqXoGlD7kCJKDDuPxrtD2in6iouxkNaV4JVs6Ix3aD
+ 1nU8il3UvA44CE8ouII9LBiaoUTuBnwFh39nUJ994M5WXYRX4DcPKM8nNaixWr8e18RS
+ P8R+wVY7OeDzqPCux1j1jwY/sm2TlG2zXIelfG0q49Lq2gumxNVwKUB9Odzo4IeQeki4
+ 5RtQ==
+X-Gm-Message-State: AOJu0YxBXv86XGONB/1it86uNGtJohEbXPOZhXBqANbDaXEvyqmb2jMz
+ W5Is8XjedUOFve9A66GkzXtX1uBtHGDozTtwa11zu720ucOJ
+X-Google-Smtp-Source: AGHT+IHQ0VTqO2nqjdyjfEu1zkzLuG3oAG2Jayb98eqPfdFvEc7ttmnPXHT8ulJ3Tccp75SPADMYSTvFVWFyMQTGXP8=
+X-Received: by 2002:a05:6214:4019:b0:680:cfb0:e492 with SMTP id
+ kd25-20020a056214401900b00680cfb0e492mr4921551qvb.50.1704672992770; Sun, 07
+ Jan 2024 16:16:32 -0800 (PST)
 Received: from 798914943136 named unknown by gmailapi.google.com with
- HTTPREST; Sun, 7 Jan 2024 18:16:26 -0600
+ HTTPREST; Sun, 7 Jan 2024 18:16:32 -0600
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20231219150408.10949-7-heinrich.schuchardt@canonical.com>
-References: <20231219150408.10949-7-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231219150408.10949-2-heinrich.schuchardt@canonical.com>
+References: <20231219150408.10949-2-heinrich.schuchardt@canonical.com>
  <20231219150408.10949-1-heinrich.schuchardt@canonical.com>
-Date: Sun, 7 Jan 2024 18:16:26 -0600
-X-Google-Sender-Auth: X22pzeOPezlZ32M7TlMW_zD4Y3s
-Message-ID: <CAFLszThvGZfm06Z_X=FV3nN5xZYOb0RzNVPDitDN+tM=Jp_3Tw@mail.gmail.com>
-Subject: Re: [PATCH v4 6/9] riscv: add support for QEMU firmware tables
+Date: Sun, 7 Jan 2024 18:16:32 -0600
+X-Google-Sender-Auth: ShliIa-iQPrxGL801hTP8HW9JHc
+Message-ID: <CAFLszTj1Rw-Fo68f+TVdjLc=fGa1rLupjryien-8qyZoCZOjDg@mail.gmail.com>
+Subject: Re: [PATCH v4 1/9] acpi: Kconfig symbol CONFIG_QFW_ACPI
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>, 
@@ -87,14 +87,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the QEMU firmware interface if ACPI tables are to be supported on
-the QEMU platform.
+We have two implementations of write_acpi_tables(). One for writing ACPI
+tables based on ACPI_WRITER() entries another based on copying tables from
+QEMU.
 
-Enable the QFW MMIO interface if the QEMU firmware interface is enabled.
+Create a symbol CONFIG_QFW_ACPI that signifies copying ACPI tables from
+QEMU and use it consistently.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 v4:
 	no change
@@ -103,7 +104,10 @@ v3:
 v2:
 	no change
 ---
- board/emulation/qemu-riscv/Kconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/misc/Kconfig   | 7 +++++++
+ drivers/misc/qfw.c     | 4 ++--
+ lib/acpi/Makefile      | 2 +-
+ lib/acpi/acpi_writer.c | 4 ++--
+ 4 files changed, 12 insertions(+), 5 deletions(-)
 
 Applied to u-boot-dm/next, thanks!
