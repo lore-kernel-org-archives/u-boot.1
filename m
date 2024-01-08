@@ -4,60 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E54DCC3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 09:29:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5237AC3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 09:31:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 330B58793A;
-	Mon,  8 Jan 2024 10:29:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id AB26187955;
+	Mon,  8 Jan 2024 10:30:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="CAHbSPNx";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="UxRavyb7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAB308793A; Mon,  8 Jan 2024 10:29:52 +0100 (CET)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
+ id 26DBD87A2F; Mon,  8 Jan 2024 10:30:57 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBDF0877DE
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 10:29:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 92FDE8793A
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 10:30:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 634c8058-ae08-11ee-abd4-005056999439
-Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 634c8058-ae08-11ee-abd4-005056999439;
- Mon, 08 Jan 2024 10:29:14 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=60HQAItS5B8UMcOtFDMk5rfvY4s+xImhuWpHDROVesA=;
- b=CAHbSPNx8suEwyBZMRcFVSfrBmB8lgJ2yhdaDNQcte9zhxN+Mky16ckBzkOa4foIlJNgyixQTwTQQ
- 6mobJNTC9C0QnLxaxZ3lDubjSun6rym0fSYQs2/DWKV9dzQpKqqEUe2BJkOfbm381SCwzwUx6/+9uB
- e/5dlnnvpF2it/pm69uLR3zxoj8NwGZ0qwN6DRNkuSF8rus43SVFrSHO4bF/JjbPEU6DrKY2IUtj5F
- OlMVp1/y7nqqDADIqjFK+aLb6g0FOKBglKHwL08e5/dhoJG+fdI3t7E4cJ3t6L+hYQAU7Txly0RkOq
- sBifSBjJppoX+1SOcAxUIPY7ogGPEAA==
-X-KPN-MID: 33|qWy0mH9hQAERNZXfUxDC8iknBA2G3ewAcwxJENfbNs1xZaKFF3wE/dnYmCbtBSE
- +s4AJcU0CQ3/KSlVz7g6nUA3nvtrVnEO4QCU8rndtQtk=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|R1NT+rLq6L4SwGS309Hxsna8VQAnZozOdsKviW6f0ukw0EO/14KQaw6oRO4EryU
- P1T6lX8taIeqffRUfZxmdfg==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 78460e7b-ae08-11ee-ad2d-005056998788;
- Mon, 08 Jan 2024 10:29:50 +0100 (CET)
-Date: Mon, 08 Jan 2024 10:29:49 +0100
-Message-Id: <874jfouq9e.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, bmeng.cn@gmail.com, sjg@chromium.org
-In-Reply-To: <20240108001455.35638-2-sjg@chromium.org> (message from Simon
- Glass on Sun, 7 Jan 2024 17:14:55 -0700)
-Subject: Re: [PATCH 2/2] coreboot: Switch to a monospaced font
-References: <20240108001455.35638-1-sjg@chromium.org>
- <20240108001455.35638-2-sjg@chromium.org>
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 01B7860DB9;
+ Mon,  8 Jan 2024 09:30:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8C022C433C7;
+ Mon,  8 Jan 2024 09:30:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1704706252;
+ bh=5ugu2S1SJlCoPfmn4n+EihabWKy4vzKIfLGn7hvYlZE=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=UxRavyb7N0TQqP9ccp6Vy1TQ0z6G5iCLw/c8p+du+VJr5boQbcBdIwP15w4BPQXP4
+ dwdPQiv4mutkum3uyxsTPgGgcDFG3qqtaHVkA3lQeX7E9jC8M7/oklqdnxEkCQLdcy
+ thtexrcSGT/zXZfI9rhoa0MA2oRDI6khs5naay8eF3k/Q79Pj0SFNjarak8Yk9JlEH
+ JqyElTEXfJugY0myQgLJ+BBX6e3DaTVjJQcRB59Frmw30M6u5AB9C69/cemi/rA/xO
+ u0fx9rkj1XhZf7NQueli7GHtwRY9nkZKbtngL8W/FfXMpF85NM+KpB1spElUeecf7f
+ BosIPbwBos1mg==
+Message-ID: <0b912565-d34e-4fbd-88c4-1750fe8d3d96@kernel.org>
+Date: Mon, 8 Jan 2024 11:30:45 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 00/16] Introduce ICSSG Ethernet driver
+Content-Language: en-US
+To: "Anwar, Md Danish" <a0501179@ti.com>, MD Danish Anwar
+ <danishanwar@ti.com>, Andrew Davis <afd@ti.com>,
+ Maxime Ripard <mripard@kernel.org>, Siddharth Vadapalli
+ <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, srk@ti.com, r-gunasekaran@ti.com
+References: <20231219101225.3443978-1-danishanwar@ti.com>
+ <6d9456ec-a483-4721-8713-626aacdc9f81@kernel.org>
+ <4ccd7db1-533a-4243-9087-7e7c2e85b917@ti.com>
+ <d841b7b8-80f8-467d-afed-1170a2627724@kernel.org>
+ <46c69c28-09c3-4e60-92f5-1f91d795a22a@ti.com>
+ <036c3423-4205-4d9e-9779-ecd3a49f8a47@ti.com>
+ <64a18d0a-294d-4e11-a867-4191e99f2437@ti.com>
+ <b3ecb419-6ef1-4f44-a6c8-57e259cb06db@kernel.org>
+ <0151a34a-7426-4072-a442-39625d236010@ti.com>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <0151a34a-7426-4072-a442-39625d236010@ti.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,83 +86,296 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Simon Glass <sjg@chromium.org>
-> Date: Sun,  7 Jan 2024 17:14:55 -0700
-> 
-> The default font is proportional, with different character widths.
-> Select a monospace font for coreboot so that the 'dm tree' output lines
-> up correctly.
-> 
-> Update the coreboot tests to match.
 
-To be honest, I think defaulting to a proportional font is wrong as a
-default for something like U-Boot.
 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
->  configs/coreboot64_defconfig |  3 +++
->  configs/coreboot_defconfig   |  3 +++
->  test/cmd/font.c              | 12 +++++++++---
->  3 files changed, 15 insertions(+), 3 deletions(-)
-> 
-> diff --git a/configs/coreboot64_defconfig b/configs/coreboot64_defconfig
-> index 49c982ef756..c4571090859 100644
-> --- a/configs/coreboot64_defconfig
-> +++ b/configs/coreboot64_defconfig
-> @@ -64,6 +64,9 @@ CONFIG_SOUND=y
->  CONFIG_SOUND_I8254=y
->  CONFIG_VIDEO_COPY=y
->  CONFIG_CONSOLE_TRUETYPE=y
-> +CONFIG_CONSOLE_TRUETYPE_SIZE=20
-> +# CONFIG_CONSOLE_TRUETYPE_NIMBUS is not set
-> +CONFIG_CONSOLE_TRUETYPE_ANKACODER=y
->  CONFIG_CONSOLE_SCROLL_LINES=5
->  CONFIG_SPL_ACPI=y
->  CONFIG_CMD_DHRYSTONE=y
-> diff --git a/configs/coreboot_defconfig b/configs/coreboot_defconfig
-> index d4e44e00dca..7aa841bb54b 100644
-> --- a/configs/coreboot_defconfig
-> +++ b/configs/coreboot_defconfig
-> @@ -61,6 +61,9 @@ CONFIG_SOUND=y
->  CONFIG_SOUND_I8254=y
->  CONFIG_VIDEO_COPY=y
->  CONFIG_CONSOLE_TRUETYPE=y
-> +CONFIG_CONSOLE_TRUETYPE_SIZE=20
-> +# CONFIG_CONSOLE_TRUETYPE_NIMBUS is not set
-> +CONFIG_CONSOLE_TRUETYPE_ANKACODER=y
->  CONFIG_CONSOLE_SCROLL_LINES=5
->  CONFIG_CMD_DHRYSTONE=y
->  # CONFIG_GZIP is not set
-> diff --git a/test/cmd/font.c b/test/cmd/font.c
-> index 9c1eebf799e..ee1c610106d 100644
-> --- a/test/cmd/font.c
-> +++ b/test/cmd/font.c
-> @@ -29,14 +29,20 @@ static int font_test_base(struct unit_test_state *uts)
->  
->  	ut_assertok(console_record_reset_enable());
->  	ut_assertok(run_command("font list", 0));
-> -	ut_assert_nextline("nimbus_sans_l_regular");
-> +	if (IS_ENABLED(CONFIG_CONSOLE_TRUETYPE_NIMBUS))
-> +		ut_assert_nextline("nimbus_sans_l_regular");
-> +	if (IS_ENABLED(CONFIG_CONSOLE_TRUETYPE_ANKACODER))
-> +		ut_assert_nextline("ankacoder_c75_r");
->  	if (IS_ENABLED(CONFIG_CONSOLE_TRUETYPE_CANTORAONE))
->  		ut_assert_nextline("cantoraone_regular");
->  	ut_assertok(ut_check_console_end(uts));
->  
->  	ut_assertok(vidconsole_get_font_size(dev, &name, &size));
-> -	ut_asserteq_str("nimbus_sans_l_regular", name);
-> -	ut_asserteq(18, size);
-> +	if (IS_ENABLED(CONFIG_CONSOLE_TRUETYPE_ANKACODER))
-> +		ut_asserteq_str("ankacoder_c75_r", name);
-> +	else
-> +		ut_asserteq_str("nimbus_sans_l_regular", name);
-> +	ut_asserteq(CONFIG_CONSOLE_TRUETYPE_SIZE, size);
->  
->  	if (!IS_ENABLED(CONFIG_CONSOLE_TRUETYPE_CANTORAONE))
->  		return 0;
-> -- 
-> 2.34.1
+On 05/01/2024 12:15, Anwar, Md Danish wrote:
 > 
 > 
+> On 1/5/2024 1:49 PM, Roger Quadros wrote:
+>>
+>>
+>> On 03/01/2024 12:27, MD Danish Anwar wrote:
+>>>
+>>>
+>>> On 02/01/24 7:26 pm, Andrew Davis wrote:
+>>>> On 12/27/23 12:56 AM, MD Danish Anwar wrote:
+>>>>>
+>>>>>
+>>>>> On 22/12/23 6:13 pm, Roger Quadros wrote:
+>>>>>>
+>>>>>> On 22/12/2023 12:26, MD Danish Anwar wrote:
+>>>>>>> Hi Roger,
+>>>>>>>
+>>>>>>> On 20/12/23 3:29 pm, Roger Quadros wrote:
+>>>>>>>> Hi,
+>>>>>>>>
+>>>>>>>> On 19/12/2023 12:11, MD Danish Anwar wrote:
+>>>>>>>>> Introduce ICSSG PRUETH support in uboot. The ICSSG driver is used
+>>>>>>>>> in TI
+>>>>>>>>> AM654 SR2.0.
+>>>>>>>>>
+>>>>>>>>> The ICSSG PRU Sub-system runs on EMAC firmware. This series
+>>>>>>>>> Introduces
+>>>>>>>>> support for ICSSG driver in uboot. This series also adds the driver's
+>>>>>>>>> dependencies.
+>>>>>>>>>
+>>>>>>>>> The ICSSG2 node is added in device tree overlay so that it remains in
+>>>>>>>>> sync with linux kernel.
+>>>>>>>>>
+>>>>>>>>> The series introduces device tree and config changes and AM65x
+>>>>>>>>> to enable ICSSG driver. The series also enables
+>>>>>>>>> SPL_LOAD_FIT_APPLY_OVERLAY
+>>>>>>>>> for AM65x in order to load overlay over spl.
+>>>>>>>>>
+>>>>>>>>> This series has been tested on AM65x SR2.0, and the ICSSG
+>>>>>>>>> interface is
+>>>>>>>>> able to ping / dhcp and boot kernel using tftp in uboot.
+>>>>>>>>>
+>>>>>>>>> To use ICSSG2 ethernet, the ICSSG firmware needs to be loaded to
+>>>>>>>>> PRU RPROC
+>>>>>>>>> cores and RPROC cores need to be booted with the firmware. This
+>>>>>>>>> step is
+>>>>>>>>> done inside driver in kernel as kernel supports APIs like
+>>>>>>>>> rproc_set_firmware() and rproc_fw_boot(). But as u-boot doesn't
+>>>>>>>>> have these
+>>>>>>>>> APIs, the same needs to be done via u-boot cmds.
+>>>>>>>>>
+>>>>>>>>> To make sure icssg-eth works we need to do below steps.
+>>>>>>>>>
+>>>>>>>>> 1. Initialize rproc cores i.e. rproc_init()
+>>>>>>>>> 2. Load $firmware_file from partition '1:2' (root) on device (mmc
+>>>>>>>>> in this
+>>>>>>>>>     example)
+>>>>>>>>> 3. Load the firmware file to rproc cores passing. i.e. rproc_load()
+>>>>>>>>>     taking rproc_id, loadaddr and file size as arguments.
+>>>>>>>>> 4. Start rproc cores. i.e. rproc_start() taking rproc_id as arguments
+>>>>>>>>>
+>>>>>>>>> The above steps are done by running the below commands at u-boot
+>>>>>>>>> prompt.
+>>>>>>>>>
+>>>>>>>>> => setenv start_icssg2 'rproc start 14; rproc start 15; rproc
+>>>>>>>>> start 16; rproc start 17; rproc start 18; rproc start 19'
+>>>>>>>>> => setenv stop_icssg2 'rproc stop 14; rproc stop 15; rproc stop
+>>>>>>>>> 16; rproc stop 17; rproc stop 18; rproc stop 19'
+>>>>>>>>> => setenv firmware_dir '/lib/firmware/ti-pruss'
+>>>>>>>>> => setenv get_firmware_mmc 'load mmc ${bootpart} ${loadaddr}
+>>>>>>>>> ${firmware_dir}/${firmware_file}'
+>>>>>>>>>
+>>>>>>>>> => setenv init_icssg2 'setenv ethact icssg2-eth; setenv autoload
+>>>>>>>>> no; rproc init; setenv loadaddr 0x80000000; \
+>>>>>>>>>      setenv firmware_file am65x-sr2-pru0-prueth-fw.elf; run
+>>>>>>>>> get_firmware_mmc;  rproc load 14 0x80000000 ${filesize}; \
+>>>>>>>>>      setenv loadaddr 0x89000000; setenv firmware_file
+>>>>>>>>> am65x-sr2-rtu0-prueth-fw.elf; run get_firmware_mmc; rproc load 15
+>>>>>>>>> 0x89000000 ${filesize}; \
+>>>>>>>>>      setenv loadaddr 0x90000000; setenv firmware_file
+>>>>>>>>> am65x-sr2-txpru0-prueth-fw.elf; run get_firmware_mmc; rproc load
+>>>>>>>>> 16 0x90000000 ${filesize}; \
+>>>>>>>>>      setenv loadaddr 0x80000000; setenv firmware_file
+>>>>>>>>> am65x-sr2-pru1-prueth-fw.elf; run get_firmware_mmc; rproc load 17
+>>>>>>>>> 0x80000000 ${filesize}; \
+>>>>>>>>>      setenv loadaddr 0x89000000; setenv firmware_file
+>>>>>>>>> am65x-sr2-rtu1-prueth-fw.elf; run get_firmware_mmc; rproc load 18
+>>>>>>>>> 0x89000000 ${filesize}; \
+>>>>>>>>>      setenv loadaddr 0x90000000; setenv firmware_file
+>>>>>>>>> am65x-sr2-txpru1-prueth-fw.elf; run get_firmware_mmc; rproc load
+>>>>>>>>> 19 0x90000000 ${filesize}; \
+>>>>>>>>>      run start_icssg2;'
+>>>>>>>>
+>>>>>>>> A whole bunch of commands are required to get ethernet functional.
+>>>>>>>> This is not at all user friendly and will be a maintenance nightmare.
+>>>>>>>> What worries me is tracking the 6 different rproc cores and the 6
+>>>>>>>> different firmware files to start 1 ethernet device.
+>>>>>>>> This will get even more interesting when we have to deal with
+>>>>>>>> different ICSSG instances on different boards.
+>>>>>>>>
+>>>>>>>> What is preventing the driver from starting the rproc cores it
+>>>>>>>> needs so user doesn't need to care about it?
+>>>>>>>> All the necessary information is in the Device tree. At least this
+>>>>>>>> is how it is done on Linux.
+>>>>>>>>
+>>>>>>>
+>>>>>>> I tried removing the need for these commands and implementing them
+>>>>>>> inside the driver only. I am able to load the firmware from driver
+>>>>>>> using
+>>>>>>> the fs_loader API request_firmware_into_buf(). It requires changes to
+>>>>>>> dt. A DT node called fs-loader needs to be added also CONFIG_FS_LOADER
+>>>>>>> needs to enabled. In the DT node we need to specify the storage media
+>>>>>>> that we are using i.e. mmc, ospi, usb. It's upto user to modify the
+>>>>>>> storage media, the driver will take the media from DT and try to laod
+>>>>>>> firmware from their.
+>>>>>>>
+>>>>>>> For loading firmwares to rproc cores, rproc_load() API is needed. Now
+>>>>>>> this API takes rproc_id, loadaddr and firmware_size as arguments.
+>>>>>>> loadaddr is fixed for all three pru cores. firmware_size is obtained
+>>>>>>> from request_firmware_into_buf() but I couldn't find a way to get the
+>>>>>>> rproc_id. For now based on the ICSSG instance and slice number I am
+>>>>>>> figuring out the rproc_id and passing it to rproc_load() and
+>>>>>>> rproc_start() APIs. Please let me know if you have any other / better
+>>>>>>> way of finding rproc_id.
+>>>>>>>
+>>>>>>> Below is the entire diff to remove these commands and move their
+>>>>>>> functionality to driver. Please have a look and let me know if this
+>>>>>>> is ok.
+>>>>>>>
+>>>>>>
+>>>>>> Good to see you got something working so quickly.
+>>>>>> It has some rough edges but nothing that is blocking.
+>>>>>>
+>>>>>>>
+>>>>>>> Save New Duplicate & Edit Just Text Twitter
+>>>>>>> diff --git a/arch/arm/dts/k3-am654-base-board.dts
+>>>>>>> b/arch/arm/dts/k3-am654-base-board.dts
+>>>>>>> index cfbcebfa37..c8da72e49c 100644
+>>>>>>> --- a/arch/arm/dts/k3-am654-base-board.dts
+>>>>>>> +++ b/arch/arm/dts/k3-am654-base-board.dts
+>>>>>>> @@ -16,6 +16,13 @@
+>>>>>>>       chosen {
+>>>>>>>           stdout-path = "serial2:115200n8";
+>>>>>>>           bootargs = "earlycon=ns16550a,mmio32,0x02800000";
+>>>>>>> +        firmware-loader = <&fs_loader0>;
+>>>>>>> +    };
+>>>>>>> +
+>>>>>>> +    fs_loader0: fs-loader {
+>>>>>>> +        bootph-all;
+>>>>>>> +        compatible = "u-boot,fs-loader";
+>>>>>>> +        phandlepart = <&sdhci1 2>;
+>>>>>>>       };
+>>>>>>
+>>>>>> This is has 2 issues
+>>>>>> 1) It will not be accepted in Kernel DT. Maybe it could be done in
+>>>>>> -u-boot.dtsi file.
+>>>>>
+>>>>> Sure. I'll move this to k3-am654-base-board-u-boot.dtsi
+>>>>>
+>>>>>> 2) You cannot assume boot medium is always sdhci1 2
+>>>>>>
+>>>>>
+>>>>> Yes. It's upto user to provide the boot medium and boot partition for
+>>>>> loading firmware. By default the firmware is loacated in root partion of
+>>>>> shdci1 on am65x so I am adding this as default. But user can easily
+>>>>> modify this to any other medium / partition needed.
+>>>>>
+>>>>
+>>>> Users should not have to modify DT to pick a boot medium/partition.
+>>>> What would you do for complex cases or non block devices like eth/uart
+>>>
+>> I agree with Andrew here.
+>>
+>>> In order to load firmware files from driver, we need to add the node for
+>>> fs-loader. The fs-loader has a phandlepart property which takes the boot
+>>> medium and the partition as input. Based on the medium and partition it
+>>> looks for the requested file and loads it to a given address. I am not
+>>> sure if there is any other way to load firmware from driver without
+>>> using the fs-loader.
+>>>
+>>>
+>>>> booting? This is one reason kernel moved firmware loading to
+>>>> userspace. The equivalant in U-Boot is the shell and scripts. Your
+>>>> original command based loading was the correct solution IMHO.
+>>>
+>>> I intended to go ahead with command base approach only but as Roger
+>>> pointed out the command based approach is not very user friendly.
+>>>
+>>> We need to align on what should be the correct approach for loading
+>>> firmware.
+>>>
+>>> Roger, can you please chime in here.
+>>
+>> My intention was to make it user friendly so he does not have to
+>> deal with 6 different Rproc IDs that can change between
+>> platforms. The solution also has to be seamless between different
+>> boot mediums. I think we can assume that the firmware will come from the
+>> same medium that the platform was booted.
+>>
+> 
+> Yes and the with changes done by me using ICSSG port seems much easier
+> and user friendly. Just doing `dhcp` at u-boot prompt is enough to use
+> ICSSG port so the driver changes effectively makes the usage for user
+> friendly. But only way I have found to load the firmware files is to use
+> fs-loader that requires the boot medium and boot partition. I am not
+> sure how can I re-use the the boot medium used for booting u-boot images.
+> 
+> Also in SD card, u-boot images are located in /boot partition where as
+> firmware is located inside /root partition. So we'll need to specify the
+> partition.
+> 
+> Currently I don't have any way to load the firmware files from driver
+> without using below DT change
+> 
+> fs_loader0: fs-loader {
+>         bootph-all;
+>         compatible = "u-boot,fs-loader";
+>         phandlepart = <&sdhci1 2>;
+> };
+> 
+
+Fromdoc/develop/driver-model/fs_firmware_loader.rst
+
+"Firmware loader driver is also designed to support U-Boot environment
+variables, so all these data from FDT can be overwritten
+through the U-Boot environment variable during run time.
+
+For examples:
+
+storage_interface:
+  Storage interface, it can be "mmc", "usb", "sata" or "ubi".
+fw_dev_part:
+  Block device number and its partition, it can be "0:1".
+fw_ubi_mtdpart:
+  UBI device mtd partition, it can be "UBI".
+fw_ubi_volume:
+  UBI volume, it can be "ubi0".
+
+When above environment variables are set, environment values would be
+used instead of data from FDT.
+The benefit of this design allows user to change storage attribute data
+at run time through U-Boot console and saving the setting as default
+environment values in the storage for the next power cycle, so no
+compilation is required for both driver and FDT."
+
+So looks like we should provide this in environment variables instead of DT?
+
+>>>
+>>>>
+>>>> If we want to try to hide some of that then we need a way to
+>>>> run a user provided script from the environement to handle
+>>>> the general cases for firmware loading.
+>>
+>> Assuming we go with the "script provided in environment: route,
+>> how do we deal with the Rproc IDs? I'm not sure if they are constant
+>> and can probably change based on which Rproc is registered first.
+>> So there needs to be some way to make sure user can reference
+>> the correct Rproc.
+>>
+> 
+> The Rproc IDs aren't constant. I think the IDs depend on the sequence of
+> init. The only way to know the IDs of different Rprocs is to run `rproc
+> init` and then `rproc list`. Mostly on AM65x I have seen Rporc ID 0 and
+> 1 to be of r5 rprocs and from 2 to 19 of differnet PRUs (Total 18, 6 per
+> ICSSG instance). If r5 is not enabled, the sequence changes. Similarly
+> if some other rproc is enabled sequence will change.
+> 
+> The script should be able to read the list and determine which rproc
+> needs to be loaded based on the port we want to use. I am not sure how
+> to do this during u-boot.
+> 
+
+rproc list gives an output in the following format.
+
+=> rproc list
+0 - Name:'r5f@41000000' type:'internal memory mapped' supports: load start stop reset
+1 - Name:'r5f@41400000' type:'internal memory mapped' supports: load start stop reset
+2 - Name:'r5f@5c00000' type:'internal memory mapped' supports: load start stop reset
+3 - Name:'r5f@5d00000' type:'internal memory mapped' supports: load start stop reset
+4 - Name:'r5f@5e00000' type:'internal memory mapped' supports: load start stop reset
+5 - Name:'r5f@5f00000' type:'internal memory mapped' supports: load start stop reset
+6 - Name:'dsp@4d80800000' type:'internal memory mapped' supports: load start stop reset
+7 - Name:'dsp@4d81800000' type:'internal memory mapped' supports: load start stop reset
+8 - Name:'dsp@64800000' type:'internal memory mapped' supports: load start stop reset
+
+How can the script know which rproc to start for a specific Ethernet interface?
+
+-- 
+cheers,
+-roger
