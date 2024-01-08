@@ -4,72 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9886AC47074
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 00:16:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84FEFC47073
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 00:16:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 211D687955;
+	by phobos.denx.de (Postfix) with ESMTP id E5A0187A46;
 	Mon,  8 Jan 2024 01:16:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jA10C0Qg";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aeTs9RWF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6699B87987; Mon,  8 Jan 2024 01:16:12 +0100 (CET)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id 6CC2487A21; Mon,  8 Jan 2024 01:16:12 +0100 (CET)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E79D587A21
+ by phobos.denx.de (Postfix) with ESMTPS id D2FA787A36
  for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 01:16:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-680a06cc763so14526716d6.1
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-4283cd9bd87so14290601cf.3
  for <u-boot@lists.denx.de>; Sun, 07 Jan 2024 16:16:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1704672967; x=1705277767; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ddUpOk2usaLGLkE43W9/jzm7lLQnc4E090z3310xteg=;
- b=jA10C0Qgc7D3uZYdH9NyNI4DRoiE6XtXo5FDn2Vna7m8t6fwrVzSTgErmVV0qmlEKz
- 4IXFGXhX1xJUEoawTeaOZwajpSYyB2W2WC6e4o4LOSFWCTrGER/LdeF6dIFhbL2Yw+Xw
- 5YfMuYaOsBs1/eZUIwhsx/PsEH9ZquFk1cik0=
+ bh=YT4Bx/z75hfkzlM8tSmqfV6kZPiMCwKpeCAdzaUZmwo=;
+ b=aeTs9RWFfYxc4/1sgizmI7h2aO8tgON40IUDt8ACEoC04pXlCDd8foEzfVsY2j2lib
+ a4TzkslFA/ds584sLIcRJ8USs8wQJ6PvH8SXjJOwMvA2nG2OAtW+U2h1OKSEmEx+a5/5
+ 99FieWrxPR7Om9mf8s9EjHv1fQIM1+mt7nRtQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1704672967; x=1705277767;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ddUpOk2usaLGLkE43W9/jzm7lLQnc4E090z3310xteg=;
- b=Ozaeq91FrtNBx9uDeq99TebnLKzeUB2hc96H9XiscD7F2BmSH3/NMuMoxl53DDhD3i
- oFTRAEEYURGVE2SaZCqQd2VYQ2+J+0Fj4450/C0AvNB+SgiR5Y2OqGIvBmuz3Pbh1eNI
- 3mRP+XebQvlr5lC58GWaEEHv2P+ZtCYWK9KxwFmWskM6f+MyAoyifiOJCKRiI7Ldlswn
- mp7PFznQBkhEGffXB9kAHE6ib7RqaP5Ba7kN8E0kjrTokqchhHgd/plu8rWMEvXgXoR0
- TDqFNB8h2wh7u5W+ePtryn4HgTKUh2+WRXL8EHxV5+Guwytj9zZHNX7Eoa9blFup0hbL
- CBuQ==
-X-Gm-Message-State: AOJu0Yz9tUpHf6TV1u3h+ukyi7P7wOXlVPUXa4i96yJ3QVVCjG49uJP7
- HR3kcXvJTJhLQny+hrUC1zrXKyhWTrutgFyScW/vrcMnDXAX
-X-Google-Smtp-Source: AGHT+IGYCCRIyrEOZV0lEOHFFPjiGCz+nopmbPIZcGWrj0aTiiCTrxDq8W3b3YwSjwyrWTLGpsQ4kchSO0TdWQBEKYc=
-X-Received: by 2002:a05:6214:e67:b0:681:9d1:532f with SMTP id
- jz7-20020a0562140e6700b0068109d1532fmr205710qvb.94.1704672967786; Sun, 07 Jan
+ bh=YT4Bx/z75hfkzlM8tSmqfV6kZPiMCwKpeCAdzaUZmwo=;
+ b=nEONL3sWIv1IxThSDEov8GO+dY8dkSiqwhtbBAIHt8Sgc18CyXMNO6FaoSYgLZnKB+
+ A9jhBM76L8UT/QN8KpgzZi92HmJPwTgJ0wM2iDWEcKMqTqGy3gzuK2U/vRvdXu+FQPwL
+ Inxhw3ldFG0NbE05r6S54fNVvHadAa9j/VwpduA5ZC6CpJZi9Ut4tFpp3gWU8EJjbbQf
+ IAnK1QyeUuj03WT+iRvcnPoct1oD6MKzLUOFfYKhEc0du1CJAda9c33M/B19rFfKq4eG
+ 6T7O4RCCGuwKleKAZzeI3xbUWOdfMeZVs/Hl6HPQW+isyx5lRKcMx6FlrpG4w/IviwZ9
+ rUtQ==
+X-Gm-Message-State: AOJu0YwJXKVNUMF+nq4k2XFDKcgD0aE53kvCEYwTWxgfz5xen1F7TU01
+ EOYUI6dWLXtRx3CZeyU7E3voQju4Y2evLoZUDzQaeQpX2r1V
+X-Google-Smtp-Source: AGHT+IEhAyc6jMwAQzcDNYp1cGfZovIWhdLb/1nOqT8DFbURngDmS09RfDJivLtpPYGdABKq88fYDlfvtlsHf945Z/Q=
+X-Received: by 2002:a05:6214:21e8:b0:681:100:ad02 with SMTP id
+ p8-20020a05621421e800b006810100ad02mr2959345qvj.50.1704672967456; Sun, 07 Jan
  2024 16:16:07 -0800 (PST)
 Received: from 798914943136 named unknown by gmailapi.google.com with
  HTTPREST; Sun, 7 Jan 2024 18:16:07 -0600
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <1E62ECDE-F9C4-4035-A51B-53A083D61C62@gmx.de>
-References: <1E62ECDE-F9C4-4035-A51B-53A083D61C62@gmx.de>
+In-Reply-To: <29b33ebd-1f13-4233-9142-07ad08da75a8@gmx.de>
+References: <29b33ebd-1f13-4233-9142-07ad08da75a8@gmx.de>
  <20231231152555.464874-1-sjg@chromium.org>
- <20231231152555.464874-11-sjg@chromium.org>
+ <20231231152555.464874-12-sjg@chromium.org>
 Date: Sun, 7 Jan 2024 18:16:07 -0600
-X-Google-Sender-Auth: -MoO-LxP6mXPyu5IBBFLO0d_OjE
-Message-ID: <CAFLszTjxyyt8xjGVN2zF4YOg-C3EHogkaMpbfnoHTc+TaWtnUQ@mail.gmail.com>
-Subject: Re: [PATCH v5 10/12] acpi: Rename test
- dm_test_setup_ctx_and_base_tables()
+X-Google-Sender-Auth: Jz-C3tCa9k8mNDYu_6uZf3ZlqOc
+Message-ID: <CAFLszTj1dzFftW1g-xhF7qRZui4ZTBd9MSgfuWfp2g+SSb80_Q@mail.gmail.com>
+Subject: Re: [PATCH v5 11/12] acpi: Write pointers to tables instead of
+ addresses
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Igor Prusov <ivprusov@salutedevices.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,21 +90,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 31. Dezember 2023 16:25:53 MEZ schrieb Simon Glass <sjg@chromium.org>:
->Use the word 'acpi' in this test so that it runs along with all the
->other ACPI tests.
+On 12/31/23 16:25, Simon Glass wrote:
+> Sandbox uses an API to map between addresses and pointers. This allows
+> it to have (emulated) memory at zero and avoid arch-specific addressing
+> details. It also allows memory-mapped peripherals to work.
 >
->Signed-off-by: Simon Glass <sjg@chromium.org>
+> As an example, on many machines sandbox maps address 100 to pointer
+> value 10000000.
+>
+> However this is not correct for ACPI, if sandbox starts another program
+> (e.g EFI app) and passes it the tables. That app has no knowledge of
+> sandbox's address mapping. So to make this work we want to store
+> 10000000 as the value in the table.
+>
+> Add two new 'nomap' functions which clearly make this exeption to how
+> sandbox works.
+>
+> This should allow EFI apps to access ACPI tables with sandbox, e.g. for
+> testing purposes.
+>
+> Signed-off-by: Simon Glass<sjg@chromium.org>
+> Suggested-by: Heinrich Schuchardt<xypron.glpk@gmx.de>
 
+Thanks a lot for making this change.
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Best regards
 
->---
->
->Changes in v5:
->- Add new patch to rename test dm_test_setup_ctx_and_base_tables()
->
-> test/dm/acpi.c | 4 ++--
-> 1 file changed, 2 insertions(+), 2 deletions(-)
->
+Heinrich
+
 Applied to u-boot-dm/next, thanks!
