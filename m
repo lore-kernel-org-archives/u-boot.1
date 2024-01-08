@@ -4,113 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 891EFC47079
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 14:48:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7809CC3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 15:34:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02E8987A65;
-	Mon,  8 Jan 2024 15:48:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 768CE87A77;
+	Mon,  8 Jan 2024 16:34:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="BwRuye2X";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ILAhnaJm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96CB287A8C; Mon,  8 Jan 2024 15:48:21 +0100 (CET)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20620.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe5b::620])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4B8B487A7F; Mon,  8 Jan 2024 16:34:04 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F41D8794A
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 15:48:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6729D87A35
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 16:33:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=k7ruKPXVoq0SfGxO2IelsAh7oXO3uuVQOu3S5hC2iFIpA6F0ILxiX+sI0HrVXsF6FeU4jNIsy9OI0GJ2uXboLG0sL3dksPz21zmjdQFBmDWFESAfShxqbuGOWMQmDDJVqJnommpFogKzGt35cGBs5Xox3edBP/ZPHVm64VfUIy2hEuNHs7PJ3joOLFc+QeatqhXnCHA8vsMtyt8en9r4XxPGXwFE9BCPk0xGM1+EfIHprha4E6PEFSjVhIdIOOuGAVkATe08NbYEGvQSfn+UbDvae+EWSP3S5wFPvCM/Jubnj8VllmVDOiTnZOr0GU9l2lS1rfov9nBWJSdSUWtJ3g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QCFocyojGIiIulffsAzbjWczyFQmeeM8etxvaEDa0mI=;
- b=NheAM8anPqB7cUQ8/nMY22EXhsLSksw13BCGRqJ/fNb9yb/jjZr7nXGq/7wPiHXCcXrYDj3gQWizPJ1i3cQrg9HnRo+9FeUu6PbxnA0gYmMPNrVc0qt6ATIs4T1WdIkBUJVEXaslV1vmCOlftdXU3CWa5Q+4qZiMmL8k4V9vYssIaU5kGRUXpYsygX48k4DK1Loz9I/CvszdrZaeeqh1s72up6cm9NckxlpuMzLHuon2+gZ5QVLyR490P+5DrRjzE+lbzFD1gHHvEBodKrE6mQQrYoWkIlaQtpDvbGI7sYhYLcWHHvr3Mun6UQI606UzbtO5KeM9pq3FgTfWZPKNAw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QCFocyojGIiIulffsAzbjWczyFQmeeM8etxvaEDa0mI=;
- b=BwRuye2Xy5H4AlGG+dJfniS67Vuje02DTv7DCWG4GNpc5RDRIJcwtRGtfiDr2/Y2VjP4eTFpPE77dRfjPxh7ge2yOHoG/2fQcZAxa5rZcpva6vvw9mN1fvL2Q9IJ3cyi4zKnAi21pAsT3lEWZRjmWWVK26zZ8HBD+a0bFH7mr+A=
-Received: from PH7PR17CA0070.namprd17.prod.outlook.com (2603:10b6:510:325::10)
- by PH8PR12MB7027.namprd12.prod.outlook.com (2603:10b6:510:1be::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.22; Mon, 8 Jan
- 2024 14:48:01 +0000
-Received: from SN1PEPF0002BA4C.namprd03.prod.outlook.com
- (2603:10b6:510:325:cafe::42) by PH7PR17CA0070.outlook.office365.com
- (2603:10b6:510:325::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.21 via Frontend
- Transport; Mon, 8 Jan 2024 14:48:01 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SN1PEPF0002BA4C.mail.protection.outlook.com (10.167.242.69) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7181.13 via Frontend Transport; Mon, 8 Jan 2024 14:48:00 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Mon, 8 Jan
- 2024 08:47:59 -0600
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Laurent Pinchart <laurent.pinchart@ideasonboard.com>, Piyush Mehta
- <piyush.mehta@amd.com>, Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>,
- Robert Hancock <robert.hancock@calian.com>, Simon Glass <sjg@chromium.org>,
- Tanmay Shah <tanmay.shah@amd.com>
-Subject: [PATCH] arm64: zynqmp: Match dwc3 interrupts description with values
-Date: Mon, 8 Jan 2024 15:47:56 +0100
-Message-ID: <caecc1fcf26951a4c0297a4764dfb797795c7bc6.1704725272.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.36.1
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-40d5a41143fso22471225e9.3
+ for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 07:33:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1704728039; x=1705332839; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Djf2VOIsiPNzb63DUIxbLl10/dZ9vIbkFTNsHbExmT0=;
+ b=ILAhnaJmATLy6DK8mCLdCcC4x6rJSNmtpIdJKClrOtgcFDkbnmYNz3cDvEbRFzuwba
+ NsuH2Xj610iY32v77P+udQmMaT4j22PeHPd139D8c/w/1ZeWCvr4re+9C97V4bqP45QE
+ TbHTRF05J/1zDOafx/EBak2WHWZpsK5fMWqqJhFFZegJO4z6H6LhFlw8LvfjDr/5+HTv
+ vkAbvU/603g3f+P45S/8PvEuU16o5vbtgFPfJX3yHv2xJFZBongovg3gGXHpKQP5GMZ0
+ eH45DTDGa4BwYRRTzU7PInTW+IAucSLy1eNCDTucWSPpt1fwwhUGSjkspEZ7FfblaCA2
+ kPTA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704728039; x=1705332839;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Djf2VOIsiPNzb63DUIxbLl10/dZ9vIbkFTNsHbExmT0=;
+ b=glwN3C85JC0zlLf4LpVl5ZSlE+E0x5nb0Ih5dMRvZyfiXYygRMcgRSsaQPDGfaRqpA
+ kS6YxPsqC91pMq0JN0N16rHi0Bi7vdcIhWWkq1KjZID6dr631o41Rcu33ldC4Urh4L2t
+ lseQWt1xwSnPWs7hrAIjUUvuRa206o/P6mCsl/kmf0hrcOTJ5G1MPKjmYscFPBcw9l4a
+ oDXdeJBImlSeuMIrJus8MNl32dZio19iqbhjjj5ylQ3nF3S/8N87aRADw4s6NitOXCz1
+ oKE5sYD+xQsIRkEg61+a3yCQHoZNxkMwdyv2uE6Y+NK4Nc6IPaM9/U//CZ38KMIyzc9+
+ 8ZVA==
+X-Gm-Message-State: AOJu0Yzf7j7Q0h/867QFXcwowyNH6Kd3ierxrzXi0uwY8kDP2wpzJ3hh
+ khKBwn9Mq+ISldBr14l8I9VKc7iQNlAj9Q==
+X-Google-Smtp-Source: AGHT+IFYolRRatto3g/KDAjBPS6H/fRVzGt0kOuFA/ENslMfkDtRZdQIq1k6m5v4Hrkgr0tXzFxiyA==
+X-Received: by 2002:a05:600c:4f02:b0:40d:8ff4:ea02 with SMTP id
+ l2-20020a05600c4f0200b0040d8ff4ea02mr1925235wmq.86.1704728038837; 
+ Mon, 08 Jan 2024 07:33:58 -0800 (PST)
+Received: from lion.caleb.rex.connolly.tech (host-92-17-96-230.as13285.net.
+ [92.17.96.230]) by smtp.gmail.com with ESMTPSA id
+ df18-20020a5d5b92000000b00336a1f6ce7csm8075266wrb.19.2024.01.08.07.33.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Jan 2024 07:33:58 -0800 (PST)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+	Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH] v2 test: spmi: fix tests
+Date: Mon,  8 Jan 2024 15:31:44 +0000
+Message-ID: <20240108153351.1605918-1-caleb.connolly@linaro.org>
+X-Mailer: git-send-email 2.42.1
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1313; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=ULZIzvIkJJAcCVlQMmXRoP7t1jttE6mKD0FZ5dd22k8=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhtQ53JLSV5OP1H7QkwxcWf8vKbTGf4+guVLSiZfmuSktj
- /T+n8jviGVhEGRikBVTZJG2uXJmb+WMKcIXD8vBzGFlAhnCwMUpABOZ3cYwv0bi+w+tJ7x/Nkjt
- ubpIPGTpxrMMtQzzEyXPVK6LNir8l9u2+/B+OYlvHhctAA==
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002BA4C:EE_|PH8PR12MB7027:EE_
-X-MS-Office365-Filtering-Correlation-Id: c6899e13-e3fd-408e-007c-08dc1058cfa7
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 2Lh8NN8D0giHm5YHMBzgJ4qREZqSgSnaRjEPes0IPb4AOTcydCUgZvwdu5Lvvn1LOQRKWk+5t59cPz8UV8ZB4ok6xfHlXGTPiUi8jZxB6Ul1Z1o5Q7NGS230QvT+a2vl20EaM6HCJemKDV2TttGgZBaPiP6JZQQuqtSMz6Tg/3nI1yY6tdYRRS8Kqm2avCK607ldWb5go9d7g0IJGFKYir0ltSiEtsMZCbFZY0OIGp3yDaVjMq8XJFmjB2oIBmy/OXQn4T1hcRGgTP1A/xLdY9e4v15plIMrSk+PMZbuT5O+oqRW9XJpZ0N4jU3wD1BrlJJmiEVH7ngcRowPlhPP93PBVoeDGwU0GHfZpgaigBpBy1xKW+/51YL1WYjaIz6t17U0PDMYz7nQBhvHwKDMO688nKY9z+oti7nrdLvHVZbmd81TbCN0HRrTBQAtU7l2sppz5IfSz9ber0CCBdj6BoHKHnq5v4g7mc3CQLU/UJ83nylK2fDRBL0jQz+yYUwTMJZvlWSDdg4C8D2ifQNwtC0FgPj4D7/rNt4lzwFK366SD5k/EUa2iE/RfY/XSCT7qp+besrdPtDmQAFxibdX4KhrBMhMOXvhDT8BrRIQUzkIDga2R/J2LF1KWSusLf2iTocP0cpHYLQlxmZOol3wW7vluzg7Vk7PY9l6uycAsYtccoiTaEBhb9REYE6K6hUZX1fP4iSKv1Nw6ZR0sxQ1n2PwMOgF49GbRKVm1hmsRPaJFBGBsiBMquCPqBQvrNyptuAzTEjOPQ1bwpN/jb/Y/9fsmmYFTtfsO4drdWXFtEaW5+fQiqPM0zcmNqkLfaQc
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(39860400002)(346002)(396003)(376002)(136003)(230922051799003)(186009)(64100799003)(451199024)(1800799012)(82310400011)(40470700004)(46966006)(36840700001)(40460700003)(40480700001)(426003)(26005)(336012)(2616005)(6666004)(478600001)(36860700001)(82740400003)(86362001)(36756003)(81166007)(356005)(5660300002)(2906002)(41300700001)(16526019)(47076005)(83380400001)(70586007)(54906003)(70206006)(316002)(4326008)(8676002)(8936002)(44832011)(110136005)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2024 14:48:00.6137 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c6899e13-e3fd-408e-007c-08dc1058cfa7
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002BA4C.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7027
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,39 +89,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Correct IRQ values don't match IRQ line description.
-There is one more IRQ (hiber) but it is not described in DT binding spec
-that's why value is not described. Just for completeness dwc3_0 has hiber
-IRQ at 75 and dwc3_1 at 76.
+With the recent changes to the Qualcomm PMIC GPIO driver the sandbox
+tests for it no longer pass, update the DTS and tests to work with the
+changes.
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
+I'll pick this into qcom-next as it goes along with the PMIC changes there.
 
- arch/arm/dts/zynqmp.dtsi | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+V1: lore.kernel.org/u-boot/20240102-b4-pytest-sandbox-spmi-pmic-v1-1-227d1062b3d1@linaro.org
+---
+ arch/sandbox/dts/test.dts | 2 +-
+ test/dm/spmi.c            | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm/dts/zynqmp.dtsi b/arch/arm/dts/zynqmp.dtsi
-index 21be909b1abe..7c7cbfb287fb 100644
---- a/arch/arm/dts/zynqmp.dtsi
-+++ b/arch/arm/dts/zynqmp.dtsi
-@@ -996,7 +996,7 @@
- 				status = "disabled";
- 				reg = <0x0 0xfe200000 0x0 0x40000>;
- 				interrupt-parent = <&gic>;
--				interrupt-names = "dwc_usb3", "otg", "hiber";
-+				interrupt-names = "host", "peripheral", "otg";
- 				interrupts = <GIC_SPI 65 IRQ_TYPE_LEVEL_HIGH>,
- 					     <GIC_SPI 65 IRQ_TYPE_LEVEL_HIGH>,
- 					     <GIC_SPI 69 IRQ_TYPE_LEVEL_HIGH>;
-@@ -1028,7 +1028,7 @@
- 				status = "disabled";
- 				reg = <0x0 0xfe300000 0x0 0x40000>;
- 				interrupt-parent = <&gic>;
--				interrupt-names = "dwc_usb3", "otg", "hiber";
-+				interrupt-names = "host", "peripheral", "otg";
- 				interrupts = <GIC_SPI 70 IRQ_TYPE_LEVEL_HIGH>,
- 					     <GIC_SPI 70 IRQ_TYPE_LEVEL_HIGH>,
- 					     <GIC_SPI 74 IRQ_TYPE_LEVEL_HIGH>;
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index 4fe72664c4b3..e264b29554cf 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -1544,10 +1544,10 @@
+ 			spmi_gpios: gpios@c000 {
+ 				compatible = "qcom,pm8916-gpio";
+ 				reg = <0xc000 0x400>;
++				gpio-ranges = <&spmi_gpios 0 0 4>;
+ 				gpio-controller;
+ 				gpio-count = <4>;
+ 				#gpio-cells = <2>;
+-				gpio-bank-name="spmi";
+ 			};
+ 		};
+ 	};
+diff --git a/test/dm/spmi.c b/test/dm/spmi.c
+index 9cc284b98cb0..97bb0eb30fc9 100644
+--- a/test/dm/spmi.c
++++ b/test/dm/spmi.c
+@@ -81,7 +81,7 @@ static int dm_test_spmi_access_peripheral(struct unit_test_state *uts)
+ 	int offset_count;
+ 
+ 	/* Get second pin of PMIC GPIO */
+-	ut_assertok(gpio_lookup_name("spmi1", &dev, &offset, &gpio));
++	ut_assertok(gpio_lookup_name("pmic1", &dev, &offset, &gpio));
+ 
+ 	/* Check if PMIC is parent */
+ 	ut_asserteq(device_get_uclass_id(dev->parent), UCLASS_PMIC);
+@@ -92,7 +92,7 @@ static int dm_test_spmi_access_peripheral(struct unit_test_state *uts)
+ 	name = gpio_get_bank_info(dev, &offset_count);
+ 
+ 	/* Check bank name */
+-	ut_asserteq_str("spmi", name);
++	ut_asserteq_str("pmic", name);
+ 	/* Check pin count */
+ 	ut_asserteq(4, offset_count);
+ 
 -- 
-2.36.1
+2.42.1
 
