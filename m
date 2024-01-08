@@ -4,63 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18EFAC47074
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 00:22:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD72AC47073
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 01:37:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 923CC87A34;
-	Mon,  8 Jan 2024 01:22:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 03B368773E;
+	Mon,  8 Jan 2024 02:37:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LkFdebgj";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="i7bzPzou";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CDA087A34; Mon,  8 Jan 2024 01:22:13 +0100 (CET)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 58322878ED; Mon,  8 Jan 2024 02:37:40 +0100 (CET)
+Received: from mail-m17233.xmail.ntesmail.com (mail-m17233.xmail.ntesmail.com
+ [45.195.17.233])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4633787955
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 01:22:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BA9D87579
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 02:37:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-67f8d9fe99fso13448226d6.2
- for <u-boot@lists.denx.de>; Sun, 07 Jan 2024 16:22:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704673328; x=1705278128; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=bhi1noj4chDUEfvvxguKntYP0bLt/vV3ewRKtJlz3ao=;
- b=LkFdebgja/ZSt7+nJThK2qC2R1uzpatw7FJ+gHrCdcgwj9e4MaAtc6YW/SsYYaR3k/
- EJGVTqNqmyPhV4h7+h/h89piCuOFZkP8qTiFkGpG3khQhfOrunOibT9wIA0lKvOEIQlZ
- FIvqrqkwIPArw+4KPXjamNxELdHxP0tsi26qQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704673328; x=1705278128;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=bhi1noj4chDUEfvvxguKntYP0bLt/vV3ewRKtJlz3ao=;
- b=nktlpNvzlF6sDl2Zgm6e5U/Eb+K2LcMT8LOhRiYy5DupTUYbT5nlbsUfUdjaYLqrig
- CV4pH3Yj2EeVZtC46sfUMCmKqoiphtnN1pkf4hk1j0DrjQeYrzInIpgqEnX/yIZPeLpU
- KhUBHe872ESej8IInS7NwG61XG6Io5tRj7MbA0X22B++dp10Fwn4J/ntUeYJvqqhSW9z
- 3JeJit7MzJF9XbktHIeTLXcA6OpCg3MfcrRmEqoTgCflreFOPmv8dpO13Z6lQYCMhsNM
- LFYWI2JqZ66GIzt6gUTZg/J+1z1/4L/ehMjOPX2K3ZZD1PmGyJaootoi6fb6huH6hVF6
- MGUQ==
-X-Gm-Message-State: AOJu0YxHKntqXrD5TYctAgNBhj+bNYh7dES2X61mXUV/MV3Cyg2jArN4
- dDvOiaJyVPyIpj3d5tqgF76IwgURHvM+q6ro1IKGkdp5y6FQ0QrTFqJXg0Amog==
-X-Google-Smtp-Source: AGHT+IFztczR6B17QQMANcMvAoew4z2qiEuk19vAwPFzQw0Yu242FvXjF5/icsVFiKF+0H6YFcuMkxiWxSEsozeTpg0=
-X-Received: by 2002:ad4:4ea4:0:b0:67a:cdb1:d0f3 with SMTP id
- ed4-20020ad44ea4000000b0067acdb1d0f3mr4292072qvb.35.1704673328021; Sun, 07
- Jan 2024 16:22:08 -0800 (PST)
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=i7bzPzouWGy53cavKxdNKljAdiKFq6znRJjebCYHPXmRrrfgYjChEFzSEqzUVMM/SvZ41ITeF73o6b6mcCGILbXh8fjJ21WdbPbOIvy8z3dQnEBZw7nL7Uyua2E99F4nBBBUHZdUEd6eefwG4VWphffCYx6B0GHSVzDa0LFIkKk=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
+ bh=NiLfzuiqQ/QSZJOxhX3uslQy3jyMd9QdQ7b0tAWemrY=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [192.168.60.65] (unknown [103.29.142.67])
+ by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 80EBC40022F;
+ Mon,  8 Jan 2024 09:37:00 +0800 (CST)
+Message-ID: <81c61f08-d595-491e-9b32-d47603a8fc08@rock-chips.com>
+Date: Mon, 8 Jan 2024 09:36:56 +0800
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 7 Jan 2024 17:21:57 -0700
-Message-ID: <CAFLszThp=VqYAR7FB0i4Ni3yd9wJvD63_QP7_pb2+2fRhXxBAg@mail.gmail.com>
-Subject: Please pull u-boot-dm/next
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] rockchip: rk3328: Set efuse auto mode and timing
+ control
+Content-Language: en-US
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: u-boot@lists.denx.de
+References: <20240107181834.1589988-1-jonas@kwiboo.se>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20240107181834.1589988-1-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCHk1JVk5NT0hKTkseSU9MH1UTARMWGhIXJBQOD1
+ lXWRgSC1lBWUpLSFVJQlVKT0lVTUxZV1kWGg8SFR0UWUFZT0tIVUpNT0lOSFVKS0tVSkJLS1kG
+X-HM-Tid: 0a8ce6b749672eb3kusn80ebc40022f
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Kwg6EAw4CzweKjMLCR1RQjpP
+ OExPCQ1VSlVKTEtPTUxMQ0lKSUNCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQU9DTU83Bg++
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,107 +73,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-This is for -next
+On 2024/1/8 02:18, Jonas Karlman wrote:
+> Reading from efuse return zero when mainline TF-A is used.
+>
+>    => dump_efuse
+>    00000000: 00 00 00 00  ....
+>    00000004: 00 00 00 00  ....
+>    00000008: 00 00 00 00  ....
+>    0000000c: 00 00 00 00  ....
+>    00000010: 00 00 00 00  ....
+>    00000014: 00 00 00 00  ....
+>    00000018: 00 00 00 00  ....
+>    0000001c: 00 00 00 00  ....
+>
+> However, when vendor TF-A blobs is used reading from efuse works.
+>
+> Change to use auto mode, enable finish and auto access err interrupts
+> and set timing control using same values that vendor TF-A blob use to
+> fix this.
+>
+> With this efuse can be read when either of mainline TF-A or vendor blob
+> is used.
+>
+>    => dump_efuse
+>    00000000: 52 4b 33 82  RK3.
+>    00000004: 00 fe 21 55  ..!U
+>    00000008: 52 4b 57 34  RKW4
+>    0000000c: 35 30 32 39  5029
+>    00000010: 00 00 00 00  ....
+>    00000014: 08 25 0c 0f  .%..
+>    00000018: 02 0d 08 00  ....
+>    0000001c: 00 00 f0 00  ....
+>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/19216
-
-https://dev.azure.com/simon0972/u-boot/_build/results?buildId=58&view=results
-
-
-The following changes since commit c2c598e87cfe56f5991730762c00733c5aa9a994:
-
-  Merge branch 'staging' of
-https://source.denx.de/u-boot/custodians/u-boot-tegra into next
-(2024-01-06 09:57:56 -0500)
-
-are available in the Git repository at:
-
-  git://git.denx.de/u-boot-dm.git tags/dm-next-7jan23
-
-for you to fetch changes up to 8c4b37ce97c27ad4e7f83b028d4cd1396a51a36f:
-
-  arm: enable support for QEMU firmware tables (2024-01-07 13:49:15 -0700)
-
-----------------------------------------------------------------
-switch to SMBIOS3 tables
-allow devicetree from bloblist
-ACPI support for ARM and RISC-V
-
-----------------------------------------------------------------
-Heinrich Schuchardt (14):
-      smbios: SMBIOS 3.0 (64-bit) Entry Point structure
-      acpi: use 64-bit addresses in FADT table
-      cmd: acpi: fix listing DSDT and FACS
-      cmd: acpi: check HW reduced flag in acpi list
-      acpi: support 64bit in acpi_find_table for DSDT and FACS
-      acpi: Kconfig symbol CONFIG_QFW_ACPI
-      acpi: carve out qfw_acpi.c
-      arm: add ACPI fields to global data
-      riscv: add ACPI fields to global data
-      acpi: enable writing ACPI tables on QEMU
-      riscv: add support for QEMU firmware tables
-      riscv: allow usage of ACPI
-      configs: qemu: add config fragment for ACPI
-      arm: enable support for QEMU firmware tables
-
-Simon Glass (12):
-      smbios: Refactor 32-bit code into an else statement
-      smbios: Move the rest of the SMBIOS2 code
-      smbios: Use SMBIOS 3.0 to support an address above 4GB
-      smbios: Correct gd_smbios_start()
-      efi: Use the correct GUID for the SMBIOS table
-      smbios: Require the caller to align the SMBIOS table
-      smbios: Drop support for SMBIOS2 tables
-      efi: smbios: Drop support for SMBIOS2 tables
-      acpi: Rename test dm_test_setup_ctx_and_base_tables()
-      acpi: Write pointers to tables instead of addresses
-      efi: Correct smbios-table installation
-      fdt: Allow the devicetree to come from a bloblist
-
- MAINTAINERS                          |   1 +
- arch/Kconfig                         |   1 +
- arch/arm/include/asm/global_data.h   |   7 ++-
- arch/riscv/include/asm/global_data.h |   6 ++
- arch/sandbox/include/asm/io.h        |  16 ++++++
- arch/x86/cpu/baytrail/acpi.c         |   9 +--
- arch/x86/cpu/quark/acpi.c            |   9 +--
- arch/x86/cpu/tangier/acpi.c          |   9 +--
- arch/x86/lib/acpi_table.c            |  15 ++---
- board/emulation/configs/acpi.config  |   3 +
- board/emulation/qemu-arm/Kconfig     |   1 +
- board/emulation/qemu-riscv/Kconfig   |   2 +
- cmd/acpi.c                           |  24 +++++---
- doc/board/emulation/acpi.rst         |  23 ++++++++
- doc/board/emulation/index.rst        |   1 +
- doc/develop/devicetree/control.rst   |   3 +
- drivers/misc/Kconfig                 |   7 +++
- drivers/misc/Makefile                |   1 +
- drivers/misc/qfw.c                   | 240
-------------------------------------------------------------------------------
- drivers/misc/qfw_acpi.c              | 281
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- include/acpi/acpi_table.h            |   6 +-
- include/asm-generic/global_data.h    |   2 +-
- include/efi_api.h                    |   4 ++
- include/fdtdec.h                     |   6 +-
- include/mapmem.h                     |  18 ++++++
- include/smbios.h                     |  41 ++++++++++++--
- lib/acpi/Makefile                    |   2 +-
- lib/acpi/acpi.c                      |  37 +++++++++---
- lib/acpi/acpi_table.c                |   4 +-
- lib/acpi/acpi_writer.c               |   4 +-
- lib/acpi/base.c                      |   4 +-
- lib/efi_loader/efi_smbios.c          |  28 ++++++----
- lib/fdtdec.c                         |  44 +++++++++++----
- lib/smbios.c                         |  55 ++++++------------
- test/dm/acpi.c                       |  14 ++---
- 35 files changed, 556 insertions(+), 372 deletions(-)
- create mode 100644 board/emulation/configs/acpi.config
- create mode 100644 doc/board/emulation/acpi.rst
- create mode 100644 drivers/misc/qfw_acpi.c
-
-Regards,
-Simon
+Thanks,
+- Kever
+> ---
+> Changes in v2:
+> - Read and mask user mode flag instead of force 0x46 value
+>
+>   arch/arm/mach-rockchip/rk3328/rk3328.c | 38 ++++++++++++++++++++++++++
+>   1 file changed, 38 insertions(+)
+>
+> diff --git a/arch/arm/mach-rockchip/rk3328/rk3328.c b/arch/arm/mach-rockchip/rk3328/rk3328.c
+> index de17b8868273..ca623c0d3d03 100644
+> --- a/arch/arm/mach-rockchip/rk3328/rk3328.c
+> +++ b/arch/arm/mach-rockchip/rk3328/rk3328.c
+> @@ -19,6 +19,23 @@ DECLARE_GLOBAL_DATA_PTR;
+>   #define GRF_BASE		0xFF100000
+>   #define UART2_BASE		0xFF130000
+>   #define FW_DDR_CON_REG		0xFF7C0040
+> +#define EFUSE_NS_BASE		0xFF260000
+> +
+> +#define EFUSE_MOD		0x0000
+> +#define EFUSE_INT_CON		0x0014
+> +#define EFUSE_T_CSB_P		0x0028
+> +#define EFUSE_T_PGENB_P		0x002C
+> +#define EFUSE_T_LOAD_P		0x0030
+> +#define EFUSE_T_ADDR_P		0x0034
+> +#define EFUSE_T_STROBE_P	0x0038
+> +#define EFUSE_T_CSB_R		0x003C
+> +#define EFUSE_T_PGENB_R		0x0040
+> +#define EFUSE_T_LOAD_R		0x0044
+> +#define EFUSE_T_ADDR_R		0x0048
+> +#define EFUSE_T_STROBE_R	0x004C
+> +
+> +#define EFUSE_USER_MODE		0x1
+> +#define EFUSE_TIMING(s, l)	(((s) << 16) | (l))
+>   
+>   const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
+>   	[BROM_BOOTSOURCE_EMMC] = "/mmc@ff520000",
+> @@ -50,10 +67,31 @@ struct mm_region *mem_map = rk3328_mem_map;
+>   int arch_cpu_init(void)
+>   {
+>   #ifdef CONFIG_SPL_BUILD
+> +	u32 reg;
+> +
+>   	/* We do some SoC one time setting here. */
+>   
+>   	/* Disable the ddr secure region setting to make it non-secure */
+>   	rk_setreg(FW_DDR_CON_REG, 0x200);
+> +
+> +	/* Use efuse auto mode */
+> +	reg = readl(EFUSE_NS_BASE + EFUSE_MOD);
+> +	writel(reg & ~EFUSE_USER_MODE, EFUSE_NS_BASE + EFUSE_MOD);
+> +
+> +	/* Enable efuse finish and auto access err interrupt */
+> +	writel(0x07, EFUSE_NS_BASE + EFUSE_INT_CON);
+> +
+> +	/* Set efuse timing control */
+> +	writel(EFUSE_TIMING(1, 241), EFUSE_NS_BASE + EFUSE_T_CSB_P);
+> +	writel(EFUSE_TIMING(1, 241), EFUSE_NS_BASE + EFUSE_T_PGENB_P);
+> +	writel(EFUSE_TIMING(1, 241), EFUSE_NS_BASE + EFUSE_T_LOAD_P);
+> +	writel(EFUSE_TIMING(1, 241), EFUSE_NS_BASE + EFUSE_T_ADDR_P);
+> +	writel(EFUSE_TIMING(2, 240), EFUSE_NS_BASE + EFUSE_T_STROBE_P);
+> +	writel(EFUSE_TIMING(1, 4), EFUSE_NS_BASE + EFUSE_T_CSB_R);
+> +	writel(EFUSE_TIMING(1, 4), EFUSE_NS_BASE + EFUSE_T_PGENB_R);
+> +	writel(EFUSE_TIMING(1, 4), EFUSE_NS_BASE + EFUSE_T_LOAD_R);
+> +	writel(EFUSE_TIMING(1, 4), EFUSE_NS_BASE + EFUSE_T_ADDR_R);
+> +	writel(EFUSE_TIMING(2, 3), EFUSE_NS_BASE + EFUSE_T_STROBE_R);
+>   #endif
+>   	return 0;
+>   }
