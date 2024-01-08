@@ -4,135 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C939C3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 17:22:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07851C47073
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 17:28:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 972A887A7B;
-	Mon,  8 Jan 2024 18:22:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id 340B087A99;
+	Mon,  8 Jan 2024 18:28:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="RAO2HrXK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZI1vLPM+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD6AE87AB4; Mon,  8 Jan 2024 18:22:09 +0100 (CET)
-Received: from EUR02-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur02on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2608::601])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id EBA8187A8B; Mon,  8 Jan 2024 18:28:06 +0100 (CET)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7486087A7B
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 18:22:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CC18F87A7B
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 18:28:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JL65QwqE/SuZDHO553Y5/rOmdoa1vwkIEDai4dcMXen2lJeNktuWJ+721L0Zv/SjxSFwx8naOUQ/Os6PoL8WsjwoyFg1MhhuMdjMo3Y7ZE4+2RSHYBs1edHsuBPl9JCM9tAOrywwb9NAAGM6liMSe71k+bh2rcmVdBS30JQHvZlYHlOncujMtxbQoYiQweRltUehkghtRMdx20iQ0xJ5zzrnUsKQMvseyVAdVl7O8FV/SIy+aIjJy09o4ZyiwfNjxNApoHnslkweuGLfmEeu3GWK1PJvf/v8WgG6A9AHgLoqipzj46iD2pSjqo0/BWko78bvWG6U5jfCd4B7jyAqJw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KvmGkxTd41yGj11l1vl17Fg0Ps2WUc/LI3WKoqaKB84=;
- b=Ini1+uXG5NPQSVXhwkh2OxXeuKk9SOydUJfGeAIusq9az4wG3ysiKea+5FVjFZ1x86J+hOx0UtYnMJ/vaGK51M53GwgPByccUFtEFARDnp6Gvxnb1SMRlP2pY7Dqss2dxDEbx/KGydVc5qP8CCfhp6YHWLe/vkI0NrSV0picExoJUiewrlNK+T651SS94in+jh61qdhGjbRgeMXdJzMolWk7pswodOHEjw/CTgkjToAJxyy7hM0gC7BDQcQCvTlWqBL5te4II1Jfs0NP0er8MmL0QpeUt6SagpOGNGyXeBENfFzJFG8uAQ7DBgHGAkVMfe1kq8XWTGJZfhvst/cpUA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KvmGkxTd41yGj11l1vl17Fg0Ps2WUc/LI3WKoqaKB84=;
- b=RAO2HrXKxe9Ilj1jwBf+iJGSjxMBx+zHFVhZos8KrvmBnAIiBY9chaNIUX7BLxDnss75SQaktahR1levjibyUW+92NoS5MQIPC+pnwTjXZPu2byoA7tBTI1CR3VXopYy+B8jwb3vKnxBggDi6s2F/c57yO2m8S+wWYufz6A6/hpKzwzXm2GgJKRhYcDnQkIxo/iLEuMPwQrETzvXVwtBeFj+E2uAvYJ4tyjl4AHSK4N5ktmJkvVBtkbpowsQOi1F6XuP5JPGvaP7Usmg7HDauA1px/oNazim3da/yB4TsjUedG2kU5w75uunoYVnw39APEDwDxgH2oPQ72Nfij8j3g==
-Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5b6::22)
- by AS2PR10MB6871.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5f7::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.23; Mon, 8 Jan
- 2024 17:22:03 +0000
-Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::f4e3:6357:166f:b46b]) by AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::f4e3:6357:166f:b46b%4]) with mapi id 15.20.7159.020; Mon, 8 Jan 2024
- 17:22:02 +0000
-From: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "Leto, Enrico"
- <enrico.leto@siemens.com>
-CC: "trini@konsulko.com" <trini@konsulko.com>
-Subject: Re: [PATCH v4 2/6] siemens: eeprom: simplify setup & read
-Thread-Topic: [PATCH v4 2/6] siemens: eeprom: simplify setup & read
-Thread-Index: AQHaPkk7zWToqm7v2EK4ATjtp1uWVrDQMc+A
-Date: Mon, 8 Jan 2024 17:22:02 +0000
-Message-ID: <316a3ff010e3dca01f568103f2b4fe1c5a481a5e.camel@siemens.com>
-References: <20240103133154.152886-1-enrico.leto@siemens.com>
- <20240103133154.152886-3-enrico.leto@siemens.com>
-In-Reply-To: <20240103133154.152886-3-enrico.leto@siemens.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS8PR10MB6867:EE_|AS2PR10MB6871:EE_
-x-ms-office365-filtering-correlation-id: 96813277-1d32-42d2-1cf4-08dc106e5433
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: lldUHSXYEoKVmcwHhJIXU7tJKZiDL+p9qwnIa8X1wldhDx6q22809UYdbJw5P891Y9qCpLO7/eozpYqamGc3YzbrvQ+s3W9uNGSKlVctyRplHLeiX+31IAaJGBQruo8JdS0z2afRF4LryqsyOflWtvfTYQSjr7f2QVpirTZwWV4gge8X8cEO8QXu4TgAQsF++OO10beG7eip3/eShEy3yczWB1hXZ1D0gsRdoncv6IwSPVjHDSTN6Y0qSho1rB3vKtR74lOgL4MMzN5LZplTFWvs8JrG08WSHyxHNw80o/dx0vPa8cL1teYuVppkZun/VDMEpnKGeF+03GBJa22Y5f8qDpDONE+Va+8iynKIygODHKp/9vp/9sGaUF7qqBk+j/7tX1iWrPtscd9nhLu1RBq9eJ03nb9O303fRgEZPFx5ff9YTB2lXWFS8EronP5ianU/lMHLUDVhVsvN60ofaTK6+5y9LlBqyaWmMkSRbXZJhnyjNBMC6gpgHdnoXlb/iqFmXi3jXAGZGy9GoQRJ4Hx/gx5ismI53JQwxE/X2f5+QSh5H3Nu/APfevWJrp4LvnNsAe3srY6dZJ/ZHHVXUEXd6CET8k9CC7BIUHuyU0Ys39DEFZ9FazSS6WBLPPYvLDyGbQcLSk2Pleg2AyBscA==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(136003)(376002)(396003)(39860400002)(346002)(366004)(230922051799003)(64100799003)(186009)(451199024)(1800799012)(71200400001)(83380400001)(15974865002)(36756003)(86362001)(38070700009)(122000001)(38100700002)(82960400001)(5660300002)(4326008)(4744005)(6512007)(6506007)(2616005)(66556008)(64756008)(66476007)(6636002)(76116006)(66446008)(110136005)(316002)(8936002)(8676002)(66946007)(91956017)(2906002)(41300700001)(478600001)(6486002)(18886075002);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?aXRzZmxFMWNzOUpRWlpDM256SDJxU0hPSWF0RWIzanF3L1pSdTRiSlRNVDZG?=
- =?utf-8?B?LzRVNXNmUGpvYTEvc0w1NWZhVUdHMHNDUVVsT250eXBiaE0vQ0piNitFOFBE?=
- =?utf-8?B?VjBzMVpzZEZTNTJ1Y3I1VGxzVTdGRDVRdWJSblJwc0xwNVJpczNFbWttR1dq?=
- =?utf-8?B?a0ZTSGZ5ejE3eEdJYUtQUVA0dVBsUnJsNnlHT1RLOUJRUTVvVnd0Zk5UR2lj?=
- =?utf-8?B?QnZUWXptT25HWjdKckRIamlLZUhyVytkK1BFZWIzRUM2RGY0MlM1aUpTSWpi?=
- =?utf-8?B?c0YwSEh0RjhPb1I4MHQxSnFUbXJDajk0aU9FQUxQQ1BpUDF4eGErSHBkODZF?=
- =?utf-8?B?SnBiV2F2VFVpdEpVWjJoTXIvbTYyaTBOQkM1Y0xJTlFuUEhTRVIxTHFMOUtk?=
- =?utf-8?B?K2N5RXJ0K0NPS1ZtNDUwNyt4VlNRRlFoSzNzY0JOTFBwaHdSM25CL0QyVGd6?=
- =?utf-8?B?d3RBTWtSNTAyVEdNdml0NUFKMis2RHJaWlA5MVV3c1BxajBiQnBtYXdFOU5i?=
- =?utf-8?B?QUl0d3c0Q1lCcTU4LytZcVZBdytxL2h6Ukx6RzhkakVXcllFYnU4VHRpVVBn?=
- =?utf-8?B?M3BhVWZPWDFLZ3k2ZlZPdE5ZaERodTNUSUszVnNGWVpkUGxVUHVBblh0RHBP?=
- =?utf-8?B?WGdmaTBFb25mMTZvVmtmcE9ySjBOekVZUzVOSlZSS1ZNSTk1MTJNZ2tscUVK?=
- =?utf-8?B?N21iYjFNRlR6YXVteU0rczF5RzdscWZzV0tZLy9rclVSbS9CNCtJd01UNkEr?=
- =?utf-8?B?QnhxRkN3cDNpa0VScWtBREh0UkppK1JoWjVzWW1NNUI1N2V2RnR2UDFoZUJ3?=
- =?utf-8?B?ZkhXSktsemNpNUthTlBrc2NpYnpiTzlqMjVpaXNOQlJYS3FlVEZQaHpGaEdp?=
- =?utf-8?B?MHpnMlMvWnRFMnh6WERjZ1BvNXRQdG1JQ1pTZWhSd1lXRVZIb3JUSnRrTGE5?=
- =?utf-8?B?dVdhcmU5QkFxWTdEWk1CbjViM3JGb1NQUTZGZDE2TEdmSjc4ZmwyOGw3Tk5p?=
- =?utf-8?B?dHZYYloxYjAreFFxaGtMUk1aZEtISnBOakxPeHBRVDhxWktkVVlUTWVvZXJ5?=
- =?utf-8?B?eUxSUlZjS29WYjFnMnp1SXFFL0NZc0E5R2p0WnJoY1BUNm5zWmRuQUQrNGJU?=
- =?utf-8?B?cFNJakhpQ1dBRjJPZ21saEtVMmoxek1Za0N3K2ZGTGtIOWhwMXRhbEFuQk1T?=
- =?utf-8?B?UFlEZU9lV00vUG9BK2Y1dzhjbyttdTdkVE9OYlVKRE4vTkJXSHMvZWtkdGN1?=
- =?utf-8?B?ZGpuNFZYc2tSVlJZVzNsN05jWUxVN3dKQVFxcXUvcUY5MW9hdVBrTGdycTFZ?=
- =?utf-8?B?MEVMSytsNXQxTHlXNUpXNklmaCtvT2lNc3VBRW5nck5EaEthb1lhellxTGRE?=
- =?utf-8?B?ckhiWVpVYmdvMGlMalhaVWpKSjhuUHRZaGwxcHJHcCtQbWNiVDlCOXc4ZXd3?=
- =?utf-8?B?QWI4dTNUUzNKY0FXVTEvZE1XSFA4OXZPR2dHenZ2enUvandlaWw2Q0U4dHVi?=
- =?utf-8?B?SjlTQjNWeXMvbXpzN1lNMW1oN0JXZEV1LzRteVZUZ1VxRHcyS2tDUXhvcWlU?=
- =?utf-8?B?Y09jbGhKS2dQUERzaC96WEx0LzlOb1ZDYnBwb1FnZTlTM3ExYnArYktvMXFl?=
- =?utf-8?B?c2xzS1pjUHkvWUNmVmVuc1I0QXppeUhQanZqREtRRWowRWt1OHM4a3dsQjZh?=
- =?utf-8?B?OXlYa2RSbnR1YW1CR3E5V3pDUEI5V21qTVFkUFZuOWY4K21MVVVlTjZCZEZT?=
- =?utf-8?B?VytxT0laYXRkbmNnM01vaUpFcGRrK0RVblo0OEFHWDk5amY1V0g4clY5SXVV?=
- =?utf-8?B?UUR5Wm5ybjNpSmVra3hmSDBpRDdjVTRhcTQ2WjZNSmhKUFU4azNnMWxnd1F2?=
- =?utf-8?B?N2cxKzNkRFJ4S1NwSXZBc2g5SmNWWlN3SkZ5bklDV3pVNEtNc1FWZGgyd1RO?=
- =?utf-8?B?amx1NEZDN0JkdnZ4cXBJeEdUQ1Z2SzJHUmtLRWZzRUVOT1Vod3NVNHFLQ09P?=
- =?utf-8?B?Uy9rT2diZkFIVWFacE5GemhhcUV5aTlZN1FoTmxsZzFLNkwxQUlBaFZGSW9N?=
- =?utf-8?B?dDVMNGQ0cEF4OUE1QkhVRFUva0lHTWNSZ1I3bUVRa3RPaDhLL0JMSXp2Zkow?=
- =?utf-8?B?SEI4M3V2YS91OEN1MFZOT1piOTh4SzJEZWpLZWdNcUhiTDVENndYMVp4T2hk?=
- =?utf-8?B?TlhwUVhVNkwybDRXa0tzTGRKcmJtUXUxR3hTcS9aZjBiaWVYN1lneUNqL2Rh?=
- =?utf-8?Q?PV2CPvadVQfMnRm5HQY2zF1+nO7vXTrQU1QmFcPoQ4=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <C2F6EBAAD0B89C4C967A60324FB0F257@EURPRD10.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-7811db57cb4so172948785a.0
+ for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 09:28:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1704734879; x=1705339679; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=79gpbEIZ30POMFchkyZt7j4Z4kbT8jcRym5yYbGtqcM=;
+ b=ZI1vLPM+dw9N+3bVlynpgu9Mrzmk+6FPVELnsq5oJJCNRJmaB38EOjBSyGg7KFEJuM
+ mCwt8otnwn1BamHGwQGjBUJFUq1VCLcv5Vb9Xt2WehCxDFRjru1Ag9OuFe5UYqZ9KInv
+ g1QdKsK361OzjqZCFhCyYXSb2BXAI6jNWePvU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704734879; x=1705339679;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=79gpbEIZ30POMFchkyZt7j4Z4kbT8jcRym5yYbGtqcM=;
+ b=xUJH5nIiSfwAV6Uc8mWdoUC8dNBtYooqgEgXaypDplHXavvYFRejV3/gRVqKXwAGA/
+ wwrNKBXPN/zmYVNRFe8B21fDV7UiJPUV+LLGybMp4JV7/2SeubT23l9owZD5R8WOZz9D
+ T1vC9D0LKcOMWUMpL9MUnuMcRTLfjENKsZLTbxyraWYUSZKKthqyq27I7ZGbgCBftqhs
+ +zQzDeWELfnMH9/QL+lxS83fvUDmWNL6H1xeIVdGwpn1fxd8XDIky17jxWtJBIsQC6j5
+ nSCqS0+10zRzsy9xeh67Tg29SYEuRqXs/8BQWFbFVX1ybGKv4dAlm+0RGUce/2kquJWt
+ EV1Q==
+X-Gm-Message-State: AOJu0Yx8j3hykFKBrmEmgLiGGDanwlU8VrhIND51RZBXHA7X4kDmN5By
+ 1vLU4U0sLl/5A9KcI9wCEtx3NqWQOrgJ81ICMDIqyXE2zNY=
+X-Google-Smtp-Source: AGHT+IG9O0rkit5R07NoMdpcUdRbj+47AycKhCvSqg0aJobtbACqQ9whahahKtP1OJZetvB2lRRKhw==
+X-Received: by 2002:a05:620a:2a01:b0:781:9e55:b34f with SMTP id
+ o1-20020a05620a2a0100b007819e55b34fmr143901qkp.4.1704734879441; 
+ Mon, 08 Jan 2024 09:27:59 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
+ [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
+ f4-20020a056214164400b00680b3818c53sm129988qvw.141.2024.01.08.09.27.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Jan 2024 09:27:59 -0800 (PST)
+Date: Mon, 8 Jan 2024 12:27:57 -0500
+From: Tom Rini <trini@konsulko.com>
+To: E Shattow <lucent@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: booti usage offset requirements for compressed kernel and initrd
+ with dtb
+Message-ID: <20240108172757.GI1610741@bill-the-cat>
+References: <CANV2PTOD+cY55ES5HDrSZuGjqee3fvfXKORWg8bJFT64mFdg8A@mail.gmail.com>
+ <CAFLszTiEfCDGTRHiVQDzb+9KqpKi-EQuS77bOK-LYThZxTTb4g@mail.gmail.com>
+ <CANV2PTPXDfZ84PGxEvwqRHnScMcwwy-Amgmg-eJxq0R_b4Gn=w@mail.gmail.com>
 MIME-Version: 1.0
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 96813277-1d32-42d2-1cf4-08dc106e5433
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Jan 2024 17:22:02.4209 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Uze9G6FfIBomnR+ZAQ4T0LqF5gkWg6AFfvLFQXWHOFdlv9Dye3u1L6Q9qRl+nls3LTzTOFj3F9PgWTwKZwe2JbMppAgUkODYWvcPyUes1Sg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB6871
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9hl4y2qkUwZQOXPI"
+Content-Disposition: inline
+In-Reply-To: <CANV2PTPXDfZ84PGxEvwqRHnScMcwwy-Amgmg-eJxq0R_b4Gn=w@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,18 +93,189 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGVsbG8gRW5yaWNvIGV0IGFsLiENCg0KT24gV2VkLCAyMDI0LTAxLTAzIGF0IDE0OjMxICswMTAw
-LCBFbnJpY28gTGV0byB3cm90ZToNCj4gU2luY2Ugd2UgaGF2ZSBib2FyZHMgdXNpbmcgdGhlIGRy
-aXZlciBtb2RlbCBvciBub3QgZm9yIGkyYywgdXNlIGFic3RyYWN0aW9uDQo+IGZ1bmN0aW9uIHRv
-IHByb2JlIHRoZSBpMmMsIGNoZWNrIHRoZSBFRVBST00gYW5kIHJlYWQgZnJvbSBFRVBST00uDQo+
-IA0KPiBTaWduZWQtb2ZmLWJ5OiBFbnJpY28gTGV0byA8ZW5yaWNvLmxldG9Ac2llbWVucy5jb20+
-DQoNClJldmlld2VkLWJ5OiBBbGV4YW5kZXIgU3ZlcmRsaW4gPGFsZXhhbmRlci5zdmVyZGxpbkBz
-aWVtZW5zLmNvbT4NCg0KPiAtLS0NCj4gwqBib2FyZC9zaWVtZW5zL2NvbW1vbi9ib2FyZC5jwqDC
-oMKgwqDCoCB8IDQ4ICsrKysrKysrKysrKysrKysrKysrKy0tDQo+IMKgYm9hcmQvc2llbWVucy9j
-b21tb24vYm9hcmQuaMKgwqDCoMKgwqAgfMKgIDMgKysNCj4gwqBib2FyZC9zaWVtZW5zL2NvbW1v
-bi9mYWN0b3J5c2V0LmMgfCA2MyArKysrKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQo+IMKg
-Ym9hcmQvc2llbWVucy9kcmFjby9ib2FyZC5jwqDCoMKgwqDCoMKgIHwgMjMgKysrKy0tLS0tLS0N
-Cj4gwqBib2FyZC9zaWVtZW5zL3B4bTIvYm9hcmQuY8KgwqDCoMKgwqDCoMKgIHzCoCAyICstDQo+
-IMKgYm9hcmQvc2llbWVucy9ydXQvYm9hcmQuY8KgwqDCoMKgwqDCoMKgwqAgfMKgIDIgKy0NCj4g
-wqA2IGZpbGVzIGNoYW5nZWQsIDY3IGluc2VydGlvbnMoKyksIDc0IGRlbGV0aW9ucygtKQ0KDQot
-LSANCkFsZXhhbmRlciBTdmVyZGxpbg0KU2llbWVucyBBRw0Kd3d3LnNpZW1lbnMuY29tDQo=
+
+--9hl4y2qkUwZQOXPI
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sat, Jan 06, 2024 at 02:45:47PM -0800, E Shattow wrote:
+> Hi Simon,
+>=20
+> "If this [fdt_high environment variable] is set to the special value
+> 0xffffffff (32-bit machines) or 0xffffffffffffffff (64-bit machines) then
+> the fdt will not be copied at all on boot. For this to work it must reside
+> in writable memory, have sufficient padding on the end of it for U-Boot to
+> add the information it needs into it, and the memory must be accessible by
+> the kernel. This usage is strongly discouraged however as it also stops
+> U-Boot from ensuring the device tree starting address is properly aligned
+> and a misaligned tree will cause OS failures."
+>=20
+> https://docs.u-boot.org/en/latest/usage/environment.html
+>=20
+> "The device tree blob (dtb) must be placed on an 8-byte boundary"
+>=20
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/D=
+ocumentation/arch/arm64/booting.rst
+>=20
+> No mention of dtb alignment requirement at the similar documentation for
+> riscv64, but there is this mention:
+> "The RISC-V kernel expects to be placed at a PMD boundary (2MB aligned for
+> rv64 and 4MB aligned for rv32)."
+>=20
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/D=
+ocumentation/arch/riscv/boot.rst
+>=20
+> Perhaps then it is both a dtb alignment issue (not mentioned in the
+> documentation?) and the spurious extra requirement after the transferred
+> data length?
+>=20
+> If yes, how much is enough to pad after the end of devicetree blob?
+
+One should not try and aim for the smallest possible memory region here,
+but instead pick good defaults. Practically speaking, if I recall, 128MB
+is an implicit limit in uncompressed kernel image size, so taking one
+128MB chunk for the kernel, and the next 128MB chunk for a decompress-to
+location is reasonable. Then carve a few MB for device tree next, then
+initrd goes after that.
+
+>=20
+> Thanks!
+>=20
+> E Shattow
+>=20
+>=20
+>=20
+> On Thu, Jan 4, 2024 at 8:02=E2=80=AFAM Simon Glass <sjg@chromium.org> wro=
+te:
+>=20
+> > Hi,
+> >
+> > On Thu, Jan 4, 2024 at 5:19=E2=80=AFAM E Shattow <lucent@gmail.com> wro=
+te:
+> > >
+> > > Hello,
+> > >
+> > > There is data corruption when using booti on a JH7110 (riscv64) board=
+ to
+> > > load (over tftp or ymodem) a compressed kernel, compressed initrd, and
+> > > device tree blob, when the data are too close together (even though n=
+ot
+> > > overlapping). In the adjustments I have tried it seems to be consiste=
+nt
+> > but
+> > > not clear "why?" by how much for each adjustment is needed to observe=
+ the
+> > > failure versus success.
+> > >
+> > > My question is simple enough, what are the intended offset requiremen=
+ts
+> > for
+> > > loading these data into memory for use with booti ?
+> > >
+> > > For example:
+> > >
+> > > setenv ip 192.168.2.216
+> > > setenv loadaddr 0x60000000  # default from Milk-V vendor for Mars CM
+> > product
+> > > setenv kernel_uncomp_size 24193024  # uncompressed size of
+> > > vmlinuz-5.15.0-gpu117 from file command information
+> > > setenv kernel_comp_addr_r $loadaddr
+> > > setenv kernel_addr_r 0x61712800  # $kernel_comp_addr_r +
+> > $kernel_uncomp_size
+> > > dhcp $kernel_addr_r
+> > > $ip:mars-cm_debian-desktop_sdk-boot/vmlinuz-5.15.0-gpu117
+> > > setenv kernel_comp_size 0x$filesize
+> > > setenv dtb_addr 0x62e25000  # $kernel_addr_r + $kernel_uncomp_size
+> > > dhcp $dtb_addr
+> > >
+> > $ip:mars-cm_debian-desktop_sdk-boot/dtbs/starfive/jh7110-visionfive-v2.=
+dtb
+> > > setenv initrd_addr 0x62e31d7f  # $dtb_addr + 0x$filesize
+> > > dhcp $initrd_addr $ip:debian-installer-netboot/initrd.gz; setenv
+> > > initrd_size 0x$filesize
+> > > booti $kernel_addr_r $initrd_addr:$initrd_size $dtb_addr
+> > >
+> > > Waiting for root device ...
+> > >
+> > > (and nothing else, this is a failure)
+> > >
+> > > If 0x62e31d7f is replaced by 0x62e31ec6 then the boot is successful a=
+nd
+> > > dmesg from debian-installer shows the additional information:
+> > >
+> > >  Freeing unused kernel image (initmem) memory: 2196K
+> > >  Run /init as init process
+> > >    with arguments:
+> > >      /init
+> > >    with environment:
+> > >      HOME=3D/
+> > >      TERM=3Dlinux
+> > >
+> > >
+> > > So in this the kernel boots and all works normally. Even if that addr=
+ess
+> > is
+> > > 0x62e31ec5 one byte earlier it is a failure.
+> > >
+> > > In other attempts I would change the ordering i.e. so the initrd is f=
+irst
+> > > at $loadaddr and then kernel and DTB, or DTB and kernel. If I learned
+> > > anything it is that compressed initrd must be loaded to a span of mem=
+ory
+> > at
+> > > least the size of its uncompressed length, and this is also true of t=
+he
+> > > compressed kernel vmlinuz even though booti documentation vaguely inf=
+ers
+> > > that there is an area of memory specified for decompression - so a
+> > > compressed kernel needs two times its uncompressed size is that corre=
+ct?
+> > > Also there's no hint anywhere if the device tree blob has special mem=
+ory
+> > > constraints but if it is not starting on some 16byte aligned address =
+at
+> > > least my superstition from observations in testing is that it is not
+> > > successful... and now, where it ends (in the above example) and initrd
+> > > begins seems arbitrary.
+> > >
+> > > Sure I could pad things out, they tend to work that way, but I would =
+like
+> > > to know "why?"
+> >
+> > I don't know why, but I imagine that Linux finds the initrd in one
+> > case and not inthe other...does the kernel log give you any clues?
+> >
+> > Also, can you use U-Boot's 'md5sum' command or similar to check that
+> > the initrd and DT are the same in each case?
+> >
+> > Also, you could use a FIT [1] rather than booti.
+> >
+> > Regards,
+> > Simon
+> >
+> > [1] https://docs.u-boot.org/en/latest/usage/fit/index.html
+> >
+
+--=20
+Tom
+
+--9hl4y2qkUwZQOXPI
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWcMJoACgkQFHw5/5Y0
+tyybSgv/Tz2CigdtaYb9L4ttjsERU3kSBezzdV6BdzYCjOpcoZi4OIpNApdk61sF
+eE90aPFNEl6mb10tybzaUzelS+SPgymnrqaRlAC7agtM9/9w1/0Zb/MjQJoMreaa
+4TAeT3aBnR9y8RYW8B309XY852VXKUVFZg7c0tI3Ct8YukOzDywbhFLk6cKgDW+L
+lOPzQFqh+fOLSLzCFVy+P9yRtWKjXmXPd6zipZcHNuMJUlHM+5WWOK2S8plpwmVr
+xsl+KgTu573DoIjFrIlZ+uBT3zEhui1fePfs3GOOAL7ZzrRD0ZtbL8SP+BJz5q/1
+9EGVsFgptALbLIkIDPjV1K2S6JkKmj318JR6esNbvGdhG/9qWhGaZGoLMRyvjw5E
+3tdVxzQ42sVwZ5607nt5hr5AooyZ20Xc429RCuKdHHSkkI9XkNWOrbSVjkPGgHur
+NRPX2k5EpAmBjpuAD3Vz2sFAy/QDIkBVJ09wRDVKgDafDJrC1X9+DPJW55y3jH+r
+t0d7xYha
+=SuyB
+-----END PGP SIGNATURE-----
+
+--9hl4y2qkUwZQOXPI--
