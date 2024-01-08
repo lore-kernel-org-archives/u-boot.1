@@ -4,72 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAA84C47073
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 00:19:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2491C47074
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 00:19:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3869487ABE;
-	Mon,  8 Jan 2024 01:16:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2726687A82;
+	Mon,  8 Jan 2024 01:16:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i6zGMqXo";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eH2j9kay";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 273CA87AAB; Mon,  8 Jan 2024 01:16:35 +0100 (CET)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id 657D787A9B; Mon,  8 Jan 2024 01:16:35 +0100 (CET)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3021B87A70
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 01:16:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C02687A60
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 01:16:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-67fb9df3699so14486386d6.2
- for <u-boot@lists.denx.de>; Sun, 07 Jan 2024 16:16:25 -0800 (PST)
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-78315243c11so103607085a.3
+ for <u-boot@lists.denx.de>; Sun, 07 Jan 2024 16:16:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704672984; x=1705277784; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1704672987; x=1705277787; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=F03KOHNoBPA7vF6vsl+UH281N3Zf8YGr5JyORhbnmKk=;
- b=i6zGMqXodkvLNcRusUHNysJGTr5Nj1ix2bV+1DpXWET27W+iQb15f60dEjbwEOyfVJ
- 6XUyt9mI1klnuugItCk+G829tODHGK54Riizl6gf0oGCdiqzeVUSeztgRYtiDM1QgQmQ
- Wa/qxJEWpnF7Nxx8AroEqVvuSBr77jdhNsCFc=
+ bh=DumTl8UylEYj2c4022A9wXHBifufO9hKgLzUQFVoUpM=;
+ b=eH2j9kayEKzF9l97PJyBFnO8u62DpHPvHL6K0lhFul0sPgcuGWLfFzveTQoLOKmX5J
+ llTt6hFn7WT28UbTOE4HGNyaCMNT6UbEijtKxFAqhFOiutVLMBygPSs7DdJ5uI1OaIBs
+ l3jVxJ+IMJXsOnrFvJErKGk+VD6r2jz5r7h+c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704672984; x=1705277784;
+ d=1e100.net; s=20230601; t=1704672987; x=1705277787;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=F03KOHNoBPA7vF6vsl+UH281N3Zf8YGr5JyORhbnmKk=;
- b=lcKcPsbN0sCGba421f1tzdKVwkJGxid/5wKo7wAOAR82e3w+QqsHvdPyC2n7FP9iN6
- 8LVrNWvxvFKmsBGgIWzIJnTo1wN6GOHe7QAUqBdap9eg6NAmrfw09E1zbIjuEdiecw16
- XYoUWg4OOEbW9V3g0RYfERDa3usfRG95FEtDtFbwphcVfOtBcvwUDvhuKdVtpa7X/6D1
- 0v8TPIRie1rc85pJhThKJ4ftjrYoibHNiW5hSJ14jmcL+HwsUlKjrs1IniQHfqQMQvPm
- gdXBgjj9oxSLtw1wqvqtyKU89ridpzJI0t9gFVEVnePNpsnjgWj8rsN/j17yGr4FXCCS
- jeBg==
-X-Gm-Message-State: AOJu0YwZhiIPvlxbZQ9anZqKH0VqAdg0NJGMakODTuvvH3WBgM0QL0If
- nyrrvbsVlsn7uYKbChjRjcKpq9PsXpweDJ2MoQt3VI2HbCqL
-X-Google-Smtp-Source: AGHT+IHj6i8iegcRGcm5kjnIQ2kKpFK+eiGYfB7ouLBNtzCDZen+dPyxN1EJJZwCjKTXpbJ8tvyThHwN+/JdduYwwQM=
-X-Received: by 2002:a05:6214:d4d:b0:67f:4a00:c423 with SMTP id
- 13-20020a0562140d4d00b0067f4a00c423mr4897791qvr.2.1704672984100; Sun, 07 Jan
- 2024 16:16:24 -0800 (PST)
+ bh=DumTl8UylEYj2c4022A9wXHBifufO9hKgLzUQFVoUpM=;
+ b=C2ETN14DRlB2iMNn8/mPlo7WqNWKO0j+HbjYHxzKNl0sVQcpzr1HhUfG63pxL/mY3J
+ WCajDxseKckUeZfQT2ln5JHjAcxZl6js+E2F5OY94+2m/fcEkWADcvqNZkydGGSFMs7K
+ Wy1lIDyU19ieIRgCOYgjgcz0W8YMRs2uH6fruy+KuS2cvWXM5LcdWVufaveT1eV9l36j
+ 8ReKVAo5ixdKVFeNW4tg6kA4s9lEDDxjCxQdFeuprj/ZrfjREGsu6ZO3rf0EQfAfE13C
+ Xi1YOUriYHSqvlDoV+YTuBJ9Gvchq8WA72IdYWDMfWpBU83IOV0z58Wt/2U40NclEoOO
+ D7/w==
+X-Gm-Message-State: AOJu0YyTjagirE0b3I6W4MVEvLwp4fMRmE/H3XJ2ZHqIamH6hqoeXma+
+ q3PlCwDxFFDsm673b+JvjKfTN1gbq273f2OPqzhJLvHI45sw
+X-Google-Smtp-Source: AGHT+IFreHl43psscXxe9NNZ0zV362CR8VPkV41bGKHZnEO3JhxP3Ax7ImuSe6tbVlXwF7NCaYzywkHpBKl7W8nXSCQ=
+X-Received: by 2002:a05:6214:1c8d:b0:67f:4867:2ec9 with SMTP id
+ ib13-20020a0562141c8d00b0067f48672ec9mr3027981qvb.16.1704672987148; Sun, 07
+ Jan 2024 16:16:27 -0800 (PST)
 Received: from 798914943136 named unknown by gmailapi.google.com with
- HTTPREST; Sun, 7 Jan 2024 18:16:23 -0600
+ HTTPREST; Sun, 7 Jan 2024 18:16:26 -0600
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20231219150408.10949-9-heinrich.schuchardt@canonical.com>
-References: <20231219150408.10949-9-heinrich.schuchardt@canonical.com>
+In-Reply-To: <ZY52HXjJGruD7fM3@hades>
+References: <ZY52HXjJGruD7fM3@hades>
  <20231219150408.10949-1-heinrich.schuchardt@canonical.com>
-Date: Sun, 7 Jan 2024 18:16:23 -0600
-X-Google-Sender-Auth: fWkoPnxNr0P3QvxwI-t6oLL2EOk
-Message-ID: <CAFLszTjtq6oxw-HojFOgtRC=jAU675=M+NrYwnR5bb1Wf9erhw@mail.gmail.com>
-Subject: Re: [PATCH v4 8/9] configs: qemu: add config fragment for ACPI
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
- Simon Glass <sjg@chromium.org>
+ <20231219150408.10949-6-heinrich.schuchardt@canonical.com>
+Date: Sun, 7 Jan 2024 18:16:26 -0600
+X-Google-Sender-Auth: KRhl1RAjUsk5nnshjCRPfL7EqLM
+Message-ID: <CAFLszTia7HvFnFmZv7HecebfiQP6zceAB_ZOfcAiwzcb=mT4oQ@mail.gmail.com>
+Subject: Re: [PATCH v4 5/9] acpi: enable writing ACPI tables on QEMU
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de, 
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,25 +89,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide a configuration fragment to enable ACPI on QEMU.
-
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
-v4:
-	mention that QEMU v8.0.0 introduced RISC-V ACPI support
-v3:
-	no change
-v2:
-	no change
----
- MAINTAINERS                         |  1 +
- board/emulation/configs/acpi.config |  3 +++
- doc/board/emulation/acpi.rst        | 23 +++++++++++++++++++++++
- doc/board/emulation/index.rst       |  1 +
- 4 files changed, 28 insertions(+)
- create mode 100644 board/emulation/configs/acpi.config
- create mode 100644 doc/board/emulation/acpi.rst
-
+On Tue, Dec 19, 2023 at 04:04:04PM +0100, Heinrich Schuchardt wrote:
+> Invoke write_acpi_tables() via EVT_LAST_STAGE_INIT on QEMU except on X86.
+> X86 calls write_acpi_tables() in write_tables().
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> ---
+> v4:
+> 	no change
+> v3:
+> 	no change
+> v2:
+> 	new patch
+> ---
+>  drivers/misc/qfw_acpi.c | 25 +++++++++++++++++++++++++
+>  1 file changed, 25 insertions(+)
+>
 Applied to u-boot-dm/next, thanks!
