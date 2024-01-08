@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BC1AC3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 16:58:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4C9BC3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 16:59:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 799D787AAD;
-	Mon,  8 Jan 2024 17:58:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2FAD187ACD;
+	Mon,  8 Jan 2024 17:58:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="gGpR7Vz8";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="WcuzT7oJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB28887AB1; Mon,  8 Jan 2024 17:58:19 +0100 (CET)
+ id B351387463; Mon,  8 Jan 2024 17:58:24 +0100 (CET)
 Received: from relay9-d.mail.gandi.net (relay9-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::229])
+ [217.70.183.199])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BC9587AAD
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 17:58:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CED9C87AB3
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 17:58:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=thomas.richard@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 899DFFF803;
- Mon,  8 Jan 2024 16:58:15 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id C84F3FF80F;
+ Mon,  8 Jan 2024 16:58:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1704733097;
+ t=1704733101;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=tPrY5mw615o0ZDyi2YN23uoxXcL1Ky8xpTyZBcA8vNA=;
- b=gGpR7Vz8ac4vXoFrtNVIN61EQBIOaoH1+c95vbiyyqpsZnRBHa9QkOZJkkFOYNUA3QVAGG
- Nim4NTeXVAp/xclCLsQJomnHmxNgIbD4vaDRgocsLQA/X0/BIQmaTgCltZE08lCsgsxC6e
- FrS/A7l3yyX4Nr5DEarSPB5ue+3Bgx2d2zbbaygew0udMix1kZDlOvy+tIBmmhcLz/Ccf1
- 67zD1uxa8BVnFtajzuVRFj/LR7ITRzGEayoavgbLisNJhGcHJS33/7PDb/WrJ2aJ1OyED0
- NCJKIfQwxDFTkIN4Si7dvqW8D3sR8ZSTNbG4YSNqaH0BK4NdhWnNtgQKTC62HA==
+ bh=4nQTYiDFLoWciH0d6FtlPNiws/h87tBokD0/DaItmjk=;
+ b=WcuzT7oJ4y0LboPEbDalREzNvfR4Kjsf0hP1hw7dHM3KZ5XIrYfvH3IHXrUVRXj3YFeQlf
+ rTmJ+gXS0ee+s4lJ27hl2GoTfs0Ya0CnhvI69DEOP+vW0Ga2A+f0u5cPcnVSyFPyrwqLKp
+ ESD7Oyc95gFxB4jkLuw8tb9psNDbvUym/TO7NqTNrOVtLE8F06CxcdjDBBLpPGbwv7wuLK
+ RS/pfdH90Oom0nz0qrA4yFQSLqsvjMBPRAN8dxdF2lInQ6AY63VmAksZERInS5cB+F0NWf
+ dzmA1uYI6gdTWTh6lUAVbkC8xctKADPY5Rv4KFEHJI+jPWe1sTRr7o+jXifl2Q==
 From: Thomas Richard <thomas.richard@bootlin.com>
 To: u-boot@lists.denx.de
 Cc: thomas.petazzoni@bootlin.com, thomas.richard@bootlin.com, nm@ti.com,
- u-kumar1@ti.com, gregory.clement@bootlin.com, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 4/8] board: ti: j721e: Add resume detection for J7200
-Date: Mon,  8 Jan 2024 17:56:24 +0100
-Message-Id: <20240108165628.3935756-5-thomas.richard@bootlin.com>
+ u-kumar1@ti.com, gregory.clement@bootlin.com, Bryan Brattlof <bb@ti.com>
+Subject: [PATCH v3 5/8] ram: k3-ddrss: Add exit retention support
+Date: Mon,  8 Jan 2024 17:56:25 +0100
+Message-Id: <20240108165628.3935756-6-thomas.richard@bootlin.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240108165628.3935756-1-thomas.richard@bootlin.com>
 References: <20240108165628.3935756-1-thomas.richard@bootlin.com>
@@ -69,10 +69,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the capability to detect a resume.
-To detect the resume, SPL searches a magic value (0xBA) in a register
-of PMICA.
-This value is set by DM-Firmware during the suspend sequence.
+Add the exit retention support.
+The enter retention is done by DM-Firmware.
+A part of the exit retention sequence is specific to the board.
+It is done in board_k3_ddrss_lpddr4_release_retention.
 
 Based on the work of Gregory CLEMENT <gregory.clement@bootlin.com>
 
@@ -81,82 +81,339 @@ Signed-off-by: Gregory CLEMENT <gregory.clement@bootlin.com>
 
 ---
 
-Changes in v3:
-- Remove if statement for pmic.h
+(no changes since v2)
 
- board/ti/j721e/evm.c | 52 ++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 52 insertions(+)
+Changes in v2:
+- Set exit retention code for DDR behind CONFIG_K3_J721E_DDRSS
 
-diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
-index 38fe447d8f..c5404c014d 100644
---- a/board/ti/j721e/evm.c
-+++ b/board/ti/j721e/evm.c
-@@ -22,6 +22,7 @@
- #include <spl.h>
- #include <dm.h>
- #include <dm/uclass-internal.h>
-+#include <power/pmic.h>
- 
- #include "../common/board_detect.h"
- 
-@@ -528,6 +529,57 @@ err_free_gpio:
- 	}
+ drivers/ram/k3-ddrss/k3-ddrss.c | 307 ++++++++++++++++++++++++++++++++
+ 1 file changed, 307 insertions(+)
+
+diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
+index b54557f02c..e47f615032 100644
+--- a/drivers/ram/k3-ddrss/k3-ddrss.c
++++ b/drivers/ram/k3-ddrss/k3-ddrss.c
+@@ -413,6 +413,306 @@ static int k3_ddrss_ofdata_to_priv(struct udevice *dev)
+ 	return ret;
  }
  
-+#if (IS_ENABLED(CONFIG_SPL_BUILD) && IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM))
++#if defined(CONFIG_K3_J721E_DDRSS)
 +
-+#define SCRATCH_PAD_REG_3 0xCB
++void __weak board_k3_ddrss_lpddr4_release_retention(void) {}
 +
-+#define MAGIC_SUSPEND 0xBA
-+
-+static int resuming = -1;
-+
-+int board_is_resuming(void)
++int __weak board_is_resuming(void)
 +{
-+	struct udevice *pmica, *pmicb;
-+	int ret;
-+
-+	if (resuming >= 0)
-+		goto end;
-+
-+	ret = uclass_get_device_by_name(UCLASS_PMIC,
-+					"tps659413@48", &pmica);
-+	if (ret) {
-+		printf("Getting PMICA init failed: %d\n", ret);
-+		resuming = 0;
-+		goto end;
-+	}
-+	debug("%s: PMICA is detected (%s)\n", __func__, pmica->name);
-+
-+	ret = uclass_get_device_by_name(UCLASS_PMIC,
-+					"lp876441@4c", &pmicb);
-+	if (ret) {
-+		printf("Getting PMICB init failed: %d\n", ret);
-+		resuming = 0;
-+		goto end;
-+	}
-+	debug("%s: PMICB is detected (%s)\n", __func__, pmicb->name);
-+
-+	if ((pmic_reg_read(pmica, SCRATCH_PAD_REG_3) == MAGIC_SUSPEND)) {
-+		resuming = 1;
-+		debug("%s: board is resuming\n", __func__);
-+
-+		/* clean magic suspend */
-+		if (pmic_reg_write(pmica, SCRATCH_PAD_REG_3, 0))
-+			printf("Failed to clean magic value for suspend detection in PMICA\n");
-+	} else {
-+		resuming = 0;
-+		debug("%s: board is booting (no resume detected)\n", __func__);
-+	}
-+end:
-+	return resuming;
++	return 0;
 +}
 +
-+#endif /* CONFIG_SPL_BUILD && CONFIG_TARGET_J7200_R5_EVM */
++#define PLL12_CTRL  0x0068C020
 +
- void spl_board_init(void)
++#define k3_ddrss_readreg(k3_ddrss, block, shift, reg, pt) do {		\
++		u32 offset = 0U;					\
++		u32 result = 0U;					\
++		TH_OFFSET_FROM_REG(reg, shift, offset);			\
++		result = k3_ddrss->driverdt->readreg(&k3_ddrss->pd, block, offset, pt); \
++		if (result > 0U) {					\
++			printf("%s: Failed to read %s\n", __func__, xstr(reg));	\
++			hang();						\
++		}							\
++	} while (0)
++
++#define k3_ddrss_writereg(k3_ddrss, block, shift, reg, value) do {	\
++		u32 offset = 0U;					\
++		u32 result = 0U;					\
++		TH_OFFSET_FROM_REG(reg, shift, offset);			\
++		result = k3_ddrss->driverdt->writereg(&k3_ddrss->pd, block, offset, value); \
++		if (result > 0U) {					\
++			printf("%s: Failed to write %s\n", __func__, xstr(reg)); \
++			hang();						\
++		}							\
++	} while (0)
++
++#define k3_ddrss_readreg_ctl(ddrss, reg, pt) \
++	k3_ddrss_readreg(ddrss, LPDDR4_CTL_REGS, CTL_SHIFT, reg, pt)
++
++#define k3_ddrss_readreg_pi(ddrss, reg, pt) \
++	k3_ddrss_readreg(ddrss, LPDDR4_PHY_INDEP_REGS, PI_SHIFT, reg, pt)
++
++#define k3_ddrss_readreg_phy(ddrss, reg, pt) \
++	k3_ddrss_readreg(ddrss, LPDDR4_PHY_REGS, PHY_SHIFT, reg, pt)
++
++#define k3_ddrss_writereg_ctl(ddrss, reg, value) \
++	k3_ddrss_writereg(ddrss, LPDDR4_CTL_REGS, CTL_SHIFT, reg, value)
++
++#define k3_ddrss_writereg_pi(ddrss, reg, value) \
++	k3_ddrss_writereg(ddrss, LPDDR4_PHY_INDEP_REGS, PI_SHIFT, reg, value)
++
++#define k3_ddrss_writereg_phy(ddrss, reg, value) \
++	k3_ddrss_writereg(ddrss, LPDDR4_PHY_REGS, PHY_SHIFT, reg, value)
++
++#define k3_ddrss_set_ctl(k3_ddrss, reg, mask) do {	\
++	u32 val;					\
++	k3_ddrss_readreg_ctl(ddrss, reg, &val);		\
++	val |= mask;					\
++	k3_ddrss_writereg_ctl(ddrss, reg, val);		\
++	} while (0)
++
++#define k3_ddrss_clr_ctl(k3_ddrss, reg, mask) do {		\
++		u32 val;					\
++		k3_ddrss_readreg_ctl(ddrss, reg, &val);		\
++		val &= ~(mask);					\
++		k3_ddrss_writereg_ctl(ddrss, reg, val);		\
++	} while (0)
++
++#define k3_ddrss_set_pi(k3_ddrss, reg, mask) do {		\
++		u32 val;					\
++		k3_ddrss_readreg_pi(ddrss, reg, &val);		\
++		val |= mask;					\
++		k3_ddrss_writereg_pi(ddrss, reg, val);		\
++	} while (0)
++
++#define k3_ddrss_clr_pi(k3_ddrss, reg, mask) do {		\
++		u32 val;					\
++		k3_ddrss_readreg_pi(ddrss, reg, &val);		\
++		val &= ~(mask);					\
++		k3_ddrss_writereg_pi(ddrss, reg, val);		\
++	} while (0)
++
++#define k3_ddrss_set_phy(ddrss, reg, mask) do {		\
++	u32 val;					\
++	k3_ddrss_readreg_phy(ddrss, reg, &val);		\
++	val |= mask;					\
++	k3_ddrss_writereg_phy(ddrss, reg, val);		\
++	} while (0)
++
++#define k3_ddrss_clr_phy(ddrss, reg, mask) do {		\
++	u32 val;					\
++	k3_ddrss_readreg_phy(ddrss, reg, &val);		\
++	val &= ~(mask);					\
++	k3_ddrss_writereg_phy(ddrss, reg, val);		\
++	} while (0)
++
++static void k3_ddrss_lpddr4_exit_retention(struct k3_ddrss_desc *ddrss)
++{
++	u32 regval;
++	unsigned long tmo;
++	volatile unsigned int val;
++
++	/* disable auto entry / exit */
++	k3_ddrss_clr_ctl(ddrss, LPDDR4__LP_STATE_CS0__REG, (0xF << 24) | (0xF << 16));
++
++	/* Configure DFI Interface, DDR retention exit occurs through PHY */
++	k3_ddrss_readreg_phy(ddrss, LPDDR4__PHY_SET_DFI_INPUT_0__REG, &regval);
++	regval &= ~0xF0F; // Set DFI_Input_1 = 0
++	regval |= 0x01;   // Set DFI Input_0 = 1
++	k3_ddrss_writereg_phy(ddrss, LPDDR4__PHY_SET_DFI_INPUT_0__REG, regval);
++
++	/* PWRUP_SREFRESH_EXIT = 1 */
++	k3_ddrss_set_ctl(ddrss, LPDDR4__PWRUP_SREFRESH_EXIT__REG, 0x1);
++
++	/* PI_PWRUP_SREFRESH_EXIT = 0 */
++	k3_ddrss_clr_ctl(ddrss, LPDDR4__PI_COL_DIFF__REG, 0x1 << 16);
++
++	/* DFIBUS_BOOT_FREQ = 0 */
++	k3_ddrss_clr_ctl(ddrss, LPDDR4__DFIBUS_BOOT_FREQ__REG, 0x3);
++
++	/* DFIBUS_FREQ_INIT = 2 */
++	k3_ddrss_readreg_ctl(ddrss, LPDDR4__PHY_INDEP_TRAIN_MODE__REG, &regval);
++	regval &= ~(0x3 << 24);
++	regval |= (0x1 << 24);
++	k3_ddrss_writereg_ctl(ddrss, LPDDR4__PHY_INDEP_TRAIN_MODE__REG, regval);
++
++	/* Force Leveling during Initialization, Enable Link Training */
++
++	/* PI_INIT_LVL_EN = 1 */
++	k3_ddrss_set_pi(ddrss, LPDDR4__PI_NORMAL_LVL_SEQ__REG, (1 << 8));
++
++	/* PI_DRAM_INIT_EN = 0 */
++	k3_ddrss_clr_pi(ddrss, LPDDR4__PI_DLL_RST__REG, (0x1 << 8));
++
++	/* PI_DFI_PHYMSTR_STATE_SEL_R = 1  (force memory into self-refresh) */
++	k3_ddrss_set_pi(ddrss, LPDDR4__PI_DFI_VERSION__REG, (1 << 24));
++
++	/*  PHY_INDEP_INIT_MODE = 0 */
++	k3_ddrss_clr_ctl(ddrss, LPDDR4__PHY_INDEP_TRAIN_MODE__REG, (0x1 << 16));
++	/* PHY_INDEP_TRAIN_MODE = 1 */
++	k3_ddrss_set_ctl(ddrss, LPDDR4__PHY_INDEP_TRAIN_MODE__REG, 0x1);
++
++	/* PI_INIT_WORK_FREQ = 1 */
++	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_INIT_WORK_FREQ__REG, &regval);
++	regval &= ~0x1F;
++	regval |= 0x01;
++	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_INIT_WORK_FREQ__REG, regval);
++
++	/* PI_FREQ_MAP[2:0] */
++	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_FREQ_MAP__REG, 0x03);
++
++	/* Training/leveling configurations for different frequency set points */
++
++	/* PI_CALVL_EN_F0 = 01b; PI_CALVL_EN_F1 = 01b; PI_CALVL_EN_F2 = 01b */
++	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_CALVL_EN_F0__REG, &regval);
++	regval &= ~0x030303;
++	regval |= 0x010101;
++	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_CALVL_EN_F0__REG, regval);
++
++	/* PI_WRLVL_EN_F0 = 00b; PI_WRLVL_EN_F1 = 01b */
++	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_TDFI_CTRL_DELAY_F1__REG, &regval);
++	regval &= ~0x03030000;
++	regval |= 0x01000000;
++	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_TDFI_CTRL_DELAY_F1__REG, regval);
++
++	/* PI_WRLVL_EN_F2 = 01b */
++	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_WRLVL_EN_F2__REG, &regval);
++	regval &= ~0x03;
++	regval |= 0x01;
++	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_WRLVL_EN_F2__REG, regval);
++
++	/* PI_RDLVL_EN_F0 = 00b; PI_RDLVL_EN_F1 = 01b */
++	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F0__REG, &regval);
++	regval &= ~0x030003;
++	regval |= 0x010000;
++	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F0__REG, regval);
++
++	/* PI_RDLVL_EN_F2 = 01b */
++	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F2__REG, &regval);
++	regval &= ~0x03;
++	regval |= 0x01;
++	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F2__REG, regval);
++
++	/* PI_RDLVL_GATE_EN_F0 = 00b; PI_RDLVL_GATE_EN_F1 = 01b */
++	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F0__REG, &regval);
++	regval &= ~0x03000300;
++	regval |= 0x01000000;
++	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F0__REG, regval);
++
++	/* PI_RDLVL_GATE_EN_F2 = 01b */
++	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F2__REG, &regval);
++	regval &= ~0x0300;
++	regval |= 0x0100;
++	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F2__REG, regval);
++
++	/* PI_WDQLVL_EN_F0 = 00b */
++	k3_ddrss_clr_pi(ddrss, LPDDR4__PI_WDQLVL_VREF_DELTA_F0__REG, (0x3 << 8));
++
++	/* PI_WDQLVL_EN_F1 = 01b */
++	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_WDQLVL_VREF_DELTA_F1__REG, &regval);
++	regval &= ~(0x3 << 24);
++	regval |= (0x1 << 24);
++	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_WDQLVL_VREF_DELTA_F1__REG, regval);
++
++	/* PI_WDQLVL_EN_F2 = 01b */
++	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_WDQLVL_VREF_DELTA_F2__REG, &regval);
++	regval &= ~(0x3 << 8);
++	regval |= (0x1 << 8);
++	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_WDQLVL_VREF_DELTA_F2__REG, regval);
++
++	*(unsigned int *)PLL12_CTRL |= 0x80000000;
++	val = *(volatile unsigned int *)PLL12_CTRL;
++
++	if ((val & 0x80000000) != 0x80000000)
++		val = *(volatile unsigned int *)PLL12_CTRL;
++
++	board_k3_ddrss_lpddr4_release_retention();
++
++	/* LPC_SR_PHYMSTR_EN */
++	k3_ddrss_clr_ctl(ddrss, LPDDR4__LPC_SR_CTRLUPD_EN__REG, (0x1 << 16));
++	/* PI_START=1 */
++	k3_ddrss_set_pi(ddrss, LPDDR4__PI_START__REG, 0x01);
++	/* START=1 */
++	k3_ddrss_set_ctl(ddrss, LPDDR4__START__REG, 0x01);
++
++	debug("%s: PPL12 = %x\n", __func__, *(volatile unsigned int *)PLL12_CTRL);
++	ddrss->ddr_fhs_cnt = 5;
++	k3_lpddr4_freq_update(ddrss);
++	debug("%s: PPL12 = %x\n", __func__, *(volatile unsigned int *)PLL12_CTRL);
++
++	tmo = timer_get_us() + 100000;
++	do {
++		k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_INT_STATUS__REG, &regval);
++		debug("%s: DDRSS_PI_79 = %x\n", __func__, regval);
++		if (timer_get_us() > tmo) {
++			printf("%s:%d timeout error\n", __func__, __LINE__);
++			hang();
++		}
++	} while ((regval & (1 << 0)) == 0x00);
++
++	tmo = timer_get_us() + 4000;
++	do {
++		k3_ddrss_readreg_ctl(ddrss, LPDDR4__INT_STATUS_0__REG, &regval);
++		if (timer_get_us() > tmo) {
++			printf("%s:%d timeout error\n", __func__, __LINE__);
++			hang();
++		}
++	} while ((regval & (1 << 9)) == 0x00);
++
++	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_INT_STATUS__REG, &regval);
++	debug("%s: PI interrupt status: 0x%08x\n", __func__, regval);
++
++	k3_ddrss_readreg_ctl(ddrss, LPDDR4__INT_STATUS_0__REG, &regval);
++	debug("%s: Controller interrupt status: 0x%08x\n", __func__, regval);
++
++	debug("%s: Successfully exited Retention\n", __func__);
++
++	k3_ddrss_readreg_ctl(ddrss, LPDDR4__LP_STATE_CS0__REG, &regval);
++	debug("%s: LP State: 0x%08x\n", __func__, regval);
++
++	k3_ddrss_writereg_ctl(ddrss, LPDDR4__INT_ACK_0__REG, (0x1 << 10));
++
++	k3_ddrss_readreg_ctl(ddrss, LPDDR4__CKSRX_F1__REG, &regval);
++	regval &= ~(0x7F << 24);
++	regval |= (0x2 << 24); // set low power mode exit
++	k3_ddrss_writereg_ctl(ddrss, LPDDR4__CKSRX_F1__REG, regval);
++
++	k3_ddrss_readreg_ctl(ddrss, LPDDR4__LP_STATE_CS0__REG, &regval);
++	debug("%s: LP State: 0x%08x\n", __func__, regval);
++
++	/* wait until low power operation has been completed */
++	tmo = timer_get_us() + 4000;
++	do {
++		k3_ddrss_readreg_ctl(ddrss, LPDDR4__INT_STATUS_0__REG, &regval);
++		if (timer_get_us() > tmo) {
++			printf("%s:%d timeout error\n", __func__, __LINE__);
++			hang();
++		}
++	} while ((regval & (0x1 << 10)) == 0);
++
++	k3_ddrss_readreg_ctl(ddrss, LPDDR4__LP_STATE_CS0__REG, &regval);
++	debug("%s: LP State: 0x%08x\n", __func__, regval);
++
++	k3_ddrss_writereg_ctl(ddrss, LPDDR4__INT_ACK_0__REG, (0x1 << 10));
++
++	/*
++	 * bit 6 / 14 -- lp_state valid
++	 * bits 13:8 / 5:0 0x0F SRPD Long with Mem and Controller Clk Gating
++	 */
++	tmo = timer_get_us() + 4000;
++	do {
++		k3_ddrss_readreg_ctl(ddrss, LPDDR4__LP_STATE_CS0__REG, &regval);
++		if (timer_get_us() > tmo) {
++			printf("%s:%d timeout error\n", __func__, __LINE__);
++			hang();
++		}
++	} while ((regval & 0x4F4F) != 0x4040);
++
++	k3_ddrss_readreg_ctl(ddrss, LPDDR4__LP_STATE_CS0__REG, &regval);
++	debug("%s: LP State: 0x%08x\n", __func__, regval);
++}
++#endif /* CONFIG_K3_J721E_DDRSS */
++
+ void k3_lpddr4_probe(struct k3_ddrss_desc *ddrss)
  {
- #if defined(CONFIG_ESM_K3) || defined(CONFIG_ESM_PMIC)
+ 	u32 status = 0U;
+@@ -637,6 +937,13 @@ static int k3_ddrss_probe(struct udevice *dev)
+ 	if (ret)
+ 		return ret;
+ 
++#if defined(CONFIG_K3_J721E_DDRSS)
++	if (board_is_resuming()) {
++		k3_ddrss_lpddr4_exit_retention(ddrss);
++		return 0;
++	}
++#endif
++
+ 	k3_lpddr4_start(ddrss);
+ 
+ 	if (ddrss->ti_ecc_enabled) {
 -- 
 2.39.2
 
