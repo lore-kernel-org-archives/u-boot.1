@@ -4,75 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B96F5C3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 08:55:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5853EC3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 09:25:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2C8F87929;
-	Mon,  8 Jan 2024 09:55:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A705F87929;
+	Mon,  8 Jan 2024 10:25:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="S2pjqTxE";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ZGfe3Aov";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D392D8794A; Mon,  8 Jan 2024 09:55:44 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0B2C987A21; Mon,  8 Jan 2024 10:25:32 +0100 (CET)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on20619.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe59::619])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B52E5871A7
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 09:55:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A807877DE
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 10:25:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-40d89446895so8731855e9.0
- for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 00:55:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704704142; x=1705308942; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=XD+Jnl/IQEUwYUhUzl7LpqY5fOXTIO68nzQ9CAuBE1Q=;
- b=S2pjqTxE5we2BGxbwkr7++3FW7XqFdonGt4Sl0D6miWRmkv27a5FXBEOWNLfIdyC6F
- MudK69vMtWt5WsMFFA0WJvPVK6kmxSf34GXINbM4WdHZENcDL6nJgHRZVVaMxGUucFWl
- 9hQOFNRKzr+MlmZD+mYBFNrtwWLWa8LHLj78jdZC+4qGUKVekhvjHukr05NOUx4cUxzz
- CewA1zdmnEp7OYgPGGydOk19z+OETWGp09O3jTH5ExKKhsnU2mudCn+xFxiBz3SXIyPP
- EYXFIUtwHyS2p7lFDJDG9EHXk6REI+RgWOAaHPcuTUmAxoZ4eVYQ7YN+j7j9HJJtWtCq
- WOAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704704142; x=1705308942;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=XD+Jnl/IQEUwYUhUzl7LpqY5fOXTIO68nzQ9CAuBE1Q=;
- b=mj1rvUsplMAJZ9myiDsnHtPux6NNk8quHDuk5+OLchmRnVLm78qC0DArPL0h+UqxEU
- bfaAQ6hDZszn4e0kX94TI3+b5Yb61TLvfgYnVz3Uxs8JWfyHp+oyMjMAr2yofI9m+qWL
- M48dNRH4V25eL7CLcdwF+x315myggmfOh78n+ls05ck7E+9PDd0PydK5m9vuTc3X6KxD
- jTZcCKQO8e0DMjs+38Db44gMDaaluydoOds3N+6kk+2MYBJAVWJ7fH9dU5rF9PwP7E0d
- fAFmLnG+9dUjZxTlWaZKSrd+jzAeum/bcX/CX+CxHapboEjoUeq3dJMasir22flInZPM
- sGSg==
-X-Gm-Message-State: AOJu0YyZK899t1EbleqLlc3hIsbuciVjZDCfHWlXYmoWqV/+yZugjard
- ibn478mYtcjySKSy6dYdtiswtCboIecVCw==
-X-Google-Smtp-Source: AGHT+IHEfpDijrxobZS+UeK0n9Ldw8y21Cz8fJlgej/VnjcgUDe24FPtIx61AzaoGnSfBbodYdW/Vw==
-X-Received: by 2002:a05:600c:3583:b0:40e:4550:f35c with SMTP id
- p3-20020a05600c358300b0040e4550f35cmr739173wmq.129.1704704141964; 
- Mon, 08 Jan 2024 00:55:41 -0800 (PST)
-Received: from hades.. (ppp089210121239.access.hol.gr. [89.210.121.239])
- by smtp.gmail.com with ESMTPSA id
- fm7-20020a05600c0c0700b0040e4914f28dsm1028916wmb.18.2024.01.08.00.55.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jan 2024 00:55:41 -0800 (PST)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: xypron.glpk@gmx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
-	u-boot@lists.denx.de
-Subject: [PATCH v2] efi_loader: Clean up efi_dp_append and efi_dp_concat
-Date: Mon,  8 Jan 2024 10:55:33 +0200
-Message-Id: <20240108085534.951333-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.37.2
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=jC4Cu5f6SSt7X4nuA6IacpRFJ6xgYJrNYnQNM5uvWssQt2AyKCF8+zGU+c0Y9G1Yi12ClIv7OHuCmuPjfcn0f9sPn0c0sYaldURU6xf4MtNwtwvKZzXxmoQd4VFI8idDfZ/K+hF60wd/Bmkfc8gh3XSZFTQ1QTCehVAloSgX+uKiz2fIY3qYFrGDAbMc0n5c6mZ+gNCwQN+JldB0ewARgdLf5uDPBxFoXaG1lEeHpgNeI9/Pcdu75v8dPQ0dhlQl0At7zcJYtRq5jQnOQjs44rj+foKs2wXC9/vWRzkTmwNgZDbrMADrSXdSTeeAUcM06ZSEnvV063L9xBpWex4MFQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kHd8GuAFbF9YnXby/U2a83bJWdEUhfT8Fiee/dwfZ0o=;
+ b=Q/R+c5/ioFW881BW7ZO69ZaJ/H3YX02DlUC12qygcADDVf9fg6VrKs9QI+FtUI/bmZqVpvKn0RlzvPdUabfT6ASahfUNAJFG4YTmR6cQA9WVNaRTgjlb3SFEVTKCSnlaRqSp1L6WSi6eYdFSZg4mrP7q5yiAvC7R9G5fC/YMGa0pnDJl8OG8Dczt8hNk1k6KZ+2Mv7bf+MG8aEOIN/5yvuC92BJb2+zZgNDQhHNxIXNnLyuzNNF+ZbPPEc/S/lW9r3VqEGz5MK+jgepDR9UOVYOIc5QMgKS9ijknBNsSZXV2EftI2wp67uXZY/g3bWPdT80biAFGKP+od96f6WzBmA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kHd8GuAFbF9YnXby/U2a83bJWdEUhfT8Fiee/dwfZ0o=;
+ b=ZGfe3Aov/yDdZCmodFn+D0/BRsbGBdqOGbMsQrGlHp6ooa7vQiSYkUFiHybfM9DFKQnrY8MoMYXztvifvp1HvZNFWDyK0gRADjFWO5uFUfGyADu1sfAwGKLEI6X6EygZRxpoR53buY0DTmYLTqzwEpRCDJJ0swbLux+ImKdc4Ac=
+Received: from DM6PR17CA0018.namprd17.prod.outlook.com (2603:10b6:5:1b3::31)
+ by PH7PR12MB6563.namprd12.prod.outlook.com (2603:10b6:510:211::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.21; Mon, 8 Jan
+ 2024 09:25:26 +0000
+Received: from DS2PEPF00003447.namprd04.prod.outlook.com
+ (2603:10b6:5:1b3:cafe::24) by DM6PR17CA0018.outlook.office365.com
+ (2603:10b6:5:1b3::31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.21 via Frontend
+ Transport; Mon, 8 Jan 2024 09:25:25 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DS2PEPF00003447.mail.protection.outlook.com (10.167.17.74) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7181.12 via Frontend Transport; Mon, 8 Jan 2024 09:25:25 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Mon, 8 Jan
+ 2024 03:25:20 -0600
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Harini Katakam <harini.katakam@amd.com>, Manikanta Guntupalli
+ <manikanta.guntupalli@amd.com>, Neal Frager <neal.frager@amd.com>, "Radhey
+ Shyam Pandey" <radhey.shyam.pandey@amd.com>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>, Saeed Nowshadi <saeed.nowshadi@amd.com>, "Simon
+ Glass" <sjg@chromium.org>
+Subject: [PATCH] arm64: zynqmp: Replace '-' by '_' in fixed clock nodes
+Date: Mon, 8 Jan 2024 10:24:45 +0100
+Message-ID: <3979167636f0a5970a9ab642a4e0ea6a46b3f8d7.1704705872.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8240; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=5No8hG7lpgn0krOv3YjEkjbgFArO1XmL05tc2cf750s=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhtTZ+8Nrb2lbPrXdcP5N+NZ2n/1X9F+cLL9zMemu1Jr2d
+ yrqoieUO2JZGASZGGTFFFmkba6c2Vs5Y4rwxcNyMHNYmUCGMHBxCsBE7mUxLJjy6sXxyxXXojdM
+ 4j7IK7JJalvPngKGBW3ZL6Y3Gdx4OuvOnudVQaHCs8K0/AA=
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS2PEPF00003447:EE_|PH7PR12MB6563:EE_
+X-MS-Office365-Filtering-Correlation-Id: 82c5b988-8764-4368-a845-08dc102bbf33
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: Fm0lohjTOdydKjk01KHTVDsFB6gDM+rpLifUuRKFvgxJqmLcuHIj9zkE1g/A45dhevgqG5eRqmmlAF25HVoUaNQJTyQHfmQfGXEDBnWruA3BgO9vjU1w+0ZyOOAR2Gq8Nf4GVRsnhsZ00GE0TMk4HVpScqvtG1v3Pl171q5r553b3K5DC2ZccEN7/KHOsgY0jwatttP6+Q817yHZ74jaCQnFfnKd+M9W/oQ/OwHWMDJEK0n+wLj+j/1sYMK26vxbVF24B5VJGh/RZ+h+sX2fNwyJl/qro5nslKqC1LMkXRQe+oNN4GgrKVSCQRfSVN11YOvRl89cL78jACI54qE0mvh1z81QzqIJ0IoPtbkqAMvm7O2nnTLHFWrtpvEt8oR7KkAPBSvLfPCkB0kx+0PkNsPDvamHWFK1eKqf07YoX8Hi0gHzIv8vGhO9JtuF1OeSOd8NC+0/FhngmCu+uUZBUuMqtKl46JBegdkuT5ezLESkLBSxDa27KWGuAe3Z4MAG3uPbkoacDhUftWVclZtav6YnSWzAII7nH5lr61F5e3SzIKA0DEoSbgqr/EKLowReuDDYihdnzczBdKeCFCICdOgdIWyKDwobIQqqLBUEE9G4tnfrMimoNgUyPcUn5kCOyYM5b+l91TSHT3P0wP7QDR7r3pfPOcCHxNaiBMQGGaTD/Kn0lD7kb/74PL5NuRcvMy8RlpyW/Syfo+kyDYB20HCvm+0ZV0Acrf/WIkEv+uK0sOr5Wv9XKfomoiF7Ha1LT14talGWQi+BNDe9AARLSg==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(39860400002)(346002)(396003)(376002)(136003)(230922051799003)(1800799012)(451199024)(82310400011)(64100799003)(186009)(36840700001)(40470700004)(46966006)(6666004)(47076005)(478600001)(26005)(2616005)(83380400001)(336012)(16526019)(426003)(70206006)(70586007)(41300700001)(82740400003)(40480700001)(44832011)(36756003)(81166007)(2906002)(5660300002)(8936002)(8676002)(316002)(54906003)(110136005)(356005)(40460700003)(4326008)(36860700001)(86362001)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2024 09:25:25.6458 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 82c5b988-8764-4368-a845-08dc102bbf33
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF00003447.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6563
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,273 +128,259 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Looking back at the initrd storing functionality, we introduced three
-functions, efi_dp_append_or_concatenate(), efi_dp_append/concat(). In
-hindsight we could have simplified that by a lot. First of all none of
-the functions append anything. They all allocate a new device path and
-concatenate the contents of two device paths in one. A boolean parameter
-controls the final device path -- if that's true an end node is injected
-between the two device paths.
+Using '_' in node name is not recommended that's why convert them to use
+'-' instead.
 
-So let's rewrite this and make it a bit easier to read. Get rid of
-efi_dp_append(), efi_dp_concat() and rename
-efi_dp_append_or_concatenate() to efi_dp_concat(). This is far more
-intuitive and the only adjustment that is needed is an extra boolean
-argument on all callsites.
-
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
-Changes since v1:
-- move the size calculation in a single if
-- Clarify the subtype of the device path we are using on the end node
-- Rebase on top of -next
- cmd/eficonfig.c                            |  7 ++-
- cmd/efidebug.c                             |  6 +-
- include/efi_loader.h                       |  5 +-
- lib/efi_loader/efi_bootmgr.c               |  6 +-
- lib/efi_loader/efi_boottime.c              |  2 +-
- lib/efi_loader/efi_device_path.c           | 70 +++++++---------------
- lib/efi_loader/efi_device_path_utilities.c |  2 +-
- 7 files changed, 35 insertions(+), 63 deletions(-)
 
-diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
-index 34a59cb15d0d..8234e602b8fb 100644
---- a/cmd/eficonfig.c
-+++ b/cmd/eficonfig.c
-@@ -531,7 +531,7 @@ struct efi_device_path *eficonfig_create_device_path(struct efi_device_path *dp_
- 	dp = efi_dp_shorten(dp_volume);
- 	if (!dp)
- 		dp = dp_volume;
--	dp = efi_dp_append(dp, &fp->dp);
-+	dp = efi_dp_concat(dp, &fp->dp, false);
- 	free(buf);
+ arch/arm/dts/zynqmp-dlc21-revA.dts         |  4 ++--
+ arch/arm/dts/zynqmp-e-a2197-00-revA.dts    |  2 +-
+ arch/arm/dts/zynqmp-mini-emmc0.dts         |  2 +-
+ arch/arm/dts/zynqmp-mini-emmc1.dts         |  2 +-
+ arch/arm/dts/zynqmp-mini-qspi.dts          |  2 +-
+ arch/arm/dts/zynqmp-p-a2197-00-revA.dts    |  4 ++--
+ arch/arm/dts/zynqmp-sc-revB.dts            |  2 +-
+ arch/arm/dts/zynqmp-sck-kr-g-revA.dtso     | 12 ++++++------
+ arch/arm/dts/zynqmp-vp-x-a2785-00-revA.dts |  6 +++---
+ arch/arm/dts/zynqmp-vpk120-revA.dts        |  6 +++---
+ arch/arm/dts/zynqmp-zcu670-revA.dts        |  2 +-
+ arch/arm/dts/zynqmp-zcu670-revB.dts        |  2 +-
+ 12 files changed, 23 insertions(+), 23 deletions(-)
 
- 	return dp;
-@@ -1484,7 +1484,8 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
- 			ret = EFI_OUT_OF_RESOURCES;
- 			goto out;
- 		}
--		initrd_dp = efi_dp_append((const struct efi_device_path *)&id_dp, dp);
-+		initrd_dp = efi_dp_concat((const struct efi_device_path *)&id_dp,
-+					  dp, false);
- 		efi_free_pool(dp);
- 	}
-
-@@ -1495,7 +1496,7 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
- 	}
- 	final_dp_size = efi_dp_size(dp) + sizeof(END);
- 	if (initrd_dp) {
--		final_dp = efi_dp_concat(dp, initrd_dp);
-+		final_dp = efi_dp_concat(dp, initrd_dp, true);
- 		final_dp_size += efi_dp_size(initrd_dp) + sizeof(END);
- 	} else {
- 		final_dp = efi_dp_dup(dp);
-diff --git a/cmd/efidebug.c b/cmd/efidebug.c
-index e10fbf891a42..836014ab8eab 100644
---- a/cmd/efidebug.c
-+++ b/cmd/efidebug.c
-@@ -699,8 +699,8 @@ struct efi_device_path *create_initrd_dp(const char *dev, const char *part,
- 	if (!short_fp)
- 		short_fp = tmp_fp;
-
--	initrd_dp = efi_dp_append((const struct efi_device_path *)&id_dp,
--				  short_fp);
-+	initrd_dp = efi_dp_concat((const struct efi_device_path *)&id_dp,
-+				  short_fp, false);
-
- out:
- 	efi_free_pool(tmp_dp);
-@@ -916,7 +916,7 @@ static int do_efi_boot_add(struct cmd_tbl *cmdtp, int flag,
- 		goto out;
- 	}
-
--	final_fp = efi_dp_concat(file_path, initrd_dp);
-+	final_fp = efi_dp_concat(file_path, initrd_dp, true);
- 	if (!final_fp) {
- 		printf("Cannot create final device path\n");
- 		r = CMD_RET_FAILURE;
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 34e7fbbf1840..d3725041b20d 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -819,8 +819,6 @@ efi_uintn_t efi_dp_instance_size(const struct efi_device_path *dp);
- /* size of multi-instance device path excluding end node */
- efi_uintn_t efi_dp_size(const struct efi_device_path *dp);
- struct efi_device_path *efi_dp_dup(const struct efi_device_path *dp);
--struct efi_device_path *efi_dp_append(const struct efi_device_path *dp1,
--				      const struct efi_device_path *dp2);
- struct efi_device_path *efi_dp_append_node(const struct efi_device_path *dp,
- 					   const struct efi_device_path *node);
- /* Create a device path node of given type, sub-type, length */
-@@ -937,7 +935,8 @@ struct efi_load_option {
- struct efi_device_path *efi_dp_from_lo(struct efi_load_option *lo,
- 				       const efi_guid_t *guid);
- struct efi_device_path *efi_dp_concat(const struct efi_device_path *dp1,
--				      const struct efi_device_path *dp2);
-+				      const struct efi_device_path *dp2,
-+				      bool split_end_node);
- struct efi_device_path *search_gpt_dp_node(struct efi_device_path *device_path);
- efi_status_t efi_deserialize_load_option(struct efi_load_option *lo, u8 *data,
- 					 efi_uintn_t *size);
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index a032d3ae04e2..dd2dd23c7b5a 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -143,7 +143,7 @@ static efi_status_t try_load_from_file_path(efi_handle_t *fs_handles,
- 		if (!dp)
- 			continue;
-
--		dp = efi_dp_append(dp, fp);
-+		dp = efi_dp_concat(dp, fp, false);
- 		if (!dp)
- 			continue;
-
-@@ -1579,8 +1579,8 @@ efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size)
- 			goto out;
- 		msg_path = file_path;
- 	} else {
--		file_path = efi_dp_append(bootefi_device_path,
--					  bootefi_image_path);
-+		file_path = efi_dp_concat(bootefi_device_path,
-+					  bootefi_image_path, false);
- 		msg_path = bootefi_image_path;
- 		log_debug("Loaded from disk\n");
- 	}
-diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-index c579d89211be..1951291747cd 100644
---- a/lib/efi_loader/efi_boottime.c
-+++ b/lib/efi_loader/efi_boottime.c
-@@ -1816,7 +1816,7 @@ efi_status_t efi_setup_loaded_image(struct efi_device_path *device_path,
- 	if (device_path) {
- 		info->device_handle = efi_dp_find_obj(device_path, NULL, NULL);
-
--		dp = efi_dp_append(device_path, file_path);
-+		dp = efi_dp_concat(device_path, file_path, false);
- 		if (!dp) {
- 			ret = EFI_OUT_OF_RESOURCES;
- 			goto failure;
-diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
-index 8dbd8105ae26..500fa10d405f 100644
---- a/lib/efi_loader/efi_device_path.c
-+++ b/lib/efi_loader/efi_device_path.c
-@@ -271,30 +271,27 @@ struct efi_device_path *efi_dp_dup(const struct efi_device_path *dp)
- }
-
- /**
-- * efi_dp_append_or_concatenate() - Append or concatenate two device paths.
-- *				    Concatenated device path will be separated
-- *				    by a sub-type 0xff end node
-+ * efi_dp_concat() - Concatenate two device paths and add and terminate them
-+ *                   with an end node.
-  *
-- * @dp1:	First device path
-- * @dp2:	Second device path
-- * @concat:	If true the two device paths will be concatenated and separated
-- *		by an end of entrire device path sub-type 0xff end node.
-- *		If true the second device path will be appended to the first and
-- *		terminated by an end node
-+ * @dp1:	    First device path
-+ * @dp2:	    Second device path
-+ * @split_end_node: If true the two device paths will be concatenated and
-+ *                  separated by an end node (DEVICE_PATH_SUB_TYPE_END).
-+ *		    If false the second device path will be concatenated to the
-+ *		    first one as-is.
-  *
-  * Return:
-  * concatenated device path or NULL. Caller must free the returned value
-  */
--static struct
--efi_device_path *efi_dp_append_or_concatenate(const struct efi_device_path *dp1,
--					      const struct efi_device_path *dp2,
--					      bool concat)
-+struct
-+efi_device_path *efi_dp_concat(const struct efi_device_path *dp1,
-+			       const struct efi_device_path *dp2,
-+			       bool split_end_node)
- {
- 	struct efi_device_path *ret;
--	size_t end_size = sizeof(END);
-+	size_t end_size;
-
--	if (concat)
--		end_size = 2 * sizeof(END);
- 	if (!dp1 && !dp2) {
- 		/* return an end node */
- 		ret = efi_dp_dup(&END);
-@@ -306,14 +303,20 @@ efi_device_path *efi_dp_append_or_concatenate(const struct efi_device_path *dp1,
- 		/* both dp1 and dp2 are non-null */
- 		unsigned sz1 = efi_dp_size(dp1);
- 		unsigned sz2 = efi_dp_size(dp2);
--		void *p = efi_alloc(sz1 + sz2 + end_size);
-+		void *p;
-+
-+		if (split_end_node)
-+			end_size = 2 * sizeof(END);
-+		else
-+			end_size = sizeof(END);
-+		p = efi_alloc(sz1 + sz2 + end_size);
- 		if (!p)
- 			return NULL;
- 		ret = p;
- 		memcpy(p, dp1, sz1);
- 		p += sz1;
-
--		if (concat) {
-+		if (split_end_node) {
- 			memcpy(p, &END, sizeof(END));
- 			p += sizeof(END);
- 		}
-@@ -327,37 +330,6 @@ efi_device_path *efi_dp_append_or_concatenate(const struct efi_device_path *dp1,
- 	return ret;
- }
-
--/**
-- * efi_dp_append() - Append a device to an existing device path.
-- *
-- * @dp1:	First device path
-- * @dp2:	Second device path
-- *
-- * Return:
-- * concatenated device path or NULL. Caller must free the returned value
-- */
--struct efi_device_path *efi_dp_append(const struct efi_device_path *dp1,
--				      const struct efi_device_path *dp2)
--{
--	return efi_dp_append_or_concatenate(dp1, dp2, false);
--}
--
--/**
-- * efi_dp_concat() - Concatenate 2 device paths. The final device path will
-- *                   contain two device paths separated by and end node (0xff).
-- *
-- * @dp1:	First device path
-- * @dp2:	Second device path
-- *
-- * Return:
-- * concatenated device path or NULL. Caller must free the returned value
-- */
--struct efi_device_path *efi_dp_concat(const struct efi_device_path *dp1,
--				      const struct efi_device_path *dp2)
--{
--	return efi_dp_append_or_concatenate(dp1, dp2, true);
--}
--
- struct efi_device_path *efi_dp_append_node(const struct efi_device_path *dp,
- 					   const struct efi_device_path *node)
- {
-diff --git a/lib/efi_loader/efi_device_path_utilities.c b/lib/efi_loader/efi_device_path_utilities.c
-index 844d8acd67c0..c95dbfa9b5f6 100644
---- a/lib/efi_loader/efi_device_path_utilities.c
-+++ b/lib/efi_loader/efi_device_path_utilities.c
-@@ -76,7 +76,7 @@ static struct efi_device_path * EFIAPI append_device_path(
- 	const struct efi_device_path *src2)
- {
- 	EFI_ENTRY("%pD, %pD", src1, src2);
--	return EFI_EXIT(efi_dp_append(src1, src2));
-+	return EFI_EXIT(efi_dp_concat(src1, src2, false));
- }
-
- /*
---
-2.37.2
+diff --git a/arch/arm/dts/zynqmp-dlc21-revA.dts b/arch/arm/dts/zynqmp-dlc21-revA.dts
+index f737004d7943..9dabee3f9985 100644
+--- a/arch/arm/dts/zynqmp-dlc21-revA.dts
++++ b/arch/arm/dts/zynqmp-dlc21-revA.dts
+@@ -43,13 +43,13 @@
+ 		reg = <0 0 0 0x80000000>, <0x8 0 0x3 0x80000000>;
+ 	};
+ 
+-	si5332_1: si5332_1 { /* clk0_sgmii - u142 */
++	si5332_1: si5332-1 { /* clk0_sgmii - u142 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <125000000>;
+ 	};
+ 
+-	si5332_2: si5332_2 { /* clk1_usb - u142 */
++	si5332_2: si5332-2 { /* clk1_usb - u142 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <26000000>;
+diff --git a/arch/arm/dts/zynqmp-e-a2197-00-revA.dts b/arch/arm/dts/zynqmp-e-a2197-00-revA.dts
+index cc57c2a1b0be..f1b0a4aa65dd 100644
+--- a/arch/arm/dts/zynqmp-e-a2197-00-revA.dts
++++ b/arch/arm/dts/zynqmp-e-a2197-00-revA.dts
+@@ -43,7 +43,7 @@
+ 		reg = <0x0 0x0 0x0 0x80000000>;
+ 	};
+ 
+-	si5332_1: si5332_1 { /* u142 - GEM0 */
++	si5332_1: si5332-1 { /* u142 - GEM0 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <125000000>;
+diff --git a/arch/arm/dts/zynqmp-mini-emmc0.dts b/arch/arm/dts/zynqmp-mini-emmc0.dts
+index 02e80bd85e1a..7823c58cb272 100644
+--- a/arch/arm/dts/zynqmp-mini-emmc0.dts
++++ b/arch/arm/dts/zynqmp-mini-emmc0.dts
+@@ -35,7 +35,7 @@
+ 		bootph-all;
+ 	};
+ 
+-	clk_xin: clk_xin {
++	clk_xin: clk-xin {
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <200000000>;
+diff --git a/arch/arm/dts/zynqmp-mini-emmc1.dts b/arch/arm/dts/zynqmp-mini-emmc1.dts
+index ce1cdb207538..2f6ba95073ab 100644
+--- a/arch/arm/dts/zynqmp-mini-emmc1.dts
++++ b/arch/arm/dts/zynqmp-mini-emmc1.dts
+@@ -35,7 +35,7 @@
+ 		bootph-all;
+ 	};
+ 
+-	clk_xin: clk_xin {
++	clk_xin: clk-xin {
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <200000000>;
+diff --git a/arch/arm/dts/zynqmp-mini-qspi.dts b/arch/arm/dts/zynqmp-mini-qspi.dts
+index ee8be5360004..e35317f3e2d4 100644
+--- a/arch/arm/dts/zynqmp-mini-qspi.dts
++++ b/arch/arm/dts/zynqmp-mini-qspi.dts
+@@ -53,7 +53,7 @@
+ 			#size-cells = <0>;
+ 		};
+ 
+-		misc_clk: misc_clk {
++		misc_clk: misc-clk {
+ 			compatible = "fixed-clock";
+ 			#clock-cells = <0>;
+ 			clock-frequency = <125000000>;
+diff --git a/arch/arm/dts/zynqmp-p-a2197-00-revA.dts b/arch/arm/dts/zynqmp-p-a2197-00-revA.dts
+index 9acccad40e77..5a60b86a574e 100644
+--- a/arch/arm/dts/zynqmp-p-a2197-00-revA.dts
++++ b/arch/arm/dts/zynqmp-p-a2197-00-revA.dts
+@@ -43,13 +43,13 @@
+ 		reg = <0x0 0x0 0x0 0x80000000>;
+ 	};
+ 
+-	si5332_1: si5332_1 { /* clk0_sgmii - u142 */
++	si5332_1: si5332-1 { /* clk0_sgmii - u142 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <125000000>;
+ 	};
+ 
+-	si5332_2: si5332_2 { /* clk1_usb - u142 */
++	si5332_2: si5332-2 { /* clk1_usb - u142 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <27000000>;
+diff --git a/arch/arm/dts/zynqmp-sc-revB.dts b/arch/arm/dts/zynqmp-sc-revB.dts
+index f7349fdc3b4c..8517bdad6f47 100644
+--- a/arch/arm/dts/zynqmp-sc-revB.dts
++++ b/arch/arm/dts/zynqmp-sc-revB.dts
+@@ -71,7 +71,7 @@
+ 		};
+ 	};
+ 
+-	si5332_2: si5332_2 { /* u42 */
++	si5332_2: si5332-2 { /* u42 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <26000000>;
+diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
+index 57cd9ba13e78..7717abf7bd8a 100644
+--- a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
++++ b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
+@@ -25,37 +25,37 @@
+ 		io-channels = <&u14 0>, <&u14 1>, <&u14 2>;
+ 	};
+ 
+-	si5332_0: si5332_0 { /* u17 - GEM0/1 */
++	si5332_0: si5332-0 { /* u17 - GEM0/1 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <125000000>;
+ 	};
+ 
+-	si5332_1: si5332_1 { /* u17 - DP */
++	si5332_1: si5332-1 { /* u17 - DP */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <27000000>;
+ 	};
+ 
+-	si5332_2: si5332_2 { /* u17 - USB */
++	si5332_2: si5332-2 { /* u17 - USB */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <26000000>;
+ 	};
+ 
+-	si5332_3: si5332_3 { /* u17 - SFP+ */
++	si5332_3: si5332-3 { /* u17 - SFP+ */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <156250000>;
+ 	};
+ 
+-	si5332_4: si5332_4 { /* u17 - GEM2 */
++	si5332_4: si5332-4 { /* u17 - GEM2 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <25000000>;
+ 	};
+ 
+-	si5332_5: si5332_5 { /* u17 - GEM3 */
++	si5332_5: si5332-5 { /* u17 - GEM3 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <25000000>;
+diff --git a/arch/arm/dts/zynqmp-vp-x-a2785-00-revA.dts b/arch/arm/dts/zynqmp-vp-x-a2785-00-revA.dts
+index 088545c87cee..2a3bbe170472 100644
+--- a/arch/arm/dts/zynqmp-vp-x-a2785-00-revA.dts
++++ b/arch/arm/dts/zynqmp-vp-x-a2785-00-revA.dts
+@@ -65,19 +65,19 @@
+ 		};
+ 	};
+ 
+-	si5332_0: si5332_0 { /* ps_ref_clk - u142 */
++	si5332_0: si5332-0 { /* ps_ref_clk - u142 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <33333333>;
+ 	};
+ 
+-	si5332_1: si5332_1 { /* clk0_sgmii - u142 */
++	si5332_1: si5332-1 { /* clk0_sgmii - u142 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <33333333>; /* FIXME */
+ 	};
+ 
+-	si5332_2: si5332_2 { /* clk1_usb - u142 */
++	si5332_2: si5332-2 { /* clk1_usb - u142 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <27000000>;
+diff --git a/arch/arm/dts/zynqmp-vpk120-revA.dts b/arch/arm/dts/zynqmp-vpk120-revA.dts
+index fa6046eb95c4..e0e4f1b13ada 100644
+--- a/arch/arm/dts/zynqmp-vpk120-revA.dts
++++ b/arch/arm/dts/zynqmp-vpk120-revA.dts
+@@ -65,19 +65,19 @@
+ 		};
+ 	};
+ 
+-	si5332_0: si5332_0 { /* ps_ref_clk */
++	si5332_0: si5332-0 { /* ps_ref_clk */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <33333333>;
+ 	};
+ 
+-	si5332_1: si5332_1 { /* clk0_sgmii */
++	si5332_1: si5332-1 { /* clk0_sgmii */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <33333333>; /* FIXME */
+ 	};
+ 
+-	si5332_2: si5332_2 { /* clk1_usb */
++	si5332_2: si5332-2 { /* clk1_usb */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <27000000>;
+diff --git a/arch/arm/dts/zynqmp-zcu670-revA.dts b/arch/arm/dts/zynqmp-zcu670-revA.dts
+index 76410de1edca..7f70904f44e7 100644
+--- a/arch/arm/dts/zynqmp-zcu670-revA.dts
++++ b/arch/arm/dts/zynqmp-zcu670-revA.dts
+@@ -131,7 +131,7 @@
+ 		clock-frequency = <48000000>;
+ 	};
+ 
+-	si5381_6: si5381_6 { /* refclk_usb3 - u43 */
++	si5381_6: si5381-6 { /* refclk_usb3 - u43 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <26000000>;
+diff --git a/arch/arm/dts/zynqmp-zcu670-revB.dts b/arch/arm/dts/zynqmp-zcu670-revB.dts
+index c2dd9f696bf0..0adb2062aef1 100644
+--- a/arch/arm/dts/zynqmp-zcu670-revB.dts
++++ b/arch/arm/dts/zynqmp-zcu670-revB.dts
+@@ -131,7 +131,7 @@
+ 		clock-frequency = <48000000>;
+ 	};
+ 
+-	si5381_6: si5381_6 { /* refclk_usb3 - u43 */
++	si5381_6: si5381-6 { /* refclk_usb3 - u43 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <26000000>;
+-- 
+2.36.1
 
