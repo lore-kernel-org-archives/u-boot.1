@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D49AEC4707C
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 10:52:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87106C3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 10:52:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6334387A77;
+	by phobos.denx.de (Postfix) with ESMTP id D39AC87A83;
 	Mon,  8 Jan 2024 11:51:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jByd5OdU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KJYAZQ0I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B0B787A4B; Mon,  8 Jan 2024 11:51:02 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 5247487A34; Mon,  8 Jan 2024 11:51:04 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D86487A71
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 11:51:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DAEE87A78
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 11:51:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a28cc85e6b5so171631266b.1
- for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 02:51:00 -0800 (PST)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-555f95cc2e4so1796655a12.3
+ for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 02:51:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704711060; x=1705315860; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1704711061; x=1705315861; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kXOgRnSofkv/Njfu3qoE2KZG7UQG2XPkPVhPpkOxYeU=;
- b=jByd5OdUMjySUHs09ysjg0EK17x7DqwYF1mlYp0VjoBJI4CB+jzPlfmW+KGsfqffKi
- Du9ANfifsfFgimbMglPOrDI5G0axDpc3O46XAkIC0GKjGPHCSmsnvDpxYFjkuTQ5gy70
- PbZCKS159ti59Mr9x0aN2FpYa5ZX2HuwTq5rSLVYTXSMLnevczz6Xj5eL6x51d3iViF6
- EA/HuahNuF9oA96Uzj8vff0JwWDK+LqDKxJkF0eVBaeb61rcSlgpQEJW/UFOhQNHrZV5
- dTF13ZpF3qhqItSiu5NI311c+hQJ7wxAD9KWyRV7uJIw77UzQpYb803lDT0PVhAPvIie
- foUA==
+ bh=6NKP1XPhkHwbFyXAe8mNVRUMAxRgxeIZ/pJsiBhhklA=;
+ b=KJYAZQ0InbY1J8Afg6JCOoWCPXGI7ExCtr87vqaAz/Lh10OXlKLpqUPldLsv2q74HL
+ 60j/hPGqqJAAoVQQGAddIbNyJbNY20GvpRjvvHGVy6zNA1gtzljF2OV4rPl0IXpeY0n0
+ Z8cH4QRfWbRIXU0Cu2GjPWJK5Mj26zF31d1cizfZ04KdE/HcH5JffT+bx6FyzdDR0D2y
+ vMM1s8gx86u9hgbCEq/ET5VuZXjVXHqTEi6HQrgrw2YtUb6P/qxMKQQHmSLd5eveXg4w
+ VgQHBjWmWqyAu5tKx2tYoL/ih5DYfMcCaL5eQbkrn4oeF8dRztZaleFnbQepj91q4t8u
+ p9MQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704711060; x=1705315860;
+ d=1e100.net; s=20230601; t=1704711061; x=1705315861;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kXOgRnSofkv/Njfu3qoE2KZG7UQG2XPkPVhPpkOxYeU=;
- b=WIxR3uVH2a1YEw124NrJ/yVZ+/sS/R8Cz0KNZCFvnNDpZsqr1zMq2XeYAVxpUZMtoo
- Rm15yHB70zVQ2uYEwsaV6N4wAjgs7GO3xrACd/yK+uf/y+ccDIhoXnf/RNPB6O9Vg4bl
- BZdEefUZG/7aPbs6vxItcfb74/L+fnG3tEQxN7jNdxC/SVLgpcBdyu/SxmscMxNXu8uY
- Ujq1a5SO4tQhV9AhmccjdZpNtLlbOpc+hlK3RIKp2jOYS+wITvoCORc13XLDmRb/lUkh
- +ke1ME95k3vY3NBS7R0oAucup+chtgDtWNjOsnE4c7/MR0Mf4KUShPq6UHEdrpkXRr5R
- Il1g==
-X-Gm-Message-State: AOJu0YxDanQEqZufV/SJnkD7ZiQIILfve8IKK3jtXDEwNrRjRQb2JaNq
- 0R3dl/ahZKbLx+1aIJ6IMDI=
-X-Google-Smtp-Source: AGHT+IERJPUvTJeCkvQbKU7Ot1oVWs41rCCSuJvYRFVJkbd+bl2MXwMeyv997GGU5RQKCSt6z0d6eA==
-X-Received: by 2002:a17:907:1b0d:b0:a28:8cb2:e5a5 with SMTP id
- mp13-20020a1709071b0d00b00a288cb2e5a5mr1432290ejc.25.1704711059514; 
- Mon, 08 Jan 2024 02:50:59 -0800 (PST)
+ bh=6NKP1XPhkHwbFyXAe8mNVRUMAxRgxeIZ/pJsiBhhklA=;
+ b=h6TJigX6gEFH3zd3c6yv/hUpPvtKkSN9aokr7IgkwtZHlM/LhHpRNjuU4mpw0TqHjc
+ msVw61c4ZJwovL2ToNFxC7P2OZvqu6kezMhCaw2gborG4HYAL0mrQVsEPBeh6Fq8T2JC
+ OaT5CNb+dKkYyasWFoNZADGDrkfPF/4oTaBUVM8KUZcOYGIhnYdbfDV2Asm96X7D0MFd
+ WzqqJaR78d/sE8GHsJQeuHudNcvgxwl5VOylwEAEjWG29SBKCw2Ey/PO8QddvmKwjJrA
+ DaeY5EkHv+KcU+bCxv9/rh+t6wL7vp9pdZxxdAiQ2O27CHILPkzjIV7uaWg+3mOQUpst
+ aGfg==
+X-Gm-Message-State: AOJu0YxIuDZagqVkkVmKFhHBJAxrlI4PHFD04XchK/RWiYvJhcXkHS7e
+ splk5rrx9Lw237cu2iLkwuw=
+X-Google-Smtp-Source: AGHT+IFCmJjmtdJM1TrAWomWmmdXzROctG7mxxsWBQlxpG0kXkpZVaAbfpcHTf/3gRemkS1W00xmng==
+X-Received: by 2002:a17:906:220c:b0:a27:aa9c:fed4 with SMTP id
+ s12-20020a170906220c00b00a27aa9cfed4mr1413158ejs.100.1704711060824; 
+ Mon, 08 Jan 2024 02:51:00 -0800 (PST)
 Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
- 26-20020a170906309a00b00a26ae4fb50asm3821141ejv.89.2024.01.08.02.50.58
+ 26-20020a170906309a00b00a26ae4fb50asm3821141ejv.89.2024.01.08.02.50.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jan 2024 02:50:59 -0800 (PST)
+ Mon, 08 Jan 2024 02:51:00 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Anatolij Gustschin <agust@denx.de>,
  Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 7/9] video: tegra20: add MIPI calibration driver
-Date: Mon,  8 Jan 2024 12:50:00 +0200
-Message-Id: <20240108105002.243149-8-clamor95@gmail.com>
+Subject: [PATCH v2 8/9] video: tegra20: dsi: add T114 support
+Date: Mon,  8 Jan 2024 12:50:01 +0200
+Message-Id: <20240108105002.243149-9-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240108105002.243149-1-clamor95@gmail.com>
 References: <20240108105002.243149-1-clamor95@gmail.com>
@@ -91,222 +91,219 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dedicated MIPI calibration driver is used on T114 and newer. Before
-T114 MIPI calibration registers were part of VI and CSI.
+Existing Tegra DSI driver mostly fits T114 apart MIPI calibration
+which on T114 has dedicated driver. To resolve this MIPI calibration
+logic was split for pre-T114 and T114+ devices.
 
+Tested-by: Ion Agorria <ion@agorria.com> # HTC One X
 Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # Nvidia Tegratab T114
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/tegra20/Makefile     |   2 +-
- drivers/video/tegra20/tegra-mipi.c | 188 +++++++++++++++++++++++++++++
- 2 files changed, 189 insertions(+), 1 deletion(-)
- create mode 100644 drivers/video/tegra20/tegra-mipi.c
+ drivers/video/tegra20/tegra-dsi.c             | 78 ++++++++++++++++++-
+ .../video/tegra20/tegra-dsi.h                 | 24 +++++-
+ 2 files changed, 96 insertions(+), 6 deletions(-)
+ rename arch/arm/include/asm/arch-tegra30/dsi.h => drivers/video/tegra20/tegra-dsi.h (90%)
 
-diff --git a/drivers/video/tegra20/Makefile b/drivers/video/tegra20/Makefile
-index f0b534c579..a75aea2a87 100644
---- a/drivers/video/tegra20/Makefile
-+++ b/drivers/video/tegra20/Makefile
-@@ -1,5 +1,5 @@
- # SPDX-License-Identifier: GPL-2.0+
+diff --git a/drivers/video/tegra20/tegra-dsi.c b/drivers/video/tegra20/tegra-dsi.c
+index 72b91ed26b..f4743e8458 100644
+--- a/drivers/video/tegra20/tegra-dsi.c
++++ b/drivers/video/tegra20/tegra-dsi.c
+@@ -20,17 +20,24 @@
+ #include <asm/gpio.h>
+ #include <asm/io.h>
+ #include <asm/arch/clock.h>
+-#include <asm/arch-tegra30/dsi.h>
  
- obj-$(CONFIG_VIDEO_TEGRA20) += tegra-dc.o
--obj-$(CONFIG_VIDEO_DSI_TEGRA30) += tegra-dsi.o mipi-phy.o
-+obj-$(CONFIG_VIDEO_DSI_TEGRA30) += tegra-dsi.o tegra-mipi.o mipi-phy.o
- obj-$(CONFIG_TEGRA_BACKLIGHT_PWM) += tegra-pwm-backlight.o
-diff --git a/drivers/video/tegra20/tegra-mipi.c b/drivers/video/tegra20/tegra-mipi.c
-new file mode 100644
-index 0000000000..2df3c1a994
---- /dev/null
-+++ b/drivers/video/tegra20/tegra-mipi.c
-@@ -0,0 +1,188 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2013 NVIDIA Corporation
-+ * Copyright (c) 2023 Svyatoslav Ryhel <clamor95@gmail.com>
-+ */
-+
-+#include <dm.h>
-+#include <clk.h>
-+#include <misc.h>
-+#include <linux/delay.h>
-+#include <linux/iopoll.h>
-+
-+#include <asm/io.h>
-+
-+/* MIPI control registers 0x00 ~ 0x60 */
-+struct mipi_ctlr {
-+	uint mipi_cal_ctrl;
-+	uint mipi_cal_autocal_ctrl;
-+	uint mipi_cal_status;
-+
-+	uint unused1[2];
-+
-+	uint mipi_cal_config_csia;
-+	uint mipi_cal_config_csib;
-+	uint mipi_cal_config_csic;
-+	uint mipi_cal_config_csid;
-+	uint mipi_cal_config_csie;
-+
-+	uint unused2[4];
-+
-+	uint mipi_cal_config_dsia;
-+	uint mipi_cal_config_dsib;
-+	uint mipi_cal_config_dsic;
-+	uint mipi_cal_config_dsid;
-+
-+	uint unused3[4];
-+
-+	uint mipi_cal_bias_pad_cfg0;
-+	uint mipi_cal_bias_pad_cfg1;
-+	uint mipi_cal_bias_pad_cfg2;
+ #include "tegra-dc.h"
++#include "tegra-dsi.h"
+ #include "mipi-phy.h"
+ 
++/* List of supported DSI bridges */
++enum {
++	DSI_V0,
++	DSI_V1,
 +};
 +
-+#define MIPI_CAL_CTRL_NOISE_FILTER(x)	(((x) & 0xf) << 26)
-+#define MIPI_CAL_CTRL_PRESCALE(x)	(((x) & 0x3) << 24)
-+#define MIPI_CAL_CTRL_CLKEN_OVR		BIT(4)
-+#define MIPI_CAL_CTRL_START		BIT(0)
+ struct tegra_dsi_priv {
+ 	struct mipi_dsi_host host;
+ 	struct mipi_dsi_device device;
+ 	struct mipi_dphy_timing dphy_timing;
+ 
+ 	struct udevice *panel;
++	struct udevice *mipi;
+ 	struct display_timing timing;
+ 
+ 	struct dsi_ctlr *dsi;
+@@ -41,6 +48,8 @@ struct tegra_dsi_priv {
+ 	int dsi_clk;
+ 	int video_fifo_depth;
+ 	int host_fifo_depth;
 +
-+#define MIPI_CAL_STATUS_DONE		BIT(16)
-+#define MIPI_CAL_STATUS_ACTIVE		BIT(0)
-+
-+#define MIPI_CAL_OVERIDE(x)		(((x) & 0x1) << 30)
-+#define MIPI_CAL_SEL(x)			(((x) & 0x1) << 21)
-+#define MIPI_CAL_HSPDOS(x)		(((x) & 0x1f) << 16)
-+#define MIPI_CAL_HSPUOS(x)		(((x) & 0x1f) << 8)
-+#define MIPI_CAL_TERMOS(x)		(((x) & 0x1f) << 0)
-+
-+#define MIPI_CAL_BIAS_PAD_PDVCLAMP	BIT(1)
-+#define MIPI_CAL_BIAS_PAD_E_VCLAMP_REF	BIT(0)
-+
-+#define MIPI_CAL_BIAS_PAD_DRV_DN_REF(x) (((x) & 0x7) << 16)
-+#define MIPI_CAL_BIAS_PAD_DRV_UP_REF(x) (((x) & 0x7) << 8)
-+
-+#define MIPI_CAL_BIAS_PAD_VCLAMP(x)	(((x) & 0x7) << 16)
-+#define MIPI_CAL_BIAS_PAD_VAUXP(x)	(((x) & 0x7) << 4)
-+#define MIPI_CAL_BIAS_PAD_PDVREG	BIT(1)
-+
-+struct tegra_mipi_priv {
-+	struct mipi_ctlr	*mipi;
-+	struct clk		*mipi_cal;
-+};
-+
-+static int tegra_mipi_calibrate(struct udevice *dev, int offset, const void *buf,
-+				int size)
++	u32 version;
+ };
+ 
+ static void tegra_dc_enable_controller(struct udevice *dev)
+@@ -501,6 +510,41 @@ static void tegra_dsi_pad_calibrate(struct dsi_pad_ctrl_reg *pad)
+ 	writel(value, TEGRA_VI_BASE + (CSI_CIL_PAD_CONFIG << 2));
+ }
+ 
++static void tegra_dsi_mipi_calibrate(struct tegra_dsi_priv *priv)
 +{
-+	struct tegra_mipi_priv *priv = dev_get_priv(dev);
++	struct dsi_pad_ctrl_reg *pad = &priv->dsi->pad;
 +	u32 value;
++	int ret;
 +
-+	value = MIPI_CAL_BIAS_PAD_DRV_DN_REF(0x2) |
-+		MIPI_CAL_BIAS_PAD_DRV_UP_REF(0x0);
-+	writel(value, &priv->mipi->mipi_cal_bias_pad_cfg1);
++	ret = misc_set_enabled(priv->mipi, true);
++	if (ret)
++		log_debug("%s: failed to enable MIPI calibration: %d\n",
++			  __func__, ret);
 +
-+	value = readl(&priv->mipi->mipi_cal_bias_pad_cfg2);
-+	value &= ~MIPI_CAL_BIAS_PAD_VCLAMP(0x7);
-+	value &= ~MIPI_CAL_BIAS_PAD_VAUXP(0x7);
-+	writel(value, &priv->mipi->mipi_cal_bias_pad_cfg2);
++	writel(0, &pad->pad_ctrl);
++	writel(0, &pad->pad_ctrl_1);
++	writel(0, &pad->pad_ctrl_2);
++	writel(0, &pad->pad_ctrl_3);
++	writel(0, &pad->pad_ctrl_4);
 +
-+	value = MIPI_CAL_OVERIDE(0x0) | MIPI_CAL_SEL(0x1) |
-+		MIPI_CAL_HSPDOS(0x0) | MIPI_CAL_HSPUOS(0x4) |
-+		MIPI_CAL_TERMOS(0x5);
-+	writel(value, &priv->mipi->mipi_cal_config_dsia);
-+	writel(value, &priv->mipi->mipi_cal_config_dsib);
++	/* DSI pad enable */
++	value = DSI_PAD_CONTROL_VS1_PULLDN(0) | DSI_PAD_CONTROL_VS1_PDIO(0);
++	writel(value, &pad->pad_ctrl);
 +
-+	/* Deselect PAD C */
-+	value = readl(&priv->mipi->mipi_cal_config_dsic);
-+	value &= ~(MIPI_CAL_SEL(0x1));
-+	writel(value, &priv->mipi->mipi_cal_config_dsic);
++	value = DSI_PAD_SLEW_UP(0x7) | DSI_PAD_SLEW_DN(0x7) |
++		DSI_PAD_LP_UP(0x1) | DSI_PAD_LP_DN(0x1) |
++		DSI_PAD_OUT_CLK(0x0);
++	writel(value, &pad->pad_ctrl_2);
 +
-+	/* Deselect PAD D */
-+	value = readl(&priv->mipi->mipi_cal_config_dsid);
-+	value &= ~(MIPI_CAL_SEL(0x1));
-+	writel(value, &priv->mipi->mipi_cal_config_dsid);
++	value = DSI_PAD_PREEMP_PD_CLK(0x3) | DSI_PAD_PREEMP_PU_CLK(0x3) |
++		DSI_PAD_PREEMP_PD(0x03) | DSI_PAD_PREEMP_PU(0x3);
++	writel(value, &pad->pad_ctrl_3);
 +
-+	value = readl(&priv->mipi->mipi_cal_ctrl);
-+	value &= ~MIPI_CAL_CTRL_NOISE_FILTER(0xf);
-+	value &= ~MIPI_CAL_CTRL_PRESCALE(0x3);
-+	value |= MIPI_CAL_CTRL_NOISE_FILTER(0xa) |
-+		 MIPI_CAL_CTRL_PRESCALE(0x2) |
-+		 MIPI_CAL_CTRL_CLKEN_OVR;
-+	writel(value, &priv->mipi->mipi_cal_ctrl);
++	ret = misc_write(priv->mipi, 0, NULL, 0);
++	if (ret)
++		log_debug("%s: MIPI calibration failed %d\n", __func__, ret);
++}
 +
-+	/* clear any pending status bits */
-+	value = readl(&priv->mipi->mipi_cal_status);
-+	writel(value, &priv->mipi->mipi_cal_status);
-+
-+	value = readl(&priv->mipi->mipi_cal_ctrl);
-+	value |= MIPI_CAL_CTRL_START;
-+	writel(value, &priv->mipi->mipi_cal_ctrl);
-+
-+	/*
-+	 * Wait for min 72uS to let calibration logic finish calibration
-+	 * sequence codes before waiting for pads idle state to apply the
-+	 * results.
+ static void tegra_dsi_set_timeout(struct dsi_timeout_reg *rtimeout,
+ 				  unsigned long bclk,
+ 				  unsigned int vrefresh)
+@@ -664,10 +708,25 @@ static int tegra_dsi_encoder_enable(struct udevice *dev)
+ 	u32 value;
+ 	int ret;
+ 
++	/* If for some reasone DSI is enabled then it needs to
++	 * be disabled in order for the panel initialization
++	 * commands to be properly sent.
 +	 */
-+	udelay(80);
++	value = readl(&misc->dsi_pwr_ctrl);
 +
-+	return readl_poll_sleep_timeout(&priv->mipi->mipi_cal_status, value,
-+					!(value & MIPI_CAL_STATUS_ACTIVE) &&
-+					(value & MIPI_CAL_STATUS_DONE), 100,
-+					250000);
-+}
-+
-+static int tegra_mipi_enable(struct udevice *dev, bool val)
-+{
-+	struct tegra_mipi_priv *priv = dev_get_priv(dev);
-+	u32 value;
-+
-+	clk_enable(priv->mipi_cal);
-+
-+	value = readl(&priv->mipi->mipi_cal_bias_pad_cfg0);
-+	value &= ~MIPI_CAL_BIAS_PAD_PDVCLAMP;
-+	value |= MIPI_CAL_BIAS_PAD_E_VCLAMP_REF;
-+	writel(value, &priv->mipi->mipi_cal_bias_pad_cfg0);
-+
-+	value = readl(&priv->mipi->mipi_cal_bias_pad_cfg2);
-+	value &= ~MIPI_CAL_BIAS_PAD_PDVREG;
-+	writel(value, &priv->mipi->mipi_cal_bias_pad_cfg2);
-+
-+	return 0;
-+}
-+
-+static const struct misc_ops tegra_mipi_ops = {
-+	.write = tegra_mipi_calibrate,
-+	.set_enabled = tegra_mipi_enable,
-+};
-+
-+static int tegra_mipi_probe(struct udevice *dev)
-+{
-+	struct tegra_mipi_priv *priv = dev_get_priv(dev);
-+
-+	priv->mipi = (struct mipi_ctlr *)dev_read_addr_ptr(dev);
-+	if (!priv->mipi) {
-+		log_debug("%s: no MIPI controller address\n", __func__);
-+		return -EINVAL;
++	if (value & DSI_POWER_CONTROL_ENABLE) {
++		value = readl(&misc->dsi_pwr_ctrl);
++		value &= ~DSI_POWER_CONTROL_ENABLE;
++		writel(value, &misc->dsi_pwr_ctrl);
 +	}
 +
-+	priv->mipi_cal = devm_clk_get(dev, NULL);
-+	if (IS_ERR(priv->mipi_cal)) {
-+		log_debug("%s: Could not get MIPI clock: %ld\n",
-+			  __func__, PTR_ERR(priv->mipi_cal));
-+		return PTR_ERR(priv->mipi_cal);
+ 	/* Disable interrupt */
+ 	writel(0, &misc->int_enable);
+ 
+-	tegra_dsi_pad_calibrate(&priv->dsi->pad);
++	if (priv->version)
++		tegra_dsi_mipi_calibrate(priv);
++	else
++		tegra_dsi_pad_calibrate(&priv->dsi->pad);
+ 
+ 	tegra_dsi_get_muldiv(device->format, &mul, &div);
+ 
+@@ -792,6 +851,8 @@ static int tegra_dsi_bridge_probe(struct udevice *dev)
+ 	struct mipi_dsi_panel_plat *mipi_plat;
+ 	int ret;
+ 
++	priv->version = dev_get_driver_data(dev);
++
+ 	priv->dsi = (struct dsi_ctlr *)dev_read_addr_ptr(dev);
+ 	if (!priv->dsi) {
+ 		printf("%s: No display controller address\n", __func__);
+@@ -814,6 +875,16 @@ static int tegra_dsi_bridge_probe(struct udevice *dev)
+ 		return log_ret(ret);
+ 	}
+ 
++	if (priv->version) {
++		ret = uclass_get_device_by_phandle(UCLASS_MISC, dev,
++						   "nvidia,mipi-calibrate",
++						   &priv->mipi);
++		if (ret) {
++			log_debug("%s: cannot get MIPI: error %d\n", __func__, ret);
++			return ret;
++		}
 +	}
 +
-+	return 0;
-+}
+ 	panel_get_display_timing(priv->panel, &priv->timing);
+ 
+ 	mipi_plat = dev_get_plat(priv->panel);
+@@ -845,7 +916,8 @@ static const struct panel_ops tegra_dsi_bridge_ops = {
+ };
+ 
+ static const struct udevice_id tegra_dsi_bridge_ids[] = {
+-	{ .compatible = "nvidia,tegra30-dsi" },
++	{ .compatible = "nvidia,tegra30-dsi", .data = DSI_V0 },
++	{ .compatible = "nvidia,tegra114-dsi", .data = DSI_V1 },
+ 	{ }
+ };
+ 
+diff --git a/arch/arm/include/asm/arch-tegra30/dsi.h b/drivers/video/tegra20/tegra-dsi.h
+similarity index 90%
+rename from arch/arm/include/asm/arch-tegra30/dsi.h
+rename to drivers/video/tegra20/tegra-dsi.h
+index 7ade132613..69dac4bd1b 100644
+--- a/arch/arm/include/asm/arch-tegra30/dsi.h
++++ b/drivers/video/tegra20/tegra-dsi.h
+@@ -4,8 +4,8 @@
+  *  NVIDIA Corporation <www.nvidia.com>
+  */
+ 
+-#ifndef __ASM_ARCH_TEGRA_DSI_H
+-#define __ASM_ARCH_TEGRA_DSI_H
++#ifndef _TEGRA_DSI_H
++#define _TEGRA_DSI_H
+ 
+ #ifndef __ASSEMBLY__
+ #include <linux/bitops.h>
+@@ -105,6 +105,10 @@ struct dsi_pad_ctrl_reg {
+ 	uint pad_ctrl_cd;		/* _PAD_CONTROL_CD_0 */
+ 	uint pad_cd_status;		/* _PAD_CD_STATUS_0 */
+ 	uint dsi_vid_mode_control;	/* _DSI_VID_MODE_CONTROL_0 */
++	uint pad_ctrl_1;		/* _PAD_CONTROL_1 */
++	uint pad_ctrl_2;		/* _PAD_CONTROL_2 */
++	uint pad_ctrl_3;		/* _PAD_CONTROL_3 */
++	uint pad_ctrl_4;		/* _PAD_CONTROL_4 */
+ };
+ 
+ /* Display Serial Interface (DSI_) regs */
+@@ -184,6 +188,20 @@ struct dsi_ctlr {
+ #define DSI_PAD_CONTROL_PAD_LPUPADJ(x)		(((x) & 0x3) << 14)
+ #define DSI_PAD_CONTROL_PAD_LPDNADJ(x)		(((x) & 0x3) << 12)
+ 
++#define DSI_PAD_CONTROL_VS1_PDIO(x)	(((x) & 0xf) <<  0)
++#define DSI_PAD_CONTROL_VS1_PULLDN(x)	(((x) & 0xf) << 16)
 +
-+static const struct udevice_id tegra_mipi_ids[] = {
-+	{ .compatible = "nvidia,tegra114-mipi" },
-+	{ }
-+};
++#define DSI_PAD_OUT_CLK(x)		(((x) & 0x7) <<  0)
++#define DSI_PAD_LP_DN(x)		(((x) & 0x7) <<  4)
++#define DSI_PAD_LP_UP(x)		(((x) & 0x7) <<  8)
++#define DSI_PAD_SLEW_DN(x)		(((x) & 0x7) << 12)
++#define DSI_PAD_SLEW_UP(x)		(((x) & 0x7) << 16)
 +
-+U_BOOT_DRIVER(tegra_mipi) = {
-+	.name           = "tegra_mipi",
-+	.id             = UCLASS_MISC,
-+	.ops		= &tegra_mipi_ops,
-+	.of_match       = tegra_mipi_ids,
-+	.probe          = tegra_mipi_probe,
-+	.priv_auto	= sizeof(struct tegra_mipi_priv),
-+};
++#define DSI_PAD_PREEMP_PD_CLK(x)	(((x) & 0x3) << 12)
++#define DSI_PAD_PREEMP_PU_CLK(x)	(((x) & 0x3) << 8)
++#define DSI_PAD_PREEMP_PD(x)		(((x) & 0x3) << 4)
++#define DSI_PAD_PREEMP_PU(x)		(((x) & 0x3) << 0)
++
+ /*
+  * pixel format as used in the DSI_CONTROL_FORMAT field
+  */
+@@ -214,4 +232,4 @@ enum tegra_dsi_format {
+ #define  PAD_DRIV_DN_REF(x)		(((x) & 0x7) << 16)
+ #define  PAD_DRIV_UP_REF(x)		(((x) & 0x7) << 8)
+ 
+-#endif /* __ASM_ARCH_TEGRA_DSI_H */
++#endif /* _TEGRA_DSI_H */
 -- 
 2.40.1
 
