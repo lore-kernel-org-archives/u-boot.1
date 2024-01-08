@@ -4,74 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74565C3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 08:19:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7F0CC3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 08:43:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63A9B87A38;
-	Mon,  8 Jan 2024 09:19:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E7168794A;
+	Mon,  8 Jan 2024 09:43:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SQWP+a/t";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SXkakPdj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB0A187A32; Mon,  8 Jan 2024 09:19:03 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id ABFD787929; Mon,  8 Jan 2024 09:43:06 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 539E387A21
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 09:19:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6797887929
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 09:43:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4088IvYw105262;
- Mon, 8 Jan 2024 02:18:57 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704701937;
- bh=Ey39qEgqH76ToiGWjJSYJoWw0mxUW9PiIZPXU04qY4s=;
- h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=SQWP+a/tO92cctUXgg/au3XCXwbgexxBUaCI7HuH4cz4ThyS9007InkNW0Sn3LwYw
- df2VGXYtSE8jkPTwXV3xPb1lL9n+r6rE+e4CxrSPkqTHJbZVauKTLEVBgQQSV6QFZ2
- vVwk13EG+QOhBqMyld8A6KJDpcwEUpK5HwZXNFEo=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4088Ivv8062321
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 8 Jan 2024 02:18:57 -0600
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
- Jan 2024 02:18:57 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 8 Jan 2024 02:18:57 -0600
-Received: from [127.0.1.1] (uda0497581.dhcp.ti.com [10.24.68.185])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4088IpIh030312;
- Mon, 8 Jan 2024 02:18:55 -0600
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Mon, 8 Jan 2024 13:48:49 +0530
-Subject: [PATCH 2/2] include: env: ti: add default for
- do_main_cpsw0_qsgmii_phyinit
+ spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a26f73732c5so149921966b.3
+ for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 00:43:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1704703384; x=1705308184; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=PysvAtygZvV/oByXKVHl3LA7AiZOjUv7VExLE+s46uM=;
+ b=SXkakPdjCRBJPQnHpu1XCbVHhxp/+fuwPft2sJSa1XSJbQ0LvUvYfChMEDDLHpZwX0
+ wsHpKXgkTyudQz1os8V8fk6Hm/LvHgnAlMBa0belClnBfNCZYjZHxK5u8BqVqMX+zYng
+ qyw/Gjh1g9aqCNvbCZqfEytIzTK2q0gnwiE7XXNb6+33lGImrfHglTO64eY/tD8eARV5
+ I0tv1TOfAWkBVscfrzhg0tm18OOQLJLXDNRlnnAiAuyPJopG89zUXd4QTSrVbuAj+iqS
+ Q4S1YfyZjig6kXKxq52juFFfAwdyeu4OrwCl7nkF5RDcugDeV6SEp1QbvGzyxqaStXJb
+ qdQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704703384; x=1705308184;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PysvAtygZvV/oByXKVHl3LA7AiZOjUv7VExLE+s46uM=;
+ b=dfHWu1AokNLC/FLHdIBm9FGLSlYTiTfQQE2GNg43ugMkcmtm5Pd5/T5q6Xda9tYh9G
+ XXTzdSbs6pNvcMEjzn8OqopfIbrbjPWhQCrTZ8ITjlQ3cUHvMssB00yoj+k56hQD+BBk
+ 9RsrEwNl/Yjx36+BvrRP+Abv5ljxCFFmwnDLlTjY1b/R28Sn6zuw9zlm8y9tRzVsnEXD
+ 3rLIFbD7PfaZZDlhfzUjR24Y8ZUUgCcLo1+fj+bJ5lNjEEkNjlc90b7KwsgOHCpHWWZ/
+ Ky2F7QEgqeP/FK8BCYrdSfOORB9KeeKr4Z+RfVGJkpeZ1snv8HVC/mDgmgSV8jMCwmv0
+ dC3w==
+X-Gm-Message-State: AOJu0YxHE6Qwi2eosgh1kOSqCtVq3PmrwpeeAswycTDlOw8LnNgOsGqy
+ pJMuGUKTOCbN6sPGPNtF1BGdinBd6Woz2CsQLNS5p/G+up/rOg==
+X-Google-Smtp-Source: AGHT+IG/XyMF/xSDmd7I3/wtbHLFjqhyaP1Be47coT+geUry7la3T6+jVdeKVfoj6bZn282nXvNFLNExuoSIyah1r8I=
+X-Received: by 2002:a17:907:1584:b0:a23:360f:f8c4 with SMTP id
+ cf4-20020a170907158400b00a23360ff8c4mr1281948ejc.41.1704703383651; Mon, 08
+ Jan 2024 00:43:03 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20240108-b4-upstream-fix-semicolon-v1-2-9437b3dc90ea@ti.com>
-References: <20240108-b4-upstream-fix-semicolon-v1-0-9437b3dc90ea@ti.com>
-In-Reply-To: <20240108-b4-upstream-fix-semicolon-v1-0-9437b3dc90ea@ti.com>
-To: Siddharth Vadapalli <s-vadapalli@ti.com>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Manorit Chawdhry <m-chawdhry@ti.com>
-X-Mailer: b4 0.13-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1704701931; l=976;
- i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
- bh=jG67l4Q8Tt4WoO1NZEneAUYq/mN3HRuBm+/g1zDHLGg=;
- b=aM5vLqDpJNsh8wT4t28Cgty3FZpxUbpTeinTPjlBFPA6NM7+Xp4MHiidtzSnTbSHh+CiMMQSB
- MrcpoVQIDrTBGXcVSLzGVQfMfgJMNVoBTzrn8XZ+MfOj5U4EMgKG21R
-X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
- pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
+ <20231219-49026ec51e53dffb0c4d4e20@thorsis.com>
+ <CAD8XO3buXi_0dJQzh2HSirym3VD1C-rugCsmbrsE-nuN-VVS7Q@mail.gmail.com>
+ <CAOMZO5BWibgnQKTreqCfTOioaUYnEZPoUVs4290OSs3k82x8bQ@mail.gmail.com>
+ <CAD8XO3aXShwQGKzqqYO9GAoAV2SbQFx0Fys3G_ZonTQCWQCAJg@mail.gmail.com>
+ <CAOMZO5DiJtMAePwZd-adxscDTZ5dSGoZiwLK-vH-7Yz8nyPfog@mail.gmail.com>
+In-Reply-To: <CAOMZO5DiJtMAePwZd-adxscDTZ5dSGoZiwLK-vH-7Yz8nyPfog@mail.gmail.com>
+From: Maxim Uvarov <maxim.uvarov@linaro.org>
+Date: Mon, 8 Jan 2024 14:41:14 +0600
+Message-ID: <CAD8XO3aeQDqfbzCTFVuP6VY5S1RXQaLxoayM4-NBaLi_2JktNA@mail.gmail.com>
+Subject: Re: [PATHv11 00/43] net/lwip: add lwip library for the network stack
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, pbrobinson@gmail.com, ilias.apalodimas@linaro.org, 
+ trini@konsulko.com, goldsimon@gmx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,34 +92,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-By default this variable is unset and this causes the test condition to
-fail on devices that don't have this defined. Set a default value for
-this.
+On Fri, 5 Jan 2024 at 02:46, Fabio Estevam <festevam@gmail.com> wrote:
 
-   => boot
-   ## Error: "main_cpsw0_qsgmii_phyinit" not defined
-   [...]
+> On Thu, Jan 4, 2024 at 12:02=E2=80=AFPM Maxim Uvarov <maxim.uvarov@linaro=
+.org>
+> wrote:
+>
+> > CI tests this in all qemu emulated boards. I tested it locally on
+> Raspberry Pi - works well. This version did not
+> > yet tested on imx8, but the previous version worked on eth0, did not
+> work on eth1.  So I plan to continue testing
+> > these patches on different boards. But in general it's the upper layer
+> then drivers and theoretically has to work on any
+> > board. But in fact different boards work in different ways and behaviou=
+r
+> is different with their qemu model. So I'm a little bit confused
+> > how to test and debug these patches on board which I don't have physica=
+l
+> access...
+>
+> Can you try to get access to any i.MX board via Linaro?
+>
 
-Fixes: 0d72b0f2f83b ("include: env: ti: ti_common: Run main_cpsw0_qsgmii_phyinit conditionally")
 
-Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
----
- include/env/ti/ti_common.env | 1 +
- 1 file changed, 1 insertion(+)
+I will try, but for some reason there is no i.MX board in the lab.
 
-diff --git a/include/env/ti/ti_common.env b/include/env/ti/ti_common.env
-index 5473f633aa7d..02b410c3adc4 100644
---- a/include/env/ti/ti_common.env
-+++ b/include/env/ti/ti_common.env
-@@ -22,6 +22,7 @@ get_fit_overlaystring=
- 	done;
- get_fit_config=setexpr name_fit_config gsub / _ conf-${fdtfile}
- run_fit=run get_fit_config; bootm ${addr_fit}#${name_fit_config}${overlaystring}
-+do_main_cpsw0_qsgmii_phyinit=0
- bootcmd_ti_mmc=
- 	run findfdt; run init_${boot};
- #if CONFIG_CMD_REMOTEPROC
 
--- 
-2.43.0
+>
+> > that is really strange, after reboot you should get the initial stage.
+> > You can type 'lwip list' and 'net list' to check if there is an IP
+> address for
+> > active device set.
+>
+> Nothing strange there:
+>
+> u-boot=3D> lwip list
+> 1:  eth0 UP IP: 192.168.0.122/255.255.255.0, GW: 192.168.0.1,
+> 00:04:9f:06:33:d3
+> done.
+> u-boot=3D> net list
+> eth0 : ethernet@30be0000 00:04:9f:06:12:98 active
+>
 
+MAC address is different in two commands, it has to be the same.
+
+BR,
+Maxim.
