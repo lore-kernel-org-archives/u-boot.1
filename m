@@ -4,75 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7809CC3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 15:34:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34660C3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 15:38:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 768CE87A77;
-	Mon,  8 Jan 2024 16:34:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4ED3887A77;
+	Mon,  8 Jan 2024 16:38:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ILAhnaJm";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="R4O+VrYf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B8B487A7F; Mon,  8 Jan 2024 16:34:04 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 7EAD387A99; Mon,  8 Jan 2024 16:38:22 +0100 (CET)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6729D87A35
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 16:33:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E19B87A77
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 16:38:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-40d5a41143fso22471225e9.3
- for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 07:33:59 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-67f9f6caabcso17976916d6.3
+ for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 07:38:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704728039; x=1705332839; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Djf2VOIsiPNzb63DUIxbLl10/dZ9vIbkFTNsHbExmT0=;
- b=ILAhnaJmATLy6DK8mCLdCcC4x6rJSNmtpIdJKClrOtgcFDkbnmYNz3cDvEbRFzuwba
- NsuH2Xj610iY32v77P+udQmMaT4j22PeHPd139D8c/w/1ZeWCvr4re+9C97V4bqP45QE
- TbHTRF05J/1zDOafx/EBak2WHWZpsK5fMWqqJhFFZegJO4z6H6LhFlw8LvfjDr/5+HTv
- vkAbvU/603g3f+P45S/8PvEuU16o5vbtgFPfJX3yHv2xJFZBongovg3gGXHpKQP5GMZ0
- eH45DTDGa4BwYRRTzU7PInTW+IAucSLy1eNCDTucWSPpt1fwwhUGSjkspEZ7FfblaCA2
- kPTA==
+ d=konsulko.com; s=google; t=1704728299; x=1705333099; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=rETT4xIj+XW7So/B7yqenwjhxLstHmDThpc4O4ERU2g=;
+ b=R4O+VrYfGXXa0qpRBK8yZaLRQDXds6gGrrtrC/dpaBjfeWe3pBjj2PhsTvTCO5QKHu
+ TKEnOk4ImuIDgubPe2jLl7RHu6/0zo2du1qp1/BzFg48NApCUIBv1j31XyhEoRfvqq2j
+ 2H2NA4oMY6xWTcrwvsjFB2L7vHVPxqDXApqWU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704728039; x=1705332839;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Djf2VOIsiPNzb63DUIxbLl10/dZ9vIbkFTNsHbExmT0=;
- b=glwN3C85JC0zlLf4LpVl5ZSlE+E0x5nb0Ih5dMRvZyfiXYygRMcgRSsaQPDGfaRqpA
- kS6YxPsqC91pMq0JN0N16rHi0Bi7vdcIhWWkq1KjZID6dr631o41Rcu33ldC4Urh4L2t
- lseQWt1xwSnPWs7hrAIjUUvuRa206o/P6mCsl/kmf0hrcOTJ5G1MPKjmYscFPBcw9l4a
- oDXdeJBImlSeuMIrJus8MNl32dZio19iqbhjjj5ylQ3nF3S/8N87aRADw4s6NitOXCz1
- oKE5sYD+xQsIRkEg61+a3yCQHoZNxkMwdyv2uE6Y+NK4Nc6IPaM9/U//CZ38KMIyzc9+
- 8ZVA==
-X-Gm-Message-State: AOJu0Yzf7j7Q0h/867QFXcwowyNH6Kd3ierxrzXi0uwY8kDP2wpzJ3hh
- khKBwn9Mq+ISldBr14l8I9VKc7iQNlAj9Q==
-X-Google-Smtp-Source: AGHT+IFYolRRatto3g/KDAjBPS6H/fRVzGt0kOuFA/ENslMfkDtRZdQIq1k6m5v4Hrkgr0tXzFxiyA==
-X-Received: by 2002:a05:600c:4f02:b0:40d:8ff4:ea02 with SMTP id
- l2-20020a05600c4f0200b0040d8ff4ea02mr1925235wmq.86.1704728038837; 
- Mon, 08 Jan 2024 07:33:58 -0800 (PST)
-Received: from lion.caleb.rex.connolly.tech (host-92-17-96-230.as13285.net.
- [92.17.96.230]) by smtp.gmail.com with ESMTPSA id
- df18-20020a5d5b92000000b00336a1f6ce7csm8075266wrb.19.2024.01.08.07.33.58
+ d=1e100.net; s=20230601; t=1704728299; x=1705333099;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rETT4xIj+XW7So/B7yqenwjhxLstHmDThpc4O4ERU2g=;
+ b=bNkh3AkgjPAo97eh06oMwjG8cHVvTLReia9ZNhNkIGcSag9Al0U2BU7gIm0qxEwIF7
+ jGpofSiX7PGLR+lvRVEqsdECVw356HvVrkrhXsBKJXKEK7VqOgVbZMatsKQqvzdzlT5o
+ BH65I9ivNCkM3ambfMSwx2v2K/6Jo12KboE529SCKik1Oy/PtM1PnZ+nVlRjlFgCJB3i
+ 7GqsbeXofWiFUPB/NvBn9a7pwBMwl0W0Mszx1c2eh44JK9KjdoEvFJwaRF9i604S7MyI
+ yvnTAlzLRwv2fGVQfadJnw+nnKUMrlUo1y5FXafg1LMs+1/oIEN1WGVSZzUi7+d1J+tS
+ 7vQw==
+X-Gm-Message-State: AOJu0YwGT7eP43KvJnxnljzBX01cQ7IFDmpJVJrZU8WyITwKc1KbY8yV
+ E5U3L6ShnXKphv9T/kkbkoWA7Yh75o0qLQ==
+X-Google-Smtp-Source: AGHT+IFj+28l586c4zWDHUcQkCxCZeATlrlHLnNg8A9QpdKg4Vr2qxzJ+OrCkLNCNCtxZwqe6kzwww==
+X-Received: by 2002:a05:6214:1311:b0:680:fe80:2f7a with SMTP id
+ pn17-20020a056214131100b00680fe802f7amr4250287qvb.98.1704728299153; 
+ Mon, 08 Jan 2024 07:38:19 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
+ [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
+ ml10-20020a056214584a00b0068086c5fcb2sm46402qvb.143.2024.01.08.07.38.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jan 2024 07:33:58 -0800 (PST)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
-	Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PATCH] v2 test: spmi: fix tests
-Date: Mon,  8 Jan 2024 15:31:44 +0000
-Message-ID: <20240108153351.1605918-1-caleb.connolly@linaro.org>
-X-Mailer: git-send-email 2.42.1
+ Mon, 08 Jan 2024 07:38:18 -0800 (PST)
+Date: Mon, 8 Jan 2024 10:38:16 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Dragan Simic <dsimic@manjaro.org>, Anatolij Gustschin <agust@denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 2/2] coreboot: Switch to a monospaced font
+Message-ID: <20240108153816.GE1610741@bill-the-cat>
+References: <20240108001455.35638-1-sjg@chromium.org>
+ <20240108001455.35638-2-sjg@chromium.org>
+ <874jfouq9e.fsf@bloch.sibelius.xs4all.nl>
+ <6beec0824542ac0608a5dfad9b88d32a@manjaro.org>
+ <CAEUhbmVc06RydZavZHAXS2oBZC=cRt0C801+dxYVYr9qZRvBVA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="K9WHQJs5Palre6EC"
+Content-Disposition: inline
+In-Reply-To: <CAEUhbmVc06RydZavZHAXS2oBZC=cRt0C801+dxYVYr9qZRvBVA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,58 +96,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the recent changes to the Qualcomm PMIC GPIO driver the sandbox
-tests for it no longer pass, update the DTS and tests to work with the
-changes.
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
-I'll pick this into qcom-next as it goes along with the PMIC changes there.
+--K9WHQJs5Palre6EC
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-V1: lore.kernel.org/u-boot/20240102-b4-pytest-sandbox-spmi-pmic-v1-1-227d1062b3d1@linaro.org
----
- arch/sandbox/dts/test.dts | 2 +-
- test/dm/spmi.c            | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+On Mon, Jan 08, 2024 at 09:09:39PM +0800, Bin Meng wrote:
+> + Tom and Anatolij,
+>=20
+> On Mon, Jan 8, 2024 at 5:33=E2=80=AFPM Dragan Simic <dsimic@manjaro.org> =
+wrote:
+> >
+> > On 2024-01-08 10:29, Mark Kettenis wrote:
+> > >> From: Simon Glass <sjg@chromium.org>
+> > >> Date: Sun,  7 Jan 2024 17:14:55 -0700
+> > >>
+> > >> The default font is proportional, with different character widths.
+> > >> Select a monospace font for coreboot so that the 'dm tree' output
+> > >> lines
+> > >> up correctly.
+> > >>
+> > >> Update the coreboot tests to match.
+> > >
+> > > To be honest, I think defaulting to a proportional font is wrong as a
+> > > default for something like U-Boot.
+> >
+> > I agree, it makes very little sense to default to a proportional font.
+> >
+>=20
+> So we should revert
+>=20
+> commit b093753471c1a30d680868a9f4d9f6db090bf0b7 ("video: Add a default
+> TrueType font")
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 4fe72664c4b3..e264b29554cf 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -1544,10 +1544,10 @@
- 			spmi_gpios: gpios@c000 {
- 				compatible = "qcom,pm8916-gpio";
- 				reg = <0xc000 0x400>;
-+				gpio-ranges = <&spmi_gpios 0 0 4>;
- 				gpio-controller;
- 				gpio-count = <4>;
- 				#gpio-cells = <2>;
--				gpio-bank-name="spmi";
- 			};
- 		};
- 	};
-diff --git a/test/dm/spmi.c b/test/dm/spmi.c
-index 9cc284b98cb0..97bb0eb30fc9 100644
---- a/test/dm/spmi.c
-+++ b/test/dm/spmi.c
-@@ -81,7 +81,7 @@ static int dm_test_spmi_access_peripheral(struct unit_test_state *uts)
- 	int offset_count;
- 
- 	/* Get second pin of PMIC GPIO */
--	ut_assertok(gpio_lookup_name("spmi1", &dev, &offset, &gpio));
-+	ut_assertok(gpio_lookup_name("pmic1", &dev, &offset, &gpio));
- 
- 	/* Check if PMIC is parent */
- 	ut_asserteq(device_get_uclass_id(dev->parent), UCLASS_PMIC);
-@@ -92,7 +92,7 @@ static int dm_test_spmi_access_peripheral(struct unit_test_state *uts)
- 	name = gpio_get_bank_info(dev, &offset_count);
- 
- 	/* Check bank name */
--	ut_asserteq_str("spmi", name);
-+	ut_asserteq_str("pmic", name);
- 	/* Check pin count */
- 	ut_asserteq(4, offset_count);
- 
--- 
-2.42.1
+Well, I would "fixes" that commit and drop default y there and instead
+make the monospace font the default and explain why the switch, rather
+than revert.
 
+--=20
+Tom
+
+--K9WHQJs5Palre6EC
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWcFugACgkQFHw5/5Y0
+tywqHQwAtzjQBwbkGCWSZYgA/MxOgACTuVMoiLid4Sghtsijc3ZktmsaxAxU7X7g
+ZLrUhOFczt6wsYwgWyuyZ2LYDqzSE+p+PWUWGbUaME1nwDpWirH3r17tkZXNyaME
+2EkTA6Df1CiYGNrGPSrIbbnXrKa/Htv/IYBTWOEPNNe+tzwd8x925iVntNDAJMN1
+84h+qSbWy2fojAQ4ODpoqx9F5yeclyZ64QCRHXGr7oNivzUAHATBJo6NILsFj7p0
+BKmI9mIgt+qPrcvtepQdRISGybahCpyodUgTUjdsmRoZhgjyQUb2znMfaWpP0HHm
+mvF4fgt556CVzLm9UX2lIy9Ws9zhcWHUthB9Ch/bFxh3ttQ2cFgp0t5JMT6fyNvj
+gR3JjjprYy0ILt1KxnhNWBepdBKa2/JDyz+5u1KLpX/sSewJUVVK7+Egy1MiGr1K
++C0ihGCtzFuzgLHMI9tM0FW/6Wcl9MtYO1tYscBQNNTDhjtaMsALV5Nyc3ZVktHR
+CY6AtMYv
+=Fl+G
+-----END PGP SIGNATURE-----
+
+--K9WHQJs5Palre6EC--
