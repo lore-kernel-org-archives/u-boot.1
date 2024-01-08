@@ -4,82 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34660C3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 15:38:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9105BC3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 15:38:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4ED3887A77;
-	Mon,  8 Jan 2024 16:38:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E1B5B87AAD;
+	Mon,  8 Jan 2024 16:38:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="R4O+VrYf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VcBuZ1bA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EAD387A99; Mon,  8 Jan 2024 16:38:22 +0100 (CET)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id EE68387A9A; Mon,  8 Jan 2024 16:38:30 +0100 (CET)
+Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
+ [IPv6:2607:f8b0:4864:20::833])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E19B87A77
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 16:38:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7810887AB5
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 16:38:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-67f9f6caabcso17976916d6.3
- for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 07:38:20 -0800 (PST)
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-4298b23abffso7879681cf.0
+ for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 07:38:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1704728299; x=1705333099; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rETT4xIj+XW7So/B7yqenwjhxLstHmDThpc4O4ERU2g=;
- b=R4O+VrYfGXXa0qpRBK8yZaLRQDXds6gGrrtrC/dpaBjfeWe3pBjj2PhsTvTCO5QKHu
- TKEnOk4ImuIDgubPe2jLl7RHu6/0zo2du1qp1/BzFg48NApCUIBv1j31XyhEoRfvqq2j
- 2H2NA4oMY6xWTcrwvsjFB2L7vHVPxqDXApqWU=
+ d=konsulko.com; s=google; t=1704728307; x=1705333107; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=LGCApyS4hQVSDLAMzD+tyvGvvvbZDOiXugKeinuW8JE=;
+ b=VcBuZ1bAeRFzATtNsqQrAALI4lfycVrKZYCzDj4J/3sQpUTuYYQ7TnerAGMJjrFx/n
+ J4U1roDzTAzlTRBghLGPPUBKMQiqVdP26ppoL/FZIS7HwTRHUMeMjSUze34gWjD4p1d4
+ F/Km86lif6ivLh/Z6BQ4ToclibTLYxzEzPXhk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704728299; x=1705333099;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rETT4xIj+XW7So/B7yqenwjhxLstHmDThpc4O4ERU2g=;
- b=bNkh3AkgjPAo97eh06oMwjG8cHVvTLReia9ZNhNkIGcSag9Al0U2BU7gIm0qxEwIF7
- jGpofSiX7PGLR+lvRVEqsdECVw356HvVrkrhXsBKJXKEK7VqOgVbZMatsKQqvzdzlT5o
- BH65I9ivNCkM3ambfMSwx2v2K/6Jo12KboE529SCKik1Oy/PtM1PnZ+nVlRjlFgCJB3i
- 7GqsbeXofWiFUPB/NvBn9a7pwBMwl0W0Mszx1c2eh44JK9KjdoEvFJwaRF9i604S7MyI
- yvnTAlzLRwv2fGVQfadJnw+nnKUMrlUo1y5FXafg1LMs+1/oIEN1WGVSZzUi7+d1J+tS
- 7vQw==
-X-Gm-Message-State: AOJu0YwGT7eP43KvJnxnljzBX01cQ7IFDmpJVJrZU8WyITwKc1KbY8yV
- E5U3L6ShnXKphv9T/kkbkoWA7Yh75o0qLQ==
-X-Google-Smtp-Source: AGHT+IFj+28l586c4zWDHUcQkCxCZeATlrlHLnNg8A9QpdKg4Vr2qxzJ+OrCkLNCNCtxZwqe6kzwww==
-X-Received: by 2002:a05:6214:1311:b0:680:fe80:2f7a with SMTP id
- pn17-20020a056214131100b00680fe802f7amr4250287qvb.98.1704728299153; 
- Mon, 08 Jan 2024 07:38:19 -0800 (PST)
+ d=1e100.net; s=20230601; t=1704728307; x=1705333107;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=LGCApyS4hQVSDLAMzD+tyvGvvvbZDOiXugKeinuW8JE=;
+ b=FkuAzgVT9KuVfhNFDpeItKYjjJxZ04cfhvDdMzUsGGXWA11YyZyW6jlVkEPvSnqmyF
+ gwN4sQWrCdJUDQMYnr+GXabc8+pRvHahKlXYy+C1GV7MLb4nA7OSNYrzOGyAHMYXPdCG
+ xX5eIDrqMoxjRMo+aeVmbnR5nIWdQr/ov6HGKGsGxpNUCK1TAwcMiJwHTVPBFs7Euo4h
+ S4csrl7J+xEJ/J2XcRf7Pe7ksva4HFrzAUMLpVt1vIYPi8ONo+Px+/sJKa7GDg5HulC8
+ u+BIyR6aApDzgVV2bg7ApHY0NCvtgXeeixoN6ny9N/MX81St96C5Zv6tudaCXWOQ0F2A
+ 2m6g==
+X-Gm-Message-State: AOJu0YzI7tJQHmYHbB18YqzfDP5PhFhhWb9MpAjps/yHutEXufwUkSoj
+ C61yQOR7Jhsw/ORYTBCNpO2I1UNUgS9FhGjOEysazkGSc04=
+X-Google-Smtp-Source: AGHT+IG/3cq3EfZ5cq5qpGqTE5odPdtMXvR23jPxEYWdsy2D0oiTQNxRLCfsvO+dPDlGk8hw1wP5Yg==
+X-Received: by 2002:ac8:5c11:0:b0:429:9e25:1d48 with SMTP id
+ i17-20020ac85c11000000b004299e251d48mr486626qti.20.1704728307059; 
+ Mon, 08 Jan 2024 07:38:27 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
  [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
- ml10-20020a056214584a00b0068086c5fcb2sm46402qvb.143.2024.01.08.07.38.18
+ en7-20020a05622a540700b00427fcfa42fbsm3593532qtb.70.2024.01.08.07.38.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jan 2024 07:38:18 -0800 (PST)
-Date: Mon, 8 Jan 2024 10:38:16 -0500
+ Mon, 08 Jan 2024 07:38:26 -0800 (PST)
+Date: Mon, 8 Jan 2024 10:38:24 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Dragan Simic <dsimic@manjaro.org>, Anatolij Gustschin <agust@denx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/2] coreboot: Switch to a monospaced font
-Message-ID: <20240108153816.GE1610741@bill-the-cat>
-References: <20240108001455.35638-1-sjg@chromium.org>
- <20240108001455.35638-2-sjg@chromium.org>
- <874jfouq9e.fsf@bloch.sibelius.xs4all.nl>
- <6beec0824542ac0608a5dfad9b88d32a@manjaro.org>
- <CAEUhbmVc06RydZavZHAXS2oBZC=cRt0C801+dxYVYr9qZRvBVA@mail.gmail.com>
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: [ANN] U-Boot v2024.01 released
+Message-ID: <20240108153824.GF1610741@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="K9WHQJs5Palre6EC"
+ protocol="application/pgp-signature"; boundary="iaeRmz8QGBdcV85P"
 Content-Disposition: inline
-In-Reply-To: <CAEUhbmVc06RydZavZHAXS2oBZC=cRt0C801+dxYVYr9qZRvBVA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,62 +87,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---K9WHQJs5Palre6EC
-Content-Type: text/plain; charset=utf-8
+--iaeRmz8QGBdcV85P
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 08, 2024 at 09:09:39PM +0800, Bin Meng wrote:
-> + Tom and Anatolij,
->=20
-> On Mon, Jan 8, 2024 at 5:33=E2=80=AFPM Dragan Simic <dsimic@manjaro.org> =
-wrote:
-> >
-> > On 2024-01-08 10:29, Mark Kettenis wrote:
-> > >> From: Simon Glass <sjg@chromium.org>
-> > >> Date: Sun,  7 Jan 2024 17:14:55 -0700
-> > >>
-> > >> The default font is proportional, with different character widths.
-> > >> Select a monospace font for coreboot so that the 'dm tree' output
-> > >> lines
-> > >> up correctly.
-> > >>
-> > >> Update the coreboot tests to match.
-> > >
-> > > To be honest, I think defaulting to a proportional font is wrong as a
-> > > default for something like U-Boot.
-> >
-> > I agree, it makes very little sense to default to a proportional font.
-> >
->=20
-> So we should revert
->=20
-> commit b093753471c1a30d680868a9f4d9f6db090bf0b7 ("video: Add a default
-> TrueType font")
+Hey all,
 
-Well, I would "fixes" that commit and drop default y there and instead
-make the monospace font the default and explain why the switch, rather
-than revert.
+It's release day and here's v2024.01.  Once again I want to thank
+everyone that's contributed to this release, not just in terms of code,
+but documentation, testing and otherwise ensuring things go as smoothly
+as they can.
+
+In terms of a changelog,=20
+git log --merges v2024.01-rc6..v2024.01
+contains what I've pulled since the last RC or:
+git log --merges v2023.10..v2024.01
+for changes since the last full release.  As always, more details in
+pull requests (or the tags referenced by them) will result in more
+details here.
+
+The merge window is formally open again, and I'll be merging in next
+shortly. v2024.04 is scheduled for Tuesday, April 2nd, 2024 as I refuse
+to release something on  April Fools day, and the merge window will
+close and -rc1 will be released on the 29th of January, and then the
+next window will open with -rc2, two weeks later.
+
+Thanks all!
 
 --=20
 Tom
 
---K9WHQJs5Palre6EC
+--iaeRmz8QGBdcV85P
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWcFugACgkQFHw5/5Y0
-tywqHQwAtzjQBwbkGCWSZYgA/MxOgACTuVMoiLid4Sghtsijc3ZktmsaxAxU7X7g
-ZLrUhOFczt6wsYwgWyuyZ2LYDqzSE+p+PWUWGbUaME1nwDpWirH3r17tkZXNyaME
-2EkTA6Df1CiYGNrGPSrIbbnXrKa/Htv/IYBTWOEPNNe+tzwd8x925iVntNDAJMN1
-84h+qSbWy2fojAQ4ODpoqx9F5yeclyZ64QCRHXGr7oNivzUAHATBJo6NILsFj7p0
-BKmI9mIgt+qPrcvtepQdRISGybahCpyodUgTUjdsmRoZhgjyQUb2znMfaWpP0HHm
-mvF4fgt556CVzLm9UX2lIy9Ws9zhcWHUthB9Ch/bFxh3ttQ2cFgp0t5JMT6fyNvj
-gR3JjjprYy0ILt1KxnhNWBepdBKa2/JDyz+5u1KLpX/sSewJUVVK7+Egy1MiGr1K
-+C0ihGCtzFuzgLHMI9tM0FW/6Wcl9MtYO1tYscBQNNTDhjtaMsALV5Nyc3ZVktHR
-CY6AtMYv
-=Fl+G
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWcFvAACgkQFHw5/5Y0
+tyx53gwAnBJhljuyBZ9Lu+p9kTesNZrecjt5VIB9Pxdr+8URLbSAQ8ybOPupz//o
+PKA0L4lGDWdP8Lmu3EfkcryFBlnQP09BqbWd79etP+Qr+TYPCMBOBHXwLN9uqyLo
+3vwnVf/wMYtnVulGwws4tOCkUCooLu3RUk8PoQbaddgODm6veR5X1yqhOWPX5yMs
+SqVj3Y0GLW0SFwG/AtOtQUzp6VC0TwUOfHSCl7IFUEEUhWMYZ7pr+5Xqz9IQ7w/J
+fvZoH8DpFRkkqs+s5Bl9XlzJ+AW4H9dI0qU1EYKAqMkrse+ZXuC/Yo6i4nNTp0hI
+vQ7c+Oau4tHXknQP/8j2J8imOdNcUofLTtT6svHN4VXCUU6kFyXzmLcoCxLpEa5T
+76qyfTJ/X6i3DJRJTIuuiAyyUXTHteHFxh8loPvsTKVIdIygv+O1JjbtrAfg0Pq9
+IWu1ubhPf2OXrYYz7ojK9wN7slwblbpHDOgzYy6dyvJDYgF7LZXttnSGaI13yH84
+Ijipv3kv
+=xZ8Y
 -----END PGP SIGNATURE-----
 
---K9WHQJs5Palre6EC--
+--iaeRmz8QGBdcV85P--
