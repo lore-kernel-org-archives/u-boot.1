@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E11AC3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 20:03:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4480CC3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 20:04:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9610E87828;
-	Mon,  8 Jan 2024 21:03:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 97AE487A46;
+	Mon,  8 Jan 2024 21:04:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OPvPatEH";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xEos32m8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C8D487645; Mon,  8 Jan 2024 21:02:59 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 3BC0687A77; Mon,  8 Jan 2024 21:04:42 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3782C87A10
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 21:02:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F4A087828
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 21:04:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 408K2hJY036780;
- Mon, 8 Jan 2024 14:02:43 -0600
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 408K4WBY022754;
+ Mon, 8 Jan 2024 14:04:32 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704744163;
- bh=SEAXOd0HVRz+RuPNq1yXNl26WwwL6j8ByFqYM2QQNj0=;
+ s=ti-com-17Q1; t=1704744272;
+ bh=3vo6PZIgcoA1Gm6mzRykCfFZqpvdbKhpoby0kkd8k8c=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=OPvPatEHUt0869zspQeYJBP4uVjKSKz/As8YiHWEf7RFXGQ9utEjaLQmkw1QfFPAA
- PNjz/uBOBiRRoXGiD0yVq8roEW2Xsyw9oFqfY8eGzGhxyPQNUUleMVNOR1mdz/9BjT
- HgLlb/gsP/VzhNRvOiz1dAHT0UbmZtPmwcwbGIF8=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 408K2hUo065416
+ b=xEos32m8OLz9dOSFeDZC/PZQsoHbiIQ0VMApmLcdr2Wm0R17Xv1h0ycvussRQBF0f
+ e7vzEXas6O5Ri4B5WUiLcem7dBgis7oTtMhuttjFtZkHO0M+Sr2kU6kC/BqgDm+P1f
+ bS+WMoCrMf62fmy/5qyIOQrY28EUNmgZo7CjiIfc=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 408K4WXP130968
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 8 Jan 2024 14:02:43 -0600
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 8 Jan 2024 14:04:32 -0600
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
- Jan 2024 14:02:42 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 14:04:32 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 8 Jan 2024 14:02:42 -0600
+ Frontend Transport; Mon, 8 Jan 2024 14:04:32 -0600
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 408K2ghf103275;
- Mon, 8 Jan 2024 14:02:42 -0600
-Date: Mon, 8 Jan 2024 14:02:42 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 408K4W0j105310;
+ Mon, 8 Jan 2024 14:04:32 -0600
+Date: Mon, 8 Jan 2024 14:04:32 -0600
 From: Nishanth Menon <nm@ti.com>
 To: Andrew Davis <afd@ti.com>
 CC: Tom Rini <trini@konsulko.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu
@@ -59,16 +59,16 @@ CC: Tom Rini <trini@konsulko.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu
  Nikhil M Jain <n-jain1@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Bryan
  Brattlof <bb@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
  <u-boot@lists.denx.de>, Jon Humphreys <j-humphreys@ti.com>
-Subject: Re: [PATCH 01/10] board: ti: common: Introduce a common fdt ops
- library
-Message-ID: <20240108200242.4pveylszdcvjqmyi@cubical>
+Subject: Re: [PATCH 08/10] board: beagle: beagleboneai64: Set fdtfile from C
+ code instead of findfdt script
+Message-ID: <20240108200432.ytukx6r5eybsn7wb@hazard>
 References: <20240108173301.2692332-1-nm@ti.com>
- <20240108173301.2692332-2-nm@ti.com>
- <87a2bc20-0c05-4980-a573-15efa090f4d2@ti.com>
+ <20240108173301.2692332-9-nm@ti.com>
+ <f94817a7-b81a-479b-bef2-2c255c4e0f1d@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <87a2bc20-0c05-4980-a573-15efa090f4d2@ti.com>
+In-Reply-To: <f94817a7-b81a-479b-bef2-2c255c4e0f1d@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,128 +86,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12:50-20240108, Andrew Davis wrote:
-> On 1/8/24 11:32 AM, Nishanth Menon wrote:
-> > Introduce a common fdt operations library for basic device tree
-> > operations that are common between various boards.
-> > 
-> > The first library to introduce here is the capability to set up
-> > fdtfile as a standard variable as part of board identification rather
-> > than depend on scripted ifdeffery.
-> > 
-> > Signed-off-by: Nishanth Menon <nm@ti.com>
-> > ---
-> >   board/ti/common/Kconfig   | 12 ++++++++
-> >   board/ti/common/Makefile  |  1 +
-> >   board/ti/common/fdt_ops.c | 65 +++++++++++++++++++++++++++++++++++++++
-> >   board/ti/common/fdt_ops.h | 41 ++++++++++++++++++++++++
-> >   4 files changed, 119 insertions(+)
-> >   create mode 100644 board/ti/common/fdt_ops.c
-> >   create mode 100644 board/ti/common/fdt_ops.h
-> > 
-> > diff --git a/board/ti/common/Kconfig b/board/ti/common/Kconfig
-> > index 49edd98014ab..06a8a36aa1cd 100644
-> > --- a/board/ti/common/Kconfig
-> > +++ b/board/ti/common/Kconfig
-> > @@ -49,3 +49,15 @@ config TI_COMMON_CMD_OPTIONS
-> >   	imply CMD_SPI
-> >   	imply CMD_TIME
-> >   	imply CMD_USB if USB
-> > +
-> > +config TI_EVM_FDT_FOLDER_PATH
-> > +	string "Location of Folder path where dtb is present"
-> > +	default "ti/davinci" if ARCH_DAVINCI
-> > +	default "ti/keystone" if ARCH_KEYSTONE
-> > +	default "ti/omap" if ARCH_OMAP2PLUS
-> > +	default "ti" if ARCH_K3
-> > +	depends on ARCH_DAVINCI || ARCH_KEYSTONE || ARCH_OMAP2PLUS || ARCH_K3
-> > +	help
-> > +	   Folder path for kernel device tree default.
-> > +	   This is used along with fdtfile path to locate the kernel
-> > +	   device tree blob.
-> > diff --git a/board/ti/common/Makefile b/board/ti/common/Makefile
-> > index 26bf12e2e6d5..5ac361ba7fcf 100644
-> > --- a/board/ti/common/Makefile
-> > +++ b/board/ti/common/Makefile
-> > @@ -3,3 +3,4 @@
-> >   obj-${CONFIG_TI_I2C_BOARD_DETECT} += board_detect.o
-> >   obj-${CONFIG_CMD_EXTENSION} += cape_detect.o
-> > +obj-${CONFIG_OF_LIBFDT} += fdt_ops.o
-> > diff --git a/board/ti/common/fdt_ops.c b/board/ti/common/fdt_ops.c
-> > new file mode 100644
-> > index 000000000000..f8770cae4a54
-> > --- /dev/null
-> > +++ b/board/ti/common/fdt_ops.c
-> > @@ -0,0 +1,65 @@
-> > +// SPDX-License-Identifier: GPL-2.0-or-later
-> > +/*
-> > + * Library to support FDT file operations which are common
-> > + *
-> > + * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
-> > + */
-> > +
-> > +#include <env.h>
-> > +#include <vsprintf.h>
-> > +#include "fdt_ops.h"
-> > +
-> > +void ti_set_fdt_env(const char *name_fdt, struct ti_fdt_map *fdt_map)
+On 13:00-20240108, Andrew Davis wrote:
+> > +#ifdef CONFIG_BOARD_LATE_INIT
+> > +int board_late_init(void)
 > > +{
-> > +	char *fdt_file_name = NULL;
-> > +	char fdtfile[TI_FDT_FILE_MAX];
+> > +	char fdtfile[50];
 > > +
-> > +	if (name_fdt) {
-> > +		while (fdt_map) {
-> > +			/* Check for NULL terminator in the list */
-> > +			if (!fdt_map->name_fdt)
-> > +				break;
-> > +			if (!strncmp(fdt_map->name_fdt, name_fdt, TI_NAME_FDT_MAX)) {
-> > +				fdt_file_name = fdt_map->fdt_file_name;
-> > +				break;
-> > +			}
-> > +			fdt_map++;
-> > +		}
-> > +	}
+> > +	snprintf(fdtfile, sizeof(fdtfile), "%s/%s.dtb",
+> > +		 CONFIG_TI_EVM_FDT_FOLDER_PATH, CONFIG_DEFAULT_DEVICE_TREE);
 > > +
-> > +	/* match not found OR null name_fdt */
-> > +	if (!fdt_file_name) {
-> > +		/*
-> > +		 * Prioritize CONFIG_DEFAULT_FDT_FILE - if that is not defined,
-> > +		 * or is empty, then use CONFIG_DEFAULT_DEVICE_TREE
-> > +		 */
-> > +#ifdef CONFIG_DEFAULT_FDT_FILE
-> > +		if (strlen(CONFIG_DEFAULT_FDT_FILE)) {
-> > +			snprintf(fdtfile, sizeof(fdtfile), "%s/%s",
-> > +				 CONFIG_TI_EVM_FDT_FOLDER_PATH, CONFIG_DEFAULT_FDT_FILE);
-> > +		} else
-> > +#endif
-> > +		{
-> > +			snprintf(fdtfile, sizeof(fdtfile), "%s/%s.dtb",
-> > +				 CONFIG_TI_EVM_FDT_FOLDER_PATH,
-> > +				 CONFIG_DEFAULT_DEVICE_TREE);
-> > +		}
-> > +	} else {
-> > +		snprintf(fdtfile, sizeof(fdtfile), "%s/%s", CONFIG_TI_EVM_FDT_FOLDER_PATH,
-> > +			 fdt_file_name);
-> > +	}
-> > +
-> > +	env_set("fdtfile", fdtfile);
-> > +
-> > +	/*
-> > +	 * XXX: DEPRECATION WARNING: 2 u-boot versions.
-> > +	 *
-> > +	 * Maintain compatibility with downstream scripts that may be using
-> > +	 * name_fdt
-> > +	 */
-> > +	if (name_fdt)
-> > +		env_set("name_fdt", name_fdt);
 > 
-> "name_fdt" should match "fdtfile", you should have just:
-> 
-> env_set("name_fdt", fdtfile);
-> 
-> are you mixing this up with "board_name"?
+> Why not use your new ti_set_fdt_env() helper? It makes this board
 
-It should have been fdtfile. Thanks for catching it.
+I had it originally, but did not want the code to depend on
+board/ti/common functions. So dropped it in later version.
+
+> consistent with TI boards (sets "name_fdt" and adds warning for
+> "findfdt" like your commit message says you do..).
+
+Will fix up the commit message in the next revision
+
 
 -- 
 Regards,
