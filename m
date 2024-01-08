@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C76BC3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 17:34:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B0B4C3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 17:34:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F26A87B04;
+	by phobos.denx.de (Postfix) with ESMTP id 99F2387B17;
 	Mon,  8 Jan 2024 18:33:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Xss4Ei3H";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YKURWd4l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C90A387AF0; Mon,  8 Jan 2024 18:33:25 +0100 (CET)
+ id 6157C87ACD; Mon,  8 Jan 2024 18:33:26 +0100 (CET)
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C9A787AD7
+ by phobos.denx.de (Postfix) with ESMTPS id 83E8787AE2
  for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 18:33:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 408HX9Bp109414;
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 408HX9Kw109418;
  Mon, 8 Jan 2024 11:33:09 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1704735189;
- bh=Ob0gbmWdasJldya/RlSoWYc2Zw3FFnPB4Arbz8WNRZo=;
- h=From:To:CC:Subject:Date;
- b=Xss4Ei3H4pZT+DGst6p2sDTWbY5YumNqZc1PddPD32VnpEmixhiSnq/kpOa/uTWrV
- mr+nOWWhSNLfrFI32nrhz6APyPBznSYyt+/3k213NdHKatrEQUML54G5PTG8WAO2Gf
- rF+/dteMVUJ8K3B7ibZZcqQuXrMnx7zaAKFfqhhE=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 408HX9fY009225
+ bh=lmGbwUxOm8WUbtUCjVKAbSQqbASi+186zfnn05vp7PE=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=YKURWd4lOPSKjkoYBQECfuvc+j5kUwUxODfEwy1x+RNUfChNmqMpufN9BENGtFcD+
+ LcImfiapxIpvsV1oguIzXIDXZISgZKZBDFVPwaJn80QMB6pQ5XwI77LRA84vrgKXDc
+ 091cDLUBQqLOc8pp1QlUGPHjBYDjvtPMvbOu3o1s=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 408HX9Vn072363
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Mon, 8 Jan 2024 11:33:09 -0600
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
  Jan 2024 11:33:08 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Mon, 8 Jan 2024 11:33:08 -0600
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 408HX8oj045323;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 408HX82l109322;
  Mon, 8 Jan 2024 11:33:08 -0600
 From: Nishanth Menon <nm@ti.com>
 To: Tom Rini <trini@konsulko.com>
@@ -60,10 +60,13 @@ CC: Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu Raja <sinthu.raja@ti.com>,
  Bryan Brattlof <bb@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
  <u-boot@lists.denx.de>, Jon Humphreys <j-humphreys@ti.com>,
  Nishanth Menon <nm@ti.com>
-Subject: [PATCH 00/10] board/ti:  k3 boards: Stop using findfdt
-Date: Mon, 8 Jan 2024 11:32:51 -0600
-Message-ID: <20240108173301.2692332-1-nm@ti.com>
+Subject: [PATCH 05/10] board: ti: am65x: Set fdtfile from C code instead of
+ findfdt script
+Date: Mon, 8 Jan 2024 11:32:56 -0600
+Message-ID: <20240108173301.2692332-6-nm@ti.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240108173301.2692332-1-nm@ti.com>
+References: <20240108173301.2692332-1-nm@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -84,67 +87,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a wide cleanup to switch to setting fdtfile using env_set
-instead of scripted magic. 'fdtfile' is expected to be set by default.
-This allows the stdboot triggered efi loaders to find the correct OS
-device tree file.
+We now can provide a map and have the standard fdtfile variable set from
+code itself. This allows for bootstd to "just work".
 
-This is a refresh of
-https://lore.kernel.org/all/86le9dwz4d.fsf@udb0321960.dhcp.ti.com/ which
-was the wrong approach.
+While at this, replace findfdt in environment with a warning as it is no
+longer needed.
 
-Bootlogs: https://gist.github.com/nmenon/2f4a142c1bcaa09d544b1f2e206ea134
+Signed-off-by: Nishanth Menon <nm@ti.com>
+---
+ board/ti/am65x/am65x.env | 3 ---
+ board/ti/am65x/evm.c     | 2 ++
+ 2 files changed, 2 insertions(+), 3 deletions(-)
 
-NOTE: There are a couple of checkpatch WARN (around LATE_INIT) and
-CHECK (fdt_ops #ifdeffery) that on closer inspection looks fine and
-consistent with other similar usage.
-
-Based on next branch at: c2c598e87cfe Merge branch 'staging' of https://source.denx.de/u-boot/custodians/u-boot-tegra into next
-
-Nishanth Menon (10):
-  board: ti: common: Introduce a common fdt ops library
-  board: ti: am62ax: Set fdtfile from C code instead of findfdt script
-  board: ti: am62x: Set fdtfile from C code instead of findfdt script
-  board: ti: am64x: Set fdtfile from C code instead of findfdt script
-  board: ti: am65x: Set fdtfile from C code instead of findfdt script
-  board: ti: j721e: Set fdtfile from C code instead of findfdt script
-  board: ti: j721s2: Set fdtfile from C code instead of findfdt script
-  board: beagle: beagleboneai64: Set fdtfile from C code instead of
-    findfdt script
-  board: beagle: beagleplay: Set fdtfile from C code instead of findfdt
-    script
-  include: env: ti: Drop default_findfdt
-
- board/beagle/beagleboneai64/beagleboneai64.c  | 14 ++++
- .../beagle/beagleboneai64/beagleboneai64.env  |  1 -
- board/beagle/beagleplay/beagleplay.c          | 14 ++++
- board/beagle/beagleplay/beagleplay.env        |  1 -
- board/ti/am62ax/am62ax.env                    |  1 -
- board/ti/am62ax/evm.c                         | 10 +++
- board/ti/am62x/am62x.env                      |  1 -
- board/ti/am62x/evm.c                          |  8 +++
- board/ti/am64x/am64x.env                      |  9 ---
- board/ti/am64x/evm.c                          |  8 +++
- board/ti/am65x/am65x.env                      |  3 -
- board/ti/am65x/evm.c                          |  2 +
- board/ti/common/Kconfig                       | 12 ++++
- board/ti/common/Makefile                      |  1 +
- board/ti/common/fdt_ops.c                     | 65 +++++++++++++++++++
- board/ti/common/fdt_ops.h                     | 41 ++++++++++++
- board/ti/j721e/evm.c                          |  8 +++
- board/ti/j721e/j721e.env                      | 10 ---
- board/ti/j721s2/evm.c                         |  8 +++
- board/ti/j721s2/j721s2.env                    |  8 ---
- configs/am62ax_evm_a53_defconfig              |  1 +
- configs/am62x_beagleplay_a53_defconfig        |  3 +-
- configs/am62x_evm_a53_defconfig               |  1 +
- configs/j721e_beagleboneai64_a72_defconfig    |  3 +-
- include/env/ti/default_findfdt.env            | 12 ----
- 25 files changed, 197 insertions(+), 48 deletions(-)
- create mode 100644 board/ti/common/fdt_ops.c
- create mode 100644 board/ti/common/fdt_ops.h
- delete mode 100644 include/env/ti/default_findfdt.env
-
+diff --git a/board/ti/am65x/am65x.env b/board/ti/am65x/am65x.env
+index 286b9c300c05..814374d68cf0 100644
+--- a/board/ti/am65x/am65x.env
++++ b/board/ti/am65x/am65x.env
+@@ -5,9 +5,6 @@
+ #include <env/ti/k3_rproc.env>
+ #endif
+ 
+-findfdt=
+-	setenv name_fdt ti/k3-am654-base-board.dtb;
+-	setenv fdtfile ${name_fdt}
+ name_kern=Image
+ console=ttyS2,115200n8
+ args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
+diff --git a/board/ti/am65x/evm.c b/board/ti/am65x/evm.c
+index df209021c1b7..3109c9a2acac 100644
+--- a/board/ti/am65x/evm.c
++++ b/board/ti/am65x/evm.c
+@@ -22,6 +22,7 @@
+ #include <linux/printk.h>
+ 
+ #include "../common/board_detect.h"
++#include "../common/fdt_ops.h"
+ 
+ #define board_is_am65x_base_board()	board_ti_is("AM6-COMPROCEVM")
+ 
+@@ -141,6 +142,7 @@ static void setup_board_eeprom_env(void)
+ 
+ invalid_eeprom:
+ 	set_board_info_env_am6(name);
++	ti_set_fdt_env(NULL, NULL);
+ }
+ 
+ static int init_daughtercard_det_gpio(char *gpio_name, struct gpio_desc *desc)
 -- 
 2.43.0
 
