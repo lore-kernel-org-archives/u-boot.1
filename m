@@ -4,77 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32FD9C3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 13:09:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F42BC3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 13:17:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C0A787A34;
-	Mon,  8 Jan 2024 14:09:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 59CFF87A77;
+	Mon,  8 Jan 2024 14:17:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="O6hAde2A";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="IkkbJTpm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C98CE87469; Mon,  8 Jan 2024 14:09:52 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 57AF587A7A; Mon,  8 Jan 2024 14:16:59 +0100 (CET)
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E44A587A36
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 14:09:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B68887A76
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 14:16:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-55642663ac4so1933059a12.1
- for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 05:09:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704719390; x=1705324190; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=C8yoRqcl4sXzDJcVZBTrMc45JNhCN9KrBp4kKIYbhDY=;
- b=O6hAde2AWKGJy6boZyBLeh1D+4C9od7yjuvElDd9KRKfr92XS4MRmByxsgv5aymjsN
- r0R8wvXLLnlm6CrbJ5yRQzjIKdtwYeo9jzsSSZ6TfrWPtmZta2IEWZEPuvbB0BmUStfx
- YHGKhvtZYC4TrkjV6tHXtnpsG8/AVlc/YWJyfvooJbjDJGid4xajvVN6SBlwjKr/uTiy
- ijJ/x4ta2fRpWM5pJif1JfEL5E+e0hh86lDWutNvFuICPM3gHkZay/RNvcpv6blOG0rX
- 2evk3qnaoZXyGyC2clssd1mBFfnEDE3L+LgTq4mdAXL+aMgFkftZlbGz4E0UlsJOsO0C
- CpMw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704719390; x=1705324190;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=C8yoRqcl4sXzDJcVZBTrMc45JNhCN9KrBp4kKIYbhDY=;
- b=bWW0omJHYkritEOXCNJk8Y07aK4W1GY3lyY3OMNd2rbh+E4BAzHH0xKQHb83WpTcu4
- 5BDJYtanF7o1r0qPIIHvBaxaBsXVAY0nk0LcHkhqTVJze9OJibtCC/nIKZfP7XwYlO1c
- /PXlFTYrbk+GicTuZGZNWqCZG271tGeZvHBEkH54QicjvKycXqRP5S5w64kPtKZO1sBJ
- Th2e1ae/IXVd0vdJIigxo5WOFjnnfAzZCMwV7l/f9cDmB+yDVAZ1MmHj9dUJBHRvs85w
- sWV96T97N/JrDbSdOwKXliv1hHvLKIf1/MhGet6g/oP/T3pFBvRF1hcRvQdLF1ayewgx
- i9Cw==
-X-Gm-Message-State: AOJu0YzjEW2BlmjxF2FJ6eni5C5EchCs9U2BLOPfklIWiC1uOGKQyciI
- Vlfd5UqOLRcQUP/tWdCbeMgfcDEEPyQZYltrJfs=
-X-Google-Smtp-Source: AGHT+IEPsziJfrZUeBAsvqRiFaCzW515TJ3PguFFY1+aXWvINAOl6Ziz7wTO5qctUJn8w8HSc9tBHXgON9M/VWWVC9U=
-X-Received: by 2002:a17:906:260c:b0:a27:f7a1:2ad2 with SMTP id
- h12-20020a170906260c00b00a27f7a12ad2mr991796ejc.69.1704719390170; Mon, 08 Jan
- 2024 05:09:50 -0800 (PST)
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by ams.source.kernel.org (Postfix) with ESMTP id C096DB80DAD;
+ Mon,  8 Jan 2024 13:16:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E67EC433C7;
+ Mon,  8 Jan 2024 13:16:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1704719816;
+ bh=XX+tXlgHl2iqGFIc4EXIARMqCoYd4xBRTovr/iW/914=;
+ h=From:To:Cc:Subject:Date:From;
+ b=IkkbJTpmMAP7e5Q4CdinDNU+LNi86iB6lfGzkbqLa5MXCQVI+sEyIK4Gv9GCuS7PI
+ Cbw1CILqDj73WSWadN0DxV41wTjVmI6z0qTYowMu0Rsrt5FFnecsASMvGBhVdZS4Yt
+ zsL7eYc1bb8ulja8cFMhveFrQPxY4BAh00pNNIlAyjsBf4Dg6za6ZMYJhysOX7cAC3
+ RGO9y7/Ejb++v3DbFGhvSvfKRWgp+5nDo+PI8blpBE9KCtdlu1l2W5Exj8zXeEtIRm
+ HarCauAqQjxytClf3L1wB58jdTYJNKcmlPL8gyVCoOVNV+nQQqrhww5o4aY2trgc3G
+ DHpg4Y+k3yIkA==
+From: Roger Quadros <rogerq@kernel.org>
+To: vigneshr@ti.com,
+	trini@konsulko.com
+Cc: praneeth@ti.com, nm@ti.com, u-boot@lists.denx.de,
+ Roger Quadros <rogerq@kernel.org>
+Subject: [PATCH] board: ti: am64: Support TMDS64EVM
+Date: Mon,  8 Jan 2024 15:16:50 +0200
+Message-Id: <20240108131650.100519-1-rogerq@kernel.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240108001455.35638-1-sjg@chromium.org>
- <20240108001455.35638-2-sjg@chromium.org>
- <874jfouq9e.fsf@bloch.sibelius.xs4all.nl>
- <6beec0824542ac0608a5dfad9b88d32a@manjaro.org>
-In-Reply-To: <6beec0824542ac0608a5dfad9b88d32a@manjaro.org>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 8 Jan 2024 21:09:39 +0800
-Message-ID: <CAEUhbmVc06RydZavZHAXS2oBZC=cRt0C801+dxYVYr9qZRvBVA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] coreboot: Switch to a monospaced font
-To: Dragan Simic <dsimic@manjaro.org>, Tom Rini <trini@konsulko.com>, 
- Anatolij Gustschin <agust@denx.de>
-Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,32 +68,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+ Tom and Anatolij,
+The TMDS64EVM [1] ships with AM64X SR2.0 HS-FS chip
+and a slightly different board name in the board information
+EEPROM header. Support this board.
 
-On Mon, Jan 8, 2024 at 5:33=E2=80=AFPM Dragan Simic <dsimic@manjaro.org> wr=
-ote:
->
-> On 2024-01-08 10:29, Mark Kettenis wrote:
-> >> From: Simon Glass <sjg@chromium.org>
-> >> Date: Sun,  7 Jan 2024 17:14:55 -0700
-> >>
-> >> The default font is proportional, with different character widths.
-> >> Select a monospace font for coreboot so that the 'dm tree' output
-> >> lines
-> >> up correctly.
-> >>
-> >> Update the coreboot tests to match.
-> >
-> > To be honest, I think defaulting to a proportional font is wrong as a
-> > default for something like U-Boot.
->
-> I agree, it makes very little sense to default to a proportional font.
->
+[1] https://www.ti.com/tool/TMDS64EVM
 
-So we should revert
+Gets rid of below message at boot
+"Unidentified board claims AM64-EVM in eeprom header"
 
-commit b093753471c1a30d680868a9f4d9f6db090bf0b7 ("video: Add a default
-TrueType font")
+Signed-off-by: Roger Quadros <rogerq@kernel.org>
+---
+ board/ti/am64x/evm.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Regards,
-Bin
+diff --git a/board/ti/am64x/evm.c b/board/ti/am64x/evm.c
+index a6dcff2eb4..a7ca6be436 100644
+--- a/board/ti/am64x/evm.c
++++ b/board/ti/am64x/evm.c
+@@ -18,6 +18,7 @@
+ #include "../common/board_detect.h"
+ 
+ #define board_is_am64x_gpevm() (board_ti_k3_is("AM64-GPEVM") || \
++				board_ti_k3_is("AM64-EVM") || \
+ 				board_ti_k3_is("AM64-HSEVM"))
+ 
+ #define board_is_am64x_skevm() (board_ti_k3_is("AM64-SKEVM") || \
+
+base-commit: c2c598e87cfe56f5991730762c00733c5aa9a994
+-- 
+2.34.1
+
