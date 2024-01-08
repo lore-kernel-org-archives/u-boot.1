@@ -4,72 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 805A1C47073
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 00:21:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18EFAC47074
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 00:22:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5DC687AD9;
-	Mon,  8 Jan 2024 01:16:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 923CC87A34;
+	Mon,  8 Jan 2024 01:22:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WyreyAwX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LkFdebgj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A205E87A4F; Mon,  8 Jan 2024 01:16:41 +0100 (CET)
+ id 6CDA087A34; Mon,  8 Jan 2024 01:22:13 +0100 (CET)
 Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
  [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BA4A87AB0
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 01:16:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4633787955
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 01:22:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-680c7cf2ab3so14491316d6.3
- for <u-boot@lists.denx.de>; Sun, 07 Jan 2024 16:16:39 -0800 (PST)
+ 6a1803df08f44-67f8d9fe99fso13448226d6.2
+ for <u-boot@lists.denx.de>; Sun, 07 Jan 2024 16:22:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704672998; x=1705277798; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0gwb/iPHuWkF+kPoNVuTlsutzKO7Rl8eA10n9vX1R9I=;
- b=WyreyAwXq848WjyMOv/lOfgNsJynMuHNAnDtWS+dD7Ag4BaJscMZ9R9Nm5fpOurzWg
- jXiJSeMLIg2/yVr2J7YLqKjl1fbjr6LY54xhIoasKEgslMNpaBc18Wy1Iamhjd6PIQ6I
- ucGxzPKLlIjOmxKja3oSfv6K6vwINOez6nxB0=
+ d=chromium.org; s=google; t=1704673328; x=1705278128; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=bhi1noj4chDUEfvvxguKntYP0bLt/vV3ewRKtJlz3ao=;
+ b=LkFdebgja/ZSt7+nJThK2qC2R1uzpatw7FJ+gHrCdcgwj9e4MaAtc6YW/SsYYaR3k/
+ EJGVTqNqmyPhV4h7+h/h89piCuOFZkP8qTiFkGpG3khQhfOrunOibT9wIA0lKvOEIQlZ
+ FIvqrqkwIPArw+4KPXjamNxELdHxP0tsi26qQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704672998; x=1705277798;
- h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0gwb/iPHuWkF+kPoNVuTlsutzKO7Rl8eA10n9vX1R9I=;
- b=seoG49wDmc8CcFLVCAiLbGXLycWjb+HNLQOnw4J9wMEZ1gr32f5rq30T05c9AdiM36
- IQMv9B9V8kSYSUfimMB99rl7mJ4RqPLOEM0N8yWSTcp5vVHDeOzAkhAs1N6Lk2EN4sWz
- luMPKFDRNSO/YkFvyjgjDlGGgAy4w2czTEpWd5rjNdo8RKZvMVWyzVM5puvS2R58hGOk
- S8dSHyxdxlxJJNjcFxVA9MytkmWA5Pq9y/KbSbKpMiOvbzRcAADP3dm5pY0GGUReY1hu
- XsfeQHnXKbY9VOTJiZ4IaPs8q9O3FjOm3pXF5D+mwaV+OltugKNMZi+Z0Wevr25+s9tx
- bi/w==
-X-Gm-Message-State: AOJu0YyX4a17lGTTsk9YZ/Amz+clnoP2zUx01GNcHS75Evroa53UjAvb
- qUaha+SNChdJaagDJ7jHm7Af2fx+Ige9P3sH8V9Zd06wTcII
-X-Google-Smtp-Source: AGHT+IHRbR0OMVM+sDWLl6Nc/4wImSqOaBQhxLZPHysIzzLcH9qgTDBnwzLMjOjA3O1hyWI61204jDvbjAfAvSZJRNg=
-X-Received: by 2002:ad4:5dea:0:b0:67a:b1f1:9c57 with SMTP id
- jn10-20020ad45dea000000b0067ab1f19c57mr4123923qvb.26.1704672998545; Sun, 07
- Jan 2024 16:16:38 -0800 (PST)
-Received: from 798914943136 named unknown by gmailapi.google.com with
- HTTPREST; Sun, 7 Jan 2024 18:16:38 -0600
+ d=1e100.net; s=20230601; t=1704673328; x=1705278128;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=bhi1noj4chDUEfvvxguKntYP0bLt/vV3ewRKtJlz3ao=;
+ b=nktlpNvzlF6sDl2Zgm6e5U/Eb+K2LcMT8LOhRiYy5DupTUYbT5nlbsUfUdjaYLqrig
+ CV4pH3Yj2EeVZtC46sfUMCmKqoiphtnN1pkf4hk1j0DrjQeYrzInIpgqEnX/yIZPeLpU
+ KhUBHe872ESej8IInS7NwG61XG6Io5tRj7MbA0X22B++dp10Fwn4J/ntUeYJvqqhSW9z
+ 3JeJit7MzJF9XbktHIeTLXcA6OpCg3MfcrRmEqoTgCflreFOPmv8dpO13Z6lQYCMhsNM
+ LFYWI2JqZ66GIzt6gUTZg/J+1z1/4L/ehMjOPX2K3ZZD1PmGyJaootoi6fb6huH6hVF6
+ MGUQ==
+X-Gm-Message-State: AOJu0YxHKntqXrD5TYctAgNBhj+bNYh7dES2X61mXUV/MV3Cyg2jArN4
+ dDvOiaJyVPyIpj3d5tqgF76IwgURHvM+q6ro1IKGkdp5y6FQ0QrTFqJXg0Amog==
+X-Google-Smtp-Source: AGHT+IFztczR6B17QQMANcMvAoew4z2qiEuk19vAwPFzQw0Yu242FvXjF5/icsVFiKF+0H6YFcuMkxiWxSEsozeTpg0=
+X-Received: by 2002:ad4:4ea4:0:b0:67a:cdb1:d0f3 with SMTP id
+ ed4-20020ad44ea4000000b0067acdb1d0f3mr4292072qvb.35.1704673328021; Sun, 07
+ Jan 2024 16:22:08 -0800 (PST)
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAPnjgZ2WdXAj=6=jTf1mYxDRR-8ow3OFr+tjrrvqKBNWJV78Qw@mail.gmail.com>
-References: <CAPnjgZ2WdXAj=6=jTf1mYxDRR-8ow3OFr+tjrrvqKBNWJV78Qw@mail.gmail.com>
- <20231216081200.7677-1-heinrich.schuchardt@canonical.com>
- <20231216081200.7677-2-heinrich.schuchardt@canonical.com>
-Date: Sun, 7 Jan 2024 18:16:38 -0600
-X-Google-Sender-Auth: 0rkeoPjulQh4GHZKAFFcPhq8qos
-Message-ID: <CAFLszTir8ni0Vv_XJLry3+fprbhOwy-GPRX09PkyxF5c8i7Jbw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/4] acpi: use 64-bit addresses in FADT table
-To: Simon Glass <sjg@chromium.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
- u-boot@lists.denx.de, Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Date: Sun, 7 Jan 2024 17:21:57 -0700
+Message-ID: <CAFLszThp=VqYAR7FB0i4Ni3yd9wJvD63_QP7_pb2+2fRhXxBAg@mail.gmail.com>
+Subject: Please pull u-boot-dm/next
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,28 +77,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 16 Dec 2023 at 01:12, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> Fields X_FIRMWAE_CTRL and X_DSDT must be 64bit wide. Convert pointers to
-> to uintptr_t to fill these.
->
-> If field X_FIRMWARE_CTRL is filled, field FIRMWARE must be ignored. If
-> field X_DSDT is filled, field DSDT must be ignored. We should not fill
-> unused fields.
->
-> See the field definitions in chapter "5.2.9 Fixed ACPI Description Table
-> (FADT)" of the ACPI Specification 6.5.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  arch/x86/cpu/baytrail/acpi.c | 9 +++------
->  arch/x86/cpu/quark/acpi.c    | 9 +++------
->  arch/x86/cpu/tangier/acpi.c  | 9 +++------
->  arch/x86/lib/acpi_table.c    | 9 ++-------
->  include/acpi/acpi_table.h    | 6 ++----
->  5 files changed, 13 insertions(+), 29 deletions(-)
+Hi Tom,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+This is for -next
 
-Applied to u-boot-dm/next, thanks!
+
+https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/19216
+
+https://dev.azure.com/simon0972/u-boot/_build/results?buildId=58&view=results
+
+
+The following changes since commit c2c598e87cfe56f5991730762c00733c5aa9a994:
+
+  Merge branch 'staging' of
+https://source.denx.de/u-boot/custodians/u-boot-tegra into next
+(2024-01-06 09:57:56 -0500)
+
+are available in the Git repository at:
+
+  git://git.denx.de/u-boot-dm.git tags/dm-next-7jan23
+
+for you to fetch changes up to 8c4b37ce97c27ad4e7f83b028d4cd1396a51a36f:
+
+  arm: enable support for QEMU firmware tables (2024-01-07 13:49:15 -0700)
+
+----------------------------------------------------------------
+switch to SMBIOS3 tables
+allow devicetree from bloblist
+ACPI support for ARM and RISC-V
+
+----------------------------------------------------------------
+Heinrich Schuchardt (14):
+      smbios: SMBIOS 3.0 (64-bit) Entry Point structure
+      acpi: use 64-bit addresses in FADT table
+      cmd: acpi: fix listing DSDT and FACS
+      cmd: acpi: check HW reduced flag in acpi list
+      acpi: support 64bit in acpi_find_table for DSDT and FACS
+      acpi: Kconfig symbol CONFIG_QFW_ACPI
+      acpi: carve out qfw_acpi.c
+      arm: add ACPI fields to global data
+      riscv: add ACPI fields to global data
+      acpi: enable writing ACPI tables on QEMU
+      riscv: add support for QEMU firmware tables
+      riscv: allow usage of ACPI
+      configs: qemu: add config fragment for ACPI
+      arm: enable support for QEMU firmware tables
+
+Simon Glass (12):
+      smbios: Refactor 32-bit code into an else statement
+      smbios: Move the rest of the SMBIOS2 code
+      smbios: Use SMBIOS 3.0 to support an address above 4GB
+      smbios: Correct gd_smbios_start()
+      efi: Use the correct GUID for the SMBIOS table
+      smbios: Require the caller to align the SMBIOS table
+      smbios: Drop support for SMBIOS2 tables
+      efi: smbios: Drop support for SMBIOS2 tables
+      acpi: Rename test dm_test_setup_ctx_and_base_tables()
+      acpi: Write pointers to tables instead of addresses
+      efi: Correct smbios-table installation
+      fdt: Allow the devicetree to come from a bloblist
+
+ MAINTAINERS                          |   1 +
+ arch/Kconfig                         |   1 +
+ arch/arm/include/asm/global_data.h   |   7 ++-
+ arch/riscv/include/asm/global_data.h |   6 ++
+ arch/sandbox/include/asm/io.h        |  16 ++++++
+ arch/x86/cpu/baytrail/acpi.c         |   9 +--
+ arch/x86/cpu/quark/acpi.c            |   9 +--
+ arch/x86/cpu/tangier/acpi.c          |   9 +--
+ arch/x86/lib/acpi_table.c            |  15 ++---
+ board/emulation/configs/acpi.config  |   3 +
+ board/emulation/qemu-arm/Kconfig     |   1 +
+ board/emulation/qemu-riscv/Kconfig   |   2 +
+ cmd/acpi.c                           |  24 +++++---
+ doc/board/emulation/acpi.rst         |  23 ++++++++
+ doc/board/emulation/index.rst        |   1 +
+ doc/develop/devicetree/control.rst   |   3 +
+ drivers/misc/Kconfig                 |   7 +++
+ drivers/misc/Makefile                |   1 +
+ drivers/misc/qfw.c                   | 240
+------------------------------------------------------------------------------
+ drivers/misc/qfw_acpi.c              | 281
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ include/acpi/acpi_table.h            |   6 +-
+ include/asm-generic/global_data.h    |   2 +-
+ include/efi_api.h                    |   4 ++
+ include/fdtdec.h                     |   6 +-
+ include/mapmem.h                     |  18 ++++++
+ include/smbios.h                     |  41 ++++++++++++--
+ lib/acpi/Makefile                    |   2 +-
+ lib/acpi/acpi.c                      |  37 +++++++++---
+ lib/acpi/acpi_table.c                |   4 +-
+ lib/acpi/acpi_writer.c               |   4 +-
+ lib/acpi/base.c                      |   4 +-
+ lib/efi_loader/efi_smbios.c          |  28 ++++++----
+ lib/fdtdec.c                         |  44 +++++++++++----
+ lib/smbios.c                         |  55 ++++++------------
+ test/dm/acpi.c                       |  14 ++---
+ 35 files changed, 556 insertions(+), 372 deletions(-)
+ create mode 100644 board/emulation/configs/acpi.config
+ create mode 100644 doc/board/emulation/acpi.rst
+ create mode 100644 drivers/misc/qfw_acpi.c
+
+Regards,
+Simon
