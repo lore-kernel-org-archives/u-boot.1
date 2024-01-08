@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AE83C3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 08:02:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27050C3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 08:19:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05D3F87962;
-	Mon,  8 Jan 2024 09:02:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4E66987A2F;
+	Mon,  8 Jan 2024 09:19:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZruiQTJ/";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hdmygPCF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FF6187A0A; Mon,  8 Jan 2024 09:02:23 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id ED4BC87A2F; Mon,  8 Jan 2024 09:19:00 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2C1F8794A
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 09:02:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A169D8773E
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 09:18:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40882EFJ070101;
- Mon, 8 Jan 2024 02:02:14 -0600
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4088ItCu012051;
+ Mon, 8 Jan 2024 02:18:55 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704700934;
- bh=jgO3grtlnP0AHmuEMdS4hPSex/bB5JbdP4HhsV5RbQ8=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=ZruiQTJ/2DzEAbH9JBTlez3GLMggz/3knHWUDGJ2KnmHmibh+GjCTwo/W9HOZA+uZ
- oyXUDpB4azm3Y7tYyn2+fcmz+VI9VndkgOa/9q0uElW7SWpgBvczo/Imh9m36PGExk
- +Ql/ENcVl/jUh+c98kV64nqRlAtKdNfCM/sYm/8w=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40882ERf048776
+ s=ti-com-17Q1; t=1704701935;
+ bh=zkP9rlGEioJvyq3d87Z7SoDgtnSyUBYsCo2e+GH11Lw=;
+ h=From:Date:Subject:References:In-Reply-To:To:CC;
+ b=hdmygPCFHsBt4o0SmMFGXkJA8/8mhMInjsBalndlrsOXKMiXqd0gS/xOmPE70BhUW
+ BJL4bbdztYTBXKdNG6wW6H1LW106AcRXyXLBGIM3MH9D3DDh30+/mPhKBZy3dd/N18
+ RE/WEC7RA5X7t8aaN+fhzlApNGEnqHC4tRELWE1I=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4088Itib001342
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 8 Jan 2024 02:02:14 -0600
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
- Jan 2024 02:02:13 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE100.ent.ti.com
+ Mon, 8 Jan 2024 02:18:55 -0600
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE100.ent.ti.com
  (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
+ Jan 2024 02:18:55 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 8 Jan 2024 02:02:13 -0600
-Received: from [172.24.227.193] (devarsht.dhcp.ti.com [172.24.227.193])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 408828pP067763;
- Mon, 8 Jan 2024 02:02:09 -0600
-Message-ID: <416d41aa-397d-2d08-8297-f9d8b4e07752@ti.com>
-Date: Mon, 8 Jan 2024 13:32:07 +0530
+ Frontend Transport; Mon, 8 Jan 2024 02:18:55 -0600
+Received: from [127.0.1.1] (uda0497581.dhcp.ti.com [10.24.68.185])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4088IpIg030312;
+ Mon, 8 Jan 2024 02:18:54 -0600
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+Date: Mon, 8 Jan 2024 13:48:48 +0530
+Subject: [PATCH 1/2] include: env: ti: ti_common: Fix a missing semicolon
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [PATCH v5 0/8] Move framebuffer reservation for SPL to RAM end
-To: Simon Glass <sjg@chromium.org>, Anatolij Gustschin <agust@denx.de>, Tom
- Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <agust@denx.de>, <bmeng.cn@gmail.com>,
- <msuchanek@suse.de>, <rasmus.villemoes@prevas.dk>,
- <yangshiji66@outlook.com>, <praneeth@ti.com>, <nm@ti.com>,
- <vigneshr@ti.com>, <a-bhatia1@ti.com>, <j-luthra@ti.com>,
- <nsekhar@ti.com>, <n-jain1@ti.com>
-References: <20231205155523.721784-1-devarsht@ti.com>
- <871ec46f-feb6-146f-91f9-6f02c0da3b45@ti.com>
- <CAFLszTiJ6En-jQr_3v4S0d4eUyBvvOt==SeZ8n46ZjLwju6Tdw@mail.gmail.com>
-Content-Language: en-US
-From: Devarsh Thakkar <devarsht@ti.com>
-In-Reply-To: <CAFLszTiJ6En-jQr_3v4S0d4eUyBvvOt==SeZ8n46ZjLwju6Tdw@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20240108-b4-upstream-fix-semicolon-v1-1-9437b3dc90ea@ti.com>
+References: <20240108-b4-upstream-fix-semicolon-v1-0-9437b3dc90ea@ti.com>
+In-Reply-To: <20240108-b4-upstream-fix-semicolon-v1-0-9437b3dc90ea@ti.com>
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Manorit Chawdhry <m-chawdhry@ti.com>
+X-Mailer: b4 0.13-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1704701931; l=829;
+ i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
+ bh=9xmlUpUL50kvu1oMSpN9JhhsnLBWL8olAcmjzkcctFE=;
+ b=jKr+SrhNkf3nKiD1C9RkyN2rCM3VNrxO55mkvf0xNMYLl08JvTLincIuZ0nhkaf0eIc+D0t0l
+ QD+nbrYMZ3xCCS6XW9e1kbZkZOf3uEsV1RdcBvI5uauVXcX4gmg3Xjg
+X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
+ pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,97 +87,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anatolij, Tom,
+Fix a missing semicolon that leads to syntax error while booting j721s2.
 
-On 26/12/23 15:17, Simon Glass wrote:
-> On Wed, Dec 13, 2023 at 2:56 PM Devarsh Thakkar <devarsht@ti.com> wrote:
->>
->> Hi Antoine,
->>
->> On 05/12/23 21:25, Devarsh Thakkar wrote:
->>> Move video memory reservation for SPL at end of RAM so that it does
->>> not interefere with reservations for next stage so that the next stage
->>> need not have holes in between for passed regions and instead it can
->>> maintain continuity in reservations.
->>>
->>> Also catch the bloblist before starting reservations to avoid the same
->>> problem.
->>>
->>> While at it, also fill missing fields in video handoff struct before
->>> passing it to next stage.
->>>
->>> This is as per discussions at :
->>> For moving SPL framebuffer reservation at end of RAM:
->>>
->>> https://lore.kernel.org/all/CAPnjgZ3xSoe_G3yrqwuAvoiVjUfZ+YQgkOR0ZTVXGT9VK8TwJg@mail.gmail.com/
->>>
->>> For filling missing video handoff fields :
->>> https://lore.kernel.org/all/CAPnjgZ1Hs0rNf0JDirp6YPsOQ5=QqQSP9g9qRwLoOASUV8a4cw@mail.gmail.com/
->>>
->>> Changelog:
->>> V2:
->>> - Make a generic function to reserve video memory at SPL stage.
->>> - Add debug prints while skipping framebuffer allocation at uboot.
->>> - Correct commenting style as suggested.
->>>
->>> V3:
->>> - Change spl_reserve_video to spl_reserve_video_from_ram_top
->>>   which enforce framebuffer reservation from end of RAM.
->>> - Use gd->ram_top instead of local ram_top and update
->>>   gd->reloc_addr after each reservation.
->>> - Print error message on framebuffer reservation.
->>> - Update SPL doc with spl splash screen specific info.
->>>
->>> V4:
->>> - Split patches into atomic commits.
->>> - Remove duplicate check for video blob passed addresses and error out
->>>   if invalid address/size received from blob.
->>> - Improve SPL documentation memory reservation scheme and print message
->>>   for video memory reservation from bloblist.
->>> - Add Reviewed-By.
->>>
->>> V5:
->>>  - Add comment for filling video handoff size with aligned size
->>>  - Use PHASE_BOARD_F while checking for U-boot proper stage
->>>  - Add Reviewed-by
->>>
->>
->> Is it possible to pull this series in if no further comments ?
-> 
-> Yes please, this has been pending for a while.
+    Importing environment from mmc1 ...
+    syntax error at 'run'HUSH died!
 
-Gentle reminder. Is it possible to pick this series ?
+Fixes: 0d72b0f2f83b ("include: env: ti: ti_common: Run main_cpsw0_qsgmii_phyinit conditionally")
 
-Regards
-Devarsh
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+---
+ include/env/ti/ti_common.env | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> 
->>
->> Regards
->> Devarsh
->>
->>> Test logs:
->>> https://gist.github.com/devarsht/30a3c1591270c9ebae00714b48d33058
->>>
->>> Devarsh Thakkar (8):
->>>   spl: Enforce framebuffer reservation from end of RAM
->>>   arm: mach-k3: common: Reserve video memory from end of the RAM
->>>   board: ti: am62x: evm: Remove video_setup from spl_board_init
->>>   common/board_f: Catch bloblist before starting reservations
->>>   video: Skip framebuffer reservation if already reserved
->>>   video: Fill video handoff in video post probe
->>>   doc: spl: Add info for missing Kconfigs
->>>   doc: spl: Add info regarding memory reservation
->>>
->>>  arch/arm/mach-k3/common.c    | 17 ++++++++++-----
->>>  board/ti/am62x/evm.c         | 18 ----------------
->>>  common/board_f.c             | 41 +++++++++++++++++++++++++++++++-----
->>>  common/spl/spl.c             | 19 +++++++++++++++++
->>>  doc/develop/spl.rst          | 37 ++++++++++++++++++++++++++++++++
->>>  drivers/video/video-uclass.c | 40 ++++++++++++++++++++++++-----------
->>>  include/spl.h                | 10 +++++++++
->>>  7 files changed, 142 insertions(+), 40 deletions(-)
->>>
-> 
-> Regards,
-> Simon
+diff --git a/include/env/ti/ti_common.env b/include/env/ti/ti_common.env
+index f0f89a228767..5473f633aa7d 100644
+--- a/include/env/ti/ti_common.env
++++ b/include/env/ti/ti_common.env
+@@ -27,7 +27,7 @@ bootcmd_ti_mmc=
+ #if CONFIG_CMD_REMOTEPROC
+ 	if test ${do_main_cpsw0_qsgmii_phyinit} -eq 1;
+ 		then run main_cpsw0_qsgmii_phyinit;
+-	fi
++	fi;
+ 	run boot_rprocs;
+ #endif
+ 	if test ${boot_fit} -eq 1;
+
+-- 
+2.43.0
+
