@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D82E9C3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 10:30:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5C09C3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 10:50:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12F7E87A24;
-	Mon,  8 Jan 2024 11:30:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1259987A6A;
+	Mon,  8 Jan 2024 11:50:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P6UBWk/K";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fi1rgWii";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 662748794A; Mon,  8 Jan 2024 11:30:42 +0100 (CET)
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
+ id 1DA3E878F6; Mon,  8 Jan 2024 11:50:56 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED05C87A24
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 11:30:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E8BE987A47
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 11:50:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-28ba5cca7fdso342176a91.0
- for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 02:30:39 -0800 (PST)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a29c4bbb2f4so167315466b.1
+ for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 02:50:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704709838; x=1705314638; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vACA5V7I9kpykdDM1k2LbKkm8AIpSVA3HFuBimh8Vag=;
- b=P6UBWk/KSldRNOCS6YT7JDF1MOzNHvpf94aGJ6AP+yCHTHem66CdajUBbSYqr/lZhl
- uOV8PL7YQ+v6J8N2NdQtnap32LndEX6K5GW/24umzuhVHKI6CxTE4CIAS9d2nVLzsA+W
- 4iLDbyAc7nZ3XWNzdUlpLftzdUPpaBM1o3ANx57mZ6LtliclYMzr7ZDEi8pAjBIKQhVc
- eIicLewAr7M4J2Zy/xDt0/JNjOp+jBgkx+d7IaZw8hIn03RShe2NUl4AW/WeRFuqFpu5
- 02KbgTaEqWpTe19iEwyeVBiGp2/+jQ2wXnqzbRiNHAZy6inOx6JdeyBMhc9e8sveNG8b
- R01g==
+ d=gmail.com; s=20230601; t=1704711053; x=1705315853; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ad/16uMd3ie39mBGaQFHiVGgwjULHdmhflaum9jZooI=;
+ b=fi1rgWii2RvGOxtJLC+LzJkTEriw1VsAJ7hFcEdrffa3XDNo/lrR+0Ai/nAlD4MutI
+ X0nYh2j4X0UDq64WKXEzP8bZ/hcXB5sw+rCcDf76HOYoMI0Em7Drd1leVYQBW+jHtbHV
+ sF7rtQCts3et3hdv4WfoMEO8fTWkNPF7r2rcwRBICu55uzGQSILzXEmJSfiRjK53jvUk
+ yK0/QNyy9lRcanbwUTW1iYPCksrnISUrx8SIkxibHGnmJbjIFqrO2YmGn5/u0tCh961c
+ YHz+rtStJSbGA8hJYbfkHsY+bhvNFpl59wQY3kfyhmkL3sR8hsiDVagM9hGW7Gd/urp7
+ sApQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704709838; x=1705314638;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vACA5V7I9kpykdDM1k2LbKkm8AIpSVA3HFuBimh8Vag=;
- b=Q8VLHpE4U6Xgty1Tk5MjIC1wxUXMEQ43l7jjgrVwz71KiMNw0ctTR5YLJH9dauQdn/
- BsRC8r4ax5p6FKg0Cg5QbVkrHP8Fo2iMp/vmfHOrZaiYBNUqR5tF0pUSAn8ibSbdSI8N
- qVnrnWjZl0d6sSCOG3uOSVvvpcanH75sBxfbMEBB8xZI0jrSV3k9ckJMfB6bBAZER2an
- rEXkWa78CJ/bnZAKOnXksFPOdshvDvhOlaJXo2F/IkpStCSybPnZucBgUKyp82RyjGYP
- tHQlw0mdJnPyzuK6vlDcN56KtToYcYQwMunK72ruMWO7Aokt77u5lm+YNMgvNC+Ml356
- nxOw==
-X-Gm-Message-State: AOJu0Yx6mH6IcnFIPlZK5KGkUiqi6F80S/y7JV0Y02oOXEo8KJINv70n
- 7h4EzNPN9cAR6ZVA3mlIwT40sW6J5S0lUYOB3Qo=
-X-Google-Smtp-Source: AGHT+IF7wNyn/jDsaagLEjZb4oPWMptGTSzDKAfXpcBhy1jIC4IFApEBxbivpBCHzdcOWULC5hm96VzbEw4XL7Cg0Uw=
-X-Received: by 2002:a17:90a:b78e:b0:28c:18b:3971 with SMTP id
- m14-20020a17090ab78e00b0028c018b3971mr5195266pjr.1.1704709837926; Mon, 08 Jan
- 2024 02:30:37 -0800 (PST)
+ d=1e100.net; s=20230601; t=1704711053; x=1705315853;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ad/16uMd3ie39mBGaQFHiVGgwjULHdmhflaum9jZooI=;
+ b=mfVHTY4asReY5lDF9UWwgYrYY0cLdiBy0CF7Z99sPvafPaaakr7MMVQHXvg6fUdYPS
+ f6eFRmMZRT4lML/bHXUBnVzZruJZwucOCv/LiWegPIvB/uvEUZtJREN7DClfVu+3c0Ag
+ rp5OQnM6QvTUc1Qngr8u7vkdYxUSE4S1wN/F1n/y5EhsB/OPV7fos4D4erkWvFwk7spX
+ UWlbJsfahn/iSeWy+asPa+pQdIzpTe6ggaDr13Jgtwi6atlwqRh3fVPPnmVRPmluZ8V0
+ 3AyQAOnkfOZ8jdYAIx+7uqAPN10HMdBbbWwDN3y/EulhgD4LIeo7gIVrdRx5NymD3tnm
+ AA2w==
+X-Gm-Message-State: AOJu0YzCgnnZ81oSDtV2LLXCLmJrKsV0/Bq6qNdwf9+NvhE4Oyzwc7CU
+ FiKrdpNSnDJZf8POpTqXWpk=
+X-Google-Smtp-Source: AGHT+IFWU2+K96U2nE7ZWgJS25m689lW//0XBJiY5Fj+04dap9Io/FQDh1kKvkYQNp0Ky1PYKDw3LQ==
+X-Received: by 2002:a17:907:3187:b0:a28:cf0a:c29e with SMTP id
+ xe7-20020a170907318700b00a28cf0ac29emr1573677ejb.114.1704711052999; 
+ Mon, 08 Jan 2024 02:50:52 -0800 (PST)
+Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
+ 26-20020a170906309a00b00a26ae4fb50asm3821141ejv.89.2024.01.08.02.50.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Jan 2024 02:50:52 -0800 (PST)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Thierry Reding <treding@nvidia.com>, Anatolij Gustschin <agust@denx.de>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v2 0/9] Add T114 video support
+Date: Mon,  8 Jan 2024 12:49:53 +0200
+Message-Id: <20240108105002.243149-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20240104155357.21865-1-othacehe@gnu.org>
- <CAOMZO5Cw3WE5j02GmFpGB7z4-LBA7Tne7X2TG=riTxpYvJZRuA@mail.gmail.com>
- <87v88489b4.fsf@gmail.com>
-In-Reply-To: <87v88489b4.fsf@gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 8 Jan 2024 07:30:26 -0300
-Message-ID: <CAOMZO5CyqnaqqWpcLQZXPYXiSYbtzLzR+7k10NC-LZ2WA7P4iA@mail.gmail.com>
-Subject: Re: [PATCH v5 0/3] Add imx93-var-som support
-To: Mathieu Othacehe <m.othacehe@gmail.com>
-Cc: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- Stefano Babic <sbabic@denx.de>, 
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,22 +88,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mathieu,
+T114 is not that different from T30 and all T30 drivers will work
+on T114 as well with some adjustments.
 
-On Mon, Jan 8, 2024 at 6:26=E2=80=AFAM Mathieu Othacehe <m.othacehe@gmail.c=
-om> wrote:
+Patches propose general improvements for existing Tegra DC and DSI
+drivers as well Tegra 114 video support (experimentl).
 
-> This issue was that we are expecting binman to keep working on the CI
-> even though the binary blobs are not present. I fixed that, had a green
-> Github build and submitted a v6.
+Commits pass buildman for tegra.
 
-Excellent, thank you.
+Svyatoslav Ryhel (9):
+  video: tegra20: dc: diverge DC per-SOC
+  video: tegra20: consolidate DC header
+  video: tegra20: dc: pass DC id to internal devices
+  video: tegra20: dc: add PLLD2 parent support
+  video: tegra20: dc: add reset support
+  video: tegra20: dc: add powergate
+  video: tegra20: add MIPI calibration driver
+  video: tegra20: dsi: add T114 support
+  video: tegra20: dsi: add reset support
 
- I plan to apply this series today, after Tom releases 2024.01 and
-merge next into master.
+ arch/arm/dts/tegra114-u-boot.dtsi             |  13 ++
+ arch/arm/dts/tegra114.dtsi                    |   4 +-
+ arch/arm/dts/tegra30-u-boot.dtsi              |   4 +
+ arch/arm/dts/tegra30.dtsi                     |   2 +-
+ arch/arm/include/asm/arch-tegra/dc.h          |   8 -
+ arch/arm/include/asm/arch-tegra114/pwm.h      |  13 ++
+ arch/arm/include/asm/arch-tegra20/display.h   |  28 ---
+ arch/arm/include/asm/arch-tegra30/display.h   |  28 ---
+ drivers/video/tegra20/Makefile                |   2 +-
+ drivers/video/tegra20/tegra-dc.c              | 166 ++++++++++++----
+ drivers/video/tegra20/tegra-dc.h              |  44 ++++
+ drivers/video/tegra20/tegra-dsi.c             |  94 ++++++++-
+ .../video/tegra20/tegra-dsi.h                 |  24 ++-
+ drivers/video/tegra20/tegra-mipi.c            | 188 ++++++++++++++++++
+ drivers/video/tegra20/tegra-pwm-backlight.c   |   3 +-
+ 15 files changed, 509 insertions(+), 112 deletions(-)
+ create mode 100644 arch/arm/include/asm/arch-tegra114/pwm.h
+ delete mode 100644 arch/arm/include/asm/arch-tegra20/display.h
+ delete mode 100644 arch/arm/include/asm/arch-tegra30/display.h
+ create mode 100644 drivers/video/tegra20/tegra-dc.h
+ rename arch/arm/include/asm/arch-tegra30/dsi.h => drivers/video/tegra20/tegra-dsi.h (90%)
+ create mode 100644 drivers/video/tegra20/tegra-mipi.c
 
-I will also wait for the Gitbug CI job to finish:
-https://github.com/u-boot/u-boot/pull/457
+-- 
+2.40.1
 
-Also, it seems you generated v6 against U-Boot master instead of U-Boot nex=
-t?
