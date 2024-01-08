@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E441C47073
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 00:19:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4881C47074
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 00:19:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6355C87A7F;
-	Mon,  8 Jan 2024 01:16:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 05FE287A89;
+	Mon,  8 Jan 2024 01:16:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i/tCWznZ";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eigdupQg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27F8C87A9B; Mon,  8 Jan 2024 01:16:36 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id E157B87A7F; Mon,  8 Jan 2024 01:16:36 +0100 (CET)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FA9987A83
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 01:16:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DDF387A8C
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 01:16:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-78314e00337so106479785a.0
- for <u-boot@lists.denx.de>; Sun, 07 Jan 2024 16:16:28 -0800 (PST)
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-3bbbc6e51d0so1203127b6e.3
+ for <u-boot@lists.denx.de>; Sun, 07 Jan 2024 16:16:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1704672987; x=1705277787; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1704672988; x=1705277788; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yWSOSJ24a8/GxORkAQOaa87HeUh+vX2RlID6abUvPXA=;
- b=i/tCWznZnoDUmIp46Bg8UaVaGLZuqmvjNMki8BU8vcsjHoDKtzWzQRCB5ZCokij9B9
- DfHMo6ysr8zJNTX+Sy15AAPZ63tbvdcED5PBlR7IZ4M1ZQd0nTh0mNtwVPyme42g+iSt
- cNtRM5Mz2UoHQTX7FpxHqWLGkfe/Oz+p7Iljo=
+ bh=gEUXFaUZS2mPqztpSEaFQrS+3j2zK4l4nLUxRMP4YJU=;
+ b=eigdupQgcc/0OmLs5BbpBzB2bgw81dqwQP7d32rHVkPWEfGNeWIenBBCjJdotwgChu
+ 2rGkbtUxQx1P0apJXJoUnqpptpxeVnB29TUhw46IPj9tFMM/OUWDZTPZcS10DOIOcsXT
+ teXrrtUMlGpBggwPv2HxXLkRWlwrVkPwvqMl4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704672987; x=1705277787;
+ d=1e100.net; s=20230601; t=1704672988; x=1705277788;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=yWSOSJ24a8/GxORkAQOaa87HeUh+vX2RlID6abUvPXA=;
- b=sqULHhd2S5lG3r7jxVbB0p1t77ZMWPDWoq6KsKl0eoxy/GBDehaZp6kin/Yr81oSDV
- /jqvjUL5Opm5MjqiDznDE5zwFGvilwkTnZneN0iPMtn/UgvnENAKtxOn9sa74FODfXzZ
- IC7keS2219RvoWyGlRAtcsE8lrJYBdLEJ457wuc0irzalewFkc/viPA5OdUHiqN3RPoY
- k9FQrjUS7VcNqlmtyDO9X9S5DyGJlFJ245c+3tNwJYNmgYkT3tj8rcpIq6KX3+rGBMXb
- nPo9Fip7Ft+C9QJG/j+bE/xFbFk/07NwKIEE2+GwPX+fbTWSW4nevGiLPpBZykx+ZKYf
- nQjg==
-X-Gm-Message-State: AOJu0YyAj3d6bR+NvRnU0E02VPOeAWNNXfC18RNfHVuvdVphhDLWBxUj
- BUmG4mblCvzPzpF6LcldAv5WUD+R9A5rVvOEsoRSULa6r7dB
-X-Google-Smtp-Source: AGHT+IGQ3L/btputHGvzYmKBcLe5g0NvTsYBJiwbzZ4ZgujcxinD3iE0tq4/xN9cnaYVNdJFP2HT87a25IoLeXXNGWU=
-X-Received: by 2002:ad4:430f:0:b0:680:d224:702c with SMTP id
- c15-20020ad4430f000000b00680d224702cmr2825531qvs.84.1704672987489; Sun, 07
+ bh=gEUXFaUZS2mPqztpSEaFQrS+3j2zK4l4nLUxRMP4YJU=;
+ b=OBckaFg0CCuta0KO3a67KiCvglVe2J1eRS9AxLTiYMhwGKRh8baZeNhyVkStuVTzkH
+ UM5sSpQXmK1So5mM5h6TY7FgL9D/YAEy4GetIPuv/T9enJ/BjLeZ8h82OGccRniSFfT0
+ VJTYP08nUDknkS6Tt5em+aW0X2XpYs/NyuykUGv+jvjd4Jb41Hh0rwz/71vUtgWmVXkY
+ gWUNe6EEbCY1b3+REDaM/g9PgSmfBwagdMXmfur4HvGZjCaEXtHubZXsWcUyGHkMpUGu
+ UMN6892ek1TP/hjQQAFJIsch7+SnLnMmOJX3wjaN3OCCLdxwKN4ydJrc7frqcke+piYV
+ 0v0w==
+X-Gm-Message-State: AOJu0Yyrm6e7lMdI8Z/pvaj+95kx4LfIWnH0sQfco+4PJvM3ZGDcslvP
+ 9aSDb28ko5vYXexAB5/00VkB96Zbp1DAa7X1gyFyWEEBU+nG
+X-Google-Smtp-Source: AGHT+IGwOh1A2MSf5ct6hWHhhP4ODbxRm7t9ieuQ/DItv7RL3Xz06Uxc6irOGbECsShTFlCQ+3OljMLM/Lapq1M24j8=
+X-Received: by 2002:a05:6808:1281:b0:3bb:b700:e2e6 with SMTP id
+ a1-20020a056808128100b003bbb700e2e6mr2579000oiw.114.1704672987928; Sun, 07
  Jan 2024 16:16:27 -0800 (PST)
 Received: from 798914943136 named unknown by gmailapi.google.com with
  HTTPREST; Sun, 7 Jan 2024 18:16:27 -0600
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20231219150408.10949-5-heinrich.schuchardt@canonical.com>
-References: <20231219150408.10949-5-heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAPnjgZ303PP1B0zwiybV=m72bu2A7eQokg5GvW4XCE3Jc_y34w@mail.gmail.com>
+References: <CAPnjgZ303PP1B0zwiybV=m72bu2A7eQokg5GvW4XCE3Jc_y34w@mail.gmail.com>
  <20231219150408.10949-1-heinrich.schuchardt@canonical.com>
+ <20231219150408.10949-4-heinrich.schuchardt@canonical.com>
 Date: Sun, 7 Jan 2024 18:16:27 -0600
-X-Google-Sender-Auth: Mrte6GJusfLojSau21QLsjcPuWk
-Message-ID: <CAFLszThQ6JjZPvsUA8gNNdgofYGpk6PR_1T4p2AuY0wc_DAnAg@mail.gmail.com>
-Subject: Re: [PATCH v4 4/9] riscv: add ACPI fields to global data
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+X-Google-Sender-Auth: fUJcsOK6CvT0nkdsvU9aHXB-yKM
+Message-ID: <CAFLszTiY+e=RKCQp344Mhg6UZa=er6zEtyNxpDaegVYsD6iCjg@mail.gmail.com>
+Subject: Re: [PATCH v4 3/9] arm: add ACPI fields to global data
+To: Simon Glass <sjg@chromium.org>
 Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
- Simon Glass <sjg@chromium.org>
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,20 +88,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add fields for the location of ACPI tables to the global data.
+On Tue, 19 Dec 2023 at 08:04, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> Add fields for the location of ACPI tables to the global data.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> v4:
+>         no change
+> v3:
+>         let tables in global data depend on CONFIG_(SPL_)ACPI
+> v2:
+>         new patch
+> ---
+>  arch/arm/include/asm/global_data.h | 7 ++++++-
+>  1 file changed, 6 insertions(+), 1 deletion(-)
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
----
-v4:
-	no change
-v3:
-	let tables in global data depend on CONFIG_(SPL_)ACPI
-v2:
-	no change
----
- arch/riscv/include/asm/global_data.h | 6 ++++++
- 1 file changed, 6 insertions(+)
 
 Applied to u-boot-dm/next, thanks!
