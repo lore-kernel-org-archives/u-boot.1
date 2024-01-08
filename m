@@ -4,52 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29809C3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 16:58:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77532C3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 16:58:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AD2F87A4B;
-	Mon,  8 Jan 2024 17:58:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 57B9987ABA;
+	Mon,  8 Jan 2024 17:58:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="K17WIO8t";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Sed3m9QE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC6A387A4B; Mon,  8 Jan 2024 17:58:08 +0100 (CET)
+ id 7529887463; Mon,  8 Jan 2024 17:58:13 +0100 (CET)
 Received: from relay9-d.mail.gandi.net (relay9-d.mail.gandi.net
  [IPv6:2001:4b98:dc4:8::229])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14BBA87A9A
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 17:58:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B2DA87AA4
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 17:58:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=thomas.richard@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id B36BEFF80E;
- Mon,  8 Jan 2024 16:58:03 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 59A10FF815;
+ Mon,  8 Jan 2024 16:58:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1704733086;
+ t=1704733090;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=XEjNhwV11lLYJfLwEoEcPQ50k+zcLiL2H8TTcz2T9rI=;
- b=K17WIO8tR/VEFBI1ja1g367gS8nmdWwKvuKHsc5SAAZtInpqbsg/Hjbqg9zL0mwoVw6+Wr
- Zs+gaTJuCE/KJgeQfvIT7aL/vZDa8jywv/HFQYdi5cbUlUqDRVvka+peQ97ass4J3XnlXK
- zEJRMMSg/qNwNrV0h6tLjaE5iYJIz51kn/5eQQpOqU/9+LBuYgJDUNfCXQfXgz+c8kFjpD
- 4AHfb7tgb7ies+T+lcSMBFK7+xR0rKQQkp3xFqACX5kMn43qjWrDmoCFFS5Iq/bBGbqLv9
- ndC/XF83AXhWoIwUWjkfZJWpIFkBEtQgcK4/2EYriO+aqJutILQppslcc8jZfg==
+ bh=+UnjXEVnQYyie2JWwVQ4gSmHGi9QOVTvhU54k9n79VQ=;
+ b=Sed3m9QEcg/T+ug1FPmm0gvka4GpeG1HgZ5G+mXtz/bRVbX4jr9v3bDZQeK5poK4gudxwl
+ sbEIGXfa0pOOVneO15RX2aYstAqNqOCJNk1i+OEe2YmnZX94WKyEhy1ggorXt04SgZNBqG
+ bhyisV6udFiuoKmNct/R0W30DSqvbR9ZAOto4YbnD3KLXL26LiCyU6WbelCkUWWnXWOUQZ
+ Xs47CVqyEw92cZVE3h6OdWi2BhpE+JCSedfjKF/tNmZpRbtrlohJ4ijMAdJRbkzZXYUreU
+ gvOYBOXMDhG75tnltsx8qRexW6Mi8766r2T0vJzgwxmwRrVLgbJNbjn24ZkO8Q==
 From: Thomas Richard <thomas.richard@bootlin.com>
 To: u-boot@lists.denx.de
 Cc: thomas.petazzoni@bootlin.com, thomas.richard@bootlin.com, nm@ti.com,
- u-kumar1@ti.com, gregory.clement@bootlin.com,
- Gowtham Tammana <g-tammana@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 1/8] DO NOT MERGE: arm: dts: k3-j7200-r5-common: Add pmic
- node for esm
-Date: Mon,  8 Jan 2024 17:56:21 +0100
-Message-Id: <20240108165628.3935756-2-thomas.richard@bootlin.com>
+ u-kumar1@ti.com, gregory.clement@bootlin.com
+Subject: [PATCH v3 2/8] configs: j7200_evm_r5: Used reserved memory in DDR for
+ stack
+Date: Mon,  8 Jan 2024 17:56:22 +0100
+Message-Id: <20240108165628.3935756-3-thomas.richard@bootlin.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240108165628.3935756-1-thomas.richard@bootlin.com>
 References: <20240108165628.3935756-1-thomas.richard@bootlin.com>
@@ -72,52 +70,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Gowtham Tammana <g-tammana@ti.com>
+From: Gregory CLEMENT <gregory.clement@bootlin.com>
 
-Add pmic tps659413 node needed for ESM error event handling.
+When resuming from suspend to ram, we load again the DM firmware.
+However, we have to be sure to not modify the memory used by
+Linux.
 
-Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
-Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+Currently the SPL stack in DDR was in place that could be used by
+Linux. Instead of it use a memory address that is located in a
+reserved location that won't be used by Linux.
+
+Signed-off-by: Gregory CLEMENT <gregory.clement@bootlin.com>
 Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
 ---
 
 (no changes since v1)
 
- arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 17 ++++++++++++++---
- 1 file changed, 14 insertions(+), 3 deletions(-)
+ configs/j7200_evm_r5_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-index e62f9218e8..2bf0d5e3c0 100644
---- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-+++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-@@ -249,13 +249,24 @@
- 
- &wkup_i2c0 {
- 	bootph-pre-ram;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&wkup_i2c0_pins_default>;
-+	clock-frequency = <400000>;
-+
-+	tps659413: tps659413@48 {
-+		compatible = "ti,tps659413";
-+		reg = <0x48>;
-+		bootph-pre-ram;
-+
-+		regulators_a: regulators {
-+			bootph-pre-ram;
-+		};
-+	};
-+
- 	lp876441: lp876441@4c {
- 		compatible = "ti,lp876441";
- 		reg = <0x4c>;
- 		bootph-pre-ram;
--		pinctrl-names = "default";
--		pinctrl-0 = <&wkup_i2c0_pins_default>;
--		clock-frequency = <400000>;
- 
- 		regulators: regulators {
- 			bootph-pre-ram;
+diff --git a/configs/j7200_evm_r5_defconfig b/configs/j7200_evm_r5_defconfig
+index c4dd33627b..7450529d66 100644
+--- a/configs/j7200_evm_r5_defconfig
++++ b/configs/j7200_evm_r5_defconfig
+@@ -20,7 +20,7 @@ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_DRIVERS_MISC=y
+-CONFIG_SPL_STACK_R_ADDR=0x82000000
++CONFIG_SPL_STACK_R_ADDR=0xa5300000
+ CONFIG_SPL_FS_FAT=y
+ CONFIG_SPL_LIBDISK_SUPPORT=y
+ CONFIG_SPL_SPI_FLASH_SUPPORT=y
 -- 
 2.39.2
 
