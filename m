@@ -4,55 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F41DC3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 21:11:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6273C3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 21:11:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE55C87A36;
-	Mon,  8 Jan 2024 22:11:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2074F87A47;
+	Mon,  8 Jan 2024 22:11:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="GsYkbzAr";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="ScvI++5D";
+	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="1OL/7z30";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="wieP+B2k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B26A87A4B; Mon,  8 Jan 2024 22:11:07 +0100 (CET)
+ id 83E1487A77; Mon,  8 Jan 2024 22:11:21 +0100 (CET)
 Received: from galois.linutronix.de (Galois.linutronix.de
  [IPv6:2a0a:51c0:0:12e:550::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31E9D877AF
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 22:11:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B38B187A28
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 22:11:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tdmg@linutronix.de
 From: Tobias Deiminger <tdmg@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1704748264;
+ s=2020; t=1704748279;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=DiJkZUCfF+BZl4T8QUcDu6DfGWsH/Z4MBZTFdyAUiL8=;
- b=GsYkbzArRZs19RkXQgOmcPyBy8N/sE/vRWp7IbLzaAnplSvNRHhxBWBpKRtzEyNYWszrzI
- bQxnZaoStDbhctQ/bkhEr1oa3IeHhOpTCDFP9AkvsSue1MtImoEVvf4cX+ZcM+dlOhN952
- a3wlS+6OE6zuPkHykyLuvyssrTCbN+z5VkpZj4rNeYtS6oyi0z+aN9eOSBAZwFD82miCZ7
- OX5hoaUnsQdOMFPKE9VjfIfoXaUl95mTtV2hSoAf2QevCE1dMNXwq0AFgljKm/C9Df8N0R
- YtkGKkeInr+PUsZObo8f98n3GtnondKs6p5cs51bICCw/rrCksGbrZGM5k4PzA==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=nVqaMuS+4hBOV4fe6swjQ+fvzb/M2F84COUO0eL7mGA=;
+ b=1OL/7z30M9U2Cgf29BmDajcoIEnc8L3BmmuzUdWd1KT4V4D9S+D5sXKfQ6Qe2OzrH6o7Ub
+ eyYpOM3YkDYH+19u/oyftvmUhRFdbVWt+Yn/to5KwF4wma+Tl2QyC4hzRaRx/4xNLVMPpC
+ FpJcA+ZKwqo0YmdsB0+Tq/cJJ7RLZTUpdztvFZ1/zAAy++ES94oTrAVeRhr+RedPAGTqox
+ 68GI2EWMWCKXqUwtiTWrygaG+IiPqk/tLnkQ6ue9TBkmzL2fSsy5djxK7U7m4GRUgKMO/l
+ 6Qk+d0EOptQ74294EVW9Nc3vAauSW1peb0dbNRoNv3QjLz3ke58COle0ypGDTA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1704748264;
+ s=2020e; t=1704748279;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=DiJkZUCfF+BZl4T8QUcDu6DfGWsH/Z4MBZTFdyAUiL8=;
- b=ScvI++5D7JBjAnXq+NdrRNQLDxFhcjrWo+Keal8ikYUAshRZnZ8tZP8i7lFrFKd+Eivpw3
- FyyvNKtGxF0PLWCw==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=nVqaMuS+4hBOV4fe6swjQ+fvzb/M2F84COUO0eL7mGA=;
+ b=wieP+B2kBtdUm1DHje9abp9ndnTh0rG9OhVEgWnc70N66ZshyRPS2CZUT+w7T6Pq7ZkuHu
+ gzXuTIk/5TJTnGDg==
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Harald Seiler <hws@denx.de>,
  tdmg@linutronix.de (Tobias Deiminger)
-Subject: [PATCH 0/1] Skip cleanup test if not built out of tree
-Date: Mon,  8 Jan 2024 22:10:59 +0100
-Message-Id: <20240108211100.112730-1-tdmg@linutronix.de>
+Subject: [PATCH 1/1] test: Skip cleanup test if not built out of tree
+Date: Mon,  8 Jan 2024 22:11:00 +0100
+Message-Id: <20240108211100.112730-2-tdmg@linutronix.de>
+In-Reply-To: <20240108211100.112730-1-tdmg@linutronix.de>
+References: <20240108211100.112730-1-tdmg@linutronix.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -71,28 +75,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch avoids false positives in cases where tests are invoked with
-test.py --build-dir=./ . 
+42c0e5bb054d ("test: Find leftovers after clean/mrproper") assumes out
+of tree builds. test_clean and test_mrproper fail if the assumption
+isn't met.
 
-See tbot issue 107 [1] for motivation and prior discussion.
+However there are valid scenarios where tests run with in source builds
+(i.e., test.py --build-dir=.).
 
-Previously it resulted in:    
-E   AssertionError: leftovers: net/mdio-uclass.c, net/bootp.c, [...]
+Automatically skip cleanup tests in such scenarios to prevent false
+positives.
 
-Now it results in:
-SKIPPED [2] test/py/tests/test_cleanup_build.py:23: Leftover detection
-requires out of tree build.
-
-[1] https://github.com/Rahix/tbot/issues/107#issuecomment-1880192186
-
-Tobias Deiminger (1):
-  test: Skip cleanup test if not built out of tree
-
+Signed-off-by: Tobias Deiminger <tdmg@linutronix.de>
+---
  test/py/tests/test_cleanup_build.py | 5 +++++
  1 file changed, 5 insertions(+)
 
-
-base-commit: 93d91e9485d902a1836a22e72d1a545b587adf36
+diff --git a/test/py/tests/test_cleanup_build.py b/test/py/tests/test_cleanup_build.py
+index 5206ff73ec..aca90cb110 100644
+--- a/test/py/tests/test_cleanup_build.py
++++ b/test/py/tests/test_cleanup_build.py
+@@ -17,6 +17,11 @@ import pytest
+ @pytest.fixture
+ def tmp_copy_of_builddir(u_boot_config, tmp_path):
+     """For each test, provide a temporary copy of the initial build directory."""
++    if os.path.realpath(u_boot_config.source_dir) == os.path.realpath(
++        u_boot_config.build_dir
++    ):
++        pytest.skip("Leftover detection requires out of tree build.")
++        return None
+     shutil.copytree(
+         u_boot_config.build_dir,
+         tmp_path,
 -- 
 2.30.2
 
