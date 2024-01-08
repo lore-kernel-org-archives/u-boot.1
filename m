@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 038CFC3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 17:33:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50D45C3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 17:33:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF9C287ACA;
-	Mon,  8 Jan 2024 18:33:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 18D6C87AEB;
+	Mon,  8 Jan 2024 18:33:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="yztcmLGr";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZHoeSPAe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85E3587AE5; Mon,  8 Jan 2024 18:33:21 +0100 (CET)
+ id EF01787AE5; Mon,  8 Jan 2024 18:33:21 +0100 (CET)
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1DFF87AC7
+ by phobos.denx.de (Postfix) with ESMTPS id E6AEB87AD4
  for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 18:33:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 408HX9lh116464;
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 408HX9UO116456;
  Mon, 8 Jan 2024 11:33:09 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1704735189;
- bh=bvHZRuIW0lqws7SPjDU9lH51s1cf8iMHj+0dkV1DG6Q=;
+ bh=RmCp/032WLN8LbNd6eujax8pcaCg5cXj2tSapneEKws=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=yztcmLGrERQCimJqVM0srMi4OvyNrG6FvAYcttJcCDV7yZVMn7qtdjriahHSc9Xw5
- dxAYIuOkNbrrtebA6nk2iOLUBNrQJTtMcGwCGQtEimMtic0lZkToIPt08ONho0Q3pU
- NuhNgNRJx5cuirW3anSgsMLf99vMY+e0saaEtdg0=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 408HX9b0001660
+ b=ZHoeSPAeB4vsmHi20cHUyg//1rJg8ytldKmalJuKE81XYsE1BDEVhvYl7QNEiOCAP
+ A9l1K23Ze4an7Kwu24oZlXgeNHsXqjWl8f//XqV3lCO4uxj1x51Y9iec27ZrLmfJMm
+ TDxndDPVkKqFXF4PkOzQA+ItvVLmboTN5rfdw5AU=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 408HX9xm006924
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Mon, 8 Jan 2024 11:33:09 -0600
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
  Jan 2024 11:33:08 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 8 Jan 2024 11:33:09 -0600
+ Frontend Transport; Mon, 8 Jan 2024 11:33:08 -0600
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 408HX8wa045345;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 408HX83N109329;
  Mon, 8 Jan 2024 11:33:08 -0600
 From: Nishanth Menon <nm@ti.com>
 To: Tom Rini <trini@konsulko.com>
@@ -60,10 +60,10 @@ CC: Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu Raja <sinthu.raja@ti.com>,
  Bryan Brattlof <bb@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
  <u-boot@lists.denx.de>, Jon Humphreys <j-humphreys@ti.com>,
  Nishanth Menon <nm@ti.com>
-Subject: [PATCH 08/10] board: beagle: beagleboneai64: Set fdtfile from C code
- instead of findfdt script
-Date: Mon, 8 Jan 2024 11:32:59 -0600
-Message-ID: <20240108173301.2692332-9-nm@ti.com>
+Subject: [PATCH 07/10] board: ti: j721s2: Set fdtfile from C code instead of
+ findfdt script
+Date: Mon, 8 Jan 2024 11:32:58 -0600
+Message-ID: <20240108173301.2692332-8-nm@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240108173301.2692332-1-nm@ti.com>
 References: <20240108173301.2692332-1-nm@ti.com>
@@ -87,65 +87,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Stop using the findfdt script and switch to setting the fdtfile from C
-code.
+We now can provide a map and have the standard fdtfile variable set from
+code itself. This allows for bootstd to "just work".
 
-While at this, replace findfdt in environment with a warning as it is
-no longer needed
+While at this, replace findfdt in environment with a warning as it is no
+longer needed.
 
 Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
- board/beagle/beagleboneai64/beagleboneai64.c   | 14 ++++++++++++++
- board/beagle/beagleboneai64/beagleboneai64.env |  1 -
- configs/j721e_beagleboneai64_a72_defconfig     |  3 ++-
- 3 files changed, 16 insertions(+), 2 deletions(-)
+ board/ti/j721s2/evm.c      | 8 ++++++++
+ board/ti/j721s2/j721s2.env | 8 --------
+ 2 files changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/board/beagle/beagleboneai64/beagleboneai64.c b/board/beagle/beagleboneai64/beagleboneai64.c
-index c8c1c78ae5a2..1982f738b04e 100644
---- a/board/beagle/beagleboneai64/beagleboneai64.c
-+++ b/board/beagle/beagleboneai64/beagleboneai64.c
-@@ -28,3 +28,17 @@ int dram_init_banksize(void)
- {
- 	return fdtdec_setup_memory_banksize();
- }
-+
-+#ifdef CONFIG_BOARD_LATE_INIT
-+int board_late_init(void)
-+{
-+	char fdtfile[50];
-+
-+	snprintf(fdtfile, sizeof(fdtfile), "%s/%s.dtb",
-+		 CONFIG_TI_EVM_FDT_FOLDER_PATH, CONFIG_DEFAULT_DEVICE_TREE);
-+
-+	env_set("fdtfile", fdtfile);
-+
-+	return 0;
-+}
-+#endif
-diff --git a/board/beagle/beagleboneai64/beagleboneai64.env b/board/beagle/beagleboneai64/beagleboneai64.env
-index 4f0a94a8113e..647b25d14c8e 100644
---- a/board/beagle/beagleboneai64/beagleboneai64.env
-+++ b/board/beagle/beagleboneai64/beagleboneai64.env
-@@ -1,5 +1,4 @@
- #include <env/ti/ti_common.env>
--#include <env/ti/default_findfdt.env>
- #include <env/ti/mmc.env>
+diff --git a/board/ti/j721s2/evm.c b/board/ti/j721s2/evm.c
+index 1220cd84519b..5a0281d6b483 100644
+--- a/board/ti/j721s2/evm.c
++++ b/board/ti/j721s2/evm.c
+@@ -23,6 +23,7 @@
+ #include <dm/root.h>
  
+ #include "../common/board_detect.h"
++#include "../common/fdt_ops.h"
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -114,6 +115,12 @@ int checkboard(void)
+ 	return 0;
+ }
+ 
++static struct ti_fdt_map ti_j721s2_evm_fdt_map[] = {
++	{"j721s2", "k3-j721s2-common-proc-board.dtb"},
++	{"am68-sk", "k3-am68-sk-base-board.dtb"},
++	{ /* Sentinel. */ }
++};
++
+ static void setup_board_eeprom_env(void)
+ {
+ 	char *name = "j721s2";
+@@ -131,6 +138,7 @@ static void setup_board_eeprom_env(void)
+ 
+ invalid_eeprom:
+ 	set_board_info_env_am6(name);
++	ti_set_fdt_env(name, ti_j721s2_evm_fdt_map);
+ }
+ 
+ static void setup_serial(void)
+diff --git a/board/ti/j721s2/j721s2.env b/board/ti/j721s2/j721s2.env
+index 64e3d9da85f0..9a03b9f30aee 100644
+--- a/board/ti/j721s2/j721s2.env
++++ b/board/ti/j721s2/j721s2.env
+@@ -7,14 +7,6 @@
+ #include <env/ti/k3_rproc.env>
+ #endif
+ 
+-default_device_tree=ti/k3-j721s2-common-proc-board.dtb
+-findfdt=
+-	setenv name_fdt ${default_device_tree};
+-	if test $board_name = j721s2; then			\
+-		setenv name_fdt ti/k3-j721s2-common-proc-board.dtb; fi;
+-	if test $board_name = am68-sk; then
+-		setenv name_fdt ti/k3-am68-sk-base-board.dtb; fi;
+-	setenv fdtfile ${name_fdt}
  name_kern=Image
-diff --git a/configs/j721e_beagleboneai64_a72_defconfig b/configs/j721e_beagleboneai64_a72_defconfig
-index 959f86844d32..9e53658eacb9 100644
---- a/configs/j721e_beagleboneai64_a72_defconfig
-+++ b/configs/j721e_beagleboneai64_a72_defconfig
-@@ -34,7 +34,8 @@ CONFIG_AUTOBOOT_PROMPT="Press SPACE to abort autoboot in %d seconds\n"
- CONFIG_AUTOBOOT_DELAY_STR="d"
- CONFIG_AUTOBOOT_STOP_STR=" "
- CONFIG_OF_SYSTEM_SETUP=y
--CONFIG_BOOTCOMMAND="run set_led_state_start_load;run findfdt; run envboot; bootflow scan -lb;run set_led_state_fail_load"
-+CONFIG_BOOTCOMMAND="run set_led_state_start_load; run envboot; bootflow scan -lb;run set_led_state_fail_load"
-+CONFIG_BOARD_LATE_INIT=y
- CONFIG_LOGLEVEL=7
- CONFIG_SPL_MAX_SIZE=0xc0000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ console=ttyS2,115200n8
+ args_all=setenv optargs earlycon=ns16550a,mmio32,0x02880000
 -- 
 2.43.0
 
