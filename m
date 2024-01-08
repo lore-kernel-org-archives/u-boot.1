@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6EA6C47073
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 18:24:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51F9FC3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 18:24:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D35C87A38;
-	Mon,  8 Jan 2024 19:24:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9ABEA87A38;
+	Mon,  8 Jan 2024 19:24:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A2t7CZh4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gEszWdVA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FB3687A38; Mon,  8 Jan 2024 19:24:08 +0100 (CET)
-Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
- [IPv6:2607:f8b0:4864:20::532])
+ id 9E78886E82; Mon,  8 Jan 2024 19:24:43 +0100 (CET)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A132186E82
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 19:24:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 75C3087A36
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 19:24:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-5ce99e1d807so139118a12.1
- for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 10:24:05 -0800 (PST)
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-28b93b04446so543298a91.0
+ for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 10:24:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704738244; x=1705343044; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1704738280; x=1705343080; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8aGpmpqcXIL72u6VEsot+KhT1QnR9pcA55APKFfW878=;
- b=A2t7CZh45jGah86Q+w+PRCtBS5ihKRaAnxp/AdJyx8eh2gqvLC36MNZKG06TAIxyVh
- yI8HYdE9U1UUy+MMhQe3QgKCpuAbcRWG2ms+7Epld8PnkKYi7na3wvplJt6os3K3dpzE
- fxKYfe1dnYyCbDhEJIlfZ0uCkPPmDvFPyZidGfHvCYL2pTbkEmMleoz8af911Ucn5M1+
- 9b4Y841MnXu4DJlGDi+ZG89lM3N3OyQjDCgVgO/jrd2/GLMXlYLFj8BCoOMSLCP7+RJ7
- u/0NwfifSLCEcaiwG+8ZpYe6gDdlPFNn0JE8HRXBZZu83eaxGmFRYtT1YZpZm7Jr46t8
- aM6w==
+ bh=N45jniLBTbDzl3TmiwFG3vcSoJpuM6mN138Yx7AQu/U=;
+ b=gEszWdVA81hsIPWk+W3A8KaQeeyPHVlZIU7w1QjXdz2WPT/TbrPsLNOvD70J8qMhy3
+ dpPvUQMtwP3pAmq1IgZjTVOJwb+w4tr1qaThP+kl55svaZ+H4zSOQYhUrVlnLJLkHX4V
+ /BaCWfYFdVtmR0jZPL7RFUCrehnbcfPeS3Y8OQk4p5qrcW2zvoG16Q5zFrOGBMqiu1lv
+ Nu67m0+TrYQyoh1NmifytROHVTUb2pM+2P7mc9d1B1oweAkdwRbSiNFIXL6pwuPf3mDi
+ kpFGNI0cyPYCl3wfC4hapQ5dealMIhGGzcc4lWtLQxMz+za08iNJEuIcR54gr2JlzxjO
+ cgJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704738244; x=1705343044;
+ d=1e100.net; s=20230601; t=1704738280; x=1705343080;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8aGpmpqcXIL72u6VEsot+KhT1QnR9pcA55APKFfW878=;
- b=EleM82LwpKbSwvseMjJ180wRwxTzAnHLPEpBa6Lr2EnBSWgxnN7M5Ua7u/OQa3YuUl
- 1wwHw95TQkmWTzvneX41npLmXNFVDT+NK3MMfSLnMlXU1wCixdjRZgwVZ8J+0q9uXlmC
- npBmBevt7u0S4m8ICfN8P/pXp/3iEec/FTM2lpQ0WvDjfq8UyCXyhdc7gmhFktMcP+7k
- EyK9NE3ziIGQNpcFuLsMGCzxKJchXlSwuyTIegmYWih+ewhSx2vjLrZUmEoeYKL1twMm
- /ma/Eft4r3DgcAxLdq9LfhgofDbzWGWk2I3syVJvMFwWpbFgPSnHp3WaQwREYRvQIVqW
- jQRg==
-X-Gm-Message-State: AOJu0YygrR2hkLGecuQiQVdcDBATbxJNA9gWLdbUNn0Bb8qxzx955Tk7
- rnOg+VYiOv2Ovs+Zs/Om4IcX9arsMdIfPo6T5NM=
-X-Google-Smtp-Source: AGHT+IFWp+u4E+YwzOECkusc/FMjmAqbaot8f9rA1NE7NLd+rJ3vKB/Eg15vCKE30g95qkTAvHIRaV3uOIGestmdtY0=
-X-Received: by 2002:a17:90a:d58a:b0:286:4055:63e0 with SMTP id
- v10-20020a17090ad58a00b00286405563e0mr5734688pju.0.1704738243809; Mon, 08 Jan
- 2024 10:24:03 -0800 (PST)
+ bh=N45jniLBTbDzl3TmiwFG3vcSoJpuM6mN138Yx7AQu/U=;
+ b=IKsZJ/haunkKzzuNhxYsDF2Owsa6d7kNE3X5sMgYrBdjb8srPEljw9Fy37z8JJQuvu
+ cKONEd5SFR5ULLV+0B6pmE6PgBsoRpwTZOup15NAwWMAotM4TPPwAO9kcnuEIXfPLEGX
+ JxRt+Nj95w5+eDsAz/iMazqXgqYgaKYryIUcdriLUWaWZFEqXt9ULqPi0EmP74MGe/vn
+ oEsaob5BeTmEmi7XOLrnIidNpbQx4sxoE2pI8DfDboWlxc/KKMD5eRpgCdKdLAmo/iyE
+ l7AYrKHX8IPnm7wcpo2p+Ln9Bb3gbMYrwZeOZpVDsUN0ZaPcpaDd0CuSFmV4WPfxXtFJ
+ cTfA==
+X-Gm-Message-State: AOJu0Yz8VWTjBpCPlnDbepxAjmDJJyPH3UgSftJCUeQ4KBDz6+Fwq1sS
+ OKMtsNqy4PNlE2E2dHbdHlOfHUxcPf2dP/eChT6TvOvQ
+X-Google-Smtp-Source: AGHT+IHjG2fxqNHIda135C1CeSYAP9mW9VBuOZAzZFIehWDxOQKEyubsr40BmWcih2C3zBf3pGf4hpd5EAXpfFOQ0VY=
+X-Received: by 2002:a17:90a:4bce:b0:28b:c60:8dd0 with SMTP id
+ u14-20020a17090a4bce00b0028b0c608dd0mr5986723pjl.2.1704738279691; Mon, 08 Jan
+ 2024 10:24:39 -0800 (PST)
 MIME-Version: 1.0
-References: <20240102121207.3963-1-francesco@dolcini.it>
-In-Reply-To: <20240102121207.3963-1-francesco@dolcini.it>
+References: <20240101210650.87314-1-marex@denx.de>
+In-Reply-To: <20240101210650.87314-1-marex@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 8 Jan 2024 15:23:52 -0300
-Message-ID: <CAOMZO5B8OaaTZJdnNMUCH4+BPW3zUU1R6zAHrZ5koVEqoJZoKQ@mail.gmail.com>
-Subject: Re: [PATCH v1] verdin-imx8mm: Remove stale fdt_addr env variable
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, u-boot@lists.denx.de
+Date: Mon, 8 Jan 2024 15:24:28 -0300
+Message-ID: <CAOMZO5BN-yp89gKGc-2=_0oakBQzw68zBLaQTcCTr-N-xNdjCQ@mail.gmail.com>
+Subject: Re: [PATCH] ARM: imx: Auto-detect PHY on Data Modul i.MX8M Mini/Plus
+ eDM SBC
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Stefano Babic <sbabic@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,24 +88,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jan 2, 2024 at 9:12=E2=80=AFAM Francesco Dolcini <francesco@dolcini=
-.it> wrote:
+On Mon, Jan 1, 2024 at 6:07=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
 >
-> From: Francesco Dolcini <francesco.dolcini@toradex.com>
+> Implement fdtdec_board_setup() auto-detection of ethernet PHY.
+> This uses properties of the hardware and pull resistor placement.
 >
-> fdt_addr variable is the location in flash of the device tree blob [1], i=
-t
-> does not exist for verdin-imx8mm.
+> If GPIO1_16 RGMII_MDC is HIGH, then R530 (MX8MM eDM SBC) or
+> R390 (MX8MP eDM SBC) is populated. R530 or R390 is populated
+> only on boards with AR8031 PHY.
 >
-> Because of this the bootefi command fails unless the optional
-> `[fdt address]` parameter is passed on the command line,
-> bootefi.c:efi_install_fdt() assumes that `fdt_addr` is valid when
-> present.
+> If GPIO1_16 RGMII_MDC is LOW, then the in-SoM pull down is the
+> dominant pull resistor. This is the case on boards with BCM54213PE
+> PHY.
 >
-> Fix this removing fdt_addr from the U-Boot environment.
+> In case AR8031 PHY is populated, the PHY MDIO address is 0, in
+> case BCM54213PE PHY is populated, the PHY MDIO address is 1, the
+> fdtdec_board_setup() is used to patch the correct address into
+> the U-Boot control DT.
 >
-> [1] doc/usage/environment.rst
+> Enable broadcom PHY support to support both PHYs.
 >
-> Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
 Applied, thanks.
