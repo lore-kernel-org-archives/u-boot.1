@@ -4,55 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6A9CC3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 17:29:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 038CFC3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 17:33:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 153B687A8B;
-	Mon,  8 Jan 2024 18:29:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=codethink.co.uk
+	by phobos.denx.de (Postfix) with ESMTP id CF9C287ACA;
+	Mon,  8 Jan 2024 18:33:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=codethink.co.uk header.i=@codethink.co.uk header.b="qRcI5CKR";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="yztcmLGr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56D1687A7E; Mon,  8 Jan 2024 18:20:56 +0100 (CET)
-Received: from imap5.colo.codethink.co.uk (imap5.colo.codethink.co.uk
- [78.40.148.171])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 85E3587AE5; Mon,  8 Jan 2024 18:33:21 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C8818082A
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 18:20:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=codethink.co.uk
+ by phobos.denx.de (Postfix) with ESMTPS id B1DFF87AC7
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 18:33:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ivan.orlov@codethink.co.uk
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=codethink.co.uk; s=imap5-20230908; h=Sender:Content-Transfer-Encoding:
- MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pn6ClSdipMY6nE+HhmTgklfhXFS8MZ5AnTS5OKBfDNE=; b=qRcI5CKRy+QiOXajE80foWc6AM
- xtlZ4V2TlPl/l6Dq1uiquHtW1jAXOVux+jnKHX21hYmWsdB36groIA6rPf/+H+M5jqNMBrXTHCTCI
- 0qGaTTDVB5PXZwYrRmhOG1GuuRIhUS5o715+Yz8oQHxEGDiZmDcsIqICyDFIBfcdKKo50dB0lB+96
- BSgoCB940kuSsdByVglmUF4tl99kcJxN/G3XYnuoMKKAF0w042pyky8LMPnd2+zmqL+Y+7mzdlHiM
- es9cn5VxC39M1iglIiiXro7RWhFGTnedxBGjvbaq/jbzMK6Ik4Wxsa2iHpGZ7FLiHVtiK8sHTvFIw
- RAN8yWQg==;
-Received: from [167.98.27.226] (helo=ct-lt-2504.guest.codethink.co.uk)
- by imap5.colo.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
- id 1rMtIt-0033Nl-9d; Mon, 08 Jan 2024 17:20:47 +0000
-From: Ivan Orlov <ivan.orlov@codethink.co.uk>
-To: sjg@chromium.org, marek.vasut+renesas@mailbox.org,
- troykiskyboundary@gmail.com, rasmus.villemoes@prevas.dk
-Cc: Ivan Orlov <ivan.orlov@codethink.co.uk>,
-	u-boot@lists.denx.de
-Subject: [PATCH] cmd: nvedit: Fix typo in 'illegal character' error
-Date: Mon,  8 Jan 2024 17:20:45 +0000
-Message-Id: <20240108172045.1474962-1-ivan.orlov@codethink.co.uk>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 408HX9lh116464;
+ Mon, 8 Jan 2024 11:33:09 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1704735189;
+ bh=bvHZRuIW0lqws7SPjDU9lH51s1cf8iMHj+0dkV1DG6Q=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=yztcmLGrERQCimJqVM0srMi4OvyNrG6FvAYcttJcCDV7yZVMn7qtdjriahHSc9Xw5
+ dxAYIuOkNbrrtebA6nk2iOLUBNrQJTtMcGwCGQtEimMtic0lZkToIPt08ONho0Q3pU
+ NuhNgNRJx5cuirW3anSgsMLf99vMY+e0saaEtdg0=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 408HX9b0001660
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 8 Jan 2024 11:33:09 -0600
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
+ Jan 2024 11:33:08 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 8 Jan 2024 11:33:09 -0600
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 408HX8wa045345;
+ Mon, 8 Jan 2024 11:33:08 -0600
+From: Nishanth Menon <nm@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu Raja <sinthu.raja@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Roger Quadros <rogerq@kernel.org>, Simon Glass
+ <sjg@chromium.org>, Andrew Davis <afd@ti.com>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
+ <u-boot@lists.denx.de>, Jon Humphreys <j-humphreys@ti.com>,
+ Nishanth Menon <nm@ti.com>
+Subject: [PATCH 08/10] board: beagle: beagleboneai64: Set fdtfile from C code
+ instead of findfdt script
+Date: Mon, 8 Jan 2024 11:32:59 -0600
+Message-ID: <20240108173301.2692332-9-nm@ti.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240108173301.2692332-1-nm@ti.com>
+References: <20240108173301.2692332-1-nm@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 08 Jan 2024 18:29:50 +0100
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,27 +87,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix a typo: add a space after the single quote in 'illegal character'
-error message in 'env set' command
+Stop using the findfdt script and switch to setting the fdtfile from C
+code.
 
-Signed-off-by: Ivan Orlov <ivan.orlov@codethink.co.uk>
+While at this, replace findfdt in environment with a warning as it is
+no longer needed
+
+Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
- cmd/nvedit.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ board/beagle/beagleboneai64/beagleboneai64.c   | 14 ++++++++++++++
+ board/beagle/beagleboneai64/beagleboneai64.env |  1 -
+ configs/j721e_beagleboneai64_a72_defconfig     |  3 ++-
+ 3 files changed, 16 insertions(+), 2 deletions(-)
 
-diff --git a/cmd/nvedit.c b/cmd/nvedit.c
-index daf1ad37f9..7db78848bb 100644
---- a/cmd/nvedit.c
-+++ b/cmd/nvedit.c
-@@ -233,7 +233,7 @@ static int _do_env_set(int flag, int argc, char *const argv[], int env_flag)
- 	name = argv[1];
+diff --git a/board/beagle/beagleboneai64/beagleboneai64.c b/board/beagle/beagleboneai64/beagleboneai64.c
+index c8c1c78ae5a2..1982f738b04e 100644
+--- a/board/beagle/beagleboneai64/beagleboneai64.c
++++ b/board/beagle/beagleboneai64/beagleboneai64.c
+@@ -28,3 +28,17 @@ int dram_init_banksize(void)
+ {
+ 	return fdtdec_setup_memory_banksize();
+ }
++
++#ifdef CONFIG_BOARD_LATE_INIT
++int board_late_init(void)
++{
++	char fdtfile[50];
++
++	snprintf(fdtfile, sizeof(fdtfile), "%s/%s.dtb",
++		 CONFIG_TI_EVM_FDT_FOLDER_PATH, CONFIG_DEFAULT_DEVICE_TREE);
++
++	env_set("fdtfile", fdtfile);
++
++	return 0;
++}
++#endif
+diff --git a/board/beagle/beagleboneai64/beagleboneai64.env b/board/beagle/beagleboneai64/beagleboneai64.env
+index 4f0a94a8113e..647b25d14c8e 100644
+--- a/board/beagle/beagleboneai64/beagleboneai64.env
++++ b/board/beagle/beagleboneai64/beagleboneai64.env
+@@ -1,5 +1,4 @@
+ #include <env/ti/ti_common.env>
+-#include <env/ti/default_findfdt.env>
+ #include <env/ti/mmc.env>
  
- 	if (strchr(name, '=')) {
--		printf("## Error: illegal character '='"
-+		printf("## Error: illegal character '=' "
- 		       "in variable name \"%s\"\n", name);
- 		return 1;
- 	}
+ name_kern=Image
+diff --git a/configs/j721e_beagleboneai64_a72_defconfig b/configs/j721e_beagleboneai64_a72_defconfig
+index 959f86844d32..9e53658eacb9 100644
+--- a/configs/j721e_beagleboneai64_a72_defconfig
++++ b/configs/j721e_beagleboneai64_a72_defconfig
+@@ -34,7 +34,8 @@ CONFIG_AUTOBOOT_PROMPT="Press SPACE to abort autoboot in %d seconds\n"
+ CONFIG_AUTOBOOT_DELAY_STR="d"
+ CONFIG_AUTOBOOT_STOP_STR=" "
+ CONFIG_OF_SYSTEM_SETUP=y
+-CONFIG_BOOTCOMMAND="run set_led_state_start_load;run findfdt; run envboot; bootflow scan -lb;run set_led_state_fail_load"
++CONFIG_BOOTCOMMAND="run set_led_state_start_load; run envboot; bootflow scan -lb;run set_led_state_fail_load"
++CONFIG_BOARD_LATE_INIT=y
+ CONFIG_LOGLEVEL=7
+ CONFIG_SPL_MAX_SIZE=0xc0000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
 -- 
-2.34.1
+2.43.0
 
