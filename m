@@ -4,71 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48B2BC3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 10:03:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2457C3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 10:11:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C86A87A30;
-	Mon,  8 Jan 2024 11:03:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C71DA87A39;
+	Mon,  8 Jan 2024 11:11:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ingdWRPl";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="kPl7njDw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCA0287A34; Mon,  8 Jan 2024 11:03:35 +0100 (CET)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 54BF987A30; Mon,  8 Jan 2024 11:11:04 +0100 (CET)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2009::601])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F0F487A2F
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 11:03:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1CEDF87A24
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 11:11:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-50ea98440a7so1399689e87.1
- for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 02:03:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704708212; x=1705313012; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uuRrjfKVAzgwK6B5pdQ/OUH+aEZ5iBQ23U6n5/bLbw0=;
- b=ingdWRPlOmM3xCwR0ijiNdb0JSmOjmt/TCf27eDeZs449yyxOdQz/1nmBs4UW8f9kd
- pLHBJwiMp11ttCJqGqQqxJMKKpP2FPSeD2uEV0aDK8A9Svyfc0mWUhSh1kuQA727EPJJ
- ibXlSRtuU5WttjEHn0kmNsnepdLu21o4wLaJnI6ljtfPvZHfI+R8vfCu59JBdfVySK5O
- 8zwR5SwE48V8DnVyH7OEyNlRtAbQwiE2Xk3ktk/cDpObaRKTkTyIZ/F2+5rYkiGYbatb
- j/VoHgGMCyyVxdCj/aH2iOsB64ZEkYWGimaIkHH9be5BgmmTB9wAB0s58KyVXjyKt/3J
- xAWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704708212; x=1705313012;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=uuRrjfKVAzgwK6B5pdQ/OUH+aEZ5iBQ23U6n5/bLbw0=;
- b=Yg6Ed2TNrwMkQvblIeIohEvbLS3W4pGHwoh4zAls/qOY3g2BlkuqxSCvH8SlyfgZ16
- GPLz6HG5vQXdubSysRU2RQlEYgCZXI/Gw32+L2jx3737sNTnvTZHm9+Ivd8qPSXvExoD
- A7LbguDKeBxgq7GG+2tslHfch38egq7UIT82Dm/RXCQB2cXWTS1rcWKuvv6SRA1F8MZQ
- EVBvX/hhz/BtC18F1e3g5jlw9+mII9VgTC57mc9in0MvEw/PAIdKIWu9s6gHrNWPR4s0
- LSL37tT7b/NNknJE20CQMFjmwxoJqY2eM9SPoY1uh3p3r54x/jZcQanFYAVbwS10pnSB
- HJoQ==
-X-Gm-Message-State: AOJu0Ywn5oAniF7NUH/UM9I5nTvSfjlzRfVThzzcXk1mnd49MOyj70wA
- iP5a5nb/78owBFz6Mz8hR7y3utNXS+qFcwAt3K7TJLbrDC+AHA==
-X-Google-Smtp-Source: AGHT+IEpw6O8/BonoTrsN0APzZyMmnJkjZbuCllAlrds2ug/bu0Z0nCtJGUR3Wea6HE92pwY/1sANnPbOB3lg4yp8ok=
-X-Received: by 2002:a05:6512:552:b0:50e:8d02:72d9 with SMTP id
- h18-20020a056512055200b0050e8d0272d9mr826127lfl.124.1704708212505; Mon, 08
- Jan 2024 02:03:32 -0800 (PST)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=MjFdktgc3DtMJ+ljfvWN9CwciEFzIoAJtj7oWi6Gu/FMQDymgSAzRehJyAtNNMP60oUv1OKrcHK3U7lPqPHlz3672adMQtzfN+XLvnSgXLPzHw7+UMyEmRQIl7dFcj/F3UhAP1Wlyx3XM3LDiXcSowoNWgu2bKPOrNm2yOb3qVKTPLcFSaUVEt7XNL4C8tpxpDnPvv2byGhpmKSJhcwZ6qwfa+V5VZr9VSibyO/IRb0sR9Xz0el5mBtYiQYQ87f3qwJs8sZSluu9Xs0ehx/3vtNlXBX6tV4jo/V56npXtkGwXi6aiMCbfqtCYUMOXIbhqpbgVAmuZnsHd5NKZ69Oww==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Wk9mq672Ewgw81XTDWygY8Co7hrdwthZ+jx9beoUbdM=;
+ b=lFjOX5aU8TfSZrUpn6vkI7f5hzz40Sw6GoPQZwHVdFH3xaCo7w5ET4ng90HTVf/eucIYXb5+ps3hBl03Cot9ryma1P44H8z5Z3d6aaN/ztFgGlbJRJ5B9gxuv9EgRryDHOE7TipNpszyckwULdZIQWFSejiBRKL1o2srAWaIM3cNlVv/zW7m9tx1aqcPhzz1JYebKJs95dl4JEOQV8nLXSvHltUJTmCHicefjIxkYN8NihpYmnMQX6yvXlg7RwtNcJBGKZZ4B1hLsi41CHTi9jnrFxR7QvXLIn0XEErxCgupS+lFagDKGURq7l4K0B0rPLwmxS1BExQvEAABtsQj4w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Wk9mq672Ewgw81XTDWygY8Co7hrdwthZ+jx9beoUbdM=;
+ b=kPl7njDwQFhQBQBoY6yIf/ezKOxiAodmbddTtn25nT0ZyC8jTxQ3hgbzEUh1PKGKi9RhWzWLi5mQPG8qaGALdNErhbA4FHhyC03N/NjTF/j1eg7ufrTwlQ34n3RWUtfhoDjudBwD1k82es++wQdqs6TZCYEBpisAJRr4sg6NCUY=
+Received: from MN2PR19CA0049.namprd19.prod.outlook.com (2603:10b6:208:19b::26)
+ by LV8PR12MB9182.namprd12.prod.outlook.com (2603:10b6:408:192::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.23; Mon, 8 Jan
+ 2024 10:10:54 +0000
+Received: from BL6PEPF0001AB72.namprd02.prod.outlook.com
+ (2603:10b6:208:19b:cafe::ff) by MN2PR19CA0049.outlook.office365.com
+ (2603:10b6:208:19b::26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.21 via Frontend
+ Transport; Mon, 8 Jan 2024 10:10:54 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BL6PEPF0001AB72.mail.protection.outlook.com (10.167.242.165) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7181.12 via Frontend Transport; Mon, 8 Jan 2024 10:10:53 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Mon, 8 Jan
+ 2024 04:10:51 -0600
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Simon Glass <sjg@chromium.org>
+Subject: [PATCH] arm64: xilinx: Remove multiple blank lines from DTSes
+Date: Mon, 8 Jan 2024 11:10:47 +0100
+Message-ID: <6aaa9fa91c88ca3d3e5645d66a795ec09b8cec61.1704708642.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-References: <20240103080721.22292-1-heinrich.schuchardt@canonical.com>
- <20240103080721.22292-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240103080721.22292-3-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 8 Jan 2024 12:02:56 +0200
-Message-ID: <CAC_iWjJ1YDz1qiT+n-3hO63ZHCxw8M-qfQV+XcNQDOCVLx=kqA@mail.gmail.com>
-Subject: Re: [PATCH v3 2/2] efi_loader: provide tool to dump SMBIOS table
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1932; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=JMzdyrfB+QNBZUJPkfYJsa91TTSexBznv7E40EYgT2Y=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhtTZp1RZ9P38G2fcT007k/syVF5lq+Lyt9dWvrohL/iT0
+ Vezw5ylI5aFQZCJQVZMkUXa5sqZvZUzpghfPCwHM4eVCWQIAxenAExEegXDgo6lInWtU1gf7k8L
+ t+CeL7FDIodZnmHBhF+O1lMyoxUyBPm/FHW6LKyfsvweAA==
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB72:EE_|LV8PR12MB9182:EE_
+X-MS-Office365-Filtering-Correlation-Id: b163c1f7-bb15-4fd6-f1bc-08dc10321960
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: u8UiDsda2JYGmUsAfPgF4AnDIdDJn0d+Fh0zy/INo+v/gRaujgo/Wg3fT9F1h6nBcrLQqy1Azj/s/WTNlFi+aqlh0Of9qdr+MNP0hl6wAtCIvbN9JoF41nOL1b6rrEipnUL8dqAI/zPiLnyYKVUaYUbFZrtXAK7IlGTly31+bVB8f+1JtlUAEMX5lRfJxeyOR/mS4FGsbB/4igENY15BdcHyjzj0GL7JatPImYjrgcZ4KQT5B3BNqbbBtzcdv5sAoJ4dlesmqy7Pwpp7mERTWl0S4HCaTBftjbtwDLE1YRFxx45B7MNoUVNdMjZ2npRPPTrOkXy3XKL+Y+PvUZVCMXA1pDTgnrcDMBKoQlk5lsN9lUojX/r9pNjm81bsFHyVvFXNjhCLHXvTx7seKb1puPljxvxfKdQGxa28jwuMdLKfANbdAGvduCMcAfWcpqgCPfPzqMS0S+tc1D7f8DXChADJSNCqoLrX8DQs/MCXa8zt1dT7Rm6SQxkMs4E5PdgE1ZBSxi/YA8cfU3UDdcJyWe40z7DG8MA9aAOs5j1R0JHmdi7IloUV1fGfQZmE1f1hcOa0axp0D0CqZwhnVqhuxn41690//TrqiZ8UnjLmNRpt+Sp2qulEd6Cjw/cYMLqsxATyRhDiyWKZkXYXV1plxL+GdlbVoxt+9zVngbBqvUPF0atXpnJWwJ+ARtR/hUb8qc/hf0JDYYoBiwtv/Jm7hNRKR4y7yCL/J4lT1plXld+eHS+7iOpaXBrMkLvDcmsVF8KxXNIuoz09pXfUMVcgCg==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(39860400002)(136003)(376002)(346002)(396003)(230922051799003)(1800799012)(64100799003)(186009)(82310400011)(451199024)(46966006)(40470700004)(36840700001)(81166007)(41300700001)(2906002)(5660300002)(82740400003)(110136005)(40460700003)(44832011)(36756003)(36860700001)(86362001)(356005)(40480700001)(6666004)(316002)(8676002)(8936002)(4326008)(70206006)(47076005)(70586007)(83380400001)(26005)(478600001)(16526019)(426003)(336012)(2616005)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jan 2024 10:10:53.9492 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b163c1f7-bb15-4fd6-f1bc-08dc10321960
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB72.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR12MB9182
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,701 +124,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 3 Jan 2024 at 10:07, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> An EFI binary smbiosdump.efi is provided that can be used to check the
-> SMBIOS table for consistency and to dump it as a file.
->
-> The tool provides the following commands:
->
-> check
->     Check the SMBIOS table for consistency.
->
-> exit
->     Leave the tool.
->
-> help
->     Show available commands.
->
-> save
->     Save the SMBIOS table to a file on the EFI system partition. The file
->     can be further analyzed with the dmidecode command line tool::
->
->         dmidecode --from-dump <filename>
->
-> Specifying 'nocolor' as load option data suppresses colored output and
-> clearing of the screen.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
-> v3:
->         rename the tool
->         restructure the code
->         handle NULL value in starts_with()
-> v2:
->         fix an incorrect variable usage when checking the result of memcmp
-> ---
->  lib/efi_loader/Makefile     |   7 +
->  lib/efi_loader/smbiosdump.c | 622 ++++++++++++++++++++++++++++++++++++
->  2 files changed, 629 insertions(+)
->  create mode 100644 lib/efi_loader/smbiosdump.c
->
-> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-> index 24d33d5409..25060bbd95 100644
-> --- a/lib/efi_loader/Makefile
-> +++ b/lib/efi_loader/Makefile
-> @@ -16,6 +16,8 @@ CFLAGS_boothart.o := $(CFLAGS_EFI) -Os -ffreestanding
->  CFLAGS_REMOVE_boothart.o := $(CFLAGS_NON_EFI)
->  CFLAGS_helloworld.o := $(CFLAGS_EFI) -Os -ffreestanding
->  CFLAGS_REMOVE_helloworld.o := $(CFLAGS_NON_EFI)
-> +CFLAGS_smbiosdump.o := $(CFLAGS_EFI) -Os -ffreestanding
-> +CFLAGS_REMOVE_smbiosdump.o := $(CFLAGS_NON_EFI)
->  CFLAGS_dtbdump.o := $(CFLAGS_EFI) -Os -ffreestanding
->  CFLAGS_REMOVE_dtbdump.o := $(CFLAGS_NON_EFI)
->  CFLAGS_initrddump.o := $(CFLAGS_EFI) -Os -ffreestanding
-> @@ -31,6 +33,11 @@ always += helloworld.efi
->  targets += helloworld.o
->  endif
->
-> +ifneq ($(CONFIG_GENERATE_SMBIOS_TABLE),)
-> +always += smbiosdump.efi
-> +targets += smbiosdump.o
-> +endif
-> +
->  ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
->  always += dtbdump.efi
->  targets += dtbdump.o
-> diff --git a/lib/efi_loader/smbiosdump.c b/lib/efi_loader/smbiosdump.c
-> new file mode 100644
-> index 0000000000..8a42794789
-> --- /dev/null
-> +++ b/lib/efi_loader/smbiosdump.c
-> @@ -0,0 +1,622 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * Copyright 2023, Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> + *
-> + * smbiosdump.efi saves the SMBIOS table as file.
-> + *
-> + * Specifying 'nocolor' as load option data suppresses colored output and
-> + * clearing of the screen.
-> + */
-> +
-> +#include <efi_api.h>
-> +#include <part.h>
-> +#include <smbios.h>
-> +#include <string.h>
-> +
-> +#define BUFFER_SIZE 64
-> +
-> +static struct efi_simple_text_output_protocol *cerr;
-> +static struct efi_simple_text_output_protocol *cout;
-> +static struct efi_simple_text_input_protocol *cin;
-> +static struct efi_boot_services *bs;
-> +static efi_handle_t handle;
-> +static struct efi_system_table *systable;
-> +static const efi_guid_t smbios_guid = SMBIOS_TABLE_GUID;
-> +static const efi_guid_t smbios3_guid = SMBIOS3_TABLE_GUID;
-> +static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
-> +static const efi_guid_t guid_simple_file_system_protocol =
-> +                                       EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID;
-> +static const efi_guid_t efi_system_partition_guid = PARTITION_SYSTEM_GUID;
-> +static bool nocolor;
-> +
-> +/**
-> + * color() - set foreground color
-> + *
-> + * @color:     foreground color
-> + */
-> +static void color(u8 color)
-> +{
-> +       if (!nocolor)
-> +               cout->set_attribute(cout, color | EFI_BACKGROUND_BLACK);
-> +}
-> +
-> +/**
-> + * print() - print string
-> + *
-> + * @string:    text
-> + */
-> +static void print(u16 *string)
-> +{
-> +       cout->output_string(cout, string);
-> +}
-> +
-> +/**
-> + * cls() - clear screen
-> + */
-> +static void cls(void)
-> +{
-> +       if (nocolor)
-> +               print(u"\r\n");
-> +       else
-> +               cout->clear_screen(cout);
-> +}
-> +
-> +/**
-> + * error() - print error string
-> + *
-> + * @string:    error text
-> + */
-> +static void error(u16 *string)
-> +{
-> +       color(EFI_LIGHTRED);
-> +       print(string);
-> +       color(EFI_LIGHTBLUE);
-> +}
-> +
-> +/**
-> + * efi_input_yn() - get answer to yes/no question
-> + *
-> + * Return:
-> + * y or Y
-> + *     EFI_SUCCESS
-> + * n or N
-> + *     EFI_ACCESS_DENIED
-> + * ESC
-> + *     EFI_ABORTED
-> + */
-> +static efi_status_t efi_input_yn(void)
-> +{
-> +       struct efi_input_key key = {0};
-> +       efi_uintn_t index;
-> +       efi_status_t ret;
-> +
-> +       /* Drain the console input */
-> +       ret = cin->reset(cin, true);
-> +       for (;;) {
-> +               ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
-> +               if (ret != EFI_SUCCESS)
-> +                       continue;
-> +               ret = cin->read_key_stroke(cin, &key);
-> +               if (ret != EFI_SUCCESS)
-> +                       continue;
-> +               switch (key.scan_code) {
-> +               case 0x17: /* Escape */
-> +                       return EFI_ABORTED;
-> +               default:
-> +                       break;
-> +               }
-> +               /* Convert to lower case */
-> +               switch (key.unicode_char | 0x20) {
-> +               case 'y':
-> +                       return EFI_SUCCESS;
-> +               case 'n':
-> +                       return EFI_ACCESS_DENIED;
-> +               default:
-> +                       break;
-> +               }
-> +       }
-> +}
-> +
-> +/**
-> + * efi_input() - read string from console
-> + *
-> + * @buffer:            input buffer
-> + * @buffer_size:       buffer size
-> + * Return:             status code
-> + */
-> +static efi_status_t efi_input(u16 *buffer, efi_uintn_t buffer_size)
-> +{
-> +       struct efi_input_key key = {0};
-> +       efi_uintn_t index;
-> +       efi_uintn_t pos = 0;
-> +       u16 outbuf[2] = u" ";
-> +       efi_status_t ret;
-> +
-> +       /* Drain the console input */
-> +       ret = cin->reset(cin, true);
-> +       *buffer = 0;
-> +       for (;;) {
-> +               ret = bs->wait_for_event(1, &cin->wait_for_key, &index);
-> +               if (ret != EFI_SUCCESS)
-> +                       continue;
-> +               ret = cin->read_key_stroke(cin, &key);
-> +               if (ret != EFI_SUCCESS)
-> +                       continue;
-> +               switch (key.scan_code) {
-> +               case 0x17: /* Escape */
-> +                       print(u"\r\nAborted\r\n");
-> +                       return EFI_ABORTED;
-> +               default:
-> +                       break;
-> +               }
-> +               switch (key.unicode_char) {
-> +               case 0x08: /* Backspace */
-> +                       if (pos) {
-> +                               buffer[pos--] = 0;
-> +                               print(u"\b \b");
-> +                       }
-> +                       break;
-> +               case 0x0a: /* Linefeed */
-> +               case 0x0d: /* Carriage return */
-> +                       print(u"\r\n");
-> +                       return EFI_SUCCESS;
-> +               default:
-> +                       break;
-> +               }
-> +               /* Ignore surrogate codes */
-> +               if (key.unicode_char >= 0xD800 && key.unicode_char <= 0xDBFF)
-> +                       continue;
-> +               if (key.unicode_char >= 0x20 &&
-> +                   pos < buffer_size - 1) {
-> +                       *outbuf = key.unicode_char;
-> +                       buffer[pos++] = key.unicode_char;
-> +                       buffer[pos] = 0;
-> +                       print(outbuf);
-> +               }
-> +       }
-> +}
-> +
-> +/**
-> + * skip_whitespace() - skip over leading whitespace
-> + *
-> + * @pos:       UTF-16 string
-> + * Return:     pointer to first non-whitespace
-> + */
-> +static u16 *skip_whitespace(u16 *pos)
-> +{
-> +       for (; *pos && *pos <= 0x20; ++pos)
-> +               ;
-> +       return pos;
-> +}
-> +
-> +/**
-> + * starts_with() - check if @string starts with @keyword
-> + *
-> + * @string:    string to search for keyword
-> + * @keyword:   keyword to be searched
-> + * Return:     true fi @string starts with the keyword
-> + */
-> +static bool starts_with(u16 *string, u16 *keyword)
-> +{
-> +       if (!string || !keyword)
-> +               return NULL;
-> +
-> +       for (; *keyword; ++string, ++keyword) {
-> +               if (*string != *keyword)
-> +                       return false;
-> +       }
-> +       return true;
-> +}
-> +
-> +/**
-> + * open_file_system() - open simple file system protocol
-> + *
-> + * file_system:        interface of the simple file system protocol
-> + * Return:     status code
-> + */
-> +static efi_status_t
-> +open_file_system(struct efi_simple_file_system_protocol **file_system)
-> +{
-> +       struct efi_loaded_image *loaded_image;
-> +       efi_status_t ret;
-> +       efi_handle_t *handle_buffer = NULL;
-> +       efi_uintn_t count;
-> +
-> +       ret = bs->open_protocol(handle, &loaded_image_guid,
-> +                               (void **)&loaded_image, NULL, NULL,
-> +                               EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-> +       if (ret != EFI_SUCCESS) {
-> +               error(u"Loaded image protocol not found\r\n");
-> +               return ret;
-> +       }
-> +
-> +       /* Open the simple file system protocol on the same partition */
-> +       ret = bs->open_protocol(loaded_image->device_handle,
-> +                               &guid_simple_file_system_protocol,
-> +                               (void **)file_system, NULL, NULL,
-> +                               EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-> +       if (ret == EFI_SUCCESS)
-> +               return ret;
-> +
-> +       /* Open the simple file system protocol on the UEFI system partition */
-> +       ret = bs->locate_handle_buffer(BY_PROTOCOL, &efi_system_partition_guid,
-> +                                      NULL, &count, &handle_buffer);
-> +       if (ret == EFI_SUCCESS && handle_buffer)
-> +               ret = bs->open_protocol(handle_buffer[0],
-> +                                       &guid_simple_file_system_protocol,
-> +                                       (void **)file_system, NULL, NULL,
-> +                                       EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-> +       if (ret != EFI_SUCCESS)
-> +               error(u"Failed to open simple file system protocol\r\n");
-> +       if (handle)
-> +               bs->free_pool(handle_buffer);
-> +
-> +       return ret;
-> +}
-> +
-> +/**
-> + * do_help() - print help
-> + */
-> +static void do_help(void)
-> +{
-> +       error(u"check       - check SMBIOS table\r\n");
-> +       error(u"save <file> - save SMBIOS table to file\r\n");
-> +       error(u"exit        - exit the shell\r\n");
-> +}
-> +
-> +/**
-> + * get_config_table() - get configuration table
-> + *
-> + * @guid:      GUID of the configuration table
-> + * Return:     pointer to configuration table or NULL
-> + */
-> +static void *get_config_table(const efi_guid_t *guid)
-> +{
-> +       size_t i;
-> +
-> +       for (i = 0; i < systable->nr_tables; ++i) {
-> +               if (!memcmp(guid, &systable->tables[i].guid, 16))
-> +                       return systable->tables[i].table;
-> +       }
-> +
-> +       return NULL;
-> +}
-> +
-> +/**
-> + * checksum() - calculate checksum
-> + *
-> + * @buf:       buffer to checksum
-> + * @len:       length of buffer
-> + * Return:     checksum
-> + */
-> +u8 checksum(void *buf, int len)
-> +{
-> +       u8 ret = 0;
-> +
-> +       for (u8 *ptr = buf; len; --len, ++ptr)
-> +               ret -= *ptr;
-> +
-> +       return ret;
-> +}
-> +
-> +/**
-> + * do_check() - check SMBIOS table
-> + *
-> + * Return:     status code
-> + */
-> +efi_status_t do_check(void)
-> +{
-> +       struct smbios3_entry *smbios3_anchor;
-> +       void *table, *table_end;
-> +       u32 len;
-> +
-> +       smbios3_anchor = get_config_table(&smbios3_guid);
-> +       if (smbios3_anchor) {
-> +               int r;
-> +
-> +               r = memcmp(smbios3_anchor->anchor, "_SM3_", 5);
-> +               if (r) {
-> +                       error(u"Invalid anchor string\n");
-> +                       return EFI_LOAD_ERROR;
-> +               }
-> +               print(u"Found SMBIOS 3 entry point\n");
-> +               if (smbios3_anchor->length != 0x18) {
-> +                       error(u"Invalid anchor length\n");
-> +                       return EFI_LOAD_ERROR;
-> +               }
-> +               if (checksum(smbios3_anchor, smbios3_anchor->length)) {
-> +                       error(u"Invalid anchor checksum\n");
-> +                       return EFI_LOAD_ERROR;
-> +               }
-> +               table = (void *)(uintptr_t)smbios3_anchor->struct_table_address;
-> +               len = smbios3_anchor->max_struct_size;
-> +       } else {
-> +               struct smbios_entry *smbios_anchor;
-> +               int r;
-> +
-> +               smbios_anchor = get_config_table(&smbios_guid);
-> +               if (!smbios_anchor) {
-> +                       error(u"No SMBIOS table\n");
-> +                       return EFI_NOT_FOUND;
-> +               }
-> +               r = memcmp(smbios_anchor->anchor, "_SM_", 4);
-> +               if (r) {
-> +                       error(u"Invalid anchor string\n");
-> +                       return EFI_LOAD_ERROR;
-> +               }
-> +               print(u"Found SMBIOS 2.1 entry point\n");
-> +               if (smbios_anchor->length != 0x1f) {
-> +                       error(u"Invalid anchor length\n");
-> +                       return EFI_LOAD_ERROR;
-> +               }
-> +               if (checksum(smbios_anchor, smbios_anchor->length)) {
-> +                       error(u"Invalid anchor checksum\n");
-> +                       return EFI_LOAD_ERROR;
-> +               }
-> +               r = memcmp(smbios_anchor->intermediate_anchor, "_DMI_", 5);
-> +               if (r) {
-> +                       error(u"Invalid intermediate anchor string\n");
-> +                       return EFI_LOAD_ERROR;
-> +               }
-> +               if (checksum(&smbios_anchor->intermediate_anchor, 0xf)) {
-> +                       error(u"Invalid intermediate anchor checksum\n");
-> +                       return EFI_LOAD_ERROR;
-> +               }
-> +               table = (void *)(uintptr_t)smbios_anchor->struct_table_address;
-> +               len = smbios_anchor->struct_table_length;
-> +       }
-> +
-> +       table_end = (void *)((u8 *)table + len);
-> +       for (struct smbios_header *pos = table; ;) {
-> +               u8 *str = (u8 *)pos + pos->length;
-> +
-> +               if (!*str)
-> +                       ++str;
-> +               while (*str) {
-> +                       for (; *str; ++str) {
-> +                               if ((void *)str >= table_end) {
-> +                                       error(u"Structure table length exceeded\n");
-> +                                       return EFI_LOAD_ERROR;
-> +                               }
-> +                       }
-> +                       ++str;
-> +               }
-> +               ++str;
-> +               if ((void *)str > table_end) {
-> +                       error(u"Structure table length exceeded\n");
-> +                       return EFI_LOAD_ERROR;
-> +               }
-> +               if (pos->type == 0x7f) /* End of table */
-> +                       break;
-> +               pos = (struct smbios_header *)str;
-> +       }
-> +
-> +       return EFI_SUCCESS;
-> +}
-> +
-> +/**
-> + * save_file() - save file to EFI system partition
-> + *
-> + * @filename:  file name
-> + * @buf:       buffer to write
-> + * @size:      size of the buffer
-> + */
-> +efi_status_t save_file(u16 *filename, void *buf, efi_uintn_t size)
-> +{
-> +       efi_uintn_t ret;
-> +       struct efi_simple_file_system_protocol *file_system;
-> +       struct efi_file_handle *root, *file;
-> +
-> +       ret = open_file_system(&file_system);
-> +       if (ret != EFI_SUCCESS)
-> +               return ret;
-> +
-> +       /* Open volume */
-> +       ret = file_system->open_volume(file_system, &root);
-> +       if (ret != EFI_SUCCESS) {
-> +               error(u"Failed to open volume\r\n");
-> +               return ret;
-> +       }
-> +       /* Check if file already exists */
-> +       ret = root->open(root, &file, filename, EFI_FILE_MODE_READ, 0);
-> +       if (ret == EFI_SUCCESS) {
-> +               file->close(file);
-> +               print(u"Overwrite existing file (y/n)? ");
-> +               ret = efi_input_yn();
-> +               print(u"\r\n");
-> +               if (ret != EFI_SUCCESS) {
-> +                       root->close(root);
-> +                       error(u"Aborted by user\r\n");
-> +                       bs->free_pool(buf);
-> +                       return ret;
-> +               }
-> +       }
-> +
-> +       /* Create file */
-> +       ret = root->open(root, &file, filename,
-> +                        EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE |
-> +                        EFI_FILE_MODE_CREATE, EFI_FILE_ARCHIVE);
-> +       if (ret == EFI_SUCCESS) {
-> +               /* Write file */
-> +               ret = file->write(file, &size, buf);
-> +               if (ret != EFI_SUCCESS)
-> +                       error(u"Failed to write file\r\n");
-> +               file->close(file);
-> +       } else {
-> +               error(u"Failed to open file\r\n");
-> +       }
-> +       root->close(root);
-> +
-> +       return ret;
-> +}
-> +
-> +/**
-> + * do_save() - save SMBIOS table
-> + *
-> + * @filename:  file name
-> + * Return:     status code
-> + */
-> +static efi_status_t do_save(u16 *filename)
-> +{
-> +       struct smbios3_entry *smbios3_anchor;
-> +       u8 *buf;
-> +       efi_uintn_t size;
-> +       efi_uintn_t ret;
-> +
-> +       ret = do_check();
-> +       if (ret != EFI_SUCCESS)
-> +               return ret;
-> +
-> +       smbios3_anchor = get_config_table(&smbios3_guid);
-> +       if (smbios3_anchor) {
-> +               size = 0x20 + smbios3_anchor->max_struct_size;
-> +               ret = bs->allocate_pool(EFI_LOADER_DATA, size, (void **)&buf);
-> +               if (ret != EFI_SUCCESS) {
-> +                       error(u"Out of memory\n");
-> +                       return ret;
-> +               }
-> +
-> +               memset(buf, 0, size);
-> +               memcpy(buf, smbios3_anchor, smbios3_anchor->length);
-> +               memcpy(buf + 0x20,
-> +                      (void *)(uintptr_t)smbios3_anchor->struct_table_address,
-> +                      smbios3_anchor->max_struct_size);
-> +
-> +               smbios3_anchor = (struct smbios3_entry *)buf;
-> +               smbios3_anchor->struct_table_address = 0x20;
-> +               smbios3_anchor->checksum +=
-> +                       checksum(smbios3_anchor, smbios3_anchor->length);
-> +       } else {
-> +               struct smbios_entry *smbios_anchor;
-> +
-> +               smbios_anchor = get_config_table(&smbios_guid);
-> +               if (!smbios_anchor) {
-> +                       /* Should not be reached after successful do_check() */
-> +                       error(u"No SMBIOS table\n");
-> +                       return EFI_NOT_FOUND;
-> +               }
-> +
-> +               size = 0x20 + smbios_anchor->struct_table_length;
-> +
-> +               ret = bs->allocate_pool(EFI_LOADER_DATA, size, (void **)&buf);
-> +               if (ret != EFI_SUCCESS) {
-> +                       error(u"Out of memory\n");
-> +                       return ret;
-> +               }
-> +
-> +               memset(buf, 0, size);
-> +               memcpy(buf, smbios_anchor, smbios_anchor->length);
-> +               memcpy(buf + 0x20,
-> +                      (void *)(uintptr_t)smbios_anchor->struct_table_address,
-> +                      smbios_anchor->struct_table_length);
-> +
-> +               smbios_anchor = (struct smbios_entry *)buf;
-> +               smbios_anchor->struct_table_address = 0x20;
-> +               smbios_anchor->intermediate_checksum +=
-> +                       checksum(&smbios_anchor->intermediate_anchor, 0xf);
-> +               smbios_anchor->checksum +=
-> +                       checksum(smbios_anchor, smbios_anchor->length);
-> +       }
-> +
-> +       filename = skip_whitespace(filename);
-> +
-> +       ret = save_file(filename, buf, size);
-> +
-> +       if (ret == EFI_SUCCESS) {
-> +               print(filename);
-> +               print(u" written\r\n");
-> +       }
-> +
-> +       bs->free_pool(buf);
-> +
-> +       return ret;
-> +}
-> +
-> +/**
-> + * get_load_options() - get load options
-> + *
-> + * Return:     load options or NULL
-> + */
-> +static u16 *get_load_options(void)
-> +{
-> +       efi_status_t ret;
-> +       struct efi_loaded_image *loaded_image;
-> +
-> +       ret = bs->open_protocol(handle, &loaded_image_guid,
-> +                               (void **)&loaded_image, NULL, NULL,
-> +                               EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-> +       if (ret != EFI_SUCCESS) {
-> +               error(u"Loaded image protocol not found\r\n");
-> +               return NULL;
-> +       }
-> +
-> +       if (!loaded_image->load_options_size || !loaded_image->load_options)
-> +               return NULL;
-> +
-> +       return loaded_image->load_options;
-> +}
-> +
-> +/**
-> + * command_loop - process user commands
-> + */
-> +static void command_loop(void)
-> +{
-> +       for (;;) {
-> +               u16 command[BUFFER_SIZE];
-> +               u16 *pos;
-> +               efi_uintn_t ret;
-> +
-> +               print(u"=> ");
-> +               ret = efi_input(command, sizeof(command));
-> +               if (ret == EFI_ABORTED)
-> +                       break;
-> +               pos = skip_whitespace(command);
-> +               if (starts_with(pos, u"exit")) {
-> +                       break;
-> +               } else if (starts_with(pos, u"check")) {
-> +                       ret = do_check();
-> +                       if (ret == EFI_SUCCESS)
-> +                               print(u"OK\n");
-> +               } else if (starts_with(pos, u"save ")) {
-> +                       do_save(pos + 5);
-> +               } else {
-> +                       do_help();
-> +               }
-> +       }
-> +}
-> +
-> +/**
-> + * efi_main() - entry point of the EFI application.
-> + *
-> + * @handle:    handle of the loaded image
-> + * @systab:    system table
-> + * Return:     status code
-> + */
-> +efi_status_t EFIAPI efi_main(efi_handle_t image_handle,
-> +                            struct efi_system_table *systab)
-> +{
-> +       u16 *load_options;
-> +
-> +       handle = image_handle;
-> +       systable = systab;
-> +       cerr = systable->std_err;
-> +       cout = systable->con_out;
-> +       cin = systable->con_in;
-> +       bs = systable->boottime;
-> +       load_options = get_load_options();
-> +
-> +       if (starts_with(load_options, u"nocolor"))
-> +               nocolor = true;
-> +
-> +       color(EFI_WHITE);
-> +       cls();
-> +       print(u"DMI Dump\r\n========\r\n\r\n");
-> +       color(EFI_LIGHTBLUE);
-> +
-> +       command_loop();
-> +
-> +       color(EFI_LIGHTGRAY);
-> +       cls();
-> +
-> +       return EFI_SUCCESS;
-> +}
-> --
-> 2.43.0
->
+There is no reason to have multiple blank lines in DTS files that's why
+remove them.
 
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
+
+ arch/arm/dts/zynqmp-dlc21-revA.dts      | 1 -
+ arch/arm/dts/zynqmp-sc-vpk120-revB.dtso | 1 -
+ arch/arm/dts/zynqmp-sc-vpk180-revA.dtso | 1 -
+ arch/arm/dts/zynqmp-sc-vpk180-revB.dtso | 1 -
+ 4 files changed, 4 deletions(-)
+
+diff --git a/arch/arm/dts/zynqmp-dlc21-revA.dts b/arch/arm/dts/zynqmp-dlc21-revA.dts
+index f737004d7943..b28dab0003ac 100644
+--- a/arch/arm/dts/zynqmp-dlc21-revA.dts
++++ b/arch/arm/dts/zynqmp-dlc21-revA.dts
+@@ -155,7 +155,6 @@
+ 	/* u138 - TUSB320IRWBR - for USB-C */
+ };
+ 
+-
+ &usb0 {
+ 	status = "okay";
+ };
+diff --git a/arch/arm/dts/zynqmp-sc-vpk120-revB.dtso b/arch/arm/dts/zynqmp-sc-vpk120-revB.dtso
+index 750bc39139cc..853d9817dd2a 100644
+--- a/arch/arm/dts/zynqmp-sc-vpk120-revB.dtso
++++ b/arch/arm/dts/zynqmp-sc-vpk120-revB.dtso
+@@ -13,7 +13,6 @@
+ /dts-v1/;
+ /plugin/;
+ 
+-
+ &{/} {
+ 	compatible = "xlnx,zynqmp-sc-vpk120-revB", "xlnx,zynqmp-vpk120-revB",
+ 		     "xlnx,zynqmp-vpk120", "xlnx,zynqmp";
+diff --git a/arch/arm/dts/zynqmp-sc-vpk180-revA.dtso b/arch/arm/dts/zynqmp-sc-vpk180-revA.dtso
+index 551341f31bd1..18625933ad3d 100644
+--- a/arch/arm/dts/zynqmp-sc-vpk180-revA.dtso
++++ b/arch/arm/dts/zynqmp-sc-vpk180-revA.dtso
+@@ -13,7 +13,6 @@
+ /dts-v1/;
+ /plugin/;
+ 
+-
+ &{/} {
+ 	compatible = "xlnx,zynqmp-sc-vpk180-revA", "xlnx,zynqmp-vpk180-revA",
+ 		     "xlnx,zynqmp-vpk180", "xlnx,zynqmp";
+diff --git a/arch/arm/dts/zynqmp-sc-vpk180-revB.dtso b/arch/arm/dts/zynqmp-sc-vpk180-revB.dtso
+index e70eb4dc9478..3990d053c351 100644
+--- a/arch/arm/dts/zynqmp-sc-vpk180-revB.dtso
++++ b/arch/arm/dts/zynqmp-sc-vpk180-revB.dtso
+@@ -13,7 +13,6 @@
+ /dts-v1/;
+ /plugin/;
+ 
+-
+ &{/} {
+ 	compatible = "xlnx,zynqmp-sc-vpk180-revB", "xlnx,zynqmp-vpk180-revB",
+ 		     "xlnx,zynqmp-vpk180", "xlnx,zynqmp";
+-- 
+2.36.1
+
