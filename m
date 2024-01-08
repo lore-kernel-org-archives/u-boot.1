@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3399BC3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 21:11:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 153C7C3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 21:11:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96D5987A8C;
-	Mon,  8 Jan 2024 22:11:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0C4AD87A9F;
+	Mon,  8 Jan 2024 22:11:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Gh92+mPK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DgeY3yP1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 094CE87A8C; Mon,  8 Jan 2024 22:11:51 +0100 (CET)
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
+ id EA60987A9F; Mon,  8 Jan 2024 22:11:52 +0100 (CET)
+Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
+ [IPv6:2607:f8b0:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0DD2877AF
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 22:11:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C95CD87A46
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 22:11:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-6d9ab48faeaso419823b3a.1
- for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 13:11:48 -0800 (PST)
+Received: by mail-pg1-x52e.google.com with SMTP id
+ 41be03b00d2f7-5cdf90e5cdeso291346a12.1
+ for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 13:11:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704748307; x=1705353107; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DHqcUbjxrVoW86bDiTanSkA0v4N2pRH32cvAl1clU5w=;
- b=Gh92+mPKmaCvCIEeJFR2WCnrkn4F2tyIsvwbPaW61eA0jAb9WLGNbFiknkFRBTFBnJ
- zgES1J4PJUmvHALTEnvQXovRtJ5L3I9v2R9m6VhI2aKdSnW4FruYTjji+DT9T0JOys51
- TQlYlGz4JIGv7jTECbGpPd9a18XKpKWAFSsueg5/lNB5gDLJpp87/2WZaRTJFoo0JhPE
- XqgZUIuBTwmPC5sfFN0UWMaqAjjBAfvUnK9+ajoBxqy7HQxyvQRTspltwUcsY1+oMWZf
- EXXHnAPmy6C4BMwZMCOXfjasovnzL7h8fOTAYbdZKW5QMlyX80Ol4sJwig7rfynBNaWr
- ZJEA==
+ d=gmail.com; s=20230601; t=1704748309; x=1705353109; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+S7Zi86W+AX+v5AQNZPooUlGA/2kVfinAuIGj+HpK48=;
+ b=DgeY3yP1nh7x133367BqI5mpQ4+liUfkh8a4dm6R2OxuQsyA8ghkOsUe60qCIOu+6g
+ 1XpMLJHkpSojZEuGD94gu7HoXRiJEWSNdbDGddXsT9K2nyUbKN3viI+Krv7hZtag5B9K
+ EdAx3ICmGexq6KdbxNrWpXq3X93fdPM4g/TbEZmm3nvxvUdVOJB9cmZ7lHrSCmTue2Ir
+ 7oyLFSTQDKwMQXo2wlIvTkdg5dvL1f65VjojpJYpzjjZZjaJU2bACKi1mJ8q/38L9lib
+ VTUi1qug91BJFTg53gV2zEs2Gk33LEjhU7m0Tenv1pO78+D4+F8kWIPO62rWkv3I6g3+
+ 2P1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704748307; x=1705353107;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DHqcUbjxrVoW86bDiTanSkA0v4N2pRH32cvAl1clU5w=;
- b=ws0K7rHXLuXy26c9n8Y2e8EgVof+eUYFPq0aZUhIvFBXUUjQGveWtl0KoSxrOGBz4f
- F69aRXORyyJmo1gBvS/vuWX4o4Cqc1Nt7zbr4tHRMkq9+z4epF9pesJ0eaznvAD4s2M8
- /Kv1hvhxKbUJ/F3ff6FIkmKwo7A5aJxt6ntIPCmBdYvmLVR3rqII5uF80bml18ZkmMYu
- UAaMoOXRt452NSO1ixoPWmyK2zsm3gl3NgxCNdr8r6xzgL00olg8RC4sovnfMHT7qUR6
- HYFfyqIezhaVwSCRnruiIRJUACZRHQPX2yDfzNON2BCSWgPsGlx4jH8tE69uU0a8U18T
- KQow==
-X-Gm-Message-State: AOJu0YxjHp50wehgYGD/cB5aDdCrbfCWtvy4FVhiZwoIvLWkcsNNzgIG
- 3WMyqKfxiOX8cpQX31jqlvQ=
-X-Google-Smtp-Source: AGHT+IGOrdh8w+KClb7P2OtwEbsJaQ3+/DJH92e/jv2dNF2uRNew74JLvyCbvIZEEN55P1eePOoBqQ==
-X-Received: by 2002:a05:6a00:2447:b0:6cd:dfff:19b6 with SMTP id
- d7-20020a056a00244700b006cddfff19b6mr9142114pfj.2.1704748307052; 
- Mon, 08 Jan 2024 13:11:47 -0800 (PST)
+ d=1e100.net; s=20230601; t=1704748309; x=1705353109;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+S7Zi86W+AX+v5AQNZPooUlGA/2kVfinAuIGj+HpK48=;
+ b=PNnBDKB6I3fpXueRFO5tBgeupm6CbMIdhSRcSc/WlN42qRnq/Nvo5UnaxODxzgaDV4
+ JEBp1tkYcRoOerV8bMBul1A9jzs/TEdkon3rTNYbHbgKvSPKWHaAj9xZsW+cmikcRVoc
+ 5LA1+A5A/6v3gtnnXIHea/U8WlEAZ7L3dWd+JC4+9iVw9V5LMCCe18CMFPRxGpireLy1
+ y6nmjd3ECRyGh8dxEMw0ySlor0knw5bc5d2A0jSMP2nKEj8sbArz3Lp2ETgpj+APSa98
+ h42gXyicvATv4o+LM+kqyyVFcbKDGCPAWJnwD9ATY3WOYnsx+uENgJi9uzxv1akIOI4s
+ jUWQ==
+X-Gm-Message-State: AOJu0YwoSX9qLHnpJRWh0jTxaw0qAaii7cMFpZ3siDwx/N3QfypcA1o0
+ 9krMN7KzKbtBdKK2MzoYazCTehWRftE=
+X-Google-Smtp-Source: AGHT+IEQtHMSCQkqHiQnJDB4epMwCcy88hrv2FwxLwoqydlBkQV6dRT9H8mrYguOtne28R07jcWp8g==
+X-Received: by 2002:a05:6a20:4a09:b0:199:7f36:d88f with SMTP id
+ fr9-20020a056a204a0900b001997f36d88fmr7334933pzb.1.1704748309153; 
+ Mon, 08 Jan 2024 13:11:49 -0800 (PST)
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:63f2:cfe7:4b90:23c])
  by smtp.gmail.com with ESMTPSA id
- r11-20020aa7988b000000b006d9aa6592d0sm304581pfl.82.2024.01.08.13.11.45
+ r11-20020aa7988b000000b006d9aa6592d0sm304581pfl.82.2024.01.08.13.11.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jan 2024 13:11:46 -0800 (PST)
+ Mon, 08 Jan 2024 13:11:48 -0800 (PST)
 From: Fabio Estevam <festevam@gmail.com>
 To: sbabic@denx.de
 Cc: m.othacehe@gmail.com, peng.fan@nxp.com, u-boot@lists.denx.de,
  Fabio Estevam <festevam@denx.de>
-Subject: [PATCH 1/3] doc: imx93_var_som: Adjust the underline length
-Date: Mon,  8 Jan 2024 18:11:38 -0300
-Message-Id: <20240108211140.3270595-1-festevam@gmail.com>
+Subject: [PATCH 2/3] imx9: Select BINMAN at SoC level
+Date: Mon,  8 Jan 2024 18:11:39 -0300
+Message-Id: <20240108211140.3270595-2-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240108211140.3270595-1-festevam@gmail.com>
+References: <20240108211140.3270595-1-festevam@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,34 +94,40 @@ X-Virus-Status: Clean
 
 From: Fabio Estevam <festevam@denx.de>
 
-Adjust the underline length so that it matches the title length.
+All i.MX93 targets rely on using binman to generate the U-Boot
+binary.
+
+Select it at the SoC level instead of per board.
 
 Signed-off-by: Fabio Estevam <festevam@denx.de>
 ---
- doc/board/variscite/imx93_var_som.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ arch/arm/mach-imx/imx9/Kconfig | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/doc/board/variscite/imx93_var_som.rst b/doc/board/variscite/imx93_var_som.rst
-index 2225a772e375..4951afd2dad6 100644
---- a/doc/board/variscite/imx93_var_som.rst
-+++ b/doc/board/variscite/imx93_var_som.rst
-@@ -1,7 +1,7 @@
- .. SPDX-License-Identifier: GPL-2.0+
+diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
+index 76c4129d79e0..961d6f527ab6 100644
+--- a/arch/arm/mach-imx/imx9/Kconfig
++++ b/arch/arm/mach-imx/imx9/Kconfig
+@@ -12,6 +12,7 @@ config IMX9_LOW_DRIVE_MODE
  
- imx93_var_som
--=======================
-+=============
+ config IMX9
+ 	bool
++	select BINMAN
+ 	select HAS_CAAM
+ 	select ROM_UNIFIED_SECTIONS
  
- U-Boot for the Variscite VAR-SOM-MX93 Symphony evaluation board
+@@ -29,12 +30,10 @@ choice
  
-@@ -38,7 +38,7 @@ Get the DDR firmware
-    $ cp firmware-imx-8.21/firmware/ddr/synopsys/lpddr4*.bin $(srctree)
+ config TARGET_IMX93_11X11_EVK
+ 	bool "imx93_11x11_evk"
+-	select BINMAN
+ 	select IMX93
  
- Get ahab-container.img
-----------------------------------------
-+----------------------
- 
- .. code-block:: bash
+ config TARGET_IMX93_VAR_SOM
+ 	bool "imx93_var_som"
+-	select BINMAN
+ 	select IMX93
+ 	select IMX9_LPDDR4X
  
 -- 
 2.34.1
