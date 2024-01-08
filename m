@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01294C3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 16:45:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06E69C4707C
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 16:45:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4206287A82;
+	by phobos.denx.de (Postfix) with ESMTP id E787787463;
 	Mon,  8 Jan 2024 17:45:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E3cOOP6o";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IS1mpZfe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8360287AA4; Mon,  8 Jan 2024 17:45:26 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 0232687A82; Mon,  8 Jan 2024 17:45:27 +0100 (CET)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A97AB87A82
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 17:45:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F04787A99
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 17:45:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-55745901085so2497910a12.0
- for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 08:45:22 -0800 (PST)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-557a3ce8b72so1471900a12.1
+ for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 08:45:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20230601; t=1704732322; x=1705337122; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=g0nW9u1jufA9yDPc8OkPmx5inrzzKMEzPforfM0Alec=;
- b=E3cOOP6ol8AQ7OfBkQiepFxWkCbcOzZYmDQryJm9a2nHtNLDjVKw0rOMDj7rm2JrMe
- Y9Tdz/ILnPcKEqsbEm9jpY491JIek/f32TihcVyLpsBXt+DnBkVzvctmhcWqjfCZ/ex4
- xIAoBdmAjMHYWXggb0gnOFiH4izyYLTNjD4kklVJiB/sP2jeFJxDDa8/kOQBSeGDv/cw
- 7u6ele3A2kwpyiB8DCG0vigvAMIIO8zT5IOMgvmvhS226AY7v9SxWhPdyX/t/AfMlfHP
- sHAuatqa+RJfOaGnb+VOlnPe0HFJ/pqjwnL1eSLL+jZz5IA60Gn69UDCiNDcxRefgg3b
- 3aQg==
+ bh=PZdHUWcjM6WJ5AjDVbMr9xStXJfoCDQIXJ1hiXTPO/E=;
+ b=IS1mpZfeW8lxZbWXmYopo+mUWfXoaTLN8SV6tqnqToYFuINqXfTy+/0KSpq4BICaTi
+ vnj1xvGs6ljAtWLfqC1LdARHRVRrAOksVcibsCQY3j96+i0lH9Hybd0+1QHGRqOWvaol
+ ExCYe9igkwNDr2QbG+uGQs0K4OvN7bRJxYEIGC+eJQzzS91485LhnUc2Ti74TEfuRlLs
+ hx5iFGe7o9FEsTfKZ/OUqb4shNXewl49ItQ3GIYczCPGBxZDC5AOPDBqor+hn4K42dP8
+ WQutzD2hcGvQ1yn075XtlMCLkOBBq9NdDb4gRQ5X20NfFXzGJhyJljIzX8xPixuREeiF
+ EYFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1704732322; x=1705337122;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=g0nW9u1jufA9yDPc8OkPmx5inrzzKMEzPforfM0Alec=;
- b=Z/h1pFeYONYRviJBMmCqjufZjgXFl2lP+A/JTGlAfB4xQ3FvZ/sRswJI+uR81XzU+I
- /baWckRy9Yvc5qR+aGRLpdgJfeUghXRPthIlhPh//RbymRkIK0N/wlsDwMwifDZs0VH8
- dJfNxWfcJ32nk9Ofo8QXfsZIpjNoehsO0Qihz0oqian2BlWfKhJ9SxkxOCnb6pWaagPt
- 4YdQf2yVIE4XOO6e6JvCTM73sBos+McPXy3uWr50aDnKFWo38QEI/rBJeJD3C0UuSxrS
- Nay0xF2KnmhbUuOY90vNnO3iKueXTj/RoFoeRwNaG6CkPKhjCOOqC8Lh1+23b+a+lGo5
- Y5KQ==
-X-Gm-Message-State: AOJu0YyipEuKg7Bq+2wCs8YgNBSXGblDtyXtlx4M8EoRg+auFWriO0dh
- Q1Rj8IpSuCEghnQZVe8VhJU=
-X-Google-Smtp-Source: AGHT+IEnJ47wVL2cXP5G2Kp+IHf8aVjQnXM+BrK+wYXteXWmBV1hj9jjHuROEAkPSUeLezhc6t69KA==
-X-Received: by 2002:a05:6402:3125:b0:555:2b97:3f57 with SMTP id
- dd5-20020a056402312500b005552b973f57mr1892369edb.84.1704732321902; 
- Mon, 08 Jan 2024 08:45:21 -0800 (PST)
+ bh=PZdHUWcjM6WJ5AjDVbMr9xStXJfoCDQIXJ1hiXTPO/E=;
+ b=B3Vm8sCoO4kY2zNRstkzyVaTVuX8BzAUpUOaDcnwIjc63ZHGnhAM3XR66ZzsVVh3ON
+ 9BAWNCPVkAYqML4+oxpxMPq/QmjNv6OFJoQVMkXXiRmWF+1G/JOMoS1TKWItdAfvBrRJ
+ Es1AmfNFMrNWhKK5GtVsD5ygsxreKYvsO9Djr6eIuWXQTZUsQTP1v5yQVLopOiYAqRFd
+ Dv55ygPeDEJDsHWLH6HA7tZBrR2n2SiYy27xEfXZGWOrkUSOwMSc4aG67HzBq9KMOQda
+ mP8SA+3wXJbuc/gLH4QwArEoWcZX6Hvj0zSwMoSQPIV4WPZv+C5THDR5m+17UBXNDEIR
+ IsBA==
+X-Gm-Message-State: AOJu0Yx3u8zRhjpT7dvQwgQwtiOVoyMAfFEegd0AQQ7GHZy+kvhtDRbT
+ w9bXQf+Yn/2SQl8Ea8KbFBQ=
+X-Google-Smtp-Source: AGHT+IFUkPxuAXlHqLNM5E48d2d+dlqXFtMfdy8KhYWvZZU9BgR6PfKJuV5c+vuYHFAXE9zTMeH51w==
+X-Received: by 2002:a50:cdca:0:b0:554:20a:5d56 with SMTP id
+ h10-20020a50cdca000000b00554020a5d56mr2580038edj.2.1704732322482; 
+ Mon, 08 Jan 2024 08:45:22 -0800 (PST)
 Received: from xeon.. ([188.163.112.64]) by smtp.gmail.com with ESMTPSA id
- x8-20020aa7cd88000000b0055751515a84sm26684edv.51.2024.01.08.08.45.21
+ x8-20020aa7cd88000000b0055751515a84sm26684edv.51.2024.01.08.08.45.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jan 2024 08:45:21 -0800 (PST)
+ Mon, 08 Jan 2024 08:45:22 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Anatolij Gustschin <agust@denx.de>, Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 1/2] video: simple_panel: simplify platform data pass
-Date: Mon,  8 Jan 2024 18:45:00 +0200
-Message-Id: <20240108164501.4660-2-clamor95@gmail.com>
+Subject: [PATCH v1 2/2] video: simple_panel: add EDID support
+Date: Mon,  8 Jan 2024 18:45:01 +0200
+Message-Id: <20240108164501.4660-3-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240108164501.4660-1-clamor95@gmail.com>
 References: <20240108164501.4660-1-clamor95@gmail.com>
@@ -90,89 +90,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Pass MIPI DSI platform data to simple DSI panel directly
-from driver data on panel probe.
+Support timing parsing from EDID if panel device tree node
+provides DDC i2c bus instead of timings node.
 
+Tested-by: Robert Eckelmann <longnoserob@gmail.com> # ASUS TF201
+Tested-by: Agneli <poczt@protonmail.ch> # Toshiba AC100 T20
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/simple_panel.c | 36 ++++++++++++------------------------
- 1 file changed, 12 insertions(+), 24 deletions(-)
+ drivers/video/Kconfig        |  2 ++
+ drivers/video/simple_panel.c | 51 ++++++++++++++++++++++++++++++++++--
+ 2 files changed, 51 insertions(+), 2 deletions(-)
 
+diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+index 6f319ba0d5..e2016d73d1 100644
+--- a/drivers/video/Kconfig
++++ b/drivers/video/Kconfig
+@@ -240,6 +240,7 @@ config PANEL
+ config SIMPLE_PANEL
+ 	bool "Enable simple panel support"
+ 	depends on PANEL && BACKLIGHT && DM_GPIO
++	select I2C_EDID
+ 	default y
+ 	help
+ 	  This turns on a simple panel driver that enables a compatible
+@@ -1105,6 +1106,7 @@ config SPL_PANEL
+ config SPL_SIMPLE_PANEL
+ 	bool "Enable simple panel support at SPL"
+ 	depends on SPL_PANEL && SPL_BACKLIGHT && SPL_DM_GPIO
++	select I2C_EDID
+ 	default y
+ 	help
+ 	  This turns on a simple panel driver that enables a compatible
 diff --git a/drivers/video/simple_panel.c b/drivers/video/simple_panel.c
-index efb122b534..064c113d2d 100644
+index 064c113d2d..f0234349da 100644
 --- a/drivers/video/simple_panel.c
 +++ b/drivers/video/simple_panel.c
-@@ -19,19 +19,6 @@ struct simple_panel_priv {
- 	struct gpio_desc enable;
- };
+@@ -7,12 +7,16 @@
+ #include <common.h>
+ #include <backlight.h>
+ #include <dm.h>
++#include <edid.h>
++#include <i2c.h>
+ #include <log.h>
+ #include <mipi_dsi.h>
+ #include <panel.h>
+ #include <asm/gpio.h>
+ #include <power/regulator.h>
  
--/* List of supported DSI panels */
--enum {
--	PANEL_NON_DSI,
--	PANASONIC_VVX10F004B00,
--};
--
--static const struct mipi_dsi_panel_plat panasonic_vvx10f004b00 = {
--	.mode_flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_VIDEO_SYNC_PULSE |
--		      MIPI_DSI_CLOCK_NON_CONTINUOUS,
--	.format = MIPI_DSI_FMT_RGB888,
--	.lanes = 4,
--};
--
- static int simple_panel_enable_backlight(struct udevice *dev)
- {
- 	struct simple_panel_priv *priv = dev_get_priv(dev);
-@@ -111,7 +98,8 @@ static int simple_panel_probe(struct udevice *dev)
- {
- 	struct simple_panel_priv *priv = dev_get_priv(dev);
- 	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
--	const u32 dsi_data = dev_get_driver_data(dev);
-+	struct mipi_dsi_panel_plat *dsi_data =
-+		(struct mipi_dsi_panel_plat *)dev_get_driver_data(dev);
- 	int ret;
- 
- 	ret = regulator_set_enable_if_allowed(priv->reg, true);
-@@ -121,15 +109,8 @@ static int simple_panel_probe(struct udevice *dev)
- 		return ret;
- 	}
- 
--	switch (dsi_data) {
--	case PANASONIC_VVX10F004B00:
--		memcpy(plat, &panasonic_vvx10f004b00,
--		       sizeof(panasonic_vvx10f004b00));
--		break;
--	case PANEL_NON_DSI:
--	default:
--		break;
--	}
-+	if (dsi_data)
-+		memcpy(plat, dsi_data, sizeof(struct mipi_dsi_panel_plat));
- 
- 	return 0;
- }
-@@ -140,6 +121,13 @@ static const struct panel_ops simple_panel_ops = {
- 	.get_display_timing	= simple_panel_get_display_timing,
- };
- 
-+static const struct mipi_dsi_panel_plat panasonic_vvx10f004b00 = {
-+	.mode_flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_VIDEO_SYNC_PULSE |
-+		      MIPI_DSI_CLOCK_NON_CONTINUOUS,
-+	.format = MIPI_DSI_FMT_RGB888,
-+	.lanes = 4,
-+};
++#define EDID_I2C_ADDR	0x50
 +
- static const struct udevice_id simple_panel_ids[] = {
- 	{ .compatible = "simple-panel" },
- 	{ .compatible = "auo,b133xtn01" },
-@@ -150,7 +138,7 @@ static const struct udevice_id simple_panel_ids[] = {
- 	{ .compatible = "sharp,lq123p1jx31" },
- 	{ .compatible = "boe,nv101wxmn51" },
- 	{ .compatible = "panasonic,vvx10f004b00",
--	  .data = PANASONIC_VVX10F004B00 },
-+	  .data = (ulong)&panasonic_vvx10f004b00 },
- 	{ }
- };
+ struct simple_panel_priv {
+ 	struct udevice *reg;
+ 	struct udevice *backlight;
+@@ -53,9 +57,52 @@ static int simple_panel_get_display_timing(struct udevice *dev,
+ 					   struct display_timing *timings)
+ {
+ 	const void *blob = gd->fdt_blob;
++	struct display_timing edid_timing;
++	struct udevice *panel_ddc, *panel_edid;
++	u8 edid_buf[EDID_SIZE] = { 0 };
++	int ret, bpc;
++
++	/* Check for timing subnode if panel node first */
++	ret = fdtdec_decode_display_timing(blob, dev_of_offset(dev),
++					   0, timings);
++	if (!ret)
++		return ret;
++
++	/* Check for DDC i2c if no timings are provided */
++	ret = uclass_get_device_by_phandle(UCLASS_I2C, dev,
++					   "ddc-i2c-bus",
++					   &panel_ddc);
++	if (ret) {
++		log_debug("%s: cannot get DDC i2c bus: error %d\n",
++			  __func__, ret);
++		return ret;
++	}
++
++	ret = dm_i2c_probe(panel_ddc, EDID_I2C_ADDR, 0, &panel_edid);
++	if (ret) {
++		log_debug("%s: cannot probe EDID: error %d\n",
++			  __func__, ret);
++		return ret;
++	}
  
+-	return fdtdec_decode_display_timing(blob, dev_of_offset(dev),
+-					    0, timings);
++	ret = dm_i2c_read(panel_edid, 0, edid_buf, sizeof(edid_buf));
++	if (ret) {
++		log_debug("%s: cannot dump EDID buffer: error %d\n",
++			  __func__, ret);
++		return ret;
++	}
++
++	ret = edid_get_timing(edid_buf, sizeof(edid_buf),
++			      &edid_timing, &bpc);
++	if (ret) {
++		log_debug("%s: cannot decode EDID info: error %d\n",
++			  __func__, ret);
++		return ret;
++	}
++
++	memcpy(timings, &edid_timing, sizeof(*timings));
++
++	return 0;
+ }
+ 
+ static int simple_panel_of_to_plat(struct udevice *dev)
 -- 
 2.40.1
 
