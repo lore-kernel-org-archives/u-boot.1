@@ -4,83 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B5B4C3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 12:12:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32FD9C3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 13:09:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A61D387A78;
-	Mon,  8 Jan 2024 13:10:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9C0A787A34;
+	Mon,  8 Jan 2024 14:09:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lJNp8Brc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="O6hAde2A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3093487A60; Mon,  8 Jan 2024 11:59:23 +0100 (CET)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id C98CE87469; Mon,  8 Jan 2024 14:09:52 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12C7987A4F
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 11:59:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E44A587A36
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 14:09:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m.othacehe@gmail.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-33761e291c1so845419f8f.0
- for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 02:59:21 -0800 (PST)
+ spf=pass smtp.mailfrom=bmeng.cn@gmail.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-55642663ac4so1933059a12.1
+ for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 05:09:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704711560; x=1705316360; darn=lists.denx.de;
- h=mime-version:user-agent:message-id:date:references:in-reply-to
- :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=P1h+WYQfmOq794z2lbE/qySeX0UCLz3tlFUGqCAKGMY=;
- b=lJNp8Brcop7+RJ93a1Sq7jSyebdNI8I29EP08Yqwt50ZSfRtXwQcjazkTnc0zC70E5
- IpvOHPLGVOYE9lzPjkU61VDz2hdTM2VFkryY2c8x7T9xctpywwKs/lXbqxOMG3E6ebjH
- FxFAlBckkjPteqxzNa0C5zytXIIShIl0HLkOwiX51q3rClOyap9TrMy4yajadfwuqFaK
- zitN6jQy+j9VGr7bTZcsg+xSZtvXz+QiqUJ0KKTrKjouTdyRi8ngC3bTeyec3YsUBMdn
- SfWZTqSckKnXoD0M2SPh901KV4/h7GRElQiwPPd4GGUMNRzBaiFYzyJ/Mkhyery/r7h7
- IjrQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704711560; x=1705316360;
- h=mime-version:user-agent:message-id:date:references:in-reply-to
- :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1704719390; x=1705324190; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P1h+WYQfmOq794z2lbE/qySeX0UCLz3tlFUGqCAKGMY=;
- b=uwIXDRK8VUB930ESJuKFGKHr6dKO5peXJAepshfSAdid0iHCrlWw1p97HKiqHSF762
- wSo2ys/0BU9bSV4408tdpMfbd+7VviZWYOnc0bldh+dcvim99YccJbjybC3RaoVjOyZi
- yrtb5XWlTCpkhF/OIbuK+r7wsCLrhyTYA1G/o6WlltkWSTDUOZZWIqz+Ojjvdvh1wSHp
- OMblBew/agUCX5N/erBucHs0ca1i3hoSqMRJy78/2cHVrWe17/ZL3jfxRW6oaLci/fpm
- cVFAi/pdRCtSLaMnsj0EIkROp03oUrDRnrMLYFsXt5R+T9rTpW67cfVrDpB3O5AA05XR
- ajKQ==
-X-Gm-Message-State: AOJu0Ywo7YQs16e/ZfFDIcKtYRjxJIDS/djFLcXd1wm7N8iK1zBSrf6h
- +hZUEqZA1FgsC6eXxfmrethAxDLuLao=
-X-Google-Smtp-Source: AGHT+IEhe3Z2r+lAcWRmmZYK/T4wBqiAt8qh7j0qyo8f1NsvdFdUwC6SBdTcLvh7gNWXT91q7q9Rnw==
-X-Received: by 2002:a05:600c:511e:b0:40e:4317:2312 with SMTP id
- o30-20020a05600c511e00b0040e43172312mr1258672wms.9.1704711560227; 
- Mon, 08 Jan 2024 02:59:20 -0800 (PST)
-Received: from meije ([2a01:e0a:ab1:5c70:ddd3:fad7:e5a6:7e01])
- by smtp.gmail.com with ESMTPSA id
- e8-20020a5d5948000000b00336898daceasm7501961wri.96.2024.01.08.02.59.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jan 2024 02:59:19 -0800 (PST)
-From: Mathieu Othacehe <m.othacehe@gmail.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Peng Fan <peng.fan@nxp.com>,  Tom Rini <trini@konsulko.com>,  Stefano
- Babic <sbabic@denx.de>,  "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v5 0/3] Add imx93-var-som support
-In-Reply-To: <CAOMZO5CyqnaqqWpcLQZXPYXiSYbtzLzR+7k10NC-LZ2WA7P4iA@mail.gmail.com>
- (Fabio Estevam's message of "Mon, 8 Jan 2024 07:30:26 -0300")
-References: <20240104155357.21865-1-othacehe@gnu.org>
- <CAOMZO5Cw3WE5j02GmFpGB7z4-LBA7Tne7X2TG=riTxpYvJZRuA@mail.gmail.com>
- <87v88489b4.fsf@gmail.com>
- <CAOMZO5CyqnaqqWpcLQZXPYXiSYbtzLzR+7k10NC-LZ2WA7P4iA@mail.gmail.com>
-Date: Mon, 08 Jan 2024 11:59:18 +0100
-Message-ID: <87a5pg8515.fsf@gmail.com>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ bh=C8yoRqcl4sXzDJcVZBTrMc45JNhCN9KrBp4kKIYbhDY=;
+ b=O6hAde2AWKGJy6boZyBLeh1D+4C9od7yjuvElDd9KRKfr92XS4MRmByxsgv5aymjsN
+ r0R8wvXLLnlm6CrbJ5yRQzjIKdtwYeo9jzsSSZ6TfrWPtmZta2IEWZEPuvbB0BmUStfx
+ YHGKhvtZYC4TrkjV6tHXtnpsG8/AVlc/YWJyfvooJbjDJGid4xajvVN6SBlwjKr/uTiy
+ ijJ/x4ta2fRpWM5pJif1JfEL5E+e0hh86lDWutNvFuICPM3gHkZay/RNvcpv6blOG0rX
+ 2evk3qnaoZXyGyC2clssd1mBFfnEDE3L+LgTq4mdAXL+aMgFkftZlbGz4E0UlsJOsO0C
+ CpMw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704719390; x=1705324190;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=C8yoRqcl4sXzDJcVZBTrMc45JNhCN9KrBp4kKIYbhDY=;
+ b=bWW0omJHYkritEOXCNJk8Y07aK4W1GY3lyY3OMNd2rbh+E4BAzHH0xKQHb83WpTcu4
+ 5BDJYtanF7o1r0qPIIHvBaxaBsXVAY0nk0LcHkhqTVJze9OJibtCC/nIKZfP7XwYlO1c
+ /PXlFTYrbk+GicTuZGZNWqCZG271tGeZvHBEkH54QicjvKycXqRP5S5w64kPtKZO1sBJ
+ Th2e1ae/IXVd0vdJIigxo5WOFjnnfAzZCMwV7l/f9cDmB+yDVAZ1MmHj9dUJBHRvs85w
+ sWV96T97N/JrDbSdOwKXliv1hHvLKIf1/MhGet6g/oP/T3pFBvRF1hcRvQdLF1ayewgx
+ i9Cw==
+X-Gm-Message-State: AOJu0YzjEW2BlmjxF2FJ6eni5C5EchCs9U2BLOPfklIWiC1uOGKQyciI
+ Vlfd5UqOLRcQUP/tWdCbeMgfcDEEPyQZYltrJfs=
+X-Google-Smtp-Source: AGHT+IEPsziJfrZUeBAsvqRiFaCzW515TJ3PguFFY1+aXWvINAOl6Ziz7wTO5qctUJn8w8HSc9tBHXgON9M/VWWVC9U=
+X-Received: by 2002:a17:906:260c:b0:a27:f7a1:2ad2 with SMTP id
+ h12-20020a170906260c00b00a27f7a12ad2mr991796ejc.69.1704719390170; Mon, 08 Jan
+ 2024 05:09:50 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Mailman-Approved-At: Mon, 08 Jan 2024 13:10:24 +0100
+References: <20240108001455.35638-1-sjg@chromium.org>
+ <20240108001455.35638-2-sjg@chromium.org>
+ <874jfouq9e.fsf@bloch.sibelius.xs4all.nl>
+ <6beec0824542ac0608a5dfad9b88d32a@manjaro.org>
+In-Reply-To: <6beec0824542ac0608a5dfad9b88d32a@manjaro.org>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Mon, 8 Jan 2024 21:09:39 +0800
+Message-ID: <CAEUhbmVc06RydZavZHAXS2oBZC=cRt0C801+dxYVYr9qZRvBVA@mail.gmail.com>
+Subject: Re: [PATCH 2/2] coreboot: Switch to a monospaced font
+To: Dragan Simic <dsimic@manjaro.org>, Tom Rini <trini@konsulko.com>, 
+ Anatolij Gustschin <agust@denx.de>
+Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,20 +91,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
++ Tom and Anatolij,
 
-Hello,
-
-> I will also wait for the Gitbug CI job to finish:
-> https://github.com/u-boot/u-boot/pull/457
+On Mon, Jan 8, 2024 at 5:33=E2=80=AFPM Dragan Simic <dsimic@manjaro.org> wr=
+ote:
 >
-> Also, it seems you generated v6 against U-Boot master instead of U-Boot next?
+> On 2024-01-08 10:29, Mark Kettenis wrote:
+> >> From: Simon Glass <sjg@chromium.org>
+> >> Date: Sun,  7 Jan 2024 17:14:55 -0700
+> >>
+> >> The default font is proportional, with different character widths.
+> >> Select a monospace font for coreboot so that the 'dm tree' output
+> >> lines
+> >> up correctly.
+> >>
+> >> Update the coreboot tests to match.
+> >
+> > To be honest, I think defaulting to a proportional font is wrong as a
+> > default for something like U-Boot.
+>
+> I agree, it makes very little sense to default to a proportional font.
+>
 
-Right, because I wasn't sure CI was working for pull requests on the
-`next` branch of Github. It looks like it is so I also created a PR on
-top of the `next` branch: https://github.com/u-boot/u-boot/pull/459.
+So we should revert
 
-I should have done that in the first place, sorry about that.
+commit b093753471c1a30d680868a9f4d9f6db090bf0b7 ("video: Add a default
+TrueType font")
 
-Thanks,
-
-Mathieu
+Regards,
+Bin
