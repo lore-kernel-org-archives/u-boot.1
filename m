@@ -4,81 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 428D5C3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 20:43:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64416C3DA6E
+	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 20:44:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39DAC87A47;
-	Mon,  8 Jan 2024 21:42:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CAC8687942;
+	Mon,  8 Jan 2024 21:44:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Xb3hFMuk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mBTiXYcD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F2D687942; Mon,  8 Jan 2024 21:42:57 +0100 (CET)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id CF3FF87A30; Mon,  8 Jan 2024 21:44:34 +0100 (CET)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2779987848
- for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 21:42:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F659878E1
+ for <u-boot@lists.denx.de>; Mon,  8 Jan 2024 21:44:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-67f85fe5632so26091036d6.0
- for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 12:42:55 -0800 (PST)
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-78314e00350so232118285a.1
+ for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 12:44:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1704746574; x=1705351374; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1704746671; x=1705351471; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QDbPnGXrBS7xwoi3m/W6VJEKOPMl5jxbGjqbR30tX24=;
- b=Xb3hFMukQXDKG33Sl3m0+fzrdPUdxZQALNactNcMzQ96bFg/OVx3aHnFxIyASVKH/o
- v8pUbQty1sfZcVoHKQF9OW0n7VAzVzBbpE2qTw0hKU1STnj8rMbmf8ULNE8WXwm6Nexx
- 9qPnPJNnARPF07nB7khL6FzVyHhWVFED5P8GU=
+ bh=NVY1iWo87P+QX7J9EnBO6gA3XemPZOffMJ4k7T0fN8U=;
+ b=mBTiXYcDdmvqFM2pO/US6b3OhJJHAGF4GmsQx/NzQC8hMmqTadl2cSYrhR5y/Wdl6a
+ WhGxsM+ZY4t16Og57FtUCJpZN7dn42m8TtkaNk5vnlUr4WHhJMHK099zNF86f4L8Qb+M
+ JE4N9/PKy9dluS2g4opzWyV+he2n36ElsPbag=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704746574; x=1705351374;
+ d=1e100.net; s=20230601; t=1704746671; x=1705351471;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QDbPnGXrBS7xwoi3m/W6VJEKOPMl5jxbGjqbR30tX24=;
- b=GE8pzBrAimBG5Pwrb9qM+yDqymq9aOgnI7/sl98Ib+IRBfHG+5ziOhiGQ4r7uhk1Zd
- Ooc7+ErHXM6LYkPfbFJb+FdUDpfCK/ct0m31jK+xGwtHPFSxLo8qu/2NKqtK7Qv2EC9t
- 5aU6QEH71HtOCL1QTzsLpBqHIIyTjLLTcDDoGOv75D+J1kEjaH6UR0oukmAT0hq+joWI
- addAIF4oZaS4bQdD0XXavKJeH4el0xriWOGZWggmJOWhgclqW71WqEZV9xWCwVfoVug5
- 2otJJwtPFsHM/hMh/R2w0xlMAuCzHCBktL2S4fAqYW2dPSlDXYTi9xsOMdB5VT26fHK1
- bjsw==
-X-Gm-Message-State: AOJu0Yznb8766c7NA/6nNKTpGL+MxuzhTG+/ldXm+Udqffa66hkkioJN
- ZOBCkSv5uQ7ctXsp6vMKGDYeTGFL3SgNvQ==
-X-Google-Smtp-Source: AGHT+IEqhMrzm1a2GQBxJ5h0BRSC9N2MUlYA8+ijNh79ZYC7ccRKPGK1NpgxxY1HQJTVGKD/kzBfzg==
-X-Received: by 2002:ad4:5943:0:b0:681:144a:5548 with SMTP id
- eo3-20020ad45943000000b00681144a5548mr90022qvb.31.1704746573889; 
- Mon, 08 Jan 2024 12:42:53 -0800 (PST)
+ bh=NVY1iWo87P+QX7J9EnBO6gA3XemPZOffMJ4k7T0fN8U=;
+ b=kYw6Uxxx1u0PFKHBbh4lCxDrQhuLjPuhxapaaGWnQeY+4QmKR1AlA9lgPVinM73nOB
+ M8LufuE3/5yRWsVuiVu7DvUZi4lBdLvgydvnf1fiXcqg72n8v9+rU5UA9/+4wShUE7zx
+ 4eq0DJaWpkKF3MZ5VeH+WJtNyg4qbkjEyu7LVuDvhxJ3K9GWINULSETrnnUl9vRHWnlH
+ AcBj1qsff3TAOMboUHqNz87yEroxDh3jDiAfHqRr/FWaq3+Ce2o/mP5roySn8F/3j8pn
+ w654GQSyl6Phwrwk+fk1lbYj7Xs55bI21ltm9qD7LGk2vIJUjKDwgSGMkJtsyJzI+GPA
+ 1o8A==
+X-Gm-Message-State: AOJu0Yyim6RiLg9aBH1z/V5A/3Ar93B9ky3A25aijeWWYOd94In/6Rrs
+ oYaZyoMLGZiDUWgmAB4YG/qh4IeLQ07p2Q==
+X-Google-Smtp-Source: AGHT+IHq1WHLexKPXIgJjWzhbmnywMHbPvnEKOAqZ6GoQ/xe08twq42toXMzXUpylcEg2uJGDKapFA==
+X-Received: by 2002:a05:620a:6890:b0:781:b2bc:336 with SMTP id
+ rv16-20020a05620a689000b00781b2bc0336mr5265216qkn.12.1704746671303; 
+ Mon, 08 Jan 2024 12:44:31 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
  [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
- z7-20020ad44147000000b0067f07683decsm280555qvp.99.2024.01.08.12.42.52
+ o4-20020a05620a22c400b007831c7989a4sm194052qki.22.2024.01.08.12.44.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jan 2024 12:42:53 -0800 (PST)
-Date: Mon, 8 Jan 2024 15:42:51 -0500
+ Mon, 08 Jan 2024 12:44:30 -0800 (PST)
+Date: Mon, 8 Jan 2024 15:44:29 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Kongyang Liu <seashell11234455@gmail.com>
-Cc: u-boot@lists.denx.de, Bin Meng <bmeng@tinylab.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Leo <ycliang@andestech.com>, Michal Simek <michal.simek@amd.com>,
- Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>,
- Samuel Holland <samuel@sholland.org>, Shengyu Qu <wiagn233@outlook.com>,
- Yu Chien Peter Lin <peterlin@andestech.com>
-Subject: Re: [PATCH 1/4] riscv: sophgo: milkv_duo: initial support added
-Message-ID: <20240108204251.GP1610741@bill-the-cat>
-References: <20240107112713.61966-1-seashell11234455@gmail.com>
- <20240107112713.61966-2-seashell11234455@gmail.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: sbabic@denx.de, u-boot@lists.denx.de
+Subject: Re: [v2] Pull request: Please pull u-boot-imx-master-20240108
+Message-ID: <20240108204429.GQ1610741@bill-the-cat>
+References: <20240108183709.3230970-1-festevam@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="wXz7zjVXe/ZSeG1D"
+ protocol="application/pgp-signature"; boundary="Rmn9xbqKno55hID0"
 Content-Disposition: inline
-In-Reply-To: <20240107112713.61966-2-seashell11234455@gmail.com>
+In-Reply-To: <20240108183709.3230970-1-festevam@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,94 +91,56 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---wXz7zjVXe/ZSeG1D
+--Rmn9xbqKno55hID0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jan 07, 2024 at 07:27:07PM +0800, Kongyang Liu wrote:
+On Mon, Jan 08, 2024 at 03:37:09PM -0300, Fabio Estevam wrote:
 
-> Add support for Sophgo's Milk-V Duo board, only minimal device tree and
-> serial console are enabled, and it can boot via vendor first stage
-> bootloader.
+> Hi Tom,
 >=20
-> Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
+> This is v2. Fixed the summary log.
 >=20
-> ---
+> Please pull from u-boot-imx, thanks.
 >=20
->  arch/riscv/Kconfig                 |  4 ++++
->  board/sophgo/milkv_duo/Kconfig     | 28 ++++++++++++++++++++++++++++
->  board/sophgo/milkv_duo/MAINTAINERS |  6 ++++++
->  board/sophgo/milkv_duo/Makefile    |  5 +++++
->  board/sophgo/milkv_duo/board.c     |  9 +++++++++
->  include/configs/milkv_duo.h        | 16 ++++++++++++++++
+> The following changes since commit 93d91e9485d902a1836a22e72d1a545b587adf=
+36:
+>=20
+>   Merge branch 'next' (2024-01-08 12:00:18 -0500)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
+-master-20240108
+>=20
+> for you to fetch changes up to 54e1aa236f7d934ea81d727fe27b6d05902643be:
+>=20
+>   Add imx93-var-som support (2024-01-08 14:37:57 -0300)
+>=20
+> u-boot-imx-master-20240108
 
-The defconfig patch should be folded in to this one.
-
-[snip]
-> diff --git a/board/sophgo/milkv_duo/board.c b/board/sophgo/milkv_duo/boar=
-d.c
-> new file mode 100644
-> index 0000000000..eaa47be173
-> --- /dev/null
-> +++ b/board/sophgo/milkv_duo/board.c
-> @@ -0,0 +1,9 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
-> + */
-> +
-> +int board_init(void)
-> +{
-> +	return 0;
-> +}
-
-Shouldn't you enable caches here?
-
-> diff --git a/include/configs/milkv_duo.h b/include/configs/milkv_duo.h
-> new file mode 100644
-> index 0000000000..dd1d146c50
-> --- /dev/null
-> +++ b/include/configs/milkv_duo.h
-> @@ -0,0 +1,16 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
-> + *
-> + */
-> +
-> +#ifndef __CONFIG_H
-> +#define __CONFIG_H
-> +
-> +#define CFG_SYS_SDRAM_BASE         0x80000000
-> +
-> +#define CFG_EXTRA_ENV_SETTINGS                 \
-> +	"consoledev=3DttyS0"                         \
-> +	"baudrate=3D115200\0"                        \
-
-We shouldn't need to set baudrate, it will be handled for us. Is
-consoledev something that must be set? Can it all be done in a plain
-text environment anyhow? Thanks.
+Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---wXz7zjVXe/ZSeG1D
+--Rmn9xbqKno55hID0
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWcXkgACgkQFHw5/5Y0
-tyyDowv/d9HFAN0s8B9o7hnFtUB/6nPUuE3RoBE7TrVOfTyMUJ+pG5oz68k3mHzc
-HnYtPBa6xdpWH5puYejbwmnlZ3V+KogOzSakKbPRTnO/C7SvTWXYR23YegkSJqQ9
-tIl9VyA2w/9MSYmc/dTs1YTZ3sEDL3se6eTrdGZGcLKtIyrd2FY2uYSgA1nAd0u/
-PWLMIRBx5GnK5xO1zi523+eewhKu4ez4ig/J8y4Rg0zLU8uN6aRJnHIA87Q4IjFH
-j18uM27jsPzE6hRAKSp8dh5OQMsf5RDT5YrgkT9A+BKKFxQ7w2BJND7U+nqrHZEx
-sE1f1e8/tckzF1MGZXKVoUKByFzp3zB01GfNvkGYm9O1IHV+W4XwnQsQ1dSj/+Ve
-yLEYdFx5z2Fyzbyc8uGs5vQNdWVDCvYVbmEgB6O1vEZtZxUK/VtPFL67HYoYFof4
-YRyt/N1I8U5lkMBCJM6/vzkQRo6bGVQLK0nF4Lxt79K4bSf5GTm6ge4lp20Fs3KB
-gKxoYuUq
-=MkHM
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWcXq0ACgkQFHw5/5Y0
+tyy9tAwAkhJkOYfKAWHQRv7+eUohR+/qJXR2zFMHFReCHV7r3A6J3hSRtYxp1gQz
+nQIHFADyq3GpybsPagv9phkMe2aEOtEiPNDNkjZyU7fVBhUMtGkO6kuuXv3iJGHv
+gOVTnZVjVWkQqnaW97fC00DN0qDr7rZScMaI/X55wKJph/kFzd3KiO3ftdq7Aofs
+OPlW//DMVfXkZPDZBE3BJsIRI6NXGhPLjq+ytEjhAiz98Tv1ZfbD/sS2oHJIPMNN
+X5H8wXvVsZxMV9+oQuEUoQ0WoGvC8hxwwvV6quNYld1657E1NGtU9uU48lmIiraf
+LbZdVxLS+M8X93peKY2e6tFT1gq3yAFJzoElLw/J0Mpe+XL/0vimYnfupU5mICSA
+m3zAmLchVy3pLQGAy/tX7BYe+Twi4/nk4HisG3qLQHWhRL5UM9b8b/RiasTE58S7
+N5UeUlOI/yTRVogcz+szf+9euqmp9wB1p1goi9jteaMnr9CRdfgyYZW1zQb+c998
+JvEPWJyT
+=YdYV
 -----END PGP SIGNATURE-----
 
---wXz7zjVXe/ZSeG1D--
+--Rmn9xbqKno55hID0--
