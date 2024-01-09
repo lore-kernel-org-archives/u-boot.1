@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08363C47073
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 12:26:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBC83C47073
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 12:26:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC408878DB;
-	Tue,  9 Jan 2024 13:26:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 54F30878FB;
+	Tue,  9 Jan 2024 13:26:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Xrhc58BZ";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="jq+rHwb1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D706878CD; Tue,  9 Jan 2024 13:26:28 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ id F3EB2878CD; Tue,  9 Jan 2024 13:26:28 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AF95878DA
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 13:26:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0BF00878EC
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 13:26:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 3CAECCE182E;
- Tue,  9 Jan 2024 12:26:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CD7F3C433F1;
- Tue,  9 Jan 2024 12:26:19 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id E300861209;
+ Tue,  9 Jan 2024 12:26:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 053A7C433C7;
+ Tue,  9 Jan 2024 12:26:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1704803182;
- bh=Z4cJUx4MdKKu1lx2zVinzN4WOWVLbBOEn1r01CLIvZI=;
+ s=k20201202; t=1704803185;
+ bh=ZfiMuWZMEMMpCFGCxvOdnk2Co2X1o61llc87Cip1VEs=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Xrhc58BZtHeG0hWO1kEHpjp5/uKy+9lK8QFE1i8uODUb1ffaoWxs/k9CJBBNBvV4C
- qx5H0qPBgXk1lAJXAKKbKh28pteD2VFGUufMZGOAeGlvfEP1V5qYNNLy9hB264dVjb
- tV4AVLt8pze25GcrUoBeiEWBGMjsqPYKeUK5Kfr0ZVrHjmLAba/PmCBZ+KTumUTc2i
- aw9MPlVMFoAQgl3lV+4WIKOWEQU5c+UawiHIlr7+kofCVSWKokSqbp4NMQXlzE3zOg
- 83dk5jMzS/VQW38fMYqoug6aPvQzDD8bNthc1MxquvUi705BtpkbK/Jc9CvYqjGwb4
- 1Z/gpDEbSoAUA==
+ b=jq+rHwb15ye6B2UYyDBd4H8+oVbDdW4Y5iuiky8M/cKAxFPZb1J+NkvvhN3MXuKC7
+ AqRpSXy9kbqwUjqUSml0H4ODGjkWuJOQ/+IJiDx60j4dIStT4AKzTpuXWPrhQqsffD
+ mOWm7ypA4vcL4f2l4A4Wz0xQho8PfLG5wzhxzflDPaomUGeTyiO2XGdZoJ3cO66a1k
+ FXkbX58UETqdw0gDbiK4nOosLqRU59bmCg5WPogOpiCV9JjV25CQe0AphAawSb+3iR
+ 4IkNhe4vEB0uqXbZ+ilADRfiL7/YKc5Gp37lwboBnb6PnUXcDSyInkrGZnBZj2b9VN
+ DqSiGz1iray9w==
 From: Roger Quadros <rogerq@kernel.org>
 To: trini@konsulko.com, michael@amarulasolutions.com,
  dario.binacchi@amarulasolutions.com
 Cc: nm@ti.com, afd@ti.com, vigneshr@ti.com, praneeth@ti.com, srk@ti.com,
  r-gunasekaran@ti.com, u-boot@lists.denx.de,
  Roger Quadros <rogerq@kernel.org>
-Subject: [PATCH 3/4] arm: mach-k3: am642: Define NAND boot device
-Date: Tue,  9 Jan 2024 14:26:04 +0200
-Message-Id: <20240109122605.51951-4-rogerq@kernel.org>
+Subject: [PATCH 4/4] configs: am64x_evm_a53_defconfig: Enable NAND
+Date: Tue,  9 Jan 2024 14:26:05 +0200
+Message-Id: <20240109122605.51951-5-rogerq@kernel.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240109122605.51951-1-rogerq@kernel.org>
 References: <20240109122605.51951-1-rogerq@kernel.org>
@@ -70,41 +70,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-AM642 SoC supports booting from GPMC NAND device.
-Define boot device for it.
+Enables configuration required for NAND in SPL and u-boot.
+
+Enable MTD Driver model and MTD + UBI command line utilities.
+
+Add mtdids/mtdparts for NAND as it is required for u-boot's
+MTD subsystem commands to recognize NAND partitions.
+
+Add u-boot partition location.
 
 Signed-off-by: Roger Quadros <rogerq@kernel.org>
 ---
- arch/arm/mach-k3/am642_init.c            | 3 +++
- arch/arm/mach-k3/include/mach/am64_spl.h | 1 +
- 2 files changed, 4 insertions(+)
+ configs/am64x_evm_a53_defconfig | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
 
-diff --git a/arch/arm/mach-k3/am642_init.c b/arch/arm/mach-k3/am642_init.c
-index 6085379f1d..ddf47ef0a9 100644
---- a/arch/arm/mach-k3/am642_init.c
-+++ b/arch/arm/mach-k3/am642_init.c
-@@ -348,6 +348,9 @@ static u32 __get_primary_bootmedia(u32 main_devstat)
- 	case BOOT_DEVICE_EMMC:
- 		return BOOT_DEVICE_MMC1;
- 
-+	case BOOT_DEVICE_NAND:
-+		return BOOT_DEVICE_NAND;
-+
- 	case BOOT_DEVICE_MMC:
- 		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK) >>
- 		     MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT)
-diff --git a/arch/arm/mach-k3/include/mach/am64_spl.h b/arch/arm/mach-k3/include/mach/am64_spl.h
-index b4f396b2c0..a0a517019c 100644
---- a/arch/arm/mach-k3/include/mach/am64_spl.h
-+++ b/arch/arm/mach-k3/include/mach/am64_spl.h
-@@ -22,6 +22,7 @@
- 
- #define BOOT_DEVICE_USB			0x2A
- #define BOOT_DEVICE_DFU			0x0A
-+#define BOOT_DEVICE_NAND		0x0B
- #define BOOT_DEVICE_GPMC_NOR		0x0C
- #define BOOT_DEVICE_PCIE		0x0D
- #define BOOT_DEVICE_XSPI		0x0E
+diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
+index 05e35a8db6..e22153a958 100644
+--- a/configs/am64x_evm_a53_defconfig
++++ b/configs/am64x_evm_a53_defconfig
+@@ -66,10 +66,15 @@ CONFIG_CMD_DFU=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
++CONFIG_CMD_MTD=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_TIME=y
+ CONFIG_CMD_PMIC=y
+ CONFIG_CMD_REGULATOR=y
++CONFIG_CMD_MTDPARTS=y
++CONFIG_MTDIDS_DEFAULT="nand0=omap2-nand.0"
++CONFIG_MTDPARTS_DEFAULT="mtdparts=omap2-nand.0:2m(NAND.tiboot3),2m(NAND.tispl),2m(NAND.tiboot3.backup),4m(NAND.u-boot),256k(NAND.u-boot-env),256k(NAND.u-boot-env.backup),-(NAND.file-system)"
++CONFIG_CMD_UBI=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_LIST="k3-am642-evm k3-am642-sk"
+@@ -107,6 +112,9 @@ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_ADMA=y
+ CONFIG_SPL_MMC_SDHCI_ADMA=y
+ CONFIG_MMC_SDHCI_AM654=y
++CONFIG_MTD=y
++CONFIG_SPL_MTD=y
++CONFIG_DM_MTD=y
+ CONFIG_DM_SPI_FLASH=y
+ CONFIG_SPI_FLASH_SPANSION=y
+ CONFIG_SPI_FLASH_STMICRO=y
+@@ -161,3 +169,27 @@ CONFIG_USB_GADGET_DOWNLOAD=y
+ CONFIG_USB_FUNCTION_MASS_STORAGE=y
+ CONFIG_SPL_DFU=y
+ CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
++CONFIG_MEMORY=y
++CONFIG_SPL_MEMORY=y
++CONFIG_TI_GPMC=y
++CONFIG_MTD_RAW_NAND=y
++CONFIG_NAND_OMAP_GPMC=y
++CONFIG_CMD_NAND=y
++CONFIG_NAND_OMAP_ELM=y
++CONFIG_NAND_OMAP_ECCSCHEME_BCH8_CODE_HW=y
++CONFIG_SYS_NAND_BLOCK_SIZE=0x40000
++CONFIG_SYS_NAND_ONFI_DETECTION=y
++CONFIG_SYS_NAND_PAGE_SIZE=0x1000
++CONFIG_SYS_NAND_PAGE_COUNT=0x40
++CONFIG_SYS_NAND_OOBSIZE=0x100
++CONFIG_SPL_NAND_SUPPORT=y
++CONFIG_SPL_NAND_DRIVERS=y
++CONFIG_SPL_NAND_BASE=y
++CONFIG_SPL_NAND_IDENT=y
++CONFIG_SPL_NAND_ECC=y
++CONFIG_SYS_NAND_MAX_CHIPS=1
++CONFIG_SYS_MAX_NAND_DEVICE=1
++# CONFIG_SPL_NAND_AM33XX_BCH is not set
++CONFIG_SPL_MTD_SUPPORT=y
++CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
++CONFIG_SYS_NAND_U_BOOT_OFFS=0x600000
 -- 
 2.34.1
 
