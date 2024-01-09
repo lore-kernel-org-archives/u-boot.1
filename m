@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39A9AC4707B
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 19:18:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6353DC4707B
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 19:18:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34E2E87A79;
-	Tue,  9 Jan 2024 20:18:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B2D1187AD4;
+	Tue,  9 Jan 2024 20:18:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sEo7sC+t";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CIoVK5Ij";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9097787AAB; Tue,  9 Jan 2024 20:18:08 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id BA97787ABA; Tue,  9 Jan 2024 20:18:09 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33F8C8797B
+ by phobos.denx.de (Postfix) with ESMTPS id 9ECB88790F
  for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 20:18:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 409JHvUL066103;
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 409JHvwL008520;
  Tue, 9 Jan 2024 13:17:57 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1704827877;
- bh=igdQ5WZ4UNvKNB3wac4rg82hQXOGHTaESCwY7wVjH7c=;
+ bh=xpD6mu0fbHZNbNkUEeIJvqWVqtRRqdUB/yeFgmW/dPU=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=sEo7sC+tcO6xEcbfzvL9Kat6iso71OeeqeqcwQ4mSJ4hpDpmvM6M+L21mB6T5qpIr
- sUIDOaDE+ocRqOSDGZGDC3ITsjnrzlmx1U9OFxwOszhbKfQB+jRpo7vm+0dgjDi5Pf
- 8dQbGhkx/vzPL7zojEpAXjWHnGKzYeprEgT/s7oY=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 409JHvCO095805
+ b=CIoVK5Ijg/D/dpYdZn+IR78tXCIisIRtT7oMDR+STI8FB9uBJEAlBHx0oAc6OdxXY
+ qIfjztJ2ItFFJ37z3zOPweZ6xTjhPdx7TqdjHDUcsQfvYRyA8dfAtNif3KuPOLuYQI
+ 5kOzESeUEHN1oy+J7u2tdfYyMZg/Xmb4V590JWo8=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 409JHvEt029070
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Tue, 9 Jan 2024 13:17:57 -0600
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 9
  Jan 2024 13:17:56 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Tue, 9 Jan 2024 13:17:56 -0600
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 409JHuRt106634;
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 409JHu9L075212;
  Tue, 9 Jan 2024 13:17:56 -0600
 From: Nishanth Menon <nm@ti.com>
 To: Tom Rini <trini@konsulko.com>
@@ -60,9 +60,10 @@ CC: Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu Raja <sinthu.raja@ti.com>,
  Bryan Brattlof <bb@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
  <u-boot@lists.denx.de>, Jon Humphreys <j-humphreys@ti.com>,
  Nishanth Menon <nm@ti.com>
-Subject: [PATCH V2 01/10] board: ti: common: Introduce a common fdt ops library
-Date: Tue, 9 Jan 2024 13:14:56 -0600
-Message-ID: <20240109191506.3820908-2-nm@ti.com>
+Subject: [PATCH V2 02/10] board: ti: am62ax: Set fdtfile from C code instead
+ of findfdt script
+Date: Tue, 9 Jan 2024 13:14:57 -0600
+Message-ID: <20240109191506.3820908-3-nm@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240109191506.3820908-1-nm@ti.com>
 References: <20240109191506.3820908-1-nm@ti.com>
@@ -86,181 +87,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce a common fdt operations library for basic device tree
-operations that are common between various boards.
+Stop using the findfdt script and switch to setting the fdtfile from
+C code.
 
-The first library to introduce here is the capability to set up
-fdtfile as a standard variable as part of board identification rather
-than depend on scripted ifdeffery.
+While at this, replace findfdt in environment with a warning as it is
+no longer needed
 
 Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
-Changes Since v1:
-* s/TI_EVM_FDT_FOLDER_PATH/TI_FDT_FOLDER_PATH s/name_fdt/board_name
-  s/TI_NAME_FDT_MAX/TI_BOARD_NAME_MAX
-* Comment updates in various places for review clarification.
-* Still maintain the fall back using CONFIG_DEFAULT_DEVICE_TREE for
-  reasons explained in review comment response.
-* Added a specific u-boot version number for deprecation of legacy
-  env variables.
+Changes from V1: None.
+I have retained the central call ti_set_fdt_env() to retain the
+population of fdtfile name using the CONFIG fall back logic and the
+population of (now deprecated) legacy variables for downstream script
+users.
 
-V1: https://lore.kernel.org/r/20240108173301.2692332-2-nm@ti.com
+V1: https://lore.kernel.org/r/20240108173301.2692332-3-nm@ti.com
 
- board/ti/common/Kconfig   | 12 ++++++++
- board/ti/common/Makefile  |  1 +
- board/ti/common/fdt_ops.c | 64 +++++++++++++++++++++++++++++++++++++++
- board/ti/common/fdt_ops.h | 42 +++++++++++++++++++++++++
- 4 files changed, 119 insertions(+)
- create mode 100644 board/ti/common/fdt_ops.c
- create mode 100644 board/ti/common/fdt_ops.h
+ board/ti/am62ax/am62ax.env       |  1 -
+ board/ti/am62ax/evm.c            | 10 ++++++++++
+ configs/am62ax_evm_a53_defconfig |  1 +
+ 3 files changed, 11 insertions(+), 1 deletion(-)
 
-diff --git a/board/ti/common/Kconfig b/board/ti/common/Kconfig
-index 49edd98014ab..de44e4de2115 100644
---- a/board/ti/common/Kconfig
-+++ b/board/ti/common/Kconfig
-@@ -49,3 +49,15 @@ config TI_COMMON_CMD_OPTIONS
- 	imply CMD_SPI
- 	imply CMD_TIME
- 	imply CMD_USB if USB
-+
-+config TI_FDT_FOLDER_PATH
-+	string "Location of Folder path where dtb is present"
-+	default "ti/davinci" if ARCH_DAVINCI
-+	default "ti/keystone" if ARCH_KEYSTONE
-+	default "ti/omap" if ARCH_OMAP2PLUS
-+	default "ti" if ARCH_K3
-+	depends on ARCH_DAVINCI || ARCH_KEYSTONE || ARCH_OMAP2PLUS || ARCH_K3
-+	help
-+	   Folder path for kernel device tree default.
-+	   This is used along with fdtfile path to locate the kernel
-+	   device tree blob.
-diff --git a/board/ti/common/Makefile b/board/ti/common/Makefile
-index 26bf12e2e6d5..5ac361ba7fcf 100644
---- a/board/ti/common/Makefile
-+++ b/board/ti/common/Makefile
-@@ -3,3 +3,4 @@
+diff --git a/board/ti/am62ax/am62ax.env b/board/ti/am62ax/am62ax.env
+index a6d967e982d4..334374abb73e 100644
+--- a/board/ti/am62ax/am62ax.env
++++ b/board/ti/am62ax/am62ax.env
+@@ -1,5 +1,4 @@
+ #include <env/ti/ti_common.env>
+-#include <env/ti/default_findfdt.env>
+ #include <env/ti/mmc.env>
  
- obj-${CONFIG_TI_I2C_BOARD_DETECT} += board_detect.o
- obj-${CONFIG_CMD_EXTENSION} += cape_detect.o
-+obj-${CONFIG_OF_LIBFDT} += fdt_ops.o
-diff --git a/board/ti/common/fdt_ops.c b/board/ti/common/fdt_ops.c
-new file mode 100644
-index 000000000000..eb917be9e0da
---- /dev/null
-+++ b/board/ti/common/fdt_ops.c
-@@ -0,0 +1,64 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Library to support FDT file operations which are common
-+ *
-+ * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
-+ */
+ name_kern=Image
+diff --git a/board/ti/am62ax/evm.c b/board/ti/am62ax/evm.c
+index cd3360a43029..62d3664936e7 100644
+--- a/board/ti/am62ax/evm.c
++++ b/board/ti/am62ax/evm.c
+@@ -13,6 +13,8 @@
+ #include <fdt_support.h>
+ #include <spl.h>
+ 
++#include "../common/fdt_ops.h"
 +
-+#include <env.h>
-+#include <vsprintf.h>
-+#include "fdt_ops.h"
+ int board_init(void)
+ {
+ 	return 0;
+@@ -27,3 +29,11 @@ int dram_init_banksize(void)
+ {
+ 	return fdtdec_setup_memory_banksize();
+ }
 +
-+void ti_set_fdt_env(const char *board_name, struct ti_fdt_map *fdt_map)
++#ifdef CONFIG_BOARD_LATE_INIT
++int board_late_init(void)
 +{
-+	char *fdt_file_name = NULL;
-+	char fdtfile[TI_FDT_FILE_MAX];
-+
-+	if (board_name) {
-+		while (fdt_map) {
-+			/* Check for NULL terminator in the list */
-+			if (!fdt_map->board_name)
-+				break;
-+			if (!strncmp(fdt_map->board_name, board_name, TI_BOARD_NAME_MAX)) {
-+				fdt_file_name = fdt_map->fdt_file_name;
-+				break;
-+			}
-+			fdt_map++;
-+		}
-+	}
-+
-+	/* match not found OR null board_name */
-+	if (!fdt_file_name) {
-+		/*
-+		 * Prioritize CONFIG_DEFAULT_FDT_FILE - if that is not defined,
-+		 * or is empty, then use CONFIG_DEFAULT_DEVICE_TREE
-+		 */
-+#ifdef CONFIG_DEFAULT_FDT_FILE
-+		if (strlen(CONFIG_DEFAULT_FDT_FILE)) {
-+			snprintf(fdtfile, sizeof(fdtfile), "%s/%s",
-+				 CONFIG_TI_FDT_FOLDER_PATH, CONFIG_DEFAULT_FDT_FILE);
-+		} else
-+#endif
-+		{
-+			snprintf(fdtfile, sizeof(fdtfile), "%s/%s.dtb",
-+				 CONFIG_TI_FDT_FOLDER_PATH, CONFIG_DEFAULT_DEVICE_TREE);
-+		}
-+	} else {
-+		snprintf(fdtfile, sizeof(fdtfile), "%s/%s", CONFIG_TI_FDT_FOLDER_PATH,
-+			 fdt_file_name);
-+	}
-+
-+	env_set("fdtfile", fdtfile);
-+
-+	/*
-+	 * XXX: DEPRECATION WARNING: 2 u-boot versions (2024.10).
-+	 *
-+	 * Maintain compatibility with downstream scripts that may be using
-+	 * name_fdt
-+	 */
-+	if (board_name)
-+		env_set("name_fdt", fdtfile);
-+	/* Also set the findfdt legacy script to warn users to stop using this */
-+	env_set("findfdt",
-+		"echo WARN: fdtfile already set. Stop using findfdt in script");
++	ti_set_fdt_env(NULL, NULL);
++	return 0;
 +}
-diff --git a/board/ti/common/fdt_ops.h b/board/ti/common/fdt_ops.h
-new file mode 100644
-index 000000000000..5d304994fb6e
---- /dev/null
-+++ b/board/ti/common/fdt_ops.h
-@@ -0,0 +1,42 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * Library to support common device tree manipulation for TI EVMs
-+ *
-+ * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com
-+ */
-+
-+#ifndef __FDT_OPS_H
-+#define __FDT_OPS_H
-+
-+#define TI_BOARD_NAME_MAX 20
-+#define TI_FDT_FILE_MAX 200
-+
-+/**
-+ *  struct ti_fdt_map - mapping of device tree blob name to board name
-+ *  @board_name: board_name up to TI_BOARD_NAME_MAX long
-+ *  @fdt_file_name: device tree blob name as described by kernel
-+ */
-+struct ti_fdt_map {
-+	const char *board_name;
-+	char *fdt_file_name;
-+};
-+
-+/**
-+ * ti_set_fdt_env  - Find the correct device tree file name based on the
-+ * board name and set 'fdtfile' env variable with correct folder
-+ * structure appropriate to the architecture and Linux kernel's
-+ * 'make install_dtbs' conventions. This function is invoked typically
-+ * as part of board_late_init.
-+ *
-+ * fdt name is picked by:
-+ * a) If a board name match is found, use the match
-+ * b) If not, CONFIG_DEFAULT_FDT_FILE (Boot OS device tree) if that is defined
-+ *    and not null
-+ * c) If not, Use CONFIG_DEFAULT_DEVICE_TREE (DT control for bootloader)
-+ *
-+ * @board_name: match to search with (max of TI_BOARD_NAME_MAX chars)
-+ * @fdt_map: NULL terminated array of device tree file name matches.
-+ */
-+void ti_set_fdt_env(const char *board_name, struct ti_fdt_map *fdt_map);
-+
-+#endif /* __FDT_OPS_H */
++#endif
+diff --git a/configs/am62ax_evm_a53_defconfig b/configs/am62ax_evm_a53_defconfig
+index 38083586a3ec..e5fcd8cc5b6f 100644
+--- a/configs/am62ax_evm_a53_defconfig
++++ b/configs/am62ax_evm_a53_defconfig
+@@ -24,6 +24,7 @@ CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
+ CONFIG_BOOTSTD_FULL=y
+ CONFIG_BOOTSTD_DEFAULTS=y
+ CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
++CONFIG_BOARD_LATE_INIT=y
+ CONFIG_SPL_MAX_SIZE=0x58000
+ CONFIG_SPL_PAD_TO=0x0
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
 -- 
 2.43.0
 
