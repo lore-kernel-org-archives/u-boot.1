@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E033C47079
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 17:43:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FA09C4707C
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 17:43:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE07B87A91;
-	Tue,  9 Jan 2024 18:40:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B2E7687A99;
+	Tue,  9 Jan 2024 18:40:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="QQok7pDP";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="rzay7s5g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DE2187A42; Tue,  9 Jan 2024 18:32:57 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ id 7176C87929; Tue,  9 Jan 2024 18:32:58 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 013EC87A4B
+ by phobos.denx.de (Postfix) with ESMTPS id 755A487A61
  for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 18:32:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 2AE93100012;
+Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id DB9A0120012;
  Tue,  9 Jan 2024 20:32:53 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 2AE93100012
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru DB9A0120012
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
  s=mail; t=1704821573;
- bh=okL/DqGxlPVJEYiIXmR7xE1GQL0zFzbA5YlczyteG3I=;
+ bh=pnIlL0NrxZctZLa/rHVTE4H6JpCxhgSIu5oQp78TrRs=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=QQok7pDPHjxpql9o7s6nU+Vjtcxbt2+Jgu6LD+PvYfbEbHoSMpJ6cG+JtXzVM8XdO
- 9PRpXZjb4EKSHzr7MiW6ZCKc48o/tTzwlU3YVBP/5YPaJbYxqdqffbqBwrIJpkM6Gx
- tZN91xX75LHtCYJyt4YqzbCRaYHjq3SPBz0Kh4qsB0p/hUJQVrMhncJjtqB74OFDS7
- Tq0cg8uy2vyBZ5LjYw4mfqGA3hjzkaTC++ogse05qWK8zRapkar8EgKZEeISDND12u
- PwRiY8KhTzHS1Vnd0TG1friYWJ8P92RlD7eArq01o8cq379qMr2ach0a4gWsLHUxYv
- GuvjxIA7/QDUw==
+ b=rzay7s5grgH6h6b6Xn0qoZdbdnc3gtBQAhL6ySKCPg3JI1ZZMqV6sXuE3Bp68Z+TP
+ xlwQGWTCLG/rrq6Au1eIJIeyGWeiUCu84WMdi9XtQgztkvxcDYUDlRn0W/c/AmniZj
+ W4o8M4Qsh2C/DrtNZOkztYDNmn+V61Iz+cQfoLAV/3UxzkbZrN6oR/rd14BjuRsuiR
+ /xWQ9GrDfDByA4R8pyFlgLhEqMAlNWs64N49lo08WK0arv1NikwrGxMWO6tWJ/GQC/
+ gLE+27GD304apCxj/fHs4hHjOhzwRnRXLsE3k+zGgUCGRtxPnZB1a4XULLoLMIdl4F
+ VhjETT/A7xmtg==
 Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue,  9 Jan 2024 20:32:52 +0300 (MSK)
+ Tue,  9 Jan 2024 20:32:53 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 9 Jan 2024 20:32:52 +0300
+ 15.2.1118.40; Tue, 9 Jan 2024 20:32:53 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <michal.simek@amd.com>, <marex@denx.de>, <michael@walle.cc>,
  <stcarlso@linux.microsoft.com>, <tobias@waldekranz.com>,
@@ -60,9 +60,9 @@ To: <michal.simek@amd.com>, <marex@denx.de>, <michael@walle.cc>,
  <mkorpershoek@baylibre.com>, <patrick.delaunay@foss.st.com>
 CC: <u-boot@lists.denx.de>, <kernel@salutedevices.com>, Alexey Romanov
  <avromanov@salutedevices.com>
-Subject: [PATCH v2 11/14] cmd: allow to enable CMD_NAND for SPI NAND devices
-Date: Tue, 9 Jan 2024 20:32:23 +0300
-Message-ID: <20240109173231.78920-12-avromanov@salutedevices.com>
+Subject: [PATCH v2 12/14] fastboot: check device type for SPI NAND too
+Date: Tue, 9 Jan 2024 20:32:24 +0300
+Message-ID: <20240109173231.78920-13-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240109173231.78920-1-avromanov@salutedevices.com>
 References: <20240109173231.78920-1-avromanov@salutedevices.com>
@@ -83,10 +83,10 @@ X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 7 0.3.7
  6d6bf5bd8eea7373134f756a2fd73e9456bb7d1a,
- {Tracking_from_domain_doesnt_match_to}, smtp.sberdevices.ru:5.0.1,7.1.1;
- salutedevices.com:7.1.1; 100.64.160.123:7.1.2; 127.0.0.199:7.1.2;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s,
- ApMailHostAddress: 100.64.160.123
+ {Tracking_from_domain_doesnt_match_to},
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; smtp.sberdevices.ru:5.0.1,7.1.1;
+ 100.64.160.123:7.1.2; 127.0.0.199:7.1.2;
+ salutedevices.com:7.1.1, FromAlignment: s, ApMailHostAddress: 100.64.160.123
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
 X-KSMG-AntiPhishing: Clean
@@ -111,27 +111,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Boards with SPI NAND also can use this command.
+SPI NAND devices also supports 'fastboot erase / flash' commands.
 
 Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 Reviewed-by: Sean Anderson <sean.anderson@seco.com>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
- cmd/Kconfig | 2 +-
+ drivers/fastboot/fb_nand.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 26aeeeed03..4332894184 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1381,7 +1381,7 @@ config CMD_MUX
- config CMD_NAND
- 	bool "nand"
- 	default y if NAND_SUNXI
--	depends on MTD_RAW_NAND
-+	depends on MTD_RAW_NAND || MTD_SPI_NAND
- 	help
- 	  NAND support.
+diff --git a/drivers/fastboot/fb_nand.c b/drivers/fastboot/fb_nand.c
+index bbe26ddcc9..6d94bfdc45 100644
+--- a/drivers/fastboot/fb_nand.c
++++ b/drivers/fastboot/fb_nand.c
+@@ -54,7 +54,7 @@ static int fb_nand_lookup(const char *partname,
+ 		return ret;
+ 	}
  
+-	if (dev->id->type != MTD_DEV_TYPE_NAND) {
++	if (dev->id->type != MTD_DEV_TYPE_NAND && dev->id->type != MTD_DEV_TYPE_SPINAND) {
+ 		pr_err("partition '%s' is not stored on a NAND device",
+ 		      partname);
+ 		fastboot_fail("not a NAND device", response);
 -- 
 2.30.1
 
