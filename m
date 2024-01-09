@@ -4,74 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78FDAC46CD2
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 13:02:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FF18C46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 13:08:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0972877F9;
-	Tue,  9 Jan 2024 14:02:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7221187807;
+	Tue,  9 Jan 2024 14:08:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LLt8aAPQ";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="j6xOCyOr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C358687800; Tue,  9 Jan 2024 14:02:51 +0100 (CET)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1C8AD87800; Tue,  9 Jan 2024 14:08:28 +0100 (CET)
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AECBC86E82
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 14:02:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E65E86E82
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 14:08:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-50e759ece35so3109167e87.3
- for <u-boot@lists.denx.de>; Tue, 09 Jan 2024 05:02:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704805369; x=1705410169; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tvrFgKkSwxEG0W3cDS2Rjcp1RLHnovalUMSrD9hfS6c=;
- b=LLt8aAPQGGezQYrtpHSM5MOoZvk4eIcs8AJnTsj9IrpDFuOZlF7EHNHQKJlKYBIFjU
- BoksrK8pj5vvJ2/SxIcCY+1fzCsiKThKx+jTTeOK8aXa4mM1rWjV2y4xmSrsEpH+81/S
- Ibd7A2xPVOhEq1REmF0/uoMsZm5zwdZLXVQsOPmHvom2XREyvIIQz2r8Cv2XTEskvO7N
- whWoFpj/34u/6SViepJiXgm/2F36Yfe8BNxkuXklcWWJLGgCLqRGt289iSwbraM/K45S
- 67ijqprYVTJ0ZmCw3n3SsC7tyCqQDhrkoxYFrlHYEbcvxJNefsT4BdNuSuNA3yNWHQeY
- 6LPw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704805369; x=1705410169;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tvrFgKkSwxEG0W3cDS2Rjcp1RLHnovalUMSrD9hfS6c=;
- b=XJz1F7uwMMtYTkXn11ldJrRqXgCEIUvFxaHrZECjqAmdSL9OrOWIIwnfrVIP80kPsb
- /ihWjjVNMwdudPWHpnKLQ7zt0F7hshHCVuTCyU8VZIKd3FJGQB0jtOL8HykpyayczK2E
- PdgMiXXH7JLgyz0vvGtw0GFU3eZ41SrasPbktnSJQb1m1+rhMQOpTruV3muP4vpQBj32
- 45fAAtX643dTuD9Iny+So78NaY9XYdJE7cXGYK0EBu6b9/1g/A8GFr3c14SKxIgbwz3q
- h0F7Y0lZxssLMvRU998omTKDn7jl/3UWW3fDCN4aWnRvefhwhrI8abV9rfMlQmK1OorU
- mURQ==
-X-Gm-Message-State: AOJu0YzFx2eutSMXkFoA8DzFUjRkPNoJ2g4NADOFzQlh7m2V0asrQtDM
- 7JoDnGy0NFwxNhrLWM1Pg9oOiWDadY2HQeW+c9DwReEyoiIu+Q==
-X-Google-Smtp-Source: AGHT+IHF+CFHOUhW8FVRkrNFV4fRh5YL0lfswRFPSpuFwP+kK42s3q9BdpmOHZN1DGW7zcog57yHVsFrE+tKmBX/Pq4=
-X-Received: by 2002:a05:6512:2394:b0:50e:7c70:fbe1 with SMTP id
- c20-20020a056512239400b0050e7c70fbe1mr2411285lfv.100.1704805368751; Tue, 09
- Jan 2024 05:02:48 -0800 (PST)
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by ams.source.kernel.org (Postfix) with ESMTP id A9690B81A16;
+ Tue,  9 Jan 2024 13:08:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 70750C433C7;
+ Tue,  9 Jan 2024 13:08:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1704805705;
+ bh=vQFMxnxdhO9+AGOwngSFiyR8Hlz+wZtLxv8qsp9UYC0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=j6xOCyOrMDkFHK77OC3E0EphNKZRaaAoJUoOudSpwtZMsTZUECEWFXAzNyNQyGFds
+ dIHdtPO9wd5E3atnYJk6kQdvpl8zEjCm0hA0ZJD983k4AeQju8yZQ0oicF4kuJhKaH
+ sMUL4QLYgX8AIk7bzhQ7TniUF+W9XbDMaE1dJUZaGWEjUfpZAKXz4NnBIYk/DyPgu4
+ 2udVFk08FYZShEFq5HeD1u5sQduxJjnbPY2BCmP2/BgPq+SVtGlpPZacX3eWpZSYHj
+ QCORwRu36/FAt8vu96qIgk8fm/2+aUMtEr5rn2YR7aroCfc7tVi0buylf24Pyjld8R
+ /AFAA6huFpjYQ==
+Message-ID: <ec2ead48-0aaa-44fd-be71-545a7e3d59e1@kernel.org>
+Date: Tue, 9 Jan 2024 15:08:18 +0200
 MIME-Version: 1.0
-References: <20231221095258.592275-1-masahisa.kojima@linaro.org>
- <20231221095258.592275-3-masahisa.kojima@linaro.org> <ZYw_UqZ_wj-htZvI@hera>
- <CADQ0-X8fBNDCrWkbZWwxYJaovradmMCM+vDt3DEJF2p9X2fgTg@mail.gmail.com>
-In-Reply-To: <CADQ0-X8fBNDCrWkbZWwxYJaovradmMCM+vDt3DEJF2p9X2fgTg@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 9 Jan 2024 15:02:12 +0200
-Message-ID: <CAC_iWjKBgezN_R54qsyh+WxcbvU4vRuCvyyNiHB-eQgFabBUig@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] efi_loader: support fmp versioning for multi bank
- update
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 04/10] board: ti: am64x: Set fdtfile from C code instead
+ of findfdt script
+Content-Language: en-US
+To: Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
+Cc: Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu Raja <sinthu.raja@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Andrew Davis <afd@ti.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
+ u-boot@lists.denx.de, Jon Humphreys <j-humphreys@ti.com>
+References: <20240108173301.2692332-1-nm@ti.com>
+ <20240108173301.2692332-5-nm@ti.com>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20240108173301.2692332-5-nm@ti.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,166 +78,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 9 Jan 2024 at 03:00, Masahisa Kojima <masahisa.kojima@linaro.org> wrote:
->
-> Hi Ilias,
->
-> On Thu, 28 Dec 2023 at 00:14, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Kojima-san
-> >
-> > On Thu, Dec 21, 2023 at 06:52:58PM +0900, Masahisa Kojima wrote:
-> > > This commit stores the firmware version into the array
-> > > of fmp_state structure to support the fmp versioning
-> > > for multi bank update. The index of the array is identified
-> > > by the bank index.
-> >
-> > Why do we all of them? Can't we just always store/use the version of the active
-> > bank?
->
-> Sorry for the late reply.
-> When the capsule update is reverted, the active bank is back to the
-> previous active bank.
-> So I think versions for all banks should be stored.
 
-But even in that case, the active bank should point to the correct
-version when the ESRT tables are generated. Wouldn't it be simpler to
-just set the FmpState variable accordingly when that happens?
-Am I missing anything?
 
-Thanks
-/Ilias
->
-> Thanks,
-> Masahisa Kojima
->
-> >
-> > >
-> > > This modification keeps the backward compatibility with
-> > > the existing versioning feature.
-> > >
-> >
-> > Thanks
-> > /Ilias
-> > > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-> > > ---
-> > >  lib/efi_loader/efi_firmware.c | 69 +++++++++++++++++++++++++++--------
-> > >  1 file changed, 54 insertions(+), 15 deletions(-)
-> > >
-> > > diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-> > > index 9b8630625f..5459f3d38d 100644
-> > > --- a/lib/efi_loader/efi_firmware.c
-> > > +++ b/lib/efi_loader/efi_firmware.c
-> > > @@ -207,18 +207,10 @@ void efi_firmware_fill_version_info(struct efi_firmware_image_descriptor *image_
-> > >  {
-> > >       u16 varname[13]; /* u"FmpStateXXXX" */
-> > >       efi_status_t ret;
-> > > -     efi_uintn_t size;
-> > > -     struct fmp_state var_state = { 0 };
-> > > -
-> > > -     efi_create_indexed_name(varname, sizeof(varname), "FmpState",
-> > > -                             fw_array->image_index);
-> > > -     size = sizeof(var_state);
-> > > -     ret = efi_get_variable_int(varname, &fw_array->image_type_id,
-> > > -                                NULL, &size, &var_state, NULL);
-> > > -     if (ret == EFI_SUCCESS)
-> > > -             image_info->version = var_state.fw_version;
-> > > -     else
-> > > -             image_info->version = 0;
-> > > +     efi_uintn_t size, expected_size;
-> > > +     uint num_banks = 1;
-> > > +     uint active_index = 0;
-> > > +     struct fmp_state *var_state;
-> > >
-> > >       efi_firmware_get_lsv_from_dtb(fw_array->image_index,
-> > >                                     &fw_array->image_type_id,
-> > > @@ -227,6 +219,31 @@ void efi_firmware_fill_version_info(struct efi_firmware_image_descriptor *image_
-> > >       image_info->version_name = NULL; /* not supported */
-> > >       image_info->last_attempt_version = 0;
-> > >       image_info->last_attempt_status = LAST_ATTEMPT_STATUS_SUCCESS;
-> > > +     image_info->version = 0;
-> > > +
-> > > +     /* get the fw_version */
-> > > +     efi_create_indexed_name(varname, sizeof(varname), "FmpState",
-> > > +                             fw_array->image_index);
-> > > +     if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE)) {
-> > > +             ret = fwu_get_active_index(&active_index);
-> > > +             if (ret)
-> > > +                     return;
-> > > +
-> > > +             num_banks = CONFIG_FWU_NUM_BANKS;
-> > > +     }
-> > > +
-> > > +     size = num_banks * sizeof(*var_state);
-> > > +     expected_size = size;
-> > > +     var_state = calloc(1, size);
-> > > +     if (!var_state)
-> > > +             return;
-> > > +
-> > > +     ret = efi_get_variable_int(varname, &fw_array->image_type_id,
-> > > +                                NULL, &size, var_state, NULL);
-> > > +     if (ret == EFI_SUCCESS && expected_size == size)
-> > > +             image_info->version = var_state[active_index].fw_version;
-> > > +
-> > > +     free(var_state);
-> > >  }
-> > >
-> > >  /**
-> > > @@ -362,8 +379,11 @@ efi_status_t efi_firmware_set_fmp_state_var(struct fmp_state *state, u8 image_in
-> > >  {
-> > >       u16 varname[13]; /* u"FmpStateXXXX" */
-> > >       efi_status_t ret;
-> > > +     uint num_banks = 1;
-> > > +     uint update_bank = 0;
-> > > +     efi_uintn_t size;
-> > >       efi_guid_t *image_type_id;
-> > > -     struct fmp_state var_state = { 0 };
-> > > +     struct fmp_state *var_state;
-> > >
-> > >       image_type_id = efi_firmware_get_image_type_id(image_index);
-> > >       if (!image_type_id)
-> > > @@ -372,19 +392,38 @@ efi_status_t efi_firmware_set_fmp_state_var(struct fmp_state *state, u8 image_in
-> > >       efi_create_indexed_name(varname, sizeof(varname), "FmpState",
-> > >                               image_index);
-> > >
-> > > +     if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE)) {
-> > > +             ret = fwu_plat_get_update_index(&update_bank);
-> > > +             if (ret)
-> > > +                     return EFI_INVALID_PARAMETER;
-> > > +
-> > > +             num_banks = CONFIG_FWU_NUM_BANKS;
-> > > +     }
-> > > +
-> > > +     size = num_banks * sizeof(*var_state);
-> > > +     var_state = calloc(1, size);
-> > > +     if (!var_state)
-> > > +             return EFI_OUT_OF_RESOURCES;
-> > > +
-> > > +     ret = efi_get_variable_int(varname, image_type_id, NULL, &size,
-> > > +                                var_state, NULL);
-> > > +
-> > >       /*
-> > >        * Only the fw_version is set here.
-> > >        * lowest_supported_version in FmpState variable is ignored since
-> > >        * it can be tampered if the file based EFI variable storage is used.
-> > >        */
-> > > -     var_state.fw_version = state->fw_version;
-> > > +     var_state[update_bank].fw_version = state->fw_version;
-> > >
-> > > +     size = num_banks * sizeof(*var_state);
-> > >       ret = efi_set_variable_int(varname, image_type_id,
-> > >                                  EFI_VARIABLE_READ_ONLY |
-> > >                                  EFI_VARIABLE_NON_VOLATILE |
-> > >                                  EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> > >                                  EFI_VARIABLE_RUNTIME_ACCESS,
-> > > -                                sizeof(var_state), &var_state, false);
-> > > +                                size, var_state, false);
-> > > +
-> > > +     free(var_state);
-> > >
-> > >       return ret;
-> > >  }
-> > > --
-> > > 2.34.1
-> > >
+On 08/01/2024 19:32, Nishanth Menon wrote:
+> We now can provide a map and have the standard fdtfile variable set from
+> code itself. This allows for bootstd to "just work".
+> 
+> While at this, replace findfdt in environment with a warning as it is no
+> longer needed.
+> 
+> Signed-off-by: Nishanth Menon <nm@ti.com>
+> ---
+>  board/ti/am64x/am64x.env | 9 ---------
+>  board/ti/am64x/evm.c     | 8 ++++++++
+>  2 files changed, 8 insertions(+), 9 deletions(-)
+> 
+> diff --git a/board/ti/am64x/am64x.env b/board/ti/am64x/am64x.env
+> index efd736b99be4..9a8812d4ee54 100644
+> --- a/board/ti/am64x/am64x.env
+> +++ b/board/ti/am64x/am64x.env
+> @@ -2,14 +2,6 @@
+>  #include <env/ti/mmc.env>
+>  #include <env/ti/k3_dfu.env>
+>  
+> -findfdt=
+> -	if test $board_name = am64x_gpevm; then
+> -		setenv name_fdt ti/k3-am642-evm.dtb; fi;
+> -	if test $board_name = am64x_skevm; then
+> -		setenv name_fdt ti/k3-am642-sk.dtb; fi;
+> -	if test $name_fdt = undefined; then
+> -		echo WARNING: Could not determine device tree to use; fi;
+> -	setenv fdtfile ${name_fdt}
+>  name_kern=Image
+>  console=ttyS2,115200n8
+>  args_all=setenv optargs earlycon=ns16550a,mmio32,0x02800000 ${mtdparts}
+> @@ -43,7 +35,6 @@ get_fit_usb=load usb ${bootpart} ${addr_fit}
+>  usbboot=setenv boot usb;
+>  	setenv bootpart 0:2;
+>  	usb start;
+> -	run findfdt;
+>  	run init_usb;
+>  	run get_kern_usb;
+>  	run get_fdt_usb;
+> diff --git a/board/ti/am64x/evm.c b/board/ti/am64x/evm.c
+> index a6dcff2eb434..e2f506d2c6ea 100644
+> --- a/board/ti/am64x/evm.c
+> +++ b/board/ti/am64x/evm.c
+> @@ -16,6 +16,7 @@
+>  #include <env.h>
+>  
+>  #include "../common/board_detect.h"
+> +#include "../common/fdt_ops.h"
+>  
+>  #define board_is_am64x_gpevm() (board_ti_k3_is("AM64-GPEVM") || \
+>  				board_ti_k3_is("AM64-HSEVM"))
+> @@ -180,6 +181,12 @@ int checkboard(void)
+>  }
+>  
+>  #ifdef CONFIG_BOARD_LATE_INIT
+> +static struct ti_fdt_map ti_am64_evm_fdt_map[] = {
+> +	{"am64x_gpevm", "k3-am642-evm.dtb"},
+> +	{"am64x_skevm", "k3-am642-sk.dtb"},
+
+"am64x_gpevm" and "am64x_skevm" strings are used multiple times in this file.
+see setup_board_eeprom_env()
+
+Please use a MACRO for them.
+
+What is the logic of choosing this name and can it be updated at this point?
+e.g."gp" is misleading in the board name as the boards are now shipped with
+HS-FS chip and are no longer GP.
+
+
+> +	{ /* Sentinel. */ }
+> +};
+> +
+>  static void setup_board_eeprom_env(void)
+>  {
+>  	char *name = "am64x_gpevm";
+> @@ -197,6 +204,7 @@ static void setup_board_eeprom_env(void)
+>  
+>  invalid_eeprom:
+>  	set_board_info_env_am6(name);
+> +	ti_set_fdt_env(name, ti_am64_evm_fdt_map);
+>  }
+>  
+>  static void setup_serial(void)
+
+-- 
+cheers,
+-roger
