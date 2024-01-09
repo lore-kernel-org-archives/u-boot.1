@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F526C4706C
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 20:35:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEB32C4706C
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 20:48:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B53AF876D3;
-	Tue,  9 Jan 2024 21:35:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 16EA7877FD;
+	Tue,  9 Jan 2024 21:48:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kcbULiOJ";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="OySe06+D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1629B87729; Tue,  9 Jan 2024 21:35:28 +0100 (CET)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6532A87855; Tue,  9 Jan 2024 21:48:33 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03A2086FBF
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 21:35:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3ECD980245
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 21:48:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-dbed4b84667so2665999276.0
- for <u-boot@lists.denx.de>; Tue, 09 Jan 2024 12:35:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1704832524; x=1705437324; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+cR1whVtuRdMnxegHwwP17bSkqyTGu3ZGFpeJQLFt9M=;
- b=kcbULiOJd6AVycPLSp+IjssC6R55FtvM+6WkiYHbOmC1Sfan2//dzK1EQBQ8sJJTz4
- IkuwnQuwVh4vqwynH2mbqebWoxjl5Mnaor3nn9/J7D+XTPZm0TEJhmTkLG/JuWEysg44
- IYmI7A5zt92FwQxDePAvm0q+h4DFMsQ7JORRs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704832524; x=1705437324;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+cR1whVtuRdMnxegHwwP17bSkqyTGu3ZGFpeJQLFt9M=;
- b=LPCOQBFHcbf8AYTX7yJPhmHUcIGAwkUqJi0YREr3W5UGipOlzhCGQixT106Kf58CgR
- /vJUIvJwSjXSKdyLUDHQ2nUlj+s1gqMxixRqrWiVt3+GscdAi0YrW+xoGOIJqneAih1r
- EEO3aN76M8JCi3sgqNfDffGbx/M+K2tbgAZ9RbftXwZUG5yDYb1AeCuuYj6JpOgUhkcg
- ejZWljI5f/8vcZGzbqz8v9iBwqKGrRWQLCTaSm3blWu4AZgO+6mT22i0dmlYFZqz46jx
- 3YePBnUPloZrBPh88O7bKbEfFsumWZO+t/OditBNhTyLladI68yVPAXBpk1IRHSc43vE
- VdYA==
-X-Gm-Message-State: AOJu0YzFuNUNSfjyUTr2wRcoBKhneGN2f60ZozjFSI9Qr/Vyz1rquIQD
- phukKcacdJUb0vFk2T4NR4pWV/WJbor7pQ==
-X-Google-Smtp-Source: AGHT+IECcaGk0Si3tKwzSqERPHmh8EtcvZ9nN6bl18CWm6dOYek4EY6luY+BWQ/kdR32h2qqEJC7SA==
-X-Received: by 2002:a25:d0c4:0:b0:dbe:a10e:9ab with SMTP id
- h187-20020a25d0c4000000b00dbea10e09abmr3548457ybg.93.1704832524699; 
- Tue, 09 Jan 2024 12:35:24 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- c18-20020a05622a025200b00427ee66bec1sm1163697qtx.48.2024.01.09.12.35.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jan 2024 12:35:24 -0800 (PST)
-Date: Tue, 9 Jan 2024 15:35:22 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Nishanth Menon <nm@ti.com>
-Cc: Roger Quadros <rogerq@kernel.org>, michael@amarulasolutions.com,
- dario.binacchi@amarulasolutions.com, afd@ti.com, vigneshr@ti.com,
- praneeth@ti.com, srk@ti.com, r-gunasekaran@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH 4/4] configs: am64x_evm_a53_defconfig: Enable NAND
-Message-ID: <20240109203522.GZ1610741@bill-the-cat>
-References: <20240109122605.51951-1-rogerq@kernel.org>
- <20240109122605.51951-5-rogerq@kernel.org>
- <20240109191627.jn2b4nsczlsynik2@carpenter>
- <20240109194807.GX1610741@bill-the-cat>
- <20240109200014.wda3anzu4gljeic6@glitch>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1704833305; x=1705438105; i=xypron.glpk@gmx.de;
+ bh=p0OaoPX1gOUjyuJJPrlTrL8au+DEDBEVyJZAVb+vRmQ=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=OySe06+Dtlk7o4n0Dyi5X7jXLPUErKN4RzYC6RLe0qp4tqOFS8eVekzMO/VknKSB
+ gTkUMPY7QlFy/H/vuKRMJWy8B8NwA4kqNUSz0BZFzVRxCj0yP+YJNPRkPOngIjjck
+ O7BHo+EvR74qBhXexwCRpUjP4weyxQ5rWA5MpUHhmfDIePQL1XyTzVuYVlsc+2QwG
+ 8RfudTKI7UqiYJ6aD1IzCYyruYaKMFWWlc62tdkyFO0emzxu+kssa3gBjJl4CcqPj
+ 2Jnj9/SX77LDCWif0NXRK8tBtjdeQwIE+9UtvvkJzwtgLzuW9JcTuuAH8MJbwxkzd
+ Hu5wEhyEwfLv6nV0Fw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([178.202.40.247]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mof9P-1qpqsr4BRZ-00p4Lv; Tue, 09
+ Jan 2024 21:48:25 +0100
+Message-ID: <41008bde-d8a2-4119-a23c-75ad411f8675@gmx.de>
+Date: Tue, 9 Jan 2024 21:48:24 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="iWD5E3R9MeJLuu1H"
-Content-Disposition: inline
-In-Reply-To: <20240109200014.wda3anzu4gljeic6@glitch>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] smbios: copy QEMU tables
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+References: <20231223010334.248291-1-xypron.glpk@gmx.de>
+ <20231223010334.248291-3-xypron.glpk@gmx.de>
+ <CAFLszTjLj2s+RKwikofXtAebW42o7J4M2yajjaeWX0OBp_e+rg@mail.gmail.com>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAFLszTjLj2s+RKwikofXtAebW42o7J4M2yajjaeWX0OBp_e+rg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:DAv1GvGmi0EHYoi1rGhvtIw3yby2/8hIWh9xr/el/oYlfXetgBG
+ DcaDzavyvAGtfkcuOag3HH02PBu20y2EETNIv07vtJF+2LQf1aJ67TkoSN+/m/sWMwCKooT
+ z+EBdMP74pzgrj+/YTsuugwByUftIoLfcswELseeSLfd4ds6aab2TyUroeK3pxmtWI54OYS
+ ytFVP8PBBsG+/LvlRbKqw==
+UI-OutboundReport: notjunk:1;M01:P0:JYQYSUc+l0M=;8MZw5OXvWY5szWIII9dw6JFkKAC
+ g1Tc5vniDXWaO8IMqJrNrRbKeckAlmz8BXiTzMnAobGgUbrMVCEA35yxDFlBaAWcNYIJRQ8pg
+ FFOSMoHLrfuS+NckpmcpO3yB2wDJmwzzXw/JmDTTIZQnO/OgFKM/yj29j1pX4uwpPFPgB3Irc
+ kDXJPDiMxwdcZWoNRXr0mD9DW6CCUUTioyh7zJ5aLBWctbQSabbMT83r7fST8nh7Y0/6h/sCw
+ VeBbdnjU8le98jtwj+vhk7b0pbpLQXMt5vbhu448fdaKhMoV6gaLt3OZmxoB8fZ+IgTTzW92i
+ B7v1t3zG4HdMfQPvoaDUwBM1T+5dX4gpa4zISAgzs0R8PO8VB/X36BJdlXM2u9bC0Ng2SZIOa
+ kPMXw+E8Q4mVDeAHPBWWT7OfwbrueBLv7s0sZtRDvAcIvX9zgCD/eAsc6YveCN1TTEQW/VLbV
+ wq1xUbaz5LnGFBVt7j0MWYZf0Xp9OSICM6Emuam+aPp0/5y+J+QLa09dYxy3MVABBEHolGMzU
+ 8fvcPXhDhgzf9wR9NJ30hb/iQPKz+XnsSXJ/AYkEEJOpCNM5+Dc7JM0eH9FF7cOU+ZVgvWDOD
+ Iybpjl5ujHcWc8t5sNLCAuyriVznlpHi1ct1YKd9bdFBLoe6BxfBoF2cg2wbaTckHshOudE0M
+ ClKSy3l60WKg+TE0YW9IWoJTdU8YhmzXfzYcnQWakEFJp8JznQUFLvnJJ3fWe95lcTuk1c2k5
+ gw/66LnRKMLVxWrcQWWK7qQmtOMhR0Sks4LVdR261AxReX/VrwrXd89N7O+vuLsebroc+YGoq
+ VD5NKSEFjaISj2p79evBlLMUfNH9W1+KIH2AUCXSXMFiZuDb2JHKypYU39kLTf+UsOX6oDQD3
+ TGLdeJKzrXkKhohtZ6r4lAiLJKygUPoN3t+khO6Q81ntg1SmLA1p6NEbK4TzgejBfcePjoL3q
+ X1xlo0PYP/tqp9IxfvsUR8gTq6c=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,59 +94,368 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 12/26/23 10:47, Simon Glass wrote:
+> Hi Heinrich,
+>
+> On Sat, Dec 23, 2023 at 1:03=E2=80=AFAM Heinrich Schuchardt <xypron.glpk=
+@gmx.de> wrote:
+>>
+>> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>>
+>> QEMU provides SMBIOS tables with detailed information. We should not tr=
+y to
+>> replicate them in U-Boot.
+>>
+>> If we want to inform about U-Boot, we can add a Firmware Inventory
+>> Information (type 45) table in future.
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>> v2:
+>>          fix parsing of SMBIOS anchor
+>>          enable copying on x86 and 32bit ARM/RISC-V
+>> ---
+>>   arch/x86/lib/tables.c       |   2 +-
+>>   drivers/misc/Kconfig        |   7 ++
+>>   drivers/misc/Makefile       |   1 +
+>>   drivers/misc/qfw_smbios.c   | 197 +++++++++++++++++++++++++++++++++++=
++
+>>   lib/efi_loader/efi_smbios.c |   4 +-
+>>   5 files changed, 209 insertions(+), 2 deletions(-)
+>>   create mode 100644 drivers/misc/qfw_smbios.c
+>>
+>> diff --git a/arch/x86/lib/tables.c b/arch/x86/lib/tables.c
+>> index 5b5070f7ca..914d9de0cb 100644
+>> --- a/arch/x86/lib/tables.c
+>> +++ b/arch/x86/lib/tables.c
+>> @@ -61,7 +61,7 @@ static struct table_info table_list[] =3D {
+>>   #ifdef CONFIG_GENERATE_ACPI_TABLE
+>>          { "acpi", write_acpi_tables, BLOBLISTT_ACPI_TABLES, 0x10000, 0=
+x1000},
+>>   #endif
+>> -#ifdef CONFIG_GENERATE_SMBIOS_TABLE
+>> +#if defined(CONFIG_GENERATE_SMBIOS_TABLE) && !defined(CONFIG_QFW_SMBIO=
+S)
+>>          { "smbios", write_smbios_table, BLOBLISTT_SMBIOS_TABLES, 0x100=
+0, 0x100},
+>>   #endif
+>>   };
+>> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+>> index e8e4400516..d2536c54e0 100644
+>> --- a/drivers/misc/Kconfig
+>> +++ b/drivers/misc/Kconfig
+>> @@ -561,6 +561,13 @@ config QFW_MMIO
+>>            Hidden option to enable MMIO QEMU fw_cfg interface. This wil=
+l be
+>>            selected by the appropriate QEMU board.
+>>
+>> +config QFW_SMBIOS
+>> +       bool
+>> +       default y
+>> +       depends on QFW && SMBIOS && !SANDBOX
+>> +       help
+>> +         Hidden option to read SMBIOS tables from QEMU.
+>> +
+>>   config I2C_EEPROM
+>>          bool "Enable driver for generic I2C-attached EEPROMs"
+>>          depends on MISC
+>> diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+>> index cda701d38e..64bea92f51 100644
+>> --- a/drivers/misc/Makefile
+>> +++ b/drivers/misc/Makefile
+>> @@ -66,6 +66,7 @@ obj-y +=3D qfw.o
+>>   obj-$(CONFIG_QFW_ACPI) +=3D qfw_acpi.o
+>>   obj-$(CONFIG_QFW_PIO) +=3D qfw_pio.o
+>>   obj-$(CONFIG_QFW_MMIO) +=3D qfw_mmio.o
+>> +obj-$(CONFIG_QFW_SMBIOS) +=3D qfw_smbios.o
+>>   obj-$(CONFIG_SANDBOX) +=3D qfw_sandbox.o
+>>   endif
+>>   obj-$(CONFIG_ROCKCHIP_EFUSE) +=3D rockchip-efuse.o
+>> diff --git a/drivers/misc/qfw_smbios.c b/drivers/misc/qfw_smbios.c
+>> new file mode 100644
+>> index 0000000000..9019345783
+>> --- /dev/null
+>> +++ b/drivers/misc/qfw_smbios.c
+>> @@ -0,0 +1,197 @@
+>> +// SPDX-License-Identifier: GPL-2.0-or-later
+>> +/*
+>> + * (C) Copyright 2023 Heinrich Schuchardt <heinrich.schuchardt@canonic=
+al.com>
+>> + */
+>> +
+>> +#define LOG_CATEGORY UCLASS_QFW
+>> +
+>> +#include <efi_loader.h>
+>> +#include <errno.h>
+>> +#include <log.h>
+>> +#include <malloc.h>
+>> +#include <mapmem.h>
+>> +#include <qfw.h>
+>> +#include <smbios.h>
+>> +#include <tables_csum.h>
+>> +#include <linux/sizes.h>
+>> +#include <asm/global_data.h>
+>> +
+>> +DECLARE_GLOBAL_DATA_PTR;
+>> +
+>> +/**
+>> + * qfw_load_smbios_table() - load a QEMU firmware file
+>> + *
+>> + * @dev:       QEMU firmware device
+>> + * @size:      parameter to return the size of the loaded table
+>> + * @name:      name of the table to load
+>> + * Return:     address of the loaded table, NULL on error
+>> + */
+>> +static void *qfw_load_smbios_table(struct udevice *dev, uint32_t *size=
+,
+>> +                                  char *name)
+>> +{
+>> +       struct fw_file *file;
+>> +       struct bios_linker_entry *table;
+>> +
+>> +       file =3D qfw_find_file(dev, name);
+>> +       if (!file) {
+>> +               log_debug("Can't find %s\n", name);
+>> +               return NULL;
+>> +       }
+>> +
+>> +       *size =3D be32_to_cpu(file->cfg.size);
+>> +
+>> +       table =3D malloc(*size);
+>> +       if (!table) {
+>> +               log_err("Out of memory\n");
+>> +               return NULL;
+>> +       }
+>> +
+>> +       qfw_read_entry(dev, be16_to_cpu(file->cfg.select), *size, table=
+);
+>> +
+>> +       return table;
+>> +}
+>> +
+>> +/**
+>> + * qfw_parse_smbios_anchor() - parse QEMU's SMBIOS anchor
+>> + *
+>> + * @dev:       QEMU firmware device
+>> + * @entry:     SMBIOS 3 structure to be filled from QEMU's anchor
+>> + * Return:     0 for success, -ve on error
+>> + */
+>> +static int qfw_parse_smbios_anchor(struct udevice *dev,
+>> +                                  struct smbios3_entry *entry)
+>> +{
+>> +       void *table;
+>> +       uint32_t size;
+>> +       struct smbios_entry *entry2;
+>> +       struct smbios3_entry *entry3;
+>> +       const char smbios_sig[] =3D "_SM_";
+>> +       const char smbios3_sig[] =3D "_SM3_";
+>> +       int ret =3D 0;
+>> +
+>> +       table =3D qfw_load_smbios_table(dev, &size, "etc/smbios/smbios-=
+anchor");
+>> +       if (!table)
+>> +               return -ENOMEM;
+>> +       if (!memcmp(table, smbios3_sig, sizeof(smbios3_sig) - 1)) {
+>> +               entry3 =3D table;
+>> +               if (entry3->length !=3D sizeof(struct smbios3_entry)) {
+>> +                       ret =3D -ENOENT;
+>> +                       goto out;
+>> +               }
+>> +               memcpy(entry, entry3, sizeof(struct smbios3_entry));
+>> +       } else if (!memcmp(table, smbios_sig, sizeof(smbios_sig) - 1)) =
+{
+>> +               entry2 =3D table;
+>> +               if (entry2->length !=3D sizeof(struct smbios_entry)) {
+>> +                       ret =3D -ENOENT;
+>> +                       goto out;
+>> +               }
+>> +               memset(entry, 0, sizeof(struct smbios3_entry));
+>> +               memcpy(entry, smbios3_sig, sizeof(smbios3_sig));
+>> +               entry->length =3D sizeof(struct smbios3_entry);
+>> +               entry->major_ver =3D entry2->major_ver;
+>> +               entry->minor_ver =3D entry2->minor_ver;
+>> +               entry->max_struct_size =3D entry2->max_struct_size;
+>> +       } else {
+>> +               ret =3D -ENOENT;
+>> +               goto out;
+>> +       }
+>> +       ret =3D 0;
+>> +out:
+>> +       free(table);
+>> +
+>> +       return ret;
+>> +}
+>> +
+>> +/**
+>> + * qfw_write_smbios_tables() - copy SMBIOS tables from QEMU
+>> + *
+>> + * @addr:      target buffer
+>> + * @size:      size of target buffer
+>> + * Return:     0 for success, -ve on error
+>> + */
+>> +static int qfw_write_smbios_tables(u8 *addr, uint32_t size)
+>> +{
+>> +       int ret;
+>> +       struct udevice *dev;
+>> +       struct smbios3_entry *entry =3D (void *)addr;
+>
+> map_sysmem() so you can use a sandbox test
 
---iWD5E3R9MeJLuu1H
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This is a static function which never can be called directly by a test.
+The caller already has a map_sysmem(). See below.
 
-On Tue, Jan 09, 2024 at 02:00:14PM -0600, Nishanth Menon wrote:
-> On 14:48-20240109, Tom Rini wrote:
-> [...]
-> > > > --=20
-> > > > 2.34.1
-> > > >=20
-> > >=20
-> > > Why not a config fragment?
-> >=20
-> > To me, this makes sense to keep in the main config. It can be turned off
-> > as needed, and at run time if it's not present, it's safe.
->=20
-> Three reasons:
-> * There is going to be duplication across multiple boards
-> * It confuses the affair of trying to find the minimal configuration need=
-ed
->   to boot the board.
-> * SRAM is limited already - we have been playing all kind of dances
->   around this - NAND is a daughter card addon - while I am not trying to
->   diminish NAND support, we are in a constant struggle to keep SRAM
->   viable and adding additional boot modes to a single config, IMHO is
->   the wrong direction to go.
+>
+>> +       void *table;
+>> +       uint32_t table_size;
+>> +
+>> +       ret =3D qfw_get_dev(&dev);
+>> +       if (ret) {
+>> +               log_err("No QEMU firmware device\n");
+>> +               return ret;
+>> +       }
+>> +
+>> +       ret =3D qfw_read_firmware_list(dev);
+>> +       if (ret) {
+>> +               log_err("Can't read firmware file list\n");
+>> +               return ret;
+>> +       }
+>> +
+>> +       ret =3D qfw_parse_smbios_anchor(dev, entry);
+>> +       if (ret) {
+>> +               log_debug("Can't parse anchor\n");
+>> +               return ret;
+>> +       }
+>> +
+>> +       addr +=3D entry->length;
+>> +       entry->struct_table_address =3D (uintptr_t)addr;
+>> +       entry->checksum =3D 0;
+>> +       entry->checksum =3D table_compute_checksum(entry,
+>> +                                                sizeof(struct smbios3_=
+entry));
+>> +
+>> +       table =3D qfw_load_smbios_table(dev, &table_size,
+>> +                                     "etc/smbios/smbios-tables");
+>> +       if (table_size + sizeof(struct smbios3_entry) > size) {
+>> +               free(table);
+>> +               return -ENOMEM;
+>> +       }
+>> +       memcpy(addr, table, table_size);
+>> +       free(table);
+>> +
+>> +       return 0;
+>> +}
+>> +
+>> +/**
+>> + * qfw_evt_write_smbios_tables() - event handler for copying QEMU SMBI=
+OS tables
+>> + *
+>> + * Return:     0 on success, -ve on error (only out of memory)
+>> + */
+>> +static int qfw_evt_write_smbios_tables(void)
+>> +{
+>> +       phys_addr_t addr;
+>> +       void *ptr;
+>> +       int ret;
+>> +       /*
+>> +        * TODO:
+>> +        * This size is currently hard coded in lib/efi_loader/efi_smbi=
+os.c.
+>> +        * We need a field in global data for the size.
+>
+> Is that because it might be >4KB?
+>
+>> +        */
+>> +       uint32_t size =3D SZ_4K;
+>> +
+>> +       /* Reserve 64K for SMBIOS tables, aligned to a 4K boundary */
+>> +       ptr =3D memalign(SZ_4K, size);
+>> +       if (!ptr) {
+>> +               log_err("Out of memory\n");
+>> +               return -ENOMEM;
+>> +       }
+>> +       addr =3D map_to_sysmem(ptr);
+>> +
+>> +       /* Generate SMBIOS tables */
+>> +       ret =3D qfw_write_smbios_tables(ptr, size);
+>> +       if (ret) {
+>> +               if (CONFIG_IS_ENABLED(GENERATE_SMBIOS_TABLE)) {
+>> +                       log_info("Falling back to U-Boot generated SMBI=
+OS tables\n");
+>> +                       write_smbios_table(addr);
+>
+> Should we do this? Perhaps better to produce an error? If not, please
+> add a comment as to why.
 
-At the end of the day, I'll leave it to TI folks. I see that
-drivers/mtd/Kconfig needs a whole lot of help as while I would have
-hoped that turning off just CONFIG_MTD would undo most of the changes
-here, it does not.
+Error messages are written.
 
---=20
-Tom
+If QEMU provides SMBIOS tables depends on the QEMU version. E.g for
+RISC-V patches enabling SMBIOS table generation are still pending.
 
---iWD5E3R9MeJLuu1H
-Content-Type: application/pgp-signature; name="signature.asc"
+Stopping the boot process because SMBIOS tables are not supplied by QEMU
+is not very helpful for users stuck on an old QEMU version. We should
+always do our best to complete the boot process.
 
------BEGIN PGP SIGNATURE-----
+>
+>> +               }
+>> +       } else {
+>> +               log_debug("SMBIOS tables copied from QEMU\n");
+>> +       }
+>> +
+>> +       gd_set_smbios_start(addr);
+>> +
+>> +       return 0;
+>> +}
+>> +
+>> +EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, qfw_evt_write_smbios_tables);
+>> diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
+>> index bbb8421ce1..c4837da969 100644
+>> --- a/lib/efi_loader/efi_smbios.c
+>> +++ b/lib/efi_loader/efi_smbios.c
+>> @@ -51,7 +51,9 @@ static int install_smbios_table(void)
+>>          u64 addr;
+>>          efi_status_t ret;
+>>
+>> -       if (!IS_ENABLED(CONFIG_GENERATE_SMBIOS_TABLE) || IS_ENABLED(CON=
+FIG_X86))
+>> +       if (!IS_ENABLED(CONFIG_GENERATE_SMBIOS_TABLE) ||
+>> +           IS_ENABLED(CONFIG_X86) ||
+>> +           IS_ENABLED(CONFIG_QFW_SMBIOS))
+>
+> Hmm it seems we need an new Kconfig for this condition?
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWdrgAACgkQFHw5/5Y0
-tywYyAwArxHC90ROFex54tA/9wYi3+tfNrcIF6iuaRpoNfHYuwZF+Peyu1wLk3KU
-B1j6X7wpoIHVuOyfYTcevP7mW3TNkK3+boX10nisSlAqKdlVye4od2aLq4VOQ6bw
-tPVD12KHwc4vVL3FLHZPmD8Kcnae2R7JgtFeam4x4KyDc66iSg8LI7usDZG3+7mr
-g1KpWgcsg25kzl+LtUDaC+0pcp4ehVmNkTyDEoM/ShmxFZPwdelTAlMtgbsyBGNn
-2aMXwRnzK25IGkNikiwpb9v8mHpL1odjETlYn8yhddgbOc13SK72IG5LNMoXjiKF
-ovUSouEKgbP4rdzLrbb3e7CWFfpRT2SC8JxpVnHciOkwKpNolrTGDpS6zqJ8n3zo
-v0PJv1ljyG6wnvaRNwHQEteZ9lmIVYoc4d9Gfy/nQcuRdkR1zpGMgqUZV+wfaJcM
-LSVYxkyBasgtKDh00oyfQboPWHU0S2rvNYX1TEOBF7GHJcp+hu4rWDP1RQ70ZMG6
-PS3DrewO
-=/7Ks
------END PGP SIGNATURE-----
+I think we have too many symbols with unclear meaning.
 
---iWD5E3R9MeJLuu1H--
+Should we really use CONFIG_GENERATE_SMBIOS_TABLE=3Dy in conjunction with
+CONFIG_QFW_SMBIOS=3Dy? Or should we have a Kconfig choice where we have
+mutually exclusive sources for SMBIOS:
+
+CONFIG SMBIOS_NONE - no SMBIOS table
+CONFIG_QFW_SMBIOS - copy SMBIOS table from QEMU
+CONFIG_SMBIOS_FROM DT - generate SMBIOS table from device-tree
+CONFIG_SMBIOS_COREBOOT - copy SMBIOS table from coreboot
+CONFIG SMBIOS_X86 - x86 specific code
+
+There is nothing EFI specific in this function. Shouldn't we move it to
+a different module?
+
+For ACPI we have a folder lib/acpi/ Should we have a folder lib/smbios/?
+
+Best regards
+
+Heinrich
+
+>
+>>                  return 0;
+>>
+>>          addr =3D SZ_4G;
+>> --
+>> 2.43.0
+>>
+>
+> Otherwise:
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+>
+> Regards,
+> Simon
+
