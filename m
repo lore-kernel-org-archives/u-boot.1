@@ -4,73 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9DCCC47079
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 17:09:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 099CFC46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 17:32:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 134278786E;
-	Tue,  9 Jan 2024 18:09:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 4B44D87A0A;
+	Tue,  9 Jan 2024 18:32:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="LhHThsG4";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UnP7pq6H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 989628785D; Tue,  9 Jan 2024 18:09:22 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DC7D187A30; Tue,  9 Jan 2024 18:32:50 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D78978786F
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 18:09:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9AB0987942
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 18:32:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1704820158; x=1705424958; i=xypron.glpk@gmx.de;
- bh=dGP3Q2pD9NP0yyuA/iHLob20ZGzd/bkqE5QiQmQVdMU=;
- h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
- b=LhHThsG4dUYASXEElpeP1Pj9ljCuBDP42Z5DeNiPhK2Vmkc+Yzn6NgiD3pT+H50+
- p6+3zYjHEk/AIyC+pfYXsvmID/CMbEnMEyvR36RVDBctu2SMP4S/iPndm2llrEn8f
- BUMXXYQjEf+OKPYtap6pTlZl0eSuTGnRBpe9DmCnydq1YDeSBCTXjgZ8TRKyaUTE3
- 6lVbj/W3+LsJalT/5xWO3fXLzT1Z7ue7XkgOidzrwRf9lGzfxVzBXPM+MbxO+M4zI
- yHzt2izONVZYgWpMmfQ2Nn6YuzjRscbgMU/QJsNW98ABqYqyJRxsUaK0DbY+GXDX3
- bjKg86jrAGbZmUs0gQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MryXH-1qr9pL1XHR-00nxs1; Tue, 09
- Jan 2024 18:09:18 +0100
-Message-ID: <10da4396-501b-4ab4-bd88-3d6c5b152017@gmx.de>
-Date: Tue, 9 Jan 2024 18:09:12 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 409HWewL028311;
+ Tue, 9 Jan 2024 11:32:40 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1704821560;
+ bh=9KHVgaEiK/7AMGhkz2PEdyTsivFAQkTb1GtdE98Ea2c=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=UnP7pq6HhhJsu9rSDF4Ef6ClmtRCeVvFDkEQCDe8IncZRW07HauzejGIV0+amO7MA
+ Y7OdHESXk4xSeEny51RAoJj8U5+35JQgfLsdZl25/L2PELrcptsw42Dnx/6SMxodBd
+ Dnl4laZYI+BWD392wcUyB0xvYuggxrJdsvPAgwi4=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 409HWeXV002942
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 9 Jan 2024 11:32:40 -0600
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 9
+ Jan 2024 11:32:40 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 9 Jan 2024 11:32:40 -0600
+Received: from [10.249.40.136] ([10.249.40.136])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 409HWd0k068623;
+ Tue, 9 Jan 2024 11:32:39 -0600
+Message-ID: <8a2970aa-7c4b-41f4-9eeb-c43e2c5da285@ti.com>
+Date: Tue, 9 Jan 2024 11:32:39 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/8] Suspend to RAM support for K3 J7200
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Pull request smbios-2024-04-rc1
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:38rs1vlTecaO/uyoH3J6SoIs9btrdzWuuMs4eJgrNifbj2Mr8L4
- p5sJv3tsof83eqyc0SySbJ25wBxlvgSLTfWx9wpfMBi8YEaTsXpBHbE4MmBYAdkDiBjz866
- 8Coh/sgk2R9UxIe1V+OtaA2MZTmJDzrh7hfj8DiIU8yzpkn1ovFKZ0gHiSfAkfMVD0yKEqE
- 6ZNpBTIysu4VYeeHbllSQ==
-UI-OutboundReport: notjunk:1;M01:P0:irJ9Syd03Q8=;auztr1baAHyMBXChGMV3ZDTerJ2
- ko8nHEGFE9JV10jDPL4+5zr92n11htnSo/FCfAF/+mXo5hYLw0LXKDU//GjFKZgKEhsfLMUZu
- i0hieHxUATj61p6Rboq196ZFqTVubFSqq4BQ9DKMNyWB+54DzbRGyHgKDMtcWHpgodWQ0xBb2
- 1lMWuxfnsUMglIdaomq42YLDjyna/xTWWkip1FdRsCxWmbKNqtoC0iLpt/qQ3el0hGDHGlBbv
- k+mz94DsDw1hnT45gisV4ZC04F5UQepaLA+26D8lwrqEQhjbeKdc921tR7O7A8DAcU3mCCoUV
- Tpvau3MBcRNTNoPVcvcydh9CnUk+NoNCcRm/AQfZz18MJwjOnjYZt3p4HeVRU8S15Ehm8XaYu
- eILqMUQpiVjxnLxFQ6Z5mqETyp64gnyMzkCqlPkfH/etuPY98ZlBJez6JqStnAnW8v2G80b/R
- ARJUc1CqfL4R31akjBl7tQ9vG8DGOOF9jlPLjzePW6scrwXM08puPrrLsBPzMvx2pfAb7bzfy
- AFvBot4VA4y03PcRn/ynsNnFIxdpBlFLtWjmiS19k6WrCSeQ+A43DPOhuA/yBP0/uKxgvUULt
- 9spz5fm8qJkoYSn8Y1DoJw7mXa6Cdo0eXJqnNv9zIjJq8kNRHpY6j2jm9Yo0QIficPIVosHYQ
- npOFQcb2h8KM7TLNXoC+E7emRuJLx4e971sLZCNuFLiMr2HgQtR0fkHbrRB66bQBl37ebBDNB
- KXIY4l616mIZfcrNkvx2pq6fMUf/df8NAliWfdHBbqMaqtrnJZnJLNHil7PlIMEnW6EOPCUN/
- o4zXqzm9icu2AmYBk8GTGws/1+vjfDnwULDub5ND7qDW/bKDoOMu57CmHORfzer2zO6vJtCeJ
- j9BiscQzqm+0oGY1WXWcJeVGmqwzk7sUrBX1unVl9vBFWNIQT3hy9SJD7fGUExC2PVmdB+nVE
- IpJLpNSJQ+rL10r9IMzWPgqixcEJTD9Ey5ZQwW8ZxN1wVbrklhzjriZg0pi5IX09li2aRA==
+To: Thomas Richard <thomas.richard@bootlin.com>, <u-boot@lists.denx.de>
+CC: <thomas.petazzoni@bootlin.com>, <nm@ti.com>, <u-kumar1@ti.com>,
+ <gregory.clement@bootlin.com>, Bryan Brattlof <bb@ti.com>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Gowtham Tammana <g-tammana@ti.com>, "Manorit Chawdhry" <m-chawdhry@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, "Simon
+ Glass" <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+References: <20240108165628.3935756-1-thomas.richard@bootlin.com>
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20240108165628.3935756-1-thomas.richard@bootlin.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,51 +84,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit c5e461fbf7cc72f0c1c8a79226b6a5170e56cb4=
-d:
+On 1/8/24 10:56 AM, Thomas Richard wrote:
+> This series is the U-Boot part of the work to add the suspend to RAM
+> support for the K3 J7200 EVM board.
+> 
+> During the boot R5 SPL makes a copy of DM-Firmware and TF-A in memory.
+> Resume detection is done by reading a magic value in a pmic register
+> (set by DM-Firmware).
+> 
+> If a resume is detected, R5 SPL run the exit retention sequence of the
+> DDR. Then it load TF-A and DM-Firmware using the copies done during the boot
+> (fit image processing is skipped).
+> Before to start TF-A, R5 SPL writes a magic value in scratchpad ram. This
+> will be used by TF-A to detect that the board is resuming.
+> 
+> The copy of TF-A/DM-Firmware, the SPL stack and malloc are located in a
+> reserved memory region (for the kernel point of view) to avoid any
+> memory corruption.
+> 
+> This version is mostly to test the firewall protection with the suspend
+> to ram.
 
-   Merge tag 'u-boot-imx-master-20240108' of
-https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2024-01-08 13:39:43
--0500)
+Seems to show the opposite, if you are able to access and load TF-A
+back to its spot after resume from un-trusted SPL then the firewall
+did not survive suspend to RAM. That is a huge security gap if TIFS
+is forgetting to put back the firewalls on resume.. What is the
+point of firewalls on these systems if I can just knock them all
+out by doing a simple suspend/resume cycle?
 
-are available in the Git repository at:
+> Some comments (for the v2) were not fixed in this version.
 
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-tags/smbios-2024-04-rc1
+Why not?
 
-for you to fetch changes up to 8aec7031112eba0dbfc8f23f9be11c081ea5cc56:
+> This series has been tested with the series [1] to enable the firewall.
+> At the end of the resume sequence, TF-A is well protected by the
+> firewall, but OP-TEE remains unprotected.
+> 
 
-   efi_loader: provide tool to dump SMBIOS table (2024-01-09 10:09:15 +010=
-0)
+Then why post this? If it is just to get some eyes on it, then label
+it as an "RFC" so our silence isn't considered acceptance, otherwise we
+have to manually NAK these each time.
 
-=2D---------------------------------------------------------------
-Pull request smbios-2024-04-rc1
+Andrew
 
-* make table_compute_checksum() arguments const
-* remove duplicate function verify_checksum()
-* enable setting processor family > 0xff
-* set correct SMBIOS processor family value for RISC-V
-* avoid importing ofnode.h in smbios.h
-* provide a UEFI tool to dump SMBIOS table
-
-=2D---------------------------------------------------------------
-Heinrich Schuchardt (6):
-       lib: make table_compute_checksum() arguments const
-       lib: smbios: verify_checksum() is duplicate
-       smbios: enable setting processor family > 0xff
-       cpu: riscv: set correct SMBIOS processor family value
-       smbios: smbios.h should not import ofnode.h
-       efi_loader: provide tool to dump SMBIOS table
-
-  drivers/cpu/riscv_cpu.c     |   4 +
-  include/smbios.h            |   6 +-
-  include/tables_csum.h       |   2 +-
-  lib/efi_loader/Makefile     |   7 +
-  lib/efi_loader/efi_smbios.c |   3 +
-  lib/efi_loader/smbiosdump.c | 622
-++++++++++++++++++++++++++++++++++++++++++++
-  lib/smbios-parser.c         |  21 +-
-  lib/smbios.c                |   4 +-
-  lib/tables_csum.c           |   4 +-
-  9 files changed, 647 insertions(+), 26 deletions(-)
-  create mode 100644 lib/efi_loader/smbiosdump.c
+> [1] https://lore.kernel.org/all/20231229-binman-firewalling-v7-0-47ed4af303fe@ti.com/
+> 
+> 
+> Changes in v3:
+> - At resume, R5 SPL doesn't restore TF-A anymore.
+>    TF-A is started like during a cold boot. R5 SPL will notify that the board is
+>    resuming using a magic value written in the scratchpad ram.
+>    TF-A will restore itself.
+> - Link to v2:
+>    https://lore.kernel.org/u-boot/20231107161802.855154-1-thomas.richard@bootlin.com/
+> 
+> Changes in v2:
+> - Set exit retention code for DDR behind CONFIG_K3_J721E_DDRSS
+> - Check if TF-A is running in DRAM, if yes no need to restore it
+> - Remove BL31_START macro, and get TF-A start address from the fit image
+> - Remove the test_enter_suspend command
+> - Link to v1:
+>    https://lore.kernel.org/u-boot/20231016141135.325698-1-thomas.richard@bootlin.com/
+> 
+> Gowtham Tammana (1):
+>    DO NOT MERGE: arm: dts: k3-j7200-r5-common: Add pmic node for esm
+> 
+> Gregory CLEMENT (2):
+>    configs: j7200_evm_r5: Used reserved memory in DDR for stack
+>    configs: j7200_evm_r5: Move address used for allocation in the
+>      reserved space
+> 
+> Thomas Richard (5):
+>    board: ti: j721e: Add resume detection for J7200
+>    ram: k3-ddrss: Add exit retention support
+>    board: ti: j721e: Add the missing part of exit retention for k3-ddrss
+>      (J7200)
+>    board: ti: j721e: During resume spl notify tf-a that the board is
+>      resuming
+>    arm: mach-k3: j7200: Skip fit processing when resuming
+> 
+>   .../arm/dts/k3-j7200-r5-common-proc-board.dts |  17 +-
+>   arch/arm/mach-k3/common.c                     |  65 +++-
+>   .../arm/mach-k3/include/mach/j721e_hardware.h |   1 +
+>   arch/arm/mach-k3/include/mach/j721e_spl.h     |  30 ++
+>   arch/arm/mach-k3/sysfw-loader.c               |  16 +-
+>   board/ti/j721e/evm.c                          |  77 +++++
+>   configs/j7200_evm_r5_defconfig                |   4 +-
+>   drivers/ram/k3-ddrss/k3-ddrss.c               | 307 ++++++++++++++++++
+>   8 files changed, 507 insertions(+), 10 deletions(-)
+> 
