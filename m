@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EFD7C47073
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 08:57:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4701C47073
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 09:07:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0133B8789A;
-	Tue,  9 Jan 2024 09:57:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 10EBD86C39;
+	Tue,  9 Jan 2024 10:07:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PmNUVyDh";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="UjFiWCBF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 032D987874; Tue,  9 Jan 2024 09:57:35 +0100 (CET)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 83DE58706B; Tue,  9 Jan 2024 10:07:42 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F5FE8789B
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 09:57:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3769386611
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 10:07:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-50e67e37661so3253565e87.0
- for <u-boot@lists.denx.de>; Tue, 09 Jan 2024 00:57:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704790652; x=1705395452; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2h8BeNyAj5hhCamdrIJePWwZtMeW1E4Xdfp4Fxhio48=;
- b=PmNUVyDhEWoZEu7TTb9xBg1deKgab8Ofr8QmbL6FVkK4l5ArOI5Ns3x/Sh9j3d112/
- dP4nATQZ3yWiMJgbwE3UWdgvZvc2V3bQMKm/VhGYxMSGAarFZbnuvifjXe5WoGLeuMUl
- nO7VpcPfFvTtmWWs4GsV+g15qM8rH9KyPpTnFONIFsHnHfu0s3N9+tgyBrtzg3rsqeT8
- V3oFtoS9G2SFK37kKmFW3aExBvoEOM6FZ6/M8jmcKZ75qMB+vCKAuL6RXkJseVjFcZxA
- yR2LvXtshpu6LSe2xbHG1yyYwabMDiDdtVSu9eOaWKTL9EGSqZFlpOkox22CD1zPtPm+
- QOTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704790652; x=1705395452;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2h8BeNyAj5hhCamdrIJePWwZtMeW1E4Xdfp4Fxhio48=;
- b=TBlh7gz1rmR+JUtlHxFsl8LRzYDxHYvCr42Or1s2CmAKmLZUF4c6h2pUJbgERHqsGp
- lUXMycTfpp3u0ya6gdXeCOOPuebiOqpN3Gj3ODIOG5tEKWLTLZvlhxY+bc3yIEYcvoNW
- VJOVRYZg/9VDmXvPd0ZqxgzxRESGGtlJj3Dul1b0wiHmNHrakSVoXx3Cd58PbGIRoy0C
- sxpBXLnx3lmVjgEbx+BbXKqpo20iLmSeHQgVBgIQnNCHiR3CFAobBAax7ggBxeL8iuMX
- gOf+sSX8QZQp/xbBqV5Y5WJDDpF2Ts6iwRW8DNVmPvwN5KpWEYbb77XaPV6OTg43VfUS
- Dx4Q==
-X-Gm-Message-State: AOJu0YzNQ9ChgCBP5PVDb1znO79FEtMA/lA5TiasEbP6eTCzC5eVCgrp
- mUW5U5MgTH/5XRY849r42T+6TNlJBReig6AtVpLJ091cKkaDWw==
-X-Google-Smtp-Source: AGHT+IHmM66KXy6dM0ieNjzC9uMx1V4vgpcuj6M1X1cu7f0Dp4VVGCbtFo/rN0HiJ53/2Rt0dLXWF/HMckrYdJaK0CY=
-X-Received: by 2002:a05:6512:78c:b0:50e:7bd0:1c3d with SMTP id
- x12-20020a056512078c00b0050e7bd01c3dmr2026187lfr.97.1704790652407; Tue, 09
- Jan 2024 00:57:32 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1704791258; x=1705396058; i=xypron.glpk@gmx.de;
+ bh=Mt8bM8+UHC3ICzGKEGsilC2YJUDxsd6PaluEAIGWWK8=;
+ h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
+ b=UjFiWCBFgR65ODxMSMeLY9zZATL2qv/zV5SWadwZ+8EU9rpNOKaPwm1zUjtQESzG
+ nZlR6RG0VxvqTYf/8h77MdkbhYhcX+tALcQIEcQ3sAEd1YU2Jz+9dYI177ACBVZyV
+ kCSnb7h2YRJo96shh3OtBA9Qr32Jdab31I/oosv8Jvbl9byCBTs5Is7QVLDKQq6g6
+ sAlwYeJZRFrFDSNN0q1qZU+wLFOj5YUno9iUqisxHpPoGdlKc7Q1pfIsShqo9VahB
+ 2RNOhxgseKkXle0/qsWnUHlRTs4MvSFC1zdc/pI+/22OICdYEeVWc4w8iHKeeA7bm
+ Nbl1o2bsO/7JVaEyRQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([178.202.40.247]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MDhlV-1rV8Zh2KzX-00Aqi7; Tue, 09
+ Jan 2024 10:07:38 +0100
+Message-ID: <44bea48c-b453-452a-84d1-9a5ae88c5f15@gmx.de>
+Date: Tue, 9 Jan 2024 10:07:37 +0100
 MIME-Version: 1.0
-References: <20240109085334.41481-1-heinrich.schuchardt@canonical.com>
- <20240109085334.41481-2-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240109085334.41481-2-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 9 Jan 2024 10:56:56 +0200
-Message-ID: <CAC_iWjJX5fG3i_edtnNtGcZQPecD6Mn7_RgBKPCwqOgCKxrJig@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] lib: make table_compute_checksum() arguments const
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Christian Gmeiner <christian.gmeiner@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US, de-DE
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andre Przywara <andre.przywara@arm.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Pull request rng-2024-04-rc1
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:6KaFBFFoA9zRCASmaQJhzP6bfmFbZkZPZpifhes8dZDO40g1CEx
+ tfN4/R71MijfMqusaRdObh0/VPcSW9Dck/J8WpeEimdS8vCdM8Hocu/gOic/mJ4MvK+JDTM
+ 7KasJN9SxE7inz9YAEBgPuEc1Y62nGbX4NWEQ0yJi1ewPLltrKQeJaHJbH283R58qSGnPAT
+ W4c+JdcfOf/6WiQ1lPOIg==
+UI-OutboundReport: notjunk:1;M01:P0:UM+tFEqvjLM=;uZLzsXTWAL3Sm0KzB8tJF2RxRuF
+ 0//qWgrfqdnyUN80pJH4dv1vlY77GOE4Kd/KF6+aKccM/J5VqenXGdI7uBmG1Sjj3DTWEj5gh
+ wmq2Mh8tgomjdp+Cr3w4EORYzTLsufAf9ru2ZazX5ND9eRT1zJTm8WDuuk1TaWSq641dwojw7
+ Ur2KnWJkWAZQsbNC6/jR4hffZfXf7LH/ClVq3Moqem9V3z8EuJeQbG6wM89rpU8y/vHNLM8E2
+ NpB8NW5nZDxBO99TfLlEaddGAdICeHCJrVrCWk1EjsD0JQDdZA8NR6GZgGEUw5ZObZoaNLebi
+ DuX0I5dAlWSIhAACLpfu2vJObRgfFhPCM2kU8EMLBuYl6EO3zi1rxnIXYJ8D+knfUg/tN+yOx
+ a53Iw189EL51JPz3+XTYay3dHLv7G/MBXiEeWVREYQNy8Bp9+KzaqjYjRmY07EbrhUlDPHnh/
+ kxjH6Mud8eFcY2bYyewWnnDeSCO8ew07zWj1zlqeQi7WmRD6LAiqWor5nSgS8p66gmIinfHhE
+ veynFbFIYylY+XEZCxXnW00ARKGO0YD2JRbMtD13sAU7uDJaLUi/KPa9ptDWm6z6bVR0f8367
+ uQIj74OTyhPx0C1SEBMgZ76Qzr4usZJZEQlbs8x6CBCVH4e3mQCxmE9ld/HxWLWV8+OZ6UupF
+ p0kh+MQ3oLcRoEp8xwqPPpQAB4U33YC0/JeQauUsIlINBLkI+Gw12b2V37BviQh+hFv8nSvde
+ JlPiPyRmwAaycPijRvTAoAtuFRGUIOOuFO9kWQw1jDtUciyhQjVkx1Kzi8F95kWZxZAcce83r
+ 7LZmAiWtjpsUHdj+jrNIZ9TUAIaXGXKAAOiS6QPX2mOGV8TCU18yGYEqhFa+V9c7e1feU6uL5
+ Pp+w8KfsdJBt2bElliI2ojvzBrQYqFBxT2Bhv9Bt+tnHcZqmoy8eih4pvn4uo0j1+0Tx+lW+c
+ 0zA/domvF4DPR7fWg+9qYKthDnv6fqST54a9R3lWTB1mnft82Lirej7XLbFFBhb6SPU597wSQ
+ Lt/CApmXlWpSTs3rC4=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,52 +87,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 9 Jan 2024 at 10:53, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> table_compute_checksum() does neither changes the content of the
-> checksummed buffer nor the buffer length. Adding const to the
-> definition makes the function wider usable.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
-> v2:
->         new patch
-> ---
->  include/tables_csum.h | 2 +-
->  lib/tables_csum.c     | 4 ++--
->  2 files changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/include/tables_csum.h b/include/tables_csum.h
-> index 4812333093..9207e85f91 100644
-> --- a/include/tables_csum.h
-> +++ b/include/tables_csum.h
-> @@ -17,6 +17,6 @@
->   * @len:       configuration table size
->   * @return:    the 8-bit checksum
->   */
-> -u8 table_compute_checksum(void *v, int len);
-> +u8 table_compute_checksum(const void *v, const int len);
->
->  #endif
-> diff --git a/lib/tables_csum.c b/lib/tables_csum.c
-> index 636aa59676..305b1ec31c 100644
-> --- a/lib/tables_csum.c
-> +++ b/lib/tables_csum.c
-> @@ -5,9 +5,9 @@
->
->  #include <linux/types.h>
->
-> -u8 table_compute_checksum(void *v, int len)
-> +u8 table_compute_checksum(const void *v, const int len)
->  {
-> -       u8 *bytes = v;
-> +       const u8 *bytes = v;
->         u8 checksum = 0;
->         int i;
->
-> --
-> 2.43.0
->
+Dear Tom,
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+The following changes since commit c5e461fbf7cc72f0c1c8a79226b6a5170e56cb4=
+d:
+
+   Merge tag 'u-boot-imx-master-20240108' of
+https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2024-01-08 13:39:43
+-0500)
+
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+tags/rng-2024-04-rc1
+
+for you to fetch changes up to 1351cd3b4b1b18cafa4893a44378ca6b1d091c8e:
+
+   rng: detect RISC-V Zkr RNG device in bind method (2024-01-09 07:37:05
++0100)
+
+Gitlab CI showed no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/19241
+
+=2D---------------------------------------------------------------
+Pull request rng-2024-04-rc1
+
+QEMU does not provide information in the device-tree if the ARMv8.5 RNDR
+or the RISC-V Zkr RNG have been enabled on the command line.
+
+In different parts of our code we assume that the first RNG device is the
+one to be used. Therefore it is preferable to detect the availability of
+said devices already in the bind method.
+
+There has been a related discussion if the U_BOOT_DRVINFO() macro should b=
+e
+used for architectural devices
+(https://lore.kernel.org/u-boot/20231031125552.26698-1-heinrich.schuchardt=
+@canonical.com/).
+This aspect is not touched by this series.
+
+=2D---------------------------------------------------------------
+Heinrich Schuchardt (2):
+       rng: fix ARMv8.5 RNDR driver
+       rng: detect RISC-V Zkr RNG device in bind method
+
+  drivers/rng/arm_rndr.c      |  6 +++---
+  drivers/rng/riscv_zkr_rng.c | 34 ++++++++++++++++++++++++++--------
+  2 files changed, 29 insertions(+), 11 deletions(-)
