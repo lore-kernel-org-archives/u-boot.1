@@ -4,63 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A85D0C46CD2
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 13:09:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEF9EC46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 13:17:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0069877F9;
-	Tue,  9 Jan 2024 14:09:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 0EF538785D;
+	Tue,  9 Jan 2024 14:17:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="GCA9h1de";
+	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="b6GmRX2w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C843D87800; Tue,  9 Jan 2024 14:09:06 +0100 (CET)
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 883D0878D7; Tue,  9 Jan 2024 14:17:14 +0100 (CET)
+Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
+ [IPv6:2607:f8b0:4864:20::52b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 881B5807EC
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 14:09:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 517C4877F4
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 14:17:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
+ dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 3723DB81A56;
- Tue,  9 Jan 2024 13:09:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 38360C433C7;
- Tue,  9 Jan 2024 13:08:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1704805743;
- bh=OqUHZvLdtdQ6KYfZRlQlK0CGpWZ9Cky92VHj1Ts3fnA=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=GCA9h1deE8Pd3rv3UNsdoD5vYMCfWudiWz7CFXYyIuuw54UEfYE8nqQ3N+aTJbVXO
- 6geZQ5p3jGmF/6wKz2RDvNvDPo8tuW7Lm6TOk2jHC6PLOJNrLJKJzq3ieXFxdl+B9I
- JTT5o0meG8+tUV+XwoQ86/6YVnNxpwjIHo67WPNGInrKlWi9Vb56qZucHs2jxoegnu
- 1dp3p4gBFNc7i+Q6YOV9NsV2Hc81JAPMngm/0Y2jTJcHGIDv83qMEe0knSTcUWyIYo
- b2NWy9lheDGoBOM8DUhQl7TpxS9/JHLWr2E0Ykbqxrug+1mW17ZD5O8GDCMsZO2Lwf
- CF/O+CME0QUww==
-Message-ID: <59043a79-8199-4319-a9c0-eb2bc8d55a77@kernel.org>
-Date: Tue, 9 Jan 2024 15:08:59 +0200
+ spf=pass smtp.mailfrom=robert.marko@sartura.hr
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-5cdfed46372so2163003a12.3
+ for <u-boot@lists.denx.de>; Tue, 09 Jan 2024 05:17:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sartura.hr; s=sartura; t=1704806230; x=1705411030; darn=lists.denx.de;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PGogBy+hvjYTRWlfhEbBAJ6tjOgcZeQduX7SPInnJ3k=;
+ b=b6GmRX2wxg7lBchrgxZKKccImhKjyy4BfSJjY4DJUDS/WFUqLjfOgUl7Vly+L7bmMk
+ sDBG951wC3mf6OlS2IubMDikWHGbhJG446tyYzAshS0GulO2G11V+Whd5trepAOKBk2d
+ Lq0X3UbA+07tYOKCmL47grSjCjzfKeAgA0EdGp9kS6Q2Y+YRVEOs45MXlFSXFLXfSO3U
+ FKsEl183U6xTYHlfgg189+eGyILni5dHrffVYyRLoWK/ri9I6cXkOlQ6WgkwGP21LI6x
+ zycJyv/g455ir0dZR62+b1gcbwM4256bsAYtG8Jxt12JkWHcxpfCqfvMnhf+f0CjgaRj
+ H5xw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704806230; x=1705411030;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=PGogBy+hvjYTRWlfhEbBAJ6tjOgcZeQduX7SPInnJ3k=;
+ b=LHUewRLSGDaiotZ+w19GgBfoyE/vCwZe9no85vaqovHVxDT2R9sHbYBVYaOGznYE2u
+ jm38G2+6gf2hKTbAdAsC/izG1z++ZvWyKQg9NnVXZk89f+6ved0dEeSwfyTTOJiUax7O
+ tnnvniP+bdsashwJDR7v88mRpN1wTUj5MNBh4nMwT/SeJ1LlJBzoWLnmFDBrzt96tOHR
+ 75mkqGdGoBstO54U15CQzxQX207qPq5fNUsJF9TN22jI7GnNf5cojqEzONLvOzHzo+Oy
+ +RhPJBxPsQ9W6RJNpxRYNLookRfAn2OC4w4asrMkq8Bj+6n06d1AcNv9qyNJK77pH37T
+ mqYg==
+X-Gm-Message-State: AOJu0YwxxJk5Pb1qL9NNoMr+djdziWdpFzYimq1yQhaYtIBhXJtGLPAa
+ KmRQna9bP8bNg5BZC6CvvqTPpNGOUiUeLvnZfXz0bsicmJgZbg==
+X-Google-Smtp-Source: AGHT+IHa18lEryav7pTJ4JJwSCvJlNVlcdbwvePEvKbcC6VkYWKWcqyWJ904sQerMomsmWGdengDIywXhIwRtgkXoW8=
+X-Received: by 2002:a17:90a:7f89:b0:28c:27e6:c4b7 with SMTP id
+ m9-20020a17090a7f8900b0028c27e6c4b7mr3292502pjl.78.1704806230653; Tue, 09 Jan
+ 2024 05:17:10 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/10] board: ti: common: Introduce a common fdt ops
- library
-Content-Language: en-US
-To: Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
-Cc: Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu Raja <sinthu.raja@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Andrew Davis <afd@ti.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nikhil M Jain <n-jain1@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Bryan Brattlof <bb@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
- u-boot@lists.denx.de, Jon Humphreys <j-humphreys@ti.com>
-References: <20240108173301.2692332-1-nm@ti.com>
- <20240108173301.2692332-2-nm@ti.com>
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20240108173301.2692332-2-nm@ti.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20231129101117.60177-1-robert.marko@sartura.hr>
+In-Reply-To: <20231129101117.60177-1-robert.marko@sartura.hr>
+From: Robert Marko <robert.marko@sartura.hr>
+Date: Tue, 9 Jan 2024 14:16:59 +0100
+Message-ID: <CA+HBbNFbLjSwY9QRP09SXVDMm=TJ1q4isgkce6p-H7LAnwZZ2g@mail.gmail.com>
+Subject: Re: [PATCH v3 1/3] arm: mvebu: Espressobin: move FDT fixup into a
+ separate function
+To: sr@denx.de, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,177 +86,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, Nov 29, 2023 at 11:11=E2=80=AFAM Robert Marko <robert.marko@sartura=
+.hr> wrote:
+>
+> Currently, Esspresobin FDT is being fixed up directly in ft_board_setup()
+> which makes it hard to add support for any other board to be fixed up.
+>
+> So, lets just move the FDT fixup code to a separate function and call it
+> if compatible matches, there should be no functional change.
+>
+> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+> Reviewed-by: Stefan Roese <sr@denx.de>
 
 
-On 08/01/2024 19:32, Nishanth Menon wrote:
-> Introduce a common fdt operations library for basic device tree
-> operations that are common between various boards.
-> 
-> The first library to introduce here is the capability to set up
-> fdtfile as a standard variable as part of board identification rather
-> than depend on scripted ifdeffery.
-> 
-> Signed-off-by: Nishanth Menon <nm@ti.com>
+Hi Stefan,
+Since 2024.01 was released, can this series be pulled in now?
+
+Regards,
+Robert
+
+>
 > ---
->  board/ti/common/Kconfig   | 12 ++++++++
->  board/ti/common/Makefile  |  1 +
->  board/ti/common/fdt_ops.c | 65 +++++++++++++++++++++++++++++++++++++++
->  board/ti/common/fdt_ops.h | 41 ++++++++++++++++++++++++
->  4 files changed, 119 insertions(+)
->  create mode 100644 board/ti/common/fdt_ops.c
->  create mode 100644 board/ti/common/fdt_ops.h
-> 
-> diff --git a/board/ti/common/Kconfig b/board/ti/common/Kconfig
-> index 49edd98014ab..06a8a36aa1cd 100644
-> --- a/board/ti/common/Kconfig
-> +++ b/board/ti/common/Kconfig
-> @@ -49,3 +49,15 @@ config TI_COMMON_CMD_OPTIONS
->  	imply CMD_SPI
->  	imply CMD_TIME
->  	imply CMD_USB if USB
-> +
-> +config TI_EVM_FDT_FOLDER_PATH
-> +	string "Location of Folder path where dtb is present"
-> +	default "ti/davinci" if ARCH_DAVINCI
-> +	default "ti/keystone" if ARCH_KEYSTONE
-> +	default "ti/omap" if ARCH_OMAP2PLUS
-> +	default "ti" if ARCH_K3
-> +	depends on ARCH_DAVINCI || ARCH_KEYSTONE || ARCH_OMAP2PLUS || ARCH_K3
-> +	help
-> +	   Folder path for kernel device tree default.
-> +	   This is used along with fdtfile path to locate the kernel
-> +	   device tree blob.
-> diff --git a/board/ti/common/Makefile b/board/ti/common/Makefile
-> index 26bf12e2e6d5..5ac361ba7fcf 100644
-> --- a/board/ti/common/Makefile
-> +++ b/board/ti/common/Makefile
-> @@ -3,3 +3,4 @@
->  
->  obj-${CONFIG_TI_I2C_BOARD_DETECT} += board_detect.o
->  obj-${CONFIG_CMD_EXTENSION} += cape_detect.o
-> +obj-${CONFIG_OF_LIBFDT} += fdt_ops.o
-> diff --git a/board/ti/common/fdt_ops.c b/board/ti/common/fdt_ops.c
-> new file mode 100644
-> index 000000000000..f8770cae4a54
-> --- /dev/null
-> +++ b/board/ti/common/fdt_ops.c
-> @@ -0,0 +1,65 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * Library to support FDT file operations which are common
-> + *
-> + * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
-> + */
-> +
-> +#include <env.h>
-> +#include <vsprintf.h>
-> +#include "fdt_ops.h"
-> +
-> +void ti_set_fdt_env(const char *name_fdt, struct ti_fdt_map *fdt_map)
-> +{
-> +	char *fdt_file_name = NULL;
-> +	char fdtfile[TI_FDT_FILE_MAX];
-> +
-> +	if (name_fdt) {
-> +		while (fdt_map) {
-> +			/* Check for NULL terminator in the list */
-> +			if (!fdt_map->name_fdt)
-> +				break;
-> +			if (!strncmp(fdt_map->name_fdt, name_fdt, TI_NAME_FDT_MAX)) {
-> +				fdt_file_name = fdt_map->fdt_file_name;
-> +				break;
-> +			}
-> +			fdt_map++;
-> +		}
-> +	}
-> +
-> +	/* match not found OR null name_fdt */
-> +	if (!fdt_file_name) {
-> +		/*
-> +		 * Prioritize CONFIG_DEFAULT_FDT_FILE - if that is not defined,
-> +		 * or is empty, then use CONFIG_DEFAULT_DEVICE_TREE
-> +		 */
-> +#ifdef CONFIG_DEFAULT_FDT_FILE
-> +		if (strlen(CONFIG_DEFAULT_FDT_FILE)) {
-> +			snprintf(fdtfile, sizeof(fdtfile), "%s/%s",
-> +				 CONFIG_TI_EVM_FDT_FOLDER_PATH, CONFIG_DEFAULT_FDT_FILE);
-> +		} else
-> +#endif
-> +		{
-> +			snprintf(fdtfile, sizeof(fdtfile), "%s/%s.dtb",
-> +				 CONFIG_TI_EVM_FDT_FOLDER_PATH,
-> +				 CONFIG_DEFAULT_DEVICE_TREE);
-> +		}
-> +	} else {
-> +		snprintf(fdtfile, sizeof(fdtfile), "%s/%s", CONFIG_TI_EVM_FDT_FOLDER_PATH,
-> +			 fdt_file_name);
-> +	}
-> +
-> +	env_set("fdtfile", fdtfile);
-> +
-> +	/*
-> +	 * XXX: DEPRECATION WARNING: 2 u-boot versions.
-> +	 *
-> +	 * Maintain compatibility with downstream scripts that may be using
-> +	 * name_fdt
-> +	 */
-> +	if (name_fdt)
-> +		env_set("name_fdt", name_fdt);
-> +	/* Also set the findfdt legacy script to warn users to stop using this */
-> +	env_set("findfdt",
-> +		"echo WARN: fdtfile already set. Stop using findfdt in script");
+>  board/Marvell/mvebu_armada-37xx/board.c | 14 +++++++++-----
+>  1 file changed, 9 insertions(+), 5 deletions(-)
+>
+> diff --git a/board/Marvell/mvebu_armada-37xx/board.c b/board/Marvell/mveb=
+u_armada-37xx/board.c
+> index 04124d8014..1471caa9a6 100644
+> --- a/board/Marvell/mvebu_armada-37xx/board.c
+> +++ b/board/Marvell/mvebu_armada-37xx/board.c
+> @@ -363,18 +363,14 @@ EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, last_stage_in=
+it);
+>  #endif
+>
+>  #ifdef CONFIG_OF_BOARD_SETUP
+> -int ft_board_setup(void *blob, struct bd_info *bd)
+> +static int espressobin_fdt_setup(void *blob)
+>  {
+> -#ifdef CONFIG_ENV_IS_IN_SPI_FLASH
+>         int ret;
+>         int spi_off;
+>         int parts_off;
+>         int part_off;
+>
+>         /* Fill SPI MTD partitions for Linux kernel on Espressobin */
+> -       if (!of_machine_is_compatible("globalscale,espressobin"))
+> -               return 0;
+> -
+>         spi_off =3D fdt_node_offset_by_compatible(blob, -1, "jedec,spi-no=
+r");
+>         if (spi_off < 0)
+>                 return 0;
+> @@ -459,6 +455,14 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+>                 return 0;
+>         }
+>
+> +       return 0;
 > +}
-> diff --git a/board/ti/common/fdt_ops.h b/board/ti/common/fdt_ops.h
-> new file mode 100644
-> index 000000000000..c01697bed28f
-> --- /dev/null
-> +++ b/board/ti/common/fdt_ops.h
-> @@ -0,0 +1,41 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +/*
-> + * Library to support common device tree manipulation for TI EVMs
-> + *
-> + * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com
-> + */
 > +
-> +#ifndef __FDT_OPS_H
-> +#define __FDT_OPS_H
-> +
-> +#define TI_NAME_FDT_MAX 20
-> +#define TI_FDT_FILE_MAX 200
-> +
-> +/**
-> + *  struct ti_fdt_map - mapping of device tree blob name to board name
-> + *  @name_fdt: board_name up to TI_NAME_FDT_MAX long
-> + *  @fdt_file_name: device tree blob name as described by kernel
-> + */
-> +struct ti_fdt_map {
-> +	const char *name_fdt;
+> +int ft_board_setup(void *blob, struct bd_info *bd)
+> +{
+> +#ifdef CONFIG_ENV_IS_IN_SPI_FLASH
+> +       if (of_machine_is_compatible("globalscale,espressobin"))
+> +               return espressobin_fdt_setup(blob);
+>  #endif
+>         return 0;
+>  }
+> --
+> 2.43.0
+>
 
-Can we call this board_name? as name_fdt corresponds to device tree name.
 
-> +	char *fdt_file_name;
-> +};
-> +
-> +/**
-> + * ti_set_fdt_env  - Find the correct device tree file name and set 'fdtfile'
-> + * env variable with correct folder structure appropriate to the architecture
-> + * and kernel conventions. This function is invoked typically as part of
-> + * board_late_init
-> + *
-> + * fdt name is picked by:
-> + * a) If a match is found, use the match
-> + * b) If not, CONFIG_DEFAULT_FDT_FILE (Boot OS device tree) if that is defined
-> + *    and not null
-> + * c) If not, Use CONFIG_DEFAULT_DEVICE_TREE (DT control for bootloader)
-> + *
-> + * @name_fdt: match to search with (max of TI_NAME_FDT_MAX chars)
-> + * @fdt_map: NULL terminated array of device tree file name matches.
-> + */
-> +void ti_set_fdt_env(const char *name_fdt, struct ti_fdt_map *fdt_map);
-> +
-> +#endif /* __FDT_OPS_H */
-
--- 
-cheers,
--roger
+--=20
+Robert Marko
+Staff Embedded Linux Engineer
+Sartura Ltd.
+Lendavska ulica 16a
+10000 Zagreb, Croatia
+Email: robert.marko@sartura.hr
+Web: www.sartura.hr
