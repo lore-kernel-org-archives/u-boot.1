@@ -4,66 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFAFEC4706C
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 19:20:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11DA2C4707B
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 19:29:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0C2E87A99;
-	Tue,  9 Jan 2024 20:19:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 19401878DF;
+	Tue,  9 Jan 2024 20:29:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="x8Nau9Bh";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oUBi2IiS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAA1A87AE7; Tue,  9 Jan 2024 20:19:06 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 17C608797B; Tue,  9 Jan 2024 20:29:34 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDF4D8786E
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 20:19:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 352CC878D7
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 20:29:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 409JJ0n7033128;
- Tue, 9 Jan 2024 13:19:00 -0600
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 409JTQ9X067934;
+ Tue, 9 Jan 2024 13:29:26 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704827940;
- bh=ZLSdpGdr1CV28ygfi3yHUJUiWHw8ABewOXkeeC+BGms=;
+ s=ti-com-17Q1; t=1704828566;
+ bh=SVW5avyHIcrB8Q8gKHDX28NjhHJgK3LRvM2a+WqD7Q4=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=x8Nau9BhPAlOFO2BMBRHzrEdQEgK9dHyJIka/gLZOVlSWhkbDIhv7WVIthHLOawuR
- k8q0MeXQtn5LxgJyPdvIFhG/HMO1l7uoFHEqL3I/bQiMtSE9knM3/7Ipk/E6dyiPMO
- WfhBmcZc2nO5YE9y3d3enuu7CZImoAqmhgzClsuQ=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 409JJ0kn021756
+ b=oUBi2IiSdHs2J4puDAN5a8CmdJDmDHtEVx4OenAca+E+wcNTJoEJjSEe4mpYX93sE
+ lAhMKpRhoawLBgPc9K0ChWGQDxipYa+Pnv8KeDONk14HZpjSU/BFISont+hXV5wijU
+ kY8GICXb1Xr6NrhCRnJ1B0BvYTH0pnDiKInxK+wk=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 409JTQ4b005496
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 9 Jan 2024 13:19:00 -0600
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 9 Jan 2024 13:29:26 -0600
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 9
- Jan 2024 13:18:59 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 13:29:25 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 9 Jan 2024 13:18:59 -0600
+ Frontend Transport; Tue, 9 Jan 2024 13:29:25 -0600
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 409JIxqv076295;
- Tue, 9 Jan 2024 13:18:59 -0600
-Date: Tue, 9 Jan 2024 13:18:59 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 409JTPfp119687;
+ Tue, 9 Jan 2024 13:29:25 -0600
+Date: Tue, 9 Jan 2024 13:29:25 -0600
 From: Nishanth Menon <nm@ti.com>
 To: Roger Quadros <rogerq@kernel.org>
-CC: <trini@konsulko.com>, <michael@amarulasolutions.com>,
- <dario.binacchi@amarulasolutions.com>, <afd@ti.com>, <vigneshr@ti.com>,
- <praneeth@ti.com>, <srk@ti.com>, <r-gunasekaran@ti.com>,
+CC: <vigneshr@ti.com>, <trini@konsulko.com>, <praneeth@ti.com>,
  <u-boot@lists.denx.de>
-Subject: Re: [PATCH 4/4] configs: am64x_evm_a53_defconfig: Enable NAND
-Message-ID: <20240109191859.ljtnotdn4voabwko@animate>
-References: <20240109122605.51951-1-rogerq@kernel.org>
- <20240109122605.51951-5-rogerq@kernel.org>
+Subject: Re: [PATCH] board: ti: am64: Support TMDS64EVM
+Message-ID: <20240109192925.yzod5ttvxhnlr6a2@dreamy>
+References: <20240108131650.100519-1-rogerq@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20240109122605.51951-5-rogerq@kernel.org>
+In-Reply-To: <20240108131650.100519-1-rogerq@kernel.org>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,86 +78,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 14:26-20240109, Roger Quadros wrote:
-> Enables configuration required for NAND in SPL and u-boot.
+On 15:16-20240108, Roger Quadros wrote:
+> The TMDS64EVM [1] ships with AM64X SR2.0 HS-FS chip
+> and a slightly different board name in the board information
+> EEPROM header. Support this board.
 > 
-> Enable MTD Driver model and MTD + UBI command line utilities.
+> [1] https://www.ti.com/tool/TMDS64EVM
 > 
-> Add mtdids/mtdparts for NAND as it is required for u-boot's
-> MTD subsystem commands to recognize NAND partitions.
-> 
-> Add u-boot partition location.
+> Gets rid of below message at boot
+> "Unidentified board claims AM64-EVM in eeprom header"
 > 
 > Signed-off-by: Roger Quadros <rogerq@kernel.org>
 > ---
->  configs/am64x_evm_a53_defconfig | 32 ++++++++++++++++++++++++++++++++
->  1 file changed, 32 insertions(+)
+>  board/ti/am64x/evm.c | 1 +
+>  1 file changed, 1 insertion(+)
 > 
-> diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
-> index 05e35a8db6..e22153a958 100644
-> --- a/configs/am64x_evm_a53_defconfig
-> +++ b/configs/am64x_evm_a53_defconfig
-> @@ -66,10 +66,15 @@ CONFIG_CMD_DFU=y
->  CONFIG_CMD_GPT=y
->  CONFIG_CMD_I2C=y
->  CONFIG_CMD_MMC=y
-> +CONFIG_CMD_MTD=y
->  CONFIG_CMD_USB=y
->  CONFIG_CMD_TIME=y
->  CONFIG_CMD_PMIC=y
->  CONFIG_CMD_REGULATOR=y
-> +CONFIG_CMD_MTDPARTS=y
-> +CONFIG_MTDIDS_DEFAULT="nand0=omap2-nand.0"
-> +CONFIG_MTDPARTS_DEFAULT="mtdparts=omap2-nand.0:2m(NAND.tiboot3),2m(NAND.tispl),2m(NAND.tiboot3.backup),4m(NAND.u-boot),256k(NAND.u-boot-env),256k(NAND.u-boot-env.backup),-(NAND.file-system)"
-
-Why not handle this as device tree partitions?
-
-> +CONFIG_CMD_UBI=y
->  CONFIG_OF_CONTROL=y
->  CONFIG_SPL_OF_CONTROL=y
->  CONFIG_OF_LIST="k3-am642-evm k3-am642-sk"
-> @@ -107,6 +112,9 @@ CONFIG_MMC_SDHCI=y
->  CONFIG_MMC_SDHCI_ADMA=y
->  CONFIG_SPL_MMC_SDHCI_ADMA=y
->  CONFIG_MMC_SDHCI_AM654=y
-> +CONFIG_MTD=y
-> +CONFIG_SPL_MTD=y
-> +CONFIG_DM_MTD=y
->  CONFIG_DM_SPI_FLASH=y
->  CONFIG_SPI_FLASH_SPANSION=y
->  CONFIG_SPI_FLASH_STMICRO=y
-> @@ -161,3 +169,27 @@ CONFIG_USB_GADGET_DOWNLOAD=y
->  CONFIG_USB_FUNCTION_MASS_STORAGE=y
->  CONFIG_SPL_DFU=y
->  CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
-> +CONFIG_MEMORY=y
-> +CONFIG_SPL_MEMORY=y
-> +CONFIG_TI_GPMC=y
-> +CONFIG_MTD_RAW_NAND=y
-> +CONFIG_NAND_OMAP_GPMC=y
-> +CONFIG_CMD_NAND=y
-> +CONFIG_NAND_OMAP_ELM=y
-> +CONFIG_NAND_OMAP_ECCSCHEME_BCH8_CODE_HW=y
-> +CONFIG_SYS_NAND_BLOCK_SIZE=0x40000
-> +CONFIG_SYS_NAND_ONFI_DETECTION=y
-> +CONFIG_SYS_NAND_PAGE_SIZE=0x1000
-> +CONFIG_SYS_NAND_PAGE_COUNT=0x40
-> +CONFIG_SYS_NAND_OOBSIZE=0x100
-> +CONFIG_SPL_NAND_SUPPORT=y
-> +CONFIG_SPL_NAND_DRIVERS=y
-> +CONFIG_SPL_NAND_BASE=y
-> +CONFIG_SPL_NAND_IDENT=y
-> +CONFIG_SPL_NAND_ECC=y
-> +CONFIG_SYS_NAND_MAX_CHIPS=1
-> +CONFIG_SYS_MAX_NAND_DEVICE=1
-> +# CONFIG_SPL_NAND_AM33XX_BCH is not set
-> +CONFIG_SPL_MTD_SUPPORT=y
-> +CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
-> +CONFIG_SYS_NAND_U_BOOT_OFFS=0x600000
+> diff --git a/board/ti/am64x/evm.c b/board/ti/am64x/evm.c
+> index a6dcff2eb4..a7ca6be436 100644
+> --- a/board/ti/am64x/evm.c
+> +++ b/board/ti/am64x/evm.c
+> @@ -18,6 +18,7 @@
+>  #include "../common/board_detect.h"
+>  
+>  #define board_is_am64x_gpevm() (board_ti_k3_is("AM64-GPEVM") || \
+> +				board_ti_k3_is("AM64-EVM") || \
+>  				board_ti_k3_is("AM64-HSEVM"))
+>  
+>  #define board_is_am64x_skevm() (board_ti_k3_is("AM64-SKEVM") || \
+> 
+> base-commit: c2c598e87cfe56f5991730762c00733c5aa9a994
 > -- 
 > 2.34.1
 > 
 
+Reviewed-by: Nishanth Menon <nm@ti.com>
 -- 
 Regards,
 Nishanth Menon
