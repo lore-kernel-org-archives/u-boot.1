@@ -4,63 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1CDEC46CD2
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 12:21:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8428EC46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 12:21:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0825687823;
+	by phobos.denx.de (Postfix) with ESMTP id B561887884;
 	Tue,  9 Jan 2024 13:21:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=zoho.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jBJJSf/+";
+	dkim=pass (1024-bit key; unprotected) header.d=zoho.com header.i=lukasz.wojcik@zoho.com header.b="JtGCLYnS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EE46807E2; Tue,  9 Jan 2024 09:45:59 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4686F8783F; Tue,  9 Jan 2024 09:59:29 +0100 (CET)
+Received: from sender3-op-o17.zoho.com (sender3-op-o17.zoho.com
+ [136.143.184.17])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D38E486FBF
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 09:45:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0898F87864
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 09:59:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nsekhar@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4098jsTD118104;
- Tue, 9 Jan 2024 02:45:54 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704789954;
- bh=6gIacyqrxfKpwhtQafPpCsg+GdM53MhMO0R4+rC24uA=;
- h=From:To:CC:Subject:Date;
- b=jBJJSf/+zm/kOovFbxh5tpM9a6aFTqVG2tFtU6sbMeKyjnOUtijGv+FiztANkxlMs
- tNNTYK1xutxF8+chucjApUMp1duQSvH+94vVE5pXIx9z8MNZqSqZRMSuKxSU0040ym
- TmQSlbZbGC1PBHRwqbie9g4EqlBnk6mdoRLyhn8I=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4098jsaA031052
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 9 Jan 2024 02:45:54 -0600
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 9
- Jan 2024 02:45:54 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 9 Jan 2024 02:45:54 -0600
-Received: from pxplinux063.india.ti.com (pxplinux063.india.englab.ti.com
- [172.24.238.35])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4098jqQC074460;
- Tue, 9 Jan 2024 02:45:52 -0600
-From: Sekhar Nori <nsekhar@ti.com>
-To: Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
-CC: "Andrew F. Davis" <afd@ti.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: [PATCH] arch: mach-k3: Fix incorrect mapping of higher DDR addresses
- as device memory
-Date: Tue, 9 Jan 2024 14:15:51 +0530
-Message-ID: <20240109084551.21155-1-nsekhar@ti.com>
-X-Mailer: git-send-email 2.17.1
+ dmarc=pass (p=reject dis=none) header.from=zoho.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=lukasz.wojcik@zoho.com
+ARC-Seal: i=1; a=rsa-sha256; t=1704790764; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=j6jWi4jw1dN7xa+NOztFg2rd3VLRHKWngVrpHB0dGRmi4mwIG3/6WM8B7L6BCARwKhtr7Sx88lDHO8jlteRS3axsdnDIWIBXJBC1nZV3843Annl+tyw0iytzCO0+KT67u7e5qm9wMxQvhat4C7Y1V+axai9S3e0cDVCIEK8IelE=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1704790764;
+ h=Content-Type:Content-Transfer-Encoding:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To:Cc;
+ bh=anwoSVBaOLUmm6YXuE7j/ux7fon1cLmqlUX8E2O+CRI=; 
+ b=creVHYrLY5k1r0kSSk9G/39GwK3ABPVMEiNU07oajIW7B7cTfrzwa/GItLVJtxRYmgoYcc/Vaa88AFoTVAqAC+bkx45lnm8d9zJRFn2t2tJT70txyLlbORt6OqvdliTknpI+1esdLvtIfCFp6ZC6KQJC7uw0sr9g5t8xmnZuSKI=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=zoho.com;
+ spf=pass  smtp.mailfrom=lukasz.wojcik@zoho.com;
+ dmarc=pass header.from=<lukasz.wojcik@zoho.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1704790764; 
+ s=zm2022; d=zoho.com; i=lukasz.wojcik@zoho.com;
+ h=Message-ID:Date:Date:MIME-Version:To:To:From:From:Subject:Subject:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To:Cc;
+ bh=anwoSVBaOLUmm6YXuE7j/ux7fon1cLmqlUX8E2O+CRI=;
+ b=JtGCLYnSbBTZMCTBxx/HgPeqKYYLZUE8Tp3y6DMX5M7+IuvcT4HuU8WkJ380/CRh
+ iQCjzeO0ANeo6i7aWwHfoEOnxMNn2jEgqGfGeOMdKNGIazAEMEl7+/AKJN0pdQmSsnt
+ Ksi/5zf5bYKD+dowjgrHPJqInvfuy2ejJOIGjyrc=
+Received: from [192.168.1.28] (31.131.174.165 [31.131.174.165]) by
+ mx.zohomail.com with SMTPS id 1704790763684949.1154581109571;
+ Tue, 9 Jan 2024 00:59:23 -0800 (PST)
+Message-ID: <4d7979ed-f0c2-4f0a-8a87-df4be96ee705@zoho.com>
+Date: Tue, 9 Jan 2024 09:59:20 +0100
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla Thunderbird
+To: u-boot@lists.denx.de
+Content-Language: en-US
+From: =?UTF-8?B?xYF1a2FzeiBXw7NqY2lr?= <lukasz.wojcik@zoho.com>
+Subject: Reviving bricked device
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ZohoMailClient: External
 X-Mailman-Approved-At: Tue, 09 Jan 2024 13:21:09 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -78,46 +75,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Entry for physical address 0x500000000 in memory map table for MMU
-configuration is spilling over and inadvertently making DDR available at
-higher address (above 4GB address space) get mapped as device memory
-(nGnRnE).
+Hi there,
 
-Fix this by adjusting entry size. Tested on AM62A SK. Before this patch:
 
-=> time crc32 0x881000000 0x20000000
-crc32 for 881000000 ... 8a0ffffff ==> 7f34d7ca
+Good day to you guys in new year. I am seeking advice on 'reviving' 
+bricked device. I have recently bricked my customer's device that is 
+running their own version of Uboot. Something went wrong during update. 
+I already have a working version of a binary. Uboot lies in NOR flash 
+chip, and the layout is as follows:
 
-time: 1 minutes, 14.716 seconds
+uboot        0x00000000 - 0x000dffff (size 0x000e0000, 896KB)
+shmoo        0x000e0000 - 0x000effff (size 0x00010000, 64KB)
+uboot-env    0x000f0000 - 0x000fffff (size 0x00010000, 64KB)
 
-After patch:
 
-=> time crc32 0x881000000 0x20000000
-crc32 for 881000000 ... 8a0ffffff ==> 7f34d7ca
+I'm not an Uboot expert, but I think 'u-boot.bin' contains environment 
+variables as well (or so it seems scanning it using 'strings'). How 
+should I program the chip so that it layout after the programming 
+conforms to the above memory map ?
 
-time: 2.710 seconds
 
-Acked-by: Andrew Davis <afd@ti.com>
-Signed-off-by: Sekhar Nori <nsekhar@ti.com>
----
-Applies to u-boot/next
+Programming the 'executable' seems easy enough, I just put it at the 
+address 0x0, but how do I program environment variables at 0xf0000 ? Or 
+is this portion only for new environment variables ?
 
- arch/arm/mach-k3/arm64-mmu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-k3/arm64-mmu.c b/arch/arm/mach-k3/arm64-mmu.c
-index b4308205b2..0e07b1b7ce 100644
---- a/arch/arm/mach-k3/arm64-mmu.c
-+++ b/arch/arm/mach-k3/arm64-mmu.c
-@@ -41,7 +41,7 @@ struct mm_region k3_mem_map[] = {
- 	}, {
- 		.virt = 0x500000000UL,
- 		.phys = 0x500000000UL,
--		.size = 0x400000000UL,
-+		.size = 0x380000000UL,
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
- 			 PTE_BLOCK_NON_SHARE |
- 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
--- 
-2.40.0
+I would appreciate any sort of clues and suggestions,
+
+
+Best regards,
+
+-ŁW
+
 
