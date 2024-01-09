@@ -4,70 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 099CFC46CD2
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 17:32:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FC93C46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 17:40:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B44D87A0A;
-	Tue,  9 Jan 2024 18:32:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6AEA28786F;
+	Tue,  9 Jan 2024 18:40:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UnP7pq6H";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="QtQfFwBt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC7D187A30; Tue,  9 Jan 2024 18:32:50 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id BD23587943; Tue,  9 Jan 2024 18:32:46 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AB0987942
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 18:32:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 42BDC8785F
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 18:32:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 409HWewL028311;
- Tue, 9 Jan 2024 11:32:40 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704821560;
- bh=9KHVgaEiK/7AMGhkz2PEdyTsivFAQkTb1GtdE98Ea2c=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=UnP7pq6HhhJsu9rSDF4Ef6ClmtRCeVvFDkEQCDe8IncZRW07HauzejGIV0+amO7MA
- Y7OdHESXk4xSeEny51RAoJj8U5+35JQgfLsdZl25/L2PELrcptsw42Dnx/6SMxodBd
- Dnl4laZYI+BWD392wcUyB0xvYuggxrJdsvPAgwi4=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 409HWeXV002942
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 9 Jan 2024 11:32:40 -0600
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 9
- Jan 2024 11:32:40 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 9 Jan 2024 11:32:40 -0600
-Received: from [10.249.40.136] ([10.249.40.136])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 409HWd0k068623;
- Tue, 9 Jan 2024 11:32:39 -0600
-Message-ID: <8a2970aa-7c4b-41f4-9eeb-c43e2c5da285@ti.com>
-Date: Tue, 9 Jan 2024 11:32:39 -0600
+ spf=pass smtp.mailfrom=avromanov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 6126B120002;
+ Tue,  9 Jan 2024 20:32:43 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 6126B120002
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1704821563;
+ bh=/hgJi9tpX358DzB8GwkcaVUL7F09/kK/vZo0GExBK1Q=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=QtQfFwBt7cfiU5Lak0oP4vLfDK4911V+FoPEv4q0bNeQlqRRRQfbLtUyBO+G9sOd4
+ Kpu0OvjjTL2cC+S9BAZmr0MVXHSmUmXCmOOOeX7bkud15SsviN26Iarvp3bBhz4gct
+ OEzQz4gmkx22KGC77t5u097pRyT9w1A/jsuIq5sStFMUAYi8dieNgMd8hlJ2YTUQ+P
+ hk35STsHJZ4e+gWda9nLSHl+PgCsvkSFqT+BnSDV3c7Eok48SjCHwXd+hdELXqDVuS
+ Jti8m53TDvrcYxCxafmCiV1rXv6sN5owi7Dzvd0Vcn0wiIDxV2ULCO/tbEKM/O6B3F
+ 6xCKTKMnrMFTg==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Tue,  9 Jan 2024 20:32:43 +0300 (MSK)
+Received: from localhost.localdomain (100.64.160.123) by
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Tue, 9 Jan 2024 20:32:42 +0300
+From: Alexey Romanov <avromanov@salutedevices.com>
+To: <michal.simek@amd.com>, <marex@denx.de>, <michael@walle.cc>,
+ <stcarlso@linux.microsoft.com>, <tobias@waldekranz.com>,
+ <seanedmond@microsoft.com>, <abdellatif.elkhlifi@arm.com>,
+ <neil.armstrong@linaro.org>, <n-jain1@ti.com>, <xypron.glpk@gmx.de>,
+ <dario.binacchi@amarulasolutions.com>, <michael@amarulasolutions.com>,
+ <frieder.schrempf@kontron.de>, <sjg@chromium.org>, <hs@denx.de>,
+ <sean.anderson@seco.com>, <dimorinny@google.com>,
+ <mkorpershoek@baylibre.com>, <patrick.delaunay@foss.st.com>
+CC: <u-boot@lists.denx.de>, <kernel@salutedevices.com>, Alexey Romanov
+ <avromanov@salutedevices.com>
+Subject: [PATCH v2 00/14] Support SPI NAND in fastboot protocol
+Date: Tue, 9 Jan 2024 20:32:12 +0300
+Message-ID: <20240109173231.78920-1-avromanov@salutedevices.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/8] Suspend to RAM support for K3 J7200
-Content-Language: en-US
-To: Thomas Richard <thomas.richard@bootlin.com>, <u-boot@lists.denx.de>
-CC: <thomas.petazzoni@bootlin.com>, <nm@ti.com>, <u-kumar1@ti.com>,
- <gregory.clement@bootlin.com>, Bryan Brattlof <bb@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Gowtham Tammana <g-tammana@ti.com>, "Manorit Chawdhry" <m-chawdhry@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, "Simon
- Glass" <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-References: <20240108165628.3935756-1-thomas.richard@bootlin.com>
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20240108165628.3935756-1-thomas.richard@bootlin.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 182518 [Jan 09 2024]
+X-KSMG-AntiSpam-Version: 6.1.0.3
+X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 7 0.3.7
+ 6d6bf5bd8eea7373134f756a2fd73e9456bb7d1a,
+ {Tracking_from_domain_doesnt_match_to},
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; smtp.sberdevices.ru:5.0.1,7.1.1;
+ 100.64.160.123:7.1.2; 127.0.0.199:7.1.2;
+ salutedevices.com:7.1.1, FromAlignment: s, ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/01/09 15:14:00 #23039571
+X-KSMG-AntiVirus-Status: Clean, skipped
+X-Mailman-Approved-At: Tue, 09 Jan 2024 18:40:45 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,92 +109,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/8/24 10:56 AM, Thomas Richard wrote:
-> This series is the U-Boot part of the work to add the suspend to RAM
-> support for the K3 J7200 EVM board.
-> 
-> During the boot R5 SPL makes a copy of DM-Firmware and TF-A in memory.
-> Resume detection is done by reading a magic value in a pmic register
-> (set by DM-Firmware).
-> 
-> If a resume is detected, R5 SPL run the exit retention sequence of the
-> DDR. Then it load TF-A and DM-Firmware using the copies done during the boot
-> (fit image processing is skipped).
-> Before to start TF-A, R5 SPL writes a magic value in scratchpad ram. This
-> will be used by TF-A to detect that the board is resuming.
-> 
-> The copy of TF-A/DM-Firmware, the SPL stack and malloc are located in a
-> reserved memory region (for the kernel point of view) to avoid any
-> memory corruption.
-> 
-> This version is mostly to test the firewall protection with the suspend
-> to ram.
+Currently, fastboot in U-Boot doens't support SPI NAND
+devices. This patchset adds support for SPI NAND in fastboot
+nand subsystem.
 
-Seems to show the opposite, if you are able to access and load TF-A
-back to its spot after resume from un-trusted SPL then the firewall
-did not survive suspend to RAM. That is a huge security gap if TIFS
-is forgetting to put back the firewalls on resume.. What is the
-point of firewalls on these systems if I can just knock them all
-out by doing a simple suspend/resume cycle?
+Changes V1 -> V2:
 
-> Some comments (for the v2) were not fixed in this version.
+- Rebase patchset over u-boot/next.
+- Move nand_unregister(), nand_reinit() and nang_page_size() functions
+  to NAND core folder too.
+- Move changes about CMD_RET_FAILURE/SUCCESS into separate patches.
 
-Why not?
+Alexey Romanov (14):
+  nand: move NAND initialization API to nand/core.c
+  nand: don't overwrite mtd name in nand_register()
+  nand: move nand_util.c to NAND core folder
+  nand: move nand_erase_opts() to core NAND folder
+  spi: add board_nand_init() function
+  spi: use nand_register() instead of add_mtd_device()
+  mtdparts: use negative error codes
+  mtdparts: use CMD_RET_FAILURE define
+  jffs2: use negative error codes
+  jffs2: use CMD_RET_FAILURE/SUCCESS defines
+  cmd: allow to enable CMD_NAND for SPI NAND devices
+  fastboot: check device type for SPI NAND too
+  fastboot: enable FASTBOOT_FLASH option for SPI NAND devices
+  fastboot: fb_nand: add missing newlines in pr_err() macro
 
-> This series has been tested with the series [1] to enable the firewall.
-> At the end of the resume sequence, TF-A is well protected by the
-> firewall, but OP-TEE remains unprotected.
-> 
+ cmd/Kconfig                      |   2 +-
+ cmd/jffs2.c                      |  45 +-
+ cmd/mtdparts.c                   | 154 +++----
+ drivers/fastboot/Kconfig         |   4 +-
+ drivers/fastboot/fb_nand.c       |  12 +-
+ drivers/mtd/Kconfig              |   2 +-
+ drivers/mtd/nand/Kconfig         |  10 +
+ drivers/mtd/nand/Makefile        |   2 +-
+ drivers/mtd/nand/core.c          | 193 +++++++++
+ drivers/mtd/nand/raw/Kconfig     |  10 -
+ drivers/mtd/nand/raw/nand.c      | 182 --------
+ drivers/mtd/nand/raw/nand_util.c | 664 -----------------------------
+ drivers/mtd/nand/spi/Kconfig     |   1 +
+ drivers/mtd/nand/spi/core.c      |  17 +-
+ drivers/mtd/nand/util.c          | 709 +++++++++++++++++++++++++++++++
+ include/nand.h                   |   2 +
+ 16 files changed, 1042 insertions(+), 967 deletions(-)
+ create mode 100644 drivers/mtd/nand/util.c
 
-Then why post this? If it is just to get some eyes on it, then label
-it as an "RFC" so our silence isn't considered acceptance, otherwise we
-have to manually NAK these each time.
+-- 
+2.30.1
 
-Andrew
-
-> [1] https://lore.kernel.org/all/20231229-binman-firewalling-v7-0-47ed4af303fe@ti.com/
-> 
-> 
-> Changes in v3:
-> - At resume, R5 SPL doesn't restore TF-A anymore.
->    TF-A is started like during a cold boot. R5 SPL will notify that the board is
->    resuming using a magic value written in the scratchpad ram.
->    TF-A will restore itself.
-> - Link to v2:
->    https://lore.kernel.org/u-boot/20231107161802.855154-1-thomas.richard@bootlin.com/
-> 
-> Changes in v2:
-> - Set exit retention code for DDR behind CONFIG_K3_J721E_DDRSS
-> - Check if TF-A is running in DRAM, if yes no need to restore it
-> - Remove BL31_START macro, and get TF-A start address from the fit image
-> - Remove the test_enter_suspend command
-> - Link to v1:
->    https://lore.kernel.org/u-boot/20231016141135.325698-1-thomas.richard@bootlin.com/
-> 
-> Gowtham Tammana (1):
->    DO NOT MERGE: arm: dts: k3-j7200-r5-common: Add pmic node for esm
-> 
-> Gregory CLEMENT (2):
->    configs: j7200_evm_r5: Used reserved memory in DDR for stack
->    configs: j7200_evm_r5: Move address used for allocation in the
->      reserved space
-> 
-> Thomas Richard (5):
->    board: ti: j721e: Add resume detection for J7200
->    ram: k3-ddrss: Add exit retention support
->    board: ti: j721e: Add the missing part of exit retention for k3-ddrss
->      (J7200)
->    board: ti: j721e: During resume spl notify tf-a that the board is
->      resuming
->    arm: mach-k3: j7200: Skip fit processing when resuming
-> 
->   .../arm/dts/k3-j7200-r5-common-proc-board.dts |  17 +-
->   arch/arm/mach-k3/common.c                     |  65 +++-
->   .../arm/mach-k3/include/mach/j721e_hardware.h |   1 +
->   arch/arm/mach-k3/include/mach/j721e_spl.h     |  30 ++
->   arch/arm/mach-k3/sysfw-loader.c               |  16 +-
->   board/ti/j721e/evm.c                          |  77 +++++
->   configs/j7200_evm_r5_defconfig                |   4 +-
->   drivers/ram/k3-ddrss/k3-ddrss.c               | 307 ++++++++++++++++++
->   8 files changed, 507 insertions(+), 10 deletions(-)
-> 
