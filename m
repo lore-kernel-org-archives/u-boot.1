@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D956C3DA6E
-	for <u-boot@archiver.kernel.org>; Mon,  8 Jan 2024 23:54:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F14CC3DA6E
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 01:00:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8344187775;
-	Tue,  9 Jan 2024 00:54:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 488038767C;
+	Tue,  9 Jan 2024 02:00:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZYKOD3EQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bPpRH+ZW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64941877F1; Tue,  9 Jan 2024 00:54:11 +0100 (CET)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id DD81886E82; Tue,  9 Jan 2024 02:00:47 +0100 (CET)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EE918774E
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 00:54:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1242287718
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 02:00:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sigmaris@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2cc9fa5e8e1so27264031fa.3
- for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 15:54:09 -0800 (PST)
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-50e7af5f618so2525449e87.1
+ for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 17:00:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1704758048; x=1705362848; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1704762043; x=1705366843; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=i9v7ns2acAAoCfC401fYRYaPeF4AC6LMXkPKouji6Nw=;
- b=ZYKOD3EQba3TBPJ3nbvNqHjiY11kKqJdbf8Y/tAGD02sw29yNyh8CGhIlZFywcVHbq
- EPmUHmUqLrWiOmNtTSSTSry2m0GcnWitIhTHMTr6s2iHIvu5GZAf9zpLnDrRz2IsEgOu
- 28fm6rG4BTqzt8GPg1a5/5BWMdL0kStc5ePABggE3zXvK5gwXD0wKIWL8uZquw9/NZDB
- TOMH9FFw0RtmXaycUQqx9M3DhA9I5SzoNW6A9GmC8ggeUcOiqqkFIKc+EY7HWYy5iTAp
- o77GkJKj0sanQMAKy1MwB8aHViFPVhr/r11spgKf7aDb1jvAaI5XTTbUaeIRbtm21ZZ5
- q0+Q==
+ bh=ki1Z2fJCTmjSp4wXfOsI+9t1zzLp4D2s7eEIvsA5JfY=;
+ b=bPpRH+ZWzql0BR0n5Z7e+bbtpj04DVydmvEt7TrDoE0ALiq2Xp6Kz+d+DdWMhZ/PZX
+ V92Jvtl+bWRZlkHWabo6V3N9ndxNwaUblmF0sgBfs8mvyIT921/B9jft91IyncM0qw3a
+ aWxCXmjhyWq9ws/aLl1+5sfhb4DWnHPAEQF4vCmIStjxDyoCaPRoU//qrojyj8EZX8Vz
+ mip6GkW9WQALGdF5gTCIrLmkVoLN8URSFChpt6L2pNz3sXo208xnYBYYgWr0vsA+HLYb
+ mTfwAUox2OeMGwKfwcoqhk+exXxwhxg7RUiZaj056DMboPvYCrDeY7juW9F9GfciBoQt
+ AX0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704758048; x=1705362848;
+ d=1e100.net; s=20230601; t=1704762043; x=1705366843;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=i9v7ns2acAAoCfC401fYRYaPeF4AC6LMXkPKouji6Nw=;
- b=ZsHTYdFaHgfD7S1PhXt1lop2jDbB0i7pVwPl2muFSPPubRBv+n4IW+oBqFIxuEyC68
- DtF4V9VN5uf8SciJBPB7haFe5vNA9Progh73j+VFl6mjCy4NCZqqJuEEEnJ83PFD3qu/
- oiyrvtvZX0IEZbnR3LoqnEQGBAeSd0g1P6JLeO6A9sKZvbRjQG+o76I0hmTS3KdYj2I9
- GTu7AOaVQugvYUAj/FaXnjaYBTqIZkU12T1DlbSamEvUPU0YzqbozVFCgP5XtsFBL6b0
- dG0zGQKTWQ25l4wzUTxAPoknnkhVEftY9ASYUQdsCWzyv4xbm55etxA3HIZwz+vsWtxE
- GhVQ==
-X-Gm-Message-State: AOJu0Yz0Y21qqcaRO5ibcR2b32a2MfbsC9yNbf5qpXG6AqF53Zx4E49i
- Wbmk/nna+0wVEdDx5KHJ3ShBOXuk6SmoA320q8s=
-X-Google-Smtp-Source: AGHT+IE3jY8UXTOaDzA571k3rE8Vub5eoKGIEivpl5zgUcX4p0vHDazPnX5lOZdIMkbELEgyd5OQbAKyiiCiIfVmHY8=
-X-Received: by 2002:ac2:5b52:0:b0:50e:7f9e:7c4a with SMTP id
- i18-20020ac25b52000000b0050e7f9e7c4amr1622231lfp.117.1704758048237; Mon, 08
- Jan 2024 15:54:08 -0800 (PST)
+ bh=ki1Z2fJCTmjSp4wXfOsI+9t1zzLp4D2s7eEIvsA5JfY=;
+ b=O804EQYrkdgjguhG4KmHyWy+oR0Vg9Ryfnqa2R7O8zONXeVcaRCyH19EfLGdc2WxWf
+ BUAAp2cOoJqiAVeU/MiO/SzH5BPILJN7jzCM+NfSoNcSiX/kX55G0DgYkoSXRsPdf06Z
+ NXHsXpb+aelx+FboqFy+YQ0rZEGZVrCfmlhY9PrVUpC3A3YSAUq3HmM7gYek61AFgncW
+ U8022zVnsy27iKvB3fR/aFjRBbJSSvmDa3qSjhojskOPoX2VGnXw40UzHHaYUy9MP4nw
+ CEodgcRz5YkQx7n4jCjAYOQ0ZhdeEvVqVZ8yZCNZiE276HRo8GxqN0PJsyQXTCgfuEnn
+ 6KMw==
+X-Gm-Message-State: AOJu0YxyfA4zxVRJ0706rtE5h+/ZIhEbM1BJEXAZhZbxw+gCWmwnP6I7
+ gGLmf4hvyg0YqxxziNesdk3ud29aDxr3MXwHmjAaFG3fi2Vr/Q==
+X-Google-Smtp-Source: AGHT+IEZzkQO0zuPL7VHW2MF0ITSibOJ0DgA566BhlL7z/nOAiOzsrQOIVhHc7SxHNYIXhPNNYCk7k3hOaMrgczNuZ4=
+X-Received: by 2002:ac2:44cc:0:b0:50e:35a3:a90d with SMTP id
+ d12-20020ac244cc000000b0050e35a3a90dmr1745438lfm.36.1704762043285; Mon, 08
+ Jan 2024 17:00:43 -0800 (PST)
 MIME-Version: 1.0
-References: <20231226164330.63725-1-sigmaris@gmail.com>
- <c52fb0c8-411f-4f97-8998-913e4da79d2b@kwiboo.se>
-In-Reply-To: <c52fb0c8-411f-4f97-8998-913e4da79d2b@kwiboo.se>
-From: Hugh Cole-Baker <sigmaris@gmail.com>
-Date: Mon, 8 Jan 2024 23:53:57 +0000
-Message-ID: <CAAXNxMT3SSu-3oth9qL+N-nCcxzZR+b0a0CbYzZP5bOqzdDV5Q@mail.gmail.com>
-Subject: Re: [PATCH v2] rockchip: rk35xx: expand space for decompressed kernel
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, John Clark <inindev@gmail.com>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20231221095258.592275-1-masahisa.kojima@linaro.org>
+ <20231221095258.592275-3-masahisa.kojima@linaro.org> <ZYw_UqZ_wj-htZvI@hera>
+In-Reply-To: <ZYw_UqZ_wj-htZvI@hera>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Tue, 9 Jan 2024 10:00:31 +0900
+Message-ID: <CADQ0-X8fBNDCrWkbZWwxYJaovradmMCM+vDt3DEJF2p9X2fgTg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] efi_loader: support fmp versioning for multi bank
+ update
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,123 +87,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Ilias,
 
-On Sun, 7 Jan 2024 at 17:35, Jonas Karlman <jonas@kwiboo.se> wrote:
+On Thu, 28 Dec 2023 at 00:14, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> Hi Hugh,
+> Kojima-san
 >
-> On 2023-12-26 17:43, Hugh Cole-Baker wrote:
-> > An uncompressed 6.7.0-rc1 Linux kernel Image built with the arm64
-> > defconfig is about 40MB. This does not fit in to the space between
-> > kernel_comp_addr_r and fdt_addr_r, so when uncompressing an Image.gz
-> > to this size, the FDT will be overwritten. Rearrange addresses to have
-> > 128MiB for the kernel and its decompression buffer, then devicetree,
-> > overlay and ramdisk at the end.
+> On Thu, Dec 21, 2023 at 06:52:58PM +0900, Masahisa Kojima wrote:
+> > This commit stores the firmware version into the array
+> > of fmp_state structure to support the fmp versioning
+> > for multi bank update. The index of the array is identified
+> > by the bank index.
+>
+> Why do we all of them? Can't we just always store/use the version of the active
+> bank?
+
+Sorry for the late reply.
+When the capsule update is reverted, the active bank is back to the
+previous active bank.
+So I think versions for all banks should be stored.
+
+Thanks,
+Masahisa Kojima
+
+>
 > >
-> > Signed-off-by: Hugh Cole-Baker <sigmaris@gmail.com>
+> > This modification keeps the backward compatibility with
+> > the existing versioning feature.
+> >
+>
+> Thanks
+> /Ilias
+> > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
 > > ---
-> > Changes from v1:
-> > Reorder things to have to have 128MiB for kernel and decompression space,
-> > then devicetree, overlays and ramdisk.
-> > Update kernel_comp_size to 128MiB.
+> >  lib/efi_loader/efi_firmware.c | 69 +++++++++++++++++++++++++++--------
+> >  1 file changed, 54 insertions(+), 15 deletions(-)
 > >
-> >  include/configs/rk3568_common.h | 12 ++++++------
-> >  include/configs/rk3588_common.h | 12 ++++++------
-> >  2 files changed, 12 insertions(+), 12 deletions(-)
+> > diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
+> > index 9b8630625f..5459f3d38d 100644
+> > --- a/lib/efi_loader/efi_firmware.c
+> > +++ b/lib/efi_loader/efi_firmware.c
+> > @@ -207,18 +207,10 @@ void efi_firmware_fill_version_info(struct efi_firmware_image_descriptor *image_
+> >  {
+> >       u16 varname[13]; /* u"FmpStateXXXX" */
+> >       efi_status_t ret;
+> > -     efi_uintn_t size;
+> > -     struct fmp_state var_state = { 0 };
+> > -
+> > -     efi_create_indexed_name(varname, sizeof(varname), "FmpState",
+> > -                             fw_array->image_index);
+> > -     size = sizeof(var_state);
+> > -     ret = efi_get_variable_int(varname, &fw_array->image_type_id,
+> > -                                NULL, &size, &var_state, NULL);
+> > -     if (ret == EFI_SUCCESS)
+> > -             image_info->version = var_state.fw_version;
+> > -     else
+> > -             image_info->version = 0;
+> > +     efi_uintn_t size, expected_size;
+> > +     uint num_banks = 1;
+> > +     uint active_index = 0;
+> > +     struct fmp_state *var_state;
 > >
-> > diff --git a/include/configs/rk3568_common.h b/include/configs/rk3568_common.h
-> > index 1b7d3437b1..48f93083de 100644
-> > --- a/include/configs/rk3568_common.h
-> > +++ b/include/configs/rk3568_common.h
-> > @@ -20,12 +20,12 @@
-> >       "script_offset_f=0xffe000\0"    \
-> >       "script_size_f=0x2000\0"        \
-> >       "pxefile_addr_r=0x00e00000\0"   \
-> > -     "fdt_addr_r=0x0a100000\0"       \
-> > -     "fdtoverlay_addr_r=0x02000000\0"        \
-> > -     "kernel_addr_r=0x02080000\0"    \
-> > -     "ramdisk_addr_r=0x0a200000\0"   \
-> > -     "kernel_comp_addr_r=0x08000000\0"       \
-> > -     "kernel_comp_size=0x2000000\0"
-> > +     "kernel_addr_r=0x02000000\0"    \
-> > +     "kernel_comp_addr_r=0x0a000000\0"       \
-> > +     "fdt_addr_r=0x12000000\0"       \
-> > +     "fdtoverlay_addr_r=0x12100000\0"        \
-> > +     "ramdisk_addr_r=0x12180000\0"   \
-> > +     "kernel_comp_size=0x8000000\0"
->
-> This (and the prior) memory layout extend over the possible memory
-> region that OPTEE may use, 32 MiB at 132 MiB offset.
->
-> The following regions is typically reserved for TF-A and OPTEE:
->
-> 0x00000000 - 0x00200000 - reserved for TF-A, pstore, shmem, etc (0-2 MiB)
-> 0x08400000 - 0x0a400000 - reserved for OPTEE (132-164 MiB)
-
-Thanks, I wasn't aware of this reserved memory. Out of curiosity, is it
-documented anywhere more about this & how to use OPTEE on RK3588?
-I'd like to try it out, I tried to simply include it in a U-Boot build via
-"export TEE=rk3588_bl32_v1.13.bin" but binman expects the given file to be
-an ELF.
-
->
-> Following offsets are used by U-Boot on rockchip rk35xx:
->
-> @0       - U-Boot SPL
-> @40000   - TF-A (@256 KiB)
-> @a00000  - U-Boot proper (@10 MiB)
-> @c00000  - scriptaddr (@12 MiB)
-> @c00800  - loadaddr (@12 MiB + 2 KiB)
-> @e00000  - pxefile_addr_r (@14 MiB)
-> @8400000 - optional OPTEE (@132 MiB)
->
-> May I suggest a memory layout similar to the following be used:
->
-> @1800000  - fdtoverlay_addr_r (@24 MiB)
-> @1c00000  - fdt_addr_r (@28 MiB)
-> @2000000  - kernel_addr_r (@32 MiB)
-> @a800000  - kernel_comp_addr_r (@168 MiB) // could also be a400000 (@164 MiB)
-> @12c00000 - ramdisk_addr_r (@300 MiB) // kernel_comp_addr_r + kernel_comp_size
-> and kernel_comp_size = 0x8000000 (128 MiB)
->
-> With that it should allow for a 100-136 MiB kernel starting at @32 MiB,
-> depending on if memory is reserved for OPTEE or not. It also leave 4 MiB
-> for FDT and FDT overlay in memory just before the kernel. And finally do
-> not overlap kernel_comp_addr_r with possible OPTEE memory.
->
-> If we need more space then 2 MiB for U-Boot proper we should also
-> revise the offsets used for loadaddr, scriptaddr and pxefile_addr_r.
->
-> Regards,
-> Jonas
->
+> >       efi_firmware_get_lsv_from_dtb(fw_array->image_index,
+> >                                     &fw_array->image_type_id,
+> > @@ -227,6 +219,31 @@ void efi_firmware_fill_version_info(struct efi_firmware_image_descriptor *image_
+> >       image_info->version_name = NULL; /* not supported */
+> >       image_info->last_attempt_version = 0;
+> >       image_info->last_attempt_status = LAST_ATTEMPT_STATUS_SUCCESS;
+> > +     image_info->version = 0;
+> > +
+> > +     /* get the fw_version */
+> > +     efi_create_indexed_name(varname, sizeof(varname), "FmpState",
+> > +                             fw_array->image_index);
+> > +     if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE)) {
+> > +             ret = fwu_get_active_index(&active_index);
+> > +             if (ret)
+> > +                     return;
+> > +
+> > +             num_banks = CONFIG_FWU_NUM_BANKS;
+> > +     }
+> > +
+> > +     size = num_banks * sizeof(*var_state);
+> > +     expected_size = size;
+> > +     var_state = calloc(1, size);
+> > +     if (!var_state)
+> > +             return;
+> > +
+> > +     ret = efi_get_variable_int(varname, &fw_array->image_type_id,
+> > +                                NULL, &size, var_state, NULL);
+> > +     if (ret == EFI_SUCCESS && expected_size == size)
+> > +             image_info->version = var_state[active_index].fw_version;
+> > +
+> > +     free(var_state);
+> >  }
 > >
-> >  #define CFG_EXTRA_ENV_SETTINGS               \
-> >       ENV_MEM_LAYOUT_SETTINGS                 \
-> > diff --git a/include/configs/rk3588_common.h b/include/configs/rk3588_common.h
-> > index 46389d087d..70430612ef 100644
-> > --- a/include/configs/rk3588_common.h
-> > +++ b/include/configs/rk3588_common.h
-> > @@ -19,12 +19,12 @@
-> >       "script_offset_f=0xffe000\0"    \
-> >       "script_size_f=0x2000\0"        \
-> >       "pxefile_addr_r=0x00e00000\0"   \
-> > -     "fdt_addr_r=0x0a100000\0"       \
-> > -     "fdtoverlay_addr_r=0x02000000\0"        \
-> > -     "kernel_addr_r=0x02080000\0"    \
-> > -     "ramdisk_addr_r=0x0a200000\0"   \
-> > -     "kernel_comp_addr_r=0x08000000\0"       \
-> > -     "kernel_comp_size=0x2000000\0"
-> > +     "kernel_addr_r=0x02000000\0"    \
-> > +     "kernel_comp_addr_r=0x0a000000\0"       \
-> > +     "fdt_addr_r=0x12000000\0"       \
-> > +     "fdtoverlay_addr_r=0x12100000\0"        \
-> > +     "ramdisk_addr_r=0x12180000\0"   \
-> > +     "kernel_comp_size=0x8000000\0"
+> >  /**
+> > @@ -362,8 +379,11 @@ efi_status_t efi_firmware_set_fmp_state_var(struct fmp_state *state, u8 image_in
+> >  {
+> >       u16 varname[13]; /* u"FmpStateXXXX" */
+> >       efi_status_t ret;
+> > +     uint num_banks = 1;
+> > +     uint update_bank = 0;
+> > +     efi_uintn_t size;
+> >       efi_guid_t *image_type_id;
+> > -     struct fmp_state var_state = { 0 };
+> > +     struct fmp_state *var_state;
 > >
-> >  #define CFG_EXTRA_ENV_SETTINGS \
-> >       "fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
-
-Regards,
-Hugh
+> >       image_type_id = efi_firmware_get_image_type_id(image_index);
+> >       if (!image_type_id)
+> > @@ -372,19 +392,38 @@ efi_status_t efi_firmware_set_fmp_state_var(struct fmp_state *state, u8 image_in
+> >       efi_create_indexed_name(varname, sizeof(varname), "FmpState",
+> >                               image_index);
+> >
+> > +     if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE)) {
+> > +             ret = fwu_plat_get_update_index(&update_bank);
+> > +             if (ret)
+> > +                     return EFI_INVALID_PARAMETER;
+> > +
+> > +             num_banks = CONFIG_FWU_NUM_BANKS;
+> > +     }
+> > +
+> > +     size = num_banks * sizeof(*var_state);
+> > +     var_state = calloc(1, size);
+> > +     if (!var_state)
+> > +             return EFI_OUT_OF_RESOURCES;
+> > +
+> > +     ret = efi_get_variable_int(varname, image_type_id, NULL, &size,
+> > +                                var_state, NULL);
+> > +
+> >       /*
+> >        * Only the fw_version is set here.
+> >        * lowest_supported_version in FmpState variable is ignored since
+> >        * it can be tampered if the file based EFI variable storage is used.
+> >        */
+> > -     var_state.fw_version = state->fw_version;
+> > +     var_state[update_bank].fw_version = state->fw_version;
+> >
+> > +     size = num_banks * sizeof(*var_state);
+> >       ret = efi_set_variable_int(varname, image_type_id,
+> >                                  EFI_VARIABLE_READ_ONLY |
+> >                                  EFI_VARIABLE_NON_VOLATILE |
+> >                                  EFI_VARIABLE_BOOTSERVICE_ACCESS |
+> >                                  EFI_VARIABLE_RUNTIME_ACCESS,
+> > -                                sizeof(var_state), &var_state, false);
+> > +                                size, var_state, false);
+> > +
+> > +     free(var_state);
+> >
+> >       return ret;
+> >  }
+> > --
+> > 2.34.1
+> >
