@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDAB8C46CD2
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 17:42:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADFDFC46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 17:42:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 438EC87A82;
-	Tue,  9 Jan 2024 18:40:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2F62D87A79;
+	Tue,  9 Jan 2024 18:40:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="R2MkRuHI";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="Sv/XIUlJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9788D8792B; Tue,  9 Jan 2024 18:32:54 +0100 (CET)
+ id EBD3F8792B; Tue,  9 Jan 2024 18:32:54 +0100 (CET)
 Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1179D87942
+ by phobos.denx.de (Postfix) with ESMTPS id 6A3CA87977
  for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 18:32:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 4159312000F;
- Tue,  9 Jan 2024 20:32:49 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 4159312000F
+ by mx1.sberdevices.ru (Postfix) with ESMTP id D599F120010;
+ Tue,  9 Jan 2024 20:32:50 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru D599F120010
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1704821569;
- bh=A3Bxug9hIq5eS6Hg7bmSKGOsqswnyc2j44RMkBtn+SA=;
+ s=mail; t=1704821570;
+ bh=RsUw0+jyZ3lvvq75q5dwotsQs+NpI8iH1zHq3tiBlhw=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=R2MkRuHIa+uzCbL5ezCcA4Kfc+QnO3/5ZPon7F3eFh9XefShojGENefBeDS4ekXON
- YCKAETsZsS+f8UEjcT8pDictJX+CGqmciqGJgoC/KW++soAN3K90O8H3CX+8Pt94B6
- Hm6XlRHvQRYNfoi+HP3DqMdb2snWlAVMMY2fwpDXKoO7dfKN8jPsU2G/S3L4fJMdwE
- 7pmrgSb1DE4T8OE7sP+0UW2W0PSIPJW+vryRnVKsbTOJCCGaNj+twMZhQuREy8clVi
- nmDeBoHcEopwEUSL7Bf6kh0SsX+4e5ZoollOOpDdh0OwhzQ3DprKuEh8by2hih1FrO
- K6Vr2pedn4eow==
+ b=Sv/XIUlJ0RqL+21mN79l0iLVJN8QKZpleTXPPdoE2GbEK8NxDGCKMcaD+FTD9m+Q0
+ 96wD64jVFHm43gVQxGBf67LUxm6r0XhrwT/xDavQI4j4/99yOYpJ16XIqGRY0Wjd1h
+ b53oeuYwe/VnMLJqm1ae9HwAxYz9AzndUrC7tCvjwhPxNhiZJ0PHeMH72T0PU7qmxc
+ DVBQu3//FLDOWTvVKVbNEkaUQaKq9C1xiIyk00tEb443R9qVolJTm9u/sHpBFhg8Y+
+ OZqZbkRHdDxVAaEMvI/2dWiWJI68wkquGAXPucZtyOBDldB8nI/3lU5I7hvEJFCMFt
+ +P628UUmP1HAQ==
 Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue,  9 Jan 2024 20:32:49 +0300 (MSK)
+ Tue,  9 Jan 2024 20:32:50 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 9 Jan 2024 20:32:48 +0300
+ 15.2.1118.40; Tue, 9 Jan 2024 20:32:50 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <michal.simek@amd.com>, <marex@denx.de>, <michael@walle.cc>,
  <stcarlso@linux.microsoft.com>, <tobias@waldekranz.com>,
@@ -60,9 +60,9 @@ To: <michal.simek@amd.com>, <marex@denx.de>, <michael@walle.cc>,
  <mkorpershoek@baylibre.com>, <patrick.delaunay@foss.st.com>
 CC: <u-boot@lists.denx.de>, <kernel@salutedevices.com>, Alexey Romanov
  <avromanov@salutedevices.com>
-Subject: [PATCH v2 06/14] spi: use nand_register() instead of add_mtd_device()
-Date: Tue, 9 Jan 2024 20:32:18 +0300
-Message-ID: <20240109173231.78920-7-avromanov@salutedevices.com>
+Subject: [PATCH v2 08/14] mtdparts: use CMD_RET_FAILURE define
+Date: Tue, 9 Jan 2024 20:32:20 +0300
+Message-ID: <20240109173231.78920-9-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240109173231.78920-1-avromanov@salutedevices.com>
 References: <20240109173231.78920-1-avromanov@salutedevices.com>
@@ -111,37 +111,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Most functions that work with NAND device (for example fastboot),
-use the get_nand_dev_by_index() function to work with NAND MTD.
-In order to use this feature, SPI NAND must be registered via
-nand_register().
+Use 'return CMD_RET_FAILURE' define instead of 'return 1'.
 
 Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 ---
- drivers/mtd/nand/spi/core.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ cmd/mtdparts.c | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index 07e521dbf5..2a3dbcfcb4 100644
---- a/drivers/mtd/nand/spi/core.c
-+++ b/drivers/mtd/nand/spi/core.c
-@@ -23,6 +23,7 @@
- #else
- #include <common.h>
- #include <errno.h>
-+#include <nand.h>
- #include <watchdog.h>
- #include <spi.h>
- #include <spi-mem.h>
-@@ -1213,7 +1214,7 @@ static int spinand_probe(struct udevice *dev)
- #ifndef __UBOOT__
- 	ret = mtd_device_register(mtd, NULL, 0);
- #else
--	ret = add_mtd_device(mtd);
-+	ret = nand_register(0, mtd);
- #endif
- 	if (ret)
- 		goto err_spinand_cleanup;
+diff --git a/cmd/mtdparts.c b/cmd/mtdparts.c
+index 00c07014b2..392ee511c9 100644
+--- a/cmd/mtdparts.c
++++ b/cmd/mtdparts.c
+@@ -1923,15 +1923,15 @@ static int do_chpart(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	u8 pnum;
+ 
+ 	if (mtdparts_init() !=0)
+-		return 1;
++		return CMD_RET_FAILURE;
+ 
+ 	if (argc < 2) {
+ 		printf("no partition id specified\n");
+-		return 1;
++		return CMD_RET_FAILURE;
+ 	}
+ 
+ 	if (find_dev_and_part(argv[1], &dev, &pnum, &part) != 0)
+-		return 1;
++		return CMD_RET_FAILURE;
+ 
+ 	current_mtd_dev = dev;
+ 	current_mtd_partnum = pnum;
+@@ -1978,7 +1978,7 @@ static int do_mtdparts(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 	/* make sure we are in sync with env variables */
+ 	if (mtdparts_init() != 0)
+-		return 1;
++		return CMD_RET_FAILURE;
+ 
+ 	if (argc == 1) {
+ 		list_partitions();
+@@ -2000,11 +2000,11 @@ static int do_mtdparts(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		struct part_info *p;
+ 
+ 		if (mtd_id_parse(argv[2], NULL, &type, &num) != 0)
+-			return 1;
++			return CMD_RET_FAILURE;
+ 
+ 		if ((id = id_find(type, num)) == NULL) {
+ 			printf("no such device %s defined in mtdids variable\n", argv[2]);
+-			return 1;
++			return CMD_RET_FAILURE;
+ 		}
+ 
+ 		len = strlen(id->mtd_id) + 1;	/* 'mtd_id:' */
+@@ -2015,7 +2015,7 @@ static int do_mtdparts(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 		if (len >= PART_ADD_DESC_MAXLEN) {
+ 			printf("too long partition description\n");
+-			return 1;
++			return CMD_RET_FAILURE;
+ 		}
+ 		sprintf(tmpbuf, "%s:%s(%s)%s",
+ 				id->mtd_id, argv[3], argv[4], argv[5] ? argv[5] : "");
+@@ -2031,7 +2031,7 @@ static int do_mtdparts(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ #if defined(CONFIG_CMD_MTDPARTS_SPREAD)
+ 		if (get_mtd_info(dev->id->type, dev->id->num, &mtd))
+-			return 1;
++			return CMD_RET_FAILURE;
+ 
+ 		if (!strcmp(&argv[1][3], ".spread")) {
+ 			spread_partition(mtd, p, &next_offset);
+@@ -2045,12 +2045,12 @@ static int do_mtdparts(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		} else if (part_add(dev_tmp, p) != 0) {
+ 			/* merge new partition with existing ones*/
+ 			device_del(dev);
+-			return 1;
++			return CMD_RET_FAILURE;
+ 		}
+ 
+ 		if (generate_mtdparts_save(last_parts, MTDPARTS_MAXLEN) != 0) {
+ 			printf("generated mtdparts too long, resetting to null\n");
+-			return 1;
++			return CMD_RET_FAILURE;
+ 		}
+ 
+ 		return 0;
 -- 
 2.30.1
 
