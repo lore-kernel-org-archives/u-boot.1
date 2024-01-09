@@ -4,73 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E7D6C3DA6E
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 03:28:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F07B4C46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 05:09:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E399D87861;
-	Tue,  9 Jan 2024 04:27:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 23FDF87754;
+	Tue,  9 Jan 2024 06:09:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RrNBnPvM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="b1iyg/Sc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 297038743A; Tue,  9 Jan 2024 03:48:21 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F0264877D3; Tue,  9 Jan 2024 06:09:04 +0100 (CET)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0426B87848
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 03:48:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A143987754
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 06:09:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4092mAuT120444;
- Mon, 8 Jan 2024 20:48:10 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704768491;
- bh=X6ArkC9ecxLP6DqTtHN/xVDMVZo0j08dxrfOe+DBzcg=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=RrNBnPvMO+v8WeiGdnjrH4FzMuIoOZI2fq8Q1DI7Beg/m5R5AwvlinJUsoRe2uom7
- 47ba3fs2+L0Orst4CfgFau2FSR9o9S0kI5Lo2HA8g82N6x/b8VCn73rs9Ph8dYK1G2
- J8kM7OiYBEo8dfEBvwMv+Xaw8pzlKhuWwR3c6X6U=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4092mAIS016482
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 8 Jan 2024 20:48:10 -0600
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
- Jan 2024 20:48:10 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 8 Jan 2024 20:48:10 -0600
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4092mAnH122014;
- Mon, 8 Jan 2024 20:48:10 -0600
-From: Jon Humphreys <j-humphreys@ti.com>
-To: Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
-CC: Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu Raja <sinthu.raja@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Roger Quadros <rogerq@kernel.org>, Simon Glass
- <sjg@chromium.org>, Andrew Davis <afd@ti.com>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Nikhil M Jain <n-jain1@ti.com>, "Manorit
- Chawdhry" <m-chawdhry@ti.com>, Bryan Brattlof <bb@ti.com>, Robert Nelson
- <robertcnelson@gmail.com>, <u-boot@lists.denx.de>,
- Nishanth Menon <nm@ti.com>
-Subject: Re: [PATCH 02/10] board: ti: am62ax: Set fdtfile from C code
- instead of findfdt script
-In-Reply-To: <20240108173301.2692332-3-nm@ti.com>
-References: <20240108173301.2692332-1-nm@ti.com>
- <20240108173301.2692332-3-nm@ti.com>
-Date: Mon, 8 Jan 2024 20:48:10 -0600
-Message-ID: <86jzojdxxx.fsf@udb0321960.dhcp.ti.com>
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-6dde2b84139so163979a34.2
+ for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 21:09:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1704776939; x=1705381739; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Mms3BAEVl3p07ppv3W8+q853INrtQ1XzDvXKNxchagM=;
+ b=b1iyg/ScubQzL8EOlWx/PMtVq+x/MoSvS6Tzoo7HrqGepvjeOnQ4Bu8BI8hG/ApeS9
+ muaQcIHYPE7yaZc0C3oYxQ3dEOoUIcK6M3HwBJzZh2DEmB6NkW7lNN9QYKZrHC477if5
+ JQw6bxIvfUbAynQ3Wvvx6RVcoHd7O5IKX3CxoWR4sAdXvRnucP3kg+EbTfAp8vJ4GAef
+ +Ko0SMHJbRC7tJh1qCKaR5y9HU9Pvjvt1pbWSQRZXq5GAXFxEzSnP7CW+IKAY9G1Pvai
+ I8PDmlVniDLarj1J9n0HuCvDh9nGeoOLjjGi5jQ2Khvo7K44gS3zf0ZtNCidS0Dk4Qij
+ CjPQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704776939; x=1705381739;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Mms3BAEVl3p07ppv3W8+q853INrtQ1XzDvXKNxchagM=;
+ b=cswJK4az3RXoFIjB2xwrQNtaVEKyqfe4r3x6eFemwTyGe2Ne0RQN6uzo7befEKJIuy
+ czCF00rWm0orICUlLA2SsVQRgF0WUrhwyZ7L0nUDrqM+r+q5Q6nm5BB218YpZ+kTS0iY
+ hQsjRtgLlzpi6FaN0Y8/RF6GRoHWjDxOYB1I8Do1GHokBfn8JaNwWa1f7qPl+zVd2tnH
+ zHDRevvcoLjGo8OO/NPTMsBgUuNugK7lGnPljkKO2uOJ1vqKR4jlPrMDzyufpCNvSQnF
+ ioPzFGD5epahwZBjLKx7fbkHp4ztq3bG5SEEK3xd909QqFopKTr6FkQlmNXgukMFcRCr
+ 57ew==
+X-Gm-Message-State: AOJu0Yxrvu1GAy6RnibJhTNYjpa0DkQ33l0DRKTR5O6d797fn6KYQBA8
+ xcG7cN1Cv2s0WEhAQXJJG+OE+kews8oZAMnf6P1j9wxSoECmQg==
+X-Google-Smtp-Source: AGHT+IGHnH0QzjHeQrV4B3qFkX8/sYv913QDnYOFZmaTTHU0AJUWD0DFpr3X2/0HchKY1xZ7evhqSy2r2ICqYFtwMcY=
+X-Received: by 2002:a05:6830:4787:b0:6da:3409:fd90 with SMTP id
+ df7-20020a056830478700b006da3409fd90mr3014641otb.62.1704776939291; Mon, 08
+ Jan 2024 21:08:59 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-Mailman-Approved-At: Tue, 09 Jan 2024 04:27:54 +0100
+References: <20231228115804.3626579-1-sumit.garg@linaro.org>
+ <20231228115804.3626579-4-sumit.garg@linaro.org>
+ <20240105204137.pdzgacapwpgpualp@bryanbrattlof.com>
+ <CAFA6WYMoEcg+niaf+3+a29c9Fon5LrJQ9E5X7YtWyjEX_1RKDA@mail.gmail.com>
+ <20240109015419.f6lwlhkudqy7uvly@bryanbrattlof.com>
+In-Reply-To: <20240109015419.f6lwlhkudqy7uvly@bryanbrattlof.com>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Tue, 9 Jan 2024 10:38:48 +0530
+Message-ID: <CAFA6WYM5P_8OaFuOMGwqCFFBwGwAui_uyVPX+gPFDsKFT_eePA@mail.gmail.com>
+Subject: Re: [PATCH v3 3/8] scripts/Makefile.lib: Statically define
+ *-u-boot.dtsi files location
+To: Bryan Brattlof <bb@ti.com>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
+ u-boot-custodians@lists.denx.de, trini@konsulko.com, sjg@chromium.org, 
+ robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
+ ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
+ xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
+ rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
+ rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,78 +97,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Nishanth Menon <nm@ti.com> writes:
-
-> Stop using the findfdt script and switch to setting the fdtfile from
-> C code.
+On Tue, 9 Jan 2024 at 07:24, Bryan Brattlof <bb@ti.com> wrote:
 >
-> While at this, replace findfdt in environment with a warning as it is
-> no longer needed
+> On January  8, 2024 thus sayeth Sumit Garg:
+> > Hi Bryan,
+> >
+> > On Sat, 6 Jan 2024 at 02:12, Bryan Brattlof <bb@ti.com> wrote:
+> > >
+> > > Hi Sumit!
+> > >
+> > > On December 28, 2023 thus sayeth Sumit Garg:
+> > > > Allow u-boot to build DTB from a different directory tree such that
+> > > > *-u-boot.dtsi files can be included from a common location. Currently
+> > > > that location is arch/$(ARCH)/dts/, so statically define that common
+> > > > location.
+> > > >
+> > > > This is needed for platform owners to start building DTB files from
+> > > > devicetree-rebasing directory but still being able to include
+> > > > *-u-boot.dtsi files.
+> > > >
+> > > > Reviewed-by: Tom Rini <trini@konsulko.com>
+> > > > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > > > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> > > > ---
+> > > >
+> > >
+> > > ...
+> > >
+> > > >
+> > > > diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+> > > > index 27b9437027c..09330421856 100644
+> > > > --- a/scripts/Makefile.lib
+> > > > +++ b/scripts/Makefile.lib
+> > >
+> > > ...
+> > >
+> > > >  # Uncomment for debugging
+> > > > @@ -190,6 +192,7 @@ dtsi_include_list += $(CONFIG_DEVICE_TREE_INCLUDES)
+> > > >  dtc_cpp_flags  = -Wp,-MD,$(depfile).pre.tmp -nostdinc                    \
+> > > >                $(UBOOTINCLUDE)                                         \
+> > > >                -I$(dir $<)                                             \
+> > > > +              -I$(u_boot_dtsi_loc)                                     \
+> > > >                -I$(srctree)/arch/$(ARCH)/dts/include                   \
+> > > >                -I$(srctree)/include                                    \
+> > > >                -D__ASSEMBLY__                                          \
+> > > > @@ -328,7 +331,7 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
+> > > >         echo '$(pound)include "$(f)"' >> $(pre-tmp);) \
+> > > >       $(HOSTCC) -E $(dtc_cpp_flags) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
+> > > >       $(DTC) -O dtb -o $@ -b 0 \
+> > > > -             -i $(dir $<) $(DTC_FLAGS) \
+> > > > +             -i $(dir $<) -i $(u_boot_dtsi_loc) $(DTC_FLAGS) \
+> > > >               -d $(depfile).dtc.tmp $(dtc-tmp) || \
+> > > >               (echo "Check $(shell pwd)/$(pre-tmp) for errors" && false) \
+> > > >               ; \
+> > >
+> > > One of the issues I see with having a separate OF_UPSTREAM and U-Boot dt
+> > > directory is when we have U-Boot board files that use dtsi files in the
+> > > OF_UPSTREAM folder.
+> > >
+> > > For example our reference boards uses the primary bootloader's dtb (eg:
+> > > k3-am62a7-r5-sk.dts) which #includes the k3-am62a7-sk.dts that will be
+> > > found in the OF_UPSTREAM directory and modifies it to give it the
+> > > perspective of the micro-controller it will be running on during boot.
+> >
+> > Thanks for bringing this up. I have been playing with the idea to
+> > reuse DT includes from upstream.
+> >
+> > >
+> > > What do you think if we have both paths included regardless if
+> > > OF_UPSTREAM is selected or not? IDK if this will break anyone else
+> >
+> > Sure, we should be able to do that if we maintain the correct order of
+> > include paths as per following patch [1]. If this works for you let me
+> > know and I will include it for v4.
+> >
 >
-> Signed-off-by: Nishanth Menon <nm@ti.com>
-> ---
->  board/ti/am62ax/am62ax.env       |  1 -
->  board/ti/am62ax/evm.c            | 10 ++++++++++
->  configs/am62ax_evm_a53_defconfig |  1 +
->  3 files changed, 11 insertions(+), 1 deletion(-)
+> This works beautifully.
 >
-> diff --git a/board/ti/am62ax/am62ax.env b/board/ti/am62ax/am62ax.env
-> index a6d967e982d4..334374abb73e 100644
-> --- a/board/ti/am62ax/am62ax.env
-> +++ b/board/ti/am62ax/am62ax.env
-> @@ -1,5 +1,4 @@
->  #include <env/ti/ti_common.env>
-> -#include <env/ti/default_findfdt.env>
->  #include <env/ti/mmc.env>
->  
->  name_kern=Image
-> diff --git a/board/ti/am62ax/evm.c b/board/ti/am62ax/evm.c
-> index cd3360a43029..62d3664936e7 100644
-> --- a/board/ti/am62ax/evm.c
-> +++ b/board/ti/am62ax/evm.c
-> @@ -13,6 +13,8 @@
->  #include <fdt_support.h>
->  #include <spl.h>
->  
-> +#include "../common/fdt_ops.h"
-> +
->  int board_init(void)
->  {
->  	return 0;
-> @@ -27,3 +29,11 @@ int dram_init_banksize(void)
->  {
->  	return fdtdec_setup_memory_banksize();
->  }
-> +
-> +#ifdef CONFIG_BOARD_LATE_INIT
-> +int board_late_init(void)
-> +{
-> +	ti_set_fdt_env(NULL, NULL);
+> I did have to hack around to get Makefile.spl working but this is headed
+> in the right direction for me :)
 
-If a board only has one FDT possible, why not just hard code the path
-here, rather than use the set_fdt_env() logic with NULLs and create/set
-TI_EVM_FDT_FOLDER_PATH config that is only used here anyway?
+Thanks for testing. I hope I can take that as a tested-by tag for this patch.
 
-If you think we might add additional board types / FDTs later, then
-instead let's formalize the fdt_map concept and create a CONFIG_USES_FDT_MAP
-that will then rely on the fdt_map and call the ti_set_fdt_env(), and if
-not set, then it just returns a hard coded value, which could be based on
-the CONFIG_DEFAULT_DEVICE_TREE config.
+-Sumit
 
-> +	return 0;
-> +}
-> +#endif
-> diff --git a/configs/am62ax_evm_a53_defconfig b/configs/am62ax_evm_a53_defconfig
-> index 38083586a3ec..e5fcd8cc5b6f 100644
-> --- a/configs/am62ax_evm_a53_defconfig
-> +++ b/configs/am62ax_evm_a53_defconfig
-> @@ -24,6 +24,7 @@ CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
->  CONFIG_BOOTSTD_FULL=y
->  CONFIG_BOOTSTD_DEFAULTS=y
->  CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
-> +CONFIG_BOARD_LATE_INIT=y
->  CONFIG_SPL_MAX_SIZE=0x58000
->  CONFIG_SPL_PAD_TO=0x0
->  CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-> -- 
-> 2.43.0
+>
+> Thank you
+> ~Bryan
