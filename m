@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3579C47073
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 14:26:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56F5BC46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 14:29:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A033877FD;
-	Tue,  9 Jan 2024 15:26:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id B28F1877FD;
+	Tue,  9 Jan 2024 15:29:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Dde4Otes";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="SNd4+cp1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0D2987899; Tue,  9 Jan 2024 15:26:29 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E990F87902; Tue,  9 Jan 2024 15:29:39 +0100 (CET)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C147877FA;
- Tue,  9 Jan 2024 15:26:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 76DA4877FA
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 15:29:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 409EQCV0069261;
- Tue, 9 Jan 2024 08:26:12 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704810372;
- bh=GxykHR0CTc9bXVscxtaeW500eH3bOFb7HrhKhbYoTgY=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=Dde4Otes5FaYnTlQXKhCwycoY1J1GL1mRs0FILreTMymPKXiSTVHd2yTU1Aufj4Kj
- 2tIkYAOmk7s10z2hkiBpHjVtwzFQT9piYYO1pC5b5e0dW+5Zgt489inzJzKGMo0VV5
- SysF+/kAblKuU/4WQ9BX7jc9xH0cfWLcAIGg2rOg=
-Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 409EQCRQ110563
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 9 Jan 2024 08:26:12 -0600
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 9
- Jan 2024 08:26:12 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 9 Jan 2024 08:26:12 -0600
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 409EQC6J089729;
- Tue, 9 Jan 2024 08:26:12 -0600
-Date: Tue, 9 Jan 2024 08:26:12 -0600
-From: Bryan Brattlof <bb@ti.com>
-To: Sumit Garg <sumit.garg@linaro.org>
-CC: <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>,
- <u-boot-custodians@lists.denx.de>, <trini@konsulko.com>,
- <sjg@chromium.org>, <robh+dt@kernel.org>,
- <krzysztof.kozlowski+dt@linaro.org>, <conor@kernel.org>,
- <neil.armstrong@linaro.org>, <caleb.connolly@linaro.org>,
- <ff@shokubai.tech>, <daniel.thompson@linaro.org>,
- <dgilmore@fedoraproject.org>, <pbrobinson@gmail.com>,
- <ilias.apalodimas@linaro.org>, <maxim.uvarov@linaro.org>,
- <b.galvani@gmail.com>, <xypron.glpk@gmx.de>, <michal.simek@amd.com>,
- <seanga2@gmail.com>, <rasmus.villemoes@prevas.dk>, <peng.fan@nxp.com>,
- <jh80.chung@samsung.com>, <rfried.dev@gmail.com>, <marex@denx.de>,
- <mibodhi@gmail.com>
-Subject: Re: [PATCH v3 3/8] scripts/Makefile.lib: Statically define
- *-u-boot.dtsi files location
-Message-ID: <20240109142612.ymzucfcjtmz5jix7@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20231228115804.3626579-1-sumit.garg@linaro.org>
- <20231228115804.3626579-4-sumit.garg@linaro.org>
- <20240105204137.pdzgacapwpgpualp@bryanbrattlof.com>
- <CAFA6WYMoEcg+niaf+3+a29c9Fon5LrJQ9E5X7YtWyjEX_1RKDA@mail.gmail.com>
- <20240109015419.f6lwlhkudqy7uvly@bryanbrattlof.com>
- <CAFA6WYM5P_8OaFuOMGwqCFFBwGwAui_uyVPX+gPFDsKFT_eePA@mail.gmail.com>
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-336c9acec03so2895851f8f.2
+ for <u-boot@lists.denx.de>; Tue, 09 Jan 2024 06:29:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1704810576; x=1705415376;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=66jQDCRtZqevghi5u/yWd7i64gD8dZDebV3kpyuIqE0=;
+ b=SNd4+cp1TUUL/TIX8N+szgKvbn3ujpyyXHhSmsuQYbgLu2tIm4EWC/HcJP4P4boQ7u
+ W49qnxn0nQVkqOX7mW5pkiXDu8slyBW42Xb6pWDSfzHhNX/o9/+bJ+tscwzuV3NpJ1bT
+ c1eR60NjJFiGabjcnKWVUFS7QeQTKTb0zDC+xZYbihwYfDn62RojxpmGqp8dYk2gBOUP
+ gmL9EZ5EVPmwU5onZjTER5WbJ9xLf+xYcfYMeMpxZIqhZw8M2AemWoIbe5pL03lrghTh
+ l8WDnV6Kc2WBKNkYKvLpmomsYq9cKnK/xF5AMNbSkJGj3dUdG42CmiyhmufvuCAlp5cw
+ 5s2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704810576; x=1705415376;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=66jQDCRtZqevghi5u/yWd7i64gD8dZDebV3kpyuIqE0=;
+ b=BMzvUD+VU46evjU3NyV/73A/fM1G7/acMawM2zHIM9b7/c+1RYl6RdprxnnMKL2agX
+ fhQrRjrSY1HebNIowhD00RTFEnwZYzPvwWBdoebTWQuUUjBvjbKVHaccoNjeUIkdBpcb
+ g8v/c37r2OEy0rid3nj+585jXixdDh1WMVq+U3c+SdID/xsjHpXj5iMRc0mIRBqypi1/
+ sVWOSixC0KbPd/HrAwt6vX23K9zbjFPOHMU/9pxFlLSVmoR1Q3uZKbbZ1qO/x+r3sQ3j
+ kvCH38zCRXRoHVf3zOeyxuCS3iMijFDfCwlNtaXt80RdJJRp2xQY93wbu+xQU99HIKvY
+ GxbQ==
+X-Gm-Message-State: AOJu0YxHL35EPiqit0AqDuK99SmYqEmlYgR+sGAZk67wOIq/HTguiiS+
+ w2lxNJ85HJtp/QWQl32eRIKfZNKl4zRXS15+10hmOnwQEZI=
+X-Google-Smtp-Source: AGHT+IGJouOCKfsIbKTQs6HXAtp36Yf0lMAOMz9o/RnPB6t/VeqjuamXbbqFlrDTkjokC7HmLdckNA==
+X-Received: by 2002:a05:6000:cc8:b0:336:1aef:7352 with SMTP id
+ dq8-20020a0560000cc800b003361aef7352mr584098wrb.109.1704810575857; 
+ Tue, 09 Jan 2024 06:29:35 -0800 (PST)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ l1-20020a05600012c100b00336670abdcasm2573592wrx.40.2024.01.09.06.29.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 09 Jan 2024 06:29:35 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Manorit Chawdhry <m-chawdhry@ti.com>, Siddharth Vadapalli
+ <s-vadapalli@ti.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Manorit Chawdhry <m-chawdhry@ti.com>
+Subject: Re: [PATCH 2/2] include: env: ti: add default for
+ do_main_cpsw0_qsgmii_phyinit
+In-Reply-To: <20240108-b4-upstream-fix-semicolon-v1-2-9437b3dc90ea@ti.com>
+References: <20240108-b4-upstream-fix-semicolon-v1-0-9437b3dc90ea@ti.com>
+ <20240108-b4-upstream-fix-semicolon-v1-2-9437b3dc90ea@ti.com>
+Date: Tue, 09 Jan 2024 15:29:34 +0100
+Message-ID: <87frz6wpf5.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <CAFA6WYM5P_8OaFuOMGwqCFFBwGwAui_uyVPX+gPFDsKFT_eePA@mail.gmail.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,93 +91,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On January  9, 2024 thus sayeth Sumit Garg:
-> On Tue, 9 Jan 2024 at 07:24, Bryan Brattlof <bb@ti.com> wrote:
-> >
-> > On January  8, 2024 thus sayeth Sumit Garg:
-> > > Hi Bryan,
-> > >
-> > > On Sat, 6 Jan 2024 at 02:12, Bryan Brattlof <bb@ti.com> wrote:
-> > > >
-> > > > Hi Sumit!
-> > > >
-> > > > On December 28, 2023 thus sayeth Sumit Garg:
-> > > > > Allow u-boot to build DTB from a different directory tree such that
-> > > > > *-u-boot.dtsi files can be included from a common location. Currently
-> > > > > that location is arch/$(ARCH)/dts/, so statically define that common
-> > > > > location.
-> > > > >
-> > > > > This is needed for platform owners to start building DTB files from
-> > > > > devicetree-rebasing directory but still being able to include
-> > > > > *-u-boot.dtsi files.
-> > > > >
-> > > > > Reviewed-by: Tom Rini <trini@konsulko.com>
-> > > > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > > > > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > > > > ---
-> > > > >
-> > > >
-> > > > ...
-> > > >
-> > > > >
-> > > > > diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-> > > > > index 27b9437027c..09330421856 100644
-> > > > > --- a/scripts/Makefile.lib
-> > > > > +++ b/scripts/Makefile.lib
-> > > >
-> > > > ...
-> > > >
-> > > > >  # Uncomment for debugging
-> > > > > @@ -190,6 +192,7 @@ dtsi_include_list += $(CONFIG_DEVICE_TREE_INCLUDES)
-> > > > >  dtc_cpp_flags  = -Wp,-MD,$(depfile).pre.tmp -nostdinc                    \
-> > > > >                $(UBOOTINCLUDE)                                         \
-> > > > >                -I$(dir $<)                                             \
-> > > > > +              -I$(u_boot_dtsi_loc)                                     \
-> > > > >                -I$(srctree)/arch/$(ARCH)/dts/include                   \
-> > > > >                -I$(srctree)/include                                    \
-> > > > >                -D__ASSEMBLY__                                          \
-> > > > > @@ -328,7 +331,7 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
-> > > > >         echo '$(pound)include "$(f)"' >> $(pre-tmp);) \
-> > > > >       $(HOSTCC) -E $(dtc_cpp_flags) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
-> > > > >       $(DTC) -O dtb -o $@ -b 0 \
-> > > > > -             -i $(dir $<) $(DTC_FLAGS) \
-> > > > > +             -i $(dir $<) -i $(u_boot_dtsi_loc) $(DTC_FLAGS) \
-> > > > >               -d $(depfile).dtc.tmp $(dtc-tmp) || \
-> > > > >               (echo "Check $(shell pwd)/$(pre-tmp) for errors" && false) \
-> > > > >               ; \
-> > > >
-> > > > One of the issues I see with having a separate OF_UPSTREAM and U-Boot dt
-> > > > directory is when we have U-Boot board files that use dtsi files in the
-> > > > OF_UPSTREAM folder.
-> > > >
-> > > > For example our reference boards uses the primary bootloader's dtb (eg:
-> > > > k3-am62a7-r5-sk.dts) which #includes the k3-am62a7-sk.dts that will be
-> > > > found in the OF_UPSTREAM directory and modifies it to give it the
-> > > > perspective of the micro-controller it will be running on during boot.
-> > >
-> > > Thanks for bringing this up. I have been playing with the idea to
-> > > reuse DT includes from upstream.
-> > >
-> > > >
-> > > > What do you think if we have both paths included regardless if
-> > > > OF_UPSTREAM is selected or not? IDK if this will break anyone else
-> > >
-> > > Sure, we should be able to do that if we maintain the correct order of
-> > > include paths as per following patch [1]. If this works for you let me
-> > > know and I will include it for v4.
-> > >
-> >
-> > This works beautifully.
-> >
-> > I did have to hack around to get Makefile.spl working but this is headed
-> > in the right direction for me :)
-> 
-> Thanks for testing. I hope I can take that as a tested-by tag for this patch.
-> 
+Hi Manorit,
 
-Absolutely 
+Thank you for the patch.
 
-Tested-by: Bryan Brattlof <bb@ti.com>
+On lun., janv. 08, 2024 at 13:48, Manorit Chawdhry <m-chawdhry@ti.com> wrote:
 
-~Bryan
+> By default this variable is unset and this causes the test condition to
+> fail on devices that don't have this defined. Set a default value for
+> this.
+>
+>    => boot
+>    ## Error: "main_cpsw0_qsgmii_phyinit" not defined
+>    [...]
+>
+> Fixes: 0d72b0f2f83b ("include: env: ti: ti_common: Run main_cpsw0_qsgmii_phyinit conditionally")
+>
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+> ---
+>  include/env/ti/ti_common.env | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/include/env/ti/ti_common.env b/include/env/ti/ti_common.env
+> index 5473f633aa7d..02b410c3adc4 100644
+> --- a/include/env/ti/ti_common.env
+> +++ b/include/env/ti/ti_common.env
+> @@ -22,6 +22,7 @@ get_fit_overlaystring=
+>  	done;
+>  get_fit_config=setexpr name_fit_config gsub / _ conf-${fdtfile}
+>  run_fit=run get_fit_config; bootm ${addr_fit}#${name_fit_config}${overlaystring}
+> +do_main_cpsw0_qsgmii_phyinit=0
+>  bootcmd_ti_mmc=
+>  	run findfdt; run init_${boot};
+>  #if CONFIG_CMD_REMOTEPROC
+>
+> -- 
+> 2.43.0
