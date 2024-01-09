@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33BF9C47073
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 14:02:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29D5DC46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 14:16:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90A1A878CF;
-	Tue,  9 Jan 2024 15:02:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id A353D878CF;
+	Tue,  9 Jan 2024 15:16:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="QSiKu9sm";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="B/HwiM5N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 573B7878E1; Tue,  9 Jan 2024 15:02:24 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EFA70878CF; Tue,  9 Jan 2024 15:16:09 +0100 (CET)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09C1C87867
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 15:02:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C84CD87871
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 15:16:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahiroy@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 04C99CE18DD
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 14:02:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16704C433A6
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 14:02:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1704808939;
- bh=ySGWGM6KAkW2Wvf68TJ4tX2XgT/a98DZvuxdIxEnpFg=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=QSiKu9smlPJRTZ5t2XfwSf201qynpyqIXrjx2VivuJqP+AxM9kA3+HMzIAv6H0Q7S
- kkSsSg4uq+IzBGkq1BkauN/kmxjau2SUxLmvu91qLuxLpD9AY2NLpAbxSVuDtGtozt
- DlxXZ92Qt/+2uafPOuXWTEYN95m3Bd6uRwCdBE206GrgqNHUuG5ex74X/tQlavj6nG
- m1qGsGL0SVmX5Z+adZKVfi16ZfqA2hn847LFRPnU3GW5pNSe+7/+BOxbwv5QWrJvwJ
- V4+LU3C2eKnRE9fZhQ1HV7SHD7Pf+pJFrEe9XOk04NocNe9bEaxXDvhTHw2FJTtzPs
- z6PeZsLKUdp/A==
-Received: by mail-oa1-f41.google.com with SMTP id
- 586e51a60fabf-2041ed74956so1780376fac.0
- for <u-boot@lists.denx.de>; Tue, 09 Jan 2024 06:02:19 -0800 (PST)
-X-Gm-Message-State: AOJu0YzgcWH8wnTZSuC+kagof/d4U0BOAoB4gYR3K5g6vQuiOpMNcF+Z
- LtBodc2iHBtYSvuy53MGsdiZB2N1MkC0Dbl2hJQ=
-X-Google-Smtp-Source: AGHT+IFlTnlM5PnQAacW9Sy3tlgTzLI2sRSd9sbzVX2G3fIH3OgI3KNJpyEpr0ABbrCkSjtQP8yf/hVfXgpGMPs7EdA=
-X-Received: by 2002:a05:6870:170e:b0:203:bb46:fb67 with SMTP id
- h14-20020a056870170e00b00203bb46fb67mr305930oae.43.1704808938423; Tue, 09 Jan
- 2024 06:02:18 -0800 (PST)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-40e52ebd63dso2181545e9.1
+ for <u-boot@lists.denx.de>; Tue, 09 Jan 2024 06:16:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1704809765; x=1705414565;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6IMwiQwoFFC0VBBN0Uic/oFn/INod1XpLWgH4lGnZJU=;
+ b=B/HwiM5Nm3i/ZInXQuhcfIyU4cz50bHbGBidYj//5gyCU76L+CoJ1LMcYidAEq2nbx
+ HR23EQAH3jb1UXpBNQZuY/J79c48/alZAHCbzVGrFxI5am2mLnIy4GT3ZUMnDc2Rg9/1
+ 8zMn2YkC08pVAIlpsXIZMGHBWn3+hV/+3DkaEG8Mge+EbuLekDkylJXwy7MZK8jzCkgy
+ VKhriHmE63205eIukvBdrJGbm31kMxEZcjYlbA9uOGqQwj35rwLAfd9RrW1ZOhd+kPoQ
+ XAHIB24zopKKvb+ydMSkxSPsHDmDA+KxjOVck9lrxShGkCaH7PVGq4AKGVHqAXREAt6A
+ rx6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704809765; x=1705414565;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=6IMwiQwoFFC0VBBN0Uic/oFn/INod1XpLWgH4lGnZJU=;
+ b=v7XrLUeM7p/U+UHnDcL3Tah5Fmd+pyDSn2tgY7s3XAawQjSeQKIo/Sn/T8RisW0R2V
+ GEoycGx9RKJ9+Gg6sMoiukOcXA1TQwpjZdb8Ux7bm/OPusJUXWxec2HB094Dimv2tUBZ
+ NfavvSBuyuEYpCV/W6X0AMNVBMremF2tyZIZe5wvt3FII0j13DTixd6iyBNtlEjxpLVF
+ K06BnyRYmkVABd+RyU0JSvHvVYHufh6t+Uq+33LiYdZYtNTTMgzTYoW/M5Zmwq6jX4BI
+ e6cKxwEBbnZvglZMJ2q7uX+3y+utY3NAttTc0O3rkAPi5qxP9SkOqwAy6SRpMkxiuC4h
+ uEmg==
+X-Gm-Message-State: AOJu0Yzt8gRQn2t7oGfQhnOzS9TnOK62KM2Cay9lPG8ft79/JUhRggn9
+ aUsTNNsRDKwWFAPIkyvabyUfnEn487GHDw==
+X-Google-Smtp-Source: AGHT+IGLOZi8tPPrBnHqnqF4WMM7ndser+MFECXNEVZA48OG0zGwdI52azYopCZLrhrsQTB1IF/7wg==
+X-Received: by 2002:a05:600c:3504:b0:40d:3b2d:99a0 with SMTP id
+ h4-20020a05600c350400b0040d3b2d99a0mr2594192wmq.81.1704809765497; 
+ Tue, 09 Jan 2024 06:16:05 -0800 (PST)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ g17-20020a05600c311100b0040d81ca11casm3785126wmo.28.2024.01.09.06.16.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 09 Jan 2024 06:16:05 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Manorit Chawdhry <m-chawdhry@ti.com>, Siddharth Vadapalli
+ <s-vadapalli@ti.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Manorit Chawdhry <m-chawdhry@ti.com>
+Subject: Re: [PATCH 1/2] include: env: ti: ti_common: Fix a missing semicolon
+In-Reply-To: <20240108-b4-upstream-fix-semicolon-v1-1-9437b3dc90ea@ti.com>
+References: <20240108-b4-upstream-fix-semicolon-v1-0-9437b3dc90ea@ti.com>
+ <20240108-b4-upstream-fix-semicolon-v1-1-9437b3dc90ea@ti.com>
+Date: Tue, 09 Jan 2024 15:16:04 +0100
+Message-ID: <87il42wq1n.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20231202035511.487946-1-sjg@chromium.org>
- <20231202035511.487946-3-sjg@chromium.org>
- <20231213121353.GA31326@willie-the-truck>
- <CAFLszTjfmSx1YMqzb2TsQf7sP4KrcQB=X7DY_HxRQp0J5HAppQ@mail.gmail.com>
-In-Reply-To: <CAFLszTjfmSx1YMqzb2TsQf7sP4KrcQB=X7DY_HxRQp0J5HAppQ@mail.gmail.com>
-From: Masahiro Yamada <masahiroy@kernel.org>
-Date: Tue, 9 Jan 2024 23:01:42 +0900
-X-Gmail-Original-Message-ID: <CAK7LNAQRCDC03e=TVO=k4FuD2a2RdTy7yLr3UptQjVCX7pM1CA@mail.gmail.com>
-Message-ID: <CAK7LNAQRCDC03e=TVO=k4FuD2a2RdTy7yLr3UptQjVCX7pM1CA@mail.gmail.com>
-Subject: Re: [PATCH v9 2/2] arm64: boot: Support Flat Image Tree
-To: Simon Glass <sjg@chromium.org>
-Cc: Will Deacon <will@kernel.org>, linux-arm-kernel@lists.infradead.org, 
- Ahmad Fatoum <a.fatoum@pengutronix.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Nicolas Schier <nicolas@fjasle.eu>, Tom Rini <trini@konsulko.com>, 
- Catalin Marinas <catalin.marinas@arm.com>, Jonathan Corbet <corbet@lwn.net>, 
- Nathan Chancellor <nathan@kernel.org>, Nick Terrell <terrelln@fb.com>,
- linux-doc@vger.kernel.org, 
- linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org, 
- workflows@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,164 +90,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Manorit,
 
+Thank you for the patch.
 
-On Wed, Jan 3, 2024 at 8:47=E2=80=AFAM Simon Glass <sjg@chromium.org> wrote=
-:
+On lun., janv. 08, 2024 at 13:48, Manorit Chawdhry <m-chawdhry@ti.com> wrote:
+
+> Fix a missing semicolon that leads to syntax error while booting j721s2.
 >
-> Hi Masahiro,
+>     Importing environment from mmc1 ...
+>     syntax error at 'run'HUSH died!
 >
-> On Wed, Dec 13, 2023 at 5:14=E2=80=AFAM Will Deacon <will@kernel.org> wro=
-te:
-> >
-> > On Fri, Dec 01, 2023 at 08:54:42PM -0700, Simon Glass wrote:
-> > > Add a script which produces a Flat Image Tree (FIT), a single file
-> > > containing the built kernel and associated devicetree files.
-> > > Compression defaults to gzip which gives a good balance of size and
-> > > performance.
-> > >
-> > > The files compress from about 86MB to 24MB using this approach.
-> > >
-> > > The FIT can be used by bootloaders which support it, such as U-Boot
-> > > and Linuxboot. It permits automatic selection of the correct
-> > > devicetree, matching the compatible string of the running board with
-> > > the closest compatible string in the FIT. There is no need for
-> > > filenames or other workarounds.
-> > >
-> > > Add a 'make image.fit' build target for arm64, as well. Use
-> > > FIT_COMPRESSION to select a different algorithm.
-> > >
-> > > The FIT can be examined using 'dumpimage -l'.
-> > >
-> > > This features requires pylibfdt (use 'pip install libfdt'). It also
-> > > requires compression utilities for the algorithm being used. Supporte=
-d
-> > > compression options are the same as the Image.xxx files. For now ther=
-e
-> > > is no way to change the compression other than by editing the rule fo=
-r
-> > > $(obj)/image.fit
-> > >
-> > > While FIT supports a ramdisk / initrd, no attempt is made to support
-> > > this here, since it must be built separately from the Linux build.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > > Changes in v9:
-> > > - Move the compression control into Makefile.lib
-> > >
-> > > Changes in v8:
-> > > - Drop compatible string in FDT node
-> > > - Correct sorting of MAINTAINERS to before ARM64 PORT
-> > > - Turn compress part of the make_fit.py comment in to a sentence
-> > > - Add two blank lines before parse_args() and setup_fit()
-> > > - Use 'image.fit: dtbs' instead of BUILD_DTBS var
-> > > - Use '$(<D)/dts' instead of '$(dir $<)dts'
-> > > - Add 'mkimage' details Documentation/process/changes.rst
-> > > - Allow changing the compression used
-> > > - Tweak cover letter since there is only one clean-up patch
-> > >
-> > > Changes in v7:
-> > > - Add Image as a dependency of image.fit
-> > > - Drop kbuild tag
-> > > - Add dependency on dtbs
-> > > - Drop unnecessary path separator for dtbs
-> > > - Rebase to -next
-> > >
-> > > Changes in v5:
-> > > - Drop patch previously applied
-> > > - Correct compression rule which was broken in v4
-> > >
-> > > Changes in v4:
-> > > - Use single quotes for UIMAGE_NAME
-> > >
-> > > Changes in v3:
-> > > - Drop temporary file image.itk
-> > > - Drop patch 'Use double quotes for image name'
-> > > - Drop double quotes in use of UIMAGE_NAME
-> > > - Drop unnecessary CONFIG_EFI_ZBOOT condition for help
-> > > - Avoid hard-coding "arm64" for the DT architecture
-> > >
-> > > Changes in v2:
-> > > - Drop patch previously applied
-> > > - Add .gitignore file
-> > > - Move fit rule to Makefile.lib using an intermediate file
-> > > - Drop dependency on CONFIG_EFI_ZBOOT
-> > > - Pick up .dtb files separately from the kernel
-> > > - Correct pylint too-many-args warning for write_kernel()
-> > > - Include the kernel image in the file count
-> > > - Add a pointer to the FIT spec and mention of its wide industry usag=
-e
-> > > - Mention the kernel version in the FIT description
-> > >
-> > >  Documentation/process/changes.rst |   9 +
-> > >  MAINTAINERS                       |   7 +
-> > >  arch/arm64/Makefile               |   7 +-
-> > >  arch/arm64/boot/.gitignore        |   1 +
-> > >  arch/arm64/boot/Makefile          |   6 +-
-> > >  scripts/Makefile.lib              |  16 ++
-> > >  scripts/make_fit.py               | 291 ++++++++++++++++++++++++++++=
-++
-> > >  7 files changed, 334 insertions(+), 3 deletions(-)
-> > >  create mode 100755 scripts/make_fit.py
-> >
-> > I'll need Masahiro's Ack on the scripts/ changes before I can take this
-> > one.
+> Fixes: 0d72b0f2f83b ("include: env: ti: ti_common: Run main_cpsw0_qsgmii_phyinit conditionally")
 >
-> Any thoughts on this request, please?
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+> ---
+>  include/env/ti/ti_common.env | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> Regards,
-> Simon
+> diff --git a/include/env/ti/ti_common.env b/include/env/ti/ti_common.env
+> index f0f89a228767..5473f633aa7d 100644
+> --- a/include/env/ti/ti_common.env
+> +++ b/include/env/ti/ti_common.env
+> @@ -27,7 +27,7 @@ bootcmd_ti_mmc=
+>  #if CONFIG_CMD_REMOTEPROC
+>  	if test ${do_main_cpsw0_qsgmii_phyinit} -eq 1;
+>  		then run main_cpsw0_qsgmii_phyinit;
+> -	fi
+> +	fi;
+>  	run boot_rprocs;
+>  #endif
+>  	if test ${boot_fit} -eq 1;
 >
-
-
-
-As I mentioned before, I am concerned with having
-the same "compatible" entries, with different contents,
-as you use the "compatible" string as an ID to selecting
-the target config node, right?
-
-
-
-
-
-$ fdtdump  arch/arm64/boot/image.fit
-
-        ...
-
-        conf-10 {
-            compatible =3D "tq,am642-tqma6442l-mbax4xxl",
-"tq,am642-tqma6442l", "ti,am642";
-            description =3D "TQ-Systems TQMa64xxL SoM on MBax4xxL carrier b=
-oard";
-            fdt =3D "fdt-10";
-            kernel =3D "kernel";
-        };
-
-        ...
-
-        conf-25 {
-            compatible =3D "tq,am642-tqma6442l-mbax4xxl",
-"tq,am642-tqma6442l", "ti,am642";
-            description =3D "TQ-Systems TQMa64xxL SoM on MBax4xxL carrier b=
-oard";
-            fdt =3D "fdt-25";
-            kernel =3D "kernel";
-        };
-
-
-
-
-
-
-
-
-
-
-
-
---=20
-Best Regards
-Masahiro Yamada
+> -- 
+> 2.43.0
