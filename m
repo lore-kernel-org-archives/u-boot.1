@@ -4,77 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C76A1C47079
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 17:49:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25F25C4706C
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 19:16:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BAC987A38;
-	Tue,  9 Jan 2024 18:49:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 275C48785F;
+	Tue,  9 Jan 2024 20:16:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Fl1y6RLN";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ch0RlR35";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E00BF87A0A; Tue,  9 Jan 2024 18:49:50 +0100 (CET)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CD1ED8786F; Tue,  9 Jan 2024 20:16:34 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBDAC87942
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 18:49:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A14A387855
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 20:16:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-78314e00337so240237385a.0
- for <u-boot@lists.denx.de>; Tue, 09 Jan 2024 09:49:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1704822587; x=1705427387; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=INqV2WuyQr7MS2dgarRzTq6q53fXC3goF40zK98J0/Q=;
- b=Fl1y6RLNsCOLYwAhhT3G/SK3JtKbm7twP0oHasc8eHToGyMc151m3UnnCtwCmlQB2x
- wORWX4slYZZqM2M0uS0YyWRzC0AT/I7AnYw6i/30XVUG4H4wpzmUCw1fD5eLZfZbMR0z
- edi2sJEaWuK7Fmzgr4xH9AcANxHLOuUtj04Yk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704822587; x=1705427387;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=INqV2WuyQr7MS2dgarRzTq6q53fXC3goF40zK98J0/Q=;
- b=dpIAIN9qKmDuIFnr/LI7P375gqbEQM41Vb429gc5jVOQfH33AybwAOuCCbR4gyAol4
- 81rRfcQY/07SEQ7Hfz/Iz4CxhHTLB9aNGrfd6YOkmfA0o6b53b0/Wko1684C2PUW6hTw
- GZOvr/WSMSoOz0fshFodd3CpU5PcRtV/rpOdwfBOG4YBwOb53gcXB5ne1Unr6auR+gVX
- IfydbWueL+VITa6fyB3qVvxyWntGfnGiSIMZKEfPyAU9lUVTNuIlGchX4Yx2BcV8X9g3
- +i0REabTYqkMzyATLcjsVOcnNSylVFCLd28DMVRX3jqcqlWfqLwJztjVv1TVRrSRML99
- AJ1Q==
-X-Gm-Message-State: AOJu0Yzg/LI2cwLyMjUb/OkqQzwxiTxinv5RbKk2GkeFyk/8e4DcphrH
- A/q97u5DY+2aZtv5WkR07O1eZPiYADZPIA==
-X-Google-Smtp-Source: AGHT+IF/2MTLtYKLIW+u2U1mxs5l/NJYjX0yBnJ0dGPWPd4Ev1lzpUDJrTUL6nnxLhY77vk4BebG+A==
-X-Received: by 2002:a05:620a:4251:b0:77d:9c23:46c5 with SMTP id
- w17-20020a05620a425100b0077d9c2346c5mr6955496qko.22.1704822587619; 
- Tue, 09 Jan 2024 09:49:47 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- e9-20020a37ac09000000b00781d3f29215sm965772qkm.91.2024.01.09.09.49.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jan 2024 09:49:47 -0800 (PST)
-Date: Tue, 9 Jan 2024 12:49:45 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Minkyu Kang <mk7.kang@samsung.com>
-Cc: u-boot@lists.denx.de, promsoft@gmail.com
-Subject: Re: Please pull u-boot-samsung master
-Message-ID: <20240109174945.GV1610741@bill-the-cat>
-References: <CGME20240109015516epcas1p368e48c6d3e2433577bf7d0684966c45b@epcas1p3.samsung.com>
- <0a3d01da429e$e4427ec0$acc77c40$@samsung.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 409JGSVh008129;
+ Tue, 9 Jan 2024 13:16:28 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1704827788;
+ bh=fAI5NYFgXb7OO9faXknkjzOcsCu+H/sYERF0Iz9LQC4=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=ch0RlR35LAmqjvGQ84GD8Q8MZ5Gc998UzJ4lmhqD5Hb1GWHowRME0FpnDpRB2EhHa
+ bUuKeqk+CBOZYFTPG3bClmhc+T5lMmkx1VLWJffb/oTi96hzsckbvguIByEKJB777D
+ lHDNPvpqlGX/wH/PjBczXR5SudVJeK8ZfjWvxSUI=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 409JGSQX019937
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 9 Jan 2024 13:16:28 -0600
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 9
+ Jan 2024 13:16:27 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 9 Jan 2024 13:16:27 -0600
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 409JGR4B105203;
+ Tue, 9 Jan 2024 13:16:27 -0600
+Date: Tue, 9 Jan 2024 13:16:27 -0600
+From: Nishanth Menon <nm@ti.com>
+To: Roger Quadros <rogerq@kernel.org>
+CC: <trini@konsulko.com>, <michael@amarulasolutions.com>,
+ <dario.binacchi@amarulasolutions.com>, <afd@ti.com>, <vigneshr@ti.com>,
+ <praneeth@ti.com>, <srk@ti.com>, <r-gunasekaran@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: Re: [PATCH 4/4] configs: am64x_evm_a53_defconfig: Enable NAND
+Message-ID: <20240109191627.jn2b4nsczlsynik2@carpenter>
+References: <20240109122605.51951-1-rogerq@kernel.org>
+ <20240109122605.51951-5-rogerq@kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="X0mRMReG20h64Jn+"
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <0a3d01da429e$e4427ec0$acc77c40$@samsung.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20240109122605.51951-5-rogerq@kernel.org>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,68 +81,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 14:26-20240109, Roger Quadros wrote:
+> Enables configuration required for NAND in SPL and u-boot.
+> 
+> Enable MTD Driver model and MTD + UBI command line utilities.
+> 
+> Add mtdids/mtdparts for NAND as it is required for u-boot's
+> MTD subsystem commands to recognize NAND partitions.
+> 
+> Add u-boot partition location.
+> 
+> Signed-off-by: Roger Quadros <rogerq@kernel.org>
+> ---
+>  configs/am64x_evm_a53_defconfig | 32 ++++++++++++++++++++++++++++++++
+>  1 file changed, 32 insertions(+)
+> 
+> diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
+> index 05e35a8db6..e22153a958 100644
+> --- a/configs/am64x_evm_a53_defconfig
+> +++ b/configs/am64x_evm_a53_defconfig
+> @@ -66,10 +66,15 @@ CONFIG_CMD_DFU=y
+>  CONFIG_CMD_GPT=y
+>  CONFIG_CMD_I2C=y
+>  CONFIG_CMD_MMC=y
+> +CONFIG_CMD_MTD=y
+>  CONFIG_CMD_USB=y
+>  CONFIG_CMD_TIME=y
+>  CONFIG_CMD_PMIC=y
+>  CONFIG_CMD_REGULATOR=y
+> +CONFIG_CMD_MTDPARTS=y
+> +CONFIG_MTDIDS_DEFAULT="nand0=omap2-nand.0"
+> +CONFIG_MTDPARTS_DEFAULT="mtdparts=omap2-nand.0:2m(NAND.tiboot3),2m(NAND.tispl),2m(NAND.tiboot3.backup),4m(NAND.u-boot),256k(NAND.u-boot-env),256k(NAND.u-boot-env.backup),-(NAND.file-system)"
+> +CONFIG_CMD_UBI=y
+>  CONFIG_OF_CONTROL=y
+>  CONFIG_SPL_OF_CONTROL=y
+>  CONFIG_OF_LIST="k3-am642-evm k3-am642-sk"
+> @@ -107,6 +112,9 @@ CONFIG_MMC_SDHCI=y
+>  CONFIG_MMC_SDHCI_ADMA=y
+>  CONFIG_SPL_MMC_SDHCI_ADMA=y
+>  CONFIG_MMC_SDHCI_AM654=y
+> +CONFIG_MTD=y
+> +CONFIG_SPL_MTD=y
+> +CONFIG_DM_MTD=y
+>  CONFIG_DM_SPI_FLASH=y
+>  CONFIG_SPI_FLASH_SPANSION=y
+>  CONFIG_SPI_FLASH_STMICRO=y
+> @@ -161,3 +169,27 @@ CONFIG_USB_GADGET_DOWNLOAD=y
+>  CONFIG_USB_FUNCTION_MASS_STORAGE=y
+>  CONFIG_SPL_DFU=y
+>  CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
+> +CONFIG_MEMORY=y
+> +CONFIG_SPL_MEMORY=y
+> +CONFIG_TI_GPMC=y
+> +CONFIG_MTD_RAW_NAND=y
+> +CONFIG_NAND_OMAP_GPMC=y
+> +CONFIG_CMD_NAND=y
+> +CONFIG_NAND_OMAP_ELM=y
+> +CONFIG_NAND_OMAP_ECCSCHEME_BCH8_CODE_HW=y
+> +CONFIG_SYS_NAND_BLOCK_SIZE=0x40000
+> +CONFIG_SYS_NAND_ONFI_DETECTION=y
+> +CONFIG_SYS_NAND_PAGE_SIZE=0x1000
+> +CONFIG_SYS_NAND_PAGE_COUNT=0x40
+> +CONFIG_SYS_NAND_OOBSIZE=0x100
+> +CONFIG_SPL_NAND_SUPPORT=y
+> +CONFIG_SPL_NAND_DRIVERS=y
+> +CONFIG_SPL_NAND_BASE=y
+> +CONFIG_SPL_NAND_IDENT=y
+> +CONFIG_SPL_NAND_ECC=y
+> +CONFIG_SYS_NAND_MAX_CHIPS=1
+> +CONFIG_SYS_MAX_NAND_DEVICE=1
+> +# CONFIG_SPL_NAND_AM33XX_BCH is not set
+> +CONFIG_SPL_MTD_SUPPORT=y
+> +CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
+> +CONFIG_SYS_NAND_U_BOOT_OFFS=0x600000
+> -- 
+> 2.34.1
+> 
 
---X0mRMReG20h64Jn+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Why not a config fragment?
 
-On Tue, Jan 09, 2024 at 10:55:16AM +0900, Minkyu Kang wrote:
-
-> Dear Tom,
->=20
-> The following changes since commit 2f0282922b2c458eea7f85c500a948a587437b=
-63:
->=20
->   Prepare v2024.01-rc4 (2023-12-04 13:46:56 -0500)
->=20
-> are available in the git repository at:
->=20
->   git@source.denx.de:u-boot/custodians/u-boot-samsung.git master
->=20
-> for you to fetch changes up to 5631d20e2ef1008d55569790f79672ea8cc6894b:
->=20
->   pinctrl: exynos: Convert to use livetree API for fdt access (2023-12-07
-> 18:58:48 +0900)
->=20
-> ----------------------------------------------------------------
-> Sam Protsenko (7):
->       pinctrl: exynos: Improve coding style
->       pinctrl: exynos: Extract pin parsing code into a separate function
->       pinctrl: exynos: Rework pin_to_bank_base() to obtain data by name
->       pinctrl: exynos: Support different register types in pin banks
->       pinctrl: exynos: Refactor handling the pin related dt properties
->       pinctrl: exynos: Reduce variables scope
->       pinctrl: exynos: Convert to use livetree API for fdt access
->=20
-> Stefan Bosch (2):
->       common: board_f: change calculation of gd->mon_len to fix s5p4418
-> reloc
->       arm: s5p4418: fix relocation of vectors
-
-Taking just the pincttrl changes here (as I know this blocks other work)
-I've taken that and I assume Stefan will fix microblaze shortly and then
-his work can be picked up.
-
---=20
-Tom
-
---X0mRMReG20h64Jn+
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWdhzkACgkQFHw5/5Y0
-tyw8+Av+JHpVzbZbiS2UM6zdvr7S2/86rRC/U1vS1ZkYW1kiB4eFLztft3tQxwb/
-XXyKxrX+tkW7SIWZImt1gOUVdmhsaG0sUFIDb7b3yvn+ZFPQ2gHqMqW7xPpNFDne
-Pz2OmLBZLWTaVZXUftvvt1D355EFNJg5Xmf74quJf/tSXMAZPC12uZExWimk15zc
-5iN2NALTDBUhqNVX9FnlAM9Aw8rnoAXAsOMrvGXH7g8IqtObSDqd/1wbD0yEeJRv
-U/sR+7ansuJeQVvUYnWaox9zon4A0Rith8qDA9bejODm+rbPpqNa/P0CThJJbzNP
-nvjLyFO/sRwbk3aoBpaTiK7I4USOhf6z8YHsHJJyYEtxmdRiwRZnj/QlzmlvKWQC
-v85WYqYa9lsku/9EKaXdjRNx/VB1NR8h4WoF3JSnO9G6OMVwiOMLV5yxRC/O+HrP
-ztrIYB6dlJ4AS76CWmRu/VU80alXEG/2LVHgkqBeU9UwOA+Rd400yaO96wcgYU76
-N2qVljod
-=MEuR
------END PGP SIGNATURE-----
-
---X0mRMReG20h64Jn+--
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
