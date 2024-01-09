@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2223C4707B
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 19:19:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F80DC4707B
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 19:19:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74D4E87B0E;
-	Tue,  9 Jan 2024 20:18:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E400887AC5;
+	Tue,  9 Jan 2024 20:18:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qptVmXtN";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RrOhu7SR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8ECB87AC7; Tue,  9 Jan 2024 20:18:12 +0100 (CET)
+ id 0ED6787B08; Tue,  9 Jan 2024 20:18:14 +0100 (CET)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7893887AC5
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 20:18:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C48F8797B
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 20:18:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 409JHvxE102935;
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 409JHvWw102927;
  Tue, 9 Jan 2024 13:17:57 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1704827877;
- bh=iOiteL0p/Vsp2Ib4pu/gglVsvuN6PCMjA0WTwEDJPpY=;
+ bh=9pvHb56msqji57wvIEtaNfWiMustBaBoXR3OoqbILEE=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=qptVmXtNlb4LNXbKBuL/PXGChyxBiwnd5lrNwReHyFVN+5OnWXSHZ6xgZBKVYvNcZ
- cYYf3i+jp5T86Q/XlmTTNU3oGDuxwDvrIOFsQHx5ep8bZvd9rL0yWr27QRcRSS7FG8
- Oi/qMcFXUzkKa1g15Sump3dmDj2RCKymR+Lsz3T0=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 409JHvmm029087
+ b=RrOhu7SRs0kCaphR34valvugKFiGQ+tU0a+z+/gBr7r9ym3g2wi5TCaOgsDG2fvPZ
+ pJEsTmaEgrpYAo2s7qQ9ccyagSVbq18reBwPbWo8EvOOCSRZA2kAaMhov9pM5MKQyU
+ kegFAddTtVLUAU3UrGrSf2pChEzYXkB2ZHtMHt+c=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 409JHvrM029075
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Tue, 9 Jan 2024 13:17:57 -0600
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 9
- Jan 2024 13:17:57 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 13:17:56 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Tue, 9 Jan 2024 13:17:57 -0600
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 409JHvST075226;
- Tue, 9 Jan 2024 13:17:57 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 409JHunq106639;
+ Tue, 9 Jan 2024 13:17:56 -0600
 From: Nishanth Menon <nm@ti.com>
 To: Tom Rini <trini@konsulko.com>
 CC: Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu Raja <sinthu.raja@ti.com>,
@@ -60,9 +60,10 @@ CC: Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu Raja <sinthu.raja@ti.com>,
  Bryan Brattlof <bb@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
  <u-boot@lists.denx.de>, Jon Humphreys <j-humphreys@ti.com>,
  Nishanth Menon <nm@ti.com>
-Subject: [PATCH V2 10/10] include: env: ti: Drop default_findfdt
-Date: Tue, 9 Jan 2024 13:15:05 -0600
-Message-ID: <20240109191506.3820908-11-nm@ti.com>
+Subject: [PATCH V2 04/10] board: ti: am64x: Set fdtfile from C code instead of
+ findfdt script
+Date: Tue, 9 Jan 2024 13:14:59 -0600
+Message-ID: <20240109191506.3820908-5-nm@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240109191506.3820908-1-nm@ti.com>
 References: <20240109191506.3820908-1-nm@ti.com>
@@ -86,35 +87,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We shouldn't need finfdt anymore. Drop the env script.
+We now can provide a map and have the standard fdtfile variable set from
+code itself. This allows for bootstd to "just work".
+
+While at this, replace findfdt in environment with a warning as it is no
+longer needed.
 
 Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
 Changes from V1: None.
+I have retained the the existing names used in the file as is for now, a
+cleanup as suggested in review is probably something to do in a follow
+on series.
 
-V1: https://lore.kernel.org/r/20240108173301.2692332-11-nm@ti.com
- include/env/ti/default_findfdt.env | 12 ------------
- 1 file changed, 12 deletions(-)
- delete mode 100644 include/env/ti/default_findfdt.env
+V1: https://lore.kernel.org/r/20240108173301.2692332-5-nm@ti.com
 
-diff --git a/include/env/ti/default_findfdt.env b/include/env/ti/default_findfdt.env
-deleted file mode 100644
-index a2b51dd923bb..000000000000
---- a/include/env/ti/default_findfdt.env
-+++ /dev/null
-@@ -1,12 +0,0 @@
--default_device_tree=CONFIG_DEFAULT_DEVICE_TREE
--default_device_tree_arch=ti
--#ifdef CONFIG_ARM64
+ board/ti/am64x/am64x.env | 9 ---------
+ board/ti/am64x/evm.c     | 8 ++++++++
+ 2 files changed, 8 insertions(+), 9 deletions(-)
+
+diff --git a/board/ti/am64x/am64x.env b/board/ti/am64x/am64x.env
+index efd736b99be4..9a8812d4ee54 100644
+--- a/board/ti/am64x/am64x.env
++++ b/board/ti/am64x/am64x.env
+@@ -2,14 +2,6 @@
+ #include <env/ti/mmc.env>
+ #include <env/ti/k3_dfu.env>
+ 
 -findfdt=
--	setenv name_fdt ${default_device_tree_arch}/${default_device_tree}.dtb;
+-	if test $board_name = am64x_gpevm; then
+-		setenv name_fdt ti/k3-am642-evm.dtb; fi;
+-	if test $board_name = am64x_skevm; then
+-		setenv name_fdt ti/k3-am642-sk.dtb; fi;
+-	if test $name_fdt = undefined; then
+-		echo WARNING: Could not determine device tree to use; fi;
 -	setenv fdtfile ${name_fdt}
--#else
--default_device_tree_subarch=omap
--findfdt=
--	setenv name_fdt ${default_device_tree_arch}/${default_device_tree_subarch}/${default_device_tree}.dtb;
--	setenv fdtfile ${name_fdt}
--#endif
+ name_kern=Image
+ console=ttyS2,115200n8
+ args_all=setenv optargs earlycon=ns16550a,mmio32,0x02800000 ${mtdparts}
+@@ -43,7 +35,6 @@ get_fit_usb=load usb ${bootpart} ${addr_fit}
+ usbboot=setenv boot usb;
+ 	setenv bootpart 0:2;
+ 	usb start;
+-	run findfdt;
+ 	run init_usb;
+ 	run get_kern_usb;
+ 	run get_fdt_usb;
+diff --git a/board/ti/am64x/evm.c b/board/ti/am64x/evm.c
+index a6dcff2eb434..e2f506d2c6ea 100644
+--- a/board/ti/am64x/evm.c
++++ b/board/ti/am64x/evm.c
+@@ -16,6 +16,7 @@
+ #include <env.h>
+ 
+ #include "../common/board_detect.h"
++#include "../common/fdt_ops.h"
+ 
+ #define board_is_am64x_gpevm() (board_ti_k3_is("AM64-GPEVM") || \
+ 				board_ti_k3_is("AM64-HSEVM"))
+@@ -180,6 +181,12 @@ int checkboard(void)
+ }
+ 
+ #ifdef CONFIG_BOARD_LATE_INIT
++static struct ti_fdt_map ti_am64_evm_fdt_map[] = {
++	{"am64x_gpevm", "k3-am642-evm.dtb"},
++	{"am64x_skevm", "k3-am642-sk.dtb"},
++	{ /* Sentinel. */ }
++};
++
+ static void setup_board_eeprom_env(void)
+ {
+ 	char *name = "am64x_gpevm";
+@@ -197,6 +204,7 @@ static void setup_board_eeprom_env(void)
+ 
+ invalid_eeprom:
+ 	set_board_info_env_am6(name);
++	ti_set_fdt_env(name, ti_am64_evm_fdt_map);
+ }
+ 
+ static void setup_serial(void)
 -- 
 2.43.0
 
