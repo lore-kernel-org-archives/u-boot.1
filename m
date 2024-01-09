@@ -4,76 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F3C0C46CD2
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 14:51:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2C1AC46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 15:34:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1857D8786A;
-	Tue,  9 Jan 2024 15:51:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id E88FF87807;
+	Tue,  9 Jan 2024 16:34:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="i4jc5lwO";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1704814461;
+	bh=+UzNwQDAfbQ+tuSf/qaAeZeozdRGhUeE4CwAW7UpanI=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=xNcFOh+JXOXdwkNxSoslr7JM2MJnlSYMwv2OqUNsUx0bTR2T8z9+6DNeIkt/M18EG
+	 5cS9WNdFjqSrQJzbTHVcFLWFwNMvt19wCQ7HVFC+y0KrDZCPAEsSji8unCjAJrW1h0
+	 cGOglUH6oWnc4k/tu+TyXFGA6zDL6OzWjbQCG/a7FY17MFAySzKtVC/ZTxNbwURaRI
+	 UJgnJCklj4KVbUhUSyWYxmcfgPC6GjkILAniIxSvB1TnTeHhDoU7EpACXRDr+uPOf8
+	 MzZ1/e8Ly7Iw9R0RDjySVm/klrfv2SCk/fzrV3kF+e7nF8LQizZYGW9nGm1MdKT2Lj
+	 a88wFDy9Fl/6g==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DBBE877FD; Tue,  9 Jan 2024 15:51:00 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E767087824; Tue,  9 Jan 2024 16:34:20 +0100 (CET)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 769E0877FD
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 15:50:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 13CA886EEC
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 16:34:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-40e4f692d06so4416405e9.1
- for <u-boot@lists.denx.de>; Tue, 09 Jan 2024 06:50:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1704811858; x=1705416658;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=mlNQWJOtY73Lx51nmFn9lOGGMmdqVQbVocpylY0zP6s=;
- b=i4jc5lwOGACXADn741DZ74n6fkpHAymJLR87H++cUDmF4h3uVK+9uJfzGoQtX5XoK5
- QCRMYvIXQ5B37fMypjyg7JEADSrg0wZCr3vgnO7qfuk4cMPSNl8sgv7sBFcs+A5dPVjc
- fgyjQsDfg8w4GI7sBGMUbvgjF0VPQtmndMU0Fsm1Gh8YnEk59kJVXokSBlxvJ2F4rTpl
- riKDlxc3QGUnn+UMTvVXinSDv4IObc/FRL5g7J82cE5NClQQUxEzI1+Gj1V9vH/FQ6qU
- Q/GbFS0PDTvILf8nW7Ysx6SlSVBGpHpGWnbORCC/Vu0nhqjY/QJnHLNLiyIaaqsFvfpG
- /HpQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704811858; x=1705416658;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=mlNQWJOtY73Lx51nmFn9lOGGMmdqVQbVocpylY0zP6s=;
- b=fqd1KRGkA+vYA2+HwROl3lPN4Qxjf9k1uQeyRxzcpuXMC+CgN2DJxsYv2g7RckiB+8
- IT93aLSudLL6LMFNvMPdCqEp07TPeuhiEq5BRVIfk6NmgSFz0TPiU4oW4EsLTnfEUflX
- ZpLzWhMfILzr7liz3tzXd5vBtoH5ZZPPjOkH4Xu1daJuNYsjYN+OPe9dgy1qWEKo+czY
- FFDTgtKNrM/5HrbKtLlTYlAFK3sCgv5iM8p8uGs0Jcwij0lbxZSuI4f/4EPEySpmbN9w
- 6hLHywu4ImnRo/hbFix2DGwb2zRD6FdfTmSr+cLdiKWcT24xjgC+cuc4++VOE6BU2TnF
- oEoQ==
-X-Gm-Message-State: AOJu0YxNndhInuYjWc9g4KZSFat/x68fLuQ5OdQSukQOLxJ51k4gC8uh
- Tgx9F1CqLpBIFO0ug+6cFv89nT5tYSRqFQ==
-X-Google-Smtp-Source: AGHT+IFAcZdXtbkwRxjX42UuwB99KtDuQikv4AwY/maig/3CLivwFOuBI8sAh9VOFFEbuG63dY7POw==
-X-Received: by 2002:a7b:ce0e:0:b0:40e:4f71:5c3b with SMTP id
- m14-20020a7bce0e000000b0040e4f715c3bmr519789wmc.93.1704811857856; 
- Tue, 09 Jan 2024 06:50:57 -0800 (PST)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- n33-20020a05600c3ba100b0040e398f8cafsm3872492wms.31.2024.01.09.06.50.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jan 2024 06:50:57 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Grzegorz Szymaszek <gszymaszek@short.pl>, u-boot@lists.denx.de
-Cc: Grzegorz Szymaszek <gszymaszek@short.pl>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Maxim Cournoyer <maxim.cournoyer@gmail.com>, Simon
- Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] doc: fix three-dash references in reStructuredText
-In-Reply-To: <ZZktRm3O89FnozlD@nx64de-df6d00>
-References: <ZZktRm3O89FnozlD@nx64de-df6d00>
-Date: Tue, 09 Jan 2024 15:50:56 +0100
-Message-ID: <87a5pewofj.fsf@baylibre.com>
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4T8ZjF0Dj3z9sr1;
+ Tue,  9 Jan 2024 16:34:09 +0100 (CET)
+Message-ID: <2f81957a-ab26-4220-9125-d0a788446e60@denx.de>
+Date: Tue, 9 Jan 2024 16:34:03 +0100
 MIME-Version: 1.0
-Content-Type: text/plain
+Subject: Re: [PATCH v3 1/3] arm: mvebu: Espressobin: move FDT fixup into a
+ separate function
+Content-Language: en-US
+To: Robert Marko <robert.marko@sartura.hr>, u-boot@lists.denx.de
+References: <20231129101117.60177-1-robert.marko@sartura.hr>
+ <CA+HBbNFbLjSwY9QRP09SXVDMm=TJ1q4isgkce6p-H7LAnwZZ2g@mail.gmail.com>
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <CA+HBbNFbLjSwY9QRP09SXVDMm=TJ1q4isgkce6p-H7LAnwZZ2g@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4T8ZjF0Dj3z9sr1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,64 +71,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Grzegorz,
+Hi Robert,
 
-Thank you for the patch.
+On 1/9/24 14:16, Robert Marko wrote:
+> On Wed, Nov 29, 2023 at 11:11 AM Robert Marko <robert.marko@sartura.hr> wrote:
+>>
+>> Currently, Esspresobin FDT is being fixed up directly in ft_board_setup()
+>> which makes it hard to add support for any other board to be fixed up.
+>>
+>> So, lets just move the FDT fixup code to a separate function and call it
+>> if compatible matches, there should be no functional change.
+>>
+>> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+>> Reviewed-by: Stefan Roese <sr@denx.de>
+> 
+> 
+> Hi Stefan,
+> Since 2024.01 was released, can this series be pulled in now?
 
-On sam., janv. 06, 2024 at 11:36, Grzegorz Szymaszek <gszymaszek@short.pl> wrote:
+It's on my list. I actually already started with some CI build tests.
+Hope to get this done by end of this week, before I leave for a
+short vacation.
 
-> The "Sending patches" and "Patman patch manager" documents refer to the
-> three-dash, "---", that separates patch parts. The symbol is written in
-> the documentation in the same form as it is in actual patches: as three
-> U+002D HYPHEN-MINUS characters. When building the documentation, Sphinx
-> converts this symbol to a U+2014 EM DASH, that is invalid in this case.
->
-> Make the three-dash symbol a reStructuredText inline literal to prevent
-> its conversion; that is, enclose it in a pair of double backquotes (`).
->
-> Signed-off-by: Grzegorz Szymaszek <gszymaszek@short.pl>
+Thanks,
+Stefan
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Regards,
+> Robert
+> 
+>>
+>> ---
+>>   board/Marvell/mvebu_armada-37xx/board.c | 14 +++++++++-----
+>>   1 file changed, 9 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/board/Marvell/mvebu_armada-37xx/board.c b/board/Marvell/mvebu_armada-37xx/board.c
+>> index 04124d8014..1471caa9a6 100644
+>> --- a/board/Marvell/mvebu_armada-37xx/board.c
+>> +++ b/board/Marvell/mvebu_armada-37xx/board.c
+>> @@ -363,18 +363,14 @@ EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, last_stage_init);
+>>   #endif
+>>
+>>   #ifdef CONFIG_OF_BOARD_SETUP
+>> -int ft_board_setup(void *blob, struct bd_info *bd)
+>> +static int espressobin_fdt_setup(void *blob)
+>>   {
+>> -#ifdef CONFIG_ENV_IS_IN_SPI_FLASH
+>>          int ret;
+>>          int spi_off;
+>>          int parts_off;
+>>          int part_off;
+>>
+>>          /* Fill SPI MTD partitions for Linux kernel on Espressobin */
+>> -       if (!of_machine_is_compatible("globalscale,espressobin"))
+>> -               return 0;
+>> -
+>>          spi_off = fdt_node_offset_by_compatible(blob, -1, "jedec,spi-nor");
+>>          if (spi_off < 0)
+>>                  return 0;
+>> @@ -459,6 +455,14 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+>>                  return 0;
+>>          }
+>>
+>> +       return 0;
+>> +}
+>> +
+>> +int ft_board_setup(void *blob, struct bd_info *bd)
+>> +{
+>> +#ifdef CONFIG_ENV_IS_IN_SPI_FLASH
+>> +       if (of_machine_is_compatible("globalscale,espressobin"))
+>> +               return espressobin_fdt_setup(blob);
+>>   #endif
+>>          return 0;
+>>   }
+>> --
+>> 2.43.0
+>>
+> 
+> 
 
-> ---
->  doc/develop/sending_patches.rst | 4 ++--
->  tools/patman/patman.rst         | 2 +-
->  2 files changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/doc/develop/sending_patches.rst b/doc/develop/sending_patches.rst
-> index 5a6962f102..3f25b1d046 100644
-> --- a/doc/develop/sending_patches.rst
-> +++ b/doc/develop/sending_patches.rst
-> @@ -121,7 +121,7 @@ General Patch Submission Rules
->     * For new features: a description of the feature and your implementation.
->  
->  * Additional comments which you don't want included in U-Boot's history can be
-> -  included below the first "---" in the message body.
-> +  included below the first "``---``" in the message body.
->  
->  * If your description gets too long, that's a strong indication that you should
->    split up your patch.
-> @@ -253,7 +253,7 @@ to observe the following rules.
->  
->  * Please make sure to keep a "change log", i.e. a description of what you have
->    changed compared to previous versions of this patch. This change log should
-> -  be added below the "---" line in the patch, which starts the "comment
-> +  be added below the "``---``" line in the patch, which starts the "comment
->    section", i.e. which contains text that does not get included into the
->    actual commit message.
->    Note: it is *not* sufficient to provide a change log in some cover letter
-> diff --git a/tools/patman/patman.rst b/tools/patman/patman.rst
-> index a8b317eed6..e01355824c 100644
-> --- a/tools/patman/patman.rst
-> +++ b/tools/patman/patman.rst
-> @@ -280,7 +280,7 @@ Series-notes:
->  
->  Commit-notes:
->      Similar, but for a single commit (patch). These notes will appear
-> -    immediately below the --- cut in the patch file::
-> +    immediately below the ``---`` cut in the patch file::
->  
->          Commit-notes:
->          blah blah
-> -- 
-> 2.43.0
+Viele Grüße,
+Stefan Roese
+
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
