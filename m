@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F07B4C46CD2
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 05:09:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E380DC46CD2
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 05:26:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23FDF87754;
-	Tue,  9 Jan 2024 06:09:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B7DD1877EC;
+	Tue,  9 Jan 2024 06:26:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="b1iyg/Sc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dVXCVECo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0264877D3; Tue,  9 Jan 2024 06:09:04 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id BD4B8877F1; Tue,  9 Jan 2024 06:26:18 +0100 (CET)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A143987754
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 06:09:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 20740876FF
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 06:26:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-6dde2b84139so163979a34.2
- for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 21:09:00 -0800 (PST)
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-783045e88a6so283068485a.0
+ for <u-boot@lists.denx.de>; Mon, 08 Jan 2024 21:26:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704776939; x=1705381739; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Mms3BAEVl3p07ppv3W8+q853INrtQ1XzDvXKNxchagM=;
- b=b1iyg/ScubQzL8EOlWx/PMtVq+x/MoSvS6Tzoo7HrqGepvjeOnQ4Bu8BI8hG/ApeS9
- muaQcIHYPE7yaZc0C3oYxQ3dEOoUIcK6M3HwBJzZh2DEmB6NkW7lNN9QYKZrHC477if5
- JQw6bxIvfUbAynQ3Wvvx6RVcoHd7O5IKX3CxoWR4sAdXvRnucP3kg+EbTfAp8vJ4GAef
- +Ko0SMHJbRC7tJh1qCKaR5y9HU9Pvjvt1pbWSQRZXq5GAXFxEzSnP7CW+IKAY9G1Pvai
- I8PDmlVniDLarj1J9n0HuCvDh9nGeoOLjjGi5jQ2Khvo7K44gS3zf0ZtNCidS0Dk4Qij
- CjPQ==
+ d=gmail.com; s=20230601; t=1704777975; x=1705382775; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:cc:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=+EcRHTta+bmfk5CVFVBFRgqqvColORCxn1DFMXh715E=;
+ b=dVXCVECoEQCVkjAKvF3I80zYcJm8OTsEi5DH4QSnnDv5/7LLB5Dy8usiAQEwk3vHwW
+ unAtE1+BoDoGlXpVScdO7iFGEumMhNzutcjoDyQEly7hnMNGRox6Yp/1RCz6ufS296VF
+ pQRjnZA14xnCv/jG2zFIM/iXLX0TVHe41ALuYCdbwSIvV6Qzm9VJ3q2IKpiWkDEdNIR0
+ DOhxWuRlo7MO6mVMcXZE/emK1KiO/4oMsCLHbnUugFaAaQGf3dm9P364lAalwvpXYjO7
+ 0IhXGgr3xumt4vdSmM3DKIVLMyvLnk8PB6SbNIDxF7kz53zFqWOxaewwyXqIAUFnP2Qc
+ Vjyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704776939; x=1705381739;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Mms3BAEVl3p07ppv3W8+q853INrtQ1XzDvXKNxchagM=;
- b=cswJK4az3RXoFIjB2xwrQNtaVEKyqfe4r3x6eFemwTyGe2Ne0RQN6uzo7befEKJIuy
- czCF00rWm0orICUlLA2SsVQRgF0WUrhwyZ7L0nUDrqM+r+q5Q6nm5BB218YpZ+kTS0iY
- hQsjRtgLlzpi6FaN0Y8/RF6GRoHWjDxOYB1I8Do1GHokBfn8JaNwWa1f7qPl+zVd2tnH
- zHDRevvcoLjGo8OO/NPTMsBgUuNugK7lGnPljkKO2uOJ1vqKR4jlPrMDzyufpCNvSQnF
- ioPzFGD5epahwZBjLKx7fbkHp4ztq3bG5SEEK3xd909QqFopKTr6FkQlmNXgukMFcRCr
- 57ew==
-X-Gm-Message-State: AOJu0Yxrvu1GAy6RnibJhTNYjpa0DkQ33l0DRKTR5O6d797fn6KYQBA8
- xcG7cN1Cv2s0WEhAQXJJG+OE+kews8oZAMnf6P1j9wxSoECmQg==
-X-Google-Smtp-Source: AGHT+IGHnH0QzjHeQrV4B3qFkX8/sYv913QDnYOFZmaTTHU0AJUWD0DFpr3X2/0HchKY1xZ7evhqSy2r2ICqYFtwMcY=
-X-Received: by 2002:a05:6830:4787:b0:6da:3409:fd90 with SMTP id
- df7-20020a056830478700b006da3409fd90mr3014641otb.62.1704776939291; Mon, 08
- Jan 2024 21:08:59 -0800 (PST)
+ d=1e100.net; s=20230601; t=1704777975; x=1705382775;
+ h=content-transfer-encoding:in-reply-to:cc:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+EcRHTta+bmfk5CVFVBFRgqqvColORCxn1DFMXh715E=;
+ b=puKWeq6UOYXFc0RLuanD47yW+kezRV23rsknG4xS9i1czwZL0sy229pNRuD4hg+J92
+ Z7ApSMezNxakVpvknNWX0bg8790FRlGbI48dtmAf0QEo9Q/dfsLqPSXURdsoKAolqL7K
+ XK84tTFN84IhUmxsN+fvhTtbmAUs6UPlIzmAL3AruiInGLwImRSxHIx6xH9vz0azQRdy
+ /l0i6uNnuPOBOjwUZqgRg+GIVk3uFJ444G9gcDNmPqr2tqksGhKC9+hk3ZhGiA6TW1W4
+ tfwEY+d5euemlwsLXjwQjnIZzNhbnLRaLo7IR2KR6RtDG/3juK+SorMPLHBCaZlxjOnD
+ ZJ/A==
+X-Gm-Message-State: AOJu0Yzx6NPNPWuAdz7rhTOv1kQyRnunva5gPv54qhNbgzQ7Jq9xJROQ
+ olhbs98PH3JjB4lR/9S3FvUxhrl60RzOkA==
+X-Google-Smtp-Source: AGHT+IFUzZ3kx21IngL2bmtkJVzf4+TeEVuOc5hJecS9SZrQibpTTb0rhD+Wn9Yvk5ZqrfbSzoAKpg==
+X-Received: by 2002:ad4:5bac:0:b0:681:11b9:29c with SMTP id
+ 12-20020ad45bac000000b0068111b9029cmr1168700qvq.63.1704777974714; 
+ Mon, 08 Jan 2024 21:26:14 -0800 (PST)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ p15-20020a05621421ef00b0067f80dbd535sm602107qvj.8.2024.01.08.21.26.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 08 Jan 2024 21:26:14 -0800 (PST)
+Message-ID: <d873ed4d-25df-5ba0-67b3-c104d9da229d@gmail.com>
+Date: Tue, 9 Jan 2024 00:26:13 -0500
 MIME-Version: 1.0
-References: <20231228115804.3626579-1-sumit.garg@linaro.org>
- <20231228115804.3626579-4-sumit.garg@linaro.org>
- <20240105204137.pdzgacapwpgpualp@bryanbrattlof.com>
- <CAFA6WYMoEcg+niaf+3+a29c9Fon5LrJQ9E5X7YtWyjEX_1RKDA@mail.gmail.com>
- <20240109015419.f6lwlhkudqy7uvly@bryanbrattlof.com>
-In-Reply-To: <20240109015419.f6lwlhkudqy7uvly@bryanbrattlof.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 9 Jan 2024 10:38:48 +0530
-Message-ID: <CAFA6WYM5P_8OaFuOMGwqCFFBwGwAui_uyVPX+gPFDsKFT_eePA@mail.gmail.com>
-Subject: Re: [PATCH v3 3/8] scripts/Makefile.lib: Statically define
- *-u-boot.dtsi files location
-To: Bryan Brattlof <bb@ti.com>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, trini@konsulko.com, sjg@chromium.org, 
- robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
- rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Francis Laniel <francis.laniel@amarulasolutions.com>
+References: <20240108174506.GL1610741@bill-the-cat>
+From: Sean Anderson <seanga2@gmail.com>
+Cc: Michael Trimarchi <michael@amarulasolutions.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>
+In-Reply-To: <20240108174506.GL1610741@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,91 +96,223 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 9 Jan 2024 at 07:24, Bryan Brattlof <bb@ti.com> wrote:
->
-> On January  8, 2024 thus sayeth Sumit Garg:
-> > Hi Bryan,
-> >
-> > On Sat, 6 Jan 2024 at 02:12, Bryan Brattlof <bb@ti.com> wrote:
-> > >
-> > > Hi Sumit!
-> > >
-> > > On December 28, 2023 thus sayeth Sumit Garg:
-> > > > Allow u-boot to build DTB from a different directory tree such that
-> > > > *-u-boot.dtsi files can be included from a common location. Currently
-> > > > that location is arch/$(ARCH)/dts/, so statically define that common
-> > > > location.
-> > > >
-> > > > This is needed for platform owners to start building DTB files from
-> > > > devicetree-rebasing directory but still being able to include
-> > > > *-u-boot.dtsi files.
-> > > >
-> > > > Reviewed-by: Tom Rini <trini@konsulko.com>
-> > > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > > > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > > > ---
-> > > >
-> > >
-> > > ...
-> > >
-> > > >
-> > > > diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-> > > > index 27b9437027c..09330421856 100644
-> > > > --- a/scripts/Makefile.lib
-> > > > +++ b/scripts/Makefile.lib
-> > >
-> > > ...
-> > >
-> > > >  # Uncomment for debugging
-> > > > @@ -190,6 +192,7 @@ dtsi_include_list += $(CONFIG_DEVICE_TREE_INCLUDES)
-> > > >  dtc_cpp_flags  = -Wp,-MD,$(depfile).pre.tmp -nostdinc                    \
-> > > >                $(UBOOTINCLUDE)                                         \
-> > > >                -I$(dir $<)                                             \
-> > > > +              -I$(u_boot_dtsi_loc)                                     \
-> > > >                -I$(srctree)/arch/$(ARCH)/dts/include                   \
-> > > >                -I$(srctree)/include                                    \
-> > > >                -D__ASSEMBLY__                                          \
-> > > > @@ -328,7 +331,7 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
-> > > >         echo '$(pound)include "$(f)"' >> $(pre-tmp);) \
-> > > >       $(HOSTCC) -E $(dtc_cpp_flags) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
-> > > >       $(DTC) -O dtb -o $@ -b 0 \
-> > > > -             -i $(dir $<) $(DTC_FLAGS) \
-> > > > +             -i $(dir $<) -i $(u_boot_dtsi_loc) $(DTC_FLAGS) \
-> > > >               -d $(depfile).dtc.tmp $(dtc-tmp) || \
-> > > >               (echo "Check $(shell pwd)/$(pre-tmp) for errors" && false) \
-> > > >               ; \
-> > >
-> > > One of the issues I see with having a separate OF_UPSTREAM and U-Boot dt
-> > > directory is when we have U-Boot board files that use dtsi files in the
-> > > OF_UPSTREAM folder.
-> > >
-> > > For example our reference boards uses the primary bootloader's dtb (eg:
-> > > k3-am62a7-r5-sk.dts) which #includes the k3-am62a7-sk.dts that will be
-> > > found in the OF_UPSTREAM directory and modifies it to give it the
-> > > perspective of the micro-controller it will be running on during boot.
-> >
-> > Thanks for bringing this up. I have been playing with the idea to
-> > reuse DT includes from upstream.
-> >
-> > >
-> > > What do you think if we have both paths included regardless if
-> > > OF_UPSTREAM is selected or not? IDK if this will break anyone else
-> >
-> > Sure, we should be able to do that if we maintain the correct order of
-> > include paths as per following patch [1]. If this works for you let me
-> > know and I will include it for v4.
-> >
->
-> This works beautifully.
->
-> I did have to hack around to get Makefile.spl working but this is headed
-> in the right direction for me :)
+Comments on NAND stuff only.
 
-Thanks for testing. I hope I can take that as a tested-by tag for this patch.
+On 1/8/24 12:45, Tom Rini wrote:
+> ________________________________________________________________________________________________________
+> *** CID 477216:    (BAD_SHIFT)
+> /drivers/mtd/nand/raw/nand_base.c: 3921 in nand_flash_detect_onfi()
+> 3915
+> 3916            /*
+> 3917             * pages_per_block and blocks_per_lun may not be a
+> power-of-2 size
+> 3918             * (don't ask me who thought of this...). MTD assumes that these
+> 3919             * dimensions will be power-of-2, so just truncate the
+> remaining area.
+> 3920             */
+>>>>      CID 477216:    (BAD_SHIFT)
+>>>>      In expression "1 << generic_fls((__u32)(__le32)p->pages_per_block) - 1", shifting by a negative amount has undefined behavior.  The shift amount, "generic_fls((__u32)(__le32)p->pages_per_block) - 1", is -1.
+> 3921            mtd->erasesize = 1 <<
+> (fls(le32_to_cpu(p->pages_per_block)) - 1);
+> 3922            mtd->erasesize *= mtd->writesize;
+> 3923
+> 3924            mtd->oobsize = le16_to_cpu(p->spare_bytes_per_page);
+> 3925
+> 3926            /* See erasesize comment */
+> /drivers/mtd/nand/raw/nand_base.c: 3927 in nand_flash_detect_onfi()
+> 3921            mtd->erasesize = 1 <<
+> (fls(le32_to_cpu(p->pages_per_block)) - 1);
+> 3922            mtd->erasesize *= mtd->writesize;
+> 3923
+> 3924            mtd->oobsize = le16_to_cpu(p->spare_bytes_per_page);
+> 3925
+> 3926            /* See erasesize comment */
+>>>>      CID 477216:    (BAD_SHIFT)
+>>>>      In expression "1 << generic_fls((__u32)(__le32)p->blocks_per_lun) - 1", shifting by a negative amount has undefined behavior.  The shift amount, "generic_fls((__u32)(__le32)p->blocks_per_lun) - 1", is -1.
+> 3927            chip->chipsize = 1 << (fls(le32_to_cpu(p->blocks_per_lun)) - 1);
+> 3928            chip->chipsize *= (uint64_t)mtd->erasesize * p->lun_count;
+> 3929            chip->bits_per_cell = p->bits_per_cell;
+> 3930
+> 3931            if (onfi_feature(chip) & ONFI_FEATURE_16_BIT_BUS)
+> 3932                    chip->options |= NAND_BUSWIDTH_16;
 
--Sumit
+Yeah, this looks like a bug.
 
->
-> Thank you
-> ~Bryan
+> ** CID 477215:  Control flow issues  (MISSING_BREAK)
+> /drivers/mtd/nand/raw/nand_base.c: 4978 in nand_scan_tail()
+> 
+> 
+> ________________________________________________________________________________________________________
+> *** CID 477215:  Control flow issues  (MISSING_BREAK)
+> /drivers/mtd/nand/raw/nand_base.c: 4978 in nand_scan_tail()
+> 4972                            pr_warn("No ECC functions supplied;
+> hardware ECC not possible\n");
+> 4973                            BUG();
+> 4974                    }
+> 4975                    if (!ecc->read_page)
+> 4976                            ecc->read_page = nand_read_page_hwecc_oob_first;
+> 4977
+>>>>      CID 477215:  Control flow issues  (MISSING_BREAK)
+>>>>      The case for value "NAND_ECC_HW" is not terminated by a "break" statement.
+> 4978            case NAND_ECC_HW:
+> 4979                    /* Use standard hwecc read page function? */
+> 4980                    if (!ecc->read_page)
+> 4981                            ecc->read_page = nand_read_page_hwecc;
+> 4982                    if (!ecc->write_page)
+> 4983                            ecc->write_page = nand_write_page_hwecc;
+
+I think we just need a fallthrough comment here.
+
+> ** CID 477214:  Integer handling issues  (BAD_SHIFT)
+> /drivers/mtd/nand/raw/nand_base.c: 4397 in nand_detect()
+> 
+> 
+> ________________________________________________________________________________________________________
+> *** CID 477214:  Integer handling issues  (BAD_SHIFT)
+> /drivers/mtd/nand/raw/nand_base.c: 4397 in nand_detect()
+> 4391
+> 4392            nand_decode_bbm_options(mtd, chip);
+> 4393
+> 4394            /* Calculate the address shift from the page size */
+> 4395            chip->page_shift = ffs(mtd->writesize) - 1;
+> 4396            /* Convert chipsize to number of pages per chip -1 */
+>>>>      CID 477214:  Integer handling issues  (BAD_SHIFT)
+>>>>      In expression "chip->chipsize >> chip->page_shift", shifting by a negative amount has undefined behavior.  The shift amount, "chip->page_shift", is -1.
+> 4397            chip->pagemask = (chip->chipsize >> chip->page_shift) - 1;
+> 4398
+> 4399            chip->bbt_erase_shift = chip->phys_erase_shift =
+> 4400                    ffs(mtd->erasesize) - 1;
+> 4401            if (chip->chipsize & 0xffffffff)
+> 4402                    chip->chip_shift = ffs((unsigned)chip->chipsize) - 1;
+
+Buggy, but only when writesize is 0 (which is a bigger bug in the nand chip).
+
+> ** CID 477213:  Security best practices violations  (DC.WEAK_CRYPTO)
+> /test/dm/nand.c: 67 in dm_test_nand()
+> 
+> 
+> ________________________________________________________________________________________________________
+> *** CID 477213:  Security best practices violations  (DC.WEAK_CRYPTO)
+> /test/dm/nand.c: 67 in dm_test_nand()
+> 61      ops.ooblen = mtd->oobsize;
+> 62      ut_assertok(mtd_read_oob(mtd, mtd->erasesize, &ops));
+> 63      ut_asserteq(0, oob[mtd_to_nand(mtd)->badblockpos]);
+> 64
+> 65      /* Generate some data and write it */
+> 66      for (i = 0; i < size / sizeof(int); i++)
+>>>>      CID 477213:  Security best practices violations  (DC.WEAK_CRYPTO)
+>>>>      "rand" should not be used for security-related applications, because linear congruential algorithms are too easy to break.
+> 67              gold[i] = rand();
+> 68      ut_assertok(nand_write_skip_bad(mtd, off, &length, NULL, U64_MAX,
+> 69                                      (void *)gold, 0));
+> 70      ut_asserteq(size, length);
+> 71
+> 72      /* Verify */
+
+Not a bug.
+
+> ** CID 477211:  API usage errors  (ALLOC_FREE_MISMATCH)
+> /drivers/mtd/nand/raw/nand_bbt.c: 1133 in nand_scan_bbt()
+> 
+> 
+> ________________________________________________________________________________________________________
+> *** CID 477211:  API usage errors  (ALLOC_FREE_MISMATCH)
+> /drivers/mtd/nand/raw/nand_bbt.c: 1133 in nand_scan_bbt()
+> 1127
+> 1128            /* Prevent the bbt regions from erasing / writing */
+> 1129            mark_bbt_region(mtd, td);
+> 1130            if (md)
+> 1131                    mark_bbt_region(mtd, md);
+> 1132
+>>>>      CID 477211:  API usage errors  (ALLOC_FREE_MISMATCH)
+>>>>      Calling "vfree" frees "buf" using "vfree" but it should have been freed using "kfree". [Note: The source code implementation of the function has been overridden by a builtin model.]
+> 1133            vfree(buf);
+> 1134            return 0;
+> 1135
+> 1136     err:
+> 1137            kfree(this->bbt);
+> 1138            this->bbt = NULL;
+
+Not a bug, since these both call free().
+
+> ** CID 477210:  Security best practices violations  (DC.WEAK_CRYPTO)
+> /drivers/mtd/nand/raw/sand_nand.c: 199 in sand_nand_read()
+> 
+> 
+> ________________________________________________________________________________________________________
+> *** CID 477210:  Security best practices violations  (DC.WEAK_CRYPTO)
+> /drivers/mtd/nand/raw/sand_nand.c: 199 in sand_nand_read()
+> 193             chip->tmp_dirty = true;
+> 194             for (i = 0; i < chip->err_steps; i++) {
+> 195                     u32 bit_errors = chip->err_count;
+> 196                     unsigned int j = chip->err_step_bits + chip->ecc_bits;
+> 197
+> 198                     while (bit_errors) {
+>>>>      CID 477210:  Security best practices violations  (DC.WEAK_CRYPTO)
+>>>>      "rand" should not be used for security-related applications, because linear congruential algorithms are too easy to break.
+> 199                             unsigned int u = rand();
+> 200                             float quot = 1ULL << 32;
+> 201
+> 202                             do {
+> 203                                     quot *= j - bit_errors;
+> 204                                     quot /= j;
+
+Not a bug.
+
+> ** CID 477207:  Control flow issues  (MISSING_BREAK)
+> /drivers/mtd/nand/raw/nand_base.c: 4969 in nand_scan_tail()
+> 
+> 
+> ________________________________________________________________________________________________________
+> *** CID 477207:  Control flow issues  (MISSING_BREAK)
+> /drivers/mtd/nand/raw/nand_base.c: 4969 in nand_scan_tail()
+> 4963            /*
+> 4964             * Check ECC mode, default to software if
+> 3byte/512byte hardware ECC is
+> 4965             * selected and we have 256 byte pagesize fallback to
+> software ECC
+> 4966             */
+> 4967
+> 4968            switch (ecc->mode) {
+>>>>      CID 477207:  Control flow issues  (MISSING_BREAK)
+>>>>      The case for value "NAND_ECC_HW_OOB_FIRST" is not terminated by a "break" statement.
+> 4969            case NAND_ECC_HW_OOB_FIRST:
+> 4970                    /* Similar to NAND_ECC_HW, but a separate
+> read_page handle */
+> 4971                    if (!ecc->calculate || !ecc->correct || !ecc->hwctl) {
+> 4972                            pr_warn("No ECC functions supplied;
+> hardware ECC not possible\n");
+> 4973                            BUG();
+> 4974                    }
+
+need a fallthrough comment
+
+> ** CID 477205:  Integer handling issues  (OVERFLOW_BEFORE_WIDEN)
+> /cmd/mtd.c: 88 in mtd_dump_device_buf()
+> 
+> 
+> ________________________________________________________________________________________________________
+> *** CID 477205:  Integer handling issues  (OVERFLOW_BEFORE_WIDEN)
+> /cmd/mtd.c: 88 in mtd_dump_device_buf()
+> 82                      printf("\nDump %d data bytes from 0x%08llx:\n",
+> 83                             mtd->writesize, start_off + data_off);
+> 84                      mtd_dump_buf(&buf[data_off],
+> 85                                   mtd->writesize, start_off + data_off);
+> 86
+> 87                      if (woob) {
+>>>>      CID 477205:  Integer handling issues  (OVERFLOW_BEFORE_WIDEN)
+>>>>      Potentially overflowing expression "page * mtd->oobsize" with type "unsigned int" (32 bits, unsigned) is evaluated using 32-bit arithmetic, and then used in a context that expects an expression of type "u64" (64 bits, unsigned).
+> 88                              u64 oob_off = page * mtd->oobsize;
+> 89
+> 90                              printf("Dump %d OOB bytes from page at
+> 0x%08llx:\n",
+> 91                                     mtd->oobsize, start_off + data_off);
+> 92                              mtd_dump_buf(&buf[len + oob_off],
+> 93                                           mtd->oobsize, 0);
+
+In the Linux MTD list [1], the largest this can be is 0xe0000000 for MT29F512G08CUCAB. That's worryingly
+close to overflow, so I'd say this is a bug.
+
+--Sean
+
+[1] http://linux-mtd.infradead.org/nand-data/nanddata.html
