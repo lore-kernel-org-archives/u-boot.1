@@ -4,65 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 369C1C4706C
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 19:17:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7579C4706C
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 19:18:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3B5B878C9;
-	Tue,  9 Jan 2024 20:17:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3765287A4B;
+	Tue,  9 Jan 2024 20:18:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Aoki+fZE";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GH8+lCm/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B663B8790F; Tue,  9 Jan 2024 20:17:30 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 9362A87A99; Tue,  9 Jan 2024 20:18:07 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F8CA8785F
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 20:17:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3208287943
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 20:18:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 409JHMe5008314;
- Tue, 9 Jan 2024 13:17:22 -0600
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 409JHvvp066107;
+ Tue, 9 Jan 2024 13:17:57 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704827842;
- bh=9OO99fGizrR76X4Dh7UQFv0PjyRHQ1vesd1NTwLCZNM=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=Aoki+fZE2IOspUFmHzGR5ZS7heeITu4ZN0wrK6A6VlW11dyxWw8DatlVsNnQXIOS7
- wU5RmDB2EPp2syfo/OlJ1EWMnOhMBgQb+0v5+nZUQ4isbGfgtsBqC6Hzkh5nwaJGgd
- dYZksXz6fVeLPuRBnZfRxtrDrzcNoLcAQcforpN8=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 409JHM6X028771
+ s=ti-com-17Q1; t=1704827877;
+ bh=hVv3tVBKwjv6nKq5vAeCX8nPFAU/qxcVWwiaoSGTfYg=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=GH8+lCm/MLKQDTol7DpqMAD5rMqlzAtnIr9cqx/NtZdqkzKYqddggF8a0cMJeIQgp
+ uK8znYh6XH77cmIfbhcEGvvvaOQaUxDJSd00GIAN31oJWvUGYCwh+jHk6Xr3bOtRP7
+ EEhQaeNGc76FYPbGZV7kMBNVo4nfbxcwFyp34xNc=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 409JHvnt090791
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 9 Jan 2024 13:17:22 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 9 Jan 2024 13:17:57 -0600
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 9
- Jan 2024 13:17:22 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 13:17:56 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 9 Jan 2024 13:17:22 -0600
+ Frontend Transport; Tue, 9 Jan 2024 13:17:56 -0600
 Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 409JHMCk074751;
- Tue, 9 Jan 2024 13:17:22 -0600
-Date: Tue, 9 Jan 2024 13:17:22 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 409JHuW2106642;
+ Tue, 9 Jan 2024 13:17:56 -0600
 From: Nishanth Menon <nm@ti.com>
-To: Roger Quadros <rogerq@kernel.org>
-CC: <trini@konsulko.com>, <michael@amarulasolutions.com>,
- <dario.binacchi@amarulasolutions.com>, <afd@ti.com>, <vigneshr@ti.com>,
- <praneeth@ti.com>, <srk@ti.com>, <r-gunasekaran@ti.com>,
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH 0/4] arm: mach-k3: am64: Add NAND configuration
-Message-ID: <20240109191722.wkd2px7mveylz6ue@cautious>
-References: <20240109122605.51951-1-rogerq@kernel.org>
+To: Tom Rini <trini@konsulko.com>
+CC: Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu Raja <sinthu.raja@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Roger Quadros <rogerq@kernel.org>, Simon Glass
+ <sjg@chromium.org>, Andrew Davis <afd@ti.com>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
+ <u-boot@lists.denx.de>, Jon Humphreys <j-humphreys@ti.com>,
+ Nishanth Menon <nm@ti.com>
+Subject: [PATCH V2 05/10] board: ti: am65x: Set fdtfile from C code instead of
+ findfdt script
+Date: Tue, 9 Jan 2024 13:15:00 -0600
+Message-ID: <20240109191506.3820908-6-nm@ti.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240109191506.3820908-1-nm@ti.com>
+References: <20240109191506.3820908-1-nm@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240109122605.51951-1-rogerq@kernel.org>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,52 +87,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 14:26-20240109, Roger Quadros wrote:
-> Hi,
-> 
-> AM64-EVM [1] supports NAND via expansion card.
-> 
-> This series fixes the GPMC memory and NAND drivers
-> and provides NAND configuration for AM642 platform.
-> 
-> The extension card support and NAND DT overlay is
-> still missing so NAND is not yet functional just with
-> this series.
-> 
-> It was tested with NAND overlay [2] manually applied to base
-> AM64-EVM DT.
-> 
-> CI test results are available at
-> https://github.com/u-boot/u-boot/pull/460
-> 
-> [1] https://www.ti.com/tool/TMDS64EVM
-> [2] https://lore.kernel.org/all/20230923080046.5373-2-rogerq@kernel.org/
-> 
-> Roger Quadros (4):
->   memory: ti-gpmc: Fix build
->   mtd: rawnand: omap_gpmc: Use DT provided IO address
->   arm: mach-k3: am642: Define NAND boot device
->   configs: am64x_evm_a53_defconfig: Enable NAND
-> 
->  arch/arm/mach-k3/am642_init.c            |  3 +++
->  arch/arm/mach-k3/include/mach/am64_spl.h |  1 +
->  configs/am64x_evm_a53_defconfig          | 32 ++++++++++++++++++++++++
->  drivers/memory/ti-gpmc.c                 |  2 +-
->  drivers/mtd/nand/raw/omap_gpmc.c         | 19 ++++++++++----
->  5 files changed, 51 insertions(+), 6 deletions(-)
+We now can provide a map and have the standard fdtfile variable set from
+code itself. This allows for bootstd to "just work".
 
-Please update am64x documentation as well. People will need to know
-how to actually build, flash and use it.
+While at this, replace findfdt in environment with a warning as it is no
+longer needed.
 
-> 
-> 
-> base-commit: c2c598e87cfe56f5991730762c00733c5aa9a994
-> prerequisite-patch-id: e0465f3e924302d1c4bd47f2129b4eb3bd9faead
-> -- 
-> 2.34.1
-> 
+Signed-off-by: Nishanth Menon <nm@ti.com>
+---
+Changes from V1: None.
+I have retained the central call ti_set_fdt_env() to retain the
+population of fdtfile name using the CONFIG fall back logic and the
+population of (now deprecated) legacy variables for downstream script
+users.
 
+V1: https://lore.kernel.org/r/20240108173301.2692332-6-nm@ti.com
+ board/ti/am65x/am65x.env | 3 ---
+ board/ti/am65x/evm.c     | 2 ++
+ 2 files changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/board/ti/am65x/am65x.env b/board/ti/am65x/am65x.env
+index 286b9c300c05..814374d68cf0 100644
+--- a/board/ti/am65x/am65x.env
++++ b/board/ti/am65x/am65x.env
+@@ -5,9 +5,6 @@
+ #include <env/ti/k3_rproc.env>
+ #endif
+ 
+-findfdt=
+-	setenv name_fdt ti/k3-am654-base-board.dtb;
+-	setenv fdtfile ${name_fdt}
+ name_kern=Image
+ console=ttyS2,115200n8
+ args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
+diff --git a/board/ti/am65x/evm.c b/board/ti/am65x/evm.c
+index df209021c1b7..3109c9a2acac 100644
+--- a/board/ti/am65x/evm.c
++++ b/board/ti/am65x/evm.c
+@@ -22,6 +22,7 @@
+ #include <linux/printk.h>
+ 
+ #include "../common/board_detect.h"
++#include "../common/fdt_ops.h"
+ 
+ #define board_is_am65x_base_board()	board_ti_is("AM6-COMPROCEVM")
+ 
+@@ -141,6 +142,7 @@ static void setup_board_eeprom_env(void)
+ 
+ invalid_eeprom:
+ 	set_board_info_env_am6(name);
++	ti_set_fdt_env(NULL, NULL);
+ }
+ 
+ static int init_daughtercard_det_gpio(char *gpio_name, struct gpio_desc *desc)
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+2.43.0
+
