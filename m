@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A1FFC46CD2
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 08:57:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EFD7C47073
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 08:57:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81C6187876;
-	Tue,  9 Jan 2024 09:57:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0133B8789A;
+	Tue,  9 Jan 2024 09:57:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="csq2DIXK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PmNUVyDh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 432EF87874; Tue,  9 Jan 2024 09:57:26 +0100 (CET)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id 032D987874; Tue,  9 Jan 2024 09:57:35 +0100 (CET)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47E7B8788A
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 09:57:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F5FE8789B
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 09:57:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2cd56dac1adso20280201fa.2
- for <u-boot@lists.denx.de>; Tue, 09 Jan 2024 00:57:24 -0800 (PST)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-50e67e37661so3253565e87.0
+ for <u-boot@lists.denx.de>; Tue, 09 Jan 2024 00:57:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704790643; x=1705395443; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1704790652; x=1705395452; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BntdAFzQeLTibRKT7FHxOBClqXl5Qi1Z2gyu6zMzPwU=;
- b=csq2DIXKUH1RbXgYUzPdMki2TAAoe/vlQ6xhB4yVrDpvydrQSCoKZvmpg3JhuaO7rA
- 3HGUlK1qhE7rug2UBNrJRcBHHoi1Yc+MiRf6hD9No8UdBhQoTdr5/sOe4zHqINlkfkSn
- 98AYKV7NJCGtT+TayjO1peqjT25zelDMsFYNfJ7G/1Cq0UaDWBOH4UdY3pF0kVknMmSj
- cV8irP2JYSgDH0MKXocnI/R7l9pEHE7azic7SbgwZzP6Ev6B54YbOPAbDLtvIADk4B7a
- QLfZBycHqf8PBHlyMKPBd5tTYI2I6U6YU6THB5S8KQtOdDArZU5A9W2Zko+YNfJYJ4fd
- WoZQ==
+ bh=2h8BeNyAj5hhCamdrIJePWwZtMeW1E4Xdfp4Fxhio48=;
+ b=PmNUVyDhEWoZEu7TTb9xBg1deKgab8Ofr8QmbL6FVkK4l5ArOI5Ns3x/Sh9j3d112/
+ dP4nATQZ3yWiMJgbwE3UWdgvZvc2V3bQMKm/VhGYxMSGAarFZbnuvifjXe5WoGLeuMUl
+ nO7VpcPfFvTtmWWs4GsV+g15qM8rH9KyPpTnFONIFsHnHfu0s3N9+tgyBrtzg3rsqeT8
+ V3oFtoS9G2SFK37kKmFW3aExBvoEOM6FZ6/M8jmcKZ75qMB+vCKAuL6RXkJseVjFcZxA
+ yR2LvXtshpu6LSe2xbHG1yyYwabMDiDdtVSu9eOaWKTL9EGSqZFlpOkox22CD1zPtPm+
+ QOTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704790643; x=1705395443;
+ d=1e100.net; s=20230601; t=1704790652; x=1705395452;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=BntdAFzQeLTibRKT7FHxOBClqXl5Qi1Z2gyu6zMzPwU=;
- b=pYAK3qkD9AfCovgiT3CqmHzc1XII27iXldDe4H2Pu69jgXDPscTQaIhSmJzIK9rPHm
- gyvRCiOI7CN1XGxyT4f1plKW0tVz5OwhqUuGDhkXNktWE5JJ5PZx2AmJg3lvSOFLbG5r
- F7MaUYRvMLZxV/wCD9Pv6XBlk2lFHJjZgHmggdPVKUF+EQwVfMW4yKRtHTEgb53pFpgl
- qmZD/EZb2mWDgTMDZavZ1sgawoV0d1o0sNkPxryfbIPKxufIKeYI6d3NdMQdMvtkBXZu
- jLb7fR9P66rcOG0mHrJrTCgEPDGucv+Z/Im1L0cxPLn34sABMnq7vy2vprwGNpMw0Cq/
- gaQA==
-X-Gm-Message-State: AOJu0Yzovo1zDKhxZiy4TBh7oQczor9m6Hpo1dOHPch3ZhiUwh622UuH
- 7RcR0wal9yTkZ0gTRNGsEllU3xNiq/OvSQfyo/svhbgaUSjdPQ==
-X-Google-Smtp-Source: AGHT+IG+W3T04UxvMP4sq/y6xdKkSAEGMgJiqUMLmwZiM47VKCOEnF2TrGe2hX02qcHHgvGa+KTbRQnm3xj3RVUcVhI=
-X-Received: by 2002:ac2:5928:0:b0:50e:9c59:5627 with SMTP id
- v8-20020ac25928000000b0050e9c595627mr2024671lfi.45.1704790643525; Tue, 09 Jan
- 2024 00:57:23 -0800 (PST)
+ bh=2h8BeNyAj5hhCamdrIJePWwZtMeW1E4Xdfp4Fxhio48=;
+ b=TBlh7gz1rmR+JUtlHxFsl8LRzYDxHYvCr42Or1s2CmAKmLZUF4c6h2pUJbgERHqsGp
+ lUXMycTfpp3u0ya6gdXeCOOPuebiOqpN3Gj3ODIOG5tEKWLTLZvlhxY+bc3yIEYcvoNW
+ VJOVRYZg/9VDmXvPd0ZqxgzxRESGGtlJj3Dul1b0wiHmNHrakSVoXx3Cd58PbGIRoy0C
+ sxpBXLnx3lmVjgEbx+BbXKqpo20iLmSeHQgVBgIQnNCHiR3CFAobBAax7ggBxeL8iuMX
+ gOf+sSX8QZQp/xbBqV5Y5WJDDpF2Ts6iwRW8DNVmPvwN5KpWEYbb77XaPV6OTg43VfUS
+ Dx4Q==
+X-Gm-Message-State: AOJu0YzNQ9ChgCBP5PVDb1znO79FEtMA/lA5TiasEbP6eTCzC5eVCgrp
+ mUW5U5MgTH/5XRY849r42T+6TNlJBReig6AtVpLJ091cKkaDWw==
+X-Google-Smtp-Source: AGHT+IHmM66KXy6dM0ieNjzC9uMx1V4vgpcuj6M1X1cu7f0Dp4VVGCbtFo/rN0HiJ53/2Rt0dLXWF/HMckrYdJaK0CY=
+X-Received: by 2002:a05:6512:78c:b0:50e:7bd0:1c3d with SMTP id
+ x12-20020a056512078c00b0050e7bd01c3dmr2026187lfr.97.1704790652407; Tue, 09
+ Jan 2024 00:57:32 -0800 (PST)
 MIME-Version: 1.0
 References: <20240109085334.41481-1-heinrich.schuchardt@canonical.com>
- <20240109085334.41481-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240109085334.41481-3-heinrich.schuchardt@canonical.com>
+ <20240109085334.41481-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240109085334.41481-2-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 9 Jan 2024 10:56:47 +0200
-Message-ID: <CAC_iWjJniq4hXHA6-dc6ukn4BZFhuV50enr0ueQD-s+Ts1GsVg@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] lib: smbios: verify_checksum() is duplicate
+Date: Tue, 9 Jan 2024 10:56:56 +0200
+Message-ID: <CAC_iWjJX5fG3i_edtnNtGcZQPecD6Mn7_RgBKPCwqOgCKxrJig@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] lib: make table_compute_checksum() arguments const
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Simon Glass <sjg@chromium.org>,
  Christian Gmeiner <christian.gmeiner@gmail.com>, u-boot@lists.denx.de
@@ -89,57 +89,49 @@ X-Virus-Status: Clean
 On Tue, 9 Jan 2024 at 10:53, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> The function verify_checksum() duplicates what table_compute_checksum()
-> does. Replace it. table_compute_checksum() is always compiled.
+> table_compute_checksum() does neither changes the content of the
+> checksummed buffer nor the buffer length. Adding const to the
+> definition makes the function wider usable.
 >
-> Fixes: 415eab0655a8 ("smbios: add parsing API")
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
 > ---
 > v2:
->         correct sequence of includes
+>         new patch
 > ---
->  lib/smbios-parser.c | 18 ++----------------
->  1 file changed, 2 insertions(+), 16 deletions(-)
+>  include/tables_csum.h | 2 +-
+>  lib/tables_csum.c     | 4 ++--
+>  2 files changed, 3 insertions(+), 3 deletions(-)
 >
-> diff --git a/lib/smbios-parser.c b/lib/smbios-parser.c
-> index b578c30840..110670343d 100644
-> --- a/lib/smbios-parser.c
-> +++ b/lib/smbios-parser.c
-> @@ -5,22 +5,8 @@
->  #define LOG_CATEGORY   LOGC_BOOT
+> diff --git a/include/tables_csum.h b/include/tables_csum.h
+> index 4812333093..9207e85f91 100644
+> --- a/include/tables_csum.h
+> +++ b/include/tables_csum.h
+> @@ -17,6 +17,6 @@
+>   * @len:       configuration table size
+>   * @return:    the 8-bit checksum
+>   */
+> -u8 table_compute_checksum(void *v, int len);
+> +u8 table_compute_checksum(const void *v, const int len);
 >
->  #include <smbios.h>
-> +#include <tables_csum.h>
+>  #endif
+> diff --git a/lib/tables_csum.c b/lib/tables_csum.c
+> index 636aa59676..305b1ec31c 100644
+> --- a/lib/tables_csum.c
+> +++ b/lib/tables_csum.c
+> @@ -5,9 +5,9 @@
 >
-> -static inline int verify_checksum(const struct smbios_entry *e)
-> -{
-> -       /*
-> -        * Checksums for SMBIOS tables are calculated to have a value, so that
-> -        * the sum over all bytes yields zero (using unsigned 8 bit arithmetic).
-> -        */
-> -       u8 *byte = (u8 *)e;
-> -       u8 sum = 0;
-> -
-> -       for (int i = 0; i < e->length; i++)
-> -               sum += byte[i];
-> -
-> -       return sum;
-> -}
-> -
->  const struct smbios_entry *smbios_entry(u64 address, u32 size)
+>  #include <linux/types.h>
+>
+> -u8 table_compute_checksum(void *v, int len)
+> +u8 table_compute_checksum(const void *v, const int len)
 >  {
->         const struct smbios_entry *entry = (struct smbios_entry *)(uintptr_t)address;
-> @@ -32,7 +18,7 @@ const struct smbios_entry *smbios_entry(u64 address, u32 size)
->         if (memcmp(entry->anchor, "_SM_", 4))
->                 return NULL;
+> -       u8 *bytes = v;
+> +       const u8 *bytes = v;
+>         u8 checksum = 0;
+>         int i;
 >
-> -       if (verify_checksum(entry))
-> +       if (table_compute_checksum(entry, entry->length))
->                 return NULL;
->
->         return entry;
 > --
 > 2.43.0
 >
+
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
