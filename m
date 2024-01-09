@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9663C46CD2
-	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 14:00:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33BF9C47073
+	for <u-boot@archiver.kernel.org>; Tue,  9 Jan 2024 14:02:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFAB6878CF;
-	Tue,  9 Jan 2024 15:00:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 90A1A878CF;
+	Tue,  9 Jan 2024 15:02:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="KyojuvK8";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="QSiKu9sm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAE1287867; Tue,  9 Jan 2024 15:00:27 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 573B7878E1; Tue,  9 Jan 2024 15:02:24 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C5A7878E1
- for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 15:00:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 09C1C87867
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 15:02:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=1738c7e6a4=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 4099FJP2014975; Tue, 9 Jan 2024 15:00:22 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding:content-type; s=selector1; bh=ze7yZBG
- 3+0mLL3viz6bj3xaP1nlBrlm56zMeKLIjgdc=; b=KyojuvK84hocKKWkK6e+P/l
- hur4+nNyy2JUNd0iRICNPexlb8mCDxShfGS6vA7CUFvCiOWsn1FSUWOUKgXD6ZvJ
- 5Wz8JWbsX1E4Y/Sutqdjrn1Oxrr9DihHLMQf0k4bgYxszivEYL6c3e2mo6OxIo8y
- 28ajOaxl9qNXIsaU8GMM8bfAcgzPT0nqH/cxTl7FpMDzf8VKbV+kNPo7UzwbgXu2
- lKqJO3/WjrtRKEqATjpfbt1Wkq1fKNSU2rrZpSYB37jQrWFsYr5VCOhRWZTGJKpK
- IU9A/zToKE/waDZWJp5Fh5IWZY0IUAetAmexRQS4yy4WaPuiomqBJBxFIkS2xng=
- =
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vey30m39n-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 09 Jan 2024 15:00:22 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6925710002A;
- Tue,  9 Jan 2024 15:00:22 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 569D6210F7E;
- Tue,  9 Jan 2024 15:00:22 +0100 (CET)
-Received: from localhost (10.201.20.205) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 9 Jan
- 2024 15:00:22 +0100
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Igor Opaniuk
- <igor.opaniuk@foundries.io>, Marek Vasut <marex@denx.de>, Oleksandr Suvorov
- <oleksandr.suvorov@foundries.io>
-Subject: [PATCH] stm32mp2: Fix CONFIG_STM32MP25X flag usage
-Date: Tue, 9 Jan 2024 15:00:17 +0100
-Message-ID: <20240109140018.2015396-1-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=masahiroy@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 04C99CE18DD
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 14:02:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16704C433A6
+ for <u-boot@lists.denx.de>; Tue,  9 Jan 2024 14:02:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1704808939;
+ bh=ySGWGM6KAkW2Wvf68TJ4tX2XgT/a98DZvuxdIxEnpFg=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=QSiKu9smlPJRTZ5t2XfwSf201qynpyqIXrjx2VivuJqP+AxM9kA3+HMzIAv6H0Q7S
+ kkSsSg4uq+IzBGkq1BkauN/kmxjau2SUxLmvu91qLuxLpD9AY2NLpAbxSVuDtGtozt
+ DlxXZ92Qt/+2uafPOuXWTEYN95m3Bd6uRwCdBE206GrgqNHUuG5ex74X/tQlavj6nG
+ m1qGsGL0SVmX5Z+adZKVfi16ZfqA2hn847LFRPnU3GW5pNSe+7/+BOxbwv5QWrJvwJ
+ V4+LU3C2eKnRE9fZhQ1HV7SHD7Pf+pJFrEe9XOk04NocNe9bEaxXDvhTHw2FJTtzPs
+ z6PeZsLKUdp/A==
+Received: by mail-oa1-f41.google.com with SMTP id
+ 586e51a60fabf-2041ed74956so1780376fac.0
+ for <u-boot@lists.denx.de>; Tue, 09 Jan 2024 06:02:19 -0800 (PST)
+X-Gm-Message-State: AOJu0YzgcWH8wnTZSuC+kagof/d4U0BOAoB4gYR3K5g6vQuiOpMNcF+Z
+ LtBodc2iHBtYSvuy53MGsdiZB2N1MkC0Dbl2hJQ=
+X-Google-Smtp-Source: AGHT+IFlTnlM5PnQAacW9Sy3tlgTzLI2sRSd9sbzVX2G3fIH3OgI3KNJpyEpr0ABbrCkSjtQP8yf/hVfXgpGMPs7EdA=
+X-Received: by 2002:a05:6870:170e:b0:203:bb46:fb67 with SMTP id
+ h14-20020a056870170e00b00203bb46fb67mr305930oae.43.1704808938423; Tue, 09 Jan
+ 2024 06:02:18 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.201.20.205]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-01-05_08,2024-01-05_01,2023-05-22_02
+References: <20231202035511.487946-1-sjg@chromium.org>
+ <20231202035511.487946-3-sjg@chromium.org>
+ <20231213121353.GA31326@willie-the-truck>
+ <CAFLszTjfmSx1YMqzb2TsQf7sP4KrcQB=X7DY_HxRQp0J5HAppQ@mail.gmail.com>
+In-Reply-To: <CAFLszTjfmSx1YMqzb2TsQf7sP4KrcQB=X7DY_HxRQp0J5HAppQ@mail.gmail.com>
+From: Masahiro Yamada <masahiroy@kernel.org>
+Date: Tue, 9 Jan 2024 23:01:42 +0900
+X-Gmail-Original-Message-ID: <CAK7LNAQRCDC03e=TVO=k4FuD2a2RdTy7yLr3UptQjVCX7pM1CA@mail.gmail.com>
+Message-ID: <CAK7LNAQRCDC03e=TVO=k4FuD2a2RdTy7yLr3UptQjVCX7pM1CA@mail.gmail.com>
+Subject: Re: [PATCH v9 2/2] arm64: boot: Support Flat Image Tree
+To: Simon Glass <sjg@chromium.org>
+Cc: Will Deacon <will@kernel.org>, linux-arm-kernel@lists.infradead.org, 
+ Ahmad Fatoum <a.fatoum@pengutronix.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Nicolas Schier <nicolas@fjasle.eu>, Tom Rini <trini@konsulko.com>, 
+ Catalin Marinas <catalin.marinas@arm.com>, Jonathan Corbet <corbet@lwn.net>, 
+ Nathan Chancellor <nathan@kernel.org>, Nick Terrell <terrelln@fb.com>,
+ linux-doc@vger.kernel.org, 
+ linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ workflows@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,28 +88,164 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-"#if" was used instead of "#ifdef"
+Hi Simon,
 
-Fixes: 01a701994b05 ("stm32mp2: initial support")
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
 
- arch/arm/mach-stm32mp/include/mach/stm32.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Wed, Jan 3, 2024 at 8:47=E2=80=AFAM Simon Glass <sjg@chromium.org> wrote=
+:
+>
+> Hi Masahiro,
+>
+> On Wed, Dec 13, 2023 at 5:14=E2=80=AFAM Will Deacon <will@kernel.org> wro=
+te:
+> >
+> > On Fri, Dec 01, 2023 at 08:54:42PM -0700, Simon Glass wrote:
+> > > Add a script which produces a Flat Image Tree (FIT), a single file
+> > > containing the built kernel and associated devicetree files.
+> > > Compression defaults to gzip which gives a good balance of size and
+> > > performance.
+> > >
+> > > The files compress from about 86MB to 24MB using this approach.
+> > >
+> > > The FIT can be used by bootloaders which support it, such as U-Boot
+> > > and Linuxboot. It permits automatic selection of the correct
+> > > devicetree, matching the compatible string of the running board with
+> > > the closest compatible string in the FIT. There is no need for
+> > > filenames or other workarounds.
+> > >
+> > > Add a 'make image.fit' build target for arm64, as well. Use
+> > > FIT_COMPRESSION to select a different algorithm.
+> > >
+> > > The FIT can be examined using 'dumpimage -l'.
+> > >
+> > > This features requires pylibfdt (use 'pip install libfdt'). It also
+> > > requires compression utilities for the algorithm being used. Supporte=
+d
+> > > compression options are the same as the Image.xxx files. For now ther=
+e
+> > > is no way to change the compression other than by editing the rule fo=
+r
+> > > $(obj)/image.fit
+> > >
+> > > While FIT supports a ramdisk / initrd, no attempt is made to support
+> > > this here, since it must be built separately from the Linux build.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > > Changes in v9:
+> > > - Move the compression control into Makefile.lib
+> > >
+> > > Changes in v8:
+> > > - Drop compatible string in FDT node
+> > > - Correct sorting of MAINTAINERS to before ARM64 PORT
+> > > - Turn compress part of the make_fit.py comment in to a sentence
+> > > - Add two blank lines before parse_args() and setup_fit()
+> > > - Use 'image.fit: dtbs' instead of BUILD_DTBS var
+> > > - Use '$(<D)/dts' instead of '$(dir $<)dts'
+> > > - Add 'mkimage' details Documentation/process/changes.rst
+> > > - Allow changing the compression used
+> > > - Tweak cover letter since there is only one clean-up patch
+> > >
+> > > Changes in v7:
+> > > - Add Image as a dependency of image.fit
+> > > - Drop kbuild tag
+> > > - Add dependency on dtbs
+> > > - Drop unnecessary path separator for dtbs
+> > > - Rebase to -next
+> > >
+> > > Changes in v5:
+> > > - Drop patch previously applied
+> > > - Correct compression rule which was broken in v4
+> > >
+> > > Changes in v4:
+> > > - Use single quotes for UIMAGE_NAME
+> > >
+> > > Changes in v3:
+> > > - Drop temporary file image.itk
+> > > - Drop patch 'Use double quotes for image name'
+> > > - Drop double quotes in use of UIMAGE_NAME
+> > > - Drop unnecessary CONFIG_EFI_ZBOOT condition for help
+> > > - Avoid hard-coding "arm64" for the DT architecture
+> > >
+> > > Changes in v2:
+> > > - Drop patch previously applied
+> > > - Add .gitignore file
+> > > - Move fit rule to Makefile.lib using an intermediate file
+> > > - Drop dependency on CONFIG_EFI_ZBOOT
+> > > - Pick up .dtb files separately from the kernel
+> > > - Correct pylint too-many-args warning for write_kernel()
+> > > - Include the kernel image in the file count
+> > > - Add a pointer to the FIT spec and mention of its wide industry usag=
+e
+> > > - Mention the kernel version in the FIT description
+> > >
+> > >  Documentation/process/changes.rst |   9 +
+> > >  MAINTAINERS                       |   7 +
+> > >  arch/arm64/Makefile               |   7 +-
+> > >  arch/arm64/boot/.gitignore        |   1 +
+> > >  arch/arm64/boot/Makefile          |   6 +-
+> > >  scripts/Makefile.lib              |  16 ++
+> > >  scripts/make_fit.py               | 291 ++++++++++++++++++++++++++++=
+++
+> > >  7 files changed, 334 insertions(+), 3 deletions(-)
+> > >  create mode 100755 scripts/make_fit.py
+> >
+> > I'll need Masahiro's Ack on the scripts/ changes before I can take this
+> > one.
+>
+> Any thoughts on this request, please?
+>
+> Regards,
+> Simon
+>
 
-diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
-index 46d469881b3..175f2a88490 100644
---- a/arch/arm/mach-stm32mp/include/mach/stm32.h
-+++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
-@@ -157,7 +157,7 @@ enum forced_boot_mode {
- #endif /* __ASSEMBLY__ */
- #endif /* CONFIG_STM32MP15X || CONFIG_STM32MP13X */
- 
--#if CONFIG_STM32MP25X
-+#ifdef CONFIG_STM32MP25X
- #define STM32_RCC_BASE			0x44200000
- #define STM32_TAMP_BASE			0x46010000
- 
--- 
-2.25.1
 
+
+As I mentioned before, I am concerned with having
+the same "compatible" entries, with different contents,
+as you use the "compatible" string as an ID to selecting
+the target config node, right?
+
+
+
+
+
+$ fdtdump  arch/arm64/boot/image.fit
+
+        ...
+
+        conf-10 {
+            compatible =3D "tq,am642-tqma6442l-mbax4xxl",
+"tq,am642-tqma6442l", "ti,am642";
+            description =3D "TQ-Systems TQMa64xxL SoM on MBax4xxL carrier b=
+oard";
+            fdt =3D "fdt-10";
+            kernel =3D "kernel";
+        };
+
+        ...
+
+        conf-25 {
+            compatible =3D "tq,am642-tqma6442l-mbax4xxl",
+"tq,am642-tqma6442l", "ti,am642";
+            description =3D "TQ-Systems TQMa64xxL SoM on MBax4xxL carrier b=
+oard";
+            fdt =3D "fdt-25";
+            kernel =3D "kernel";
+        };
+
+
+
+
+
+
+
+
+
+
+
+
+--=20
+Best Regards
+Masahiro Yamada
