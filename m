@@ -4,33 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48BC7C4725D
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 14:08:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1053C4707C
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 14:10:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38D7C87A7B;
-	Wed, 10 Jan 2024 15:08:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 19AC987ABE;
+	Wed, 10 Jan 2024 15:10:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1704895698;
-	bh=bmYr3e1Fx8vcfqlanCjANQnvdy5AfYyw2eCFbb5/nWs=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	s=phobos-20191101; t=1704895817;
+	bh=SRwKr6t7fVHcKJlOZ2V1IrfUrne5w8zOo3fr+u2wcdQ=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=kQXASoovHj97AGb726KVo3atDXZZ1fuF1cs2L8Q71o5ReNVj73dBzpiw5Gf9KotYz
-	 TtDpWK+AfG0N1M89Gyw7gk9fOqDBDKX8m4Wvob1x/Y0NPbgHDtKukHmTIXnbExhyNF
-	 4O9unVUjm4YpweveoJWseTreEX+jzQOhxjakgxH3rYd8JOZIDvm8d9n/psIaqxfQMV
-	 OZRNSWwtnV3kVc15AeY1H3FW7CLIHZfYbwfdnNV9uhLZ01S7h679pBp4+K7b+TmymT
-	 a9CHaXZ6iHgvV9E850iuPgJf/PlpTkf9MsXiwBCr3SklASUE+wRGSiky/1mEedKwx+
-	 FyJzP51/ZSpjQ==
+	b=Ho7uVCmgBbf86g8Z+V5fXXEMl2DwatdabOk7TqSDn9GoRI0MM07p16TvbGjoVUwoi
+	 8qT3MUMGjH/r3lHCownS1J/Ds71NzqQ93fs9LORhEQBW5wJa4C12fnG8O5AKt+D9yj
+	 MZZ7l3wqHtUz+3G0mbe5BPqI1E1bTGPa82b9IRXtwzhy0fwOwnHXZajmCzzIihvnzw
+	 w5fDsBTLP3Y7gxYVoParrIIEnZVydDicjm+saOJ+mdSogqDKwwyto2GfcKh1+Yz/Yj
+	 jxs5E5fsFK7GKbAO+N+MgIbK0IygNLB+HmoGTWu1xNs2RaOOZU/OdvLR4n0efZ4xJq
+	 oWfxfMA17KSsQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7842787A99; Wed, 10 Jan 2024 15:08:16 +0100 (CET)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
- [IPv6:2001:67c:2050:101:465::204])
+ id 9E92F87A88; Wed, 10 Jan 2024 15:10:15 +0100 (CET)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FBFB87A79
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 15:08:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B8F4487A7B
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 15:10:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
@@ -39,21 +38,21 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4T98lc4D73z9scd;
- Wed, 10 Jan 2024 15:08:12 +0100 (CET)
-Message-ID: <698b72c1-5353-4608-bab0-ce3185498c0d@denx.de>
-Date: Wed, 10 Jan 2024 15:08:11 +0100
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4T98nv1hKHz9sZN;
+ Wed, 10 Jan 2024 15:10:11 +0100 (CET)
+Message-ID: <4dbc517f-8610-4380-bafb-5b54d969cbc1@denx.de>
+Date: Wed, 10 Jan 2024 15:10:10 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH] arm: mvebu: AC5: Use finer grained memory map
-To: Chris Packham <judge.packham@gmail.com>, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-References: <20231027004430.442136-1-judge.packham@gmail.com>
+Subject: Re: [PATCH v3 1/3] arm: mvebu: Espressobin: move FDT fixup into a
+ separate function
 Content-Language: en-US
+To: Robert Marko <robert.marko@sartura.hr>, u-boot@lists.denx.de
+References: <20231129101117.60177-1-robert.marko@sartura.hr>
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20231027004430.442136-1-judge.packham@gmail.com>
+In-Reply-To: <20231129101117.60177-1-robert.marko@sartura.hr>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4T98lc4D73z9scd
+X-Rspamd-Queue-Id: 4T98nv1hKHz9sZN
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,14 +69,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/27/23 02:44, Chris Packham wrote:
-> The ATF implementation for AC5/AC5X ends up with bl31 living in some
-> internal SRAM. This is in the middle of the large MMIO region that we
-> were using. Adjust this to be finer grained blocks based on the address
-> map from the AC5X Family Control and Management Subsystem Functional
-> Datasheet.
+On 11/29/23 11:11, Robert Marko wrote:
+> Currently, Esspresobin FDT is being fixed up directly in ft_board_setup()
+> which makes it hard to add support for any other board to be fixed up.
 > 
-> Signed-off-by: Chris Packham <judge.packham@gmail.com>
+> So, lets just move the FDT fixup code to a separate function and call it
+> if compatible matches, there should be no functional change.
+> 
+> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+> Reviewed-by: Stefan Roese <sr@denx.de>
 
 Applied to u-boot-marvell/master
 
@@ -85,104 +85,48 @@ Thanks,
 Stefan
 
 > ---
+>   board/Marvell/mvebu_armada-37xx/board.c | 14 +++++++++-----
+>   1 file changed, 9 insertions(+), 5 deletions(-)
 > 
->   arch/arm/mach-mvebu/alleycat5/cpu.c | 66 ++++++++++++++++++++++-------
->   1 file changed, 51 insertions(+), 15 deletions(-)
-> 
-> diff --git a/arch/arm/mach-mvebu/alleycat5/cpu.c b/arch/arm/mach-mvebu/alleycat5/cpu.c
-> index 8204d9627515..0f72ae1709be 100644
-> --- a/arch/arm/mach-mvebu/alleycat5/cpu.c
-> +++ b/arch/arm/mach-mvebu/alleycat5/cpu.c
-> @@ -16,7 +16,10 @@
+> diff --git a/board/Marvell/mvebu_armada-37xx/board.c b/board/Marvell/mvebu_armada-37xx/board.c
+> index 04124d8014..1471caa9a6 100644
+> --- a/board/Marvell/mvebu_armada-37xx/board.c
+> +++ b/board/Marvell/mvebu_armada-37xx/board.c
+> @@ -363,18 +363,14 @@ EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, last_stage_init);
+>   #endif
 >   
->   DECLARE_GLOBAL_DATA_PTR;
+>   #ifdef CONFIG_OF_BOARD_SETUP
+> -int ft_board_setup(void *blob, struct bd_info *bd)
+> +static int espressobin_fdt_setup(void *blob)
+>   {
+> -#ifdef CONFIG_ENV_IS_IN_SPI_FLASH
+>   	int ret;
+>   	int spi_off;
+>   	int parts_off;
+>   	int part_off;
 >   
-> -#define RAM_SIZE	SZ_1G
-> +#define AC5_PTE_BLOCK_DEVICE \
-> +	(PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) | \
-> +			 PTE_BLOCK_NON_SHARE | \
-> +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN)
+>   	/* Fill SPI MTD partitions for Linux kernel on Espressobin */
+> -	if (!of_machine_is_compatible("globalscale,espressobin"))
+> -		return 0;
+> -
+>   	spi_off = fdt_node_offset_by_compatible(blob, -1, "jedec,spi-nor");
+>   	if (spi_off < 0)
+>   		return 0;
+> @@ -459,6 +455,14 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+>   		return 0;
+>   	}
 >   
->   static struct mm_region ac5_mem_map[] = {
->   	{
-> @@ -31,30 +34,63 @@ static struct mm_region ac5_mem_map[] = {
->   		.phys = 0x00000000,
->   		.virt = 0xa0000000,
->   		.size = 0x100000,
-> -
-> -		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> -			 PTE_BLOCK_NON_SHARE |
-> -			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> +		.attrs = AC5_PTE_BLOCK_DEVICE,
->   	},
->   	{
->   		/* MMIO regions */
->   		.phys = 0x100000,
->   		.virt = 0x100000,
->   		.size = 0x3ff00000,
-> -
-> -		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> -			 PTE_BLOCK_NON_SHARE |
-> -			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> +		.attrs = AC5_PTE_BLOCK_DEVICE,
->   	},
->   	{
-> -		/* MMIO regions */
->   		.phys = 0x7F000000,
->   		.virt = 0x7F000000,
-> -		.size = 0x21000000,
-> -
-> -		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> -			 PTE_BLOCK_NON_SHARE |
-> -			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> +		.size = SZ_8M,
-> +		.attrs = AC5_PTE_BLOCK_DEVICE,
-> +	},
-> +	{
-> +		.phys = 0x7F800000,
-> +		.virt = 0x7F800000,
-> +		.size = SZ_4M,
-> +		.attrs = AC5_PTE_BLOCK_DEVICE,
-> +	},
-> +	{
-> +		.phys = 0x7FC00000,
-> +		.virt = 0x7FC00000,
-> +		.size = SZ_512K,
-> +		.attrs = AC5_PTE_BLOCK_DEVICE,
-> +	},
-> +	{
-> +		.phys = 0x7FC80000,
-> +		.virt = 0x7FC80000,
-> +		.size = SZ_512K,
-> +		.attrs = AC5_PTE_BLOCK_DEVICE,
-> +	},
-> +	{
-> +		.phys = 0x7FD00000,
-> +		.virt = 0x7FD00000,
-> +		.size = SZ_512K,
-> +		.attrs = AC5_PTE_BLOCK_DEVICE,
-> +	},
-> +	/* ATF region 0x7FE00000-0x7FE20000 not mapped */
-> +	{
-> +		.phys = 0x7FE80000,
-> +		.virt = 0x7FE80000,
-> +		.size = SZ_512K,
-> +		.attrs = AC5_PTE_BLOCK_DEVICE,
-> +	},
-> +	{
-> +		.phys = 0x7FFF0000,
-> +		.virt = 0x7FFF0000,
-> +		.size = SZ_1M,
-> +		.attrs = AC5_PTE_BLOCK_DEVICE,
-> +	},
-> +	{
-> +		.phys = 0x80000000,
-> +		.virt = 0x80000000,
-> +		.size = SZ_2G,
-> +		.attrs = AC5_PTE_BLOCK_DEVICE,
->   	},
->   	{
->   		0,
+> +	return 0;
+> +}
+> +
+> +int ft_board_setup(void *blob, struct bd_info *bd)
+> +{
+> +#ifdef CONFIG_ENV_IS_IN_SPI_FLASH
+> +	if (of_machine_is_compatible("globalscale,espressobin"))
+> +		return espressobin_fdt_setup(blob);
+>   #endif
+>   	return 0;
+>   }
 
 Viele Grüße,
 Stefan Roese
