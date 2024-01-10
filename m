@@ -4,70 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17E2CC3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 09:11:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17523C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 09:11:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24B1C87A99;
-	Wed, 10 Jan 2024 10:10:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BE84E87A9E;
+	Wed, 10 Jan 2024 10:10:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="CUVHeA9d";
+	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="GcmiocAh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92F8C87A4B; Wed, 10 Jan 2024 10:10:51 +0100 (CET)
+ id 5B73F87AB3; Wed, 10 Jan 2024 10:10:53 +0100 (CET)
 Received: from EUR02-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur02on20613.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe16::613])
+ (mail-vi1eur02on20629.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe16::629])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3464B85E44
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 10:10:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 82DCB8797B
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 10:10:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
  header.from=weidmueller.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=MzkF9M36m0rch8rQ1JLVFRkud5DVsbBN/FqqqY1Rroslp67Pp/ADDE7Cf9cc+J4silzcwET2kPmd+ZqVDzjkqOdePr9+oa5yLDflbf31+cxXmWPUVcsE0309qNWQu5jXuzgrMpp6hYghQ2opLwLC17YTtOTVbb+mK5C2x4gKH3sICpWivSBYVj9qMXUVtmW/m5JUWU17Hfh0fPmGFJk9p8jSZ79ErYGAgcD6z+7w+wUvc3U4v9ngOMUAip6fqMtmXf0CYpE9D2xh1absO7emdyET0N4La+Eseto4G0iLVvtBoHbaXQBXrEoi9Rzudve0vGzJIctU2BQmySNIpIIP2w==
+ b=k10PBt95bgrpeLY7RKUqGlQqS9hYTe2CxRoBXdYtUdPnXqWV6Fq54TsiSPWkyB6BblGoXkSv5RJ3BibZ2wsd4m2jt67CioRXwpKWofQOF+LfxPdt/GS0NcsJXp9udLlzCsD7NanxbNLzPlVSEx2TWUnC4eQj30BQ48YX83tHal9ziihr6iOFxyFetp/B2dvCNTem6Dlaoda4fq0D1b4VgBaQ6OwWm8b/PvbbQg1U3aGEzHTw8XwVZtCt2Gqq3V3Ohou3qhlJhfXftRgCAaYE9PdQ2I9GIbmEUheFlG9ziCukYBnr/EYcNpiVJ/zbBTw3zqny0nywOZfvhb+YJoHECg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=S42LaWGIAFlxh9QWibhKVkeyPm7TdXTqYss3DeIf/Js=;
- b=inY8PftX8tpm2AQ3Dju842p0e9cyYRMb4bWNJ+6o0KnwbK/7Ud1AcuL9ywttsgr+GyZyFAT0EDoQ2JSrYGCFqRTlpPmsxCSqrKR7paWGxcvKRCPjwu9D5cnCOo0yhIShCuDkt7w17pe0kn58IZaql5sL7IT5gDNCCqR9gP+EJRKoKcXTaCMvzW76KjPxzAgILGSSWI6A35xtN8gaDzN7Zx6U8Whp52gXqq1Tw0CoU9EV/w6HEK2p/6lDrcY+oZOVxfVsQ/6wA30ErUNtk62Pp3FaumFCEDcX9y9XvOWmzOAbN0U7uP3u+WE7U5VyHOeJ4nnE0ikn9ivrkcmXmazHWg==
+ bh=O5+hUd0kJ/55WDNWk/vjw7685stc9LtUunN+q9hAR5w=;
+ b=kbZYrETfO09ma/JKzTp/3rZ1Es+JushksTHMosZ4OoZ5f84snq99lH/2WC1VmoYcScVwPJKHatys/hz9ePaXRBm75vski7r7E6I6zERAaDJDJZXfdhY+2ZxN6pGIyZl9q4iEdAxCwujSCYH3fiYU/tubtsTqVJO2XX96kBNQ5EbLWYqQiuh/YB6IbkmJ946TWhZsIAcuNc//526vYCk0o1KgH9WB9WSWvCmhvgCtrwiil9TgBa96XFa/HQVRZVhzegL7Eo62/98G0zZH2W2wyEKNKAGEFRZyQ4sCloJ+vVveQycW7TpCSzTntClH0FoIYrRZyXtGEF75tXavRJ1Mgw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=weidmueller.com; dmarc=pass action=none
  header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=S42LaWGIAFlxh9QWibhKVkeyPm7TdXTqYss3DeIf/Js=;
- b=CUVHeA9dHk19zG0uQLXwOLKJd10dYZoXOiARCj7UakRDH+Ua2l82mAF5l/OIqzn0K8ONCY8JMuDGF/KFtQHtBrpYtOIsu8yCCf1w4x9ECjAhtKNxZSls5ptCmZ8A+QYmUbAqEGxt97wurkCBrKDHrmN8mTNCGuOn1YTX1BnzVvw=
+ bh=O5+hUd0kJ/55WDNWk/vjw7685stc9LtUunN+q9hAR5w=;
+ b=GcmiocAhPCYc0rU4m0JnqRd87V5hv7YwyKT5eyaxDDXntOTv9uv/LBvzMorJqWmdJQFJ25uYU1YWJmkMKlg6A0c7VDkx+pn1faCDUMjY3Y+Wz8PjaQCFXyeNRy/9OHYjNmbKDyV4Snlty5G52rhy9IERVFK4/Pbi/CZ7h7Yow3c=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=weidmueller.com;
 Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
  by GV1PR08MB8641.eurprd08.prod.outlook.com (2603:10a6:150:82::19)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7181.17; Wed, 10 Jan
- 2024 09:10:47 +0000
+ 2024 09:10:49 +0000
 Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
  ([fe80::daa3:b3af:ec52:4278]) by AS2PR08MB8431.eurprd08.prod.outlook.com
  ([fe80::daa3:b3af:ec52:4278%3]) with mapi id 15.20.7159.020; Wed, 10 Jan 2024
- 09:10:47 +0000
+ 09:10:49 +0000
 From: lukas.funke-oss@weidmueller.com
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Lukas Funke <lukas.funke@weidmueller.com>, Bin Meng <bmeng.cn@gmail.com>,
- Evgeny Bachinin <EABachinin@sberdevices.ru>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Roland Gaudig <roland.gaudig@weidmueller.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- =?UTF-8?q?=C5=81ukasz=20Stelmach?= <l.stelmach@samsung.com>
-Subject: [PATCH v3 00/11] Enable setexpr command to print cpu-list like bitmaps
-Date: Wed, 10 Jan 2024 10:10:26 +0100
-Message-Id: <20240110091037.392520-1-lukas.funke-oss@weidmueller.com>
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Roland Gaudig <roland.gaudig@weidmueller.com>
+Subject: [PATCH v3 05/11] cmd: printf: Correctly handle field width
+Date: Wed, 10 Jan 2024 10:10:31 +0100
+Message-Id: <20240110091037.392520-6-lukas.funke-oss@weidmueller.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20240110091037.392520-1-lukas.funke-oss@weidmueller.com>
+References: <20240110091037.392520-1-lukas.funke-oss@weidmueller.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: FR0P281CA0200.DEUP281.PROD.OUTLOOK.COM
@@ -76,53 +72,53 @@ X-ClientProxiedBy: FR0P281CA0200.DEUP281.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|GV1PR08MB8641:EE_
-X-MS-Office365-Filtering-Correlation-Id: deca497f-fdf0-4625-76c1-08dc11bc0848
+X-MS-Office365-Filtering-Correlation-Id: b8602e0b-d0db-4a6a-6942-08dc11bc097e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: R5R7nZXYRdLxpa+cnpak0zBYCuDNvL/nO450EvBjlLC/JUjWHHnaqNBIgaI0zPEaukZz5cA1xTW+/ILeBrvyinVz7ooGn6gZthI/QGOGitHkAhv7jfD+lO263Ycqz1IkDX1pyarFyD0kCzT9laXy/TWYlR+pLcWYpdtRtb3uF8hMSnoJ93ayin7kEHfz4jGd+CbEsAPGI8kS6edC8L1YNNXWcJtWeI6bEciohFqenf2yvmkzHHat04CsrLW/Eby86n6mXvsxW7wrCob/lM9DN85+0atiOTa/IqL2osBd6vBR9I+feOHi0edD8nhGu5exFpFW0LKYxGV+0VNjwE+t57KFlcJlCxjeoaoaki4SRnJCeIkM+vIr0s47jQfkmxWw4sXuDfs00QX8Ge2PxnZQCkyEpKj34XNm09shjY6A3clsJDOjjKyOuDBgEvSsfmcDiLUj7TthfYtAWJw0Ep1ReTurxi6AWDI/rYQyuxohZWpDByN1EwcxwA3KtIPlTF6opwAprPEqLyHeRq/7/c85Odw4zlPbDb59umtuwkZEouuMrTAIZtzyttqYpYq375omUvJd8hYG8VoXmP+HbbBJ/JxvLF+9o1k7YLa/vimQ5O4=
+X-Microsoft-Antispam-Message-Info: gmyR7bzggbTQvVPmXT05U61NyvNLw859OPhpaFDHOBBHyYXiq2Svuh3GmJeN0stybU8+icsSLvUBAC7JvqZWk0xOypyp3GSMNXJcaty6zXusG2kDgmeu/+4CmEIm/Vq2opSpMwSic9/2ghS2Bpyyv0XhQ+sCXatVUwVKe/rPUbsp3D5ALAXsTSqJkOzt9uwGqfuFeowjAAa1WTflDgK0Nl0zzIR1jnAy0VGk3rhhOjkEix6fjB85a4p0/7yqG4vQO68InsBb3NgtFXHecqOKx1eWZEBzKGVn8gE9Rmdo0lwSnibTGYaUAUKr5zz0qjg2wT7S1PUUHWir8s6xEoNrAbQSwUsuXODpnaRChmSnwUK86XU4p2RUw5htLAssC/Z1H3DgehXSQitFr0beO9aPwpf5+CIS1aL/naZBTjlDuYK7j9pd7keAC8l8oliCgC1P3nNHsEoPYAbOCHYkA4Y+Hz2DhZIP+Mf4x9w6AzAPxP1y62KacP/Y+CJ1eP8Dg0DQs+EAJtuqbzjvcTwxBp/3Y8yY9uUYrVf9cRJKNwUtdmIuFdULu81+1zCu07xi56OKdxpC3IKO1rRSX60h4Y5pSHY6LyNyaolbYjLlTsushxMwPrRY0d4jqc241qNIdT+p
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376002)(366004)(39860400002)(396003)(136003)(346002)(230922051799003)(186009)(1800799012)(451199024)(64100799003)(86362001)(26005)(1076003)(2616005)(6666004)(478600001)(6506007)(9686003)(6512007)(52116002)(966005)(83380400001)(5660300002)(7416002)(4326008)(2906002)(41300700001)(6486002)(8676002)(8936002)(6916009)(66556008)(66946007)(66476007)(54906003)(316002)(38100700002)(38350700005)(36756003);
+ SFS:(13230031)(376002)(366004)(39860400002)(396003)(136003)(346002)(230922051799003)(186009)(1800799012)(451199024)(64100799003)(86362001)(107886003)(26005)(1076003)(2616005)(6666004)(478600001)(6506007)(9686003)(6512007)(52116002)(83380400001)(5660300002)(4744005)(4326008)(2906002)(41300700001)(6486002)(8676002)(8936002)(6916009)(66556008)(66946007)(66476007)(54906003)(316002)(38100700002)(38350700005)(36756003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?MqErtgE3oRBP/PZHHaUYIsm5Al4nN1Qn4QXccaOT2qQhm/NgxH434QaZVCWI?=
- =?us-ascii?Q?/2mz6zYBXWZ5RHQHMstoZ2AEOnXP7v1mhp/jW9OhKRSPMrUnuerm+idVtaP5?=
- =?us-ascii?Q?lhduyXuTCJVMUhJVTAar2lHlTJbQpSglklvWBw+cOgkcs/gId+J7WdygfLcf?=
- =?us-ascii?Q?1RFx0KutReo+Mf4kTDwW88qELjgLVkZRIGiyAinEtcbWNUDo/vvOFnVKxPkR?=
- =?us-ascii?Q?nX/VkWowlno0slaWFX2Ip9/OG/IcSkK4MqR6QH0+1Azj8alY6iC5XXiILCPI?=
- =?us-ascii?Q?CaVUEJHVuJ/EyMrDwHqGc52BytmHxewkIWQ/dpEA43QV5oI4TIR2iPKNyfcR?=
- =?us-ascii?Q?B25026BAcUQS+86SOnNSCeDs3QkbVAlem8/1UmxTG/9gv9yf15JDW/0KUjmR?=
- =?us-ascii?Q?S3IvlXO+2h3wsyDmEcXfVL1xutfSRWZnZip+Qm+uvyLVl4cWxDL/k3JL86ka?=
- =?us-ascii?Q?QK36q6vSUMk1wavoHvQ+Gv/+sfFNaU5SgkME4tucKqZWxeG/rRd4+nUGiisR?=
- =?us-ascii?Q?H/umNkkAuTKQfuQwJqxGs2ISs3uiT8af0VqUTzUBHqLrY8iNqmXKDS5Dlkxs?=
- =?us-ascii?Q?4U/sQWW8sDIF+KZo0Y7fQ1mjYO95EH6yRQWrqzUt3DZlBkoYG5WYKtyO8MJl?=
- =?us-ascii?Q?S4r2cxRGFpMAnAEZ+KPbYNK4CbU4f4Fzdx2APPBkN3TArZ0SdGT39UooNsVt?=
- =?us-ascii?Q?ZfMpV8JO9qGdCEUJu72HHN1ZQ44EJmY2KlruDzbxjg+e9EsCPh2PrXMk29g7?=
- =?us-ascii?Q?vgr3khUMOthSvKdQmE4qW+ZhEEsZ9YU16r0hya/WJjB1tdvCJI14EUqqp6EJ?=
- =?us-ascii?Q?TOPGTdZsy2T1do8NyGFv+vFhVaTzUtXDA32fYPDvPhIJsrzOFWIcokHSpqH7?=
- =?us-ascii?Q?T9th+Ulx81mKZVyvncBMu1758fYqpubL/THqHFOHLHDTq0Moy72A/2cM7cGI?=
- =?us-ascii?Q?fq/WdyTWX1l0U7a8u0JYgSalrIWYkI8TashW/5m+pESAibPYH3kR14JdIhpN?=
- =?us-ascii?Q?pJzJke6soHhr1F4CwD6DtWBmadlwIDmfyxc9944kYcyEHKOA5lEU6pbrA0LA?=
- =?us-ascii?Q?HTW9vojE8PLC1Zwea61TQgpxUYZ5EBL5hBj2wi8f2CtL7wXZgLyPQOzmHkW7?=
- =?us-ascii?Q?BSkqCexB3iL2XSPqLNPbkSK4Hp6wP8OGwn7T2XgZFChURmnS5ljSCT6I1X6Y?=
- =?us-ascii?Q?R2juhXqjD1orPx3miaLV6e4fG/rNl0oTocXNTGNwLS19mNuKZD6Ibjsc99v+?=
- =?us-ascii?Q?gXsoY3HUf1DIe5njjHN7zTd9XUFcyFYsQ0IHE23jWAQ2VtjKEGLvzi+HVz4c?=
- =?us-ascii?Q?HKfbUwNahJpDSfIgQtjAKdgZHgfrfucXLlH6aKRAfYayPzj7c2xIjPUPwZcs?=
- =?us-ascii?Q?DSxh4YTOAQ6jmFlmCXK/FABCizKqkssittTTO+P/J/damM9MrxSwUqgo5hbQ?=
- =?us-ascii?Q?kQ2oH2VaPyHJIE1H3ON9kTvAkqm3kWuTe0jnIBEnPSlWm7oa4k9jfyiNpd4h?=
- =?us-ascii?Q?gXlu3cae9MDNAuZcPR4V3nqZKEL07yrV3ohCbY6yCSZEgc4mn3YmTJkSTl3q?=
- =?us-ascii?Q?LgZDdxalfDymuiR9PoGbO+vP0QtDyZAd5RfLm9Vz0Zu7lpN/ZdWIN+hvzxsw?=
- =?us-ascii?Q?pQ=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gezCeDOGYKj8yqRVs2V5Fve3vxy6iKpPuApmipgqApinFpAECduSbnAOVRbW?=
+ =?us-ascii?Q?8jHiwiz3HfjzZscMmfmlR/Drx0sR7bl7R4nLGJu8Slwr2B1Z13HlOAI8H/Y5?=
+ =?us-ascii?Q?sUajVdNW9fd9iyz9qMmHYCeYhagPmpMUuqJRM0ydRcQgGUh5JHTgFSMr3KbL?=
+ =?us-ascii?Q?3fz3RdQCY9BQvW+pZM7s1OEjLecjMoG8lMev8LCgGg461gX4EgXbp2ubS5v+?=
+ =?us-ascii?Q?+eIIhTSjUVQviWrFX4ePYbQ0eV9oQqndz2vg09bavsGZgMUq7xMPiI7aZLMK?=
+ =?us-ascii?Q?ZVjEc6ERNCbVcS5YR72WUxJy7DX0UasZYX3tOZlCimcR/nV1MFWM2D01fwzD?=
+ =?us-ascii?Q?H8nrloSh57g7fPg61KPuMzdr6VH8qu3xN+t2RGwXZmpDxynP4AYdLcLxFld0?=
+ =?us-ascii?Q?Nr7u08S1uesPhlgI2a1bR9bwpGYPDMWAIwkuhXfVldMBfcesBxL3e4OhvyXb?=
+ =?us-ascii?Q?Tb2UpP8CY8Jafg1PMnw5t7B9mOVZx2sQfmawHUY+aiIYxCGTV7krTpuTlzoL?=
+ =?us-ascii?Q?4P4Er6KZEEZUTOZMu4A8bBBeWZO1Rd/v3TLNdII5E/c/1S+6URSORtNeCKUC?=
+ =?us-ascii?Q?XHkUbmKKZXZdSS8lte4UxO36kLcV2+2D0uP1BU7D0E0HZATCMbbM/bndtTFr?=
+ =?us-ascii?Q?Z5HBeLjpL7io6AjoXGXI+PNYTim5G8uh1+4pgdVDlcM/CDc5VLSX06+AJEYg?=
+ =?us-ascii?Q?S58hXh3uGmz2hvhm5sID9zkMEAG0ZqDPnebcOLYjCuXg4TkfzlbZuO9qhpsy?=
+ =?us-ascii?Q?pech84Bako6KEMzGPxI7VgYZAfkjdXNtQoDavh1SGsAsokj61CpYHff+UDtx?=
+ =?us-ascii?Q?VyqZ5OIZckvYZg7sQH+BHjMw9QC64nVVJYXAFguOiZGQsK1kAIRDCXnATqJP?=
+ =?us-ascii?Q?EChtRSL0DZXAwNZET1EOrn98HiHz7GAsDNfB39C64xyr7xNEyZp10ovfzkTF?=
+ =?us-ascii?Q?fWJ3L1JB6xTII4gRiMfhVWWht6nByxAhL7uQbhPqdlIg9f3D8Ic43Saf7o/Q?=
+ =?us-ascii?Q?6i2XPOFAimdEAiwzVEmF5Ib4x4q9QlGuDkJfMgtb98Oiru+T8T6+i2oJUux1?=
+ =?us-ascii?Q?/8Wff2xXRQBXkSv1KwdRZOQkqsrW9XFyU14blcII1uN3O9ZEPEfbKLIpf9p7?=
+ =?us-ascii?Q?BOC15x6XbJi5SA5LUnhOc+rAa5KYwWwCyVKM9NnnTQWRDaArn2PFVoAkLkBH?=
+ =?us-ascii?Q?sLyZ9x/bwO3u9cdBjwWJeZMCopqUCsEhVRVPxLJc9uklDi+5Xs2PLFUw3cha?=
+ =?us-ascii?Q?gBBdPYI/kc28DkkgX3YJqAbB0TG8FItsnnh7uPPtikT3G3cY74/+054ZUa5o?=
+ =?us-ascii?Q?wZ7xNePKY6wN6XUldb/pmrhpdXRsqjqAHlktBU6LEBSlie+wml176QR+e/nO?=
+ =?us-ascii?Q?jiraYcn6F+0LnSkr+SQJb1bHl8znOdMiSJZ2Zvq+zVVKmZb9q/acCmuTRfeN?=
+ =?us-ascii?Q?XELg2ys8tpYHB1J+O6n3nAE0gPIarXpBR7SpjDZaT7cRcZjaAvx1EwHy0On8?=
+ =?us-ascii?Q?AitbBORLdoTazxPNcLeJPr5bNuu2drp/9qE5wUGGgKNOcPNTCVmrApSmd5xU?=
+ =?us-ascii?Q?1ZP//z24GTIU+jdk1xhk2HdwU6c1lMBA6SvQ26u5yda4LWA0YtKTv0sREgmz?=
+ =?us-ascii?Q?fQ=3D=3D?=
 X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: deca497f-fdf0-4625-76c1-08dc11bc0848
+X-MS-Exchange-CrossTenant-Network-Message-Id: b8602e0b-d0db-4a6a-6942-08dc11bc097e
 X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jan 2024 09:10:47.1755 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jan 2024 09:10:49.1730 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: WIvZ87j6VBaY61wFoysHTdLrl+3hiZxxtfsRUGqolvo2AwQfBr7d0cGeSu4xApaRbRcQU+6ED+mFMjbc04LIQg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: zulAfyU4Dago8AQ/WfBdOyfcHOfgHeQIl4iwnG/ics+LHMTw90x9TRUrsSmGUuAPF9IxbX6zuUu/+fWuGpaWRw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR08MB8641
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -142,66 +138,30 @@ X-Virus-Status: Clean
 
 From: Lukas Funke <lukas.funke@weidmueller.com>
 
+Correctly parse the field width from the format specifier. Before this
+commit the field_width was simply ignored.
 
-This series enables the 'setexpr' command to print "cpu list"-like
-bitmaps based on the printk format specifier [1].
+Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+---
 
-One use-case is to pass cpu list [2] based kernel parameter like
-'isolcpu', 'nohz_full', irq affinity or RCU related CPU parameter to
-the kernel via a separate firmware variable without exposing the
-'bootargs' variable to directly.
+(no changes since v1)
 
-Example:
+ cmd/printf.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-=> env set value 0xdeadbeef
-=> setexpr a fmt isolcpus=%32pbl $value
-=> echo $a
-isolcpus=0-3,5-7,9-13,15-16,18-19,21,23,25-28,30-31
-
-[1] https://www.kernel.org/doc/Documentation/printk-formats.txt
-[2] https://www.kernel.org/doc/html/latest/admin-guide/kernel-parameters.html
-
-
-Changes in v3:
-- Use generic find_next_zero_bit() from arch/arm/include/asm/bitops.h
-- Redirect sandbox ffz() implementation to generic __ffs() impl
-- Remove '%bp' from documentation
-- Give an example output in the documentation
-- Remove bitmap_string() conversion function since the same function
-  can be achieved using other format specifier
-- Dereference pointer argument (i.e. *value) in the
-  'setexpr name fmt <format> value' case. This is currently only
-  supported in the 'setexptr <name> [*]<value>' and
-  'setexptr <name> [*]<value> <op> [*]<value2>' case
-
-Changes in v2:
-- Add bitmap format specifier to documentation
-
-Lukas Funke (11):
-  sandbox: add generic find_next_zero_bit implementation
-  linux: bitmap.h: add 'for_each_set_bitrange' iteration macro
-  test: cmd: setexpr: Add tests for bitmap string format
-  doc: printf() codes: Add bitmap format specifier
-  cmd: printf: Correctly handle field width
-  lib: Add hextobarray() function
-  lib: vsprintf: enable '%pbl' format specifier
-  setexpr: rename 'get_arg()' to 'setexpr_get_arg()'
-  setexpr: Promote 'setexpr_get_arg()' to a public function
-  setexptr: Extend setexpr_get_arg() to handle pointer to memory
-  cmd: printf: forward '%p' format string specifier
-
- arch/sandbox/include/asm/bitops.h | 60 +++++++++++++++++++------------
- cmd/printf.c                      | 53 ++++++++++++++++++++++++++-
- cmd/setexpr.c                     | 48 +++++++++++++++----------
- doc/develop/printf.rst            |  4 +++
- include/command.h                 | 27 ++++++++++++++
- include/linux/bitmap.h            |  7 ++++
- include/vsprintf.h                |  7 ++++
- lib/strto.c                       | 35 ++++++++++++++++++
- lib/vsprintf.c                    | 42 ++++++++++++++++++++++
- test/cmd/setexpr.c                | 22 ++++++++++++
- 10 files changed, 263 insertions(+), 42 deletions(-)
-
+diff --git a/cmd/printf.c b/cmd/printf.c
+index 0c6887e0d6..f56543b79e 100644
+--- a/cmd/printf.c
++++ b/cmd/printf.c
+@@ -517,7 +517,7 @@ static char **print_formatted(struct print_inf *inf, char *f, char **argv, int *
+ 					field_width = get_width_prec(*argv++);
+ 			} else {
+ 				while (isdigit(*f)) {
+-					++f;
++					field_width = field_width * 10 + *(f++) - '0';
+ 					++direc_length;
+ 				}
+ 			}
 -- 
 2.30.2
 
