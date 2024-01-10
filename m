@@ -4,74 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42F12C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 05:05:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E126C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 06:51:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 966678784B;
-	Wed, 10 Jan 2024 06:05:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 594998786E;
+	Wed, 10 Jan 2024 07:51:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="tdW059v0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UivAfYqz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5FBD878C8; Wed, 10 Jan 2024 06:05:01 +0100 (CET)
-Received: from mail-yw1-x1149.google.com (mail-yw1-x1149.google.com
- [IPv6:2607:f8b0:4864:20::1149])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6C5E58789B; Wed, 10 Jan 2024 07:51:15 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65127877FD
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 06:04:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9893487866
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 07:51:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=3eiWeZQcKBnEbdgXioUVddVaT.Rdbj-QddiaXhih.STcm.ST@flex--moritzf.bounces.google.com
-Received: by mail-yw1-x1149.google.com with SMTP id
- 00721157ae682-5e9074bb7c5so52766217b3.0
- for <u-boot@lists.denx.de>; Tue, 09 Jan 2024 21:04:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1704863098; x=1705467898; darn=lists.denx.de;
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:from:to:cc:subject:date:message-id:reply-to;
- bh=VBjgB0cEwRCkpZHI8IW5ySXpOL+WH1a12AKJ9FO6kQU=;
- b=tdW059v0b1uWz7W9HvyvrIHCAqzyngiYy/1QfmAIcuB6k/POTeEE9joUsBrst7hGgV
- 1sNO5qBqg/cJzpgUqg2ZFLegnHX2z0+UReANOUjcjx/HLDQ9xM7igANXkhB/0e2/ccVY
- FADkI7lkjWx3oljQXhJ747i76sB7jz31eSUSmOK/kL+ATMS9kXpOCJGrsdnrLcGxL8Zt
- xc/ASa9VSadJYezSGxePrTSfWhmnnsrPVyKciPcUhXyL885KWEavIJI3jk5gun9VcYno
- ozg81pCT11hXx9xxi5I7X0L4Bva1zEjAeX1+RYWoxn4+UJtDCnKrqAOMyosf2M59BicQ
- RBYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704863098; x=1705467898;
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=VBjgB0cEwRCkpZHI8IW5ySXpOL+WH1a12AKJ9FO6kQU=;
- b=NzUBH1nkkQ0sxxT1/F7toQZ9IVoi4mcaditfczcmy9BSVzkhy9SYXtrH4ptK05Kv/H
- dpPe/Xz98FUwxGtA0h/Ww/RncQI3mfBMaqjy2LLax9BsKHhHoTd0LNR6p0oXXpv4IOCn
- wO2PKoCnMpcjqffy3f2Nirrzgmk7Vh49ESGErV8q8+i9au8rivoHiKa8pY3T3Yvhk0u+
- RICKELjMpa62zWgqJUhYrECl7cWBBk9U6NB2iS8QPcuL9rFIWvgXPZInaxHxJ03NuYk3
- G0mDEgrOmCinLw8V17761z1gMpMF7DVHm6I2aM4++MCy3mXVO+ATq8LPfdzhibYQdeG0
- v+nw==
-X-Gm-Message-State: AOJu0YxZGcZ16QqdGG4cnHIs52+C4A28OwVflMCdEQwAncZNrmgoHhGq
- 3/JnuyC3EI4geetNwMZmvHqOPJZEiqghjyEoo+0=
-X-Google-Smtp-Source: AGHT+IEQxHC+a9vm5OFxBSVcIyGB4ZwPoTm1Svhcs90NM3E4r88qDS6YLtbZevV1UVlOxv1n49nbUx1B7v+V
-X-Received: from morats.c.googlers.com ([fda3:e722:ac3:cc00:14:4d90:c0a8:d9e])
- (user=moritzf job=sendgmr) by 2002:a05:690c:b03:b0:5e3:2a36:b4d
- with SMTP id
- cj3-20020a05690c0b0300b005e32a360b4dmr215440ywb.1.1704863098231; Tue, 09 Jan
- 2024 21:04:58 -0800 (PST)
-Date: Wed, 10 Jan 2024 05:04:48 +0000
-In-Reply-To: <20240110050448.1441657-1-moritzf@google.com>
-Mime-Version: 1.0
-References: <20240110050448.1441657-1-moritzf@google.com>
-X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
-Message-ID: <20240110050448.1441657-2-moritzf@google.com>
-Subject: [PATCH v2 RESEND 2/2] nvme: Update nvme_scan_namespace to keep trying
- on busy
-From: Moritz Fischer <moritzf@google.com>
-To: bmeng.cn@gmail.com, sjg@chromium.org, wenbin.song@nxp.com, 
- u-boot@lists.denx.de, trini@konsulko.com
-Cc: mdf@kernel.org, patrick@blueri.se, Moritz Fischer <moritzf@google.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=danishanwar@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40A6p3qp030393;
+ Wed, 10 Jan 2024 00:51:03 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1704869463;
+ bh=8YtJyyxSjyp8PLcEz9ZdrJ6cvPjIF+O3atYOrXOfoso=;
+ h=Date:Subject:From:To:CC:References:In-Reply-To;
+ b=UivAfYqzg90vRT+iUi/NmNm5+eIM01ZAG1EYz15ji3BSI0bQ5sCpQTHwh1uQnxgtw
+ E9G9JgpGNo1BvObee/5bGZIxQRpJgzjvL4Q28A49hl7PLUsSY3MLrs1+w23/3AADy8
+ V2kq9muRbGY6Wr4gjX1P+rXyBNxnfOvMODBpuULg=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40A6p31U129239
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 10 Jan 2024 00:51:03 -0600
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 10
+ Jan 2024 00:51:02 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 10 Jan 2024 00:51:03 -0600
+Received: from [10.24.69.25] (danish-tpc.dhcp.ti.com [10.24.69.25])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40A6ovLd026159;
+ Wed, 10 Jan 2024 00:50:58 -0600
+Message-ID: <427c0741-5daf-4370-9cf6-5c70d8d6f673@ti.com>
+Date: Wed, 10 Jan 2024 12:20:57 +0530
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 12/16] arm: dts: k3-am65x-binman: Add ICSSG2 overlay
+ and configuration
+Content-Language: en-US
+From: MD Danish Anwar <danishanwar@ti.com>
+To: Roger Quadros <rogerq@kernel.org>, Maxime Ripard <mripard@kernel.org>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Matthias Schiffer
+ <matthias.schiffer@ew.tq-group.com>, Kamlesh Gurudasani <kamlesh@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Joe
+ Hershberger <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>, Tom
+ Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>
+References: <20231219103418.3445886-1-danishanwar@ti.com>
+ <20231219103418.3445886-13-danishanwar@ti.com>
+ <1745ec33-7446-41fc-886a-704eb6e53c7e@kernel.org>
+ <a5d94983-5b36-45d3-b1ef-92cc0da1a505@ti.com>
+In-Reply-To: <a5d94983-5b36-45d3-b1ef-92cc0da1a505@ti.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,34 +92,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A busy controller shouldn't be game-over for all controllers,
-so keep trying on hitting -EBUSY.
+Hi Roger,
 
-This change brings the actual behavior of the routine in line
-with what the descriptions says.
+On 27/12/23 3:49 pm, MD Danish Anwar wrote:
+> On 20/12/23 4:10 pm, Roger Quadros wrote:
+>>
+>>
+>> On 19/12/2023 12:34, MD Danish Anwar wrote:
+>>> Add ICSSG2 overlay and configuration to tispl and u-boot images.
+>>>
+>>> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
+>>> ---
+>>>  arch/arm/dts/k3-am65x-binman.dtsi | 85 +++++++++++++++++++++++++++++++
+>>>  1 file changed, 85 insertions(+)
+>>>
+>>> diff --git a/arch/arm/dts/k3-am65x-binman.dtsi b/arch/arm/dts/k3-am65x-binman.dtsi
+>>> index 8cc24da1f3..9a0c0fca47 100644
+>>> --- a/arch/arm/dts/k3-am65x-binman.dtsi
+>>> +++ b/arch/arm/dts/k3-am65x-binman.dtsi
+>>> @@ -98,6 +98,8 @@
+>>>  #define SPL_AM654_EVM_DTB "spl/dts/k3-am654-base-board.dtb"
+>>>  #define AM654_EVM_DTB "u-boot.dtb"
+>>>  
+>>> +#define AM654_EVM_ICSSG2_DTBO "arch/arm/dts/k3-am654-icssg2.dtbo"
+>>> +
+>>>  &binman {
+>>>  	ti-spl {
+>>>  		insert-template = <&ti_spl_template>;
+>>> @@ -124,6 +126,20 @@
+>>>  						filename = SPL_AM654_EVM_DTB;
+>>>  					};
+>>>  				};
+>>> +
+>>> +				fdt-1 {
+>>> +					description = "k3-am654-icssg2 overlay";
+>>> +					type = "flat_dt";
+>>> +					arch = "arm";
+>>> +					compression = "none";
+>>> +					ti-secure {
+>>> +						content = <&spl_am65x_evm_icssg2_dtb>;
+>>> +						keyfile = "custMpk.pem";
+>>> +					};
+>>> +					spl_am65x_evm_icssg2_dtb: blob-ext {
+>>> +						filename = AM654_EVM_ICSSG2_DTBO;
+>>> +					};
+>>
+>> This is wrong.
+>>
+>> ICSSG2 Ethernet should be part of the fdt-0 configuration as the 2 Ethernet ports
+>> on the board are hardwired to ICSSG2. Not having them working by default
+>> is an invalid configuration.
+>>
+> 
+> ICSSG2 ethernet ports should be enabled by default. But the ICSSG2 nodes
+> is added in the overlay file (k3-am654-icssg2.dtso) in kernel so they
+> are added in same overlay file in u-boot as well.
+> 
+> I am keeping,
+> fdt-0  as k3-am654-base-board dtb,
+> fdt-1  as k3-am654-icssg2 dtbo,
+> conf-0 as k3-am654-base-board and
+> conf-1 as k3-am654-icssg2.
+> 
+> Do you want me to keep k3-am654-icssg2 dtbo as fdt-0 and
+> k3-am654-base-board as fdt-1? I tried doing this but this results into
+> u-boot getting stuck. The tispl and u-boot images are not able to load
+> if I swap fdt-0 and fdt-1 , and conf-0 and conf-1.
+> 
+> If the current combination doesn't look OK, please let me know what
+> should be the correct combinations for fdt-0, fdt-1, conf-0 and conf-1.
+> 
 
-Fixes: 982388eaa991 ("nvme: Add NVM Express driver support")
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Moritz Fischer <moritzf@google.com>
----
- drivers/nvme/nvme.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+Can you please comment on this. I'll send v2 with all the suggested
+changes once you confirm the correct fdt and configurations.
 
-diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
-index ec45f831a3..59a139baa0 100644
---- a/drivers/nvme/nvme.c
-+++ b/drivers/nvme/nvme.c
-@@ -695,7 +695,9 @@ int nvme_scan_namespace(void)
- 		if (ret) {
- 			log_err("Failed to probe '%s': err=%dE\n", dev->name,
- 				ret);
--			return ret;
-+			/* Bail if we ran out of memory, else keep trying */
-+			if (ret != -EBUSY)
-+				return ret;
- 		}
- 	}
- 
+<snip>
+
 -- 
-2.43.0.472.g3155946c3a-goog
-
+Thanks and Regards,
+Danish
