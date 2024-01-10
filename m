@@ -4,64 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82ACAC3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 09:12:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57734C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 09:13:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CD2387AEC;
-	Wed, 10 Jan 2024 10:11:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 05DEC87AF6;
+	Wed, 10 Jan 2024 10:11:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="hKbvBjQm";
+	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="sAEbjV8W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7319287AC9; Wed, 10 Jan 2024 10:10:56 +0100 (CET)
+ id 14C1987AD7; Wed, 10 Jan 2024 10:10:57 +0100 (CET)
 Received: from EUR01-VE1-obe.outbound.protection.outlook.com
  (mail-ve1eur01on0610.outbound.protection.outlook.com
  [IPv6:2a01:111:f400:fe1f::610])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83B2E8792C
+ by phobos.denx.de (Postfix) with ESMTPS id A6AC287A36
  for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 10:10:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
  header.from=weidmueller.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cFiUMDUQdHe3+q80Qvzj9hqKAFXnGVsxOfI9IAz5KGGYIECCxm6ofvKJk8MjllYipyopsIoCXtopbsPS3Z8yP8SjA7lQUEtvIsdcq5+6apdOG6J6oRqd7JZ9vTV6JT1nenWqef1Xz3/JAwYySlRep0SEO4ZNw8SmQ4C3SJc8x0HepePunIBwG4kzY29qVXRyNVilRmrt7I2lsyA5eiq5EJBXxkP+g7/9XCb17omSxai5w/6BoqS3o31WmiIi2D4xlU8u6DBVzXQOqtGios2iNedyg+5sKGrHebd75LpH0iPwSXPp0x35tiYw/UnVNYI6IYZZXgEFABKwjZ49Wy6fMg==
+ b=Xc2AmfK9eKId1FAAXKqMwFgQbxhVBuyx49Knf7neoUSTWSDq9ipTrW6rH7BReGCIJ4e9QX5rm1l9TGeZVhtfS1jilF1Pw1Cr+4wxL+mMUYYcbHQ894y9L78TmxbvkNM+4MoL1HDeE3uFWpgrWOJ6u1rQkli8Y6JZHrLKR2DAY/eiDF5j1MYpkEBAp1ceMiX0kLFdxNCPvXbAijHZxkdO7myORmeZcOYeIWr8qCmFPKdZ5ITQn4ckpnPwPm5fC4Cmf5a8YihvyEOjHejcpi0LGtTqUvBm+6oIacU6pTkjizyDKlB5D6OwHHwM9Vfv7ZevUkMAYktS2LbqzD//GHea6A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zFl6bRAhN0MaFTSzO7WG8IaxEOGytGzxn+YX1njLevw=;
- b=aNlg+GPoGhDrW32orjhmba3mQ6Xs0XrAhjfjNPAqyW1jFaOQYLPKN+a7QiqPY4VgA8rG9TDI6igAnudME3OQ6T22K3lGvOVZuxIXst8tmdL443xVFdX2g0SEMHQion/8FiJzlk0roHgPQMb/UnDlksAmNPE4bcnIZ+Fln3neKfV77/G9NOpDwksWlV29gAlJBNJGttaRmdyOBnVRI+LH7c//3k25wbBcQG1QLANwbvsF8dI2ND2k+5seU8YogYxpXWcesGqv7KO+4XFUawOifzmplma97clryGnukiUs/OtVggJqr7GFvA7j1ghMDZFkrxujH8lpnRwa9FQvpS/p9g==
+ bh=yUDxR0usJNbwdJXEgklhfHqvWlvNhqYYBBEfewc3Ebk=;
+ b=nFHNMzw2noVyWFzHHOed7yCFsJENz/QHwwK3H52DgejViGrLTNQK9yZwE3wh8c9jF+uhucGNN7VjHZD6VbyHMHwNPdHi1FPkk05xbM/sKV9SWJFUBm4kxg1jgX7ajHlu7RsVFheBz7e5xS9D3LIoNdqJSxQMw6TJpS/7f4ueCH9EpFikxGI61aaz6K52UCisRtQY91wXwmmL42LXx5vS/5Xy9XyupKrWMyhSdzNWcm359z+03SFdFWkJbPrSGeNBCoexcZQW0fDV0TjcCmWAQRBkgWdu0+8MU//IXwVRustjOoPWXu5q1m9usVFe8hIPsvaOupGK5+97gLQDSBPZUQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=weidmueller.com; dmarc=pass action=none
  header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zFl6bRAhN0MaFTSzO7WG8IaxEOGytGzxn+YX1njLevw=;
- b=hKbvBjQmSIW9hcj8D3nGUKpnsTe9TN1JalVMBiopWIkt3B03P+owKetF3ioUzcDbwylPyURfsa/8TM/U6YHAThTMKLeJeBcs4JPiNbj7xuroK1sjwM2vK1PVhBzcAJSFfcXlodOT80ZcAqXuUr8uo0XtsRymwtf97eTR6ZtB7Gg=
+ bh=yUDxR0usJNbwdJXEgklhfHqvWlvNhqYYBBEfewc3Ebk=;
+ b=sAEbjV8WVU/H67a+J7dfpQydqa7h/Ao0Krm1I3+zQ3vW9Wh3/4Vr/KpqFxRShnJ00z7eIGX4zipOT6Jws+XVT9XI4h99gK+XRlJjOblfROr0boEP4EAW84JJZaAsEn5Zsr6+B0UtR3zB98AxVEXJCJw2tGO8koOaT+wPD3AOr+U=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=weidmueller.com;
 Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
  by PAXPR08MB6527.eurprd08.prod.outlook.com (2603:10a6:102:156::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.26; Wed, 10 Jan
- 2024 09:10:52 +0000
+ 2024 09:10:53 +0000
 Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
  ([fe80::daa3:b3af:ec52:4278]) by AS2PR08MB8431.eurprd08.prod.outlook.com
  ([fe80::daa3:b3af:ec52:4278%3]) with mapi id 15.20.7159.020; Wed, 10 Jan 2024
- 09:10:52 +0000
+ 09:10:53 +0000
 From: lukas.funke-oss@weidmueller.com
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Lukas Funke <lukas.funke@weidmueller.com>,
- =?UTF-8?q?=C5=81ukasz=20Stelmach?= <l.stelmach@samsung.com>
-Subject: [PATCH v3 10/11] setexptr: Extend setexpr_get_arg() to handle pointer
- to memory
-Date: Wed, 10 Jan 2024 10:10:36 +0100
-Message-Id: <20240110091037.392520-11-lukas.funke-oss@weidmueller.com>
+ Roland Gaudig <roland.gaudig@weidmueller.com>
+Subject: [PATCH v3 11/11] cmd: printf: forward '%p' format string specifier
+Date: Wed, 10 Jan 2024 10:10:37 +0100
+Message-Id: <20240110091037.392520-12-lukas.funke-oss@weidmueller.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20240110091037.392520-1-lukas.funke-oss@weidmueller.com>
 References: <20240110091037.392520-1-lukas.funke-oss@weidmueller.com>
@@ -73,53 +72,53 @@ X-ClientProxiedBy: FR0P281CA0200.DEUP281.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|PAXPR08MB6527:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6fd20140-436b-41a6-d127-08dc11bc0ac9
+X-MS-Office365-Filtering-Correlation-Id: b6402588-9363-43e7-6c22-08dc11bc0b05
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 9HYYi9+4SZi/Rs/86JvJk7LZ6etfuKA6J+I1vqJWECcv2u/CAUcmsWS04tS82jWEkj4gCljB2ejyfNVZWmEAAsD6ihXNjeaEL44y4iPzP78vRrf1oGfSGuKreIG/74C4cOd0g7NjyUk8OlU7qr8FvnbC9YxDQY1vq7FnGuw6xYyRm1GpLBm6VlIviWreIdSGtdYsHxjawRd407WJGEE+6VluCULstpHxUtxjyRJRX1jYA3x/lnvGHL9GbNifBNAH5suMdvvdWll3J05MksZA6WRqzLgENnTqSuew1Xp/v5HaXGSAgbpkQrIMFhfs6TWA4g8niledu+PFi4n9aJkM586VN3CZ7MYY6XlOfQXagE+UotFIxwYt+WhvgQIP6BkA6nuW9OSgfeuktVJ/8VaPbC2EAc8vIHNQU815hSY6WkE/pkDgxG4IY4JWCpqiDQ0NGyoRqkkUTPWV0eAIWZS0oUEZSUH6awkoDAa9V2u7wR1jVjcr1EzrZX2W03vtwr0z0v8dsSrc+zqL+CB6Uy3Zzf15C2Xp2UkS/JbyEIlASdmlUt4S21WWnOWpveBZbeb5udPVGsuqkWpT0oYHjYMy7ZNzpm8GXd+cJt7XxNVhM9RP1xYIhbSqBNFb1GBlMkNt
+X-Microsoft-Antispam-Message-Info: Vcn3r+GDlb7r3gg6jZKoiuPcNJ0hJEOQTtdE13tXdVIRUPTtwRk9Gc0n3nmJ1WVxsJnKEUfcu8QsIFsXvz3WswvPIM0V4QUlQ6hb+TnwgQAsBy9wgzbQiRTzJ7ZHlkCXQtH5QoS1B0c4sYtqr3Q3rvBGnfuX3JeXKmSAjYbAmG+uk75fPsguo+Ybr+TEnNTPRPdnYcEDsesEGIeexr+NTfeN6BzO1aPaDODfGEKmhYRODhttSI6LKmoeAAfrZVMnaoKH6F4KNISMLCWSGiLuLReYW9A9PEaHwBGOC9clMzwKA2uPxQFpN5vPqNoUs9b8aU+bteah4xoGYIpSvg5/GQhfv8vZszEEVVS0mIvAP118b3PKYzsiY92bhHYZlhfUOmxsuT7/lav6S1s14akzcgk2S5f2fKn3z4+iyb/y8pkeTAFJidp9k91nmL91ijnB56xcAq/h6LoSaL3g57DmLTEKAyFOEpSShunXmUSFhPcV7R7CKVvXuuQsuCJhsgPw+d0b9LnUzxRNyoSIQYM6xdDGDJDVqVWj7k/Rpda44ZjbMIYpfTgT/aUvvGbIhkSpFeWoBeCw1i2zskQNVeVt9P2MS3qUr3yOofEHn4wBReV94SDjnSQ+Y4NKjLUJPdZH
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(39860400002)(366004)(376002)(346002)(396003)(136003)(230922051799003)(64100799003)(1800799012)(186009)(451199024)(2616005)(26005)(1076003)(6666004)(478600001)(6512007)(9686003)(6506007)(52116002)(83380400001)(5660300002)(2906002)(41300700001)(4326008)(6486002)(66946007)(8676002)(8936002)(6916009)(66476007)(66556008)(54906003)(316002)(86362001)(38100700002)(38350700005)(36756003);
+ SFS:(13230031)(39860400002)(366004)(376002)(346002)(396003)(136003)(230922051799003)(64100799003)(1800799012)(186009)(451199024)(2616005)(107886003)(26005)(1076003)(6666004)(478600001)(6512007)(9686003)(6506007)(52116002)(83380400001)(5660300002)(2906002)(41300700001)(4326008)(6486002)(66946007)(8676002)(8936002)(6916009)(66476007)(66556008)(54906003)(316002)(86362001)(38100700002)(38350700005)(36756003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?apqZ+KiCX6zkhCkqiCmoyVM/Dakrs9HZa4DDLfd9HYIyxQkCNO1jYlDF/Duu?=
- =?us-ascii?Q?ieWYiiU3F+LHVeOlguqY3+PsVOf3a53RSS3AJDnPnU9gg2spBDsYNQtslyYp?=
- =?us-ascii?Q?6JkVylFh+e87Oij13ojPeaLvG5WRFARM/qYhteHN9h9ds5hNz2WCi9Jci4di?=
- =?us-ascii?Q?WLPe3U6+iBAkNBPjarC+hvT10zu1IuFXxR4YBEKnJ4t9ttMiSmX/z4FoMjUs?=
- =?us-ascii?Q?KEbWJYTgrdWlJ/jG1sQk6RTp6x+xjyeGQ2j8OGYcZbd6sfxurSi8ldP7gQPq?=
- =?us-ascii?Q?mppisjZR9xfZ5l9UV5N9MhMBwlXzAzb85mcGUA2+rroL7jTbxlAYmBoAFmdz?=
- =?us-ascii?Q?tze22/hn6tUQufXxyIiqdti1sYTmhSNDyGz9JPn47yEwThsORuPqfshSj6Di?=
- =?us-ascii?Q?vznDDI16U04t99/B9eWkmi/URefJwaFEBxnY/PJf3/dkTa5Pp6+fAg++Hspr?=
- =?us-ascii?Q?CduYYfPl4ETsBQp8OhMsfFZBbbCSIOrryF7R8VhJobOMbNt+/mtFsY2KrlYp?=
- =?us-ascii?Q?zlohStiBe6aXRHb5d3X901VLCRStCkSliZU0JNuPSMdNH2ByZCcQttpBHFfq?=
- =?us-ascii?Q?TI5eUJt6IgyJrZ2AywdsqE2WEv2hL4OrLWZK/LKAVpss9aceFgy0Fqgu+dWt?=
- =?us-ascii?Q?afnik17kd8V6M/rwDzSbfvnqfVedM7Ri2DhGrvHk0vx6XxDwwHt+V9+Nt/XU?=
- =?us-ascii?Q?+z+wvi+BflY98H719y3G6+eQwXaAO7Bo68UYBZ4Py5TVmUKI4Er5OeLTWQ8M?=
- =?us-ascii?Q?4H3FtHAG5WzdtfhHbRjcQrjG0SjjQw8ZRYiKAvTkCmuNYRnYEhoq/TlXpXsX?=
- =?us-ascii?Q?91pwqLVkmS+3qPuzbT6ouYiuYCZfr1sFNZBxB+H5mSZm2ijLgQa9eCsnO1Sj?=
- =?us-ascii?Q?pJ0tIJ6pLxm/FkMGInJwGCpLpUpa11ZVLeJ4pWgH7QQBcgVrLfF9hgFx+nY4?=
- =?us-ascii?Q?PwRv60d62GayQpnyrx29ld/jMGYWwUC2K5zD2nh+7JmRlkB+B2TYFCstlmoo?=
- =?us-ascii?Q?mbdaxKc/Z5Iyaj2NXP6aDeBL3WUqX5EktxoDUF37gvbuappZUNGa0BYZsmEd?=
- =?us-ascii?Q?LzXIGTYGs+oA4dHT+gJ0TW5pPmk2A7GkVUPkmJ+I+YpnA5RRlDmk19AaAu2E?=
- =?us-ascii?Q?zZi9Twjc9zSLRWdMNFszT0ZIT+K4mUU69qZgZCyYweMdvWFEGmHDKuv9kEso?=
- =?us-ascii?Q?PoU4FynS/86kw+AErk77s+xT9Y/odFQBm55NRhzGwojkkxK+OrSLk5dbDuhd?=
- =?us-ascii?Q?vGBvpYEXvKOOpst4mOgAw3RdJXq2RlMDJHbTfCedcydiWCMT8wqZz3epFiAJ?=
- =?us-ascii?Q?7GiXHOA1Bun3u6ubE2Pt2Esj3RygOCg6L9IXBywDPgvyIjjXVQ9PR5ieGZ/x?=
- =?us-ascii?Q?w5Llt7SpoRvqHTN13QW/cot9m4CKbUkaNVYUty+8dQTreGMswy2kI3bNKPgG?=
- =?us-ascii?Q?YmcYcA4Oca37bsM31Ap6IZsnHKos4R/k+dtA/W46OhR7SzLO7y6CwtjM42R1?=
- =?us-ascii?Q?7lCKn1YzLCPMh+pLk7AffA+eAB9ZFnVqXe4Zu5PVDWPDIjhHGEK86UvRNGRD?=
- =?us-ascii?Q?n5j/CAWRO9GPeYUac9DWAAa8zlfMEEPf+KtCmbcEPmU3dvSIOEGI63QMe47f?=
- =?us-ascii?Q?2w=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?UbFr6mGWAkCEOXYCjiRBCXXxuQcJTPwk5quyIsVp30jLf9V1SKinWW1qu4qS?=
+ =?us-ascii?Q?m1eY3diNmhQNHui0kOB4BADxGy9/uyhcUdmAFsgrhu1w9wN2DbsED7/0lXt9?=
+ =?us-ascii?Q?4dJIabwvje2Fv0IgdaFa/+lpLW5OXQEiFELMwfxtALeyB0Az6BY6m4XV/sKq?=
+ =?us-ascii?Q?huD6cM06d/+pebYgHwb58+5xY/sQMWlRhANDnzr3htxsixYQac1O76UW8KBd?=
+ =?us-ascii?Q?HbWGcDcICfobvz22AP86PojPLAhfq3f3v0nenD6SyUgP2eGQHfeldPqktu5D?=
+ =?us-ascii?Q?DOd0CLoEC7+cOIFgf91tC+my02f+HNLYHXyjy4VzKvHF3sfd2kE9ch9OdNeY?=
+ =?us-ascii?Q?a7f6SitjdIuzZvJ/u6+Y3eRCNQxBrDIHqsudXq15ud4Q5ZUubvebdckm82s6?=
+ =?us-ascii?Q?EC88/7U4IdzVY+0m+lJSjdfAG0P+IUjMRTHDTu3W/v+6wQn4lS/58IXb0Okx?=
+ =?us-ascii?Q?6beOTfQp+7xUdvgcOdkyvEe2+dUA1ZiySB3VwLjyOP0Gq90aFbMnrrgBv4Xp?=
+ =?us-ascii?Q?IXk1BeiJ6CDjdVEC4JDEFQvqKBlf1DTAN/Gwq5idV2/BpcKvPX9gvIzpsQIk?=
+ =?us-ascii?Q?7GkJgfN5Z2AwYARd+GfwGKIzXKBAnueUTHRrtx65EtYnERn2sKIDZaOH1MaT?=
+ =?us-ascii?Q?ZGof0DpUCsr5k1VU8L3vgeEQgC9RnI/gtxtX3u/qR/bv/MJ+F2k01Evz6s+N?=
+ =?us-ascii?Q?x+IrrDxyyt9x5QiWMDwBnhFAGFAuhTXgkwSRZ22i247qbbpbOX31A0AndkS2?=
+ =?us-ascii?Q?O7NduXQxdankHKPUVBQyQReJXctuIMkSqc84MVPGf8oQoQHj7oHObE8FA5hK?=
+ =?us-ascii?Q?p+k2jp+TAXOktY1GCROey/h/u6rjYXRpGHe3sD9fO/y268OfenBf07EKRrko?=
+ =?us-ascii?Q?ceuHT9MNuIo6jcQbH2B/M+fioN+6NGLe/SBlCtvj3ZXpDUL5lc9LCMbEnHHM?=
+ =?us-ascii?Q?NNG0U1YqVgIJ10o3nCkpEJOu+TgBh9WrMhXjMlM2k7u7L8A2/ISoV4SMRSOl?=
+ =?us-ascii?Q?yme/RUcJxrwZbMbU7NpPNO2NO41vWdRNIzqnm57Je3seSU3T074qEP5UJazA?=
+ =?us-ascii?Q?cb2EDqHmLJVcptcO9DPAxLdFa/aSXPl4ZIJAY4PmFf9jeo8dlFkCyTX6ZwSz?=
+ =?us-ascii?Q?vr/gkEqDygr/RxOdS+h6wH15SF9G+DwiHNgcGhz3HWVT2F/unUSPgBRvWNw/?=
+ =?us-ascii?Q?c5bP/gXpeXnZeyTpOlzCJ03qC3txg11vO+itMU8cugnpiXKtU6b3iv8qYpYu?=
+ =?us-ascii?Q?3QWN672ZjNB2QaAprc/7ZEU/SrUSuIG1PoVlGA5Jm1uk5MEqCjlPiZaXNRPM?=
+ =?us-ascii?Q?Z74udvSdb7k0V/XFEDNM+zWzKkvNZdBbGPhrmHFUmJtMhl6Xh9usXswc96yz?=
+ =?us-ascii?Q?tGHTD29QXvX1dJxyt2PzOksIru8JXMZhBq47EfwGop+2s3/X8rmxHOs3iT1P?=
+ =?us-ascii?Q?cR9Qrv5ciItyB1NqhuLA4dHNFE2TbWLzlx0RF53lvxVu3sJwYBpIpBLihB1+?=
+ =?us-ascii?Q?Js3855slRmsqMpmAjjct4rlsFKOAkWuMuSlalDvQs7I3frPSgUjoDvS55/0D?=
+ =?us-ascii?Q?FY2w6YVsqjcyuHIsokMe5WSExBSszWr4tmfhXI2g4bT9BUDg9yy5/nl8i+V+?=
+ =?us-ascii?Q?YQ=3D=3D?=
 X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6fd20140-436b-41a6-d127-08dc11bc0ac9
+X-MS-Exchange-CrossTenant-Network-Message-Id: b6402588-9363-43e7-6c22-08dc11bc0b05
 X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jan 2024 09:10:51.3153 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jan 2024 09:10:51.7591 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ZYkaLCXjFI+w8dZM9ttLRPIzOiUqTyknzB4UYTvDb/iYPXzU8QEGxEsnT5WWzEzq9jXGmNPujmQOf7I3PZLYbw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: XHranaBTJ1AU3MVlfbYKjDQrb1vQiFEaR83lW4MoYajKt6BHJrjrN0egZwSgwfpUvIpJN8cFnQrsGpx4YGeLXg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR08MB6527
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -139,88 +138,102 @@ X-Virus-Status: Clean
 
 From: Lukas Funke <lukas.funke@weidmueller.com>
 
-Extend setexpr_get_arg() function in order to handle bitmaps with
-length greater than 8 byte. If the bitmap is provided as hex string
-the string is parsed into a bitmap.
+Forward '%p' format specifier to the underlying format logic in order
+to print pointers, especially bitmaps.
 
 Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
 ---
 
-(no changes since v1)
+Changes in v3:
+- Dereference pointer argument (i.e. *value) in the
+  'setexpr name fmt <format> value' case. This is currently only
+  supported in the 'setexptr <name> [*]<value>' and
+  'setexptr <name> [*]<value> <op> [*]<value2>' case
 
- cmd/setexpr.c | 29 ++++++++++++++++++++++++++---
- 1 file changed, 26 insertions(+), 3 deletions(-)
+ cmd/printf.c | 51 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 51 insertions(+)
 
-diff --git a/cmd/setexpr.c b/cmd/setexpr.c
-index 9caa68d20d..fed457bb7e 100644
---- a/cmd/setexpr.c
-+++ b/cmd/setexpr.c
-@@ -17,6 +17,7 @@
- #include <malloc.h>
- #include <mapmem.h>
- #include <linux/sizes.h>
-+#include <linux/err.h>
- #include "printf.h"
+diff --git a/cmd/printf.c b/cmd/printf.c
+index f56543b79e..2e54faf339 100644
+--- a/cmd/printf.c
++++ b/cmd/printf.c
+@@ -85,11 +85,13 @@
+  */
  
- #define MAX_STR_LEN 128
-@@ -24,6 +25,8 @@
- int setexpr_get_arg(char *s, int w, struct expr_arg *argp)
- {
- 	struct expr_arg arg;
-+	uchar *bmap;
-+	ulong val;
+ #include <common.h>
++#include <command.h>
+ #include <ctype.h>
+ #include <errno.h>
+ #include <stddef.h>
+ #include <stdio.h>
+ #include <stdlib.h>
++#include <linux/bitmap.h>
  
- 	/*
- 	 * If the parameter starts with a '*' then assume it is a pointer to
-@@ -32,7 +35,6 @@ int setexpr_get_arg(char *s, int w, struct expr_arg *argp)
- 	if (s[0] == '*') {
- 		ulong *p;
- 		ulong addr;
--		ulong val;
- 		int len;
- 		char *str;
+ #define WANT_HEX_ESCAPES 0
+ #define PRINT_CONVERSION_ERROR 1
+@@ -476,6 +478,38 @@ static int get_width_prec(const char *str)
+ 	return (int)v;
+ }
  
-@@ -71,17 +73,38 @@ int setexpr_get_arg(char *s, int w, struct expr_arg *argp)
- 			unmap_sysmem(p);
- 			arg.ival = val;
- 			break;
--		default:
-+#if BITS_PER_LONG == 64
-+		case 8:
- 			p = map_sysmem(addr, sizeof(ulong));
- 			val = *p;
- 			unmap_sysmem(p);
- 			arg.ival = val;
- 			break;
-+#endif
-+		default:
-+			p = map_sysmem(addr, w);
-+			bmap = malloc(w);
-+			if (!bmap) {
-+				printf("Out of memory\n");
-+				return -ENOMEM;
++static int print_pointer(struct print_inf *inf, char *format,
++			 unsigned int fmt_length, int field_width,
++			 int precision, const char *argument)
++{
++	struct expr_arg aval;
++
++	if (setexpr_get_arg(skip_whitespace(argument), field_width >> 3, &aval))
++		return CMD_RET_FAILURE;
++
++	if (field_width > BITS_PER_LONG) {
++		printf_str(inf, format, aval.bmap);
++		free(aval.bmap);
++	} else {
++		printf_str(inf, format, &aval.ival);
++	}
++
++	switch (inf->error) {
++	case 0:
++		return 0;
++	case PRINT_SIZE_ERROR:
++		printf("printf: size error\n"); break;
++	case PRINT_CONVERSION_ERROR:
++		printf("printf: conversion error\n"); break;
++	case PRINT_TRUNCATED_ERROR:
++		printf("printf: output truncated\n"); break;
++	default:
++		printf("printf: unknown error\n");
++	}
++
++	return -1;
++}
++
+ /* Print the text in FORMAT, using ARGV for arguments to any '%' directives.
+  * Return advanced ARGV.
+  */
+@@ -536,6 +570,23 @@ static char **print_formatted(struct print_inf *inf, char *f, char **argv, int *
+ 					}
+ 				}
+ 			}
++			if (*f == 'p') {
++				static const char ptr_format_chars[] = "bl";
++				++f;
++				++direc_length;
++				char *p = strchr(ptr_format_chars, *f);
++				/* consume whole format token */
++				while (*f != '\0' && *(p++) == *f) {
++					++f;
++					++direc_length;
++				}
++				if (print_pointer(inf, direc_start, direc_length,
++						  field_width, precision, *argv++)) {
++					return saved_argv - 1;
++				}
++				f--;
++				break;
 +			}
-+			memcpy(bmap, p, w);
-+			arg.bmap = bmap;
-+			unmap_sysmem(p);
- 		}
- 	} else {
- 		if (w == CMD_DATA_SIZE_STR)
- 			return -EINVAL;
--		arg.ival = hextoul(s, NULL);
-+		if (w > sizeof(ulong)) {
-+			bmap = hextobarray(s);
-+			if (IS_ERR(bmap)) {
-+				printf("Out of memory\n");
-+				return -ENOMEM;
-+			}
-+			arg.bmap = bmap;
-+		} else {
-+			arg.ival = hextoul(s, NULL);
-+		}
- 	}
- 	*argp = arg;
  
+ 			/* Remove "lLhz" size modifiers, repeatedly.
+ 			 * bash does not like "%lld", but coreutils
 -- 
 2.30.2
 
