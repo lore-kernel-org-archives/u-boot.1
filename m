@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCB4AC3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 10:37:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5181CC3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 10:37:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6A7F87ABA;
-	Wed, 10 Jan 2024 11:36:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 933A187AE2;
+	Wed, 10 Jan 2024 11:36:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="STtAJNGb";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DkOXh4Mp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37D7787A7F; Wed, 10 Jan 2024 11:36:46 +0100 (CET)
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
- [IPv6:2607:f8b0:4864:20::432])
+ id D3A178790F; Wed, 10 Jan 2024 11:36:53 +0100 (CET)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A0F187AD5
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 11:36:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B1D8687AB7
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 11:36:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-6d9cb95ddd1so1751819b3a.1
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 02:36:42 -0800 (PST)
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1d3ef33e68dso27755055ad.1
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 02:36:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704883000; x=1705487800; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1704883009; x=1705487809; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5jjrQStR8mg01rea7SGpxXhx6+KLoAYg0dAdhNzxz5w=;
- b=STtAJNGbzkPG6dvBd8bG0jLVDKkFwODzB0Y0qxwcQjeveytbNy8WMYrlke4pVvdH1i
- zT23NJuXhvuMQjWMFdnU365QQSJhH+qAp1s7uDMSITx8/SQP7yhzaDUL4X9FxFq8bieR
- /ZJzfCYZgvovJJpNoqZhMoaduNyjfdOiWpQcEQ+htmx/Xu4Dj31fj0ohQAFtBkw+je22
- DcY25Wgn3AZOqnrrOr29jYTJBKAq9JiOH/GVTajUFBF7HsacUuRZYM10S8THb9iMETLa
- qNnKM42wLOr3mrO06wqhhpbv6poIzlzRg/iX2qBBCicAbY3CnF3feStTseXUGNpqmaU6
- tp2g==
+ bh=FsiA+O12iJkpNew60z2Ss9cRy01PCvnIz5NjHTdND8w=;
+ b=DkOXh4MpXsq1rKgvT+wE6yUsHo0qtxYA13NDtf4m2VrCXkhXKiu2xN/JkdcVASIFLH
+ mru3binrvovEBZwrrFPWvqpYAckonFOs7D7cP8sYKVR/yknU2Gjgd67TQWXFqR6AoFg4
+ iCaBFVMssRGiuIHuEQsVt1lR60wRFo7qGqT68KylykrGvifYEtZ6BM41V31TMKyPYUwt
+ 0TqXEWZcNt1+Blp4KjDcTDzWikMGjsM0RbtiUk135ZDko5zbZcdTJir9syzmydNed2BZ
+ SfNqGLJl+qwFDk9stAnYzIvzaBTInRyMdlUYwHspha7H31ngFlNPBqvzISCR5VRO8QaJ
+ eiSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704883000; x=1705487800;
+ d=1e100.net; s=20230601; t=1704883009; x=1705487809;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5jjrQStR8mg01rea7SGpxXhx6+KLoAYg0dAdhNzxz5w=;
- b=LqK/ytJXWN0nHlKZcU0AWJf4tKnYd4DNsqxKQcp2wDmN+0xuZPyAuLGMGYIGmJAlLG
- 87kHyOSst5xmqSc3pAo7sTJ82sefyDZrxS+4QJcqIcuGXMi3SmB7i35Rs7vMOCMn5pPh
- zdPDzM42GdC2ARkhTIA2zQIqcI+xGGGS81VlVTd6d7+XvfYURR7t8OHf5hrh9btW+kqY
- sEgiuh01tpO+0KOOzdgT0iv4yskI7HlFBVXtz8Fv7KDE0gthGTDXSNEJZyw79zdsTod4
- Ny3fVXVDfiWrvo77GVE9479It5rbVgQFotTFyWpJ04X9Xzbyhg7Q+vB47qDDFaiFOlCw
- OPFw==
-X-Gm-Message-State: AOJu0YyljVPz1/2as2MiDr3C7triSd6mNkwHS5nESNS5DRheoVCxgB46
- GgIV3ys6qBpBvimHVEG3Mh4zg+qGKODY3kQkdbwcFDhWWcM=
-X-Google-Smtp-Source: AGHT+IFw0b4WpWns2ugIjhso7Di59KjpROnkAbXw5gptrKmYqPMluvHhA46Hz6yGGD7hCRf79adAIw==
-X-Received: by 2002:a17:902:7841:b0:1d4:ebbc:227f with SMTP id
- e1-20020a170902784100b001d4ebbc227fmr438033pln.134.1704883000645; 
- Wed, 10 Jan 2024 02:36:40 -0800 (PST)
+ bh=FsiA+O12iJkpNew60z2Ss9cRy01PCvnIz5NjHTdND8w=;
+ b=lU/uf7p0X1TPmcsy7vYpCDixPrF0eOv1ZMjQUvfSgix24fRFTGKoPQr/ZpENSET2rB
+ wNzXJ/9EgA5MTq6mlAsHWszq0U05l0q8pE/CcNeBL1a1f2Ad///OIUzeHe0V/28tc0jx
+ wUbvNTmpR5GqcBkII2ijlw/IDYwnV+s6+pYCjNy6LAc9RQ5cHPBo7XjNdFDrYhzPaMa5
+ k+atk60qqacH7li7/+l1M7EnwBbofuv67EecrWiOf8vVvHQkN6dSwnXYp3mPLWFZTxAx
+ SfSHS4FXNdYZ22M7tyrjkXChTXePqVzFoVmV8qbI+8jSJmy8zVl0BP+wfjml/6IhzYtN
+ 7vbg==
+X-Gm-Message-State: AOJu0YxrnoyoOGLkDtCKdCtlwS4YRwH2FwixmnxR+BZ15VV8ClrPNZ8I
+ CRvkNxi1LuK+C6kpB6wJ5kUosbAw3MOJr1m3F9hlCe339LU=
+X-Google-Smtp-Source: AGHT+IFb+flFOMi8jhEI84jn3b6jKNoBFO+35tkGAWNhdslOrWzI48A5tpPQY3KKPv+JkviI4c1cLg==
+X-Received: by 2002:a17:902:ca11:b0:1d5:6b6c:1ace with SMTP id
+ w17-20020a170902ca1100b001d56b6c1acemr1096120pld.18.1704883008643; 
+ Wed, 10 Jan 2024 02:36:48 -0800 (PST)
 Received: from sumit-X1.. ([223.178.208.66]) by smtp.gmail.com with ESMTPSA id
- i7-20020a17090332c700b001d38a7e6a30sm3332604plr.70.2024.01.10.02.36.32
+ i7-20020a17090332c700b001d38a7e6a30sm3332604plr.70.2024.01.10.02.36.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jan 2024 02:36:40 -0800 (PST)
+ Wed, 10 Jan 2024 02:36:48 -0800 (PST)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
  u-boot-custodians@lists.denx.de
@@ -76,10 +76,9 @@ Cc: trini@konsulko.com, sjg@chromium.org, robh+dt@kernel.org,
  jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de,
  mibodhi@gmail.com, bb@ti.com, mark.kettenis@xs4all.nl,
  Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v4 04/11] Makefile: Allow upstream DT subtree to provide DT
- includes
-Date: Wed, 10 Jan 2024 16:05:40 +0530
-Message-Id: <20240110103547.719757-5-sumit.garg@linaro.org>
+Subject: [PATCH v4 05/11] dts: Add alternative location for upstream DTB builds
+Date: Wed, 10 Jan 2024 16:05:41 +0530
+Message-Id: <20240110103547.719757-6-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240110103547.719757-1-sumit.garg@linaro.org>
 References: <20240110103547.719757-1-sumit.garg@linaro.org>
@@ -101,62 +100,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allow platforms to reuse DT headers and dtsi includes directly form
-upstream DT subtree which will be frequently synced with Linux kernel.
-This will further allow us to drop corresponding DT includes copy from
-U-Boot tree.
+Allow platform owners to mirror devicetree files from devitree-rebasing
+directory into dts/upstream/src/$(ARCH) (special case for arm64). Then
+build then along with any *-u-boot.dtsi file present in arch/$(ARCH)/dts
+directory. Also add a new Makefile for arm64.
 
-Also, since the DT includes from upstream DT subtree are done after DT
-includes from U-Boot tree, so it shouldn't cause any conflicts.
+This will help easy migration for platforms which currently are compliant
+with upstream Linux kernel devicetree files.
 
-Tested-by: Bryan Brattlof <bb@ti.com>
 Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 ---
 
 Changes in v4:
-- New patch to reuse upstream DT includes by U-Boot as per Brian's use-case
-  for TI K3 SoCs.
+- Switched subtree to be imported as dts/upstream sub-directory rather
+  than devicetree-rebasing sub-directory to better suite U-Boot
+  directory structure.
+- Added a note to OF_UPSTREAM Kconfig option.
 
- Makefile             | 3 ++-
- scripts/Makefile.lib | 5 +++++
- 2 files changed, 7 insertions(+), 1 deletion(-)
+Changes in v3:
+- Minor commit message update
 
-diff --git a/Makefile b/Makefile
-index 69cffb16ee2..d4e65ffe49f 100644
---- a/Makefile
-+++ b/Makefile
-@@ -835,7 +835,8 @@ UBOOTINCLUDE    := \
- 				-I$(srctree)/arch/arm/thumb1/include), \
- 			-I$(srctree)/arch/arm/thumb1/include)) \
- 	-I$(srctree)/arch/$(ARCH)/include \
--	-include $(srctree)/include/linux/kconfig.h
-+	-include $(srctree)/include/linux/kconfig.h \
-+	-I$(srctree)/dts/upstream/include
+Changes in v2:
+- s/DEVICE_TREE_LOC/dt_dir/ and s/U-boot/U-Boot/
+
+ dts/Kconfig                     | 16 ++++++++++++++++
+ dts/Makefile                    | 17 ++++++++++++++---
+ dts/upstream/src/arm64/Makefile | 14 ++++++++++++++
+ 3 files changed, 44 insertions(+), 3 deletions(-)
+ create mode 100644 dts/upstream/src/arm64/Makefile
+
+diff --git a/dts/Kconfig b/dts/Kconfig
+index 00c0aeff893..09789d3e18b 100644
+--- a/dts/Kconfig
++++ b/dts/Kconfig
+@@ -85,6 +85,22 @@ config OF_LIVE
+ 	  enables a live tree which is available after relocation,
+ 	  and can be adjusted as needed.
  
- NOSTDINC_FLAGS += -nostdinc -isystem $(shell $(CC) -print-file-name=include)
++config OF_UPSTREAM
++	bool "Enable use of devicetree imported from Linux kernel release"
++	help
++	  Traditionally, U-Boot platforms used to have their custom devicetree
++	  files or copy devicetree files from Linux kernel which are hard to
++	  maintain and can usually get out-of-sync from Linux kernel. This
++	  option enables platforms to migrate to devicetree-rebasing repo where
++	  a regular sync will be maintained every major Linux kernel release
++	  cycle. However, platforms can still have some custom u-boot specific
++	  bits maintained as part of *-u-boot.dtsi files.
++
++	  Note: This option should be set in Kconfig, for the SoC as a whole.
++	  However, newer boards whose devicetree source files haven't landed in
++	  the dts/upstream subtree, they can override this option to have the
++	  DT build from existing U-Boot tree location instead.
++
+ choice
+ 	prompt "Provider of DTB for DT control"
+ 	depends on OF_CONTROL
+diff --git a/dts/Makefile b/dts/Makefile
+index 3437e54033d..d6c2c9daf31 100644
+--- a/dts/Makefile
++++ b/dts/Makefile
+@@ -10,10 +10,20 @@ ifeq ($(DEVICE_TREE),)
+ DEVICE_TREE := unset
+ endif
  
-diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-index fe2a0aadc41..fbcaf335f9a 100644
---- a/scripts/Makefile.lib
-+++ b/scripts/Makefile.lib
-@@ -189,12 +189,17 @@ dtsi_include_list = $(strip $(u_boot_dtsi_options_debug) \
- dtsi_include_list += $(CONFIG_DEVICE_TREE_INCLUDES)
++ifeq ($(CONFIG_OF_UPSTREAM),y)
++ifeq ($(CONFIG_ARM64),y)
++dt_dir := dts/upstream/src/arm64
++else
++dt_dir := dts/upstream/src/$(ARCH)
++endif
++else
++dt_dir := arch/$(ARCH)/dts
++endif
++
+ ifneq ($(EXT_DTB),)
+ DTB := $(EXT_DTB)
+ else
+-DTB := arch/$(ARCH)/dts/$(DEVICE_TREE).dtb
++DTB := $(dt_dir)/$(DEVICE_TREE).dtb
+ endif
  
- # Modified for U-Boot
-+upstream_dtsi_include = $(addprefix -I, $(srctree)/dts/upstream/src/ \
-+	$(sort $(dir $(wildcard $(srctree)/dts/upstream/src/$(ARCH)/*/*))) \
-+	$(if (CONFIG_ARM64), \
-+		 $(sort $(dir $(wildcard $(srctree)/dts/upstream/src/arm64/*/*)))))
- dtc_cpp_flags  = -Wp,-MD,$(depfile).pre.tmp -nostdinc                    \
- 		 $(UBOOTINCLUDE)                                         \
- 		 -I$(dir $<)                                             \
- 		 -I$(u_boot_dtsi_loc)                                     \
- 		 -I$(srctree)/arch/$(ARCH)/dts/include                   \
- 		 -I$(srctree)/include                                    \
-+		 $(upstream_dtsi_include)                                \
- 		 -D__ASSEMBLY__                                          \
- 		 -undef -D__DTS__
+ $(obj)/dt-$(SPL_NAME).dtb: dts/dt.dtb $(objtree)/tools/fdtgrep FORCE
+@@ -41,7 +51,7 @@ $(DTB): arch-dtbs
  
+ PHONY += arch-dtbs
+ arch-dtbs:
+-	$(Q)$(MAKE) $(build)=arch/$(ARCH)/dts dtbs
++	$(Q)$(MAKE) $(build)=$(dt_dir) dtbs
+ 
+ ifeq ($(CONFIG_SPL_BUILD),y)
+ obj-$(CONFIG_OF_EMBED) := dt-spl.dtb.o
+@@ -65,4 +75,5 @@ clean-files := dt.dtb.S
+ # Let clean descend into dts directories
+ subdir- += ../arch/arc/dts ../arch/arm/dts ../arch/m68k/dts ../arch/microblaze/dts	\
+ 	   ../arch/mips/dts ../arch/nios2/dts ../arch/powerpc/dts ../arch/riscv/dts	\
+-	   ../arch/sandbox/dts ../arch/sh/dts ../arch/x86/dts ../arch/xtensa/dts
++	   ../arch/sandbox/dts ../arch/sh/dts ../arch/x86/dts ../arch/xtensa/dts	\
++	   ./upstream/src/arm64 ./upstream/src/$(ARCH)
+diff --git a/dts/upstream/src/arm64/Makefile b/dts/upstream/src/arm64/Makefile
+new file mode 100644
+index 00000000000..9a8f6aa3584
+--- /dev/null
++++ b/dts/upstream/src/arm64/Makefile
+@@ -0,0 +1,14 @@
++# SPDX-License-Identifier: GPL-2.0+
++
++include $(srctree)/scripts/Makefile.dts
++
++targets += $(dtb-y)
++
++# Add any required device tree compiler flags here
++DTC_FLAGS += -a 0x8
++
++PHONY += dtbs
++dtbs: $(addprefix $(obj)/, $(dtb-y))
++	@:
++
++clean-files := */*.dtb */*.dtbo
 -- 
 2.34.1
 
