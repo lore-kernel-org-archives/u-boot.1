@@ -4,172 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB04EC47073
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 09:07:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56385C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 09:10:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1818E85E44;
-	Wed, 10 Jan 2024 10:07:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 96F8087A61;
+	Wed, 10 Jan 2024 10:10:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="f8ldX2gw";
+	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="oxzn0BhX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD20A87732; Wed, 10 Jan 2024 10:07:14 +0100 (CET)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20613.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e88::613])
+ id 731BB87A4B; Wed, 10 Jan 2024 10:10:51 +0100 (CET)
+Received: from EUR02-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur02on20613.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe16::613])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FB09807EC
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 10:07:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 83A088792C
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 10:10:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
+ header.from=weidmueller.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
+ spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=De/TWZhcnXwVq8Nx+DLi05Mfq10faduxAScQOigh5J/oxtQpclhee/kp9ioTRQ6L+cT4sBxvAyGLF1VfyNmTJ4fkWoYyX8YTecdMZcE7fYdPIlv9pXhp3bSoW3fdwLFoSAXNJ607KyOJPzWrg04XL/CjJU3UqogZltS49IKp/wVkDa1oxylmkotCi+pNcE2bXFyxqU4BuesIyVc1bm/V5zAkG0lKd//09hSHznn+JTB4h4NDzR4M6TWn17xpATSYLl2KBBwO+MtXf9/EGde9ubkdY/buNtIWz8K2zyGmdgV5DArLXd54QHcJ1FJuGL/lOKmh24qEHZdIoMepxoA7HA==
+ b=BlvCZ+22OwR59hFT/Gxb3gluU4SEp+1Gn06c0UCYqi3huc7+q8xVjDwfczeKsEOtxiYAqXc5Gw0iDP3e2CsEqUDoMWwXxRopc2wxvQpXdep+nUC+oXz+OxPL+WPP4sa4SlSbDXOo+yGgr5R4FdI90pW2YloID6zrRf9p0jU12oSCMJ4kaI0AuS93SVVipCHiNZf83spXTKyKpRjAvV+DiciUr+MepMT8R3tHG5SDmG3cb5UfEVDUe/970xqPcGZUxPX1nLmHkf3UXqyAVC6z8Er+6EJoXffQ+1Kqo2yj0vN61RflgvAzV/u49gPC9+JYSzdOWBJ+uI2gXF+hNOZi/w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PoYfs8WczO76xzhlZPzxTqXq1qfrk5WRNOunjaGpNgg=;
- b=bvkTvqUiBAzHvAoweml23oXmbSUcbXunidVlr7jNM13qG5mHBVSdm8bLxdBjz5Q9TR4PUveXWsP325T+R7ch1nnP0a6bbI/+FyfureztTHEF/52rY2Gp/ijT12roCI4DNf1LOFSgpZ2+lg4jGh5Kr5MxKJlTTJdbqoEGi4ga4Ba2afRYK5/24ETh62ng+8yEadGEjNDgFWmGcwKMWlkVnDuDpcaeGl2GBQKMhnB4oKPy1yICfuFqu4jD90r8OFKoaixrsvQvX5IVo+iutP3WUBi6AGBZjM139lm+M5Hcso1yb++6XZwYNieTpDfM0kU1AvyK9zJMYgejBRviRHGF+g==
+ bh=vUfQ7EZ/b2xAfXz2YAhns1pSq1ZFB23FnsAewKWR/dM=;
+ b=C/d72Fy63Ebj0/oAqL1Bc+OE9bcWKR8MoFv+SvzpwHijyGsjNhmDg3ZEX7y5FlqsBBz0iqw1eYkzv/qCIMfIBcIWzVrVISQixKTdW5ZflxfbIEsPPo3rdopbbDEgOeFyt3L3nEoXqiTTOf0o2i0iqzDRogJrjASdnaJTl8La5vQDCgRFvdV8o2q59hd52aqmU1TYdD1RZUp2sYNzktZpzyQLCGWfjVgs3DUCHVR+hBTy1uFvufTprkRb2Z8lEerDB5PBXce30t7bKoGH3O6HxK0q4Cc6regR6hC6DZrXi828DFOx7MfKYd/KG4nF7enGs8TocTv52WDOMz0U7tiYjw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ smtp.mailfrom=weidmueller.com; dmarc=pass action=none
+ header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PoYfs8WczO76xzhlZPzxTqXq1qfrk5WRNOunjaGpNgg=;
- b=f8ldX2gw+nyQNfiUIm38b5+aFvohcWQ5wpMgfDH4zplR2NN0guCfUBZUZIiMtM0uRNwfQ4ZPmpQRW87R0DK7KrWg0U6v13HGdWEBRY4smRlfgZnjLzaCJrXAtr8b34VSkW2dXu6PjTUlTG4Zf/Pig2v+xBm8zjOrn9bAwXqjBMU=
+ bh=vUfQ7EZ/b2xAfXz2YAhns1pSq1ZFB23FnsAewKWR/dM=;
+ b=oxzn0BhXCeqahXU494xrby+TCjTc/jC21q7/dLX7OWSiUlFVi4iuMoB7/jD9VD7QTsMiZ2eXF/ORDXPyMqQPtljs/c3aaArXf15T3hSZP727leFD7VjvrQ6auV3yj4j+h8DggZj+uS3ahhu1rR9D+96VeKxpe1sBRJOjCxv0OEg=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from CYXPR12MB9337.namprd12.prod.outlook.com (2603:10b6:930:d8::20)
- by SJ2PR12MB8010.namprd12.prod.outlook.com (2603:10b6:a03:4c7::14)
+ header.d=none;dmarc=none action=none header.from=weidmueller.com;
+Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
+ by GV1PR08MB8641.eurprd08.prod.outlook.com (2603:10a6:150:82::19)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7181.18; Wed, 10 Jan
- 2024 09:07:03 +0000
-Received: from CYXPR12MB9337.namprd12.prod.outlook.com
- ([fe80::2b19:2045:59c7:cde2]) by CYXPR12MB9337.namprd12.prod.outlook.com
- ([fe80::2b19:2045:59c7:cde2%7]) with mapi id 15.20.7159.020; Wed, 10 Jan 2024
- 09:07:03 +0000
-Message-ID: <8cb2b0d2-675e-499d-a4bf-493110d3b30c@amd.com>
-Date: Wed, 10 Jan 2024 10:06:51 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] tools: zynqmpimage: show info on partition 0
-Content-Language: en-US
-To: Brandon Maier <brandon.maier@collins.com>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-References: <20240104185258.39465-1-brandon.maier@collins.com>
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20240104185258.39465-1-brandon.maier@collins.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VE1PR03CA0028.eurprd03.prod.outlook.com
- (2603:10a6:803:118::17) To CYXPR12MB9337.namprd12.prod.outlook.com
- (2603:10b6:930:d8::20)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7181.17; Wed, 10 Jan
+ 2024 09:10:47 +0000
+Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
+ ([fe80::daa3:b3af:ec52:4278]) by AS2PR08MB8431.eurprd08.prod.outlook.com
+ ([fe80::daa3:b3af:ec52:4278%3]) with mapi id 15.20.7159.020; Wed, 10 Jan 2024
+ 09:10:47 +0000
+From: lukas.funke-oss@weidmueller.com
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Lukas Funke <lukas.funke@weidmueller.com>
+Subject: [PATCH v3 01/11] sandbox: add generic find_next_zero_bit
+ implementation
+Date: Wed, 10 Jan 2024 10:10:27 +0100
+Message-Id: <20240110091037.392520-2-lukas.funke-oss@weidmueller.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20240110091037.392520-1-lukas.funke-oss@weidmueller.com>
+References: <20240110091037.392520-1-lukas.funke-oss@weidmueller.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: FR0P281CA0200.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:ad::11) To AS2PR08MB8431.eurprd08.prod.outlook.com
+ (2603:10a6:20b:55a::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CYXPR12MB9337:EE_|SJ2PR12MB8010:EE_
-X-MS-Office365-Filtering-Correlation-Id: d3849a34-6a78-4078-77c5-08dc11bb82c2
+X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|GV1PR08MB8641:EE_
+X-MS-Office365-Filtering-Correlation-Id: 48c42aaa-0d66-4f21-9b0b-08dc11bc088d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: fZtHEnM96RbKOlB70MkHdf+GJilf5NmSJwfY0G9LX14058U3LRLAPkDpKSbNKsDgcAeAsYvEcWvIfZ2EAXYMYKLRqLoKLwBUWzJEyP6LUbKy70P4uYAxOq67fRwMYL6qJS16ENyzGcXYhsmb0qeNo/wkhq8hwlnFWryt7hFLBNoKK/sGrwp/ixm6UG3jqxKHcEkoy+u31lCWP/GvsNNrEGh5PbP5B4F+ofvfhFzTmcFKCY2r8bmpJpMSBkkYU3bLMRTsf0kLtf3uzNZAHnLaGXIR77hFwslZQ6XDU/11eC/9khqKFRn+3TvnRHkXGSW3gdhF6FFUZhM9z78R/S2C8t2OWuPk7FnUtYfsi5cmKT9PNhXhm8kX5xwOZmQcOUE0y26zA669gAOnbDryFr8TMwKLNGYDnAgdzShdhM0aK/aB7esJT5PYR9Wx2jGRrZwNUbRQTInDw0gqcRTdAptUqpQQIMvHAk6tkhH5BPvhEQ1ArV754AUO5p/HKiv8hX1nTw79J2icTFgiCIs7jhp/yg+uUHZJzr1Yl1YndALqs6Yv+AMml+NceIx2D+MipUCnFaCxInOh/f39o9KMaXqoAtZTngeNIsKthkWTzqCHJs2HagOboleiuCSTp5KvcqmnIyuJ/WKDtf8b+/63iJqSSg==
+X-Microsoft-Antispam-Message-Info: 8FCw3lz74W2AHYs3HynPQxr8K1DCmzMKxa9ZZikqm4vr7JPRltKIPbiIKge3iynXq2IjFMDEoHJPiLr1koBFyPa0XNPgk8DBNAdzXbMpTp6stDTY8Jt4jyGyEOknwNLbAVi++5YKTkRYhoTfLOPgYdz9Nr311ywW5kkBASJ7ZGRuN1JnZGtbLjr8yGqvCXC2osl8cJmh7cBquz6VQ7aUT/TgqaYURxFBNxu4i8IUWkXjxzAHKeOu9QndfYlo1Hr8IGVG7Ba3Eu9Mifh5G1rlR4JoscE/bHE0guUC8felU/AnI5hAkfYnRafxLErBrPxyRg9Ma3eo/HToBEuPyDLSGhKav9Hvb/wUUeZIKIe4hmdKY+FGgAe7gSLA+HkAP5OmbXNELj4Di6b/6wnax3XvfGI9fGl3DYvXfNl6YzHeTAZ4ENeJRlzN5VQ0AMfagCnXF/AavJTzsZPvVLiVMM/G70U+15djJXTsByY8xkD0/6ElhhDa3lYw679HpxDSuJibTfcvPWQASLgz4e22W22VSoCBp+8y/Cc01TqzHO1pIeyGyLsWdU1s87fdC8m+woiCzFDtjdHi3jKc9iBkSc2I6twu32tg8cLKmo/FADeAYHiC7Bmu+fD/iOhPARIAdy0d+IOz57QHFWE4oBmRD99o3Q==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CYXPR12MB9337.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(396003)(346002)(136003)(39860400002)(376002)(230922051799003)(1800799012)(64100799003)(186009)(451199024)(5660300002)(2906002)(38100700002)(44832011)(8936002)(8676002)(4326008)(41300700001)(36756003)(31696002)(86362001)(83380400001)(478600001)(6486002)(53546011)(2616005)(6666004)(6512007)(6506007)(26005)(66476007)(316002)(66556008)(66946007)(110136005)(31686004)(43740500002)(45980500001);
+ IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(376002)(366004)(39860400002)(396003)(136003)(346002)(230922051799003)(186009)(1800799012)(451199024)(64100799003)(86362001)(107886003)(26005)(1076003)(2616005)(6666004)(478600001)(6506007)(9686003)(6512007)(52116002)(83380400001)(5660300002)(4326008)(2906002)(41300700001)(6486002)(8676002)(8936002)(6916009)(66556008)(66946007)(66476007)(54906003)(316002)(38100700002)(38350700005)(36756003)(41533002);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aitFN211QmJpcE1SeHdnTFR1WUdQMThseTNVRUcvYmQrK3pSNnloakpXMUkw?=
- =?utf-8?B?UndGY3ZVa2RwSkJqSVV6ZXM5ZXBHdkNYT0IraHZBVkdMMXh3R0ZGcDFxMUho?=
- =?utf-8?B?YlJZbW9BNmc0OUR5R0lNeSt2cjZWVTkwRU1XNzdhOUh0RFByUHM2VVh6dFJH?=
- =?utf-8?B?TVVFZHI1Y3QraURVUktGUE1TanFzN2VNbFdmQVBVa2ZEV0Ezc2p0TVZTeHQ2?=
- =?utf-8?B?bnVQYUZmdDVmWFJNdUg5anBPaWg4Qy9YV1FaVDF2YlFyUUthZXBUUzFmbm1G?=
- =?utf-8?B?ODlWVU0xWVFuZDJoNXZydWk2UEdNcXBxY3lIaVAzL0p4RUsreDBEKzNKdEFF?=
- =?utf-8?B?cFhhcWUrTnYzOTlmRVluSHd2SmQ5MkF1SDNjcFVxVytva3RPeE4wdy80Ukpz?=
- =?utf-8?B?VXpsdlNmYUx0Mm5odTVsNkF0Z3lnbzRtakovSjlTaW80N2E3djJUUWhocU4v?=
- =?utf-8?B?QVQ5SVBVNDBWb1UzN3ZSRm9YVkVWM2pJRjcxeXMxZWJwRWFPaEVRYTdqeEpK?=
- =?utf-8?B?U2NBVXRQdzZpQW1IQzJBenQ0L3NkZDRjRUVzSmQrL2YxQ3dJWi80L01TSStw?=
- =?utf-8?B?MXZ4U3JRMGh1QkdiL0Jza0tEZlVCRlV3MHVFSWJwME5YMWQ5Ni9sQmRJbUI5?=
- =?utf-8?B?UkdIaTdxeXZtZkRKTUkycUFKcGpWa0ExWk5YdkcrRDR5V01RWlk5NGdGNXFM?=
- =?utf-8?B?Qy9IZ2xaS1IvaUNPMXA0d0RZamk4bHVDS2pBMUNmUmRrRHNaZG5TS0lDK1dY?=
- =?utf-8?B?ZkJoTHNoLzNzalR5aVVjOWRWTlVLNmhqU05ZWkZVb0hFZktNQ2ttQzM4WVY3?=
- =?utf-8?B?TGVBeThhV1JleEN3LzA1SUpWenI2TE5UOGZObnZCTHZOSFFha1h2Y2VRRU5O?=
- =?utf-8?B?ZTlFeTRzWjZISWlWSy81a3RhMHZueXZLZS9GWWFWRWoxVElMN3FYUVk4aE1B?=
- =?utf-8?B?b1JYZzBhamUrT3N1aGtZcmkwMUhYRmZkQVRaQ0pDZWZ0WGlaeDFWREtlaXA4?=
- =?utf-8?B?L3pORmtmV2FiOUJlREY5WEFLc1RpZmdiNHBpTW1JWlVzcmMwMlBXMmk5bGow?=
- =?utf-8?B?SHVONnBxZHh0ZTZXaWpOQU0vSDlhWFVpUHZaemJpT0tjUEVra0RONEQ3MytJ?=
- =?utf-8?B?ajB6WnhGKzBQVi9nRjNEK3dnRVY5SHZEaGYrY250N3JnYWlPYzVzWnJpQjVv?=
- =?utf-8?B?VHMveldnanR6eFI2WXVHZFRPeHI2U2JyY05HcWNQMEhxNEZlYkp1Mlc2aUdP?=
- =?utf-8?B?Z3lJVnBRS2xrL3ZmYmZjY2VPcGVGM1RLMDFvMERnaEFacytGV1VkY1pXUW9j?=
- =?utf-8?B?NjBNMlYyb05kbGdJN3ZSeDArTkhQRjZsL1p5eUltK1czakZlbktJMllNTVFZ?=
- =?utf-8?B?Y2pvbWtXRFpnQ3Njd0hrc0wxdmhsZXRoR3h5M3FETk9GNS9aMHNzMllMWjFO?=
- =?utf-8?B?ZXVKRSs4cjl0dFUwRWRvQkt6VkxtVEhnSkdVM3hLbGMva000cDY3Yndaenpm?=
- =?utf-8?B?ZjFjZFMzSTRYbHNtNGNZQnV4RjlQZHBPRmI0b1lGYkhMQU9oMGo4VTJ0TUU4?=
- =?utf-8?B?TVA1cWdDbzArQVpEY2M3TmRhQVZCeHArYW9rZFlIaGIvWGpEem8zVW5vbW1L?=
- =?utf-8?B?VVV1UURmU0tqVEVLUGJwWVlJaTZEQnkyVEhSeUFmSGVvMTllNlVJVDdxV1hm?=
- =?utf-8?B?YWRpNUtodEFsK2JwNVFKazZnQnN6dG5nSUtiWWM3NGRFa0tPbWNaMmFORVpi?=
- =?utf-8?B?azcvOUE2b3pvVkI5Q0VuVkxxTDRWTVg1VC80L3grOUd4RHNhNmNTakk1Rmd4?=
- =?utf-8?B?TVJXSnFEbnE2N2xsZWFYOUUzNlRoSDFqS1hYcWVyRURNU3RxNDhxTFJqZEta?=
- =?utf-8?B?L1MvSGhwZ2pocjlkcFo3L2t4UjlaRy9QTS9XRGlUNTd0MEpDbGtaMEFpTDRH?=
- =?utf-8?B?SEE4QTZ3a0dBN3p4ekRpQzdKK21INEhET1JNWXIyb3pwNlVkcEZHQ0hjVzNt?=
- =?utf-8?B?RnNqRm9MS1B2UnVxdC9DS1pjNWZVM3lGakMzS0YwR3psVXF6aElxZHBiQjAr?=
- =?utf-8?B?VG5hN2dCYkN5ZjVqZlcyWXNQNit0b2pQNThHa2JpUVcra1V6ZnNxYXJ3WU5i?=
- =?utf-8?Q?YqhDZP0MrjeeIbGfUpISC9Qd5?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d3849a34-6a78-4078-77c5-08dc11bb82c2
-X-MS-Exchange-CrossTenant-AuthSource: CYXPR12MB9337.namprd12.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Du+VIJnGr30YVjW3jZk4xNH4RzbA1YLD2kUontp9SDa+AI29/Y30I2DmyFvn?=
+ =?us-ascii?Q?2bghX1kOHkV9x26Ikq8N5fP3U2mlSIExBPSVvdju4zT5WThK1qzlPeMFpO+B?=
+ =?us-ascii?Q?79AmhxDkz1z57j1EgXHaEAprKbHe9WdyE8NMDiT8FWZtRi6a4vKrLDtLdWN5?=
+ =?us-ascii?Q?SJo7Z9UqPt9sAcgNcUjP3OnyjOzT+92Z42YRJ4tjVtUBWQ6madHxK1zgDRqG?=
+ =?us-ascii?Q?Mwdc2Zim6UCWXEP7bxdy1KpjJgZfLaKMM+yqzLzXNWuD3ZHyaCmybJl8p8lM?=
+ =?us-ascii?Q?d+8ETH/Tq+SDoesHnJTi/Zb+MIPvu5Jk06AsRGT41LdC9hy4HS0YWMyG+xtd?=
+ =?us-ascii?Q?eUDekRnV4CidJebsIDv3oRqA11X6PrqcU1h6KRH791eXF5pjdwAdYGZY5GJB?=
+ =?us-ascii?Q?sks3e9u1YgQJ+SBHMzyMQFsolyzPs9ViYWnEorFPq1ne3XD5pcwMA9TOls07?=
+ =?us-ascii?Q?cF+somX8n/wJB0vOS8Bpx1Kz7h4nvJxsCcjq/hv4EVxd4csMAbURSrnqiczo?=
+ =?us-ascii?Q?tTh9yZMeVx8UJY45fRxwovey4RrvMqJt+9inmDI5Xzcolcv7iW28ByzKg6aY?=
+ =?us-ascii?Q?bxaxGxNQQxSx0dNYQDavtw+AEJH71jw/Btf0JHguAfXspOQSoSvtOsH6ltn2?=
+ =?us-ascii?Q?5iUiMLcGulGIIbHq6lckZ5kxVCi43IJX/Icvm6kArBDNUnZnqTjfNs0ZIcgu?=
+ =?us-ascii?Q?3OJPcDjL7ea8rYyZEInwn97gl/xcq1R7fHXDCHAh0zcnZn8HDwrUfLK6tag1?=
+ =?us-ascii?Q?1D9PJHT4OLu76UmDFEVlg7jdwXRE7UNoeocQ/35+XBsyHXU1wz+fplisWlFs?=
+ =?us-ascii?Q?b2ZSWPfbA5rT+J+iwsiqO6O2BLQ07Nm0mktc6WBZu7LvjmWdjvSq9DIeBmjX?=
+ =?us-ascii?Q?pD4EG5WWWIArtAI6/Izlg2j7n6pRs9xN5YSrCVZfOSsFWWFkw4AIhDURUypB?=
+ =?us-ascii?Q?Ip9P9Ut2rTSk1lfKPwmv+VvdM7l/PXyXi37/rexm91pAElU9PzTQsHlsjS3t?=
+ =?us-ascii?Q?UIel+gDaYNQLvB9OpXjRrCziVIXPdZj9WGixGNI0JyxZKUrU/yRVzPbsclYJ?=
+ =?us-ascii?Q?yU/HzC5FBFEvLNJ2fdGv2nRFOKJAsH/DTYhhGwDQiNt5ih9giCYKmdu840JD?=
+ =?us-ascii?Q?bq1XmKP2i7VHCv3owbAbYGaHUiBthaabYwrdsvogaw4fxSpdBFypaexR3hQR?=
+ =?us-ascii?Q?lWH3lbhrZxpqJC05PRfMS9FfWoAPBJeqdiAwiUXrU1i62I2TIg3BDsJTZ1Bn?=
+ =?us-ascii?Q?HgUYvTuSr7va887b/1Ox7bx/M+Jr8r2G04rM4F5RCujXC1020NulKCubTM3L?=
+ =?us-ascii?Q?ZTX6+LveTKtr8SehRfJW+kQoYXRew6vjQq/CrW1vO0dQxXZhRffY7prhJ5MB?=
+ =?us-ascii?Q?eA5DNu/skc0b+apj8EhbV+7aKbP8/9AVmyBanH/gASAuv9H4Q10a1Vujot1I?=
+ =?us-ascii?Q?YyqXx4Ocorb111+xyCet0IMsK2a8BREuIRqgPrCdVhhpP8fX5QJB0bXW+wc7?=
+ =?us-ascii?Q?BmimX7cFmnG6nrr0j8xrs3fpt5EDD+66OLVY76rDr9w/xgYsQY+1U5Xxa6B/?=
+ =?us-ascii?Q?oMsStFQAMuI0dIUBRSn1kjf1RWhC373I8XAOPkwr7TlmHnRdaRKVd35ttwfE?=
+ =?us-ascii?Q?Mg=3D=3D?=
+X-OriginatorOrg: weidmueller.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 48c42aaa-0d66-4f21-9b0b-08dc11bc088d
+X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jan 2024 09:07:03.2388 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jan 2024 09:10:47.5666 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3tQ9Px+59N5f6vzMBU+EqpXIcY1cxbJz1E/kEGQeR1cBd8PJpr1lnW6aX7bdNZfD
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8010
+X-MS-Exchange-CrossTenant-UserPrincipalName: WfGUxABEDr9Nn3gCBvlGOAY3AGwgeLbsQGYSI6Mblh3cII1CYcm2VkR3asDS6wrdJPEDkiVAjjtByGvsC8l2Mg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR08MB8641
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -186,40 +136,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Lukas Funke <lukas.funke@weidmueller.com>
 
+Add generic 'find_next_zero_bit()' implementation in order to enable the
+use of the 'for_each_set_bitrange' macro. The implementation is currently
+missing for the sandbox-arch and using the function results in a linker
+error. The implementation is copied from the 'arm' implementation.
 
-On 1/4/24 19:50, Brandon Maier wrote:
-> The zynqmpimage_print_header() skips printing the first partition. This
-> is because the image header can contain duplicate fields as the first
-> partition. However some fields, like the partition attributes, are only
-> present in the partition table. It is also possible for the first
-> partition to not be declared in the image header, if the image is not a
-> bootloader image.
-> 
-> Signed-off-by: Brandon Maier <brandon.maier@collins.com>
-> ---
-> 
->   tools/zynqmpimage.c | 4 +---
->   1 file changed, 1 insertion(+), 3 deletions(-)
-> 
-> diff --git a/tools/zynqmpimage.c b/tools/zynqmpimage.c
-> index bb54f41a153..05af1e81a24 100644
-> --- a/tools/zynqmpimage.c
-> +++ b/tools/zynqmpimage.c
-> @@ -262,9 +262,7 @@ void zynqmpimage_print_header(const void *ptr, struct image_tool_params *params)
->   		for (i = 0; i < le32_to_cpu(iht->nr_parts); i++) {
->   			next = le32_to_cpu(ph->next_partition_offset) * 4;
->   
-> -			/* Partition 0 is the base image itself */
-> -			if (i)
-> -				print_partition(ptr, ph);
-> +			print_partition(ptr, ph);
->   
->   			ph = (void *)ptr + next;
->   		}
+Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
 
+Changes in v3:
+- Use generic find_next_zero_bit() from arch/arm/include/asm/bitops.h
+- Redirect sandbox ffz() implementation to generic __ffs() impl
 
-Applied all. With also removing "This contributor prefers not to receive mails 
-<noreply@example.com>" from my reply.
+ arch/sandbox/include/asm/bitops.h | 60 +++++++++++++++++++------------
+ 1 file changed, 38 insertions(+), 22 deletions(-)
 
-M
+diff --git a/arch/sandbox/include/asm/bitops.h b/arch/sandbox/include/asm/bitops.h
+index f27d5e98c5..6950916962 100644
+--- a/arch/sandbox/include/asm/bitops.h
++++ b/arch/sandbox/include/asm/bitops.h
+@@ -104,9 +104,6 @@ static inline int __test_and_change_bit(int nr, void *addr)
+ 	return (old & mask) != 0;
+ }
+ 
+-extern int find_first_zero_bit(void *addr, unsigned size);
+-extern int find_next_zero_bit(void *addr, int size, int offset);
+-
+ /*
+  * This routine doesn't need to be atomic.
+  */
+@@ -119,27 +116,46 @@ static inline int test_bit(int nr, const void *addr)
+  * ffz = Find First Zero in word. Undefined if no zero exists,
+  * so code should check against ~0UL first..
+  */
+-static inline unsigned long ffz(unsigned long word)
+-{
+-	int k;
+-
+-	word = ~word;
+-	k = 31;
+-	if (word & 0x0000ffff) {
+-		k -= 16; word <<= 16;
+-	}
+-	if (word & 0x00ff0000) {
+-		k -= 8;  word <<= 8;
+-	}
+-	if (word & 0x0f000000) {
+-		k -= 4;  word <<= 4;
++#define ffz(x)  __ffs(~(x))
++
++#define find_first_zero_bit(addr, size) \
++	find_next_zero_bit((addr), (size), 0)
++
++static inline int find_next_zero_bit(const unsigned long *addr, int size,
++				     int offset) {
++	unsigned long *p = ((unsigned long *)addr) + (offset / BITS_PER_LONG);
++	unsigned long result = offset & ~(BITS_PER_LONG - 1);
++	unsigned long tmp;
++
++	if (offset >= size)
++		return size;
++	size -= result;
++	offset &= (BITS_PER_LONG - 1);
++	if (offset) {
++		tmp = *(p++);
++		tmp |= ~0UL >> (BITS_PER_LONG - offset);
++		if (size < BITS_PER_LONG)
++			goto found_first;
++		if (~tmp)
++			goto found_middle;
++		size -= BITS_PER_LONG;
++		result += BITS_PER_LONG;
+ 	}
+-	if (word & 0x30000000) {
+-		k -= 2;  word <<= 2;
++	while (size & ~(BITS_PER_LONG - 1)) {
++		tmp = *(p++);
++		if (~tmp)
++			goto found_middle;
++		result += BITS_PER_LONG;
++		size -= BITS_PER_LONG;
+ 	}
+-	if (word & 0x40000000)
+-		k -= 1;
+-	return k;
++	if (!size)
++		return result;
++	tmp = *p;
++
++found_first:
++	tmp |= ~0UL << size;
++found_middle:
++	return result + ffz(tmp);
+ }
+ 
+ /*
+-- 
+2.30.2
+
