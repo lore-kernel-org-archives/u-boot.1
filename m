@@ -4,57 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 191A5C4707B
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 14:49:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13411C4707B
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 14:52:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 418D187AC5;
-	Wed, 10 Jan 2024 15:49:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 4E37987A97;
+	Wed, 10 Jan 2024 15:52:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1704898173;
-	bh=C7wOi6aTldLTBy9WztLKcPZ/0XaawuvAuQ53Wdn1Xak=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=sKP8vJnjFrVU+saKAJRNLh3ixHMx0VIj3HEuekVHM8Eu+Ry8grgJvIXjdsgQOKdr7
-	 ANmK/VSku9L9ARN8Jdlojb92o4r4KWGA8CF6kdjcFEQnl6sqd2ChaJMxMz5NS/QuVC
-	 FBlhMyun7ehYR6XauyBqfSXF0xncSBlXLNwXbf7JqcKXMMh12B4+b9ixq8fBigVefc
-	 8Se1x1H2rAyHsSJr9uViWUgRxld5uJlsYRb1Gx0Q8BHwMAts94YscQSYHyRw8xLEjj
-	 j+c2YhKstoR6EC3KYcyS9/om0usn2gOdnSVvqbMQdB/JL5cypofoBezPt0QuvvcALP
-	 RA0AYKA0mCsrw==
-Received: from localhost.localdomain (85-222-111-42.dynamic.chello.pl
- [85.222.111.42])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="azDtQAPT";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 08DAA87A97; Wed, 10 Jan 2024 15:52:58 +0100 (CET)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id AE27B8791E;
- Wed, 10 Jan 2024 15:49:26 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1704898166;
- bh=C7wOi6aTldLTBy9WztLKcPZ/0XaawuvAuQ53Wdn1Xak=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=GuiXTc6Hjh9ixJKOXEtdl4TwTmBWdKb2M6EQniODT6xtKbEMYwHzlmzRdpYFDXqGB
- sSxELM8wxT9NjOvZEtrXwRTo8maPLfkb7H9kW2PyXcOzkiToXmi7RljKrs6708/3GE
- xinrtMwVKkHkU/9Q+MEn7rl1wei5D6c+bgZ0JaLb9Sj58o1ePGWZ40rLnOLnI3r1d/
- C2nvhxk5m96Jtcexm4r5bQ7H842mCZLDfjDyBsfLpbP3kd53bL1fS3qHzE/Usx0UTb
- Pz6h+lHm0Vt+r5zIkGGmZklAwRUU6/J5xxoo1z/gm2J8uRaSC+Anhu5Wss/13PaUZ1
- Dd1Qr8Gi1pNRw==
-From: Lukasz Majewski <lukma@denx.de>
-To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- NXP u-boot <uboot-imx@nxp.com>
-Cc: Anatolij Gustschin <agust@denx.de>,
-	Lukasz Majewski <lukma@denx.de>
-Subject: [PATCH v1 3/3] arm: xea: Add support for boot image source descriptor
- in SPL
-Date: Wed, 10 Jan 2024 15:48:49 +0100
-Message-Id: <20240110144849.1783122-3-lukma@denx.de>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240110144849.1783122-1-lukma@denx.de>
+ by phobos.denx.de (Postfix) with ESMTPS id E02528785F
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 15:52:55 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-680cb09a819so28830756d6.2
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 06:52:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1704898374; x=1705503174; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=V9UmroHy8uaIA5jlFsjChcJZQzCXW3Jt5TnEpHY2Jls=;
+ b=azDtQAPTTodJbS4XCxTQ6uv5mGj3YqiiQr1XOc3tYZBRSOswPp6dZ/Yzw+c3imbSOR
+ MvY3h/IZcHXbFGlL71xzTEYkWfgRK297KHrjvKyeMuIVbu6tz/CFI1lKC39BN91v1Zjs
+ QfcTwQY2zwLsF+s08igVKxS8SzjGjC5lz460Q=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704898374; x=1705503174;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=V9UmroHy8uaIA5jlFsjChcJZQzCXW3Jt5TnEpHY2Jls=;
+ b=cLmEqTj3w1Haeuy4wCJaVlXI+mG6gvvaCYWoJZQ1FjvKgRwgUSKnDyhZXNLa5nrcz6
+ lvM/kA4lkI0kKBniLP9aFUc0yYpf3kwxzQQ1XTiGkLhr3uQdFlrgw1dbDO0LnVE7uiMe
+ 5wI9AqKD6nu4Hdn1Hw0PUxvqZyU7drKXh7QlILmpQwlqg8LPZDUlf09p4mY5NsHPgKn+
+ mB7xGeuiPtr6BFaON0hPb/DIQVG+NL/8WRC5jwvML+OOdKiFNf3KW3ls8l49AdozbAxC
+ fAXkFmCM5HvShBNXtwesziHYI6TtHil6wIWepHRFpMZbyNMeiZO4jxSFWQtlOFwWUqiy
+ sPPg==
+X-Gm-Message-State: AOJu0YyvRIJHofHGPlTzHoNhti53jzh9PbIeopG8Be54+eIqmVQiYaVl
+ FzKEH5zP+t1heIbLOka8oDSye72tPIw2uA==
+X-Google-Smtp-Source: AGHT+IE+AhUINE+1OF1ClRzpUKLNYTJUEhRrVAVsSOoBGilGQ4R4bRw4WlQTwd9XZzFcTHrtNFrH1A==
+X-Received: by 2002:a05:6214:21ce:b0:67f:7ef9:4a09 with SMTP id
+ d14-20020a05621421ce00b0067f7ef94a09mr1485714qvh.43.1704898374669; 
+ Wed, 10 Jan 2024 06:52:54 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
+ [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
+ h19-20020a0ceed3000000b0067f7b0904c3sm1749444qvs.83.2024.01.10.06.52.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Jan 2024 06:52:54 -0800 (PST)
+Date: Wed, 10 Jan 2024 09:52:52 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Lukasz Majewski <lukma@denx.de>
+Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ u-boot@lists.denx.de, NXP u-boot <uboot-imx@nxp.com>
+Subject: Re: [PATCH v1 1/3] arm: config: xea: Update environment variables
+ for XEA board (imx287)
+Message-ID: <20240110145252.GE1610741@bill-the-cat>
 References: <20240110144849.1783122-1-lukma@denx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="aiDxHVCaWay0MoMi"
+Content-Disposition: inline
+In-Reply-To: <20240110144849.1783122-1-lukma@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,166 +92,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Anatolij Gustschin <agust@denx.de>
 
-We load two boot image source descriptor structures from last
-two sectors in the SPI NOR flash and determine the boot source
-for loading the kernel/DTB images, then adjust the boot order for
-loading image from eMMC boot0 or boot1 partition.
+--aiDxHVCaWay0MoMi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Anatolij Gustschin <agust@denx.de>
-Signed-off-by: Lukasz Majewski <lukma@denx.de>
+On Wed, Jan 10, 2024 at 03:48:47PM +0100, Lukasz Majewski wrote:
 
----
+> As the XEA now supports fitImage, the default envs shall reflect this
+> as well.
+>=20
+> Moreover, some SPI-NOR layout re-organization has took place.
+>=20
+> Signed-off-by: Lukasz Majewski <lukma@denx.de>
+> ---
+>=20
+>  include/configs/xea.h | 45 ++++++++++++++++++++++++-------------------
+>  1 file changed, 25 insertions(+), 20 deletions(-)
 
- board/liebherr/xea/boot_img_scr.h | 27 ++++++++++
- board/liebherr/xea/xea.c          | 85 +++++++++++++++++++++++++++++++
- 2 files changed, 112 insertions(+)
- create mode 100644 board/liebherr/xea/boot_img_scr.h
+Please migrate this to a plain text environment.
 
-diff --git a/board/liebherr/xea/boot_img_scr.h b/board/liebherr/xea/boot_img_scr.h
-new file mode 100644
-index 0000000000..baa3072b49
---- /dev/null
-+++ b/board/liebherr/xea/boot_img_scr.h
-@@ -0,0 +1,27 @@
-+/* SPDX-License-Identifier:     GPL-2.0+ */
-+/*
-+ * Struct for boot image source description for placing in last
-+ * two SPI NOR flash sectors on legcom.
-+ */
-+
-+struct boot_img_src {
-+	u8 magic;	/* Must be 'B' = 0x42 */
-+	u8 flags;	/* flags to specify mmcblk[0|1] boot[0|1] */
-+	u8 crc8;	/* CRC-8 over above two bytes */
-+} __packed;
-+
-+/*
-+ * Bit definition in boot_img_src.flags:
-+ *  Bit 0: mmcblk device 0 or 1 (1 - if this bit set)
-+ *  Bit 1: mmcblk boot partition 0 or 1.
-+ *         for eMMC: boot0 if this bit is cleared, boot1 - if set
-+ *         for SD-card the boot partition value will always be 0
-+ *         (independent of the value of this bit)
-+ *
-+ */
-+#define BOOT_SRC_MMC1	BIT(0)
-+#define BOOT_SRC_PART1	BIT(1)
-+
-+/* Offset of the first boot image source descriptor in SPI NOR */
-+#define SPI_FLASH_BOOT_SRC_OFFS	0xFE0000
-+#define SPI_FLASH_SECTOR_SIZE	0x10000
-diff --git a/board/liebherr/xea/xea.c b/board/liebherr/xea/xea.c
-index e4d2eb65cc..c8ac526cb4 100644
---- a/board/liebherr/xea/xea.c
-+++ b/board/liebherr/xea/xea.c
-@@ -32,6 +32,11 @@
- #include <errno.h>
- #include <usb.h>
- #include <serial.h>
-+#include <u-boot/crc.h>
-+#include "boot_img_scr.h"
-+
-+#include <spi.h>
-+#include <spi_flash.h>
- 
- #ifdef CONFIG_SPL_BUILD
- #include <spl.h>
-@@ -66,6 +71,52 @@ void board_init_f(ulong arg)
- 	preloader_console_init();
- }
- 
-+static struct boot_img_src img_src[2];
-+static int spi_load_boot_info(void)
-+{
-+	struct spi_flash *flash;
-+	int err;
-+
-+	flash = spi_flash_probe(CONFIG_SF_DEFAULT_BUS,
-+				CONFIG_SF_DEFAULT_CS,
-+				CONFIG_SF_DEFAULT_SPEED,
-+				CONFIG_SF_DEFAULT_MODE);
-+	if (!flash) {
-+		printf("%s: SPI probe err\n", __func__);
-+		return -ENODEV;
-+	}
-+
-+	/*
-+	 * Load both boot info structs from SPI flash
-+	 */
-+	err = spi_flash_read(flash, SPI_FLASH_BOOT_SRC_OFFS,
-+			     sizeof(img_src[0]),
-+			     (void *)&img_src[0]);
-+	if (err) {
-+		debug("%s: First boot info NOR sector read error %d\n",
-+		      __func__, err);
-+		return err;
-+	}
-+
-+	err = spi_flash_read(flash,
-+			     SPI_FLASH_BOOT_SRC_OFFS + SPI_FLASH_SECTOR_SIZE,
-+			     sizeof(img_src[0]),
-+			     (void *)&img_src[1]);
-+	if (err) {
-+		debug("%s: First boot info NOR sector read error %d\n",
-+		      __func__, err);
-+		return err;
-+	}
-+
-+	debug("%s: BI0 0x%x 0x%x 0x%x\n", __func__,
-+	      img_src[0].magic, img_src[0].flags, img_src[0].crc8);
-+
-+	debug("%s: BI1 0x%x 0x%x 0x%x\n", __func__,
-+	      img_src[1].magic, img_src[1].flags, img_src[1].crc8);
-+
-+	return 0;
-+}
-+
- static int boot_tiva0, boot_tiva1;
- 
- /* Check if TIVAs request booting via U-Boot proper */
-@@ -114,6 +165,40 @@ void spl_board_init(void)
- 	boot_tiva1 = dm_gpio_get_value(&btiva1);
- }
- 
-+int spl_mmc_emmc_boot_partition(struct mmc *mmc)
-+{
-+	int i, src_idx = -1, ret;
-+
-+	ret = spi_load_boot_info();
-+	if (ret) {
-+		printf("%s: Cannot read XEA boot info! [%d]\n", __func__, ret);
-+		/* To avoid bricking board - by default boot from boot0 eMMC */
-+		return 1;
-+	}
-+
-+	for (i = 0; i < 2; i++) {
-+		if (img_src[i].magic == 'B' &&
-+		    img_src[i].crc8 == crc8(0, &img_src[i].magic, 2)) {
-+			src_idx = i;
-+			break;
-+		}
-+	}
-+
-+	debug("%s: src idx: %d\n", __func__, src_idx);
-+
-+	if (src_idx < 0)
-+		/*
-+		 * Always use eMMC (mmcblkX) boot0 if no
-+		 * valid image source description found
-+		 */
-+		return 1;
-+
-+	if (img_src[src_idx].flags & BOOT_SRC_PART1)
-+		return 2;
-+
-+	return 1;
-+}
-+
- void board_boot_order(u32 *spl_boot_list)
- {
- 	spl_boot_list[0] = BOOT_DEVICE_MMC1;
--- 
-2.39.2
+--=20
+Tom
 
+--aiDxHVCaWay0MoMi
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWer0AACgkQFHw5/5Y0
+tyw9bQv+JSB0uwhR6GPgCIAYU+yND0lFq9PkSWtYGzTOcQB8aEuEH69fi48OUc6H
+BBQph8q9T/4xJZzcklenocPDAncYMY23lYx5xxc1DE+XSI6ZLilAfWpdHjpVoTad
+orh3bJYV6d7gJLp/t1XONYKq/37cnmBbASQraktVbQu6Gt93cuzVH0ERlRL8liFE
+mPNHM7loI771PeBPIHMXnuDUhEVaqcGR3Ey54283UU7DxhGqu8TuWpSWY8EkrXwx
+CQ78J7aA/XB5SHiQWBmPJpTnitC0gR+8lbf8AaxRdTpJ+Ykix4ouohSPVvQn9qws
+GJrTh1BrmuiVukryNaCQVWlMQk3YtNEjMBG2r7ctn4twfjNjlcSTpyNi6NXrLH9a
+QGI5XglcftMhLsSZGqFKPmEsR/hh1j84NvTE7PdL8SSoS3J/vWwI42qNDb/BroJR
+Ox7BwKfG3dCbdqVAxY67GkG1ASHptSdwETt9JNA5NNCHyL//vvJJlox65zm94+iP
+5Cig7A7v
+=vsuh
+-----END PGP SIGNATURE-----
+
+--aiDxHVCaWay0MoMi--
