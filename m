@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 325B4C47077
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 01:17:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 378FFC4706C
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 01:17:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89E0787977;
-	Wed, 10 Jan 2024 02:17:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0BC0A87A7B;
+	Wed, 10 Jan 2024 02:17:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="W5YdkEcU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bIvCe0lk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A987687708; Wed, 10 Jan 2024 02:17:07 +0100 (CET)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
+ id 67F7A87977; Wed, 10 Jan 2024 02:17:08 +0100 (CET)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DAEC8786F
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 02:16:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 87362878F5
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 02:17:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-2049e6d7f50so685352fac.0
- for <u-boot@lists.denx.de>; Tue, 09 Jan 2024 17:16:59 -0800 (PST)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-6ddec302e68so118824a34.0
+ for <u-boot@lists.denx.de>; Tue, 09 Jan 2024 17:17:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704849418; x=1705454218; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1704849420; x=1705454220; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qbjgTfHkMTJGirKT3R9MJjlpV0ohhIqb0vChQJw0nDk=;
- b=W5YdkEcUphJqcDA6AZTU5svYkfvvli5n3PpDBADTivf7DAqok05LDN9I0zwhjw0gxY
- qOgNvsodyNAH2kQAhlhsc/qWqRs3zA93JT956AS31lrtx1+pZtY3Or7OlxHnRXbhFJXy
- H8NZ1pU79WEwijN32ALay/DkfJnMrJFeg/twUp9TbsTAOUYUAHDSrdHj2+FFSk89SfL2
- Py13ekRmEGErDTRDJQ+iRBL/qWY/OWAn5Wx+woD4B/9dBMskkzQ5t6UzVoWsMQWSzzsd
- NH0ZylHjjUbjY/cms5Z5brjwxWYc/Ios/XtNUjkEkqVHXKPfxdrmTag2FPSHwlZieyhy
- xfvg==
+ bh=3MpDZAKW0GtvfJUZzRZqB7/dnvoYqSper+30bo2fhw0=;
+ b=bIvCe0lkpoL/ka8Cezd/sjEzCWD23+o20w0YQ0wf4hsOL816PG2JgRR9jZIXUDw5c4
+ HsOXzZnGEHR1JTSyZuzC4xrBGxQDrCBQc0zlUcl/SGv67eXLpTkPk5gjLqrAtO85l/h1
+ 0i/FyxVU79twEvoGaBxJtbk3X66rVgXFbKWO0sGLyy0G5xqy+LTAdG3e5YJyE+U2odQJ
+ cYgjBRxeHlDRY2F4xyAdphsYuU7SGWI9yObVngOWrluzbNyWEsbxOIvvR5ta2jI/NnQu
+ BaDWafZ+0fBYIjvg3TBnX8gVGIfCwc9BjKnRbc4yQD6HcKz4N/OdNQZQUM7rSQINufgZ
+ 5Svg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704849418; x=1705454218;
+ d=1e100.net; s=20230601; t=1704849420; x=1705454220;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qbjgTfHkMTJGirKT3R9MJjlpV0ohhIqb0vChQJw0nDk=;
- b=p/iJSWCTYzVBgAEqQwd5I449bvIEhTQhnJgPlOYXOLuVRpyb8Ia/Q4r3F3s+R38vz2
- b/CgRh4AjW8mxRlpkFEY68KgGOnsUmmPEHb3Hhwfv22+373KIpx2qB8tg5PBx/bhgQ9P
- hW+unaGeMl1bA5KzBStBoy2A34O09dAacxNzvilUSTgxNjA7gXuUHtX/PZwAN0O48prL
- VnALsZ6t0DqMUFBngvcRV1vm16WldW4Tka2HtnJyKBWMF3D3w7UApBwB8O2V2oMfMswZ
- rY10d1dDO5y3Mp08sgwJY1k91HYrfTgE4yizAZVbRy8tN+xKOZyEpcasvUdi6ihb6SH1
- xZZw==
-X-Gm-Message-State: AOJu0YxD5mRxIpUev49I+oRaCd1nEB1Dl4HzN/22MvLHlmjPOUZMXKy+
- qyWyNyk13FHdGyVRupf1nD/t7cw+gVQtUaE7WEnFv4eeL/4=
-X-Google-Smtp-Source: AGHT+IESQST3V9xn/FN8zq5KUxWMfpURXsi1wGMX34naP0wFmPcc695F6deJyzVyyArWa+YjapFQZA==
-X-Received: by 2002:a05:6870:8986:b0:204:9066:c34f with SMTP id
- f6-20020a056870898600b002049066c34fmr654965oaq.5.1704849417651; 
- Tue, 09 Jan 2024 17:16:57 -0800 (PST)
+ bh=3MpDZAKW0GtvfJUZzRZqB7/dnvoYqSper+30bo2fhw0=;
+ b=cSmgsU3mxgAL0uV82YOL9sAImiuhwkgj3q5L28Q4OHCmIVZjjSaWQtOTVJY36W/EUg
+ wAYfM+IomLuKq/oGs6cZIxWDf7sUNriR0x37md3lIwPSMxTSVIpklsyPf6xFeF3faEZz
+ xsVKIGsg6DRvkKrTWcs/F0lZOLVAV0o3lF587got1An/b8AQgAVKIGS6tsmEX0wWlDCd
+ i7hr5LEU64TtKgzN6dlMgugPae8k7myTkF8PUx9TgODiOqPSidibcZ29LPsgrUX6fF/F
+ vN2NWfRtBuPgn+JZu98DG9S4XipvS+LwqE8U6CSw7na4XFjHvWsosLScSG5o/XsJuIxP
+ onIg==
+X-Gm-Message-State: AOJu0Yylr3qJQseAEfgRLYRusYmabgQUmOrCcATn1R4XEnX8PoZQXaWg
+ 2FI44f4gz8kZLXe58dVaP4cJV1AExtI35w==
+X-Google-Smtp-Source: AGHT+IG/ZWBkgIG6bRLS34JmtQuDD2krtD+PabP2MlRVFYLTYSk8Nd/uEuWQLkywedAu49w+ZlB6Tg==
+X-Received: by 2002:a05:6830:448b:b0:6dc:12f0:cb38 with SMTP id
+ r11-20020a056830448b00b006dc12f0cb38mr633717otv.0.1704849420161; 
+ Tue, 09 Jan 2024 17:17:00 -0800 (PST)
 Received: from octopus.. ([2400:4050:c3e1:100:e32c:1ab8:3100:c37f])
  by smtp.gmail.com with ESMTPSA id
- a36-20020a634d24000000b005c2967852c5sm2166833pgb.30.2024.01.09.17.16.55
+ a36-20020a634d24000000b005c2967852c5sm2166833pgb.30.2024.01.09.17.16.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jan 2024 17:16:57 -0800 (PST)
+ Tue, 09 Jan 2024 17:16:59 -0800 (PST)
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de,
  ilias.apalodimas@linaro.org
-Cc: u-boot@lists.denx.de,
-	AKASHI Takahiro <takahiro.akashi@linaro.org>
-Subject: [PATCH v4 2/4] efi_loader: rename BOOTEFI_BOOTMGR to EFI_BOOTMGR
-Date: Wed, 10 Jan 2024 10:16:35 +0900
-Message-Id: <20240110011637.174710-3-takahiro.akashi@linaro.org>
+Cc: u-boot@lists.denx.de, AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Ramon Fried <rfried.dev@gmail.com>
+Subject: [PATCH v4 3/4] net: tftp: remove explicit efi configuration dependency
+Date: Wed, 10 Jan 2024 10:16:36 +0900
+Message-Id: <20240110011637.174710-4-takahiro.akashi@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240110011637.174710-1-takahiro.akashi@linaro.org>
 References: <20240110011637.174710-1-takahiro.akashi@linaro.org>
@@ -93,116 +93,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At this point, EFI boot manager interfaces is fully independent from
-bootefi command. So just rename the configuration parameter.
+Now it is clear that the feature actually depends on efi interfaces,
+not "bootefi" command. efi_set_bootdev() will automatically be nullified
+if necessary efi component is disabled.
 
 Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
+Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
- boot/Makefile           | 2 +-
- cmd/Kconfig             | 4 ++--
- cmd/efidebug.c          | 4 ++--
- lib/efi_loader/Kconfig  | 2 +-
- lib/efi_loader/Makefile | 2 +-
- test/boot/bootflow.c    | 2 +-
- 6 files changed, 8 insertions(+), 8 deletions(-)
+ net/tftp.c | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
 
-diff --git a/boot/Makefile b/boot/Makefile
-index a90ebea5a867..bcd01cfc890c 100644
---- a/boot/Makefile
-+++ b/boot/Makefile
-@@ -34,7 +34,7 @@ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_CROS) += bootm.o bootm_os.o bootmeth_cros.o
- obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SANDBOX) += bootmeth_sandbox.o
- obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SCRIPT) += bootmeth_script.o
- ifdef CONFIG_$(SPL_TPL_)BOOTSTD_FULL
--obj-$(CONFIG_BOOTEFI_BOOTMGR) += bootmeth_efi_mgr.o
-+obj-$(CONFIG_EFI_BOOTMGR) += bootmeth_efi_mgr.o
- obj-$(CONFIG_$(SPL_TPL_)EXPO) += bootflow_menu.o
- obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += bootflow_menu.o
- obj-$(CONFIG_$(SPL_TPL_)CEDIT) += cedit.o
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 150fa37a50a7..62d2ae3d3f1b 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -395,7 +395,7 @@ config CMD_BOOTEFI_BINARY
- 
- config CMD_BOOTEFI_BOOTMGR
- 	bool "UEFI Boot Manager command"
--	depends on BOOTEFI_BOOTMGR
-+	depends on EFI_BOOTMGR
- 	default y
- 	help
- 	  Select this option to enable the 'bootmgr' subcommand of 'bootefi'.
-@@ -2153,7 +2153,7 @@ config CMD_EFIDEBUG
- config CMD_EFICONFIG
- 	bool "eficonfig - provide menu-driven uefi variables maintenance interface"
- 	default y if !HAS_BOARD_SIZE_LIMIT
--	depends on BOOTEFI_BOOTMGR
-+	depends on EFI_BOOTMGR
- 	select MENU
- 	help
- 	  Enable the 'eficonfig' command which provides the menu-driven UEFI
-diff --git a/cmd/efidebug.c b/cmd/efidebug.c
-index e10fbf891a42..b4954258eeba 100644
---- a/cmd/efidebug.c
-+++ b/cmd/efidebug.c
-@@ -1410,7 +1410,7 @@ static __maybe_unused int do_efi_test_bootmgr(struct cmd_tbl *cmdtp, int flag,
+diff --git a/net/tftp.c b/net/tftp.c
+index 88e71e67de35..2e335413492b 100644
+--- a/net/tftp.c
++++ b/net/tftp.c
+@@ -302,12 +302,10 @@ static void tftp_complete(void)
+ 			time_start * 1000, "/s");
+ 	}
+ 	puts("\ndone\n");
+-	if (IS_ENABLED(CONFIG_CMD_BOOTEFI)) {
+-		if (!tftp_put_active)
+-			efi_set_bootdev("Net", "", tftp_filename,
+-					map_sysmem(tftp_load_addr, 0),
+-					net_boot_file_size);
+-	}
++	if (!tftp_put_active)
++		efi_set_bootdev("Net", "", tftp_filename,
++				map_sysmem(tftp_load_addr, 0),
++				net_boot_file_size);
+ 	net_set_state(NETLOOP_SUCCESS);
  }
  
- static struct cmd_tbl cmd_efidebug_test_sub[] = {
--#ifdef CONFIG_BOOTEFI_BOOTMGR
-+#ifdef CONFIG_EFI_BOOTMGR
- 	U_BOOT_CMD_MKENT(bootmgr, CONFIG_SYS_MAXARGS, 1, do_efi_test_bootmgr,
- 			 "", ""),
- #endif
-@@ -1604,7 +1604,7 @@ U_BOOT_LONGHELP(efidebug,
- 	"  - show UEFI memory map\n"
- 	"efidebug tables\n"
- 	"  - show UEFI configuration tables\n"
--#ifdef CONFIG_BOOTEFI_BOOTMGR
-+#ifdef CONFIG_EFI_BOOTMGR
- 	"efidebug test bootmgr\n"
- 	"  - run simple bootmgr for test\n"
- #endif
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index 64f2f1cdd161..db5571de1d95 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -41,7 +41,7 @@ config EFI_BINARY_EXEC
- 	  You may enable CMD_BOOTEFI_BINARY so that you can use bootefi
- 	  command to do that.
- 
--config BOOTEFI_BOOTMGR
-+config EFI_BOOTMGR
- 	bool "UEFI Boot Manager"
- 	default y
- 	select BOOTMETH_GLOBAL if BOOTSTD
-diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-index f85d26d9724c..56e5ce220a3e 100644
---- a/lib/efi_loader/Makefile
-+++ b/lib/efi_loader/Makefile
-@@ -42,7 +42,7 @@ targets += initrddump.o
- endif
- 
- obj-$(CONFIG_CMD_BOOTEFI_HELLO) += helloworld_efi.o
--obj-$(CONFIG_BOOTEFI_BOOTMGR) += efi_bootmgr.o
-+obj-$(CONFIG_EFI_BOOTMGR) += efi_bootmgr.o
- obj-$(CONFIG_EFI_BINARY_EXEC) += efi_bootbin.o
- obj-y += efi_boottime.o
- obj-y += efi_helper.o
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 104f49deef2a..fa54dde661c8 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -374,7 +374,7 @@ static int bootflow_system(struct unit_test_state *uts)
- {
- 	struct udevice *bootstd, *dev;
- 
--	if (!IS_ENABLED(CONFIG_BOOTEFI_BOOTMGR))
-+	if (!IS_ENABLED(CONFIG_EFI_BOOTMGR))
- 		return -EAGAIN;
- 	ut_assertok(uclass_first_device_err(UCLASS_BOOTSTD, &bootstd));
- 	ut_assertok(device_bind(bootstd, DM_DRIVER_GET(bootmeth_efi_mgr),
 -- 
 2.34.1
 
