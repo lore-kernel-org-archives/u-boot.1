@@ -4,55 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1053C4707C
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 14:10:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A95FC4707B
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 14:12:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19AC987ABE;
-	Wed, 10 Jan 2024 15:10:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 321D787A7B;
+	Wed, 10 Jan 2024 15:12:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1704895817;
-	bh=SRwKr6t7fVHcKJlOZ2V1IrfUrne5w8zOo3fr+u2wcdQ=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Ho7uVCmgBbf86g8Z+V5fXXEMl2DwatdabOk7TqSDn9GoRI0MM07p16TvbGjoVUwoi
-	 8qT3MUMGjH/r3lHCownS1J/Ds71NzqQ93fs9LORhEQBW5wJa4C12fnG8O5AKt+D9yj
-	 MZZ7l3wqHtUz+3G0mbe5BPqI1E1bTGPa82b9IRXtwzhy0fwOwnHXZajmCzzIihvnzw
-	 w5fDsBTLP3Y7gxYVoParrIIEnZVydDicjm+saOJ+mdSogqDKwwyto2GfcKh1+Yz/Yj
-	 jxs5E5fsFK7GKbAO+N+MgIbK0IygNLB+HmoGTWu1xNs2RaOOZU/OdvLR4n0efZ4xJq
-	 oWfxfMA17KSsQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E92F87A88; Wed, 10 Jan 2024 15:10:15 +0100 (CET)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8F4487A7B
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 15:10:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YdQX71+E";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 2A6DB87A79; Wed, 10 Jan 2024 15:12:01 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4T98nv1hKHz9sZN;
- Wed, 10 Jan 2024 15:10:11 +0100 (CET)
-Message-ID: <4dbc517f-8610-4380-bafb-5b54d969cbc1@denx.de>
-Date: Wed, 10 Jan 2024 15:10:10 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 3ED7887AB9
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 15:11:58 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-50ec948ad31so2782495e87.2
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 06:11:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1704895917; x=1705500717; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=wVYqvbUgva5GBq1nfKmGHfzF1QI+Y6z6rHSylnduZRQ=;
+ b=YdQX71+EvH7EwiUMV+BF7BFfkJB8i6My8yaPuOyKWD37B59AjeUy4LL7aGnYi7rZo7
+ k2KqXhE33/tgXgxpdW9rnTz0+v0dm/pIyzatj+bVzTO0YBFOgLvJROLoq8p5jEnUq/HN
+ D5tnVWiuovU5KqYiCroSKD9SFuliYqk8Lq/MOnj0tv7KWcQP1zldigQpkMupAg42F1Ml
+ pUqfpMv/fFUacrTd91umVPEozGzK/CrQm1rOquwQGbwpqOyCWaC09LWulgIWaNYppHHc
+ QIp9guvNmcQSVhaj4sO2XdIDy3NpKf6oiv4y9nQMg6Jw9D+hLXv0KrjaxRjN2nUE3K0U
+ xfgA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704895917; x=1705500717;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wVYqvbUgva5GBq1nfKmGHfzF1QI+Y6z6rHSylnduZRQ=;
+ b=RaFs147+cluLmaFzMG98NgdqmsnDJejQDShtQPyYSMw82i96sp2SrQ31aW+5Ch+kxn
+ N1r+WPAnRMbo2l7JbTqx1s1IPHo03hX91onZRwhGxn9ydTu1oFuDXTRVSrfMSGqboL/u
+ ajhrbUX/V7aRbjETJloqw3oHQSqD47Lfr73Y7HRdPKcm2cHO5g/rh4zoAS0i9kQ7mJcv
+ 00u1fYFsYSxN/Qpkxgk1VXQWGLlFF+Nn9kx9/y/puR+8bSmt3sdeZxijIWvVsS+rZ7tb
+ neFFQOTsGlOCaPHFQxs02jf1TEOOJ/epLJkM0CPNLjhsO+LMXw/ZoWHNqI7tUr5tyutZ
+ GuGQ==
+X-Gm-Message-State: AOJu0YyOAGBUrti8cIaR9sVK+yzli0va0BAGqRObG3NkmFLy/SRmmzc6
+ phx5Vx5t7V2syGVcpCOVytgI2QwOcTlt0+60jbfw93b3mXxAPA==
+X-Google-Smtp-Source: AGHT+IFBGQcEkoCQuFM1kZtGkrsuNWumyawvF+iXYBTKx02mn9dtgOEiVYhrIRz5PX9x9CTJaYepeuh+a95K9hxYG/Y=
+X-Received: by 2002:ac2:4f81:0:b0:50e:a431:de2e with SMTP id
+ z1-20020ac24f81000000b0050ea431de2emr374398lfs.138.1704895917373; Wed, 10 Jan
+ 2024 06:11:57 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: [PATCH v3 1/3] arm: mvebu: Espressobin: move FDT fixup into a
- separate function
-Content-Language: en-US
-To: Robert Marko <robert.marko@sartura.hr>, u-boot@lists.denx.de
-References: <20231129101117.60177-1-robert.marko@sartura.hr>
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20231129101117.60177-1-robert.marko@sartura.hr>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4T98nv1hKHz9sZN
+References: <20240102221237.1007090-1-raymond.mao@linaro.org>
+ <20240102221237.1007090-3-raymond.mao@linaro.org>
+In-Reply-To: <20240102221237.1007090-3-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 10 Jan 2024 16:11:20 +0200
+Message-ID: <CAC_iWj+q0zCSm3mcsZz8_iiQsiFRaSeSS6qAqiKb4f2OqHGTLw@mail.gmail.com>
+Subject: Re: [PATCH v4 2/9] bloblist: check bloblist with specified buffer size
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Kevin Chen <kevin_chen@aspeedtech.com>, 
+ Sean Anderson <sean.anderson@seco.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Shiji Yang <yangshiji66@outlook.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Baruch Siach <baruch@tkos.co.il>, Michal Simek <michal.simek@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,69 +94,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/29/23 11:11, Robert Marko wrote:
-> Currently, Esspresobin FDT is being fixed up directly in ft_board_setup()
-> which makes it hard to add support for any other board to be fixed up.
-> 
-> So, lets just move the FDT fixup code to a separate function and call it
-> if compatible matches, there should be no functional change.
-> 
-> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
-> Reviewed-by: Stefan Roese <sr@denx.de>
+Hi Raymond
 
-Applied to u-boot-marvell/master
+I think my r-b tag got lost across versions
 
-Thanks,
-Stefan
-
+On Wed, 3 Jan 2024 at 00:13, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Instead of expecting the bloblist total size to be the same as the
+> pre-allocated buffer size, practically we are more interested in
+> whether the pre-allocated buffer size is bigger than the bloblist
+> total size.
+>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 > ---
->   board/Marvell/mvebu_armada-37xx/board.c | 14 +++++++++-----
->   1 file changed, 9 insertions(+), 5 deletions(-)
-> 
-> diff --git a/board/Marvell/mvebu_armada-37xx/board.c b/board/Marvell/mvebu_armada-37xx/board.c
-> index 04124d8014..1471caa9a6 100644
-> --- a/board/Marvell/mvebu_armada-37xx/board.c
-> +++ b/board/Marvell/mvebu_armada-37xx/board.c
-> @@ -363,18 +363,14 @@ EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, last_stage_init);
->   #endif
->   
->   #ifdef CONFIG_OF_BOARD_SETUP
-> -int ft_board_setup(void *blob, struct bd_info *bd)
-> +static int espressobin_fdt_setup(void *blob)
->   {
-> -#ifdef CONFIG_ENV_IS_IN_SPI_FLASH
->   	int ret;
->   	int spi_off;
->   	int parts_off;
->   	int part_off;
->   
->   	/* Fill SPI MTD partitions for Linux kernel on Espressobin */
-> -	if (!of_machine_is_compatible("globalscale,espressobin"))
-> -		return 0;
-> -
->   	spi_off = fdt_node_offset_by_compatible(blob, -1, "jedec,spi-nor");
->   	if (spi_off < 0)
->   		return 0;
-> @@ -459,6 +455,14 @@ int ft_board_setup(void *blob, struct bd_info *bd)
->   		return 0;
->   	}
->   
-> +	return 0;
-> +}
-> +
-> +int ft_board_setup(void *blob, struct bd_info *bd)
-> +{
-> +#ifdef CONFIG_ENV_IS_IN_SPI_FLASH
-> +	if (of_machine_is_compatible("globalscale,espressobin"))
-> +		return espressobin_fdt_setup(blob);
->   #endif
->   	return 0;
->   }
-
-Viele Grüße,
-Stefan Roese
-
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+> Changes in v2
+> - New patch file created for v2.
+> Changes in v4
+> - Update function header of bloblist_check().
+>
+>  common/bloblist.c  | 2 +-
+>  include/bloblist.h | 9 +++++----
+>  test/bloblist.c    | 2 +-
+>  3 files changed, 7 insertions(+), 6 deletions(-)
+>
+> diff --git a/common/bloblist.c b/common/bloblist.c
+> index acf67304d0..4039eb3a03 100644
+> --- a/common/bloblist.c
+> +++ b/common/bloblist.c
+> @@ -384,7 +384,7 @@ int bloblist_check(ulong addr, uint size)
+>                 return log_msg_ret("Bad magic", -ENOENT);
+>         if (hdr->version != BLOBLIST_VERSION)
+>                 return log_msg_ret("Bad version", -EPROTONOSUPPORT);
+> -       if (!hdr->total_size || (size && hdr->total_size != size))
+> +       if (!hdr->total_size || (size && hdr->total_size > size))
+>                 return log_msg_ret("Bad total size", -EFBIG);
+>         if (hdr->used_size > hdr->total_size)
+>                 return log_msg_ret("Bad used size", -ENOENT);
+> diff --git a/include/bloblist.h b/include/bloblist.h
+> index bf9e12ebf8..1906847c15 100644
+> --- a/include/bloblist.h
+> +++ b/include/bloblist.h
+> @@ -348,12 +348,13 @@ int bloblist_new(ulong addr, uint size, uint flags, uint align_log2);
+>   * bloblist_check() - Check if a bloblist exists
+>   *
+>   * @addr: Address of bloblist
+> - * @size: Expected size of blobsize, or 0 to detect the size
+> + * @size: Reserved space size for blobsize, or 0 to use the total size
+>   * Return: 0 if OK, -ENOENT if the magic number doesn't match (indicating that
+> - * there problem is no bloblist at the given address), -EPROTONOSUPPORT
+> + * there problem is no bloblist at the given address) or any fields for header
+> + * size, used size and total size do not match, -EPROTONOSUPPORT
+>   * if the version does not match, -EIO if the checksum does not match,
+> - * -EFBIG if the expected size does not match the detected size, -ENOSPC
+> - * if the size is not large enough to hold the headers
+> + * -EFBIG if the reserved space size is small than the total size or total size
+> + * is 0
+>   */
+>  int bloblist_check(ulong addr, uint size);
+>
+> diff --git a/test/bloblist.c b/test/bloblist.c
+> index 17d9dd03d0..7dab9addf8 100644
+> --- a/test/bloblist.c
+> +++ b/test/bloblist.c
+> @@ -207,7 +207,7 @@ static int bloblist_test_checksum(struct unit_test_state *uts)
+>         hdr->flags++;
+>
+>         hdr->total_size--;
+> -       ut_asserteq(-EFBIG, bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
+> +       ut_asserteq(-EIO, bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
+>         hdr->total_size++;
+>
+>         hdr->spare++;
+> --
+> 2.25.1
+>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
