@@ -4,65 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 231B9C4707C
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 16:06:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71FB5C4707B
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 16:10:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6108F8783C;
-	Wed, 10 Jan 2024 17:06:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 3F3CD87AC9;
+	Wed, 10 Jan 2024 17:10:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kW/AkrFF";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GW/efKaz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4BF787A97; Wed, 10 Jan 2024 17:06:55 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DD4E082FBE; Wed, 10 Jan 2024 17:10:17 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94D2287776
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 17:06:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 04F89876EA
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 17:10:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 18A01616E6;
- Wed, 10 Jan 2024 16:06:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A4128C433F1;
- Wed, 10 Jan 2024 16:06:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1704902811;
- bh=vOohNF9w3fXlvHjA0H5g34k9C8Z77AiZNnznVm7IBWg=;
- h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
- b=kW/AkrFFmiIHRxcfe6sUqAGvMFh5kM0TslptYjOnfoTUwyz3lo9U+JHyurD73I2U0
- iyEXakAlRZgxtG2Sx9JTHpJI3iT5NsrAD5DWM73Wd7RDrr5cRr0PjMugqyNHLj4/Hr
- IMp7NSNOLqo/iorVC+b6PJANfDG0ONzLcIS4TssVi93gnhZEwB1c3pQtCq4cfaepei
- Cgl0O0VJCSQ47ovGQBz+9SHF3u46nhfDdmy/iOvZgrqDehcejB7TKxDkVinOz1p2Qy
- EHaPzYvcgv+HwMV1PegTwV2STdetsb/OmXyABT+AbZmVERfoVRFwYlrBQk/OK8UNuO
- qu7j2puVxXvGw==
-Message-ID: <179ded75-e874-41c1-a76d-1fadce65881f@kernel.org>
-Date: Wed, 10 Jan 2024 18:06:45 +0200
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-557dcb0f870so3204144a12.2
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 08:10:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1704903015; x=1705507815; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Fqdx58IyxcLjtTQ0bJx/bnZSsX+1vye06U2Q0Y6vxMY=;
+ b=GW/efKazp/ZePd5bUlQNZI7rO17SRTudXj2YzcXk1xzyD5oELpX5zsG+SqAFjTRT81
+ +I3efkaTS2nwa/u3dU6Cp1UK/4tiBafxwmZsRPUN1efCEwfdRSXDmL6QEpIvWL/dmrPD
+ T2+3b/9xpVR+e2+3Psm9EN5eZorLXe3BojMfQu+LKiD5+rG0Du8IbA38KwA8GBS1Woeo
+ HgkDnuH9RAIGJ/zTixHjF9MMWwlPNBATgDaDYpgNMgz/wTNm8uKTbQFQ9bKuAG/YkeuY
+ pg5Orv3v/HJAl444lVsd0pMajsFxZdQePyfiNcygVru7IxThDP1KwMwN5FWJ6dU81xQM
+ iMlA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704903015; x=1705507815;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Fqdx58IyxcLjtTQ0bJx/bnZSsX+1vye06U2Q0Y6vxMY=;
+ b=iVA7Wocm0h3fkBlSDDGa0H/yI8igatnXdHu1F1S+tS+70V5mJLx8Me+OBnGHGwG7pk
+ +u8SNhE6Fe1of2tIbI84E4Z7R9QtF/QfyBxk3OO5fc/xpCKtTsmdXgSMATsZqNrItE00
+ shxl3jUFWIlHNiOT2sJy3SjgxORbtVZEbh/p7JPv4FAaI4Zcq3iWW3Ui26VdIJFaqhTX
+ 96m4f1xzeWRar2Yb/X9YiLb+85/7SMtqu+I7Wl+gcFZLZc6d3x9qlB027i83ZlikqgLB
+ ciuhXUPsiII/0moATSerTzEF1qNbMQZYd8jDnR+4pppn97fHw7fs6jwGFsIRjOEI2FOu
+ W78A==
+X-Gm-Message-State: AOJu0Yxx1xs26qs6thvdTDz2pdYHabx63+dy946jBi/2meykanF8Api5
+ Fy4Q5lNw1eSqDwCQzlAdJEw=
+X-Google-Smtp-Source: AGHT+IGi/k269yJpeyVxFM3seWSaWYFfgQ8uQTkO2itRk4biQhNSVxBzYNX+GnxecFbk75YQYRKaQw==
+X-Received: by 2002:a05:6402:1852:b0:557:b5e:eb49 with SMTP id
+ v18-20020a056402185200b005570b5eeb49mr580353edy.21.1704903015240; 
+ Wed, 10 Jan 2024 08:10:15 -0800 (PST)
+Received: from xeon.. ([188.163.112.64]) by smtp.gmail.com with ESMTPSA id
+ a23-20020aa7d757000000b00557075b4499sm2138662eds.58.2024.01.10.08.10.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Jan 2024 08:10:14 -0800 (PST)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v3 0/1] Fix clk-gpio driver
+Date: Wed, 10 Jan 2024 18:09:55 +0200
+Message-Id: <20240110160956.4476-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] configs: am64x_evm_a53_defconfig: Enable NAND
-From: Roger Quadros <rogerq@kernel.org>
-To: Francesco Dolcini <francesco@dolcini.it>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Nishanth Menon <nm@ti.com>, michael@amarulasolutions.com,
- dario.binacchi@amarulasolutions.com, afd@ti.com, vigneshr@ti.com,
- praneeth@ti.com, srk@ti.com, r-gunasekaran@ti.com, u-boot@lists.denx.de,
- Francesco Dolcini <francesco.dolcini@toradex.com>
-References: <20240109122605.51951-1-rogerq@kernel.org>
- <20240109122605.51951-5-rogerq@kernel.org>
- <20240109191859.ljtnotdn4voabwko@animate>
- <20240109195400.GY1610741@bill-the-cat> <20240109200053.GA94696@francesco-nb>
- <f6b3cf36-8e33-4e0d-9794-35ea32410c88@kernel.org>
-Content-Language: en-US
-In-Reply-To: <f6b3cf36-8e33-4e0d-9794-35ea32410c88@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,55 +89,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+Lukasz & Mattijs
+Existing gpio-gate-clock driver acts like a simple GPIO switch without any
+effect on gated clock. Add actual clock actions into enable/disable ops and
+implement get_rate op by passing gated clock if it is enabled.
 
-On 10/01/2024 11:34, Roger Quadros wrote:
-> 
-> 
-> On 09/01/2024 22:00, Francesco Dolcini wrote:
->> On Tue, Jan 09, 2024 at 02:54:00PM -0500, Tom Rini wrote:
->>> On Tue, Jan 09, 2024 at 01:18:59PM -0600, Nishanth Menon wrote:
->>>> On 14:26-20240109, Roger Quadros wrote:
->>>>>  CONFIG_CMD_PMIC=y
->>>>>  CONFIG_CMD_REGULATOR=y
->>>>> +CONFIG_CMD_MTDPARTS=y
->>>>> +CONFIG_MTDIDS_DEFAULT="nand0=omap2-nand.0"
->>>>> +CONFIG_MTDPARTS_DEFAULT="mtdparts=omap2-nand.0:2m(NAND.tiboot3),2m(NAND.tispl),2m(NAND.tiboot3.backup),4m(NAND.u-boot),256k(NAND.u-boot-env),256k(NAND.u-boot-env.backup),-(NAND.file-system)"
->>>>
->>>> Why not handle this as device tree partitions?
->>>
->>> I honestly forget what the preferred way of defining and passing NAND
->>> partition information is these days. It might even be the funny case
->>> that passing as cmdline args is "best" rather than fixed-partitions
->>> binding?
->>
->> According to past discussions [1] doing the fixup in U-Boot is not advised.
->>
->> Using the command line or having the partition fixed in the DT are both
->> valid options.
->>
->> [1] https://lore.kernel.org/all/20230206224838.75963-1-francesco@dolcini.it/
->>
->> Francesco
->>
-> 
-> This was not about passing mtdparts to kernel but about getting 'mtdparts' command
-> to work at u-boot. I need to figure out why OF partition parser didn't work here.
-> 
-> For a start I didn't have CONFIG_MTD_PARTITIONS set. Maybe I'm missing something more.
-> 
+Testing current driver implementation shows that it is not fully capable
+and lacks gated clock manipulations.
 
-The issue was the NAND driver was not setting chip->dev and chip->ofnode correctly.
-Now 'mtd list' shows partitions from the DT.
-But, 'dfu 0 nand list' still fails like so.
-	"mtdparts variable not set, see 'help mtdparts'"
+---
+Changes from v2
+- restored probe
 
-Looks like dfu_nand driver doesn't fall back to OF partitions if mtdparts environment
-is not defined.
+Changes from v1
+- added comments for priv struct members
+- return gatet clock rate unconditionally
+- switch log_err > log_debug on of_to_plat
+---
 
-Should we add OF partitions support to dfu_nand driver or is it deprecated
-in favor of dfu_mtd driver?
+Svyatoslav Ryhel (1):
+  clk: clk-gpio: add actual gated clock
+
+ drivers/clk/clk-gpio.c | 40 ++++++++++++++++++++++++++++++++++------
+ 1 file changed, 34 insertions(+), 6 deletions(-)
 
 -- 
-cheers,
--roger
+2.40.1
+
