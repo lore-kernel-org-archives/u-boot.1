@@ -4,74 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F34E0C4707C
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 12:58:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B69D2C4707B
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 13:04:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C378187A7B;
-	Wed, 10 Jan 2024 13:58:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 2A892878D7;
+	Wed, 10 Jan 2024 14:04:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="lWEZuk4V";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QtEXdfaY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 036D787AB3; Wed, 10 Jan 2024 13:58:11 +0100 (CET)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ id 329D087732; Wed, 10 Jan 2024 07:02:08 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1ED7A87A3B
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 13:58:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 394CD876F6
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 07:02:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1704891486; x=1707483486;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Px1I9kTRbe+5sGLPRn+BUJfY6wNFXLIBP0E7fTKIeeU=;
- b=lWEZuk4VsBeN+wVgxvIAZanI4AiaD+ewDqMTVxgtwfqpDS45UO0vwROUnv+xrfNe
- ya1Dnpbfyv6EzzYZQBwGka6tItKxYvddloK6zuLsxXeEfZkI1bMr2MraQHWBUZN+
- DrgpJzPfgppU7kEbhidvGV+WmUZ7KdUup80RGLngvqw=;
-X-AuditID: ac14000a-fadff7000000290d-b9-659e945e290c
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id D9.45.10509.E549E956;
- Wed, 10 Jan 2024 13:58:06 +0100 (CET)
-Received: from lws-moog.phytec.de (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 10 Jan
- 2024 13:58:06 +0100
-From: Yannic Moog <y.moog@phytec.de>
-Date: Wed, 10 Jan 2024 13:57:42 +0100
-Subject: [PATCH 2/2] doc: board: phytec: Add phyGATE-Tauri board documentation
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=b-kapoor@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40A623l8056214
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 00:02:03 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1704866523;
+ bh=MyEpP0TANHKJzHg9XKWsfefS04jGsa/9fk5YqDB2vbc=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=QtEXdfaYxfiX6vM2zfX5+pfw2KMSyXfl5zieRPV45VQ0izelElDbSSnX6I3mJJFVG
+ k5jV7KB2S7rd2ZVipZl7fmwx3OsgudP35p1H0tGsiIwwsKDRirLq/fb2WSPKJNWOPr
+ OneciQGtqNJpPpnhtI0EijMXXnGwVSUkIPNpugag=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40A623KU015775
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 00:02:03 -0600
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 10
+ Jan 2024 00:02:03 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 10 Jan 2024 00:02:03 -0600
+Received: from [10.24.68.175] (a0498981-hp-z2-tower-g5-workstation.dhcp.ti.com
+ [10.24.68.175])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40A620IY090786;
+ Wed, 10 Jan 2024 00:02:01 -0600
+Message-ID: <8a17f24b-62d3-4535-8433-02d3ff261331@ti.com>
+Date: Wed, 10 Jan 2024 11:32:00 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/2] arm: dts: Add Itap Delay Value For High Speed DDR
+To: Bryan Brattlof <bb@ti.com>
+CC: <u-boot@lists.denx.de>, <jm@ti.com>, <m-chawdhry@ti.com>, <reidt@ti.com>, 
+ <n-francis@ti.com>
+References: <20240108051922.29044-1-b-kapoor@ti.com>
+ <20240108140502.euuxmgutu4gcd7pn@bryanbrattlof.com>
+Content-Language: en-US
+From: Bhavya Kapoor <b-kapoor@ti.com>
+In-Reply-To: <20240108140502.euuxmgutu4gcd7pn@bryanbrattlof.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-ID: <20240110-wip-y-moog-phytec-de-tauri-l_upstream-v1-2-1ba2d9220da6@phytec.de>
-References: <20240110-wip-y-moog-phytec-de-tauri-l_upstream-v1-0-1ba2d9220da6@phytec.de>
-In-Reply-To: <20240110-wip-y-moog-phytec-de-tauri-l_upstream-v1-0-1ba2d9220da6@phytec.de>
-To: Fabio Estevam <festevam@gmail.com>, NXP i.MX U-Boot Team
- <uboot-imx@nxp.com>, Teresa Remmet <t.remmet@phytec.de>
-CC: <upstream@lists.phytec.de>, <u-boot@lists.denx.de>, Yannic Moog
- <y.moog@phytec.de>
-X-Mailer: b4 0.12.3
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrGLMWRmVeSWpSXmKPExsWyRpKBRzduyrxUg823rCweXvW3eLu3k91i
- yuP17Bbd79QdWDx2zrrL7nH2zg5Gj/7uFlaPje92MAWwRHHZpKTmZJalFunbJXBl3PhSV3BY
- sOLK/UOMDYzb+LoYOTkkBEwkDr88ygJiCwksZpJY/ykRwn7IKHHovBKIzSagIvH4xT3WLkYO
- DhYBVYlthwNATGGBAIklx6xBKngFBCVOznzCAhJmFtCUWL9LHyTMLCAvsf3tHGaIkgiJ3vM/
- oBZFSBw7fYwNxOYUiJRYdvoWWFxEoExiW28/1JgIiTmPzCBuFJZoX3SLCaJVVuLF+V52iLi8
- xLRzr5kh7FCJrV+2M01gFJqF5KBZCAfNQnLQAkbmVYxCuZnJ2alFmdl6BRmVJanJeimpmxhB
- YS3CwLWDsW+OxyFGJg7GQ4wSHMxKIrwKn+ekCvGmJFZWpRblxxeV5qQWH2KU5mBREudd3RGc
- KiSQnliSmp2aWpBaBJNl4uCUamCMemy7OKz7davjpQ8xQSu8Hi39s0Wcf+3TXyKrNJ2t/5zl
- ld59/l5swokNK2dzSSsvPXQ+Rf7ehA/8pxLDHA6GZcgKqHduv21QYaccp6i3Q1/O+Lqz40Gd
- vuQLizZrC6dmBupOU5UWyr6b/U5foPCA26aN+zlPpEc9Wlf17KGLtXCn45SYGDclluKMREMt
- 5qLiRADojRlDWQIAAA==
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Mailman-Approved-At: Wed, 10 Jan 2024 14:04:49 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,93 +83,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add brief documentation on how to build a bootable U-Boot image for the
-phyGATE-Tauri-L.
 
-Signed-off-by: Yannic Moog <y.moog@phytec.de>
----
- doc/board/phytec/imx8mm-phygate-tauri-l.rst | 60 +++++++++++++++++++++++++++++
- doc/board/phytec/index.rst                  |  1 +
- 2 files changed, 61 insertions(+)
+On 08/01/24 7:35 pm, Bryan Brattlof wrote:
+> Hi Bhavya!
+>
+> On January  8, 2024 thus sayeth Bhavya Kapoor:
+>> This Series adds Itap Delay Value for DDR52 speed mode for eMMC in
+>> J7200 SoC and for DDR50 speed mode for MMCSD in J721s2 SoC.
+>>
+>> Bhavya Kapoor (2):
+>>    arm: dts: k3-j7200-main: Add Itap Delay Value For DDR52 speed mode
+>>    arm: dts: k3-j721s2-main: Add Itap Delay Value For DDR50 speed mode
+>>
+>>   arch/arm/dts/k3-j7200-main.dtsi  | 1 +
+>>   arch/arm/dts/k3-j721s2-main.dtsi | 1 +
+> Because of the periodic syncs with the kernel, modifying these dt files
+> in U-Boot will cause confusion. (Which node is correct why did we have
+> to do this in U-Boot and not in the Kernel... bla bla bla) If they
+> absolutely need to go in now please override these nodes in the
+> *-u-boot.dtsi files with a comment so we can keep track of these changes
+> during the next sync with Linux.
+>
+> ~Bryan
 
-diff --git a/doc/board/phytec/imx8mm-phygate-tauri-l.rst b/doc/board/phytec/imx8mm-phygate-tauri-l.rst
-new file mode 100644
-index 00000000000..28b614fd144
---- /dev/null
-+++ b/doc/board/phytec/imx8mm-phygate-tauri-l.rst
-@@ -0,0 +1,60 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+phyGATE-Tauri-L-i.MX 8M Mini
-+============================
-+
-+The phyGATE-Tauri-L-i.MX 8M Mini with 2GB of main memory is supported.
-+
-+Quick Start
-+-----------
-+
-+- Build the ARM Trusted firmware binary
-+- Get ddr firmware
-+- Build U-Boot
-+- Boot
-+
-+Build the ARM Trusted firmware binary
-+-------------------------------------
-+
-+.. code-block:: bash
-+
-+   $ git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
-+   $ cd trusted-firmware-a
-+   $ export CROSS_COMPILE=aarch64-linux-gnu
-+   $ export IMX_BOOT_UART_BASE=0x30880000
-+   $ make PLAT=imx8mm bl31
-+
-+Get the ddr firmware
-+--------------------
-+
-+.. code-block:: bash
-+
-+   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-imx-8.23.bin
-+   $ chmod +x firmware-imx-8.23.bin
-+   $ ./firmware-imx-8.23.bin
-+
-+Build U-Boot for SD card
-+------------------------
-+
-+Copy binaries
-+^^^^^^^^^^^^^
-+
-+.. code-block:: bash
-+
-+   $ cp <TF-A dir>/build/imx8mm/release/bl31.bin .
-+   $ cp firmware-imx-8.23/firmware/ddr/synopsys/lpddr4*.bin .
-+
-+Build U-Boot
-+^^^^^^^^^^^^
-+
-+.. code-block:: bash
-+
-+   $ make imx8mm-phygate-tauri-l_defconfig
-+   $ make flash.bin
-+
-+Flash SD card
-+^^^^^^^^^^^^^
-+
-+.. code-block:: bash
-+
-+   $ sudo dd if=flash.bin of=/dev/sd[x] bs=1024 seek=33 conv=sync
-diff --git a/doc/board/phytec/index.rst b/doc/board/phytec/index.rst
-index a5b442045ed..9996bce9741 100644
---- a/doc/board/phytec/index.rst
-+++ b/doc/board/phytec/index.rst
-@@ -6,5 +6,6 @@ PHYTEC
- .. toctree::
-    :maxdepth: 2
- 
-+   imx8mm-phygate-tauri-l
-    phycore-imx8mm
-    phycore-imx8mp
+Hi Bryan, Fyi, This patch went in kernel as well.
 
--- 
-2.34.1
+Can be tracked below-
+
+https://lore.kernel.org/all/170266085077.3490141.14935960940418963459.b4-ty@ti.com/
+
+So , kernel and uboot dt files will remain in sync.
+
+~B-Kapoor
 
