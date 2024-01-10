@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 378FFC4706C
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 01:17:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C99F1C4706C
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 01:17:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BC0A87A7B;
-	Wed, 10 Jan 2024 02:17:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 86E368756F;
+	Wed, 10 Jan 2024 02:17:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bIvCe0lk";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wAI93oYj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67F7A87977; Wed, 10 Jan 2024 02:17:08 +0100 (CET)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id AEA2587708; Wed, 10 Jan 2024 02:17:13 +0100 (CET)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87362878F5
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 02:17:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3284987A35
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 02:17:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-6ddec302e68so118824a34.0
- for <u-boot@lists.denx.de>; Tue, 09 Jan 2024 17:17:01 -0800 (PST)
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-205dc844e5eso707921fac.0
+ for <u-boot@lists.denx.de>; Tue, 09 Jan 2024 17:17:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704849420; x=1705454220; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1704849422; x=1705454222; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3MpDZAKW0GtvfJUZzRZqB7/dnvoYqSper+30bo2fhw0=;
- b=bIvCe0lkpoL/ka8Cezd/sjEzCWD23+o20w0YQ0wf4hsOL816PG2JgRR9jZIXUDw5c4
- HsOXzZnGEHR1JTSyZuzC4xrBGxQDrCBQc0zlUcl/SGv67eXLpTkPk5gjLqrAtO85l/h1
- 0i/FyxVU79twEvoGaBxJtbk3X66rVgXFbKWO0sGLyy0G5xqy+LTAdG3e5YJyE+U2odQJ
- cYgjBRxeHlDRY2F4xyAdphsYuU7SGWI9yObVngOWrluzbNyWEsbxOIvvR5ta2jI/NnQu
- BaDWafZ+0fBYIjvg3TBnX8gVGIfCwc9BjKnRbc4yQD6HcKz4N/OdNQZQUM7rSQINufgZ
- 5Svg==
+ bh=uLu8RNfQOxa+r7scNxZe5YOo/ZxWLLZ6QlPdhb7HAxM=;
+ b=wAI93oYj7/jemcDLwvctcQvttCCpOfM7X/mU33iO9aJTSbMQ9Q6E8D6QN9WPQ1eoet
+ jkx7kiIzNeQekpUpII+jDljZZGWONnxYa133RQInbXIwxOJtFRlSObeFEDZpJYM9hlcq
+ zUl1IpBSslsvum+9b5piMxPYpRSK151klGD2uJ0biwFjO4ueGJnQYHtzX9/lLZUvY2t9
+ BqRDV55tl9ISWDJXvxiDu5J38Bf2K8tAx2zJmlWAEhtfodFIOIcfRMhRtjQ4UcKb0yIA
+ 3pXLRxwEgkjks11D5ws58boteoLoz6FYOdL0Qi+giIPf/SdV7wsMc1SO1fbr4Y6rILrr
+ yCKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704849420; x=1705454220;
+ d=1e100.net; s=20230601; t=1704849422; x=1705454222;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3MpDZAKW0GtvfJUZzRZqB7/dnvoYqSper+30bo2fhw0=;
- b=cSmgsU3mxgAL0uV82YOL9sAImiuhwkgj3q5L28Q4OHCmIVZjjSaWQtOTVJY36W/EUg
- wAYfM+IomLuKq/oGs6cZIxWDf7sUNriR0x37md3lIwPSMxTSVIpklsyPf6xFeF3faEZz
- xsVKIGsg6DRvkKrTWcs/F0lZOLVAV0o3lF587got1An/b8AQgAVKIGS6tsmEX0wWlDCd
- i7hr5LEU64TtKgzN6dlMgugPae8k7myTkF8PUx9TgODiOqPSidibcZ29LPsgrUX6fF/F
- vN2NWfRtBuPgn+JZu98DG9S4XipvS+LwqE8U6CSw7na4XFjHvWsosLScSG5o/XsJuIxP
- onIg==
-X-Gm-Message-State: AOJu0Yylr3qJQseAEfgRLYRusYmabgQUmOrCcATn1R4XEnX8PoZQXaWg
- 2FI44f4gz8kZLXe58dVaP4cJV1AExtI35w==
-X-Google-Smtp-Source: AGHT+IG/ZWBkgIG6bRLS34JmtQuDD2krtD+PabP2MlRVFYLTYSk8Nd/uEuWQLkywedAu49w+ZlB6Tg==
-X-Received: by 2002:a05:6830:448b:b0:6dc:12f0:cb38 with SMTP id
- r11-20020a056830448b00b006dc12f0cb38mr633717otv.0.1704849420161; 
- Tue, 09 Jan 2024 17:17:00 -0800 (PST)
+ bh=uLu8RNfQOxa+r7scNxZe5YOo/ZxWLLZ6QlPdhb7HAxM=;
+ b=bGVqGrUGsk4KoA1En+11zhBQ6On07HZkNdmm7198FcpOrSrJDQKzLCept7oZa2dnGM
+ J+S3maKxXSIuYYngsuOXv5Z5CudJ2u/zWos/n4z+ZxHVbQ4ryJmz4c8nhGRT4U+nlakF
+ ykv5Tb5BasCQB6sYhPi4zFiLSV+/rb7v/WVS8oHXeIKreSqdHDQKPHE+g1aAcigzM1eB
+ EfgURbLgkY/Og7fMs3bnJ0BdV9uue18pVnSXc1n6eIXCuki6PCQNibxCGEP0gfLMT/KN
+ LtxglnQd9MkL42QdT6CHbeTcEiq9NmTPWcWFU56314E1sgChIFU/YsghEjxfPcEBojwY
+ xKJA==
+X-Gm-Message-State: AOJu0Yw5gM5oWs9iqAEwVlSR4JWDwCJwK4/CU486Yb+rWvovz3I5T1P0
+ MGlCAmnFhlrpK2QvXOo5fkgjwwftaNvrSQ==
+X-Google-Smtp-Source: AGHT+IEZRgwbxgIJ5Ia63OIubf+bf7B4JnO1VB3F3s/ir0QV6z1EAJm0G09m/owOmSNOAo7Sp+CVpg==
+X-Received: by 2002:a05:6359:45a0:b0:175:a1c1:d200 with SMTP id
+ no32-20020a05635945a000b00175a1c1d200mr526451rwb.3.1704849422315; 
+ Tue, 09 Jan 2024 17:17:02 -0800 (PST)
 Received: from octopus.. ([2400:4050:c3e1:100:e32c:1ab8:3100:c37f])
  by smtp.gmail.com with ESMTPSA id
- a36-20020a634d24000000b005c2967852c5sm2166833pgb.30.2024.01.09.17.16.57
+ a36-20020a634d24000000b005c2967852c5sm2166833pgb.30.2024.01.09.17.17.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Jan 2024 17:16:59 -0800 (PST)
+ Tue, 09 Jan 2024 17:17:02 -0800 (PST)
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de,
  ilias.apalodimas@linaro.org
-Cc: u-boot@lists.denx.de, AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>
-Subject: [PATCH v4 3/4] net: tftp: remove explicit efi configuration dependency
-Date: Wed, 10 Jan 2024 10:16:36 +0900
-Message-Id: <20240110011637.174710-4-takahiro.akashi@linaro.org>
+Cc: u-boot@lists.denx.de,
+	AKASHI Takahiro <takahiro.akashi@linaro.org>
+Subject: [PATCH v4 4/4] fs: remove explicit efi configuration dependency
+Date: Wed, 10 Jan 2024 10:16:37 +0900
+Message-Id: <20240110011637.174710-5-takahiro.akashi@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240110011637.174710-1-takahiro.akashi@linaro.org>
 References: <20240110011637.174710-1-takahiro.akashi@linaro.org>
@@ -98,33 +98,29 @@ not "bootefi" command. efi_set_bootdev() will automatically be nullified
 if necessary efi component is disabled.
 
 Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- net/tftp.c | 10 ++++------
- 1 file changed, 4 insertions(+), 6 deletions(-)
+ fs/fs.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/net/tftp.c b/net/tftp.c
-index 88e71e67de35..2e335413492b 100644
---- a/net/tftp.c
-+++ b/net/tftp.c
-@@ -302,12 +302,10 @@ static void tftp_complete(void)
- 			time_start * 1000, "/s");
+diff --git a/fs/fs.c b/fs/fs.c
+index f1a0b70d1d57..acf465bdd807 100644
+--- a/fs/fs.c
++++ b/fs/fs.c
+@@ -791,10 +791,9 @@ int do_load(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[],
+ 		return 1;
  	}
- 	puts("\ndone\n");
--	if (IS_ENABLED(CONFIG_CMD_BOOTEFI)) {
--		if (!tftp_put_active)
--			efi_set_bootdev("Net", "", tftp_filename,
--					map_sysmem(tftp_load_addr, 0),
--					net_boot_file_size);
--	}
-+	if (!tftp_put_active)
-+		efi_set_bootdev("Net", "", tftp_filename,
-+				map_sysmem(tftp_load_addr, 0),
-+				net_boot_file_size);
- 	net_set_state(NETLOOP_SUCCESS);
- }
  
+-	if (IS_ENABLED(CONFIG_CMD_BOOTEFI))
+-		efi_set_bootdev(argv[1], (argc > 2) ? argv[2] : "",
+-				(argc > 4) ? argv[4] : "", map_sysmem(addr, 0),
+-				len_read);
++	efi_set_bootdev(argv[1], (argc > 2) ? argv[2] : "",
++			(argc > 4) ? argv[4] : "", map_sysmem(addr, 0),
++			len_read);
+ 
+ 	printf("%llu bytes read in %lu ms", len_read, time);
+ 	if (time > 0) {
 -- 
 2.34.1
 
