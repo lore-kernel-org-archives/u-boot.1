@@ -4,62 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D3CAC3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 09:35:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03D42C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 09:52:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC3D68790F;
-	Wed, 10 Jan 2024 10:35:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 03DF58786F;
+	Wed, 10 Jan 2024 10:52:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="ACfzN39Q";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MSg9qBU2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F22138792C; Wed, 10 Jan 2024 10:35:04 +0100 (CET)
-Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::226])
+ id 63FA487905; Wed, 10 Jan 2024 10:52:56 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA0BF8786F
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 10:34:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 31C4581EC8
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 10:52:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=thomas.richard@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 91B55C000A;
- Wed, 10 Jan 2024 09:34:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1704879298;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DE9uuBGOE8iE11z7iCEv1LCNKh/TJEOuMQ8Ga9cizAc=;
- b=ACfzN39QerkyhuQYcMyL+iaES1diREhwNL6gFq/fmAVWthp+mxBC9/33D+CygX1oWNPZSe
- XXXSK+iIi+lDWbHzUb5BTg4K6OYAG8v0fHDP3RQNxAwLDeEb8dJ9A+IvCpjwxdIyS5Fxoa
- Jpme8dAIe989ELe7HoowOqMwEAYxTBcZ8s8qr7mkgo5QtjJybmmxc/lNzWyol8btLSRQrh
- 0xplHZF4ntKFpWeAzeulNgdS0KVQ64xXbdp6PL+CliZd5OL71idhcfxjK5U3XcRZ5wDLJL
- KJk9pxsj8PNmlTtBI0+O+SBewC7Ym3Qz78IC12xl9q0Ix9MnwSRrkoue9u/8xA==
-Message-ID: <6b76423c-6c38-4aba-a7f7-c7aafb3be80b@bootlin.com>
-Date: Wed, 10 Jan 2024 10:34:56 +0100
+ spf=pass smtp.mailfrom=danishanwar@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40A9qj25022483;
+ Wed, 10 Jan 2024 03:52:45 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1704880365;
+ bh=AA/6QCR20S7XCYUwDH2wBf0wuPdVaR/CouKHmh5JMKs=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=MSg9qBU22DvKws76ikja5frI3mWFy78kt9N9oTtNNrDHMB8oCSAFzFPW8Y9t88/QB
+ 1YkIXgTWm9GLa24zp29x8ggA6mD7ANspgeSKV++3M/x66HwLLoGqXGIXWp2wCN6OdD
+ uW/rhRc7rj5qH7S/SiZ58ycWTtsGrnEGgQeZmpAw=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40A9qj3Y079839
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 10 Jan 2024 03:52:45 -0600
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 10
+ Jan 2024 03:52:45 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 10 Jan 2024 03:52:45 -0600
+Received: from [10.24.69.25] (danish-tpc.dhcp.ti.com [10.24.69.25])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40A9qeuE009725;
+ Wed, 10 Jan 2024 03:52:40 -0600
+Message-ID: <e7a75cce-ec5c-4c74-86e3-c7467f8b5643@ti.com>
+Date: Wed, 10 Jan 2024 15:22:39 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/8] Suspend to RAM support for K3 J7200
+Subject: Re: [RFC PATCH 15/16] tools/fdtgrep: Include __symbols__ table
 Content-Language: en-US
-To: Andrew Davis <afd@ti.com>, u-boot@lists.denx.de
-Cc: thomas.petazzoni@bootlin.com, nm@ti.com, u-kumar1@ti.com,
- gregory.clement@bootlin.com, Bryan Brattlof <bb@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Gowtham Tammana <g-tammana@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20240108165628.3935756-1-thomas.richard@bootlin.com>
- <8a2970aa-7c4b-41f4-9eeb-c43e2c5da285@ti.com>
-From: Thomas Richard <thomas.richard@bootlin.com>
-In-Reply-To: <8a2970aa-7c4b-41f4-9eeb-c43e2c5da285@ti.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-GND-Sasl: thomas.richard@bootlin.com
+To: Simon Glass <sjg@chromium.org>
+CC: Maxime Ripard <mripard@kernel.org>, Siddharth Vadapalli
+ <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>, Nishanth Menon
+ <nm@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Matthias Schiffer
+ <matthias.schiffer@ew.tq-group.com>, Kamlesh Gurudasani <kamlesh@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Joe
+ Hershberger <joe.hershberger@ni.com>,
+ Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, <srk@ti.com>,
+ <r-gunasekaran@ti.com>
+References: <20231219103418.3445886-1-danishanwar@ti.com>
+ <20231219103418.3445886-16-danishanwar@ti.com>
+ <CAFLszTjVBzpM-GiraSSNtXtbbQGPDUrCo7ZDjyeByx7Xtg+t_A@mail.gmail.com>
+From: MD Danish Anwar <danishanwar@ti.com>
+In-Reply-To: <CAFLszTjVBzpM-GiraSSNtXtbbQGPDUrCo7ZDjyeByx7Xtg+t_A@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,72 +91,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/9/24 18:32, Andrew Davis wrote:
-> On 1/8/24 10:56 AM, Thomas Richard wrote:
->> This series is the U-Boot part of the work to add the suspend to RAM
->> support for the K3 J7200 EVM board.
->>
->> During the boot R5 SPL makes a copy of DM-Firmware and TF-A in memory.
->> Resume detection is done by reading a magic value in a pmic register
->> (set by DM-Firmware).
->>
->> If a resume is detected, R5 SPL run the exit retention sequence of the
->> DDR. Then it load TF-A and DM-Firmware using the copies done during
->> the boot
->> (fit image processing is skipped).
->> Before to start TF-A, R5 SPL writes a magic value in scratchpad ram. This
->> will be used by TF-A to detect that the board is resuming.
->>
->> The copy of TF-A/DM-Firmware, the SPL stack and malloc are located in a
->> reserved memory region (for the kernel point of view) to avoid any
->> memory corruption.
->>
->> This version is mostly to test the firewall protection with the suspend
->> to ram.
+Hi Simon,
+
+On 26/12/23 3:17 pm, Simon Glass wrote:
+> Hi,
 > 
-> Seems to show the opposite, if you are able to access and load TF-A
-> back to its spot after resume from un-trusted SPL then the firewall
-> did not survive suspend to RAM. That is a huge security gap if TIFS
-> is forgetting to put back the firewalls on resume.. What is the
-> point of firewalls on these systems if I can just knock them all
-> out by doing a simple suspend/resume cycle?
-
-Hello Andrew,
-
-Why are you talking about un-trusted SPL, how R5 SPL can be un-trusted ?
-Our resume sequence starts like a power-on: ROM code is started, it
-loads TIFS and R5 SPL.
-As defined in the chain of trust [1], ROM authenticates TIFS and R5 SPL.
-So I don't understand how R5 SPL can be un-trusted.
-
-Then R5 SPL detects that the board is resuming (and does some specific
-operations on the DDR).
-But even if the board is resuming, TF-A is authenticated (using
-ti_secure_image_post_process) like during the boot.
-
-So once TF-A is loaded, firewall is active.
-TF-A restores its context, then jump to its warm entrypoint.
-
-I guess a weak point could be TF-A context (stored in DDR).
-
-[1] https://docs.u-boot.org/en/latest/board/ti/k3.html#chain-of-trust
-
-> 
->> Some comments (for the v2) were not fixed in this version.
-> 
-> Why not?
-> 
->> This series has been tested with the series [1] to enable the firewall.
->> At the end of the resume sequence, TF-A is well protected by the
->> firewall, but OP-TEE remains unprotected.
+> On Tue, Dec 19, 2023 at 10:34 AM MD Danish Anwar <danishanwar@ti.com> wrote:
+>>
+>> This is required for overlays to work at SPL.
+>>
+>> Loading of symbol table depends on DT Overlay support in SPL
+>> so make it compile-time dependent. Without this SPL fails to
+>> boot some platforms where this feature is not enabled
+>> (e.g. dra71-evm.)
+>>
+>> Without including the <linux/kconfig.h> file, the symbol
+>> CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY will not be visible and
+>> we will never include the symbol table.
+>>
+>> So include <linux/kconfig.h>
+>>
+>> Due to some reason it needs to be included after
+>> [#include "fdt_host.h"] otherwise it causes a build error.
+>>
+>> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
+>> ---
+>>  tools/fdtgrep.c | 8 ++++++++
+>>  1 file changed, 8 insertions(+)
+>>
+>> diff --git a/tools/fdtgrep.c b/tools/fdtgrep.c
+>> index 7eabcab439..706b4a35f4 100644
+>> --- a/tools/fdtgrep.c
+>> +++ b/tools/fdtgrep.c
+>> @@ -22,6 +22,8 @@
+>>  #include "fdt_host.h"
+>>  #include "libfdt_internal.h"
+>>
+>> +#include <linux/kconfig.h>
+>> +
+>>  /* Define DEBUG to get some debugging output on stderr */
+>>  #ifdef DEBUG
+>>  #define debug(a, b...) fprintf(stderr, a, ## b)
+>> @@ -1234,6 +1236,12 @@ int main(int argc, char *argv[])
+>>                 disp.fout = stdout;
+>>         }
+>>
+>> +       if (IS_ENABLED(CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY)) {
+>> +               /* include symbol table */
+>> +               if (value_add(&disp, &disp.value_head, FDT_IS_NODE, 1, "/__symbols__"))
+>> +                       usage("Cannot add __symbols__ value");
+>> +       }
+>> +
+>>         /* Run the grep and output the results */
+>>         ret = do_fdtgrep(&disp, filename);
+>>         if (disp.output_fname)
+>> --
+>> 2.34.1
 >>
 > 
-> Then why post this? If it is just to get some eyes on it, then label
-> it as an "RFC" so our silence isn't considered acceptance, otherwise we
-> have to manually NAK these each time.
+> I may have replied elsewhere, but please use a new fdtgrep option for this.
+> 
+> Regards,
+> Simon
 
-Yes sorry, I totally forgot to label it as RFC.
+This patch is actually not needed. Without this patch also I am able to
+apply overlays at SPL. Even without this patch I see symbols table
+getting included while using fdtgrep tool. I will drop this patch in v2.
 
-Regards,
-
-Thomas
+-- 
+Thanks and Regards,
+Danish
