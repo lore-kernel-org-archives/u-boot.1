@@ -4,75 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F0DEC3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 08:30:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C109C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 08:54:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B729B8788D;
-	Wed, 10 Jan 2024 09:30:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
+	by phobos.denx.de (Postfix) with ESMTP id 8466787811;
+	Wed, 10 Jan 2024 09:54:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="mzh5JMfv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MhpoT+H6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22A8D878B1; Wed, 10 Jan 2024 09:30:13 +0100 (CET)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
+ id DB4868788D; Wed, 10 Jan 2024 09:54:15 +0100 (CET)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB218876F6
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 09:30:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C92D787811
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 09:54:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sartura.hr
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robert.marko@sartura.hr
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-5c6ce4dffb5so1671650a12.0
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 00:30:09 -0800 (PST)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-3366ddd1eddso3742366f8f.0
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 00:54:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sartura.hr; s=sartura; t=1704875408; x=1705480208; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MUNCdQX5cMNo7YaDK5jee95ZtdPgJTftQv1f6kVln+4=;
- b=mzh5JMfv0vRpd7R3XB3/JZi7rCQEWri+TaFoOirzL9e4rRijyN5AWZBHoWm3m1v4zY
- Om+PCdFhGbYOhjVr5h0v4TvTCvuHfa5rGyN3rTfEgTTNXpdCiavHZfQLbvTMG/hwdRDQ
- MIOGzO2aQPBfdQcYGPo4fD5V+6GSxT/somEsVTzOHFk0XoMLb6Z3SOmkvJpY99A0b5c7
- uU28YN+uUgJW6dy6RE2fYCGmlFHmYAHwi3PyMOeBt80Z791LC1hOu0+NL8w7txDFvKtw
- nvXMYcp5VBj/hDritSoS1DjLBnerp/KxGOFHNLjmMh2dBugRQX9RT91G+xc9enGTA6lY
- f1ig==
+ d=linaro.org; s=google; t=1704876852; x=1705481652; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=wzn5rweXdw33KEIfOLTcUf03a2eISzLTVfCMtXzzRPI=;
+ b=MhpoT+H61Web1QW2U91CtIRnvgOTPI3uJM0P9pfXAhqGJg/iiyFqBJNVxKll2Qt4TW
+ H9CQtXGYYsGSlREAmVOARiHcRyKLrHfaeId6e3VykXL6BdyKq1q2m/hImalFKozI/d+z
+ H5d1eKp8Ky/klekh7lY7NpZP3SGvJNUIqSvlNGt+XZbKutSSxmo1i2Sg64GrQuEZRSPH
+ sO1FQDW50a1z5sfWojTNiC0WDKB/ovz1pU4dDffr4BNBa50K29OgH5+DDamttRN+nec5
+ /i5R/hjaAKi2VPAhoDu5k+kWqn9yS0/dHPkqEz2ibDzqhYFbLd5WfMKDNLOpk7NcRs/i
+ Bcug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704875408; x=1705480208;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MUNCdQX5cMNo7YaDK5jee95ZtdPgJTftQv1f6kVln+4=;
- b=DVuRhHqUzLmHfq07n4mwTEEa7HbC4x2P26i6ETuLZx2hmqm7RPk4Qpe++UpW1rr/qs
- Uzv4j1v9GNlK3aXuZrtFDqD+xPQPnB/52rLYHkbfqzr+BP2Qd/Ig16Yn41vBk0R3dMj4
- ejA5XoDwWojNo6WVhVgbKS/adl0CH0geda0pwzlHjB6U7GkfNzxk8Gui/xfyVobFmFdP
- Yg6Q1p+dsNnQWWdL78MmGIzrAcgpPVIJNLuFTTnBfFe/ubxhECPjRL3Pj6l2GAJXVaVb
- bE6qW9YXUHUHLwcejqMlWnVnMtzHSR86vj4ZNTe6K9h1UeuPIUfMu8xcJX/JiwsyPhFK
- x7nA==
-X-Gm-Message-State: AOJu0Yxc6G7lJ4l0yZ9ttptJH/IN83TYFaAY8HoxH3hkr6wfirAzfAeC
- BnYHRKRw8TSkQucqhvbU7+D7JgrUtZlxNonaKqCz+MkCfKyqmlekBEVdvzpO
-X-Google-Smtp-Source: AGHT+IGQDzwtETHP4yj10pl9eUmtMYIOMAtDVjxyXEsyOPASL3x+csgDruGjmKRWFgcwnJReJzceyfj0uLQJZUeaKs4=
-X-Received: by 2002:a05:6a20:3d18:b0:199:c2d6:8999 with SMTP id
- y24-20020a056a203d1800b00199c2d68999mr450004pzi.103.1704875407959; Wed, 10
- Jan 2024 00:30:07 -0800 (PST)
+ d=1e100.net; s=20230601; t=1704876852; x=1705481652;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=wzn5rweXdw33KEIfOLTcUf03a2eISzLTVfCMtXzzRPI=;
+ b=QsOedf0Ztzb+JZNNGugun3d3SDQs7P086+HkWF3zmagce1B2s8V14GYU1J7RSushEA
+ Q52//WVaX3lukkN4M9W/QxZMY4bYGGJrTQcIyI3TKQ+jGNP2lN/Bb+tvbCGc4gBHumpt
+ MEPrnN5/SY3wE/cWpXDaBYMVEw/21JtboYqeUpHllLG05fCZHe7FIMwFmLwZRpbMCttr
+ QoebY+Va8WuE5Ie9mgCqvGItH3gI7V0GVTeidjnUesvLsS7/GLOlK7cHfglYZXA7FJwq
+ G11hp2F09BiFiejteW9ZdnePz5ygdnlFB3CXjBJwYPDdR2ilDxASVeu+t8MqRGOSFeMf
+ VLyQ==
+X-Gm-Message-State: AOJu0YzLgvRAQYEfRcELG5vEDbV1yD09vlqehPHHmvxMl+R13grSuKqT
+ uWS/8Qnc07RM08HLiCXR+u21LusCUhZwlg==
+X-Google-Smtp-Source: AGHT+IHnh3OyPMW+f7LXIywCO5WcyioYe8jwYPeXUb0A5t3sYsMiwfb7pFakvtG4tUUmusCuTNpUNA==
+X-Received: by 2002:a05:6000:36a:b0:336:ca92:6298 with SMTP id
+ f10-20020a056000036a00b00336ca926298mr166979wrf.117.1704876852103; 
+ Wed, 10 Jan 2024 00:54:12 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:982:cbb0:5dee:51de:9349:2adf?
+ ([2a01:e0a:982:cbb0:5dee:51de:9349:2adf])
+ by smtp.gmail.com with ESMTPSA id
+ c11-20020a056000184b00b003377be178a5sm1232191wri.78.2024.01.10.00.54.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 10 Jan 2024 00:54:11 -0800 (PST)
+Message-ID: <4803d996-54cf-40de-8bcb-cb7e7eb0348a@linaro.org>
+Date: Wed, 10 Jan 2024 09:54:10 +0100
 MIME-Version: 1.0
-References: <20231129101117.60177-1-robert.marko@sartura.hr>
- <CA+HBbNFbLjSwY9QRP09SXVDMm=TJ1q4isgkce6p-H7LAnwZZ2g@mail.gmail.com>
- <2f81957a-ab26-4220-9125-d0a788446e60@denx.de>
-In-Reply-To: <2f81957a-ab26-4220-9125-d0a788446e60@denx.de>
-From: Robert Marko <robert.marko@sartura.hr>
-Date: Wed, 10 Jan 2024 09:29:56 +0100
-Message-ID: <CA+HBbNHArsjXqxe6Znh=cZ0T=kxTN1v1iJM6GeD6Sa=6SZXafw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/3] arm: mvebu: Espressobin: move FDT fixup into a
- separate function
-To: Stefan Roese <sr@denx.de>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+From: neil.armstrong@linaro.org
+Subject: Re: [PATCH v2 02/17] video: dw_hdmi: Add Vendor PHY handling
+Content-Language: en-US, fr
+To: Jagan Teki <jagan@amarulasolutions.com>
+Cc: Anatolij Gustschin <agust@denx.de>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Heiko Stuebner <heiko@sntech.de>, Robin Murphy <robin.murphy@arm.com>,
+ u-boot@lists.denx.de, Da Xue <da.xue@libretech.co>,
+ Jagan Teki <jagan@edgeble.ai>
+References: <20231218191114.129329-1-jagan@amarulasolutions.com>
+ <20231218191114.129329-3-jagan@amarulasolutions.com>
+ <fbdad616-21a0-4fe1-84b8-a5110ca2cd7d@linaro.org>
+ <CAMty3ZDz2vyzxMSdvhXXZrh_J_PwFJxZ5bnQtpv8qZRAtB_b5w@mail.gmail.com>
+ <CAMty3ZB9CBUAz9OdKpkirukwMSWtBGAMzL5ObJf4gsR6W7TCfw@mail.gmail.com>
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro Developer Services
+In-Reply-To: <CAMty3ZB9CBUAz9OdKpkirukwMSWtBGAMzL5ObJf4gsR6W7TCfw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,118 +124,119 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jan 9, 2024 at 4:34=E2=80=AFPM Stefan Roese <sr@denx.de> wrote:
->
-> Hi Robert,
->
-> On 1/9/24 14:16, Robert Marko wrote:
-> > On Wed, Nov 29, 2023 at 11:11=E2=80=AFAM Robert Marko <robert.marko@sar=
-tura.hr> wrote:
-> >>
-> >> Currently, Esspresobin FDT is being fixed up directly in ft_board_setu=
-p()
-> >> which makes it hard to add support for any other board to be fixed up.
-> >>
-> >> So, lets just move the FDT fixup code to a separate function and call =
-it
-> >> if compatible matches, there should be no functional change.
-> >>
-> >> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
-> >> Reviewed-by: Stefan Roese <sr@denx.de>
-> >
-> >
-> > Hi Stefan,
-> > Since 2024.01 was released, can this series be pulled in now?
->
-> It's on my list. I actually already started with some CI build tests.
-> Hope to get this done by end of this week, before I leave for a
-> short vacation.
+On 09/01/2024 21:04, Jagan Teki wrote:
+> Hi Neil,
+> 
+> On Tue, Dec 19, 2023 at 5:21 PM Jagan Teki <jagan@amarulasolutions.com> wrote:
+>>
+>> On Tue, Dec 19, 2023 at 2:34 PM Neil Armstrong
+>> <neil.armstrong@linaro.org> wrote:
+>>>
+>>> On 18/12/2023 20:10, Jagan Teki wrote:
+>>>> From: Jagan Teki <jagan@edgeble.ai>
+>>>>
+>>>> DW HDMI support Vendor PHY like Rockchip RK3328 Inno HDMI PHY.
+>>>>
+>>>> Extend the vendor phy handling by adding platform phy hooks.
+>>>>
+>>>> Signed-off-by: Jagan Teki <jagan@edgeble.ai>
+>>>> ---
+>>>> Changes for v2:
+>>>> - fix meson cfg
+>>>>
+>>>>    drivers/video/dw_hdmi.c              | 29 +++++++++++++++++++++++++++-
+>>>>    drivers/video/meson/meson_dw_hdmi.c  | 11 ++++++++++-
+>>>>    drivers/video/rockchip/rk3399_hdmi.c |  8 +++++++-
+>>>>    drivers/video/rockchip/rk_hdmi.c     |  2 +-
+>>>>    drivers/video/sunxi/sunxi_dw_hdmi.c  | 11 ++++++++++-
+>>>>    include/dw_hdmi.h                    | 14 +++++++++++++-
+>>>>    6 files changed, 69 insertions(+), 6 deletions(-)
+>>>>
+>>>> diff --git a/drivers/video/dw_hdmi.c b/drivers/video/dw_hdmi.c
+>>>> index c4fbb18294..ea12a09407 100644
+>>>> --- a/drivers/video/dw_hdmi.c
+>>>> +++ b/drivers/video/dw_hdmi.c
+>>>> @@ -988,7 +988,7 @@ int dw_hdmi_enable(struct dw_hdmi *hdmi, const struct display_timing *edid)
+>>>>
+>>>>        hdmi_av_composer(hdmi, edid);
+>>>>
+>>>> -     ret = hdmi->phy_set(hdmi, edid->pixelclock.typ);
+>>>> +     ret = hdmi->ops->phy_set(hdmi, edid->pixelclock.typ);
+>>>>        if (ret)
+>>>>                return ret;
+>>>>
+>>>> @@ -1009,10 +1009,37 @@ int dw_hdmi_enable(struct dw_hdmi *hdmi, const struct display_timing *edid)
+>>>>        return 0;
+>>>>    }
+>>>>
+>>>> +static const struct dw_hdmi_phy_ops dw_hdmi_synopsys_phy_ops = {
+>>>> +     .phy_set = dw_hdmi_phy_cfg,
+>>>> +};
+>>>> +
+>>>> +static void dw_hdmi_detect_phy(struct dw_hdmi *hdmi)
+>>>> +{
+>>>> +     if (!hdmi->data)
+>>>> +             return;
+>>>> +
+>>>> +     /* hook Synopsys PHYs ops */
+>>>> +     if (!hdmi->data->phy_force_vendor) {
+>>>> +             hdmi->ops = &dw_hdmi_synopsys_phy_ops;
+>>>> +             return;
+>>>> +     }
+>>>> +
+>>>> +     /* Vendor HDMI PHYs must assign phy_ops in plat_data */
+>>>> +     if (!hdmi->data->phy_ops) {
+>>>> +             printf("Unsupported Vendor HDMI phy_ops\n");
+>>>> +             return;
+>>>> +     }
+>>>> +
+>>>> +     /* hook Vendor HDMI PHYs ops */
+>>>> +     hdmi->ops = hdmi->data->phy_ops;
+>>>
+>>> Sorry but I still don't understand why you need phy_force_vendor & phy_ops,
+>>> this code clearly fails if you have phy_force_vendor=true && phy_ops=NULL,
+>>> so drop phy_force_vendor and simply use phy_ops if != NULL, and since it's
+>>> the only element of dw_hdmi_plat_data, drop dw_hdmi_plat_data and pass
+>>> dw_hdmi_phy_ops directly in the dw_hdmi struct.
+>>>
+>>> So in dw_hdmi_detect_phy(), if hdmi->ops is NULL, set it to dw_hdmi_synopsys_phy_ops.
+>>
+>> Let me elaborate more.
+>>
+>> DW HDMI IP must have phy ops. It never be NULL. Either it uses
+>> 1. Internal PHY via DW called them Synopsys PHYs ops - for example, rk3399
+>> 2. Vendor PHY via vendor phy meson, sunxi, rk3328
+>>
+>> For case 1) phy_force_vendor is false so it uses dw_hdmi_synopsys_phy_ops
+>> For case 2) phy_force_vendor is true so it uses dw_hdmi_plat_data phy ops
+>>
+>> dw_hdmi_detect_phy assigns internal phy ops first and then vendor phy
+>> ops based on phy_force_vendor flag.
+>>
+>> If we remove dw_hdmi_plat_data how can we assign or differentiate two
+>> types of phy ops hooks? can you explain?
+> 
+> Let me know if you have any comments on this. I'm sending V3 would
+> probably hit in MW.
 
-Sounds good.
+Sure, I understand your point, but there's a limited number of users and it can
+be greatly simplified, no need to keep the current structure, there's no external
+users of the driver.
 
-Regards,
-Robert
->
+Just set hdmi->ops with the vendor phy ops from the glue driver if needed,
+or let it to NULL if the platform uses the synopsys PHY, it's as simple as that.
+If hdmi->ops is NULL it would be replaced with dw_hdmi_synopsys_phy_ops in the
+dw_hdmi_detect_phy() function.
+
+Neil
+
+> 
 > Thanks,
-> Stefan
->
-> > Regards,
-> > Robert
-> >
-> >>
-> >> ---
-> >>   board/Marvell/mvebu_armada-37xx/board.c | 14 +++++++++-----
-> >>   1 file changed, 9 insertions(+), 5 deletions(-)
-> >>
-> >> diff --git a/board/Marvell/mvebu_armada-37xx/board.c b/board/Marvell/m=
-vebu_armada-37xx/board.c
-> >> index 04124d8014..1471caa9a6 100644
-> >> --- a/board/Marvell/mvebu_armada-37xx/board.c
-> >> +++ b/board/Marvell/mvebu_armada-37xx/board.c
-> >> @@ -363,18 +363,14 @@ EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, last_stage=
-_init);
-> >>   #endif
-> >>
-> >>   #ifdef CONFIG_OF_BOARD_SETUP
-> >> -int ft_board_setup(void *blob, struct bd_info *bd)
-> >> +static int espressobin_fdt_setup(void *blob)
-> >>   {
-> >> -#ifdef CONFIG_ENV_IS_IN_SPI_FLASH
-> >>          int ret;
-> >>          int spi_off;
-> >>          int parts_off;
-> >>          int part_off;
-> >>
-> >>          /* Fill SPI MTD partitions for Linux kernel on Espressobin */
-> >> -       if (!of_machine_is_compatible("globalscale,espressobin"))
-> >> -               return 0;
-> >> -
-> >>          spi_off =3D fdt_node_offset_by_compatible(blob, -1, "jedec,sp=
-i-nor");
-> >>          if (spi_off < 0)
-> >>                  return 0;
-> >> @@ -459,6 +455,14 @@ int ft_board_setup(void *blob, struct bd_info *bd=
-)
-> >>                  return 0;
-> >>          }
-> >>
-> >> +       return 0;
-> >> +}
-> >> +
-> >> +int ft_board_setup(void *blob, struct bd_info *bd)
-> >> +{
-> >> +#ifdef CONFIG_ENV_IS_IN_SPI_FLASH
-> >> +       if (of_machine_is_compatible("globalscale,espressobin"))
-> >> +               return espressobin_fdt_setup(blob);
-> >>   #endif
-> >>          return 0;
-> >>   }
-> >> --
-> >> 2.43.0
-> >>
-> >
-> >
->
-> Viele Gr=C3=BC=C3=9Fe,
-> Stefan Roese
->
-> --
-> DENX Software Engineering GmbH,      Managing Director: Erika Unter
-> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-> Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+> Jagan.
 
-
-
---=20
-Robert Marko
-Staff Embedded Linux Engineer
-Sartura Ltd.
-Lendavska ulica 16a
-10000 Zagreb, Croatia
-Email: robert.marko@sartura.hr
-Web: www.sartura.hr
