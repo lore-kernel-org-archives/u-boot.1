@@ -4,78 +4,127 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13411C4707B
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 14:52:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F377C4707B
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 15:12:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E37987A97;
-	Wed, 10 Jan 2024 15:52:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 407BA8771B;
+	Wed, 10 Jan 2024 16:12:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="azDtQAPT";
+	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="aqv9O5bJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08DAA87A97; Wed, 10 Jan 2024 15:52:58 +0100 (CET)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id EE96A87508; Wed, 10 Jan 2024 16:12:17 +0100 (CET)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E02528785F
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 15:52:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B64AC8771B
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 16:12:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=suse.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-680cb09a819so28830756d6.2
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 06:52:55 -0800 (PST)
+ spf=pass smtp.mailfrom=mbrugger@suse.com
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-50e7c6f0487so4364574e87.3
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 07:12:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1704898374; x=1705503174; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=V9UmroHy8uaIA5jlFsjChcJZQzCXW3Jt5TnEpHY2Jls=;
- b=azDtQAPTTodJbS4XCxTQ6uv5mGj3YqiiQr1XOc3tYZBRSOswPp6dZ/Yzw+c3imbSOR
- MvY3h/IZcHXbFGlL71xzTEYkWfgRK297KHrjvKyeMuIVbu6tz/CFI1lKC39BN91v1Zjs
- QfcTwQY2zwLsF+s08igVKxS8SzjGjC5lz460Q=
+ d=suse.com; s=google; t=1704899534; x=1705504334; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+ :to:content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=CYoqAT2EhyqTMATuqdrEnb5kM/M76x0Jhxh/dZgYvYk=;
+ b=aqv9O5bJXKQ8ah8fQwB2bu++8zt4R4sJhrhUcLLfEbqVMBFf96seANIeaNhMkPRMvn
+ zH/K4jj/FRjXb4+2DP1/ryQk3j+MDs/bypIh6VI8LF3QByYgESEy/iPKEADhqVctyLtn
+ n4JcWZaBlnacD7auqw6oDekWkmQXLwyCmgbXIyabiAEFZq7LB6bfIVI6yA7h/ouKgVfp
+ o+4teXVhx1qyvL1o9DvHJcERCwBcmNZxb7BgvJ03p6DWoIT43YMv2CzShKACsmwIQwtB
+ vzItJJQrKKEVisgxh+JwqeSTbk1kYVEobu5IzXAUo3JrTwkyksIoKniCuLNkw1sttT9t
+ leFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704898374; x=1705503174;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=V9UmroHy8uaIA5jlFsjChcJZQzCXW3Jt5TnEpHY2Jls=;
- b=cLmEqTj3w1Haeuy4wCJaVlXI+mG6gvvaCYWoJZQ1FjvKgRwgUSKnDyhZXNLa5nrcz6
- lvM/kA4lkI0kKBniLP9aFUc0yYpf3kwxzQQ1XTiGkLhr3uQdFlrgw1dbDO0LnVE7uiMe
- 5wI9AqKD6nu4Hdn1Hw0PUxvqZyU7drKXh7QlILmpQwlqg8LPZDUlf09p4mY5NsHPgKn+
- mB7xGeuiPtr6BFaON0hPb/DIQVG+NL/8WRC5jwvML+OOdKiFNf3KW3ls8l49AdozbAxC
- fAXkFmCM5HvShBNXtwesziHYI6TtHil6wIWepHRFpMZbyNMeiZO4jxSFWQtlOFwWUqiy
- sPPg==
-X-Gm-Message-State: AOJu0YyvRIJHofHGPlTzHoNhti53jzh9PbIeopG8Be54+eIqmVQiYaVl
- FzKEH5zP+t1heIbLOka8oDSye72tPIw2uA==
-X-Google-Smtp-Source: AGHT+IE+AhUINE+1OF1ClRzpUKLNYTJUEhRrVAVsSOoBGilGQ4R4bRw4WlQTwd9XZzFcTHrtNFrH1A==
-X-Received: by 2002:a05:6214:21ce:b0:67f:7ef9:4a09 with SMTP id
- d14-20020a05621421ce00b0067f7ef94a09mr1485714qvh.43.1704898374669; 
- Wed, 10 Jan 2024 06:52:54 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- h19-20020a0ceed3000000b0067f7b0904c3sm1749444qvs.83.2024.01.10.06.52.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jan 2024 06:52:54 -0800 (PST)
-Date: Wed, 10 Jan 2024 09:52:52 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Lukasz Majewski <lukma@denx.de>
-Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
- u-boot@lists.denx.de, NXP u-boot <uboot-imx@nxp.com>
-Subject: Re: [PATCH v1 1/3] arm: config: xea: Update environment variables
- for XEA board (imx287)
-Message-ID: <20240110145252.GE1610741@bill-the-cat>
-References: <20240110144849.1783122-1-lukma@denx.de>
+ d=1e100.net; s=20230601; t=1704899534; x=1705504334;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+ :to:content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=CYoqAT2EhyqTMATuqdrEnb5kM/M76x0Jhxh/dZgYvYk=;
+ b=tsnR7RZYV/UUypnkwn/+8wlyTDa+TjAZ7A1o2r3vF3M3ZOtjfvjnpcjjO+nxtgidfi
+ ToM2srBKbmsE8NSCWapT+rCH40pgQ3jMdfpO3JS2ENjwIK8fJL3qU05gK52eG3u2FPTI
+ 1B//s7OLy4yOsaM2rPDy4yvp+0bsJjEReHwj6VXmapzuAxR3ctuwgh3YEwbmTPLMzkd6
+ oS6qG3PMiTLCy/farDYiEsv+o6v98GSP+yKWeBqhIB4KaJRa02RjcX99ytZv/dLrDukL
+ WHVXDSMDXyuwn+pYP+UoREzuJml3W04hzZ6bIQRimnVCtjUUi9eu7cNRGIVKPP0Ahpmo
+ bulw==
+X-Gm-Message-State: AOJu0YzAKvfLM7sXcKUuCfNN2d62y99XmOCC1N9wXY4uEsG7zA84IdJV
+ KXsDM3JiQ1rm5flb48TtXNq0FWNMGolbQQ==
+X-Google-Smtp-Source: AGHT+IFYUokh5pyNIU6D7NTxQGKQbbbZ5FYntDIiemG+8C03EOVd5bjY7PyaYGjy8iAIPIgOrGHB/Q==
+X-Received: by 2002:ac2:41d0:0:b0:50e:84f8:77d4 with SMTP id
+ d16-20020ac241d0000000b0050e84f877d4mr312179lfi.153.1704899534472; 
+ Wed, 10 Jan 2024 07:12:14 -0800 (PST)
+Received: from [192.168.2.177] ([207.188.161.188])
+ by smtp.gmail.com with ESMTPSA id
+ w130-20020a0dd488000000b005d317074440sm1626379ywd.79.2024.01.10.07.12.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 10 Jan 2024 07:12:13 -0800 (PST)
+Message-ID: <2fc1ea46-78d0-4ce2-aabc-d78f826152a4@suse.com>
+Date: Wed, 10 Jan 2024 16:12:03 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="aiDxHVCaWay0MoMi"
-Content-Disposition: inline
-In-Reply-To: <20240110144849.1783122-1-lukma@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 4/6] bcm2835: Dynamically calculate bytes per pixel
+ parameter
+Content-Language: en-US, ca-ES, es-ES
+To: "Ivan T. Ivanov" <iivanov@suse.de>, Peter Robinson <pbrobinson@gmail.com>
+Cc: Dmitry Malkin <dmitry@bedrocksystems.com>,
+ Thomas Fitzsimmons <fitzsim@fitzsim.org>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>,
+ wahrenst@gmx.net, florian.fainelli@broadcom.com, u-boot@lists.denx.de
+References: <20240110122908.31612-1-iivanov@suse.de>
+ <20240110122908.31612-5-iivanov@suse.de>
+From: Matthias Brugger <mbrugger@suse.com>
+Autocrypt: addr=mbrugger@suse.com; keydata=
+ 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
+ PVrr2NoUqi/bxI8fFQJD1jVj8K0=
+In-Reply-To: <20240110122908.31612-5-iivanov@suse.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,45 +142,58 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---aiDxHVCaWay0MoMi
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 10, 2024 at 03:48:47PM +0100, Lukasz Majewski wrote:
+On 10/01/2024 13:29, Ivan T. Ivanov wrote:
+> brcm,bcm2708-fb device provided by firmware on RPi5 uses
+> 16 bits per pixel, so lets calculate framebuffer bytes
+> per pixel dynamically based on queried information.
+> 
+> Tested to work for RPi2b v1.2, RPi3b v1.3, RPi4b v1.1,
+> RPi2 Zero W, RPi5b v1.0.
+> 
+> Signed-off-by: Ivan T. Ivanov <iivanov@suse.de>
 
-> As the XEA now supports fitImage, the default envs shall reflect this
-> as well.
->=20
-> Moreover, some SPI-NOR layout re-organization has took place.
->=20
-> Signed-off-by: Lukasz Majewski <lukma@denx.de>
+Reviewed-by: Matthias Brugger <mbrugger@suse.com>
+
 > ---
->=20
->  include/configs/xea.h | 45 ++++++++++++++++++++++++-------------------
->  1 file changed, 25 insertions(+), 20 deletions(-)
-
-Please migrate this to a plain text environment.
-
---=20
-Tom
-
---aiDxHVCaWay0MoMi
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWer0AACgkQFHw5/5Y0
-tyw9bQv+JSB0uwhR6GPgCIAYU+yND0lFq9PkSWtYGzTOcQB8aEuEH69fi48OUc6H
-BBQph8q9T/4xJZzcklenocPDAncYMY23lYx5xxc1DE+XSI6ZLilAfWpdHjpVoTad
-orh3bJYV6d7gJLp/t1XONYKq/37cnmBbASQraktVbQu6Gt93cuzVH0ERlRL8liFE
-mPNHM7loI771PeBPIHMXnuDUhEVaqcGR3Ey54283UU7DxhGqu8TuWpSWY8EkrXwx
-CQ78J7aA/XB5SHiQWBmPJpTnitC0gR+8lbf8AaxRdTpJ+Ykix4ouohSPVvQn9qws
-GJrTh1BrmuiVukryNaCQVWlMQk3YtNEjMBG2r7ctn4twfjNjlcSTpyNi6NXrLH9a
-QGI5XglcftMhLsSZGqFKPmEsR/hh1j84NvTE7PdL8SSoS3J/vWwI42qNDb/BroJR
-Ox7BwKfG3dCbdqVAxY67GkG1ASHptSdwETt9JNA5NNCHyL//vvJJlox65zm94+iP
-5Cig7A7v
-=vsuh
------END PGP SIGNATURE-----
-
---aiDxHVCaWay0MoMi--
+>   drivers/video/bcm2835.c | 18 ++++++++++++++++--
+>   1 file changed, 16 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/video/bcm2835.c b/drivers/video/bcm2835.c
+> index 14942526f1..63efa762db 100644
+> --- a/drivers/video/bcm2835.c
+> +++ b/drivers/video/bcm2835.c
+> @@ -16,7 +16,7 @@ static int bcm2835_video_probe(struct udevice *dev)
+>   	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
+>   	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
+>   	int ret;
+> -	int w, h, pitch;
+> +	int w, h, pitch, bpp;
+>   	ulong fb_base, fb_size, fb_start, fb_end;
+>   
+>   	debug("bcm2835: Query resolution...\n");
+> @@ -41,9 +41,23 @@ static int bcm2835_video_probe(struct udevice *dev)
+>   					DCACHE_WRITEBACK);
+>   	video_set_flush_dcache(dev, true);
+>   
+> +	bpp = pitch / w;
+> +	switch (bpp) {
+> +	case 2:
+> +		uc_priv->bpix = VIDEO_BPP16;
+> +		break;
+> +	case 4:
+> +		uc_priv->bpix = VIDEO_BPP32;
+> +		break;
+> +	default:
+> +		printf("bcm2835: unexpected bpp %d, pitch %d, width %d\n",
+> +		       bpp, pitch, w);
+> +		uc_priv->bpix = VIDEO_BPP32;
+> +		break;
+> +	}
+> +
+>   	uc_priv->xsize = w;
+>   	uc_priv->ysize = h;
+> -	uc_priv->bpix = VIDEO_BPP32;
+>   	plat->base = fb_base;
+>   	plat->size = fb_size;
+>   
