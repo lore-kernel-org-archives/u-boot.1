@@ -4,111 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C614C4707B
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 12:29:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE492C4707B
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 12:29:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2BCF87867;
-	Wed, 10 Jan 2024 13:29:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 54A4187A88;
+	Wed, 10 Jan 2024 13:29:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="MXwPpHC9";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="cJzDVfNf";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="MXwPpHC9";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="cJzDVfNf";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="WhHjAWOY";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="p8oa/FRs";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="WhHjAWOY";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="p8oa/FRs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 569C387AC2; Wed, 10 Jan 2024 13:29:26 +0100 (CET)
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ id 280E486EF1; Wed, 10 Jan 2024 13:29:27 +0100 (CET)
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAF0F86EF1
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 13:29:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DA4E878D7
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 13:29:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=iivanov@suse.de
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 5F3171F88C;
+ by smtp-out1.suse.de (Postfix) with ESMTPS id F2C2B21DDF;
  Wed, 10 Jan 2024 12:29:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1704889762; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
- bh=XnyVheFq4sAHWH5OU+2Vi8uznNim/1BomMdwlW2AAhc=;
- b=MXwPpHC9EdKjVV+T51MblN5RNYRq/8BYWhoN3HhZbVCkq68/8XiP45PP9JtnhGn8yFPayT
- 8EpSxLosUQq6eRkVolJnAfaiejYPekTiiubsNzXhmyXZC5MMbl5jtjdhYkRvL2queeXlFi
- mAfBRcp7xWMA6+UiReVGMnRdD77R8Ag=
+ t=1704889763; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=6fZNNsdOHOssOsQ3DD4x6601/qyAAXeT5aF/iQxY4ik=;
+ b=WhHjAWOY8Wm5fabRxuldEZartP81vl91Pjc9OZKBazs5LMET3quy0WbDehf9380R4pOj1Q
+ FEy5PHhLyO+gF9T3ZQ53Z512SucvTmnInuQ/jAXA6Xk3C+9jY5QiK9PJhKTQuZ1jPGWQ1A
+ XWeHZ/OeSgIZBpvl1cJMkaVbCoQLTbY=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1704889762;
+ s=susede2_ed25519; t=1704889763;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
- bh=XnyVheFq4sAHWH5OU+2Vi8uznNim/1BomMdwlW2AAhc=;
- b=cJzDVfNfSLiU37+0TnvCTv08WW/WwybH4N3NrvwnFK9zAWFipIY/tY0pPUIIktGfMT/OUO
- x9NLGOatxTu9LCDQ==
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=6fZNNsdOHOssOsQ3DD4x6601/qyAAXeT5aF/iQxY4ik=;
+ b=p8oa/FRsv7uY3mWqZc7MgfRzt4sZUekRoBq8V7PHK2EBbONzyJvIEA21MYSKK2LeBPCqei
+ XEtZqeb13Fhe/SDg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1704889762; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
- bh=XnyVheFq4sAHWH5OU+2Vi8uznNim/1BomMdwlW2AAhc=;
- b=MXwPpHC9EdKjVV+T51MblN5RNYRq/8BYWhoN3HhZbVCkq68/8XiP45PP9JtnhGn8yFPayT
- 8EpSxLosUQq6eRkVolJnAfaiejYPekTiiubsNzXhmyXZC5MMbl5jtjdhYkRvL2queeXlFi
- mAfBRcp7xWMA6+UiReVGMnRdD77R8Ag=
+ t=1704889763; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=6fZNNsdOHOssOsQ3DD4x6601/qyAAXeT5aF/iQxY4ik=;
+ b=WhHjAWOY8Wm5fabRxuldEZartP81vl91Pjc9OZKBazs5LMET3quy0WbDehf9380R4pOj1Q
+ FEy5PHhLyO+gF9T3ZQ53Z512SucvTmnInuQ/jAXA6Xk3C+9jY5QiK9PJhKTQuZ1jPGWQ1A
+ XWeHZ/OeSgIZBpvl1cJMkaVbCoQLTbY=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1704889762;
+ s=susede2_ed25519; t=1704889763;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
- bh=XnyVheFq4sAHWH5OU+2Vi8uznNim/1BomMdwlW2AAhc=;
- b=cJzDVfNfSLiU37+0TnvCTv08WW/WwybH4N3NrvwnFK9zAWFipIY/tY0pPUIIktGfMT/OUO
- x9NLGOatxTu9LCDQ==
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=6fZNNsdOHOssOsQ3DD4x6601/qyAAXeT5aF/iQxY4ik=;
+ b=p8oa/FRsv7uY3mWqZc7MgfRzt4sZUekRoBq8V7PHK2EBbONzyJvIEA21MYSKK2LeBPCqei
+ XEtZqeb13Fhe/SDg==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id CC4EE1398A;
- Wed, 10 Jan 2024 12:29:21 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 6E66C13CB3;
+ Wed, 10 Jan 2024 12:29:22 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([10.150.64.162])
- by imap1.dmz-prg2.suse.org with ESMTPSA id QYF8L6GNnmUZPgAAD6G6ig
- (envelope-from <iivanov@suse.de>); Wed, 10 Jan 2024 12:29:21 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id OMWUGKKNnmUZPgAAD6G6ig
+ (envelope-from <iivanov@suse.de>); Wed, 10 Jan 2024 12:29:22 +0000
 From: "Ivan T. Ivanov" <iivanov@suse.de>
 To: Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>
 Cc: Dmitry Malkin <dmitry@bedrocksystems.com>,
  Thomas Fitzsimmons <fitzsim@fitzsim.org>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>,
  wahrenst@gmx.net, florian.fainelli@broadcom.com, u-boot@lists.denx.de,
- "Ivan T. Ivanov" <iivanov@suse.de>
-Subject: [PATCH v4 0/6] rpi5: initial support
-Date: Wed, 10 Jan 2024 14:29:02 +0200
-Message-ID: <20240110122908.31612-1-iivanov@suse.de>
+ "Ivan T . Ivanov" <iivanov@suse.de>
+Subject: [PATCH v4 1/6] rpi5: add initial memory map for bcm2712
+Date: Wed, 10 Jan 2024 14:29:03 +0200
+Message-ID: <20240110122908.31612-2-iivanov@suse.de>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240110122908.31612-1-iivanov@suse.de>
+References: <20240110122908.31612-1-iivanov@suse.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Bar: /
-Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=MXwPpHC9;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=cJzDVfNf
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Spamd-Result: default: False [-0.51 / 50.00]; RCVD_VIA_SMTP_AUTH(0.00)[];
- SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
- TO_DN_SOME(0.00)[]; R_MISSING_CHARSET(2.50)[];
- BROKEN_CONTENT_TYPE(1.50)[]; RCVD_COUNT_THREE(0.00)[3];
- DKIM_TRACE(0.00)[suse.de:+]; MX_GOOD(-0.01)[];
- RCPT_COUNT_SEVEN(0.00)[11]; NEURAL_HAM_SHORT(-0.20)[-1.000];
- FREEMAIL_TO(0.00)[suse.com,gmail.com]; FROM_EQ_ENVFROM(0.00)[];
- MIME_TRACE(0.00)[0:+]; BAYES_HAM(-3.00)[100.00%];
- ARC_NA(0.00)[];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FROM_HAS_DN(0.00)[]; DWL_DNSWL_MED(-2.00)[suse.de:dkim];
- FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.net];
- TO_MATCH_ENVRCPT_ALL(0.00)[]; MIME_GOOD(-0.10)[text/plain];
+X-Spamd-Result: default: False [3.22 / 50.00]; ARC_NA(0.00)[];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; FROM_HAS_DN(0.00)[];
+ TO_DN_SOME(0.00)[]; FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.net];
+ R_MISSING_CHARSET(2.50)[]; MIME_GOOD(-0.10)[text/plain];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; BROKEN_CONTENT_TYPE(1.50)[];
+ RCVD_COUNT_THREE(0.00)[3];
  DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- MID_CONTAINS_FROM(1.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim];
- FUZZY_BLOCKED(0.00)[rspamd.com];
+ RCPT_COUNT_SEVEN(0.00)[11]; MID_CONTAINS_FROM(1.00)[];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email];
+ FREEMAIL_TO(0.00)[suse.com,gmail.com];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_EQ_ENVFROM(0.00)[];
+ MIME_TRACE(0.00)[0:+];
  FREEMAIL_CC(0.00)[bedrocksystems.com,fitzsim.org,nxp.com,samsung.com,denx.de,gmx.net,broadcom.com,lists.denx.de,suse.de];
- RCVD_TLS_ALL(0.00)[]
-X-Rspamd-Queue-Id: 5F3171F88C
+ RCVD_TLS_ALL(0.00)[]; BAYES_HAM(-1.68)[93.01%]
+Authentication-Results: smtp-out1.suse.de;
+	none
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,68 +125,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+From: Dmitry Malkin <dmitry@bedrocksystems.com>
 
-These patches are slight update for patches posted earlier here[1].
-They are adding basic support for RPi5 and are based on v2 series
-from Dmitry Malkin[2].
+This includes:
+* 1GB of RAM (from 4GB or 8GB total)
+* AXI ranges (main peripherals)
 
-What changed:
+When HDMI cable is plugged in at boot time firmware will
+insert "simple-framebuffer" device into devicetree and will
+shrink first memory region to 0x3f800000UL. Board setup then
+will properly reserve frameboofer region.
 
-* Initial memory map now includes whole first 1GB of DRAM. At runtime,
-  the firmware will adjust this size depending on whether an HDMI cable
-  is plugged in or not. If there is HDMI monitor connected it will reserve
-  framebufer memory region and will add simple-framebuffer device into
-  devicetree.
+When no HDMI cable is plugged in size of the region will be
+0x3fc00000UL.
 
-* Dynamically calculate bits per pixel in video driver. This works
-  on all prevous RPi's models that I have.
+Signed-off-by: Dmitry Malkin <dmitry@bedrocksystems.com>
+Signed-off-by: Ivan T. Ivanov <iivanov@suse.de>
+---
+ arch/arm/mach-bcm283x/init.c | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
 
-* I am dropping PCIe patch for now. I made some progress on porting changes
-  from vendor Linux tree to U-Boot. Unfortunatly testing it is little bit
-  tricky. They are many devices behind PCIe, but more or less all of them
-  requires missing either "reset-controller" or "clock-controller" or
-  "pin-controller" drivers. I was able to probe "cdns,macb" device, but
-  access to ethernet PHY over MDIO bus is stucking. Then I ported
-  "raspberrypi,rp1-adc" driver from vendor Linux tree, but it requires
-  missing clock. And on top of that machine that I used for developing this
-  crashed and I lost my PCIe changes :-|. Anyway.
-
-These patches allows me to boot current openSUSE Tumbleweed without
-modification. I can see serial console log and boot process on HDMI
-connected monitor.
-
-I think these patches should be enough for start. Please consider for
-inclusion.
-
-Thanks,
-Ivan
-
-[1] https://lore.kernel.org/all/20231218210341.30073-1-iivanov@suse.de/
-[2] https://lore.kernel.org/all/CAKRNjQ0dsWozGo4n8g58m4cCEk3n=qx1R+L24WBgpo-iP1yo7A@mail.gmail.com/
-
-Dmitry Malkin (2):
-  rpi5: add initial memory map for bcm2712
-  rpi5: Use devicetree as alternative way to read IO base addresses
-
-Ivan T. Ivanov (4):
-  rpi5: Use devicetree to retrieve board revision
-  bcm2835: Dynamically calculate bytes per pixel parameter
-  mmc: bcmstb: Add support for bcm2712 SD controller
-  configs: rpi_arm64: enable SDHCI BCMSTB driver
-
- arch/arm/mach-bcm283x/include/mach/base.h  |   5 +-
- arch/arm/mach-bcm283x/include/mach/mbox.h  |   3 +-
- arch/arm/mach-bcm283x/include/mach/sdhci.h |   3 +-
- arch/arm/mach-bcm283x/include/mach/timer.h |   3 +-
- arch/arm/mach-bcm283x/include/mach/wdog.h  |   3 +-
- arch/arm/mach-bcm283x/init.c               |  74 ++++++++-
- board/raspberrypi/rpi/rpi.c                |  22 ++-
- configs/rpi_arm64_defconfig                |   1 +
- drivers/mmc/bcmstb_sdhci.c                 | 173 ++++++++++++++++++++-
- drivers/video/bcm2835.c                    |  18 ++-
- 10 files changed, 282 insertions(+), 23 deletions(-)
-
+diff --git a/arch/arm/mach-bcm283x/init.c b/arch/arm/mach-bcm283x/init.c
+index 7265faf6ce..f1a0c8588d 100644
+--- a/arch/arm/mach-bcm283x/init.c
++++ b/arch/arm/mach-bcm283x/init.c
+@@ -68,6 +68,36 @@ static struct mm_region bcm2711_mem_map[MEM_MAP_MAX_ENTRIES] = {
+ 	}
+ };
+ 
++static struct mm_region bcm2712_mem_map[MEM_MAP_MAX_ENTRIES] = {
++	{
++		/* First 1GB of DRAM */
++		.virt = 0x00000000UL,
++		.phys = 0x00000000UL,
++		.size = 0x40000000UL,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++			 PTE_BLOCK_INNER_SHARE
++	}, {
++		/* Beginning of AXI bus where uSD controller lives */
++		.virt = 0x1000000000UL,
++		.phys = 0x1000000000UL,
++		.size = 0x0002000000UL,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* SoC bus */
++		.virt = 0x107c000000UL,
++		.phys = 0x107c000000UL,
++		.size = 0x0004000000UL,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* List terminator */
++		0,
++	}
++};
++
+ struct mm_region *mem_map = bcm283x_mem_map;
+ 
+ /*
+@@ -78,6 +108,7 @@ static const struct udevice_id board_ids[] = {
+ 	{ .compatible = "brcm,bcm2837", .data = (ulong)&bcm283x_mem_map},
+ 	{ .compatible = "brcm,bcm2838", .data = (ulong)&bcm2711_mem_map},
+ 	{ .compatible = "brcm,bcm2711", .data = (ulong)&bcm2711_mem_map},
++	{ .compatible = "brcm,bcm2712", .data = (ulong)&bcm2712_mem_map},
+ 	{ },
+ };
+ 
 -- 
 2.35.3
 
