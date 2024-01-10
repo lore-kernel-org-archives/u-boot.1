@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 856CEC47073
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 17:57:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82B1EC4707B
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 18:00:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD74E87732;
-	Wed, 10 Jan 2024 18:57:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8968987732;
+	Wed, 10 Jan 2024 19:00:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="IwupnYBP";
+	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="BmahvHWs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CC9C878E7; Wed, 10 Jan 2024 18:57:24 +0100 (CET)
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
+ id AE7C88791E; Wed, 10 Jan 2024 19:00:25 +0100 (CET)
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [IPv6:2607:f8b0:4864:20::1031])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E374387732
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 18:57:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FD0287732
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 19:00:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=broadcom.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=florian.fainelli@broadcom.com
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-6d9af1f52bcso2234752b3a.3
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 09:57:21 -0800 (PST)
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-28cf491b197so2344110a91.1
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 10:00:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=broadcom.com; s=google; t=1704909440; x=1705514240; darn=lists.denx.de;
+ d=broadcom.com; s=google; t=1704909620; x=1705514420; darn=lists.denx.de;
  h=in-reply-to:autocrypt:from:references:cc:to:subject:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=yCIsTAi5HZkcJkmcv2jgl+iYZjBAgny+aCZ1iE8gyJE=;
- b=IwupnYBPhIVZY91RJW3dK7Px7xbSeI4Np3YzbglEL5hY97fmKbHU1hKnaN6mY8n7rE
- 1lb7Q0God3VZT0Fcg0tw/nY9BI7JJ7NSUHJ34Dl+6cY+E76id+gUUhy5FUJJP91HPUme
- MUamsSSolOJhzO537pSleSdGULwBAUiQVX8XU=
+ :reply-to; bh=TEDzg+kuXitrJfXvfy1IuYot3vNh6o/FVy3a79tfKi0=;
+ b=BmahvHWs6/sq+Cl4X/YA8MJjvH1Bu92BYzEtyBe68v6KXei2WHvbpbh39QXaK7je7s
+ PCERm2I3zEXFSRw6CYZZudO5SO+1Jsm2DaSbVTofMCFzSnvnufkKcUkxeIWArGe3U5sg
+ +R8B9DJxhsybaoHgtsIFSZgKh/iLQjY6fPXDI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704909440; x=1705514240;
+ d=1e100.net; s=20230601; t=1704909620; x=1705514420;
  h=in-reply-to:autocrypt:from:references:cc:to:subject:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=yCIsTAi5HZkcJkmcv2jgl+iYZjBAgny+aCZ1iE8gyJE=;
- b=o7UQ3ScrNnpJedj0rcRxDiWeuVFp6TgTDinH24jbTn7EecBUROGNRFq7HYOABsnJEc
- HJHoZTnsdMLCEjmWj90vWzmtCHfqKaPJGKc1ZWh2XICCTvL3Zr7RHQdyR0dvlu55Bjl5
- FLLXJ3ZsEafH5IHf9XjC2T9RH0r7+iPo/Clxpy3bG5JebkVd/sReAuAMlRfaLp4JcIAX
- jslhUjNwL+nZ8tselK82YwcKa1hq06r3RwjoarO32U8VYCvtpfhMaO3jPq+cX9TIjmKO
- EERCmYkUQYFZ6t4uJ5ST7P6JQ0mFkViWaXm0iUipggwjPzbNyUqijWtYDnVuqRJJbF/L
- eucQ==
-X-Gm-Message-State: AOJu0YyU0cKlTiH4MQC1mArpvgcjnVcG4xZgFDEy9RlO4eayiGy/4nOQ
- 35zpQ/KguK2AogX4W7+iKgJCclRDCf8B
-X-Google-Smtp-Source: AGHT+IEAixuw1QJudibnCSVw+I8eMiUuBe6uC1CC2cAgxJjvRu7J+o/X7QvjUU9epdhYelhT4/jZxA==
-X-Received: by 2002:a05:6a00:139c:b0:6da:bceb:3990 with SMTP id
- t28-20020a056a00139c00b006dabceb3990mr1409783pfg.53.1704909440109; 
- Wed, 10 Jan 2024 09:57:20 -0800 (PST)
+ bh=TEDzg+kuXitrJfXvfy1IuYot3vNh6o/FVy3a79tfKi0=;
+ b=lz+DPOBZ1kDbYnXpigZM7C0PKbxwLfecmkg5cGTd0oYRnoqDYEFZKVJ1e2/KIPTeNj
+ rmIyWgD96BsWtYBeZb54a4VgTRrczfmIOI751jwDp99csCic0vwZIFRXyLNUm8Nunpmg
+ QMAXxv1j1rkP+1aTUEu5JPbuHKHK6oGTZmjgotw1jQSrhRsD3YTntRN8WnYkOc6TMasV
+ Mnb+rLQFn8wAaldJ3UJZRVQDSTeXN0dJr/DDD7AXkQCMEpr7qK1XR9DgzCHEjcEZf8Oo
+ 7r1usPbjQU3gQfrTdkAs2j3eqLw2C8mSpwV8HN8mjF00p0dBgzO7Ur2Pvkf2msuwDV8t
+ wwow==
+X-Gm-Message-State: AOJu0YzidAId1Mn0r8F3aIbS1nCp8Qfczq1Ii1ZTtKqya2b1A+rqZaI5
+ ioPKORTzrFpfei/SU6Y5ukPm5iId3W8a
+X-Google-Smtp-Source: AGHT+IHutiu7+OXWiD9sxx7gXzPElgp6U+FJxjmeNxF9JJluqLrYBABMLCNioYlwncs9/BQb0Ukheg==
+X-Received: by 2002:a17:90a:e50f:b0:28b:c1ad:9cf5 with SMTP id
+ t15-20020a17090ae50f00b0028bc1ad9cf5mr1041334pjy.26.1704909619775; 
+ Wed, 10 Jan 2024 10:00:19 -0800 (PST)
 Received: from [10.67.48.245] ([192.19.223.252])
  by smtp.gmail.com with ESMTPSA id
- t5-20020a628105000000b006d96d753ca0sm3943198pfd.38.2024.01.10.09.57.17
+ gl18-20020a17090b121200b0028cef021d45sm1893820pjb.17.2024.01.10.10.00.18
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Jan 2024 09:57:18 -0800 (PST)
-Message-ID: <5c68ebf9-243d-4cc2-a5da-451e87e1b443@broadcom.com>
-Date: Wed, 10 Jan 2024 09:57:16 -0800
+ Wed, 10 Jan 2024 10:00:19 -0800 (PST)
+Message-ID: <170b21a9-89b2-4072-981a-76b9ec772b5f@broadcom.com>
+Date: Wed, 10 Jan 2024 10:00:17 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/6] rpi5: add initial memory map for bcm2712
+Subject: Re: [PATCH v4 2/6] rpi5: Use devicetree as alternative way to read IO
+ base addresses
 To: "Ivan T. Ivanov" <iivanov@suse.de>, Matthias Brugger <mbrugger@suse.com>, 
  Peter Robinson <pbrobinson@gmail.com>
 Cc: Dmitry Malkin <dmitry@bedrocksystems.com>,
@@ -72,7 +73,7 @@ Cc: Dmitry Malkin <dmitry@bedrocksystems.com>,
  Jaehoon Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>,
  wahrenst@gmx.net, u-boot@lists.denx.de
 References: <20240110122908.31612-1-iivanov@suse.de>
- <20240110122908.31612-2-iivanov@suse.de>
+ <20240110122908.31612-3-iivanov@suse.de>
 From: Florian Fainelli <florian.fainelli@broadcom.com>
 Autocrypt: addr=florian.fainelli@broadcom.com; keydata=
  xsBNBFPAG8ABCAC3EO02urEwipgbUNJ1r6oI2Vr/+uE389lSEShN2PmL3MVnzhViSAtrYxeT
@@ -106,10 +107,10 @@ Autocrypt: addr=florian.fainelli@broadcom.com; keydata=
  MIlnaE6V0U8f5zNHB7Y46yJjjYT/Ds1TJo3pvwevDWPvv6rdBeV07D9s43frUS6xYd1uFxHC
  7dZYWJjZmyUf5evr1W1gCgwLXG0PEi9n3qmz1lelQ8lSocmvxBKtMbX/OKhAfuP/iIwnTsww
  95A2SaPiQZA51NywV8OFgsN0ITl2PlZ4Tp9hHERDe6nQCsNI/Us=
-In-Reply-To: <20240110122908.31612-2-iivanov@suse.de>
+In-Reply-To: <20240110122908.31612-3-iivanov@suse.de>
 Content-Type: multipart/signed; protocol="application/pkcs7-signature";
- micalg=sha-256; boundary="000000000000930936060e9b2930"
-X-Mailman-Approved-At: Wed, 10 Jan 2024 18:57:49 +0100
+ micalg=sha-256; boundary="0000000000004a9e84060e9b34d2"
+X-Mailman-Approved-At: Wed, 10 Jan 2024 19:00:42 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,7 +127,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---000000000000930936060e9b2930
+--0000000000004a9e84060e9b34d2
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
@@ -134,27 +135,47 @@ Content-Transfer-Encoding: 7bit
 On 1/10/24 04:29, Ivan T. Ivanov wrote:
 > From: Dmitry Malkin <dmitry@bedrocksystems.com>
 > 
-> This includes:
-> * 1GB of RAM (from 4GB or 8GB total)
-> * AXI ranges (main peripherals)
+> MBOX and Watchdog on RPi5/bcm2712 has a different base IO offsets.
+
+s/has a/have a /
+
+> Find them via devicetree blob passed by bootloader.
 > 
-> When HDMI cable is plugged in at boot time firmware will
-> insert "simple-framebuffer" device into devicetree and will
-> shrink first memory region to 0x3f800000UL. Board setup then
-> will properly reserve frameboofer region.
-
-s/frameboofer/framebuffer/
-
+> Signed-off-by: Dmitry Malkin <dmitry@bedrocksystems.com>
+> Reviewed-by: Matthias Brugger <mbrugger@suse.com>
+> Signed-off-by: Ivan T. Ivanov <iivanov@suse.de>
+> ---
+>   arch/arm/mach-bcm283x/include/mach/base.h  |  5 ++-
+>   arch/arm/mach-bcm283x/include/mach/mbox.h  |  3 +-
+>   arch/arm/mach-bcm283x/include/mach/sdhci.h |  3 +-
+>   arch/arm/mach-bcm283x/include/mach/timer.h |  3 +-
+>   arch/arm/mach-bcm283x/include/mach/wdog.h  |  3 +-
+>   arch/arm/mach-bcm283x/init.c               | 43 ++++++++++++++++++----
+>   6 files changed, 43 insertions(+), 17 deletions(-)
 > 
-> When no HDMI cable is plugged in size of the region will be
-> 0x3fc00000UL.
+> diff --git a/arch/arm/mach-bcm283x/include/mach/base.h b/arch/arm/mach-bcm283x/include/mach/base.h
+> index 4ccaf69693..6de99e7ea1 100644
+> --- a/arch/arm/mach-bcm283x/include/mach/base.h
+> +++ b/arch/arm/mach-bcm283x/include/mach/base.h
+> @@ -6,7 +6,10 @@
+>   #ifndef _BCM283x_BASE_H_
+>   #define _BCM283x_BASE_H_
+>   
+> -extern unsigned long rpi_bcm283x_base;
+> +extern unsigned long rpi_mbox_base;
+> +extern unsigned long rpi_timer_base;
+> +extern unsigned long rpi_sdhci_base;
+> +extern unsigned long rpi_wdog_base;
 
-s/in size/in the size/
+Maybe suffix those variables with _phys_base to denote they are physical 
+addresses, even if you seem to use a 1:1 mapping between virtual and 
+physical, knowing which type of address we are dealing with right away 
+is clearer.
 -- 
 Florian
 
 
---000000000000930936060e9b2930
+--0000000000004a9e84060e9b34d2
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -225,14 +246,14 @@ kNGap1mHJ+JngGzZCz+dDiHRQKGpXLxkHX0BvEDZLW6LGOJ83ImrW38YMOo3ZYnCYNHA9qDOakiw
 NxADYvcRBA0ySL6sZpj8BIIhWiXiuusuBmt2Mak2eEv0xDbovE6Z6hYyl/ZnRadbgK/ClgbY3w+O
 AfUXEZ0xggJtMIICaQIBATBrMFsxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52
 LXNhMTEwLwYDVQQDEyhHbG9iYWxTaWduIEdDQyBSMyBQZXJzb25hbFNpZ24gMiBDQSAyMDIwAgwT
-/D/YSkVckoN0L+QwDQYJYIZIAWUDBAIBBQCggdQwLwYJKoZIhvcNAQkEMSIEIN+GuNMkYLS5KLCt
-gBLWeJFOzJN4rNVFmG3xDDCoGPG2MBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcN
-AQkFMQ8XDTI0MDExMDE3NTcyMFowaQYJKoZIhvcNAQkPMVwwWjALBglghkgBZQMEASowCwYJYIZI
+/D/YSkVckoN0L+QwDQYJYIZIAWUDBAIBBQCggdQwLwYJKoZIhvcNAQkEMSIEIJgbxCZTampzN0Uc
+9FmGSCuZZBzBgzi7Gt0/TJ4qE7yhMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcN
+AQkFMQ8XDTI0MDExMDE4MDAyMFowaQYJKoZIhvcNAQkPMVwwWjALBglghkgBZQMEASowCwYJYIZI
 AWUDBAEWMAsGCWCGSAFlAwQBAjAKBggqhkiG9w0DBzALBgkqhkiG9w0BAQowCwYJKoZIhvcNAQEH
-MAsGCWCGSAFlAwQCATANBgkqhkiG9w0BAQEFAASCAQA8avq82YXPWYW54a8o9sOi0V5YvE1WHMDU
-ggXntUdQdG+Zb97IukKe9wEMCMicA2FSyrLqsLEU/FBLaSqToxBeBEcn5LyxLDM9kKUrlTC+YAwj
-GU3pkr1wGJ5eueVw6YcqiMLEHYcuduG/uo4DdZkvth6QfC845kFesKCa5tF97GMvUtMapu3NH3Ki
-PxlD6FKtN/pFGecym/4KnTsgEeAalX5Y+oDUiPuuY/Immr3ad1b7nX/dgfTfNsdwM3nijVB9aeoF
-7LlfLP7RSnqmxHVMm/CjrnBE7jVBs0vsQvNvSYT8rfudbNs+uydKTnlCzpe8Lfg0DOBUDTcWycL7
-1Uc9
---000000000000930936060e9b2930--
+MAsGCWCGSAFlAwQCATANBgkqhkiG9w0BAQEFAASCAQCHdnuCCUpbFNhx2H9QcNkTrjSCBLp5x5Do
+ChkTYBkgUO/J5UAA5Su44wRsLbVUY99femD5i++3H6QWNz4cDqcmks8+ogz68DSH2gsjCFs4RVXl
+fkBLKJzai2AJBYS/li+v8ewLa//M2s+2tWA62SBycn3gc0yV0wm5QlNj9kWAfX+FDofrFk31XV9y
+Z7eSxwapxpX9XQhCFITg7Sm60Lfa3PHNkFyKYi55wXpuPMF4/cXgdlAS9vkKcgDoZxcYPsA4ZfgD
+E5zLuzSEaT1KXp8J+NbrM/88R6vi1PLJZzdKznto1fpVduhK6K+re/NSQRDHAMEhgiLYV7zDWMgL
+66qK
+--0000000000004a9e84060e9b34d2--
