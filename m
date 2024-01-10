@@ -4,26 +4,27 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE492C4707B
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 12:29:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 110E3C4707C
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 12:29:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54A4187A88;
+	by phobos.denx.de (Postfix) with ESMTP id BFA4D87AB3;
 	Wed, 10 Jan 2024 13:29:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="WhHjAWOY";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="p8oa/FRs";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="WhHjAWOY";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="p8oa/FRs";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="ievEdHt+";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="kQ/Y1GjR";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="ievEdHt+";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="kQ/Y1GjR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 280E486EF1; Wed, 10 Jan 2024 13:29:27 +0100 (CET)
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ id 4B84286EF1; Wed, 10 Jan 2024 13:29:27 +0100 (CET)
+Received: from smtp-out1.suse.de (smtp-out1.suse.de
+ [IPv6:2a07:de40:b251:101:10:150:64:1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DA4E878D7
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 13:29:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 39FBD87A99
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 13:29:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=iivanov@suse.de
@@ -31,53 +32,53 @@ Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id F2C2B21DDF;
- Wed, 10 Jan 2024 12:29:22 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id AA1E221E1A;
+ Wed, 10 Jan 2024 12:29:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
  t=1704889763; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=6fZNNsdOHOssOsQ3DD4x6601/qyAAXeT5aF/iQxY4ik=;
- b=WhHjAWOY8Wm5fabRxuldEZartP81vl91Pjc9OZKBazs5LMET3quy0WbDehf9380R4pOj1Q
- FEy5PHhLyO+gF9T3ZQ53Z512SucvTmnInuQ/jAXA6Xk3C+9jY5QiK9PJhKTQuZ1jPGWQ1A
- XWeHZ/OeSgIZBpvl1cJMkaVbCoQLTbY=
+ bh=AlCE5vmqe4xWrcv24OhDYtQP9UXBhjmUlXxVHRbcUp4=;
+ b=ievEdHt+XuRUGLHng3qiHfa6VUGnjIpE386AYGR2EYfRPOPGvOCZfsy2luAvdGu3DRaSBu
+ vJPmeiOfH6qy8pkqvgrsGxqStS3jATCQ1mFTls6YuXJZ1uEJydQSp1+x/LPjm78UFN+qmJ
+ p0wji3iedB6jsZI7bwuwYehETTpN41c=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
  s=susede2_ed25519; t=1704889763;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=6fZNNsdOHOssOsQ3DD4x6601/qyAAXeT5aF/iQxY4ik=;
- b=p8oa/FRsv7uY3mWqZc7MgfRzt4sZUekRoBq8V7PHK2EBbONzyJvIEA21MYSKK2LeBPCqei
- XEtZqeb13Fhe/SDg==
+ bh=AlCE5vmqe4xWrcv24OhDYtQP9UXBhjmUlXxVHRbcUp4=;
+ b=kQ/Y1GjRZVThfdiqAUlfpj55fqWEgv82VRf1+DFGxUrKgMBUICa/d87haYSjOTJAhr1uq8
+ 5T8vmrqA2wd8quCA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
  t=1704889763; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=6fZNNsdOHOssOsQ3DD4x6601/qyAAXeT5aF/iQxY4ik=;
- b=WhHjAWOY8Wm5fabRxuldEZartP81vl91Pjc9OZKBazs5LMET3quy0WbDehf9380R4pOj1Q
- FEy5PHhLyO+gF9T3ZQ53Z512SucvTmnInuQ/jAXA6Xk3C+9jY5QiK9PJhKTQuZ1jPGWQ1A
- XWeHZ/OeSgIZBpvl1cJMkaVbCoQLTbY=
+ bh=AlCE5vmqe4xWrcv24OhDYtQP9UXBhjmUlXxVHRbcUp4=;
+ b=ievEdHt+XuRUGLHng3qiHfa6VUGnjIpE386AYGR2EYfRPOPGvOCZfsy2luAvdGu3DRaSBu
+ vJPmeiOfH6qy8pkqvgrsGxqStS3jATCQ1mFTls6YuXJZ1uEJydQSp1+x/LPjm78UFN+qmJ
+ p0wji3iedB6jsZI7bwuwYehETTpN41c=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
  s=susede2_ed25519; t=1704889763;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=6fZNNsdOHOssOsQ3DD4x6601/qyAAXeT5aF/iQxY4ik=;
- b=p8oa/FRsv7uY3mWqZc7MgfRzt4sZUekRoBq8V7PHK2EBbONzyJvIEA21MYSKK2LeBPCqei
- XEtZqeb13Fhe/SDg==
+ bh=AlCE5vmqe4xWrcv24OhDYtQP9UXBhjmUlXxVHRbcUp4=;
+ b=kQ/Y1GjRZVThfdiqAUlfpj55fqWEgv82VRf1+DFGxUrKgMBUICa/d87haYSjOTJAhr1uq8
+ 5T8vmrqA2wd8quCA==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 6E66C13CB3;
- Wed, 10 Jan 2024 12:29:22 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 0E1711398A;
+ Wed, 10 Jan 2024 12:29:23 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([10.150.64.162])
- by imap1.dmz-prg2.suse.org with ESMTPSA id OMWUGKKNnmUZPgAAD6G6ig
- (envelope-from <iivanov@suse.de>); Wed, 10 Jan 2024 12:29:22 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id 0CMfAaONnmUZPgAAD6G6ig
+ (envelope-from <iivanov@suse.de>); Wed, 10 Jan 2024 12:29:23 +0000
 From: "Ivan T. Ivanov" <iivanov@suse.de>
 To: Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>
 Cc: Dmitry Malkin <dmitry@bedrocksystems.com>,
@@ -85,28 +86,30 @@ Cc: Dmitry Malkin <dmitry@bedrocksystems.com>,
  Jaehoon Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>,
  wahrenst@gmx.net, florian.fainelli@broadcom.com, u-boot@lists.denx.de,
  "Ivan T . Ivanov" <iivanov@suse.de>
-Subject: [PATCH v4 1/6] rpi5: add initial memory map for bcm2712
-Date: Wed, 10 Jan 2024 14:29:03 +0200
-Message-ID: <20240110122908.31612-2-iivanov@suse.de>
+Subject: [PATCH v4 2/6] rpi5: Use devicetree as alternative way to read IO
+ base addresses
+Date: Wed, 10 Jan 2024 14:29:04 +0200
+Message-ID: <20240110122908.31612-3-iivanov@suse.de>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240110122908.31612-1-iivanov@suse.de>
 References: <20240110122908.31612-1-iivanov@suse.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [3.22 / 50.00]; ARC_NA(0.00)[];
- RCVD_VIA_SMTP_AUTH(0.00)[]; FROM_HAS_DN(0.00)[];
- TO_DN_SOME(0.00)[]; FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.net];
+X-Spamd-Result: default: False [5.42 / 50.00]; ARC_NA(0.00)[];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; BAYES_SPAM(0.52)[75.24%];
+ FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.net];
  R_MISSING_CHARSET(2.50)[]; MIME_GOOD(-0.10)[text/plain];
  TO_MATCH_ENVRCPT_ALL(0.00)[]; BROKEN_CONTENT_TYPE(1.50)[];
  RCVD_COUNT_THREE(0.00)[3];
  DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
  RCPT_COUNT_SEVEN(0.00)[11]; MID_CONTAINS_FROM(1.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email,suse.com:email];
  FREEMAIL_TO(0.00)[suse.com,gmail.com];
  FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_EQ_ENVFROM(0.00)[];
  MIME_TRACE(0.00)[0:+];
  FREEMAIL_CC(0.00)[bedrocksystems.com,fitzsim.org,nxp.com,samsung.com,denx.de,gmx.net,broadcom.com,lists.denx.de,suse.de];
- RCVD_TLS_ALL(0.00)[]; BAYES_HAM(-1.68)[93.01%]
+ RCVD_TLS_ALL(0.00)[]
 Authentication-Results: smtp-out1.suse.de;
 	none
 X-BeenThere: u-boot@lists.denx.de
@@ -127,73 +130,163 @@ X-Virus-Status: Clean
 
 From: Dmitry Malkin <dmitry@bedrocksystems.com>
 
-This includes:
-* 1GB of RAM (from 4GB or 8GB total)
-* AXI ranges (main peripherals)
-
-When HDMI cable is plugged in at boot time firmware will
-insert "simple-framebuffer" device into devicetree and will
-shrink first memory region to 0x3f800000UL. Board setup then
-will properly reserve frameboofer region.
-
-When no HDMI cable is plugged in size of the region will be
-0x3fc00000UL.
+MBOX and Watchdog on RPi5/bcm2712 has a different base IO offsets.
+Find them via devicetree blob passed by bootloader.
 
 Signed-off-by: Dmitry Malkin <dmitry@bedrocksystems.com>
+Reviewed-by: Matthias Brugger <mbrugger@suse.com>
 Signed-off-by: Ivan T. Ivanov <iivanov@suse.de>
 ---
- arch/arm/mach-bcm283x/init.c | 31 +++++++++++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
+ arch/arm/mach-bcm283x/include/mach/base.h  |  5 ++-
+ arch/arm/mach-bcm283x/include/mach/mbox.h  |  3 +-
+ arch/arm/mach-bcm283x/include/mach/sdhci.h |  3 +-
+ arch/arm/mach-bcm283x/include/mach/timer.h |  3 +-
+ arch/arm/mach-bcm283x/include/mach/wdog.h  |  3 +-
+ arch/arm/mach-bcm283x/init.c               | 43 ++++++++++++++++++----
+ 6 files changed, 43 insertions(+), 17 deletions(-)
 
+diff --git a/arch/arm/mach-bcm283x/include/mach/base.h b/arch/arm/mach-bcm283x/include/mach/base.h
+index 4ccaf69693..6de99e7ea1 100644
+--- a/arch/arm/mach-bcm283x/include/mach/base.h
++++ b/arch/arm/mach-bcm283x/include/mach/base.h
+@@ -6,7 +6,10 @@
+ #ifndef _BCM283x_BASE_H_
+ #define _BCM283x_BASE_H_
+ 
+-extern unsigned long rpi_bcm283x_base;
++extern unsigned long rpi_mbox_base;
++extern unsigned long rpi_timer_base;
++extern unsigned long rpi_sdhci_base;
++extern unsigned long rpi_wdog_base;
+ 
+ #ifdef CONFIG_ARMV7_LPAE
+ #ifdef CONFIG_TARGET_RPI_4_32B
+diff --git a/arch/arm/mach-bcm283x/include/mach/mbox.h b/arch/arm/mach-bcm283x/include/mach/mbox.h
+index 490664f878..35d4e2f075 100644
+--- a/arch/arm/mach-bcm283x/include/mach/mbox.h
++++ b/arch/arm/mach-bcm283x/include/mach/mbox.h
+@@ -38,8 +38,7 @@
+ 
+ /* Raw mailbox HW */
+ 
+-#define BCM2835_MBOX_PHYSADDR ({ BUG_ON(!rpi_bcm283x_base); \
+-				 rpi_bcm283x_base + 0x0000b880; })
++#define BCM2835_MBOX_PHYSADDR	rpi_mbox_base
+ 
+ struct bcm2835_mbox_regs {
+ 	u32 read;
+diff --git a/arch/arm/mach-bcm283x/include/mach/sdhci.h b/arch/arm/mach-bcm283x/include/mach/sdhci.h
+index 7323690687..e837c679c4 100644
+--- a/arch/arm/mach-bcm283x/include/mach/sdhci.h
++++ b/arch/arm/mach-bcm283x/include/mach/sdhci.h
+@@ -8,8 +8,7 @@
+ 
+ #include <asm/arch/base.h>
+ 
+-#define BCM2835_SDHCI_PHYSADDR ({ BUG_ON(!rpi_bcm283x_base); \
+-				  rpi_bcm283x_base + 0x00300000; })
++#define BCM2835_SDHCI_PHYSADDR	rpi_sdhci_base
+ 
+ int bcm2835_sdhci_init(u32 regbase, u32 emmc_freq);
+ 
+diff --git a/arch/arm/mach-bcm283x/include/mach/timer.h b/arch/arm/mach-bcm283x/include/mach/timer.h
+index 5567dbd7f3..60500a256d 100644
+--- a/arch/arm/mach-bcm283x/include/mach/timer.h
++++ b/arch/arm/mach-bcm283x/include/mach/timer.h
+@@ -11,8 +11,7 @@
+ #include <linux/bug.h>
+ #endif
+ 
+-#define BCM2835_TIMER_PHYSADDR ({ BUG_ON(!rpi_bcm283x_base); \
+-				  rpi_bcm283x_base + 0x00003000; })
++#define BCM2835_TIMER_PHYSADDR	rpi_timer_base
+ 
+ #define BCM2835_TIMER_CS_M3	(1 << 3)
+ #define BCM2835_TIMER_CS_M2	(1 << 2)
+diff --git a/arch/arm/mach-bcm283x/include/mach/wdog.h b/arch/arm/mach-bcm283x/include/mach/wdog.h
+index 9942666720..b950560674 100644
+--- a/arch/arm/mach-bcm283x/include/mach/wdog.h
++++ b/arch/arm/mach-bcm283x/include/mach/wdog.h
+@@ -8,8 +8,7 @@
+ 
+ #include <asm/arch/base.h>
+ 
+-#define BCM2835_WDOG_PHYSADDR ({ BUG_ON(!rpi_bcm283x_base); \
+-				 rpi_bcm283x_base + 0x00100000; })
++#define BCM2835_WDOG_PHYSADDR	rpi_wdog_base
+ 
+ struct bcm2835_wdog_regs {
+ 	u32 unknown0[7];
 diff --git a/arch/arm/mach-bcm283x/init.c b/arch/arm/mach-bcm283x/init.c
-index 7265faf6ce..f1a0c8588d 100644
+index f1a0c8588d..016bc1eb41 100644
 --- a/arch/arm/mach-bcm283x/init.c
 +++ b/arch/arm/mach-bcm283x/init.c
-@@ -68,6 +68,36 @@ static struct mm_region bcm2711_mem_map[MEM_MAP_MAX_ENTRIES] = {
- 	}
- };
+@@ -146,7 +146,11 @@ static void rpi_update_mem_map(void)
+ static void rpi_update_mem_map(void) {}
+ #endif
  
-+static struct mm_region bcm2712_mem_map[MEM_MAP_MAX_ENTRIES] = {
-+	{
-+		/* First 1GB of DRAM */
-+		.virt = 0x00000000UL,
-+		.phys = 0x00000000UL,
-+		.size = 0x40000000UL,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-+			 PTE_BLOCK_INNER_SHARE
-+	}, {
-+		/* Beginning of AXI bus where uSD controller lives */
-+		.virt = 0x1000000000UL,
-+		.phys = 0x1000000000UL,
-+		.size = 0x0002000000UL,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-+			 PTE_BLOCK_NON_SHARE |
-+			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-+	}, {
-+		/* SoC bus */
-+		.virt = 0x107c000000UL,
-+		.phys = 0x107c000000UL,
-+		.size = 0x0004000000UL,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-+			 PTE_BLOCK_NON_SHARE |
-+			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-+	}, {
-+		/* List terminator */
-+		0,
-+	}
-+};
+-unsigned long rpi_bcm283x_base = 0x3f000000;
++/* Default bcm283x devices addresses */
++unsigned long rpi_mbox_base  = 0x3f00b880;
++unsigned long rpi_sdhci_base = 0x3f300000;
++unsigned long rpi_wdog_base  = 0x3f100000;
++unsigned long rpi_timer_base = 0x3f003000;
+ 
+ int arch_cpu_init(void)
+ {
+@@ -157,22 +161,45 @@ int arch_cpu_init(void)
+ 
+ int mach_cpu_init(void)
+ {
+-	int ret, soc_offset;
++	int ret, soc, offset;
+ 	u64 io_base, size;
+ 
+ 	rpi_update_mem_map();
+ 
+ 	/* Get IO base from device tree */
+-	soc_offset = fdt_path_offset(gd->fdt_blob, "/soc");
+-	if (soc_offset < 0)
+-		return soc_offset;
++	soc = fdt_path_offset(gd->fdt_blob, "/soc");
++	if (soc < 0)
++		return soc;
+ 
+-	ret = fdt_read_range((void *)gd->fdt_blob, soc_offset, 0, NULL,
+-				&io_base, &size);
++	ret = fdt_read_range((void *)gd->fdt_blob, soc, 0, NULL,
++			     &io_base, &size);
+ 	if (ret)
+ 		return ret;
+ 
+-	rpi_bcm283x_base = io_base;
++	rpi_mbox_base  = io_base + 0x00b880;
++	rpi_sdhci_base = io_base + 0x300000;
++	rpi_wdog_base  = io_base + 0x100000;
++	rpi_timer_base = io_base + 0x003000;
 +
- struct mm_region *mem_map = bcm283x_mem_map;
++	offset = fdt_node_offset_by_compatible(gd->fdt_blob, soc,
++					       "brcm,bcm2835-mbox");
++	if (offset > soc)
++		rpi_mbox_base = fdt_get_base_address(gd->fdt_blob, offset);
++
++	offset = fdt_node_offset_by_compatible(gd->fdt_blob, soc,
++					       "brcm,bcm2835-sdhci");
++	if (offset > soc)
++		rpi_sdhci_base = fdt_get_base_address(gd->fdt_blob, offset);
++
++	offset = fdt_node_offset_by_compatible(gd->fdt_blob, soc,
++					       "brcm,bcm2835-system-timer");
++	if (offset > soc)
++		rpi_timer_base = fdt_get_base_address(gd->fdt_blob, offset);
++
++	offset = fdt_node_offset_by_compatible(gd->fdt_blob, soc,
++					       "brcm,bcm2712-pm");
++	if (offset > soc)
++		rpi_wdog_base = fdt_get_base_address(gd->fdt_blob, offset);
  
- /*
-@@ -78,6 +108,7 @@ static const struct udevice_id board_ids[] = {
- 	{ .compatible = "brcm,bcm2837", .data = (ulong)&bcm283x_mem_map},
- 	{ .compatible = "brcm,bcm2838", .data = (ulong)&bcm2711_mem_map},
- 	{ .compatible = "brcm,bcm2711", .data = (ulong)&bcm2711_mem_map},
-+	{ .compatible = "brcm,bcm2712", .data = (ulong)&bcm2712_mem_map},
- 	{ },
- };
- 
+ 	return 0;
+ }
 -- 
 2.35.3
 
