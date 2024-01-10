@@ -4,111 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D16B5C4707C
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 12:34:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D46CC4707B
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 12:36:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3299786EF1;
-	Wed, 10 Jan 2024 13:34:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id C4E3E86EF1;
+	Wed, 10 Jan 2024 13:36:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="PwFpONR/";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="JkmR6xd5";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="G+m9V8bM";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="PB8UvJA0";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="4BDRhDYH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 523FF86D2E; Wed, 10 Jan 2024 13:34:31 +0100 (CET)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2061f.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe5b::61f])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 3369087ABE; Wed, 10 Jan 2024 13:36:25 +0100 (CET)
+Received: from smtp-out2.suse.de (smtp-out2.suse.de
+ [IPv6:2a07:de40:b251:101:10:150:64:2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D350F878E9
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 13:34:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1811B86D2E
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 13:36:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=TXlGqPaxj3qt/Sz+QL8Ll151fTNCvxEFrdj90aBXgW+7q2Gm736FYt7di7ywMR4KIlS05l71+jVgzgmEj6VcrAmQGsPZ0CLuzn49S5ZZev6BAJoFFrIRuDxWVoHzSrtcqpHnhA5ULTrMhQFj6IB2WoOzB5vt7kwm5riu1rcMUTGKZLhQ2Emf9PNzIvfGeHJbQR+xR2CVe1NPkPLq/+HRMr7Ozn0oaeQtQsfMJsGlIoVk/o0ioRqiBDIzq0KU0dOwbFfe/IqvqK3eVpvUeRRzYeIl9i6u13LBsY2oBEsPDsEsvwSoxmThEY1Usn+wnB1CrpA3mynQ6gPcssGNodPqOQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bWchV1sBBMUBYJNoNC4MT9Bn8NHAe01TnmqwmzN8190=;
- b=VzXSeZDEQ8wm/z9BP8XXKP+lDFNp2u+sbH19DwDhlXDuA51z/HMPFqWYp99wrjlfgukS9LlxelR9zSsriEljM6g0Tcc52mHcseaKg9QQRsBP9/TdYfT/5hmi/SQjaMBm5y6W1cqyLRaJgRPUHpsPePeNGPkvQ2SFl2TuFtbwWKv/vMqvIQ8LjA/aBvyUE3q3g6ewMxSkqJwXXwl1rWvMGUPQFZvVJX8FNTElgRcT7Ou3jzyeYYkzA+/X0Q4gen+8ftVyAMIEkC94byK+pyBTxmIctc3ml3B33R0J1Cpgau45GKkXRjgAr8g1zyTAJvRWBHUFoy5Y8H9GJOHM7NnJPQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bWchV1sBBMUBYJNoNC4MT9Bn8NHAe01TnmqwmzN8190=;
- b=PwFpONR/dFOxz+4l7EttOCt1ZfF/uLB1JYcnsavfBsGv3iuRKQp6ZesHUWvf68K2gjwRLMXmKPOuO4/NyB6/oXWd/LelxTrT2lPEn6MwqAsCG0GlMRLo/qNrmtzcr5Ot8PCsZDSbGSLrM9+5NK2/CD/90/xz+G80bmNYWF+0usA=
-Received: from CH2PR02CA0029.namprd02.prod.outlook.com (2603:10b6:610:4e::39)
- by MW4PR12MB6778.namprd12.prod.outlook.com (2603:10b6:303:1e8::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.23; Wed, 10 Jan
- 2024 12:34:24 +0000
-Received: from DS3PEPF000099D3.namprd04.prod.outlook.com
- (2603:10b6:610:4e:cafe::73) by CH2PR02CA0029.outlook.office365.com
- (2603:10b6:610:4e::39) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7181.17 via Frontend
- Transport; Wed, 10 Jan 2024 12:34:24 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS3PEPF000099D3.mail.protection.outlook.com (10.167.17.4) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7181.14 via Frontend Transport; Wed, 10 Jan 2024 12:34:24 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Wed, 10 Jan
- 2024 06:34:22 -0600
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>, Manikanta Guntupalli
- <manikanta.guntupalli@amd.com>
-Subject: [PATCH] arm64: zynqmp: Remove ltc2954 node
-Date: Wed, 10 Jan 2024 13:34:20 +0100
-Message-ID: <f26b1a780ec44444d62e2dd696a05e2a37fa0993.1704890056.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.36.1
+ dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=iivanov@suse.de
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 85D1E1FD53;
+ Wed, 10 Jan 2024 12:36:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1704890182; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=uP1ZnUgZbbfrrj9GCsaBsy/nQj7H8r6do86LEnTV99Y=;
+ b=JkmR6xd5qb+tfON4C7mysYf5Ylzu4/gNwHctjgspjG5P7hoZRkUtfvN0pTHAPS6cMkM1bg
+ 67vfvAPTjN1OnRS5tCMR9ywXGsdaMMPwAqz6C5esh0DzAIN++QU4PT2s7yMaSdNDqHYu78
+ XTdHZ5i5PWD0wJ3cLLpZUCeg4g1UEgI=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1704890182;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=uP1ZnUgZbbfrrj9GCsaBsy/nQj7H8r6do86LEnTV99Y=;
+ b=G+m9V8bMt45YjFEFvS9Z1SKWikAUTrdhHYpVygH1NqkrdkCnNo0yymZWzbfnUP6hAfMGKM
+ k4ysyA5GM+3aCZBg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1704890180; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=uP1ZnUgZbbfrrj9GCsaBsy/nQj7H8r6do86LEnTV99Y=;
+ b=PB8UvJA065RVutfNbgUnuhGek++DcsicFW3YfLaU4/mdZ0y54e37f3/wj4hF6l/C7YjvLF
+ ZoTKnRZE0sfwg0Autp/JJEn0oJknDLzxZq/36ltfYplhtDM5YiMSDU5ZlIMd4EYgxW3Hge
+ 5TLszfNeziacm5PmefqNhw3DZ5txEW4=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1704890180;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=uP1ZnUgZbbfrrj9GCsaBsy/nQj7H8r6do86LEnTV99Y=;
+ b=4BDRhDYHgbA2Z8JBt53Y3gq45+ly5Q1KfiplulXBZSVG5yyNqCvmBXq2N9NPBDb3jsfD/h
+ Ntt23xtk5Gn2l6BA==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D3DD113CB3;
+ Wed, 10 Jan 2024 12:29:24 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([10.150.64.162])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id aLhnMaSNnmUZPgAAD6G6ig
+ (envelope-from <iivanov@suse.de>); Wed, 10 Jan 2024 12:29:24 +0000
+From: "Ivan T. Ivanov" <iivanov@suse.de>
+To: Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>
+Cc: Dmitry Malkin <dmitry@bedrocksystems.com>,
+ Thomas Fitzsimmons <fitzsim@fitzsim.org>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>,
+ wahrenst@gmx.net, florian.fainelli@broadcom.com, u-boot@lists.denx.de,
+ "Ivan T. Ivanov" <iivanov@suse.de>
+Subject: [PATCH v4 5/6] mmc: bcmstb: Add support for bcm2712 SD controller
+Date: Wed, 10 Jan 2024 14:29:07 +0200
+Message-ID: <20240110122908.31612-6-iivanov@suse.de>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240110122908.31612-1-iivanov@suse.de>
+References: <20240110122908.31612-1-iivanov@suse.de>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1223; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=hxMyXz57gldPVs872qq1bUqSkqtTuV1PvC7LKe3G1Lk=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhtR5fScDtBPtElbNkwiX3xHQtefPVRFj+dJVbxeHJDS0z
- 357sVWwI5aFQZCJQVZMkUXa5sqZvZUzpghfPCwHM4eVCWQIAxenAEwkx45hnhX7pEVTbZP8N3fv
- iNfrLvzC6uLZzzBXyOyQx6MmU9ej4ndYN66ufsix9LMrAA==
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099D3:EE_|MW4PR12MB6778:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7270e0e2-8c51-4eb9-bbed-08dc11d87a7f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: y7RKWnG5a8i/uMr7EjkZxb2O0ZTVFHTtGqzL12fqDnM3zQzJ6hFhrZ7DTTKIycpEuK5xS//zvqe2wr3X3o2TDnzpLycoSBeS1vE1ZUQY1aU8n4Utie55ukut83r1ygy/wfxlkM20YXMQUuVKbMZYB4iTYoYtgOO2TPuNuIeW7iA17X+c5T1CndIp6gqsVLRp/qvnbzWQn8MUp+tLaUrBGT3h9XeipCyGVAR0eDshan76rMNBuo+aej2aCYYydpEbrafjaHbutjI2z5pMD/0sY8Z7xEgEDjmEBmPYo0AnO8u6Z8wxt+PpZZJ9ZTuqJspv1KKwWeJi4PBlimA87FBrXj52+fJNZu5RVC+8hYSav7H/gGCcvQhQyL4UGyKwsEVBmRaJ9cChRN1UyBT7UNrx+cdJnHSWy+8+gcbrDIEE0g/PJuxhpWnY9mjklwcAn9Cr/plNHayHWpqinVqGVlFI7IUtsofiT49hl/jdQJ+S/Lzav2YZEdxwBxhswioBIJw+ivA9uP8SvlAQb3n4zzuY8Sd5TBdgboY/1XfopLZZQmO+Tsfra3OEyd78VXNF23dZL3Mn1k1q/u0dnSMpvZeMGxHQdaPdf5pVcmQ/fNZzRSLkEFZXlj/sDuXCiTW9yXWPwemrxUApvls5DS5KAKh+cKjU7u9iN8AeEnm+30Ep8CEXzX/ECL6xXKn5OHvEuC1LOcWePeJUOnuZ3nmA3QONhbUKf2UBzrStL4OrNBDAPgrrE4XOlT0xis5dtk/XOJW/AEOU3NXLTJrIsYDL+12Hdw==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(39860400002)(346002)(376002)(396003)(136003)(230922051799003)(82310400011)(64100799003)(451199024)(1800799012)(186009)(40470700004)(36840700001)(46966006)(36860700001)(316002)(110136005)(336012)(426003)(54906003)(16526019)(8936002)(47076005)(8676002)(36756003)(83380400001)(4326008)(44832011)(70206006)(40480700001)(70586007)(2616005)(478600001)(40460700003)(26005)(2906002)(82740400003)(5660300002)(81166007)(41300700001)(86362001)(356005)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jan 2024 12:34:24.4942 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7270e0e2-8c51-4eb9-bbed-08dc11d87a7f
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099D3.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB6778
+X-Spamd-Bar: /
+X-Spamd-Result: default: False [-0.48 / 50.00]; RCVD_VIA_SMTP_AUTH(0.00)[];
+ SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+ TO_DN_SOME(0.00)[]; R_MISSING_CHARSET(2.50)[];
+ BROKEN_CONTENT_TYPE(1.50)[]; RCVD_COUNT_THREE(0.00)[3];
+ DKIM_TRACE(0.00)[suse.de:+]; MX_GOOD(-0.01)[];
+ RCPT_COUNT_SEVEN(0.00)[11]; NEURAL_HAM_SHORT(-0.17)[-0.843];
+ FREEMAIL_TO(0.00)[suse.com,gmail.com]; FROM_EQ_ENVFROM(0.00)[];
+ MIME_TRACE(0.00)[0:+]; BAYES_HAM(-3.00)[99.99%];
+ ARC_NA(0.00)[];
+ R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ FROM_HAS_DN(0.00)[]; DWL_DNSWL_MED(-2.00)[suse.de:dkim];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.net];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; MIME_GOOD(-0.10)[text/plain];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ MID_CONTAINS_FROM(1.00)[];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email,suse.de:dkim];
+ FUZZY_BLOCKED(0.00)[rspamd.com];
+ FREEMAIL_CC(0.00)[bedrocksystems.com,fitzsim.org,nxp.com,samsung.com,denx.de,gmx.net,broadcom.com,lists.denx.de,suse.de];
+ RCVD_TLS_ALL(0.00)[];
+ RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Rspamd-Queue-Id: 85D1E1FD53
+Authentication-Results: smtp-out2.suse.de;
+ dkim=pass header.d=suse.de header.s=susede2_rsa header.b=PB8UvJA0;
+ dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=4BDRhDYH
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,37 +137,241 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove already disabled node. GPIO connections are handled by pmufw that's
-why there is no reason to have it described for non secure firmware.
-If someone wants to handle it from OS revert this patch and also update
-PMUFW configuration and pinctrl setting for these GPIO pins.
+Borrow SD quirks from vendor Linux driver.
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
+"BCM2712 unfortunately carries with it a perennial bug with the SD
+controller register interface present on previous chips (2711/2709/2708).
+Accesses must be dword-sized and a read-modify-write cycle to the 32-bit
+registers containing the COMMAND, TRANSFER_MODE, BLOCK_SIZE and
+BLOCK_COUNT registers tramples the upper/lower 16 bits of data written.
+BCM2712 does not seem to need the extreme delay between each write as on
+previous chips, just the serialisation of writes to these registers in a
+single 32-bit operation."
+
+Signed-off-by: Ivan T. Ivanov <iivanov@suse.de>
 ---
+ drivers/mmc/bcmstb_sdhci.c | 173 ++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 172 insertions(+), 1 deletion(-)
 
- arch/arm/dts/zynqmp-zcu100-revC.dts | 9 ---------
- 1 file changed, 9 deletions(-)
-
-diff --git a/arch/arm/dts/zynqmp-zcu100-revC.dts b/arch/arm/dts/zynqmp-zcu100-revC.dts
-index 49d5cdbba585..c5945067cd57 100644
---- a/arch/arm/dts/zynqmp-zcu100-revC.dts
-+++ b/arch/arm/dts/zynqmp-zcu100-revC.dts
-@@ -103,15 +103,6 @@
- 		};
- 	};
+diff --git a/drivers/mmc/bcmstb_sdhci.c b/drivers/mmc/bcmstb_sdhci.c
+index dc96818cff..21489e66c0 100644
+--- a/drivers/mmc/bcmstb_sdhci.c
++++ b/drivers/mmc/bcmstb_sdhci.c
+@@ -38,6 +38,16 @@
+  */
+ #define BCMSTB_SDHCI_MINIMUM_CLOCK_FREQUENCY	400000
  
--	ltc2954: ltc2954 { /* U7 */
--		compatible = "lltc,ltc2954", "lltc,ltc2952";
--		status = "disabled";
--		trigger-gpios = <&gpio 26 GPIO_ACTIVE_LOW>; /* INT line - input */
--		/* If there is HW watchdog on mezzanine this signal should be connected there */
--		watchdog-gpios = <&gpio 35 GPIO_ACTIVE_HIGH>; /* MIO on PAD */
--		kill-gpios = <&gpio 34 GPIO_ACTIVE_LOW>; /* KILL signal - output */
--	};
--
- 	wmmcsdio_fixed: fixedregulator-mmcsdio {
- 		compatible = "regulator-fixed";
- 		regulator-name = "wmmcsdio_fixed";
++#define SDIO_CFG_CTRL				0x0
++#define  SDIO_CFG_CTRL_SDCD_N_TEST_EN		BIT(31)
++#define  SDIO_CFG_CTRL_SDCD_N_TEST_LEV		BIT(30)
++
++#define SDIO_CFG_SD_PIN_SEL			0x44
++#define  SDIO_CFG_SD_PIN_SEL_MASK		0x3
++#define  SDIO_CFG_SD_PIN_SEL_CARD		BIT(1)
++
++#define REG_OFFSET_IN_BITS(reg) ((reg) << 3 & 0x18)
++
+ /*
+  * This driver has only been tested with eMMC devices; SD devices may
+  * not work.
+@@ -47,6 +57,53 @@ struct sdhci_bcmstb_plat {
+ 	struct mmc mmc;
+ };
+ 
++struct sdhci_bcmstb_host {
++	struct sdhci_host host;
++	u32 shadow_cmd;
++	u32 shadow_blk;
++	bool is_cmd_shadowed;
++	bool is_blk_shadowed;
++};
++
++struct sdhci_brcmstb_dev_priv {
++	int (*init)(struct udevice *dev);
++	struct sdhci_ops *ops;
++};
++
++static inline struct sdhci_bcmstb_host *to_bcmstb_host(struct sdhci_host *host)
++{
++	return container_of(host, struct sdhci_bcmstb_host, host);
++}
++
++static int sdhci_brcmstb_init_2712(struct udevice *dev)
++{
++	struct sdhci_host *host = dev_get_priv(dev);
++	void *cfg_regs;
++	u32 reg;
++
++	/* Map in the non-standard CFG registers */
++	cfg_regs = dev_remap_addr_name(dev, "cfg");
++	if (!cfg_regs)
++		return -ENOENT;
++
++	if ((host->mmc->host_caps & MMC_CAP_NONREMOVABLE) ||
++	    (host->mmc->host_caps & MMC_CAP_NEEDS_POLL)) {
++		/* Force presence */
++		reg = readl(cfg_regs + SDIO_CFG_CTRL);
++		reg &= ~SDIO_CFG_CTRL_SDCD_N_TEST_LEV;
++		reg |= SDIO_CFG_CTRL_SDCD_N_TEST_EN;
++		writel(reg, cfg_regs + SDIO_CFG_CTRL);
++	} else {
++		/* Enable card detection line */
++		reg = readl(cfg_regs + SDIO_CFG_SD_PIN_SEL);
++		reg &= ~SDIO_CFG_SD_PIN_SEL_MASK;
++		reg |= SDIO_CFG_SD_PIN_SEL_CARD;
++		writel(reg, cfg_regs + SDIO_CFG_SD_PIN_SEL);
++	}
++
++	return 0;
++}
++
+ static int sdhci_bcmstb_bind(struct udevice *dev)
+ {
+ 	struct sdhci_bcmstb_plat *plat = dev_get_plat(dev);
+@@ -58,10 +115,14 @@ static int sdhci_bcmstb_probe(struct udevice *dev)
+ {
+ 	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(dev);
+ 	struct sdhci_bcmstb_plat *plat = dev_get_plat(dev);
+-	struct sdhci_host *host = dev_get_priv(dev);
++	struct sdhci_bcmstb_host *bcmstb = dev_get_priv(dev);
++	struct sdhci_host *host = &bcmstb->host;
++	struct sdhci_brcmstb_dev_priv *dev_priv;
+ 	fdt_addr_t base;
+ 	int ret;
+ 
++	dev_priv = (struct sdhci_brcmstb_dev_priv *)dev_get_driver_data(dev);
++
+ 	base = dev_read_addr(dev);
+ 	if (base == FDT_ADDR_T_NONE)
+ 		return -EINVAL;
+@@ -75,6 +136,10 @@ static int sdhci_bcmstb_probe(struct udevice *dev)
+ 
+ 	host->mmc = &plat->mmc;
+ 	host->mmc->dev = dev;
++
++	if (dev_priv && dev_priv->ops)
++		host->ops = dev_priv->ops;
++
+ 	ret = sdhci_setup_cfg(&plat->cfg, host,
+ 			      BCMSTB_SDHCI_MAXIMUM_CLOCK_FREQUENCY,
+ 			      BCMSTB_SDHCI_MINIMUM_CLOCK_FREQUENCY);
+@@ -84,10 +149,116 @@ static int sdhci_bcmstb_probe(struct udevice *dev)
+ 	upriv->mmc = &plat->mmc;
+ 	host->mmc->priv = host;
+ 
++	if (dev_priv && dev_priv->init) {
++		ret = dev_priv->init(dev);
++		if (ret)
++			return ret;
++	}
++
+ 	return sdhci_probe(dev);
+ }
+ 
++static u16 sdhci_brcmstb_32bits_readw(struct sdhci_host *host, int reg)
++{
++	struct sdhci_bcmstb_host *bcmstb = to_bcmstb_host(host);
++	u16 word;
++	u32 val;
++
++	if (reg == SDHCI_TRANSFER_MODE && bcmstb->is_cmd_shadowed) {
++		/* Get the saved transfer mode */
++		val = bcmstb->shadow_cmd;
++	} else if ((reg == SDHCI_BLOCK_SIZE || reg == SDHCI_BLOCK_COUNT) &&
++		   bcmstb->is_blk_shadowed) {
++		/* Get the saved block info */
++		val = bcmstb->shadow_blk;
++	} else {
++		val = readl(host->ioaddr + (reg & ~3));
++	}
++
++	word = val >> REG_OFFSET_IN_BITS(reg) & 0xffff;
++	return word;
++}
++
++static u8 sdhci_brcmstb_32bits_readb(struct sdhci_host *host, int reg)
++{
++	u32 val = readl(host->ioaddr + (reg & ~3));
++	u8 byte = val >> REG_OFFSET_IN_BITS(reg) & 0xff;
++	return byte;
++}
++
++/*
++ * BCM2712 unfortunately carries with it a perennial bug with the SD
++ * controller register interface present on previous chips (2711/2709/2708).
++ * Accesses must be dword-sized and a read-modify-write cycle to the
++ * 32-bit registers containing the COMMAND, TRANSFER_MODE, BLOCK_SIZE and
++ * BLOCK_COUNT registers tramples the upper/lower 16 bits of data written.
++ * BCM2712 does not seem to need the extreme delay between each write as
++ * on previous chips, just the serialisation of writes to these registers
++ * in a single 32-bit operation.
++ */
++static void sdhci_brcmstb_32bits_writew(struct sdhci_host *host, u16 val, int reg)
++{
++	struct sdhci_bcmstb_host *bcmstb = to_bcmstb_host(host);
++	u32 word_shift = REG_OFFSET_IN_BITS(reg);
++	u32 mask = 0xffff << word_shift;
++	u32 oldval, newval;
++
++	if (reg == SDHCI_COMMAND) {
++		/* Write the block now as we are issuing a command */
++		if (bcmstb->is_blk_shadowed) {
++			writel(bcmstb->shadow_blk, host->ioaddr + SDHCI_BLOCK_SIZE);
++			bcmstb->is_blk_shadowed = false;
++		}
++		oldval = bcmstb->shadow_cmd;
++		bcmstb->is_cmd_shadowed = false;
++	} else if ((reg == SDHCI_BLOCK_SIZE || reg == SDHCI_BLOCK_COUNT) &&
++		   bcmstb->is_blk_shadowed) {
++		/* Block size and count are stored in shadow reg */
++		oldval = bcmstb->shadow_blk;
++	} else {
++		/* Read reg, all other registers are not shadowed */
++		oldval = readl(host->ioaddr + (reg & ~3));
++	}
++	newval = (oldval & ~mask) | (val << word_shift);
++
++	if (reg == SDHCI_TRANSFER_MODE) {
++		/* Save the transfer mode until the command is issued */
++		bcmstb->shadow_cmd = newval;
++		bcmstb->is_cmd_shadowed = true;
++	} else if (reg == SDHCI_BLOCK_SIZE || reg == SDHCI_BLOCK_COUNT) {
++		/* Save the block info until the command is issued */
++		bcmstb->shadow_blk = newval;
++		bcmstb->is_blk_shadowed = true;
++	} else {
++		/* Command or other regular 32-bit write */
++		writel(newval, host->ioaddr + (reg & ~3));
++	}
++}
++
++static void sdhci_brcmstb_32bits_writeb(struct sdhci_host *host, u8 val, int reg)
++{
++	u32 oldval = readl(host->ioaddr + (reg & ~3));
++	u32 byte_shift = REG_OFFSET_IN_BITS(reg);
++	u32 mask = 0xff << byte_shift;
++	u32 newval = (oldval & ~mask) | (val << byte_shift);
++
++	writel(newval, host->ioaddr + (reg & ~3));
++}
++
++static struct sdhci_ops sdhci_brcmstb_ops_2712 = {
++	.read_b    = sdhci_brcmstb_32bits_readb,
++	.read_w    = sdhci_brcmstb_32bits_readw,
++	.write_w   = sdhci_brcmstb_32bits_writew,
++	.write_b   = sdhci_brcmstb_32bits_writeb,
++};
++
++static const struct sdhci_brcmstb_dev_priv match_priv_2712 = {
++	.init = sdhci_brcmstb_init_2712,
++	.ops = &sdhci_brcmstb_ops_2712,
++};
++
+ static const struct udevice_id sdhci_bcmstb_match[] = {
++	{ .compatible = "brcm,bcm2712-sdhci", .data = (ulong)&match_priv_2712 },
+ 	{ .compatible = "brcm,bcm7425-sdhci" },
+ 	{ .compatible = "brcm,sdhci-brcmstb" },
+ 	{ }
 -- 
-2.36.1
+2.35.3
 
