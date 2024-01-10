@@ -4,79 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E8ACC4707B
-	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 14:13:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D83B2C4707B
+	for <u-boot@archiver.kernel.org>; Wed, 10 Jan 2024 14:13:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 877CF87A7B;
-	Wed, 10 Jan 2024 15:13:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5454E87AEC;
+	Wed, 10 Jan 2024 15:13:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oAhXGPVP";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1704896000;
+	bh=T9Pzonwf+GIww8cGozCfeOwxT4z20GSmJO57WG1zu80=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ZgctX+UHNWhuz76mR1PzdTv/IzfM2k/9aeZWm6UMF51CUhU1d5noZYNE1ZnRe8HAy
+	 FEJ/a5/v+Q7IhPuyvaFcTxzNf1N1i6qxBB4enPRM7rj7McSLxzEfl85knO0gEklRPN
+	 SeaCQjfLq1/57ik1YloTxxngVOzgRQN1jgMDKNKIUCetMQw2x/AlBjWWEONmJDMFfk
+	 hYjmesavYODV2cFUwteP6GUwFs+cL5JbzxaEE82jaO5alduhah7a+LVGVbYhBOcTGo
+	 cRdAJMDkMaIkBs9xIfGlzOwDsFEwAHptdvPBdTc4KvjQwBxaMsghoI86Ahi+WEHcJc
+	 t0YJEV4WeI1Fw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DFF287A7B; Wed, 10 Jan 2024 15:12:59 +0100 (CET)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4624687AF8; Wed, 10 Jan 2024 15:13:18 +0100 (CET)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86D8F87A79
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 15:12:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5960887A79
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 15:13:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-50ec948ad31so2784453e87.2
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 06:12:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704895976; x=1705500776; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=q5cZxNrnMm+kLFMjeuoJp2kdfzQ5cYAOZlFEYVQw1p0=;
- b=oAhXGPVPr6EbC3cxx/3P0Vs8p2M/6uxSMZxpnuDvKc1YuQr2fYdvoRsgPptdp7AUKS
- L6XbWtDvPLh+ZeoQwHhopVbldJWHEzZmzIuTWKuFiPoXX4STuzR+v8Z9jUuxzk5uisvW
- 1RbJqF3XfUfXzCKqsa2g9dHryDbhBiNmbUqZuNfUTppteYHIBPRjFBR2v2wQWOFrRVdS
- Z+qovlL5hFihlrtdE1auyP/gdkW037EuM1uRiQ/767oxMv99YpxNxLEv9S5wr0pglVI4
- sT3pPYPvnPeOgX+a6ccCI88j1TyHubNPRKrPct0xHByS5rz4iZhaiJVyKWupooOxrF5l
- 38Ag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704895976; x=1705500776;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=q5cZxNrnMm+kLFMjeuoJp2kdfzQ5cYAOZlFEYVQw1p0=;
- b=R3qOgI4CXYmesvyLsgHJG8vhBo8mSqx3n1UDJf1785gExVrJNdHUd3O58j3fwUjojH
- F8GphxDmcUhoy9JGRsEukme+wwgIaVee0yi1zWDQlLBvt9hob2UJVZErNXF3PAKBCh59
- 8PuFAPE9DaU7G2fNzwfPSZoCPLiRkk9j6g8y5Hw0AFGsbQmvdwGbPlapa3RB8YdHiw+J
- GGRAjIT34Dd9gJIdxkO3AhQNk2YPqQzzNFZeCKY5h6xZ1Wkb6QdGj9m7rtDm2ve+72b2
- ZSHTLHRaG9gHSGWc5U2C6ZHXx6JG3wogbO3IZA2LvrE56vVF+/w7C33qgpbdp9WCI5fZ
- Efow==
-X-Gm-Message-State: AOJu0YywBAyG8iNzb+FaziKJQcMVLoeoqTCg2pYRQUP9Rvlca559SP+A
- SwP6UuaL7LgbFTcWlWqLZ87r4t5LpOEEbPSjfS0hhItlAsu7EA==
-X-Google-Smtp-Source: AGHT+IFntPMM/zfuU2xmU+0P/S5+kQY+wzd4H8VoC+2mVLEY3lcuvOk83fP8pQAo0lduy8wSipa7kSmw5YljngoKUqs=
-X-Received: by 2002:ac2:5938:0:b0:50e:40bf:e0a4 with SMTP id
- v24-20020ac25938000000b0050e40bfe0a4mr381528lfi.132.1704895975884; Wed, 10
- Jan 2024 06:12:55 -0800 (PST)
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4T98sQ2JZ5z9spQ;
+ Wed, 10 Jan 2024 15:13:14 +0100 (CET)
+Message-ID: <8f7b08b6-87bb-4fea-81b2-c70bb2be1397@denx.de>
+Date: Wed, 10 Jan 2024 15:13:13 +0100
 MIME-Version: 1.0
-References: <20240102221237.1007090-1-raymond.mao@linaro.org>
- <20240102221237.1007090-9-raymond.mao@linaro.org>
-In-Reply-To: <20240102221237.1007090-9-raymond.mao@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 10 Jan 2024 16:12:19 +0200
-Message-ID: <CAC_iWjL9zbNWDFk4x=Q3=PVe-zjv441Y52-npjWYW3Pni8PKLg@mail.gmail.com>
-Subject: Re: [PATCH v4 8/9] fdt: update the document and Kconfig description
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Kevin Chen <kevin_chen@aspeedtech.com>, 
- Sean Anderson <sean.anderson@seco.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Nikhil M Jain <n-jain1@ti.com>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Shiji Yang <yangshiji66@outlook.com>,
- Baruch Siach <baruch@tkos.co.il>, Michal Simek <michal.simek@amd.com>,
- Stefan Roese <sr@denx.de>, Qu Wenruo <wqu@suse.com>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH v3 2/3] arm: mvebu: Espressobin: move network setup into a
+ separate function
+Content-Language: en-US
+To: Robert Marko <robert.marko@sartura.hr>, u-boot@lists.denx.de
+References: <20231129101117.60177-1-robert.marko@sartura.hr>
+ <20231129101117.60177-2-robert.marko@sartura.hr>
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20231129101117.60177-2-robert.marko@sartura.hr>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,59 +69,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I think this isn't needed anymore after
-https://lore.kernel.org/u-boot/CAC_iWjJ6=NjqwcFzVvV4DzMWy5nY_QAeD=vfQrRSjodLbVqroQ@mail.gmail.com/
+On 11/29/23 11:11, Robert Marko wrote:
+> Currently, Esspresobin switch is being setup directly in last_stage_init()
+> which makes it hard to add support for any other board to be setup.
+> 
+> So, lets just move the switch setup code to a separate function and call it
+> if compatible matches, there should be no functional change.
+> 
+> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+> Reviewed-by: Stefan Roese <sr@denx.de>
 
+Applied to u-boot-marvell/master
 
-On Wed, 3 Jan 2024 at 00:14, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> Update the document and Kconfig to describe the behavior of board
-> specific custom functions when CONFIG_OF_BOARD is defined.
->
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Thanks,
+Stefan
+
 > ---
-> Changes in v4
-> - Refine the description.
->
->  doc/develop/devicetree/control.rst | 6 +++---
->  dts/Kconfig                        | 7 +++++--
->  2 files changed, 8 insertions(+), 5 deletions(-)
->
-> diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
-> index cbb65c9b17..2b968a6b01 100644
-> --- a/doc/develop/devicetree/control.rst
-> +++ b/doc/develop/devicetree/control.rst
-> @@ -104,9 +104,9 @@ in u-boot.bin so you can still just flash u-boot.bin onto your board. If you are
->  using CONFIG_SPL_FRAMEWORK, then u-boot.img will be built to include the device
->  tree binary.
->
-> -If CONFIG_OF_BOARD is defined, a board-specific routine will provide the
-> -devicetree at runtime, for example if an earlier bootloader stage creates
-> -it and passes it to U-Boot.
-> +If CONFIG_OF_BOARD is defined, arch-specific routine and board-specific routine
-> +will provide the bloblist and devicetree respectively at runtime, for example if
-> +an earlier bootloader stage creates it and passes it to U-Boot.
->
->  If CONFIG_SANDBOX is defined, then it will be read from a file on
->  startup. Use the -d flag to U-Boot to specify the file to read, -D for the
-> diff --git a/dts/Kconfig b/dts/Kconfig
-> index 00c0aeff89..ac6e1752bb 100644
-> --- a/dts/Kconfig
-> +++ b/dts/Kconfig
-> @@ -110,8 +110,11 @@ config OF_BOARD
->         default y if SANDBOX || OF_HAS_PRIOR_STAGE
->         help
->           If this option is enabled, the device tree is provided at runtime by
-> -         a custom function called board_fdt_blob_setup(). The board must
-> -         implement this function if it wishes to provide special behaviour.
-> +         a board custom function called board_fdt_blob_setup().
-> +         If this option is enabled, bloblist is provided at runtime by an
-> +         arch custom function called xferlist_from_boot_arg().
-> +         An arch or board must implement these functions if it wishes to
-> +         provide special behaviours.
->
->           With this option, the device tree build by U-Boot may be overridden or
->           ignored. See OF_HAS_PRIOR_STAGE.
-> --
-> 2.25.1
->
+> Changes in v2:
+> * Rebase on top of current master and resolve conflicts
+> 
+>   board/Marvell/mvebu_armada-37xx/board.c | 17 ++++++++++++-----
+>   1 file changed, 12 insertions(+), 5 deletions(-)
+> 
+> diff --git a/board/Marvell/mvebu_armada-37xx/board.c b/board/Marvell/mvebu_armada-37xx/board.c
+> index 1471caa9a6..f532486b70 100644
+> --- a/board/Marvell/mvebu_armada-37xx/board.c
+> +++ b/board/Marvell/mvebu_armada-37xx/board.c
+> @@ -301,14 +301,12 @@ static int mii_multi_chip_mode_write(struct udevice *bus, int dev_smi_addr,
+>   	return 0;
+>   }
+>   
+> -/* Bring-up board-specific network stuff */
+> -static int last_stage_init(void)
+> +static int espressobin_last_stage_init(void)
+>   {
+>   	struct udevice *bus;
+>   	ofnode node;
+>   
+> -	if (!CONFIG_IS_ENABLED(DM_MDIO) ||
+> -	    !of_machine_is_compatible("globalscale,espressobin"))
+> +	if (!CONFIG_IS_ENABLED(DM_MDIO))
+>   		return 0;
+>   
+>   	node = ofnode_by_compatible(ofnode_null(), "marvell,orion-mdio");
+> @@ -358,8 +356,17 @@ static int last_stage_init(void)
+>   
+>   	return 0;
+>   }
+> -EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, last_stage_init);
+>   
+> +/* Bring-up board-specific network stuff */
+> +static int last_stage_init(void)
+> +{
+> +
+> +	if (of_machine_is_compatible("globalscale,espressobin"))
+> +		return espressobin_last_stage_init();
+> +
+> +	return 0;
+> +}
+> +EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, last_stage_init);
+>   #endif
+>   
+>   #ifdef CONFIG_OF_BOARD_SETUP
+
+Viele Grüße,
+Stefan Roese
+
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
