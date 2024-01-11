@@ -4,80 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04C52C4707B
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 05:38:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88FD4C47077
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 05:40:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0674187AAB;
-	Thu, 11 Jan 2024 06:37:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E8DE28786C;
+	Thu, 11 Jan 2024 06:40:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WCbU9ER2";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="DRiY2JZo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05CE887A88; Thu, 11 Jan 2024 06:37:55 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 488488792C; Thu, 11 Jan 2024 06:40:17 +0100 (CET)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2416::600])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFB5587823
- for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 06:37:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AD29A87847
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 06:40:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1d4ab4e65aeso38499165ad.0
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 21:37:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704951470; x=1705556270; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Oiu3XdFGrY9VUxnGd/RC4lYGuf7y4wN/HseMcD3PiKg=;
- b=WCbU9ER2wvtT6afh0myuF7rTHZl6bxfDIEfhGpasktam1zCs62grWs80/YKG2i4Y0G
- 0pEkQ+69epWUuirZwytkfPcxl5NpCesnSz25r6shLhALXxQschRkjpONaBm+JRAK+KKT
- ptfOD9ZVM3eaYeDCH71XKzr+jBFh7Xhqrfh+O/3OeJbIALtFJWXKBPCVOUwtEdOq3Xjb
- Bj1U8xw2jgK3pdJJAiCp7u6foT+zcP28L6GBKcHcRGw8/k2K7Owk1+nGxRcquh6UMhaq
- A5vLtjQ2cF3oi6X48376XxxWVCf2Ow8uvAF6v0g8DHZrR9tQJKGrNhRFD6i4DHzAdkCy
- 8Vkw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704951470; x=1705556270;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Oiu3XdFGrY9VUxnGd/RC4lYGuf7y4wN/HseMcD3PiKg=;
- b=OquzWzRE/TBtMEi72K5+/1mArkpko9h0wdaCAQ0CfVUtWMlnaF/9gi7qJkOKxi9k7X
- 9JBf0bhCKmTmAv/S5+0P13Fz0l3MFCzAbq4gZgtBHg/iamwclEgYMj3taJsEIcr+ibHP
- WoCMvDDRtDJQDpbVoL0fI8f9MdDgxX3EQKeZDlhVmJ/vzt8qZbLoHhAYMPV7oEe6h89q
- gyKKpPGzS2fgNeTI7Igr8yO0uMJdzxuhkdj1rvnLjq8tL/wkYozzBjLqOOQndFhmfNPD
- cQ1E+xmzqN1hf8YI0L5sAPyP+Uc7/YH+6l4WVMNKZCPrB8snORLXSbDS2pc7KP9Ain3V
- nUtw==
-X-Gm-Message-State: AOJu0Yz9wTFFJb+PrPd++8oVmQawgYL6Z4ELb8JIpBow+58trqiCVtoU
- +sH6JTPa1OlT+zpbTvmtqURukOBDjhuPyNWBKI/+2mj4wmg=
-X-Google-Smtp-Source: AGHT+IHtEyJO8ZdSktkrMYb66wS8VHa0B+NJQs8KRhWYvSvVIweLrHfnqPV+JShqpQt+Z93hEnHKKw==
-X-Received: by 2002:a17:902:ee51:b0:1d4:381c:a3e5 with SMTP id
- 17-20020a170902ee5100b001d4381ca3e5mr301246plo.66.1704951470298; 
- Wed, 10 Jan 2024 21:37:50 -0800 (PST)
-Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- r19-20020a170902c61300b001d3e9937d92sm273645plr.51.2024.01.10.21.37.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jan 2024 21:37:49 -0800 (PST)
-From: Masahisa Kojima <masahisa.kojima@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [PATCH v3 2/2] efi_loader: support fmp versioning for multi bank
- update
-Date: Thu, 11 Jan 2024 14:35:40 +0900
-Message-Id: <20240111053540.899997-3-masahisa.kojima@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240111053540.899997-1-masahisa.kojima@linaro.org>
-References: <20240111053540.899997-1-masahisa.kojima@linaro.org>
+ spf=fail smtp.mailfrom=love.kumar@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=cD1BX269QnIHmfLlk4W6ApmjoEVXnuMxqXu48XyFm8mNnu2j3S1+dZVEL8wZrwuMLFN/9D9mRFK6AHomAdWZ6LiVMLBxcP3gICF6GrWoaUIaTE0em880aKiACej7EoMn5A4wD9owc+6cyjLDMDLQr+pOywcCyLmYYsvOGortQNeohoPsF1Lsnyb9MI0rxCUmMMleNcNBxfw/NKAjvnazVqNKEsEvJkp4xFqsaLOJ9446N7zf3vE/D4wSt4LiypeLS92vJAnz7kGLzPBbgslrc6Y7VdfglLwx91N0H3IeDw1Xe38fR7QGuaWvSnIe7d6iFrwEzoBFNq0hOKGJMcOcVw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=TvM7sBWhXzVEpqzewy2OBYiYM/0ImIPePCRQo2Ek9Sg=;
+ b=SdSCeL0GqP9sMkjtI0KcviFOuymaOVcjjLEx0yD+zH4NxjDibBAEmENMdJENXMJoMovpLgCiwgXXdEflVtRdgXeuphKhQTfyqa0IxbIWJkKXy3aVdYMOBur9UDAl68aTJbsqjJeOaIHdSUJp3lN/4g995/JrrC7gT138I1TKssu9RQEbv85EfDRnVl+Vb+5PsL9R4+a/TfIIZgfM+nx09malSUGfnFDMqbgpt6C4LLirIcK6N6qEXNb7OS1mnZmsMWuTI24tAOe/fobR2xcyMP85Aw1teAnd3D0XVODIZyIJgSjKgo61MbPv/sPM+DdPhinJtzf9i4tPRPcrOZH4rQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TvM7sBWhXzVEpqzewy2OBYiYM/0ImIPePCRQo2Ek9Sg=;
+ b=DRiY2JZoMXvgQrdgNVN5p4epiZmqNvBJagG2IMb593bXB5wKyBmvDMAHrSxrR6n0IpiFfth5QfOh0TpVn2ft17fMllbvydqrmR6pUw4PLpiG1HHsTcALDSomoqp+RIpjwtXJIv1HSuEQCDTtrh382PvGJhI5sjY9kyIEu2qZ1yE=
+Received: from MN2PR04CA0021.namprd04.prod.outlook.com (2603:10b6:208:d4::34)
+ by CH3PR12MB8483.namprd12.prod.outlook.com (2603:10b6:610:15c::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.23; Thu, 11 Jan
+ 2024 05:40:11 +0000
+Received: from BL6PEPF0001AB54.namprd02.prod.outlook.com
+ (2603:10b6:208:d4:cafe::44) by MN2PR04CA0021.outlook.office365.com
+ (2603:10b6:208:d4::34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7181.19 via Frontend
+ Transport; Thu, 11 Jan 2024 05:40:11 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ BL6PEPF0001AB54.mail.protection.outlook.com (10.167.241.6) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7181.14 via Frontend Transport; Thu, 11 Jan 2024 05:40:10 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Wed, 10 Jan
+ 2024 23:40:09 -0600
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Wed, 10 Jan
+ 2024 23:40:03 -0600
+Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.34 via Frontend
+ Transport; Wed, 10 Jan 2024 23:40:02 -0600
+From: Love Kumar <love.kumar@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <git@xilinx.com>
+Subject: [PATCH] test/py: reset: Add a test for reset command
+Date: Thu, 11 Jan 2024 11:10:01 +0530
+Message-ID: <bef92835c3b6f0992382673a661f8390dfd4d06e.1704949216.git.love.kumar@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB54:EE_|CH3PR12MB8483:EE_
+X-MS-Office365-Filtering-Correlation-Id: 51cf9607-d651-48a9-c8c5-08dc1267c70f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: hmjv34RVZCf2WWJuVOZFv3scVDTCLV8mFdMti/SHZOcODFh9jhaOBIuagzY16VMtt4cxxITsarpwo/WD/1JKZFnMqesYFSKchLWHHQCrrpGo/oU4l3w/tHy5nIfELA6CgJsxGnO4it0i4IaAtfx8oIiRynRDvxnC9neaLzLcksPtoWned7ESLvlF8hIeeUYXvhNaZlJkTGsQL6J/GM6YJHThJLddKs/JCw9ziDnyk7BwQBp7IpIIR9QW+/66EG8O/vUcg1BIyWcZFD2Nm60nYPtXRnfCKnfzDOy4UoYlKEGXoBQS7jANnh17EppaxNL3o6S3Kv2Rerk1wXeT/cT80uA25SeXXNZhpsqqTDyMx3UsMdjFTtViC1pwVOEq+UEenbGUQ0eQAYIUn8ijNMsmSmBmpFHzeovtviKdFBOZgj/HBvQJAP2Uef7HP0q5YA7ZidKcW+KSeyxNp1Pt7zEvpgX68bKhujh8JWJuNYIFDJKCECDb5Dc2g9BU3XkIrq+jyO7RoHUB24xN/dGVac7OJDYlylwe+oHcw6fy3xZXgRKKo8bpL7QJQn/Hm9Uc5Z0W+4T1o+9vJPzA3GE7MYi4nePXuweAI5VYYj/T918ManZA6bf1KNe9YyOGWS0NErwVSinR8Ep1OsyCf8HphLlOdjihXW+RWE7B0ZPRD4OBe0V4YjbkyepkXqH4Eq7xLUkO2Jqnr/sewdfsnOB6xLVyZn0AWHhTgx0viWyLPfnWVgFHXIYRWP03VUNEz/qY1PehLDwks+N52OL/IDS927chSA==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(136003)(376002)(39860400002)(346002)(396003)(230922051799003)(1800799012)(451199024)(82310400011)(64100799003)(186009)(40470700004)(46966006)(36840700001)(2616005)(426003)(478600001)(336012)(107886003)(83380400001)(5660300002)(2906002)(41300700001)(4326008)(44832011)(8936002)(6916009)(47076005)(8676002)(70586007)(316002)(54906003)(70206006)(82740400003)(81166007)(86362001)(36756003)(356005)(36860700001)(26005)(40460700003)(40480700001)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jan 2024 05:40:10.9930 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 51cf9607-d651-48a9-c8c5-08dc1267c70f
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB54.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8483
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,138 +121,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This commit stores the firmware version into the array
-of fmp_state structure to support the fmp versioning
-for multi bank update. The index of the array is identified
-by the bank index.
+Add a test for reset commands which performs resetting of CPU, It does
+COLD reset by default and WARM reset with -w option.
 
-This modification keeps the backward compatibility with
-the existing versioning feature.
-
-Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+Signed-off-by: Love Kumar <love.kumar@amd.com>
 ---
- lib/efi_loader/efi_firmware.c | 75 ++++++++++++++++++++++++++++-------
- 1 file changed, 60 insertions(+), 15 deletions(-)
+ test/py/tests/test_reset.py | 50 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 50 insertions(+)
+ create mode 100644 test/py/tests/test_reset.py
 
-diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-index e558336bc1..9fd13297a6 100644
---- a/lib/efi_loader/efi_firmware.c
-+++ b/lib/efi_loader/efi_firmware.c
-@@ -206,18 +206,10 @@ void efi_firmware_fill_version_info(struct efi_firmware_image_descriptor *image_
- {
- 	u16 varname[13]; /* u"FmpStateXXXX" */
- 	efi_status_t ret;
--	efi_uintn_t size;
--	struct fmp_state var_state = { 0 };
--
--	efi_create_indexed_name(varname, sizeof(varname), "FmpState",
--				fw_array->image_index);
--	size = sizeof(var_state);
--	ret = efi_get_variable_int(varname, &fw_array->image_type_id,
--				   NULL, &size, &var_state, NULL);
--	if (ret == EFI_SUCCESS)
--		image_info->version = var_state.fw_version;
--	else
--		image_info->version = 0;
-+	efi_uintn_t size, expected_size;
-+	uint num_banks = 1;
-+	uint active_index = 0;
-+	struct fmp_state *var_state;
- 
- 	efi_firmware_get_lsv_from_dtb(fw_array->image_index,
- 				      &fw_array->image_type_id,
-@@ -226,6 +218,31 @@ void efi_firmware_fill_version_info(struct efi_firmware_image_descriptor *image_
- 	image_info->version_name = NULL; /* not supported */
- 	image_info->last_attempt_version = 0;
- 	image_info->last_attempt_status = LAST_ATTEMPT_STATUS_SUCCESS;
-+	image_info->version = 0;
+diff --git a/test/py/tests/test_reset.py b/test/py/tests/test_reset.py
+new file mode 100644
+index 000000000000..896918cd8baf
+--- /dev/null
++++ b/test/py/tests/test_reset.py
+@@ -0,0 +1,50 @@
++# SPDX-License-Identifier: GPL-2.0
++# (C) Copyright 2023, Advanced Micro Devices, Inc.
 +
-+	/* get the fw_version */
-+	efi_create_indexed_name(varname, sizeof(varname), "FmpState",
-+				fw_array->image_index);
-+	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE)) {
-+		ret = fwu_get_active_index(&active_index);
-+		if (ret)
-+			return;
++"""
++Note: This test doesn't rely on boardenv_* configuration value but they can
++change test behavior.
 +
-+		num_banks = CONFIG_FWU_NUM_BANKS;
-+	}
++# Setup env__reset_test_skip to True if reset test is not possible or desired
++# and should be skipped.
++env__reset_test_skip = True
 +
-+	size = num_banks * sizeof(*var_state);
-+	expected_size = size;
-+	var_state = calloc(1, size);
-+	if (!var_state)
-+		return;
++# This test will be also skipped if the bootmode is detected to JTAG.
++"""
 +
-+	ret = efi_get_variable_int(varname, &fw_array->image_type_id,
-+				   NULL, &size, var_state, NULL);
-+	if (ret == EFI_SUCCESS && expected_size == size)
-+		image_info->version = var_state[active_index].fw_version;
++import pytest
++import re
++import test_000_version
 +
-+	free(var_state);
- }
- 
- /**
-@@ -361,8 +378,11 @@ efi_status_t efi_firmware_set_fmp_state_var(struct fmp_state *state, u8 image_in
- {
- 	u16 varname[13]; /* u"FmpStateXXXX" */
- 	efi_status_t ret;
-+	uint num_banks = 1;
-+	uint update_bank = 0;
-+	efi_uintn_t size;
- 	efi_guid_t *image_type_id;
--	struct fmp_state var_state = { 0 };
-+	struct fmp_state *var_state;
- 
- 	image_type_id = efi_firmware_get_image_type_id(image_index);
- 	if (!image_type_id)
-@@ -371,19 +391,44 @@ efi_status_t efi_firmware_set_fmp_state_var(struct fmp_state *state, u8 image_in
- 	efi_create_indexed_name(varname, sizeof(varname), "FmpState",
- 				image_index);
- 
-+	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE)) {
-+		ret = fwu_plat_get_update_index(&update_bank);
-+		if (ret)
-+			return EFI_INVALID_PARAMETER;
++def setup_reset_env(u_boot_console):
++    if u_boot_console.config.env.get('env__reset_test_skip', False):
++        pytest.skip('reset test is not enabled')
 +
-+		num_banks = CONFIG_FWU_NUM_BANKS;
-+	}
++    output = u_boot_console.run_command('print modeboot')
++    m = re.search('modeboot=(.+?)boot', output)
++    if not m:
++        pytest.skip('bootmode cannnot be determined')
 +
-+	size = num_banks * sizeof(*var_state);
-+	var_state = calloc(1, size);
-+	if (!var_state)
-+		return EFI_OUT_OF_RESOURCES;
++    bootmode = m.group(1)
++    if bootmode == 'jtag':
++        pytest.skip('skipping reset test due to jtag bootmode')
 +
-+	/*
-+	 * GetVariable may fail, EFI_NOT_FOUND is returned if FmpState
-+	 * variable has not been set yet.
-+	 * Ignore the error here since the correct FmpState variable
-+	 * is set later.
-+	 */
-+	efi_get_variable_int(varname, image_type_id, NULL, &size, var_state,
-+			     NULL);
++def test_reset(u_boot_console):
++    """Test the reset command in non-JTAG bootmode.
++    It does COLD reset, which resets CPU, DDR and peripherals
++    """
++    setup_reset_env(u_boot_console)
++    u_boot_console.run_command('reset', wait_for_reboot=True)
 +
- 	/*
- 	 * Only the fw_version is set here.
- 	 * lowest_supported_version in FmpState variable is ignored since
- 	 * it can be tampered if the file based EFI variable storage is used.
- 	 */
--	var_state.fw_version = state->fw_version;
-+	var_state[update_bank].fw_version = state->fw_version;
- 
-+	size = num_banks * sizeof(*var_state);
- 	ret = efi_set_variable_int(varname, image_type_id,
- 				   EFI_VARIABLE_READ_ONLY |
- 				   EFI_VARIABLE_NON_VOLATILE |
- 				   EFI_VARIABLE_BOOTSERVICE_ACCESS |
- 				   EFI_VARIABLE_RUNTIME_ACCESS,
--				   sizeof(var_state), &var_state, false);
-+				   size, var_state, false);
++    # Checks the u-boot command prompt's functionality after reset
++    test_000_version.test_version(u_boot_console)
 +
-+	free(var_state);
- 
- 	return ret;
- }
++def test_reset_w(u_boot_console):
++    """Test the reset -w command in non-JTAG bootmode.
++    It does WARM reset, which resets CPU but keep DDR/peripherals active.
++    """
++    setup_reset_env(u_boot_console)
++    u_boot_console.run_command('reset -w', wait_for_reboot=True)
++
++    # Checks the u-boot command prompt's functionality after reset
++    test_000_version.test_version(u_boot_console)
 -- 
-2.34.1
+2.25.1
 
