@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5410AC47077
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 13:08:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5F3EC47258
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 13:08:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D679F87AE6;
-	Thu, 11 Jan 2024 14:08:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1CF1B87AEF;
+	Thu, 11 Jan 2024 14:08:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eM375Lyx";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="edpCCfTu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B6D187AAB; Thu, 11 Jan 2024 08:06:52 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id E908A87A3B; Thu, 11 Jan 2024 08:06:53 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CAB387A3B
+ by phobos.denx.de (Postfix) with ESMTPS id AC35287A61
  for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 08:06:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=danishanwar@ti.com
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40B76Y6Y080955;
- Thu, 11 Jan 2024 01:06:34 -0600
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40B76W0O127228;
+ Thu, 11 Jan 2024 01:06:32 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704956794;
- bh=Pi2giqw34blj0ta9b90u6otYmr+oTjwpPyjS9wAOU8M=;
+ s=ti-com-17Q1; t=1704956792;
+ bh=pS0x6qzppQ1eh6xyBXCC61Y+A7dLgo3zysq5GZoRKl8=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=eM375LyxYrcoh/SJ75I3VWqplBwIQls0Fa01oQ0csOYTmougED4EjhiK2BvOgZXgJ
- uU0AWrIUV+7/lOEzDYFZboyfnmXt5Zq83CNMOuGp7oNkOQ3hTChIfdDjV5ez0ypF2F
- rHpw5BPH28Sbqrh9J7+DfGTybPJhanOoJecrLpF4=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40B76XQs001894
+ b=edpCCfTujDGkt6cyYKhID1gJ0AQ4o6IYIwAISPWfI+yw7bqFawV28ktEamGisZ+Yz
+ DQ1LE2msxza1kknBIKKd5+R9SoAQwY2mv8uNT1hc+gMyoN9qfRPFueLELPm7EvBwKT
+ dhKxpaTHV20OnwqkbsOLJVAFmo4aTZRMjCPiB3ic=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40B76WSE001889
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 11 Jan 2024 01:06:33 -0600
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 11 Jan 2024 01:06:32 -0600
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 11
- Jan 2024 01:06:33 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 01:06:31 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 11 Jan 2024 01:06:33 -0600
+ Frontend Transport; Thu, 11 Jan 2024 01:06:31 -0600
 Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40B76XAl090317;
- Thu, 11 Jan 2024 01:06:33 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40B76VvD090278;
+ Thu, 11 Jan 2024 01:06:31 -0600
 Received: from localhost (danish-tpc.dhcp.ti.com [10.24.69.25])
- by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 40B76Wtg017682;
- Thu, 11 Jan 2024 01:06:33 -0600
+ by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 40B76Ufe017676;
+ Thu, 11 Jan 2024 01:06:31 -0600
 From: MD Danish Anwar <danishanwar@ti.com>
 To: Dan Carpenter <dan.carpenter@linaro.org>, Siddharth Vadapalli
  <s-vadapalli@ti.com>, Maxime Ripard <mripard@kernel.org>, Roger Quadros
@@ -72,10 +72,10 @@ To: Dan Carpenter <dan.carpenter@linaro.org>, Siddharth Vadapalli
  Kever Yang <kever.yang@rock-chips.com>, Ramon Fried <rfried.dev@gmail.com>,
  Joe Hershberger <joe.hershberger@ni.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>
-Subject: [RFC PATCH v2 04/15] net: ti: icssg: Add Firmware Interface for ICSSG
- Ethernet driver.
-Date: Thu, 11 Jan 2024 12:36:00 +0530
-Message-ID: <20240111070611.342701-5-danishanwar@ti.com>
+Subject: [RFC PATCH v2 03/15] remoteproc: uclass: Add methods to load firmware
+ to rproc and boot rproc
+Date: Thu, 11 Jan 2024 12:35:59 +0530
+Message-ID: <20240111070611.342701-4-danishanwar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240111070611.342701-1-danishanwar@ti.com>
 References: <20240111070611.342701-1-danishanwar@ti.com>
@@ -100,230 +100,205 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add firmware interface related headers and macros for ICSSG Ethernet
-driver. These macros will be later used by the ICSSG ethernet driver.
+Add APIs to set a firmware_name to a rproc and boot the rproc with the
+same firmware.
+
+Clients can call rproc_set_firmware() API to set firmware_name for a rproc
+whereas rproc_boot() will load the firmware set by rproc_set_firmware() to
+a buffer by calling request_firmware_into_buf(). rproc_boot() will then
+load the firmware file to the remote processor and start the remote
+processor.
+
+Also include "fs-loader.h" and make remoteproc driver select FS_LOADER in
+Kconfig so that we can call request_firmware_into_buf() from remoteproc
+driver.
 
 Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
 ---
- drivers/net/ti/icssg_switch_map.h | 209 ++++++++++++++++++++++++++++++
- 1 file changed, 209 insertions(+)
- create mode 100644 drivers/net/ti/icssg_switch_map.h
+ drivers/remoteproc/Kconfig        |  1 +
+ drivers/remoteproc/rproc-uclass.c | 85 +++++++++++++++++++++++++++++++
+ include/remoteproc.h              | 35 +++++++++++++
+ 3 files changed, 121 insertions(+)
 
-diff --git a/drivers/net/ti/icssg_switch_map.h b/drivers/net/ti/icssg_switch_map.h
-new file mode 100644
-index 0000000000..ba87a44023
---- /dev/null
-+++ b/drivers/net/ti/icssg_switch_map.h
-@@ -0,0 +1,209 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/* Texas Instruments ICSSG Ethernet driver
+diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
+index 781de530af..0fdf1b38ea 100644
+--- a/drivers/remoteproc/Kconfig
++++ b/drivers/remoteproc/Kconfig
+@@ -10,6 +10,7 @@ menu "Remote Processor drivers"
+ # All users should depend on DM
+ config REMOTEPROC
+ 	bool
++	select FS_LOADER
+ 	depends on DM
+ 
+ # Please keep the configuration alphabetically sorted.
+diff --git a/drivers/remoteproc/rproc-uclass.c b/drivers/remoteproc/rproc-uclass.c
+index 28b362c887..76db4157f7 100644
+--- a/drivers/remoteproc/rproc-uclass.c
++++ b/drivers/remoteproc/rproc-uclass.c
+@@ -13,6 +13,7 @@
+ #include <log.h>
+ #include <malloc.h>
+ #include <virtio_ring.h>
++#include <fs_loader.h>
+ #include <remoteproc.h>
+ #include <asm/io.h>
+ #include <dm/device-internal.h>
+@@ -961,3 +962,87 @@ unsigned long rproc_parse_resource_table(struct udevice *dev, struct rproc *cfg)
+ 
+ 	return 1;
+ }
++
++int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name)
++{
++	struct dm_rproc_uclass_pdata *uc_pdata;
++	int len;
++	char *p;
++
++	if (!rproc_dev || !fw_name)
++		return -EINVAL;
++
++	uc_pdata = dev_get_uclass_plat(rproc_dev);
++
++	len = strcspn(fw_name, "\n");
++	if (!len) {
++		debug("can't provide empty string for firmware name\n");
++		return -EINVAL;
++	}
++
++	p = strndup(fw_name, len);
++	if (!p)
++		return -ENOMEM;
++
++	uc_pdata->fw_name = p;
++
++	return 0;
++}
++
++int rproc_boot(struct udevice *rproc_dev, size_t fw_size)
++{
++	struct dm_rproc_uclass_pdata *uc_pdata;
++	struct udevice *fs_loader;
++	void *addr = malloc(fw_size);
++	int core_id, ret = 0;
++	char *firmware;
++	ulong rproc_addr;
++
++	if (!rproc_dev)
++		return -EINVAL;
++
++	if (!addr)
++		return -ENOMEM;
++
++	uc_pdata = dev_get_uclass_plat(rproc_dev);
++	core_id = dev_seq(rproc_dev);
++	firmware = uc_pdata->fw_name;
++
++	if (!firmware) {
++		debug("No firmware set for rproc core %d\n", core_id);
++		return -EINVAL;
++	}
++
++	/* Initialize all rproc cores */
++	rproc_init();
++
++	/* Loading firmware to a given address */
++	ret = get_fs_loader(&fs_loader);
++	if (ret) {
++		debug("could not get fs loader: %d\n", ret);
++		return ret;
++	}
++
++	ret = request_firmware_into_buf(fs_loader, firmware, addr, fw_size, 0);
++	if (ret < 0) {
++		debug("could not request %s: %d\n", firmware, ret);
++		return ret;
++	}
++
++	rproc_addr = (ulong)addr;
++
++	ret = rproc_load(core_id, rproc_addr, ret);
++	if (ret) {
++		debug("failed to load %s to rproc core %d from addr 0x%08lX err %d\n",
++		      uc_pdata->fw_name, core_id, rproc_addr, ret);
++		return ret;
++	}
++
++	ret = rproc_start(core_id);
++	if (ret) {
++		debug("failed to start rproc core %d\n", core_id);
++		return ret;
++	}
++
++	return ret;
++}
+diff --git a/include/remoteproc.h b/include/remoteproc.h
+index a11dc8a9b6..65b0ff7477 100644
+--- a/include/remoteproc.h
++++ b/include/remoteproc.h
+@@ -402,6 +402,7 @@ enum rproc_mem_type {
+  * @name: Platform-specific way of naming the Remote proc
+  * @mem_type: one of 'enum rproc_mem_type'
+  * @driver_plat_data: driver specific platform data that may be needed.
++ * @fw_name: firmware name
+  *
+  * This can be accessed with dev_get_uclass_plat() for any UCLASS_REMOTEPROC
+  * device.
+@@ -411,6 +412,7 @@ struct dm_rproc_uclass_pdata {
+ 	const char *name;
+ 	enum rproc_mem_type mem_type;
+ 	void *driver_plat_data;
++	char *fw_name;
+ };
+ 
+ /**
+@@ -704,6 +706,35 @@ unsigned long rproc_parse_resource_table(struct udevice *dev,
+ struct resource_table *rproc_find_resource_table(struct udevice *dev,
+ 						 unsigned int addr,
+ 						 int *tablesz);
++/**
++ * rproc_set_firmware() - assign a new firmware
++ * @rproc_dev: device for wich new firmware is being assigned
++ * @fw_name: new firmware name to be assigned
 + *
-+ * Copyright (C) 2020 Texas Instruments Incorporated - https://www.ti.com/
++ * This function allows remoteproc drivers or clients to configure a custom
++ * firmware name. The function does not trigger a remote processor boot,
++ * only sets the firmware name used for a subsequent boot.
 + *
++ * This function sets the fw_name field in uclass pdata of the Remote proc
++ *
++ * Return: 0 on success or a negative value upon failure
 + */
++int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name);
 +
-+#ifndef __NET_TI_ICSSG_SWITCH_MAP_H
-+#define __NET_TI_ICSSG_SWITCH_MAP_H
-+
-+/*Time after which FDB entries are checked for aged out values. Value in nanoseconds*/
-+#define FDB_AGEING_TIMEOUT_OFFSET                          0x0014
-+
-+/*default VLAN tag for Host Port*/
-+#define HOST_PORT_DF_VLAN_OFFSET                           0x001C
-+
-+/*Same as HOST_PORT_DF_VLAN_OFFSET*/
-+#define EMAC_ICSSG_SWITCH_PORT0_DEFAULT_VLAN_OFFSET        HOST_PORT_DF_VLAN_OFFSET
-+
-+/*default VLAN tag for P1 Port*/
-+#define P1_PORT_DF_VLAN_OFFSET                             0x0020
-+
-+/*Same as P1_PORT_DF_VLAN_OFFSET*/
-+#define EMAC_ICSSG_SWITCH_PORT1_DEFAULT_VLAN_OFFSET        P1_PORT_DF_VLAN_OFFSET
-+
-+/*default VLAN tag for P2 Port*/
-+#define P2_PORT_DF_VLAN_OFFSET                             0x0024
-+
-+/*Same as P2_PORT_DF_VLAN_OFFSET*/
-+#define EMAC_ICSSG_SWITCH_PORT2_DEFAULT_VLAN_OFFSET        P2_PORT_DF_VLAN_OFFSET
-+
-+/*VLAN-FID Table offset. 4096 VIDs. 2B per VID = 8KB = 0x2000*/
-+#define VLAN_STATIC_REG_TABLE_OFFSET                       0x0100
-+
-+/*VLAN-FID Table offset for EMAC*/
-+#define EMAC_ICSSG_SWITCH_DEFAULT_VLAN_TABLE_OFFSET        VLAN_STATIC_REG_TABLE_OFFSET
-+
-+/*packet descriptor Q reserved memory*/
-+#define PORT_DESC0_HI                                      0x2104
-+
-+/*packet descriptor Q reserved memory*/
-+#define PORT_DESC0_LO                                      0x2F6C
-+
-+/*packet descriptor Q reserved memory*/
-+#define PORT_DESC1_HI                                      0x3DD4
-+
-+/*packet descriptor Q reserved memory*/
-+#define PORT_DESC1_LO                                      0x4C3C
-+
-+/*packet descriptor Q reserved memory*/
-+#define HOST_DESC0_HI                                      0x5AA4
-+
-+/*packet descriptor Q reserved memory*/
-+#define HOST_DESC0_LO                                      0x5F0C
-+
-+/*packet descriptor Q reserved memory*/
-+#define HOST_DESC1_HI                                      0x6374
-+
-+/*packet descriptor Q reserved memory*/
-+#define HOST_DESC1_LO                                      0x67DC
-+
-+/*special packet descriptor Q reserved memory*/
-+#define HOST_SPPD0                                         0x7AAC
-+
-+/*special packet descriptor Q reserved memory*/
-+#define HOST_SPPD1                                         0x7EAC
-+
-+/*_Small_Description_*/
-+#define TIMESYNC_FW_WC_CYCLECOUNT_OFFSET                   0x83EC
-+
-+/*IEP count hi roll over count*/
-+#define TIMESYNC_FW_WC_HI_ROLLOVER_COUNT_OFFSET            0x83F4
-+
-+/*_Small_Description_*/
-+#define TIMESYNC_FW_WC_COUNT_HI_SW_OFFSET_OFFSET           0x83F8
-+
-+/*Set clock descriptor*/
-+#define TIMESYNC_FW_WC_SETCLOCK_DESC_OFFSET                0x83FC
-+
-+/*_Small_Description_*/
-+#define TIMESYNC_FW_WC_SYNCOUT_REDUCTION_FACTOR_OFFSET     0x843C
-+
-+/*_Small_Description_*/
-+#define TIMESYNC_FW_WC_SYNCOUT_REDUCTION_COUNT_OFFSET      0x8440
-+
-+/*_Small_Description_*/
-+#define TIMESYNC_FW_WC_SYNCOUT_START_TIME_CYCLECOUNT_OFFSET 0x8444
-+
-+/*Control variable to generate SYNC1*/
-+#define TIMESYNC_FW_WC_ISOM_PIN_SIGNAL_EN_OFFSET           0x844C
-+
-+/*SystemTime Sync0 periodicity*/
-+#define TIMESYNC_FW_ST_SYNCOUT_PERIOD_OFFSET               0x8450
-+
-+/*pktTxDelay for P1 = link speed dependent p1 mac delay + p1 phy delay*/
-+#define TIMESYNC_FW_WC_PKTTXDELAY_P1_OFFSET                0x8454
-+
-+/*pktTxDelay for P2 = link speed dependent p2 mac delay + p2 phy delay*/
-+#define TIMESYNC_FW_WC_PKTTXDELAY_P2_OFFSET                0x8458
-+
-+/*Set clock operation done signal for next task*/
-+#define TIMESYNC_FW_SIG_PNFW_OFFSET                        0x845C
-+
-+/*Set clock operation done signal for next task*/
-+#define TIMESYNC_FW_SIG_TIMESYNCFW_OFFSET                  0x8460
-+
-+/*New list is copied at this time*/
-+#define TAS_CONFIG_CHANGE_TIME                             0x000C
-+
-+/*config change error counter*/
-+#define TAS_CONFIG_CHANGE_ERROR_COUNTER                    0x0014
-+
-+/*TAS List update pending flag*/
-+#define TAS_CONFIG_PENDING                                 0x0018
-+
-+/*TAS list update trigger flag*/
-+#define TAS_CONFIG_CHANGE                                  0x0019
-+
-+/*List length for new TAS schedule*/
-+#define TAS_ADMIN_LIST_LENGTH                              0x001A
-+
-+/*Currently active TAS list index*/
-+#define TAS_ACTIVE_LIST_INDEX                              0x001B
-+
-+/*Cycle time for the new TAS schedule*/
-+#define TAS_ADMIN_CYCLE_TIME                               0x001C
-+
-+/*Cycle counts remaining till the TAS list update*/
-+#define TAS_CONFIG_CHANGE_CYCLE_COUNT                      0x0020
-+
-+/*Base Flow ID for sending packets to Host for Slice0*/
-+#define PSI_L_REGULAR_FLOW_ID_BASE_OFFSET                  0x0024
-+
-+/*Same as PSI_L_REGULAR_FLOW_ID_BASE_OFFSET*/
-+#define EMAC_ICSSG_SWITCH_PSI_L_REGULAR_FLOW_ID_BASE_OFFSET PSI_L_REGULAR_FLOW_ID_BASE_OFFSET
-+
-+/*Base Flow ID for sending mgmt and Tx TS to Host for Slice0*/
-+#define PSI_L_MGMT_FLOW_ID_OFFSET                          0x0026
-+
-+/*Same as PSI_L_MGMT_FLOW_ID_OFFSET*/
-+#define EMAC_ICSSG_SWITCH_PSI_L_MGMT_FLOW_ID_BASE_OFFSET   PSI_L_MGMT_FLOW_ID_OFFSET
-+
-+/*Queue number for Special packets written here*/
-+#define SPL_PKT_DEFAULT_PRIORITY                           0x0028
-+
-+/*Express Preemptible Queue Mask*/
-+#define EXPRESS_PRE_EMPTIVE_Q_MASK                         0x0029
-+
-+/*Port1/Port2 Default Queue number for untagged packets, only 1B is used*/
-+#define QUEUE_NUM_UNTAGGED                                 0x002A
-+
-+/*Stores the table used for priority regeneration. 1B per PCP/Queue*/
-+#define PORT_Q_PRIORITY_REGEN_OFFSET                       0x002C
-+
-+/* For marking Packet as priority/express (this feature is disabled) or
-+ * cut-through/S&F.
++/**
++ * rproc_boot() - boot a remote processor
++ * @rproc_dev: rproc device to boot
++ * @fw_size: Size of the memory to allocate for firmeware
++ *
++ * Boot a remote processor (i.e. load its firmware, power it on, ...).
++ *
++ * This function first loads the firmware set in the uclass pdata of Remote
++ * processor to a buffer and then loads firmware to the remote processor
++ * using rproc_load().
++ *
++ * Return: 0 on success, and an appropriate error value otherwise
 + */
-+#define EXPRESS_PRE_EMPTIVE_Q_MAP                          0x0034
-+
-+/*Stores the table used for priority mapping. 1B per PCP/Queue*/
-+#define PORT_Q_PRIORITY_MAPPING_OFFSET                     0x003C
-+
-+/*TAS gate mask for windows list0*/
-+#define TAS_GATE_MASK_LIST0                                0x0100
-+
-+/*TAS gate mask for windows list1*/
-+#define TAS_GATE_MASK_LIST1                                0x0350
-+
-+/*Memory to Enable/Disable Preemption on TX side*/
-+#define PRE_EMPTION_ENABLE_TX                              0x05A0
-+
-+/*Active State of Preemption on TX side*/
-+#define PRE_EMPTION_ACTIVE_TX                              0x05A1
-+
-+/*Memory to Enable/Disable Verify State Machine Preemption*/
-+#define PRE_EMPTION_ENABLE_VERIFY                          0x05A2
-+
-+/*Verify Status of State Machine*/
-+#define PRE_EMPTION_VERIFY_STATUS                          0x05A3
-+
-+/*Non Final Fragment Size supported by Link Partner*/
-+#define PRE_EMPTION_ADD_FRAG_SIZE_REMOTE                   0x05A4
-+
-+/*Non Final Fragment Size supported by Firmware*/
-+#define PRE_EMPTION_ADD_FRAG_SIZE_LOCAL                    0x05A6
-+
-+/*Time in ms the State machine waits for respond packet*/
-+#define PRE_EMPTION_VERIFY_TIME                            0x05A8
-+
-+/*Memory used for R30 related management commands*/
-+#define MGR_R30_CMD_OFFSET                                 0x05AC
-+
-+/*HW Buffer Pool0 base address*/
-+#define BUFFER_POOL_0_ADDR_OFFSET                          0x05BC
-+
-+/*16B for Host Egress MSMC Q (Pre-emptible) context*/
-+#define HOST_RX_Q_PRE_CONTEXT_OFFSET                       0x0684
-+
-+/*Buffer for 8 FDB entries to be added by 'Add Multiple FDB entries IOCTL*/
-+#define FDB_CMD_BUFFER                                     0x0894
-+
-+/*16B for Host Egress MSMC Q (Express) context*/
-+#define HOST_RX_Q_EXP_CONTEXT_OFFSET                       0x0940
-+
-+/*Start of 32 bits PA_STAT counters*/
-+#define PA_STAT_32b_START_OFFSET                           0x0080
-+
-+#endif
-+/* __NET_TI_ICSSG_SWITCH_MAP_H */
++int rproc_boot(struct udevice *rproc_dev, size_t fw_size);
+ #else
+ static inline int rproc_init(void) { return -ENOSYS; }
+ static inline int rproc_dev_init(int id) { return -ENOSYS; }
+@@ -743,6 +774,10 @@ static inline int rproc_elf_load_rsc_table(struct udevice *dev, ulong fw_addr,
+ 					   ulong fw_size, ulong *rsc_addr,
+ 					   ulong *rsc_size)
+ { return -ENOSYS; }
++static inline int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name)
++{ return -ENOSYS; }
++static inline int rproc_boot(struct udevice *rproc_dev, size_t fw_size)
++{ return -ENOSYS; }
+ #endif
+ 
+ #endif	/* _RPROC_H_ */
 -- 
 2.34.1
 
