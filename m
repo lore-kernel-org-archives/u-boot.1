@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1F6AC47258
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 13:11:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BEEFC47258
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 13:11:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8B3D87B47;
-	Thu, 11 Jan 2024 14:08:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 86F2687B4D;
+	Thu, 11 Jan 2024 14:08:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OSnuD+oC";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="k043thoY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 539DB87847; Thu, 11 Jan 2024 08:07:12 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 3D2DF8792C; Thu, 11 Jan 2024 08:07:14 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 073B887AB6
- for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 08:07:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A8189876EA
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 08:07:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=danishanwar@ti.com
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40B76sZO072505;
- Thu, 11 Jan 2024 01:06:54 -0600
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40B76uDN127291;
+ Thu, 11 Jan 2024 01:06:56 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704956814;
- bh=Fid3o+LulWJ085fAwe+SrrojtGnOIwgvFfgYxy7Q83w=;
+ s=ti-com-17Q1; t=1704956817;
+ bh=xolAsSVEw4wDwHrX6y8AXxWTvqain4wJl3wkGTPVRK4=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=OSnuD+oC3pupssgbv9IWqk8PuCa3dNVd+yHRaMAVb4kHjRKo40jFMnX36OpHw3rSo
- htxt59pWb0e8UmkCr8j3m9KXwfUxk84sIBEYRSS9scx9DPqA6s7NbnuK1PPRTjd1cj
- Qp0TzslmF7HqKpaxAMfFehhhy4h0zEiVruNgGm6E=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40B76s9Q039315
+ b=k043thoYQ20hBjYYpwo2AAjS79DMUjtUcbPTPzNcOXWy6hVQkZZ2DEsHCgWJ71tK6
+ o164qeqb7lb3sUYcDNFlVNbi3BSmCFjPMp8/GnGCQMXMuB7lxMI+m4RSeRC6vCmh7U
+ Fh3k0fcdIYHfXgW788DG5BvUWlNOqvd4OXtgC53k=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40B76uc6039399
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 11 Jan 2024 01:06:54 -0600
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 11
- Jan 2024 01:06:53 -0600
-Received: from fllvsmtp7.itg.ti.com (10.64.40.31) by DLEE104.ent.ti.com
+ Thu, 11 Jan 2024 01:06:56 -0600
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE104.ent.ti.com
  (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 11
+ Jan 2024 01:06:56 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 11 Jan 2024 01:06:53 -0600
+ Frontend Transport; Thu, 11 Jan 2024 01:06:56 -0600
 Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
- by fllvsmtp7.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40B76rI4014594;
- Thu, 11 Jan 2024 01:06:53 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40B76ut5086576;
+ Thu, 11 Jan 2024 01:06:56 -0600
 Received: from localhost (danish-tpc.dhcp.ti.com [10.24.69.25])
- by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 40B76qUJ017723;
- Thu, 11 Jan 2024 01:06:53 -0600
+ by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 40B76sFA017729;
+ Thu, 11 Jan 2024 01:06:55 -0600
 From: MD Danish Anwar <danishanwar@ti.com>
 To: Dan Carpenter <dan.carpenter@linaro.org>, Siddharth Vadapalli
  <s-vadapalli@ti.com>, Maxime Ripard <mripard@kernel.org>, Roger Quadros
@@ -72,10 +72,10 @@ To: Dan Carpenter <dan.carpenter@linaro.org>, Siddharth Vadapalli
  Kever Yang <kever.yang@rock-chips.com>, Ramon Fried <rfried.dev@gmail.com>,
  Joe Hershberger <joe.hershberger@ni.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>
-Subject: [RFC PATCH v2 14/15] board: ti: am65x: Add check for k3-am654-icssg2
- in board_fit_config_match()
-Date: Thu, 11 Jan 2024 12:36:10 +0530
-Message-ID: <20240111070611.342701-15-danishanwar@ti.com>
+Subject: [RFC PATCH v2 15/15] board: ti: am65x: Set fw_storage_interface and
+ fw_dev_part ENVs
+Date: Thu, 11 Jan 2024 12:36:11 +0530
+Message-ID: <20240111070611.342701-16-danishanwar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240111070611.342701-1-danishanwar@ti.com>
 References: <20240111070611.342701-1-danishanwar@ti.com>
@@ -100,36 +100,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When CONFIG_TI_ICSSG_PRUETH is enabled, add config name check for the
-icssg2 overlay in board_fit_config_match() API.
+When ICSSG driver is enabled (CONFIG_TI_ICSSG_PRUETH=y) set
+fw_storage_interface and fw_dev_part env variables.
+
+These variables need be set appropriately in order to load differnet
+ICSSG firmwares needed for ICSSG driver. By default the storage
+interface is mmc and the partition is 1:2. User can modify this based on
+their needs.
 
 Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
 ---
- board/ti/am65x/evm.c | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+ board/ti/am65x/am65x.env | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/board/ti/am65x/evm.c b/board/ti/am65x/evm.c
-index df209021c1..0b661f0084 100644
---- a/board/ti/am65x/evm.c
-+++ b/board/ti/am65x/evm.c
-@@ -90,10 +90,13 @@ int dram_init_banksize(void)
- #ifdef CONFIG_SPL_LOAD_FIT
- int board_fit_config_name_match(const char *name)
- {
--#ifdef CONFIG_TARGET_AM654_A53_EVM
--	if (!strcmp(name, "k3-am654-base-board"))
--		return 0;
--#endif
-+	if (IS_ENABLED(CONFIG_TI_ICSSG_PRUETH)) {
-+		if (!strcmp(name, "k3-am654-icssg2"))
-+			return 0;
-+	} else {
-+		if (!strcmp(name, "k3-am654-base-board"))
-+			return 0;
-+	}
+diff --git a/board/ti/am65x/am65x.env b/board/ti/am65x/am65x.env
+index 286b9c300c..5d6b98b87c 100644
+--- a/board/ti/am65x/am65x.env
++++ b/board/ti/am65x/am65x.env
+@@ -30,3 +30,7 @@ get_fdt_ubi=ubifsload ${fdtaddr} ${bootdir}/${name_fdt}
+ args_ubi=setenv bootargs console=${console} ${optargs}
+ rootfstype=ubifs root=ubi0:rootfs rw ubi.mtd=ospi.rootfs
  
- 	return -1;
- }
++#if CONFIG_TI_ICSSG_PRUETH
++fw_storage_interface=mmc
++fw_dev_part=1:2
++#endif
 -- 
 2.34.1
 
