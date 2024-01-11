@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AA67C47077
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 14:39:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88BC8C47077
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 15:54:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18941877C8;
-	Thu, 11 Jan 2024 15:39:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 95B718749F;
+	Thu, 11 Jan 2024 16:54:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bKlmVlha";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XRp6/uYC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D69F87885; Thu, 11 Jan 2024 15:39:44 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 09CC68749F; Thu, 11 Jan 2024 16:54:02 +0100 (CET)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0E458765B
- for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 15:39:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD36087250
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 16:53:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-40e5f615a32so6616945e9.1
- for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 06:39:41 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-7831b3a48e7so315273485a.3
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 07:53:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704983981; x=1705588781; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TzTzR5VNiT0R5wEPYpe09GvA11cdNr11PvYP0OyMppI=;
- b=bKlmVlhaG/RTMuRbxSY/Gmu41zYMmVadbtXTrRWDh137EAp5ZgoVPGiCdCYYCmChOC
- FpWspjBOnFIxUD3Fp5K3DVcWtZitY3ZSfZB3wg5o3LraFKc1TUUokuUy7r6bOGs2mGjs
- 74Cogu07g5YcuBy9SIfvqRqP6ZbOQ96LAc395NwzSqIzmjOcyZ8QaWYfoFEK2PGr/vK+
- taPs+6Ixai2IaRc1YsEvE6aF83X/TxFSwHhGJT/YM3r8gbyBY5eEvlrd+ulBvIRrZfCQ
- XjRfr7cE6itAvckibl+S6mePh/BxlbmrioxYcYkS30ATCD+J5tnUzrEqeSm31AJJp7+S
- h9jw==
+ d=konsulko.com; s=google; t=1704988438; x=1705593238; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=6FRLRnuuY/v+cUvWoEU0FxOs/oZbw07SuzYT1mqY7Tk=;
+ b=XRp6/uYCQwYsaHGTNY0jSgDjS67oU6oKybxEMZtZHJby4vpjFro+r3fIV8/RwdZTsC
+ 7UjVHd/obGEfwfMI2XUl+OxuB+ZUCrlE0iJTGIWU2IgMClTRH/yhfa4uFXBT5XJbO21B
+ 7IFqXO7dgugQfAGfFrg06FD97ny1WOGxRxFpw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704983981; x=1705588781;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TzTzR5VNiT0R5wEPYpe09GvA11cdNr11PvYP0OyMppI=;
- b=cwjGi3yTYfAEmn5bg/6v8YEPM35S1s5bjINNCRHFV16sctlsxBRdDnqw4tybg93kx0
- j6FE+QE73sFaDYo/TzGBO0tmWUayV1oCFcFsN2cd/ZAZPbR/oqRXeNhu8aAUt2l9cgwN
- mgmpPFD17ZLLOZVCXx4N0O8IZrwn/irAlAFdu+DJvPtjOF7NpP1ZVTrYQm4SH7hwy2G4
- l2Ecq3z4tQ5sfmiW6gOiu4yL7QIigQMl0c3sWUheMJAeWoEy58cYxh4ajGAdIUiS4PnA
- wrx1zmL65JZ0fObYh9jbJRHaH50TuP1jlem4jrVd9ykwNbZzOqqfjyqK34owxTGmGq9L
- bT2g==
-X-Gm-Message-State: AOJu0Yx3UK2bIlPxJMyCXjuqpLSGej0x2nWRtG2xbg+2BzVTu4mU/go/
- oNGimLrUOOlvMAlN1vs1NKzGJIfh+XwW0LOCL8y4ttUa/Pg=
-X-Google-Smtp-Source: AGHT+IGuCuFcB7KcOX9OMPaY4mBVTVw6fLKfCna/g99fhTl2dERRNSVR5pc9wB40va6aZu75sHV2iw==
-X-Received: by 2002:a05:600c:4e14:b0:40e:567f:38d7 with SMTP id
- b20-20020a05600c4e1400b0040e567f38d7mr265434wmq.225.1704983981314; 
- Thu, 11 Jan 2024 06:39:41 -0800 (PST)
-Received: from hades.. (ppp089210121239.access.hol.gr. [89.210.121.239])
- by smtp.gmail.com with ESMTPSA id
- j25-20020a1709066dd900b00a26af4d96c6sm655062ejt.4.2024.01.11.06.39.40
+ d=1e100.net; s=20230601; t=1704988438; x=1705593238;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6FRLRnuuY/v+cUvWoEU0FxOs/oZbw07SuzYT1mqY7Tk=;
+ b=WGH6YePSLbItL1EDx0jgJGKz2mIO/qUg9y3Wy7gvlapkqmlYSfQDHgkGUYF77Ck0v3
+ Bw1ky+PDk9TqR1xBGTSyIvw/g9lZ2ykj09UAqyM6oZxe9r5IFgnQLv5lhQumVP3vOlze
+ sFz4bAFW2mKg8kxUKHG9N+rlN0Kc3JzDWJAuARuHZTj19vXuZDGlO/tsNneJg3yiK1AY
+ nl8GLLWCvq3FV1TCxO1cv7suby/DXbYtLG5p8ZxdR987X2tvR9a29sYnDfesXb7WmUf4
+ 3HU9iDLQs8tP9Snb0o1SLzQWZtnBvOK8GUI9DZ5aJxx2kbUZ8ZPTeB6/N7LjrZ+APAvP
+ ncyA==
+X-Gm-Message-State: AOJu0Yw1kxtpcgglZrwR+QdmfdJSaiIdGlazs3qhSc18Kgh8Jxnl2wPe
+ +9VruLwZhTjZtOtQnp6WfMNs6hL+XJlvVA==
+X-Google-Smtp-Source: AGHT+IFRZa3KvO26BVhgNI19n9jPujC+9bqRhNE+D6qcQgb0pcZhYbYctIgGJVx6xrshwwEGOpFM5g==
+X-Received: by 2002:a37:ac05:0:b0:783:4638:e790 with SMTP id
+ e5-20020a37ac05000000b007834638e790mr369453qkm.61.1704988438450; 
+ Thu, 11 Jan 2024 07:53:58 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
+ [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
+ bq43-20020a05620a46ab00b00783244c7a95sm423066qkb.24.2024.01.11.07.53.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jan 2024 06:39:41 -0800 (PST)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: u-boot@lists.denx.de,
-	trini@konsulko.com
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Peter Robinson <pbrobinson@gmail.com>
-Subject: [PATCH 2/2] smbios: fix matching issues for table types
-Date: Thu, 11 Jan 2024 16:39:36 +0200
-Message-Id: <20240111143936.983448-2-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.37.2
-In-Reply-To: <20240111143936.983448-1-ilias.apalodimas@linaro.org>
-References: <20240111143936.983448-1-ilias.apalodimas@linaro.org>
+ Thu, 11 Jan 2024 07:53:57 -0800 (PST)
+Date: Thu, 11 Jan 2024 10:53:55 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Love Kumar <love.kumar@amd.com>
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
+Subject: Re: [PATCH] test/py: net_boot: Add test cases for net boot
+Message-ID: <20240111155355.GI1610741@bill-the-cat>
+References: <46d98c2d18f3577b755b9f0af886307f0d91849b.1704783802.git.love.kumar@amd.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="rpzkdW/b1g/EZh8q"
+Content-Disposition: inline
+In-Reply-To: <46d98c2d18f3577b755b9f0af886307f0d91849b.1704783802.git.love.kumar@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,121 +90,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-commit 738b34668f28 ("smbios: Fallback to the default DT if sysinfo nodes are missing")
-allowed the code to fallback and fill in SMBIOS tables with properties
-from the compatible and product nodes of the DT, in case the
-'smbios,sysinfo' node is missing.
-That works fine for Type1/2 tables, but for other types we need to
-match the smbios,sysinfo subnode name as well. So add it to the
-smbios_ctx and check it during the sysinfo <-> DT mathcing
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
-We still lack selftests for smbios code.
-Heinrich started an effort here [0]. I'll update that once his series gets merged
+--rpzkdW/b1g/EZh8q
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-[0]
-https://lore.kernel.org/u-boot/20231223004429.247301-4-xypron.glpk@gmx.de/#t
+On Tue, Jan 09, 2024 at 12:33:36PM +0530, Love Kumar wrote:
 
- lib/smbios.c | 45 ++++++++++++++++++++++++++++-----------------
- 1 file changed, 28 insertions(+), 17 deletions(-)
+> Add tests for booting image using tftpboot/pxe boot commands, tftpboot
+> boot case loads the FIT image into DDR and boots using bootm command
+> whereas pxe boot cases downloads the pxe configuration file from the
+> TFTP server and interprets it to boot the images mentioned in the pxe
+> configurations file.
+>=20
+> Signed-off-by: Love Kumar <love.kumar@amd.com>
+> ---
+>  test/py/tests/test_net_boot.py | 371 +++++++++++++++++++++++++++++++++
+>  1 file changed, 371 insertions(+)
+>  create mode 100644 test/py/tests/test_net_boot.py
 
-diff --git a/lib/smbios.c b/lib/smbios.c
-index 47db410a2141..64e65bfd6f93 100644
---- a/lib/smbios.c
-+++ b/lib/smbios.c
-@@ -54,32 +54,38 @@ DECLARE_GLOBAL_DATA_PTR;
-  *
-  */
- struct map_sysinfo {
-+	const char *si_node;
- 	const char *si_str;
- 	const char *dt_str;
- 	int max;
- };
+Can you expand a little more on how far this test goes? Does it actually
+get as far as a login prompt or ? Thanks.
 
- static const struct map_sysinfo sysinfo_to_dt[] = {
--	{ .si_str = "product", .dt_str = "model", 2 },
--	{ .si_str = "manufacturer", .dt_str = "compatible", 1 },
-+	{ .si_node = "system", .si_str = "product", .dt_str = "model", 2 },
-+	{ .si_node = "system", .si_str = "manufacturer", .dt_str = "compatible", 1 },
-+	{ .si_node = "baseboard", .si_str = "product", .dt_str = "model", 2 },
-+	{ .si_node = "baseboard", .si_str = "manufacturer", .dt_str = "compatible", 1 },
- };
+--=20
+Tom
 
- /**
-  * struct smbios_ctx - context for writing SMBIOS tables
-  *
-- * @node:	node containing the information to write (ofnode_null() if none)
-- * @dev:	sysinfo device to use (NULL if none)
-- * @eos:	end-of-string pointer for the table being processed. This is set
-- *		up when we start processing a table
-- * @next_ptr:	pointer to the start of the next string to be added. When the
-- *		table is nopt empty, this points to the byte after the \0 of the
-- *		previous string.
-- * @last_str:	points to the last string that was written to the table, or NULL
-- *		if none
-+ * @node:		node containing the information to write (ofnode_null()
-+ *			if none)
-+ * @dev:		sysinfo device to use (NULL if none)
-+ * @subnode_name:	sysinfo subnode_name. Used for DT fallback
-+ * @eos:		end-of-string pointer for the table being processed.
-+ *			This is set up when we start processing a table
-+ * @next_ptr:		pointer to the start of the next string to be added.
-+ *			When the table is not empty, this points to the byte
-+ *			after the \0 of the previous string.
-+ * @last_str:		points to the last string that was written to the table,
-+ *			or NULL if none
-  */
- struct smbios_ctx {
- 	ofnode node;
- 	struct udevice *dev;
-+	const char *subnode_name;
- 	char *eos;
- 	char *next_ptr;
- 	char *last_str;
-@@ -108,12 +114,13 @@ struct smbios_write_method {
- 	const char *subnode_name;
- };
+--rpzkdW/b1g/EZh8q
+Content-Type: application/pgp-signature; name="signature.asc"
 
--static const struct map_sysinfo *convert_sysinfo_to_dt(const char *si)
-+static const struct map_sysinfo *convert_sysinfo_to_dt(const char *node, const char *si)
- {
- 	int i;
+-----BEGIN PGP SIGNATURE-----
 
- 	for (i = 0; i < ARRAY_SIZE(sysinfo_to_dt); i++) {
--		if (!strcmp(si, sysinfo_to_dt[i].si_str))
-+		if (node && !strcmp(node, sysinfo_to_dt[i].si_node) &&
-+		    !strcmp(si, sysinfo_to_dt[i].si_str))
- 			return &sysinfo_to_dt[i];
- 	}
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWgDxAACgkQFHw5/5Y0
+tyxdowwAkE0qvp5Ivxh1N1luRU6AIYIlfXyKIhyD9TVluTkQBuWWAUTkP5QMeSuO
+zLeGapVLuruqFb63/hCWSPndxuNH7d/hCSf9IgRsOtAuO6SzLNJMQiQ1xUxNgyPe
+9c7wvq8hQ6LPMtfmlolEcZa9zAu4l7IarqI1zGjqzCvirpgsp4lFQHj8hMgeKb1w
+cbQoVgwfzYj37laD35Pphqy5vkIJYf+1pEYnTjHiiBBJwE6uVlNiw/OnfToITuP2
+VyYlLC1kpvCv1T1uLxITm91MUydcScxOaVWx7bwGsNySR49/nLUAarn+93XIoy6B
+WyYIhstR3Jx8hDem6paD+sftrasn1vIT/mVggObCJbOp2/ue7Hx6muhMcdi9D5I7
+B2Sa7qoPmRrhuCRA+5SsnBHifkyUYdLDqpvhapapqIjD8/Y5CQaxz6FzXRvs6PQY
+GN9p32HCL3SfGq0078V+wrHLtxEt1Rkl5OPjcBvcMsfjICyQTdKkg5JD7dX4uY/g
+tignHcUA
+=3ab6
+-----END PGP SIGNATURE-----
 
-@@ -233,7 +240,7 @@ static int smbios_add_prop_si(struct smbios_ctx *ctx, const char *prop,
- 		} else {
- 			const struct map_sysinfo *nprop;
-
--			nprop = convert_sysinfo_to_dt(prop);
-+			nprop = convert_sysinfo_to_dt(ctx->subnode_name, prop);
- 			get_str_from_dt(nprop, str_dt, sizeof(str_dt));
- 			str = (const char *)str_dt;
- 		}
-@@ -574,9 +581,13 @@ ulong write_smbios_table(ulong addr)
- 		int tmp;
-
- 		method = &smbios_write_funcs[i];
--		if (IS_ENABLED(CONFIG_OF_CONTROL) && method->subnode_name)
--			ctx.node = ofnode_find_subnode(parent_node,
--						       method->subnode_name);
-+		ctx.subnode_name = NULL;
-+		if (method->subnode_name) {
-+			ctx.subnode_name = method->subnode_name;
-+			if (IS_ENABLED(CONFIG_OF_CONTROL))
-+				ctx.node = ofnode_find_subnode(parent_node,
-+							       method->subnode_name);
-+		}
- 		tmp = method->write((ulong *)&addr, handle++, &ctx);
-
- 		max_struct_size = max(max_struct_size, tmp);
---
-2.37.2
-
+--rpzkdW/b1g/EZh8q--
