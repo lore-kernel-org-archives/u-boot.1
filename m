@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBCCCC47258
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 13:10:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D68B2C47077
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 13:10:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E69A287B35;
-	Thu, 11 Jan 2024 14:08:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 85FF087B2D;
+	Thu, 11 Jan 2024 14:08:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="zAiunots";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HJhKTZck";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAC1E87847; Thu, 11 Jan 2024 08:07:09 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 6E01F87A77; Thu, 11 Jan 2024 08:07:10 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B842187A88
+ by phobos.denx.de (Postfix) with ESMTPS id B82B787A7F
  for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 08:07:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=danishanwar@ti.com
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40B76o4k080982;
- Thu, 11 Jan 2024 01:06:50 -0600
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40B76qnt049557;
+ Thu, 11 Jan 2024 01:06:52 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1704956810;
- bh=cFe0Vds5H+fF5JxWCqfmHrSmVzjN2K6YHKYk0JKMDV8=;
+ s=ti-com-17Q1; t=1704956812;
+ bh=qhirBzMipDiVn0pCPhiyor6khX+AZ0gYFXQL7TJIE5A=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=zAiunotsc77ZfA2wh6Q1XMwh9QreNSM+qy2XRcyKd9xCQALFPQCi3l8403ZbXDccZ
- gOpblaoLa5IUZJJD8ufOo8GSEiaAEriXt8DCIDhRhca/9N/+8lQf3K30WPT5wUKUBp
- n3sd+wi+idnExLzI8uO/udKesu0B1uvJvJ/Yh/8s=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40B76oeW002140
+ b=HJhKTZck/i7SClVJPgOQMA1xVW6yFVuXzo6W9o52Tdg+qs7QQlnhDq9LApdQeDkr5
+ 0cPGC4Z5pnCUlPFSpfVdVQ7plyUwSbpNV1jl9zkxImBCP3dhdET/7R5d+ox2k2kjob
+ 1Mb4PcWAAZxsqWfg6xEP1qmyOiBmsMLH7Fc9SUtY=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40B76q2q002161
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 11 Jan 2024 01:06:50 -0600
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 11 Jan 2024 01:06:52 -0600
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 11
- Jan 2024 01:06:49 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 01:06:51 -0600
+Received: from fllvsmtp8.itg.ti.com (10.64.41.158) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 11 Jan 2024 01:06:49 -0600
+ Frontend Transport; Thu, 11 Jan 2024 01:06:51 -0600
 Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40B76n1i090728;
- Thu, 11 Jan 2024 01:06:49 -0600
+ by fllvsmtp8.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40B76pX4023161;
+ Thu, 11 Jan 2024 01:06:51 -0600
 Received: from localhost (danish-tpc.dhcp.ti.com [10.24.69.25])
- by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 40B76mXp017712;
- Thu, 11 Jan 2024 01:06:49 -0600
+ by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 40B76otY017717;
+ Thu, 11 Jan 2024 01:06:51 -0600
 From: MD Danish Anwar <danishanwar@ti.com>
 To: Dan Carpenter <dan.carpenter@linaro.org>, Siddharth Vadapalli
  <s-vadapalli@ti.com>, Maxime Ripard <mripard@kernel.org>, Roger Quadros
@@ -72,9 +72,10 @@ To: Dan Carpenter <dan.carpenter@linaro.org>, Siddharth Vadapalli
  Kever Yang <kever.yang@rock-chips.com>, Ramon Fried <rfried.dev@gmail.com>,
  Joe Hershberger <joe.hershberger@ni.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>
-Subject: [RFC PATCH v2 12/15] configs: am65x_evm_a53: Enable ICSSG Driver
-Date: Thu, 11 Jan 2024 12:36:08 +0530
-Message-ID: <20240111070611.342701-13-danishanwar@ti.com>
+Subject: [RFC PATCH v2 13/15] configs: am65x_evm_a53: add
+ SPL_LOAD_FIT_APPLY_OVERLAY
+Date: Thu, 11 Jan 2024 12:36:09 +0530
+Message-ID: <20240111070611.342701-14-danishanwar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240111070611.342701-1-danishanwar@ti.com>
 References: <20240111070611.342701-1-danishanwar@ti.com>
@@ -99,7 +100,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable ICSSG driver in am65x_evm_a53_defconfig
+We want SPL to apply DTB overlays (e.g. ICSSG2 overlay) so enable
+SPL_LOAD_FIT_APPLY_OVERLAY.
 
 Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
 ---
@@ -107,17 +109,17 @@ Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
  1 file changed, 1 insertion(+)
 
 diff --git a/configs/am65x_evm_a53_defconfig b/configs/am65x_evm_a53_defconfig
-index 529bda283d..aeea24d773 100644
+index aeea24d773..329973de68 100644
 --- a/configs/am65x_evm_a53_defconfig
 +++ b/configs/am65x_evm_a53_defconfig
-@@ -129,6 +129,7 @@ CONFIG_PHY_FIXED=y
- CONFIG_E1000=y
- CONFIG_CMD_E1000=y
- CONFIG_TI_AM65_CPSW_NUSS=y
-+CONFIG_TI_ICSSG_PRUETH=y
- CONFIG_PCI_KEYSTONE=y
- CONFIG_PHY=y
- CONFIG_SPL_PHY=y
+@@ -69,6 +69,7 @@ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_PCI=y
+ CONFIG_CMD_REMOTEPROC=y
++CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_TIME=y
+ CONFIG_MTDIDS_DEFAULT="nor0=47040000.spi.0"
 -- 
 2.34.1
 
