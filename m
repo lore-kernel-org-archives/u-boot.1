@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4E0CC47077
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 09:50:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DE5BC4707B
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 09:50:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DAAB87725;
-	Thu, 11 Jan 2024 10:50:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B9A3F87AC2;
+	Thu, 11 Jan 2024 10:50:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Njn5OHfd";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="p6/MjAFt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94A248751F; Thu, 11 Jan 2024 10:50:16 +0100 (CET)
-Received: from mail-vk1-xa32.google.com (mail-vk1-xa32.google.com
- [IPv6:2607:f8b0:4864:20::a32])
+ id 169EA87AC7; Thu, 11 Jan 2024 10:50:32 +0100 (CET)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04F38878FE
- for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 10:50:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2BC2287AB7
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 10:50:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-4b739b49349so1125276e0c.1
- for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 01:50:10 -0800 (PST)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-33748c4f33dso4936174f8f.1
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 01:50:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704966609; x=1705571409; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1u3L+Q0UAnGeF7mU0dxbuBL2y7bro8+81bDSyUqEMOg=;
- b=Njn5OHfdomsvd50PfM7+hbRIvtFrvOIZ7GXB8WCbOFI1XUXAqi4PMyV+/Fow5msiEP
- qGVlKdmCQ0dS1minjSlEtutRwWFGZmeNzgXA5jsBku76QoXZQJDVKKJverbqO+QxcvCs
- uAtxZLP1EMD5lWK/850KyPH6YYU1X6s0KZ9yOV0hSAmVlOwS8TJPAZKb0JjYp9qGxo5y
- j0PgbMYGKBRG7LAW7R8zWz6Bni44R1wYelkjnYXKJL8pGiAkEjX9BYaH4wbMb6ma+Q+J
- LVeTkvltSoXgh/Smv9Hm36r2pVI8vUosxJiGtmJ39zuuhEn3EukuSxvWnaoZPRGJ6lRh
- iy0A==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1704966627; x=1705571427;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=A+xkJMWY6lhd25ar1Y4BztRmZ+CK8oC+ljypuMtMLYk=;
+ b=p6/MjAFteVBIWlx2+uKmirixjTYRRoOLP/8RuGmWlc0CbkfpB4K3XU+eVIEqMUN8MI
+ 2XDZwGEzjGy2B2+WG15NiUQjalJLi0gGANLxF0sFtgfExctTCjG0vnWh/jx7t22O7mHd
+ vCXv1DDIR27KlJIV4csCgsp/BG6WhqOzvPQOT+HYsRr/9Ufr+/uOgQcsjNcifFlqiiY+
+ rejvk3CWi1HKgCTrrMmIhMmZE109NvsCYnArn24jCeAxooe3CNpJRBcRsl30lU923nh1
+ csLeWZSea+xzXKaoakZqMa1Z67RbuUIFBJhYbzMUc/pI2BS7ris7tab9um5zJm5alJmS
+ YHuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704966609; x=1705571409;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1u3L+Q0UAnGeF7mU0dxbuBL2y7bro8+81bDSyUqEMOg=;
- b=OKn/jbyBksT47eVE/wJjiiWni+wlCtT06vftCninUnlvt1qr5C7nacTTIQCg0oUzIE
- oK4BmdT9sHU1LhGkYbXbe9LZ4pcgB33meQzLziH/4aOd4XEno/TaR2Af0Rl0EYkFFp9O
- IgZiXRmiQ6VssAohIxR/WNd2dQq03CfVSxwvnVZNLRSX2p3k7SS6vPaw1U65NsBui2XW
- kuvM35zBsoZ7Sibp+Nw85ZhCxm6EzScopJAVguEwEymuom3bVaysscdJswagRVUoZVh1
- V8f8btmiEjI+2pRAc67N3cfe2bcoJCpBq4EzvzafPE9/vQAaVP6T1bldXkfv7PeWMwTu
- oRxQ==
-X-Gm-Message-State: AOJu0Yxxw8mdzlHEafyfJe3tcwrCfDKHXc9BAZC6LE0NKrepJVfXFg9Y
- kI2M2Ne9BAO4ptrbj/YYd4R1F9RDjXd82HoWgEMPZ2QIhWpZmg==
-X-Google-Smtp-Source: AGHT+IG0wimoxt5/Jfs8g0wIG0tT8DQpBvpOxRjZiG8TuHZ5r+JRbnRopKjiPkj0pG3Uu38T2KCjv/1NxCOXCVPDhQc=
-X-Received: by 2002:a05:6122:1166:b0:4b6:be22:cfb8 with SMTP id
- q6-20020a056122116600b004b6be22cfb8mr209549vko.23.1704966609523; Thu, 11 Jan
- 2024 01:50:09 -0800 (PST)
+ d=1e100.net; s=20230601; t=1704966627; x=1705571427;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=A+xkJMWY6lhd25ar1Y4BztRmZ+CK8oC+ljypuMtMLYk=;
+ b=mCL5a91xP1DyzthHL5DzrsVurJwgXyR2s1Gg1h7T09fKtydmUf4ypB+dicP+6sG3y9
+ laen21vcI9rLPyCaGAEYcBB9I2LcfGoji8jB/eudakZEc52MOyd5BbDu34c+kM+ljKoO
+ MRweEKL94G5nT1wGgwWoNdlCvx0JR/D/+/Hi9h3D/xwasaN+wcDWZVPZDvQ6/OdBo8DT
+ BAcseDTcOUX1Br7A2NzdVVX92LTDPsbXsvhTrEvkgW9OjUDUTnD9TkqNGkT0Xc3m4YOr
+ Ys/Z4ruiL9JjYpGUTaK6P0euESKrmCQnQmuKAw3M3greY4zNynN0qch8ItjsTP9kcf1p
+ hr/g==
+X-Gm-Message-State: AOJu0YwC87Fnbl1Zdlu/Gblzvd+6MjAUQrcqCCGkZ3n/8FS7EL8WuO1A
+ /kFhPvaQCGvKSRDO71vTIyeP/17TCLaQug==
+X-Google-Smtp-Source: AGHT+IExd2xtDLUxp1VKkrrIm6GYZjzazcrBuy0gvBNvIdV/PPGg1LlOf3yozS/xFfY4IjxJfAYPPw==
+X-Received: by 2002:a05:600c:2e15:b0:40e:4832:9fab with SMTP id
+ o21-20020a05600c2e1500b0040e48329fabmr244725wmf.143.1704966627401; 
+ Thu, 11 Jan 2024 01:50:27 -0800 (PST)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ m15-20020a7bce0f000000b0040d23cea7bcsm2047283wmc.1.2024.01.11.01.50.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Jan 2024 01:50:27 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Alexey Romanov <avromanov@salutedevices.com>, Sean Anderson
+ <sean.anderson@seco.com>
+Cc: "sjg@chromium.org" <sjg@chromium.org>, "hs@denx.de" <hs@denx.de>,
+ "dimorinny@google.com" <dimorinny@google.com>,
+ "patrick.delaunay@foss.st.com" <patrick.delaunay@foss.st.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, kernel
+ <kernel@sberdevices.ru>
+Subject: Re: [PATCH v1] fastboot: introduce 'oem board' subcommand
+In-Reply-To: <20240110080332.o24rv45vadrzdsns@cab-wsm-0029881>
+References: <20231228152522.83291-1-avromanov@salutedevices.com>
+ <a3aea373-80fc-4799-894b-b0879e63da39@seco.com>
+ <20240109102746.75iqizxeo6fxq4cu@cab-wsm-0029881>
+ <48b16521-f1aa-4f78-ae9d-96832da0da72@seco.com>
+ <20240110080332.o24rv45vadrzdsns@cab-wsm-0029881>
+Date: Thu, 11 Jan 2024 10:50:26 +0100
+Message-ID: <877ckg6vx9.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20231219-b4-qcom-common-target-v2-0-b6dd9704219e@linaro.org>
- <CAFA6WYPo6kET7DA12iZQ=RJRtxs295hWTAr9YVcuB1so56JJTQ@mail.gmail.com>
- <3e669c63-7357-4e86-8724-470f783a893e@linaro.org>
- <CAFA6WYPwZxFu-tbtqaU5Mp_yiUyTA8J9-=FY+qmsZ4ZD_JGM+Q@mail.gmail.com>
- <445c0f94-d575-4f0c-8612-e672fca316b4@linaro.org>
-In-Reply-To: <445c0f94-d575-4f0c-8612-e672fca316b4@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Thu, 11 Jan 2024 15:19:58 +0530
-Message-ID: <CAFA6WYMpw6Z=iSC-cy_1kxuWv+JiR_7B0y36o0K6iy5COSUCFA@mail.gmail.com>
-Subject: Re: [PATCH v2 00/32] Qualcomm generic board support
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Stephan Gerhold <stephan@gerhold.net>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski <dsankouski@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,378 +97,242 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 9 Jan 2024 at 17:03, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+Hi Alexey, Sean,
+
+On mer., janv. 10, 2024 at 08:03, Alexey Romanov <avromanov@salutedevices.com> wrote:
+
+> Hi,
 >
+> On Tue, Jan 09, 2024 at 10:45:46AM -0500, Sean Anderson wrote:
+>> On 1/9/24 05:27, Alexey Romanov wrote:
+>> > Hello Sean!
+>> > 
+>> > Thanks for you reply.
+>> > 
+>> > On Thu, Dec 28, 2023 at 11:45:04AM -0500, Sean Anderson wrote:
+>> >> On 12/28/23 10:25, Alexey Romanov wrote:
+>> >> > Currently, fastboot protocol in U-Boot has no opportunity
+>> >> > to execute vendor custom code with verifed boot.
+>> >> 
+>> >> Well, I would say the most conventional way to do this would be something like
+>> >> 
+>> >> => fastboot 0
+>> >> => source \# CONFIG_FASTBOOT_BUF_ADDR
+>> >> 
+>> >> and on your host machine,
+>> >> 
+>> >> $ fastboot stage my_script.itb
+>> >> 
+>> >> where my_script.its looks like
+>> >> 
+>> >> /dts-v1/;
+>> >> 
+>> >> / {
+>> >>     description = "my script";
+>> >>     #address-cells = <1>;
+>> >> 
+>> >>     images {
+>> >>         my-script {
+>> >>             data = /incbin/("my_script.scr");
+>> >>             type = "script";
+>> >>             arch = "arm64";
+>> >>             compression = "none";
+>> >>             hash-1 {
+>> >>                 algo = "sha256";
+>> >>             };
+>> >>         };
+>> >>     };
+>> >> 
+>> >>     configurations {
+>> >>         default = "conf";
+>> >>         conf {
+>> >>             description = "Load my script";
+>> >>             script = "my-script";
+>> >>             signature {
+>> >>                 algo = "sha256,rsa2048";
+>> >>                 key-name-hint = "vboot";
+>> >>                 sign-images = "script";
+>> >>             };
+>> >>         };
+>> >>     };
+>> >> };
+>> >> 
+>> >> This method is especially useful to pass complex parameters to your command.
+>> >> This method of course requires commit bcc85b96b5f ("cmd: source: Support
+>> >> specifying config name").
+>> >> 
+>> >> Would it be possible to use the above method for your use case?
+>> > 
+>> > This method sounds good for some cases, but we have encountered some
+>> > problems that prevent us from applying it:
+>> > 
+>> > 1. Looks like this method requires access to UART (for typing 'source'
+>> > command). Open the UART is unsafe at devices with verified boot.
+>> 
+>> Generally the idea is that you run source after you run fastboot. E.g. you set
+>> your altbootcmd (or whatever) to something like
+>> 
+>> while true; fastboot 0; source \# || boot; done
+>> 
+>> so you try to source whatever gets staged, and boot it otherwise.
 >
+> If I understand right, U-Boot always will try fastboot mode?
+> Yes, it seems like it will work. But the code for complex
+> fastboot scripts will be complex and difficult to read.
 >
-> On 09/01/2024 06:07, Sumit Garg wrote:
-> > On Fri, 5 Jan 2024 at 19:15, Caleb Connolly <caleb.connolly@linaro.org> wrote:
-> >>
-> >>
-> >>
-> >> On 05/01/2024 13:14, Sumit Garg wrote:
-> >>> Hi Caleb,
-> >>
-> >> Hi Sumit,
-> >>
-> >> [snip]
-> >>
-> >>>> ---
-> >>>> I have tested this series on the Dragonboard410c, Dragonboard820c, and
-> >>>
-> >>> This series fails to boot (without any U-Boot console print) on
-> >>> db410c. I even added below pinctrl change but without any success:
-> >>
-> >> Are you chainloading from aboot? Or flashing over it?
-> >>
-> >
-> > I am using the default mode where U-Boot acts as the first stage
-> > bootloader. I suppose it worked for you since LK enabled drivers which
-> > were just reused by U-Boot.
->
-> + Stephan, could you maybe give this a try at some point?
->
-> Right, although the lack of any output probably indicates that U-Boot
-> code isn't getting run for some reason. Could you check if disabling
-> LINUX_KERNEL_IMAGE_HEADER (remove the select in arch/arm/Kconfig) helps?
-> It was *theorised* that this shouldn't cause any issues but not tested.
+> I think my version looks more elegant and simple.
 
-So I did:
-
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 5ed9cbf378f..61192fb4a43 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1077,8 +1077,6 @@ config ARCH_SNAPDRAGON
-        select SPMI
-        select BOARD_LATE_INIT
-        select OF_BOARD
--       select SAVE_PREV_BL_FDT_ADDR
--       select LINUX_KERNEL_IMAGE_HEADER
-        imply CMD_DM
-
- config ARCH_SOCFPGA
-
-But it didn't help.
+I think your solution is elegant, but i'd like to make sure that the
+problem cannot be solved otherwise (via environment changes or other things)
 
 >
-> Oh yeah, you should also hardcode the memory layout in DTS, this got
-> lost when moving to upstream DT and it's needed for the case where we
-> don't have ABL/LK to fill it in for us.
-
-I see you have still preserved arch/arm/dts/dragonboard410c.dts with
-memory layout. I switched to it via:
-
-diff --git a/configs/dragonboard410c_defconfig
-b/configs/dragonboard410c_defconfig
-index a9a48c2212d..600d614643f 100644
---- a/configs/dragonboard410c_defconfig
-+++ b/configs/dragonboard410c_defconfig
-@@ -9,7 +9,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x8007fff0
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0x0
--CONFIG_DEFAULT_DEVICE_TREE="apq8016-sbc"
-+CONFIG_DEFAULT_DEVICE_TREE="dragonboard410c"
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_IDENT_STRING="\nQualcomm-DragonBoard 410C"
- CONFIG_SYS_LOAD_ADDR=0x80080000
-
-But that didn't help it to boot, still no U-Boot console log.
-
-> >
-> >> I have only been able to validate the chainloading method, following the
-> >> steps in doc/board/qualcomm/board.rst and generating the config with
-> >>
-> >> make dragonboard410c_defconfig chainloaded.config
-> >>
-> >> do you get any output at all?
-> >
-> > No output from U-Boot. Last prints from SBL1:
-> >
-> > <snip>
-> > D -    299022 - SBL1, Delta
-> > S - Flash Throughput, 81000 KB/s  (1537656 Bytes,  18940 us)
-> > S - DDR Frequency, 400 MHz
-> >
-> >> Can you try enabling debug UART output as
-> >> documented in doc/board/qualcomm/debugging.rst?
-> >
-> > I did but it didn't help.
+>> 
+>> > 2. We use automation scripts to flash our devices using fastboot
+>> > protocol. A typical example of flashing scripts (device is already in
+>> > fastboot mode):
+>> > 
+>> >   $ fastboot erase bootloader
+>> >   $ fastboot stage bootloader.img
+>> >   $ fastboot oem board:write_bootloader
+>> > 
+>> >   $ fastboot reboot-bootloader
+>> > 
+>> >   $ fastboot erase super
+>> >   $ fastboot flash super super.bin
+>> > 
+>> >   $ fastboot reboot
+>> > 
+>> > This method doesn't assume what something typing additional command in
+>> > U-Boot shell, even if we have access to UART.
+>> 
+>> I'm curious what you actual usage for this is? That is, what do you need
+>> a custom command for.
 >
-> Hmm, I doubt SBL turns off the UART clock, so the DEBUG_UART ought to
-> work - but this has not been tested so there could be something missing.
-> Maybe you can try calling msm_uart_clk_init() from _debug_uart_init().
-
-The driver model isn't available for DEBUG_UART, so it can directly
-invoke msm_uart_clk_init().
-
-> >
-> >>
-> >> The pinctrl fix shouldn't be needed to boot to a shell.
-> >
-> > While at it, I noticed another pinctrl issue which should be fixed by
-> > following diff:
-> >
-> > diff --git a/drivers/serial/serial_msm.c b/drivers/serial/serial_msm.c
-> > index 0148ddb54df..6fe7bdd1dca 100644
-> > --- a/drivers/serial/serial_msm.c
-> > +++ b/drivers/serial/serial_msm.c
-> > @@ -204,7 +204,7 @@ static int msm_serial_probe(struct udevice *dev)
-> >         if (ret)
-> >                 return ret;
-> >
-> > -       pinctrl_select_state(dev, "uart");
-> > +       pinctrl_select_state(dev, "default");
-> >         uart_dm_init(priv);
-> >
-> >         return 0;
-> >
-> > But this still didn't fix the boot problem. As you have the board in
-> > your hand, I would suggest you to debug to avoid this back and forth.
+> Our SoC vendor use custom scheme for flashing bootloader partition.
+> So we can't just use fastbooot flash command - we have to use custom
+> flashing logic. We also don't want to use hacks in generic fastboot
+> code, for example something like this in _fb_nand_write():
 >
-> I don't have the board unfortunately, only remote access - hence I can
-> only debug the chainloaded U-Boot and not "u-boot1st" (or however we
-> call it :P). Sorry.
-
-I can help keep digging in but since this series overhauls db410c
-support I expected it to be at least tested.
-
--Sumit
-
-> >
-> > -Sumit
-> >
-> >>
-> >> Thanks,
-> >>>
-> >>> diff --git a/drivers/pinctrl/qcom/pinctrl-apq8016.c
-> >>> b/drivers/pinctrl/qcom/pinctrl-apq8016.c
-> >>> index 8e698085d78..88518845952 100644
-> >>> --- a/drivers/pinctrl/qcom/pinctrl-apq8016.c
-> >>> +++ b/drivers/pinctrl/qcom/pinctrl-apq8016.c
-> >>> @@ -42,7 +42,7 @@ static const char *apq8016_get_pin_name(struct udevice *dev,
-> >>>                                         unsigned int selector)
-> >>>  {
-> >>>         if (selector < 122) {
-> >>> -               snprintf(pin_name, MAX_PIN_NAME_LEN, "GPIO_%u", selector);
-> >>> +               snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
-> >>>                 return pin_name;
-> >>>         } else {
-> >>>                 return msm_pinctrl_pins[selector - 122];
-> >>>
-> >>>
-> >>>> Dragonboard845c. I unfortunately don't have access to a QCS404 EVB board
-> >>>> to test.
-> >>>
-> >>> db820c and qcs404 require a similar pinctrl change though.
-> >>>
-> >>> -Sumit
-> >>>
-> >>>>
-> >>>> This series is based on the qcom-next branch [1] and depends on my PMIC
-> >>>> fixes series [2], an integration branch for testing can be found at [3].
-> >>>> The non-qualcomm-specific changes (patches 1 and 2) don't have any
-> >>>> dependencies.
-> >>>>
-> >>>> [1]: https://source.denx.de/u-boot/custodians/u-boot-snapdragon
-> >>>> [2]: https://lore.kernel.org/u-boot/20231114-b4-qcom-dt-compat-v3-0-88a92f8f00ba@linaro.org/
-> >>>> [3]: https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/tree/b4/qcom-common-target
-> >>>>
-> >>>> ---
-> >>>> Changes in v2:
-> >>>> - Split DTS changes to reduce patch size.
-> >>>> - Import full board DTS files from Linux too, and introduce -u-boot.dtsi
-> >>>>   files where necessary to make any U-Boot specific changes.
-> >>>> - Add a pinctrl driver for qcom PMIC GPIOs
-> >>>> - Always enable LINUX_KERNEL_IMAGE_HEADER
-> >>>> - Link to v1: https://lore.kernel.org/r/20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org
-> >>>>
-> >>>> To: Neil Armstrong <neil.armstrong@linaro.org>
-> >>>> To: Sumit Garg <sumit.garg@linaro.org>
-> >>>> To: Ramon Fried <rfried.dev@gmail.com>
-> >>>> Cc: Marek Vasut <marex@denx.de>
-> >>>> To: Dzmitry Sankouski <dsankouski@gmail.com>
-> >>>> To: Caleb Connolly <caleb.connolly@linaro.org>
-> >>>> To: Peng Fan <peng.fan@nxp.com>
-> >>>> To: Jaehoon Chung <jh80.chung@samsung.com>
-> >>>> To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
-> >>>> To: Lukasz Majewski <lukma@denx.de>
-> >>>> To: Sean Anderson <seanga2@gmail.com>
-> >>>> To: Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
-> >>>> To: Stephan Gerhold <stephan@gerhold.net>
-> >>>> Cc:  <u-boot@lists.denx.de>
-> >>>>
-> >>>> ---
-> >>>> Caleb Connolly (32):
-> >>>>       arm: init: export prev_bl_fdt_addr
-> >>>>       usb: dwc3-generic: support external vbus regulator
-> >>>>       mmc: msm_sdhci: use modern clock handling
-> >>>>       dt-bindings: drop msm_sdhci binding
-> >>>>       clk/qcom: use upstream compatible properties
-> >>>>       serial: msm: add debug UART
-> >>>>       serial: msm: fix clock handling
-> >>>>       gpio: qcom_pmic: 1-based GPIOs
-> >>>>       gpio: qcom_pmic: add a quirk to skip GPIO configuration
-> >>>>       gpio: qcom_pmic: add pinctrl driver
-> >>>>       board: dragonboard410c: add chainloaded config fragment
-> >>>>       board: dragonboard410c: upstream DT compat
-> >>>>       board: dragonboard410c: import board code from mach-snapdragon
-> >>>>       board: dragonboard820c: use LINUX_KERNEL_IMAGE_HEADER
-> >>>>       mach-snapdragon: generalise board support
-> >>>>       mach-snapdragon: dynamic load addresses
-> >>>>       mach-snapdragon: generate fdtfile automatically
-> >>>>       doc: board/qualcomm: document generic targets
-> >>>>       dt-bindings: import headers for SDM845
-> >>>>       dts: sdm845: import supporting dtsi files
-> >>>>       dts: sdm845: replace with upstream DTS
-> >>>>       dt-bindings: import headers for MSM8916
-> >>>>       dts: msm8916: import PMIC dtsi files
-> >>>>       dts: msm8916: replace with upstream DTS
-> >>>>       dt-bindings: import headers for MSM8996
-> >>>>       dts: msm8996: import PMIC dtsi files
-> >>>>       dts: dragonboard820c: use correct bindings for clocks
-> >>>>       dts: msm8996: replace with upstream DTS
-> >>>>       dt-bindings: import headers for qcs404
-> >>>>       dts: qcs404-evb: replace with upstream DT
-> >>>>       board: qcs404-evb: drop board code
-> >>>>       MAINTAINERS: Qualcomm: add some missing paths
-> >>>>
-> >>>>  MAINTAINERS                                        |   12 +-
-> >>>>  arch/arm/Kconfig                                   |    4 +
-> >>>>  arch/arm/dts/Makefile                              |    9 +-
-> >>>>  arch/arm/dts/apq8016-sbc.dts                       |  729 +++
-> >>>>  arch/arm/dts/apq8096-db820c-u-boot.dtsi            |   10 +
-> >>>>  arch/arm/dts/apq8096-db820c.dts                    | 1137 ++++
-> >>>>  arch/arm/dts/dragonboard410c-uboot.dtsi            |   44 -
-> >>>>  arch/arm/dts/dragonboard410c.dts                   |  199 +-
-> >>>>  arch/arm/dts/dragonboard820c-uboot.dtsi            |   32 -
-> >>>>  arch/arm/dts/dragonboard820c.dts                   |  151 -
-> >>>>  arch/arm/dts/dragonboard845c-uboot.dtsi            |   26 -
-> >>>>  arch/arm/dts/dragonboard845c.dts                   |   48 -
-> >>>>  arch/arm/dts/msm8916-pm8916.dtsi                   |  157 +
-> >>>>  arch/arm/dts/msm8916.dtsi                          | 2702 +++++++++
-> >>>>  arch/arm/dts/msm8996.dtsi                          | 3884 +++++++++++++
-> >>>>  arch/arm/dts/pm8916.dtsi                           |  178 +
-> >>>>  arch/arm/dts/pm8994.dtsi                           |  152 +
-> >>>>  arch/arm/dts/pm8998.dtsi                           |  130 +
-> >>>>  arch/arm/dts/pmi8994.dtsi                          |   65 +
-> >>>>  arch/arm/dts/pmi8998.dtsi                          |   98 +
-> >>>>  arch/arm/dts/pms405.dtsi                           |  149 +
-> >>>>  arch/arm/dts/qcs404-evb-4000-u-boot.dtsi           |   26 +
-> >>>>  arch/arm/dts/qcs404-evb-4000.dts                   |   96 +
-> >>>>  arch/arm/dts/qcs404-evb-uboot.dtsi                 |   30 -
-> >>>>  arch/arm/dts/qcs404-evb.dts                        |  390 --
-> >>>>  arch/arm/dts/qcs404-evb.dtsi                       |  389 ++
-> >>>>  arch/arm/dts/qcs404.dtsi                           | 1829 ++++++
-> >>>>  arch/arm/dts/sdm845-db845c.dts                     | 1190 ++++
-> >>>>  .../arm/dts/sdm845-samsung-starqltechn-u-boot.dtsi |   16 +
-> >>>>  arch/arm/dts/sdm845-samsung-starqltechn.dts        |  624 +++
-> >>>>  arch/arm/dts/sdm845-wcd9340.dtsi                   |   86 +
-> >>>>  arch/arm/dts/sdm845.dtsi                           | 5801 +++++++++++++++++++-
-> >>>>  arch/arm/dts/starqltechn-uboot.dtsi                |   27 -
-> >>>>  arch/arm/dts/starqltechn.dts                       |   68 -
-> >>>>  arch/arm/lib/save_prev_bl_data.c                   |    5 +
-> >>>>  arch/arm/mach-snapdragon/Kconfig                   |   95 +-
-> >>>>  arch/arm/mach-snapdragon/Makefile                  |    8 +-
-> >>>>  arch/arm/mach-snapdragon/board.c                   |  304 +
-> >>>>  arch/arm/mach-snapdragon/include/mach/dram.h       |   12 -
-> >>>>  arch/arm/mach-snapdragon/init_sdm845.c             |   73 -
-> >>>>  arch/arm/mach-snapdragon/misc.c                    |   55 -
-> >>>>  arch/arm/mach-snapdragon/sysmap-apq8016.c          |   31 -
-> >>>>  arch/arm/mach-snapdragon/sysmap-apq8096.c          |   31 -
-> >>>>  arch/arm/mach-snapdragon/sysmap-qcs404.c           |   43 -
-> >>>>  arch/arm/mach-snapdragon/sysmap-sdm845.c           |   31 -
-> >>>>  board/qualcomm/dragonboard410c/Kconfig             |   15 -
-> >>>>  board/qualcomm/dragonboard410c/Makefile            |    3 +-
-> >>>>  .../dragonboard410c/configs/chainloaded.config     |    7 +
-> >>>>  board/qualcomm/dragonboard410c/dragonboard410c.c   |  109 +-
-> >>>>  .../qualcomm/dragonboard410c/misc.c                |   51 +-
-> >>>>  .../mach => board/qualcomm/dragonboard410c}/misc.h |    1 +
-> >>>>  board/qualcomm/dragonboard820c/Kconfig             |   15 -
-> >>>>  board/qualcomm/dragonboard820c/Makefile            |    1 -
-> >>>>  board/qualcomm/dragonboard820c/dragonboard820c.c   |   39 +-
-> >>>>  board/qualcomm/dragonboard820c/head.S              |   33 -
-> >>>>  board/qualcomm/dragonboard820c/u-boot.lds          |  111 -
-> >>>>  board/qualcomm/dragonboard845c/Kconfig             |   12 -
-> >>>>  board/qualcomm/qcs404-evb/Kconfig                  |   15 -
-> >>>>  board/qualcomm/qcs404-evb/Makefile                 |    6 -
-> >>>>  board/qualcomm/qcs404-evb/qcs404-evb.c             |   62 -
-> >>>>  configs/dragonboard410c_defconfig                  |    8 +-
-> >>>>  configs/dragonboard820c_defconfig                  |    8 +-
-> >>>>  configs/dragonboard845c_defconfig                  |   29 -
-> >>>>  configs/qcom_defconfig                             |   73 +
-> >>>>  configs/qcs404evb_defconfig                        |   55 -
-> >>>>  configs/starqltechn_defconfig                      |   41 -
-> >>>>  doc/board/qualcomm/board.rst                       |  119 +
-> >>>>  doc/board/qualcomm/debugging.rst                   |   61 +
-> >>>>  doc/board/qualcomm/index.rst                       |    4 +-
-> >>>>  doc/board/qualcomm/qcs404.rst                      |   79 -
-> >>>>  doc/board/qualcomm/sdm845.rst                      |  162 -
-> >>>>  doc/device-tree-bindings/mmc/msm_sdhci.txt         |   25 -
-> >>>>  doc/device-tree-bindings/usb/ehci-msm.txt          |   10 -
-> >>>>  drivers/clk/qcom/clock-apq8016.c                   |    9 +-
-> >>>>  drivers/clk/qcom/clock-apq8096.c                   |    7 +-
-> >>>>  drivers/gpio/qcom_pmic_gpio.c                      |  232 +-
-> >>>>  drivers/mmc/msm_sdhci.c                            |   69 +-
-> >>>>  drivers/phy/qcom/msm8916-usbh-phy.c                |    4 +-
-> >>>>  drivers/pinctrl/qcom/pinctrl-apq8016.c             |    2 +-
-> >>>>  drivers/serial/Kconfig                             |    8 +
-> >>>>  drivers/serial/serial_msm.c                        |   56 +-
-> >>>>  drivers/usb/dwc3/dwc3-generic.c                    |   12 +
-> >>>>  drivers/usb/host/ehci-msm.c                        |   24 +-
-> >>>>  include/configs/dragonboard845c.h                  |   20 -
-> >>>>  include/configs/qcom.h                             |   21 +
-> >>>>  include/configs/qcs404-evb.h                       |   20 -
-> >>>>  include/configs/sdm845.h                           |   26 -
-> >>>>  include/dt-bindings/arm/coresight-cti-dt.h         |   37 +
-> >>>>  include/dt-bindings/clock/qcom,camcc-sdm845.h      |  116 +
-> >>>>  include/dt-bindings/clock/qcom,dispcc-sdm845.h     |   56 +
-> >>>>  include/dt-bindings/clock/qcom,gcc-msm8916.h       |  179 +
-> >>>>  include/dt-bindings/clock/qcom,gcc-msm8996.h       |  360 ++
-> >>>>  include/dt-bindings/clock/qcom,gpucc-sdm845.h      |   24 +
-> >>>>  include/dt-bindings/clock/qcom,lpass-sdm845.h      |   15 +
-> >>>>  include/dt-bindings/clock/qcom,mmcc-msm8996.h      |  295 +
-> >>>>  include/dt-bindings/clock/qcom,rpmcc.h             |  174 +
-> >>>>  include/dt-bindings/clock/qcom,rpmh.h              |   37 +
-> >>>>  include/dt-bindings/clock/qcom,turingcc-qcs404.h   |   15 +
-> >>>>  include/dt-bindings/clock/qcom,videocc-sdm845.h    |   35 +
-> >>>>  include/dt-bindings/dma/qcom-gpi.h                 |   11 +
-> >>>>  include/dt-bindings/firmware/qcom,scm.h            |   18 +
-> >>>>  include/dt-bindings/iio/qcom,spmi-vadc.h           |  300 +
-> >>>>  include/dt-bindings/interconnect/qcom,msm8916.h    |  100 +
-> >>>>  .../dt-bindings/interconnect/qcom,msm8996-cbf.h    |   12 +
-> >>>>  include/dt-bindings/interconnect/qcom,msm8996.h    |  163 +
-> >>>>  include/dt-bindings/interconnect/qcom,osm-l3.h     |   15 +
-> >>>>  include/dt-bindings/interconnect/qcom,sdm845.h     |  150 +
-> >>>>  include/dt-bindings/phy/phy-qcom-qmp.h             |   20 +
-> >>>>  include/dt-bindings/phy/phy-qcom-qusb2.h           |   37 +
-> >>>>  include/dt-bindings/pinctrl/qcom,pmic-gpio.h       |  164 +
-> >>>>  include/dt-bindings/pinctrl/qcom,pmic-mpp.h        |  106 +
-> >>>>  include/dt-bindings/power/qcom-rpmpd.h             |  412 ++
-> >>>>  include/dt-bindings/qcom,q6asm.h                   |   26 +
-> >>>>  .../dt-bindings/regulator/qcom,rpmh-regulator.h    |   36 +
-> >>>>  include/dt-bindings/reset/qcom,gcc-msm8916.h       |  100 +
-> >>>>  include/dt-bindings/reset/qcom,sdm845-aoss.h       |   17 +
-> >>>>  include/dt-bindings/reset/qcom,sdm845-pdc.h        |   22 +
-> >>>>  include/dt-bindings/soc/qcom,apr.h                 |   28 +
-> >>>>  include/dt-bindings/soc/qcom,rpmh-rsc.h            |   14 +
-> >>>>  include/dt-bindings/sound/apq8016-lpass.h          |    9 +
-> >>>>  include/dt-bindings/sound/qcom,lpass.h             |   46 +
-> >>>>  include/dt-bindings/sound/qcom,q6afe.h             |    9 +
-> >>>>  include/dt-bindings/sound/qcom,q6asm.h             |   26 +
-> >>>>  include/dt-bindings/sound/qcom,q6dsp-lpass-ports.h |  234 +
-> >>>>  include/dt-bindings/sound/qcom,wcd9335.h           |   15 +
-> >>>>  include/init.h                                     |   11 +
-> >>>>  126 files changed, 23909 insertions(+), 2375 deletions(-)
-> >>>> ---
-> >>>> base-commit: bcb4a9ddbd21a61b5b421ba374a785757bd28c80
-> >>>>
-> >>>> // Caleb (they/them)
-> >>>>
-> >>
-> >> --
-> >> // Caleb (they/them)
+>   ...
 >
-> --
-> // Caleb (they/them)
+>   if (!strcmp(part->name, "bootloader"))
+>      write_bootloader_custom_logic(...)
+>   else
+>     nand_write_skip_bad(...)
+
+Could you detail what "custom scheme" means?
+
+Wouldn't using "fastboot_raw_partition_*" be appropriate for your use-case?
+https://docs.u-boot.org/en/latest/android/fastboot.html#raw-partition-descriptors
+
+I know the above is for mmc but maybe this can be extended for nand ?
+
+>
+>   ...
+>
+>> 
+>> --Sean
+>> 
+>> >> 
+>> >> --Sean
+>> >> 
+>> >> > This patch
+>> >> > introduce new fastboot subcommand fastboot oem board:<cmd>,
+>> >> > which allow to run custom oem_board function.
+>> >> > =
+>> >> > Default implementation is __weak. Vendor must redefine it in
+>> >> > board/ folder with his own logic.
+>> >> > 
+>> >> > For example, some vendors have their custom nand/emmc partition
+>> >> > flashing or erasing. Here some typical command for such use cases:
+>> >> > 
+>> >> > - flashing:
+>> >> > 
+>> >> >   $ fastboot stage bootloader.img
+>> >> >   $ fastboot oem board:write_bootloader
+>> >> > 
+>> >> > - erasing:
+>> >> > 
+>> >> >   $ fastboot oem board:erase_env
+>> >> > 
+>> >> > Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
+>> >> > ---
+>> >> >  drivers/fastboot/Kconfig      |  7 +++++++
+>> >> >  drivers/fastboot/fb_command.c | 15 +++++++++++++++
+>> >> >  include/fastboot.h            |  1 +
+>> >> >  3 files changed, 23 insertions(+)
+>> >> > 
+>> >> > diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
+>> >> > index 3cfeea4837..4c955cabab 100644
+>> >> > --- a/drivers/fastboot/Kconfig
+>> >> > +++ b/drivers/fastboot/Kconfig
+>> >> > @@ -241,6 +241,13 @@ config FASTBOOT_OEM_RUN
+>> >> >  	  this feature if you are using verified boot, as it will allow an
+>> >> >  	  attacker to bypass any restrictions you have in place.
+>> >> >  
+>> >> > +config FASTBOOT_OEM_BOARD
+>> >> > +	bool "Enable the 'oem board' command"
+>> >> > +	help
+>> >> > +	  This extends the fastboot protocol with an "oem board" command. This
+>> >> > +	  command allows running vendor custom code defined in board/ files.
+>> >> > +	  Otherwise, it will do nothing and send fastboot fail.
+>> >> > +
+>> >> >  endif # FASTBOOT
+>> >> >  
+>> >> >  endmenu
+>> >> > diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
+>> >> > index 71cfaec6e9..4d2b451f46 100644
+>> >> > --- a/drivers/fastboot/fb_command.c
+>> >> > +++ b/drivers/fastboot/fb_command.c
+>> >> > @@ -39,6 +39,7 @@ static void reboot_recovery(char *, char *);
+>> >> >  static void oem_format(char *, char *);
+>> >> >  static void oem_partconf(char *, char *);
+>> >> >  static void oem_bootbus(char *, char *);
+>> >> > +static void oem_board(char *, char *);
+>> >> >  static void run_ucmd(char *, char *);
+>> >> >  static void run_acmd(char *, char *);
+>> >> >  
+>> >> > @@ -106,6 +107,10 @@ static const struct {
+>> >> >  		.command = "oem run",
+>> >> >  		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_OEM_RUN, (run_ucmd), (NULL))
+>> >> >  	},
+>> >> > +	[FASTBOOT_COMMAND_OEM_BOARD] = {
+>> >> > +		.command = "oem board",
+>> >> > +		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_OEM_BOARD, (oem_board), (NULL))
+>> >> > +	},
+>> >> >  	[FASTBOOT_COMMAND_UCMD] = {
+>> >> >  		.command = "UCmd",
+>> >> >  		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_UUU_SUPPORT, (run_ucmd), (NULL))
+>> >> > @@ -489,3 +494,13 @@ static void __maybe_unused oem_bootbus(char *cmd_parameter, char *response)
+>> >> >  	else
+>> >> >  		fastboot_okay(NULL, response);
+>> >> >  }
+>> >> > +
+>> >> > +void __weak fastboot_oem_board(char *cmd_parameter, void *data, u32 size, char *response)
+>> >> > +{
+>> >> > +	fastboot_fail("oem board function not defined", response);
+>> >> > +}
+>> >> > +
+>> >> > +static void __maybe_unused oem_board(char *cmd_parameter, char *response)
+>> >> > +{
+>> >> > +	fastboot_oem_board(cmd_parameter, fastboot_buf_addr, image_size, response);
+>> >> > +}
+>> >> > diff --git a/include/fastboot.h b/include/fastboot.h
+>> >> > index 296451f89d..06c1f26b6c 100644
+>> >> > --- a/include/fastboot.h
+>> >> > +++ b/include/fastboot.h
+>> >> > @@ -37,6 +37,7 @@ enum {
+>> >> >  	FASTBOOT_COMMAND_OEM_PARTCONF,
+>> >> >  	FASTBOOT_COMMAND_OEM_BOOTBUS,
+>> >> >  	FASTBOOT_COMMAND_OEM_RUN,
+>> >> > +	FASTBOOT_COMMAND_OEM_BOARD,
+>> >> >  	FASTBOOT_COMMAND_ACMD,
+>> >> >  	FASTBOOT_COMMAND_UCMD,
+>> >> >  	FASTBOOT_COMMAND_COUNT
+>> >> 
+>> > 
+>> 
+>
+> -- 
+> Thank you,
+> Alexey
