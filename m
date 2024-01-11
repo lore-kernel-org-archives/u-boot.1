@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F490C4707B
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 03:10:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17958C4707B
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 03:10:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EB9687AEC;
-	Thu, 11 Jan 2024 04:09:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5643387A36;
+	Thu, 11 Jan 2024 04:09:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RDxs6Rqu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="svLcMEU9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D30E38792C; Thu, 11 Jan 2024 04:09:27 +0100 (CET)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
+ id 361738792C; Thu, 11 Jan 2024 04:09:28 +0100 (CET)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 317D68791E
- for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 04:09:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AA20287ADC
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 04:09:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-2045bedb806so4035931fac.3
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 19:09:20 -0800 (PST)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-6dde00025faso1794422a34.3
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 19:09:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704942558; x=1705547358; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1704942557; x=1705547357; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pWCOtSiZiCsY82ekLLkAxSvnzb2DCAEccueMHBBUVHs=;
- b=RDxs6RquNAA5Hy70UOcJRTYaEjvTfnxNbShE/wZ6b3cD3gSfQ4ngFiMp0eDPc99RFH
- Esgo5fYkNTSTpxYNw4bGLdEXX4ajsHRAL59RzIfFOrtNwtoqTvPlYN79Onh5rGBYIN07
- D2CW3dMc38OGUi/A/7TwT23sNI/3PcvYoPEE2q6HLqLWpu6l+PUnugbUrCp6gNhIkWBA
- tih09zUAP6tW1tQq5VzDYtf8LwO5o6PK53KDYmx/QMznDKxZqiFBYIJ8WgRo43NPMFs3
- lGDpoUiOdK8hkNOOR2Il+Nqr+ZJxfc4AhpPHwT8PfXfAvXuMZjz31878/1Ds0EvVATLt
- 8Cpg==
+ bh=FZamB8HQFE3xnEU3Kog2EvJx83VWjNRAeNl6NTTGjZQ=;
+ b=svLcMEU96uDWY5OFf4iBa9hfMJUvHOu08EFI8rQV9eZaxUJIPPC9lylJ2CCZBHmnXv
+ qvmTy5XntQ9XllOKNbXqJu76EjoeY51YV+aHXgutx6ZGQVvr3lVDy/TvMkTTTIexnS1u
+ XmXEHx7Qfy3p8w4mO6zJa83lewhxcrkiiDNaamyNoQW2qpRs2eAU5A/oUe5pof0gHGh9
+ /wlzOHbioIhnqRpf7gTYewwdI+944BQyqqB+Bmm6iFAf8lwwBqQNhrv5kwiYsodFC0mV
+ 2byVpm//WDCTJb4cMYzJHNvkqNWX+gNDO0BvO1ULcvOfsDBOFiYDzeEt6Kwc/ygHjfdv
+ Pb5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704942558; x=1705547358;
+ d=1e100.net; s=20230601; t=1704942557; x=1705547357;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pWCOtSiZiCsY82ekLLkAxSvnzb2DCAEccueMHBBUVHs=;
- b=QElnXN2qcd4mBuLVThlcOpRcHGYtBtVq05NODg6Tbtr2HndO40uDkl4OKnRUElx9e8
- wZdsuwrp52yuii5ylEP/MW6n0sdNk4xDka88W+wasAEYFr6HaeaRTEnWke+IlrTHRob9
- s+s6Gw3KIMr1kXzxIH4v8ZroMkT9mjBVZw/Rrjh1NhWUg96eoZ3jPsADE57pzjdtXgbg
- 9fzAyxS0BJFA3E/QWLoC24J4wA4kGssMZQ89k4f5jF0xr8wZvMGZgq+ShiFa5G0XFw4/
- VklSA0BEnGQgmWwYHhfYDpFsSU9ZfQ4ocqlxI6SHBafKwen26z1AfO/Vks7Ys5wzYq8d
- 7+ig==
-X-Gm-Message-State: AOJu0Yy7neiM1r/e0xbZCvmS06LJze1a4AIedjCVdRsnKgtfeIqJ9VPG
- 14Rk6SJDAiT46bfRA9YqIwvkEd5GRMDQxA==
-X-Google-Smtp-Source: AGHT+IHWFZfD7RMcVOzsIQ3VeWUN+YAG2JrUiGbri+EV4Ah0NKNDmAE+VbVFGpSjMSVLfbA9JdGmYg==
-X-Received: by 2002:a05:6870:1707:b0:206:7e46:f18b with SMTP id
- h7-20020a056870170700b002067e46f18bmr691571oae.28.1704942558312; 
- Wed, 10 Jan 2024 19:09:18 -0800 (PST)
-Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- l21-20020a9d7355000000b006dc375b57d4sm2697otk.65.2024.01.10.19.09.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ bh=FZamB8HQFE3xnEU3Kog2EvJx83VWjNRAeNl6NTTGjZQ=;
+ b=mAPgFOwghkJbdF09JkUXwDnUsReU1rjH2U78j3D0aqSirKaBx5cYTZ+PF88ix7TgtS
+ GGFlgyoVJKf7B6fq2EFvUh0p2nEflIx8GafLB5L7u77ZSEQkRhJwSE3qRuuSMytNhKgb
+ T+c95G/W0V5DXUFdsUWCgJmAkywRc3BUzPRZNHbN7aH/iswVrj2Ft6Dj9c1FjMWnw2tV
+ omIOhPVkF5pTjYZjmiELxT6MMn61nZMJSttSWVG9z9Q4RCnr7LISWRbFRbohFgzqYLrp
+ UlifNgXDp5dtRXPCVNyybjmXpISg+CQr0chj2HSTH+E9J5uUScROeGRH5KfLJzbs7Mnv
+ VhgA==
+X-Gm-Message-State: AOJu0YyKAQhKGZOWzfI7ZzrQoBhOCmH/CpQNO79GMCoZWpb54Rt33lk+
+ /UK+XObOuPBwPTo9YUBL2sqI90AAaMzxNA==
+X-Google-Smtp-Source: AGHT+IH1kp5+BI14h9pnnvOKGlh9lPIFbnhUlXT5VpMYHIg6Hug+MvdPtovjpI9Px7NaoEMpQOJE3g==
+X-Received: by 2002:a9d:6301:0:b0:6dd:dda6:67b3 with SMTP id
+ q1-20020a9d6301000000b006dddda667b3mr621811otk.67.1704942557342; 
  Wed, 10 Jan 2024 19:09:17 -0800 (PST)
+Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
+ w10-20020a4aa44a000000b00598a2ef41ddsm11493ool.44.2024.01.10.19.09.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Jan 2024 19:09:16 -0800 (PST)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
 Cc: Simon Glass <sjg@chromium.org>, Chanho Park <chanho61.park@samsung.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
-Subject: [PATCH v2 07/13] clk: exynos: Add Samsung clock framework
-Date: Wed, 10 Jan 2024 21:09:03 -0600
-Message-Id: <20240111030909.27373-8-semen.protsenko@linaro.org>
+Subject: [PATCH v2 06/13] clk: exynos: Move pll code into clk-exynos7420
+Date: Wed, 10 Jan 2024 21:09:02 -0600
+Message-Id: <20240111030909.27373-7-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240111030909.27373-1-semen.protsenko@linaro.org>
 References: <20240111030909.27373-1-semen.protsenko@linaro.org>
@@ -92,609 +92,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Heavily based on Linux kernel Samsung clock framework, with some changes
-to accommodate the differences in U-Boot CCF implementation. It's also
-quite minimal as compared to the Linux version.
+PLL utilities code is only used by clk-exynos7420 driver at the moment.
+Move it into clk-exynos7420 to make clk-pll.c file available for CCF PLL
+clocks implementation, which is coming in the next patches.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 Reviewed-by: Chanho Park <chanho61.park@samsung.com>
 ---
 Changes in v2:
-  - Corrected Thomas Abraham's e-mail
   - Added R-b tag
 
- drivers/clk/exynos/Makefile  |   9 +-
- drivers/clk/exynos/clk-pll.c | 167 +++++++++++++++++++++++++
- drivers/clk/exynos/clk-pll.h |  23 ++++
- drivers/clk/exynos/clk.c     | 121 +++++++++++++++++++
- drivers/clk/exynos/clk.h     | 228 +++++++++++++++++++++++++++++++++++
- 5 files changed, 546 insertions(+), 2 deletions(-)
- create mode 100644 drivers/clk/exynos/clk-pll.c
- create mode 100644 drivers/clk/exynos/clk-pll.h
- create mode 100644 drivers/clk/exynos/clk.c
- create mode 100644 drivers/clk/exynos/clk.h
+ drivers/clk/exynos/Makefile         |  1 -
+ drivers/clk/exynos/clk-exynos7420.c | 25 +++++++++++++++++++++-
+ drivers/clk/exynos/clk-pll.c        | 32 -----------------------------
+ drivers/clk/exynos/clk-pll.h        | 13 ------------
+ 4 files changed, 24 insertions(+), 47 deletions(-)
+ delete mode 100644 drivers/clk/exynos/clk-pll.c
+ delete mode 100644 drivers/clk/exynos/clk-pll.h
 
 diff --git a/drivers/clk/exynos/Makefile b/drivers/clk/exynos/Makefile
-index 7faf238571ef..04c5b9a39e16 100644
+index c9f29c873e9b..7faf238571ef 100644
 --- a/drivers/clk/exynos/Makefile
 +++ b/drivers/clk/exynos/Makefile
-@@ -1,6 +1,11 @@
- # SPDX-License-Identifier: GPL-2.0+
- #
+@@ -3,5 +3,4 @@
  # Copyright (C) 2016 Samsung Electronics
--# Thomas Abraham <thomas.ab@samsung.com>
-+# Copyright (C) 2023 Linaro Ltd.
-+#
-+# Authors:
-+#   Thomas Abraham <thomas.ab@samsung.com>
-+#   Sam Protsenko <semen.protsenko@linaro.org>
+ # Thomas Abraham <thomas.ab@samsung.com>
  
--obj-$(CONFIG_CLK_EXYNOS7420)	+= clk-exynos7420.o
-+obj-$(CONFIG_$(SPL_TPL_)CLK_CCF)	+= clk.o clk-pll.o
-+obj-$(CONFIG_CLK_EXYNOS7420)		+= clk-exynos7420.o
-diff --git a/drivers/clk/exynos/clk-pll.c b/drivers/clk/exynos/clk-pll.c
-new file mode 100644
-index 000000000000..4aacbc26b25d
---- /dev/null
-+++ b/drivers/clk/exynos/clk-pll.c
-@@ -0,0 +1,167 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2016 Samsung Electronics
-+ * Copyright (C) 2023 Linaro Ltd.
-+ *
-+ * Authors:
-+ *   Thomas Abraham <thomas.ab@samsung.com>
-+ *   Sam Protsenko <semen.protsenko@linaro.org>
-+ *
-+ * This file contains the utility functions to register the pll clocks.
-+ */
-+
-+#include <asm/io.h>
+-obj-y				+= clk-pll.o
+ obj-$(CONFIG_CLK_EXYNOS7420)	+= clk-exynos7420.o
+diff --git a/drivers/clk/exynos/clk-exynos7420.c b/drivers/clk/exynos/clk-exynos7420.c
+index 7d869eb02b8e..9caa932e12fb 100644
+--- a/drivers/clk/exynos/clk-exynos7420.c
++++ b/drivers/clk/exynos/clk-exynos7420.c
+@@ -10,8 +10,15 @@
+ #include <errno.h>
+ #include <clk-uclass.h>
+ #include <asm/io.h>
 +#include <div64.h>
-+#include <malloc.h>
-+#include <clk-uclass.h>
-+#include <dm/device.h>
-+#include <clk.h>
-+#include "clk.h"
+ #include <dt-bindings/clock/exynos7420-clk.h>
+-#include "clk-pll.h"
 +
-+#define UBOOT_DM_CLK_SAMSUNG_PLL0822X	"samsung_clk_pll0822x"
-+#define UBOOT_DM_CLK_SAMSUNG_PLL0831X	"samsung_clk_pll0831x"
-+
-+struct samsung_clk_pll {
-+	struct clk		clk;
-+	void __iomem		*con_reg;
-+	enum samsung_pll_type	type;
-+};
-+
-+#define to_clk_pll(_clk) container_of(_clk, struct samsung_clk_pll, clk)
-+
-+/*
-+ * PLL0822x Clock Type
-+ */
-+
-+#define PLL0822X_MDIV_MASK		0x3ff
-+#define PLL0822X_PDIV_MASK		0x3f
-+#define PLL0822X_SDIV_MASK		0x7
-+#define PLL0822X_MDIV_SHIFT		16
-+#define PLL0822X_PDIV_SHIFT		8
-+#define PLL0822X_SDIV_SHIFT		0
-+
-+static unsigned long samsung_pll0822x_recalc_rate(struct clk *clk)
++#define PLL145X_MDIV_SHIFT	16
++#define PLL145X_MDIV_MASK	0x3ff
++#define PLL145X_PDIV_SHIFT	8
++#define PLL145X_PDIV_MASK	0x3f
++#define PLL145X_SDIV_SHIFT	0
++#define PLL145X_SDIV_MASK	0x7
+ 
+ #define DIVIDER(reg, shift, mask)	\
+ 	(((readl(reg) >> shift) & mask) + 1)
+@@ -64,6 +71,22 @@ struct exynos7420_clk_top0_priv {
+ 	unsigned long sclk_uart2;
+ };
+ 
++static unsigned long pll145x_get_rate(unsigned int *con1,
++				      unsigned long fin_freq)
 +{
-+	struct samsung_clk_pll *pll = to_clk_pll(clk);
-+	u32 mdiv, pdiv, sdiv, pll_con3;
-+	u64 fvco = clk_get_parent_rate(clk);
++	unsigned long pll_con1 = readl(con1);
++	unsigned long mdiv, sdiv, pdiv;
++	u64 fvco = fin_freq;
 +
-+	pll_con3 = readl_relaxed(pll->con_reg);
-+	mdiv = (pll_con3 >> PLL0822X_MDIV_SHIFT) & PLL0822X_MDIV_MASK;
-+	pdiv = (pll_con3 >> PLL0822X_PDIV_SHIFT) & PLL0822X_PDIV_MASK;
-+	sdiv = (pll_con3 >> PLL0822X_SDIV_SHIFT) & PLL0822X_SDIV_MASK;
++	mdiv = (pll_con1 >> PLL145X_MDIV_SHIFT) & PLL145X_MDIV_MASK;
++	pdiv = (pll_con1 >> PLL145X_PDIV_SHIFT) & PLL145X_PDIV_MASK;
++	sdiv = (pll_con1 >> PLL145X_SDIV_SHIFT) & PLL145X_SDIV_MASK;
 +
 +	fvco *= mdiv;
 +	do_div(fvco, (pdiv << sdiv));
 +	return (unsigned long)fvco;
 +}
 +
-+static const struct clk_ops samsung_pll0822x_clk_min_ops = {
-+	.get_rate = samsung_pll0822x_recalc_rate,
-+};
-+
-+/*
-+ * PLL0831x Clock Type
-+ */
-+
-+#define PLL0831X_KDIV_MASK		0xffff
-+#define PLL0831X_MDIV_MASK		0x1ff
-+#define PLL0831X_PDIV_MASK		0x3f
-+#define PLL0831X_SDIV_MASK		0x7
-+#define PLL0831X_MDIV_SHIFT		16
-+#define PLL0831X_PDIV_SHIFT		8
-+#define PLL0831X_SDIV_SHIFT		0
-+#define PLL0831X_KDIV_SHIFT		0
-+
-+static unsigned long samsung_pll0831x_recalc_rate(struct clk *clk)
-+{
-+	struct samsung_clk_pll *pll = to_clk_pll(clk);
-+	u32 mdiv, pdiv, sdiv, pll_con3, pll_con5;
-+	s16 kdiv;
-+	u64 fvco = clk_get_parent_rate(clk);
-+
-+	pll_con3 = readl_relaxed(pll->con_reg);
-+	pll_con5 = readl_relaxed(pll->con_reg + 8);
-+	mdiv = (pll_con3 >> PLL0831X_MDIV_SHIFT) & PLL0831X_MDIV_MASK;
-+	pdiv = (pll_con3 >> PLL0831X_PDIV_SHIFT) & PLL0831X_PDIV_MASK;
-+	sdiv = (pll_con3 >> PLL0831X_SDIV_SHIFT) & PLL0831X_SDIV_MASK;
-+	kdiv = (s16)((pll_con5 >> PLL0831X_KDIV_SHIFT) & PLL0831X_KDIV_MASK);
-+
-+	fvco *= (mdiv << 16) + kdiv;
-+	do_div(fvco, (pdiv << sdiv));
-+	fvco >>= 16;
-+
-+	return (unsigned long)fvco;
-+}
-+
-+static const struct clk_ops samsung_pll0831x_clk_min_ops = {
-+	.get_rate = samsung_pll0831x_recalc_rate,
-+};
-+
-+static struct clk *_samsung_clk_register_pll(void __iomem *base,
-+					const struct samsung_pll_clock *pll_clk)
-+{
-+	struct samsung_clk_pll *pll;
-+	struct clk *clk;
-+	const char *drv_name;
-+	int ret;
-+
-+	pll = kzalloc(sizeof(*pll), GFP_KERNEL);
-+	if (!pll)
-+		return ERR_PTR(-ENOMEM);
-+
-+	pll->con_reg = base + pll_clk->con_offset;
-+	pll->type = pll_clk->type;
-+	clk = &pll->clk;
-+	clk->flags = pll_clk->flags;
-+
-+	switch (pll_clk->type) {
-+	case pll_0822x:
-+		drv_name = UBOOT_DM_CLK_SAMSUNG_PLL0822X;
-+		break;
-+	case pll_0831x:
-+		drv_name = UBOOT_DM_CLK_SAMSUNG_PLL0831X;
-+		break;
-+	default:
-+		kfree(pll);
-+		return ERR_PTR(-ENODEV);
-+	}
-+
-+	ret = clk_register(clk, drv_name, pll_clk->name, pll_clk->parent_name);
-+	if (ret) {
-+		kfree(pll);
-+		return ERR_PTR(ret);
-+	}
-+
-+	return clk;
-+}
-+
-+void samsung_clk_register_pll(void __iomem *base,
-+			      const struct samsung_pll_clock *clk_list,
-+			      unsigned int nr_clk)
-+{
-+	unsigned int cnt;
-+
-+	for (cnt = 0; cnt < nr_clk; cnt++) {
-+		struct clk *clk;
-+		const struct samsung_pll_clock *pll_clk;
-+
-+		pll_clk = &clk_list[cnt];
-+		clk = _samsung_clk_register_pll(base, pll_clk);
-+		clk_dm(pll_clk->id, clk);
-+	}
-+}
-+
-+U_BOOT_DRIVER(samsung_pll0822x_clk) = {
-+	.name	= UBOOT_DM_CLK_SAMSUNG_PLL0822X,
-+	.id	= UCLASS_CLK,
-+	.ops	= &samsung_pll0822x_clk_min_ops,
-+	.flags	= DM_FLAG_PRE_RELOC,
-+};
-+
-+U_BOOT_DRIVER(samsung_pll0831x_clk) = {
-+	.name	= UBOOT_DM_CLK_SAMSUNG_PLL0831X,
-+	.id	= UCLASS_CLK,
-+	.ops	= &samsung_pll0831x_clk_min_ops,
-+	.flags	= DM_FLAG_PRE_RELOC,
-+};
+ static ulong exynos7420_topc_get_rate(struct clk *clk)
+ {
+ 	struct exynos7420_clk_topc_priv *priv = dev_get_priv(clk->dev);
+diff --git a/drivers/clk/exynos/clk-pll.c b/drivers/clk/exynos/clk-pll.c
+deleted file mode 100644
+index 407fc71d415b..000000000000
+--- a/drivers/clk/exynos/clk-pll.c
++++ /dev/null
+@@ -1,32 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Exynos PLL helper functions for clock drivers.
+- * Copyright (C) 2016 Samsung Electronics
+- * Thomas Abraham <thomas.ab@samsung.com>
+- */
+-
+-#include <common.h>
+-#include <asm/io.h>
+-#include <div64.h>
+-
+-#define PLL145X_MDIV_SHIFT	16
+-#define PLL145X_MDIV_MASK	0x3ff
+-#define PLL145X_PDIV_SHIFT	8
+-#define PLL145X_PDIV_MASK	0x3f
+-#define PLL145X_SDIV_SHIFT	0
+-#define PLL145X_SDIV_MASK	0x7
+-
+-unsigned long pll145x_get_rate(unsigned int *con1, unsigned long fin_freq)
+-{
+-	unsigned long pll_con1 = readl(con1);
+-	unsigned long mdiv, sdiv, pdiv;
+-	uint64_t fvco = fin_freq;
+-
+-	mdiv = (pll_con1 >> PLL145X_MDIV_SHIFT) & PLL145X_MDIV_MASK;
+-	pdiv = (pll_con1 >> PLL145X_PDIV_SHIFT) & PLL145X_PDIV_MASK;
+-	sdiv = (pll_con1 >> PLL145X_SDIV_SHIFT) & PLL145X_SDIV_MASK;
+-
+-	fvco *= mdiv;
+-	do_div(fvco, (pdiv << sdiv));
+-	return (unsigned long)fvco;
+-}
 diff --git a/drivers/clk/exynos/clk-pll.h b/drivers/clk/exynos/clk-pll.h
-new file mode 100644
-index 000000000000..bd79309fa1cf
---- /dev/null
-+++ b/drivers/clk/exynos/clk-pll.h
-@@ -0,0 +1,23 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2016 Samsung Electronics
-+ * Copyright (C) 2023 Linaro Ltd.
-+ *
-+ * Authors:
-+ *   Thomas Abraham <thomas.ab@samsung.com>
-+ *   Sam Protsenko <semen.protsenko@linaro.org>
-+ *
-+ * Common Clock Framework support for all PLL's in Samsung platforms.
-+ */
-+
-+#ifndef __EXYNOS_CLK_PLL_H
-+#define __EXYNOS_CLK_PLL_H
-+
-+#include <linux/clk-provider.h>
-+
-+enum samsung_pll_type {
-+	pll_0822x,
-+	pll_0831x,
-+};
-+
-+#endif /* __EXYNOS_CLK_PLL_H */
-diff --git a/drivers/clk/exynos/clk.c b/drivers/clk/exynos/clk.c
-new file mode 100644
-index 000000000000..430767f072d8
---- /dev/null
-+++ b/drivers/clk/exynos/clk.c
-@@ -0,0 +1,121 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (C) 2023 Linaro Ltd.
-+ * Sam Protsenko <semen.protsenko@linaro.org>
-+ *
-+ * This file includes utility functions to register clocks to common
-+ * clock framework for Samsung platforms.
-+ */
-+
-+#include <dm.h>
-+#include "clk.h"
-+
-+void samsung_clk_register_mux(void __iomem *base,
-+			      const struct samsung_mux_clock *clk_list,
-+			      unsigned int nr_clk)
-+{
-+	unsigned int cnt;
-+
-+	for (cnt = 0; cnt < nr_clk; cnt++) {
-+		struct clk *clk;
-+		const struct samsung_mux_clock *m;
-+
-+		m = &clk_list[cnt];
-+		clk = clk_register_mux(NULL, m->name, m->parent_names,
-+			m->num_parents, m->flags, base + m->offset, m->shift,
-+			m->width, m->mux_flags);
-+		clk_dm(m->id, clk);
-+	}
-+}
-+
-+void samsung_clk_register_div(void __iomem *base,
-+			      const struct samsung_div_clock *clk_list,
-+			      unsigned int nr_clk)
-+{
-+	unsigned int cnt;
-+
-+	for (cnt = 0; cnt < nr_clk; cnt++) {
-+		struct clk *clk;
-+		const struct samsung_div_clock *d;
-+
-+		d = &clk_list[cnt];
-+		clk = clk_register_divider(NULL, d->name, d->parent_name,
-+			d->flags, base + d->offset, d->shift,
-+			d->width, d->div_flags);
-+		clk_dm(d->id, clk);
-+	}
-+}
-+
-+void samsung_clk_register_gate(void __iomem *base,
-+			       const struct samsung_gate_clock *clk_list,
-+			       unsigned int nr_clk)
-+{
-+	unsigned int cnt;
-+
-+	for (cnt = 0; cnt < nr_clk; cnt++) {
-+		struct clk *clk;
-+		const struct samsung_gate_clock *g;
-+
-+		g = &clk_list[cnt];
-+		clk = clk_register_gate(NULL, g->name, g->parent_name,
-+			g->flags, base + g->offset, g->bit_idx,
-+			g->gate_flags, NULL);
-+		clk_dm(g->id, clk);
-+	}
-+}
-+
-+typedef void (*samsung_clk_register_fn)(void __iomem *base,
-+					const void *clk_list,
-+					unsigned int nr_clk);
-+
-+static const samsung_clk_register_fn samsung_clk_register_fns[] = {
-+	[S_CLK_MUX]	= (samsung_clk_register_fn)samsung_clk_register_mux,
-+	[S_CLK_DIV]	= (samsung_clk_register_fn)samsung_clk_register_div,
-+	[S_CLK_GATE]	= (samsung_clk_register_fn)samsung_clk_register_gate,
-+	[S_CLK_PLL]	= (samsung_clk_register_fn)samsung_clk_register_pll,
-+};
-+
-+/**
-+ * samsung_cmu_register_clocks() - Register provided clock groups
-+ * @base: Base address of CMU registers
-+ * @clk_groups: list of clock groups
-+ * @nr_groups: count of clock groups in @clk_groups
-+ *
-+ * Having the array of clock groups @clk_groups makes it possible to keep a
-+ * correct clocks registration order.
-+ */
-+void samsung_cmu_register_clocks(void __iomem *base,
-+				 const struct samsung_clk_group *clk_groups,
-+				 unsigned int nr_groups)
-+{
-+	unsigned int i;
-+
-+	for (i = 0; i < nr_groups; i++) {
-+		const struct samsung_clk_group *g = &clk_groups[i];
-+
-+		samsung_clk_register_fns[g->type](base, g->clk_list, g->nr_clk);
-+	}
-+}
-+
-+/**
-+ * samsung_cmu_register_one - Register all CMU clocks
-+ * @dev: CMU device
-+ * @clk_groups: list of CMU clock groups
-+ * @nr_groups: count of CMU clock groups in @clk_groups
-+ *
-+ * Return: 0 on success or negative value on error.
-+ */
-+int samsung_cmu_register_one(struct udevice *dev,
-+			     const struct samsung_clk_group *clk_groups,
-+			     unsigned int nr_groups)
-+{
-+	void __iomem *base;
-+
-+	base = dev_read_addr_ptr(dev);
-+	if (!base)
-+		return -EINVAL;
-+
-+	samsung_cmu_register_clocks(base, clk_groups, nr_groups);
-+
-+	return 0;
-+}
-diff --git a/drivers/clk/exynos/clk.h b/drivers/clk/exynos/clk.h
-new file mode 100644
-index 000000000000..91a51b877a63
---- /dev/null
-+++ b/drivers/clk/exynos/clk.h
-@@ -0,0 +1,228 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Copyright (c) 2023 Linaro Ltd.
-+ * Sam Protsenko <semen.protsenko@linaro.org>
-+ *
-+ * Common Clock Framework support for all Samsung platforms.
-+ */
-+
-+#ifndef __EXYNOS_CLK_H
-+#define __EXYNOS_CLK_H
-+
-+#include <errno.h>
-+#include <linux/clk-provider.h>
-+#include "clk-pll.h"
-+
-+/**
-+ * struct samsung_mux_clock - information about mux clock
-+ * @id: platform specific id of the clock
-+ * @name: name of this mux clock
-+ * @parent_names: array of pointer to parent clock names
-+ * @num_parents: number of parents listed in @parent_names
-+ * @flags: optional flags for basic clock
-+ * @offset: offset of the register for configuring the mux
-+ * @shift: starting bit location of the mux control bit-field in @reg
-+ * @width: width of the mux control bit-field in @reg
-+ * @mux_flags: flags for mux-type clock
-+ */
-+struct samsung_mux_clock {
-+	unsigned int		id;
-+	const char		*name;
-+	const char		* const *parent_names;
-+	u8			num_parents;
-+	unsigned long		flags;
-+	unsigned long		offset;
-+	u8			shift;
-+	u8			width;
-+	u8			mux_flags;
-+};
-+
-+#define PNAME(x) static const char * const x[]
-+
-+#define __MUX(_id, cname, pnames, o, s, w, f, mf)			\
-+	{								\
-+		.id		= _id,					\
-+		.name		= cname,				\
-+		.parent_names	= pnames,				\
-+		.num_parents	= ARRAY_SIZE(pnames),			\
-+		.flags		= (f) | CLK_SET_RATE_NO_REPARENT,	\
-+		.offset		= o,					\
-+		.shift		= s,					\
-+		.width		= w,					\
-+		.mux_flags	= mf,					\
-+	}
-+
-+#define MUX(_id, cname, pnames, o, s, w)				\
-+	__MUX(_id, cname, pnames, o, s, w, 0, 0)
-+
-+#define MUX_F(_id, cname, pnames, o, s, w, f, mf)			\
-+	__MUX(_id, cname, pnames, o, s, w, f, mf)
-+
-+/**
-+ * struct samsung_div_clock - information about div clock
-+ * @id: platform specific id of the clock
-+ * @name: name of this div clock
-+ * @parent_name: name of the parent clock
-+ * @flags: optional flags for basic clock
-+ * @offset: offset of the register for configuring the div
-+ * @shift: starting bit location of the div control bit-field in @reg
-+ * @width: width of the bitfield
-+ * @div_flags: flags for div-type clock
-+ */
-+struct samsung_div_clock {
-+	unsigned int		id;
-+	const char		*name;
-+	const char		*parent_name;
-+	unsigned long		flags;
-+	unsigned long		offset;
-+	u8			shift;
-+	u8			width;
-+	u8			div_flags;
-+};
-+
-+#define __DIV(_id, cname, pname, o, s, w, f, df)	\
-+	{						\
-+		.id		= _id,			\
-+		.name		= cname,		\
-+		.parent_name	= pname,		\
-+		.flags		= f,			\
-+		.offset		= o,			\
-+		.shift		= s,			\
-+		.width		= w,			\
-+		.div_flags	= df,			\
-+	}
-+
-+#define DIV(_id, cname, pname, o, s, w)			\
-+	__DIV(_id, cname, pname, o, s, w, 0, 0)
-+
-+#define DIV_F(_id, cname, pname, o, s, w, f, df)	\
-+	__DIV(_id, cname, pname, o, s, w, f, df)
-+
-+/**
-+ * struct samsung_gate_clock - information about gate clock
-+ * @id: platform specific id of the clock
-+ * @name: name of this gate clock
-+ * @parent_name: name of the parent clock
-+ * @flags: optional flags for basic clock
-+ * @offset: offset of the register for configuring the gate
-+ * @bit_idx: bit index of the gate control bit-field in @reg
-+ * @gate_flags: flags for gate-type clock
-+ */
-+struct samsung_gate_clock {
-+	unsigned int		id;
-+	const char		*name;
-+	const char		*parent_name;
-+	unsigned long		flags;
-+	unsigned long		offset;
-+	u8			bit_idx;
-+	u8			gate_flags;
-+};
-+
-+#define __GATE(_id, cname, pname, o, b, f, gf)			\
-+	{							\
-+		.id		= _id,				\
-+		.name		= cname,			\
-+		.parent_name	= pname,			\
-+		.flags		= f,				\
-+		.offset		= o,				\
-+		.bit_idx	= b,				\
-+		.gate_flags	= gf,				\
-+	}
-+
-+#define GATE(_id, cname, pname, o, b, f, gf)			\
-+	__GATE(_id, cname, pname, o, b, f, gf)
-+
-+/**
-+ * struct samsung_pll_clock - information about pll clock
-+ * @id: platform specific id of the clock
-+ * @name: name of this pll clock
-+ * @parent_name: name of the parent clock
-+ * @flags: optional flags for basic clock
-+ * @con_offset: offset of the register for configuring the PLL
-+ * @type: type of PLL to be registered
-+ */
-+struct samsung_pll_clock {
-+	unsigned int		id;
-+	const char		*name;
-+	const char		*parent_name;
-+	unsigned long		flags;
-+	int			con_offset;
-+	enum samsung_pll_type	type;
-+};
-+
-+#define PLL(_typ, _id, _name, _pname, _con)		\
-+	{						\
-+		.id		= _id,			\
-+		.name		= _name,		\
-+		.parent_name	= _pname,		\
-+		.flags		= CLK_GET_RATE_NOCACHE,	\
-+		.con_offset	= _con,			\
-+		.type		= _typ,			\
-+	}
-+
-+enum samsung_clock_type {
-+	S_CLK_MUX,
-+	S_CLK_DIV,
-+	S_CLK_GATE,
-+	S_CLK_PLL,
-+};
-+
-+/**
-+ * struct samsung_clock_group - contains a list of clocks of one type
-+ * @type: type of clocks this structure contains
-+ * @clk_list: list of clocks
-+ * @nr_clk: count of clocks in @clk_list
-+ */
-+struct samsung_clk_group {
-+	enum samsung_clock_type type;
-+	const void *clk_list;
-+	unsigned int nr_clk;
-+};
-+
-+void samsung_clk_register_mux(void __iomem *base,
-+			      const struct samsung_mux_clock *clk_list,
-+			      unsigned int nr_clk);
-+void samsung_clk_register_div(void __iomem *base,
-+			      const struct samsung_div_clock *clk_list,
-+			      unsigned int nr_clk);
-+void samsung_clk_register_gate(void __iomem *base,
-+			       const struct samsung_gate_clock *clk_list,
-+			       unsigned int nr_clk);
-+void samsung_clk_register_pll(void __iomem *base,
-+			      const struct samsung_pll_clock *clk_list,
-+			      unsigned int nr_clk);
-+
-+void samsung_cmu_register_clocks(void __iomem *base,
-+				 const struct samsung_clk_group *clk_groups,
-+				 unsigned int nr_groups);
-+int samsung_cmu_register_one(struct udevice *dev,
-+			     const struct samsung_clk_group *clk_groups,
-+			     unsigned int nr_groups);
-+
-+/**
-+ * samsung_register_cmu - Register CMU clocks ensuring parent CMU is present
-+ * @dev: CMU device
-+ * @clk_groups: list of CMU clock groups
-+ * @parent_drv: name of parent CMU driver
-+ *
-+ * Register provided CMU clocks, but make sure CMU_TOP driver is instantiated
-+ * first.
-+ *
-+ * Return: 0 on success or negative value on error.
-+ */
-+#define samsung_register_cmu(dev, clk_groups, parent_drv)		\
-+({									\
-+	struct udevice *__parent;					\
-+	int __ret;							\
-+									\
-+	__ret = uclass_get_device_by_driver(UCLASS_CLK,			\
-+		DM_DRIVER_GET(parent_drv), &__parent);			\
-+	if (__ret || !__parent)						\
-+		__ret = -ENOENT;					\
-+	else								\
-+		__ret = samsung_cmu_register_one(dev, clk_groups,	\
-+			ARRAY_SIZE(clk_groups));			\
-+	__ret;								\
-+})
-+
-+#endif /* __EXYNOS_CLK_H */
+deleted file mode 100644
+index 7b7af5e67612..000000000000
+--- a/drivers/clk/exynos/clk-pll.h
++++ /dev/null
+@@ -1,13 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Exynos PLL helper functions for clock drivers.
+- * Copyright (C) 2016 Samsung Electronics
+- * Thomas Abraham <thomas.ab@samsung.com>
+- */
+-
+-#ifndef __EXYNOS_CLK_PLL_H
+-#define __EXYNOS_CLK_PLL_H
+-
+-unsigned long pll145x_get_rate(unsigned int *con1, unsigned long fin_freq);
+-
+-#endif /* __EXYNOS_CLK_PLL_H */
 -- 
 2.39.2
 
