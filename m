@@ -4,57 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96593C47077
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 11:06:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD8AFC4707B
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 11:17:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A84C87AC2;
-	Thu, 11 Jan 2024 12:06:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 27B73877FD;
+	Thu, 11 Jan 2024 12:17:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1704971198;
-	bh=dUeYcKeDb3iXzQJmjlwQqJ78U+luIblgfVc22xNEafA=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Nuxuynospq3P12M6GrI1OkvceKepZ2yU9FjisWE338caTnFmuBIz4NMK9Pm7IOIfe
-	 /IDWjzGSFMFSrkpM10Zs1p/iI0b4XEvVESb3TeWlVdAK4bU0VCXqF2URATm7bEzcBr
-	 GP2OaepOg2vOAtQq5qQvWK5r2rq8/M9mqTfcGeFQocug+BasZ8fIUWyrM7IKiw6JAi
-	 URGv/Re8aCwTzTYJi6yFna3G1oCSf7UK/X6r2xExyocZxmCnIv7m0DDpnMBGGq33P/
-	 iqirwRiKoIgVxZzDNmEBmRw+sYagEeQJHn3zdsx6yPfKvw5tkbztDvDvEwYpNMA2wt
-	 OCkmxl2N2UFIQ==
-Received: from localhost.localdomain (85-222-111-42.dynamic.chello.pl
- [85.222.111.42])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lUFhvCqq";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 8D02B8786C; Thu, 11 Jan 2024 12:16:59 +0100 (CET)
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id CF536878C8;
- Thu, 11 Jan 2024 12:06:33 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1704971194;
- bh=dUeYcKeDb3iXzQJmjlwQqJ78U+luIblgfVc22xNEafA=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=RoGYB8qZmDAA2UNuOQV3hpEociir9XM7YwYm8IKbslz2MsHcKK00OfL4DMivQpdfK
- ADaQ9WdH9no7eq+PsD13Wg/JPFm9sjUjNp1/fnQKr2znguhpe1yHatJjZiGRYu+GU6
- 0V5fZrP0NO8OsOKb9561IcT95hweK92lPlJPsPR1uc6fJ9fqgRaN4eBD8BxghRGM8k
- PRUi3DCuoUAyqj5Cj9QTNF6yq1vDGJwnPDkyMj39CJpaB4IULC4FEzzEJX3AbKsg2+
- anPtFEj7BzvTMxN47VoktKmm1UHCSRuqDcZ5CeTpD6li9ERauzydvNunfiINjALWx0
- TdMpKr/QoMS5g==
-From: Lukasz Majewski <lukma@denx.de>
-To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- NXP u-boot <uboot-imx@nxp.com>
-Cc: Anatolij Gustschin <agust@denx.de>,
-	Lukasz Majewski <lukma@denx.de>
-Subject: [PATCH v2 3/3] arm: xea: Add support for boot image source descriptor
- in SPL
-Date: Thu, 11 Jan 2024 12:06:11 +0100
-Message-Id: <20240111110611.2051821-3-lukma@denx.de>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240111110611.2051821-1-lukma@denx.de>
-References: <20240111110611.2051821-1-lukma@denx.de>
+ by phobos.denx.de (Postfix) with ESMTPS id 6ADAB8753C
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 12:16:51 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-1d54c7ef801so8153015ad.0
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 03:16:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1704971810; x=1705576610; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PVQrk1PmBnnvDstidvZiLrSOCNC5TEGIBJBK9HGWyGc=;
+ b=lUFhvCqq9Bk1xDTli58gvsJtCCux3a2CzbnhV7hf1S94fQEl9RSNUbTM2TucvIT8Gm
+ 5UHtAU1TyRnQ6YsZpNgE7fHKvPixwZKo9ddJVfODaCs8h20pjBrW5rCt/5f9kaqcRxLl
+ 06G5w+61J1dZMTZg7GdBl6kVHNCwTuLT2qXuBZ5MNH7RKMcq5F2q6Bv6434b7RgGL4qu
+ pK1F2N3hkrVCDdcXjNFU+7cjrMpzpc/wlo/eK3bZdxty4uO6xVocRDiiCeM5QL3vcGfu
+ 1B4tym5KFwgy5G5OE9aLcyJwe7+araj7tbQrAmVqgHW/CWJ/hO9kh1tzLHbL21QUwz+0
+ w7Jg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704971810; x=1705576610;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=PVQrk1PmBnnvDstidvZiLrSOCNC5TEGIBJBK9HGWyGc=;
+ b=TX8S4YjTqC3wdMXSHF59+04XO7x59W+XsofAk0WMldi8hLyYl1mWlLjZbw80jKw6JP
+ W38HVlohWLvidFErLB06njHG6GtFx3YgZ5LmGuBy4IBZ1UlGaB/1sW3OwrroKNlap7fh
+ S+kiowm0ZOkosYTp/TCmYyNY1Jiqqa7ThUGcTWIRgVduokSMtRurpbzEO8T11lBhP34E
+ BmzzKpPbGlNQc6qfjraDrlkDlRqsKoFdBPc/KGmsCF6I8guEJtYcs2SXDYpzQuGnsoy1
+ egD0CUT7JDtlyg+weedzUZuIZQ8jL5XLHpXoft7BGNQI19PUuAMp29PeZMLKuZw8WLLN
+ ai3Q==
+X-Gm-Message-State: AOJu0YynIJnQdMMTjkGsvO8m40O/R6ubZ4e6534tpY/S8ej30Ht8C7wT
+ y6+SOtrkdGs/tJs2DXG385NwycfmCJSPqERwpP4=
+X-Google-Smtp-Source: AGHT+IGbBwSDvMFurpTpnxtS3J7t8ZNuYYCQlpuYx9Tav+p0hFGwNcTARh3Wfi6Qx3jBzBQpzTWYyBuMePJIQ83zDOY=
+X-Received: by 2002:a05:6a21:3281:b0:199:7f36:d8c1 with SMTP id
+ yt1-20020a056a21328100b001997f36d8c1mr1929561pzb.2.1704971809689; Thu, 11 Jan
+ 2024 03:16:49 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240111110611.2051821-1-lukma@denx.de>
+In-Reply-To: <20240111110611.2051821-1-lukma@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 11 Jan 2024 08:16:38 -0300
+Message-ID: <CAOMZO5CtLSkRPb-3RvS77za-y5zwkBirH4gGE_kwqLNao9bdSg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] arm: xea: Move XEA's environment variables from
+ xea.h to xea.env
+To: Lukasz Majewski <lukma@denx.de>
+Cc: Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, NXP u-boot <uboot-imx@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,169 +88,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Anatolij Gustschin <agust@denx.de>
+Hi Lukasz,
 
-We load two boot image source descriptor structures from last
-two sectors in the SPI NOR flash and determine the boot source
-for loading the kernel/DTB images, then adjust the boot order for
-loading image from eMMC boot0 or boot1 partition.
+On Thu, Jan 11, 2024 at 8:06=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wro=
+te:
 
-Signed-off-by: Anatolij Gustschin <agust@denx.de>
-Signed-off-by: Lukasz Majewski <lukma@denx.de>
+> +serverip=3D10.8.217.79
+> +nfs_serverip=3D10.8.218.113
+> +gatewayip=3D10.8.209.250
 
----
+These IP addresses should not be hardcoded here.
 
-Changes in v2:
-- Move XEA's env adjustments to xea.env file (from include/configs/xea.h)
-
- board/liebherr/xea/boot_img_scr.h | 27 ++++++++++
- board/liebherr/xea/xea.c          | 85 +++++++++++++++++++++++++++++++
- 2 files changed, 112 insertions(+)
- create mode 100644 board/liebherr/xea/boot_img_scr.h
-
-diff --git a/board/liebherr/xea/boot_img_scr.h b/board/liebherr/xea/boot_img_scr.h
-new file mode 100644
-index 0000000000..baa3072b49
---- /dev/null
-+++ b/board/liebherr/xea/boot_img_scr.h
-@@ -0,0 +1,27 @@
-+/* SPDX-License-Identifier:     GPL-2.0+ */
-+/*
-+ * Struct for boot image source description for placing in last
-+ * two SPI NOR flash sectors on legcom.
-+ */
-+
-+struct boot_img_src {
-+	u8 magic;	/* Must be 'B' = 0x42 */
-+	u8 flags;	/* flags to specify mmcblk[0|1] boot[0|1] */
-+	u8 crc8;	/* CRC-8 over above two bytes */
-+} __packed;
-+
-+/*
-+ * Bit definition in boot_img_src.flags:
-+ *  Bit 0: mmcblk device 0 or 1 (1 - if this bit set)
-+ *  Bit 1: mmcblk boot partition 0 or 1.
-+ *         for eMMC: boot0 if this bit is cleared, boot1 - if set
-+ *         for SD-card the boot partition value will always be 0
-+ *         (independent of the value of this bit)
-+ *
-+ */
-+#define BOOT_SRC_MMC1	BIT(0)
-+#define BOOT_SRC_PART1	BIT(1)
-+
-+/* Offset of the first boot image source descriptor in SPI NOR */
-+#define SPI_FLASH_BOOT_SRC_OFFS	0xFE0000
-+#define SPI_FLASH_SECTOR_SIZE	0x10000
-diff --git a/board/liebherr/xea/xea.c b/board/liebherr/xea/xea.c
-index e4d2eb65cc..c8ac526cb4 100644
---- a/board/liebherr/xea/xea.c
-+++ b/board/liebherr/xea/xea.c
-@@ -32,6 +32,11 @@
- #include <errno.h>
- #include <usb.h>
- #include <serial.h>
-+#include <u-boot/crc.h>
-+#include "boot_img_scr.h"
-+
-+#include <spi.h>
-+#include <spi_flash.h>
- 
- #ifdef CONFIG_SPL_BUILD
- #include <spl.h>
-@@ -66,6 +71,52 @@ void board_init_f(ulong arg)
- 	preloader_console_init();
- }
- 
-+static struct boot_img_src img_src[2];
-+static int spi_load_boot_info(void)
-+{
-+	struct spi_flash *flash;
-+	int err;
-+
-+	flash = spi_flash_probe(CONFIG_SF_DEFAULT_BUS,
-+				CONFIG_SF_DEFAULT_CS,
-+				CONFIG_SF_DEFAULT_SPEED,
-+				CONFIG_SF_DEFAULT_MODE);
-+	if (!flash) {
-+		printf("%s: SPI probe err\n", __func__);
-+		return -ENODEV;
-+	}
-+
-+	/*
-+	 * Load both boot info structs from SPI flash
-+	 */
-+	err = spi_flash_read(flash, SPI_FLASH_BOOT_SRC_OFFS,
-+			     sizeof(img_src[0]),
-+			     (void *)&img_src[0]);
-+	if (err) {
-+		debug("%s: First boot info NOR sector read error %d\n",
-+		      __func__, err);
-+		return err;
-+	}
-+
-+	err = spi_flash_read(flash,
-+			     SPI_FLASH_BOOT_SRC_OFFS + SPI_FLASH_SECTOR_SIZE,
-+			     sizeof(img_src[0]),
-+			     (void *)&img_src[1]);
-+	if (err) {
-+		debug("%s: First boot info NOR sector read error %d\n",
-+		      __func__, err);
-+		return err;
-+	}
-+
-+	debug("%s: BI0 0x%x 0x%x 0x%x\n", __func__,
-+	      img_src[0].magic, img_src[0].flags, img_src[0].crc8);
-+
-+	debug("%s: BI1 0x%x 0x%x 0x%x\n", __func__,
-+	      img_src[1].magic, img_src[1].flags, img_src[1].crc8);
-+
-+	return 0;
-+}
-+
- static int boot_tiva0, boot_tiva1;
- 
- /* Check if TIVAs request booting via U-Boot proper */
-@@ -114,6 +165,40 @@ void spl_board_init(void)
- 	boot_tiva1 = dm_gpio_get_value(&btiva1);
- }
- 
-+int spl_mmc_emmc_boot_partition(struct mmc *mmc)
-+{
-+	int i, src_idx = -1, ret;
-+
-+	ret = spi_load_boot_info();
-+	if (ret) {
-+		printf("%s: Cannot read XEA boot info! [%d]\n", __func__, ret);
-+		/* To avoid bricking board - by default boot from boot0 eMMC */
-+		return 1;
-+	}
-+
-+	for (i = 0; i < 2; i++) {
-+		if (img_src[i].magic == 'B' &&
-+		    img_src[i].crc8 == crc8(0, &img_src[i].magic, 2)) {
-+			src_idx = i;
-+			break;
-+		}
-+	}
-+
-+	debug("%s: src idx: %d\n", __func__, src_idx);
-+
-+	if (src_idx < 0)
-+		/*
-+		 * Always use eMMC (mmcblkX) boot0 if no
-+		 * valid image source description found
-+		 */
-+		return 1;
-+
-+	if (img_src[src_idx].flags & BOOT_SRC_PART1)
-+		return 2;
-+
-+	return 1;
-+}
-+
- void board_boot_order(u32 *spl_boot_list)
- {
- 	spl_boot_list[0] = BOOT_DEVICE_MMC1;
--- 
-2.39.2
-
+They were not present in xea.h originally. Please remove them.
