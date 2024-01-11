@@ -4,56 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3F1CC47077
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 17:56:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4DBAC47077
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 17:56:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A16B187930;
-	Thu, 11 Jan 2024 18:55:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rahix.de
+	by phobos.denx.de (Postfix) with ESMTP id 2953587966;
+	Thu, 11 Jan 2024 18:55:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=rahix.de header.i=@rahix.de header.b="RXaymCYn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jDwnbOLh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B7FB87751; Thu, 11 Jan 2024 18:51:51 +0100 (CET)
-Received: from mail.rahix.de (rahix.de [185.170.115.47])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3F2A2876AE; Thu, 11 Jan 2024 18:32:36 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2419A87776
- for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 18:51:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F63A8642A
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 18:32:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=rahix.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rahix@rahix.de
-Authentication-Results: mail.rahix.de;
- dmarc=fail (p=none dis=none) header.from=rahix.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=rahix.de;
- s=a-selector; t=1704995555;
- bh=X7iDjJbKQfvZLJqf9pwbcs0c4b/g/2Hshr99uXuuZfo=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References;
- b=RXaymCYnjIgM06GwM9Vua1NPKhmWRbeRKDkFUnmKdvd6/pvli4nHyoRIJpNwOxLpP
- AinOvB7hQmT9fBDsORo2ziJWGQm6C+Hz+ZKSmJD7CyORv7PKyaloSzwhqxQxcHSvrR
- khRD9f7qt/NUDC4/AN+s8kg81tfwQ5vBjWeFqzYK4GaYF+AJ6B10l/FZn3P7a07PqL
- 4UZ7cNGCR9GsfWQhUCXSZ/rKHixqAwCAr7IejKYV+mEGGj999xiziiug30t3c0ZeAW
- HlAKJs53bhjR4o8GFRvg3jsPwpoDNugvu5LWLjd/44q16vSzW6mutZ4NGEFEWpZs69
- q8lZYE2CHNkOw==
-Message-ID: <d2bebeb244f5b6cc396e1b0b1d78edd2655c2b97.camel@rahix.de>
-Subject: Re: [PATCH 1/1] test: Skip cleanup test if not built out of tree
-From: rahix <rahix@rahix.de>
-To: Tobias Deiminger <tdmg@linutronix.de>, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Harald Seiler <hws@denx.de>
-Date: Thu, 11 Jan 2024 18:51:47 +0100
-In-Reply-To: <20240108211100.112730-2-tdmg@linutronix.de>
-References: <20240108211100.112730-1-tdmg@linutronix.de>
- <20240108211100.112730-2-tdmg@linutronix.de>
-Autocrypt: addr=rahix@rahix.de; prefer-encrypt=mutual;
- keydata=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
- N5eftlrXcJt5uaP+FoonOrTg=
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=seashell11234455@gmail.com
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-40e629c5a42so4680035e9.0
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 09:32:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1704994353; x=1705599153; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=kjpd5IUBOeB/J2gQckxUU8y/gV3jpqFZjxLFFpLA/Hs=;
+ b=jDwnbOLhwDphSUFpsKgvYdJFG/BkFgV6KYcCj/ekwr3SShDq1XcbZ+xAFdBb3xz3yD
+ 2vXINw6UpDyyz9JA5vpzCeSkHJz0/EmEQvz0ldzEQCPdhqhkltWZNbfPAoZCCgGl9h5u
+ 9inL6tePMlrW+2aKCLz93gRZpjA3eliTlwrvRhCAGRKGOc4UOljY2nLALw/AEeCZYi6+
+ WNNGnjjbBvYnMxDfbOlU+/FN0UMuxLrUkcpVk1jFrhLsN4z7qHg//J3MCZ0lothSvbck
+ uJdqfdwJIqcMUPLGCO03NXQaKTxSsqRQMe5wT7HFqcKSbLtom9jqEkOaaGHihdR1QLJ5
+ 3+zQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704994353; x=1705599153;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=kjpd5IUBOeB/J2gQckxUU8y/gV3jpqFZjxLFFpLA/Hs=;
+ b=xHOBjdR+w6SE6UnltWWvYjy0do9A8Erkz8KGDIkODWhmt1lFcRDrl5ueYSKiBy8uSK
+ V3vSyp0tf4J+u7Yb1jH4aiFVpO165UTPn4FmrIvKcj1kjFj+69B6F34LRGZSivswGGxG
+ o2lk8lfAGobY/XF8KLdQ+Lk4IsLjRGRcsjdX7SzhnB+rHxvpa24HcTodhLMOe6Ls5EGa
+ v6s183N5n+XOZD8NLfCUAPAs95qgbt2WlD/2N+QsoHEFxpZoiWy+KwYv+FFmO2lHw7zT
+ BTNU9ElAiUwMXsPnatR1mQBTrYNzSgeT6B3HWi/vBW2HWLzaU7jomKHSvB72uleZS0Wl
+ n/DQ==
+X-Gm-Message-State: AOJu0YzfdgxQxvNul2wvvuZAiitZjBww7KBYPFBh66MHmCeTsRFmd9wN
+ EGAFe9BMDooZbU8YFNLfVM2ZXVTPJWN0pqmuMKM=
+X-Google-Smtp-Source: AGHT+IGGqBmnBN34WGkrpIjNRipWYfqHPnfcfspah2pdLS4Lu4k3vNAKADguoDSqaYUWsnXZKR6+V44qhfh6Jjvhq4Q=
+X-Received: by 2002:a7b:cd95:0:b0:40e:5f22:34ed with SMTP id
+ y21-20020a7bcd95000000b0040e5f2234edmr84867wmj.211.1704994353120; Thu, 11 Jan
+ 2024 09:32:33 -0800 (PST)
+MIME-Version: 1.0
+References: <20240107112713.61966-1-seashell11234455@gmail.com>
+ <20240107112713.61966-2-seashell11234455@gmail.com>
+ <20240108204251.GP1610741@bill-the-cat>
+In-Reply-To: <20240108204251.GP1610741@bill-the-cat>
+From: =?UTF-8?B?5YiY5a2U6Ziz?= <seashell11234455@gmail.com>
+Date: Fri, 12 Jan 2024 01:32:19 +0800
+Message-ID: <CAOKwTdpoGCEpAAwvTntg3HNj2zPr05gZ2cvUNisereqRVa4mJA@mail.gmail.com>
+Subject: Re: [PATCH 1/4] riscv: sophgo: milkv_duo: initial support added
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Bin Meng <bmeng@tinylab.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Leo <ycliang@andestech.com>, 
+ Michal Simek <michal.simek@amd.com>, Randolph <randolph@andestech.com>, 
+ Rick Chen <rick@andestech.com>, Samuel Holland <samuel@sholland.org>, 
+ Shengyu Qu <wiagn233@outlook.com>, Yu Chien Peter Lin <peterlin@andestech.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-MIME-Version: 1.0
-X-Mailman-Approved-At: Thu, 11 Jan 2024 18:55:45 +0100
+X-Mailman-Approved-At: Thu, 11 Jan 2024 18:55:51 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,43 +93,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 2024-01-08 at 22:11 +0100, Tobias Deiminger wrote:
-> 42c0e5bb054d ("test: Find leftovers after clean/mrproper") assumes out
-> of tree builds. test_clean and test_mrproper fail if the assumption
-> isn't met.
->=20
-> However there are valid scenarios where tests run with in source builds
-> (i.e., test.py --build-dir=3D.).
->=20
-> Automatically skip cleanup tests in such scenarios to prevent false
-> positives.
->=20
-> Signed-off-by: Tobias Deiminger <tdmg@linutronix.de>
+Tom Rini <trini@konsulko.com> =E4=BA=8E2024=E5=B9=B41=E6=9C=889=E6=97=A5=E5=
+=91=A8=E4=BA=8C 04:42=E5=86=99=E9=81=93=EF=BC=9A
+>
+> On Sun, Jan 07, 2024 at 07:27:07PM +0800, Kongyang Liu wrote:
+>
+> > Add support for Sophgo's Milk-V Duo board, only minimal device tree and
+> > serial console are enabled, and it can boot via vendor first stage
+> > bootloader.
+> >
+> > Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
+> >
+> > ---
+> >
+> >  arch/riscv/Kconfig                 |  4 ++++
+> >  board/sophgo/milkv_duo/Kconfig     | 28 ++++++++++++++++++++++++++++
+> >  board/sophgo/milkv_duo/MAINTAINERS |  6 ++++++
+> >  board/sophgo/milkv_duo/Makefile    |  5 +++++
+> >  board/sophgo/milkv_duo/board.c     |  9 +++++++++
+> >  include/configs/milkv_duo.h        | 16 ++++++++++++++++
+>
+> The defconfig patch should be folded in to this one.
+>
+I will fold it in next version.
 
-Reviewed-by: Harald Seiler <u-boot@rahix.de>
+> [snip]
+> > diff --git a/board/sophgo/milkv_duo/board.c b/board/sophgo/milkv_duo/bo=
+ard.c
+> > new file mode 100644
+> > index 0000000000..eaa47be173
+> > --- /dev/null
+> > +++ b/board/sophgo/milkv_duo/board.c
+> > @@ -0,0 +1,9 @@
+> > +// SPDX-License-Identifier: GPL-2.0+
+> > +/*
+> > + * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
+> > + */
+> > +
+> > +int board_init(void)
+> > +{
+> > +     return 0;
+> > +}
+>
+> Shouldn't you enable caches here?
+>
+Enable caches will cause other problems, and I will implement it
+in subsequent patches.
 
-> ---
-> =C2=A0test/py/tests/test_cleanup_build.py | 5 +++++
-> =C2=A01 file changed, 5 insertions(+)
->=20
-> diff --git a/test/py/tests/test_cleanup_build.py b/test/py/tests/test_cle=
-anup_build.py
-> index 5206ff73ec..aca90cb110 100644
-> --- a/test/py/tests/test_cleanup_build.py
-> +++ b/test/py/tests/test_cleanup_build.py
-> @@ -17,6 +17,11 @@ import pytest
-> =C2=A0@pytest.fixture
-> =C2=A0def tmp_copy_of_builddir(u_boot_config, tmp_path):
-> =C2=A0=C2=A0=C2=A0=C2=A0 """For each test, provide a temporary copy of th=
-e initial build directory."""
-> +=C2=A0=C2=A0=C2=A0 if os.path.realpath(u_boot_config.source_dir) =3D=3D =
-os.path.realpath(
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 u_boot_config.build_dir
-> +=C2=A0=C2=A0=C2=A0 ):
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 pytest.skip("Leftover detecti=
-on requires out of tree build.")
-> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return None
-> =C2=A0=C2=A0=C2=A0=C2=A0 shutil.copytree(
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 u_boot_config.build_dir,
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 tmp_path,
+> > diff --git a/include/configs/milkv_duo.h b/include/configs/milkv_duo.h
+> > new file mode 100644
+> > index 0000000000..dd1d146c50
+> > --- /dev/null
+> > +++ b/include/configs/milkv_duo.h
+> > @@ -0,0 +1,16 @@
+> > +/* SPDX-License-Identifier: GPL-2.0+ */
+> > +/*
+> > + * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
+> > + *
+> > + */
+> > +
+> > +#ifndef __CONFIG_H
+> > +#define __CONFIG_H
+> > +
+> > +#define CFG_SYS_SDRAM_BASE         0x80000000
+> > +
+> > +#define CFG_EXTRA_ENV_SETTINGS                 \
+> > +     "consoledev=3DttyS0"                         \
+> > +     "baudrate=3D115200\0"                        \
+>
+> We shouldn't need to set baudrate, it will be handled for us. Is
+> consoledev something that must be set? Can it all be done in a plain
+> text environment anyhow? Thanks.
+>
+I will check and detele it if it is unnecessary.
 
+Best regards
+Kongyang Liu
+> --
+> Tom
