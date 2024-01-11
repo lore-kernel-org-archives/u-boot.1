@@ -4,56 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02019C47258
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 17:04:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 957FDC47258
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 17:18:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F25587756;
-	Thu, 11 Jan 2024 18:04:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id D5FEC876C4;
+	Thu, 11 Jan 2024 18:18:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="z693jCDk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DOlFKux4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64C6787620; Thu, 11 Jan 2024 18:04:32 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AA15587885; Thu, 11 Jan 2024 18:18:19 +0100 (CET)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 302088785F
- for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 18:04:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CAF587620
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 18:18:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 0AF272233D;
- Thu, 11 Jan 2024 18:04:26 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1704992668;
- bh=26dNqidS44cOEu6eiTxI2OG+ORa682V5ds7fS1RUy0Q=; h=From:To:Subject;
- b=z693jCDkp19qEL71HnCF4vVEjzWi6uN0vDn5ABdvAqs+2O8uNClnpiPPbBwL4Tbuy
- 6FLoKhs35SVFyWmXS3kEXM7peWXn35jlQHvb0dB6YjLay9yW7x3S6VlzCeV/fB9f7t
- sTmj0JIaIMls1ceck4S/EMLWpwV0kIEowYmn8yDIrtF+nguc6+9yI2TBpdMZTxyFQr
- DUw4GBS94fjnn63WO1SCeRDzQfzvCN+/mWw1UFswnRnrYvDRgZefCc7GaY9yKJzqH7
- pFGjH0jneZNaPQ1QtWPum8+Z9UfdzIUYbBh4SvfCXGqGEA5nUNggGEN4bymwFwhZGN
- I12NA5ql0G7fA==
-Date: Thu, 11 Jan 2024 18:04:18 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Francis Laniel <francis.laniel@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v13 00/24] Modernize U-Boot shell
-Message-ID: <20240111170418.GA7220@francesco-nb>
-References: <20231222210244.91830-1-francis.laniel@amarulasolutions.com>
- <170379713946.899302.2054678070497875668.b4-ty@konsulko.com>
- <5740853.DvuYhMxLoT@pwmachine>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-7833b6bb41bso119911385a.3
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 09:18:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1704993496; x=1705598296; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=LEO73EOi9OiNBoalw4y9eQA6U0uCQ1hgUmoTmFKW+4k=;
+ b=DOlFKux4qrnyz1+z9G8XQf04GU4SFrSdgCNB5uyr4Qe9QQ7wnoumalWC1JPH1YbnxN
+ N8yG8JYcC696oiipZm+LAu6NyvBF3+NxLvVwjsL3kc/lYl8mAL7rlmON776L6yd/hSGE
+ 1vkP8rbQusgyyCx+rqK5oa33xVliWDHGx1gGg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704993496; x=1705598296;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LEO73EOi9OiNBoalw4y9eQA6U0uCQ1hgUmoTmFKW+4k=;
+ b=pcos1szZOZgB9mS5ThzEhe/5i5DQhl9Ccf4GPDMO82OfKiPofej38mGL7x2s040rkS
+ K7o54zv1a4/PRU4AHkmEee7VfnxRowEMNXIMuLPBcrQKfHxVtWihfMS1cE7bRPKhCKhK
+ Vz2oK13bTKg+TR3JcHCOg6B87rjhAOC8DUEhNsZCIqr6/sEacALurBSUa79S4nAdIB3y
+ IILQ4zR1P3435C9uHayfIo7x8CJScO/zXBdJlW392B7ufiYyfwra3ErPFkaILI5/qDXx
+ vXqumFvG3BHF8ZAcMXAjORIBQuHkxsaUT7NgsQs86F6DPm0NXOb7vGx0MRD7Q+ZY+kF0
+ F31g==
+X-Gm-Message-State: AOJu0YyQL6AYpBH36MGpIRTx7apHjziUb6doOqsRaumKrs53We1EBGAC
+ 2FePO49pyBKLzDjn/u5To+RWfEJjb2KxSln4zIofYMixO3c=
+X-Google-Smtp-Source: AGHT+IEcCwwkJap3QnH0bCbVCWdNS3wcoiA38TohNZenXNNCm4xOYwBGSCtE0NfP9zRp+h9eAuwkZA==
+X-Received: by 2002:a05:620a:2404:b0:783:1a11:5efc with SMTP id
+ d4-20020a05620a240400b007831a115efcmr147212qkn.42.1704993496146; 
+ Thu, 11 Jan 2024 09:18:16 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
+ [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
+ v10-20020a05620a122a00b0078321b70b05sm462167qkj.101.2024.01.11.09.18.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Jan 2024 09:18:15 -0800 (PST)
+Date: Thu, 11 Jan 2024 12:18:13 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Anthony Loiseau <anthony@loiseau.fr>
+Cc: u-boot@lists.denx.de, Anthony Loiseau <anthony.loiseau@allcircuits.com>
+Subject: Re: [PATCH 1/1] get_maintainer.pl: slightly modify penguin_chief
+Message-ID: <20240111171813.GJ1610741@bill-the-cat>
+References: <20240111165127.12882-1-anthony@loiseau.fr>
+ <20240111165127.12882-2-anthony@loiseau.fr>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="dH+nNIm1RpzCF7IG"
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <5740853.DvuYhMxLoT@pwmachine>
+In-Reply-To: <20240111165127.12882-2-anthony@loiseau.fr>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,56 +91,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom, Francis
 
-On Fri, Dec 29, 2023 at 07:55:37PM +0100, Francis Laniel wrote:
-> Le jeudi 28 décembre 2023, 21:58:59 CET Tom Rini a écrit :
-> > On Fri, 22 Dec 2023 22:02:20 +0100, Francis Laniel wrote:
-> > > During 2021 summer, Sean Anderson wrote a contribution to add a new shell,
-> > > based on LIL, to U-Boot [1, 2].
-> > > While one of the goals of this contribution was to address the fact actual
-> > > U-Boot shell, which is based on Busybox hush, is old there was a
-> > > discussion
-> > > about adding a new shell versus updating the actual one [3, 4].
-> > > 
-> > > So, in this series, with Harald Seiler, we updated the actual U-Boot shell
-> > > to reflect what is currently in Busybox source code.
-> > > Basically, this contribution is about taking a snapshot of Busybox
-> > > shell/hush.c file (as it exists in commit 37460f5da) and adapt it to suit
-> > > U-Boot needs.
-> > > 
-> > > [...]
-> > 
-> > Applied to u-boot/next, thanks!
-> 
-> Thank you for the merge!
-> If there is any problem, do not hesitate to mail me and I will take care of 
-> it!
+--dH+nNIm1RpzCF7IG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This change, specifically setting the modern hush shell as default, is
-breaking our boot script, just noticed since the current U-Boot master
-has a regression for us.
+On Thu, Jan 11, 2024 at 05:51:27PM +0100, Anthony Loiseau wrote:
 
-We still need to figure out the exact details, here [1] you can find the
-boot script (that has some placeholder that is replaced during build).
+> From: Anthony Loiseau <anthony.loiseau@allcircuits.com>
+>=20
+> Penguin chiefs are actually stripped out from get_maintainer results unle=
+ss
+> --git-chief-penguins is provided, which appends them to all results inste=
+ad.
+>=20
+> This is a issue for U-Boot since Tom Rini (penguin chief) is also maintai=
+ner
+> of some sub-trees ("ARM", "ARM TI" and "THE REST").
+>=20
+> Hopefully, this match is performed case-senditive over name and email,
+> therefore upper-casing Tom Rini last name workarounds the issue.
+>=20
+> Important note: This also fixes "THE REST" catch all section resulting
+> in Tom Rini listed as (maintainer:THE REST) for all files. Hope there is =
+not
+> too much developers scripting their patch email header from get_maintaine=
+r.pl
+> output, otherwise Tom Rini may be flooded.
+>=20
+> Cc: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Anthony Loiseau <anthony.loiseau@allcircuits.com>
 
-and the error is something like:
+Given the explanation and links in the cover letter, this seems like the
+most reasonable path to me, thanks.
 
-```
-## Executing script at 90280000
-Loading DeviceTree: k3-am625-verdin-nonwifi-dev.dtb
-69025 bytes read in 11 ms (6 MiB/s)
-82 bytes read in 9 ms (8.8 KiB/s)
-Working FDT set to 90200000
-syntax error at 'done'HUSH died!
-resetting ...
-```
+Acked-by: Tom Rini <trini@konsulko.com>
 
-that I _assume_ comes from this line
+--=20
+Tom
 
-    env set set_apply_overlays 'env set apply_overlays "for overlay_file in \\${fdt_overlays}; do echo Applying Overlay: \\${overlay_file} && ${load_cmd} \\${loadaddr} \\${overlays_prefix}\\${overlay_file} && fdt apply \\${loadaddr}; env set overlay_file; done; true"'
+--dH+nNIm1RpzCF7IG
+Content-Type: application/pgp-signature; name="signature.asc"
 
-[1] https://git.toradex.com/cgit/meta-toradex-bsp-common.git/tree/recipes-bsp/u-boot/u-boot-distro-boot/boot.cmd.in
+-----BEGIN PGP SIGNATURE-----
 
-Francesco
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWgItIACgkQFHw5/5Y0
+tyy56Av6AsBlTGkoPanurRGqjD2yNYcQfvN8DsuuNlximQ1OJXr3MgunstU4Wpql
+B2zIm0lmA4KgOnKzB8YcCnt8SPjbAvLNxdkSdL+LIbCUvwhV5iqFiCFUSiFaG9Li
+zcLUw2tdSdN2SW+ONw86v62Av+WnqXvhHYoCXPi8292jgbw460aj5ZdmRg3DxcFF
+Cpfd1eCscxVlawZzn3IYvVjWH178EivPnP8wyhoR8Ilho+zlS1P3t8EgCS0Kz3Y7
+MZtapJWxwtflj/wIpHm8Xt1j1ut1NXDdaTS0ctTB2PObB4hgrksrBVOvWA9z3LLJ
+hLKsbVDfqRreUuYLFC0tEL/4Lyp/CrWoxpPVP6Aen/uZW+2xCTFBvlFOfTz9pfBP
+B7RxVrvyxl2+2fUnXRqyBWoqEwUgnGN7nUWbGKc//W2VX6rMpphV2iXwAcZa2Urm
+vmRz95mqhSDo2hTMvDdqhzuet0Uj8vsJ+g+IcLk56gcdDi/12sFOaKZ0v86UAcVG
+ettY8nc+
+=UMSB
+-----END PGP SIGNATURE-----
 
+--dH+nNIm1RpzCF7IG--
