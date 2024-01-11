@@ -4,72 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01FACC47077
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 09:50:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9644C47077
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 10:17:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7987E87725;
-	Thu, 11 Jan 2024 10:50:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 37C588765B;
+	Thu, 11 Jan 2024 11:17:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="AQGNRdiD";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="eRhGWZZh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 770EA87725; Thu, 11 Jan 2024 10:50:52 +0100 (CET)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 13B878765B; Thu, 11 Jan 2024 11:17:42 +0100 (CET)
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 502D787A99
- for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 10:50:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D358187613
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 11:17:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-33694bf8835so4151560f8f.3
- for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 01:50:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1704966650; x=1705571450;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to;
- bh=Hr+Zp6/XS3IW9+cANsoGfZU5cdTZrUycKfc5qf6fN4o=;
- b=AQGNRdiDcRWU81KZntkN4CQxv1y7UTRX6zt04IoaegioYB8uVGEmtQt5/RyQhrTRMB
- saVdEbFvZ5cylaKLdHAh2TubA9+e+A7mG7dMDohXBR25nqA6qx6Sh+yHx9pYTk15qeDU
- J3dmD7w/Hg3QfIEZ2gZcYiNLeK4fnALBVzfQo1bS3JZz6MJA9PsU9Ad/juc+5vHi4j/T
- 6G5K5/dMTgVUxWg5F6gIvpI7WMago3mGfjoaTwq4elN/cN+KGOC05c7SYBczScEJAj45
- 9bDGlQiSIy8dq+uYdWiNZwZjB22TrFkFpUeKFf1g0VGHb6rjhdEh+z0QIg004KgvXTDe
- /R2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704966650; x=1705571450;
- h=mime-version:message-id:date:subject:cc:to:from:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Hr+Zp6/XS3IW9+cANsoGfZU5cdTZrUycKfc5qf6fN4o=;
- b=B5+SKbT3jgZRl/AqpaZroRWdQk5kNUBdTiSEaJF2n1DpS1KGmOb4wfBxJ+OSaAqSQu
- rMlR/xa2xNrvHQn1VIClDE0aPcq53OycMfxT0MMx6jHYAgT8dqSmIbNxk2l8hgz8wHUB
- VnQUFU9FERctarfNEArmaC/xUMEuYJlO10GLEr4aAdpvr8ZgnlUnx0r2IuhcappP8KCa
- Fcz5MBVdHNEY97s6uPNEPSxQ4inBlhnazfeYh8jPwLvybLkAgu/X4G9kbc6852HmZ9St
- St0y7QA/n0c0aL1i5xn8A8JM+nMfnOkyWHSymAiryeKjURp2X2pnt5cNhEaHClAcZL+h
- kJDQ==
-X-Gm-Message-State: AOJu0YwJAL2tpZ4YB3RRFATwU+c5yLG5lxXFIBr4EmjBifuPRCGRJJzx
- KajV6pMyhuAqTcMggHyn3hu2105BPjKG7y0P2R7GtljLtas=
-X-Google-Smtp-Source: AGHT+IEJbsopqSa1rGgU84DkzUekEcqJ2cZnBShYhp1GQEPYWPTlCOfrvgxAW5DA7P1lNUJ4aADxNw==
-X-Received: by 2002:a05:6000:1813:b0:337:62c0:796a with SMTP id
- m19-20020a056000181300b0033762c0796amr429521wrh.8.1704966649659; 
- Thu, 11 Jan 2024 01:50:49 -0800 (PST)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- d6-20020a056000114600b003366a9cb0d1sm747318wrx.92.2024.01.11.01.50.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jan 2024 01:50:49 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Lukasz Majewski <lukma@denx.de>, u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-dfu-20240111
-Date: Thu, 11 Jan 2024 10:50:47 +0100
-Message-ID: <875y006vwo.fsf@baylibre.com>
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by ams.source.kernel.org (Postfix) with ESMTP id BAC01B80ACD;
+ Thu, 11 Jan 2024 10:17:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDACBC433C7;
+ Thu, 11 Jan 2024 10:17:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1704968258;
+ bh=Gb2kX71f3+QBBn2KsSXB5XZqPgX4ur3uPoHdMUH7RfA=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=eRhGWZZh2JOCtSW1IAaG5u4IFbcWaMZEGX6GlZKu64pnYk8jgJISz4+2E10x+Nfu4
+ 0T6MH5jYyLd5wVO4PeVnWYJieAqkpjhONRoKpVLTmxjmFJ/au9rusJzVFoDECf7N1F
+ pKbV5ZQSbha4oA6b6zy6/qcSN72sTXzu2lv1wO3WmjnmWbPWmT2nNiUMvyuWHSf8P+
+ gRoDzVaobC72iosqpaW19S+9YFFs3IqQJ3Gng3L0P1NtdpV7pS7EmY2KTqNcHIAHGJ
+ rkjDzjkpVQ8gZJB1uJLxJvx/xKAMmkXgIbwASZsOI5lrtn4mjBZIG3Jc7UkzYNK0wr
+ ScQ47XctdYCYw==
+Message-ID: <a0a7b0a6-9575-4783-9409-3dd915bc862c@kernel.org>
+Date: Thu, 11 Jan 2024 12:17:31 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH V2 00/10] board/ti: k3 boards: Stop using findfdt
+Content-Language: en-US
+To: Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
+Cc: Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu Raja <sinthu.raja@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Andrew Davis <afd@ti.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
+ u-boot@lists.denx.de, Jon Humphreys <j-humphreys@ti.com>
+References: <20240109191506.3820908-1-nm@ti.com>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20240109191506.3820908-1-nm@ti.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,70 +76,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-Here are some developments for master including:
 
-- Implement fastboot multi-response. This allows multi-line response and
-  most importantly, finally adds support for fastboot getvar all command.
+On 09/01/2024 21:14, Nishanth Menon wrote:
+> This is a wide cleanup to switch to setting fdtfile using env_set
+> instead of scripted magic. 'fdtfile' is expected to be set by default.
+> This allows the stdboot triggered efi loaders to find the correct OS
+> device tree file even if regular boot process is interrupted by user
+> intervention.
+> 
+> This is a refresh of
+> https://lore.kernel.org/all/86le9dwz4d.fsf@udb0321960.dhcp.ti.com/ which
+> was the wrong approach.
+> 
+> Updates from V1:
+>  * Renames of variables and macros for various review comments.
+>  * Commit message updates in some patches for clarity.
+> 
+> Bootlogs: https://gist.github.com/nmenon/843e343cde645ec4aa57b60cece5256a
+> 
+> based on master: c5e461fbf7cc Merge tag 'u-boot-imx-master-20240108' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx
+> 
+> NOTE: There are a couple of checkpatch WARN (around LATE_INIT) and
+> CHECK (fdt_ops #ifdeffery) that on closer inspection looks fine and
+> consistent with other similar usage.
+> 
+> V1: https://lore.kernel.org/all/20240108173301.2692332-1-nm@ti.com/
+> 
+> Nishanth Menon (10):
+>   board: ti: common: Introduce a common fdt ops library
+>   board: ti: am62ax: Set fdtfile from C code instead of findfdt script
+>   board: ti: am62x: Set fdtfile from C code instead of findfdt script
+>   board: ti: am64x: Set fdtfile from C code instead of findfdt script
+>   board: ti: am65x: Set fdtfile from C code instead of findfdt script
+>   board: ti: j721e: Set fdtfile from C code instead of findfdt script
+>   board: ti: j721s2: Set fdtfile from C code instead of findfdt script
+>   board: beagle: beagleboneai64: Set fdtfile from C code instead of
+>     findfdt script
+>   board: beagle: beagleplay: Set fdtfile from C code instead of findfdt
+>     script
+>   include: env: ti: Drop default_findfdt
 
-- New 'fastboot oem console' command. Useful for debugging to send data
-  the u-boot shell via fastboot
+For this series:
 
-- Console recording fixes
+Reviewed-by: Roger Quadros <rogerq@kernel.org>
 
-The CI job is at https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/19279
-
-Thanks,
-Mattijs
-
-The following changes since commit c5e461fbf7cc72f0c1c8a79226b6a5170e56cb4d:
-
-  Merge tag 'u-boot-imx-master-20240108' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2024-01-08 13:39:43 -0500)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-20240111
-
-for you to fetch changes up to 6c2f753f4ad3dcee60190949d1286736a6d51d17:
-
-  test: hush: dollar: fix bugous behavior (2024-01-09 15:31:59 +0100)
-
-----------------------------------------------------------------
-u-boot-dfu-20240111
-
-- Implement fastboot multi-response. This allows multi-line response and
-  most importantly, finally adds support for fastboot getvar all command.
-
-- New 'fastboot oem console' command. Useful for debugging to send data
-  the u-boot shell via fastboot
-
-- Console recording fixes
-
-----------------------------------------------------------------
-Ion Agorria (7):
-      fastboot: multiresponse support
-      fastboot: implement "getvar all"
-      common: console: introduce console_record_isempty helper
-      common: console: record console from the beginning
-      lib: membuff: fix readline not returning line in case of overflow
-      fastboot: add oem console command support
-      test: hush: dollar: fix bugous behavior
-
- boot/bootmeth_extlinux.c          |  2 +-
- common/console.c                  | 10 ++++-
- doc/android/fastboot-protocol.rst |  3 ++
- doc/android/fastboot.rst          |  1 +
- drivers/fastboot/Kconfig          |  7 ++++
- drivers/fastboot/fb_command.c     | 52 ++++++++++++++++++++++++++
- drivers/fastboot/fb_getvar.c      | 77 ++++++++++++++++++++++++++++++++-------
- drivers/usb/gadget/f_fastboot.c   | 29 +++++++++++++++
- include/console.h                 | 13 +++++++
- include/fastboot-internal.h       |  7 ++++
- include/fastboot.h                | 19 ++++++++++
- include/membuff.h                 |  5 ++-
- lib/membuff.c                     |  4 +-
- net/fastboot_udp.c                | 29 ++++++++++++---
- test/hush/dollar.c                | 23 ++----------
- 15 files changed, 236 insertions(+), 45 deletions(-)
-
+-- 
+cheers,
+-roger
