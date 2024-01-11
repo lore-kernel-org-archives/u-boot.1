@@ -4,71 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 100F0C47077
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 10:21:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D740BC4707B
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 10:34:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1363C87776;
-	Thu, 11 Jan 2024 11:21:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 293B087883;
+	Thu, 11 Jan 2024 11:34:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="cFHw9OHa";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="V7ihr5yI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FA4087613; Thu, 11 Jan 2024 11:21:03 +0100 (CET)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2705287885; Thu, 11 Jan 2024 11:34:35 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CEB0A87776
- for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 11:21:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 704E586813
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 11:34:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-dbe344a6cf4so4272438276.0
- for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 02:21:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1704968459; x=1705573259;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=L4RvWDvWT+B6QRxyuRtL3Vvsf5OIJSxxkFHVPFFPjYw=;
- b=cFHw9OHavF2wV/nWzjdZ5i+EtqgZpEAzdIaXJO+8ducaaMcu3L/T4pfRL6WDvy8sNW
- pSvP7LrntpWHUKmmZyi+piD2vxhEY4q0+unH6EFS/69QsRTXkFvMDkO/V/GiOqWh8bhx
- Wg4HqB6/9BPhFgzpEViRnPATtaJRyLqs2YHFU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704968459; x=1705573259;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=L4RvWDvWT+B6QRxyuRtL3Vvsf5OIJSxxkFHVPFFPjYw=;
- b=YD129Xcst78lCz4Mx6ItuX/hSw6497yzccZWVfZjOVqYFbX8u71sjJurXKywQCukjj
- Xb2fEJrzzLKqRWfZbNK5NxbFaUP4Yyo5q2e4Aaa1FuQUEfi1I0/4S1BvPrKg8mAwBWZO
- aJa1mXQf0hJ02nJ3+5eOhH4DPetSEK3eX1lmpj/jLfgWxQZ9RhDfC4g3R2Ddm730erbk
- o+e8VTvGyBa7UTrlHK0Aa7z2DBsiJ62p62L7FHjIPc8jTpG+LNMY/1VPW0BtSeqxG7Jy
- OyDenc+J+R+fMblIKUa4sIM1AhYtufno6/cwUbwK45OxW6bUOePH5pOTVu2vUKyFTHwr
- AB3g==
-X-Gm-Message-State: AOJu0YyyT9+FV6hFoGSVqLvQ9Gs8ty8nxr3gHYg1xhVTcGAf5sSdI0fP
- ORQXx5PZvJRJVd4k94BpXCJAxMp+b6oroGGrB0iEKdXiQkAOdw==
-X-Google-Smtp-Source: AGHT+IHYS75gA/GM7R0mynVo30+qobBtSON/Jm/PoD1fyRuTZKe6KFrhL1JdIRySMlbg1OPGsstjzYgXIBdMSbGx/9Y=
-X-Received: by 2002:a05:6902:218a:b0:dbc:ceab:4c1c with SMTP id
- dl10-20020a056902218a00b00dbcceab4c1cmr993226ybb.7.1704968459518; Thu, 11 Jan
- 2024 02:20:59 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40BAYTX8053612;
+ Thu, 11 Jan 2024 04:34:29 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1704969270;
+ bh=8h3yCOrquOEfKhrSF6IevhdxJ/n0y5OG3GFYh9jmumE=;
+ h=From:Date:Subject:To:CC;
+ b=V7ihr5yIvs3BigDHc5i8pAqOwai8GnU8E5jJEMfw21CBIejaXeUK27brIP6PBeuYl
+ PNcAwRgY9dLY35KGm3Tt53J/r+5keO87RcdpCZ05hrc6rI/rv7LPEJqwLHInz4cMCj
+ HZfQ0fcGw5IEBpZCV8rx8bdkMBUSOuSnEZfSF/VQ=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40BAYTYG081678
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 11 Jan 2024 04:34:29 -0600
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 11
+ Jan 2024 04:34:29 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 11 Jan 2024 04:34:29 -0600
+Received: from [127.0.1.1] (uda0497581.dhcp.ti.com [10.24.68.185])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40BAYQmC087112;
+ Thu, 11 Jan 2024 04:34:27 -0600
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+Date: Thu, 11 Jan 2024 16:04:19 +0530
+Subject: [PATCH RFC] Kconfig: Add support for FIT image signature enforcing
 MIME-Version: 1.0
-References: <20230718085736.17337-1-n-jain1@ti.com>
-In-Reply-To: <20230718085736.17337-1-n-jain1@ti.com>
-From: Jagan Teki <jagan@amarulasolutions.com>
-Date: Thu, 11 Jan 2024 15:50:48 +0530
-Message-ID: <CAMty3ZBPuYFwQTFT9JwwETGdLSvz1i6NvYFsTcv0SV1iVOjQYQ@mail.gmail.com>
-Subject: Re: [PATCH V6 00/10] Update SPL splashscreen framework for AM62x
-To: Nikhil M Jain <n-jain1@ti.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, devarsht@ti.com, vigneshr@ti.com,
- nsekhar@ti.com, sjg@chromium.org, samuel@dionne-riel.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20240111-b4-upstream-fit-signature-enforce-v1-1-2b91be31866e@ti.com>
+X-B4-Tracking: v=1; b=H4sIACrEn2UC/x3NsQqDMBCA4VeRm3uQWIvBtdAH6FocEr3oDY1yF
+ 4sgvruh47f8/wFKwqTQVQcI/Vh5SQX2VsEw+zQR8lgMtanv1poWQ4PbqlnIfzFyRuUp+bwJIaW
+ 4yEBo3cObMTgX2gilswpF3v+PD7xfT+jP8wIP/SSSeAAAAA==
+To: <u-boot@lists.denx.de>
+CC: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Andrew
+ Davis <afd@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Nishanth Menon <nm@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>
+X-Mailer: b4 0.13-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1704969266; l=3873;
+ i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
+ bh=vWIkcju0OAfvvy49A7FjPhnym3Ko1tCo1178ZInrgDU=;
+ b=yPUbELg0uRkq+62VLqR/IW6UGTfWAnnmLkG5RjmtgnWjz3dnOXG5hFbacyFoyYKUm/XCMYC9a
+ +Ve0ncQuITxBFhPHZuVcugg5qxbGLiqqk2nwx4QaO2Ux1HwVBnFmEsf
+X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
+ pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,65 +91,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Nikhil,
+FIT_SIGNATURE doesn't enforce the U-boot setup to be correct for booting
+the FIT images, the DTB might not have all the proper nodes and it just
+boots up without any warning. This makes it difficult to get the correct
+setup working.
 
-On Tue, Jul 18, 2023 at 2:27=E2=80=AFPM Nikhil M Jain <n-jain1@ti.com> wrot=
-e:
->
-> This patch series aims at updating SPL splashscreen framework for AM62x.
->
-> This patch series depends on
-> https://lore.kernel.org/u-boot/20230504225829.2537050-1-sjg@chromium.org/
->
-> This series:
-> - Fixes compilation issues in case splash related configs are not
->   defined in SPL.
-> - Does page table setup, dram initialisation and dcache enabling in
->   one function call spl_enable_dcache.
-> - Allows passing of framebuffer from spl to u-boot, eliminating flicker.
->
-> V6:
-> - Add patch [1] from Samuel Dionne-Riel fixing CMD_BMP/BMP dependecy.
->
-> V5:
-> - Change A53 SPL DDR layout from ASCII table to tabular format.
->
-> V4:
-> - Fix commit message.
-> - Introduce patch defining DDR layout in A53 SPL.
-> - Add Reviewed-by tags.
->
-> V3:
-> - Fix spacing issues.
-> - Add Reviewed-by tag.
-> - Replace #if with if in patch
->   common: spl: spl: Remove video driver
-> - Add link to updated memory map.
->
-> V2:
-> - Update cover letter.
-> - Fix commit message.
->
-> [1]: https://patchwork.ozlabs.org/project/uboot/patch/20230709231810.6330=
-44-1-samuel@dionne-riel.com/
->
-> Nikhil M Jain (9):
->   common: spl: spl: Update stack pointer address
->   arch: arm: mach-k3: common: Return a pointer after setting page table
->   board: ti: am62x: evm: Update function calls for splash screen
->   include: video: Reserve video using blob
->   common: board_f: Pass frame buffer info from SPL to u-boot
->   drivers: video: Kconfig: Add config remove video
->   common: spl: spl: Remove video driver
->   configs: am62x_evm_a53: Add bloblist address
->   doc: board: ti: am62x_sk: Add A53 SPL DDR layout
->
-> Samuel Dionne-Riel (1):
->   common: Kconfig: Fix CMD_BMP/BMP dependency
+Adds an enforcement flag that doesn't allow the setup to have problems
+and enforces the environment to only pick the signature node from DTB
+and don't rely on anything else.
 
-I'm trying to use this to print splash in SPL. Look like the SPL video
-is not initialized in a general way like U-Boot proper does via
-board_f.c  in reserve_video() correct? do you have your board code to
-initialize the video for SPL?
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+---
+A very crude implementation of [0], not exactly sure if the Kconfig
+should just protect the getting key part of if we can make it more
+generic and handle this as some lockdown where we can disable boot for
+any other method and just allow FIT Images to bootup.
 
-Jagan.
+[0]: https://lore.kernel.org/u-boot/CAPnjgZ3B9hWTNAMr2QjSN8P1AsOme4XfSAYUKSg=tRRiJ9drTg@mail.gmail.com/
+---
+ boot/Kconfig         | 11 +++++++++++
+ boot/image-fit-sig.c | 31 +++++++++++++++++++++----------
+ 2 files changed, 32 insertions(+), 10 deletions(-)
+
+diff --git a/boot/Kconfig b/boot/Kconfig
+index fbc49c5bca47..ed85fd3dc3c5 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -78,6 +78,17 @@ config FIT_SIGNATURE
+ 	  format support in this case, enable it using
+ 	  CONFIG_LEGACY_IMAGE_FORMAT.
+ 
++config FIT_SIGNATURE_ENFORCE
++	bool "Enforce the signature in FIT Images"
++	default y if TI_SECURE_DEVICE
++	depends on FIT_SIGNATURE
++	help
++	  Enabling FIT_SIGNATURE by default doesn't enforce the U-boot DTB to be
++	  having keys and allows booting the images without having proper setup.
++	  This option enforces the FIT signature mechanism to contain the keys in
++	  the DTB and enforce the nodes to be authenticated without relying on
++	  the "required" node in the DTB.
++
+ config FIT_SIGNATURE_MAX_SIZE
+ 	hex "Max size of signed FIT structures"
+ 	depends on FIT_SIGNATURE
+diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
+index 12369896fe3f..8a324733e7e4 100644
+--- a/boot/image-fit-sig.c
++++ b/boot/image-fit-sig.c
+@@ -490,15 +490,24 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
+ 	/* Work out what we need to verify */
+ 	key_node = fdt_subnode_offset(key_blob, 0, FIT_SIG_NODENAME);
+ 	if (key_node < 0) {
+-		debug("%s: No signature node found: %s\n", __func__,
+-		      fdt_strerror(key_node));
+-		return 0;
++		if (IS_ENABLED(CONFIG_FIT_SIGNATURE_ENFORCE)) {
++			printf("%s: No signature node found: %s\n", __func__,
++			       fdt_strerror(key_node));
++			return -EPERM;
++		} else {
++			debug("%s: No signature node found: %s\n", __func__,
++			      fdt_strerror(key_node));
++			return 0;
++		}
+ 	}
+ 
+ 	/* Get required-mode policy property from DTB */
+-	reqd_mode = fdt_getprop(key_blob, key_node, "required-mode", NULL);
+-	if (reqd_mode && !strcmp(reqd_mode, "any"))
+-		reqd_policy_all = false;
++	if (!IS_ENABLED(CONFIG_FIT_SIGNATURE_ENFORCE)) {
++		reqd_mode =
++			fdt_getprop(key_blob, key_node, "required-mode", NULL);
++		if (reqd_mode && !strcmp(reqd_mode, "any"))
++			reqd_policy_all = false;
++	}
+ 
+ 	debug("%s: required-mode policy set to '%s'\n", __func__,
+ 	      reqd_policy_all ? "all" : "any");
+@@ -514,10 +523,12 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
+ 		const char *required;
+ 		int ret;
+ 
+-		required = fdt_getprop(key_blob, noffset, FIT_KEY_REQUIRED,
+-				       NULL);
+-		if (!required || strcmp(required, "conf"))
+-			continue;
++		if (!IS_ENABLED(CONFIG_FIT_SIGNATURE_ENFORCE)) {
++			required = fdt_getprop(key_blob, noffset,
++					       FIT_KEY_REQUIRED, NULL);
++			if (!required || strcmp(required, "conf"))
++				continue;
++		}
+ 
+ 		reqd_sigs++;
+ 
+
+---
+base-commit: a803f87202aa48974bdff4d8100464a8288931e4
+change-id: 20231107-b4-upstream-fit-signature-enforce-185a0db88b7f
+
+Best regards,
+-- 
+Manorit Chawdhry <m-chawdhry@ti.com>
+
