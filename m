@@ -4,52 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33330C47258
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 13:20:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E01DC47077
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 13:21:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E502087AE2;
-	Thu, 11 Jan 2024 14:20:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4FF668785F;
+	Thu, 11 Jan 2024 14:21:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="fc9havgR";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="YKBAzJmg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F12587AE2; Thu, 11 Jan 2024 14:20:10 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id C2D5A877C8; Thu, 11 Jan 2024 14:21:39 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFA33877C8
- for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 14:19:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D60AE8761C
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 14:21:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 06F0061AC0;
- Thu, 11 Jan 2024 13:19:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6DFABC43394;
- Thu, 11 Jan 2024 13:19:23 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 84216CE1E6A;
+ Thu, 11 Jan 2024 13:20:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB6AEC4160E;
+ Thu, 11 Jan 2024 13:19:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1704979165;
- bh=AbCDSzcff61yTBCgFVbMOX7pPu//fQJ6fDMZQCwNlU4=;
- h=From:To:Cc:Subject:Date:From;
- b=fc9havgR0pURPcFwGAdFCl8OxOzaDbBF7ivR/5vFX4EV6A3ZraxyTC9tYkGpeGT8C
- wyR2H7ZjcbBSXq0wLgKkRhzJZj1l6sbPkwHo/jJmiuroIPa33INoJdNxt5/HpvLjDz
- HORsxZPQR6Ye17eMeFmpTE4gjUFZBW19y7ZwPd8WxEtP8cDKt7goeuW9ivLB3tZzla
- +cm4UhFI34GXLCOtzQEdRA5ZyRhSsxkPl8sQpgudshWq7wg6Am10KNqB11mZ+Cp2Gd
- Bmjj40k42rPva6BTRikRo/jvyDmpu3n7WpQf+LYX4wcV+OBi41N74d/EXclOmTCHkB
- xYq5aSsyB8Z0g==
+ s=k20201202; t=1704979177;
+ bh=8ja47tWr/dp+w5cEyzPr1B4nKJ1DavwjdD9R1nF4CXQ=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=YKBAzJmga8r+8qUcMHvDc+Ge+1YAiL2H6dWFmCMPHfdkk0l5wptfymPfTZZTO6+/0
+ 4RxWX6ijBHy3guCwjQ/jFgr2w8IKmKR0LmMc0kaMpAczjo4FiS1ZaGB5AdQk4z9Bqv
+ 80jxXmtr/1/bnc4zYP0tm1Lf9XiN+D9B3T+KtMybQ+27QKRh67MMfapZihmsIBdTGI
+ J5triRZVGAI6ftSHmNQwF9p5Xtv3hGC/Kxg11l1SDsZQEs6wnOrcDK0ecJc5VMYKJO
+ kgQlfBzSNqs7acqf4+2tbhTtFhpd1VaXfiB6tIdLquwgrJysir+LIfSfjU1FjhDvu7
+ azPvc/MdMhfqg==
 From: Roger Quadros <rogerq@kernel.org>
 To: trini@konsulko.com, dario.binacchi@amarulasolutions.com,
  michael@amarulasolutions.com
 Cc: vigneshr@ti.com, nm@ti.com, praneeth@ti.com, afd@ti.com, srk@ti.com,
  u-boot@lists.denx.de, Roger Quadros <rogerq@kernel.org>
-Subject: [PATCH v2 0/4] mtd: omap_gpmc: Fix GPMC & NAND drivers
-Date: Thu, 11 Jan 2024 15:19:16 +0200
-Message-Id: <20240111131920.73691-1-rogerq@kernel.org>
+Subject: [PATCH v2 4/4] arm: mach-k3: am642: Define NAND boot device
+Date: Thu, 11 Jan 2024 15:19:20 +0200
+Message-Id: <20240111131920.73691-5-rogerq@kernel.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240111131920.73691-1-rogerq@kernel.org>
+References: <20240111131920.73691-1-rogerq@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -68,41 +70,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+AM642 SoC supports booting from GPMC NAND device.
+Define boot device for it.
 
-When testing the driver with K3 platform, build and functional
-issues were found in the ti-gpmc and omap_gpmc NAND driver.
-Fix those.
+Signed-off-by: Roger Quadros <rogerq@kernel.org>
+---
 
-cheers,
--roger
+Notes:
+    v2: No change
 
-Changelog:
+ arch/arm/mach-k3/am642_init.c            | 3 +++
+ arch/arm/mach-k3/include/mach/am64_spl.h | 1 +
+ 2 files changed, 4 insertions(+)
 
-v2:
-- Added "mtd: rawnand: omap_gpmc: fix OF based partition parsing for NAND".
-- Dropped defconfig patch.
-
-CI test results: https://github.com/u-boot/u-boot/pull/467
-
-v1:
-https://lore.kernel.org/all/20240109122605.51951-1-rogerq@kernel.org/
-
-Roger Quadros (4):
-  memory: ti-gpmc: Fix build
-  mtd: rawnand: omap_gpmc: Use DT provided IO address
-  mtd: rawnand: omap_gpmc: fix OF based partition parsing for NAND
-  arm: mach-k3: am642: Define NAND boot device
-
- arch/arm/mach-k3/am642_init.c            |  3 +++
- arch/arm/mach-k3/include/mach/am64_spl.h |  1 +
- drivers/memory/ti-gpmc.c                 |  2 +-
- drivers/mtd/nand/raw/omap_gpmc.c         | 21 ++++++++++++++++-----
- 4 files changed, 21 insertions(+), 6 deletions(-)
-
-
-base-commit: c2c598e87cfe56f5991730762c00733c5aa9a994
-prerequisite-patch-id: e0465f3e924302d1c4bd47f2129b4eb3bd9faead
+diff --git a/arch/arm/mach-k3/am642_init.c b/arch/arm/mach-k3/am642_init.c
+index 6085379f1d..ddf47ef0a9 100644
+--- a/arch/arm/mach-k3/am642_init.c
++++ b/arch/arm/mach-k3/am642_init.c
+@@ -348,6 +348,9 @@ static u32 __get_primary_bootmedia(u32 main_devstat)
+ 	case BOOT_DEVICE_EMMC:
+ 		return BOOT_DEVICE_MMC1;
+ 
++	case BOOT_DEVICE_NAND:
++		return BOOT_DEVICE_NAND;
++
+ 	case BOOT_DEVICE_MMC:
+ 		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK) >>
+ 		     MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT)
+diff --git a/arch/arm/mach-k3/include/mach/am64_spl.h b/arch/arm/mach-k3/include/mach/am64_spl.h
+index b4f396b2c0..a0a517019c 100644
+--- a/arch/arm/mach-k3/include/mach/am64_spl.h
++++ b/arch/arm/mach-k3/include/mach/am64_spl.h
+@@ -22,6 +22,7 @@
+ 
+ #define BOOT_DEVICE_USB			0x2A
+ #define BOOT_DEVICE_DFU			0x0A
++#define BOOT_DEVICE_NAND		0x0B
+ #define BOOT_DEVICE_GPMC_NOR		0x0C
+ #define BOOT_DEVICE_PCIE		0x0D
+ #define BOOT_DEVICE_XSPI		0x0E
 -- 
 2.34.1
 
