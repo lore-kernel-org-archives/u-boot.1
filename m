@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 800EAC4707B
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 05:37:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BF5AC4707B
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 05:37:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D15B8792C;
-	Thu, 11 Jan 2024 06:37:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8759D8786C;
+	Thu, 11 Jan 2024 06:37:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FmWfGhmK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mMcgwoQa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2390387869; Thu, 11 Jan 2024 06:37:41 +0100 (CET)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
+ id 683F587A8B; Thu, 11 Jan 2024 06:37:48 +0100 (CET)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0281F871DA
- for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 06:37:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A5C8787823
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 06:37:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-2053f5e97b2so3078959fac.3
- for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 21:37:38 -0800 (PST)
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-3bc1414b48eso5390090b6e.2
+ for <u-boot@lists.denx.de>; Wed, 10 Jan 2024 21:37:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1704951457; x=1705556257; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Cv2+6W2sbiPBSZLS6DXdEt7FKMbh8KHE6XDwGMhoy8Q=;
- b=FmWfGhmKVnhPvdD57Dlmk+MKsIpiaFZuyV3SJvFCGCUJkQuNiixJo9h9X6Sf9Iwe8u
- 8DXG8nLME0ScayNkIxypkKIdoFjyFA13s31mhiDTGKwvudOjA/beoS4zmXf0G82rvJw2
- Q2/T61kQse5ISiqI1cp4PkQ/bc7HznbUMUzPBbmBAYC3uwOGR1cAgTl0lkmFTsmfAbdW
- Oqak52yKd/O9dG7FuYeSyf3WP11OgN2YcCaj+0eCmmiXfQKQdcPeBMu9RqLOC3Bj9hUW
- CUn/2A3/sCoRBW8E1ym2InDfTW7WP+yvdM+PEYqchntduNfdm32xkqevpxOjmaT4tNvw
- mJAA==
+ d=linaro.org; s=google; t=1704951463; x=1705556263; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dJpAQqKZRU5gCSObJbfKhLiDyhlORb0+CJLUsG0YWwI=;
+ b=mMcgwoQa+YzeED0p86qOFdu842qh4V/s7qSGmS+jHlnQd5SIkXEuMI6wBUXWpY0Mcj
+ F8YaeQZC+2MCluoG6Pc/SatOCoDlUKYCr/VHJ0moykp1WNxl1REYZishLnNuCdj1T2W3
+ zjmcZHKpoTobO0S2V0Eg5UmF/u84JXA0Bw11UmwW6U/Acd63BlQs2W2n4AbTQLFH2vfm
+ kgXoJcO7U3qMSGTougv19DgH9rUX8wXBoVt8EO46D8rxcNUO3xcCcxySf9+Ir4QgCV7s
+ 1k2w8IEBwuPmlUruxg7MKdLQE5wsQjVMuatRf+NJaGSrIVd6n0S5ut3gSTFyw8hFk+2n
+ DAsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704951457; x=1705556257;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Cv2+6W2sbiPBSZLS6DXdEt7FKMbh8KHE6XDwGMhoy8Q=;
- b=kawdVbjlt+qvy3hTEQpgTQeRw75JysvUO78lKPI6aPobsHkn5Py+1fqJY0ncLByfWw
- sOvkcHSg6CLks3rt6hlV5TZyYxfPAUU9VzQiLs7OTqGEitViPlr4+FLuH/3mSsFAqylJ
- GabEQWqFHhuw2RGPzpePQw64z0Vy/bx1Fi+cjoj/RGlCB5dunTFnEpMDz4PiF021GHFq
- 4QBvTO5UqTE34CPXeg1WFSLCPLZ18b8WjKg67Nn5SSGpN3PNZ+ssHgjH7iSVoUnVDdsp
- Pi1IBjCqBAnsYN9bBeYBDgiMd5ea0XDg/1MdHJnLHRx0SKPP/qskNOLF4Uv34Liqlf69
- //Vw==
-X-Gm-Message-State: AOJu0Yz/nsrFKr7cLM41XY/j1sK84/yisTNqzM+lEHtW2ZntrjAilJMV
- +JgQQ+RHZTE9TTvW+bnLioTpVBP0OePVIkYqy2ft8lhvUXE=
-X-Google-Smtp-Source: AGHT+IGlnl+10Euzy1e06ZyAX2NhTKhsujVzyzViNez/zCWFyRQEVP6Xodeii5svJkGAZM4/jNwY3g==
-X-Received: by 2002:a05:6870:8196:b0:203:eee3:caca with SMTP id
- k22-20020a056870819600b00203eee3cacamr946513oae.80.1704951456902; 
- Wed, 10 Jan 2024 21:37:36 -0800 (PST)
+ d=1e100.net; s=20230601; t=1704951463; x=1705556263;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dJpAQqKZRU5gCSObJbfKhLiDyhlORb0+CJLUsG0YWwI=;
+ b=VsAYUk57nHqe/5RtrJhOR7yOO/3Lci/8/fCArgVe8qW6JkcLnXmqj3SrkyPtY0ZMsG
+ WDXStnXdOGYBzqcS1rGrcpa7P3Ceo7HL6mthA0EXb8fzSCMX+MPrL5nanc+m3HtFNSSc
+ fXMnQ5txwbr7CkFzr17rIteWhxt2lg1r6bu5QRyeXo/mu5JRyK844qeUaY4drGCxKmlL
+ MyX8upWd1MmUSpoU7O/NG+PJ02hphrmxTmUDPX9RAKPgSZLFtGX2owJNhBIVJE1Rj5ik
+ JqBf2HHvRtNsInWHa3+IDKtx2QsgJVfiCZUnbW7gMxbNXW42BPTxu7AUTylTynmSQfIa
+ 9shw==
+X-Gm-Message-State: AOJu0YwAFQboOyE37hjG6iABCZcDtv9yL0ly3kpzT3gnWkJ0ZiiSJ97c
+ sy0V0qqfDWltHfgiYT84c635EmvNNPfGyni8ZO0cmrYQT1E=
+X-Google-Smtp-Source: AGHT+IGlZ7YB9v2iEfZwHWWYljjuhlRp1p6OVuB1vm78rX7C/QI7qVLRZNw57X/4gvitv+yw0pdh6g==
+X-Received: by 2002:a05:6808:2120:b0:3bd:534e:f81e with SMTP id
+ r32-20020a056808212000b003bd534ef81emr585007oiw.53.1704951463482; 
+ Wed, 10 Jan 2024 21:37:43 -0800 (PST)
 Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- c185-20020a6335c2000000b005cee9115cb3sm312918pga.0.2024.01.10.21.37.35
+ p19-20020aa78613000000b006d93ca7f8f3sm264566pfn.150.2024.01.10.21.37.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Jan 2024 21:37:36 -0800 (PST)
+ Wed, 10 Jan 2024 21:37:42 -0800 (PST)
 From: Masahisa Kojima <masahisa.kojima@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
  Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [PATCH v3 0/2] fix FMP versioning for FWU multi bank update
-Date: Thu, 11 Jan 2024 14:35:38 +0900
-Message-Id: <20240111053540.899997-1-masahisa.kojima@linaro.org>
+Subject: [PATCH v3 1/2] fwu: fix fwu_get_image_index interface
+Date: Thu, 11 Jan 2024 14:35:39 +0900
+Message-Id: <20240111053540.899997-2-masahisa.kojima@linaro.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240111053540.899997-1-masahisa.kojima@linaro.org>
+References: <20240111053540.899997-1-masahisa.kojima@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -90,27 +93,175 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current FMP versioning does not work when CONFIG_FWU_MULTI_BANK_UPDATE
-is enabled. This series aims to support FMP versioning
-for FWU multi bank update.
+The capsule update uses the DFU framework for updating
+storage. fwu_get_image_index() currently returns the
+image_index calculated by (dfu_alt_num + 1), but this is
+different from the image_index in UEFI terminology.
 
-[Changelog]
-v2 -> v3
-- add comment of ignoring GetVariable error when set FmpState variable
+Since capsule update implementation calls dfu_write_by_alt
+function, it is better that FWU returns the dfu_alt_num.
 
-v1 -> v2
-- update fwu_get_image_index() function to return the dfu_alt_num
-- store firmware version into the array of fmp_state structure
+Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ include/fwu.h                 | 13 +++++--------
+ lib/efi_loader/efi_firmware.c | 11 +++++++++--
+ lib/fwu_updates/fwu.c         | 32 ++++++++++++--------------------
+ 3 files changed, 26 insertions(+), 30 deletions(-)
 
-Masahisa Kojima (2):
-  fwu: fix fwu_get_image_index interface
-  efi_loader: support fmp versioning for multi bank update
-
- include/fwu.h                 | 13 ++----
- lib/efi_loader/efi_firmware.c | 86 ++++++++++++++++++++++++++++-------
- lib/fwu_updates/fwu.c         | 32 +++++--------
- 3 files changed, 86 insertions(+), 45 deletions(-)
-
+diff --git a/include/fwu.h b/include/fwu.h
+index ac5c5de870..eb5638f4f3 100644
+--- a/include/fwu.h
++++ b/include/fwu.h
+@@ -122,21 +122,18 @@ int fwu_get_active_index(uint *active_idxp);
+ int fwu_set_active_index(uint active_idx);
+ 
+ /**
+- * fwu_get_image_index() - Get the Image Index to be used for capsule update
+- * @image_index: The Image Index for the image
+- *
+- * The FWU multi bank update feature computes the value of image_index at
+- * runtime, based on the bank to which the image needs to be written to.
+- * Derive the image_index value for the image.
++ * fwu_get_dfu_alt_num() - Get the dfu_alt_num to be used for capsule update
++ * @image_index:	The Image Index for the image
++ * @alt_num:		pointer to store dfu_alt_num
+  *
+  * Currently, the capsule update driver uses the DFU framework for
+  * the updates. This function gets the DFU alt number which is to
+- * be used as the Image Index
++ * be used for capsule update.
+  *
+  * Return: 0 if OK, -ve on error
+  *
+  */
+-int fwu_get_image_index(u8 *image_index);
++int fwu_get_dfu_alt_num(u8 image_index, u8 *alt_num);
+ 
+ /**
+  * fwu_revert_boot_index() - Revert the active index in the FWU metadata
+diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
+index 1fde1885e3..e558336bc1 100644
+--- a/lib/efi_loader/efi_firmware.c
++++ b/lib/efi_loader/efi_firmware.c
+@@ -610,6 +610,7 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
+ 	u16 **abort_reason)
+ {
+ 	int ret;
++	u8 dfu_alt_num;
+ 	efi_status_t status;
+ 	struct fmp_state state = { 0 };
+ 
+@@ -624,19 +625,25 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
+ 	if (status != EFI_SUCCESS)
+ 		return EFI_EXIT(status);
+ 
++	/*
++	 * dfu_alt_num is assigned from 0 while image_index starts from 1.
++	 * dfu_alt_num is calculated by (image_index - 1) when multi bank update
++	 * is not used.
++	 */
++	dfu_alt_num = image_index - 1;
+ 	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE)) {
+ 		/*
+ 		 * Based on the value of update bank, derive the
+ 		 * image index value.
+ 		 */
+-		ret = fwu_get_image_index(&image_index);
++		ret = fwu_get_dfu_alt_num(image_index, &dfu_alt_num);
+ 		if (ret) {
+ 			log_debug("Unable to get FWU image_index\n");
+ 			return EFI_EXIT(EFI_DEVICE_ERROR);
+ 		}
+ 	}
+ 
+-	if (dfu_write_by_alt(image_index - 1, (void *)image, image_size,
++	if (dfu_write_by_alt(dfu_alt_num, (void *)image, image_size,
+ 			     NULL, NULL))
+ 		return EFI_EXIT(EFI_DEVICE_ERROR);
+ 
+diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
+index b580574015..86518108c2 100644
+--- a/lib/fwu_updates/fwu.c
++++ b/lib/fwu_updates/fwu.c
+@@ -125,16 +125,14 @@ static int in_trial_state(struct fwu_mdata *mdata)
+ 	return 0;
+ }
+ 
+-static int fwu_get_image_type_id(u8 *image_index, efi_guid_t *image_type_id)
++static int fwu_get_image_type_id(u8 image_index, efi_guid_t *image_type_id)
+ {
+-	u8 index;
+ 	int i;
+ 	struct efi_fw_image *image;
+ 
+-	index = *image_index;
+ 	image = update_info.images;
+ 	for (i = 0; i < update_info.num_images; i++) {
+-		if (index == image[i].image_index) {
++		if (image_index == image[i].image_index) {
+ 			guidcpy(image_type_id, &image[i].image_type_id);
+ 			return 0;
+ 		}
+@@ -332,24 +330,20 @@ int fwu_set_active_index(uint active_idx)
+ }
+ 
+ /**
+- * fwu_get_image_index() - Get the Image Index to be used for capsule update
+- * @image_index: The Image Index for the image
+- *
+- * The FWU multi bank update feature computes the value of image_index at
+- * runtime, based on the bank to which the image needs to be written to.
+- * Derive the image_index value for the image.
++ * fwu_get_dfu_alt_num() - Get the dfu_alt_num to be used for capsule update
++ * @image_index:	The Image Index for the image
++ * @alt_num:		pointer to store dfu_alt_num
+  *
+  * Currently, the capsule update driver uses the DFU framework for
+  * the updates. This function gets the DFU alt number which is to
+- * be used as the Image Index
++ * be used for capsule update.
+  *
+  * Return: 0 if OK, -ve on error
+  *
+  */
+-int fwu_get_image_index(u8 *image_index)
++int fwu_get_dfu_alt_num(u8 image_index, u8 *alt_num)
+ {
+ 	int ret, i;
+-	u8 alt_num;
+ 	uint update_bank;
+ 	efi_guid_t *image_guid, image_type_id;
+ 	struct fwu_mdata *mdata = &g_mdata;
+@@ -365,7 +359,7 @@ int fwu_get_image_index(u8 *image_index)
+ 	ret = fwu_get_image_type_id(image_index, &image_type_id);
+ 	if (ret) {
+ 		log_debug("Unable to get image_type_id for image_index %u\n",
+-			  *image_index);
++			  image_index);
+ 		goto out;
+ 	}
+ 
+@@ -380,15 +374,13 @@ int fwu_get_image_index(u8 *image_index)
+ 			img_entry = &mdata->img_entry[i];
+ 			img_bank_info = &img_entry->img_bank_info[update_bank];
+ 			image_guid = &img_bank_info->image_uuid;
+-			ret = fwu_plat_get_alt_num(g_dev, image_guid, &alt_num);
+-			if (ret) {
++			ret = fwu_plat_get_alt_num(g_dev, image_guid, alt_num);
++			if (ret)
+ 				log_debug("alt_num not found for partition with GUID %pUs\n",
+ 					  image_guid);
+-			} else {
++			else
+ 				log_debug("alt_num %d for partition %pUs\n",
+-					  alt_num, image_guid);
+-				*image_index = alt_num + 1;
+-			}
++					  *alt_num, image_guid);
+ 
+ 			goto out;
+ 		}
 -- 
 2.34.1
 
