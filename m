@@ -4,55 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 713B7C47258
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 13:12:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F674C47077
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 13:13:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 673C387B4C;
-	Thu, 11 Jan 2024 14:08:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=codethink.co.uk
+	by phobos.denx.de (Postfix) with ESMTP id 66FF487AEC;
+	Thu, 11 Jan 2024 14:13:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=codethink.co.uk header.i=@codethink.co.uk header.b="X/tnRfRh";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="DR/mH4re";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85CD287A99; Thu, 11 Jan 2024 13:58:32 +0100 (CET)
-Received: from imap4.hz.codethink.co.uk (imap4.hz.codethink.co.uk
- [188.40.203.114])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 61B6587AEC; Thu, 11 Jan 2024 14:13:32 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 674348753C
- for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 13:58:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=codethink.co.uk
+ by phobos.denx.de (Postfix) with ESMTPS id E061380844
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 14:13:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ivan.orlov@codethink.co.uk
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=codethink.co.uk; s=imap4-20230908; h=Sender:Content-Transfer-Encoding:
- MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kjuJit04/Qm+ukYhkXfjevwE+5xkuqyNXeK7qsZSU8Y=; b=X/tnRfRh4f0mAn6QJjrji6w3i4
- 6OPgLivAHhRpDdoY/INBvDnfTNfRXPdgD0810YPuJOQ6i2XSjZLRBktiJr2lcgFID0963+sUiYeiX
- HlnkSAsyeSNUM6dP85EhceQp+MoRYD9un1WMqse4EHaBSPc7rZGmR/WIkjhytj+5LcZGDwnLMwF+m
- DBs7RyMTM7rvwXduIYDNddtouAYNlmGzvRFFo2fcuoEipHX9WR8cXT8ZD7oSHy75v8Og5PmjVCWIN
- iY13MP+Fw9MdloNvNu9L5iPIQVPRmKC81wN5MGxKG/bSP6HFcwsRKWcIn9lXqZ4iH8KH4K61KEXI/
- DcsBkGAQ==;
-Received: from [167.98.27.226] (helo=ct-lt-2504.guest.codethink.co.uk)
- by imap4.hz.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
- id 1rNudZ-00432e-6d; Thu, 11 Jan 2024 12:58:21 +0000
-From: Ivan Orlov <ivan.orlov@codethink.co.uk>
-To: sjg@chromium.org, mkorpershoek@baylibre.com, bmeng@tinylab.org,
- takahiro.akashi@linaro.org
-Cc: Ivan Orlov <ivan.orlov@codethink.co.uk>,
-	u-boot@lists.denx.de
-Subject: [PATCH] cmd: license: Add CONFIG_GZIP dependency
-Date: Thu, 11 Jan 2024 12:58:19 +0000
-Message-Id: <20240111125819.1787378-1-ivan.orlov@codethink.co.uk>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-556c3f0d6c5so6267949a12.2
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 05:13:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1704978809; x=1705583609;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=StLbeN3ZNFYXrfv0KmdxRESMl1bFe0bZXV5OijdvzgU=;
+ b=DR/mH4re33gyR5VBzYTmVsqXeAPqLDzjizaVSAwrW0/NAqSTtyExGUwc0+t/Xr11Ch
+ lOkfpoCAyhzYv6/KkrsrLv4pRceFVKjayMNRLeZLCSa6EH12LQUnm/ban4pHxpOk88MD
+ IWegWMs65cBcsn1rEMi1Cy1aqFUNjoeECoFjY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1704978809; x=1705583609;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=StLbeN3ZNFYXrfv0KmdxRESMl1bFe0bZXV5OijdvzgU=;
+ b=HgmhhdhbAslJwNpYiGKoPp4IqIRDjuOPlpTqyRkN4UhzlC2UiDbHudP6wyAvy1crRb
+ QTjiaWvZWy7vqCrwwiVygsL+HKWu1CJydjGwfymKAnGA98Era8udtD5nYSifemq/f07M
+ D8ZQUp7gTMWuEjEVFnXU5kw+5V5WhajvjU5DH5C0q83Bfd6UfR8DUS0g91yShhusOr77
+ giUR1NGQU3KB8ujPnCbPzreHeJMi78TQnG6TUhuAdeVdP/qpfk69D19ZGi/erLUsYdGs
+ /CHXmXz70Wlbrje4NwTA1yEvLZ2hs2pa6kBqbO170q1KeUnhWb08TLOj/Urr6HMEx880
+ V/Bg==
+X-Gm-Message-State: AOJu0YyCmw2v9U//Ifz5FM10R0jqMOBTuNr5dG6F0K7e9HweRbwOBfbF
+ zB2WD1eZq4Kaa6ideMbp9hRhO9XYpEi9LJm6/mmaaHJY03aQ5Q==
+X-Google-Smtp-Source: AGHT+IFog6169FTxJ9E8T0TZiTUsl8qyGv2X7CLsBJQWHlmUIE4WMKz+B97lde4xwnsroFpYPwYe5x6c+Uh8CuCdsNs=
+X-Received: by 2002:a05:6402:326:b0:553:83ca:60c5 with SMTP id
+ q6-20020a056402032600b0055383ca60c5mr408150edw.3.1704978809313; Thu, 11 Jan
+ 2024 05:13:29 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 11 Jan 2024 14:08:34 +0100
+References: <20231211114600.4414-1-rogerq@kernel.org>
+ <5d79b1c8-4dc8-44d3-bfe7-4514f41c7102@kernel.org>
+In-Reply-To: <5d79b1c8-4dc8-44d3-bfe7-4514f41c7102@kernel.org>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Thu, 11 Jan 2024 14:13:16 +0100
+Message-ID: <CAOf5uwn6Q24OcrwHBEbSJhvkX2MV46ea+EZa7yOBDN6WZrw5Dw@mail.gmail.com>
+Subject: Re: [PATCH v2 0/2] mtd: nand: omap_gpmc: Fix NAND for AM335x
+To: Roger Quadros <rogerq@kernel.org>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Heiko Schocher <hs@denx.de>, 
+ "Leto, Enrico" <enrico.leto@siemens.com>, Tom Rini <trini@konsulko.com>, 
+ "Bajjuri, Praneeth" <praneeth@ti.com>, Nishanth Menon <nm@ti.com>,
+ Vignesh R <vigneshr@ti.com>, U-Boot-Denx <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,30 +88,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-'License' command processing code could be successfully compiled only
-when CONFIG_GZIP option is enabled, otherwise it can't find the 'gunzip'
-function definition (it is defined in lib/gunzip.c).
+Hi
 
-Add CONFIG_GZIP dependency to 'license' command config option in the
-corresponding Kconfig.
+Il gio 11 gen 2024, 14:06 Roger Quadros <rogerq@kernel.org> ha scritto:
 
-Signed-off-by: Ivan Orlov <ivan.orlov@codethink.co.uk>
----
- cmd/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+> Hi,
+>
+> On 11/12/2023 13:45, Roger Quadros wrote:
+> > Hi,
+> >
+> > These patches fix NAND and ELM for AM335x and related legacy platforms
+> > that use HW BCH and ELM modules.
+> >
+> > All CI tests pass: https://github.com/u-boot/u-boot/pull/453
+> >
+> > Changelog:
+> >
+> > v2:
+> > - added __maybe_unused to omap_calculate_ecc_bch. fixes CI tests
+> > - Added Tested-by Tags
+> > - Explained about omap_elm single sector support in commit log
+> >
+> > cheers,
+> > -roger
+> >
+> > Roger Quadros (2):
+> >   mtd: nand: omap_gpmc: Fix NAND in SPL for AM335x
+> >   mtd: rawnand: omap_elm: Fix elm_init definition
+> >
+> >  drivers/mtd/nand/raw/omap_elm.c  |  4 +-
+> >  drivers/mtd/nand/raw/omap_elm.h  |  6 --
+> >  drivers/mtd/nand/raw/omap_gpmc.c | 95 ++++++++++----------------------
+> >  3 files changed, 31 insertions(+), 74 deletions(-)
+> >
+> >
+> > base-commit: 2f0282922b2c458eea7f85c500a948a587437b63
+>
+> If no objections can this be Acked and picked up please?
+> Without these NAND is broken on some TI platforms.
+>
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 26aeeeed03..0d63cbfda1 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -188,6 +188,7 @@ config CMD_HISTORY
- config CMD_LICENSE
- 	bool "license"
- 	select BUILD_BIN2C
-+	depends on GZIP
- 	help
- 	  Print GPL license text
- 
--- 
-2.34.1
 
+We will queue them and send over the weekend
+
+Michael
+
+>
+>
+>
+> Thanks!
+>
+> --
+> cheers,
+> -roger
+>
