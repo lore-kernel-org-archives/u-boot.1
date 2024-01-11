@@ -4,77 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 957FDC47258
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 17:18:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74EFEC47077
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 17:55:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5FEC876C4;
-	Thu, 11 Jan 2024 18:18:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8E11987751;
+	Thu, 11 Jan 2024 18:55:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=loiseau.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DOlFKux4";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=loiseau.fr header.i=@loiseau.fr header.b="u1IOn2+2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA15587885; Thu, 11 Jan 2024 18:18:19 +0100 (CET)
-Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
- [IPv6:2607:f8b0:4864:20::72f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C109487885; Thu, 11 Jan 2024 17:52:04 +0100 (CET)
+Received: from try.jabatus.fr (try.jabatus.fr [109.234.163.213])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CAF587620
- for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 18:18:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3813C87142
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 17:52:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=loiseau.fr
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-7833b6bb41bso119911385a.3
- for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 09:18:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1704993496; x=1705598296; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=LEO73EOi9OiNBoalw4y9eQA6U0uCQ1hgUmoTmFKW+4k=;
- b=DOlFKux4qrnyz1+z9G8XQf04GU4SFrSdgCNB5uyr4Qe9QQ7wnoumalWC1JPH1YbnxN
- N8yG8JYcC696oiipZm+LAu6NyvBF3+NxLvVwjsL3kc/lYl8mAL7rlmON776L6yd/hSGE
- 1vkP8rbQusgyyCx+rqK5oa33xVliWDHGx1gGg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1704993496; x=1705598296;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LEO73EOi9OiNBoalw4y9eQA6U0uCQ1hgUmoTmFKW+4k=;
- b=pcos1szZOZgB9mS5ThzEhe/5i5DQhl9Ccf4GPDMO82OfKiPofej38mGL7x2s040rkS
- K7o54zv1a4/PRU4AHkmEee7VfnxRowEMNXIMuLPBcrQKfHxVtWihfMS1cE7bRPKhCKhK
- Vz2oK13bTKg+TR3JcHCOg6B87rjhAOC8DUEhNsZCIqr6/sEacALurBSUa79S4nAdIB3y
- IILQ4zR1P3435C9uHayfIo7x8CJScO/zXBdJlW392B7ufiYyfwra3ErPFkaILI5/qDXx
- vXqumFvG3BHF8ZAcMXAjORIBQuHkxsaUT7NgsQs86F6DPm0NXOb7vGx0MRD7Q+ZY+kF0
- F31g==
-X-Gm-Message-State: AOJu0YyQL6AYpBH36MGpIRTx7apHjziUb6doOqsRaumKrs53We1EBGAC
- 2FePO49pyBKLzDjn/u5To+RWfEJjb2KxSln4zIofYMixO3c=
-X-Google-Smtp-Source: AGHT+IEcCwwkJap3QnH0bCbVCWdNS3wcoiA38TohNZenXNNCm4xOYwBGSCtE0NfP9zRp+h9eAuwkZA==
-X-Received: by 2002:a05:620a:2404:b0:783:1a11:5efc with SMTP id
- d4-20020a05620a240400b007831a115efcmr147212qkn.42.1704993496146; 
- Thu, 11 Jan 2024 09:18:16 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- v10-20020a05620a122a00b0078321b70b05sm462167qkj.101.2024.01.11.09.18.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Jan 2024 09:18:15 -0800 (PST)
-Date: Thu, 11 Jan 2024 12:18:13 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Anthony Loiseau <anthony@loiseau.fr>
-Cc: u-boot@lists.denx.de, Anthony Loiseau <anthony.loiseau@allcircuits.com>
-Subject: Re: [PATCH 1/1] get_maintainer.pl: slightly modify penguin_chief
-Message-ID: <20240111171813.GJ1610741@bill-the-cat>
-References: <20240111165127.12882-1-anthony@loiseau.fr>
- <20240111165127.12882-2-anthony@loiseau.fr>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="dH+nNIm1RpzCF7IG"
-Content-Disposition: inline
-In-Reply-To: <20240111165127.12882-2-anthony@loiseau.fr>
-X-Clacks-Overhead: GNU Terry Pratchett
+ spf=pass smtp.mailfrom=anthony@loiseau.fr
+X-MailPropre-MailScanner-From: anthony@loiseau.fr
+X-MailPropre-MailScanner-SpamCheck: not spam, SpamAssassin (not cached,
+ score=-25.979, required 5, autolearn=disabled, MED_SPX 1.00,
+ RCVD_IN_DNSWL_HI 0.01, SPF_HELO_NONE 0.00, SPF_PASS -1.50, VM03 0.01,
+ WHLISHOS -25.50)
+X-MailPropre-MailScanner: Not scanned: please contact your Internet E-Mail
+ Service Provider for details
+X-MailPropre-MailScanner-ID: C32FBE03B2.A6E8B
+X-MailPropre-MailScanner-Information: Please contact the ISP for more
+ information
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=loiseau.fr; 
+ s=default;
+ h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=0Ysv/AqBDE6/bWlR2tLGkIi+U8Jy+OkTXlchgylWzzk=; b=u1IOn2+26JRujzFNBcPe9T8BnC
+ CxiulxE3XkGI81v7MutUBiGwNdI239EkuWItE7BRy/GMDCiYUsLDbrkQ61gwtPnVtMQsGQHuo2Oih
+ I0QkA/YOrej8u0O1gdOkcwenm/ysXPxFAoFle1Hqsrxj/O6b4t/hTduJMlrFSVvUZ50f+jYhid57F
+ EdiTl3t/yWeTbE4PZpurF9kolcVmCErH6xfKiBYSAU3M6YvyHaFOzdRoXUIEa7XFXdz4p/J6qtlqS
+ 5bPEax8F6+9szAV1GcjFlC55sJKFaq8xeJBXWaztpMUmATdmLAraVDXR9qFE29ZBlUVGBFwQXWzEV
+ mgyzlSwg==;
+From: Anthony Loiseau <anthony@loiseau.fr>
+To: u-boot@lists.denx.de
+Cc: Anthony Loiseau <anthony.loiseau@allcircuits.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 0/1] get_maintainer.pl: slightly modify penguin_chief
+Date: Thu, 11 Jan 2024 17:51:26 +0100
+Message-Id: <20240111165127.12882-1-anthony@loiseau.fr>
+X-Mailer: git-send-email 2.11.0
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - sucre.o2switch.net
+X-AntiAbuse: Original Domain - lists.denx.de
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - loiseau.fr
+X-Get-Message-Sender-Via: sucre.o2switch.net: authenticated_id:
+ anthony@loiseau.fr
+X-Authenticated-Sender: sucre.o2switch.net: anthony@loiseau.fr
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Mailman-Approved-At: Thu, 11 Jan 2024 18:55:45 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,62 +85,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Anthony Loiseau <anthony.loiseau@allcircuits.com>
 
---dH+nNIm1RpzCF7IG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Please find a patch proposal which slightly modifies get_maintainer.pl
+penguin_chief list.
 
-On Thu, Jan 11, 2024 at 05:51:27PM +0100, Anthony Loiseau wrote:
+This proposal aims to workaround get_maintainer.pl behavior for ARM, ARM_TI
+and THE_REST sections (see MAINTAINERS file) for which Tom Rini was not
+outputed as a maintainer by get_maintainer.pl.
 
-> From: Anthony Loiseau <anthony.loiseau@allcircuits.com>
->=20
-> Penguin chiefs are actually stripped out from get_maintainer results unle=
-ss
-> --git-chief-penguins is provided, which appends them to all results inste=
-ad.
->=20
-> This is a issue for U-Boot since Tom Rini (penguin chief) is also maintai=
-ner
-> of some sub-trees ("ARM", "ARM TI" and "THE REST").
->=20
-> Hopefully, this match is performed case-senditive over name and email,
-> therefore upper-casing Tom Rini last name workarounds the issue.
->=20
-> Important note: This also fixes "THE REST" catch all section resulting
-> in Tom Rini listed as (maintainer:THE REST) for all files. Hope there is =
-not
-> too much developers scripting their patch email header from get_maintaine=
-r.pl
-> output, otherwise Tom Rini may be flooded.
->=20
-> Cc: Tom Rini <trini@konsulko.com>
-> Signed-off-by: Anthony Loiseau <anthony.loiseau@allcircuits.com>
+Root issue is that get_maintainer.pl threats penguin_chiefs this way:
+- with --git-chief-penguins, penguin_chiefs are appended to all results
+- with --no-git-chief-penguins (the default), penguin chiefs are stripped
+  out of all results
 
-Given the explanation and links in the cover letter, this seems like the
-most reasonable path to me, thanks.
+That is, since Tom Rini is set as a penguin chief inside get_maintainer.pl,
+get_maintainer.pl never outputs him as a maintainer with usual uses.
 
-Acked-by: Tom Rini <trini@konsulko.com>
+This issue does not hurt that much for upstream Linux code since Linus Torvalds
+is not listed in MAINTAINERS file except for THE_REST, but sections coverage is
+good so "THE REST" section almost never triggers.
 
---=20
-Tom
+I saw several options to fix this:
+- OPT1: get in touch with Linux upstream to change --no-git-chief-penguins
+      behavior so it does nothing instead of stripping chiefs from results
+- OPT2: take advantage of case-sensitive (name, email) comparison
+        to keep Tom Rini chief as Tom RINI.
+- OPT3: clear penguin_chiefs, breaking --git-chief-penguins
+- OPT4: implement OPT1 here
 
---dH+nNIm1RpzCF7IG
-Content-Type: application/pgp-signature; name="signature.asc"
+From an email discussion on LKML [1] my understanding is that upstream votes
+for downstream edits here, hence this patch proposal for OPT2.
 
------BEGIN PGP SIGNATURE-----
+Note of interest: this fixes "THE REST" catch all sectioni too, resulting
+in Tom Rini listed as (maintainer:THE REST) for all repo files.
+If you think developers automatically fills patch emails to/cc from
+get_maintainer.pl output, then you may want to break it again by setting its
+maintainer as Tom RINI.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWgItIACgkQFHw5/5Y0
-tyy56Av6AsBlTGkoPanurRGqjD2yNYcQfvN8DsuuNlximQ1OJXr3MgunstU4Wpql
-B2zIm0lmA4KgOnKzB8YcCnt8SPjbAvLNxdkSdL+LIbCUvwhV5iqFiCFUSiFaG9Li
-zcLUw2tdSdN2SW+ONw86v62Av+WnqXvhHYoCXPi8292jgbw460aj5ZdmRg3DxcFF
-Cpfd1eCscxVlawZzn3IYvVjWH178EivPnP8wyhoR8Ilho+zlS1P3t8EgCS0Kz3Y7
-MZtapJWxwtflj/wIpHm8Xt1j1ut1NXDdaTS0ctTB2PObB4hgrksrBVOvWA9z3LLJ
-hLKsbVDfqRreUuYLFC0tEL/4Lyp/CrWoxpPVP6Aen/uZW+2xCTFBvlFOfTz9pfBP
-B7RxVrvyxl2+2fUnXRqyBWoqEwUgnGN7nUWbGKc//W2VX6rMpphV2iXwAcZa2Urm
-vmRz95mqhSDo2hTMvDdqhzuet0Uj8vsJ+g+IcLk56gcdDi/12sFOaKZ0v86UAcVG
-ettY8nc+
-=UMSB
------END PGP SIGNATURE-----
+[1] https://lore.kernel.org/lkml/13fd63b7e8e0f197842ae1f1264e50c9614d0667.camel@perches.com/T/
 
---dH+nNIm1RpzCF7IG--
+Regards,
+Anthony
+
+Cc: Tom Rini <trini@konsulko.com>
+
+
+Anthony Loiseau (1):
+  get_maintainer.pl: slightly modify penguin_chief
+
+ scripts/get_maintainer.pl | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+-- 
+2.11.0
+
