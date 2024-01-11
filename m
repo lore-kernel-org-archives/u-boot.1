@@ -4,55 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE7F7C4707B
-	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 08:25:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6540BC47077
+	for <u-boot@archiver.kernel.org>; Thu, 11 Jan 2024 08:27:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D83FB878B1;
-	Thu, 11 Jan 2024 09:25:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id B1DFA878B1;
+	Thu, 11 Jan 2024 09:27:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="l4mWohVV";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="UcchVjdA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A5F6878C8; Thu, 11 Jan 2024 09:25:43 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 669C987ABA; Thu, 11 Jan 2024 09:27:33 +0100 (CET)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 816D88786C
- for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 09:25:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 429C48786C
+ for <u-boot@lists.denx.de>; Thu, 11 Jan 2024 09:27:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.home.xypron
- (ip-178-202-040-247.um47.pools.vodafone-ip.de [178.202.40.247])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id CFB0442FE1; 
- Thu, 11 Jan 2024 08:25:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1704961541;
- bh=H05jHx3eFDt1UZgV/BaQFCFwnLzP7x9z02f8kdoR2Dk=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=l4mWohVVEkKng8G/CqSRFxIOsghypb5AyFFGVpu3wKrpfuTzmLyz4gEvkWMuoaVSI
- mAHYkIsiZcM8V1hGNcJkbagWR2nCf5ISAP5pYzYOWPUpQSUGJNPeoMtE2vVFCJ7jg9
- ZLAF5LycS3CFNC4yFEUJ0OLHGdXsruTcnDuyaTmeDG9L7ivlgSgtXO79/pXyNlESpP
- OXiffNiDE2a43h+kBx3MZMNJQFxkIOnLVbwfH26UA8nxrNa7s3MiRT5bODs0KVSiCQ
- 4Oy0wrGIhJBhpnH07nwveopS3hDkel+ty3hFeTO1WCmFYNE8gtvy1KD1E5tYJGY7jA
- qSRXNnMz2ZEfg==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Masahisa Kojima <masahisa.kojima@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH] cmd: efidebug: check pointer after memory allocation
-Date: Thu, 11 Jan 2024 09:25:35 +0100
-Message-ID: <20240111082535.191136-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1704961651; x=1707553651;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=KmzgJk6zWqDOQ1FmdLKYilCI5grV1dOI73dXUAF++u0=;
+ b=UcchVjdA30septWqPehdCB4p0/V6e8j6yAVcGvrRJs+O6g1DmLUZNLgWVPf1LIAT
+ /euOXH6PBxHBr427Rpe2onyjbFDEKpucYrdWZeoMphBlXVTz7mHFmp98yuuowegS
+ /11BF8GxYOCg8azn6jMhnD4olD10tFTqfGmOMQvnJRQ=;
+X-AuditID: ac14000a-fbefe7000000290d-f1-659fa672be2c
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 49.19.10509.276AF956;
+ Thu, 11 Jan 2024 09:27:31 +0100 (CET)
+Received: from lws-moog.phytec.de (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Thu, 11 Jan
+ 2024 09:27:30 +0100
+From: Yannic Moog <y.moog@phytec.de>
+Date: Thu, 11 Jan 2024 09:26:24 +0100
+Subject: [PATCH] board: phytec: fix link error when disabling
+ PHYTEC_SOM_DETECTION
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20240111-wip-y-moog-phytec-de-som-detection-fixup-v1-1-7c1a63e7eee8@phytec.de>
+X-B4-Tracking: v=1; b=H4sIAC+mn2UC/x2NwQqDMBBEf0X23AEjEaW/UjyEZKt70IREqyL+u
+ 0tPw2N4MxcVzsKF3tVFmX9SJC4K5lWRn9wyMiQoU1M3tjbGYJeEE3OMI9J0ruwRGCXOGgqr6vj
+ KsSW03gXubOds70jnUmYt/lef4b4fmhU173oAAAA=
+To: Fabio Estevam <festevam@gmail.com>, Teresa Remmet <t.remmet@phytec.de>,
+ <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
+CC: Yannic Moog <y.moog@phytec.de>
+X-Mailer: b4 0.12.3
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrGLMWRmVeSWpSXmKPExsWyRpKBR7d42fxUg/Zoi4dX/S3e7u1kt+h+
+ p+7A7LFz1l12j7N3djB69He3sAYwR3HZpKTmZJalFunbJXBlbNhwlq3gMUfFlCc7mBoYL7J3
+ MXJySAiYSOz/8RDI5uIQEljMJPHv1HJWCOcho8Tsy+cYQarYBFQkHr+4xwpiswioSpxs6Qez
+ hQVCJHq+bmEBsXkFBCVOznwCZHNwMAtoSqzfpQ8SZhaQl9j+dg4zREm0xPFznawQi48wSqzu
+ qgXZJSLQwChx9sUedogGJYnTV9tYIIqEJdoX3WICsYUEZCVenO+FulpeYtq518wQdqjE1i/b
+ mSYwCs5CcsYshDNmITljASPzKkah3Mzk7NSizGy9gozKktRkvZTUTYygsBVh4NrB2DfH4xAj
+ EwfjIUYJDmYlEV6Fz3NShXhTEiurUovy44tKc1KLDzFKc7AoifOu7ghOFRJITyxJzU5NLUgt
+ gskycXBKNTCuqF8aYfMo6Lax1tSF079/VXuyTVTzs6a5S0z5jfabRy/8mvGoa85ZS4uKZW93
+ fgkz7WIMuizDEGbfLe+hETCZ3W3/x6/8PT4v6q8FW87+OuXL9LRek11H11x139GzoZy1bR/j
+ lP0TWeK/27DoCus90zD5azxP6uHKBdMutYaGdZrVz3sts7dAiaU4I9FQi7moOBEATgShYUkC
+ AAA=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,30 +89,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After calling efi_alloc() we must check that the return value is not NULL.
+Commit aa7858fe5e2e ("board: phytec: som_detection: move definitions to
+source file") moved function definitions from header to source file.
+Makefile however was not updated to unconditionally build the imx8 and
+phytec som detection units. Fix this.
 
-Fixes: f01c961ee34c ("cmd: efidebug: add uri device path")
-Addresses-Coverity-ID: 477185 Dereference null return value
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Fixes: aa7858fe5e2e ("board: phytec: som_detection: move definitions to source file")
+Signed-off-by: Yannic Moog <y.moog@phytec.de>
 ---
- cmd/efidebug.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ board/phytec/common/Makefile | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/cmd/efidebug.c b/cmd/efidebug.c
-index e10fbf891a..997469b485 100644
---- a/cmd/efidebug.c
-+++ b/cmd/efidebug.c
-@@ -754,6 +754,10 @@ static int efi_boot_add_uri(int argc, char *const argv[], u16 *var_name16,
+diff --git a/board/phytec/common/Makefile b/board/phytec/common/Makefile
+index fe28964ce21..5f8e8435413 100644
+--- a/board/phytec/common/Makefile
++++ b/board/phytec/common/Makefile
+@@ -7,5 +7,4 @@ ifdef CONFIG_SPL_BUILD
+ obj- := __dummy__.o
+ endif
  
- 	uridp_len = sizeof(struct efi_device_path) + strlen(argv[3]) + 1;
- 	uridp = efi_alloc(uridp_len + sizeof(END));
-+	if (!uridp) {
-+		log_err("Out of memory\n");
-+		return CMD_RET_FAILURE;
-+	}
- 	uridp->dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
- 	uridp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_URI;
- 	uridp->dp.length = uridp_len;
+-obj-$(CONFIG_PHYTEC_SOM_DETECTION) += phytec_som_detection.o
+-obj-$(CONFIG_PHYTEC_IMX8M_SOM_DETECTION) += imx8m_som_detection.o
++obj-y += phytec_som_detection.o imx8m_som_detection.o
+
+---
+base-commit: 7a59d520ef0bfd29b339cba5282149271d5ac3b2
+change-id: 20240111-wip-y-moog-phytec-de-som-detection-fixup-5cade747a48a
+
+Best regards,
 -- 
-2.43.0
+Yannic Moog <y.moog@phytec.de>
 
