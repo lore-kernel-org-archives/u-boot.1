@@ -4,64 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FD04C4706C
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 12:56:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF331C4725D
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 12:58:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 881638309D;
-	Fri, 12 Jan 2024 13:56:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 2C183879F4;
+	Fri, 12 Jan 2024 13:58:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="lPh0iqzc";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="gw61Aiz3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E76880844; Fri, 12 Jan 2024 13:56:56 +0100 (CET)
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
+ id B4567879F5; Fri, 12 Jan 2024 13:58:21 +0100 (CET)
+Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
+ [46.235.227.194])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAC91879DB
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 13:56:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C3FA8309D
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 13:58:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 80392B82253;
- Fri, 12 Jan 2024 12:56:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6740FC43394;
- Fri, 12 Jan 2024 12:56:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705064212;
- bh=b5kukbR1T0nImPhVEnqE3xlNaQVIJvq8zblc6Ct62LU=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=lPh0iqzc9OJm0xOwN+ySq66p9DYwpfJVKANbQHyJCgsY4NO8N0ilFalTGW/nQDHph
- XpXNLYwCmZJoBGxPCrO3RTHAQYkdRuqc7y87HjVdh0WKD1bE9IlZdOVaVxkaJ1iJDO
- qwDytmakgxJkZNcHsvS0pcXS+TVGm/4ZOo3Vt3jOUpp00gfcZdRnNfVfn1L3Ql+yS3
- KNrcEzse+myIebaowLOhmvD5lXcO1YYNka0nEY4AWH3PJK6LThvgomonojCooFjVIB
- jWxf7dvZlxqb9Qa6Q4kkcN8DBwi2p9N49Pnmweypfa9BI04yhsjmbW9qDBUiD/BByj
- rePjP5foGz1Nw==
-Message-ID: <1fea7f2d-62af-44f5-bcfd-2a7e3fd33ca6@kernel.org>
-Date: Fri, 12 Jan 2024 14:56:47 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/7] usb: dwc3: Switch to device mode on gadget start
-Content-Language: en-US
-To: Sjoerd Simons <sjoerd@collabora.com>, u-boot@lists.denx.de
-Cc: Martyn Welch <martyn.welch@collabora.com>, Nishanth Menon <nm@ti.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Igor Prusov <ivprusov@salutedevices.com>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Simon Glass
- <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>
+ spf=pass smtp.mailfrom=sjoerd@collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1705064298;
+ bh=6Z70P6gFOicMquqvt1tjy7fdbZr4uIMPT4bRSK4vF4I=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+ b=gw61Aiz3lZVfAFre4qdY91dTz/BF90KWuOEj7t1ZntmSovj124BWxARt+UT5urzS3
+ cICOmkj8aEuQLPd7RISN1Xct4+qBGOyo41LtAKTGLsjQTVkUk9uVTfIAzJfvrcwb7x
+ uDp8Dae7jtEwlafAEes/1mp6YoRTTgpkh0E8VoinevSvTxJcZW4eTVZMl1eohkHjDT
+ WOsjCALO1diL0qiGBMd2tsv1SUusuI16Hzo/ciHVd0iGwwZg+MKaj0y770FhUiVnmK
+ mGruOBysLptiYfhSNmWVAd6988BaFIv8AiTmPIOOd/CU3qMee8iHv4tEf2VlpouPLi
+ X3Hu6KZdxUR0w==
+Received: from beast.luon.net (cola.collaboradmins.com
+ [IPv6:2a01:4f8:1c1c:5717::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested) (Authenticated sender: sjoerd)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id A514A37811D1;
+ Fri, 12 Jan 2024 12:58:18 +0000 (UTC)
+Received: by beast.luon.net (Postfix, from userid 1000)
+ id 3FCB59F0867A; Fri, 12 Jan 2024 13:58:18 +0100 (CET)
+Message-ID: <5ee4497041ca512a11daa4323ec2d36ade06128d.camel@collabora.com>
+Subject: Re: [PATCH v4 7/7] doc: board: Add document for DFU boot on am62x SoCs
+From: Sjoerd Simons <sjoerd@collabora.com>
+To: Nishanth Menon <nm@ti.com>
+Cc: u-boot@lists.denx.de, Martyn Welch <martyn.welch@collabora.com>, Roger
+ Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>, Heinrich
+ Schuchardt <xypron.glpk@gmx.de>,  Judith Mendez <jm@ti.com>, Marcel
+ Ziswiler <marcel.ziswiler@toradex.com>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>, Neha Malcom Francis <n-francis@ti.com>, Nikhil
+ M Jain <n-jain1@ti.com>, Robert Nelson <robertcnelson@gmail.com>
+Date: Fri, 12 Jan 2024 13:58:18 +0100
+In-Reply-To: <20240112123636.2h44vbdffrjlik5g@kindling>
 References: <20240112085317.1866449-1-sjoerd@collabora.com>
- <20240112085317.1866449-3-sjoerd@collabora.com>
- <5444e6d5-f928-4f46-9af9-2c07c8b49f4f@kernel.org>
- <80d49aa7dd463700d98d5b2d74b7df35b6ed1d88.camel@collabora.com>
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <80d49aa7dd463700d98d5b2d74b7df35b6ed1d88.camel@collabora.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ <20240112085317.1866449-8-sjoerd@collabora.com>
+ <20240112123636.2h44vbdffrjlik5g@kindling>
+Organization: Collabora Ltd.
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.50.2-1 
+MIME-Version: 1.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,83 +81,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 2024-01-12 at 06:36 -0600, Nishanth Menon wrote:
+> On 09:52-20240112, Sjoerd Simons wrote:
+> >=20
+> > +DFU based boot
+> > +--------------
+> > +
+> > +To boot the board over DFU, ensure there is no SD card inserted
+> > with a
+> > +bootloader. Hold the USR switch while plugging into the Type C to
+> > boot into DFU
+> > +mode. After power-on the build artifacts needs to be uploaded one
+> > by one with a
+> > +tool like dfu-util.
+>=20
+> Don't we also need a wiped out emmc unfortunately?
 
+Nope just not having an SD card without boot artifacts is enough (or to
+keep things simple no SD card). the USR switch changes the bootmode to
+have SD as primary, DFU as fallback, so what's on the eMMC is luckily
+not relevant.
 
-On 12/01/2024 13:06, Sjoerd Simons wrote:
-> On Fri, 2024-01-12 at 12:39 +0200, Roger Quadros wrote:
->>
->>
->> On 12/01/2024 10:52, Sjoerd Simons wrote:
->>> When dr_mode is "otg" the dwc3 is initially configured in _OTG
->>> mode;
->>> However in this mode the gadget functionality doesn't work without
->>> further configuration. To resolve that on gadget start switch to
->>> _DEVICE
->>> mode globally and go back to _OTG on stop again.
->>>
->>> For this the dwc3_set_mode is renamed to dwc3_core_set_mode to
->>> avoid a
->>> conflict with the same function exposed by xhci-dwc3
->>
->> Aren't they both doing the same thing? I'd rather define them at one
->> place
->> i.e. dwc3/core.c.
-> 
-> They twiddle the same registers afaict indeed; but the way to get there
-> is rather different. So having just one for both really needs a bigger
-> amount of rework.
-> 
->> The driver model design for dwc3 looks really broken in u-boot.
->>
->> "snps,dwc3" is claimed by xhci-dwc3.c instead of being claimed by
->> dwc3/core.c.
->> This is probably because at the time USB host was the more needed use
->> case at u-boot.
->>
->> Ideally dwc3/core.c should claim "snps,dwc3" device and instantiate
->> the respective Host/Device/OTG device based on the provided otg mode.
->>
->> For Host/Device mode it is straight forwa
->> dwc3/core.c does dwc3_set_mode() depending on the mode and:
->> for host mode -> register xhci-usb driver.
->> for device mode -> register UDC device driver.
->>
->> For dual-role mode, the solution is not very clear as I don't think
->> there is a role switch framework present
->>
->> To begin with, we could probably restrict it to just device mode
->> as most platforms were forcing it to device mode in any case as they
->> usually have a 2nd USB port that is host only.
-> 
-> Right we don't have role switching; And if we had we'd have to add
-> support of the Type-C controller on the SK boards which determines the
-> roles for this.
-> 
-> This one more minimal patch was modelled after the discussion last year
-> around otg mode[0]. And similar to how the cdns3 driver handles it.
-> Essentially letting host/gadget mode be determined by the usage rather
-> then the cables plugged, which is not pretty but works.
-> 
-> While I agree with you this could all be a lot nicer of u-boot did
-> "proper" OTG/role-switching; I unfortunately don't have the bandwidth
-> to introduce all of that and it seems a shame to block DFU support on
-> it. For reference my previous series just set the peripheral role in
-> the dts which reflects your suggestion of forcing device mode. I'd be
-> wary to do so in the driver because i would hope the OTG handling in
-> dwc3 is there for a reason :) 
-> 
-> 
-> 0: https://lists.denx.de/pipermail/u-boot/2023-August/527709.html
-> 
-> 
+So i've been happily testing with the factory eMMC image untouched to
+allow me to compare against the factory u-boot behaviour=20
 
-In your current series, how does it work?
-What happens if user starts both host and device controllers?
+>=20
+> > +
+> > +.. include::=C2=A0 ../ti/am62x_sk.rst
+> > +=C2=A0=C2=A0=C2=A0 :start-after: .. am62x_evm_rst_include_start_dfu_bo=
+ot
+> > +=C2=A0=C2=A0=C2=A0 :end-before: .. am62x_evm_rst_include_end_dfu_boot
+> > +
+> > =C2=A0Debugging U-Boot
+> > =C2=A0----------------
+> > =C2=A0
+> > diff --git a/doc/board/ti/am62x_sk.rst b/doc/board/ti/am62x_sk.rst
+> > index b12dc85f06b..904a54cd5ff 100644
+> > --- a/doc/board/ti/am62x_sk.rst
+> > +++ b/doc/board/ti/am62x_sk.rst
+> > @@ -105,6 +105,20 @@ Set the variables corresponding to this
+> > platform:
+> > =C2=A0
+> > =C2=A0* 3.1 R5:
+> > =C2=A0
+> > +.. include::=C2=A0 ../ti/k3.rst
+> > +=C2=A0=C2=A0=C2=A0 :start-after: .. k3_rst_include_start_build_steps_s=
+pl_r5
+> > +=C2=A0=C2=A0=C2=A0 :end-before: .. k3_rst_include_end_build_steps_spl_=
+r5
+> > +
+> > +* 3.1.1 Alternatively build R5 for DFU boot:
+> > +
+> > +As the SPL size can get to big when building with support for
+> > booting both from
+> > +local storage *and* DFU an extra config fragment should be used to
+> > enable DFU
+> > +support (and disable storage support)
+> > +
+> > +.. prompt:: bash $
+> > +
+> > +=C2=A0 export UBOOT_CFG_CORTEXR=3D${UBOOT_CFG_CORTEXR}
+> > am62x_r5_usbdfu.config
+> > +
+> > =C2=A0.. include::=C2=A0 ../ti/k3.rst
+> > =C2=A0=C2=A0=C2=A0=C2=A0 :start-after: .. k3_rst_include_start_build_st=
+eps_spl_r5
+> > =C2=A0=C2=A0=C2=A0=C2=A0 :end-before: .. k3_rst_include_end_build_steps=
+_spl_r5
+> > @@ -251,6 +265,29 @@ https://www.ti.com/lit/pdf/spruiv7=C2=A0under the
+> > `Boot Mode Pins` section.
+> > =C2=A0
+> > =C2=A0For SW2 and SW1, the switch state in the "ON" position =3D 1.
+> > =C2=A0
+> > +DFU based boot
+> > +--------------
+> > +
+> > +To boot the board over DFU, set the switches to DFU mode and
+> > connect to the
+> > +USB Type C DRD Port on the board. After power-on the build
+> > artifacts needs to be
+> > +uploaded one by one with a tool like dfu-util.
+> > +
+> > +.. am62x_evm_rst_include_start_dfu_boot
+> > +
+> > +The initial ROM will have a DFU alt named `bootloader` for the
+> > initial R5 spl
+> > +upload. The next stages as exposed by u-boot have target alts
+> > matching the name
+> > +of the artifacts, for these a USB reset has to be done after each
+> > upload.
+> > +
+> > +When using dfu-util the following commands can be used to boot to
+> > a u-boot shell:
+> > +
+> > +.. prompt:: bash $
+> > +
+> > +=C2=A0 dfu-util -a bootloader -D tiboot3.bin
+> > +=C2=A0 dfu-util -R -a tispl -D tispl.bin
+> > +=C2=A0 dfu-util -R -a u-boot.img -D u-boot.img
+> > +
+> > +.. am62x_evm_rst_include_end_dfu_boot
+> > +
+> > =C2=A0Debugging U-Boot
+> > =C2=A0----------------
+> > =C2=A0
+> > --=20
+> > 2.43.0
+> >=20
+>=20
 
-e.g.
-> usb start
-> dfu 0
-
--- 
-cheers,
--roger
+--=20
+Sjoerd Simons
+Collabora Ltd.
