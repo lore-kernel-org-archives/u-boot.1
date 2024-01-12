@@ -4,62 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F412C4707C
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 10:55:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39B67C4706C
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 11:06:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6813D879B0;
-	Fri, 12 Jan 2024 11:55:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 8177987947;
+	Fri, 12 Jan 2024 12:06:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="A5nj7gFz";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="4lrF0Voq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D31D879B2; Fri, 12 Jan 2024 11:55:24 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id CF1698798C; Fri, 12 Jan 2024 12:06:05 +0100 (CET)
+Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
+ [46.235.227.194])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB1E78793B
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 11:55:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C76387947
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 12:06:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id B357761C27;
- Fri, 12 Jan 2024 10:55:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E69D0C43390;
- Fri, 12 Jan 2024 10:55:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705056920;
- bh=Pl6wx1wQDx8ua7aJ9xI0suJDcPRYNuNrfedncsCpJnc=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=A5nj7gFzWkHXh3xMDWCdkJSo8XN1LI0RstOREfkAItwNeGiStkEpoXL9fmyRU+ZbZ
- U7eYCb/c9rgjGOJ3b0yrXUzit/ThRSFa6UUfr3deiW19lvYwGBwQ0xzXhM3ybxyUzQ
- v/CooYKecgxFlYWljK03563vrLLmsYUXA8prms/Zfm5t0jEfBGS5e2y7FIoW7/tzPD
- Lj3m7By1/fFNilQ9FjNu2A7yW4BY4CVLvKp7PNTdgZ3CP+QCS8hQ83C/DE76IPCCoI
- g8l5LUQaL54aMZ/W8h7opBp/dqFJ5F77cuF3yjdBPTpxuL6vorUhatxFujbXnKiCzf
- SgEg9QP8Fu/dg==
-Message-ID: <8e4f2030-81fe-4af2-af8f-1919aca66d3f@kernel.org>
-Date: Fri, 12 Jan 2024 12:55:15 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 5/7] configs: am62x_evm_*: Enable USB and DFU support
-Content-Language: en-US
-To: Sjoerd Simons <sjoerd@collabora.com>, u-boot@lists.denx.de
-Cc: Martyn Welch <martyn.welch@collabora.com>, Nishanth Menon <nm@ti.com>,
- Andrew Davis <afd@ti.com>, Dave Gerlach <d-gerlach@ti.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nikhil M Jain <n-jain1@ti.com>, Praneeth Bajjuri <praneeth@ti.com>
+ spf=pass smtp.mailfrom=sjoerd@collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1705057562;
+ bh=lDrMWqzyPilK4MbM3xMnW/cWTEp2QfbVBjehGpUyiYM=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+ b=4lrF0Voqclknn6lWOThog5ny6sE2XmyL7grOeXOz3qau0Eqh+haH4vr/81BCJhyBN
+ Qsk7jF1WFxQdUJ/fWUMuso67A1a2OXkjv5jM+5TdjL4CwKUPnsGLyODQKto5Qg7cTE
+ TvEARO1/sxOpgN+hzO5Y2YhIn8nWkbITcBqYDNmclM+yLRLk/kin2PXKwpxmEUY1wb
+ 2R56YkxwcBPi+02WBawBLT4Zq4zABHy2epajECzfDLJnx/wc43B1NTAmZG45yTgFx8
+ fM1JwCgj6/PdHrzgj34ZCT0xj3mm3jDlpidLA1y5ZhghMkAFq0m4SfZ9kbxCkrWSgE
+ cVWv0T4B6H0Uw==
+Received: from beast.luon.net (cola.collaboradmins.com [195.201.22.229])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested) (Authenticated sender: sjoerd)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id D15EC3781F8E;
+ Fri, 12 Jan 2024 11:06:02 +0000 (UTC)
+Received: by beast.luon.net (Postfix, from userid 1000)
+ id 5EAD79F0735E; Fri, 12 Jan 2024 12:06:02 +0100 (CET)
+Message-ID: <80d49aa7dd463700d98d5b2d74b7df35b6ed1d88.camel@collabora.com>
+Subject: Re: [PATCH v4 2/7] usb: dwc3: Switch to device mode on gadget start
+From: Sjoerd Simons <sjoerd@collabora.com>
+To: Roger Quadros <rogerq@kernel.org>, u-boot@lists.denx.de
+Cc: Martyn Welch <martyn.welch@collabora.com>, Nishanth Menon <nm@ti.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Igor Prusov
+ <ivprusov@salutedevices.com>, Marek Vasut <marex@denx.de>,  Mattijs
+ Korpershoek <mkorpershoek@baylibre.com>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Simon Glass <sjg@chromium.org>, Svyatoslav
+ Ryhel <clamor95@gmail.com>
+Date: Fri, 12 Jan 2024 12:06:02 +0100
+In-Reply-To: <5444e6d5-f928-4f46-9af9-2c07c8b49f4f@kernel.org>
 References: <20240112085317.1866449-1-sjoerd@collabora.com>
- <20240112085317.1866449-6-sjoerd@collabora.com>
- <57e0d59d-ea1d-4396-ae63-2440e0c89eb9@kernel.org>
- <2cd97e2cd89597760eb8c1567be37f78445e1978.camel@collabora.com>
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <2cd97e2cd89597760eb8c1567be37f78445e1978.camel@collabora.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+ <20240112085317.1866449-3-sjoerd@collabora.com>
+ <5444e6d5-f928-4f46-9af9-2c07c8b49f4f@kernel.org>
+Organization: Collabora Ltd.
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.50.2-1 
+MIME-Version: 1.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,152 +80,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 2024-01-12 at 12:39 +0200, Roger Quadros wrote:
+>=20
+>=20
+> On 12/01/2024 10:52, Sjoerd Simons wrote:
+> > When dr_mode is "otg" the dwc3 is initially configured in _OTG
+> > mode;
+> > However in this mode the gadget functionality doesn't work without
+> > further configuration. To resolve that on gadget start switch to
+> > _DEVICE
+> > mode globally and go back to _OTG on stop again.
+> >=20
+> > For this the dwc3_set_mode is renamed to dwc3_core_set_mode to
+> > avoid a
+> > conflict with the same function exposed by xhci-dwc3
+>=20
+> Aren't they both doing the same thing? I'd rather define them at one
+> place
+> i.e. dwc3/core.c.
+
+They twiddle the same registers afaict indeed; but the way to get there
+is rather different. So having just one for both really needs a bigger
+amount of rework.
+
+> The driver model design for dwc3 looks really broken in u-boot.
+>=20
+> "snps,dwc3" is claimed by xhci-dwc3.c instead of being claimed by
+> dwc3/core.c.
+> This is probably because at the time USB host was the more needed use
+> case at u-boot.
+>=20
+> Ideally dwc3/core.c should claim "snps,dwc3" device and instantiate
+> the respective Host/Device/OTG device based on the provided otg mode.
+>=20
+> For Host/Device mode it is straight forwa
+> dwc3/core.c does dwc3_set_mode() depending on the mode and:
+> for host mode -> register xhci-usb driver.
+> for device mode -> register UDC device driver.
+>=20
+> For dual-role mode, the solution is not very clear as I don't think
+> there is a role switch framework present
+>=20
+> To begin with, we could probably restrict it to just device mode
+> as most platforms were forcing it to device mode in any case as they
+> usually have a 2nd USB port that is host only.
+
+Right we don't have role switching; And if we had we'd have to add
+support of the Type-C controller on the SK boards which determines the
+roles for this.
+
+This one more minimal patch was modelled after the discussion last year
+around otg mode[0]. And similar to how the cdns3 driver handles it.
+Essentially letting host/gadget mode be determined by the usage rather
+then the cables plugged, which is not pretty but works.
+
+While I agree with you this could all be a lot nicer of u-boot did
+"proper" OTG/role-switching; I unfortunately don't have the bandwidth
+to introduce all of that and it seems a shame to block DFU support on
+it. For reference my previous series just set the peripheral role in
+the dts which reflects your suggestion of forcing device mode. I'd be
+wary to do so in the driver because i would hope the OTG handling in
+dwc3 is there for a reason :)=20
 
 
-On 12/01/2024 12:44, Sjoerd Simons wrote:
-> On Fri, 2024-01-12 at 11:58 +0200, Roger Quadros wrote:
->> Hi Sjoerd,
->>
->> On 12/01/2024 10:52, Sjoerd Simons wrote:
->>> Enable USB host as well as USB gadget and DFU support for a53; For
->>> the
->>> r5 due to the smaller available size create a config fragment for
->>> DFU
->>> supports which disables support for persistent storage to free up
->>> space
->>> for USB support
->>>
->>> Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
->>>
->>> ---
->>>
->>> Changes in v4:
->>> - Move R5 dfu config to a config fragment rather then a full
->>> defconfig
->>> - Don't enable XHCI for the R5 SPL, unneeded
->>>
->>> Changes in v3:
->>> - Run savedefconfig to adjust to more recent u-boot
->>>
->>> Changes in v2:
->>> - Create a seperate defconfig for R5
->>>
->>>  configs/am62x_evm_a53_defconfig | 30
->>> ++++++++++++++++++++++++++++++
->>>  configs/am62x_r5_usbdfu.config  | 28 ++++++++++++++++++++++++++++
->>>  2 files changed, 58 insertions(+)
->>>  create mode 100644 configs/am62x_r5_usbdfu.config
->>>
->>> diff --git a/configs/am62x_evm_a53_defconfig
->>> b/configs/am62x_evm_a53_defconfig
->>> index aa96c1b3125..f335eb11e63 100644
->>> --- a/configs/am62x_evm_a53_defconfig
->>> +++ b/configs/am62x_evm_a53_defconfig
->>> @@ -1,5 +1,6 @@
->>>  CONFIG_ARM=y
->>>  CONFIG_ARCH_K3=y
->>> +CONFIG_SYS_MALLOC_LEN=0x2000000
->>>  CONFIG_SYS_MALLOC_F_LEN=0x8000
->>>  CONFIG_SPL_LIBCOMMON_SUPPORT=y
->>>  CONFIG_SPL_LIBGENERIC_SUPPORT=y
->>> @@ -41,16 +42,23 @@ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
->>>  CONFIG_SPL_STACK_R=y
->>>  CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
->>>  CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
->>> +CONFIG_SPL_ENV_SUPPORT=y
->>>  CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
->>>  CONFIG_SPL_DM_MAILBOX=y
->>>  CONFIG_SPL_DM_SPI_FLASH=y
->>>  CONFIG_SPL_POWER_DOMAIN=y
->>> +CONFIG_SPL_RAM_SUPPORT=y
->>> +CONFIG_SPL_RAM_DEVICE=y
->>>  # CONFIG_SPL_SPI_FLASH_TINY is not set
->>>  CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
->>>  CONFIG_SPL_SPI_LOAD=y
->>>  CONFIG_SYS_SPI_U_BOOT_OFFS=0x280000
->>> +CONFIG_SPL_USB_GADGET=y
->>> +CONFIG_SPL_DFU=y
->>>  CONFIG_SPL_YMODEM_SUPPORT=y
->>> +CONFIG_CMD_DFU=y
->>>  CONFIG_CMD_MMC=y
->>> +CONFIG_CMD_USB=y
->>>  CONFIG_OF_CONTROL=y
->>>  CONFIG_SPL_OF_CONTROL=y
->>>  CONFIG_MULTI_DTB_FIT=y
->>> @@ -61,10 +69,17 @@ CONFIG_SPL_DM=y
->>>  CONFIG_SPL_DM_SEQ_ALIAS=y
->>>  CONFIG_REGMAP=y
->>>  CONFIG_SPL_REGMAP=y
->>> +CONFIG_SYSCON=y
->>> +CONFIG_SPL_SYSCON=y
->>>  CONFIG_SPL_OF_TRANSLATE=y
->>>  CONFIG_CLK=y
->>>  CONFIG_SPL_CLK=y
->>>  CONFIG_CLK_TI_SCI=y
->>> +CONFIG_DFU_MMC=y
->>> +CONFIG_DFU_RAM=y
->>> +CONFIG_DFU_SF=y
->>> +CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
->>> +CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
->>>  CONFIG_DMA_CHANNELS=y
->>>  CONFIG_TI_K3_NAVSS_UDMA=y
->>>  CONFIG_TI_SCI_PROTOCOL=y
->>> @@ -103,4 +118,19 @@ CONFIG_CADENCE_QSPI=y
->>>  CONFIG_SYSRESET=y
->>>  CONFIG_SPL_SYSRESET=y
->>>  CONFIG_SYSRESET_TI_SCI=y
->>> +CONFIG_USB=y
->>> +CONFIG_DM_USB_GADGET=y
->>> +CONFIG_SPL_DM_USB_GADGET=y
->>> +CONFIG_USB_XHCI_HCD=y
->>> +CONFIG_USB_XHCI_DWC3=y
->>> +CONFIG_USB_DWC3=y
->>> +CONFIG_USB_DWC3_GENERIC=y
->>> +CONFIG_SPL_USB_DWC3_GENERIC=y
->>> +CONFIG_SPL_USB_DWC3_AM62=y
->>> +CONFIG_USB_DWC3_AM62=y
->>> +CONFIG_USB_GADGET=y
->>> +CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
->>> +CONFIG_USB_GADGET_VENDOR_NUM=0x0451
->>> +CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
->>> +CONFIG_USB_GADGET_DOWNLOAD=y
->>>  CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
->>> diff --git a/configs/am62x_r5_usbdfu.config
->>> b/configs/am62x_r5_usbdfu.config
->>> new file mode 100644
->>> index 00000000000..772bb2ab935
->>> --- /dev/null
->>> +++ b/configs/am62x_r5_usbdfu.config
->>> @@ -0,0 +1,28 @@
->>> +CONFIG_SPL_ENV_SUPPORT=y
->>> +CONFIG_SYSCON=y
->>> +CONFIG_SPL_SYSCON=y
->>> +CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
->>> +CONFIG_MISC=y
->>> +CONFIG_USB=y
->>> +CONFIG_DM_USB_GADGET=y
->>> +CONFIG_SPL_DM_USB_GADGET=y
->>> +CONFIG_USB_DWC3=y
->>> +CONFIG_USB_DWC3_GENERIC=y
->>> +CONFIG_SPL_USB_DWC3_GENERIC=y
->>> +CONFIG_SPL_USB_DWC3_AM62=y
->>> +CONFIG_USB_GADGET=y
->>> +CONFIG_SPL_USB_GADGET=y
->>> +CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
->>> +CONFIG_USB_GADGET_VENDOR_NUM=0x0451
->>> +CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
->>> +CONFIG_USB_GADGET_DOWNLOAD=y
->>> +CONFIG_SPL_DFU=y
->>
->> Why do we need USB DFU support at R5 SPL stage?
->> What is the use case?
-> 
-> So we can load the A53 SPL over DFU ? There is no way to get a full DFU
-> bootchain without the R5 also taking part 
-> 
-> 
-Got it. I should have read the documentation in patch 7 before asking. ;)
+0: https://lists.denx.de/pipermail/u-boot/2023-August/527709.html
 
--- 
-cheers,
--roger
+
+--=20
+Sjoerd Simons
+Collabora Ltd.
