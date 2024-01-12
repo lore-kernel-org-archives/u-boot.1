@@ -4,77 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24A78C4725D
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 13:48:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3C8FC4725D
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 13:48:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3244A87AE7;
-	Fri, 12 Jan 2024 14:46:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D07D38794F;
+	Fri, 12 Jan 2024 14:47:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tSPC1gXf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OiFhCbke";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 773988794F; Fri, 12 Jan 2024 14:46:49 +0100 (CET)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id 9BD5A8793B; Fri, 12 Jan 2024 14:47:18 +0100 (CET)
+Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
+ [IPv6:2607:f8b0:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AEB487AE2
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 14:46:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 50FCC87B0F
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 14:47:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-5f588ce1b6dso52974497b3.1
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 05:46:47 -0800 (PST)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-6daf9d5f111so4976392b3a.0
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 05:47:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705067206; x=1705672006; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rrbvcnRxvEiWzrjRGQTAYC7WGaG8BBv6djiUL9M2yn8=;
- b=tSPC1gXffQBSKUfoopEugWDjAijU2D6imL6fbcLWePjNr8wxFo3sd9kMnaSjsQEzCq
- FaY0jdcQ/i6w17gevAwisBeisk+6624NvYiAU51SJ5tqVG22/dQQmH571JDrRqaPkLr5
- ZXQvFrPXm8SlHZK0hfeXhD682S5ppAluXBF28=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705067206; x=1705672006;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1705067233; x=1705672033; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rrbvcnRxvEiWzrjRGQTAYC7WGaG8BBv6djiUL9M2yn8=;
- b=CGcsKNrCvjKxIrK7tGx1GLIqa2fd3crmNiSCYYmZGliTXhuV9MfZwxamwLfXTVHjNr
- Vx4PpxiPe5OrWQDy/ZEzKxUcUlUYaCN32iSP1T+rTPqQGpZwa0BLOC4YDqsw7A78A6T1
- hnnYLyIBXc7y22USoywpj/4rdHJPc1qYW2VtQc6UZT9Q/isgXUJuHpVjncBhNjt6Ni/M
- aDOVVxiIuoS5Ux8A1nTAY0w20jTfQPIAkCu+HU6M43hgBGWXBSZuy2l7tLve2xlYjp0W
- uIr22WL2bUiBba3vMN+mT1nt9vpG4RFxnWJukzTooN154hjOk0PBiHlFDvHsksCYyNuL
- 8m7w==
-X-Gm-Message-State: AOJu0YzUTG3WDDAarJoYexs1fnUR8FKdk/2eQfMqbO/GhCQW+S3ksH5R
- NShvuNBY00Gk0G4uE4b9nWdOW8AAWTo29SH7SX8nPM2f4Zw=
-X-Google-Smtp-Source: AGHT+IG6zfGbWpBug+aPKWW2NZRwOtliqS+cV626B3LtpgaKwFp8MwYgB5jYMgoaWzqHeNtygIxX+A==
-X-Received: by 2002:a0d:d889:0:b0:5fc:3623:e90c with SMTP id
- a131-20020a0dd889000000b005fc3623e90cmr195428ywe.4.1705067206240; 
- Fri, 12 Jan 2024 05:46:46 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- ci24-20020a05690c0a9800b005f93cc31ff0sm1321415ywb.72.2024.01.12.05.46.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jan 2024 05:46:45 -0800 (PST)
-Date: Fri, 12 Jan 2024 08:46:44 -0500
-From: Tom Rini <trini@konsulko.com>
-To: =?iso-8859-1?B?Q3Pza+Fz?= Bence <csokas.bence@prolan.hu>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v2] arm: spl: Use separate fault handlers instead of a
- single common one
-Message-ID: <20240112134644.GZ1610741@bill-the-cat>
-References: <20231219133317.11101-1-csokas.bence@prolan.hu>
+ bh=nvDaeEHp6dpUe+dll8A8cJThJVY/LQE3rbKxucRVTgM=;
+ b=OiFhCbkeEC5bbb/bH7v1TiXj2/W7mkmRQga+VNoLxptSYJOJQAURMOC/XSGWYa2PL+
+ +GHa9apMbmBZ51wSbkroivnaKizw+Md2faSVy7EkhLidfc+DIYVaDj9rNjaIQXF8n+Zc
+ X/d+a//DjXxfpSnm2QPJxo5mf0fTCIszLRGoTdfAy7mB4XCGzsTtnWRiWPMpLB0tdEt8
+ mufTzJs4bfYXKV3WcDinXm5vymyQvFw6MV1/ceSUqGNomh0SuWNzS434xCmgUM7IdvjX
+ UvvobEW1ebZyjgnSAmFCK3Qotwvg98msVLJmJ/6v5ghtQH7onn2xrY/Qx0Cm4IY0sBUr
+ dlDg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705067233; x=1705672033;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nvDaeEHp6dpUe+dll8A8cJThJVY/LQE3rbKxucRVTgM=;
+ b=lQJPRckNBTwX7v/M2wnOiWinbTLQUg+dyb1Ks2ZYJJLOVakLhbRc74j8TqVtDRrW/f
+ j1KpvtYeGaZzHPWaknBgOcFlKlQSuBaiJuFf7H2kd+XFHwDDyOo6ZekmSXjLZ0u2csq5
+ jBWhbwtcSmDrA51hkoqXzsImRXokHiEijlHYswYwv8ooOGGvrgDSgeR94/Ku7jCJZWo9
+ B58a4aaUQODPpz6vD2+xdzAuKWeRUji/6Gg3M4+zzOnvUSoIzlyVe/Ocj+UT3E5ochhG
+ 8ZZ3ZYV86RBxeak3qtGdOoVpp0Y88EJCm2/QqN8ghEk3xtq9f+VzEzOsMAbU7C0EDdbi
+ WRyg==
+X-Gm-Message-State: AOJu0Yy4fUDaf8kSCzTh1YSz36L+Up4+7HyUZZMqcR1N9AvSdZwtzMpk
+ zzL3NGbP4b8BuhDL4lK1IS/a6vtg/vKdP3WsSphLC/6SrwVqMg==
+X-Google-Smtp-Source: AGHT+IHaogIqX7XeHOEctiraustOkfRRPgSMyx8OYgEBIhwJkBxTCb+t2EvDgXcztA8hGHMEijT3yXS1srnge6pnJ5k=
+X-Received: by 2002:a05:6300:8082:b0:199:a725:9b59 with SMTP id
+ ap2-20020a056300808200b00199a7259b59mr1059141pzc.114.1705067233667; Fri, 12
+ Jan 2024 05:47:13 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="sBpP8goehbTU2pVk"
-Content-Disposition: inline
-In-Reply-To: <20231219133317.11101-1-csokas.bence@prolan.hu>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240112-maintainers-ab-v1-0-f2a538eab18a@baylibre.com>
+ <20240112-maintainers-ab-v1-2-f2a538eab18a@baylibre.com>
+In-Reply-To: <20240112-maintainers-ab-v1-2-f2a538eab18a@baylibre.com>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Fri, 12 Jan 2024 07:47:02 -0600
+Message-ID: <CAPLW+4=3CbUYFmK-vG=baTwiwLSULZVYXp8WcWZy93Gijc9hrA@mail.gmail.com>
+Subject: Re: [PATCH 2/2] MAINTAINERS: add Mattijs for Android AVB
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Tom Rini <trini@konsulko.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,42 +88,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, Jan 12, 2024 at 2:40=E2=80=AFAM Mattijs Korpershoek
+<mkorpershoek@baylibre.com> wrote:
+>
+> Igor has not been active for quite some time on lore:
+> https://lore.kernel.org/all/?q=3Digor.opaniuk@gmail.com
+>
+> I'm interested in helping with maintaining the android_avb
+> command. I'm a long time android/aosp developer and my daily job is
+> still doing android work.
+>
+> Add myself as maintainer for Android AVB.
+>
+> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> ---
 
---sBpP8goehbTU2pVk
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
 
-On Tue, Dec 19, 2023 at 02:33:18PM +0100, Cs=F3k=E1s Bence wrote:
-
-> It may be necessary to set breakpoints etc. on a specific fault handler i=
-n SPL.
-> Add a Kconfig option to separate the different handlers into their own in=
-dividual infinite loops.
->=20
-> Signed-off-by: Cs=F3k=E1s Bence <csokas.bence@prolan.hu>
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---sBpP8goehbTU2pVk
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWhQsQACgkQFHw5/5Y0
-tyxjOQv9EPk4tGqr/u8/pWi/tT+KZQo2/rHbo4iApjPqDmY6ADS1bnhwybHu5XHh
-NaZIqgdZh5rYeMNpxjKKJWXpT0CMSyVpWpQaYt+P5+d8uTvTabqc16EjKmHIiDAK
-wVI1xXyfvOSVdaT8cgOYolfsTT63RskYTYYRoryYUrDMyZWIEfKRjjAkYKKcog2e
-rNBDrk6JNqzZ3b1Qo+mttlzivEbRsmSiiAvc8EiXoEgoBEHW7I7BtKBM4EMaIb1Y
-7HItSTnCWpbmTnQdivb8KBYmmN80LGF++5uyw+PN7i3mlZhgWCcUzWVdTM4Tia4e
-3yf8NERKhK4OpWjGCRWUsNo8beEW8p5BIsy2YymMoVhsdkdfiIlkqhhQ9IuWB3BM
-66+O/3dZLq69xuEPOgAkyBlP7189+GR4P6V2m87+bd2RiZq0pgPx31hyDpuzhvfV
-Tp9EM5oo6Iuyg/bpvO/JkQNRAbs/beH8BrDON5ROwBLmO3yGB1P9M+xnBmXfK7uU
-asMN+G8T
-=l8FN
------END PGP SIGNATURE-----
-
---sBpP8goehbTU2pVk--
+>  MAINTAINERS | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 3c73d8c35c4a..4978470c1664 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -70,6 +70,7 @@ F:    test/py/tests/test_android/test_ab.py
+>
+>  ANDROID AVB
+>  M:     Igor Opaniuk <igor.opaniuk@gmail.com>
+> +M:     Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>  S:     Maintained
+>  F:     cmd/avb.c
+>  F:     common/avb_verify.c
+>
+> --
+> 2.43.0
+>
