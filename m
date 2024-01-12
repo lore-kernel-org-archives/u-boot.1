@@ -4,62 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31179C4706C
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 10:41:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B540C4706C
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 10:44:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A160A8792D;
-	Fri, 12 Jan 2024 11:41:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 7488F8792D;
+	Fri, 12 Jan 2024 11:44:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="u5PahWiM";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="fSJCsI75";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 312D18798C; Fri, 12 Jan 2024 11:41:20 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ id CFE23879C0; Fri, 12 Jan 2024 11:44:20 +0100 (CET)
+Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
+ [46.235.227.194])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9FB38764D
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 11:41:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CA0968764D
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 11:44:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id CBB58CE20CC;
- Fri, 12 Jan 2024 10:41:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 19BB3C433C7;
- Fri, 12 Jan 2024 10:41:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705056074;
- bh=WfbXsI/XAdHG9GtztxmSJ0pgqn5qNGi7EQ4qLyECrsA=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=u5PahWiMe8OxOBdLQIE9Mx2QS8dj2xD7VVTVmW9VJknmMcyNpGnfBw6pQ3TBqK/bA
- gseGPCugH20h32Ln/Z0e+hlJVB5ltJsF1VUh/luV0rUwW22gChIk6hxfOPDALvVjPc
- ZSIkq8x7RI1CvJ5NoHMk/b48wOOsV0jnPI5ajBgzEMRnk7po/zTwB7uDdnIcZLLvtL
- OWMQrVvfgi3pgPP2qk0eErPA/8przMpF7IxRoAAzOWeMugx71YItlzeIFJ9UXxXxNg
- rCuqMcFUK+WQ4vQpDjVSEW4A6LjGMqkh3RLjgPap5bTuElybsKJoy4FdUK1xFSogmC
- w0Yb6UNGL+jOg==
-Message-ID: <f43b81c8-1886-4560-b8fe-dfa6a88ea726@kernel.org>
-Date: Fri, 12 Jan 2024 12:41:11 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 6/7] beagleplay: Add DFU support
-Content-Language: en-US
-To: Sjoerd Simons <sjoerd@collabora.com>, u-boot@lists.denx.de
-Cc: Martyn Welch <martyn.welch@collabora.com>, Nishanth Menon <nm@ti.com>,
- Andrew Davis <afd@ti.com>, Bryan Brattlof <bb@ti.com>,
- Dhruva Gole <d-gole@ti.com>, Jan Kiszka <jan.kiszka@siemens.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nikhil M Jain <n-jain1@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
- Vignesh Raghavendra <vigneshr@ti.com>
+ spf=pass smtp.mailfrom=sjoerd@collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1705056258;
+ bh=56SjH3SkLD+OAmL0p4iVToYaFd4Bnv185rlSEpN2+ys=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+ b=fSJCsI75ThByV3Y+JAbdjbcxeaNFagWiq/RGVH3h0wSNatiZeVh3f/hhIJ2xQjM2N
+ hf0AVhwsUeKndZgwewfz14LBVsDvFXJB/U0P0WmPOZsJB2hRB0vbXY/N/QMCHqtu8w
+ on0wAg3XVaAdL51iKFloI7Z+gTRDbk/IRx3ityDyZA3ougbRXR6zGnF00Md/oYc0Es
+ Kq+u4d/+jHEN3prfHppGK5Zlpblw+FC14zmJmFRJ1bzvhl/GZvEmevXPUnw+cmEXT2
+ qmLxTtI2QlqAKPHfozh8ENB98XThAc2dl/AC49RZE/YFvZd9BVMPOKulGYph/edSSl
+ 44JLqqLRGRkVQ==
+Received: from beast.luon.net (cola.collaboradmins.com [195.201.22.229])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: sjoerd)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id 2C8953781FED;
+ Fri, 12 Jan 2024 10:44:18 +0000 (UTC)
+Received: by beast.luon.net (Postfix, from userid 1000)
+ id A488C9F06F61; Fri, 12 Jan 2024 11:44:17 +0100 (CET)
+Message-ID: <2cd97e2cd89597760eb8c1567be37f78445e1978.camel@collabora.com>
+Subject: Re: [PATCH v4 5/7] configs: am62x_evm_*: Enable USB and DFU support
+From: Sjoerd Simons <sjoerd@collabora.com>
+To: Roger Quadros <rogerq@kernel.org>, u-boot@lists.denx.de
+Cc: Martyn Welch <martyn.welch@collabora.com>, Nishanth Menon <nm@ti.com>, 
+ Andrew Davis <afd@ti.com>, Dave Gerlach <d-gerlach@ti.com>, Kamlesh
+ Gurudasani <kamlesh@ti.com>,  Manorit Chawdhry <m-chawdhry@ti.com>, Mattijs
+ Korpershoek <mkorpershoek@baylibre.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Praneeth Bajjuri <praneeth@ti.com>
+Date: Fri, 12 Jan 2024 11:44:17 +0100
+In-Reply-To: <57e0d59d-ea1d-4396-ae63-2440e0c89eb9@kernel.org>
 References: <20240112085317.1866449-1-sjoerd@collabora.com>
- <20240112085317.1866449-7-sjoerd@collabora.com>
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20240112085317.1866449-7-sjoerd@collabora.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ <20240112085317.1866449-6-sjoerd@collabora.com>
+ <57e0d59d-ea1d-4396-ae63-2440e0c89eb9@kernel.org>
+Organization: Collabora Ltd.
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.50.2-1 
+MIME-Version: 1.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,134 +79,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 2024-01-12 at 11:58 +0200, Roger Quadros wrote:
+> Hi Sjoerd,
+>=20
+> On 12/01/2024 10:52, Sjoerd Simons wrote:
+> > Enable USB host as well as USB gadget and DFU support for a53; For
+> > the
+> > r5 due to the smaller available size create a config fragment for
+> > DFU
+> > supports which disables support for persistent storage to free up
+> > space
+> > for USB support
+> >=20
+> > Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
+> >=20
+> > ---
+> >=20
+> > Changes in v4:
+> > - Move R5 dfu config to a config fragment rather then a full
+> > defconfig
+> > - Don't enable XHCI for the R5 SPL, unneeded
+> >=20
+> > Changes in v3:
+> > - Run savedefconfig to adjust to more recent u-boot
+> >=20
+> > Changes in v2:
+> > - Create a seperate defconfig for R5
+> >=20
+> > =C2=A0configs/am62x_evm_a53_defconfig | 30
+> > ++++++++++++++++++++++++++++++
+> > =C2=A0configs/am62x_r5_usbdfu.config=C2=A0 | 28 +++++++++++++++++++++++=
++++++
+> > =C2=A02 files changed, 58 insertions(+)
+> > =C2=A0create mode 100644 configs/am62x_r5_usbdfu.config
+> >=20
+> > diff --git a/configs/am62x_evm_a53_defconfig
+> > b/configs/am62x_evm_a53_defconfig
+> > index aa96c1b3125..f335eb11e63 100644
+> > --- a/configs/am62x_evm_a53_defconfig
+> > +++ b/configs/am62x_evm_a53_defconfig
+> > @@ -1,5 +1,6 @@
+> > =C2=A0CONFIG_ARM=3Dy
+> > =C2=A0CONFIG_ARCH_K3=3Dy
+> > +CONFIG_SYS_MALLOC_LEN=3D0x2000000
+> > =C2=A0CONFIG_SYS_MALLOC_F_LEN=3D0x8000
+> > =C2=A0CONFIG_SPL_LIBCOMMON_SUPPORT=3Dy
+> > =C2=A0CONFIG_SPL_LIBGENERIC_SUPPORT=3Dy
+> > @@ -41,16 +42,23 @@ CONFIG_SPL_SYS_MALLOC_SIMPLE=3Dy
+> > =C2=A0CONFIG_SPL_STACK_R=3Dy
+> > =C2=A0CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=3Dy
+> > =C2=A0CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=3D0x1400
+> > +CONFIG_SPL_ENV_SUPPORT=3Dy
+> > =C2=A0CONFIG_SPL_FS_LOAD_PAYLOAD_NAME=3D"u-boot.img"
+> > =C2=A0CONFIG_SPL_DM_MAILBOX=3Dy
+> > =C2=A0CONFIG_SPL_DM_SPI_FLASH=3Dy
+> > =C2=A0CONFIG_SPL_POWER_DOMAIN=3Dy
+> > +CONFIG_SPL_RAM_SUPPORT=3Dy
+> > +CONFIG_SPL_RAM_DEVICE=3Dy
+> > =C2=A0# CONFIG_SPL_SPI_FLASH_TINY is not set
+> > =C2=A0CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=3Dy
+> > =C2=A0CONFIG_SPL_SPI_LOAD=3Dy
+> > =C2=A0CONFIG_SYS_SPI_U_BOOT_OFFS=3D0x280000
+> > +CONFIG_SPL_USB_GADGET=3Dy
+> > +CONFIG_SPL_DFU=3Dy
+> > =C2=A0CONFIG_SPL_YMODEM_SUPPORT=3Dy
+> > +CONFIG_CMD_DFU=3Dy
+> > =C2=A0CONFIG_CMD_MMC=3Dy
+> > +CONFIG_CMD_USB=3Dy
+> > =C2=A0CONFIG_OF_CONTROL=3Dy
+> > =C2=A0CONFIG_SPL_OF_CONTROL=3Dy
+> > =C2=A0CONFIG_MULTI_DTB_FIT=3Dy
+> > @@ -61,10 +69,17 @@ CONFIG_SPL_DM=3Dy
+> > =C2=A0CONFIG_SPL_DM_SEQ_ALIAS=3Dy
+> > =C2=A0CONFIG_REGMAP=3Dy
+> > =C2=A0CONFIG_SPL_REGMAP=3Dy
+> > +CONFIG_SYSCON=3Dy
+> > +CONFIG_SPL_SYSCON=3Dy
+> > =C2=A0CONFIG_SPL_OF_TRANSLATE=3Dy
+> > =C2=A0CONFIG_CLK=3Dy
+> > =C2=A0CONFIG_SPL_CLK=3Dy
+> > =C2=A0CONFIG_CLK_TI_SCI=3Dy
+> > +CONFIG_DFU_MMC=3Dy
+> > +CONFIG_DFU_RAM=3Dy
+> > +CONFIG_DFU_SF=3Dy
+> > +CONFIG_SYS_DFU_DATA_BUF_SIZE=3D0x5000
+> > +CONFIG_SYS_DFU_MAX_FILE_SIZE=3D0x800000
+> > =C2=A0CONFIG_DMA_CHANNELS=3Dy
+> > =C2=A0CONFIG_TI_K3_NAVSS_UDMA=3Dy
+> > =C2=A0CONFIG_TI_SCI_PROTOCOL=3Dy
+> > @@ -103,4 +118,19 @@ CONFIG_CADENCE_QSPI=3Dy
+> > =C2=A0CONFIG_SYSRESET=3Dy
+> > =C2=A0CONFIG_SPL_SYSRESET=3Dy
+> > =C2=A0CONFIG_SYSRESET_TI_SCI=3Dy
+> > +CONFIG_USB=3Dy
+> > +CONFIG_DM_USB_GADGET=3Dy
+> > +CONFIG_SPL_DM_USB_GADGET=3Dy
+> > +CONFIG_USB_XHCI_HCD=3Dy
+> > +CONFIG_USB_XHCI_DWC3=3Dy
+> > +CONFIG_USB_DWC3=3Dy
+> > +CONFIG_USB_DWC3_GENERIC=3Dy
+> > +CONFIG_SPL_USB_DWC3_GENERIC=3Dy
+> > +CONFIG_SPL_USB_DWC3_AM62=3Dy
+> > +CONFIG_USB_DWC3_AM62=3Dy
+> > +CONFIG_USB_GADGET=3Dy
+> > +CONFIG_USB_GADGET_MANUFACTURER=3D"Texas Instruments"
+> > +CONFIG_USB_GADGET_VENDOR_NUM=3D0x0451
+> > +CONFIG_USB_GADGET_PRODUCT_NUM=3D0x6165
+> > +CONFIG_USB_GADGET_DOWNLOAD=3Dy
+> > =C2=A0CONFIG_FS_FAT_MAX_CLUSTSIZE=3D16384
+> > diff --git a/configs/am62x_r5_usbdfu.config
+> > b/configs/am62x_r5_usbdfu.config
+> > new file mode 100644
+> > index 00000000000..772bb2ab935
+> > --- /dev/null
+> > +++ b/configs/am62x_r5_usbdfu.config
+> > @@ -0,0 +1,28 @@
+> > +CONFIG_SPL_ENV_SUPPORT=3Dy
+> > +CONFIG_SYSCON=3Dy
+> > +CONFIG_SPL_SYSCON=3Dy
+> > +CONFIG_SYS_DFU_DATA_BUF_SIZE=3D0x5000
+> > +CONFIG_MISC=3Dy
+> > +CONFIG_USB=3Dy
+> > +CONFIG_DM_USB_GADGET=3Dy
+> > +CONFIG_SPL_DM_USB_GADGET=3Dy
+> > +CONFIG_USB_DWC3=3Dy
+> > +CONFIG_USB_DWC3_GENERIC=3Dy
+> > +CONFIG_SPL_USB_DWC3_GENERIC=3Dy
+> > +CONFIG_SPL_USB_DWC3_AM62=3Dy
+> > +CONFIG_USB_GADGET=3Dy
+> > +CONFIG_SPL_USB_GADGET=3Dy
+> > +CONFIG_USB_GADGET_MANUFACTURER=3D"Texas Instruments"
+> > +CONFIG_USB_GADGET_VENDOR_NUM=3D0x0451
+> > +CONFIG_USB_GADGET_PRODUCT_NUM=3D0x6165
+> > +CONFIG_USB_GADGET_DOWNLOAD=3Dy
+> > +CONFIG_SPL_DFU=3Dy
+>=20
+> Why do we need USB DFU support at R5 SPL stage?
+> What is the use case?
+
+So we can load the A53 SPL over DFU ? There is no way to get a full DFU
+bootchain without the R5 also taking part=20
 
 
-On 12/01/2024 10:52, Sjoerd Simons wrote:
-> DFU mode on a beagleplay can be used via the Type-C connector by holding
-> the USR switch while powering on.
-> 
-> Configuration is only added for the A53 u-boot parts, for R5 the
-> am62x_r5_usbdfu.config fragment should be used.
-> 
-> Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
-> 
-> ---
-> 
-> Changes in v4:
-> - New patch
-> 
->  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi |  8 ++++++
->  board/beagle/beagleplay/beagleplay.env       |  1 +
->  configs/am62x_beagleplay_a53_defconfig       | 30 ++++++++++++++++++++
->  3 files changed, 39 insertions(+)
-> 
-> diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-> index a723caa5805..0b1e5e70fe2 100644
-> --- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-> +++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-> @@ -61,6 +61,14 @@
->  	>;
->  };
->  
-> +&usbss0 {
-> +	bootph-all;
-> +};
-> +
-> +&usb0 {
-> +	bootph-all;
-> +};
-> +
->  #ifdef CONFIG_TARGET_AM625_A53_BEAGLEPLAY
->  
->  #define SPL_NODTB "spl/u-boot-spl-nodtb.bin"
-> diff --git a/board/beagle/beagleplay/beagleplay.env b/board/beagle/beagleplay/beagleplay.env
-> index 4f0a94a8113..85c94856017 100644
-> --- a/board/beagle/beagleplay/beagleplay.env
-> +++ b/board/beagle/beagleplay/beagleplay.env
-> @@ -1,6 +1,7 @@
->  #include <env/ti/ti_common.env>
->  #include <env/ti/default_findfdt.env>
->  #include <env/ti/mmc.env>
-> +#include <env/ti/k3_dfu.env>
->  
->  name_kern=Image
->  console=ttyS2,115200n8
-> diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
-> index 0be20045a97..dfe04b71810 100644
-> --- a/configs/am62x_beagleplay_a53_defconfig
-> +++ b/configs/am62x_beagleplay_a53_defconfig
-> @@ -1,5 +1,6 @@
->  CONFIG_ARM=y
->  CONFIG_ARCH_K3=y
-> +CONFIG_SYS_MALLOC_LEN=0x2000000
->  CONFIG_SYS_MALLOC_F_LEN=0x8000
->  CONFIG_SPL_GPIO=y
->  CONFIG_SPL_LIBCOMMON_SUPPORT=y
-> @@ -43,15 +44,20 @@ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
->  CONFIG_SPL_STACK_R=y
->  CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
->  CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
-> +CONFIG_SPL_ENV_SUPPORT=y
->  CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
->  CONFIG_SPL_I2C=y
->  CONFIG_SPL_DM_MAILBOX=y
->  CONFIG_SPL_POWER_DOMAIN=y
-> +CONFIG_SPL_RAM_SUPPORT=y
-> +CONFIG_SPL_RAM_DEVICE=y
->  CONFIG_SPL_YMODEM_SUPPORT=y
-> +CONFIG_CMD_DFU=y
->  CONFIG_CMD_GPIO=y
->  CONFIG_CMD_GPIO_READ=y
->  CONFIG_CMD_I2C=y
->  CONFIG_CMD_MMC=y
-> +CONFIG_CMD_USB=y
->  CONFIG_CMD_PMIC=y
->  CONFIG_CMD_REGULATOR=y
->  CONFIG_OF_CONTROL=y
-> @@ -68,6 +74,10 @@ CONFIG_SPL_OF_TRANSLATE=y
->  CONFIG_CLK=y
->  CONFIG_SPL_CLK=y
->  CONFIG_CLK_TI_SCI=y
-> +CONFIG_DFU_MMC=y
-> +CONFIG_DFU_RAM=y
-> +CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
-> +CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
->  CONFIG_DMA_CHANNELS=y
->  CONFIG_TI_K3_NAVSS_UDMA=y
->  CONFIG_TI_SCI_PROTOCOL=y
-> @@ -113,6 +123,26 @@ CONFIG_SOC_TI=y
->  CONFIG_SYSRESET=y
->  CONFIG_SPL_SYSRESET=y
->  CONFIG_SYSRESET_TI_SCI=y
-> +CONFIG_USB=y
-> +CONFIG_DM_USB_GADGET=y
-> +CONFIG_SPL_DM_USB_GADGET=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_XHCI_DWC3=y
-
-XHCI features are really not required for DFU
-but now I see that we depend on XHCI driver to get
-probed even for device mode. lol.
-
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_SPL_USB_DWC3_GENERIC=y
-> +CONFIG_SPL_USB_DWC3_AM62=y
-> +CONFIG_USB_DWC3_AM62=y
-> +CONFIG_USB_GADGET=y
-> +CONFIG_SPL_USB_GADGET=y
-> +CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
-> +CONFIG_USB_GADGET_VENDOR_NUM=0x0451
-> +CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
-> +CONFIG_USB_GADGET_DOWNLOAD=y
-> +CONFIG_SPL_DFU=y
->  CONFIG_EXT4_WRITE=y
->  CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
->  CONFIG_LZO=y
-> +CONFIG_SYSCON=y
-> +CONFIG_SPL_SYSCON=y
-> +
-
--- 
-cheers,
--roger
+--=20
+Sjoerd Simons
+Collabora Ltd.
