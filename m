@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B4C4C4707C
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 08:53:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DFC6C4706C
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 08:53:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFCC787981;
-	Fri, 12 Jan 2024 09:53:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4B7308799D;
+	Fri, 12 Jan 2024 09:53:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="nwT1p3+3";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="iUX88yJU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15C1E86D38; Fri, 12 Jan 2024 09:53:22 +0100 (CET)
+ id 9FC4386D38; Fri, 12 Jan 2024 09:53:22 +0100 (CET)
 Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
  [46.235.227.194])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7F5A8795E
+ by phobos.denx.de (Postfix) with ESMTPS id E1B6F87980
  for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 09:53:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=collabora.com
@@ -28,49 +28,35 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sjoerd@collabora.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
  s=mail; t=1705049598;
- bh=P5OKQzKnTwK6oMwOOWAzazDTBGas+irKs4FtgdRyoOY=;
- h=From:To:Cc:Subject:Date:From;
- b=nwT1p3+3INgCnYGkmv+68WTiJF7iVKPrDtTIACVihqnwXH9+TyT26WDiF4nKI2fYD
- 1hiC2Z5N86rItxz6GX0nWm/DTwE/xZAvUAlqq9hUigmaTkFR3Uoe51AE7gvgYPoLEU
- g2rQYb0F9K5/4Jd7IZlsaw1szt52PUO1q/7rpSPuX8kXJj1R/X+JwNvJ/se9/JtS3N
- ngzd+ZPw0hSDK012KtXazbjAcIXn60sVRRZqeiE0YS2STOJZRQNBW2OKyY7aCgGULo
- FnbwsOFABYxgmjKMKjy2iC+z96n3nVn0w/dwveYQ4KR+O7nmQ+gR8yo209ym8GKHx8
- UcBIdLuy8f22Q==
-Received: from beast.luon.net (cola.collaboradmins.com
- [IPv6:2a01:4f8:1c1c:5717::1])
+ bh=1QrV5aNtzBLtI6pX8I+bP3MakczTiBQrHN7/hCepSkU=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=iUX88yJUEqHB0ReD4z4DDBjg6RMPh5HPcaDlS3E/GyTHqDa7mL6nGB1o6aH2ZbplY
+ nIsN3y+d0kGRQ42jDuLhPiGdue2sn+oFLKtW4hKN2PFWZyzA23Wck6mAZHgoiiemuQ
+ OFdNKdYthuR8ekLxYUOQ3BX51ZZlHcJJ6o/O9VCvcNDdXrIAoqz1rvQHKOFfqtmWiP
+ Dis7hQlEo/p5aWxVDJr4g/UGGGmPdDbRjwkkUWlr2RfSWtSN7GASbO5hiRF14yVzcH
+ wnYYW5Te1FwWy4dxqgEkF0RZ/nnUXNq5ql+ZWGkalicdW7GaH2Z3PYY9LlFIkzRuqB
+ ZxEENppGYcuMQ==
+Received: from beast.luon.net (cola.collaboradmins.com [195.201.22.229])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested) (Authenticated sender: sjoerd)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id F172B3781FC7;
- Fri, 12 Jan 2024 08:53:17 +0000 (UTC)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id 0B0A03782011;
+ Fri, 12 Jan 2024 08:53:18 +0000 (UTC)
 Received: by beast.luon.net (Postfix, from userid 1000)
- id 6FDE69ED7CC8; Fri, 12 Jan 2024 09:53:17 +0100 (CET)
+ id 986269ED7CCA; Fri, 12 Jan 2024 09:53:17 +0100 (CET)
 From: Sjoerd Simons <sjoerd@collabora.com>
 To: u-boot@lists.denx.de
 Cc: Martyn Welch <martyn.welch@collabora.com>,
  Roger Quadros <rogerq@kernel.org>, Nishanth Menon <nm@ti.com>,
- Andrew Davis <afd@ti.com>, Bryan Brattlof <bb@ti.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Dave Gerlach <d-gerlach@ti.com>, Dhruva Gole <d-gole@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Igor Prusov <ivprusov@salutedevices.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Judith Mendez <jm@ti.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>,
  Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Neha Malcom Francis <n-francis@ti.com>, Nikhil M Jain <n-jain1@ti.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Praneeth Bajjuri <praneeth@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, Simon Glass <sjg@chromium.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
- Vignesh Raghavendra <vigneshr@ti.com>
-Subject: [PATCH v4 0/7] Add DFU and usb boot for TI am62x SK and beagleplay
-Date: Fri, 12 Jan 2024 09:52:15 +0100
-Message-ID: <20240112085317.1866449-1-sjoerd@collabora.com>
+ Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: [PATCH v4 1/7] usb: dwc3: Add dwc3 glue driver for am62
+Date: Fri, 12 Jan 2024 09:52:16 +0100
+Message-ID: <20240112085317.1866449-2-sjoerd@collabora.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240112085317.1866449-1-sjoerd@collabora.com>
+References: <20240112085317.1866449-1-sjoerd@collabora.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -89,68 +75,194 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add glue code for TI AM62 to the dwc3 driver; Most code adopted from
+TI vendor u-boot code.
 
-This series adds DFU support for TI AM62 SK board and new since this
-version also for beagleplay.
+Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
 
-Since the last revision, apart from beagleplay support the main changes
-are:
-* Documentation was added on how to use this functionality on both boards
-* the R5 configuration is now done via a config fragment rather
-  then a full configuraiton
-* A new patch was added for dwc3 to work in device mode even if dr_mode is
-  configured as otg. Avoiding the need for an explicit switch to
-  periphal in the u-boot dts
-
-I will also submit the dts changes to linux so that those can be dropped
-again in the near future (hopefully)
+---
 
 Changes in v4:
 - Add config dependency on SYSCON
 - Move defines and constants outside out of function scope
-- Don't force usb0 into peripheral mode
-- Move R5 dfu config to a config fragment rather then a full defconfig
-- Don't enable XHCI for the R5 SPL, unneeded
-
-Change in v3:
-- Add dfu via environment rather then config headers
-- Enable usb nodes in all boot phases
-- Run savedefconfig to adjust to more recent u-boot
 
 Changes in v2:
 - Switch dwc3 glue to a seperate driver rather then in dwc-generic
-- Minimize config changes to just DFU configuration
-- Only enable usb port 0 DFU in SPL
-- Create a seperate defconfig for R5
 
-Sjoerd Simons (7):
-  usb: dwc3: Add dwc3 glue driver for am62
-  usb: dwc3: Switch to device mode on gadget start
-  board: ti: am62x: am62x: include env for DFU
-  arm: dts: k3-am625-sk: Enable usb port in u-boot
-  configs: am62x_evm_*: Enable USB and DFU support
-  beagleplay: Add DFU support
-  doc: board: Add document for DFU boot on am62x SoCs
-
- arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi |   8 ++
- arch/arm/dts/k3-am625-sk-u-boot.dtsi         |   8 ++
- board/beagle/beagleplay/beagleplay.env       |   1 +
- board/ti/am62x/am62x.env                     |   1 +
- configs/am62x_beagleplay_a53_defconfig       |  30 +++++
- configs/am62x_evm_a53_defconfig              |  30 +++++
- configs/am62x_r5_usbdfu.config               |  28 +++++
- doc/board/beagle/am62x_beagleplay.rst        |  12 ++
- doc/board/ti/am62x_sk.rst                    |  37 ++++++
- drivers/usb/dwc3/Kconfig                     |  14 +++
- drivers/usb/dwc3/Makefile                    |   1 +
- drivers/usb/dwc3/core.c                      |  10 +-
- drivers/usb/dwc3/core.h                      |   1 +
- drivers/usb/dwc3/dwc3-am62.c                 | 125 +++++++++++++++++++
- drivers/usb/dwc3/gadget.c                    |   6 +
- 15 files changed, 307 insertions(+), 5 deletions(-)
- create mode 100644 configs/am62x_r5_usbdfu.config
+ drivers/usb/dwc3/Kconfig     |  14 ++++
+ drivers/usb/dwc3/Makefile    |   1 +
+ drivers/usb/dwc3/dwc3-am62.c | 125 +++++++++++++++++++++++++++++++++++
+ 3 files changed, 140 insertions(+)
  create mode 100644 drivers/usb/dwc3/dwc3-am62.c
 
+diff --git a/drivers/usb/dwc3/Kconfig b/drivers/usb/dwc3/Kconfig
+index c0c8c16fd9c..0100723a68b 100644
+--- a/drivers/usb/dwc3/Kconfig
++++ b/drivers/usb/dwc3/Kconfig
+@@ -37,6 +37,20 @@ config SPL_USB_DWC3_GENERIC
+ 	  Select this for Xilinx ZynqMP and similar Platforms.
+ 	  This wrapper supports Host and Peripheral operation modes.
+ 
++config SPL_USB_DWC3_AM62
++	bool "TI AM62 USB wrapper"
++	depends on SPL_DM_USB && SPL_USB_DWC3_GENERIC && SPL_SYSCON
++	help
++	  Select this for TI AM62 Platforms.
++	  This wrapper supports Host and Peripheral operation modes.
++
++config USB_DWC3_AM62
++	bool "TI AM62 USB wrapper"
++	depends on DM_USB && USB_DWC3_GENERIC && SYSCON
++	help
++	  Select this for TI AM62 Platforms.
++	  This wrapper supports Host and Peripheral operation modes.
++
+ config USB_DWC3_MESON_G12A
+ 	bool "Amlogic Meson G12A USB wrapper"
+ 	depends on DM_USB && USB_DWC3 && ARCH_MESON
+diff --git a/drivers/usb/dwc3/Makefile b/drivers/usb/dwc3/Makefile
+index 97b4f7191ca..a46b6824ab7 100644
+--- a/drivers/usb/dwc3/Makefile
++++ b/drivers/usb/dwc3/Makefile
+@@ -6,6 +6,7 @@ dwc3-y					:= core.o
+ 
+ obj-$(CONFIG_USB_DWC3_GADGET)		+= gadget.o ep0.o
+ 
++obj-$(CONFIG_$(SPL_)USB_DWC3_AM62)	+= dwc3-am62.o
+ obj-$(CONFIG_USB_DWC3_OMAP)		+= dwc3-omap.o
+ obj-$(CONFIG_USB_DWC3_MESON_G12A)	+= dwc3-meson-g12a.o
+ obj-$(CONFIG_USB_DWC3_MESON_GXL)	+= dwc3-meson-gxl.o
+diff --git a/drivers/usb/dwc3/dwc3-am62.c b/drivers/usb/dwc3/dwc3-am62.c
+new file mode 100644
+index 00000000000..99519602eb2
+--- /dev/null
++++ b/drivers/usb/dwc3/dwc3-am62.c
+@@ -0,0 +1,125 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * TI AM62 specific glue layer for DWC3
++ */
++
++#include <dm.h>
++#include <dm/device_compat.h>
++#include <regmap.h>
++#include <syscon.h>
++#include <asm/io.h>
++
++#include "dwc3-generic.h"
++
++#define USBSS_MODE_CONTROL		0x1c
++#define USBSS_PHY_CONFIG		0x8
++#define USBSS_PHY_VBUS_SEL_MASK		GENMASK(2, 1)
++#define USBSS_PHY_VBUS_SEL_SHIFT	1
++#define USBSS_MODE_VALID	BIT(0)
++#define PHY_PLL_REFCLK_MASK	GENMASK(3, 0)
++static const int dwc3_ti_am62_rate_table[] = {	/* in KHZ */
++	9600,
++	10000,
++	12000,
++	19200,
++	20000,
++	24000,
++	25000,
++	26000,
++	38400,
++	40000,
++	58000,
++	50000,
++	52000,
++};
++
++static void dwc3_ti_am62_glue_configure(struct udevice *dev, int index,
++					enum usb_dr_mode mode)
++{
++	struct clk usb2_refclk;
++	int rate_code, i, ret;
++	unsigned long rate;
++	u32 reg;
++	void *usbss;
++	bool vbus_divider;
++	struct regmap *syscon;
++	struct ofnode_phandle_args args;
++
++	usbss = dev_remap_addr_index(dev, 0);
++	if (IS_ERR(usbss)) {
++		dev_err(dev, "can't map IOMEM resource\n");
++		return;
++	}
++
++	ret = clk_get_by_name(dev, "ref", &usb2_refclk);
++	if (ret) {
++		dev_err(dev, "can't get usb2_refclk\n");
++		return;
++	}
++
++	/* Calculate the rate code */
++	rate = clk_get_rate(&usb2_refclk);
++	rate /= 1000;	/* To KHz */
++	for (i = 0; i < ARRAY_SIZE(dwc3_ti_am62_rate_table); i++) {
++		if (dwc3_ti_am62_rate_table[i] == rate)
++			break;
++	}
++
++	if (i == ARRAY_SIZE(dwc3_ti_am62_rate_table)) {
++		dev_err(dev, "unsupported usb2_refclk rate: %lu KHz\n", rate);
++		return;
++	}
++
++	rate_code = i;
++
++	/* Read the syscon property */
++	syscon = syscon_regmap_lookup_by_phandle(dev, "ti,syscon-phy-pll-refclk");
++	if (IS_ERR(syscon)) {
++		dev_err(dev, "unable to get ti,syscon-phy-pll-refclk regmap\n");
++		return;
++	}
++
++	ret = ofnode_parse_phandle_with_args(dev_ofnode(dev), "ti,syscon-phy-pll-refclk", NULL, 1,
++					     0, &args);
++	if (ret)
++		return;
++
++	/* Program PHY PLL refclk by reading syscon property */
++	ret = regmap_update_bits(syscon, args.args[0], PHY_PLL_REFCLK_MASK, rate_code);
++	if (ret) {
++		dev_err(dev, "failed to set phy pll reference clock rate\n");
++		return;
++	}
++
++	/* VBUS divider select */
++	reg = readl(usbss + USBSS_PHY_CONFIG);
++	vbus_divider = dev_read_bool(dev, "ti,vbus-divider");
++	if (vbus_divider)
++		reg |= 1 << USBSS_PHY_VBUS_SEL_SHIFT;
++
++	writel(reg, usbss + USBSS_PHY_CONFIG);
++
++	/* Set mode valid */
++	reg = readl(usbss + USBSS_MODE_CONTROL);
++	reg |= USBSS_MODE_VALID;
++	writel(reg, usbss + USBSS_MODE_CONTROL);
++}
++
++struct dwc3_glue_ops ti_am62_ops = {
++	.glue_configure = dwc3_ti_am62_glue_configure,
++};
++
++static const struct udevice_id dwc3_am62_match[] = {
++	{ .compatible = "ti,am62-usb", .data = (ulong)&ti_am62_ops },
++	{ /* sentinel */ }
++};
++
++U_BOOT_DRIVER(dwc3_am62_wrapper) = {
++	.name	= "dwc3-am62",
++	.id	= UCLASS_SIMPLE_BUS,
++	.of_match = dwc3_am62_match,
++	.bind = dwc3_glue_bind,
++	.probe = dwc3_glue_probe,
++	.remove = dwc3_glue_remove,
++	.plat_auto	= sizeof(struct dwc3_glue_data),
++};
 -- 
 2.43.0
 
