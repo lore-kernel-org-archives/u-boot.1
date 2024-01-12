@@ -4,72 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEAF9C4706C
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 09:46:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23C3DC4707C
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 09:58:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2509D879A3;
-	Fri, 12 Jan 2024 10:46:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 6ADE587021;
+	Fri, 12 Jan 2024 10:58:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="R8xa1SY7";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="epzJhCnv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2933083414; Fri, 12 Jan 2024 10:46:54 +0100 (CET)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 74C6087067; Fri, 12 Jan 2024 10:58:27 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C836879A5
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 10:46:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-dbd99c08cd6so5468355276.0
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 01:46:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1705052810; x=1705657610;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yhYeWtfk2681GD8nAxqbQNXY3QL7HSpw98AMyR86Bao=;
- b=R8xa1SY7SvzAZBRqevx1OgQo6FNcXwA/g1EmiD/YqDeFKI+Vm87ZhnwCqQXukRU3tc
- ZTLw+HcwfRzYllH9aLyc1B4jauzZ6i6+TkCorG3otPQkplB8a2NI6x2Y/DfaQrfQ4NKZ
- QyAJXEWMUSUu7SjgzJmjhkLyn+ryguUnPDIfY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705052810; x=1705657610;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=yhYeWtfk2681GD8nAxqbQNXY3QL7HSpw98AMyR86Bao=;
- b=hvriQWSoy6+rwoqK1+5QM17tPknxt4zaqsqfrQxoQ4f1K9a3IlMewoWGg6kalD9pW+
- noVK2zCvRofzX+IAfsvP19s3MD7xih/V3y+9EMAitM47Z9V5NoHcduQWSzRmnymvMK1/
- ZrOaNT6wKtOnz3doWjNVMsBKlB+ufYks2/Izn3ZnYrgNI5g2qGydK2FietQl+DoZlPrh
- mHNSNdG7+abPHA0qWeZj0WgBSUi3cesbcRuJ4MOyXGg0MsyM+juP7sbkIDiqVEQO2JR8
- GzL2CIx62jCNTd2FWCIK3vlKn/YwsnzkrZkBF3Or0tZk2sAzP18b1xgBQXbSu/U9KFMR
- 0PmA==
-X-Gm-Message-State: AOJu0Yzx4q6+Ytur2Uq3rOoXE55RUxwk1PSjIhccti/3uy0eoEy2O7Gr
- iBqG5H2ekITNFeenSYBe8abNuKSqElAUy2zMAj7QTYHnxWX9sQ==
-X-Google-Smtp-Source: AGHT+IHjrj5Zu35wh6m85E+VkmRJgh+UZmepB4d8jbLuEvEafiN/3Rbk9cGk3gYcb6GTKNvVzN6jMGNDCvs6qd3jizY=
-X-Received: by 2002:a25:a28b:0:b0:dbd:8d9:15be with SMTP id
- c11-20020a25a28b000000b00dbd08d915bemr564169ybi.85.1705052809737; Fri, 12 Jan
- 2024 01:46:49 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 06B1286E05
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 10:58:24 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 35578CE20DA;
+ Fri, 12 Jan 2024 09:58:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 35C14C433C7;
+ Fri, 12 Jan 2024 09:58:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1705053499;
+ bh=yY/L0RYctYbeNlo/bNIoXefrcbQ8kRPWWegJ4RpyhGI=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=epzJhCnvz7u9yxKfpp3SIAQCEMRa63exjKo8X4fSEb7CN0lC+tKDVE9mKzl2GqJDp
+ voXJHurRPHGUs3WJitQF4m2L4CNNFgfDIA6FukrZri2qt5+LqR0cUJQavJjF3Afime
+ 4Lc7zOfipS5Hr78F5KpbeJNafYvY4eeIN8KQ+88CMu1kAOJEbIQS/GCafcb44R8DvW
+ C2Wtne86ms97O8dVjsPP6eP5jgluJxtu0R6W9YkTHck++JlF9w8pEXZy6ObANkNqMy
+ WwMOt6RZzJxIufBPop4oGvVSWvrkRNYaZCQw2zI5+Qbkj8PPqqmBE+TapSK/y+PLak
+ N/AuWvGraqL8w==
+Message-ID: <57e0d59d-ea1d-4396-ae63-2440e0c89eb9@kernel.org>
+Date: Fri, 12 Jan 2024 11:58:14 +0200
 MIME-Version: 1.0
-References: <20240111131920.73691-1-rogerq@kernel.org>
- <20240111131920.73691-3-rogerq@kernel.org>
-In-Reply-To: <20240111131920.73691-3-rogerq@kernel.org>
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Date: Fri, 12 Jan 2024 10:46:39 +0100
-Message-ID: <CABGWkvo5QpCCzRTwCav6GsAgeB4kdN+StquA5=x=1J+Kj4aNbg@mail.gmail.com>
-Subject: Re: [PATCH v2 2/4] mtd: rawnand: omap_gpmc: Use DT provided IO address
-To: Roger Quadros <rogerq@kernel.org>
-Cc: trini@konsulko.com, michael@amarulasolutions.com, vigneshr@ti.com, 
- nm@ti.com, praneeth@ti.com, afd@ti.com, srk@ti.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 5/7] configs: am62x_evm_*: Enable USB and DFU support
+Content-Language: en-US
+To: Sjoerd Simons <sjoerd@collabora.com>, u-boot@lists.denx.de
+Cc: Martyn Welch <martyn.welch@collabora.com>, Nishanth Menon <nm@ti.com>,
+ Andrew Davis <afd@ti.com>, Dave Gerlach <d-gerlach@ti.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Praneeth Bajjuri <praneeth@ti.com>
+References: <20240112085317.1866449-1-sjoerd@collabora.com>
+ <20240112085317.1866449-6-sjoerd@collabora.com>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20240112085317.1866449-6-sjoerd@collabora.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,118 +75,145 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Roger,
+Hi Sjoerd,
 
-On Thu, Jan 11, 2024 at 2:19=E2=80=AFPM Roger Quadros <rogerq@kernel.org> w=
-rote:
->
-> For DM case we can get the NAND chip's IO address from DT
-> so we don't need to rely on CFG_SYS_NAND_BASE.
->
-> Signed-off-by: Roger Quadros <rogerq@kernel.org>
+On 12/01/2024 10:52, Sjoerd Simons wrote:
+> Enable USB host as well as USB gadget and DFU support for a53; For the
+> r5 due to the smaller available size create a config fragment for DFU
+> supports which disables support for persistent storage to free up space
+> for USB support
+> 
+> Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
+> 
 > ---
->
-> Notes:
->     v2: no change
->
->  drivers/mtd/nand/raw/omap_gpmc.c | 19 ++++++++++++++-----
->  1 file changed, 14 insertions(+), 5 deletions(-)
->
-> diff --git a/drivers/mtd/nand/raw/omap_gpmc.c b/drivers/mtd/nand/raw/omap=
-_gpmc.c
-> index 0e25bd5dc2..f827c578d9 100644
-> --- a/drivers/mtd/nand/raw/omap_gpmc.c
-> +++ b/drivers/mtd/nand/raw/omap_gpmc.c
-> @@ -8,13 +8,15 @@
->  #include <log.h>
->  #include <system-constants.h>
->  #include <asm/io.h>
-> -#include <dm/uclass.h>
-> +#include <dm.h>
->  #include <linux/errno.h>
->
->  #ifdef CONFIG_ARCH_OMAP2PLUS
->  #include <asm/arch/mem.h>
->  #endif
->
-> +#include <linux/io.h>
-> +#include <linux/ioport.h>
->  #include <linux/mtd/omap_gpmc.h>
->  #include <linux/mtd/nand_ecc.h>
->  #include <linux/mtd/rawnand.h>
-> @@ -1124,7 +1126,7 @@ int __maybe_unused omap_nand_switch_ecc(uint32_t ha=
-rdware, uint32_t eccstrength)
->   *   nand_scan about special functionality. See the defines for further
->   *   explanation
->   */
-> -int gpmc_nand_init(struct nand_chip *nand)
-> +int gpmc_nand_init(struct nand_chip *nand, void __iomem *nand_base)
->  {
->         int32_t gpmc_config =3D 0;
->         int cs =3D cs_next++;
-> @@ -1164,7 +1166,7 @@ int gpmc_nand_init(struct nand_chip *nand)
->         info->control =3D NULL;
->         info->cs =3D cs;
->         info->ws =3D wscfg[cs];
-> -       info->fifo =3D (void __iomem *)CFG_SYS_NAND_BASE;
-> +       info->fifo =3D nand_base;
->         nand_set_controller_data(nand, &omap_nand_info[cs]);
->         nand->cmd_ctrl  =3D omap_nand_hwcontrol;
->         nand->options   |=3D NAND_NO_PADDING | NAND_CACHEPRG;
-> @@ -1214,9 +1216,16 @@ static int gpmc_nand_probe(struct udevice *dev)
->  {
->         struct nand_chip *nand =3D dev_get_priv(dev);
->         struct mtd_info *mtd =3D nand_to_mtd(nand);
-> +       struct resource res;
-> +       void __iomem *base;
->         int ret;
->
-> -       gpmc_nand_init(nand);
-> +       ret =3D dev_read_resource(dev, 0, &res);
-> +       if (ret)
-> +               return ret;
-> +
-> +       base =3D devm_ioremap(dev, res.start, resource_size(&res));
-> +       gpmc_nand_init(nand, base);
->
->         ret =3D nand_scan(mtd, CONFIG_SYS_NAND_MAX_CHIPS);
->         if (ret)
-> @@ -1270,7 +1279,7 @@ void board_nand_init(void)
->
->  int board_nand_init(struct nand_chip *nand)
->  {
-> -       return gpmc_nand_init(nand);
-> +       return gpmc_nand_init(nand, (void __iomem *)CFG_SYS_NAND_BASE);
->  }
+> 
+> Changes in v4:
+> - Move R5 dfu config to a config fragment rather then a full defconfig
+> - Don't enable XHCI for the R5 SPL, unneeded
+> 
+> Changes in v3:
+> - Run savedefconfig to adjust to more recent u-boot
+> 
+> Changes in v2:
+> - Create a seperate defconfig for R5
+> 
+>  configs/am62x_evm_a53_defconfig | 30 ++++++++++++++++++++++++++++++
+>  configs/am62x_r5_usbdfu.config  | 28 ++++++++++++++++++++++++++++
+>  2 files changed, 58 insertions(+)
+>  create mode 100644 configs/am62x_r5_usbdfu.config
+> 
+> diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
+> index aa96c1b3125..f335eb11e63 100644
+> --- a/configs/am62x_evm_a53_defconfig
+> +++ b/configs/am62x_evm_a53_defconfig
+> @@ -1,5 +1,6 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_K3=y
+> +CONFIG_SYS_MALLOC_LEN=0x2000000
+>  CONFIG_SYS_MALLOC_F_LEN=0x8000
+>  CONFIG_SPL_LIBCOMMON_SUPPORT=y
+>  CONFIG_SPL_LIBGENERIC_SUPPORT=y
+> @@ -41,16 +42,23 @@ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+>  CONFIG_SPL_STACK_R=y
+>  CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
+>  CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
+> +CONFIG_SPL_ENV_SUPPORT=y
+>  CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
+>  CONFIG_SPL_DM_MAILBOX=y
+>  CONFIG_SPL_DM_SPI_FLASH=y
+>  CONFIG_SPL_POWER_DOMAIN=y
+> +CONFIG_SPL_RAM_SUPPORT=y
+> +CONFIG_SPL_RAM_DEVICE=y
+>  # CONFIG_SPL_SPI_FLASH_TINY is not set
+>  CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
+>  CONFIG_SPL_SPI_LOAD=y
+>  CONFIG_SYS_SPI_U_BOOT_OFFS=0x280000
+> +CONFIG_SPL_USB_GADGET=y
+> +CONFIG_SPL_DFU=y
+>  CONFIG_SPL_YMODEM_SUPPORT=y
+> +CONFIG_CMD_DFU=y
+>  CONFIG_CMD_MMC=y
+> +CONFIG_CMD_USB=y
+>  CONFIG_OF_CONTROL=y
+>  CONFIG_SPL_OF_CONTROL=y
+>  CONFIG_MULTI_DTB_FIT=y
+> @@ -61,10 +69,17 @@ CONFIG_SPL_DM=y
+>  CONFIG_SPL_DM_SEQ_ALIAS=y
+>  CONFIG_REGMAP=y
+>  CONFIG_SPL_REGMAP=y
+> +CONFIG_SYSCON=y
+> +CONFIG_SPL_SYSCON=y
+>  CONFIG_SPL_OF_TRANSLATE=y
+>  CONFIG_CLK=y
+>  CONFIG_SPL_CLK=y
+>  CONFIG_CLK_TI_SCI=y
+> +CONFIG_DFU_MMC=y
+> +CONFIG_DFU_RAM=y
+> +CONFIG_DFU_SF=y
+> +CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
+> +CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
+>  CONFIG_DMA_CHANNELS=y
+>  CONFIG_TI_K3_NAVSS_UDMA=y
+>  CONFIG_TI_SCI_PROTOCOL=y
+> @@ -103,4 +118,19 @@ CONFIG_CADENCE_QSPI=y
+>  CONFIG_SYSRESET=y
+>  CONFIG_SPL_SYSRESET=y
+>  CONFIG_SYSRESET_TI_SCI=y
+> +CONFIG_USB=y
+> +CONFIG_DM_USB_GADGET=y
+> +CONFIG_SPL_DM_USB_GADGET=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_XHCI_DWC3=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_SPL_USB_DWC3_GENERIC=y
+> +CONFIG_SPL_USB_DWC3_AM62=y
+> +CONFIG_USB_DWC3_AM62=y
+> +CONFIG_USB_GADGET=y
+> +CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
+> +CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+> +CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
+> +CONFIG_USB_GADGET_DOWNLOAD=y
+>  CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
+> diff --git a/configs/am62x_r5_usbdfu.config b/configs/am62x_r5_usbdfu.config
+> new file mode 100644
+> index 00000000000..772bb2ab935
+> --- /dev/null
+> +++ b/configs/am62x_r5_usbdfu.config
+> @@ -0,0 +1,28 @@
+> +CONFIG_SPL_ENV_SUPPORT=y
+> +CONFIG_SYSCON=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
+> +CONFIG_MISC=y
+> +CONFIG_USB=y
+> +CONFIG_DM_USB_GADGET=y
+> +CONFIG_SPL_DM_USB_GADGET=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_SPL_USB_DWC3_GENERIC=y
+> +CONFIG_SPL_USB_DWC3_AM62=y
+> +CONFIG_USB_GADGET=y
+> +CONFIG_SPL_USB_GADGET=y
+> +CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
+> +CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+> +CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
+> +CONFIG_USB_GADGET_DOWNLOAD=y
+> +CONFIG_SPL_DFU=y
 
-Reviewed-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Why do we need USB DFU support at R5 SPL stage?
+What is the use case?
 
-Thanks and regards,
-Dario
+> +# CONFIG_SPL_MMC is not set
+> +# CONFIG_SPL_FS_FAT is not set
+> +# CONFIG_SPL_LIBDISK_SUPPORT is not set
+> +# CONFIG_SPL_SPI is not set
+> +# CONFIG_SPL_SYS_MALLOC is not set
+> +# CONFIG_CMD_GPT is not set
+> +# CONFIG_CMD_MMC is not set
+> +# CONFIG_CMD_FAT is not set
+> +# CONFIG_MMC_SDHCI is not set
 
->
->  #endif /* CONFIG_SYS_NAND_SELF_INIT */
-> --
-> 2.34.1
->
-
-
---=20
-
-Dario Binacchi
-
-Senior Embedded Linux Developer
-
-dario.binacchi@amarulasolutions.com
-
-__________________________________
-
-
-Amarula Solutions SRL
-
-Via Le Canevare 30, 31100 Treviso, Veneto, IT
-
-T. +39 042 243 5310
-info@amarulasolutions.com
-
-www.amarulasolutions.com
+-- 
+cheers,
+-roger
