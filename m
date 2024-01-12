@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1671CC4706C
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 21:27:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB6CFC4707C
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 21:27:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 951FD879C3;
-	Fri, 12 Jan 2024 22:26:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0932D879D2;
+	Fri, 12 Jan 2024 22:26:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sgqUHXKO";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nHwkijM+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CD4887831; Fri, 12 Jan 2024 22:15:08 +0100 (CET)
+ id AA4C587831; Fri, 12 Jan 2024 22:15:31 +0100 (CET)
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AED6B807A7
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 22:15:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F0A2807A7
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 22:15:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40CLEvxL006974;
- Fri, 12 Jan 2024 15:14:57 -0600
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40CLFJdk007180;
+ Fri, 12 Jan 2024 15:15:19 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1705094097;
- bh=Ea0c5zPeh4ohfL/DWlw57g1mBUTrYMNxaDDuoUo51dg=;
+ s=ti-com-17Q1; t=1705094119;
+ bh=GgrvG7ZpGlQpMeqltL4Mn/ThoNEa/TmxhOOCyfi2RTE=;
  h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=sgqUHXKODX9KforBLMofPcrvdXun2Pv/2oGLBaUmbi0ks+sFfHRNzZ6Nm4/O81QvL
- SZyynQ1326id3FbEYBJLvHOBSv69mLvnTZSPYN6W/0WLxzhpE2PgwKmlo6OygwYj87
- 1/dcCZkVzJGnHwOwZ48CUkXPICleorZOu4jfDvW8=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40CLEvGa079859
+ b=nHwkijM+cl8iD96aTLLaSQMn3R+OwHGuRkKM5cE+1sQGVlogVKmR/HlCL6Y/hGZCI
+ sgugPkR3etTdSgE+u2IV6zdE5BU4WlK5XnFE/3ddb94d6HdXxZfOmnOCOqHbob+jP8
+ YSoq42VfPlOvM/JsosrwywjBwsXVmvzSeW3EbsvA=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40CLFJ1j082992
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 12 Jan 2024 15:14:57 -0600
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 12 Jan 2024 15:15:19 -0600
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 12
- Jan 2024 15:14:57 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 15:15:15 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 12 Jan 2024 15:14:57 -0600
+ Frontend Transport; Fri, 12 Jan 2024 15:15:15 -0600
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40CLEvXu033271;
- Fri, 12 Jan 2024 15:14:57 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40CLFF5Y061908;
+ Fri, 12 Jan 2024 15:15:15 -0600
 From: Jon Humphreys <j-humphreys@ti.com>
 To: Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
 CC: Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu Raja <sinthu.raja@ti.com>,
@@ -60,13 +60,13 @@ CC: Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu Raja <sinthu.raja@ti.com>,
  Chawdhry" <m-chawdhry@ti.com>, Bryan Brattlof <bb@ti.com>, Robert Nelson
  <robertcnelson@gmail.com>, <u-boot@lists.denx.de>,
  Nishanth Menon <nm@ti.com>
-Subject: Re: [PATCH V2 06/10] board: ti: j721e: Set fdtfile from C code
+Subject: Re: [PATCH V2 07/10] board: ti: j721s2: Set fdtfile from C code
  instead of findfdt script
-In-Reply-To: <20240109191506.3820908-7-nm@ti.com>
+In-Reply-To: <20240109191506.3820908-8-nm@ti.com>
 References: <20240109191506.3820908-1-nm@ti.com>
- <20240109191506.3820908-7-nm@ti.com>
-Date: Fri, 12 Jan 2024 15:14:57 -0600
-Message-ID: <86sf32ckz2.fsf@udb0321960.dhcp.ti.com>
+ <20240109191506.3820908-8-nm@ti.com>
+Date: Fri, 12 Jan 2024 15:15:15 -0600
+Message-ID: <86o7dqckyk.fsf@udb0321960.dhcp.ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -99,65 +99,63 @@ Nishanth Menon <nm@ti.com> writes:
 > ---
 > Changes from V1: None.
 >
-> v1: https://lore.kernel.org/r/20240108173301.2692332-7-nm@ti.com
->  board/ti/j721e/evm.c     |  8 ++++++++
->  board/ti/j721e/j721e.env | 10 ----------
->  2 files changed, 8 insertions(+), 10 deletions(-)
+> V1: https://lore.kernel.org/r/20240108173301.2692332-8-nm@ti.com
+>  board/ti/j721s2/evm.c      | 8 ++++++++
+>  board/ti/j721s2/j721s2.env | 8 --------
+>  2 files changed, 8 insertions(+), 8 deletions(-)
 >
-> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
-> index c541880107ec..ad6ef4553e04 100644
-> --- a/board/ti/j721e/evm.c
-> +++ b/board/ti/j721e/evm.c
-> @@ -16,6 +16,7 @@
->  #include <dm.h>
+> diff --git a/board/ti/j721s2/evm.c b/board/ti/j721s2/evm.c
+> index 1220cd84519b..5a0281d6b483 100644
+> --- a/board/ti/j721s2/evm.c
+> +++ b/board/ti/j721s2/evm.c
+> @@ -23,6 +23,7 @@
+>  #include <dm/root.h>
 >  
 >  #include "../common/board_detect.h"
 > +#include "../common/fdt_ops.h"
 >  
->  #define board_is_j721e_som()	(board_ti_k3_is("J721EX-PM1-SOM") || \
->  				 board_ti_k3_is("J721EX-PM2-SOM"))
-> @@ -424,6 +425,12 @@ void configure_serdes_sierra(void)
+>  DECLARE_GLOBAL_DATA_PTR;
+>  
+> @@ -114,6 +115,12 @@ int checkboard(void)
+>  	return 0;
 >  }
 >  
->  #ifdef CONFIG_BOARD_LATE_INIT
-> +static struct ti_fdt_map ti_j721e_evm_fdt_map[] = {
-> +	{"j721e", "k3-j721e-common-proc-board.dtb"},
-> +	{"j721e-sk", "k3-j721e-sk.dtb"},
-> +	{"j7200", "k3-j7200-common-proc-board.dtb"},
+> +static struct ti_fdt_map ti_j721s2_evm_fdt_map[] = {
+> +	{"j721s2", "k3-j721s2-common-proc-board.dtb"},
+> +	{"am68-sk", "k3-am68-sk-base-board.dtb"},
 > +	{ /* Sentinel. */ }
 > +};
+> +
 >  static void setup_board_eeprom_env(void)
 >  {
->  	char *name = "j721e";
-> @@ -443,6 +450,7 @@ static void setup_board_eeprom_env(void)
+>  	char *name = "j721s2";
+> @@ -131,6 +138,7 @@ static void setup_board_eeprom_env(void)
 >  
 >  invalid_eeprom:
 >  	set_board_info_env_am6(name);
-> +	ti_set_fdt_env(name, ti_j721e_evm_fdt_map);
+> +	ti_set_fdt_env(name, ti_j721s2_evm_fdt_map);
 >  }
 >  
 >  static void setup_serial(void)
-> diff --git a/board/ti/j721e/j721e.env b/board/ti/j721e/j721e.env
-> index cb27bf5e2b24..38bfd7d49634 100644
-> --- a/board/ti/j721e/j721e.env
-> +++ b/board/ti/j721e/j721e.env
-> @@ -7,16 +7,6 @@
+> diff --git a/board/ti/j721s2/j721s2.env b/board/ti/j721s2/j721s2.env
+> index 64e3d9da85f0..9a03b9f30aee 100644
+> --- a/board/ti/j721s2/j721s2.env
+> +++ b/board/ti/j721s2/j721s2.env
+> @@ -7,14 +7,6 @@
 >  #include <env/ti/k3_rproc.env>
 >  #endif
 >  
-> -default_device_tree=ti/k3-j721e-common-proc-board.dtb
+> -default_device_tree=ti/k3-j721s2-common-proc-board.dtb
 > -findfdt=
 > -	setenv name_fdt ${default_device_tree};
-> -	if test $board_name = j721e; then
-> -		setenv name_fdt ti/k3-j721e-common-proc-board.dtb; fi;
-> -	if test $board_name = j7200; then
-> -		setenv name_fdt ti/k3-j7200-common-proc-board.dtb; fi;
-> -	if test $board_name = j721e-eaik || test $board_name = j721e-sk; then
-> -		setenv name_fdt ti/k3-j721e-sk.dtb; fi;
+> -	if test $board_name = j721s2; then			\
+> -		setenv name_fdt ti/k3-j721s2-common-proc-board.dtb; fi;
+> -	if test $board_name = am68-sk; then
+> -		setenv name_fdt ti/k3-am68-sk-base-board.dtb; fi;
 > -	setenv fdtfile ${name_fdt}
 >  name_kern=Image
 >  console=ttyS2,115200n8
->  args_all=setenv optargs earlycon=ns16550a,mmio32,0x02800000
+>  args_all=setenv optargs earlycon=ns16550a,mmio32,0x02880000
 > -- 
 > 2.43.0
 
