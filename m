@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECE63C4706C
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 08:56:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85E42C4707C
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 08:56:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 540FE87976;
-	Fri, 12 Jan 2024 09:56:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E16998792D;
+	Fri, 12 Jan 2024 09:56:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="l54RCrmD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YeTFqBza";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DD2187981; Fri, 12 Jan 2024 09:56:00 +0100 (CET)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id 8AB398792D; Fri, 12 Jan 2024 09:56:11 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C8968792D
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 09:55:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 53CAC879CB
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 09:56:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-336c8ab0b20so5327035f8f.1
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 00:55:58 -0800 (PST)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-40e5f746ac4so18537585e9.1
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 00:56:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705049757; x=1705654557; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1705049769; x=1705654569; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:to:content-language:subject:reply-to:from:user-agent
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=4TkZ9wji1D78BlczypPPTQPPNeHKenaBsaD1kmaimlw=;
- b=l54RCrmDzx7+5Vpgvz6iobhd4HG026WW+XeKE0D9hY9yGS+JiPqnFczRqSf8w6BE//
- tgIiuuqPeK5BPsvW2yK2ZT1vXkL66I5AxS41GR0/yWFgKbPY1pEbRmOryKomS47s/hRP
- oser1WoQGKHVsKX7YEYhZiABjIZkqAcITsbB3qJgU9pDvnWlOzUlLBXdMXJTD8TxNxJ6
- M+ciui0i8k4wMfNflYMXI/tQWw+badpIQJBVisX5s9m3bSQh7MfbaQd9+VicwDcDISqC
- klP6UWd2ZQMaTzzIVj4REyojHzNK+UWEdvRMKNdfBKQlyByPDzQpWuVXC0j1PIV4x5Zq
- VBDA==
+ :reply-to; bh=1CfNwzikwHdlXB6AsG7zIlf0cCL6lbFjUJwzhlGd4zE=;
+ b=YeTFqBza0rzxd0wsQ+yGkY0AJYQbfwhS17bA9CI5o7VVDOq/v9TAYcYK2mOGY1tTHl
+ aDMpF0Qfo4/PjpbycymQN5OehPV/kEo2h2i1ZITF0MoHJR6H7qIWgokVtBzF80ayRpoB
+ 7KXM6FTp5Jnnp2YF8nPlQzu8iQoKc5Zc8glcOfi3alHX8YCANOOKXs20/jacg+9D6RLv
+ exCJafRRI4j4ze27JeevUldeaVimGEWWn+O+7EAdDJMqgovBLQ6jBdztROpoateXIV/g
+ taxqit1FBStoTeyRRKl/ITAfJcMTNokVHkbpG49uVlzZud/fNaJ3JvxeLVtIR47D3Dq+
+ wTrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705049757; x=1705654557;
+ d=1e100.net; s=20230601; t=1705049769; x=1705654569;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:to:content-language:subject:reply-to:from:user-agent
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=4TkZ9wji1D78BlczypPPTQPPNeHKenaBsaD1kmaimlw=;
- b=cA1RIEdqocrsYthamKjQR6trE0BXTDeFgIgRAcUhsqC9nsyaDcQyjUEsBB//E+zonK
- bIkWRci3N7RvpEVtnIdAs31mOgtUsLhBSBUhkBI2Si2fdZbUiJJVMtWIcdscdc+lc3Wb
- c+yKi8aQOlFr5oxq8jKs9zuQFwqNiS+YvuuwkBPeEmBKTWf0sV869Cq8t8uCmYswV7G5
- 2EchJw6gELhybdM6DuEimDk9MWw/QMpuKF70oMOyMAaRi1kWBDbIy9Gfp3ouNGe48jSX
- Rk3n3/s84unybhdfOnrG7s/yfhwunZvj/DPnnGeUoGvLC+ZB+nUHkaBhwGE3+X7wiLFv
- /xCg==
-X-Gm-Message-State: AOJu0Yz5j4H7GpBaaPoGC+w0aSS8vHqgmSHEOLUIOept6KbcPjt9x9rW
- 0NyjplWIajO36usIrikWrWnYjMaL8/JwjSsGEw7ZpooCUpg=
-X-Google-Smtp-Source: AGHT+IG1Yi1wwRjJRV/nEPlAQytI1hKoomXgI83opakULLJahcsOaNHeOkQXS5Mx6Iptj22quPWVjA==
-X-Received: by 2002:a05:6000:11d1:b0:333:2fd2:5d1a with SMTP id
- i17-20020a05600011d100b003332fd25d1amr628011wrx.76.1705049757576; 
- Fri, 12 Jan 2024 00:55:57 -0800 (PST)
+ bh=1CfNwzikwHdlXB6AsG7zIlf0cCL6lbFjUJwzhlGd4zE=;
+ b=ud8oyOzuZ6VSWSAPPh6JEb3SeYYf0lHmVloFP0646tQElHOdLZH/xsDGO5L9G5BTjE
+ F2k3W7qAh6cVw2C2OgCSpBBESEosHUfScEO/Rz1i890DtzhXOC+Fcbdc19mmSwoyJ/aF
+ KS0V7k3gzaraN+Db9DEGpHgC9AvmOLZll7JH8Y3Qt023jlv6cmRsUNZQ24/zCWmFs38b
+ kTbt6v+GmDIOjYKzov7J70dgXVkCLyFH6maorX3iiKP9ym5ixLFb0sj5wYLfA6a1O+nn
+ 34R+GHAbl4eqmCKhvQh7c0UkJ12mHNsL1sdnRMpghBAnE46TbNTyNs1013jJfUPkTYbx
+ eTyg==
+X-Gm-Message-State: AOJu0YzeSE+cGyJR3LdU3gsg9YiwBkmSkx2BZJApt184xGK1iAYLeAz1
+ 9tPFgOmsrN9jFdZpNlnXF9hIeh2a0cEdLQ==
+X-Google-Smtp-Source: AGHT+IFBCLK+bl2rZrsF4WxJ/BAKEhv46KRCtfmbyOUanRUU0bfx/XShZ//pgQ8jE+vsZK+rVFudWQ==
+X-Received: by 2002:a05:600c:3549:b0:40e:42b5:a19b with SMTP id
+ i9-20020a05600c354900b0040e42b5a19bmr614047wmq.154.1705049768769; 
+ Fri, 12 Jan 2024 00:56:08 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:982:cbb0:59d5:231:f1ee:77f?
  ([2a01:e0a:982:cbb0:59d5:231:f1ee:77f])
  by smtp.gmail.com with ESMTPSA id
- g1-20020adfa581000000b0033680f7be5fsm3278900wrc.87.2024.01.12.00.55.56
- for <u-boot@lists.denx.de>
+ g1-20020adfa581000000b0033680f7be5fsm3278900wrc.87.2024.01.12.00.56.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 12 Jan 2024 00:55:57 -0800 (PST)
-Message-ID: <e51db290-901b-4ccb-8fc8-e9dd1bd045d6@linaro.org>
-Date: Fri, 12 Jan 2024 09:55:55 +0100
+ Fri, 12 Jan 2024 00:56:08 -0800 (PST)
+Message-ID: <3ff5d6ab-bdeb-472a-b156-70bf866293aa@linaro.org>
+Date: Fri, 12 Jan 2024 09:56:07 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: neil.armstrong@linaro.org
-Subject: Re: [PATCH 1/2] MAINTAINERS: add Mattijs for Android AB
+Subject: Re: [PATCH 2/2] MAINTAINERS: add Mattijs for Android AVB
 Content-Language: en-US, fr
-To: u-boot@lists.denx.de
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Tom Rini <trini@konsulko.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>
+Cc: u-boot@lists.denx.de
 References: <20240112-maintainers-ab-v1-0-f2a538eab18a@baylibre.com>
- <20240112-maintainers-ab-v1-1-f2a538eab18a@baylibre.com>
+ <20240112-maintainers-ab-v1-2-f2a538eab18a@baylibre.com>
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
  GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
@@ -102,7 +104,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro Developer Services
-In-Reply-To: <20240112-maintainers-ab-v1-1-f2a538eab18a@baylibre.com>
+In-Reply-To: <20240112-maintainers-ab-v1-2-f2a538eab18a@baylibre.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -126,11 +128,11 @@ On 12/01/2024 09:40, Mattijs Korpershoek wrote:
 > Igor has not been active for quite some time on lore:
 > https://lore.kernel.org/all/?q=igor.opaniuk@gmail.com
 > 
-> I'm interested in helping with maintaining the android_ab
+> I'm interested in helping with maintaining the android_avb
 > command. I'm a long time android/aosp developer and my daily job is
 > still doing android work.
 > 
-> Add myself as maintainer for Android AB.
+> Add myself as maintainer for Android AVB.
 > 
 > Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 > ---
@@ -138,17 +140,17 @@ On 12/01/2024 09:40, Mattijs Korpershoek wrote:
 >   1 file changed, 1 insertion(+)
 > 
 > diff --git a/MAINTAINERS b/MAINTAINERS
-> index 4fec063a242f..3c73d8c35c4a 100644
+> index 3c73d8c35c4a..4978470c1664 100644
 > --- a/MAINTAINERS
 > +++ b/MAINTAINERS
-> @@ -59,6 +59,7 @@ F:	lib/acpi/
+> @@ -70,6 +70,7 @@ F:	test/py/tests/test_android/test_ab.py
 >   
->   ANDROID AB
+>   ANDROID AVB
 >   M:	Igor Opaniuk <igor.opaniuk@gmail.com>
 > +M:	Mattijs Korpershoek <mkorpershoek@baylibre.com>
->   R:	Sam Protsenko <semen.protsenko@linaro.org>
 >   S:	Maintained
->   F:	boot/android_ab.c
+>   F:	cmd/avb.c
+>   F:	common/avb_verify.c
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
