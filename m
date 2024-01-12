@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50D45C4706C
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 08:54:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E43EC4707C
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 08:54:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31FA6879CB;
-	Fri, 12 Jan 2024 09:53:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A6568879C8;
+	Fri, 12 Jan 2024 09:53:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="k06uIrwq";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="qRKP2YTP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 829FC87142; Fri, 12 Jan 2024 09:53:24 +0100 (CET)
+ id D5729879B5; Fri, 12 Jan 2024 09:53:25 +0100 (CET)
 Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
  [IPv6:2a00:1098:ed:100::25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51FAF879A9
+ by phobos.denx.de (Postfix) with ESMTPS id 73D0D879AB
  for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 09:53:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=collabora.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sjoerd@collabora.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1705049598;
- bh=uHDoBEMRm/yKxg+pqLKWNarC9BMJ+SLJXIEcP/jLlrA=;
+ s=mail; t=1705049599;
+ bh=CtHm90/BSZBaA0TyjKDSlQog7TdE3fPM/RgGftWx3sc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=k06uIrwq/7qlMM7WmTE9kNBhT1DB/3QdCLpI4uGjuKUOK6tTLYMD1KteurePg7CX4
- 3aCfVRvjUg/kYHbTZAMXjtXyk3FKH97Cq1S67+VciSnlgYLQq3x3S12LyCrSbQmoj+
- tVoYeD3nHl/9pXh/883Lyh1GprxGCO3g+F4/TWiyhD6a2JHQOH5zrca3TAWLcb9lSO
- W6VEAYvHg0jEPiS/urrHYAmyYIldj4cs5zu+mOcs7MvANX6fEC8t+a+Xv7A+DP9poJ
- esYIwOHQgoxN/3wgl/SyRB1r61V2BDZVS+gsdUQQN02kkZ+3bdrzhK0/Uh/7R9KMdV
- s3mKjLMekc4WQ==
-Received: from beast.luon.net (cola.collaboradmins.com [195.201.22.229])
+ b=qRKP2YTP9Ed+Nl9RNejLbAB2X/lLHXpt/Mf7PId54SctRuCNaKvkIIUD0e7iC88Cf
+ 3s9sbTvOYWLZ88jJKXYtYI+/J9FFAhZPU0BmRx9SLxh8K0UcqkAftowVjkI72t0Of7
+ NBVQQCGQls+oRlC/R+MdKY8LN4Iodn+D1dDu3xOZ/Yu6CdD+YRNYIjpxcXJ/k4YZHn
+ cftsOkbMi1GtV7Xg/VQ65sL+SnKwytIo/LU3lvHdZoewMYKLTNu5zonWWYzTtMMnhb
+ IOpn/Ty7ky4lMap8DXeavV4MDkM+hG3NEY1vM3He0CaPABCx7Wa5egeylY8neL91d4
+ siFaQUdUEsu4Q==
+Received: from beast.luon.net (cola.collaboradmins.com
+ [IPv6:2a01:4f8:1c1c:5717::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (No client certificate requested) (Authenticated sender: sjoerd)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id D6A1B3782033;
- Fri, 12 Jan 2024 08:53:18 +0000 (UTC)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id 0FC783782035;
+ Fri, 12 Jan 2024 08:53:19 +0000 (UTC)
 Received: by beast.luon.net (Postfix, from userid 1000)
- id 7EB4D9ED7CD4; Fri, 12 Jan 2024 09:53:18 +0100 (CET)
+ id ADA349ED7CD6; Fri, 12 Jan 2024 09:53:18 +0100 (CET)
 From: Sjoerd Simons <sjoerd@collabora.com>
 To: u-boot@lists.denx.de
 Cc: Martyn Welch <martyn.welch@collabora.com>,
  Roger Quadros <rogerq@kernel.org>, Nishanth Menon <nm@ti.com>,
- Andrew Davis <afd@ti.com>, Bryan Brattlof <bb@ti.com>,
- Dhruva Gole <d-gole@ti.com>, Jan Kiszka <jan.kiszka@siemens.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Judith Mendez <jm@ti.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nikhil M Jain <n-jain1@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
- Vignesh Raghavendra <vigneshr@ti.com>
-Subject: [PATCH v4 6/7] beagleplay: Add DFU support
-Date: Fri, 12 Jan 2024 09:52:21 +0100
-Message-ID: <20240112085317.1866449-7-sjoerd@collabora.com>
+ Neha Malcom Francis <n-francis@ti.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>
+Subject: [PATCH v4 7/7] doc: board: Add document for DFU boot on am62x SoCs
+Date: Fri, 12 Jan 2024 09:52:22 +0100
+Message-ID: <20240112085317.1866449-8-sjoerd@collabora.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240112085317.1866449-1-sjoerd@collabora.com>
 References: <20240112085317.1866449-1-sjoerd@collabora.com>
@@ -78,11 +78,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-DFU mode on a beagleplay can be used via the Type-C connector by holding
-the USR switch while powering on.
-
-Configuration is only added for the A53 u-boot parts, for R5 the
-am62x_r5_usbdfu.config fragment should be used.
+Both AM62 SK and beagleplay support DFU boot in a similar way now;
+Document how to actually run DFU boot for both boards
 
 Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
 
@@ -91,112 +88,88 @@ Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
 Changes in v4:
 - New patch
 
- arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi |  8 ++++++
- board/beagle/beagleplay/beagleplay.env       |  1 +
- configs/am62x_beagleplay_a53_defconfig       | 30 ++++++++++++++++++++
- 3 files changed, 39 insertions(+)
+ doc/board/beagle/am62x_beagleplay.rst | 12 +++++++++
+ doc/board/ti/am62x_sk.rst             | 37 +++++++++++++++++++++++++++
+ 2 files changed, 49 insertions(+)
 
-diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-index a723caa5805..0b1e5e70fe2 100644
---- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-@@ -61,6 +61,14 @@
- 	>;
- };
+diff --git a/doc/board/beagle/am62x_beagleplay.rst b/doc/board/beagle/am62x_beagleplay.rst
+index 7784e62b0b7..4c8b0845845 100644
+--- a/doc/board/beagle/am62x_beagleplay.rst
++++ b/doc/board/beagle/am62x_beagleplay.rst
+@@ -270,6 +270,18 @@ for details.
+ To switch to SD card boot mode, hold the USR button while powering on
+ with Type-C power supply, then release when power LED lights up.
  
-+&usbss0 {
-+	bootph-all;
-+};
++DFU based boot
++--------------
 +
-+&usb0 {
-+	bootph-all;
-+};
++To boot the board over DFU, ensure there is no SD card inserted with a
++bootloader. Hold the USR switch while plugging into the Type C to boot into DFU
++mode. After power-on the build artifacts needs to be uploaded one by one with a
++tool like dfu-util.
 +
- #ifdef CONFIG_TARGET_AM625_A53_BEAGLEPLAY
++.. include::  ../ti/am62x_sk.rst
++    :start-after: .. am62x_evm_rst_include_start_dfu_boot
++    :end-before: .. am62x_evm_rst_include_end_dfu_boot
++
+ Debugging U-Boot
+ ----------------
  
- #define SPL_NODTB "spl/u-boot-spl-nodtb.bin"
-diff --git a/board/beagle/beagleplay/beagleplay.env b/board/beagle/beagleplay/beagleplay.env
-index 4f0a94a8113..85c94856017 100644
---- a/board/beagle/beagleplay/beagleplay.env
-+++ b/board/beagle/beagleplay/beagleplay.env
-@@ -1,6 +1,7 @@
- #include <env/ti/ti_common.env>
- #include <env/ti/default_findfdt.env>
- #include <env/ti/mmc.env>
-+#include <env/ti/k3_dfu.env>
+diff --git a/doc/board/ti/am62x_sk.rst b/doc/board/ti/am62x_sk.rst
+index b12dc85f06b..904a54cd5ff 100644
+--- a/doc/board/ti/am62x_sk.rst
++++ b/doc/board/ti/am62x_sk.rst
+@@ -105,6 +105,20 @@ Set the variables corresponding to this platform:
  
- name_kern=Image
- console=ttyS2,115200n8
-diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
-index 0be20045a97..dfe04b71810 100644
---- a/configs/am62x_beagleplay_a53_defconfig
-+++ b/configs/am62x_beagleplay_a53_defconfig
-@@ -1,5 +1,6 @@
- CONFIG_ARM=y
- CONFIG_ARCH_K3=y
-+CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
-@@ -43,15 +44,20 @@ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_STACK_R=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
-+CONFIG_SPL_ENV_SUPPORT=y
- CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
- CONFIG_SPL_I2C=y
- CONFIG_SPL_DM_MAILBOX=y
- CONFIG_SPL_POWER_DOMAIN=y
-+CONFIG_SPL_RAM_SUPPORT=y
-+CONFIG_SPL_RAM_DEVICE=y
- CONFIG_SPL_YMODEM_SUPPORT=y
-+CONFIG_CMD_DFU=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPIO_READ=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
-+CONFIG_CMD_USB=y
- CONFIG_CMD_PMIC=y
- CONFIG_CMD_REGULATOR=y
- CONFIG_OF_CONTROL=y
-@@ -68,6 +74,10 @@ CONFIG_SPL_OF_TRANSLATE=y
- CONFIG_CLK=y
- CONFIG_SPL_CLK=y
- CONFIG_CLK_TI_SCI=y
-+CONFIG_DFU_MMC=y
-+CONFIG_DFU_RAM=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
-+CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
- CONFIG_DMA_CHANNELS=y
- CONFIG_TI_K3_NAVSS_UDMA=y
- CONFIG_TI_SCI_PROTOCOL=y
-@@ -113,6 +123,26 @@ CONFIG_SOC_TI=y
- CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_TI_SCI=y
-+CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_SPL_DM_USB_GADGET=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_XHCI_DWC3=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_SPL_USB_DWC3_GENERIC=y
-+CONFIG_SPL_USB_DWC3_AM62=y
-+CONFIG_USB_DWC3_AM62=y
-+CONFIG_USB_GADGET=y
-+CONFIG_SPL_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0451
-+CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_SPL_DFU=y
- CONFIG_EXT4_WRITE=y
- CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
- CONFIG_LZO=y
-+CONFIG_SYSCON=y
-+CONFIG_SPL_SYSCON=y
+ * 3.1 R5:
+ 
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_build_steps_spl_r5
++    :end-before: .. k3_rst_include_end_build_steps_spl_r5
 +
++* 3.1.1 Alternatively build R5 for DFU boot:
++
++As the SPL size can get to big when building with support for booting both from
++local storage *and* DFU an extra config fragment should be used to enable DFU
++support (and disable storage support)
++
++.. prompt:: bash $
++
++  export UBOOT_CFG_CORTEXR=${UBOOT_CFG_CORTEXR} am62x_r5_usbdfu.config
++
+ .. include::  ../ti/k3.rst
+     :start-after: .. k3_rst_include_start_build_steps_spl_r5
+     :end-before: .. k3_rst_include_end_build_steps_spl_r5
+@@ -251,6 +265,29 @@ https://www.ti.com/lit/pdf/spruiv7 under the `Boot Mode Pins` section.
+ 
+ For SW2 and SW1, the switch state in the "ON" position = 1.
+ 
++DFU based boot
++--------------
++
++To boot the board over DFU, set the switches to DFU mode and connect to the
++USB Type C DRD Port on the board. After power-on the build artifacts needs to be
++uploaded one by one with a tool like dfu-util.
++
++.. am62x_evm_rst_include_start_dfu_boot
++
++The initial ROM will have a DFU alt named `bootloader` for the initial R5 spl
++upload. The next stages as exposed by u-boot have target alts matching the name
++of the artifacts, for these a USB reset has to be done after each upload.
++
++When using dfu-util the following commands can be used to boot to a u-boot shell:
++
++.. prompt:: bash $
++
++  dfu-util -a bootloader -D tiboot3.bin
++  dfu-util -R -a tispl -D tispl.bin
++  dfu-util -R -a u-boot.img -D u-boot.img
++
++.. am62x_evm_rst_include_end_dfu_boot
++
+ Debugging U-Boot
+ ----------------
+ 
 -- 
 2.43.0
 
