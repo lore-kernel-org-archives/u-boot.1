@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2493C4706C
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 17:56:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E05D2C4706C
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 18:00:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A62A98792D;
-	Fri, 12 Jan 2024 18:56:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D78CB8792D;
+	Fri, 12 Jan 2024 19:00:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g5Sz6ahC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CpPiwXbq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C38F587937; Fri, 12 Jan 2024 18:56:04 +0100 (CET)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
+ id B81CD87561; Fri, 12 Jan 2024 19:00:56 +0100 (CET)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DD2C87561
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 18:56:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C3AE38797B
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 19:00:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-28b93b04446so1410989a91.0
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 09:56:01 -0800 (PST)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1d3fe03b6b7so13950595ad.1
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 10:00:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705082160; x=1705686960; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1705082452; x=1705687252; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FAPBPT5lEx6l01Nyst65ShHJ7E+5cJ7RC2FweFSGakw=;
- b=g5Sz6ahC1Abq2NiR1fjflS00BxDE9lkLLSsLgGkDmna7Ym7b85ODm7WafMvdLRoxKK
- F4P8Zj6reQ/iXKGJdGKnxTuSo0bSkBZZwyKRbIE31sFqsuDkvE7NTY+45uYU4ZIoTsw5
- 6yofME/wvhIDBq6ybbH5icu62NfQ1NjoIuM7e8DZytZG+2Wz3S326u8hrx+7P+KX8O52
- aVw1uA/hxhEMKqTUyjbVGl91t7nsq6cq8NSCg5KFrzV3l8+3UoZkdja1jpx6vfg62OVo
- vsU0LCif7ONm+hk68ht83mWmYJzbziesMfJL3UK0wlG+FowuNtaq/Wek/XrOo3Rk41QK
- /o3w==
+ bh=kJbO1S4hvAhgBp4DvcvkU8L6yZKagDoYC3gCT8cIoh8=;
+ b=CpPiwXbqD1AxUocStUcEQhrCWYsdhYvfpKVLJHU4KVyKydXdeHQ4oC7EBSX1GKl6yy
+ ptcSMbtaJfVqHg3vcpG0GZPVwLyapDcXZpO9F5DxWZ7MWLnO6bJWH/TWGWtPxbRMI8I1
+ YREykS5gmIdQuLqZV6LDTKKZIO71WfXoXiNxaAXGDX96Zd681DVcTnkBpFZk3gYAjCzz
+ JugfTasQMtmuhDR3agLYNeQeNzTtZ2utAwxvlvaG5BFAVa2C2X/dT7NM+g2JekQrwZy4
+ SYN8Vw1wQusG+Aufrbu8YM/EQkCMZeF96TnSYU02dp76O/5IgzNCeLKJssEZIfIrBbSH
+ +RPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705082160; x=1705686960;
+ d=1e100.net; s=20230601; t=1705082452; x=1705687252;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FAPBPT5lEx6l01Nyst65ShHJ7E+5cJ7RC2FweFSGakw=;
- b=siaR40yYwIQVkMIK6hYOS9Ih5vJu1XjMuCBzzFqFjD2+Vj3Mk1r8nKHuBrimgiyfby
- 25QiIN4EcT2dtYbU5QlHv0EbqK9JQMjLw2qDazGKMiVzxFTM4xileFSnVcqqJSkEDY39
- PlXh55tqAmBzzzgGpBu2md9IB67Mb65VprH+wdvIGUbfPP+ubJy+eblJMkRz4GmB9ElT
- DnsbvkvlQhon8AibjB+eC3LQuirswCxnbH3WueDP9jiZdwy6xskTJmE8p1WS689TpzX/
- DgjKqgBvK2GvP0C5Nt+5PzNNcWqtAZzQ0gefQlljAshG1oLhb4zpsWqqXkRPm9uxpYa5
- QQzg==
-X-Gm-Message-State: AOJu0YwT4o+2sDr8by5kG6QVNQE57ewkaGPgBM17NGfyOFs1eXGEM66u
- Z4fgdrrP0ibgRu85LLaUSnvmTvycN+Yg7Gdo7YnK6x0NQG0=
-X-Google-Smtp-Source: AGHT+IEnJQ1n1qJkgtTh5D46dnswP9Sgq8OGgxDpcZUbmMCr45euf5Ot7ot5UR6H/x6ffPkWGVzyMoBEZ1neZavtYb0=
-X-Received: by 2002:a17:90b:1bd0:b0:28d:e180:5429 with SMTP id
- oa16-20020a17090b1bd000b0028de1805429mr2506127pjb.2.1705082159792; Fri, 12
- Jan 2024 09:55:59 -0800 (PST)
+ bh=kJbO1S4hvAhgBp4DvcvkU8L6yZKagDoYC3gCT8cIoh8=;
+ b=MDjCXoP11rdugDIBxRihZhMWoMgxTonTwGidIwtnvv7t609uToJnTPxM8IRahHo50H
+ TP83FT21Qdss8rjxG2jezQQHSZT4m0quVTi4ah82pTmEPmdIPPAf6xuzDO2vTVE9XC1G
+ hoQvuB2pfOLy7BwKPNXiYuMUypk7QbXeClygcEl9LJPo9Q5EQndax+AyOnnjB/Mbz2Ka
+ y8Tsuacnagdbqrh7/nIPiicpYqrBqMYugjvBfLOeF4JE9H6+yA2eSE2QhIwbin6IZTma
+ YVNJJuwJmsSMHRdiMsiEWK4+jl6fZ0NO6RcrWlJE513Z/WcaQo8t9x2sQFMy8HSRtQN7
+ u2DA==
+X-Gm-Message-State: AOJu0YxsORIvohzzmLROtPW1jXhoE2ckI2AlJL5frshh52htQiIS82Ko
+ jBt4ZBkrSh0mVgMt9qPsrzCv5dpdFd6LuPowsCk=
+X-Google-Smtp-Source: AGHT+IFpJUgKybaNfCnP9tXB6hT1m44PxzBHZn5/7UZIfOXDO9EN+A7SLoO3n85UmsYoR1KvUzdr1b6QDhUHaA9sBUI=
+X-Received: by 2002:a17:90b:4c42:b0:28e:fa5:7afd with SMTP id
+ np2-20020a17090b4c4200b0028e0fa57afdmr1825088pjb.4.1705082452076; Fri, 12 Jan
+ 2024 10:00:52 -0800 (PST)
 MIME-Version: 1.0
-References: <20240111-wip-y-moog-phytec-de-som-detection-fixup-v1-1-7c1a63e7eee8@phytec.de>
-In-Reply-To: <20240111-wip-y-moog-phytec-de-som-detection-fixup-v1-1-7c1a63e7eee8@phytec.de>
+References: <1705043234-39185-1-git-send-email-ye.li@nxp.com>
+In-Reply-To: <1705043234-39185-1-git-send-email-ye.li@nxp.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 12 Jan 2024 14:55:48 -0300
-Message-ID: <CAOMZO5BBhS9qQFNkftiNN-6odxe_MN+ONGKwTsbCdMWwX1vtKg@mail.gmail.com>
-Subject: Re: [PATCH] board: phytec: fix link error when disabling
- PHYTEC_SOM_DETECTION
-To: Yannic Moog <y.moog@phytec.de>
-Cc: Teresa Remmet <t.remmet@phytec.de>, u-boot@lists.denx.de,
- upstream@lists.phytec.de
+Date: Fri, 12 Jan 2024 15:00:41 -0300
+Message-ID: <CAOMZO5BpA7Mx4Pogz4vMJaBy2GeoroKAELRg7wftUNdxuePtyg@mail.gmail.com>
+Subject: Re: [PATCH] arm: imx: imx8m: Enable the SError exception
+To: Ye Li <ye.li@nxp.com>
+Cc: sbabic@denx.de, u-boot@lists.denx.de, peng.fan@nxp.com, uboot-imx@nxp.com, 
+ thomas.schaefer@kontron.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -88,20 +87,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yannic,
+Hi Ye Li,
 
-On Thu, Jan 11, 2024 at 5:27=E2=80=AFAM Yannic Moog <y.moog@phytec.de> wrot=
-e:
+On Fri, Jan 12, 2024 at 4:07=E2=80=AFAM Ye Li <ye.li@nxp.com> wrote:
 >
-> Commit aa7858fe5e2e ("board: phytec: som_detection: move definitions to
-> source file") moved function definitions from header to source file.
-> Makefile however was not updated to unconditionally build the imx8 and
-> phytec som detection units. Fix this.
+> To work with commit 2f3c920(imx8m: workaround ROM serror),
+> we need to enable the SError exception and install vector in SPL.
 >
-> Fixes: aa7858fe5e2e ("board: phytec: som_detection: move definitions to s=
-ource file")
-> Signed-off-by: Yannic Moog <y.moog@phytec.de>
+> Signed-off-by: Ye Li <ye.li@nxp.com>
+> Reviewed-by: Peng Fan <peng.fan@nxp.com>
 
-This causes build failure:
+This causes an image increase that makes SPL to not fit into the
+internal SRAM on some boards:
 
-https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/769421
+https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/769422
