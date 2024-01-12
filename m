@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01D2AC4706C
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 13:46:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60B5CC4706C
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 13:46:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 107A0879CC;
-	Fri, 12 Jan 2024 14:46:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B60BA879B2;
+	Fri, 12 Jan 2024 14:46:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IlcCO2jQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NrbW07j3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E262286E05; Fri, 12 Jan 2024 14:46:01 +0100 (CET)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
+ id 4A5EE879C5; Fri, 12 Jan 2024 14:46:04 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E03C38793B
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 14:45:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 20B828794F
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 14:46:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-dbf2740355fso2295509276.0
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 05:45:57 -0800 (PST)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-5f2d4aaa2fdso67927087b3.1
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 05:46:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705067156; x=1705671956; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1705067161; x=1705671961; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=5GzexHJoSDqYJWNN0XavbKpjORsPy/TlCfEvaBqKzw8=;
- b=IlcCO2jQiLmnt8isWbh8wKDkcgr2xwEvnrqPEvqGtv73BivDKSNI0CaXzJJwYpWPQy
- Sy6ycPJGbGga2l5cNzUW3sJVpzMGzndp2UuXFlgdp9lUWxMgG+LT7xFGzHA5MheSpywR
- +/F9SRsW+4aKvyQve4wvt/O67e/icpEq3O36Q=
+ bh=wHtOoG6kDrpXxtdxAq385QLnFPnu60+JjTK043JM7rA=;
+ b=NrbW07j3/EmyP0PkOG2u569qNEoe1LUgRBYonDJbudPsRp1KTmT340jqzlJtBjA4vD
+ 6ZEyJZG2nGtZKASBssMNtIEhlSFHEYmJO5zReluhUDPfTrpkjnrYTQAZaOLTi6PCjlxt
+ FWQ81jji56ox8Npk+0tO75GYy/jZkM8VoJMtY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705067156; x=1705671956;
+ d=1e100.net; s=20230601; t=1705067161; x=1705671961;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5GzexHJoSDqYJWNN0XavbKpjORsPy/TlCfEvaBqKzw8=;
- b=daTi6Z6LmlFsUQy0MPyxOc4fKV0WFROcBmejwMbqZwWZIQsVD2DDQGNyDKqEJzz0a9
- DPx39XLm42K0C8BNlPxGQDiuKtUALbgIQvZl0ryhUJnPkjvK5ICRJP+WMM31vj5Uc+K6
- F+a3gI3jqd9OB99jSktUXlAPo9e7nVydhizIJ2lFAl4Sn3pz2YM6gvuqTLHDqdFsrLzl
- UQ0EajfpE+F+ThS/oLmCkyuYhqhAwO/KHwpdeYpVuB7yToQ7BAjE9EI7UrjMIhDBTDip
- jhC2uVQxu6iA3tJQaJ3jANVH/q7fyf92mM1C+/KFKvsDtllhAnWiHHcpghysDB8RFiET
- tDVQ==
-X-Gm-Message-State: AOJu0Yyk9m3Nr8IYdkKXsiAC2otOo/bk157xG5nxq44CBeH1sFuSOMBz
- aniNznnO9nk/abWgYdk4M0y13bL8NT8h9w==
-X-Google-Smtp-Source: AGHT+IEpqw+nE3dx5NBgi17sUw2aNqbf8rxFgNhD+W3qBMpUh6btE9FrOH8pXTlHkaLi5FIBB4SAIg==
-X-Received: by 2002:a05:6902:2847:b0:dbd:c554:e76c with SMTP id
- ee7-20020a056902284700b00dbdc554e76cmr503204ybb.0.1705067156509; 
- Fri, 12 Jan 2024 05:45:56 -0800 (PST)
+ bh=wHtOoG6kDrpXxtdxAq385QLnFPnu60+JjTK043JM7rA=;
+ b=IdjiF0Dw5mBd9liJeiUWpUySIoPyRS7ojoSrR/KCfGPermyDWletfRvPbGLyPeNAMN
+ kJ6DNAgBEG77msQbXkrd6wh0vA7KD/G6q8tQUqEG37BoqxsdMoAHvjWoyUT35COXusTj
+ e1WeuLVwqBf4a4yWlIihNsQE/GEOFzBYWHJjIMnpLUcZGFVXVfhC2/2GZlVDRIYLmSb7
+ 3fWd2M92GYgrmNORAyn33bm00uangv9q9oyoO3++yGk1oboqkMmgnO7C+t9anOoQT1uz
+ iQdD/wvjjEr2fGZaQipwBI9xGgLBC9A9Xw/WJzI9ZIudZbAGYy+zaQh1OfRdsmijE9YH
+ aaQw==
+X-Gm-Message-State: AOJu0YxYmjNDV/KztQcR8MiSc6jNz3n0H7sizp8jPB553haHgUyesliF
+ F4l47/YQH+xAUNQpLR3fAzMCq1JYCuDmYA==
+X-Google-Smtp-Source: AGHT+IGVSdW8PJfslyrTeJxl35K/AbUNMo7p1ysyQ2Adno9/lar5/qhBCrhk9PlD8lHXPfYyQBhA+A==
+X-Received: by 2002:a81:9854:0:b0:5f3:ebb9:ec59 with SMTP id
+ p81-20020a819854000000b005f3ebb9ec59mr1271139ywg.5.1705067160794; 
+ Fri, 12 Jan 2024 05:46:00 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- e11-20020a056902034b00b00dbd15c3b753sm1188938ybs.46.2024.01.12.05.45.55
+ p10-20020a81980a000000b005effa4feef0sm1336129ywg.58.2024.01.12.05.45.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jan 2024 05:45:55 -0800 (PST)
-Date: Fri, 12 Jan 2024 08:45:54 -0500
+ Fri, 12 Jan 2024 05:46:00 -0800 (PST)
+Date: Fri, 12 Jan 2024 08:45:58 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Chunfeng Yun <chunfeng.yun@mediatek.com>
 Cc: Marek Vasut <marex@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
  Weijie Gao <weijie.gao@mediatek.com>,
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH RESEND 1/2] dt-bindings: phy-mtk-tphy: add properties for
- phy tuning
-Message-ID: <20240112134554.GP1610741@bill-the-cat>
+Subject: Re: [PATCH RESEND 2/2] phy: phy-mtk-tphy: add properties for phy
+ tuning
+Message-ID: <20240112134558.GQ1610741@bill-the-cat>
 References: <20231213064134.12727-1-chunfeng.yun@mediatek.com>
+ <20231213064134.12727-2-chunfeng.yun@mediatek.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ANGnryvoY3LstILt"
+ protocol="application/pgp-signature"; boundary="BoAQJhIXlR5PytgS"
 Content-Disposition: inline
-In-Reply-To: <20231213064134.12727-1-chunfeng.yun@mediatek.com>
+In-Reply-To: <20231213064134.12727-2-chunfeng.yun@mediatek.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,12 +96,12 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ANGnryvoY3LstILt
+--BoAQJhIXlR5PytgS
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Dec 13, 2023 at 02:41:33PM +0800, Chunfeng Yun wrote:
+On Wed, Dec 13, 2023 at 02:41:34PM +0800, Chunfeng Yun wrote:
 
 > Add properties to improve eye diagram which sometimes need adjust
 > some parameters of u2phy;
@@ -113,22 +114,22 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---ANGnryvoY3LstILt
+--BoAQJhIXlR5PytgS
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWhQosACgkQFHw5/5Y0
-tywmmAv/f9msBjP6YWqWp1q3IK0btiUtMtEfBF1lRWxbU4l8fbO/aHNYsgIXYWEc
-MNLrrJbXruLBzKoT8B5qwCoKwtTt9yse+XFgmE/R8nNHc6YLytRb7mAtkKR6SQma
-fLQX/qLYxm1orA1TsLFHClsOZl8ij7EYaCayZWBW6+C+zCWlbn73QH0OIRrOh1OI
-D4I4IGliGPkjDgi+BCi9M6wUbjX4JPBSqzgelXQ/YfYeat3bkpXBYZkS2SeOnxcC
-ihzKmd2ZULshMBvITjE6Wj/fc7latC2KFl2EMx14Eo6zcQ75i+O3mnjoCx98HtRs
-uTGi63p8h5XRc7ap9Zi8eQhg5nOs9VR2XeORyQAgVilX/OUw1rQ7GkQKez/TxdEm
-FqGGKY8LUonWDZH6l+JJJIptvwWM5QvVvSHdk+nuNWeAQVQNSW+rTcTjIVG4suEp
-+bYG7d/s3ncQ1fnU++mFP4D7FPN6fmFMa9LuwFilyxqc6rCg8E/4FIHXOGfke0Px
-Dm7f6PI2
-=Rq99
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWhQpYACgkQFHw5/5Y0
+tyyZ+Qv9Gh9Gl0/xA6wE1AZpzG/ms0aY2XlmPzaVaxc4wVS2M79Te8VRm6gsnC2G
+vdoonvjm9+Gj9X3nJChEXYgpZCfR2YPETkmSixCdFbjKHN+Ft7ebjVuyKJMO/QQr
+dK1B6E5hL9CQan6SVA6w9TGPAx4Wq4eIFyHXypjvmEZyGwH6YBc/7JtwJJHkXD13
+oDPISjZCDHsNREiII0wV4eBJQ/J95iZZCnp3ug/Zrvskkz3hzaZkiL2cQA8cuSos
+8FYSdC4GnWonedcxwjQgt10eXLORfvIVtq38phkIc+s4iTlvEyysXKtMsC+s/0eo
+vLARTePPM6qBLv9K9yyRtUNkd8BZXhtElh1lJI0mnfZoLye6edWNErUjUAG4z5ED
+HvAeMCk0jknEVy2zpwVtEVb5QWQZiuI9ue/7OTVrCF9t37rI6eeIIAihmmMcojMP
+OfJXO+3A4KlafEqvBbQkFZnpg34yJT8gseIvFo5xSmkMZH9mwg/gbio/CqqHha9F
+l+5u5k45
+=ganq
 -----END PGP SIGNATURE-----
 
---ANGnryvoY3LstILt--
+--BoAQJhIXlR5PytgS--
