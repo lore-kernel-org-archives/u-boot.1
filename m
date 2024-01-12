@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CBF8C4706C
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 06:49:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0518BC4706C
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 06:49:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1B318799E;
-	Fri, 12 Jan 2024 07:48:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B031E879BD;
+	Fri, 12 Jan 2024 07:48:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vfdz93qu";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qtRTlW6Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75A308799C; Fri, 12 Jan 2024 07:48:23 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 0A89A879B2; Fri, 12 Jan 2024 07:48:28 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58CF1871C3
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 07:48:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AC16E8798D
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 07:48:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40C6mJPK057303;
- Fri, 12 Jan 2024 00:48:19 -0600
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40C6mMup023328;
+ Fri, 12 Jan 2024 00:48:22 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1705042099;
- bh=kqN+9jd02zjICUdnwxDvJTRXE/w0ae/glA2Zlt8jqSo=;
+ s=ti-com-17Q1; t=1705042102;
+ bh=+bS3HtU/uAs+QtAWqiUy1+7ScwTbI3NeRwR+l51cRYU=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=vfdz93qu0Df6B0cpzfbwCBUcxqgFlvO8ez+qlgR2a1dXVLHdLivw/mz+XH2ztVPl9
- GIo2Yidf3mDRsZpN9LRUf/cHNPgmOk3uz8K8lY+asYdc/Uic7hF4w8fY9amukv8vV3
- Wv+e1KLi4s8Ol25Ic+LUYDyIqu59a99tUeYacxAM=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40C6mJNT071838
+ b=qtRTlW6Zq9sbNm2w1zi6nD9oC8CKg5kbRIS/Cu6OLKwo0/1p590nXQ0L/2Tx/Uk8H
+ jC3l/O690304wwhRF+SE8Uw/DHPzkbbZFEWZkCfipNPqEaXzwgXCH+FOJhD88A0ng8
+ Mw99eGI/4OQoL09huN4Al11qw1pPMeFcPg7iD27s=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40C6mM92073672
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 12 Jan 2024 00:48:19 -0600
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 12 Jan 2024 00:48:22 -0600
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 12
- Jan 2024 00:48:18 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 00:48:22 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 12 Jan 2024 00:48:18 -0600
+ Frontend Transport; Fri, 12 Jan 2024 00:48:22 -0600
 Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [172.24.227.9])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40C6lxsC063681; 
- Fri, 12 Jan 2024 00:48:16 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40C6lxsD063681; 
+ Fri, 12 Jan 2024 00:48:19 -0600
 From: Siddharth Vadapalli <s-vadapalli@ti.com>
 To: <trini@konsulko.com>, <nm@ti.com>, <sjg@chromium.org>, <afd@ti.com>,
  <vigneshr@ti.com>
 CC: <u-boot@lists.denx.de>, <dannenberg@ti.com>, <srk@ti.com>,
  <s-vadapalli@ti.com>
-Subject: [PATCH 05/10] dma: ti: k3-udma: Add support for native configuration
- of chan/flow
-Date: Fri, 12 Jan 2024 12:17:54 +0530
-Message-ID: <20240112064759.1801600-6-s-vadapalli@ti.com>
+Subject: [PATCH 06/10] arm: mach-k3: am62: Update SoC autogenerated data to
+ enable Ethernet Boot
+Date: Fri, 12 Jan 2024 12:17:55 +0530
+Message-ID: <20240112064759.1801600-7-s-vadapalli@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240112064759.1801600-1-s-vadapalli@ti.com>
 References: <20240112064759.1801600-1-s-vadapalli@ti.com>
@@ -82,43 +82,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Kishon Vijay Abraham I <kishon@ti.com>
+From: Andreas Dannenberg <dannenberg@ti.com>
 
-In absence of Device Manager (DM) services such as at R5 SPL stage,
-driver will have to natively setup TCHAN/RCHAN/RFLOW cfg registers.
-Existing UDMA driver performed the above mentioned configuration
-for UDMA. Add similar configuration for PKTDMA here.
+In order to enable Ethernet Boot using CPSW, update the clock data.
 
-Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
+Signed-off-by: Andreas Dannenberg <dannenberg@ti.com>
 Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 ---
- drivers/dma/ti/k3-udma.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ arch/arm/mach-k3/r5/am62x/clk-data.c | 79 ++++++++++++++--------------
+ 1 file changed, 39 insertions(+), 40 deletions(-)
 
-diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
-index 8a62d63dfe..3bd1e7668b 100644
---- a/drivers/dma/ti/k3-udma.c
-+++ b/drivers/dma/ti/k3-udma.c
-@@ -2110,6 +2110,9 @@ static int bcdma_tisci_tx_channel_config(struct udma_chan *uc)
- 	if (ret)
- 		dev_err(ud->dev, "tchan%d cfg failed %d\n", tchan->id, ret);
+diff --git a/arch/arm/mach-k3/r5/am62x/clk-data.c b/arch/arm/mach-k3/r5/am62x/clk-data.c
+index d7bfed0e03..880f05c40b 100644
+--- a/arch/arm/mach-k3/r5/am62x/clk-data.c
++++ b/arch/arm/mach-k3/r5/am62x/clk-data.c
+@@ -3,9 +3,9 @@
+  * AM62X specific clock platform data
+  *
+  * This file is auto generated. Please do not hand edit and report any issues
+- * to Dave Gerlach <d-gerlach@ti.com>.
++ * to Bryan Brattlof <bb@ti.com>.
+  *
+- * Copyright (C) 2020-2022 Texas Instruments Incorporated - https://www.ti.com/
++ * Copyright (C) 2020-2024 Texas Instruments Incorporated - https://www.ti.com/
+  */
  
-+	if (IS_ENABLED(CONFIG_K3_DM_FW))
-+		udma_alloc_tchan_raw(uc);
-+
- 	return ret;
- }
+ #include <linux/clk-provider.h>
+@@ -57,7 +57,7 @@ static const char * const sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk_parents[] = {
  
-@@ -2158,6 +2161,9 @@ static int pktdma_tisci_rx_channel_config(struct udma_chan *uc)
- 		dev_err(ud->dev, "flow%d config failed: %d\n", uc->rflow->id,
- 			ret);
+ static const char * const clkout0_ctrl_out0_parents[] = {
+ 	"hsdiv4_16fft_main_2_hsdivout1_clk",
+-	"hsdiv4_16fft_main_2_hsdivout1_clk10",
++	"hsdiv4_16fft_main_2_hsdivout1_clk",
+ };
  
-+	if (IS_ENABLED(CONFIG_K3_DM_FW))
-+		udma_alloc_rchan_raw(uc);
-+
- 	return ret;
- }
- 
+ static const char * const clk_32k_rc_sel_out0_parents[] = {
+@@ -158,46 +158,45 @@ static const struct clk_data clk_list[] = {
+ 	CLK_FIXED_RATE("fss_ul_main_0_ospi_0_ospi_oclk_clk", 0, 0),
+ 	CLK_DIV("hsdiv0_16fft_mcu_32khz_gen_0_hsdivout0_clk", "gluelogic_hfosc0_clkout", 0x4508030, 0, 7, 0, 0),
+ 	CLK_FIXED_RATE("mshsi2c_main_0_porscl", 0, 0),
+-	CLK_PLL("pllfracf_ssmod_16fft_main_0_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x680000, 0),
+-	CLK_DIV("pllfracf_ssmod_16fft_main_0_foutpostdiv_clk_subdiv", "pllfracf_ssmod_16fft_main_0_foutvcop_clk", 0x680038, 16, 3, 0, CLK_DIVIDER_ONE_BASED),
+-	CLK_DIV("pllfracf_ssmod_16fft_main_0_foutpostdiv_clk", "pllfracf_ssmod_16fft_main_0_foutpostdiv_clk_subdiv", 0x680038, 24, 3, 0, CLK_DIVIDER_ONE_BASED),
+-	CLK_PLL("pllfracf_ssmod_16fft_main_1_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x681000, 0),
+-	CLK_DIV("pllfracf_ssmod_16fft_main_1_foutpostdiv_clk_subdiv", "pllfracf_ssmod_16fft_main_1_foutvcop_clk", 0x681038, 16, 3, 0, CLK_DIVIDER_ONE_BASED),
+-	CLK_DIV("pllfracf_ssmod_16fft_main_1_foutpostdiv_clk", "pllfracf_ssmod_16fft_main_1_foutpostdiv_clk_subdiv", 0x681038, 24, 3, 0, CLK_DIVIDER_ONE_BASED),
+-	CLK_PLL("pllfracf_ssmod_16fft_main_12_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x68c000, 0),
+-	CLK_PLL("pllfracf_ssmod_16fft_main_15_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x68f000, 0),
+-	CLK_PLL("pllfracf_ssmod_16fft_main_2_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x682000, 0),
+-	CLK_DIV("pllfracf_ssmod_16fft_main_2_foutpostdiv_clk_subdiv", "pllfracf_ssmod_16fft_main_2_foutvcop_clk", 0x682038, 16, 3, 0, CLK_DIVIDER_ONE_BASED),
+-	CLK_DIV("pllfracf_ssmod_16fft_main_2_foutpostdiv_clk", "pllfracf_ssmod_16fft_main_2_foutpostdiv_clk_subdiv", 0x682038, 24, 3, 0, CLK_DIVIDER_ONE_BASED),
+-	CLK_PLL("pllfracf_ssmod_16fft_main_8_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x688000, 0),
+-	CLK_PLL("pllfracf_ssmod_16fft_mcu_0_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x4040000, 0),
+-	CLK_DIV("postdiv1_16fft_main_1_hsdivout5_clk", "pllfracf_ssmod_16fft_main_1_foutpostdiv_clk", 0x681094, 0, 7, 0, 0),
+-	CLK_DIV("postdiv4_16ff_main_0_hsdivout5_clk", "pllfracf_ssmod_16fft_main_0_foutpostdiv_clk", 0x680094, 0, 7, 0, 0),
+-	CLK_DIV("postdiv4_16ff_main_0_hsdivout6_clk", "pllfracf_ssmod_16fft_main_0_foutpostdiv_clk", 0x680098, 0, 7, 0, 0),
+-	CLK_DIV("postdiv4_16ff_main_0_hsdivout8_clk", "pllfracf_ssmod_16fft_main_0_foutpostdiv_clk", 0x6800a0, 0, 7, 0, 0),
+-	CLK_DIV("postdiv4_16ff_main_2_hsdivout5_clk", "pllfracf_ssmod_16fft_main_2_foutpostdiv_clk", 0x682094, 0, 7, 0, 0),
+-	CLK_DIV("postdiv4_16ff_main_2_hsdivout8_clk", "pllfracf_ssmod_16fft_main_2_foutpostdiv_clk", 0x6820a0, 0, 7, 0, 0),
+-	CLK_DIV("postdiv4_16ff_main_2_hsdivout9_clk", "pllfracf_ssmod_16fft_main_2_foutpostdiv_clk", 0x6820a4, 0, 7, 0, 0),
++	CLK_PLL("pllfracf2_ssmod_16fft_main_0_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x680000, 0),
++	CLK_DIV("pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk_subdiv", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680038, 16, 3, 0, CLK_DIVIDER_ONE_BASED),
++	CLK_DIV("pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk_subdiv", 0x680038, 24, 3, 0, CLK_DIVIDER_ONE_BASED),
++	CLK_PLL_DEFFREQ("pllfracf2_ssmod_16fft_main_1_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x681000, 0, 1920000000),
++	CLK_DIV("pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk_subdiv", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681038, 16, 3, 0, CLK_DIVIDER_ONE_BASED),
++	CLK_DIV("pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk", "pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk_subdiv", 0x681038, 24, 3, 0, CLK_DIVIDER_ONE_BASED),
++	CLK_PLL("pllfracf2_ssmod_16fft_main_12_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x68c000, 0),
++	CLK_PLL("pllfracf2_ssmod_16fft_main_15_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x68f000, 0),
++	CLK_PLL("pllfracf2_ssmod_16fft_main_2_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x682000, 0),
++	CLK_DIV("pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk_subdiv", "pllfracf2_ssmod_16fft_main_2_foutvcop_clk", 0x682038, 16, 3, 0, CLK_DIVIDER_ONE_BASED),
++	CLK_DIV("pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk", "pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk_subdiv", 0x682038, 24, 3, 0, CLK_DIVIDER_ONE_BASED),
++	CLK_PLL("pllfracf2_ssmod_16fft_main_8_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x688000, 0),
++	CLK_PLL("pllfracf2_ssmod_16fft_mcu_0_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x4040000, 0),
++	CLK_DIV("postdiv1_16fft_main_1_hsdivout5_clk", "pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk", 0x681094, 0, 7, 0, 0),
++	CLK_DIV("postdiv4_16ff_main_0_hsdivout5_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", 0x680094, 0, 7, 0, 0),
++	CLK_DIV("postdiv4_16ff_main_0_hsdivout6_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", 0x680098, 0, 7, 0, 0),
++	CLK_DIV("postdiv4_16ff_main_0_hsdivout8_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", 0x6800a0, 0, 7, 0, 0),
++	CLK_DIV("postdiv4_16ff_main_2_hsdivout5_clk", "pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk", 0x682094, 0, 7, 0, 0),
++	CLK_DIV("postdiv4_16ff_main_2_hsdivout8_clk", "pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk", 0x6820a0, 0, 7, 0, 0),
++	CLK_DIV("postdiv4_16ff_main_2_hsdivout9_clk", "pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk", 0x6820a4, 0, 7, 0, 0),
+ 	CLK_MUX("main_emmcsd0_io_clklb_sel_out0", main_emmcsd0_io_clklb_sel_out0_parents, 2, 0x108160, 16, 1, 0),
+ 	CLK_MUX("main_emmcsd1_io_clklb_sel_out0", main_emmcsd1_io_clklb_sel_out0_parents, 2, 0x108168, 16, 1, 0),
+ 	CLK_MUX("main_ospi_loopback_clk_sel_out0", main_ospi_loopback_clk_sel_out0_parents, 2, 0x108500, 4, 1, 0),
+ 	CLK_MUX("main_usb0_refclk_sel_out0", main_usb0_refclk_sel_out0_parents, 2, 0x43008190, 0, 1, 0),
+ 	CLK_MUX("main_usb1_refclk_sel_out0", main_usb1_refclk_sel_out0_parents, 2, 0x43008194, 0, 1, 0),
+-	CLK_DIV("hsdiv0_16fft_main_12_hsdivout0_clk", "pllfracf_ssmod_16fft_main_12_foutvcop_clk", 0x68c080, 0, 7, 0, 0),
+-	CLK_DIV("hsdiv0_16fft_main_8_hsdivout0_clk", "pllfracf_ssmod_16fft_main_8_foutvcop_clk", 0x688080, 0, 7, 0, 0),
+-	CLK_DIV("hsdiv1_16fft_main_15_hsdivout0_clk", "pllfracf_ssmod_16fft_main_15_foutvcop_clk", 0x68f080, 0, 7, 0, 0),
+-	CLK_DIV("hsdiv4_16fft_main_0_hsdivout0_clk", "pllfracf_ssmod_16fft_main_0_foutvcop_clk", 0x680080, 0, 7, 0, 0),
+-	CLK_DIV("hsdiv4_16fft_main_0_hsdivout1_clk", "pllfracf_ssmod_16fft_main_0_foutvcop_clk", 0x680084, 0, 7, 0, 0),
+-	CLK_DIV("hsdiv4_16fft_main_0_hsdivout2_clk", "pllfracf_ssmod_16fft_main_0_foutvcop_clk", 0x680088, 0, 7, 0, 0),
+-	CLK_DIV("hsdiv4_16fft_main_0_hsdivout3_clk", "pllfracf_ssmod_16fft_main_0_foutvcop_clk", 0x68008c, 0, 7, 0, 0),
+-	CLK_DIV("hsdiv4_16fft_main_0_hsdivout4_clk", "pllfracf_ssmod_16fft_main_0_foutvcop_clk", 0x680090, 0, 7, 0, 0),
+-	CLK_DIV_DEFFREQ("hsdiv4_16fft_main_1_hsdivout0_clk", "pllfracf_ssmod_16fft_main_1_foutvcop_clk", 0x681080, 0, 7, 0, 0, 192000000),
+-	CLK_DIV("hsdiv4_16fft_main_1_hsdivout1_clk", "pllfracf_ssmod_16fft_main_1_foutvcop_clk", 0x681084, 0, 7, 0, 0),
+-	CLK_DIV("hsdiv4_16fft_main_1_hsdivout2_clk", "pllfracf_ssmod_16fft_main_1_foutvcop_clk", 0x681088, 0, 7, 0, 0),
+-	CLK_DIV("hsdiv4_16fft_main_2_hsdivout1_clk", "pllfracf_ssmod_16fft_main_2_foutvcop_clk", 0x682084, 0, 7, 0, 0),
+-	CLK_DIV("hsdiv4_16fft_main_2_hsdivout1_clk10", "pllfracf_ssmod_16fft_main_2_foutvcop_clk", 0x682084, 0, 7, 0, 0),
+-	CLK_DIV("hsdiv4_16fft_main_2_hsdivout2_clk", "pllfracf_ssmod_16fft_main_2_foutvcop_clk", 0x682088, 0, 7, 0, 0),
+-	CLK_DIV("hsdiv4_16fft_mcu_0_hsdivout0_clk", "pllfracf_ssmod_16fft_mcu_0_foutvcop_clk", 0x4040080, 0, 7, 0, 0),
++	CLK_DIV("hsdiv0_16fft_main_12_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_12_foutvcop_clk", 0x68c080, 0, 7, 0, 0),
++	CLK_DIV("hsdiv0_16fft_main_8_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_8_foutvcop_clk", 0x688080, 0, 7, 0, 0),
++	CLK_DIV("hsdiv1_16fft_main_15_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_15_foutvcop_clk", 0x68f080, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_main_0_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680080, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_main_0_hsdivout1_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680084, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_main_0_hsdivout2_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680088, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_main_0_hsdivout3_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x68008c, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_main_0_hsdivout4_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680090, 0, 7, 0, 0),
++	CLK_DIV_DEFFREQ("hsdiv4_16fft_main_1_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681080, 0, 7, 0, 0, 192000000),
++	CLK_DIV("hsdiv4_16fft_main_1_hsdivout1_clk", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681084, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_main_1_hsdivout2_clk", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681088, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_main_2_hsdivout1_clk", "pllfracf2_ssmod_16fft_main_2_foutvcop_clk", 0x682084, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_main_2_hsdivout2_clk", "pllfracf2_ssmod_16fft_main_2_foutvcop_clk", 0x682088, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_mcu_0_hsdivout0_clk", "pllfracf2_ssmod_16fft_mcu_0_foutvcop_clk", 0x4040080, 0, 7, 0, 0),
+ 	CLK_MUX_PLLCTRL("sam62_pll_ctrl_wrap_main_0_sysclkout_clk", sam62_pll_ctrl_wrap_main_0_sysclkout_clk_parents, 2, 0x410000, 0),
+ 	CLK_DIV("sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk", "sam62_pll_ctrl_wrap_main_0_sysclkout_clk", 0x410118, 0, 5, 0, 0),
+ 	CLK_MUX_PLLCTRL("sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk", sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk_parents, 2, 0x4020000, 0),
+@@ -213,7 +212,7 @@ static const struct clk_data clk_list[] = {
+ 	CLK_MUX("wkup_clkout_sel_out0", wkup_clkout_sel_out0_parents, 8, 0x43008020, 0, 3, 0),
+ 	CLK_MUX("wkup_clksel_out0", wkup_clksel_out0_parents, 2, 0x43008010, 0, 1, 0),
+ 	CLK_MUX("main_usart0_fclk_sel_out0", main_usart0_fclk_sel_out0_parents, 2, 0x108280, 0, 1, 0),
+-	CLK_DIV("hsdiv4_16fft_mcu_0_hsdivout1_clk", "pllfracf_ssmod_16fft_mcu_0_foutvcop_clk", 0x4040084, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_mcu_0_hsdivout1_clk", "pllfracf2_ssmod_16fft_mcu_0_foutvcop_clk", 0x4040084, 0, 7, 0, 0),
+ 	CLK_FIXED_RATE("mshsi2c_wkup_0_porscl", 0, 0),
+ 	CLK_DIV("sam62_pll_ctrl_wrap_main_0_chip_div24_clk_clk", "sam62_pll_ctrl_wrap_main_0_sysclkout_clk", 0x41011c, 0, 5, 0, 0),
+ 	CLK_DIV("sam62_pll_ctrl_wrap_mcu_0_chip_div24_clk_clk", "sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk", 0x402011c, 0, 5, 0, 0),
+@@ -314,7 +313,7 @@ static const struct dev_clk soc_dev_clk_data[] = {
+ 	DEV_CLK(146, 5, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
+ 	DEV_CLK(157, 20, "clkout0_ctrl_out0"),
+ 	DEV_CLK(157, 21, "hsdiv4_16fft_main_2_hsdivout1_clk"),
+-	DEV_CLK(157, 22, "hsdiv4_16fft_main_2_hsdivout1_clk10"),
++	DEV_CLK(157, 22, "hsdiv4_16fft_main_2_hsdivout1_clk"),
+ 	DEV_CLK(157, 24, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
+ 	DEV_CLK(157, 25, "board_0_ddr0_ck0_out"),
+ 	DEV_CLK(157, 40, "mshsi2c_main_0_porscl"),
 -- 
 2.34.1
 
