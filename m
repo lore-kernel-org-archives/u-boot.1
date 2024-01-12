@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8314C4725D
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 12:50:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0BE9C4706C
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 12:50:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8697A8785F;
-	Fri, 12 Jan 2024 13:50:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 11FFA879F5;
+	Fri, 12 Jan 2024 13:50:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="myKYEbmT";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="d820eJ7E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C38E387947; Fri, 12 Jan 2024 13:50:14 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 2100A876C6; Fri, 12 Jan 2024 13:50:22 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D788287937
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 13:50:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 41008879FD
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 13:50:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id BB14B61D65;
+ by sin.source.kernel.org (Postfix) with ESMTP id A6B68CE23B7;
+ Fri, 12 Jan 2024 12:50:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0E9C8C433C7;
  Fri, 12 Jan 2024 12:50:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B0CE7C433F1;
- Fri, 12 Jan 2024 12:50:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705063811;
- bh=PJA3FP5R7N1uB6IHUHOxEMkK3Q5erQp2iEcTSVKvuKY=;
+ s=k20201202; t=1705063814;
+ bh=ufCM7wt1OkGRcUI60F4cyD/BurlN5aihqfLptVRU3QE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=myKYEbmTup/NOVtZBWBl01oG/CkXUFDIVm3kvOothlYidvFNxVlpM1VwHRn/hK55v
- B195mDop3iSJWzKfDidgfgg0XNitgiPwGZmgFhLmAT5Xmab9T4F2o9ixKpgLRqn/aY
- O+oWN9CrVj8X1y4xvl37x3K52itg3mHYXmU+bfxF5P3n7HRPpTIf8sScoktb+Bor9B
- N4yteB9KdLBC/eAZVFtyJBXmY5oizKrwS81pykrf2xjyIJjadKZIUvDVErHdV6Xbaf
- m5txkHGox970347v61eUbD0sCJTPLMjCl3Ki6MBcCNzisKTqSySpo/OFhe347wC0mM
- NxFAfBU2QblhA==
+ b=d820eJ7E4QBwXhMubw0aG3M7pb+rGncmqlvpB+ud/Fbjoqvr+EMTtSF56q3BK6HOG
+ GuvhyxWHeRHKj0NYj5yFeOKFyaD6LkmrAAS7HTVcPR+cuVdlbEIbVXk9KfWeej6VO8
+ QzG4h0Grfcss2k/qf2BrH11Krw9fthzeu6xA01uvYzrriHts0TzOMES18fin0l5aR7
+ KyJpsAjp3WhHfBXFe0pB/L1i6mPQlqmvNqNwhQErwjIK4F8jk0VkW9+QCbGR5U+fwf
+ egPwtdykqdz+wOAiPLthr2X9uZem+YJnmyqHwmFaF6ztocvDvhc1Ho+qjoICVtkFxe
+ HmQMpLHqgFUvQ==
 From: Roger Quadros <rogerq@kernel.org>
 To: nm@ti.com,
 	robertcnelson@gmail.com,
@@ -48,9 +48,10 @@ To: nm@ti.com,
 Cc: n-francis@ti.com, praneeth@ti.com, s-vadapalli@ti.com,
  r-gunasekaran@ti.com, srk@ti.com, vigneshr@ti.com, u-boot@lists.denx.de,
  Roger Quadros <rogerq@kernel.org>
-Subject: [PATCH 4/5] arm: dts: k3-j721e-beagleboneai64: Fix USB operation
-Date: Fri, 12 Jan 2024 14:49:50 +0200
-Message-Id: <20240112124951.238098-5-rogerq@kernel.org>
+Subject: [PATCH 5/5] configs/j721e_beagleboneai64_a72_defconfig: Enable Sierra
+ PHY
+Date: Fri, 12 Jan 2024 14:49:51 +0200
+Message-Id: <20240112124951.238098-6-rogerq@kernel.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240112124951.238098-1-rogerq@kernel.org>
 References: <20240112124951.238098-1-rogerq@kernel.org>
@@ -72,35 +73,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Without correct SERDES MUX and Lane control settings
-USB0 will be broken. Set the MUX and Lane control devices
-to be auto probed so they are configured correctly.
+This is required for USB Super-Speed operation.
 
 Signed-off-by: Roger Quadros <rogerq@kernel.org>
 ---
- arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi | 2 ++
+ configs/j721e_beagleboneai64_a72_defconfig | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
-index f83caf7998..017a5a722e 100644
---- a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
-+++ b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
-@@ -165,6 +165,7 @@
- 
- &serdes_ln_ctrl {
- 	bootph-all;
-+	u-boot,mux-autoprobe;
- };
- 
- &serdes2_usb_link {
-@@ -173,6 +174,7 @@
- 
- &usb_serdes_mux {
- 	bootph-all;
-+	u-boot,mux-autoprobe;
- };
- 
- &serdes_wiz2 {
+diff --git a/configs/j721e_beagleboneai64_a72_defconfig b/configs/j721e_beagleboneai64_a72_defconfig
+index 959f86844d..f66206f6e3 100644
+--- a/configs/j721e_beagleboneai64_a72_defconfig
++++ b/configs/j721e_beagleboneai64_a72_defconfig
+@@ -127,6 +127,8 @@ CONFIG_PHY_TI_DP83867=y
+ CONFIG_PHY_FIXED=y
+ CONFIG_TI_AM65_CPSW_NUSS=y
+ CONFIG_PHY=y
++CONFIG_PHY_J721E_WIZ=y
++CONFIG_PHY_CADENCE_SIERRA=y
+ CONFIG_SPL_PHY=y
+ CONFIG_PINCTRL=y
+ # CONFIG_PINCTRL_GENERIC is not set
 -- 
 2.34.1
 
