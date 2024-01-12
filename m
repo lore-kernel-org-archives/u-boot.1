@@ -4,59 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6630FC4707C
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 10:40:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31179C4706C
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 10:41:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6DE58798C;
-	Fri, 12 Jan 2024 11:39:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A160A8792D;
+	Fri, 12 Jan 2024 11:41:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="L76CAaTz";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="u5PahWiM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 308A28764D; Fri, 12 Jan 2024 11:39:59 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 312D18798C; Fri, 12 Jan 2024 11:41:20 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E44238798C
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 11:39:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E9FB38764D
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 11:41:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 4204161D61;
- Fri, 12 Jan 2024 10:39:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 78462C433F1;
- Fri, 12 Jan 2024 10:39:50 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id CBB58CE20CC;
+ Fri, 12 Jan 2024 10:41:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 19BB3C433C7;
+ Fri, 12 Jan 2024 10:41:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705055992;
- bh=MrEwlkw8q53sqjfLAxF+g3pOLHf9YSJqymGTgokTdSY=;
+ s=k20201202; t=1705056074;
+ bh=WfbXsI/XAdHG9GtztxmSJ0pgqn5qNGi7EQ4qLyECrsA=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=L76CAaTzTpzcdlszpf5M3C5LFvFj0WPj9SImqLD/emzU4lCLjWAyv/3SUt6EFE4Y8
- YGRAP2zesAtng9QBa36mj0/Jwc4PWsAZzZ1lmfpLBn2yPmCowIYIqinKV7iMQI6dmV
- D+kaiV9RYTqxD2d/CkKKNWOMxVRhAE9ei9MtQhXKNiyBzDurgcNlxuLzIZSeBCpCvA
- jikXJug436ZPB8iVmEMcWpc7KFWo3Dd7KpL7iajBGvcjBGFQ1KH7XlAkdxuAGMX495
- T6LbyF5h2zBcp4LdoL/+uBFWs/H+nAHwUxeC4kLKM4Ob4JnI4m/Wd0v47wa/LFMUNl
- f6NWMV/W6Lt3Q==
-Message-ID: <5444e6d5-f928-4f46-9af9-2c07c8b49f4f@kernel.org>
-Date: Fri, 12 Jan 2024 12:39:47 +0200
+ b=u5PahWiMe8OxOBdLQIE9Mx2QS8dj2xD7VVTVmW9VJknmMcyNpGnfBw6pQ3TBqK/bA
+ gseGPCugH20h32Ln/Z0e+hlJVB5ltJsF1VUh/luV0rUwW22gChIk6hxfOPDALvVjPc
+ ZSIkq8x7RI1CvJ5NoHMk/b48wOOsV0jnPI5ajBgzEMRnk7po/zTwB7uDdnIcZLLvtL
+ OWMQrVvfgi3pgPP2qk0eErPA/8przMpF7IxRoAAzOWeMugx71YItlzeIFJ9UXxXxNg
+ rCuqMcFUK+WQ4vQpDjVSEW4A6LjGMqkh3RLjgPap5bTuElybsKJoy4FdUK1xFSogmC
+ w0Yb6UNGL+jOg==
+Message-ID: <f43b81c8-1886-4560-b8fe-dfa6a88ea726@kernel.org>
+Date: Fri, 12 Jan 2024 12:41:11 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/7] usb: dwc3: Switch to device mode on gadget start
+Subject: Re: [PATCH v4 6/7] beagleplay: Add DFU support
 Content-Language: en-US
 To: Sjoerd Simons <sjoerd@collabora.com>, u-boot@lists.denx.de
 Cc: Martyn Welch <martyn.welch@collabora.com>, Nishanth Menon <nm@ti.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Igor Prusov <ivprusov@salutedevices.com>, Marek Vasut <marex@denx.de>,
+ Andrew Davis <afd@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Dhruva Gole <d-gole@ti.com>, Jan Kiszka <jan.kiszka@siemens.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Simon Glass
- <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>
+ Nikhil M Jain <n-jain1@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>
 References: <20240112085317.1866449-1-sjoerd@collabora.com>
- <20240112085317.1866449-3-sjoerd@collabora.com>
+ <20240112085317.1866449-7-sjoerd@collabora.com>
 From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20240112085317.1866449-3-sjoerd@collabora.com>
+In-Reply-To: <20240112085317.1866449-7-sjoerd@collabora.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -78,42 +79,11 @@ X-Virus-Status: Clean
 
 
 On 12/01/2024 10:52, Sjoerd Simons wrote:
-> When dr_mode is "otg" the dwc3 is initially configured in _OTG mode;
-> However in this mode the gadget functionality doesn't work without
-> further configuration. To resolve that on gadget start switch to _DEVICE
-> mode globally and go back to _OTG on stop again.
+> DFU mode on a beagleplay can be used via the Type-C connector by holding
+> the USR switch while powering on.
 > 
-> For this the dwc3_set_mode is renamed to dwc3_core_set_mode to avoid a
-> conflict with the same function exposed by xhci-dwc3
-
-Aren't they both doing the same thing? I'd rather define them at one place
-i.e. dwc3/core.c.
-
-The driver model design for dwc3 looks really broken in u-boot.
-
-"snps,dwc3" is claimed by xhci-dwc3.c instead of being claimed by dwc3/core.c.
-This is probably because at the time USB host was the more needed use
-case at u-boot.
-
-Ideally dwc3/core.c should claim "snps,dwc3" device and instantiate
-the respective Host/Device/OTG device based on the provided otg mode.
-
-For Host/Device mode it is straight forward.
-dwc3/core.c does dwc3_set_mode() depending on the mode and:
-for host mode -> register xhci-usb driver.
-for device mode -> register UDC device driver.
-
-For dual-role mode, the solution is not very clear as I don't think
-there is a role switch framework present.
-
-To begin with, we could probably restrict it to just device mode
-as most platforms were forcing it to device mode in any case as they
-usually have a 2nd USB port that is host only.
-
-A better solution would be to introduce a role switch mechanism 
-like it exists in Linux so user can choose what mode he wants to
-operate. That could wait till someone really wants such a feature.
-
+> Configuration is only added for the A53 u-boot parts, for R5 the
+> am62x_r5_usbdfu.config fragment should be used.
 > 
 > Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
 > 
@@ -122,96 +92,117 @@ operate. That could wait till someone really wants such a feature.
 > Changes in v4:
 > - New patch
 > 
->  drivers/usb/dwc3/core.c   | 10 +++++-----
->  drivers/usb/dwc3/core.h   |  1 +
->  drivers/usb/dwc3/gadget.c |  6 ++++++
->  3 files changed, 12 insertions(+), 5 deletions(-)
+>  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi |  8 ++++++
+>  board/beagle/beagleplay/beagleplay.env       |  1 +
+>  configs/am62x_beagleplay_a53_defconfig       | 30 ++++++++++++++++++++
+>  3 files changed, 39 insertions(+)
 > 
-> diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-> index 4b4fcd8a22e..d22d4c4bb6a 100644
-> --- a/drivers/usb/dwc3/core.c
-> +++ b/drivers/usb/dwc3/core.c
-> @@ -42,7 +42,7 @@
->  static LIST_HEAD(dwc3_list);
->  /* -------------------------------------------------------------------------- */
+> diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+> index a723caa5805..0b1e5e70fe2 100644
+> --- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+> +++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+> @@ -61,6 +61,14 @@
+>  	>;
+>  };
 >  
-> -static void dwc3_set_mode(struct dwc3 *dwc, u32 mode)
-> +void dwc3_core_set_mode(struct dwc3 *dwc, u32 mode)
->  {
->  	u32 reg;
->  
-> @@ -736,7 +736,7 @@ static int dwc3_core_init_mode(struct dwc3 *dwc)
->  
->  	switch (dwc->dr_mode) {
->  	case USB_DR_MODE_PERIPHERAL:
-> -		dwc3_set_mode(dwc, DWC3_GCTL_PRTCAP_DEVICE);
-> +		dwc3_core_set_mode(dwc, DWC3_GCTL_PRTCAP_DEVICE);
->  		ret = dwc3_gadget_init(dwc);
->  		if (ret) {
->  			dev_err(dwc->dev, "failed to initialize gadget\n");
-> @@ -744,7 +744,7 @@ static int dwc3_core_init_mode(struct dwc3 *dwc)
->  		}
->  		break;
->  	case USB_DR_MODE_HOST:
-> -		dwc3_set_mode(dwc, DWC3_GCTL_PRTCAP_HOST);
-> +		dwc3_core_set_mode(dwc, DWC3_GCTL_PRTCAP_HOST);
->  		ret = dwc3_host_init(dwc);
->  		if (ret) {
->  			dev_err(dwc->dev, "failed to initialize host\n");
-> @@ -752,7 +752,7 @@ static int dwc3_core_init_mode(struct dwc3 *dwc)
->  		}
->  		break;
->  	case USB_DR_MODE_OTG:
-> -		dwc3_set_mode(dwc, DWC3_GCTL_PRTCAP_OTG);
-> +		dwc3_core_set_mode(dwc, DWC3_GCTL_PRTCAP_OTG);
->  		ret = dwc3_host_init(dwc);
->  		if (ret) {
->  			dev_err(dwc->dev, "failed to initialize host\n");
-> @@ -810,7 +810,7 @@ static void dwc3_core_exit_mode(struct dwc3 *dwc)
->  	 * switch back to peripheral mode
->  	 * This enables the phy to enter idle and then, if enabled, suspend.
->  	 */
-> -	dwc3_set_mode(dwc, DWC3_GCTL_PRTCAP_DEVICE);
-> +	dwc3_core_set_mode(dwc, DWC3_GCTL_PRTCAP_DEVICE);
->  	dwc3_gadget_run(dwc);
->  }
->  
-> diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
-> index 4162a682298..1e7eda89a34 100644
-> --- a/drivers/usb/dwc3/core.h
-> +++ b/drivers/usb/dwc3/core.h
-> @@ -1057,6 +1057,7 @@ int dwc3_gadget_resize_tx_fifos(struct dwc3 *dwc);
->  void dwc3_of_parse(struct dwc3 *dwc);
->  int dwc3_init(struct dwc3 *dwc);
->  void dwc3_remove(struct dwc3 *dwc);
-> +void dwc3_core_set_mode(struct dwc3 *dwc, u32 mode);
->  
->  static inline int dwc3_host_init(struct dwc3 *dwc)
->  { return 0; }
-> diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-> index 406d36ceafe..69d9fe40e2f 100644
-> --- a/drivers/usb/dwc3/gadget.c
-> +++ b/drivers/usb/dwc3/gadget.c
-> @@ -1468,6 +1468,9 @@ static int dwc3_gadget_start(struct usb_gadget *g,
->  
->  	dwc->gadget_driver	= driver;
->  
-> +	if (dwc->dr_mode == DWC3_GCTL_PRTCAP_OTG)
-> +		dwc3_core_set_mode(dwc, DWC3_GCTL_PRTCAP_DEVICE);
+> +&usbss0 {
+> +	bootph-all;
+> +};
 > +
->  	reg = dwc3_readl(dwc->regs, DWC3_DCFG);
->  	reg &= ~(DWC3_DCFG_SPEED_MASK);
->  
-> @@ -1559,6 +1562,9 @@ static int dwc3_gadget_stop(struct usb_gadget *g)
->  	__dwc3_gadget_ep_disable(dwc->eps[0]);
->  	__dwc3_gadget_ep_disable(dwc->eps[1]);
->  
-> +	if (dwc->dr_mode == DWC3_GCTL_PRTCAP_OTG)
-> +		dwc3_core_set_mode(dwc, DWC3_GCTL_PRTCAP_OTG);
+> +&usb0 {
+> +	bootph-all;
+> +};
 > +
->  	dwc->gadget_driver	= NULL;
+>  #ifdef CONFIG_TARGET_AM625_A53_BEAGLEPLAY
 >  
->  	spin_unlock_irqrestore(&dwc->lock, flags);
+>  #define SPL_NODTB "spl/u-boot-spl-nodtb.bin"
+> diff --git a/board/beagle/beagleplay/beagleplay.env b/board/beagle/beagleplay/beagleplay.env
+> index 4f0a94a8113..85c94856017 100644
+> --- a/board/beagle/beagleplay/beagleplay.env
+> +++ b/board/beagle/beagleplay/beagleplay.env
+> @@ -1,6 +1,7 @@
+>  #include <env/ti/ti_common.env>
+>  #include <env/ti/default_findfdt.env>
+>  #include <env/ti/mmc.env>
+> +#include <env/ti/k3_dfu.env>
+>  
+>  name_kern=Image
+>  console=ttyS2,115200n8
+> diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
+> index 0be20045a97..dfe04b71810 100644
+> --- a/configs/am62x_beagleplay_a53_defconfig
+> +++ b/configs/am62x_beagleplay_a53_defconfig
+> @@ -1,5 +1,6 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_K3=y
+> +CONFIG_SYS_MALLOC_LEN=0x2000000
+>  CONFIG_SYS_MALLOC_F_LEN=0x8000
+>  CONFIG_SPL_GPIO=y
+>  CONFIG_SPL_LIBCOMMON_SUPPORT=y
+> @@ -43,15 +44,20 @@ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+>  CONFIG_SPL_STACK_R=y
+>  CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
+>  CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
+> +CONFIG_SPL_ENV_SUPPORT=y
+>  CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
+>  CONFIG_SPL_I2C=y
+>  CONFIG_SPL_DM_MAILBOX=y
+>  CONFIG_SPL_POWER_DOMAIN=y
+> +CONFIG_SPL_RAM_SUPPORT=y
+> +CONFIG_SPL_RAM_DEVICE=y
+>  CONFIG_SPL_YMODEM_SUPPORT=y
+> +CONFIG_CMD_DFU=y
+>  CONFIG_CMD_GPIO=y
+>  CONFIG_CMD_GPIO_READ=y
+>  CONFIG_CMD_I2C=y
+>  CONFIG_CMD_MMC=y
+> +CONFIG_CMD_USB=y
+>  CONFIG_CMD_PMIC=y
+>  CONFIG_CMD_REGULATOR=y
+>  CONFIG_OF_CONTROL=y
+> @@ -68,6 +74,10 @@ CONFIG_SPL_OF_TRANSLATE=y
+>  CONFIG_CLK=y
+>  CONFIG_SPL_CLK=y
+>  CONFIG_CLK_TI_SCI=y
+> +CONFIG_DFU_MMC=y
+> +CONFIG_DFU_RAM=y
+> +CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
+> +CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
+>  CONFIG_DMA_CHANNELS=y
+>  CONFIG_TI_K3_NAVSS_UDMA=y
+>  CONFIG_TI_SCI_PROTOCOL=y
+> @@ -113,6 +123,26 @@ CONFIG_SOC_TI=y
+>  CONFIG_SYSRESET=y
+>  CONFIG_SPL_SYSRESET=y
+>  CONFIG_SYSRESET_TI_SCI=y
+> +CONFIG_USB=y
+> +CONFIG_DM_USB_GADGET=y
+> +CONFIG_SPL_DM_USB_GADGET=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_XHCI_DWC3=y
+
+XHCI features are really not required for DFU
+but now I see that we depend on XHCI driver to get
+probed even for device mode. lol.
+
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_SPL_USB_DWC3_GENERIC=y
+> +CONFIG_SPL_USB_DWC3_AM62=y
+> +CONFIG_USB_DWC3_AM62=y
+> +CONFIG_USB_GADGET=y
+> +CONFIG_SPL_USB_GADGET=y
+> +CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
+> +CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+> +CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
+> +CONFIG_USB_GADGET_DOWNLOAD=y
+> +CONFIG_SPL_DFU=y
+>  CONFIG_EXT4_WRITE=y
+>  CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
+>  CONFIG_LZO=y
+> +CONFIG_SYSCON=y
+> +CONFIG_SPL_SYSCON=y
+> +
 
 -- 
 cheers,
