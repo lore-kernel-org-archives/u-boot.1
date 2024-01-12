@@ -4,64 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B48B1C4706C
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 12:31:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 234F3C4706C
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 12:31:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66A668785F;
-	Fri, 12 Jan 2024 13:31:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 93DF78796E;
+	Fri, 12 Jan 2024 13:31:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WMwcT5ef";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZoOXHaqv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F30458792D; Fri, 12 Jan 2024 13:30:59 +0100 (CET)
+ id 5656E8797B; Fri, 12 Jan 2024 13:31:36 +0100 (CET)
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06CC5876C6
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 13:30:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DBA058785F
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 13:31:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40CCUtM6018314;
- Fri, 12 Jan 2024 06:30:55 -0600
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40CCVVFJ018397;
+ Fri, 12 Jan 2024 06:31:31 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1705062655;
- bh=lW8QTdk8UaoLCue538EX0F4IpY+ZMR+XmkoCPLxzpoA=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=WMwcT5efqsjV9swHJ00Lve7hi/YNtbMyNt1TU5mGgpisMAjhUuuXsI99v1FT9R82c
- 5LqM/iMTO+gfFfXTOj07aGdp8VO1xNf1teJRJTDpgEb4Q0FZzxNTwDpjNQN93Je3dx
- u4WNEMiBOaYNocmWiaWvRXQ8B/a6tJxjYAAuuPpk=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40CCUtdS127518
+ s=ti-com-17Q1; t=1705062691;
+ bh=HCCEKFP8Jph1+bVhUCMhaLZHxgAhjXizsdameSiP+yE=;
+ h=Date:CC:Subject:To:References:From:In-Reply-To;
+ b=ZoOXHaqvnanTKx4uJ5gEh1nWo4sv4OdQZbd1gimGna7Mq46zDsFoCExX9g3w5pD71
+ Yq9e5XU3IR7KY+QQOqAZiicy5Q2MCjfPnZr3nz7uZnMUGjPk55SWvjyjQyAgO3WyJq
+ xyNsRulnQgIcLnI/J3LVayoIZwmr5NNcMs8PXcDA=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40CCVVxe024741
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 12 Jan 2024 06:30:55 -0600
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 12 Jan 2024 06:31:31 -0600
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 12
- Jan 2024 06:30:55 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 06:31:31 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 12 Jan 2024 06:30:55 -0600
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40CCUtHX007694;
- Fri, 12 Jan 2024 06:30:55 -0600
-Date: Fri, 12 Jan 2024 06:30:55 -0600
-From: Nishanth Menon <nm@ti.com>
-To: Siddharth Vadapalli <s-vadapalli@ti.com>
-CC: <trini@konsulko.com>, <sjg@chromium.org>, <afd@ti.com>, <vigneshr@ti.com>, 
- <u-boot@lists.denx.de>, <dannenberg@ti.com>, <srk@ti.com>
-Subject: Re: [PATCH 07/10] arm: mach-k3: am625_init: Probe AM65 CPSW NUSS
-Message-ID: <20240112123055.5h3qio3w55godccy@gallstone>
-References: <20240112064759.1801600-1-s-vadapalli@ti.com>
- <20240112064759.1801600-8-s-vadapalli@ti.com>
+ Frontend Transport; Fri, 12 Jan 2024 06:31:31 -0600
+Received: from [172.24.227.9] (uda0492258.dhcp.ti.com [172.24.227.9])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40CCVSBi028252;
+ Fri, 12 Jan 2024 06:31:28 -0600
+Message-ID: <4fdc86fb-69e6-4b79-acd8-e1b0bd8c9f4b@ti.com>
+Date: Fri, 12 Jan 2024 18:01:27 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240112064759.1801600-8-s-vadapalli@ti.com>
+User-Agent: Mozilla Thunderbird
+CC: <trini@konsulko.com>, <sjg@chromium.org>, <afd@ti.com>, <vigneshr@ti.com>, 
+ <u-boot@lists.denx.de>, <dannenberg@ti.com>, <srk@ti.com>,
+ <s-vadapalli@ti.com>
+Subject: Re: [PATCH 01/10] board: ti: am62x: Init DRAM size in R5/A53 SPL
+Content-Language: en-US
+To: Nishanth Menon <nm@ti.com>
+References: <20240112064759.1801600-1-s-vadapalli@ti.com>
+ <20240112064759.1801600-2-s-vadapalli@ti.com>
+ <20240112122623.gkrpcvcqbmrmwkho@margin>
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+In-Reply-To: <20240112122623.gkrpcvcqbmrmwkho@margin>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -79,42 +84,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12:17-20240112, Siddharth Vadapalli wrote:
-> From: Kishon Vijay Abraham I <kishon@ti.com>
-> 
-> In order to support Ethernet boot on AM62x, probe AM65 CPSW NUSS driver
-> in board_init_f().
+Hello Nishanth,
 
-Why? doesn't the DM framework handle this?
+On 12/01/24 17:56, Nishanth Menon wrote:
+> On 12:17-20240112, Siddharth Vadapalli wrote:
+>> From: Kishon Vijay Abraham I <kishon@ti.com>
+>>
+>> Call dram_init_banksize() from spl_board_init() otherwise TFTP download
+>> fails with error "TFTP error: trying to overwrite reserved memory..."
+>> due to lmb_get_free_size() not able to find unreserved region due
+>> to lack of DRAM size info. Required to support Ethernet boot on AM62x.
+>>
+>> Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
+>> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+>> ---
+>>  board/ti/am62x/evm.c | 3 +++
+>>  1 file changed, 3 insertions(+)
+>>
+>> diff --git a/board/ti/am62x/evm.c b/board/ti/am62x/evm.c
+>> index ad93908840..35f291d83a 100644
+>> --- a/board/ti/am62x/evm.c
+>> +++ b/board/ti/am62x/evm.c
+>> @@ -85,6 +85,9 @@ void spl_board_init(void)
+>>  	if (IS_ENABLED(CONFIG_SPL_SPLASH_SCREEN) && IS_ENABLED(CONFIG_SPL_BMP))
+>>  		splash_display();
+>>  
+>> +	if (IS_ENABLED(CONFIG_SPL_ETH))
+>> +		/* Init DRAM size for R5/A53 SPL */
+>> +		dram_init_banksize();
+>>  }
+>>  
+>>  #if defined(CONFIG_K3_AM64_DDRSS)
+>> -- 
+>> 2.34.1
+>>
+> 
+> Are you sure? tftp seems to work without this patch.
+> 
+> https://gist.github.com/nmenon/91e3282e00e38ae42e8cf640be2ab888
 
-> 
-> Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
-> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> ---
->  arch/arm/mach-k3/am625_init.c | 10 ++++++++++
->  1 file changed, 10 insertions(+)
-> 
-> diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
-> index 6c96e88114..b89dd206e5 100644
-> --- a/arch/arm/mach-k3/am625_init.c
-> +++ b/arch/arm/mach-k3/am625_init.c
-> @@ -209,6 +209,16 @@ void board_init_f(ulong dummy)
->  		if (ret)
->  			panic("DRAM init failed: %d\n", ret);
->  	}
-> +
-> +	if (IS_ENABLED(CONFIG_SPL_ETH) && IS_ENABLED(CONFIG_TI_AM65_CPSW_NUSS) &&
-> +	    spl_boot_device() == BOOT_DEVICE_ETHERNET) {
-> +		struct udevice *cpswdev;
-> +
-> +		if (uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(am65_cpsw_nuss),
-> +						&cpswdev))
-> +			printf("Failed to probe am65_cpsw_nuss driver\n");
-> +	}
-> +
+I noticed the error pointed out in the commit message at the A53 SPL stage when
+the U-Boot Image is being fetched over TFTP without this patch, so I have
+verified that this patch is necessary. The logs you have shared verify TFTP at
+U-Boot, but this patch is for enabling TFTP at A53 SPL for fetching U-Boot image
+via TFTP.
 
 
 -- 
 Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+Siddharth.
