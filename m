@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 404A1C4706C
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 08:56:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73282C4706C
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 09:17:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58D33879D4;
-	Fri, 12 Jan 2024 09:56:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id CE5C28797B;
+	Fri, 12 Jan 2024 10:17:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="hfbY6c9a";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JMYL6Rl7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DDCA1879B5; Fri, 12 Jan 2024 09:56:12 +0100 (CET)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id D8DDE87980; Fri, 12 Jan 2024 10:17:27 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A432D879D4
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 09:56:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FBE887976
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 10:17:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-3367632ce7bso4245370f8f.2
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 00:56:09 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-55790581457so6716714a12.3
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 01:17:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1705049769; x=1705654569;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=h88mZ3vbH2Sh4w51Px/BhXHTZDWwIwdb3Wyxf3xNF2M=;
- b=hfbY6c9alD/g52CDefCuleg3a7PvhXiDc2M0G2mgD9RiVJedBUaccdyF34wM3HPLdl
- emBROPT59+hCAP5aQE8IBF+zlmClgspFXAzeYpQwp4JCkG03k4EHZfWM5H9vHZQ5BoNv
- 5c26jfSBjGDtFwyMyzk2onoSJPVgWwbUjl6o68f7xFJvWHZxkiyRxVoip8OnapzDFKKI
- gb7Oo/aeJAyBYwMKv218B65IXarXCxYQpmjB7YdOyQ0I+9Mq6x4vnsXzIaa41oCWaWci
- UPi87CrCROhvrJeMivUzJNl8wO6Z+5l2UzmhhvT3ggNHBMsF60r8n81mzydFDKmLycg6
- kvBQ==
+ d=linaro.org; s=google; t=1705051045; x=1705655845; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Jdtdz+UWkvPD2YH5OM39BXoliaXp0vTkzh/9uYe7qf4=;
+ b=JMYL6Rl73I+IB8ncl7cN93DEdd9vUyWsNIxV46YIRaQEhJ0f3bvw8bhMjD32YkD3aN
+ whMgxbkc6exODRBBdBVOVj70ymdZ9H+GEBrXR84ll+BWpmbjf5yTkdWbx8S/uhdv5RnX
+ o9B2By1HWhOI6rvOaxqpdpoIjEOWLku6FxE3m9Dg2xORZbrHJG9pd51yUCLWkD4Wi//s
+ xkX9dY6jvcYrHZFfIAYRbKhTigMF/Atx6nPChTNr6upFmQIeDsiLKpLqYReIwXsW61wb
+ c8yxRCijvQu3UG+W+Qht65my8dnb+0Qxkv4+7P0gj2k0zonCvpD4Y6Brxx3s1onGOjw8
+ uF3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705049769; x=1705654569;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=h88mZ3vbH2Sh4w51Px/BhXHTZDWwIwdb3Wyxf3xNF2M=;
- b=W/St8ABHVtizzhS17xHFd3fQKFh633xw3K73KCkHXPn2UHxQ0FYaMTrK6zeTbhNPPr
- 1NjJITd11jWYa00/pfapHg7Bd0UrPTz5asLnWMNWYA4xxn5yXy7mOJ5hVYf/JJTR9yqm
- m6LRa3C59gXQoaoyZAUINt/S/JjQ5DpVhRqR/PoxdBrZUALLrVUf/3JFx/dCI2s/jNKD
- 45/uN8G/xChTPqYteNKQYG4aKH0hFHuVGmmWgpW9Q3AiEiw8SoShQbeUmHqDS63jDgzU
- 3yduDEmxYKMHuFgqGRfIChFHqhmAx/q5p6qXvo3s3LS0X5Mxr59dAvg2ogXTc+ppN9cn
- JEdw==
-X-Gm-Message-State: AOJu0YyQfogMHYId2sWpxgXth6S4c42XaPJ/b4u0jOUBiN44RVZVoP+q
- lO/MzKUDZZK9lGJ36Wd3KukXMHWzGL8wfg==
-X-Google-Smtp-Source: AGHT+IFuO186qGdEmiP9JX8jfpWPdIMecVvi2bfGnPycjcsRh+CzzA0xNGWyiJphvuusNAb4SrUWxg==
-X-Received: by 2002:adf:ed8b:0:b0:337:6ea7:5a7a with SMTP id
- c11-20020adfed8b000000b003376ea75a7amr382318wro.124.1705049769141; 
- Fri, 12 Jan 2024 00:56:09 -0800 (PST)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ d=1e100.net; s=20230601; t=1705051045; x=1705655845;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Jdtdz+UWkvPD2YH5OM39BXoliaXp0vTkzh/9uYe7qf4=;
+ b=UioEJYbPvVIkBLJBpji6fDIuRR9QD37WCvjsPhFc3TfOevTGRqgRjRg1KPuuTyP/+Y
+ Vl5WMp/Oi0L78oGoO7a0W812+GhrVNPDL0UkG82ANxSiDmcEEtQDiywhz3SQTYt0iONN
+ IhMilc+3t+shMwSOL9xSxZKg/TasAD5nnvJfr00R0mDLJxFqCfGTYyjUaaadjH/8RPbu
+ 3j1HXdtu581ldkb3bDCKpuYYHzGecCeLI6zW7stl2O6Oe6b4v6mBJ0a3yCB/eBNErPFJ
+ enQOAAd9QL/sTgUGUbnGjChMdOmS8dkuHihAkHMFT45DTVhamw28F8Lmd+gFZYSKv3JB
+ Ma1w==
+X-Gm-Message-State: AOJu0YzLy/dcP7nXH2x0xvDQ+RdujE3dzdxrqp/sMR+jpGEx9eHPOhDr
+ aBXA9pqUe7dyYfmYdEKJiwIjb5Mo+as+Iw==
+X-Google-Smtp-Source: AGHT+IFF80BIHELU7s3qUfHWdXvQadaA2eAPlQtemFYWbUJF7GDButVgF9afDKFvbdxqXXonOQKIAA==
+X-Received: by 2002:a05:6402:2069:b0:557:83a8:5840 with SMTP id
+ bd9-20020a056402206900b0055783a85840mr474691edb.49.1705051044747; 
+ Fri, 12 Jan 2024 01:17:24 -0800 (PST)
+Received: from hera (ppp089210121239.access.hol.gr. [89.210.121.239])
  by smtp.gmail.com with ESMTPSA id
- m6-20020adffa06000000b00336c6b77584sm3248095wrr.91.2024.01.12.00.56.08
+ w1-20020aa7da41000000b00557463cdc76sm1558101eds.69.2024.01.12.01.17.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jan 2024 00:56:08 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Alexey Romanov <avromanov@salutedevices.com>, "jpewhacker@gmail.com"
- <jpewhacker@gmail.com>, "sjg@google.com" <sjg@google.com>,
- "semen.protsenko@linaro.org" <semen.protsenko@linaro.org>,
- "igor.opaniuk@gmail.com" <igor.opaniuk@gmail.com>, "trini@konsulko.com"
- <trini@konsulko.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, kernel
- <kernel@sberdevices.ru>
-Subject: Re: [PATCH v2] android_ab: don't ignore ab_control_store return code
-In-Reply-To: <20240109103720.j6vudgbx5fi74pq7@cab-wsm-0029881>
-References: <20231225102247.76794-1-avromanov@salutedevices.com>
- <20240109103720.j6vudgbx5fi74pq7@cab-wsm-0029881>
-Date: Fri, 12 Jan 2024 09:56:08 +0100
-Message-ID: <877ckflyl3.fsf@baylibre.com>
+ Fri, 12 Jan 2024 01:17:24 -0800 (PST)
+Date: Fri, 12 Jan 2024 11:17:22 +0200
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH v3 2/2] efi_loader: support fmp versioning for multi bank
+ update
+Message-ID: <ZaEDotSg2-duPipD@hera>
+References: <20240111053540.899997-1-masahisa.kojima@linaro.org>
+ <20240111053540.899997-3-masahisa.kojima@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240111053540.899997-3-masahisa.kojima@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,75 +93,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexey,
-
-On Tue, Jan 09, 2024 at 10:37, Alexey Romanov <avromanov@salutedevices.com> wrote:
-
-> + Tom Rini
+On Thu, Jan 11, 2024 at 02:35:40PM +0900, Masahisa Kojima wrote:
+> This commit stores the firmware version into the array
+> of fmp_state structure to support the fmp versioning
+> for multi bank update. The index of the array is identified
+> by the bank index.
 >
-> Hello! Please, ping
-
-It seems that Igor (the Android AB maintainer) has been busy elsewhere.
-
-I've requested to take over maintainership:
-https://lore.kernel.org/all/20240112-maintainers-ab-v1-0-f2a538eab18a@baylibre.com/
-
-If that gets accepted, I will pick up this patch.
-
-Thank you for your patience,
-
-Mattijs
-
+> This modification keeps the backward compatibility with
+> the existing versioning feature.
 >
-> On Mon, Dec 25, 2023 at 01:22:45PM +0300, Alexey Romanov wrote:
->> ab_control_store() can return an error if writing to disk fails.
->> In this case, we have to pass the error code to the caller.
->> 
->> Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
->> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->> ---
->>  boot/android_ab.c | 16 ++++++++++++++--
->>  1 file changed, 14 insertions(+), 2 deletions(-)
->> 
->> diff --git a/boot/android_ab.c b/boot/android_ab.c
->> index 73b55c196c..af3c375e07 100644
->> --- a/boot/android_ab.c
->> +++ b/boot/android_ab.c
->> @@ -337,7 +337,14 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
->>  
->>  	if (store_needed) {
->>  		abc->crc32_le = ab_control_compute_crc(abc);
->> -		ab_control_store(dev_desc, part_info, abc, 0);
->> +		ret = ab_control_store(dev_desc, part_info, abc, 0);
->> +		if (ret < 0) {
->> +#if ANDROID_AB_BACKUP_OFFSET
->> +			free(backup_abc);
->> +#endif
->> +			free(abc);
->> +			return ret;
->> +		}
->>  	}
->>  
->>  #if ANDROID_AB_BACKUP_OFFSET
->> @@ -346,8 +353,13 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
->>  	 * to the backup offset
->>  	 */
->>  	if (memcmp(backup_abc, abc, sizeof(*abc)) != 0) {
->> -		ab_control_store(dev_desc, part_info, abc,
->> +		ret = ab_control_store(dev_desc, part_info, abc,
->>  				 ANDROID_AB_BACKUP_OFFSET);
->> +		if (ret < 0) {
->> +			free(backup_abc);
->> +			free(abc);
->> +			return ret;
->> +		}
->>  	}
->>  	free(backup_abc);
->>  #endif
->> -- 
->> 2.39.2
->> 
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> ---
+>  lib/efi_loader/efi_firmware.c | 75 ++++++++++++++++++++++++++++-------
+>  1 file changed, 60 insertions(+), 15 deletions(-)
 >
-> -- 
-> Thank you,
-> Alexey
+> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
+> index e558336bc1..9fd13297a6 100644
+> --- a/lib/efi_loader/efi_firmware.c
+> +++ b/lib/efi_loader/efi_firmware.c
+> @@ -206,18 +206,10 @@ void efi_firmware_fill_version_info(struct efi_firmware_image_descriptor *image_
+>  {
+>  	u16 varname[13]; /* u"FmpStateXXXX" */
+>  	efi_status_t ret;
+> -	efi_uintn_t size;
+> -	struct fmp_state var_state = { 0 };
+> -
+> -	efi_create_indexed_name(varname, sizeof(varname), "FmpState",
+> -				fw_array->image_index);
+> -	size = sizeof(var_state);
+> -	ret = efi_get_variable_int(varname, &fw_array->image_type_id,
+> -				   NULL, &size, &var_state, NULL);
+> -	if (ret == EFI_SUCCESS)
+> -		image_info->version = var_state.fw_version;
+> -	else
+> -		image_info->version = 0;
+> +	efi_uintn_t size, expected_size;
+> +	uint num_banks = 1;
+> +	uint active_index = 0;
+> +	struct fmp_state *var_state;
+>
+>  	efi_firmware_get_lsv_from_dtb(fw_array->image_index,
+>  				      &fw_array->image_type_id,
+> @@ -226,6 +218,31 @@ void efi_firmware_fill_version_info(struct efi_firmware_image_descriptor *image_
+>  	image_info->version_name = NULL; /* not supported */
+>  	image_info->last_attempt_version = 0;
+>  	image_info->last_attempt_status = LAST_ATTEMPT_STATUS_SUCCESS;
+> +	image_info->version = 0;
+> +
+> +	/* get the fw_version */
+> +	efi_create_indexed_name(varname, sizeof(varname), "FmpState",
+> +				fw_array->image_index);
+> +	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE)) {
+> +		ret = fwu_get_active_index(&active_index);
+> +		if (ret)
+> +			return;
+> +
+> +		num_banks = CONFIG_FWU_NUM_BANKS;
+> +	}
+> +
+> +	size = num_banks * sizeof(*var_state);
+> +	expected_size = size;
+> +	var_state = calloc(1, size);
+> +	if (!var_state)
+> +		return;
+> +
+> +	ret = efi_get_variable_int(varname, &fw_array->image_type_id,
+> +				   NULL, &size, var_state, NULL);
+> +	if (ret == EFI_SUCCESS && expected_size == size)
+> +		image_info->version = var_state[active_index].fw_version;
+> +
+> +	free(var_state);
+>  }
+>
+>  /**
+> @@ -361,8 +378,11 @@ efi_status_t efi_firmware_set_fmp_state_var(struct fmp_state *state, u8 image_in
+>  {
+>  	u16 varname[13]; /* u"FmpStateXXXX" */
+>  	efi_status_t ret;
+> +	uint num_banks = 1;
+> +	uint update_bank = 0;
+> +	efi_uintn_t size;
+>  	efi_guid_t *image_type_id;
+> -	struct fmp_state var_state = { 0 };
+> +	struct fmp_state *var_state;
+>
+>  	image_type_id = efi_firmware_get_image_type_id(image_index);
+>  	if (!image_type_id)
+> @@ -371,19 +391,44 @@ efi_status_t efi_firmware_set_fmp_state_var(struct fmp_state *state, u8 image_in
+>  	efi_create_indexed_name(varname, sizeof(varname), "FmpState",
+>  				image_index);
+>
+> +	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE)) {
+> +		ret = fwu_plat_get_update_index(&update_bank);
+> +		if (ret)
+> +			return EFI_INVALID_PARAMETER;
+> +
+> +		num_banks = CONFIG_FWU_NUM_BANKS;
+> +	}
+> +
+> +	size = num_banks * sizeof(*var_state);
+> +	var_state = calloc(1, size);
+> +	if (!var_state)
+> +		return EFI_OUT_OF_RESOURCES;
+> +
+> +	/*
+> +	 * GetVariable may fail, EFI_NOT_FOUND is returned if FmpState
+> +	 * variable has not been set yet.
+> +	 * Ignore the error here since the correct FmpState variable
+> +	 * is set later.
+> +	 */
+> +	efi_get_variable_int(varname, image_type_id, NULL, &size, var_state,
+> +			     NULL);
+> +
+>  	/*
+>  	 * Only the fw_version is set here.
+>  	 * lowest_supported_version in FmpState variable is ignored since
+>  	 * it can be tampered if the file based EFI variable storage is used.
+>  	 */
+> -	var_state.fw_version = state->fw_version;
+> +	var_state[update_bank].fw_version = state->fw_version;
+>
+> +	size = num_banks * sizeof(*var_state);
+>  	ret = efi_set_variable_int(varname, image_type_id,
+>  				   EFI_VARIABLE_READ_ONLY |
+>  				   EFI_VARIABLE_NON_VOLATILE |
+>  				   EFI_VARIABLE_BOOTSERVICE_ACCESS |
+>  				   EFI_VARIABLE_RUNTIME_ACCESS,
+> -				   sizeof(var_state), &var_state, false);
+> +				   size, var_state, false);
+> +
+> +	free(var_state);
+>
+>  	return ret;
+>  }
+> --
+> 2.34.1
+>
+
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
