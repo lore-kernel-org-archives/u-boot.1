@@ -4,46 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A7B4C4706C
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 16:01:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E2C7C4706C
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 16:02:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9437F879E6;
-	Fri, 12 Jan 2024 17:01:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id B2F12879F8;
+	Fri, 12 Jan 2024 17:02:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D7403879F8; Fri, 12 Jan 2024 17:01:07 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 692D48797C
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 17:01:04 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2BCD31FB;
- Fri, 12 Jan 2024 08:01:50 -0800 (PST)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C3BAD3F67D;
- Fri, 12 Jan 2024 08:01:02 -0800 (PST)
-Date: Fri, 12 Jan 2024 16:01:00 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Philippe Coval <rzr@users.sf.net>
-Cc: u-boot@lists.denx.de, Hans de Goede <hdegoede@redhat.com>, Jagan Teki
- <jagan@amarulasolutions.com>, Sam Edwards <CFSworks@gmail.com>, Samuel
- Holland <samuel@sholland.org>, Tom Rini <trini@konsulko.com>, Olliver
- Schinagl <oliver@schinagl.nl>
-Subject: Re: [PATCH] arm: sunxi: Reduce inrush current on Olimex
- A20-OLinuXino_MICRO
-Message-ID: <20240112160100.274ff616@donnerap.manchester.arm.com>
-In-Reply-To: <20240106222142.170219-1-rzr@users.sf.net>
-References: <20240106222142.170219-1-rzr@users.sf.net>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1705075329;
+	bh=sSW4odYKQ57hHP0TrmW6YLEFLAGVfR83OcdqHX+rV8c=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=KvvQKDm9myjU+ATpqVSMH1r0OPaPTMd9GTUPvJmYI+JrV6i6FKLhyQH7HxH9iOt99
+	 H6G40gtHxFkgpSui1JKcfcu1ASkSdT5eWy6XoPJ3gDZA5AitSs3qp8q8tpgIpmItqF
+	 QaWEqNROC09a+eKHnghdWiKtYeIAjCf08Nz0sCp+VgDl/U6uSnazCjBcyREn6FHBrn
+	 jBVSr7BRzhndhu+78AVb8XPXrpgDX3/CFJflOCNP4S8Nkc/KCSJx2wpoLZ8ZJRCHcg
+	 WpHK9ARWszY0kXSPXJNa4tkretLoMbQF7qH+fU8BYmun8vyDBu/ljq0vrMzHDIU91e
+	 DzyoS6zFzRRXg==
+Received: from localhost.localdomain (85-222-111-42.dynamic.chello.pl
+ [85.222.111.42])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ (Authenticated sender: lukma@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 6F9C1877CB;
+ Fri, 12 Jan 2024 17:02:08 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1705075328;
+ bh=sSW4odYKQ57hHP0TrmW6YLEFLAGVfR83OcdqHX+rV8c=;
+ h=From:To:Cc:Subject:Date:From;
+ b=cVduGDCAjXPL2Ase0I3W82A7R8dNXk52bXWFM51FKoNhM9DeDgn+IHxzn5rMCDIL9
+ eTeB8EjW3/c6sKm4CNmqiw+dBjRp1npPrnQM8A//4D0OHyBtn5WtDK8t31fruP1Q0g
+ s+fVkmPtHrf78dYmx/T4rzFZ9FA2Bl6tSIuo7hkaqVYkMp+rbvbpVn5zvRJQXrKjgH
+ wARnCYCwt543htyztygd4YUlkqFgXvIdwztaiF5zZMXtzpkm0ayGoPdbH1OH/wS94Y
+ nL9+SdTwOjuX9xGKAHIkzZqA8qrsMiQcstmDTCNyLWD9SEeIjeYTvmgzp7B0v3Ei7k
+ IciQ7MN0ed9gA==
+From: Lukasz Majewski <lukma@denx.de>
+To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>
+Subject: [PATCH] defconfig: xea: Change default spi-nor memory bus to 2
+ (single binary)
+Date: Fri, 12 Jan 2024 17:01:48 +0100
+Message-Id: <20240112160148.2376535-1-lukma@denx.de>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,61 +66,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat,  6 Jan 2024 23:21:34 +0100
-Philippe Coval <rzr@users.sf.net> wrote:
+After the re-sync with Linux kernel (v6.0) of the XEA DTS
+(SHA1: 7d08ddd09b75e7a3c103cc0d0d3ed700287f268e) the alias
+for SPI bus, to which SPI-NOR  memory is connected, has changed from
+'spi3' to 'spi2'.
 
-(CC:ing Olliver, can you confirm that this quirk applies to the Micro too?)
+To be in sync with current u-boot's xea dts, the default bus number
+(which allows running 'sf probe' without any extra parameters given)
+has been adjusted.
 
-Hi Philippe,
+Signed-off-by: Lukasz Majewski <lukma@denx.de>
 
-thanks for taking care of upstreaming this!
+---
 
-> This change fix reboot, it was tested on debian-12
+ configs/imx28_xea_sb_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-So I am wondering why this only comes up now. Was that always broken, and
-nobody cared (or ran mainline U-Boot)? Or does the problem only show under
-certain circumstances?
-
-It would be good if you can elaborate about that in the commit message, to
-show *why* your patch is needed.
-
-> It was inspired from for-master-20181206-10-g8311e84b18
-
-Referencing a commit here looks odd. You could just mention that this quirk
-is also used on the Lime2 boards.
-
-> Relate-to: https://github.com/rzr/u-boot/issues/2
-> Thanks-to: Olliver Schinagl <oliver@schinagl.nl>
-
-Please don't invent tags. If you want to give credit for things like
-advice or support, mention their name in the commit message, and maybe add
-them in CC:
-If you have a *stable* link with useful(!) information, use the Link: tag.
-
-> Signed-off-by: Philippe Coval <rzr@users.sf.net>
-> ---
-> 
->  configs/A20-OLinuXino_MICRO_defconfig | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/configs/A20-OLinuXino_MICRO_defconfig b/configs/A20-OLinuXino_MICRO_defconfig
-
-If you change this file, that probably means that the eMMC version is also
-affected? Same as the two Lime2 boards, where we set the symbol in *both*
-defconfigs? So can you please add that symbol there as well?
-
-Cheers,
-Andre
-
-> index db4270f9b2..673ab85c8a 100644
-> --- a/configs/A20-OLinuXino_MICRO_defconfig
-> +++ b/configs/A20-OLinuXino_MICRO_defconfig
-> @@ -20,6 +20,7 @@ CONFIG_ETH_DESIGNWARE=y
->  CONFIG_MII=y
->  CONFIG_SUN7I_GMAC=y
->  CONFIG_SUN7I_GMAC_FORCE_TXERR=y
-> +CONFIG_AXP_ALDO3_INRUSH_QUIRK=y
->  CONFIG_AXP_ALDO3_VOLT=2800
->  CONFIG_AXP_ALDO4_VOLT=2800
->  CONFIG_SCSI=y
+diff --git a/configs/imx28_xea_sb_defconfig b/configs/imx28_xea_sb_defconfig
+index 0b3259866e..9872d35c1b 100644
+--- a/configs/imx28_xea_sb_defconfig
++++ b/configs/imx28_xea_sb_defconfig
+@@ -74,7 +74,7 @@ CONFIG_MMC_MXS=y
+ CONFIG_MTD=y
+ CONFIG_DM_MTD=y
+ CONFIG_DM_SPI_FLASH=y
+-CONFIG_SF_DEFAULT_BUS=3
++CONFIG_SF_DEFAULT_BUS=2
+ CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+ CONFIG_SPI_FLASH_ISSI=y
+ CONFIG_SPI_FLASH_SPANSION=y
+-- 
+2.39.2
 
