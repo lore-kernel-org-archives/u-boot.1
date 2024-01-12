@@ -4,67 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CA8BC47258
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 15:06:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 115E8C47258
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 15:12:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BF1B879A3;
-	Fri, 12 Jan 2024 16:06:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
+	by phobos.denx.de (Postfix) with ESMTP id 5F614879E2;
+	Fri, 12 Jan 2024 16:12:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="sCLSgwrK";
+	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="FnSEmkwU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E3458798C; Fri, 12 Jan 2024 16:06:06 +0100 (CET)
-Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
- [46.235.227.194])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BB451879E6; Fri, 12 Jan 2024 16:12:08 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33B96879AB
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 16:06:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B46B879A3
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 16:12:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=collabora.com
+ header.from=foundries.io
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sjoerd@collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1705071963;
- bh=e2ufEElpb4PjjTXRu2FSEthDXyWAqYCAoFfOpXyMyoU=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=sCLSgwrKq4iyg1Ng3lWjiqwvkRrV6Hh1chlaQ9LTxTfkHz+uob5Hh9qrvPyn4QT5p
- cK3mKWb2kmM7CKrlR6UhH7KCy3+1wVmIkxzDaRXWw/ffeJ0h7ybn/BoxWP2ofqHsfx
- PHr08XCQc2kSjypBaNhkq2lbWsFHRciRbqJo6LHylLUM0ysfVve/jwqIdooo5frXtb
- EISDaKWoO0tdu/42eblIQLrTKyfjosOQ7+edihqQfuSiWVYFedYoFtLWyPVT09s9J7
- LzBqA4wnZk7loSqDq2iCCpt4SfDV39lTCtV7ZuFQO4DezGVjtLSFXcCYUD5XOZhEiO
- UOGbNMKoneOfA==
-Received: from beast.luon.net (cola.collaboradmins.com [195.201.22.229])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: sjoerd)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id 89AEF3781FED;
- Fri, 12 Jan 2024 15:06:03 +0000 (UTC)
-Received: by beast.luon.net (Postfix, from userid 1000)
- id 1BA7B9F0C86C; Fri, 12 Jan 2024 16:06:03 +0100 (CET)
-Message-ID: <2bf954654a89c9e939dc27dca772fe57ea0077bf.camel@collabora.com>
-Subject: Re: [PATCH v4 5/7] configs: am62x_evm_*: Enable USB and DFU support
-From: Sjoerd Simons <sjoerd@collabora.com>
-To: Nishanth Menon <nm@ti.com>
-Cc: u-boot@lists.denx.de, Martyn Welch <martyn.welch@collabora.com>, Roger
- Quadros <rogerq@kernel.org>, Andrew Davis <afd@ti.com>, Dave Gerlach
- <d-gerlach@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry
- <m-chawdhry@ti.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nikhil M Jain <n-jain1@ti.com>, Praneeth Bajjuri <praneeth@ti.com>
-Date: Fri, 12 Jan 2024 16:06:02 +0100
-In-Reply-To: <20240112131913.s6tc7wqgvjmflxpy@lyrically>
-References: <20240112085317.1866449-1-sjoerd@collabora.com>
- <20240112085317.1866449-6-sjoerd@collabora.com>
- <20240112123738.v76kpf6bfngtc2kr@zigzagged>
- <a1553b40223d017dc6cc03f35be9b8e07f813b0b.camel@collabora.com>
- <20240112131913.s6tc7wqgvjmflxpy@lyrically>
-Organization: Collabora Ltd.
+ spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-50e766937ddso7546460e87.3
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 07:12:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=foundries.io; s=google; t=1705072326; x=1705677126; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VjoVQrp/kTZaNrjGLzKSCutbMVs/rWXFM+84wLDvIts=;
+ b=FnSEmkwUNz86sY2+B5ga23jct6snkLjyfQRHkZQ5M7v8kpOUmQ9iqduad25HporkzS
+ VXxaa2AtZ0/fq++lrYQzVO/ynhAyEAV/M2pUGTm7JLJO3Dcx2m7SaUoJk9tUkrkZLbsH
+ u2eq+x8VWUXYWJ/wHHW/l0/ECBaTz7UOfzoLPFGgDOwakGxgK65AYfHX+T1yq8nZNLh3
+ HPn2sz8HLSqvmlT/pRkB2z1zJagLaBH/gpHoc2jbW3JKtxO0/7hEWSKWwCSwF6X9H208
+ Wj2xQXHMUudVPUycJUQsIziatne6/daDYSV7d3M3pbqosioJawseXgKGNQ4vCHvQ3ZZI
+ FIEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705072326; x=1705677126;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=VjoVQrp/kTZaNrjGLzKSCutbMVs/rWXFM+84wLDvIts=;
+ b=YMrzI4+eYY2jlhBP3R53Szgw+C9bhDio6JJARKFQl+U9Hs5wvCtMo3AJ1ne/fy7KKd
+ 2TwVYZHcfx1H7QnNIJUfApZeZJbl1NsxM8WZN/UqMWugll9SUnfh7Kqetzi93o3OrkhX
+ JbvYoaghepuaVql+2zRT4045EIlbfdMhwsXx3Y0RAXop6wByKXvhwAuMCbYQqD+wtE4n
+ oNLafNdsK/Vj2bk1C6zYnVwA/+kQ5nZnUlqWeCRdX+cEAKSLu/Z+EDajF8uvKHPJwFN4
+ EAWN9YGiNiO3Yrj+VIhvgCxg8keRqipNH48r0ukHPd6Nx5FqwAn8y/c7WL/sU8T7pVqe
+ pVXQ==
+X-Gm-Message-State: AOJu0YyX+9ST2Nt6tFYr+oRM7VJVINcpFbE3UGKLJ9aGEN0rS24wso1K
+ 64B00a7XDjUooNteoeQ+a2g6IyN7SABY8fni94s23Y1lHjzESw==
+X-Google-Smtp-Source: AGHT+IHdkX8nHlZAyu6ccZAgSYkok0rImhagRz7AG8vw3tMuhChh724vK9c9NhvULiBtTZNR+m9mQc7mOcPahvyERPs=
+X-Received: by 2002:a19:3852:0:b0:50e:7e1a:6ef4 with SMTP id
+ d18-20020a193852000000b0050e7e1a6ef4mr582141lfj.102.1705072325699; Fri, 12
+ Jan 2024 07:12:05 -0800 (PST)
+MIME-Version: 1.0
+References: <20240112-maintainers-ab-v1-0-f2a538eab18a@baylibre.com>
+ <20240112-maintainers-ab-v1-1-f2a538eab18a@baylibre.com>
+In-Reply-To: <20240112-maintainers-ab-v1-1-f2a538eab18a@baylibre.com>
+From: Igor Opaniuk <igor.opaniuk@foundries.io>
+Date: Fri, 12 Jan 2024 16:11:54 +0100
+Message-ID: <CAL6CDMGKC8_kTsPXYa1CVPajb3Z1k=Ps7uEV_X3Q1Dj3K1kpTA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] MAINTAINERS: add Mattijs for Android AB
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Tom Rini <trini@konsulko.com>, Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.50.2-1 
-MIME-Version: 1.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,78 +88,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 2024-01-12 at 07:19 -0600, Nishanth Menon wrote:
-> On 14:09-20240112, Sjoerd Simons wrote:
-> [...]
->=20
-> > > > diff --git a/configs/am62x_evm_a53_defconfig
-> > > > b/configs/am62x_evm_a53_defconfig
-> > > > index aa96c1b3125..f335eb11e63 100644
-> > > > --- a/configs/am62x_evm_a53_defconfig
-> > > > +++ b/configs/am62x_evm_a53_defconfig
-> > >=20
-> > > Should we make the a53 also a defconfig fragment allowing reuse
-> > > across
-> > > multiple boards?
-> >=20
-> > Pros and cons. having all the various options (USB boot, ETH boot,
-> > misc
-> > other) as fragments would allow easier re-use but make it more
-> > complicated for the end-user to get a "full-featured" u-boot.=C2=A0
-> >=20
-> > My personal preference, as i'm coming with a distribution
-> > background,
-> > is to always enable as much as possible in a default build to allow
-> > maximum flexibility for end-users; Those that need
-> > space/performance/whatever optimisation can always do custom
-> > builds.
-> >=20
-> > It would be great if we could have a level of indirection here
-> > where by
-> > default a set of fragments get included such that it's invisible to
-> > the
-> > end-user that the underlying config is actually quite modular. But
-> > I
-> > don't think that's currently possible, hence preferring a fat
-> > defconfig
-> > such that the user/distro can just do `make
-> > am62x_evm_a53_defconfig`
-> > (and similar for beagleplay)
-> >=20
->=20
-> I understand, but I am looking to reduce duplication between boards
-> and making it easier for new board devs to be able to pick the
-> feature
-> group they need - almost all am62x users who desire dfu on a53 will
-> need the same options enabled. This also keeps the default u-boot
-> foot
-> print lower to allow for emmc boot0 partition limitations if any (I
-> removed that dependency on beagle by using uda, but other platforms
-> still keep u-boot in emmc boot0 and depending on the part and TEE
-> binary size, the available space can be constraining)
+On Fri, Jan 12, 2024 at 9:41=E2=80=AFAM Mattijs Korpershoek
+<mkorpershoek@baylibre.com> wrote:
+>
+> Igor has not been active for quite some time on lore:
+> https://lore.kernel.org/all/?q=3Digor.opaniuk@gmail.com
+>
+> I'm interested in helping with maintaining the android_ab
+> command. I'm a long time android/aosp developer and my daily job is
+> still doing android work.
+>
+> Add myself as maintainer for Android AB.
+>
+> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> ---
+>  MAINTAINERS | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 4fec063a242f..3c73d8c35c4a 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -59,6 +59,7 @@ F:    lib/acpi/
+>
+>  ANDROID AB
+>  M:     Igor Opaniuk <igor.opaniuk@gmail.com>
+> +M:     Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>  R:     Sam Protsenko <semen.protsenko@linaro.org>
+>  S:     Maintained
+>  F:     boot/android_ab.c
+>
+> --
+> 2.43.0
+>
 
-Fwiw just testing; for the SK board the difference in size for
-tispl.bin and u-boot.img is about 200 kilobytes with this extra config.
-=C2=A0
-The SK board i have has about 32 megabytes for the hardware boot
-partition so unlikely an issue there; For the beagleplay it seems to be
-only 4M, but that's currently already on UDA indeed so shouldn't matter
-there.
-
-Mind i agree with you in general; and i was looking at moving the full
-u-boot into the hw boot partition on beagleplay already so the OS i
-flash doesn't have to be device specific.
-
->=20
-> I am starting to wonder if
-> https://lore.kernel.org/u-boot/20231101170519.39627-1-afd@ti.com/
-> will help us here.
-
-Yes absolutely that would be perfect. Can i suggest we land it as is
-for now ("fat monolithic config") and once those patches land i'm happy
-to split things up?=20
-
+Acked-by: Igor Opaniuk <igor.opaniuk@foundries.io>
 
 --=20
-Sjoerd Simons
-Collabora Ltd.
+Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
+
+Igor Opaniuk
+Senior Software Engineer, Embedded & Security
+E: igor.opaniuk@foundries.io
+W: www.foundries.io
