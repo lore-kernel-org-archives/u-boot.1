@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E56D3C4725D
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 16:04:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2493C4706C
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 17:56:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 637D98798D;
-	Fri, 12 Jan 2024 17:04:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A62A98792D;
+	Fri, 12 Jan 2024 18:56:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="af//vmja";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g5Sz6ahC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCBAC8798D; Fri, 12 Jan 2024 17:04:30 +0100 (CET)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
+ id C38F587937; Fri, 12 Jan 2024 18:56:04 +0100 (CET)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7797D87981
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 17:04:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7DD2C87561
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 18:56:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-dbf2737bd48so3082683276.2
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 08:04:28 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-28b93b04446so1410989a91.0
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 09:56:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705075467; x=1705680267; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=mP5TDaJws7FyW3VvSN4FG10MjtWLtLN7JdmrdiThAp8=;
- b=af//vmjaH7s06XsZtwJaXpvQ/H0e9kL6Ayi+lZ+0s+XUyGYGNK79e0TG9yocgASOX+
- /dt3SA6GCWf0Ryu4xvZ7aOgkSuMJFlONgIDOOeFVTksJ0r8AT+PbvJsFRHRcWrijy6wo
- Loy8o0zF4SyCxkTUd92wAY3nkvHgdbyBgOrPA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705075467; x=1705680267;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1705082160; x=1705686960; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mP5TDaJws7FyW3VvSN4FG10MjtWLtLN7JdmrdiThAp8=;
- b=k3Maxt307t7vd5MYm0DFuKiQpHlDZcHUfxjsdXnPlvXo6uG+haodpLuRfUji3knTZP
- pmLw4r9utzZWM3aBm8w2k7cTcKzMJWfvArK5t2cnQuJbreNyt1RDwvSPaT7ODGzwNLHn
- Vt66jjZyW5QwehFGmUEMlvyWmr9UTCTKk1ppTdgE0FB6NzyXGYsoRLMIVkAn5Br2j06M
- hyIxqFAvQDBkwVjtPO3ex8iWUmCcgMJ90bOLT/6avqRcbPURlwziPAv7sFjocoSpKvsx
- S3ww5TFvgkCVFjfUtzQVXiC/Y2RlwomUZHdOAqwUIGyEN2yQhIF7FvWyjsgZWcWHZz36
- 9vPw==
-X-Gm-Message-State: AOJu0Yw0MZN51v+toqXW83eKwOlK7NLBXwQRM9OQMNkUh6a7ALzSc1DN
- xG+qv+swaCBGdwX5FldZrjW2zOkMVDm1DftEa29qhzkDdfw=
-X-Google-Smtp-Source: AGHT+IF7R0o9S7TEpPgnjedFFt5NVu8iqYaZVjDFAacKzBzxCYwy0YwCnDi6Xvwce100L74yVt3fdQ==
-X-Received: by 2002:a05:6902:2007:b0:dbc:cbda:adda with SMTP id
- dh7-20020a056902200700b00dbccbdaaddamr884833ybb.105.1705075467009; 
- Fri, 12 Jan 2024 08:04:27 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- t44-20020a25aaaf000000b00dbdaf9a60e9sm1302590ybi.37.2024.01.12.08.04.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Jan 2024 08:04:26 -0800 (PST)
-Date: Fri, 12 Jan 2024 11:04:24 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Love Kumar <love.kumar@amd.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
-Subject: Re: [PATCH] test/py: saveenv: Add a test for saveenv command
-Message-ID: <20240112160424.GD1610741@bill-the-cat>
-References: <ad2d0f038a9547ff0e6cba6a496ddec73c6a0e88.1704976608.git.love.kumar@amd.com>
+ bh=FAPBPT5lEx6l01Nyst65ShHJ7E+5cJ7RC2FweFSGakw=;
+ b=g5Sz6ahC1Abq2NiR1fjflS00BxDE9lkLLSsLgGkDmna7Ym7b85ODm7WafMvdLRoxKK
+ F4P8Zj6reQ/iXKGJdGKnxTuSo0bSkBZZwyKRbIE31sFqsuDkvE7NTY+45uYU4ZIoTsw5
+ 6yofME/wvhIDBq6ybbH5icu62NfQ1NjoIuM7e8DZytZG+2Wz3S326u8hrx+7P+KX8O52
+ aVw1uA/hxhEMKqTUyjbVGl91t7nsq6cq8NSCg5KFrzV3l8+3UoZkdja1jpx6vfg62OVo
+ vsU0LCif7ONm+hk68ht83mWmYJzbziesMfJL3UK0wlG+FowuNtaq/Wek/XrOo3Rk41QK
+ /o3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705082160; x=1705686960;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=FAPBPT5lEx6l01Nyst65ShHJ7E+5cJ7RC2FweFSGakw=;
+ b=siaR40yYwIQVkMIK6hYOS9Ih5vJu1XjMuCBzzFqFjD2+Vj3Mk1r8nKHuBrimgiyfby
+ 25QiIN4EcT2dtYbU5QlHv0EbqK9JQMjLw2qDazGKMiVzxFTM4xileFSnVcqqJSkEDY39
+ PlXh55tqAmBzzzgGpBu2md9IB67Mb65VprH+wdvIGUbfPP+ubJy+eblJMkRz4GmB9ElT
+ DnsbvkvlQhon8AibjB+eC3LQuirswCxnbH3WueDP9jiZdwy6xskTJmE8p1WS689TpzX/
+ DgjKqgBvK2GvP0C5Nt+5PzNNcWqtAZzQ0gefQlljAshG1oLhb4zpsWqqXkRPm9uxpYa5
+ QQzg==
+X-Gm-Message-State: AOJu0YwT4o+2sDr8by5kG6QVNQE57ewkaGPgBM17NGfyOFs1eXGEM66u
+ Z4fgdrrP0ibgRu85LLaUSnvmTvycN+Yg7Gdo7YnK6x0NQG0=
+X-Google-Smtp-Source: AGHT+IEnJQ1n1qJkgtTh5D46dnswP9Sgq8OGgxDpcZUbmMCr45euf5Ot7ot5UR6H/x6ffPkWGVzyMoBEZ1neZavtYb0=
+X-Received: by 2002:a17:90b:1bd0:b0:28d:e180:5429 with SMTP id
+ oa16-20020a17090b1bd000b0028de1805429mr2506127pjb.2.1705082159792; Fri, 12
+ Jan 2024 09:55:59 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="h5yGudPNqnNNTd3Z"
-Content-Disposition: inline
-In-Reply-To: <ad2d0f038a9547ff0e6cba6a496ddec73c6a0e88.1704976608.git.love.kumar@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240111-wip-y-moog-phytec-de-som-detection-fixup-v1-1-7c1a63e7eee8@phytec.de>
+In-Reply-To: <20240111-wip-y-moog-phytec-de-som-detection-fixup-v1-1-7c1a63e7eee8@phytec.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 12 Jan 2024 14:55:48 -0300
+Message-ID: <CAOMZO5BBhS9qQFNkftiNN-6odxe_MN+ONGKwTsbCdMWwX1vtKg@mail.gmail.com>
+Subject: Re: [PATCH] board: phytec: fix link error when disabling
+ PHYTEC_SOM_DETECTION
+To: Yannic Moog <y.moog@phytec.de>
+Cc: Teresa Remmet <t.remmet@phytec.de>, u-boot@lists.denx.de,
+ upstream@lists.phytec.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,54 +88,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Yannic,
 
---h5yGudPNqnNNTd3Z
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, Jan 11, 2024 at 5:27=E2=80=AFAM Yannic Moog <y.moog@phytec.de> wrot=
+e:
+>
+> Commit aa7858fe5e2e ("board: phytec: som_detection: move definitions to
+> source file") moved function definitions from header to source file.
+> Makefile however was not updated to unconditionally build the imx8 and
+> phytec som detection units. Fix this.
+>
+> Fixes: aa7858fe5e2e ("board: phytec: som_detection: move definitions to s=
+ource file")
+> Signed-off-by: Yannic Moog <y.moog@phytec.de>
 
-On Thu, Jan 11, 2024 at 06:12:25PM +0530, Love Kumar wrote:
+This causes build failure:
 
-> Add test case for saveenv command in non-JTAG bootmode which saves the
-> u-boot environment variables in persistent storage.
->=20
-> Signed-off-by: Love Kumar <love.kumar@amd.com>
-[snip]
-> +# Setup the env
-> +def setup_saveenv_env(u_boot_console):
-> +    if u_boot_console.config.env.get('env__saveenv_test_skip', False):
-> +        pytest.skip('saveenv test is not enabled')
-> +
-> +    output =3D u_boot_console.run_command('print modeboot')
-> +    m =3D re.search('modeboot=3D(.+?)boot', output)
-> +    if not m:
-> +        pytest.skip('bootmode cannnot be determined')
-> +
-> +    bootmode =3D m.group(1)
-> +    if bootmode =3D=3D 'jtag':
-> +        pytest.skip('skipping saveenv test due to jtag bootmode')
-
-This doesn't handle the case of "modeboot" being unset, which is how my
-hardware is.
---=20
-Tom
-
---h5yGudPNqnNNTd3Z
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWhYwgACgkQFHw5/5Y0
-tywxbgv+POCBax6FCi9qm4kzN1aRzeBCWhmnTL6Uot68ZejuyyaWotm46uqTExZl
-0aUOrZTpNb4o2/43x8Y3vKxuuFbHlNVcTQqpeFIPewOQCTzN7aXPtNAkwUJxvM+D
-ZuM4fAw56E0HaMaQL1CM4A4Huvxb8o/MSW4nB5OlXhEk5328nywQb1p4o59ZApyG
-Ry/0fPXUPhFRIyhedenhfLxd8prCzr73dNMFO3lRCQRC+aTvNxXe2YYPjXtlTqOl
-7TNRU9dBQzcTk1uJNF8syddb4tT/ut0h/co9UPhJ0YnzbtYyu/VqDwewnuvJyh8H
-vsCUS8d7P81cIIgwBCGmjSdiLuvmno3dM7RleUWYTYVWvp/X9h9UUL1sbvLfLT6k
-9fhyZAciZd4iCGCKsOMBLHOCXXEJ4n9EMQM3ornq1VVLIIW5cCf8tP5EYOgd5R1s
-KH9StUd1dz74pQEzomr8JpBBdB0OvOSntEoMD1bUHF5NrTFH7VhXVC/lYMr+H2hN
-RNF0Vemq
-=I5FC
------END PGP SIGNATURE-----
-
---h5yGudPNqnNNTd3Z--
+https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/769421
