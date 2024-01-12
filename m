@@ -4,74 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 115E8C47258
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 15:12:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A34CBC4706C
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 15:35:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F614879E2;
-	Fri, 12 Jan 2024 16:12:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
+	by phobos.denx.de (Postfix) with ESMTP id C0F20879D3;
+	Fri, 12 Jan 2024 16:35:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="FnSEmkwU";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d2pmF7wP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB451879E6; Fri, 12 Jan 2024 16:12:08 +0100 (CET)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id 79AA3879E6; Fri, 12 Jan 2024 16:35:31 +0100 (CET)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B46B879A3
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 16:12:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=foundries.io
+ by phobos.denx.de (Postfix) with ESMTPS id 09F3F879C3
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 16:35:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-50e766937ddso7546460e87.3
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 07:12:06 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-6d9b51093a0so5783472b3a.0
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 07:35:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1705072326; x=1705677126; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VjoVQrp/kTZaNrjGLzKSCutbMVs/rWXFM+84wLDvIts=;
- b=FnSEmkwUNz86sY2+B5ga23jct6snkLjyfQRHkZQ5M7v8kpOUmQ9iqduad25HporkzS
- VXxaa2AtZ0/fq++lrYQzVO/ynhAyEAV/M2pUGTm7JLJO3Dcx2m7SaUoJk9tUkrkZLbsH
- u2eq+x8VWUXYWJ/wHHW/l0/ECBaTz7UOfzoLPFGgDOwakGxgK65AYfHX+T1yq8nZNLh3
- HPn2sz8HLSqvmlT/pRkB2z1zJagLaBH/gpHoc2jbW3JKtxO0/7hEWSKWwCSwF6X9H208
- Wj2xQXHMUudVPUycJUQsIziatne6/daDYSV7d3M3pbqosioJawseXgKGNQ4vCHvQ3ZZI
- FIEg==
+ d=linaro.org; s=google; t=1705073727; x=1705678527; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=gGgj330Lfa8T6D3C/aBJweU9zqG5wl1k6ZXIWiqOVrk=;
+ b=d2pmF7wPVBFqR3SXYFdSK8YVMY2QoueWniJ+j7cl5ivUyWWg8OMStPyvFc6ormkszH
+ XyadgElEg1lCvOaSvv/f1URG9+ojxGgMHbHIghDrCVmUb1pUMoOIBx9XcVHvkpb1Q9Qi
+ OIZhd35L1g40bKDWv4kFV0k6+DBNPAdKirDj/iJBUSaduMCYh9u/0HcMK+ccqo/QK8sq
+ z/YtQbEYZisWvofeHE3KgiAWwUMdAyvLZ2JcCgmQYK/k5oyLk5r6EFml+3L5AmX5CfOz
+ 8979OovxRnahfT7WgoZ524bfMF8AKkyAWavHd+iwwFZwInZ85zx3nz5Qw1RM5BJjxaD4
+ rV5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705072326; x=1705677126;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VjoVQrp/kTZaNrjGLzKSCutbMVs/rWXFM+84wLDvIts=;
- b=YMrzI4+eYY2jlhBP3R53Szgw+C9bhDio6JJARKFQl+U9Hs5wvCtMo3AJ1ne/fy7KKd
- 2TwVYZHcfx1H7QnNIJUfApZeZJbl1NsxM8WZN/UqMWugll9SUnfh7Kqetzi93o3OrkhX
- JbvYoaghepuaVql+2zRT4045EIlbfdMhwsXx3Y0RAXop6wByKXvhwAuMCbYQqD+wtE4n
- oNLafNdsK/Vj2bk1C6zYnVwA/+kQ5nZnUlqWeCRdX+cEAKSLu/Z+EDajF8uvKHPJwFN4
- EAWN9YGiNiO3Yrj+VIhvgCxg8keRqipNH48r0ukHPd6Nx5FqwAn8y/c7WL/sU8T7pVqe
- pVXQ==
-X-Gm-Message-State: AOJu0YyX+9ST2Nt6tFYr+oRM7VJVINcpFbE3UGKLJ9aGEN0rS24wso1K
- 64B00a7XDjUooNteoeQ+a2g6IyN7SABY8fni94s23Y1lHjzESw==
-X-Google-Smtp-Source: AGHT+IHdkX8nHlZAyu6ccZAgSYkok0rImhagRz7AG8vw3tMuhChh724vK9c9NhvULiBtTZNR+m9mQc7mOcPahvyERPs=
-X-Received: by 2002:a19:3852:0:b0:50e:7e1a:6ef4 with SMTP id
- d18-20020a193852000000b0050e7e1a6ef4mr582141lfj.102.1705072325699; Fri, 12
- Jan 2024 07:12:05 -0800 (PST)
+ d=1e100.net; s=20230601; t=1705073727; x=1705678527;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=gGgj330Lfa8T6D3C/aBJweU9zqG5wl1k6ZXIWiqOVrk=;
+ b=cglBeesiNzMpOMA3TjwslR/KeZO5J/VW1ZiFA5QCumK8pI7W7zRsmmk7H372liJHws
+ Mexy7bjezc0jkxu5wXze7hTG3t305hL0vM5Rj8JAfZtJZVNZ/8+rPr+oClV1ejoirUpy
+ uzDexWM7j8Nwa3fCTW7W+UDT7D/8xDlxZBvDWw/nBq94eIaA/b5U/333hEXfXMyey3LX
+ Wp8vorYVaE1HufKclZ9wKYT9c46Ouwp24Hgy3Bz9saqJF689X29XzUHG6nhp+eyI/crE
+ 2iUIASZwWxmniUEDhH/rX4v8/gQ8Wc+nJrivw6CSMs3bG/R8NzsqJBABEKAOpwSqiMbK
+ S2dg==
+X-Gm-Message-State: AOJu0YyhdHKescy1khxxFZWZGgSAjb615hhecadtAeLArzm1sNBQR6FS
+ LpiFvH4UyTr/+JJFr5H62DLbVP9hmWzUXqya/YeCyZOfkYtaLA==
+X-Google-Smtp-Source: AGHT+IEkF+Em17XldMSBX4AykY3HHSDPQSqdg10p28Dj9xL6mD0+RNPq9o9iPmcjU4A4Piip6FX4+6Hp0EeFC7xjY5Y=
+X-Received: by 2002:a05:6a21:a599:b0:19a:3eae:6875 with SMTP id
+ gd25-20020a056a21a59900b0019a3eae6875mr1420336pzc.15.1705073727342; Fri, 12
+ Jan 2024 07:35:27 -0800 (PST)
 MIME-Version: 1.0
-References: <20240112-maintainers-ab-v1-0-f2a538eab18a@baylibre.com>
- <20240112-maintainers-ab-v1-1-f2a538eab18a@baylibre.com>
-In-Reply-To: <20240112-maintainers-ab-v1-1-f2a538eab18a@baylibre.com>
-From: Igor Opaniuk <igor.opaniuk@foundries.io>
-Date: Fri, 12 Jan 2024 16:11:54 +0100
-Message-ID: <CAL6CDMGKC8_kTsPXYa1CVPajb3Z1k=Ps7uEV_X3Q1Dj3K1kpTA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] MAINTAINERS: add Mattijs for Android AB
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Tom Rini <trini@konsulko.com>, Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, u-boot@lists.denx.de
+References: <20240102221237.1007090-1-raymond.mao@linaro.org>
+ <20240102221237.1007090-9-raymond.mao@linaro.org>
+ <CAC_iWjL9zbNWDFk4x=Q3=PVe-zjv441Y52-npjWYW3Pni8PKLg@mail.gmail.com>
+In-Reply-To: <CAC_iWjL9zbNWDFk4x=Q3=PVe-zjv441Y52-npjWYW3Pni8PKLg@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Fri, 12 Jan 2024 10:35:16 -0500
+Message-ID: <CAEfUkU+-0fWkTzt8AY4KM4tae83VYF0yoaC770riPMbZ9X4_uA@mail.gmail.com>
+Subject: Re: [PATCH v4 8/9] fdt: update the document and Kconfig description
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Kevin Chen <kevin_chen@aspeedtech.com>, 
+ Sean Anderson <sean.anderson@seco.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Nikhil M Jain <n-jain1@ti.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Shiji Yang <yangshiji66@outlook.com>,
+ Baruch Siach <baruch@tkos.co.il>, Michal Simek <michal.simek@amd.com>,
+ Stefan Roese <sr@denx.de>, Qu Wenruo <wqu@suse.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,46 +95,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jan 12, 2024 at 9:41=E2=80=AFAM Mattijs Korpershoek
-<mkorpershoek@baylibre.com> wrote:
->
-> Igor has not been active for quite some time on lore:
-> https://lore.kernel.org/all/?q=3Digor.opaniuk@gmail.com
->
-> I'm interested in helping with maintaining the android_ab
-> command. I'm a long time android/aosp developer and my daily job is
-> still doing android work.
->
-> Add myself as maintainer for Android AB.
->
-> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> ---
->  MAINTAINERS | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 4fec063a242f..3c73d8c35c4a 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -59,6 +59,7 @@ F:    lib/acpi/
->
->  ANDROID AB
->  M:     Igor Opaniuk <igor.opaniuk@gmail.com>
-> +M:     Mattijs Korpershoek <mkorpershoek@baylibre.com>
->  R:     Sam Protsenko <semen.protsenko@linaro.org>
->  S:     Maintained
->  F:     boot/android_ab.c
->
-> --
-> 2.43.0
->
+Hi Ilias,
 
-Acked-by: Igor Opaniuk <igor.opaniuk@foundries.io>
+On Wed, 10 Jan 2024 at 09:12, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+wrote:
 
---=20
-Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
+> I think this isn't needed anymore after
+>
+> https://lore.kernel.org/u-boot/CAC_iWjJ6=NjqwcFzVvV4DzMWy5nY_QAeD=vfQrRSjodLbVqroQ@mail.gmail.com/
+>
+> I think Simon's patch is missing the description on OF_BOARD, a FDT from
+the previous stage via transfer list
+depends on both  OF_BOARD and BLOBLIST.
+And also I think we need to describe about the arch-specific function here,
+in case that other arches want to
+follow the same FW handoff spec in the future.
 
-Igor Opaniuk
-Senior Software Engineer, Embedded & Security
-E: igor.opaniuk@foundries.io
-W: www.foundries.io
+[...]
+
+Regards,
+Raymond
