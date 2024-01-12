@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95519C4706C
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 21:00:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66A10C4706C
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 21:00:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 303D287937;
-	Fri, 12 Jan 2024 22:00:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B170E878C8;
+	Fri, 12 Jan 2024 22:00:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="O/d0+wVJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DzRayUXj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A639D8793B; Fri, 12 Jan 2024 22:00:05 +0100 (CET)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id ADC5E86EF1; Fri, 12 Jan 2024 22:00:34 +0100 (CET)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E722A878C8
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 22:00:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9335B878C8
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 22:00:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1d3fe03b6b7so14311395ad.1
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 13:00:02 -0800 (PST)
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-1d54c7ef801so12148595ad.0
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 13:00:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705093201; x=1705698001; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1705093231; x=1705698031; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=11QaYuA76iOmCEIKe6WeqomPDV48IpaE1dx4Fgset+A=;
- b=O/d0+wVJ9bsgxlq+zbdrC3rPRx/bxcjO0/xZlhMIvt2Sqd+RkVOwADCZ+QcUYkcXlr
- /idGbpqn+TCo9UqDFc8o7IYqmu0xpmbfH0kBrN+JVvhMigKQtzIJdHiZV/o3Gzmnmzr0
- GeMiwgNedLwq/bFzRRNHpm0jH24PFQnx03sOulJn4qE3NOn6XFNw2D3d+vcln/GuxzXt
- w0tz8w90FwIGL7XxrQBznbg7zxgm+7J9DT9WqTolk/I44Sd5p+kRufD1CVEbNLZMUW6y
- lGGZTcPEyBmvNDyHBtmlAncfeNKnzeATJXVq3OeAtK84RRagMJFDPORb8v9u46yOehP9
- IWAg==
+ bh=WXJWwzRTIfAS7jXpMqW5K/b7aofFFc6vqGHGTjArWkY=;
+ b=DzRayUXjl1VbIIt4hXbGGu8gBZUQO+v0T2RAjLbyLhrPcMXTiqg3zsFEC9KWG0QAxg
+ 2zqUlLw4Xg6CAr4JuqXqThSpocViUM0VkqjOzdlfasrfdeWjRuMoRofXuBUWhB+HeAO7
+ 15HlYdf68ZErY05QLfV7Tv3OUEQTCT/lexPPGK5/2mbjDcG4y5cOJlE4zbLDegEo58rz
+ KfCDBJdWVCBei7c6W2iyObb4/I8OWvkblZc+8wbI6em707EwG8TJWQetAb9j8X/R7rGQ
+ fqWsAUT4koTIMeUSkRwgkC01BhpgLf4U8+OPklm2mHYp8WxKeV6GydCyZpdyxDStvXAU
+ U2bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705093201; x=1705698001;
+ d=1e100.net; s=20230601; t=1705093231; x=1705698031;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=11QaYuA76iOmCEIKe6WeqomPDV48IpaE1dx4Fgset+A=;
- b=wS9zrYkuYVNLcK3qX7OHthGRKpXIMNZezFnl2kTO+KtUC+khGz76kj3e9SRhXtostn
- XmEJJiE1FYlCcxw3QsHj+0FZ/+NOGpSdnEVrOoijHCJALPXDR/R7PrVl4SVEd3Fln+wY
- 2+DPCywKdJ7MUTEI5eyWbwpPL+l8cha2k2vf/C5Q9QleDypR4pTYOekB7R/Y3vzoDPcl
- CdpnfiHPcSqot5OtaoJDdfZN6D0RiY5hUnv6rrU2bB4zbaaUajEHoswQ1bIN6oRfs0CX
- Qj8ZflwKfDPy2UV/8+3nk8PXul2f5b5z/NnvCr9202/kpRsuW0q+ULvyVRNJb3yuIClh
- t09Q==
-X-Gm-Message-State: AOJu0YzKh+f1WDFcdogTRVFKW84UMop1kvHqJ/oF1ke7yha9zKmswaMr
- GzLojSYKAX432LF463YyeVD/JBSktoGYJ1YM52qaQjoA
-X-Google-Smtp-Source: AGHT+IFeX+LI1nmKLMS9UeEH4WsNjy6JQWqIqfoykddH8jRdr9LQDDQqYjONwduuHHqHDh8VNyg1WDoxEcw3L23faw8=
-X-Received: by 2002:a17:90b:4c42:b0:28e:fa5:7afd with SMTP id
- np2-20020a17090b4c4200b0028e0fa57afdmr2283869pjb.4.1705093201072; Fri, 12 Jan
- 2024 13:00:01 -0800 (PST)
+ bh=WXJWwzRTIfAS7jXpMqW5K/b7aofFFc6vqGHGTjArWkY=;
+ b=ii3JICqF0bo4FEPMrrowkOhSrIdDD9lFpzxphTbqALV2lYGxkKNkKzmApHWu+HNtfB
+ p1F7vO16fBZxMObH6uVidbMUJnlhzj1LY8G/GB2k8hDVU4fknOmp+HyfJlU6/+Ye4yUu
+ gUHYU5RwJ88KKckAaU0t6WIhitITjqrgYH0qr9cI4ChfXwBuUCYzKWTf1XGoMl1RSlUT
+ r7qIc21WV0wAKJg9Kipsw+JHfwUM8h2O46Pxvk9dbpndevzZf6rxse9WOjjBwOj3AOzS
+ 0dJbmdPd1FnVNMjqmiADPNI//aS3NRrYmFjXZVc/mYL/IISNixuBaZ5GPb0RIA2/1PZq
+ +osw==
+X-Gm-Message-State: AOJu0YwrL9xyyvDvNkEio7gQo8JwWnio8qMqGPUYJXJ1a0fh/+KeccWf
+ zt2q7zL5d1hnxoH9bpP93XHyKoICFOPlg7F1ILw=
+X-Google-Smtp-Source: AGHT+IErKJhv1Awc6Ln9Pob4DyaFe9ObiN+52hd8KBMgLASEm3UqS53YtpFjUig7bCvXMJSFrT9mj460K7G6I62/hIs=
+X-Received: by 2002:a17:90b:384a:b0:28b:9a2d:c1c5 with SMTP id
+ nl10-20020a17090b384a00b0028b9a2dc1c5mr2922581pjb.2.1705093230899; Fri, 12
+ Jan 2024 13:00:30 -0800 (PST)
 MIME-Version: 1.0
-References: <20240110-wip-y-moog-phytec-de-tauri-l_upstream-v2-0-4ea2dd6a4f74@phytec.de>
-In-Reply-To: <20240110-wip-y-moog-phytec-de-tauri-l_upstream-v2-0-4ea2dd6a4f74@phytec.de>
+References: <20240111125625.2815180-1-primoz.fiser@norik.com>
+ <20240111125625.2815180-2-primoz.fiser@norik.com>
+In-Reply-To: <20240111125625.2815180-2-primoz.fiser@norik.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 12 Jan 2024 17:59:50 -0300
-Message-ID: <CAOMZO5CmmKXbzj6F1-tQ9tKifFNz4k-TpSMXBAfKQrTufM2epw@mail.gmail.com>
-Subject: Re: [PATCH v2 0/3] This series adds support for the phyGATE-Tauri-L.
-To: Yannic Moog <y.moog@phytec.de>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Teresa Remmet <t.remmet@phytec.de>, upstream@lists.phytec.de, 
- u-boot@lists.denx.de
+Date: Fri, 12 Jan 2024 18:00:19 -0300
+Message-ID: <CAOMZO5CjfkTQhFk2nA7XOUW9oVUAdvYS=mgwyLG_JhwUMqrBig@mail.gmail.com>
+Subject: Re: [PATCH 1/1] imx: imx9: fixup thermal trips from fuses
+To: Primoz Fiser <primoz.fiser@norik.com>
+Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, 
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
+ PHYTEC upstream <upstream@lists.phytec.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -88,13 +89,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jan 10, 2024 at 10:35=E2=80=AFAM Yannic Moog <y.moog@phytec.de> wro=
-te:
+On Thu, Jan 11, 2024 at 9:56=E2=80=AFAM Primoz Fiser <primoz.fiser@norik.co=
+m> wrote:
 >
-> The config is minimal and mostly a copy from the phycore-imx8mm. SPI
-> (flash) is disabled as it is not populated by default.
-> Also add documentation for the phyGATE-Tauri-L board. While at it, add
-> the other PHYTEC doc files to MAINTAINERS; they were missing for
-> existing phycore-imx8m{m,p} doc.
+> Read i.MX9 CPU temp grade from fuses and fixup thermal trips in Linux
+> device-tree accordingly.
+>
+> Based on commit 0543a1ed2787 ("imx8m: fixup thermal trips")
+>
+> Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
 
-Applied all, thanks.
+Applied, thanks.
