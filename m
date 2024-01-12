@@ -4,43 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0408C4725D
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 12:50:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8314C4725D
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 12:50:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01737879F6;
-	Fri, 12 Jan 2024 13:50:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8697A8785F;
+	Fri, 12 Jan 2024 13:50:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="lzMH467m";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="myKYEbmT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E0C087947; Fri, 12 Jan 2024 13:50:12 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id C38E387947; Fri, 12 Jan 2024 13:50:14 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3CAA879F5
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 13:50:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D788287937
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 13:50:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 694F561D01;
+ by dfw.source.kernel.org (Postfix) with ESMTP id BB14B61D65;
+ Fri, 12 Jan 2024 12:50:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B0CE7C433F1;
  Fri, 12 Jan 2024 12:50:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 656D4C43390;
- Fri, 12 Jan 2024 12:50:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705063808;
- bh=r91NdKHxE+tAHUcVFE663sGeid3oKWnZu39PkxP5l8U=;
+ s=k20201202; t=1705063811;
+ bh=PJA3FP5R7N1uB6IHUHOxEMkK3Q5erQp2iEcTSVKvuKY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=lzMH467m4+73UEd8yyKIVMgJn+PlSkX1KxR3d5DnfNSYc+Ils3pWFeQR62axRHY50
- AJ+Gm5N+GtyeMqJ5w4uShLTThOco3cbYTo10mntMg4jV+6wd7Bk+rRJy0vF7Cn9Wto
- 9X8CC5AcDGvnv/9o9HqFeEmZgk4Pxf4Z/K8IVpCBYIdT3XDqTc+ay3tnSiJ/FwK7tQ
- PTrWz9R0Kq15+21vIJESI1XZDBduDpL+175GVrGfTYE44ewpsIL+87faE99542IlCA
- QkBijVJ3ylzk20xch/K0E5Y1UzZEKjGGgKemwkoH7zx+CRGrBczU1gLldLZB3Gpsql
- 2/rt1yEVerB8g==
+ b=myKYEbmTup/NOVtZBWBl01oG/CkXUFDIVm3kvOothlYidvFNxVlpM1VwHRn/hK55v
+ B195mDop3iSJWzKfDidgfgg0XNitgiPwGZmgFhLmAT5Xmab9T4F2o9ixKpgLRqn/aY
+ O+oWN9CrVj8X1y4xvl37x3K52itg3mHYXmU+bfxF5P3n7HRPpTIf8sScoktb+Bor9B
+ N4yteB9KdLBC/eAZVFtyJBXmY5oizKrwS81pykrf2xjyIJjadKZIUvDVErHdV6Xbaf
+ m5txkHGox970347v61eUbD0sCJTPLMjCl3Ki6MBcCNzisKTqSySpo/OFhe347wC0mM
+ NxFAfBU2QblhA==
 From: Roger Quadros <rogerq@kernel.org>
 To: nm@ti.com,
 	robertcnelson@gmail.com,
@@ -49,9 +48,9 @@ To: nm@ti.com,
 Cc: n-francis@ti.com, praneeth@ti.com, s-vadapalli@ti.com,
  r-gunasekaran@ti.com, srk@ti.com, vigneshr@ti.com, u-boot@lists.denx.de,
  Roger Quadros <rogerq@kernel.org>
-Subject: [PATCH 3/5] arm: dts: k3-j721e: Fix USB0 operation
-Date: Fri, 12 Jan 2024 14:49:49 +0200
-Message-Id: <20240112124951.238098-4-rogerq@kernel.org>
+Subject: [PATCH 4/5] arm: dts: k3-j721e-beagleboneai64: Fix USB operation
+Date: Fri, 12 Jan 2024 14:49:50 +0200
+Message-Id: <20240112124951.238098-5-rogerq@kernel.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240112124951.238098-1-rogerq@kernel.org>
 References: <20240112124951.238098-1-rogerq@kernel.org>
@@ -77,51 +76,31 @@ Without correct SERDES MUX and Lane control settings
 USB0 will be broken. Set the MUX and Lane control devices
 to be auto probed so they are configured correctly.
 
-Fixes: 69b19ca67bcb ("arm: dts: k3-j721e: Sync with v6.6-rc1")
 Signed-off-by: Roger Quadros <rogerq@kernel.org>
 ---
- arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi | 8 ++++++++
- arch/arm/dts/k3-j721e-sk-u-boot.dtsi                | 8 ++++++++
- 2 files changed, 16 insertions(+)
+ arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi b/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi
-index b77f8d92de..7ae7cf3d4c 100644
---- a/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi
-+++ b/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi
-@@ -93,6 +93,14 @@
+diff --git a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
+index f83caf7998..017a5a722e 100644
+--- a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
++++ b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
+@@ -165,6 +165,7 @@
+ 
+ &serdes_ln_ctrl {
  	bootph-all;
++	u-boot,mux-autoprobe;
  };
  
-+&serdes_ln_ctrl {
-+	u-boot,mux-autoprobe;
-+};
-+
-+&usb_serdes_mux {
-+	u-boot,mux-autoprobe;
-+};
-+
- &main_usbss0_pins_default {
+ &serdes2_usb_link {
+@@ -173,6 +174,7 @@
+ 
+ &usb_serdes_mux {
  	bootph-all;
- };
-diff --git a/arch/arm/dts/k3-j721e-sk-u-boot.dtsi b/arch/arm/dts/k3-j721e-sk-u-boot.dtsi
-index 370fe5190b..479b7bcd6f 100644
---- a/arch/arm/dts/k3-j721e-sk-u-boot.dtsi
-+++ b/arch/arm/dts/k3-j721e-sk-u-boot.dtsi
-@@ -89,6 +89,14 @@
- 	bootph-all;
++	u-boot,mux-autoprobe;
  };
  
-+&serdes_ln_ctrl {
-+	u-boot,mux-autoprobe;
-+};
-+
-+&usb_serdes_mux {
-+	u-boot,mux-autoprobe;
-+};
-+
- &main_usbss0_pins_default {
- 	bootph-all;
- };
+ &serdes_wiz2 {
 -- 
 2.34.1
 
