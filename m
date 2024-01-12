@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F839C4725D
-	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 13:46:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB464C4725D
+	for <u-boot@archiver.kernel.org>; Fri, 12 Jan 2024 13:47:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C960A87AB1;
-	Fri, 12 Jan 2024 14:46:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4FDEB87A99;
+	Fri, 12 Jan 2024 14:46:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="E6tHLEm/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="d3aPPkO+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 045F687A98; Fri, 12 Jan 2024 14:46:24 +0100 (CET)
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
+ id E03C987A9F; Fri, 12 Jan 2024 14:46:26 +0100 (CET)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F92587AC2
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 14:46:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D2CA887A98
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 14:46:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-5ce9555d42eso4901708a12.2
- for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 05:46:21 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-5f15a1052b3so60711207b3.1
+ for <u-boot@lists.denx.de>; Fri, 12 Jan 2024 05:46:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705067180; x=1705671980; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Wt9gANHO2Flvg//KPgc+gp1VYhzVIegxb+uZl9qzeoY=;
- b=E6tHLEm/9tS1AjYs+OMf/iYsEqfCNBOeD8YPH46DlXO5Y/e46M2WCUPzrOYm+P7avF
- GhhAGllACAmSpYB5W0Q/YAX/Whkiec8nYyp+E1Mre8f4dAWT7ODYgx5pNiDbkBLFtVQS
- oT+CidzjvhAXLCvlOHMnz4MZnv9nGk0/Fx2Rk1AVojAtLjSSaWL4VV3L4GU6b786vcw8
- n5kr3Xgj7ttGfi5i81VbL7rRZD8oi4t3zcJUEQbvUvtKnlzveAChTvz7y/b8Snre6CuG
- P774kdBHyGi+xxS3s3H/8LfFMDx6mSmno7kB9P72+RuYNC7f1D8IJFxm6FY/r4wtHRNP
- PTIg==
+ d=konsulko.com; s=google; t=1705067183; x=1705671983; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=SLoSF6z/1hwPpnzTBVbwB8ne9/Sysp42emvroEYxTww=;
+ b=d3aPPkO+jrEWmTFHvpMDK5jv/dUUnSlq36gmncCUl/TYpEwPCAtdnxZT3GYwEvwy5t
+ fYGAfiUKJyjcLl3vGDUWtCX2e4VOgDd6D+vVnUpfE06HuTDWvnpP/Z3E8vMtw/5DyRHa
+ D4tDGc4IfjErm/X9pauIDRcUf4yJQwKAjJ+08=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705067180; x=1705671980;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Wt9gANHO2Flvg//KPgc+gp1VYhzVIegxb+uZl9qzeoY=;
- b=aVBnvcOlmc9uZuEd0B7iHaFHTx22UoiCceQ7upMN+FuyFs2/KxvIu2rrMFNhxPR8sH
- W8HJXgGGz5x2edK3p/o/tJOgFSAzvCmcVOX++SotxQktr2avj79fg2f42Tl/sykMvEI9
- fd8UVHaOqWU0ml3jHYGJf3O8CZ5sc1HUQrPCGmApp3bMW2L4MB9IoD6F2iraH+bpuM5F
- NPTRAm0n++PXvzavF4nMg+XKgGn1J+7VDVe6aPKByrm/va6sKvNkKWareKLsJ0Xaa2+s
- H/sl3eH36C2J6ryOpsTAWrf7L0dC0XceK89cwuEjnm0ClsQkDtNWmd2upnP/kGzj84WG
- QN2g==
-X-Gm-Message-State: AOJu0Yy9XKzQlKVV8ywmRQoYb5SZ88rQkHQEhcNFMt+rAxmjXxON/+A9
- 7XsILkXnMORW4u17xCWB+kp1XLCaxUsAPopyBEGxZ9QD5yDiBQ==
-X-Google-Smtp-Source: AGHT+IHFSICLiBX9nWHG1FctCXEQyWsHP6c9kEXvyatM8Nn+MdxUUJQ5SpXTBbzk0ISaehhScHxk5t3rGfXbVVZ265k=
-X-Received: by 2002:a05:6a20:394a:b0:19a:4e80:2152 with SMTP id
- r10-20020a056a20394a00b0019a4e802152mr1261237pzg.83.1705067179715; Fri, 12
- Jan 2024 05:46:19 -0800 (PST)
+ d=1e100.net; s=20230601; t=1705067183; x=1705671983;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SLoSF6z/1hwPpnzTBVbwB8ne9/Sysp42emvroEYxTww=;
+ b=puIg2c+AXwP1cgnItVY30qpwIS3dm42PoUlnz91tThyam+Xj7FLmDpXQGXdFyqF9R/
+ Deczvra0IKySQkZqRFa8j99Noc58C3Ho41ackjOlh2HaKTj59VtSBkNL3AWw0LV4nwyc
+ xtMr93L7OsLnVU/vMKIWA4hZqrMcZpaP1wvO8NxU7vsAr+7aAkBX5N9BaqTE3h/3Ul6P
+ 3CdSJl6WrvdLov5qmZRJRBAFsDgkE6VoNPltnp6UxwKfGH2UzO3+rA1xtBsrp1M6vHvC
+ HVAnuD/FTMsKxfIsa/DwrnQegUZzyXBce17Y8Fo8x5rE5+a8GCjq5LpHmc1r743qJT0Y
+ ACCQ==
+X-Gm-Message-State: AOJu0Yzwc1iKRnRHB4gDdSFeQJGKgkw7K4qks8k8ncbc/Jos53yqii3z
+ 24IpciWGS8TbwwIGo1hx3rjofDUdtvGYkQ==
+X-Google-Smtp-Source: AGHT+IH7XACYS6mXHoCSVf6zRk7nGeFWJCDOYf7MOMIB6kF+L6W3rNE16JMG7pYu1/SwNNs6/+z75w==
+X-Received: by 2002:a81:9894:0:b0:5f8:cf76:e571 with SMTP id
+ p142-20020a819894000000b005f8cf76e571mr1038266ywg.93.1705067183547; 
+ Fri, 12 Jan 2024 05:46:23 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
+ [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
+ gr1-20020a05690c448100b005fb4f8256e1sm1171628ywb.96.2024.01.12.05.46.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 12 Jan 2024 05:46:23 -0800 (PST)
+Date: Fri, 12 Jan 2024 08:46:21 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
+ Brandon Maier <brandon.maier@collins.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] test: CONFIG_UT_BOOTSTD must depend on CONFIG_BOOTSTD
+Message-ID: <20240112134621.GU1610741@bill-the-cat>
+References: <20231216154631.87789-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-References: <20240112-maintainers-ab-v1-0-f2a538eab18a@baylibre.com>
- <20240112-maintainers-ab-v1-1-f2a538eab18a@baylibre.com>
-In-Reply-To: <20240112-maintainers-ab-v1-1-f2a538eab18a@baylibre.com>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Fri, 12 Jan 2024 07:46:08 -0600
-Message-ID: <CAPLW+4kbC27kv2r4riVUvT5XaCBhG+VREEAvD31Fzg5cN9tb9A@mail.gmail.com>
-Subject: Re: [PATCH 1/2] MAINTAINERS: add Mattijs for Android AB
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Tom Rini <trini@konsulko.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="mQ1dU+JPeebDf2dB"
+Content-Disposition: inline
+In-Reply-To: <20231216154631.87789-1-heinrich.schuchardt@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,39 +91,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jan 12, 2024 at 2:40=E2=80=AFAM Mattijs Korpershoek
-<mkorpershoek@baylibre.com> wrote:
->
-> Igor has not been active for quite some time on lore:
-> https://lore.kernel.org/all/?q=3Digor.opaniuk@gmail.com
->
-> I'm interested in helping with maintaining the android_ab
-> command. I'm a long time android/aosp developer and my daily job is
-> still doing android work.
->
-> Add myself as maintainer for Android AB.
->
-> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> ---
 
-Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
+--mQ1dU+JPeebDf2dB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->  MAINTAINERS | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 4fec063a242f..3c73d8c35c4a 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -59,6 +59,7 @@ F:    lib/acpi/
->
->  ANDROID AB
->  M:     Igor Opaniuk <igor.opaniuk@gmail.com>
-> +M:     Mattijs Korpershoek <mkorpershoek@baylibre.com>
->  R:     Sam Protsenko <semen.protsenko@linaro.org>
->  S:     Maintained
->  F:     boot/android_ab.c
->
-> --
-> 2.43.0
->
+On Sat, Dec 16, 2023 at 04:46:31PM +0100, Heinrich Schuchardt wrote:
+
+> Building sandbox_defconfig with
+>=20
+>     CONFIG_BOOTSTD=3Dn
+>     CONFIG_UT_BOOTSTD=3Dy
+>=20
+> leads to an error
+>=20
+>     /usr/bin/ld: test/cmd_ut.o:(.data.rel.cmd_ut_sub+0xc0):
+>     undefined reference to `do_ut_bootstd'
+>=20
+> Add the missing dependency.
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--mQ1dU+JPeebDf2dB
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWhQq0ACgkQFHw5/5Y0
+tywIRQwAoNIdxh6iAfohrVkvSe1B81yu/jDtmSwXqBHhZfVurHeWjsT350AYxWcN
+cN4Ppc56N41tswgOYBnkikULsoWDilmX4j+nrmkqSZeSrYxAXKDgf1gGekUuQ0aP
+oFkt5ETo++uSzYq/udPBCt2bg72WZEP82N6t41ZbhiiXUxcCv6Md06ErHoC+Un5E
+2BHIadGHMmxvsY+zoTR+rTnTfLM6r5RBoO49Bj3kSHSyuH7CDpLggjkK7EEUFize
+0CsTgFzTBc6pqeeWlhKWcb2hTlKldYycrCkGWt1l0dzhj752W6dmGqd5l3dMkfzm
+qfH478A06OPbP8vV3SzWa6bqX8dy1y/b7Y+yCBpagFNNN/GaMv6dUVsPqCC61WPj
+cZnuOxRGj2yrH3qtPNo4dKL13FUNuZfNXMa1nx/I2L7JbLITtxiV3L65sbkdf/3W
+mbQ8+xek73qxlHgGqlikkza+nOnA/mEA/vBVdnsDz3Z14blsw2juxiKX1nge+DAl
+Uwvsx3YA
+=2tWj
+-----END PGP SIGNATURE-----
+
+--mQ1dU+JPeebDf2dB--
