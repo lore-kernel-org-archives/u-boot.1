@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C12EC4706C
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jan 2024 17:58:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FEF1C4706C
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jan 2024 17:59:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E18C487941;
-	Sat, 13 Jan 2024 18:58:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6AA7A87968;
+	Sat, 13 Jan 2024 18:59:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1705168712;
-	bh=OzQD8RTLlgGkKaYlxGEhy6j8cS4l6OmbZOuN4wdlSe0=;
+	s=phobos-20191101; t=1705168751;
+	bh=unb5CfRDroclepYIbU8ri4tI66yqH1qSZaQV9BFLNXQ=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=UK9NdeVYrGvBPHk12wuLsM8VZsZb/8nFKFGEomt1SVW4W2EGkyGkW2cjXXgoTStl9
-	 vYkBRR1HRvLTbUYoSyuTIPP0GsO5cHXkaX3uMRIvglc3xThst1LoVTOB/jvPOX0ADF
-	 qkFA1CBlZwD8m+ndq4LP8ZMcQNob7MrUt8WTWNL+GJeKIDSEV90hW4abcPT1DwdTkE
-	 KYuBS4wzkTvY2unAn+nioGHfGhtbHIOBMuFVfdmmzyZaHWsWyovsV1ihBg3LLDFNgZ
-	 NPoJDekNuHqlukLOWba3j6c4/G4qNBSF1StXr1wqkC5OiWX0LWvuUFTXwsCjlr7z40
-	 8ltTGAoSHhxng==
+	b=GDB0njiPaO8BTlBppemKKXc0S5k0qrsv4qhllvpsIVL0us9ZBDQAB+1HaOiFc7Kp7
+	 2XejNsG/Pte+FGPzC7hwog1B42hF3ZpSPOuoH9OAoVEJuBwfDD6oLOYUpQl06WCdvA
+	 saEPCU9eoaxqQWX471dt2QxqLcytJ4WgcEsdNOrZSmJfPq3w8SBDuqOKmVQmMMVftR
+	 MLMaPGGEPyDABQPkBvG8evgHtrYoTfi+hO2d7ba3BgpSMctsNtZTGdQ6blfexPCxmz
+	 FiyI29Qx3ByzstyQ7rAEFYaitnE+W5ubyYFAgw0dkkxG6rYuwGmVsDk2Zzpo+Liw0C
+	 aEW9nR1IxgzXg==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id EF42C87134;
- Sat, 13 Jan 2024 18:58:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id A48D78793C;
+ Sat, 13 Jan 2024 18:59:09 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1705168706;
- bh=OzQD8RTLlgGkKaYlxGEhy6j8cS4l6OmbZOuN4wdlSe0=;
+ s=phobos-20191101; t=1705168750;
+ bh=unb5CfRDroclepYIbU8ri4tI66yqH1qSZaQV9BFLNXQ=;
  h=From:To:Cc:Subject:Date:From;
- b=I0/c6qMI5H4ALupYQukQokWHR6h0LgevL5SlzcqDY4kZHVHdfRRY4Yo4T74+pOYRk
- 4GZewKiXp9Jkr1+jbYTtCwLB/XFr9m7YU1XuuL3SvdusuOeSC8sQHUVC7J17RvtR6O
- YIq47nPkAkodctG41xlUOE68JcrlY9EWijnJ8K8nHEVyrPgYz0xb92eM412bnpb/e5
- q1HCb02QYa7j99hb340XM16YZWxJzvDC2CXjyjBd2FUKpoQVq0Zpq3hbTqVSF4ADD+
- E0G+auHJwBGgxH3HulY2pOoLUMhVGANLO8bDvCFe8Am5C5bbLgkeEOChHBB/HkO3WU
- KsE0PIKlsulRw==
+ b=Vm2zxSbdj4gHGZkdNu8qRTmb7RSUris2lqPXhuseV2dVBgoqtofmnLAYbuJxKUjR4
+ UPZ0IJC+eBwaGsaKrtT+IDsmFAtWrfw4i2S4/52OPBqQ0Iv4UkdAuJcmxMebgbVKN+
+ WqHQOVvy295r29fzFafMCMZAckCU7qEOhcxFMHcgOD7i1ubOfwH1P/l+mBgtP2FGbB
+ Nnjr8Uago7L8zTbEtD7SEzaqB9BNN9D0wgQl/TtbylYxQL4QF2JOnD+H7JKkFSqhTy
+ NM1ByDZJJ0YkV1C2J6+aSUlwLlf33oNOpxOSeQKeeJkztAe7HpdZpjTCRMlQkY/lT2
+ Mv9ifUiz1Yr7A==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@dh-electronics.com,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH] ARM: stm32: Set stdio to serial on DH STM32MP15xx DHSOM
-Date: Sat, 13 Jan 2024 18:57:27 +0100
-Message-ID: <20240113175811.157221-1-marex@denx.de>
+Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ u-boot@dh-electronics.com
+Subject: [PATCH] ARM: imx: Set stdio to serial on DH i.MX8M Plus DHCOM
+Date: Sat, 13 Jan 2024 18:58:30 +0100
+Message-ID: <20240113175856.157248-1-marex@denx.de>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -79,48 +79,51 @@ Sort the default environment as well.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Stefano Babic <sbabic@denx.de>
 Cc: u-boot@dh-electronics.com
-Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- include/configs/stm32mp15_dh_dhsom.h | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+ include/configs/imx8mp_dhcom_pdk2.h | 17 ++++++++++-------
+ 1 file changed, 10 insertions(+), 7 deletions(-)
 
-diff --git a/include/configs/stm32mp15_dh_dhsom.h b/include/configs/stm32mp15_dh_dhsom.h
-index 8ff882264f4..de39b19219d 100644
---- a/include/configs/stm32mp15_dh_dhsom.h
-+++ b/include/configs/stm32mp15_dh_dhsom.h
-@@ -12,14 +12,13 @@
- #define PHY_ANEG_TIMEOUT		20000
+diff --git a/include/configs/imx8mp_dhcom_pdk2.h b/include/configs/imx8mp_dhcom_pdk2.h
+index d022faaa91a..ea32fe11a52 100644
+--- a/include/configs/imx8mp_dhcom_pdk2.h
++++ b/include/configs/imx8mp_dhcom_pdk2.h
+@@ -28,15 +28,9 @@
+ #define CFG_SYS_FSL_USDHC_NUM	2
+ #define CFG_SYS_FSL_ESDHC_ADDR	0
  
- #ifdef CONFIG_SPL_BUILD
 -#define CFG_EXTRA_ENV_SETTINGS					\
 +#define CFG_EXTRA_ENV_SETTINGS						\
- 	"dfu_alt_info_ram=u-boot.itb ram "				\
- 			__stringify(CONFIG_SPL_LOAD_FIT_ADDRESS)	\
- 			" 0x800000\0"
- #endif
- 
--#define STM32MP_BOARD_EXTRA_ENV \
--	"usb_pgood_delay=1000\0" \
-+#define STM32MP_BOARD_EXTRA_ENV						\
- 	"dh_update_sd_to_emmc=" /* Install U-Boot from SD to eMMC */	\
- 		"setexpr loadaddr1 ${loadaddr} + 0x1000000 && "		\
- 		"load mmc 0:4 ${loadaddr1} boot/u-boot-spl.stm32 && "	\
-@@ -49,7 +48,11 @@
- 		"sf update ${loadaddr1} 0x40000 ${filesize1} && "	\
- 		"sf update ${loadaddr} 0x80000 ${filesize} && "		\
- 		"env set filesize1 && env set loadaddr1\0"		\
--	"update_sf=run dh_update_sd_to_sf\0"
+ 	"altbootcmd=run bootcmd ; reset\0"				\
+ 	"bootlimit=3\0"							\
+-	"kernel_addr_r=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0"		\
+-	"pxefile_addr_r=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0"	\
+-	"ramdisk_addr_r=0x58000000\0"					\
+-	"scriptaddr=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0"		\
+-	/* Give slow devices beyond USB HUB chance to come up. */	\
+-	"usb_pgood_delay=2000\0"					\
+ 	"dfu_alt_info="							\
+ 		/* RAM block at DRAM offset 256..768 MiB */		\
+ 		"ram ram0=ram ram 0x50000000 0x20000000&"		\
+@@ -68,6 +62,15 @@
+ 	"dh_update_emmc_to_sf="						\
+ 		"load mmc 1:1 ${loadaddr} boot/flash.bin && "		\
+ 		"run dh_update_sf_gen_fcfb dh_update_sf_write_data\0"	\
++	"kernel_addr_r=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0"		\
++	"pxefile_addr_r=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0"	\
++	"ramdisk_addr_r=0x58000000\0"					\
++	"scriptaddr=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0"		\
 +	"stdin=serial\0"						\
 +	"stdout=serial\0"						\
 +	"stderr=serial\0"						\
-+	"update_sf=run dh_update_sd_to_sf\0"				\
-+	"usb_pgood_delay=1000\0"
++	/* Give slow devices beyond USB HUB chance to come up. */	\
++	"usb_pgood_delay=2000\0"					\
+ 	BOOTENV
  
- 
- #include <configs/stm32mp15_common.h>
+ #define BOOT_TARGET_DEVICES(func)	\
 -- 
 2.43.0
 
