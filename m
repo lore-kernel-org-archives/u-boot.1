@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FEF1C4706C
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jan 2024 17:59:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97369C4706C
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jan 2024 18:00:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AA7A87968;
-	Sat, 13 Jan 2024 18:59:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0962D8793C;
+	Sat, 13 Jan 2024 18:59:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1705168751;
-	bh=unb5CfRDroclepYIbU8ri4tI66yqH1qSZaQV9BFLNXQ=;
+	s=phobos-20191101; t=1705168799;
+	bh=u6LayEthrZXYIPzMEYyPP6Z36QGi3m/52fjPd9vaiUw=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=GDB0njiPaO8BTlBppemKKXc0S5k0qrsv4qhllvpsIVL0us9ZBDQAB+1HaOiFc7Kp7
-	 2XejNsG/Pte+FGPzC7hwog1B42hF3ZpSPOuoH9OAoVEJuBwfDD6oLOYUpQl06WCdvA
-	 saEPCU9eoaxqQWX471dt2QxqLcytJ4WgcEsdNOrZSmJfPq3w8SBDuqOKmVQmMMVftR
-	 MLMaPGGEPyDABQPkBvG8evgHtrYoTfi+hO2d7ba3BgpSMctsNtZTGdQ6blfexPCxmz
-	 FiyI29Qx3ByzstyQ7rAEFYaitnE+W5ubyYFAgw0dkkxG6rYuwGmVsDk2Zzpo+Liw0C
-	 aEW9nR1IxgzXg==
+	b=A9ljclFBW1mUDAk8BIH6zLBm/asaQK54hhE6hUQ/HwEhfrQqD9+eUU0uNOX52DPN2
+	 chHTtsisADurnw+tVCHqy3cAVyAVZwqr0pYGSPkplC+h4G/2pSQaSyUI9yJ42ZGg6Q
+	 c4uEEW0++ZsEMG6+uHxMfWLbhk+DWWwo2BYz8I7wi4OIFBOH2y+mYz9mFlBUbE2z1r
+	 f+nFKqrsQ0AxhXoLNWq0zWVFD0/CLCYgsx8YCxfRSodvNdzXWIdg/xfgKjNiE+hpxK
+	 a3Hy/B0cp/SVAyzewrUhUEleEAsrSbYJbXPso3lIVxgB/ZWVfm4kokUjQnM2OR3c2o
+	 LYFLLQXW20rdg==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id A48D78793C;
- Sat, 13 Jan 2024 18:59:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 261E287134;
+ Sat, 13 Jan 2024 18:59:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1705168750;
- bh=unb5CfRDroclepYIbU8ri4tI66yqH1qSZaQV9BFLNXQ=;
+ s=phobos-20191101; t=1705168797;
+ bh=u6LayEthrZXYIPzMEYyPP6Z36QGi3m/52fjPd9vaiUw=;
  h=From:To:Cc:Subject:Date:From;
- b=Vm2zxSbdj4gHGZkdNu8qRTmb7RSUris2lqPXhuseV2dVBgoqtofmnLAYbuJxKUjR4
- UPZ0IJC+eBwaGsaKrtT+IDsmFAtWrfw4i2S4/52OPBqQ0Iv4UkdAuJcmxMebgbVKN+
- WqHQOVvy295r29fzFafMCMZAckCU7qEOhcxFMHcgOD7i1ubOfwH1P/l+mBgtP2FGbB
- Nnjr8Uago7L8zTbEtD7SEzaqB9BNN9D0wgQl/TtbylYxQL4QF2JOnD+H7JKkFSqhTy
- NM1ByDZJJ0YkV1C2J6+aSUlwLlf33oNOpxOSeQKeeJkztAe7HpdZpjTCRMlQkY/lT2
- Mv9ifUiz1Yr7A==
+ b=oreXoWqn+NLVRT8jUBd54Gsy8M4Pv8x3+FgjZmf8xl9XZ7PL4mOP18OnTUY0Sij6e
+ 75fB3BIY0NIyISz1S23WnxYiDb+g49g33TL0rxQn+S9NI3/pVnGRv4ISZXav2tQFhx
+ UoCk+sXZRGhqZmrHC9CCnOmE5Ex3GnHkGI1nqagEkTCJdgqiPGGBvPjBGr2sz6fEjt
+ L3Vo1owqPJIt//wdejN15L7Mr7NVSSPPDPMsZ6FPVEtNnen85wJ1JB3mOgg4vqZVJ0
+ 7TZPPh7iw8i5N/9PMyDfrYLJjFy+Uat+FOQjKNWwe6xgFLGPJqEGvFN7tiNz/4UKkN
+ +0J2EdAcrImug==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
- u-boot@dh-electronics.com
-Subject: [PATCH] ARM: imx: Set stdio to serial on DH i.MX8M Plus DHCOM
-Date: Sat, 13 Jan 2024 18:58:30 +0100
-Message-ID: <20240113175856.157248-1-marex@denx.de>
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>
+Subject: [PATCH] ARM: imx: Set stdio to serial on Data Modul i.MX8M Mini/Plus
+ eDM SBC
+Date: Sat, 13 Jan 2024 18:59:13 +0100
+Message-ID: <20240113175941.157275-1-marex@denx.de>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -82,48 +82,69 @@ Signed-off-by: Marek Vasut <marex@denx.de>
 Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
 Cc: Fabio Estevam <festevam@gmail.com>
 Cc: Stefano Babic <sbabic@denx.de>
-Cc: u-boot@dh-electronics.com
 ---
- include/configs/imx8mp_dhcom_pdk2.h | 17 ++++++++++-------
- 1 file changed, 10 insertions(+), 7 deletions(-)
+ include/configs/imx8mm_data_modul_edm_sbc.h | 11 +++++++----
+ include/configs/imx8mp_data_modul_edm_sbc.h |  9 ++++++---
+ 2 files changed, 13 insertions(+), 7 deletions(-)
 
-diff --git a/include/configs/imx8mp_dhcom_pdk2.h b/include/configs/imx8mp_dhcom_pdk2.h
-index d022faaa91a..ea32fe11a52 100644
---- a/include/configs/imx8mp_dhcom_pdk2.h
-+++ b/include/configs/imx8mp_dhcom_pdk2.h
-@@ -28,15 +28,9 @@
+diff --git a/include/configs/imx8mm_data_modul_edm_sbc.h b/include/configs/imx8mm_data_modul_edm_sbc.h
+index f7d2b660c1f..b777fe6073b 100644
+--- a/include/configs/imx8mm_data_modul_edm_sbc.h
++++ b/include/configs/imx8mm_data_modul_edm_sbc.h
+@@ -34,13 +34,11 @@
  #define CFG_SYS_FSL_USDHC_NUM	2
  #define CFG_SYS_FSL_ESDHC_ADDR	0
  
 -#define CFG_EXTRA_ENV_SETTINGS					\
 +#define CFG_EXTRA_ENV_SETTINGS						\
- 	"altbootcmd=run bootcmd ; reset\0"				\
+ 	"altbootcmd=setenv devpart 2 && run bootcmd ; reset\0"		\
  	"bootlimit=3\0"							\
--	"kernel_addr_r=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0"		\
--	"pxefile_addr_r=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0"	\
--	"ramdisk_addr_r=0x58000000\0"					\
--	"scriptaddr=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0"		\
+ 	"devtype=mmc\0"							\
+ 	"devpart=1\0"							\
 -	/* Give slow devices beyond USB HUB chance to come up. */	\
 -	"usb_pgood_delay=2000\0"					\
  	"dfu_alt_info="							\
  		/* RAM block at DRAM offset 256..768 MiB */		\
  		"ram ram0=ram ram 0x50000000 0x20000000&"		\
-@@ -68,6 +62,15 @@
- 	"dh_update_emmc_to_sf="						\
- 		"load mmc 1:1 ${loadaddr} boot/flash.bin && "		\
- 		"run dh_update_sf_gen_fcfb dh_update_sf_write_data\0"	\
-+	"kernel_addr_r=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0"		\
-+	"pxefile_addr_r=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0"	\
-+	"ramdisk_addr_r=0x58000000\0"					\
-+	"scriptaddr=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0"		\
+@@ -76,6 +74,11 @@
+ 			"setenv stderr ${stderr},nc && "		\
+ 			"setenv stdout ${stdout},nc && "		\
+ 			"setenv stdin ${stdin},nc ; "			\
+-		"fi"
++		"fi\0"							\
 +	"stdin=serial\0"						\
 +	"stdout=serial\0"						\
 +	"stderr=serial\0"						\
 +	/* Give slow devices beyond USB HUB chance to come up. */	\
-+	"usb_pgood_delay=2000\0"					\
- 	BOOTENV
++	"usb_pgood_delay=2000\0"
  
- #define BOOT_TARGET_DEVICES(func)	\
+ #endif
+diff --git a/include/configs/imx8mp_data_modul_edm_sbc.h b/include/configs/imx8mp_data_modul_edm_sbc.h
+index 11ac3c00f7e..8d7954004c2 100644
+--- a/include/configs/imx8mp_data_modul_edm_sbc.h
++++ b/include/configs/imx8mp_data_modul_edm_sbc.h
+@@ -29,8 +29,6 @@
+ 	"bootlimit=3\0"							\
+ 	"devtype=mmc\0"							\
+ 	"devpart=1\0"							\
+-	/* Give slow devices beyond USB HUB chance to come up. */	\
+-	"usb_pgood_delay=2000\0"					\
+ 	"dmo_update_env="						\
+ 		"setenv dmo_update_env true ; saveenv ; saveenv\0"	\
+ 	"dmo_update_sf_write_data="					\
+@@ -40,6 +38,11 @@
+ 		"run dmo_update_sf_write_data\0"			\
+ 	"dmo_update_sd_to_sf="						\
+ 		"load mmc 1:1 ${loadaddr} boot/flash.bin && "		\
+-		"run dmo_update_sf_write_data\0"
++		"run dmo_update_sf_write_data\0"			\
++	"stdin=serial\0"						\
++	"stdout=serial\0"						\
++	"stderr=serial\0"						\
++	/* Give slow devices beyond USB HUB chance to come up. */	\
++	"usb_pgood_delay=2000\0"
+ 
+ #endif
 -- 
 2.43.0
 
