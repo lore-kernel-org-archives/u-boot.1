@@ -4,77 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 652D4C4706C
-	for <u-boot@archiver.kernel.org>; Sat, 13 Jan 2024 17:22:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C12EC4706C
+	for <u-boot@archiver.kernel.org>; Sat, 13 Jan 2024 17:58:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70A3787946;
-	Sat, 13 Jan 2024 18:22:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E18C487941;
+	Sat, 13 Jan 2024 18:58:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VrDOougU";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C04FD8794A; Sat, 13 Jan 2024 18:22:43 +0100 (CET)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1705168712;
+	bh=OzQD8RTLlgGkKaYlxGEhy6j8cS4l6OmbZOuN4wdlSe0=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=UK9NdeVYrGvBPHk12wuLsM8VZsZb/8nFKFGEomt1SVW4W2EGkyGkW2cjXXgoTStl9
+	 vYkBRR1HRvLTbUYoSyuTIPP0GsO5cHXkaX3uMRIvglc3xThst1LoVTOB/jvPOX0ADF
+	 qkFA1CBlZwD8m+ndq4LP8ZMcQNob7MrUt8WTWNL+GJeKIDSEV90hW4abcPT1DwdTkE
+	 KYuBS4wzkTvY2unAn+nioGHfGhtbHIOBMuFVfdmmzyZaHWsWyovsV1ihBg3LLDFNgZ
+	 NPoJDekNuHqlukLOWba3j6c4/G4qNBSF1StXr1wqkC5OiWX0LWvuUFTXwsCjlr7z40
+	 8ltTGAoSHhxng==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6497387930
- for <u-boot@lists.denx.de>; Sat, 13 Jan 2024 18:22:41 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-783137d7fb4so534075185a.2
- for <u-boot@lists.denx.de>; Sat, 13 Jan 2024 09:22:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705166560; x=1705771360; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=yqpJmjO1X5xiMNkgiYyR18HXAlfd2fdtiwo5b5txMsg=;
- b=VrDOougUi9tji76ZnHhvqX+6zmX7KnP2+OBR7w461s6tic0ojjVQe+l2O7k3B2MsQd
- MgApHy9spYdp2Wy2dAiaO/yclYLtigOCJhWl9nK2hqWX42luySvYKVJROauIR/pivBlB
- lA/UReB8gCLiUVz2cUKZ2QCl+4/eok5RAaPvA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705166560; x=1705771360;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yqpJmjO1X5xiMNkgiYyR18HXAlfd2fdtiwo5b5txMsg=;
- b=gjOlp13YOZsHMCqKzvBPGxX4aOmFUKZ+Ci10kTTlLfm3etlT5T0k1lF8YXkWbtspT6
- b4x1TeKbhFjrP3iydd3WlorzPaay4AnqOXHqazwUaHofSNWO6nZXkytkRGh+jAcpjFSy
- Clm6/stZkHACV9VLACFfsWBjA+4UahjQHet1mIFyBOPOZ01+i6U24uSCxC6AjlGEw20+
- eMvEjlRF0Lr5WFPG0Qsoirp/vBCerfNPu7rUtirObZ5h+vSKcgpFcasZdNnsRBUOFRkP
- YrD/ed1s0GyPE74EwXjijbKDv/UCcCMJmLmQ7vxL7oDQkSCKa4N3tl5aPB9pC7rhVDD2
- WhaA==
-X-Gm-Message-State: AOJu0YwYeJ7MEGZcJAhCTB4FhlyvsXrRENTE6a30cBdhvw7u4mIMpeAg
- mXlRnQK99KRISNCWsC2siEZ5AB8CHHjMrQ==
-X-Google-Smtp-Source: AGHT+IEW9M1LTgldRtfyl9fyJ+isEeg7jeMB62PKE68C1LJ5IpyBmMoQWi7iR4/5NzhN9yLDzNHxzg==
-X-Received: by 2002:a05:622a:1342:b0:429:cb83:2019 with SMTP id
- w2-20020a05622a134200b00429cb832019mr3197334qtk.47.1705166560080; 
- Sat, 13 Jan 2024 09:22:40 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- t26-20020ac86a1a000000b00419732075b4sm2356933qtr.84.2024.01.13.09.22.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 13 Jan 2024 09:22:39 -0800 (PST)
-Date: Sat, 13 Jan 2024 12:22:36 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Josua Mayer <josua@solid-run.com>
-Cc: Dennis Gilmore <dgilmore@redhat.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 3/3] arm: mvebu: helios-4: add defconfig for spi booting
-Message-ID: <20240113172236.GI1610741@bill-the-cat>
-References: <20240113-helios4-spi-v1-0-2a5663a10e6a@solid-run.com>
- <20240113-helios4-spi-v1-3-2a5663a10e6a@solid-run.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id EF42C87134;
+ Sat, 13 Jan 2024 18:58:25 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1705168706;
+ bh=OzQD8RTLlgGkKaYlxGEhy6j8cS4l6OmbZOuN4wdlSe0=;
+ h=From:To:Cc:Subject:Date:From;
+ b=I0/c6qMI5H4ALupYQukQokWHR6h0LgevL5SlzcqDY4kZHVHdfRRY4Yo4T74+pOYRk
+ 4GZewKiXp9Jkr1+jbYTtCwLB/XFr9m7YU1XuuL3SvdusuOeSC8sQHUVC7J17RvtR6O
+ YIq47nPkAkodctG41xlUOE68JcrlY9EWijnJ8K8nHEVyrPgYz0xb92eM412bnpb/e5
+ q1HCb02QYa7j99hb340XM16YZWxJzvDC2CXjyjBd2FUKpoQVq0Zpq3hbTqVSF4ADD+
+ E0G+auHJwBGgxH3HulY2pOoLUMhVGANLO8bDvCFe8Am5C5bbLgkeEOChHBB/HkO3WU
+ KsE0PIKlsulRw==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH] ARM: stm32: Set stdio to serial on DH STM32MP15xx DHSOM
+Date: Sat, 13 Jan 2024 18:57:27 +0100
+Message-ID: <20240113175811.157221-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oVxlOHfFA4VOJfRj"
-Content-Disposition: inline
-In-Reply-To: <20240113-helios4-spi-v1-3-2a5663a10e6a@solid-run.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,66 +65,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+In case CONSOLE_MUX and SYS_CONSOLE_IS_IN_ENV are enabled, the console
+stdin, stdout, stderr must be defined in environment. Define the default
+settings to fix the following warning on boot:
 
---oVxlOHfFA4VOJfRj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+"
+In:    No input devices available!
+Out:   No output devices available!
+Err:   No error devices available!
+"
 
-On Sat, Jan 13, 2024 at 05:36:57PM +0100, Josua Mayer wrote:
+Sort the default environment as well.
 
-> Add a new defconfig based on existing helios4_config file to support
-> booting from spi flash.
->=20
-> Settings for environment location are based on vendor u-boot:
-> https://github.com/kobol-io/u-boot/blob/helios4/include/configs/helios4.h=
-#L59
->=20
-> A separate defconfig is required because the options are not
-> intuitive from menuconfig, numeric values in particular.
->=20
-> Signed-off-by: Josua Mayer <josua@solid-run.com>
-> ---
->  configs/helios4_spi_defconfig | 81 +++++++++++++++++++++++++++++++++++++=
-++++++
->  1 file changed, 81 insertions(+)
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: u-boot@dh-electronics.com
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+ include/configs/stm32mp15_dh_dhsom.h | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
-So, a super new thing that might be of interest, but please try this
-since I'd like to prove/disprove the use-case.  This could instead be:
-configs/helios4_spi_defconfig:
-#include "configs/helios4_defconfig"
-=2E.. enable/disable options specific to the SPI boot use case ...
+diff --git a/include/configs/stm32mp15_dh_dhsom.h b/include/configs/stm32mp15_dh_dhsom.h
+index 8ff882264f4..de39b19219d 100644
+--- a/include/configs/stm32mp15_dh_dhsom.h
++++ b/include/configs/stm32mp15_dh_dhsom.h
+@@ -12,14 +12,13 @@
+ #define PHY_ANEG_TIMEOUT		20000
+ 
+ #ifdef CONFIG_SPL_BUILD
+-#define CFG_EXTRA_ENV_SETTINGS					\
++#define CFG_EXTRA_ENV_SETTINGS						\
+ 	"dfu_alt_info_ram=u-boot.itb ram "				\
+ 			__stringify(CONFIG_SPL_LOAD_FIT_ADDRESS)	\
+ 			" 0x800000\0"
+ #endif
+ 
+-#define STM32MP_BOARD_EXTRA_ENV \
+-	"usb_pgood_delay=1000\0" \
++#define STM32MP_BOARD_EXTRA_ENV						\
+ 	"dh_update_sd_to_emmc=" /* Install U-Boot from SD to eMMC */	\
+ 		"setexpr loadaddr1 ${loadaddr} + 0x1000000 && "		\
+ 		"load mmc 0:4 ${loadaddr1} boot/u-boot-spl.stm32 && "	\
+@@ -49,7 +48,11 @@
+ 		"sf update ${loadaddr1} 0x40000 ${filesize1} && "	\
+ 		"sf update ${loadaddr} 0x80000 ${filesize} && "		\
+ 		"env set filesize1 && env set loadaddr1\0"		\
+-	"update_sf=run dh_update_sd_to_sf\0"
++	"stdin=serial\0"						\
++	"stdout=serial\0"						\
++	"stderr=serial\0"						\
++	"update_sf=run dh_update_sd_to_sf\0"				\
++	"usb_pgood_delay=1000\0"
+ 
+ 
+ #include <configs/stm32mp15_common.h>
+-- 
+2.43.0
 
-And so now both boards will otherwise be kept in-sync for general config
-changes.  It could further be done as:
-configs/helios4_spi_defconfig:
-#include "configs/helios4_defconfig"
-#include "board/kobol/helios4/spiboot.config"
-
-And have board/kobol/helios4/spiboot.config contain the SPI-boot
-specific options.  This path would allow for:
-make helios4_defconfig spiboot.config
-to be a valid alternative way of configuring a build for spiboot.
-
---=20
-Tom
-
---oVxlOHfFA4VOJfRj
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWixtkACgkQFHw5/5Y0
-tywq2Av/SUC4juSuAn5MYLVd3ol2cQL2k7+IZXiwAtKlMdp3S/paJYaY1xO1bNvN
-IF4QlXnds7Iv5XtdwlmUAh10+wGBpvafCN78337nUkOcCYrVm8biGxJUYMZDv6rz
-20Oni0PYUTl336pspqfv+99IWOtf6mTNNJ8yTsIMwRAim/2hN/gE/AAGwni2xetF
-L9lVfWsPVuArePv4WwSWwMgoUzU3s7nba48lO0GxaSkS6L6Y3oFGMut+qKbN6yYY
-rOq8vU28relkb9ilhoc7lbNqZo5mlygNKF68G9MhCdzlAtUHip/AeQOmMPYy3LdB
-2HB+rCHwqG7yW09EN9r4IYxSQ0urpc5RDPI7NekbkelkAhVXNMexdAQVXsw+RAKc
-ZaY6RBwQ6VWHUC7KfQrB82Ej+oV/Neq4TR6U82nAz6E2RRWzXrX9Ygs8pmHXc8rt
-e+D9Pwi2q7iJPLapiWGeivR5mX1YEEpvfqQGW/KHDlCEN+RNvY6TxD+9L+CpogLl
-t3nlg2Xu
-=xz5H
------END PGP SIGNATURE-----
-
---oVxlOHfFA4VOJfRj--
