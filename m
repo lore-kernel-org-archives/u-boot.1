@@ -4,74 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7027AC47077
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jan 2024 14:41:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE204C4707B
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jan 2024 14:50:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 859F187707;
-	Sun, 14 Jan 2024 15:41:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 15D3387707;
+	Sun, 14 Jan 2024 15:50:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=ik.me
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gF4icYTA";
+	dkim=fail reason="signature verification failed" (1024-bit key; secure) header.d=ik.me header.i=@ik.me header.b="STl4ZU/v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC08587873; Sun, 14 Jan 2024 15:41:54 +0100 (CET)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0085D87933; Sat, 13 Jan 2024 20:30:27 +0100 (CET)
+Received: from smtp-8fab.mail.infomaniak.ch (smtp-8fab.mail.infomaniak.ch
+ [IPv6:2001:1600:3:17::8fab])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A01B186E05
- for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 15:41:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A93487883
+ for <u-boot@lists.denx.de>; Sat, 13 Jan 2024 20:30:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=ik.me
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2cc9fa5e8e1so92641991fa.3
- for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 06:41:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705243312; x=1705848112; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ksSZ5cyaRiil68fDDkeXi34OS46o72Q4E3J9TkupU5Q=;
- b=gF4icYTA+vhFkgbaC15whoZw7s/KQedpjAtFm7NXyXfPU4shdfZfvvL0c1BIbxcodg
- +B15HDOceBBU3E4pQR8NqBB5DcgyH8AO/nrnId/F+20c/2DLb6dvqVFXupAQmh11Kxq9
- 8rChgdsxOiCWlYbI2US+U+2jV/huIZ9yJso0GAoL1gIT6RgWqfNT5K3hJi2MOypZs/QF
- 369JgrYDLhtBsqdL8Nim0wl+sDwgzWOuZ0F2mf0f47oBG70XCSVCLa3hPkuOaMylhqHK
- 30BBChd2JT0Wpwwu5NdCJUv/tqoV9tsnpvMbK8vQzsDvH6L2odzmA6SJPI9ksA2hXJ6B
- U2Yw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705243312; x=1705848112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ksSZ5cyaRiil68fDDkeXi34OS46o72Q4E3J9TkupU5Q=;
- b=IZJraifJtRalXGvTimPDdsx0jpUvDLZ6DJPNd1S9DC5x89QjzSkBUE9bCyt8OiOj6h
- gVxN4d5+bpULHxgwUi33dMIoqltFKjN24VxiN7GBQNVpsVz0e06Ijj6v8+md/t93D55o
- YmKW1pHwqGuG4SPWPEIC1RPMV7Vlotiq1V5mr9uSPbTibZGgXLbSJ9UORXCIpQxJT8jE
- Cc+eLvGQNdA3GG2INy40uM26jFk3s8cI2AODRdKEBd+32P1fyQbLeHWoglvYhV6IdbHN
- CEnPuhJlBi7Q5NwHS5eAbzdZHFtOOR+4Va7n6FxmX8dxfQyyc9/Wzp2ju34KjPe4E54K
- kTPg==
-X-Gm-Message-State: AOJu0YyH/gzd/VcTlP9JPNcL7kkZdkmBRj7b6iD7+ywr48HHb7ERKP70
- HnBtrOT46YL9vETDeIO2eeWNcewXo31mCzyJGhsSyeGz
-X-Google-Smtp-Source: AGHT+IERCkEqwwjxabNX0E/rbSEo34jhvuGbE0pBq1c8BBIsH2i2jB1v5BMUQAsES4SLJ3WFGIFVm5TT25pPRe3GhaA=
-X-Received: by 2002:a2e:ab1a:0:b0:2cd:9fbc:d3d3 with SMTP id
- ce26-20020a2eab1a000000b002cd9fbcd3d3mr1967780ljb.69.1705243311558; Sun, 14
- Jan 2024 06:41:51 -0800 (PST)
+ spf=pass smtp.mailfrom=philippe.coval@ik.me
+Received: from smtp-3-0000.mail.infomaniak.ch (unknown [10.4.36.107])
+ by smtp-2-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TC7ly6TyZzMq0PH;
+ Sat, 13 Jan 2024 19:30:22 +0000 (UTC)
+Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4TC7lx6Frjz3Y; Sat, 13 Jan 2024 20:30:21 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ik.me; s=20200325;
+ t=1705174222; bh=CXaHd5Rc7VhT2R3ykqrzPUViELzewjef899gS2glkrM=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=STl4ZU/vGLEwnZZGb9jNnt92VVfc6N3/JvbN9YqCa2qIc4+XnRllofkmlYS6Pncn4
+ 6nl3rKVs3Yi7A9moh+Wbk2vLN++SgXWbmoXvngn/vqjcMbEm9rhLyADi2e+c+03CiP
+ OHU39trbVfbas+MFMWBWBx38SWge+/wXPddJUo+M=
+Message-ID: <ff57cae8-efc4-4e30-abce-83e7d43bde28@ik.me>
+Date: Sat, 13 Jan 2024 20:30:21 +0100
 MIME-Version: 1.0
-References: <20240114101701.23070-1-clamor95@gmail.com>
- <20240114101701.23070-2-clamor95@gmail.com>
-In-Reply-To: <20240114101701.23070-2-clamor95@gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Sun, 14 Jan 2024 14:41:40 +0000
-Message-ID: <CALeDE9N6kn9Q-Uafx9-3_3xPUhLj1QN=h6DemYturrBUM5nwmQ@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] cmd: bootmenu: rename U-Boot console to Exit
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, Raymond Mao <raymond.mao@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Masahisa Kojima <masahisa.kojima@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: sunxi: Reduce inrush current on Olimex
+ A20-OLinuXino_MICRO
+Content-Language: en-US
+To: Andre Przywara <andre.przywara@arm.com>, Philippe Coval <rzr@users.sf.net>
+Cc: u-boot@lists.denx.de, Hans de Goede <hdegoede@redhat.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Sam Edwards <CFSworks@gmail.com>,
+ Samuel Holland <samuel@sholland.org>, Tom Rini <trini@konsulko.com>,
+ Olliver Schinagl <oliver@schinagl.nl>
+References: <20240106222142.170219-1-rzr@users.sf.net>
+ <20240112160100.274ff616@donnerap.manchester.arm.com>
+From: Philippe Coval <philippe.coval@ik.me>
+In-Reply-To: <20240112160100.274ff616@donnerap.manchester.arm.com>
+X-Infomaniak-Routing: alpha
+X-Mailman-Approved-At: Sun, 14 Jan 2024 15:50:38 +0100
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,73 +74,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 14 Jan 2024 at 10:23, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
->
-> It seems that the U-Boot console entry of the bootmenu has lost
-> its original meaning. Now, even if it is chosen, the probability
-> that you will enter the actual U-Boot console is quite low.
-> Boot env, bootflow, bootcommand script may appear, but not the
-> actual console. Hense, let's remove ambiguity and name this
+On 1/12/24 5:01 PM, Andre Przywara wrote:
 
-Hence
-
-> entry by what it actually does: 'Exit' the bootmenu.
+> On Sat,  6 Jan 2024 23:21:34 +0100
+> Philippe Coval<rzr@users.sf.net>  wrote:
 >
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> ---
->  cmd/bootmenu.c | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
->
-> diff --git a/cmd/bootmenu.c b/cmd/bootmenu.c
-> index 987b16889f..69fca710a8 100644
-> --- a/cmd/bootmenu.c
-> +++ b/cmd/bootmenu.c
-> @@ -119,7 +119,7 @@ static char *bootmenu_choice_entry(void *data)
->                                 iter = iter->next;
->                         return iter->key;
->                 case BKEY_QUIT:
-> -                       /* Quit by choosing the last entry - U-Boot console */
-> +                       /* Quit by choosing the last entry - Exit */
+(...)
+> thanks for taking care of upstreaming this!
 
-I think just put "Set the last entry to Exit"
+yea I should have done this earlier !
 
->                         iter = menu->first;
->                         while (iter->next)
->                                 iter = iter->next;
-> @@ -361,15 +361,15 @@ static struct bootmenu_data *bootmenu_create(int delay)
->         }
->  #endif
->
-> -       /* Add U-Boot console entry at the end */
-> +       /* Add Exit entry at the end */
->         if (i <= MAX_COUNT - 1) {
->                 entry = malloc(sizeof(struct bootmenu_entry));
->                 if (!entry)
->                         goto cleanup;
->
-> -               /* Add Quit entry if entering U-Boot console is disabled */
-> +               /* Add Quit entry if exiting to U-Boot console is disabled */
+>> This change fix reboot, it was tested on debian-12
+> So I am wondering why this only comes up now. Was that always broken,
 
-s/Quit/Exit/
+I assume yes, it has been reported a couple of time elsewhere:
 
->                 if (!IS_ENABLED(CONFIG_BOOTMENU_DISABLE_UBOOT_CONSOLE))
-> -                       entry->title = strdup("U-Boot console");
-> +                       entry->title = strdup("Exit");
->                 else
->                         entry->title = strdup("Quit");
->
-> @@ -532,7 +532,7 @@ static enum bootmenu_ret bootmenu_show(int delay)
->                 title = strdup(iter->title);
->                 command = strdup(iter->command);
->
-> -               /* last entry is U-Boot console or Quit */
-> +               /* last entry is Exit or Quit */
+https://forum.openwrt.org/t/rebot-issue-with-a20-olinuxino-micro/56720/2?u=rzr
 
-"Last entry is Exit" as I don't see Quit referred to.
+Also, I just filed (And shared patch):
 
->                 if (iter->num == iter->menu->count - 1) {
->                         ret = BOOTMENU_RET_QUIT;
->                         goto cleanup;
-> --
-> 2.40.1
->
+https://bugs.debian.org/1060752
+
+I've been using armbian's lime images on micro that had the fix , and 
+forgot about this problem
+until  I gave a try at freedom box images for micro
+
+> It would be good if you can elaborate about that in the commit message, to
+> show *why* your patch is needed.
+
+OK I'll improve commit message with details I know
+and also apply to the eMMC defconfig (testers welcome?)
+waiting for Olivier feedback then I'll push a V2 of patch to:
+
+http://patchwork.ozlabs.org/project/uboot/list/?series=389169 
+<http://patchwork.ozlabs.org/project/uboot/list/?series=389169>
+
+then feel free to annotate if you have more details to share
+
+Keep in touch
+
+
