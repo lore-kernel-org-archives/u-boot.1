@@ -4,85 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65EE2C4707B
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jan 2024 18:09:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B91BC47077
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jan 2024 18:10:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 332F2879BB;
-	Sun, 14 Jan 2024 19:08:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7097F87988;
+	Sun, 14 Jan 2024 19:10:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BRE3bA60";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EMVrtSjE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AD748798B; Sun, 14 Jan 2024 19:08:15 +0100 (CET)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 970E58798B; Sun, 14 Jan 2024 19:10:07 +0100 (CET)
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [IPv6:2607:f8b0:4864:20::72d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 400798773F
- for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 19:08:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 151F68796B
+ for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 19:10:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seashell11234455@gmail.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-3bd4e6a7cb0so2353408b6e.3
- for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 10:08:13 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-783310bd2d3so613958385a.0
+ for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 10:10:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705255691; x=1705860491; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IFmUBupdxwKtziR8C3jj0Ys3bE0RLYplWMx/OUaz6NM=;
- b=BRE3bA604wlxroKBxHsgErs8HFJI4SS5EwotCkcOj/hBtDXIOOLloRp5vdOJOJzZtG
- 0wb11CJk5lbBnGCokloGni9PbGe+1wtDb2nB6qCbcLHzZ8jd6JTxrkAQB1eE848zf96L
- ay17cufI7qRhbhyJxiJjM58dO0rvXmiEQiFfn5y26Y7/3OdudierdYL5i5soyPUsMjfw
- wBZ7dBA80d+ElyKrMfgMftsvHSA6rm53dq3fl+Cgwye+YiVFDw4VBKyTMn9gimFWmxjU
- j1BhQ/RXgaYqvb+CilcJldZ9mC6RBsQghmALEFVfxYwIl1sWAhRbnZwI7NhwqU3+6NlK
- swwQ==
+ d=konsulko.com; s=google; t=1705255801; x=1705860601; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=d/gatJ+0wzkeYs7un4jsQFQFYcPmJaLfm2TJtlpF8E8=;
+ b=EMVrtSjEqVyQOsu33hQKua/wHhWV7945wMVMh6n35zI6gU12VS/RkBL7/RCu5QQInj
+ fDkgueFojecEGyfmBAXIoMSFB0vMvk+GUP15gmtVsa5P94S/y81LVVtJ6SA5x3y6HBmd
+ hxfMCy7enBEOzsJNvfQyDlGir/v5kHplMu6+A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705255691; x=1705860491;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IFmUBupdxwKtziR8C3jj0Ys3bE0RLYplWMx/OUaz6NM=;
- b=VYznN2TsZfGEUX/u2/0O9fok3nX/13Rz/nwjRjA5qARUPjLHhO1pmCMrMxkNEoxqd5
- 1/9PafU3UIUix46RUeLHMslK4DEIFnbijUDB5BjRQukxx/xwXVCx7i3zpjevWgFpjWxz
- 24lv82hPvt+/3nmLMMqxGLm54mwsQrawu5H8e2xjpvC/R+zpr1fzLqvbU6S3Vx7l4wqJ
- 3TR6qcnruFlK0xMpSUS6XOQJoBNcOuh+kmwDcUd8CPWo5GfODAnJlOZLVh0cRIzC6bwu
- memfWqACzehfY2rn5WbeyD/Psl3ldQyKZO4WsKaMlcPaw1Pj0+Qg3/KhkatsD9KNE/Ry
- UIRw==
-X-Gm-Message-State: AOJu0Yyh/VebFP6gyygZ374XXDbwRUgT80pLMXyk4HAWWpsZpSZkKR8U
- HPigAOBV10gBY4gkfwa3oXK9L1IQ4rcvyQar
-X-Google-Smtp-Source: AGHT+IFyNS8l0bZQiAaYxTNGA6Aacx4gYq8QcokFuil/SSDJCdg6/By3z7yjP7n78Cm+HfAh8s+iXA==
-X-Received: by 2002:a05:6808:2208:b0:3bd:5377:79df with SMTP id
- bd8-20020a056808220800b003bd537779dfmr5789306oib.82.1705255691059; 
- Sun, 14 Jan 2024 10:08:11 -0800 (PST)
-Received: from localhost.localdomain ([120.204.188.187])
- by smtp.gmail.com with ESMTPSA id
- q13-20020a056a00088d00b006d998f5b890sm6253657pfj.192.2024.01.14.10.08.07
+ d=1e100.net; s=20230601; t=1705255801; x=1705860601;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=d/gatJ+0wzkeYs7un4jsQFQFYcPmJaLfm2TJtlpF8E8=;
+ b=sxSJQvOgiPGJ+5Mjhu119g3OODhS3QokDW3fxtbTdDPFRkQumczo5QmG7MDs8l9DBU
+ jCqKnFIsu8IkPMGajHyHawEioKfQOMzuxdjFljSJVXT2zKB/PqM/Ry3OvIOp8U8m2BrQ
+ so23nnezwDTUh7xnz+dvWIJADT/oCZzzYch8AtaHHKR/cgKkJ9au94XJ41ClaLXdXz5C
+ a5/l+/F/2xapBZIVTS50acL3k10PEKpBJUYOUL1nZ3fJ+cN4yXntoJYajMYsTjSGTbrH
+ oHVaFg3hgWhrSDCOtUgJOJi8VYbnnp+20QyAI5xwJKNQif16Mr91znePab/1cfUMeB+W
+ ssIg==
+X-Gm-Message-State: AOJu0YzWHC2iuDVHMvMTtVgF+ZtMVefVgAdQAYnvEUn8lMpwH7+W89io
+ l/Fr5HW2vbcborMO6LUs3iNSnF+jNZF/MA==
+X-Google-Smtp-Source: AGHT+IGYbdg6BMJHH10IVQw5WRr5rKW0Mp6gkgaD13LTC9VU0C773/LS0UwPwAgzM2mA7SeurqBgqA==
+X-Received: by 2002:a05:620a:b8e:b0:783:4976:7f8 with SMTP id
+ k14-20020a05620a0b8e00b00783497607f8mr4808796qkh.103.1705255801232; 
+ Sun, 14 Jan 2024 10:10:01 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
+ [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
+ vy3-20020a05620a490300b00781eb1e7779sm2426832qkn.94.2024.01.14.10.10.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 14 Jan 2024 10:08:10 -0800 (PST)
-From: Kongyang Liu <seashell11234455@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Chris Morgan <macromorgan@hotmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ralph Siemsen <ralph.siemsen@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
- Tim Harvey <tharvey@gateworks.com>, Wei Fu <wefu@redhat.com>,
- Yanhong Wang <yanhong.wang@starfivetech.com>,
- Yannic Moog <y.moog@phytec.de>, Yixun Lan <dlan@gentoo.org>
-Subject: [PATCH v2 3/3] doc: sophgo: milkv_duo: document Milk-V Duo board
-Date: Mon, 15 Jan 2024 02:07:39 +0800
-Message-ID: <20240114180741.2114-4-seashell11234455@gmail.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20240114180741.2114-1-seashell11234455@gmail.com>
-References: <20240114180741.2114-1-seashell11234455@gmail.com>
+ Sun, 14 Jan 2024 10:10:00 -0800 (PST)
+Date: Sun, 14 Jan 2024 13:09:58 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Bin Meng <bmeng.cn@gmail.com>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Grzegorz Szymaszek <gszymaszek@short.pl>
+Subject: Re: Pull request efi-2024-04-rc1
+Message-ID: <20240114180958.GL1610741@bill-the-cat>
+References: <61fbd4b8-8a06-4ade-882e-323a6d916adc@gmx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sun, 14 Jan 2024 19:08:45 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="OkglodNcuRBkvSO9"
+Content-Disposition: inline
+In-Reply-To: <61fbd4b8-8a06-4ade-882e-323a6d916adc@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,102 +94,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add document for Milk-V Duo board which based on Sophgo's CV1800B SoC.
 
-Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
----
+--OkglodNcuRBkvSO9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-(no changes since v1)
+On Sun, Jan 14, 2024 at 03:14:12PM +0100, Heinrich Schuchardt wrote:
 
- doc/board/index.rst            |  1 +
- doc/board/sophgo/index.rst     |  8 ++++++
- doc/board/sophgo/milkv_duo.rst | 50 ++++++++++++++++++++++++++++++++++
- 3 files changed, 59 insertions(+)
- create mode 100644 doc/board/sophgo/index.rst
- create mode 100644 doc/board/sophgo/milkv_duo.rst
+> Dear Tom,
+>=20
+> The following changes since commit 547d3dd28a46a18d59e00a153c8becca8d4e8c=
+f9:
+>=20
+>   Merge branch '2024-01-12-assorted-fixes' (2024-01-12 08:34:50 -0500)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/efi-2024-04-rc1
+>=20
+> for you to fetch changes up to 55125bbfb48cb1330a692059bc972810f77b984a:
+>=20
+>   cmd: efidebug: check pointer after memory allocation (2024-01-13
+> 18:17:47 +0100)
+>=20
+> Gitlab CI showed no issues:
+> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/19306
+>=20
 
-diff --git a/doc/board/index.rst b/doc/board/index.rst
-index 531e547e7e..a0bd534742 100644
---- a/doc/board/index.rst
-+++ b/doc/board/index.rst
-@@ -45,6 +45,7 @@ Board-specific doc
-    sifive/index
-    sipeed/index
-    socionext/index
-+   sophgo/index
-    st/index
-    starfive/index
-    ste/index
-diff --git a/doc/board/sophgo/index.rst b/doc/board/sophgo/index.rst
-new file mode 100644
-index 0000000000..e097afdac6
---- /dev/null
-+++ b/doc/board/sophgo/index.rst
-@@ -0,0 +1,8 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Sophgo
-+======
-+.. toctree::
-+   :maxdepth: 1
-+
-+   milkv_duo
-diff --git a/doc/board/sophgo/milkv_duo.rst b/doc/board/sophgo/milkv_duo.rst
-new file mode 100644
-index 0000000000..b63304b510
---- /dev/null
-+++ b/doc/board/sophgo/milkv_duo.rst
-@@ -0,0 +1,50 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Milk-V Duo
-+==========
-+
-+CV1800B RISC-V SoC
-+------------------
-+The CV1800B is a high-performance, low-power 1+1 64-bit RISC-V SoC from Sophgo.
-+
-+Mainline support
-+----------------
-+The support for following drivers are already enabled:
-+1. ns16550 UART Driver.
-+
-+Building
-+~~~~~~~~
-+1. Add the RISC-V toolchain to your PATH.
-+2. Setup ARCH & cross compilation environment variable:
-+
-+.. code-block:: console
-+
-+   export CROSS_COMPILE=<riscv64 toolchain prefix>
-+   cd <U-Boot-dir>
-+   make milkv_duo_defconfig
-+   make
-+
-+This will generate u-boot-dtb.bin
-+
-+Booting
-+~~~~~~~
-+Currently, we rely on vendor FSBL(First Stage Boot Loader) to initialize the
-+clock and load the u-boot image, then bootup from it.
-+
-+Sample boot log from Milk-V Duo board
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+.. code-block:: none
-+
-+   U-Boot 2024.01-rc5-00010-g51965baa36 (Dec 28 2023 - 13:15:53 +0800)milkv_duo
-+
-+   DRAM:  63.3 MiB
-+   Core:  10 devices, 8 uclasses, devicetree: separate
-+   Loading Environment from nowhere... OK
-+   In:    serial@4140000
-+   Out:   serial@4140000
-+   Err:   serial@4140000
-+   Net:   No ethernet found.
-+   milkv_duo# cpu detail
-+     0: cpu@0      rv64imafdc
-+      ID = 0, freq = 0 Hz: L1 cache, MMU
-+   milkv_duo#
--- 
-2.41.0
+Applied to u-boot/master, thanks!
 
+--=20
+Tom
+
+--OkglodNcuRBkvSO9
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWkI3MACgkQFHw5/5Y0
+tyyrsgwAiBstmYjFJ9QZji464GV0piuadz5bVMOT+4Fkq4tbWos5bwSUAyNMZMG2
+joCUi/CF4C22DJPfT4faQQuAM+LJ3yi1KJA4cXwPMDcfGwiUcJpMtlS/M/qSyONy
+BRPUd+A6ERh81605BOprR6fd31Celc2j/zrwExku1pZuqaXLVGZg2b1qE9r/xc2m
+FZvKDDsPDxCY5A+Yk1vAhmVGgwYKmG0SyZo104itZvyTe7lpUSkfK6Im1cORSo3G
+x5mwp+1luqVXg9jiGwApet91aGfhqHcGs1wqd5qwJjAYfLIrvISXBLYnpe6vJGAg
+zUJyr8+Wb/M6EwaEORdcCAuXO7N7j4K50c15zJY8Gc9TXDzOTHQbQk0KVi5gxn82
+HmQPsBjA0cCwxnLdXkvZb7r3pnNLbpVL5UGt4zs4s+k4dSDz7WAHeVLc2tMTjcHO
+tjoRqkVAcTSkJi2MFYN5FSNzRDyCV19Zd0XJug83fXteb2b8SBoN33/2AApEGy0L
+W02Vyw+c
+=iL+X
+-----END PGP SIGNATURE-----
+
+--OkglodNcuRBkvSO9--
