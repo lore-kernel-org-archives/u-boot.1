@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13491C4707B
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jan 2024 18:09:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B116EC4707B
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jan 2024 18:09:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2745987996;
+	by phobos.denx.de (Postfix) with ESMTP id 9BF51879A5;
 	Sun, 14 Jan 2024 19:08:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TKBbQ7Mj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="R/5UG0T3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 843438796B; Sun, 14 Jan 2024 19:08:08 +0100 (CET)
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [IPv6:2607:f8b0:4864:20::429])
+ id CAF7C87979; Sun, 14 Jan 2024 19:08:11 +0100 (CET)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 493628773F
- for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 19:08:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F8668773F
+ for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 19:08:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seashell11234455@gmail.com
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-6d9344f30caso5352544b3a.1
- for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 10:08:06 -0800 (PST)
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-6d98ce84e18so6997098b3a.3
+ for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 10:08:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705255684; x=1705860484; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1705255687; x=1705860487; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WKCU5KINuJTXWnDQmDtI8tHPKKpt4Ry/i6kPKbMLfOo=;
- b=TKBbQ7MjQoOTyPwY5bBZ62U5DHWXe0Q0jNcv+MAW2EkIBI8dIVEFaDuzEMKk5NGkK5
- VI/CVqcOFnCmeLplWOqnGDhx0yK1VvTW3njFmmKa8/nn6Lv6e1oxc8ibturajzjtCvHh
- rPM3usA79MlIQsrpHAIYf7tMh8+wSkZ2mWAniyGimDPr6dStfUeonSBP92TzTALvzctN
- +hqDLsRpZuO9hlYHKwWTjBTb1AB/ZIF/HZpaedxNJbGc8oE1LsZdCfeaVgcOKsTN1yZI
- HhVWZPSA1qGuVBkvEJwVbsME8QtZ7Nt1yelYv+JGlxropgP9PvbsuCmhAYAdpXyOuLOY
- cj4w==
+ bh=NuNqP9VvUKyrCH/oQVHOfLBHfW7rlIWQPGbwBg6mdWk=;
+ b=R/5UG0T34Gzfa7yTx8YO+Dg68mS+1fs+gR10l1uJtlEgtn0GIXEubD3tTne6uEjGnl
+ Oi03Pc+UrLVL+dmCtHzWBSRnEuUUJguNfdQ0Ygrb/4qlpBG9mL2kmYcMlcJP9RkbX6XU
+ WsuJIcrJP9YxlxjGQ3Z+tK+HbNUQTDlhlUmv/8uqCcdhLC6k1YjsZdigFzjqhKAoZX84
+ JZqhfCSFs9LOFoTPK5zRgWNkCm5uaxmJAAAXNPNP9Z6M85aKXADukZkL+ZldvzN7O2jF
+ lnGEvTrcOB/LRRJVqNTFcIaopKUqJb2Ye91pXW4kVqyg9NKVy6qpVK3Pl/r2rB+b7ifp
+ Qscw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705255684; x=1705860484;
+ d=1e100.net; s=20230601; t=1705255687; x=1705860487;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WKCU5KINuJTXWnDQmDtI8tHPKKpt4Ry/i6kPKbMLfOo=;
- b=iEMYajUTAHyFcHikW6L+CXxnrfqfqiyJFwV440G7q2KXRVUHN4StBuV2b8oPsAJtj+
- xew16vTCZ6KF5Fn06QSC1nn4HtH5fwEg32ThAiBtxE1T9M61uU1vQFkRbNZ33DvCAUZB
- f5vs+ao4YqEDEmB5psctkBEzM0WoNW8xBJ2ptdnqUD5xu5MKjr3auadFq09yhE4SN4ws
- zG/YwXoranuoLfkrEa8eTebGQZj7olDimbcuBaY0gtVK4X10FkDw7O1F7qwhdD+LdQRY
- BDGrv0h08F+luK19Fj8OLAw2Po4VY4Y5iKokC/JHSEokxkMy8E+3evGsa72tI4ryf71l
- vY8Q==
-X-Gm-Message-State: AOJu0YwFLLyn0+yy0FI+5zJJaFlo1ER+WEx/rXNAqPqpsYgO/rf1I/5W
- KRtOsGTV6X7t4Hvm0cvl0ZfxnTHIIbmVZPle
-X-Google-Smtp-Source: AGHT+IGHh9e/LCZf964q5npqhXIAmg3Kjq7ooowM/tnsUbf6Sekoha8WNSTPjnLkKGc/vrkFEU0AOw==
-X-Received: by 2002:a05:6a00:464f:b0:6d9:acb2:29ac with SMTP id
- kp15-20020a056a00464f00b006d9acb229acmr5510600pfb.23.1705255683827; 
- Sun, 14 Jan 2024 10:08:03 -0800 (PST)
+ bh=NuNqP9VvUKyrCH/oQVHOfLBHfW7rlIWQPGbwBg6mdWk=;
+ b=w7V25vlvAIM4JvMnBOjvxpaIqSnE2AhkQ+i5h/0B14IX7l3BB3cNB0kl8ouaJFB9aY
+ AUgI0CDmSNOrfuB/yBTOxz7wWRj5MwdBWkShpBgumFvViB4E2NIWZLHyu9c4yyj5Ar01
+ oPe1o6AwIqQaQ4X1qNeuR/h8RqytvgIXFJtAprmZEzRDPUNWRCio0njHsTlGwK7YD4Ay
+ Gar+K8RuFTohl/fFDq+Rl6etFmEbWXfXWhNB5uoJXY5HsfBAvP+KzOauw4qvoXM2xpcx
+ MZ+72t9uemyF23Jk86RL/Du3n/56puvXHcfosXfvj+6xAW2GlwpN8GmUuCid6p/BcYwN
+ 5D3g==
+X-Gm-Message-State: AOJu0YwfAxletfuTShwZqpWRrpflhKUB/yR3ChTWinCHh82z9vOYs4hJ
+ DkFEEJhu3av+tSnVdl9t0TaX+52TzP/eceaA
+X-Google-Smtp-Source: AGHT+IErJTwHcwLpoqsgjkPcwtouJe/AsTBWJcLCeIRCqpugLSRtV9Dr0+WHA/DuZnvS8wHQgCHOCw==
+X-Received: by 2002:a05:6a21:6706:b0:19a:fad2:50b4 with SMTP id
+ wh6-20020a056a21670600b0019afad250b4mr411689pzb.38.1705255687055; 
+ Sun, 14 Jan 2024 10:08:07 -0800 (PST)
 Received: from localhost.localdomain ([120.204.188.187])
  by smtp.gmail.com with ESMTPSA id
- q13-20020a056a00088d00b006d998f5b890sm6253657pfj.192.2024.01.14.10.08.00
+ q13-20020a056a00088d00b006d998f5b890sm6253657pfj.192.2024.01.14.10.08.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 14 Jan 2024 10:08:03 -0800 (PST)
+ Sun, 14 Jan 2024 10:08:06 -0800 (PST)
 From: Kongyang Liu <seashell11234455@gmail.com>
 To: u-boot@lists.denx.de
-Cc: Bin Meng <bmeng@tinylab.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Leo <ycliang@andestech.com>, Michal Simek <michal.simek@amd.com>,
+Cc: Conor Dooley <conor.dooley@microchip.com>, Leo <ycliang@andestech.com>,
  Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>,
- Samuel Holland <samuel@sholland.org>, Shengyu Qu <wiagn233@outlook.com>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>, Yixun Lan <dlan@gentoo.org>,
  Yu Chien Peter Lin <peterlin@andestech.com>
-Subject: [PATCH v2 1/3] riscv: sophgo: milkv_duo: initial support added
-Date: Mon, 15 Jan 2024 02:07:37 +0800
-Message-ID: <20240114180741.2114-2-seashell11234455@gmail.com>
+Subject: [PATCH v2 2/3] riscv: dts: sophgo: Add basic device tree for Milk-V
+ Duo board
+Date: Mon, 15 Jan 2024 02:07:38 +0800
+Message-ID: <20240114180741.2114-3-seashell11234455@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240114180741.2114-1-seashell11234455@gmail.com>
 References: <20240114180741.2114-1-seashell11234455@gmail.com>
@@ -96,176 +96,207 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for Sophgo's Milk-V Duo board, only minimal device tree and
-serial console are enabled, and it can boot via vendor first stage
-bootloader.
+Import device tree from Linux kernel to add basic support for CPU, PLIC,
+UART and Timer. The name cv1800b in the filename represent the chip used
+on Milk-V Duo board.
 
 Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
-
 ---
 
-Changes in v2:
-- Fold the defconfig patch to first patch
-- Remove unnecessary environment settings of consoledev and baudrate in
-config
+(no changes since v1)
 
- arch/riscv/Kconfig                 |  4 ++++
- board/sophgo/milkv_duo/Kconfig     | 28 ++++++++++++++++++++++++++++
- board/sophgo/milkv_duo/MAINTAINERS |  6 ++++++
- board/sophgo/milkv_duo/Makefile    |  5 +++++
- board/sophgo/milkv_duo/board.c     |  9 +++++++++
- configs/milkv_duo_defconfig        | 24 ++++++++++++++++++++++++
- include/configs/milkv_duo.h        | 12 ++++++++++++
- 7 files changed, 88 insertions(+)
- create mode 100644 board/sophgo/milkv_duo/Kconfig
- create mode 100644 board/sophgo/milkv_duo/MAINTAINERS
- create mode 100644 board/sophgo/milkv_duo/Makefile
- create mode 100644 board/sophgo/milkv_duo/board.c
- create mode 100644 configs/milkv_duo_defconfig
- create mode 100644 include/configs/milkv_duo.h
+ arch/riscv/dts/Makefile              |   1 +
+ arch/riscv/dts/cv1800b-milkv-duo.dts |  38 +++++++++
+ arch/riscv/dts/cv1800b.dtsi          | 123 +++++++++++++++++++++++++++
+ 3 files changed, 162 insertions(+)
+ create mode 100644 arch/riscv/dts/cv1800b-milkv-duo.dts
+ create mode 100644 arch/riscv/dts/cv1800b.dtsi
 
-diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-index 6d0d812ddb..de99ce3a28 100644
---- a/arch/riscv/Kconfig
-+++ b/arch/riscv/Kconfig
-@@ -14,6 +14,9 @@ config TARGET_ANDES_AE350
- config TARGET_MICROCHIP_ICICLE
- 	bool "Support Microchip PolarFire-SoC Icicle Board"
+diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
+index be6c8a4227..b9e1678676 100644
+--- a/arch/riscv/dts/Makefile
++++ b/arch/riscv/dts/Makefile
+@@ -2,6 +2,7 @@
  
-+config TARGET_MILKV_DUO
-+	bool "Support Milk-v Duo Board"
-+
- config TARGET_OPENPITON_RISCV64
- 	bool "Support RISC-V cores on OpenPiton SoC"
- 
-@@ -80,6 +83,7 @@ source "board/openpiton/riscv64/Kconfig"
- source "board/sifive/unleashed/Kconfig"
- source "board/sifive/unmatched/Kconfig"
- source "board/sipeed/maix/Kconfig"
-+source "board/sophgo/milkv_duo/Kconfig"
- source "board/starfive/visionfive2/Kconfig"
- source "board/thead/th1520_lpi4a/Kconfig"
- 
-diff --git a/board/sophgo/milkv_duo/Kconfig b/board/sophgo/milkv_duo/Kconfig
+ dtb-$(CONFIG_TARGET_ANDES_AE350) += ae350_32.dtb ae350_64.dtb
+ dtb-$(CONFIG_TARGET_MICROCHIP_ICICLE) += mpfs-icicle-kit.dtb
++dtb-$(CONFIG_TARGET_MILKV_DUO) += cv1800b-milkv-duo.dtb
+ dtb-$(CONFIG_TARGET_QEMU_VIRT) += qemu-virt32.dtb qemu-virt64.dtb
+ dtb-$(CONFIG_TARGET_OPENPITON_RISCV64) += openpiton-riscv64.dtb
+ dtb-$(CONFIG_TARGET_SIFIVE_UNLEASHED) += hifive-unleashed-a00.dtb
+diff --git a/arch/riscv/dts/cv1800b-milkv-duo.dts b/arch/riscv/dts/cv1800b-milkv-duo.dts
 new file mode 100644
-index 0000000000..2a458f291c
+index 0000000000..3af9e34b3b
 --- /dev/null
-+++ b/board/sophgo/milkv_duo/Kconfig
-@@ -0,0 +1,28 @@
-+if TARGET_MILKV_DUO
-+
-+config SYS_BOARD
-+	default "milkv_duo"
-+
-+config SYS_VENDOR
-+	default "sophgo"
-+
-+config SYS_CPU
-+	default "generic"
-+
-+config SYS_CONFIG_NAME
-+	default "milkv_duo"
-+
-+config TEXT_BASE
-+	default 0x80200000
-+
-+config ENV_SIZE
-+	default 0x20000
-+
-+config ENV_SECT_SIZE
-+	default 0x40000
-+
-+config BOARD_SPECIFIC_OPTIONS
-+	def_bool y
-+	select GENERIC_RISCV
-+
-+endif
-diff --git a/board/sophgo/milkv_duo/MAINTAINERS b/board/sophgo/milkv_duo/MAINTAINERS
-new file mode 100644
-index 0000000000..651a0592f7
---- /dev/null
-+++ b/board/sophgo/milkv_duo/MAINTAINERS
-@@ -0,0 +1,6 @@
-+Milk-V Duo
-+M:	Kongyang Liu <seashell11234455@gmail.com>
-+S:	Maintained
-+F:	board/sophgo/milkv_duo/
-+F:	configs/milkv_duo_defconfig
-+F:	doc/board/sophgo/milkv_duo.rst
-diff --git a/board/sophgo/milkv_duo/Makefile b/board/sophgo/milkv_duo/Makefile
-new file mode 100644
-index 0000000000..a087013f5c
---- /dev/null
-+++ b/board/sophgo/milkv_duo/Makefile
-@@ -0,0 +1,5 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
-+
-+obj-y := board.o
-diff --git a/board/sophgo/milkv_duo/board.c b/board/sophgo/milkv_duo/board.c
-new file mode 100644
-index 0000000000..eaa47be173
---- /dev/null
-+++ b/board/sophgo/milkv_duo/board.c
-@@ -0,0 +1,9 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/arch/riscv/dts/cv1800b-milkv-duo.dts
+@@ -0,0 +1,38 @@
++// SPDX-License-Identifier: (GPL-2.0 OR MIT)
 +/*
-+ * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
++ * Copyright (C) 2023 Jisheng Zhang <jszhang@kernel.org>
 + */
 +
-+int board_init(void)
-+{
-+	return 0;
-+}
-diff --git a/configs/milkv_duo_defconfig b/configs/milkv_duo_defconfig
++/dts-v1/;
++
++#include "cv1800b.dtsi"
++
++/ {
++	model = "Milk-V Duo";
++	compatible = "milkv,duo", "sophgo,cv1800b";
++
++	aliases {
++		serial0 = &uart0;
++		serial1 = &uart1;
++		serial2 = &uart2;
++		serial3 = &uart3;
++		serial4 = &uart4;
++	};
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++	};
++
++	memory@80000000 {
++		device_type = "memory";
++		reg = <0x80000000 0x3f40000>;
++	};
++};
++
++&osc {
++	clock-frequency = <25000000>;
++};
++
++&uart0 {
++	status = "okay";
++};
+diff --git a/arch/riscv/dts/cv1800b.dtsi b/arch/riscv/dts/cv1800b.dtsi
 new file mode 100644
-index 0000000000..c4782639ef
+index 0000000000..df40e87ee0
 --- /dev/null
-+++ b/configs/milkv_duo_defconfig
-@@ -0,0 +1,24 @@
-+CONFIG_RISCV=y
-+CONFIG_SYS_MALLOC_LEN=0x820000
-+CONFIG_SYS_MALLOC_F_LEN=0x2000
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x82300000
-+CONFIG_DEFAULT_DEVICE_TREE="cv1800b-milkv-duo"
-+CONFIG_IDENT_STRING="milkv_duo"
-+CONFIG_SYS_LOAD_ADDR=0x80080000
-+CONFIG_TARGET_MILKV_DUO=y
-+CONFIG_ARCH_RV64I=y
-+CONFIG_RISCV_SMODE=y
-+CONFIG_FIT=y
-+CONFIG_SUPPORT_RAW_INITRD=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_SYS_PROMPT="milkv_duo# "
-+CONFIG_SYS_MAXARGS=64
-+CONFIG_SYS_CBSIZE=512
-+CONFIG_SYS_PBSIZE=544
-+CONFIG_SYS_BOOTM_LEN=0x4000000
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_SYS_NS16550=y
-+CONFIG_SYS_NS16550_MEM32=y
-+# CONFIG_EFI_LOADER is not set
-diff --git a/include/configs/milkv_duo.h b/include/configs/milkv_duo.h
-new file mode 100644
-index 0000000000..0b4109dc1f
---- /dev/null
-+++ b/include/configs/milkv_duo.h
-@@ -0,0 +1,12 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
++++ b/arch/riscv/dts/cv1800b.dtsi
+@@ -0,0 +1,123 @@
++// SPDX-License-Identifier: (GPL-2.0 OR MIT)
 +/*
-+ * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
-+ *
++ * Copyright (C) 2023 Jisheng Zhang <jszhang@kernel.org>
 + */
 +
-+#ifndef __CONFIG_H
-+#define __CONFIG_H
++#include <dt-bindings/interrupt-controller/irq.h>
 +
-+#define CFG_SYS_SDRAM_BASE         0x80000000
++/ {
++	compatible = "sophgo,cv1800b";
++	#address-cells = <1>;
++	#size-cells = <1>;
 +
-+#endif /* __CONFIG_H */
++	cpus: cpus {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		timebase-frequency = <25000000>;
++
++		cpu0: cpu@0 {
++			compatible = "thead,c906", "riscv";
++			device_type = "cpu";
++			reg = <0>;
++			d-cache-block-size = <64>;
++			d-cache-sets = <512>;
++			d-cache-size = <65536>;
++			i-cache-block-size = <64>;
++			i-cache-sets = <128>;
++			i-cache-size = <32768>;
++			mmu-type = "riscv,sv39";
++			riscv,isa = "rv64imafdc";
++			riscv,isa-base = "rv64i";
++			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "zicntr", "zicsr",
++					       "zifencei", "zihpm";
++
++			cpu0_intc: interrupt-controller {
++				compatible = "riscv,cpu-intc";
++				interrupt-controller;
++				#address-cells = <0>;
++				#interrupt-cells = <1>;
++			};
++		};
++	};
++
++	osc: oscillator {
++		compatible = "fixed-clock";
++		clock-output-names = "osc_25m";
++		#clock-cells = <0>;
++	};
++
++	soc {
++		compatible = "simple-bus";
++		interrupt-parent = <&plic>;
++		#address-cells = <1>;
++		#size-cells = <1>;
++		dma-noncoherent;
++		ranges;
++
++		uart0: serial@4140000 {
++			compatible = "snps,dw-apb-uart";
++			reg = <0x04140000 0x100>;
++			interrupts = <44 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&osc>;
++			reg-shift = <2>;
++			reg-io-width = <4>;
++			status = "disabled";
++		};
++
++		uart1: serial@4150000 {
++			compatible = "snps,dw-apb-uart";
++			reg = <0x04150000 0x100>;
++			interrupts = <45 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&osc>;
++			reg-shift = <2>;
++			reg-io-width = <4>;
++			status = "disabled";
++		};
++
++		uart2: serial@4160000 {
++			compatible = "snps,dw-apb-uart";
++			reg = <0x04160000 0x100>;
++			interrupts = <46 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&osc>;
++			reg-shift = <2>;
++			reg-io-width = <4>;
++			status = "disabled";
++		};
++
++		uart3: serial@4170000 {
++			compatible = "snps,dw-apb-uart";
++			reg = <0x04170000 0x100>;
++			interrupts = <47 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&osc>;
++			reg-shift = <2>;
++			reg-io-width = <4>;
++			status = "disabled";
++		};
++
++		uart4: serial@41c0000 {
++			compatible = "snps,dw-apb-uart";
++			reg = <0x041c0000 0x100>;
++			interrupts = <48 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&osc>;
++			reg-shift = <2>;
++			reg-io-width = <4>;
++			status = "disabled";
++		};
++
++		plic: interrupt-controller@70000000 {
++			compatible = "sophgo,cv1800b-plic", "thead,c900-plic";
++			reg = <0x70000000 0x4000000>;
++			interrupts-extended = <&cpu0_intc 11>, <&cpu0_intc 9>;
++			interrupt-controller;
++			#address-cells = <0>;
++			#interrupt-cells = <2>;
++			riscv,ndev = <101>;
++		};
++
++		clint: timer@74000000 {
++			compatible = "sophgo,cv1800b-clint", "thead,c900-clint";
++			reg = <0x74000000 0x10000>;
++			interrupts-extended = <&cpu0_intc 3>, <&cpu0_intc 7>;
++		};
++	};
++};
 -- 
 2.41.0
 
