@@ -4,83 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9156CC4707B
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jan 2024 14:52:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF9DBC47077
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jan 2024 18:08:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8B258783D;
-	Sun, 14 Jan 2024 15:52:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A545E87988;
+	Sun, 14 Jan 2024 19:08:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FIpMMyfB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k4FzEwzj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEE518771E; Sun, 14 Jan 2024 15:52:25 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id F003A8796B; Sun, 14 Jan 2024 19:08:04 +0100 (CET)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CB6B86EF1
- for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 15:52:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD33D8773F
+ for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 19:08:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a26f73732c5so917044966b.3
- for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 06:52:21 -0800 (PST)
+ spf=pass smtp.mailfrom=seashell11234455@gmail.com
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-6d9344f30caso5352529b3a.1
+ for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 10:08:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705243940; x=1705848740; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=EMsVySxQbxPkmfKzXwszVZWMbG7DMLmQlYd7W73Wytg=;
- b=FIpMMyfBVBspTqJeW/GdmynHNtFgoyTgFJwTII04QTnjyDIGnLX4hutU146+F1Koe9
- KuHh3J2K9DvJK+dBWzo1Cqs0ej1ai9h4tVnjsuLtwWzyEdvHGVG11wJZLetpaGzjtNBD
- NUPCGbfCqI9Tq27r9qX6wb0KAzYGlzTJJfMxp02irXOXzAkrt/pOssiJSxbXvkUeSZXo
- amvCcX3wCGnd4Gm4LFqtL7kYTC/oGmEcIpeH1I4SULaP7iygtT5qsjkDD6SCFgq6oa0a
- DdZkbU2KAWxMTjmknQlySfFuCKG3d1KbdLBI+SkTBqLpOxXoQuZ9iMiSEjq5+gu2xK+h
- kiag==
+ d=gmail.com; s=20230601; t=1705255680; x=1705860480; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=S6zQKDG6XA5G1bB8RCytY983T5/07DGTGQkM1FKIh90=;
+ b=k4FzEwzjG6lu3/K2WlgdKgNhMOdlc5XbueaWz1jzSFXCqmpP6k9RmnpdcArTKDbELZ
+ l18dRUfVCDgFCZKK/ciirTh8q/0rcBO3tRj3IeQ0Te+03Cgd1dIktrktZZK0oE6EV2gm
+ W7oC1eksvJmw+2nW5j4jSsGec8Fl+UPXGOID0hukTxTBhV/I9nEsA/tZjHFIAWW5lMVj
+ qKqYhEKOBUti77hdv/T3O3vTRMzvCeayGZQsvlFnqTRooIJTdlkSlQTB+0+V7N79PXVp
+ sKMXcxUDoqNVJfoy/ASl/mipj1kZeHMIVX3LhWDIjcmmW9763GaZPs3FQi8irHWf+Nmj
+ GnhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705243940; x=1705848740;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=EMsVySxQbxPkmfKzXwszVZWMbG7DMLmQlYd7W73Wytg=;
- b=ErOGwr1/8XE/CoyGJcV6gP+qAipipwL1iSyO4X6mBU8v22YaXYA0ryWIKRqfTJRr1d
- i5X1jO9LeITafVT+Rss99eehlNHsA6yJxUr5HNqSfBSfgP2w7rLzoTKI9cnpIPICHpml
- gnytjfmqMN3HJce1ej7F0sAdKtN0GrX6JZu1RAfB3PS7G1rT75a/B/oWNaIxVI3mPzgp
- kZbiUcv6+4s95ZZbZs+LeVyD/Nvs0t6OY4nt4cnfGGXdzL1lc78oHq/5TzgqWqSomllq
- GFXB77qwg3ybgj8MxdVoHxCUgXVshV2ul4HYjupv/OCPSm9zU16jM0nPoVhuFtJFegGg
- wvMw==
-X-Gm-Message-State: AOJu0YxflsF2mTmpd9tZFioZm9RGRZDVSoSNe+UzHTUiyg0SRpkKn70r
- AvfScFtVUJvdjpuLHib/aAM=
-X-Google-Smtp-Source: AGHT+IGsjleu7rKysZENzNI/8fEUdU8Sy3ZEGOqDMZtMEY98QD8SN8sLAT8/5HRhCtK7JXrfL50WmQ==
-X-Received: by 2002:a17:906:bc56:b0:a2d:1f53:4601 with SMTP id
- s22-20020a170906bc5600b00a2d1f534601mr1106510ejv.24.1705243939736; 
- Sun, 14 Jan 2024 06:52:19 -0800 (PST)
-Received: from [127.0.0.1] ([46.211.234.255]) by smtp.gmail.com with ESMTPSA id
- vw15-20020a170907a70f00b00a2d0595cd0dsm2329512ejc.86.2024.01.14.06.52.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 14 Jan 2024 06:52:19 -0800 (PST)
-Date: Sun, 14 Jan 2024 16:52:17 +0200
-From: Svyatoslav <clamor95@gmail.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-CC: Simon Glass <sjg@chromium.org>, Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Masahisa Kojima <masahisa.kojima@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 1/1] cmd: bootmenu: rename U-Boot console to Exit
-User-Agent: K-9 Mail for Android
-In-Reply-To: <CALeDE9N6kn9Q-Uafx9-3_3xPUhLj1QN=h6DemYturrBUM5nwmQ@mail.gmail.com>
-References: <20240114101701.23070-1-clamor95@gmail.com>
- <20240114101701.23070-2-clamor95@gmail.com>
- <CALeDE9N6kn9Q-Uafx9-3_3xPUhLj1QN=h6DemYturrBUM5nwmQ@mail.gmail.com>
-Message-ID: <E7FA443F-DAE6-494E-8552-C4D75E86DE54@gmail.com>
+ d=1e100.net; s=20230601; t=1705255680; x=1705860480;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=S6zQKDG6XA5G1bB8RCytY983T5/07DGTGQkM1FKIh90=;
+ b=diWcovKCy/QjCgxeVM/DKqdgmXJxMHbzr4+pft649wtfFI+VymilnsIdLXHLeVLxee
+ EGtSKJlv50BiGew/woYgCcaj9R5X0pE1jyN78yzwTJwBBFQ/EUgApxWAPl5WF0PbnvV0
+ dh3DdE5ZvJeEnrXbN7cmbgNeNpGWes234b6x/WK0qOXllWgVaqSmchaSGM+3Y6o8CYcP
+ qt9KFStBY4bdCwZt8LX/7fGWZGaM0+82cuq1rtAgDUnpgokWmOFYsmeVbIHeoKL0sv4y
+ h+HWmBpAkXnCszi0zkfCIOclkXL08aXpxb1LRBLtoCVMYoY+uWx3qL19zrSTUlAKJc9P
+ wd5g==
+X-Gm-Message-State: AOJu0YyUa6FyGWwXFJwOLPNIhTqDUT8jckAoVNXflvg+gWxciBN+PJV3
+ fnYUtRUbZrw/+9qfXtbD4Cx4GpKXDQzEEXef7dI=
+X-Google-Smtp-Source: AGHT+IFaILL3Lvc80PDMSsov3Is2d/EQovZYMPvRKAM7lHLC3tfv+qaVAJ2dJRTemX9nwKERnyU74Q==
+X-Received: by 2002:a05:6a20:bd1a:b0:19a:80b4:5acd with SMTP id
+ fy26-20020a056a20bd1a00b0019a80b45acdmr4590344pzb.53.1705255680232; 
+ Sun, 14 Jan 2024 10:08:00 -0800 (PST)
+Received: from localhost.localdomain ([120.204.188.187])
+ by smtp.gmail.com with ESMTPSA id
+ q13-20020a056a00088d00b006d998f5b890sm6253657pfj.192.2024.01.14.10.07.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 14 Jan 2024 10:07:59 -0800 (PST)
+From: Kongyang Liu <seashell11234455@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Bin Meng <bmeng@tinylab.org>, Chris Morgan <macromorgan@hotmail.com>,
+ Conor Dooley <conor.dooley@microchip.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Leo <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>,
+ Samuel Holland <samuel@sholland.org>, Shengyu Qu <wiagn233@outlook.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
+ Tim Harvey <tharvey@gateworks.com>, Wei Fu <wefu@redhat.com>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>,
+ Yannic Moog <y.moog@phytec.de>, Yixun Lan <dlan@gentoo.org>,
+ Yu Chien Peter Lin <peterlin@andestech.com>
+Subject: [PATCH v2 0/3] riscv: sophgo: milkv_duo: add support for Milk-V Duo
+ board
+Date: Mon, 15 Jan 2024 02:07:36 +0800
+Message-ID: <20240114180741.2114-1-seashell11234455@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 14 Jan 2024 19:08:45 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,92 +102,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The Milk-V Duo board is built upon Sophgo's CV1800B SoC, featuring two
+XuanTie C906 CPUs running at 1.0GHz and 700MHz, respectively.
 
+This series introduces fundamental support for the Milk-V Duo board,
+encompassing UART, CPU, and PLIC support. This ensures that U-Boot can
+operate in serial console mode.
 
-14 =D1=81=D1=96=D1=87=D0=BD=D1=8F 2024=E2=80=AF=D1=80=2E 16:41:40 GMT+02:0=
-0, Peter Robinson <pbrobinson@gmail=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=
-=D0=B0=D0=B2(-=D0=BB=D0=B0):
->On Sun, 14 Jan 2024 at 10:23, Svyatoslav Ryhel <clamor95@gmail=2Ecom> wro=
-te:
->>
->> It seems that the U-Boot console entry of the bootmenu has lost
->> its original meaning=2E Now, even if it is chosen, the probability
->> that you will enter the actual U-Boot console is quite low=2E
->> Boot env, bootflow, bootcommand script may appear, but not the
->> actual console=2E Hense, let's remove ambiguity and name this
->
->Hence
->
-Fair
+Changes in v2:
+- Fold the defconfig patch to first patch
+- Remove unnecessary environment settings of consoledev and baudrate in
+config
 
->> entry by what it actually does: 'Exit' the bootmenu=2E
->>
->> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail=2Ecom>
->> ---
->>  cmd/bootmenu=2Ec | 10 +++++-----
->>  1 file changed, 5 insertions(+), 5 deletions(-)
->>
->> diff --git a/cmd/bootmenu=2Ec b/cmd/bootmenu=2Ec
->> index 987b16889f=2E=2E69fca710a8 100644
->> --- a/cmd/bootmenu=2Ec
->> +++ b/cmd/bootmenu=2Ec
->> @@ -119,7 +119,7 @@ static char *bootmenu_choice_entry(void *data)
->>                                 iter =3D iter->next;
->>                         return iter->key;
->>                 case BKEY_QUIT:
->> -                       /* Quit by choosing the last entry - U-Boot con=
-sole */
->> +                       /* Quit by choosing the last entry - Exit */
->
->I think just put "Set the last entry to Exit"
->
+Kongyang Liu (3):
+  riscv: sophgo: milkv_duo: initial support added
+  riscv: dts: sophgo: Add basic device tree for Milk-V Duo board
+  doc: sophgo: milkv_duo: document Milk-V Duo board
 
-It can be either Quit or U-Boot console=2E Since U-Boot console is renamed=
- by this patch, all references in comments are replaced with Exit=2E
+ arch/riscv/Kconfig                   |   4 +
+ arch/riscv/dts/Makefile              |   1 +
+ arch/riscv/dts/cv1800b-milkv-duo.dts |  38 +++++++++
+ arch/riscv/dts/cv1800b.dtsi          | 123 +++++++++++++++++++++++++++
+ board/sophgo/milkv_duo/Kconfig       |  28 ++++++
+ board/sophgo/milkv_duo/MAINTAINERS   |   6 ++
+ board/sophgo/milkv_duo/Makefile      |   5 ++
+ board/sophgo/milkv_duo/board.c       |   9 ++
+ configs/milkv_duo_defconfig          |  24 ++++++
+ doc/board/index.rst                  |   1 +
+ doc/board/sophgo/index.rst           |   8 ++
+ doc/board/sophgo/milkv_duo.rst       |  50 +++++++++++
+ include/configs/milkv_duo.h          |  12 +++
+ 13 files changed, 309 insertions(+)
+ create mode 100644 arch/riscv/dts/cv1800b-milkv-duo.dts
+ create mode 100644 arch/riscv/dts/cv1800b.dtsi
+ create mode 100644 board/sophgo/milkv_duo/Kconfig
+ create mode 100644 board/sophgo/milkv_duo/MAINTAINERS
+ create mode 100644 board/sophgo/milkv_duo/Makefile
+ create mode 100644 board/sophgo/milkv_duo/board.c
+ create mode 100644 configs/milkv_duo_defconfig
+ create mode 100644 doc/board/sophgo/index.rst
+ create mode 100644 doc/board/sophgo/milkv_duo.rst
+ create mode 100644 include/configs/milkv_duo.h
 
->>                         iter =3D menu->first;
->>                         while (iter->next)
->>                                 iter =3D iter->next;
->> @@ -361,15 +361,15 @@ static struct bootmenu_data *bootmenu_create(int =
-delay)
->>         }
->>  #endif
->>
->> -       /* Add U-Boot console entry at the end */
->> +       /* Add Exit entry at the end */
->>         if (i <=3D MAX_COUNT - 1) {
->>                 entry =3D malloc(sizeof(struct bootmenu_entry));
->>                 if (!entry)
->>                         goto cleanup;
->>
->> -               /* Add Quit entry if entering U-Boot console is disable=
-d */
->> +               /* Add Quit entry if exiting to U-Boot console is disab=
-led */
->
->s/Quit/Exit/
->
->>                 if (!IS_ENABLED(CONFIG_BOOTMENU_DISABLE_UBOOT_CONSOLE))
->> -                       entry->title =3D strdup("U-Boot console");
->> +                       entry->title =3D strdup("Exit");
->>                 else
->>                         entry->title =3D strdup("Quit");
->>
->> @@ -532,7 +532,7 @@ static enum bootmenu_ret bootmenu_show(int delay)
->>                 title =3D strdup(iter->title);
->>                 command =3D strdup(iter->command);
->>
->> -               /* last entry is U-Boot console or Quit */
->> +               /* last entry is Exit or Quit */
->
->"Last entry is Exit" as I don't see Quit referred to=2E
->
+-- 
+2.41.0
 
-Check above=2E
-
->>                 if (iter->num =3D=3D iter->menu->count - 1) {
->>                         ret =3D BOOTMENU_RET_QUIT;
->>                         goto cleanup;
->> --
->> 2=2E40=2E1
->>
