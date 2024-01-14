@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C249C47077
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jan 2024 13:19:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECB88C47077
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jan 2024 13:19:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD8418785F;
-	Sun, 14 Jan 2024 14:18:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 952BE8796E;
+	Sun, 14 Jan 2024 14:18:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="osf8LP70";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="cO79kUd4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAC6B87941; Sun, 14 Jan 2024 14:18:42 +0100 (CET)
+ id AE89C87968; Sun, 14 Jan 2024 14:18:44 +0100 (CET)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49DCE87873
- for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 14:18:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 478908796B
+ for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 14:18:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,28 +31,28 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 893AF41BBB; 
- Sun, 14 Jan 2024 13:18:38 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 8F62C41BC1; 
+ Sun, 14 Jan 2024 13:18:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1705238318;
- bh=UQq88ZLLuWRRDJ18qWzG3+IKHeSNdUZ2+PVT51vOSyI=;
+ s=20210705; t=1705238319;
+ bh=6CrnuCSadLj/ohCVwCxDk3VqS0c3WwyVFzC+FwgEITQ=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=osf8LP70ebUNet4Frr/2KYWt7JoZxQBs9uf1Mo1GRplQyPr0a8dED4+NJqFs4jhkH
- 6OySIQaq8lIQYq2MNdy4zfn3js72Zrd9qztL7vRAzRLZu/CnSWZ0MuV5nf34/lNcBE
- Hf11hZIusP5pDTa7r36ml5ckC71DE1E1hY5sh1+Nv6pjYe0qeLvBXFAUERd/1HeoGt
- MvKA1z6P1cAriiXAmHldvWGy26+CHvxyDO+MKd+v3dFSrEFHQoPzgzKHcs6CuOC5iK
- FCt6SkhQ4LkEGRKxb2pbTqRXO0f1BHp25dVGfaoGoYRQsxdHZLy6BPpUdS6D68Ookj
- 86dfawcjMg71Q==
+ b=cO79kUd4PeYnUxCIq2E8rgEgJgSfgl1vqzQ5eKta9DYbi+fUbvmqEMbr3yytWfcpO
+ V435voRmVXnsm/708K2fP6j9QAmO2DsptnrasekG5b65s3GTWgMrBG9Jeoju0MR/rf
+ OHOoWoUdmk3y4feOOJDcbcnj6rXBepfylLj3joyJA3K+3UIcGy5ydh5VomUVSsIc/9
+ yuTq4q+JzyFeuKBqimXlkbsHLDf0IcmLRrGRQYC/4uFd6vqM8ZlP+XcEa3UbPlcM1u
+ clV+oPBVYai9tmY4mv0DDSzEVGyjoZHyTKT7F6F7qNs3hSLO7lEWeM7dt0/9gmd24h
+ E6jMJxN/cPm6A==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Nishanth Menon <nm@ti.com>, Jonathan Corbet <corbet@lwn.net>,
  Oliver Faso <erer1243@gmail.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, Akira Yokosawa <akiyks@gmail.com>,
+ u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/5] docs/sphinx: Explicitly convert Sphinx paths to str
-Date: Sun, 14 Jan 2024 14:18:19 +0100
-Message-ID: <20240114131824.68298-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 3/5] doc: update theme_overrides.css
+Date: Sun, 14 Jan 2024 14:18:21 +0100
+Message-ID: <20240114131824.68298-4-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240114131824.68298-1-heinrich.schuchardt@canonical.com>
 References: <20240114131824.68298-1-heinrich.schuchardt@canonical.com>
@@ -74,50 +74,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Oliver Faso <erer1243@gmail.com>
+Update theme_overrides.css from Linux v6.7.
 
-Sphinx 7.2+ is switching to using pathlib.Path
-instead of str to represent paths. This fixes the
-current deprecation warnings and eventual breakage.
-This conversion will be a no-op when using older
-Sphinx versions.
-
-Signed-off-by: Oliver Faso <erer1243@gmail.com>
-Tested-by: Akira Yokosawa <akiyks@gmail.com>
-Signed-off-by: Jonathan Corbet <corbet@lwn.net>
-Link: https://lore.kernel.org/r/20230910040811.53046-1-erer1243@gmail.com
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- doc/sphinx/kerneldoc.py | 2 +-
- doc/sphinx/kfigure.py   | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ doc/sphinx-static/theme_overrides.css | 44 ++++++++++++++++++++++++---
+ 1 file changed, 40 insertions(+), 4 deletions(-)
 
-diff --git a/doc/sphinx/kerneldoc.py b/doc/sphinx/kerneldoc.py
-index 8189c33b9d..01a55429c5 100644
---- a/doc/sphinx/kerneldoc.py
-+++ b/doc/sphinx/kerneldoc.py
-@@ -138,7 +138,7 @@ class KernelDocDirective(Directive):
-                     lineoffset = int(match.group(1)) - 1
-                     # we must eat our comments since the upset the markup
-                 else:
--                    doc = env.srcdir + "/" + env.docname + ":" + str(self.lineno)
-+                    doc = str(env.srcdir) + "/" + env.docname + ":" + str(self.lineno)
-                     result.append(line, doc + ": " + filename, lineoffset)
-                     lineoffset += 1
+diff --git a/doc/sphinx-static/theme_overrides.css b/doc/sphinx-static/theme_overrides.css
+index 522b6d4c49..f6f2b941a5 100644
+--- a/doc/sphinx-static/theme_overrides.css
++++ b/doc/sphinx-static/theme_overrides.css
+@@ -1,9 +1,38 @@
+ /* -*- coding: utf-8; mode: css -*-
+  *
+  * Sphinx HTML theme customization: read the doc
+- *
++ * Please don't add any color definition here, as the theme should
++ * work for both normal and dark modes.
+  */
  
-diff --git a/doc/sphinx/kfigure.py b/doc/sphinx/kfigure.py
-index 788704886e..dea7f91ef5 100644
---- a/doc/sphinx/kfigure.py
-+++ b/doc/sphinx/kfigure.py
-@@ -266,7 +266,7 @@ def convert_image(img_node, translator, src_fname=None):
-     if dst_fname:
-         # the builder needs not to copy one more time, so pop it if exists.
-         translator.builder.images.pop(img_node['uri'], None)
--        _name = dst_fname[len(translator.builder.outdir) + 1:]
-+        _name = dst_fname[len(str(translator.builder.outdir)) + 1:]
++/* Improve contrast and increase size for easier reading. */
++
++body {
++	font-family: serif;
++	font-size: 100%;
++}
++
++h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
++	font-family: sans-serif;
++}
++
++div[class^="highlight"] pre {
++	font-family: monospace;
++	font-size: 100%;
++}
++
++.wy-menu-vertical {
++	font-family: sans-serif;
++}
++
++.c {
++	font-style: normal;
++}
++
++p {
++	font-size: 100%;
++}
++
+ /* Interim: Code-blocks with line nos - lines and line numbers don't line up.
+  * see: https://github.com/rtfd/sphinx_rtd_theme/issues/419
+  */
+@@ -15,6 +44,16 @@ div[class^="highlight"] pre {
+     line-height: normal;
+ }
  
-         if isNewer(dst_fname, src_fname):
-             kernellog.verbose(app,
++/* Keep fields from being strangely far apart due to inheirited table CSS. */
++.rst-content table.field-list th.field-name {
++    padding-top: 1px;
++    padding-bottom: 1px;
++}
++.rst-content table.field-list td.field-body {
++    padding-top: 1px;
++    padding-bottom: 1px;
++}
++
+ @media screen {
+ 
+     /* content column
+@@ -56,13 +95,10 @@ div[class^="highlight"] pre {
+     /* Menu selection and keystrokes */
+ 
+     span.menuselection {
+-	color: blue;
+ 	font-family: "Courier New", Courier, monospace
+     }
+ 
+     code.kbd, code.kbd span {
+-	color: white;
+-	background-color: darkblue;
+ 	font-weight: bold;
+ 	font-family: "Courier New", Courier, monospace
+     }
 -- 
 2.43.0
 
