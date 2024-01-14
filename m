@@ -4,80 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B91BC47077
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jan 2024 18:10:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 720ACC47077
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jan 2024 18:58:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7097F87988;
-	Sun, 14 Jan 2024 19:10:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6AEB3877F8;
+	Sun, 14 Jan 2024 19:58:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EMVrtSjE";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="QetI6oaR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 970E58798B; Sun, 14 Jan 2024 19:10:07 +0100 (CET)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 48B7C878D0; Sun, 14 Jan 2024 19:58:53 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 151F68796B
- for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 19:10:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 53CC886EF1
+ for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 19:58:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-783310bd2d3so613958385a.0
- for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 10:10:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705255801; x=1705860601; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=d/gatJ+0wzkeYs7un4jsQFQFYcPmJaLfm2TJtlpF8E8=;
- b=EMVrtSjEqVyQOsu33hQKua/wHhWV7945wMVMh6n35zI6gU12VS/RkBL7/RCu5QQInj
- fDkgueFojecEGyfmBAXIoMSFB0vMvk+GUP15gmtVsa5P94S/y81LVVtJ6SA5x3y6HBmd
- hxfMCy7enBEOzsJNvfQyDlGir/v5kHplMu6+A=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705255801; x=1705860601;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=d/gatJ+0wzkeYs7un4jsQFQFYcPmJaLfm2TJtlpF8E8=;
- b=sxSJQvOgiPGJ+5Mjhu119g3OODhS3QokDW3fxtbTdDPFRkQumczo5QmG7MDs8l9DBU
- jCqKnFIsu8IkPMGajHyHawEioKfQOMzuxdjFljSJVXT2zKB/PqM/Ry3OvIOp8U8m2BrQ
- so23nnezwDTUh7xnz+dvWIJADT/oCZzzYch8AtaHHKR/cgKkJ9au94XJ41ClaLXdXz5C
- a5/l+/F/2xapBZIVTS50acL3k10PEKpBJUYOUL1nZ3fJ+cN4yXntoJYajMYsTjSGTbrH
- oHVaFg3hgWhrSDCOtUgJOJi8VYbnnp+20QyAI5xwJKNQif16Mr91znePab/1cfUMeB+W
- ssIg==
-X-Gm-Message-State: AOJu0YzWHC2iuDVHMvMTtVgF+ZtMVefVgAdQAYnvEUn8lMpwH7+W89io
- l/Fr5HW2vbcborMO6LUs3iNSnF+jNZF/MA==
-X-Google-Smtp-Source: AGHT+IGYbdg6BMJHH10IVQw5WRr5rKW0Mp6gkgaD13LTC9VU0C773/LS0UwPwAgzM2mA7SeurqBgqA==
-X-Received: by 2002:a05:620a:b8e:b0:783:4976:7f8 with SMTP id
- k14-20020a05620a0b8e00b00783497607f8mr4808796qkh.103.1705255801232; 
- Sun, 14 Jan 2024 10:10:01 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- vy3-20020a05620a490300b00781eb1e7779sm2426832qkn.94.2024.01.14.10.10.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 14 Jan 2024 10:10:00 -0800 (PST)
-Date: Sun, 14 Jan 2024 13:09:58 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>,
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- Simon Glass <sjg@chromium.org>, Grzegorz Szymaszek <gszymaszek@short.pl>
-Subject: Re: Pull request efi-2024-04-rc1
-Message-ID: <20240114180958.GL1610741@bill-the-cat>
-References: <61fbd4b8-8a06-4ade-882e-323a6d916adc@gmx.de>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
+ [178.202.40.247])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 82C67413D3; 
+ Sun, 14 Jan 2024 18:58:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1705258730;
+ bh=flNlCqvIq9llFsHMEeVoP21daiaMxoKNsRckUAW3XT8=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=QetI6oaRvPmhGoiG5ES1S75M9YwniLrlIoujsgD0QOJ7gZEQmydo43TBkCaxeKv98
+ HrY99Iza0NDFfitXymph98yWdhi1Moo3Skh/naYEiu8vIrOvQLrlNvsIWGTQrsNIjI
+ o1mxkz5U5vYnVr2rI8J9BUglYmCypj8lkgYYgOQzgeqKaaTfq7YDNQ40klyXVXOduv
+ 9G7eEV6TOTc7mOEC9dVtdHEL28JZ/flY5IVzWvg7vsv01h3qgh1NdqS3xDEe0RYSqz
+ z/4IlZ5RlX7b6pJlle6Vtexa+1bmc7Di69rbdWScvJqiwDk/t1iwTvgBTE63nIaxY0
+ apq0RvIgOFQ7g==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 1/2] doc: add generated index to table of contents
+Date: Sun, 14 Jan 2024 19:58:43 +0100
+Message-ID: <20240114185843.88240-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="OkglodNcuRBkvSO9"
-Content-Disposition: inline
-In-Reply-To: <61fbd4b8-8a06-4ade-882e-323a6d916adc@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,56 +69,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Show the index in the navigation sidebar.
 
---OkglodNcuRBkvSO9
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+doc/genindex.rst is needed to create the navigation sidebar entry.
+output/genindex.html will only contain the generated content.
 
-On Sun, Jan 14, 2024 at 03:14:12PM +0100, Heinrich Schuchardt wrote:
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+v2:
+	Provide doc/genindex.rst
+---
+ doc/genindex.rst | 4 ++++
+ doc/index.rst    | 5 ++++-
+ 2 files changed, 8 insertions(+), 1 deletion(-)
+ create mode 100644 doc/genindex.rst
 
-> Dear Tom,
->=20
-> The following changes since commit 547d3dd28a46a18d59e00a153c8becca8d4e8c=
-f9:
->=20
->   Merge branch '2024-01-12-assorted-fixes' (2024-01-12 08:34:50 -0500)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-2024-04-rc1
->=20
-> for you to fetch changes up to 55125bbfb48cb1330a692059bc972810f77b984a:
->=20
->   cmd: efidebug: check pointer after memory allocation (2024-01-13
-> 18:17:47 +0100)
->=20
-> Gitlab CI showed no issues:
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/19306
->=20
+diff --git a/doc/genindex.rst b/doc/genindex.rst
+new file mode 100644
+index 0000000000..2e452cb8f5
+--- /dev/null
++++ b/doc/genindex.rst
+@@ -0,0 +1,4 @@
++.. SPDX-License-Identifier: GPL-2.0-or-later
++
++Index
++=====
+diff --git a/doc/index.rst b/doc/index.rst
+index 57b42c68e4..43398627d8 100644
+--- a/doc/index.rst
++++ b/doc/index.rst
+@@ -99,4 +99,7 @@ Chromium OS-specific doc
+ Indices and tables
+ ==================
+ 
+-* :ref:`genindex`
++.. toctree::
++   :maxdepth: 1
++
++   genindex
+-- 
+2.43.0
 
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---OkglodNcuRBkvSO9
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWkI3MACgkQFHw5/5Y0
-tyyrsgwAiBstmYjFJ9QZji464GV0piuadz5bVMOT+4Fkq4tbWos5bwSUAyNMZMG2
-joCUi/CF4C22DJPfT4faQQuAM+LJ3yi1KJA4cXwPMDcfGwiUcJpMtlS/M/qSyONy
-BRPUd+A6ERh81605BOprR6fd31Celc2j/zrwExku1pZuqaXLVGZg2b1qE9r/xc2m
-FZvKDDsPDxCY5A+Yk1vAhmVGgwYKmG0SyZo104itZvyTe7lpUSkfK6Im1cORSo3G
-x5mwp+1luqVXg9jiGwApet91aGfhqHcGs1wqd5qwJjAYfLIrvISXBLYnpe6vJGAg
-zUJyr8+Wb/M6EwaEORdcCAuXO7N7j4K50c15zJY8Gc9TXDzOTHQbQk0KVi5gxn82
-HmQPsBjA0cCwxnLdXkvZb7r3pnNLbpVL5UGt4zs4s+k4dSDz7WAHeVLc2tMTjcHO
-tjoRqkVAcTSkJi2MFYN5FSNzRDyCV19Zd0XJug83fXteb2b8SBoN33/2AApEGy0L
-W02Vyw+c
-=iL+X
------END PGP SIGNATURE-----
-
---OkglodNcuRBkvSO9--
