@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6CFEC47077
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jan 2024 10:17:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFE88C4707B
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jan 2024 12:47:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2767D8784D;
-	Sun, 14 Jan 2024 11:17:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 34FA187848;
+	Sun, 14 Jan 2024 13:47:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kZMRRivZ";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="eq9TjsPQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C31C87831; Sun, 14 Jan 2024 11:17:31 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 953B387849; Sun, 14 Jan 2024 13:46:59 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8F0687835
- for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 11:17:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E61218743A
+ for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 13:46:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-40e779f0253so468355e9.1
- for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 02:17:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705227448; x=1705832248; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lAxST3W/8SHkL1cYCYZKP36M4jXXvJRLVnSXLxunP5g=;
- b=kZMRRivZxQMn2WkJi48+xz3oa0Y9sw5gyi/+bc0aWwR/7lHjHcxMuM9OG7Ba8uA0pk
- RC1eBirfD8JLN1rRDLpYMJxVfJkFIsa0LYh6AlBmQ8a1qSdkbeyLhOzkzrfx0bvBwgN6
- GL7o9IVRhLuzRuqq4glGfIaQdRiutuQDYg3MLtn2P2lKCpcEri4LQaGQsZeFMWSxvzx+
- ldfRD5QgrWp72wOKUlLle4HDnLYrBzOsA1TOoHqHL0BJ1iLjx4jGV2YyM+cMD0vicI0u
- YpJgTnOitZZla8kaApuHptiBGTTjLcBhfxyKVjUuXqyhaJSoCEBwl6cYDQ+NYAoRDHUA
- Cjqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705227448; x=1705832248;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lAxST3W/8SHkL1cYCYZKP36M4jXXvJRLVnSXLxunP5g=;
- b=nXVLHGNPH+WNG4/2TCQEWf+bQY5VtKDFz8qQHbbXoma/1doo/0YcaiM51ega+Nco1W
- EEDJildIjtRJY4NJkqqCUI9nup59T6T+M6/ERhbP8Yvg3LTfNreoa1DD67zgzwXTj3j6
- I5Kx/c9245rXDhZH88HVvW37X9sobc8LoH0fxeM33nfe7VB9CRMGfGYzh5GaEp3WN/RX
- bxJVjkcSkJO3zhEiPcJlWHqbMP98oe8XuShnkk7dZvZbyKFZG98ARYpnZsfstLhXiRtq
- J59PypVVs/njOkcCn1hLRll5Yfz+pATvcH7Z3qN4WyaTCtwOY4jhoh4qL3YgQW3nB9GX
- l0sA==
-X-Gm-Message-State: AOJu0YxDXsQNKNh0ToZ+dLoSe2m+6aYPDKNSRLsXWYkRY5k8r5/9vLD8
- lRsl40nL9p3H5/kCxWyfkzzHfCS3WXq6UiNk
-X-Google-Smtp-Source: AGHT+IFity8kZ0XwQm7YqNxXRGPu9k8J8DTTqYHkG4Rf/6QE8oTBvRwZFxnr0VF9DR4efE5WSlCGTA==
-X-Received: by 2002:a05:600c:4709:b0:40e:4db3:f7a7 with SMTP id
- v9-20020a05600c470900b0040e4db3f7a7mr2639438wmo.110.1705227447841; 
- Sun, 14 Jan 2024 02:17:27 -0800 (PST)
-Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
- cf12-20020a170906b2cc00b00a28116285e0sm3906165ejb.165.2024.01.14.02.17.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 14 Jan 2024 02:17:27 -0800 (PST)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Simon Glass <sjg@chromium.org>, Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 1/1] cmd: bootmenu: rename U-Boot console to Exit
-Date: Sun, 14 Jan 2024 12:17:01 +0200
-Message-Id: <20240114101701.23070-2-clamor95@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240114101701.23070-1-clamor95@gmail.com>
-References: <20240114101701.23070-1-clamor95@gmail.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1705236415; x=1705841215; i=xypron.glpk@gmx.de;
+ bh=DwHXUXUvS6oJcT+jMwmDne5LkZutc7kvAPAP05QDFSA=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=eq9TjsPQVw3eUp6PZLebw+OLBZnJjO3WjA36gwQ4kO2ps9FqFWhTeUU+l0Y8mLk2
+ k79eENcRLq8YrkkhOWmrbnbC3pP3hoMa1xlUVT0Wi8uCr6c4JTLMiI0nnEvcvnVbf
+ A3XGnaZV8fgxOVChjsA8FrDihjdfWLQO5gze9KpsS/80PsPDPAkv+Z8UB9BMROMsT
+ GEFiDDouLjIfEBzlKteXCQtZ/b5K92AFKNnzHyWjJ8xhn+7dzsvX0edKjWlEQY1++
+ iGkuUGAaFWSoygVmzhrJmbE8JaJGwtSrtOyiTN523imRPcxFaw22I7k9Gq9JDdIdR
+ O9Nlk3KlKefNin52sA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([178.202.40.247]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mzyyk-1rC7Mf1CmE-00x5Nv; Sun, 14
+ Jan 2024 13:46:55 +0100
+Message-ID: <1c42a17d-1043-4449-93c2-9020c1ded71d@gmx.de>
+Date: Sun, 14 Jan 2024 13:46:45 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/4] efi_loader: rename BOOTEFI_BOOTMGR to EFI_BOOTMGR
+Content-Language: en-US, de-DE
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
+ ilias.apalodimas@linaro.org
+References: <20240110011637.174710-1-takahiro.akashi@linaro.org>
+ <20240110011637.174710-3-takahiro.akashi@linaro.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240110011637.174710-3-takahiro.akashi@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:LyxvTnW9edmCVggpcw9f1SpcK021fkNR2Js1JakPBM5xX6ekZl4
+ M/xH56tYY8uXdzc1h4Mc354QCpqX4pmnP5kuTUcxZuvW02P2oHjHVoZcXdPUmxIyOR3JXWE
+ l2uXrGQka+tdM6iPfRKoLEYLC+oLTm7cppkiA3xYNQU3zmedjJ751Cx1MrqX2UBYj5j7XvW
+ BK8AMqZ+JVfzDUNz4iJdQ==
+UI-OutboundReport: notjunk:1;M01:P0:3NoBl44rf0o=;2hx1uVYqfj3+14+Qa4ixYloXXbO
+ Lrp95BK181Fag7exoTP+CUXpd87s+zz+15KN4meWAdzL/FsYFT09gSnOxC3bdBUpRjJ1Y5uEA
+ gr3dzCZpV9DlryIRbH+Q32Qx3v/d5sQGhR2+ZEX9Di53I7sy8jaAdi+2Wg+ZJzt43ShyiPYMT
+ jGt1c8MLzZ0bKxDnRsOF0kofNHl/RkzMCQr3jDinle0w9jj40+yG8kdg1kRa/ULrznO5T8MXL
+ QRr+2/82vOzWFDeTjXV+yT0Pm/rpaZ38FrOBgW0/AyLwgqAh0sQD/EdSKqs9R0q45jERrUOx6
+ 7kaEflhsPLRV4cnDQ9Vx21oJm0Fz2ObLDnYPfTn+12BIPkw2U8xz2fnzAQD16dpCSss7Al1Xv
+ m8RwRQ6cxyE1M2V2E//tsAH+kLHqaYTQEmd/CZ0/Ti827MD7Gjsyc6pyoI9uRapopZ0RR6F69
+ RI9XylDLWEk44kyrnaO2UbzWDOBGSLb2AcSKO7rcpg+fkaJmdqviusnvF1oE2BIzl7lSe7Hye
+ A7HbdVK5DoDdk5NY9WT3hhGZfgXb5HdQCKEo+Wu4QHhEycPuh6VN/jeV0T5OdrajVImsFgQec
+ vl9m3cvQxBw1D0mohsowy6mTZ+TCy8gB1catQiJQXogK98AiOe8j94yMGNYaxZXxeE6aWwdLb
+ k+f/HEG4dOXj6OY6aXYchwjLvBA0xnWxinFE/PBy88ufA5GcOGqLbOcjHK8tp02CAXL8RoDXX
+ HF7Lf5p3nZqzw62AxA+HRqVNCJM3Fhk9R2uIhNamUUgIbXvbSytl7PvH/dK0MBWLKP1FMVARC
+ 7OY7GTmQSxmmkl+WbKOacJ+pxh8YXlMLbgdsKtm4J8cV14GYfWcMk+O2+HohlguJkhIz5b9/e
+ 8ZdxKFivUowafaG+x7nXv8J3IeGx22Vdfk1c59tKhlJHGo70zW3WjcRPS7accDMRyaB3paJVI
+ uGLdq2tIvY6KwlQSQo3znJWIMr8=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,59 +90,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It seems that the U-Boot console entry of the bootmenu has lost
-its original meaning. Now, even if it is chosen, the probability
-that you will enter the actual U-Boot console is quite low.
-Boot env, bootflow, bootcommand script may appear, but not the
-actual console. Hense, let's remove ambiguity and name this
-entry by what it actually does: 'Exit' the bootmenu.
+On 1/10/24 02:16, AKASHI Takahiro wrote:
+> At this point, EFI boot manager interfaces is fully independent from
+> bootefi command. So just rename the configuration parameter.
+>
+> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- cmd/bootmenu.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+This patch breaks the 'bootefi hello' command in
+qemu-riscv64_smode_defconfig and other QEMU defconfigs.
 
-diff --git a/cmd/bootmenu.c b/cmd/bootmenu.c
-index 987b16889f..69fca710a8 100644
---- a/cmd/bootmenu.c
-+++ b/cmd/bootmenu.c
-@@ -119,7 +119,7 @@ static char *bootmenu_choice_entry(void *data)
- 				iter = iter->next;
- 			return iter->key;
- 		case BKEY_QUIT:
--			/* Quit by choosing the last entry - U-Boot console */
-+			/* Quit by choosing the last entry - Exit */
- 			iter = menu->first;
- 			while (iter->next)
- 				iter = iter->next;
-@@ -361,15 +361,15 @@ static struct bootmenu_data *bootmenu_create(int delay)
- 	}
- #endif
- 
--	/* Add U-Boot console entry at the end */
-+	/* Add Exit entry at the end */
- 	if (i <= MAX_COUNT - 1) {
- 		entry = malloc(sizeof(struct bootmenu_entry));
- 		if (!entry)
- 			goto cleanup;
- 
--		/* Add Quit entry if entering U-Boot console is disabled */
-+		/* Add Quit entry if exiting to U-Boot console is disabled */
- 		if (!IS_ENABLED(CONFIG_BOOTMENU_DISABLE_UBOOT_CONSOLE))
--			entry->title = strdup("U-Boot console");
-+			entry->title = strdup("Exit");
- 		else
- 			entry->title = strdup("Quit");
- 
-@@ -532,7 +532,7 @@ static enum bootmenu_ret bootmenu_show(int delay)
- 		title = strdup(iter->title);
- 		command = strdup(iter->command);
- 
--		/* last entry is U-Boot console or Quit */
-+		/* last entry is Exit or Quit */
- 		if (iter->num == iter->menu->count - 1) {
- 			ret = BOOTMENU_RET_QUIT;
- 			goto cleanup;
--- 
-2.40.1
+Best regards
 
+Heinrich
