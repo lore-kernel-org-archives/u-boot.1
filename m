@@ -4,79 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4531C47077
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jan 2024 14:39:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7027AC47077
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jan 2024 14:41:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA5F287707;
-	Sun, 14 Jan 2024 15:39:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 859F187707;
+	Sun, 14 Jan 2024 15:41:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lAerDBSe";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gF4icYTA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 767E487849; Sun, 14 Jan 2024 15:39:57 +0100 (CET)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id AC08587873; Sun, 14 Jan 2024 15:41:54 +0100 (CET)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52F1586E05
- for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 15:39:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A01B186E05
+ for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 15:41:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-67f9f6ca479so53833176d6.3
- for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 06:39:55 -0800 (PST)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2cc9fa5e8e1so92641991fa.3
+ for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 06:41:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705243194; x=1705847994; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+XUY5PReW55vWuR2br3C6EmM38qZtDJbrHxCfXeIgsg=;
- b=lAerDBSehSf3OV1/sUYA1EeUeeKg5yPech0tAqJDaXlY8MOsfzoVjUelfPS22jeRXH
- EGtYA3ezsJDDo/S3ADbljbl0yGFGnjtfxxh5zk+dnPT1hJ/NZLu/LvLHBtPIRViOu7Yn
- zco4sCg10GlyJ7rlNo+5ZleZQt4s+f3ve7T0M=
+ d=gmail.com; s=20230601; t=1705243312; x=1705848112; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ksSZ5cyaRiil68fDDkeXi34OS46o72Q4E3J9TkupU5Q=;
+ b=gF4icYTA+vhFkgbaC15whoZw7s/KQedpjAtFm7NXyXfPU4shdfZfvvL0c1BIbxcodg
+ +B15HDOceBBU3E4pQR8NqBB5DcgyH8AO/nrnId/F+20c/2DLb6dvqVFXupAQmh11Kxq9
+ 8rChgdsxOiCWlYbI2US+U+2jV/huIZ9yJso0GAoL1gIT6RgWqfNT5K3hJi2MOypZs/QF
+ 369JgrYDLhtBsqdL8Nim0wl+sDwgzWOuZ0F2mf0f47oBG70XCSVCLa3hPkuOaMylhqHK
+ 30BBChd2JT0Wpwwu5NdCJUv/tqoV9tsnpvMbK8vQzsDvH6L2odzmA6SJPI9ksA2hXJ6B
+ U2Yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705243194; x=1705847994;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+XUY5PReW55vWuR2br3C6EmM38qZtDJbrHxCfXeIgsg=;
- b=DrZcOyH7Yh1PkRLVzwBYvaUiPKPyrwbT4VrW+QbwNFs9dRxKxVo5aUlp2uNjMfgNLb
- BJSlP2KZTmhjsQ23Tb6Bmx0ePypCH16wT5csb/qptrEA3A+Tt0TRZLFMwXH539q26nFW
- n/exodvYkhblcyJ03+n9TONLW0DhVdsKr7/xnhra2isEbPLmSTCgx/lKeRETIpQSht6B
- 2s1McFI8AJ6dNI17c9NcSXNOIfBw4TueKf3fNW+mgutuN0/KbxC3YO6yyNmzayT9U0Sc
- 8391ZeO01DuHG0j49x7NIseM2k7Ewj+i9HMt7wYd44qJ1GCxLku7jUpRUG//fFfDOttX
- woiA==
-X-Gm-Message-State: AOJu0YzMp255zjKdE3szI/REWaY93VA4XGTOoOacIV4M49ei8vSpxjdF
- A21wj1CfgTt6I69MsLV56ZnyovG4QP3+pw==
-X-Google-Smtp-Source: AGHT+IH6NQto8HLDvVQHx96UUtgTqd0gzVBJpYoxo/1t8kU9KkNaLKzJ/BBCKHRSe+noShONDrmiPw==
-X-Received: by 2002:a0c:aa9d:0:b0:680:fec5:874a with SMTP id
- f29-20020a0caa9d000000b00680fec5874amr4279862qvb.76.1705243194103; 
- Sun, 14 Jan 2024 06:39:54 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- z7-20020a0cfec7000000b006815748969esm684837qvs.13.2024.01.14.06.39.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 14 Jan 2024 06:39:53 -0800 (PST)
-Date: Sun, 14 Jan 2024 09:39:51 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Nishanth Menon <nm@ti.com>, Jonathan Corbet <corbet@lwn.net>,
- Oliver Faso <erer1243@gmail.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 5/5] doc: update requirements.txt
-Message-ID: <20240114143951.GK1610741@bill-the-cat>
-References: <20240114131824.68298-1-heinrich.schuchardt@canonical.com>
- <20240114131824.68298-6-heinrich.schuchardt@canonical.com>
+ d=1e100.net; s=20230601; t=1705243312; x=1705848112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ksSZ5cyaRiil68fDDkeXi34OS46o72Q4E3J9TkupU5Q=;
+ b=IZJraifJtRalXGvTimPDdsx0jpUvDLZ6DJPNd1S9DC5x89QjzSkBUE9bCyt8OiOj6h
+ gVxN4d5+bpULHxgwUi33dMIoqltFKjN24VxiN7GBQNVpsVz0e06Ijj6v8+md/t93D55o
+ YmKW1pHwqGuG4SPWPEIC1RPMV7Vlotiq1V5mr9uSPbTibZGgXLbSJ9UORXCIpQxJT8jE
+ Cc+eLvGQNdA3GG2INy40uM26jFk3s8cI2AODRdKEBd+32P1fyQbLeHWoglvYhV6IdbHN
+ CEnPuhJlBi7Q5NwHS5eAbzdZHFtOOR+4Va7n6FxmX8dxfQyyc9/Wzp2ju34KjPe4E54K
+ kTPg==
+X-Gm-Message-State: AOJu0YyH/gzd/VcTlP9JPNcL7kkZdkmBRj7b6iD7+ywr48HHb7ERKP70
+ HnBtrOT46YL9vETDeIO2eeWNcewXo31mCzyJGhsSyeGz
+X-Google-Smtp-Source: AGHT+IERCkEqwwjxabNX0E/rbSEo34jhvuGbE0pBq1c8BBIsH2i2jB1v5BMUQAsES4SLJ3WFGIFVm5TT25pPRe3GhaA=
+X-Received: by 2002:a2e:ab1a:0:b0:2cd:9fbc:d3d3 with SMTP id
+ ce26-20020a2eab1a000000b002cd9fbcd3d3mr1967780ljb.69.1705243311558; Sun, 14
+ Jan 2024 06:41:51 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="EvwkBhTPlFbBMdxj"
-Content-Disposition: inline
-In-Reply-To: <20240114131824.68298-6-heinrich.schuchardt@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240114101701.23070-1-clamor95@gmail.com>
+ <20240114101701.23070-2-clamor95@gmail.com>
+In-Reply-To: <20240114101701.23070-2-clamor95@gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Sun, 14 Jan 2024 14:41:40 +0000
+Message-ID: <CALeDE9N6kn9Q-Uafx9-3_3xPUhLj1QN=h6DemYturrBUM5nwmQ@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] cmd: bootmenu: rename U-Boot console to Exit
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, Raymond Mao <raymond.mao@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Masahisa Kojima <masahisa.kojima@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,47 +88,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sun, 14 Jan 2024 at 10:23, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
+>
+> It seems that the U-Boot console entry of the bootmenu has lost
+> its original meaning. Now, even if it is chosen, the probability
+> that you will enter the actual U-Boot console is quite low.
+> Boot env, bootflow, bootcommand script may appear, but not the
+> actual console. Hense, let's remove ambiguity and name this
 
---EvwkBhTPlFbBMdxj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hence
 
-On Sun, Jan 14, 2024 at 02:18:23PM +0100, Heinrich Schuchardt wrote:
+> entry by what it actually does: 'Exit' the bootmenu.
+>
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> ---
+>  cmd/bootmenu.c | 10 +++++-----
+>  1 file changed, 5 insertions(+), 5 deletions(-)
+>
+> diff --git a/cmd/bootmenu.c b/cmd/bootmenu.c
+> index 987b16889f..69fca710a8 100644
+> --- a/cmd/bootmenu.c
+> +++ b/cmd/bootmenu.c
+> @@ -119,7 +119,7 @@ static char *bootmenu_choice_entry(void *data)
+>                                 iter = iter->next;
+>                         return iter->key;
+>                 case BKEY_QUIT:
+> -                       /* Quit by choosing the last entry - U-Boot console */
+> +                       /* Quit by choosing the last entry - Exit */
 
-> Update requirements.txt to most current packages as produced by
->=20
->    python3 -m pip install six sphinx-rtd-theme sphinx-prompt
->    python3 -m pip freeze
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+I think just put "Set the last entry to Exit"
 
-Note that this will also fix CVE-2024-22195 (Jinja before 3.1.3 has an
-issue that's unlikely to be a problem for us), but I don't think we need
-to spell that out in the commit message, I'm just noting for the record
-here.
+>                         iter = menu->first;
+>                         while (iter->next)
+>                                 iter = iter->next;
+> @@ -361,15 +361,15 @@ static struct bootmenu_data *bootmenu_create(int delay)
+>         }
+>  #endif
+>
+> -       /* Add U-Boot console entry at the end */
+> +       /* Add Exit entry at the end */
+>         if (i <= MAX_COUNT - 1) {
+>                 entry = malloc(sizeof(struct bootmenu_entry));
+>                 if (!entry)
+>                         goto cleanup;
+>
+> -               /* Add Quit entry if entering U-Boot console is disabled */
+> +               /* Add Quit entry if exiting to U-Boot console is disabled */
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+s/Quit/Exit/
 
---=20
-Tom
+>                 if (!IS_ENABLED(CONFIG_BOOTMENU_DISABLE_UBOOT_CONSOLE))
+> -                       entry->title = strdup("U-Boot console");
+> +                       entry->title = strdup("Exit");
+>                 else
+>                         entry->title = strdup("Quit");
+>
+> @@ -532,7 +532,7 @@ static enum bootmenu_ret bootmenu_show(int delay)
+>                 title = strdup(iter->title);
+>                 command = strdup(iter->command);
+>
+> -               /* last entry is U-Boot console or Quit */
+> +               /* last entry is Exit or Quit */
 
---EvwkBhTPlFbBMdxj
-Content-Type: application/pgp-signature; name="signature.asc"
+"Last entry is Exit" as I don't see Quit referred to.
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWj8jcACgkQFHw5/5Y0
-tyzmuAwAladbGCmwgfp+BlHFo7aimnuYSyNJ/qPXCec+dH7y+XGDMxaKJxG7e4Ji
-kVGCV6DZfTWTfRKjHZxXw9PQgh+VUcir9tRrg2Nlhk3oas+dgDfBVpuIpZFwNk6a
-1xWRob6TE08BD3FDo2vGYKOVWM9PyhBTaAEqv1tTrSw3aZ3eG7MgRLZ1w/mLS6vq
-cMgTwzy871kGZ6SP/geU4n6I11tjLslBcjXjVHMOLTQVdfVV+xl5awzIh1VS9XZG
-ILbmS2fH7EHyP8+ZM0V0Wewakx7sDPWU9hbeHAD67vqutNvWiXfgjPe6FhZ1j2VU
-3vsEIw1Xfkp48G1gA5lCBi1ky+P2BwCyRFy6woJrepz6pCuq0YjM033aYIg8GYMa
-dztaSoLbSe6LeIcbLQbEkGDpSB8C8+VrtXzstUqLv6wn3j+S8G1x3TKBQgxf2uqc
-Cc2HlwSw7Cv/Ycf/mMa5VLI8qqT/w6a3CliAsLfuJh1C5J15xHWuvICk2wy+QVKE
-n2OaJLrE
-=HdXB
------END PGP SIGNATURE-----
-
---EvwkBhTPlFbBMdxj--
+>                 if (iter->num == iter->menu->count - 1) {
+>                         ret = BOOTMENU_RET_QUIT;
+>                         goto cleanup;
+> --
+> 2.40.1
+>
