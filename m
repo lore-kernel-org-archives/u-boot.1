@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30741C4707B
-	for <u-boot@archiver.kernel.org>; Sun, 14 Jan 2024 13:18:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32429C4707B
+	for <u-boot@archiver.kernel.org>; Sun, 14 Jan 2024 13:18:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D88A687873;
-	Sun, 14 Jan 2024 14:18:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5A28A8795D;
+	Sun, 14 Jan 2024 14:18:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SlUlOTYO";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="dWTOMOza";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88BC287985; Sun, 14 Jan 2024 14:18:42 +0100 (CET)
+ id D28D58786B; Sun, 14 Jan 2024 14:18:42 +0100 (CET)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E96148785F
- for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 14:18:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BF9FA87941
+ for <u-boot@lists.denx.de>; Sun, 14 Jan 2024 14:18:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,28 +31,31 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 21762416CD; 
- Sun, 14 Jan 2024 13:18:38 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 0E3B841BBD; 
+ Sun, 14 Jan 2024 13:18:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1705238318;
- bh=E3XIUUH4UMe10eBclJ4wO+Va+AP8V33SCxE1LM07c+U=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=SlUlOTYOeAvP6GQ0PC1TJrnKtm8Mwn5Dqbo11ll8dvFrI758T0GEXpCrLb7U0k3PM
- E8/UboDdnQpBuexS1wTRh1M2sahQZ2aprDGYojuGKxN8TUon07/vK2KD+tfS4fEGFM
- 4FW1YqYPVqrfvqfDWtfzI1hlgi5OHJgAhJmq5M2m+5xi7x6C/aCYTM1E4FTLJyZSaB
- vGyuTu3iFdR34uffCd7LI0YJKO22D21yPz3myleLCje4plp47Pm7+9Bt4o9XcQJQl2
- xFBIb8i2oRUh8IjZKOBOltErIoQqsYgAsIYPvlL6J99NOrqptYbwyf/xgZPTxuSLmY
- QMNYVSXrFQFiw==
+ s=20210705; t=1705238319;
+ bh=DPZJ2Oicg7vB+3J5AGffviCymseNwqwiSFtxjtWMJZ8=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=dWTOMOza3GXcBPxxzzgyv4UURNWKDBmJ0eUXxCNRF5CaEAasjspeR/fFMf63ogvnj
+ JpK03cQN9INFeqhEn+rFdmwnuANg7x0GhUHl7D5xFUKF+yrQI1lMShRtA0qS5xgHp6
+ dHsA0FkFBff+s/hrxtq7mFK9yviUmWHVA6qUjg6oeUlk2nx3SZ+VT2xfzhd6PykceB
+ PwVM6hmLXv8GeSiNK+FMZ6ZVA8y02meGKDP+5W9vjJX0wVG5lDLOprohqjseW+ssS+
+ 3/wTB8/DZx4sSuvQ40xpcp+sDHKEwzRicXnZ7H5zO+J2pwI0icM8ILYUrdmB9SHX+1
+ lnk5jBpSLGgNg==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Nishanth Menon <nm@ti.com>, Jonathan Corbet <corbet@lwn.net>,
  Oliver Faso <erer1243@gmail.com>, Simon Glass <sjg@chromium.org>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 0/5] doc: update requirements.txt
-Date: Sun, 14 Jan 2024 14:18:18 +0100
-Message-ID: <20240114131824.68298-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 2/5] doc: add sphinx_rtd_theme extension
+Date: Sun, 14 Jan 2024 14:18:20 +0100
+Message-ID: <20240114131824.68298-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240114131824.68298-1-heinrich.schuchardt@canonical.com>
+References: <20240114131824.68298-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -71,33 +74,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update all Python requirements to there newest version.
+Newer versions of sphinx_rtd_theme require to add sphinx_rtd_theme to the
+list of extensions. Cf.
+https://github.com/readthedocs/readthedocs.org/pull/9654
 
-Update the CSS overrides from Linux.
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ doc/conf.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Apply prerequisite changes:
-
-* convert Sphinx paths to str (patch copied from Linux)
-* add sphinx_rtd_theme to the array of extensions instead of setting
-  html_theme_path
-* include Sphinx theme.css and pygments.css in our CSS override
-
-Heinrich Schuchardt (4):
-  doc: add sphinx_rtd_theme extension
-  doc: update theme_overrides.css
-  doc: import Sphinx theme.css and pygments.css
-  doc: update requirements.txt
-
-Oliver Faso (1):
-  docs/sphinx: Explicitly convert Sphinx paths to str
-
- doc/conf.py                           |  2 +-
- doc/sphinx-static/theme_overrides.css | 47 ++++++++++++++++++++++++---
- doc/sphinx/kerneldoc.py               |  2 +-
- doc/sphinx/kfigure.py                 |  2 +-
- doc/sphinx/requirements.txt           | 43 ++++++++++++------------
- 5 files changed, 67 insertions(+), 29 deletions(-)
-
+diff --git a/doc/conf.py b/doc/conf.py
+index 5e2ff1c8f5..c9138a5a5d 100644
+--- a/doc/conf.py
++++ b/doc/conf.py
+@@ -228,7 +228,7 @@ highlight_language = 'none'
+ try:
+     import sphinx_rtd_theme
+     html_theme = 'sphinx_rtd_theme'
+-    html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
++    extensions.append('sphinx_rtd_theme')
+ except ImportError:
+     sys.stderr.write('Warning: The Sphinx \'sphinx_rtd_theme\' HTML theme was not found. Make sure you have the theme installed to produce pretty HTML output. Falling back to the default theme.\n')
+ 
 -- 
 2.43.0
 
