@@ -4,67 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE471C3DA79
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 10:48:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4635C3DA79
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 11:40:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4698186314;
-	Mon, 15 Jan 2024 11:48:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id B8013871CF;
+	Mon, 15 Jan 2024 12:40:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="PFpblLa4";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Fnl3U1Wd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8416871CC; Mon, 15 Jan 2024 11:48:27 +0100 (CET)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3814E86FF9; Mon, 15 Jan 2024 12:40:14 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D966786308
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 11:48:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-dbdb124491cso6587996276.1
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 02:48:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1705315703; x=1705920503;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=CSmkq40sBVUI84nypYwy0As8tAB0TTK3WJp/z1hjwTQ=;
- b=PFpblLa4J2sR1OLLD2U+4EYE5FlETzRfqjK+PDpT3+LYZq1eUkiYCaNg9Z8PgkuCx2
- mOLmphdWkBmusTJVkcl1d2hdFF8VrmnkqDglwGSsz8/8p2CZFv3P93FrpPT2CFWfcNEq
- XqGRRbzxAMraSZMS2amxAUAc7IwPEsBUlXgc4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705315703; x=1705920503;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=CSmkq40sBVUI84nypYwy0As8tAB0TTK3WJp/z1hjwTQ=;
- b=wIRT3a050vUCuU5qK6Xk1fuu+djeOu29gqVdYrdf78Fd58Jx4REWsYceXqt6FEfktS
- EBtEeStLHuuJbEXlOWn5bphXnVjnI0lLUcu0YbYMXQQffsK8ouHDM1SSzAf9xX+Ztdeu
- 6+3xIyZxafKI+ov60XLF7mOqRRtBmzKa7PuzDKHFJE6vA2CtcHDzgsJmCXCCx00HDc1K
- epd/iWEb2Rzlym4tUcCQOee4hw5EFFWEydjH5WU/1tStQTvhrCpO3Vo1zK52N+TUU/aL
- UGMzlCauFctmwY59X185GtxOkQJQhyw+wIFzTGm42NdJ+Qj0GQkpsgFZn7m89SrFifVC
- rszQ==
-X-Gm-Message-State: AOJu0YzAcgS4pZFY9ZK2+0WVxWtLgayI5ofAjFchAUhBJQMdD8HxUVQw
- A9RvGQEnePvGDwzavd3JuhgvLBTubEwkkc+RessOuDH7NbS+Dw==
-X-Google-Smtp-Source: AGHT+IGybVxRUYMnftT1f08mw9Z7ogpyGrNCOJIt8HhvRzEGmPNIIixjQmYQfSjPL1xaKKcdg3QFn9c4dKWx/0wAkAY=
-X-Received: by 2002:a25:db88:0:b0:dbd:998:5fbd with SMTP id
- g130-20020a25db88000000b00dbd09985fbdmr2689691ybf.32.1705315703606; Mon, 15
- Jan 2024 02:48:23 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32DE0871CF
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 12:40:10 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 7987ECE0A1D;
+ Mon, 15 Jan 2024 11:40:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6C3F2C433F1;
+ Mon, 15 Jan 2024 11:40:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1705318805;
+ bh=4grwlrNENwsSa/FcXPkqPWtyuk25goyJrHMkpAv+3aI=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=Fnl3U1WdQRHr56x1fXcDfPxdTx5YptkTc7VF3C7buJ6hD7CzgEoqgke2KCTeCqanV
+ raDpzAJu65ZDAl6Te2tnHF3CXZC5HdhfkfLDsTnfDCvrSpJR7sAamr5oBpzE2XOx06
+ JtsiG5m19ZUBuB+MHF4IPtc1fMQTjjZ4ifnmc2uIGZdlvbRV28fpd9PkovtEa8rmfp
+ flHm3d3mAjC0Ot4v8Sj8G0ZdfR+JBo1CFXowqC4tpr7dVVe56XRkkk+DgTsZa2nhDA
+ N1QPAyq4SLo7yvSPAPeU1TmpEjMfD23hy3JrRvQ5Fc47ct2Co5rhHZLjyXOFx4iNff
+ j++x3vDowS9Hg==
+Message-ID: <1f4ceaf6-0387-4010-bbcd-0f6970428e8c@kernel.org>
+Date: Mon, 15 Jan 2024 13:40:00 +0200
 MIME-Version: 1.0
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Date: Mon, 15 Jan 2024 11:48:12 +0100
-Message-ID: <CABGWkvo7ERgbNViKy=mYAyiHkemULT-8qXWQr3yprzQnL7cDYg@mail.gmail.com>
-Subject: [PULL] Pull request for u-boot-nand-20240115
-To: Tom Rini <trini@konsulko.com>
-Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Roger Quadros <rogerq@kernel.org>, U-Boot-Denx <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/5] arm: dts: k3-j721e-beagleboneai64: Fix USB operation
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, Nishanth Menon <nm@ti.com>
+Cc: robertcnelson@gmail.com, marex@denx.de, n-francis@ti.com,
+ praneeth@ti.com, s-vadapalli@ti.com, r-gunasekaran@ti.com, srk@ti.com,
+ vigneshr@ti.com, u-boot@lists.denx.de
+References: <20240112124951.238098-1-rogerq@kernel.org>
+ <20240112124951.238098-5-rogerq@kernel.org>
+ <20240112130233.bflterluncjoyrhy@treadmill>
+ <8f5d151c-aebb-41d9-b638-83c60e740d15@kernel.org>
+ <20240112131450.tpn454pfzlqlteed@urology>
+ <20240112132131.GN1610741@bill-the-cat>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20240112132131.GN1610741@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,79 +77,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
 
-The following changes since commit 697758e7c81131da6db0e3b10515019fe3aca8c9:
 
-  Merge branch 'master-sync-dts-663' of
-https://source.denx.de/u-boot/custodians/u-boot-sh (2024-01-14
-18:07:49 -0500)
+On 12/01/2024 15:21, Tom Rini wrote:
+> On Fri, Jan 12, 2024 at 07:14:50AM -0600, Nishanth Menon wrote:
+>> On 15:06-20240112, Roger Quadros wrote:
+>>>
+>>>
+>>> On 12/01/2024 15:02, Nishanth Menon wrote:
+>>>> On 14:49-20240112, Roger Quadros wrote:
+>>>>> Without correct SERDES MUX and Lane control settings
+>>>>> USB0 will be broken. Set the MUX and Lane control devices
+>>>>> to be auto probed so they are configured correctly.
+>>>>>
+>>>>> Signed-off-by: Roger Quadros <rogerq@kernel.org>
+>>>>> ---
+>>>>>  arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi | 2 ++
+>>>>>  1 file changed, 2 insertions(+)
+>>>>>
+>>>>> diff --git a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
+>>>>> index f83caf7998..017a5a722e 100644
+>>>>> --- a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
+>>>>> +++ b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
+>>>>> @@ -165,6 +165,7 @@
+>>>>>  
+>>>>>  &serdes_ln_ctrl {
+>>>>>  	bootph-all;
+>>>>> +	u-boot,mux-autoprobe;
+>>>>>  };
+>>>>>  
+>>>>>  &serdes2_usb_link {
+>>>>> @@ -173,6 +174,7 @@
+>>>>>  
+>>>>>  &usb_serdes_mux {
+>>>>>  	bootph-all;
+>>>>> +	u-boot,mux-autoprobe;
+>>>>>  };
+>>>>>  
+>>>>>  &serdes_wiz2 {
+> 
+> OK, so both of these are compatible = "mmio-mux", is the problem they
+> aren't probed in time or something else?
+> 
 
-are available in the Git repository at:
+That's correct. They aren't probed ever. But that is because there are no
+explicit consumers for them. Since this is a platform wide configuration,
+we have been relying on the "idle-states" property and that they are auto-probed.
 
-  https://source.denx.de/u-boot/u-boot.git u-boot-nand-20240115
-
-for you to fetch changes up to 4dfa08af79097d068d6657a4c77e7d474733b796:
-
-  arm: mach-k3: am642: Define NAND boot device (2024-01-15 08:58:24 +0100)
-
-Gitlab CI showed no issues:
-https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipelines/19322
-
-----------------------------------------------------------------
-Pull request for u-boot-nand-20240115
-
-The first patch is by Heinrich Schuchardt and fixes an integer overflow
-
-The following two patches are by Dario Binacchi and add arguments check
-to the nand_mtd_to_devnum() and nand_register() functions.
-
-The remaining patches are by Roger Quadros and include various fixes for
-the OMAP platform.
-
-----------------------------------------------------------------
-Dario Binacchi (2):
-      mtd: nand: complete nand_register() arguments check
-      mtd: nand: check nand_mtd_to_devnum() argument
-
-Heinrich Schuchardt (1):
-      cmd: mtd: avoid unintentional integer overflow
-
-Roger Quadros (6):
-      mtd: nand: omap_gpmc: Fix NAND in SPL for AM335x
-      mtd: rawnand: omap_elm: Fix elm_init definition
-      memory: ti-gpmc: Fix build
-      mtd: rawnand: omap_gpmc: Use DT provided IO address
-      mtd: rawnand: omap_gpmc: fix OF based partition parsing for NAND
-      arm: mach-k3: am642: Define NAND boot device
-
- arch/arm/mach-k3/am642_init.c            |   3 +++
- arch/arm/mach-k3/include/mach/am64_spl.h |   1 +
- cmd/mtd.c                                |   4 ++--
- drivers/memory/ti-gpmc.c                 |   2 +-
- drivers/mtd/nand/raw/nand.c              |   7 ++++--
- drivers/mtd/nand/raw/omap_elm.c          |   4 ++--
- drivers/mtd/nand/raw/omap_elm.h          |   6 ------
- drivers/mtd/nand/raw/omap_gpmc.c         | 116
-+++++++++++++++++++++++++++++++++++++++------------------------------------------------------------
- 8 files changed, 59 insertions(+), 84 deletions(-)
-
+>>>>> -- 
+>>>>> 2.34.1
+>>>>>
+>>>>
+>>>> Is this a u-boot thing? or a driver limitation?
+>>>>
+>>>
+>>> u-boot specific. We just want the mux driver to probe
+>>> and apply the settings.
+>>>
+>>> from drivers/mux/mux-uclass.c
+>>>
+>>> int dm_mux_init(void)
+>>> {
+>>>         struct uclass *uc;
+>>>         struct udevice *dev;
+>>>         int ret;
+>>>
+>>>         ret = uclass_get(UCLASS_MUX, &uc);
+>>>         if (ret < 0) {
+>>>                 log_debug("unable to get MUX uclass\n");
+>>>                 return ret;
+>>>         }
+>>>         uclass_foreach_dev(dev, uc) {
+>>>                 if (dev_read_bool(dev, "u-boot,mux-autoprobe")) {
+>>>                         ret = device_probe(dev);
+>>>                         if (ret)
+>>>                                 log_debug("unable to probe device %s\n",
+>>>                                           dev->name);
+>>>                 }
+>>>         }
+>>>
+>>>         return 0;
+>>> }
+>>>
+>>>
+>>
+>> Uggh.. We need to see eventually how to get rid of this.
+>> This makes
+>> https://lore.kernel.org/u-boot/20240110103547.719757-1-sumit.garg@linaro.org/#t
+>> harder now?
+> 
+> No, it should be fine, Sumit's series handles -u-boot.dtsi files.
+> 
 
 -- 
-Dario Binacchi
-
-Senior Embedded Linux Developer
-
-dario.binacchi@amarulasolutions.com
-
-__________________________________
-
-
-Amarula Solutions SRL
-
-Via Le Canevare 30, 31100 Treviso, Veneto, IT
-
-T. +39 042 243 5310
-info@amarulasolutions.com
-
-www.amarulasolutions.com
+cheers,
+-roger
