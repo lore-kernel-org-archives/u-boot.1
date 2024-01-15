@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C324C3DA79
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 17:42:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DFF1C4707C
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 18:51:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 761A2879AB;
-	Mon, 15 Jan 2024 18:42:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id E28E8876F8;
+	Mon, 15 Jan 2024 19:51:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="z7geCC2x";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PM5f8aod";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43227878EE; Mon, 15 Jan 2024 18:42:31 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C9F6987852; Mon, 15 Jan 2024 19:51:28 +0100 (CET)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C7E8879EB
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 18:42:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EEBC787626
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 19:51:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=1744d49635=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 40FDU0NA021553; Mon, 15 Jan 2024 18:42:17 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=s1q66G7043sYJvF6jBzsBt/8C3bNHFiI3gM+7akYBaI=; b=z7
- geCC2xp1rjyt1SsTp1YnQj07tnX2E8LOv78b4YIht9gZDRrXsTgazg38aXmpysj1
- g/Jve2Fs2neuJamrUfr+zZzMovM7Tf4b4NhwKC7oKsKDo/2Gp2OWanzVQuNQP66l
- 9q1kVaRLpGKVoaxFAYn5BATsrWjzfhiGuk4VmbJ1QGurT1tIL2d6/LSB5o6ASN6u
- z7KaOuvpU+LGfQeByFBInHwdkKp/gjGvW7OadPFXf+gKVbYcwec2Zkg5rYxKQD3h
- we3lY5C2mhbSoOX2GhveYjuJv/ZA3ZqcfcxL5fC6ylSzhazWbuMMM4VhdDRyoXtJ
- NxV19uKNFEvsW2l/APEQ==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vm4y4qs9t-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 15 Jan 2024 18:42:17 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6C7BA100057;
- Mon, 15 Jan 2024 18:42:17 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 634DD290FC1;
- Mon, 15 Jan 2024 18:42:17 +0100 (CET)
-Received: from [10.201.20.205] (10.201.20.205) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 15 Jan
- 2024 18:42:16 +0100
-Message-ID: <dae41bd1-7d12-47c4-99bd-4638c8888b13@foss.st.com>
-Date: Mon, 15 Jan 2024 18:42:16 +0100
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3366ddd1eddso7448984f8f.0
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 10:51:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1705344686; x=1705949486; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=p1N0BoW7E1W/RVT7zDsuIE1tGK/RlIGl6XW7xYLUJdI=;
+ b=PM5f8aodaD77omVYJX89K7jH3MGWtp43ejS7H9dSBzhzDJaXUMN6UH4c19+EzS0FGc
+ xhkIR74At2V9EvuyyPwGrnY4+7mf5DR2RhnGSlluiKEjfG+N0VS533/Y174rYhIuEHEG
+ 5ocr66LBtpZ50EhZauy8QjTBbx5LMS6LlSDfJu1GUYvrnYqksoAnGP91OeP6Evvc5qX2
+ syor8CJEywe8XjITuuLKgyEjrkg5SLjbszHYcZ8vLUgUCPoJjBCPFGV+EXzsq/rX3X2d
+ 8qPNjEptvlOfZbKw1mDn5FKkQp6k3py6i7tPIqkj4cBoaIQg4yeYJMC7NWCoq0kXL9s4
+ uwbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705344686; x=1705949486;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=p1N0BoW7E1W/RVT7zDsuIE1tGK/RlIGl6XW7xYLUJdI=;
+ b=EnA91MNDSg5V7twc2gYLacDMcDk4ezTSr6+ztjuFRU/mwTkSmBxCt4pbjopUYmNcq2
+ lFaRwboijNmj+YIhnwkS2gj9pjPjaBEk5T9TTz6foc6lF7m3QBohlPUNJCIXr+D2mbLi
+ DNXO4oosR3NEBCmC1PrgMSZK5X1mbPJ+n9m7d2QHn6q5EuMSekZWoQ/hnss3Os+GoWEG
+ SUigdOSUNdXW3RcXEhfctbZVL48ZtYJ4dVYjmC7rlVT2P1KbzAcL24oOsKkf5wcWrf7m
+ XTwazMZaV05u9g+fy9TspkNMLtWM3ThZaQlM34UzNDzP1fflZnILK7MmHNgWuuMUFf78
+ +JfA==
+X-Gm-Message-State: AOJu0Yy+uvydpt3lIO1e8abf9v97t7FC2FqAa2Ab9ytM7ozWINYmSr13
+ wn5zGYPGt6knUYkMDuYHbEihiMs0vie6TQ==
+X-Google-Smtp-Source: AGHT+IEGsntu43GsMpZ/X4RQUa2b0Xk1y87OEQaH6YYOLFdyESSWhy0000yQjfEdTooou4Dm3Z+51Q==
+X-Received: by 2002:a05:600c:4683:b0:40e:490f:3f31 with SMTP id
+ p3-20020a05600c468300b0040e490f3f31mr1545711wmo.35.1705344686347; 
+ Mon, 15 Jan 2024 10:51:26 -0800 (PST)
+Received: from lion.caleb.rex.connolly.tech (host-92-17-96-230.as13285.net.
+ [92.17.96.230]) by smtp.gmail.com with ESMTPSA id
+ hn33-20020a05600ca3a100b0040e621feca9sm15276689wmb.17.2024.01.15.10.51.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Jan 2024 10:51:26 -0800 (PST)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH] sandbox_flattree: enable button support
+Date: Mon, 15 Jan 2024 18:50:49 +0000
+Message-ID: <20240115185122.776217-1-caleb.connolly@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 10/14] stm32mp: activate the command stboard for
- stm32mp25 boards
-Content-Language: en-US
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-CC: Igor Opaniuk <igor.opaniuk@foundries.io>, Marek Vasut <marex@denx.de>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, Simon Glass
- <sjg@chromium.org>, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20240115140557.57448-1-patrick.delaunay@foss.st.com>
- <20240115150451.v2.10.I7e8d4ae242605f7c9d276a858f336d13681528d9@changeid>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240115150451.v2.10.I7e8d4ae242605f7c9d276a858f336d13681528d9@changeid>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.201.20.205]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-01-05_08,2024-01-05_01,2023-05-22_02
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,64 +90,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+sandbox_flattree enables QCOM_PMIC_GPIO which now depends on BUTTON. As
+a result the button tests now get run, but fail because the ADC and GPIO
+button drivers aren't enabled.
 
+Enable them to run the tests for sandbox_flattree.
 
-On 1/15/24 15:05, Patrick Delaunay wrote:
-> Activate the command stboard for stm32mp25 STMicroelectronics boards,
-> add the default used OTP identifier and the associated board identifier:
-> - stm32mp25xx-ev1 = MB1936
-> - stm32mp25xx-dk = MB1605
-> 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
-> 
-> Changes in v2:
-> - fix CONFIG name with 'x': TARGET_ST_STM32MP15x TARGET_ST_STM32MP13x
-> 
->  arch/arm/mach-stm32mp/include/mach/stm32.h | 1 +
->  board/st/common/Kconfig                    | 2 +-
->  board/st/common/cmd_stboard.c              | 2 ++
->  3 files changed, 4 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
-> index 45c929aa605d..726c390977e3 100644
-> --- a/arch/arm/mach-stm32mp/include/mach/stm32.h
-> +++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
-> @@ -198,6 +198,7 @@ enum forced_boot_mode {
->  #define BSEC_OTP_SERIAL	5
->  #define BSEC_OTP_RPN	9
->  #define BSEC_OTP_PKG	122
-> +#define BSEC_OTP_BOARD	246
->  #define BSEC_OTP_MAC	247
->  #endif
->  
-> diff --git a/board/st/common/Kconfig b/board/st/common/Kconfig
-> index c1c254d07354..f40d1a78ca36 100644
-> --- a/board/st/common/Kconfig
-> +++ b/board/st/common/Kconfig
-> @@ -1,7 +1,7 @@
->  config CMD_STBOARD
->  	bool "stboard - command for OTP board information"
->  	depends on ARCH_STM32MP
-> -	default y if TARGET_ST_STM32MP15x || TARGET_ST_STM32MP13x
-> +	default y if TARGET_ST_STM32MP25X || TARGET_ST_STM32MP15x || TARGET_ST_STM32MP13x
->  	help
->  	  This compile the stboard command to
->  	  read and write the board in the OTP.
-> diff --git a/board/st/common/cmd_stboard.c b/board/st/common/cmd_stboard.c
-> index 853ab78bbf16..cb103e69b369 100644
-> --- a/board/st/common/cmd_stboard.c
-> +++ b/board/st/common/cmd_stboard.c
-> @@ -49,7 +49,9 @@ static bool check_stboard(u16 board)
->  		0x1298,
->  		0x1341,
->  		0x1497,
-> +		0x1605, /* stm32mp25xx-dk */
->  		0x1635,
-> +		0x1936, /* stm32mp25xx-ev1 */
->  	};
->  
->  	for (i = 0; i < ARRAY_SIZE(st_board_id); i++)
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Reported-by: Neil Armstrong <neil.armstrong@linaro.org>
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+---
+ configs/sandbox_flattree_defconfig | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Thanks
+diff --git a/configs/sandbox_flattree_defconfig b/configs/sandbox_flattree_defconfig
+index 0b637727d9f1..ad364f6e128e 100644
+--- a/configs/sandbox_flattree_defconfig
++++ b/configs/sandbox_flattree_defconfig
+@@ -101,6 +101,9 @@ CONFIG_SYS_ATA_DATA_OFFSET=0
+ CONFIG_SYS_ATA_REG_OFFSET=1
+ CONFIG_SYS_ATA_ALT_OFFSET=2
+ CONFIG_SYS_ATA_IDE0_OFFSET=0
++CONFIG_BUTTON=y
++CONFIG_BUTTON_ADC=y
++CONFIG_BUTTON_GPIO=y
+ CONFIG_CLK=y
+ CONFIG_CLK_COMPOSITE_CCF=y
+ CONFIG_CLK_K210=y
+-- 
+2.43.0
+
