@@ -4,77 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAA15C3DA79
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 08:03:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49BEFC3DA79
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 08:13:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED74A8784B;
-	Mon, 15 Jan 2024 09:03:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8425B8642D;
+	Mon, 15 Jan 2024 09:13:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="izrJLmvn";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="japzD0fe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C800876DD; Mon, 15 Jan 2024 09:03:19 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F0C1986487; Mon, 15 Jan 2024 09:13:00 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E41E807E4
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 09:03:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A0836807E4
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 09:12:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a2dbc61fe89so69853766b.0
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 00:03:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705305797; x=1705910597; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VJv7JBuguQmPpPEzX3TsGYZJXjhp3EARyLG9Ovj17yE=;
- b=izrJLmvnedYHLEsYhL2bwp77tgpyln6iTV25TYOEmlVL1fehxa9jWEzksxhyj6eQt4
- vnRIl4m6eNm4APMrDVsFKucK9VXNBfl5H+hexQzpSP6x7hDWJ5uIGQ7ht+EnuMAqq0QC
- d+s2sCFNry4PMddZlgT87Bd46z2Zk2LFcwSgwyPq/KvIW6B2bVlzWOeGZVWJw1qLYF2/
- 4iYt5X6LrPBM/CI3yfqY9F95WIBlYYENS/XELmAJ6N35Y2+7NlPyY5kUY+scaJqT/fG3
- LbXEJScBkc7k+8VcBF9HoMkSKaDOiiqPNI7YyyDQ8PyeqDqskUkYRv6P2zv6jDpEAEmk
- Nc9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705305797; x=1705910597;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=VJv7JBuguQmPpPEzX3TsGYZJXjhp3EARyLG9Ovj17yE=;
- b=EwoBrphmxpiBKLvNmBW8tMRchzDYm/aibrWl7iyxC4yy0dXCV+MCNeRjBp3eDmIlJL
- +UxvRRCWwV+vev006c1U9j4jgkBm6OtlT4Hm12VLDsQM09uEPd/D7yxrJZYSvmL2givx
- MeX3Vd8U0wkJ/s622040DC1HN8ycZ2C101jEHOR5TITXJ+8XY2eyx/2Mr4YAEVBfGZGB
- ZOfeRpAJICsRdsfk26/NqjuoGy7WVBpzEutbtKHwqqr/4I5I2jef3QRjvbhN+v+Kf8rZ
- wce3kFiZUmWF2D/mFi2pOqHwXnQc9njTItvlLeayuVrhZFsvpBWlqqI9qAU/YVAkBy7T
- ACEw==
-X-Gm-Message-State: AOJu0Yx+gdyHbb7LMuiQGzD55olfRDx+16IT3/L9HaF5Coz09odBv0Xs
- fSXk1oTrsSK8u16o++UbGG3konSCUJufO+zr4nvQdSclnTsvWA==
-X-Google-Smtp-Source: AGHT+IFvv6OmFGYZKopeBR5PM9TwK0IHCMMvPq8nB3wUuWqR8VBGlq/gwG7uqbaUQQ8YPqqJmGuQtyJ3S9CuGP70kT0=
-X-Received: by 2002:a17:907:a705:b0:a2c:f8c2:4941 with SMTP id
- vw5-20020a170907a70500b00a2cf8c24941mr2353161ejc.27.1705305796774; Mon, 15
- Jan 2024 00:03:16 -0800 (PST)
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40F8CteY040946;
+ Mon, 15 Jan 2024 02:12:55 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1705306375;
+ bh=htpfjHaG09SN+MnMB2+Q89MRvVdkTtc+m88fBonMG94=;
+ h=Date:CC:Subject:To:References:From:In-Reply-To;
+ b=japzD0femdpXSa87n4zpp/TKmOJ+w+qmo0y/Qd2ZEBTOoAyTVlGlRVUKLdTe8mtJB
+ nnjwN4kc7Rn0p5TBt/TO2ut9HbkXWd6x7Hqgyp86v5kPSkpkaF2maU6CaoDriPUN4s
+ AkC3fi3g45cBdX0rgppt0qgY9xOW67X+hiCI+nx4=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40F8CtKe007686
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 15 Jan 2024 02:12:55 -0600
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 15
+ Jan 2024 02:12:55 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 15 Jan 2024 02:12:55 -0600
+Received: from [172.24.227.9] (uda0492258.dhcp.ti.com [172.24.227.9])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40F8CqQM074604;
+ Mon, 15 Jan 2024 02:12:52 -0600
+Message-ID: <a1d7ca85-8723-4d73-8e1c-357c6aa6294f@ti.com>
+Date: Mon, 15 Jan 2024 13:42:51 +0530
 MIME-Version: 1.0
-References: <20231225044356.626900-1-masahisa.kojima@linaro.org>
- <20231225044356.626900-3-masahisa.kojima@linaro.org>
- <585c8dd4-2fc9-44ff-b71b-ca1ad384c223@gmx.de>
- <CADQ0-X-LuZGHRGR=MkXEHaHg4p3ToBU2CbxkP9Phyw8sGCrBtw@mail.gmail.com>
- <4C5AB456-685F-4912-9528-298C2080F122@gmx.de>
-In-Reply-To: <4C5AB456-685F-4912-9528-298C2080F122@gmx.de>
-From: Masahisa Kojima <masahisa.kojima@linaro.org>
-Date: Mon, 15 Jan 2024 17:03:05 +0900
-Message-ID: <CADQ0-X-agZPPQCjcGVKgYrPukoeVYPq=jdaNGc-n5nmkiCPqpA@mail.gmail.com>
-Subject: Re: [PATCH 2/3] efi_loader: avoid pointer access after calling
- efi_delete_handle
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, 
- Takahiro Akashi <takahiro.akashi@linaro.org>, u-boot@lists.denx.de
+User-Agent: Mozilla Thunderbird
+CC: <nm@ti.com>, <sjg@chromium.org>, <afd@ti.com>, <vigneshr@ti.com>,
+ <u-boot@lists.denx.de>, <dannenberg@ti.com>, <srk@ti.com>,
+ <s-vadapalli@ti.com>
+Subject: Re: [PATCH 01/10] board: ti: am62x: Init DRAM size in R5/A53 SPL
+To: Tom Rini <trini@konsulko.com>
+References: <20240112064759.1801600-1-s-vadapalli@ti.com>
+ <20240112064759.1801600-2-s-vadapalli@ti.com>
+ <20240112132607.GO1610741@bill-the-cat>
+Content-Language: en-US
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+In-Reply-To: <20240112132607.GO1610741@bill-the-cat>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,126 +84,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hello Tom,
 
-On Tue, 26 Dec 2023 at 10:43, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
->
->
-> Am 26. Dezember 2023 02:13:08 MEZ schrieb Masahisa Kojima <masahisa.kojima@linaro.org>:
-> >Hi Heinrich,
-> >
-> >On Mon, 25 Dec 2023 at 19:05, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >>
-> >> On 12/25/23 05:43, Masahisa Kojima wrote:
-> >> > efi_delete_handle() calls efi_purge_handle(), then it finally
-> >> > frees the efi handle.
-> >> > Both diskobj and handle variables in efi_disk_remove() have
-> >> > the same pointer, we can not access diskobj->dp after calling
-> >> > efi_delete_handle().
-> >> >
-> >> > This commit saves the struct efi_device_path pointer before
-> >> > calling efi_delete_handle(). This commit also fixes the
-> >> > missing free for volume member in struct efi_disk_obj.
-> >> >
-> >> > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-> >> > ---
-> >> >   lib/efi_loader/efi_disk.c | 12 +++++++++---
-> >> >   1 file changed, 9 insertions(+), 3 deletions(-)
-> >> >
-> >> > diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-> >> > index a2f8b531a3..415d8601ba 100644
-> >> > --- a/lib/efi_loader/efi_disk.c
-> >> > +++ b/lib/efi_loader/efi_disk.c
-> >> > @@ -701,7 +701,9 @@ int efi_disk_remove(void *ctx, struct event *event)
-> >> >       struct udevice *dev = event->data.dm.dev;
-> >> >       efi_handle_t handle;
-> >> >       struct blk_desc *desc;
-> >> > +     struct efi_device_path *dp = NULL;
-> >> >       struct efi_disk_obj *diskobj = NULL;
-> >> > +     struct efi_simple_file_system_protocol *volume = NULL;
-> >> >       efi_status_t ret;
-> >> >
-> >> >       if (dev_tag_get_ptr(dev, DM_TAG_EFI, (void **)&handle))
-> >> > @@ -722,14 +724,18 @@ int efi_disk_remove(void *ctx, struct event *event)
-> >> >               return 0;
-> >> >       }
-> >> >
-> >> > +     if (diskobj) {
-> >>
-> >>
-> >>    diskobj = container_of(handle, struct efi_disk_obj, header);
-> >>
-> >> can be replaced by
-> >>
-> >>    diskobj = handle
-> >>
-> >> We should check the handle immediately after dev_tag_get_ptr() and
-> >> return 0 if the handle == NULL.
-> >
-> >OK, I will try to improve the efi_disk_remove() function.
-> >
-> >>
-> >> > +             dp = diskobj->dp;
-> >> > +             volume = diskobj->volume;
-> >> > +     }
-> >> > +
-> >> >       ret = efi_delete_handle(handle);
-> >>
-> >> We must not delete the handle in case of UCLASS_EFI_LOADER.
-> >>
-> >> Instead of calling efi_delete_handle we should uninstall all protocols
-> >> that we have installed. If no protocol is left the handle will go away.
-> >>
-> >> To make the protocols to delete tractable they should be opened with
-> >> BY_DRIVER.
-> >
-> >efi_delete_handle() calls efi_remove_all_protocols(), and frees the efi handle
-> >if no protocol is left on the handle.
-> >So I think efi_delete_handle() does all the required processes mentioned above.
->
-> Given an EFI application like iPXE that provides a handle with the block IO protocol implemented by the application: Why should U-Boot remove the block IO protocol or the device path protocol when the application calls DisconnectController()?
+On 12/01/24 18:56, Tom Rini wrote:
+> On Fri, Jan 12, 2024 at 12:17:50PM +0530, Siddharth Vadapalli wrote:
+> 
+>> From: Kishon Vijay Abraham I <kishon@ti.com>
+>>
+>> Call dram_init_banksize() from spl_board_init() otherwise TFTP download
+>> fails with error "TFTP error: trying to overwrite reserved memory..."
+>> due to lmb_get_free_size() not able to find unreserved region due
+>> to lack of DRAM size info. Required to support Ethernet boot on AM62x.
+>>
+>> Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
+>> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+>> ---
+>>  board/ti/am62x/evm.c | 3 +++
+>>  1 file changed, 3 insertions(+)
+>>
+>> diff --git a/board/ti/am62x/evm.c b/board/ti/am62x/evm.c
+>> index ad93908840..35f291d83a 100644
+>> --- a/board/ti/am62x/evm.c
+>> +++ b/board/ti/am62x/evm.c
+>> @@ -85,6 +85,9 @@ void spl_board_init(void)
+>>  	if (IS_ENABLED(CONFIG_SPL_SPLASH_SCREEN) && IS_ENABLED(CONFIG_SPL_BMP))
+>>  		splash_display();
+>>  
+>> +	if (IS_ENABLED(CONFIG_SPL_ETH))
+>> +		/* Init DRAM size for R5/A53 SPL */
+>> +		dram_init_banksize();
+> 
+> The list of conditionals in common/spl/spl.c::board_init_r() should be
+> updated and probably use SPL_NET as the option to check for.
 
-Yes, but the current implementation does the same.
-So in the case of UCLASS_EFI_LOADER, we need to immediately return without
-calling efi_delete_handle(), is my understanding correct?
-I checked lib/efi_selftest/efi_selftest_block_device.c implementation,
-the teadown() process uninstalls the all protocol_interface then
-the EFI handle goes away if no protocol is left.
+Thank you for reviewing the patch and pointing this out. I wasn't aware of it. I
+assume that you are referring to the following change:
 
-Thanks,
-Masahisa Kojima
+        if (IS_ENABLED(CONFIG_SPL_OS_BOOT) || CONFIG_IS_ENABLED(HANDOFF) ||
+-           IS_ENABLED(CONFIG_SPL_ATF))
++           IS_ENABLED(CONFIG_SPL_ATF) || IS_ENABLED(CONFIG_SPL_NET))
+                dram_init_banksize();
 
->
-> Best regards
->
-> Heinrich
->
-> >
-> >>
-> >> When a partition is removed we must close the protocol interfaces opened
-> >> with EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER (cf. efi_disk_add_dev()).
-> >
-> >OK, I will fix this.
-> >
-> >Thanks,
-> >Masahisa Kojima
-> >
-> >>
-> >> Best regards
-> >>
-> >> Heinrich
-> >>
-> >> >       /* Do not delete DM device if there are still EFI drivers attached. */
-> >> >       if (ret != EFI_SUCCESS)
-> >> >               return -1;
-> >> >
-> >> > -     if (diskobj)
-> >> > -             efi_free_pool(diskobj->dp);
-> >> > -
-> >> > +     efi_free_pool(dp);
-> >> > +     free(volume);
-> >> >       dev_tag_del(dev, DM_TAG_EFI);
-> >> >
-> >> >       return 0;
-> >>
+I shall replace the current patch with the above change in the v2 series. Since
+this is in the common section, is there a generic reason I could provide in the
+commit message rather than the existing commit message which seems to be board
+specific? Also, I hope that the above change will not cause regressions for
+other non-TI devices. Please let me know.
+
+> 
+
+-- 
+Regards,
+Siddharth.
