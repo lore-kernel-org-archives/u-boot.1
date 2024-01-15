@@ -4,74 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EB84C3DA79
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 19:54:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C679C3DA79
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 22:11:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDE6087559;
-	Mon, 15 Jan 2024 20:54:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5E66387252;
+	Mon, 15 Jan 2024 23:11:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="c1B2FaY1";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="mK8yDsDx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C362D87707; Mon, 15 Jan 2024 20:54:18 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6E91A8743A; Mon, 15 Jan 2024 23:11:06 +0100 (CET)
+Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
+ [IPv6:2001:4b98:dc4:8::224])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9ECAF86D82
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 20:54:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EF0CB86F6F
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 23:11:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1d48a8ed85bso22564585ad.0
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 11:54:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705348455; x=1705953255; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6XiJCxfi/YipWzfub5OATxaOv/YSwNeV9Hme8bknXaY=;
- b=c1B2FaY1+018fMiAWo8sl0a2XzgI1XeAL2uNVN9NzWInDU7OXMiDAwsTKOjdlvHx3H
- 3t1Fq5G7/CGv0tCJhNsQZIDnVhXP7QRK4e6WFpAW9GaHvrOIi8QOlpj97GvMHFHsCbiH
- QQdKBlFvveeLQjbWNljHvSXmlAIfL/HmuU+yRTpv1csK9csnzQGUwrOLdDCoDnhZjUDN
- bTYf6cNyS+ucrL9BcwkIC9M/24SCLbjV48D9VYQ4VzV+rWeAy6BY9fa3SLa4edE8q77L
- smv58+uO57Lt7OYZx2aMPdNfvylCJODgF+M3FSaqc+mAUuCDhXKqL9KQhdXMy2eB6qS5
- HhNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705348455; x=1705953255;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6XiJCxfi/YipWzfub5OATxaOv/YSwNeV9Hme8bknXaY=;
- b=IRZaOWfVZ2oAkFTPusbMvWS6tYMx8G/+HC+Ilh+pH2z9tXijb/nQHRPbpbWoVj8Pln
- WUVe8O5HohbkRxp5VSKVoDIIZvLh7edlXgmI9hUvMnfQEjSbowCZTMUsvIO8XuwtiAId
- a9neB92Dbvpre5epaabls2BOfUvZCsYsW+QhgbxAtRjtyBaSGlcZD5kUT+3UnSmnf6PD
- qEnLyMhxw7PRjyMQR7VqwnhRln94ye7D+srJ6I+igkA6W0BclGCtgaVah5DUvXvgoH9p
- z6R/sO/CWLR3dQiqX/TVPQdK+P4k4zAxzd3iOOeLojOkpBb5HDUgtfGy93gLIjG6l+3C
- Fhxg==
-X-Gm-Message-State: AOJu0YzWd9eSrDFQZEkea/Ur0xMi+hWt9BiwLotZkbReIrV8mUN0ulRR
- nMtuPlXyh6p6xLh1GXV+8PfBbbOr0UVUzK85fZA=
-X-Google-Smtp-Source: AGHT+IGNuQf0i8I7QNDQ6UyO0nX+//AKSZErsA9JYKKX3Is5pESsdpwET1PbUukk3ytZk7w8He5RVIElP/IyQO7791k=
-X-Received: by 2002:a05:6a20:89a1:b0:199:501f:a08b with SMTP id
- h33-20020a056a2089a100b00199501fa08bmr9668876pzg.3.1705348454940; Mon, 15 Jan
- 2024 11:54:14 -0800 (PST)
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 0BE28E0002;
+ Mon, 15 Jan 2024 22:10:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1705356663;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=BNpSqsS8XC+o4t+8mb4+eClJ0FTb3VnER5NeEMVYzUk=;
+ b=mK8yDsDxaA5F7ORFHTfdYDVAtRLbHg29t2GN/tpinTID/C73BtiJGw8SmjrtnuGx4q0Rha
+ tBzMlvU53RmKMJtQOgAV3zPTrELcO/LfjLVCpv10cH5yDyPaMT/WnpXjs5RkngldQPRJh7
+ McPsM4JI349fkggPDS9WFwa+CdiagK6gF6EEzfNFl4H4lMTyN1P+uz94KdRYkaC1WmZlh3
+ kNgrLE3D0w8ilyc2YEVAlwNcqlr6GJoV/XctyyVoHCOoklwyVSKv5vfPyZFnA3ZeDNty2g
+ Ck6JwFTtmdCNzkI1xK37qHPCi9nfriGsKRVzVEiRfELUqntq+u+ZNGZxNNWIeg==
+Date: Mon, 15 Jan 2024 23:10:57 +0100
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Rob Herring <robh@kernel.org>
+Cc: =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>, Srinivas Kandagatla
+ <srinivas.kandagatla@linaro.org>, Krzysztof Kozlowski
+ <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Michael Walle
+ <michael@walle.cc>, linux-mtd@lists.infradead.org,
+ devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-kernel@vger.kernel.org, u-boot@lists.denx.de, =?UTF-8?B?UmFmYcWC?=
+ =?UTF-8?B?IE1pxYJlY2tp?= <rafal@milecki.pl>
+Subject: Re: [PATCH V3 1/6] dt-bindings: nvmem: layouts: add U-Boot
+ environment variables layout
+Message-ID: <20240115231057.6ac1dbd0@xps-13>
+In-Reply-To: <20240115170903.GA911971-robh@kernel.org>
+References: <20231221173421.13737-1-zajec5@gmail.com>
+ <20240104001129.GA2045237-robh@kernel.org>
+ <20240104085839.5624c354@xps-13>
+ <8c8d2d38-faf2-47f2-bfbf-2e4842dded47@gmail.com>
+ <20240115170903.GA911971-robh@kernel.org>
+Organization: Bootlin
+X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-References: <20240115135130.2789123-1-lukma@denx.de>
-In-Reply-To: <20240115135130.2789123-1-lukma@denx.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 15 Jan 2024 16:54:03 -0300
-Message-ID: <CAOMZO5AuWczsAQo_WQwo-7=D6MYN0RRRYd1ZgTJJ5OkoNfjj3A@mail.gmail.com>
-Subject: Re: [PATCH v3 1/3] arm: xea: Move XEA's environment variables from
- xea.h to xea.env
-To: Lukasz Majewski <lukma@denx.de>
-Cc: Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, NXP u-boot <uboot-imx@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
+X-GND-Sasl: miquel.raynal@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,23 +82,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jan 15, 2024 at 10:52=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wr=
-ote:
->
-> The default set of environment variables from CFG_EXTRA_ENV_SETTINGS
-> has been moved to a separate file - board/liebherr/xea/xea.env
->
-> Adjustments done:
-> - fitImage support
-> - SPI-NOR layout re-organization
->
-> Signed-off-by: Lukasz Majewski <lukma@denx.de>
->
-> ---
->
-> Changes in v3:
-> - Remove customer's default IP settings for production (hardcoded
->   values)
-> - Add missing dtbfile env variable
+Hi Rob,
 
-Applied all, thanks.
+robh@kernel.org wrote on Mon, 15 Jan 2024 11:09:03 -0600:
+
+> On Thu, Jan 04, 2024 at 10:10:13AM +0100, Rafa=C5=82 Mi=C5=82ecki wrote:
+> > On 4.01.2024 08:58, Miquel Raynal wrote:
+> > > robh@kernel.org wrote on Wed, 3 Jan 2024 17:11:29 -0700:
+> > > > On Thu, Dec 21, 2023 at 06:34:16PM +0100, Rafa=C5=82 Mi=C5=82ecki w=
+rote:
+> > > > > From: Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.pl>
+> > > > >=20
+> > > > > U-Boot env data is a way of storing firmware variables. It's a fo=
+rmat
+> > > > > that can be used of top of various storage devices. Its binding s=
+hould
+> > > > > be an NVMEM layout instead of a standalone device.
+> > > > >=20
+> > > > > This patch adds layout binding which allows using it on top of MT=
+D NVMEM
+> > > > > device as well as any other. At the same time it deprecates the o=
+ld
+> > > > > combined binding.
+> > > >=20
+> > > > I don't understand the issue. From a DT perspective, there isn't. A
+> > > > partition is not a device, but is describing the layout of storage
+> > > > already.
+> > >=20
+> > > Actually I think what Rafa=C5=82 wants to do goes in the right direct=
+ion but
+> > > I also understand from a binding perspective it may be a little
+> > > confusing, even more if we consider "NVMEM" a Linux specific concept.
+> > >=20
+> > > There is today a "u-boot env" NVMEM *device* description which
+> > > almost sits at the same level as eg. an eeprom device. We cannot
+> > > compare "an eeprom device" and "a u-boot environment" of course. But
+> > > that's truly what is currently described.
+> > >=20
+> > > * Current situation
+> > >=20
+> > > 	Flash device -> U-Boot env layout -> NVMEM cells
+>=20
+> Isn't it?:
+>=20
+> Flash device -> fixed-partitions -> U-Boot env layout -> NVMEM cells
+>=20
+> > >=20
+> > > * Improved situation
+> > >=20
+> > > 	Any storage device -> NVMEM -> U-Boot env layout -> NVMEM cells
+>=20
+> Why is this better? We don't need a container to say 'this is NVMEM=20
+> stuff' or 'this is MTD stuff'. 'U-Boot env layout' can tell us 'this is=20
+> NVMEM stuff' or whatever the kernel decides in the future.
+
+Yes, I also want the U-boot env layout to tell us "this is nvmem
+stuff". But that's not the case today. Today, it says "this is NVMEM
+stuff on top of mtd stuff". This was a mistake in the first place, but
+this compatible is heavily tight to mtd and cannot work on anything
+else. And correcting this is IMO the right direction.
+
+> > > The latter is of course the most relevant description as we expect
+> > > storage devices to expose a storage-agnostic interface (NVMEM in
+> > > this case) which can then be parsed (by NVMEM layouts) in a storage
+> > > agnostic way.
+> > >=20
+> > > In the current case, the current U-Boot env binding tells people to
+> > > declare the env layout on top of a flash device (only). The current
+> > > description also expects a partition node which is typical to flash
+> > > devices. Whereas what we should have described in the first place is a
+> > > layout that applies on any kind of NVMEM device.
+> > >=20
+> > > Bonus point: We've been working the last couple years on clarifying
+> > > bindings, especially with mtd partitions (with the partitions{}
+> > > container) and NVMEM layouts (with the nvmem-layout{} container).
+> > > The switch proposed in this patch makes use of the latter, of course.
+> >=20
+> > Thanks Miqu=C3=A8l for filling bits I missed in commit description. Des=
+pite
+> > years in Linux/DT I still struggle with more complex designs
+> > documentation.
+> >=20
+> >=20
+> > As per Rob's comment I think I see his point and a possible design
+> > confusion. If you look from a pure DT perspective then "partitions" and
+> > "nvmem-layout" serve a very similar purpose. They describe device's data
+> > content structure. For fixed structures we have very similar
+> > "fixed-partitions" and "fixed-cells".
+> >=20
+> > If we were to design those bindings today I'm wondering if we couldn't
+> > have s/partitions/layout/ and s/nvmem-layout/layout/.
+>=20
+> Why!? It is just a name, and we can't get rid of the old names. We don't=
+=20
+> need 2 names.
+
+We need 2 names because we are not capturing the same concepts here?
+
+> > Rob: other than having different bindings for MTD vs. NVMEM layouts I
+> > think they overall design makes sense. A single device may have content
+> > structurized on more than 1 level:
+> > 1. You may have fixed layout at top level (multiple partitions)
+> > 2. Single partitions may have their own layouts (like U-Boot env data)
+>=20
+> Sure. Partitions is for 1 and Layouts is for 2.
+>=20
+> > Maybe ideally above should look more like:
+> >=20
+> > flash@0 {
+> > 	compatible =3D "<flash-compatible>";
+> >=20
+> > 	layout {
+> > 		compatible =3D "fixed-layout";
+>=20
+> Why does 'partitions' and 'fixed-partitions' not work here?
+
+They do, and that's actually what we use. This example just illustrates
+another proposal from Rafal. No panic :)
+
+>=20
+> > 		#address-cells =3D <1>;
+> > 		#size-cells =3D <1>;
+> >=20
+> > 		partition@0 {
+> > 			reg =3D <0x0 0x40000>;
+> > 			label =3D "u-boot";
+> > 		};
+> >=20
+> > 		partition@40000 {
+> > 			reg =3D <0x40000 0x10000>;
+> > 			label =3D "u-boot-env";
+> >=20
+> > 			layout {
+> > 				compatible =3D "u-boot,env-layout";
+> > 			};
+> > 		};
+> >=20
+> > 		partition@50000 {
+> > 			reg =3D <0x50000 0x100000>;
+> > 			label =3D "u-boot";
+> > 		};
+> > 	};
+> > };
+> >=20
+> > but I can clearly see a use for nested "layout"s. As I said maybe we
+> > just shouldn't be so open in calling those MTD or NVMEM devices as that
+> > is kind of Linux specific.
+>=20
+> The overall structure should be agnostic to the subsystem. Specific=20
+> compatibles like 'u-boot,env' can be tied to a subsystem.
+>=20
+> Maybe some things need to be both MTD and NVMEM. MTD to operate on the=20
+> opague region and NVMEM to access the contents.
+>=20
+>=20
+> > I'm not sure if we should try renaming "nvmem-layout" to "layout" or
+> > "partitions" in similar way at this point.
+>=20
+> You can't rename. It's an ABI though maybe the whole "nvmem-layout" is=20
+> new enough we can. It's looking like it was a mistake to accept any of=20
+> this.
+
+I don't think so.
+
+A partition and a layout are not the same concept, as acknowledged
+above. We need both, and we need both because we can encapsulate
+both as well:
+
+flash { partitions { partA@x { layout { cell@Y } } } }
+
+Renaming nvmem-layout to layout can be done if you want, I don't mind,
+but I don't see the point in doing that.
+
+Thanks,
+Miqu=C3=A8l
