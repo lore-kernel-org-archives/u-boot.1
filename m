@@ -4,57 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99C09C3DA79
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 13:52:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FAD8C3DA79
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 14:06:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CCAD876E7;
-	Mon, 15 Jan 2024 14:52:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id AF275876B5;
+	Mon, 15 Jan 2024 15:06:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1705326722;
-	bh=zQoAkpGrY6VaWaJ/+SMAs2dp9L0JAjtts/kqWvzZseg=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=TuEvDJHhtvAVSglOR/iVz1cHSTjJsyjCU0ZkkN/aXQ+ZwjklGUQpX12xbUO16l9gu
-	 lrgPoN24BGMl3FsMrvs/LBQ9vTcRAlggulAQiuxWZhS7zL5i33/yQO9tDjKqiTcejm
-	 +z0s5hySskhAXECI979r9QgGxSk02ZtoOnkaG4jeZqXue6MEv6Qq0QQ+57SqPvHkh6
-	 gGBe1vaKeewD3dP0aTtA7x9H7pziryXpDzJrsphCymsRVnm4aaZ0ZmlRbYqhPzYzl4
-	 lTabJORfFcB9ZV0m3NznAUuDx/od80RKezKdGAim1xqr1UehH6KYL8lKUuFaiHkgQg
-	 NyjZrHkmHSZhg==
-Received: from localhost.localdomain (85-222-111-42.dynamic.chello.pl
- [85.222.111.42])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="8HffdZSF";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 7CF50874E0; Mon, 15 Jan 2024 15:06:09 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 4D9A186F80;
- Mon, 15 Jan 2024 14:52:00 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1705326720;
- bh=zQoAkpGrY6VaWaJ/+SMAs2dp9L0JAjtts/kqWvzZseg=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=wDrpPhE1XqsrQ2nHdQWcw9MJnvCWbpwTjnPx2ULKNBiu6igtE9LdcyBoj8sEEWQf+
- xVP5MlzvQUT802jpzJEbTGNfKMXUrQ193RMkbNNhn8gDoj1Fv7gcRvlgJYtFSMETOr
- 4HlQ1bzHPGsMn0XDbhRqLAq1bl1O7wPOYNd+9BgmUnUqApXxnkL0tJx0ZNfMltKtKY
- 3LCbHQ8fRgoP+Uq3xvKjZWyupRIHiRU7v4ycbO5wdoKVNXml2aL4Eqc2zZQkxFfWPN
- Lp8lMvcGJNUEoGEndsFSFiasf+oIWjuv/qr37d6ArlK2J1s89nocT/BquBJHLP79p1
- Y00z2w5PJmh9A==
-From: Lukasz Majewski <lukma@denx.de>
-To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- NXP u-boot <uboot-imx@nxp.com>
-Cc: Anatolij Gustschin <agust@denx.de>,
-	Lukasz Majewski <lukma@denx.de>
-Subject: [PATCH v3 3/3] arm: xea: Add support for boot image source descriptor
- in SPL
-Date: Mon, 15 Jan 2024 14:51:30 +0100
-Message-Id: <20240115135130.2789123-3-lukma@denx.de>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240115135130.2789123-1-lukma@denx.de>
-References: <20240115135130.2789123-1-lukma@denx.de>
+ by phobos.denx.de (Postfix) with ESMTPS id 9014B86EF1
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 15:06:07 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=1744d57945=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 40FDrZmH008279; Mon, 15 Jan 2024 15:06:05 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding:content-type; s=
+ selector1; bh=qeBHFpBAaW89DD5Mr5k/vHQlMWikiFq7qzgl0CGOAMA=; b=8H
+ ffdZSFwkHKQaRXec0L8yRJbjg6+QQei1pNfPcrXcYQz3t2O9OcK4HnPgrzkrOY2u
+ O1Hny5PQBt2UmR4q6pjzgw0eRZaHYCdxkvs2r88T/crjWADxt7FsBYcHSmaPM91w
+ 9K6FXN5Ad+TElT2hgfHOuLpzxiSoH09X9hKkE/PWEMHrz4dcZ3ctDdfF365j+TrA
+ lA8KXAM4JE7WGC/eihm3Ec7j+I+ElFFO1qkHNU9u/P3nxAHpWU2+Nz2M24dAzfGN
+ l3LJxwgxNmFiogBzE09+qjn0EbLpU3w21LIBHdWsTRoN3JuhfZFAPtnD8nUv0d37
+ R85oZKEJafHvG3j+5AGA==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vkmddru0k-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 15 Jan 2024 15:06:05 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 573B1100057;
+ Mon, 15 Jan 2024 15:06:05 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5064529865C;
+ Mon, 15 Jan 2024 15:06:05 +0100 (CET)
+Received: from localhost (10.201.22.165) by SHFDAG1NODE3.st.com (10.75.129.71)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 15 Jan
+ 2024 15:06:05 +0100
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Alexandre Torgue
+ <alexandre.torgue@foss.st.com>, Simon Glass <sjg@chromium.org>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [PATCH v2 01/14] arm64: dts: st: add bsec support to stm32mp25
+Date: Mon, 15 Jan 2024 15:05:44 +0100
+Message-ID: <20240115150451.v2.1.Iefa175618c8da1cb27702d86b19bdada62a0f01d@changeid>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240115140557.57448-1-patrick.delaunay@foss.st.com>
+References: <20240115140557.57448-1-patrick.delaunay@foss.st.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.201.22.165]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-01-05_08,2024-01-05_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,169 +90,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Anatolij Gustschin <agust@denx.de>
+Add BSEC support to STM32MP25 SoC family with SoC information:
+- RPN = Device part number (BSEC_OTP_DATA9)
+- PKG = package data register (Bits 2:0 of BSEC_OTP_DATA122)
 
-We load two boot image source descriptor structures from last
-two sectors in the SPI NOR flash and determine the boot source
-for loading the kernel/DTB images, then adjust the boot order for
-loading image from eMMC boot0 or boot1 partition.
-
-Signed-off-by: Anatolij Gustschin <agust@denx.de>
-Signed-off-by: Lukasz Majewski <lukma@denx.de>
-
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Signed-off-by: Alexandre Torgue <alexandre.torgue@foss.st.com>
 ---
 
-Changes in v3:
-- None
+(no changes since v1)
 
- board/liebherr/xea/boot_img_scr.h | 27 ++++++++++
- board/liebherr/xea/xea.c          | 85 +++++++++++++++++++++++++++++++
- 2 files changed, 112 insertions(+)
- create mode 100644 board/liebherr/xea/boot_img_scr.h
+ arch/arm/dts/stm32mp25-u-boot.dtsi |  4 ++++
+ arch/arm/dts/stm32mp251.dtsi       | 16 ++++++++++++++++
+ 2 files changed, 20 insertions(+)
 
-diff --git a/board/liebherr/xea/boot_img_scr.h b/board/liebherr/xea/boot_img_scr.h
-new file mode 100644
-index 0000000000..baa3072b49
---- /dev/null
-+++ b/board/liebherr/xea/boot_img_scr.h
-@@ -0,0 +1,27 @@
-+/* SPDX-License-Identifier:     GPL-2.0+ */
-+/*
-+ * Struct for boot image source description for placing in last
-+ * two SPI NOR flash sectors on legcom.
-+ */
-+
-+struct boot_img_src {
-+	u8 magic;	/* Must be 'B' = 0x42 */
-+	u8 flags;	/* flags to specify mmcblk[0|1] boot[0|1] */
-+	u8 crc8;	/* CRC-8 over above two bytes */
-+} __packed;
-+
-+/*
-+ * Bit definition in boot_img_src.flags:
-+ *  Bit 0: mmcblk device 0 or 1 (1 - if this bit set)
-+ *  Bit 1: mmcblk boot partition 0 or 1.
-+ *         for eMMC: boot0 if this bit is cleared, boot1 - if set
-+ *         for SD-card the boot partition value will always be 0
-+ *         (independent of the value of this bit)
-+ *
-+ */
-+#define BOOT_SRC_MMC1	BIT(0)
-+#define BOOT_SRC_PART1	BIT(1)
-+
-+/* Offset of the first boot image source descriptor in SPI NOR */
-+#define SPI_FLASH_BOOT_SRC_OFFS	0xFE0000
-+#define SPI_FLASH_SECTOR_SIZE	0x10000
-diff --git a/board/liebherr/xea/xea.c b/board/liebherr/xea/xea.c
-index e4d2eb65cc..c8ac526cb4 100644
---- a/board/liebherr/xea/xea.c
-+++ b/board/liebherr/xea/xea.c
-@@ -32,6 +32,11 @@
- #include <errno.h>
- #include <usb.h>
- #include <serial.h>
-+#include <u-boot/crc.h>
-+#include "boot_img_scr.h"
-+
-+#include <spi.h>
-+#include <spi_flash.h>
+diff --git a/arch/arm/dts/stm32mp25-u-boot.dtsi b/arch/arm/dts/stm32mp25-u-boot.dtsi
+index f4f26add2a41..0c8e95b34163 100644
+--- a/arch/arm/dts/stm32mp25-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp25-u-boot.dtsi
+@@ -37,6 +37,10 @@
+ 	};
+ };
  
- #ifdef CONFIG_SPL_BUILD
- #include <spl.h>
-@@ -66,6 +71,52 @@ void board_init_f(ulong arg)
- 	preloader_console_init();
- }
++&bsec {
++	bootph-all;
++};
++
+ &gpioa {
+ 	bootph-all;
+ };
+diff --git a/arch/arm/dts/stm32mp251.dtsi b/arch/arm/dts/stm32mp251.dtsi
+index cf2f28dc1582..44eb664fb510 100644
+--- a/arch/arm/dts/stm32mp251.dtsi
++++ b/arch/arm/dts/stm32mp251.dtsi
+@@ -127,6 +127,22 @@
+ 			};
+ 		};
  
-+static struct boot_img_src img_src[2];
-+static int spi_load_boot_info(void)
-+{
-+	struct spi_flash *flash;
-+	int err;
++		bsec: efuse@44000000 {
++			compatible = "st,stm32mp25-bsec";
++			reg = <0x44000000 0x1000>;
++			#address-cells = <1>;
++			#size-cells = <1>;
 +
-+	flash = spi_flash_probe(CONFIG_SF_DEFAULT_BUS,
-+				CONFIG_SF_DEFAULT_CS,
-+				CONFIG_SF_DEFAULT_SPEED,
-+				CONFIG_SF_DEFAULT_MODE);
-+	if (!flash) {
-+		printf("%s: SPI probe err\n", __func__);
-+		return -ENODEV;
-+	}
++			part_number_otp@24 {
++				reg = <0x24 0x4>;
++			};
 +
-+	/*
-+	 * Load both boot info structs from SPI flash
-+	 */
-+	err = spi_flash_read(flash, SPI_FLASH_BOOT_SRC_OFFS,
-+			     sizeof(img_src[0]),
-+			     (void *)&img_src[0]);
-+	if (err) {
-+		debug("%s: First boot info NOR sector read error %d\n",
-+		      __func__, err);
-+		return err;
-+	}
++			package_otp@1e8 {
++				reg = <0x1e8 0x1>;
++				bits = <0 3>;
++			};
++		};
 +
-+	err = spi_flash_read(flash,
-+			     SPI_FLASH_BOOT_SRC_OFFS + SPI_FLASH_SECTOR_SIZE,
-+			     sizeof(img_src[0]),
-+			     (void *)&img_src[1]);
-+	if (err) {
-+		debug("%s: First boot info NOR sector read error %d\n",
-+		      __func__, err);
-+		return err;
-+	}
-+
-+	debug("%s: BI0 0x%x 0x%x 0x%x\n", __func__,
-+	      img_src[0].magic, img_src[0].flags, img_src[0].crc8);
-+
-+	debug("%s: BI1 0x%x 0x%x 0x%x\n", __func__,
-+	      img_src[1].magic, img_src[1].flags, img_src[1].crc8);
-+
-+	return 0;
-+}
-+
- static int boot_tiva0, boot_tiva1;
- 
- /* Check if TIVAs request booting via U-Boot proper */
-@@ -114,6 +165,40 @@ void spl_board_init(void)
- 	boot_tiva1 = dm_gpio_get_value(&btiva1);
- }
- 
-+int spl_mmc_emmc_boot_partition(struct mmc *mmc)
-+{
-+	int i, src_idx = -1, ret;
-+
-+	ret = spi_load_boot_info();
-+	if (ret) {
-+		printf("%s: Cannot read XEA boot info! [%d]\n", __func__, ret);
-+		/* To avoid bricking board - by default boot from boot0 eMMC */
-+		return 1;
-+	}
-+
-+	for (i = 0; i < 2; i++) {
-+		if (img_src[i].magic == 'B' &&
-+		    img_src[i].crc8 == crc8(0, &img_src[i].magic, 2)) {
-+			src_idx = i;
-+			break;
-+		}
-+	}
-+
-+	debug("%s: src idx: %d\n", __func__, src_idx);
-+
-+	if (src_idx < 0)
-+		/*
-+		 * Always use eMMC (mmcblkX) boot0 if no
-+		 * valid image source description found
-+		 */
-+		return 1;
-+
-+	if (img_src[src_idx].flags & BOOT_SRC_PART1)
-+		return 2;
-+
-+	return 1;
-+}
-+
- void board_boot_order(u32 *spl_boot_list)
- {
- 	spl_boot_list[0] = BOOT_DEVICE_MMC1;
+ 		syscfg: syscon@44230000 {
+ 			compatible = "st,stm32mp25-syscfg", "syscon";
+ 			reg = <0x44230000 0x10000>;
 -- 
-2.39.2
+2.25.1
 
