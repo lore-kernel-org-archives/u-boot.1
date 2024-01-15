@@ -4,85 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 265F4C3DA79
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 10:12:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CF47C3DA79
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 10:17:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CD2D87061;
-	Mon, 15 Jan 2024 11:12:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 29C1886F40;
+	Mon, 15 Jan 2024 11:17:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nWdglQe3";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="kV2M9Yoo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40B3387061; Mon, 15 Jan 2024 11:12:55 +0100 (CET)
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
+ id 4DEA086D82; Mon, 15 Jan 2024 11:17:27 +0100 (CET)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0C1485E44
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 11:12:52 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-28bae84fc2eso1672471a91.1
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 02:12:52 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3195885E44
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 11:17:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-dbed5d1ffb0so7466214276.1
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 02:17:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705313571; x=1705918371; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
- :subject:date:message-id:reply-to;
- bh=19JjZTTgM/qTkuaYYT7sONjc7NuIzTzKJEz5gULSgO4=;
- b=nWdglQe3soBiJlSyFIDJqtwi3u/EMQQVLpfTPW7nlGbYVuwgA5Z/eTQc9gxDiYb3i8
- YstZC4uYVyA+U9NMcWaWOHJV3+woXPoD86uY5A1AWAoXA87vu4b9K9IXzvCqWh0yw0sG
- LRbSw7ToFkLdOoOckFVBfZiZ0i4NyqGd5FxtOyHy4hjZ7sInrR5dQBJBerLZCjroUDk6
- km3ythrsrs4sDzX/bVwquj7g9AwotllXugnz2swic602efTZ9lgVe0u+nWufwuzaZ0CW
- hJzHjdcTx8stHSLPdfGqCS5kF8479V8MHtRa+wn9apz27GsL5ogCkIBvQa54WDTO2L85
- yP+w==
+ d=amarulasolutions.com; s=google; t=1705313843; x=1705918643;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MXp73V/H1/sNhp9ahuFJG6d1NYs2msKRokeY5l7iW/c=;
+ b=kV2M9YoocnflvXxG+IrrOzOD1rRiiJHFgBHYOZOACvZVXIrCMMtoOZriBZ420eeFNu
+ 8fmSYSd2ZhbUJqnnlvTdlppluYhr84tQeeIUnPGzztV0qOdtW015Xpc0RyZj1ncleoJk
+ 8C1YlPH8qkBVQsnsC8C5RS0aKQc9iLpnqBDhc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705313571; x=1705918371;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=19JjZTTgM/qTkuaYYT7sONjc7NuIzTzKJEz5gULSgO4=;
- b=RlRD+QCFPQOWxlmrhMxzRp0otOY1DcEFXnVBrCroOl1JYlVvBsJrNp6KKjMRjdtxxO
- p7Q+sdyxI9WhNnZupWcRlmTgo1fbez6u1i5KRcXZzrVORt9PRJuvTbyMqLFg8+wPAM+L
- dZmO9z1/CFYEL1K94+hYr4CYzYCrg8tswmPBL2QxheTwdv/FWfrMS9moBa83P2y/Un7Q
- eG0ENfkOVbOc7BmdBJk2CNUejZbn+f8H0Z3mKd0MS0u8PuhL5m/A3cFqT9v8ysuTYJLa
- 4OFUAkbiZNrUgQf4aXeYCDocIHUq3wQX18fVwbgqfOUB1QXXMQyL1jOMmiaNpznzdQUK
- 29wg==
-X-Gm-Message-State: AOJu0YyEzdoDWqVqhPqkMMvSv+tXoNe3wMQj0YUJrcg91sKLi/rWrP3D
- us7AtRTqCzhGY41tPbCQTz2w0ZUHnUQkrw==
-X-Google-Smtp-Source: AGHT+IGxd8a4VcgssHvTN8lU+PVMPgyAWvG8GnbSRVqgT0YVs/Xigz5UJBLG9gFvkVafVKBg05H6BA==
-X-Received: by 2002:a17:90b:3b88:b0:28d:136c:8859 with SMTP id
- pc8-20020a17090b3b8800b0028d136c8859mr8777560pjb.3.1705313570919; 
- Mon, 15 Jan 2024 02:12:50 -0800 (PST)
-Received: from octopus ([2400:4050:c3e1:100:4e3a:6682:78c7:6f45])
- by smtp.gmail.com with ESMTPSA id
- sc4-20020a17090b510400b0028cefda6fa2sm9386073pjb.24.2024.01.15.02.12.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jan 2024 02:12:50 -0800 (PST)
-Date: Mon, 15 Jan 2024 19:12:47 +0900
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
- ilias.apalodimas@linaro.org
-Subject: Re: [PATCH v4 2/4] efi_loader: rename BOOTEFI_BOOTMGR to EFI_BOOTMGR
-Message-ID: <ZaUFH3r9MdW+tHTv@octopus>
-Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org
-References: <20240110011637.174710-1-takahiro.akashi@linaro.org>
- <20240110011637.174710-3-takahiro.akashi@linaro.org>
- <1c42a17d-1043-4449-93c2-9020c1ded71d@gmx.de>
- <ZaSDUrTQ2Z5N+gil@octopus>
- <d70d5134-1cc9-4d56-9aa3-499ed992584c@gmx.de>
+ d=1e100.net; s=20230601; t=1705313843; x=1705918643;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=MXp73V/H1/sNhp9ahuFJG6d1NYs2msKRokeY5l7iW/c=;
+ b=VZ8grzbOMvLFfXWm/tmaQpY/Ra7i6OZMMxDpMFjANAEx4RdWgTwR9DFYU2n1D4zrUN
+ xOXXpkjoWs0zbTcZlzKUg9w4yZw4rLVTGjXqJWU6/JmM8HbSvrV9pPk2c51vS/Kb/2YS
+ aP90VlZNh5aPiBOojZIIkHEgHRPToodS683kJrEDfM8f4+aCQbGl3sc5JMVlEKFA0Z4j
+ phcuFoU6v948TDoUnzS5CjO95yhegQu2dzibVdvs1WEj6gseYd9hh9BbSdEqu1NYDfRQ
+ qHFv5FfCGdKq1hnYckLVSzamT3873JXQu4stQOogLBq7nrJ9eD2rhqgLNqaK2oGNW2VJ
+ IK5A==
+X-Gm-Message-State: AOJu0Ywp8LsyOEuamXtHPzsa/lFed7SYePzcCH/4Mp8MJTFkryCEEVGa
+ vF+EIRa6lWboqqNehZTidjfqKe6aQqJL75pc+YTlPHFH8tTUsw==
+X-Google-Smtp-Source: AGHT+IEtHWriMHKPyW6h/Hzr7B6QQZUBVEWoiHge4oBQmNm+3WMCqUwX3CpQcyGNpQRXlT2j0XP7uZ6cSBnyeUIOtac=
+X-Received: by 2002:a25:c711:0:b0:dbe:ace5:c053 with SMTP id
+ w17-20020a25c711000000b00dbeace5c053mr2283829ybe.5.1705313841444; Mon, 15 Jan
+ 2024 02:17:21 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <d70d5134-1cc9-4d56-9aa3-499ed992584c@gmx.de>
+References: <20240109173231.78920-1-avromanov@salutedevices.com>
+In-Reply-To: <20240109173231.78920-1-avromanov@salutedevices.com>
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Date: Mon, 15 Jan 2024 11:17:10 +0100
+Message-ID: <CABGWkvrF3YQHK-rOZtQvrFw9o2qM1tukR=0ZYE_RVqwF69H4jA@mail.gmail.com>
+Subject: Re: [PATCH v2 00/14] Support SPI NAND in fastboot protocol
+To: Alexey Romanov <avromanov@salutedevices.com>
+Cc: michal.simek@amd.com, marex@denx.de, michael@walle.cc, 
+ stcarlso@linux.microsoft.com, tobias@waldekranz.com, seanedmond@microsoft.com, 
+ abdellatif.elkhlifi@arm.com, neil.armstrong@linaro.org, n-jain1@ti.com, 
+ xypron.glpk@gmx.de, michael@amarulasolutions.com, frieder.schrempf@kontron.de, 
+ sjg@chromium.org, hs@denx.de, sean.anderson@seco.com, dimorinny@google.com, 
+ mkorpershoek@baylibre.com, patrick.delaunay@foss.st.com, u-boot@lists.denx.de, 
+ kernel@salutedevices.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,47 +90,150 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jan 15, 2024 at 09:34:51AM +0100, Heinrich Schuchardt wrote:
-> On 1/15/24 01:58, AKASHI Takahiro wrote:
-> > On Sun, Jan 14, 2024 at 01:46:45PM +0100, Heinrich Schuchardt wrote:
-> > > On 1/10/24 02:16, AKASHI Takahiro wrote:
-> > > > At this point, EFI boot manager interfaces is fully independent from
-> > > > bootefi command. So just rename the configuration parameter.
-> > > > 
-> > > > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> > > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > > 
-> > > This patch breaks the 'bootefi hello' command in
-> > > qemu-riscv64_smode_defconfig and other QEMU defconfigs.
-> > 
-> > What happened? Please elaborate details so that I can trace your issue.
-> > 
-> > On my side, I didn't see any problem with "bootefi hello" on qemu-arm64
-> > and moreover CI check (github pull request) didn't complain anything.
-> 
-> The failures are logged in
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/19302
+Hi Alexey,
 
-In the logs for qemu-arm64, qemu-risc64 and maybe others as well,
-I see the same error:
---- ---
-______________________________ test_efi_grub_net _______________________________
-test/py/tests/test_efi_loader.py:188: in test_efi_grub_net
-    addr = fetch_tftp_file(u_boot_console, 'env__efi_loader_grub_file')
-test/py/tests/test_efi_loader.py:136: in fetch_tftp_file
-    assert expected_text in output
-E   assert 'Bytes transferred = 520192' in "*** ERROR: `serverip' not set"
---- ---
+On Tue, Jan 9, 2024 at 6:32=E2=80=AFPM Alexey Romanov
+<avromanov@salutedevices.com> wrote:
+>
+> Currently, fastboot in U-Boot doens't support SPI NAND
+> devices. This patchset adds support for SPI NAND in fastboot
+> nand subsystem.
+>
+> Changes V1 -> V2:
+>
+> - Rebase patchset over u-boot/next.
+> - Move nand_unregister(), nand_reinit() and nang_page_size() functions
+>   to NAND core folder too.
+> - Move changes about CMD_RET_FAILURE/SUCCESS into separate patches.
+>
+> Alexey Romanov (14):
+>   nand: move NAND initialization API to nand/core.c
+>   nand: don't overwrite mtd name in nand_register()
+>   nand: move nand_util.c to NAND core folder
+>   nand: move nand_erase_opts() to core NAND folder
+>   spi: add board_nand_init() function
+>   spi: use nand_register() instead of add_mtd_device()
+>   mtdparts: use negative error codes
+>   mtdparts: use CMD_RET_FAILURE define
+>   jffs2: use negative error codes
+>   jffs2: use CMD_RET_FAILURE/SUCCESS defines
+>   cmd: allow to enable CMD_NAND for SPI NAND devices
+>   fastboot: check device type for SPI NAND too
+>   fastboot: enable FASTBOOT_FLASH option for SPI NAND devices
+>   fastboot: fb_nand: add missing newlines in pr_err() macro
+>
+>  cmd/Kconfig                      |   2 +-
+>  cmd/jffs2.c                      |  45 +-
+>  cmd/mtdparts.c                   | 154 +++----
+>  drivers/fastboot/Kconfig         |   4 +-
+>  drivers/fastboot/fb_nand.c       |  12 +-
+>  drivers/mtd/Kconfig              |   2 +-
+>  drivers/mtd/nand/Kconfig         |  10 +
+>  drivers/mtd/nand/Makefile        |   2 +-
+>  drivers/mtd/nand/core.c          | 193 +++++++++
+>  drivers/mtd/nand/raw/Kconfig     |  10 -
+>  drivers/mtd/nand/raw/nand.c      | 182 --------
+>  drivers/mtd/nand/raw/nand_util.c | 664 -----------------------------
+>  drivers/mtd/nand/spi/Kconfig     |   1 +
+>  drivers/mtd/nand/spi/core.c      |  17 +-
+>  drivers/mtd/nand/util.c          | 709 +++++++++++++++++++++++++++++++
+>  include/nand.h                   |   2 +
+>  16 files changed, 1042 insertions(+), 967 deletions(-)
+>  create mode 100644 drivers/mtd/nand/util.c
+>
+> --
+> 2.30.1
+>
 
-This seems to be the root cause and my commit will have nothing to do
-with the problem.
-Please check the test environment.
+The series doesn't pass te CI tests.
+Following an example of errors :
 
--Takahiro Akashi
+Building current source for 1 boards (1 thread, 64 jobs per thread)
+59 sandbox: + sandbox
+60+/usr/bin/ld: /tmp/ccyLvZ90.ltrans5.ltrans.o: in function `set_dev':
+61+cmd/nand.c:239: undefined reference to `get_nand_dev_by_index'
+62+/usr/bin/ld: cmd/nand.c:244: undefined reference to `nand_curr_device'
+63+/usr/bin/ld: /tmp/ccyLvZ90.ltrans5.ltrans.o: in function
+`nand_print_and_set_info':
+64+cmd/nand.c:411: undefined reference to `get_nand_dev_by_index'
+65+/usr/bin/ld: /tmp/ccyLvZ90.ltrans5.ltrans.o: in function `nand_load_imag=
+e':
+66+cmd/nand.c:1002: undefined reference to `nand_read_skip_bad'
+67+/usr/bin/ld: cmd/nand.c:1037: undefined reference to `nand_read_skip_bad=
+'
+68+/usr/bin/ld: /tmp/ccyLvZ90.ltrans5.ltrans.o: in function `do_nand':
+69+cmd/nand.c:511: undefined reference to `nand_curr_device'
+70+/usr/bin/ld: cmd/nand.c:563: undefined reference to `get_nand_dev_by_ind=
+ex'
+71+/usr/bin/ld: cmd/nand.c:635: undefined reference to `get_nand_dev_by_ind=
+ex'
+72+/usr/bin/ld: cmd/nand.c:657: undefined reference to `nand_erase_opts'
+73+/usr/bin/ld: cmd/nand.c:705: undefined reference to `get_nand_dev_by_ind=
+ex'
+74+/usr/bin/ld: cmd/nand.c:480: undefined reference to `get_nand_dev_by_ind=
+ex'
+75+/usr/bin/ld: cmd/nand.c:734: undefined reference to `get_nand_dev_by_ind=
+ex'
+76+/usr/bin/ld: cmd/nand.c:740: undefined reference to `nand_read_skip_bad'
+77+/usr/bin/ld: cmd/nand.c:743: undefined reference to `nand_write_skip_bad=
+'
+78+/usr/bin/ld: cmd/nand.c:456: undefined reference to `nand_verify_page_oo=
+b'
+79+/usr/bin/ld: /tmp/ccyLvZ90.ltrans5.ltrans.o: in function `do_nandboot':
+80+cmd/nand.c:1093: undefined reference to `get_nand_dev_by_index'
+81+/usr/bin/ld: cmd/nand.c:1137: undefined reference to `get_nand_dev_by_in=
+dex'
+82+/usr/bin/ld: /tmp/ccyLvZ90.ltrans8.ltrans.o: in function
+`initr_nand.lto_priv.0':
+83+common/board_r.c:370: undefined reference to `nand_init'
+84+/usr/bin/ld: common/board_r.c:371: undefined reference to `nand_size'
+85+/usr/bin/ld: /tmp/ccyLvZ90.ltrans14.ltrans.o: in function `sand_nand_rem=
+ove':
+86+drivers/mtd/nand/raw/sand_nand.c:462: undefined reference to
+`nand_unregister'
+87+/usr/bin/ld: /tmp/ccyLvZ90.ltrans14.ltrans.o: in function `sand_nand_pro=
+be':
+88+drivers/mtd/nand/raw/sand_nand.c:628: undefined reference to `nand_regis=
+ter'
+89+/usr/bin/ld: /tmp/ccyLvZ90.ltrans41.ltrans.o: in function `dm_test_nand'=
+:
+90+test/dm/nand.c:31: undefined reference to `get_nand_dev_by_index'
+91+/usr/bin/ld: test/dm/nand.c:51: undefined reference to `nand_erase_opts'
+92+/usr/bin/ld: test/dm/nand.c:55: undefined reference to `nand_read_skip_b=
+ad'
+93+/usr/bin/ld: test/dm/nand.c:68: undefined reference to `nand_write_skip_=
+bad'
+94+/usr/bin/ld: test/dm/nand.c:73: undefined reference to `nand_read_skip_b=
+ad'
+95+/usr/bin/ld: test/dm/nand.c:81: undefined reference to `nand_erase_opts'
+96+/usr/bin/ld: test/dm/nand.c:84: undefined reference to `nand_read_skip_b=
+ad'
+97+collect2: error: ld returned 1 exit status
+98+make[1]: *** [Makefile:1766: u-boot] Error 1
+99+make: *** [Makefile:177: sub-make] Error 2
+100 0 0 1 /1 sandbox
 
-> I have pushed the tag failed_20240114 to
-> https://source.denx.de/u-boot/custodians/u-boot-efi.git for analysis.
-> 
-> Best regards
-> 
-> Heinrich
+Please fix the errors.
+
+Thanks and regards,
+Dario
+
+--=20
+
+Dario Binacchi
+
+Senior Embedded Linux Developer
+
+dario.binacchi@amarulasolutions.com
+
+__________________________________
+
+
+Amarula Solutions SRL
+
+Via Le Canevare 30, 31100 Treviso, Veneto, IT
+
+T. +39 042 243 5310
+info@amarulasolutions.com
+
+www.amarulasolutions.com
