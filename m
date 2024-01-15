@@ -4,63 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4635C3DA79
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 11:40:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0F04C3DA79
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 12:47:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8013871CF;
-	Mon, 15 Jan 2024 12:40:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id F361586FC6;
+	Mon, 15 Jan 2024 13:47:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Fnl3U1Wd";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="KEErlJ6/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3814E86FF9; Mon, 15 Jan 2024 12:40:14 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 384C986D85; Mon, 15 Jan 2024 13:47:13 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32DE0871CF
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 12:40:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4332B86D85
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 13:47:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 7987ECE0A1D;
- Mon, 15 Jan 2024 11:40:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6C3F2C433F1;
- Mon, 15 Jan 2024 11:40:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705318805;
- bh=4grwlrNENwsSa/FcXPkqPWtyuk25goyJrHMkpAv+3aI=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Fnl3U1WdQRHr56x1fXcDfPxdTx5YptkTc7VF3C7buJ6hD7CzgEoqgke2KCTeCqanV
- raDpzAJu65ZDAl6Te2tnHF3CXZC5HdhfkfLDsTnfDCvrSpJR7sAamr5oBpzE2XOx06
- JtsiG5m19ZUBuB+MHF4IPtc1fMQTjjZ4ifnmc2uIGZdlvbRV28fpd9PkovtEa8rmfp
- flHm3d3mAjC0Ot4v8Sj8G0ZdfR+JBo1CFXowqC4tpr7dVVe56XRkkk+DgTsZa2nhDA
- N1QPAyq4SLo7yvSPAPeU1TmpEjMfD23hy3JrRvQ5Fc47ct2Co5rhHZLjyXOFx4iNff
- j++x3vDowS9Hg==
-Message-ID: <1f4ceaf6-0387-4010-bbcd-0f6970428e8c@kernel.org>
-Date: Mon, 15 Jan 2024 13:40:00 +0200
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=1744d57945=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 40F89vsS021194; Mon, 15 Jan 2024 13:47:09 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding:content-type; s=
+ selector1; bh=uOQ0j8ZEn0faAmV6rDWOcREPyIS7ftIGdU3nwmbys9k=; b=KE
+ ErlJ6/4rAC1RXkZzlUAGpCwHVhZ9gI9iD/fU/25tSq9z/rKGMlNt/zhvbjRii3bU
+ lrsrpqnIvfTTI86YLyisOhDBVyDducJFB2rVSSQAzsC3df3z4Ir1AiU+a07LtwG2
+ cMFXJ2cgBK5PWI/l1L9h6hU6uKVBKG2/xuVqptoF58v6gCNxiiG4Fk5u+dCC4H9b
+ tCVaVtFK/StpRf36NbbA673EmcBGRxFmuk21DgoujDHDlO/I1kJ6e0Eymy0szn5L
+ 8wL4+ZObHxNV8WSv5e8RgB/4JlIxzdyothq+oHBkSEHDnWNBJoAMekiEAK8foRnH
+ FIj9oxIcmmECnPwGuqqQ==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vkmddrexk-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 15 Jan 2024 13:47:09 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C8695100057;
+ Mon, 15 Jan 2024 13:47:08 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C19A026DDD6;
+ Mon, 15 Jan 2024 13:47:08 +0100 (CET)
+Received: from localhost (10.201.22.165) by SHFDAG1NODE3.st.com (10.75.129.71)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 15 Jan
+ 2024 13:47:08 +0100
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Alexandre Torgue
+ <alexandre.torgue@foss.st.com>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Simon Glass <sjg@chromium.org>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [PATCH 01/12] arm64: dts: st: add bsec support to stm32mp25
+Date: Mon, 15 Jan 2024 13:46:46 +0100
+Message-ID: <20240115134642.1.Iefa175618c8da1cb27702d86b19bdada62a0f01d@changeid>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240115124657.39109-1-patrick.delaunay@foss.st.com>
+References: <20240115124657.39109-1-patrick.delaunay@foss.st.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/5] arm: dts: k3-j721e-beagleboneai64: Fix USB operation
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, Nishanth Menon <nm@ti.com>
-Cc: robertcnelson@gmail.com, marex@denx.de, n-francis@ti.com,
- praneeth@ti.com, s-vadapalli@ti.com, r-gunasekaran@ti.com, srk@ti.com,
- vigneshr@ti.com, u-boot@lists.denx.de
-References: <20240112124951.238098-1-rogerq@kernel.org>
- <20240112124951.238098-5-rogerq@kernel.org>
- <20240112130233.bflterluncjoyrhy@treadmill>
- <8f5d151c-aebb-41d9-b638-83c60e740d15@kernel.org>
- <20240112131450.tpn454pfzlqlteed@urology>
- <20240112132131.GN1610741@bill-the-cat>
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20240112132131.GN1610741@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.201.22.165]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-01-05_08,2024-01-05_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,98 +90,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add BSEC support to STM32MP25 SoC family with SoC information:
+- RPN = Device part number (BSEC_OTP_DATA9)
+- PKG = package data register (Bits 2:0 of BSEC_OTP_DATA122)
 
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Signed-off-by: Alexandre Torgue <alexandre.torgue@foss.st.com>
+---
 
-On 12/01/2024 15:21, Tom Rini wrote:
-> On Fri, Jan 12, 2024 at 07:14:50AM -0600, Nishanth Menon wrote:
->> On 15:06-20240112, Roger Quadros wrote:
->>>
->>>
->>> On 12/01/2024 15:02, Nishanth Menon wrote:
->>>> On 14:49-20240112, Roger Quadros wrote:
->>>>> Without correct SERDES MUX and Lane control settings
->>>>> USB0 will be broken. Set the MUX and Lane control devices
->>>>> to be auto probed so they are configured correctly.
->>>>>
->>>>> Signed-off-by: Roger Quadros <rogerq@kernel.org>
->>>>> ---
->>>>>  arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi | 2 ++
->>>>>  1 file changed, 2 insertions(+)
->>>>>
->>>>> diff --git a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
->>>>> index f83caf7998..017a5a722e 100644
->>>>> --- a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
->>>>> +++ b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
->>>>> @@ -165,6 +165,7 @@
->>>>>  
->>>>>  &serdes_ln_ctrl {
->>>>>  	bootph-all;
->>>>> +	u-boot,mux-autoprobe;
->>>>>  };
->>>>>  
->>>>>  &serdes2_usb_link {
->>>>> @@ -173,6 +174,7 @@
->>>>>  
->>>>>  &usb_serdes_mux {
->>>>>  	bootph-all;
->>>>> +	u-boot,mux-autoprobe;
->>>>>  };
->>>>>  
->>>>>  &serdes_wiz2 {
-> 
-> OK, so both of these are compatible = "mmio-mux", is the problem they
-> aren't probed in time or something else?
-> 
+ arch/arm/dts/stm32mp25-u-boot.dtsi |  4 ++++
+ arch/arm/dts/stm32mp251.dtsi       | 16 ++++++++++++++++
+ 2 files changed, 20 insertions(+)
 
-That's correct. They aren't probed ever. But that is because there are no
-explicit consumers for them. Since this is a platform wide configuration,
-we have been relying on the "idle-states" property and that they are auto-probed.
-
->>>>> -- 
->>>>> 2.34.1
->>>>>
->>>>
->>>> Is this a u-boot thing? or a driver limitation?
->>>>
->>>
->>> u-boot specific. We just want the mux driver to probe
->>> and apply the settings.
->>>
->>> from drivers/mux/mux-uclass.c
->>>
->>> int dm_mux_init(void)
->>> {
->>>         struct uclass *uc;
->>>         struct udevice *dev;
->>>         int ret;
->>>
->>>         ret = uclass_get(UCLASS_MUX, &uc);
->>>         if (ret < 0) {
->>>                 log_debug("unable to get MUX uclass\n");
->>>                 return ret;
->>>         }
->>>         uclass_foreach_dev(dev, uc) {
->>>                 if (dev_read_bool(dev, "u-boot,mux-autoprobe")) {
->>>                         ret = device_probe(dev);
->>>                         if (ret)
->>>                                 log_debug("unable to probe device %s\n",
->>>                                           dev->name);
->>>                 }
->>>         }
->>>
->>>         return 0;
->>> }
->>>
->>>
->>
->> Uggh.. We need to see eventually how to get rid of this.
->> This makes
->> https://lore.kernel.org/u-boot/20240110103547.719757-1-sumit.garg@linaro.org/#t
->> harder now?
-> 
-> No, it should be fine, Sumit's series handles -u-boot.dtsi files.
-> 
-
+diff --git a/arch/arm/dts/stm32mp25-u-boot.dtsi b/arch/arm/dts/stm32mp25-u-boot.dtsi
+index f4f26add2a41..0c8e95b34163 100644
+--- a/arch/arm/dts/stm32mp25-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp25-u-boot.dtsi
+@@ -37,6 +37,10 @@
+ 	};
+ };
+ 
++&bsec {
++	bootph-all;
++};
++
+ &gpioa {
+ 	bootph-all;
+ };
+diff --git a/arch/arm/dts/stm32mp251.dtsi b/arch/arm/dts/stm32mp251.dtsi
+index cf2f28dc1582..44eb664fb510 100644
+--- a/arch/arm/dts/stm32mp251.dtsi
++++ b/arch/arm/dts/stm32mp251.dtsi
+@@ -127,6 +127,22 @@
+ 			};
+ 		};
+ 
++		bsec: efuse@44000000 {
++			compatible = "st,stm32mp25-bsec";
++			reg = <0x44000000 0x1000>;
++			#address-cells = <1>;
++			#size-cells = <1>;
++
++			part_number_otp@24 {
++				reg = <0x24 0x4>;
++			};
++
++			package_otp@1e8 {
++				reg = <0x1e8 0x1>;
++				bits = <0 3>;
++			};
++		};
++
+ 		syscfg: syscon@44230000 {
+ 			compatible = "st,stm32mp25-syscfg", "syscon";
+ 			reg = <0x44230000 0x10000>;
 -- 
-cheers,
--roger
+2.25.1
+
