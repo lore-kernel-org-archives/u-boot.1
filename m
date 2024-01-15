@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A268C3DA79
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 16:23:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B530DC3DA79
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 16:26:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6681187214;
-	Mon, 15 Jan 2024 17:23:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0DDDB87214;
+	Mon, 15 Jan 2024 17:26:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KbK5WKkO";
+	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="MaEda4Dc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5E1B86FC9; Mon, 15 Jan 2024 17:23:54 +0100 (CET)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id AF63287252; Mon, 15 Jan 2024 17:26:37 +0100 (CET)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9714987252
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 17:23:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4537F86FC9
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 17:26:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=foundries.io
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3367f8757d0so1376684f8f.1
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 08:23:52 -0800 (PST)
+ spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2cd928a1d58so34692081fa.3
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 08:26:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705335832; x=1705940632; darn=lists.denx.de;
+ d=foundries.io; s=google; t=1705335994; x=1705940794; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tvrYPCsuuL5dZ9ouOQ629EW/UL0JJXCha/HaDfZ+0b4=;
- b=KbK5WKkOTv0Ezdja7cYbS4yR7cujtMcjpiwPqLAqlE9JZJ5oRhGok1rhi4VIa5gttE
- ECWRNVuoLPKy39EuORzjLTdlXzoDz7chlnbdnmN8VDvq9yzWPK7y/ThgnqSh9sH4Wzu8
- Ss0yKc90ByzSScIKxYJkHt2VYlrBVNkBGUFpyvaX+OLktJzFNGfdHRmWvaDzTlF8puhY
- 8tjxW5viYjd2nu0/qwcDAO8wyu2NbfWduoVEZPSHPcM6FzJyrkpA+VtYgF3DUkGBN8ju
- evqknRmv4fLHnXejUTGktpwVK9FgHZYumVtaQYcVuNvs1cWuAYLrbR6pRotNEUnz0DP5
- mJZg==
+ bh=I2ULnBts3eiCPQ4rcf6zBr7I4Aq0uQ8ncBziZmt4kGY=;
+ b=MaEda4DcyhxHMyOHsetUetvWOjsdmzr37mFUmEismHL+K0YGWfZhV59sv8FQWGwsqH
+ y2S2r5BYoX4wMn1Zf3NxVAhbdjqFmsAHQ+R1efeAEUhF4ZxCA7rOYjXyhYzvkPdvQ3z8
+ 9FBEs+MDpDDtEw/KZ4fDRdpKGQnfE6Tm3yH2Fkgw7I+LLe74dsR4jMnDOxW9E4eWBrfs
+ wXSWk73P1F4q3CFi808KjsdmxS0hy3X54vuCRyN5Bno1Pnhx9yrdpOFdO10vlr3EaEdY
+ P1/EEuArREFN3zY2AW/Chw6TMJbxqIIIeBBGV0u5emzuzqOKPUZyVG2zP1iwFIWrO79O
+ E3qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705335832; x=1705940632;
+ d=1e100.net; s=20230601; t=1705335994; x=1705940794;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tvrYPCsuuL5dZ9ouOQ629EW/UL0JJXCha/HaDfZ+0b4=;
- b=fXh2zVGFxwVyXGrQ8uQRMhQNsLxiXYK+XfzyhDgV2L83tQVjMeW9sgqide5BkQmR66
- LSTHQIo/YxK3+oMSg/JyH9KXkqgjELmaJKbOvm7bUP3EO1/pS7hf6Umvh4Xr3Lu64ZUc
- nmbuK33YJpmnRAMp1Cnrea+6RxQ0U8rqk8h8jIMNAKW12D37yTW7o6YPrgQc6ikFrrJN
- 4u2J+K8lxiBGHT8f9JMGaA6U6111BHxW6WzdYcfDoerNJr1rrxzX8XxRFtWGLhbx5/R6
- p2HZ+9IiQP3nkLK8k73aBVMJY9m5rrj+v+QFX+Qnj6ggvTA+mmfNUVrPdwaiHMx/t4yt
- GOTw==
-X-Gm-Message-State: AOJu0YyojCWvvwn3p23iWNfrs02atlycsKxLSMskSSMMjJSwzul4B9oL
- 8dYn6QvgVhLeD5yAPjalmy9sCXcgcH9wikVUXAE=
-X-Google-Smtp-Source: AGHT+IHmHiBywCNdNaMmhcpNpKUubzRf20caA/R8GWJoK24UmFNPU7sjXb8g5r39S4dZpmXpH9hCM59wuaXEnHs0uNc=
-X-Received: by 2002:adf:fecb:0:b0:336:8103:6ce9 with SMTP id
- q11-20020adffecb000000b0033681036ce9mr6129182wrs.7.1705335831635; Mon, 15 Jan
- 2024 08:23:51 -0800 (PST)
+ bh=I2ULnBts3eiCPQ4rcf6zBr7I4Aq0uQ8ncBziZmt4kGY=;
+ b=KGKnSe6qrb5oDGvdJeAipX1ktiGTFCuGOjfm5OYKW0JtWIzK8emthTOOex5fzZfmqq
+ nxDsJS109UIZngqB5t+T6BU+6U66/geFCtE+2yuTQrAb1x8BXOQwUMPpt6sJ5mYAJZnC
+ 9fyXF52AsDaMot92PRTfC6sha+ls5P1XG/elxBPTz4xoLSFUyJ81Q9D+9DZRdyh2X5zO
+ +FBsGXEiw45kwmMdip8f6cdRhCRVzQ4dawg0K2OEvpsEinj4oQI2B+D3u+ifc+9JWpzI
+ Q0NKNha7yuX359Oz2cg51bQlk53Ocp9i+txxKiI6VmKfalrnH9VvmTN7Y4OXwqmm8U7Z
+ 4T3Q==
+X-Gm-Message-State: AOJu0Yx4lDaUIE2VNyqo8ZALxXQqzztW+wLeEbbbToXSTyI8hk2G3AG+
+ pFZcv2e0Q/ozkKsLV+i+qrAc+sOxNZSRqkH421bBBBvqqpesMg==
+X-Google-Smtp-Source: AGHT+IFDSh8QJ4kBc7UCKdJoB75/I3NYWelHLRcjs3R9lttqmo4nvm/7BeJdzesFQufT+gct2mI6YzuHOHUM6a9MLY4=
+X-Received: by 2002:a05:6512:3c8d:b0:50e:74c1:64d2 with SMTP id
+ h13-20020a0565123c8d00b0050e74c164d2mr3778658lfv.94.1705335994365; Mon, 15
+ Jan 2024 08:26:34 -0800 (PST)
 MIME-Version: 1.0
 References: <20240115140557.57448-1-patrick.delaunay@foss.st.com>
- <20240115150451.v2.7.I122ede30eb83184b996b7d3e1c480418b29ffbe1@changeid>
-In-Reply-To: <20240115150451.v2.7.I122ede30eb83184b996b7d3e1c480418b29ffbe1@changeid>
-From: Igor Opaniuk <igor.opaniuk@gmail.com>
-Date: Mon, 15 Jan 2024 17:23:39 +0100
-Message-ID: <CAByghJaABf37PeVgEPWaQAtpZK4O=brECrLLAWnhWc5mrpW92g@mail.gmail.com>
-Subject: Re: [PATCH v2 07/14] stm32mp: add setup_serial_number for stm32mp25
+ <20240115150451.v2.6.I175b5b047ccdb4198f1ae11bac19411617623518@changeid>
+In-Reply-To: <20240115150451.v2.6.I175b5b047ccdb4198f1ae11bac19411617623518@changeid>
+From: Igor Opaniuk <igor.opaniuk@foundries.io>
+Date: Mon, 15 Jan 2024 17:26:22 +0100
+Message-ID: <CAL6CDMESvLgGFrOb2767nCUiKPJcP9XLWkY1du+sKWamZf24Mw@mail.gmail.com>
+Subject: Re: [PATCH v2 06/14] stm32mp: add soc.c file
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Cc: u-boot@lists.denx.de, Patrice Chotard <patrice.chotard@foss.st.com>, 
  Bhupesh Sharma <bhupesh.sharma@linaro.org>, 
@@ -91,142 +91,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Patrick,
-
-On Mon, Jan 15, 2024 at 5:03=E2=80=AFPM Patrick Delaunay
+On Mon, Jan 15, 2024 at 3:07=E2=80=AFPM Patrick Delaunay
 <patrick.delaunay@foss.st.com> wrote:
 >
-> From: Patrice Chotard <patrice.chotard@foss.st.com>
->
-> Add support of serial number for stm32mp25, gets from OTP with BSEC drive=
-r.
+> Add a new file soc.c for common functions between stm32mp1 and stm32mp2
+> family and move print_cpuinfo() in this new file.
 >
 > Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 >
 > (no changes since v1)
 >
->  .../arm/mach-stm32mp/include/mach/sys_proto.h |  1 +
->  arch/arm/mach-stm32mp/soc.c                   | 31 +++++++++++++++++++
->  arch/arm/mach-stm32mp/stm32mp1/cpu.c          | 27 ----------------
->  arch/arm/mach-stm32mp/stm32mp2/cpu.c          |  2 ++
->  4 files changed, 34 insertions(+), 27 deletions(-)
+>  arch/arm/mach-stm32mp/Makefile       |  1 +
+>  arch/arm/mach-stm32mp/soc.c          | 17 +++++++++++++++++
+>  arch/arm/mach-stm32mp/stm32mp1/cpu.c | 11 -----------
+>  arch/arm/mach-stm32mp/stm32mp2/cpu.c | 11 -----------
+>  4 files changed, 18 insertions(+), 22 deletions(-)
+>  create mode 100644 arch/arm/mach-stm32mp/soc.c
 >
-> diff --git a/arch/arm/mach-stm32mp/include/mach/sys_proto.h b/arch/arm/ma=
-ch-stm32mp/include/mach/sys_proto.h
-> index 83388fdb7371..2a65efc0a50a 100644
-> --- a/arch/arm/mach-stm32mp/include/mach/sys_proto.h
-> +++ b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
-> @@ -97,6 +97,7 @@ u32 get_bootauth(void);
+> diff --git a/arch/arm/mach-stm32mp/Makefile b/arch/arm/mach-stm32mp/Makef=
+ile
+> index 00dc25bb275c..fdcbbf91dfd5 100644
+> --- a/arch/arm/mach-stm32mp/Makefile
+> +++ b/arch/arm/mach-stm32mp/Makefile
+> @@ -6,6 +6,7 @@
+>  obj-y +=3D dram_init.o
+>  obj-y +=3D syscon.o
+>  obj-y +=3D bsec.o
+> +obj-y +=3D soc.o
 >
->  int get_eth_nb(void);
->  int setup_mac_address(void);
-> +int setup_serial_number(void);
->
->  /* board power management : configure vddcore according OPP */
->  void board_vddcore_init(u32 voltage_mv);
+>  obj-$(CONFIG_STM32MP15x) +=3D stm32mp1/
+>  obj-$(CONFIG_STM32MP13x) +=3D stm32mp1/
 > diff --git a/arch/arm/mach-stm32mp/soc.c b/arch/arm/mach-stm32mp/soc.c
-> index 8d5fa474ccaf..ff70ebe97464 100644
-> --- a/arch/arm/mach-stm32mp/soc.c
+> new file mode 100644
+> index 000000000000..8d5fa474ccaf
+> --- /dev/null
 > +++ b/arch/arm/mach-stm32mp/soc.c
-> @@ -3,7 +3,11 @@
->   * Copyright (C) 2024, STMicroelectronics - All Rights Reserved
->   */
->
-> +#include <env.h>
-> +#include <misc.h>
->  #include <asm/arch/sys_proto.h>
-> +#include <dm/device.h>
-> +#include <dm/uclass.h>
->
->  /* used when CONFIG_DISPLAY_CPUINFO is activated */
->  int print_cpuinfo(void)
-> @@ -15,3 +19,30 @@ int print_cpuinfo(void)
->
->         return 0;
->  }
+> @@ -0,0 +1,17 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
+> +/*
+> + * Copyright (C) 2024, STMicroelectronics - All Rights Reserved
+> + */
 > +
-> +int setup_serial_number(void)
+> +#include <asm/arch/sys_proto.h>
+> +
+> +/* used when CONFIG_DISPLAY_CPUINFO is activated */
+> +int print_cpuinfo(void)
 > +{
-> +       char serial_string[25];
-> +       u32 otp[3] =3D {0, 0, 0 };
-> +       struct udevice *dev;
-> +       int ret;
+> +       char name[SOC_NAME_SIZE];
 > +
-> +       if (env_get("serial#"))
-> +               return 0;
-> +
-> +       ret =3D uclass_get_device_by_driver(UCLASS_MISC,
-> +                                         DM_DRIVER_GET(stm32mp_bsec),
-> +                                         &dev);
-> +       if (ret)
-> +               return ret;
-> +
-> +       ret =3D misc_read(dev, STM32_BSEC_SHADOW(BSEC_OTP_SERIAL),
-> +                       otp, sizeof(otp));
-> +       if (ret < 0)
-> +               return ret;
-> +
-> +       sprintf(serial_string, "%08X%08X%08X", otp[0], otp[1], otp[2]);
-> +       env_set("serial#", serial_string);
+> +       get_soc_name(name);
+> +       printf("CPU: %s\n", name);
 > +
 > +       return 0;
 > +}
 > diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp=
 /stm32mp1/cpu.c
-> index 00fea7929b2f..f84cb26fa565 100644
+> index 55574fd4bebf..00fea7929b2f 100644
 > --- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
 > +++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-> @@ -336,33 +336,6 @@ __weak int setup_mac_address(void)
->         return 0;
+> @@ -158,17 +158,6 @@ void enable_caches(void)
+>         dcache_enable();
 >  }
 >
-> -static int setup_serial_number(void)
+> -/* used when CONFIG_DISPLAY_CPUINFO is activated */
+> -int print_cpuinfo(void)
 > -{
-> -       char serial_string[25];
-> -       u32 otp[3] =3D {0, 0, 0 };
-> -       struct udevice *dev;
-> -       int ret;
+> -       char name[SOC_NAME_SIZE];
 > -
-> -       if (env_get("serial#"))
-> -               return 0;
-> -
-> -       ret =3D uclass_get_device_by_driver(UCLASS_MISC,
-> -                                         DM_DRIVER_GET(stm32mp_bsec),
-> -                                         &dev);
-> -       if (ret)
-> -               return ret;
-> -
-> -       ret =3D misc_read(dev, STM32_BSEC_SHADOW(BSEC_OTP_SERIAL),
-> -                       otp, sizeof(otp));
-> -       if (ret < 0)
-> -               return ret;
-> -
-> -       sprintf(serial_string, "%08X%08X%08X", otp[0], otp[1], otp[2]);
-> -       env_set("serial#", serial_string);
+> -       get_soc_name(name);
+> -       printf("CPU: %s\n", name);
 > -
 > -       return 0;
 > -}
 > -
->  __weak void stm32mp_misc_init(void)
+>  static void setup_boot_mode(void)
 >  {
->  }
+>         const u32 serial_addr[] =3D {
 > diff --git a/arch/arm/mach-stm32mp/stm32mp2/cpu.c b/arch/arm/mach-stm32mp=
 /stm32mp2/cpu.c
-> index c0f6519e8d7c..301e365cf4f4 100644
+> index f43d1aaf72cc..c0f6519e8d7c 100644
 > --- a/arch/arm/mach-stm32mp/stm32mp2/cpu.c
 > +++ b/arch/arm/mach-stm32mp/stm32mp2/cpu.c
-> @@ -69,6 +69,8 @@ void enable_caches(void)
->
->  int arch_misc_init(void)
->  {
-> +       setup_serial_number();
-> +
->         return 0;
+> @@ -67,17 +67,6 @@ void enable_caches(void)
+>         dcache_enable();
 >  }
 >
+> -/* used when CONFIG_DISPLAY_CPUINFO is activated */
+> -int print_cpuinfo(void)
+> -{
+> -       char name[SOC_NAME_SIZE];
+> -
+> -       get_soc_name(name);
+> -       printf("CPU: %s\n", name);
+> -
+> -       return 0;
+> -}
+> -
+>  int arch_misc_init(void)
+>  {
+>         return 0;
 > --
 > 2.25.1
 >
@@ -237,8 +202,7 @@ Reviewed-by: Igor Opaniuk <igor.opaniuk@foundries.io>
 Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
 
 Igor Opaniuk
-
-mailto: igor.opaniuk@gmail.com
-skype: igor.opanyuk
-+48 666 108 041
-http://ua.linkedin.com/in/iopaniuk
+Embedded Software Engineer
+T:  +380 938364067
+E: igor.opaniuk@foundries.io
+W: www.foundries.io
