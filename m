@@ -4,55 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1B59C3DA79
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 15:44:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 715A8C3DA79
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 15:45:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49EB086F67;
-	Mon, 15 Jan 2024 16:44:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id DF6BD86F67;
+	Mon, 15 Jan 2024 16:45:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="kDof2Hxt";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="U/9X8QT2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99C0086EF1; Mon, 15 Jan 2024 16:44:48 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 092FD8743A; Mon, 15 Jan 2024 16:45:43 +0100 (CET)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C9DF86F67
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 16:44:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C0AB86EF1
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 16:45:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 4E24628682;
- Mon, 15 Jan 2024 16:44:44 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1705333484;
- bh=FVZ01lgRqiNKYFMLi7htcpOkC1kNUHq+18V2KYD4PHg=; h=From:To:Subject;
- b=kDof2Hxt49IzxRohWHxdDWb5e0CRBPldloDtQPfcKm1dAvB+9EJVGrcwxg4key+P3
- xkq0nbLOj4ilYLpIf4xVyVVzwWtnoYriP+fZ91cCkcbiCo+7/CTadDwki8/xjDIbet
- HacnduJXFW2MHXMD/5pIr5VKAbYvKGka4ou600AVarbgWttWC67ci1xsn2oozfCKDx
- 2DLm58eHFAo+zBDr1rj2QbM5HOOosPn/VwYgc8U+CVn/Kh045QsyextXqFRb07xsmj
- UwLEUVh6MMn9FnqoLIpK6nlEcGgZaN9D7t1Ufe/y2Zbi2iaD3e5k6uUWaiNfHnAmH7
- laCEKN/55DUJA==
-Date: Mon, 15 Jan 2024 16:44:20 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Stefano Babic <sbabic@denx.de>
-Subject: Re: [RFC][PATCH] ARM: imx: verdin-imx8mm: Set CAN oscillator
- frequency based on model
-Message-ID: <20240115154420.GA31739@francesco-nb>
-References: <20240113183350.176131-1-marex@denx.de>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=1744d49635=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 40FDWaw5002788; Mon, 15 Jan 2024 16:45:40 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=lnDqovMO+d6vo44Yg652zMBP9dI7y06/6AyMPVyllmQ=; b=U/
+ 9X8QT2/Rz9iZ2gkqETokwu+VUsjta/HraJciSNXmsQ5Ol12F33MCSmgftH8DfK7K
+ sNvy1Hnc/oQJbJ5i3oLlh6nMFPdFDSyR1BLweaJcpGQ5Krj1P4udqpXFPLPX/9TX
+ y/neQPpxTW1mPfJnCg3bnn/4U2op+3aM9h9DNwVx6IJMra4cdt573TazgOMUDs2Z
+ /Q28MB+SVh3bhvTF8Dr15BUa9x1p9R+R7oQuPvY5ZOeY36zkthi9QC9sbHBUTLkb
+ AbAyLPvFzh5JRfBnpDxcfEW5VDmJjmRy8zNLd5HSmt0sXk1ol2fLvYRCbAYzvRPz
+ RX9rewtDdd0nyPlN3VGA==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vm6bny17w-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 15 Jan 2024 16:45:40 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 62D4410002A;
+ Mon, 15 Jan 2024 16:45:40 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 599AC2BE2E9;
+ Mon, 15 Jan 2024 16:45:40 +0100 (CET)
+Received: from [10.201.20.205] (10.201.20.205) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 15 Jan
+ 2024 16:45:39 +0100
+Message-ID: <1c7597c1-0da7-42bd-b728-da088d02a2f5@foss.st.com>
+Date: Mon, 15 Jan 2024 16:45:39 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240113183350.176131-1-marex@denx.de>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] smt32mp: Add dependencies on CMDLINE for command stm32key
+Content-Language: en-US
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+CC: <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20240115143048.1.I808ca7780ec7f1ca146b47adae52ef1060a276c9@changeid>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20240115143048.1.I808ca7780ec7f1ca146b47adae52ef1060a276c9@changeid>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.201.20.205]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-01-05_08,2024-01-05_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,81 +88,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Jan 13, 2024 at 07:33:17PM +0100, Marek Vasut wrote:
-> The older i.MX8M Mini Verdin SoMs before rev. 1.1C came with 20 MHz SPI CAN
-> controller oscillator, the newer SoMs use 40 MHz oscillator. Handle both by
-> overriding the oscillator frequency just before booting the kernel.
+
+
+On 1/15/24 14:30, Patrick Delaunay wrote:
+> We cannot use stm32key commands without CONFIG_CMDLINE so add the
+> required condition.
 > 
-> Signed-off-by: Marek Vasut <marex@denx.de>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
-> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-> Cc: Fabio Estevam <festevam@gmail.com>
-> Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
-> Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-> Cc: Philippe Schenker <philippe.schenker@toradex.com>
-
-Philippe is no longer in toradex, removed from cc list.
-
-> Cc: Stefano Babic <sbabic@denx.de>
-> ---
->  board/toradex/verdin-imx8mm/verdin-imx8mm.c | 19 +++++++++++++++++++
->  1 file changed, 19 insertions(+)
 > 
-> diff --git a/board/toradex/verdin-imx8mm/verdin-imx8mm.c b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
-> index b2781b51d6a..8bc1a51eeb1 100644
-> --- a/board/toradex/verdin-imx8mm/verdin-imx8mm.c
-> +++ b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
-> @@ -142,6 +142,25 @@ int board_phys_sdram_size(phys_size_t *size)
->  #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
->  int ft_board_setup(void *blob, struct bd_info *bd)
->  {
-> +	const char *canoscpath = "/oscillator";
-> +	int canoscoff, freq, ret;
-> +
-> +	canoscoff = fdt_path_offset(blob, canoscpath);
-> +	if (canoscoff < 0)	/* No CAN oscillator found. */
-> +		goto exit;
-> +
-> +	if (tdx_hw_tag.ver_assembly < 2)        /* rev. A or B */
-> +		freq = 20000000;
-> +	else					/* rev. C or newer */
-> +		freq = 40000000;
+>  arch/arm/mach-stm32mp/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
+> index 5fc92d07fe6d..c6c89883f2b0 100644
+> --- a/arch/arm/mach-stm32mp/Kconfig
+> +++ b/arch/arm/mach-stm32mp/Kconfig
+> @@ -144,6 +144,7 @@ config STM32_ECDSA_VERIFY
+>  
+>  config CMD_STM32KEY
+>  	bool "command stm32key to fuse public key hash"
+> +	depends on CMDLINE
+>  	help
+>  		fuse public key hash in corresponding fuse used to authenticate
+>  		binary.
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-So, the situation is more complex than what I thought initially.
-
-The actual frequency of the oscillator depends on the whole
-`struct toradex_hw`, you would need to check prodid, ver_major,
-ver_minor and ver_assembly.
-	
-In addition to that code should not expect `ver_assembly` to be an
-increasing number, this is just a number that is matching the BOM.
-
-The actual `prodid` (PID4 in Toradex naming) that have the CAN
-functionality are 0055 and 0059.
-
-0059, V1.1A and V1.1B, use a 20MHz oscillator
-0055, V1.1A, V1.1B, V1.1C and V1.1D, use a 20Mhz oscillator
-
-Verdin iMX8MM V1.0* is something I would not consider, from what I know
-they were all scrapped (not even myself has any of those anymore).
-
-With that said what I would do is something like
-
-if ((tdx_hw_tag.ver_major == 1 && tdx_hw_tag.ver_minor == 1) &&
-    ((tdx_hw_tag.prodid == VERDIN_IMX8MMQ_IT && ver_assembly <= 1) ||
-    (tdx_hw_tag.prodid == VERDIN_IMX8MMQ_WIFI_BT_IT &&. ....))
-
-    ft_fixup_can_oscillator_freq();
-
-or any other more readable variant of your choice ;-)
-
-And I would not have the code guess anything apart this, just setting
-20MHz for the well known configuration.
-
-If you are interested the details on the versions they are public, see
-https://www.toradex.com/computer-on-modules/verdin-arm-family/nxp-imx-8m-mini-nano
-and
-https://developer.toradex.com/hardware/verdin-som-family/modules/verdin-imx8m-mini/#revision-history
-
-Francesco
-
+Thanks
+Patrice
