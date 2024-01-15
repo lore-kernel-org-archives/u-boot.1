@@ -4,65 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A18C6C3DA79
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 09:29:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E44CC3DA79
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 09:29:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D4EB86E88;
-	Mon, 15 Jan 2024 10:29:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9F68D84694;
+	Mon, 15 Jan 2024 10:29:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="KYnM+Dyj";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="KXDDPSqd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B4CF86308; Mon, 15 Jan 2024 10:29:08 +0100 (CET)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eae::600])
+ id 71032807AE; Mon, 15 Jan 2024 10:29:27 +0100 (CET)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2416::601])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35AF784694
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 10:29:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B5B2686308
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 10:29:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Ii4rGavVoq5vZlR0mSGFhRccp2Os2nekSbErIrd8jIUOvG97h6yPaP+SiaXR4cUUQnqnsOli2TAXo3D2TrSiskR8h5u0EIfNnVwmXiyko2D01nkWWv1wHcJqns0r0oac/q3yc8Z1qNmQf80SGB54gXG0OiSsjPOu1xmFYLHygqAmOr2pPDZzL0OG5v0ANALz6r40s/VzDx55BXjC7eaW7ilOew2wcb5vXuE3MfdvnR5LSe173+b4nl/59kuw2MePhAZRxB5S7LOQELG0wZP7DDHGWLDzxLINuu291Dho4bTJ3fFFpOcHkTe6XSgWUXcbPXMPlyQ42oqy06G7NKafFQ==
+ b=GC0b6XC7j9PgZjsUphWN/MJ2vt59gvEJJfZ7y1n0o9WY9aqLPVzfATGgMkXNDMROI+hoiqV2rgWFGUMB6jw51dPBUV+LgXtBndel2Xu+KJkwipVRBFrsrQETeaxyUStwQGgo5k1DeTOqgzinaw3kJqdNG+glm1dppAztfODGPPtWJKGTCc0d26k/9odpVGr4XjJSKaWfLUycBy/rBtueL3AGfMgOMpQmJUJN8gOTK3qW+W0/5gXjV/TD2e+4PMWDNVCCZn4JDuWgxxNS5WPD5C+sZaYBEPjNLcx1L2S8KfSqkv71lNQKftSpLFJyW0GFcnxq71kPrHRZU2a4pFAF8Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GBnvNRyD99rcaiJfLXE1AiNMIVCbTRCRsHAjZLlrVWs=;
- b=D43KSmPeSzI8zcJLY43pkmoeW0e54KFx38PpiaUYLqdLi4PcRD3i7sOKIOCY8zpzQuQlagmH+XPvb2BDVao85DQZF9L+P15r6TlaIMJru5omvYvw5D4w0G2D2mCNG8xFsULLmveKdZWHsXS2RkEeL6ivm6/kmmzS7A3eQeSH8LI9fP2MWtejut6oN26hjbN3kdRIbUGfFTchv3HgYHpSizEmE2Xdkh91GbeVwr0RyJE6vYkW0DAp6KV1pu0gucl+ecME6cKXuPitlZf/yi0YKJSUfSDJW4UI2quiUk+CozzRcPL7KjLJhyJM1tdxwFGiy1p6zhp5TPrVI0jR0hImEQ==
+ bh=tlFYVfIZjmw8tx+d6LDhjdItomstFvNR5vj4eaoE4HY=;
+ b=Ra/c53/SE5Ofmp9zRFRJBUa3qBmkkbp9TjvLuMh9zKCIyTEbK0iQI7Df8IqjNLsmnfzUR2mWzz92lzENt2HNZX3K/gNXr1E53pKzsTV9jOrzjD1sefHiv7S3Y6rpjSbuafUhJAKQFpD+mhuh2rMxNDb9jlwR15pM++8w2szaq/vlhsXY66KDKZ0xdPnIv4KjkzC6+1APOdE+a6p42nTOOUoVRcybaflomrVoJK0SVZ5oSNFT7JN/a8yJON0IJFAO8yzTK/Chc9NA6RM40jq+TyjrA6dwdYAr9YoJduMpwB3Anlq/yVJTL6polzVCj3Wm0PUObTS9wcBb0a0Yos69Qg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GBnvNRyD99rcaiJfLXE1AiNMIVCbTRCRsHAjZLlrVWs=;
- b=KYnM+Dyj3ljV5fH43PKF8nMwH4Fd+4/9fcw+XJvp2Im91gm9Vec5QK1ezPwYyZnDkcSu8D3VDQAFonnbhIuMzyw5hfz3sy+HH7CvtPsY3IhWYMN/iPTfS+dyVDjPygk5mWdVeWttvHW4xafcsTVSH0UenqZc4bOylAIh8fxqKYk=
+ bh=tlFYVfIZjmw8tx+d6LDhjdItomstFvNR5vj4eaoE4HY=;
+ b=KXDDPSqdQwnFN1slL6DlWM3PLMWNMufvfq4cPSiYTLVsdiH4Azhqm4WXHB9KmSjrcp2L4VPDoCvtViYOGGsj9ZlmM+lx32eIz+jDmpFCclZozgeO1BNoV3c8DGvrCh5CBz2OEwUwuzYCcMS5HcYkXQdi8yFZVZzKlSyvflmdnYA=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from CYXPR12MB9337.namprd12.prod.outlook.com (2603:10b6:930:d8::20)
  by BL0PR12MB4882.namprd12.prod.outlook.com (2603:10b6:208:1c3::10)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7181.19; Mon, 15 Jan
- 2024 09:29:00 +0000
+ 2024 09:29:18 +0000
 Received: from CYXPR12MB9337.namprd12.prod.outlook.com
  ([fe80::772d:da3d:154b:fa45]) by CYXPR12MB9337.namprd12.prod.outlook.com
  ([fe80::772d:da3d:154b:fa45%7]) with mapi id 15.20.7181.018; Mon, 15 Jan 2024
- 09:29:00 +0000
-Message-ID: <4648f4a9-c327-417f-bf4f-5dd09d61bf48@amd.com>
-Date: Mon, 15 Jan 2024 10:28:57 +0100
+ 09:29:18 +0000
+Message-ID: <e093edda-875a-4cdf-bc58-a8f26d9b1891@amd.com>
+Date: Mon, 15 Jan 2024 10:29:13 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: zynqmp: Add support for new power-management node
- name
+Subject: Re: [PATCH] arm64: zynqmp: Replace '-' by '_' in fixed clock nodes
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 To: u-boot@lists.denx.de, git@xilinx.com
-Cc: Simon Glass <sjg@chromium.org>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-References: <967aa76f9f72604c874b580476aa85f5260ccd65.1704448544.git.michal.simek@amd.com>
+Cc: Harini Katakam <harini.katakam@amd.com>,
+ Manikanta Guntupalli <manikanta.guntupalli@amd.com>,
+ Neal Frager <neal.frager@amd.com>,
+ Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Saeed Nowshadi <saeed.nowshadi@amd.com>, Simon Glass <sjg@chromium.org>
+References: <3979167636f0a5970a9ab642a4e0ea6a46b3f8d7.1704705872.git.michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
  howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
@@ -107,7 +110,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <967aa76f9f72604c874b580476aa85f5260ccd65.1704448544.git.michal.simek@amd.com>
+In-Reply-To: <3979167636f0a5970a9ab642a4e0ea6a46b3f8d7.1704705872.git.michal.simek@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-ClientProxiedBy: VE1PR08CA0019.eurprd08.prod.outlook.com
@@ -116,61 +119,61 @@ X-ClientProxiedBy: VE1PR08CA0019.eurprd08.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: CYXPR12MB9337:EE_|BL0PR12MB4882:EE_
-X-MS-Office365-Filtering-Correlation-Id: 244f3d69-439b-429c-4cf8-08dc15ac680d
+X-MS-Office365-Filtering-Correlation-Id: df158169-9d5b-400a-1382-08dc15ac72c4
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: OwxXX/E4dBQXlUCHrqPmufcnRzBAPVTy+3auIcNdlb9sXTvxnKLBIasIlZkPtqgR2qUVtNLIDA2JPPpd+qp3nDsC1RRU8jscPr1oQoZnPppVP7fFXu875x4mTOpxjuRiCMQRxlrQKSKr4BaI0Fkj2th6niX4ndO/uORXuQirFys0ChzXpcA0ocXH876WmcxS9UjjN8+Pi5+h8yTbOHmBG2Z4z26Ittp3d3H5cCLnTqiCuYdBZOvut/cGYdw6E+PjX0bIJof0rWuKr581AVb8Tt++VcFTBPV6eeqxww01LgCEfgB4ueIkvUCzVM2atpyerYCMAt2u4OioAFHVmkffcyNCFs+meLHZoSs3tRSgfCpPppg2dNMCPCLxtM5UA4Epi0g12zAlvG0dJHKqOfhajPO6O9k5n4gg0xMsjs+a586+HHPP1R94xc3j+H+LEnYy4YYPNa8qCphWbOliSZhNS+z/g7FoV4BSbQtfSfBFWQl+a6wtH+FkgLw6eBC4X0ELeT8QCrbZ9StdJ5NJ3YzqZbX2FoXtrAxEgzvLSayWL8JRhKpJQB7NSbfWJQf3K0fDwUKYGtPc4d4lQ1F53IRLXEYkGy1nuIRtMbXSMU1RJ+GiFXRHmdxDeuCeUl/uo7pQiQJzaBfUnbZSpAew5fPXqg==
+X-Microsoft-Antispam-Message-Info: jx349Ro8PAq8he5cYX/7tIC5h1XT2x7fHHf8B3KkqL4Pb4nnR96S+uSq91crgATtjzOVIw+bbAtBBzSIn/dlsDApZwd2joyFofuEi5oJUbd/KKpFJpsBWRiB8xEcXbjl+n0nXDAt+RnC+08g7nCyazK6fjXbPPSJGzBVshJZII2xeg5vJKYabcPgM23dS1SLzDTxhUIKmLqWmdsf90gJy1SqJ+YnS4hUJTD4oUeAOxBACty/ofmkWc38tFzBAj0ywSijm2lLGNGjThms+zcPVqCVtCzYGouKxgveLKdjsQUU3X1uPJhtFb5BOZtpzitaOlxoHsXUwDxCYv9zFNRsgp77exGq5JM3hAAvxAkn+eMF+FUN532FZGl1TmocxVWKBG2OHCo+W1PqZhPfrQ039WGJd7GGTV0ba8EoUDChO1tbbGmA+O2+f/BsWnzgB2fApVp0rk5pJmcFs11ZuTpzdh0vdxNyUroN4oZmnIMgfRrbVRMvT5bc2S6mM+bDStcdncuXY/UPUQiYYgrCjvaWrkcLQgDzbVoJ95MogEipH/pEaynIGZGekAphBoKts9SagvYxwAfgLdxE5e4/c+MmlhsNL1Jxcpbyg0sXDLowYmLUvnsy7tLispc0+1fx3CoedmbqwUVZoBlgGKsbdW9ZOA==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:CYXPR12MB9337.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(346002)(39860400002)(366004)(136003)(396003)(376002)(230922051799003)(186009)(64100799003)(1800799012)(451199024)(8676002)(5660300002)(4326008)(8936002)(2906002)(83380400001)(26005)(2616005)(38100700002)(31696002)(86362001)(31686004)(53546011)(6506007)(6512007)(316002)(36756003)(6666004)(478600001)(44832011)(66476007)(54906003)(66946007)(66556008)(6486002)(966005)(41300700001)(45980500001)(43740500002);
+ SFS:(13230031)(346002)(39860400002)(366004)(136003)(396003)(376002)(230922051799003)(186009)(64100799003)(1800799012)(451199024)(8676002)(5660300002)(4326008)(8936002)(2906002)(83380400001)(26005)(2616005)(38100700002)(31696002)(86362001)(31686004)(53546011)(6506007)(6512007)(316002)(36756003)(6666004)(478600001)(44832011)(66476007)(54906003)(66946007)(66556008)(6486002)(41300700001)(45980500001)(43740500002);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SXVPSUxud3FDQ2hpWVduS2kxRkxUSG9YSlhRRk41MXdrdWhFZnlTMTdYMHgx?=
- =?utf-8?B?aU9YeW1CSjVBSUwzMjV3cTlrL0RqOGxTcFZ2NG9JZERSbndqOHM0WE9wZSt2?=
- =?utf-8?B?WkhzdFFNVTdxUXowUTFjK1NLUFZ5MGRnaEZuVGxIbDNWTmVjT2I0WEtWUDhJ?=
- =?utf-8?B?dU1TNFZpV0NYTHQvM0YrSkF5NU5ZMzlpT3pldzFBTHM0c3N0WEVxRWRsdkR1?=
- =?utf-8?B?VDd6R2o4RzA0TkVYenRaSC9sK2Y2NDNENHlrRVFkZTVKS0Vpc3IwRDI0UWs1?=
- =?utf-8?B?MnViNTdvUnZFTHlLdEFYR3AzZXJobk9yYmlpUk1lRFRjWTJSTnpEOXUzZVNi?=
- =?utf-8?B?Nk1lV3g2Unl3d2RUZTRnRThTRWhqeUJpck1ZeGJRZXI5RjRCbzdkRzFjbC9h?=
- =?utf-8?B?K09TTE5kTzhSbnVoMDUwT1BFL3FhdG5oMGFBMHRHMWxIVTl3Ump0dWMxOTZO?=
- =?utf-8?B?SlBpWWVzbXg4aFVubXlmemxidXY0Q0swVFdIVDBiZDdCalMxY0l0bmxmZW9k?=
- =?utf-8?B?OCtsRko4Z2hkWlRJUEtQSGdJa2g5NVU0T0ZsVmlYeWdUclJESEQ5MytjS0JP?=
- =?utf-8?B?RUYwcXRsMFZhTDlHdHp0K2FoeXpseFIzeVRKWTZrMlovYjJQemVLVmFFai9x?=
- =?utf-8?B?VXpkRFVVK0hXSXg2QXdhWWcxcm5GSWpwUjhobFhkMmcrNW0wNlgxK1NuNTBq?=
- =?utf-8?B?Z0dvWmtVNjJxU2t3MGt6OHdRcjFNUTB0ZFBzU2FiVjluMVhucE11MlQyVUNm?=
- =?utf-8?B?Z3Nic29RSzQ2eUhMLzBPdHhpa01Ed2xYclM5SUZpcDZ2ejloR3JDNDcvcSsr?=
- =?utf-8?B?RnJ5VmtyZ2ZnZmJiZ3FkSSt1eHZTT2VRQzl5TitwZ2JORE1vdE1KSXZlMlBx?=
- =?utf-8?B?RnFwTGhsZmFwOEVlR0FKZXo0eU5VQyt1ekIrdEpHWWNqR0pNZ3p6Z1pnUVVk?=
- =?utf-8?B?a2Z2cUI4V3VGWnNBY1QrUEY0SXA2MVZ0R2dDOTdPL1RhQnpMN2cyVjJUcVE2?=
- =?utf-8?B?TGpualV5ZG93TXhDTmJsM3lGTDIrcVFGQmVsNlBtWWxzYzR1dzVhSmZTWjJT?=
- =?utf-8?B?NUJWMDNUcU9rNS9mb0tILzhPUHRscG9pWHBWSERNVDdFTGtVUVBCODhaSUVM?=
- =?utf-8?B?RlJua2ZzVndITml1MzNJV3EvUlBGMHB1M1NGY1AySnA5QVlNd2ZtUUR1NzRo?=
- =?utf-8?B?RmtkbFUwcmZZUlRRdVcwS1llRkZ1ay9GVGFoTndRYXY1SGtQU2pVNmIxN0w0?=
- =?utf-8?B?VUQwb1ZudGFGTmJZTmV6KzNjZEdYRFp1VFQ5SVA5cy8ya3MxV0dsb25pdGsw?=
- =?utf-8?B?ZDEweWtCdTRYelUvdDBWS1JqTWZuMXhOS3RJMEozdGtPN001UnZhaXdyaW82?=
- =?utf-8?B?RTV2dlB2L2hmL3dzb3NXL2ZacndXaGgvZGR6QzdCSjMwRlJPSy91bG10eStK?=
- =?utf-8?B?YUNVMUtSMlNYbGRWMEU3WHExbmh4SnA5T2ZsK2lFT0l0aVR3QkJvUWc2YTUy?=
- =?utf-8?B?ZlhiMEdTL2NSckM4MFFEWGR0VXFzV0ord25KLzNxRkFCbk52azJlK3JJNm9O?=
- =?utf-8?B?UG1pTVcvRjF0VGVnblI3b2hNaTZ6MFRuQm5oWkF1ZmtHMUhkeWc0TEp4ampG?=
- =?utf-8?B?SGNSSTAwaC9CWDY0eVpyTFYwTmFqZVB1QUh3SUtVRWdwZmIrdXNiMk9kbHk4?=
- =?utf-8?B?NVRLeHI5VnRnbDBBbStXL2Z5ZFAwakRqTG5QK1Zrc3IvY2E5WlpLMnJpdlFM?=
- =?utf-8?B?cVBJNjNuaFEybnI3OHR6V0dJU05ZZFFSbEIxTFY3aXhLZFFTU0I4Ry95MG1K?=
- =?utf-8?B?MiswVHJNRVVndkJscUYrNHJGNG9peTlOUXE2aDIrdkNYWi94aXVMN2pqYzVs?=
- =?utf-8?B?OGJFYUZsQjBGTGFnUUNzakVQQXhWWGNXNEV6NUtDaHdrMWNvb0pMMXN2eHF5?=
- =?utf-8?B?OGtmaVRlcUVhci9tNk5pMmdHdlBQWEJWT0FTem5vN21UakUrcFkrSXJIU0pa?=
- =?utf-8?B?bHBpY1V3elp5Y1dQUEp0dkl5OHZtRURXMFNaZGlhZllKVnlOWHVENHNjN2pU?=
- =?utf-8?B?MHdKQXFOTG5vZWhMbUFKdTFscjVQYW5VanYrdmgvTE83aWNEb290VEUxengx?=
- =?utf-8?Q?e/r3VsIoRmNq2udiMs/C4YjOB?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aHdVUFBxVjRWenVQKzg3Z09ubkVmeE9wQis2Vy9HMGJ0aVRvNnI2Ukk0Q2Qw?=
+ =?utf-8?B?OVcxMFNROEQzZncybEYwYW1vbFVpNDdCOGRlaWhXUjRWa254c2NZOGk3cUxE?=
+ =?utf-8?B?WlFTTm1vL1B5MUI3ZGFpV2ZpYnVGNXpTUjBRaTAxREpVVHFTdlhLMzA2SjE2?=
+ =?utf-8?B?MFZUYmNhTmxmQjBPeENFQkM3dDhaUFlYMlRUUW10LzN5OFovUGZyY1JZY0xt?=
+ =?utf-8?B?ZDZWaVJ1RzFKZURiNDh1R1JQRUpTcXRYT21TWGdlbFN6L2tSQktxaXRwSWxT?=
+ =?utf-8?B?OUJjUERkZUdSdzcwWERsU3o1YlYzQi93VXZoMC8zSFpRS3JtZDlLUkNDWHY2?=
+ =?utf-8?B?b2JTTCtiak5KK01rcHJ1eDNMZU5KbDRQdFVZSEtDVjk4SVhNUStaUHFVZHFw?=
+ =?utf-8?B?RXVMemM0UHdDL2ZFL1NTdC9ERWs5elNhUEtXY1p4TmRUc08vdTROb2NFYnU0?=
+ =?utf-8?B?TU5YTzRYSDYzZ0xQbHBLdWtpSHlkL1ZKMHNEQS85dkpva0l3dlA0UXloTEFx?=
+ =?utf-8?B?MFZxdi9EcG5mWEJKTGlDUzBkblB2aGcwMk9XcXlIZkxLdVlqSSs3dENxM0lu?=
+ =?utf-8?B?b1NRZFM5cXRRWEhtajBROEl4Y1Z1SllkZXR0ODJrOGRZU0hLNTk4VFpEZHBj?=
+ =?utf-8?B?RUR1eDg2K1BOYVBHTVh3NW5BRXdaOEhLVS9ZVFQ4LzhwRUJ0NFVacVQ2TkRT?=
+ =?utf-8?B?OFVPZU5maS9waXkvQ3lzeUNPNTBxWXdVNEt1Z2hhSFFuVytqb2pWTDFXc0lC?=
+ =?utf-8?B?N05WWjY1ZStnbjJDTHJMVlQydGd6QTJKai9vdVF2eDhWUkZxbmlnSzJUakd3?=
+ =?utf-8?B?MEFHQ1FabllaSU05RkY0WTFIVE9GbTRJSFA2dGtaQ0VkejBWZE04MXVkbHRt?=
+ =?utf-8?B?S0pPeGNkU0dNdisrNmJXbCtBTlA1UzJHQjh3dzhnMXYxditqaks0VzhTSndP?=
+ =?utf-8?B?STBBSUNWL0xhbHhWQWVDZFZjQ0YzL0hEZjh4UStsckZiUnZ0OG5kbHJpWmJN?=
+ =?utf-8?B?YnlsM2NmSnNsTHVrWFFGTTRyQUhPWlRhRDdtN1pnMjVxOE5DbGlrZzgwaExS?=
+ =?utf-8?B?ZG1raUo1Q0h3akJ6REw2aVUzOEhkdlRVTTA0clJ3T0NjckpWekZFd2pKbmpK?=
+ =?utf-8?B?aEw1UytXV3d2TFAwNGNiMjNvY1R1WlNoN1B1bDU0c1JjKzhqbGJkc1BMMk1J?=
+ =?utf-8?B?dTkxM0lydmRJL3BtRFlXcm9qaTRueWpwbTFtaEdhTXFtd0lKK0oxaFF6bmpV?=
+ =?utf-8?B?WFJqL01uUXl4bTVTdzhoSWhUcGFOOUFJcnE1SWtMZHlCV2pKOEJXdWdjMG53?=
+ =?utf-8?B?cG9uMGcwTjZlSGIzakhweWxtR1FyM0JlQi9OZkY4UGNJMkJ4M1AvTUJ1RWdK?=
+ =?utf-8?B?ZG9TbUhPSnFiNm1WcWVzYm1wLzM2Z1F1K0RQZ3RiSFg5a0tjNWhpVWFXRFVl?=
+ =?utf-8?B?TWoyZWk3QUFHTWFWdDdGOEd5c1UwWUdibnVoY2lyRUZaUkoxblA5WnA3NjVy?=
+ =?utf-8?B?eXBlTmF5SjM0MXR6clhQQzRhSVdRMzBjRHArUFE4UlU3ZnAzcC9FOWdjR21W?=
+ =?utf-8?B?emtZUlo2Sy9td1UvQm5VUm1vTnA1bHlJZUVoT0RvcFdWSlRpdVloMzlYdmtm?=
+ =?utf-8?B?TktPQ2tXR0VHdnJLcEZQTGlnOU9CRDlsbkRiUHdmT1BRSHp0eFJxa1pkOHM0?=
+ =?utf-8?B?WTBHTWt0cFB2YlVsSThwTlpmYU5zNENJRFVkNlZ2dXdrcEpVOENPbHdSWWE4?=
+ =?utf-8?B?ekpjTnF4Rk9nbElCQTdOdFBRdjEvZWhBK3NHamdyMHpxWnRzbDhFNlBNZDFZ?=
+ =?utf-8?B?ZEc2cWFKSXBkeWJPTUVFK3Z4NWlmeEIrdnJpeUZTb2tKTUFPc0NkOUk5MVN3?=
+ =?utf-8?B?ckJ2c2FKZm1KaVRMRnlBa0dON2RKU0RkNVdwMENYaU5yZXhPRVNJOW40YWFD?=
+ =?utf-8?B?M0hHdk5jb1F4MGt0ampwck52K3g1RElNOE8ydUZJTGVtREZNeUpFZTM4UlU2?=
+ =?utf-8?B?WkluVCtKRlNJQ20rQkZPek13Y1RGVWVIcGNrMVVBbDlwYkJKKzZDcEw4Umc5?=
+ =?utf-8?B?YW5NWlNtZ0Z4ZkltNlRWWFlTM3QwY013N2FPTEgwcDBCY1RCN2VpU21ZckJu?=
+ =?utf-8?Q?fAa+nLCnmifcUtZbrziF/bKdJ?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 244f3d69-439b-429c-4cf8-08dc15ac680d
+X-MS-Exchange-CrossTenant-Network-Message-Id: df158169-9d5b-400a-1382-08dc15ac72c4
 X-MS-Exchange-CrossTenant-AuthSource: CYXPR12MB9337.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2024 09:29:00.4800 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2024 09:29:18.4357 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Je1MZzBUCq6UVyQjsr3C2ttUNUXssfvvPkI0IL5q/r5As4Mk+vzf1t1T3LE7PPb5
+X-MS-Exchange-CrossTenant-UserPrincipalName: dmEAv6jypZ0svXcxH9NRwPEgdXELLaXmmmUcDkbBwUM/1vLOsfMpUJNz8Q7O2ZRY
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR12MB4882
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -190,42 +193,260 @@ X-Virus-Status: Clean
 
 
 
-On 1/5/24 10:55, Michal Simek wrote:
-> zynqmp-power node is going to be renamed to power-management which should
-> be generic enough. New name came from dt-binding review that's why there is
-> no way around. Add support new name but also at the same time check old
-> name just in case older dt binding is used.
+On 1/8/24 10:24, Michal Simek wrote:
+> Using '_' in node name is not recommended that's why convert them to use
+> '-' instead.
 > 
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
 > 
-> DT patch is available here:
-> https://lore.kernel.org/all/a2f7fe30e3630c262c2773a595b7a0c8918573a0.1704359569.git.michal.simek@amd.com/
-> ---
->   board/xilinx/zynqmp/zynqmp.c | 9 ++++++---
->   1 file changed, 6 insertions(+), 3 deletions(-)
+>   arch/arm/dts/zynqmp-dlc21-revA.dts         |  4 ++--
+>   arch/arm/dts/zynqmp-e-a2197-00-revA.dts    |  2 +-
+>   arch/arm/dts/zynqmp-mini-emmc0.dts         |  2 +-
+>   arch/arm/dts/zynqmp-mini-emmc1.dts         |  2 +-
+>   arch/arm/dts/zynqmp-mini-qspi.dts          |  2 +-
+>   arch/arm/dts/zynqmp-p-a2197-00-revA.dts    |  4 ++--
+>   arch/arm/dts/zynqmp-sc-revB.dts            |  2 +-
+>   arch/arm/dts/zynqmp-sck-kr-g-revA.dtso     | 12 ++++++------
+>   arch/arm/dts/zynqmp-vp-x-a2785-00-revA.dts |  6 +++---
+>   arch/arm/dts/zynqmp-vpk120-revA.dts        |  6 +++---
+>   arch/arm/dts/zynqmp-zcu670-revA.dts        |  2 +-
+>   arch/arm/dts/zynqmp-zcu670-revB.dts        |  2 +-
+>   12 files changed, 23 insertions(+), 23 deletions(-)
 > 
-> diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-> index e3700f076bc1..9f5009072025 100644
-> --- a/board/xilinx/zynqmp/zynqmp.c
-> +++ b/board/xilinx/zynqmp/zynqmp.c
-> @@ -156,9 +156,12 @@ int board_init(void)
->   #if defined(CONFIG_ZYNQMP_FIRMWARE)
->   	struct udevice *dev;
+> diff --git a/arch/arm/dts/zynqmp-dlc21-revA.dts b/arch/arm/dts/zynqmp-dlc21-revA.dts
+> index f737004d7943..9dabee3f9985 100644
+> --- a/arch/arm/dts/zynqmp-dlc21-revA.dts
+> +++ b/arch/arm/dts/zynqmp-dlc21-revA.dts
+> @@ -43,13 +43,13 @@
+>   		reg = <0 0 0 0x80000000>, <0x8 0 0x3 0x80000000>;
+>   	};
 >   
-> -	uclass_get_device_by_name(UCLASS_FIRMWARE, "zynqmp-power", &dev);
-> -	if (!dev)
-> -		panic("PMU Firmware device not found - Enable it");
-> +	uclass_get_device_by_name(UCLASS_FIRMWARE, "power-management", &dev);
-> +	if (!dev) {
-> +		uclass_get_device_by_name(UCLASS_FIRMWARE, "zynqmp-power", &dev);
-> +		if (!dev)
-> +			panic("PMU Firmware device not found - Enable it");
-> +	}
->   #endif
+> -	si5332_1: si5332_1 { /* clk0_sgmii - u142 */
+> +	si5332_1: si5332-1 { /* clk0_sgmii - u142 */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <125000000>;
+>   	};
 >   
->   #if defined(CONFIG_SPL_BUILD)
-
+> -	si5332_2: si5332_2 { /* clk1_usb - u142 */
+> +	si5332_2: si5332-2 { /* clk1_usb - u142 */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <26000000>;
+> diff --git a/arch/arm/dts/zynqmp-e-a2197-00-revA.dts b/arch/arm/dts/zynqmp-e-a2197-00-revA.dts
+> index cc57c2a1b0be..f1b0a4aa65dd 100644
+> --- a/arch/arm/dts/zynqmp-e-a2197-00-revA.dts
+> +++ b/arch/arm/dts/zynqmp-e-a2197-00-revA.dts
+> @@ -43,7 +43,7 @@
+>   		reg = <0x0 0x0 0x0 0x80000000>;
+>   	};
+>   
+> -	si5332_1: si5332_1 { /* u142 - GEM0 */
+> +	si5332_1: si5332-1 { /* u142 - GEM0 */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <125000000>;
+> diff --git a/arch/arm/dts/zynqmp-mini-emmc0.dts b/arch/arm/dts/zynqmp-mini-emmc0.dts
+> index 02e80bd85e1a..7823c58cb272 100644
+> --- a/arch/arm/dts/zynqmp-mini-emmc0.dts
+> +++ b/arch/arm/dts/zynqmp-mini-emmc0.dts
+> @@ -35,7 +35,7 @@
+>   		bootph-all;
+>   	};
+>   
+> -	clk_xin: clk_xin {
+> +	clk_xin: clk-xin {
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <200000000>;
+> diff --git a/arch/arm/dts/zynqmp-mini-emmc1.dts b/arch/arm/dts/zynqmp-mini-emmc1.dts
+> index ce1cdb207538..2f6ba95073ab 100644
+> --- a/arch/arm/dts/zynqmp-mini-emmc1.dts
+> +++ b/arch/arm/dts/zynqmp-mini-emmc1.dts
+> @@ -35,7 +35,7 @@
+>   		bootph-all;
+>   	};
+>   
+> -	clk_xin: clk_xin {
+> +	clk_xin: clk-xin {
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <200000000>;
+> diff --git a/arch/arm/dts/zynqmp-mini-qspi.dts b/arch/arm/dts/zynqmp-mini-qspi.dts
+> index ee8be5360004..e35317f3e2d4 100644
+> --- a/arch/arm/dts/zynqmp-mini-qspi.dts
+> +++ b/arch/arm/dts/zynqmp-mini-qspi.dts
+> @@ -53,7 +53,7 @@
+>   			#size-cells = <0>;
+>   		};
+>   
+> -		misc_clk: misc_clk {
+> +		misc_clk: misc-clk {
+>   			compatible = "fixed-clock";
+>   			#clock-cells = <0>;
+>   			clock-frequency = <125000000>;
+> diff --git a/arch/arm/dts/zynqmp-p-a2197-00-revA.dts b/arch/arm/dts/zynqmp-p-a2197-00-revA.dts
+> index 9acccad40e77..5a60b86a574e 100644
+> --- a/arch/arm/dts/zynqmp-p-a2197-00-revA.dts
+> +++ b/arch/arm/dts/zynqmp-p-a2197-00-revA.dts
+> @@ -43,13 +43,13 @@
+>   		reg = <0x0 0x0 0x0 0x80000000>;
+>   	};
+>   
+> -	si5332_1: si5332_1 { /* clk0_sgmii - u142 */
+> +	si5332_1: si5332-1 { /* clk0_sgmii - u142 */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <125000000>;
+>   	};
+>   
+> -	si5332_2: si5332_2 { /* clk1_usb - u142 */
+> +	si5332_2: si5332-2 { /* clk1_usb - u142 */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <27000000>;
+> diff --git a/arch/arm/dts/zynqmp-sc-revB.dts b/arch/arm/dts/zynqmp-sc-revB.dts
+> index f7349fdc3b4c..8517bdad6f47 100644
+> --- a/arch/arm/dts/zynqmp-sc-revB.dts
+> +++ b/arch/arm/dts/zynqmp-sc-revB.dts
+> @@ -71,7 +71,7 @@
+>   		};
+>   	};
+>   
+> -	si5332_2: si5332_2 { /* u42 */
+> +	si5332_2: si5332-2 { /* u42 */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <26000000>;
+> diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
+> index 57cd9ba13e78..7717abf7bd8a 100644
+> --- a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
+> +++ b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
+> @@ -25,37 +25,37 @@
+>   		io-channels = <&u14 0>, <&u14 1>, <&u14 2>;
+>   	};
+>   
+> -	si5332_0: si5332_0 { /* u17 - GEM0/1 */
+> +	si5332_0: si5332-0 { /* u17 - GEM0/1 */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <125000000>;
+>   	};
+>   
+> -	si5332_1: si5332_1 { /* u17 - DP */
+> +	si5332_1: si5332-1 { /* u17 - DP */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <27000000>;
+>   	};
+>   
+> -	si5332_2: si5332_2 { /* u17 - USB */
+> +	si5332_2: si5332-2 { /* u17 - USB */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <26000000>;
+>   	};
+>   
+> -	si5332_3: si5332_3 { /* u17 - SFP+ */
+> +	si5332_3: si5332-3 { /* u17 - SFP+ */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <156250000>;
+>   	};
+>   
+> -	si5332_4: si5332_4 { /* u17 - GEM2 */
+> +	si5332_4: si5332-4 { /* u17 - GEM2 */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <25000000>;
+>   	};
+>   
+> -	si5332_5: si5332_5 { /* u17 - GEM3 */
+> +	si5332_5: si5332-5 { /* u17 - GEM3 */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <25000000>;
+> diff --git a/arch/arm/dts/zynqmp-vp-x-a2785-00-revA.dts b/arch/arm/dts/zynqmp-vp-x-a2785-00-revA.dts
+> index 088545c87cee..2a3bbe170472 100644
+> --- a/arch/arm/dts/zynqmp-vp-x-a2785-00-revA.dts
+> +++ b/arch/arm/dts/zynqmp-vp-x-a2785-00-revA.dts
+> @@ -65,19 +65,19 @@
+>   		};
+>   	};
+>   
+> -	si5332_0: si5332_0 { /* ps_ref_clk - u142 */
+> +	si5332_0: si5332-0 { /* ps_ref_clk - u142 */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <33333333>;
+>   	};
+>   
+> -	si5332_1: si5332_1 { /* clk0_sgmii - u142 */
+> +	si5332_1: si5332-1 { /* clk0_sgmii - u142 */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <33333333>; /* FIXME */
+>   	};
+>   
+> -	si5332_2: si5332_2 { /* clk1_usb - u142 */
+> +	si5332_2: si5332-2 { /* clk1_usb - u142 */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <27000000>;
+> diff --git a/arch/arm/dts/zynqmp-vpk120-revA.dts b/arch/arm/dts/zynqmp-vpk120-revA.dts
+> index fa6046eb95c4..e0e4f1b13ada 100644
+> --- a/arch/arm/dts/zynqmp-vpk120-revA.dts
+> +++ b/arch/arm/dts/zynqmp-vpk120-revA.dts
+> @@ -65,19 +65,19 @@
+>   		};
+>   	};
+>   
+> -	si5332_0: si5332_0 { /* ps_ref_clk */
+> +	si5332_0: si5332-0 { /* ps_ref_clk */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <33333333>;
+>   	};
+>   
+> -	si5332_1: si5332_1 { /* clk0_sgmii */
+> +	si5332_1: si5332-1 { /* clk0_sgmii */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <33333333>; /* FIXME */
+>   	};
+>   
+> -	si5332_2: si5332_2 { /* clk1_usb */
+> +	si5332_2: si5332-2 { /* clk1_usb */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <27000000>;
+> diff --git a/arch/arm/dts/zynqmp-zcu670-revA.dts b/arch/arm/dts/zynqmp-zcu670-revA.dts
+> index 76410de1edca..7f70904f44e7 100644
+> --- a/arch/arm/dts/zynqmp-zcu670-revA.dts
+> +++ b/arch/arm/dts/zynqmp-zcu670-revA.dts
+> @@ -131,7 +131,7 @@
+>   		clock-frequency = <48000000>;
+>   	};
+>   
+> -	si5381_6: si5381_6 { /* refclk_usb3 - u43 */
+> +	si5381_6: si5381-6 { /* refclk_usb3 - u43 */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <26000000>;
+> diff --git a/arch/arm/dts/zynqmp-zcu670-revB.dts b/arch/arm/dts/zynqmp-zcu670-revB.dts
+> index c2dd9f696bf0..0adb2062aef1 100644
+> --- a/arch/arm/dts/zynqmp-zcu670-revB.dts
+> +++ b/arch/arm/dts/zynqmp-zcu670-revB.dts
+> @@ -131,7 +131,7 @@
+>   		clock-frequency = <48000000>;
+>   	};
+>   
+> -	si5381_6: si5381_6 { /* refclk_usb3 - u43 */
+> +	si5381_6: si5381-6 { /* refclk_usb3 - u43 */
+>   		compatible = "fixed-clock";
+>   		#clock-cells = <0>;
+>   		clock-frequency = <26000000>;
 
 Applied.
 M
