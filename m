@@ -4,75 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5B95C3DA79
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 09:44:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 265F4C3DA79
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 10:12:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6699586DD1;
-	Mon, 15 Jan 2024 10:44:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 3CD2D87061;
+	Mon, 15 Jan 2024 11:12:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Gx5kKBE0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nWdglQe3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89E15865D0; Mon, 15 Jan 2024 10:44:09 +0100 (CET)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id 40B3387061; Mon, 15 Jan 2024 11:12:55 +0100 (CET)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A9ED86D9E
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 10:44:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-db3fa47c2f7so6895699276.0
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 01:44:07 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0C1485E44
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 11:12:52 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-28bae84fc2eso1672471a91.1
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 02:12:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1705311846; x=1705916646;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NRoGWt5fYDu3ZDMTVp7td0DY++DBAhdhZDhWkqN/5K0=;
- b=Gx5kKBE04eTMmSaTH1r/6KUFLXgBWjY8GxGR85c1R6/F4OsFO9Nc2NDVZcrHBGmsui
- Wp1+xigAflAKzAymf0i4u5a4ElOay6aP87Wesi0ZiwcS1jz950KT1pEnQgJKkbvlxKah
- cGU4sSlHH2fyJ7gLKTZSn9RMhT9PnAW26jJ1k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705311846; x=1705916646;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=linaro.org; s=google; t=1705313571; x=1705918371; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NRoGWt5fYDu3ZDMTVp7td0DY++DBAhdhZDhWkqN/5K0=;
- b=QhmWYeK5ls+Yabidnx3CSnxBjQsDrINIYfgO2jvt8weq/tS7fcUo2Lb3X0L+CQz+Zd
- RVgpJfyKGhRApcBDXiS37J6hpl9xF4LqWQEz5oA4NcuI/9KzeK031lP/Q6oS+qkI1arw
- Ag/YlxzJomdm4mUXW5vkCWvyDbE3Q45BhUdIePWN6M1+oiQ2VyEeb80a7NXav07w5NV5
- 2uoDtPu8AIuLEb4kdsT/OvzAX2iFeYqNPJthq1LEf4DDjMyAYqwycbdslpLYUtRGcljq
- fIIl7lwaY2QYNedzT2ee1vj730LRK6U9n9iTf3faEeKrRscVdyC/6ryXArfhCSRjZCDB
- c8/Q==
-X-Gm-Message-State: AOJu0YycWyV/rBLaZbAYEH1zVmNUwFbsX3iSQ5LDm/sbybVGgXrkAx0j
- 7ZGUOTR0sytpIp6KKt+CAhm5thKy+IWnSL8JsD8bCfPKmmSAEw==
-X-Google-Smtp-Source: AGHT+IEDV7gUWL7beWZ3oK74Q3b9/5/9O4+wqAqIpq3JP4W9TkTzXKU9z2/my/kNZnDOsOBIL26UnjKKgpfmZDt7sU8=
-X-Received: by 2002:a25:13c4:0:b0:dbf:67f0:efd1 with SMTP id
- 187-20020a2513c4000000b00dbf67f0efd1mr929111ybt.45.1705311845886; Mon, 15 Jan
- 2024 01:44:05 -0800 (PST)
+ bh=19JjZTTgM/qTkuaYYT7sONjc7NuIzTzKJEz5gULSgO4=;
+ b=nWdglQe3soBiJlSyFIDJqtwi3u/EMQQVLpfTPW7nlGbYVuwgA5Z/eTQc9gxDiYb3i8
+ YstZC4uYVyA+U9NMcWaWOHJV3+woXPoD86uY5A1AWAoXA87vu4b9K9IXzvCqWh0yw0sG
+ LRbSw7ToFkLdOoOckFVBfZiZ0i4NyqGd5FxtOyHy4hjZ7sInrR5dQBJBerLZCjroUDk6
+ km3ythrsrs4sDzX/bVwquj7g9AwotllXugnz2swic602efTZ9lgVe0u+nWufwuzaZ0CW
+ hJzHjdcTx8stHSLPdfGqCS5kF8479V8MHtRa+wn9apz27GsL5ogCkIBvQa54WDTO2L85
+ yP+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705313571; x=1705918371;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=19JjZTTgM/qTkuaYYT7sONjc7NuIzTzKJEz5gULSgO4=;
+ b=RlRD+QCFPQOWxlmrhMxzRp0otOY1DcEFXnVBrCroOl1JYlVvBsJrNp6KKjMRjdtxxO
+ p7Q+sdyxI9WhNnZupWcRlmTgo1fbez6u1i5KRcXZzrVORt9PRJuvTbyMqLFg8+wPAM+L
+ dZmO9z1/CFYEL1K94+hYr4CYzYCrg8tswmPBL2QxheTwdv/FWfrMS9moBa83P2y/Un7Q
+ eG0ENfkOVbOc7BmdBJk2CNUejZbn+f8H0Z3mKd0MS0u8PuhL5m/A3cFqT9v8ysuTYJLa
+ 4OFUAkbiZNrUgQf4aXeYCDocIHUq3wQX18fVwbgqfOUB1QXXMQyL1jOMmiaNpznzdQUK
+ 29wg==
+X-Gm-Message-State: AOJu0YyEzdoDWqVqhPqkMMvSv+tXoNe3wMQj0YUJrcg91sKLi/rWrP3D
+ us7AtRTqCzhGY41tPbCQTz2w0ZUHnUQkrw==
+X-Google-Smtp-Source: AGHT+IGxd8a4VcgssHvTN8lU+PVMPgyAWvG8GnbSRVqgT0YVs/Xigz5UJBLG9gFvkVafVKBg05H6BA==
+X-Received: by 2002:a17:90b:3b88:b0:28d:136c:8859 with SMTP id
+ pc8-20020a17090b3b8800b0028d136c8859mr8777560pjb.3.1705313570919; 
+ Mon, 15 Jan 2024 02:12:50 -0800 (PST)
+Received: from octopus ([2400:4050:c3e1:100:4e3a:6682:78c7:6f45])
+ by smtp.gmail.com with ESMTPSA id
+ sc4-20020a17090b510400b0028cefda6fa2sm9386073pjb.24.2024.01.15.02.12.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Jan 2024 02:12:50 -0800 (PST)
+Date: Mon, 15 Jan 2024 19:12:47 +0900
+From: AKASHI Takahiro <takahiro.akashi@linaro.org>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
+ ilias.apalodimas@linaro.org
+Subject: Re: [PATCH v4 2/4] efi_loader: rename BOOTEFI_BOOTMGR to EFI_BOOTMGR
+Message-ID: <ZaUFH3r9MdW+tHTv@octopus>
+Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
+ trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org
+References: <20240110011637.174710-1-takahiro.akashi@linaro.org>
+ <20240110011637.174710-3-takahiro.akashi@linaro.org>
+ <1c42a17d-1043-4449-93c2-9020c1ded71d@gmx.de>
+ <ZaSDUrTQ2Z5N+gil@octopus>
+ <d70d5134-1cc9-4d56-9aa3-499ed992584c@gmx.de>
 MIME-Version: 1.0
-References: <20231211114600.4414-1-rogerq@kernel.org>
- <5d79b1c8-4dc8-44d3-bfe7-4514f41c7102@kernel.org>
- <CAOf5uwn6Q24OcrwHBEbSJhvkX2MV46ea+EZa7yOBDN6WZrw5Dw@mail.gmail.com>
-In-Reply-To: <CAOf5uwn6Q24OcrwHBEbSJhvkX2MV46ea+EZa7yOBDN6WZrw5Dw@mail.gmail.com>
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Date: Mon, 15 Jan 2024 10:43:55 +0100
-Message-ID: <CABGWkvptPdusNjWYSGYUBgWiuOw2TeJFq4Jata1bE_kF+nMyQw@mail.gmail.com>
-Subject: Re: [PATCH v2 0/2] mtd: nand: omap_gpmc: Fix NAND for AM335x
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Roger Quadros <rogerq@kernel.org>, Heiko Schocher <hs@denx.de>, 
- "Leto, Enrico" <enrico.leto@siemens.com>, Tom Rini <trini@konsulko.com>, 
- "Bajjuri, Praneeth" <praneeth@ti.com>, Nishanth Menon <nm@ti.com>,
- Vignesh R <vigneshr@ti.com>, U-Boot-Denx <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <d70d5134-1cc9-4d56-9aa3-499ed992584c@gmx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,87 +99,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Roger And Michael,
+On Mon, Jan 15, 2024 at 09:34:51AM +0100, Heinrich Schuchardt wrote:
+> On 1/15/24 01:58, AKASHI Takahiro wrote:
+> > On Sun, Jan 14, 2024 at 01:46:45PM +0100, Heinrich Schuchardt wrote:
+> > > On 1/10/24 02:16, AKASHI Takahiro wrote:
+> > > > At this point, EFI boot manager interfaces is fully independent from
+> > > > bootefi command. So just rename the configuration parameter.
+> > > > 
+> > > > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> > > > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > > 
+> > > This patch breaks the 'bootefi hello' command in
+> > > qemu-riscv64_smode_defconfig and other QEMU defconfigs.
+> > 
+> > What happened? Please elaborate details so that I can trace your issue.
+> > 
+> > On my side, I didn't see any problem with "bootefi hello" on qemu-arm64
+> > and moreover CI check (github pull request) didn't complain anything.
+> 
+> The failures are logged in
+> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/19302
 
-On Thu, Jan 11, 2024 at 2:13=E2=80=AFPM Michael Nazzareno Trimarchi
-<michael@amarulasolutions.com> wrote:
->
-> Hi
->
-> Il gio 11 gen 2024, 14:06 Roger Quadros <rogerq@kernel.org> ha scritto:
->>
->> Hi,
->>
->> On 11/12/2023 13:45, Roger Quadros wrote:
->> > Hi,
->> >
->> > These patches fix NAND and ELM for AM335x and related legacy platforms
->> > that use HW BCH and ELM modules.
->> >
->> > All CI tests pass: https://github.com/u-boot/u-boot/pull/453
->> >
->> > Changelog:
->> >
->> > v2:
->> > - added __maybe_unused to omap_calculate_ecc_bch. fixes CI tests
->> > - Added Tested-by Tags
->> > - Explained about omap_elm single sector support in commit log
->> >
->> > cheers,
->> > -roger
->> >
->> > Roger Quadros (2):
->> >   mtd: nand: omap_gpmc: Fix NAND in SPL for AM335x
->> >   mtd: rawnand: omap_elm: Fix elm_init definition
->> >
->> >  drivers/mtd/nand/raw/omap_elm.c  |  4 +-
->> >  drivers/mtd/nand/raw/omap_elm.h  |  6 --
->> >  drivers/mtd/nand/raw/omap_gpmc.c | 95 ++++++++++---------------------=
--
->> >  3 files changed, 31 insertions(+), 74 deletions(-)
->> >
->> >
->> > base-commit: 2f0282922b2c458eea7f85c500a948a587437b63
->>
->> If no objections can this be Acked and picked up please?
->> Without these NAND is broken on some TI platforms.
->
->
->
-> We will queue them and send over the weekend
->
-> Michael
->>
->>
->>
->>
->> Thanks!
->>
->> --
->> cheers,
->> -roger
+In the logs for qemu-arm64, qemu-risc64 and maybe others as well,
+I see the same error:
+--- ---
+______________________________ test_efi_grub_net _______________________________
+test/py/tests/test_efi_loader.py:188: in test_efi_grub_net
+    addr = fetch_tftp_file(u_boot_console, 'env__efi_loader_grub_file')
+test/py/tests/test_efi_loader.py:136: in fetch_tftp_file
+    assert expected_text in output
+E   assert 'Bytes transferred = 520192' in "*** ERROR: `serverip' not set"
+--- ---
 
+This seems to be the root cause and my commit will have nothing to do
+with the problem.
+Please check the test environment.
 
-Applied to nand-next.
+-Takahiro Akashi
 
-Thanks and regards,
-Dario
---=20
-
-Dario Binacchi
-
-Senior Embedded Linux Developer
-
-dario.binacchi@amarulasolutions.com
-
-__________________________________
-
-
-Amarula Solutions SRL
-
-Via Le Canevare 30, 31100 Treviso, Veneto, IT
-
-T. +39 042 243 5310
-info@amarulasolutions.com
-
-www.amarulasolutions.com
+> I have pushed the tag failed_20240114 to
+> https://source.denx.de/u-boot/custodians/u-boot-efi.git for analysis.
+> 
+> Best regards
+> 
+> Heinrich
