@@ -4,73 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74AD9C3DA79
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 08:16:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12BC3C47258
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 08:28:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B63BE86590;
-	Mon, 15 Jan 2024 09:16:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 4526E86FB2;
+	Mon, 15 Jan 2024 09:28:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jxHhlvZS";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="hFb6gwaB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E3C386B9A; Mon, 15 Jan 2024 09:16:22 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id A691886F1F; Mon, 15 Jan 2024 09:28:21 +0100 (CET)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE7538646E
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 09:16:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EF4B86590
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 09:28:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40F8GHCp093739;
- Mon, 15 Jan 2024 02:16:17 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1705306577;
- bh=G16zSVvq9KU3VcbnXfNbDviyZesvBZyn9IEqoqtwmYg=;
- h=Date:CC:Subject:To:References:From:In-Reply-To;
- b=jxHhlvZSg8MFOtumcZLs9gCuubuCVb/uUKPOAaUmc4qbxg8uVJ9a/nGX0iCg2wBr/
- /EdjRrv3HUFjY1lmnMobDMQfh+mxjLiG9JbWPDxLizNHhMuVuBvcE28pfDvc0wOnlE
- DAIm3wHiWQoZs4YxSAeljzrmGEzdNah1j3nBGleg=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40F8GHRW007386
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 15 Jan 2024 02:16:17 -0600
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 15
- Jan 2024 02:16:16 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 15 Jan 2024 02:16:17 -0600
-Received: from [172.24.227.9] (uda0492258.dhcp.ti.com [172.24.227.9])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40F8GDpf028912;
- Mon, 15 Jan 2024 02:16:14 -0600
-Message-ID: <617c19a9-2570-4b04-aef9-3a90d93c0f6a@ti.com>
-Date: Mon, 15 Jan 2024 13:46:13 +0530
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1705307299; x=1707899299;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=gLuvuKujKiE1RrnsCBgu0a4u2aeAH5PJjtH6UngOe8E=;
+ b=hFb6gwaBcCANZZGgnkgmn8p0EY7z+ArjZg7jdwq02jEv8NVz5+tFi1sI6ZWknwGT
+ wosYX8mtELkO5l/MWqkp5krQfakWa5Tip1Uqt0E9vc06Ja5olIdIRi/Xmx15bghM
+ qBlygAE+duLqrPx8XVT5SsOyO3qrEDcwpqKB9z/4HMI=;
+X-AuditID: ac14000a-fbefe7000000290d-bb-65a4eca3fba3
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id AE.04.10509.3ACE4A56;
+ Mon, 15 Jan 2024 09:28:19 +0100 (CET)
+Received: from Berlix.phytec.de (172.25.0.12) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 15 Jan
+ 2024 09:28:19 +0100
+Received: from Berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4]) by
+ berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4%4]) with mapi id 15.01.2507.006;
+ Mon, 15 Jan 2024 09:28:19 +0100
+From: Yannic Moog <Y.Moog@phytec.de>
+To: "festevam@gmail.com" <festevam@gmail.com>
+CC: "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Teresa Remmet
+ <T.Remmet@phytec.de>
+Subject: Re: [PATCH] board: phytec: fix link error when disabling
+ PHYTEC_SOM_DETECTION
+Thread-Topic: [PATCH] board: phytec: fix link error when disabling
+ PHYTEC_SOM_DETECTION
+Thread-Index: AQHaRGgEqGvhB4M9TE6VzSzQqwIX/7DWZ5EAgAQYcAA=
+Date: Mon, 15 Jan 2024 08:28:18 +0000
+Message-ID: <cfa8d0a081f41af59b71b5da6dd41e01c1b340b0.camel@phytec.de>
+References: <20240111-wip-y-moog-phytec-de-som-detection-fixup-v1-1-7c1a63e7eee8@phytec.de>
+ <CAOMZO5BBhS9qQFNkftiNN-6odxe_MN+ONGKwTsbCdMWwX1vtKg@mail.gmail.com>
+In-Reply-To: <CAOMZO5BBhS9qQFNkftiNN-6odxe_MN+ONGKwTsbCdMWwX1vtKg@mail.gmail.com>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.25.0.11]
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <6B96F3B38FD18F42A1865E7FED5DB96E@phytec.de>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-CC: <trini@konsulko.com>, <sjg@chromium.org>, <afd@ti.com>, <vigneshr@ti.com>, 
- <u-boot@lists.denx.de>, <dannenberg@ti.com>, <srk@ti.com>,
- <s-vadapalli@ti.com>
-Subject: Re: [PATCH 00/10] Add support for Ethernet Boot on SK-AM62
-Content-Language: en-US
-To: Nishanth Menon <nm@ti.com>
-References: <20240112064759.1801600-1-s-vadapalli@ti.com>
- <20240112123231.ivvcnryppxuqi5jr@sequel>
- <cc658de2-24f6-4990-ac59-1f4ad4d373e1@ti.com>
- <20240112124203.5lx66ytqc4golgvj@jumble>
- <1ca2a137-3206-44ca-9b39-cb08baec394e@ti.com>
- <20240112130127.rvvrhz7p4vmlyalh@smother>
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-In-Reply-To: <20240112130127.rvvrhz7p4vmlyalh@smother>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprOIsWRmVeSWpSXmKPExsWyRpKBR3fxmyWpBj0HeC0eXvW3eLu3k92i
+ +526A7PHzll32T3O3tnB6NHf3cIawBzFZZOSmpNZllqkb5fAlbFq52Smgm/sFY0LzjI2MN5h
+ 72Lk5JAQMJGYcuYoI4gtJLCYSWLRPpYuRi4g+z6jxOanDWwQzgZGibaDf1lBqtgEVCROzrgE
+ 1iEioCux4kQXI0gRs8AERonvK78zgySEBSIk3vc8YIEoipTY8fARVIOVREfbXSCbg4NFQFXi
+ 9XcukDCvgJvExnP9UJsXM0ps718AtoxTIFDi6vTTYKcyCshKbNhwHmw+s4C4xKZn31khXhCQ
+ WLIHIi4hICrx8vE/qLi8xIlb05hAdjELaEqs36UP0Woh8XLpfHYIW1FiSvdDdogbBCVOznzC
+ MoFRfBaSDbMQumch6Z6FpHsWku4FjKyrGIVyM5OzU4sys/UKMipLUpP1UlI3MYIiT4SBawdj
+ 3xyPQ4xMHIyHGCU4mJVEeKvvLEkV4k1JrKxKLcqPLyrNSS0+xCjNwaIkzru6IzhVSCA9sSQ1
+ OzW1ILUIJsvEwSnVwCjxPs0v3PX19OmLJ6oH960N5trEazm1Rsu4LyGe66pkS1hYaVD8ppPM
+ +nktMQWtd0Le7O3auk/u7aovTBp7KpVbBLvbsy4YHjNe+vNC+pKOK1XXRJ+X2H/+YedlLZaw
+ L+X/JN4DupvmZRjGaRQxfN9fOafwzBTNie1tq9iVo0v0b2U3hbxTU2Ipzkg01GIuKk4EABoa
+ 9zaqAgAA
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,105 +99,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 12/01/24 18:31, Nishanth Menon wrote:
-> On 18:17-20240112, Siddharth Vadapalli wrote:
->>
->>
->> On 12/01/24 18:12, Nishanth Menon wrote:
->>> On 18:06-20240112, Siddharth Vadapalli wrote:
->>>>
->>>>
->>>> On 12/01/24 18:02, Nishanth Menon wrote:
->>>>> On 12:17-20240112, Siddharth Vadapalli wrote:
->>>>>> Hello,
->>>>>>
->>>>>> This series enables Ethernet Boot on SK-AM62 device.
->>>>>> Product Link: https://www.ti.com/tool/SK-AM62
->>>>>> User Guide: https://www.ti.com/lit/pdf/spruj40
->>>>>>
->>>>>> Ethernet Boot flow is as follows:
->>>>>> 1. The BOOT MODE pins are configured for Ethernet Boot.
->>>>>> 2. On powering on the device, ROM uses the Ethernet Port corresponding
->>>>>> to CPSW3G's MAC Port 1 to transmit "TI K3 Bootp Boot".
->>>>>> 3. The TFTP server and DHCP server on the receiver device need to be
->>>>>> configured such that VCI string "TI K3 Bootp Boot" maps to the file
->>>>>> "tiboot3.bin" and the TFTP server should be capable of transferring
->>>>>> it to the device.
->>>>>> 4. ROM loads and executes "tiboot3.bin" provided by the TFTP server.
->>>>>> 5. The "tiboot3.bin" file is expected to be built using the config:
->>>>>> am62x_evm_r5_ethboot_defconfig
->>>>>> introduced in this series, which shall enable "tispl.bin" to be fetched
->>>>>> over TFTP using "tiboot3.bin".
->>>>>> 6. "tiboot3.bin" is configured to transmit "AM62X U-Boot R5 SPL" as its
->>>>>> NET_VCI_STRING, thereby implying that the DHCP server and TFTP server
->>>>>> need to be configured to transfer "tispl.bin" to the device.
->>>>>> 7. "tiboot3.bin" loads and executes "tispl.bin" provided by the TFTP
->>>>>> server.
->>>>>> 8. The "tispl.bin" file is expected to be built using the config:
->>>>>> am62x_evm_a53_defconfig
->>>>>> which has been updated in this series to enable Ethernet Boot specific
->>>>>> configs, allowing "u-boot.img" to be fetched over TFTP using
->>>>>> "tispl.bin".
->>>>>> 9. "tispl.bin" is configured to transmit "AM62X U-Boot A53 SPL" as its
->>>>>> NET_VCI_STRING. The DHCP server and TFTP server need to be configured to
->>>>>> transfer "u-boot.img" to the device for the aforementioned NET_VCI_STRING.
->>>>>> 10. "tispl.bin" then fetches "u-boot.img" using TFTP and loads and
->>>>>> executes it on the device, completing the process of Ethernet Boot on the
->>>>>> device.
->>>>>>
->>>>>> NOTE: ROM configures CPSW3G's MAC Port 1 for 100 Mbps full-duplex mode
->>>>>> of operation due to which it is expected that the Link Partner also
->>>>>> supports the same mode of operation.
->>>>>> Additionally, enabling "phy_gmii_sel" node at SPL stage will be
->>>>>> necessary and is not added as a part of this series with the aim of
->>>>>> adding the "bootph-all" property to its counterpart in Linux device-tree
->>>>>> first.
->>>>>
->>>>>
->>>>> NAK - instead of writing all this up in the commit message, why would
->>>>> you not spend that time updating the excellent documentation we have?
->>>>
->>>> I plan to document it after the feature is in. The reason for mentioning the
->>>> content above is for explaining the flow in case anyone wishes to test and
->>>> verify it. Wouldn't documenting it make it appear that the feature is present
->>>> when it isn't?
->>>
->>> So you are saying this series does NOT work! why are you sending patches
->>> then? If you are introducing a feature and enabling it, ensure you send
->>> documentation along with it allowing people to be able to actually use
->>> the feature.
->>
->> I have mentioned in the "NOTE" above that enabling "phy_gmii_sel" node at SPL
->> stage by adding the "bootph-all" property is necessary to verify this series.
->> I cannot post that with this series since Linux device-tree needs to have the
->> property added first and the merge window is closed now. Once it is in the Linux
->> device-tree, syncing U-Boot device-tree with Linux device-tree will enable
->> Ethernet Boot which is when the feature will work. That is when I was planning
->> to document it. However, based on your feedback, in the next version for this
->> series I will add the documentation as well along with the note that
->> "phy_gmii_sel" needs to be enabled at SPL stage for the feature to work.
->>
-> 
-> considered first posting a patch to kernel.org (merge window has
-> nothing to do with posting and having patches reviewed) and in the
-> interim, doing that in u-boot.dtsi so that the next sync will drop it
-> from u-boot.dtsi?
-> 
-> OR hold the series back till it is merged into kernel.org master?
-> 
-> Either way, please do not send patches to the list that does not work.
-> 
-> Since it is now hard to trust your patches without detailed cover letter
-> analysis, next time you are updating the series post test logs as well
-> with just the patches applied and no additional changes.
-
-Thank you for clarifying regarding the approach to be taken. I shall include the
-logs when I post the v2 series, in addition to the Documentation update.
-
-> 
-
--- 
-Regards,
-Siddharth.
+SGkgRmFiaW8NCg0KT24gRnJpLCAyMDI0LTAxLTEyIGF0IDE0OjU1IC0wMzAwLCBGYWJpbyBFc3Rl
+dmFtIHdyb3RlOg0KPiBIaSBZYW5uaWMsDQo+IA0KPiBPbiBUaHUsIEphbiAxMSwgMjAyNCBhdCA1
+OjI34oCvQU0gWWFubmljIE1vb2cgPHkubW9vZ0BwaHl0ZWMuZGU+IHdyb3RlOg0KPiA+IA0KPiA+
+IENvbW1pdCBhYTc4NThmZTVlMmUgKCJib2FyZDogcGh5dGVjOiBzb21fZGV0ZWN0aW9uOiBtb3Zl
+IGRlZmluaXRpb25zIHRvDQo+ID4gc291cmNlIGZpbGUiKSBtb3ZlZCBmdW5jdGlvbiBkZWZpbml0
+aW9ucyBmcm9tIGhlYWRlciB0byBzb3VyY2UgZmlsZS4NCj4gPiBNYWtlZmlsZSBob3dldmVyIHdh
+cyBub3QgdXBkYXRlZCB0byB1bmNvbmRpdGlvbmFsbHkgYnVpbGQgdGhlIGlteDggYW5kDQo+ID4g
+cGh5dGVjIHNvbSBkZXRlY3Rpb24gdW5pdHMuIEZpeCB0aGlzLg0KPiA+IA0KPiA+IEZpeGVzOiBh
+YTc4NThmZTVlMmUgKCJib2FyZDogcGh5dGVjOiBzb21fZGV0ZWN0aW9uOiBtb3ZlIGRlZmluaXRp
+b25zIHRvIHNvdXJjZSBmaWxlIikNCj4gPiBTaWduZWQtb2ZmLWJ5OiBZYW5uaWMgTW9vZyA8eS5t
+b29nQHBoeXRlYy5kZT4NCj4gDQo+IFRoaXMgY2F1c2VzIGJ1aWxkIGZhaWx1cmU6DQo+IA0KPiBo
+dHRwczovL3NvdXJjZS5kZW54LmRlL3UtYm9vdC9jdXN0b2RpYW5zL3UtYm9vdC1pbXgvLS9qb2Jz
+Lzc2OTQyMQ0KDQpUaGFuayB5b3UsIEkgd2lsbCBzZW5kIGFuIHVwZGF0ZWQgdmVyc2lvbi4NCg==
