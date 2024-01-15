@@ -4,66 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC204C3DA79
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 13:40:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CD73C3DA79
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 13:40:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F8B187214;
-	Mon, 15 Jan 2024 14:40:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id A5A408753A;
+	Mon, 15 Jan 2024 14:40:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ZGz/Zd+T";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="grUVoP2w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5E6686F02; Mon, 15 Jan 2024 14:40:13 +0100 (CET)
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2409387186; Mon, 15 Jan 2024 14:40:31 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDF7E86F6F
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 14:40:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9091587559
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 14:40:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 856D6B80B78;
- Mon, 15 Jan 2024 13:40:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 678FBC433C7;
- Mon, 15 Jan 2024 13:40:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705326009;
- bh=bVZt/lADy0gWI2BrlGtGUfijtY/a6ZMzKO0loR7msik=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ZGz/Zd+ToxMLjMdbhj1Kpq4hWhn2hmQ7Eez4qmAh+iWDynqXJ1KlAXEULglg68dEA
- qTwORgkwgtqGghZ6U9brJ7l4bDo/R+x6ASlUWjYDAJCQg6XZSfmraV82QejZfcHK+E
- z+SvabDe8UyX7MZJLTIEUnqx4bYS8h2FfosfeAf+ww7wTZZ5+8cNxu+SGDM8hoPxS9
- kCQsE1b6RLk27pME5R0Bq9ZVbJozbuMiLTT93undt2Z+h0XtW7xpKwAFQRXNrGGemA
- z7qc7QMVyoWbbyy3XQYKPovxE3Dea384UiRTswA8a4+CSuYOgVGEFKMi+8OYS89eWi
- dZXpy9YS4QsIA==
-Message-ID: <e649445b-9cb9-4ef2-a9b1-fac198ae8f04@kernel.org>
-Date: Mon, 15 Jan 2024 15:40:04 +0200
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=1744d57945=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 40F8aUtr004759; Mon, 15 Jan 2024 14:40:25 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=/0Ci2/0LanhHZpnb5rx4II8xpoa+UzkODcMYRqHv48Y=; b=gr
+ UVoP2wZGykHs8zuArQdnBtrQZ1LYWW/92r+3lKoi5/5XfUSxihy46HGbd4DgJw+q
+ RaIyJFnSlH9uQiB8y5YE6HYlloUTcgCcs9WEB0UttOxrQiKP/PkeR2iRX22maBgz
+ 46Z1UTeyYUOwgIknpkA4iBVvcXyWCt4MjwwYWI3r8dJLQcX+2c6eveL6rlYqccY5
+ IdLf5Y43lP5uWl3DIDyztmaQCsaiBTyU7IZDVJN9yKFcAl3UC/iS1rqOVB4MHK1f
+ QjtO3yBmSeH4lFJmuRhDnuBXPkIOCFCoSjTYNiXu8KJe6D6zpT3lgjR2t9aeFR40
+ Mx82glKWiCVCAY7FJr+Q==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vkma5runv-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 15 Jan 2024 14:40:25 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3DEDE100057;
+ Mon, 15 Jan 2024 14:40:25 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 34726286A3B;
+ Mon, 15 Jan 2024 14:40:25 +0100 (CET)
+Received: from [10.201.22.165] (10.201.22.165) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 15 Jan
+ 2024 14:40:24 +0100
+Message-ID: <80ce8fac-da35-436b-b5ab-e01be63762e1@foss.st.com>
+Date: Mon, 15 Jan 2024 14:40:23 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/7] usb: dwc3: Switch to device mode on gadget start
+Subject: Re: [PATCH 10/12] stm32mp: activate the command stboard for stm32mp25
+ boards
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
+CC: Igor Opaniuk <igor.opaniuk@foundries.io>, Marek Vasut <marex@denx.de>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Simon Glass <sjg@chromium.org>
+References: <20240115124657.39109-1-patrick.delaunay@foss.st.com>
+ <20240115134642.10.I7e8d4ae242605f7c9d276a858f336d13681528d9@changeid>
+ <cd2a0f5d-85ac-4232-95b8-8d2f7afa7dfe@foss.st.com>
 Content-Language: en-US
-To: Sjoerd Simons <sjoerd@collabora.com>, u-boot@lists.denx.de
-Cc: Martyn Welch <martyn.welch@collabora.com>, Nishanth Menon <nm@ti.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Igor Prusov <ivprusov@salutedevices.com>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Simon Glass
- <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>
-References: <20240112085317.1866449-1-sjoerd@collabora.com>
- <20240112085317.1866449-3-sjoerd@collabora.com>
- <5444e6d5-f928-4f46-9af9-2c07c8b49f4f@kernel.org>
- <80d49aa7dd463700d98d5b2d74b7df35b6ed1d88.camel@collabora.com>
- <1fea7f2d-62af-44f5-bcfd-2a7e3fd33ca6@kernel.org>
- <289be181c4bb9805172cfb6908bbc6f969f79494.camel@collabora.com>
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <289be181c4bb9805172cfb6908bbc6f969f79494.camel@collabora.com>
-Content-Type: text/plain; charset=UTF-8
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <cd2a0f5d-85ac-4232-95b8-8d2f7afa7dfe@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.201.22.165]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-01-05_08,2024-01-05_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,120 +93,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
+
+On 1/15/24 14:03, Patrice CHOTARD wrote:
+>
+> On 1/15/24 13:46, Patrick Delaunay wrote:
+>> Activate the command stboard for stm32mp25 STMicroelectronics boards,
+>> add the default used OTP identifier and the associated board identifier:
+>> - stm32mp25xx-ev1 = MB1936
+>> - stm32mp25xx-dk = MB1605
+>>
+>> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>> ---
+>>
+>>   arch/arm/mach-stm32mp/include/mach/stm32.h | 1 +
+>>   board/st/common/Kconfig                    | 2 +-
+>>   board/st/common/cmd_stboard.c              | 2 ++
+>>   3 files changed, 4 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
+>> index 45c929aa605d..726c390977e3 100644
+>> --- a/arch/arm/mach-stm32mp/include/mach/stm32.h
+>> +++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
+>> @@ -198,6 +198,7 @@ enum forced_boot_mode {
+>>   #define BSEC_OTP_SERIAL	5
+>>   #define BSEC_OTP_RPN	9
+>>   #define BSEC_OTP_PKG	122
+>> +#define BSEC_OTP_BOARD	246
+>>   #define BSEC_OTP_MAC	247
+>>   #endif
+>>   
+>> diff --git a/board/st/common/Kconfig b/board/st/common/Kconfig
+>> index c1c254d07354..5efac658cf4d 100644
+>> --- a/board/st/common/Kconfig
+>> +++ b/board/st/common/Kconfig
+>> @@ -1,7 +1,7 @@
+>>   config CMD_STBOARD
+>>   	bool "stboard - command for OTP board information"
+>>   	depends on ARCH_STM32MP
+>> -	default y if TARGET_ST_STM32MP15x || TARGET_ST_STM32MP13x
+>> +	default y if TARGET_ST_STM32MP25X || TARGET_ST_STM32MP15X || TARGET_ST_STM32MP13X
+> TARGET_ST_STM32MP15x or TARGET_ST_STM32MP15X ? ;-)
+> Internally, we use all our flags in uppercase, whereas at upstream there are some
+> camelcase as TARGET_ST_STM32MP15x or TARGET_ST_STM32MP13x
+>
+
+Thks, I don't see that the Simon patches was not merged.
 
 
-On 12/01/2024 16:18, Sjoerd Simons wrote:
-> On Fri, 2024-01-12 at 14:56 +0200, Roger Quadros wrote:
->>
->>
->> On 12/01/2024 13:06, Sjoerd Simons wrote:
->>> On Fri, 2024-01-12 at 12:39 +0200, Roger Quadros wrote:
->>>>
->>>>
->>>> On 12/01/2024 10:52, Sjoerd Simons wrote:
->>>>> When dr_mode is "otg" the dwc3 is initially configured in _OTG
->>>>> mode;
->>>>> However in this mode the gadget functionality doesn't work
->>>>> without
->>>>> further configuration. To resolve that on gadget start switch
->>>>> to
->>>>> _DEVICE
->>>>> mode globally and go back to _OTG on stop again.
->>>>>
->>>>> For this the dwc3_set_mode is renamed to dwc3_core_set_mode to
->>>>> avoid a
->>>>> conflict with the same function exposed by xhci-dwc3
->>>>
->>>> Aren't they both doing the same thing? I'd rather define them at
->>>> one
->>>> place
->>>> i.e. dwc3/core.c.
->>>
->>> They twiddle the same registers afaict indeed; but the way to get
->>> there
->>> is rather different. So having just one for both really needs a
->>> bigger
->>> amount of rework.
->>>
->>>> The driver model design for dwc3 looks really broken in u-boot.
->>>>
->>>> "snps,dwc3" is claimed by xhci-dwc3.c instead of being claimed by
->>>> dwc3/core.c.
->>>> This is probably because at the time USB host was the more needed
->>>> use
->>>> case at u-boot.
->>>>
->>>> Ideally dwc3/core.c should claim "snps,dwc3" device and
->>>> instantiate
->>>> the respective Host/Device/OTG device based on the provided otg
->>>> mode.
->>>>
->>>> For Host/Device mode it is straight forwa
->>>> dwc3/core.c does dwc3_set_mode() depending on the mode and:
->>>> for host mode -> register xhci-usb driver.
->>>> for device mode -> register UDC device driver.
->>>>
->>>> For dual-role mode, the solution is not very clear as I don't
->>>> think
->>>> there is a role switch framework present
->>>>
->>>> To begin with, we could probably restrict it to just device mode
->>>> as most platforms were forcing it to device mode in any case as
->>>> they
->>>> usually have a 2nd USB port that is host only.
->>>
->>> Right we don't have role switching; And if we had we'd have to add
->>> support of the Type-C controller on the SK boards which determines
->>> the
->>> roles for this.
->>>
->>> This one more minimal patch was modelled after the discussion last
->>> year
->>> around otg mode[0]. And similar to how the cdns3 driver handles it.
->>> Essentially letting host/gadget mode be determined by the usage
->>> rather
->>> then the cables plugged, which is not pretty but works.
->>>
->>> While I agree with you this could all be a lot nicer of u-boot did
->>> "proper" OTG/role-switching; I unfortunately don't have the
->>> bandwidth
->>> to introduce all of that and it seems a shame to block DFU support
->>> on
->>> it. For reference my previous series just set the peripheral role
->>> in
->>> the dts which reflects your suggestion of forcing device mode. I'd
->>> be
->>> wary to do so in the driver because i would hope the OTG handling
->>> in
->>> dwc3 is there for a reason :) 
->>>
->>>
->>> 0: https://lists.denx.de/pipermail/u-boot/2023-August/527709.html
->>>
->>>
->>
->> In your current series, how does it work?
->> What happens if user starts both host and device controllers?
-> 
-> Testing host functionality on the same port as used for DFU (the only
-> one that's otg) doesn't seem to work at all, not sure why that is. host
-> on usb1 (usb-a port, host only) works fine ofcourse.
-> 
-> practically however once the user has used a gadget it's likely they'd
-> have to reset the host side (or at least do a rescan) though as likely
-> they'll have also switched around the cable :).
-> 
->>
->> e.g.
->>> usb start
->>> dfu 0
-> 
-> That seems to work fine, modulo usb0 not seeing attached devices, but
-> that's not a regression introduced by this patch.
+I will correct this part in V2
 
-am62-sk USB0 was never tested in host mode at u-boot. Let me try out and see
-if I can get it to work.
+and also include the 2 Simon patches which rename the stm32mp config to 
+avoid the same issue in futur.
 
--- 
-cheers,
--roger
+
+See series "Clean up of bad Kconfig options"
+
+https://patchwork.ozlabs.org/project/uboot/list/?series=339004&state=*
+
+
+=> [v2,67/87] arm: Rename STM32MP13x
+
+https://patchwork.ozlabs.org/project/uboot/patch/20230129005903.74918-68-sjg@chromium.org/
+
+
+=> [v2,68/87] arm: Rename STM32MP15x
+
+https://patchwork.ozlabs.org/project/uboot/patch/20230129005903.74918-69-sjg@chromium.org/
+
+
+>>   	help
+>>   	  This compile the stboard command to
+>>   	  read and write the board in the OTP.
+>> diff --git a/board/st/common/cmd_stboard.c b/board/st/common/cmd_stboard.c
+>> index 853ab78bbf16..cb103e69b369 100644
+>> --- a/board/st/common/cmd_stboard.c
+>> +++ b/board/st/common/cmd_stboard.c
+>> @@ -49,7 +49,9 @@ static bool check_stboard(u16 board)
+>>   		0x1298,
+>>   		0x1341,
+>>   		0x1497,
+>> +		0x1605, /* stm32mp25xx-dk */
+>>   		0x1635,
+>> +		0x1936, /* stm32mp25xx-ev1 */
+>>   	};
+>>   
+>>   	for (i = 0; i < ARRAY_SIZE(st_board_id); i++)
