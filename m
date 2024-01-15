@@ -4,85 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA10AC3DA79
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 17:08:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53EAAC3DA79
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 17:09:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9E5D8784B;
-	Mon, 15 Jan 2024 18:08:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BCDFC8785C;
+	Mon, 15 Jan 2024 18:09:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mHsw0D8S";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="mjvCtXil";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBE5D87856; Mon, 15 Jan 2024 18:08:40 +0100 (CET)
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5D94886EF1; Mon, 15 Jan 2024 18:09:09 +0100 (CET)
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5249586D82
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 18:08:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AA278785F
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 18:09:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-5c66b093b86so6874770a12.0
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 09:08:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705338516; x=1705943316; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qGwE6yIVHiaKKIcP0PeyKFyKuxc7T6G3U6dzFkFwy9E=;
- b=mHsw0D8S+YxR+JO35gqbsN/xzAg5YY6D6ttZ6fzmakSa1TIkLzEjU0Kv4JDIUcz1Ar
- d2kjlyc+X1NZ3I3varNzYH5zj2rek/osryxrZ/92L5nQukAEI3FN2Sda2LGJHKp+4JRJ
- y/cgmglDThghQSlP87GrVVgSxhYAX53bGkswHxwKw9KIxCaX9Xw3Apz01Cv4DjPfzLXb
- KjYGvH3aQQf6e0xrN7efJsUow/JWgTPcfuFwSvjPCIsnaKsnwM5WGBWXTMPcVDW5axRr
- lE2a/p2AttACuExD7Q3mSbCJ5qqwVgCwgsMKRTG6ffFSjrYs2va0dbSSzI54usg5zmgS
- RJPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705338516; x=1705943316;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=qGwE6yIVHiaKKIcP0PeyKFyKuxc7T6G3U6dzFkFwy9E=;
- b=YZhBCyZA59PZ1TfF0oN8Ax0Bb9d+YXh3KGzvbbCHLnruCbdDQFsg3e83sEMWnSUq7M
- umrWCqazqnAg6EaoM3Xs9fL5NjQOWTe9FMhU4qQYai2jl7p/GJBB66fnBUtn2787F1Lk
- cyaycleG5JhXSfTsjQd0JhdRaNejmBcddMP5Obcx982l/5xYXtRzZ1EfNza/OWwxCW/b
- iuLyVL/epZFJODlE8l2dZfPysu10pXA199U8EHOxeVPsqL098EnBupevVPEzR70GyZTO
- YINegbhyfxcSGWxMvRTei1tp3AAkLy+It1k6HFI2KhgB6EaNU//qjNnPZU5uveEM3EOE
- STjA==
-X-Gm-Message-State: AOJu0YzdVx8oOF3IRupNhNr7U0xNoMbJMsNAl/Vxh785wmPS6Ti+hjkG
- MpyQu2qPGaiut/NAASdY9TdM6weibLGxq7qLekMZBpE/GsnJgQ==
-X-Google-Smtp-Source: AGHT+IGqCB0VMA+a1BGdYgDtkU4jo8DSMbW6HF7sJibeTUWTNERmRHZTIUcvoiCOEr2lubUXnKP0wAmdsy+ROKs4dnk=
-X-Received: by 2002:a17:90b:23c3:b0:28d:9cf2:373d with SMTP id
- md3-20020a17090b23c300b0028d9cf2373dmr8243389pjb.30.1705338516674; Mon, 15
- Jan 2024 09:08:36 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by ams.source.kernel.org (Postfix) with ESMTP id 8385EB80C94;
+ Mon, 15 Jan 2024 17:09:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9DCA7C433F1;
+ Mon, 15 Jan 2024 17:09:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1705338545;
+ bh=EqOMEzkyzNYto3UmIip9XB66HC1aMCqtxgSe2FiBi4I=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=mjvCtXilB+F7tlBXPufpFIoL+uZ5s6bm559DwsOVDAOKL0F+CaraYCpFlmLbfF6/Q
+ EjC5Fy6G41QsIgoRkD35EDwWOrihkeebauqiWVXBfQrZa1+0Y/RASisVtVmiLTuRk6
+ eGhdOYUpbvtNChB0w/5pkNrmpzNgRHEB7wcdyCpqqI1qtqrYlQLBHHIRt9MqY0ofYh
+ msitEc9VYqPft14r9x/yRjnosv7EZAa3ZkgZZaOK1FsLWl6iC8RmSJqovIlL/18jk/
+ F+22h92t37oDYAe8zT+YeBvv+/CNODIP/dYDYB9N1ce1xsApQ1v7J/gnxDe6pxWzoO
+ fhYcgGy3ZzBnA==
+Date: Mon, 15 Jan 2024 11:09:03 -0600
+From: Rob Herring <robh@kernel.org>
+To: =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>
+Cc: Miquel Raynal <miquel.raynal@bootlin.com>,
+ Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Michael Walle <michael@walle.cc>, linux-mtd@lists.infradead.org,
+ devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-kernel@vger.kernel.org, u-boot@lists.denx.de,
+ =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>
+Subject: Re: [PATCH V3 1/6] dt-bindings: nvmem: layouts: add U-Boot
+ environment variables layout
+Message-ID: <20240115170903.GA911971-robh@kernel.org>
+References: <20231221173421.13737-1-zajec5@gmail.com>
+ <20240104001129.GA2045237-robh@kernel.org>
+ <20240104085839.5624c354@xps-13>
+ <8c8d2d38-faf2-47f2-bfbf-2e4842dded47@gmail.com>
 MIME-Version: 1.0
-References: <20240112213337.185460-1-raymond.mao@linaro.org>
- <20240112213337.185460-9-raymond.mao@linaro.org>
- <20240113152732.GH1610741@bill-the-cat>
- <CAEfUkU+fDjfJ02Pjyeock=MhV-SUU0raw8uSvfAi6mwxq_R=xA@mail.gmail.com>
-In-Reply-To: <CAEfUkU+fDjfJ02Pjyeock=MhV-SUU0raw8uSvfAi6mwxq_R=xA@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Mon, 15 Jan 2024 12:08:26 -0500
-Message-ID: <CAEfUkU+xJ+Zwyer-2fo=EtfcELYw4Gw0QNM9pd1PuNYk-RXf3g@mail.gmail.com>
-Subject: Re: [PATCH v5 8/8] fdt: get FDT from bloblist
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, sjg@chromium.org, 
- jwerner@chromium.org, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Kevin Chen <kevin_chen@aspeedtech.com>, Sean Anderson <sean.anderson@seco.com>,
- Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
- Devarsh Thakkar <devarsht@ti.com>, 
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Shiji Yang <yangshiji66@outlook.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>, 
- Samuel Holland <samuel@sholland.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <8c8d2d38-faf2-47f2-bfbf-2e4842dded47@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,51 +80,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Thu, Jan 04, 2024 at 10:10:13AM +0100, Rafał Miłecki wrote:
+> On 4.01.2024 08:58, Miquel Raynal wrote:
+> > robh@kernel.org wrote on Wed, 3 Jan 2024 17:11:29 -0700:
+> > > On Thu, Dec 21, 2023 at 06:34:16PM +0100, Rafał Miłecki wrote:
+> > > > From: Rafał Miłecki <rafal@milecki.pl>
+> > > > 
+> > > > U-Boot env data is a way of storing firmware variables. It's a format
+> > > > that can be used of top of various storage devices. Its binding should
+> > > > be an NVMEM layout instead of a standalone device.
+> > > > 
+> > > > This patch adds layout binding which allows using it on top of MTD NVMEM
+> > > > device as well as any other. At the same time it deprecates the old
+> > > > combined binding.
+> > > 
+> > > I don't understand the issue. From a DT perspective, there isn't. A
+> > > partition is not a device, but is describing the layout of storage
+> > > already.
+> > 
+> > Actually I think what Rafał wants to do goes in the right direction but
+> > I also understand from a binding perspective it may be a little
+> > confusing, even more if we consider "NVMEM" a Linux specific concept.
+> > 
+> > There is today a "u-boot env" NVMEM *device* description which
+> > almost sits at the same level as eg. an eeprom device. We cannot
+> > compare "an eeprom device" and "a u-boot environment" of course. But
+> > that's truly what is currently described.
+> > 
+> > * Current situation
+> > 
+> > 	Flash device -> U-Boot env layout -> NVMEM cells
 
-On Mon, 15 Jan 2024 at 09:57, Raymond Mao <raymond.mao@linaro.org> wrote:
+Isn't it?:
 
-> Hi Tom,
->
-> On Sat, 13 Jan 2024 at 10:27, Tom Rini <trini@konsulko.com> wrote:
->
->> On Fri, Jan 12, 2024 at 01:33:34PM -0800, Raymond Mao wrote:
->>
->> > Get device tree from a bloblist if it exists.
->> > If not, fallback to traditional way.
->> >
->> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
->> > ---
->> > Changes in v2
->> > - Refactor of board_fdt_blob_setup().
->> > Changes in v4
->> > - Move the logics from board custom function to fdt library.
->> > Changes in V5
->> > - Rebase the changes on top of master.
->> >
->> >  lib/fdtdec.c | 18 +++++++++---------
->> >  1 file changed, 9 insertions(+), 9 deletions(-)
->>
->> Why was this just not dropped after:
->> commit 70fe23859437ffe4efe0793423937d8b78ebf9d6
->>
-> In commit 70fe23859437ffe4efe0793423937d8b78ebf9d6, the FDT from bloblist
-> is always overridden when OF_BOARD is enabled (OF_BOARD is enabled when
-> OF_HAS_PRIOR_STAGE is on). I think this is not what we want.
-> The FDT from the bloblist passed from the previous stage should be the
-> default setting.
->
-> If we want to build with OF_HAS_PRIOR_STAGE=y and without OF_BOARD to
-avoid the
-FDT from bloblist not being overridden,
-`imply OF_HAS_PRIOR_STAGE` needs to be dropped from Kconfig for ARCH_QEMU,
-otherwise check-of.sh will always complain.
-Do you mind me adding a patch to arch/arm/Kconfig? And then we can drop
-[PATCH v5 8/8].
+Flash device -> fixed-partitions -> U-Boot env layout -> NVMEM cells
 
-[...]
+> > 
+> > * Improved situation
+> > 
+> > 	Any storage device -> NVMEM -> U-Boot env layout -> NVMEM cells
 
-Thanks and regards,
-Raymond
+Why is this better? We don't need a container to say 'this is NVMEM 
+stuff' or 'this is MTD stuff'. 'U-Boot env layout' can tell us 'this is 
+NVMEM stuff' or whatever the kernel decides in the future.
 
->
+> > 
+> > The latter is of course the most relevant description as we expect
+> > storage devices to expose a storage-agnostic interface (NVMEM in
+> > this case) which can then be parsed (by NVMEM layouts) in a storage
+> > agnostic way.
+> > 
+> > In the current case, the current U-Boot env binding tells people to
+> > declare the env layout on top of a flash device (only). The current
+> > description also expects a partition node which is typical to flash
+> > devices. Whereas what we should have described in the first place is a
+> > layout that applies on any kind of NVMEM device.
+> > 
+> > Bonus point: We've been working the last couple years on clarifying
+> > bindings, especially with mtd partitions (with the partitions{}
+> > container) and NVMEM layouts (with the nvmem-layout{} container).
+> > The switch proposed in this patch makes use of the latter, of course.
+> 
+> Thanks Miquèl for filling bits I missed in commit description. Despite
+> years in Linux/DT I still struggle with more complex designs
+> documentation.
+> 
+> 
+> As per Rob's comment I think I see his point and a possible design
+> confusion. If you look from a pure DT perspective then "partitions" and
+> "nvmem-layout" serve a very similar purpose. They describe device's data
+> content structure. For fixed structures we have very similar
+> "fixed-partitions" and "fixed-cells".
+> 
+> If we were to design those bindings today I'm wondering if we couldn't
+> have s/partitions/layout/ and s/nvmem-layout/layout/.
+
+Why!? It is just a name, and we can't get rid of the old names. We don't 
+need 2 names.
+
+> Rob: other than having different bindings for MTD vs. NVMEM layouts I
+> think they overall design makes sense. A single device may have content
+> structurized on more than 1 level:
+> 1. You may have fixed layout at top level (multiple partitions)
+> 2. Single partitions may have their own layouts (like U-Boot env data)
+
+Sure. Partitions is for 1 and Layouts is for 2.
+
+> Maybe ideally above should look more like:
+> 
+> flash@0 {
+> 	compatible = "<flash-compatible>";
+> 
+> 	layout {
+> 		compatible = "fixed-layout";
+
+Why does 'partitions' and 'fixed-partitions' not work here?
+
+> 		#address-cells = <1>;
+> 		#size-cells = <1>;
+> 
+> 		partition@0 {
+> 			reg = <0x0 0x40000>;
+> 			label = "u-boot";
+> 		};
+> 
+> 		partition@40000 {
+> 			reg = <0x40000 0x10000>;
+> 			label = "u-boot-env";
+> 
+> 			layout {
+> 				compatible = "u-boot,env-layout";
+> 			};
+> 		};
+> 
+> 		partition@50000 {
+> 			reg = <0x50000 0x100000>;
+> 			label = "u-boot";
+> 		};
+> 	};
+> };
+> 
+> but I can clearly see a use for nested "layout"s. As I said maybe we
+> just shouldn't be so open in calling those MTD or NVMEM devices as that
+> is kind of Linux specific.
+
+The overall structure should be agnostic to the subsystem. Specific 
+compatibles like 'u-boot,env' can be tied to a subsystem.
+
+Maybe some things need to be both MTD and NVMEM. MTD to operate on the 
+opague region and NVMEM to access the contents.
+
+
+> I'm not sure if we should try renaming "nvmem-layout" to "layout" or
+> "partitions" in similar way at this point.
+
+You can't rename. It's an ABI though maybe the whole "nvmem-layout" is 
+new enough we can. It's looking like it was a mistake to accept any of 
+this.
+
+Rob
