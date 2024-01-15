@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 715A8C3DA79
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 15:45:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A268C3DA79
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 16:23:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF6BD86F67;
-	Mon, 15 Jan 2024 16:45:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 6681187214;
+	Mon, 15 Jan 2024 17:23:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="U/9X8QT2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KbK5WKkO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 092FD8743A; Mon, 15 Jan 2024 16:45:43 +0100 (CET)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D5E1B86FC9; Mon, 15 Jan 2024 17:23:54 +0100 (CET)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C0AB86EF1
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 16:45:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9714987252
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 17:23:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=1744d49635=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 40FDWaw5002788; Mon, 15 Jan 2024 16:45:40 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=lnDqovMO+d6vo44Yg652zMBP9dI7y06/6AyMPVyllmQ=; b=U/
- 9X8QT2/Rz9iZ2gkqETokwu+VUsjta/HraJciSNXmsQ5Ol12F33MCSmgftH8DfK7K
- sNvy1Hnc/oQJbJ5i3oLlh6nMFPdFDSyR1BLweaJcpGQ5Krj1P4udqpXFPLPX/9TX
- y/neQPpxTW1mPfJnCg3bnn/4U2op+3aM9h9DNwVx6IJMra4cdt573TazgOMUDs2Z
- /Q28MB+SVh3bhvTF8Dr15BUa9x1p9R+R7oQuPvY5ZOeY36zkthi9QC9sbHBUTLkb
- AbAyLPvFzh5JRfBnpDxcfEW5VDmJjmRy8zNLd5HSmt0sXk1ol2fLvYRCbAYzvRPz
- RX9rewtDdd0nyPlN3VGA==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vm6bny17w-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 15 Jan 2024 16:45:40 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 62D4410002A;
- Mon, 15 Jan 2024 16:45:40 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 599AC2BE2E9;
- Mon, 15 Jan 2024 16:45:40 +0100 (CET)
-Received: from [10.201.20.205] (10.201.20.205) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 15 Jan
- 2024 16:45:39 +0100
-Message-ID: <1c7597c1-0da7-42bd-b728-da088d02a2f5@foss.st.com>
-Date: Mon, 15 Jan 2024 16:45:39 +0100
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3367f8757d0so1376684f8f.1
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 08:23:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1705335832; x=1705940632; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tvrYPCsuuL5dZ9ouOQ629EW/UL0JJXCha/HaDfZ+0b4=;
+ b=KbK5WKkOTv0Ezdja7cYbS4yR7cujtMcjpiwPqLAqlE9JZJ5oRhGok1rhi4VIa5gttE
+ ECWRNVuoLPKy39EuORzjLTdlXzoDz7chlnbdnmN8VDvq9yzWPK7y/ThgnqSh9sH4Wzu8
+ Ss0yKc90ByzSScIKxYJkHt2VYlrBVNkBGUFpyvaX+OLktJzFNGfdHRmWvaDzTlF8puhY
+ 8tjxW5viYjd2nu0/qwcDAO8wyu2NbfWduoVEZPSHPcM6FzJyrkpA+VtYgF3DUkGBN8ju
+ evqknRmv4fLHnXejUTGktpwVK9FgHZYumVtaQYcVuNvs1cWuAYLrbR6pRotNEUnz0DP5
+ mJZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705335832; x=1705940632;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=tvrYPCsuuL5dZ9ouOQ629EW/UL0JJXCha/HaDfZ+0b4=;
+ b=fXh2zVGFxwVyXGrQ8uQRMhQNsLxiXYK+XfzyhDgV2L83tQVjMeW9sgqide5BkQmR66
+ LSTHQIo/YxK3+oMSg/JyH9KXkqgjELmaJKbOvm7bUP3EO1/pS7hf6Umvh4Xr3Lu64ZUc
+ nmbuK33YJpmnRAMp1Cnrea+6RxQ0U8rqk8h8jIMNAKW12D37yTW7o6YPrgQc6ikFrrJN
+ 4u2J+K8lxiBGHT8f9JMGaA6U6111BHxW6WzdYcfDoerNJr1rrxzX8XxRFtWGLhbx5/R6
+ p2HZ+9IiQP3nkLK8k73aBVMJY9m5rrj+v+QFX+Qnj6ggvTA+mmfNUVrPdwaiHMx/t4yt
+ GOTw==
+X-Gm-Message-State: AOJu0YyojCWvvwn3p23iWNfrs02atlycsKxLSMskSSMMjJSwzul4B9oL
+ 8dYn6QvgVhLeD5yAPjalmy9sCXcgcH9wikVUXAE=
+X-Google-Smtp-Source: AGHT+IHmHiBywCNdNaMmhcpNpKUubzRf20caA/R8GWJoK24UmFNPU7sjXb8g5r39S4dZpmXpH9hCM59wuaXEnHs0uNc=
+X-Received: by 2002:adf:fecb:0:b0:336:8103:6ce9 with SMTP id
+ q11-20020adffecb000000b0033681036ce9mr6129182wrs.7.1705335831635; Mon, 15 Jan
+ 2024 08:23:51 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] smt32mp: Add dependencies on CMDLINE for command stm32key
-Content-Language: en-US
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-CC: <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20240115143048.1.I808ca7780ec7f1ca146b47adae52ef1060a276c9@changeid>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240115143048.1.I808ca7780ec7f1ca146b47adae52ef1060a276c9@changeid>
+References: <20240115140557.57448-1-patrick.delaunay@foss.st.com>
+ <20240115150451.v2.7.I122ede30eb83184b996b7d3e1c480418b29ffbe1@changeid>
+In-Reply-To: <20240115150451.v2.7.I122ede30eb83184b996b7d3e1c480418b29ffbe1@changeid>
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Date: Mon, 15 Jan 2024 17:23:39 +0100
+Message-ID: <CAByghJaABf37PeVgEPWaQAtpZK4O=brECrLLAWnhWc5mrpW92g@mail.gmail.com>
+Subject: Re: [PATCH v2 07/14] stm32mp: add setup_serial_number for stm32mp25
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: u-boot@lists.denx.de, Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Bhupesh Sharma <bhupesh.sharma@linaro.org>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Simon Glass <sjg@chromium.org>, 
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.201.20.205]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-01-05_08,2024-01-05_01,2023-05-22_02
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,31 +91,154 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello Patrick,
 
-
-On 1/15/24 14:30, Patrick Delaunay wrote:
-> We cannot use stm32key commands without CONFIG_CMDLINE so add the
-> required condition.
-> 
+On Mon, Jan 15, 2024 at 5:03=E2=80=AFPM Patrick Delaunay
+<patrick.delaunay@foss.st.com> wrote:
+>
+> From: Patrice Chotard <patrice.chotard@foss.st.com>
+>
+> Add support of serial number for stm32mp25, gets from OTP with BSEC drive=
+r.
+>
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
-> 
->  arch/arm/mach-stm32mp/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
-> index 5fc92d07fe6d..c6c89883f2b0 100644
-> --- a/arch/arm/mach-stm32mp/Kconfig
-> +++ b/arch/arm/mach-stm32mp/Kconfig
-> @@ -144,6 +144,7 @@ config STM32_ECDSA_VERIFY
->  
->  config CMD_STM32KEY
->  	bool "command stm32key to fuse public key hash"
-> +	depends on CMDLINE
->  	help
->  		fuse public key hash in corresponding fuse used to authenticate
->  		binary.
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>
+> (no changes since v1)
+>
+>  .../arm/mach-stm32mp/include/mach/sys_proto.h |  1 +
+>  arch/arm/mach-stm32mp/soc.c                   | 31 +++++++++++++++++++
+>  arch/arm/mach-stm32mp/stm32mp1/cpu.c          | 27 ----------------
+>  arch/arm/mach-stm32mp/stm32mp2/cpu.c          |  2 ++
+>  4 files changed, 34 insertions(+), 27 deletions(-)
+>
+> diff --git a/arch/arm/mach-stm32mp/include/mach/sys_proto.h b/arch/arm/ma=
+ch-stm32mp/include/mach/sys_proto.h
+> index 83388fdb7371..2a65efc0a50a 100644
+> --- a/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+> +++ b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+> @@ -97,6 +97,7 @@ u32 get_bootauth(void);
+>
+>  int get_eth_nb(void);
+>  int setup_mac_address(void);
+> +int setup_serial_number(void);
+>
+>  /* board power management : configure vddcore according OPP */
+>  void board_vddcore_init(u32 voltage_mv);
+> diff --git a/arch/arm/mach-stm32mp/soc.c b/arch/arm/mach-stm32mp/soc.c
+> index 8d5fa474ccaf..ff70ebe97464 100644
+> --- a/arch/arm/mach-stm32mp/soc.c
+> +++ b/arch/arm/mach-stm32mp/soc.c
+> @@ -3,7 +3,11 @@
+>   * Copyright (C) 2024, STMicroelectronics - All Rights Reserved
+>   */
+>
+> +#include <env.h>
+> +#include <misc.h>
+>  #include <asm/arch/sys_proto.h>
+> +#include <dm/device.h>
+> +#include <dm/uclass.h>
+>
+>  /* used when CONFIG_DISPLAY_CPUINFO is activated */
+>  int print_cpuinfo(void)
+> @@ -15,3 +19,30 @@ int print_cpuinfo(void)
+>
+>         return 0;
+>  }
+> +
+> +int setup_serial_number(void)
+> +{
+> +       char serial_string[25];
+> +       u32 otp[3] =3D {0, 0, 0 };
+> +       struct udevice *dev;
+> +       int ret;
+> +
+> +       if (env_get("serial#"))
+> +               return 0;
+> +
+> +       ret =3D uclass_get_device_by_driver(UCLASS_MISC,
+> +                                         DM_DRIVER_GET(stm32mp_bsec),
+> +                                         &dev);
+> +       if (ret)
+> +               return ret;
+> +
+> +       ret =3D misc_read(dev, STM32_BSEC_SHADOW(BSEC_OTP_SERIAL),
+> +                       otp, sizeof(otp));
+> +       if (ret < 0)
+> +               return ret;
+> +
+> +       sprintf(serial_string, "%08X%08X%08X", otp[0], otp[1], otp[2]);
+> +       env_set("serial#", serial_string);
+> +
+> +       return 0;
+> +}
+> diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp=
+/stm32mp1/cpu.c
+> index 00fea7929b2f..f84cb26fa565 100644
+> --- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+> +++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+> @@ -336,33 +336,6 @@ __weak int setup_mac_address(void)
+>         return 0;
+>  }
+>
+> -static int setup_serial_number(void)
+> -{
+> -       char serial_string[25];
+> -       u32 otp[3] =3D {0, 0, 0 };
+> -       struct udevice *dev;
+> -       int ret;
+> -
+> -       if (env_get("serial#"))
+> -               return 0;
+> -
+> -       ret =3D uclass_get_device_by_driver(UCLASS_MISC,
+> -                                         DM_DRIVER_GET(stm32mp_bsec),
+> -                                         &dev);
+> -       if (ret)
+> -               return ret;
+> -
+> -       ret =3D misc_read(dev, STM32_BSEC_SHADOW(BSEC_OTP_SERIAL),
+> -                       otp, sizeof(otp));
+> -       if (ret < 0)
+> -               return ret;
+> -
+> -       sprintf(serial_string, "%08X%08X%08X", otp[0], otp[1], otp[2]);
+> -       env_set("serial#", serial_string);
+> -
+> -       return 0;
+> -}
+> -
+>  __weak void stm32mp_misc_init(void)
+>  {
+>  }
+> diff --git a/arch/arm/mach-stm32mp/stm32mp2/cpu.c b/arch/arm/mach-stm32mp=
+/stm32mp2/cpu.c
+> index c0f6519e8d7c..301e365cf4f4 100644
+> --- a/arch/arm/mach-stm32mp/stm32mp2/cpu.c
+> +++ b/arch/arm/mach-stm32mp/stm32mp2/cpu.c
+> @@ -69,6 +69,8 @@ void enable_caches(void)
+>
+>  int arch_misc_init(void)
+>  {
+> +       setup_serial_number();
+> +
+>         return 0;
+>  }
+>
+> --
+> 2.25.1
+>
 
-Thanks
-Patrice
+Reviewed-by: Igor Opaniuk <igor.opaniuk@foundries.io>
+
+--=20
+Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
+
+Igor Opaniuk
+
+mailto: igor.opaniuk@gmail.com
+skype: igor.opanyuk
++48 666 108 041
+http://ua.linkedin.com/in/iopaniuk
