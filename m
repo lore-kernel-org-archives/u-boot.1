@@ -4,79 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CD73C3DA79
-	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 13:40:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1D74C3DA79
+	for <u-boot@archiver.kernel.org>; Mon, 15 Jan 2024 13:47:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5A408753A;
-	Mon, 15 Jan 2024 14:40:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 4033487214;
+	Mon, 15 Jan 2024 14:47:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="grUVoP2w";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="vrm1CDX7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2409387186; Mon, 15 Jan 2024 14:40:31 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 603DE875E9; Mon, 15 Jan 2024 14:47:28 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9091587559
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 14:40:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 23E2586EF1
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 14:47:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=1744d57945=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 40F8aUtr004759; Mon, 15 Jan 2024 14:40:25 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=/0Ci2/0LanhHZpnb5rx4II8xpoa+UzkODcMYRqHv48Y=; b=gr
- UVoP2wZGykHs8zuArQdnBtrQZ1LYWW/92r+3lKoi5/5XfUSxihy46HGbd4DgJw+q
- RaIyJFnSlH9uQiB8y5YE6HYlloUTcgCcs9WEB0UttOxrQiKP/PkeR2iRX22maBgz
- 46Z1UTeyYUOwgIknpkA4iBVvcXyWCt4MjwwYWI3r8dJLQcX+2c6eveL6rlYqccY5
- IdLf5Y43lP5uWl3DIDyztmaQCsaiBTyU7IZDVJN9yKFcAl3UC/iS1rqOVB4MHK1f
- QjtO3yBmSeH4lFJmuRhDnuBXPkIOCFCoSjTYNiXu8KJe6D6zpT3lgjR2t9aeFR40
- Mx82glKWiCVCAY7FJr+Q==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vkma5runv-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 15 Jan 2024 14:40:25 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3DEDE100057;
- Mon, 15 Jan 2024 14:40:25 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 34726286A3B;
- Mon, 15 Jan 2024 14:40:25 +0100 (CET)
-Received: from [10.201.22.165] (10.201.22.165) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 15 Jan
- 2024 14:40:24 +0100
-Message-ID: <80ce8fac-da35-436b-b5ab-e01be63762e1@foss.st.com>
-Date: Mon, 15 Jan 2024 14:40:23 +0100
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 5FDA13F15B
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 13:47:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1705326442;
+ bh=hQElnugzimXxLUXyVZDcb/nfdx7K3xeN+mKLeR+X8gs=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=vrm1CDX79buRwE9zNvbFW+NZ8f3o8GHcoNBtpaofjkQaxx6ia/X9lhuQ/kxEbQKUw
+ opUOURpbh23iGp8WKp/c1U50/yeUX3mlL+eTE6sJukAuMM0TfbMCT2pRVCa+wStU3J
+ sGPobAF3A4ivhNodOmLvsirpeMD2WFp7FoEiAz179+QUfRbXC2fJQjtVqEVQuwBRhP
+ 6cV8xObQK4nNQO77AlFiusNJBRzUoVAQUp3Vycl+ZoxVdvYffr0RcF8Q3u9oE1O8de
+ ntChODNMVmFIUx4mA0Xi+fS6EEwwdGMX+oiGY4b92RhG5Up7+Lc7nzkTRfhCmSdO7G
+ +Fnt9gGPQb6Sw==
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-40e4f70af99so50866635e9.2
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 05:47:22 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705326442; x=1705931242;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hQElnugzimXxLUXyVZDcb/nfdx7K3xeN+mKLeR+X8gs=;
+ b=hd7pwCDKGymq/+Fnn5Pnoc13YGm6aM5Gv/AAE7efW91gKpAbkvkqWzmjTUb6Uv29+L
+ LX4WR/VEltzzgS5NIEWnKbQDn1mcXT06GYmu7kVDzLZLdrDFSF2I2z6rpYLLBvT6Slni
+ hLbmE6rTsH/HbNd+lqT0Z2zzLAlnL1EZc1NW6Kf6ZnnlFjYgXqwBNHBuYf2Sab/JpQIs
+ xw28I9i54yO+JCmoVcdlyrl94u9KtIkZ7umBFGF4s/vFVQkNsOj9yvKjaP5hiY5Yus46
+ LtHJbOVIChzFYLrRu4mRwd852F/jeveKR1Ytf1okiFdTqSlHgkjVqxSF0dsY8NM97jEj
+ qHtw==
+X-Gm-Message-State: AOJu0YxwiyftcS7wjgnOIUksUYw6WvOiRtUW7HGsJOQ2jEIPxCK4LyUZ
+ fcJyE75XUtrjMXdC66XP+yHs6f/DkR69ESjM7Y9Vi/C8KFPnO0xud0M9WIjwasKgmdTpKxP5qq9
+ 5aaljijgrQlxMYX46b4NKWdrMEFTyoo+ZZKlrbA==
+X-Received: by 2002:a05:600c:2e05:b0:40e:74e6:5f1d with SMTP id
+ o5-20020a05600c2e0500b0040e74e65f1dmr1131789wmf.57.1705326441900; 
+ Mon, 15 Jan 2024 05:47:21 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEjovI5RUJO0GgAUveliFO52TgOTW9ux7JbVnyOtzs6k/keeAeN/3cWaLDZS/cK22i7WI8H2g==
+X-Received: by 2002:a05:600c:2e05:b0:40e:74e6:5f1d with SMTP id
+ o5-20020a05600c2e0500b0040e74e65f1dmr1131776wmf.57.1705326441526; 
+ Mon, 15 Jan 2024 05:47:21 -0800 (PST)
+Received: from workstation5.fritz.box
+ (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
+ by smtp.gmail.com with ESMTPSA id
+ i19-20020a05600c355300b0040e76b60235sm4703281wmq.8.2024.01.15.05.47.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Jan 2024 05:47:21 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Evgeny Bachinin <EABachinin@sberdevices.ru>,
+ Yurii Monakov <monakov.y@gmail.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Harald Seiler <hws@denx.de>,
+ Dave Jones <dave.jones@canonical.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] cmd: increase default for SYS_MAXARGS
+Date: Mon, 15 Jan 2024 14:46:56 +0100
+Message-ID: <20240115134656.50917-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 10/12] stm32mp: activate the command stboard for stm32mp25
- boards
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
-CC: Igor Opaniuk <igor.opaniuk@foundries.io>, Marek Vasut <marex@denx.de>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Simon Glass <sjg@chromium.org>
-References: <20240115124657.39109-1-patrick.delaunay@foss.st.com>
- <20240115134642.10.I7e8d4ae242605f7c9d276a858f336d13681528d9@changeid>
- <cd2a0f5d-85ac-4232-95b8-8d2f7afa7dfe@foss.st.com>
-Content-Language: en-US
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <cd2a0f5d-85ac-4232-95b8-8d2f7afa7dfe@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.201.22.165]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-01-05_08,2024-01-05_01,2023-05-22_02
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,89 +106,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+The value of CONFIG SYS_MAXARGS limits the usability of the 'for' command.
+The current default of 16 is too low for some use case. Cf.
+https://bugs.launchpad.net/snap-core18/+bug/1910094
 
-On 1/15/24 14:03, Patrice CHOTARD wrote:
->
-> On 1/15/24 13:46, Patrick Delaunay wrote:
->> Activate the command stboard for stm32mp25 STMicroelectronics boards,
->> add the default used OTP identifier and the associated board identifier:
->> - stm32mp25xx-ev1 = MB1936
->> - stm32mp25xx-dk = MB1605
->>
->> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
->> ---
->>
->>   arch/arm/mach-stm32mp/include/mach/stm32.h | 1 +
->>   board/st/common/Kconfig                    | 2 +-
->>   board/st/common/cmd_stboard.c              | 2 ++
->>   3 files changed, 4 insertions(+), 1 deletion(-)
->>
->> diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
->> index 45c929aa605d..726c390977e3 100644
->> --- a/arch/arm/mach-stm32mp/include/mach/stm32.h
->> +++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
->> @@ -198,6 +198,7 @@ enum forced_boot_mode {
->>   #define BSEC_OTP_SERIAL	5
->>   #define BSEC_OTP_RPN	9
->>   #define BSEC_OTP_PKG	122
->> +#define BSEC_OTP_BOARD	246
->>   #define BSEC_OTP_MAC	247
->>   #endif
->>   
->> diff --git a/board/st/common/Kconfig b/board/st/common/Kconfig
->> index c1c254d07354..5efac658cf4d 100644
->> --- a/board/st/common/Kconfig
->> +++ b/board/st/common/Kconfig
->> @@ -1,7 +1,7 @@
->>   config CMD_STBOARD
->>   	bool "stboard - command for OTP board information"
->>   	depends on ARCH_STM32MP
->> -	default y if TARGET_ST_STM32MP15x || TARGET_ST_STM32MP13x
->> +	default y if TARGET_ST_STM32MP25X || TARGET_ST_STM32MP15X || TARGET_ST_STM32MP13X
-> TARGET_ST_STM32MP15x or TARGET_ST_STM32MP15X ? ;-)
-> Internally, we use all our flags in uppercase, whereas at upstream there are some
-> camelcase as TARGET_ST_STM32MP15x or TARGET_ST_STM32MP13x
->
+Increase the default to 64.
 
-Thks, I don't see that the Simon patches was not merged.
+Reported-by: Dave Jones <dave.jones@canonical.com>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ cmd/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 150fa37a50a..4dbf89b7d71 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -90,7 +90,7 @@ config SYS_PROMPT_HUSH_PS2
+ 
+ config SYS_MAXARGS
+ 	int "Maximum number arguments accepted by commands"
+-	default 16
++	default 64
+ 
+ config SYS_XTRACE
+ 	bool "Command execution tracer"
+-- 
+2.43.0
 
-I will correct this part in V2
-
-and also include the 2 Simon patches which rename the stm32mp config to 
-avoid the same issue in futur.
-
-
-See series "Clean up of bad Kconfig options"
-
-https://patchwork.ozlabs.org/project/uboot/list/?series=339004&state=*
-
-
-=> [v2,67/87] arm: Rename STM32MP13x
-
-https://patchwork.ozlabs.org/project/uboot/patch/20230129005903.74918-68-sjg@chromium.org/
-
-
-=> [v2,68/87] arm: Rename STM32MP15x
-
-https://patchwork.ozlabs.org/project/uboot/patch/20230129005903.74918-69-sjg@chromium.org/
-
-
->>   	help
->>   	  This compile the stboard command to
->>   	  read and write the board in the OTP.
->> diff --git a/board/st/common/cmd_stboard.c b/board/st/common/cmd_stboard.c
->> index 853ab78bbf16..cb103e69b369 100644
->> --- a/board/st/common/cmd_stboard.c
->> +++ b/board/st/common/cmd_stboard.c
->> @@ -49,7 +49,9 @@ static bool check_stboard(u16 board)
->>   		0x1298,
->>   		0x1341,
->>   		0x1497,
->> +		0x1605, /* stm32mp25xx-dk */
->>   		0x1635,
->> +		0x1936, /* stm32mp25xx-ev1 */
->>   	};
->>   
->>   	for (i = 0; i < ARRAY_SIZE(st_board_id); i++)
