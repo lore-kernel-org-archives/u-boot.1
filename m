@@ -4,93 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1DA1C47077
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 17:15:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E832C47077
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 17:20:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B562587A08;
-	Tue, 16 Jan 2024 18:14:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 47214879F8;
+	Tue, 16 Jan 2024 18:20:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="N2N8GHp+";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ouuElK2b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 038A786F67; Tue, 16 Jan 2024 18:14:49 +0100 (CET)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 03DCD879F8; Tue, 16 Jan 2024 18:20:18 +0100 (CET)
+Received: from mail-oo1-xc42.google.com (mail-oo1-xc42.google.com
+ [IPv6:2607:f8b0:4864:20::c42])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9A2C87A18
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 18:14:46 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-6dc8b280155so3876863a34.0
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 09:14:46 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id E040587A05
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 18:20:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=francis.laniel@amarulasolutions.com
+Received: by mail-oo1-xc42.google.com with SMTP id
+ 006d021491bc7-598699c0f1eso4429090eaf.2
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 09:20:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705425285; x=1706030085; darn=lists.denx.de;
+ d=amarulasolutions.com; s=google; t=1705425611; x=1706030411;
+ darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Y+SbtxPaLs0sI6B8Aif8NsZLo5lvyC+gWqu8P/RNRM8=;
- b=N2N8GHp+IyUw4BVPJq3AVjz+fNyh5ehy+0o85CNoB4Fc7ZwdlAATIOnZ3GrSMwwxXk
- fAYp9qhyyBjzDE514rhWKv1dK2BdosfDkd5LNwX/BHY9KYWFkdOc8UH/w77mPZ409yGl
- 646+JjCxeAlTeD3l+hA3ddpzjiPK/bIOdi8u2Go1q3Xv1pbiyuYFZjfyXwHcfvU+UpqT
- e1izR+5lLZHuqyAiix8VN86JLBVYWN+WpttSrhCtM371KVkwnrWAJbyv606F75ISc+S8
- RSCjcMwPoViw/fn/P4Twc2tGHZZEkXvQYGhNj5DEb2J+m7wyvDzPAmHN+29lQH5br9/m
- VJTA==
+ bh=hpfArJN/X/O5lYIaxRCgK7d/CugKmqeLxu6oPK0ah4E=;
+ b=ouuElK2b/wjdkAxp6fZtEaVD9c5TTvQhBc0h3N5QtT6B4V4NE4d1PaFoUimlxUD1Lo
+ Mb5VteQiRNRSC9iO1iuoCajEx/HAfEzI8lNQCMwhmrDJ8yNk0W+xY4jm31/+SwViWaQ7
+ 15VpQSxkorZfpOUBB3gs9tq5ExbG7lfsvbUDI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705425285; x=1706030085;
+ d=1e100.net; s=20230601; t=1705425611; x=1706030411;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Y+SbtxPaLs0sI6B8Aif8NsZLo5lvyC+gWqu8P/RNRM8=;
- b=e5KZXXRwGJH8cWEkkJuxgLwl1gf+ZdUjVXTCBl/oodINhmFB6S624/GfKBdsgX6TyI
- xA6WGJCVGLvR5DJxsMGGHdCmURzWbJa8GI1nuwDlA74rN06iTkFHTdWrFHUy/2lq4tp9
- c5d5QPT2wdBSErj3PI1Fum1PbHjv9MMhA+snwSM3J+OAhWJ9IAzJFDsGEQf9NbqXIbqZ
- Cr+P5UXlooUg/psMHrkV6R0St+uUMjpS4ZULOQQGpHTuiiMJtvxK4wguVGhC4nvZOGVj
- HvFjbCk2MG4mqXqM8QlvWeivgX4d8P2EIk58/RQbectf22dOnlInkKDJ0cWW4+ydXd8d
- eOvA==
-X-Gm-Message-State: AOJu0YyTzrLOrTT1+u0qYGqPAQFhc06RZgF2VtFlaUwH1awpENsmqXdk
- u3jX3MwZRMHKExjV7LmY5Jjuc0G0wzBiQ+FWymKCq9vNhPk=
-X-Google-Smtp-Source: AGHT+IEIJTIqDe66l7vol6MlXSRq6zxEtI6ktZnnnsHORjIfRFuG6eybnytSSTNZxrhYPf7S+jYqIg==
-X-Received: by 2002:a05:6830:1bfc:b0:6dc:23a:6dd0 with SMTP id
- k28-20020a0568301bfc00b006dc023a6dd0mr4496521otb.17.1705425285066; 
- Tue, 16 Jan 2024 09:14:45 -0800 (PST)
-Received: from ubuntu.localdomain
- (cpe688f2e182063-cm688f2e182060.sdns.net.rogers.com. [174.115.4.214])
+ bh=hpfArJN/X/O5lYIaxRCgK7d/CugKmqeLxu6oPK0ah4E=;
+ b=smcgBI5TjsRUPajYVfH7xoLVelvaeB5kGswsUp0PRsz1DVHwupWUi/FwnFCQ354zeU
+ ecsCo42q+P4VNvO7A+pYaK2NlogP1kI6rOYpMeuHM/uTKyx5x1ciXh1V6MVrpjukPWY1
+ r7HF2iiQ1P6orqY/TMZRz/kBoM8+nncF6vCVCZjWUb7471w5jUOhOHiyQN35J2GYXEV2
+ KPWR2LB8elv8a5FAN2fGeKEja7bA6GG+mUqIXgMICARtKZcYatFAISUbtUEk3qXGkVaQ
+ nFO0QIjdFf1hDlg92Rfw09Xij8Nowd4Q7P8gi086d2Vqp80+c2qOp6SJnx/KB2Gvx2/I
+ i+Fw==
+X-Gm-Message-State: AOJu0YzUDlivToiLy/saHmSJUpsTQ+8dZE80wqaayRR5+CGS5tGGj1gu
+ pb/K9b2HWBsCftIwYrhMHbxsa2VyUudexQ==
+X-Google-Smtp-Source: AGHT+IG3ne6WvpNS4UGGgt8Idwj94U04d5VwzeAwj4xYdnEczS2W7Hv2t3OIbDdhDTjETxPueaRzuQ==
+X-Received: by 2002:a05:6358:3d53:b0:175:4048:c590 with SMTP id
+ b19-20020a0563583d5300b001754048c590mr8479531rwc.58.1705425611335; 
+ Tue, 16 Jan 2024 09:20:11 -0800 (PST)
+Received: from pwmachine.localnet ([171.4.233.91])
  by smtp.gmail.com with ESMTPSA id
- bp43-20020a05622a1bab00b00427e0e9c22dsm4988291qtb.54.2024.01.16.09.14.43
+ by41-20020a056a0205a900b00578b40a4903sm9076747pgb.22.2024.01.16.09.20.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jan 2024 09:14:44 -0800 (PST)
-From: Raymond Mao <raymond.mao@linaro.org>
-To: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
- jwerner@chromium.org
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Fabio Estevam <festevam@denx.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng@tinylab.org>,
- Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>,
- Linus Walleij <linus.walleij@linaro.org>,
- Yang Xiwen <forbidden405@outlook.com>,
- =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?= <csokas.bence@prolan.hu>,
- Peng Fan <peng.fan@nxp.com>, Kevin Chen <kevin_chen@aspeedtech.com>,
- Sean Anderson <seanga2@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Shiji Yang <yangshiji66@outlook.com>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
-Subject: [PATCH v6 7/7] bloblist: Load the bloblist from the previous loader
-Date: Tue, 16 Jan 2024 09:13:52 -0800
-Message-Id: <20240116171356.376801-8-raymond.mao@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240116171356.376801-1-raymond.mao@linaro.org>
-References: <20240116171356.376801-1-raymond.mao@linaro.org>
+ Tue, 16 Jan 2024 09:20:10 -0800 (PST)
+From: Francis Laniel <francis.laniel@amarulasolutions.com>
+To: Tom Rini <trini@konsulko.com>, Francesco Dolcini <francesco@dolcini.it>
+Cc: u-boot@lists.denx.de,
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH v13 00/24] Modernize U-Boot shell
+Date: Wed, 17 Jan 2024 00:20:06 +0700
+Message-ID: <4890457.31r3eYUQgx@pwmachine>
+In-Reply-To: <20240111170418.GA7220@francesco-nb>
+References: <20231222210244.91830-1-francis.laniel@amarulasolutions.com>
+ <5740853.DvuYhMxLoT@pwmachine> <20240111170418.GA7220@francesco-nb>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,147 +92,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-During bloblist initialization, load the bloblist via boot arguments
-from the previous loader.
-If a valid bloblist exists in boot arguments, relocate it into the
-fixed bloblist memory region.
-If not, fallback to support BLOBLIST_ADDR or BLOBLIST_ALLOC.
+Hi!
 
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
----
-Changes in v4
-- Add weak default function.
-- Add comments for BLOBLIST_ALLOC.
-- Add local debug macro.
-- Refine the commit message.
-Changes in V5
-- Drop the dependence on OF_BOARD.
-- Remove local debug macro.
 
- common/bloblist.c  | 62 ++++++++++++++++++++++++++++++++--------------
- include/bloblist.h | 10 ++++++++
- 2 files changed, 54 insertions(+), 18 deletions(-)
+Le vendredi 12 janvier 2024, 00:04:18 +07 Francesco Dolcini a =E9crit :
+> Hello Tom, Francis
+>=20
+> On Fri, Dec 29, 2023 at 07:55:37PM +0100, Francis Laniel wrote:
+> > Le jeudi 28 d=E9cembre 2023, 21:58:59 CET Tom Rini a =E9crit :
+> > > On Fri, 22 Dec 2023 22:02:20 +0100, Francis Laniel wrote:
+> > > > During 2021 summer, Sean Anderson wrote a contribution to add a new
+> > > > shell,
+> > > > based on LIL, to U-Boot [1, 2].
+> > > > While one of the goals of this contribution was to address the fact
+> > > > actual
+> > > > U-Boot shell, which is based on Busybox hush, is old there was a
+> > > > discussion
+> > > > about adding a new shell versus updating the actual one [3, 4].
+> > > >=20
+> > > > So, in this series, with Harald Seiler, we updated the actual U-Boot
+> > > > shell
+> > > > to reflect what is currently in Busybox source code.
+> > > > Basically, this contribution is about taking a snapshot of Busybox
+> > > > shell/hush.c file (as it exists in commit 37460f5da) and adapt it to
+> > > > suit
+> > > > U-Boot needs.
+> > > >=20
+> > > > [...]
+> > >=20
+> > > Applied to u-boot/next, thanks!
+> >=20
+> > Thank you for the merge!
+> > If there is any problem, do not hesitate to mail me and I will take care
+> > of
+> > it!
+>=20
+> This change, specifically setting the modern hush shell as default, is
+> breaking our boot script, just noticed since the current U-Boot master
+> has a regression for us.
+>=20
+> We still need to figure out the exact details, here [1] you can find the
+> boot script (that has some placeholder that is replaced during build).
+>=20
+> and the error is something like:
+>=20
+> ```
+> ## Executing script at 90280000
+> Loading DeviceTree: k3-am625-verdin-nonwifi-dev.dtb
+> 69025 bytes read in 11 ms (6 MiB/s)
+> 82 bytes read in 9 ms (8.8 KiB/s)
+> Working FDT set to 90200000
+> syntax error at 'done'HUSH died!
+> resetting ...
+> ```
+>=20
+> that I _assume_ comes from this line
+>=20
+>     env set set_apply_overlays 'env set apply_overlays "for overlay_file =
+in
+> \\${fdt_overlays}; do echo Applying Overlay: \\${overlay_file} &&
+> ${load_cmd} \\${loadaddr} \\${overlays_prefix}\\${overlay_file} && fdt
+> apply \\${loadaddr}; env set overlay_file; done; true"'
 
-diff --git a/common/bloblist.c b/common/bloblist.c
-index c2fd07575f..ad06d7a179 100644
---- a/common/bloblist.c
-+++ b/common/bloblist.c
-@@ -487,37 +487,57 @@ int bloblist_reloc(void *to, uint to_size)
- 	return 0;
- }
- 
-+/*
-+ * Weak default function for getting bloblist from boot args.
-+ */
-+int __weak xferlist_from_boot_arg(ulong __always_unused addr,
-+				  ulong __always_unused size)
-+{
-+	return -ENOENT;
-+}
-+
- int bloblist_init(void)
- {
- 	bool fixed = IS_ENABLED(CONFIG_BLOBLIST_FIXED);
- 	int ret = -ENOENT;
- 	ulong addr, size;
--	bool expected;
--
--	/**
--	 * We don't expect to find an existing bloblist in the first phase of
--	 * U-Boot that runs. Also we have no way to receive the address of an
--	 * allocated bloblist from a previous stage, so it must be at a fixed
-+	/*
-+	 * If U-Boot is not in the first phase, an existing bloblist must be
-+	 * at a fixed address.
-+	 */
-+	bool from_addr = fixed && !u_boot_first_phase();
-+	/*
-+	 * If U-Boot is in the first phase that an arch custom routine should
-+	 * install the bloblist passed from previous loader to this fixed
- 	 * address.
- 	 */
--	expected = fixed && !u_boot_first_phase();
-+	bool from_boot_arg = fixed && u_boot_first_phase();
-+
- 	if (spl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
--		expected = false;
-+		from_addr = false;
- 	if (fixed)
- 		addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
- 				      CONFIG_BLOBLIST_ADDR);
- 	size = CONFIG_BLOBLIST_SIZE;
--	if (expected) {
-+
-+	if (from_boot_arg)
-+		ret = xferlist_from_boot_arg(addr, size);
-+	else if (from_addr)
- 		ret = bloblist_check(addr, size);
--		if (ret) {
--			log_warning("Expected bloblist at %lx not found (err=%d)\n",
--				    addr, ret);
--		} else {
--			/* Get the real size, if it is not what we expected */
--			size = gd->bloblist->total_size;
--		}
--	}
-+
-+	if (ret)
-+		log_warning("Bloblist at %lx not found (err=%d)\n",
-+			    addr, ret);
-+	else
-+		/* Get the real size */
-+		size = gd->bloblist->total_size;
-+
- 	if (ret) {
-+		/*
-+		 * If we don't have a bloblist from a fixed address, or the one
-+		 * in the fixed address is not valid. we must allocate the
-+		 * memory for it now.
-+		 */
- 		if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
- 			void *ptr = memalign(BLOBLIST_ALIGN, size);
- 
-@@ -525,7 +545,8 @@ int bloblist_init(void)
- 				return log_msg_ret("alloc", -ENOMEM);
- 			addr = map_to_sysmem(ptr);
- 		} else if (!fixed) {
--			return log_msg_ret("!fixed", ret);
-+			return log_msg_ret("BLOBLIST_FIXED is not enabled",
-+					   ret);
- 		}
- 		log_debug("Creating new bloblist size %lx at %lx\n", size,
- 			  addr);
-@@ -538,6 +559,11 @@ int bloblist_init(void)
- 		return log_msg_ret("ini", ret);
- 	gd->flags |= GD_FLG_BLOBLIST_READY;
- 
-+#ifdef DEBUG
-+	bloblist_show_stats();
-+	bloblist_show_list();
-+#endif
-+
- 	return 0;
- }
- 
-diff --git a/include/bloblist.h b/include/bloblist.h
-index 0ae079d62a..7fbdd622bc 100644
---- a/include/bloblist.h
-+++ b/include/bloblist.h
-@@ -482,4 +482,14 @@ static inline int bloblist_maybe_init(void)
-  */
- int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig);
- 
-+/**
-+ * xferlist_from_boot_arg() - Get bloblist from the boot args and relocate it
-+ *			      to the specified address.
-+ *
-+ * @addr: Address for the bloblist
-+ * @size: Size of space reserved for the bloblist
-+ * Return: 0 if OK, else on error
-+ */
-+int xferlist_from_boot_arg(ulong addr, ulong size);
-+
- #endif /* __BLOBLIST_H */
--- 
-2.25.1
+Sorry for the inconvenience, I tried to reproduce on my side and noticed so=
+me=20
+strange behavior.
+=46or the moment, can you please try to only escape "$" with "\$ and not "\=
+\$"?
+I would like to confirm some insights I have.
+
+> [1]
+> https://git.toradex.com/cgit/meta-toradex-bsp-common.git/tree/recipes-bsp=
+/u
+> -boot/u-boot-distro-boot/boot.cmd.in
+>=20
+> Francesco
+
+Best regards.
+
 
