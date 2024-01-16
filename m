@@ -4,87 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0E5AC47077
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 14:00:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 189D2C47DA2
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 14:35:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20445876E5;
-	Tue, 16 Jan 2024 15:00:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 52799879F8;
+	Tue, 16 Jan 2024 15:35:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="V34X/SJt";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="TuR9v4gA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7FE0876E5; Tue, 16 Jan 2024 15:00:39 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id DB00A879FE; Tue, 16 Jan 2024 15:35:14 +0100 (CET)
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C2EB86FB0
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 15:00:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D5FFA862DA
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 15:35:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
- [209.85.218.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id CD1D63F120
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 14:00:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1705413636;
- bh=Q53GQob56Xnm2jFD31DMBDgPlNHSIKfvHeDwV4bto2U=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=V34X/SJttDmNT3XAk0ykXo0pjWwEYYBQ/bQpGD8JE5oxARYDa9A8MFLqWEPFYTz0S
- WZ5iXCBpAitCES2HFKjl7uxjNdH8M9fW8MY3Xp9Rrrz4hvo+uEFpaQ1HW6uiBuU/GZ
- a96QX0VTK+Cz6JHHm6bFSH5EMIFzbhv+G4iJ2npW5zoM3ZnqP8lyEwmf0PM+a8VrzV
- AKtEBsK4lJ3wNRdGnXxMu2ugTzZQWMIYwJxIHnmoRp5mh+xdq0yyQuTuxRQluG2rdF
- cCVd7LJt55LJD7m5syFiJRTy9PcOtUvlZjdZEOUF/fzKZr2HCp9uuahdRoP3dBK6dT
- JYWjRYJIk3EPg==
-Received: by mail-ej1-f69.google.com with SMTP id
- a640c23a62f3a-a2e1630853eso68635166b.0
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 06:00:36 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705413636; x=1706018436;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Q53GQob56Xnm2jFD31DMBDgPlNHSIKfvHeDwV4bto2U=;
- b=rlC4OxFggjcjgybkLX8i6MTlbTopcdmoRcQugxopQi9xfGMaqblk50DhCdTE6CIOWt
- TtqUQtqSi4NFaUb51XQulhOjt+LkP0ffHOtNJFJvnm8Fb4pAEu8u34SL3NUTB33c8sYx
- YJ1NeC3i+3CWsjcnx1i68R4euJv1R5OBm1DwDKls2QlegHq2PX3WFeru9FWn8Mi/66sC
- SxnrkmgFMpw9rYPT2O3hka2gm2ivv78jLQDyifbmsWWrKmojwUigTMSNTb+Xza2ieheu
- Ow5RbR5PbdGCFh4EHFAN4wXhen9zvTtrDhnceFV2V5kjOhY+u2LmD6V+2X4I4wbzCDsk
- +/jg==
-X-Gm-Message-State: AOJu0Ywhl3j7FaH2m9ODoH7qmEVmUpwc8HSq6LJ95o7d3zk4s4S1Eg3Y
- ncSVQfJGXIMHjVY0UjU4ET3FtxEqVxpEmqRBVjCRf+sqsCxcwrhYnX+9NVW40lV2kOmapulnXp8
- vjZBsq8J1TKsw7Y4bwZ1QZhteRBpUinIoBvhRg7NJ4iwWcw==
-X-Received: by 2002:a17:907:a0d1:b0:a2c:f8e3:1fce with SMTP id
- hw17-20020a170907a0d100b00a2cf8e31fcemr3613277ejc.153.1705413636518; 
- Tue, 16 Jan 2024 06:00:36 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFo0Sco4D4PssDn3AvNoSbp3AyPwx4nhZSRwENYG8IfkhNT/PLQ8fdJFLoYESQfYuyfM1G0sg==
-X-Received: by 2002:a17:907:a0d1:b0:a2c:f8e3:1fce with SMTP id
- hw17-20020a170907a0d100b00a2cf8e31fcemr3613263ejc.153.1705413636226; 
- Tue, 16 Jan 2024 06:00:36 -0800 (PST)
-Received: from workstation5.fritz.box
- (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
- by smtp.gmail.com with ESMTPSA id
- tk10-20020a170907c28a00b00a2d60194466sm3727645ejc.52.2024.01.16.06.00.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jan 2024 06:00:35 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Joshua Watt <jpewhacker@gmail.com>,
- Bin Meng <bmeng.cn@gmail.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] part: correct documentation of part_get_bootable()
-Date: Tue, 16 Jan 2024 15:00:20 +0100
-Message-ID: <20240116140020.58464-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ardb@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by ams.source.kernel.org (Postfix) with ESMTP id 3F377B80D31
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 14:35:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E320C433A6
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 14:35:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1705415710;
+ bh=zaijGVATmy6GzChHiiK8uSOo+YHOgSEKUtwLiX427Fg=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=TuR9v4gAJ3BdvTrCIO1Gwm1YdvK2IK2MYf5qjlOdra7K3hhCZuY4L0nO9aOXaD0Ev
+ jSB7ThFlG9PenmRKCX1uArnaAHc/30P6YOHq3A/DtLWj99Ki4GygKfJInlAa8FM9ie
+ zgSkSnRlgakLrBegiyneYGlPETKDpc4+1hT9ITicxyticqd2HuMLOFkXqMspRor/Oc
+ N+AUAu3AvMPb68BeU+6d9JZcS85gFF16aLsczmyvnR7Xx3EejwuuQgHeY8+wrnlRtu
+ 0sLrjTmk1/gqk/MCSrq9JXbOP0GuZk5Gs6ZoztFAFg5/r1S4Hct3Rk0rEW/Rqz8K9S
+ cRpXwhX7/ZpWA==
+Received: by mail-lj1-f175.google.com with SMTP id
+ 38308e7fff4ca-2cd81b09e83so66961881fa.2
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 06:35:10 -0800 (PST)
+X-Gm-Message-State: AOJu0Ywu1yxP3HmM55zC0J049z+Mr6mimbhEkDOLu+zp/Ym6BUZRAzmd
+ +wJJy/fl+k4MWoZlroJayh59KpONUQXs5oJDgvM=
+X-Google-Smtp-Source: AGHT+IHFIyuoq5L7mzPqeE6kVupTlFwQ1uP+ufGn0cV0oNciVMUk2jSy25h1vh0L4Uq0cPUXFourXmrMR+lNwNj9VRI=
+X-Received: by 2002:a05:651c:150f:b0:2cd:e256:5db2 with SMTP id
+ e15-20020a05651c150f00b002cde2565db2mr340814ljf.110.1705415708662; Tue, 16
+ Jan 2024 06:35:08 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230926194242.2732127-1-sjg@chromium.org>
+ <20230926194242.2732127-2-sjg@chromium.org>
+ <BN9PR11MB5483FF3039913334C7EA83E1E6AEA@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAMj1kXFG92NpL7T7YocOup0xLKyopt3MnSCp0RL8cLzozzJz7A@mail.gmail.com>
+ <BN9PR11MB548303B09536EB1577472029E6B3A@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAPnjgZ36t8g7E=0MSJyaV8-QKv9RVYe47Jd5E=NU-mFM4LWBQA@mail.gmail.com>
+ <CAMj1kXHAEeK7x2f13k_JV3Xcw61nNLasyvXQf+mKwKekQ48EpQ@mail.gmail.com>
+ <BN9PR11MB548334E0DA6495C438FBFDE1E6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <BN9PR11MB548314DDE8D4C9503103D51CE6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAMj1kXHbM+ArLgNZgnmiok4gOfv6QLYxzyB9OCwfhEkJ2xGK_g@mail.gmail.com>
+ <BN9PR11MB5483C2FBCD07DE61DCCDB523E6BCA@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAMj1kXHmu=ykgBMRiFqG4_ra3FJtHa=GASoMUJswdMFa9v4Xgw@mail.gmail.com>
+ <BN9PR11MB54837EEB391CC2A8FA6C0BF5E695A@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAMj1kXEQL9n1Adedow5KEyZ5gdFQY3Fn+Fz8vSK3mHib_vDFig@mail.gmail.com>
+ <BN9PR11MB5483E191F1906641565A1337E694A@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAMj1kXGcZP99hyURXFAZfwKmYqj-xBN9BcW7R3h9Mm2k937Buw@mail.gmail.com>
+ <BN9PR11MB548370E8181B1BB3C6FB9A20E667A@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAMj1kXH9z0fvWc5UgzDQ=HfYKkh=YudjL-yoZwKX93baiMgZ8w@mail.gmail.com>
+ <BN9PR11MB5483D8D09B86CF3F92A20D3AE6672@BN9PR11MB5483.namprd11.prod.outlook.com>
+In-Reply-To: <BN9PR11MB5483D8D09B86CF3F92A20D3AE6672@BN9PR11MB5483.namprd11.prod.outlook.com>
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Tue, 16 Jan 2024 15:34:57 +0100
+X-Gmail-Original-Message-ID: <CAMj1kXGNdheZ97JNhBc53VNoajPA=4iPn=KkWf6DZ36td2d8aA@mail.gmail.com>
+Message-ID: <CAMj1kXGNdheZ97JNhBc53VNoajPA=4iPn=KkWf6DZ36td2d8aA@mail.gmail.com>
+Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
+To: "Chiu, Chasel" <chasel.chiu@intel.com>
+Cc: Simon Glass <sjg@chromium.org>, 
+ "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+ Mark Rutland <mark.rutland@arm.com>, 
+ Rob Herring <robh@kernel.org>, "Tan, Lean Sheng" <sheng.tan@9elements.com>, 
+ lkml <linux-kernel@vger.kernel.org>, Dhaval Sharma <dhaval@rivosinc.com>, 
+ "Brune, Maximilian" <maximilian.brune@9elements.com>,
+ Yunhui Cui <cuiyunhui@bytedance.com>, 
+ "Dong, Guo" <guo.dong@intel.com>, Tom Rini <trini@konsulko.com>, 
+ ron minnich <rminnich@gmail.com>, "Guo, Gua" <gua.guo@intel.com>, 
+ "linux-acpi@vger.kernel.org" <linux-acpi@vger.kernel.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,31 +103,288 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We have to use 'Return:' to render the description of the return value in
-the HTML documentation.
+On Thu, 4 Jan 2024 at 18:53, Chiu, Chasel <chasel.chiu@intel.com> wrote:
+>
+>
+>
+> > -----Original Message-----
+> > From: Ard Biesheuvel <ardb@kernel.org>
+> > Sent: Thursday, January 4, 2024 12:43 AM
+> > To: Chiu, Chasel <chasel.chiu@intel.com>
+> > Cc: Simon Glass <sjg@chromium.org>; devicetree@vger.kernel.org; Mark Rutland
+> > <mark.rutland@arm.com>; Rob Herring <robh@kernel.org>; Tan, Lean Sheng
+> > <sheng.tan@9elements.com>; lkml <linux-kernel@vger.kernel.org>; Dhaval
+> > Sharma <dhaval@rivosinc.com>; Brune, Maximilian
+> > <maximilian.brune@9elements.com>; Yunhui Cui <cuiyunhui@bytedance.com>;
+> > Dong, Guo <guo.dong@intel.com>; Tom Rini <trini@konsulko.com>; ron minnich
+> > <rminnich@gmail.com>; Guo, Gua <gua.guo@intel.com>; linux-
+> > acpi@vger.kernel.org; U-Boot Mailing List <u-boot@lists.denx.de>
+> > Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory
+> > usages
+> >
+> > On Thu, 4 Jan 2024 at 01:25, Chiu, Chasel <chasel.chiu@intel.com> wrote:
+> > >
+> > >
+> > >
+> > > > -----Original Message-----
+> > > > From: Ard Biesheuvel <ardb@kernel.org>
+> > > > Sent: Wednesday, January 3, 2024 7:22 AM
+> > > > To: Chiu, Chasel <chasel.chiu@intel.com>
+> > > > Cc: Simon Glass <sjg@chromium.org>; devicetree@vger.kernel.org; Mark
+> > > > Rutland <mark.rutland@arm.com>; Rob Herring <robh@kernel.org>; Tan,
+> > > > Lean Sheng <sheng.tan@9elements.com>; lkml
+> > > > <linux-kernel@vger.kernel.org>; Dhaval Sharma <dhaval@rivosinc.com>;
+> > > > Brune, Maximilian <maximilian.brune@9elements.com>; Yunhui Cui
+> > > > <cuiyunhui@bytedance.com>; Dong, Guo <guo.dong@intel.com>; Tom Rini
+> > > > <trini@konsulko.com>; ron minnich <rminnich@gmail.com>; Guo, Gua
+> > > > <gua.guo@intel.com>; linux- acpi@vger.kernel.org; U-Boot Mailing
+> > > > List <u-boot@lists.denx.de>
+> > > > Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory
+> > > > usages
+> > > >
+> > > > On Fri, 22 Dec 2023 at 20:52, Chiu, Chasel <chasel.chiu@intel.com> wrote:
+> > > > >
+> > > > >
+> > > > > Please see my reply below inline.
+> > > > >
+> > > > > Thanks,
+> > > > > Chasel
+> > > > >
+> > > > ...
+> > > > > > > > The gEfiMemoryTypeInformationGuid HOB typically carries
+> > > > > > > > platform defaults, and the actual memory type information is
+> > > > > > > > kept in a non-volatile EFI variable, which gets updated when
+> > > > > > > > the memory usage changes. Is this different for UefiPayloadPkg?
+> > > > > > > >
+> > > > > > > > (For those among the cc'ees less versed in EFI/EDK2: when
+> > > > > > > > you get the 'config changed -rebooting' message from the
+> > > > > > > > boot firmware, it typically means that this memory type
+> > > > > > > > table has changed, and a reboot is necessary.)
+> > > > > > > >
+> > > > > > > > So the platform init needs to read this variable, or get the
+> > > > > > > > information in a different way. I assume it is the payload,
+> > > > > > > > not the platform init that updates the variable when
+> > > > > > > > necessary. This means the information flows from payload(n)
+> > > > > > > > to platform init(n+1), where n is a monotonic index tracking
+> > > > > > > > consecutive boots of the
+> > > > system.
+> > > > > > > >
+> > > > > > > > Can you explain how the DT fits into this? How are the
+> > > > > > > > runtime-code and runtime-data memory reservation nodes under
+> > > > > > > > /reserved-memory used to implement this information exchange
+> > > > > > > > between platform init and payload? And how do the HOB and
+> > > > > > > > the EFI
+> > > > variable fit into this picture?
+> > > > > > >
+> > > > > > >
+> > > > > > > 1. With some offline discussion, we would move
+> > > > > > > gEfiMemoryTypeInformationGuid usage to FDT->upl-custom node.
+> > > > > > > This is because it is edk2 implementation choice and non-edk2
+> > > > > > > PlatformInit or Payload may not have such memory optimization
+> > > > > > > implementation. (not a generic usage/requirement for
+> > > > > > > PlatformInit and Payload)
+> > > > > > >
+> > > > > > > The edk2 example flow will be like below:
+> > > > > > >
+> > > > > > > PlatformInit to GetVariable of gEfiMemoryTypeInformationGuid
+> > > > > > > and create Hob-
+> > > > > > >
+> > > > > > >   PlatformInit to initialize FDT->upl-custom node to report
+> > > > > > gEfiMemoryTypeInformationGuid HOB information ->
+> > > > > > >     UefiPayload entry to re-create
+> > > > > > > gEfiMemoryTypeInformationGuid HOB basing
+> > > > > > on FDT input (instead of the default MemoryType inside
+> > > > > > UefiPayload)
+> > > > > > ->
+> > > > > > >       UefiPayload DxeMain/Gcd will consume
+> > > > > > > gEfiMemoryTypeInformationGuid
+> > > > > > Hob for memory type information ->
+> > > > > > >         UefiPayload to initialize UEFI environment (mainly DXE dispatcher) -
+> > >
+> > > > > > >           (additional FV binary appended to common UefiPayload
+> > > > > > > binary)
+> > > > > > PlatformPayload to provide VariableService which is platform
+> > > > > > specific ->
+> > > > > > >             UefiPayload UefiBootManager will SetVariable if
+> > > > > > > memory type change
+> > > > > > needed and request a warm reset ->
+> > > > > > >               Back to PlatformInit ...
+> > > > > > >
+> > > > > >
+> > > > > > OK so the upl-custom node can do whatever it needs to. I imagine
+> > > > > > these will include the memory descriptor attribute field, and
+> > > > > > other parts that may be missing from the /reserved-memory DT node
+> > specification?
+> > > > >
+> > > > >
+> > > > > Yes, if needed by edk2 specific implementation, not generic
+> > > > > enough, we may
+> > > > consider to use upl-custom node to pass those data.
+> > > > >
+> > > > >
+> > > > > >
+> > > > > > >
+> > > > > > > 2. Now the proposed reserved-memory node usages will be for
+> > > > > > > PlatformInit to
+> > > > > > provide data which may be used by Payload or OS. This is not
+> > > > > > edk2 specific and any PlatformInit/Payload could have same support.
+> > > > > > > Note: all of below are optional and PlatformInit may choose to
+> > > > > > > implement some
+> > > > > > of them or not.
+> > > > > > >
+> > > > > > >       - acpi
+> > > > > > > If PlatformInit created some ACPI tables, this will report a
+> > > > > > > memory region which
+> > > > > > contains all the tables to Payload and Payload may base on this
+> > > > > > to add some more tables if required.
+> > > > > > >
+> > > > > > >       - acpi-nvs
+> > > > > > > If PlatformInit has created some ACPI tables which having ACPI
+> > > > > > > NVS memory
+> > > > > > dependency, this will be that nvs region.
+> > > > > > >
+> > > > > >
+> > > > > > These make sense.
+> > > > > >
+> > > > > > >       - boot-code
+> > > > > > > When PlatformInit having some FW boot phase code that could be
+> > > > > > > freed for OS to use when payload transferring control to UEFI
+> > > > > > > OS
+> > > > > > >
+> > > > > > >       - boot-data
+> > > > > > > When PlatformInit having some FW boot phase data that could be
+> > > > > > > freed for OS
+> > > > > > to use when payload transferring control to UEFI OS.
+> > > > > > >
+> > > > > > >       - runtime-code
+> > > > > > > PlatformInit may provide some services code that can be used
+> > > > > > > for Payload to
+> > > > > > initialize UEFI Runtime Services for supporting UEFI OS.
+> > > > > > >
+> > > > > > >       - runtime-data
+> > > > > > > PlatformInit may provide some services data that can be used
+> > > > > > > for Payload to
+> > > > > > Initialize UEFI Runtime Services for supporting UEFI OS.
+> > > > > > >
+> > > > > >
+> > > > > > A UEFI OS must consume this information from the UEFI memory
+> > > > > > map, not from the /reserved-memory nodes. So these nodes must
+> > > > > > either not be visible to the OS at all, or carry an annotation
+> > > > > > that the OS must ignore
+> > > > them.
+> > > > > >
+> > > > > > Would it be possible to include a restriction in the DT schema
+> > > > > > that these are only valid in the firmware boot phase?
+> > > > >
+> > > > >
+> > > > > https://uefi.org/specs/UEFI/2.10/07_Services_Boot_Services.html#ef
+> > > > > i-bo ot-services-exitbootservices Per UEFI specification, UEFI OS
+> > > > > will always call UEFI GetMemoryMap function to retrieve memory
+> > > > > map, so FDT
+> > > > node present or not does not matter to UEFI OS. We probably could
+> > > > have annotation in UPL specification to emphasize this.
+> > > > > I'm not familiar with Linux FDT boot, but if non-UEFI OS does not
+> > > > > call UEFI
+> > > > GetMemoryMap() and does not know what is runtime-code/data, boot-
+> > > > code/data, it might just treat such reserved-memory nodes as
+> > > > 'regular' reserved memory nodes, and that's still ok because
+> > > > non-UEFI OS will not call to any runtime service or re-purpose boot-code/data
+> > memory regions.
+> > > > >
+> > > >
+> > > > You are saying the same thing but in a different way. A UEFI OS must
+> > > > only rely on GetMemoryMap(), and not on the /reserved-memory node to
+> > > > obtain this information. But this requirement needs to be stated
+> > > > somewhere: the UEFI spec does not reason about other sources of EFI
+> > > > memory information at all, and this DT schema does not mention any of this
+> > either.
+> > > >
+> > > > > Would you provide a real OS case which will be impacted by this
+> > > > > reserved-
+> > > > memory schema so we can discuss basing on real case?
+> > > > >
+> > > >
+> > > > Funny, that is what I have been trying to get from you :-)
+> > > >
+> > > > The problem I am anticipating here is that the information in
+> > > > /reserved-memory may be out of sync with the EFI memory map. It
+> > > > needs to be made clear that the EFI memory map is the only source of
+> > > > truth when the OS is involved, and this /reserved-memory mechanism
+> > > > should only be used by other firmware stages. But the schema does
+> > > > not mention this at all. The schema also does not mention that the
+> > > > information in /reserved-memory is not actually sufficient to
+> > > > reconstruct the EFI memory map that the firmware payload expects
+> > > > (which is why the upl- custom-node exists too)
+> > >
+> > >
+> > >
+> > > Does below solve your concerns if we mention those in schema
+> > > description? (please feel free to add more if you have) . boot-code/boot-data
+> > and runtime-code/runtime-data usages are following UEFI specification
+> > >   . before ExitBootServices:
+> > https://uefi.org/specs/UEFI/2.10/07_Services_Boot_Services.html#memory-
+> > type-usage-before-exitbootservices
+> > >   . after ExitBootServices:
+> > > https://uefi.org/specs/UEFI/2.10/07_Services_Boot_Services.html#memory
+> > > -type-usage-after-exitbootservices
+> > > . These usages do not intend to construct full UEFI memory map, it is only for
+> > PlatformInit to pass pre-installed tables or services to Payload for supporting UEFI
+> > OS boot.
+> > > . These usages are optional
+> > > . Typically UEFI OS boot will always call GetMemoryMap() to retrieve
+> > > memory map following UEFI spec, no matter DT nodes present or not
+> > > (https://uefi.org/specs/UEFI/2.10/07_Services_Boot_Services.html#efi-b
+> > > oot-services-exitbootservices) . Typically Non-UEFI OS boot will treat
+> > > those  boot* or runtime* reserved-memory as 'regular' reserved memory if
+> > present.
+> > >
+> >
+> > This already helps quite a lot, thanks.
+> >
+> > But why should a non-UEFI OS be required to keep boot* or runtime* regions
+> > reserved? The firmware stage that boots the OS knows whether it is performing
+> > an UEFI boot or a non-UEFI boot, and it should only present the information that
+> > goes along with that. The OS should never have to worry about reconciling two
+> > sources of truth.
+> >
+> > And to Rob's point about boot / runtime being ill-defined: I would argue that
+> > 'runtime' quite clearly implies 'under the OS', and so UEFI
+> > runtime* reservations are assumed to always be relevant to UEFI OSes.
+> >
+> > I think there is a fundamental difference of opinion here, where the position of
+> > the firmware developers is that the DT should be the same across all boot stages,
+> > while my position reasoning from the OS side is that the OS should be able to
+> > observe only the abstractions that are part of the contract between firmware and
+> > OS.
+>
+> I agree that boot* and runtime* can be utilized by non-UEFI OS too, we are just reusing existing definitions from UEFI spec.
+>   . boot-code/boot-data: firmware stage code/data that can be freed after firmware stage ending so OS will have more usable memory.
+>   . runtime-code/runtime-data: firmware stage code/data that are intended to be utilized by OS stage.
+> Non-UEFI OS still can implement/support boot* or runtime* memory if they want, and the runtime service can be 'non-UEFI' runtime service too as long as OS/FW aligning each other.
 
-Fixes: f55aa4454ac3 ("part: Add a fallback for part_get_bootable()")
-Fixes: dcffa4428d03 ("part: Add a function to find the first bootable partition")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- include/part.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+No, I disagree here, and this is the core of the issue IMO. Boot data
+and runtime data are tied to UEFI boot. A non-UEFI OS must either keep
+these regions reserved and not use them at all, or disregard the
+reservation and use them as ordinary memory.
 
-diff --git a/include/part.h b/include/part.h
-index db34bc6bb7d..32ee4048856 100644
---- a/include/part.h
-+++ b/include/part.h
-@@ -685,8 +685,8 @@ int part_get_type_by_name(const char *name);
- /**
-  * part_get_bootable() - Find the first bootable partition
-  *
-- * @desc: Block-device descriptor
-- * @return first bootable partition, or 0 if there is none
-+ * @desc:	Block-device descriptor
-+ * Return:	first bootable partition, or 0 if there is none
-  */
- int part_get_bootable(struct blk_desc *desc);
- 
--- 
-2.43.0
+What I don't want is a frankenstein construction where UEFI boot is
+avoided for religious reasons, but the regions in question are still
+parsed/accessed/etc to reimplement things like SMBIOS etc in a way
+that violates the specification.
 
+> Or non-UEFI OS can simply treat them as "usable memory" if they do not call to any runtime services from those memory regions. (in this case runtime* memory can be repurposed just like boot* memory)
+> That will be OS choices and we may add some example OS handling to schema description too.
+>
+
+The OS should not have to care about this at all. The reservations are
+intended for firmware stages, not the OS. The OS will either find
+these reservations in the UEFI memory map, or it should not care about
+them at all.
+
+> While we are working on UPL specific DT, we got agreement that 2 separate DT are unnecessary, we better align/merge with existing OS DT and OS could utilize those additional UPL DT information too if they want.
+> This also simplifies/unifies PlatformInit as same DT could support different OS loader Payloads.
+>
+
+I was not part of any agreement that 2 separate DTs are unnecessary,
+and I think this discussion proves that exposing firmware
+implementation details to the OS via a unified DT can be problematic.
