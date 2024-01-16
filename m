@@ -4,75 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 577A3C4706C
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 13:49:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0E5AC47077
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 14:00:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16204879E4;
-	Tue, 16 Jan 2024 14:49:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id 20445876E5;
+	Tue, 16 Jan 2024 15:00:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="U0YOvSSF";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="V34X/SJt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4390C879E4; Tue, 16 Jan 2024 14:49:03 +0100 (CET)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.153.233])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id A7FE0876E5; Tue, 16 Jan 2024 15:00:39 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 966C7876E5
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 14:48:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=microchip.com
+ by phobos.denx.de (Postfix) with ESMTPS id 6C2EB86FB0
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 15:00:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Conor.Dooley@microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1705412939; x=1736948939;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=RSyZYyMQgfxS+4Xftv2tNishUTbcnGzSLCyR8pSJIpA=;
- b=U0YOvSSF2/geTcx2706TS4UbSrvRaNb3JQ74xK4Q9qwMClE9CNjZLOc7
- 8DdmlQUazYqauyJkvqritK3DvQz/7+YgU5+J/nFJs15nXl2kV0ha3IKGo
- WQgDv7nitiJMOjUH3dHjT6EHt2lNuU9qLPkJD9uKmITWRauRoMFird96T
- AxnBkFXyWyNUK38lf93U5/rm0eJntd9dwLCdY9RD1rJHCxj3yXvlFdRDg
- ywDo/Ap8JHWQfVij/+KMsv0G5BOmCSDlGiTTwXUVFvXABWc0DtdUMO8gZ
- Mj6H8vGZQqShNlmGasIV0O12bJVga0ZioJOAbU5o0u/BEtlwHmwNyFU1Y A==;
-X-CSE-ConnectionGUID: i7wzn+J5QWyhyxLEdLriNQ==
-X-CSE-MsgGUID: 6Txx3qCERZ+pykVmzPzt2g==
-X-IronPort-AV: E=Sophos;i="6.05,199,1701154800"; 
- d="asc'?scan'208";a="16000830"
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa1.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 16 Jan 2024 06:48:57 -0700
-Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
- chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Tue, 16 Jan 2024 06:48:45 -0700
-Received: from wendy (10.10.85.11) by chn-vm-ex04.mchp-main.com (10.10.85.152)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35 via Frontend
- Transport; Tue, 16 Jan 2024 06:48:42 -0700
-Date: Tue, 16 Jan 2024 13:48:06 +0000
-From: Conor Dooley <conor.dooley@microchip.com>
-To: Simon Glass <sjg@chromium.org>
-CC: U-Boot Mailing List <u-boot@lists.denx.de>, Raymond Mao
- <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>, Marek Vasut
- <marex@denx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, Andre
- Przywara <andre.przywara@arm.com>, Baruch Siach <baruch@tkos.co.il>, Heinrich
- Schuchardt <xypron.glpk@gmx.de>, Jerry Van Baren <vanbaren@cideas.com>, Johan
- Jonker <jbx6244@gmail.com>, Kever Yang <kever.yang@rock-chips.com>, Samuel
- Holland <samuel@sholland.org>, Shiji Yang <yangshiji66@outlook.com>
-Subject: Re: [PATCH v7] fdt: Allow the devicetree to come from a bloblist
-Message-ID: <20240116-snowbound-symptom-aa07c4dcf736@wendy>
-References: <20240104014919.413568-1-sjg@chromium.org>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
+ [209.85.218.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id CD1D63F120
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 14:00:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1705413636;
+ bh=Q53GQob56Xnm2jFD31DMBDgPlNHSIKfvHeDwV4bto2U=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=V34X/SJttDmNT3XAk0ykXo0pjWwEYYBQ/bQpGD8JE5oxARYDa9A8MFLqWEPFYTz0S
+ WZ5iXCBpAitCES2HFKjl7uxjNdH8M9fW8MY3Xp9Rrrz4hvo+uEFpaQ1HW6uiBuU/GZ
+ a96QX0VTK+Cz6JHHm6bFSH5EMIFzbhv+G4iJ2npW5zoM3ZnqP8lyEwmf0PM+a8VrzV
+ AKtEBsK4lJ3wNRdGnXxMu2ugTzZQWMIYwJxIHnmoRp5mh+xdq0yyQuTuxRQluG2rdF
+ cCVd7LJt55LJD7m5syFiJRTy9PcOtUvlZjdZEOUF/fzKZr2HCp9uuahdRoP3dBK6dT
+ JYWjRYJIk3EPg==
+Received: by mail-ej1-f69.google.com with SMTP id
+ a640c23a62f3a-a2e1630853eso68635166b.0
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 06:00:36 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705413636; x=1706018436;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Q53GQob56Xnm2jFD31DMBDgPlNHSIKfvHeDwV4bto2U=;
+ b=rlC4OxFggjcjgybkLX8i6MTlbTopcdmoRcQugxopQi9xfGMaqblk50DhCdTE6CIOWt
+ TtqUQtqSi4NFaUb51XQulhOjt+LkP0ffHOtNJFJvnm8Fb4pAEu8u34SL3NUTB33c8sYx
+ YJ1NeC3i+3CWsjcnx1i68R4euJv1R5OBm1DwDKls2QlegHq2PX3WFeru9FWn8Mi/66sC
+ SxnrkmgFMpw9rYPT2O3hka2gm2ivv78jLQDyifbmsWWrKmojwUigTMSNTb+Xza2ieheu
+ Ow5RbR5PbdGCFh4EHFAN4wXhen9zvTtrDhnceFV2V5kjOhY+u2LmD6V+2X4I4wbzCDsk
+ +/jg==
+X-Gm-Message-State: AOJu0Ywhl3j7FaH2m9ODoH7qmEVmUpwc8HSq6LJ95o7d3zk4s4S1Eg3Y
+ ncSVQfJGXIMHjVY0UjU4ET3FtxEqVxpEmqRBVjCRf+sqsCxcwrhYnX+9NVW40lV2kOmapulnXp8
+ vjZBsq8J1TKsw7Y4bwZ1QZhteRBpUinIoBvhRg7NJ4iwWcw==
+X-Received: by 2002:a17:907:a0d1:b0:a2c:f8e3:1fce with SMTP id
+ hw17-20020a170907a0d100b00a2cf8e31fcemr3613277ejc.153.1705413636518; 
+ Tue, 16 Jan 2024 06:00:36 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFo0Sco4D4PssDn3AvNoSbp3AyPwx4nhZSRwENYG8IfkhNT/PLQ8fdJFLoYESQfYuyfM1G0sg==
+X-Received: by 2002:a17:907:a0d1:b0:a2c:f8e3:1fce with SMTP id
+ hw17-20020a170907a0d100b00a2cf8e31fcemr3613263ejc.153.1705413636226; 
+ Tue, 16 Jan 2024 06:00:36 -0800 (PST)
+Received: from workstation5.fritz.box
+ (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
+ by smtp.gmail.com with ESMTPSA id
+ tk10-20020a170907c28a00b00a2d60194466sm3727645ejc.52.2024.01.16.06.00.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 16 Jan 2024 06:00:35 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Joshua Watt <jpewhacker@gmail.com>,
+ Bin Meng <bmeng.cn@gmail.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] part: correct documentation of part_get_bootable()
+Date: Tue, 16 Jan 2024 15:00:20 +0100
+Message-ID: <20240116140020.58464-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="x10peqGISNg11rrX"
-Content-Disposition: inline
-In-Reply-To: <20240104014919.413568-1-sjg@chromium.org>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,197 +101,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---x10peqGISNg11rrX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+We have to use 'Return:' to render the description of the return value in
+the HTML documentation.
 
-Yo,
+Fixes: f55aa4454ac3 ("part: Add a fallback for part_get_bootable()")
+Fixes: dcffa4428d03 ("part: Add a function to find the first bootable partition")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ include/part.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-On Wed, Jan 03, 2024 at 06:49:19PM -0700, Simon Glass wrote:
-> Standard passage provides for a bloblist to be passed from one firmware
-> phase to the next. That can be used to pass the devicetree along as well.
-> Add an option to support this.
->=20
-> Tests for this will be added as part of the Universal Payload work.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+diff --git a/include/part.h b/include/part.h
+index db34bc6bb7d..32ee4048856 100644
+--- a/include/part.h
++++ b/include/part.h
+@@ -685,8 +685,8 @@ int part_get_type_by_name(const char *name);
+ /**
+  * part_get_bootable() - Find the first bootable partition
+  *
+- * @desc: Block-device descriptor
+- * @return first bootable partition, or 0 if there is none
++ * @desc:	Block-device descriptor
++ * Return:	first bootable partition, or 0 if there is none
+  */
+ int part_get_bootable(struct blk_desc *desc);
+ 
+-- 
+2.43.0
 
-Since this was merged into master, U-Boot is no longer booting on my
-icicle kit (At least that's what my bisection tells me). This is a
-RISC-V board and U-Boot for it is built from
-microchip_mpfs_icicle_defconfig.
-
-There's zero output on the console from U-Boot at all, the last thing
-that I see is OpenSBI before things grind to a halt.
-
-Thanks,
-Conor.
-
-
-> ---
-> The discussion on this was not resolved and is now important due to the
-> bloblist series from Raymond. So I am sending it again since I believe
-> this is a better starting point than building on OF_BOARD
->=20
-> Changes in v7:
-> - Drop use of OF_BLOBLIST
->=20
-> Changes in v6:
-> - Don't allow bloblist with OF_EMBED
->=20
-> Changes in v5:
-> - Make OF_BLOBLIST default y
-> - Make OF_BLOBLIST optional at runtime
->=20
-> Changes in v4:
-> - Rebase to -next
->=20
->  doc/develop/devicetree/control.rst |  3 ++
->  include/fdtdec.h                   |  6 ++--
->  lib/fdtdec.c                       | 44 +++++++++++++++++++++++-------
->  3 files changed, 41 insertions(+), 12 deletions(-)
->=20
-> diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/=
-control.rst
-> index cbb65c9b177..11c92d440f4 100644
-> --- a/doc/develop/devicetree/control.rst
-> +++ b/doc/develop/devicetree/control.rst
-> @@ -108,6 +108,9 @@ If CONFIG_OF_BOARD is defined, a board-specific routi=
-ne will provide the
->  devicetree at runtime, for example if an earlier bootloader stage creates
->  it and passes it to U-Boot.
-> =20
-> +If CONFIG_BLOBLIST is defined, the devicetree may come from a bloblist p=
-assed
-> +from a previous stage, if present.
-> +
->  If CONFIG_SANDBOX is defined, then it will be read from a file on
->  startup. Use the -d flag to U-Boot to specify the file to read, -D for t=
-he
->  default and -T for the test devicetree, used to run sandbox unit tests.
-> diff --git a/include/fdtdec.h b/include/fdtdec.h
-> index bd1149f46d0..e80de24076c 100644
-> --- a/include/fdtdec.h
-> +++ b/include/fdtdec.h
-> @@ -72,7 +72,7 @@ struct bd_info;
->   *	U-Boot is packaged as an ELF file, e.g. for debugging purposes
->   * @FDTSRC_ENV: Provided by the fdtcontroladdr environment variable. Thi=
-s should
->   *	be used for debugging/development only
-> - * @FDTSRC_NONE: No devicetree at all
-> + * @FDTSRC_BLOBLIST: Provided by a bloblist from an earlier phase
->   */
->  enum fdt_source_t {
->  	FDTSRC_SEPARATE,
-> @@ -80,6 +80,7 @@ enum fdt_source_t {
->  	FDTSRC_BOARD,
->  	FDTSRC_EMBED,
->  	FDTSRC_ENV,
-> +	FDTSRC_BLOBLIST,
->  };
-> =20
->  /*
-> @@ -1190,7 +1191,8 @@ int fdtdec_resetup(int *rescan);
->   *
->   * The existing devicetree is available at gd->fdt_blob
->   *
-> - * @err internal error code if we fail to setup a DTB
-> + * @err: 0 on success, -EEXIST if the devicetree is already correct, or =
-other
-> + * internal error code if we fail to setup a DTB
->   * @returns new devicetree blob pointer
->   */
->  void *board_fdt_blob_setup(int *err);
-> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> index 4016bf3c113..b2c59ab3818 100644
-> --- a/lib/fdtdec.c
-> +++ b/lib/fdtdec.c
-> @@ -7,6 +7,10 @@
->   */
-> =20
->  #ifndef USE_HOSTCC
-> +
-> +#define LOG_CATEGORY	LOGC_DT
-> +
-> +#include <bloblist.h>
->  #include <boot_fit.h>
->  #include <display_options.h>
->  #include <dm.h>
-> @@ -86,6 +90,7 @@ static const char *const fdt_src_name[] =3D {
->  	[FDTSRC_BOARD] =3D "board",
->  	[FDTSRC_EMBED] =3D "embed",
->  	[FDTSRC_ENV] =3D "env",
-> +	[FDTSRC_BLOBLIST] =3D "bloblist",
->  };
-> =20
->  const char *fdtdec_get_srcname(void)
-> @@ -1662,23 +1667,42 @@ static void setup_multi_dtb_fit(void)
-> =20
->  int fdtdec_setup(void)
->  {
-> -	int ret;
-> +	int ret =3D -ENOENT;
-> +
-> +	/* If allowing a bloblist, check that first */
-> +	if (CONFIG_IS_ENABLED(BLOBLIST)) {
-> +		ret =3D bloblist_maybe_init();
-> +		if (!ret) {
-> +			gd->fdt_blob =3D bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-> +			if (gd->fdt_blob) {
-> +				gd->fdt_src =3D FDTSRC_BLOBLIST;
-> +				log_debug("Devicetree is in bloblist at %p\n",
-> +					  gd->fdt_blob);
-> +			} else {
-> +				log_debug("No FDT found in bloblist\n");
-> +				ret =3D -ENOENT;
-> +			}
-> +		}
-> +	}
-> =20
-> -	/* The devicetree is typically appended to U-Boot */
-> -	if (IS_ENABLED(CONFIG_OF_SEPARATE)) {
-> -		gd->fdt_blob =3D fdt_find_separate();
-> -		gd->fdt_src =3D FDTSRC_SEPARATE;
-> -	} else { /* embed dtb in ELF file for testing / development */
-> -		gd->fdt_blob =3D dtb_dt_embedded();
-> -		gd->fdt_src =3D FDTSRC_EMBED;
-> +	/* Otherwise, the devicetree is typically appended to U-Boot */
-> +	if (ret) {
-> +		if (IS_ENABLED(CONFIG_OF_SEPARATE)) {
-> +			gd->fdt_blob =3D fdt_find_separate();
-> +			gd->fdt_src =3D FDTSRC_SEPARATE;
-> +		} else { /* embed dtb in ELF file for testing / development */
-> +			gd->fdt_blob =3D dtb_dt_embedded();
-> +			gd->fdt_src =3D FDTSRC_EMBED;
-> +		}
->  	}
-> =20
->  	/* Allow the board to override the fdt address. */
->  	if (IS_ENABLED(CONFIG_OF_BOARD)) {
->  		gd->fdt_blob =3D board_fdt_blob_setup(&ret);
-> -		if (ret)
-> +		if (!ret)
-> +			gd->fdt_src =3D FDTSRC_BOARD;
-> +		else if (ret !=3D -EEXIST)
->  			return ret;
-> -		gd->fdt_src =3D FDTSRC_BOARD;
->  	}
-> =20
->  	/* Allow the early environment to override the fdt address */
-> --=20
-> 2.34.1
->=20
-
---x10peqGISNg11rrX
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZaaJBQAKCRB4tDGHoIJi
-0stZAQDbKg/2zIOMc0jWhPZQJUSf2UL/gQ5MiLnr758QNuq++gD/Qux37yPpw7S/
-w3/UEdqiVl9oA1wDYakE6QbgzmxYrAg=
-=KJ/Y
------END PGP SIGNATURE-----
-
---x10peqGISNg11rrX--
