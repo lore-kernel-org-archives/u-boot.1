@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3655C47077
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 17:14:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC3AFC47077
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 17:15:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B24887A05;
-	Tue, 16 Jan 2024 18:14:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A810A87A0B;
+	Tue, 16 Jan 2024 18:14:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x9WfBMSg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fNhNhlWT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BD4B87A36; Tue, 16 Jan 2024 18:14:33 +0100 (CET)
-Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
- [IPv6:2607:f8b0:4864:20::835])
+ id BBFDE86F67; Tue, 16 Jan 2024 18:14:37 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4B2887A14
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 18:14:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AB64487A18
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 18:14:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qt1-x835.google.com with SMTP id
- d75a77b69052e-427a3887483so62862621cf.3
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 09:14:29 -0800 (PST)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-6ddef319fabso4556008a34.1
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 09:14:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705425268; x=1706030068; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1705425274; x=1706030074; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EiMM1MFv91uHV7BD5aRWuIOj8x1+iCYX0IYLQ6Y+DEw=;
- b=x9WfBMSgxCbbui/7sKL9qz/7qP+im8Y8dzL65p3tIUHJ0FcwusUQnJtN7JENYv6mtr
- YrmV+DnrYitRNEk+M0RW/J+TiOtT0o9UGWs98LEPlpLDq5iFzgUxqEZGYlals0NBlg47
- 3hKu5vWFVlZ/7TmFkgQZZSfk06QjFkrp6MpSRJwG/omBK8vhusSWfU7HTdU+Tr5mMHKR
- OEVHnbzA+5Ol+/lJoNxKVjWA/zPxu/NfpJBPHOz7d/o5mwKcWHKhf4vbfTmT6MgxnFSp
- cj/LWzCb0MMg8kMwxSfIjz0gkVTkRH+gpqV9P7ldH4mhe1N/XJ3viELpNY4wEngr9Xts
- lHqQ==
+ bh=Y5YNPlhJytwclbnPZso5l+tBazJTAx0BgcunMJhm9IU=;
+ b=fNhNhlWTJzscuYNu77cmTcl6ufE6T9WpqcxtLQiGyb72Me3yNevtQnAOazH0OnCJ41
+ BLbsyIA8eFCnWo7G32FsV5KkghfUcc3D5W6F2XNwBs4MkwDEkV3YY3/tmdXiChEXbeg4
+ hLRoY2Smub2BBc6xXsAW9LezVp3a8VmoynmotFuumAcrt0sheu2AshxSb0vPIp+MoFIO
+ 5GhTU03329yG+e7Goa0F7aFrT4BlG3Z4ikIYm2/JD4S0erXOdXMWFwmOiMWlE+HFRh4e
+ ZB1pKEb9KHi0r4gnVEnaMGqbQggzrJ2ANCjOz74pJvDKzz/SZ7NSckOgnBB/X+4c/GNa
+ nCBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705425268; x=1706030068;
+ d=1e100.net; s=20230601; t=1705425274; x=1706030074;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EiMM1MFv91uHV7BD5aRWuIOj8x1+iCYX0IYLQ6Y+DEw=;
- b=C9p9/DTaMZpkILkurA6u4NQ9UzRy74esUeE/N6JYpzE/Zq/m7IXzyOZjf0VRU3/cMx
- snptQpSNDITQxWHVLx5gzsFQTkE/dGhTIZMbncjffHDStc4RPifdTZqDrSit4mU9MIe2
- NvsnEMGrbuyp/hbZ6ostWaPiiNhHwmS+FCnYrvLE/aCFCvb7kHij8m3nSJSYezSWrhNW
- WTGTjc6f0KZVy2lB10NeK97URGWDZa3uZiq1hs15QUVdHvJU6d57q9EfgZ0WHeM/zAF4
- /v7aBWOhd9U94Sbz3HJpglItsCvB8Gxk84XU/9Aa1qOcBUcP4/j1A+22kyf8XWkCtoIM
- 0Qyw==
-X-Gm-Message-State: AOJu0YzRBWIe27yargvXkENFxwIgDBRflVcoi1qdIt1UbkRsIELnTqtN
- KHnsCIevjSjh1SECc993UBxKJzgZ5v3em6rXiklOluc27E8=
-X-Google-Smtp-Source: AGHT+IHKd1s6CQEe5zCPhs624QzyvhGMrwlyB+6pyzsakA8+kfmXEPDfd/Tao93luvMRpY4GSz5/sQ==
-X-Received: by 2002:a05:622a:13c8:b0:429:f5e9:e20 with SMTP id
- p8-20020a05622a13c800b00429f5e90e20mr3378138qtk.124.1705425268564; 
- Tue, 16 Jan 2024 09:14:28 -0800 (PST)
+ bh=Y5YNPlhJytwclbnPZso5l+tBazJTAx0BgcunMJhm9IU=;
+ b=ayc3FDl6vUUJB5BUcEqRwY29lgzpePmAMBFalZXu0h7L4M4uLZ8erLA17MnWmR/ed6
+ ohaTgAFFMgaR2O+X+t9wiD8TdNOQEZDnOFdISCllvCWyql8HkHzXSz/mO7yHrhDtS/3O
+ TnF3NRlmro6lAfrkb2hRZmNtcrH/akQIKZ4V+LFcgFJlK9cjuFCfKWQOKnWyPLqSawI3
+ SLHGY0t07BG5q/sDr79u05+KMg7Iz7lSOPmd+7NGcupffcBvsljnjyJvb6pVagP6exp0
+ 1VlIfNdTFETM8zsq1YxpIUQ9lLqD6VxWGFFmz/EhJhCTAzHsknUiDLyNOG6LIGnUavlD
+ H15g==
+X-Gm-Message-State: AOJu0YxSFdH+H75C96khomlxihc1f7V4ddJvYUH3z66xUohXJ0mwYmhm
+ hBpVZd5CfQTcxh0XO09Wac+xRxICdj7tMLbLlIUC5r0xYTM=
+X-Google-Smtp-Source: AGHT+IFD6AY5RIk+7VsURayKtd8x/7awtXqQnf917OjkDeNMr2W8dF8hTPNODYCaPxMaPwq+CnvXKg==
+X-Received: by 2002:a05:6830:1da9:b0:6dd:ef0b:4f62 with SMTP id
+ z9-20020a0568301da900b006ddef0b4f62mr6162672oti.77.1705425273867; 
+ Tue, 16 Jan 2024 09:14:33 -0800 (PST)
 Received: from ubuntu.localdomain
  (cpe688f2e182063-cm688f2e182060.sdns.net.rogers.com. [174.115.4.214])
  by smtp.gmail.com with ESMTPSA id
- bp43-20020a05622a1bab00b00427e0e9c22dsm4988291qtb.54.2024.01.16.09.14.26
+ bp43-20020a05622a1bab00b00427e0e9c22dsm4988291qtb.54.2024.01.16.09.14.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jan 2024 09:14:28 -0800 (PST)
+ Tue, 16 Jan 2024 09:14:33 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
  jwerner@chromium.org
@@ -74,19 +74,18 @@ Cc: Raymond Mao <raymond.mao@linaro.org>,
  Fabio Estevam <festevam@denx.de>, Bin Meng <bmeng@tinylab.org>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  Andre Przywara <andre.przywara@arm.com>,
- Mark Kettenis <kettenis@openbsd.org>,
  Linus Walleij <linus.walleij@linaro.org>,
+ Mark Kettenis <kettenis@openbsd.org>,
  Yang Xiwen <forbidden405@outlook.com>,
  =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?= <csokas.bence@prolan.hu>,
  Peng Fan <peng.fan@nxp.com>, Kevin Chen <kevin_chen@aspeedtech.com>,
  Sean Anderson <seanga2@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Shiji Yang <yangshiji66@outlook.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH v6 4/7] arm: armv7: save boot arguments
-Date: Tue, 16 Jan 2024 09:13:49 -0800
-Message-Id: <20240116171356.376801-5-raymond.mao@linaro.org>
+Subject: [PATCH v6 5/7] arm: armv8: save boot arguments
+Date: Tue, 16 Jan 2024 09:13:50 -0800
+Message-Id: <20240116171356.376801-6-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240116171356.376801-1-raymond.mao@linaro.org>
 References: <20240116171356.376801-1-raymond.mao@linaro.org>
@@ -108,56 +107,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Save boot arguments r[0-3] into an array for handover of bloblist from
+Save boot arguments x[0-3] into an array for handover of bloblist from
 previous boot stage.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
 Changes in v2
 - New patch file created for v2.
-Changes in v3
-- Swap value of r0 with r2.
-Changes in v4
-- Fix a bug when saving the boot args.
 Changes in V5
 - Drop the dependence on OF_BOARD.
 
- arch/arm/cpu/armv7/start.S | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+ arch/arm/cpu/armv8/start.S | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-diff --git a/arch/arm/cpu/armv7/start.S b/arch/arm/cpu/armv7/start.S
-index 69e281b086..f4f50ab9a4 100644
---- a/arch/arm/cpu/armv7/start.S
-+++ b/arch/arm/cpu/armv7/start.S
-@@ -152,9 +152,28 @@ ENDPROC(c_runtime_cpu_setup)
-  *
-  *************************************************************************/
+diff --git a/arch/arm/cpu/armv8/start.S b/arch/arm/cpu/armv8/start.S
+index 6cc1d26e5e..91cdd03947 100644
+--- a/arch/arm/cpu/armv8/start.S
++++ b/arch/arm/cpu/armv8/start.S
+@@ -370,5 +370,19 @@ ENTRY(c_runtime_cpu_setup)
+ ENDPROC(c_runtime_cpu_setup)
+ 
  WEAK(save_boot_params)
 +#if (IS_ENABLED(CONFIG_BLOBLIST))
-+	ldr r12, =saved_args
-+	/*
-+	 * Intentionally swapping r0 with r2 in order to simplify the C
-+	 * function we use later.
-+	 */
-+	str r2, [r12]
-+	str r1, [r12, #4]
-+	str r0, [r12, #8]
-+	str r3, [r12, #12]
++	adr x9, saved_args
++	stp x0, x1, [x9]
++	/* Increment the address by 16 bytes for the next pair of values */
++	stp x2, x3, [x9, #16]
 +#endif
- 	b	save_boot_params_ret		@ back to my caller
+ 	b	save_boot_params_ret	/* back to my caller */
  ENDPROC(save_boot_params)
- 
++
 +.section .data
 +.global saved_args
 +saved_args:
 +	.rept 4
-+	.word 0
++	.xword 0
 +	.endr
 +END(saved_args)
-+
- #ifdef CONFIG_ARMV7_LPAE
- WEAK(switch_to_hypervisor)
- 	b	switch_to_hypervisor_ret
 -- 
 2.25.1
 
