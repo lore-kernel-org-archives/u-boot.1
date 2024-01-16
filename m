@@ -4,95 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3C2EC47DA7
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 16:14:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1205C47077
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 16:30:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1875587559;
-	Tue, 16 Jan 2024 17:14:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 236AC86FB8;
+	Tue, 16 Jan 2024 17:30:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Ql/v9im4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Cv1HcO8i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02421878CA; Tue, 16 Jan 2024 17:14:39 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D99F1871BB; Tue, 16 Jan 2024 17:30:10 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23C5F86564
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 17:14:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D3BC286FB0
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 17:30:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-lf1-f71.google.com (mail-lf1-f71.google.com
- [209.85.167.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 89AA43F154
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 16:14:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1705421674;
- bh=TRX0uaVqbJj8KFkJ7nW5dYvtlv6gEAjAFd5lnPFj/9o=;
- h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
- In-Reply-To:Content-Type;
- b=Ql/v9im4HGMzNviijIxvVTsUk0G2/SRGK768w1hmPD64QNwjccBzDGtbGhrORXm+p
- qE4zUWRX4MOS3ETQ5OVlegJ++QtNTqBNo6Hpw9nuYbGtMXs2gblrQ4CzsNVFEx3cV/
- ZhUewjmC7/x9JX5deN9GX6eSLh+7Gs0tldL0GuMkKLlMiQUp/FjfI3DDYqWVUVmEzw
- HmVU9uQo9tv6JWgqh5M6BDauKxBmsZPU4AtsTc6xKUWs+DzN00tmLeZ52UdccpozPV
- 2mnjPEgKhigeFytmXfwjLV09e6uj1x6qV5FfXTMrXlNXn4iWtwgS4LjdX4UclH2FyG
- 7gbBAUXHTELlw==
-Received: by mail-lf1-f71.google.com with SMTP id
- 2adb3069b0e04-50e73a3a280so7221113e87.3
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 08:14:34 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=bmeng.cn@gmail.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a28b1095064so1134358066b.2
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 08:30:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1705422608; x=1706027408; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ah+KpIFxINeqjKoWk0Est9A8em2cueX7ZTdn5KWqH3g=;
+ b=Cv1HcO8iyxX8ncgQa2lBen4juUqiZtfKtx9paYWnJmvgR77LGwlVvsQo+nR+yVoMBK
+ 92U27eqGR9nqmVWQbuQWfY8RaYmODOYyjpYNXdA34uTcgZ5afBv1NtXCnOuNi1g18Mgl
+ IgKYn8HUtEzLH/IHMslDkrtdEuzsklFzjrcmKpBlkvxT+Gzi4l40n++lorIqL/noeKlP
+ x1GyeUOfgWjcQmHckiAYJ6hOjE+4CSnca61e2VNEQ7KiK1/vdoXZc4UzTVtNAvLA5BV3
+ Om1X/SqAdn8zprBSkIdo8SZK/BIuvbxIhWeBMt8BnbS8ke1Pzh+TQudov/mpp+DtqC4W
+ dlmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705421674; x=1706026474;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=TRX0uaVqbJj8KFkJ7nW5dYvtlv6gEAjAFd5lnPFj/9o=;
- b=mTOGNcHC1Lyha/xx7bhT00KRxolyxcxfYzmForNTzLzzoAD7umu6IXB4NXVtlroZod
- S3DmDlQefDPiVWd4BqOMqnUKpMaqaJcgYnblRh86f0nDUrRaXSW/avLPL4cMzPD6wPqa
- 5bdSG90m5dmzVw2QsNqHSfPN26f4DBhHBw6GuOhwPiOxIW95vOcjma9BzcMPNNa9FEoh
- cX+W2XDYBwObWzTcx4yT/rcdhw0vEXa03YVdweqsDFjf6UkDlOXh3HBEAStRvgR0dwl/
- TylTpHRTCCNSlEqHQ45rpaoTR5aF79HCd9v/xoLm+XlGNCSoDHIlZMvHxG8MFvxv/b8f
- 60Wg==
-X-Gm-Message-State: AOJu0YyMqFQc2fdaU5u61WY/TBHlKVaAL5DSDFFQCbD4UXQzZ0joLQeB
- Gqr3q6ipA27yHpmIUyCR6S5v52xHDqVgklCTW5Aj+/C0f0Nv1Ii06GjtKqM6pAYOBZazfTPWu4J
- nFpPdz1/ilwXA7tu5aUYaR3QPOss/XsViVMJEgg==
-X-Received: by 2002:a05:6512:124b:b0:50e:74e9:1512 with SMTP id
- fb11-20020a056512124b00b0050e74e91512mr3796930lfb.52.1705421673984; 
- Tue, 16 Jan 2024 08:14:33 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHWY8jAQyPkTnJj6OTQe6+ev2IDDfw9RB8cxhBCT8iAOufQ4busIjWjGf1p94SReyOGyKb12w==
-X-Received: by 2002:a05:6512:124b:b0:50e:74e9:1512 with SMTP id
- fb11-20020a056512124b00b0050e74e91512mr3796917lfb.52.1705421673589; 
- Tue, 16 Jan 2024 08:14:33 -0800 (PST)
-Received: from [192.168.123.67] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
- [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
- bl2-20020a170906c24200b00a29d232ab76sm6613841ejb.182.2024.01.16.08.14.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 16 Jan 2024 08:14:33 -0800 (PST)
-Message-ID: <77d00047-154e-4e35-8171-3028c4b5d3f3@canonical.com>
-Date: Tue, 16 Jan 2024 17:14:31 +0100
+ d=1e100.net; s=20230601; t=1705422608; x=1706027408;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Ah+KpIFxINeqjKoWk0Est9A8em2cueX7ZTdn5KWqH3g=;
+ b=K+wvg8OXwr/k7cVgoOGjjZBVf4nnxykMkBuXJBDZFUNnF1w/vbsVEF02HG6GiwHtYY
+ m/O530giqe3HBb11pliL6yyJb63pQde/ydaC2DbcmkDjjPiVC4RBH6ZDvAfQCOMKKxWI
+ N5fo+L/88Qves2mwoc7eckLLBAdGHAD0SH4vSZ5JwuKg6nK4XeAsfgTATw9tMtDxXk8H
+ XbCV25p6UxuFHFJiC/C4swFKighMQlld7GxiggNpBdGv14l68FhFUZP7vvJkmz+urH5w
+ yBwM8dd2Aa8B8Voyb5vHteEeiSF6bapFKK/Z4yUfg3o3/cES05hRabX2V7hm6BZyxRDE
+ yeRw==
+X-Gm-Message-State: AOJu0YyFNVnWCOGGwxLW68tBcmFiMKLoPbE1xJUWNq69xa8PBWcqzS/O
+ a4K5vCab2RQ+jyx5PAiW8XElU21nH3a9aem6F+o=
+X-Google-Smtp-Source: AGHT+IFGfYdIvMft5RT7ZH1jll3NhxB2kiGblL97kbok8B/4PzLB/H4e9p6JtgvH0RmI1Cw+TdiPZ3L0Yj587MNLJmw=
+X-Received: by 2002:a17:907:b023:b0:a2b:684:11d with SMTP id
+ fu35-20020a170907b02300b00a2b0684011dmr1518646ejc.255.1705422608048; Tue, 16
+ Jan 2024 08:30:08 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] part: Add a function to find ESP partition
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Mayuresh Chitale <mchitale@ventanamicro.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng@tinylab.org>, Tobias Waldekranz <tobias@waldekranz.com>,
- Joshua Watt <jpewhacker@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Johan Jonker <jbx6244@gmail.com>
-References: <20240116123643.563412-1-mchitale@ventanamicro.com>
- <20240116123643.563412-2-mchitale@ventanamicro.com>
- <d3d71b07-9636-42e9-b29b-31ae84d8e4b4@canonical.com>
-Content-Language: en-US
-In-Reply-To: <d3d71b07-9636-42e9-b29b-31ae84d8e4b4@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20240116161231.741794-1-patrice.chotard@foss.st.com>
+In-Reply-To: <20240116161231.741794-1-patrice.chotard@foss.st.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 17 Jan 2024 00:29:57 +0800
+Message-ID: <CAEUhbmUOy-iJ9SEiA8atU=V5CG+DAAxtQ9HJXO2A5_W=hwe1jw@mail.gmail.com>
+Subject: Re: [PATCH] common: console: Fix print complete stdio device list
+To: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: u-boot@lists.denx.de, Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Bin Meng <bmeng@tinylab.org>, 
+ Ion Agorria <ion@agorria.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Simon Glass <sjg@chromium.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,92 +91,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 16.01.24 14:45, Heinrich Schuchardt wrote:
-> On 16.01.24 13:36, Mayuresh Chitale wrote:
->> If a disk has an EFI system partition (ESP) then it can be used to
->> locate the boot files. Add a function to find the ESP.
->>
->> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
->> Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+On Wed, Jan 17, 2024 at 12:13=E2=80=AFAM Patrice Chotard
+<patrice.chotard@foss.st.com> wrote:
+>
+> In case CONSOLE_MUX and SYS_CONSOLE_IS_IN_ENV are on and
+> stdin or stdout or stderr are missing in environment, as fallback, get
+> these either from stdio_devices[std] or stdio_devices[std]->name.
+>
+> Fixes: 6b343ab38d ("console: Print out complete stdio device list")
+>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> ---
+>
+>  common/console.c | 23 +++++++++++------------
+>  1 file changed, 11 insertions(+), 12 deletions(-)
+>
+> diff --git a/common/console.c b/common/console.c
+> index cad65891fc9..8bfcfce5643 100644
+> --- a/common/console.c
+> +++ b/common/console.c
+> @@ -1049,6 +1049,11 @@ int console_clear(void)
+>         return 0;
+>  }
+>
+> +static char *get_stdio(const u8 std)
+> +{
+> +       return stdio_devices[std] ? stdio_devices[std]->name : "No device=
+s available!";
+> +}
+> +
+>  static void stdio_print_current_devices(void)
+>  {
+>         char *stdinname, *stdoutname, *stderrname;
+> @@ -1060,19 +1065,13 @@ static void stdio_print_current_devices(void)
+>                 stdoutname =3D env_get("stdout");
+>                 stderrname =3D env_get("stderr");
+>
+> -               stdinname =3D stdinname ? : "No input devices available!"=
+;
+> -               stdoutname =3D stdoutname ? : "No output devices availabl=
+e!";
+> -               stderrname =3D stderrname ? : "No error devices available=
+!";
+> +               stdinname =3D stdinname ? : get_stdio(stdin);
+> +               stdoutname =3D stdoutname ? : get_stdio(stdout);
+> +               stderrname =3D stderrname ? : get_stdio(stderr);
+>         } else {
+> -               stdinname =3D stdio_devices[stdin] ?
+> -                       stdio_devices[stdin]->name :
+> -                       "No input devices available!";
+> -               stdoutname =3D stdio_devices[stdout] ?
+> -                       stdio_devices[stdout]->name :
+> -                       "No output devices available!";
+> -               stderrname =3D stdio_devices[stderr] ?
+> -                       stdio_devices[stderr]->name :
+> -                       "No error devices available!";
+> +               stdinname =3D get_stdio(stdin);
+> +               stdoutname =3D get_stdio(stdout);
+> +               stderrname =3D get_stdio(stderr);
+>         }
+>
+>         /* Print information */
+> --
 
-I ran your patches through Gitlab CI and some issues came up:
+This can be further simplified to:
 
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/jobs/771497
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/jobs/771498
+char *stdinname =3D NULL;
+char *stdoutname =3D NULL;
+char *stderrname NULL;
 
-Could you, please, have a look at it.
+    if (CONFIG_IS_ENABLED(CONSOLE_MUX) &&
+         CONFIG_IS_ENABLED(SYS_CONSOLE_IS_IN_ENV)) {
+               /* stdin stdout and stderr are in environment */
+               stdinname  =3D env_get("stdin");
+               stdoutname =3D env_get("stdout");
+               stderrname =3D env_get("stderr");
+    }
 
-Best regards
+   stdinname =3D stdinname ? : get_stdio(stdin);
+   stdoutname =3D stdoutname ? : get_stdio(stdout);
+   stderrname =3D stderrname ? : get_stdio(stderr);
 
-Heinrich
-
->> ---
->>   disk/part.c    | 16 ++++++++++++++++
->>   include/part.h | 11 +++++++++++
->>   2 files changed, 27 insertions(+)
->>
->> diff --git a/disk/part.c b/disk/part.c
->> index 36b88205eca..6b1fbc18637 100644
->> --- a/disk/part.c
->> +++ b/disk/part.c
->> @@ -848,3 +848,19 @@ int part_get_bootable(struct blk_desc *desc)
->>       return 0;
->>   }
->> +
->> +int part_get_esp(struct blk_desc *desc)
->> +{
->> +    struct disk_partition info;
->> +    int p;
->> +
->> +    for (p = 1; p <= MAX_SEARCH_PARTITIONS; p++) {
->> +        int ret;
->> +
->> +        ret = part_get_info(desc, p, &info);
->> +        if (!ret && (info.bootable & PART_EFI_SYSTEM_PARTITION))
->> +            return p;
->> +    }
->> +
->> +    return 0;
->> +}
->> diff --git a/include/part.h b/include/part.h
->> index db34bc6bb7d..30e049c8f19 100644
->> --- a/include/part.h
->> +++ b/include/part.h
->> @@ -690,6 +690,14 @@ int part_get_type_by_name(const char *name);
->>    */
->>   int part_get_bootable(struct blk_desc *desc);
->> +/**
->> + * part_get_esp() - Find the EFI system partition
->> + *
->> + * @desc: Block-device descriptor
->> + * @Return the EFI system partition, or 0 if there is none
-> 
-> We want to be able to add the include to our API documentation. This 
-> requires adhering to the Sphinx documentation style.
-> 
-> %s/@Return the/Return:/
-> 
-> Cf. 
-> https://www.kernel.org/doc/html/v6.7/doc-guide/kernel-doc.html#function-documentation
-> 
-> Best regards
-> 
-> Heinrich
-> 
->> + */
->> +int part_get_esp(struct blk_desc *desc);
->> +
->>   #else
->>   static inline int part_driver_get_count(void)
->>   { return 0; }
->> @@ -700,6 +708,9 @@ static inline struct part_driver 
->> *part_driver_get_first(void)
->>   static inline bool part_get_bootable(struct blk_desc *desc)
->>   { return false; }
->> +static inline bool part_get_esp(struct blk_desc *desc)
->> +{ return false; }
->> +
->>   #endif /* CONFIG_PARTITIONS */
->>   #endif /* _PART_H */
-> 
-
+Regards,
+Bin
