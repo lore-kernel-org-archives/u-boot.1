@@ -4,90 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64CE9C47077
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 13:33:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF77FC47077
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 13:39:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91F43879A0;
-	Tue, 16 Jan 2024 14:33:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 206D187707;
+	Tue, 16 Jan 2024 14:39:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Fu6zA7Xv";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="JJv15kfU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31DCF879D3; Tue, 16 Jan 2024 14:33:22 +0100 (CET)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C38A88745E; Tue, 16 Jan 2024 14:39:27 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86703874D5
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 14:33:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EB6F7879E7
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 14:39:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-337bfab4137so67300f8f.3
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 05:33:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705411995; x=1706016795; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Dd+n/qrziKmvLGVGOr37beBdXy+evB+Nm7vWbiW3Iko=;
- b=Fu6zA7XvAHpUIP/Hf1LgXi9lWLT6+NChSjl5QWUMlQHIaUs4uQ7DqXohKWTAvOoDA6
- DF7Cni2KeBvQCEpNDx5uwd5jJwV6T2yPV9J4T5SN0sXEZbhCu15g4vDRftyhPqsgncKs
- lkEd3nIVAUMN8mnLEYZ9iXczesW5qVy7ZT0HoxaW48bRQPkJRH6RAuY91I6NbRrhxhwt
- i8DYtrTzNVkPshUSGfd8JUCMVyEtWEnwi67qdQuiPj/BsGIlZatxm/MoFpmiEzGV0fnh
- yyOyY93eEybit6rrSdgaUDs7XCklSN94cxOW+DFYi4AS4ONGgtutebBeJD482R8bruZh
- UN6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705411995; x=1706016795;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Dd+n/qrziKmvLGVGOr37beBdXy+evB+Nm7vWbiW3Iko=;
- b=kL9yEPvlbcpdQBSjfdWejKT2CKDE8lbegy019ggRp3LOuFzbFnUAkO6qBV0vggcbHC
- PYrCNDs0vlbHq/iYrQRTCPWknTPNo1Vetp27I2kI+L0ZhlYR1AWsV1gxb6oOPg2PtkCy
- uAes3C/HvdfA8IlaGezVDIOX0ur7myvwDAHKwzSBk5paz62xv/+fGjaaH8QZVeS8fAq3
- 1NY8CE7VhVJs/Z0gH11rWwxFbDfmS30BO7e3na1XiUtjlod6QSK4JhD9Mqd6v2P1Vdq/
- AAEbJc7N9t6VagbjnNFBhA4Df+kdbCW0Abd+o9N+laYB5YqezBrCHZce2Zsuu/7K2Drx
- kUog==
-X-Gm-Message-State: AOJu0Yz8F/sv8A4+ib7XNMdu1BBuPbx3Kb7QgE3oD0l4bLxWTy3pdKua
- Qck/eg5dR0pC9uBtTUkgZ9vaWEIHGW0DqQ==
-X-Google-Smtp-Source: AGHT+IHXYFwjSwy5Y/gNsHUmaYZmC6wiPJknoemy/H33FDjSXyNhZdE3ylHkV3jg2kdpjus4VhFoFA==
-X-Received: by 2002:a5d:69ca:0:b0:337:bfcd:27fa with SMTP id
- s10-20020a5d69ca000000b00337bfcd27famr7877wrw.22.1705411995020; 
- Tue, 16 Jan 2024 05:33:15 -0800 (PST)
-Received: from [192.168.1.78] (host-92-17-96-230.as13285.net. [92.17.96.230])
- by smtp.gmail.com with ESMTPSA id
- c18-20020a5d4cd2000000b0033740e109adsm14619457wrt.75.2024.01.16.05.33.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 16 Jan 2024 05:33:14 -0800 (PST)
-Message-ID: <5e60a445-6eeb-4b5c-a0b6-a5435382f452@linaro.org>
-Date: Tue, 16 Jan 2024 13:33:13 +0000
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1705412360; x=1706017160; i=xypron.glpk@gmx.de;
+ bh=cHpvbAlH38larXfvCb+Q4JoOMG7VcLJqWCtAQ44EFVo=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=JJv15kfUz/aP5r/CQrMW/V6dUZ0m5QzM9XKTsEzQd6uFSonlykO3oVtQ563fckZg
+ LVrTHZ/dlXA9RxQg3DrJstMTarpXk5LqNyIrD5t9t8eV4dW+QAfMtJM9SmLYeluZ2
+ OHaZ+HcWQJ/uPfFdjyCWjuemO1KibZjGMP5v/Ea2YwCuwh8d6Lb5EAzMKJ/rS7FAJ
+ T3ugN2B1cR5iJ8qhiSiTmbxCK1Ak7jZZOYR0tlHcaI/0pUc3Enj5pV/Yhk3hfGJH4
+ /TP04p+Cc589ysfEliHy9zlihQn45q3N9kYhtkiEVwyLuKhZ1GaffuTwgWXnsck/h
+ L5Gt0MGoy3zrMUsYEg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N2V0H-1r086Z1ThP-013yvL; Tue, 16
+ Jan 2024 14:39:20 +0100
+Message-ID: <5d54af9b-205d-4130-868e-0773364446b9@gmx.de>
+Date: Tue, 16 Jan 2024 14:39:13 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 13/32] board: dragonboard410c: import board code from
- mach-snapdragon
+Subject: Re: [PATCH v2 2/2] spl: Add support for booting from ESP
+To: Mayuresh Chitale <mchitale@ventanamicro.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Sean Anderson <seanga2@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Marek Vasut <marex@denx.de>, Xavier Drudis Ferran <xdrudis@tinet.cat>
+References: <20240116123643.563412-1-mchitale@ventanamicro.com>
+ <20240116123643.563412-3-mchitale@ventanamicro.com>
 Content-Language: en-US
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski
- <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-References: <20231219-b4-qcom-common-target-v2-0-b6dd9704219e@linaro.org>
- <20231219-b4-qcom-common-target-v2-13-b6dd9704219e@linaro.org>
- <CAFA6WYMtwBFVCreA6XWr4EhmepOm--wKt5OXL=Ui8x0t1-3VXg@mail.gmail.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFA6WYMtwBFVCreA6XWr4EhmepOm--wKt5OXL=Ui8x0t1-3VXg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240116123643.563412-3-mchitale@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:5TLrOMD2Kg72pFGvcr3DPgJsgYFUNkWXmQ84VfAbnBchshkeEE5
+ SoVJqQ/32cgcMuXLLaSaK0GpIvdZK5oUUmMz6miQ3HuJSuk2dIi+7uO71JXO42aAq6UePDd
+ ljzecJjk4EKkla6E59qovn+TOLB3gwUVO/Y+YD5VVeGzBYyK1Mjuc9BSa/+kwJmOTOB+FnJ
+ CeFKGOjpXPY67PtgtOSLw==
+UI-OutboundReport: notjunk:1;M01:P0:FW+ZP50QTW4=;GF0VdqzB7c1ISevVqv4HTjZrGOe
+ 6vHO7cUXba94DSExJwfQBsC0JCXnSf6SstlkKTpJNp9SWcY6JDGi2M8o1NUQONlpfxa5YMUZ+
+ MFkFthm5JlvOjCZmezDF4uwOvR2p7m/bUFrA2/6uOW6pRClLFTigwrpouSDJ2DfpNjTNIIONo
+ CQUu7LTSW8DHycE2ecInzBVS8+HXSnIpjTpypljR8bl6z46jgY5j8N2s7Q7PvN6/UCaQJNXpz
+ LJc9Y2hUPFtJyMCHKQQKHZE0DMQMGhxvCWuKEUHuQp5oFdcAuvGLVPEvfPXR7RyuWXbclwI9v
+ fzMfr2N/sR7AvC3F08xrg1R71zGnI662hI5kFtpm6G+KxLUaxvP0v24qUGn83GQnTkdVtodlt
+ kY0Q76+kDODzbtf4zEyb7HSjTzFSlSED08LXUEJQWRvFa3Q6RlmBHrN7AdXHJ66Z4VtkeRcfv
+ Z4AwJFtoJoJEyEYtpzi7KZlCMbhZfqiZiYKxprx8DiIIf3DNyx4lhSE0ibsJI39yJdBSgLKVM
+ Jw1/lQ8KFj0CiQDxaOV5wrsphUY+Ov4dYzUuCIdCZ8934BdGaJRolMlX5Aoi948KIaEVfVMHS
+ LEPE1I/4f4VeS7EBKy9cryuR1njFeHbJyp/DAydunSZm8TwtRZO587KGyD/kUdxF0hUC65IGt
+ QX4sXg8OFvDsA/v4l8TqJI4mt2/a1lMBV6tfMdWQTR00mnko7GwKPTz9idNUeVAv8XuthgBHG
+ EzmbKZH9kq7/tO/O2IruvF3Nsy56T89HE6lE+TYHUhpIceEBiVGhID1U9nZqDw7ecqvwkbg7k
+ eKxqNevYa6JOdIJvXw0JY3rMD3WaD12jB0aT6OP9XtBxPrEzVp9iRBMXRGtU3P76oIXxYuvaa
+ O+XWNwQy8ful5yL9tZaOPSLPkaNCSd5yIwy1xU+UCdYkobqdVAq49WEiz2HVIjLNpnOdQ/Qkx
+ xsT50+FdgvaK83rKaVdZJYZ8xP0=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,263 +92,212 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 16.01.24 13:36, Mayuresh Chitale wrote:
+> Some platforms as described by EBBR specification may store images in
+> the FIRMWARE directory of the UEFI system partition(ESP). Add support
+> to boot from the EFI system partition if it is enabled for a platform.
+>
+> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+
+Thank you for respinning this series.
+
+For future submissions it would be preferable to have the changes
+between the versions also in the individual patches.
+
+> ---
+>   common/spl/Kconfig      |  8 +++++++
+>   common/spl/spl_blk_fs.c | 51 ++++++++++++++++++++++++++++++-----------
+>   common/spl/spl_fat.c    | 34 +++++++++++++++++++++++----
+>   3 files changed, 75 insertions(+), 18 deletions(-)
+>
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> index cf7ffc9b112..48e4e43196a 100644
+> --- a/common/spl/Kconfig
+> +++ b/common/spl/Kconfig
+> @@ -1292,6 +1292,14 @@ config SPL_SATA_RAW_U_BOOT_SECTOR
+>   	  Sector on the SATA disk to load U-Boot from, when the SATA disk is =
+being
+>   	  used in raw mode. Units: SATA disk sectors (1 sector =3D 512 bytes)=
+.
+>
+> +config SPL_ESP_BOOT
+> +	bool "Load next stage boot image from the UEFI system partition"
+> +	default y if BOOT_DEFAULTS
+> +	select SPL_PARTITION_TYPE_GUID
+> +	help
+> +	  When enabled, first try to boot from the UEFI system partition as
+> +	  described in the Ch.4 of the EBBR specification.
+> +
+>   config SPL_NVME
+>   	bool "NVM Express device support"
+>   	depends on BLK
+> diff --git a/common/spl/spl_blk_fs.c b/common/spl/spl_blk_fs.c
+> index 04eac6f306b..a2e8c2ce910 100644
+> --- a/common/spl/spl_blk_fs.c
+> +++ b/common/spl/spl_blk_fs.c
+> @@ -10,12 +10,15 @@
+>   #include <spl_load.h>
+>   #include <image.h>
+>   #include <fs.h>
+> +#include <part.h>
+>   #include <asm/cache.h>
+>   #include <asm/io.h>
+>
+>   struct blk_dev {
+>   	const char *ifname;
+>   	const char *filename;
+> +	int devnum;
+> +	int partnum;
+>   	char dev_part_str[8];
+>   };
+>
+> @@ -44,6 +47,29 @@ static ulong spl_fit_read(struct spl_load_info *load,=
+ ulong file_offset,
+>   	return actlen;
+>   }
+>
+> +static int spl_blk_file_size(struct blk_dev *dev, const char *filename,
+> +			     loff_t *filesize)
+> +{
+> +	int ret;
+> +
+> +	snprintf(dev->dev_part_str, sizeof(dev->dev_part_str) - 1, "%x:%x",
+> +		 dev->devnum, dev->partnum);
+
+Using log functions allows to provide more information if
+CONFIG_SPL_LOG=3Dy otherwise they fall back to printf() and debug().
+
+> +	debug("Loading file %s from %s %s\n", filename, dev->ifname,
+> +	      dev->dev_part_str);
+
+log_debug(
+
+> +	ret =3D fs_set_blk_dev(dev->ifname, dev->dev_part_str, FS_TYPE_ANY);
+> +	if (ret) {
+> +		printf("spl: unable to set blk_dev %s %s. Err - %d\n",
+
+SPL binary size is limited on many systems. There is already a message
+telling that we are in SPL. I would suggest to abbreviate the message.
+
+log_err("Can't access %s %s\n", dev->ifname, dev->dev_part_str);
+
+> +		       dev->ifname, dev->dev_part_str, ret);
+> +		return ret;
+> +	}
+> +
+> +	ret =3D fs_size(filename, filesize);
+> +	if (ret)
+> +		printf("spl: unable to get size, file: %s. Err - %d\n",
+> +		       filename, ret);
+
+log_err("File not found %s\n", filename);
+
+Moving to log functions and adjusting the messages can be done in a
+follow up patch. I don't want to stop this series.
+
+Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
 
-On 20/12/2023 13:47, Sumit Garg wrote:
-> Hi Caleb,
-> 
-> On Tue, 19 Dec 2023 at 21:34, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>
->> Some of the db410c board support code was written to be generic and
->> placed in mach-snapdragon. However, as the db410c is the only board
->> using this, move the code out of mach-snapdragon. This makes is more
->> obvious what code is relevant for which targets and helps tidy things up
->> a little more.
-> 
-> This change will be incompatible with HMIBSC board support being
-> proposed in the other thread. It will lead to further code duplication
-> among boards. You should rather reverse it to keep APQ8016 SoC
-> specific changes in mach-snapdragon and let the derivative boards use
-> them.
+> +	return ret;
+> +}
+> +
+>   int spl_blk_load_image(struct spl_image_info *spl_image,
+>   		       struct spl_boot_device *bootdev,
+>   		       enum uclass_id uclass_id, int devnum, int partnum)
+> @@ -53,7 +79,7 @@ int spl_blk_load_image(struct spl_image_info *spl_imag=
+e,
+>   	loff_t filesize;
+>   	struct blk_dev dev;
+>   	struct spl_load_info load;
+> -	int ret;
+> +	int ret, part;
+>
+>   	blk_desc =3D blk_get_devnum_by_uclass_id(uclass_id, devnum);
+>   	if (!blk_desc) {
+> @@ -65,21 +91,18 @@ int spl_blk_load_image(struct spl_image_info *spl_im=
+age,
+>
+>   	dev.filename =3D filename;
+>   	dev.ifname =3D blk_get_uclass_name(uclass_id);
+> -	snprintf(dev.dev_part_str, sizeof(dev.dev_part_str) - 1, "%x:%x",
+> -		 devnum, partnum);
+> -	ret =3D fs_set_blk_dev(dev.ifname, dev.dev_part_str, FS_TYPE_ANY);
+> -	if (ret) {
+> -		printf("spl: unable to set blk_dev %s %s. Err - %d\n",
+> -		       dev.ifname, dev.dev_part_str, ret);
+> -		return ret;
+> +	dev.devnum =3D devnum;
+> +	dev.partnum =3D partnum;
+> +	if (IS_ENABLED(CONFIG_SPL_ESP_BOOT)) {
+> +		part =3D part_get_esp(blk_desc);
+> +		if (part)
+> +			dev.partnum =3D part;
+> +		else
+> +			return -ENODEV;
+>   	}
+> -
+> -	ret =3D fs_size(filename, &filesize);
+> -	if (ret) {
+> -		printf("spl: unable to get file size: %s. Err - %d\n",
+> -		       filename, ret);
+> +	ret =3D spl_blk_file_size(&dev, filename, &filesize);
+> +	if (ret)
+>   		return ret;
+> -	}
+>
+>   	load.read =3D spl_fit_read;
+>   	if (IS_ENABLED(CONFIG_SPL_FS_FAT_DMA_ALIGN))
+> diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c
+> index a52f9e178e6..8c426a3f3e7 100644
+> --- a/common/spl/spl_fat.c
+> +++ b/common/spl/spl_fat.c
+> @@ -60,10 +60,10 @@ static ulong spl_fit_read(struct spl_load_info *load=
+, ulong file_offset,
+>   	return actread;
+>   }
+>
+> -int spl_load_image_fat(struct spl_image_info *spl_image,
+> -		       struct spl_boot_device *bootdev,
+> -		       struct blk_desc *block_dev, int partition,
+> -		       const char *filename)
+> +int spl_load_image_fat_one(struct spl_image_info *spl_image,
+> +			   struct spl_boot_device *bootdev,
+> +			   struct blk_desc *block_dev, int partition,
+> +			   const char *filename)
+>   {
+>   	int err;
+>   	loff_t size;
+> @@ -103,6 +103,32 @@ end:
+>   	return err;
+>   }
+>
+> +int spl_load_image_fat(struct spl_image_info *spl_image,
+> +		       struct spl_boot_device *bootdev,
+> +		       struct blk_desc *block_dev, int partition,
+> +		       const char *filename)
+> +{
+> +	int err, part;
+> +
+> +	/*
+> +	 * First try to boot from EFI System partition. In case of failure,
+> +	 * fall back to the configured partition.
+> +	 */
+> +	if (IS_ENABLED(CONFIG_SPL_ESP_BOOT)) {
+> +		part =3D part_get_esp(block_dev);
+> +		if (part) {
+> +			err =3D spl_load_image_fat_one(spl_image, bootdev,
+> +						     block_dev, part,
+> +						     filename);
+> +			if (!err)
+> +				return err;
+> +		}
+> +	}
+> +
+> +	return spl_load_image_fat_one(spl_image, bootdev, block_dev,
+> +				      partition, filename);
+> +}
+> +
+>   #if CONFIG_IS_ENABLED(OS_BOOT)
+>   int spl_load_image_fat_os(struct spl_image_info *spl_image,
+>   			  struct spl_boot_device *bootdev,
 
-Re-capping our off-list discussion: the HMIBSC board only depends on the
-usb init code and button handling code.
-
-The usb init code will be moved to mach-snapdragon in the next revision
-of this series, and the button code will eventually be handled by my
-proposed "button cmd" patch.
-
-The smem code (msm_fixup_memory()) will be dropped in favour of using DT
-as the source of truth.
-> 
-> -Sumit
-> 
->>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->>  arch/arm/mach-snapdragon/Makefile                  |  2 -
->>  arch/arm/mach-snapdragon/include/mach/dram.h       | 12 -----
->>  arch/arm/mach-snapdragon/misc.c                    | 55 ----------------------
->>  board/qualcomm/dragonboard410c/Makefile            |  3 +-
->>  board/qualcomm/dragonboard410c/dragonboard410c.c   |  4 +-
->>  .../qualcomm/dragonboard410c/misc.c                | 51 +++++++++++++++++++-
->>  .../mach => board/qualcomm/dragonboard410c}/misc.h |  1 +
->>  7 files changed, 54 insertions(+), 74 deletions(-)
->>
->> diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-snapdragon/Makefile
->> index 3a3a297c1768..d02432df8b04 100644
->> --- a/arch/arm/mach-snapdragon/Makefile
->> +++ b/arch/arm/mach-snapdragon/Makefile
->> @@ -6,6 +6,4 @@ obj-$(CONFIG_SDM845) += sysmap-sdm845.o
->>  obj-$(CONFIG_SDM845) += init_sdm845.o
->>  obj-$(CONFIG_TARGET_DRAGONBOARD820C) += sysmap-apq8096.o
->>  obj-$(CONFIG_TARGET_DRAGONBOARD410C) += sysmap-apq8016.o
->> -obj-y += misc.o
->> -obj-y += dram.o
->>  obj-$(CONFIG_TARGET_QCS404EVB) += sysmap-qcs404.o
->> diff --git a/arch/arm/mach-snapdragon/include/mach/dram.h b/arch/arm/mach-snapdragon/include/mach/dram.h
->> deleted file mode 100644
->> index 0a9eedda414c..000000000000
->> --- a/arch/arm/mach-snapdragon/include/mach/dram.h
->> +++ /dev/null
->> @@ -1,12 +0,0 @@
->> -/* SPDX-License-Identifier: GPL-2.0+ */
->> -/*
->> - * Snapdragon DRAM
->> - * Copyright (C) 2018 Ramon Fried <ramon.fried@gmail.com>
->> - */
->> -
->> -#ifndef DRAM_H
->> -#define DRAM_H
->> -
->> -int msm_fixup_memory(void *blob);
->> -
->> -#endif
->> diff --git a/arch/arm/mach-snapdragon/misc.c b/arch/arm/mach-snapdragon/misc.c
->> deleted file mode 100644
->> index 7d452f4529b7..000000000000
->> --- a/arch/arm/mach-snapdragon/misc.c
->> +++ /dev/null
->> @@ -1,55 +0,0 @@
->> -// SPDX-License-Identifier: GPL-2.0+
->> -/*
->> - * Miscellaneous Snapdragon functionality
->> - *
->> - * (C) Copyright 2018 Ramon Fried <ramon.fried@gmail.com>
->> - *
->> - */
->> -
->> -#include <common.h>
->> -#include <mmc.h>
->> -#include <asm/arch/misc.h>
->> -#include <asm/unaligned.h>
->> -
->> -/* UNSTUFF_BITS macro taken from Linux Kernel: drivers/mmc/core/sd.c */
->> -#define UNSTUFF_BITS(resp, start, size) \
->> -       ({ \
->> -               const int __size = size; \
->> -               const u32 __mask = (__size < 32 ? 1 << __size : 0) - 1; \
->> -               const int __off = 3 - ((start) / 32); \
->> -               const int __shft = (start) & 31; \
->> -               u32 __res; \
->> -                                       \
->> -               __res = resp[__off] >> __shft; \
->> -               if (__size + __shft > 32) \
->> -                       __res |= resp[__off - 1] << ((32 - __shft) % 32); \
->> -               __res & __mask; \
->> -       })
->> -
->> -u32 msm_board_serial(void)
->> -{
->> -       struct mmc *mmc_dev;
->> -
->> -       mmc_dev = find_mmc_device(0);
->> -       if (!mmc_dev)
->> -               return 0;
->> -
->> -       if (mmc_init(mmc_dev))
->> -               return 0;
->> -
->> -       return UNSTUFF_BITS(mmc_dev->cid, 16, 32);
->> -}
->> -
->> -void msm_generate_mac_addr(u8 *mac)
->> -{
->> -       /* use locally adminstrated pool */
->> -       mac[0] = 0x02;
->> -       mac[1] = 0x00;
->> -
->> -       /*
->> -        * Put the 32-bit serial number in the last 32-bit of the MAC address.
->> -        * Use big endian order so it is consistent with the serial number
->> -        * written as a hexadecimal string, e.g. 0x1234abcd -> 02:00:12:34:ab:cd
->> -        */
->> -       put_unaligned_be32(msm_board_serial(), &mac[2]);
->> -}
->> diff --git a/board/qualcomm/dragonboard410c/Makefile b/board/qualcomm/dragonboard410c/Makefile
->> index 1b99c8b0efef..a3ae1a5f9136 100644
->> --- a/board/qualcomm/dragonboard410c/Makefile
->> +++ b/board/qualcomm/dragonboard410c/Makefile
->> @@ -2,4 +2,5 @@
->>  #
->>  # (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
->>
->> -obj-y  := dragonboard410c.o
->> +obj-y += dragonboard410c.o
->> +obj-y += misc.o
->> diff --git a/board/qualcomm/dragonboard410c/dragonboard410c.c b/board/qualcomm/dragonboard410c/dragonboard410c.c
->> index 1adac07569ae..eea603a4148d 100644
->> --- a/board/qualcomm/dragonboard410c/dragonboard410c.c
->> +++ b/board/qualcomm/dragonboard410c/dragonboard410c.c
->> @@ -18,10 +18,10 @@
->>  #include <asm/global_data.h>
->>  #include <asm/gpio.h>
->>  #include <fdt_support.h>
->> -#include <asm/arch/dram.h>
->> -#include <asm/arch/misc.h>
->>  #include <linux/delay.h>
->>
->> +#include "misc.h"
->> +
->>  DECLARE_GLOBAL_DATA_PTR;
->>
->>  #define USB_HUB_RESET_GPIO 2
->> diff --git a/arch/arm/mach-snapdragon/dram.c b/board/qualcomm/dragonboard410c/misc.c
->> similarity index 64%
->> rename from arch/arm/mach-snapdragon/dram.c
->> rename to board/qualcomm/dragonboard410c/misc.c
->> index 499dfdf0da6e..27d51ef78914 100644
->> --- a/arch/arm/mach-snapdragon/dram.c
->> +++ b/board/qualcomm/dragonboard410c/misc.c
->> @@ -1,6 +1,6 @@
->>  // SPDX-License-Identifier: GPL-2.0+
->>  /*
->> - * Onboard memory detection for Snapdragon boards
->> + * Miscellaneous Snapdragon functionality
->>   *
->>   * (C) Copyright 2018 Ramon Fried <ramon.fried@gmail.com>
->>   *
->> @@ -9,10 +9,56 @@
->>  #include <common.h>
->>  #include <dm.h>
->>  #include <log.h>
->> +#include <mmc.h>
->>  #include <part.h>
->>  #include <smem.h>
->>  #include <fdt_support.h>
->> -#include <asm/arch/dram.h>
->> +#include <asm/unaligned.h>
->> +
->> +#include "misc.h"
->> +
->> +/* UNSTUFF_BITS macro taken from Linux Kernel: drivers/mmc/core/sd.c */
->> +#define UNSTUFF_BITS(resp, start, size) \
->> +       ({ \
->> +               const int __size = size; \
->> +               const u32 __mask = (__size < 32 ? 1 << __size : 0) - 1; \
->> +               const int __off = 3 - ((start) / 32); \
->> +               const int __shft = (start) & 31; \
->> +               u32 __res; \
->> +                                       \
->> +               __res = resp[__off] >> __shft; \
->> +               if (__size + __shft > 32) \
->> +                       __res |= resp[__off - 1] << ((32 - __shft) % 32); \
->> +               __res & __mask; \
->> +       })
->> +
->> +u32 msm_board_serial(void)
->> +{
->> +       struct mmc *mmc_dev;
->> +
->> +       mmc_dev = find_mmc_device(0);
->> +       if (!mmc_dev)
->> +               return 0;
->> +
->> +       if (mmc_init(mmc_dev))
->> +               return 0;
->> +
->> +       return UNSTUFF_BITS(mmc_dev->cid, 16, 32);
->> +}
->> +
->> +void msm_generate_mac_addr(u8 *mac)
->> +{
->> +       /* use locally adminstrated pool */
->> +       mac[0] = 0x02;
->> +       mac[1] = 0x00;
->> +
->> +       /*
->> +        * Put the 32-bit serial number in the last 32-bit of the MAC address.
->> +        * Use big endian order so it is consistent with the serial number
->> +        * written as a hexadecimal string, e.g. 0x1234abcd -> 02:00:12:34:ab:cd
->> +        */
->> +       put_unaligned_be32(msm_board_serial(), &mac[2]);
->> +}
->>
->>  #define SMEM_USABLE_RAM_PARTITION_TABLE 402
->>  #define RAM_PART_NAME_LENGTH            16
->> @@ -97,3 +143,4 @@ int msm_fixup_memory(void *blob)
->>
->>         return 0;
->>  }
->> +
->> diff --git a/arch/arm/mach-snapdragon/include/mach/misc.h b/board/qualcomm/dragonboard410c/misc.h
->> similarity index 87%
->> rename from arch/arm/mach-snapdragon/include/mach/misc.h
->> rename to board/qualcomm/dragonboard410c/misc.h
->> index c60e3e472470..fe44caf51b18 100644
->> --- a/arch/arm/mach-snapdragon/include/mach/misc.h
->> +++ b/board/qualcomm/dragonboard410c/misc.h
->> @@ -9,5 +9,6 @@
->>
->>  u32 msm_board_serial(void);
->>  void msm_generate_mac_addr(u8 *mac);
->> +int msm_fixup_memory(void *blob);
->>
->>  #endif
->>
->> --
->> 2.42.1
->>
-
--- 
-// Caleb (they/them)
