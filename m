@@ -4,41 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 691D2C4707B
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 00:18:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 944A7C3DA79
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 00:45:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4114E870D2;
-	Tue, 16 Jan 2024 01:18:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 4A561874B1;
+	Tue, 16 Jan 2024 01:45:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B6C48701D; Tue, 16 Jan 2024 01:18:23 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 6E181870DF
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 01:18:19 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6CD282F4;
- Mon, 15 Jan 2024 16:19:05 -0800 (PST)
-Received: from minigeek.lan (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C1B053F5A1;
- Mon, 15 Jan 2024 16:18:17 -0800 (PST)
-Date: Tue, 16 Jan 2024 00:17:35 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Maxim Kiselev <bigunclemax@gmail.com>
-Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>, Ramon
- Fried <rfried.dev@gmail.com>
-Subject: Re: [PATCH v1] net: sun8i-emac: Add support for fixed-link phy
-Message-ID: <20240116001735.7c48ea88@minigeek.lan>
-In-Reply-To: <20230614214405.1038301-1-bigunclemax@gmail.com>
-References: <20230614214405.1038301-1-bigunclemax@gmail.com>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1705365915;
+	bh=d+MbD0iuWfx2ByjRIVnsnPTRIfRjcV3b4h3nfSvQ/TM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=MAyS6x1/GlJVCqYkFV709IjhTNSliS1SnRkrzpTvZ6ACzfsF+Kf+Q+fGZFyVbrydi
+	 kvJ6DHzX37XiMboTv3HumSpd+CK1NagFDuuqXBexl8CT/w0kragkC2ZCHhYvaSeQGy
+	 Y1YFJdDrDf2s8j34GfOhPcVXwD9kTHlGZy6lak0IcnKQIGYcsRvP6Vbo5mIoH7705E
+	 lbQxbLWYQjbpfiXaxyQXuEik+PzQuQhSQfBLTgwQNiVhFtDxXpGTmOVNb2A/JIJG8r
+	 tamuog+/zKBc2mNPNt/L2IoD4aOdA+aabTe7H33QWExVV8If+MW9sQBRg7M45jiJd7
+	 de6+IXQM5WliQ==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 15FE2869F6;
+ Tue, 16 Jan 2024 01:45:14 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1705365914;
+ bh=d+MbD0iuWfx2ByjRIVnsnPTRIfRjcV3b4h3nfSvQ/TM=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=M7qyCsYCZLNP67cNUGJNFcpm6rGxj8CqRked3RnGdD7zu05zdMlYykEClI7WWiS4j
+ goNK82YKi04hJ1D+UPYBbBc9tR4ewrfHgPjBqGxzwwOUji3RlMKIqyI1HQuDwX0P82
+ kMstxUNRml7TPG02xd+mARfC9VuPh1TEkC7JtvHti4NtL3tZVvsd4qgpevSlHP2nIu
+ QfVjYVHvwcMP0R3zECad8GG8VfDLHhY/3FirhQ07XdOSj2+lBLyURf/tugWBSHfTNj
+ a1CIJxyjn3P3jwhT1HmgfyLmLxoPyqEmRiwBMjpthQuHV8mjMgJddjbO4b+yPbkTNL
+ qPi0h1rjZjczQ==
+Message-ID: <2b040273-528e-4954-8258-362e0a1060ab@denx.de>
+Date: Tue, 16 Jan 2024 01:45:13 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] common: usb-hub: Reset hub port before scanning
+To: Shantur Rathore <i@shantur.com>, Tom Rini <trini@konsulko.com>
+Cc: bmeng.cn@gmail.com, clamor95@gmail.com, Hector Martin <marcan@marcan.st>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+References: <20231209181057.331815-1-i@shantur.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20231209181057.331815-1-i@shantur.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -56,50 +70,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 15 Jun 2023 00:44:06 +0300
-Maxim Kiselev <bigunclemax@gmail.com> wrote:
-
-Hi Maxim,
-
-> From: Maksim Kiselev <bigunclemax@gmail.com>
+On 12/9/23 19:10, Shantur Rathore wrote:
+> Currently when a hub is turned on, all the ports are powered on.
+> This works well for hubs which have individual power control.
 > 
-> Based on dt-specs fixed-link doesn't require phy-handle to be used.
-
-Do you have such a board? And where is that written down? I don't see
-it explicitly mentioned as optional in ethernet-controller.yaml or in
-the DT spec PDF. The sun8i EMAC binding lists phy-handle as required,
-so that would need to be relaxed there then.
-
-> Fix driver to only read phy related setting when phy-handle is found.
-
-The patch itself looks fine, we already specify -1 as the default when
-the PHY DT node does not contain a reg property, so that looks like it
-would work.
-
-Cheers,
-Andre
-
-> Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
-> ---
->  drivers/net/sun8i_emac.c | 7 ++-----
->  1 file changed, 2 insertions(+), 5 deletions(-)
+> For the hubs without individual power control this has no effect.
+> Mostly in these scenarios the hub port is powered before the USB
+> controller is enabled, this can lead to some devices in unexpected
+> state.
 > 
-> diff --git a/drivers/net/sun8i_emac.c b/drivers/net/sun8i_emac.c
-> index 04c3274fbe..0e339d69e0 100644
-> --- a/drivers/net/sun8i_emac.c
-> +++ b/drivers/net/sun8i_emac.c
-> @@ -834,11 +834,8 @@ static int sun8i_emac_eth_of_to_plat(struct udevice *dev)
->  	priv->use_internal_phy = false;
->  
->  	offset = fdtdec_lookup_phandle(gd->fdt_blob, node, "phy-handle");
-> -	if (offset < 0) {
-> -		debug("%s: Cannot find PHY address\n", __func__);
-> -		return -EINVAL;
-> -	}
-> -	priv->phyaddr = fdtdec_get_int(gd->fdt_blob, offset, "reg", -1);
-> +	if (offset >= 0)
-> +		priv->phyaddr = fdtdec_get_int(gd->fdt_blob, offset, "reg", -1);
->  
->  	pdata->phy_interface = dev_read_phy_mode(dev);
->  	debug("phy interface %d\n", pdata->phy_interface);
+> With this patch, we explicitly reset the port while powering up hub
+> This resets the port for hubs without port power control and has
+> no effect on hubs with port power control as the port is still off.
+> 
+> Before this patch AMicro AM8180 based NVME to USB adapter won't be
+> detected as a USB3.0 Mass Storage device but with this it works as
+> expected.
+> 
+> Tested working after this patch:
+> 1. AMicro AM8180 based NVME to USB Adapter
+> 2. Kingston DataTraveler 3.0
+> 3. GenesysLogic USB3.0 Hub
+> 
+> The drives were tested while connected directly and via the hub.
+> 
+> Signed-off-by: Shantur Rathore <i@shantur.com>
 
+Reviewed-by: Marek Vasut <marex@denx.de>
+
+Tom, can you please pick this one up directly ?
