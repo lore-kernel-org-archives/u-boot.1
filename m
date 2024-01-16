@@ -4,75 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CA3DC3DA79
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 02:46:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1CE9C4706C
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 04:50:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13AA2870D9;
-	Tue, 16 Jan 2024 03:46:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E751D87559;
+	Tue, 16 Jan 2024 05:50:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UsPra2RB";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="njb3A/Bb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FAE2876D0; Tue, 16 Jan 2024 03:46:05 +0100 (CET)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3D38887708; Tue, 16 Jan 2024 05:50:55 +0100 (CET)
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com
+ (mail-bn1nam02on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2407::601])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2EB0870D9
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 03:46:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AD533870B4
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 05:50:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1d51bf8a7dcso20237905ad.1
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 18:46:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705373159; x=1705977959; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=bubRev/bGJN2SP8lhGWb/c/yYTps1Zxijb68yFX/jk8=;
- b=UsPra2RBoEpIAhjCBlrtnq2mu86K9du3h5DrJzejwEX9qWoLgquphLrO8i/ZWNZ/CS
- G0FZYHhE2h/L9rhBuLxDsfMtwt44pPZ45HeSeyhlm/zMCsWxaQJxB7J9lzsnpb7d5Fw+
- r/w82MyzuNpkPPVUzUN8FwQzkqiGMbEjPPuPP+VS7lFwVUCekr7/66MfLk+iZykxT1vy
- of106kaITLcU+igdxA35Ylu8Fr3lRK8NrEur847/DTeGnFRtKHal7oKfPnvYF6Z+Amwp
- J7u3KosRaKlXleIvVUJoBQXkwqXid+64hbSk/YpEIhK8QlUwEZEKe/Jnv9ofT+6UoGTm
- P/Lg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705373159; x=1705977959;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bubRev/bGJN2SP8lhGWb/c/yYTps1Zxijb68yFX/jk8=;
- b=dGc1xIkU+rT1iv0JOmDCKWTnwEr1ygmYDDuT0it3jfch+8TcGLfvpzcs9VjUGUVc/p
- lcX56VNhtPSDiRYTD3DcLABxQvFawMS5dB/qUNPEhBkfMwEmtaSx1s/YFuTQIT0F5T44
- AVYf3ebEoyCf641rb8nIVJn6kLVTahldlyXBVRs1n0ft0n6H7Gb5j8kez2pIxVKpWt//
- 4kt3Q/HjZwH9MZUNTUgAHRCv4n+3aUTOE7P6MMc3ASoa01Mr7mccB4YC+kOnb1jRC5R5
- pbT1rxxBeq6xfbfs581ojkFHBobKJlFnjeHbQZTyBdQpFxOynpfwnVa81/KXR7mUUSEj
- troA==
-X-Gm-Message-State: AOJu0YwyaifjMYtGfTFPwl7iSavIIvVf9pso6s3zaCX6cQC/3NmepVIS
- 0LPE3w08UzlWvgGjM8pbyD4=
-X-Google-Smtp-Source: AGHT+IGBF6B+gT6O1FLV64tziCXqOZYVHukHyVyXKbNwo5AT6FsGUgAv3F81f2Lprp0w3+47DCLPMg==
-X-Received: by 2002:a17:902:e803:b0:1d4:b46d:81fe with SMTP id
- u3-20020a170902e80300b001d4b46d81femr13131496plg.3.1705373159165; 
- Mon, 15 Jan 2024 18:45:59 -0800 (PST)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:3ce7:bbce:335e:2c36])
- by smtp.gmail.com with ESMTPSA id
- kq14-20020a170903284e00b001d3ec25614bsm8301145plb.24.2024.01.15.18.45.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jan 2024 18:45:58 -0800 (PST)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: sbabic@denx.de,
-	u-boot@lists.denx.de
-Subject: Pull request: Please pull u-boot-imx-20240115
-Date: Mon, 15 Jan 2024 23:45:54 -0300
-Message-Id: <20240116024554.3316040-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=FxSOMUZpTVaaDG0ZZTsQJcCU8k5Id4BOKcGbQ80SKWSfD09WoLUIPtqnGidH4VD0LA+Icm/XPgjXlxvQVAteBd5gFUHZhxdklojeApcdSnEL7PxyYZeTDEMqSZFTnquph/V5m367mB0oodl1HhgOfvncm5QNgwlrE2lHdgDbfYZSSJF0fvMgNosU9aC03ErR6sMjvdtuartq/SiDXY0CO2GIPi5tF53VdA4IzgMKppQVQcsU9EevilvF8MkBjm23e3HAYMayWZUVX086F6MLBfYjTI3hEgKwyQQYPlT0qOlIE7qeftUJNFk4a1AOxsm5buJGdujuCH3dG19bQSHePw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=AY03mN3LK8mnZrnrleQ07We2hfKd3A4sCYerppahSa0=;
+ b=etiapJf5An2zqupFdUzPH9c/mbTRp16PpRjyOcLIuA7P1xGfG7tlhp0YoGo+FMaNvcA4s5j2bOjtADHMApGnrVkjm9KOeVpnOU7IotCu78Iu88yjnlHmRkv+LXJxjsXKFnvKZ71jT0v0mDCnCIZo6e4CVz/X95h/GabBY5hxyZbXLeV65elddn1J71F8bdpqa9oefPzMoaWOuAVYhLV+pX3wQFTlEZzmpxY4peg+v6pBC4BG+PuygooiUzeXg6IDRWrBXMNi9FY6wripVf+8u8WLZlJEFvYtd9muyE6bI3lDWvZu3LFtZSX/fl3wUuJ9xDZHBD1vXZSzHAgEA5CUTg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=AY03mN3LK8mnZrnrleQ07We2hfKd3A4sCYerppahSa0=;
+ b=njb3A/BbWvnPR74ytL3CApbsW47MFydUizYGPRR/tn3VfOm7VVUVYn80JJTXAtT0xCiPaLBesH2CD1VlCSHbfbuDer+vkmR8z00wZdZkBBDEUSC8rr/QjOE3Hj7qRLKlBBxm1MCf5zB4md33pFylc3CBPMH7309/nsnjqpcHRUc=
+Received: from PH0PR07CA0019.namprd07.prod.outlook.com (2603:10b6:510:5::24)
+ by CY5PR12MB6249.namprd12.prod.outlook.com (2603:10b6:930:23::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7181.29; Tue, 16 Jan
+ 2024 04:50:48 +0000
+Received: from SN1PEPF0002BA52.namprd03.prod.outlook.com
+ (2603:10b6:510:5:cafe::21) by PH0PR07CA0019.outlook.office365.com
+ (2603:10b6:510:5::24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7181.23 via Frontend
+ Transport; Tue, 16 Jan 2024 04:50:48 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ SN1PEPF0002BA52.mail.protection.outlook.com (10.167.242.75) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7202.16 via Frontend Transport; Tue, 16 Jan 2024 04:50:47 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Mon, 15 Jan
+ 2024 22:50:42 -0600
+Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34 via Frontend
+ Transport; Mon, 15 Jan 2024 22:50:35 -0600
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <git@xilinx.com>
+Subject: [PATCH v2 0/2] xilinx: Update the kaslr-seed property
+Date: Tue, 16 Jan 2024 10:20:21 +0530
+Message-ID: <20240116045023.580837-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002BA52:EE_|CY5PR12MB6249:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9e4cdecc-4b91-4f15-d55d-08dc164eb4f0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: wUCtFYZLdDoLZDAw7324gKLLB64dac5kTbidxqvHWIcDbtF4GEQIcTc1zVwkoS1kM3vvQ2vjcDFTQ6g5xXDR7O6RnGjgIM0cnv6wbd9amHO9r8bHW+mrouaMIG7PmSYZLgN1vTnNk+r+/yuF75QONNtZsAUGVHQUHNIZ0GOOLnzybqDL8vjKl4eD8RyUHfsWI6NTuiq8hb8t0Ck+4hoZ7yBMoclpmiqPK4e2BV1vbpZ8FC1TVqpwICYhcJIrVFm0XiH5eNsaWeXUMcbkM/d6pwX5B5wgyMlS6NNxwkylgqhylk6OEeNkd8l7L+tOWwlf2/ogtmu83Q+iOqvs/i2W8Rwcz5DRLs6E+Glz26okQXw2g/ZKqtF1V5+FBsbk1hhEcd7IWG/wS9m0ECHDrxyKZ89VbYbyqN3wt14co8WV/f9LW6W4ZVuM2RUOUDHmrsfMi9dcG+7kOQp4rodMls8WT/CEj3IACHruxVfIqSKgPWurmKCLQWuxllSQtG43ZRqVS2hix9S9y51poU/I6/i+1B/ROfO8fTVNU6aj801kNIrc25sw099aTREmevBs05xun+Y1l23JP65o/PCYfx2Ls41DnEjsNwu1vyorv4tAk1s+hEEAMwqjPIJs2Yue/IIZiksPLaAhYG4lRg6fLMoEDDs7KTs6JuvQtv8RI/wWFZC+LaguTTrR4AsQMs2vPueYjDaogpO+E2hfntG5Qot0bz5g8F56/yQTZyzk6G9xDczV9epZm4RGaVhkL6vKr3U+sOwMo1q2ATcmXJgG7NJbLQ==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(376002)(346002)(396003)(39860400002)(136003)(230922051799003)(82310400011)(64100799003)(186009)(451199024)(1800799012)(46966006)(40470700004)(36840700001)(47076005)(83380400001)(426003)(26005)(336012)(107886003)(2616005)(1076003)(82740400003)(36860700001)(5660300002)(4326008)(8676002)(8936002)(15650500001)(2906002)(4744005)(478600001)(6666004)(54906003)(70206006)(70586007)(6916009)(316002)(41300700001)(81166007)(356005)(36756003)(86362001)(40460700003)(40480700001)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jan 2024 04:50:47.8241 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9e4cdecc-4b91-4f15-d55d-08dc164eb4f0
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002BA52.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6249
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,81 +118,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Update the kaslr-seed property and enable the config CONFIG_OF_BOARD_SETUP.
 
-Please pull from u-boot-imx, thanks.
+Changes in v2:
+- Created macro for size variable.
+- Removed malloc and created array for rng buffer.
+- Added debug logs for all the apis.
 
-The following changes since commit 547d3dd28a46a18d59e00a153c8becca8d4e8cf9:
+Venkatesh Yadav Abbarapu (2):
+  xilinx: board: Update the kaslr-seed property
+  configs: zynqmp_kria: Enable CONFIG_OF_BOARD_SETUP
 
-  Merge branch '2024-01-12-assorted-fixes' (2024-01-12 08:34:50 -0500)
+ board/xilinx/common/board.c          | 50 ++++++++++++++++++++++++++++
+ configs/xilinx_zynqmp_kria_defconfig |  1 +
+ 2 files changed, 51 insertions(+)
 
-are available in the Git repository at:
+-- 
+2.25.1
 
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-20240115
-
-for you to fetch changes up to 662e7ef7f0e84114dd58d77ccdcfdf61d1a0df31:
-
-  arm: xea: Add support for boot image source descriptor in SPL (2024-01-15 10:55:42 -0300)
-
-u-boot-imx-20240115
--------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/19324
-
-----------------------------------------------------------------
-Anatolij Gustschin (1):
-      arm: xea: Add support for boot image source descriptor in SPL
-
-Fabio Estevam (3):
-      doc: imx93_var_som: Adjust the underline length
-      imx9: Select BINMAN at SoC level
-      imx8m: Select BINMAN at SoC level
-
-Lukasz Majewski (3):
-      defconfig: xea: Change default spi-nor memory bus to 2 (single binary)
-      arm: xea: Move XEA's environment variables from xea.h to xea.env
-      arm: config: Enable CRC8 support in SPL on imx287 XEA board
-
-Marek Vasut (2):
-      ARM: imx: Set stdio to serial on DH i.MX8M Plus DHCOM
-      ARM: imx: Set stdio to serial on Data Modul i.MX8M Mini/Plus eDM SBC
-
-Primoz Fiser (1):
-      imx: imx9: fixup thermal trips from fuses
-
-Yannic Moog (4):
-      Add support for phyGATE-Tauri-L-iMX8MM
-      doc: board: phytec: Add phyGATE-Tauri board documentation
-      board: phytec: MAINTAINERS: add missing phytec doc files
-      board: phytec: fix link error when disabling PHYTEC_SOM_DETECTION
-
- arch/arm/dts/Makefile                           |   1 +
- arch/arm/dts/imx8mm-phygate-tauri-l-u-boot.dtsi |  70 ++++
- arch/arm/dts/imx8mm-phygate-tauri-l.dts         | 489 ++++++++++++++++++++++++
- arch/arm/mach-imx/imx8m/Kconfig                 |  39 +-
- arch/arm/mach-imx/imx9/Kconfig                  |   3 +-
- arch/arm/mach-imx/imx9/soc.c                    |  45 +++
- board/liebherr/xea/boot_img_scr.h               |  27 ++
- board/liebherr/xea/xea.c                        |  85 ++++
- board/liebherr/xea/xea.env                      | 139 +++++++
- board/phytec/common/Makefile                    |   4 +-
- board/phytec/common/phytec_som_detection.c      |   2 -
- board/phytec/phycore_imx8mm/MAINTAINERS         |   6 +
- board/phytec/phycore_imx8mp/MAINTAINERS         |   1 +
- configs/imx28_xea_defconfig                     |   1 +
- configs/imx28_xea_sb_defconfig                  |   2 +-
- configs/imx8mm-phygate-tauri-l_defconfig        | 115 ++++++
- doc/board/phytec/imx8mm-phygate-tauri-l.rst     |  60 +++
- doc/board/phytec/index.rst                      |   1 +
- doc/board/variscite/imx93_var_som.rst           |   4 +-
- include/configs/imx8mm_data_modul_edm_sbc.h     |  11 +-
- include/configs/imx8mp_data_modul_edm_sbc.h     |   9 +-
- include/configs/imx8mp_dhcom_pdk2.h             |  17 +-
- include/configs/xea.h                           | 140 -------
- 23 files changed, 1070 insertions(+), 201 deletions(-)
- create mode 100644 arch/arm/dts/imx8mm-phygate-tauri-l-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx8mm-phygate-tauri-l.dts
- create mode 100644 board/liebherr/xea/boot_img_scr.h
- create mode 100644 board/liebherr/xea/xea.env
- create mode 100644 configs/imx8mm-phygate-tauri-l_defconfig
- create mode 100644 doc/board/phytec/imx8mm-phygate-tauri-l.rst
