@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06786C47077
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 18:44:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3212DC47077
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 22:05:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C6FC8796E;
-	Tue, 16 Jan 2024 19:44:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2E5058772E;
+	Tue, 16 Jan 2024 23:04:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="B9RcTXO7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rKZuN2gM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E17B08751B; Tue, 16 Jan 2024 19:44:29 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3FE06877B0; Tue, 16 Jan 2024 23:04:57 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65DF087978
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 19:44:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B83D086F80
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 23:04:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1705430665; x=1706035465; i=xypron.glpk@gmx.de;
- bh=a/3oms70OL7kv0UHS3FEzepfVf7CwfwfIb3BxGDA9vk=;
- h=X-UI-Sender-Class:Date:Subject:To:References:Cc:From:
- In-Reply-To;
- b=B9RcTXO7pSCE7Cija1tePfG+vNKsag3qSAmNoLIUTeOr6udGfyz05DWRG3jhFzmO
- Lugq4QIY/kFlxAoUmBsGh4OocGGDeKZ3GX0t3GMJXG3wyhbsBKgo6R9QPKcnfA1GZ
- Rjew3fyoO8v7lChL5FWRDaJkhsVotOXuuw+XIbFdgsfSooiPecOIOTnq7Io7op/1D
- j+ibmfxEkVPcdQ+S+vai+9Pg875HGnVloWZM+DrC60RM6EshUmmcwUiafVm44X+JA
- zs/3mW4oDBF9ogfnUSgKeIQuclY5cy0KGakOtqEbjDIQgKuvhFW8UPJbwkFbGY5qN
- toIjNeEQoTy4ipFY9A==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mq2nK-1qlZnf3Itm-00n5g5; Tue, 16
- Jan 2024 19:44:25 +0100
-Message-ID: <ddc1e7d2-c70d-4a7d-884a-6a18db3ea1c5@gmx.de>
-Date: Tue, 16 Jan 2024 19:44:22 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-5ff6245c1deso3164847b3.1
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 14:04:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1705442693; x=1706047493; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=s8/1MUbydGXbhud+FRjdMg41aA89juLF0SaNcQ4/oMU=;
+ b=rKZuN2gMq5+Bn4Lwu2wLF9Th8V9lhlltBdscDseoUYCAOyVe1Xtfr6Sg35OPymgfVV
+ edallUSeodnRBlBQ4aI9k4QKg7jNonL2WYI/rgN+EaYeIcB13MVAis+L939r9o9YDY48
+ KOBsUeT7qL+Uxi0pdNsgj1gsHjCiT9PYTFzC4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705442693; x=1706047493;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=s8/1MUbydGXbhud+FRjdMg41aA89juLF0SaNcQ4/oMU=;
+ b=lQ1yjiuuJ9x6RfhJ32ypcsQpXI9S0+/ofw1bd2SuWtbM8F0R3KjCNQJ6sk1NTzCTWN
+ o1bT0UGhI8Ue8S0phf5JqbbobLTSKowsA3ElaZf7RdIh0CCfDxgvKbLiCtQXfxC/LlHW
+ ryVyVd/+QgjWJFgpMvf1A+8QWPpLmmB/EqzpIVtt4D52/w5Mq0UXvMv1fps4y3L+yDPa
+ PRPPk8390Z9ENikgILUuIi0J6UoRynqnkmBdGKqHkE+ZT5mxxOpGV3lluv9oqRfpPe2T
+ 7ZNEMJXUHMCgI2vJ5P0/DeLup/C67IrMDdKFrH9J5t6vk1jUDfaADjg3esqaAFgxvayd
+ g5XQ==
+X-Gm-Message-State: AOJu0YzAmOWgiico62d7mEH3niBNoX2qgWYRoQ0C1+/V6FO6HJsnFMPB
+ 1Rj/oBUQ2WaBXGnXuiaFCEp3RwsOMToJKQ==
+X-Google-Smtp-Source: AGHT+IG7pRfHM3c/dNGA3opIe8FGRnAdFN7GBYuelyRVAd5VXz2gWX3+F1HDsFl2KkhGgHgq8xznrg==
+X-Received: by 2002:a05:690c:805:b0:5ff:329c:299 with SMTP id
+ bx5-20020a05690c080500b005ff329c0299mr3207725ywb.78.1705442693230; 
+ Tue, 16 Jan 2024 14:04:53 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
+ [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
+ i17-20020a819111000000b005ff55dc76e9sm791729ywg.14.2024.01.16.14.04.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 16 Jan 2024 14:04:52 -0800 (PST)
+Date: Tue, 16 Jan 2024 17:04:50 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 5/5] test: unit test for smbios command
+Message-ID: <20240116220450.GA1204271@bill-the-cat>
+References: <20231223004429.247301-1-xypron.glpk@gmx.de>
+ <20231223004429.247301-6-xypron.glpk@gmx.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/4] efi_loader: rename BOOTEFI_BOOTMGR to EFI_BOOTMGR
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>
-References: <20240110011637.174710-1-takahiro.akashi@linaro.org>
- <20240110011637.174710-3-takahiro.akashi@linaro.org>
- <1c42a17d-1043-4449-93c2-9020c1ded71d@gmx.de> <ZaSDUrTQ2Z5N+gil@octopus>
- <d70d5134-1cc9-4d56-9aa3-499ed992584c@gmx.de> <ZaUFH3r9MdW+tHTv@octopus>
- <379beb70-c147-470d-ac45-ecc8c93a5f52@gmx.de> <ZaXfNy2V8y0N1o08@octopus>
-Content-Language: en-US, de-DE
-Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
- ilias.apalodimas@linaro.org
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <ZaXfNy2V8y0N1o08@octopus>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:t1LHKdLddLyvaiFpTsJ0yS8JRL3/9beh1EIWagx4UkQz+aMY4KD
- s5PadJJYjlzVAtTq+Z+yiVg9M2kSUf+xSVExDUyorK0GGhSd0gVAjIIqsp6YYvI4Hx0Ew+S
- eQiU7AdnT4W7GKz9nbShm/NKDVBnTUMuNhLq9y9p1RlN8VhtTCAlMXixtlwM0svpcc45S3e
- VmHBYCWreOXrmsYkdzDvQ==
-UI-OutboundReport: notjunk:1;M01:P0:AjQpCMhUxXE=;9cK1RcLDEYyrdM6w81m9dYIZL/Y
- QrtuGBBFRRc9514PnZD3GDF8NpKa0wdASfbYMAZ+CiYrOjm0X4yI4YDCDUeveG1loKZNLVbXv
- 3jSfJ6XZNODrq5BiL1rrjDjo8qcbwfKWu4OLyh8GI0tAAZxKGEGt2aWXRU64HSpNyjU584RsI
- zyszerzRbPtAg+FqRt+usj5pQO6QydJlPOogPsmy16qoPprzcFcrcc3v2sDNbkC7s/z/Kd/sF
- FA7XnIkbTLoYgU9hMX90dtuXajRZd1Cj6EuZXmDaWBC460RounKk8AfByIPXdzpqhLM3aorhX
- teQ5XvauBQpjk6tDZxoecCQqwK/0M6th5FS2b/AdsU6yxTio8FLCHs+TQ3x8F9LxFPxCwQ2t5
- t/GANySfKBoKsaNUIhh+eypnEQ51PpDRoi7vrXlmvNgnWOtwep2HP9YTmowGvKyRXi9loGiM9
- ZQO0IQvbGsvrnDp/IDb5+wLvmPGc1sqDhOwaM0V/sNONrZz94WRA8E7aXYIjemAwxjCsc/idE
- bToD+02m2+T7ZAnO/vbkhRzzfFj3T5JUl78qMeU/44arxqFEe68y1P3HoTAlRJY2BQxTKo9kQ
- 6jbEo9+mfkJ2qT+0ShmW9wLtZOY5Cqniu8AxT8BRD71xkHEKLZ52SMV+WlAU7yLOd698gN6vS
- Vu3/pqiVyv4gkSCK1FgazKDIGvQwvYmxrtU9ikMijfGSJFMur2oRxBeRhIFURLptynV37aWgS
- kHMVrlX5GbLUrlv2r14W2VEfNoxpKyUm8bY9W0sqxG8dVRFZ6mYZ5ZzsxCXoATlI3nTrJQWda
- PsEQ2EwHxaS/8GcQUfUaRIbkXgGerSqhIYqalJRsRZmQZj1HJAoZSwFOO2/swEQlME/rvlxnn
- cQ71sRQXkh8qO83GlKcKLBlo1EPsyJNLzU0BBkI+PGNQo80nT1S1cJ4FSlNoExCBeo1cnJsx7
- 4nMTTpf/RzlYcsIgrhtq9CHSsxo=
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="z+ynFSzzXmRPMumA"
+Content-Disposition: inline
+In-Reply-To: <20231223004429.247301-6-xypron.glpk@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,83 +93,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/16/24 02:43, AKASHI Takahiro wrote:
-> On Mon, Jan 15, 2024 at 03:16:22PM +0100, Heinrich Schuchardt wrote:
->> On 15.01.24 11:12, AKASHI Takahiro wrote:
->>> On Mon, Jan 15, 2024 at 09:34:51AM +0100, Heinrich Schuchardt wrote:
->>>> On 1/15/24 01:58, AKASHI Takahiro wrote:
->>>>> On Sun, Jan 14, 2024 at 01:46:45PM +0100, Heinrich Schuchardt wrote:
->>>>>> On 1/10/24 02:16, AKASHI Takahiro wrote:
->>>>>>> At this point, EFI boot manager interfaces is fully independent fr=
-om
->>>>>>> bootefi command. So just rename the configuration parameter.
->>>>>>>
->>>>>>> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
->>>>>>> Reviewed-by: Simon Glass <sjg@chromium.org>
->>>>>>
->>>>>> This patch breaks the 'bootefi hello' command in
->>>>>> qemu-riscv64_smode_defconfig and other QEMU defconfigs.
->>>>>
->>>>> What happened? Please elaborate details so that I can trace your iss=
-ue.
->>>>>
->>>>> On my side, I didn't see any problem with "bootefi hello" on qemu-ar=
-m64
->>>>> and moreover CI check (github pull request) didn't complain anything=
-.
->>>>
->>>> The failures are logged in
->>>> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/19302
->>>
->>> In the logs for qemu-arm64, qemu-risc64 and maybe others as well,
->>> I see the same error:
->>> --- ---
->>> ______________________________ test_efi_grub_net _____________________=
-__________
->>> test/py/tests/test_efi_loader.py:188: in test_efi_grub_net
->>>       addr =3D fetch_tftp_file(u_boot_console, 'env__efi_loader_grub_f=
-ile')
->>> test/py/tests/test_efi_loader.py:136: in fetch_tftp_file
->>>       assert expected_text in output
->>> E   assert 'Bytes transferred =3D 520192' in "*** ERROR: `serverip' no=
-t set"
->>> --- ---
->>>
->>> This seems to be the root cause and my commit will have nothing to do
->>> with the problem.
->>> Please check the test environment.
->>
->> You are looking at test_efi_grub_net. I referred to 'bootefi hello',
->> i.e. test_efi_helloworld_builtin:
->>
->>
->> ----------------------------- Captured stdout call
->> -----------------------------
->> =3D> bootefi hello
->>
->> =3D>
->>
->>
->> The command does not provide any output.
->
-> Ah, yeah, but
->
->>>
->>> -Takahiro Akashi
->>>
->>>> I have pushed the tag failed_20240114 to
->>>> https://source.denx.de/u-boot/custodians/u-boot-efi.git for analysis.
->
-> While I compiled this code and tried to run "bootefi hello",
-> I could not reproduce this issue, always seeing the right output
-> either on qemu-arm64 or sandbox64.
-> (I also invoked test_efi_loader/efi_helloworld_builtin locally,
-> but the test passed.)
-> So no clue.
 
-Please, rebase your patch set upon origin/master and retry the tests.
+--z+ynFSzzXmRPMumA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Best regards
+On Sat, Dec 23, 2023 at 01:44:29AM +0100, Heinrich Schuchardt wrote:
 
-Heinrich
+> Provide a unit test for the smbios command.
+>=20
+> Provide different test functions for QEMU, sandbox, and other systems.
+>=20
+> Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> ---
+>  test/py/tests/test_smbios.py | 47 ++++++++++++++++++++++++++++++++++++
+>  1 file changed, 47 insertions(+)
+>  create mode 100644 test/py/tests/test_smbios.py
+>=20
+> --
+> 2.43.0
+>=20
+> diff --git a/test/py/tests/test_smbios.py b/test/py/tests/test_smbios.py
+> new file mode 100644
+> index 0000000000..86d8d07539
+> --- /dev/null
+> +++ b/test/py/tests/test_smbios.py
+> @@ -0,0 +1,47 @@
+> +# SPDX-License-Identifier: GPL-2.0-or-later
+> +
+> +"""Test smbios command"""
+> +
+> +import pytest
+> +
+> +@pytest.mark.buildconfigspec('cmd_smbios')
+> +@pytest.mark.notbuildconfigspec('qfw_smbios')
+> +@pytest.mark.notbuildconfigspec('sandbox')
+> +def test_cmd_smbios(u_boot_console):
+> +    """Run the smbios command"""
+> +    output =3D u_boot_console.run_command('smbios')
+> +    assert 'DMI type 0,' in output
+> +    assert 'String 1: U-Boot' in output
+> +    assert 'DMI type 1,' in output
+> +    assert 'DMI type 2,' in output
+> +    assert 'DMI type 3,' in output
+> +    assert 'DMI type 4,' in output
+> +    assert 'DMI type 127,' in output
+> +
+> +@pytest.mark.buildconfigspec('cmd_smbios')
+> +@pytest.mark.buildconfigspec('qfw_smbios')
+> +@pytest.mark.notbuildconfigspec('sandbox')
+> +# TODO:
+> +# QEMU v8.2.0 lacks SMBIOS support for RISC-V
+> +# Once support is available in our Docker image we can remove the constr=
+aint.
+> +@pytest.mark.notbuildconfigspec('riscv')
+> +def test_cmd_smbios_qemu(u_boot_console):
+> +    """Run the smbios command on QEMU"""
+> +    output =3D u_boot_console.run_command('smbios')
+> +    assert 'DMI type 1,' in output
+> +    assert 'Manufacturer: QEMU' in output
+> +    assert 'DMI type 127,' in output
+> +
+> +@pytest.mark.buildconfigspec('cmd_smbios')
+> +@pytest.mark.buildconfigspec('sandbox')
+> +def test_cmd_smbios_sandbox(u_boot_console):
+> +    """Run the smbios command on the sandbox"""
+> +    output =3D u_boot_console.run_command('smbios')
+> +    assert 'DMI type 0,' in output
+> +    assert 'String 1: U-Boot' in output
+> +    assert 'DMI type 1,' in output
+> +    assert 'Manufacturer: sandbox' in output
+> +    assert 'DMI type 2,' in output
+> +    assert 'DMI type 3,' in output
+> +    assert 'DMI type 4,' in output
+> +    assert 'DMI type 127,' in output
 
+This fails on coreboot:
+https://source.denx.de/u-boot/u-boot/-/jobs/771654
+
+--=20
+Tom
+
+--z+ynFSzzXmRPMumA
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWm/X8ACgkQFHw5/5Y0
+tyy3PgwAlBpgtQqUOCs6UWSQvMYcPjZxRw+hbyeEn0pCpe8hdoHGcokEPUrpHrSb
+Bw4wIgvF6HBXxCCcD6B8odAJugsHqUpyli0wvX+MVg2WYiyabMcJ2wJNLWYh9T+J
+9bl6k0mjQ6zaF9SL1O0YBwaHI4nDWme6pDiLlVdwavV0SxBL3JsN7vXnZEjQpPFO
+2ZHU2uFc+zrxUNmYUAyszoVI4zfC883+i2NvhNTGJ5iIXXG4IRPrjb+BFZhAVRRf
+9pOs9MCHra7QGpvJfBawN+Yh9rqED8Cv2nbp1p8uGOhdZVbwSaBNK6qrRSaYNQDj
+zBdwHOzT6kP5X3AfvoSdmFBG0Fej/Yj01vIGQnP1TqKFhfDSmwARcVxDQoxQ6fVx
+yAR4dP+jrOawnY32L7Cgvf9dXIkdQTclskVbcfkqv7K/bEcjLwOpUDDZMTcRWtb9
+GvMYWLIoq8y/oaVbfDmXkOFboa3pQMsSBPypR+/aZ7DvugTu+blHZURXi/JKV4w8
+ohQV4oEw
+=30hz
+-----END PGP SIGNATURE-----
+
+--z+ynFSzzXmRPMumA--
