@@ -4,76 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 493FFC47077
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 14:55:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88999C47DA2
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 14:56:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73A8A8796E;
-	Tue, 16 Jan 2024 15:55:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F2CA38796E;
+	Tue, 16 Jan 2024 15:56:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UoXx0bGs";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X/ccRm/F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5076879A0; Tue, 16 Jan 2024 15:55:17 +0100 (CET)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id 6FE45879A0; Tue, 16 Jan 2024 15:56:53 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B76487078
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 15:55:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B9B287078
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 15:56:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-5f0c0ca5ef1so96803347b3.2
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 06:55:14 -0800 (PST)
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-5f254d1a6daso101409837b3.2
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 06:56:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705416914; x=1706021714; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1705417010; x=1706021810; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ckDj56g1IHS41679Eq/bP+N5g3VqiBu8P7zCE0IjftU=;
- b=UoXx0bGsDr8g+qI7Eo8UQxFSqma4XOCw7OPQUaqAFl//ZDnFRHAJ2ebR6Ws2miV427
- AKn5erd+1s/wEmYnrfI06Bf4iLHcUr56qG8CWfgS6J1djmEP2os/pU5zctDh2CRkCbc9
- hc8no6iDDUHNkxNQ+0dXP9Qvg/+B0+bAjVLPk=
+ bh=9Darfz4+Jcs8VyaDI5+CjGiDknbuqJMXNjXoPy84sK0=;
+ b=X/ccRm/FKQxcQsqO9OFPi063AJINIayS7D+ra8wppQ0x1rGiEUC7Q7qWNclLowJRQu
+ 8TezYN2oV6Sx4y3zShn1YezVpeSY0Hg3N3Ave+j9shJIkIT2Vwekwjyx3NgVOtc+yJ5q
+ Qo7hPhb7GWjMhk3ZxZFDH01r01hCv3PKqZew4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705416914; x=1706021714;
+ d=1e100.net; s=20230601; t=1705417010; x=1706021810;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ckDj56g1IHS41679Eq/bP+N5g3VqiBu8P7zCE0IjftU=;
- b=QnOQd+MhzjlJjOgfGingl5BEOkUzj/vO39Aj24nAYVgdmcblek7UvcVYE8x8bKqHcl
- jZyEG4XzwH3TflkXFppp9FSNbR2WXFie0Ej5Ldg67YZvdPAvvvCC4terD1nzo4WtxLTt
- 8dhnITFm+JdFTKl3lI+hEgzlGQf/DQ7K9quAxaOGthbD50DvLUKk5m8vzNjYMYDKHloB
- dPGKD/8svq94iBJJWQJezUFzJvYFAX50r8mvqgBvW3hJ4yEb1Jo/sbskQOXSY/mVZhdy
- yl/avjJcb5heUBIwGDG2hK/OlJsYAbg5VdKt220K60c6ZKakLkcnHiuGOtfrBZd0/WQv
- Gn6A==
-X-Gm-Message-State: AOJu0Yz5gNp8nbDPqll+0Gzmlmpz06xiWEDbnQBcZh9laiC2OQLos1D7
- 7UN9XzDLQQfw/pnRvLZ+zSw7B7TpTGGAGw==
-X-Google-Smtp-Source: AGHT+IGal1Admh0fAMyxS+LZfGcibNYTZ9yig0NpZR8TqNkLQBjN3BlMccm9esfknKuZ45Cwo0/KVQ==
-X-Received: by 2002:a81:b61e:0:b0:5ff:52db:48c3 with SMTP id
- u30-20020a81b61e000000b005ff52db48c3mr859100ywh.85.1705416913609; 
- Tue, 16 Jan 2024 06:55:13 -0800 (PST)
+ bh=9Darfz4+Jcs8VyaDI5+CjGiDknbuqJMXNjXoPy84sK0=;
+ b=GXxMMK+ncEhq8Oz2Iry6DPUeMJ2p/OKluuPwQ7oSEykzuNCpa4BAJJK7kzozXIMiZX
+ jbdrc4autj69ZPxvP/ungDgwbF175VHBmiBL42mOH+TQucICtXvOOHNv8eWMw3KKKZXF
+ sLMeXfYmWpVuxcRgAcprL214kYlptNEJyY4nlXuwSL3tZQpWaZADmhqh0VfbIAHz1f2K
+ 20Ed9aCw12TlUE6YDQzOTMw0XXdADgl1rKZUFptOdS51CnXvg0VOt73OrLf4umWE171x
+ HPPGtfXgCTaAEK42eMnyCDsjQa6DPJwltDUH+Y45b3YrSW3Ozi9K1dKkICMuoEq9NWXp
+ N8wg==
+X-Gm-Message-State: AOJu0YytMgLG4AccdOfJLwHu5PHCB1HDN5a3uH759T7oes9UJfm6yXfm
+ BatsJijaJjrAbjlgzjwFyP73CioY/1HPKw==
+X-Google-Smtp-Source: AGHT+IHL7nZ3DrINE6UWEQ9Pjtcn1g1Fm5zuVFvfHKHuRd+MxXxeP0FwS1v7zBLCceJpg4YZQSSyLw==
+X-Received: by 2002:a25:1f42:0:b0:dbf:6c75:b5a9 with SMTP id
+ f63-20020a251f42000000b00dbf6c75b5a9mr2423511ybf.86.1705417010034; 
+ Tue, 16 Jan 2024 06:56:50 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- r200-20020a819ad1000000b005ff42feb3e3sm986797ywg.69.2024.01.16.06.55.12
+ d1-20020a25eb01000000b00dbf23ca7d82sm4279728ybs.63.2024.01.16.06.56.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jan 2024 06:55:12 -0800 (PST)
-Date: Tue, 16 Jan 2024 09:55:10 -0500
+ Tue, 16 Jan 2024 06:56:49 -0800 (PST)
+Date: Tue, 16 Jan 2024 09:56:47 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Wadim Egorov <w.egorov@phytec.de>
-Cc: u-boot@lists.denx.de, nm@ti.com, upstream@lists.phytec.de
-Subject: Re: [Upstream] [PATCH v4 0/2] *** Add support for phyCORE-AM62x ***
-Message-ID: <20240116145510.GB12635@bill-the-cat>
-References: <20231220091811.80373-1-w.egorov@phytec.de>
- <a6dda694-7451-4725-8fd7-bffb7498522b@phytec.de>
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
+ jwerner@chromium.org, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Kevin Chen <kevin_chen@aspeedtech.com>,
+ Sean Anderson <sean.anderson@seco.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Shiji Yang <yangshiji66@outlook.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Samuel Holland <samuel@sholland.org>
+Subject: Re: [PATCH v5 8/8] fdt: get FDT from bloblist
+Message-ID: <20240116145647.GC12635@bill-the-cat>
+References: <20240112213337.185460-1-raymond.mao@linaro.org>
+ <20240112213337.185460-9-raymond.mao@linaro.org>
+ <20240113152732.GH1610741@bill-the-cat>
+ <CAEfUkU+fDjfJ02Pjyeock=MhV-SUU0raw8uSvfAi6mwxq_R=xA@mail.gmail.com>
+ <CAEfUkU+xJ+Zwyer-2fo=EtfcELYw4Gw0QNM9pd1PuNYk-RXf3g@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7Qem8ozS5irNN55y"
+ protocol="application/pgp-signature"; boundary="b9US/ieZ3d1ROTvt"
 Content-Disposition: inline
-In-Reply-To: <a6dda694-7451-4725-8fd7-bffb7498522b@phytec.de>
+In-Reply-To: <CAEfUkU+xJ+Zwyer-2fo=EtfcELYw4Gw0QNM9pd1PuNYk-RXf3g@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,105 +107,77 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---7Qem8ozS5irNN55y
+--b9US/ieZ3d1ROTvt
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 16, 2024 at 06:54:57AM +0100, Wadim Egorov wrote:
+On Mon, Jan 15, 2024 at 12:08:26PM -0500, Raymond Mao wrote:
+> Hi Tom,
+>=20
+> On Mon, 15 Jan 2024 at 09:57, Raymond Mao <raymond.mao@linaro.org> wrote:
+>=20
+> > Hi Tom,
+> >
+> > On Sat, 13 Jan 2024 at 10:27, Tom Rini <trini@konsulko.com> wrote:
+> >
+> >> On Fri, Jan 12, 2024 at 01:33:34PM -0800, Raymond Mao wrote:
+> >>
+> >> > Get device tree from a bloblist if it exists.
+> >> > If not, fallback to traditional way.
+> >> >
+> >> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> >> > ---
+> >> > Changes in v2
+> >> > - Refactor of board_fdt_blob_setup().
+> >> > Changes in v4
+> >> > - Move the logics from board custom function to fdt library.
+> >> > Changes in V5
+> >> > - Rebase the changes on top of master.
+> >> >
+> >> >  lib/fdtdec.c | 18 +++++++++---------
+> >> >  1 file changed, 9 insertions(+), 9 deletions(-)
+> >>
+> >> Why was this just not dropped after:
+> >> commit 70fe23859437ffe4efe0793423937d8b78ebf9d6
+> >>
+> > In commit 70fe23859437ffe4efe0793423937d8b78ebf9d6, the FDT from blobli=
+st
+> > is always overridden when OF_BOARD is enabled (OF_BOARD is enabled when
+> > OF_HAS_PRIOR_STAGE is on). I think this is not what we want.
+> > The FDT from the bloblist passed from the previous stage should be the
+> > default setting.
+> >
+> > If we want to build with OF_HAS_PRIOR_STAGE=3Dy and without OF_BOARD to
+> avoid the
+> FDT from bloblist not being overridden,
+> `imply OF_HAS_PRIOR_STAGE` needs to be dropped from Kconfig for ARCH_QEMU,
+> otherwise check-of.sh will always complain.
+> Do you mind me adding a patch to arch/arm/Kconfig? And then we can drop
+> [PATCH v5 8/8].
 
-> Hello,
->=20
-> is there something missing in this series for it to be applied?
-> I would like to add support for a 2nd k3/am64x board based on this. So it
-> would be nice to know if I can do it the same way or should wait for more=
- k3
-> changes to come in first?
-
-Yes, sorry, I'll pick this up soon.
-
->=20
-> Regards,
-> Wadim
->=20
-> Am 20.12.23 um 10:18 schrieb Wadim Egorov:
-> > v4:
-> >    - Rebase on current next
-> >    - Drop schema file overrides from binman
-> >=20
-> > v3: https://lists.denx.de/pipermail/u-boot/2023-December/539779.html
-> > v2: https://lists.denx.de/pipermail/u-boot/2023-November/538971.html
-> > v1: https://lists.denx.de/pipermail/u-boot/2023-October/535750.html
-> >=20
-> > Wadim Egorov (2):
-> >    board: phytec: am62x: Add PHYTEC phyCORE-AM62x SoM
-> >    doc: board: phytec: Add phyCORE-AM62x
-> >=20
-> >   arch/arm/dts/Makefile                         |    4 +-
-> >   .../arm/dts/k3-am62-phycore-som-ddr4-2gb.dtsi | 2190 +++++++++++++++++
-> >   arch/arm/dts/k3-am62-phycore-som.dtsi         |  324 +++
-> >   .../k3-am625-phyboard-lyra-rdk-u-boot.dtsi    |  166 ++
-> >   arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts   |  266 ++
-> >   arch/arm/dts/k3-am625-phycore-som-binman.dtsi |  314 +++
-> >   arch/arm/dts/k3-am625-r5-phycore-som-2gb.dts  |  119 +
-> >   arch/arm/mach-k3/am62x/Kconfig                |   17 +
-> >   board/phytec/phycore_am62x/Kconfig            |   33 +
-> >   board/phytec/phycore_am62x/MAINTAINERS        |   15 +
-> >   board/phytec/phycore_am62x/Makefile           |    8 +
-> >   board/phytec/phycore_am62x/board-cfg.yaml     |   36 +
-> >   board/phytec/phycore_am62x/phycore-am62x.c    |   59 +
-> >   board/phytec/phycore_am62x/phycore_am62x.env  |   23 +
-> >   board/phytec/phycore_am62x/pm-cfg.yaml        |   12 +
-> >   board/phytec/phycore_am62x/rm-cfg.yaml        | 1088 ++++++++
-> >   board/phytec/phycore_am62x/sec-cfg.yaml       |  379 +++
-> >   configs/phycore_am62x_a53_defconfig           |  115 +
-> >   configs/phycore_am62x_r5_defconfig            |  130 +
-> >   doc/board/phytec/index.rst                    |    1 +
-> >   doc/board/phytec/phycore-am62x.rst            |  158 ++
-> >   doc/board/ti/k3.rst                           |    1 +
-> >   include/configs/phycore_am62x.h               |   15 +
-> >   23 files changed, 5472 insertions(+), 1 deletion(-)
-> >   create mode 100644 arch/arm/dts/k3-am62-phycore-som-ddr4-2gb.dtsi
-> >   create mode 100644 arch/arm/dts/k3-am62-phycore-som.dtsi
-> >   create mode 100644 arch/arm/dts/k3-am625-phyboard-lyra-rdk-u-boot.dtsi
-> >   create mode 100644 arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts
-> >   create mode 100644 arch/arm/dts/k3-am625-phycore-som-binman.dtsi
-> >   create mode 100644 arch/arm/dts/k3-am625-r5-phycore-som-2gb.dts
-> >   create mode 100644 board/phytec/phycore_am62x/Kconfig
-> >   create mode 100644 board/phytec/phycore_am62x/MAINTAINERS
-> >   create mode 100644 board/phytec/phycore_am62x/Makefile
-> >   create mode 100644 board/phytec/phycore_am62x/board-cfg.yaml
-> >   create mode 100644 board/phytec/phycore_am62x/phycore-am62x.c
-> >   create mode 100644 board/phytec/phycore_am62x/phycore_am62x.env
-> >   create mode 100644 board/phytec/phycore_am62x/pm-cfg.yaml
-> >   create mode 100644 board/phytec/phycore_am62x/rm-cfg.yaml
-> >   create mode 100644 board/phytec/phycore_am62x/sec-cfg.yaml
-> >   create mode 100644 configs/phycore_am62x_a53_defconfig
-> >   create mode 100644 configs/phycore_am62x_r5_defconfig
-> >   create mode 100644 doc/board/phytec/phycore-am62x.rst
-> >   create mode 100644 include/configs/phycore_am62x.h
-> >=20
->=20
+Platforms that are able to migrate towards using bloblist should disable
+OF_BOARD/OF_HAS_PRIOR_STAGE/etc and just use the bloblist, yes.
 
 --=20
 Tom
 
---7Qem8ozS5irNN55y
+--b9US/ieZ3d1ROTvt
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWmmMoACgkQFHw5/5Y0
-tyzQ6wv6A0h6MStem1EL9vOiOZpCKZw1PtX6JKJqEkJmayDFEIqJSQ+sBBQyItRx
-fP1B5pJqzvQUqyccxH7Ci2UXJKI5Iz+ejRlUTiN+9nohIujj1isqgXnmw4xurHu7
-VRtGKU3pydBFpo7r39hCIyZQlW06wCMv2VJwkVHSERi92TQrnlDcvWja6S5P/WDt
-VUc6H0dPDQ1WI8J6L1R/0wQyNkhHRhvkBvfPy0XwEiuBMtrBM1QaF+F6FnYFe9NK
-zVqi/oEQbUmfqmbiGCzFjAGnm4/7ywWbB859JcQCE8T+FK32ilvXEFSvsMcO8HkB
-VRs3XklYA0lrD8qmWwyMP9GvQ6coA58veHnyIW65XA43N9GYZj56jAWg3ueJa68n
-mEs0By1yrvIuDbCcDbG/8tMsITTWfaSXw4V8QAY6CZmBBilf60kjOwRKFbRwmEzF
-yBw1E2VDNHrjhVqtH/b4/IBie00VqszC/FNEo9hH1Cg2Zi5MSgZOErP788znKl2P
-eKoHGFQC
-=NY+w
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWmmS8ACgkQFHw5/5Y0
+tywN5AwAuphRYfI2fceIpJRVBe6g4MfF04P1w6s8lz82FjFMmBPxEJElQAux9tDR
+Y+K1IKdU8UXe6XvrD82S3fYDIR/df/s6gW0JSVAL14wv5RgsF5JANUtbsdaxfewJ
+8sndPtRGn30ioyvkQQelsIyxTpMqTaFeUufxF4mexj32rwx6fTKYiHdg++Gx4epl
+dyo7v14yhWWhHPME2//LTKURUVLO4BInGoe80kfuBYWhy3ex1PCpisEliCmY5rjO
+PKYxDN/VIEh/idcS5qyOZ/glgx+mMglYnBPaKXnfeSArnjPzCOLXrev3xkcgcZNy
+fk5YF8gpQkeg2hYnQZpDTd/SdLnK3i/URaC0RzG8GwXji7JBic2SLNlvh49xh1CD
+KOKURQ9v5+olFWcbTvE2xp2hEdCLPbVYgZhWU1Q33yRWtY3gcu2w8c8pfQRAqh41
+ct/7wuQI8Fe1TD4ohtrEYcdCUHHumY4g+4tbLGDE3pzDc59xkZlSGr2uA7nARVXF
+7K4y/Qf4
+=drOm
 -----END PGP SIGNATURE-----
 
---7Qem8ozS5irNN55y--
+--b9US/ieZ3d1ROTvt--
