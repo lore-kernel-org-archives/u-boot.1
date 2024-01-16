@@ -4,87 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9481EC3DA79
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 01:43:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CA3DC3DA79
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 02:46:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B84A875A0;
-	Tue, 16 Jan 2024 02:43:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 13AA2870D9;
+	Tue, 16 Jan 2024 03:46:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yhvr6YfB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UsPra2RB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30E5187856; Tue, 16 Jan 2024 02:43:31 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 7FAE2876D0; Tue, 16 Jan 2024 03:46:05 +0100 (CET)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 260A88783B
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 02:43:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E2EB0870D9
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 03:46:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-1d5c0d58909so3271575ad.0
- for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 17:43:25 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-1d51bf8a7dcso20237905ad.1
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 18:46:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705369403; x=1705974203; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vR5Zts9CFVo9aLRB7jsYReIBBSWs4uRLDwM+x0iZO4A=;
- b=yhvr6YfBf2sgcRt7CXBfoYqijvLKbGJ8UPuipkA9D67W7b1riey3KLz0/YKfrL0saO
- aYwT5ATg8Nw+/TArGxjgWAn2ZTsTX49k5rxIwK52Z+bzwcojgIArqXbd3UK8r5B24xVQ
- FTXXF9o6Qaeb1DCb4U7fBhnkw8JsMVGtUUlJhhwawrPkrgm6uahHzDt2kJ2pXoEVXOb0
- zakHNDiCyow7epcNHjzW/EAy9XJmn5YxrC2w+VarcYVreX04qoijWSlWoCxPXiq7ki3S
- Taky+hZFCJxCbrCbvW1pw4XlAUxsU+22RDuYOpSzkLvKUqqB9r0YRC8n5z3flNbU0Rq2
- HIUg==
+ d=gmail.com; s=20230601; t=1705373159; x=1705977959; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=bubRev/bGJN2SP8lhGWb/c/yYTps1Zxijb68yFX/jk8=;
+ b=UsPra2RBoEpIAhjCBlrtnq2mu86K9du3h5DrJzejwEX9qWoLgquphLrO8i/ZWNZ/CS
+ G0FZYHhE2h/L9rhBuLxDsfMtwt44pPZ45HeSeyhlm/zMCsWxaQJxB7J9lzsnpb7d5Fw+
+ r/w82MyzuNpkPPVUzUN8FwQzkqiGMbEjPPuPP+VS7lFwVUCekr7/66MfLk+iZykxT1vy
+ of106kaITLcU+igdxA35Ylu8Fr3lRK8NrEur847/DTeGnFRtKHal7oKfPnvYF6Z+Amwp
+ J7u3KosRaKlXleIvVUJoBQXkwqXid+64hbSk/YpEIhK8QlUwEZEKe/Jnv9ofT+6UoGTm
+ P/Lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705369403; x=1705974203;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=vR5Zts9CFVo9aLRB7jsYReIBBSWs4uRLDwM+x0iZO4A=;
- b=OHx1AGkKTIjaLVM7Vfu+lZyGB+WIoh8IE5z4QLNT+8iPGC+fHyca2ATPwkwEX2gOWa
- +lUxylLavLoKAKv76U7xnMEStVKOfIPCicwrX9ii1vYaM0jB3H554oanGCxW38WGqv2u
- tdfZpliNNKiMm2AaLV6nrT6rO+TrUxcGee4A33uhYUutKhrnIKapcaBiSTWz0eM93uZa
- kq2Fw99AJUS6cjCsa3QzKpF3FfUjTz3TkEwbEzPoQDH34jOF/bznI8+NhStUCXsCCvcT
- xvhzD0ZEC8K59FzxJzTHYGcY/r8TPypss4GjHvTIuNuRecDXF/rhWCC+YJO3lIKLh01n
- 8cOg==
-X-Gm-Message-State: AOJu0YywVvF9k302LTfquxfl+qHc0UDAEUgPz/rHTSQEejCK/CS9u0VN
- Pp7smThx7SH5D32zhQlXESD8Ov7z3En1EZTWd2XHnnTIEOKiXA==
-X-Google-Smtp-Source: AGHT+IEWlAJQYKZjoxltdKFAvo+gGMRaq/X/0TIfDKTLQmM2sHN7Uo44lC/WkeVi5xalHNeR9glQbw==
-X-Received: by 2002:a17:902:a50b:b0:1d5:bcc2:2bac with SMTP id
- s11-20020a170902a50b00b001d5bcc22bacmr8384981plq.1.1705369402896; 
- Mon, 15 Jan 2024 17:43:22 -0800 (PST)
-Received: from octopus ([2400:4050:c3e1:100:eb20:38d8:5fc5:1d49])
+ d=1e100.net; s=20230601; t=1705373159; x=1705977959;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bubRev/bGJN2SP8lhGWb/c/yYTps1Zxijb68yFX/jk8=;
+ b=dGc1xIkU+rT1iv0JOmDCKWTnwEr1ygmYDDuT0it3jfch+8TcGLfvpzcs9VjUGUVc/p
+ lcX56VNhtPSDiRYTD3DcLABxQvFawMS5dB/qUNPEhBkfMwEmtaSx1s/YFuTQIT0F5T44
+ AVYf3ebEoyCf641rb8nIVJn6kLVTahldlyXBVRs1n0ft0n6H7Gb5j8kez2pIxVKpWt//
+ 4kt3Q/HjZwH9MZUNTUgAHRCv4n+3aUTOE7P6MMc3ASoa01Mr7mccB4YC+kOnb1jRC5R5
+ pbT1rxxBeq6xfbfs581ojkFHBobKJlFnjeHbQZTyBdQpFxOynpfwnVa81/KXR7mUUSEj
+ troA==
+X-Gm-Message-State: AOJu0YwyaifjMYtGfTFPwl7iSavIIvVf9pso6s3zaCX6cQC/3NmepVIS
+ 0LPE3w08UzlWvgGjM8pbyD4=
+X-Google-Smtp-Source: AGHT+IGBF6B+gT6O1FLV64tziCXqOZYVHukHyVyXKbNwo5AT6FsGUgAv3F81f2Lprp0w3+47DCLPMg==
+X-Received: by 2002:a17:902:e803:b0:1d4:b46d:81fe with SMTP id
+ u3-20020a170902e80300b001d4b46d81femr13131496plg.3.1705373159165; 
+ Mon, 15 Jan 2024 18:45:59 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:3ce7:bbce:335e:2c36])
  by smtp.gmail.com with ESMTPSA id
- o12-20020a170902d4cc00b001d4e04b4938sm8195788plg.85.2024.01.15.17.43.21
+ kq14-20020a170903284e00b001d3ec25614bsm8301145plb.24.2024.01.15.18.45.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Jan 2024 17:43:22 -0800 (PST)
-Date: Tue, 16 Jan 2024 10:43:19 +0900
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
- ilias.apalodimas@linaro.org
-Subject: Re: [PATCH v4 2/4] efi_loader: rename BOOTEFI_BOOTMGR to EFI_BOOTMGR
-Message-ID: <ZaXfNy2V8y0N1o08@octopus>
-Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org
-References: <20240110011637.174710-1-takahiro.akashi@linaro.org>
- <20240110011637.174710-3-takahiro.akashi@linaro.org>
- <1c42a17d-1043-4449-93c2-9020c1ded71d@gmx.de>
- <ZaSDUrTQ2Z5N+gil@octopus>
- <d70d5134-1cc9-4d56-9aa3-499ed992584c@gmx.de>
- <ZaUFH3r9MdW+tHTv@octopus>
- <379beb70-c147-470d-ac45-ecc8c93a5f52@gmx.de>
+ Mon, 15 Jan 2024 18:45:58 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: sbabic@denx.de,
+	u-boot@lists.denx.de
+Subject: Pull request: Please pull u-boot-imx-20240115
+Date: Mon, 15 Jan 2024 23:45:54 -0300
+Message-Id: <20240116024554.3316040-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <379beb70-c147-470d-ac45-ecc8c93a5f52@gmx.de>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,81 +89,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jan 15, 2024 at 03:16:22PM +0100, Heinrich Schuchardt wrote:
-> On 15.01.24 11:12, AKASHI Takahiro wrote:
-> > On Mon, Jan 15, 2024 at 09:34:51AM +0100, Heinrich Schuchardt wrote:
-> > > On 1/15/24 01:58, AKASHI Takahiro wrote:
-> > > > On Sun, Jan 14, 2024 at 01:46:45PM +0100, Heinrich Schuchardt wrote:
-> > > > > On 1/10/24 02:16, AKASHI Takahiro wrote:
-> > > > > > At this point, EFI boot manager interfaces is fully independent from
-> > > > > > bootefi command. So just rename the configuration parameter.
-> > > > > > 
-> > > > > > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> > > > > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > > > > 
-> > > > > This patch breaks the 'bootefi hello' command in
-> > > > > qemu-riscv64_smode_defconfig and other QEMU defconfigs.
-> > > > 
-> > > > What happened? Please elaborate details so that I can trace your issue.
-> > > > 
-> > > > On my side, I didn't see any problem with "bootefi hello" on qemu-arm64
-> > > > and moreover CI check (github pull request) didn't complain anything.
-> > > 
-> > > The failures are logged in
-> > > https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/19302
-> > 
-> > In the logs for qemu-arm64, qemu-risc64 and maybe others as well,
-> > I see the same error:
-> > --- ---
-> > ______________________________ test_efi_grub_net _______________________________
-> > test/py/tests/test_efi_loader.py:188: in test_efi_grub_net
-> >      addr = fetch_tftp_file(u_boot_console, 'env__efi_loader_grub_file')
-> > test/py/tests/test_efi_loader.py:136: in fetch_tftp_file
-> >      assert expected_text in output
-> > E   assert 'Bytes transferred = 520192' in "*** ERROR: `serverip' not set"
-> > --- ---
-> > 
-> > This seems to be the root cause and my commit will have nothing to do
-> > with the problem.
-> > Please check the test environment.
-> 
-> You are looking at test_efi_grub_net. I referred to 'bootefi hello',
-> i.e. test_efi_helloworld_builtin:
-> 
-> 
-> ----------------------------- Captured stdout call
-> -----------------------------
-> => bootefi hello
-> 
-> =>
-> 
-> 
-> The command does not provide any output.
+Hi Tom,
 
-Ah, yeah, but
+Please pull from u-boot-imx, thanks.
 
-> Best regards
-> 
-> Heinrich
-> 
-> 
-> > 
-> > -Takahiro Akashi
-> > 
-> > > I have pushed the tag failed_20240114 to
-> > > https://source.denx.de/u-boot/custodians/u-boot-efi.git for analysis.
+The following changes since commit 547d3dd28a46a18d59e00a153c8becca8d4e8cf9:
 
-While I compiled this code and tried to run "bootefi hello",
-I could not reproduce this issue, always seeing the right output
-either on qemu-arm64 or sandbox64.
-(I also invoked test_efi_loader/efi_helloworld_builtin locally,
-but the test passed.)
-So no clue.
+  Merge branch '2024-01-12-assorted-fixes' (2024-01-12 08:34:50 -0500)
 
--Takahiro Akashi
+are available in the Git repository at:
 
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-20240115
 
-> > > Best regards
-> > > 
-> > > Heinrich
-> 
+for you to fetch changes up to 662e7ef7f0e84114dd58d77ccdcfdf61d1a0df31:
+
+  arm: xea: Add support for boot image source descriptor in SPL (2024-01-15 10:55:42 -0300)
+
+u-boot-imx-20240115
+-------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/19324
+
+----------------------------------------------------------------
+Anatolij Gustschin (1):
+      arm: xea: Add support for boot image source descriptor in SPL
+
+Fabio Estevam (3):
+      doc: imx93_var_som: Adjust the underline length
+      imx9: Select BINMAN at SoC level
+      imx8m: Select BINMAN at SoC level
+
+Lukasz Majewski (3):
+      defconfig: xea: Change default spi-nor memory bus to 2 (single binary)
+      arm: xea: Move XEA's environment variables from xea.h to xea.env
+      arm: config: Enable CRC8 support in SPL on imx287 XEA board
+
+Marek Vasut (2):
+      ARM: imx: Set stdio to serial on DH i.MX8M Plus DHCOM
+      ARM: imx: Set stdio to serial on Data Modul i.MX8M Mini/Plus eDM SBC
+
+Primoz Fiser (1):
+      imx: imx9: fixup thermal trips from fuses
+
+Yannic Moog (4):
+      Add support for phyGATE-Tauri-L-iMX8MM
+      doc: board: phytec: Add phyGATE-Tauri board documentation
+      board: phytec: MAINTAINERS: add missing phytec doc files
+      board: phytec: fix link error when disabling PHYTEC_SOM_DETECTION
+
+ arch/arm/dts/Makefile                           |   1 +
+ arch/arm/dts/imx8mm-phygate-tauri-l-u-boot.dtsi |  70 ++++
+ arch/arm/dts/imx8mm-phygate-tauri-l.dts         | 489 ++++++++++++++++++++++++
+ arch/arm/mach-imx/imx8m/Kconfig                 |  39 +-
+ arch/arm/mach-imx/imx9/Kconfig                  |   3 +-
+ arch/arm/mach-imx/imx9/soc.c                    |  45 +++
+ board/liebherr/xea/boot_img_scr.h               |  27 ++
+ board/liebherr/xea/xea.c                        |  85 ++++
+ board/liebherr/xea/xea.env                      | 139 +++++++
+ board/phytec/common/Makefile                    |   4 +-
+ board/phytec/common/phytec_som_detection.c      |   2 -
+ board/phytec/phycore_imx8mm/MAINTAINERS         |   6 +
+ board/phytec/phycore_imx8mp/MAINTAINERS         |   1 +
+ configs/imx28_xea_defconfig                     |   1 +
+ configs/imx28_xea_sb_defconfig                  |   2 +-
+ configs/imx8mm-phygate-tauri-l_defconfig        | 115 ++++++
+ doc/board/phytec/imx8mm-phygate-tauri-l.rst     |  60 +++
+ doc/board/phytec/index.rst                      |   1 +
+ doc/board/variscite/imx93_var_som.rst           |   4 +-
+ include/configs/imx8mm_data_modul_edm_sbc.h     |  11 +-
+ include/configs/imx8mp_data_modul_edm_sbc.h     |   9 +-
+ include/configs/imx8mp_dhcom_pdk2.h             |  17 +-
+ include/configs/xea.h                           | 140 -------
+ 23 files changed, 1070 insertions(+), 201 deletions(-)
+ create mode 100644 arch/arm/dts/imx8mm-phygate-tauri-l-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx8mm-phygate-tauri-l.dts
+ create mode 100644 board/liebherr/xea/boot_img_scr.h
+ create mode 100644 board/liebherr/xea/xea.env
+ create mode 100644 configs/imx8mm-phygate-tauri-l_defconfig
+ create mode 100644 doc/board/phytec/imx8mm-phygate-tauri-l.rst
