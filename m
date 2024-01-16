@@ -4,59 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0271C3DA79
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 01:01:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9481EC3DA79
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 01:43:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2161876F6;
-	Tue, 16 Jan 2024 02:01:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2B84A875A0;
+	Tue, 16 Jan 2024 02:43:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1705366866;
-	bh=pZX5nLaMv6cDJI7utqbMirb3TL+OYSJ/R2XaKBtBcms=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=HG9uyi00hB7q5V2Jixr2JoWrW73W19O5RV7yaJpl3z/q9ItFZ34woyl0SbOjbxMsM
-	 mJWYsuZZ1aY6LOF351nj0NdeM35xBKvvl1RdOtVdEk2sPWa3mAX5qrvy9V8vFRIs9t
-	 2mafzg+FfTgJFJGCzX4juf1DvC8LE+o3D2hXBDEznpbSGH6uWqxEvC/nOz0YtmDS31
-	 jk2AFdnbl6urhsyQ870AZEeXBNLaJQ2cS9HRqZ4KXRwNI4CyPSetykEHqJrPPiEIme
-	 Q6w1EX2HrWChCNvYw9l2r1QsrS4jsGWqxgX7NFgqouOUS6iBcQlkPFGgyKY2EZ+ZWO
-	 g0bD3G/mJIG1Q==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yhvr6YfB";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 30E5187856; Tue, 16 Jan 2024 02:43:31 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 723CC86308;
- Tue, 16 Jan 2024 02:01:03 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1705366864;
- bh=pZX5nLaMv6cDJI7utqbMirb3TL+OYSJ/R2XaKBtBcms=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ue4Hq5osQnzxu6aEL81E4YaSHLreZC9f9kq5FsWscdpPnqx/RzFJJXvWpfqk9GLtH
- jHL0fw4HDj19nfAr79Jf7LC1v7mh3ewTvVRSU9VNNkhZevvNBIDM/Nt1fhmcrXrmuZ
- LFK18emGq80dx+HTmZGn77HSXVbgBO1fEPdVV4WdxeDEYBKrNlZrrXMy14IUQG02Xu
- Zbo/xj1fPlOg0C/5g3wjKvR6j0ZFNrd7prwurcEDxdoeW0uyJY+EH33cbCzP6m4b/j
- 3VeMJOFWXYR8/n1OmOT0Y2vm9blHQOdz8++ImO5k1V47iupdg89hcConVd6dfLGv+n
- lp8OPMy6vD5fQ==
-Message-ID: <0da23033-3084-4cf0-9339-10cfa0ba5351@denx.de>
-Date: Tue, 16 Jan 2024 02:01:02 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 260A88783B
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 02:43:25 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1d5c0d58909so3271575ad.0
+ for <u-boot@lists.denx.de>; Mon, 15 Jan 2024 17:43:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1705369403; x=1705974203; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vR5Zts9CFVo9aLRB7jsYReIBBSWs4uRLDwM+x0iZO4A=;
+ b=yhvr6YfBf2sgcRt7CXBfoYqijvLKbGJ8UPuipkA9D67W7b1riey3KLz0/YKfrL0saO
+ aYwT5ATg8Nw+/TArGxjgWAn2ZTsTX49k5rxIwK52Z+bzwcojgIArqXbd3UK8r5B24xVQ
+ FTXXF9o6Qaeb1DCb4U7fBhnkw8JsMVGtUUlJhhwawrPkrgm6uahHzDt2kJ2pXoEVXOb0
+ zakHNDiCyow7epcNHjzW/EAy9XJmn5YxrC2w+VarcYVreX04qoijWSlWoCxPXiq7ki3S
+ Taky+hZFCJxCbrCbvW1pw4XlAUxsU+22RDuYOpSzkLvKUqqB9r0YRC8n5z3flNbU0Rq2
+ HIUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705369403; x=1705974203;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=vR5Zts9CFVo9aLRB7jsYReIBBSWs4uRLDwM+x0iZO4A=;
+ b=OHx1AGkKTIjaLVM7Vfu+lZyGB+WIoh8IE5z4QLNT+8iPGC+fHyca2ATPwkwEX2gOWa
+ +lUxylLavLoKAKv76U7xnMEStVKOfIPCicwrX9ii1vYaM0jB3H554oanGCxW38WGqv2u
+ tdfZpliNNKiMm2AaLV6nrT6rO+TrUxcGee4A33uhYUutKhrnIKapcaBiSTWz0eM93uZa
+ kq2Fw99AJUS6cjCsa3QzKpF3FfUjTz3TkEwbEzPoQDH34jOF/bznI8+NhStUCXsCCvcT
+ xvhzD0ZEC8K59FzxJzTHYGcY/r8TPypss4GjHvTIuNuRecDXF/rhWCC+YJO3lIKLh01n
+ 8cOg==
+X-Gm-Message-State: AOJu0YywVvF9k302LTfquxfl+qHc0UDAEUgPz/rHTSQEejCK/CS9u0VN
+ Pp7smThx7SH5D32zhQlXESD8Ov7z3En1EZTWd2XHnnTIEOKiXA==
+X-Google-Smtp-Source: AGHT+IEWlAJQYKZjoxltdKFAvo+gGMRaq/X/0TIfDKTLQmM2sHN7Uo44lC/WkeVi5xalHNeR9glQbw==
+X-Received: by 2002:a17:902:a50b:b0:1d5:bcc2:2bac with SMTP id
+ s11-20020a170902a50b00b001d5bcc22bacmr8384981plq.1.1705369402896; 
+ Mon, 15 Jan 2024 17:43:22 -0800 (PST)
+Received: from octopus ([2400:4050:c3e1:100:eb20:38d8:5fc5:1d49])
+ by smtp.gmail.com with ESMTPSA id
+ o12-20020a170902d4cc00b001d4e04b4938sm8195788plg.85.2024.01.15.17.43.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Jan 2024 17:43:22 -0800 (PST)
+Date: Tue, 16 Jan 2024 10:43:19 +0900
+From: AKASHI Takahiro <takahiro.akashi@linaro.org>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
+ ilias.apalodimas@linaro.org
+Subject: Re: [PATCH v4 2/4] efi_loader: rename BOOTEFI_BOOTMGR to EFI_BOOTMGR
+Message-ID: <ZaXfNy2V8y0N1o08@octopus>
+Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
+ trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org
+References: <20240110011637.174710-1-takahiro.akashi@linaro.org>
+ <20240110011637.174710-3-takahiro.akashi@linaro.org>
+ <1c42a17d-1043-4449-93c2-9020c1ded71d@gmx.de>
+ <ZaSDUrTQ2Z5N+gil@octopus>
+ <d70d5134-1cc9-4d56-9aa3-499ed992584c@gmx.de>
+ <ZaUFH3r9MdW+tHTv@octopus>
+ <379beb70-c147-470d-ac45-ecc8c93a5f52@gmx.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC][PATCH] ARM: imx: verdin-imx8mm: Set CAN oscillator
- frequency based on model
-Content-Language: en-US
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Stefano Babic <sbabic@denx.de>
-References: <20240113183350.176131-1-marex@denx.de>
- <20240115154420.GA31739@francesco-nb>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240115154420.GA31739@francesco-nb>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <379beb70-c147-470d-ac45-ecc8c93a5f52@gmx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,61 +101,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/15/24 16:44, Francesco Dolcini wrote:
-> On Sat, Jan 13, 2024 at 07:33:17PM +0100, Marek Vasut wrote:
->> The older i.MX8M Mini Verdin SoMs before rev. 1.1C came with 20 MHz SPI CAN
->> controller oscillator, the newer SoMs use 40 MHz oscillator. Handle both by
->> overriding the oscillator frequency just before booting the kernel.
->>
->> Signed-off-by: Marek Vasut <marex@denx.de>
->> ---
->> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
->> Cc: Fabio Estevam <festevam@gmail.com>
->> Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
->> Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>
->> Cc: Philippe Schenker <philippe.schenker@toradex.com>
+On Mon, Jan 15, 2024 at 03:16:22PM +0100, Heinrich Schuchardt wrote:
+> On 15.01.24 11:12, AKASHI Takahiro wrote:
+> > On Mon, Jan 15, 2024 at 09:34:51AM +0100, Heinrich Schuchardt wrote:
+> > > On 1/15/24 01:58, AKASHI Takahiro wrote:
+> > > > On Sun, Jan 14, 2024 at 01:46:45PM +0100, Heinrich Schuchardt wrote:
+> > > > > On 1/10/24 02:16, AKASHI Takahiro wrote:
+> > > > > > At this point, EFI boot manager interfaces is fully independent from
+> > > > > > bootefi command. So just rename the configuration parameter.
+> > > > > > 
+> > > > > > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> > > > > > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > > > > 
+> > > > > This patch breaks the 'bootefi hello' command in
+> > > > > qemu-riscv64_smode_defconfig and other QEMU defconfigs.
+> > > > 
+> > > > What happened? Please elaborate details so that I can trace your issue.
+> > > > 
+> > > > On my side, I didn't see any problem with "bootefi hello" on qemu-arm64
+> > > > and moreover CI check (github pull request) didn't complain anything.
+> > > 
+> > > The failures are logged in
+> > > https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/19302
+> > 
+> > In the logs for qemu-arm64, qemu-risc64 and maybe others as well,
+> > I see the same error:
+> > --- ---
+> > ______________________________ test_efi_grub_net _______________________________
+> > test/py/tests/test_efi_loader.py:188: in test_efi_grub_net
+> >      addr = fetch_tftp_file(u_boot_console, 'env__efi_loader_grub_file')
+> > test/py/tests/test_efi_loader.py:136: in fetch_tftp_file
+> >      assert expected_text in output
+> > E   assert 'Bytes transferred = 520192' in "*** ERROR: `serverip' not set"
+> > --- ---
+> > 
+> > This seems to be the root cause and my commit will have nothing to do
+> > with the problem.
+> > Please check the test environment.
 > 
-> Philippe is no longer in toradex, removed from cc list.
+> You are looking at test_efi_grub_net. I referred to 'bootefi hello',
+> i.e. test_efi_helloworld_builtin:
 > 
->> Cc: Stefano Babic <sbabic@denx.de>
->> ---
->>   board/toradex/verdin-imx8mm/verdin-imx8mm.c | 19 +++++++++++++++++++
->>   1 file changed, 19 insertions(+)
->>
->> diff --git a/board/toradex/verdin-imx8mm/verdin-imx8mm.c b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
->> index b2781b51d6a..8bc1a51eeb1 100644
->> --- a/board/toradex/verdin-imx8mm/verdin-imx8mm.c
->> +++ b/board/toradex/verdin-imx8mm/verdin-imx8mm.c
->> @@ -142,6 +142,25 @@ int board_phys_sdram_size(phys_size_t *size)
->>   #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
->>   int ft_board_setup(void *blob, struct bd_info *bd)
->>   {
->> +	const char *canoscpath = "/oscillator";
->> +	int canoscoff, freq, ret;
->> +
->> +	canoscoff = fdt_path_offset(blob, canoscpath);
->> +	if (canoscoff < 0)	/* No CAN oscillator found. */
->> +		goto exit;
->> +
->> +	if (tdx_hw_tag.ver_assembly < 2)        /* rev. A or B */
->> +		freq = 20000000;
->> +	else					/* rev. C or newer */
->> +		freq = 40000000;
 > 
-> So, the situation is more complex than what I thought initially.
+> ----------------------------- Captured stdout call
+> -----------------------------
+> => bootefi hello
 > 
-> The actual frequency of the oscillator depends on the whole
-> `struct toradex_hw`, you would need to check prodid, ver_major,
-> ver_minor and ver_assembly.
-> 	
-> In addition to that code should not expect `ver_assembly` to be an
-> increasing number, this is just a number that is matching the BOM.
+> =>
 > 
-> The actual `prodid` (PID4 in Toradex naming) that have the CAN
-> functionality are 0055 and 0059.
 > 
-> 0059, V1.1A and V1.1B, use a 20MHz oscillator
-> 0055, V1.1A, V1.1B, V1.1C and V1.1D, use a 20Mhz oscillator
+> The command does not provide any output.
 
-Do you happen to have a table of what was populated with which 
-oscillator, so I can fill all the 20 MHz parts in right away ?
+Ah, yeah, but
+
+> Best regards
+> 
+> Heinrich
+> 
+> 
+> > 
+> > -Takahiro Akashi
+> > 
+> > > I have pushed the tag failed_20240114 to
+> > > https://source.denx.de/u-boot/custodians/u-boot-efi.git for analysis.
+
+While I compiled this code and tried to run "bootefi hello",
+I could not reproduce this issue, always seeing the right output
+either on qemu-arm64 or sandbox64.
+(I also invoked test_efi_loader/efi_helloworld_builtin locally,
+but the test passed.)
+So no clue.
+
+-Takahiro Akashi
+
+
+> > > Best regards
+> > > 
+> > > Heinrich
+> 
