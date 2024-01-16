@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CFAEC47077
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 16:49:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C5C5C47077
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 16:49:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A97C8879E7;
-	Tue, 16 Jan 2024 17:49:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A2BBC879FD;
+	Tue, 16 Jan 2024 17:49:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZPNnPBPd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JPzmM8Zx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1747879E7; Tue, 16 Jan 2024 17:49:13 +0100 (CET)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id 42153879FE; Tue, 16 Jan 2024 17:49:18 +0100 (CET)
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7361187985
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 17:49:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BA4B1879EE
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 17:49:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-5fa52e173f7so66570117b3.3
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 08:49:10 -0800 (PST)
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-dc236729a2bso78034276.0
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 08:49:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705423749; x=1706028549; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1705423754; x=1706028554; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Migj71t+Wdexg9n8o0A3HH8rup6/oQMT7jgOv3/l8m8=;
- b=ZPNnPBPdWK052y8g/GrlSfEwMlrtnyvWszLFHIbfq3j1pb+maA9hq1aF3Xq/kqla3I
- BSUra494mtX5H9Qn5cXE5nsCHlR/LkqhYlZ2GIEMmhfwmVfbDG8qVMnh/HwH55UDY30/
- TXrIPPmpoDJ0gmLag4Z5RAawSJM4V0eXQL3yE=
+ bh=f12krigyrUJtsV1CGFcgLNlC2SqeYDJLWOdVcMdGbeg=;
+ b=JPzmM8Zxflz7j4SUeLX6Hht9Cv5nG1xR92gNZfJwYgZMnvjKXzJedLkqEDqvK8v1Lo
+ L1nm9jmw92rVZ5KdTj52KWHg8HkLQYiMnVQhZoMQyQBSsAtLRDwrKfXb5PTfFJ3Awy5+
+ N7kOFn8YCPEbgSk8B/ZqydkQB2yPnrz45oFMM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705423749; x=1706028549;
+ d=1e100.net; s=20230601; t=1705423754; x=1706028554;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Migj71t+Wdexg9n8o0A3HH8rup6/oQMT7jgOv3/l8m8=;
- b=GDf/VR4QaJ3z4dDIz8mIwLz7JYxcKwGyAI0tY+ZPmjeZl5mi7YbIHC/l0/vjpwPu3r
- svl1H5yypfVbp6TqTZTtAbmohT2TrL7qjXQeHEOKhU+5WYJKW0H+ybyowAJ4tgmnFFHF
- eE/YHOHf2gPLI9XPB6ZgbA6W63APBnAZM8Qf5SJufd06GZcjTIAlHy7n0G0mSgUoOh5Z
- ZD5IWT/EqnmLEDJ+Pd3EchCn4AhBg8ak6J225gMgqyitQwXJLNqMC7s5mzELYo82qlrA
- loXXxO92ZK+fpoLweiECs8T88mQM+D7tsLj+QRpgOo0D1N90TMKjOb8vAmlyzltErJOY
- vfyA==
-X-Gm-Message-State: AOJu0YyivyZOSg3SMXwGVLvVHVw3x6bJyy33fzkUeB6f5PYZO5f1uKFj
- aR/HlQpSPAxWuJfB1sgDzHxV6U9iadW+F/mGfFpqJCceX5c=
-X-Google-Smtp-Source: AGHT+IEzvxBTAParDLHParXxdwDRj8CsTQT7iZ7xUNcwn8gCch4AIaZ1zm8gTB5f1x/CuGP+fHWlLA==
-X-Received: by 2002:a05:690c:e0a:b0:5fb:a07d:bfc2 with SMTP id
- cp10-20020a05690c0e0a00b005fba07dbfc2mr5893162ywb.28.1705423749247; 
- Tue, 16 Jan 2024 08:49:09 -0800 (PST)
+ bh=f12krigyrUJtsV1CGFcgLNlC2SqeYDJLWOdVcMdGbeg=;
+ b=DIbnLgOjPTX1XU/6xDx2bnbyhQtalESiNGHPW9tK2SZ+zBaEG/daG6awPBEOHYf+se
+ xQs0C2cP56G9nRNd/phf2cDOCuicd7U4Tu9Td88LywcXNE9qXHorXyZp46WvPek/gsBo
+ jxxodT88X8IiF90sb/WBdWwYE2z9KD6A/xdBID2TT6Hqr2Ng/6Mz6MB/JwFLNCQMc5Ep
+ KeJlXm2CFZWnYyatX3z+cSt5/4lcyW3EZeLaO47M8ygHjiIP31NvwvOppXyt4tnf8hgt
+ 3H8YSLWMkqpRSfaJ8ffw5lfWjDfWxJQ1oDLAPfyTfIOanKybTfZlAwSye5GWNef6epHG
+ 4TQQ==
+X-Gm-Message-State: AOJu0YxtMWpLVHvY2Ecqixa5JBYaPXtKtm1ELkmooV5FN2zie8xexWf2
+ cTvjdx9DRpDy/rAAix89YkSQ9hqXvWUajQ==
+X-Google-Smtp-Source: AGHT+IE8AJRf+FbJpvALI0T1kuhQrgoo54SQO+34Gb1rJNVRO5NKEUcxZmpmYK/NlVhoJ9sRfLN/uQ==
+X-Received: by 2002:a5b:c4e:0:b0:dc2:207b:c903 with SMTP id
+ d14-20020a5b0c4e000000b00dc2207bc903mr1082090ybr.94.1705423754444; 
+ Tue, 16 Jan 2024 08:49:14 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- o8-20020a817308000000b005ff58f04043sm459286ywc.106.2024.01.16.08.49.07
+ 124-20020a251382000000b00dbf3dbedd69sm4474731ybt.53.2024.01.16.08.49.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jan 2024 08:49:08 -0800 (PST)
-Date: Tue, 16 Jan 2024 11:49:06 -0500
+ Tue, 16 Jan 2024 08:49:13 -0800 (PST)
+Date: Tue, 16 Jan 2024 11:49:12 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: sbabic@denx.de, u-boot@lists.denx.de
-Subject: Re: Pull request: Please pull u-boot-imx-20240115
-Message-ID: <20240116164906.GE12635@bill-the-cat>
-References: <20240116024554.3316040-1-festevam@gmail.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Konrad Dybcio <konrad.dybcio@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de
+Subject: Re: Please pull qcom-2024.04-rc1
+Message-ID: <20240116164912.GF12635@bill-the-cat>
+References: <20240116123343.1038689-2-caleb.connolly@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="SE5zktj0Z+kYkX4W"
+ protocol="application/pgp-signature"; boundary="Stg0vlQsdTonP5Q4"
 Content-Disposition: inline
-In-Reply-To: <20240116024554.3316040-1-festevam@gmail.com>
+In-Reply-To: <20240116123343.1038689-2-caleb.connolly@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,58 +92,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---SE5zktj0Z+kYkX4W
+--Stg0vlQsdTonP5Q4
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 15, 2024 at 11:45:54PM -0300, Fabio Estevam wrote:
+On Tue, Jan 16, 2024 at 12:33:18PM +0000, Caleb Connolly wrote:
 
 > Hi Tom,
 >=20
-> Please pull from u-boot-imx, thanks.
+> The following changes since commit 697758e7c81131da6db0e3b10515019fe3aca8=
+c9:
 >=20
-> The following changes since commit 547d3dd28a46a18d59e00a153c8becca8d4e8c=
-f9:
->=20
->   Merge branch '2024-01-12-assorted-fixes' (2024-01-12 08:34:50 -0500)
+>   Merge branch 'master-sync-dts-663' of https://source.denx.de/u-boot/cus=
+todians/u-boot-sh (2024-01-14 18:07:49 -0500)
 >=20
 > are available in the Git repository at:
 >=20
->   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
--20240115
+>   git@source.denx.de:/u-boot/custodians/u-boot-snapdragon.git tags/qcom-2=
+024.04-rc1
 >=20
-> for you to fetch changes up to 662e7ef7f0e84114dd58d77ccdcfdf61d1a0df31:
+> for you to fetch changes up to 4c3dfa1b8babf9fc0575ce08eed99f950d3bab84:
 >=20
->   arm: xea: Add support for boot image source descriptor in SPL (2024-01-=
-15 10:55:42 -0300)
->=20
-> u-boot-imx-20240115
-
-I would appreciate a brief summary I can paste in to the merge commit in
-the future please.
+>   sandbox_flattree: enable button support (2024-01-16 12:26:54 +0000)
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---SE5zktj0Z+kYkX4W
+--Stg0vlQsdTonP5Q4
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWms4IACgkQFHw5/5Y0
-tywCXgv/SRgoNSC0Gf1K6cRoQmZwUC7sMtm3R1exxte0F9d68A4ws+J0VtUcWoTP
-E9B5H2o9JLUU6xiVvFK6xfp8Fcu5XWCTkfoFFOoYBdoH8bezTyndxsWAB0ADmAlv
-3GYAfCahtVUwL+Jq8x5klAIOHNZhEBma83FLC4RVj+hbzddSr1VCGKsFD4ZVSThV
-zSkbkMu3EMNoneIdJB/eq3aNwxM3dVSeLlcM0CKhbfwRWbBQSs/0WXWd8tShWRpl
-DsWN2DGr0q3cipHP7R8t1anWyEaG2Sa2W7R6BDOqc1o75wWxkvhOQCS/tAFSgBaN
-H5p90qplv1T9ujMGFg74n5MOdYHz2FVjpL0yEqC8fEtv5YQAx/QHn7aEiPuAONIv
-tXltmbAr3+2J9nzRWZhQTi1VAvl9bkwKk+FhxMCSkr6s+bHpnqYzOYnPue0tcqF8
-eEe1gXt7wNOmwbbxFgYGUSVbahzAVs0FX/w53iGC3dlE8YppwPoBfqWQLHDOQetx
-coMVIO+s
-=0kv1
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWms4gACgkQFHw5/5Y0
+tyyr/wv+PoTOX+RZppKXCpBYu8HH7vM0DMoZGnvCoN+gtBMaeF5fjBXFrMsDFBSR
+OpCkG+XrPlLVPmBs4UHOryH/pDK0jOWWhnbaNp+WBS2FMppSrWYxE/LNZsCqxPL2
+/5iKWU10hkOOhUdPHCAmy11GeKsg/qhtxBcdEvalAm5jy2pWa7uu58aNlj94EU8+
+wcVYMLG5624FJ4UUxfaHCgTrMPvH/mUl6OSynf4GfIAuPnFxnZWkotRYTZYTQbCV
+3g84tNpsUzxgKjBY2SrGopzLKaih1KeEEjOk85i39sPhFhfy/NoxVr+CTfll1k+f
+aZn8XeyEYpVLboOZXGTB6TdTmOc7x3uQi7+Hj6qKMokJF0V7griB46kQkxibxc9A
+I8LzzbcTT6BNnt/wre5V++g3c2Cn5ffGIYRWR5hKSo5OnaOH1xZwhiEQNFmcrNjw
+u4Ydg6EEkwYdULd5dauyUogziLgSR5kra9/pTXLJZZ63g9tq/SvHvDq9W4gdRqVt
+npSaVQ0v
+=6P8s
 -----END PGP SIGNATURE-----
 
---SE5zktj0Z+kYkX4W--
+--Stg0vlQsdTonP5Q4--
