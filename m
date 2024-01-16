@@ -4,92 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88999C47DA2
-	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 14:56:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6AECC47077
+	for <u-boot@archiver.kernel.org>; Tue, 16 Jan 2024 16:13:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2CA38796E;
-	Tue, 16 Jan 2024 15:56:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C736386F80;
+	Tue, 16 Jan 2024 17:12:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X/ccRm/F";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="IqppP8tD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FE45879A0; Tue, 16 Jan 2024 15:56:53 +0100 (CET)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 76C2F86FB8; Tue, 16 Jan 2024 17:12:57 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B9B287078
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 15:56:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6254686564
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 17:12:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-5f254d1a6daso101409837b3.2
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 06:56:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705417010; x=1706021810; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=9Darfz4+Jcs8VyaDI5+CjGiDknbuqJMXNjXoPy84sK0=;
- b=X/ccRm/FKQxcQsqO9OFPi063AJINIayS7D+ra8wppQ0x1rGiEUC7Q7qWNclLowJRQu
- 8TezYN2oV6Sx4y3zShn1YezVpeSY0Hg3N3Ave+j9shJIkIT2Vwekwjyx3NgVOtc+yJ5q
- Qo7hPhb7GWjMhk3ZxZFDH01r01hCv3PKqZew4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705417010; x=1706021810;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9Darfz4+Jcs8VyaDI5+CjGiDknbuqJMXNjXoPy84sK0=;
- b=GXxMMK+ncEhq8Oz2Iry6DPUeMJ2p/OKluuPwQ7oSEykzuNCpa4BAJJK7kzozXIMiZX
- jbdrc4autj69ZPxvP/ungDgwbF175VHBmiBL42mOH+TQucICtXvOOHNv8eWMw3KKKZXF
- sLMeXfYmWpVuxcRgAcprL214kYlptNEJyY4nlXuwSL3tZQpWaZADmhqh0VfbIAHz1f2K
- 20Ed9aCw12TlUE6YDQzOTMw0XXdADgl1rKZUFptOdS51CnXvg0VOt73OrLf4umWE171x
- HPPGtfXgCTaAEK42eMnyCDsjQa6DPJwltDUH+Y45b3YrSW3Ozi9K1dKkICMuoEq9NWXp
- N8wg==
-X-Gm-Message-State: AOJu0YytMgLG4AccdOfJLwHu5PHCB1HDN5a3uH759T7oes9UJfm6yXfm
- BatsJijaJjrAbjlgzjwFyP73CioY/1HPKw==
-X-Google-Smtp-Source: AGHT+IHL7nZ3DrINE6UWEQ9Pjtcn1g1Fm5zuVFvfHKHuRd+MxXxeP0FwS1v7zBLCceJpg4YZQSSyLw==
-X-Received: by 2002:a25:1f42:0:b0:dbf:6c75:b5a9 with SMTP id
- f63-20020a251f42000000b00dbf6c75b5a9mr2423511ybf.86.1705417010034; 
- Tue, 16 Jan 2024 06:56:50 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- d1-20020a25eb01000000b00dbf23ca7d82sm4279728ybs.63.2024.01.16.06.56.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jan 2024 06:56:49 -0800 (PST)
-Date: Tue, 16 Jan 2024 09:56:47 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
- jwerner@chromium.org, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Kevin Chen <kevin_chen@aspeedtech.com>,
- Sean Anderson <sean.anderson@seco.com>,
- Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
- Devarsh Thakkar <devarsht@ti.com>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=1745c6cb32=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 40GAsV6d019271; Tue, 16 Jan 2024 17:12:38 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding:content-type; s=selector1; bh=tloMFgA
+ HPyYfitINC+LYlVu+a88XsqAMtS2i0WaKVbA=; b=IqppP8tD7WbUtlzh7RR39Q6
+ sAhT1mBMy2cud8EbTx8p9pYbsISoPN2yXQZeugiaHKTn/y3O8k4I5T6AwEHrJxtw
+ gpGepvua4DnezZgF1BEfSfxk6wtonlcEOHA+srdDYNu8Hc86ih/vGJekSHqpUdqB
+ 5THRJ66pquJy7j0uq63jngg12Mifzyauo1S/PEAHDW8DHUOoCesZLnulmjXrlN7k
+ r8TcY5qarazKVVxJXC4ovVQ1Khqtz4VBtRzkbq39GcHXmfCWytSAJMcdDvi/amAU
+ DPgkmJhnXMRs05ox2kRY94abu/BKmOsr2rW5PbXAleSAQePc4g0gqxqbDsXsGMQ=
+ =
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vkmfyfewf-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 16 Jan 2024 17:12:38 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2E9AF10002A;
+ Tue, 16 Jan 2024 17:12:36 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 21EB52896ED;
+ Tue, 16 Jan 2024 17:12:36 +0100 (CET)
+Received: from localhost (10.201.20.205) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 16 Jan
+ 2024 17:12:35 +0100
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ Bin Meng <bmeng@tinylab.org>, Ion Agorria <ion@agorria.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Shiji Yang <yangshiji66@outlook.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Samuel Holland <samuel@sholland.org>
-Subject: Re: [PATCH v5 8/8] fdt: get FDT from bloblist
-Message-ID: <20240116145647.GC12635@bill-the-cat>
-References: <20240112213337.185460-1-raymond.mao@linaro.org>
- <20240112213337.185460-9-raymond.mao@linaro.org>
- <20240113152732.GH1610741@bill-the-cat>
- <CAEfUkU+fDjfJ02Pjyeock=MhV-SUU0raw8uSvfAi6mwxq_R=xA@mail.gmail.com>
- <CAEfUkU+xJ+Zwyer-2fo=EtfcELYw4Gw0QNM9pd1PuNYk-RXf3g@mail.gmail.com>
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Simon Glass
+ <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>
+Subject: [PATCH] common: console: Fix print complete stdio device list
+Date: Tue, 16 Jan 2024 17:12:31 +0100
+Message-ID: <20240116161231.741794-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="b9US/ieZ3d1ROTvt"
-Content-Disposition: inline
-In-Reply-To: <CAEfUkU+xJ+Zwyer-2fo=EtfcELYw4Gw0QNM9pd1PuNYk-RXf3g@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.201.20.205]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-01-05_08,2024-01-05_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,78 +91,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+In case CONSOLE_MUX and SYS_CONSOLE_IS_IN_ENV are on and
+stdin or stdout or stderr are missing in environment, as fallback, get
+these either from stdio_devices[std] or stdio_devices[std]->name.
 
---b9US/ieZ3d1ROTvt
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixes: 6b343ab38d ("console: Print out complete stdio device list")
 
-On Mon, Jan 15, 2024 at 12:08:26PM -0500, Raymond Mao wrote:
-> Hi Tom,
->=20
-> On Mon, 15 Jan 2024 at 09:57, Raymond Mao <raymond.mao@linaro.org> wrote:
->=20
-> > Hi Tom,
-> >
-> > On Sat, 13 Jan 2024 at 10:27, Tom Rini <trini@konsulko.com> wrote:
-> >
-> >> On Fri, Jan 12, 2024 at 01:33:34PM -0800, Raymond Mao wrote:
-> >>
-> >> > Get device tree from a bloblist if it exists.
-> >> > If not, fallback to traditional way.
-> >> >
-> >> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> >> > ---
-> >> > Changes in v2
-> >> > - Refactor of board_fdt_blob_setup().
-> >> > Changes in v4
-> >> > - Move the logics from board custom function to fdt library.
-> >> > Changes in V5
-> >> > - Rebase the changes on top of master.
-> >> >
-> >> >  lib/fdtdec.c | 18 +++++++++---------
-> >> >  1 file changed, 9 insertions(+), 9 deletions(-)
-> >>
-> >> Why was this just not dropped after:
-> >> commit 70fe23859437ffe4efe0793423937d8b78ebf9d6
-> >>
-> > In commit 70fe23859437ffe4efe0793423937d8b78ebf9d6, the FDT from blobli=
-st
-> > is always overridden when OF_BOARD is enabled (OF_BOARD is enabled when
-> > OF_HAS_PRIOR_STAGE is on). I think this is not what we want.
-> > The FDT from the bloblist passed from the previous stage should be the
-> > default setting.
-> >
-> > If we want to build with OF_HAS_PRIOR_STAGE=3Dy and without OF_BOARD to
-> avoid the
-> FDT from bloblist not being overridden,
-> `imply OF_HAS_PRIOR_STAGE` needs to be dropped from Kconfig for ARCH_QEMU,
-> otherwise check-of.sh will always complain.
-> Do you mind me adding a patch to arch/arm/Kconfig? And then we can drop
-> [PATCH v5 8/8].
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
 
-Platforms that are able to migrate towards using bloblist should disable
-OF_BOARD/OF_HAS_PRIOR_STAGE/etc and just use the bloblist, yes.
+ common/console.c | 23 +++++++++++------------
+ 1 file changed, 11 insertions(+), 12 deletions(-)
 
---=20
-Tom
+diff --git a/common/console.c b/common/console.c
+index cad65891fc9..8bfcfce5643 100644
+--- a/common/console.c
++++ b/common/console.c
+@@ -1049,6 +1049,11 @@ int console_clear(void)
+ 	return 0;
+ }
+ 
++static char *get_stdio(const u8 std)
++{
++	return stdio_devices[std] ? stdio_devices[std]->name : "No devices available!";
++}
++
+ static void stdio_print_current_devices(void)
+ {
+ 	char *stdinname, *stdoutname, *stderrname;
+@@ -1060,19 +1065,13 @@ static void stdio_print_current_devices(void)
+ 		stdoutname = env_get("stdout");
+ 		stderrname = env_get("stderr");
+ 
+-		stdinname = stdinname ? : "No input devices available!";
+-		stdoutname = stdoutname ? : "No output devices available!";
+-		stderrname = stderrname ? : "No error devices available!";
++		stdinname = stdinname ? : get_stdio(stdin);
++		stdoutname = stdoutname ? : get_stdio(stdout);
++		stderrname = stderrname ? : get_stdio(stderr);
+ 	} else {
+-		stdinname = stdio_devices[stdin] ?
+-			stdio_devices[stdin]->name :
+-			"No input devices available!";
+-		stdoutname = stdio_devices[stdout] ?
+-			stdio_devices[stdout]->name :
+-			"No output devices available!";
+-		stderrname = stdio_devices[stderr] ?
+-			stdio_devices[stderr]->name :
+-			"No error devices available!";
++		stdinname = get_stdio(stdin);
++		stdoutname = get_stdio(stdout);
++		stderrname = get_stdio(stderr);
+ 	}
+ 
+ 	/* Print information */
+-- 
+2.25.1
 
---b9US/ieZ3d1ROTvt
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWmmS8ACgkQFHw5/5Y0
-tywN5AwAuphRYfI2fceIpJRVBe6g4MfF04P1w6s8lz82FjFMmBPxEJElQAux9tDR
-Y+K1IKdU8UXe6XvrD82S3fYDIR/df/s6gW0JSVAL14wv5RgsF5JANUtbsdaxfewJ
-8sndPtRGn30ioyvkQQelsIyxTpMqTaFeUufxF4mexj32rwx6fTKYiHdg++Gx4epl
-dyo7v14yhWWhHPME2//LTKURUVLO4BInGoe80kfuBYWhy3ex1PCpisEliCmY5rjO
-PKYxDN/VIEh/idcS5qyOZ/glgx+mMglYnBPaKXnfeSArnjPzCOLXrev3xkcgcZNy
-fk5YF8gpQkeg2hYnQZpDTd/SdLnK3i/URaC0RzG8GwXji7JBic2SLNlvh49xh1CD
-KOKURQ9v5+olFWcbTvE2xp2hEdCLPbVYgZhWU1Q33yRWtY3gcu2w8c8pfQRAqh41
-ct/7wuQI8Fe1TD4ohtrEYcdCUHHumY4g+4tbLGDE3pzDc59xkZlSGr2uA7nARVXF
-7K4y/Qf4
-=drOm
------END PGP SIGNATURE-----
-
---b9US/ieZ3d1ROTvt--
