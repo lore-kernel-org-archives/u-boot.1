@@ -4,50 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AC7FC47258
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 18:00:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3610DC47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 18:49:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD9DC87BBB;
-	Wed, 17 Jan 2024 18:59:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 0C9B7878C6;
+	Wed, 17 Jan 2024 19:49:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KsPnBOHW";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D7F587947; Wed, 17 Jan 2024 18:59:38 +0100 (CET)
-Received: from smtp-42af.mail.infomaniak.ch (smtp-42af.mail.infomaniak.ch
- [IPv6:2001:1600:3:17::42af])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8A2C8878DA; Wed, 17 Jan 2024 19:49:17 +0100 (CET)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62109876FC
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 18:59:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7543286DC3
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 19:49:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (unknown [10.7.10.107])
- by smtp-2-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TFYYN00dPzMqGc7;
- Wed, 17 Jan 2024 17:59:36 +0000 (UTC)
-Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4TFYYM1tY1z1Rc; Wed, 17 Jan 2024 18:59:35 +0100 (CET)
-From: Quentin Schulz <foss+uboot@0leil.net>
-To: Joe Hershberger <joe.hershberger@ni.com>,
- Klaus Goger <klaus.goger@theobroma-systems.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>
-Cc: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de,
- Heiko Stuebner <heiko@sntech.de>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Subject: [PATCH v4 6/6] rockchip: theobroma-systems: fix modified boot_targets
- detection
-Date: Wed, 17 Jan 2024 18:59:13 +0100
-Message-ID: <20240117-env_default_theobroma-v4-6-12019172b482@theobroma-systems.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240117-env_default_theobroma-v4-0-12019172b482@theobroma-systems.com>
-References: <20240117-env_default_theobroma-v4-0-12019172b482@theobroma-systems.com>
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-28bae84fc2eso2153115a91.1
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 10:49:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1705517354; x=1706122154; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ctSkJpVZQRM7jfOxofKKOWJBZP4TjejrZDt0gxGzp4M=;
+ b=KsPnBOHWb1k+U4d92WbFrIrcxS8d5gXFBpPxXjW89A60NC6CLUAk2NCllUBBtCAQ3X
+ 5+dhkbLNc6PJ0Kcr+bWINN1Qw3XjOuTtdyeVWs7q2DYrBTKUYh621Q5oTcn528m+p87T
+ JuYre7llFpRON/ZpcofYpjIVRPd8SwM3BKIhEFEqYyu0iynsr3JiKwH2E/fsEhhWVT9M
+ riYjfitX6ZT8X88mojF5nHThWDHDmQhISNYqzsZBBVKw4YPYuj5mwhhJpADXjob4Kr9F
+ mNPUKU97wllpSQ+Rf4A47Go6VVADe5nlXaSS+R88Xjp8biTmj7komhVj4lp/NKZQlNtx
+ aZ2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705517354; x=1706122154;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ctSkJpVZQRM7jfOxofKKOWJBZP4TjejrZDt0gxGzp4M=;
+ b=U1UUCWmPfJAgYQZ0gKKyoQpiMwJSFFMByAxn9W6WUeCfSOYvlZxUpwKhQLvUEe1Fvr
+ WKz33qHAMZrblbo/n0Zj7tOP9azn6GtsnZqvyI5PZWEkpWKsYbgzpUgfAnblv771JS6r
+ a2ZDv4/Ft4GzRdI2Qc7c8JeSHARO+Jvmk6J1z5R4ZVVAp59HVyo5FJ3LKPGaxzLExTS6
+ d7HJU8aXMi2uYPqdJP64MKQJ16oiKHUCnBK5rz5H47kwpdyusJBupVguDkY4tVTGFdWM
+ bSgnr0OWAt4/zTEQ4vAtk4e15XYEi4f1bHJj95P4kRWSd+H2Tx//BjbncxBaxLLUiXAl
+ +3/Q==
+X-Gm-Message-State: AOJu0Yz8V0rJmSVub+d2vlLp3lGBXY38o1lMTqv2j0In8HQP2d8aAhvi
+ /3t9GPLbJ9FwHBqC+sVyOZ0fnOBuuM674COZMkmh1UmZq2U=
+X-Google-Smtp-Source: AGHT+IHufdE8sSe3kj5RMYrumQ4BWWuI1Qv3TSkuAk6V3r7ek6sZ0WvebHjUIoe8yFmVeeVOYLuhii2OpGZW+OdfQL4=
+X-Received: by 2002:a17:90b:4d8e:b0:28e:8e5b:73fd with SMTP id
+ oj14-20020a17090b4d8e00b0028e8e5b73fdmr4149171pjb.4.1705517353609; Wed, 17
+ Jan 2024 10:49:13 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-X-Mailer: b4 0.12.4
-Content-Transfer-Encoding: 8bit
-X-Infomaniak-Routing: alpha
+References: <2dba1330181940c78b5ad47f18ee43fa@supermicro.com>
+ <CAOMZO5DTw2uU+uEmVLR9nbFkR4QPgmhuY9VUAz-sgg+GppMG9g@mail.gmail.com>
+ <0934648988c9444aaf85f2e3163c0f4b@supermicro.com>
+In-Reply-To: <0934648988c9444aaf85f2e3163c0f4b@supermicro.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 17 Jan 2024 15:49:01 -0300
+Message-ID: <CAOMZO5Cy8as7b_cup6J+PYbN-stkj4Vz2wsLB_1=NN3vx5SVWQ@mail.gmail.com>
+Subject: Re: Could you please help me in resolving the
+ "arch/arm/lib/vectors.S:87: Error: no such instruction: `b reset' ?"
+To: Liu Wang <liuw@supermicro.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,60 +89,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+On Wed, Jan 17, 2024 at 3:25=E2=80=AFPM Liu Wang <liuw@supermicro.com> wrot=
+e:
 
-U-Boot proper automatically modifies boot_targets to swap the order in
-which MMC storage media are used for standard boot based on which MMC
-storage medium was used to load U-Boot proper. This is however only done
-if the user has not changed it manually, therefore a check between the
-default and current value is done.
+> 2. You are right. I have not exported the tool chain.
+> Could you please share me a link to a readme in setting up the tool chain=
+ for Ubuntu cross build environment ?
 
-This used to work fine until the migration to standard boot where
-boot_targets value size in the default environment went above the 32
-characters that env_get_default function can return, thus resulting in a
-truncated variable.
+You can do like this:
 
-Therefore the check between default and current value would always fail.
+export ARCH=3Darm
+export CROSS_COMPILE=3D/usr/bin/arm-linux-gnueabihf-
 
-By using the newly added env_get_default_into function, a buffer of
-the appropriate size can be allocated on the stack to get the whole
-value of boot_targets in the default environment and thus fixing the
-check.
-
-Cc: Quentin Schulz <foss+uboot@0leil.net>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
-Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
----
- board/theobroma-systems/common/common.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
-
-diff --git a/board/theobroma-systems/common/common.c b/board/theobroma-systems/common/common.c
-index eb21d4c4550..864bcdd46f8 100644
---- a/board/theobroma-systems/common/common.c
-+++ b/board/theobroma-systems/common/common.c
-@@ -21,7 +21,9 @@ int setup_boottargets(void)
- {
- 	const char *boot_device =
- 		ofnode_read_chosen_string("u-boot,spl-boot-device");
--	char *env_default, *env;
-+	char env_default[sizeof(BOOT_TARGETS)];
-+	char *env;
-+	int ret;
- 
- 	if (!boot_device) {
- 		debug("%s: /chosen/u-boot,spl-boot-device not set\n",
-@@ -30,7 +32,9 @@ int setup_boottargets(void)
- 	}
- 	debug("%s: booted from %s\n", __func__, boot_device);
- 
--	env_default = env_get_default("boot_targets");
-+	ret = env_get_default_into("boot_targets", env_default, sizeof(env_default));
-+	if (ret < 0)
-+		env_default[0] = '\0';
- 	env = env_get("boot_targets");
- 	if (!env) {
- 		debug("%s: boot_targets does not exist\n", __func__);
-
--- 
-2.43.0
-
+make cse_ptjob_cb3_r102_defconfig
+make
