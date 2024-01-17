@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 893D8C47DA2
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 14:28:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34DABC47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 14:28:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1760E87BB3;
-	Wed, 17 Jan 2024 15:27:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A03A587BBA;
+	Wed, 17 Jan 2024 15:27:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ve+WE861";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rGPHG6KF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4857F87B9B; Wed, 17 Jan 2024 15:27:01 +0100 (CET)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
+ id B79CC87B9C; Wed, 17 Jan 2024 15:27:05 +0100 (CET)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A419087B66
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 15:26:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5341987B6E
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 15:27:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-5ff7953910cso1243067b3.1
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 06:26:58 -0800 (PST)
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-5edfcba97e3so117060567b3.2
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 06:27:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705501617; x=1706106417; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1705501622; x=1706106422; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=mjqJeS+pb/xk8MEIuUg9cgUE66XSPf0ZYZ3hJwI67GQ=;
- b=Ve+WE861umGNt3eEFfqRSFp92TDIWpDTUG39WyCIPZFoEnCE9NIdeJFuc/ikepI2F5
- C1xOW/yz89p1C3RPdoVVsBMxi9pTGHjqj9j9FQwmtW8JQi2JULmvKzXjvIbGEyPM8eKZ
- b9s/EqE3Cs+BKsc7UoaEzwzoeYXA2drwVDEss=
+ bh=suJWHQ+m6KbnzFLJTSP8uiWENLxjIRLzYmamcvb44Wk=;
+ b=rGPHG6KFMIgDqCI3aa+oXuJWgeMpTdqbh4sqjBZRWE4a2QueUtf5c62fvy4lhtoCI2
+ v8Hm14GqYsxOkdPd/kPgM/hS11wHX/I/H67zZf+F0j8UXfKBO0mVsmwThMODOBdFsBUH
+ NHBixHEhARE3IVDPWhoHR84HKxCI2Bcs4u4z4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705501617; x=1706106417;
+ d=1e100.net; s=20230601; t=1705501622; x=1706106422;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mjqJeS+pb/xk8MEIuUg9cgUE66XSPf0ZYZ3hJwI67GQ=;
- b=O4N+q0BhAudOGwpXDgd5uYqyvW0bWmkhpxS1/etSBh7NyhmOJ26YRmDpYML+jdh693
- h3n2QQyVj6JsDrfZBCPNH4yCjLoqZF2ZPRkGbw3P9xmy+RIPCh1XIRi+62re8whe6Xdf
- b2T+vywYYaMozbhSzkvTDvDzEQ1hbk4Y+hCZXgHoy63hxgSCL4oI3HlXEDsRxeu0ldRH
- RVr7iurJfuCQRmwN6wm6plZB5A1n9K3gT8xitpeX27yKkpsueZ0OaRT8ws3KaYt1mX/d
- qT6J/C2ghb6I/eIPyM29rTlyNdmSTG8fw8acN6z9e19SAllX/OiS9j8zrEiH7Sgyg9tg
- Pc0A==
-X-Gm-Message-State: AOJu0YzFxaNZy8LDzOp+DNg+2TXdIabSK1SFQEeF7+MsOdZ8TM1R6e2f
- TpeGqveo6tsGulcuVDYXFt8psG03gl5RC3rv9UBfQWf6t1GLL56DE+cTuAktT+4=
-X-Google-Smtp-Source: AGHT+IFOenAlDw2sGUmLTdQdc0JNtPvyNwMDdUnYq7/oWkw+s1546Qs4gsU+63hsBN+f4bbwfcp/Eg==
-X-Received: by 2002:a81:af02:0:b0:5ff:583c:6dab with SMTP id
- n2-20020a81af02000000b005ff583c6dabmr438312ywh.13.1705501617412; 
- Wed, 17 Jan 2024 06:26:57 -0800 (PST)
+ bh=suJWHQ+m6KbnzFLJTSP8uiWENLxjIRLzYmamcvb44Wk=;
+ b=keYipDONZFAjclW6GC8MmEhf0RTt/xus2OCxJj8kysNWYZm1rB2cpyEBXefZ3WoRXe
+ MmYXEgcStclwizCIbYY8x4ipRyQfdqLKqlnKpX5vJIHImHNjh2nB12GWaXPhCFH797FR
+ cQr8EeNfcP5qwB5iujabMt3nzTc8ttCerUN1WUQtS5iDjqjkly9AMr6hSLdG2nPRszVS
+ szhQAaEVha3w+cL3rygphAkDMzHsgIzZWBvX0J9uC2MvP0f6Yg/FM26jj15Kw5cM8zGj
+ P5NnDja1MVydH2sR6vpKTV7wBpNVyb6ALS8587ltFqHj1O2YLE/39u0xbr7iZn8eKNRG
+ crww==
+X-Gm-Message-State: AOJu0Yx87u2qKuAa3KSR3NqAm7vA1+jTevLWJDF1SeRNxInFjSArOjq5
+ J38lXbAKsN5idB7IGW8onWFpErmXMgzRqA==
+X-Google-Smtp-Source: AGHT+IGO0OBDY/cA3VYgsR5SAhK6ffUE4pFMsctHsOS0u783ynsPsBu4BauPEj+T6iH8dp1Cca7eaA==
+X-Received: by 2002:a81:9984:0:b0:5ef:78ad:b0b6 with SMTP id
+ q126-20020a819984000000b005ef78adb0b6mr7170363ywg.69.1705501622102; 
+ Wed, 17 Jan 2024 06:27:02 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- l9-20020a815709000000b005ff63349520sm818420ywb.46.2024.01.17.06.26.56
+ l13-20020a0de20d000000b005ff50fd9635sm1616400ywe.35.2024.01.17.06.27.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jan 2024 06:26:57 -0800 (PST)
-Date: Wed, 17 Jan 2024 09:26:55 -0500
+ Wed, 17 Jan 2024 06:27:01 -0800 (PST)
+Date: Wed, 17 Jan 2024 09:27:00 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.denx.de, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH v2 2/2] smbios: copy QEMU tables
-Message-ID: <20240117142655.GS12635@bill-the-cat>
-References: <20231223010334.248291-1-xypron.glpk@gmx.de>
- <20231223010334.248291-3-xypron.glpk@gmx.de>
+To: Neha Malcom Francis <n-francis@ti.com>
+Cc: sjg@chromium.org, u-boot@lists.denx.de, kamlesh@ti.com,
+ m-chawdhry@ti.com, afd@ti.com, u-kumar1@ti.com
+Subject: Re: [PATCH] arm: dts: k3-j721e-binman: Add support for HS-SE 2.0
+Message-ID: <20240117142700.GT12635@bill-the-cat>
+References: <20231220113433.1690312-1-n-francis@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="lR3veVifYHz+2ULz"
+ protocol="application/pgp-signature"; boundary="gF33H2BGmFzu+BeL"
 Content-Disposition: inline
-In-Reply-To: <20231223010334.248291-3-xypron.glpk@gmx.de>
+In-Reply-To: <20231220113433.1690312-1-n-francis@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,46 +92,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---lR3veVifYHz+2ULz
+--gF33H2BGmFzu+BeL
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Dec 23, 2023 at 02:03:34AM +0100, Heinrich Schuchardt wrote:
+On Wed, Dec 20, 2023 at 05:04:33PM +0530, Neha Malcom Francis wrote:
 
-> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Add support for J721E HS-SE 2.0 device. Make use of the existing
+> templates and override the phandles for sysfw.itb so that builds do not
+> fail.
 >=20
-> QEMU provides SMBIOS tables with detailed information. We should not try =
-to
-> replicate them in U-Boot.
->=20
-> If we want to inform about U-Boot, we can add a Firmware Inventory
-> Information (type 45) table in future.
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---lR3veVifYHz+2ULz
+--gF33H2BGmFzu+BeL
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWn468ACgkQFHw5/5Y0
-tyxxPAv+MWcvziTn93QHns/RwadkjcFi80bRkr/zLEeI2UDqMfYFkiAO0QxtB8kM
-cRXarHHOwBSb4BDToAtazEgPEeIUfXiTOOc2WszFxjBS32gSU0qBPse3epVRkuiz
-ouzekX/Q5pBeyC0xUBkgNA9DJ4xpZCb6R5aSt4zq60cE5+HX9u/ZHVYODRFdMpcM
-wvXBkxJ+wYiOvJ8srwdlFYEH6pVqmdcB3sBIz7jbblE0TkQsLqdC44csNU53EknL
-/TrNCb/QgTtTeMS6dgi08osbABxL/zT0LcFSPFoM1fsd+Ln1RO9JjTi34c5RxO6u
-UWMkoSFXWtId3QpIzw1xewjXvr8EaWxM6piU4EFN0T85BvKoZAWi2nRF/q1srfbz
-lUwiHdUiGItdzSqinI/H3tW7+Qcae0eLQKmjVsPpp5lcqVKzZz3mhlT8XVt4sII3
-BdV79G65Pg83iVVc+0Qpwj0rv2V+LtL+9C9AWNpeuJI2rvV6J5rATsmsrP6ndq1J
-pvUO1tIi
-=/N6p
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWn47QACgkQFHw5/5Y0
+tyxXtwwAt+q3AuAP4eP+vBBweMRhXmrFm1NJNLM8qJ5HAvZVQjCdwUjsCQoIatmx
+s12LZ0nrJBcfmFTys7QFK8VfE3+sbt443S+z0h2R0YnPtj0gLXOAJhb9lMFjZQTS
+yD45TL3eKwXTaB9KoFrtrS7hiJOZ4ztCbI899fOPBRLZX1ZJvhZpKVjrmffeyCg6
+e/oaIFUoS/8GPV9rjD0Im6lLYyetT10VCdMM++qqGBJrgk5fxynYjfAnVw5yv2ht
+rSM7jnScESyeZz3fyAvLjyaF6z6Fu3H4CRtTWDG1XWg0wHj46/10ZUjmyBU89fuc
+x/r9FIulvRF9zJDVaXHYq2q/XIecLxUOpvDG6FHlR570C+OgZqbWbDBVePojkNFB
+GK54M2k8KT8jYke5vae4e95TK0++lzTgsEn5Upu7qjlEPkBvztfBTYQfdTX8B2u5
+qHjajdSozrZtiywOybQ6Roe5pnknBP5QOHR04x80QX2wQT4vhMPYGoHeVOsT+QqW
+YSPptskC
+=57GO
 -----END PGP SIGNATURE-----
 
---lR3veVifYHz+2ULz--
+--gF33H2BGmFzu+BeL--
