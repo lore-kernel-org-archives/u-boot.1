@@ -4,110 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BBFCC47422
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 04:08:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E21AFC47422
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 04:39:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9714D8751B;
-	Wed, 17 Jan 2024 05:08:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id F290A87559;
+	Wed, 17 Jan 2024 05:39:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="qr654hxN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lFuDSQSt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD83B875FE; Wed, 17 Jan 2024 05:08:39 +0100 (CET)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2418::601])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B120387559; Wed, 17 Jan 2024 05:39:55 +0100 (CET)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95B0586F6F
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 05:08:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 321A6875FE
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 05:39:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=dFlJyHPl8AaNrvZNnTINYlv1yx/Z6JhkcmKFnsbiKx9TgrkzJvSgn9bsnhvOHI++/BT+Ptvp3iaVYzMEFDClZzyN5eaG8qoPZGUb2foOa5fOta28T6wGqYt6Cca9mBq2EjyP2Z0j/4j7EOeQoO208x8mocpEEU6245tq4fMfwqOw0hZeowyLdtlxMhT9UpKetdHWNnkKfJseGl07gmANc+piRWEQVRrqS8tg5iUZ7BqLaXZ7q9xA7uv7u4l4tmxNmEddmPrFUpRGYAxsaRlzfCkguw8BsnFmFHyV672/DelcvDvDqy2kDO8dHPuzt+kBb0IrSaBqs1CFrdoUjDo0QQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=O3EhA+FrKB3SRxeZvXiTfT8xtzHBdiGo15kLjPFO1C0=;
- b=iPTQRVBaKiM2NAQkIoF1yJUhQ5qcv4LwPJ4GV3KiG/RIEmlKgFynf1hOw3GsfoVYevBNhpQ1bcOlA1Fg4Pgv+PYMxjrOeDEy2qPICRo/eAwNDWbaux6zMamdaRP+wL/1pC5K/UIk6tPzArxYSIOnbbE0341AtEEO4mc3JycP0AzGtyOO9rRsVHcnkdj5zHLhUoeHnEW75E1My0UI9IKXkdfLcFVGDKJRI+Pwqu8emngv97QQ7gi8mBQpHT4TRDH+xJuBPTApx0mJ1H4qvbudz4HLdNvN46wotdbnwiz5SjaL/JZc6o8jb4hYqKruN8A32FhNUEe2yBoBrAvHJREgpQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=O3EhA+FrKB3SRxeZvXiTfT8xtzHBdiGo15kLjPFO1C0=;
- b=qr654hxN45T1Dl6qwXy793kq+ZRmalTOmzD/UZbO+NYYjcBzpeUD4ZTvlKdxd12cVMoIsZdxz0HqBGKBOO6SMwNBT4sBAV/Fs85a3KbpJz9EVtOU4IY2efXpUQDnXF56Lb3jtGPu/6iuAE7NPUj1mpCjK6Q7I+Q+m/8yHXGRnuU=
-Received: from SN7PR04CA0017.namprd04.prod.outlook.com (2603:10b6:806:f2::22)
- by SJ1PR12MB6362.namprd12.prod.outlook.com (2603:10b6:a03:454::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7202.23; Wed, 17 Jan
- 2024 04:08:33 +0000
-Received: from SA2PEPF000015CC.namprd03.prod.outlook.com
- (2603:10b6:806:f2:cafe::ee) by SN7PR04CA0017.outlook.office365.com
- (2603:10b6:806:f2::22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7202.23 via Frontend
- Transport; Wed, 17 Jan 2024 04:08:33 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SA2PEPF000015CC.mail.protection.outlook.com (10.167.241.202) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7202.16 via Frontend Transport; Wed, 17 Jan 2024 04:08:32 +0000
-Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Tue, 16 Jan
- 2024 22:08:32 -0600
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB08.amd.com
- (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32; Tue, 16 Jan
- 2024 20:08:30 -0800
-Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34 via Frontend
- Transport; Tue, 16 Jan 2024 22:08:29 -0600
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <dario.binacchi@amarulasolutions.com>, <michael@amarulasolutions.com>,
- <michal.simek@amd.com>, <git@xilinx.com>, Ashok Reddy Soma
- <ashok.reddy.soma@amd.com>
-Subject: [PATCH] mtd: nand: Print warning for unsupported ecc modes
-Date: Wed, 17 Jan 2024 09:38:22 +0530
-Message-ID: <20240117040822.1031992-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1d5ea64bbc1so2509005ad.0
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 20:39:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1705466391; x=1706071191; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=oW+x737jbjprx57Gkuw2tAmswLyQqi/9DFWlxBXABes=;
+ b=lFuDSQStyzGP3DEbM0c9M6erEUZ9BpaDRerbzHEbw1STTlTK5spO+Cnc/8iN7kgXT7
+ WR11xnFLRnIDZl8CvtKcUX6Wkb+BSMhKy/XOnpnX37Gw0ZHevPEEBmNnTHBk6XjAQ0Qs
+ Q1CQXQ4kyN6RGSr/mwDaAawP2S5QrY3ZmgTrL2WJOm2gF5tFUeP2nCr1J/GT54G7PSEI
+ we4bQhX78UNjDn4a2zn1tYYj4RfOQ8z3Q4W3jCZGzgkoV0ctbXxB9xHCFnEou/DdWhT5
+ v5V9Lh67DeiEvDZ/K2I4xd9L31sOoWCaNJ1UQHZV8de4ug4cfXGOkv55JKkFzBFY5Xv8
+ NeqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705466391; x=1706071191;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=oW+x737jbjprx57Gkuw2tAmswLyQqi/9DFWlxBXABes=;
+ b=a0nHzT4tYMutxELCY1hUk6arrwLqAeSGl2f+b/WctgSzyndBda183D0w7E2bCJeybk
+ eWTQQphM4CyWBt0GsuO/hgqDsc+T9lNgh+MwqjlU3kJ7JGUhhug5Zo2dNnFF8P65YQwo
+ q/vO5/kJCydLoDJYZWboEqddjUYesZURNHOgrKBb1KNtkbRqUZBvPav8FhLqg6bIF1dL
+ N0E+wODW+hTAYLokBCRG5XJHkAK/LX+eabR6N7BUSKhqpufHjr87fbccrRxdsVGCqVln
+ zQL7Ws/8xiHEl2Q6CprNKuNsYpXTK9g3FXwv8Io7E7BYQ1plp9yhRdjHZuHBoC4bYptY
+ xtwg==
+X-Gm-Message-State: AOJu0YzR94Ui8ZFRLymtMQzRrzTtYTLk0Xo3VmIJj81Jc9OFUDiFUKz2
+ dYiGs2l7nVzYGhJRt4fEL1qt4y+EBkp4MA==
+X-Google-Smtp-Source: AGHT+IFbc2IPVgvdSqdPB0VPU1yQAN3OxeggMQ4jeEAQ1Ayj2+MWGq74w7zjTNhkxbZPB+yl/rQy3A==
+X-Received: by 2002:a17:902:a50b:b0:1d5:bcc2:2bac with SMTP id
+ s11-20020a170902a50b00b001d5bcc22bacmr11757074plq.1.1705466391340; 
+ Tue, 16 Jan 2024 20:39:51 -0800 (PST)
+Received: from octopus.. ([2400:4050:c3e1:100:e481:26af:1a49:433a])
+ by smtp.gmail.com with ESMTPSA id
+ s17-20020a170902ea1100b001d403969bf4sm10048668plg.309.2024.01.16.20.39.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 16 Jan 2024 20:39:51 -0800 (PST)
+From: AKASHI Takahiro <takahiro.akashi@linaro.org>
+To: trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de,
+ ilias.apalodimas@linaro.org
+Cc: u-boot@lists.denx.de,
+	AKASHI Takahiro <takahiro.akashi@linaro.org>
+Subject: [PATCH v5 0/4] cmd: bootefi: refactor the code for bootmgr
+Date: Wed, 17 Jan 2024 13:39:40 +0900
+Message-Id: <20240117043944.477358-1-takahiro.akashi@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF000015CC:EE_|SJ1PR12MB6362:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9d4da1b1-a039-4ccc-ae19-08dc1711f879
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: k4AoET3a39JZbGI3OAfxjbrjEMzlE/FTemK+1f1NzP8F+HTF5ckSGzOJx7xPPkXcwzpXmZcXY7i0H4X/a7MF81rqvys5xGkEcn9J3xh4zKTkcabege646APlRtddv62wRHlLAsJuacenwKO76U62/QYeltLx4YfIAnazT13h8D9dhAzYXHWvCuUIRFMJNec8UOqSjxHiuxhGfeGl/MGhiWFaxFXFoMd/ISylvBWU/Udr8MEMzxcYwzktN9f9dfmND4TdNlAiCofNyuS6FJh/UUzhfhDIqAuYFTst4bSFURvCrkXOhPmdgOY2u0cpN2aCyAPBZRQswOtwx4vayypQGJHULTHwWjh9b+7Dddajrpn6B6M0yK1r3G7bFSZK94UCGl27ic+hslCVvRIMIKvqCJ0HKqxUDHVV/8hlgXFAIGtcd405wBO3dHR/Sazv2im1bHJqlzCag8fYT1Z01VZlNyg7bKyxASZRo7RcvyPzj/CYhGmXXPDX/P7NfSe34Xo6Nby7w6GMRcyCn7KcYGpTF/9uU8KQMM8nyidcrUI30abFXLkEnNK7vi+hofhFWpW+z4lDOxLhIdm9EZpa26GRz1Qg0atZ8JVWKpbJnRWkqWQi9NUsBzccObHuOt+iiG7X2vNYC6Sn7I27f9n+vVFTSJFKV9hj0/gHq5S9BGEfNFtmTwNzVUvQzI6p9dTPWt7YXRLkpE+Dz4Ak7lA0M89vr8Ya+LXz7T0R1IISq1M8XglLYlJN9KkAvXusN3u/y7CM5emviuJZ/QIVHMBalmwfPg==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(39860400002)(346002)(136003)(376002)(396003)(230922051799003)(82310400011)(1800799012)(64100799003)(451199024)(186009)(46966006)(36840700001)(40470700004)(8676002)(4326008)(5660300002)(6916009)(8936002)(54906003)(316002)(2906002)(4744005)(70206006)(426003)(336012)(26005)(2616005)(1076003)(81166007)(356005)(36756003)(86362001)(70586007)(6666004)(478600001)(40460700003)(40480700001)(41300700001)(82740400003)(47076005)(36860700001)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jan 2024 04:08:32.9905 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9d4da1b1-a039-4ccc-ae19-08dc1711f879
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF000015CC.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6362
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,32 +90,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently only hw ecc is supported in U-Boot. If any other ecc mode is
-given in DT, it simply ignores and switches to hw ecc. So better print
-what is being done.
+This patch set is motivated by the discussion[1] regarding
+CONFIG_BOOTEFI_BOOTMGR option.
 
-Revert this patch once soft ecc support is fixed in future.
+# This version (v5) contains only the remaining commits.
 
-Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- drivers/mtd/nand/raw/nand_base.c | 3 +++
- 1 file changed, 3 insertions(+)
+At the end, bootefi.c will be decomposed into two parts, one for
+providing the command itself and one for implementing helper functions.
+EFI_LOADER will now be available without CONFIG_CMDLINE or specifically
+CONFIG_CMD_BOOTEFI if invoked via bootmeth/bootstd.
 
-diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand_base.c
-index c40a0f23d7..200f7f8ba0 100644
---- a/drivers/mtd/nand/raw/nand_base.c
-+++ b/drivers/mtd/nand/raw/nand_base.c
-@@ -4463,6 +4463,9 @@ static int nand_dt_init(struct mtd_info *mtd, struct nand_chip *chip, ofnode nod
- 
- 	str = ofnode_read_string(node, "nand-ecc-mode");
- 	if (str) {
-+		if (strcmp(str, "hw"))
-+			printf("%s ecc is not supported, switching to hw ecc\n", str);
-+
- 		if (!strcmp(str, "none"))
- 			ecc_mode = NAND_ECC_NONE;
- 		else if (!strcmp(str, "soft"))
+Then, EFI_LOADER library side will be further split into two options
+for fine-grain control:
+CONFIG_EFI_BINARY_EXEC: execute UEFI binaries which are to be explicitly
+    loaded by U-Boot's load commands/functions or other methods
+    (like a jtag debugger?)
+    It supports bootmeth_efi as well as "bootefi <addr>|hello"(/"bootm"?).
+
+CONFIG_EFI_BOOTMGR: provide EFI boot manger functionality
+    It supports bootmeth_efi_mgr as well as "bootefi bootmgr".
+
+As such, We will no longer need CONFIG_EFI_BINARY_EXEC if we want to only
+make use of the UEFI boot manger for booting a next stage OS.
+
+Prerequisite
+============
+This patch set is based on top of the latest "master" branch.
+
+Tests
+=====
+* ran and passed py/efi_selftest on sandbox locally
+* ran and passed py/test_efi_bootmgr on sandbox locally
+* passed CI check (github pull request[2])
+
+Changes
+=======
+v4 (Jan 17, 2024)
+* rebased onto the latest master branch again
+
+v4 (Jan 10, 2024)
+* rebased onto the latest master branch
+* moved binary execution portion of code (EFI_BINARY_EXEC) to
+  a new file, efi_bootbin.c, instead of efi_helper.c (patch#1)
+
+v3 (Dec 18, 2023)
+* rebased onto Tom's latest next branch
+* remove already-merged commits
+
+v2 (Nov 21, 2023)
+* rebased onto Tom's next branch
+* remove already merged commits
+* revise commit messages
+* add patch #5 which was split from ex-patch#5
+RFC (Oct 26, 2023)
+
+[1] https://lists.denx.de/pipermail/u-boot/2023-October/534598.html
+[2] https://dev.azure.com/u-boot/u-boot/_build/results?buildId=7760&view=results
+
+AKASHI Takahiro (4):
+  efi_loader: split unrelated code from efi_bootmgr.c
+  efi_loader: rename BOOTEFI_BOOTMGR to EFI_BOOTMGR
+  net: tftp: remove explicit efi configuration dependency
+  fs: remove explicit efi configuration dependency
+
+ boot/Kconfig                     |   4 +-
+ boot/Makefile                    |   2 +-
+ cmd/Kconfig                      |  10 +-
+ cmd/efidebug.c                   |   4 +-
+ fs/fs.c                          |   7 +-
+ include/efi_loader.h             |  28 +-
+ lib/efi_loader/Kconfig           |  11 +-
+ lib/efi_loader/Makefile          |   3 +-
+ lib/efi_loader/efi_bootbin.c     | 211 +++++++++++++
+ lib/efi_loader/efi_bootmgr.c     | 488 -------------------------------
+ lib/efi_loader/efi_device_path.c |   3 +-
+ lib/efi_loader/efi_helper.c      | 286 ++++++++++++++++++
+ net/tftp.c                       |  10 +-
+ test/boot/bootflow.c             |   2 +-
+ 14 files changed, 546 insertions(+), 523 deletions(-)
+ create mode 100644 lib/efi_loader/efi_bootbin.c
+
 -- 
-2.25.1
+2.34.1
 
