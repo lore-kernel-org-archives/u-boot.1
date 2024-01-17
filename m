@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49497C47DA2
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 21:47:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B72EBC47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 21:53:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 871D2879A8;
-	Wed, 17 Jan 2024 22:47:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EB43987971;
+	Wed, 17 Jan 2024 22:53:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4E43879F4; Wed, 17 Jan 2024 22:47:15 +0100 (CET)
+ id 8E6FF87889; Wed, 17 Jan 2024 22:53:32 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 6D4628798F
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 22:47:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 53EC58798C
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 22:53:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DEA3A11FB;
- Wed, 17 Jan 2024 13:47:58 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CA4CE11FB;
+ Wed, 17 Jan 2024 13:54:15 -0800 (PST)
 Received: from minigeek.lan (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 236683F73F;
- Wed, 17 Jan 2024 13:47:12 -0800 (PST)
-Date: Wed, 17 Jan 2024 21:46:27 +0000
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1A4113F73F;
+ Wed, 17 Jan 2024 13:53:28 -0800 (PST)
+Date: Wed, 17 Jan 2024 21:52:45 +0000
 From: Andre Przywara <andre.przywara@arm.com>
 To: Nick Alilovic <nickalilovic@gmail.com>
 Cc: u-boot@lists.denx.de, jagan@amarulasolutions.com,
  linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH 2/2] configs: Transpeed 8K618-T: Add Transpeed 8K618-T
+Subject: Re: [PATCH 1/2] arm: dts: Transpeed 8K618-T: Add Transpeed 8K618-T
  board support
-Message-ID: <20240117214627.63964221@minigeek.lan>
-In-Reply-To: <20240117163756.63875-2-nickalilovic@gmail.com>
+Message-ID: <20240117215245.65fc0282@minigeek.lan>
+In-Reply-To: <20240117163756.63875-1-nickalilovic@gmail.com>
 References: <20240117163756.63875-1-nickalilovic@gmail.com>
- <20240117163756.63875-2-nickalilovic@gmail.com>
 Organization: Arm Ltd.
 X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
@@ -58,86 +57,205 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 17 Jan 2024 11:37:56 -0500
+On Wed, 17 Jan 2024 11:37:55 -0500
 Nick Alilovic <nickalilovic@gmail.com> wrote:
 
 Hi Nick,
 
-thanks for sending this!
+> This is the DT I used from the Linux kernel. Made changes to the Makefile to build the new DTB.
 
-> This is a Chinese TV box based on Allwinner H618 SoC.
-> 
-> The DRAM parameters were derived from the values found in a firmware update.
-> 
-> This patch will add transpeed-8k618-t_defconfig to the configs directory.
+thanks, I will copy in this file along with other changes during the
+upcoming DT sync, with all the sunxi DT bits queued for Linux v6.8 -
+after the merge window closes. Weather permitting ;-) this should be
+early next week.
 
-This last sentence is a bit out of place, the typical tone in a commit
-message is to "direct the repository to make a change", so you use an
-imperative. But it's more directed to the human reader of course, so
-you don't need to replicate details like the exact filename, that are
-spelt out three lines below here. So just a simple:
+Cheers,
+Andre
 
-Add the defconfig file.
-
-would suffice.
-
-> 
 > Signed-off-by: Nick Alilovic <nickalilovic@gmail.com>
 > ---
->  configs/transpeed-8k618-t_defconfig | 25 +++++++++++++++++++++++++
->  1 file changed, 25 insertions(+)
->  create mode 100644 configs/transpeed-8k618-t_defconfig
+>  arch/arm/dts/Makefile                         |   1 +
+>  .../arm/dts/sun50i-h618-transpeed-8k618-t.dts | 161 ++++++++++++++++++
+>  2 files changed, 162 insertions(+)
+>  create mode 100644 arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts
 > 
-> diff --git a/configs/transpeed-8k618-t_defconfig b/configs/transpeed-8k618-t_defconfig
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index d456a524b3..cacd21558a 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -836,6 +836,7 @@ dtb-$(CONFIG_MACH_SUN50I_H6) += \
+>  dtb-$(CONFIG_MACH_SUN50I_H616) += \
+>  	sun50i-h616-orangepi-zero2.dtb \
+>  	sun50i-h618-orangepi-zero3.dtb \
+> +	sun50i-h618-transpeed-8k618-t.dtb \
+>  	sun50i-h616-x96-mate.dtb
+>  dtb-$(CONFIG_MACH_SUN50I) += \
+>  	sun50i-a64-amarula-relic.dtb \
+> diff --git a/arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts b/arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts
 > new file mode 100644
-> index 0000000000..7090577199
+> index 0000000000..8ea1fd41ae
 > --- /dev/null
-> +++ b/configs/transpeed-8k618-t_defconfig
-> @@ -0,0 +1,25 @@
-> +CONFIG_ARM=y
-> +CONFIG_ARCH_SUNXI=y
-> +CONFIG_DEFAULT_DEVICE_TREE="sun50i-h618-transpeed-8k618-t"
-> +CONFIG_SPL=y
-> +CONFIG_DRAM_SUN50I_H616_DX_ODT=0x03030303
-> +CONFIG_DRAM_SUN50I_H616_DX_DRI=0x0e0e0e0e
-> +CONFIG_DRAM_SUN50I_H616_CA_DRI=0x1f12
-> +CONFIG_DRAM_SUN50I_H616_TPR0=0xc0001002
-> +CONFIG_DRAM_SUN50I_H616_TPR10=0x2f1107
-> +CONFIG_DRAM_SUN50I_H616_TPR11=0xddddcccc
-> +CONFIG_DRAM_SUN50I_H616_TPR12=0xeddc7665
-> +CONFIG_MACH_SUN50I_H616=y
-> +CONFIG_SUNXI_DRAM_H616_DDR3_1333=y
-> +CONFIG_DRAM_CLK=648
-> +CONFIG_R_I2C_ENABLE=y
-> +CONFIG_SPL_I2C=y
-> +CONFIG_SPL_SYS_I2C_LEGACY=y
-> +CONFIG_SYS_I2C_MVTWSI=y
-> +CONFIG_SYS_I2C_SLAVE=0x7f
-> +CONFIG_SYS_I2C_SPEED=400000
-> +CONFIG_SUPPORT_EMMC_BOOT=y
+> +++ b/arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts
+> @@ -0,0 +1,161 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (C) 2023 Arm Ltd.
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include "sun50i-h616.dtsi"
+> +
+> +#include <dt-bindings/gpio/gpio.h>
+> +#include <dt-bindings/interrupt-controller/arm-gic.h>
+> +
+> +/ {
+> +	model = "Transpeed 8K618-T";
+> +	compatible = "transpeed,8k618-t", "allwinner,sun50i-h618";
+> +
+> +	aliases {
+> +		serial0 = &uart0;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = "serial0:115200n8";
+> +	};
+> +
+> +	reg_vcc5v: vcc5v {
+> +		/* board wide 5V supply directly from the DC input */
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc-5v";
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +		regulator-always-on;
+> +	};
+> +
+> +	reg_vcc3v3: vcc3v3 {
+> +		/* discrete 3.3V regulator */
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc-3v3";
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		regulator-always-on;
+> +	};
+> +};
+> +
+> +&ehci0 {
+> +	status = "okay";
+> +};
+> +
+> +&ehci1 {
+> +	status = "okay";
+> +};
+> +
+> +&ir {
+> +	status = "okay";
+> +};
+> +
+> +&mmc0 {
+> +	vmmc-supply = <&reg_dldo1>;
+> +	cd-gpios = <&pio 8 16 GPIO_ACTIVE_LOW>;	/* PI16 */
+> +	bus-width = <4>;
+> +	status = "okay";
+> +};
+> +
+> +&mmc2 {
+> +	vmmc-supply = <&reg_dldo1>;
+> +	vqmmc-supply = <&reg_aldo1>;
+> +	bus-width = <8>;
+> +	non-removable;
+> +	cap-mmc-hw-reset;
+> +	mmc-ddr-1_8v;
+> +	mmc-hs200-1_8v;
+> +	status = "okay";
+> +};
+> +
+> +&ohci0 {
+> +	status = "okay";
+> +};
+> +
+> +&ohci1 {
+> +	status = "okay";
+> +};
+> +
+> +&r_i2c {
+> +	status = "okay";
+> +
+> +	axp313: pmic@36 {
+> +		compatible = "x-powers,axp313a";
+> +		reg = <0x36>;
+> +		#interrupt-cells = <1>;
+> +		interrupt-controller;
+> +
+> +		vin1-supply = <&reg_vcc5v>;
+> +		vin2-supply = <&reg_vcc5v>;
+> +		vin3-supply = <&reg_vcc5v>;
+> +
+> +		regulators {
+> +			reg_aldo1: aldo1 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <1800000>;
+> +				regulator-max-microvolt = <1800000>;
+> +				regulator-name = "vcc-1v8-pll";
+> +			};
+> +
+> +			reg_dldo1: dldo1 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <3300000>;
+> +				regulator-max-microvolt = <3300000>;
+> +				regulator-name = "vcc-3v3-io-mmc";
+> +			};
+> +
+> +			reg_dcdc1: dcdc1 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <810000>;
+> +				regulator-max-microvolt = <990000>;
+> +				regulator-name = "vdd-gpu-sys";
+> +			};
+> +
+> +			reg_dcdc2: dcdc2 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <810000>;
+> +				regulator-max-microvolt = <1100000>;
+> +				regulator-name = "vdd-cpu";
+> +			};
+> +
+> +			reg_dcdc3: dcdc3 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <1360000>;
+> +				regulator-max-microvolt = <1360000>;
+> +				regulator-name = "vdd-dram";
+> +			};
+> +		};
+> +	};
+> +};
+> +
+> +&pio {
+> +	vcc-pc-supply = <&reg_aldo1>;
+> +	vcc-pg-supply = <&reg_dldo1>;
+> +	vcc-ph-supply = <&reg_dldo1>;
+> +	vcc-pi-supply = <&reg_dldo1>;
+> +};
+> +
+> +&uart0 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&uart0_ph_pins>;
+> +	status = "okay";
+> +};
+> +
+> +&uart1 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&uart1_pins>, <&uart1_rts_cts_pins>;
+> +	uart-has-rtscts;
+> +	status = "okay";
+> +};
+> +
+> +&usbotg {
+> +	dr_mode = "host";	/* USB A type receptable */
+> +	status = "okay";
+> +};
+> +
+> +&usbphy {
+> +	status = "okay";
+> +};
 
-You correctly mention this, but miss the required MMC controller number:
-
-CONFIG_MMC_SUNXI_SLOT_EXTRA=2
-
-> +CONFIG_AXP313_POWER=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_AXP_DCDC3_VOLT=1360
-
-This line belongs a few lines up. There is some non-obvious order of
-those lines, which you can obtain by running "make savedefconfig" after
-"make transpeed-8k618-t_defconfig". This will create a "defconfig"
-file, which contains the minimal defconfig, in the right order. This
-will be done routinely on all files in the configs/ directory
-eventually, but it's good measure to get this right from the beginning,
-to reduce churn.
-
-You are also missing:
-# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-which is somewhat mandatory on all Allwinner boards.
-I don't actually remember why exactly, but we have this for almost
-every sunxi board.
-
-Thanks,
-Andre
