@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0590FC47258
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 14:26:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04884C47DA2
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 14:26:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BA1487B50;
-	Wed, 17 Jan 2024 15:26:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A330C87B6E;
+	Wed, 17 Jan 2024 15:26:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Il4kzlMU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="U0krW0ob";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2D8787B61; Wed, 17 Jan 2024 15:26:14 +0100 (CET)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id 7CD2487B6D; Wed, 17 Jan 2024 15:26:18 +0100 (CET)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCE6387B43
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 15:26:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 680EB87B66
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 15:26:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-5f8cf76ef5bso100167147b3.0
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 06:26:11 -0800 (PST)
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-5fc2e997804so46420797b3.3
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 06:26:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705501570; x=1706106370; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1705501575; x=1706106375; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zizAuZSJ0zsK/7Xo/rAB4aD9eLEYRW/QOQKG35bxxzs=;
- b=Il4kzlMUnllTjVIvvDvpfSyvPUUrGBkB1rFQTQKsf0g4Pk3IRzPOs5l3mqUlNlyAMW
- ZT1JAZQuWqeydfDrCzYSXyDvyUQAXN25nv1fX0G3ie8lXjNY2cM6Nh+0BhQewYF1anga
- jKyY3YMEroieepRsIdiEHb1Tty0enL9V/7/Ks=
+ bh=mmwoa4LEXvti6Z5CRqkQiaEv4/90zVG4QtLyRmjmJT4=;
+ b=U0krW0obaZ670eUtdiinkYM2Oz+u0W/z08gQkMGchDCavQ19c5SrDJ4KrzsbjqdSuq
+ CydVYP4LX796PfHKQ2T7h4EQPhjQkf24IOyNXPsjDBk2YsUw8L9GdcGiIwa+GPzyh93A
+ /MsE+eOF9MSGp2sMnC6Oowj14eMp436yZEw/s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705501570; x=1706106370;
+ d=1e100.net; s=20230601; t=1705501575; x=1706106375;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zizAuZSJ0zsK/7Xo/rAB4aD9eLEYRW/QOQKG35bxxzs=;
- b=EpOtbQ6aIokGhelVi0fAo9yKTWbQk1kMeyF510MJ3skCL2QyJYEFoa88O9xiVBrQ3o
- U7eXrXkEfmCyW3V5CEJyMEgoUxe1y5W7vM9/BGa1EuIcxjKOqa66lEE4X7gkH4CCR0XY
- jAIFqHSn6hPTi5YhZZ7RP3LnvS82ngwQk40isfumrGNbv8O4KwT5DP2L0Xp4Bj+T/yt3
- ELx8iwZWEjGq6n+Erv94L8hkxhAcYpheDj3c0TqMYbl3DkuVRFDJtqW+HMz7vdMxq5Fo
- NRGOBdL1VrpEHcetbHb9EDFxj+++fTkDjdOPRPUo6gps0mdDuDLofeLj5PLAs12aOqCN
- Sikg==
-X-Gm-Message-State: AOJu0Yxnk1jOthtuWT5XH9lvnbQ7muQf9jS9S0erFgGww0tGeCveeayU
- HONxjXMDqox2n8fXwdiI+aU92EMeY9dTpg==
-X-Google-Smtp-Source: AGHT+IFU0ZUp1i34yTNj4v8pT7s3EH/2rBym1wXYEzUJzFOFQPOwYS1xctgX7pRS6dPjuvYHkNYeOA==
-X-Received: by 2002:a81:b65b:0:b0:5ff:54db:814a with SMTP id
- h27-20020a81b65b000000b005ff54db814amr2614107ywk.61.1705501570518; 
- Wed, 17 Jan 2024 06:26:10 -0800 (PST)
+ bh=mmwoa4LEXvti6Z5CRqkQiaEv4/90zVG4QtLyRmjmJT4=;
+ b=RajvX6HzLUaEIGfCn8q9Bvopfz8GjWbECLns/7dDx2B60Tl4QDVzkdKNv2pwZtYcd3
+ uUC6R+PagzZ0QXjqvyCXctGGYpenWS+37qyDXnRYqwy9S9x38q6MPI8J/60Pcyl9j8p9
+ MCjV+LH1VzG1P260mlGj3d4Mcps+JHIsZXbS+vpE3v9Njy9zoaFdvkwn+cZ4iqu+2FQ8
+ lK5rll3O2D1JJ9IgZunHRDDA7YAnGB7rn7/8PcL7zbBgTEBJuGt8YZ/477xJ/bPWzFAA
+ +wtgkvCGTtR0brfp7BGKO79RAmuOckb+0opOR7yz6qp3zVy/wUB8D7eu3CsZOUOXHXQu
+ nq9g==
+X-Gm-Message-State: AOJu0YwWpo1pPWXk859N26/o0oTYXIECNZ7Zm0lmVftnU8MyJquw/yep
+ 1N5gCYskqCF9sNeZVby+gv/JCoEBHPSDkPseSDXX8jt3bDI=
+X-Google-Smtp-Source: AGHT+IEIDhwnDfPXjlOIrKmwtI1VcFMvA3eAAulWGDZPmglNi9HsidKOS6k0FuyJXRDCt0xEYgLYUA==
+X-Received: by 2002:a81:8d42:0:b0:5ef:c519:76bd with SMTP id
+ w2-20020a818d42000000b005efc51976bdmr6360319ywj.25.1705501575203; 
+ Wed, 17 Jan 2024 06:26:15 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- z188-20020a0df0c5000000b005f900790763sm5915682ywe.49.2024.01.17.06.26.09
+ d70-20020a814f49000000b005fdc47c460dsm2068366ywb.23.2024.01.17.06.26.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jan 2024 06:26:09 -0800 (PST)
-Date: Wed, 17 Jan 2024 09:26:08 -0500
+ Wed, 17 Jan 2024 06:26:14 -0800 (PST)
+Date: Wed, 17 Jan 2024 09:26:12 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Love Kumar <love.kumar@amd.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com,
- rfried.dev@gmail.com, v.v.mitrofanov@yadro.com,
- seanedmond@microsoft.com, emohandesi@linux.microsoft.com
-Subject: Re: [UBOOT PATCH v4] test/py: net: Add dhcp abort test
-Message-ID: <20240117142608.GH12635@bill-the-cat>
-References: <dd44fc9bf39e0debc9d0bc78a5d9215bace26023.1700571693.git.love.kumar@amd.com>
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
+Subject: Re: [PATCH] test/py: mdio: Add tests for mdio command
+Message-ID: <20240117142612.GI12635@bill-the-cat>
+References: <92907606c7b930808b82582bea752d4cee13cae6.1702988434.git.love.kumar@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ioEHYQHg9CcYxh9s"
+ protocol="application/pgp-signature"; boundary="kaCTbZqoYh/ks6OJ"
 Content-Disposition: inline
-In-Reply-To: <dd44fc9bf39e0debc9d0bc78a5d9215bace26023.1700571693.git.love.kumar@amd.com>
+In-Reply-To: <92907606c7b930808b82582bea752d4cee13cae6.1702988434.git.love.kumar@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,15 +91,17 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ioEHYQHg9CcYxh9s
+--kaCTbZqoYh/ks6OJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 21, 2023 at 06:32:47PM +0530, Love Kumar wrote:
+On Tue, Dec 19, 2023 at 05:50:51PM +0530, Love Kumar wrote:
 
-> Abort the dhcp request in the middle by pressing ctrl + c on u-boot
-> prompt and validate the abort status.
+> Add below test cases for mdio commands:
+> mdio_list - To list MDIO buses
+> mdio_read - To read PHY's register at <devad>.<reg>
+> mdio_write - To write PHY's register at <devad>.<reg>
 >=20
 > Signed-off-by: Love Kumar <love.kumar@amd.com>
 > Reviewed-by: Tom Rini <trini@konsulko.com>
@@ -111,22 +111,22 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---ioEHYQHg9CcYxh9s
+--kaCTbZqoYh/ks6OJ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWn430ACgkQFHw5/5Y0
-tywLYgwAjLlVXPS0mreL/+NvjAms4pXs401ao5DtaPg9hQVH7GBoQTB7Lcq84bHN
-c5AmtO0Gdi1cUZbNZWMhIU53RiHJHTEl7LG1m0rT1Qd+0JAa6yc1WHW1tNLK/vdJ
-j0HrJAAIQ4PGHoV+YJp7AYkfHXbdozaxbZ1DV7K90JDxdz7kF8RVCv0T/x9o3QER
-2lrlqm+Dwu24kn7chZNX9gO+d2slEe3QmCJXESgYPDnpS8Nnkpy5GRi03EpVVWcd
-ZGg1w0y+A8TJxeNIRxwJUNLFEFDx7HY2edWVaMXtJM/8zCuVAvJf66hTIQ0FcA86
-AjxdN5WVT/juy5v4IoXmddR4ISNX5vOdZehb4DEfIUfqo17WqjEV8ow7gcc4zmRB
-Jo4Q5JYdhEOO7lIFE2gZ8E5xE7ag7QCPZua8XSQGUi6DDomRuIGVD2/CfN3avlRF
-Wk7CHLY9HBdSZgCuNqBBragPExBWlibsPxBsOwEUvL5DCqw0AqvxLH+qfpIC8bMx
-C6eSO4vr
-=lpIX
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWn44QACgkQFHw5/5Y0
+tywDawwAqYbO1SCmUitOMCYTWuJYhkCFoN6lcWb4GH/oo24IHFqXxPYQP67HYEyd
+BJZ4cA0tLFotspqWCD9U9URMhay4j6/FDc12D/O8A/NSPQLyNMpRo7Ofh9vIxCbs
+1YjzdK8ZSl7qSDE7bbOq2u8CF/I2zHcTMs5eVA07VUiDbuG/V4n7T3LEyEQey8/4
+q/V2Vtkm+3FKxMlHmkASViBPygqh0gFr8G1iTibkplXcV5jZRZsHZJ9UcLt6FCXK
+nlYzRrR1I//s+SQzQy0slozqbGZO/BkHArSxr8hPXl32tU1A2OelGVaF1mlVSSQ2
+cRgT9ajToCoGw02+clXoHT8V5arxn/fO4DQ2iVnZU/ETLYA9Ob1Tz1Lbc9smCiDT
+ZlvwZwEzxFZefYmsGpeX0J4XuPA8hDQNhlgbS6F2reUSOKjMk40O2K454NC9nZcK
+cDARnXQiWGlDnOlwJy49W0E5f54WXHnVO32MCihFfRNFHDQ25Ntc8pAX8k/chbNf
+pHljpYUK
+=C7mv
 -----END PGP SIGNATURE-----
 
---ioEHYQHg9CcYxh9s--
+--kaCTbZqoYh/ks6OJ--
