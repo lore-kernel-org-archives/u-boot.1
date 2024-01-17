@@ -4,62 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBB87C47422
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 10:16:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61626C47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 10:18:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB4D087B2A;
-	Wed, 17 Jan 2024 11:16:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id AECB7879FE;
+	Wed, 17 Jan 2024 11:18:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="EVkJKgGL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GKIVrYZ4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1133787B30; Wed, 17 Jan 2024 11:16:22 +0100 (CET)
-Received: from mail-m127219.xmail.ntesmail.com
- (mail-m127219.xmail.ntesmail.com [115.236.127.219])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 385F487A0B; Wed, 17 Jan 2024 11:18:08 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A214D87A0B
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 11:16:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 25A21876D3
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 11:18:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=EVkJKgGL0AI+TgZ+Dc5WZG//SQ0xINTD6qLzUrEK5YD42CECZClsNDvP3T3Dw19nO0wPnRBXswNWM1mm1NT2tz5q8qb+LlS9vgDe7pz5sRRNkjTAfPama0Nksx9CT9BpIdLKXTnoiGPfU7FooS5BZ5EPySKOGmOcfEsXkY+ThQ4=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=5YGHEZI6ATsI9+5CZtyTbsQY77YNnmhXiG8UhDKGqow=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11880.qiye.163.com (Hmail) with ESMTPA id 023A120843;
- Wed, 17 Jan 2024 18:16:09 +0800 (CST)
-Message-ID: <ec946f62-94b3-4dcf-8193-3478cacc224a@rock-chips.com>
-Date: Wed, 17 Jan 2024 18:16:09 +0800
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=max.oss.09@gmail.com
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-40e7065b692so35857745e9.3
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 02:18:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1705486685; x=1706091485; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=PKh3QnixkZ4ZAaCzS5Mc+YociiZUOY+6IGoz7S6jYuY=;
+ b=GKIVrYZ4DTNKEoFewCYFZmNy+v6cu7mRR8df7qSolBjBZyCOidM6wB+sOglv6WEFfR
+ yCZaYI+YXCggmQpJqB9gyUR1ZLqvbDkowExEGM6UAY1Yo1eKai52ru/e5eiY9OE6WVWh
+ wAc09/qboczPPsvu5sNvhiPv407Iir74zpstCJ55ahIIZOnuYKMEeBBdY/DEjnVaTs2O
+ eiSLcG+okLG77svIcxCJjXAdAf++sZ541bCC0JArnWhq8Uk7bcJD02AGUKEz2assfMrK
+ 2G7/qawJ0D/UfCbthXOQpIm7A4rWLTwkd4WL2OzQR15hIdfEcfQRe3XyF6VEgTWz1Lb2
+ sUnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705486685; x=1706091485;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PKh3QnixkZ4ZAaCzS5Mc+YociiZUOY+6IGoz7S6jYuY=;
+ b=hqZSko5NsJN0/2Mz8t/lwokmL6o/PQ8AkPu691NSsYRmu+kjr5/7U/URGBHtHFdjVL
+ 3+KriTYhH6lxuLjHbD3/j6q7ojLv5RM8ZDLMYrbo586lSOTu0H38rqxhBLpnvUp2zPNc
+ v0VOWl/51K3vi7e5VtVuq5YaiHDUA482ERWQ9FpZvtLtna4JujvZuE7o+QdBWRNnuRyp
+ owxwr16GzthwrNoIOaN0inDWBxEiJu4e7ngIIZTbszux+6rbif9csIxJVYLeZ9lNSyQ8
+ sFTq3OUBMwSXYEHmkeUbEenJ3yI0bBzShuaWWlXd2u9UBrUPmNfTwZywJniWIy91nPbw
+ 4Ctw==
+X-Gm-Message-State: AOJu0YzPCuZIR0JLY9Dr9TuqZs6ajrPkph3EiVQ5yD/BTHtxU9IMHiqz
+ lnR9UWtMrskHRMFPNHV6JtE=
+X-Google-Smtp-Source: AGHT+IEnQBN4H80Q8rgN+QA1do7eyJboRQyb2RBZJ9A6ukW3HoDaWfFSTqml7L9RD+wS1GeC4cxP/Q==
+X-Received: by 2002:a05:600c:15d2:b0:40e:6a93:1c42 with SMTP id
+ v18-20020a05600c15d200b0040e6a931c42mr3709825wmf.26.1705486684917; 
+ Wed, 17 Jan 2024 02:18:04 -0800 (PST)
+Received: from toolbox.int.toradex.com (31-10-206-125.static.upc.ch.
+ [31.10.206.125]) by smtp.gmail.com with ESMTPSA id
+ s14-20020a5d69ce000000b00337478efa4fsm1305849wrw.60.2024.01.17.02.18.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 17 Jan 2024 02:18:04 -0800 (PST)
+From: Max Krummenacher <max.oss.09@gmail.com>
+To: Max Krummenacher <max.krummenacher@toradex.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Max Krummenacher <max.oss.09@gmail.com>, Andrew Davis <afd@ti.com>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Kamlesh Gurudasani <kamlesh@ti.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Nishanth Menon <nm@ti.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: [PATCH v1 0/4] board: verdin-am62: set cpu core voltage depending on
+ speed grade
+Date: Wed, 17 Jan 2024 11:16:45 +0100
+Message-ID: <20240117101743.3955852-1-max.oss.09@gmail.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH next v2 4/6] rockchip: rk3588: insert
- u-boot,spl-boot-device into U-Boot device tree
-Content-Language: en-US
-To: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: u-boot@lists.denx.de, jonas@kwiboo.se,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>, heiko@sntech.de
-References: <20231108-rk3588-spl-boot-dev-v2-0-e67e26202c85@theobroma-systems.com>
- <20231108-rk3588-spl-boot-dev-v2-4-e67e26202c85@theobroma-systems.com>
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20231108-rk3588-spl-boot-dev-v2-4-e67e26202c85@theobroma-systems.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQxlOH1YfHUJOSR8ZTh4ZSxlVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
- tLWQY+
-X-HM-Tid: 0a8d16ebd2d12eb6kusn023a120843
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pj46PQw5DjwoHBMWTAIvSihD
- DkJPCjFVSlVKTEtOT0NNTkxLQ0pKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPS0hONwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,64 +96,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
 
-On 2023/11/9 01:25, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
->
-> It is possible to boot U-Boot proper from a different storage medium
-> than the one used by the BOOTROM to load the SPL. This information is
-> stored in the u-boot,spl-boot-device Device Tree property and is
-> accessible from U-Boot proper so that it has knowledge at runtime where
-> it was loaded from.
->
-> Let's add support for this feature for rk3588 the same way it was done
-> for px30 and rk3399.
->
-> Cc: Quentin Schulz <foss+uboot@0leil.net>
-> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-> ---
->   arch/arm/mach-rockchip/rk3588/rk3588.c | 8 ++++++++
->   1 file changed, 8 insertions(+)
->
-> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> index b1f535fad50..fde5f281b0a 100644
-> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> @@ -163,3 +163,11 @@ int arch_cpu_init(void)
->   	return 0;
->   }
->   #endif
-> +
-> +#if defined(CONFIG_SPL_BUILD) && !defined(CONFIG_TPL_BUILD)
-> +const char * const spl_boot_devices[BOOT_DEVICE_NONE + 1] = {
-> +	[BOOT_DEVICE_MMC2] = "/mmc@fe2e0000",
-> +	[BOOT_DEVICE_MMC1] = "/mmc@fe2c0000",
+The series moves the existing access functions to the AM62 Device
+Identification fields and adds function for the not yet accessible
+fields to be available to all.
 
-This may be wrong because I found that the mmc0 alias is not the same 
-for all the boards.
-
-Rockchip platform do set SD card alias as mmc0 before no alias used by 
-kernel, and after kernel enable
-
-the use of alias, the different board has different mmc0:
-
-arch/arm/dts/rk3588-rock-5b.dts:        mmc0 = &sdhci;
-arch/arm/dts/rk3588-edgeble-neu6b.dtsi:        mmc0 = &sdhci;
-arch/arm/dts/rk3588s-orangepi-5.dts:        mmc0 = &sdmmc;
-arch/arm/dts/rk3588s-rock-5a.dts:        mmc0 = &sdhci;
-arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi:        mmc0 = &sdmmc;
-arch/arm/dts/rk3588-edgeble-neu6a.dtsi:        mmc0 = &sdhci;
-arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi:        mmc0 = &sdmmc;
-arch/arm/dts/rk3588-quartzpro64.dts:        mmc0 = &sdhci;
-arch/arm/dts/rk3588-evb1-v10.dts:        mmc0 = &sdhci;
-arch/arm/dts/rk3588-orangepi-5-plus.dts:        mmc0 = &sdhci;
-arch/arm/dts/rk3588-nanopc-t6.dts:        mmc0 = &sdhci;
+This is then used in the Verdin AM62 board code to set the CPU core
+voltage according to speed grade to gain more than 100mW power
+consumption reduction for the slower speed graded SKUs.
 
 
-Thanks,
-- Kever
-> +	[BOOT_DEVICE_SPI] = "/spi@fe2b0000/flash@0",
-> +};
-> +#endif
->
+Max Krummenacher (4):
+  board: verdin-am62: improve comment on usb phy core voltage
+  arm: mach-k3: am62: move device identification accessor functions to
+    header
+  arm: mach-k3: am62: provide more soc feature info accessors
+  board: verdin-am62: set cpu core voltage depending on speed grade
+
+ arch/arm/mach-k3/am625_fdt.c                  | 23 --------
+ arch/arm/mach-k3/include/mach/am62_hardware.h | 39 ++++++++++++++
+ board/toradex/verdin-am62/verdin-am62.c       | 52 ++++++++++++++++++-
+ 3 files changed, 89 insertions(+), 25 deletions(-)
+
+-- 
+2.42.0
+
