@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21101C47DA2
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 14:27:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD906C47DA2
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 14:28:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D91D987B9E;
-	Wed, 17 Jan 2024 15:26:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 93CB387BA8;
+	Wed, 17 Jan 2024 15:26:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nm9iCsZi";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HmRlC5qC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C76987B50; Wed, 17 Jan 2024 15:26:52 +0100 (CET)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id 38C9887B66; Wed, 17 Jan 2024 15:26:58 +0100 (CET)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B9A387B9B
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 15:26:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6972987BAD
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 15:26:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-5ff7dd8d7ceso436317b3.0
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 06:26:50 -0800 (PST)
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-dbed179f0faso8540651276.1
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 06:26:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705501609; x=1706106409; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1705501613; x=1706106413; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CjIaljm+bLOFMUhc2c46AsyrzMkjdOdVDqdburTx+Tg=;
- b=nm9iCsZiEzE7OS5Ko5MeTG2zxFY2XeeC2j4hqbvU7Y5/dIEsaxbKIt6OklkmrIg41g
- eRMmJVovRyDWpHMnOcprlAshINj4fO6ews4Sg+9DkDbWu7uflnRgcbv6igb9eKL7Sics
- jDnxayMExUPxszXeSQ2F+dKP3baPQk5VHOhsM=
+ bh=XfHq8pa5fzWsN/OprTYXSN4O+fBYEUxjAs5GEIfDVtU=;
+ b=HmRlC5qCN9fJQqRDYrGbLsh6Oc1UGnT0nESgNjSk2rdsRx16jJtLFxlsiSp9zU2dyz
+ 5BZRLBd029s6p5K2XZeA/h5BwHghXOSRkcMvyERfgXbi4JTkFAoX8i40UzmGbfMhDWAe
+ RLFHZbECQVxPcr0cWOcgtB0lw7pUmugTTxxj0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705501609; x=1706106409;
+ d=1e100.net; s=20230601; t=1705501613; x=1706106413;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CjIaljm+bLOFMUhc2c46AsyrzMkjdOdVDqdburTx+Tg=;
- b=exXhdZ60CN1mV44LmNTLTcCrrF/a6hb5424ONHB7AgqCHCKX+caHsslG+fpB+scVge
- +0EXDQztLkeuYB4BXwENQK2fn4F6KtV81QOblW5OblioCHu+d/vMxcs/SSj0lmunuymp
- kO2rNfrw6zruK/qdEdXAhJ241SAGzJHnAztB9xU7uzlD/HZbRBtHax83EK0J6VAxscLB
- qDZhSjrO6ZRHw/MP1iMALmub/hAd8R63nn3II1dR1rSLRxAhLlelJh4wlZCe580cKwmz
- In9wtS4t5QewdK5YhT6sbLbWLrchjuP26r0+4yB24EJErw5rM/aV2IY26kZbaQjkIkb2
- 3yhQ==
-X-Gm-Message-State: AOJu0YwEKuw9J1BkCwWy1EFOX+3dqhZ7cAzNTEoXU50d+ISboX3vs3SL
- 6rO/uYV/ZOHiu8dUethH/SSamRea2IvJPQ==
-X-Google-Smtp-Source: AGHT+IGm47qtQ7MskGeEdpugm44+fgn66VeJUIiCWRBMgrh+/xJxkvul+e1IOslzApPXAFORbsynDg==
-X-Received: by 2002:a81:b606:0:b0:5ff:5fd9:a43f with SMTP id
- u6-20020a81b606000000b005ff5fd9a43fmr1685840ywh.39.1705501608725; 
- Wed, 17 Jan 2024 06:26:48 -0800 (PST)
+ bh=XfHq8pa5fzWsN/OprTYXSN4O+fBYEUxjAs5GEIfDVtU=;
+ b=apDhQ4o5WYwa43iH+XqY2N4y+HPEai4tkRlWw9qZzyIZOZlpB3MdDJsCf4tW4PyR8r
+ fGBCYIDPACFu6WWdeeWIjzjU+fjg3DVxJvRXJ0WELE4g0qe2CDd+FoPeBqKGuDHlZX+s
+ r0i5m7sHygv3yQt3TzkFF+GLv/ovk/guEIAzUobcTS7l9gLHK1wsLAojNw26gz2SUk6c
+ ucrVgLBtVWO/5WoorDnJh5hu90gtYC6T/Isnt5RLonxddo+Y376X2AJfCV+AxhWAQdCY
+ AVHAXlDLVc6VErtMlIjcmYA/v8Z2fxbcPuhA/nxsLmrlQwBmOpkjSU9biVtRsH1ObXJs
+ hzgA==
+X-Gm-Message-State: AOJu0Yw6w01T3M71AvKiaebPaPRLsjXLBcRx3Pa4bVByZR4blvUk6ALa
+ RmupBNBlRRs4Mk5lMAHn1cJvRloG9uqvBw==
+X-Google-Smtp-Source: AGHT+IEa8vlWbYDEvKBUivk6KNroqNlvrEuP0DZjaAnCx4H6XCgYEJzLs8WlJltO1fqh69W/XnCXSQ==
+X-Received: by 2002:a81:9205:0:b0:5ee:5d8a:51e1 with SMTP id
+ j5-20020a819205000000b005ee5d8a51e1mr458014ywg.27.1705501613160; 
+ Wed, 17 Jan 2024 06:26:53 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- w196-20020a0dd4cd000000b005ff7e023754sm19811ywd.55.2024.01.17.06.26.47
+ m195-20020a0dcacc000000b005ff4da78ec4sm1704935ywd.130.2024.01.17.06.26.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jan 2024 06:26:48 -0800 (PST)
-Date: Wed, 17 Jan 2024 09:26:46 -0500
+ Wed, 17 Jan 2024 06:26:52 -0800 (PST)
+Date: Wed, 17 Jan 2024 09:26:50 -0500
 From: Tom Rini <trini@konsulko.com>
-To: TracyMg_Li@outlook.com
-Cc: jagan@amarulasolutions.com, andre.przywara@arm.com, festevam@gmail.com,
- patrick.delaunay@foss.st.com, tharvey@gateworks.com,
- pbrobinson@gmail.com, weichangzheng@phytium.com.cn, hs@denx.de,
- d-gerlach@ti.com, u-boot@lists.denx.de, robh+dt@kernel.org
-Subject: Re: [PATCH V4] ARM add initial support for the Phytium Pe2201 Board.
-Message-ID: <20240117142646.GQ12635@bill-the-cat>
-References: <TYSPR01MB58854E5328ACD3462C60E612F199A@TYSPR01MB5885.apcprd01.prod.exchangelabs.com>
+To: Jim Liu <jim.t90615@gmail.com>
+Cc: JJLIU0@nuvoton.com, YSCHU@nuvoton.com, KWLIU@nuvoton.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2] reset: npcm: Add support for Nuvoton NPCM BMC family
+Message-ID: <20240117142650.GR12635@bill-the-cat>
+References: <20240103072933.1319033-1-JJLIU0@nuvoton.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="sE/tH6E2q1t6UJjg"
+ protocol="application/pgp-signature"; boundary="YubPttGfpM1OzZ5u"
 Content-Disposition: inline
-In-Reply-To: <TYSPR01MB58854E5328ACD3462C60E612F199A@TYSPR01MB5885.apcprd01.prod.exchangelabs.com>
+In-Reply-To: <20240103072933.1319033-1-JJLIU0@nuvoton.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,47 +92,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---sE/tH6E2q1t6UJjg
+--YubPttGfpM1OzZ5u
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 25, 2023 at 11:21:34AM +0800, TracyMg_Li@outlook.com wrote:
+On Wed, Jan 03, 2024 at 03:29:33PM +0800, Jim Liu wrote:
 
-> From: TracyMg_Li <TracyMg_Li@outlook.com>
+> Add reset controller driver for Nuvoton BMCs.
+> The npcm reset driver not only supports reset each module reset
+> but setting initial value of reset Control Registers.
 >=20
-> Add pe2201 platform code and the device tree of pe2201 platform board.
-> The initial support comprises the UART and PCIe.
+> And The driver support each module reset.
 >=20
-> Signed-off-by: TracyMg_Li <TracyMg_Li@outlook.com>
-> Changes since v1:
->         fix space corrupt.
-> Changes since v2:
->         switch to bootstd and text environment.
-> Changes since v3:
->         add environment variables.
+> Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---sE/tH6E2q1t6UJjg
+--YubPttGfpM1OzZ5u
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWn46YACgkQFHw5/5Y0
-tyx9ogv+MoRSqdGJauL3OeGbB3Qe6Ixw/Qnrj5VbHAYbp9dgnz3q69jIA/cl4Ion
-T9Wq0MaCiao06RS+GOOuElQb/dMcivv+nG1IkYcuKXlc5oRa46LFPB0Tx4luB2HI
-0lXpchDs3IWwepRSVHnJTY6FkGSQyKKVe5SqKqCsYs+ZjL82aq9bPgr0hvn66T8R
-yQxa/ZFkPn+gawF/pkxhHfEHUIJNmeBJCB+MwfxbAkAZ+7W7w+Y5ug+XjRnnmqzo
-wxxJsmHcxMWlscKMdLkKs8h8J0y6IOqY8SgXtuyh35FzGaNW5QllX4e4VSZGs4bu
-XlcpbpKPNPEEgOUUw+AcYczIhfgH1mQYz1iQF7deMpDKikS/EKR8wNDQ6YXqDm3k
-oTdYwqsz/HVLVw/0ijndLoUErAvJF5bXKVh8l+Wa4bZ+ddWwkkIYWdXEoeXnxc/v
-m/Crn9gllNHBTMguEUY+519YPx5ge/az+9GI3flzSJOk/pxMe4GKY+LvAOlGlZVH
-FfnZJF7o
-=QNde
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWn46oACgkQFHw5/5Y0
+tywmYgwAhUhFMIu44e5iWC4+qQ37Yqa9p9gMT+lUtJZ2YRBakx8m/Q4QtxVQIwt2
+owhSfAkyap8XELQJKrq4AXGOmnnIDciI5HC3BBmiY0h9Bwx2tyoaSd1MKbCQz19K
+kD3e1tgFdb9vGar/e8aDf/SjyjlKG+cegL9ePkYiqWrxTO3Thz+KWATfTIYG6eNt
+NQ+EHZUM+6XCMtiHbOAuvwH0aFF6nmxzNavJSF4C6Gp6iKHw3dyZ8QvhHq7nlMc7
+uK8I8xD7XqM4gsoxK+BTqhr6OvEt67KAR1CU9DWinq2tgli3x+HcdZUs9NnrOq0F
+a1kgOgL+39vq9vvfYfOFmUwdcTrN2Kgx+XJo51Db7i7f2iO+fMu9DcqdBRahZLy3
+elIKaMdMp7IVJ40454gxxnj2HVkQXHJxZkS9KnS0EvXUv4YS4lwjYXEOB8vTx/Ec
+usZca+Kx6k6BERo2egGfIwKuP7u6kP97spF1qIKtmG96fZNaNs1NhMRAN01HhFD5
+tHWBozjT
+=pcW5
 -----END PGP SIGNATURE-----
 
---sE/tH6E2q1t6UJjg--
+--YubPttGfpM1OzZ5u--
