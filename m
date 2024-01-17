@@ -4,172 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E8F1C47422
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 07:19:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBEE9C47422
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 07:43:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29DF7878A5;
-	Wed, 17 Jan 2024 08:19:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 1A18587186;
+	Wed, 17 Jan 2024 08:43:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ZdVvh+3c";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Yowr9wmd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A83A5878F4; Wed, 17 Jan 2024 08:19:49 +0100 (CET)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2060a.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e88::60a])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 41B6E878B3; Wed, 17 Jan 2024 08:43:18 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D38A87800
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 08:19:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D25E986F67
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 08:43:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gjuRHAHjMIMudn/ClsJ7RT0ayDjCypj8/lyb3dHIwvYDG/VUg/2STebDpijrcLuvd8EBjqIrHTosrmX+rm6zOV8wHHhXtCRNqUFj+3MSfVxjRp8XFfHSNqmChOyNy6klkq7OCXpfH4kW/Z7sXdWWvyoLbSulHOFw1FmowLeXr8DhcxwMUb1BcFo16S2OUkipIqrbSSqruGT5f5FXG6reUrQ/AFszYz3EhrEyaNoY8oYOQ8hj6BpduUgaHPeOis9e2RBVx99hW8z81zmr2MX4KWD+NBXTVPAImvdWF1ymDrdKGfiqlh00XCQUaC7DB4JBTh10Wt3KLhKawebhL+mrmg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GCYDJQpp/g1dSJ5itTWw7T1LDYNR7srT9reLpxYBqV0=;
- b=OaLCGbnoCYw3c31jPtrAK7X5TGkk3PMoKkJSnyIK4Z65kOtVrKhza2ZoF+JpdghCOKrU/nXptWJ2cyKhjilgzeuJDIpwDyJLM9poJ5rOj180KexfylW1Rais6kr4+jrFhCTDolQEfuM50vqN27JQr/CNnZojKrL5MksH8Xj7EcFeZ9QL7S3t/F+FSSfLAdiX3aPkI2ih51S/NCeQQ8J4DMiB5JGH2F1jIJL+pMeQ0Bp7PvO4/zgahaItol8D/oFGEQm76u9E3GsdUsUyyKO46raZXVsphwZ2ILakyCQ/7tpMnJ8JrXZlsD9CLHY0o2nctW6NV1hEKo4uhcSFTEmNOA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GCYDJQpp/g1dSJ5itTWw7T1LDYNR7srT9reLpxYBqV0=;
- b=ZdVvh+3cCIY62MlTJz+IBWvD/v4y+p3VtiYDnpz4+i2SoN7ycBPSHRX3ZyGT3vbZZDZQ25IkFHlg26HavWVTLjn/E2AcG+1PuhAbvPpgem6tBRg6ZbgQukhfx/GzHTgc4TEiaZJ1Kc6BfGJiTmKZyqeSVlaBPuPSeiRLpeYLh1k=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from CYXPR12MB9337.namprd12.prod.outlook.com (2603:10b6:930:d8::20)
- by SJ1PR12MB6219.namprd12.prod.outlook.com (2603:10b6:a03:456::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7181.26; Wed, 17 Jan
- 2024 07:19:42 +0000
-Received: from CYXPR12MB9337.namprd12.prod.outlook.com
- ([fe80::772d:da3d:154b:fa45]) by CYXPR12MB9337.namprd12.prod.outlook.com
- ([fe80::772d:da3d:154b:fa45%7]) with mapi id 15.20.7181.018; Wed, 17 Jan 2024
- 07:19:42 +0000
-Message-ID: <a055045b-3a9c-4e71-9b17-1192782f751b@amd.com>
-Date: Wed, 17 Jan 2024 08:19:31 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/2] xilinx: Update the kaslr-seed property
-Content-Language: en-US
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
-Cc: git@xilinx.com
-References: <20240117032014.1014084-1-venkatesh.abbarapu@amd.com>
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20240117032014.1014084-1-venkatesh.abbarapu@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR0102CA0105.eurprd01.prod.exchangelabs.com
- (2603:10a6:803:15::46) To CYXPR12MB9337.namprd12.prod.outlook.com
- (2603:10b6:930:d8::20)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1705477393; x=1706082193; i=xypron.glpk@gmx.de;
+ bh=ILeeJRHk15DJ95CoHv5ydFmdSaLYa+xjEKT8q0aLntk=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=Yowr9wmdTX8zZNBUOWewNhPitBLMmupsRzVP3feQt/rz/p1060Z9RBg0q0QZZ1VM
+ OrZdFDbdc/720gmnOu0DUWagNHvD2bLcCG97HKAqICrRe+Z9zMM6oKG+svXDRAdbr
+ 8N7g+/ow7jUVxVNR+6/xyJllQAQ8qA8obbGppz7cuJICi+MFohVUzt3sdokiiPkIL
+ 7wBhOBRdVNhBpj0Nbw1TaLMUWyCDbMRNeMYx9c4lal3afDHUCInkMPYPvyLBGPNky
+ /lILxGIUp9wAhINz+QBKi+wbqvYwhfjf1ned8P8JkcTBTJBzbww57l8A5GlMnmx9w
+ ywQueTZphRnG7efPxQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MYeR1-1rcVKE0QKp-00Vd6W; Wed, 17
+ Jan 2024 08:43:13 +0100
+Message-ID: <ad091ee1-a4ff-4329-aa73-e67f96a2bca8@gmx.de>
+Date: Wed, 17 Jan 2024 08:43:10 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CYXPR12MB9337:EE_|SJ1PR12MB6219:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5ceeb329-d5be-4ab2-8d63-08dc172cac7a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: oMsbEfKt9bscsehGK+Vns+ZEvaeg6u09hhLAeeq8+pPSTdd5y5A3syX67Y5vKmt29aPde9i7yG/Wy99/7mS9KFs765/4NCQl2QBtO1Tvs5JldnAO3VDlEC0iLne+pD6QcUNGFXOwJMOm/DyM6YHGGEEWdPjYDsIfURG+/7J+rUuTLcj8RxCPQ5JU99iSY0RwV8eiQP4iZl/L6uYIYyhtwZilVmGgPd4TF2SV21LASaqdgvR7C3x/CvaE5aHoYqwWhF3nDrxT4JFFHX4Hi/qbyeEri/N3tmNYWHjIA2PDCjXEeVDgtIRff3lzIOTeYKg4kiXsPTFh1aFaMxNEFECY9eUZmDJt+AY1ZYERSXu9TaIYx6PEkgCUpmh7gc7IWgfpbK8oBBgyzBYeUfwm+ea3toXeXw0cr5zSQqphWtaBgSbXAX3DfVxUIs87krGA0HBlsPquSUVdA5qFmlADQRJ0W3pHJ+SDnMdp3lWi/R2Daucpv27MfPP/oKtL7m7vqLcgRQw/5xIIaONbsqJvq5eAH4mgvqRsTQdUl62iWqJQTbc7OjhWv0Fkp/RcS3hcFZ6D8UGbBWf7dpyWhDicoQj6vWzSVsh+oDhT7M6Qp5T0SAYbDppZaheBP0LBNJIHGJ0ZykbdDYvSjhwhiHwk+HlhFw==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CYXPR12MB9337.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(39860400002)(396003)(346002)(136003)(366004)(376002)(230922051799003)(64100799003)(186009)(1800799012)(451199024)(31686004)(6506007)(6666004)(53546011)(6512007)(26005)(2616005)(38100700002)(31696002)(36756003)(86362001)(44832011)(83380400001)(4744005)(15650500001)(5660300002)(2906002)(6486002)(478600001)(4326008)(41300700001)(8676002)(66556008)(8936002)(316002)(66476007)(66946007)(43740500002)(45980500001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?K1Q0U0lZbk1ublQybnFJTStjSjdqN0ZOV05jN1c1TUVucDRnSGZCNVh5OFlL?=
- =?utf-8?B?WFRYaTdBSFRWUGZ5QTBOemd4bHFYK0dsdHBWNVJLVy9tL2xRM3BHQ1BXdWtj?=
- =?utf-8?B?Y3JHSWlVaDZDVmxsSStwUXRDUU5Hd056YXJqQzF4SlZWRUd3Q2FCRlV5ZFRz?=
- =?utf-8?B?U3M2VnlQYWRjZmsvbzlwVm8zZ3VFS0hPRmRNNnFrTHgyWGFHdFhRSWRmd3BD?=
- =?utf-8?B?L3U5dWdER2dsSFZaYVF1Wk44emU3OCtUeENwVU0yZndsMkZKNC9nZTFLTWVC?=
- =?utf-8?B?a3NtYk5RMjZTSXo2bjNuME51Y2Fnd0ZETkNLUFN3YitjRVRGcmFSZVZVcGoy?=
- =?utf-8?B?OEhlcVVhNU5FajZWMWp5RjhXNFpUWnlUYmp5WVI0aWFtbklEZkgxd1hqaUdw?=
- =?utf-8?B?b3RqdGE3eFVBeUE5UHlGbXdONGZ3WDBlZmtkYWpLeGExVTd6eGJtUW9WaHJn?=
- =?utf-8?B?SVN0Y0JOSXFKR2l5djJMdVJ1Y3NzeW9idWptRVoxUFBsMXdEc1JvSWZDRkpG?=
- =?utf-8?B?SkIrOEsxRnMxUmxrbGJQVTAxQjJFM1phK3pkeXo4c2s1YXlFMjliZkJ5N2Zx?=
- =?utf-8?B?ZDBhNHFEOEFBbVJpeEk0N2VEVTgwUk5OdWRLSmRhM2hFUzEzRlZxeEprOFdt?=
- =?utf-8?B?NXB1a29MNFZzOEdQajhkSjcyckI0T1FpemRJN1lDNGp2M2JEN1lubUhjL0Qv?=
- =?utf-8?B?TGVBKy9HOFR6VDJDMDhObjNBOGdOUnVCSFllQi9vNzdLUHR2elRhdWNZbHRX?=
- =?utf-8?B?VGJrN1VqRm9BbERkNlQzdyt2M3o2MXFSRnV6bElkZ05qNDk1d2w0Z0hvR1Zn?=
- =?utf-8?B?NE5zNTgzNDdLaGc2ZFNTNHA3V3gxdDZ4bXlDbmNMem44MDZMejBzT21BMS83?=
- =?utf-8?B?dDhHOVZhTGRVRFl6enQ2cUpHNDU1Zmc1UVB5b3BpMXNROS8xemVTYzl5aC9r?=
- =?utf-8?B?eGlMenlMR3l1cW9TWHpWektod25iNXR4UXltYmJvWEhFUkNlWTBGZDhpNDZx?=
- =?utf-8?B?bEsrcys5b2tTbmo3OEZHb2ZpUCtZbEw3V3J0V0dtVlVmRkJzczZpb2w1TVJ6?=
- =?utf-8?B?L2RSV1ZSYm9hcUk3Ri83eEoyeFczWWcvT1c1NGZUSUs5eTc3TkF6ODNDcENU?=
- =?utf-8?B?TXMxMlh4eVlUempENzRKRHVLZ1VhanBoREJMM1F4NWdOWnBYQ3FaN1M1UGpl?=
- =?utf-8?B?aE5XZEJIMUtjSG92WllYUGEwUDV4MFBlaUJ1QWtCMmd4YTNWNG04MkdYSWhH?=
- =?utf-8?B?eFNJUWhGbUIyNXZSQk1zeTRSZVhVSUlraXAyZy8rQUFZVFNSVFNmQ2lEbDlN?=
- =?utf-8?B?QnR5MUtreS9YSjFSWFYxN3ZXZG5UN21EMUNESzFvYndNZWhaS1JvU0FZUDMx?=
- =?utf-8?B?ZVQxR1RZTWUvNnl0c2lvNjNpUXBBRllEc3A5KzNDRitVcmFnNXVNQ3BDUWRi?=
- =?utf-8?B?OE10akhiMEJSMTdzZXNNcDZCZFluU2hwbTV4RHRpMFAzMG5CbmRZVzA5WFk3?=
- =?utf-8?B?WHpWaWZpWDdNcEM5NlMyeERXL0wzRWw5YTRuSERjVk5pVkhlNHE3WklIS0Z4?=
- =?utf-8?B?aUJyTG5ncnF4L2NJRU5sZDB6M0VqejhyaUw4R3lEVEZnR0piMWVja1drWURu?=
- =?utf-8?B?Z3AyTXduOG0ySE5uT0hHZWJUbkkvdnYrRFVKdFJTUDNmdHhiaU4reW4rOVUw?=
- =?utf-8?B?R0NzY0dUSjg4ZVJQY0RIZS85QkxpTVRBaE5XeERoVDNTV0lzWFFXdEdBRzNR?=
- =?utf-8?B?SjJDWTBHYStEckFQY0kwZkFxSUdxUis3L09hUi9KUytCYXRGZGhJV2JzZCti?=
- =?utf-8?B?N2t5Nm1uZlpycGU2UmhrbWIwa3RVSVdFNy9sOFhva0p6VitkVVJXR1dEcWor?=
- =?utf-8?B?WjhPR0J2VmpKUEwvdmFWT2FZVER6czk5ZEdFd1pGajVYbm9GNFJiZWlhbXdQ?=
- =?utf-8?B?ZGJjZTlCQXM5STQ0azkyZGZQdURZcW0vUGJ5aEtQWnpMTVp5d0dGdFlLYktn?=
- =?utf-8?B?S1llcnA5SlJoTG50d3Bmc2djUklYRjcvYUVBNlpHMGt1d0pISXYvWEZIS3pN?=
- =?utf-8?B?VkVlYlM2UTdicDV4NWNBbFM4dlN5WlBkMzQzdmZ6VHV5dFB1THBPcEJIQmZB?=
- =?utf-8?Q?PCTRu0PmzYV1RWDliGGQ06TeL?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5ceeb329-d5be-4ab2-8d63-08dc172cac7a
-X-MS-Exchange-CrossTenant-AuthSource: CYXPR12MB9337.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jan 2024 07:19:42.1500 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: V5qPQSJ0OT2j9w5cRKhjiAQCLwSy8u+HqVgQ17Vg98lRdmQiPTE5M2V20L30hFtn
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6219
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 0/4] cmd: bootefi: refactor the code for bootmgr
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
+ ilias.apalodimas@linaro.org
+References: <20240117043944.477358-1-takahiro.akashi@linaro.org>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240117043944.477358-1-takahiro.akashi@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:NeB8ALfRy5SHnMx/TijMaseet9mMbK0qn58HOVjJLJVfNeCjpG0
+ OexSxiEIzw+biSf4iDi664Q9sGn+4ZF14gMeT3b3hHm1VO8qdoj9JUOY3TSmMfvJOSHeZUx
+ dJVmsH2S4nTZt41J5IbfV4RqM9qOWTrGYsA0SrhmBSsyaHaKbCa+jDywxeErZ2nLpfr2JtP
+ 1RmCe25YK7S8FqPTAxZCQ==
+UI-OutboundReport: notjunk:1;M01:P0:oMb+KXhv1iQ=;UPitt0acC7G18IlMX1YLCZr00HJ
+ kDVS5/niZo1Fyw7jvoI2KGhrgHIRKa4LMtTQDMY4vkvpbUjJ+RUMwIqSJSwMl7LgWsWqRdTHR
+ YAMaMytp7Vw8UIBMQogSb/mRcR0CqNKP0fhqJm6x0jHKiKcjakeY7fChqkPDK/2Tom1HU02iW
+ EI1m6JzSlfvfniR8Hf1bPVAO/bTavfUGSvWqCOaiQV20nXl/h6pnpabzFyXjbeC5bIA//t2Vj
+ 8382PUBpa8MlrgkOKv5w99pqnUzNylWnpcCtM+DBW1YcVgoEJL1gfvf8BBaHI3TGM1W6pbD/e
+ H99bMt47yJyuXYpQFY8bJ1SCM9aIqXJum8SI4hcFS6cTeiqXtGB8/QNu7Q+amHD14oJesidt1
+ a99X/bb5qG0uiG0rZIl2tTxPD58InCa3avYw4bdQcUdne23sxlGfezBJT5uoZweX5Lzx6dN8G
+ ay07cRV9g+ye08lpNPI2yXQY84TFFWhUB+klQxo5vy39TvkEOFx9m0vGD+s3d3FhLoyiEdaZy
+ 5NhWGArCWpweGjja7bGzAEbMhZJVWOSWkDw2doNkJYPhEIZ8WSsB3FvjFBRQS1bAlJxwUWvrd
+ fPMcV/x8XNkKHllO9dD6AWYzfUI7f24QXaXERwo15uhc3tSgNV0oWBQeHMdHGrEd3LkJnxlWN
+ iEsmjSHNZJeYBaUX53mR6EmSVOf7cQ6Y2hTwfn6cTL9Q8tmO7LzPknW4WVRX6xDKBPm1f4j41
+ 0FGbakisQxW+oNrhX+Dn+r0D9Ge6Zr2LgTK6hEbtLBRvlT4oRISGBHLka+jfkkRz9eNtg9kLB
+ KfAwKT1SrrvgHw3PorYwggV4Gd4uqMF0QXfx+MlWHjswAigGKljWYeLQuytj68tLYZlJKwjZl
+ Bi3hKJgl/BzmiWfTXPGpUAVU8qqSOjQWn3xufETcuk0FJ1m/qFF2CmMkLtAif4VY5laFvj50k
+ eBdH7GT7XsrGNd0gnku4eKyvYQY=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -186,26 +89,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 1/17/24 05:39, AKASHI Takahiro wrote:
+> This patch set is motivated by the discussion[1] regarding
+> CONFIG_BOOTEFI_BOOTMGR option.
+>
+> # This version (v5) contains only the remaining commits.
+>
+> At the end, bootefi.c will be decomposed into two parts, one for
+> providing the command itself and one for implementing helper functions.
+> EFI_LOADER will now be available without CONFIG_CMDLINE or specifically
+> CONFIG_CMD_BOOTEFI if invoked via bootmeth/bootstd.
+>
+> Then, EFI_LOADER library side will be further split into two options
+> for fine-grain control:
+> CONFIG_EFI_BINARY_EXEC: execute UEFI binaries which are to be explicitly
+>      loaded by U-Boot's load commands/functions or other methods
+>      (like a jtag debugger?)
+>      It supports bootmeth_efi as well as "bootefi <addr>|hello"(/"bootm"=
+?).
+>
+> CONFIG_EFI_BOOTMGR: provide EFI boot manger functionality
+>      It supports bootmeth_efi_mgr as well as "bootefi bootmgr".
+>
+> As such, We will no longer need CONFIG_EFI_BINARY_EXEC if we want to onl=
+y
+> make use of the UEFI boot manger for booting a next stage OS.
+>
+> Prerequisite
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> This patch set is based on top of the latest "master" branch.
+>
+> Tests
+> =3D=3D=3D=3D=3D
+> * ran and passed py/efi_selftest on sandbox locally
+> * ran and passed py/test_efi_bootmgr on sandbox locally
+> * passed CI check (github pull request[2])
 
+Thanks for rebasing. Testing on CI
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/19342
+looks good.
 
-On 1/17/24 04:20, Venkatesh Yadav Abbarapu wrote:
-> Update the kaslr-seed property and enable the config CONFIG_OF_BOARD_SETUP.
-> 
-> Changes in v2:
-> - Created macro for size variable.
-> - Removed malloc and created array for rng buffer.
-> - Added debug logs for all the apis.
-> Changes in v3:
-> - Fixed the return values.
-> 
-> Venkatesh Yadav Abbarapu (2):
->    xilinx: board: Update the kaslr-seed property
->    configs: zynqmp_kria: Enable CONFIG_OF_BOARD_SETUP
-> 
->   board/xilinx/common/board.c          | 49 ++++++++++++++++++++++++++++
->   configs/xilinx_zynqmp_kria_defconfig |  1 +
->   2 files changed, 50 insertions(+)
-> 
+Best regards
 
-Applied.
-M
+Heinrich
+
+>
+> Changes
+> =3D=3D=3D=3D=3D=3D=3D
+> v4 (Jan 17, 2024)
+> * rebased onto the latest master branch again
+>
+> v4 (Jan 10, 2024)
+> * rebased onto the latest master branch
+> * moved binary execution portion of code (EFI_BINARY_EXEC) to
+>    a new file, efi_bootbin.c, instead of efi_helper.c (patch#1)
+>
+> v3 (Dec 18, 2023)
+> * rebased onto Tom's latest next branch
+> * remove already-merged commits
+>
+> v2 (Nov 21, 2023)
+> * rebased onto Tom's next branch
+> * remove already merged commits
+> * revise commit messages
+> * add patch #5 which was split from ex-patch#5
+> RFC (Oct 26, 2023)
+>
+> [1] https://lists.denx.de/pipermail/u-boot/2023-October/534598.html
+> [2] https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D7760&vi=
+ew=3Dresults
+>
+> AKASHI Takahiro (4):
+>    efi_loader: split unrelated code from efi_bootmgr.c
+>    efi_loader: rename BOOTEFI_BOOTMGR to EFI_BOOTMGR
+>    net: tftp: remove explicit efi configuration dependency
+>    fs: remove explicit efi configuration dependency
+>
+>   boot/Kconfig                     |   4 +-
+>   boot/Makefile                    |   2 +-
+>   cmd/Kconfig                      |  10 +-
+>   cmd/efidebug.c                   |   4 +-
+>   fs/fs.c                          |   7 +-
+>   include/efi_loader.h             |  28 +-
+>   lib/efi_loader/Kconfig           |  11 +-
+>   lib/efi_loader/Makefile          |   3 +-
+>   lib/efi_loader/efi_bootbin.c     | 211 +++++++++++++
+>   lib/efi_loader/efi_bootmgr.c     | 488 -------------------------------
+>   lib/efi_loader/efi_device_path.c |   3 +-
+>   lib/efi_loader/efi_helper.c      | 286 ++++++++++++++++++
+>   net/tftp.c                       |  10 +-
+>   test/boot/bootflow.c             |   2 +-
+>   14 files changed, 546 insertions(+), 523 deletions(-)
+>   create mode 100644 lib/efi_loader/efi_bootbin.c
+>
+
