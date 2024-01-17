@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34DABC47258
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 14:28:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A4B0C47DA2
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 14:28:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A03A587BBA;
-	Wed, 17 Jan 2024 15:27:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 25D2187B9C;
+	Wed, 17 Jan 2024 15:27:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rGPHG6KF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mNBkI90C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B79CC87B9C; Wed, 17 Jan 2024 15:27:05 +0100 (CET)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id 9D0B887B9C; Wed, 17 Jan 2024 15:27:09 +0100 (CET)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5341987B6E
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 15:27:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 52F2B87BAC
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 15:27:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-5edfcba97e3so117060567b3.2
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 06:27:03 -0800 (PST)
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-5ff45c65e60so21553557b3.0
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 06:27:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705501622; x=1706106422; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1705501626; x=1706106426; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=suJWHQ+m6KbnzFLJTSP8uiWENLxjIRLzYmamcvb44Wk=;
- b=rGPHG6KFMIgDqCI3aa+oXuJWgeMpTdqbh4sqjBZRWE4a2QueUtf5c62fvy4lhtoCI2
- v8Hm14GqYsxOkdPd/kPgM/hS11wHX/I/H67zZf+F0j8UXfKBO0mVsmwThMODOBdFsBUH
- NHBixHEhARE3IVDPWhoHR84HKxCI2Bcs4u4z4=
+ bh=9Dgo+c3/dvXiiBdVBe9USuq1XFwKY/wSkrTZxqVvoqU=;
+ b=mNBkI90C+J4YkpXn1ey1qPX4nueCNzdOPXyH/S/VSqySeR6s8uFBUGz6gZVLqeHpR8
+ nZC1PFfodW+dUG45M0UlNmR0GvYiRCdXAot2z69v38QhwUt2K3SESqjb8D3aS/4hklX7
+ KqLvZzAqN2A+86Eofo1PpqGaWA3Gube56Q32Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705501622; x=1706106422;
+ d=1e100.net; s=20230601; t=1705501626; x=1706106426;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=suJWHQ+m6KbnzFLJTSP8uiWENLxjIRLzYmamcvb44Wk=;
- b=keYipDONZFAjclW6GC8MmEhf0RTt/xus2OCxJj8kysNWYZm1rB2cpyEBXefZ3WoRXe
- MmYXEgcStclwizCIbYY8x4ipRyQfdqLKqlnKpX5vJIHImHNjh2nB12GWaXPhCFH797FR
- cQr8EeNfcP5qwB5iujabMt3nzTc8ttCerUN1WUQtS5iDjqjkly9AMr6hSLdG2nPRszVS
- szhQAaEVha3w+cL3rygphAkDMzHsgIzZWBvX0J9uC2MvP0f6Yg/FM26jj15Kw5cM8zGj
- P5NnDja1MVydH2sR6vpKTV7wBpNVyb6ALS8587ltFqHj1O2YLE/39u0xbr7iZn8eKNRG
- crww==
-X-Gm-Message-State: AOJu0Yx87u2qKuAa3KSR3NqAm7vA1+jTevLWJDF1SeRNxInFjSArOjq5
- J38lXbAKsN5idB7IGW8onWFpErmXMgzRqA==
-X-Google-Smtp-Source: AGHT+IGO0OBDY/cA3VYgsR5SAhK6ffUE4pFMsctHsOS0u783ynsPsBu4BauPEj+T6iH8dp1Cca7eaA==
-X-Received: by 2002:a81:9984:0:b0:5ef:78ad:b0b6 with SMTP id
- q126-20020a819984000000b005ef78adb0b6mr7170363ywg.69.1705501622102; 
- Wed, 17 Jan 2024 06:27:02 -0800 (PST)
+ bh=9Dgo+c3/dvXiiBdVBe9USuq1XFwKY/wSkrTZxqVvoqU=;
+ b=SrORtWOCyWYFMl2r08FViVc6uZ53qeRYWzudY5CJG3nrFfPB1K0YhV2yyJ2vRVt6jC
+ 8xsbVMrEy9ZEekBkBgSNabC9GqwLqNEMU6mDaOchkMhgAY0g+fzVnVS9yzIbpZlf8wlh
+ hIDczQ55gx8gdooJhIsL9o2B6CbIVQLL/pyX2vZdEPEnqZSSipuWUBUqUVGA3bQZIm/+
+ Mu5H7969S9DvimY3fMy6LbXScpvuslaye0+aNi9Iww9kRSpZ+c360xcyjxg8mIVe1GW8
+ bxurUuMrCbrz9spIOUnEmXoilVLILETNmQNhmP+7qkMGC5A/V1LvIe9COghrvtHeeEmj
+ Kiag==
+X-Gm-Message-State: AOJu0YxnsWoZm6AafBxxcmOLrlSYnRQrXlFY119BMr1gB5vdCfoYM9sx
+ FWyjyG0PFzot5zlE+zzgpyngKWjVwsUiZQ==
+X-Google-Smtp-Source: AGHT+IFSAkSa/+LnxOo3yAzLPvADJ08b/h/1KPEMYgohOVQwVgrTXiB9P2RDZk/uNQ7dFqaZ04Dyfw==
+X-Received: by 2002:a81:830c:0:b0:5ff:6b4a:8ec0 with SMTP id
+ t12-20020a81830c000000b005ff6b4a8ec0mr532261ywf.5.1705501626127; 
+ Wed, 17 Jan 2024 06:27:06 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- l13-20020a0de20d000000b005ff50fd9635sm1616400ywe.35.2024.01.17.06.27.01
+ cd10-20020a05690c088a00b005fb56881fa9sm5659464ywb.15.2024.01.17.06.27.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jan 2024 06:27:01 -0800 (PST)
-Date: Wed, 17 Jan 2024 09:27:00 -0500
+ Wed, 17 Jan 2024 06:27:05 -0800 (PST)
+Date: Wed, 17 Jan 2024 09:27:03 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-Cc: sjg@chromium.org, u-boot@lists.denx.de, kamlesh@ti.com,
- m-chawdhry@ti.com, afd@ti.com, u-kumar1@ti.com
-Subject: Re: [PATCH] arm: dts: k3-j721e-binman: Add support for HS-SE 2.0
-Message-ID: <20240117142700.GT12635@bill-the-cat>
-References: <20231220113433.1690312-1-n-francis@ti.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH v2 1/1] lib: smbios: remove redundant next_header()
+Message-ID: <20240117142703.GU12635@bill-the-cat>
+References: <20231223011734.248809-1-xypron.glpk@gmx.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="gF33H2BGmFzu+BeL"
+ protocol="application/pgp-signature"; boundary="SPiKcNwu751PFP8U"
 Content-Disposition: inline
-In-Reply-To: <20231220113433.1690312-1-n-francis@ti.com>
+In-Reply-To: <20231223011734.248809-1-xypron.glpk@gmx.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,40 +93,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---gF33H2BGmFzu+BeL
+--SPiKcNwu751PFP8U
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Dec 20, 2023 at 05:04:33PM +0530, Neha Malcom Francis wrote:
+On Sat, Dec 23, 2023 at 02:17:33AM +0100, Heinrich Schuchardt wrote:
 
-> Add support for J721E HS-SE 2.0 device. Make use of the existing
-> templates and override the phandles for sysfw.itb so that builds do not
-> fail.
+> next_header() and get_next_header() only differ in how the const attribute
+> is used. One function taking a const parameter and returning a non-const =
+is
+> good enough.
 >=20
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---gF33H2BGmFzu+BeL
+--SPiKcNwu751PFP8U
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWn47QACgkQFHw5/5Y0
-tyxXtwwAt+q3AuAP4eP+vBBweMRhXmrFm1NJNLM8qJ5HAvZVQjCdwUjsCQoIatmx
-s12LZ0nrJBcfmFTys7QFK8VfE3+sbt443S+z0h2R0YnPtj0gLXOAJhb9lMFjZQTS
-yD45TL3eKwXTaB9KoFrtrS7hiJOZ4ztCbI899fOPBRLZX1ZJvhZpKVjrmffeyCg6
-e/oaIFUoS/8GPV9rjD0Im6lLYyetT10VCdMM++qqGBJrgk5fxynYjfAnVw5yv2ht
-rSM7jnScESyeZz3fyAvLjyaF6z6Fu3H4CRtTWDG1XWg0wHj46/10ZUjmyBU89fuc
-x/r9FIulvRF9zJDVaXHYq2q/XIecLxUOpvDG6FHlR570C+OgZqbWbDBVePojkNFB
-GK54M2k8KT8jYke5vae4e95TK0++lzTgsEn5Upu7qjlEPkBvztfBTYQfdTX8B2u5
-qHjajdSozrZtiywOybQ6Roe5pnknBP5QOHR04x80QX2wQT4vhMPYGoHeVOsT+QqW
-YSPptskC
-=57GO
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWn47cACgkQFHw5/5Y0
+tywF9Qv/XrF/tgvWDgJaAN6btja5u1IzNTonjtG0ZPFm9HC7Yqel0o8XEezA/eEG
+95OWz9z14KHTtweRDQcHjdQR/QCpj0dVRRyu4oTFl5dvTGAtA5VAENuIQTMB+hv2
+0GYVZkyvOHGXnaKkBl6K6UEWjVrXqytIXre/TXW7H/jjfYQ4/6HRQWBr1c8K/eDH
+LH54PctC2ke/1s6sGkpNsEqGbumzqreIMeS2XAxlnKNGlOvXYes1nWomdCvUz1yI
+I3dlpTcA+8K2yXIvFgLfAmY19VZXiHrWiu3RRPgRTCetSWEiMx2BdAGKcOlwXVLF
+BEI6NobVVzuwFQOIjahNjZ83h5R2n9slhQotKKVpA5tstA0yjKB983qY8QxCUbFW
+kg6iZUYfVmbu1jkIRMqKoALdxqr5zQOXFiosW721JuIrGNkWxuTZur9GfBUE4EWu
+6GjsO27f39qukqSsDAH8qPy411h9aTpOasHR76C8pHR+rydPFWYPmdVjmVfvTWEB
+6IWMm6iA
+=KjGW
 -----END PGP SIGNATURE-----
 
---gF33H2BGmFzu+BeL--
+--SPiKcNwu751PFP8U--
