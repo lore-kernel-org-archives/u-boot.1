@@ -4,58 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 228F8C47258
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 17:39:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E897FC47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 17:43:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2ABB587947;
-	Wed, 17 Jan 2024 18:39:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 428BA87B43;
+	Wed, 17 Jan 2024 18:43:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="xnPEH59f";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 751E4879ED; Wed, 17 Jan 2024 18:39:46 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ id 58049879ED; Wed, 17 Jan 2024 18:43:10 +0100 (CET)
+Received: from smtp-1909.mail.infomaniak.ch (smtp-1909.mail.infomaniak.ch
+ [IPv6:2001:1600:3:17::1909])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FF6387947
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 18:39:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9EC9F879F4
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 18:43:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 21DEB222CF;
- Wed, 17 Jan 2024 18:39:42 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1705513182;
- bh=mBgrPuPn2G9mOLeTJaI2xu+A7iiHxhR2mdMpAkxWHsI=; h=From:To:Subject;
- b=xnPEH59f5nqC2KVEqASpqnMKur8sY6g3pGWPY5WExg4Y8BQUV76akNqkO6wmDLLDE
- O/a+7v4NjrKEnn9KxM1T3Lb5TsZun8xOdwCipaUd9auaw9987P44NPpy8bZsDUaP7M
- YaUKHW9mxGxGpZa0X5VQEjC3RodCITQ1AacPR9WNAJyHgMUv6cNOiWPKspZY/4/UYM
- 6S3ilnQW6cbOZo+InvAPmNK8k9Oj7+BIg8iRd0N8vCZmHaR+dSP3TS89RH4XAvAwgq
- 6l7MmZ2veHK2aIH/33N3+6yvSwZxFbXVsJTWG3eSd7YHYIQIYIaWFrQj0NgLH/7MFR
- cRvJjlR4BlZ0Q==
-Date: Wed, 17 Jan 2024 18:39:12 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Francis Laniel <francis.laniel@amarulasolutions.com>
-Cc: Francesco Dolcini <francesco@dolcini.it>, Tom Rini <trini@konsulko.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>, u-boot@lists.denx.de,
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v13 00/24] Modernize U-Boot shell
-Message-ID: <20240117173912.GA4046@francesco-nb>
-References: <20231222210244.91830-1-francis.laniel@amarulasolutions.com>
- <2170847.irdbgypaU6@pwmachine>
- <3033df6b-e9c2-41e7-a83e-4c3200268629@foss.st.com>
- <12363012.O9o76ZdvQC@pwmachine>
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-3-0000.mail.infomaniak.ch (unknown [10.4.36.107])
+ by smtp-2-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TFYBM1jD4zMqLwT;
+ Wed, 17 Jan 2024 17:43:07 +0000 (UTC)
+Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4TFYBL3zYtzvq; Wed, 17 Jan 2024 18:43:06 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+To: Joe Hershberger <joe.hershberger@ni.com>,
+ Klaus Goger <klaus.goger@theobroma-systems.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de,
+ Heiko Stuebner <heiko@sntech.de>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Subject: [PATCH v3 1/6] rockchip: ringneck-px30: do not hardcode MMC
+ controller paths
+Date: Wed, 17 Jan 2024 18:42:48 +0100
+Message-ID: <20240117-env_default_theobroma-v3-1-316c25a6733f@theobroma-systems.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240117-env_default_theobroma-v3-0-316c25a6733f@theobroma-systems.com>
+References: <20240117-env_default_theobroma-v3-0-316c25a6733f@theobroma-systems.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
+X-Mailer: b4 0.12.4
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <12363012.O9o76ZdvQC@pwmachine>
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,140 +64,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jan 18, 2024 at 12:30:42AM +0700, Francis Laniel wrote:
-> Le mercredi 17 janvier 2024, 17:05:28 +07 Patrice CHOTARD a écrit :
-> > On 1/16/24 18:25, Francis Laniel wrote:
-> > > Le mardi 16 janvier 2024, 00:34:24 +07 Patrice CHOTARD a écrit :
-> > >> On 1/11/24 18:04, Francesco Dolcini wrote:
-> > >>> On Fri, Dec 29, 2023 at 07:55:37PM +0100, Francis Laniel wrote:
-> > >>>> Le jeudi 28 décembre 2023, 21:58:59 CET Tom Rini a écrit :
-> > >>>>> On Fri, 22 Dec 2023 22:02:20 +0100, Francis Laniel wrote:
-> > >>>>>> During 2021 summer, Sean Anderson wrote a contribution to add a new
-> > >>>>>> shell,
-> > >>>>>> based on LIL, to U-Boot [1, 2].
-> > >>>>>> While one of the goals of this contribution was to address the fact
-> > >>>>>> actual
-> > >>>>>> U-Boot shell, which is based on Busybox hush, is old there was a
-> > >>>>>> discussion
-> > >>>>>> about adding a new shell versus updating the actual one [3, 4].
-> > >>>>>> 
-> > >>>>>> So, in this series, with Harald Seiler, we updated the actual U-Boot
-> > >>>>>> shell
-> > >>>>>> to reflect what is currently in Busybox source code.
-> > >>>>>> Basically, this contribution is about taking a snapshot of Busybox
-> > >>>>>> shell/hush.c file (as it exists in commit 37460f5da) and adapt it to
-> > >>>>>> suit
-> > >>>>>> U-Boot needs.
-> > >>>>>> 
-> > >>>>>> [...]
-> > >>>>> 
-> > >>>>> Applied to u-boot/next, thanks!
-> > >>>> 
-> > >>>> Thank you for the merge!
-> > >>>> If there is any problem, do not hesitate to mail me and I will take
-> > >>>> care
-> > >>>> of
-> > >>>> it!
-> > >>> 
-> > >>> This change, specifically setting the modern hush shell as default, is
-> > >>> breaking our boot script, just noticed since the current U-Boot master
-> > >>> has a regression for us.
-> > >>> 
-> > >>> We still need to figure out the exact details, here [1] you can find the
-> > >>> boot script (that has some placeholder that is replaced during build).
-> > >>> 
-> > >>> and the error is something like:
-> > >>> 
-> > >>> ```
-> > >>> ## Executing script at 90280000
-> > >>> Loading DeviceTree: k3-am625-verdin-nonwifi-dev.dtb
-> > >>> 69025 bytes read in 11 ms (6 MiB/s)
-> > >>> 82 bytes read in 9 ms (8.8 KiB/s)
-> > >>> Working FDT set to 90200000
-> > >>> syntax error at 'done'HUSH died!
-> > >>> resetting ...
-> > >>> ```
-> > >>> 
-> > >>> that I _assume_ comes from this line
-> > >>> 
-> > >>>     env set set_apply_overlays 'env set apply_overlays "for overlay_file
-> > >>>     in \\${fdt_overlays}; do echo Applying Overlay: \\${overlay_file} &&
-> > >>>     ${load_cmd} \\${loadaddr} \\${overlays_prefix}\\${overlay_file} &&
-> > >>>     fdt apply \\${loadaddr}; env set overlay_file; done; true"'>
-> > >>> 
-> > >>> [1]
-> > >>> https://git.toradex.com/cgit/meta-toradex-bsp-common.git/tree/recipes-bs
-> > >>> p
-> > >>> /u-boot/u-boot-distro-boot/boot.cmd.in
-> > >>> 
-> > >>> Francesco
-> > >> 
-> > >> Hi all
-> > >> 
-> > >> I observed a similar issue with STM32MP157c-DK2 board.
-> > >> Since commit 78912cfde281 ("cmd: Set modern hush as default shell")
-> > >> U-Boot
-> > >> crashes :
-> > >> 
-> > >> 
-> > >> U-Boot 2024.01-00486-g697758e7c81-dirty (Jan 15 2024 - 18:23:52 +0100)
-> > >> 
-> > >> CPU: STM32MP157CAC Rev.B
-> > >> Model: STMicroelectronics STM32MP157C-DK2 Discovery Board
-> > >> Board: stm32mp1 in trusted mode (st,stm32mp157c-dk2)
-> > >> Board: MB1272 Var2.0 Rev.C-01
-> > >> DRAM:  512 MiB
-> > >> Clocks:
-> > >> - MPU : 650 MHz
-> > >> - MCU : 208.878 MHz
-> > >> - AXI : 266.500 MHz
-> > >> - PER : 24 MHz
-> > >> - DDR : 533 MHz
-> > >> optee optee: OP-TEE: revision 4.0 (e92de4ca)
-> > >> I/TC: Reserved shared memory is disabled
-> > >> I/TC: Dynamic shared memory is enabled
-> > >> I/TC: Normal World virtualization support is disabled
-> > >> I/TC: Asynchronous notifications are disabled
-> > >> Core:  311 devices, 40 uclasses, devicetree: board
-> > >> WDT:   Started watchdog@5a002000 with servicing every 1000ms (32s
-> > >> timeout)
-> > >> NAND:  0 MiB
-> > >> MMC:   STM32 SD/MMC: 0
-> > >> Loading Environment from MMC... OK
-> > >> In:    No input devices available!
-> > >> Out:   No output devices available!
-> > >> Err:   No error devices available!
-> > >> Net:   eth0: ethernet@5800a000
-> > >> Hit any key to stop autoboot:  0
-> > >> Boot over mmc0!
-> > >> switch to partitions #0, OK
-> > >> mmc0 is current device
-> > >> Scanning mmc 0:8...
-> > >> data abort
-> > >> pc : [<ddb3f77a>]          lr : [<ddb44c95>]
-> > >> reloc pc : [<c012777a>]    lr : [<c012cc95>]
-> > >> sp : dbafc848  ip : ddbfc578     fp : ddbedf18
-> > >> r10: 00000000  r9 : dbb15e70     r8 : 00000000
-> > >> r7 : dbb5bf98  r6 : dbb5de10     r5 : dbb5bf98  r4 : ddbeda78
-> > >> r3 : dbb5dc08  r2 : 000033f8     r1 : 00000071  r0 : ddbede00
-> > >> Flags: nzcv  IRQs off  FIQs off  Mode SVC_32 (T)
-> > >> Code: 3138 1c48 f854 0030 (eb04) 05c1
-> > >> Resetting CPU ...
-> 
-> I will take a look at the issue, trying to reproduce it and understand the 
-> root cause.
-> I cannot give you any ETA for the fix, so for now I can only advise you to 
-> stick with the old parser.
+From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-Should we revert the change that set the modern hush shell as default
-till this is fixed?
+To prepare to put the similar logic around storage medium selection for
+Ringneck PX30 and Puma RK3399 in common, let's not use hardcoded paths
+but use uclass functions instead to find udevice based on their DT node
+full path.
 
-This is preventing us to run our automated test suite against current
-master. Whatever other issue might be introduced we will not be able to
-report.
+Cc: Quentin Schulz <foss+uboot@0leil.net>
+Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+---
+ .../ringneck_px30/ringneck-px30.c                  | 37 +++++++++++++++-------
+ 1 file changed, 25 insertions(+), 12 deletions(-)
 
-Tom?
+diff --git a/board/theobroma-systems/ringneck_px30/ringneck-px30.c b/board/theobroma-systems/ringneck_px30/ringneck-px30.c
+index 537ce0d1d11..5d2c76ab902 100644
+--- a/board/theobroma-systems/ringneck_px30/ringneck-px30.c
++++ b/board/theobroma-systems/ringneck_px30/ringneck-px30.c
+@@ -68,11 +68,16 @@ static int setup_boottargets(void)
+ 	 * Make the default boot medium between SD Card and eMMC, the one that
+ 	 * was used to load U-Boot proper.
+ 	 */
+-	bool sd_booted = !strcmp(boot_device, "/mmc@ff370000");
++	struct udevice *devp;
++
++	if (uclass_find_device_by_ofnode(UCLASS_MMC, ofnode_path(boot_device), &devp)) {
++		debug("%s: not reordering boot_targets, bootdev %s != MMC\n",
++		      __func__, boot_device);
++		return 0;
++	}
++
+ 	char *mmc0, *mmc1;
+ 
+-	debug("%s: booted from %s\n", __func__,
+-	      sd_booted ? "SD-Card" : "eMMC");
+ 	mmc0 = strstr(env, "mmc0");
+ 	mmc1 = strstr(env, "mmc1");
+ 
+@@ -87,8 +92,8 @@ static int setup_boottargets(void)
+ 	 * If mmc1 comes first in the boot order and U-Boot proper was
+ 	 * loaded from mmc0, swap mmc0 and mmc1 in the list.
+ 	 */
+-	if ((mmc0 < mmc1 && sd_booted) ||
+-	    (mmc0 > mmc1 && !sd_booted)) {
++	if ((mmc0 < mmc1 && devp->seq_ == 1) ||
++	    (mmc0 > mmc1 && devp->seq_ == 0)) {
+ 		mmc0[3] = '1';
+ 		mmc1[3] = '0';
+ 		debug("%s: set boot_targets to: %s\n", __func__, env);
+@@ -102,28 +107,37 @@ int mmc_get_env_dev(void)
+ {
+ 	const char *boot_device =
+ 		ofnode_read_chosen_string("u-boot,spl-boot-device");
++	struct udevice *devp;
+ 
+ 	if (!boot_device) {
+ 		debug("%s: /chosen/u-boot,spl-boot-device not set\n",
+ 		      __func__);
++#ifdef CONFIG_SYS_MMC_ENV_DEV
+ 		return CONFIG_SYS_MMC_ENV_DEV;
++#else
++		return 0;
++#endif
+ 	}
+ 
+ 	debug("%s: booted from %s\n", __func__, boot_device);
+ 
+-	if (!strcmp(boot_device, "/mmc@ff370000"))
+-		return 1;
+-
+-	if (!strcmp(boot_device, "/mmc@ff390000"))
++	if (uclass_find_device_by_ofnode(UCLASS_MMC, ofnode_path(boot_device), &devp))
++#ifdef CONFIG_SYS_MMC_ENV_DEV
++		return CONFIG_SYS_MMC_ENV_DEV;
++#else
+ 		return 0;
++#endif
++
++	debug("%s: get MMC ENV from mmc%d\n", __func__, devp->seq_);
+ 
+-	return CONFIG_SYS_MMC_ENV_DEV;
++	return devp->seq_;
+ }
+ 
+ enum env_location arch_env_get_location(enum env_operation op, int prio)
+ {
+ 	const char *boot_device =
+ 		ofnode_read_chosen_string("u-boot,spl-boot-device");
++	struct udevice *devp;
+ 
+ 	if (prio > 0)
+ 		return ENVL_UNKNOWN;
+@@ -137,8 +151,7 @@ enum env_location arch_env_get_location(enum env_operation op, int prio)
+ 	debug("%s: booted from %s\n", __func__, boot_device);
+ 
+ 	if (IS_ENABLED(CONFIG_ENV_IS_IN_MMC) &&
+-	    (!strcmp(boot_device, "/mmc@ff370000") ||
+-	     !strcmp(boot_device, "/mmc@ff390000")))
++	    !uclass_find_device_by_ofnode(UCLASS_MMC, ofnode_path(boot_device), &devp))
+ 		return ENVL_MMC;
+ 
+ 	printf("%s: No environment available: booted from %s but U-Boot "
 
-Francesco
-
+-- 
+2.43.0
 
