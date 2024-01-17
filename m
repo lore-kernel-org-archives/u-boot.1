@@ -4,39 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDF46C47258
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 17:24:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B118C47422
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 17:25:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6766487BBD;
+	by phobos.denx.de (Postfix) with ESMTP id F025787BC8;
 	Wed, 17 Jan 2024 18:24:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D21AE8796A; Wed, 17 Jan 2024 18:24:09 +0100 (CET)
-Received: from smtp-190e.mail.infomaniak.ch (smtp-190e.mail.infomaniak.ch
- [185.125.25.14])
+ id 2180287971; Wed, 17 Jan 2024 18:24:10 +0100 (CET)
+Received: from smtp-8faa.mail.infomaniak.ch (smtp-8faa.mail.infomaniak.ch
+ [83.166.143.170])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8D2887B82
+ by phobos.denx.de (Postfix) with ESMTPS id 1EDFE87B52
  for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 18:24:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0001.mail.infomaniak.ch (unknown [10.7.10.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TFXmP2k0FzMqBHx;
- Wed, 17 Jan 2024 17:24:05 +0000 (UTC)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TFXmN5981zMpvRC;
+ Wed, 17 Jan 2024 17:24:04 +0000 (UTC)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4TFXmN5Nf1znF1; Wed, 17 Jan 2024 18:24:04 +0100 (CET)
+ id 4TFXmN0bGGzlRL; Wed, 17 Jan 2024 18:24:04 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
 To: heiko@sntech.de, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Kever Yang <kever.yang@rock-chips.com>
 Cc: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de,
  jonas@kwiboo.se, Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Subject: [PATCH v3 5/6] rockchip: remove unused global data ptr
-Date: Wed, 17 Jan 2024 18:22:59 +0100
-Message-ID: <20240117-rk3588-spl-boot-dev-v3-5-72cb989e6da8@theobroma-systems.com>
+Subject: [PATCH v3 4/6] rockchip: find U-boot proper boot device by inverting
+ the logic that sets it
+Date: Wed, 17 Jan 2024 18:22:58 +0100
+Message-ID: <20240117-rk3588-spl-boot-dev-v3-4-72cb989e6da8@theobroma-systems.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240117-rk3588-spl-boot-dev-v3-0-72cb989e6da8@theobroma-systems.com>
 References: <20240117-rk3588-spl-boot-dev-v3-0-72cb989e6da8@theobroma-systems.com>
@@ -63,149 +64,188 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-Remove leftover import and global data ptr from files since they aren't
-used anymore.
+BOOT_DEVICE_* is set by spl_node_to_boot_device() depending on the block
+device number associated with the MMC device the SPL used to load U-Boot
+proper from. It is NOT related to the mmc alias in the Device Tree.
+
+For SPI flashes, all SPI flashes will return BOOT_DEVICE_SPI so there's
+currently no way to know from which one the SPL loaded U-Boot proper
+from. Therefore, let's just find the first valid candidate in
+/chosen/u-boot,spl-boot-order that is a SPI flash and return that path.
+This is a best effort.
+
+While the original implementation may have worked, using the exact same
+mechanism but in inverted fashion makes it less likely to have
+surprising corner-cases or side-effects.
+
+A nice side-effect is that all existing and future Rockchip SoCs now
+automatically have their /chosen/u-boot,spl-boot-device set.
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- arch/arm/mach-rockchip/board.c         | 3 ---
- arch/arm/mach-rockchip/rk3128/rk3128.c | 3 ---
- arch/arm/mach-rockchip/rk3308/rk3308.c | 3 ---
- arch/arm/mach-rockchip/rk3328/rk3328.c | 3 ---
- arch/arm/mach-rockchip/rk3368/rk3368.c | 3 ---
- arch/arm/mach-rockchip/rk3399/rk3399.c | 3 ---
- arch/arm/mach-rockchip/rk3588/rk3588.c | 2 --
- 7 files changed, 20 deletions(-)
+ arch/arm/mach-rockchip/px30/px30.c      |  7 ---
+ arch/arm/mach-rockchip/rk3399/rk3399.c  |  6 ---
+ arch/arm/mach-rockchip/spl-boot-order.c | 91 ++++++++++++++++++++++++++-------
+ 3 files changed, 73 insertions(+), 31 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
-index 57f08e0be0e..6a9d297e6ff 100644
---- a/arch/arm/mach-rockchip/board.c
-+++ b/arch/arm/mach-rockchip/board.c
-@@ -16,7 +16,6 @@
- #include <syscon.h>
- #include <uuid.h>
- #include <asm/cache.h>
--#include <asm/global_data.h>
- #include <asm/io.h>
- #include <asm/arch-rockchip/boot_mode.h>
- #include <asm/arch-rockchip/clock.h>
-@@ -24,8 +23,6 @@
- #include <asm/arch-rockchip/misc.h>
- #include <power/regulator.h>
- 
--DECLARE_GLOBAL_DATA_PTR;
+diff --git a/arch/arm/mach-rockchip/px30/px30.c b/arch/arm/mach-rockchip/px30/px30.c
+index 7676adcb044..fc7456e680c 100644
+--- a/arch/arm/mach-rockchip/px30/px30.c
++++ b/arch/arm/mach-rockchip/px30/px30.c
+@@ -443,10 +443,3 @@ void board_debug_uart_init(void)
+ #endif /* CONFIG_DEBUG_UART_BASE && CONFIG_DEBUG_UART_BASE == ... */
+ }
+ #endif /* CONFIG_DEBUG_UART_BOARD_INIT */
 -
- #if defined(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && defined(CONFIG_EFI_PARTITION)
- 
- #define DFU_ALT_BUF_LEN			SZ_1K
-diff --git a/arch/arm/mach-rockchip/rk3128/rk3128.c b/arch/arm/mach-rockchip/rk3128/rk3128.c
-index 01dbfa75cb2..8f8f4951bae 100644
---- a/arch/arm/mach-rockchip/rk3128/rk3128.c
-+++ b/arch/arm/mach-rockchip/rk3128/rk3128.c
-@@ -4,9 +4,6 @@
-  */
- #include <common.h>
- #include <init.h>
--#include <asm/global_data.h>
--
--DECLARE_GLOBAL_DATA_PTR;
- 
- int arch_cpu_init(void)
- {
-diff --git a/arch/arm/mach-rockchip/rk3308/rk3308.c b/arch/arm/mach-rockchip/rk3308/rk3308.c
-index 5763604dc3e..6f121bf1304 100644
---- a/arch/arm/mach-rockchip/rk3308/rk3308.c
-+++ b/arch/arm/mach-rockchip/rk3308/rk3308.c
-@@ -5,7 +5,6 @@
- #include <common.h>
- #include <init.h>
- #include <malloc.h>
--#include <asm/global_data.h>
- #include <asm/io.h>
- #include <asm/arch/grf_rk3308.h>
- #include <asm/arch-rockchip/bootrom.h>
-@@ -14,8 +13,6 @@
- #include <debug_uart.h>
- #include <linux/bitops.h>
- 
--DECLARE_GLOBAL_DATA_PTR;
--
- #include <asm/armv8/mmu.h>
- static struct mm_region rk3308_mem_map[] = {
- 	{
-diff --git a/arch/arm/mach-rockchip/rk3328/rk3328.c b/arch/arm/mach-rockchip/rk3328/rk3328.c
-index de17b886827..02821c9e51d 100644
---- a/arch/arm/mach-rockchip/rk3328/rk3328.c
-+++ b/arch/arm/mach-rockchip/rk3328/rk3328.c
-@@ -10,11 +10,8 @@
- #include <asm/arch-rockchip/grf_rk3328.h>
- #include <asm/arch-rockchip/uart.h>
- #include <asm/armv8/mmu.h>
--#include <asm/global_data.h>
- #include <asm/io.h>
- 
--DECLARE_GLOBAL_DATA_PTR;
--
- #define CRU_BASE		0xFF440000
- #define GRF_BASE		0xFF100000
- #define UART2_BASE		0xFF130000
-diff --git a/arch/arm/mach-rockchip/rk3368/rk3368.c b/arch/arm/mach-rockchip/rk3368/rk3368.c
-index d0a6107e5e0..d009b8758e5 100644
---- a/arch/arm/mach-rockchip/rk3368/rk3368.c
-+++ b/arch/arm/mach-rockchip/rk3368/rk3368.c
-@@ -8,7 +8,6 @@
- #include <init.h>
- #include <syscon.h>
- #include <asm/armv8/mmu.h>
--#include <asm/global_data.h>
- #include <asm/io.h>
- #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/clock.h>
-@@ -18,8 +17,6 @@
- #include <linux/bitops.h>
- #include <linux/delay.h>
- 
--DECLARE_GLOBAL_DATA_PTR;
--
- #define IMEM_BASE                  0xFF8C0000
- 
- /* Max MCU's SRAM value is 8K, begin at (IMEM_BASE + 4K) */
+-#if defined(CONFIG_SPL_BUILD) && !defined(CONFIG_TPL_BUILD)
+-const char * const spl_boot_devices[BOOT_DEVICE_NONE + 1] = {
+-	[BOOT_DEVICE_MMC2] = "/mmc@ff370000",
+-	[BOOT_DEVICE_MMC1] = "/mmc@ff390000",
+-};
+-#endif
 diff --git a/arch/arm/mach-rockchip/rk3399/rk3399.c b/arch/arm/mach-rockchip/rk3399/rk3399.c
-index 801a4a6662e..a1aa0e3e8b5 100644
+index 6929de5603c..801a4a6662e 100644
 --- a/arch/arm/mach-rockchip/rk3399/rk3399.c
 +++ b/arch/arm/mach-rockchip/rk3399/rk3399.c
-@@ -11,7 +11,6 @@
- #include <spl_gpio.h>
- #include <syscon.h>
- #include <asm/armv8/mmu.h>
--#include <asm/global_data.h>
- #include <asm/io.h>
- #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/clock.h>
-@@ -23,8 +22,6 @@
- #include <linux/printk.h>
- #include <power/regulator.h>
+@@ -175,12 +175,6 @@ void board_debug_uart_init(void)
+ #endif
  
--DECLARE_GLOBAL_DATA_PTR;
+ #if defined(CONFIG_SPL_BUILD) && !defined(CONFIG_TPL_BUILD)
+-const char * const spl_boot_devices[BOOT_DEVICE_NONE + 1] = {
+-	[BOOT_DEVICE_MMC2] = "/mmc@fe320000",
+-	[BOOT_DEVICE_MMC1] = "/mmc@fe330000",
+-	[BOOT_DEVICE_SPI] = "/spi@ff1d0000/flash@0",
+-};
 -
- #define GRF_EMMCCORE_CON11 0xff77f02c
- #define GRF_BASE	0xff770000
+ static void rk3399_force_power_on_reset(void)
+ {
+ 	ofnode node;
+diff --git a/arch/arm/mach-rockchip/spl-boot-order.c b/arch/arm/mach-rockchip/spl-boot-order.c
+index 55d0976fb0a..f2cb17224e8 100644
+--- a/arch/arm/mach-rockchip/spl-boot-order.c
++++ b/arch/arm/mach-rockchip/spl-boot-order.c
+@@ -10,6 +10,7 @@
+ #include <mmc.h>
+ #include <spl.h>
+ #include <asm/global_data.h>
++#include <dm/uclass-internal.h>
  
-diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-index b1f535fad50..00e3da40d9a 100644
---- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-+++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-@@ -12,8 +12,6 @@
- #include <asm/arch-rockchip/hardware.h>
- #include <asm/arch-rockchip/ioc_rk3588.h>
+ #if CONFIG_IS_ENABLED(OF_LIBFDT)
+ /**
+@@ -163,30 +164,84 @@ void board_boot_order(u32 *spl_boot_list)
+ 		spl_boot_list[0] = spl_boot_device();
+ }
  
--DECLARE_GLOBAL_DATA_PTR;
+-__weak const char * const spl_boot_devices[BOOT_DEVICE_NONE + 1] = {};
 -
- #define FIREWALL_DDR_BASE		0xfe030000
- #define FW_DDR_MST5_REG			0x54
- #define FW_DDR_MST13_REG		0x74
+-const char *spl_decode_boot_device(u32 boot_device)
++int spl_decode_boot_device(u32 boot_device, char *buf, size_t buflen)
+ {
+-	const char *spl_bootdevice_ofpath = NULL;
++	struct udevice *dev;
++	int dev_num, ret;
++
++	if (boot_device == BOOT_DEVICE_SPI) {
++		/* Revert spl_node_to_boot_device() logic to find appropriate SPI flash device */
++
++		/*
++		 * Devices with multiple SPI flash devices will take the first SPI flash found in
++		 * /chosen/u-boot,spl-boot-order.
++		 */
++		const void *blob = gd->fdt_blob;
++		int chosen_node = fdt_path_offset(blob, "/chosen");
++		int elem;
++		int node;
++		const char *conf;
++
++		if (chosen_node < 0) {
++			debug("%s: /chosen not found\n", __func__);
++			return -ENODEV;
++		}
++
++		for (elem = 0;
++		     (conf = fdt_stringlist_get(blob, chosen_node,
++						"u-boot,spl-boot-order", elem, NULL));
++		     elem++) {
++			const char *alias;
++
++			/* Handle the case of 'same device the SPL was loaded from' */
++			if (strncmp(conf, "same-as-spl", 11) == 0) {
++				conf = board_spl_was_booted_from();
++				if (!conf)
++					continue;
++			}
++
++			/* First check if the list element is an alias */
++			alias = fdt_get_alias(blob, conf);
++			if (alias)
++				conf = alias;
++
++			/* Try to resolve the config item (or alias) as a path */
++			node = fdt_path_offset(blob, conf);
++			if (node < 0) {
++				debug("%s: could not find %s in FDT\n", __func__, conf);
++				continue;
++			}
++
++			ret = uclass_find_device_by_of_offset(UCLASS_SPI_FLASH, node, &dev);
++			if (ret) {
++				debug("%s: could not find udevice for %s\n", __func__, conf);
++				continue;
++			}
+ 
+-	if (boot_device < ARRAY_SIZE(spl_boot_devices))
+-		spl_bootdevice_ofpath = spl_boot_devices[boot_device];
++			return ofnode_get_path(dev_ofnode(dev), buf, buflen);
++		}
++
++		return -ENODEV;
++	}
+ 
+-	if (spl_bootdevice_ofpath)
+-		debug("%s: spl_bootdevice_id %x maps to '%s'\n",
+-		      __func__, boot_device, spl_bootdevice_ofpath);
+-	else
+-		debug("%s: failed to resolve spl_bootdevice_id %x\n",
+-		      __func__, boot_device);
++	dev_num = (boot_device == BOOT_DEVICE_MMC1) ? 0 : 1;
++
++	ret = blk_find_device(UCLASS_MMC, dev_num, &dev);
++	if (ret) {
++		debug("%s: could not find blk device for MMC device %d: %d\n",
++		      __func__, dev_num, ret);
++		return ret;
++	}
+ 
+-	return spl_bootdevice_ofpath;
++	dev = dev_get_parent(dev);
++	return ofnode_get_path(dev_ofnode(dev), buf, buflen);
+ }
+ 
+ void spl_perform_fixups(struct spl_image_info *spl_image)
+ {
+ 	void *blob = spl_image->fdt_addr;
+-	const char *boot_ofpath;
+-	int chosen;
++	char boot_ofpath[512];
++	int chosen, ret;
+ 
+ 	/*
+ 	 * Inject the ofpath of the device the full U-Boot (or Linux in
+@@ -196,9 +251,9 @@ void spl_perform_fixups(struct spl_image_info *spl_image)
+ 	if (!blob)
+ 		return;
+ 
+-	boot_ofpath = spl_decode_boot_device(spl_image->boot_device);
+-	if (!boot_ofpath) {
+-		pr_err("%s: could not map boot_device to ofpath\n", __func__);
++	ret = spl_decode_boot_device(spl_image->boot_device, boot_ofpath, sizeof(boot_ofpath));
++	if (ret) {
++		pr_err("%s: could not map boot_device to ofpath: %d\n", __func__, ret);
+ 		return;
+ 	}
+ 
 
 -- 
 2.43.0
