@@ -4,44 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E65CBC47077
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 00:19:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93878C47077
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 00:40:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BDA386FB0;
-	Wed, 17 Jan 2024 01:19:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id C902F8753E;
+	Wed, 17 Jan 2024 01:40:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mP7z+57q";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68BDC877DA; Wed, 17 Jan 2024 01:19:56 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 63AA386F67
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 01:19:54 +0100 (CET)
+ id 5488D87559; Wed, 17 Jan 2024 01:40:36 +0100 (CET)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 75F498753E
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 01:40:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 26FF82F4;
- Tue, 16 Jan 2024 16:20:40 -0800 (PST)
-Received: from minigeek.lan (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 061483F5A1;
- Tue, 16 Jan 2024 16:19:52 -0800 (PST)
-Date: Wed, 17 Jan 2024 00:19:05 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Samuel Holland <samuel@sholland.org>
-Cc: Jagan Teki <jagan@amarulasolutions.com>, u-boot@lists.denx.de, Icenowy
- Zheng <icenowy@aosc.io>, Jesse Taube <Mr.Bossman075@gmail.com>
-Subject: Re: [PATCH v3 4/4] sunxi: Enable SPL FIT loading for 32-bit SoCs
-Message-ID: <20240117001905.0d9954eb@minigeek.lan>
-In-Reply-To: <20231208013945.6ac0b9e8@slackpad.lan>
-References: <20231031051805.62430-1-samuel@sholland.org>
- <20231031051805.62430-5-samuel@sholland.org>
- <20231208013945.6ac0b9e8@slackpad.lan>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-1d48a8ed85bso25407125ad.0
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 16:40:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1705452032; x=1706056832; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6Nvdd2iRaHS3P64zC7pmDYRMjJAbM11guYkeIIkOPdU=;
+ b=mP7z+57qIYeglF1FCgpz9NqBHb2/BRknf2Q1eO9z9JoabgG4xn284yKMR4rPvX61rK
+ uVWoELSxPalsUrlFZR7cfLNje7FtSAFDPW5d8xabwcS6eleAsIS5QyLZG5FyYpr02ZIU
+ 7RysjdcyDgaeGax2o5BYBQFW0n4Ymk6hXzhIBnZUeGjYlJZ1p5t2+v2YlLbTglVxBAgL
+ pONtLLb5K5pDy7hLi2UzdJ+t4VGhKhh3/nE0sn8fljQg4I871Hlny/tzjSVWCBJj7bn8
+ GxliAOuFSujmYU9qOtjeZ2Z9EvxeNbnroj3AY4E2/UB1PLGDJzshghIUoZGVavcRmLvI
+ iT3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705452032; x=1706056832;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=6Nvdd2iRaHS3P64zC7pmDYRMjJAbM11guYkeIIkOPdU=;
+ b=woDP4cVTZFX8dXiRJr3qC/PMWqEwoayBVYpA2X+MeF/Jqzf/b7LQdlPj/0AcaXtRIU
+ bTqCoTxQGjOjLNFptAnxyJR29Y0Yj7zSrwMF9zwzRtt7z0y7VFY/pA2zSNDR1ZgSQbQX
+ 67FUwrALvGll7xt6jsDmINrEY8a9Pjs4ujI4OHy3wZ1FeTBd1s3iCZgNRrOea0qqFzlh
+ k3NJZmPhgBmAskuosKocfRkyVB5hfS70xnGoXX6HMdw2oIuKXbVBkZ8LiKw3BIFcMJR+
+ sg+llk+p+SqfndTnmhFeQFQQMauJI9XzUnL5YMR7k7DITyTyP5ZmT6kNp8cw+YMGACox
+ vm9A==
+X-Gm-Message-State: AOJu0YwIgRK6Vg/DtUNq1pSHDr81yfSadWMGetZlBIZifYT72OttWLUy
+ 2XxXHgUblhbt/Vq5zR0anixj7shCmk1OzA==
+X-Google-Smtp-Source: AGHT+IGZwxqD1BYXtBqUVts4OEeGGdYArqeSPiusrja0btRLxBx6HtxcmVM5i4hSZe/x9ecZaW7cUA==
+X-Received: by 2002:a17:902:d50e:b0:1d4:e2bc:891c with SMTP id
+ b14-20020a170902d50e00b001d4e2bc891cmr15600889plg.5.1705452031518; 
+ Tue, 16 Jan 2024 16:40:31 -0800 (PST)
+Received: from octopus ([2400:4050:c3e1:100:e481:26af:1a49:433a])
+ by smtp.gmail.com with ESMTPSA id
+ lo13-20020a170903434d00b001d3a371cd24sm9939714plb.53.2024.01.16.16.40.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 16 Jan 2024 16:40:31 -0800 (PST)
+Date: Wed, 17 Jan 2024 09:40:28 +0900
+From: AKASHI Takahiro <takahiro.akashi@linaro.org>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
+ ilias.apalodimas@linaro.org
+Subject: Re: [PATCH v4 2/4] efi_loader: rename BOOTEFI_BOOTMGR to EFI_BOOTMGR
+Message-ID: <Zach/J8WDx23Yz2K@octopus>
+Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
+ trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org
+References: <20240110011637.174710-1-takahiro.akashi@linaro.org>
+ <20240110011637.174710-3-takahiro.akashi@linaro.org>
+ <1c42a17d-1043-4449-93c2-9020c1ded71d@gmx.de>
+ <ZaSDUrTQ2Z5N+gil@octopus>
+ <d70d5134-1cc9-4d56-9aa3-499ed992584c@gmx.de>
+ <ZaUFH3r9MdW+tHTv@octopus>
+ <379beb70-c147-470d-ac45-ecc8c93a5f52@gmx.de>
+ <ZaXfNy2V8y0N1o08@octopus>
+ <ddc1e7d2-c70d-4a7d-884a-6a18db3ea1c5@gmx.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ddc1e7d2-c70d-4a7d-884a-6a18db3ea1c5@gmx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,79 +103,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 8 Dec 2023 01:39:45 +0000
-Andre Przywara <andre.przywara@arm.com> wrote:
-
-Hi Samuel,
-
-> On Tue, 31 Oct 2023 00:17:41 -0500
-> Samuel Holland <samuel@sholland.org> wrote:
-> 
-> Hi,
-> 
-> > Now that 32-bit SoCs can load U-Boot proper (and possibly other
-> > firmware) from a FIT, use this method by default. SPL_FIT_IMAGE_TINY is
-> > required to stay within the 24 or 32 KiB SPL size limit on early SoCs;
-> > for consistency, enable it everywhere.  
-> 
-> Mmh, so that changes the build for an awful lot of boards, especially
-> old ones that no one can be bothered to test anymore. I am bit scared
-> of that change there, especially with the limited SRAM size there.
-> 
-> I think the main motivation stems from crust on H3, and since H3 boards
-> are still in good use and get tested, I'd prefer to enable it just for
-> H3 boards, at least for now.
-> If we don't hear anything bad for a while, we could try to enable it
-> (by default) on the other SoCs as well.
-> 
-> What do you think?
-
-Any ideas here? I plan to take the other three patches, which would
-already allow people to enable FIT in their (def)config.
-I can just leave this one off for now, and we can merge a changed
-version later?
-
-Cheers,
-Andre
-
+On Tue, Jan 16, 2024 at 07:44:22PM +0100, Heinrich Schuchardt wrote:
+> On 1/16/24 02:43, AKASHI Takahiro wrote:
+> > On Mon, Jan 15, 2024 at 03:16:22PM +0100, Heinrich Schuchardt wrote:
+> > > On 15.01.24 11:12, AKASHI Takahiro wrote:
+> > > > On Mon, Jan 15, 2024 at 09:34:51AM +0100, Heinrich Schuchardt wrote:
+> > > > > On 1/15/24 01:58, AKASHI Takahiro wrote:
+> > > > > > On Sun, Jan 14, 2024 at 01:46:45PM +0100, Heinrich Schuchardt wrote:
+> > > > > > > On 1/10/24 02:16, AKASHI Takahiro wrote:
+> > > > > > > > At this point, EFI boot manager interfaces is fully independent from
+> > > > > > > > bootefi command. So just rename the configuration parameter.
+> > > > > > > > 
+> > > > > > > > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> > > > > > > > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > > > > > > 
+> > > > > > > This patch breaks the 'bootefi hello' command in
+> > > > > > > qemu-riscv64_smode_defconfig and other QEMU defconfigs.
+> > > > > > 
+> > > > > > What happened? Please elaborate details so that I can trace your issue.
+> > > > > > 
+> > > > > > On my side, I didn't see any problem with "bootefi hello" on qemu-arm64
+> > > > > > and moreover CI check (github pull request) didn't complain anything.
+> > > > > 
+> > > > > The failures are logged in
+> > > > > https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/19302
+> > > > 
+> > > > In the logs for qemu-arm64, qemu-risc64 and maybe others as well,
+> > > > I see the same error:
+> > > > --- ---
+> > > > ______________________________ test_efi_grub_net _______________________________
+> > > > test/py/tests/test_efi_loader.py:188: in test_efi_grub_net
+> > > >       addr = fetch_tftp_file(u_boot_console, 'env__efi_loader_grub_file')
+> > > > test/py/tests/test_efi_loader.py:136: in fetch_tftp_file
+> > > >       assert expected_text in output
+> > > > E   assert 'Bytes transferred = 520192' in "*** ERROR: `serverip' not set"
+> > > > --- ---
+> > > > 
+> > > > This seems to be the root cause and my commit will have nothing to do
+> > > > with the problem.
+> > > > Please check the test environment.
+> > > 
+> > > You are looking at test_efi_grub_net. I referred to 'bootefi hello',
+> > > i.e. test_efi_helloworld_builtin:
+> > > 
+> > > 
+> > > ----------------------------- Captured stdout call
+> > > -----------------------------
+> > > => bootefi hello
+> > > 
+> > > =>
+> > > 
+> > > 
+> > > The command does not provide any output.
 > > 
-> > Signed-off-by: Samuel Holland <samuel@sholland.org>
-> > ---
+> > Ah, yeah, but
 > > 
-> > (no changes since v2)
+> > > > 
+> > > > -Takahiro Akashi
+> > > > 
+> > > > > I have pushed the tag failed_20240114 to
+> > > > > https://source.denx.de/u-boot/custodians/u-boot-efi.git for analysis.
 > > 
-> > Changes in v2:
-> >  - New patch for v2, split from the .dtsi changes
-> > 
-> >  arch/arm/Kconfig   | 1 +
-> >  common/spl/Kconfig | 3 +--
-> >  2 files changed, 2 insertions(+), 2 deletions(-)
-> > 
-> > diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> > index d812685c984..42781d02f0f 100644
-> > --- a/arch/arm/Kconfig
-> > +++ b/arch/arm/Kconfig
-> > @@ -1167,6 +1167,7 @@ config ARCH_SUNXI
-> >  	imply SPL_GPIO
-> >  	imply SPL_LIBCOMMON_SUPPORT
-> >  	imply SPL_LIBGENERIC_SUPPORT
-> > +	imply SPL_LOAD_FIT
-> >  	imply SPL_MMC if MMC
-> >  	imply SPL_POWER
-> >  	imply SPL_SERIAL
-> > diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> > index a0968ff1065..aebbfbf99d2 100644
-> > --- a/common/spl/Kconfig
-> > +++ b/common/spl/Kconfig
-> > @@ -567,8 +567,7 @@ config SYS_MMCSD_RAW_MODE_EMMC_BOOT_PARTITION
-> >  config SPL_FIT_IMAGE_TINY
-> >  	bool "Remove functionality from SPL FIT loading to reduce size"
-> >  	depends on SPL_FIT
-> > -	default y if MACH_SUN50I || MACH_SUN50I_H5 || SUN50I_GEN_H6
-> > -	default y if ARCH_IMX8M || ARCH_IMX9
-> > +	default y if ARCH_IMX8M || ARCH_IMX9 || ARCH_SUNXI
-> >  	help
-> >  	  Enable this to reduce the size of the FIT image loading code
-> >  	  in SPL, if space for the SPL binary is very tight.  
+> > While I compiled this code and tried to run "bootefi hello",
+> > I could not reproduce this issue, always seeing the right output
+> > either on qemu-arm64 or sandbox64.
+> > (I also invoked test_efi_loader/efi_helloworld_builtin locally,
+> > but the test passed.)
+> > So no clue.
 > 
+> Please, rebase your patch set upon origin/master and retry the tests.
 
+After rebasing my commits to the latest master (please note that my v4 has
+already been rebased on the master at my submission time), I tried the test
+again but anyhow the test passed as before on my side.
+I'm not able to reproduce your issue.
+
+The only conflicting commit was f19171c919e0 ("efi_loader: Clean up
+efi_dp_append and efi_dp_concat"). I don't think that it would make
+any difference.
+
+-Takahiro Akashi
+
+
+> Best regards
+> 
+> Heinrich
+> 
