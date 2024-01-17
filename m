@@ -4,47 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BF00C47258
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 17:25:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F33EEC47422
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 17:30:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F6A087BCD;
-	Wed, 17 Jan 2024 18:24:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 29B1D8798C;
+	Wed, 17 Jan 2024 18:30:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="TTImIE/R";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B249987ABE; Wed, 17 Jan 2024 18:24:10 +0100 (CET)
-Received: from smtp-190f.mail.infomaniak.ch (smtp-190f.mail.infomaniak.ch
- [IPv6:2001:1600:3:17::190f])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4904687947; Wed, 17 Jan 2024 18:30:53 +0100 (CET)
+Received: from mail-pg1-x542.google.com (mail-pg1-x542.google.com
+ [IPv6:2607:f8b0:4864:20::542])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92B35879F7
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 18:24:06 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (unknown [10.7.10.108])
- by smtp-2-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TFXmQ14zKzMqFc7;
- Wed, 17 Jan 2024 17:24:06 +0000 (UTC)
-Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4TFXmP3Qj3zmtl; Wed, 17 Jan 2024 18:24:05 +0100 (CET)
-From: Quentin Schulz <foss+uboot@0leil.net>
-To: heiko@sntech.de, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>
-Cc: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de,
- jonas@kwiboo.se, Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Subject: [PATCH v3 6/6] rockchip: rk3128: remove noop file
-Date: Wed, 17 Jan 2024 18:23:00 +0100
-Message-ID: <20240117-rk3588-spl-boot-dev-v3-6-72cb989e6da8@theobroma-systems.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240117-rk3588-spl-boot-dev-v3-0-72cb989e6da8@theobroma-systems.com>
-References: <20240117-rk3588-spl-boot-dev-v3-0-72cb989e6da8@theobroma-systems.com>
+ by phobos.denx.de (Postfix) with ESMTPS id C41758798C
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 18:30:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=francis.laniel@amarulasolutions.com
+Received: by mail-pg1-x542.google.com with SMTP id
+ 41be03b00d2f7-5cec32dedf3so5387003a12.0
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 09:30:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1705512648; x=1706117448;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QiMiuDKv+OSzLBfaBNzvc/C93oLI03VY9n7oldJDDqk=;
+ b=TTImIE/RcpIPONcodaWzxZOOZ7h2QUtE9dvnd/jlrFszFX2uRR2D8oxqiczAypCoSC
+ RMaeC8tjTdkvfO3HYuj5BW/hn+j4/2y3wQqh8076EXEfv0vSL7HiwGcZmCccTpvOu5qX
+ ApVlGQcO1ZmwtTNupixA8B5OvFAFIpQcr0hFE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705512648; x=1706117448;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QiMiuDKv+OSzLBfaBNzvc/C93oLI03VY9n7oldJDDqk=;
+ b=MA7NzJK5N+TP7ewG5k/Zlhs5sPZUE6JicdLZOI/iZOpPVsa9dW09DvqZ3ynwSrSmu5
+ zVBPMEW8K/KoTDx5Ytqoc4I0ylscmPFD7WTlRpW1JzbuyK2JTPkj7I+uqLoJBknWHP8T
+ v6uOmw79uix4kEZM3RRYjllmOwfk6IDJkZC1Sca0QKnQmZNwh3tMXSjf0scHzLQX0iZr
+ YEggleuGeeQgkIByrvLp2wB2AmD16rEWNW4LbQnhXx//cNKutiKkVm3bjH1uZXNlFJ/W
+ jySHupKjZ90X5cPeNODm+BohoZwjwhaibxBrCDMB9SUu71Ah6b7dOWem5PCeIELeNjHy
+ V+JQ==
+X-Gm-Message-State: AOJu0Yy4C+YDKL1YSAibof2eSwDvlo1nQZc6bNr0VfZNKzBOsWMTDjU0
+ VFV9kDC2OpsO3P2WZyuTAeQudYSd1eENQg==
+X-Google-Smtp-Source: AGHT+IFtEmiOuhFZmnWc5BO7DSiAkgNPru6Y8WP4OKauyiohBB2da40hQE666yKK6JWvQRsExMMVaQ==
+X-Received: by 2002:a17:90b:60a:b0:28f:f1c0:3d21 with SMTP id
+ gb10-20020a17090b060a00b0028ff1c03d21mr1300426pjb.41.1705512647742; 
+ Wed, 17 Jan 2024 09:30:47 -0800 (PST)
+Received: from pwmachine.localnet (mx-ll-171.4.233-91.dynamic.3bb.co.th.
+ [171.4.233.91]) by smtp.gmail.com with ESMTPSA id
+ np8-20020a17090b4c4800b0028e73f66facsm4112949pjb.26.2024.01.17.09.30.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 17 Jan 2024 09:30:47 -0800 (PST)
+From: Francis Laniel <francis.laniel@amarulasolutions.com>
+To: Francesco Dolcini <francesco@dolcini.it>, Tom Rini <trini@konsulko.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Patrice CHOTARD <patrice.chotard@foss.st.com>
+Cc: u-boot@lists.denx.de,
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH v13 00/24] Modernize U-Boot shell
+Date: Thu, 18 Jan 2024 00:30:42 +0700
+Message-ID: <12363012.O9o76ZdvQC@pwmachine>
+In-Reply-To: <3033df6b-e9c2-41e7-a83e-4c3200268629@foss.st.com>
+References: <20231222210244.91830-1-francis.laniel@amarulasolutions.com>
+ <2170847.irdbgypaU6@pwmachine>
+ <3033df6b-e9c2-41e7-a83e-4c3200268629@foss.st.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-X-Mailer: b4 0.12.4
-Content-Transfer-Encoding: 8bit
-X-Infomaniak-Routing: alpha
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,51 +95,411 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Hi!
 
-arch_cpu_init is already returning 0 in its weak definition in
-common/board_f.c so let's just remove the file entirely since nothing
-else is done in it.
 
-Cc: Quentin Schulz <foss+uboot@0leil.net>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
-Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
----
- arch/arm/mach-rockchip/rk3128/Makefile |  1 -
- arch/arm/mach-rockchip/rk3128/rk3128.c | 13 -------------
- 2 files changed, 14 deletions(-)
+Le mercredi 17 janvier 2024, 17:05:28 +07 Patrice CHOTARD a =E9crit :
+> On 1/16/24 18:25, Francis Laniel wrote:
+> > Hi!
+> >=20
+> > Le mardi 16 janvier 2024, 00:34:24 +07 Patrice CHOTARD a =E9crit :
+> >> On 1/11/24 18:04, Francesco Dolcini wrote:
+> >>> Hello Tom, Francis
+> >>>=20
+> >>> On Fri, Dec 29, 2023 at 07:55:37PM +0100, Francis Laniel wrote:
+> >>>> Le jeudi 28 d=E9cembre 2023, 21:58:59 CET Tom Rini a =E9crit :
+> >>>>> On Fri, 22 Dec 2023 22:02:20 +0100, Francis Laniel wrote:
+> >>>>>> During 2021 summer, Sean Anderson wrote a contribution to add a new
+> >>>>>> shell,
+> >>>>>> based on LIL, to U-Boot [1, 2].
+> >>>>>> While one of the goals of this contribution was to address the fact
+> >>>>>> actual
+> >>>>>> U-Boot shell, which is based on Busybox hush, is old there was a
+> >>>>>> discussion
+> >>>>>> about adding a new shell versus updating the actual one [3, 4].
+> >>>>>>=20
+> >>>>>> So, in this series, with Harald Seiler, we updated the actual U-Bo=
+ot
+> >>>>>> shell
+> >>>>>> to reflect what is currently in Busybox source code.
+> >>>>>> Basically, this contribution is about taking a snapshot of Busybox
+> >>>>>> shell/hush.c file (as it exists in commit 37460f5da) and adapt it =
+to
+> >>>>>> suit
+> >>>>>> U-Boot needs.
+> >>>>>>=20
+> >>>>>> [...]
+> >>>>>=20
+> >>>>> Applied to u-boot/next, thanks!
+> >>>>=20
+> >>>> Thank you for the merge!
+> >>>> If there is any problem, do not hesitate to mail me and I will take
+> >>>> care
+> >>>> of
+> >>>> it!
+> >>>=20
+> >>> This change, specifically setting the modern hush shell as default, is
+> >>> breaking our boot script, just noticed since the current U-Boot master
+> >>> has a regression for us.
+> >>>=20
+> >>> We still need to figure out the exact details, here [1] you can find =
+the
+> >>> boot script (that has some placeholder that is replaced during build).
+> >>>=20
+> >>> and the error is something like:
+> >>>=20
+> >>> ```
+> >>> ## Executing script at 90280000
+> >>> Loading DeviceTree: k3-am625-verdin-nonwifi-dev.dtb
+> >>> 69025 bytes read in 11 ms (6 MiB/s)
+> >>> 82 bytes read in 9 ms (8.8 KiB/s)
+> >>> Working FDT set to 90200000
+> >>> syntax error at 'done'HUSH died!
+> >>> resetting ...
+> >>> ```
+> >>>=20
+> >>> that I _assume_ comes from this line
+> >>>=20
+> >>>     env set set_apply_overlays 'env set apply_overlays "for overlay_f=
+ile
+> >>>     in \\${fdt_overlays}; do echo Applying Overlay: \\${overlay_file}=
+ &&
+> >>>     ${load_cmd} \\${loadaddr} \\${overlays_prefix}\\${overlay_file} &&
+> >>>     fdt apply \\${loadaddr}; env set overlay_file; done; true"'>
+> >>>=20
+> >>> [1]
+> >>> https://git.toradex.com/cgit/meta-toradex-bsp-common.git/tree/recipes=
+=2Dbs
+> >>> p
+> >>> /u-boot/u-boot-distro-boot/boot.cmd.in
+> >>>=20
+> >>> Francesco
+> >>=20
+> >> Hi all
+> >>=20
+> >> I observed a similar issue with STM32MP157c-DK2 board.
+> >> Since commit 78912cfde281 ("cmd: Set modern hush as default shell")
+> >> U-Boot
+> >> crashes :
+> >>=20
+> >>=20
+> >> U-Boot 2024.01-00486-g697758e7c81-dirty (Jan 15 2024 - 18:23:52 +0100)
+> >>=20
+> >> CPU: STM32MP157CAC Rev.B
+> >> Model: STMicroelectronics STM32MP157C-DK2 Discovery Board
+> >> Board: stm32mp1 in trusted mode (st,stm32mp157c-dk2)
+> >> Board: MB1272 Var2.0 Rev.C-01
+> >> DRAM:  512 MiB
+> >> Clocks:
+> >> - MPU : 650 MHz
+> >> - MCU : 208.878 MHz
+> >> - AXI : 266.500 MHz
+> >> - PER : 24 MHz
+> >> - DDR : 533 MHz
+> >> optee optee: OP-TEE: revision 4.0 (e92de4ca)
+> >> I/TC: Reserved shared memory is disabled
+> >> I/TC: Dynamic shared memory is enabled
+> >> I/TC: Normal World virtualization support is disabled
+> >> I/TC: Asynchronous notifications are disabled
+> >> Core:  311 devices, 40 uclasses, devicetree: board
+> >> WDT:   Started watchdog@5a002000 with servicing every 1000ms (32s
+> >> timeout)
+> >> NAND:  0 MiB
+> >> MMC:   STM32 SD/MMC: 0
+> >> Loading Environment from MMC... OK
+> >> In:    No input devices available!
+> >> Out:   No output devices available!
+> >> Err:   No error devices available!
+> >> Net:   eth0: ethernet@5800a000
+> >> Hit any key to stop autoboot:  0
+> >> Boot over mmc0!
+> >> switch to partitions #0, OK
+> >> mmc0 is current device
+> >> Scanning mmc 0:8...
+> >> data abort
+> >> pc : [<ddb3f77a>]          lr : [<ddb44c95>]
+> >> reloc pc : [<c012777a>]    lr : [<c012cc95>]
+> >> sp : dbafc848  ip : ddbfc578     fp : ddbedf18
+> >> r10: 00000000  r9 : dbb15e70     r8 : 00000000
+> >> r7 : dbb5bf98  r6 : dbb5de10     r5 : dbb5bf98  r4 : ddbeda78
+> >> r3 : dbb5dc08  r2 : 000033f8     r1 : 00000071  r0 : ddbede00
+> >> Flags: nzcv  IRQs off  FIQs off  Mode SVC_32 (T)
+> >> Code: 3138 1c48 f854 0030 (eb04) 05c1
+> >> Resetting CPU ...
+> >>=20
+> >>=20
+> >> It crashes in blkcache_fill() , i didn't investigate deeply into this
+> >> issue
+> >> yet, but i can reproduce this issue by stopping autoboot by pressing a
+> >> key
+> >> and running a environment command as shown below :
+> >>=20
+> >> U-Boot 2024.01-00486-g697758e7c81-dirty (Jan 15 2024 - 18:23:52 +0100)
+> >>=20
+> >> CPU: STM32MP157CAC Rev.B
+> >> Model: STMicroelectronics STM32MP157C-DK2 Discovery Board
+> >> Board: stm32mp1 in trusted mode (st,stm32mp157c-dk2)
+> >> Board: MB1272 Var2.0 Rev.C-01
+> >> DRAM:  512 MiB
+> >> Clocks:
+> >> - MPU : 650 MHz
+> >> - MCU : 208.878 MHz
+> >> - AXI : 266.500 MHz
+> >> - PER : 24 MHz
+> >> - DDR : 533 MHz
+> >> optee optee: OP-TEE: revision 4.0 (e92de4ca)
+> >> I/TC: Reserved shared memory is disabled
+> >> I/TC: Dynamic shared memory is enabled
+> >> I/TC: Normal World virtualization support is disabled
+> >> I/TC: Asynchronous notifications are disabled
+> >> Core:  311 devices, 40 uclasses, devicetree: board
+> >> WDT:   Started watchdog@5a002000 with servicing every 1000ms (32s
+> >> timeout)
+> >> NAND:  0 MiB
+> >> MMC:   STM32 SD/MMC: 0
+> >> Loading Environment from MMC... OK
+> >> In:    No input devices available!
+> >> Out:   No output devices available!
+> >> Err:   No error devices available!
+> >> Net:   eth0: ethernet@5800a000
+> >> Hit any key to stop autoboot:  0
+> >> STM32MP>
+> >> STM32MP>
+> >>=20
+> >>=20
+> >> Then i run "printenv" :
+> >>=20
+> >> STM32MP> printenv
+> >> arch=3Darm
+> >> autoload=3D0
+> >> baudrate=3D115200
+> >> board=3Dstm32mp1
+> >> board_id=3D0x1272
+> >> board_name=3Dstm32mp157c-dk2
+> >> board_rev=3D0x000c
+> >> boot_a_script=3Dload ${devtype} ${devnum}:${distro_bootpart} ${scripta=
+ddr}
+> >> ${prefix}${script}; source ${scriptaddr} boot_auth=3D0
+> >> boot_device=3Dmmc
+> >> boot_efi_binary=3Dload ${devtype} ${devnum}:${distro_bootpart}
+> >> ${kernel_addr_r} efi/boot/bootarm.efi; if fdt addr -q ${fdt_addr_r}; t=
+hen
+> >> bootefi ${kernel_addr_r} ${fdt_i boot_efi_bootmgr=3Dif fdt addr -q
+> >> ${fdt_addr_r}; then bootefi bootmgr ${fdt_addr_r};else bootefi bootmgr=
+;fi
+> >> boot_extlinux=3Dsysboot ${devtype} ${devnum}:${distro_bootpart} any
+> >> ${scriptaddr} ${prefix}${boot_syslinux_conf} boot_instance=3D0
+> >> boot_net_usb_start=3Dtrue
+> >> boot_part=3D1
+> >> boot_prefixes=3D/ /boot/
+> >> boot_script_dhcp=3Dboot.scr.uimg
+> >> boot_scripts=3Dboot.scr.uimg boot.scr
+> >> boot_syslinux_conf=3Dextlinux/extlinux.conf
+> >> boot_targets=3Dmmc1 ubifs0 mmc0 mmc2 usb0 pxe
+> >> bootcmd=3Drun bootcmd_stm32mp
+> >> bootcmd_mmc0=3Ddevnum=3D0; run mmc_boot
+> >> bootcmd_mmc1=3Ddevnum=3D1; run mmc_boot
+> >> bootcmd_mmc2=3Ddevnum=3D2; run mmc_boot
+> >> bootcmd_pxe=3Drun boot_net_usb_start; dhcp; if pxe get; then pxe boot;=
+ fi
+> >> bootcmd_stm32mp=3Decho "Boot over ${boot_device}${boot_instance}!";if =
+test
+> >> ${boot_device} =3D serial || test ${boot_device} =3D usb;then stm32prog
+> >> ${boot_device} ${boot_ins; bootcmd_ubifs0=3Dbootubipart=3DUBI;
+> >> bootubivol=3Dboot;
+> >> bootubioff=3D; run ubifs_boot bootcmd_usb0=3Ddevnum=3D0; run usb_boot
+> >> bootdelay=3D1
+> >> console=3DttySTM0
+> >> cpu=3Darmv7
+> >> distro_bootcmd=3Dfor target in ${boot_targets}; do run bootcmd_${targe=
+t};
+> >> done efi_dtb_prefixes=3D/ /dtb/ /dtb/current/
+> >> env_check=3Dif env info -p -d -q; then env save; fi
+> >> ethaddr=3D00:80:e1:42:48:f9
+> >> fdt_addr_r=3D0xc4000000
+> >> fdtcontroladdr=3Ddbafd730
+> >> fdtfile=3Dstm32mp157c-dk2.dtb
+> >> fdtoverlay_addr_r=3D0xc4300000
+> >> kernel_addr_r=3D0xc2000000
+> >> load_efi_dtb=3Dload ${devtype} ${devnum}:${distro_bootpart} ${fdt_addr=
+_r}
+> >> ${prefix}${efi_fdtfile} loadaddr=3D0xc2000000
+> >> mmc_boot=3Dif mmc dev ${devnum}; then devtype=3Dmmc; run
+> >> scan_dev_for_boot_part; fi pxefile_addr_r=3D0xc4200000
+> >> ramdisk_addr_r=3D0xc4400000
+> >> scan_dev_for_boot=3Decho Scanning ${devtype}
+> >> ${devnum}:${distro_bootpart}...;
+> >> for prefix in ${boot_prefixes}; do run scan_dev_for_extlinux; run
+> >> scan_dev_for_scripts; do; scan_dev_for_boot_part=3Dpart list ${devtype}
+> >> ${devnum} -bootable devplist; env exists devplist || setenv devplist 1;
+> >> for
+> >> distro_bootpart in ${devplist}; do if fstype $t scan_dev_for_efi=3Dset=
+env
+> >> efi_fdtfile ${fdtfile}; if test -z "${fdtfile}" -a -n "${soc}"; then
+> >> setenv
+> >> efi_fdtfile ${soc}-${board}${boardver}.dtb; fi; for prefix in ${efe
+> >> scan_dev_for_extlinux=3Dif test -e ${devtype} ${devnum}:${distro_bootp=
+art}
+> >> ${prefix}${boot_syslinux_conf}; then echo Found
+> >> ${prefix}${boot_syslinux_conf}; run boot_extli scan_dev_for_scripts=3D=
+for
+> >> script in ${boot_scripts}; do if test -e ${devtype}
+> >> ${devnum}:${distro_bootpart} ${prefix}${script}; then echo Found U-Boot
+> >> script ${prefix}$e scriptaddr=3D0xc4100000
+> >> serial#=3D003700433338511634383330
+> >> serverip=3D192.168.1.1
+> >> soc=3Dstm32mp
+> >> soc_pkg=3DAC
+> >> soc_rev=3DB
+> >> soc_type=3D157C
+> >> splashimage=3D0xc2000000
+> >> splashpos=3Dm,m
+> >> ubifs_boot=3Dif ubi part ${bootubipart} ${bootubioff} && ubifsmount
+> >> ubi0:${bootubivol}; then devtype=3Dubi; devnum=3Dubi0; bootfstype=3Dub=
+ifs;
+> >> distro_bootpart=3D${bootubivol}; i usb_boot=3Dusb start; if usb dev
+> >> ${devnum};
+> >> then devtype=3Dusb; run scan_dev_for_boot_part; fi usb_pgood_delay=3D2=
+000
+> >> vendor=3Dst
+> >>=20
+> >> Environment size: 4321/8187 bytes
+> >>=20
+> >>=20
+> >> and after i execute "run bootcmd_mmc0"
+> >>=20
+> >> STM32MP> run bootcmd_mmc0
+> >> switch to partitions #0, OK
+> >> mmc0 is current device
+> >> Scanning mmc 0:8...
+> >> data abort
+> >> pc : [<ddb3f7a4>]          lr : [<ddb44c95>]
+> >> reloc pc : [<c01277a4>]    lr : [<c012cc95>]
+> >> sp : dbafcad8  ip : ddbfc578     fp : ddbedf18
+> >> r10: 00000000  r9 : dbb15e70     r8 : 00000000
+> >> r7 : dbb5f700  r6 : dbb615b8     r5 : dbb5f700  r4 : ddbeda78
+> >> r3 : dbb613b0  r2 : 00005c50     r1 : 0000002e  r0 : 00005c51
+> >> Flags: Nzcv  IRQs off  FIQs off  Mode SVC_32 (T)
+> >> Code: 315b e7e9 2954 d802 (0b11) 316e
+> >> Resetting CPU ...
+> >>=20
+> >> resetting ...
+>=20
+> Hi Francis
+>=20
+> > Again, sorry for the troubles caused...
+> > With regard to crashing in blkcache_fill() I suspect this is because so=
+me
+> > input data are wrong due to error in hush.
+>=20
+> I got additionnal information, the crash occurs more precisely in
+> blkcache_invalidate() when executing "free(node->cache);"
+>=20
+> Another information, the issue doesn't occurs if the partition, on which =
+we
+> attempt to read, is formatted in EXT4. In my case, the partition is
+> formatted in FAT.
+> > I am not really sure to understand how you reproduced it. Do you need to
+> > run printenv before to generate the bug?
+>=20
+> No, the printenv is not necessary, it was just to give some clue just in
+> case.
+> > Also, can you please check the value of scan_dev_for_boot_part? I am
+> > wondering if something is wrong with variable expansion and escaping
+> > character.
+> I finally succeed to reproduce the issue with limited action :
+>=20
+> U-Boot 2024.01-00486-g697758e7c81 (Jan 17 2024 - 09:14:46 +0100)
+>=20
+> CPU: STM32MP157CAC Rev.B
+> Model: STMicroelectronics STM32MP157C-DK2 Discovery Board
+> Board: stm32mp1 in trusted mode (st,stm32mp157c-dk2)
+> Board: MB1272 Var2.0 Rev.C-01
+> DRAM:  512 MiB
+> Clocks:
+> - MPU : 650 MHz
+> - MCU : 208.878 MHz
+> - AXI : 266.500 MHz
+> - PER : 24 MHz
+> - DDR : 533 MHz
+> optee optee: OP-TEE: revision 4.0 (a441cdcf)
+> I/TC: Reserved shared memory is disabled
+> I/TC: Dynamic shared memory is enabled
+> I/TC: Normal World virtualization support is disabled
+> I/TC: Asynchronous notifications are disabled
+> Core:  311 devices, 40 uclasses, devicetree: board
+> WDT:   Started watchdog@5a002000 with servicing every 1000ms (32s timeout)
+> NAND:  0 MiB
+> MMC:   STM32 SD/MMC: 0
+> Loading Environment from MMC... Invalid ENV offset in MMC, copy=3D0
+> In:    No input devices available!
+> Out:   No output devices available!
+> Err:   No error devices available!
+> Net:   eth0: ethernet@5800a000
+> Hit any key to stop autoboot:  0
+> STM32MP> ls mmc 0:8
+>      5545   boot.scr.uimg
+>             mmc0_extlinux/
+>             mmc1_extlinux/
+>             nand0_extlinux/
+>     18244   splash.bmp
+>    384894   splash_yellow.bmp
+>   6243746   st-image-resize-initrd
+>     44390   stm32mp135f-dk.dtb
+>     98349   stm32mp157c-dk2-scmi.dtb
+>     97393   stm32mp157c-dk2.dtb
+>     98101   stm32mp157c-ev1-scmi.dtb
+>     97137   stm32mp157c-ev1.dtb
+>      1248   ubootefi.var
+>             uefi-certificates/
+>   8761856   zImage
+>   8057344   zImage-6.7.0-rt-rt1
+>   8763400   zImage.signed
+>=20
+> 13 file(s), 4 dir(s)
+>=20
+> STM32MP> env set list 1 boot.scr.uimg splash.bmp
+> STM32MP> env print list
+> list=3D1 boot.scr.uimg splash.bmp
+> STM32MP> for i in ${list}; do if test -e mmc 0:8 ${i}; then echo ${i}
+> found;else echo ${i} not found;fi; done; 1 not found
+> boot.scr.uimg found
+> splash.bmp found
+> data abort
+> pc : [<ddb3f72a>]          lr : [<ddb39da1>]
+> reloc pc : [<c012772a>]    lr : [<c0121da1>]
+> sp : dbafd370  ip : 00000000     fp : 00000017
+> r10: dbb5d5fc  r9 : dbb15e70     r8 : 0000001c
+> r7 : ddbedaa8  r6 : dbb5d640     r5 : 6873616c  r4 : ddbeda78
+> r3 : dbb5d5d0  r2 : 00000080     r1 : 00000000  r0 : 70733d69
+> Flags: NzcV  IRQs off  FIQs off  Mode SVC_32 (T)
+> Code: e7e9 2101 e7e7 68f5 (60c5) 60a8
+> Resetting CPU ...
+>=20
+>=20
+> Hope it helps ;-)
 
-diff --git a/arch/arm/mach-rockchip/rk3128/Makefile b/arch/arm/mach-rockchip/rk3128/Makefile
-index 50e11175423..8df1a60a348 100644
---- a/arch/arm/mach-rockchip/rk3128/Makefile
-+++ b/arch/arm/mach-rockchip/rk3128/Makefile
-@@ -4,6 +4,5 @@
- # SPDX-License-Identifier:     GPL-2.0+
- #
- 
--obj-y += rk3128.o
- obj-y += syscon_rk3128.o
- obj-y += clk_rk3128.o
-diff --git a/arch/arm/mach-rockchip/rk3128/rk3128.c b/arch/arm/mach-rockchip/rk3128/rk3128.c
-deleted file mode 100644
-index 8f8f4951bae..00000000000
---- a/arch/arm/mach-rockchip/rk3128/rk3128.c
-+++ /dev/null
-@@ -1,13 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * Copyright (c) 2017 Rockchip Electronics Co., Ltd
-- */
--#include <common.h>
--#include <init.h>
--
--int arch_cpu_init(void)
--{
--	/* We do some SoC one time setting here. */
--
--	return 0;
--}
+Thank you for the reproducer!
+Here is my hypothesis: something is definitely wrong with the new version w=
+hich=20
+then leads to some script misbehaving which then leads to the problem in=20
+blkcache_invalidate().
 
--- 
-2.43.0
+I will take a look at the issue, trying to reproduce it and understand the=
+=20
+root cause.
+I cannot give you any ETA for the fix, so for now I can only advise you to=
+=20
+stick with the old parser.
+
+> Patrice
+>=20
+> >> Thanks
+> >> Patrice
+> >=20
+> > Best regards.
+
+
+Best regards.
+
 
