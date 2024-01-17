@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43594C47422
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 17:18:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D217CC47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 17:18:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D76A087BB7;
-	Wed, 17 Jan 2024 18:17:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5026D87BA0;
+	Wed, 17 Jan 2024 18:17:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CzAGHlaT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mnk1r+tH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 334AB87BA7; Wed, 17 Jan 2024 18:17:28 +0100 (CET)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 7F908879F7; Wed, 17 Jan 2024 18:17:28 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28218879F3
+ by phobos.denx.de (Postfix) with ESMTPS id A5F0187B7F
  for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 18:17:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-55969c01168so4964158a12.1
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a26fa294e56so1186019366b.0
  for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 09:17:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705511844; x=1706116644; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1705511845; x=1706116645; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=96znt4d6nDmc3curz0bN/+E4yyTus03y/d1LkCQeNXM=;
- b=CzAGHlaTVa2dJb/rioWnGqLQ8IxT6CPvmyqN+GZHomTtDm8wekZV1h5iQcXk00RoJX
- ebl6jGm25qToh+a0VJkbXni2pbq7HgKrKLowy3nQqrZZqSDc2KoST49A3vKV/JL57pi7
- vQxr7Ej42t/3yUvWJVylqMAiV4z2d9l0h4Wu1lq6E6v+yqiCrlRln3rGjGdXsd0+upDa
- LyYJXB/qY67LOsIv/yKgZigc+RDUYOAG6ouAPOWF3jS8JG5ohMN+DK2gmm5+hsUDcPaS
- +ypFhyBJPV/0vZsUqz6V0sdGde1zuqAwIAkv3t+vyfsoP2UUBygjdATBxVlhEfep69XQ
- 2Tiw==
+ bh=bA8dIPyuevVt49I0mtLgTHbxtNgE3Zzcp8vc5MXLjDA=;
+ b=mnk1r+tHuGnGcA2dI/7rAf0ywTqhNuHLloR+NxoZyXJSy+SD5euKGC13Xfrj+SKOP0
+ xVGU3iWkfefj0wG5m4zxqSGCWZ8ECiVklYya0iGg0YJHsL9PGgBrCJkM0F57DtGgG5IO
+ +aa/vxExHZqVoV+knrt9Oqf+pAB/5geIJ7k132LNQH9jLfvTzm/Ri8W2be/8DAAtdFAK
+ sdZFK9AAEZijyz79aUTOA/EW3NIOg5jf5JbiqEMDQXggA8VVqL9uiVoD56eTy/utQN2C
+ lLzYJcZf1G6jLjfG7NUORT0jZJumQBiZXEutreVxxJuqRjhnnos11tvthMr4LA0WY4T7
+ JaxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705511844; x=1706116644;
+ d=1e100.net; s=20230601; t=1705511845; x=1706116645;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=96znt4d6nDmc3curz0bN/+E4yyTus03y/d1LkCQeNXM=;
- b=dD7Xrf92/3vAJjJayDMCDLmPirqK0ynwgETfdLDLfQGI02ecYDJ75mZYHyTdUNYzHg
- MC1ODwxKBbuTsGtD54ZgMj2PqcCnu5zdgja3G5qRT4EQL04ZVN+LZFzf+sV0oFDYmFtp
- hsmlhEeWuHgW6R0+9xGMSVbLG6N9IEHOloBYQw0iiFIR4640jht3BoALikNy/VKTrukF
- v7fQUhnWxyRJ3s0dHVLzHEVVAHIjYx9AuqG6112ESUCazb7IzZdUqTvTpceYRUKEXDuB
- 31hwbsqoqZikduB5xWV//XX917T4OLCrro6Vnu4Ufd5QqPOuAro9iX4VgXT9xllogLgv
- H28A==
-X-Gm-Message-State: AOJu0Ywd7qYo5ugu5OP0tJFuCD0uqw3x9+ZH1sWaCiCsw4/jkn/cqboJ
- Jfo4z4hD24JCylxl+1InKUz8Qpyf7saTMVYriHcCgRKc7LXiAdeeE4VISCGWEtoRoA==
-X-Google-Smtp-Source: AGHT+IHERluGYy20M3kG20DzYQ2RSrD4ZJunzRk7Cvipt/d+v/G6klm3LU/9lKHV10KExKQwWydFjA==
-X-Received: by 2002:a17:906:b845:b0:a2e:c034:36eb with SMTP id
- ga5-20020a170906b84500b00a2ec03436ebmr1054211ejb.37.1705511844561; 
- Wed, 17 Jan 2024 09:17:24 -0800 (PST)
+ bh=bA8dIPyuevVt49I0mtLgTHbxtNgE3Zzcp8vc5MXLjDA=;
+ b=hwcafg4XP+dMe9hf1SMjI0EaloEecpVDBt+NS/mLlNQinpMdN3j6dBylw8qXfSJFD1
+ 9WEuZNtBeQLKxGj2UwKTlpYwwyzuMjqNRiRwt6uZwM5WKMY3OW1BH5HbWMQksYM/4lvm
+ cCB1pJ6q9+SppGg5pNmG80rN+ojFJeef2XBEp8ptCbqZ/ClZtYBROePTBrbzdXxumH8Q
+ nBw+uOmbNHWaXR7NtQjU0n4/vhmOGQAHTrxs9k9YJes/7MTfJoHaQzlObOnKq/ce5q2Z
+ f1SLX358uYCrBE5qderegvN/MoUbDyIZM6suFy7wrlg8V4dMWr7UZQIhLg9PohnOw2aG
+ H6FQ==
+X-Gm-Message-State: AOJu0YzumV3+D9xO/IEkw9U8UVXRRJmjjx79xaKa2czxpn10lHZPWIKG
+ W+RanmHvQESoWia0h7hLOxrbL+q7LL1UeEj0
+X-Google-Smtp-Source: AGHT+IH1m5pXOatb0IZEONmPprh/jRpGmZx5UJZFpRxh+EfE4cdZJdsiR+7JMWtzS9tUuIAEy6ZZ/w==
+X-Received: by 2002:a17:907:d311:b0:a2c:be06:5386 with SMTP id
+ vg17-20020a170907d31100b00a2cbe065386mr5108484ejc.94.1705511845198; 
+ Wed, 17 Jan 2024 09:17:25 -0800 (PST)
 Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
- vs5-20020a170907a58500b00a2cbbebedc1sm6904976ejc.53.2024.01.17.09.17.23
+ vs5-20020a170907a58500b00a2cbbebedc1sm6904976ejc.53.2024.01.17.09.17.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jan 2024 09:17:24 -0800 (PST)
+ Wed, 17 Jan 2024 09:17:25 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Anatolij Gustschin <agust@denx.de>,
  Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v4 04/13] video: tegra20: dc: pass DC id to internal devices
-Date: Wed, 17 Jan 2024 19:16:49 +0200
-Message-Id: <20240117171658.22324-5-clamor95@gmail.com>
+Subject: [PATCH v4 05/13] video: tegra20: dc: add PLLD2 parent support
+Date: Wed, 17 Jan 2024 19:16:50 +0200
+Message-Id: <20240117171658.22324-6-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240117171658.22324-1-clamor95@gmail.com>
 References: <20240117171658.22324-1-clamor95@gmail.com>
@@ -91,12 +91,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tegra SoC has 2 independent display controllers called DC_A and
-DC_B, they are handled differently by internal video devices like
-DSI and HDMI controllers so it is important for last to know
-which display controller is used to properly set up registers.
-To achieve this, a pipe field was added to pdata to pass display
-controller id to internal Tegra SoC devices.
+T30+ SOC have second PLLD - PLLD2 which can be actively used by
+DC and act as main DISP1/2 clock parent.
 
 Tested-by: Agneli <poczt@protonmail.ch> # Toshiba AC100 T20
 Tested-by: Robert Eckelmann <longnoserob@gmail.com> # ASUS TF101
@@ -106,66 +102,25 @@ Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # Nvidia Tegratab T114
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
  drivers/video/tegra20/tegra-dc.c | 6 ++++++
- drivers/video/tegra20/tegra-dc.h | 3 +++
- 2 files changed, 9 insertions(+)
+ 1 file changed, 6 insertions(+)
 
 diff --git a/drivers/video/tegra20/tegra-dc.c b/drivers/video/tegra20/tegra-dc.c
-index 5d8874f323..0e94e665ef 100644
+index 0e94e665ef..56a23b3c97 100644
 --- a/drivers/video/tegra20/tegra-dc.c
 +++ b/drivers/video/tegra20/tegra-dc.c
-@@ -45,6 +45,7 @@ struct tegra_lcd_priv {
- 	unsigned pixel_clock;		/* Pixel clock in Hz */
- 	int dc_clk[2];			/* Contains clk and its parent */
- 	bool rotation;			/* 180 degree panel turn */
-+	bool pipe;			/* DC controller: 0 for A, 1 for B */
- };
+@@ -304,6 +304,12 @@ static int tegra_display_probe(struct tegra_lcd_priv *priv,
+ 	if (priv->dc_clk[1] == CLOCK_ID_DISPLAY)
+ 		rate /= 2;
  
- enum {
-@@ -406,6 +407,9 @@ static int tegra_lcd_of_to_plat(struct udevice *dev)
- 
- 	priv->rotation = dev_read_bool(dev, "nvidia,180-rotation");
- 
-+	if (!strcmp(dev->name, TEGRA_DC_B))
-+		priv->pipe = 1;
++#ifndef CONFIG_TEGRA20
++	/* PLLD2 obeys same rules as PLLD but it is present only on T30+ */
++	if (priv->dc_clk[1] == CLOCK_ID_DISPLAY2)
++		rate /= 2;
++#endif
 +
- 	rgb = fdt_subnode_offset(blob, node, "rgb");
- 	if (rgb < 0) {
- 		debug("%s: Cannot find rgb subnode for '%s' (ret=%d)\n",
-@@ -431,12 +435,14 @@ static int tegra_lcd_of_to_plat(struct udevice *dev)
- 		return ret;
- 	}
- 
-+	/* Fill the platform data for internal devices */
- 	if (!strcmp(priv->panel->name, TEGRA_DSI_A) ||
- 	    !strcmp(priv->panel->name, TEGRA_DSI_B)) {
- 		struct tegra_dc_plat *dc_plat = dev_get_plat(priv->panel);
- 
- 		dc_plat->dev = dev;
- 		dc_plat->dc = priv->dc;
-+		dc_plat->pipe = priv->pipe;
- 	}
- 
- 	ret = panel_get_display_timing(priv->panel, &priv->timing);
-diff --git a/drivers/video/tegra20/tegra-dc.h b/drivers/video/tegra20/tegra-dc.h
-index 5c05221038..75fc0fa4de 100644
---- a/drivers/video/tegra20/tegra-dc.h
-+++ b/drivers/video/tegra20/tegra-dc.h
-@@ -14,12 +14,15 @@
- /* arch-tegra/dc exists only because T124 uses it */
- #include <asm/arch-tegra/dc.h>
- 
-+#define TEGRA_DC_A		"dc@54200000"
-+#define TEGRA_DC_B		"dc@54240000"
- #define TEGRA_DSI_A		"dsi@54300000"
- #define TEGRA_DSI_B		"dsi@54400000"
- 
- struct tegra_dc_plat {
- 	struct udevice *dev;		/* Display controller device */
- 	struct dc_ctlr *dc;		/* Display controller regmap */
-+	bool pipe;			/* DC number: 0 for A, 1 for B */
- };
- 
- /* This holds information about a window which can be displayed */
+ 	/*
+ 	 * HOST1X is init by default at 150MHz with PLLC as parent
+ 	 */
 -- 
 2.40.1
 
