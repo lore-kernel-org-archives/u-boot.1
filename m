@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 052EDC47DA2
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 15:34:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17295C47DA2
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 15:34:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3443C879F4;
-	Wed, 17 Jan 2024 16:34:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D3ABA87B72;
+	Wed, 17 Jan 2024 16:34:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="es623yDX";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="CZ50Evjh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A27F6876D3; Wed, 17 Jan 2024 16:34:05 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 03ED387707; Wed, 17 Jan 2024 16:34:08 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53C05879B2
+ by phobos.denx.de (Postfix) with ESMTPS id 7DACF879F4
  for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 16:33:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id EBC0C3F276
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 3BB893F274
  for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 15:33:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
  s=20210705; t=1705505638;
- bh=dAU6fzBubYU/BoQZYees/HT9dP/++1vqorQEjD8tUpw=;
+ bh=7Z0uuAe9C+bnxkBLrKDqqIaz78wny9RzW4yrDZRENO0=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=es623yDXt62g4BuuMx0Dzt9ZBjtf0j7jMK2zHqnoOrSF8UimwCgz4JdGlavcAkbuq
- UQlZALf8OgXls5wS7vXJIthvebV2Q6TTMeULPH/u/4GhVIZIeZmObyvpZGk993rQ7i
- ssJ6J+MbtAe8IHSnRJ9fgVbBx8Fvq8hSPeUQh1gWC8RMjmjJN4ZCt+PeZRA0UtXqzB
- El/bzS165VD+lTOxXZpae8Y8qwGNkp0k1/ZMNHCYBQdBajNNEpOMU+E2F/XHdfAcY0
- lsfb/T0/xBEInPCOAjBZJm7l41tur2/S4UefP9mwX9Y5rMbAJEO4KnvQtXT3/O6R2O
- 3nROk8JiRui7Q==
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-40e419b52d5so83740235e9.3
+ b=CZ50EvjhUUFSNM4rIZIBcvA5CeR0LnfTRXqgTfQPOfAc3FTTOTIsUsJ/UaVd8qIyt
+ 16EMdSxusShGHkmnJRAp7ueh7gIMWDRR4tURyQYfakCk5u27SB0bAiHUriVWPr8LL7
+ QqP3LC6FwedWcnTc09W6JiVS1LD/lCUCbZEMG8ZGC+34gT6IcAjpzu1/Hwrcf54zus
+ WZliw44ghLUwRQWiDApMN11pxpJvpJ7brAGTutAw4alG60r1nUQkbvlIIcCYHq/XNx
+ mfIpgMMiNPw4ID7eg3ns5ToNWGnB33LKmnhcQj6g0Q1+xE43y1VHYlw9vuyVuf/+YE
+ CRDMa8C7ngu0g==
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-337c79755eeso17604f8f.2
  for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 07:33:58 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1705505638; x=1706110438;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dAU6fzBubYU/BoQZYees/HT9dP/++1vqorQEjD8tUpw=;
- b=CnhcX5HiyA0qNHm85N4TNknPbplVNcIqiKTDWnSTVW07mp5d2Hbw0SyFadN4r4eAUT
- pj9T3MQb9L+s4lfEMYlWzo/wpuo1LfiJoCi+Pmi96psEpROzOYtU1HuXDvNa0MUI2cTh
- JW6E9TRckGO0NxtUTiz0qBVtRdqjKTGGVoR/a6ZBorvpTqv7O73tN0kiwY2isrTuprpT
- 8E8gtAKhyb7632i+Qgp3uD2ubTt9OaCm0k1d2oRL8tDvIjDppnGn+njNHvu9OOTeo2CQ
- b7lpAshLhXjB+rMC6wpKxpdmi+NeJSPC2wjSMVPMRR0WYNCeUqb8klK5bas3GuVmMl32
- t5Zg==
-X-Gm-Message-State: AOJu0Yyh3uJXkger922NzUlHgznBC71P5dYXdP1k/C6PnBfTy0nMeH1O
- vIefigwrU79JgRBnU1cDmiBKuHHnNxdgf4qnlT3Oj6YfkJIuPibmcQq/3Sm6KMCfNQToY7OE/+L
- feReBVd9F2Vw8BU7S8y3pXPlJmAQjKG98yO2Ftg==
-X-Received: by 2002:a7b:c3c6:0:b0:40e:67a5:8666 with SMTP id
- t6-20020a7bc3c6000000b0040e67a58666mr4302596wmj.49.1705505638531; 
- Wed, 17 Jan 2024 07:33:58 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHNxXugEPxRoSJUuMYuRTjQCfOSRbMZ8SYCqKEeR61SF9uThhEYfswrAOGRibeJD2cJDe7LdA==
-X-Received: by 2002:a7b:c3c6:0:b0:40e:67a5:8666 with SMTP id
- t6-20020a7bc3c6000000b0040e67a58666mr4302590wmj.49.1705505638146; 
- Wed, 17 Jan 2024 07:33:58 -0800 (PST)
+ bh=7Z0uuAe9C+bnxkBLrKDqqIaz78wny9RzW4yrDZRENO0=;
+ b=ZwPsMmawmSH4PCr5gICcyM39WhBkzMvmKu3MR7yB/wtTxs8+mqd7zEjDdWip/lddr7
+ OBphldEiM5x13k3SP20k6nl1HhKQMgrCj2BjWCIMiRf5I6+wD6wnlpHzuUx6iJGj6rAx
+ rrPnhUmCwkWT1grj03ZFUlCeXWqcmn8J3grBvrmyv5u6tJA5nH2u9ouUDN197HBIxIG8
+ 9lktgHI1y9d0YInUJ9DfVE8q2hXAG4P2g0K4ajSoqw9P2j0c+wLEY9wR/z9a9GcgZkgT
+ +h9ffMt14GjcIpsKjqyllo4DYBZTQg7p61ZMx7VaVN8e5+FZjvCJKsuAYDLq6I6WWQE8
+ mAhQ==
+X-Gm-Message-State: AOJu0YxF67LNzYK/fnu2vj3mPdUWuaurhiFVw06P9VIV/TxYE6DjcBfq
+ UQu8bwSq4sFJl1lGZeVjXYdWIyuL1Zlr3X17AmSC8LHcxZnMDdW7v1+azmGvF/t9/4f3lzOgI3K
+ Idvdd6DEp+QxfVtLCvU8hD5F/Qkuza+E12WMBig==
+X-Received: by 2002:a5d:50c9:0:b0:337:5bf0:d92f with SMTP id
+ f9-20020a5d50c9000000b003375bf0d92fmr5480352wrt.73.1705505637787; 
+ Wed, 17 Jan 2024 07:33:57 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHAtvJiESXixVFgiL1Rm30qes54V5ZUztbxblVebfZLbqZmTbvn3Mq1SMOUiCp8pldmS6unjQ==
+X-Received: by 2002:a5d:50c9:0:b0:337:5bf0:d92f with SMTP id
+ f9-20020a5d50c9000000b003375bf0d92fmr5480343wrt.73.1705505637437; 
+ Wed, 17 Jan 2024 07:33:57 -0800 (PST)
 Received: from workstation5.fritz.box
  (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
  by smtp.gmail.com with ESMTPSA id
- c7-20020a5d4f07000000b00337876596d1sm1897499wru.111.2024.01.17.07.33.57
+ c7-20020a5d4f07000000b00337876596d1sm1897499wru.111.2024.01.17.07.33.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 17 Jan 2024 07:33:57 -0800 (PST)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
@@ -81,9 +81,9 @@ Cc: Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 3/4] doc: man-page for smbios command
-Date: Wed, 17 Jan 2024 16:33:46 +0100
-Message-ID: <20240117153347.85074-3-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 2/4] cmd: provide command to display SMBIOS information
+Date: Wed, 17 Jan 2024 16:33:45 +0100
+Message-ID: <20240117153347.85074-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240117153347.85074-1-heinrich.schuchardt@canonical.com>
 References: <20240117153347.85074-1-heinrich.schuchardt@canonical.com>
@@ -105,131 +105,254 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide a man-page for the smbios command.
+U-Boot can either generated an SMBIOS table or copy it from a prior boot
+stage, e.g. QEMU.
+
+Provide a command to display the SMBIOS information.
+
+Currently only type 1 and 2 are translated to human readable text.
+Other types may be added later. Currently only a hexdump and the list of
+strings is provided for these.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 v2:
-	no change
+	email address updated
 ---
- doc/usage/cmd/smbios.rst | 93 ++++++++++++++++++++++++++++++++++++++++
- doc/usage/index.rst      |  1 +
- 2 files changed, 94 insertions(+)
- create mode 100644 doc/usage/cmd/smbios.rst
+ cmd/Kconfig  |   7 ++
+ cmd/Makefile |   1 +
+ cmd/smbios.c | 191 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 199 insertions(+)
+ create mode 100644 cmd/smbios.c
 
-diff --git a/doc/usage/cmd/smbios.rst b/doc/usage/cmd/smbios.rst
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 26aeeeed03b..43c9c20c8fa 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -227,6 +227,13 @@ config CMD_SBI
+ 	help
+ 	  Display information about the SBI implementation.
+ 
++config CMD_SMBIOS
++	bool "smbios"
++	depends on SMBIOS
++	default y
++	help
++	  Display the SMBIOS information.
++
+ endmenu
+ 
+ menu "Boot commands"
+diff --git a/cmd/Makefile b/cmd/Makefile
+index e2a2b16ab25..87133cc27a8 100644
+--- a/cmd/Makefile
++++ b/cmd/Makefile
+@@ -168,6 +168,7 @@ obj-$(CONFIG_CMD_SETEXPR) += setexpr.o
+ obj-$(CONFIG_CMD_SETEXPR_FMT) += printf.o
+ obj-$(CONFIG_CMD_SPI) += spi.o
+ obj-$(CONFIG_CMD_STRINGS) += strings.o
++obj-$(CONFIG_CMD_SMBIOS) += smbios.o
+ obj-$(CONFIG_CMD_SMC) += smccc.o
+ obj-$(CONFIG_CMD_SYSBOOT) += sysboot.o
+ obj-$(CONFIG_CMD_STACKPROTECTOR_TEST) += stackprot_test.o
+diff --git a/cmd/smbios.c b/cmd/smbios.c
 new file mode 100644
-index 00000000000..1ffd706d7de
+index 00000000000..63f908e92ce
 --- /dev/null
-+++ b/doc/usage/cmd/smbios.rst
-@@ -0,0 +1,93 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later:
++++ b/cmd/smbios.c
+@@ -0,0 +1,191 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * The 'smbios' command displays information from the SMBIOS table.
++ *
++ * Copyright (c) 2023, Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
++ */
 +
-+smbios command
-+==============
++#include <command.h>
++#include <hexdump.h>
++#include <mapmem.h>
++#include <smbios.h>
++#include <tables_csum.h>
++#include <asm/global_data.h>
 +
-+Synopsis
-+--------
++DECLARE_GLOBAL_DATA_PTR;
 +
-+::
++/**
++ * smbios_get_string() - get SMBIOS string from table
++ *
++ * @table:	SMBIOS table
++ * @index:	index of the string
++ * Return:	address of string, may point to empty string
++ */
++static const char *smbios_get_string(void *table, int index)
++{
++	const char *str = (char *)table +
++			  ((struct smbios_header *)table)->length;
 +
-+        smbios
++	if (!*str)
++		++str;
++	for (--index; *str && index; --index)
++		str += strlen(str) + 1;
 +
-+Description
-+-----------
++	return str;
++}
 +
-+The smbios command displays information from the SMBIOS tables.
++static struct smbios_header *next_table(struct smbios_header *table)
++{
++	const char *str;
 +
-+Examples
-+--------
++	if (table->type == SMBIOS_END_OF_TABLE)
++		return NULL;
 +
-+The example below shows an example output of the smbios command.
++	str = smbios_get_string(table, 0);
++	return (struct smbios_header *)(++str);
++}
 +
-+::
++static void smbios_print_generic(struct smbios_header *table)
++{
++	char *str = (char *)table + table->length;
 +
-+    => smbios
-+    SMBIOS 2.8.0 present.
-+    8 structures occupying 81 bytes
-+    Table at 0x6d35018
++	if (CONFIG_IS_ENABLED(HEXDUMP)) {
++		printf("Header and Data:\n");
++		print_hex_dump("\t", DUMP_PREFIX_OFFSET, 16, 1,
++			       table, table->length, false);
++	}
++	if (*str) {
++		printf("Strings:\n");
++		for (int index = 1; *str; ++index) {
++			printf("\tString %u: %s\n", index, str);
++			str += strlen(str) + 1;
++		}
++	}
++}
 +
-+    Handle 0x0100, DMI type 1, 27 bytes at 0x6d35018
-+    System Information
-+        Manufacturer: QEMU
-+        Product Name: Standard PC (i440FX + PIIX, 1996)
-+        Version: pc-i440fx-2.5
-+        Serial Number:
-+        UUID 00000000-0000-0000-0000-000000000000
-+        Wake Up Type:
-+        Serial Number:
-+        SKU Number:
++void smbios_print_str(const char *label, void *table, u8 index)
++{
++	printf("\t%s: %s\n", label, smbios_get_string(table, index));
++}
 +
-+    Handle 0x0300, DMI type 3, 22 bytes at 0x6d35069
-+    Header and Data:
-+        00000000: 03 16 00 03 01 01 02 00 00 03 03 03 02 00 00 00
-+        00000010: 00 00 00 00 00 00
-+    Strings:
-+        String 1: QEMU
-+        String 2: pc-i440fx-2.5
++static void smbios_print_type1(struct smbios_type1 *table)
++{
++	printf("System Information\n");
++	smbios_print_str("Manufacturer", table, table->manufacturer);
++	smbios_print_str("Product Name", table, table->product_name);
++	smbios_print_str("Version", table, table->version);
++	smbios_print_str("Serial Number", table, table->serial_number);
++	if (table->length >= 0x19) {
++		printf("\tUUID %pUl\n", table->uuid);
++		smbios_print_str("Wake Up Type", table, table->serial_number);
++	}
++	if (table->length >= 0x1b) {
++		smbios_print_str("Serial Number", table, table->serial_number);
++		smbios_print_str("SKU Number", table, table->sku_number);
++	}
++}
 +
-+    Handle 0x0400, DMI type 4, 42 bytes at 0x6d35093
-+    Header and Data:
-+        00000000: 04 2a 00 04 01 03 01 02 63 06 00 00 fd ab 81 07
-+        00000010: 03 00 00 00 d0 07 d0 07 41 01 ff ff ff ff ff ff
-+        00000020: 00 00 00 01 01 01 02 00 01 00
-+    Strings:
-+        String 1: CPU 0
-+        String 2: QEMU
-+        String 3: pc-i440fx-2.5
++static void smbios_print_type2(struct smbios_type2 *table)
++{
++	u16 *handle;
 +
-+    Handle 0x1000, DMI type 16, 23 bytes at 0x6d350d7
-+    Header and Data:
-+        00000000: 10 17 00 10 01 03 06 00 00 02 00 fe ff 01 00 00
-+        00000010: 00 00 00 00 00 00 00
++	printf("Base Board Information\n");
++	smbios_print_str("Manufacturer", table, table->manufacturer);
++	smbios_print_str("Product Name", table, table->product_name);
++	smbios_print_str("Version", table, table->version);
++	smbios_print_str("Serial Number", table, table->serial_number);
++	smbios_print_str("Asset Tag", table, table->asset_tag_number);
++	printf("\tFeature Flags: 0x%2x\n", table->feature_flags);
++	smbios_print_str("Chassis Location", table, table->chassis_location);
++	printf("\tChassis Handle: 0x%2x\n", table->chassis_handle);
++	smbios_print_str("Board Type", table, table->board_type);
++	printf("\tContained Object Handles: ");
++	handle = (void *)table->eos;
++	for (int i = 0; i < table->number_contained_objects; ++i)
++		printf("0x%04x ", handle[i]);
++	printf("\n");
++}
 +
-+    Handle 0x1100, DMI type 17, 40 bytes at 0x6d350f0
-+    Header and Data:
-+        00000000: 11 28 00 11 00 10 fe ff ff ff ff ff 80 00 09 00
-+        00000010: 01 00 07 02 00 00 00 02 00 00 00 00 00 00 00 00
-+        00000020: 00 00 00 00 00 00 00 00
-+    Strings:
-+        String 1: DIMM 0
-+        String 2: QEMU
++static void smbios_print_type127(struct smbios_type127 *table)
++{
++	printf("End Of Table\n");
++}
 +
-+    Handle 0x1300, DMI type 19, 31 bytes at 0x6d35125
-+    Header and Data:
-+        00000000: 13 1f 00 13 00 00 00 00 ff ff 01 00 00 10 01 00
-+        00000010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
++static int do_smbios(struct cmd_tbl *cmdtp, int flag, int argc,
++		     char *const argv[])
++{
++	ulong addr;
++	void *entry;
++	u32 size;
++	char version[12];
++	struct smbios_header *table;
++	static const char smbios_sig[] = "_SM_";
++	static const char smbios3_sig[] = "_SM3_";
++	size_t count = 0;
++	u32 max_struct_size;
 +
-+    Handle 0x2000, DMI type 32, 11 bytes at 0x6d35146
-+    Header and Data:
-+        00000000: 20 0b 00 20 00 00 00 00 00 00 00
++	addr = gd_smbios_start();
++	if (!addr) {
++		log_warning("SMBIOS not available\n");
++		return CMD_RET_FAILURE;
++	}
++	entry = map_sysmem(addr, 0);
++	if (!memcmp(entry, smbios3_sig, sizeof(smbios3_sig) - 1)) {
++		struct smbios3_entry *entry3 = entry;
 +
-+    Handle 0x7f00, DMI type 127, 4 bytes at 0x6d35153
-+    End Of Table
++		table = (void *)(uintptr_t)entry3->struct_table_address;
++		snprintf(version, sizeof(version), "%d.%d.%d",
++			 entry3->major_ver, entry3->minor_ver, entry3->doc_rev);
++		table = (void *)(uintptr_t)entry3->struct_table_address;
++		size = entry3->length;
++		max_struct_size = entry3->max_struct_size;
++	} else if (!memcmp(entry, smbios_sig, sizeof(smbios_sig) - 1)) {
++		struct smbios_entry *entry2 = entry;
 +
-+Configuration
-+-------------
++		snprintf(version, sizeof(version), "%d.%d",
++			 entry2->major_ver, entry2->minor_ver);
++		table = (void *)(uintptr_t)entry2->struct_table_address;
++		size = entry2->length;
++		max_struct_size = entry2->max_struct_size;
++	} else {
++		log_err("Unknown SMBIOS anchor format\n");
++		return CMD_RET_FAILURE;
++	}
++	if (table_compute_checksum(entry, size)) {
++		log_err("Invalid anchor checksum\n");
++		return CMD_RET_FAILURE;
++	}
++	printf("SMBIOS %s present.\n", version);
 +
-+The command is only available if CONFIG_CMD_SMBIOS=y.
++	for (struct smbios_header *pos = table; pos; pos = next_table(pos))
++		++count;
++	printf("%zd structures occupying %d bytes\n", count, max_struct_size);
++	printf("Table at 0x%llx\n", (unsigned long long)map_to_sysmem(table));
 +
-+Return value
-+------------
++	for (struct smbios_header *pos = table; pos; pos = next_table(pos)) {
++		printf("\nHandle 0x%04x, DMI type %d, %d bytes at 0x%llx\n",
++		       pos->handle, pos->type, pos->length,
++		       (unsigned long long)map_to_sysmem(pos));
++		switch (pos->type) {
++		case 1:
++			smbios_print_type1((struct smbios_type1 *)pos);
++			break;
++		case 2:
++			smbios_print_type2((struct smbios_type2 *)pos);
++			break;
++		case 127:
++			smbios_print_type127((struct smbios_type127 *)pos);
++			break;
++		default:
++			smbios_print_generic(pos);
++			break;
++		}
++	}
 +
-+The return value $? is 0 (true) on success, 1 (false) otherwise.
-diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-index c171c029b80..0d174eefaa5 100644
---- a/doc/usage/index.rst
-+++ b/doc/usage/index.rst
-@@ -103,6 +103,7 @@ Shell commands
-    cmd/size
-    cmd/sleep
-    cmd/sm
-+   cmd/smbios
-    cmd/sound
-    cmd/source
-    cmd/temperature
++	return CMD_RET_SUCCESS;
++}
++
++U_BOOT_LONGHELP(smbios, "- display SMBIOS information");
++
++U_BOOT_CMD(smbios, 1, 0, do_smbios, "display SMBIOS information",
++	   smbios_help_text);
 -- 
 2.43.0
 
