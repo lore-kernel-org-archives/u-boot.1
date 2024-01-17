@@ -4,82 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75DB3C47DA2
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 16:42:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE8FEC47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 16:46:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88A3A87889;
-	Wed, 17 Jan 2024 17:42:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0381187A4B;
+	Wed, 17 Jan 2024 17:46:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TPRp7+Uy";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="Vho33jez";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="eqgnJOHT";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="ldSgnv+z";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="o+jA0teL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EDE358798F; Wed, 17 Jan 2024 17:42:00 +0100 (CET)
-Received: from mail-ua1-x931.google.com (mail-ua1-x931.google.com
- [IPv6:2607:f8b0:4864:20::931])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3BB5587A4B; Wed, 17 Jan 2024 17:46:09 +0100 (CET)
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2D1B8753C
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 17:41:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 41CB686EF1
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 17:46:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-ua1-x931.google.com with SMTP id
- a1e0cc1a2514c-7cc7bae27b5so4040821241.2
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 08:41:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705509717; x=1706114517; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=sMS+qndjwO3GkEgbUuAL5ORYSYyl6U76aRTsVBa0f64=;
- b=TPRp7+UyZPG9jXhl+sn8+RzeGplWw1Np/l73Kpj6srf1IKl4Yy4CXWVdbr2bKRdMvb
- RCt2FB6npD8z/mUUCFrjdcSFvC8acv724PULHZxBoedHviyhBOZLN9+4tC4cSUEdfzhU
- P4uBI0i1OxPWhG8BIv+w0YcsJ87n8BFomgOSDwsXM4kL91a8734gqk7DNEhA8NUTvsEY
- Yea3ex4+Wvfu/A1ie0GgDCDkz1jSYJklyaADIy57iNOPb4L+LoayVpmcLMksJr/EE7UF
- xS/W/AwbFwC89YaMH15bfl/AVr68n/My6JVO+BMFyk3I4ukyNp1D52UWnHhp6N6cSoGy
- 3z9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705509717; x=1706114517;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=sMS+qndjwO3GkEgbUuAL5ORYSYyl6U76aRTsVBa0f64=;
- b=XgsQaYx35oTstnKD2MSMDo3CbjqHblFCMjr9fxOAH7oEDw5NHYidA8NyssJ2v5q6PE
- r5/KrsO4Fg5GqQCvKhrYC5s2jPN+Fe/t/wbQn55fsswOM4BOhZgBP3lAZquKddEdYaNe
- Zg4aAulK0VMSnuMXs6ao2kGtgCSNjBq3NOhQa082EikElpsIli7RMCRr00uEIfmkAtdw
- G3l2DJB9X7ahwIUdd2lpI+3dGNZJz1kePJ0MN809zagdEXseqPr+TzPoZbG8gL6HSPEe
- M9OAxK9nYO7FG2EK9oAqsb1cFg7XHHpEdgxPOAWV1BN5568DS7HTXC1GeH+RZ4JRaK5j
- 0sWQ==
-X-Gm-Message-State: AOJu0Yz+27fSOuUL59TlUlc7HmRZOK2gxH+mNY7GLrGVOJk6h4uQL5i1
- +KGnahSq+f+pUcGmZ4Tk8+g=
-X-Google-Smtp-Source: AGHT+IE9Vm9K6tTtfyLapTDo4g2TsxmjTCBDW2cZ8/EZwLFs773tfqeIywo/E7otZ/F+rK4mWxnnzQ==
-X-Received: by 2002:a67:eacb:0:b0:467:48c8:840d with SMTP id
- s11-20020a67eacb000000b0046748c8840dmr5311374vso.38.1705509717413; 
- Wed, 17 Jan 2024 08:41:57 -0800 (PST)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- ne1-20020a056214424100b006815bb6f6fesm2877306qvb.97.2024.01.17.08.41.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 17 Jan 2024 08:41:57 -0800 (PST)
-Message-ID: <d08e3874-b6d3-7b8a-20e8-5f75d9c80dd8@gmail.com>
-Date: Wed, 17 Jan 2024 11:41:56 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH] mtd: nand: Print warning for unsupported ecc modes
-Content-Language: en-US
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
-Cc: dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
- michal.simek@amd.com, git@xilinx.com,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-References: <20240117040822.1031992-1-venkatesh.abbarapu@amd.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20240117040822.1031992-1-venkatesh.abbarapu@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=iivanov@suse.de
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id AF5EF221D0;
+ Wed, 17 Jan 2024 16:46:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1705509966; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Hf/nzheg1peCMo6lckAeMngj9m7iJYXtI6P2bBkn8EU=;
+ b=Vho33jezgpvIC6KQmwuVUbEBH95dxECJTkfrbWflTLWhXpriC/6qb1/WkNPHMisD4MNYTe
+ HWX/B5Ig6gScPMqMWEAIEDWx4XVBQMX9TCw4OAbrEc8aXfuux+36R9V1fCWKYWD1bfTUz+
+ 3/yE/kZxQ0P1hBWGzfwf7CKvdieMFh4=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1705509966;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Hf/nzheg1peCMo6lckAeMngj9m7iJYXtI6P2bBkn8EU=;
+ b=eqgnJOHTCYyrGHdS3WtvNVxA+HVN+QJXXpXgroJeg6pUonKADSugH/Tj3YwXWjyNeF+8nv
+ omJfTWkMes8AleCA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1705509965; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Hf/nzheg1peCMo6lckAeMngj9m7iJYXtI6P2bBkn8EU=;
+ b=ldSgnv+zRV7DRSyD/K5nhV8KyULqD/1FRh3Teq94rIausgLyGdF46y3TU9/wkXXWFC70aD
+ teHXoLT3yj+ILdH0dFXw9cc49OJlAMDP20GlU1weR3OdPSiyvl2owERNtHdzb7p0UdIv8i
+ lYo+EqI81fpkBwiLg1XjXNX3zU9jkZg=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1705509965;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Hf/nzheg1peCMo6lckAeMngj9m7iJYXtI6P2bBkn8EU=;
+ b=o+jA0teLKd7ED2B94UISnXrv2UN/UmQMdKBjSTEFnX0GU2oCCYQbsHju4ipoyr9d34ZXZB
+ MEZ8nSY19ydMvLAQ==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 8A57513800;
+ Wed, 17 Jan 2024 16:46:05 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([10.150.64.162])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id USZKH00EqGXbMgAAD6G6ig
+ (envelope-from <iivanov@suse.de>); Wed, 17 Jan 2024 16:46:05 +0000
+Content-Type: text/plain;
+	charset=utf-8
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3731.700.6\))
+Subject: Re: [PATCH v4 0/6] rpi5: initial support
+From: "Ivan T. Ivanov" <iivanov@suse.de>
+In-Reply-To: <A796E025-0F6E-4FF7-BA4D-2F52CD763B4B@jens-maus.de>
+Date: Wed, 17 Jan 2024 18:45:54 +0200
+Cc: u-boot@lists.denx.de
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <9AFD4C3E-E1B7-4EA7-8589-7060A2747732@suse.de>
+References: <BD4D4B77-9C54-4FD7-8EEF-A65E674E0747@jens-maus.de>
+ <sfo77vzvmblyv5g5ek6uc6oxrf5n7dcp3vsw2g2lvfnnrlyaft@kc6s7vvspwvz>
+ <4DCC64E0-F0E4-4AF6-8E81-62B156E81554@jens-maus.de>
+ <2303FFA8-E2FA-4AA4-AE67-FF5E904D21DD@suse.de>
+ <A796E025-0F6E-4FF7-BA4D-2F52CD763B4B@jens-maus.de>
+To: Jens Maus <mail@jens-maus.de>
+X-Mailer: Apple Mail (2.3731.700.6)
+Authentication-Results: smtp-out1.suse.de;
+	none
+X-Spamd-Result: default: False [-2.60 / 50.00]; ARC_NA(0.00)[];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; BAYES_HAM(-3.00)[100.00%];
+ FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[]; MV_CASE(0.50)[];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; MIME_GOOD(-0.10)[text/plain];
+ RCVD_COUNT_THREE(0.00)[3];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ RCPT_COUNT_TWO(0.00)[2];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[jens-maus.de:email,suse.de:email];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_EQ_ENVFROM(0.00)[];
+ MIME_TRACE(0.00)[0:+]; RCVD_TLS_ALL(0.00)[];
+ MID_RHS_MATCH_FROM(0.00)[]
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,34 +124,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/16/24 23:08, Venkatesh Yadav Abbarapu wrote:
-> Currently only hw ecc is supported in U-Boot. If any other ecc mode is
-> given in DT, it simply ignores and switches to hw ecc. So better print
-> what is being done.
+Hi,
 
-This is not true? Sandbox for example uses soft ECC (hamming and BCH).
+> On 17 Jan 2024, at 17:30, Jens Maus <mail@jens-maus.de> wrote:
+>=20
+> Hi,
+>=20
+>> Am 17.01.2024 um 16:23 schrieb Ivan T. Ivanov <iivanov@suse.de>:
+>>=20
+>>> That=E2=80=99s in fact exactly what I was also trying in addition to =
+get u-boot running with your patches in my own buildroot-based =
+environment. So I was also exactly using this Tumbleweed rpi4 image and =
+simply replaced the u-boot.bin file with my own build version which I =
+built with your patches applied and using the rpi_arm64_defconfig as the =
+build config. However, there is still no output on any of the HDMI =
+ports. Haven=E2=80=99t tried to see if there is any serial output on the =
+special UART debug port of the rpi5. Should there be any output at all?
+>>=20
+>> Unfortunately on RPi5 they moved UART debug port to
+>> separate connector [1], [2].
+>=20
+> I know. In fact, I already have such a rpi debug probe [1] at my desk. =
+Nevertheless, haven=E2=80=99t tried to fire up the rpi5 with your =
+u-boot.bin to see if anything sensible comes up at that special UART =
+debug port which could explain the stalling and no HDMI output I saw =
+here last time I checked.
+>=20
+>> Let me update my Tumbleweed image and check again.
+>=20
+> Thx. Can you perhaps also elaborate on your build environment for that =
+particular u-boot.bin build? Or perhaps put a binary of it somewhere so =
+that I could check if it works with your u-boot.bin build.
 
---Sean
+I have aarch64 based machine at hand running openSUSE,
+thus I am building U-boot =E2=80=9Cnatively=E2=80=9D, no =
+cross-compiling.
 
-> Revert this patch once soft ecc support is fixed in future.
-> 
-> Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> ---
->   drivers/mtd/nand/raw/nand_base.c | 3 +++
->   1 file changed, 3 insertions(+)
-> 
-> diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand_base.c
-> index c40a0f23d7..200f7f8ba0 100644
-> --- a/drivers/mtd/nand/raw/nand_base.c
-> +++ b/drivers/mtd/nand/raw/nand_base.c
-> @@ -4463,6 +4463,9 @@ static int nand_dt_init(struct mtd_info *mtd, struct nand_chip *chip, ofnode nod
->   
->   	str = ofnode_read_string(node, "nand-ecc-mode");
->   	if (str) {
-> +		if (strcmp(str, "hw"))
-> +			printf("%s ecc is not supported, switching to hw ecc\n", str);
-> +
->   		if (!strcmp(str, "none"))
->   			ecc_mode = NAND_ECC_NONE;
->   		else if (!strcmp(str, "soft"))
+$ make rpi_arm64_defconfig
+$ make
+
+I just dumped latest Tumbleweed[1] to uSD card and copied
+u-boot.bin to EFI. I can see the HDMI output.
+
+One thing which I forgot to mention is that once I see
+Grub2 prompt I change console parameter from ttyS0 to ttyAMA0
+and usually add =E2=80=9Cignore_loglevel earlycon=E2=80=9D.
+
+Regards,
+Ivan
+
+[1] b66d5fa70e5cab998bc6000737015746c636e4b622397b407225b9de73f4a9be  =
+openSUSE-Tumbleweed-ARM-XFCE-raspberrypi.aarch64.raw.xz=
