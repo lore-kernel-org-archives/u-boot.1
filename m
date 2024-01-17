@@ -4,77 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5822EC47258
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 15:56:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16569C47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 15:59:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52EF68798F;
-	Wed, 17 Jan 2024 16:56:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 4C86D8798F;
+	Wed, 17 Jan 2024 16:59:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="cRiBZ2Es";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YvpcdVPP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B434A8790F; Wed, 17 Jan 2024 16:56:43 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8A7EC87B5F; Wed, 17 Jan 2024 16:59:13 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F63187B4C
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 16:56:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 890C28790F
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 16:59:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 09469CE1BFA
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 15:56:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 42A6EC43390
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 15:56:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705506997;
- bh=ptXYt1hCdovZz/ffSWT9gyAHt7rRwgYj2ew+MlFtyNY=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=cRiBZ2Es/hp4k2N4q8iUn7Gg6G7WRx6Enx6NzwR0pvs1Uo+PJaPHaN7erZz9hslNv
- oJ7sqEw1Gm4XNo9zvyHyBuflt9WlyERaBGdNjvStedufPMloODdbHhUJirOzDWC+8X
- zVp4JrJ/gaV0VdW1ge5sqw0homVaw3Vc/e2SizUHaye7MACpqpVvpFCg/vFe6MBz1u
- bgnYht1IvQbsvC5pfXFx6HqJc0SdU7EZMACNFbDBzeekUAJ687dDajvzJw2G1QTSiI
- bwYUDUdmE4eHB+SBxhjQhqYhK29d3CioXGWhhlWOuEMZFh0a6Eu7tsz6DzSkSNNYQr
- KPpk+usdP0Kqg==
-Received: by mail-lf1-f51.google.com with SMTP id
- 2adb3069b0e04-50e7dd8bce8so13653261e87.1
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 07:56:37 -0800 (PST)
-X-Gm-Message-State: AOJu0YwMeQyT3EWkWIWZhduwb2dL5CL8/3p4g+hsyQDWfNYsaOff5qVG
- 2LWLJudNDViLSBlApQ6Lgfc7rqZoq8NwemzJzw==
-X-Google-Smtp-Source: AGHT+IGaf7OO/QIwbRtFIzzCYIwu/CbtDrVi9rgtHOA0Oa7uryO/EzrtchbYZmaVI0oi/aGjQ3nl2bIJQVjlGNvIzlI=
-X-Received: by 2002:a05:6512:b87:b0:50e:a9db:9b89 with SMTP id
- b7-20020a0565120b8700b0050ea9db9b89mr5288051lfv.13.1705506995412; Wed, 17 Jan
- 2024 07:56:35 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40HFx84Z057241;
+ Wed, 17 Jan 2024 09:59:08 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1705507148;
+ bh=6kYxPbe1Sfq1hGC2j0CVDtwY4W4HSqFY9uyw2kut3Jo=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=YvpcdVPPrX+uKklgFBGFAed+eibhgoSZlC+cF9Y8rD+7mcMttUNnDRq4iDeLeThpJ
+ xePqu+HrkepiztMEizE8OIXbvz7sENEcLwDqwxZVvLukvwAtqewVaGpaZPX2zxeICG
+ vPGSL9leFT38aFyOtCGPjQohy5YCWLMsrplQiEK8=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40HFx8Fp009914
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 17 Jan 2024 09:59:08 -0600
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 17
+ Jan 2024 09:59:07 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 17 Jan 2024 09:59:07 -0600
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40HFx77p090745;
+ Wed, 17 Jan 2024 09:59:07 -0600
+Message-ID: <1915a58b-b0f1-4cf9-9ceb-7ca5f4cee5c1@ti.com>
+Date: Wed, 17 Jan 2024 09:59:07 -0600
 MIME-Version: 1.0
-References: <20231116172859.393744-1-sjg@chromium.org>
- <20231208150042.GA1278773-robh@kernel.org>
- <CAPnjgZ2i4gvgiUeHPOfHuOdBooV4e=QQEq6iMo0JbDwOS6dCwA@mail.gmail.com>
- <CAL_Jsq+xMZ8yz4H9D59uCSyX4h5W+4ruGF++=wVA=msXz+Y01A@mail.gmail.com>
- <CAPnjgZ1uW8T6woXSqFUNm301=W3zBYOrADREkrz=DuwSW87qZg@mail.gmail.com>
- <20231214172702.GA617226-robh@kernel.org>
- <CAPnjgZ2oJSGPO91Y_aLbe+v250WFrND4n3T0mOvhERYidVu=eQ@mail.gmail.com>
- <CAFLszTizRRVbRO6_ygE2X-Lp5dENWSc4uMGL5GPJAFGAbRdCyQ@mail.gmail.com>
-In-Reply-To: <CAFLszTizRRVbRO6_ygE2X-Lp5dENWSc4uMGL5GPJAFGAbRdCyQ@mail.gmail.com>
-From: Rob Herring <robh@kernel.org>
-Date: Wed, 17 Jan 2024 09:56:22 -0600
-X-Gmail-Original-Message-ID: <CAL_Jsq+j7_KZtQ2ENq9+vsw0LOZF=spu293_G=AxOmBM+m_f-g@mail.gmail.com>
-Message-ID: <CAL_Jsq+j7_KZtQ2ENq9+vsw0LOZF=spu293_G=AxOmBM+m_f-g@mail.gmail.com>
-Subject: Re: [PATCH v6 1/3] dt-bindings: mtd: partitions: Add binman compatible
-To: Simon Glass <sjg@chromium.org>
-Cc: devicetree@vger.kernel.org, Miquel Raynal <miquel.raynal@bootlin.com>, 
- linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>, 
- Michael Walle <mwalle@kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Pratyush Yadav <ptyadav@amazon.de>, 
- =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC] Kconfig: Add support for FIT image signature enforcing
+Content-Language: en-US
+To: Manorit Chawdhry <m-chawdhry@ti.com>, <u-boot@lists.denx.de>
+CC: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Kamlesh
+ Gurudasani <kamlesh@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Neha
+ Malcom Francis <n-francis@ti.com>, Nishanth Menon <nm@ti.com>
+References: <20240111-b4-upstream-fit-signature-enforce-v1-1-2b91be31866e@ti.com>
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20240111-b4-upstream-fit-signature-enforce-v1-1-2b91be31866e@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,155 +81,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jan 4, 2024 at 3:54=E2=80=AFPM Simon Glass <sjg@chromium.org> wrote=
-:
->
-> Hi Rob,
->
-> On Thu, Dec 14, 2023 at 2:09=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
-ote:
-> >
-> > Hi Rob,
-> >
-> > On Thu, 14 Dec 2023 at 10:27, Rob Herring <robh@kernel.org> wrote:
-> > >
-> > > On Fri, Dec 08, 2023 at 03:58:10PM -0700, Simon Glass wrote:
-> > > > Hi Rob,
-> > > >
-> > > > On Fri, 8 Dec 2023 at 14:56, Rob Herring <robh@kernel.org> wrote:
-> > > > >
-> > > > > On Fri, Dec 8, 2023 at 11:47=E2=80=AFAM Simon Glass <sjg@chromium=
-.org> wrote:
-> > > > > >
-> > > > > > Hi Rob,
-> > > > > >
-> > > > > > On Fri, 8 Dec 2023 at 08:00, Rob Herring <robh@kernel.org> wrot=
-e:
-> > > > > > >
-> > > > > > > On Thu, Nov 16, 2023 at 10:28:50AM -0700, Simon Glass wrote:
-> > > > > > > > Add a compatible string for binman, so we can extend fixed-=
-partitions
-> > > > > > > > in various ways.
-> > > > > > > >
-> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > ---
-> > > > > > > >
-> > > > > > > > (no changes since v5)
-> > > > > > > >
-> > > > > > > > Changes in v5:
-> > > > > > > > - Add #address/size-cells and parternProperties
-> > > > > > > > - Drop $ref to fixed-partitions.yaml
-> > > > > > > > - Drop 'select: false'
-> > > > > > > >
-> > > > > > > > Changes in v4:
-> > > > > > > > - Change subject line
-> > > > > > > >
-> > > > > > > > Changes in v3:
-> > > > > > > > - Drop fixed-partition additional compatible string
-> > > > > > > > - Drop fixed-partitions from the example
-> > > > > > > > - Mention use of compatible instead of label
-> > > > > > > >
-> > > > > > > > Changes in v2:
-> > > > > > > > - Drop mention of 'enhanced features' in fixed-partitions.y=
-aml
-> > > > > > > > - Mention Binman input and output properties
-> > > > > > > > - Use plain partition@xxx for the node name
-> > > > > > > >
-> > > > > > > >  .../bindings/mtd/partitions/binman.yaml       | 68 +++++++=
-++++++++++++
-> > > > > > > >  .../bindings/mtd/partitions/partitions.yaml   |  1 +
-> > > > > > > >  MAINTAINERS                                   |  5 ++
-> > > > > > > >  3 files changed, 74 insertions(+)
-> > > > > > > >  create mode 100644 Documentation/devicetree/bindings/mtd/p=
-artitions/binman.yaml
-> > > > > > > >
-> > > > > > > > diff --git a/Documentation/devicetree/bindings/mtd/partitio=
-ns/binman.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman.ya=
-ml
-> > > > > > > > new file mode 100644
-> > > > > > > > index 000000000000..329217550a98
-> > > > > > > > --- /dev/null
-> > > > > > > > +++ b/Documentation/devicetree/bindings/mtd/partitions/binm=
-an.yaml
-> > > > > > > > @@ -0,0 +1,68 @@
-> > > > > > > > +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-> > > > > > > > +# Copyright 2023 Google LLC
-> > > > > > > > +
-> > > > > > > > +%YAML 1.2
-> > > > > > > > +---
-> > > > > > > > +$id: http://devicetree.org/schemas/mtd/partitions/binman.y=
-aml#
-> > > > > > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > > > > > > > +
-> > > > > > > > +title: Binman firmware layout
-> > > > > > > > +
-> > > > > > > > +maintainers:
-> > > > > > > > +  - Simon Glass <sjg@chromium.org>
-> > > > > > > > +
-> > > > > > > > +description: |
-> > > > > > > > +  The binman node provides a layout for firmware, used whe=
-n packaging firmware
-> > > > > > > > +  from multiple projects. It is based on fixed-partitions,=
- with some
-> > > > > > > > +  extensions, but uses 'compatible' to indicate the conten=
-ts of the node, to
-> > > > > > > > +  avoid perturbing or confusing existing installations whi=
-ch use 'label' for a
-> > > > > > > > +  particular purpose.
-> > > > > > > > +
-> > > > > > > > +  Binman supports properties used as inputs to the firmwar=
-e-packaging process,
-> > > > > > > > +  such as those which control alignment of partitions. Thi=
-s binding addresses
-> > > > > > > > +  these 'input' properties. For example, it is common for =
-the 'reg' property
-> > > > > > > > +  (an 'output' property) to be set by Binman, based on the=
- alignment requested
-> > > > > > > > +  in the input.
-> > > > > > > > +
-> > > > > > > > +  Once processing is complete, input properties have mostl=
-y served their
-> > > > > > > > +  purpose, at least until the firmware is repacked later, =
-e.g. due to a
-> > > > > > > > +  firmware update. The 'fixed-partitions' binding should p=
-rovide enough
-> > > > > > > > +  information to read the firmware at runtime, including d=
-ecompression if
-> > > > > > > > +  needed.
-> > > > > > >
-> > > > > > > How is this going to work exactly? binman reads these nodes a=
-nd then
-> > > > > > > writes out 'fixed-partitions' nodes. But then you've lost the=
- binman
-> > > > > > > specifc parts needed for repacking.
-> > > > > >
-> > > > > > No, they are the same node. I do want the extra information to =
-stick
-> > > > > > around. So long as it is compatible with fixed-partition as wel=
-l, this
-> > > > > > should work OK.
-> > > > >
-> > > > > How can it be both? The partitions node compatible can be either
-> > > > > 'fixed-partitions' or 'binman'.
-> > > >
-> > > > Can we not allow it to be both? I have tried to adjust things in
-> > > > response to feedback but perhaps the feedback was leading me down t=
-he
-> > > > wrong path?
-> > >
-> > > Sure, but then the schema has to and that means extending
-> > > fixed-partitions.
-> >
-> > Can we cross that bridge later? There might be resistance to it. I'm
-> > not sure. For now, perhaps just a binman compatible works well enough
-> > to make progress.
->
-> Is there any way to make progress on this? I would like to have
-> software which doesn't understand the binman compatible to at least be
-> able to understand the fixed-partition compatible. Is that acceptable?
+On 1/11/24 4:34 AM, Manorit Chawdhry wrote:
+> FIT_SIGNATURE doesn't enforce the U-boot setup to be correct for booting
+> the FIT images, the DTB might not have all the proper nodes and it just
+> boots up without any warning. This makes it difficult to get the correct
+> setup working.
+> 
+> Adds an enforcement flag that doesn't allow the setup to have problems
+> and enforces the environment to only pick the signature node from DTB
+> and don't rely on anything else.
+> 
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> ---
+> A very crude implementation of [0], not exactly sure if the Kconfig
+> should just protect the getting key part of if we can make it more
+> generic and handle this as some lockdown where we can disable boot for
+> any other method and just allow FIT Images to bootup.
+> 
 
-There's only 2 ways that it can work. Either binman writes out
-fixed-partition nodes dropping/replacing anything only defined for
-binman or fixed-partition is extended to include what binman needs.
+Disabling other boot modes could be a different Kconfig, then we would
+have a generic "lockdown/secure" Kconfig that goes and selects the
+various smaller Kconfigs (like this one) that together would prevent
+bypassing security checks.
 
-Rob
+> [0]: https://lore.kernel.org/u-boot/CAPnjgZ3B9hWTNAMr2QjSN8P1AsOme4XfSAYUKSg=tRRiJ9drTg@mail.gmail.com/
+> ---
+>   boot/Kconfig         | 11 +++++++++++
+>   boot/image-fit-sig.c | 31 +++++++++++++++++++++----------
+>   2 files changed, 32 insertions(+), 10 deletions(-)
+> 
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index fbc49c5bca47..ed85fd3dc3c5 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -78,6 +78,17 @@ config FIT_SIGNATURE
+>   	  format support in this case, enable it using
+>   	  CONFIG_LEGACY_IMAGE_FORMAT.
+>   
+> +config FIT_SIGNATURE_ENFORCE
+> +	bool "Enforce the signature in FIT Images"
+> +	default y if TI_SECURE_DEVICE
+> +	depends on FIT_SIGNATURE
+> +	help
+> +	  Enabling FIT_SIGNATURE by default doesn't enforce the U-boot DTB to be
+> +	  having keys and allows booting the images without having proper setup.
+
+s/be having/have
+
+Andrew
+
+> +	  This option enforces the FIT signature mechanism to contain the keys in
+> +	  the DTB and enforce the nodes to be authenticated without relying on
+> +	  the "required" node in the DTB.
+> +
+>   config FIT_SIGNATURE_MAX_SIZE
+>   	hex "Max size of signed FIT structures"
+>   	depends on FIT_SIGNATURE
+> diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
+> index 12369896fe3f..8a324733e7e4 100644
+> --- a/boot/image-fit-sig.c
+> +++ b/boot/image-fit-sig.c
+> @@ -490,15 +490,24 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
+>   	/* Work out what we need to verify */
+>   	key_node = fdt_subnode_offset(key_blob, 0, FIT_SIG_NODENAME);
+>   	if (key_node < 0) {
+> -		debug("%s: No signature node found: %s\n", __func__,
+> -		      fdt_strerror(key_node));
+> -		return 0;
+> +		if (IS_ENABLED(CONFIG_FIT_SIGNATURE_ENFORCE)) {
+> +			printf("%s: No signature node found: %s\n", __func__,
+> +			       fdt_strerror(key_node));
+> +			return -EPERM;
+> +		} else {
+> +			debug("%s: No signature node found: %s\n", __func__,
+> +			      fdt_strerror(key_node));
+> +			return 0;
+> +		}
+>   	}
+>   
+>   	/* Get required-mode policy property from DTB */
+> -	reqd_mode = fdt_getprop(key_blob, key_node, "required-mode", NULL);
+> -	if (reqd_mode && !strcmp(reqd_mode, "any"))
+> -		reqd_policy_all = false;
+> +	if (!IS_ENABLED(CONFIG_FIT_SIGNATURE_ENFORCE)) {
+> +		reqd_mode =
+> +			fdt_getprop(key_blob, key_node, "required-mode", NULL);
+> +		if (reqd_mode && !strcmp(reqd_mode, "any"))
+> +			reqd_policy_all = false;
+> +	}
+>   
+>   	debug("%s: required-mode policy set to '%s'\n", __func__,
+>   	      reqd_policy_all ? "all" : "any");
+> @@ -514,10 +523,12 @@ static int fit_config_verify_required_keys(const void *fit, int conf_noffset,
+>   		const char *required;
+>   		int ret;
+>   
+> -		required = fdt_getprop(key_blob, noffset, FIT_KEY_REQUIRED,
+> -				       NULL);
+> -		if (!required || strcmp(required, "conf"))
+> -			continue;
+> +		if (!IS_ENABLED(CONFIG_FIT_SIGNATURE_ENFORCE)) {
+> +			required = fdt_getprop(key_blob, noffset,
+> +					       FIT_KEY_REQUIRED, NULL);
+> +			if (!required || strcmp(required, "conf"))
+> +				continue;
+> +		}
+>   
+>   		reqd_sigs++;
+>   
+> 
+> ---
+> base-commit: a803f87202aa48974bdff4d8100464a8288931e4
+> change-id: 20231107-b4-upstream-fit-signature-enforce-185a0db88b7f
+> 
+> Best regards,
