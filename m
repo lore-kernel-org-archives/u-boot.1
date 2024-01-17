@@ -4,43 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B72EBC47258
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 21:53:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76694C47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 22:12:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB43987971;
-	Wed, 17 Jan 2024 22:53:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id C44768795B;
+	Wed, 17 Jan 2024 23:12:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Uxl01exS";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E6FF87889; Wed, 17 Jan 2024 22:53:32 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 53EC58798C
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 22:53:30 +0100 (CET)
+ id C97E38798C; Wed, 17 Jan 2024 23:12:41 +0100 (CET)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 962C3876FC
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 23:12:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CA4CE11FB;
- Wed, 17 Jan 2024 13:54:15 -0800 (PST)
-Received: from minigeek.lan (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1A4113F73F;
- Wed, 17 Jan 2024 13:53:28 -0800 (PST)
-Date: Wed, 17 Jan 2024 21:52:45 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Nick Alilovic <nickalilovic@gmail.com>
-Cc: u-boot@lists.denx.de, jagan@amarulasolutions.com,
- linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH 1/2] arm: dts: Transpeed 8K618-T: Add Transpeed 8K618-T
- board support
-Message-ID: <20240117215245.65fc0282@minigeek.lan>
-In-Reply-To: <20240117163756.63875-1-nickalilovic@gmail.com>
-References: <20240117163756.63875-1-nickalilovic@gmail.com>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-6818b86ec67so576616d6.0
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 14:12:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1705529558; x=1706134358; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=FyKvBfB/TmOQJzQ+IIixaZL3h+y46z2a5w7Ute1CT6Q=;
+ b=Uxl01exSYns/joAw+tTJtHVidRzoaCJo0paiPn7pxm6nwYlO70IOWCHcd67scIEAEI
+ sNNZ4YTF53qgFEr0p8p3YZqYOXYuVY3+8fvPnNmnl94No1mCGJS1ra4H8z8j887sh/v+
+ HvAy3o/OCGWdl2KYHyoJN392tX/VpqU1tFttc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705529558; x=1706134358;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=FyKvBfB/TmOQJzQ+IIixaZL3h+y46z2a5w7Ute1CT6Q=;
+ b=Nu9QM9IqS71qxai6rTogIZp46BKFChuSxf/ZDzT8GuDZOi+gKGCVjE14XM+BvzVwBc
+ MN+4VWdzV5LBJJJqbN7WyF90XvhDDCC4Gx+Amb8tz9U89JeyfYa+Gd2BcNeTEncZehUd
+ 6DnGvaTssAbiemq/BIoEuGmUOndI6TVnzVKnlR9KFBHPpGjUMkaH42TDrqea/ulN2441
+ R/9oGKr2T0F2ky4Yz24K46LJj+pVvIlWTqwzvbsg4jHuUIQKcUOYjTwzS/LVXSaDA2P4
+ NIYHLtg+nt7i1Wq1668PQHahgXOjZOfT+5rGN0gE+mDk+zifdFTxqig0K3iwZdYCLIwA
+ IKbg==
+X-Gm-Message-State: AOJu0YyMlWcez8nx+DgbV9eJ6Tz01XfS2qjtUmZzJjwv9Vu2r5lENOrf
+ oWN1wSx4PZhymHAQo1ev5D2cS/oCUwsszUAHgAniXXv9/OI=
+X-Google-Smtp-Source: AGHT+IEpobAXvfkE7aLdq1aFq377CqYYN57zfvYaqTgOD2ASm3+PUVDlW94j7afBj62gX66t6smEcQ==
+X-Received: by 2002:a05:6214:29e2:b0:681:78d4:6be8 with SMTP id
+ jv2-20020a05621429e200b0068178d46be8mr1800353qvb.43.1705529558019; 
+ Wed, 17 Jan 2024 14:12:38 -0800 (PST)
+Received: from bill-the-cat..
+ (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
+ [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
+ cn17-20020ad44a71000000b006817cee3877sm801648qvb.43.2024.01.17.14.12.37
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 17 Jan 2024 14:12:37 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH] test: test_trace.py: Have trace-cmd report always use -l
+Date: Wed, 17 Jan 2024 17:12:36 -0500
+Message-Id: <20240117221236.2234826-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240117214357.2197351-1-trini@konsulko.com>
+References: <20240117214357.2197351-1-trini@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,205 +88,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 17 Jan 2024 11:37:55 -0500
-Nick Alilovic <nickalilovic@gmail.com> wrote:
+With newer versions of trace-cmd the report subcommand will have
+different output from before if we do or do not pass -l. However, with
+the -l flag passed our put is consistent here. This updates our regular
+expressions and comments for this as well now.
 
-Hi Nick,
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Changes in v2:
+- Use the -l flag to have consistent output for either version
+---
+ test/py/tests/test_trace.py | 32 ++++++++++++++++----------------
+ 1 file changed, 16 insertions(+), 16 deletions(-)
 
-> This is the DT I used from the Linux kernel. Made changes to the Makefile to build the new DTB.
-
-thanks, I will copy in this file along with other changes during the
-upcoming DT sync, with all the sunxi DT bits queued for Linux v6.8 -
-after the merge window closes. Weather permitting ;-) this should be
-early next week.
-
-Cheers,
-Andre
-
-> Signed-off-by: Nick Alilovic <nickalilovic@gmail.com>
-> ---
->  arch/arm/dts/Makefile                         |   1 +
->  .../arm/dts/sun50i-h618-transpeed-8k618-t.dts | 161 ++++++++++++++++++
->  2 files changed, 162 insertions(+)
->  create mode 100644 arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts
-> 
-> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index d456a524b3..cacd21558a 100644
-> --- a/arch/arm/dts/Makefile
-> +++ b/arch/arm/dts/Makefile
-> @@ -836,6 +836,7 @@ dtb-$(CONFIG_MACH_SUN50I_H6) += \
->  dtb-$(CONFIG_MACH_SUN50I_H616) += \
->  	sun50i-h616-orangepi-zero2.dtb \
->  	sun50i-h618-orangepi-zero3.dtb \
-> +	sun50i-h618-transpeed-8k618-t.dtb \
->  	sun50i-h616-x96-mate.dtb
->  dtb-$(CONFIG_MACH_SUN50I) += \
->  	sun50i-a64-amarula-relic.dtb \
-> diff --git a/arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts b/arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts
-> new file mode 100644
-> index 0000000000..8ea1fd41ae
-> --- /dev/null
-> +++ b/arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts
-> @@ -0,0 +1,161 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +/*
-> + * Copyright (C) 2023 Arm Ltd.
-> + */
-> +
-> +/dts-v1/;
-> +
-> +#include "sun50i-h616.dtsi"
-> +
-> +#include <dt-bindings/gpio/gpio.h>
-> +#include <dt-bindings/interrupt-controller/arm-gic.h>
-> +
-> +/ {
-> +	model = "Transpeed 8K618-T";
-> +	compatible = "transpeed,8k618-t", "allwinner,sun50i-h618";
-> +
-> +	aliases {
-> +		serial0 = &uart0;
-> +	};
-> +
-> +	chosen {
-> +		stdout-path = "serial0:115200n8";
-> +	};
-> +
-> +	reg_vcc5v: vcc5v {
-> +		/* board wide 5V supply directly from the DC input */
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc-5v";
-> +		regulator-min-microvolt = <5000000>;
-> +		regulator-max-microvolt = <5000000>;
-> +		regulator-always-on;
-> +	};
-> +
-> +	reg_vcc3v3: vcc3v3 {
-> +		/* discrete 3.3V regulator */
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc-3v3";
-> +		regulator-min-microvolt = <3300000>;
-> +		regulator-max-microvolt = <3300000>;
-> +		regulator-always-on;
-> +	};
-> +};
-> +
-> +&ehci0 {
-> +	status = "okay";
-> +};
-> +
-> +&ehci1 {
-> +	status = "okay";
-> +};
-> +
-> +&ir {
-> +	status = "okay";
-> +};
-> +
-> +&mmc0 {
-> +	vmmc-supply = <&reg_dldo1>;
-> +	cd-gpios = <&pio 8 16 GPIO_ACTIVE_LOW>;	/* PI16 */
-> +	bus-width = <4>;
-> +	status = "okay";
-> +};
-> +
-> +&mmc2 {
-> +	vmmc-supply = <&reg_dldo1>;
-> +	vqmmc-supply = <&reg_aldo1>;
-> +	bus-width = <8>;
-> +	non-removable;
-> +	cap-mmc-hw-reset;
-> +	mmc-ddr-1_8v;
-> +	mmc-hs200-1_8v;
-> +	status = "okay";
-> +};
-> +
-> +&ohci0 {
-> +	status = "okay";
-> +};
-> +
-> +&ohci1 {
-> +	status = "okay";
-> +};
-> +
-> +&r_i2c {
-> +	status = "okay";
-> +
-> +	axp313: pmic@36 {
-> +		compatible = "x-powers,axp313a";
-> +		reg = <0x36>;
-> +		#interrupt-cells = <1>;
-> +		interrupt-controller;
-> +
-> +		vin1-supply = <&reg_vcc5v>;
-> +		vin2-supply = <&reg_vcc5v>;
-> +		vin3-supply = <&reg_vcc5v>;
-> +
-> +		regulators {
-> +			reg_aldo1: aldo1 {
-> +				regulator-always-on;
-> +				regulator-min-microvolt = <1800000>;
-> +				regulator-max-microvolt = <1800000>;
-> +				regulator-name = "vcc-1v8-pll";
-> +			};
-> +
-> +			reg_dldo1: dldo1 {
-> +				regulator-always-on;
-> +				regulator-min-microvolt = <3300000>;
-> +				regulator-max-microvolt = <3300000>;
-> +				regulator-name = "vcc-3v3-io-mmc";
-> +			};
-> +
-> +			reg_dcdc1: dcdc1 {
-> +				regulator-always-on;
-> +				regulator-min-microvolt = <810000>;
-> +				regulator-max-microvolt = <990000>;
-> +				regulator-name = "vdd-gpu-sys";
-> +			};
-> +
-> +			reg_dcdc2: dcdc2 {
-> +				regulator-always-on;
-> +				regulator-min-microvolt = <810000>;
-> +				regulator-max-microvolt = <1100000>;
-> +				regulator-name = "vdd-cpu";
-> +			};
-> +
-> +			reg_dcdc3: dcdc3 {
-> +				regulator-always-on;
-> +				regulator-min-microvolt = <1360000>;
-> +				regulator-max-microvolt = <1360000>;
-> +				regulator-name = "vdd-dram";
-> +			};
-> +		};
-> +	};
-> +};
-> +
-> +&pio {
-> +	vcc-pc-supply = <&reg_aldo1>;
-> +	vcc-pg-supply = <&reg_dldo1>;
-> +	vcc-ph-supply = <&reg_dldo1>;
-> +	vcc-pi-supply = <&reg_dldo1>;
-> +};
-> +
-> +&uart0 {
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&uart0_ph_pins>;
-> +	status = "okay";
-> +};
-> +
-> +&uart1 {
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&uart1_pins>, <&uart1_rts_cts_pins>;
-> +	uart-has-rtscts;
-> +	status = "okay";
-> +};
-> +
-> +&usbotg {
-> +	dr_mode = "host";	/* USB A type receptable */
-> +	status = "okay";
-> +};
-> +
-> +&usbphy {
-> +	status = "okay";
-> +};
+diff --git a/test/py/tests/test_trace.py b/test/py/tests/test_trace.py
+index 28a6e72f525f..7c5696ce747f 100644
+--- a/test/py/tests/test_trace.py
++++ b/test/py/tests/test_trace.py
+@@ -12,7 +12,7 @@ import u_boot_utils as util
+ TMPDIR = '/tmp/test_trace'
+ 
+ # Decode a function-graph line
+-RE_LINE = re.compile(r'.*\[000\]\s*([0-9.]*): func.*[|](\s*)(\S.*)?([{};])$')
++RE_LINE = re.compile(r'.*0\.\.\.\.\. \s*([0-9.]*): func.*[|](\s*)(\S.*)?([{};])$')
+ 
+ 
+ def collect_trace(cons):
+@@ -113,15 +113,15 @@ def check_function(cons, fname, proftool, map_fname, trace_dat):
+     assert val > 50000  # Should be at least 50KB of symbols
+ 
+     # Check that the trace has something useful
+-    cmd = f"trace-cmd report {trace_dat} |grep -E '(initf_|initr_)'"
++    cmd = f"trace-cmd report -l {trace_dat} |grep -E '(initf_|initr_)'"
+     out = util.run_and_log(cons, ['sh', '-c', cmd])
+ 
+     # Format:
+-    # unknown option 14
+-    #      u-boot-1     [000]    60.805596: function:             initf_malloc
+-    #      u-boot-1     [000]    60.805597: function:             initf_malloc
+-    #      u-boot-1     [000]    60.805601: function:             initf_bootstage
+-    #      u-boot-1     [000]    60.805607: function:             initf_bootstage
++    #      u-boot-1     0.....    60.805596: function:             initf_malloc
++    #      u-boot-1     0.....    60.805597: function:             initf_malloc
++    #      u-boot-1     0.....    60.805601: function:             initf_bootstage
++    #      u-boot-1     0.....    60.805607: function:             initf_bootstage
++
+     lines = [line.replace(':', '').split() for line in out.splitlines()]
+     vals = {items[4]: float(items[2]) for items in lines if len(items) == 5}
+     base = None
+@@ -161,21 +161,21 @@ def check_funcgraph(cons, fname, proftool, map_fname, trace_dat):
+                'dump-ftrace', '-f', 'funcgraph'])
+ 
+     # Check that the trace has what we expect
+-    cmd = f'trace-cmd report {trace_dat} |head -n 70'
++    cmd = f'trace-cmd report -l {trace_dat} |head -n 70'
+     out = util.run_and_log(cons, ['sh', '-c', cmd])
+ 
+     # First look for this:
+-    #  u-boot-1     [000]   282.101360: funcgraph_entry:        0.004 us   |    initf_malloc();
++    #  u-boot-1     0.....   282.101360: funcgraph_entry:        0.004 us   |    initf_malloc();
+     # ...
+-    #  u-boot-1     [000]   282.101369: funcgraph_entry:                   |    initf_bootstage() {
+-    #  u-boot-1     [000]   282.101369: funcgraph_entry:                   |      bootstage_init() {
+-    #  u-boot-1     [000]   282.101369: funcgraph_entry:                   |        dlmalloc() {
++    #  u-boot-1     0.....   282.101369: funcgraph_entry:                   |    initf_bootstage() {
++    #  u-boot-1     0.....   282.101369: funcgraph_entry:                   |      bootstage_init() {
++    #  u-boot-1     0.....   282.101369: funcgraph_entry:                   |        dlmalloc() {
+     # ...
+-    #  u-boot-1     [000]   282.101375: funcgraph_exit:         0.001 us   |        }
++    #  u-boot-1     0.....   282.101375: funcgraph_exit:         0.001 us   |        }
+     # Then look for this:
+-    #  u-boot-1     [000]   282.101375: funcgraph_exit:         0.006 us   |      }
++    #  u-boot-1     0.....   282.101375: funcgraph_exit:         0.006 us   |      }
+     # Then check for this:
+-    #  u-boot-1     [000]   282.101375: funcgraph_entry:        0.000 us   |    initcall_is_event();
++    #  u-boot-1     0.....   282.101375: funcgraph_entry:        0.000 us   |    initcall_is_event();
+ 
+     expected_indent = None
+     found_start = False
+@@ -203,7 +203,7 @@ def check_funcgraph(cons, fname, proftool, map_fname, trace_dat):
+ 
+     # Now look for initf_dm() and dm_timer_init() so we can check the bootstage
+     # time
+-    cmd = f"trace-cmd report {trace_dat} |grep -E '(initf_dm|dm_timer_init)'"
++    cmd = f"trace-cmd report -l {trace_dat} |grep -E '(initf_dm|dm_timer_init)'"
+     out = util.run_and_log(cons, ['sh', '-c', cmd])
+ 
+     start_timestamp = None
+-- 
+2.34.1
 
