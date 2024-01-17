@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A091C47422
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 17:19:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 236E8C47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 17:19:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA225879F7;
-	Wed, 17 Jan 2024 18:17:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2E99487BA9;
+	Wed, 17 Jan 2024 18:17:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AXtUCU/k";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MNsQnVaG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E711A87A07; Wed, 17 Jan 2024 18:17:33 +0100 (CET)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
+ id 0836187B52; Wed, 17 Jan 2024 18:17:34 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B218987B82
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 18:17:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 31DD287B71
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 18:17:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-50e7d6565b5so13541485e87.0
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 09:17:29 -0800 (PST)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a2d7e2e7fe0so679672266b.1
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 09:17:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20230601; t=1705511849; x=1706116649; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6NKP1XPhkHwbFyXAe8mNVRUMAxRgxeIZ/pJsiBhhklA=;
- b=AXtUCU/kmxEu2krgLsHiyC/BFugKT6r6KBsxK9ENTicstjJIBr5hUGy6xebcEgiqRG
- wvTcnyfO/sJuUdvlDwvn4mY4Bdg2IHbmPwiZtZe5TcNuOuOksaLvFUYy2ZpW9LqPqkH7
- hrlEpU0V052jj/OxdNJ1PrikVq4LkMOqDUGQBbQge8wlteESZm4wy51dv1xqNlIKvmJD
- z+l0ISVPOV3CdQsC8Dq2zHuBL4SGKE8Vbxx5iuWeA9HsD65tR9TNHTxNX4HKo3GvK8lh
- 5lPjIJNuC+lCzO1fzA1PBD7d2+3G3lYFODxLPDJatAp//UBbu4XaSedIj6sfiBJiFcg5
- NSbA==
+ bh=ywT7RtroBGQBoOgjaad2C3kGUJ/r/zdruIhtLtkR65U=;
+ b=MNsQnVaGEhbGO1LdagQvpzTR5xOggl8MDrx3Gri3ReECqqv3cw3BbAKfqpJWazZoSX
+ tsSZeM/mjs2mTsXCnx8igLaBFVi5GTfW0wL0AyGIEsUg28qDTtywc+f4CJjk9L6d+Xy+
+ o4VgZiTdGWjmuZtD3lL2aJA4AKQ+TaufNfEM+JVyXc9q385TgZj0En0vLeD0m8me0OfO
+ gBlnDkKd6WgvIZOoSlTgndA9qFR4MTXTcAkKTvqDiZjwi5EVjspTUyb6RtcBVabhFQ31
+ Rxd4ih5aHHMjLcB2DtP9QHLqYtZvAIwwWzkZBtZ6f0NYnI+6NxwAdbSoO6d4/nDniDMi
+ 1aoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1705511849; x=1706116649;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6NKP1XPhkHwbFyXAe8mNVRUMAxRgxeIZ/pJsiBhhklA=;
- b=qDjPvHNTc75JNj0yAzROpACeSwDOSl9uSkY6gyz9JbcTYiHxikwv56sMcU/5EOILmA
- 1U5dtMfoMxRsz7aEbZtw7hKBrJaaY+Mbp2Y6Mn0sUT5R3tmYHkLyF7bOkYNn7cMs8EgG
- 1c/c1UrZsTd/wgFZPV9sLmpYw+JhUcg0I/6ldZ+b3V80eDz8L5L9+V655w1MglVi5H/m
- hcxnlv6lrDJ+viy5C6eE4Ya/mjVmaLya+lVQggkWKQHHudEDqWOyQls/sg4ZX8iagWKI
- M0T4C6FoUFU50UQEI6yNvz4yhNcMiOYcMpnqB4sPwR5gBd4J7cgNoOhrVkXLOK+fvS2X
- i9VQ==
-X-Gm-Message-State: AOJu0Yzi2BUvTfdN/3jvO/z0z67VsPUz2N8iDArfEoaKFlm99n1bpjzP
- 9DkpIRlWnWPFizrQF0D/38A=
-X-Google-Smtp-Source: AGHT+IEXBxAjGEseqlpfZpsRqsNEJNJ+zx5sQLIRmID7aOqI290h38DixBDuqSLisRDgTEkJCt9cOQ==
-X-Received: by 2002:a05:6512:3ca3:b0:50e:d3dc:264e with SMTP id
- h35-20020a0565123ca300b0050ed3dc264emr5355615lfv.28.1705511848809; 
- Wed, 17 Jan 2024 09:17:28 -0800 (PST)
+ bh=ywT7RtroBGQBoOgjaad2C3kGUJ/r/zdruIhtLtkR65U=;
+ b=f54qEwuw4QgROLFYBwRPlRLoKMVrXulGP2lByrdsaeyAkPaREvujnvhFrFGejvAt6S
+ 8iVlOGdJCSnlZDzfIHGJGQx+nPD12BMpRRwl6E/xl2MSglFokRyf+1AEQMiSb5tgbFAS
+ H5dwQm9UhI+8ZYFKzST+QhCX8qyxy9BC5EyH8L2z/4Ia/cwtECqFpDShIv1y6/oUIVDE
+ exoQLf7PsYLkJ6mLt41r/tNACHOaxFWt9ziIUEwObPNhjLyWa0iEg6VDyJ63oEFoYhHC
+ f5B00RxvLQd+LC2BMKx4GMt73DbmuQ4RmAqGqANloHxHaVWhCUHLMNdT0wZH+wL7IKbt
+ 5NOA==
+X-Gm-Message-State: AOJu0YxobdqekrNg1Mc+VNz9l+HXeELUlocQ1NwgCU+6Ew1Il2u0d0va
+ nh8zWas4767D8vEVJVwH2A+Ey4aeRHhziwCEwJLgJZ0wJ37T52lZ
+X-Google-Smtp-Source: AGHT+IF3gyw1udyTUDMymtylj+SdhJB1R56Zr1Kj5vs6lyRPFcrBIvjVCFLhb1d2N8695qJi3gBqxw==
+X-Received: by 2002:a17:906:b845:b0:a2e:c034:36eb with SMTP id
+ ga5-20020a170906b84500b00a2ec03436ebmr1054333ejb.37.1705511849487; 
+ Wed, 17 Jan 2024 09:17:29 -0800 (PST)
 Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
  vs5-20020a170907a58500b00a2cbbebedc1sm6904976ejc.53.2024.01.17.09.17.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jan 2024 09:17:28 -0800 (PST)
+ Wed, 17 Jan 2024 09:17:29 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Anatolij Gustschin <agust@denx.de>,
  Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v4 10/13] video: tegra20: dsi: add T114 support
-Date: Wed, 17 Jan 2024 19:16:55 +0200
-Message-Id: <20240117171658.22324-11-clamor95@gmail.com>
+Subject: [PATCH v4 11/13] video: tegra20: dsi: add reset support
+Date: Wed, 17 Jan 2024 19:16:56 +0200
+Message-Id: <20240117171658.22324-12-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240117171658.22324-1-clamor95@gmail.com>
 References: <20240117171658.22324-1-clamor95@gmail.com>
@@ -91,219 +91,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Existing Tegra DSI driver mostly fits T114 apart MIPI calibration
-which on T114 has dedicated driver. To resolve this MIPI calibration
-logic was split for pre-T114 and T114+ devices.
+Implement reset use to discard any changes which could have been
+applied to DSI before and can interfere with current configuration.
 
 Tested-by: Ion Agorria <ion@agorria.com> # HTC One X
 Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # Nvidia Tegratab T114
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/tegra20/tegra-dsi.c             | 78 ++++++++++++++++++-
- .../video/tegra20/tegra-dsi.h                 | 24 +++++-
- 2 files changed, 96 insertions(+), 6 deletions(-)
- rename arch/arm/include/asm/arch-tegra30/dsi.h => drivers/video/tegra20/tegra-dsi.h (90%)
+ drivers/video/tegra20/tegra-dsi.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
 diff --git a/drivers/video/tegra20/tegra-dsi.c b/drivers/video/tegra20/tegra-dsi.c
-index 72b91ed26b..f4743e8458 100644
+index f4743e8458..6408026808 100644
 --- a/drivers/video/tegra20/tegra-dsi.c
 +++ b/drivers/video/tegra20/tegra-dsi.c
-@@ -20,17 +20,24 @@
- #include <asm/gpio.h>
- #include <asm/io.h>
- #include <asm/arch/clock.h>
--#include <asm/arch-tegra30/dsi.h>
+@@ -12,6 +12,7 @@
+ #include <mipi_dsi.h>
+ #include <backlight.h>
+ #include <panel.h>
++#include <reset.h>
+ #include <linux/delay.h>
+ #include <linux/err.h>
+ #include <linux/time.h>
+@@ -849,6 +850,7 @@ static int tegra_dsi_bridge_probe(struct udevice *dev)
+ 	struct tegra_dsi_priv *priv = dev_get_priv(dev);
+ 	struct mipi_dsi_device *device = &priv->device;
+ 	struct mipi_dsi_panel_plat *mipi_plat;
++	struct reset_ctl reset_ctl;
+ 	int ret;
  
- #include "tegra-dc.h"
-+#include "tegra-dsi.h"
- #include "mipi-phy.h"
+ 	priv->version = dev_get_driver_data(dev);
+@@ -862,6 +864,13 @@ static int tegra_dsi_bridge_probe(struct udevice *dev)
+ 	priv->video_fifo_depth = 480;
+ 	priv->host_fifo_depth = 64;
  
-+/* List of supported DSI bridges */
-+enum {
-+	DSI_V0,
-+	DSI_V1,
-+};
++	ret = reset_get_by_name(dev, "dsi", &reset_ctl);
++	if (ret) {
++		log_debug("%s: reset_get_by_name() failed: %d\n",
++			  __func__, ret);
++		return ret;
++	}
 +
- struct tegra_dsi_priv {
- 	struct mipi_dsi_host host;
- 	struct mipi_dsi_device device;
- 	struct mipi_dphy_timing dphy_timing;
+ 	ret = uclass_get_device_by_phandle(UCLASS_REGULATOR, dev,
+ 					   "avdd-dsi-csi-supply", &priv->avdd);
+ 	if (ret)
+@@ -900,12 +909,17 @@ static int tegra_dsi_bridge_probe(struct udevice *dev)
  
- 	struct udevice *panel;
-+	struct udevice *mipi;
- 	struct display_timing timing;
+ 	tegra_dsi_get_format(device->format, &priv->format);
  
- 	struct dsi_ctlr *dsi;
-@@ -41,6 +48,8 @@ struct tegra_dsi_priv {
- 	int dsi_clk;
- 	int video_fifo_depth;
- 	int host_fifo_depth;
++	reset_assert(&reset_ctl);
 +
-+	u32 version;
- };
+ 	ret = regulator_set_enable_if_allowed(priv->avdd, true);
+ 	if (ret && ret != -ENOSYS)
+ 		return ret;
  
- static void tegra_dc_enable_controller(struct udevice *dev)
-@@ -501,6 +510,41 @@ static void tegra_dsi_pad_calibrate(struct dsi_pad_ctrl_reg *pad)
- 	writel(value, TEGRA_VI_BASE + (CSI_CIL_PAD_CONFIG << 2));
+ 	tegra_dsi_init_clocks(dev);
+ 
++	mdelay(2);
++	reset_deassert(&reset_ctl);
++
+ 	return 0;
  }
  
-+static void tegra_dsi_mipi_calibrate(struct tegra_dsi_priv *priv)
-+{
-+	struct dsi_pad_ctrl_reg *pad = &priv->dsi->pad;
-+	u32 value;
-+	int ret;
-+
-+	ret = misc_set_enabled(priv->mipi, true);
-+	if (ret)
-+		log_debug("%s: failed to enable MIPI calibration: %d\n",
-+			  __func__, ret);
-+
-+	writel(0, &pad->pad_ctrl);
-+	writel(0, &pad->pad_ctrl_1);
-+	writel(0, &pad->pad_ctrl_2);
-+	writel(0, &pad->pad_ctrl_3);
-+	writel(0, &pad->pad_ctrl_4);
-+
-+	/* DSI pad enable */
-+	value = DSI_PAD_CONTROL_VS1_PULLDN(0) | DSI_PAD_CONTROL_VS1_PDIO(0);
-+	writel(value, &pad->pad_ctrl);
-+
-+	value = DSI_PAD_SLEW_UP(0x7) | DSI_PAD_SLEW_DN(0x7) |
-+		DSI_PAD_LP_UP(0x1) | DSI_PAD_LP_DN(0x1) |
-+		DSI_PAD_OUT_CLK(0x0);
-+	writel(value, &pad->pad_ctrl_2);
-+
-+	value = DSI_PAD_PREEMP_PD_CLK(0x3) | DSI_PAD_PREEMP_PU_CLK(0x3) |
-+		DSI_PAD_PREEMP_PD(0x03) | DSI_PAD_PREEMP_PU(0x3);
-+	writel(value, &pad->pad_ctrl_3);
-+
-+	ret = misc_write(priv->mipi, 0, NULL, 0);
-+	if (ret)
-+		log_debug("%s: MIPI calibration failed %d\n", __func__, ret);
-+}
-+
- static void tegra_dsi_set_timeout(struct dsi_timeout_reg *rtimeout,
- 				  unsigned long bclk,
- 				  unsigned int vrefresh)
-@@ -664,10 +708,25 @@ static int tegra_dsi_encoder_enable(struct udevice *dev)
- 	u32 value;
- 	int ret;
- 
-+	/* If for some reasone DSI is enabled then it needs to
-+	 * be disabled in order for the panel initialization
-+	 * commands to be properly sent.
-+	 */
-+	value = readl(&misc->dsi_pwr_ctrl);
-+
-+	if (value & DSI_POWER_CONTROL_ENABLE) {
-+		value = readl(&misc->dsi_pwr_ctrl);
-+		value &= ~DSI_POWER_CONTROL_ENABLE;
-+		writel(value, &misc->dsi_pwr_ctrl);
-+	}
-+
- 	/* Disable interrupt */
- 	writel(0, &misc->int_enable);
- 
--	tegra_dsi_pad_calibrate(&priv->dsi->pad);
-+	if (priv->version)
-+		tegra_dsi_mipi_calibrate(priv);
-+	else
-+		tegra_dsi_pad_calibrate(&priv->dsi->pad);
- 
- 	tegra_dsi_get_muldiv(device->format, &mul, &div);
- 
-@@ -792,6 +851,8 @@ static int tegra_dsi_bridge_probe(struct udevice *dev)
- 	struct mipi_dsi_panel_plat *mipi_plat;
- 	int ret;
- 
-+	priv->version = dev_get_driver_data(dev);
-+
- 	priv->dsi = (struct dsi_ctlr *)dev_read_addr_ptr(dev);
- 	if (!priv->dsi) {
- 		printf("%s: No display controller address\n", __func__);
-@@ -814,6 +875,16 @@ static int tegra_dsi_bridge_probe(struct udevice *dev)
- 		return log_ret(ret);
- 	}
- 
-+	if (priv->version) {
-+		ret = uclass_get_device_by_phandle(UCLASS_MISC, dev,
-+						   "nvidia,mipi-calibrate",
-+						   &priv->mipi);
-+		if (ret) {
-+			log_debug("%s: cannot get MIPI: error %d\n", __func__, ret);
-+			return ret;
-+		}
-+	}
-+
- 	panel_get_display_timing(priv->panel, &priv->timing);
- 
- 	mipi_plat = dev_get_plat(priv->panel);
-@@ -845,7 +916,8 @@ static const struct panel_ops tegra_dsi_bridge_ops = {
- };
- 
- static const struct udevice_id tegra_dsi_bridge_ids[] = {
--	{ .compatible = "nvidia,tegra30-dsi" },
-+	{ .compatible = "nvidia,tegra30-dsi", .data = DSI_V0 },
-+	{ .compatible = "nvidia,tegra114-dsi", .data = DSI_V1 },
- 	{ }
- };
- 
-diff --git a/arch/arm/include/asm/arch-tegra30/dsi.h b/drivers/video/tegra20/tegra-dsi.h
-similarity index 90%
-rename from arch/arm/include/asm/arch-tegra30/dsi.h
-rename to drivers/video/tegra20/tegra-dsi.h
-index 7ade132613..69dac4bd1b 100644
---- a/arch/arm/include/asm/arch-tegra30/dsi.h
-+++ b/drivers/video/tegra20/tegra-dsi.h
-@@ -4,8 +4,8 @@
-  *  NVIDIA Corporation <www.nvidia.com>
-  */
- 
--#ifndef __ASM_ARCH_TEGRA_DSI_H
--#define __ASM_ARCH_TEGRA_DSI_H
-+#ifndef _TEGRA_DSI_H
-+#define _TEGRA_DSI_H
- 
- #ifndef __ASSEMBLY__
- #include <linux/bitops.h>
-@@ -105,6 +105,10 @@ struct dsi_pad_ctrl_reg {
- 	uint pad_ctrl_cd;		/* _PAD_CONTROL_CD_0 */
- 	uint pad_cd_status;		/* _PAD_CD_STATUS_0 */
- 	uint dsi_vid_mode_control;	/* _DSI_VID_MODE_CONTROL_0 */
-+	uint pad_ctrl_1;		/* _PAD_CONTROL_1 */
-+	uint pad_ctrl_2;		/* _PAD_CONTROL_2 */
-+	uint pad_ctrl_3;		/* _PAD_CONTROL_3 */
-+	uint pad_ctrl_4;		/* _PAD_CONTROL_4 */
- };
- 
- /* Display Serial Interface (DSI_) regs */
-@@ -184,6 +188,20 @@ struct dsi_ctlr {
- #define DSI_PAD_CONTROL_PAD_LPUPADJ(x)		(((x) & 0x3) << 14)
- #define DSI_PAD_CONTROL_PAD_LPDNADJ(x)		(((x) & 0x3) << 12)
- 
-+#define DSI_PAD_CONTROL_VS1_PDIO(x)	(((x) & 0xf) <<  0)
-+#define DSI_PAD_CONTROL_VS1_PULLDN(x)	(((x) & 0xf) << 16)
-+
-+#define DSI_PAD_OUT_CLK(x)		(((x) & 0x7) <<  0)
-+#define DSI_PAD_LP_DN(x)		(((x) & 0x7) <<  4)
-+#define DSI_PAD_LP_UP(x)		(((x) & 0x7) <<  8)
-+#define DSI_PAD_SLEW_DN(x)		(((x) & 0x7) << 12)
-+#define DSI_PAD_SLEW_UP(x)		(((x) & 0x7) << 16)
-+
-+#define DSI_PAD_PREEMP_PD_CLK(x)	(((x) & 0x3) << 12)
-+#define DSI_PAD_PREEMP_PU_CLK(x)	(((x) & 0x3) << 8)
-+#define DSI_PAD_PREEMP_PD(x)		(((x) & 0x3) << 4)
-+#define DSI_PAD_PREEMP_PU(x)		(((x) & 0x3) << 0)
-+
- /*
-  * pixel format as used in the DSI_CONTROL_FORMAT field
-  */
-@@ -214,4 +232,4 @@ enum tegra_dsi_format {
- #define  PAD_DRIV_DN_REF(x)		(((x) & 0x7) << 16)
- #define  PAD_DRIV_UP_REF(x)		(((x) & 0x7) << 8)
- 
--#endif /* __ASM_ARCH_TEGRA_DSI_H */
-+#endif /* _TEGRA_DSI_H */
 -- 
 2.40.1
 
