@@ -4,84 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EA7DC47258
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 08:37:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71AE3C47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 08:58:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A5408796E;
-	Wed, 17 Jan 2024 09:37:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B04608799E;
+	Wed, 17 Jan 2024 09:58:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XFClNUpG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RBIKZgs6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CA9B87985; Wed, 17 Jan 2024 09:37:29 +0100 (CET)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
+ id 4747F87990; Wed, 17 Jan 2024 09:58:19 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20A348796E
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 09:37:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD659879BA
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 09:58:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2ccae380df2so118446151fa.1
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 00:37:27 -0800 (PST)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-40e76626170so31228745e9.2
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 00:58:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705480646; x=1706085446; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=t6PzjYH8vOi3ShjI+PQTnn7ErhGc2il7/zcvAVqJYsk=;
- b=XFClNUpGemvJl5nsW8Hj4EQPCqWVSjkZg8jZKbtmoAmRuMnWswJl0MHAwe7nHYxk2d
- VBFJ6n2u4EUvWeXXOKcY8yKip6+Ukp3HEC/S2IR0Quk/nTjusxJWirTpjNxwbwyUWRd0
- PeGfO4FNdTSRTcgAs+Xy5LNQ8NgsHsiJqoL6TqViHOyqFJl5u73LW8PXSqQCqcStPnkd
- ZB1uxeQpl/i/hAwygM4FVRDsxNvCNl2k+b533HfqwTdmZHWaVQJ8ApUg0YJQlt6QXL5K
- xIkiAYhovZTqFoTvYInVtGi9R7I/i9ROSERvGBcgO2danMD8eMfLHfJYssWaF/tsqrW1
- j7GA==
+ d=linaro.org; s=google; t=1705481896; x=1706086696; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=J/zfmteF/frkLtpsCcNRbMigxNcCxGFPRRhu/FyOtp0=;
+ b=RBIKZgs6Jx6M+mXg2GUdoRFCxEUq2qmn3fJ5TYUk43MEXTdEl5l0AWprPhSR5WruFa
+ pbqetg0U3Hi/voCBUMGaR4CITT/+0NOVScchjaRzconCVxtsE66U0d7VwR0G0RNhzf5U
+ T4vcl0xwqOdrxt/YP/eqAY1XJkI5iJ/89STfCmBeA4efpSSEs02ZLcZ7P4EV7MIgSDCv
+ Rp7acKu5P5emzOFAZB+3XSOyFnbmpqmtOnJ1sP4V3N5zIFtVAQcaOj4Nq8AyBl3LzZmW
+ WHn5iIJu0x/GlBVeFjb5EG08H7+CZ2F/SBkvzQ+kUfBOm5JXHfbEUxAcW2BVY+ZbCeSt
+ hJKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705480646; x=1706085446;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=t6PzjYH8vOi3ShjI+PQTnn7ErhGc2il7/zcvAVqJYsk=;
- b=dB38g9Ww2tDHy1QNvPN7AgovEi4pBQ9uObLs38lrvOaH2/HjZDbvJXtKiDA89oTPk9
- 1cPPJWKSu1msWLkgIPKMME8QVoFNaWxH5Wdva1BWQOMwl70OlzJQ5C87EAJOpKHTRQDZ
- M44MtxrC2t7uYvnv9e1jWRDPZn6A9novu6jLXQYhSpnyhBR8FzsK6Cauy34NoglazF2w
- +M1DFZg38D2CDLn4e86CpBPCaZe0mJICCIi5kuEIuKCG7zEa9WG4xRNaX32wBZ6dqWD6
- zh+cX4wDTF/C+GE3rx3Bl4OM24HOEnGulqIDfJACx5VGj2BLe4mQupVx2fPiOTcs/baE
- YUXw==
-X-Gm-Message-State: AOJu0YxNvuZpgt6mVv4oZfXaHETgaRY8SjoWVQLqcW1m9ntZJFyq8MTJ
- GGD3Q0eNbxFoJtXef8713lH6eWuCCcouHNqNmkUYT5NeAgbwww==
-X-Google-Smtp-Source: AGHT+IGrOe6I4UJjT+3mK87AOvpPfis8yUgv9H4nQDfCztl2tMDc9kPXdjOD+FtVbm62xVSIYUHfZXDc4bAq0Y+J6Jc=
-X-Received: by 2002:a19:f501:0:b0:50e:3e3a:3d6a with SMTP id
- j1-20020a19f501000000b0050e3e3a3d6amr3057117lfb.108.1705480646359; Wed, 17
- Jan 2024 00:37:26 -0800 (PST)
+ d=1e100.net; s=20230601; t=1705481896; x=1706086696;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=J/zfmteF/frkLtpsCcNRbMigxNcCxGFPRRhu/FyOtp0=;
+ b=wMufNb7PLfhNCCUVqKIsyWsfLcjhXaahYfnN2Dpx835jn8QU1VIErN4gdcJ8TktQwn
+ tCkFkZE3yi8aIGYZGkUUgk/rCHkmkGs1vfQyYgxV2ZNq/Cw2l6pUrfDgGn9wE5BX/IBI
+ LRVGlFAc8Ei+00WL4GMKwqFSlFzrt2IXcSyVpmQF3iogDcacz0wBQs7qKnGATkEpy2qL
+ eV1sCWQiPOLKSZV5mAdOi40BBFGgVutXNle5UVus2qt4K5Z71k49UrJT0u5P4Vfj/Iex
+ fnA84TXY/GVL6p8lVOiHYq3pmAXIxiT7MwSYLR0Kp0iXv8R12ZxnyKzj+tKUzFC6QfAY
+ PSew==
+X-Gm-Message-State: AOJu0YyB3KD49bun+2+mdnVzS7sSN6Wci44FEdVzac2u8/R2t6Ln8TLe
+ NQMX08S89Dk3s6Mi0Em5IykTR3zbDSugrA==
+X-Google-Smtp-Source: AGHT+IESTKarrdEFCkWs6dVoaWcrkEVRDraGW/yECTQ1DQw27/53iqzzO7z+jtrfAC3q22griVguFw==
+X-Received: by 2002:a05:600c:a0a:b0:40e:52de:1571 with SMTP id
+ z10-20020a05600c0a0a00b0040e52de1571mr4628133wmp.18.1705481896134; 
+ Wed, 17 Jan 2024 00:58:16 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:982:cbb0:de9a:cd03:1fa1:d6f1?
+ ([2a01:e0a:982:cbb0:de9a:cd03:1fa1:d6f1])
+ by smtp.gmail.com with ESMTPSA id
+ i19-20020a05600c355300b0040e76b60235sm10528547wmq.8.2024.01.17.00.58.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 17 Jan 2024 00:58:15 -0800 (PST)
+Message-ID: <a4466fdf-623b-4eca-9df0-ba6658d2978c@linaro.org>
+Date: Wed, 17 Jan 2024 09:58:12 +0100
 MIME-Version: 1.0
-References: <20240116171356.376801-1-raymond.mao@linaro.org>
- <20240116171356.376801-4-raymond.mao@linaro.org>
-In-Reply-To: <20240116171356.376801-4-raymond.mao@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 17 Jan 2024 10:36:50 +0200
-Message-ID: <CAC_iWjKi8TpyFOHQCNM3G6v59TRteYVDKf+8d+iLMru+WoK-gg@mail.gmail.com>
-Subject: Re: [PATCH v6 3/7] bloblist: refactor of bloblist_reloc()
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Fabio Estevam <festevam@denx.de>,
- Bin Meng <bmeng@tinylab.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, 
- Andre Przywara <andre.przywara@arm.com>, Mark Kettenis <kettenis@openbsd.org>, 
- Linus Walleij <linus.walleij@linaro.org>, Yang Xiwen <forbidden405@outlook.com>,
- =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>, 
- Peng Fan <peng.fan@nxp.com>, Kevin Chen <kevin_chen@aspeedtech.com>, 
- Sean Anderson <seanga2@gmail.com>, Nikhil M Jain <n-jain1@ti.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Shiji Yang <yangshiji66@outlook.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v3 02/17] video: dw_hdmi: Add Vendor PHY handling
+Content-Language: en-US, fr
+To: Jagan Teki <jagan@amarulasolutions.com>,
+ Anatolij Gustschin <agust@denx.de>, Andre Przywara <andre.przywara@arm.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Heiko Stuebner <heiko@sntech.de>, Andy Yan <andyshrk@163.com>,
+ Robin Murphy <robin.murphy@arm.com>
+Cc: Da Xue <da.xue@libretech.co>, u-boot@lists.denx.de,
+ Jagan Teki <jagan@edgeble.ai>
+References: <20240117075154.58747-1-jagan@amarulasolutions.com>
+ <20240117075154.58747-3-jagan@amarulasolutions.com>
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro Developer Services
+In-Reply-To: <20240117075154.58747-3-jagan@amarulasolutions.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,131 +121,155 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 16 Jan 2024 at 19:14, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> The current bloblist pointer and size can be retrieved from global
-> data, so we don't need to pass them from the function arguments.
-> This change also help to remove all external access of gd->bloblist
-> outside of bloblist module.
->
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+On 17/01/2024 08:51, Jagan Teki wrote:
+> From: Jagan Teki <jagan@edgeble.ai>
+> 
+> DW HDMI support Vendor PHY like Rockchip RK3328 Inno HDMI PHY.
+> 
+> Extend the vendor phy handling by adding platform phy hooks.
+> 
+> Signed-off-by: Jagan Teki <jagan@edgeble.ai>
 > ---
-> Changes in v2
-> - New patch file created for v2.
-> Changes in v3
-> - Check the space size before copying the bloblist.
-> - Add return code of bloblist_reloc().
-> Changes in v4
-> - return error code from bloblist_reloc().
->
->  common/bloblist.c  | 10 ++++++++--
->  common/board_f.c   |  9 +++------
->  include/bloblist.h |  8 ++++----
->  test/bloblist.c    |  6 ++----
->  4 files changed, 17 insertions(+), 16 deletions(-)
->
-> diff --git a/common/bloblist.c b/common/bloblist.c
-> index 26b0ba33b1..c2fd07575f 100644
-> --- a/common/bloblist.c
-> +++ b/common/bloblist.c
-> @@ -472,13 +472,19 @@ void bloblist_show_list(void)
->         }
->  }
->
-> -void bloblist_reloc(void *to, uint to_size, void *from, uint from_size)
-> +int bloblist_reloc(void *to, uint to_size)
->  {
->         struct bloblist_hdr *hdr;
->
-> -       memcpy(to, from, from_size);
-> +       if (to_size < gd->bloblist->total_size)
-> +               return -ENOSPC;
+> Changes for v3:
+> - drop data
+> - assign ops directly
+> Changes for v2:
+> - fix meson cfg
+> 
+>   drivers/video/dw_hdmi.c             | 10 +++++++++-
+>   drivers/video/meson/meson_dw_hdmi.c |  6 +++++-
+>   drivers/video/rockchip/rk_hdmi.c    |  1 -
+>   drivers/video/sunxi/sunxi_dw_hdmi.c |  6 +++++-
+>   include/dw_hdmi.h                   |  8 +++++++-
+>   5 files changed, 26 insertions(+), 5 deletions(-)
+> 
+> diff --git a/drivers/video/dw_hdmi.c b/drivers/video/dw_hdmi.c
+> index c4fbb18294..4914ba6146 100644
+> --- a/drivers/video/dw_hdmi.c
+> +++ b/drivers/video/dw_hdmi.c
+> @@ -988,7 +988,7 @@ int dw_hdmi_enable(struct dw_hdmi *hdmi, const struct display_timing *edid)
+>   
+>   	hdmi_av_composer(hdmi, edid);
+>   
+> -	ret = hdmi->phy_set(hdmi, edid->pixelclock.typ);
+> +	ret = hdmi->ops->phy_set(hdmi, edid->pixelclock.typ);
+>   	if (ret)
+>   		return ret;
+>   
+> @@ -1009,10 +1009,18 @@ int dw_hdmi_enable(struct dw_hdmi *hdmi, const struct display_timing *edid)
+>   	return 0;
+>   }
+>   
+> +static const struct dw_hdmi_phy_ops dw_hdmi_synopsys_phy_ops = {
+> +	.phy_set = dw_hdmi_phy_cfg,
+> +};
 > +
-> +       memcpy(to, gd->bloblist, gd->bloblist->total_size);
->         hdr = to;
->         hdr->total_size = to_size;
-> +       gd->bloblist = to;
+>   void dw_hdmi_init(struct dw_hdmi *hdmi)
+>   {
+>   	uint ih_mute;
+>   
+> +	/* hook Synopsys PHYs ops */
+> +	if (!hdmi->ops)
+> +		hdmi->ops = &dw_hdmi_synopsys_phy_ops;
 > +
-> +       return 0;
->  }
->
->  int bloblist_init(void)
-> diff --git a/common/board_f.c b/common/board_f.c
-> index d4d7d01f8f..f4145a2698 100644
-> --- a/common/board_f.c
-> +++ b/common/board_f.c
-> @@ -676,13 +676,10 @@ static int reloc_bloblist(void)
->                 return 0;
->         }
->         if (gd->new_bloblist) {
-> -               int size = CONFIG_BLOBLIST_SIZE;
-> -
->                 debug("Copying bloblist from %p to %p, size %x\n",
-> -                     gd->bloblist, gd->new_bloblist, size);
-> -               bloblist_reloc(gd->new_bloblist, CONFIG_BLOBLIST_SIZE_RELOC,
-> -                              gd->bloblist, size);
-> -               gd->bloblist = gd->new_bloblist;
-> +                     gd->bloblist, gd->new_bloblist, gd->bloblist->total_size);
-> +               return bloblist_reloc(gd->new_bloblist,
-> +                                     CONFIG_BLOBLIST_SIZE_RELOC);
->         }
->  #endif
->
-> diff --git a/include/bloblist.h b/include/bloblist.h
-> index cc78259e5a..0ae079d62a 100644
-> --- a/include/bloblist.h
-> +++ b/include/bloblist.h
-> @@ -426,11 +426,11 @@ const char *bloblist_tag_name(enum bloblist_tag_t tag);
->   * bloblist_reloc() - Relocate the bloblist and optionally resize it
->   *
->   * @to: Pointer to new bloblist location (must not overlap old location)
-> - * @to_size: New size for bloblist (must be larger than from_size)
-> - * @from: Pointer to bloblist to relocate
-> - * @from_size: Size of bloblist to relocate
-> + * @to_size: New size for bloblist
-> + * Return: 0 if OK, -ENOSPC if the new size is small than the bloblist total
-> + *        size.
->   */
-> -void bloblist_reloc(void *to, uint to_size, void *from, uint from_size);
-> +int bloblist_reloc(void *to, uint to_size);
->
->  /**
->   * bloblist_init() - Init the bloblist system with a single bloblist
-> diff --git a/test/bloblist.c b/test/bloblist.c
-> index 7dab9addf8..1c60bbac36 100644
-> --- a/test/bloblist.c
-> +++ b/test/bloblist.c
-> @@ -376,13 +376,12 @@ static int bloblist_test_reloc(struct unit_test_state *uts)
->  {
->         const uint large_size = TEST_BLOBLIST_SIZE;
->         const uint small_size = 0x20;
-> -       void *old_ptr, *new_ptr;
-> +       void *new_ptr;
->         void *blob1, *blob2;
->         ulong new_addr;
->         ulong new_size;
->
->         ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0, 0));
-> -       old_ptr = map_sysmem(TEST_ADDR, TEST_BLOBLIST_SIZE);
->
->         /* Add one blob and then one that won't fit */
->         blob1 = bloblist_add(TEST_TAG, small_size, 0);
-> @@ -394,8 +393,7 @@ static int bloblist_test_reloc(struct unit_test_state *uts)
->         new_addr = TEST_ADDR + TEST_BLOBLIST_SIZE;
->         new_size = TEST_BLOBLIST_SIZE + 0x100;
->         new_ptr = map_sysmem(new_addr, TEST_BLOBLIST_SIZE);
-> -       bloblist_reloc(new_ptr, new_size, old_ptr, TEST_BLOBLIST_SIZE);
-> -       gd->bloblist = new_ptr;
-> +       ut_assertok(bloblist_reloc(new_ptr, new_size));
->
->         /* Check the old blob is there and that we can now add the bigger one */
->         ut_assertnonnull(bloblist_find(TEST_TAG, small_size));
-> --
-> 2.25.1
->
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>   	/*
+>   	 * boot up defaults are:
+>   	 * hdmi_ih_mute   = 0x03 (disabled)
+> diff --git a/drivers/video/meson/meson_dw_hdmi.c b/drivers/video/meson/meson_dw_hdmi.c
+> index 5db01904b5..259af1b457 100644
+> --- a/drivers/video/meson/meson_dw_hdmi.c
+> +++ b/drivers/video/meson/meson_dw_hdmi.c
+> @@ -375,6 +375,10 @@ static int meson_dw_hdmi_wait_hpd(struct dw_hdmi *hdmi)
+>   	return -ETIMEDOUT;
+>   }
+>   
+> +static const struct dw_hdmi_phy_ops dw_hdmi_meson_phy_ops = {
+> +	.phy_set = meson_dw_hdmi_phy_init,
+> +};
+> +
+>   static int meson_dw_hdmi_probe(struct udevice *dev)
+>   {
+>   	struct meson_dw_hdmi *priv = dev_get_priv(dev);
+> @@ -397,7 +401,7 @@ static int meson_dw_hdmi_probe(struct udevice *dev)
+>   
+>   	priv->hdmi.hdmi_data.enc_out_bus_format = MEDIA_BUS_FMT_RGB888_1X24;
+>   	priv->hdmi.hdmi_data.enc_in_bus_format = MEDIA_BUS_FMT_YUV8_1X24;
+> -	priv->hdmi.phy_set = meson_dw_hdmi_phy_init;
+> +	priv->hdmi.ops = &dw_hdmi_meson_phy_ops;
+>   	if (meson_hdmi_is_compatible(priv, HDMI_COMPATIBLE_G12A))
+>   		priv->hdmi.reg_io_width = 1;
+>   	else {
+> diff --git a/drivers/video/rockchip/rk_hdmi.c b/drivers/video/rockchip/rk_hdmi.c
+> index b75a174489..d5b5a529d2 100644
+> --- a/drivers/video/rockchip/rk_hdmi.c
+> +++ b/drivers/video/rockchip/rk_hdmi.c
+> @@ -90,7 +90,6 @@ int rk_hdmi_of_to_plat(struct udevice *dev)
+>   	/* hdmi->i2c_clk_{high,low} are set up by the SoC driver */
+>   
+>   	hdmi->reg_io_width = 4;
+> -	hdmi->phy_set = dw_hdmi_phy_cfg;
+>   
+>   	priv->grf = syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
+>   
+> diff --git a/drivers/video/sunxi/sunxi_dw_hdmi.c b/drivers/video/sunxi/sunxi_dw_hdmi.c
+> index 0324a050d0..986e69d66b 100644
+> --- a/drivers/video/sunxi/sunxi_dw_hdmi.c
+> +++ b/drivers/video/sunxi/sunxi_dw_hdmi.c
+> @@ -369,6 +369,10 @@ static int sunxi_dw_hdmi_probe(struct udevice *dev)
+>   	return 0;
+>   }
+>   
+> +static const struct dw_hdmi_phy_ops dw_hdmi_sunxi_phy_ops = {
+> +	.phy_set = sunxi_dw_hdmi_phy_cfg,
+> +};
+> +
+>   static int sunxi_dw_hdmi_of_to_plat(struct udevice *dev)
+>   {
+>   	struct sunxi_dw_hdmi_priv *priv = dev_get_priv(dev);
+> @@ -379,7 +383,7 @@ static int sunxi_dw_hdmi_of_to_plat(struct udevice *dev)
+>   	hdmi->i2c_clk_high = 0xd8;
+>   	hdmi->i2c_clk_low = 0xfe;
+>   	hdmi->reg_io_width = 1;
+> -	hdmi->phy_set = sunxi_dw_hdmi_phy_cfg;
+> +	hdmi->ops = &dw_hdmi_sunxi_phy_ops;
+>   
+>   	ret = reset_get_bulk(dev, &priv->resets);
+>   	if (ret)
+> diff --git a/include/dw_hdmi.h b/include/dw_hdmi.h
+> index 8acae3839f..17bdd2dbf9 100644
+> --- a/include/dw_hdmi.h
+> +++ b/include/dw_hdmi.h
+> @@ -534,6 +534,12 @@ struct hdmi_data_info {
+>   	struct hdmi_vmode video_mode;
+>   };
+>   
+> +struct dw_hdmi;
+> +
+> +struct dw_hdmi_phy_ops {
+> +	int (*phy_set)(struct dw_hdmi *hdmi, uint mpixelclock);
+> +};
+> +
+>   struct dw_hdmi {
+>   	ulong ioaddr;
+>   	const struct hdmi_mpll_config *mpll_cfg;
+> @@ -543,8 +549,8 @@ struct dw_hdmi {
+>   	u8 reg_io_width;
+>   	struct hdmi_data_info hdmi_data;
+>   	struct udevice *ddc_bus;
+> +	const struct dw_hdmi_phy_ops *ops;
+>   
+> -	int (*phy_set)(struct dw_hdmi *hdmi, uint mpixelclock);
+>   	void (*write_reg)(struct dw_hdmi *hdmi, u8 val, int offset);
+>   	u8 (*read_reg)(struct dw_hdmi *hdmi, int offset);
+>   };
+
+That's much better!
+Thanks!
+
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
