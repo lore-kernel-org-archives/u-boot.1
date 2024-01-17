@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3610DC47258
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 18:49:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32F91C47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 19:36:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C9B7878C6;
-	Wed, 17 Jan 2024 19:49:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2419187947;
+	Wed, 17 Jan 2024 20:36:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KsPnBOHW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uaecyBlw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A2C8878DA; Wed, 17 Jan 2024 19:49:17 +0100 (CET)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
+ id DE50D87947; Wed, 17 Jan 2024 20:36:44 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7543286DC3
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 19:49:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 70F68878B3
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 20:36:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-28bae84fc2eso2153115a91.1
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 10:49:15 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-5f0c0ca5ef1so112167787b3.2
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 11:36:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705517354; x=1706122154; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ctSkJpVZQRM7jfOxofKKOWJBZP4TjejrZDt0gxGzp4M=;
- b=KsPnBOHWb1k+U4d92WbFrIrcxS8d5gXFBpPxXjW89A60NC6CLUAk2NCllUBBtCAQ3X
- 5+dhkbLNc6PJ0Kcr+bWINN1Qw3XjOuTtdyeVWs7q2DYrBTKUYh621Q5oTcn528m+p87T
- JuYre7llFpRON/ZpcofYpjIVRPd8SwM3BKIhEFEqYyu0iynsr3JiKwH2E/fsEhhWVT9M
- riYjfitX6ZT8X88mojF5nHThWDHDmQhISNYqzsZBBVKw4YPYuj5mwhhJpADXjob4Kr9F
- mNPUKU97wllpSQ+Rf4A47Go6VVADe5nlXaSS+R88Xjp8biTmj7komhVj4lp/NKZQlNtx
- aZ2g==
+ d=konsulko.com; s=google; t=1705520201; x=1706125001; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=PQRXr3Vg7tHMDy4mC91TOR1Q2ORELskPdPK/RtATl60=;
+ b=uaecyBlw7bJbCzmdgV8Pc6Rs4IzOOkxODA70VmtxC/Aa1123y0lbMPnfOEUAQM5tmx
+ Kiu71MLHgEQUiObtYTs8IWi7JXz6M9Ovl77osos6rY9gSVBhxkJOuNi9mgICBnPJXIVC
+ r7Pbs2iRCkuOkHK+gfzkHI2TTKOzB807mPhcE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705517354; x=1706122154;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ctSkJpVZQRM7jfOxofKKOWJBZP4TjejrZDt0gxGzp4M=;
- b=U1UUCWmPfJAgYQZ0gKKyoQpiMwJSFFMByAxn9W6WUeCfSOYvlZxUpwKhQLvUEe1Fvr
- WKz33qHAMZrblbo/n0Zj7tOP9azn6GtsnZqvyI5PZWEkpWKsYbgzpUgfAnblv771JS6r
- a2ZDv4/Ft4GzRdI2Qc7c8JeSHARO+Jvmk6J1z5R4ZVVAp59HVyo5FJ3LKPGaxzLExTS6
- d7HJU8aXMi2uYPqdJP64MKQJ16oiKHUCnBK5rz5H47kwpdyusJBupVguDkY4tVTGFdWM
- bSgnr0OWAt4/zTEQ4vAtk4e15XYEi4f1bHJj95P4kRWSd+H2Tx//BjbncxBaxLLUiXAl
- +3/Q==
-X-Gm-Message-State: AOJu0Yz8V0rJmSVub+d2vlLp3lGBXY38o1lMTqv2j0In8HQP2d8aAhvi
- /3t9GPLbJ9FwHBqC+sVyOZ0fnOBuuM674COZMkmh1UmZq2U=
-X-Google-Smtp-Source: AGHT+IHufdE8sSe3kj5RMYrumQ4BWWuI1Qv3TSkuAk6V3r7ek6sZ0WvebHjUIoe8yFmVeeVOYLuhii2OpGZW+OdfQL4=
-X-Received: by 2002:a17:90b:4d8e:b0:28e:8e5b:73fd with SMTP id
- oj14-20020a17090b4d8e00b0028e8e5b73fdmr4149171pjb.4.1705517353609; Wed, 17
- Jan 2024 10:49:13 -0800 (PST)
+ d=1e100.net; s=20230601; t=1705520201; x=1706125001;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PQRXr3Vg7tHMDy4mC91TOR1Q2ORELskPdPK/RtATl60=;
+ b=fOLE5m0SDxUHBSeg08nAEAki1ItrGdPzXooYV8aY4SK02WCgGyPi44CvH4KYaEaFXR
+ /tzA/a8QJ6w6DET+gSD9uiw5iQzLlWHgwK4tUQ2uR0cPCdpEi6+NsJ4ZvACYnhsszpOL
+ 1ov9K8P8uEDVYi+2AUlKeJJvnBNYxH/T34K2t1bBLpWQLN5ZVlexS3AU9nxe1AGv0txL
+ 2H+un/qVef8keBtqyJwG5AM/bTsGnkc5v13B8qy23Qmurj4lyOeg3oAEoZhasD0n/daj
+ DqeGliyvA0xiuHlmtNQ2bKlpI96nN2JuTn+cScde21ylexN7gnpxTwY1DOzfEjjUKxRJ
+ /z5w==
+X-Gm-Message-State: AOJu0YxkpQr5Ei6Yur2MD/yh0RIJhjUf8gOrwPDj8D8fa1TAENpyU4nS
+ 5W7NLgwommeglHtG9s6DbfD5rpMW+gm5Nw==
+X-Google-Smtp-Source: AGHT+IF95Evk/l0acrSgYuEGIPAsrjKMHAyxOpX1PJIinyraUFnACfzsdgJFSU3Mtgoi1DTOx7Qz6w==
+X-Received: by 2002:a81:c809:0:b0:5f5:1b6:37b7 with SMTP id
+ n9-20020a81c809000000b005f501b637b7mr7621761ywi.12.1705520199597; 
+ Wed, 17 Jan 2024 11:36:39 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
+ [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
+ cd15-20020a05690c088f00b005cb1bf4d466sm6043966ywb.82.2024.01.17.11.36.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 17 Jan 2024 11:36:39 -0800 (PST)
+Date: Wed, 17 Jan 2024 14:36:37 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: Re: Pull request efi-2024-04-rc1-2
+Message-ID: <20240117193637.GX12635@bill-the-cat>
+References: <0f47c120-3c4a-44a9-9aa3-0a99fdb5696d@gmx.de>
 MIME-Version: 1.0
-References: <2dba1330181940c78b5ad47f18ee43fa@supermicro.com>
- <CAOMZO5DTw2uU+uEmVLR9nbFkR4QPgmhuY9VUAz-sgg+GppMG9g@mail.gmail.com>
- <0934648988c9444aaf85f2e3163c0f4b@supermicro.com>
-In-Reply-To: <0934648988c9444aaf85f2e3163c0f4b@supermicro.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 17 Jan 2024 15:49:01 -0300
-Message-ID: <CAOMZO5Cy8as7b_cup6J+PYbN-stkj4Vz2wsLB_1=NN3vx5SVWQ@mail.gmail.com>
-Subject: Re: Could you please help me in resolving the
- "arch/arm/lib/vectors.S:87: Error: no such instruction: `b reset' ?"
-To: Liu Wang <liuw@supermicro.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="HXRq6N9E1o6u/OZi"
+Content-Disposition: inline
+In-Reply-To: <0f47c120-3c4a-44a9-9aa3-0a99fdb5696d@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,17 +93,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jan 17, 2024 at 3:25=E2=80=AFPM Liu Wang <liuw@supermicro.com> wrot=
-e:
 
-> 2. You are right. I have not exported the tool chain.
-> Could you please share me a link to a readme in setting up the tool chain=
- for Ubuntu cross build environment ?
+--HXRq6N9E1o6u/OZi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-You can do like this:
+On Wed, Jan 17, 2024 at 11:57:33AM +0100, Heinrich Schuchardt wrote:
 
-export ARCH=3Darm
-export CROSS_COMPILE=3D/usr/bin/arm-linux-gnueabihf-
+> Dear Tom,
+>=20
+> The following changes since commit 043ca8c8a9b181cf6f17441e9b89b5ee332063=
+09:
+>=20
+>   Merge tag 'qcom-2024.04-rc1' of
+> https://gitlab.denx.de/u-boot/custodians/u-boot-snapdragon (2024-01-16
+> 09:51:16 -0500)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/efi-2024-04-rc1-2
+>=20
+> for you to fetch changes up to 21c856797e2735fbd4e8b900803e6c42eae8d434:
+>=20
+>   riscv: qemu: imply GOLDFISH_RTC (2024-01-17 09:03:43 +0100)
+>=20
+> Gitlab CI showed no issues:
+> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/19345
+>=20
 
-make cse_ptjob_cb3_r102_defconfig
-make
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--HXRq6N9E1o6u/OZi
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWoLEIACgkQFHw5/5Y0
+tyylfAv/bANitDQQSn2ee5y91Jpi9BfHmmgibnG7RhNEk0WEjniX6yUC6Gj2Ya9q
+DIb3qohWaPnfnwQFsOrK/wHHv/6SQXv7KlTzr4R5ZoqhKDz0tdqTJsaWmhQxsqIF
+PmrdmfQCWzG8MeMk+fZOsLhygK8Rke6Xv1Y2X7VCTU0QyUzLYpqNaqPBgrtza1MW
+OTD8HIEZIkv//TmnFej9kVZYIbaBkHyHQwoKErbJqctq7UdHRlzGryGguEn2zeQC
+eZArjGqRuBZl5ERE2hJzkgIyfHjmqbGbQd8X127cshjbg4Ak5naXWQiiYHd0904l
+PCnupxtAZfBhAsuPQLH4aF5tNslY4wI6qIU9SHN/tKhJlGR+3n7s116j9tj6hwcz
+pd0NEbP3nKPYJLOaPaHMTPJUXtTVGyxTYXV+87OUWdGfVM0WLOp+7lRi4sfLqdgI
+kZElB0pkIHi5UXehC/XxfEUDNXMbwpmHpQzb4kqYTOHWJgyAnF8bgkKjpe+loVJF
+aqUcS88X
+=dCbc
+-----END PGP SIGNATURE-----
+
+--HXRq6N9E1o6u/OZi--
