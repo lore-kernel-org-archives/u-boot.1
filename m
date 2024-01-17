@@ -4,77 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A843C47DA2
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 12:39:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54986C47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 12:44:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7EDB876DB;
-	Wed, 17 Jan 2024 13:39:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9DE4B878A5;
+	Wed, 17 Jan 2024 13:44:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WkRdsE8I";
+	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="GA/bMEsJ";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="M0kR6sUz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 678A5879E5; Wed, 17 Jan 2024 13:39:33 +0100 (CET)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 27ED4879E5; Wed, 17 Jan 2024 13:44:30 +0100 (CET)
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2D748206E
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 13:39:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1501A87186
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 13:44:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-50e6ee8e911so13074320e87.1
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 04:39:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705495170; x=1706099970; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FSz/1sJNsR8v/7aa7YHZEWyDdRaLeW1vD03f/0mKWk0=;
- b=WkRdsE8IzqadJdb3woBjb5DZrVCR+Ac65Co2QD1dVmRBi9OBDXlmPpLJVa7sXrtYZM
- VXWq2sw1T3RwuEJv2Uzk5v6hSgx5Rr/h361w6IQ2tf6koFY5iQ1f5BPR7BH+LXMXkpmI
- wwlrG+lLBejYAiXW9nG+ke09cjTqQv99bDvzUow0kgKsmd+eOHBHXViRUXiv1pkhmNT2
- L3oKtjBmkwUA4P/cW46rxrfP+2Qr0USoEUoCsvbTMG90EghCHHzi/JZ6wliEFxUyMpjU
- leWkbu3CB9eXLyq8FP+dril7lbZHa9aIdyvr8vJ57cv+H46ZUP0Vu3T5V4XUeCtr1blq
- FA6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705495170; x=1706099970;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FSz/1sJNsR8v/7aa7YHZEWyDdRaLeW1vD03f/0mKWk0=;
- b=nZHi9TGxrMiaK3+FjvxJqZb9ll7YqWVnNpu2YlX2Zt8RLPBzpnpjVIPxc0CkOAjph7
- PvRaDQLazV9/9HI3wiZUCUdcXXlfzzMqgDO5e1/me8YLllOZFDvBQ9Mxaj8s0O6CPhZL
- SkCO0YBoBGOBrbSQjFwBdtU7j4LTHp/nALy0rO2amROEl8MUZeufl61aQUfKUK+nLGQ7
- lHrGc+bi/inG1PP2VeGRhXIUQx1nSyd91xlzHkvpfyScTPKaUN26gZSwpMHyjqOCuZve
- 9mCcJVMBMQdxScjTdQblhdE+cZjJxFw8AsE1EqbDGr/tTmjOd+7540Ge5fTWMZ5yWnlE
- RXeQ==
-X-Gm-Message-State: AOJu0YyqS//828JJSuPu0hUkpP36Fmrr0n9h0w3ihCFRwHvX7HjhKA05
- 285izJVW8X0fSlSniz3AuayntN8HVYcSx0lS9gs=
-X-Google-Smtp-Source: AGHT+IHpjk6qWyhy5gbaJwXxZZREI7/76JaD1y2ZqkZmJ5z+w26S/uZJNwq0NJ9xKEHbI7c8V7B5mjoZkkIzIcuw8Jk=
-X-Received: by 2002:ac2:4d1a:0:b0:50e:e420:65eb with SMTP id
- r26-20020ac24d1a000000b0050ee42065ebmr3559240lfi.128.1705495169658; Wed, 17
- Jan 2024 04:39:29 -0800 (PST)
+ spf=pass smtp.mailfrom=namcao@linutronix.de
+Date: Wed, 17 Jan 2024 13:44:24 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1705495467;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=l0Qz5mzbjo4hpyolKUpNtvs1Onf+1+cEcdMrkVsfyTg=;
+ b=GA/bMEsJvcANM+F7tVjQLh+lZV0H1QsDV3k28D7/2clPDU0AoCuunFyVvPe2Ih8B1VyyCe
+ Gl9ZUpz4W3/23CHxQFnWFs1T7ncF6Gp5M20/Fu9bo2VsrdIM545ek8jtBVajf9u6CS5OI3
+ ZCGPkB0QDdYLU4lo38GzUbdqPtOimDJRpgPlu9V4m7VdzPu0K55ycJqP4E6Ng/XTWoWvw8
+ +nJ4aDg/W0cXCoUdO4+G5tk5do3XCUrfuUsl0c175pSRR+wnUPWT+Zv/Fgtl4FsqhR8lep
+ UESX25ieG+iQm6xNvU9KuCrG6ZVYMoCUHF2nV52C/H7rYfe05mcRl1HPBsXQEQ==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1705495467;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=l0Qz5mzbjo4hpyolKUpNtvs1Onf+1+cEcdMrkVsfyTg=;
+ b=M0kR6sUzOMBwMWqaHovXVi89HHggRFSqDlzd40ua3o1V17io294pxiOyKwm6fpG8BvGI8V
+ Ms3qN6N9vfnBhQAA==
+From: Nam Cao <namcao@linutronix.de>
+To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 1/2] riscv: dts: starfive: add regulator device
+Message-ID: <20240117134424.208d251b@namcao>
+In-Reply-To: <811391b298858a02cbaae0dfafb92073b701e7d1.1705489598.git.namcao@linutronix.de>
+References: <811391b298858a02cbaae0dfafb92073b701e7d1.1705489598.git.namcao@linutronix.de>
 MIME-Version: 1.0
-References: <20240117123714.50380-1-patrice.chotard@foss.st.com>
-In-Reply-To: <20240117123714.50380-1-patrice.chotard@foss.st.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 17 Jan 2024 20:39:17 +0800
-Message-ID: <CAEUhbmXCaduJq174B5OPRcM=rEHq23CqXEMnU-hTmPNGKiwyyQ@mail.gmail.com>
-Subject: Re: [PATCH v2] common: console: Fix print complete stdio device list
-To: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: u-boot@lists.denx.de, Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Bin Meng <bmeng@tinylab.org>, 
- Ion Agorria <ion@agorria.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Simon Glass <sjg@chromium.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,24 +74,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jan 17, 2024 at 8:37=E2=80=AFPM Patrice Chotard
-<patrice.chotard@foss.st.com> wrote:
->
-> In case CONSOLE_MUX and SYS_CONSOLE_IS_IN_ENV are on and
-> stdin or stdout or stderr are missing in environment, as fallback, get
-> these either from stdio_devices[std] or stdio_devices[std]->name.
->
-> Fixes: 6b343ab38d ("console: Print out complete stdio device list")
->
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->
-> ---
->
-> Changes in v2:
->   - simplify code suggested by Bin Meng
->
->  common/console.c | 27 ++++++++++++---------------
->  1 file changed, 12 insertions(+), 15 deletions(-)
->
+On Wed, 17 Jan 2024 12:15:25 +0100 Nam Cao <namcao@linutronix.de> wrote:
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> Add the axp15060 regulator device. OpenSBI uses this device to perform
+> board reset and shutdown.
+> 
+> Signed-off-by: Nam Cao <namcao@linutronix.de>
+> ---
+>  arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi | 5 +++++
+>  1 file changed, 5 insertions(+)
+> 
+> diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi b/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
+> index e94f9fe826..388d29727f 100644
+> --- a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
+> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
+> @@ -127,6 +127,11 @@
+>  	pinctrl-0 = <&i2c5_pins>;
+>  	status = "okay";
+>  
+> +	pmic@36 {
+> +		compatible = "stf,axp15060-regulator";
+
+I should mention that Linux is using the string "x-powers,axp15060" for the
+same device, but OpenSBI is using this one. So I'm not entirely sure which
+one should I use here in U-Boot. If we use Linux's string, then OpenSBI
+needs to be changed.
+
+> +		reg = <0x36>;
+> +	};
+> +
+>  	eeprom@50 {
+>  		compatible = "atmel,24c04";
+>  		reg = <0x50>;
+
