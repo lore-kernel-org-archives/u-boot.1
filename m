@@ -4,71 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 280A6C47258
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 21:44:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49497C47DA2
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 21:47:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BBA48798F;
-	Wed, 17 Jan 2024 22:44:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 871D2879A8;
+	Wed, 17 Jan 2024 22:47:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bhQY0mhp";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 489E087994; Wed, 17 Jan 2024 22:44:02 +0100 (CET)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18BD48798C
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 22:44:00 +0100 (CET)
+ id B4E43879F4; Wed, 17 Jan 2024 22:47:15 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 6D4628798F
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 22:47:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-68185ec3b7cso3708866d6.2
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 13:44:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705527838; x=1706132638; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=XsA1dAinVPucj8h5ak2LRsOUcacwxL6oKGMYocwwHb4=;
- b=bhQY0mhpGhZXwkWmiCZEP+4kz8YCS5g963I0VkzKd6wazZ/TBJPSK+INm0Mk+s2E1d
- ZtPFURwYFcrEx/wbkhQlo+0hU4C3CZFdsrGNjQJLSzszjU4bZ6OL+xu6F/TFw97LIsHU
- BjIPOTjqIm7qXHxpVRjdKVQWD8vpscWCofFV4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705527838; x=1706132638;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=XsA1dAinVPucj8h5ak2LRsOUcacwxL6oKGMYocwwHb4=;
- b=JX2TSdKURKfQTEvbLjGSXHTwzy510fFvrRKvZcqJSmxzJjH6oPhRP2H4QqUogpdqzd
- Gfh+Eudn6D9X9W0K21ligL0WDjPH9piD/KiNtckOv/gcERDinDLvNG5Rd5U73/aVHRmV
- FWO2pH2x5pU0vlrpnVAeQHGLQhSPT6HaZLptLqt6iTD9gZQvm4ASMR9182Bn5YWQb/Kf
- 9BVyfiXLI2aVPOxk/E5prk/+BCMSdtqLaEY22EhnqjYs6orc7oZr/n4aQRw7u2ECy8QQ
- SJwFtQUnae4LngBKBv9F7hkMWSTmWzrGfArh/3oEvJbNomgN70TROhkeHdf6sVpsXfWu
- qmCA==
-X-Gm-Message-State: AOJu0Yw76BFEF60gkwBRraOnGqBssqaY5TwJKzZRkDb34KidngAwpXUP
- DDqHt773VLLWTkg+Dh7XLsXOoef0WCtzWE+NBnAPrrmfce4=
-X-Google-Smtp-Source: AGHT+IEErIXsvCoXJ2lGi2c7om0Ufy9HLkces+8vQ90Ej/GaPg75yFNA9SwD3xeOjaZLgRe4k1UGRg==
-X-Received: by 2002:a05:6214:e4b:b0:681:781f:67c5 with SMTP id
- o11-20020a0562140e4b00b00681781f67c5mr2810595qvc.5.1705527838641; 
- Wed, 17 Jan 2024 13:43:58 -0800 (PST)
-Received: from bill-the-cat..
- (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- o9-20020a0ce409000000b0067f812c4a58sm628386qvl.60.2024.01.17.13.43.58
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jan 2024 13:43:58 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] test: test_trace.py: Handle newer trace-cmd report formats
-Date: Wed, 17 Jan 2024 16:43:57 -0500
-Message-Id: <20240117214357.2197351-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DEA3A11FB;
+ Wed, 17 Jan 2024 13:47:58 -0800 (PST)
+Received: from minigeek.lan (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 236683F73F;
+ Wed, 17 Jan 2024 13:47:12 -0800 (PST)
+Date: Wed, 17 Jan 2024 21:46:27 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Nick Alilovic <nickalilovic@gmail.com>
+Cc: u-boot@lists.denx.de, jagan@amarulasolutions.com,
+ linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH 2/2] configs: Transpeed 8K618-T: Add Transpeed 8K618-T
+ board support
+Message-ID: <20240117214627.63964221@minigeek.lan>
+In-Reply-To: <20240117163756.63875-2-nickalilovic@gmail.com>
+References: <20240117163756.63875-1-nickalilovic@gmail.com>
+ <20240117163756.63875-2-nickalilovic@gmail.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,65 +58,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With newer versions of trace-cmd we have another column in the report
-that we need to handle. We don't care about it, so just use a regex to
-remove it from the output that we then parse.
+On Wed, 17 Jan 2024 11:37:56 -0500
+Nick Alilovic <nickalilovic@gmail.com> wrote:
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- test/py/tests/test_trace.py | 14 ++++++++++----
- 1 file changed, 10 insertions(+), 4 deletions(-)
+Hi Nick,
 
-diff --git a/test/py/tests/test_trace.py b/test/py/tests/test_trace.py
-index 28a6e72f525f..9cb5aa939c55 100644
---- a/test/py/tests/test_trace.py
-+++ b/test/py/tests/test_trace.py
-@@ -117,12 +117,17 @@ def check_function(cons, fname, proftool, map_fname, trace_dat):
-     out = util.run_and_log(cons, ['sh', '-c', cmd])
- 
-     # Format:
--    # unknown option 14
-     #      u-boot-1     [000]    60.805596: function:             initf_malloc
-     #      u-boot-1     [000]    60.805597: function:             initf_malloc
-     #      u-boot-1     [000]    60.805601: function:             initf_bootstage
-     #      u-boot-1     [000]    60.805607: function:             initf_bootstage
--    lines = [line.replace(':', '').split() for line in out.splitlines()]
-+    # OR:
-+    #      u-boot-1     [000] .....    60.805596: function:             initf_malloc
-+    #      u-boot-1     [000] .....    60.805597: function:             initf_malloc
-+    #      u-boot-1     [000] .....    60.805601: function:             initf_bootstage
-+    #      u-boot-1     [000] .....    60.805607: function:             initf_bootstage
-+
-+    lines = [re.sub(r'(:|\.\.\.\.\.)', '', line).split() for line in out.splitlines()]
-     vals = {items[4]: float(items[2]) for items in lines if len(items) == 5}
-     base = None
-     max_delta = 0
-@@ -176,6 +181,7 @@ def check_funcgraph(cons, fname, proftool, map_fname, trace_dat):
-     #  u-boot-1     [000]   282.101375: funcgraph_exit:         0.006 us   |      }
-     # Then check for this:
-     #  u-boot-1     [000]   282.101375: funcgraph_entry:        0.000 us   |    initcall_is_event();
-+    # And this all may be '[000] .....    282.' instead.
- 
-     expected_indent = None
-     found_start = False
-@@ -185,7 +191,7 @@ def check_funcgraph(cons, fname, proftool, map_fname, trace_dat):
-     # Look for initf_bootstage() entry and make sure we see the exit
-     # Collect the time for initf_dm()
-     for line in out.splitlines():
--        m = RE_LINE.match(line)
-+        m = RE_LINE.match(re.sub(r'\.\.\.\.\.', '', line))
-         if m:
-             timestamp, indent, func, brace = m.groups()
-             if found_end:
-@@ -209,7 +215,7 @@ def check_funcgraph(cons, fname, proftool, map_fname, trace_dat):
-     start_timestamp = None
-     end_timestamp = None
-     for line in out.splitlines():
--        m = RE_LINE.match(line)
-+        m = RE_LINE.match(re.sub(r'\.\.\.\.\.', '', line))
-         if m:
-             timestamp, indent, func, brace = m.groups()
-             if func == 'initf_dm() ':
--- 
-2.34.1
+thanks for sending this!
 
+> This is a Chinese TV box based on Allwinner H618 SoC.
+> 
+> The DRAM parameters were derived from the values found in a firmware update.
+> 
+> This patch will add transpeed-8k618-t_defconfig to the configs directory.
+
+This last sentence is a bit out of place, the typical tone in a commit
+message is to "direct the repository to make a change", so you use an
+imperative. But it's more directed to the human reader of course, so
+you don't need to replicate details like the exact filename, that are
+spelt out three lines below here. So just a simple:
+
+Add the defconfig file.
+
+would suffice.
+
+> 
+> Signed-off-by: Nick Alilovic <nickalilovic@gmail.com>
+> ---
+>  configs/transpeed-8k618-t_defconfig | 25 +++++++++++++++++++++++++
+>  1 file changed, 25 insertions(+)
+>  create mode 100644 configs/transpeed-8k618-t_defconfig
+> 
+> diff --git a/configs/transpeed-8k618-t_defconfig b/configs/transpeed-8k618-t_defconfig
+> new file mode 100644
+> index 0000000000..7090577199
+> --- /dev/null
+> +++ b/configs/transpeed-8k618-t_defconfig
+> @@ -0,0 +1,25 @@
+> +CONFIG_ARM=y
+> +CONFIG_ARCH_SUNXI=y
+> +CONFIG_DEFAULT_DEVICE_TREE="sun50i-h618-transpeed-8k618-t"
+> +CONFIG_SPL=y
+> +CONFIG_DRAM_SUN50I_H616_DX_ODT=0x03030303
+> +CONFIG_DRAM_SUN50I_H616_DX_DRI=0x0e0e0e0e
+> +CONFIG_DRAM_SUN50I_H616_CA_DRI=0x1f12
+> +CONFIG_DRAM_SUN50I_H616_TPR0=0xc0001002
+> +CONFIG_DRAM_SUN50I_H616_TPR10=0x2f1107
+> +CONFIG_DRAM_SUN50I_H616_TPR11=0xddddcccc
+> +CONFIG_DRAM_SUN50I_H616_TPR12=0xeddc7665
+> +CONFIG_MACH_SUN50I_H616=y
+> +CONFIG_SUNXI_DRAM_H616_DDR3_1333=y
+> +CONFIG_DRAM_CLK=648
+> +CONFIG_R_I2C_ENABLE=y
+> +CONFIG_SPL_I2C=y
+> +CONFIG_SPL_SYS_I2C_LEGACY=y
+> +CONFIG_SYS_I2C_MVTWSI=y
+> +CONFIG_SYS_I2C_SLAVE=0x7f
+> +CONFIG_SYS_I2C_SPEED=400000
+> +CONFIG_SUPPORT_EMMC_BOOT=y
+
+You correctly mention this, but miss the required MMC controller number:
+
+CONFIG_MMC_SUNXI_SLOT_EXTRA=2
+
+> +CONFIG_AXP313_POWER=y
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_OHCI_HCD=y
+> +CONFIG_AXP_DCDC3_VOLT=1360
+
+This line belongs a few lines up. There is some non-obvious order of
+those lines, which you can obtain by running "make savedefconfig" after
+"make transpeed-8k618-t_defconfig". This will create a "defconfig"
+file, which contains the minimal defconfig, in the right order. This
+will be done routinely on all files in the configs/ directory
+eventually, but it's good measure to get this right from the beginning,
+to reduce churn.
+
+You are also missing:
+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+which is somewhat mandatory on all Allwinner boards.
+I don't actually remember why exactly, but we have this for almost
+every sunxi board.
+
+Thanks,
+Andre
