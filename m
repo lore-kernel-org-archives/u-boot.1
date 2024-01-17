@@ -4,54 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEE03C47258
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 22:25:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2DA4C47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 22:25:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F39187A0B;
-	Wed, 17 Jan 2024 23:24:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 00D0D87B52;
+	Wed, 17 Jan 2024 23:24:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="mhcq+jG1";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="H/uXTvqX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1948187B30; Wed, 17 Jan 2024 23:24:43 +0100 (CET)
+ id 60FA287887; Wed, 17 Jan 2024 23:24:43 +0100 (CET)
 Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C98887AEC
+ by phobos.denx.de (Postfix) with ESMTPS id 6174D87B12
  for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 23:24:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 26D36CE1D68;
+ by sin.source.kernel.org (Postfix) with ESMTP id 1DDC3CE1D67;
  Wed, 17 Jan 2024 22:24:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 61F21C43394;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 566D8C43390;
  Wed, 17 Jan 2024 22:24:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1705530274;
- bh=O3Y6mXwkMS1vFMCpsv0b78t+j3Ra2FeF3BuIt2aGebE=;
+ bh=WQyrtOMmNFOKfduAga8Q6ieW0v/jCaw8pE079GcxVz8=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=mhcq+jG1u0wVNYGQjx1xCoIm9Ga+ebMRE/QXXxFoVpz/O5j3x3ivc65NxNSE2YkvX
- mi1GCJp957cfE4FxcIbFUV/ISvRyqOJIxGhrLGojr6leM4805lH5HLd7uP9W1wSxMx
- 6aQm9bjEVZsIBum5XSld9zGWVr1yVjca53hB6mu3H6XZXFp/kmwN0o3bdUL+v1eC+l
- Yv3MftqZxxkzfoqqB2MNJ2+nlFlpXgZEGdDjtQmXHp68IDRytqxscl2F5gyCMGLIHR
- qLelkClFaDclcE5hLvxrd+jCt+ZAXW8yqWOsSkbDlkFic278+Mmzxjy4M8EQ9oxeLj
- 6VZ6tmtfoc1cQ==
+ b=H/uXTvqXjXwvz5D0uaG2bzvPW+8KvIAHBtvLYefG+a2fqoxlrZji0i5fXQLmuIivC
+ u5upwCPrkkNRwDLbZqNPjnj4G09euDR2ZyLkOcUt3P65OjLPpwBUXjbuHiwXQps4rx
+ /bA9msux5wFaXs5UHx1gQwoqfPIH23wOjcysoYx9vBvkwbUjiK4x34mwglv/xsx56j
+ uGrrK8j9bm9rq735kBpNCQqQKrdlqr36KDh9FbmfJGTIc2H3zgwjmF0X121S6p2slO
+ 42EeQhy3/HrxGcUErGa8UgnoxET54ZzlM1MNIfxb7hX2TihDoESiUp6b6V0CiQRLA+
+ xKtav7Ntsq/XA==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 4A404C47DB3;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 3F001C47DA2;
  Wed, 17 Jan 2024 22:24:34 +0000 (UTC)
 From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-Date: Wed, 17 Jan 2024 23:24:29 +0100
-Subject: [PATCH RFC 3/6] lib/charset: Map cp437 low chars (0x01 - 0x1f)
- from unicode
+Date: Wed, 17 Jan 2024 23:24:28 +0100
+Subject: [PATCH RFC 2/6] video: console: Parse UTF-8 character sequences
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240117-vidconsole-utf8-uefi-v1-3-539f7ce74fb9@jannau.net>
+Message-Id: <20240117-vidconsole-utf8-uefi-v1-2-539f7ce74fb9@jannau.net>
 References: <20240117-vidconsole-utf8-uefi-v1-0-539f7ce74fb9@jannau.net>
 In-Reply-To: <20240117-vidconsole-utf8-uefi-v1-0-539f7ce74fb9@jannau.net>
 To: Anatolij Gustschin <agust@denx.de>, 
@@ -60,12 +59,12 @@ To: Anatolij Gustschin <agust@denx.de>,
 Cc: Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>, 
  u-boot@lists.denx.de, Janne Grunau <j@jannau.net>
 X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3963; i=j@jannau.net;
- h=from:subject:message-id; bh=+oAhNnSjkUtN5/UJBFWcC8rmhHfrdjvs7JZOS2V5hgU=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtQVwQsulTed6f2uWndwicqTrGMyPb6dRR9MrZ/tvWEgo
- PWjIrCzo5SFQYyLQVZMkSVJ+2UHw+oaxZjaB2Ewc1iZQIYwcHEKwEQifzEyfEpeM0t44wVer3sm
- Jju+xlwSfF0SID8nN91HZznPGz1xHUaGBROD046IZuce0Gbfw/zX6YFzucyGO41OfhHvrjfnBMt
- zAAA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=11214; i=j@jannau.net;
+ h=from:subject:message-id; bh=bH89brL49T7oX57maRoCEkeytoatMIDOzkhGLBvipeE=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtQVwQuWeU67VTlH/PwknbAa2TuL90gxbHwlNVFKfNPUc
+ /eETe597ShlYRDjYpAVU2RJ0n7ZwbC6RjGm9kEYzBxWJpAhDFycAjCR7FaGf+qiu35cXr9mce/s
+ B5Iai9ZyJl80u2u2bWKaimFMU0CTez7D/8yjG2Tbnspmhd+Tuq+hnrUpTzflq9s/39nvEpoFo38
+ wMwIA
 X-Developer-Key: i=j@jannau.net; a=openpgp;
  fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-Endpoint-Received: by B4 Relay for j@jannau.net/default with auth_id=62
@@ -89,124 +88,308 @@ X-Virus-Status: Clean
 
 From: Janne Grunau <j@jannau.net>
 
-Add mappings for code points 1 - 31 as those code points in code page 437
-are graphics.
-Thios fixes rendering issues of various EFI boot loaders (grub2,
-sd-boot, ...) using EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL.
+efi_console / UEFI applications (grub2, sd-boot, ...) pass UTF-8
+character sequences to vidconsole which results in wrong glyphs for code
+points outside of ASCII. The truetype console expects Unicode code
+points and bitmap font based consoles expect code page 437 code points.
+To support both convert UTF-8 to UTF-32 and pass Unicode code points in
+vidconsole_ops.putc_xy(). These can be used directly in console_truetype
+and after conversion to code page 437 in console_{normal,rotate}.
+
+This fixes rendering of international, symbol and box drawing characters
+used by UEFI applications.
 
 Signed-off-by: Janne Grunau <j@jannau.net>
 ---
- include/charset.h                      |  2 +-
- include/cp1250.h                       | 12 ++++++++++--
- include/cp437.h                        | 12 ++++++++++--
- lib/charset.c                          |  9 ++++++---
- lib/efi_loader/efi_unicode_collation.c |  2 +-
- 5 files changed, 28 insertions(+), 9 deletions(-)
+ drivers/video/console_normal.c      |  6 ++++--
+ drivers/video/console_rotate.c      | 16 ++++++++++------
+ drivers/video/console_truetype.c    |  8 ++++----
+ drivers/video/vidconsole-uclass.c   | 18 +++++++++++++-----
+ drivers/video/vidconsole_internal.h | 15 +++++++++++++++
+ include/video_console.h             | 10 ++++++----
+ 6 files changed, 52 insertions(+), 21 deletions(-)
 
-diff --git a/include/charset.h b/include/charset.h
-index 714382e1c1..c51c29235f 100644
---- a/include/charset.h
-+++ b/include/charset.h
-@@ -16,7 +16,7 @@
- /*
-  * codepage_437 - Unicode to codepage 437 translation table
+diff --git a/drivers/video/console_normal.c b/drivers/video/console_normal.c
+index a0231293f3..34ef5a5229 100644
+--- a/drivers/video/console_normal.c
++++ b/drivers/video/console_normal.c
+@@ -7,6 +7,7 @@
   */
--extern const u16 codepage_437[128];
-+extern const u16 codepage_437[160];
+ 
+ #include <common.h>
++#include <charset.h>
+ #include <dm.h>
+ #include <video.h>
+ #include <video_console.h>
+@@ -63,7 +64,7 @@ static int console_move_rows(struct udevice *dev, uint rowdst,
+ 	return 0;
+ }
+ 
+-static int console_putc_xy(struct udevice *dev, uint x_frac, uint y, char ch)
++static int console_putc_xy(struct udevice *dev, uint x_frac, uint y, int cp)
+ {
+ 	struct vidconsole_priv *vc_priv = dev_get_uclass_priv(dev);
+ 	struct udevice *vid = dev->parent;
+@@ -73,8 +74,9 @@ static int console_putc_xy(struct udevice *dev, uint x_frac, uint y, char ch)
+ 	int pbytes = VNBYTES(vid_priv->bpix);
+ 	int x, linenum, ret;
+ 	void *start, *line;
++	u8 ch = console_utf_to_cp437(cp);
+ 	uchar *pfont = fontdata->video_fontdata +
+-			(u8)ch * fontdata->char_pixel_bytes;
++			ch * fontdata->char_pixel_bytes;
+ 
+ 	if (x_frac + VID_TO_POS(vc_priv->x_charsize) > vc_priv->xsize_frac)
+ 		return -EAGAIN;
+diff --git a/drivers/video/console_rotate.c b/drivers/video/console_rotate.c
+index 65358a1c6e..e4303dfb36 100644
+--- a/drivers/video/console_rotate.c
++++ b/drivers/video/console_rotate.c
+@@ -7,6 +7,7 @@
+  */
+ 
+ #include <common.h>
++#include <charset.h>
+ #include <dm.h>
+ #include <video.h>
+ #include <video_console.h>
+@@ -67,7 +68,7 @@ static int console_move_rows_1(struct udevice *dev, uint rowdst, uint rowsrc,
+ 	return 0;
+ }
+ 
+-static int console_putc_xy_1(struct udevice *dev, uint x_frac, uint y, char ch)
++static int console_putc_xy_1(struct udevice *dev, uint x_frac, uint y, int cp)
+ {
+ 	struct vidconsole_priv *vc_priv = dev_get_uclass_priv(dev);
+ 	struct udevice *vid = dev->parent;
+@@ -77,8 +78,9 @@ static int console_putc_xy_1(struct udevice *dev, uint x_frac, uint y, char ch)
+ 	int pbytes = VNBYTES(vid_priv->bpix);
+ 	int x, linenum, ret;
+ 	void *start, *line;
++	u8 ch = console_utf_to_cp437(cp);
+ 	uchar *pfont = fontdata->video_fontdata +
+-			(u8)ch * fontdata->char_pixel_bytes;
++			ch * fontdata->char_pixel_bytes;
+ 
+ 	if (x_frac + VID_TO_POS(vc_priv->x_charsize) > vc_priv->xsize_frac)
+ 		return -EAGAIN;
+@@ -145,7 +147,7 @@ static int console_move_rows_2(struct udevice *dev, uint rowdst, uint rowsrc,
+ 	return 0;
+ }
+ 
+-static int console_putc_xy_2(struct udevice *dev, uint x_frac, uint y, char ch)
++static int console_putc_xy_2(struct udevice *dev, uint x_frac, uint y, int cp)
+ {
+ 	struct vidconsole_priv *vc_priv = dev_get_uclass_priv(dev);
+ 	struct udevice *vid = dev->parent;
+@@ -155,8 +157,9 @@ static int console_putc_xy_2(struct udevice *dev, uint x_frac, uint y, char ch)
+ 	int pbytes = VNBYTES(vid_priv->bpix);
+ 	int linenum, x, ret;
+ 	void *start, *line;
++	u8 ch = console_utf_to_cp437(cp);
+ 	uchar *pfont = fontdata->video_fontdata +
+-			(u8)ch * fontdata->char_pixel_bytes;
++			ch * fontdata->char_pixel_bytes;
+ 
+ 	if (x_frac + VID_TO_POS(vc_priv->x_charsize) > vc_priv->xsize_frac)
+ 		return -EAGAIN;
+@@ -227,7 +230,7 @@ static int console_move_rows_3(struct udevice *dev, uint rowdst, uint rowsrc,
+ 	return 0;
+ }
+ 
+-static int console_putc_xy_3(struct udevice *dev, uint x_frac, uint y, char ch)
++static int console_putc_xy_3(struct udevice *dev, uint x_frac, uint y, int cp)
+ {
+ 	struct vidconsole_priv *vc_priv = dev_get_uclass_priv(dev);
+ 	struct udevice *vid = dev->parent;
+@@ -237,8 +240,9 @@ static int console_putc_xy_3(struct udevice *dev, uint x_frac, uint y, char ch)
+ 	int pbytes = VNBYTES(vid_priv->bpix);
+ 	int linenum, x, ret;
+ 	void *start, *line;
++	u8 ch = console_utf_to_cp437(cp);
+ 	uchar *pfont = fontdata->video_fontdata +
+-			(u8)ch * fontdata->char_pixel_bytes;
++			ch * fontdata->char_pixel_bytes;
+ 
+ 	if (x_frac + VID_TO_POS(vc_priv->x_charsize) > vc_priv->xsize_frac)
+ 		return -EAGAIN;
+diff --git a/drivers/video/console_truetype.c b/drivers/video/console_truetype.c
+index 14fb81e956..bc3ec1c31f 100644
+--- a/drivers/video/console_truetype.c
++++ b/drivers/video/console_truetype.c
+@@ -262,7 +262,7 @@ static int console_truetype_move_rows(struct udevice *dev, uint rowdst,
+ }
+ 
+ static int console_truetype_putc_xy(struct udevice *dev, uint x, uint y,
+-				    char ch)
++				    int cp)
+ {
+ 	struct vidconsole_priv *vc_priv = dev_get_uclass_priv(dev);
+ 	struct udevice *vid = dev->parent;
+@@ -281,7 +281,7 @@ static int console_truetype_putc_xy(struct udevice *dev, uint x, uint y,
+ 	int row, ret;
+ 
+ 	/* First get some basic metrics about this character */
+-	stbtt_GetCodepointHMetrics(font, ch, &advance, &lsb);
++	stbtt_GetCodepointHMetrics(font, cp, &advance, &lsb);
+ 
+ 	/*
+ 	 * First out our current X position in fractional pixels. If we wrote
+@@ -290,7 +290,7 @@ static int console_truetype_putc_xy(struct udevice *dev, uint x, uint y,
+ 	xpos = frac(VID_TO_PIXEL((double)x));
+ 	if (vc_priv->last_ch) {
+ 		xpos += met->scale * stbtt_GetCodepointKernAdvance(font,
+-							vc_priv->last_ch, ch);
++							vc_priv->last_ch, cp);
+ 	}
+ 
+ 	/*
+@@ -320,7 +320,7 @@ static int console_truetype_putc_xy(struct udevice *dev, uint x, uint y,
+ 	 * return NULL;
+ 	 */
+ 	data = stbtt_GetCodepointBitmapSubpixel(font, met->scale, met->scale,
+-						x_shift, 0, ch, &width, &height,
++						x_shift, 0, cp, &width, &height,
+ 						&xoff, &yoff);
+ 	if (!data)
+ 		return width_frac;
+diff --git a/drivers/video/vidconsole-uclass.c b/drivers/video/vidconsole-uclass.c
+index 22d55df71f..ce1668b97b 100644
+--- a/drivers/video/vidconsole-uclass.c
++++ b/drivers/video/vidconsole-uclass.c
+@@ -11,6 +11,7 @@
+ 
+ #include <common.h>
+ #include <abuf.h>
++#include <charset.h>
+ #include <command.h>
+ #include <console.h>
+ #include <log.h>
+@@ -20,7 +21,7 @@
+ #include <video_font.h>		/* Bitmap font for code page 437 */
+ #include <linux/ctype.h>
+ 
+-int vidconsole_putc_xy(struct udevice *dev, uint x, uint y, char ch)
++int vidconsole_putc_xy(struct udevice *dev, uint x, uint y, int ch)
+ {
+ 	struct vidconsole_ops *ops = vidconsole_get_ops(dev);
+ 
+@@ -426,8 +427,8 @@ error:
+ 	priv->escape = 0;
+ }
+ 
+-/* Put that actual character on the screen (using the CP437 code page). */
+-static int vidconsole_output_glyph(struct udevice *dev, char ch)
++/* Put that actual character on the screen (using the UTF-32 code points). */
++static int vidconsole_output_glyph(struct udevice *dev, int ch)
+ {
+ 	struct vidconsole_priv *priv = dev_get_uclass_priv(dev);
+ 	int ret;
+@@ -455,7 +456,7 @@ static int vidconsole_output_glyph(struct udevice *dev, char ch)
+ int vidconsole_put_char(struct udevice *dev, char ch)
+ {
+ 	struct vidconsole_priv *priv = dev_get_uclass_priv(dev);
+-	int ret;
++	int cp, ret;
+ 
+ 	if (priv->escape) {
+ 		vidconsole_escape_char(dev, ch);
+@@ -489,7 +490,14 @@ int vidconsole_put_char(struct udevice *dev, char ch)
+ 		priv->last_ch = 0;
+ 		break;
+ 	default:
+-		ret = vidconsole_output_glyph(dev, ch);
++		if (CONFIG_EFI_LOADER) {
++			cp = utf8_to_utf32_stream(ch, priv->utf8_buf);
++			if (cp == 0)
++				return 0;
++		} else {
++			cp = ch;
++		}
++		ret = vidconsole_output_glyph(dev, cp);
+ 		if (ret < 0)
+ 			return ret;
+ 		break;
+diff --git a/drivers/video/vidconsole_internal.h b/drivers/video/vidconsole_internal.h
+index 0ec581b266..3d19410a52 100644
+--- a/drivers/video/vidconsole_internal.h
++++ b/drivers/video/vidconsole_internal.h
+@@ -6,6 +6,9 @@
+  * (C) Copyright 2023 Dzmitry Sankouski <dsankouski@gmail.com>
+  */
+ 
++#include <charset.h>
++#include <config.h>
++
+ #define FLIPPED_DIRECTION 1
+ #define NORMAL_DIRECTION 0
+ 
+@@ -142,3 +145,15 @@ int console_simple_get_font(struct udevice *dev, int seq, struct vidfont_info *i
+  * See details in video_console.h select_font function
+  **/
+ int console_simple_select_font(struct udevice *dev, const char *name, uint size);
++
++/**
++ *
++ */
++static inline u8 console_utf_to_cp437(int codepoint)
++{
++	if (CONFIG_EFI_LOADER) {
++		utf_to_cp(&codepoint, codepage_437);
++		return (u8)codepoint;
++	}
++	return (u8)codepoint;
++}
+diff --git a/include/video_console.h b/include/video_console.h
+index bde67fa9a5..20cf2d0101 100644
+--- a/include/video_console.h
++++ b/include/video_console.h
+@@ -43,6 +43,7 @@ enum {
+  * @col_saved:		Saved X position, in fractional units (VID_TO_POS(x))
+  * @row_saved:		Saved Y position in pixels (0=top)
+  * @escape_buf:		Buffer to accumulate escape sequence
++ * @utf8_buf:		Buffer to accumulate UTF-8 byte sequence
+  */
+ struct vidconsole_priv {
+ 	struct stdio_dev sdev;
+@@ -66,6 +67,7 @@ struct vidconsole_priv {
+ 	int row_saved;
+ 	int col_saved;
+ 	char escape_buf[32];
++	char utf8_buf[8];
+ };
  
  /**
-  * console_read_unicode() - read Unicode code point from console
-diff --git a/include/cp1250.h b/include/cp1250.h
-index adacf8a958..b762c78d9f 100644
---- a/include/cp1250.h
-+++ b/include/cp1250.h
-@@ -1,10 +1,18 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
+@@ -124,12 +126,12 @@ struct vidconsole_ops {
+ 	 * @x_frac:	Fractional pixel X position (0=left-most pixel) which
+ 	 *		is the X position multipled by VID_FRAC_DIV.
+ 	 * @y:		Pixel Y position (0=top-most pixel)
+-	 * @ch:		Character to write
++	 * @cp:		UTF-32 code point to write
+ 	 * @return number of fractional pixels that the cursor should move,
+ 	 * if all is OK, -EAGAIN if we ran out of space on this line, other -ve
+ 	 * on error
+ 	 */
+-	int (*putc_xy)(struct udevice *dev, uint x_frac, uint y, char ch);
++	int (*putc_xy)(struct udevice *dev, uint x_frac, uint y, int cp);
  
- /*
-- * Constant CP1250 contains the Unicode code points for characters 0x80 - 0xff
-- * of the code page 1250.
-+ * Constant CP1250 contains the Unicode code points for characters 0x00 - 0x1f
-+ * and 0x80 - 0xff of the code page 1250.
+ 	/**
+ 	 * move_rows() - Move text rows from one place to another
+@@ -403,12 +405,12 @@ void vidconsole_pop_colour(struct udevice *dev, struct vidconsole_colour *old);
+  * @x_frac:	Fractional pixel X position (0=left-most pixel) which
+  *		is the X position multipled by VID_FRAC_DIV.
+  * @y:		Pixel Y position (0=top-most pixel)
+- * @ch:		Character to write
++ * @cp:		UTF-32 code point to write
+  * Return: number of fractional pixels that the cursor should move,
+  * if all is OK, -EAGAIN if we ran out of space on this line, other -ve
+  * on error
   */
- #define CP1250 { \
-+	0x0000, 0x0000, 0x0000, 0x0000, \
-+	0x0000, 0x0000, 0x0000, 0x0000, \
-+	0x0000, 0x0000, 0x0000, 0x0000, \
-+	0x0000, 0x0000, 0x0000, 0x0000, \
-+	0x0000, 0x0000, 0x0000, 0x0000, \
-+	0x0000, 0x0000, 0x0000, 0x0000, \
-+	0x0000, 0x0000, 0x0000, 0x0000, \
-+	0x0000, 0x0000, 0x0000, 0x0000, \
- 	0x20ac, 0x0000, 0x201a, 0x0000, \
- 	0x201e, 0x2026, 0x2020, 0x2021, \
- 	0x0000, 0x2030, 0x0160, 0x2039, \
-diff --git a/include/cp437.h b/include/cp437.h
-index 0b2b97132e..5093130f5e 100644
---- a/include/cp437.h
-+++ b/include/cp437.h
-@@ -1,10 +1,18 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
+-int vidconsole_putc_xy(struct udevice *dev, uint x, uint y, char ch);
++int vidconsole_putc_xy(struct udevice *dev, uint x, uint y, int cp);
  
- /*
-- * Constant CP437 contains the Unicode code points for characters 0x80 - 0xff
-- * of the code page 437.
-+ * Constant CP437 contains the Unicode code points for characters 0x00 - 0x1f
-+ * and 0x80 - 0xff of the code page 437.
-  */
- #define CP437 { \
-+	0x0000, 0x263a, 0x263b, 0x2665, \
-+	0x2666, 0x2663, 0x2660, 0x2022, \
-+	0x25d8, 0x25cb, 0x25d9, 0x2642, \
-+	0x2640, 0x266a, 0x266b, 0x263c, \
-+	0x25ba, 0x25c4, 0x2195, 0x203c, \
-+	0x00b6, 0x00a7, 0x25ac, 0x21a8, \
-+	0x2191, 0x2193, 0x2192, 0x2190, \
-+	0x221f, 0x2194, 0x25b2, 0x25bc, \
- 	0x00c7, 0x00fc, 0x00e9, 0x00e2, \
- 	0x00e4, 0x00e0, 0x00e5, 0x00e7, \
- 	0x00ea, 0x00eb, 0x00e8, 0x00ef, \
-diff --git a/lib/charset.c b/lib/charset.c
-index 5e4c4f948a..1f8480150a 100644
---- a/lib/charset.c
-+++ b/lib/charset.c
-@@ -16,7 +16,7 @@
  /**
-  * codepage_437 - Unicode to codepage 437 translation table
-  */
--const u16 codepage_437[128] = CP437;
-+const u16 codepage_437[160] = CP437;
- 
- static struct capitalization_table capitalization_table[] =
- #ifdef CONFIG_EFI_UNICODE_CAPITALIZATION
-@@ -517,9 +517,12 @@ int utf_to_cp(s32 *c, const u16 *codepage)
- 		int j;
- 
- 		/* Look up codepage translation */
--		for (j = 0; j < 0x80; ++j) {
-+		for (j = 0; j < 0xA0; ++j) {
- 			if (*c == codepage[j]) {
--				*c = j + 0x80;
-+				if (j < 0x20)
-+					*c = j;
-+				else
-+					*c = j + 0x60;
- 				return 0;
- 			}
- 		}
-diff --git a/lib/efi_loader/efi_unicode_collation.c b/lib/efi_loader/efi_unicode_collation.c
-index c4c7572063..4b2c52918a 100644
---- a/lib/efi_loader/efi_unicode_collation.c
-+++ b/lib/efi_loader/efi_unicode_collation.c
-@@ -257,7 +257,7 @@ static void EFIAPI efi_fat_to_str(struct efi_unicode_collation_protocol *this,
- 	for (i = 0; i < fat_size; ++i) {
- 		c = (unsigned char)fat[i];
- 		if (c > 0x80)
--			c = codepage[c - 0x80];
-+			c = codepage[c - 0x60];
- 		string[i] = c;
- 		if (!c)
- 			break;
+  * vidconsole_move_rows() - Move text rows from one place to another
 
 -- 
 2.43.0
