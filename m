@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D402FC47DA2
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 14:26:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 500A0C47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 14:27:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D19787B78;
-	Wed, 17 Jan 2024 15:26:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E08D287B84;
+	Wed, 17 Jan 2024 15:26:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="B0Xpb1nd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="K4QqKOH8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 678C787B79; Wed, 17 Jan 2024 15:26:27 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id 1CC0987B7D; Wed, 17 Jan 2024 15:26:31 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D61987B66
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 15:26:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 043F687B66
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 15:26:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-5ebca94cf74so106821037b3.0
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 06:26:25 -0800 (PST)
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-5eefd0da5c0so114467637b3.2
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 06:26:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705501584; x=1706106384; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1705501587; x=1706106387; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=jJmowFZOwajacfRllumo4dC+1HLT5kp41Ia3gVJBjK4=;
- b=B0Xpb1nd9TCWpaBhB33Tm8RrStwhoA9WDwP0OFpknIIq1Qhxsfb6yFWfDo96gSsh9b
- mrA+Nl1r0z83028OqO75z/rvIsUw8mcwZY1qyrnHrigdfE4PSMxYTCmSqDp6v55SfUmm
- 2rHc8CEH0wmdI24HxKCyVSlPqoJdKkjeu0pmI=
+ bh=uwCAhwUCZ3Iultxi8gUgzXatG56myp2WCoGDe8phr9I=;
+ b=K4QqKOH84lqw3pJWAGU27RLQjBtCDSPb1bNPgDn29icf8Yj52y12tUtgTTwH+6oiWg
+ p7uZ3zvEwwC+iMjS7wVvYi0zMvpRtkfJ8xZK//JCIJH7KTsKcqsjg5+N5wFkwo4sxt9n
+ aSoqD+riDYcsWQ43WbOa8WAW7cypgYlXKjEyI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705501584; x=1706106384;
+ d=1e100.net; s=20230601; t=1705501588; x=1706106388;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jJmowFZOwajacfRllumo4dC+1HLT5kp41Ia3gVJBjK4=;
- b=hJ5PCxM+tn8MZk2YcnvrwmCSmB/98kDUFDY/PD0KxscxCnTQGaTzcqUYWvD1C/HJhI
- 2yzPO7HRVkQnQ40JfbpZJFnBI+mdjH9toeeolHUDUT5mOFV9K9Y5tbvsMUiNrVj5xvEC
- WefQ8sDA1c+pMJ9MNyw8H+/5DTd0oHxGIH/A4z6AHxjNo/LvQC0Q4VgankXIo+Ka5/EB
- l+MoqPqo0j2z4ihMFvtEQWjnhbDx4TMk3rHAkFR4dTURdh5IO7lUkjUpWg4G6QDAMkfB
- ydC2EmzcuTDzc6vnr5g0ypj1iflcMY1UeJPep9IemWJORvLG1vQFTvtGWkpx9vj97emw
- 4Rtw==
-X-Gm-Message-State: AOJu0Yz72Gtyh5Z6azcZu63bNu/eA/YCXOnmTDaFgjOX/GjiUpTCpYKX
- zmsZEFwJyC5S9E2ZJ0CWdnjH05brPqzHsw==
-X-Google-Smtp-Source: AGHT+IFRPJJ6oeBNJu/5VoRQeXnmTKqIhil2YDYqIID10uM7AlxKFBvGdTgzr8T2+/q9fqbKyFLMTA==
-X-Received: by 2002:a81:4cd6:0:b0:5f4:4014:dddf with SMTP id
- z205-20020a814cd6000000b005f44014dddfmr5462065ywa.91.1705501583984; 
- Wed, 17 Jan 2024 06:26:23 -0800 (PST)
+ bh=uwCAhwUCZ3Iultxi8gUgzXatG56myp2WCoGDe8phr9I=;
+ b=FEqsMTik3HW3TaQNtAC4i7cRQuFEf6s/GpbjkcIL9IXO3N4JnDERF8WLsj+Vqy5h0W
+ olUrO24ozn1bq6+w2iDeh1cXOV76t244jWGBMBhH4xWQdoW7mEJI5I7tMZ8ZP+83bvsq
+ DrF38W8ZGt+rCeBPdrFxiZ9PiYUJqoNjfUM82dQ00XZgtLD7IXnz8Z8Zuh1bqx3q2lLs
+ cvS2LhIAXKXX6c/h0KgPI8KhM5JwDLCtiHPTDPFMyKUWl8tgVVv+xLC6S5f2EuPynHVv
+ p+HX/xmJiEeXaE3bGlrYZ/bNwS12oJfDK+4cx14bC0nDLWbP5201IeGjwKhDo4gQuUvl
+ 0/jQ==
+X-Gm-Message-State: AOJu0YwUaqc/XBH0KADf6GLuQmZ6FUtMlw6fYmp4g69R2+XOdAjDMZtX
+ 8oYCTb5ZE4EFycsGgN8VduA0AoBWKY51N0o7Zn225liYGNw=
+X-Google-Smtp-Source: AGHT+IFNupvCd0gtcHk3JF+tGWpD35kEPUQYBGmYZyuHWqleLpA2oRSS7VEmVTdzlKOa+q5W87C6LA==
+X-Received: by 2002:a05:690c:110:b0:5f9:81f3:85e8 with SMTP id
+ bd16-20020a05690c011000b005f981f385e8mr7423935ywb.31.1705501587788; 
+ Wed, 17 Jan 2024 06:26:27 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- i17-20020a819111000000b005ff55dc76e9sm1440328ywg.14.2024.01.17.06.26.23
+ w203-20020a8162d4000000b005e1a5593c0csm1785149ywb.60.2024.01.17.06.26.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jan 2024 06:26:23 -0800 (PST)
-Date: Wed, 17 Jan 2024 09:26:21 -0500
+ Wed, 17 Jan 2024 06:26:27 -0800 (PST)
+Date: Wed, 17 Jan 2024 09:26:25 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Love Kumar <love.kumar@amd.com>
 Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
-Subject: Re: [PATCH v3] test/py: i2c: Add tests for i2c command
-Message-ID: <20240117142621.GK12635@bill-the-cat>
-References: <f7ff13475bbd3f0471bee709dc6a805d3da5915d.1704176360.git.love.kumar@amd.com>
+Subject: Re: [PATCH] test/py: memtest: Add tests for mtest command
+Message-ID: <20240117142625.GL12635@bill-the-cat>
+References: <7912602add5224c40b81a823d803bdf1e3aa0b62.1704277765.git.love.kumar@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="r9owuBDGES3GI7Dh"
+ protocol="application/pgp-signature"; boundary="voqLzSBxe99FSuTZ"
 Content-Disposition: inline
-In-Reply-To: <f7ff13475bbd3f0471bee709dc6a805d3da5915d.1704176360.git.love.kumar@amd.com>
+In-Reply-To: <7912602add5224c40b81a823d803bdf1e3aa0b62.1704277765.git.love.kumar@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,19 +91,16 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---r9owuBDGES3GI7Dh
+--voqLzSBxe99FSuTZ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 02, 2024 at 12:17:07PM +0530, Love Kumar wrote:
+On Wed, Jan 03, 2024 at 03:59:42PM +0530, Love Kumar wrote:
 
-> Add below test cases for i2c commands:
-> i2c_bus - To show i2c bus info,
-> i2c_dev - To set or show the current bus,
-> i2c_probe - To probe the i2c device,
-> i2c_eeprom - To test i2c eeprom device,
-> i2c_probe_all_buses - To list down all the buses and probes it
+> Add the following memory tests:
+> memtest_negative - To test mtest command by providing incorrect inputs
+> memtest_ddr - To test memory write-read-comparision for DDR memory
 >=20
 > Signed-off-by: Love Kumar <love.kumar@amd.com>
 
@@ -112,22 +109,22 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---r9owuBDGES3GI7Dh
+--voqLzSBxe99FSuTZ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWn440ACgkQFHw5/5Y0
-tyw8gQv/ZBW+fnVHMduEDxBAh9dcNE4pfru2Ms1dgI69bInco1qIA+JuNqTFE+Dz
-4ok7DtANw/7xohGB971Us200/oTVVwwZ+MuKfmmbQ6KGR6qf9f5JMWBjkScsBuSJ
-1EXwL2akvr2o2VxlS7tidXyS6KknvzkbWSEr/50IujffIDyKQxNW7c/LP2rKEKTJ
-8gLaPJoxIIPiRpBlrmQKcjqdaTtbUhPHWIeMmDIAvgsiXF6sYxfPFqNheN3w6tyF
-onRp3VkAKbPes+1MWzO0GbMLggFuln6dIlVVkxEVRXaNXpjDn5Ow6+qJKzD281Bj
-ce96MdyarimgW/yESeW4TJ7giBzUvyIuzoK+W6PcvUECOGMGDRKjwZKQp5MwufOb
-iLXaIXEd7Ym4PzeokmXO4YChXuF20Q8OWT8MPQGoXZqsAfzfq3bfMv91WJE1i444
-PZj5svC9cNADfbmX0RosJb1Su86/zUHmc866QRDNDNpRSBNQvrFwMdSg4wQGvNnO
-sXTbfDeI
-=yYsV
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWn45EACgkQFHw5/5Y0
+tyzvmwv/ZDEGxtiUq7dWOqzxrQ/gzse3NAMIEBYAEN5AgtGdP7TGzJUpjJNC7JrI
+j+b3bcWJihDXpmh0oAbKd0gOyIR6dlrXYxc3YYJUsEnjjuHqKKKFYOz4MzeSBRBF
+4NxLGFFkB+vKHMzUhpq+0gB6qfWVYq3aD3VxrzsMAOQ/M1Z6eQR4bjZPf5PbLs7F
+wcCDF1SCPlVFtQESMcUK9rO5BgPH2Xmpp/tY7JENBgKUGqrOHLzGrcwztqU8cv7j
+tSg27lJkQg4QmrocClq+sQRTZKx70GTJnL/JhbTD1Lg6uxksH7dFVmPopxXNlqNi
+/vOZYhXIBy5WJQhuXrDPmKT2xQXwLV89puIDfWPz5CzpkK/E6t4im04Y4VMsfEk7
+9CcX3X8xagdq74eT/a/6i2GyQQgIHMtqQV+nSiQz8K3qWM6zgivuOxjUXTlQ530A
+CZ4+bQNE8AQKQRVpi0c+9nUnyPOvD5TUquIj4ENBj21YtYrjtRY+xPyE9SLBQM2P
+mJGKeNYd
+=ENEm
 -----END PGP SIGNATURE-----
 
---r9owuBDGES3GI7Dh--
+--voqLzSBxe99FSuTZ--
