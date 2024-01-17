@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A0F6C47DA7
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 07:55:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EA7DC47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 08:37:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3CC887A99;
-	Wed, 17 Jan 2024 08:53:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 4A5408796E;
+	Wed, 17 Jan 2024 09:37:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="L62/Va9X";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XFClNUpG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74C1B87AC9; Wed, 17 Jan 2024 08:53:27 +0100 (CET)
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
- [IPv6:2607:f8b0:4864:20::42a])
+ id 2CA9B87985; Wed, 17 Jan 2024 09:37:29 +0100 (CET)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50F9A87A7A
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 08:53:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 20A348796E
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 09:37:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-6db82a57c50so2005914b3a.2
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 23:53:24 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2ccae380df2so118446151fa.1
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 00:37:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1705478002; x=1706082802;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lBKZLpkyqUzJWKpYTT64cJzwgLKzV6qe3fEWWFQTMuw=;
- b=L62/Va9XUDy6V1cosvclybrK0DnVryOUB3r4JWjOXQ7LWkEQB+YnDKlo8H0mmBgvZj
- 3iTFZzpY9lnfEDmkG7TYstQYQsIILvBFrbF5z0RAowEUX/qutQ77OuiiVKeCU1ZMmh6u
- mgKzCwyxNyNFP5uI55PdlIvSmAIYSVAYLOsx8=
+ d=linaro.org; s=google; t=1705480646; x=1706085446; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=t6PzjYH8vOi3ShjI+PQTnn7ErhGc2il7/zcvAVqJYsk=;
+ b=XFClNUpGemvJl5nsW8Hj4EQPCqWVSjkZg8jZKbtmoAmRuMnWswJl0MHAwe7nHYxk2d
+ VBFJ6n2u4EUvWeXXOKcY8yKip6+Ukp3HEC/S2IR0Quk/nTjusxJWirTpjNxwbwyUWRd0
+ PeGfO4FNdTSRTcgAs+Xy5LNQ8NgsHsiJqoL6TqViHOyqFJl5u73LW8PXSqQCqcStPnkd
+ ZB1uxeQpl/i/hAwygM4FVRDsxNvCNl2k+b533HfqwTdmZHWaVQJ8ApUg0YJQlt6QXL5K
+ xIkiAYhovZTqFoTvYInVtGi9R7I/i9ROSERvGBcgO2danMD8eMfLHfJYssWaF/tsqrW1
+ j7GA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705478002; x=1706082802;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lBKZLpkyqUzJWKpYTT64cJzwgLKzV6qe3fEWWFQTMuw=;
- b=BtLFmaWxgtrPvcbX60tZXh5Pm5CAYguYDPbLu56HgLkaZEOoJ7SZlgS/J+ADJvuqcl
- C2FTinhiqdWhF3VU4a0gSQ8pyGoV5VCeREMx6xDrPn0M2Pj+K6d+bmb7wEfQRMTR9e35
- WTCqNqg3PWKXztZkQ4DH4SRXJF1Rq+tH24PwfYmWQTGIBUip7yFAGUk2Uoj17+n6xGbQ
- LL8CJo3UuSs2ASkSxW6zn4h+iEywRzD4720BTTdTmnNRyOauTqy47oBEgE2a8Va3Nj7U
- F6vhntizH8AVGh6Ik3dilfmBfBpYmHE4cVhZ59PRvGUj7ajjIZs1Ygux5wt2vigQrYdv
- t1zQ==
-X-Gm-Message-State: AOJu0Yx8uDWWMF74VkDdr8uONbqhtXlkR/CoQ+iRidjs4y6d0Eyh2nmX
- IvBBzet/qFYY+EaGnKcpPG96QA0MnZksww==
-X-Google-Smtp-Source: AGHT+IE9hABhdWBI+4RawAfzXDe1hySI5+ofCuoxnp7vie/m4i6K3iEegJUBVgkeLLYM280H+n+eZQ==
-X-Received: by 2002:a05:6a20:438f:b0:19b:2d02:6966 with SMTP id
- i15-20020a056a20438f00b0019b2d026966mr2381335pzl.87.1705478002702; 
- Tue, 16 Jan 2024 23:53:22 -0800 (PST)
-Received: from localhost.localdomain ([183.82.41.50])
- by smtp.gmail.com with ESMTPSA id
- e10-20020a170902784a00b001d5081be740sm10718624pln.62.2024.01.16.23.53.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jan 2024 23:53:22 -0800 (PST)
-From: Jagan Teki <jagan@amarulasolutions.com>
-To: Anatolij Gustschin <agust@denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Andre Przywara <andre.przywara@arm.com>,
- Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Heiko Stuebner <heiko@sntech.de>, Andy Yan <andyshrk@163.com>,
- Robin Murphy <robin.murphy@arm.com>
-Cc: Da Xue <da.xue@libretech.co>, u-boot@lists.denx.de,
- Jagan Teki <jagan@amarulasolutions.com>
-Subject: [PATCH v3 17/17] configs: Enable HDMI Out for ROC-RK3328-CC
-Date: Wed, 17 Jan 2024 13:21:54 +0530
-Message-Id: <20240117075154.58747-18-jagan@amarulasolutions.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240117075154.58747-1-jagan@amarulasolutions.com>
-References: <20240117075154.58747-1-jagan@amarulasolutions.com>
+ d=1e100.net; s=20230601; t=1705480646; x=1706085446;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=t6PzjYH8vOi3ShjI+PQTnn7ErhGc2il7/zcvAVqJYsk=;
+ b=dB38g9Ww2tDHy1QNvPN7AgovEi4pBQ9uObLs38lrvOaH2/HjZDbvJXtKiDA89oTPk9
+ 1cPPJWKSu1msWLkgIPKMME8QVoFNaWxH5Wdva1BWQOMwl70OlzJQ5C87EAJOpKHTRQDZ
+ M44MtxrC2t7uYvnv9e1jWRDPZn6A9novu6jLXQYhSpnyhBR8FzsK6Cauy34NoglazF2w
+ +M1DFZg38D2CDLn4e86CpBPCaZe0mJICCIi5kuEIuKCG7zEa9WG4xRNaX32wBZ6dqWD6
+ zh+cX4wDTF/C+GE3rx3Bl4OM24HOEnGulqIDfJACx5VGj2BLe4mQupVx2fPiOTcs/baE
+ YUXw==
+X-Gm-Message-State: AOJu0YxNvuZpgt6mVv4oZfXaHETgaRY8SjoWVQLqcW1m9ntZJFyq8MTJ
+ GGD3Q0eNbxFoJtXef8713lH6eWuCCcouHNqNmkUYT5NeAgbwww==
+X-Google-Smtp-Source: AGHT+IGrOe6I4UJjT+3mK87AOvpPfis8yUgv9H4nQDfCztl2tMDc9kPXdjOD+FtVbm62xVSIYUHfZXDc4bAq0Y+J6Jc=
+X-Received: by 2002:a19:f501:0:b0:50e:3e3a:3d6a with SMTP id
+ j1-20020a19f501000000b0050e3e3a3d6amr3057117lfb.108.1705480646359; Wed, 17
+ Jan 2024 00:37:26 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240116171356.376801-1-raymond.mao@linaro.org>
+ <20240116171356.376801-4-raymond.mao@linaro.org>
+In-Reply-To: <20240116171356.376801-4-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 17 Jan 2024 10:36:50 +0200
+Message-ID: <CAC_iWjKi8TpyFOHQCNM3G6v59TRteYVDKf+8d+iLMru+WoK-gg@mail.gmail.com>
+Subject: Re: [PATCH v6 3/7] bloblist: refactor of bloblist_reloc()
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Fabio Estevam <festevam@denx.de>,
+ Bin Meng <bmeng@tinylab.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, 
+ Andre Przywara <andre.przywara@arm.com>, Mark Kettenis <kettenis@openbsd.org>, 
+ Linus Walleij <linus.walleij@linaro.org>, Yang Xiwen <forbidden405@outlook.com>,
+ =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>, 
+ Peng Fan <peng.fan@nxp.com>, Kevin Chen <kevin_chen@aspeedtech.com>, 
+ Sean Anderson <seanga2@gmail.com>, Nikhil M Jain <n-jain1@ti.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Shiji Yang <yangshiji66@outlook.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,78 +98,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot 2024.01-00901-g75d07e0e6e-dirty (Jan 17 2024 - 12:50:56 +0530)
-
-Model: Firefly roc-rk3328-cc
-DRAM:  4 GiB
-PMIC:  RK8050 (on=0x40, off=0x00)
-Core:  236 devices, 26 uclasses, devicetree: separate
-MMC:   mmc@ff500000: 1, mmc@ff520000: 0
-Loading Environment from MMC... *** Warning - bad CRC, using default environment
-
-In:    serial,usbkbd
-Out:   serial,vidconsole
-Err:   serial,vidconsole
-Model: Firefly roc-rk3328-cc
-Net:   eth0: ethernet@ff540000
-Hit any key to stop autoboot:  0
-=> dm tree
- Class     Index  Probed  Driver                Name
------------------------------------------------------------
- root          0  [ + ]   root_driver           root_driver
- firmware      0  [   ]   psci                  |-- psci
- clk           0  [ + ]   fixed_clock           |-- xin24m
- syscon        0  [ + ]   rockchip_rk3328_grf   |-- syscon@ff100000
- serial        0  [ + ]   ns16550_serial        |-- serial@ff130000
- i2c           0  [ + ]   rockchip_rk3066_i2c   |-- i2c@ff160000
- pmic          0  [ + ]   rockchip_rk805        |   `-- pmic@18
- sysreset      0  [   ]   rk8xx_sysreset        |       |-- rk8xx_sysreset
- regulator     0  [ + ]   rk8xx_buck            |       |-- DCDC_REG1
- regulator     1  [ + ]   rk8xx_buck            |       |-- DCDC_REG2
- regulator     2  [ + ]   rk8xx_buck            |       |-- DCDC_REG3
- regulator     3  [ + ]   rk8xx_buck            |       |-- DCDC_REG4
- regulator     4  [ + ]   rk8xx_ldo             |       |-- LDO_REG1
- regulator     5  [ + ]   rk8xx_ldo             |       |-- LDO_REG2
- regulator     6  [ + ]   rk8xx_ldo             |       `-- LDO_REG3
- video         0  [ + ]   rk3328_vop            |-- vop@ff370000
- vidconsole    0  [ + ]   vidconsole0           |   `-- vop@ff370000.vidconsole0
- display       0  [ + ]   rk3328_hdmi_rockchip  |-- hdmi@ff3c0000
- phy           0  [ + ]   inno_hdmi_phy         |-- phy@ff430000
- clk           1  [ + ]   rockchip_rk3328_cru   |-- clock-controller@ff440000
- sysreset      1  [   ]   rockchip_sysreset     |   |-- sysreset
- reset         0  [ + ]   rockchip_reset        |   `-- reset
-
-Signed-off-by: Jagan Teki <jagan@amarulasolutions.com>
----
-Changes for v3, v2:
-- none
-
- configs/roc-cc-rk3328_defconfig | 5 +++++
- 1 file changed, 5 insertions(+)
-
-diff --git a/configs/roc-cc-rk3328_defconfig b/configs/roc-cc-rk3328_defconfig
-index 4ac3c9403b..4eef9016dc 100644
---- a/configs/roc-cc-rk3328_defconfig
-+++ b/configs/roc-cc-rk3328_defconfig
-@@ -79,6 +79,7 @@ CONFIG_PHY_REALTEK=y
- CONFIG_PHY_GIGE=y
- CONFIG_ETH_DESIGNWARE=y
- CONFIG_GMAC_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_HDMI=y
- CONFIG_PHY_ROCKCHIP_INNO_USB2=y
- CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
-@@ -114,6 +115,10 @@ CONFIG_USB_DWC3=y
- CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_DWC2_OTG=y
-+CONFIG_VIDEO=y
-+CONFIG_DISPLAY=y
-+CONFIG_VIDEO_ROCKCHIP=y
-+CONFIG_DISPLAY_ROCKCHIP_HDMI=y
- CONFIG_SPL_TINY_MEMSET=y
- CONFIG_TPL_TINY_MEMSET=y
- CONFIG_ERRNO_STR=y
--- 
-2.25.1
-
+On Tue, 16 Jan 2024 at 19:14, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> The current bloblist pointer and size can be retrieved from global
+> data, so we don't need to pass them from the function arguments.
+> This change also help to remove all external access of gd->bloblist
+> outside of bloblist module.
+>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+> Changes in v2
+> - New patch file created for v2.
+> Changes in v3
+> - Check the space size before copying the bloblist.
+> - Add return code of bloblist_reloc().
+> Changes in v4
+> - return error code from bloblist_reloc().
+>
+>  common/bloblist.c  | 10 ++++++++--
+>  common/board_f.c   |  9 +++------
+>  include/bloblist.h |  8 ++++----
+>  test/bloblist.c    |  6 ++----
+>  4 files changed, 17 insertions(+), 16 deletions(-)
+>
+> diff --git a/common/bloblist.c b/common/bloblist.c
+> index 26b0ba33b1..c2fd07575f 100644
+> --- a/common/bloblist.c
+> +++ b/common/bloblist.c
+> @@ -472,13 +472,19 @@ void bloblist_show_list(void)
+>         }
+>  }
+>
+> -void bloblist_reloc(void *to, uint to_size, void *from, uint from_size)
+> +int bloblist_reloc(void *to, uint to_size)
+>  {
+>         struct bloblist_hdr *hdr;
+>
+> -       memcpy(to, from, from_size);
+> +       if (to_size < gd->bloblist->total_size)
+> +               return -ENOSPC;
+> +
+> +       memcpy(to, gd->bloblist, gd->bloblist->total_size);
+>         hdr = to;
+>         hdr->total_size = to_size;
+> +       gd->bloblist = to;
+> +
+> +       return 0;
+>  }
+>
+>  int bloblist_init(void)
+> diff --git a/common/board_f.c b/common/board_f.c
+> index d4d7d01f8f..f4145a2698 100644
+> --- a/common/board_f.c
+> +++ b/common/board_f.c
+> @@ -676,13 +676,10 @@ static int reloc_bloblist(void)
+>                 return 0;
+>         }
+>         if (gd->new_bloblist) {
+> -               int size = CONFIG_BLOBLIST_SIZE;
+> -
+>                 debug("Copying bloblist from %p to %p, size %x\n",
+> -                     gd->bloblist, gd->new_bloblist, size);
+> -               bloblist_reloc(gd->new_bloblist, CONFIG_BLOBLIST_SIZE_RELOC,
+> -                              gd->bloblist, size);
+> -               gd->bloblist = gd->new_bloblist;
+> +                     gd->bloblist, gd->new_bloblist, gd->bloblist->total_size);
+> +               return bloblist_reloc(gd->new_bloblist,
+> +                                     CONFIG_BLOBLIST_SIZE_RELOC);
+>         }
+>  #endif
+>
+> diff --git a/include/bloblist.h b/include/bloblist.h
+> index cc78259e5a..0ae079d62a 100644
+> --- a/include/bloblist.h
+> +++ b/include/bloblist.h
+> @@ -426,11 +426,11 @@ const char *bloblist_tag_name(enum bloblist_tag_t tag);
+>   * bloblist_reloc() - Relocate the bloblist and optionally resize it
+>   *
+>   * @to: Pointer to new bloblist location (must not overlap old location)
+> - * @to_size: New size for bloblist (must be larger than from_size)
+> - * @from: Pointer to bloblist to relocate
+> - * @from_size: Size of bloblist to relocate
+> + * @to_size: New size for bloblist
+> + * Return: 0 if OK, -ENOSPC if the new size is small than the bloblist total
+> + *        size.
+>   */
+> -void bloblist_reloc(void *to, uint to_size, void *from, uint from_size);
+> +int bloblist_reloc(void *to, uint to_size);
+>
+>  /**
+>   * bloblist_init() - Init the bloblist system with a single bloblist
+> diff --git a/test/bloblist.c b/test/bloblist.c
+> index 7dab9addf8..1c60bbac36 100644
+> --- a/test/bloblist.c
+> +++ b/test/bloblist.c
+> @@ -376,13 +376,12 @@ static int bloblist_test_reloc(struct unit_test_state *uts)
+>  {
+>         const uint large_size = TEST_BLOBLIST_SIZE;
+>         const uint small_size = 0x20;
+> -       void *old_ptr, *new_ptr;
+> +       void *new_ptr;
+>         void *blob1, *blob2;
+>         ulong new_addr;
+>         ulong new_size;
+>
+>         ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0, 0));
+> -       old_ptr = map_sysmem(TEST_ADDR, TEST_BLOBLIST_SIZE);
+>
+>         /* Add one blob and then one that won't fit */
+>         blob1 = bloblist_add(TEST_TAG, small_size, 0);
+> @@ -394,8 +393,7 @@ static int bloblist_test_reloc(struct unit_test_state *uts)
+>         new_addr = TEST_ADDR + TEST_BLOBLIST_SIZE;
+>         new_size = TEST_BLOBLIST_SIZE + 0x100;
+>         new_ptr = map_sysmem(new_addr, TEST_BLOBLIST_SIZE);
+> -       bloblist_reloc(new_ptr, new_size, old_ptr, TEST_BLOBLIST_SIZE);
+> -       gd->bloblist = new_ptr;
+> +       ut_assertok(bloblist_reloc(new_ptr, new_size));
+>
+>         /* Check the old blob is there and that we can now add the bigger one */
+>         ut_assertnonnull(bloblist_find(TEST_TAG, small_size));
+> --
+> 2.25.1
+>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
