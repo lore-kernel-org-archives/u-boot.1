@@ -4,74 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76694C47258
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 22:12:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79706C47DA2
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 22:24:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C44768795B;
-	Wed, 17 Jan 2024 23:12:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DC7C28798C;
+	Wed, 17 Jan 2024 23:24:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Uxl01exS";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Hk+qdXwL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C97E38798C; Wed, 17 Jan 2024 23:12:41 +0100 (CET)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4D82687B30; Wed, 17 Jan 2024 23:24:38 +0100 (CET)
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 962C3876FC
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 23:12:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E88087887
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 23:24:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-6818b86ec67so576616d6.0
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 14:12:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705529558; x=1706134358; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=FyKvBfB/TmOQJzQ+IIixaZL3h+y46z2a5w7Ute1CT6Q=;
- b=Uxl01exSYns/joAw+tTJtHVidRzoaCJo0paiPn7pxm6nwYlO70IOWCHcd67scIEAEI
- sNNZ4YTF53qgFEr0p8p3YZqYOXYuVY3+8fvPnNmnl94No1mCGJS1ra4H8z8j887sh/v+
- HvAy3o/OCGWdl2KYHyoJN392tX/VpqU1tFttc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705529558; x=1706134358;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FyKvBfB/TmOQJzQ+IIixaZL3h+y46z2a5w7Ute1CT6Q=;
- b=Nu9QM9IqS71qxai6rTogIZp46BKFChuSxf/ZDzT8GuDZOi+gKGCVjE14XM+BvzVwBc
- MN+4VWdzV5LBJJJqbN7WyF90XvhDDCC4Gx+Amb8tz9U89JeyfYa+Gd2BcNeTEncZehUd
- 6DnGvaTssAbiemq/BIoEuGmUOndI6TVnzVKnlR9KFBHPpGjUMkaH42TDrqea/ulN2441
- R/9oGKr2T0F2ky4Yz24K46LJj+pVvIlWTqwzvbsg4jHuUIQKcUOYjTwzS/LVXSaDA2P4
- NIYHLtg+nt7i1Wq1668PQHahgXOjZOfT+5rGN0gE+mDk+zifdFTxqig0K3iwZdYCLIwA
- IKbg==
-X-Gm-Message-State: AOJu0YyMlWcez8nx+DgbV9eJ6Tz01XfS2qjtUmZzJjwv9Vu2r5lENOrf
- oWN1wSx4PZhymHAQo1ev5D2cS/oCUwsszUAHgAniXXv9/OI=
-X-Google-Smtp-Source: AGHT+IEpobAXvfkE7aLdq1aFq377CqYYN57zfvYaqTgOD2ASm3+PUVDlW94j7afBj62gX66t6smEcQ==
-X-Received: by 2002:a05:6214:29e2:b0:681:78d4:6be8 with SMTP id
- jv2-20020a05621429e200b0068178d46be8mr1800353qvb.43.1705529558019; 
- Wed, 17 Jan 2024 14:12:38 -0800 (PST)
-Received: from bill-the-cat..
- (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- cn17-20020ad44a71000000b006817cee3877sm801648qvb.43.2024.01.17.14.12.37
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jan 2024 14:12:37 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] test: test_trace.py: Have trace-cmd report always use -l
-Date: Wed, 17 Jan 2024 17:12:36 -0500
-Message-Id: <20240117221236.2234826-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240117214357.2197351-1-trini@konsulko.com>
-References: <20240117214357.2197351-1-trini@konsulko.com>
+ spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by ams.source.kernel.org (Postfix) with ESMTP id 173BCB813DB;
+ Wed, 17 Jan 2024 22:24:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 6D52DC433A6;
+ Wed, 17 Jan 2024 22:24:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1705530274;
+ bh=V2l1s+yxs5Rg0q3C5CYTBAFirhLWFne48i9MYVklN58=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=Hk+qdXwLzM98zhuEunZUaDeuqRK1B45uLRd7oqPUxt84XqUZEEYvQ74VKOuNuHrq4
+ jKss5FLT7X3pDdP8EJjpEe4WM+SMhjXg6I12uaniVhkHTrijaVSWIOKBc3m4mMmhJ1
+ A0PiOmHi8bM4vVEP6pVtNT+s0lbFixkC9OjZgPqVkmokH+uVwHA46+eNyZUnyfCR1X
+ pq/wjSkcPkO8P1pdAlSBpsxZoASBcHVL/leAmxbFKX7yHxHmWSS8guR3QSzJP8ER2n
+ dIr6dBNqMn/oXPKPrg9Kzb3D+hW+BnGaHlXnnFusMXcIArtyt1sN7AXx9ow3llKkUm
+ 2gG32SiYLL0bA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 5CC1EC47258;
+ Wed, 17 Jan 2024 22:24:34 +0000 (UTC)
+From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
+Date: Wed, 17 Jan 2024 23:24:30 +0100
+Subject: [PATCH RFC 4/6] efi_selftest: Add international characters test
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240117-vidconsole-utf8-uefi-v1-4-539f7ce74fb9@jannau.net>
+References: <20240117-vidconsole-utf8-uefi-v1-0-539f7ce74fb9@jannau.net>
+In-Reply-To: <20240117-vidconsole-utf8-uefi-v1-0-539f7ce74fb9@jannau.net>
+To: Anatolij Gustschin <agust@denx.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>, 
+ u-boot@lists.denx.de, Janne Grunau <j@jannau.net>
+X-Mailer: b4 0.12.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1491; i=j@jannau.net;
+ h=from:subject:message-id; bh=xhSCbsHJtQ6v72d/HK7UQUIy+oFjZujSPTkEnV2wRR8=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtQVwQseKgff/39tVeY3/XO295eneVs8nDOZc2NDh7W3Q
+ tCmMAapjlIWBjEuBlkxRZYk7ZcdDKtrFGNqH4TBzGFlAhnCwMUpABPxcmb4n62dOPNw3/mXjRf8
+ 1r9jd7L6xD0laLbS6pJMv4rMg00sVxgZjjK+1NoWuu/6Yf8beqfCvlS3vMn6G2bJWs2zY2tJ1LJ
+ EHgA=
+X-Developer-Key: i=j@jannau.net; a=openpgp;
+ fpr=8B336A6BE4E5695E89B8532B81E806F586338419
+X-Endpoint-Received: by B4 Relay for j@jannau.net/default with auth_id=62
+X-Original-From: Janne Grunau <j@jannau.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,98 +80,56 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: j@jannau.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With newer versions of trace-cmd the report subcommand will have
-different output from before if we do or do not pass -l. However, with
-the -l flag passed our put is consistent here. This updates our regular
-expressions and comments for this as well now.
+From: Andre Przywara <andre.przywara@arm.com>
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Changes in v2:
-- Use the -l flag to have consistent output for either version
----
- test/py/tests/test_trace.py | 32 ++++++++++++++++----------------
- 1 file changed, 16 insertions(+), 16 deletions(-)
+UEFI relies entirely on unicode output, which actual fonts displayed on
+the screen might not be ready for.
 
-diff --git a/test/py/tests/test_trace.py b/test/py/tests/test_trace.py
-index 28a6e72f525f..7c5696ce747f 100644
---- a/test/py/tests/test_trace.py
-+++ b/test/py/tests/test_trace.py
-@@ -12,7 +12,7 @@ import u_boot_utils as util
- TMPDIR = '/tmp/test_trace'
+Add a test displaying some international characters, to reveal missing
+glyphs, especially in our builtin fonts.
+This would be needed to be manually checked on the screen for
+correctness.
+
+Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Signed-off-by: Janne Grunau <j@jannau.net>
+---
+ lib/efi_selftest/efi_selftest_textoutput.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/lib/efi_selftest/efi_selftest_textoutput.c b/lib/efi_selftest/efi_selftest_textoutput.c
+index cc44b38bc2..2aa81b0a80 100644
+--- a/lib/efi_selftest/efi_selftest_textoutput.c
++++ b/lib/efi_selftest/efi_selftest_textoutput.c
+@@ -30,6 +30,9 @@ static int execute(void)
+ 		0xD804, 0xDC05,
+ 		0xD804, 0xDC22,
+ 		0};
++	const u16 text[] =
++u"\u00d6sterreich Edelwei\u00df Sm\u00f8rrebr\u00f8d Sm\u00f6rg"
++u"\u00e5s Ni\u00f1o Ren\u00e9 >\u1f19\u03bb\u03bb\u03ac\u03c2<\n";
  
- # Decode a function-graph line
--RE_LINE = re.compile(r'.*\[000\]\s*([0-9.]*): func.*[|](\s*)(\S.*)?([{};])$')
-+RE_LINE = re.compile(r'.*0\.\.\.\.\. \s*([0-9.]*): func.*[|](\s*)(\S.*)?([{};])$')
+ 	/* SetAttribute */
+ 	efi_st_printf("\nColor palette\n");
+@@ -118,6 +121,11 @@ static int execute(void)
+ 		efi_st_printf("Unicode not handled properly\n");
+ 		return EFI_ST_FAILURE;
+ 	}
++	ret = con_out->output_string(con_out, text);
++	if (ret != EFI_ST_SUCCESS) {
++		efi_st_error("OutputString failed for international chars\n");
++		return EFI_ST_FAILURE;
++	}
+ 	efi_st_printf("\n");
  
- 
- def collect_trace(cons):
-@@ -113,15 +113,15 @@ def check_function(cons, fname, proftool, map_fname, trace_dat):
-     assert val > 50000  # Should be at least 50KB of symbols
- 
-     # Check that the trace has something useful
--    cmd = f"trace-cmd report {trace_dat} |grep -E '(initf_|initr_)'"
-+    cmd = f"trace-cmd report -l {trace_dat} |grep -E '(initf_|initr_)'"
-     out = util.run_and_log(cons, ['sh', '-c', cmd])
- 
-     # Format:
--    # unknown option 14
--    #      u-boot-1     [000]    60.805596: function:             initf_malloc
--    #      u-boot-1     [000]    60.805597: function:             initf_malloc
--    #      u-boot-1     [000]    60.805601: function:             initf_bootstage
--    #      u-boot-1     [000]    60.805607: function:             initf_bootstage
-+    #      u-boot-1     0.....    60.805596: function:             initf_malloc
-+    #      u-boot-1     0.....    60.805597: function:             initf_malloc
-+    #      u-boot-1     0.....    60.805601: function:             initf_bootstage
-+    #      u-boot-1     0.....    60.805607: function:             initf_bootstage
-+
-     lines = [line.replace(':', '').split() for line in out.splitlines()]
-     vals = {items[4]: float(items[2]) for items in lines if len(items) == 5}
-     base = None
-@@ -161,21 +161,21 @@ def check_funcgraph(cons, fname, proftool, map_fname, trace_dat):
-                'dump-ftrace', '-f', 'funcgraph'])
- 
-     # Check that the trace has what we expect
--    cmd = f'trace-cmd report {trace_dat} |head -n 70'
-+    cmd = f'trace-cmd report -l {trace_dat} |head -n 70'
-     out = util.run_and_log(cons, ['sh', '-c', cmd])
- 
-     # First look for this:
--    #  u-boot-1     [000]   282.101360: funcgraph_entry:        0.004 us   |    initf_malloc();
-+    #  u-boot-1     0.....   282.101360: funcgraph_entry:        0.004 us   |    initf_malloc();
-     # ...
--    #  u-boot-1     [000]   282.101369: funcgraph_entry:                   |    initf_bootstage() {
--    #  u-boot-1     [000]   282.101369: funcgraph_entry:                   |      bootstage_init() {
--    #  u-boot-1     [000]   282.101369: funcgraph_entry:                   |        dlmalloc() {
-+    #  u-boot-1     0.....   282.101369: funcgraph_entry:                   |    initf_bootstage() {
-+    #  u-boot-1     0.....   282.101369: funcgraph_entry:                   |      bootstage_init() {
-+    #  u-boot-1     0.....   282.101369: funcgraph_entry:                   |        dlmalloc() {
-     # ...
--    #  u-boot-1     [000]   282.101375: funcgraph_exit:         0.001 us   |        }
-+    #  u-boot-1     0.....   282.101375: funcgraph_exit:         0.001 us   |        }
-     # Then look for this:
--    #  u-boot-1     [000]   282.101375: funcgraph_exit:         0.006 us   |      }
-+    #  u-boot-1     0.....   282.101375: funcgraph_exit:         0.006 us   |      }
-     # Then check for this:
--    #  u-boot-1     [000]   282.101375: funcgraph_entry:        0.000 us   |    initcall_is_event();
-+    #  u-boot-1     0.....   282.101375: funcgraph_entry:        0.000 us   |    initcall_is_event();
- 
-     expected_indent = None
-     found_start = False
-@@ -203,7 +203,7 @@ def check_funcgraph(cons, fname, proftool, map_fname, trace_dat):
- 
-     # Now look for initf_dm() and dm_timer_init() so we can check the bootstage
-     # time
--    cmd = f"trace-cmd report {trace_dat} |grep -E '(initf_dm|dm_timer_init)'"
-+    cmd = f"trace-cmd report -l {trace_dat} |grep -E '(initf_dm|dm_timer_init)'"
-     out = util.run_and_log(cons, ['sh', '-c', cmd])
- 
-     start_timestamp = None
+ 	return EFI_ST_SUCCESS;
+
 -- 
-2.34.1
+2.43.0
 
