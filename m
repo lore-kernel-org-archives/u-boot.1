@@ -4,80 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C8DDC47258
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 20:27:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 280A6C47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 21:44:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96A72879F3;
-	Wed, 17 Jan 2024 21:27:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=supermicro.com
+	by phobos.denx.de (Postfix) with ESMTP id 5BBA48798F;
+	Wed, 17 Jan 2024 22:44:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=supermicro.com header.i=@supermicro.com header.b="fOXSC2B/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bhQY0mhp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C268878DA; Wed, 17 Jan 2024 21:07:56 +0100 (CET)
-Received: from MGA.supermicro.com (mga.supermicro.com [207.212.57.84])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 489E087994; Wed, 17 Jan 2024 22:44:02 +0100 (CET)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 612EF879F3
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 21:07:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=supermicro.com
+ by phobos.denx.de (Postfix) with ESMTPS id 18BD48798C
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 22:44:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=liuw@supermicro.com
-Received: from pps.filterd (MGA.supermicro.com [127.0.0.1])
- by MGA.supermicro.com (8.17.1.19/8.17.1.19) with ESMTP id 40HFhgi7004841;
- Wed, 17 Jan 2024 12:07:50 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=supermicro.com;
- h=from : to : cc :
- subject : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=DKIM;
- bh=c4/R2ID6jUf5OOxsaY90A5Vuq/4TMutQewpXzpwsB5o=;
- b=fOXSC2B/I7LJWVL6zpssejqeAVujZBW+3T3l7tl0G9iVXWVSppGoF6XJmHh3UuNfNONa
- KHiuKmnrF7LrHDYsXrpN2AwnzOLG788ZpHGQClpCPYvjraI3hwOYtrgyFVDQvWISX5xh
- P5k47/U5/GeVvdqO2YTYWhdY8C+vwlwUUXVPS5WDNbocZN4uRcTjKWkYDU2FVuJIcH3H
- uYN58kRVkdjys34kqMjVzGP0jkK2c7RL9TAykBFa9/pjlrxm3yrMibEW+ZfkwMLRadgv
- xLM1pHAUpVErT2yrDf6zdMNG9uimDH0pdJzLbGy0HKlD23b1PQyTsxoSXJDJYKCiLWB1 bg== 
-Received: from ex2013-mbx5.supermicro.com (EX2013-MBX5.supermicro.com
- [10.2.1.182]) by MGA.supermicro.com (PPS) with ESMTPS id 3vku0wnf6p-2
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
- Wed, 17 Jan 2024 12:07:50 -0800
-Received: from us-ex2019-mbx4.supermicro.com (10.2.6.160) by
- EX2013-MBX5.supermicro.com (10.2.1.182) with Microsoft SMTP Server (TLS) id
- 15.0.1497.42; Wed, 17 Jan 2024 12:07:49 -0800
-Received: from us-ex2019-mbx1.supermicro.com (10.2.6.157) by
- us-ex2019-mbx4.supermicro.com (10.2.6.160) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Wed, 17 Jan 2024 12:07:49 -0800
-Received: from us-ex2019-mbx1.supermicro.com ([fe80::37c2:47e5:2f5d:450f]) by
- us-ex2019-mbx1.supermicro.com ([fe80::37c2:47e5:2f5d:450f%16]) with
- mapi id 15.02.1118.037; Wed, 17 Jan 2024 12:07:49 -0800
-From: Liu Wang <liuw@supermicro.com>
-To: Fabio Estevam <festevam@gmail.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: Could you please help me in resolving the
- "arch/arm/lib/vectors.S:87: Error: no such instruction: `b reset' ?"
-Thread-Topic: Could you please help me in resolving the
- "arch/arm/lib/vectors.S:87: Error: no such instruction: `b reset' ?"
-Thread-Index: AdpI24I3kjWF6EnATLOPMIhQOQ7T3gAtdOcAAAg2JaAAAa1qgP//j+hE
-Date: Wed, 17 Jan 2024 20:07:49 +0000
-Message-ID: <728CCDD9-CEA4-4ED1-9143-189C3F257097@supermicro.com>
-References: <2dba1330181940c78b5ad47f18ee43fa@supermicro.com>
- <CAOMZO5DTw2uU+uEmVLR9nbFkR4QPgmhuY9VUAz-sgg+GppMG9g@mail.gmail.com>
- <0934648988c9444aaf85f2e3163c0f4b@supermicro.com>,
- <CAOMZO5Cy8as7b_cup6J+PYbN-stkj4Vz2wsLB_1=NN3vx5SVWQ@mail.gmail.com>
-In-Reply-To: <CAOMZO5Cy8as7b_cup6J+PYbN-stkj4Vz2wsLB_1=NN3vx5SVWQ@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-68185ec3b7cso3708866d6.2
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 13:44:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1705527838; x=1706132638; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XsA1dAinVPucj8h5ak2LRsOUcacwxL6oKGMYocwwHb4=;
+ b=bhQY0mhpGhZXwkWmiCZEP+4kz8YCS5g963I0VkzKd6wazZ/TBJPSK+INm0Mk+s2E1d
+ ZtPFURwYFcrEx/wbkhQlo+0hU4C3CZFdsrGNjQJLSzszjU4bZ6OL+xu6F/TFw97LIsHU
+ BjIPOTjqIm7qXHxpVRjdKVQWD8vpscWCofFV4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705527838; x=1706132638;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=XsA1dAinVPucj8h5ak2LRsOUcacwxL6oKGMYocwwHb4=;
+ b=JX2TSdKURKfQTEvbLjGSXHTwzy510fFvrRKvZcqJSmxzJjH6oPhRP2H4QqUogpdqzd
+ Gfh+Eudn6D9X9W0K21ligL0WDjPH9piD/KiNtckOv/gcERDinDLvNG5Rd5U73/aVHRmV
+ FWO2pH2x5pU0vlrpnVAeQHGLQhSPT6HaZLptLqt6iTD9gZQvm4ASMR9182Bn5YWQb/Kf
+ 9BVyfiXLI2aVPOxk/E5prk/+BCMSdtqLaEY22EhnqjYs6orc7oZr/n4aQRw7u2ECy8QQ
+ SJwFtQUnae4LngBKBv9F7hkMWSTmWzrGfArh/3oEvJbNomgN70TROhkeHdf6sVpsXfWu
+ qmCA==
+X-Gm-Message-State: AOJu0Yw76BFEF60gkwBRraOnGqBssqaY5TwJKzZRkDb34KidngAwpXUP
+ DDqHt773VLLWTkg+Dh7XLsXOoef0WCtzWE+NBnAPrrmfce4=
+X-Google-Smtp-Source: AGHT+IEErIXsvCoXJ2lGi2c7om0Ufy9HLkces+8vQ90Ej/GaPg75yFNA9SwD3xeOjaZLgRe4k1UGRg==
+X-Received: by 2002:a05:6214:e4b:b0:681:781f:67c5 with SMTP id
+ o11-20020a0562140e4b00b00681781f67c5mr2810595qvc.5.1705527838641; 
+ Wed, 17 Jan 2024 13:43:58 -0800 (PST)
+Received: from bill-the-cat..
+ (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
+ [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
+ o9-20020a0ce409000000b0067f812c4a58sm628386qvl.60.2024.01.17.13.43.58
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 17 Jan 2024 13:43:58 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH] test: test_trace.py: Handle newer trace-cmd report formats
+Date: Wed, 17 Jan 2024 16:43:57 -0500
+Message-Id: <20240117214357.2197351-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-01-17_12,2024-01-17_01,2023-05-22_02
-X-Mailman-Approved-At: Wed, 17 Jan 2024 21:27:40 +0100
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,14 +85,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgRmFiaW8sDQoNCkFwcHJlY2lhdGUhDQoNClNpbmNlcmVseSwNCkxpdSAgV2FuZw0KDQo+IE9u
-IEphbiAxNywgMjAyNCwgYXQgMTA6NDkgQU0sIEZhYmlvIEVzdGV2YW0gPGZlc3RldmFtQGdtYWls
-LmNvbT4gd3JvdGU6DQo+IA0KPiDvu79bQ0FVVElPTjogRXh0ZXJuYWwgTWFpbF0NCj4gDQo+PiBP
-biBXZWQsIEphbiAxNywgMjAyNCBhdCAzOjI14oCvUE0gTGl1IFdhbmcgPGxpdXdAc3VwZXJtaWNy
-by5jb20+IHdyb3RlOg0KPj4gDQo+PiAyLiBZb3UgYXJlIHJpZ2h0LiBJIGhhdmUgbm90IGV4cG9y
-dGVkIHRoZSB0b29sIGNoYWluLg0KPj4gQ291bGQgeW91IHBsZWFzZSBzaGFyZSBtZSBhIGxpbmsg
-dG8gYSByZWFkbWUgaW4gc2V0dGluZyB1cCB0aGUgdG9vbCBjaGFpbiBmb3IgVWJ1bnR1IGNyb3Nz
-IGJ1aWxkIGVudmlyb25tZW50ID8NCj4gDQo+IFlvdSBjYW4gZG8gbGlrZSB0aGlzOg0KPiANCj4g
-ZXhwb3J0IEFSQ0g9YXJtDQo+IGV4cG9ydCBDUk9TU19DT01QSUxFPS91c3IvYmluL2FybS1saW51
-eC1nbnVlYWJpaGYtDQo+IA0KPiBtYWtlIGNzZV9wdGpvYl9jYjNfcjEwMl9kZWZjb25maWcNCj4g
-bWFrZQ0K
+With newer versions of trace-cmd we have another column in the report
+that we need to handle. We don't care about it, so just use a regex to
+remove it from the output that we then parse.
+
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ test/py/tests/test_trace.py | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
+
+diff --git a/test/py/tests/test_trace.py b/test/py/tests/test_trace.py
+index 28a6e72f525f..9cb5aa939c55 100644
+--- a/test/py/tests/test_trace.py
++++ b/test/py/tests/test_trace.py
+@@ -117,12 +117,17 @@ def check_function(cons, fname, proftool, map_fname, trace_dat):
+     out = util.run_and_log(cons, ['sh', '-c', cmd])
+ 
+     # Format:
+-    # unknown option 14
+     #      u-boot-1     [000]    60.805596: function:             initf_malloc
+     #      u-boot-1     [000]    60.805597: function:             initf_malloc
+     #      u-boot-1     [000]    60.805601: function:             initf_bootstage
+     #      u-boot-1     [000]    60.805607: function:             initf_bootstage
+-    lines = [line.replace(':', '').split() for line in out.splitlines()]
++    # OR:
++    #      u-boot-1     [000] .....    60.805596: function:             initf_malloc
++    #      u-boot-1     [000] .....    60.805597: function:             initf_malloc
++    #      u-boot-1     [000] .....    60.805601: function:             initf_bootstage
++    #      u-boot-1     [000] .....    60.805607: function:             initf_bootstage
++
++    lines = [re.sub(r'(:|\.\.\.\.\.)', '', line).split() for line in out.splitlines()]
+     vals = {items[4]: float(items[2]) for items in lines if len(items) == 5}
+     base = None
+     max_delta = 0
+@@ -176,6 +181,7 @@ def check_funcgraph(cons, fname, proftool, map_fname, trace_dat):
+     #  u-boot-1     [000]   282.101375: funcgraph_exit:         0.006 us   |      }
+     # Then check for this:
+     #  u-boot-1     [000]   282.101375: funcgraph_entry:        0.000 us   |    initcall_is_event();
++    # And this all may be '[000] .....    282.' instead.
+ 
+     expected_indent = None
+     found_start = False
+@@ -185,7 +191,7 @@ def check_funcgraph(cons, fname, proftool, map_fname, trace_dat):
+     # Look for initf_bootstage() entry and make sure we see the exit
+     # Collect the time for initf_dm()
+     for line in out.splitlines():
+-        m = RE_LINE.match(line)
++        m = RE_LINE.match(re.sub(r'\.\.\.\.\.', '', line))
+         if m:
+             timestamp, indent, func, brace = m.groups()
+             if found_end:
+@@ -209,7 +215,7 @@ def check_funcgraph(cons, fname, proftool, map_fname, trace_dat):
+     start_timestamp = None
+     end_timestamp = None
+     for line in out.splitlines():
+-        m = RE_LINE.match(line)
++        m = RE_LINE.match(re.sub(r'\.\.\.\.\.', '', line))
+         if m:
+             timestamp, indent, func, brace = m.groups()
+             if func == 'initf_dm() ':
+-- 
+2.34.1
+
