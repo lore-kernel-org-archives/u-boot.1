@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8086AC47422
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 10:18:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C123FC47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 10:27:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBB0C87B50;
-	Wed, 17 Jan 2024 11:18:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 20A58878A5;
+	Wed, 17 Jan 2024 11:27:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RojUnitM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k9VAtwth";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85C5687B44; Wed, 17 Jan 2024 11:18:25 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 1937887B3F; Wed, 17 Jan 2024 11:27:40 +0100 (CET)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD06B87B47
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 11:18:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 56DEE8753C
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 11:27:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=max.oss.09@gmail.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-40e88012233so7599345e9.0
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 02:18:10 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-50e766937ddso12215992e87.3
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 02:27:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705486690; x=1706091490; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QYfEATmOi+dh1RkpjsODkIfh8J2USs/3oMpWapDYgZc=;
- b=RojUnitMXmkp/paNTkCN/vP0tNkLK7rCJ91yBmbt1tbP+cNDz8CYIenh+ogftycRAF
- 17rQGN5UhdPeeFashB3MYIdfKnF8czvd2YkqOZoZcLb6Zz7PiRJCiPiZf4G7qHnOdwJi
- n8zz6CWmOq4Y8DaqYSjv8KSgeiKscsHrqpDPgbWt1q83DQRjaZ2pf0aaSbT5UZvG7Bb4
- dNAQbNdp1PQUVlrv4PtuJlg69PheEZ8L70oDdAI6YTpsVjkxDojNZzA0cJBlwBJBd+q4
- GRhNBs+WXqxnFSN8f1kXiSaIpaRNxhwMairGx+gQIWr/OlYB2KWFeWmnOhGGCQ29bmro
- 8xaw==
+ d=linaro.org; s=google; t=1705487256; x=1706092056; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=XWjrVgx1AlJ7ITscfCRPsx0dh2aR64PUEqGP01ZD6lQ=;
+ b=k9VAtwthrnN6AulDWEV/CnwGOfrw+8LJlLpdFfDBFMU7EY2S14NO5uYddqOrfgK8Du
+ kLOWPdG342EUnlCfgKZLstPZPH6V6FAkFndahwy2iZYJUs35Je0eFaU/gkoqM1D+b7PQ
+ bUmzoYPzZIoW1K4PtF4zm8UDrinnhVbvQGcfdNsZR/uy95fceH67E8h1lXFWvuGX1gWF
+ RAB+HgeMrpRcbjAtjEVeavcRjLeL6ATocjB6lSHu+lz4J3KrREOAXKeU7gqjM0ftvYmL
+ fyQfJjr2XAxtw9k4viFCkTpK7z6lWTtpXC4et49CauTEMlKzl7SACMmTwc4YFZ+4j69Q
+ 3m5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705486690; x=1706091490;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QYfEATmOi+dh1RkpjsODkIfh8J2USs/3oMpWapDYgZc=;
- b=Cy+SsBz91NsEbhPkIQnayXOXZiAXWj9ycaW3K5j9UvxSvdMVjYrMLMI8Vz/YC7k9Z/
- 2R8tpWirj508SWWRWjPVtuOhRJ3qya364l7YFoxRDKlWA+keKRMgdVikUNO6VoOWKvhR
- CxAdsnbELweSObo/lDBmuiEO0pf1dELhh5rHsxe9TMr5XA+okjaJz0ihgETruHijOA/n
- sursPbyI1PwjJTfR/FRFgFwuQUxcJlQOINTVLm28eErSbCjDrRbsuNBiCD50X/NmUcOt
- OdH4Xqcf8/wRu23pTTiSRQXdxPxUqiDF1LNY5rvOaccQHygjltdnQTEuj2q7CSBFb3WQ
- 2nqg==
-X-Gm-Message-State: AOJu0Yy44rgVluBQ4GGe6e3kldzAQKTIvprSawXRAo4NBdWxL0V1DIY/
- TLmr4R14moT1Ji3zlgDUNtE=
-X-Google-Smtp-Source: AGHT+IF6PA+n/vCmonBUwy5yyDWkf6dBqeLJHcGbfxd3TpWtXlv/FYlPar/8/8spHd/Pwhqwfs/RXA==
-X-Received: by 2002:a05:600c:a4c:b0:40e:4e14:45bc with SMTP id
- c12-20020a05600c0a4c00b0040e4e1445bcmr4790889wmq.13.1705486690402; 
- Wed, 17 Jan 2024 02:18:10 -0800 (PST)
-Received: from toolbox.int.toradex.com (31-10-206-125.static.upc.ch.
- [31.10.206.125]) by smtp.gmail.com with ESMTPSA id
- s14-20020a5d69ce000000b00337478efa4fsm1305849wrw.60.2024.01.17.02.18.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jan 2024 02:18:10 -0800 (PST)
-From: Max Krummenacher <max.oss.09@gmail.com>
-To: Max Krummenacher <max.krummenacher@toradex.com>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Andrew Davis <afd@ti.com>, Christian Gmeiner <christian.gmeiner@gmail.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Subject: [PATCH v1 2/4] arm: mach-k3: am62: move device identification
- accessor functions to header
-Date: Wed, 17 Jan 2024 11:16:47 +0100
-Message-ID: <20240117101743.3955852-3-max.oss.09@gmail.com>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20240117101743.3955852-1-max.oss.09@gmail.com>
-References: <20240117101743.3955852-1-max.oss.09@gmail.com>
+ d=1e100.net; s=20230601; t=1705487256; x=1706092056;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XWjrVgx1AlJ7ITscfCRPsx0dh2aR64PUEqGP01ZD6lQ=;
+ b=Yi3XA9PRqMgXGWD2OPRNMHd/fXxdJ28nPWOFKNdaTOIA/W7nef6YAvZM8u4UyoK/A8
+ FJJmGTXBC/EE+HWIpPKSNxixCoWxd77yXWmh16UMMdGDPp11ROfKtJdSlMUs1QGfCwZ3
+ qCby0z88PdCj+qIwCdAMLybXkPTCysVqpE9wpBtCSTpVPAtPPb+UG4lTU9IR2F3dTtOk
+ gPlbVSa5kxe0h3gChZYuqRVkMgwPUuO98tJO7EslOwRI3eV8hAdQd2SVFDoQTpCpuiJN
+ RYxOyy27OayZXnjRIaA4MIuf5lAVZWN46FMaDg6op52DPrwy9LvO7bPyHxBBlwSPegUE
+ DWxA==
+X-Gm-Message-State: AOJu0Yw6xBO7qCSMNEWHUK/Wx8Oy6ms7Yl2NgGcy8gaAEJGCidedmREr
+ 2xYEzDDM04Lo4nUXTXxH5bRneANydQF0ytCCV8SWq/fQqC+Tzg==
+X-Google-Smtp-Source: AGHT+IFisl426YPh+KvnLV8yComz5I5Qh+ir/AXkIkr6SrmApxKmnq/qapYMKk5qlCYZE0GEVFnatkgQLFVs/rZngko=
+X-Received: by 2002:a05:6512:114f:b0:50e:8dd7:82a9 with SMTP id
+ m15-20020a056512114f00b0050e8dd782a9mr5157831lfg.99.1705487256615; Wed, 17
+ Jan 2024 02:27:36 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240116171356.376801-1-raymond.mao@linaro.org>
+In-Reply-To: <20240116171356.376801-1-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 17 Jan 2024 12:27:00 +0200
+Message-ID: <CAC_iWjJ9DNuZwAf2FiL7+FCm02BFfyV6gAKFA_5nBmEncJWvpw@mail.gmail.com>
+Subject: Re: [PATCH v6 0/7] Handoff bloblist from previous boot stage
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Fabio Estevam <festevam@denx.de>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng@tinylab.org>, 
+ Manorit Chawdhry <m-chawdhry@ti.com>, Linus Walleij <linus.walleij@linaro.org>,
+ Andrew Davis <afd@ti.com>, Yang Xiwen <forbidden405@outlook.com>,
+ =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>, 
+ Peng Fan <peng.fan@nxp.com>, Kevin Chen <kevin_chen@aspeedtech.com>, 
+ Sean Anderson <seanga2@gmail.com>, Nikhil M Jain <n-jain1@ti.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Shiji Yang <yangshiji66@outlook.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,88 +95,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Max Krummenacher <max.krummenacher@toradex.com>
+Hi Raymond,
+The patches look sane, however there was a failure on the CI [0]. Can
+you have a look?
 
-mach-k3/am625_fdt.c does fdt fixup depending on fields in the device
-identification register. Move the accessors to the device identification
-register as inline functions into the am62_hardware.h header, so that
-they can be used for other functionality.
 
-Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
----
+[0] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/19347
+Thanks
+/Ilias
 
- arch/arm/mach-k3/am625_fdt.c                  | 23 -------------------
- arch/arm/mach-k3/include/mach/am62_hardware.h | 23 +++++++++++++++++++
- 2 files changed, 23 insertions(+), 23 deletions(-)
-
-diff --git a/arch/arm/mach-k3/am625_fdt.c b/arch/arm/mach-k3/am625_fdt.c
-index 37806907af1..970dd3447de 100644
---- a/arch/arm/mach-k3/am625_fdt.c
-+++ b/arch/arm/mach-k3/am625_fdt.c
-@@ -38,29 +38,6 @@ static void fdt_fixup_pru_node_am625(void *blob, int has_pru)
- 		fdt_del_node_path(blob, "/bus@f0000/pruss@30040000");
- }
- 
--static int k3_get_core_nr(void)
--{
--	u32 full_devid = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
--
--	return (full_devid & JTAG_DEV_CORE_NR_MASK) >> JTAG_DEV_CORE_NR_SHIFT;
--}
--
--static int k3_has_pru(void)
--{
--	u32 full_devid = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
--	u32 feature_mask = (full_devid & JTAG_DEV_FEATURES_MASK) >>
--			   JTAG_DEV_FEATURES_SHIFT;
--
--	return !(feature_mask & JTAG_DEV_FEATURE_NO_PRU);
--}
--
--static int k3_has_gpu(void)
--{
--	u32 full_devid = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
--
--	return (full_devid & JTAG_DEV_GPU_MASK) >> JTAG_DEV_GPU_SHIFT;
--}
--
- int ft_system_setup(void *blob, struct bd_info *bd)
- {
- 	fdt_fixup_cores_nodes_am625(blob, k3_get_core_nr());
-diff --git a/arch/arm/mach-k3/include/mach/am62_hardware.h b/arch/arm/mach-k3/include/mach/am62_hardware.h
-index acd2d109c2c..ea5bcf5d3de 100644
---- a/arch/arm/mach-k3/include/mach/am62_hardware.h
-+++ b/arch/arm/mach-k3/include/mach/am62_hardware.h
-@@ -79,6 +79,29 @@
- 
- #define TI_SRAM_SCRATCH_BOARD_EEPROM_START	0x43c30000
- 
-+static inline int k3_get_core_nr(void)
-+{
-+	u32 full_devid = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
-+
-+	return (full_devid & JTAG_DEV_CORE_NR_MASK) >> JTAG_DEV_CORE_NR_SHIFT;
-+}
-+
-+static inline int k3_has_pru(void)
-+{
-+	u32 full_devid = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
-+	u32 feature_mask = (full_devid & JTAG_DEV_FEATURES_MASK) >>
-+			   JTAG_DEV_FEATURES_SHIFT;
-+
-+	return !(feature_mask & JTAG_DEV_FEATURE_NO_PRU);
-+}
-+
-+static inline int k3_has_gpu(void)
-+{
-+	u32 full_devid = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
-+
-+	return (full_devid & JTAG_DEV_GPU_MASK) >> JTAG_DEV_GPU_SHIFT;
-+}
-+
- #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
- 
- static const u32 put_device_ids[] = {};
--- 
-2.42.0
-
+On Tue, 16 Jan 2024 at 19:14, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> This patch set adds/adapts a few bloblist APIs and implements Arm arch
+> custom function to retrieve the bloblist (aka. Transfer List) from
+> previous loader via boot arguments when BLOBLIST option is enabled and
+> all boot arguments are compliant to the register conventions defined
+> in the Firmware Handoff spec v0.9.
+>
+> If an arch wishes to have different behaviors for loading bloblist
+> from the previous boot stage, it is required to implement the custom
+> function xferlist_from_boot_arg().
+>
+> V5:
+> Drop [PATCH v4 8/9] fdt: update the document and Kconfig description.
+> V6:
+> Drop [PATCH v5 8/8] fdt: get FDT from bloblist.
+>
+> Raymond Mao (7):
+>   bloblist: add API to check the register conventions
+>   bloblist: check bloblist with specified buffer size
+>   bloblist: refactor of bloblist_reloc()
+>   arm: armv7: save boot arguments
+>   arm: armv8: save boot arguments
+>   arm: Get bloblist from boot arguments
+>   bloblist: Load the bloblist from the previous loader
+>
+>  arch/arm/Kconfig             |  1 -
+>  arch/arm/cpu/armv7/start.S   | 19 ++++++++
+>  arch/arm/cpu/armv8/start.S   | 14 ++++++
+>  arch/arm/lib/Makefile        |  2 +
+>  arch/arm/lib/xferlist.c      | 27 ++++++++++++
+>  arch/arm/lib/xferlist.h      | 19 ++++++++
+>  common/bloblist.c            | 85 +++++++++++++++++++++++++++---------
+>  common/board_f.c             |  9 ++--
+>  configs/qemu_arm64_defconfig |  3 ++
+>  include/bloblist.h           | 47 ++++++++++++++++----
+>  test/bloblist.c              |  8 ++--
+>  11 files changed, 193 insertions(+), 41 deletions(-)
+>  create mode 100644 arch/arm/lib/xferlist.c
+>  create mode 100644 arch/arm/lib/xferlist.h
+>
+> --
+> 2.25.1
+>
