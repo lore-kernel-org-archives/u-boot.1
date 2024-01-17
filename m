@@ -4,78 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A736C47258
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 17:19:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 677D5C47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 17:24:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1796E87BC0;
-	Wed, 17 Jan 2024 18:17:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D869D879F8;
+	Wed, 17 Jan 2024 18:24:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QJ3R5ifu";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3803879F4; Wed, 17 Jan 2024 18:17:35 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BECB387BA0; Wed, 17 Jan 2024 18:24:07 +0100 (CET)
+Received: from smtp-bc0f.mail.infomaniak.ch (smtp-bc0f.mail.infomaniak.ch
+ [IPv6:2001:1600:3:17::bc0f])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D2A987BC1
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 18:17:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B2C9B879ED
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 18:24:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a2eb5c4dad6so94170066b.1
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 09:17:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705511851; x=1706116651; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Yb+ttg64tTztrEbozQVb9yMpLf6tqGcEI47p0nRhVwA=;
- b=QJ3R5ifuOI1X/3Pt/H0P2o5XDRrBSYZIZzk2vRdapklJxy6CkTYOmeXQYfItaouN76
- T6Yh15wFq8XiNOsW9pwkQtH0aGtBHrSOjljyzEbUymY73orfM09AnPlnugIAIDLd23XT
- rvEZViY+vyRPO5QR8bL6SAnAZmU/fW/g0dm4evIb/OuHYgDHjTrWkazIo50BOLS3SW/C
- V8Y/GoW6w+YfoRH0Q5scMKB3iOPtDO6XgYbKwcNfZ/CrrHhlR7hjOVzovaEfw71Y0XSL
- CnkFFZhjk2OO0AE4MEIE0TaTiJcFmt/sPkqrZg5esdHNhXAMT9kE12ziRy8tNkrnX6WM
- 3Xsg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705511851; x=1706116651;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Yb+ttg64tTztrEbozQVb9yMpLf6tqGcEI47p0nRhVwA=;
- b=sdZuVp6V7sOUiCVHUY8K7Bw1bNT5FbdfHzcp/RvsPAnGrcVUyv+/m1yLJqolXJRTdS
- S0olDN97oGrTvUXkdLF5HATWlpFlxPL922Jsxapzh6+7gHlKKm/b0bbP+z1HFRePum7N
- pBB9w+pM9P388p+T2zplp9XkAZWEHWyLFCSlxt0/2pxWMiwJQKQjOFM4ga7IVvHTmxnM
- p/xGcmqB8tUwDnQxiy+ReVpj//kIZs1gtTFCYWoQut3UGUJ1dKw0E+xUua40TsekqmWT
- YkwEFVRqnMtJyQHfBLJ7068Rq9Q4vwdrmS8YFSaJQQ3RVCf3KzB/mlv/X+GT6q6YTxYm
- 6Djg==
-X-Gm-Message-State: AOJu0Yy7Qz2PTRrL0ql1+uA3EEzslG6jQ9Rf/UZS7ihwJL+OUc1O/8VA
- nZjCg0mD+obQWUUFprozhVc=
-X-Google-Smtp-Source: AGHT+IHOw1TM1+PFi6loRIyokohNUdccWH8hFVnW8rni2sfG9Hj580jA+EIMH8isypILrt9NICtIbw==
-X-Received: by 2002:a17:906:3852:b0:a27:5342:aca4 with SMTP id
- w18-20020a170906385200b00a275342aca4mr5094472ejc.3.1705511850879; 
- Wed, 17 Jan 2024 09:17:30 -0800 (PST)
-Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
- vs5-20020a170907a58500b00a2cbbebedc1sm6904976ejc.53.2024.01.17.09.17.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jan 2024 09:17:30 -0800 (PST)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Thierry Reding <treding@nvidia.com>, Anatolij Gustschin <agust@denx.de>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v4 13/13] video: tegra20: dsi: set correct fifo depth
-Date: Wed, 17 Jan 2024 19:16:58 +0200
-Message-Id: <20240117171658.22324-14-clamor95@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240117171658.22324-1-clamor95@gmail.com>
-References: <20240117171658.22324-1-clamor95@gmail.com>
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0001.mail.infomaniak.ch (unknown [10.7.10.108])
+ by smtp-2-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TFXmM1cw2zMqNGx;
+ Wed, 17 Jan 2024 17:24:03 +0000 (UTC)
+Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4TFXmL3wV6zl8c; Wed, 17 Jan 2024 18:24:02 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+To: heiko@sntech.de, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de,
+ jonas@kwiboo.se, Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Subject: [PATCH v3 2/6] rockchip: px30: simplify logic for getting SPL boot
+ medium DT node
+Date: Wed, 17 Jan 2024 18:22:56 +0100
+Message-ID: <20240117-rk3588-spl-boot-dev-v3-2-72cb989e6da8@theobroma-systems.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240117-rk3588-spl-boot-dev-v3-0-72cb989e6da8@theobroma-systems.com>
+References: <20240117-rk3588-spl-boot-dev-v3-0-72cb989e6da8@theobroma-systems.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
+X-Mailer: b4 0.12.4
 Content-Transfer-Encoding: 8bit
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,36 +62,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jonas Schwöbel <jonasschwoebel@yahoo.de>
+From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-According to Thierry Reding's commit in the linux kernel
+In preparation of moving spl_perform_fixups to spl-boot-order.c, let's
+simplify the logic around mapping the BOOT_DEVICE_x enum index to a DT
+node by using an instantiated array of chars instead of creating a new
+data structure on the fly.
 
-976cebc35bed0456a42bf96073a26f251d23b264
-"drm/tegra: dsi: Make FIFO depths host parameters"
+This will make it easier to only define the spl_boot_devices array in
+the appropriate SoC file in an upcoming commit.
 
-correct depth of the video FIFO is 1920 *words* no *bytes*
-
-Tested-by: Ion Agorria <ion@agorria.com> # HTC One X
-Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # Nvidia Tegratab T114
-Signed-off-by: Jonas Schwöbel <jonasschwoebel@yahoo.de>
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Quentin Schulz <foss+uboot@0leil.net>
+Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- drivers/video/tegra20/tegra-dsi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/mach-rockchip/px30/px30.c | 28 ++++++++++++++++------------
+ 1 file changed, 16 insertions(+), 12 deletions(-)
 
-diff --git a/drivers/video/tegra20/tegra-dsi.c b/drivers/video/tegra20/tegra-dsi.c
-index e60a1d2ac4..4bd1ca7280 100644
---- a/drivers/video/tegra20/tegra-dsi.c
-+++ b/drivers/video/tegra20/tegra-dsi.c
-@@ -859,7 +859,7 @@ static int tegra_dsi_bridge_probe(struct udevice *dev)
- 		return -EINVAL;
- 	}
+diff --git a/arch/arm/mach-rockchip/px30/px30.c b/arch/arm/mach-rockchip/px30/px30.c
+index 3bca25c609f..8937677d79e 100644
+--- a/arch/arm/mach-rockchip/px30/px30.c
++++ b/arch/arm/mach-rockchip/px30/px30.c
+@@ -445,22 +445,26 @@ void board_debug_uart_init(void)
+ #endif /* CONFIG_DEBUG_UART_BOARD_INIT */
  
--	priv->video_fifo_depth = 480;
-+	priv->video_fifo_depth = 1920;
- 	priv->host_fifo_depth = 64;
+ #if defined(CONFIG_SPL_BUILD) && !defined(CONFIG_TPL_BUILD)
++const char * const spl_boot_devices[BOOT_DEVICE_NONE + 1] = {
++	[BOOT_DEVICE_MMC2] = "/mmc@ff370000",
++	[BOOT_DEVICE_MMC1] = "/mmc@ff390000",
++};
++
+ const char *spl_decode_boot_device(u32 boot_device)
+ {
+-	int i;
+-	static const struct {
+-		u32 boot_device;
+-		const char *ofpath;
+-	} spl_boot_devices_tbl[] = {
+-		{ BOOT_DEVICE_MMC2, "/mmc@ff370000" },
+-		{ BOOT_DEVICE_MMC1, "/mmc@ff390000" },
+-	};
++	const char *spl_bootdevice_ofpath = NULL;
++
++	if (boot_device < ARRAY_SIZE(spl_boot_devices))
++		spl_bootdevice_ofpath = spl_boot_devices[boot_device];
  
- 	ret = reset_get_by_name(dev, "dsi", &reset_ctl);
+-	for (i = 0; i < ARRAY_SIZE(spl_boot_devices_tbl); ++i)
+-		if (spl_boot_devices_tbl[i].boot_device == boot_device)
+-			return spl_boot_devices_tbl[i].ofpath;
++	if (spl_bootdevice_ofpath)
++		debug("%s: spl_bootdevice_id %x maps to '%s'\n",
++		      __func__, boot_device, spl_bootdevice_ofpath);
++	else
++		debug("%s: failed to resolve spl_bootdevice_id %x\n",
++		      __func__, boot_device);
+ 
+-	return NULL;
++	return spl_bootdevice_ofpath;
+ }
+ 
+ void spl_perform_fixups(struct spl_image_info *spl_image)
+
 -- 
-2.40.1
+2.43.0
 
