@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAC40C47258
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 08:59:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C66CFC47422
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 08:59:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42A8A8799E;
-	Wed, 17 Jan 2024 09:59:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2639C879F2;
+	Wed, 17 Jan 2024 09:59:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ISnalHFS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HU/4VSwa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3FD1879E7; Wed, 17 Jan 2024 09:59:23 +0100 (CET)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 4C70687990; Wed, 17 Jan 2024 09:59:32 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C34F8799E
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 09:59:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 55C3687A0E
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 09:59:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-40e88012233so6930315e9.0
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 00:59:20 -0800 (PST)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-40e8801221cso5736015e9.1
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 00:59:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705481960; x=1706086760; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1705481970; x=1706086770; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=JSBzFv7T+cNCDSdIEnrUjihreUzL+VtOWox0Xl9IUrY=;
- b=ISnalHFSNDg1mxdudNBJE4EfrRgCPTbIKcY3pCnszYLePOgtz3dqb9lJU1qzEwtD98
- 2QF9gdInuOPUDEQ3erNQI2ZuCKCC1hWnJhDFuo7mY96rCwpzDd6It2qG7oGrVV4Bvs7w
- iGTgoydpKLcxvzeqyFJFPPX3Wjch21rcJ+ifLhquNmGf1rNUe1KqoCwQQ4YBzyDZ6mBS
- S3QmOtRbCwUgzhGjKLJORMpvZICUqy6TNWYxlmUiO0iFLnXeH49iYn3V210jDul5Kn8m
- 1IqKL5W9Xri26WXqpOPQjkqTWM0Lhu6iEW7WcA6C8y7D2DBIhVxMwLFlMYWFCm+8PJly
- lQNQ==
+ :reply-to; bh=g++HePyerak7/LIfwpX5BYabmfrG24Knlw4vLCO7xvM=;
+ b=HU/4VSwaTKusxh/hZUBfiI2PIT74vKzCteeV6dM+1b87aguXhXXGyaYdYA85LXWf3B
+ 9Zc3SfhKPYmRk2T2QK1wuKMD1FoO3qORZ+U8qqisJuWrLpDUkKSWZElzCs4VsoHlwQZu
+ xFJEagqm8XE1q6RAKdO9hCUdGUtWw4oIcVZCShWsawMHByShAbFZ2Di22/f0ZMlRP8GG
+ NCC0stRv4OQxH1pW+t/Wjor3uFsA7F6Z5oWZwjMHxuk+xL7XusMD9bEwpzqbMCJurdX2
+ doQbqsc4Cyw46z9NSNxiW+wjTKcEAxguPL+t0VRqL79PqalOOKPMFEgwJVtTmT4r3FGt
+ Ubzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705481960; x=1706086760;
+ d=1e100.net; s=20230601; t=1705481970; x=1706086770;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=JSBzFv7T+cNCDSdIEnrUjihreUzL+VtOWox0Xl9IUrY=;
- b=e1asY36sjuDXKuUB9rxEbAGVZyR2dUDqj6gnBzecZoPdRiTCQIQWRnUhjheQpOv41J
- pGMYbjzISrS55QfFaX10w0k6p+wCXekXmfmleRThhYtFx1ltWkzPXuTS252OxSyf3EYR
- No175kFhbx2l+Dj2En0wYYn+z3LCE2XvoM6RAFdPK46JqstJILVwgPurZ72AnkCWBmJG
- kB/UVIjsDewZ8AqAe9YPVP9IbjCHxpA2sfjpRhINT9ewEbV14lzcdDdyDQQFp/3UrAtL
- BrTJHN7Xg1h28ewDMq4j8GTcVsZoa+cD3rkdb+EuNLrsdmz90Ap9RR13AFh/b1XLE0uU
- PSGw==
-X-Gm-Message-State: AOJu0YzIzY8XDiZC5I5wuzyWXLYkKewNveQX8LcxUCUx8CNt0GuS/9f1
- zNNRgMvn9psiGNciG3vdg9sPvIxrjA/gfg==
-X-Google-Smtp-Source: AGHT+IEtffUES/6I94h1dTcE/uE+PA/vdm9cnA0Dv1OhU3gouwtnChptdFTGzZQoZiYByrYzEwo0bA==
-X-Received: by 2002:a05:600c:3799:b0:40e:6854:d4a1 with SMTP id
- o25-20020a05600c379900b0040e6854d4a1mr4258771wmr.133.1705481960096; 
- Wed, 17 Jan 2024 00:59:20 -0800 (PST)
+ bh=g++HePyerak7/LIfwpX5BYabmfrG24Knlw4vLCO7xvM=;
+ b=AMlU8X98LthO4XW9bcx8rNM/13lJpcNYNNhK2sc4qforBsoE1LmLpKppKy8mH6/sTu
+ Y9UOv2o9tpT7MNd0DJ6cZaL2QwXslr2QeHP6TU59iXI619JMDkl8DGZr+YHx2H8glPMx
+ 3Q+at0LtNBMX4K36N37Ea9Md1NFbVD3vlNr5USStKPCLw/laAUqqZ+kw4y6+HgWPf4VP
+ 4lFpixua0wz0OGBMDv9dSDU8HDNZ9xXH+zoCicbjXTkqACnbzqGx5iSNinKf4kbKbg14
+ 7RS2YoOiacXMKC7YvOGO94gBnGXr+RqZ5/y0Bi0cnNorJtAnRYRkmDOIjZpjyObiEPbI
+ W7Zg==
+X-Gm-Message-State: AOJu0Yw/MZRewt6QLi3ce7nQlhy4fBRn2vqo2edI0QpRUoo3SUGgr+fg
+ T64vnkd2+F2eQ/php58anL3SIEGllHyRWQ==
+X-Google-Smtp-Source: AGHT+IFtsU0PF/Tez5JpysL/vKTdGEqPysFdb6OdKK+nn3TB9hc5Xacxa66XqnZaaNogszr+OCeObQ==
+X-Received: by 2002:a7b:c457:0:b0:40e:6703:cfb1 with SMTP id
+ l23-20020a7bc457000000b0040e6703cfb1mr4954752wmi.15.1705481969858; 
+ Wed, 17 Jan 2024 00:59:29 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:982:cbb0:de9a:cd03:1fa1:d6f1?
  ([2a01:e0a:982:cbb0:de9a:cd03:1fa1:d6f1])
  by smtp.gmail.com with ESMTPSA id
- i19-20020a05600c355300b0040e76b60235sm10528547wmq.8.2024.01.17.00.59.18
+ i19-20020a05600c355300b0040e76b60235sm10528547wmq.8.2024.01.17.00.59.28
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 17 Jan 2024 00:59:19 -0800 (PST)
-Message-ID: <2fe89971-71de-4396-a34d-f4fcee8c93d6@linaro.org>
-Date: Wed, 17 Jan 2024 09:59:17 +0100
+ Wed, 17 Jan 2024 00:59:29 -0800 (PST)
+Message-ID: <940b34b4-f062-4b83-9c6b-f88ce9d174b0@linaro.org>
+Date: Wed, 17 Jan 2024 09:59:27 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v3 04/17] video: dw_hdmi: Add read_hpd hook
+Subject: Re: [PATCH v3 05/17] video: dw_hdmi: Add setup_hpd hook
 Content-Language: en-US, fr
 To: Jagan Teki <jagan@amarulasolutions.com>,
  Anatolij Gustschin <agust@denx.de>, Andre Przywara <andre.przywara@arm.com>,
@@ -81,7 +81,7 @@ To: Jagan Teki <jagan@amarulasolutions.com>,
 Cc: Da Xue <da.xue@libretech.co>, u-boot@lists.denx.de,
  Jagan Teki <jagan@edgeble.ai>
 References: <20240117075154.58747-1-jagan@amarulasolutions.com>
- <20240117075154.58747-5-jagan@amarulasolutions.com>
+ <20240117075154.58747-6-jagan@amarulasolutions.com>
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
  GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
@@ -107,7 +107,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro Developer Services
-In-Reply-To: <20240117075154.58747-5-jagan@amarulasolutions.com>
+In-Reply-To: <20240117075154.58747-6-jagan@amarulasolutions.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -130,7 +130,7 @@ X-Virus-Status: Clean
 On 17/01/2024 08:51, Jagan Teki wrote:
 > From: Jagan Teki <jagan@edgeble.ai>
 > 
-> Add support for DW HDMI Read HPD status.
+> Add support for DW HDMI Setup HPD status.
 > 
 > Signed-off-by: Jagan Teki <jagan@edgeble.ai>
 > ---
@@ -144,28 +144,26 @@ On 17/01/2024 08:51, Jagan Teki wrote:
 >   2 files changed, 4 insertions(+)
 > 
 > diff --git a/drivers/video/dw_hdmi.c b/drivers/video/dw_hdmi.c
-> index 3a3b9b7a21..989b7ab2db 100644
+> index 989b7ab2db..ab4811cfc7 100644
 > --- a/drivers/video/dw_hdmi.c
 > +++ b/drivers/video/dw_hdmi.c
-> @@ -946,6 +946,9 @@ int dw_hdmi_detect_hpd(struct dw_hdmi *hdmi)
->   		return -ENODEV;
->   	}
+> @@ -1061,4 +1061,7 @@ void dw_hdmi_init(struct dw_hdmi *hdmi)
 >   
-> +	if (hdmi->ops && hdmi->ops->read_hpd)
-> +		hdmi->ops->read_hpd(hdmi, true);
+>   	/* enable i2c client nack % arbitration error irq */
+>   	hdmi_write(hdmi, ~0x44, HDMI_I2CM_CTLINT);
 > +
->   	return 0;
+> +	if (hdmi->ops && hdmi->ops->setup_hpd)
+> +		hdmi->ops->setup_hpd(hdmi);
 >   }
->   
 > diff --git a/include/dw_hdmi.h b/include/dw_hdmi.h
-> index ba2ce5ea7f..a1f0e64507 100644
+> index a1f0e64507..f4d66edace 100644
 > --- a/include/dw_hdmi.h
 > +++ b/include/dw_hdmi.h
-> @@ -538,6 +538,7 @@ struct dw_hdmi;
->   
+> @@ -539,6 +539,7 @@ struct dw_hdmi;
 >   struct dw_hdmi_phy_ops {
 >   	int (*phy_set)(struct dw_hdmi *hdmi, uint mpixelclock);
-> +	void (*read_hpd)(struct dw_hdmi *hdmi, bool hdp_status);
+>   	void (*read_hpd)(struct dw_hdmi *hdmi, bool hdp_status);
+> +	void (*setup_hpd)(struct dw_hdmi *hdmi);
 >   };
 >   
 >   struct dw_hdmi {
