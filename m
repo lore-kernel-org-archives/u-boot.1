@@ -4,89 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93878C47077
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 00:40:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5D1EC47DBE
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 01:13:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C902F8753E;
-	Wed, 17 Jan 2024 01:40:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5C68A879A0;
+	Wed, 17 Jan 2024 02:13:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mP7z+57q";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KRhZrnb3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5488D87559; Wed, 17 Jan 2024 01:40:36 +0100 (CET)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id 7E85A879A0; Wed, 17 Jan 2024 02:13:32 +0100 (CET)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75F498753E
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 01:40:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7548187885
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 02:13:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1d48a8ed85bso25407125ad.0
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 16:40:33 -0800 (PST)
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-78329cb6742so517870285a.0
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 17:13:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705452032; x=1706056832; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6Nvdd2iRaHS3P64zC7pmDYRMjJAbM11guYkeIIkOPdU=;
- b=mP7z+57qIYeglF1FCgpz9NqBHb2/BRknf2Q1eO9z9JoabgG4xn284yKMR4rPvX61rK
- uVWoELSxPalsUrlFZR7cfLNje7FtSAFDPW5d8xabwcS6eleAsIS5QyLZG5FyYpr02ZIU
- 7RysjdcyDgaeGax2o5BYBQFW0n4Ymk6hXzhIBnZUeGjYlJZ1p5t2+v2YlLbTglVxBAgL
- pONtLLb5K5pDy7hLi2UzdJ+t4VGhKhh3/nE0sn8fljQg4I871Hlny/tzjSVWCBJj7bn8
- GxliAOuFSujmYU9qOtjeZ2Z9EvxeNbnroj3AY4E2/UB1PLGDJzshghIUoZGVavcRmLvI
- iT3A==
+ d=gmail.com; s=20230601; t=1705454007; x=1706058807; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=MwR2e0GZu1flqgDyTHfAwZCCWD4k4+OElx8qGOIz2/s=;
+ b=KRhZrnb3S2CCBmB/OOkgIzjrgAuDrPT6HvoQFXB8b8ZSbeymtDlZHNOEs6vZ35UVyn
+ xgvureF2vrmjSZbdYmwMnRwwriSKBjnKNhuVIlgBawmmCeLjAG9GpPYJOiphs9bh2wBd
+ /HqSDUUhnRL/1KoXWi76XaCWJ1G0hkU+bS7Qsc4j3+MVnQ1hVausxPz1+5Zv970IwnuQ
+ 1NvnG595v8pxvTE7M1Ubl2UBFXrZDzty07L6/mASS5tas06YoWoRjUDjT5h0oYk5gvAP
+ 8YUfYRmYsV4eLmZggdhqoADnff26ZTz5lnkuXehs/XQCe9f5EZ9O8TC2C9yLSn5kc4T9
+ f/+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705452032; x=1706056832;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date
+ d=1e100.net; s=20230601; t=1705454007; x=1706058807;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6Nvdd2iRaHS3P64zC7pmDYRMjJAbM11guYkeIIkOPdU=;
- b=woDP4cVTZFX8dXiRJr3qC/PMWqEwoayBVYpA2X+MeF/Jqzf/b7LQdlPj/0AcaXtRIU
- bTqCoTxQGjOjLNFptAnxyJR29Y0Yj7zSrwMF9zwzRtt7z0y7VFY/pA2zSNDR1ZgSQbQX
- 67FUwrALvGll7xt6jsDmINrEY8a9Pjs4ujI4OHy3wZ1FeTBd1s3iCZgNRrOea0qqFzlh
- k3NJZmPhgBmAskuosKocfRkyVB5hfS70xnGoXX6HMdw2oIuKXbVBkZ8LiKw3BIFcMJR+
- sg+llk+p+SqfndTnmhFeQFQQMauJI9XzUnL5YMR7k7DITyTyP5ZmT6kNp8cw+YMGACox
- vm9A==
-X-Gm-Message-State: AOJu0YwIgRK6Vg/DtUNq1pSHDr81yfSadWMGetZlBIZifYT72OttWLUy
- 2XxXHgUblhbt/Vq5zR0anixj7shCmk1OzA==
-X-Google-Smtp-Source: AGHT+IGZwxqD1BYXtBqUVts4OEeGGdYArqeSPiusrja0btRLxBx6HtxcmVM5i4hSZe/x9ecZaW7cUA==
-X-Received: by 2002:a17:902:d50e:b0:1d4:e2bc:891c with SMTP id
- b14-20020a170902d50e00b001d4e2bc891cmr15600889plg.5.1705452031518; 
- Tue, 16 Jan 2024 16:40:31 -0800 (PST)
-Received: from octopus ([2400:4050:c3e1:100:e481:26af:1a49:433a])
- by smtp.gmail.com with ESMTPSA id
- lo13-20020a170903434d00b001d3a371cd24sm9939714plb.53.2024.01.16.16.40.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jan 2024 16:40:31 -0800 (PST)
-Date: Wed, 17 Jan 2024 09:40:28 +0900
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
- ilias.apalodimas@linaro.org
-Subject: Re: [PATCH v4 2/4] efi_loader: rename BOOTEFI_BOOTMGR to EFI_BOOTMGR
-Message-ID: <Zach/J8WDx23Yz2K@octopus>
-Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org
-References: <20240110011637.174710-1-takahiro.akashi@linaro.org>
- <20240110011637.174710-3-takahiro.akashi@linaro.org>
- <1c42a17d-1043-4449-93c2-9020c1ded71d@gmx.de>
- <ZaSDUrTQ2Z5N+gil@octopus>
- <d70d5134-1cc9-4d56-9aa3-499ed992584c@gmx.de>
- <ZaUFH3r9MdW+tHTv@octopus>
- <379beb70-c147-470d-ac45-ecc8c93a5f52@gmx.de>
- <ZaXfNy2V8y0N1o08@octopus>
- <ddc1e7d2-c70d-4a7d-884a-6a18db3ea1c5@gmx.de>
+ bh=MwR2e0GZu1flqgDyTHfAwZCCWD4k4+OElx8qGOIz2/s=;
+ b=jU/sOB46IxwlMrK5u7vl++2gL+THx7qV3MGmYZ3HLNPnT3lpqXb83K4AtLA0x0brE7
+ GvCwT3ZzjmIRouwmSlkPbsTM8IDWPMBp2UVw9yuzriL/OuJWUm8LF3Q0pIapfdU5bSLU
+ +P8XxPJQD1ycc6yyuSJvHZsZB7o/LGHOPBNWWhSCUFYCHuFam0IYeQiFQZ6XVJQ7ei6A
+ fKrNa4K2k5/gFYPfnbP2RTYiJwdn74P5o1hpOX6Wgbo9uUoYAbNRY+c/164g9LAGnohp
+ siEP8bsCjBVh4NCGiNxDz3AKXCUg45nY5rbw09BS1SuCDqrWQ/9kOFLzNWTa4izV6epc
+ j6dw==
+X-Gm-Message-State: AOJu0YwMQFscu0HjymbZGsJIzkTlF9HJgRubcuWWumK+K/CZkaEDplo4
+ oXnA9bks8o5pQredm4kK/Jc=
+X-Google-Smtp-Source: AGHT+IG7JHQgEBY92G72OCGR9OB8xF5GrbIjuoaP5mnOVaMIiuMnxxb9p9KQXRAT0hwkSD5FFl1KhQ==
+X-Received: by 2002:a05:620a:372a:b0:783:17fe:103a with SMTP id
+ de42-20020a05620a372a00b0078317fe103amr8887615qkb.19.1705454006478; 
+ Tue, 16 Jan 2024 17:13:26 -0800 (PST)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ w2-20020a05620a0e8200b00783534c512bsm2658586qkm.32.2024.01.16.17.13.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 16 Jan 2024 17:13:26 -0800 (PST)
+Message-ID: <e3e76e8a-74e8-baa9-3605-6a3b3c5290e6@gmail.com>
+Date: Tue, 16 Jan 2024 20:13:24 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ddc1e7d2-c70d-4a7d-884a-6a18db3ea1c5@gmx.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH v2 1/2] part: Add a function to find ESP partition
+Content-Language: en-US
+To: Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng@tinylab.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tobias Waldekranz <tobias@waldekranz.com>, Johan Jonker <jbx6244@gmail.com>,
+ Joshua Watt <jpewhacker@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+References: <20240116123643.563412-1-mchitale@ventanamicro.com>
+ <20240116123643.563412-2-mchitale@ventanamicro.com>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <20240116123643.563412-2-mchitale@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,89 +101,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jan 16, 2024 at 07:44:22PM +0100, Heinrich Schuchardt wrote:
-> On 1/16/24 02:43, AKASHI Takahiro wrote:
-> > On Mon, Jan 15, 2024 at 03:16:22PM +0100, Heinrich Schuchardt wrote:
-> > > On 15.01.24 11:12, AKASHI Takahiro wrote:
-> > > > On Mon, Jan 15, 2024 at 09:34:51AM +0100, Heinrich Schuchardt wrote:
-> > > > > On 1/15/24 01:58, AKASHI Takahiro wrote:
-> > > > > > On Sun, Jan 14, 2024 at 01:46:45PM +0100, Heinrich Schuchardt wrote:
-> > > > > > > On 1/10/24 02:16, AKASHI Takahiro wrote:
-> > > > > > > > At this point, EFI boot manager interfaces is fully independent from
-> > > > > > > > bootefi command. So just rename the configuration parameter.
-> > > > > > > > 
-> > > > > > > > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> > > > > > > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > > > > > > 
-> > > > > > > This patch breaks the 'bootefi hello' command in
-> > > > > > > qemu-riscv64_smode_defconfig and other QEMU defconfigs.
-> > > > > > 
-> > > > > > What happened? Please elaborate details so that I can trace your issue.
-> > > > > > 
-> > > > > > On my side, I didn't see any problem with "bootefi hello" on qemu-arm64
-> > > > > > and moreover CI check (github pull request) didn't complain anything.
-> > > > > 
-> > > > > The failures are logged in
-> > > > > https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/19302
-> > > > 
-> > > > In the logs for qemu-arm64, qemu-risc64 and maybe others as well,
-> > > > I see the same error:
-> > > > --- ---
-> > > > ______________________________ test_efi_grub_net _______________________________
-> > > > test/py/tests/test_efi_loader.py:188: in test_efi_grub_net
-> > > >       addr = fetch_tftp_file(u_boot_console, 'env__efi_loader_grub_file')
-> > > > test/py/tests/test_efi_loader.py:136: in fetch_tftp_file
-> > > >       assert expected_text in output
-> > > > E   assert 'Bytes transferred = 520192' in "*** ERROR: `serverip' not set"
-> > > > --- ---
-> > > > 
-> > > > This seems to be the root cause and my commit will have nothing to do
-> > > > with the problem.
-> > > > Please check the test environment.
-> > > 
-> > > You are looking at test_efi_grub_net. I referred to 'bootefi hello',
-> > > i.e. test_efi_helloworld_builtin:
-> > > 
-> > > 
-> > > ----------------------------- Captured stdout call
-> > > -----------------------------
-> > > => bootefi hello
-> > > 
-> > > =>
-> > > 
-> > > 
-> > > The command does not provide any output.
-> > 
-> > Ah, yeah, but
-> > 
-> > > > 
-> > > > -Takahiro Akashi
-> > > > 
-> > > > > I have pushed the tag failed_20240114 to
-> > > > > https://source.denx.de/u-boot/custodians/u-boot-efi.git for analysis.
-> > 
-> > While I compiled this code and tried to run "bootefi hello",
-> > I could not reproduce this issue, always seeing the right output
-> > either on qemu-arm64 or sandbox64.
-> > (I also invoked test_efi_loader/efi_helloworld_builtin locally,
-> > but the test passed.)
-> > So no clue.
+On 1/16/24 07:36, Mayuresh Chitale wrote:
+> If a disk has an EFI system partition (ESP) then it can be used to
+> locate the boot files. Add a function to find the ESP.
 > 
-> Please, rebase your patch set upon origin/master and retry the tests.
-
-After rebasing my commits to the latest master (please note that my v4 has
-already been rebased on the master at my submission time), I tried the test
-again but anyhow the test passed as before on my side.
-I'm not able to reproduce your issue.
-
-The only conflicting commit was f19171c919e0 ("efi_loader: Clean up
-efi_dp_append and efi_dp_concat"). I don't think that it would make
-any difference.
-
--Takahiro Akashi
-
-
-> Best regards
+> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+> Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>   disk/part.c    | 16 ++++++++++++++++
+>   include/part.h | 11 +++++++++++
+>   2 files changed, 27 insertions(+)
 > 
-> Heinrich
-> 
+> diff --git a/disk/part.c b/disk/part.c
+> index 36b88205eca..6b1fbc18637 100644
+> --- a/disk/part.c
+> +++ b/disk/part.c
+> @@ -848,3 +848,19 @@ int part_get_bootable(struct blk_desc *desc)
+>   
+>   	return 0;
+>   }
+> +
+> +int part_get_esp(struct blk_desc *desc)
+> +{
+> +	struct disk_partition info;
+> +	int p;
+> +
+> +	for (p = 1; p <= MAX_SEARCH_PARTITIONS; p++) {
+> +		int ret;
+> +
+> +		ret = part_get_info(desc, p, &info);
+> +		if (!ret && (info.bootable & PART_EFI_SYSTEM_PARTITION))
+> +			return p;
+> +	}
+> +
+> +	return 0;
+> +}
+> diff --git a/include/part.h b/include/part.h
+> index db34bc6bb7d..30e049c8f19 100644
+> --- a/include/part.h
+> +++ b/include/part.h
+> @@ -690,6 +690,14 @@ int part_get_type_by_name(const char *name);
+>    */
+>   int part_get_bootable(struct blk_desc *desc);
+>   
+> +/**
+> + * part_get_esp() - Find the EFI system partition
+> + *
+> + * @desc: Block-device descriptor
+> + * @Return the EFI system partition, or 0 if there is none
+> + */
+> +int part_get_esp(struct blk_desc *desc);
+> +
+>   #else
+>   static inline int part_driver_get_count(void)
+>   { return 0; }
+> @@ -700,6 +708,9 @@ static inline struct part_driver *part_driver_get_first(void)
+>   static inline bool part_get_bootable(struct blk_desc *desc)
+>   { return false; }
+>   
+> +static inline bool part_get_esp(struct blk_desc *desc)
+
+Please use the same signature as above.
+
+> +{ return false; }
+
+The statement here should be on its own line.
+
+--Sean
+
+> +
+>   #endif /* CONFIG_PARTITIONS */
+>   
+>   #endif /* _PART_H */
+
