@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D78BC47DA7
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 09:47:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 750D6C47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 09:47:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C665287B3D;
-	Wed, 17 Jan 2024 10:46:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 501CF87B1C;
+	Wed, 17 Jan 2024 10:46:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RiHWw7QC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JDxO+1ru";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B444287B30; Wed, 17 Jan 2024 10:46:53 +0100 (CET)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
+ id 0992D87B1C; Wed, 17 Jan 2024 10:46:57 +0100 (CET)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 166ED87B3D
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 10:46:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 469D187B48
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 10:46:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-59502aa878aso4948120eaf.1
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 01:46:50 -0800 (PST)
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-5986d902ae6so4389416eaf.3
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 01:46:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705484807; x=1706089607; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1705484811; x=1706089611; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/ho+PLVyTZdaqLEvAtRVLK3xm2WuFnKSJpTJE1JOfHA=;
- b=RiHWw7QC68GUvwyuQmie5/F2P2sTi9f0Q3kmeNpQHf6Wis+nUNeNpA33qRVC4NbNXG
- 8ZfHaNkxc7ts3A1sbLvCWJt6ymHhxHU9qd/3yqQxFkRQPWBHV8TwD8BmW/Jo6K6s2BPv
- qv9o7LXaCFa9CaSVQX9DUru4C75Q2b+OfY5dkkTHTNceyOwyxJwrRBBYPTCB+VmDs6OS
- PeayBfX7T8t/bEpZv3ItFE1JUr+bFpOjljJ24jZ76N5BPXaWnZJWfhodOz/fFBVNTf8d
- briV98GbFjuRHbDooXyNjRPM7XWsRmb1moOCTCppL9DnOAEyHvcysdn1Teu5iQDu+5e+
- kD8Q==
+ bh=TBpcYrQWRI2JAJfzQUSkVa9gBNfch/09fTVSYRF+OE8=;
+ b=JDxO+1ruqqDi9CP2HuQlsQ9XRSPV1AxPgArFLQ3zhrgJ63KDCkzJIbUdq9O3j6/Lzv
+ 6mnuWCJSV2KM0K16e+CloNAH1PaV//QS/zyu3WKcW9LQy35MTinRiBEzV5kf0zhQ6He/
+ m2KzixbOfzpH46UPL/gILYIj+1BWfbNcbN/BSVHcPWRPEFccieRd2QkoLB3kYEfGmCAz
+ bFDvUHeDOgd7ar1w/zJ6+A4nO8EH0+4SRkhFJ0GOcfam/2NFcLVBdt/vqLDwcu/uDrnC
+ AhKvLhrX+qNOdP163ZAGkArhdkds9vT+/6SwatvIPrywbQuvD5LzF7KbFKduV9YpoVnY
+ wlQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705484807; x=1706089607;
+ d=1e100.net; s=20230601; t=1705484811; x=1706089611;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/ho+PLVyTZdaqLEvAtRVLK3xm2WuFnKSJpTJE1JOfHA=;
- b=QZjhnoCUOoc0jwsO6mo/CXytMLxfbevWUf2JT/2KAsexoKS+Dm4iIuNrFguHb4uZED
- aiQ3zLNB2qJx9AtxpeO8L9un1rs9hrJmpBBGmZ1yF51zZCod+ZsOoVa3XVAOf+16GP+f
- ZAnjk15j+Ix+44yaOsPJ5PhmG4XXTMdg3C71YDyrKCBSTTYesM1iI1vUReqpZXF+bLVz
- vaC+Q6ORqQUyKCVTAuzhoSNjrS/6ABbKrtFzkk80A5PXTzYx/ovamF7SiIY4JSfp6sTH
- owjYvAv51mqWuNwIIZ4PJpM+EbCZeU8C5aWYoB+u1GX5MBo2nhZUyvqHTS0u89RFDZfO
- nHlA==
-X-Gm-Message-State: AOJu0YyXgO4DhA4ZLvZaz4ISoi9KZmXsGGaHQE6gEnH7Iq8XlBejKAZB
- 4KLfPxly5X1pDa+pb2xacNnOEfFnDcAsvygvTZQMW5dQkEE=
-X-Google-Smtp-Source: AGHT+IFwt1PJnsQDgLClEJs28MjC99UZp6TaftGhFL/sDg5xcp/LEQ1iyD45o+EmsdyUAvw2jzOzdg==
-X-Received: by 2002:a05:6358:6f0e:b0:175:5bd4:f418 with SMTP id
- r14-20020a0563586f0e00b001755bd4f418mr7093707rwn.65.1705484807289; 
- Wed, 17 Jan 2024 01:46:47 -0800 (PST)
+ bh=TBpcYrQWRI2JAJfzQUSkVa9gBNfch/09fTVSYRF+OE8=;
+ b=qWXAIRSWfcSCage3HniCI4ywO2vOgzif72SNp2+4nHp+hqFtWKR6NT9erob3qBUzvu
+ GircXpNq/7/AcHIyx/tVtS6gyhdL66RMg1C6hNZCDC0G2mFwjcXNkJHjA3myJJU1s8i2
+ ANKxGmgpzNl8jtHZIUb4+MDT/yALStBOYR0MJBwi+Za5fNg0gX5M0TkqoLhRDZr0KlFH
+ JhHKOZtj4z60iR7j1e72C4yDqlfVdsjZHAkHua1WbraFwacamoilGfj8i8Uv99D/cW3d
+ wfHNeJHtAYZXGQE6NYq2+a/kwwJ3+EEBnA3E1MnThENa0xec8EcyhdpnU5UBEzZBL2Dd
+ PS5A==
+X-Gm-Message-State: AOJu0Yz4UGWCeCoVDORt51ueJK7+RhO9cHgPG6fKYVFmvdo0PZ0DJKDD
+ eX/zw0gzlsRjpQFF1eat2/B/pqs/XPUjnGSaHF9MKGic3r8=
+X-Google-Smtp-Source: AGHT+IGZxcj1M7CSf++hpzdBt9ojXSz4VVObCQoN6lV3pV4E6HrYRAUVbPcy7inQVMZKkhHGxhTeXg==
+X-Received: by 2002:a05:6359:2d05:b0:174:edd3:b3e9 with SMTP id
+ rl5-20020a0563592d0500b00174edd3b3e9mr6330247rwb.38.1705484811510; 
+ Wed, 17 Jan 2024 01:46:51 -0800 (PST)
 Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- t19-20020a056a00139300b006d9abaf83ebsm993880pfg.164.2024.01.17.01.46.46
+ h13-20020aa79f4d000000b006d92f081d9fsm1004698pfr.31.2024.01.17.01.46.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jan 2024 01:46:46 -0800 (PST)
+ Wed, 17 Jan 2024 01:46:50 -0800 (PST)
 From: Masahisa Kojima <masahisa.kojima@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -70,10 +70,10 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>,
  AKASHI Takahiro <takahiro.akashi@linaro.org>,
  Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [PATCH v2 2/3] efi_loader: create common function to free struct
- efi_disk_obj
-Date: Wed, 17 Jan 2024 18:44:31 +0900
-Message-Id: <20240117094432.1049168-3-masahisa.kojima@linaro.org>
+Subject: [PATCH v2 3/3] efi_loader: return immediately in UCLASS_EFI_LOADER
+ removal
+Date: Wed, 17 Jan 2024 18:44:32 +0900
+Message-Id: <20240117094432.1049168-4-masahisa.kojima@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240117094432.1049168-1-masahisa.kojima@linaro.org>
 References: <20240117094432.1049168-1-masahisa.kojima@linaro.org>
@@ -95,80 +95,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Current error handling of creating raw disk/partition has
-following issues.
- - duplicate free for EFI handle, EFI handle is already freed
-   in efi_delete_handle()
- - missing free for struct efi_device_path and
-   struct efi_simple_file_system_protocol in some error paths
-
-To address those issues, this commit creates the common function
-to free the struct efi_disk_obj resources and calls it in case
-of error.
+In case of UCLASS_EFI_LOADER, EFI handles are managed by
+EFI application/driver, we must not delete EFI handles.
 
 Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
 ---
- lib/efi_loader/efi_disk.c | 26 +++++++++++++++++++-------
- 1 file changed, 19 insertions(+), 7 deletions(-)
+ lib/efi_loader/efi_disk.c | 16 ++++++++++------
+ 1 file changed, 10 insertions(+), 6 deletions(-)
 
 diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-index ce46c1092a..4897a7a7a8 100644
+index 4897a7a7a8..cdf8a4560e 100644
 --- a/lib/efi_loader/efi_disk.c
 +++ b/lib/efi_loader/efi_disk.c
-@@ -371,6 +371,20 @@ static int efi_fs_exists(struct blk_desc *desc, int part)
- 	return 1;
- }
- 
-+static void efi_disk_free_diskobj(struct efi_disk_obj *diskobj)
-+{
-+	struct efi_device_path *dp = diskobj->dp;
-+	struct efi_simple_file_system_protocol *volume = diskobj->volume;
+@@ -734,8 +734,14 @@ int efi_disk_remove(void *ctx, struct event *event)
+ 	switch (id) {
+ 	case UCLASS_BLK:
+ 		desc = dev_get_uclass_plat(dev);
+-		if (desc && desc->uclass_id != UCLASS_EFI_LOADER)
+-			diskobj = (struct efi_disk_obj *)handle;
++		if (desc && desc->uclass_id == UCLASS_EFI_LOADER)
++			/*
++			 * EFI application/driver manages the EFI handle,
++			 * no need to delete EFI handle.
++			 */
++			return 0;
 +
-+	/*
-+	 * ignore error of efi_delete_handle() since this function
-+	 * is expected to be called in error path.
-+	 */
-+	efi_delete_handle(&diskobj->header);
-+	efi_free_pool(dp);
-+	free(volume);
-+}
-+
- /**
-  * efi_disk_add_dev() - create a handle for a partition or disk
-  *
-@@ -528,9 +542,7 @@ static efi_status_t efi_disk_add_dev(
++		diskobj = (struct efi_disk_obj *)handle;
+ 		break;
+ 	case UCLASS_PARTITION:
+ 		diskobj = (struct efi_disk_obj *)handle;
+@@ -747,10 +753,8 @@ int efi_disk_remove(void *ctx, struct event *event)
+ 		return 0;
  	}
- 	return EFI_SUCCESS;
- error:
--	efi_delete_handle(&diskobj->header);
--	free(diskobj->volume);
--	free(diskobj);
-+	efi_disk_free_diskobj(diskobj);
- 	return ret;
- }
  
-@@ -569,8 +581,7 @@ static int efi_disk_create_raw(struct udevice *dev, efi_handle_t agent_handle)
- 		return ret;
- 	}
- 	if (efi_link_dev(&disk->header, dev)) {
--		efi_free_pool(disk->dp);
--		efi_delete_handle(&disk->header);
-+		efi_disk_free_diskobj(disk);
+-	if (diskobj) {
+-		dp = diskobj->dp;
+-		volume = diskobj->volume;
+-	}
++	dp = diskobj->dp;
++	volume = diskobj->volume;
  
- 		return -EINVAL;
- 	}
-@@ -624,8 +635,9 @@ static int efi_disk_create_part(struct udevice *dev, efi_handle_t agent_handle)
- 		return -1;
- 	}
- 	if (efi_link_dev(&disk->header, dev)) {
--		efi_free_pool(disk->dp);
--		efi_delete_handle(&disk->header);
-+		efi_disk_free_diskobj(disk);
-+
-+		/* TODO: closing the parent EFI_BLOCK_IO_PROTOCOL is missing. */
- 
- 		return -1;
- 	}
+ 	ret = efi_delete_handle(handle);
+ 	/* Do not delete DM device if there are still EFI drivers attached. */
 -- 
 2.34.1
 
