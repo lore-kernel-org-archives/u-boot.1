@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3B3DC47DA7
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 07:54:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE7CEC47422
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 07:54:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C97E3878A5;
-	Wed, 17 Jan 2024 08:52:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 47F8E87950;
+	Wed, 17 Jan 2024 08:53:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="hyFeJF2k";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="o4RL1qOn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03D388795B; Wed, 17 Jan 2024 08:52:55 +0100 (CET)
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
- [IPv6:2607:f8b0:4864:20::531])
+ id F258487A77; Wed, 17 Jan 2024 08:52:58 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A86E387A59
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 08:52:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D29728795B
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 08:52:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-5ce2aada130so5650841a12.1
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 23:52:52 -0800 (PST)
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1d5f388407bso7360825ad.0
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 23:52:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1705477971; x=1706082771;
+ d=amarulasolutions.com; s=google; t=1705477975; x=1706082775;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vjiMp5TfDTDN49+UQbMKIM4bQWeeH8LlyW/eIySrjN0=;
- b=hyFeJF2kSPHsASBDREA2aQlPrkFgOyLqNTn3eFIMbhxSsgkCdjprJ+B+1y/prijVQ9
- vjNEewe9im08ZGmQyUfiqsxW62mN4G0It1HbHLqakd3apGVGQemHwQASAnAgylVYaDZc
- Bco/Ue0DxH+gkhGZhZFt1QAvMotj2iO7frlo0=
+ bh=WSxIA3gvV9QOlGby6Rh9zf0Jqfao5XpbOuNEEnLKMEo=;
+ b=o4RL1qOnbv5umDjJjSfS9wVhu7OOzGHLvnTku+xXUjs+KlWkbMNg47SRGy8pesdBbL
+ gLNVHw7bXF1GG5aLOz8mMW8F6XngGQpwool9sirHEP0DVMhUTB7baFF4XBZqiZ9pTojO
+ Ow2xFGdTJz5/Z220BzyBRWHsmy+w/vj+LasiI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705477971; x=1706082771;
+ d=1e100.net; s=20230601; t=1705477975; x=1706082775;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vjiMp5TfDTDN49+UQbMKIM4bQWeeH8LlyW/eIySrjN0=;
- b=BeM2l2Y7FXPvQysGEas9wvcGceAQgJA43eyYWl/qYy3oE8URotQgEoL17k8fUEyI/6
- 7C8C+FINt4JZaUYtQYw09BbuLS/HfftHLGGQBVgiLkETywxts2LW4Jc7wGIUseex//6f
- BZvxdh+uOWlvZ1t027awmS4Y4WTgFWHXr59sqCGK0RH3ZFYLDWJ1mmWhIPBb24WSsVNk
- qXian4JCBF+dWrIoRfKf7Rw4/GQWmBG1USIRpgXGRPfSqbN3kLWDECgj/Id7jYcLVOW3
- 4zX8IBFcsmVniTnzL2m4Mfw9jdy0aunVJL3zcFradEDxUPJTnaW7hX4hPVzWAT9ffvXD
- uagQ==
-X-Gm-Message-State: AOJu0Yz3YfRlaw3PLwmkT1eZqKc+VmRiWPoz4q7WfoHSK97wUQ9j14z5
- P0l7/iJqNdozfTe7ET/6QbqWXJc4RZT1ag==
-X-Google-Smtp-Source: AGHT+IFGtoI691J5zITNIuULDtboYQqM+bm3xk4Xo65Z3xTkTbZ0mxu5KYaIdPqGvUViJ08Aee27Fw==
-X-Received: by 2002:a05:6a21:1f02:b0:19a:13cc:bdc3 with SMTP id
- ry2-20020a056a211f0200b0019a13ccbdc3mr3750072pzb.50.1705477971105; 
- Tue, 16 Jan 2024 23:52:51 -0800 (PST)
+ bh=WSxIA3gvV9QOlGby6Rh9zf0Jqfao5XpbOuNEEnLKMEo=;
+ b=Iv7MyYupjJ9QQHMz8w5oisXhxh4lDgIJOM+/nUKyO7olEVw1L8UmlbUcRNAhX1LM4E
+ wqoRKA6vfxXp041JhbZHfqkUbv66k0VdvbYu9D7O+h7xCqVnvWFlI57rpTGIx+VoBbRc
+ sH718eCbmNYLjwMQjkAdCa+Bp9HMnZ7S5utG6AFUilvjaf4v9FHCT7Eyi8cShPdhFBh5
+ TeN2Yn1m2Ahwi9hfoZJfgxRUJmZVqt3pmTWO+aHcG1e+/EwryWwZPmqXcHcRW9l4luU1
+ 5yaDEzHAZml147qQVNc8l/VJ0D4O2hQc/XpqvDuXRMLJdzyeqgxEXY6DOcNH+ZYpYH6z
+ jDrw==
+X-Gm-Message-State: AOJu0Yy0hAiF71VVmeJN2ouxlVv+g5j+oEflvMQ2bRlXEb5id8Wsym/Q
+ J1LXP02vmkat1QkECfyMB8o2BlYs3H+3lyh9TppOjHkTyynZVQ==
+X-Google-Smtp-Source: AGHT+IHsUAwIBiCf2MxnSWsvvVCZSV8Q7mJNBgzrFABpRI/yKxHncISO0sZbU49QUeBtbBuLs+79MA==
+X-Received: by 2002:a17:902:f547:b0:1d4:e308:d6ff with SMTP id
+ h7-20020a170902f54700b001d4e308d6ffmr6199665plf.113.1705477975345; 
+ Tue, 16 Jan 2024 23:52:55 -0800 (PST)
 Received: from localhost.localdomain ([183.82.41.50])
  by smtp.gmail.com with ESMTPSA id
- e10-20020a170902784a00b001d5081be740sm10718624pln.62.2024.01.16.23.52.47
+ e10-20020a170902784a00b001d5081be740sm10718624pln.62.2024.01.16.23.52.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jan 2024 23:52:50 -0800 (PST)
+ Tue, 16 Jan 2024 23:52:55 -0800 (PST)
 From: Jagan Teki <jagan@amarulasolutions.com>
 To: Anatolij Gustschin <agust@denx.de>,
  Neil Armstrong <neil.armstrong@linaro.org>,
@@ -71,9 +71,9 @@ To: Anatolij Gustschin <agust@denx.de>,
  Robin Murphy <robin.murphy@arm.com>
 Cc: Da Xue <da.xue@libretech.co>, u-boot@lists.denx.de,
  Jagan Teki <jagan@edgeble.ai>
-Subject: [PATCH v3 09/17] clk: rockchip: rk3328: Add VOP clk support
-Date: Wed, 17 Jan 2024 13:21:46 +0530
-Message-Id: <20240117075154.58747-10-jagan@amarulasolutions.com>
+Subject: [PATCH v3 10/17] clk: rk3328: Add get hdmiphy clock
+Date: Wed, 17 Jan 2024 13:21:47 +0530
+Message-Id: <20240117075154.58747-11-jagan@amarulasolutions.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240117075154.58747-1-jagan@amarulasolutions.com>
 References: <20240117075154.58747-1-jagan@amarulasolutions.com>
@@ -97,183 +97,58 @@ X-Virus-Status: Clean
 
 From: Jagan Teki <jagan@edgeble.ai>
 
-VOP get and set clock would needed for VOP drivers.
-
-Add support for it.
+Add support to get the hdmiphy clock for RK3328 PCLK_HDMIPHY.
 
 Signed-off-by: Jagan Teki <jagan@edgeble.ai>
 ---
-Changes for v3:
+Changes for v3, v2:
 - none
-Changes for v2:
-- Add DCLK get rate
 
- .../include/asm/arch-rockchip/cru_rk3328.h    | 34 +++++++
- drivers/clk/rockchip/clk_rk3328.c             | 88 ++++++++++++++++++-
- 2 files changed, 120 insertions(+), 2 deletions(-)
+ drivers/clk/rockchip/clk_rk3328.c | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3328.h b/arch/arm/include/asm/arch-rockchip/cru_rk3328.h
-index 226744d67d..4ad1d33e05 100644
---- a/arch/arm/include/asm/arch-rockchip/cru_rk3328.h
-+++ b/arch/arm/include/asm/arch-rockchip/cru_rk3328.h
-@@ -62,6 +62,40 @@ check_member(rk3328_cru, sdmmc_ext_con[1], 0x39c);
- enum apll_frequencies {
- 	APLL_816_MHZ,
- 	APLL_600_MHZ,
-+
-+	/* CRU_CLK_SEL37_CON */
-+	ACLK_VIO_PLL_SEL_CPLL		= 0,
-+	ACLK_VIO_PLL_SEL_GPLL		= 1,
-+	ACLK_VIO_PLL_SEL_HDMIPHY	= 2,
-+	ACLK_VIO_PLL_SEL_USB480M	= 3,
-+	ACLK_VIO_PLL_SEL_SHIFT		= 6,
-+	ACLK_VIO_PLL_SEL_MASK		= 3 << ACLK_VIO_PLL_SEL_SHIFT,
-+	ACLK_VIO_DIV_CON_SHIFT		= 0,
-+	ACLK_VIO_DIV_CON_MASK		= 0x1f << ACLK_VIO_DIV_CON_SHIFT,
-+	HCLK_VIO_DIV_CON_SHIFT		= 8,
-+	HCLK_VIO_DIV_CON_MASK		= 0x1f << HCLK_VIO_DIV_CON_SHIFT,
-+
-+	/* CRU_CLK_SEL39_CON */
-+	ACLK_VOP_PLL_SEL_CPLL		= 0,
-+	ACLK_VOP_PLL_SEL_GPLL		= 1,
-+	ACLK_VOP_PLL_SEL_HDMIPHY	= 2,
-+	ACLK_VOP_PLL_SEL_USB480M	= 3,
-+	ACLK_VOP_PLL_SEL_SHIFT		= 6,
-+	ACLK_VOP_PLL_SEL_MASK		= 3 << ACLK_VOP_PLL_SEL_SHIFT,
-+	ACLK_VOP_DIV_CON_SHIFT		= 0,
-+	ACLK_VOP_DIV_CON_MASK		= 0x1f << ACLK_VOP_DIV_CON_SHIFT,
-+
-+	/* CRU_CLK_SEL40_CON */
-+	DCLK_LCDC_PLL_SEL_GPLL		= 0,
-+	DCLK_LCDC_PLL_SEL_CPLL		= 1,
-+	DCLK_LCDC_PLL_SEL_SHIFT		= 0,
-+	DCLK_LCDC_PLL_SEL_MASK		= 1 << DCLK_LCDC_PLL_SEL_SHIFT,
-+	DCLK_LCDC_SEL_HDMIPHY		= 0,
-+	DCLK_LCDC_SEL_PLL		= 1,
-+	DCLK_LCDC_SEL_SHIFT		= 1,
-+	DCLK_LCDC_SEL_MASK		= 1 << DCLK_LCDC_SEL_SHIFT,
-+	DCLK_LCDC_DIV_CON_SHIFT		= 8,
-+	DCLK_LCDC_DIV_CON_MASK		= 0xFf << DCLK_LCDC_DIV_CON_SHIFT,
- };
- 
- void rk3328_configure_cpu(struct rk3328_cru *cru,
 diff --git a/drivers/clk/rockchip/clk_rk3328.c b/drivers/clk/rockchip/clk_rk3328.c
-index ef97381f0e..ee7edb9d10 100644
+index ee7edb9d10..5bb9238abb 100644
 --- a/drivers/clk/rockchip/clk_rk3328.c
 +++ b/drivers/clk/rockchip/clk_rk3328.c
-@@ -581,6 +581,86 @@ static ulong rk3328_spi_set_clk(struct rk3328_cru *cru, uint hz)
- 	return rk3328_spi_get_clk(cru);
- }
+@@ -179,6 +179,10 @@ enum {
+ 	CLK_I2C3_DIV_CON_SHIFT		= 8,
+ 	CLK_I2C2_PLL_SEL_SHIFT		= 7,
+ 	CLK_I2C2_DIV_CON_SHIFT		= 0,
++
++	/* CLKSEL_CON40 */
++	CLK_HDMIPHY_DIV_CON_SHIFT	= 3,
++	CLK_HDMIPHY_DIV_CON_MASK	= 0x7 << CLK_HDMIPHY_DIV_CON_SHIFT,
+ };
  
-+#ifndef CONFIG_SPL_BUILD
-+static ulong rk3328_vop_get_clk(struct rk3328_clk_priv *priv, ulong clk_id)
+ #define VCO_MAX_KHZ	(3200 * (MHz / KHz))
+@@ -661,6 +665,16 @@ static ulong rk3328_vop_set_clk(struct rk3328_clk_priv *priv,
+ }
+ #endif
+ 
++static ulong rk3328_hdmiphy_get_clk(struct rk3328_cru *cru)
 +{
-+	struct rk3328_cru *cru = priv->cru;
-+	u32 div, con, parent;
++	u32 div, con;
 +
-+	switch (clk_id) {
-+	case ACLK_VOP_PRE:
-+		con = readl(&cru->clksel_con[39]);
-+		div = (con & ACLK_VOP_DIV_CON_MASK) >> ACLK_VOP_DIV_CON_SHIFT;
-+		parent = GPLL_HZ;
-+		break;
-+	case ACLK_VIO_PRE:
-+		con = readl(&cru->clksel_con[37]);
-+		div = (con & ACLK_VIO_DIV_CON_MASK) >> ACLK_VIO_DIV_CON_SHIFT;
-+		parent = GPLL_HZ;
-+		break;
-+	case DCLK_LCDC:
-+		con = readl(&cru->clksel_con[40]);
-+		div = (con & DCLK_LCDC_DIV_CON_MASK) >> DCLK_LCDC_DIV_CON_SHIFT;
-+		parent = GPLL_HZ;
-+		break;
-+	default:
-+		printf("%s: Unsupported vop get clk#%ld\n", __func__, clk_id);
-+		return -ENOENT;
-+	}
++	con = readl(&cru->clksel_con[40]);
++	div = (con & CLK_HDMIPHY_DIV_CON_MASK) >> CLK_HDMIPHY_DIV_CON_SHIFT;
 +
-+	return DIV_TO_RATE(parent, div);
++	return DIV_TO_RATE(GPLL_HZ, div);
 +}
-+
-+static ulong rk3328_vop_set_clk(struct rk3328_clk_priv *priv,
-+				ulong clk_id, uint hz)
-+{
-+	struct rk3328_cru *cru = priv->cru;
-+	int src_clk_div;
-+	u32 con, parent;
-+
-+	src_clk_div = DIV_ROUND_UP(GPLL_HZ, hz);
-+	assert(src_clk_div - 1 < 31);
-+
-+	switch (clk_id) {
-+	case ACLK_VOP_PRE:
-+		rk_clrsetreg(&cru->clksel_con[39],
-+			     ACLK_VOP_PLL_SEL_MASK | ACLK_VOP_DIV_CON_MASK,
-+			     ACLK_VOP_PLL_SEL_CPLL << ACLK_VOP_PLL_SEL_SHIFT |
-+			     (src_clk_div - 1) << ACLK_VOP_DIV_CON_SHIFT);
-+		break;
-+	case ACLK_VIO_PRE:
-+		rk_clrsetreg(&cru->clksel_con[37],
-+			     ACLK_VIO_PLL_SEL_MASK | ACLK_VIO_DIV_CON_MASK,
-+			     ACLK_VIO_PLL_SEL_CPLL << ACLK_VIO_PLL_SEL_SHIFT |
-+			     (src_clk_div - 1) << ACLK_VIO_DIV_CON_SHIFT);
-+		break;
-+	case DCLK_LCDC:
-+		con = readl(&cru->clksel_con[40]);
-+		con = (con & DCLK_LCDC_SEL_MASK) >> DCLK_LCDC_SEL_SHIFT;
-+		if (con) {
-+			parent = readl(&cru->clksel_con[40]);
-+			parent = (parent & DCLK_LCDC_PLL_SEL_MASK) >>
-+				 DCLK_LCDC_PLL_SEL_SHIFT;
-+			if (parent)
-+				src_clk_div = DIV_ROUND_UP(GPLL_HZ, hz);
-+			else
-+				src_clk_div = DIV_ROUND_UP(GPLL_HZ, hz);
-+
-+			rk_clrsetreg(&cru->clksel_con[40],
-+				     DCLK_LCDC_DIV_CON_MASK,
-+				     (src_clk_div - 1) <<
-+				     DCLK_LCDC_DIV_CON_SHIFT);
-+		}
-+		break;
-+	default:
-+		printf("%s: Unable to set vop clk#%ld\n", __func__, clk_id);
-+		return -EINVAL;
-+	}
-+
-+	return rk3328_vop_get_clk(priv, clk_id);
-+}
-+#endif
 +
  static ulong rk3328_clk_get_rate(struct clk *clk)
  {
  	struct rk3328_clk_priv *priv = dev_get_priv(clk->dev);
-@@ -649,7 +729,13 @@ static ulong rk3328_clk_set_rate(struct clk *clk, ulong rate)
+@@ -690,6 +704,9 @@ static ulong rk3328_clk_get_rate(struct clk *clk)
  	case SCLK_SPI:
- 		ret = rk3328_spi_set_clk(priv->cru, rate);
+ 		rate = rk3328_spi_get_clk(priv->cru);
  		break;
-+#ifndef CONFIG_SPL_BUILD
- 	case DCLK_LCDC:
-+	case ACLK_VOP_PRE:
-+	case ACLK_VIO_PRE:
-+		rate = rk3328_vop_set_clk(priv, clk->id, rate);
++	case PCLK_HDMIPHY:
++		rate = rk3328_hdmiphy_get_clk(priv->cru);
 +		break;
-+#endif
- 	case SCLK_PDM:
- 	case SCLK_RTC32K:
- 	case SCLK_UART0:
-@@ -664,11 +750,9 @@ static ulong rk3328_clk_set_rate(struct clk *clk, ulong rate)
- 	case ACLK_PERI_PRE:
- 	case HCLK_PERI:
- 	case PCLK_PERI:
--	case ACLK_VIO_PRE:
- 	case HCLK_VIO_PRE:
- 	case ACLK_RGA_PRE:
- 	case SCLK_RGA:
--	case ACLK_VOP_PRE:
- 	case ACLK_RKVDEC_PRE:
- 	case ACLK_RKVENC:
- 	case ACLK_VPU_PRE:
+ 	default:
+ 		return -ENOENT;
+ 	}
 -- 
 2.25.1
 
