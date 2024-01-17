@@ -4,112 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40847C47422
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 08:59:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BBCAC47422
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 09:18:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A40687A08;
-	Wed, 17 Jan 2024 09:59:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4096387823;
+	Wed, 17 Jan 2024 10:18:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LuE0ij0j";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="AoVmXKVB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6028C87990; Wed, 17 Jan 2024 09:59:43 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 51A0A878EE; Wed, 17 Jan 2024 10:18:21 +0100 (CET)
+Received: from mail-m127109.qiye.163.com (mail-m127109.qiye.163.com
+ [115.236.127.109])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C56587A09
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 09:59:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0203C86F6F
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 10:18:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-40e88bb6d2bso2571225e9.1
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 00:59:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705481980; x=1706086780; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=01Rnji9Et6EwmuoF7Jr+OUWA+eO+vFFAEO4w3EEvKAU=;
- b=LuE0ij0jWTBuMtKj93cctgdPNTdUmxNvRyVS/thHICI2OcMFc9jUmdgmMpLA2W9L6e
- aTnW/3if7PWYA3w7xxM0WSlmQUN7Do9NKUorueUS9j4ctt542pLojPtMGILnjG5NO+C0
- rzeX4BcVRQ481AZBNV9NnW7nnm7yfRtXH9qglsI+4Kq8tv2NYrUlZjE+SyBa6SE/eiUO
- AymqgMe8KQwuDr603fgQOWYbGymxohsftC0JU9kifVPDxc+57gMbxNztX9XpU2OJcoqZ
- iDTVF8mmP4ZKG6q310AU5p/jVHEBn1/1G93nERsIGe8H8aC2phjTrU8SXcKwosq6NPxe
- x1PQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705481980; x=1706086780;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=01Rnji9Et6EwmuoF7Jr+OUWA+eO+vFFAEO4w3EEvKAU=;
- b=ZURHCgVKXb0eKYYfUJZl1J2pFU0wmzGkoajGkT1+eH6bjKa2TeAN73KcbjrBIGcoKB
- B89TVfekcnjYm67ssct1advbyql/0mtKRtZSD7Fuq0L5552RSDl5FqBrPvjOiksrmbsV
- JBF6a0sKxAKQJN54v9EEKUErgWLEWXYCiiJDwVciUwU8y6qjy2cZ+c1saxYbPbi4PbTk
- 6Or2mr8x1rTPeEqHu9q49d0l2YWN7k1c05aOyds2QXzRN6XhkWCg3wbpJZIfdnQg8cBY
- lTNfn5yBxH+JveyAH02zi4h7evi+9DOINqX9uuXd7zR1VV7PgAjRmNVZzOcblkefngx7
- L4hQ==
-X-Gm-Message-State: AOJu0Yy1rabdVLNRdvBxW6jJzPZGaLh7wHy670LGoEBVTHr8rys6wLew
- O529kvINgw6N3v6kkAA1z6V+DCEcyV+eXQ==
-X-Google-Smtp-Source: AGHT+IEfIRl4nbersiToVTouiz8NosJcvoCWFMJkBf4uNR5ek7dgUJJ6Hwx8/HZz0Cc9PgQSa4tysg==
-X-Received: by 2002:a7b:c349:0:b0:40e:50e7:db49 with SMTP id
- l9-20020a7bc349000000b0040e50e7db49mr277138wmj.102.1705481980536; 
- Wed, 17 Jan 2024 00:59:40 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:982:cbb0:de9a:cd03:1fa1:d6f1?
- ([2a01:e0a:982:cbb0:de9a:cd03:1fa1:d6f1])
- by smtp.gmail.com with ESMTPSA id
- i19-20020a05600c355300b0040e76b60235sm10528547wmq.8.2024.01.17.00.59.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 17 Jan 2024 00:59:40 -0800 (PST)
-Message-ID: <37bea1a0-1d0d-4b20-b78a-a4eb2985b07e@linaro.org>
-Date: Wed, 17 Jan 2024 09:59:38 +0100
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=AoVmXKVBPVXNWqLT8OiRQutVJaEubEwW6z2y84GGb9RJsSyGfFTDMsb1nYSr09Q8OhE6aw5AZshQxrH1fw2atDFmxZX5zNgT4fjcJvKv7VpmPxsVjVu3pUcQKo8S8xhZWCF4ZOiw1mkck0QuvBLbIOpUm6RzFoVFnEdgUKpB9Zk=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
+ bh=5TFnn6ZiT3t5hUiQnpCJKuJD86NUAXJNhiDYbWjU+eY=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.93] (unknown [58.22.7.114])
+ by mail-m11880.qiye.163.com (Hmail) with ESMTPA id 5534F208C7;
+ Wed, 17 Jan 2024 17:17:45 +0800 (CST)
+Message-ID: <df499977-c373-4a95-abe7-3ec596d66050@rock-chips.com>
+Date: Wed, 17 Jan 2024 17:17:45 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v3 03/17] video: dw_hdmi: Extend the HPD detection
-Content-Language: en-US, fr
-To: Jagan Teki <jagan@amarulasolutions.com>,
- Anatolij Gustschin <agust@denx.de>, Andre Przywara <andre.przywara@arm.com>,
- Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Heiko Stuebner <heiko@sntech.de>, Andy Yan <andyshrk@163.com>,
- Robin Murphy <robin.murphy@arm.com>
-Cc: Da Xue <da.xue@libretech.co>, u-boot@lists.denx.de,
- Jagan Teki <jagan@edgeble.ai>
-References: <20240117075154.58747-1-jagan@amarulasolutions.com>
- <20240117075154.58747-4-jagan@amarulasolutions.com>
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro Developer Services
-In-Reply-To: <20240117075154.58747-4-jagan@amarulasolutions.com>
+Subject: Re: [PATCH v3] arch: arm: Kconfig: Enable BOOTSTD_FULL for Rockchip
+ SoCs
+Content-Language: en-US
+To: Shantur Rathore <i@shantur.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
+References: <20231119172310.1307942-1-i@shantur.com>
+ <CABEcMwW14BFrA1ZYWTh7iQTsnrXA7LdBPcREKf_QeO71op+Wdw@mail.gmail.com>
+ <20231209191853.GA2513409@bill-the-cat>
+ <CABEcMwU4C75Xsq9AYdugyPqjPYbrTf3C01gnE+sTM0WDyoMkQg@mail.gmail.com>
+ <20231209204507.GH2513409@bill-the-cat>
+ <5430e6c4-5d0d-4ddf-bc95-e3fbd2b046cd@rock-chips.com>
+ <CABEcMwWfLJ_vHDBLNdFRe4U=+e2fWswF0FD0JAaDF49TtyDp1A@mail.gmail.com>
+ <CABEcMwWt2yMXoRZG_s45G+AMDsuEVvNkdVo-8VA5pxN4wXWvCA@mail.gmail.com>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <CABEcMwWt2yMXoRZG_s45G+AMDsuEVvNkdVo-8VA5pxN4wXWvCA@mail.gmail.com>
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ00aSFZPHUIeTR1LTkJPQ0tVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8d16b6587f2eb6kusn5534f208c7
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PTo6Nzo4MzwZHBMCCjUYNys3
+ LjMKChBVSlVKTEtOT0NIS01OQklLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKS01KQzcG
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,107 +78,92 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 17/01/2024 08:51, Jagan Teki wrote:
-> From: Jagan Teki <jagan@edgeble.ai>
-> 
-> HPD detection on some DW HDMIdesigned SoC's would need to read and
-> setup the HPD status explicitly.
-> 
-> So, extend the HPD detection code by adding the dw_hdmi_detect_hpd
-> function and move the default detection code caller there.
-> 
-> The new read and setup hdp will integrate the same function in
-> later patches.
-> 
-> Signed-off-by: Jagan Teki <jagan@edgeble.ai>
-> ---
-> Changes for v3, v2:
-> - none
-> 
->   drivers/video/dw_hdmi.c             | 13 +++++++++++++
->   drivers/video/rockchip/rk_hdmi.c    |  8 +++-----
->   drivers/video/sunxi/sunxi_dw_hdmi.c |  8 +++-----
->   include/dw_hdmi.h                   |  1 +
->   4 files changed, 20 insertions(+), 10 deletions(-)
-> 
-> diff --git a/drivers/video/dw_hdmi.c b/drivers/video/dw_hdmi.c
-> index 4914ba6146..3a3b9b7a21 100644
-> --- a/drivers/video/dw_hdmi.c
-> +++ b/drivers/video/dw_hdmi.c
-> @@ -936,6 +936,19 @@ int dw_hdmi_phy_wait_for_hpd(struct dw_hdmi *hdmi)
->   	return -1;
->   }
->   
-> +int dw_hdmi_detect_hpd(struct dw_hdmi *hdmi)
-> +{
-> +	int ret;
-> +
-> +	ret = dw_hdmi_phy_wait_for_hpd(hdmi);
-> +	if (ret < 0) {
-> +		debug("hdmi can not get hpd signal\n");
-> +		return -ENODEV;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
->   void dw_hdmi_phy_init(struct dw_hdmi *hdmi)
->   {
->   	/* enable phy i2cm done irq */
-> diff --git a/drivers/video/rockchip/rk_hdmi.c b/drivers/video/rockchip/rk_hdmi.c
-> index d5b5a529d2..16f6303513 100644
-> --- a/drivers/video/rockchip/rk_hdmi.c
-> +++ b/drivers/video/rockchip/rk_hdmi.c
-> @@ -114,11 +114,9 @@ int rk_hdmi_probe(struct udevice *dev)
->   	dw_hdmi_init(hdmi);
->   	dw_hdmi_phy_init(hdmi);
->   
-> -	ret = dw_hdmi_phy_wait_for_hpd(hdmi);
-> -	if (ret < 0) {
-> -		debug("hdmi can not get hpd signal\n");
-> -		return -1;
-> -	}
-> +	ret = dw_hdmi_detect_hpd(hdmi);
-> +	if (ret < 0)
-> +		return ret;
->   
->   	return 0;
->   }
-> diff --git a/drivers/video/sunxi/sunxi_dw_hdmi.c b/drivers/video/sunxi/sunxi_dw_hdmi.c
-> index 986e69d66b..a5e8d39e98 100644
-> --- a/drivers/video/sunxi/sunxi_dw_hdmi.c
-> +++ b/drivers/video/sunxi/sunxi_dw_hdmi.c
-> @@ -358,11 +358,9 @@ static int sunxi_dw_hdmi_probe(struct udevice *dev)
->   
->   	sunxi_dw_hdmi_phy_init(&priv->hdmi);
->   
-> -	ret = dw_hdmi_phy_wait_for_hpd(&priv->hdmi);
-> -	if (ret < 0) {
-> -		debug("hdmi can not get hpd signal\n");
-> -		return -1;
-> -	}
-> +	ret = dw_hdmi_detect_hpd(&priv->hdmi);
-> +	if (ret < 0)
-> +		return ret;
->   
->   	dw_hdmi_init(&priv->hdmi);
->   
-> diff --git a/include/dw_hdmi.h b/include/dw_hdmi.h
-> index 17bdd2dbf9..ba2ce5ea7f 100644
-> --- a/include/dw_hdmi.h
-> +++ b/include/dw_hdmi.h
-> @@ -562,5 +562,6 @@ void dw_hdmi_phy_init(struct dw_hdmi *hdmi);
->   int dw_hdmi_enable(struct dw_hdmi *hdmi, const struct display_timing *edid);
->   int dw_hdmi_read_edid(struct dw_hdmi *hdmi, u8 *buf, int buf_size);
->   void dw_hdmi_init(struct dw_hdmi *hdmi);
-> +int dw_hdmi_detect_hpd(struct dw_hdmi *hdmi);
->   
->   #endif
+Hi Shantur,
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+On 2024/1/17 14:26, Shantur Rathore wrote:
+> Hi Kever,
+>
+> On Wed, Jan 10, 2024 at 11:58 AM Shantur Rathore<i@shantur.com>  wrote:
+>> Hi Kever,
+>>
+>> On Tue, Jan 9, 2024 at 10:55 AM Kever Yang<kever.yang@rock-chips.com>  wrote:
+>>> Hi Shantur, Tom,
+>>>
+>>> On 2023/12/10 04:45, Tom Rini wrote:
+>>>> On Sat, Dec 09, 2023 at 07:49:04PM +0000, Shantur Rathore wrote:
+>>>>> On Sat, Dec 9, 2023 at 7:18 PM Tom Rini<trini@konsulko.com>  wrote:
+>>>>>> On Fri, Dec 08, 2023 at 10:52:02AM +0000, Shantur Rathore wrote:
+>>>>>>
+>>>>>>> Hi Tom / Kever
+>>>>>>>
+>>>>>>> On Sun, Nov 19, 2023 at 5:24 PM Shantur Rathore<i@shantur.com>  wrote:
+>>>>>>>> Rockchip SoCs can support wide range of bootflows.
+>>>>>>>> Without full bootflow commands, it can be difficult to
+>>>>>>>> figure out issues if any, hence enable by default.
+>>>>>>>>
+>>>>>>>> Reviewed-by: Simon Glass<sjg@chromium.org>
+>>>>>>>>
+>>>>>>>> Signed-off-by: Shantur Rathore<i@shantur.com>
+>>>>>>>> ---
+>>>>>>>>
+>>>>>>>> (no changes since v1)
+>>>>>>>>
+>>>>>>>>    arch/arm/Kconfig | 1 +
+>>>>>>>>    1 file changed, 1 insertion(+)
+>>>>>>>>
+>>>>>>>> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+>>>>>>>> index d812685c98..fca6ef6d7e 100644
+>>>>>>>> --- a/arch/arm/Kconfig
+>>>>>>>> +++ b/arch/arm/Kconfig
+>>>>>>>> @@ -1986,6 +1986,7 @@ config ARCH_ROCKCHIP
+>>>>>>>>           imply CMD_DM
+>>>>>>>>           imply DEBUG_UART_BOARD_INIT
+>>>>>>>>           imply BOOTSTD_DEFAULTS
+>>>>>>>> +       imply BOOTSTD_FULL if BOOTSTD_DEFAULTS
+>>>>>>>>           imply FAT_WRITE
+>>>>>>>>           imply SARADC_ROCKCHIP
+>>>>>>>>           imply SPL_SYSRESET
+>>>>>>> Can this please be merged in ?
+>>>>>> I wonder if we shouldn't really globally default to BOOTSTD_FULL if
+>>>>>> BOOTSTD_DEFAULTS for everyone.
+>>>>>>
+>>>>> Its matter of ~21KB in size, unless any platform is really to its
+>>>>> limits it should be alright.
+>>>> Maybe I need to re-check things too, since I wonder how much of that
+>>>> growth is re-enabling things that were removed when dropping the DISTRO
+>>>> stuff, and so for platforms just migrating over now it would be smaller
+>>>> in size if much.
+>>> A board maintainer is free to enable this option, but I don't agree to
+>>> enable this for everyone.
+>>>
+>>> Not like rk3399 and rk3588, some of other SoCs always want a clean and
+>>> simple but usable U-Boot,
+>>>
+>>> eg. rk3036 and rk3308 are still in the list.
+>>>
+>> The discussion is what we consider "usable U-Boot"
+>> By default bootstd doesn't have any options and not even to show what
+>> it's going to boot.
+>>
+>> Would it be acceptable if BOOTSTD_FULL is enabled for SoCs rather than boards?
+>>
+> Can you please suggest the way forward?
+> Initially the patch was for RockPro64 and then after discussion it was
+> suggested that as BOOTSTD_DEFAULT is very very limited
+> we should enable BOOTSTD_FULL for SoCs that can support multiple boot modes.
+
+Let's enable it for RK3588 first and then maybe other SoCs which not 
+code size sensitive.
+
+Thanks,
+
+- Kever
+
+>
+> Kind regards,
+> Shantur
