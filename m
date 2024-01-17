@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A76E2C47422
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 17:17:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43594C47422
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 17:18:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 662B587B57;
+	by phobos.denx.de (Postfix) with ESMTP id D76A087BB7;
 	Wed, 17 Jan 2024 18:17:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Zc4mkcok";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CzAGHlaT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5526087B8E; Wed, 17 Jan 2024 18:17:27 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 334AB87BA7; Wed, 17 Jan 2024 18:17:28 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EA6C87B78
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 18:17:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 28218879F3
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 18:17:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a2c67be31edso758358266b.0
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 09:17:24 -0800 (PST)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-55969c01168so4964158a12.1
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 09:17:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20230601; t=1705511844; x=1706116644; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nDTqfj6BUHfdXbX8rflZPcCjLAbZWnt/2hyfSV4fubk=;
- b=Zc4mkcokWqjixxCX6Lz2HDY1T1oV5AEvHrk45NDS4osQLlr8jJTCfpr1oFW9+wy7La
- P6szr7CyWla4/tFfdlkUZbZk9cuSYMeZ2nQfitBGlVSOhj2ph5rOVAkCL2Hw/VvD1+8b
- k2VNI+pdE/bTy8l4mD8tCm5r/yXwk32CWHNd8cmvCgwJKf86ME/jdZSiCyQ3XvIotTuW
- FhOXGoxw47HGcs/VX+5DExH6wyBvDokVGkDgUwRHUmg+e1Jovgb212dc1D7vI8rfmA+e
- r4PSAVdriiovC/WmkdlNvqN2UQaK33fMHQrxfOeKST5RzcR8YeylBRRmPuol8rMZ+HMZ
- VfkQ==
+ bh=96znt4d6nDmc3curz0bN/+E4yyTus03y/d1LkCQeNXM=;
+ b=CzAGHlaTVa2dJb/rioWnGqLQ8IxT6CPvmyqN+GZHomTtDm8wekZV1h5iQcXk00RoJX
+ ebl6jGm25qToh+a0VJkbXni2pbq7HgKrKLowy3nQqrZZqSDc2KoST49A3vKV/JL57pi7
+ vQxr7Ej42t/3yUvWJVylqMAiV4z2d9l0h4Wu1lq6E6v+yqiCrlRln3rGjGdXsd0+upDa
+ LyYJXB/qY67LOsIv/yKgZigc+RDUYOAG6ouAPOWF3jS8JG5ohMN+DK2gmm5+hsUDcPaS
+ +ypFhyBJPV/0vZsUqz6V0sdGde1zuqAwIAkv3t+vyfsoP2UUBygjdATBxVlhEfep69XQ
+ 2Tiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1705511844; x=1706116644;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nDTqfj6BUHfdXbX8rflZPcCjLAbZWnt/2hyfSV4fubk=;
- b=d8zAOcEEJSqr/BDTsPAkDvwdCHr+snCH7PRZhQQgoFSDmD2KB7ytlmwTmDOI2Q1saq
- 3ZM9gMOGvMLJz/0o40jbueUuGCkpeRhZ07BBBGM2JObFCMpRNjR18/2Osgt1Zn7depm9
- Z20yxRXT8vHFyME5+pf3e+XlW6TRcENJdYCLgWo6wx03vUD+6Kp39Il+aMUhZNYVQXH9
- HmaRsdUMr6pHrmLRhDYqbVtfzN8XTCVhS51PZl6ORQmEr9ykvCTzD7JT4e6jR2DchPS7
- PDlmQt5P6S8q5W15Ul8e62A+Ty/5OiPgmcrsljjC1j56O1NLKyDVuljZfuQ7e4tJs/Nu
- 0hIQ==
-X-Gm-Message-State: AOJu0YxA+ThOvx+6w8RsCL+koR7/OeM30XG1+pCL8MrJmKs0fgu0vmgC
- f32+4uiSscPG1KrJUGGVk0k=
-X-Google-Smtp-Source: AGHT+IFSXfxbxb3C9qKwj4doumEVCOlTwZxk96FdhZFJ7vbFTfMiHejWN/dNl3AP5HHwxDxMt8triQ==
-X-Received: by 2002:a17:907:1685:b0:a2e:9f1c:1b96 with SMTP id
- cx5-20020a170907168500b00a2e9f1c1b96mr737989ejd.80.1705511843807; 
- Wed, 17 Jan 2024 09:17:23 -0800 (PST)
+ bh=96znt4d6nDmc3curz0bN/+E4yyTus03y/d1LkCQeNXM=;
+ b=dD7Xrf92/3vAJjJayDMCDLmPirqK0ynwgETfdLDLfQGI02ecYDJ75mZYHyTdUNYzHg
+ MC1ODwxKBbuTsGtD54ZgMj2PqcCnu5zdgja3G5qRT4EQL04ZVN+LZFzf+sV0oFDYmFtp
+ hsmlhEeWuHgW6R0+9xGMSVbLG6N9IEHOloBYQw0iiFIR4640jht3BoALikNy/VKTrukF
+ v7fQUhnWxyRJ3s0dHVLzHEVVAHIjYx9AuqG6112ESUCazb7IzZdUqTvTpceYRUKEXDuB
+ 31hwbsqoqZikduB5xWV//XX917T4OLCrro6Vnu4Ufd5QqPOuAro9iX4VgXT9xllogLgv
+ H28A==
+X-Gm-Message-State: AOJu0Ywd7qYo5ugu5OP0tJFuCD0uqw3x9+ZH1sWaCiCsw4/jkn/cqboJ
+ Jfo4z4hD24JCylxl+1InKUz8Qpyf7saTMVYriHcCgRKc7LXiAdeeE4VISCGWEtoRoA==
+X-Google-Smtp-Source: AGHT+IHERluGYy20M3kG20DzYQ2RSrD4ZJunzRk7Cvipt/d+v/G6klm3LU/9lKHV10KExKQwWydFjA==
+X-Received: by 2002:a17:906:b845:b0:a2e:c034:36eb with SMTP id
+ ga5-20020a170906b84500b00a2ec03436ebmr1054211ejb.37.1705511844561; 
+ Wed, 17 Jan 2024 09:17:24 -0800 (PST)
 Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
  vs5-20020a170907a58500b00a2cbbebedc1sm6904976ejc.53.2024.01.17.09.17.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jan 2024 09:17:23 -0800 (PST)
+ Wed, 17 Jan 2024 09:17:24 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Anatolij Gustschin <agust@denx.de>,
  Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v4 03/13] video: tegra20: consolidate DC header
-Date: Wed, 17 Jan 2024 19:16:48 +0200
-Message-Id: <20240117171658.22324-4-clamor95@gmail.com>
+Subject: [PATCH v4 04/13] video: tegra20: dc: pass DC id to internal devices
+Date: Wed, 17 Jan 2024 19:16:49 +0200
+Message-Id: <20240117171658.22324-5-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240117171658.22324-1-clamor95@gmail.com>
 References: <20240117171658.22324-1-clamor95@gmail.com>
@@ -91,8 +91,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Consolidate HD headers and place the result into video/tegra20
-since it is used only by devices from this directory.
+Tegra SoC has 2 independent display controllers called DC_A and
+DC_B, they are handled differently by internal video devices like
+DSI and HDMI controllers so it is important for last to know
+which display controller is used to properly set up registers.
+To achieve this, a pipe field was added to pdata to pass display
+controller id to internal Tegra SoC devices.
 
 Tested-by: Agneli <poczt@protonmail.ch> # Toshiba AC100 T20
 Tested-by: Robert Eckelmann <longnoserob@gmail.com> # ASUS TF101
@@ -101,229 +105,67 @@ Tested-by: Ion Agorria <ion@agorria.com> # HTC One X
 Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # Nvidia Tegratab T114
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- arch/arm/include/asm/arch-tegra/dc.h         |  8 ----
- arch/arm/include/asm/arch-tegra114/display.h | 28 -------------
- arch/arm/include/asm/arch-tegra20/display.h  | 28 -------------
- arch/arm/include/asm/arch-tegra30/display.h  | 28 -------------
- drivers/video/tegra20/tegra-dc.c             |  3 +-
- drivers/video/tegra20/tegra-dc.h             | 41 ++++++++++++++++++++
- drivers/video/tegra20/tegra-dsi.c            |  2 +-
- drivers/video/tegra20/tegra-pwm-backlight.c  |  3 +-
- 8 files changed, 46 insertions(+), 95 deletions(-)
- delete mode 100644 arch/arm/include/asm/arch-tegra114/display.h
- delete mode 100644 arch/arm/include/asm/arch-tegra20/display.h
- delete mode 100644 arch/arm/include/asm/arch-tegra30/display.h
- create mode 100644 drivers/video/tegra20/tegra-dc.h
+ drivers/video/tegra20/tegra-dc.c | 6 ++++++
+ drivers/video/tegra20/tegra-dc.h | 3 +++
+ 2 files changed, 9 insertions(+)
 
-diff --git a/arch/arm/include/asm/arch-tegra/dc.h b/arch/arm/include/asm/arch-tegra/dc.h
-index 7613d84f22..6444af2993 100644
---- a/arch/arm/include/asm/arch-tegra/dc.h
-+++ b/arch/arm/include/asm/arch-tegra/dc.h
-@@ -569,12 +569,4 @@ enum {
- #define DC_N_WINDOWS			5
- #define DC_REG_SAVE_SPACE		(DC_N_WINDOWS + 5)
- 
--#define TEGRA_DSI_A		"dsi@54300000"
--#define TEGRA_DSI_B		"dsi@54400000"
--
--struct tegra_dc_plat {
--	struct udevice *dev;		/* Display controller device */
--	struct dc_ctlr *dc;		/* Display controller regmap */
--};
--
- #endif /* __ASM_ARCH_TEGRA_DC_H */
-diff --git a/arch/arm/include/asm/arch-tegra114/display.h b/arch/arm/include/asm/arch-tegra114/display.h
-deleted file mode 100644
-index 9411525799..0000000000
---- a/arch/arm/include/asm/arch-tegra114/display.h
-+++ /dev/null
-@@ -1,28 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- *  (C) Copyright 2010
-- *  NVIDIA Corporation <www.nvidia.com>
-- */
--
--#ifndef __ASM_ARCH_TEGRA_DISPLAY_H
--#define __ASM_ARCH_TEGRA_DISPLAY_H
--
--#include <asm/arch-tegra/dc.h>
--
--/* This holds information about a window which can be displayed */
--struct disp_ctl_win {
--	enum win_color_depth_id fmt;	/* Color depth/format */
--	unsigned int	bpp;		/* Bits per pixel */
--	phys_addr_t	phys_addr;	/* Physical address in memory */
--	unsigned int	x;		/* Horizontal address offset (bytes) */
--	unsigned int	y;		/* Veritical address offset (bytes) */
--	unsigned int	w;		/* Width of source window */
--	unsigned int	h;		/* Height of source window */
--	unsigned int	stride;		/* Number of bytes per line */
--	unsigned int	out_x;		/* Left edge of output window (col) */
--	unsigned int	out_y;		/* Top edge of output window (row) */
--	unsigned int	out_w;		/* Width of output window in pixels */
--	unsigned int	out_h;		/* Height of output window in pixels */
--};
--
--#endif /*__ASM_ARCH_TEGRA_DISPLAY_H*/
-diff --git a/arch/arm/include/asm/arch-tegra20/display.h b/arch/arm/include/asm/arch-tegra20/display.h
-deleted file mode 100644
-index e7b3cffd46..0000000000
---- a/arch/arm/include/asm/arch-tegra20/display.h
-+++ /dev/null
-@@ -1,28 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- *  (C) Copyright 2010
-- *  NVIDIA Corporation <www.nvidia.com>
-- */
--
--#ifndef __ASM_ARCH_TEGRA_DISPLAY_H
--#define __ASM_ARCH_TEGRA_DISPLAY_H
--
--#include <asm/arch-tegra/dc.h>
--
--/* This holds information about a window which can be displayed */
--struct disp_ctl_win {
--	enum win_color_depth_id fmt;	/* Color depth/format */
--	unsigned	bpp;		/* Bits per pixel */
--	phys_addr_t	phys_addr;	/* Physical address in memory */
--	unsigned	x;		/* Horizontal address offset (bytes) */
--	unsigned	y;		/* Veritical address offset (bytes) */
--	unsigned	w;		/* Width of source window */
--	unsigned	h;		/* Height of source window */
--	unsigned	stride;		/* Number of bytes per line */
--	unsigned	out_x;		/* Left edge of output window (col) */
--	unsigned	out_y;		/* Top edge of output window (row) */
--	unsigned	out_w;		/* Width of output window in pixels */
--	unsigned	out_h;		/* Height of output window in pixels */
--};
--
--#endif /*__ASM_ARCH_TEGRA_DISPLAY_H*/
-diff --git a/arch/arm/include/asm/arch-tegra30/display.h b/arch/arm/include/asm/arch-tegra30/display.h
-deleted file mode 100644
-index 9411525799..0000000000
---- a/arch/arm/include/asm/arch-tegra30/display.h
-+++ /dev/null
-@@ -1,28 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- *  (C) Copyright 2010
-- *  NVIDIA Corporation <www.nvidia.com>
-- */
--
--#ifndef __ASM_ARCH_TEGRA_DISPLAY_H
--#define __ASM_ARCH_TEGRA_DISPLAY_H
--
--#include <asm/arch-tegra/dc.h>
--
--/* This holds information about a window which can be displayed */
--struct disp_ctl_win {
--	enum win_color_depth_id fmt;	/* Color depth/format */
--	unsigned int	bpp;		/* Bits per pixel */
--	phys_addr_t	phys_addr;	/* Physical address in memory */
--	unsigned int	x;		/* Horizontal address offset (bytes) */
--	unsigned int	y;		/* Veritical address offset (bytes) */
--	unsigned int	w;		/* Width of source window */
--	unsigned int	h;		/* Height of source window */
--	unsigned int	stride;		/* Number of bytes per line */
--	unsigned int	out_x;		/* Left edge of output window (col) */
--	unsigned int	out_y;		/* Top edge of output window (row) */
--	unsigned int	out_w;		/* Width of output window in pixels */
--	unsigned int	out_h;		/* Height of output window in pixels */
--};
--
--#endif /*__ASM_ARCH_TEGRA_DISPLAY_H*/
 diff --git a/drivers/video/tegra20/tegra-dc.c b/drivers/video/tegra20/tegra-dc.c
-index bcc2748623..5d8874f323 100644
+index 5d8874f323..0e94e665ef 100644
 --- a/drivers/video/tegra20/tegra-dc.c
 +++ b/drivers/video/tegra20/tegra-dc.c
-@@ -21,7 +21,8 @@
- #include <asm/arch/funcmux.h>
- #include <asm/arch/pinmux.h>
- #include <asm/arch/pwm.h>
--#include <asm/arch/display.h>
+@@ -45,6 +45,7 @@ struct tegra_lcd_priv {
+ 	unsigned pixel_clock;		/* Pixel clock in Hz */
+ 	int dc_clk[2];			/* Contains clk and its parent */
+ 	bool rotation;			/* 180 degree panel turn */
++	bool pipe;			/* DC controller: 0 for A, 1 for B */
+ };
+ 
+ enum {
+@@ -406,6 +407,9 @@ static int tegra_lcd_of_to_plat(struct udevice *dev)
+ 
+ 	priv->rotation = dev_read_bool(dev, "nvidia,180-rotation");
+ 
++	if (!strcmp(dev->name, TEGRA_DC_B))
++		priv->pipe = 1;
 +
-+#include "tegra-dc.h"
+ 	rgb = fdt_subnode_offset(blob, node, "rgb");
+ 	if (rgb < 0) {
+ 		debug("%s: Cannot find rgb subnode for '%s' (ret=%d)\n",
+@@ -431,12 +435,14 @@ static int tegra_lcd_of_to_plat(struct udevice *dev)
+ 		return ret;
+ 	}
  
- DECLARE_GLOBAL_DATA_PTR;
++	/* Fill the platform data for internal devices */
+ 	if (!strcmp(priv->panel->name, TEGRA_DSI_A) ||
+ 	    !strcmp(priv->panel->name, TEGRA_DSI_B)) {
+ 		struct tegra_dc_plat *dc_plat = dev_get_plat(priv->panel);
  
+ 		dc_plat->dev = dev;
+ 		dc_plat->dc = priv->dc;
++		dc_plat->pipe = priv->pipe;
+ 	}
+ 
+ 	ret = panel_get_display_timing(priv->panel, &priv->timing);
 diff --git a/drivers/video/tegra20/tegra-dc.h b/drivers/video/tegra20/tegra-dc.h
-new file mode 100644
-index 0000000000..5c05221038
---- /dev/null
+index 5c05221038..75fc0fa4de 100644
+--- a/drivers/video/tegra20/tegra-dc.h
 +++ b/drivers/video/tegra20/tegra-dc.h
-@@ -0,0 +1,41 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ *  (C) Copyright 2010
-+ *  NVIDIA Corporation <www.nvidia.com>
-+ */
-+
-+#ifndef _TEGRA_DC_H
-+#define _TEGRA_DC_H
-+
-+#ifndef __ASSEMBLY__
-+#include <linux/bitops.h>
-+#endif
-+
-+/* arch-tegra/dc exists only because T124 uses it */
-+#include <asm/arch-tegra/dc.h>
-+
-+#define TEGRA_DSI_A		"dsi@54300000"
-+#define TEGRA_DSI_B		"dsi@54400000"
-+
-+struct tegra_dc_plat {
-+	struct udevice *dev;		/* Display controller device */
-+	struct dc_ctlr *dc;		/* Display controller regmap */
-+};
-+
-+/* This holds information about a window which can be displayed */
-+struct disp_ctl_win {
-+	enum win_color_depth_id fmt;	/* Color depth/format */
-+	unsigned int bpp;		/* Bits per pixel */
-+	phys_addr_t phys_addr;		/* Physical address in memory */
-+	unsigned int x;			/* Horizontal address offset (bytes) */
-+	unsigned int y;			/* Veritical address offset (bytes) */
-+	unsigned int w;			/* Width of source window */
-+	unsigned int h;			/* Height of source window */
-+	unsigned int stride;		/* Number of bytes per line */
-+	unsigned int out_x;		/* Left edge of output window (col) */
-+	unsigned int out_y;		/* Top edge of output window (row) */
-+	unsigned int out_w;		/* Width of output window in pixels */
-+	unsigned int out_h;		/* Height of output window in pixels */
-+};
-+
-+#endif /* _TEGRA_DC_H */
-diff --git a/drivers/video/tegra20/tegra-dsi.c b/drivers/video/tegra20/tegra-dsi.c
-index a48f9c85d0..72b91ed26b 100644
---- a/drivers/video/tegra20/tegra-dsi.c
-+++ b/drivers/video/tegra20/tegra-dsi.c
-@@ -20,9 +20,9 @@
- #include <asm/gpio.h>
- #include <asm/io.h>
- #include <asm/arch/clock.h>
--#include <asm/arch/display.h>
- #include <asm/arch-tegra30/dsi.h>
+@@ -14,12 +14,15 @@
+ /* arch-tegra/dc exists only because T124 uses it */
+ #include <asm/arch-tegra/dc.h>
  
-+#include "tegra-dc.h"
- #include "mipi-phy.h"
++#define TEGRA_DC_A		"dc@54200000"
++#define TEGRA_DC_B		"dc@54240000"
+ #define TEGRA_DSI_A		"dsi@54300000"
+ #define TEGRA_DSI_B		"dsi@54400000"
  
- struct tegra_dsi_priv {
-diff --git a/drivers/video/tegra20/tegra-pwm-backlight.c b/drivers/video/tegra20/tegra-pwm-backlight.c
-index bb677daa8a..5f93f57fe9 100644
---- a/drivers/video/tegra20/tegra-pwm-backlight.c
-+++ b/drivers/video/tegra20/tegra-pwm-backlight.c
-@@ -15,7 +15,8 @@
+ struct tegra_dc_plat {
+ 	struct udevice *dev;		/* Display controller device */
+ 	struct dc_ctlr *dc;		/* Display controller regmap */
++	bool pipe;			/* DC number: 0 for A, 1 for B */
+ };
  
- #include <asm/io.h>
- #include <asm/gpio.h>
--#include <asm/arch/display.h>
-+
-+#include "tegra-dc.h"
- 
- #define TEGRA_DISPLAY_A_BASE		0x54200000
- #define TEGRA_DISPLAY_B_BASE		0x54240000
+ /* This holds information about a window which can be displayed */
 -- 
 2.40.1
 
