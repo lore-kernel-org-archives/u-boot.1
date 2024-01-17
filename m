@@ -4,86 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5A2AC47DA2
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 16:47:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42EC2C47422
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 17:11:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C9BE87ABE;
-	Wed, 17 Jan 2024 17:47:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 714B3879F8;
+	Wed, 17 Jan 2024 18:11:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="jhaw4RPe";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BysubiMJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95A618798C; Wed, 17 Jan 2024 17:47:04 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9257F878B3; Wed, 17 Jan 2024 17:38:31 +0100 (CET)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93A1186EF1
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 17:47:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CCE58753C
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 17:38:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id E53E63F272
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 16:47:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1705510020;
- bh=Ost3tRHKwOCc3qh8rKlTOstWCdwvox+2ji+qfa12qzc=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=jhaw4RPeCjMNzmXrCPEtcJpLzKv0I3LoPqW8AvhwzrTZVDlxopPgEym66VBQRNiiS
- GAwwNxeGithJw1pO8p5JtWOvwj48K8x4iSdxbVWxFZJY1lLID8aYv0h/EraOKA7O9K
- Dz07ST7WuouvgKti5kKW5hEczKiVc9FLqVsLVgeTgpUbKfOtNbmW7kBFkcgInG231w
- EFDXWev9BXSE/X860E+F2UjuZFgoSWTwEvTT7jr7hkCHf7rOf1Sjp3sR++/121S+cn
- RrEPc/5MMX1D/M5bQRx+S0EvEMT4WVGshFo96AVM9CLpDER27J3uypxqwWkbftFrv/
- AjuRMKIcHV9Tw==
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-40e46bceed8so79340005e9.0
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 08:47:00 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=nickalilovic@gmail.com
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-78350871784so247598985a.1
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 08:38:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1705509508; x=1706114308; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=lpSpvdXF/aN1Mwo9ZnYSxkTm8q5Xet2UmvVBXOFYMZM=;
+ b=BysubiMJcym0TYNmsO9MEGMFN9XJ/Lho6IMMtOWYjA25uasHRwdghQTkU92QH0UuuQ
+ +LzXrul//BmCVYHZiOGiyknzKgTs+hpBcqL14fYo56294rCywjstsi+2V5QbKArqUWd5
+ 4PDwltEF3LNjK6esoQ/Izo9fj7zC2x5fr7Q+ZYyVXGXXhOoSeG6aUbvYT26M8EEpb07m
+ yLg3At0aOtj88O3dpObZPOhXTKczcuWzMcC305uOnASbWQ+61VGPNWh5Oa3xPVo6Rh5U
+ FgrI/fppfoc2pmz6/+vJ2baN0YQrPVli45eOuNfKKYIEw7422py4tMon3XPJYfjoSCjs
+ t5CA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705510020; x=1706114820;
+ d=1e100.net; s=20230601; t=1705509508; x=1706114308;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Ost3tRHKwOCc3qh8rKlTOstWCdwvox+2ji+qfa12qzc=;
- b=AV3HEm64071CbU41Sip6roPwgyvMpZfbvXf1G+FWlOxLE/ydJZkZJd+R6h8zAoL9bq
- TFYjn0K5dYT8Kmi99t5X9CwlnWMCbPos2EnA6ejWtB2Hh7j6HjlabM9oEXiBmTRf7AWg
- vFYATg0+BlC8NcB/vsEtRQ3s36p1cy13AWkG40GK2ZoW/qjv5llMo93Q6kyU+/JDw6EB
- CjHmGiH57ukYPZDSbaEWc6KvppGK9D/3evoB4+VBWcpYnJMRqhlMzabXZ+pOyzKJFr9e
- +9CXI7jxOOLdO4q04Vao///rodwsPDk8Dv8q7GULejXnI0DHAGkAV2dzS8+0A7v/AndM
- 95fg==
-X-Gm-Message-State: AOJu0YwPuWBHxShJqROmoYffiEqOpW9BiyFb2e8Mb+bFavGRG/W+v9PG
- CI2eWpR8PnmYdYcpLla4XBRRnBRTIMYflDgzc3K54bx6Mq55g4+3hMWr5hpkBikvotn5WDuJXKK
- sSc72xANcA5l80Dx9BJN12oIJNeOpFVnvJKmFCw==
-X-Received: by 2002:a05:600c:4b27:b0:40e:5cb5:916c with SMTP id
- i39-20020a05600c4b2700b0040e5cb5916cmr5061267wmp.129.1705510019835; 
- Wed, 17 Jan 2024 08:46:59 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFiSYU/+Y6QRaWplkNwKuTAK2s1LMeZ1tNoxYdz6mp5LJp69CbXHW9sMY2GCmb2jNzJJgtfvg==
-X-Received: by 2002:a05:600c:4b27:b0:40e:5cb5:916c with SMTP id
- i39-20020a05600c4b2700b0040e5cb5916cmr5061260wmp.129.1705510019531; 
- Wed, 17 Jan 2024 08:46:59 -0800 (PST)
-Received: from workstation5.fritz.box
- (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
+ bh=lpSpvdXF/aN1Mwo9ZnYSxkTm8q5Xet2UmvVBXOFYMZM=;
+ b=mQzi4Hhwm3oxiOeh9sYr2gTCPOX5z4DW9oGEBIveUZBnfyswWULgVMmpka/pC60Zmw
+ 3+OwKFIMNGvfMbNEDyERwI3k22fbIIwNEwPwXV2HjnJ8DFhddI9xeBm9TRD7NSaQJik+
+ qdRw4khL1GxyiOoboUYx5XKm+/f69iIVRSmiFucSqHtWjBMvBYqiumjhJL0CuXGt/KwV
+ IgMCeCC1UOXjixVsbyVokL7otZ46qN/LDSWMfq9uygl6PbhdJXD57Kn8oHvUiMZFaAfn
+ 5l8OMFoITA/EOeuoPq/vg2xSz7xdnMFC/y6x1olW35C9ap6rFKwVUpwgSQGq8AUp+i1k
+ 0w1g==
+X-Gm-Message-State: AOJu0YzVBi93/B3vH675cWlOD92RcH8Lg49WoKOiIhyjTDxjeF9+zBh1
+ u/2sDy4iNyyY0a5EX2cpnPaG6ojLd8MmGw==
+X-Google-Smtp-Source: AGHT+IGZmg/FAu/L44TcnvECa5UGFRbWksJU6lqwlSA0VA7Zw7RRPEBDJZTgDypEP5ikYrFlFx5QmA==
+X-Received: by 2002:a05:620a:2414:b0:783:1ecd:bfd1 with SMTP id
+ d20-20020a05620a241400b007831ecdbfd1mr11897076qkn.66.1705509507710; 
+ Wed, 17 Jan 2024 08:38:27 -0800 (PST)
+Received: from localhost.localdomain
+ (bras-vprn-ckvlon1747w-lp130-29-70-29-79-15.dsl.bell.ca. [70.29.79.15])
  by smtp.gmail.com with ESMTPSA id
- y3-20020adfe6c3000000b003373ef060d5sm2042467wrm.113.2024.01.17.08.46.58
+ q9-20020a05620a038900b00783237b3330sm4623850qkm.31.2024.01.17.08.38.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Jan 2024 08:46:59 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Rick Chen <rick@andestech.com>
-Cc: Leo <ycliang@andestech.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] cmd: sbi: add support for Debug Trigger Extension
-Date: Wed, 17 Jan 2024 17:46:52 +0100
-Message-ID: <20240117164652.118184-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ Wed, 17 Jan 2024 08:38:27 -0800 (PST)
+From: Nick Alilovic <nickalilovic@gmail.com>
+To: u-boot@lists.denx.de
+Cc: andre.przywara@arm.com, jagan@amarulasolutions.com,
+ linux-sunxi@lists.linux.dev, Nick Alilovic <nickalilovic@gmail.com>
+Subject: [PATCH 1/2] arm: dts: Transpeed 8K618-T: Add Transpeed 8K618-T board
+ support
+Date: Wed, 17 Jan 2024 11:37:55 -0500
+Message-Id: <20240117163756.63875-1-nickalilovic@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 17 Jan 2024 18:11:27 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,38 +92,194 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Detect and show if the SBI implements the Debug Trigger Extension.
+This is the DT I used from the Linux kernel. Made changes to the Makefile to build the new DTB.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Signed-off-by: Nick Alilovic <nickalilovic@gmail.com>
 ---
- arch/riscv/include/asm/sbi.h | 1 +
- cmd/riscv/sbi.c              | 1 +
- 2 files changed, 2 insertions(+)
+ arch/arm/dts/Makefile                         |   1 +
+ .../arm/dts/sun50i-h618-transpeed-8k618-t.dts | 161 ++++++++++++++++++
+ 2 files changed, 162 insertions(+)
+ create mode 100644 arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts
 
-diff --git a/arch/riscv/include/asm/sbi.h b/arch/riscv/include/asm/sbi.h
-index bf4c9af6220..d1113f3d703 100644
---- a/arch/riscv/include/asm/sbi.h
-+++ b/arch/riscv/include/asm/sbi.h
-@@ -33,6 +33,7 @@ enum sbi_ext_id {
- 	SBI_EXT_CPPC = 0x43505043,
- 	SBI_EXT_NACL = 0x4E41434C,
- 	SBI_EXT_STA = 0x535441,
-+	SBI_EXT_DBTR = 0x44425452,
- };
- 
- enum sbi_ext_base_fid {
-diff --git a/cmd/riscv/sbi.c b/cmd/riscv/sbi.c
-index 940d9bc1681..9daf0e247ad 100644
---- a/cmd/riscv/sbi.c
-+++ b/cmd/riscv/sbi.c
-@@ -53,6 +53,7 @@ static struct sbi_ext extensions[] = {
- 	{ SBI_EXT_CPPC,			      "Collaborative Processor Performance Control Extension" },
- 	{ SBI_EXT_NACL,			      "Nested Acceleration Extension" },
- 	{ SBI_EXT_STA,			      "Steal-time Accounting Extension" },
-+	{ SBI_EXT_DBTR,			      "Debug Trigger Extension" },
- };
- 
- static int do_sbi(struct cmd_tbl *cmdtp, int flag, int argc,
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index d456a524b3..cacd21558a 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -836,6 +836,7 @@ dtb-$(CONFIG_MACH_SUN50I_H6) += \
+ dtb-$(CONFIG_MACH_SUN50I_H616) += \
+ 	sun50i-h616-orangepi-zero2.dtb \
+ 	sun50i-h618-orangepi-zero3.dtb \
++	sun50i-h618-transpeed-8k618-t.dtb \
+ 	sun50i-h616-x96-mate.dtb
+ dtb-$(CONFIG_MACH_SUN50I) += \
+ 	sun50i-a64-amarula-relic.dtb \
+diff --git a/arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts b/arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts
+new file mode 100644
+index 0000000000..8ea1fd41ae
+--- /dev/null
++++ b/arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts
+@@ -0,0 +1,161 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (C) 2023 Arm Ltd.
++ */
++
++/dts-v1/;
++
++#include "sun50i-h616.dtsi"
++
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/interrupt-controller/arm-gic.h>
++
++/ {
++	model = "Transpeed 8K618-T";
++	compatible = "transpeed,8k618-t", "allwinner,sun50i-h618";
++
++	aliases {
++		serial0 = &uart0;
++	};
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++	};
++
++	reg_vcc5v: vcc5v {
++		/* board wide 5V supply directly from the DC input */
++		compatible = "regulator-fixed";
++		regulator-name = "vcc-5v";
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		regulator-always-on;
++	};
++
++	reg_vcc3v3: vcc3v3 {
++		/* discrete 3.3V regulator */
++		compatible = "regulator-fixed";
++		regulator-name = "vcc-3v3";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		regulator-always-on;
++	};
++};
++
++&ehci0 {
++	status = "okay";
++};
++
++&ehci1 {
++	status = "okay";
++};
++
++&ir {
++	status = "okay";
++};
++
++&mmc0 {
++	vmmc-supply = <&reg_dldo1>;
++	cd-gpios = <&pio 8 16 GPIO_ACTIVE_LOW>;	/* PI16 */
++	bus-width = <4>;
++	status = "okay";
++};
++
++&mmc2 {
++	vmmc-supply = <&reg_dldo1>;
++	vqmmc-supply = <&reg_aldo1>;
++	bus-width = <8>;
++	non-removable;
++	cap-mmc-hw-reset;
++	mmc-ddr-1_8v;
++	mmc-hs200-1_8v;
++	status = "okay";
++};
++
++&ohci0 {
++	status = "okay";
++};
++
++&ohci1 {
++	status = "okay";
++};
++
++&r_i2c {
++	status = "okay";
++
++	axp313: pmic@36 {
++		compatible = "x-powers,axp313a";
++		reg = <0x36>;
++		#interrupt-cells = <1>;
++		interrupt-controller;
++
++		vin1-supply = <&reg_vcc5v>;
++		vin2-supply = <&reg_vcc5v>;
++		vin3-supply = <&reg_vcc5v>;
++
++		regulators {
++			reg_aldo1: aldo1 {
++				regulator-always-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++				regulator-name = "vcc-1v8-pll";
++			};
++
++			reg_dldo1: dldo1 {
++				regulator-always-on;
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-name = "vcc-3v3-io-mmc";
++			};
++
++			reg_dcdc1: dcdc1 {
++				regulator-always-on;
++				regulator-min-microvolt = <810000>;
++				regulator-max-microvolt = <990000>;
++				regulator-name = "vdd-gpu-sys";
++			};
++
++			reg_dcdc2: dcdc2 {
++				regulator-always-on;
++				regulator-min-microvolt = <810000>;
++				regulator-max-microvolt = <1100000>;
++				regulator-name = "vdd-cpu";
++			};
++
++			reg_dcdc3: dcdc3 {
++				regulator-always-on;
++				regulator-min-microvolt = <1360000>;
++				regulator-max-microvolt = <1360000>;
++				regulator-name = "vdd-dram";
++			};
++		};
++	};
++};
++
++&pio {
++	vcc-pc-supply = <&reg_aldo1>;
++	vcc-pg-supply = <&reg_dldo1>;
++	vcc-ph-supply = <&reg_dldo1>;
++	vcc-pi-supply = <&reg_dldo1>;
++};
++
++&uart0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&uart0_ph_pins>;
++	status = "okay";
++};
++
++&uart1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&uart1_pins>, <&uart1_rts_cts_pins>;
++	uart-has-rtscts;
++	status = "okay";
++};
++
++&usbotg {
++	dr_mode = "host";	/* USB A type receptable */
++	status = "okay";
++};
++
++&usbphy {
++	status = "okay";
++};
 -- 
-2.43.0
+2.34.1
 
