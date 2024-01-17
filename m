@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B0C6C47422
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 04:40:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6743C47422
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 06:26:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AB37879A0;
-	Wed, 17 Jan 2024 05:40:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 17AC386D82;
+	Wed, 17 Jan 2024 07:26:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TMQQd1qu";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="Qo6SaI3s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECE7A8790F; Wed, 17 Jan 2024 05:40:10 +0100 (CET)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id 83E5C86DC3; Wed, 17 Jan 2024 07:26:26 +0100 (CET)
+Received: from mail-ua1-x929.google.com (mail-ua1-x929.google.com
+ [IPv6:2607:f8b0:4864:20::929])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 516488798B
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 05:40:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7886E86BFA
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 07:26:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-1d437a2a4c7so18673515ad.0
- for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 20:40:08 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-ua1-x929.google.com with SMTP id
+ a1e0cc1a2514c-7cdb67ec4caso3156814241.2
+ for <u-boot@lists.denx.de>; Tue, 16 Jan 2024 22:26:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705466405; x=1706071205; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1705472782; x=1706077582;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uLu8RNfQOxa+r7scNxZe5YOo/ZxWLLZ6QlPdhb7HAxM=;
- b=TMQQd1qusedBsSS+OuKHTvjfJeSyYZaAaO/szjNIzqj5RSAZTfPE1nHRZ7NrcEEBFK
- 53cohnMCPG3xzZlNIbvwaIsi0BzxDAXD8gK5al3kVoSH/2jzYjcUQ3srIWsm0e/MlHvm
- 75YRJSy85vxJD01A1ZMps+LjKyeQFKzJwuIiTgmyqanGE3b6/PPS76F6QcOWhstj7NO0
- 5SRfbIWAX+OcKug6ffyiOG+rhrx5bII87ttFXys6FawNs+rCOxFkLTcv27CERNaLJhsS
- a98nptdo35f/swXx6gxrWMI8npgf1kOVeV85YqSAbAREhzeVlIb9kUzpJzBhQ4ACFV32
- WNmg==
+ bh=cbfgFQDyNeh17op1FQDXH0WOz7Rqy5fy+7G0rmwyraE=;
+ b=Qo6SaI3sTaFPEACePKN5GB5Lr+m0Xe43rfi1jnai49JwtV0+FiKP0tDf6/jB4GB3Kv
+ 5K3MFfZMmeGN8TMgqbjm/dhobK+gQbfEid2/0mlDArjAvSv+AkPMuim1jbaFnfmRzc4Y
+ +UlSVFnK9GIonMDXlO2Z2wOo04T8AXTA0GjZ+alXP7t5kX1f2HUwuYsdb6DMARy+lubW
+ uFwXS3fASVXWtUGMlXphGTtqq6UuntBTgKjaFMuNKeZByEwUOjbEw2FM9W5MEhGG/WQK
+ 7duQoD0qt5NJVj9Dj1SB+ifvz3/0TF6+iQt6BSmG/WlaVJtc2e7G2L79pgR21HYQF9QS
+ VoTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705466405; x=1706071205;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1705472782; x=1706077582;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uLu8RNfQOxa+r7scNxZe5YOo/ZxWLLZ6QlPdhb7HAxM=;
- b=C0j/cBZmuVJU3c1H+znOVcPbyZ051MMTpEY0hxIPsN6k/rwLHkXyBi59Rih4ilI/jQ
- MCpOoYA2FZpt4kdRW5xR8mR5d7E4yDfrkMprjeNviPHcMYL+Cljj6jko25IvL7wDbYFg
- FXFTSvxDvO8eGTwyR8Js2FMK1KiGdktbvIC7NKbZB3e89n6OLXhDTKCZ+kNtLm9XeCUL
- njLphaiUEhVhHzUP880IMHEfHXAId3jxxg7yxv5NH+fQq7Q2ZZoR4TS9PSAyhf99T50p
- 4ygXcT6yYWZpPaHd7VHmjx3LRE04fKip8lhlIQCT643QoYtHblyIYgvPnOwYYbNxeJO0
- 8KhA==
-X-Gm-Message-State: AOJu0YxPWa3KAkOUvrKE2ssm7NjK9wYofuJ4NUll+EIMDrDoZZxL6SZF
- wwoxUqmaaHxsNDuT4Q+67brRZHloxh5R3vdxKYZxWAf7z6pfWQ==
-X-Google-Smtp-Source: AGHT+IHCu6u+ff48VDfN6Dqf95QQG5BNIdbn4rEMXywDzfwIDfIKDaSBBuLXd+LBQuJnUCmEq99ECA==
-X-Received: by 2002:a17:902:e981:b0:1d5:f667:10a1 with SMTP id
- f1-20020a170902e98100b001d5f66710a1mr2280718plb.6.1705466404709; 
- Tue, 16 Jan 2024 20:40:04 -0800 (PST)
-Received: from octopus.. ([2400:4050:c3e1:100:e481:26af:1a49:433a])
- by smtp.gmail.com with ESMTPSA id
- s17-20020a170902ea1100b001d403969bf4sm10048668plg.309.2024.01.16.20.40.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Jan 2024 20:40:04 -0800 (PST)
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de,
- ilias.apalodimas@linaro.org
-Cc: u-boot@lists.denx.de,
-	AKASHI Takahiro <takahiro.akashi@linaro.org>
-Subject: [PATCH v5 4/4] fs: remove explicit efi configuration dependency
-Date: Wed, 17 Jan 2024 13:39:44 +0900
-Message-Id: <20240117043944.477358-5-takahiro.akashi@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240117043944.477358-1-takahiro.akashi@linaro.org>
-References: <20240117043944.477358-1-takahiro.akashi@linaro.org>
+ bh=cbfgFQDyNeh17op1FQDXH0WOz7Rqy5fy+7G0rmwyraE=;
+ b=OXdyucUZ7yRpIGhHCggfu6F2tzE9OC2gjQoyn8/O6TOWEajnB9+j62xYMTQQ/LZUnT
+ +a9XbJe5cv6o0MHujiiYizuLBwRWcaLpw5VLuQT/JnKtu6IGSDWUG3hAi95WNRBBRc0y
+ PO7F1380ssTv60OCB3BczmtxzvtjAL7v7R4BuYErdWrEi83CCqdre3uXgURZuIGVmCTq
+ 7MVLUhHjBaHxw7vlTtIRFKWneKgLkd9KoZgdzSpBCSqJd/mBBQGVB9WCSLDarjyYONa5
+ aIkWHLeTuPpEysf/++0w55SUSk2IciE5DiW33TKoIRB0nBGHACvdsiaDh2v6xgAhKZ1o
+ 0zIw==
+X-Gm-Message-State: AOJu0Yxshu7anmuNTTyC9drJqSsZafdTw08DJkGEAmK7vPlDMgEIbCYO
+ oRCdjHriIUwMKS+jpdSkpt9fj6qztNfQfYBobihuRXgRzf8XFlWcXA5twCXQjFo=
+X-Google-Smtp-Source: AGHT+IF5C3cnRY99ubuOauTUcxXzzMpzaEeXdd3ncOXBDG8Qw5t72q/HTqxnuSL6Ig7bMu+ucmc0OtgDEh4mEJN5Qoo=
+X-Received: by 2002:a05:6122:3d16:b0:4b6:e333:168e with SMTP id
+ ga22-20020a0561223d1600b004b6e333168emr4586949vkb.2.1705472782116; Tue, 16
+ Jan 2024 22:26:22 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231119172310.1307942-1-i@shantur.com>
+ <CABEcMwW14BFrA1ZYWTh7iQTsnrXA7LdBPcREKf_QeO71op+Wdw@mail.gmail.com>
+ <20231209191853.GA2513409@bill-the-cat>
+ <CABEcMwU4C75Xsq9AYdugyPqjPYbrTf3C01gnE+sTM0WDyoMkQg@mail.gmail.com>
+ <20231209204507.GH2513409@bill-the-cat>
+ <5430e6c4-5d0d-4ddf-bc95-e3fbd2b046cd@rock-chips.com>
+ <CABEcMwWfLJ_vHDBLNdFRe4U=+e2fWswF0FD0JAaDF49TtyDp1A@mail.gmail.com>
+In-Reply-To: <CABEcMwWfLJ_vHDBLNdFRe4U=+e2fWswF0FD0JAaDF49TtyDp1A@mail.gmail.com>
+From: Shantur Rathore <i@shantur.com>
+Date: Wed, 17 Jan 2024 06:26:11 +0000
+Message-ID: <CABEcMwWt2yMXoRZG_s45G+AMDsuEVvNkdVo-8VA5pxN4wXWvCA@mail.gmail.com>
+Subject: Re: [PATCH v3] arch: arm: Kconfig: Enable BOOTSTD_FULL for Rockchip
+ SoCs
+To: Kever Yang <kever.yang@rock-chips.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
+ Simon Glass <sjg@chromium.org>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,34 +95,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now it is clear that the feature actually depends on efi interfaces,
-not "bootefi" command. efi_set_bootdev() will automatically be nullified
-if necessary efi component is disabled.
+Hi Kever,
 
-Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
- fs/fs.c | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+On Wed, Jan 10, 2024 at 11:58=E2=80=AFAM Shantur Rathore <i@shantur.com> wr=
+ote:
+>
+> Hi Kever,
+>
+> On Tue, Jan 9, 2024 at 10:55=E2=80=AFAM Kever Yang <kever.yang@rock-chips=
+.com> wrote:
+> >
+> > Hi Shantur, Tom,
+> >
+> > On 2023/12/10 04:45, Tom Rini wrote:
+> > > On Sat, Dec 09, 2023 at 07:49:04PM +0000, Shantur Rathore wrote:
+> > >> On Sat, Dec 9, 2023 at 7:18=E2=80=AFPM Tom Rini <trini@konsulko.com>=
+ wrote:
+> > >>> On Fri, Dec 08, 2023 at 10:52:02AM +0000, Shantur Rathore wrote:
+> > >>>
+> > >>>> Hi Tom / Kever
+> > >>>>
+> > >>>> On Sun, Nov 19, 2023 at 5:24=E2=80=AFPM Shantur Rathore <i@shantur=
+.com> wrote:
+> > >>>>> Rockchip SoCs can support wide range of bootflows.
+> > >>>>> Without full bootflow commands, it can be difficult to
+> > >>>>> figure out issues if any, hence enable by default.
+> > >>>>>
+> > >>>>> Reviewed-by: Simon Glass <sjg@chromium.org>
+> > >>>>>
+> > >>>>> Signed-off-by: Shantur Rathore <i@shantur.com>
+> > >>>>> ---
+> > >>>>>
+> > >>>>> (no changes since v1)
+> > >>>>>
+> > >>>>>   arch/arm/Kconfig | 1 +
+> > >>>>>   1 file changed, 1 insertion(+)
+> > >>>>>
+> > >>>>> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> > >>>>> index d812685c98..fca6ef6d7e 100644
+> > >>>>> --- a/arch/arm/Kconfig
+> > >>>>> +++ b/arch/arm/Kconfig
+> > >>>>> @@ -1986,6 +1986,7 @@ config ARCH_ROCKCHIP
+> > >>>>>          imply CMD_DM
+> > >>>>>          imply DEBUG_UART_BOARD_INIT
+> > >>>>>          imply BOOTSTD_DEFAULTS
+> > >>>>> +       imply BOOTSTD_FULL if BOOTSTD_DEFAULTS
+> > >>>>>          imply FAT_WRITE
+> > >>>>>          imply SARADC_ROCKCHIP
+> > >>>>>          imply SPL_SYSRESET
+> > >>>> Can this please be merged in ?
+> > >>> I wonder if we shouldn't really globally default to BOOTSTD_FULL if
+> > >>> BOOTSTD_DEFAULTS for everyone.
+> > >>>
+> > >> Its matter of ~21KB in size, unless any platform is really to its
+> > >> limits it should be alright.
+> > > Maybe I need to re-check things too, since I wonder how much of that
+> > > growth is re-enabling things that were removed when dropping the DIST=
+RO
+> > > stuff, and so for platforms just migrating over now it would be small=
+er
+> > > in size if much.
+> >
+> > A board maintainer is free to enable this option, but I don't agree to
+> > enable this for everyone.
+> >
+> > Not like rk3399 and rk3588, some of other SoCs always want a clean and
+> > simple but usable U-Boot,
+> >
+> > eg. rk3036 and rk3308 are still in the list.
+> >
+>
+> The discussion is what we consider "usable U-Boot"
+> By default bootstd doesn't have any options and not even to show what
+> it's going to boot.
+>
+> Would it be acceptable if BOOTSTD_FULL is enabled for SoCs rather than bo=
+ards?
+>
 
-diff --git a/fs/fs.c b/fs/fs.c
-index f1a0b70d1d57..acf465bdd807 100644
---- a/fs/fs.c
-+++ b/fs/fs.c
-@@ -791,10 +791,9 @@ int do_load(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[],
- 		return 1;
- 	}
- 
--	if (IS_ENABLED(CONFIG_CMD_BOOTEFI))
--		efi_set_bootdev(argv[1], (argc > 2) ? argv[2] : "",
--				(argc > 4) ? argv[4] : "", map_sysmem(addr, 0),
--				len_read);
-+	efi_set_bootdev(argv[1], (argc > 2) ? argv[2] : "",
-+			(argc > 4) ? argv[4] : "", map_sysmem(addr, 0),
-+			len_read);
- 
- 	printf("%llu bytes read in %lu ms", len_read, time);
- 	if (time > 0) {
--- 
-2.34.1
+Can you please suggest the way forward?
+Initially the patch was for RockPro64 and then after discussion it was
+suggested that as BOOTSTD_DEFAULT is very very limited
+we should enable BOOTSTD_FULL for SoCs that can support multiple boot modes=
+.
 
+Kind regards,
+Shantur
