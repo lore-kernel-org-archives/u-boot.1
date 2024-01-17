@@ -4,30 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15368C47422
-	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 17:43:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDA22C47258
+	for <u-boot@archiver.kernel.org>; Wed, 17 Jan 2024 17:44:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C59087B52;
-	Wed, 17 Jan 2024 18:43:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 06AC187B99;
+	Wed, 17 Jan 2024 18:43:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C516B87B8D; Wed, 17 Jan 2024 18:43:13 +0100 (CET)
-Received: from smtp-bc0d.mail.infomaniak.ch (smtp-bc0d.mail.infomaniak.ch
- [IPv6:2001:1600:3:17::bc0d])
+ id 4DBE6879F8; Wed, 17 Jan 2024 18:43:14 +0100 (CET)
+Received: from smtp-42a9.mail.infomaniak.ch (smtp-42a9.mail.infomaniak.ch
+ [84.16.66.169])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87E70879ED
- for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 18:43:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C1BE887947
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 18:43:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0000.mail.infomaniak.ch (unknown [10.4.36.107])
- by smtp-2-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TFYBR0VjDzMq9Sf;
- Wed, 17 Jan 2024 17:43:11 +0000 (UTC)
+ by smtp-2-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TFYBP38TbzMqRpX;
+ Wed, 17 Jan 2024 17:43:09 +0000 (UTC)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4TFYBQ2Vy3zvk; Wed, 17 Jan 2024 18:43:10 +0100 (CET)
+ id 4TFYBN5Kzhzvt; Wed, 17 Jan 2024 18:43:08 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
 To: Joe Hershberger <joe.hershberger@ni.com>,
  Klaus Goger <klaus.goger@theobroma-systems.com>,
@@ -35,11 +35,12 @@ To: Joe Hershberger <joe.hershberger@ni.com>,
  Kever Yang <kever.yang@rock-chips.com>
 Cc: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de,
  Heiko Stuebner <heiko@sntech.de>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Subject: [PATCH v3 6/6] rockchip: theobroma-systems: fix modified boot_targets
- detection
-Date: Wed, 17 Jan 2024 18:42:53 +0100
-Message-ID: <20240117-env_default_theobroma-v3-6-316c25a6733f@theobroma-systems.com>
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 4/6] env: allow to copy value from default environment into
+ a buffer
+Date: Wed, 17 Jan 2024 18:42:51 +0100
+Message-ID: <20240117-env_default_theobroma-v3-4-316c25a6733f@theobroma-systems.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240117-env_default_theobroma-v3-0-316c25a6733f@theobroma-systems.com>
 References: <20240117-env_default_theobroma-v3-0-316c25a6733f@theobroma-systems.com>
@@ -66,57 +67,62 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-U-Boot proper automatically modifies boot_targets to swap the order in
-which MMC storage media are used for standard boot based on which MMC
-storage medium was used to load U-Boot proper. This is however only done
-if the user has not changed it manually, therefore a check between the
-default and current value is done.
-
-This used to work fine until the migration to standard boot where
-boot_targets value size in the default environment went above the 32
-characters that env_get_default function can return, thus resulting in a
-truncated variable.
-
-Therefore the check between default and current value would always fail.
-
-By using the newly added env_get_default_into function, a buffer of
-the appropriate size can be allocated on the stack to get the whole
-value of boot_targets in the default environment and thus fixing the
-check.
+env_get_default suffers from a particular issue int that it can only
+return a value truncated to gd->env_buf (32) characters. This may be
+enough for most variables but it isn't for others, so let's allow users
+to provide a preallocated buffer to copy the value into instead,
+allowing for more control, though it'll still be truncated if the value
+size is bigger than the preallocated buffer.
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
+Reviewed-by: Tom Rini <trini@konsulko.com>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- board/theobroma-systems/common/common.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ env/common.c  |  8 ++++++++
+ include/env.h | 10 ++++++++++
+ 2 files changed, 18 insertions(+)
 
-diff --git a/board/theobroma-systems/common/common.c b/board/theobroma-systems/common/common.c
-index eb21d4c4550..864bcdd46f8 100644
---- a/board/theobroma-systems/common/common.c
-+++ b/board/theobroma-systems/common/common.c
-@@ -21,7 +21,9 @@ int setup_boottargets(void)
+diff --git a/env/common.c b/env/common.c
+index 656748c1f5b..ebcb10854d8 100644
+--- a/env/common.c
++++ b/env/common.c
+@@ -359,6 +359,14 @@ char *env_get_default(const char *name)
+ 	return NULL;
+ }
+ 
++/*
++ * Look up the variable from the default environment and store its value in buf
++ */
++int env_get_default_into(const char *name, char *buf, unsigned int len)
++{
++	return env_get_from_linear(default_environment, name, buf, len);
++}
++
+ void env_set_default(const char *s, int flags)
  {
- 	const char *boot_device =
- 		ofnode_read_chosen_string("u-boot,spl-boot-device");
--	char *env_default, *env;
-+	char env_default[sizeof(BOOT_TARGETS)];
-+	char *env;
-+	int ret;
+ 	if (s) {
+diff --git a/include/env.h b/include/env.h
+index 9778e3e4f2c..d2a5954ded8 100644
+--- a/include/env.h
++++ b/include/env.h
+@@ -356,6 +356,16 @@ int env_import_redund(const char *buf1, int buf1_read_fail,
+  */
+ char *env_get_default(const char *name);
  
- 	if (!boot_device) {
- 		debug("%s: /chosen/u-boot,spl-boot-device not set\n",
-@@ -30,7 +32,9 @@ int setup_boottargets(void)
- 	}
- 	debug("%s: booted from %s\n", __func__, boot_device);
++/**
++ * env_get_default_into() - Look up a variable from the default environment and
++ * copy its value in buf.
++ *
++ * @name: Variable to look up
++ * Return: actual length of the variable value excluding the terminating
++ *	NULL-byte, or -1 if the variable is not found
++ */
++int env_get_default_into(const char *name, char *buf, unsigned int len);
++
+ /* [re]set to the default environment */
+ void env_set_default(const char *s, int flags);
  
--	env_default = env_get_default("boot_targets");
-+	ret = env_get_default_into("boot_targets", env_default, sizeof(env_default));
-+	if (ret < 0)
-+		env_default[0] = '\0';
- 	env = env_get("boot_targets");
- 	if (!env) {
- 		debug("%s: boot_targets does not exist\n", __func__);
 
 -- 
 2.43.0
