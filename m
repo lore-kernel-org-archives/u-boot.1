@@ -4,79 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A03BC4707B
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 15:07:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 116E9C4707B
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 15:11:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DD7987BA9;
-	Thu, 18 Jan 2024 16:06:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 65C2987BAD;
+	Thu, 18 Jan 2024 16:11:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DEJxLP+z";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="AdWBtLfa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DB05878D3; Thu, 18 Jan 2024 16:06:55 +0100 (CET)
-Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
- [IPv6:2607:f8b0:4864:20::536])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B78C087BA9; Thu, 18 Jan 2024 16:11:21 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8372E87BA8
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 16:06:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 543778795B
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 16:11:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x536.google.com with SMTP id
- 41be03b00d2f7-5cdf90e5cdeso1894088a12.1
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 07:06:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705590412; x=1706195212; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kcua5DKHfnyz1xVAasRrtvomL5R5XxZHWurDgn+/X6M=;
- b=DEJxLP+zG93e4TWzJ83VsC9QCKoSM1T2nSc0wKIsCZ/eI75zYUkrA1oTnG2uP1+oqL
- OxbRAgu8vdrj0ygdIJZJIcHUIFLeLK7oaDzsWNOsjbjKCYRudVr9sLfuHsxuEJcC/d42
- r1ge5s1YtMQWyg6uQPIoj4H+6pJEAkz6jkv4NytxVHd8NBmFz8Ge9oN3APtff9PneYDZ
- VZ0DYD0hJ2k2jzzanmFteyInZHmAiIFysmEvPxruYw0DTyrtbNMelf+1kkh+MBl36MRb
- L7oYcR08vHQ78ugW7MIZVSn0JNS8B6yPW4kWBIioOdKVqjYx7Pzmox+Rbn583jpatoRL
- 4lxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705590412; x=1706195212;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kcua5DKHfnyz1xVAasRrtvomL5R5XxZHWurDgn+/X6M=;
- b=GrbF4SEupQFHtMfH0l13lfd5Oh+L9eES9brTb5sJse83TR65hwYqlwQ3hi5Txqnzmw
- 040TyhdJxbFE5c3x5wMwyGBT1oss/V9VoniRSppENeybl3WL66iTXUYPkPbEpffiyNZS
- aQJBQROCuZELriCMoTZcU/1aCqyHUkaryvWs2RzxVRPsT6iA4cVG5j8Ws4H6ZZhNoDK+
- XKPkFiKHLeJYErrSYrxpUlNoEbD0i38phuz11rHOKbOf/9PdjAWsKy4zrmhALRM2n/xS
- 9tjXy68ZNEjymvinbEJxgK7XJOlYhk1zHJC6rSGvtVzW8JAF0T89kuzDChdfcxrqwGCy
- aY4A==
-X-Gm-Message-State: AOJu0YwNR8wRvepcYvBzsf2oO/nfP/QjkgQjvUnGZtNgL+jC2Wif8ZId
- xplK4pzwGfmry5zTtzK+MzZ13vWBqSZUN8gAu5alL30WuOVzBrWB
-X-Google-Smtp-Source: AGHT+IGBv5Y5KB+G6UMs6pb8nZqjorGzkWpVKvKdheypfQAGxQ5wPz0AihphUSdTmJ4lrJ3+E6zkHg==
-X-Received: by 2002:a17:90a:b888:b0:28e:625c:5963 with SMTP id
- o8-20020a17090ab88800b0028e625c5963mr1771244pjr.0.1705590411854; 
- Thu, 18 Jan 2024 07:06:51 -0800 (PST)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:a109:42dd:8789:4db3])
- by smtp.gmail.com with ESMTPSA id
- oh12-20020a17090b3a4c00b0028cc9afaae9sm1930417pjb.34.2024.01.18.07.06.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jan 2024 07:06:51 -0800 (PST)
-From: Fabio Estevam <festevam@gmail.com>
-To: sbabic@denx.de
-Cc: uboot-imx@nxp.com, marex@denx.de, thomas.schaefer@kontron.com,
- u-boot@lists.denx.de, Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH 2/2] arm: imx: imx8m: Enable the SError exception
-Date: Thu, 18 Jan 2024 12:06:40 -0300
-Message-Id: <20240118150640.3802089-2-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240118150640.3802089-1-festevam@gmail.com>
-References: <20240118150640.3802089-1-festevam@gmail.com>
+ spf=pass smtp.mailfrom=mwalle@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 88DFECE1F9D;
+ Thu, 18 Jan 2024 15:11:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A3C1EC43390;
+ Thu, 18 Jan 2024 15:11:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1705590674;
+ bh=tEAKgLDSkw2bTNQv+vzAqzC7q8w6oU38pGIQtaPhB+o=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=AdWBtLfa/K3O519p/dQrTjdyVPxJ614ncqWDl9tbHpKLgM8NjX/9e0wT1wwT/I5rk
+ y4b4KaOxstL6GbPggz3j2kBTyDkv3U0OBJzr3q/yjT2fniqNAMZed6Dp66XkyppKhA
+ +1ZJDZVmTanR0XHQpy5d3q2LiQPdcGlLISJ3HQhjQ7hZQiOcBr17+y3eescSd4u1W9
+ EU822q4R7DLj694qJG29BgJyC9pVcAkr0rFeEcjB9a6cVTOdPCNJCF3EQPxarf2ZGU
+ 348rz2xq12TPSTZxT1Vc4fJiCWIsP7s6Y9Euqznvb43SyTJJK3h71epM6jqjDcSYfH
+ NO250P43JIXFQ==
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Date: Thu, 18 Jan 2024 16:11:10 +0100
+From: Michael Walle <mwalle@kernel.org>
+To: Dragan Simic <dsimic@manjaro.org>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>, clamor95@gmail.com,
+ sjg@chromium.org, sumit.garg@linaro.org, trini@konsulko.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2] boot: add support for button commands
+In-Reply-To: <bf263fe8e2cb0bb841efed72372ba954@manjaro.org>
+References: <3c76c99b-4d18-48a4-902a-9d547091d3d7@linaro.org>
+ <20240111093808.3678028-1-mwalle@kernel.org>
+ <5af4762a66ab630ea8e391183eb7ee4f@manjaro.org>
+ <15c65f2d0d66826cd1cf1c5a18ca7f26@kernel.org>
+ <bf263fe8e2cb0bb841efed72372ba954@manjaro.org>
+Message-ID: <b12a7bc0cbadba250b1de613236f9f85@kernel.org>
+X-Sender: mwalle@kernel.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,42 +75,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ye Li <ye.li@nxp.com>
+>>> Using CONFIG_EXTRA_ENV_SETTINGS should be good enough to provide
+>>> the fallback defaults.  However, the users can still mess the things 
+>>> up,
+>>> but again, they can do that already in many places.
+>> 
+>> I disagree. In my case that is a last resort recovery. And it should
+>> work in any case. Even if the user has messed up anything (except
+>> from erasing the bootloader in the SPI flash ;)).
+> 
+> Maybe the solution could be another compile-time option to "lock down"
+> the built-in defaults provided through CONFIG_EXTRA_ENV_SETTINGS?  If
+> that new option is selected, changes to the environment would make no
+> changes to the built-in defaults, i.e. those parts of the environment
+> would actually be ignored.
 
-To work with commit 2f3c92060dcd ("imx8m: workaround ROM serror")
-we need to enable the SError exception and install vector in SPL.
+Not sure locking down the whole environment is a good idea.
 
-Signed-off-by: Ye Li <ye.li@nxp.com>
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
-Reported-by: Thomas Schaefer <thomas.schaefer@kontron.com>
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
-Signed-off-by: Fabio Estevam <festevam@gmail.com>
----
- arch/arm/mach-imx/imx8m/Kconfig | 3 +++
- 1 file changed, 3 insertions(+)
+>>>> In summary, the registered (compiled-in) command should always take
+>>>> precedence. If one wants to supply a default command which can be
+>>>> changed later, that can go via the (compiled-in) default 
+>>>> environment.
+>>> 
+>>> Sorry, this is a bit confusing to me.  Didn't you write above that
+>>> the users should be able to change the associated commands through
+>>> the environment variables?
+>> 
+>> I had two kinds of button commands in mind: immutable ones and mutable
+>> ones. The first can be achieved with compiled-in commands, the second
+>> with a default environment and environment variables.
+>> 
+>> Also, whether a command is a mutable one or not is the decision of
+>> the developer (or the one who's compiling/configuring u-boot),
+>> not the user.
+> 
+> I believe that the additional compile-time option, which I proposed
+> above, could be extended to specify which of the built-in default
+> button-command associations are immutable, and which are allowed to
+> be modified through the environment variables.
 
-diff --git a/arch/arm/mach-imx/imx8m/Kconfig b/arch/arm/mach-imx/imx8m/Kconfig
-index 328c3e388051..eb0488a9e8bf 100644
---- a/arch/arm/mach-imx/imx8m/Kconfig
-+++ b/arch/arm/mach-imx/imx8m/Kconfig
-@@ -13,14 +13,17 @@ config IMX8MQ
- 	bool
- 	select IMX8M
- 	select CLK_IMX8MQ
-+	select ARMV8_SPL_EXCEPTION_VECTORS
- 
- config IMX8MM
- 	bool
- 	select IMX8M
-+	select ARMV8_SPL_EXCEPTION_VECTORS
- 
- config IMX8MN
- 	bool
- 	select IMX8M
-+	select ARMV8_SPL_EXCEPTION_VECTORS
- 
- config IMX8MP
- 	bool
--- 
-2.34.1
+IIRC there is already a mechanism for that. Environment hooks
+or something like that. But I'm not sure that has other implications
+and qualify as simple and lightweight for this use-case.
 
+Anyway, we digress. I just wanted to make you aware of another
+use-case, which btw. is already done today in the lsxl board for
+example.
+
+-michael
