@@ -4,78 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A96B5C4707B
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 12:39:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6A21C4707B
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 12:45:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D43F879E5;
-	Thu, 18 Jan 2024 13:39:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6B8B2879E5;
+	Thu, 18 Jan 2024 13:45:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=supermicro.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qzTRdw/5";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=supermicro.com header.i=@supermicro.com header.b="YQthO8ik";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DBFC87AB9; Thu, 18 Jan 2024 13:39:15 +0100 (CET)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 27DA687947; Thu, 18 Jan 2024 03:01:06 +0100 (CET)
+Received: from MGA.supermicro.com (mga.supermicro.com [207.212.57.84])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 732448798D
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 13:39:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B69D878B3
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 03:01:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=supermicro.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-3373bc6d625so10310982f8f.3
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 04:39:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705581553; x=1706186353; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=MjOmI2CSqFLpoVpJUVEo6+Mial8QGqoczruGVyRp04s=;
- b=qzTRdw/5VFrASYx1Td9WKbdiScpKW/SSU3gQkb+SssbKGybdWTCIz/ULP5W9Im256b
- XLq0Wj1eT0YGsfqvImuEH8qSkTXkvB5m7lvy76q385oiH5mpkk07auvdRt3n6U+Ao+tq
- 6Z4hO3Bfpa9Vu/8tgZNnNrXPE9qx5SIDNsUmiEJciUXwNh7AKTN0N46Z85P5A39yzxxt
- GCD9Rt5Yn13tJUgEwtp6ydBgYPGPzKRlj0V+Np3/lC88bIgrYfVgO8OwtF7AXOkZiKFc
- wXkJSzxoC4bYAg7OIQzF8FFBnSpK05CkGBl4L4GrLZaOdROiR+SNysNwTH+l/MRBLmNn
- lpAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705581553; x=1706186353;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MjOmI2CSqFLpoVpJUVEo6+Mial8QGqoczruGVyRp04s=;
- b=SFFzjfw07hHTy4dlaf1xC2IvCjz/hCl74aamK9sYvIqx3wuXcguCIck+Uh0cU05I2Y
- h97nMmBJ82RgQ36PECxXA2boph3aYJ1N3W6b67nWebbE9D0AaVBS6n/roVpr4OSBJ7ej
- AmcWIrQ2QExBaOXxPX/HegGT47W0Lk5FFJnzZAQieTc/SndEjV8XyDTVHiYPZwNEzCXS
- cpoW1Q1EpD2FxaJMVbdGQj0OJsa0KSBJrIX1/1IxBs/4Qj4g57/8xsfe0axy2/N2KdG2
- u4lYrEWDpJeME8iBV15OoDo9U3nh9gx0GTvbc2pMDCB6TkhFp8VXsWZKKP6Z8hXoys7k
- bUEQ==
-X-Gm-Message-State: AOJu0YwHxt65W4SlzebmUhgxUFsqvf8JNc4pS2KVBpaHJILLx6DnenEl
- YBzNupa/WQyYZ8tErcGa4lAGdZkZGYb2+VyLKJ0yIWTvfQzlx65W+uKy9f3W+gU=
-X-Google-Smtp-Source: AGHT+IGAaazP3A01xptFJ+fzWhdwrQgHfi6ndxLSm8PgjjXiMjhKZScb9cqYKj6cUr4VprZnA1g33w==
-X-Received: by 2002:a5d:6106:0:b0:337:c732:4074 with SMTP id
- v6-20020a5d6106000000b00337c7324074mr446988wrt.75.1705581552879; 
- Thu, 18 Jan 2024 04:39:12 -0800 (PST)
-Received: from hera (ppp089210121239.access.hol.gr. [89.210.121.239])
- by smtp.gmail.com with ESMTPSA id
- x8-20020a5d54c8000000b00337d3465997sm1167166wrv.38.2024.01.18.04.39.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jan 2024 04:39:12 -0800 (PST)
-Date: Thu, 18 Jan 2024 14:39:10 +0200
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 2/4] cmd: provide command to display SMBIOS information
-Message-ID: <Zakb7ozkAU994FBj@hera>
-References: <20240117153347.85074-1-heinrich.schuchardt@canonical.com>
- <20240117153347.85074-2-heinrich.schuchardt@canonical.com>
+ spf=pass smtp.mailfrom=liuw@supermicro.com
+Received: from pps.filterd (MGA.supermicro.com [127.0.0.1])
+ by MGA.supermicro.com (8.17.1.19/8.17.1.19) with ESMTP id 40HCwARa000531;
+ Wed, 17 Jan 2024 18:00:58 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=supermicro.com;
+ h=from : to : cc :
+ subject : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=DKIM;
+ bh=FR9RLjbexVQPCiWYB0GnytFFDqQ1vVwQ263k+zi//Oo=;
+ b=YQthO8ikNDk1fYkytQ6qa+gNXj0V4Jw4SSqef+g3sgAEPo2EYEGhiZpooYDyjpiK4IQn
+ m/gnQLfKPD9S08uhgPSLQorKCpdp/mn78d+vCr9LB92CE5RsoDe3mXRVqjKBYykGi80R
+ ioYIe/zJpsKyxe/iCwPMHP8GjSva73GvxWkVe5hpSzWjaCd7KEUxTUTgdivphnx15KFX
+ 0FnRRBihAPHxTtUVUi2Y4gfGpb6iXpiPP5n6ED0rcb1CewZNIFy/kwOkqFVRFGAKpkqN
+ rmrp3eNasguGOIVTDWxViRq/fDgna3kqMpi8hLGyky+s0/D5hWoCzhygsDXCw9NEOavU ig== 
+Received: from ex2013-mbx5.supermicro.com (EX2013-MBX5.supermicro.com
+ [10.2.1.182]) by MGA.supermicro.com (PPS) with ESMTPS id 3vku0wnwe1-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
+ Wed, 17 Jan 2024 18:00:58 -0800
+Received: from us-ex2019-mbx2.supermicro.com (10.2.6.158) by
+ EX2013-MBX5.supermicro.com (10.2.1.182) with Microsoft SMTP Server (TLS) id
+ 15.0.1497.42; Wed, 17 Jan 2024 18:00:58 -0800
+Received: from us-ex2019-mbx1.supermicro.com (10.2.6.157) by
+ us-ex2019-mbx2.supermicro.com (10.2.6.158) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.37; Wed, 17 Jan 2024 18:00:57 -0800
+Received: from us-ex2019-mbx1.supermicro.com ([fe80::37c2:47e5:2f5d:450f]) by
+ us-ex2019-mbx1.supermicro.com ([fe80::37c2:47e5:2f5d:450f%16]) with
+ mapi id 15.02.1118.037; Wed, 17 Jan 2024 18:00:57 -0800
+From: Liu Wang <liuw@supermicro.com>
+To: Fabio Estevam <festevam@gmail.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: Could you please help me in resolving the
+ "arch/arm/lib/vectors.S:87: Error: no such instruction: `b reset' ?"
+Thread-Topic: Could you please help me in resolving the
+ "arch/arm/lib/vectors.S:87: Error: no such instruction: `b reset' ?"
+Thread-Index: AdpI24I3kjWF6EnATLOPMIhQOQ7T3gAtdOcAAAg2JaAAAa1qgP//j+hE//+/RCD//2g18IABuW8A//+BwpQ=
+Date: Thu, 18 Jan 2024 02:00:57 +0000
+Message-ID: <8ACC66AF-9761-44E2-A36E-62C8EAADA09C@supermicro.com>
+References: <2dba1330181940c78b5ad47f18ee43fa@supermicro.com>
+ <CAOMZO5DTw2uU+uEmVLR9nbFkR4QPgmhuY9VUAz-sgg+GppMG9g@mail.gmail.com>
+ <0934648988c9444aaf85f2e3163c0f4b@supermicro.com>
+ <CAOMZO5Cy8as7b_cup6J+PYbN-stkj4Vz2wsLB_1=NN3vx5SVWQ@mail.gmail.com>
+ <728CCDD9-CEA4-4ED1-9143-189C3F257097@supermicro.com>
+ <9c2e7790f0c94b0ebf0e840100eae2c0@supermicro.com>
+ <be10a49d2381407fb955958fbc87ecd4@supermicro.com>,
+ <CAOMZO5D5g6izBC=aCumX_H1tbo5uXTfuhQekSuH_XDqUAN91Kg@mail.gmail.com>
+In-Reply-To: <CAOMZO5D5g6izBC=aCumX_H1tbo5uXTfuhQekSuH_XDqUAN91Kg@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240117153347.85074-2-heinrich.schuchardt@canonical.com>
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-01-17_14,2024-01-17_01,2023-05-22_02
+X-Mailman-Approved-At: Thu, 18 Jan 2024 13:45:03 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,73 +98,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-A few nits below
-
-On Wed, Jan 17, 2024 at 04:33:45PM +0100, Heinrich Schuchardt wrote:
-> U-Boot can either generated an SMBIOS table or copy it from a prior boot
-> stage, e.g. QEMU.
->
-> Provide a command to display the SMBIOS information.
->
-> Currently only type 1 and 2 are translated to human readable text.
-> Other types may be added later. Currently only a hexdump and the list of
-> strings is provided for these.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
-> v2:
-
-[...]
-
-> 	email address updated
-> +static struct smbios_header *next_table(struct smbios_header *table)
-> +{
-> +	const char *str;
-> +
-> +	if (table->type == SMBIOS_END_OF_TABLE)
-> +		return NULL;
-> +
-> +	str = smbios_get_string(table, 0);
-> +	return (struct smbios_header *)(++str);
-
-That can lead to unaligned access when we dereference that pointer, do we
-care?
-
-> +}
-> +
-> +static void smbios_print_generic(struct smbios_header *table)
-> +{
-> +	char *str = (char *)table + table->length;
-> +
-
-Do we want the header below printed if there are no strings?
-IOW can we exit early if (!*str) ?
-
-> +	if (CONFIG_IS_ENABLED(HEXDUMP)) {
-> +		printf("Header and Data:\n");
-> +		print_hex_dump("\t", DUMP_PREFIX_OFFSET, 16, 1,
-> +			       table, table->length, false);
-> +	}
-> +	if (*str) {
-> +		printf("Strings:\n");
-> +		for (int index = 1; *str; ++index) {
-> +			printf("\tString %u: %s\n", index, str);
-> +			str += strlen(str) + 1;
-> +		}
-> +	}
-> +}
-> +
-> +void smbios_print_str(const char *label, void *table, u8 index)
-> +{
-> +	printf("\t%s: %s\n", label, smbios_get_string(table, index));
-> +}
-> +
-
-
-Other than that, LGTM
-
-Thanks
-/Ilias
+SGkgRmFiaW8sDQoNClRoYW5rIHlvdS4gDQpXaWxsIGRvLg0KDQpTaW5jZXJlbHksDQpMaXUgIFdh
+bmcNCg0KPiBPbiBKYW4gMTcsIDIwMjQsIGF0IDU6MzMgUE0sIEZhYmlvIEVzdGV2YW0gPGZlc3Rl
+dmFtQGdtYWlsLmNvbT4gd3JvdGU6DQo+IA0KPiDvu79bQ0FVVElPTjogRXh0ZXJuYWwgTWFpbF0N
+Cj4gDQo+PiBPbiBXZWQsIEphbiAxNywgMjAyNCBhdCAxMDoyNuKAr1BNIExpdSBXYW5nIDxsaXV3
+QHN1cGVybWljcm8uY29tPiB3cm90ZToNCj4+IA0KPj4gSGkgRmFiaW8sDQo+PiANCj4+IFRoYW5r
+IHlvdSBmb3IgeW91ciBoZWxwLg0KPj4gDQo+PiBTd2l0Y2hpbmcgdG8gImFybS1nbnUtdG9vbGNo
+YWluLTEzLjIuUmVsMS14ODYtNjQtYXJtLW5vbmUtZWFiaSIgc2VlbXMgYSBmaXggZm9yIDoNCj4+
+IC4uLmdudWVhYmloZi1nY2M6IGNhbm5vdCBleGVjdXRlIGJpbmFyeSBmaWxlOiBFeGVjIGZvcm1h
+dCBlcnJvci4uLg0KPiANCj4gSSB3b3VsZCBzdWdnZXN0IGluc3RhbGxpbmcgdGhlIGRlZmF1bHQg
+YXJtIHRvb2xjaGFpbiBmcm9tIFVidW50dS4NCj4gDQo+IEFzIGZvciB0aGUgYnVpbGQgZXJyb3Is
+IHlvdSB3b3VsZCBuZWVkIHRvIGFzayB0byB3aG9ldmVyIHByb3ZpZGVkIHlvdQ0KPiB3aXRoIHRo
+ZSBjb2RlLg0KPiANCj4gU2luY2UgdGhpcyBpcyBub3QgYSBtYWlubGluZSBVLUJvb3QsIHdlIGNh
+bm5vdCBoZWxwLg0K
