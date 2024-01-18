@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0167FC47DAF
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 23:03:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF63BC47DAF
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 23:04:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B841F87AD0;
-	Fri, 19 Jan 2024 00:03:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 44D8C87BC5;
+	Fri, 19 Jan 2024 00:04:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qOyjU/Oh";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AizE58BR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93B9386FB2; Fri, 19 Jan 2024 00:03:46 +0100 (CET)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id 1613487BA0; Thu, 18 Jan 2024 23:29:26 +0100 (CET)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6046886FB2
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 00:03:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0946D87613
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 23:29:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-5ff821b9acfso1589637b3.1
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 15:03:44 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=moritz.fischer.private@gmail.com
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-5edfcba97e3so1528277b3.2
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 14:29:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705619023; x=1706223823; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=kVaRHNZhH9VamGU92mTcQpu78fvB2NP9zJBs9oeIttA=;
- b=qOyjU/OhxX0jPqlfh09SplzYZxzjnIcnHT4qggZSnMCkZGXL3UbTx0j5pGYGfmdS/X
- amKeKi5trZkk7UNJikma2GS95ttZ8Fno6GuRuYCUHkuQb+NHbEGgepbvBRdqwtNlhHCD
- Hzx1HlGVgp0HI90tLjOL5mmDbf7ut/RDXpyYw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705619023; x=1706223823;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1705616962; x=1706221762; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kVaRHNZhH9VamGU92mTcQpu78fvB2NP9zJBs9oeIttA=;
- b=lOXQSCArDGS4TCGWVGtjEnsI9b91sqBdHygcfnAO2wLcUi/81vySdc8StXBRrJSPC3
- BLHi3h5IvZEdNJsgn+D8aXAhO+O1QZSy9CvLHhx5dAAw17k2eFU/CT8qTPofKlLjJfTx
- 9UZMeF2TLPb41a/3r1WhMDH57M/sKZoilR/fsbJtkdXfPpWERTkH2t4JuFyIuQBN5eTG
- 4PaSDL3vd44FdrjTbzVNSwTEMRmVP6bX00/IE9glKhkTf2MSPC70w+XyC4TkeGeK36CA
- ydUGZtzz0MdPzMwgvmcYgQFuKTjUrHwjAc+DKW2PaCrYkFkKQ/7Xgp/1GA9h3L/YbCgH
- Xf/A==
-X-Gm-Message-State: AOJu0YxMAR1pNMOoeuOeD1C9vqHRdIHV+ei2oIuU2/pFW/80oD659UWq
- bEr5pneM39Oks7gquCpSXJFaqt28bK9Ed4xsCgjvmhUR1CbPs7W9EgjREYzN8gE=
-X-Google-Smtp-Source: AGHT+IHVF7WoHURuqVckB05CFXF0syoULuBqQHMSLNyn9ul62fI9H4z6Kj3A1QlSA5g6LkywdBRK8A==
-X-Received: by 2002:a25:b1a6:0:b0:dc2:331e:48bd with SMTP id
- h38-20020a25b1a6000000b00dc2331e48bdmr1403665ybj.44.1705619023042; 
- Thu, 18 Jan 2024 15:03:43 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- c127-20020a254e85000000b00dbdb2966f67sm6361508ybb.24.2024.01.18.15.03.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jan 2024 15:03:42 -0800 (PST)
-Date: Thu, 18 Jan 2024 18:03:40 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Moritz Fischer <moritz.fischer.private@gmail.com>
-Cc: Moritz Fischer <moritzf@google.com>, bmeng.cn@gmail.com,
- sjg@chromium.org, wenbin.song@nxp.com, u-boot@lists.denx.de,
- patrick@blueri.se
-Subject: Re: [PATCH v2 RESEND 2/2] nvme: Update nvme_scan_namespace to keep
- trying on busy
-Message-ID: <20240118230340.GI12635@bill-the-cat>
+ bh=v4c0D5qQkjAjkVsid+i7XkKsP5ZAGnL29alHCKrxqgw=;
+ b=AizE58BRMkxs9bRh/mNKuiixT0UdIiKbKAPLO7yrWPWbtzZz4sDEXDcFmTqUT89+3X
+ P7LbPiVxY1Zdm/698/G1D+xu6/Rrnox+mu/WPfg0mwu3JY0549WG8561XdxZsgGXUukA
+ o60XbMlQFcZXqY3po10Vu6ArixwYbD1v3QsVXVE6j61bYm7In5Jj6yHvn0QX/KORJzk9
+ S11VrgqXvWfHc0Ym/fG4GeBRDvnBgt/0TiKFnFAYVKPGy8n2agT149AA3VHaJKoGF6NH
+ 6d0c3Kq6qbmn4uR8xE9NPW7FoNysCW0eir+oSpj1LvmaGrp9CgN3NRQ58B8W+yh2VreW
+ iq2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705616962; x=1706221762;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=v4c0D5qQkjAjkVsid+i7XkKsP5ZAGnL29alHCKrxqgw=;
+ b=SNfnRS6z0vsv+HI1q+5f66WlXPjbEgHQ0tUgif9u5lM4LSfNk1fdpxcvELdxkVdVmU
+ k6pjjQc6FlenXprAV9aXhcYIYBMYRfrLnk+tEVEsJy4/VzP7Ap61BnxkCj3tlT1UsHEK
+ nIsn3cZlhlW0NBkt/0oykbfKlnUHseTUUQTQZ7fBbzOXLigwZb/fz92qP95CMIyjn7D3
+ jY2UiOo4wmtBomFtQ6olDBGrqaxJ1eSZ9R9RI5f+9HhaxA5I102kAbDwJ0MWHDuT0cTp
+ +mq4zeuSfEoSvsu8nAYqFyNf5EI8qiANU5rilAg9H3JEE1uj5x63K1uG/NBFcSfXPdFW
+ 5IVA==
+X-Gm-Message-State: AOJu0Ywqg2vNSZw4jIrXTypZSJWwcQQOI7r98i+OHiw3FAQ2UwZpttPE
+ A+LWkHVulGwyVXLRKE5AcrHQM0bsxdJBlDCdSD3e27cfTzsVvZYu+yNMh6dv2UWIRoj8u6RDPwy
+ 5ZDeOsE6UzN1JpNa7RgOvEHM/vSE=
+X-Google-Smtp-Source: AGHT+IHZYT/gNVbz8JuPjIW00bIM9ZvkhxT1SEWC7Mdh/eCKOhc+x+cxOB4ISoDJIXqA2KczNqu+UGFxTw0qcT7uyvA=
+X-Received: by 2002:a0d:e657:0:b0:5ff:860f:21d5 with SMTP id
+ p84-20020a0de657000000b005ff860f21d5mr1424629ywe.33.1705616962635; Thu, 18
+ Jan 2024 14:29:22 -0800 (PST)
+MIME-Version: 1.0
 References: <20240110050448.1441657-1-moritzf@google.com>
  <20240110050448.1441657-2-moritzf@google.com>
- <CAJYdmeORBWpwMFKA-C9Ybie20OgJDwUzdo+ZE7eESn7VpV_2PQ@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="LIOK7F0lQrPBxXw0"
-Content-Disposition: inline
-In-Reply-To: <CAJYdmeORBWpwMFKA-C9Ybie20OgJDwUzdo+ZE7eESn7VpV_2PQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20240110050448.1441657-2-moritzf@google.com>
+From: Moritz Fischer <moritz.fischer.private@gmail.com>
+Date: Thu, 18 Jan 2024 14:29:11 -0800
+Message-ID: <CAJYdmeORBWpwMFKA-C9Ybie20OgJDwUzdo+ZE7eESn7VpV_2PQ@mail.gmail.com>
+Subject: Re: [PATCH v2 RESEND 2/2] nvme: Update nvme_scan_namespace to keep
+ trying on busy
+To: Moritz Fischer <moritzf@google.com>
+Cc: bmeng.cn@gmail.com, sjg@chromium.org, wenbin.song@nxp.com, 
+ u-boot@lists.denx.de, trini@konsulko.com, patrick@blueri.se
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Fri, 19 Jan 2024 00:04:09 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,75 +91,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, Jan 9, 2024 at 9:05=E2=80=AFPM Moritz Fischer <moritzf@google.com> =
+wrote:
+>
+> A busy controller shouldn't be game-over for all controllers,
+> so keep trying on hitting -EBUSY.
+>
+> This change brings the actual behavior of the routine in line
+> with what the descriptions says.
+>
+> Fixes: 982388eaa991 ("nvme: Add NVM Express driver support")
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Moritz Fischer <moritzf@google.com>
+> ---
+>  drivers/nvme/nvme.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
+> index ec45f831a3..59a139baa0 100644
+> --- a/drivers/nvme/nvme.c
+> +++ b/drivers/nvme/nvme.c
+> @@ -695,7 +695,9 @@ int nvme_scan_namespace(void)
+>                 if (ret) {
+>                         log_err("Failed to probe '%s': err=3D%dE\n", dev-=
+>name,
+>                                 ret);
+> -                       return ret;
+> +                       /* Bail if we ran out of memory, else keep trying=
+ */
+> +                       if (ret !=3D -EBUSY)
+> +                               return ret;
+>                 }
+>         }
+>
+> --
+> 2.43.0.472.g3155946c3a-goog
+>
 
---LIOK7F0lQrPBxXw0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Gently ping on this. Is anything wrong with this series or why does it
+keep falling through the cracks?
 
-On Thu, Jan 18, 2024 at 02:29:11PM -0800, Moritz Fischer wrote:
-> On Tue, Jan 9, 2024 at 9:05=E2=80=AFPM Moritz Fischer <moritzf@google.com=
-> wrote:
-> >
-> > A busy controller shouldn't be game-over for all controllers,
-> > so keep trying on hitting -EBUSY.
-> >
-> > This change brings the actual behavior of the routine in line
-> > with what the descriptions says.
-> >
-> > Fixes: 982388eaa991 ("nvme: Add NVM Express driver support")
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > Signed-off-by: Moritz Fischer <moritzf@google.com>
-> > ---
-> >  drivers/nvme/nvme.c | 4 +++-
-> >  1 file changed, 3 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
-> > index ec45f831a3..59a139baa0 100644
-> > --- a/drivers/nvme/nvme.c
-> > +++ b/drivers/nvme/nvme.c
-> > @@ -695,7 +695,9 @@ int nvme_scan_namespace(void)
-> >                 if (ret) {
-> >                         log_err("Failed to probe '%s': err=3D%dE\n", de=
-v->name,
-> >                                 ret);
-> > -                       return ret;
-> > +                       /* Bail if we ran out of memory, else keep tryi=
-ng */
-> > +                       if (ret !=3D -EBUSY)
-> > +                               return ret;
-> >                 }
-> >         }
-> >
-> > --
-> > 2.43.0.472.g3155946c3a-goog
-> >
->=20
-> Gently ping on this. Is anything wrong with this series or why does it
-> keep falling through the cracks?
-
-Randomly, I'm testing this (and your other patches, and some others) at
-the moment. Sorry for the delay.
-
---=20
-Tom
-
---LIOK7F0lQrPBxXw0
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWprkkACgkQFHw5/5Y0
-tyxqTAv/WHFe+tlx43oJn9JzW7jHIioEXgE70oOth5Vzp5yH1QzK3nZaBE8ubCiX
-9bRjvg23iW53GwW07Ifi5Dr4xWcUQh0N9pCOymgHJOlgygmTLMp/Epps5ca/Bd6r
-zz/ZqgTCWTF/2slRlwMO9zS3xZlCJotFe/LIdfoU/x0n6bABqTV5dYF3Vs00sJWQ
-o+oOltUHbLYNlEATCTpISKcZga3y7VjEhV4p7PUZEtlyCOQObj0IgfJqKecPEfhD
-CgWCcQPwLerkUy0Y1Q0wbLHneHtl8F94fphYaYGuqkyLZw2MXgoAPNGdp9XNeXXf
-TcJNINiiPi4CQAvqyjuq8aUtnIebVCQ0QQx6XMbpvlpttrMAkW9CqD3NyU5OTsml
-gypzAbRkPwbFYGwSFOECV1QsEhSfEYRu6OpDFPbg9jmrNOHwq+JV5O18/OjvrPVM
-Fdi9j4AkjyV6yWXASm7G6GubNHe7iSC/p7PsTlQS3jr1dSkKeTOYcAr/KHDYvRub
-gvU9QGxH
-=3iyU
------END PGP SIGNATURE-----
-
---LIOK7F0lQrPBxXw0--
+- Moritz
