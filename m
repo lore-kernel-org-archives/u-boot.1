@@ -4,61 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5333C4707B
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 07:30:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B688EC47077
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 07:35:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2026387A00;
-	Thu, 18 Jan 2024 08:30:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id EBB0787A0E;
+	Thu, 18 Jan 2024 08:35:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="IODlxWOi";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="ZtwfAWMz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68D6C87A77; Thu, 18 Jan 2024 08:30:50 +0100 (CET)
-Received: from mail-m12796.qiye.163.com (mail-m12796.qiye.163.com
- [115.236.127.96])
+ id 9022287B5F; Thu, 18 Jan 2024 08:35:18 +0100 (CET)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C36F787837
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 08:30:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 28C4F87A00
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 08:35:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=IODlxWOii1kWHQB/Qy1FPJkk2xg0+CQJ4yuB0r8ighHcl9B1/MJbqBdMGnEDBAtnF3LMGSo8FbduY04dlN6JTLkD5cmnOo2Oel1uQsMaf9h2XmzsvbdkIHg8CtHGl3ljze9KJ8YbHAVjrOXsPQNdStKnkOxx6DJ77nex7vDj6G4=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=X3JKBO+0aWGlPRRfqZY56dqlOBColiUamvW20p262CE=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11873.qiye.163.com (Hmail) with ESMTPA id C5B84900402;
- Thu, 18 Jan 2024 15:30:43 +0800 (CST)
-Message-ID: <2cfa0648-8932-41bc-8d88-02859ebb0648@rock-chips.com>
-Date: Thu, 18 Jan 2024 15:30:43 +0800
+ dmarc=pass (p=none dis=none) header.from=redhat.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=eballetb@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1705563314;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=pa93PT82KI9iyZlh/Njw33AcENTMVm0Uo3N5jnMyhD4=;
+ b=ZtwfAWMzsS18FabULN84SpScpeFr3b4bgJmeNUws4kKMGDv8A3kLeUg6ijqjINtWP/ITb1
+ pENxNAqUR+5ErG5clwwxZPzl+M2KHeXTOiTO0u2YEV8EqZt0OKpzcF4fWwnyRq777UdQDw
+ hyS0VjE47IWpVt5DtnqucBO5mVTvcA0=
+Received: from mail-oa1-f72.google.com (mail-oa1-f72.google.com
+ [209.85.160.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-487-ena_lzSvNei6gp8KJ_NurA-1; Thu, 18 Jan 2024 02:35:12 -0500
+X-MC-Unique: ena_lzSvNei6gp8KJ_NurA-1
+Received: by mail-oa1-f72.google.com with SMTP id
+ 586e51a60fabf-2107aeb1fa8so3087769fac.0
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 23:35:12 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705563312; x=1706168112;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=pa93PT82KI9iyZlh/Njw33AcENTMVm0Uo3N5jnMyhD4=;
+ b=d84f2Dr7STEOcuBoYnpHq0ome0lPWGnPCpF4YI/3AXP/gCgX/o2qoJwkQghTvr16PC
+ N3X8HG2eLzJtXzo4VoLbDjvpkrW+e7mpz3DRGIac7b0UmBov2NlcspXDbwLcXdOPxR3Q
+ TafNIdUblOR8t0JrWa1xc+V4WcwGuj0H3uZTyS2sORZiwQJNl6Ftkb9lvNjEDLtUEpNO
+ ERfB25xFGfd8gKM9CRyycw8jnDJOJkTpT/jbyZZFIs04vBjcI6HYTt4DDoVyf3yT/ELg
+ oGjAq9vgBuyeoA/j5uM94aLkgdABGJ4/tbdkLYEyySCr28keKm3CmUAt3WyohGUy5oVG
+ StvQ==
+X-Gm-Message-State: AOJu0YzmqEZttAp91fzAXXa5hyFwYUZOQi7O3OfxunW/7PIv90jsqivP
+ 294ZioxG07niHxEh1pPSTGaHLTbjoZa5/IyKcUZzNO+1G3ZV7ij/5MoXFDDBdpASofdjKBN5UdB
+ pKyVoSE4+A18gbsfMlYZmSZjrPxIoq1j3PORrCfRl5xBjWj2+bUggWrTmN6NUkpxT965gR8hNjq
+ bC463Ik+EQCavEpsQN5my5oHG6yA==
+X-Received: by 2002:a05:6870:8290:b0:203:c5ca:533e with SMTP id
+ q16-20020a056870829000b00203c5ca533emr437319oae.24.1705563312270; 
+ Wed, 17 Jan 2024 23:35:12 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFtTemmYgQfX/e3EGI66XJyy6je8ls+Qq3GqHy9r8NkgSIA53VqekH4qQW9V5b71kThQAjQ7BYoQ0mkuhIB5Kc=
+X-Received: by 2002:a05:6870:8290:b0:203:c5ca:533e with SMTP id
+ q16-20020a056870829000b00203c5ca533emr437295oae.24.1705563312079; Wed, 17 Jan
+ 2024 23:35:12 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V4 7/7] doc: board: anbernic: Update rgxx3 to add new
- boards
-Content-Language: en-US
-To: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de
-Cc: andre.przywara@arm.com, philipp.tomsich@vrull.eu, sjg@chromium.org,
- jagan@edgeble.ai, jonas@kwiboo.se, Chris Morgan <macromorgan@hotmail.com>
-References: <20240102154654.191055-1-macroalpha82@gmail.com>
- <20240102154654.191055-8-macroalpha82@gmail.com>
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240102154654.191055-8-macroalpha82@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQkMeTlYaT01ISx4dTkgYSkpVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
- tLWQY+
-X-HM-Tid: 0a8d1b7ab8912eafkusnc5b84900402
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ODo6CRw6PTwdCBAaITAQCEIX
- QhhPCTRVSlVKTEtOTk1IS09PTklPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPSkhDNwY+
+References: <20231219191537.4039361-1-a-nandan@ti.com>
+ <20240103153715.43kvt4ma7u7gz76y@sandblast>
+ <20240103155324.cr74b2plb7kjan4t@richness>
+In-Reply-To: <20240103155324.cr74b2plb7kjan4t@richness>
+From: Enric Balletbo i Serra <eballetb@redhat.com>
+Date: Thu, 18 Jan 2024 08:35:01 +0100
+Message-ID: <CALE0LRvBz9DVvKgyHbbrJ-_Z4pc1GmdtsKuUKAJyMT2v5f7GJQ@mail.gmail.com>
+Subject: Re: [PATCH v7 00/17] Introduce initial TI's J784S4 and AM69 support
+To: Nishanth Menon <nm@ti.com>
+Cc: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>,
+ Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
+ Andrew Davis <afd@ti.com>, 
+ Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, 
+ Aradhya Bhatia <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>, 
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Roger Quadros <rogerq@kernel.org>, 
+ Jayesh Choudhary <j-choudhary@ti.com>, Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de, 
+ Sinthu Raja M <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,65 +113,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Apurva et al,
 
-On 2024/1/2 23:46, Chris Morgan wrote:
-> From: Chris Morgan <macromorgan@hotmail.com>
+On Wed, Jan 3, 2024 at 4:53=E2=80=AFPM Nishanth Menon <nm@ti.com> wrote:
 >
-> Update the RGxx3 documentation to note that it now supports the
-> RG-ARC-D, RG-ARC-S, Powkiddy RK2023, and Powkiddy RGB30. Also update
-> verbiage around panel detection to note that it is no longer hard coded
-> to the RG503.
+> On 09:37-20240103, Nishanth Menon wrote:
+> > On 00:45-20231220, Apurva Nandan wrote:
+> > > Hello Everyone!
+> > >
+> > > This series will introduce basic support (SD and UART) support for Te=
+xas
+> > > Instruments J784S4 EVM.
+> > >
+> > > The J784S4 SoC device tree patches are taken from kernel patch submis=
+sions
+> > > and will be updated as they are accepted and merged to the kernel tre=
+e.
+> > > All other patches are specific to SPL and u-boot and do not have
+> > > dependency on other trees. Appreciate a review for acceptance to u-bo=
+ot
+> > > tree.
+> > >
+> > > Here are some of the salient features of the J784S4 automotive grade
+> > > application processor:
+> > >
+> > > The J784S4 SoC belongs to the K3 Multicore SoC architecture
+> > > platform, providing advanced system integration in automotive,
+> > > ADAS and industrial applications requiring AI at the network edge.
+> > > This SoC extends the K3 Jacinto 7 family of SoCs with focus on
+> > > raising performance and integration while providing interfaces,
+> > > memory architecture and compute performance for multi-sensor, high
+> > > concurrency applications.
+> > >
+> > Tried to apply this series on top of:
+> > next dffa6d0210f5 Merge tag 'dm-next-1124' of https://source.denx.de/u-=
+boot/custodians/u-boot-dm into next
+> >
+> >
+> > $ git am -3 v7_20231220_a_nandan_introduce_initial_ti_s_j784s4_and_am69=
+_support.mbx
+> > Applying: arm: dts: Introduce j784s4 dts from linux kernel
+> > Applying: arm: dts: Introduce am69-sk dts from linux kernel
+> > Applying: arm: mach-k3: Add basic support for J784S4 SoC definition
+> > Applying: arm: mach-k3: Sort SoC JTAG_ID entries
+> > Applying: soc: ti: k3-socinfo: Add entry for J784S4 SoC
+> > Applying: arm: mach-k3: j784s4: Add clk and power support
+> > Applying: drivers: dma: Add support for J784S4 SoC
+> > Applying: board: ti: j784s4: Add board support for J784S4 EVM
+> > Applying: board: ti: j748s4: Add board config yaml files
+> > Applying: board: ti: j784s4: Add boot environment variables
+> > Applying: arm: dts: Introduce am69-sk u-boot dts files
+> > error: patch failed: arch/arm/dts/Makefile:1411
+> > error: arch/arm/dts/Makefile: patch does not apply
+> > error: arch/arm/dts/k3-j784s4-binman.dtsi: does not exist in index
+> > Patch failed at 0011 arm: dts: Introduce am69-sk u-boot dts files
+> > hint: Use 'git am --show-current-patch=3Ddiff' to see the failed patch
+> > When you have resolved this problem, run "git am --continue".
+> > If you prefer to skip this patch, run "git am --skip" instead.
+> > To restore the original branch and stop patching, run "git am --abort".
+> >
+> > You will probably have to rebase this series once any review comments
+> > are addressed.
 >
-> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> Looks like public-inbox in kernel.org is missing patch[1] #11, but
+> patchworks[2] seems to have a copy
+>
+
+Yeah, I was also hit by this one, I checked again and the patches
+still apply cleanly on top of the mainline u-boot. Apurva would you
+mind to address the few comments that the patches received, add all
+the reviewed tags and resend again? Once done, I think the patches
+will be in a good state to be merged.
 
 Thanks,
-- Kever
-> ---
->   doc/board/anbernic/rgxx3.rst | 20 ++++++++++++++------
->   1 file changed, 14 insertions(+), 6 deletions(-)
+  Enric
+
+> Comments to follow..
 >
-> diff --git a/doc/board/anbernic/rgxx3.rst b/doc/board/anbernic/rgxx3.rst
-> index 7d1beb423c..d159ed2f76 100644
-> --- a/doc/board/anbernic/rgxx3.rst
-> +++ b/doc/board/anbernic/rgxx3.rst
-> @@ -5,6 +5,8 @@ U-Boot for Anbernic RGxx3 Devices
->   
->   This allows U-Boot to boot the following Anbernic devices:
->   
-> + - Anbernic RG-ARC-D
-> + - Anbernic RG-ARC-S
->    - Anbernic RG353M
->    - Anbernic RG353P
->    - Anbernic RG353PS
-> @@ -12,18 +14,24 @@ This allows U-Boot to boot the following Anbernic devices:
->    - Anbernic RG353VS
->    - Anbernic RG503
->   
-> +Additionally, the following very similar non-Anbernic devices are also
-> +supported:
-> +
-> + - Powkiddy RGB30
-> + - Powkiddy RK2023
-> +
->   The correct device is detected automatically by comparing ADC values
->   from ADC channel 1. In the event of an RG353V or RG353P, an attempt
->   is then made to probe for an eMMC and if it fails the device is assumed
->   to be an RG353VS or RG353PS. Based on the detected device, the
->   environment variables "board", "board_name", and "fdtfile" are set to
->   the correct values corresponding to the board which can be read by a
-> -boot script to boot with the correct device tree. If the board detected
-> -is not of type RG503 (which currently has only 1 panel revision) a
-> -panel detect is then performed by probing a "dummy" display on the DSI
-> -bus and then querying the display ID. The display ID is then compared
-> -to a table to get the known compatible string for use in Linux, and
-> -this string is saved as an environment variable of "panel".
-> +boot script to boot with the correct device tree. If a board is defined
-> +as requiring panel detection, a panel detect is then performed by
-> +probing a "dummy" display on the DSI bus and then querying the display
-> +ID. The display ID is then compared to a table to get the known
-> +compatible string for use in Linux, and this string is saved as an
-> +environment variable of "panel".
->   
->   FDT fixups are performed in the event of an RG353M to change the device
->   name, or in the event the panel detected does not match the devicetree.
+> [1] https://lore.kernel.org/all/20231219191537.4039361-1-a-nandan@ti.com/=
+#t
+> [2] https://patchwork.ozlabs.org/project/uboot/list/?series=3D387428
+> --
+> Regards,
+> Nishanth Menon
+> Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DD=
+B5 849D 1736 249D
+>
+
