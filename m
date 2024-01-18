@@ -4,63 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AB31C4707B
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 12:15:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42B70C4707B
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 12:33:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77961879E5;
-	Thu, 18 Jan 2024 13:15:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 480CB8798D;
+	Thu, 18 Jan 2024 13:33:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="B7UepuNb";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="WpdqOtFe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C05D8798D; Thu, 18 Jan 2024 13:15:20 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id 6EA3787B4C; Thu, 18 Jan 2024 13:33:19 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86588879E5
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 13:15:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FC4D83CF3
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 13:33:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id CC6FC60DF6;
- Thu, 18 Jan 2024 12:15:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BBC64C433F1;
- Thu, 18 Jan 2024 12:15:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705580112;
- bh=X+IHkBoOOpbT5Lhs5+utanpDH3tGCADJxXWGYtJj+/M=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=B7UepuNb3wWMYTwN3QvJcfUe4cuHAEPhex44fn2/e78jE8QJEVh6liM8v4oFsUe+9
- ryXOX2eS6NyyzruCyrmqnA8TM6MOkF5UdPgMrPPMkzSp0MS+Gb7fBZlaAIpN+EbxWW
- e65WyoHopSSZGS2SzigFKAB91DBZhetv+CNtuxDQZ936C5ImNw4KpZbOM/7HODYztP
- Smc+nLup7of5vbOfyCVCKTlAayONK/E2QFd0Go3WqzUVrB5/aM1a+eTcSujAEtt45x
- 6Ns+KOhBfbeBPhRQfd/ZXMHVrQoTjawKhf1ltNPJKs2KfVrh3GykW1uXoVp24n+el+
- Yo1bas0JVIcng==
-Message-ID: <bd06e456-643f-4a49-a342-00a008045b41@kernel.org>
-Date: Thu, 18 Jan 2024 14:15:06 +0200
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from [192.168.123.161] (ip-178-202-040-247.um47.pools.vodafone-ip.de
+ [178.202.40.247])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 8EE773F2D5; 
+ Thu, 18 Jan 2024 12:33:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1705581193;
+ bh=9li1KF0dTBruONl88j/WhrvnB8O5DQySrkf07ZCSIio=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=WpdqOtFePEkUoFNQiLeHxBQR07Qs6Axp3VQJeBxn440D/bghjX8cdLivY4M/5Wwvn
+ E2LdJ3xb5J7A/XGUSxe/sYTaDisWPAtUJbHKzLminIdWz91hc2HoCffpJVMfI3SQk4
+ 9ckM5bT3ot0tZ+MNwo5hA5Df5Ko/4wpY/chnP6Vp1dG+Ca61PcE9eBVvQ4+omElkx2
+ XUQUzn55wWxFGA9zyprXIBfKOrAfRyHq32HUA7uMvD+Kz2zB8E5kljRM/1B5vKzYAO
+ 426KD50cGh8tWtJ+nwgezj2NPBXaP0shfdxatUuYpxVqD3nTfozM8WUEUA4W0lFb/v
+ Vo8925VWFrlpQ==
+Message-ID: <d58a1c24-9af3-4a49-b4bd-afafc0c684f2@canonical.com>
+Date: Thu, 18 Jan 2024 13:33:15 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/1] net: ti: am65-cpsw-nuss: Remove incorrect RGMII_ID
- bit functionality
-To: Ken Sloat <ken.s@variscite.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "mripard@kernel.org" <mripard@kernel.org>,
- "dannenberg@ti.com" <dannenberg@ti.com>, "sjg@chromium.org"
- <sjg@chromium.org>, "s-anna@ti.com" <s-anna@ti.com>, "nm@ti.co" <nm@ti.co>,
- "s-vadapalli@ti.com" <s-vadapalli@ti.com>,
- "rfried.dev@gmail.com" <rfried.dev@gmail.com>,
- "joe.hershberger@ni.com" <joe.hershberger@ni.com>
-Cc: Nate Drude <Nate.D@variscite.com>, Eran Matityahu <eran.m@variscite.com>
-References: <AS8PR08MB7991CFB38C65A76484AD971CEC732@AS8PR08MB7991.eurprd08.prod.outlook.com>
-Content-Language: en-US
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <AS8PR08MB7991CFB38C65A76484AD971CEC732@AS8PR08MB7991.eurprd08.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8
+Subject: Re: [PATCH v2 4/4] test: unit test for smbios command
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
+References: <20240117153347.85074-1-heinrich.schuchardt@canonical.com>
+ <20240117153347.85074-4-heinrich.schuchardt@canonical.com>
+ <CAC_iWjJv9Ff-sTq63b2L8vrarcpedNsDFg3iokwAgpzFAbZuHw@mail.gmail.com>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAC_iWjJv9Ff-sTq63b2L8vrarcpedNsDFg3iokwAgpzFAbZuHw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -78,110 +76,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ken,
-
-On 16/01/2024 22:01, Ken Sloat wrote:
-> The CPSW implementations on the AM6x platforms do not support the
-> selectable RGMII TX clk delay functionality via the RGMII_ID_MODE bit as
-> the earlier platforms did. According to various TI datasheets, reference
-> manuals, hardware design guides and TI forum posts from TI, this bit is
-> "not timed, tested, or characterized. RGMII_ID is enabled by default and
-> the register bit reserved."
+On 1/18/24 12:51, Ilias Apalodimas wrote:
+> Hi Heinrich,
 > 
-> The driver implementation today however, will incorrectly set this bit
-> whenever the interface mode is in RGMII_ID or RGMII_TXID.
+> On Wed, 17 Jan 2024 at 17:34, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>>
+>> Provide a unit test for the smbios command.
+>>
+>> Provide different test functions for QEMU, sandbox, and other systems.
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>> v2:
+>>          for generic boards we only can assume that a type 127 table exists
+>>          email address updated
+>> ---
+>>   test/py/tests/test_smbios.py | 41 ++++++++++++++++++++++++++++++++++++
+>>   1 file changed, 41 insertions(+)
+>>   create mode 100644 test/py/tests/test_smbios.py
+>>
+>> diff --git a/test/py/tests/test_smbios.py b/test/py/tests/test_smbios.py
+>> new file mode 100644
+>> index 00000000000..82b0b689830
+>> --- /dev/null
+>> +++ b/test/py/tests/test_smbios.py
+>> @@ -0,0 +1,41 @@
+>> +# SPDX-License-Identifier: GPL-2.0-or-later
+>> +
+>> +"""Test smbios command"""
+>> +
+>> +import pytest
+>> +
+>> +@pytest.mark.buildconfigspec('cmd_smbios')
+>> +@pytest.mark.notbuildconfigspec('qfw_smbios')
+>> +@pytest.mark.notbuildconfigspec('sandbox')
+>> +def test_cmd_smbios(u_boot_console):
+>> +    """Run the smbios command"""
+>> +    output = u_boot_console.run_command('smbios')
+>> +    assert 'DMI type 127,' in output
+>> +
+>> +@pytest.mark.buildconfigspec('cmd_smbios')
+>> +@pytest.mark.buildconfigspec('qfw_smbios')
+>> +@pytest.mark.notbuildconfigspec('sandbox')
+>> +# TODO:
+>> +# QEMU v8.2.0 lacks SMBIOS support for RISC-V
+>> +# Once support is available in our Docker image we can remove the constraint.
+>> +@pytest.mark.notbuildconfigspec('riscv')
+>> +def test_cmd_smbios_qemu(u_boot_console):
+>> +    """Run the smbios command on QEMU"""
+>> +    output = u_boot_console.run_command('smbios')
+>> +    assert 'DMI type 1,' in output
+>> +    assert 'Manufacturer: QEMU' in output
+>> +    assert 'DMI type 127,' in output
 > 
-> To fix this, remove any statement setting this bit, and moreover, mask
-> bits 31:4 as these are all reserved.
+> Is there an easy way to run this test with and without the SMBIOS
+> tables provided by QEMU? We could test the u-boot generated ones that
+> way
+
+We already test the sandbox without QFW. I would not want to duplicated 
+QEMU defconfigs.
+
+Best regards
+
+Heinrich
+
 > 
-> See:
-> https://e2e.ti.com/support/processors-group/processors/f/processors-forum/1211306/am625-enet1_ctrl_rgmii_id-_mode
-> https://www.ti.com/lit/pdf/spruiv7 (Rev. B Figure 14-1717> https://www.ti.com/lit/gpn/am625 (Rev. B Figure 7-31 Note A)
-> https://www.ti.com/lit/an/sprad05b/sprad05b.pdf (Rev. B Section 7.4)
-> 
+> Thanks
+> /Ilias
+>> +
+>> +@pytest.mark.buildconfigspec('cmd_smbios')
+>> +@pytest.mark.buildconfigspec('sandbox')
+>> +def test_cmd_smbios_sandbox(u_boot_console):
+>> +    """Run the smbios command on the sandbox"""
+>> +    output = u_boot_console.run_command('smbios')
+>> +    assert 'DMI type 0,' in output
+>> +    assert 'String 1: U-Boot' in output
+>> +    assert 'DMI type 1,' in output
+>> +    assert 'Manufacturer: sandbox' in output
+>> +    assert 'DMI type 2,' in output
+>> +    assert 'DMI type 3,' in output
+>> +    assert 'DMI type 4,' in output
+>> +    assert 'DMI type 127,' in output
+>> --
+>> 2.43.0
+>>
 
-Thanks for the patch. Some comments below.
-
-> Signed-off-by: Ken Sloat <ken.s@variscite.com>
-> ---
->  drivers/net/ti/am65-cpsw-nuss.c | 10 +++-------
->  1 file changed, 3 insertions(+), 7 deletions(-)
-> 
-> diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cpsw-nuss.c
-> index 18a33c4c0e..51c432408f 100644
-> --- a/drivers/net/ti/am65-cpsw-nuss.c
-> +++ b/drivers/net/ti/am65-cpsw-nuss.c
-> @@ -256,7 +256,6 @@ static int am65_cpsw_gmii_sel_k3(struct am65_cpsw_priv *priv,
->  {
->  	struct udevice *dev = priv->dev;
->  	u32 offset, reg, phandle;
-> -	bool rgmii_id = false;
->  	fdt_addr_t gmii_sel;
->  	u32 mode = 0;
->  	ofnode node;
-> @@ -296,7 +295,6 @@ static int am65_cpsw_gmii_sel_k3(struct am65_cpsw_priv *priv,
->  	case PHY_INTERFACE_MODE_RGMII_ID:
->  	case PHY_INTERFACE_MODE_RGMII_TXID:
->  		mode = AM65_GMII_SEL_MODE_RGMII;
-> -		rgmii_id = true;
->  		break;
->  
->  	case PHY_INTERFACE_MODE_SGMII:
-> @@ -313,15 +311,13 @@ static int am65_cpsw_gmii_sel_k3(struct am65_cpsw_priv *priv,
->  		break;
->  	};
->  
-> -	if (rgmii_id)
-> -		mode |= AM65_GMII_SEL_RGMII_IDMODE;
-> -
-> -	reg = mode;
-> +	/* bits 31:4 are reserved */
-
-Updated documentation is still wrong. Reserved bits should be Read only and should
-always read 0. In updated TRM it doesn't show reserved bits as read-only and states
-read value is 1.
-
-Bit 4 is clearly read/write so it cannot be treated as reserved. But setting it
-to 1 is not supported. 
-If bootROM or some other software set it to 1 then it will remain 1 and we cannot
-rely on it to be always 0. That's why it shouldn't be treated as reserved.
-
-On AM65 bits 31:5 and 3:2 are reserved (read only 0).
-Bit 4 is still r/w but setting 1 is not supported.
-
-> +	reg = (GENMASK(31, 4) & reg) | mode;
-
-As reserved bits will always read 0 this mask is not required.
-What we do need to do is always clear bit 4.
-
-So
-	#define AM6X_GMII_SEL_MODE_SEL_MASK	GENMASK(2:0)
-
-	/* RGMII_ID_MODE = 1 is not supported */
-	reg &= ~AM65_GMII_SEL_RGMII_IDMODE;
-	reg &= ~AM6X_GMII_SEL_MODE_SEL_MASK;
-	reg |= mode;
-
-Or simply this would have worked as we don't really set bit 4 in mode.
-
-	reg = mode;
-
-
->  	dev_dbg(dev, "gmii_sel PHY mode: %u, new gmii_sel: %08x\n",
->  		phy_mode, reg);
->  	writel(reg, gmii_sel);
->  
-> -	reg = readl(gmii_sel);
-> +	reg = GENMASK(3, 0) & readl(gmii_sel);
-
-should be GENMASK(2, 0);
-
-but now we can use AM6X_GMII_SEL_MODE_SEL_MASK here instead.
-
->  	if (reg != mode) {
->  		dev_err(dev,
->  			"gmii_sel PHY mode NOT SET!: requested: %08x, gmii_sel: %08x\n",
-
--- 
-cheers,
--roger
