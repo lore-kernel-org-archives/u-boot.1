@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFB60C47DAF
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 19:54:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B60FCC47DAF
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 20:22:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1383387BD0;
-	Thu, 18 Jan 2024 20:54:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CCF1586FB2;
+	Thu, 18 Jan 2024 21:22:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Vn3IDVDQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YDLFxUvn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47D3F87BCC; Thu, 18 Jan 2024 20:54:42 +0100 (CET)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
+ id 788B586FB2; Thu, 18 Jan 2024 21:22:50 +0100 (CET)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51ECB87BB6
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 20:54:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D596485E44
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 21:22:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rfried.dev@gmail.com
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-210aa8141a0so48545fac.1
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 11:54:38 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6818f3cf00aso596576d6.0
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 12:22:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705607677; x=1706212477; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cvAUoKbZbGUuhIgLOy8LMR4FwRIHH/qcC8K21xwFjhQ=;
- b=Vn3IDVDQngZdkDbH8QsisjKTyo96sMi8+eurAU0I698IVmkSV+MWW6oYe18b5K1MJc
- H7pQQYXBDtDuI264GVy4ZTrtwRERh73nep/re8Uyxar0R8wydbGo6rzo8VZA1lGNm31C
- Uv3NaoPpE0H1OvWRGGOamqrdNn14zPUrv5uVW+8uFZvgtQv+BkpjIU0NUq4yJ+Hfy2NU
- OJAaySy+DFOv5RCmJOXos7B0u0+XutwciWovlHJF/ujL/ggisooKCs2P35dtwYun+WBg
- a6WSMVcJ3skG4tS5/C8IIkRDypGqnPoOYpkvWxRIfUkexVVaUn4OJ7EN2jLL1ysfmHsf
- 5a6Q==
+ d=konsulko.com; s=google; t=1705609366; x=1706214166; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=fZtdmJJW5dS/182JmizL0lUeyj5dvkYucguZSKvEoys=;
+ b=YDLFxUvnOy+4A2SHLxaTE1lzwU4+mTmDKtgPnlQWHGbRMISdnti3+Eavcpg9pFuUzX
+ Egy0uy6+rCnNkk/ne2Kq2goYKavYctrgGsXTJBKtYRCyCMRMcUU7R9gZ4jJEkfktOEvH
+ vrgWttzkkc7i2+NLfVi8pJ/jCklb3Y1iYXbUw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705607677; x=1706212477;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cvAUoKbZbGUuhIgLOy8LMR4FwRIHH/qcC8K21xwFjhQ=;
- b=eIn8s2WknFrOhMOHSEm26Q0kn5Yosj3rzrWaHIMbFfQMifUfIsqOCLDbXgOevyD41v
- javzs4+s92vkM68hsHriYX0H/YdSqNmfkcSadGOGPyYMguBNeUkzhO4sYB20GVYhdLsX
- rRTr0ulJLWlN8rTTypsSIDs6NZJsZxRTJ4Rrci3r/paHoDby7upnU/PuqzrfpSI0hqVa
- mwubLVx6JaASVR/R4yK3+7agj47eN2NC6ybcRbGRGYKXfhnQkcokBv8898rqcVuZyyqu
- LhhtAT7smzflW+x3HsqWZimDM0KlZ96qKF6qbI2x9oV6HNw0Z3wIa6EiE9vbDoowJTKL
- C8ig==
-X-Gm-Message-State: AOJu0Yy3xn8kCeXEt/eKm4wSiG2GaQPOT2lrggwv7P0EXNe2ncKbly29
- 7T6rzFWMiZ6usfqdbgghMiQYTY9fPYZSZuWGkPlQ3Mtm7L6m+Mj7Hj1WXdnRHa37QICeW0arcpU
- vIbMGtceIhXREzk9RUtdd8fMaKZs=
-X-Google-Smtp-Source: AGHT+IGJMmUUy8wHlPHxiLDg1dMz/EN+yXavYp9nyG70UB8/he1VXodL7oLLnkkToAWea05XSlJIbk9xTv7GKVn4kF8=
-X-Received: by 2002:a05:6870:75c8:b0:210:7e88:f290 with SMTP id
- de8-20020a05687075c800b002107e88f290mr631970oab.28.1705607676942; Thu, 18 Jan
- 2024 11:54:36 -0800 (PST)
+ d=1e100.net; s=20230601; t=1705609366; x=1706214166;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fZtdmJJW5dS/182JmizL0lUeyj5dvkYucguZSKvEoys=;
+ b=l1rfd5U1mRM/PCx5VHvSYzYzg+LSmAZLK3GrVKy815z3RkGiQLqAFF47kv6o3V8EW6
+ YblDNZeL8UlvV6wndTgCPj5QZiAPCrQ0A6oU5RoWgA6Rivjbw5TCFsbvKJQzhcLHOFiY
+ uOZjR+m39I98941FS/sa9HDcreSMXm0ZvwSCa7ujOVrADq5/vmZmMcYyrtKs10EhN9y1
+ qzi3GeN48rA48uet9ST5cttVvGmHGrbUTnySCI0G7YKP/ZytuFnDYfVwUFABYdwBrtY7
+ knguNKqAe5vjqwDkpGquW24Mdl760fbZx4OIvCnU7yv1lG7HwrZk4vsDo/wKdh6O5Y5j
+ yBTQ==
+X-Gm-Message-State: AOJu0YyCERNHzNbts/DTVf/Erk5wkR73B37ZbBb6Y484fVHmeguMQUMx
+ lVH+eymEnS52akeQ1Jg4DD2S0A6bztb/YuLNxa6X69QhBi/NG3k4gcKtdVUU4yw=
+X-Google-Smtp-Source: AGHT+IHiI6iVFJ4sw57x5qCBL+W3/oeTXDM2fYylbB5yWQ5UcKgg4pUo/FWJ0qbTQlzdHo8RNLO1VQ==
+X-Received: by 2002:a05:6214:29ea:b0:681:7867:fbba with SMTP id
+ jv10-20020a05621429ea00b006817867fbbamr1203829qvb.110.1705609366625; 
+ Thu, 18 Jan 2024 12:22:46 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
+ [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
+ w5-20020a0cf705000000b006818033cceasm1446785qvn.38.2024.01.18.12.22.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Jan 2024 12:22:46 -0800 (PST)
+Date: Thu, 18 Jan 2024 15:22:43 -0500
+From: Tom Rini <trini@konsulko.com>
+To: lukas.funke-oss@weidmueller.com
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Lukas Funke <lukas.funke@weidmueller.com>, Bin Meng <bmeng.cn@gmail.com>
+Subject: Re: [PATCH v3 07/11] lib: vsprintf: enable '%pbl' format specifier
+Message-ID: <20240118202243.GF12635@bill-the-cat>
+References: <20240110091037.392520-1-lukas.funke-oss@weidmueller.com>
+ <20240110091037.392520-8-lukas.funke-oss@weidmueller.com>
 MIME-Version: 1.0
-References: <20231219-b4-qcom-common-target-v2-0-b6dd9704219e@linaro.org>
- <20231219-b4-qcom-common-target-v2-6-b6dd9704219e@linaro.org>
-In-Reply-To: <20231219-b4-qcom-common-target-v2-6-b6dd9704219e@linaro.org>
-From: Ramon Fried <rfried.dev@gmail.com>
-Date: Thu, 18 Jan 2024 23:54:26 +0200
-Message-ID: <CAGi-RULTVVdmgw9SCz1PXPeCoHVTSxd4agth9FRCGJrvJhqy_Q@mail.gmail.com>
-Subject: Re: [PATCH v2 06/32] serial: msm: add debug UART
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, 
- Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="uhUGGtpWPKgIa47c"
+Content-Disposition: inline
+In-Reply-To: <20240110091037.392520-8-lukas.funke-oss@weidmueller.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,81 +93,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Dec 19, 2023 at 6:04=E2=80=AFPM Caleb Connolly
-<caleb.connolly@linaro.org> wrote:
->
-> Introduce support for early debugging.
->
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  drivers/serial/Kconfig      |  8 ++++++++
->  drivers/serial/serial_msm.c | 32 ++++++++++++++++++++++++++++++++
->  2 files changed, 40 insertions(+)
->
-> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
-> index 81fdac047824..20713812c839 100644
-> --- a/drivers/serial/Kconfig
-> +++ b/drivers/serial/Kconfig
-> @@ -304,6 +304,14 @@ config DEBUG_UART_S5P
->           will need to provide parameters to make this work. The driver w=
-ill
->           be available until the real driver-model serial is running.
->
-> +config DEBUG_UART_MSM
-> +       bool "Qualcomm QUP UART debug"
-What is QUP ?
-> +       depends on ARCH_SNAPDRAGON
-> +       help
-> +         Select this to enable a debug UART using the serial_msm driver.=
- You
-> +         will need to provide parameters to make this work. The driver w=
-ill
-> +         be available until the real driver-model serial is running.
-> +
->  config DEBUG_UART_MSM_GENI
->         bool "Qualcomm snapdragon"
->         depends on ARCH_SNAPDRAGON
-> diff --git a/drivers/serial/serial_msm.c b/drivers/serial/serial_msm.c
-> index a22623c316ed..19a5a3a788f7 100644
-> --- a/drivers/serial/serial_msm.c
-> +++ b/drivers/serial/serial_msm.c
-> @@ -253,3 +253,35 @@ U_BOOT_DRIVER(serial_msm) =3D {
->         .probe =3D msm_serial_probe,
->         .ops    =3D &msm_serial_ops,
->  };
-> +
-> +#ifdef CONFIG_DEBUG_UART_MSM
-> +
-> +static struct msm_serial_data init_serial_data =3D {
-> +       .base =3D CONFIG_VAL(DEBUG_UART_BASE),
-> +       .clk_bit_rate =3D UART_DM_CLK_RX_TX_BIT_RATE,
-> +};
-> +
-> +#include <debug_uart.h>
-> +
-> +static inline void _debug_uart_init(void)
-> +{
-> +       uart_dm_init(&init_serial_data);
-> +}
-> +
-> +static inline void _debug_uart_putc(int ch)
-> +{
-> +       struct msm_serial_data *priv =3D &init_serial_data;
-> +
-> +       while (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_EMPTY) &&
-> +              !(readl(priv->base + UARTDM_ISR) & UARTDM_ISR_TX_READY))
-> +               ;
-> +
-> +       writel(UARTDM_CR_CMD_RESET_TX_READY, priv->base + UARTDM_CR);
-> +
-> +       writel(1, priv->base + UARTDM_NCF_TX);
-> +       writel(ch, priv->base + UARTDM_TF);
-> +}
-> +
-> +DEBUG_UART_FUNCS
-> +
-> +#endif
->
-> --
-> 2.42.1
->
+
+--uhUGGtpWPKgIa47c
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Jan 10, 2024 at 10:10:33AM +0100, lukas.funke-oss@weidmueller.com w=
+rote:
+
+> From: Lukas Funke <lukas.funke@weidmueller.com>
+>=20
+> The commit enables vsprintf() to handle the '%pbl' format specifier
+> in order to print bitmaps and its derivatives such as cpumask and
+> nodemask [1]. This can be used to derive kernel boot parameters from
+> bitmaks such as 'isolcpu' or 'nohz_full' [2].
+>=20
+> [1] https://www.kernel.org/doc/Documentation/printk-formats.txt
+> [2] https://www.kernel.org/doc/html/latest/admin-guide/kernel-parameters.=
+html
+>=20
+> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+
+This breaks building ARC platforms, and possibly others.  Note that
+tools/buildman/buildman is happy to fetch toolchains for you, and in
+this case it's also just the current kernel.org cross-toolchain. Please
+see https://docs.u-boot.org/en/latest/develop/ci_testing.html about how
+to trigger a CI run prior to sending v4, thanks.
+
+--=20
+Tom
+
+--uhUGGtpWPKgIa47c
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWpiJAACgkQFHw5/5Y0
+tyxOdQv6A5SpkBlO4CZZBXk0FhPT5MP+zj61JDVeT06kMpg/snFU/DogKW1TJu8j
+vqMyL7RgHka09LCZVyCAoM5ajOINf85Ryb+hxk16B8S790808CaEN447YC2EXwuF
+VMYuYYwKfWepj9bXBUvN+RI+QpVjcV03TtPTKeWc2/4ch0+OD+fGerTJHdXnqxIe
+TlN0ZRePlqT5hJZWhxp3Ba0186WhhJisI7uQFreCvg/lmxIeJaLIdFjh0/2qYPym
+0AyqlL8dhk0vX3L760FwtVzP2Kko/psb9GMXdqPsudj8rDOH9zZhP76BSMAgdTu0
+CQDT9K0L3QbAo4+DW9E7vMp1Mwm4jzuyJ6BoBtAwkuX36Recdjd0yYq8b7ijjHWi
+8kP+C5F8JWI6KWSRQyKrkiUu3wC/8sip9QV8Kf+IEAStuhFHXDsTxMleq6vDyR8x
+xh3z/cSSdhovQKTENc4ZB0PTvPdnuwr2Wk39WuZt4Gpzgr/hPOD+H1hbkLxUIWR+
+Ccki+LY/
+=Av/b
+-----END PGP SIGNATURE-----
+
+--uhUGGtpWPKgIa47c--
