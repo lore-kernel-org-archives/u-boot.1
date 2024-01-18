@@ -4,44 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84D61C47DAF
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 17:57:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB36BC47DB3
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 17:57:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5B4387BAF;
-	Thu, 18 Jan 2024 18:57:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 5119E87BB5;
+	Thu, 18 Jan 2024 18:57:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ZdwjaQUf";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6012787BAE; Thu, 18 Jan 2024 18:57:11 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 2337F87BB3
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 18:57:09 +0100 (CET)
+ id AF3DF87BB5; Thu, 18 Jan 2024 18:57:17 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C451187BAE
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 18:57:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 21E761042;
- Thu, 18 Jan 2024 09:57:54 -0800 (PST)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 79AAA3F766;
- Thu, 18 Jan 2024 09:57:07 -0800 (PST)
-Date: Thu, 18 Jan 2024 17:56:55 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Nick Alilovic <nickalilovic@gmail.com>
-Cc: u-boot@lists.denx.de, jagan@amarulasolutions.com,
- linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH v2] configs: Transpeed 8K618-T: Add Transpeed 8K618-T
- board support
-Message-ID: <20240118175655.1c8922a2@donnerap.manchester.arm.com>
-In-Reply-To: <20240118164508.43617-1-nickalilovic@gmail.com>
-References: <20240118164508.43617-1-nickalilovic@gmail.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 536F73F26F
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 17:57:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1705600635;
+ bh=ZqPQtDcUVP39H53v8CDS8ImUuO8/l7t5NqRi1fYvFiQ=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=ZdwjaQUfKdaXfYyAFnU3opk1Qh/Lgj7Jtv0jSRsyld3j1JbIxJWsmjkH2jhgTaJd0
+ 4/hiPqJQEOwbTm/sHbjDamVct28pO/WsavtIG3kFmwKClrT9x+Bx58hdDjrQeiApUL
+ SZ4COUJOj9U9ceNTXZBwrI1V0+gOL24Gk8/paDnzHGgbkN6ek4ODuQf5hWukaksYM0
+ bvw1yEIGlLBfeKJPEhBwYz1t7vnxzkm3NENf95VQgjp+Ca8moFy1xVigRDJojoFStp
+ JSbceIzaa7gSz2zV6IvgQdUK3Dnk9HbvW/iPNNi2oladzDh4o31IDd3nGUaiX2mOo2
+ +B4M+LTAHpIiQ==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-40e89a9a76fso12299915e9.1
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 09:57:15 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705600635; x=1706205435;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZqPQtDcUVP39H53v8CDS8ImUuO8/l7t5NqRi1fYvFiQ=;
+ b=OQ1JjMk7ksi6VjN/xJlHLsWCyUqWKGUHocsA+w6j9uWP+0SBm86cVKTVPvYO00vEyW
+ NhNwSd8Rw/gSYG8McOtcVMOzpI9lcTQeSHWEr1bFg3usw2eh4D4W3a00RhcURU+PEDu7
+ cjW6rFpyGu8O04ql1pGCXwpaZY2Y35++en2MoHUPDsiJZEc7cGcCH9JU8g5ubS2FRO//
+ uuxVDV98PiqKJRlG+iG45vozRvzlMHWPnz2HGweG6AsvlYNV3BfyjVfh2Y/2K4leIXO6
+ Wv8E9x5l2UbAAAS1i4FY2MGIuWOLHtV6tHAuJnKgUu7yQl2jgFBRF7cvZZTN79mIuCYg
+ ir7A==
+X-Gm-Message-State: AOJu0Yy4Siy42Xm0cxszoY0jTp+9kCFBX8SobmoQRi5SH3nyNcj1sNji
+ rfUQ/qv7V5BU8/6vnNDQdZfC8byBAnAu0E6qKTYegsaKIdUBp2o934zjCo2/asVJjoTCL6nktFD
+ zR5fOZK0xC6l6Bo+tL6F1nJnzbj4TG+Hsp1IeqgecEXhhLgQ5QKcjxTf8v47YDgZWD60=
+X-Received: by 2002:a7b:cbd7:0:b0:40d:87eb:fa98 with SMTP id
+ n23-20020a7bcbd7000000b0040d87ebfa98mr866439wmi.28.1705600635024; 
+ Thu, 18 Jan 2024 09:57:15 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHsRyBt9lC1QQeD8BP1k0DRla1I+vYD9pLxsgV8brNBSfL3jqH/9dS4Y3UiQP2G7kA8Lxr2mQ==
+X-Received: by 2002:a7b:cbd7:0:b0:40d:87eb:fa98 with SMTP id
+ n23-20020a7bcbd7000000b0040d87ebfa98mr866433wmi.28.1705600634661; 
+ Thu, 18 Jan 2024 09:57:14 -0800 (PST)
+Received: from x13s.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de.
+ [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
+ h5-20020a05600c314500b0040e5e21cd7bsm26168748wmo.11.2024.01.18.09.57.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Jan 2024 09:57:14 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Janne Grunau <j@jannau.net>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] test: enhance unicode_test_utf8_to_utf32_stream()
+Date: Thu, 18 Jan 2024 18:57:12 +0100
+Message-ID: <20240118175712.51068-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,64 +99,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 18 Jan 2024 11:45:08 -0500
-Nick Alilovic <nickalilovic@gmail.com> wrote:
+Additionally test a UTF-8 string where each code point translates to three
+UTF-8 bytes.
 
-Hi Nick,
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ test/unicode_ut.c | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
-> This is a Chinese TV box based on Allwinner H618 SoC.
-> 
-> The DRAM parameters were derived from the values found in a firmware update.
-> 
-> Signed-off-by: Nick Alilovic <nickalilovic@gmail.com>
-
-Thanks for the fixes, looks good now:
-
-Reviewed-by: Andre Przywara <andre.przywara@arm.com>
-
-I will queue this after the DT files have been merged.
-
-Cheers,
-Andre
-
-> ---
-> This defconfig relies on the synced sun50i-h618-transpeed-8k618-t.dts file.
-> 
->  configs/transpeed-8k618-t_defconfig | 27 +++++++++++++++++++++++++++
->  1 file changed, 27 insertions(+)
->  create mode 100644 configs/transpeed-8k618-t_defconfig
-> 
-> diff --git a/configs/transpeed-8k618-t_defconfig b/configs/transpeed-8k618-t_defconfig
-> new file mode 100644
-> index 0000000000..020d3974af
-> --- /dev/null
-> +++ b/configs/transpeed-8k618-t_defconfig
-> @@ -0,0 +1,27 @@
-> +CONFIG_ARM=y
-> +CONFIG_ARCH_SUNXI=y
-> +CONFIG_DEFAULT_DEVICE_TREE="sun50i-h618-transpeed-8k618-t"
-> +CONFIG_SPL=y
-> +CONFIG_DRAM_SUN50I_H616_DX_ODT=0x03030303
-> +CONFIG_DRAM_SUN50I_H616_DX_DRI=0x0e0e0e0e
-> +CONFIG_DRAM_SUN50I_H616_CA_DRI=0x1f12
-> +CONFIG_DRAM_SUN50I_H616_TPR0=0xc0001002
-> +CONFIG_DRAM_SUN50I_H616_TPR10=0x2f1107
-> +CONFIG_DRAM_SUN50I_H616_TPR11=0xddddcccc
-> +CONFIG_DRAM_SUN50I_H616_TPR12=0xeddc7665
-> +CONFIG_MACH_SUN50I_H616=y
-> +CONFIG_SUNXI_DRAM_H616_DDR3_1333=y
-> +CONFIG_DRAM_CLK=648
-> +CONFIG_MMC_SUNXI_SLOT_EXTRA=2
-> +CONFIG_R_I2C_ENABLE=y
-> +# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-> +CONFIG_SPL_I2C=y
-> +CONFIG_SPL_SYS_I2C_LEGACY=y
-> +CONFIG_SYS_I2C_MVTWSI=y
-> +CONFIG_SYS_I2C_SLAVE=0x7f
-> +CONFIG_SYS_I2C_SPEED=400000
-> +CONFIG_SUPPORT_EMMC_BOOT=y
-> +CONFIG_AXP313_POWER=y
-> +CONFIG_AXP_DCDC3_VOLT=1360
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_OHCI_HCD=y
+diff --git a/test/unicode_ut.c b/test/unicode_ut.c
+index 1d0d90c2d7..47c3f52774 100644
+--- a/test/unicode_ut.c
++++ b/test/unicode_ut.c
+@@ -752,9 +752,10 @@ static int unicode_test_utf8_to_utf32_stream(struct unit_test_state *uts)
+ 
+ 	const u32 u1[] = {0x55, 0x2D, 0x42, 0x6F, 0x6F, 0x74, 0x0000};
+ 	const u32 u2[] = {0x6B, 0x61, 0x66, 0x62, 0xE1, 0x74, 0x75, 0x72, 0x00};
+-	const u32 u3[] = {0x0392, 0x20, 0x69, 0x73, 0x20, 0x6E, 0x6F, 0x74,
+-			  0x20, 0x42, 0x00};
++	const u32 u3[] = {0x6f5c, 0x6c34, 0x8266};
+ 	const u32 u4[] = {0x6A, 0x32, 0x6C, 0x00};
++	const u32 u5[] = {0x0392, 0x20, 0x69, 0x73, 0x20, 0x6E, 0x6F, 0x74,
++			  0x20, 0x42, 0x00};
+ 
+ 	memset(buf, 0, sizeof(buf));
+ 	utf8_to_utf32_stream_helper(d1, buf);
+@@ -765,9 +766,13 @@ static int unicode_test_utf8_to_utf32_stream(struct unit_test_state *uts)
+ 	ut_asserteq_mem(u2, buf, sizeof(u2));
+ 
+ 	memset(buf, 0, sizeof(buf));
+-	utf8_to_utf32_stream_helper(d5, buf);
++	utf8_to_utf32_stream_helper(d3, buf);
+ 	ut_asserteq_mem(u3, buf, sizeof(u3));
+ 
++	memset(buf, 0, sizeof(buf));
++	utf8_to_utf32_stream_helper(d5, buf);
++	ut_asserteq_mem(u5, buf, sizeof(u5));
++
+ 	memset(buf, 0, sizeof(buf));
+ 	utf8_to_utf32_stream_helper(j2, buf);
+ 	ut_asserteq_mem(u4, buf, sizeof(u4));
+-- 
+2.43.0
 
