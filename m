@@ -4,109 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2DB0C47DAF
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 08:57:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46A84C4707B
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 09:50:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF5CB87A9C;
-	Thu, 18 Jan 2024 09:57:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5EA8F87B8D;
+	Thu, 18 Jan 2024 10:50:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="M/L0C23E";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="X2MpHp76";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CAA7E876C1; Thu, 18 Jan 2024 09:57:02 +0100 (CET)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 3527587B90; Thu, 18 Jan 2024 10:50:13 +0100 (CET)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B7FD87A9C
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 09:57:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F0A2487B85
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 10:50:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-336746c7b6dso10217359f8f.0
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 00:57:00 -0800 (PST)
+ spf=pass smtp.mailfrom=max.oss.09@gmail.com
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-557dcb0f870so12224418a12.2
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 01:50:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705568220; x=1706173020; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=NRkAzHt2zShRk/UrVqxmTLAQCSlVUoJru3lkIctJwXg=;
- b=M/L0C23E63/y4Ue/jNNQ/gYP2KKZ+QKqGNuxxjf6FEEMYAJ7aS1gtOGXqP/lR+GMLw
- H1qnMC5U2SeEQlOX8gt4589Fn223NcwiQ+e4Jf6V8AJooIhtnseqYG+nPfe3iuhUKgY+
- lTat6/7QnqmBxcfd+IQJKwtwpStQI7VhxyEtNaFCJu3lW/UXmeBY37TAu6qw3VXmOfgY
- vZ+su19OZUkW3hfXyT2kZrYqSys6n0z+25D/CfvgERt/Mxq2k6KLzASd6QXeJBBjmSIc
- ayN70LprUGn+40/ARqtIrmsl836vkMlv77CsY0Jf4ot0xxuqqhRMO705Gc4ms9IjiSgF
- r49g==
+ d=gmail.com; s=20230601; t=1705571409; x=1706176209; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Vysle59Z9eZq90n/E+XrLniq4WKd+Qw0R+tMjN8e0CY=;
+ b=X2MpHp76lDxdstKo27n9rbw9X2AtnpsK/E+LJhenCbSSXYTPPLruCtxQyQlvD9nUZo
+ LVFlDK8yZWYtYRy0LJnkkFtdHqU42jHwLOzaPPAXxlENuj06pTDKHOWT1Ln51twSz/ox
+ wIf6y1zzV/hLmVJbDAmqwRUuU+Brs/h6IV7Adpra6gQjk9ZfI9IgLsXhfckdayUqhwg0
+ MM+JXzM0ijN9+3cD3LRxC7LsIAN/XBGeqwDafPFxjagADSeI9KGqpHB4+oQkf6sOJdLJ
+ BB/gcTq+LzsPwJhkyPwf/noC5mv3IeoxAegIexqTXjbLZFmKQRtxxCFRPn97imuknSpr
+ 9R5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705568220; x=1706173020;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=NRkAzHt2zShRk/UrVqxmTLAQCSlVUoJru3lkIctJwXg=;
- b=SodNaNWaudDedUyAcitnSrL62A3OjL636lecmB+JNEC5Oh4jwMEOnLlKLAgEyXF/5o
- nlAmBVmQSHDQkyrMj02kCgfGy2tWY8ACAsSb8oek0W+JUBJLFLBqmEvt4qbiZ4pJVA2w
- UPP8+yc5EwQTSkxDh6Ui7n0vkv3nUnKPgR2umbroi8rKqutKfHnEEOaAYrxNWNTeMVc7
- 3Tvp9e+UcvJBQn1HhbVFQib3HKFQU5dIZG85sUZ5YRf+G+UhE1SC6BOIDHjLCEzS98FT
- 1zKDSOLHeMAPoENlJ0xcS19/SUrspFLctfOyouiuvlNZYH+ezLDUPkeRUgWUNoan6Aw+
- UdZQ==
-X-Gm-Message-State: AOJu0YzK1zMZZztE9GRwqwl9HbOUs539D0tVt2qMlkWerLOUXSRmbYuO
- mSDKxt546bF7RhHYHVbC21mSnVZ5chyYje9GxJak7m1HUDYWcDkc38Y6Qr9QxLY=
-X-Google-Smtp-Source: AGHT+IFEaxgQNLng9kz3yIrg+S4aY6kXOCk9YlpOZHxM329KNnpkA0uXTCQBsPfRNXP5+MN4I+u6iA==
-X-Received: by 2002:adf:e9c1:0:b0:337:c4bc:a1df with SMTP id
- l1-20020adfe9c1000000b00337c4bca1dfmr260965wrn.107.1705568219634; 
- Thu, 18 Jan 2024 00:56:59 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:982:cbb0:6ce5:dc98:50d7:a26a?
- ([2a01:e0a:982:cbb0:6ce5:dc98:50d7:a26a])
+ d=1e100.net; s=20230601; t=1705571409; x=1706176209;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Vysle59Z9eZq90n/E+XrLniq4WKd+Qw0R+tMjN8e0CY=;
+ b=ZpEaLHDu+CyujkpUgNz6ryeFXbDhWkKisWOGTDrZt1J4HHq35Chw6miECd/oSygz/9
+ 7bxRPUEVbpfVpXd2mCyHM5nt+8nG4HJfACvYCl/5GAUuP/a0z8E857/mn0FhebHS95U8
+ MKiIgxg9d+bjmIk7nfdYBx79y9C+MykfGeq6CGC9sELZswyfcYKeUi8sLdWHkaPucOR8
+ A5hkUchr2H8V8eD53qtrNKO35Xi4o91Zo3rcjNr83rcLTafMmgT4o0mPZogQ75pWOuuf
+ aQRWtg7GQVRWBMCvG88nkPsUECcnMo8fHH75H2/hrfVWZ+vpwj5HRGjUEWXbG94Y3VoW
+ 4FOA==
+X-Gm-Message-State: AOJu0YykViGJ+33t3o2/WIWR6BSiJp+Dy1Hs3GrdN/jtu9e067DdgZTJ
+ +CCscUpC3YIQBcePpKKETEGqoPACUQ/HcfiT773T2K1q/JrUjzPB
+X-Google-Smtp-Source: AGHT+IEPrKYxyxPQNdf+daMwRVpLw8fpliKpUFi2hTggdtiL/L20jpbCMElNIP155cbWgopkrXPFvA==
+X-Received: by 2002:a17:906:856:b0:a27:c856:d889 with SMTP id
+ f22-20020a170906085600b00a27c856d889mr320785ejd.81.1705571409040; 
+ Thu, 18 Jan 2024 01:50:09 -0800 (PST)
+Received: from toolbox (31-10-206-125.static.upc.ch. [31.10.206.125])
  by smtp.gmail.com with ESMTPSA id
- z2-20020adff1c2000000b003372b8ab19asm3515281wro.64.2024.01.18.00.56.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 18 Jan 2024 00:56:59 -0800 (PST)
-Message-ID: <e19b68f5-acc5-4838-8fec-b0fb4b4f1a5e@linaro.org>
-Date: Thu, 18 Jan 2024 09:56:58 +0100
+ bm19-20020a170906c05300b00a2362c5e3dbsm8893790ejb.151.2024.01.18.01.50.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Jan 2024 01:50:08 -0800 (PST)
+Date: Thu, 18 Jan 2024 10:50:07 +0100
+From: Max Krummenacher <max.oss.09@gmail.com>
+To: Max Krummenacher <max.krummenacher@toradex.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Nishanth Menon <nm@ti.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v1 4/4] board: verdin-am62: set cpu core voltage
+ depending on speed grade
+Message-ID: <Zaj0T33xqN3Eq6XT@toolbox>
+References: <20240117101743.3955852-1-max.oss.09@gmail.com>
+ <20240117101743.3955852-5-max.oss.09@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [UBOOT PATCH v4] test/py: net: Add dhcp abort test
-Content-Language: en-US, fr
-To: Love Kumar <love.kumar@amd.com>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-Cc: michal.simek@amd.com, git@xilinx.com, rfried.dev@gmail.com,
- v.v.mitrofanov@yadro.com, seanedmond@microsoft.com,
- emohandesi@linux.microsoft.com
-References: <dd44fc9bf39e0debc9d0bc78a5d9215bace26023.1700571693.git.love.kumar@amd.com>
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro Developer Services
-In-Reply-To: <dd44fc9bf39e0debc9d0bc78a5d9215bace26023.1700571693.git.love.kumar@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240117101743.3955852-5-max.oss.09@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,198 +91,118 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-On 21/11/2023 14:02, Love Kumar wrote:
-> Abort the dhcp request in the middle by pressing ctrl + c on u-boot
-> prompt and validate the abort status.
+On Wed, Jan 17, 2024 at 11:16:49AM +0100, Max Krummenacher wrote:
+> From: Max Krummenacher <max.krummenacher@toradex.com>
 > 
-> Signed-off-by: Love Kumar <love.kumar@amd.com>
+> Speed grade T requires the VDD_CORE voltage to be 0.85V if using
+> the maximum core frequency.
+> 
+> Speed grades G, K, S allow the VDD_CORE voltage to be 0.75V up to the
+> maximum core frequency but allow to run at 0.85V.
+> 
+> For efficiency in manufacturing and code maintenance we use 0.85V for
+> the PMIC defaults and device tree settings and dynamically adjust the
+> voltage in the PMIC and device tree to 0.75V for lower speed SKU to
+> gain more than 100mW power consumption reduction.
+> 
+> Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
 > ---
-> Changes in v2:
->   - Mark CMD_MII command dependency
 > 
-> Changes in v3:
->   - Skip the test if PHY device not present
+>  board/toradex/verdin-am62/verdin-am62.c | 47 +++++++++++++++++++++++++
+>  1 file changed, 47 insertions(+)
 > 
-> Changes in v4:
->   - Setup the network configuration by running dhcp test at the end of
->   test
->   - Add option to skip the test if it is not desired or possible
-> ---
->   test/py/tests/test_net.py | 57 +++++++++++++++++++++++++++++++++++++++
->   1 file changed, 57 insertions(+)
+> diff --git a/board/toradex/verdin-am62/verdin-am62.c b/board/toradex/verdin-am62/verdin-am62.c
+> index 4e912b5f32f..8b9db224069 100644
+> --- a/board/toradex/verdin-am62/verdin-am62.c
+> +++ b/board/toradex/verdin-am62/verdin-am62.c
+> @@ -13,10 +13,13 @@
+>  #include <fdt_support.h>
+>  #include <init.h>
+>  #include <k3-ddrss.h>
+> +#include <power/regulator.h>
+
+In the !DM_REGULATOR case regulator.h assumes errno.h to be already included.
+This happens when compiling the R5 SPL.
+
+Will fix this in a v2 of the series.
+
+Max
+
+>  #include <spl.h>
+>  
+>  #include "../common/tdx-cfg-block.h"
+>  
+> +#define VDD_CORE_REG "buck1"
+> +
+>  DECLARE_GLOBAL_DATA_PTR;
+>  
+>  int board_init(void)
+> @@ -49,9 +52,37 @@ int board_fit_config_name_match(const char *name)
+>  }
+>  #endif
+>  
+> +static u32 get_vdd_core_nominal(void)
+> +{
+> +	int core_uvolt;
+> +
+> +	switch (k3_get_speed_grade()) {
+> +	case 'G':
+> +	case 'K':
+> +	case 'S':
+> +		core_uvolt = 750000;
+> +		break;
+> +	case 'T':
+> +	default:
+> +		core_uvolt = 850000;
+> +		break;
+> +	}
+> +	return core_uvolt;
+> +}
+> +
+>  #if IS_ENABLED(CONFIG_OF_LIBFDT) && IS_ENABLED(CONFIG_OF_BOARD_SETUP)
+>  int ft_board_setup(void *blob, struct bd_info *bd)
+>  {
+> +	int core_uvolt;
+> +
+> +	core_uvolt = get_vdd_core_nominal();
+> +	if (core_uvolt != 850000) {
+> +		do_fixup_by_path_u32(blob, "/bus@f0000/i2c@20000000/pmic@30/regulators/buck1",
+> +				     "regulator-max-microvolt", core_uvolt, 0);
+> +		do_fixup_by_path_u32(blob, "/bus@f0000/i2c@20000000/pmic@30/regulators/buck1",
+> +				     "regulator-min-microvolt", core_uvolt, 0);
+> +	}
+> +
+>  	return ft_common_board_setup(blob, bd);
+>  }
+>  #endif
+> @@ -86,6 +117,22 @@ static void select_dt_from_module_version(void)
+>  
+>  int board_late_init(void)
+>  {
+> +	int ret;
+> +	int core_uvolt;
+> +	struct udevice *dev = NULL;
+> +
+> +	core_uvolt = get_vdd_core_nominal();
+> +	if (core_uvolt != 850000) {
+> +		/* Set CPU core voltage to 0.75V for slower speed grades */
+> +		ret = regulator_get_by_devname(VDD_CORE_REG, &dev);
+> +		if (ret)
+> +			pr_err("VDD CORE Regulator get error: %d\n", ret);
+> +
+> +		ret = regulator_set_value_force(dev, core_uvolt);
+> +		if (ret)
+> +			pr_err("VDD CORE Regulator value setting error: %d\n", ret);
+> +	}
+> +
+>  	select_dt_from_module_version();
+>  
+>  	return 0;
+> -- 
+> 2.42.0
 > 
-> diff --git a/test/py/tests/test_net.py b/test/py/tests/test_net.py
-> index b2241ae6a482..e0749125fd53 100644
-> --- a/test/py/tests/test_net.py
-> +++ b/test/py/tests/test_net.py
-> @@ -7,6 +7,7 @@
->   import pytest
->   import u_boot_utils
->   import uuid
-> +import re
->   
->   """
->   Note: This test relies on boardenv_* containing configuration values to define
-> @@ -30,6 +31,11 @@ env__net_uses_pci = True
->   # set to False.
->   env__net_dhcp_server = True
->   
-> +# False or omitted if a DHCP server is attached to the network, and dhcp abort
-> +# case should be tested.
-> +# If DHCP abort testing is not possible or desired, set this variable to True.
-> +env__dhcp_abort_test_skip = True
-> +
->   # True if a DHCPv6 server is attached to the network, and should be tested.
->   # If DHCPv6 testing is not possible or desired, this variable may be omitted or
->   # set to False.
-> @@ -115,6 +121,57 @@ def test_net_dhcp(u_boot_console):
->       global net_set_up
->       net_set_up = True
->   
-> +@pytest.mark.buildconfigspec("cmd_dhcp")
-> +@pytest.mark.buildconfigspec("cmd_mii")
-> +def test_net_dhcp_abort(u_boot_console):
-> +    """Test the dhcp command by pressing ctrl+c in the middle of dhcp request
-> +
-> +    The boardenv_* file may be used to enable/disable this test; see the
-> +    comment at the beginning of this file.
-> +    """
-> +
-> +    test_dhcp = u_boot_console.config.env.get("env__net_dhcp_server", False)
-> +    if not test_dhcp:
-> +        pytest.skip("No DHCP server available")
-> +
-> +    if u_boot_console.config.env.get("env__dhcp_abort_test_skip", False):
-> +        pytest.skip("DHCP abort test is not enabled!")
-> +
-> +    u_boot_console.run_command("setenv autoload no")
-> +
-> +    # Phy reset before running dhcp command
-> +    output = u_boot_console.run_command("mii device")
-> +    if not re.search(r"Current device: '(.+?)'", output):
-> +        pytest.skip("PHY device does not exist!")
-> +    eth_num = re.search(r"Current device: '(.+?)'", output).groups()[0]
-> +    u_boot_console.run_command(f"mii device {eth_num}")
-> +    output = u_boot_console.run_command("mii info")
-> +    eth_addr = hex(int(re.search(r"PHY (.+?):", output).groups()[0], 16))
-> +    u_boot_console.run_command(f"mii modify {eth_addr} 0 0x8000 0x8000")
-> +
-> +    u_boot_console.run_command("dhcp", wait_for_prompt=False)
-> +    try:
-> +        u_boot_console.wait_for("Waiting for PHY auto negotiation to complete")
-> +    except:
-> +        pytest.skip("Timeout waiting for PHY auto negotiation to complete")
-> +
-> +    u_boot_console.wait_for("done")
-> +
-> +    # Sending Ctrl-C
-> +    output = u_boot_console.run_command(
-> +        chr(3), wait_for_echo=False, send_nl=False
-> +    )
-> +
-> +    assert "TIMEOUT" not in output
-> +    assert "DHCP client bound to address " not in output
-> +    assert "Abort" in output
-> +
-> +    # Provide a time to recover from Abort - if it is not performed
-> +    # There is message like: ethernet@ff0e0000: No link.
-> +    u_boot_console.run_command("sleep 1")
-> +    # Run the dhcp test to setup the network configuration
-> +    test_net_dhcp(u_boot_console)
-> +
->   @pytest.mark.buildconfigspec('cmd_dhcp6')
->   def test_net_dhcp6(u_boot_console):
->       """Test the dhcp6 command.
-
-This test fails on the BPI-M2S and BPI-M5 boards:
-
-Section: test_net_dhcp_abort
-TIME: NOW: 2024/01/18 08:43:48.152149
-TIME: SINCE-PREV: 0:00:00.000629
-TIME: SINCE-START: 0:02:17.928462
-Stream: console
-=> setenv autoload no
-=>
-End stream: console
-TIME: NOW: 2024/01/18 08:43:48.232597
-TIME: SINCE-PREV: 0:00:00.080448
-TIME: SINCE-START: 0:02:18.008910
-Stream: console
-=> mii device
-MII devices: 'mdio' 'mdio@0'
-Current device: 'mdio'
-=>
-End stream: console
-TIME: NOW: 2024/01/18 08:43:48.277449
-TIME: SINCE-PREV: 0:00:00.044852
-TIME: SINCE-START: 0:02:18.053762
-Stream: console
-=> mii device mdio
-=>
-End stream: console
-TIME: NOW: 2024/01/18 08:43:48.318273
-TIME: SINCE-PREV: 0:00:00.040824
-TIME: SINCE-START: 0:02:18.094586
-Stream: console
-=> mii info
-PHY 0x00: OUI = 0x0732, Model = 0x11, Rev = 0x06, 100baseT, FDX
-PHY 0x01: OUI = 0x0732, Model = 0x11, Rev = 0x06, 100baseT, FDX
-=>
-End stream: console
-TIME: NOW: 2024/01/18 08:43:48.370420
-TIME: SINCE-PREV: 0:00:00.052147
-TIME: SINCE-START: 0:02:18.146733
-Stream: console
-=> mii modify 0x0 0 0x8000 0x8000
-=>
-End stream: console
-TIME: NOW: 2024/01/18 08:43:48.451550
-TIME: SINCE-PREV: 0:00:00.081130
-TIME: SINCE-START: 0:02:18.227863
-Stream: console
-=> dhcp
-End stream: console
-TIME: NOW: 2024/01/18 08:43:48.493680
-TIME: SINCE-PREV: 0:00:00.042130
-TIME: SINCE-START: 0:02:18.269993
-Stream: console
-ethernet@ff3f0000 Waiting for PHY auto negotiation to complete..... done
-Speed: 100, full duplex
-BOOTP broadcast 1
-DHCP client bound to address 10.34.56.144 (3 ms)
-=>
-End stream: console
-TIME: NOW: 2024/01/18 08:43:51.002287
-TIME: SINCE-PREV: 0:00:02.508607
-TIME: SINCE-START: 0:02:20.778600
-Stream: console
-=>
-End stream: console
-FAILED:
-test/py/tests/test_net.py:171: in test_net_dhcp_abort
-     assert "DHCP client bound to address " not in output
-E   AssertionError: assert 'DHCP client... to address ' not in 'Speed: 100,...6.144 (3 ms)'
-E     'DHCP client bound to address ' is contained here:
-E       dcast 1
-E
-E       DHCP client bound to address 10.34.56.144 (3 ms)
-TIME: SINCE-SECTION: 0:00:03.866916
-End section: test_net_dhcp_abort
-
-Full test logs:
-Job https://gitlab.com/amlogic-foss/amlogic-u-boot-autotest/-/jobs/5956146503 :
-https://amlogic-foss.gitlab.io/-/amlogic-u-boot-autotest/-/jobs/5956146503/artifacts/test-log.html
-Job https://gitlab.com/amlogic-foss/amlogic-u-boot-autotest/-/jobs/5956097398 :
-https://amlogic-foss.gitlab.io/-/amlogic-u-boot-autotest/-/jobs/5956097398/artifacts/test-log.html
-
-It seems it makes DHCP fail on subsequent board reboots.
-
-Neil
