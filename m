@@ -4,70 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB8AEC47258
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 03:10:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FE85C47258
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 03:11:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C72DD8798D;
-	Thu, 18 Jan 2024 04:10:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6D6EC8798D;
+	Thu, 18 Jan 2024 04:11:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="GfSO8hFD";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="MPYz1hVL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECC1B879C4; Thu, 18 Jan 2024 04:10:34 +0100 (CET)
-Received: from mail-m127101.qiye.163.com (mail-m127101.qiye.163.com
- [115.236.127.101])
+ id CD47187A14; Thu, 18 Jan 2024 04:11:49 +0100 (CET)
+Received: from mail-m12745.qiye.163.com (mail-m12745.qiye.163.com
+ [115.236.127.45])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3BC987971
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 04:10:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AA68987971
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 04:11:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=GfSO8hFDJuoMR0jPg9rK2e8SRjMKbG4KfRE0WNscf286UEC15srRWujRjZvSM/S0Jkm7Nnhxw+eUigS3HS9z75oqUvnmP5fMO/S0wo7+bLrJ1buAsk8Qa++oUJgQlpqXo9fP5o7QrxUv8xt3H5EMYp+boEDpcu2LqQi2mLH3XFQ=;
+ b=MPYz1hVLphTF3c+S+ak+R8x22N+8nLGN4SlaMWXL3RR7rxN3EOPUyK8IdsF0b9hP3JCUHTWu5arxh1B4O/uZRIJ4cGfHXJ7tvoxr6dXSD4Kv246WZ2HluL5AKxj6LvkKH9cleQYHi9nlT3T2RbBTC8EAuY5uS8t/HyozGQFU/Hg=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=094lgqavAldHJlTP93eZ0DDgaanMQUqotOlQ312breI=;
+ bh=9D8hESEN6khMr2nGxjGoVc/iwVgVMf6td7i37OZZyLU=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11880.qiye.163.com (Hmail) with ESMTPA id 709CA203C4;
- Thu, 18 Jan 2024 11:09:58 +0800 (CST)
-Message-ID: <f5332c95-c269-4ee4-85f0-c41476727be2@rock-chips.com>
-Date: Thu, 18 Jan 2024 11:09:58 +0800
+ by mail-m11880.qiye.163.com (Hmail) with ESMTPA id D434E203C0;
+ Thu, 18 Jan 2024 11:11:36 +0800 (CST)
+Message-ID: <2f24bedd-3a6d-44b2-ac6f-afa9ae62ef9c@rock-chips.com>
+Date: Thu, 18 Jan 2024 11:11:36 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] arch: arm: Kconfig: Enable BOOTSTD_FULL for Rockchip
- SoCs
+Subject: Re: [PATCH v4 1/6] rockchip: ringneck-px30: do not hardcode MMC
+ controller paths
 Content-Language: en-US
-To: Shantur Rathore <i@shantur.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
-References: <20231119172310.1307942-1-i@shantur.com>
- <CABEcMwW14BFrA1ZYWTh7iQTsnrXA7LdBPcREKf_QeO71op+Wdw@mail.gmail.com>
- <20231209191853.GA2513409@bill-the-cat>
- <CABEcMwU4C75Xsq9AYdugyPqjPYbrTf3C01gnE+sTM0WDyoMkQg@mail.gmail.com>
- <20231209204507.GH2513409@bill-the-cat>
- <5430e6c4-5d0d-4ddf-bc95-e3fbd2b046cd@rock-chips.com>
- <CABEcMwWfLJ_vHDBLNdFRe4U=+e2fWswF0FD0JAaDF49TtyDp1A@mail.gmail.com>
- <CABEcMwWt2yMXoRZG_s45G+AMDsuEVvNkdVo-8VA5pxN4wXWvCA@mail.gmail.com>
- <df499977-c373-4a95-abe7-3ec596d66050@rock-chips.com>
- <CABEcMwV3NWqjjdWP3aKj1iKSF7kn3FuDY=BAPr=UO-OEX6gcsA@mail.gmail.com>
+To: Quentin Schulz <foss+uboot@0leil.net>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Klaus Goger <klaus.goger@theobroma-systems.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: u-boot@lists.denx.de, Heiko Stuebner <heiko@sntech.de>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>
+References: <20240117-env_default_theobroma-v4-0-12019172b482@theobroma-systems.com>
+ <20240117-env_default_theobroma-v4-1-12019172b482@theobroma-systems.com>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <CABEcMwV3NWqjjdWP3aKj1iKSF7kn3FuDY=BAPr=UO-OEX6gcsA@mail.gmail.com>
+In-Reply-To: <20240117-env_default_theobroma-v4-1-12019172b482@theobroma-systems.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGk1IHVZPTU1OSBlKHx5PGRhVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQk0dTFZKGR5CQk8ZSUkfSE9VEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8d1a8bfdb72eb6kusn709ca203c4
+X-HM-Tid: 0a8d1a8d7ec42eb6kusnd434e203c0
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OCI6TDo4HDwuMhE1GR8uCTAd
- DVEaFBFVSlVKTEtOTk9MSEJCSkJKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOTU5DNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ODo6Kgw4ETwaGBEBNxVNPS8q
+ GiwwCwJVSlVKTEtOTk9MT0JMTUNPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOTU9KNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,108 +78,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Shantur,
 
-On 2024/1/17 17:38, Shantur Rathore wrote:
-> Hi Kever,
+On 2024/1/18 01:59, Quentin Schulz wrote:
+> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 >
-> On Wed, Jan 17, 2024 at 9:18 AM Kever Yang <kever.yang@rock-chips.com> wrote:
->> Hi Shantur,
->>
->> On 2024/1/17 14:26, Shantur Rathore wrote:
->>
->> Hi Kever,
->>
->> On Wed, Jan 10, 2024 at 11:58 AM Shantur Rathore <i@shantur.com> wrote:
->>
->> Hi Kever,
->>
->> On Tue, Jan 9, 2024 at 10:55 AM Kever Yang <kever.yang@rock-chips.com> wrote:
->>
->> Hi Shantur, Tom,
->>
->> On 2023/12/10 04:45, Tom Rini wrote:
->>
->> On Sat, Dec 09, 2023 at 07:49:04PM +0000, Shantur Rathore wrote:
->>
->> On Sat, Dec 9, 2023 at 7:18 PM Tom Rini <trini@konsulko.com> wrote:
->>
->> On Fri, Dec 08, 2023 at 10:52:02AM +0000, Shantur Rathore wrote:
->>
->> Hi Tom / Kever
->>
->> On Sun, Nov 19, 2023 at 5:24 PM Shantur Rathore <i@shantur.com> wrote:
->>
->> Rockchip SoCs can support wide range of bootflows.
->> Without full bootflow commands, it can be difficult to
->> figure out issues if any, hence enable by default.
->>
->> Reviewed-by: Simon Glass <sjg@chromium.org>
->>
->> Signed-off-by: Shantur Rathore <i@shantur.com>
->> ---
->>
->> (no changes since v1)
->>
->>    arch/arm/Kconfig | 1 +
->>    1 file changed, 1 insertion(+)
->>
->> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
->> index d812685c98..fca6ef6d7e 100644
->> --- a/arch/arm/Kconfig
->> +++ b/arch/arm/Kconfig
->> @@ -1986,6 +1986,7 @@ config ARCH_ROCKCHIP
->>           imply CMD_DM
->>           imply DEBUG_UART_BOARD_INIT
->>           imply BOOTSTD_DEFAULTS
->> +       imply BOOTSTD_FULL if BOOTSTD_DEFAULTS
->>           imply FAT_WRITE
->>           imply SARADC_ROCKCHIP
->>           imply SPL_SYSRESET
->>
->> Can this please be merged in ?
->>
->> I wonder if we shouldn't really globally default to BOOTSTD_FULL if
->> BOOTSTD_DEFAULTS for everyone.
->>
->> Its matter of ~21KB in size, unless any platform is really to its
->> limits it should be alright.
->>
->> Maybe I need to re-check things too, since I wonder how much of that
->> growth is re-enabling things that were removed when dropping the DISTRO
->> stuff, and so for platforms just migrating over now it would be smaller
->> in size if much.
->>
->> A board maintainer is free to enable this option, but I don't agree to
->> enable this for everyone.
->>
->> Not like rk3399 and rk3588, some of other SoCs always want a clean and
->> simple but usable U-Boot,
->>
->> eg. rk3036 and rk3308 are still in the list.
->>
->> The discussion is what we consider "usable U-Boot"
->> By default bootstd doesn't have any options and not even to show what
->> it's going to boot.
->>
->> Would it be acceptable if BOOTSTD_FULL is enabled for SoCs rather than boards?
->>
->> Can you please suggest the way forward?
->> Initially the patch was for RockPro64 and then after discussion it was
->> suggested that as BOOTSTD_DEFAULT is very very limited
->> we should enable BOOTSTD_FULL for SoCs that can support multiple boot modes.
->>
->> Let's enable it for RK3588 first and then maybe other SoCs which not code size sensitive.
->>
-> My requirement is for RK3399, so I will enable BOOTSTD_FULL for it.
-> While at it do you want me to enable it for RK3588 as well ?
-
-You can add for RK3399 or both RK3399 and RK3588.
+> To prepare to put the similar logic around storage medium selection for
+> Ringneck PX30 and Puma RK3399 in common, let's not use hardcoded paths
+> but use uclass functions instead to find udevice based on their DT node
+> full path.
+>
+> Cc: Quentin Schulz <foss+uboot@0leil.net>
+> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
-
 - Kever
-
+> ---
+>   .../ringneck_px30/ringneck-px30.c                  | 37 +++++++++++++++-------
+>   1 file changed, 25 insertions(+), 12 deletions(-)
 >
-> Kind regards,
-> Shantur
+> diff --git a/board/theobroma-systems/ringneck_px30/ringneck-px30.c b/board/theobroma-systems/ringneck_px30/ringneck-px30.c
+> index 537ce0d1d11..5d2c76ab902 100644
+> --- a/board/theobroma-systems/ringneck_px30/ringneck-px30.c
+> +++ b/board/theobroma-systems/ringneck_px30/ringneck-px30.c
+> @@ -68,11 +68,16 @@ static int setup_boottargets(void)
+>   	 * Make the default boot medium between SD Card and eMMC, the one that
+>   	 * was used to load U-Boot proper.
+>   	 */
+> -	bool sd_booted = !strcmp(boot_device, "/mmc@ff370000");
+> +	struct udevice *devp;
+> +
+> +	if (uclass_find_device_by_ofnode(UCLASS_MMC, ofnode_path(boot_device), &devp)) {
+> +		debug("%s: not reordering boot_targets, bootdev %s != MMC\n",
+> +		      __func__, boot_device);
+> +		return 0;
+> +	}
+> +
+>   	char *mmc0, *mmc1;
+>   
+> -	debug("%s: booted from %s\n", __func__,
+> -	      sd_booted ? "SD-Card" : "eMMC");
+>   	mmc0 = strstr(env, "mmc0");
+>   	mmc1 = strstr(env, "mmc1");
+>   
+> @@ -87,8 +92,8 @@ static int setup_boottargets(void)
+>   	 * If mmc1 comes first in the boot order and U-Boot proper was
+>   	 * loaded from mmc0, swap mmc0 and mmc1 in the list.
+>   	 */
+> -	if ((mmc0 < mmc1 && sd_booted) ||
+> -	    (mmc0 > mmc1 && !sd_booted)) {
+> +	if ((mmc0 < mmc1 && devp->seq_ == 1) ||
+> +	    (mmc0 > mmc1 && devp->seq_ == 0)) {
+>   		mmc0[3] = '1';
+>   		mmc1[3] = '0';
+>   		debug("%s: set boot_targets to: %s\n", __func__, env);
+> @@ -102,28 +107,37 @@ int mmc_get_env_dev(void)
+>   {
+>   	const char *boot_device =
+>   		ofnode_read_chosen_string("u-boot,spl-boot-device");
+> +	struct udevice *devp;
+>   
+>   	if (!boot_device) {
+>   		debug("%s: /chosen/u-boot,spl-boot-device not set\n",
+>   		      __func__);
+> +#ifdef CONFIG_SYS_MMC_ENV_DEV
+>   		return CONFIG_SYS_MMC_ENV_DEV;
+> +#else
+> +		return 0;
+> +#endif
+>   	}
+>   
+>   	debug("%s: booted from %s\n", __func__, boot_device);
+>   
+> -	if (!strcmp(boot_device, "/mmc@ff370000"))
+> -		return 1;
+> -
+> -	if (!strcmp(boot_device, "/mmc@ff390000"))
+> +	if (uclass_find_device_by_ofnode(UCLASS_MMC, ofnode_path(boot_device), &devp))
+> +#ifdef CONFIG_SYS_MMC_ENV_DEV
+> +		return CONFIG_SYS_MMC_ENV_DEV;
+> +#else
+>   		return 0;
+> +#endif
+> +
+> +	debug("%s: get MMC ENV from mmc%d\n", __func__, devp->seq_);
+>   
+> -	return CONFIG_SYS_MMC_ENV_DEV;
+> +	return devp->seq_;
+>   }
+>   
+>   enum env_location arch_env_get_location(enum env_operation op, int prio)
+>   {
+>   	const char *boot_device =
+>   		ofnode_read_chosen_string("u-boot,spl-boot-device");
+> +	struct udevice *devp;
+>   
+>   	if (prio > 0)
+>   		return ENVL_UNKNOWN;
+> @@ -137,8 +151,7 @@ enum env_location arch_env_get_location(enum env_operation op, int prio)
+>   	debug("%s: booted from %s\n", __func__, boot_device);
+>   
+>   	if (IS_ENABLED(CONFIG_ENV_IS_IN_MMC) &&
+> -	    (!strcmp(boot_device, "/mmc@ff370000") ||
+> -	     !strcmp(boot_device, "/mmc@ff390000")))
+> +	    !uclass_find_device_by_ofnode(UCLASS_MMC, ofnode_path(boot_device), &devp))
+>   		return ENVL_MMC;
+>   
+>   	printf("%s: No environment available: booted from %s but U-Boot "
+>
