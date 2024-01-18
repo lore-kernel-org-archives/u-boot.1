@@ -4,77 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 402DAC4707B
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 15:15:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52931C47DAF
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 16:31:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A86ED87B5F;
-	Thu, 18 Jan 2024 16:15:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3360587B5F;
+	Thu, 18 Jan 2024 17:31:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RtoAl8eR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SyRMECsk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9E8787B6A; Thu, 18 Jan 2024 16:15:39 +0100 (CET)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id 6913487B5F; Thu, 18 Jan 2024 17:31:25 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6C8E8795B
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 16:15:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 707A6878D3
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 17:31:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6806914dba7so77148166d6.2
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 07:15:37 -0800 (PST)
+ spf=pass smtp.mailfrom=max.oss.09@gmail.com
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a2ac304e526so1237377266b.0
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 08:31:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705590936; x=1706195736; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1705595483; x=1706200283; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=8sTvT6dVw9pY9Dz7WHisHkghy2paWOFPJ1Huj1Ojsxw=;
- b=RtoAl8eRtwYj7CINs8Z0HQZzYxr68/65HGIonuYhywV2I5ArjZUvQTO/uju3n/4/Zm
- 1WWYOo1KHpzJaVhECXFa7zlYw75wUiuLB42I1edXi6Tr9PvDtjyZIp24HtXKUKuj1uxg
- Gap7tiXvnOZr9CnGNvz43Ko5s0nfCccSxQp0I=
+ bh=+a4CnQYBiYY4NY77Pvj+JfrhGHr7raq4b13NKYRVUNI=;
+ b=SyRMECskIzkBgveYY6xSywxaOZtW4H8bjIUyuOQQMRKYv0hjawaZApsd1uL3smk6pJ
+ GmuR0RDoHJUsWxRQ2y17nwJwIpk/Pd3rnhDiq7dGR73COpyYOUPdjo2uOR8DWzx9eVUA
+ /a97HReK1lER+i3PYgND0gt7BS/bxJUY6zOQBYlIdimJXGytCQwPTdY8q7dGAxSXTHVN
+ boKHPAmMp47t2MLYLpuD3PqQxtrho6ssqJ9GcNEtuViA8QyoonCobMZLHiUMHKxGvUb2
+ bFkfNg5lrPLW79DbyLVoqdVKgGKo5DkjkCZtSdvLAmzPacTWl6NU8jDzE+xSP49bcWyc
+ wANQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705590936; x=1706195736;
+ d=1e100.net; s=20230601; t=1705595483; x=1706200283;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8sTvT6dVw9pY9Dz7WHisHkghy2paWOFPJ1Huj1Ojsxw=;
- b=hmfI4u/ee6kTAlHnTSqbRq3xzil8eT9S77+lT73K5DM7JEGVonauKUxVNZt6CbKbCI
- vRltlFwzA3YBEGkwfUqesKfro3lXzcItlBBr8TYw2KAJAn+l3Rlp4VBQiGrFdXl9sUEm
- qZIuCsZkl0UsAKrEwz94Nxvx1AGJcocbd+5nX4d51HNgKc0bfBHxwtrbf4Nkp2cyKKLM
- MnK7x+KhFp7W68ZZDWLO8w5yS5umGxpXMly8qhOyFrPhUNfgV+aji20zR7rD7aAPy4od
- LDbt08NObIR23vsTF4TgQngV7nMmTPkvMVhwxuBl4NaJluGaQdzTsNLlu5kiWJmSsvoh
- rXeQ==
-X-Gm-Message-State: AOJu0YwtbyH6LPGpyjQvM3IW/iJP823FRwl00JDgXD5B5Va+QKvk1zss
- AFJT1x2gJusuVpOzdq5mYWP+pxzT0bb6hgcYSR8I11M17sCecgcGGzaYGp/IylBFWPYeviGZN01
- m
-X-Google-Smtp-Source: AGHT+IGbkDdX8snXIOV5TrPU5o/a13Zv1aga7S5f6St9wQuu52/HoQtLK2Uy1n41uPSQBt5pqNrCmQ==
-X-Received: by 2002:a0c:f392:0:b0:681:9ab1:20d with SMTP id
- i18-20020a0cf392000000b006819ab1020dmr153835qvk.27.1705590936471; 
- Thu, 18 Jan 2024 07:15:36 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- kr20-20020a0562142b9400b0068188eee9eesm862652qvb.113.2024.01.18.07.15.35
+ bh=+a4CnQYBiYY4NY77Pvj+JfrhGHr7raq4b13NKYRVUNI=;
+ b=TslZDVQnW0IQB+qUyOrwLYUl3L5k9udqNYH8URyEYHaghUxgdzbnye+dzD9fFpE7sg
+ 1xN2KJWLkTAmm5h9K35ZLJXf53sWtCMvwkzvoeRcB3FTYXyERSo3WaQ2loaVE7sNafKq
+ bHBzg4ftab9QANP4xUFpkp5M0s05s8Kddp8tupfM1chTSa75ldxEfhcXBQwS5zCCj7tX
+ eryO2f4ZVoCRFosbahB44fjv3n9UJOMKE+qBrmODSZOAOAT08VeqSL4uefuq386tNSQk
+ 4gFqXuFWZj1SvRDaHozsrqZ4K6PmrEaL6XuwDwi9HIrHwOrnMyi5vRUuZbohRxvNpIAe
+ J0ww==
+X-Gm-Message-State: AOJu0Yxb0GuH+oLLzZo4BvfleemNMuPq+4Cj6mTfUUcY3KksHuenh7AJ
+ ZqbD6NBN+z59Qv5kBkJBCw7s/yF5yhh93YGG/wBqy6Q1vrXuUbZs
+X-Google-Smtp-Source: AGHT+IEtpQc13JwLs7xROXDgdi+5pHC5qIjHBfsfxqrHi4moPNem/0tYtII3+3kVVs8oSQoYQ8mwMw==
+X-Received: by 2002:a17:906:68c8:b0:a23:7464:e970 with SMTP id
+ y8-20020a17090668c800b00a237464e970mr646515ejr.80.1705595482484; 
+ Thu, 18 Jan 2024 08:31:22 -0800 (PST)
+Received: from toolbox (31-10-206-125.static.upc.ch. [31.10.206.125])
+ by smtp.gmail.com with ESMTPSA id
+ q14-20020a1709060f8e00b00a2a61b9c166sm9273128ejj.33.2024.01.18.08.31.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jan 2024 07:15:36 -0800 (PST)
-Date: Thu, 18 Jan 2024 10:15:33 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Enrico Leto <enrico.leto@siemens.com>
-Cc: u-boot@lists.denx.de, alexander.sverdlin@siemens.com
-Subject: Re: [PATCH v4 0/6] board: siemens: clean up subfolders
-Message-ID: <20240118151533.GA2523070@bill-the-cat>
-References: <20240103133154.152886-1-enrico.leto@siemens.com>
+ Thu, 18 Jan 2024 08:31:22 -0800 (PST)
+Date: Thu, 18 Jan 2024 17:31:20 +0100
+From: Max Krummenacher <max.oss.09@gmail.com>
+To: Max Krummenacher <max.krummenacher@toradex.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Nishanth Menon <nm@ti.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v1 4/4] board: verdin-am62: set cpu core voltage
+ depending on speed grade
+Message-ID: <ZalSWOw7UEvfnrKf@toolbox>
+References: <20240117101743.3955852-1-max.oss.09@gmail.com>
+ <20240117101743.3955852-5-max.oss.09@gmail.com>
+ <Zaj0T33xqN3Eq6XT@toolbox>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TnY5ACcSzrf2zI88"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20240103133154.152886-1-enrico.leto@siemens.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <Zaj0T33xqN3Eq6XT@toolbox>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,107 +97,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Jan 18, 2024 at 10:50:07AM +0100, Max Krummenacher wrote:
+> On Wed, Jan 17, 2024 at 11:16:49AM +0100, Max Krummenacher wrote:
+> > From: Max Krummenacher <max.krummenacher@toradex.com>
+> > 
+> > Speed grade T requires the VDD_CORE voltage to be 0.85V if using
+> > the maximum core frequency.
+> > 
+> > Speed grades G, K, S allow the VDD_CORE voltage to be 0.75V up to the
+> > maximum core frequency but allow to run at 0.85V.
+> > 
+> > For efficiency in manufacturing and code maintenance we use 0.85V for
+> > the PMIC defaults and device tree settings and dynamically adjust the
+> > voltage in the PMIC and device tree to 0.75V for lower speed SKU to
+> > gain more than 100mW power consumption reduction.
+> > 
+> > Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+> > ---
+> > 
+> >  board/toradex/verdin-am62/verdin-am62.c | 47 +++++++++++++++++++++++++
+> >  1 file changed, 47 insertions(+)
+> > 
+> > diff --git a/board/toradex/verdin-am62/verdin-am62.c b/board/toradex/verdin-am62/verdin-am62.c
+> > index 4e912b5f32f..8b9db224069 100644
+> > --- a/board/toradex/verdin-am62/verdin-am62.c
+> > +++ b/board/toradex/verdin-am62/verdin-am62.c
+> > @@ -13,10 +13,13 @@
+> >  #include <fdt_support.h>
+> >  #include <init.h>
+> >  #include <k3-ddrss.h>
+> > +#include <power/regulator.h>
+> 
+> In the !DM_REGULATOR case regulator.h assumes errno.h to be already included.
+> This happens when compiling the R5 SPL.
+> 
+> Will fix this in a v2 of the series.
 
---TnY5ACcSzrf2zI88
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Actually we can go on with the series. While it is true that errno.h is not
+included in regulator.h, the required header is included and its definitions
+available.
 
-On Wed, Jan 03, 2024 at 02:31:48PM +0100, Enrico Leto wrote:
+I will create a separate patch which cleans up the headers, so that they
+become self contained.
 
-> This serie depends on the serie:
->     [PATCH 0/6] siemens,am335x: clean up the draco board family
+Max
 
-Is this not applied already? If not, where is it? Can you please repost
-it?
-
->=20
->     The common folder was initialially created for the common parts of
->     the products based on draco-am355x board family. We have the
->     product lines 'pxm2', 'rut' and the base line unfortunately named
->     'draco'! Adding the new capricorn-imx8 board family, the files
->     were enhanced without cleanup.
->=20
->     Simplify first EEPROM probe and access that implements both i2c
->     with & without driver model. Use abstraction functions for this.
->    =20
->     Move all am355x specifics to a new file 'board_am335x'.
->    =20
->     Clean-up includes, config checks, maintainer.
->=20
-> Signed-off-by: Enrico Leto <enrico.leto@siemens.com>
-
-The problem is that I see:
-
-
-> ---
->rm:  +   draco-etamin
-+(draco-etamin) board/siemens/draco/../common/board.c: In function 'board_i=
-nit':
-+(draco-etamin) board/siemens/draco/../common/board.c:88:9: error: implicit=
- declaration of function 'board_nand_cs_init' [-Werror=3Dimplicit-function-=
-declaration]
-+(draco-etamin)    88 |         board_nand_cs_init();
-+(draco-etamin)       |         ^~~~~~~~~~~~~~~~~~
-+(draco-etamin) cc1: all warnings being treated as errors
-+(draco-etamin) make[2]: *** [scripts/Makefile.build:257: board/siemens/dra=
-co/../common/board.o] Error 1
-+(draco-etamin) make[1]: *** [Makefile:1859: board/siemens/draco] Error 2
-+(draco-etamin) make: *** [Makefile:177: sub-make] Error 2
-   aarch64:  +   deneb
-+(deneb) WARNING 'ahab-container.img' not found, resulting binary is not-fu=
-nctional
-+(deneb) aarch64-linux-ld.bfd: board/siemens/capricorn/../common/factoryset=
-=2Eo: in function `factoryset_read_eeprom':
-+(deneb) board/siemens/capricorn/../common/factoryset.c:149:(.text.factorys=
-et_read_eeprom+0x2c): undefined reference to `siemens_ee_read_data'
-+(deneb) aarch64-linux-ld.bfd: board/siemens/capricorn/../common/factoryset=
-=2Ec:177:(.text.factoryset_read_eeprom+0xb4): undefined reference to `sieme=
-ns_ee_read_data'
-+(deneb) aarch64-linux-ld.bfd: board/siemens/capricorn/../common/factoryset=
-=2Ec:172:(.text.factoryset_read_eeprom+0x264): undefined reference to `siem=
-ens_ee_read_data'
-+(deneb) make[1]: *** [Makefile:1766: u-boot] Error 139
-+(deneb) make[1]: *** Deleting file 'u-boot'
-+(deneb) make: *** [Makefile:177: sub-make] Error 2
-   aarch64:  +   giedi
-+(giedi) WARNING 'ahab-container.img' not found, resulting binary is not-fu=
-nctional
-+(giedi) aarch64-linux-ld.bfd: board/siemens/capricorn/../common/factoryset=
-=2Eo: in function `factoryset_read_eeprom':
-+(giedi) board/siemens/capricorn/../common/factoryset.c:149:(.text.factorys=
-et_read_eeprom+0x2c): undefined reference to `siemens_ee_read_data'
-+(giedi) aarch64-linux-ld.bfd: board/siemens/capricorn/../common/factoryset=
-=2Ec:177:(.text.factoryset_read_eeprom+0xb4): undefined reference to `sieme=
-ns_ee_read_data'
-+(giedi) aarch64-linux-ld.bfd: board/siemens/capricorn/../common/factoryset=
-=2Ec:172:(.text.factoryset_read_eeprom+0x264): undefined reference to `siem=
-ens_ee_read_data'
-+(giedi) make[1]: *** [Makefile:1766: u-boot] Error 139
-+(giedi) make[1]: *** Deleting file 'u-boot'
-+(giedi) make: *** [Makefile:177: sub-make] Error 2
-
-When building.
-
---=20
-Tom
-
---TnY5ACcSzrf2zI88
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWpQJIACgkQFHw5/5Y0
-tyxWxQv/X/wLD2zH95kLiQ+ST4UGtIGWEhYHbIbDRe3Z1KK3Qy+2g9Zr2S90k2TJ
-WKckF6mq4sxFSHVozWyvmyCR/3e8TRe7zTq9l5JjUy65BV3stFHm2H3tPreSaQdi
-UobBgpuqZV8MxfNjV7FTMj56MIPNc/BiXbYGO0YTfOgLRFy3vb95G4j6W5kOFvJy
-bk21sMNEn8NvIZPJ7WVWIhdeY8E50kwhbe14y8zJKp628vW9fdQU3daMvOFaohgW
-/Aa4MGMMI5jNc1VuHAhP80JCfius/oBCmazBQ+S3TMoi3wV+LwZhwZitrAe1/+QZ
-4pX7EEOFUyfft6r3qLjyNQIlwdyWgiOqLQzI5xTWunAzNIr4Sc7B6C25frPCqqtK
-rnpMHZqPiEstOaCQyJ2UlTLJ4TxwO7n0Ifl9mWsucXERY81L5lojCO3PyhMq0fvV
-JGPDpKABku12y+2zoToTeXqWJe8qzhX28sfjQIYWAzBiHr1+dnCdhkZk27xWbzcd
-S+lOSIHb
-=9hIH
------END PGP SIGNATURE-----
-
---TnY5ACcSzrf2zI88--
+> 
+> Max
+> 
+> >  #include <spl.h>
+> >  
+> >  #include "../common/tdx-cfg-block.h"
+> >  
+> > +#define VDD_CORE_REG "buck1"
+> > +
+> >  DECLARE_GLOBAL_DATA_PTR;
+> >  
+> >  int board_init(void)
+> > @@ -49,9 +52,37 @@ int board_fit_config_name_match(const char *name)
+> >  }
+> >  #endif
+> >  
+> > +static u32 get_vdd_core_nominal(void)
+> > +{
+> > +	int core_uvolt;
+> > +
+> > +	switch (k3_get_speed_grade()) {
+> > +	case 'G':
+> > +	case 'K':
+> > +	case 'S':
+> > +		core_uvolt = 750000;
+> > +		break;
+> > +	case 'T':
+> > +	default:
+> > +		core_uvolt = 850000;
+> > +		break;
+> > +	}
+> > +	return core_uvolt;
+> > +}
+> > +
+> >  #if IS_ENABLED(CONFIG_OF_LIBFDT) && IS_ENABLED(CONFIG_OF_BOARD_SETUP)
+> >  int ft_board_setup(void *blob, struct bd_info *bd)
+> >  {
+> > +	int core_uvolt;
+> > +
+> > +	core_uvolt = get_vdd_core_nominal();
+> > +	if (core_uvolt != 850000) {
+> > +		do_fixup_by_path_u32(blob, "/bus@f0000/i2c@20000000/pmic@30/regulators/buck1",
+> > +				     "regulator-max-microvolt", core_uvolt, 0);
+> > +		do_fixup_by_path_u32(blob, "/bus@f0000/i2c@20000000/pmic@30/regulators/buck1",
+> > +				     "regulator-min-microvolt", core_uvolt, 0);
+> > +	}
+> > +
+> >  	return ft_common_board_setup(blob, bd);
+> >  }
+> >  #endif
+> > @@ -86,6 +117,22 @@ static void select_dt_from_module_version(void)
+> >  
+> >  int board_late_init(void)
+> >  {
+> > +	int ret;
+> > +	int core_uvolt;
+> > +	struct udevice *dev = NULL;
+> > +
+> > +	core_uvolt = get_vdd_core_nominal();
+> > +	if (core_uvolt != 850000) {
+> > +		/* Set CPU core voltage to 0.75V for slower speed grades */
+> > +		ret = regulator_get_by_devname(VDD_CORE_REG, &dev);
+> > +		if (ret)
+> > +			pr_err("VDD CORE Regulator get error: %d\n", ret);
+> > +
+> > +		ret = regulator_set_value_force(dev, core_uvolt);
+> > +		if (ret)
+> > +			pr_err("VDD CORE Regulator value setting error: %d\n", ret);
+> > +	}
+> > +
+> >  	select_dt_from_module_version();
+> >  
+> >  	return 0;
+> > -- 
+> > 2.42.0
+> > 
