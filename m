@@ -4,82 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00215C47258
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 00:09:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFA67C4725D
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 00:16:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D5208798C;
-	Thu, 18 Jan 2024 01:08:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=supermicro.com
+	by phobos.denx.de (Postfix) with ESMTP id E1EF887A18;
+	Thu, 18 Jan 2024 01:16:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=supermicro.com header.i=@supermicro.com header.b="rLn0qwfD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="elVy6DWq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26C06876D3; Thu, 18 Jan 2024 01:07:48 +0100 (CET)
-Received: from MGB.supermicro.com (mgb.supermicro.com [207.212.57.85])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B4FC187A18; Thu, 18 Jan 2024 01:16:33 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD85687887
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 01:07:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=supermicro.com
+ by phobos.denx.de (Postfix) with ESMTPS id D58FE87994
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 01:16:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=liuw@supermicro.com
-Received: from pps.filterd (MGB.supermicro.com [127.0.0.1])
- by MGB.supermicro.com (8.17.1.19/8.17.1.19) with ESMTP id 40HLfZV5024530;
- Wed, 17 Jan 2024 16:07:40 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=supermicro.com;
- h=from : to : cc :
- subject : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=DKIM;
- bh=Ohh11xOoGWqvisZfmfmbTtK5KO8xZNeu+iILe6MbndY=;
- b=rLn0qwfDHvc1RIAzQVve0d4mW6m8ILhMcZVOtuTH7Op9MQdSINLJdj08W9/Ic3q81bkw
- k7xKNe4d670b5sCu+O8JG86VDA9JnBL0N2ojJzVeKxYpvNzIlt1m1TA99aEQMNpn8v9R
- P3VS/NOSzCaUKgysmn6Opz3JusNah5QXHU9n6E5YtdLjsSCNnNn1BoemTxGwXnEagKWR
- KuJt8ep6zgdCtjoneWJHaVZfChBrWKVWEmjLEm0iIzlfi6o8uPzDIT3F6kPloKJkaq3H
- x1TwzbIYYVguS3crG7PaWUqB8hL7u6iyvBz79VE3y7ixvOIWeHh1/xTz6Ahk/WMfhE70 Tw== 
-Received: from ex2013-mbx3.supermicro.com (EX2013-MBX3.supermicro.com
- [10.2.1.46]) by MGB.supermicro.com (PPS) with ESMTPS id 3vku0wd7s9-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
- Wed, 17 Jan 2024 16:07:40 -0800
-Received: from us-ex2019-mbx1.supermicro.com (10.2.6.157) by
- EX2013-MBX3.supermicro.com (10.2.1.46) with Microsoft SMTP Server (TLS) id
- 15.0.1497.42; Wed, 17 Jan 2024 16:07:40 -0800
-Received: from us-ex2019-mbx1.supermicro.com (10.2.6.157) by
- us-ex2019-mbx1.supermicro.com (10.2.6.157) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Wed, 17 Jan 2024 16:07:37 -0800
-Received: from us-ex2019-mbx1.supermicro.com ([fe80::37c2:47e5:2f5d:450f]) by
- us-ex2019-mbx1.supermicro.com ([fe80::37c2:47e5:2f5d:450f%16]) with
- mapi id 15.02.1118.037; Wed, 17 Jan 2024 16:07:37 -0800
-From: Liu Wang <liuw@supermicro.com>
-To: Fabio Estevam <festevam@gmail.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: RE: Could you please help me in resolving the
- "arch/arm/lib/vectors.S:87: Error: no such instruction: `b reset' ?"
-Thread-Topic: Could you please help me in resolving the
- "arch/arm/lib/vectors.S:87: Error: no such instruction: `b reset' ?"
-Thread-Index: AdpI24I3kjWF6EnATLOPMIhQOQ7T3gAtdOcAAAg2JaAAAa1qgP//j+hE//+/RCA=
-Date: Thu, 18 Jan 2024 00:07:37 +0000
-Message-ID: <9c2e7790f0c94b0ebf0e840100eae2c0@supermicro.com>
-References: <2dba1330181940c78b5ad47f18ee43fa@supermicro.com>
- <CAOMZO5DTw2uU+uEmVLR9nbFkR4QPgmhuY9VUAz-sgg+GppMG9g@mail.gmail.com>
- <0934648988c9444aaf85f2e3163c0f4b@supermicro.com>,
- <CAOMZO5Cy8as7b_cup6J+PYbN-stkj4Vz2wsLB_1=NN3vx5SVWQ@mail.gmail.com>
- <728CCDD9-CEA4-4ED1-9143-189C3F257097@supermicro.com>
-In-Reply-To: <728CCDD9-CEA4-4ED1-9143-189C3F257097@supermicro.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.2.8.23]
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-55790581457so13669341a12.3
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 16:16:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1705536985; x=1706141785; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=wqATuZvY5HfQc7Do+EKxXF7wPGpKaMaXvFYmiqxSdF0=;
+ b=elVy6DWqEw1vKQ69ToES1GbV4v2gcqK9ROmIX9g4UggBxY5atWNPIqfqUIC6D6d+9P
+ rpHxrvRUdw5ER7+o1PdU46SUXJms+7HUgTCry9bSq6dZvnTaYSYk+BnsV7lWmJd3epA8
+ pQUsbnuBeKZvLicmab4D95FAZoD8FY9tEYBE13HZbirq+OGuyHbm2oFWmUQhPOiJVJ7z
+ pQmWJhlMbJsnS0kOpPmhp7CEot5BiyfVtKUXRhWjfeeUBxL9TTRM4jBeNvMsY5cI3R6c
+ mmX8EpkBcpmkkkp5EHvzPsAU0QqGwA1BbQ9hPxDR9oezpAlX50h65I7Sq2awka36JJ/9
+ yTsQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705536985; x=1706141785;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wqATuZvY5HfQc7Do+EKxXF7wPGpKaMaXvFYmiqxSdF0=;
+ b=uijZQQgS3fF1PshW2j8kyuom2PJu7n+BJl9S40wD44bIIPXOUCJLIvqZJDYCoI2PQd
+ QPLWwtohNvYujHxJcGFRaRAEL4Nl8gykYD8IgNsFEi6LAzTnI4T6KaNFhzK/fiZ/QeIP
+ lqXshknPJDnZgN5Jz0llqbQ16bf7JRMeod3iVaY/PGql+XsHM5u6t8227XByOeuY6TTV
+ vOndsnppYAxbXA9WwcrVILA7ZBvjX2AplHmsIcfu71gmNjh6xMBngLKShDxS9GLtTW5e
+ VOOxFFmrtCUAEDskfZ/kWaib+0HPQ1eJiWC1phPEmk7S3/r0LibQPxJIgr//J40uQzAW
+ OLNA==
+X-Gm-Message-State: AOJu0YxkoeTo1kijJabFnsTh/lT2+UDpVHU9+Fr/4xpLprffmXIzH+Gq
+ +NeFKckco1nG1UTyaI9DPhFZFcg4wgAdG/2N1pB/2TtmqLpx8jGKjjM+EGRoYCrRKv8wfpL97rF
+ USbv2NQ95bQ+atfCINGmbw27Z/SOoLm0u4CXC59QpaYLPGPGst64=
+X-Google-Smtp-Source: AGHT+IHCusFPq73lA6WM45tX0MJMrAX7pqADJvkNgQuo3z9eVw4CE6PPw9m2PdV0MxKO97IIDnKTInTkqsclb8NBB+Q=
+X-Received: by 2002:a05:6402:1283:b0:559:d52e:613d with SMTP id
+ w3-20020a056402128300b00559d52e613dmr54962edv.43.1705536985233; Wed, 17 Jan
+ 2024 16:16:25 -0800 (PST)
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-01-17_12,2024-01-17_01,2023-05-22_02
-X-Mailman-Approved-At: Thu, 18 Jan 2024 01:08:58 +0100
+References: <20240117094432.1049168-1-masahisa.kojima@linaro.org>
+ <20240117094432.1049168-2-masahisa.kojima@linaro.org>
+ <CAC_iWjLWhaLtoooiqvM9AjMqp1rdtmAS3oPO+am5KV72OdGYfw@mail.gmail.com>
+In-Reply-To: <CAC_iWjLWhaLtoooiqvM9AjMqp1rdtmAS3oPO+am5KV72OdGYfw@mail.gmail.com>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Thu, 18 Jan 2024 09:16:14 +0900
+Message-ID: <CADQ0-X9FP2R2SiNZwhbo1vAn7uLTcdia=+dOo9SN27BF2CzL+w@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] efi_loader: avoid pointer access after calling
+ efi_delete_handle
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, AKASHI Takahiro <takahiro.akashi@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,63 +89,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgRmFiaW8sDQoNClRoYW5rIHlvdSBhZ2FpbiBmb3IgeW91ciBoZWxwLg0KDQpSdW4gaW50byBm
-b3JtYXQgZXJyb3IgYWZ0ZXIgZXhwb3J0IHRvb2wgY2hhaW46IA0KLi4uZ251ZWFiaWhmLWdjYzog
-Y2Fubm90IGV4ZWN1dGUgYmluYXJ5IGZpbGU6IEV4ZWMgZm9ybWF0IGVycm9yLi4uDQoNCkNvdWxk
-IHlvdSBwbGVhc2Ugc2hhcmUgbW9yZSA/DQoNClNpbmNlcmVseSwNCkxpdSBXYW5nDQotLS0tLS0t
-LS0tLS0tLS0tLS0tLQ0KL2Jpbi9zaDogbGluZSAxOiAvaG9tZS9saXV3L2FybWdudXRvb2xjaGFp
-bjEzMlJlbDFhYXJjaDY0YXJtbm9uZWxpbnV4Z251ZWFiaWhmL2FybS1nbnUtdG9vbGNoYWluLTEz
-LjIuUmVsMS1hYXJjaDY0LWFybS1ub25lLWxpbnV4LWdudWVhYmloZi9iaW4vYXJtLW5vbmUtbGlu
-dXgtZ251ZWFiaWhmLWdjYzogY2Fubm90IGV4ZWN1dGUgYmluYXJ5IGZpbGU6IEV4ZWMgZm9ybWF0
-IGVycm9yDQovaG9tZS9saXV3L2FybWdudXRvb2xjaGFpbjEzMlJlbDFhYXJjaDY0YXJtbm9uZWxp
-bnV4Z251ZWFiaWhmL2FybS1nbnUtdG9vbGNoYWluLTEzLjIuUmVsMS1hYXJjaDY0LWFybS1ub25l
-LWxpbnV4LWdudWVhYmloZi9iaW4vYXJtLW5vbmUtbGludXgtZ251ZWFiaWhmLWdjYzogL2hvbWUv
-bGl1dy9hcm1nbnV0b29sY2hhaW4xMzJSZWwxYWFyY2g2NGFybW5vbmVsaW51eGdudWVhYmloZi9h
-cm0tZ251LXRvb2xjaGFpbi0xMy4yLlJlbDEtYWFyY2g2NC1hcm0tbm9uZS1saW51eC1nbnVlYWJp
-aGYvYmluL2FybS1ub25lLWxpbnV4LWdudWVhYmloZi1nY2M6IGNhbm5vdCBleGVjdXRlIGJpbmFy
-eSBmaWxlDQovYmluL3NoOiBsaW5lIDE6IC9ob21lL2xpdXcvYXJtZ251dG9vbGNoYWluMTMyUmVs
-MWFhcmNoNjRhcm1ub25lbGludXhnbnVlYWJpaGYvYXJtLWdudS10b29sY2hhaW4tMTMuMi5SZWwx
-LWFhcmNoNjQtYXJtLW5vbmUtbGludXgtZ251ZWFiaWhmL2Jpbi9hcm0tbm9uZS1saW51eC1nbnVl
-YWJpaGYtZ2NjOiBjYW5ub3QgZXhlY3V0ZSBiaW5hcnkgZmlsZTogRXhlYyBmb3JtYXQgZXJyb3IN
-CmRpcm5hbWU6IG1pc3Npbmcgb3BlcmFuZA0KVHJ5ICdkaXJuYW1lIC0taGVscCcgZm9yIG1vcmUg
-aW5mb3JtYXRpb24uDQovYmluL3NoOiBsaW5lIDE6IC9ob21lL2xpdXcvYXJtZ251dG9vbGNoYWlu
-MTMyUmVsMWFhcmNoNjRhcm1ub25lbGludXhnbnVlYWJpaGYvYXJtLWdudS10b29sY2hhaW4tMTMu
-Mi5SZWwxLWFhcmNoNjQtYXJtLW5vbmUtbGludXgtZ251ZWFiaWhmL2Jpbi9hcm0tbm9uZS1saW51
-eC1nbnVlYWJpaGYtZ2NjOiBjYW5ub3QgZXhlY3V0ZSBiaW5hcnkgZmlsZTogRXhlYyBmb3JtYXQg
-ZXJyb3INCnNjcmlwdHMva2NvbmZpZy9jb25mICAtLXN5bmNjb25maWcgS2NvbmZpZw0KLi9zY3Jp
-cHRzL2djYy12ZXJzaW9uLnNoOiBsaW5lIDI1OiAvaG9tZS9saXV3L2FybWdudXRvb2xjaGFpbjEz
-MlJlbDFhYXJjaDY0YXJtbm9uZWxpbnV4Z251ZWFiaWhmL2FybS1nbnUtdG9vbGNoYWluLTEzLjIu
-UmVsMS1hYXJjaDY0LWFybS1ub25lLWxpbnV4LWdudWVhYmloZi9iaW4vYXJtLW5vbmUtbGludXgt
-Z251ZWFiaWhmLWdjYzogY2Fubm90IGV4ZWN1dGUgYmluYXJ5IGZpbGU6IEV4ZWMgZm9ybWF0IGVy
-cm9yDQouL3NjcmlwdHMvZ2NjLXZlcnNpb24uc2g6IGxpbmUgMjY6IC9ob21lL2xpdXcvYXJtZ251
-dG9vbGNoYWluMTMyUmVsMWFhcmNoNjRhcm1ub25lbGludXhnbnVlYWJpaGYvYXJtLWdudS10b29s
-Y2hhaW4tMTMuMi5SZWwxLWFhcmNoNjQtYXJtLW5vbmUtbGludXgtZ251ZWFiaWhmL2Jpbi9hcm0t
-bm9uZS1saW51eC1nbnVlYWJpaGYtZ2NjOiBjYW5ub3QgZXhlY3V0ZSBiaW5hcnkgZmlsZTogRXhl
-YyBmb3JtYXQgZXJyb3INCi4vc2NyaXB0cy9nY2MtdmVyc2lvbi5zaDogbGluZSAyODogL2hvbWUv
-bGl1dy9hcm1nbnV0b29sY2hhaW4xMzJSZWwxYWFyY2g2NGFybW5vbmVsaW51eGdudWVhYmloZi9h
-cm0tZ251LXRvb2xjaGFpbi0xMy4yLlJlbDEtYWFyY2g2NC1hcm0tbm9uZS1saW51eC1nbnVlYWJp
-aGYvYmluL2FybS1ub25lLWxpbnV4LWdudWVhYmloZi1nY2M6IGNhbm5vdCBleGVjdXRlIGJpbmFy
-eSBmaWxlOiBFeGVjIGZvcm1hdCBlcnJvcg0KICBDRkcgICAgIHUtYm9vdC5jZmcNCi9iaW4vc2g6
-IGxpbmUgMTogL2hvbWUvbGl1dy9hcm1nbnV0b29sY2hhaW4xMzJSZWwxYWFyY2g2NGFybW5vbmVs
-aW51eGdudWVhYmloZi9hcm0tZ251LXRvb2xjaGFpbi0xMy4yLlJlbDEtYWFyY2g2NC1hcm0tbm9u
-ZS1saW51eC1nbnVlYWJpaGYvYmluL2FybS1ub25lLWxpbnV4LWdudWVhYmloZi1nY2M6IGNhbm5v
-dCBleGVjdXRlIGJpbmFyeSBmaWxlOiBFeGVjIGZvcm1hdCBlcnJvcg0KbWFrZVsxXTogKioqIFtz
-Y3JpcHRzL01ha2VmaWxlLmF1dG9jb25mOjc3OiB1LWJvb3QuY2ZnXSBFcnJvciAxDQptYWtlOiAq
-KiogTm8gcnVsZSB0byBtYWtlIHRhcmdldCAnaW5jbHVkZS9jb25maWcvYXV0by5jb25mJywgbmVl
-ZGVkIGJ5ICdpbmNsdWRlL2NvbmZpZy91Ym9vdC5yZWxlYXNlJy4gIFN0b3AuDQoNCi0tLS0tT3Jp
-Z2luYWwgTWVzc2FnZS0tLS0tDQpGcm9tOiBMaXUgV2FuZyAoSFcpIDxsaXV3QHN1cGVybWljcm8u
-Y29tPiANClNlbnQ6IFdlZG5lc2RheSwgSmFudWFyeSAxNywgMjAyNCAxMjowOCBQTQ0KVG86IEZh
-YmlvIEVzdGV2YW0gPGZlc3RldmFtQGdtYWlsLmNvbT4NCkNjOiB1LWJvb3RAbGlzdHMuZGVueC5k
-ZQ0KU3ViamVjdDogUmU6IENvdWxkIHlvdSBwbGVhc2UgaGVscCBtZSBpbiByZXNvbHZpbmcgdGhl
-ICJhcmNoL2FybS9saWIvdmVjdG9ycy5TOjg3OiBFcnJvcjogbm8gc3VjaCBpbnN0cnVjdGlvbjog
-YGIgcmVzZXQnID8iDQoNCkhpIEZhYmlvLA0KDQpBcHByZWNpYXRlIQ0KDQpTaW5jZXJlbHksDQpM
-aXUgIFdhbmcNCg0KPiBPbiBKYW4gMTcsIDIwMjQsIGF0IDEwOjQ5IEFNLCBGYWJpbyBFc3RldmFt
-IDxmZXN0ZXZhbUBnbWFpbC5jb20+IHdyb3RlOg0KPiANCj4g77u/W0NBVVRJT046IEV4dGVybmFs
-IE1haWxdDQo+IA0KPj4gT24gV2VkLCBKYW4gMTcsIDIwMjQgYXQgMzoyNeKAr1BNIExpdSBXYW5n
-IDxsaXV3QHN1cGVybWljcm8uY29tPiB3cm90ZToNCj4+IA0KPj4gMi4gWW91IGFyZSByaWdodC4g
-SSBoYXZlIG5vdCBleHBvcnRlZCB0aGUgdG9vbCBjaGFpbi4NCj4+IENvdWxkIHlvdSBwbGVhc2Ug
-c2hhcmUgbWUgYSBsaW5rIHRvIGEgcmVhZG1lIGluIHNldHRpbmcgdXAgdGhlIHRvb2wgY2hhaW4g
-Zm9yIFVidW50dSBjcm9zcyBidWlsZCBlbnZpcm9ubWVudCA/DQo+IA0KPiBZb3UgY2FuIGRvIGxp
-a2UgdGhpczoNCj4gDQo+IGV4cG9ydCBBUkNIPWFybQ0KPiBleHBvcnQgQ1JPU1NfQ09NUElMRT0v
-dXNyL2Jpbi9hcm0tbGludXgtZ251ZWFiaWhmLQ0KPiANCj4gbWFrZSBjc2VfcHRqb2JfY2IzX3Ix
-MDJfZGVmY29uZmlnDQo+IG1ha2UNCg==
+On Wed, 17 Jan 2024 at 20:52, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Kojima-san
+>
+> On Wed, 17 Jan 2024 at 11:46, Masahisa Kojima
+> <masahisa.kojima@linaro.org> wrote:
+> >
+> > efi_delete_handle() calls efi_purge_handle(), then it finally
+> > frees the EFI handle.
+> > Both diskobj and handle variables in efi_disk_remove() have
+> > the same pointer, we can not access diskobj->dp after calling
+> > efi_delete_handle().
+> >
+> > This commit saves the struct efi_device_path pointer before
+> > calling efi_delete_handle(). This commit also fixes the
+> > missing free for volume member in struct efi_disk_obj.
+> >
+> > This commit also removes the container_of() calls, and
+> > adds the TODO comment of missing efi_close_protocol() call
+> > for the parent EFI_BLOCK_IO_PROTOCOL.
+> >
+> > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> > ---
+> >  lib/efi_loader/efi_disk.c | 23 +++++++++++++++++------
+> >  1 file changed, 17 insertions(+), 6 deletions(-)
+> >
+> > diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+> > index 013842f077..ce46c1092a 100644
+> > --- a/lib/efi_loader/efi_disk.c
+> > +++ b/lib/efi_loader/efi_disk.c
+> > @@ -707,35 +707,46 @@ int efi_disk_remove(void *ctx, struct event *event)
+> >         struct udevice *dev = event->data.dm.dev;
+> >         efi_handle_t handle;
+> >         struct blk_desc *desc;
+> > +       struct efi_device_path *dp = NULL;
+> >         struct efi_disk_obj *diskobj = NULL;
+> > +       struct efi_simple_file_system_protocol *volume = NULL;
+> >         efi_status_t ret;
+> >
+> >         if (dev_tag_get_ptr(dev, DM_TAG_EFI, (void **)&handle))
+> >                 return 0;
+> >
+> > +       if (!handle)
+> > +               return 0;
+> > +
+>
+> Is there a chance dev_tag_get_ptr() will return a NULL handle?
+
+There is no chance unless we actually set a NULL.
+Checking the return value of dev_tag_get_ptr above is enough, I will
+remove this.
+
+>
+> >         id = device_get_uclass_id(dev);
+> >         switch (id) {
+> >         case UCLASS_BLK:
+> >                 desc = dev_get_uclass_plat(dev);
+> >                 if (desc && desc->uclass_id != UCLASS_EFI_LOADER)
+> > -                       diskobj = container_of(handle, struct efi_disk_obj,
+> > -                                              header);
+> > +                       diskobj = (struct efi_disk_obj *)handle;
+> >                 break;
+> >         case UCLASS_PARTITION:
+> > -               diskobj = container_of(handle, struct efi_disk_obj, header);
+> > +               diskobj = (struct efi_disk_obj *)handle;
+> > +
+> > +               /* TODO: closing the parent EFI_BLOCK_IO_PROTOCOL is missing. */
+> > +
+> >                 break;
+> >         default:
+> >                 return 0;
+> >         }
+> >
+> > +       if (diskobj) {
+> > +               dp = diskobj->dp;
+> > +               volume = diskobj->volume;
+> > +       }
+> > +
+> >         ret = efi_delete_handle(handle);
+>
+> Hmm, in which context are the dp and volume pointers allocated? The
+> handle is now freed, can we reliably access dp and volume ptrs?
+
+dp and volume are allocated in efi_disk_add_dev() when the block
+device is probed.
+efi_delete_handle() will remove all protocols from the handle,
+efi_uninstall_protocol()
+checks whether protocol_interface is actually installed. So dp and
+volume should be
+freed after efi_delete_handle().
+
+Thanks,
+Masahisa Kojima
+
+>
+> >         /* Do not delete DM device if there are still EFI drivers attached. */
+> >         if (ret != EFI_SUCCESS)
+> >                 return -1;
+> >
+> > -       if (diskobj)
+> > -               efi_free_pool(diskobj->dp);
+> > -
+> > +       efi_free_pool(dp);
+> > +       free(volume);
+> >         dev_tag_del(dev, DM_TAG_EFI);
+> >
+> >         return 0;
+> > --
+> > 2.34.1
+> >
+>
+> Thanks
+> /Ilias
