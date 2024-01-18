@@ -4,61 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 120BEC47077
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 07:21:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BBF7C4707B
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 07:21:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EDEB87B42;
-	Thu, 18 Jan 2024 08:21:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B77BE87B72;
+	Thu, 18 Jan 2024 08:21:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="PJyyHxTh";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="CLwJZ7AK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A93487B4C; Thu, 18 Jan 2024 08:20:58 +0100 (CET)
-Received: from mail-m12827.netease.com (mail-m12827.netease.com
- [103.209.128.27])
+ id 111B287B82; Thu, 18 Jan 2024 08:21:19 +0100 (CET)
+Received: from mail-m1285.netease.com (mail-m1285.netease.com [103.209.128.5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED3AA87A00
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 08:20:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ACC5987A0E
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 08:21:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=PJyyHxTh1oY0jUtgtn+NYjccAxQHM3RfEBibj4wP7YwweMDfXuiVZ4ccVTHTy90TUYFovIO43Y8z8/ZUs5GYzorz4IhOyMX7ufJ4AGTkEUg87OJamKgrpDFNQUJk4uUYQtXtQxjRgSfL9HOPH6EuaeELd01MKaHfYuCKKJevVLs=;
+ b=CLwJZ7AKPfNVS6XQQWnKqQo0M7Kv6Li2xiaMFCvNoUquAv8iKLG/ZG+Ia0c7W1b2ZN27ResjdD8pQjT9kkxQ7D7Dwd4vv6Lbp/+HPkBGQXmQ7vylspEjZhVM1lynj8tIt6062Noyr9pGloCUgKuKy7tCJ5HmyYq0xHHJLuykFjQ=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=Lm2uyQ2uFMRIygUn0GYklnxQaq7k7JW9OLx4NWrcDM0=;
+ bh=SK4Gzh/B3C69uifipedBze4lo56aD22OAA0BjBasDJ0=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11873.qiye.163.com (Hmail) with ESMTPA id 9C71B9004E1;
- Thu, 18 Jan 2024 15:20:52 +0800 (CST)
-Message-ID: <9aae0791-84a5-42b4-b76d-2a89040b23d0@rock-chips.com>
-Date: Thu, 18 Jan 2024 15:20:52 +0800
+ by mail-m11873.qiye.163.com (Hmail) with ESMTPA id 26ABC9004E9;
+ Thu, 18 Jan 2024 15:21:13 +0800 (CST)
+Message-ID: <13dcc846-0c9c-4734-ad7f-f5468404351a@rock-chips.com>
+Date: Thu, 18 Jan 2024 15:21:13 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V4 3/7] rockchip: boot_mode: Allow
- rockchip_dnl_key_pressed() in SPL
+Subject: Re: [PATCH V4 5/7] rockchip: board: Add board_rng_seed() for all
+ Rockchip devices
 Content-Language: en-US
 To: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de
 Cc: andre.przywara@arm.com, philipp.tomsich@vrull.eu, sjg@chromium.org,
  jagan@edgeble.ai, jonas@kwiboo.se, Chris Morgan <macromorgan@hotmail.com>
 References: <20240102154654.191055-1-macroalpha82@gmail.com>
- <20240102154654.191055-4-macroalpha82@gmail.com>
+ <20240102154654.191055-6-macroalpha82@gmail.com>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240102154654.191055-4-macroalpha82@gmail.com>
+In-Reply-To: <20240102154654.191055-6-macroalpha82@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGh8dQ1YZH0kfT0JPTEpCH0hVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGRoYGFZOHxlMHRodHUpMHk9VEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8d1b71b3652eafkusn9c71b9004e1
+X-HM-Tid: 0a8d1b7203a52eafkusn26abc9004e9
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MCo6Nhw4FDwoURA5SR9PDSMV
- IUkaCiJVSlVKTEtOTk1JT05ISE5OVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPQ0JKNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PTY6TSo*UTwoKhA8Ih4vDRQz
+ Fk0KC01VSlVKTEtOTk1JT0xIQkxOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPSk5CNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,114 +74,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Chris,
 
 On 2024/1/2 23:46, Chris Morgan wrote:
 > From: Chris Morgan <macromorgan@hotmail.com>
 >
-> Update the rockchip_dnl_key_pressed() so that it can run in
-> SPL. Also change the ADC channel to a define that can be
-> overridden by a board specific option.
-
-I should ask this earlier.
-
-Why you have to enable the download key in SPL?
-
-This works for a long time in U-Boot proper, both mainline and 
-downstream vendor U-Boot,
-
-no one is detect this download key in SPL.
-
-In theory the SPL can implement all the feature which is available in 
-U-Boot proper,
-
-but it would be better to make the SPL focus on the job it should be 
-done and keep as small as possible.
-
-
-Thanks,
-
-- Kever
-
+> Allow all rockchip devices to use the hardware RNG to seed Linux
+> RNG.
 >
 > Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+
+Thanks,
+- Kever
 > ---
->   arch/arm/mach-rockchip/Makefile    |  4 ++--
->   arch/arm/mach-rockchip/boot_mode.c | 11 ++++++++++-
->   2 files changed, 12 insertions(+), 3 deletions(-)
+>   arch/arm/mach-rockchip/board.c             | 32 ++++++++++++++++++++++
+>   board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c | 29 --------------------
+>   2 files changed, 32 insertions(+), 29 deletions(-)
 >
-> diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-rockchip/Makefile
-> index 1dc92066bb..ff089ae949 100644
-> --- a/arch/arm/mach-rockchip/Makefile
-> +++ b/arch/arm/mach-rockchip/Makefile
-> @@ -15,13 +15,13 @@ obj-tpl-$(CONFIG_ROCKCHIP_PX30) += px30-board-tpl.o
+> diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
+> index 57f08e0be0..77145524ea 100644
+> --- a/arch/arm/mach-rockchip/board.c
+> +++ b/arch/arm/mach-rockchip/board.c
+> @@ -348,3 +348,35 @@ __weak int misc_init_r(void)
+>   	return ret;
+>   }
+>   #endif
+> +
+> +#if IS_ENABLED(CONFIG_BOARD_RNG_SEED) && IS_ENABLED(CONFIG_RNG_ROCKCHIP)
+> +#include <rng.h>
+> +
+> +/* Use hardware rng to seed Linux random. */
+> +__weak int board_rng_seed(struct abuf *buf)
+> +{
+> +	struct udevice *dev;
+> +	size_t len = 0x8;
+> +	u64 *data;
+> +
+> +	data = malloc(len);
+> +	if (!data) {
+> +		printf("Out of memory\n");
+> +		return -ENOMEM;
+> +	}
+> +
+> +	if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
+> +		printf("No RNG device\n");
+> +		return -ENODEV;
+> +	}
+> +
+> +	if (dm_rng_read(dev, data, len)) {
+> +		printf("Reading RNG failed\n");
+> +		return -EIO;
+> +	}
+> +
+> +	abuf_init_set(buf, data, len);
+> +
+> +	return 0;
+> +}
+> +#endif
+> diff --git a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+> index 45854709f5..7bef5a53f0 100644
+> --- a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+> +++ b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+> @@ -17,7 +17,6 @@
+>   #include <mmc.h>
+>   #include <panel.h>
+>   #include <pwm.h>
+> -#include <rng.h>
+>   #include <stdlib.h>
+>   #include <video_bridge.h>
 >   
->   obj-spl-$(CONFIG_ROCKCHIP_RK3036) += rk3036-board-spl.o
+> @@ -137,34 +136,6 @@ void spl_board_init(void)
+>   	       (GPIO0_BASE + GPIO_SWPORT_DR_H));
+>   }
 >   
-> -ifeq ($(CONFIG_SPL_BUILD)$(CONFIG_TPL_BUILD),)
+> -/* Use hardware rng to seed Linux random. */
+> -int board_rng_seed(struct abuf *buf)
+> -{
+> -	struct udevice *dev;
+> -	size_t len = 0x8;
+> -	u64 *data;
 > -
->   # Always include boot_mode.o, as we bypass it (i.e. turn it off)
->   # inside of boot_mode.c when CONFIG_ROCKCHIP_BOOT_MODE_REG is 0.  This way,
->   # we can have the preprocessor correctly recognise both 0x0 and 0
->   # meaning "turn it off".
->   obj-y += boot_mode.o
-> +
-> +ifeq ($(CONFIG_SPL_BUILD)$(CONFIG_TPL_BUILD),)
->   obj-$(CONFIG_ROCKCHIP_COMMON_BOARD) += board.o
->   obj-$(CONFIG_MISC_INIT_R) += misc.o
->   endif
-> diff --git a/arch/arm/mach-rockchip/boot_mode.c b/arch/arm/mach-rockchip/boot_mode.c
-> index eb8f65ae4e..d2308768be 100644
-> --- a/arch/arm/mach-rockchip/boot_mode.c
-> +++ b/arch/arm/mach-rockchip/boot_mode.c
-> @@ -38,6 +38,10 @@ void set_back_to_bootrom_dnl_flag(void)
->   #define KEY_DOWN_MIN_VAL	0
->   #define KEY_DOWN_MAX_VAL	30
->   
-> +#ifndef RK_DNL_ADC_CHAN
-> +#define RK_DNL_ADC_CHAN		1
-> +#endif
-> +
->   __weak int rockchip_dnl_key_pressed(void)
->   {
->   	unsigned int val;
-> @@ -52,7 +56,8 @@ __weak int rockchip_dnl_key_pressed(void)
->   	ret = -ENODEV;
->   	uclass_foreach_dev(dev, uc) {
->   		if (!strncmp(dev->name, "saradc", 6)) {
-> -			ret = adc_channel_single_shot(dev->name, 1, &val);
-> +			ret = adc_channel_single_shot(dev->name,
-> +						      RK_DNL_ADC_CHAN, &val);
->   			break;
->   		}
->   	}
-> @@ -73,11 +78,13 @@ __weak int rockchip_dnl_key_pressed(void)
->   
->   void rockchip_dnl_mode_check(void)
->   {
-> +#if CONFIG_IS_ENABLED(ADC)
->   	if (rockchip_dnl_key_pressed()) {
->   		printf("download key pressed, entering download mode...");
->   		set_back_to_bootrom_dnl_flag();
->   		do_reset(NULL, 0, 0, NULL);
->   	}
-> +#endif
->   }
->   
->   int setup_boot_mode(void)
-> @@ -90,6 +97,7 @@ int setup_boot_mode(void)
->   	boot_mode = readl(reg);
->   	debug("%s: boot mode 0x%08x\n", __func__, boot_mode);
->   
-> +#if !defined(CONFIG_SPL_BUILD) && !defined(CONFIG_TPL_BUILD)
->   	/* Clear boot mode */
->   	writel(BOOT_NORMAL, reg);
->   
-> @@ -103,6 +111,7 @@ int setup_boot_mode(void)
->   		env_set("preboot", "setenv preboot; ums mmc 0");
->   		break;
->   	}
-> +#endif
->   
->   	return 0;
->   }
+> -	data = malloc(len);
+> -	if (!data) {
+> -		printf("Out of memory\n");
+> -		return -ENOMEM;
+> -	}
+> -
+> -	if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
+> -		printf("No RNG device\n");
+> -		return -ENODEV;
+> -	}
+> -
+> -	if (dm_rng_read(dev, data, len)) {
+> -		printf("Reading RNG failed\n");
+> -		return -EIO;
+> -	}
+> -
+> -	abuf_init_set(buf, data, len);
+> -
+> -	return 0;
+> -}
+> -
+>   /*
+>    * Buzz the buzzer so the user knows something is going on. Make it
+>    * optional in case PWM is disabled.
