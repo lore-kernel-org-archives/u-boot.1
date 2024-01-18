@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED68EC47DB7
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 19:50:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29158C47DB7
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 19:52:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CFA287BC1;
-	Thu, 18 Jan 2024 20:50:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 792DF87BC1;
+	Thu, 18 Jan 2024 20:52:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IS8UI1DL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dPdyvxpH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D0E087BB6; Thu, 18 Jan 2024 20:50:44 +0100 (CET)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id 7F76287BC9; Thu, 18 Jan 2024 20:52:20 +0100 (CET)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB66387BC9
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 20:50:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6544C87BC1
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 20:52:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rfried.dev@gmail.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3bd4e6a7cb0so35165b6e.3
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 11:50:39 -0800 (PST)
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-2046c724383so57183fac.1
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 11:52:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705607438; x=1706212238; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1705607537; x=1706212337; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vM0vll8rudwhSGCJO3CAcd2/8yrjg8ogL4IX+YMuoQA=;
- b=IS8UI1DLi5jZWzPkl6Mid2FJXew3vKtAVPyKNul5bzW5SK6FtPpJu3KDB1ibvIi3EM
- H53/lsryonNiN8WQ0LxFOesdwtaY9P56Wje9+MhP9mJHP1a0AWlCnNXLt4T42dqQxsIY
- eOF4KRGZJn5qAIkTzyN/8koe2enM2UrLYxApUE1UPZneQkGSbnSBRa4Bp/EGgajVCktm
- mRDnGb28fJfAZX6BB9HkR8zYpPgNngsM7Rx18OUpUhS7hztXC1wlXy5+/3Sb85r7mbCj
- EP+9OCyVSZt/SlAGVwoHIbGWdkanIVu8bKMZ9PUs00uMdXNJaFnYBVibNwETbnrvLzBf
- mlag==
+ bh=hf0k5CE9SFAXdBj1dS69Dh8qgKjIsLTkk81n/033VP8=;
+ b=dPdyvxpHd9QQaNvfHZCsRgBojSC0RRbXju0CUR5+bS/ZxKxwlruIpdSs9NGj1R2VGx
+ 6f+Ic8KrZtzUNa9QP1viZGtg/avaSjGiVymYPyvmlsEfx8rVeAAfVDn97OKrngz770CZ
+ 26z8ri7GyHpFWPfBy6jSwKESrVG1z/sZFqV2OT+DrUuK14g07wmMDEBHsqNX8OC/gjcd
+ nMi2dolSra3viSuXgzl63TOjj/G0BB/VSM6HEEsOX7dPWmYeiksO/O77gY5bkcaCXWTU
+ 5qEtmw/Wd7dkIsv26YmFGWSvSaBHs+E+nrXOv4/Y+ghqCcmxh3ut/jQ559BrSC5glYRN
+ o1Nw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705607438; x=1706212238;
+ d=1e100.net; s=20230601; t=1705607537; x=1706212337;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vM0vll8rudwhSGCJO3CAcd2/8yrjg8ogL4IX+YMuoQA=;
- b=SdH3JXE1epMNCZ4dFVILlN5W9d8JnS2uKQbD+nlPDJK6zEdoXX8d3hn0/wpktUgyYQ
- axLewnGztUYErz8xQVSRyae5ew5WPNbNXrDM1P3rgw34pjimq4rxL+juT+/jGFOqNKKd
- UtFCIyEFW/ufwnxurkGqStbtnknjAtzLN+IdmzwdMTF8k+1alE7OYCKSDu8HYH4A8qtm
- q+/GQx65+4cs3qvFN2YbxSDyFfwqu6PQVmMai3Mk/j6ApOKDAtlbC1lSL6ppiq/Li3iw
- hqnfDMrRhjWgLYwwfuGfISZsTUgPBtsvK4BtK7EqwRdgPoTEMvRI7jJvoPdCSGFv21xM
- HeBw==
-X-Gm-Message-State: AOJu0YzQ2LZNGHwss4JCcnUpTp87PxPuBHnv3sXkBt0F+5d+PPOuycTl
- WVSARuFA8PdLry8KqQMmZOMiAq9pIMEIuwgl8ivR5Dxr1ydB4C7P8GtzNaOcEw0yjFjFaHKPzWZ
- pZMwchKvFza6EhTbk8gGxTBCVxQM=
-X-Google-Smtp-Source: AGHT+IG2DAX7RR/5vBabrHWs0n/0AP8+6GitkW5bDJoo+5+J6zgmrs/DJjDlw8mD5q0e94ENf+WPNEd+QBx8o1MPzvM=
-X-Received: by 2002:a05:6871:aa16:b0:210:a956:8cd8 with SMTP id
- wq22-20020a056871aa1600b00210a9568cd8mr1526859oab.112.1705607438298; Thu, 18
- Jan 2024 11:50:38 -0800 (PST)
+ bh=hf0k5CE9SFAXdBj1dS69Dh8qgKjIsLTkk81n/033VP8=;
+ b=RXXVxt1dtNXCBoYCuh5A+2ftM+NNWtGPBB4QEGyGTZTo3WxV/EBFFvH9EXkHOzoE31
+ FqMR7rauHRUz/j+MPXRVv8bRoXyAk6rD+CqwMEChlKhdYW5+UihX1rukjbEb8lYYDOtK
+ f7pFZVQkbheHO44RWjirNoljguNGZCM1ncOAOBbCMuWqWU38UNKmcU9XVV56LoFmaIkS
+ jhEGUSJmfm2tbIZ34hmOmAXvBaTI5dSTBfTZvyZOh469uWOdpbGZ0lF2z7yzf58RPVhE
+ APFa9iiUP5Vj20vlH7hr6QR3a7/jFeS1yeGTbyzLFfD84pFl5QbhuX1nqO6k9Z4TJmBz
+ EYVA==
+X-Gm-Message-State: AOJu0YyX6/maEaX7gYo2kSeqnWrZmiLla1I2GLM3G1UVX0M17HPxA1RH
+ Sd2uorD3FhlKMK2o1F+RTzNZcsJw0Olx6juf6JSbVBrY/peQyjH73e6RNlUHWihPe/9wqEjM+en
+ 13DgvCIwNSI6N84WdaGqMr5chVvM=
+X-Google-Smtp-Source: AGHT+IHZPsz+GoSRnzByGo8DoIraX79hYGNLEELPaQ0ZUWI+Aff/BrZOvlD5bbgGSsEOvwUwKctkXiro4wSnZ7atu2s=
+X-Received: by 2002:a05:6870:8984:b0:206:b561:72cd with SMTP id
+ f4-20020a056870898400b00206b56172cdmr1401608oaq.85.1705607537008; Thu, 18 Jan
+ 2024 11:52:17 -0800 (PST)
 MIME-Version: 1.0
 References: <20231219-b4-qcom-common-target-v2-0-b6dd9704219e@linaro.org>
- <20231219-b4-qcom-common-target-v2-13-b6dd9704219e@linaro.org>
-In-Reply-To: <20231219-b4-qcom-common-target-v2-13-b6dd9704219e@linaro.org>
+ <20231219-b4-qcom-common-target-v2-3-b6dd9704219e@linaro.org>
+In-Reply-To: <20231219-b4-qcom-common-target-v2-3-b6dd9704219e@linaro.org>
 From: Ramon Fried <rfried.dev@gmail.com>
-Date: Thu, 18 Jan 2024 23:50:28 +0200
-Message-ID: <CAGi-RULzM4DiQRCJaM2uOfrgsjwoZekBMHC7b_xwQ1L-kKmm8A@mail.gmail.com>
-Subject: Re: [PATCH v2 13/32] board: dragonboard410c: import board code from
- mach-snapdragon
+Date: Thu, 18 Jan 2024 23:52:06 +0200
+Message-ID: <CAGi-RUKNboK9_HTBhNQjhBB6p+y16Q4NkvQyGuYE2-yVkqrOeg@mail.gmail.com>
+Subject: Re: [PATCH v2 03/32] mmc: msm_sdhci: use modern clock handling
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Neil Armstrong <neil.armstrong@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>, 
@@ -100,252 +99,122 @@ X-Virus-Status: Clean
 On Tue, Dec 19, 2023 at 6:04=E2=80=AFPM Caleb Connolly
 <caleb.connolly@linaro.org> wrote:
 >
-> Some of the db410c board support code was written to be generic and
-> placed in mach-snapdragon. However, as the db410c is the only board
-> using this, move the code out of mach-snapdragon. This makes is more
-> obvious what code is relevant for which targets and helps tidy things up
-> a little more.
+> Use the clk_* helper functions and the correct property name for clocks.
 >
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->  arch/arm/mach-snapdragon/Makefile                  |  2 -
->  arch/arm/mach-snapdragon/include/mach/dram.h       | 12 -----
->  arch/arm/mach-snapdragon/misc.c                    | 55 ----------------=
+>  drivers/mmc/msm_sdhci.c | 69 ++++++++++++++++++++++++++++++++-----------=
 ------
->  board/qualcomm/dragonboard410c/Makefile            |  3 +-
->  board/qualcomm/dragonboard410c/dragonboard410c.c   |  4 +-
->  .../qualcomm/dragonboard410c/misc.c                | 51 ++++++++++++++++=
-+++-
->  .../mach =3D> board/qualcomm/dragonboard410c}/misc.h |  1 +
->  7 files changed, 54 insertions(+), 74 deletions(-)
+>  1 file changed, 46 insertions(+), 23 deletions(-)
 >
-> diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-snapdragon=
-/Makefile
-> index 3a3a297c1768..d02432df8b04 100644
-> --- a/arch/arm/mach-snapdragon/Makefile
-> +++ b/arch/arm/mach-snapdragon/Makefile
-> @@ -6,6 +6,4 @@ obj-$(CONFIG_SDM845) +=3D sysmap-sdm845.o
->  obj-$(CONFIG_SDM845) +=3D init_sdm845.o
->  obj-$(CONFIG_TARGET_DRAGONBOARD820C) +=3D sysmap-apq8096.o
->  obj-$(CONFIG_TARGET_DRAGONBOARD410C) +=3D sysmap-apq8016.o
-> -obj-y +=3D misc.o
-> -obj-y +=3D dram.o
->  obj-$(CONFIG_TARGET_QCS404EVB) +=3D sysmap-qcs404.o
-> diff --git a/arch/arm/mach-snapdragon/include/mach/dram.h b/arch/arm/mach=
--snapdragon/include/mach/dram.h
-> deleted file mode 100644
-> index 0a9eedda414c..000000000000
-> --- a/arch/arm/mach-snapdragon/include/mach/dram.h
-> +++ /dev/null
-> @@ -1,12 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0+ */
-> -/*
-> - * Snapdragon DRAM
-> - * Copyright (C) 2018 Ramon Fried <ramon.fried@gmail.com>
-> - */
-> -
-> -#ifndef DRAM_H
-> -#define DRAM_H
-> -
-> -int msm_fixup_memory(void *blob);
-> -
-> -#endif
-> diff --git a/arch/arm/mach-snapdragon/misc.c b/arch/arm/mach-snapdragon/m=
-isc.c
-> deleted file mode 100644
-> index 7d452f4529b7..000000000000
-> --- a/arch/arm/mach-snapdragon/misc.c
-> +++ /dev/null
-> @@ -1,55 +0,0 @@
-> -// SPDX-License-Identifier: GPL-2.0+
-> -/*
-> - * Miscellaneous Snapdragon functionality
-> - *
-> - * (C) Copyright 2018 Ramon Fried <ramon.fried@gmail.com>
-> - *
-> - */
-> -
-> -#include <common.h>
-> -#include <mmc.h>
-> -#include <asm/arch/misc.h>
-> -#include <asm/unaligned.h>
-> -
-> -/* UNSTUFF_BITS macro taken from Linux Kernel: drivers/mmc/core/sd.c */
-> -#define UNSTUFF_BITS(resp, start, size) \
-> -       ({ \
-> -               const int __size =3D size; \
-> -               const u32 __mask =3D (__size < 32 ? 1 << __size : 0) - 1;=
- \
-> -               const int __off =3D 3 - ((start) / 32); \
-> -               const int __shft =3D (start) & 31; \
-> -               u32 __res; \
-> -                                       \
-> -               __res =3D resp[__off] >> __shft; \
-> -               if (__size + __shft > 32) \
-> -                       __res |=3D resp[__off - 1] << ((32 - __shft) % 32=
-); \
-> -               __res & __mask; \
-> -       })
-> -
-> -u32 msm_board_serial(void)
-> -{
-> -       struct mmc *mmc_dev;
-> -
-> -       mmc_dev =3D find_mmc_device(0);
-> -       if (!mmc_dev)
-> -               return 0;
-> -
-> -       if (mmc_init(mmc_dev))
-> -               return 0;
-> -
-> -       return UNSTUFF_BITS(mmc_dev->cid, 16, 32);
-> -}
-> -
-> -void msm_generate_mac_addr(u8 *mac)
-> -{
-> -       /* use locally adminstrated pool */
-> -       mac[0] =3D 0x02;
-> -       mac[1] =3D 0x00;
-> -
-> -       /*
-> -        * Put the 32-bit serial number in the last 32-bit of the MAC add=
-ress.
-> -        * Use big endian order so it is consistent with the serial numbe=
-r
-> -        * written as a hexadecimal string, e.g. 0x1234abcd -> 02:00:12:3=
-4:ab:cd
-> -        */
-> -       put_unaligned_be32(msm_board_serial(), &mac[2]);
-> -}
-> diff --git a/board/qualcomm/dragonboard410c/Makefile b/board/qualcomm/dra=
-gonboard410c/Makefile
-> index 1b99c8b0efef..a3ae1a5f9136 100644
-> --- a/board/qualcomm/dragonboard410c/Makefile
-> +++ b/board/qualcomm/dragonboard410c/Makefile
-> @@ -2,4 +2,5 @@
->  #
->  # (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
+> diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
+> index 604f9c3ff99c..863e6007a905 100644
+> --- a/drivers/mmc/msm_sdhci.c
+> +++ b/drivers/mmc/msm_sdhci.c
+> @@ -44,6 +44,7 @@ struct msm_sdhc_plat {
+>  struct msm_sdhc {
+>         struct sdhci_host host;
+>         void *base;
+> +       struct clk_bulk clks;
+>  };
 >
-> -obj-y  :=3D dragonboard410c.o
-> +obj-y +=3D dragonboard410c.o
-> +obj-y +=3D misc.o
-> diff --git a/board/qualcomm/dragonboard410c/dragonboard410c.c b/board/qua=
-lcomm/dragonboard410c/dragonboard410c.c
-> index 1adac07569ae..eea603a4148d 100644
-> --- a/board/qualcomm/dragonboard410c/dragonboard410c.c
-> +++ b/board/qualcomm/dragonboard410c/dragonboard410c.c
-> @@ -18,10 +18,10 @@
->  #include <asm/global_data.h>
->  #include <asm/gpio.h>
->  #include <fdt_support.h>
-> -#include <asm/arch/dram.h>
-> -#include <asm/arch/misc.h>
->  #include <linux/delay.h>
+>  struct msm_sdhc_variant_info {
+> @@ -54,36 +55,56 @@ DECLARE_GLOBAL_DATA_PTR;
 >
-> +#include "misc.h"
-> +
->  DECLARE_GLOBAL_DATA_PTR;
+>  static int msm_sdc_clk_init(struct udevice *dev)
+>  {
+> -       int node =3D dev_of_offset(dev);
+> -       uint clk_rate =3D fdtdec_get_uint(gd->fdt_blob, node, "clock-freq=
+uency",
+> -                                       400000);
+> -       uint clkd[2]; /* clk_id and clk_no */
+> -       int clk_offset;
+> -       struct udevice *clk_dev;
+> -       struct clk clk;
+> -       int ret;
+> +       struct msm_sdhc *prv =3D dev_get_priv(dev);
+> +       ofnode node =3D dev_ofnode(dev);
+> +       uint clk_rate;
+> +       int ret, i =3D 0, n_clks;
+> +       const char *clk_name;
 >
->  #define USB_HUB_RESET_GPIO 2
-> diff --git a/arch/arm/mach-snapdragon/dram.c b/board/qualcomm/dragonboard=
-410c/misc.c
-> similarity index 64%
-> rename from arch/arm/mach-snapdragon/dram.c
-> rename to board/qualcomm/dragonboard410c/misc.c
-> index 499dfdf0da6e..27d51ef78914 100644
-> --- a/arch/arm/mach-snapdragon/dram.c
-> +++ b/board/qualcomm/dragonboard410c/misc.c
-> @@ -1,6 +1,6 @@
->  // SPDX-License-Identifier: GPL-2.0+
->  /*
-> - * Onboard memory detection for Snapdragon boards
-> + * Miscellaneous Snapdragon functionality
->   *
->   * (C) Copyright 2018 Ramon Fried <ramon.fried@gmail.com>
->   *
-> @@ -9,10 +9,56 @@
->  #include <common.h>
->  #include <dm.h>
->  #include <log.h>
-> +#include <mmc.h>
->  #include <part.h>
->  #include <smem.h>
->  #include <fdt_support.h>
-> -#include <asm/arch/dram.h>
-> +#include <asm/unaligned.h>
-> +
-> +#include "misc.h"
-> +
-> +/* UNSTUFF_BITS macro taken from Linux Kernel: drivers/mmc/core/sd.c */
-> +#define UNSTUFF_BITS(resp, start, size) \
-> +       ({ \
-> +               const int __size =3D size; \
-> +               const u32 __mask =3D (__size < 32 ? 1 << __size : 0) - 1;=
- \
-> +               const int __off =3D 3 - ((start) / 32); \
-> +               const int __shft =3D (start) & 31; \
-> +               u32 __res; \
-> +                                       \
-> +               __res =3D resp[__off] >> __shft; \
-> +               if (__size + __shft > 32) \
-> +                       __res |=3D resp[__off - 1] << ((32 - __shft) % 32=
-); \
-> +               __res & __mask; \
-> +       })
-> +
-> +u32 msm_board_serial(void)
-> +{
-> +       struct mmc *mmc_dev;
-> +
-> +       mmc_dev =3D find_mmc_device(0);
-> +       if (!mmc_dev)
-> +               return 0;
-> +
-> +       if (mmc_init(mmc_dev))
-> +               return 0;
-> +
-> +       return UNSTUFF_BITS(mmc_dev->cid, 16, 32);
-> +}
-> +
-> +void msm_generate_mac_addr(u8 *mac)
-> +{
-> +       /* use locally adminstrated pool */
-> +       mac[0] =3D 0x02;
-> +       mac[1] =3D 0x00;
-> +
-> +       /*
-> +        * Put the 32-bit serial number in the last 32-bit of the MAC add=
-ress.
-> +        * Use big endian order so it is consistent with the serial numbe=
-r
-> +        * written as a hexadecimal string, e.g. 0x1234abcd -> 02:00:12:3=
-4:ab:cd
-> +        */
-> +       put_unaligned_be32(msm_board_serial(), &mac[2]);
-> +}
+> -       ret =3D fdtdec_get_int_array(gd->fdt_blob, node, "clock", clkd, 2=
+);
+> +       ret =3D ofnode_read_u32(node, "clock-frequency", &clk_rate);
+>         if (ret)
+> -               return ret;
+> +               clk_rate =3D 400000;
 >
->  #define SMEM_USABLE_RAM_PARTITION_TABLE 402
->  #define RAM_PART_NAME_LENGTH            16
-> @@ -97,3 +143,4 @@ int msm_fixup_memory(void *blob)
+> -       clk_offset =3D fdt_node_offset_by_phandle(gd->fdt_blob, clkd[0]);
+> -       if (clk_offset < 0)
+> -               return clk_offset;
+> -
+> -       ret =3D uclass_get_device_by_of_offset(UCLASS_CLK, clk_offset, &c=
+lk_dev);
+> -       if (ret)
+> +       ret =3D clk_get_bulk(dev, &prv->clks);
+> +       if (ret) {
+> +               debug("Couldn't get mmc clocks: %d\n", ret);
+>                 return ret;
+> +       }
+>
+> -       clk.id =3D clkd[1];
+> -       ret =3D clk_request(clk_dev, &clk);
+> -       if (ret < 0)
+> +       ret =3D clk_enable_bulk(&prv->clks);
+> +       if (ret) {
+> +               debug("Couldn't enable mmc clocks: %d\n", ret);
+>                 return ret;
+> +       }
+>
+> -       ret =3D clk_set_rate(&clk, clk_rate);
+> -       clk_free(&clk);
+> -       if (ret < 0)
+> -               return ret;
+> +       /* If clock-names is unspecified, then the first clock is the cor=
+e clock */
+> +       if (!ofnode_get_property(node, "clock-names", &n_clks)) {
+> +               if (!clk_set_rate(&prv->clks.clks[0], clk_rate)) {
+> +                       printf("Couldn't set core clock rate: %d\n", ret)=
+;
+> +                       return -EINVAL;
+> +               }
+> +       }
+> +
+> +       /* Find the index of the "core" clock */
+> +       while (i < n_clks) {
+> +               ofnode_read_string_index(node, "clock-names", i, &clk_nam=
+e);
+> +               if (!strcmp(clk_name, "core"))
+> +                       break;
+> +               i++;
+> +       }
+> +
+> +       if (i >=3D prv->clks.count) {
+> +               printf("Couldn't find core clock (index %d but only have =
+%d clocks)\n", i,
+> +                      prv->clks.count);
+> +               return -EINVAL;
+> +       }
+> +
+> +       /* The clock is already enabled by the clk_bulk above */
+> +       ret =3D clk_set_rate(&prv->clks.clks[i], clk_rate);
+> +       if (!ret) {
+> +               printf("Couldn't set core clock rate: %d\n", ret);
+> +               return -EINVAL;
+> +       }
 >
 >         return 0;
 >  }
+> @@ -188,6 +209,8 @@ static int msm_sdc_remove(struct udevice *dev)
+>         if (!var_info->mci_removed)
+>                 writel(0, priv->base + SDCC_MCI_HC_MODE);
+>
+> +       clk_release_bulk(&priv->clks);
 > +
-> diff --git a/arch/arm/mach-snapdragon/include/mach/misc.h b/board/qualcom=
-m/dragonboard410c/misc.h
-> similarity index 87%
-> rename from arch/arm/mach-snapdragon/include/mach/misc.h
-> rename to board/qualcomm/dragonboard410c/misc.h
-> index c60e3e472470..fe44caf51b18 100644
-> --- a/arch/arm/mach-snapdragon/include/mach/misc.h
-> +++ b/board/qualcomm/dragonboard410c/misc.h
-> @@ -9,5 +9,6 @@
+>         return 0;
+>  }
 >
->  u32 msm_board_serial(void);
->  void msm_generate_mac_addr(u8 *mac);
-> +int msm_fixup_memory(void *blob);
->
->  #endif
 >
 > --
 > 2.42.1
