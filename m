@@ -4,44 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47CDCC4707B
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 13:40:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 409F4C4707B
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 13:56:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 501B28798D;
-	Thu, 18 Jan 2024 14:40:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 31BE887B99;
+	Thu, 18 Jan 2024 14:56:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 793F387887; Thu, 18 Jan 2024 14:40:29 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 0CB138798D
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 14:40:27 +0100 (CET)
+ id E2B1487B98; Thu, 18 Jan 2024 14:56:13 +0100 (CET)
+Received: from smtp-42ac.mail.infomaniak.ch (smtp-42ac.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::42ac])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id EA11987B5F
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 14:56:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 44ABC1042;
- Thu, 18 Jan 2024 05:41:12 -0800 (PST)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8DE1E3F73F;
- Thu, 18 Jan 2024 05:40:25 -0800 (PST)
-Date: Thu, 18 Jan 2024 13:40:21 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-Cc: <j@jannau.net>, Anatolij Gustschin <agust@denx.de>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon
- Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH RFC 0/6] video: Add UTF-8 support for UEFI applications
-Message-ID: <20240118134021.5aeddddb@donnerap.manchester.arm.com>
-In-Reply-To: <20240117-vidconsole-utf8-uefi-v1-0-539f7ce74fb9@jannau.net>
-References: <20240117-vidconsole-utf8-uefi-v1-0-539f7ce74fb9@jannau.net>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-3-0001.mail.infomaniak.ch (unknown [10.4.36.108])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TG4631z3fzMq4c7;
+ Thu, 18 Jan 2024 13:56:11 +0000 (UTC)
+Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4TG4625BLXzMppDj; Thu, 18 Jan 2024 14:56:10 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: heiko@sntech.de, Quentin Schulz <foss+uboot@0leil.net>,
+ u-boot@lists.denx.de, jonas@kwiboo.se,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Subject: [PATCH v5 1/6] rockchip: rk3399: simplify logic for getting SPL boot
+ medium DT node
+Date: Thu, 18 Jan 2024 14:55:55 +0100
+Message-ID: <20240118-rk3588-spl-boot-dev-v5-1-a8df3e50f486@theobroma-systems.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240118-rk3588-spl-boot-dev-v5-0-a8df3e50f486@theobroma-systems.com>
+References: <20240118-rk3588-spl-boot-dev-v5-0-a8df3e50f486@theobroma-systems.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+X-Mailer: b4 0.12.4
+Content-Transfer-Encoding: 8bit
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,60 +62,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 17 Jan 2024 23:24:26 +0100
-Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org> wrote:
+From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-Hi Janne,
+In preparation of moving spl_perform_fixups to spl-boot-order.c, let's
+simplify the logic around mapping the BOOT_DEVICE_x enum index to a DT
+node by using an instantiated array of chars instead of creating a new
+data structure on the fly.
 
-> Andre submitted 2 years ago DM_VIDEO improvements for UEFI applications
-> using UEFI's EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL but did not follow with
-> suggested changes. This series takes care of the UTF-8 support which
-> required to draw symbol and box drawing characters used by UEFI
-> applications like grub2 and sd-boot correctly.
-> 
-> Compared to Andre's version this version has the following changes:
-> - use and extend existing conversion functions from lib/charset.c
-> - convert first to UTF-32 to support the truetype console as well
-> - conversion is conditional on CONFIG_EFI_LOADER
-> - use escape sequences in tests as proposed by Heinrich
+This will make it easier to factor out the code handling the SPL boot
+medium detection by having spl_decode_boot_device common to all SoCs.
 
-many thanks for picking this up, much appreciated!
-In general this looks good, I will test this later this week, and have a
-closer look, once I am on a device with video output.
+Cc: Quentin Schulz <foss+uboot@0leil.net>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+---
+ arch/arm/mach-rockchip/rk3399/rk3399.c | 34 +++++++++++++++++++---------------
+ 1 file changed, 19 insertions(+), 15 deletions(-)
 
-Cheers,
-Andre
+diff --git a/arch/arm/mach-rockchip/rk3399/rk3399.c b/arch/arm/mach-rockchip/rk3399/rk3399.c
+index 14565d2ed9f..60d95c81cd2 100644
+--- a/arch/arm/mach-rockchip/rk3399/rk3399.c
++++ b/arch/arm/mach-rockchip/rk3399/rk3399.c
+@@ -175,23 +175,27 @@ void board_debug_uart_init(void)
+ #endif
+ 
+ #if defined(CONFIG_SPL_BUILD) && !defined(CONFIG_TPL_BUILD)
++const char * const spl_boot_devices[BOOT_DEVICE_NONE + 1] = {
++	[BOOT_DEVICE_MMC2] = "/mmc@fe320000",
++	[BOOT_DEVICE_MMC1] = "/mmc@fe330000",
++	[BOOT_DEVICE_SPI] = "/spi@ff1d0000/flash@0",
++};
++
+ const char *spl_decode_boot_device(u32 boot_device)
+ {
+-	int i;
+-	static const struct {
+-		u32 boot_device;
+-		const char *ofpath;
+-	} spl_boot_devices_tbl[] = {
+-		{ BOOT_DEVICE_MMC2, "/mmc@fe320000" },
+-		{ BOOT_DEVICE_MMC1, "/mmc@fe330000" },
+-		{ BOOT_DEVICE_SPI, "/spi@ff1d0000/flash@0" },
+-	};
+-
+-	for (i = 0; i < ARRAY_SIZE(spl_boot_devices_tbl); ++i)
+-		if (spl_boot_devices_tbl[i].boot_device == boot_device)
+-			return spl_boot_devices_tbl[i].ofpath;
+-
+-	return NULL;
++	const char *spl_bootdevice_ofpath = NULL;
++
++	if (boot_device < ARRAY_SIZE(spl_boot_devices))
++		spl_bootdevice_ofpath = spl_boot_devices[boot_device];
++
++	if (spl_bootdevice_ofpath)
++		debug("%s: spl_bootdevice_id %x maps to '%s'\n",
++		      __func__, boot_device, spl_bootdevice_ofpath);
++	else
++		debug("%s: failed to resolve spl_bootdevice_id %x\n",
++		      __func__, boot_device);
++
++	return spl_bootdevice_ofpath;
+ }
+ 
+ void spl_perform_fixups(struct spl_image_info *spl_image)
 
-> 
-> Link: https://lore.kernel.org/u-boot/20220110005638.21599-1-andre.przywara@arm.com/
-> Signed-off-by: Janne Grunau <j@jannau.net>
-> ---
-> Andre Przywara (2):
->       efi_selftest: Add international characters test
->       efi_selftest: Add box drawing character selftest
-> 
-> Janne Grunau (4):
->       lib: charset: Fix utf8_to_utf32_stream() return value doc string
->       video: console: Parse UTF-8 character sequences
->       lib/charset: Map cp437 low chars (0x01 - 0x1f) from unicode
->       efi_selftest: Add symbol character selftest
-> 
->  drivers/video/console_normal.c             |  6 +++--
->  drivers/video/console_rotate.c             | 16 +++++++++-----
->  drivers/video/console_truetype.c           |  8 +++----
->  drivers/video/vidconsole-uclass.c          | 18 ++++++++++-----
->  drivers/video/vidconsole_internal.h        | 15 +++++++++++++
->  include/charset.h                          |  4 ++--
->  include/cp1250.h                           | 12 ++++++++--
->  include/cp437.h                            | 12 ++++++++--
->  include/video_console.h                    | 10 +++++----
->  lib/charset.c                              |  9 +++++---
->  lib/efi_loader/efi_unicode_collation.c     |  2 +-
->  lib/efi_selftest/efi_selftest_textoutput.c | 35 ++++++++++++++++++++++++++++++
->  12 files changed, 116 insertions(+), 31 deletions(-)
-> ---
-> base-commit: 866ca972d6c3cabeaf6dbac431e8e08bb30b3c8e
-> change-id: 20240117-vidconsole-utf8-uefi-fa23b4ac65d6
-> 
-> Best regards,
+-- 
+2.43.0
 
