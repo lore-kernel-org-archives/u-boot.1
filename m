@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F41DC47258
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 01:30:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27843C4725D
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 01:33:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92C87878FF;
-	Thu, 18 Jan 2024 02:30:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=supermicro.com
+	by phobos.denx.de (Postfix) with ESMTP id AB81287A77;
+	Thu, 18 Jan 2024 02:33:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=supermicro.com header.i=@supermicro.com header.b="fu43lXKh";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BMlGTyPW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84FB5878FF; Thu, 18 Jan 2024 02:26:38 +0100 (CET)
-Received: from MGA.supermicro.com (mga.supermicro.com [207.212.57.84])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 580E587A77; Thu, 18 Jan 2024 02:33:06 +0100 (CET)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B124387B30
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 02:26:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=supermicro.com
+ by phobos.denx.de (Postfix) with ESMTPS id E12EE878FF
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 02:33:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=liuw@supermicro.com
-Received: from pps.filterd (MGA.supermicro.com [127.0.0.1])
- by MGA.supermicro.com (8.17.1.19/8.17.1.19) with ESMTP id 40HLZ9ha006357;
- Wed, 17 Jan 2024 17:26:29 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=supermicro.com;
- h=from : to : cc :
- subject : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=DKIM;
- bh=DreN6F7rm1tRMhQsEksjM53fnh36OUj9F/kC/nvB2XI=;
- b=fu43lXKhWPU9WdyU6LhAdCVP9U3XSD/Q0UcHenYwuBXIO1+uaiz+2I5bfLMW3sY3Y4N2
- fUqiF4QoWfOJyLWsyCfmOAz0Wof/x8a6asZR1FUmJcVWSySZJDjgSN0Ias2pEuBqWl1N
- 9SSDoHRrUCFTbaV8YrNvhgXc/w2AoO4BuRckZcveF12sZDf7bzfh/zNKFF7cqlzcXy8n
- VNI82JOvYGbl8koWmzG/DIpZtNq83nTmRbMwUjgQTRmw5UwWQ3GkDWHiNtYOiBgDanYA
- noqUxnmso+FaIjlDv+4z/zEu0V0kAu8F6HsPj73uR+L+o47tR8fOEI8D10rHN5f2MiLR KA== 
-Received: from ex2013-mbx3.supermicro.com (EX2013-MBX3.supermicro.com
- [10.2.1.46]) by MGA.supermicro.com (PPS) with ESMTPS id 3vku0wnuyk-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
- Wed, 17 Jan 2024 17:26:29 -0800
-Received: from us-ex2019-mbx3.supermicro.com (10.2.6.159) by
- EX2013-MBX3.supermicro.com (10.2.1.46) with Microsoft SMTP Server (TLS) id
- 15.0.1497.42; Wed, 17 Jan 2024 17:26:28 -0800
-Received: from us-ex2019-mbx1.supermicro.com (10.2.6.157) by
- us-ex2019-mbx3.supermicro.com (10.2.6.159) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Wed, 17 Jan 2024 17:26:28 -0800
-Received: from us-ex2019-mbx1.supermicro.com ([fe80::37c2:47e5:2f5d:450f]) by
- us-ex2019-mbx1.supermicro.com ([fe80::37c2:47e5:2f5d:450f%16]) with
- mapi id 15.02.1118.037; Wed, 17 Jan 2024 17:26:28 -0800
-From: Liu Wang <liuw@supermicro.com>
-To: Fabio Estevam <festevam@gmail.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: RE: Could you please help me in resolving the
- "arch/arm/lib/vectors.S:87: Error: no such instruction: `b reset' ?"
-Thread-Topic: Could you please help me in resolving the
- "arch/arm/lib/vectors.S:87: Error: no such instruction: `b reset' ?"
-Thread-Index: AdpI24I3kjWF6EnATLOPMIhQOQ7T3gAtdOcAAAg2JaAAAa1qgP//j+hE//+/RCD//2g18A==
-Date: Thu, 18 Jan 2024 01:26:28 +0000
-Message-ID: <be10a49d2381407fb955958fbc87ecd4@supermicro.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-2866b15b013so2558318a91.0
+ for <u-boot@lists.denx.de>; Wed, 17 Jan 2024 17:33:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1705541580; x=1706146380; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ah8M2rX13w/hbe5ACB8jcmojrm3IdHCPxg56YaoUhgQ=;
+ b=BMlGTyPWB1K0Yr44k+VqzIT7HD1UEr8gnpeHLxWLvYaaZAvN1fTO2IaVby0q+6NiuQ
+ 4bvQq8aau2fj0opAzspwXnGiOrbGPK3FkBAjtOyuzP7BWbOBeDKso03EnMUhPLDtbqpc
+ YkQXTx9zF6245uOccyZBhVgGOxQq9J4gfd2B5I46i3olwi45ock42yLFnDFvGJHuwEz/
+ KtkVRr/HzN1YWfaXVHfGowfoT+z99O1Rkso5aHBkam2FK2+++idA5h5W+d5B9QMhezqX
+ DbXwG1wBLACxESkWS3b0+hGuAEFB7zcmZNESi2noBZz93sBvxAyn5UNKmvsf5WGmBeNK
+ 0Law==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705541580; x=1706146380;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ah8M2rX13w/hbe5ACB8jcmojrm3IdHCPxg56YaoUhgQ=;
+ b=X6+3Iwe/GFQRMrN3HaUsnm/boosjXzeWZDvMHsO3CQjQR/cGFV3k2cRlAzSCDdHgT0
+ x4KLw4pd7FwrZTUhp0FRuhB24t05HzaLRNzVXICRYOJuG3+tzLlxE1f9I/AlC/BCwAfK
+ 2xG4dxkUzsuYCqKUxAYJk6gfKtdgPs/aDX3Opdn6SFhy15FgKLFKxVuFWUkUaG21+sxZ
+ OlzBMr066vko+8K5Cm7lJ9cjooWgDu/LI/e9hGBLPyVniPmFXm8Z8jsNHu1lbPpxBwk8
+ 4Zb+nfHhzNM6/uXw2tUwa4jzrnbBYJp+Y2YVUyxrZIRqzjcbj20M/3n9PQek400oWLOH
+ Zsqw==
+X-Gm-Message-State: AOJu0Yy0QCUYfUBp9U9x7a06dI0ZRRbe//n+ChQGJRpRdBwQ6GWBU3Bc
+ YvK9Wzofj2ACe6ParoLNl8bVEEusCFsB6AUhuwCu6iZOI+In4RjS/kGLhFuwR3iWZv9+vXpywxL
+ J3MtaI5XOxgPOCi/ny6iILwg1ccI=
+X-Google-Smtp-Source: AGHT+IF4N8TtbCOmD1KPJJI7oYOMtzv3KPdQj3hAMzUIJ43RG6nMUWLiPy6J1vsQb1U/01iBMf1O2MLYrU63Y7Z9DQ0=
+X-Received: by 2002:a17:90b:4c4b:b0:28c:fe8c:aa93 with SMTP id
+ np11-20020a17090b4c4b00b0028cfe8caa93mr300599pjb.1.1705541580238; Wed, 17 Jan
+ 2024 17:33:00 -0800 (PST)
+MIME-Version: 1.0
 References: <2dba1330181940c78b5ad47f18ee43fa@supermicro.com>
  <CAOMZO5DTw2uU+uEmVLR9nbFkR4QPgmhuY9VUAz-sgg+GppMG9g@mail.gmail.com>
- <0934648988c9444aaf85f2e3163c0f4b@supermicro.com>,
+ <0934648988c9444aaf85f2e3163c0f4b@supermicro.com>
  <CAOMZO5Cy8as7b_cup6J+PYbN-stkj4Vz2wsLB_1=NN3vx5SVWQ@mail.gmail.com>
  <728CCDD9-CEA4-4ED1-9143-189C3F257097@supermicro.com>
  <9c2e7790f0c94b0ebf0e840100eae2c0@supermicro.com>
-In-Reply-To: <9c2e7790f0c94b0ebf0e840100eae2c0@supermicro.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.2.8.23]
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-01-17_14,2024-01-17_01,2023-05-22_02
-X-Mailman-Approved-At: Thu, 18 Jan 2024 02:30:49 +0100
+ <be10a49d2381407fb955958fbc87ecd4@supermicro.com>
+In-Reply-To: <be10a49d2381407fb955958fbc87ecd4@supermicro.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 17 Jan 2024 22:32:48 -0300
+Message-ID: <CAOMZO5D5g6izBC=aCumX_H1tbo5uXTfuhQekSuH_XDqUAN91Kg@mail.gmail.com>
+Subject: Re: Could you please help me in resolving the
+ "arch/arm/lib/vectors.S:87: Error: no such instruction: `b reset' ?"
+To: Liu Wang <liuw@supermicro.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,151 +94,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgRmFiaW8sDQoNClRoYW5rIHlvdSBmb3IgeW91ciBoZWxwLg0KDQpTd2l0Y2hpbmcgdG8gImFy
-bS1nbnUtdG9vbGNoYWluLTEzLjIuUmVsMS14ODYtNjQtYXJtLW5vbmUtZWFiaSIgc2VlbXMgYSBm
-aXggZm9yIDoNCi4uLmdudWVhYmloZi1nY2M6IGNhbm5vdCBleGVjdXRlIGJpbmFyeSBmaWxlOiBF
-eGVjIGZvcm1hdCBlcnJvci4uLg0KDQpTaW5jZXJlbHksDQpMaXUgV2FuZw0KLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tDQpsaXV3QGxpdXctU1lTLUUxMDAtMTJULUg6fi9Eb3dubG9hZHMvdS1i
-b290JCBtYWtlDQpzY3JpcHRzL2tjb25maWcvY29uZg0KIC0tc3luY2NvbmZpZyBLY29uZmlnDQog
-IENGRyAgICAgdS1ib290LmNmZw0KICBHRU4gICAgDQppbmNsdWRlL2F1dG9jb25mLm1rDQogIEdF
-TiAgICANCmluY2x1ZGUvYXV0b2NvbmYubWsuZGVwDQogIFVQRCAgICANCmluY2x1ZGUvZ2VuZXJh
-dGVkL3ZlcnNpb25fYXV0b2dlbmVyYXRlZC5oDQogIFVQRCAgICANCmluY2x1ZGUvZ2VuZXJhdGVk
-L3RpbWVzdGFtcF9hdXRvZ2VuZXJhdGVkLmgNCiAgQ0MgICAgIA0KbGliL2FzbS1vZmZzZXRzLnMN
-CiAgVVBEICAgIA0KaW5jbHVkZS9nZW5lcmF0ZWQvZ2VuZXJpYy1hc20tb2Zmc2V0cy5oDQogIEND
-ICAgICANCmFyY2gvYXJtL2xpYi9hc20tb2Zmc2V0cy5zDQogIEhPU1RDQyANCnRvb2xzL21rZW52
-aW1hZ2Uubw0KICBIT1NUTEQgDQp0b29scy9ta2VudmltYWdlDQogIEhPU1RDQyANCnRvb2xzL2Fp
-c2ltYWdlLm8NCiAgSE9TVENDIA0KdG9vbHMvYXRtZWxpbWFnZS5vDQogIEhPU1RDQyANCnRvb2xz
-L2NvbW1vbi9mZHRfcmVnaW9uLm8NCiAgSE9TVENDIA0KdG9vbHMvY29tbW9uL2Jvb3RtLm8NCiAg
-SE9TVENDIA0KdG9vbHMvZGVmYXVsdF9pbWFnZS5vDQogIEhPU1RDQyANCnRvb2xzL2xpYi9mZHRk
-ZWNfY29tbW9uLm8NCiAgSE9TVENDIA0KdG9vbHMvbGliL2ZkdGRlYy5vDQogIEhPU1RDQyANCnRv
-b2xzL2NvbW1vbi9pbWFnZS5vDQogIEhPU1RDQyANCnRvb2xzL2ltYWdldG9vbC5vDQogIEhPU1RD
-QyANCnRvb2xzL2lteGltYWdlLm8NCiAgSE9TVENDIA0KdG9vbHMvaW14OGltYWdlLm8NCnRvb2xz
-L2lteDhpbWFnZS5jOg0KSW4gZnVuY3Rpb24g4oCYY29weV9maWxlLmNvbnN0cHJvcOKAmToNCnRv
-b2xzL2lteDhpbWFnZS5jOjQxNDoyMToNCndhcm5pbmc6IOKAmHdyaXRl4oCZIHJlYWRpbmcgNSBi
-eXRlcyBmcm9tIGEgcmVnaW9uIG9mIHNpemUgNA0KWy1Xc3RyaW5nb3Atb3ZlcnJlYWRdDQogIDQx
-NCB8ICAgICAgICAgICAgIA0KICAgaWYgKHdyaXRlKGlmZCwgKGNoYXIgKikmemVybywgNCAtIHRh
-aWwpICE9IDQgLSB0YWlsKSB7DQogICAgICB8ICAgICAgICAgICAgIA0KICAgICAgIF5+fn5+fn5+
-fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+DQp0b29scy9pbXg4aW1hZ2UuYzozNjg6MTM6DQpu
-b3RlOiBzb3VyY2Ugb2JqZWN0IOKAmHplcm/igJkgb2Ygc2l6ZSA0DQogIDM2OCB8ICAgICAgICAg
-aW50DQp6ZXJvID0gMDsNCiAgICAgIHwgICAgICAgICAgICANCl5+fn4NCkluIGZpbGUgaW5jbHVk
-ZWQNCmZyb20gLi90b29scy9pbWFnZXRvb2wuaDoyMSwNCiAgICAgICAgICAgICAgICANCmZyb20g
-aW5jbHVkZS9pbXg4aW1hZ2UuaDoxMywNCiAgICAgICAgICAgICAgICANCmZyb20gdG9vbHMvaW14
-OGltYWdlLmM6ODoNCi91c3IvaW5jbHVkZS91bmlzdGQuaDozNzg6MTY6DQpub3RlOiBpbiBhIGNh
-bGwgdG8gZnVuY3Rpb24g4oCYd3JpdGXigJkgZGVjbGFyZWQgd2l0aCBhdHRyaWJ1dGUNCuKAmGFj
-Y2VzcyAocmVhZF9vbmx5LCAyLCAzKeKAmQ0KICAzNzggfCBleHRlcm4NCnNzaXplX3Qgd3JpdGUg
-KGludCBfX2ZkLCBjb25zdCB2b2lkICpfX2J1Ziwgc2l6ZV90IF9fbikgX193dXINCiAgICAgIHwg
-ICAgICAgICAgICAgDQogIF5+fn5+DQogIEhPU1RDQyANCnRvb2xzL2lteDhtaW1hZ2Uubw0KdG9v
-bHMvaW14OG1pbWFnZS5jOg0KSW4gZnVuY3Rpb24g4oCYY29weV9maWxlLmNvbnN0cHJvcOKAmToN
-CnRvb2xzL2lteDhtaW1hZ2UuYzoyOTE6MjE6DQp3YXJuaW5nOiDigJh3cml0ZeKAmSByZWFkaW5n
-IDUgYnl0ZXMgZnJvbSBhIHJlZ2lvbiBvZiBzaXplIDQNClstV3N0cmluZ29wLW92ZXJyZWFkXQ0K
-ICAyOTEgfCAgICAgICAgICAgICANCiAgIGlmICh3cml0ZShpZmQsIChjaGFyICopJnplcm8sIDQg
-LSB0YWlsKSAhPSA0IC0gdGFpbCkgew0KICAgICAgfCAgICAgICAgICAgICANCiAgICAgICBefn5+
-fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fg0KdG9vbHMvaW14OG1pbWFnZS5jOjI0OTox
-MzoNCm5vdGU6IHNvdXJjZSBvYmplY3Qg4oCYemVyb+KAmSBvZiBzaXplIDQNCiAgMjQ5IHwgICAg
-ICAgICBpbnQNCnplcm8gPSAwOw0KICAgICAgfCAgICAgICAgICAgIA0KXn5+fg0KSW4gZmlsZSBp
-bmNsdWRlZA0KZnJvbSB0b29scy9pbWFnZXRvb2wuaDoyMSwNCiAgICAgICAgICAgICAgICANCmZy
-b20gdG9vbHMvaW14OG1pbWFnZS5jOjk6DQovdXNyL2luY2x1ZGUvdW5pc3RkLmg6Mzc4OjE2Og0K
-bm90ZTogaW4gYSBjYWxsIHRvIGZ1bmN0aW9uIOKAmHdyaXRl4oCZIGRlY2xhcmVkIHdpdGggYXR0
-cmlidXRlDQrigJhhY2Nlc3MgKHJlYWRfb25seSwgMiwgMynigJkNCiAgMzc4IHwgZXh0ZXJuDQpz
-c2l6ZV90IHdyaXRlIChpbnQgX19mZCwgY29uc3Qgdm9pZCAqX19idWYsIHNpemVfdCBfX24pIF9f
-d3VyDQogICAgICB8ICAgICAgICAgICAgIA0KICBefn5+fg0KICBIT1NUQ0MgDQp0b29scy9rd2Jp
-bWFnZS5vDQogIEhPU1RDQyANCnRvb2xzL2xwYzMyeHhpbWFnZS5vDQogIEhPU1RDQyANCnRvb2xz
-L29tYXBpbWFnZS5vDQogIEhPU1RDQyANCnRvb2xzL3BibGltYWdlLm8NCiAgSE9TVENDIA0KdG9v
-bHMvdnlicmlkaW1hZ2Uubw0KICBIT1NUQ0MgDQp0b29scy9zdG0zMmltYWdlLm8NCiAgSE9TVEND
-IA0KdG9vbHMvcmtjb21tb24ubw0KICBIT1NUQ0MgDQp0b29scy9ya2ltYWdlLm8NCiAgSE9TVEND
-IA0KdG9vbHMvcmtzZC5vDQogIEhPU1RDQyANCnRvb2xzL3Jrc3BpLm8NCiAgSE9TVENDIA0KdG9v
-bHMvc29jZnBnYWltYWdlLm8NCiAgSE9TVENDIA0KdG9vbHMvY29tbW9uL2hhc2gubw0KICBIT1NU
-Q0MgDQp0b29scy91YmxpbWFnZS5vDQogIEhPU1RDQyANCnRvb2xzL3p5bnFpbWFnZS5vDQogIEhP
-U1RDQyANCnRvb2xzL3p5bnFtcGltYWdlLm8NCiAgSE9TVENDIA0KdG9vbHMvenlucW1wYmlmLm8N
-CiAgSE9TVENDIA0KdG9vbHMvbGliZmR0L2ZkdC5vDQogIEhPU1RDQyANCnRvb2xzL2xpYmZkdC9m
-ZHRfcm8ubw0KICBIT1NUQ0MgDQp0b29scy9saWJmZHQvZmR0X3dpcC5vDQogIEhPU1RDQyANCnRv
-b2xzL2xpYmZkdC9mZHRfc3cubw0KICBIT1NUQ0MgDQp0b29scy9saWJmZHQvZmR0X3J3Lm8NCiAg
-SE9TVENDIA0KdG9vbHMvbGliZmR0L2ZkdF9zdHJlcnJvci5vDQogIEhPU1RDQyANCnRvb2xzL2xp
-YmZkdC9mZHRfZW1wdHlfdHJlZS5vDQogIEhPU1RDQyANCnRvb2xzL2xpYmZkdC9mZHRfYWRkcmVz
-c2VzLm8NCiAgSE9TVENDIA0KdG9vbHMvbGliZmR0L2ZkdF9vdmVybGF5Lm8NCiAgSE9TVENDIA0K
-dG9vbHMvZ3BpbWFnZS5vDQogIEhPU1RDQyANCnRvb2xzL2dwaW1hZ2UtY29tbW9uLm8NCiAgSE9T
-VENDIA0KdG9vbHMvbXRrX2ltYWdlLm8NCiAgSE9TVENDIA0KdG9vbHMvZHVtcGltYWdlLm8NCiAg
-SE9TVExEIA0KdG9vbHMvZHVtcGltYWdlDQogIEhPU1RDQyANCnRvb2xzL21raW1hZ2Uubw0KICBI
-T1NUTEQgDQp0b29scy9ta2ltYWdlDQogIEhPU1RDQyANCnRvb2xzL2ZkdGdyZXAubw0KICBIT1NU
-TEQgDQp0b29scy9mZHRncmVwDQogIEhPU1RDQyANCnRvb2xzL3NwbF9zaXplX2xpbWl0DQogIExE
-ICAgICANCmFyY2gvYXJtL2NwdS9idWlsdC1pbi5vDQogIExEICAgICANCmFyY2gvYXJtL2NwdS8v
-YnVpbHQtaW4ubw0KICBBUyAgICAgDQphcmNoL2FybS9saWIvdmVjdG9ycy5vDQogIEFTICAgICAN
-CmFyY2gvYXJtL2xpYi9jcnQwLm8NCiAgQVMgICAgIA0KYXJjaC9hcm0vbGliL3NldGptcC5vDQog
-IEFTICAgICANCmFyY2gvYXJtL2xpYi9yZWxvY2F0ZS5vDQogIENDICAgICANCmFyY2gvYXJtL2xp
-Yi9ib290bS1mZHQubw0KICBDQyAgICAgDQphcmNoL2FybS9saWIvYm9vdG0ubw0KSW4gZmlsZSBp
-bmNsdWRlZA0KZnJvbSAuL2FyY2gvYXJtL2luY2x1ZGUvYXNtL3N5c3RlbS5oOjUsDQogICAgICAg
-ICAgICAgICAgDQpmcm9tIC4vYXJjaC9hcm0vaW5jbHVkZS9hc20vY2FjaGUuaDoxMSwNCiAgICAg
-ICAgICAgICAgICANCmZyb20gYXJjaC9hcm0vbGliL2Jvb3RtLmM6MzU6DQouL2FyY2gvYXJtL2lu
-Y2x1ZGUvYXNtL2JhcnJpZXJzLmg6MzI6MjQ6DQplcnJvcjogb3BlcmF0b3IgJz49JyBoYXMgbm8g
-bGVmdCBvcGVyYW5kDQogICAzMiB8ICNpZg0KX19MSU5VWF9BUk1fQVJDSF9fID49IDcNCiAgICAg
-IHwgICAgICAgICAgICAgDQogICAgICAgICAgXn4NCi4vYXJjaC9hcm0vaW5jbHVkZS9hc20vYmFy
-cmllcnMuaDozNjoyNjoNCmVycm9yOiBvcGVyYXRvciAnPT0nIGhhcyBubyBsZWZ0IG9wZXJhbmQN
-CiAgIDM2IHwgI2VsaWYNCl9fTElOVVhfQVJNX0FSQ0hfXyA9PSA2DQogICAgICB8ICAgICAgICAg
-ICAgIA0KICAgICAgICAgICAgXn4NCm1ha2VbMV06ICoqKg0KW3NjcmlwdHMvTWFrZWZpbGUuYnVp
-bGQ6MjY2OiBhcmNoL2FybS9saWIvYm9vdG0ub10gRXJyb3IgMQ0KbWFrZTogKioqDQpbTWFrZWZp
-bGU6MTc4MDogYXJjaC9hcm0vbGliXSBFcnJvciAyDQpsaXV3QGxpdXctU1lTLUUxMDAtMTJULUg6
-fi9Eb3dubG9hZHMvdS1ib290JA0KDQotLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTog
-TGl1IFdhbmcgKEhXKSANClNlbnQ6IFdlZG5lc2RheSwgSmFudWFyeSAxNywgMjAyNCA0OjA4IFBN
-DQpUbzogRmFiaW8gRXN0ZXZhbSA8ZmVzdGV2YW1AZ21haWwuY29tPg0KQ2M6IHUtYm9vdEBsaXN0
-cy5kZW54LmRlDQpTdWJqZWN0OiBSRTogQ291bGQgeW91IHBsZWFzZSBoZWxwIG1lIGluIHJlc29s
-dmluZyB0aGUgImFyY2gvYXJtL2xpYi92ZWN0b3JzLlM6ODc6IEVycm9yOiBubyBzdWNoIGluc3Ry
-dWN0aW9uOiBgYiByZXNldCcgPyINCg0KSGkgRmFiaW8sDQoNClRoYW5rIHlvdSBhZ2FpbiBmb3Ig
-eW91ciBoZWxwLg0KDQpSdW4gaW50byBmb3JtYXQgZXJyb3IgYWZ0ZXIgZXhwb3J0IHRvb2wgY2hh
-aW46IA0KLi4uZ251ZWFiaWhmLWdjYzogY2Fubm90IGV4ZWN1dGUgYmluYXJ5IGZpbGU6IEV4ZWMg
-Zm9ybWF0IGVycm9yLi4uDQoNCkNvdWxkIHlvdSBwbGVhc2Ugc2hhcmUgbW9yZSA/DQoNClNpbmNl
-cmVseSwNCkxpdSBXYW5nDQotLS0tLS0tLS0tLS0tLS0tLS0tLQ0KL2Jpbi9zaDogbGluZSAxOiAv
-aG9tZS9saXV3L2FybWdudXRvb2xjaGFpbjEzMlJlbDFhYXJjaDY0YXJtbm9uZWxpbnV4Z251ZWFi
-aWhmL2FybS1nbnUtdG9vbGNoYWluLTEzLjIuUmVsMS1hYXJjaDY0LWFybS1ub25lLWxpbnV4LWdu
-dWVhYmloZi9iaW4vYXJtLW5vbmUtbGludXgtZ251ZWFiaWhmLWdjYzogY2Fubm90IGV4ZWN1dGUg
-YmluYXJ5IGZpbGU6IEV4ZWMgZm9ybWF0IGVycm9yDQovaG9tZS9saXV3L2FybWdudXRvb2xjaGFp
-bjEzMlJlbDFhYXJjaDY0YXJtbm9uZWxpbnV4Z251ZWFiaWhmL2FybS1nbnUtdG9vbGNoYWluLTEz
-LjIuUmVsMS1hYXJjaDY0LWFybS1ub25lLWxpbnV4LWdudWVhYmloZi9iaW4vYXJtLW5vbmUtbGlu
-dXgtZ251ZWFiaWhmLWdjYzogL2hvbWUvbGl1dy9hcm1nbnV0b29sY2hhaW4xMzJSZWwxYWFyY2g2
-NGFybW5vbmVsaW51eGdudWVhYmloZi9hcm0tZ251LXRvb2xjaGFpbi0xMy4yLlJlbDEtYWFyY2g2
-NC1hcm0tbm9uZS1saW51eC1nbnVlYWJpaGYvYmluL2FybS1ub25lLWxpbnV4LWdudWVhYmloZi1n
-Y2M6IGNhbm5vdCBleGVjdXRlIGJpbmFyeSBmaWxlDQovYmluL3NoOiBsaW5lIDE6IC9ob21lL2xp
-dXcvYXJtZ251dG9vbGNoYWluMTMyUmVsMWFhcmNoNjRhcm1ub25lbGludXhnbnVlYWJpaGYvYXJt
-LWdudS10b29sY2hhaW4tMTMuMi5SZWwxLWFhcmNoNjQtYXJtLW5vbmUtbGludXgtZ251ZWFiaWhm
-L2Jpbi9hcm0tbm9uZS1saW51eC1nbnVlYWJpaGYtZ2NjOiBjYW5ub3QgZXhlY3V0ZSBiaW5hcnkg
-ZmlsZTogRXhlYyBmb3JtYXQgZXJyb3INCmRpcm5hbWU6IG1pc3Npbmcgb3BlcmFuZA0KVHJ5ICdk
-aXJuYW1lIC0taGVscCcgZm9yIG1vcmUgaW5mb3JtYXRpb24uDQovYmluL3NoOiBsaW5lIDE6IC9o
-b21lL2xpdXcvYXJtZ251dG9vbGNoYWluMTMyUmVsMWFhcmNoNjRhcm1ub25lbGludXhnbnVlYWJp
-aGYvYXJtLWdudS10b29sY2hhaW4tMTMuMi5SZWwxLWFhcmNoNjQtYXJtLW5vbmUtbGludXgtZ251
-ZWFiaWhmL2Jpbi9hcm0tbm9uZS1saW51eC1nbnVlYWJpaGYtZ2NjOiBjYW5ub3QgZXhlY3V0ZSBi
-aW5hcnkgZmlsZTogRXhlYyBmb3JtYXQgZXJyb3INCnNjcmlwdHMva2NvbmZpZy9jb25mICAtLXN5
-bmNjb25maWcgS2NvbmZpZw0KLi9zY3JpcHRzL2djYy12ZXJzaW9uLnNoOiBsaW5lIDI1OiAvaG9t
-ZS9saXV3L2FybWdudXRvb2xjaGFpbjEzMlJlbDFhYXJjaDY0YXJtbm9uZWxpbnV4Z251ZWFiaWhm
-L2FybS1nbnUtdG9vbGNoYWluLTEzLjIuUmVsMS1hYXJjaDY0LWFybS1ub25lLWxpbnV4LWdudWVh
-YmloZi9iaW4vYXJtLW5vbmUtbGludXgtZ251ZWFiaWhmLWdjYzogY2Fubm90IGV4ZWN1dGUgYmlu
-YXJ5IGZpbGU6IEV4ZWMgZm9ybWF0IGVycm9yDQouL3NjcmlwdHMvZ2NjLXZlcnNpb24uc2g6IGxp
-bmUgMjY6IC9ob21lL2xpdXcvYXJtZ251dG9vbGNoYWluMTMyUmVsMWFhcmNoNjRhcm1ub25lbGlu
-dXhnbnVlYWJpaGYvYXJtLWdudS10b29sY2hhaW4tMTMuMi5SZWwxLWFhcmNoNjQtYXJtLW5vbmUt
-bGludXgtZ251ZWFiaWhmL2Jpbi9hcm0tbm9uZS1saW51eC1nbnVlYWJpaGYtZ2NjOiBjYW5ub3Qg
-ZXhlY3V0ZSBiaW5hcnkgZmlsZTogRXhlYyBmb3JtYXQgZXJyb3INCi4vc2NyaXB0cy9nY2MtdmVy
-c2lvbi5zaDogbGluZSAyODogL2hvbWUvbGl1dy9hcm1nbnV0b29sY2hhaW4xMzJSZWwxYWFyY2g2
-NGFybW5vbmVsaW51eGdudWVhYmloZi9hcm0tZ251LXRvb2xjaGFpbi0xMy4yLlJlbDEtYWFyY2g2
-NC1hcm0tbm9uZS1saW51eC1nbnVlYWJpaGYvYmluL2FybS1ub25lLWxpbnV4LWdudWVhYmloZi1n
-Y2M6IGNhbm5vdCBleGVjdXRlIGJpbmFyeSBmaWxlOiBFeGVjIGZvcm1hdCBlcnJvcg0KICBDRkcg
-ICAgIHUtYm9vdC5jZmcNCi9iaW4vc2g6IGxpbmUgMTogL2hvbWUvbGl1dy9hcm1nbnV0b29sY2hh
-aW4xMzJSZWwxYWFyY2g2NGFybW5vbmVsaW51eGdudWVhYmloZi9hcm0tZ251LXRvb2xjaGFpbi0x
-My4yLlJlbDEtYWFyY2g2NC1hcm0tbm9uZS1saW51eC1nbnVlYWJpaGYvYmluL2FybS1ub25lLWxp
-bnV4LWdudWVhYmloZi1nY2M6IGNhbm5vdCBleGVjdXRlIGJpbmFyeSBmaWxlOiBFeGVjIGZvcm1h
-dCBlcnJvcg0KbWFrZVsxXTogKioqIFtzY3JpcHRzL01ha2VmaWxlLmF1dG9jb25mOjc3OiB1LWJv
-b3QuY2ZnXSBFcnJvciAxDQptYWtlOiAqKiogTm8gcnVsZSB0byBtYWtlIHRhcmdldCAnaW5jbHVk
-ZS9jb25maWcvYXV0by5jb25mJywgbmVlZGVkIGJ5ICdpbmNsdWRlL2NvbmZpZy91Ym9vdC5yZWxl
-YXNlJy4gIFN0b3AuDQoNCi0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQpGcm9tOiBMaXUgV2Fu
-ZyAoSFcpIDxsaXV3QHN1cGVybWljcm8uY29tPiANClNlbnQ6IFdlZG5lc2RheSwgSmFudWFyeSAx
-NywgMjAyNCAxMjowOCBQTQ0KVG86IEZhYmlvIEVzdGV2YW0gPGZlc3RldmFtQGdtYWlsLmNvbT4N
-CkNjOiB1LWJvb3RAbGlzdHMuZGVueC5kZQ0KU3ViamVjdDogUmU6IENvdWxkIHlvdSBwbGVhc2Ug
-aGVscCBtZSBpbiByZXNvbHZpbmcgdGhlICJhcmNoL2FybS9saWIvdmVjdG9ycy5TOjg3OiBFcnJv
-cjogbm8gc3VjaCBpbnN0cnVjdGlvbjogYGIgcmVzZXQnID8iDQoNCkhpIEZhYmlvLA0KDQpBcHBy
-ZWNpYXRlIQ0KDQpTaW5jZXJlbHksDQpMaXUgIFdhbmcNCg0KPiBPbiBKYW4gMTcsIDIwMjQsIGF0
-IDEwOjQ5IEFNLCBGYWJpbyBFc3RldmFtIDxmZXN0ZXZhbUBnbWFpbC5jb20+IHdyb3RlOg0KPiAN
-Cj4g77u/W0NBVVRJT046IEV4dGVybmFsIE1haWxdDQo+IA0KPj4gT24gV2VkLCBKYW4gMTcsIDIw
-MjQgYXQgMzoyNeKAr1BNIExpdSBXYW5nIDxsaXV3QHN1cGVybWljcm8uY29tPiB3cm90ZToNCj4+
-IA0KPj4gMi4gWW91IGFyZSByaWdodC4gSSBoYXZlIG5vdCBleHBvcnRlZCB0aGUgdG9vbCBjaGFp
-bi4NCj4+IENvdWxkIHlvdSBwbGVhc2Ugc2hhcmUgbWUgYSBsaW5rIHRvIGEgcmVhZG1lIGluIHNl
-dHRpbmcgdXAgdGhlIHRvb2wgY2hhaW4gZm9yIFVidW50dSBjcm9zcyBidWlsZCBlbnZpcm9ubWVu
-dCA/DQo+IA0KPiBZb3UgY2FuIGRvIGxpa2UgdGhpczoNCj4gDQo+IGV4cG9ydCBBUkNIPWFybQ0K
-PiBleHBvcnQgQ1JPU1NfQ09NUElMRT0vdXNyL2Jpbi9hcm0tbGludXgtZ251ZWFiaWhmLQ0KPiAN
-Cj4gbWFrZSBjc2VfcHRqb2JfY2IzX3IxMDJfZGVmY29uZmlnDQo+IG1ha2UNCg==
+On Wed, Jan 17, 2024 at 10:26=E2=80=AFPM Liu Wang <liuw@supermicro.com> wro=
+te:
+>
+> Hi Fabio,
+>
+> Thank you for your help.
+>
+> Switching to "arm-gnu-toolchain-13.2.Rel1-x86-64-arm-none-eabi" seems a f=
+ix for :
+> ...gnueabihf-gcc: cannot execute binary file: Exec format error...
+
+I would suggest installing the default arm toolchain from Ubuntu.
+
+As for the build error, you would need to ask to whoever provided you
+with the code.
+
+Since this is not a mainline U-Boot, we cannot help.
