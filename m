@@ -4,64 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71939C4707B
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 03:38:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 300FDC4707B
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 04:58:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9FEE87A07;
-	Thu, 18 Jan 2024 04:38:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CB5BA87A0E;
+	Thu, 18 Jan 2024 05:58:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="cmK82geU";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="PVtFvZcM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20FEE87A0E; Thu, 18 Jan 2024 04:38:54 +0100 (CET)
-Received: from mail-m12810.netease.com (mail-m12810.netease.com
- [103.209.128.10])
+ id 4DF5687A14; Thu, 18 Jan 2024 05:58:01 +0100 (CET)
+Received: from mail-m606.netease.com (mail-m606.netease.com [210.79.60.6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17EFB876B1
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 04:38:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C9C4879C4
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 05:57:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=cmK82geU7RaEJK2HJGQbmBlxcBfxE0UgKeedzfhrq2kV2+43jzzocglsGjjqczSQ02b6qB9wlyN80BJMCU3yEYpVss4aj/H01qRRzzIxlT4ng073lv6YQtcIqxElH+2wFdTuTcWV8OrIwxjMrXZEtC/uPp56ozmqbUal/EQ+3UQ=;
+ b=PVtFvZcMAHsbdBWD3ITdbdPaOps4iDk0Qu2I+ljF3UV+2TbKxLilqLwkenmDqf/ryNyGbxPPH+v1q9VFqCIOYPR70Bmv2QvikpKEPG4clOBTxsEsfZUcte7fZV14A2QOYNaFXgPcJddNAmt4zAFUQhLFrtpT/WiSY4tkd+yeOQ4=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=uPODjKJ818MatOBVasUMiBLlgM7zi+iSWrkqaARNb/I=;
+ bh=OrqB+5LZ6Sg/RYsGaVcowOy+uJmpEormyu91O4nJsFo=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11873.qiye.163.com (Hmail) with ESMTPA id 86E8A900268;
- Thu, 18 Jan 2024 11:38:45 +0800 (CST)
-Message-ID: <61fa5f2f-1847-4831-a3f2-8acab93fb964@rock-chips.com>
-Date: Thu, 18 Jan 2024 11:38:45 +0800
+ by mail-m11873.qiye.163.com (Hmail) with ESMTPA id 02709900328;
+ Thu, 18 Jan 2024 12:57:52 +0800 (CST)
+Message-ID: <a7ce4a4f-4c66-4e4f-86db-d98b5bc57ec7@rock-chips.com>
+Date: Thu, 18 Jan 2024 12:57:52 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: Black and White Artifact on BMP (24BPP) logo during boot
+Subject: Re: [PATCH v4] dts: rockpro64: Disable usb regulators-always-on
 Content-Language: en-US
-To: Jagan Teki <jagan@amarulasolutions.com>,
- Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>,
- Andy Yan <andyshrk@163.com>,
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Nikhil M Jain <n-jain1@ti.com>,
- Andre Przywara <andre.przywara@arm.com>
-Cc: U-Boot-Denx <u-boot@lists.denx.de>,
- "open list:ARM/Rockchip SoC..." <linux-rockchip@lists.infradead.org>
-References: <CAMty3ZCq_d24p68fg1EfWCqmHyDVKZ54UgPDF09GVy0mh4ME=Q@mail.gmail.com>
+To: Shantur Rathore <i@shantur.com>, marex@denx.de
+Cc: bmeng.cn@gmail.com, clamor95@gmail.com,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+References: <20231222144236.509978-1-i@shantur.com>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <CAMty3ZCq_d24p68fg1EfWCqmHyDVKZ54UgPDF09GVy0mh4ME=Q@mail.gmail.com>
+In-Reply-To: <20231222144236.509978-1-i@shantur.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGklJHVZLS0xPHUhKSxoYQx1VEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQhlMQ1ZOHkMdTU8eGk4dHxpVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8d1aa658a42eafkusn86e8a900268
+X-HM-Tid: 0a8d1aeec9262eafkusn02709900328
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NRQ6KDo6LTwtTREtHyoRCSE4
- AUkwCQFVSlVKTEtOTk9CSklNSUJCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPT01ONwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pxg6Aww*TTwdTRAUHCs8Qgw6
+ DkoKCipVSlVKTEtOTk5IQ0xITUpIVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJQ0hCNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,83 +74,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jagan,
+Hi Shantur,
 
-     Have you check the memory area, does it maybe overlap with other 
-area? eg. heap, stack, malloc area and etc.
+     Since you are working on the dts change in mainline kernel, you can 
+sync the dts after kernel apply.
+
+This patch will be dropped.
 
 
 Thanks,
 
 - Kever
 
-On 2024/1/17 18:36, Jagan Teki wrote:
-> Hi All,
+On 2023/12/22 22:42, Shantur Rathore wrote:
+> USB port regulators should be controlled by PHYs
+> so we remove always-on property and let phy manage the
+> regulator.
 >
-> Artifact occurred only during boot but loading via the bmp command on
-> the u-boot console seems fine.
+> phy-supply isn't configured for TypeC port in upstream and
+> now that we are removing always-on, we need to add the
+> phy-supply until its fixed upstream.
 >
-> I have observed the contents of bmp hex codes have changed during the
-> function switch after memory to ddr address. (The same cannot happen
-> on downstream u-boot)
+> Signed-off-by: Shantur Rathore <i@shantur.com>
 >
-> diff --git a/common/splash.c b/common/splash.c
-> index 6820db683b..f97edf8732 100644
-> --- a/common/splash.c
-> +++ b/common/splash.c
-> @@ -175,6 +175,11 @@ int splash_display(void)
+> ---
 >
->          splash_get_pos(&x, &y);
+> Changes in v4:
+> - otg port must be configured with phy-supply instead of host port node
 >
-> +       if (memcmp((void *)addr, bmp_logo_bitmap, len2) == 0)
-> +               printf("%s: SAME\n", __func__);
-> +       else
-> +               printf("%s: NOTSAME\n", __func__);
+> Changes in v3:
+> - Split up patches as seperate series
+>
+> Changes in v2:
+> - As requested, added fix for regulator-always-on in RockPro64
+>
+>   arch/arm/dts/rk3399-rockpro64-u-boot.dtsi | 12 ++++++++++++
+>   1 file changed, 12 insertions(+)
+>
+> diff --git a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
+> index 732727d9b0..0ac9fa9a03 100644
+> --- a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
+> @@ -22,6 +22,18 @@
+>   	};
+>   };
+>   
+> +&u2phy0_otg {
+> +	phy-supply = <&vcc5v0_typec>;
+> +};
 > +
->          if (CONFIG_IS_ENABLED(BMP))
->                  ret = bmp_display(addr, x, y);
->          else
-> diff --git a/drivers/video/bmp.c b/drivers/video/bmp.c
-> index bab6fa7265..dc2928ccdb 100644
-> --- a/drivers/video/bmp.c
-> +++ b/drivers/video/bmp.c
-> @@ -111,10 +111,15 @@ int bmp_display(ulong addr, int x, int y)
->   {
->          struct udevice *dev;
->          int ret;
-> -       struct bmp_image *bmp = map_sysmem(addr, 0);
->          void *bmp_alloc_addr = NULL;
->          unsigned long len;
->
-> +       if (memcmp((void *)addr, bmp_logo_bitmap, len2) == 0)
-> +               printf("%s: SAME\n", __func__);
-> +       else
-> +               printf("%s: NOTSAME\n", __func__);
+> +&vcc5v0_host {
+> +	/delete-property/ regulator-always-on;
+> +};
 > +
-> +       struct bmp_image *bmp = map_sysmem(addr, 0);
->          if (!((bmp->header.signature[0] == 'B') &&
->                (bmp->header.signature[1] == 'M')))
->                  bmp = gunzip_bmp(addr, &len, &bmp_alloc_addr);
->
-> So, the contents in splash_display show SAME and the contents in
-> bmp_display show NOTSAME.
->
-> This issue is reproducing on specifics like
-> - 24-bit BMP (attached).
-> rockchip.bmp: PC bitmap, Windows 98/2000 and newer format, 480 x 270 x 24
-> - Rockchip 64-bit SoC (32-bit, RK3288 has no issue).
-> - Allwinner 64-bit SoC seems no issues.
-> - Downstream u-boot rockchip has no issues. (with mainline vide
-> drivers not with drm drivers)
-> - Issue observed in boot but loading via bmp command on u-boot console
-> seems no issue.
->
-> I did check the clock, cache, and memory but none of them showed any
-> clue. I did port clock, mach-rockchip code to rockchip u-boot but none
-> of the cases resulted in the same.
->
-> Any input on this is appreciated.
->
-> Thanks,
-> Jagan.
->
+> +&vcc5v0_typec {
+> +	/delete-property/ regulator-always-on;
+> +};
+> +
+>   &vdd_center {
+>   	regulator-min-microvolt = <950000>;
+>   	regulator-max-microvolt = <950000>;
