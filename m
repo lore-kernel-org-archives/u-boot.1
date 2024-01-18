@@ -4,58 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D85BC47DAF
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 20:49:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5FD4C47DAF
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 21:00:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F9158795B;
-	Thu, 18 Jan 2024 21:49:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id DFFDE87B84;
+	Thu, 18 Jan 2024 22:00:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="u/FBJb2O";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MRsdgVhq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D7AD87B84; Thu, 18 Jan 2024 21:49:22 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3B47987B84; Thu, 18 Jan 2024 22:00:43 +0100 (CET)
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
+ [IPv6:2607:f8b0:4864:20::c2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63E4A84694
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 21:49:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1DFA787B6C
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 22:00:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 96A432228F;
- Thu, 18 Jan 2024 21:49:19 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1705610960;
- bh=TSopf2A/DZk89ufqCq17FOn/F0JCZLiWc/klFUWH7eQ=; h=From:To:Subject;
- b=u/FBJb2OorJ5WMxJNKv83rUbd7zRRJC/4LC3XcIlZf1Z/B7SumFdBSPkZp6ItXB2M
- O4maaqYbZANAr8BcbmV3f7MfbnTCWCotyAUu0lkMkSvtpgvzJU3QUJW5QoslClDawZ
- DIHZ+IKE9WloNnLEdC94dTUjoQJZ0fB/QW3koWOz9cawjEfeGJwzfwtT742TQIcY5C
- ugbO3CRpWaE2+HTPhyQV8KbMe3cF84+ObwaXIrxJUAWI6B3Eb4rzUYR4BEKt1ajnSo
- WYw0QcPC7IhWUMldXuemCRGQksOW44p/MpZCRaDGlijHyq4e/fsjvxZfkA6+BztQBz
- AZczYGbU7YJxg==
-Date: Thu, 18 Jan 2024 21:49:17 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Max Krummenacher <max.oss.09@gmail.com>
-Cc: Max Krummenacher <max.krummenacher@toradex.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Nishanth Menon <nm@ti.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 4/4] board: verdin-am62: set cpu core voltage
- depending on speed grade
-Message-ID: <20240118204917.GB25631@francesco-nb>
-References: <20240117101743.3955852-1-max.oss.09@gmail.com>
- <20240117101743.3955852-5-max.oss.09@gmail.com>
- <Zaj0T33xqN3Eq6XT@toolbox> <ZalSWOw7UEvfnrKf@toolbox>
+ spf=pass smtp.mailfrom=twoerner@gmail.com
+Received: by mail-oo1-xc2d.google.com with SMTP id
+ 006d021491bc7-598cf18b259so49636eaf.1
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 13:00:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1705611638; x=1706216438; darn=lists.denx.de;
+ h=user-agent:in-reply-to:content-disposition:mime-version:references
+ :message-id:subject:cc:to:from:date:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EHo4xj2D4fN5dNMjVjZubHxofIwIFejnR6xqqLZP3Vk=;
+ b=MRsdgVhqy6DpVI4QaKkqd21j9XEtjX/fLpGDX/5suZvQQKsA5A+RxTShGf84q/SNC6
+ g7e9iY8S8pvrF5galRoaE0Ef0jzw6LGAT67HVhbCyLM36TMHeoCceK0FG6yTn3Pv60Oq
+ IGhVNrdIa5dE9NOfl/tJW+L8GNPIAbfpKqp7s0/he/oOpyxeKf+tLNdBZAhhPK5ovdG/
+ 56t8+5pCmv1lHu52Zf8yX6Qq3uz/2Wf21uWoEniD28V0rD2Nt2QJRwwRdvTZewbMEjUs
+ 3QbwzA2mUR7j0olyaJkcqsAZxE51aFOL6zUZOClMb/YTBV1VsBITjkKqaBuV5lpj07ZS
+ IsnQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705611638; x=1706216438;
+ h=user-agent:in-reply-to:content-disposition:mime-version:references
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=EHo4xj2D4fN5dNMjVjZubHxofIwIFejnR6xqqLZP3Vk=;
+ b=S2Ms5vnEhQnBIiUdQQ/yw982/ZS6PfXHQfibEDByLEjgrY8SYnSB4Du8HxkJ/Mc5Jw
+ Z78NqppkOItJ/l3ho/Twc1oXN2e7l3teY3wCW7vmm+kqp3VfRYhiyQhIOTN80StPbREU
+ JsmPRKjn540trCqLi9MGSJ5WQPsM8He2NG3QW6kUZcZWaqsyVrzaXmBmcQelpKCCG6cP
+ rElZYVKSGg2JvvysN1SMgWnMBDO1azNKNIFuOQ65G2rQpCfBOu3k7PvjAlI4uRGMsdT8
+ 6++DaKEu7FXVfH1du2akeHdg7/YOHyIDCm7TaqRiIFBCFavFbEESew+GJUdxAHtc2kiH
+ 8HZw==
+X-Gm-Message-State: AOJu0YyQt2GnWIOANSK6TUrgm20Kmsr8opbUePPoxik3gBZq/UDmHiiC
+ HX6wqkjrTsK2nyGnla3hlcjpf3MbwqcHl6B5Bvi3U1Ak8NXrH2+1
+X-Google-Smtp-Source: AGHT+IGApFtSNtao+brhwlRZVFmVAscm9vvJ08cTYYUvjQrXFk9+/iyLHVLf04cxlBPOQL6cY//ipA==
+X-Received: by 2002:a05:6358:7058:b0:175:7908:25ec with SMTP id
+ 24-20020a056358705800b00175790825ecmr933748rwp.38.1705611638513; 
+ Thu, 18 Jan 2024 13:00:38 -0800 (PST)
+Received: from localhost (pppoe-209-91-167-254.vianet.ca. [209.91.167.254])
+ by smtp.gmail.com with ESMTPSA id
+ p13-20020a0cfd8d000000b0067f2559fd5esm6144410qvr.34.2024.01.18.13.00.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Jan 2024 13:00:37 -0800 (PST)
+Date: Thu, 18 Jan 2024 16:00:35 -0500
+From: Trevor Woerner <twoerner@gmail.com>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>,
+ Banglang Huang <banglang.huang@foxmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 0/2] rockchip: Fix ethernet on Radxa ROCK Pi E v1.21
+Message-ID: <20240118210035.GA17102@localhost>
+References: <20240118071949.927089-1-jonas@kwiboo.se>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <ZalSWOw7UEvfnrKf@toolbox>
+In-Reply-To: <20240118071949.927089-1-jonas@kwiboo.se>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,53 +94,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jan 18, 2024 at 05:31:20PM +0100, Max Krummenacher wrote:
-> On Thu, Jan 18, 2024 at 10:50:07AM +0100, Max Krummenacher wrote:
-> > On Wed, Jan 17, 2024 at 11:16:49AM +0100, Max Krummenacher wrote:
-> > > From: Max Krummenacher <max.krummenacher@toradex.com>
-> > > 
-> > > Speed grade T requires the VDD_CORE voltage to be 0.85V if using
-> > > the maximum core frequency.
-> > > 
-> > > Speed grades G, K, S allow the VDD_CORE voltage to be 0.75V up to the
-> > > maximum core frequency but allow to run at 0.85V.
-> > > 
-> > > For efficiency in manufacturing and code maintenance we use 0.85V for
-> > > the PMIC defaults and device tree settings and dynamically adjust the
-> > > voltage in the PMIC and device tree to 0.75V for lower speed SKU to
-> > > gain more than 100mW power consumption reduction.
-> > > 
-> > > Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
-> > > ---
-> > > 
-> > >  board/toradex/verdin-am62/verdin-am62.c | 47 +++++++++++++++++++++++++
-> > >  1 file changed, 47 insertions(+)
-> > > 
-> > > diff --git a/board/toradex/verdin-am62/verdin-am62.c b/board/toradex/verdin-am62/verdin-am62.c
-> > > index 4e912b5f32f..8b9db224069 100644
-> > > --- a/board/toradex/verdin-am62/verdin-am62.c
-> > > +++ b/board/toradex/verdin-am62/verdin-am62.c
-> > > @@ -13,10 +13,13 @@
-> > >  #include <fdt_support.h>
-> > >  #include <init.h>
-> > >  #include <k3-ddrss.h>
-> > > +#include <power/regulator.h>
-> > 
-> > In the !DM_REGULATOR case regulator.h assumes errno.h to be already included.
-> > This happens when compiling the R5 SPL.
-> > 
-> > Will fix this in a v2 of the series.
+Hi Jonas,
+
+On Thu 2024-01-18 @ 07:19:44 AM, Jonas Karlman wrote:
+> Ethernet on a Radxa ROCK Pi E v1.21 with a RTL8211F ethernet PHY
+> currently fails with the following message:
 > 
-> Actually we can go on with the series. While it is true that errno.h is not
-> included in regulator.h, the required header is included and its definitions
-> available.
+>   Could not get PHY for ethernet@ff540000: addr -1
 > 
-> I will create a separate patch which cleans up the headers, so that they
-> become self contained.
+> This happens because the ethernet PHY is never reset before a phy-id is
+> read back from the MDIO bus.
+> 
+> This series fixes this issue by calling eth_phy_set_mdio_bus() from the
+> designware ethernet driver to issue a PHY reset before the phy_connect()
+> call.
+> 
+> With the driver change and DM_ETH_PHY and PHY_REALTEK enabled the PHY
+> can be identified and etherent works:
+> 
+>   => mdio list
+>   ethernet@ff540000:
+>   1 - RealTek RTL8211F <--> ethernet@ff540000
+> 
+> This was tested with and without the DM_MDIO option enabled. Decided to
+> leave it disabled in this series.
 
-FTR, https://lore.kernel.org/all/20240118181106.4133924-1-max.oss.09@gmail.com/
+This works great, thank you! As you suspected, both boards/PHYs work fine now
+work under Linux (in addition to U-Boot).
 
-As Max wrote this series does not require that cleanup.
+Tested-By: Trevor Woerner <twoerner@gmail.com>
 
-Francesco
-
+> Jonas Karlman (2):
+>   net: designware: Reset eth phy before phy connect
+>   rockchip: rk3328-rock-pi-e: Enable DM_ETH_PHY and PHY_REALTEK
+> 
+>  configs/rock-pi-e-rk3328_defconfig | 2 ++
+>  drivers/net/designware.c           | 7 +++++++
+>  2 files changed, 9 insertions(+)
+> 
+> -- 
+> 2.43.0
+> 
