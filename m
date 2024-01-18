@@ -4,82 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46A84C4707B
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 09:50:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0276C4707B
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 10:13:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EA8F87B8D;
-	Thu, 18 Jan 2024 10:50:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 83C3E876C1;
+	Thu, 18 Jan 2024 11:13:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="X2MpHp76";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="QaTLOSTP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3527587B90; Thu, 18 Jan 2024 10:50:13 +0100 (CET)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D1EA087B8D; Thu, 18 Jan 2024 11:13:01 +0100 (CET)
+Received: from mail-m11887.qiye.163.com (mail-m11887.qiye.163.com
+ [115.236.118.87])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0A2487B85
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 10:50:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C70486BFA
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 11:12:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=max.oss.09@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-557dcb0f870so12224418a12.2
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 01:50:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705571409; x=1706176209; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Vysle59Z9eZq90n/E+XrLniq4WKd+Qw0R+tMjN8e0CY=;
- b=X2MpHp76lDxdstKo27n9rbw9X2AtnpsK/E+LJhenCbSSXYTPPLruCtxQyQlvD9nUZo
- LVFlDK8yZWYtYRy0LJnkkFtdHqU42jHwLOzaPPAXxlENuj06pTDKHOWT1Ln51twSz/ox
- wIf6y1zzV/hLmVJbDAmqwRUuU+Brs/h6IV7Adpra6gQjk9ZfI9IgLsXhfckdayUqhwg0
- MM+JXzM0ijN9+3cD3LRxC7LsIAN/XBGeqwDafPFxjagADSeI9KGqpHB4+oQkf6sOJdLJ
- BB/gcTq+LzsPwJhkyPwf/noC5mv3IeoxAegIexqTXjbLZFmKQRtxxCFRPn97imuknSpr
- 9R5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705571409; x=1706176209;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Vysle59Z9eZq90n/E+XrLniq4WKd+Qw0R+tMjN8e0CY=;
- b=ZpEaLHDu+CyujkpUgNz6ryeFXbDhWkKisWOGTDrZt1J4HHq35Chw6miECd/oSygz/9
- 7bxRPUEVbpfVpXd2mCyHM5nt+8nG4HJfACvYCl/5GAUuP/a0z8E857/mn0FhebHS95U8
- MKiIgxg9d+bjmIk7nfdYBx79y9C+MykfGeq6CGC9sELZswyfcYKeUi8sLdWHkaPucOR8
- A5hkUchr2H8V8eD53qtrNKO35Xi4o91Zo3rcjNr83rcLTafMmgT4o0mPZogQ75pWOuuf
- aQRWtg7GQVRWBMCvG88nkPsUECcnMo8fHH75H2/hrfVWZ+vpwj5HRGjUEWXbG94Y3VoW
- 4FOA==
-X-Gm-Message-State: AOJu0YykViGJ+33t3o2/WIWR6BSiJp+Dy1Hs3GrdN/jtu9e067DdgZTJ
- +CCscUpC3YIQBcePpKKETEGqoPACUQ/HcfiT773T2K1q/JrUjzPB
-X-Google-Smtp-Source: AGHT+IEPrKYxyxPQNdf+daMwRVpLw8fpliKpUFi2hTggdtiL/L20jpbCMElNIP155cbWgopkrXPFvA==
-X-Received: by 2002:a17:906:856:b0:a27:c856:d889 with SMTP id
- f22-20020a170906085600b00a27c856d889mr320785ejd.81.1705571409040; 
- Thu, 18 Jan 2024 01:50:09 -0800 (PST)
-Received: from toolbox (31-10-206-125.static.upc.ch. [31.10.206.125])
- by smtp.gmail.com with ESMTPSA id
- bm19-20020a170906c05300b00a2362c5e3dbsm8893790ejb.151.2024.01.18.01.50.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jan 2024 01:50:08 -0800 (PST)
-Date: Thu, 18 Jan 2024 10:50:07 +0100
-From: Max Krummenacher <max.oss.09@gmail.com>
-To: Max Krummenacher <max.krummenacher@toradex.com>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Nishanth Menon <nm@ti.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 4/4] board: verdin-am62: set cpu core voltage
- depending on speed grade
-Message-ID: <Zaj0T33xqN3Eq6XT@toolbox>
-References: <20240117101743.3955852-1-max.oss.09@gmail.com>
- <20240117101743.3955852-5-max.oss.09@gmail.com>
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=QaTLOSTPwWgTDe24IS1LA3pgOtvz1jOooZbih1BEb1oJD8sQLcz9/2txqIyFtsXYMGoUK6Ggkp8+IyA1/DIAczjONxUVcq/qPul6T9SIySEqFMJ3nJRQm0w/N3Wv8jSpr8ti5BV1MkLNx54cngy7tOFQDMn0/rQL359qqMm+e5Y=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
+ bh=qAuiPfxsdGD4oS5xgbrew9iVlzEltDeEO2wCXmofTIc=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.93] (unknown [58.22.7.114])
+ by mail-m11873.qiye.163.com (Hmail) with ESMTPA id 3F50F9008AC;
+ Thu, 18 Jan 2024 18:12:51 +0800 (CST)
+Message-ID: <afc5d7e1-030b-48f4-b414-ab4a918debb9@rock-chips.com>
+Date: Thu, 18 Jan 2024 18:12:50 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240117101743.3955852-5-max.oss.09@gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 4/6] rockchip: find U-boot proper boot device by
+ inverting the logic that sets it
+Content-Language: en-US
+To: Quentin Schulz <foss+uboot@0leil.net>, heiko@sntech.de,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: u-boot@lists.denx.de, jonas@kwiboo.se,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>
+References: <20240117-rk3588-spl-boot-dev-v3-0-72cb989e6da8@theobroma-systems.com>
+ <20240117-rk3588-spl-boot-dev-v3-4-72cb989e6da8@theobroma-systems.com>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20240117-rk3588-spl-boot-dev-v3-4-72cb989e6da8@theobroma-systems.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUMZGFZJH0hOTExDSUxOTxpVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8d1c0f26592eafkusn3f50f9008ac
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MTI6SQw4SjwZCBcNL0gVAUlW
+ ORdPCxxVSlVKTEtOTkxJTExKQkpPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFDQk9MNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,113 +76,209 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jan 17, 2024 at 11:16:49AM +0100, Max Krummenacher wrote:
-> From: Max Krummenacher <max.krummenacher@toradex.com>
-> 
-> Speed grade T requires the VDD_CORE voltage to be 0.85V if using
-> the maximum core frequency.
-> 
-> Speed grades G, K, S allow the VDD_CORE voltage to be 0.75V up to the
-> maximum core frequency but allow to run at 0.85V.
-> 
-> For efficiency in manufacturing and code maintenance we use 0.85V for
-> the PMIC defaults and device tree settings and dynamically adjust the
-> voltage in the PMIC and device tree to 0.75V for lower speed SKU to
-> gain more than 100mW power consumption reduction.
-> 
-> Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+Hi Quentin,
+
+On 2024/1/18 01:22, Quentin Schulz wrote:
+> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+>
+> BOOT_DEVICE_* is set by spl_node_to_boot_device() depending on the block
+> device number associated with the MMC device the SPL used to load U-Boot
+> proper from. It is NOT related to the mmc alias in the Device Tree.
+>
+> For SPI flashes, all SPI flashes will return BOOT_DEVICE_SPI so there's
+> currently no way to know from which one the SPL loaded U-Boot proper
+> from. Therefore, let's just find the first valid candidate in
+> /chosen/u-boot,spl-boot-order that is a SPI flash and return that path.
+> This is a best effort.
+>
+> While the original implementation may have worked, using the exact same
+> mechanism but in inverted fashion makes it less likely to have
+> surprising corner-cases or side-effects.
+>
+> A nice side-effect is that all existing and future Rockchip SoCs now
+> automatically have their /chosen/u-boot,spl-boot-device set.
+
+Error happen in some 32bit SoC:
+
++arch/arm/mach-rockchip/spl-boot-order.c: In function 'spl_perform_fixups':
++arch/arm/mach-rockchip/spl-boot-order.c:242:31: error: 'struct 
+spl_image_info' has no member named 'fdt_addr'
++  242 |         void *blob = spl_image->fdt_addr;
++      |                               ^~
++make[3]: *** [scripts/Makefile.build:257: 
+spl/arch/arm/mach-rockchip/spl-boot-order.o] Error 1
+
+
+Please add an option for this feature so that different SoC can have 
+their choice.
+
+
+Thanks,
+- Kever
+>
+> Cc: Quentin Schulz <foss+uboot@0leil.net>
+> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 > ---
-> 
->  board/toradex/verdin-am62/verdin-am62.c | 47 +++++++++++++++++++++++++
->  1 file changed, 47 insertions(+)
-> 
-> diff --git a/board/toradex/verdin-am62/verdin-am62.c b/board/toradex/verdin-am62/verdin-am62.c
-> index 4e912b5f32f..8b9db224069 100644
-> --- a/board/toradex/verdin-am62/verdin-am62.c
-> +++ b/board/toradex/verdin-am62/verdin-am62.c
-> @@ -13,10 +13,13 @@
->  #include <fdt_support.h>
->  #include <init.h>
->  #include <k3-ddrss.h>
-> +#include <power/regulator.h>
-
-In the !DM_REGULATOR case regulator.h assumes errno.h to be already included.
-This happens when compiling the R5 SPL.
-
-Will fix this in a v2 of the series.
-
-Max
-
->  #include <spl.h>
->  
->  #include "../common/tdx-cfg-block.h"
->  
-> +#define VDD_CORE_REG "buck1"
+>   arch/arm/mach-rockchip/px30/px30.c      |  7 ---
+>   arch/arm/mach-rockchip/rk3399/rk3399.c  |  6 ---
+>   arch/arm/mach-rockchip/spl-boot-order.c | 91 ++++++++++++++++++++++++++-------
+>   3 files changed, 73 insertions(+), 31 deletions(-)
+>
+> diff --git a/arch/arm/mach-rockchip/px30/px30.c b/arch/arm/mach-rockchip/px30/px30.c
+> index 7676adcb044..fc7456e680c 100644
+> --- a/arch/arm/mach-rockchip/px30/px30.c
+> +++ b/arch/arm/mach-rockchip/px30/px30.c
+> @@ -443,10 +443,3 @@ void board_debug_uart_init(void)
+>   #endif /* CONFIG_DEBUG_UART_BASE && CONFIG_DEBUG_UART_BASE == ... */
+>   }
+>   #endif /* CONFIG_DEBUG_UART_BOARD_INIT */
+> -
+> -#if defined(CONFIG_SPL_BUILD) && !defined(CONFIG_TPL_BUILD)
+> -const char * const spl_boot_devices[BOOT_DEVICE_NONE + 1] = {
+> -	[BOOT_DEVICE_MMC2] = "/mmc@ff370000",
+> -	[BOOT_DEVICE_MMC1] = "/mmc@ff390000",
+> -};
+> -#endif
+> diff --git a/arch/arm/mach-rockchip/rk3399/rk3399.c b/arch/arm/mach-rockchip/rk3399/rk3399.c
+> index 6929de5603c..801a4a6662e 100644
+> --- a/arch/arm/mach-rockchip/rk3399/rk3399.c
+> +++ b/arch/arm/mach-rockchip/rk3399/rk3399.c
+> @@ -175,12 +175,6 @@ void board_debug_uart_init(void)
+>   #endif
+>   
+>   #if defined(CONFIG_SPL_BUILD) && !defined(CONFIG_TPL_BUILD)
+> -const char * const spl_boot_devices[BOOT_DEVICE_NONE + 1] = {
+> -	[BOOT_DEVICE_MMC2] = "/mmc@fe320000",
+> -	[BOOT_DEVICE_MMC1] = "/mmc@fe330000",
+> -	[BOOT_DEVICE_SPI] = "/spi@ff1d0000/flash@0",
+> -};
+> -
+>   static void rk3399_force_power_on_reset(void)
+>   {
+>   	ofnode node;
+> diff --git a/arch/arm/mach-rockchip/spl-boot-order.c b/arch/arm/mach-rockchip/spl-boot-order.c
+> index 55d0976fb0a..f2cb17224e8 100644
+> --- a/arch/arm/mach-rockchip/spl-boot-order.c
+> +++ b/arch/arm/mach-rockchip/spl-boot-order.c
+> @@ -10,6 +10,7 @@
+>   #include <mmc.h>
+>   #include <spl.h>
+>   #include <asm/global_data.h>
+> +#include <dm/uclass-internal.h>
+>   
+>   #if CONFIG_IS_ENABLED(OF_LIBFDT)
+>   /**
+> @@ -163,30 +164,84 @@ void board_boot_order(u32 *spl_boot_list)
+>   		spl_boot_list[0] = spl_boot_device();
+>   }
+>   
+> -__weak const char * const spl_boot_devices[BOOT_DEVICE_NONE + 1] = {};
+> -
+> -const char *spl_decode_boot_device(u32 boot_device)
+> +int spl_decode_boot_device(u32 boot_device, char *buf, size_t buflen)
+>   {
+> -	const char *spl_bootdevice_ofpath = NULL;
+> +	struct udevice *dev;
+> +	int dev_num, ret;
 > +
->  DECLARE_GLOBAL_DATA_PTR;
->  
->  int board_init(void)
-> @@ -49,9 +52,37 @@ int board_fit_config_name_match(const char *name)
->  }
->  #endif
->  
-> +static u32 get_vdd_core_nominal(void)
-> +{
-> +	int core_uvolt;
+> +	if (boot_device == BOOT_DEVICE_SPI) {
+> +		/* Revert spl_node_to_boot_device() logic to find appropriate SPI flash device */
 > +
-> +	switch (k3_get_speed_grade()) {
-> +	case 'G':
-> +	case 'K':
-> +	case 'S':
-> +		core_uvolt = 750000;
-> +		break;
-> +	case 'T':
-> +	default:
-> +		core_uvolt = 850000;
-> +		break;
+> +		/*
+> +		 * Devices with multiple SPI flash devices will take the first SPI flash found in
+> +		 * /chosen/u-boot,spl-boot-order.
+> +		 */
+> +		const void *blob = gd->fdt_blob;
+> +		int chosen_node = fdt_path_offset(blob, "/chosen");
+> +		int elem;
+> +		int node;
+> +		const char *conf;
+> +
+> +		if (chosen_node < 0) {
+> +			debug("%s: /chosen not found\n", __func__);
+> +			return -ENODEV;
+> +		}
+> +
+> +		for (elem = 0;
+> +		     (conf = fdt_stringlist_get(blob, chosen_node,
+> +						"u-boot,spl-boot-order", elem, NULL));
+> +		     elem++) {
+> +			const char *alias;
+> +
+> +			/* Handle the case of 'same device the SPL was loaded from' */
+> +			if (strncmp(conf, "same-as-spl", 11) == 0) {
+> +				conf = board_spl_was_booted_from();
+> +				if (!conf)
+> +					continue;
+> +			}
+> +
+> +			/* First check if the list element is an alias */
+> +			alias = fdt_get_alias(blob, conf);
+> +			if (alias)
+> +				conf = alias;
+> +
+> +			/* Try to resolve the config item (or alias) as a path */
+> +			node = fdt_path_offset(blob, conf);
+> +			if (node < 0) {
+> +				debug("%s: could not find %s in FDT\n", __func__, conf);
+> +				continue;
+> +			}
+> +
+> +			ret = uclass_find_device_by_of_offset(UCLASS_SPI_FLASH, node, &dev);
+> +			if (ret) {
+> +				debug("%s: could not find udevice for %s\n", __func__, conf);
+> +				continue;
+> +			}
+>   
+> -	if (boot_device < ARRAY_SIZE(spl_boot_devices))
+> -		spl_bootdevice_ofpath = spl_boot_devices[boot_device];
+> +			return ofnode_get_path(dev_ofnode(dev), buf, buflen);
+> +		}
+> +
+> +		return -ENODEV;
 > +	}
-> +	return core_uvolt;
-> +}
+>   
+> -	if (spl_bootdevice_ofpath)
+> -		debug("%s: spl_bootdevice_id %x maps to '%s'\n",
+> -		      __func__, boot_device, spl_bootdevice_ofpath);
+> -	else
+> -		debug("%s: failed to resolve spl_bootdevice_id %x\n",
+> -		      __func__, boot_device);
+> +	dev_num = (boot_device == BOOT_DEVICE_MMC1) ? 0 : 1;
 > +
->  #if IS_ENABLED(CONFIG_OF_LIBFDT) && IS_ENABLED(CONFIG_OF_BOARD_SETUP)
->  int ft_board_setup(void *blob, struct bd_info *bd)
->  {
-> +	int core_uvolt;
-> +
-> +	core_uvolt = get_vdd_core_nominal();
-> +	if (core_uvolt != 850000) {
-> +		do_fixup_by_path_u32(blob, "/bus@f0000/i2c@20000000/pmic@30/regulators/buck1",
-> +				     "regulator-max-microvolt", core_uvolt, 0);
-> +		do_fixup_by_path_u32(blob, "/bus@f0000/i2c@20000000/pmic@30/regulators/buck1",
-> +				     "regulator-min-microvolt", core_uvolt, 0);
+> +	ret = blk_find_device(UCLASS_MMC, dev_num, &dev);
+> +	if (ret) {
+> +		debug("%s: could not find blk device for MMC device %d: %d\n",
+> +		      __func__, dev_num, ret);
+> +		return ret;
 > +	}
-> +
->  	return ft_common_board_setup(blob, bd);
->  }
->  #endif
-> @@ -86,6 +117,22 @@ static void select_dt_from_module_version(void)
->  
->  int board_late_init(void)
->  {
-> +	int ret;
-> +	int core_uvolt;
-> +	struct udevice *dev = NULL;
-> +
-> +	core_uvolt = get_vdd_core_nominal();
-> +	if (core_uvolt != 850000) {
-> +		/* Set CPU core voltage to 0.75V for slower speed grades */
-> +		ret = regulator_get_by_devname(VDD_CORE_REG, &dev);
-> +		if (ret)
-> +			pr_err("VDD CORE Regulator get error: %d\n", ret);
-> +
-> +		ret = regulator_set_value_force(dev, core_uvolt);
-> +		if (ret)
-> +			pr_err("VDD CORE Regulator value setting error: %d\n", ret);
-> +	}
-> +
->  	select_dt_from_module_version();
->  
->  	return 0;
-> -- 
-> 2.42.0
-> 
+>   
+> -	return spl_bootdevice_ofpath;
+> +	dev = dev_get_parent(dev);
+> +	return ofnode_get_path(dev_ofnode(dev), buf, buflen);
+>   }
+>   
+>   void spl_perform_fixups(struct spl_image_info *spl_image)
+>   {
+>   	void *blob = spl_image->fdt_addr;
+> -	const char *boot_ofpath;
+> -	int chosen;
+> +	char boot_ofpath[512];
+> +	int chosen, ret;
+>   
+>   	/*
+>   	 * Inject the ofpath of the device the full U-Boot (or Linux in
+> @@ -196,9 +251,9 @@ void spl_perform_fixups(struct spl_image_info *spl_image)
+>   	if (!blob)
+>   		return;
+>   
+> -	boot_ofpath = spl_decode_boot_device(spl_image->boot_device);
+> -	if (!boot_ofpath) {
+> -		pr_err("%s: could not map boot_device to ofpath\n", __func__);
+> +	ret = spl_decode_boot_device(spl_image->boot_device, boot_ofpath, sizeof(boot_ofpath));
+> +	if (ret) {
+> +		pr_err("%s: could not map boot_device to ofpath: %d\n", __func__, ret);
+>   		return;
+>   	}
+>   
+>
