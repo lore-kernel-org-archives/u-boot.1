@@ -4,60 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CB91C4707B
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 07:04:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08F37C47077
+	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 07:04:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8970D87B7A;
-	Thu, 18 Jan 2024 08:04:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5A53287B85;
+	Thu, 18 Jan 2024 08:04:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="e2HDRbTu";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="kTfm7Slo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C64DA87B7F; Thu, 18 Jan 2024 08:04:19 +0100 (CET)
-Received: from mail-m608.netease.com (mail-m608.netease.com [210.79.60.8])
+ id 64E6F877FE; Thu, 18 Jan 2024 08:04:33 +0100 (CET)
+Received: from mail-m25483.xmail.ntesmail.com (mail-m25483.xmail.ntesmail.com
+ [103.129.254.83])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83332877FE
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 08:04:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1572B87B8F
+ for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 08:04:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=e2HDRbTuv8TWy70Mq2YtEgHw+XuPfaDvTV4fT1AOlJ1+ZWB3xvtLJdzhnw/yyZw/4R0pmby+/j3IrwY6ITl5aD+aJBJSeiniFjxcX+ViL+mc/GsYuzwAPvumLmH2wLT3pU6jo8n0wDL03/7/T61WiOy/LsqW3OQ1inW8z1fH5Ik=;
+ b=kTfm7SloCZ3WAvqf0bTQ7Vl89Q5fEUS5qyEC/KLXxoh6RHhKe4hhEGjUR36vipTCHgZQKKwiI7D/O94YK1eLHu7AkopUxrYA3V4yaorbkWmCblutj5Lmn3XAJ2KqCbyYSeWmh1KbnJnNZcTW+dOpXRnCeRQmLjX2nwphPvWKUIg=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=5yxu7ZNUZnsZc29gnrxX2N7OV7TbITXUJNUAzq4OEvE=;
+ bh=HWK1eCLgyckbv19KbV2jAkOkgq2V8cK2QJw09aFRNU0=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11873.qiye.163.com (Hmail) with ESMTPA id 3DA32900177;
- Thu, 18 Jan 2024 15:04:14 +0800 (CST)
-Message-ID: <b059c7de-fe38-4252-b4cf-0cc2225c632f@rock-chips.com>
-Date: Thu, 18 Jan 2024 15:04:14 +0800
+ by mail-m11873.qiye.163.com (Hmail) with ESMTPA id CDC09900498;
+ Thu, 18 Jan 2024 15:04:23 +0800 (CST)
+Message-ID: <ec2869d5-5ee0-4a7c-b724-1e27ef563c65@rock-chips.com>
+Date: Thu, 18 Jan 2024 15:04:23 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/4] rockchip: rk3588-orangepi-5-plus: Build SPI image
+Subject: Re: [PATCH v2 4/4] rockchip: rk3588s-orangepi-5: Build SPI image
 Content-Language: en-US
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>
 Cc: John Clark <inindev@gmail.com>, Slawomir Stepien <sst@poczta.fm>,
  Quentin Schulz <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
 References: <20231117232442.1430276-1-jonas@kwiboo.se>
- <20231117232442.1430276-4-jonas@kwiboo.se>
+ <20231117232442.1430276-5-jonas@kwiboo.se>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20231117232442.1430276-4-jonas@kwiboo.se>
+In-Reply-To: <20231117232442.1430276-5-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQkwaQlZLSx5KTk1MHRgeTUxVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQx5MSVYaTB5JHxgZGEJMGkhVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8d1b6277f22eafkusn3da32900177
+X-HM-Tid: 0a8d1b629cfe2eafkusncdc09900498
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6P006Egw4MTwoDBAuIyguGE0U
- OhYKC01VSlVKTEtOTk1KT05OSUpPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTUpINwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MRQ6PDo5PDwZCBBKIykxGEMf
+ IkIKCzlVSlVKTEtOTk1KT01PT09DVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJT0NLNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,13 +77,10 @@ X-Virus-Status: Clean
 
 
 On 2023/11/18 07:24, Jonas Karlman wrote:
-> From: Slawomir Stepien <sst@poczta.fm>
->
 > Enable building of the SPI image, u-boot-rockchip-spi.bin, now that we
 > know what bootsource id values BootRom use for SPI flash on RK3588.
 >
-> Fixes: b51cf8bb09b6 ("board: rockchip: Add Xunlong Orange Pi 5 Plus")
-> Signed-off-by: Slawomir Stepien <sst@poczta.fm>
+> Fixes: 28c5f941edf7 ("board: rockchip: Add Xunlong Orange Pi 5")
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
@@ -92,15 +90,15 @@ Thanks,
 > v2:
 > - No change
 >
->   configs/orangepi-5-plus-rk3588_defconfig | 1 +
+>   configs/orangepi-5-rk3588s_defconfig | 1 +
 >   1 file changed, 1 insertion(+)
 >
-> diff --git a/configs/orangepi-5-plus-rk3588_defconfig b/configs/orangepi-5-plus-rk3588_defconfig
-> index 04736996217e..e1cd753a6d18 100644
-> --- a/configs/orangepi-5-plus-rk3588_defconfig
-> +++ b/configs/orangepi-5-plus-rk3588_defconfig
-> @@ -14,6 +14,7 @@ CONFIG_SF_DEFAULT_MODE=0x2000
->   CONFIG_DEFAULT_DEVICE_TREE="rk3588-orangepi-5-plus"
+> diff --git a/configs/orangepi-5-rk3588s_defconfig b/configs/orangepi-5-rk3588s_defconfig
+> index feb45a53853b..1e33c832ec67 100644
+> --- a/configs/orangepi-5-rk3588s_defconfig
+> +++ b/configs/orangepi-5-rk3588s_defconfig
+> @@ -13,6 +13,7 @@ CONFIG_SF_DEFAULT_MODE=0x2000
+>   CONFIG_DEFAULT_DEVICE_TREE="rk3588s-orangepi-5"
 >   CONFIG_ROCKCHIP_RK3588=y
 >   CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
 > +CONFIG_ROCKCHIP_SPI_IMAGE=y
