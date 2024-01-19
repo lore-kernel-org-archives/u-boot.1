@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ABB9C4725D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:10:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B2E7C47DD3
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:11:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56A7C87D47;
-	Fri, 19 Jan 2024 17:09:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D398787D42;
+	Fri, 19 Jan 2024 17:09:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DYzlqEQI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z4ySfY/X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD3EC87D44; Fri, 19 Jan 2024 17:09:15 +0100 (CET)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
+ id F04E987D42; Fri, 19 Jan 2024 17:09:19 +0100 (CET)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DB0687D42
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 17:09:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B0E687D4D
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 17:09:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-dc250cff65aso779562276.1
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 08:09:13 -0800 (PST)
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-5f8cf76ef5bso10947967b3.0
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 08:09:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705680552; x=1706285352; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1705680555; x=1706285355; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=S+fcS6OAKg0aVxG19grbVKC6aIyGsPEAJHAiA4bZgMM=;
- b=DYzlqEQIPszt8DyPp7Msw4AdnmqO78I9UTtRdxbOqUh8DGmrb38QQ2Q9ln/umavRrY
- snJ6RER6uSiA13d9FCE8AqA8xhh7VygH5jNzbsKjh0C7Brpsa3dKU63QrA8pQ2tYeM/s
- 0MktL51pMWq7DqWgS73WRoI8iPv8B2Tta2lCQ=
+ bh=0NJCxOnfDsVlY9+M6e5rkAxZoJ92IOvH6zk6bqDVmhU=;
+ b=Z4ySfY/XmZSCbrNZSpbAaNfuKhLDQcf4FUe6iyDXyE/9Xg9t5AReLuLjspv+DKbusL
+ eItBdkl7v60t1/WNSSG+n1bE3yFPPYlI2A3G60AUsrUZXIJwiGMVHvAkjGfUPezBgTy1
+ yrmJlBUfshMRP2Y+Vdy/nbp2Izr6Veidblsxc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705680552; x=1706285352;
+ d=1e100.net; s=20230601; t=1705680555; x=1706285355;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=S+fcS6OAKg0aVxG19grbVKC6aIyGsPEAJHAiA4bZgMM=;
- b=KNCqKUrpzQpMw9jFcLPeBGidd3Jy9CePCqjKzIX4CaW/o1a5oOP2RfYBoaW+/kBOfK
- g3Pj0Y1adVk5u47eR100kAWkxioQ8LEqWXIgoBsDK3n6gVHcxqQ/reHIZ4YAbNpGOtoF
- cJ1xQ0cIgAT57RnNaQwnnBacWs6glZi29WtwY7fuPMsMdZYxPYDqaAcqZHX6rl8ADFSH
- GoDz/yVCujQjBPlgmrAje0WTGZvl3H0xc9q08JKEQiPC7eGHrHUMwNmj4uNn11dxM4tv
- vXu7VyO1VhF6+H1iHqV2Nkv8t1Cb+2os0rNCQBY8m+tjcYUZOwwVTUOVdi9gO+322VAd
- xBEA==
-X-Gm-Message-State: AOJu0Yx/3PfaVqMZTu/47P0XmS/pBzA1lJmjMzB8VzvyVcufAH3FjAI1
- YV1ri86kBvvzkcAVJc2e5rSuAG36hvM7yQCugMAwbHWv1lCy1cH+LgmWgjbbAHo=
-X-Google-Smtp-Source: AGHT+IHm6N8t2Q6wm8cZyGg8XelbJX1tPmollkt+NI6Kf9veZr2T7OfDEIP/5lO5rCmfGuXZwOyisg==
-X-Received: by 2002:a05:6902:2484:b0:dc2:403f:e3dc with SMTP id
- ds4-20020a056902248400b00dc2403fe3dcmr136546ybb.1.1705680551351; 
- Fri, 19 Jan 2024 08:09:11 -0800 (PST)
+ bh=0NJCxOnfDsVlY9+M6e5rkAxZoJ92IOvH6zk6bqDVmhU=;
+ b=M19NBUxQbpCDVb00A5l9rq/f9iRmM9mctJgBDxyr9/AxVMPL41yxFM4w9PygDW11BD
+ AzoC7AMkqj7P3BTd7gKaJMNKeqVC3h6gbC76LfXh4DgzkB4Ag574h/hZCHQipuZZtaJT
+ Zr5VeO5FFRRshY0GnSSJMKxcWyKo66hEaCpQbhn9lXvKOZmkk4cZrE5oXrn/po5MFcNY
+ YAtdwuiHIQ9ifzgQZEOIH53Pgzon+yca0wgvVRiI9JvCsmRfaQHVsTkG+IEnEgu4y1Tm
+ 00VT2lAR9sM+ig7xJHdcFxQQ9i6IJQDyDgkEGpyNUcmydFKBiZHiPqGbQjRGkxpfNNnN
+ kzaw==
+X-Gm-Message-State: AOJu0Yx96AWs0aTumHWF7hYiZL5ISAfqjG6g3HTs4JsphFATHSml1gdm
+ tRBVffPMWfo8Uh8nSY9h5IcHIytI3aCpxqcX09Cb06E8yhFqdSDGp/5xLo7siQLauGkyZmTbRjW
+ j
+X-Google-Smtp-Source: AGHT+IEbVm7PzbVDE4hNKWKl32YPknluo1ifFPp5ZyBIawWn9qiBXSxILUM10nDFb/vKDBJG9wstmw==
+X-Received: by 2002:a81:8201:0:b0:5ff:86ea:47be with SMTP id
+ s1-20020a818201000000b005ff86ea47bemr123026ywf.92.1705680555424; 
+ Fri, 19 Jan 2024 08:09:15 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- g138-20020a815290000000b005ff8d24601fsm1195112ywb.124.2024.01.19.08.09.10
+ g189-20020a0df6c6000000b005a4da74b869sm7624007ywf.139.2024.01.19.08.09.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jan 2024 08:09:10 -0800 (PST)
-Date: Fri, 19 Jan 2024 11:09:09 -0500
+ Fri, 19 Jan 2024 08:09:15 -0800 (PST)
+Date: Fri, 19 Jan 2024 11:09:13 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Peter Robinson <pbrobinson@gmail.com>
-Subject: Re: [PATCH 1/2] smbios: shorten sysinfo_str declarations and use
-Message-ID: <20240119160909.GW12635@bill-the-cat>
+Subject: Re: [PATCH 2/2] smbios: fix matching issues for table types
+Message-ID: <20240119160913.GX12635@bill-the-cat>
 References: <20240111143936.983448-1-ilias.apalodimas@linaro.org>
+ <20240111143936.983448-2-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="F9aiaq9oKNgA0ZVN"
+ protocol="application/pgp-signature"; boundary="jQprGdx/NxbwQoD/"
 Content-Disposition: inline
-In-Reply-To: <20240111143936.983448-1-ilias.apalodimas@linaro.org>
+In-Reply-To: <20240111143936.983448-2-ilias.apalodimas@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,15 +95,21 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---F9aiaq9oKNgA0ZVN
+--jQprGdx/NxbwQoD/
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 11, 2024 at 04:39:35PM +0200, Ilias Apalodimas wrote:
+On Thu, Jan 11, 2024 at 04:39:36PM +0200, Ilias Apalodimas wrote:
 
-> sysinfo_str is a bit too long and makes indentation weird. Shorten it
-> to si_str.
+> commit 738b34668f28 ("smbios: Fallback to the default DT if sysinfo nodes=
+ are missing")
+> allowed the code to fallback and fill in SMBIOS tables with properties
+> from the compatible and product nodes of the DT, in case the
+> 'smbios,sysinfo' node is missing.
+> That works fine for Type1/2 tables, but for other types we need to
+> match the smbios,sysinfo subnode name as well. So add it to the
+> smbios_ctx and check it during the sysinfo <-> DT mathcing
 >=20
 > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
@@ -110,22 +118,22 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---F9aiaq9oKNgA0ZVN
+--jQprGdx/NxbwQoD/
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWqnqUACgkQFHw5/5Y0
-tyzhIAwAlcGSBCOIADaO8PWL+0HUJpf2ZoARXd4tLD5KUXv69/gK2k+8Xg4Yk6p5
-NzTpzl3QNur0acreNMs1d/5WOUNZUPtB8MCpzb87c8zVEcfrBABB9lMWkBr668FT
-FghxevMoqmllvSvnq9ve7CuzYdNrtWAiKl+7FCRA9M22v6OF0lHkJ7UPFkQrxQJh
-iOuv0enJ8c/zD3TIZIP4lUAWwpaE/EfgJoycsxihDBjpz79AZG+EfWNXhGkFqP0E
-6J2seiWUh3U0bovNNNl1MMgyfI3gg4wEx5XyD5J+MS25+iaozEdPNrgmO99BWFaK
-SVxb7097sz5d0WGRqKvAc1KHzpraw3N8SAEjAGaXQrrAeaL4AxE4rG/pWCyYoXzA
-8aXIEw404643YvbgjlkmUmXItI4ZSsEkdU/nJKTcc6Bkh35S6Tou5NlN12Vs5x7s
-JON9BSPKmHOY3IwYyY91AnmDYS0mk7bqYcVJpNqK0jdlZYI4kivTlXM4ADRsTdDy
-scL177O+
-=z34k
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWqnqkACgkQFHw5/5Y0
+tyzKOwv/VZTrZpnZ661+vbpArCB6fmnTPL8WryLl0IErvek2FkwgolWHR9vBPeK4
+mEUq6/3F+lhUO5Gc/tzoGoVNa6NrnAhYVJstZtr/gwD5esmVrFxFeWUrs2oX73/4
+ubQOd6J7kNF0RzfeGp/VGcQx19xaYfHsA6N/ub0Tr532eOVUeVnMDfzsPVXGd8h0
+DP90o1K3xYwnmAEo5wTVBzmmdzrc38ckX/RWnIx0YEKnyngRdwbJeq+rt39qA472
+fyozJJ8H95QZjsLJZbZiBcTFv0N5mhDSUx7f07kAtXQe/exjd9MWmfYaBVHfS/RH
+HeWWCil1QHDEo53qoJ3kWxY/qlA/+RSRzunmq9Hssvor+lBWWTNqqydI+YwFRF0h
++zdH6Nb4A2Y3XNQcSLFTokIeVBPOIZJOLoCzp3SMeec9kbqCApL/Dlr7T8ST6mky
+xlqmC9SgcFKgTXuJ5Mxvmv0FCjZrQgkSRi87tyJMWUnNjjp8m+Y2MSbkbzn8RVbY
+/Ocs+71H
+=gJRw
 -----END PGP SIGNATURE-----
 
---F9aiaq9oKNgA0ZVN--
+--jQprGdx/NxbwQoD/--
