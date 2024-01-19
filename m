@@ -4,77 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B106AC4725D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:13:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9773AC47DD3
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:13:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2848D87D89;
-	Fri, 19 Jan 2024 17:10:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 93F4387D8F;
+	Fri, 19 Jan 2024 17:12:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=jens-maus.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="R2Phni+I";
+	dkim=pass (1024-bit key; unprotected) header.d=jens-maus.de header.i=@jens-maus.de header.b="qdg0n4+d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02B5F87D87; Fri, 19 Jan 2024 17:10:14 +0100 (CET)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C7E9387D8C; Fri, 19 Jan 2024 17:12:25 +0100 (CET)
+Received: from mail.light-speed.de (mail.light-speed.de [85.214.38.116])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E79C887D88
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 17:10:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B82FB87CF4
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 17:12:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=jens-maus.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-dc21d7a7042so872701276.2
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 08:10:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705680610; x=1706285410; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=znb2SgwRDUK0IwcgqWvhMtJeIsO2H2JLcWByQXN7iYY=;
- b=R2Phni+If0pM2Whip+GxNhjjtp2pJYNJvQtQJZf2Mtmu11/0J1Y6rOAigYTIhk0kcD
- zTtphV3etgaQ6Kj0uRZct9Koo7KEaIweVCdtk8mCM6435za79SdbjwAsYFWd/im1jVy1
- OaQzJH0YfajCSRJIGpT1w6MWKoDLv9HV0JAMk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705680610; x=1706285410;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=znb2SgwRDUK0IwcgqWvhMtJeIsO2H2JLcWByQXN7iYY=;
- b=OVBPJOFASb6UQn9J8x/R3/zBF7ypmcLoOLShzYwe/MGGWeDZPymelBorU4FoQ0Ct19
- /h7YG1kt6/40KGJ3jFY+cQrCceIrFXvDc74I7JyreW7lhaA2GeU2//TLuLGGANti1/Kc
- dpVDP8YPDZkssm2YoEMyCGSAKpWnPsL+HgWszmQTixcyNXaFU1oxTj/f8JhO25CBTj0a
- PNLg+iY7OAtGTyEKJyBpbcYxKAZPrpJfH8+9pYPROtrmBxDITKJCy5JMbERPykiKLXdl
- g6cqxBi8hvQRWgS4riP40HWUHuxjr0Xc22FUSRTGknbaY47fuBfKnJPbecPaoEJeFwzg
- 6c8w==
-X-Gm-Message-State: AOJu0YyJenPydlsjymmmmKJF6RlMtZNr8h8HRgmghHAeBUko2KxhG5bL
- cBdk0CdYgl+QGX811O7ilnNYP3oRfIB1MuLeCFnpbGgmI13M5zUz3ykDk4OyivYsQl09FfRdqZ8
- q
-X-Google-Smtp-Source: AGHT+IGrP8SxX3rTpkQoRpxN0JDKfjIO54W/pInmuRZwxk+dJZW3k+1XBhdNUMskvF1sI3URfWiSVg==
-X-Received: by 2002:a25:dc03:0:b0:dbe:9509:141c with SMTP id
- y3-20020a25dc03000000b00dbe9509141cmr116692ybe.30.1705680610592; 
- Fri, 19 Jan 2024 08:10:10 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- v8-20020a25fc08000000b00dc23059cbfasm2552957ybd.42.2024.01.19.08.10.10
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jan 2024 08:10:10 -0800 (PST)
-Date: Fri, 19 Jan 2024 11:10:08 -0500
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: Re: [PATCH] getchar(): Correct usage
-Message-ID: <20240119161008.GK12635@bill-the-cat>
-References: <20240109225716.3520037-1-trini@konsulko.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="UUTQ95XIacQGsr3S"
-Content-Disposition: inline
-In-Reply-To: <20240109225716.3520037-1-trini@konsulko.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ spf=pass smtp.mailfrom=mail@jens-maus.de
+Received: from smtpclient.apple (unknown
+ [IPv6:2a02:810a:8280:47aa:8cb:7c21:219f:c18e])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.light-speed.de (Postfix) with ESMTPSA id 5390F3D48651;
+ Fri, 19 Jan 2024 17:12:23 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jens-maus.de;
+ s=mail; t=1705680743;
+ bh=ta4jKGn3ikMJh6VuD+ClGXomJfjFD255t2viTsVWhPk=;
+ h=Subject:From:In-Reply-To:Date:Cc:References:To;
+ b=qdg0n4+dU9xTMd/R+FGy9aCMCuB7F+Nhct33t1kkJlXMjwX5ZvlePgxHfwXExDKGT
+ +NBdxClNYD+B0EO7V24dXcyg3wn+LX3SEZwOcrb7Y3YPZd6bD+xnncdvkboe2W1dur
+ erbifCVU7T5gfrhN0QrOLIYwE5+b/uz/HF1Svxd0=
+Content-Type: text/plain;
+	charset=utf-8
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.300.61.1.2\))
+Subject: Re: [PATCH v4 0/6] rpi5: initial support
+From: Jens Maus <mail@jens-maus.de>
+In-Reply-To: <E7BFDAEE-00A9-463A-AF73-75101AFF2BC6@suse.de>
+Date: Fri, 19 Jan 2024 17:12:12 +0100
+Cc: Stefan Wahren <wahrenst@gmx.net>,
+ u-boot@lists.denx.de
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <FB66DFF3-03B0-4DA5-8916-AB80CA6C6EB5@jens-maus.de>
+References: <454FB8E4-52A8-482D-8671-5650F8C4773C@suse.de>
+ <A26CEBAE-9950-4304-B3A2-1BAB4035437A@jens-maus.de>
+ <zmxxqxlbhdhngu36ft4yrqxtjkmvalvhbgbl2uzsj2jgnq7zje@qtncpq2nss57>
+ <DCAD0173-2377-4B89-92EB-F38ED1CA938B@jens-maus.de>
+ <03bbe9ad-7cc6-491d-8bd9-631f1cf04f39@gmx.net>
+ <418F8AAE-136A-44A0-80C3-D01FFE00EC2E@jens-maus.de>
+ <sjmi6dftbgx56isfyjtaryehzq2iollwxm2etlspiygehh3n6v@k4ws56nsbgfn>
+ <6C9E5E0C-9C27-45A4-886F-8B8C641EF7A3@jens-maus.de>
+ <ejituxf7ggiu2ciswrwoeqqjytb7mj2vn6gkxllywtnlm4aefi@br4zq7rfytlo>
+ <3FB75D28-9BF9-4518-8BF1-519C884516F7@jens-maus.de>
+ <fa7j66z5r7pul6zp5ljcntrb7xbazqxesz6wysrslrpxxhpafc@krztduo6pjm6>
+ <25AB43C7-829F-4F62-AC8E-3284B22ACB03@jens-maus.de>
+ <E7BFDAEE-00A9-463A-AF73-75101AFF2BC6@suse.de>
+To: "Ivan T. Ivanov" <iivanov@suse.de>
+X-Mailer: Apple Mail (2.3774.300.61.1.2)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,44 +81,30 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---UUTQ95XIacQGsr3S
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Jan 09, 2024 at 05:57:16PM -0500, Tom Rini wrote:
-
-> The function getchar() returns an 'int' and not a 'char'. Coverity notes
-> that "Assigning the return value of getchar to char ... truncates its val=
-ue."
-> and so for the most part we can resolve this easily by using 'int' as
-> intended, and often used throughout the codebase. A few places are not
-> so simple and would require further re-architecting of the code in order
-> to change this, so we leave them be.
+> Am 19.01.2024 um 15:24 schrieb Ivan T. Ivanov <iivanov@suse.de>:
 >=20
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+>> On 19 Jan 2024, at 16:08, Jens Maus <mail@jens-maus.de> wrote:
+>>=20
+>> On the HDMI port, right? But what about the serial UART output?=20
+>=20
+> Yes, I can see serial output from U-Boot. I am using one of these
+> simple USB<->UART cables. You can see serial output when you boot
+> with RPiOS, when you use "Raspberry Pi Debug Probe=E2=80=9D, right?
 
-Applied to u-boot/master, thanks!
+Yes, when booting up RPiOS I can first see the same serial debug output =
+regarding the rpi boot loader until the same =E2=80=9ENOTICE: BL31: =
+=E2=80=A6=E2=80=9C lines. Then RPiOS comes up and in the end I get an =
+interactive serial console login "raspberrypi login:=E2=80=9C prompt on =
+the RaspberryPi Debug Probe connection to that special UART port on the =
+rpi5 pcb.
 
+So you say with your own u-boot.bin you see serial U-Boot output after =
+that =E2=80=9ENOTICE: BL31: =E2=80=A6=E2=80=9C lines? On that special =
+UART port on the rpi5 or on the UART on the GPIO header?
+
+regards,
+jens
 --=20
-Tom
+Jens Maus, Dresden/Germany
+http://jens-maus.de/
 
---UUTQ95XIacQGsr3S
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWqnuAACgkQFHw5/5Y0
-tyw2sQv/RRsLFk7zLqTn1pPABZD9mrCAMlIEdl22wYkkPp1rk/ux82EwKvWzCpG5
-BU5IJgkwIMBLpdHwz35GWXRDyHgk4j73JhsX4AIKP6IQmtcFw8yRRvDfZ54EBObE
-0f1WNWzhVQa/GOukh0CNM02bcHW2f2qq1WnlT7J4cbDkHkVNzD0fpUEqq5LrcdDD
-Q5hVEbfVROO+Kv0cH0VwXBUEWpfs4cubLNre3tDH2cSUMqZCw9laQ7+XKnHsEbqK
-GppmhCQ3KlO6U644k+jhFKKlSgQeNF1bzOV2PE2YPbKzJvyWvpGsaG6Pt3FxsP1q
-IkxkElWZiSX8XzJkZKyyiqSOb1kqsmpGTgRbcnDaiN1crAhOM1B2/t5p+x7ww5Ao
-wxOTmmgYc/l4zoPdD3Y84HDXPexGeNXP0PTsgpYxz9uiMEZ2UATEmli4YE9005SZ
-PUj6FUSVOx6+DegXzM5d/yqqwaKELXmm33YK8smG+ILZk0hh9HXBMt8ojTJaaVyP
-t8Im2C8m
-=RBTD
------END PGP SIGNATURE-----
-
---UUTQ95XIacQGsr3S--
