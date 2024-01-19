@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3E26C47DD3
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 17:51:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3923C4725D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 17:52:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D20FF87D85;
-	Fri, 19 Jan 2024 18:51:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8E30F87D38;
+	Fri, 19 Jan 2024 18:51:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UvDY3MZP";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uXeydlEI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5C2787D00; Fri, 19 Jan 2024 18:51:37 +0100 (CET)
+ id E177487D00; Fri, 19 Jan 2024 18:51:41 +0100 (CET)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E47987D8E
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 18:51:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DABC887D38
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 18:51:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40JHpPS0087078;
- Fri, 19 Jan 2024 11:51:25 -0600
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40JHpWhu087099;
+ Fri, 19 Jan 2024 11:51:32 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1705686685;
- bh=LxyhgyXywq93TkrPAC9R8p6Uz5pP8md+eQkP4AHrZbA=;
+ s=ti-com-17Q1; t=1705686692;
+ bh=GMbIFqSjV6AvBPS+51QjV3xydUUTtQWEBItZKy4qIsc=;
  h=From:To:Subject:Date:In-Reply-To:References;
- b=UvDY3MZPP1abmHDfXE0mbSuP/pPrhL3H6jRJ4BLXbrDgvzaKRMcDQFaJii4gAp3kJ
- SHrgUPyJr4ddSuOUJ1H2bFqYaIyVyUOD5KQWszswTuSsuMXc0zfI28TZutsfXTJBfy
- mCK3cHLHa7rXXsMR6YKA8Krk53cMzTDzdnHwwl9Q=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40JHpPmR025864
+ b=uXeydlEIVLz0I8F4oCOVNqNbywpt+moh6GeTiUB5Ec1DUFuAjnXyFEWudQQO7sDru
+ Kbzb3kox1UxPVygICvvA6FKUHYftiDQ92kB20qb6HgKtSlcrZ34BupmCEybaF2Ps3B
+ +GObCjuTCeSLWPPdmnwmbDa9/Bi0bcuW/B7kau50=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40JHpWES025962
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 19 Jan 2024 11:51:25 -0600
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 19 Jan 2024 11:51:32 -0600
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 19
- Jan 2024 11:51:25 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 11:51:31 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 19 Jan 2024 11:51:24 -0600
+ Frontend Transport; Fri, 19 Jan 2024 11:51:31 -0600
 Received: from TI.dhcp.ti.com (ti.dhcp.ti.com [10.24.68.115] (may be forged))
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40JHoiDR054787; 
- Fri, 19 Jan 2024 11:51:18 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40JHoiDS054787; 
+ Fri, 19 Jan 2024 11:51:25 -0600
 From: Apurva Nandan <a-nandan@ti.com>
 To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
  Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
@@ -64,9 +64,9 @@ To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
  Marek Vasut <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
  <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
  <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
-Subject: [PATCH v8 05/16] arm: mach-k3: Sort SoC JTAG_ID entries
-Date: Fri, 19 Jan 2024 23:20:32 +0530
-Message-ID: <20240119175043.3904751-6-a-nandan@ti.com>
+Subject: [PATCH v8 06/16] soc: ti: k3-socinfo: Add entry for J784S4 SoC
+Date: Fri, 19 Jan 2024 23:20:33 +0530
+Message-ID: <20240119175043.3904751-7-a-nandan@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240119175043.3904751-1-a-nandan@ti.com>
 References: <20240119175043.3904751-1-a-nandan@ti.com>
@@ -90,36 +90,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sort JTAG_IDs for K3 SoCs in hardware.h in alphabetical order.
+Add support for J784S4 SoC Identification.
 
+Signed-off-by: Hari Nagalla <hnagalla@ti.com>
 Signed-off-by: Apurva Nandan <a-nandan@ti.com>
 Reviewed-by: Nishanth Menon <nm@ti.com>
 ---
- arch/arm/mach-k3/include/mach/hardware.h | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ arch/arm/mach-k3/include/mach/hardware.h | 1 +
+ drivers/soc/soc_ti_k3.c                  | 3 +++
+ 2 files changed, 4 insertions(+)
 
 diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
-index 0cf1e12aaa..7e143c6bdc 100644
+index 7e143c6bdc..74692b745a 100644
 --- a/arch/arm/mach-k3/include/mach/hardware.h
 +++ b/arch/arm/mach-k3/include/mach/hardware.h
-@@ -43,13 +43,13 @@
- #define JTAG_ID_VARIANT_MASK	(0xf << 28)
- #define JTAG_ID_PARTNO_SHIFT	12
- #define JTAG_ID_PARTNO_MASK	(0xffff << 12)
-+#define JTAG_ID_PARTNO_AM62AX   0xbb8d
-+#define JTAG_ID_PARTNO_AM62X	0xbb7e
-+#define JTAG_ID_PARTNO_AM64X	0xbb38
- #define JTAG_ID_PARTNO_AM65X	0xbb5a
--#define JTAG_ID_PARTNO_J721E	0xbb64
+@@ -50,6 +50,7 @@
  #define JTAG_ID_PARTNO_J7200	0xbb6d
--#define JTAG_ID_PARTNO_AM64X	0xbb38
-+#define JTAG_ID_PARTNO_J721E	0xbb64
+ #define JTAG_ID_PARTNO_J721E	0xbb64
  #define JTAG_ID_PARTNO_J721S2	0xbb75
--#define JTAG_ID_PARTNO_AM62X	0xbb7e
--#define JTAG_ID_PARTNO_AM62AX   0xbb8d
++#define JTAG_ID_PARTNO_J784S4	0xbb80
  
  #define K3_SOC_ID(id, ID) \
  static inline bool soc_is_##id(void) \
+diff --git a/drivers/soc/soc_ti_k3.c b/drivers/soc/soc_ti_k3.c
+index 355a5368dd..d176980915 100644
+--- a/drivers/soc/soc_ti_k3.c
++++ b/drivers/soc/soc_ti_k3.c
+@@ -45,6 +45,9 @@ static const char *get_family_string(u32 idreg)
+ 	case JTAG_ID_PARTNO_AM62AX:
+ 		family = "AM62AX";
+ 		break;
++	case JTAG_ID_PARTNO_J784S4:
++		family = "J784S4";
++		break;
+ 	default:
+ 		family = "Unknown Silicon";
+ 	};
 -- 
 2.34.1
 
