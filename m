@@ -4,65 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40BBCC4725D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 21:27:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F28ACC4725D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 21:33:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48E20879B5;
-	Fri, 19 Jan 2024 22:27:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=jens-maus.de
+	by phobos.denx.de (Postfix) with ESMTP id 20E6687A2A;
+	Fri, 19 Jan 2024 22:33:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=jens-maus.de header.i=@jens-maus.de header.b="NA5Ex6mX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KmEurgHP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAB0587B30; Fri, 19 Jan 2024 22:27:06 +0100 (CET)
-Received: from mail.light-speed.de (mail.light-speed.de [85.214.38.116])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4E2EE87A2A; Fri, 19 Jan 2024 22:33:13 +0100 (CET)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93D0A879B2
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 22:27:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=jens-maus.de
+ by phobos.denx.de (Postfix) with ESMTPS id 2FA8687920
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 22:33:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mail@jens-maus.de
-Received: from smtpclient.apple (unknown
- [IPv6:2a02:810a:8280:47aa:e1ca:9c29:360a:5e29])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.light-speed.de (Postfix) with ESMTPSA id E83AE3D48651;
- Fri, 19 Jan 2024 22:27:03 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jens-maus.de;
- s=mail; t=1705699624;
- bh=IJz19PLSXXfNbvnswVW35PJnEMNDFshQasol5eCqiLc=;
- h=Subject:From:In-Reply-To:Date:Cc:References:To;
- b=NA5Ex6mXcJ4MdZFKqNlEgn8GaTrN5Fj3Vf85YUSV6TT9gM70Bt9bZ1sp9efMjmYXB
- 3642Xh6L46AgOGJlRnM+l9cqCCxfIwmIIzEFvWQov3qoSkL9DU5p6QkrixxUJklPAX
- 4ufJ9ySXvBM+Hn1SowpwNVU57LvqiIDixQHyOflE=
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.300.61.1.2\))
-Subject: Re: [PATCH v4 0/6] rpi5: initial support
-From: Jens Maus <mail@jens-maus.de>
-In-Reply-To: <489FBAE5-501A-49F6-894D-58BE5C5429CC@jens-maus.de>
-Date: Fri, 19 Jan 2024 22:26:52 +0100
-Cc: Stefan Wahren <wahrenst@gmx.net>,
- u-boot@lists.denx.de
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <A0746263-646C-40C6-A2A6-659C39385E8B@jens-maus.de>
-References: <03bbe9ad-7cc6-491d-8bd9-631f1cf04f39@gmx.net>
- <418F8AAE-136A-44A0-80C3-D01FFE00EC2E@jens-maus.de>
- <sjmi6dftbgx56isfyjtaryehzq2iollwxm2etlspiygehh3n6v@k4ws56nsbgfn>
- <6C9E5E0C-9C27-45A4-886F-8B8C641EF7A3@jens-maus.de>
- <ejituxf7ggiu2ciswrwoeqqjytb7mj2vn6gkxllywtnlm4aefi@br4zq7rfytlo>
- <3FB75D28-9BF9-4518-8BF1-519C884516F7@jens-maus.de>
- <fa7j66z5r7pul6zp5ljcntrb7xbazqxesz6wysrslrpxxhpafc@krztduo6pjm6>
- <25AB43C7-829F-4F62-AC8E-3284B22ACB03@jens-maus.de>
- <E7BFDAEE-00A9-463A-AF73-75101AFF2BC6@suse.de>
- <FB66DFF3-03B0-4DA5-8916-AB80CA6C6EB5@jens-maus.de>
- <dvpwizpui6a52dfmy57ghv4zmplvgqvow6oec7x5opwzh63zzl@jehyglofr6yh>
- <489FBAE5-501A-49F6-894D-58BE5C5429CC@jens-maus.de>
-To: "Ivan T. Ivanov" <iivanov@suse.de>
-X-Mailer: Apple Mail (2.3774.300.61.1.2)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ralph.siemsen@linaro.org
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6817a470730so6041596d6.3
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 13:33:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1705699990; x=1706304790; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Q9Irad7bq9Na7d+aOFd0r7sLjoV9DLczJTXO97vMqPg=;
+ b=KmEurgHPC8BgEGvLkFnx9b7yBUfXRwVBDKBT+wIGcR7CIsLcUmhRsRlagNccDQTzkB
+ 6ymLrS/RNzoxD1E55QEZNzHPq6zqfiR/HPi9kro0Scnkjm0t/y4bKNiQ0red9DA+kSaC
+ TXr61qYgqiqDYwkeTr9wwNa87YMCkwdo1UrOnd5IDzbyphACm2UyYKOVGerFz4VaopMq
+ 1CmbAyZnNEfxz2RdjcmNA2d3uQhRfzLlW7BTOYhJM2JY1n4BzmdYeikHnfSBaIQbDgpL
+ 1JPxy50UZtdMcVMgf16pjuzdjU3Kb/GGnDrWhOBaJqOp0T0AnUtkDsN8KKk4DWQTwT3V
+ 0smA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705699990; x=1706304790;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Q9Irad7bq9Na7d+aOFd0r7sLjoV9DLczJTXO97vMqPg=;
+ b=jeTIwy+6V9DR+LtMz5/5/rEP8DdnUMvOEz2BGMLs1a9pPFa2r5clk14gUp1ca+DDRp
+ Z6uQJyGb43AEni3aDPtxbivbOHtlKIGd7OB7QwXaHw3/GIRxOSDlHMefLBEJlK+GzONo
+ Mtp83DXM2U2nStWylcrKgFtWkg2NVw6wnQPr3dKxY4FabIcHa8RN0kUPWHkovovDlcG6
+ RIhjsBC5w2oRqyjmoKTZXLhPn77+5vGrgY10Y8gHi2ZE8uP47FCsfdRVctlsnKAYJODi
+ cPLIbx1ygnaOMMmS0nKO3Oi8eyxt82Tuc1jumHfcoWLiCkEEMzEi1UKB4Txjs4FXdAsS
+ AtCw==
+X-Gm-Message-State: AOJu0YyXTmIulr/8jKMvyQ2f8QBrTGqWzZRv8w1Wq3yqFwAZeJgamPBo
+ mHba9YCieUwcVxS4yLK9uRhF+BZY+3Q9o+tYP3YHYJEWwUddsq83E0bBjQQMpQ4=
+X-Google-Smtp-Source: AGHT+IFBE/kNuBTTrVTvnR9xFNdx31u/CzvdONM1523lpMnnnJSPg8uFVJ4HJUGf0P6VekZwUxSReA==
+X-Received: by 2002:ad4:5ecd:0:b0:681:7ba3:3649 with SMTP id
+ jm13-20020ad45ecd000000b006817ba33649mr656721qvb.63.1705699989923; 
+ Fri, 19 Jan 2024 13:33:09 -0800 (PST)
+Received: from maple.home ([70.51.77.95]) by smtp.gmail.com with ESMTPSA id
+ l15-20020ad44bcf000000b00684d962f0acsm39147qvw.83.2024.01.19.13.33.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 19 Jan 2024 13:33:09 -0800 (PST)
+From: Ralph Siemsen <ralph.siemsen@linaro.org>
+To: joe.hershberger@ni.com,
+	u-boot@lists.denx.de
+Cc: Ralph Siemsen <ralph.siemsen@linaro.org>
+Subject: [PATCH] env: sf: report malloc error to caller
+Date: Fri, 19 Jan 2024 16:32:17 -0500
+Message-Id: <20240119213216.3811402-1-ralph.siemsen@linaro.org>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,58 +88,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+In the non-redundant code for env_sf_save(), a failure to malloc() the
+temporary buffer produces the following output:
 
-> Am 19.01.2024 um 17:53 schrieb Jens Maus <mail@jens-maus.de>:
->=20
->> Am 19.01.2024 um 17:29 schrieb Ivan T. Ivanov <iivanov@suse.de>:
->>=20
->>> So you say with your own u-boot.bin you see serial U-Boot output =
-after that =E2=80=9ENOTICE: BL31: =E2=80=A6=E2=80=9C lines? On that =
-special UART port on the rpi5 or on the UART on the GPIO header?
->>>=20
->>=20
->> Yes :-) See attached log file.
->=20
-> Really strange that in your case U-Boot seems to come up nicely and =
-outputs something on the debug UART. Here definitely not. And the only =
-difference in the rpi boot loader log outputs I could spot between yours =
-and mine is:
+    Saving Environment to SPIFlash... OK
 
-Replying to myself after having analysed this a bit further this =
-evening...
+This is misleading as the flash has neither been erased nor written.
 
-> [=E2=80=A6]
->=20
-> So lets see if after you updated to a more recent rpi eeprom U-boot is =
-still able to boot=E2=80=A6
+Fix it to return an error to the caller, so the output will be:
 
-I actually do have some good and bad news:
+    Saving Environment to SPIFlash... Failed (-12)
 
-1. Good news: I got u-boot finally showing up with my RaspberryPi5 8GB =
-both on the HDMI and on the serial debug UART like you reported.
+Note that there is another copy of env_sf_save() in the same file, for
+handling redundant environment, and it already has the same logic.
 
-2. Bad news: I actually got it working by downgrading the rpi-eeprom to =
-the same 2023/10/30 (VERSION:30de0ba5) version like you have.
+Signed-off-by: Ralph Siemsen <ralph.siemsen@linaro.org>
+---
+ env/sf.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-So the issue I saw/reported seems to be somehow related/limited to newer =
-rpi-eeprom versions. Looking at my previous diff on the rpi bootloader =
-log output differences, the potentially relevant piece might be the "M.2 =
-PCIe HAT not detected.=E2=80=9C line that is only present in newer =
-rpi-eeprom version outputs.
-
-So hopefully you can reproduce that issue yourself when upgrading your =
-rpi-eeprom version to newer or also the latest version from 2024/01/15 =
-available [1] and potentially find the actual piece that prevent your =
-patchset from working on newer eeprom versions.
-
-Best regards,
-jens
-
-[1] =
-https://github.com/raspberrypi/rpi-eeprom/tree/master/firmware-2712/latest=
-
---=20
-Jens Maus, Dresden/Germany
-http://jens-maus.de/
+diff --git a/env/sf.c b/env/sf.c
+index a425ecc11c8..8f5c03b00d3 100644
+--- a/env/sf.c
++++ b/env/sf.c
+@@ -210,8 +210,10 @@ static int env_sf_save(void)
+ 		saved_size = sect_size - CONFIG_ENV_SIZE;
+ 		saved_offset = CONFIG_ENV_OFFSET + CONFIG_ENV_SIZE;
+ 		saved_buffer = malloc(saved_size);
+-		if (!saved_buffer)
++		if (!saved_buffer) {
++			ret = -ENOMEM;
+ 			goto done;
++		}
+ 
+ 		ret = spi_flash_read(env_flash, saved_offset,
+ 			saved_size, saved_buffer);
+-- 
+2.25.1
 
