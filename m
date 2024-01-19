@@ -4,80 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F96CC47DD3
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:09:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1908EC4725D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:09:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C075887D2F;
-	Fri, 19 Jan 2024 17:08:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 33C5D87D09;
+	Fri, 19 Jan 2024 17:08:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="g/0Un8+W";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D83D687D2D; Fri, 19 Jan 2024 17:08:48 +0100 (CET)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1705680534;
+	bh=WrF2PyaOpqUkt0fPNoepMGYXNbCaFxMbl31hUUADsy4=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=pe1PLcWB7kCv0QLJCAmG0Guv8qvb11Bgv4FlhKCBpZ4keRHj68LoApOxofQCigblN
+	 eupmPMUeAbfhRKLFRPJAx4xwMF+LhEn3eCcur21QEEJ9OIPvqfwTAWO8ACiG7ATELd
+	 CgQRRIBWwlt702943I6PBfCwatoEj2DFO8I5hUzvOX1Q/puGl4dvw6gleCsomd4O2a
+	 Fm8f3sEcZ2/pj7IcCH5LM5WXX+C44cJbNxXfptYXG2b8+WL9g+VeMj2paIwi9rYCbP
+	 6cCwKJHSgsEKGK9O0RktsRUfYMMOUz7nDxVuN/51qA2ztageiO8+7FpWKUuJZ5fr5T
+	 dzsDxlaSuShMg==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D286F87D28
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 17:08:46 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-5ff9ba70977so8630697b3.3
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 08:08:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705680525; x=1706285325; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=yu4XLBlJXfgsJqhNq5wZr2xwpDY750c5x6LEnmmTNoY=;
- b=g/0Un8+WA7p2rukBnkR1kIA4ctIzxiLC+w4TGeApijzzhiE8oEcPDPjbRx1syoCJ4/
- FrJNxvUnbDfbdHMPJ+q2nNcTKb8Lq2vfogeVkF3tb0PWIzVUFGzVba0A3kEfpixkvdp2
- OAX6o46Dt1c4jKgRR6PkeBsNMofXTLcnXuWtI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705680525; x=1706285325;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yu4XLBlJXfgsJqhNq5wZr2xwpDY750c5x6LEnmmTNoY=;
- b=jAoFRDTSbfuQtBqo5AOf/uKJdBfeqwG8imlG1g7Gtz6fZZxoxS7ojTEGNAKjq/Liv3
- 102I+3UwFea64UHSgamM6IG4OfAFCi5HyJISphKOhCb05oGRhaZZ6f2qVscM0Mv7mtab
- NSpA/cXITDp5Gk5QwVUXANvvZ0O4uMv5DQFBb2x7fKEpEkRJKTibW+ZoJm7F5rS5BP+l
- Jv8Rtry0BVxoge4U5bNJ4AF++rtvt5+PaeOQMIlV84/2v9DLGG9QUvyftGJ7HF/0yHoi
- UEZtcyZECdQ3IYv4wylTwtpAlNUtjMWT6KYiXuC3029B7kNdAABFAuSei7+lBlrbYjJD
- 1itQ==
-X-Gm-Message-State: AOJu0YwIhjkb7N8LxEcjK7uKfg2FSGyyjP5CobZyVNu7e/E6u4bBnVKq
- gw9ApDh3fF8LqzTerNS24PJETqooKlvZmhIFgGMUXysEpHfIdriZUPj4kLU32mI=
-X-Google-Smtp-Source: AGHT+IE7hWk4jVfVP8yVQ94qF2/omgYLTTKGQWiidrcZtz2pRWYKPNG9fFo4FEffosnq1KuGhZf7Fw==
-X-Received: by 2002:a81:91ca:0:b0:5ff:9c47:a95b with SMTP id
- i193-20020a8191ca000000b005ff9c47a95bmr119673ywg.47.1705680525644; 
- Fri, 19 Jan 2024 08:08:45 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- m195-20020a0dcacc000000b005ff4da78ec4sm3390232ywd.130.2024.01.19.08.08.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jan 2024 08:08:45 -0800 (PST)
-Date: Fri, 19 Jan 2024 11:08:43 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-Cc: sjg@chromium.org, vigneshr@ti.com, bb@ti.com, m-chawdhry@ti.com,
- alpernebiyasak@gmail.com, nm@ti.com, u-boot@lists.denx.de,
- vishalm@ti.com, jonas@kwiboo.se, sughosh.ganu@linaro.org,
- lukas.funke@weidmueller.com, fr0st61te@gmail.com, u-kumar1@ti.com
-Subject: Re: [PATCH v2 1/2] board: ti: *-cfg.yaml: Adhere to yamllint rules
-Message-ID: <20240119160843.GQ12635@bill-the-cat>
-References: <20240105113917.1117945-1-n-francis@ti.com>
- <20240105113917.1117945-2-n-francis@ti.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id C93C687D0F;
+ Fri, 19 Jan 2024 17:08:52 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1705680533;
+ bh=WrF2PyaOpqUkt0fPNoepMGYXNbCaFxMbl31hUUADsy4=;
+ h=From:To:Cc:Subject:Date:From;
+ b=0WZbufdwErz2EF6H1X3EJ1Ti/a518KVsQ59W4sl8O8TH9mMG21GWGRT/H5e0KZH3n
+ A+k4Cr/iYlfVOrnx8cy/sxLuDXXros61yQ/EqDZfDFJwHbdEukJISfDnoxBObUk//M
+ NsyATrvAcRTjJjnIw3GRw6OY8eD01YDopojqBlWkxsEbbI+8FF3+J31sBjX4zCp9Sx
+ mx2s7108qrKfxtuzlPZ7Xw4g8OrDF5LSPAlXRbAwb65jadllHWZuXkH8uOgxkoZLYi
+ htWFHoZc0RCA44Vmg6D5Dhmo09Hd9Qf6mGOTIZimVMgbYdltBAROT8YjDqyL87JLDi
+ BXPGCA72EjF3g==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@denx.de>,
+ Stefano Babic <sbabic@denx.de>
+Subject: [PATCH v2] ARM: imx: Configure GIC clock parent on Data Modul i.MX8M
+ Plus eDM SBC
+Date: Fri, 19 Jan 2024 17:08:32 +0100
+Message-ID: <20240119160845.11412-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="jtomhcq1a1czxTK6"
-Content-Disposition: inline
-In-Reply-To: <20240105113917.1117945-2-n-francis@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,41 +65,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The CONFIG_SPL_BOARD_INIT lets SPL common code call spl_board_init()
+during the SPL start up. On this particular system, spl_board_init()
+is used to reconfigure GIC clock parent to PLL2 500M, which is the
+configuration expected by the Linux kernel. Enable SPL_BOARD_INIT
+and fill in the GIC clock configuration code.
 
---jtomhcq1a1czxTK6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Set GIC clock to 500 MHz for OD VDD_SOC. Kernel driver does not
+allow to change it. Should set the clock after PMIC setting done.
+Default is 400 MHz (system_pll1_800m with div = 2) set by ROM for
+ND VDD_SOC.
 
-On Fri, Jan 05, 2024 at 05:09:16PM +0530, Neha Malcom Francis wrote:
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Fabio Estevam <festevam@denx.de>
+Cc: Stefano Babic <sbabic@denx.de>
+---
+V2: Duplicate code comment into commit message
+---
+ board/data_modul/imx8mp_edm_sbc/spl.c       | 13 +++++++++++++
+ configs/imx8mp_data_modul_edm_sbc_defconfig |  1 +
+ 2 files changed, 14 insertions(+)
 
-> Clean up all configuration files to adhere to yamllint rules.
->=20
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> Suggested-by: Nishanth Menon <nm@ti.com>
+diff --git a/board/data_modul/imx8mp_edm_sbc/spl.c b/board/data_modul/imx8mp_edm_sbc/spl.c
+index a3600c8568a..cc2d253e391 100644
+--- a/board/data_modul/imx8mp_edm_sbc/spl.c
++++ b/board/data_modul/imx8mp_edm_sbc/spl.c
+@@ -80,6 +80,19 @@ int data_modul_imx_edm_sbc_board_power_init(void)
+ 	return 0;
+ }
+ 
++void spl_board_init(void)
++{
++	/*
++	 * Set GIC clock to 500 MHz for OD VDD_SOC. Kernel driver does not
++	 * allow to change it. Should set the clock after PMIC setting done.
++	 * Default is 400 MHz (system_pll1_800m with div = 2) set by ROM for
++	 * ND VDD_SOC.
++	 */
++	clock_enable(CCGR_GIC, 0);
++	clock_set_target_val(GIC_CLK_ROOT, CLK_ROOT_ON | CLK_ROOT_SOURCE_SEL(5));
++	clock_enable(CCGR_GIC, 1);
++}
++
+ int spl_board_boot_device(enum boot_device boot_dev_spl)
+ {
+ 	if (boot_dev_spl == SPI_NOR_BOOT)	/* SPI NOR */
+diff --git a/configs/imx8mp_data_modul_edm_sbc_defconfig b/configs/imx8mp_data_modul_edm_sbc_defconfig
+index a55630c1a6d..d29bc986267 100644
+--- a/configs/imx8mp_data_modul_edm_sbc_defconfig
++++ b/configs/imx8mp_data_modul_edm_sbc_defconfig
+@@ -56,6 +56,7 @@ CONFIG_SPL_MAX_SIZE=0x25000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x96fc00
+ CONFIG_SPL_BSS_MAX_SIZE=0x400
++CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_BOOTROM_SUPPORT=y
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-- 
+2.43.0
 
-After fixing more yamllint problems on newly merged platforms,
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---jtomhcq1a1czxTK6
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWqnosACgkQFHw5/5Y0
-tyzleQwAk3drBn4gwASKhWQrLf1tMkUELBPtMFe7ED7dl5lQySbSDXsk7DemiN9M
-6Inci//MbfPXc8PYU9hD1VmU8ugqTZFK7cCYXCEgFOmP4qEKoIT69Aty3AY55OHH
-m+6q5Nnue2PrZTs/ysWQD2xf1kKD1Zyd+Y1vvUVgY0szcHrfrqTVdoUX6A86rbOS
-rGGIleqG+R/pj9SmcaKlgZdSImKj7dR67SYBO2ciMWtBqRQGqqYwJP8NdxQD8Njz
-q0C+7LaoFgXNkDJe8tAg1riXpW7lUs0a2KZqgf7Ir5mJwvKLhiv2cA3tLRmgWbJz
-gFEJnXOpxZklDZ8iPa69nqIk1SY4tnXcaGRJxMV0Ma4gV8ZJByF3sevzCrwx+S1F
-mc93nC1wgO7l+6l7ZVCDCvV1OFY7fSObtA1T13JdTTCBVY1Mm87hzY3JBl6HHicd
-yFQzyiqn7t9mbde67HlNkMAYY7lYzXa5Ig7N60M20NIwRu/PmYetSq/g6/6HbMS4
-bUqdCa2b
-=gzlj
------END PGP SIGNATURE-----
-
---jtomhcq1a1czxTK6--
