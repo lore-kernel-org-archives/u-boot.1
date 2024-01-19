@@ -4,111 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78F91C4725D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 14:06:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 077A3C47DAF
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 14:08:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99FA087BC5;
-	Fri, 19 Jan 2024 15:06:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
+	by phobos.denx.de (Postfix) with ESMTP id 3C46587B9D;
+	Fri, 19 Jan 2024 15:08:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="wf6oLyGe";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="wHVRONWH";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="wf6oLyGe";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="wHVRONWH";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="JtUHh7Wd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD1B487C00; Fri, 19 Jan 2024 15:06:34 +0100 (CET)
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 01BB287BC9; Fri, 19 Jan 2024 15:08:12 +0100 (CET)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC47487BBC
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 15:06:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 284358746C
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 15:08:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=iivanov@suse.de
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 7AE031F7F1;
- Fri, 19 Jan 2024 14:06:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1705673192; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=scw4rqVYLCW4AdkNUNYrq75K+1lLeBY3pbDIBeqj/H0=;
- b=wf6oLyGeTHAKjY1UDuvtkoedI82rB+sZLW0MUdRuMdZ9pxiYQK+7hdnTw715KyxsT77U35
- WgfAbYNCTyXd1cNCWD1POWEIqWT7uklhCjbzWDBFEUt8NhEPYmnmpyFz9e1wmqVpvoLb50
- Xa/OoU4K9VXkSobLqpDgO8jmvdtC2SA=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1705673192;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=scw4rqVYLCW4AdkNUNYrq75K+1lLeBY3pbDIBeqj/H0=;
- b=wHVRONWH5CgWkaXDtOQtR25QiRgvcWvi8yXUFe1wEAFq6V/qMb1kZLQ/9J0mVp2iWENI97
- 248jIIwzBcKJUpAA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1705673192; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=scw4rqVYLCW4AdkNUNYrq75K+1lLeBY3pbDIBeqj/H0=;
- b=wf6oLyGeTHAKjY1UDuvtkoedI82rB+sZLW0MUdRuMdZ9pxiYQK+7hdnTw715KyxsT77U35
- WgfAbYNCTyXd1cNCWD1POWEIqWT7uklhCjbzWDBFEUt8NhEPYmnmpyFz9e1wmqVpvoLb50
- Xa/OoU4K9VXkSobLqpDgO8jmvdtC2SA=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1705673192;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=scw4rqVYLCW4AdkNUNYrq75K+1lLeBY3pbDIBeqj/H0=;
- b=wHVRONWH5CgWkaXDtOQtR25QiRgvcWvi8yXUFe1wEAFq6V/qMb1kZLQ/9J0mVp2iWENI97
- 248jIIwzBcKJUpAA==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 616BC1388C;
- Fri, 19 Jan 2024 14:06:32 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([10.150.64.162])
- by imap1.dmz-prg2.suse.org with ESMTPSA id /aFZFeiBqmXMKgAAD6G6ig
- (envelope-from <iivanov@suse.de>); Fri, 19 Jan 2024 14:06:32 +0000
-Date: Fri, 19 Jan 2024 16:06:27 +0200
-From: "Ivan T. Ivanov" <iivanov@suse.de>
-To: Jens Maus <mail@jens-maus.de>
-Cc: Stefan Wahren <wahrenst@gmx.net>, u-boot@lists.denx.de
-Subject: Re: Re: [PATCH v4 0/6] rpi5: initial support
-Message-ID: <fa7j66z5r7pul6zp5ljcntrb7xbazqxesz6wysrslrpxxhpafc@krztduo6pjm6>
-References: <454FB8E4-52A8-482D-8671-5650F8C4773C@suse.de>
- <A26CEBAE-9950-4304-B3A2-1BAB4035437A@jens-maus.de>
- <zmxxqxlbhdhngu36ft4yrqxtjkmvalvhbgbl2uzsj2jgnq7zje@qtncpq2nss57>
- <DCAD0173-2377-4B89-92EB-F38ED1CA938B@jens-maus.de>
- <03bbe9ad-7cc6-491d-8bd9-631f1cf04f39@gmx.net>
- <418F8AAE-136A-44A0-80C3-D01FFE00EC2E@jens-maus.de>
- <sjmi6dftbgx56isfyjtaryehzq2iollwxm2etlspiygehh3n6v@k4ws56nsbgfn>
- <6C9E5E0C-9C27-45A4-886F-8B8C641EF7A3@jens-maus.de>
- <ejituxf7ggiu2ciswrwoeqqjytb7mj2vn6gkxllywtnlm4aefi@br4zq7rfytlo>
- <3FB75D28-9BF9-4518-8BF1-519C884516F7@jens-maus.de>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=17487c629f=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 40JDZZ2d009032; Fri, 19 Jan 2024 15:08:00 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:from:to:cc:references
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=bv6q4GBBDLJqYJxbmIsPUkn9COX8xatJ8VpcfVnhqAk=; b=Jt
+ UHh7Wd0arUwo+fEfpxPHAthRQ9E1DVa7vNeD5xXiD9c0V2MKN2RU+XcxKOaC1n4j
+ IC5Io71oYuV70VtRnBZyZkDJ4FVYPGKU+3ap6A1WfbMaFBgJxUoEHUINEGfBGI+0
+ m+dI0sOqTB1t4XCcbKj4IgxZ7ocgiha36WIUAfZFFtGIHBZfQBY85G7Thhzu2kKG
+ UVOIzglVNW93MrStnP0LrPzfA+R25zpUycQsqWe2MEpcHmRKD9Fd4I5KFXWfMBlx
+ WjYP8L6SlogYUuZX7Sp5vqgecz4vvCyQiRKdIYH5ETN95b0HACK2ethMHh2Gf7Pp
+ jvmzV7z8jvg9SaIFKxTA==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vnbqckjkk-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 19 Jan 2024 15:08:00 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D9D3E100083;
+ Fri, 19 Jan 2024 15:07:59 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CB72C257A83;
+ Fri, 19 Jan 2024 15:07:59 +0100 (CET)
+Received: from [10.252.4.250] (10.252.4.250) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Jan
+ 2024 15:07:59 +0100
+Message-ID: <867f8edc-18c7-40d6-9cc9-7e0ac9e9e110@foss.st.com>
+Date: Fri, 19 Jan 2024 15:07:58 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <3FB75D28-9BF9-4518-8BF1-519C884516F7@jens-maus.de>
-Authentication-Results: smtp-out2.suse.de;
-	none
-X-Spamd-Result: default: False [-0.82 / 50.00]; ARC_NA(0.00)[];
- RCVD_VIA_SMTP_AUTH(0.00)[]; FROM_HAS_DN(0.00)[];
- RCPT_COUNT_THREE(0.00)[3]; FREEMAIL_ENVRCPT(0.00)[gmx.net];
- TO_MATCH_ENVRCPT_ALL(0.00)[]; MIME_GOOD(-0.10)[text/plain];
- NEURAL_HAM_LONG(-1.00)[-1.000]; TO_DN_SOME(0.00)[];
- RCVD_COUNT_THREE(0.00)[3];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- NEURAL_HAM_SHORT(-0.20)[-1.000];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email];
- FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_EQ_ENVFROM(0.00)[];
- MIME_TRACE(0.00)[0:+]; MID_RHS_NOT_FQDN(0.50)[];
- FREEMAIL_CC(0.00)[gmx.net,lists.denx.de]; RCVD_TLS_ALL(0.00)[];
- BAYES_HAM(-0.02)[53.44%]
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] ARM: stm32: Set stdio to serial on DH STM32MP15xx DHSOM
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20240113175811.157221-1-marex@denx.de>
+ <42896f48-89e7-4d58-b06c-d54f27350eeb@foss.st.com>
+In-Reply-To: <42896f48-89e7-4d58-b06c-d54f27350eeb@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.252.4.250]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-01-19_08,2024-01-19_02,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,27 +90,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On 01-19 14:54, Jens Maus wrote:
+
+On 1/16/24 08:19, Patrice CHOTARD wrote:
+> Hi Marek
 > 
-> > Am 19.01.2024 um 14:46 schrieb Ivan T. Ivanov <iivanov@suse.de>:
-> > 
-> > Same here, expect that they are more memory banks, of course.
-> > It is really strange that you don't seen even single message
-> > from the U-Boot..
+> On 1/13/24 18:57, Marek Vasut wrote:
+>> In case CONSOLE_MUX and SYS_CONSOLE_IS_IN_ENV are enabled, the console
+>> stdin, stdout, stderr must be defined in environment. Define the default
+>> settings to fix the following warning on boot:
+>>
+>> "
+>> In:    No input devices available!
+>> Out:   No output devices available!
+>> Err:   No error devices available!
+>> "
+>>
+>> Sort the default environment as well.
+>>
+>> Signed-off-by: Marek Vasut <marex@denx.de>
+>> ---
+>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>> Cc: u-boot@dh-electronics.com
+>> Cc: uboot-stm32@st-md-mailman.stormreply.com
+>> ---
+>>  include/configs/stm32mp15_dh_dhsom.h | 11 +++++++----
+>>  1 file changed, 7 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/include/configs/stm32mp15_dh_dhsom.h b/include/configs/stm32mp15_dh_dhsom.h
+>> index 8ff882264f4..de39b19219d 100644
+>> --- a/include/configs/stm32mp15_dh_dhsom.h
+>> +++ b/include/configs/stm32mp15_dh_dhsom.h
+>> @@ -12,14 +12,13 @@
+>>  #define PHY_ANEG_TIMEOUT		20000
+>>  
+>>  #ifdef CONFIG_SPL_BUILD
+>> -#define CFG_EXTRA_ENV_SETTINGS					\
+>> +#define CFG_EXTRA_ENV_SETTINGS						\
+>>  	"dfu_alt_info_ram=u-boot.itb ram "				\
+>>  			__stringify(CONFIG_SPL_LOAD_FIT_ADDRESS)	\
+>>  			" 0x800000\0"
+>>  #endif
+>>  
+>> -#define STM32MP_BOARD_EXTRA_ENV \
+>> -	"usb_pgood_delay=1000\0" \
+>> +#define STM32MP_BOARD_EXTRA_ENV						\
+>>  	"dh_update_sd_to_emmc=" /* Install U-Boot from SD to eMMC */	\
+>>  		"setexpr loadaddr1 ${loadaddr} + 0x1000000 && "		\
+>>  		"load mmc 0:4 ${loadaddr1} boot/u-boot-spl.stm32 && "	\
+>> @@ -49,7 +48,11 @@
+>>  		"sf update ${loadaddr1} 0x40000 ${filesize1} && "	\
+>>  		"sf update ${loadaddr} 0x80000 ${filesize} && "		\
+>>  		"env set filesize1 && env set loadaddr1\0"		\
+>> -	"update_sf=run dh_update_sd_to_sf\0"
+>> +	"stdin=serial\0"						\
+>> +	"stdout=serial\0"						\
+>> +	"stderr=serial\0"						\
+>> +	"update_sf=run dh_update_sd_to_sf\0"				\
+>> +	"usb_pgood_delay=1000\0"
+>>  
+>>  
+>>  #include <configs/stm32mp15_common.h>
 > 
-> Indeed. Not a single line, nor any U-Boot logo or anything on HDMI. Do you see any debug output on the serial debug probe connection to the rpi5?
-
-Yes, there is even small submarine on the top right side of the screen
-while U-Boot is running.
-
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > 
-> Perhaps it is really dependent on the eeprom version? Can you perhaps try to bump your eeprom version to the latest version to see if this might be the culprit?
-> 
+> Thanks
+> Patrice
 
-Yes, will do this.
+Applied to u-boot-stm32/master
 
-Regards,
-Ivan
-
+Thanks
+Patrice
