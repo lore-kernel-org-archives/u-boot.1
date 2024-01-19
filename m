@@ -4,63 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65223C4725D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 07:21:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBA07C47DB7
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 08:20:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85A5187B8E;
-	Fri, 19 Jan 2024 08:21:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=jens-maus.de
+	by phobos.denx.de (Postfix) with ESMTP id ED32F87730;
+	Fri, 19 Jan 2024 09:20:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=jens-maus.de header.i=@jens-maus.de header.b="H1b/8OcD";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="fcO1GMiR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5304F87B9D; Fri, 19 Jan 2024 08:21:55 +0100 (CET)
-Received: from mail.light-speed.de (mail.light-speed.de
- [IPv6:2a01:238:43f2:8900:dd04:e3a0:ee11:a73d])
+ id 4BA148774E; Fri, 19 Jan 2024 09:20:34 +0100 (CET)
+Received: from mail-m6014.netease.com (mail-m6014.netease.com [210.79.60.14])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42D748767C
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 08:21:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=jens-maus.de
+ by phobos.denx.de (Postfix) with ESMTPS id A53358718F
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 09:20:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mail@jens-maus.de
-Received: from smtpclient.apple (unknown
- [IPv6:2a02:810a:8280:47aa:8cb:7c21:219f:c18e])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.light-speed.de (Postfix) with ESMTPSA id 77DCA3D486AC;
- Fri, 19 Jan 2024 08:21:52 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jens-maus.de;
- s=mail; t=1705648912;
- bh=oLEWnBIn3ETV6iFcr0p2xoi2BKZsgWnEdFZVXIKUa8M=;
- h=Subject:From:In-Reply-To:Date:Cc:References:To;
- b=H1b/8OcDCHP/UIJ/PazEvfGz6LpfmPryUpyRD/Je+ejBrh/fVauLnvjplt/h09wdH
- AbTMpRvNZlMBgAln31GVPna/+IZJoEzoDz3cipCLWblbX+7M3AvGd7Iq4r1MwVgvoo
- d943iy6knbrHNKCKK7UirJacpG5ajnCCPSQK7NyM=
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.300.61.1.2\))
-Subject: Re: [PATCH v4 0/6] rpi5: initial support
-From: Jens Maus <mail@jens-maus.de>
-In-Reply-To: <zmxxqxlbhdhngu36ft4yrqxtjkmvalvhbgbl2uzsj2jgnq7zje@qtncpq2nss57>
-Date: Fri, 19 Jan 2024 08:21:41 +0100
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=fcO1GMiRbmUOFE83xySuhHVyOJh3QRzGZU+/g2R78waxkoI5mXKEKX33fd96A5JXnUS4Zs23RfnX8/2L1yAFju1dVaOhgJ3VzNGbmKIvjuQMukJHZw9ZnVUGdFxzSjO8b9SfUP/iW1iRCwd21RwZdEpN8o+MeObA6uZgLR3mqGI=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=bEVwo5vzIOf/1ZETaYn8B4HHzUiV04/o1bqPf57sARY=;
+ h=date:mime-version:subject:message-id:from;
+Received: from localhost.localdomain (unknown [103.29.142.67])
+ by mail-m12758.qiye.163.com (Hmail) with ESMTPA id 1AAA7AE2EE2;
+ Fri, 19 Jan 2024 16:20:26 +0800 (CST)
+From: Kever Yang <kever.yang@rock-chips.com>
+To: trini@konsulko.com
 Cc: u-boot@lists.denx.de
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <DCAD0173-2377-4B89-92EB-F38ED1CA938B@jens-maus.de>
-References: <BD4D4B77-9C54-4FD7-8EEF-A65E674E0747@jens-maus.de>
- <sfo77vzvmblyv5g5ek6uc6oxrf5n7dcp3vsw2g2lvfnnrlyaft@kc6s7vvspwvz>
- <4DCC64E0-F0E4-4AF6-8E81-62B156E81554@jens-maus.de>
- <2303FFA8-E2FA-4AA4-AE67-FF5E904D21DD@suse.de>
- <A796E025-0F6E-4FF7-BA4D-2F52CD763B4B@jens-maus.de>
- <9AFD4C3E-E1B7-4EA7-8589-7060A2747732@suse.de>
- <5C0A3CD4-2591-4266-B9CC-7EC38C6A88C3@jens-maus.de>
- <454FB8E4-52A8-482D-8671-5650F8C4773C@suse.de>
- <A26CEBAE-9950-4304-B3A2-1BAB4035437A@jens-maus.de>
- <zmxxqxlbhdhngu36ft4yrqxtjkmvalvhbgbl2uzsj2jgnq7zje@qtncpq2nss57>
-To: "Ivan T. Ivanov" <iivanov@suse.de>
-X-Mailer: Apple Mail (2.3774.300.61.1.2)
+Subject: Pull request: u-boot-rockchip-20240119
+Date: Fri, 19 Jan 2024 16:20:23 +0800
+Message-Id: <20240119082023.552165-1-kever.yang@rock-chips.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCSE4eVhgdHRofGU0YGBpKTVUTARMWGhIXJBQOD1
+ lXWRgSC1lBWUpLSFVJQlVKT0lVTUxZV1kWGg8SFR0UWUFZT0tIVUpNT0lMTlVKS0tVSkJLS1kG
+X-HM-Tid: 0a8d20ce95ecb225kuuu1aaa7ae2ee2
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Nhg6DRw4AzwvTRUiHSItSA04
+ IjUwCx5VSlVKTEtOTU5JT0lNQ0JJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUJDSEM3Bg++
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,39 +66,180 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Tom,
 
-> Am 19.01.2024 um 06:29 schrieb Ivan T. Ivanov <iivanov@suse.de>:
->=20
-> On 01-18 18:18, Jens Maus wrote:
->>=20
->>> I am afraid you will have to connect that UART debug cable and share
->>> what is the memory map on your device :-)
->>=20
->> No problem.
->=20
-> Thanks, but could you apply attached patch and send me
-> the logs when there is HDMI monitor connected to the board
-> and one when cable is unplugged.
+Please pull the updates for rockchip platform:
+- Add board: rk3328 FriendlyARM NanoPi R2C Plus, rk3588 Turing RK1 SoM;
+- Enable SPI boot for rk3588 and rk3528;
+- Set boot device in SPL as common code;
+- other misc fixes;
 
-I applied that patch, but unfortunately no U-Boot specific output on the =
-special debug UART of the rpi5 at all. As I have shown in my earlier =
-email, the output ends with the =E2=80=9ENOTICE: BL31=E2=80=A6=E2=80=9C =
-messages and there is no single line coming from U-boot at all. Also =
-tried to add =E2=80=9E#define DEBUG=E2=80=9C to the fdtdec.c file and =
-added CONFIG_LOG=3Dy as well as raising the maximum debug level to 9 to =
-the U-boot build. This for some reason this does not end up in any =
-additional U-boot debug line output on the RPi debug probe connected to =
-the special UART of the rpi5. I even tried to connect the debug probe to =
-the UART pins of the GPIO but also there no U-Boot debug output at all, =
-I am afraid.
+CI:
+https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/19374
 
-So where should that U-Boot debug output actually appear with your =
-u-boot.bin patched version?
+Thanks,
+- Kever
 
-Best Regards,
-jens
---=20
-Jens Maus, Dresden/Germany
-http://jens-maus.de/
+The following changes since commit f7cca7ccc5117eaafcc2bde91ad1bed6fee7cfc3:
 
+  Revert "test: hush: dollar: fix bugous behavior" (2024-01-18 11:38:25 -0500)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20240119
+
+for you to fetch changes up to c16c7ac2fe69f3cebbfc921c5b023dccc12cd198:
+
+  rockchip: rk3128: remove noop file (2024-01-19 10:57:36 +0800)
+
+----------------------------------------------------------------
+Chris Morgan (4):
+      board: rockchip: Refactor panel auto-detect code
+      rockchip: board: Add board_rng_seed() for all Rockchip devices
+      board: rockchip: Add support for new boards to RGxx3
+      doc: board: anbernic: Update rgxx3 to add new boards
+
+Hugh Cole-Baker (1):
+      rockchip: rk35xx: expand space for decompressed kernel
+
+Johan Jonker (1):
+      arm: dts: rockchip: rk3288: move to 64 bit reg size
+
+John Clark (1):
+      rockchip: rk3588-nanopc-t6: Build SPI image
+
+Jonas Karlman (5):
+      configs: rockchip: Use dwc3-generic driver on RK3328 and RK3399
+      rockchip: board: Remove dwc3 usb init and gadget handler functions
+      rockchip: rk3588: Fix boot from SPI flash
+      rockchip: rk3588s-orangepi-5: Build SPI image
+      rockchip: rk3328: Set efuse auto mode and timing control
+
+Joshua Riek (1):
+      board: rockchip: Add the Turing RK1 SoM
+
+Quentin Schulz (12):
+      rockchip: ringneck-px30: do not hardcode MMC controller paths
+      rockchip: puma-rk3399: do not hardcode MMC controller paths
+      rockchip: ringneck-px30/puma-rk3399: factor out storage medium selection
+      env: allow to copy value from default environment into a buffer
+      env: migrate env_get_default to call env_get_default_into
+      rockchip: theobroma-systems: fix modified boot_targets detection
+      rockchip: rk3399: simplify logic for getting SPL boot medium DT node
+      rockchip: px30: simplify logic for getting SPL boot medium DT node
+      rockchip: factor out spl_perform_fixups into common spl-boot-order
+      rockchip: find U-boot proper boot device by inverting the logic that sets it
+      rockchip: remove unused global data ptr
+      rockchip: rk3128: remove noop file
+
+Slawomir Stepien (1):
+      rockchip: rk3588-orangepi-5-plus: Build SPI image
+
+Tianling Shen (1):
+      board: rockchip: Add support for FriendlyARM NanoPi R2C Plus
+
+ arch/arm/Kconfig                                   |   1 +
+ arch/arm/dts/Makefile                              |   2 +
+ arch/arm/dts/rk3288-evb.dtsi                       |   2 +-
+ arch/arm/dts/rk3288-firefly.dtsi                   |   2 +-
+ arch/arm/dts/rk3288-miqi.dtsi                      |   2 +-
+ arch/arm/dts/rk3288-phycore-som.dtsi               |   2 +-
+ arch/arm/dts/rk3288-popmetal.dtsi                  |   2 +-
+ arch/arm/dts/rk3288-rock2-som.dtsi                 |   2 +-
+ arch/arm/dts/rk3288-tinker.dtsi                    |   2 +-
+ arch/arm/dts/rk3288-u-boot.dtsi                    |  14 +-
+ arch/arm/dts/rk3288-veyron.dtsi                    |   2 +-
+ arch/arm/dts/rk3288.dtsi                           | 259 +++++----
+ arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi    |   9 +
+ arch/arm/dts/rk3328-nanopi-r2c-plus.dts            |  33 ++
+ arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi         |  25 +
+ arch/arm/dts/rk3588-turing-rk1.dts                 |  21 +
+ arch/arm/dts/rk3588-turing-rk1.dtsi                | 614 +++++++++++++++++++++
+ arch/arm/include/asm/arch-rockchip/bootrom.h       |   1 -
+ arch/arm/mach-rockchip/Kconfig                     |   1 +
+ arch/arm/mach-rockchip/board.c                     |  65 +--
+ arch/arm/mach-rockchip/px30/px30.c                 |  49 --
+ arch/arm/mach-rockchip/rk3128/Makefile             |   1 -
+ arch/arm/mach-rockchip/rk3128/rk3128.c             |  16 -
+ arch/arm/mach-rockchip/rk3308/rk3308.c             |   3 -
+ arch/arm/mach-rockchip/rk3328/rk3328.c             |  41 +-
+ arch/arm/mach-rockchip/rk3368/rk3368.c             |   3 -
+ arch/arm/mach-rockchip/rk3399/rk3399.c             |  51 --
+ arch/arm/mach-rockchip/rk3588/Kconfig              |  24 +
+ arch/arm/mach-rockchip/rk3588/rk3588.c             |  18 +-
+ arch/arm/mach-rockchip/spl-boot-order.c            | 111 ++++
+ board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c         | 188 ++++---
+ board/rockchip/evb_rk3328/MAINTAINERS              |   6 +
+ board/theobroma-systems/common/common.c            | 151 +++++
+ board/theobroma-systems/common/common.h            |  19 +
+ board/theobroma-systems/puma_rk3399/MAINTAINERS    |   1 +
+ board/theobroma-systems/puma_rk3399/Makefile       |   3 +
+ board/theobroma-systems/puma_rk3399/puma-rk3399.c  | 143 +----
+ board/theobroma-systems/ringneck_px30/MAINTAINERS  |   1 +
+ board/theobroma-systems/ringneck_px30/Makefile     |   3 +
+ .../ringneck_px30/ringneck-px30.c                  | 142 +----
+ board/turing/turing-rk1-rk3588/Kconfig             |  15 +
+ board/turing/turing-rk1-rk3588/MAINTAINERS         |   9 +
+ board/turing/turing-rk1-rk3588/Makefile            |   6 +
+ board/turing/turing-rk1-rk3588/turing-rk1-rk3588.c |  39 ++
+ configs/chromebook_bob_defconfig                   |   2 +-
+ configs/chromebook_kevin_defconfig                 |   2 +-
+ configs/eaidk-610-rk3399_defconfig                 |   4 +-
+ configs/evb-rk3399_defconfig                       |   1 -
+ configs/firefly-rk3399_defconfig                   |   1 -
+ configs/khadas-edge-captain-rk3399_defconfig       |   4 +-
+ configs/khadas-edge-rk3399_defconfig               |   4 +-
+ configs/khadas-edge-v-rk3399_defconfig             |   4 +-
+ configs/leez-rk3399_defconfig                      |   4 +-
+ configs/nanopc-t4-rk3399_defconfig                 |   3 +-
+ configs/nanopc-t6-rk3588_defconfig                 |   2 +-
+ configs/nanopi-m4-2gb-rk3399_defconfig             |   4 +-
+ configs/nanopi-m4-rk3399_defconfig                 |   4 +-
+ configs/nanopi-m4b-rk3399_defconfig                |   4 +-
+ configs/nanopi-neo4-rk3399_defconfig               |   4 +-
+ configs/nanopi-r2c-plus-rk3328_defconfig           | 114 ++++
+ configs/nanopi-r4s-rk3399_defconfig                |   3 +-
+ configs/orangepi-5-plus-rk3588_defconfig           |   2 +-
+ configs/orangepi-5-rk3588s_defconfig               |   2 +-
+ configs/orangepi-r1-plus-lts-rk3328_defconfig      |   3 +-
+ configs/orangepi-r1-plus-rk3328_defconfig          |   3 +-
+ configs/orangepi-rk3399_defconfig                  |   4 +-
+ configs/pinebook-pro-rk3399_defconfig              |   1 -
+ configs/pinephone-pro-rk3399_defconfig             |   1 -
+ configs/puma-rk3399_defconfig                      |   1 -
+ configs/roc-pc-mezzanine-rk3399_defconfig          |   1 -
+ configs/roc-pc-rk3399_defconfig                    |   1 -
+ configs/rock-4c-plus-rk3399_defconfig              |   1 -
+ configs/rock-4se-rk3399_defconfig                  |   1 -
+ configs/rock-pi-4-rk3399_defconfig                 |   1 -
+ configs/rock-pi-4c-rk3399_defconfig                |   1 -
+ configs/rock-pi-n10-rk3399pro_defconfig            |   1 -
+ configs/rock5a-rk3588s_defconfig                   |   1 -
+ configs/rock5b-rk3588_defconfig                    |   1 -
+ configs/rock960-rk3399_defconfig                   |   3 +-
+ configs/rockpro64-rk3399_defconfig                 |   1 -
+ configs/turing-rk1-rk3588_defconfig                | 133 +++++
+ doc/board/anbernic/rgxx3.rst                       |  20 +-
+ doc/board/rockchip/rockchip.rst                    |   1 +
+ drivers/usb/host/Kconfig                           |   1 -
+ env/common.c                                       |  16 +-
+ include/configs/rk3568_common.h                    |  12 +-
+ include/configs/rk3588_common.h                    |  12 +-
+ include/configs/turing-rk1-rk3588.h                |  15 +
+ include/env.h                                      |  10 +
+ 89 files changed, 1815 insertions(+), 703 deletions(-)
+ create mode 100644 arch/arm/dts/rk3328-nanopi-r2c-plus-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3328-nanopi-r2c-plus.dts
+ create mode 100644 arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3588-turing-rk1.dts
+ create mode 100644 arch/arm/dts/rk3588-turing-rk1.dtsi
+ delete mode 100644 arch/arm/mach-rockchip/rk3128/rk3128.c
+ create mode 100644 board/theobroma-systems/common/common.c
+ create mode 100644 board/theobroma-systems/common/common.h
+ create mode 100644 board/turing/turing-rk1-rk3588/Kconfig
+ create mode 100644 board/turing/turing-rk1-rk3588/MAINTAINERS
+ create mode 100644 board/turing/turing-rk1-rk3588/Makefile
+ create mode 100644 board/turing/turing-rk1-rk3588/turing-rk1-rk3588.c
+ create mode 100644 configs/nanopi-r2c-plus-rk3328_defconfig
+ create mode 100644 configs/turing-rk1-rk3588_defconfig
+ create mode 100644 include/configs/turing-rk1-rk3588.h
