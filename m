@@ -4,73 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3DD7C4725D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 09:36:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51C89C4725D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 10:01:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE8A287727;
-	Fri, 19 Jan 2024 10:36:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4525987B7F;
+	Fri, 19 Jan 2024 11:01:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ebiRgOdP";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="FgzUjlTP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6265B87B7F; Fri, 19 Jan 2024 10:36:31 +0100 (CET)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7F75B87A18; Fri, 19 Jan 2024 11:01:43 +0100 (CET)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:200a::601])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1842687645
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 10:36:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 363E987730
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 11:01:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2cdae52d355so5376451fa.2
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 01:36:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705656988; x=1706261788; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uisTIOcHPXvuxeXrALPgPA1+N+nBJ06vvxAQkVPoBgA=;
- b=ebiRgOdPb9J6ybuwh3geGfjVEcrCbW/XV3EzpukeNmx3YTUHBYf0XWH/w7UDYJW53F
- bF22pl1eJ7IUmqlAdPMioBD66/djHOa9/EdkaoQkUpoCVggRCelnMvnydcAfrtTAoill
- z2kdLqRBkHiu0lPHYlk/24rQwH9R+VvMa2azT9sv+OhXs7t/JNJWsSFo3aAdm+LU4zda
- Tscjmkt8/a92H2UN0aPu1y8l1rWTA0i5kmVRSDUbEFHfR51yWUcugewV90X1tNU+HibB
- Qz4gohmI7IlNV+ovWsYgL1gikS4xL/NdQb1xK6C5VGxqB1Z9WtTOy9EEYcJ8st5sfqkK
- QVSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705656988; x=1706261788;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=uisTIOcHPXvuxeXrALPgPA1+N+nBJ06vvxAQkVPoBgA=;
- b=ssjmuzNH6/re3ckBaIExNfb6qL4Rv87nRHlMdS5oz9oEvhETXnEngkB92DWgUlhA+Y
- GKeaZYjhCskeqybwLuB4gtxa89XJa8zUrsGtn17Geb1+7uiui64Aq/xwxx/It9clvqje
- Rfl2wP+gJDxFrNHGbPvZ7rlxQop5P9yYfAfSgoGNwt3x1anxsWkfKPB7bD8Kz/nc1E5f
- qZs3JahH1Goob/Smrt6Oxi3Ije/sYBh78nz6TCLHQhLYLMHN01w56ISMwtGxzpydqb/1
- pSB1GKBJsDZ3/4Fect1ZcXrOan8my++bF4RXq5W6Ca45TQFpeN4TyBclMmXZ3+vgfiEp
- h8Ow==
-X-Gm-Message-State: AOJu0YxaO9cF7XImqXFTdKUowdafwlOKoYMyKDQX/qIhQCVU0sIxhCkT
- y1w9H6cwXiPUyFo8Vl6W6ULpy0ZJyG6vTrSUs0HfgYXAky+ZHRli6MyB9e2cOWec9CIzpnmMvac
- IKo1SVVuiYtNOZar8ezKaJyrNJiQQjCv7mlzugA==
-X-Google-Smtp-Source: AGHT+IHHik+wn6vkJISbHvsYtfmE6LT4nzYYOEFQXtYOSHPTZvgyQj7Ib9PhPrVuVJRcu9tORWXCGmigVa4oU0a7Wfw=
-X-Received: by 2002:a05:651c:1601:b0:2ce:bf:a2e3 with SMTP id
- f1-20020a05651c160100b002ce00bfa2e3mr312728ljq.62.1705656988391; Fri, 19 Jan
- 2024 01:36:28 -0800 (PST)
+ spf=fail smtp.mailfrom=love.kumar@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=SJxBgRjS35Xpnkqj+hOYnz+SK1tfOuDEAihNPIc+TSWb3XcQ8orsaIuCJ7w7pf68cEftYGAE6OIDbH4mgNmUMF983TAfHlm9XaSpgzeCq1umqEFr9qJFMmjjST1UGkH2gfNnE6j1M3tKCjZXe6ui8EMY0jiyW5FAD6AQDBo7aMBgKqs3PZzvgEOQ7Xy5lI7xsjmoMm9LoAnCljnUOO7TPjRg8RRJUyNg9FA/O3OHBxQaTDNKc9KEWd+zDaonY+zIwkeQ/QR7OzHTDBaJbqS1uEFyfmP/6HAh/NBbjglKpprUgVjehfyVsShc3NRm0Ad724P6KAe1SU6eS5B0F0oFNg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PsWwLB9KX90QUQHmwONcqNaEbgkXehz+nQ7C1vZLJfY=;
+ b=doHNDaqE7bskJ4g5WPwPsr/ZsFjHjlljKhccMMtQZyDaiGlOd6LXm7zQXyoB2g7VAtCfXYPzCjYaenWIGZoSSH6VT+LrJgCXDwdMi7UeO5esDT0FT9TqVQagUbIe/F6v8XDggHAbb8uT93ffpWa/m5xeFuFZAwI26k227u5k6ORomqwMIj9iV4/WwkR/0xEjAchqnWRhrKG0gfXzCHE1YJex1uJeVbMjejEkBP3RE3FheBI1VIvyQ1xTar1xfQY6KaLXJvL0Y0dKsUZiRRm9qV+T4cr6M1jVNnGguOF9tWabOZLO+unbzjYAK5tH3TMqRh71MqbnOga4QU/fanKFVA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PsWwLB9KX90QUQHmwONcqNaEbgkXehz+nQ7C1vZLJfY=;
+ b=FgzUjlTPcV0ivxXtxnIeXSRWmJMxL768dYnzZfpVUrNrfxPK6osSTcSa/WoAwrdiRto5lQ7dkyCxXwJjkLvoLitwy+Odorx0FS47qBrUJjISH6OAg9crJXf5KIUgGlewbwhjh/nPoQHerEQcOOwjqyRA9gTbXnppkGyZwJNnIN0=
+Received: from BL1PR13CA0392.namprd13.prod.outlook.com (2603:10b6:208:2c2::7)
+ by MN0PR12MB6125.namprd12.prod.outlook.com (2603:10b6:208:3c7::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7202.24; Fri, 19 Jan
+ 2024 10:01:35 +0000
+Received: from BL6PEPF0001AB4A.namprd04.prod.outlook.com
+ (2603:10b6:208:2c2:cafe::e3) by BL1PR13CA0392.outlook.office365.com
+ (2603:10b6:208:2c2::7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7228.9 via Frontend
+ Transport; Fri, 19 Jan 2024 10:01:35 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BL6PEPF0001AB4A.mail.protection.outlook.com (10.167.242.68) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7202.16 via Frontend Transport; Fri, 19 Jan 2024 10:01:35 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Fri, 19 Jan
+ 2024 04:01:31 -0600
+Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.34 via Frontend
+ Transport; Fri, 19 Jan 2024 04:01:30 -0600
+From: Love Kumar <love.kumar@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <git@xilinx.com>
+Subject: [PATCH] test/py: secure: Add secure tests for Zynq & ZynqMP
+Date: Fri, 19 Jan 2024 15:31:29 +0530
+Message-ID: <6e28de8a3ea437ff04cacb2cb389cec44bb033e3.1705655604.git.love.kumar@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <65a933ab652b3_da12cbd3e77f998728e5@prd-scan-dashboard-0.mail>
- <8cf878fc-88ee-4c27-b95f-d1bce5ddaf34@gmx.de>
- <CAC_iWjJNm-YFXy35_fjyHx0AQBFb0GXSDH3mcHv1uBVNp6D_TQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjJNm-YFXy35_fjyHx0AQBFb0GXSDH3mcHv1uBVNp6D_TQ@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 19 Jan 2024 11:35:52 +0200
-Message-ID: <CAC_iWjLu+34pp+ifKAgj=YrvgQKmC_ra5N-tWdkpc0mrY9dL5A@mail.gmail.com>
-Subject: Re: ** CID 478334: Memory - corruptions (OVERRUN)
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB4A:EE_|MN0PR12MB6125:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4308c3c2-d131-4374-c18a-08dc18d59ed7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: wSFdHHr+sk1RRoxrkO6MNJgGMOkosbGbbJxrydnyWiK7tof3fm+J4M6qS5get2EZP6AbFaTmxUD2pxcssXQO5+p7AxqRL1gFszGxSuwHJG/Q/Z/MZqLq/hzwzzc7oyETq7TckCY1Ly1v3+deBMAP0NSdbQw6jxIquaXLc8HzQOqcRCNuY2QDYWbvHwr8ineM1p8lyKsbCNBKxyjQbZpUqJ3vmWt3pRjv1weCdKmNC5GaGMPoJubFSPKYxphU2uv6ApP4zVgwCqLt0eG7v5Sqk2zmIfRBPqm/4bAZNB5Abj+hlJ2rvxpMvwqDgwYp7EUPcT4p4RgYhR4scCJt7k8U8bW5hq3B4U9nx5EMS+E6+dkn36A03/Ywx7RO6ThHmXgpCgMP0UyKQUxP54MqOTWUXqmj46SS0LEMdjymoukfowBi2E6XcJtdSYpHYOzycwxBpKTTLXA7fwRw8/ko8DmoDWh0L9dVU2H1F3JS1JECbIT/2uZEkGy5RQZK0Ad2flG+3+d2NwXD2vV6jIvZan20f68/calwsb9uAIyQwWxqhNj8HQ5jHhP+SFJWuOSpG0o8TY6R/z9jRrb4DJ/57iUq953c1uHlR1hAoWS2uWk54VL9YNVv7p9CCyWw5HbYwJy6zzZ22Wlz846ECp63y1irfRUKrYKZBXhag0t+yVG4Ckr1TfJp/E9VVVH0QdWHHe3drAlF7pqQBEwNEyr6QE9tUYl2kJ/8aXIhxQOPLBB3eK0NHkGHxt0WT0cj2fQfdPI6fM9YzYQRNQhGWjYoHTywog==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(376002)(39860400002)(136003)(396003)(346002)(230922051799003)(82310400011)(64100799003)(451199024)(1800799012)(186009)(40470700004)(36840700001)(46966006)(4326008)(2906002)(41300700001)(36756003)(36860700001)(30864003)(86362001)(81166007)(356005)(82740400003)(316002)(70586007)(54906003)(70206006)(478600001)(6916009)(8676002)(83380400001)(8936002)(47076005)(5660300002)(426003)(336012)(26005)(107886003)(2616005)(44832011)(40480700001)(40460700003)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jan 2024 10:01:35.1339 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4308c3c2-d131-4374-c18a-08dc18d59ed7
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB4A.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6125
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,78 +117,324 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Looking at it again,
+Add test cases to verify the different type of secure boot images loaded
+at DDR location for AMD's ZynqMP SoC. It also adds tests authentication
+and decryption functionality using AES and RSA features for Zynq.
 
-This looks like a false positive, but I cant understand how coverity
-gets triggered. If your proposal quiesces the warning for some reason,
-I can send a patch.
+Signed-off-by: Love Kumar <love.kumar@amd.com>
+---
+ test/py/tests/test_zynq_secure.py   | 190 ++++++++++++++++++++++++++++
+ test/py/tests/test_zynqmp_secure.py | 104 +++++++++++++++
+ 2 files changed, 294 insertions(+)
+ create mode 100644 test/py/tests/test_zynq_secure.py
+ create mode 100644 test/py/tests/test_zynqmp_secure.py
 
-Thanks
-/Ilias
+diff --git a/test/py/tests/test_zynq_secure.py b/test/py/tests/test_zynq_secure.py
+new file mode 100644
+index 000000000000..0ee5aebc484a
+--- /dev/null
++++ b/test/py/tests/test_zynq_secure.py
+@@ -0,0 +1,190 @@
++# SPDX-License-Identifier: GPL-2.0
++# (C) Copyright 2023, Advanced Micro Devices, Inc.
++
++import pytest
++import re
++import u_boot_utils
++import test_net
++
++"""
++This test verifies different type of secure boot images to authentication and
++decryption using AES and RSA features for AMD's Zynq SoC.
++
++Note: This test relies on boardenv_* containing configuration values to define
++the network available and files to be used for testing. Without this, this test
++will be automatically skipped. It also relies on dhcp or setup_static net test
++to support tftp to load files from a TFTP server.
++
++For example:
++
++# Details regarding the files that may be read from a TFTP server and addresses
++# and size for aes and rsa cases respectively. This variable may be omitted or
++# set to None if zynqmp secure testing is not possible or desired.
++env__zynq_aes_readable_file = {
++    'fn': 'zynq_aes_image.bin',
++    'fnbit': 'zynq_aes_bit.bin',
++    'fnpbit': 'zynq_aes_par_bit.bin',
++    'srcaddr': 0x1000000,
++    'dstaddr': 0x2000000,
++    'dstlen': 0x1000000,
++}
++
++env__zynq_rsa_readable_file = {
++    'fn': 'zynq_rsa_image.bin',
++    'fninvalid': 'zynq_rsa_image_invalid.bin',
++    'srcaddr': 0x1000000,
++}
++"""
++
++def zynq_secure_pre_commands(u_boot_console):
++    output = u_boot_console.run_command('print modeboot')
++    if not 'modeboot=' in output:
++        pytest.skip('bootmode cannnot be determined')
++    m = re.search('modeboot=(.+?)boot', output)
++    if not m:
++        pytest.skip('bootmode cannnot be determined')
++    bootmode = m.group(1)
++    if bootmode == 'jtag':
++        pytest.skip('skipping due to jtag bootmode')
++
++@pytest.mark.buildconfigspec('cmd_zynq_aes')
++def test_zynq_aes_image(u_boot_console):
++    f = u_boot_console.config.env.get('env__zynq_aes_readable_file', None)
++    if not f:
++        pytest.skip('No TFTP readable file for zynq secure aes case to read')
++
++    dstaddr = f.get('dstaddr', None)
++    if not dstaddr:
++        pytest.skip('No dstaddr specified in env file to read')
++
++    dstsize = f.get('dstlen', None)
++    if not dstsize:
++        pytest.skip('No dstlen specified in env file to read')
++
++    zynq_secure_pre_commands(u_boot_console)
++    test_net.test_net_dhcp(u_boot_console)
++    if not test_net.net_set_up:
++        test_net.test_net_setup_static(u_boot_console)
++
++    srcaddr = f.get('srcaddr', None)
++    if not srcaddr:
++        addr = u_boot_utils.find_ram_base(u_boot_console)
++
++    expected_tftp = 'Bytes transferred = '
++    fn = f['fn']
++    output = u_boot_console.run_command('tftpboot %x %s' % (srcaddr, fn))
++    assert expected_tftp in output
++
++    expected_op = 'zynq aes [operation type] <srcaddr>'
++    output = u_boot_console.run_command(
++        'zynq aes %x $filesize %x %x' % (srcaddr, dstaddr, dstsize)
++    )
++    assert expected_op not in output
++    output = u_boot_console.run_command('echo $?')
++    assert output.endswith('0')
++
++@pytest.mark.buildconfigspec('cmd_zynq_aes')
++def test_zynq_aes_bitstream(u_boot_console):
++    f = u_boot_console.config.env.get('env__zynq_aes_readable_file', None)
++    if not f:
++        pytest.skip('No TFTP readable file for zynq secure aes case to read')
++
++    zynq_secure_pre_commands(u_boot_console)
++    test_net.test_net_dhcp(u_boot_console)
++    if not test_net.net_set_up:
++        test_net.test_net_setup_static(u_boot_console)
++
++    srcaddr = f.get('srcaddr', None)
++    if not srcaddr:
++        addr = u_boot_utils.find_ram_base(u_boot_console)
++
++    expected_tftp = 'Bytes transferred = '
++    fn = f['fnbit']
++    output = u_boot_console.run_command('tftpboot %x %s' % (srcaddr, fn))
++    assert expected_tftp in output
++
++    expected_op = 'zynq aes [operation type] <srcaddr>'
++    output = u_boot_console.run_command(
++        'zynq aes load %x $filesize' % (srcaddr)
++    )
++    assert expected_op not in output
++    output = u_boot_console.run_command('echo $?')
++    assert output.endswith('0')
++
++@pytest.mark.buildconfigspec('cmd_zynq_aes')
++def test_zynq_aes_partial_bitstream(u_boot_console):
++    f = u_boot_console.config.env.get('env__zynq_aes_readable_file', None)
++    if not f:
++        pytest.skip('No TFTP readable file for zynq secure aes case to read')
++
++    zynq_secure_pre_commands(u_boot_console)
++    test_net.test_net_dhcp(u_boot_console)
++    if not test_net.net_set_up:
++        test_net.test_net_setup_static(u_boot_console)
++
++    srcaddr = f.get('srcaddr', None)
++    if not srcaddr:
++        addr = u_boot_utils.find_ram_base(u_boot_console)
++
++    expected_tftp = 'Bytes transferred = '
++    fn = f['fnpbit']
++    output = u_boot_console.run_command('tftpboot %x %s' % (srcaddr, fn))
++    assert expected_tftp in output
++
++    expected_op = 'zynq aes [operation type] <srcaddr>'
++    output = u_boot_console.run_command('zynq aes loadp %x $filesize' % (srcaddr))
++    assert expected_op not in output
++    output = u_boot_console.run_command('echo $?')
++    assert output.endswith('0')
++
++@pytest.mark.buildconfigspec('cmd_zynq_rsa')
++def test_zynq_rsa_image(u_boot_console):
++    f = u_boot_console.config.env.get('env__zynq_rsa_readable_file', None)
++    if not f:
++        pytest.skip('No TFTP readable file for zynq secure rsa case to read')
++
++    zynq_secure_pre_commands(u_boot_console)
++    test_net.test_net_dhcp(u_boot_console)
++    if not test_net.net_set_up:
++        test_net.test_net_setup_static(u_boot_console)
++
++    srcaddr = f.get('srcaddr', None)
++    if not srcaddr:
++        addr = u_boot_utils.find_ram_base(u_boot_console)
++
++    expected_tftp = 'Bytes transferred = '
++    fn = f['fn']
++    output = u_boot_console.run_command('tftpboot %x %s' % (srcaddr, fn))
++    assert expected_tftp in output
++
++    expected_op = 'zynq rsa <baseaddr>'
++    output = u_boot_console.run_command('zynq rsa %x ' % (srcaddr))
++    assert expected_op not in output
++    output = u_boot_console.run_command('echo $?')
++    assert output.endswith('0')
++
++@pytest.mark.buildconfigspec('cmd_zynq_rsa')
++def test_zynq_rsa_image_invalid(u_boot_console):
++    f = u_boot_console.config.env.get('env__zynq_rsa_readable_file', None)
++    if not f:
++        pytest.skip('No TFTP readable file for zynq secure rsa case to read')
++
++    zynq_secure_pre_commands(u_boot_console)
++    test_net.test_net_dhcp(u_boot_console)
++    if not test_net.net_set_up:
++        test_net.test_net_setup_static(u_boot_console)
++
++    srcaddr = f.get('srcaddr', None)
++    if not srcaddr:
++        addr = u_boot_utils.find_ram_base(u_boot_console)
++
++    expected_tftp = 'Bytes transferred = '
++    fninvalid = f['fninvalid']
++    output = u_boot_console.run_command('tftpboot %x %s' % (srcaddr, fninvalid))
++    assert expected_tftp in output
++
++    expected_op = 'zynq rsa <baseaddr>'
++    output = u_boot_console.run_command('zynq rsa %x ' % (srcaddr))
++    assert expected_op in output
++    output = u_boot_console.run_command('echo $?')
++    assert not output.endswith('0')
+diff --git a/test/py/tests/test_zynqmp_secure.py b/test/py/tests/test_zynqmp_secure.py
+new file mode 100644
+index 000000000000..570bd2439c17
+--- /dev/null
++++ b/test/py/tests/test_zynqmp_secure.py
+@@ -0,0 +1,104 @@
++# SPDX-License-Identifier: GPL-2.0
++# (C) Copyright 2023, Advanced Micro Devices, Inc.
++
++import pytest
++import re
++import u_boot_utils
++import test_net
++
++"""
++This test verifies different type of secure boot images loaded at the DDR for
++AMD's ZynqMP SoC.
++
++Note: This test relies on boardenv_* containing configuration values to define
++the files to be used for testing. Without this, this test will be automatically
++skipped. It also relies on dhcp or setup_static net test to support tftp to
++load files from a TFTP server.
++
++For example:
++
++# Details regarding the files that may be read from a TFTP server. This
++# variable may be omitted or set to None if zynqmp secure testing is not
++# possible or desired.
++env__zynqmp_secure_readable_file = {
++    'fn': 'auth_bhdr_ppk1.bin',
++    'enckupfn': 'auth_bhdr_enc_kup_load.bin',
++    'addr': 0x1000000,
++    'keyaddr': 0x100000,
++    'keyfn': 'aes.txt',
++}
++"""
++
++@pytest.mark.buildconfigspec('cmd_zynqmp')
++def test_zynqmp_secure_boot_image(u_boot_console):
++    """This test verifies secure boot image at the DDR address for
++    authentication only case.
++    """
++
++    f = u_boot_console.config.env.get('env__zynqmp_secure_readable_file', None)
++    if not f:
++        pytest.skip('No TFTP readable file for zynqmp secure cases to read')
++
++    test_net.test_net_dhcp(u_boot_console)
++    if not test_net.net_set_up:
++        test_net.test_net_setup_static(u_boot_console)
++
++    addr = f.get('addr', None)
++    if not addr:
++        addr = u_boot_utils.find_ram_base(u_boot_console)
++
++    expected_tftp = 'Bytes transferred = '
++    fn = f['fn']
++    output = u_boot_console.run_command('tftpboot %x %s' % (addr, fn))
++    assert expected_tftp in output
++
++    output = u_boot_console.run_command('zynqmp secure %x $filesize' % (addr))
++    assert 'Verified image at' in output
++    ver_addr = re.search(r'Verified image at 0x(.+)', output).group(1)
++    output = u_boot_console.run_command('echo $?')
++    assert output.endswith('0')
++    output = u_boot_console.run_command('print zynqmp_verified_img_addr')
++    assert f'zynqmp_verified_img_addr={ver_addr}' in output
++    assert 'Error' not in output
++
++
++@pytest.mark.buildconfigspec('cmd_zynqmp')
++def test_zynqmp_secure_boot_img_kup(u_boot_console):
++    """This test verifies secure boot image at the DDR address for encryption
++    with kup key case.
++    """
++
++    f = u_boot_console.config.env.get('env__zynqmp_secure_readable_file', None)
++    if not f:
++        pytest.skip('No TFTP readable file for zynqmp secure cases to read')
++
++    test_net.test_net_dhcp(u_boot_console)
++    if not test_net.net_set_up:
++        test_net.test_net_setup_static(u_boot_console)
++
++    keyaddr = f.get('keyaddr', None)
++    if not keyaddr:
++        addr = u_boot_utils.find_ram_base(u_boot_console)
++    expected_tftp = 'Bytes transferred = '
++    keyfn = f['keyfn']
++    output = u_boot_console.run_command('tftpboot %x %s' % (keyaddr, keyfn))
++    assert expected_tftp in output
++
++    addr = f.get('addr', None)
++    if not addr:
++        addr = u_boot_utils.find_ram_base(u_boot_console)
++    expected_tftp = 'Bytes transferred = '
++    fn = f['enckupfn']
++    output = u_boot_console.run_command('tftpboot %x %s' % (addr, fn))
++    assert expected_tftp in output
++
++    output = u_boot_console.run_command(
++        'zynqmp secure %x $filesize %x' % (addr, keyaddr)
++    )
++    assert 'Verified image at' in output
++    ver_addr = re.search(r'Verified image at 0x(.+)', output).group(1)
++    output = u_boot_console.run_command('echo $?')
++    assert output.endswith('0')
++    output = u_boot_console.run_command('print zynqmp_verified_img_addr')
++    assert f'zynqmp_verified_img_addr={ver_addr}' in output
++    assert 'Error' not in output
+-- 
+2.25.1
 
-On Fri, 19 Jan 2024 at 10:58, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Heinrich,
->
-> On Fri, 19 Jan 2024 at 10:56, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >
-> > Hello Ilias,
-> >
-> > please, have a look at this warning.
-> >
-> >
-> > -------- Forwarded Message --------
-> > Subject: New Defects reported by Coverity Scan for Das U-Boot
-> > Date: Thu, 18 Jan 2024 14:20:27 +0000 (UTC)
-> > From: scan-admin@coverity.com
-> > To: xypron.glpk@gmx.de
-> >
-> > Hi,
-> >
-> > Please find the latest report on new defect(s) introduced to Das U-Boot
-> > found with Coverity Scan.
-> >
-> > 2 new defect(s) introduced to Das U-Boot found with Coverity Scan.
-> > 16 defect(s), reported by Coverity Scan earlier, were marked fixed in
-> > the recent build analyzed by Coverity Scan.
-> >
-> > New defect(s) Reported-by: Coverity Scan
-> > Showing 2 of 2 defect(s)
-> >
-> >
-> > ** CID 478334:  Memory - corruptions  (OVERRUN)
-> >
-> >
-> > ________________________________________________________________________________________________________
-> > *** CID 478334:  Memory - corruptions  (OVERRUN)
-> > /cmd/eficonfig.c: 534 in eficonfig_create_device_path()
-> > 528             p += fp_size;
-> > 529             *((struct efi_device_path *)p) = END;
-> > 530     531             dp = efi_dp_shorten(dp_volume);
-> > 532             if (!dp)
-> > 533                     dp = dp_volume;
-> > >>>     CID 478334:  Memory - corruptions  (OVERRUN)
-> > >>>     Overrunning struct type efi_device_path of 4 bytes by passing it to a function which accesses it at byte offset 5 using argument "fp->dp.length" (which evaluates to 6).
-> > 534             dp = efi_dp_concat(dp, &fp->dp, false);
-> >
-> > How about using
-> >
-> > dp = efi_dp_concat(dp, (struct efi_device_path *)fp, false);
->
-> That looks good. I'll send a patch shortly
->
-> Thanks
-> /Ilias
-> >
-> > Best regards
-> >
-> > Heinrich
-> >
-> > 535             free(buf);
-> > 536     537             return dp;
-> > 538     }
-> > 539
-> > ** CID 478333:  Error handling issues  (CHECKED_RETURN)
-> > /lib/efi_loader/efi_firmware.c: 413 in efi_firmware_set_fmp_state_var()
-> >
