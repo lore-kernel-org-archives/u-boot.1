@@ -4,81 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94FC7C4725D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 15:12:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5371DC47DAF
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 15:12:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C305287CC1;
-	Fri, 19 Jan 2024 16:12:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3C74387CEE;
+	Fri, 19 Jan 2024 16:12:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z2UJ/zTi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VXbUOLoL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0E2187CDD; Fri, 19 Jan 2024 16:12:10 +0100 (CET)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id 493AA87CEB; Fri, 19 Jan 2024 16:12:16 +0100 (CET)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51C4387AEC
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 16:12:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3080887CDE
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 16:12:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-682bfd39ac5so3489926d6.2
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 07:12:08 -0800 (PST)
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-78314e00350so64096485a.1
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 07:12:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705677126; x=1706281926; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1705677133; x=1706281933; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KebDo8TeWIxSF2S0h4D1Oq0QWFRjBhCj6m9Tj1VWLyg=;
- b=Z2UJ/zTiy5Etmj/ILPinqLoIsAza0ALpM56NGLsOpZmlqKszRDcrMBbN/RoCkD/maT
- EzLbt/NqxCKAApJxkE9X2ja29oBksU1NUgw31SX+XIgL9NgYHLUKLmvlHSnEgQDV9Pu/
- xZlIhOs8x13/IuOrS9GluJj/WCrs0ZaXxrGG4V9v7BEIWVFF7tFe3q4P36Gkc5NV93rp
- 10k1cuHMT2OOspKPVC28xGCCOgSYcwYfVpw8b3rt7HvlMQpAhHy5psI/YEZCFhXLVZOF
- oxaGs34oXynt3WH983xiO6HZdrq5RVKMc4ta84mcqlE85u9Urxk5cfToh4oyXYJLqZPa
- mLYg==
+ bh=YJigRzS0a6MJW7lXwpZ1Qhu3SapeNrjWUudAElf5jcY=;
+ b=VXbUOLoL04eivm93NyYPL3/7p7IMfpf+nkPOJ9HOoUs5XGnpx8YXjfQslDg3UN3oy0
+ i+Oie5cq8L98bgS5uechoQTHWaq5WDnQFqb6A59X92RTEYRT10Z5FsuR7DhhMvvv9Ig8
+ GLiEmVEu/F2BjZec4MSuLnFTfbiHb1LlLvls7xa1SVg77l26zg9fb/fzcL02S4ShjCq3
+ ygexYV45D0a4EFtTbtILeGa/bhDVcwtw9x3cSvQEZNHIpDfqBRNFc4EN4cnsnQryr7dV
+ 4ubs954dqmbOnUsIC8cUv633hbkevSGaNOAo1snFLuWEWgBZz2aLsQ408OJ6cjaabFs4
+ FNnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705677126; x=1706281926;
+ d=1e100.net; s=20230601; t=1705677133; x=1706281933;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KebDo8TeWIxSF2S0h4D1Oq0QWFRjBhCj6m9Tj1VWLyg=;
- b=uvhfc92aY9XoI/YBkdua3TTSDHZ8tRnztaJ/+ASNTvt6wWoMk8JPoH/d96Hp77ixLd
- 2aaZTszgy9XJnrkfr5ynCx9R2r/UEACnHmhsUi9wGRTTO9SqU7evzbFCY8hqdq//TpLA
- 2aaIZNgZXno4/IT5Ef+/Vpyqq29hJy9HtkwGt0WyGICceDNtkd6+56+B0cqcN6pP6khi
- 6qioaMSfridORWpO6m5fiWaAtdD7qwvYrfGq+OErzmEDvtqFhlP1WTpqwsrk1pZhvtl1
- vhUvDYEk+XPJRIV4TSIrt5Ri/iNoMrY50Dz7s48e6M5gMiTalq0Qg5P6mP1za1B/C+GQ
- bnog==
-X-Gm-Message-State: AOJu0YxFwk9b1CJ3BbSKo4DF6svfbShKcKMc4yEVOcFbvGsUewCiLeXj
- H36JvgBHGfzq9UefzqlcPtK7Y3fnGmE2ALOm2gWNJ3+2JJMUQ5oFogFHsiRDPIqElhLOAU3rJMC
- q
-X-Google-Smtp-Source: AGHT+IHL6W2/lW6FeA93a08fkITFgm2M21xnunwnFISgF1ZU7YnS07+jT4Vm5H901xwTev3ahf2qfw==
-X-Received: by 2002:a05:6214:5297:b0:681:5e14:339a with SMTP id
- kj23-20020a056214529700b006815e14339amr43243qvb.19.1705677126759; 
- Fri, 19 Jan 2024 07:12:06 -0800 (PST)
+ bh=YJigRzS0a6MJW7lXwpZ1Qhu3SapeNrjWUudAElf5jcY=;
+ b=JSs7zkBNXesJFwaJoJtaxZ8DoIIgUwYU9+ZDZb3JKd7tvndAgDf0Eb2F/zX88lG49Y
+ nBdenFxRSi1saRSiv/A9GG1jK8F0KSYvY1SvhHp+YhJIMliVIN0t8GWtvVnleD3W+gdH
+ d2IQYh6Zb3KyQ5dTqMKQXYvl7JrjbiKvKgIY4RQe6nQoyA6DkftZhagzZIu1xk9UR3IY
+ Uq/k4WlRKHZMy02QCL0Ac0sii116unSXpcT7BVGiaX6qjOun5XYg+aWT3QFqTpZdBcD3
+ pCEd3vt/SAQ3mT0X4aQMiZqDKuGjOzS6IKgbxo+PI+wj6wJDjc7Agvcay3nVLH7fKWEV
+ qS3g==
+X-Gm-Message-State: AOJu0YyKsfkq09R8gP8ErctGTgnTGrBDD/yhUbGMhqX2Hv9AuNGZSGmK
+ kMlT9CYQpxSdiFUA9hOzApEcGA/PnbFxxxarS1dB9J+Pm1DKeYSXjk4q2WygsHL2Uj1iC5ymq8K
+ a
+X-Google-Smtp-Source: AGHT+IHHGpOnYbCwzvux2JqLGvgxWy43UdRdra2bRSmO0YXQV47E2aTlygm4vJV2qjDd4GYfCHSVLw==
+X-Received: by 2002:a05:620a:198f:b0:781:1dc9:4534 with SMTP id
+ bm15-20020a05620a198f00b007811dc94534mr21470qkb.66.1705677132859; 
+ Fri, 19 Jan 2024 07:12:12 -0800 (PST)
 Received: from ubuntu.localdomain
  (cpe688f2e182063-cm688f2e182060.sdns.net.rogers.com. [174.115.4.214])
  by smtp.gmail.com with ESMTPSA id
- i8-20020a37c208000000b0078322dc4f97sm6142113qkm.26.2024.01.19.07.12.05
+ i8-20020a37c208000000b0078322dc4f97sm6142113qkm.26.2024.01.19.07.12.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jan 2024 07:12:06 -0800 (PST)
+ Fri, 19 Jan 2024 07:12:12 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
  jwerner@chromium.org
 Cc: Raymond Mao <raymond.mao@linaro.org>,
  Kevin Chen <kevin_chen@aspeedtech.com>,
- Sean Anderson <sean.anderson@seco.com>, Nikhil M Jain <n-jain1@ti.com>,
- Bin Meng <bmeng.cn@gmail.com>,
+ Sean Anderson <sean.anderson@seco.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Nikhil M Jain <n-jain1@ti.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Shiji Yang <yangshiji66@outlook.com>, Michal Simek <michal.simek@amd.com>,
- Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [PATCH v7 1/8] bloblist: add API to check the register conventions
-Date: Fri, 19 Jan 2024 07:09:57 -0800
-Message-Id: <20240119151007.715348-2-raymond.mao@linaro.org>
+ Qu Wenruo <wqu@suse.com>
+Subject: [PATCH v7 2/8] bloblist: check bloblist with specified buffer size
+Date: Fri, 19 Jan 2024 07:09:58 -0800
+Message-Id: <20240119151007.715348-3-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240119151007.715348-1-raymond.mao@linaro.org>
 References: <20240119151007.715348-1-raymond.mao@linaro.org>
@@ -100,80 +102,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add bloblist_check_reg_conv() to check whether the bloblist is compliant
-to the register conventions defined in Firmware Handoff specification.
-This API can be used for all Arm platforms.
+Instead of expecting the bloblist total size to be the same as the
+pre-allocated buffer size, practically we are more interested in
+whether the pre-allocated buffer size is bigger than the bloblist
+total size.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 Changes in v2
-- Refactor of bloblist_check_reg_conv().
-Changes in v3
-- bloblist_check_reg_conv() returns -ENOENT if OF_BOARD is disabled.
+- New patch file created for v2.
 Changes in v4
-- Add checking of signature register.
-Changes in V5
-- Drop the dependence on OF_BOARD.
+- Update function header of bloblist_check().
 
- common/bloblist.c  | 11 +++++++++++
- include/bloblist.h | 20 ++++++++++++++++++++
- 2 files changed, 31 insertions(+)
+ common/bloblist.c  | 2 +-
+ include/bloblist.h | 9 +++++----
+ test/bloblist.c    | 2 +-
+ 3 files changed, 7 insertions(+), 6 deletions(-)
 
 diff --git a/common/bloblist.c b/common/bloblist.c
-index 2d373910b6..980b1ddbcb 100644
+index 980b1ddbcb..26b0ba33b1 100644
 --- a/common/bloblist.c
 +++ b/common/bloblist.c
-@@ -542,3 +542,14 @@ int bloblist_maybe_init(void)
- 
- 	return 0;
- }
-+
-+int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig)
-+{
-+	if (rzero || rsig != (BLOBLIST_MAGIC | BLOBLIST_REGCONV_VER) ||
-+	    rfdt != (ulong)bloblist_find(BLOBLISTT_CONTROL_FDT, 0)) {
-+		gd->bloblist = NULL;  /* Reset the gd bloblist pointer */
-+		return -EIO;
-+	}
-+
-+	return 0;
-+}
+@@ -384,7 +384,7 @@ int bloblist_check(ulong addr, uint size)
+ 		return log_msg_ret("Bad magic", -ENOENT);
+ 	if (hdr->version != BLOBLIST_VERSION)
+ 		return log_msg_ret("Bad version", -EPROTONOSUPPORT);
+-	if (!hdr->total_size || (size && hdr->total_size != size))
++	if (!hdr->total_size || (size && hdr->total_size > size))
+ 		return log_msg_ret("Bad total size", -EFBIG);
+ 	if (hdr->used_size > hdr->total_size)
+ 		return log_msg_ret("Bad used size", -ENOENT);
 diff --git a/include/bloblist.h b/include/bloblist.h
-index 84fc943819..f7e800f681 100644
+index f7e800f681..cc78259e5a 100644
 --- a/include/bloblist.h
 +++ b/include/bloblist.h
-@@ -78,6 +78,13 @@ enum {
- 	BLOBLIST_VERSION	= 1,
- 	BLOBLIST_MAGIC		= 0x4a0fb10b,
+@@ -348,12 +348,13 @@ int bloblist_new(ulong addr, uint size, uint flags, uint align_log2);
+  * bloblist_check() - Check if a bloblist exists
+  *
+  * @addr: Address of bloblist
+- * @size: Expected size of blobsize, or 0 to detect the size
++ * @size: Reserved space size for blobsize, or 0 to use the total size
+  * Return: 0 if OK, -ENOENT if the magic number doesn't match (indicating that
+- * there problem is no bloblist at the given address), -EPROTONOSUPPORT
++ * there problem is no bloblist at the given address) or any fields for header
++ * size, used size and total size do not match, -EPROTONOSUPPORT
+  * if the version does not match, -EIO if the checksum does not match,
+- * -EFBIG if the expected size does not match the detected size, -ENOSPC
+- * if the size is not large enough to hold the headers
++ * -EFBIG if the reserved space size is small than the total size or total size
++ * is 0
+  */
+ int bloblist_check(ulong addr, uint size);
  
-+	/*
-+	 * FIXME:
-+	 * Register convention version should be placed into a higher byte
-+	 * https://github.com/FirmwareHandoff/firmware_handoff/issues/32
-+	 */
-+	BLOBLIST_REGCONV_VER	= 1 << 24,
-+
- 	BLOBLIST_BLOB_ALIGN_LOG2 = 3,
- 	BLOBLIST_BLOB_ALIGN	 = 1 << BLOBLIST_BLOB_ALIGN_LOG2,
+diff --git a/test/bloblist.c b/test/bloblist.c
+index 17d9dd03d0..7dab9addf8 100644
+--- a/test/bloblist.c
++++ b/test/bloblist.c
+@@ -207,7 +207,7 @@ static int bloblist_test_checksum(struct unit_test_state *uts)
+ 	hdr->flags++;
  
-@@ -461,4 +468,17 @@ static inline int bloblist_maybe_init(void)
- }
- #endif /* BLOBLIST */
+ 	hdr->total_size--;
+-	ut_asserteq(-EFBIG, bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
++	ut_asserteq(-EIO, bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
+ 	hdr->total_size++;
  
-+/**
-+ * bloblist_check_reg_conv() - Check whether the bloblist is compliant to
-+ *			       the register conventions according to the
-+ *			       Firmware Handoff spec.
-+ *
-+ * @rfdt:  Register that holds the FDT base address.
-+ * @rzero: Register that must be zero.
-+ * @rsig:  Register that holds signature and register conventions version.
-+ * Return: 0 if OK, -EIO if the bloblist is not compliant to the register
-+ *	   conventions.
-+ */
-+int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig);
-+
- #endif /* __BLOBLIST_H */
+ 	hdr->spare++;
 -- 
 2.25.1
 
