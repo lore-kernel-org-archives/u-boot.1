@@ -4,76 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 077A3C47DAF
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 14:08:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 594F0C47DAF
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 14:09:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C46587B9D;
-	Fri, 19 Jan 2024 15:08:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 59E948746C;
+	Fri, 19 Jan 2024 15:09:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=jens-maus.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="JtUHh7Wd";
+	dkim=pass (1024-bit key; unprotected) header.d=jens-maus.de header.i=@jens-maus.de header.b="kusVisUs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01BB287BC9; Fri, 19 Jan 2024 15:08:12 +0100 (CET)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+ id 0860987CAF; Fri, 19 Jan 2024 15:09:00 +0100 (CET)
+Received: from mail.light-speed.de (mail.light-speed.de
+ [IPv6:2a01:238:43f2:8900:dd04:e3a0:ee11:a73d])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E3C828746C
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 15:08:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=jens-maus.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mail@jens-maus.de
+Received: from smtpclient.apple (ip5f5a836f.dynamic.kabel-deutschland.de
+ [95.90.131.111])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 284358746C
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 15:08:10 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=17487c629f=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 40JDZZ2d009032; Fri, 19 Jan 2024 15:08:00 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:from:to:cc:references
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=bv6q4GBBDLJqYJxbmIsPUkn9COX8xatJ8VpcfVnhqAk=; b=Jt
- UHh7Wd0arUwo+fEfpxPHAthRQ9E1DVa7vNeD5xXiD9c0V2MKN2RU+XcxKOaC1n4j
- IC5Io71oYuV70VtRnBZyZkDJ4FVYPGKU+3ap6A1WfbMaFBgJxUoEHUINEGfBGI+0
- m+dI0sOqTB1t4XCcbKj4IgxZ7ocgiha36WIUAfZFFtGIHBZfQBY85G7Thhzu2kKG
- UVOIzglVNW93MrStnP0LrPzfA+R25zpUycQsqWe2MEpcHmRKD9Fd4I5KFXWfMBlx
- WjYP8L6SlogYUuZX7Sp5vqgecz4vvCyQiRKdIYH5ETN95b0HACK2ethMHh2Gf7Pp
- jvmzV7z8jvg9SaIFKxTA==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vnbqckjkk-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 Jan 2024 15:08:00 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D9D3E100083;
- Fri, 19 Jan 2024 15:07:59 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CB72C257A83;
- Fri, 19 Jan 2024 15:07:59 +0100 (CET)
-Received: from [10.252.4.250] (10.252.4.250) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Jan
- 2024 15:07:59 +0100
-Message-ID: <867f8edc-18c7-40d6-9cc9-7e0ac9e9e110@foss.st.com>
-Date: Fri, 19 Jan 2024 15:07:58 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: stm32: Set stdio to serial on DH STM32MP15xx DHSOM
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20240113175811.157221-1-marex@denx.de>
- <42896f48-89e7-4d58-b06c-d54f27350eeb@foss.st.com>
-In-Reply-To: <42896f48-89e7-4d58-b06c-d54f27350eeb@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.252.4.250]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-01-19_08,2024-01-19_02,2023-05-22_02
+ by mail.light-speed.de (Postfix) with ESMTPSA id 8BDD03D48651;
+ Fri, 19 Jan 2024 15:08:57 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jens-maus.de;
+ s=mail; t=1705673337;
+ bh=kSqaFLr9cHJ+lhfMT8CPQwqgaS+sQeWHQUrEjsG5zzQ=;
+ h=Subject:From:In-Reply-To:Date:Cc:References:To;
+ b=kusVisUsyfduHzdwM38sOJxqyqO7nPzb68BVI4TtWHQJzH1QYuJVbUeS+1gHTFARJ
+ Is/Uu4eKyB+VQg1H0HmnKS2cnyDxz7Ht0EzIBCreSLITmdPdV55SQC2Vt60d/8bN9A
+ G/r6b1arONBxlceuCvOJ8+5boPlvfEDXAtNPtS0U=
+Content-Type: text/plain;
+	charset=us-ascii
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.300.61.1.2\))
+Subject: Re: [PATCH v4 0/6] rpi5: initial support
+From: Jens Maus <mail@jens-maus.de>
+In-Reply-To: <fa7j66z5r7pul6zp5ljcntrb7xbazqxesz6wysrslrpxxhpafc@krztduo6pjm6>
+Date: Fri, 19 Jan 2024 15:08:46 +0100
+Cc: Stefan Wahren <wahrenst@gmx.net>,
+ u-boot@lists.denx.de
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <25AB43C7-829F-4F62-AC8E-3284B22ACB03@jens-maus.de>
+References: <454FB8E4-52A8-482D-8671-5650F8C4773C@suse.de>
+ <A26CEBAE-9950-4304-B3A2-1BAB4035437A@jens-maus.de>
+ <zmxxqxlbhdhngu36ft4yrqxtjkmvalvhbgbl2uzsj2jgnq7zje@qtncpq2nss57>
+ <DCAD0173-2377-4B89-92EB-F38ED1CA938B@jens-maus.de>
+ <03bbe9ad-7cc6-491d-8bd9-631f1cf04f39@gmx.net>
+ <418F8AAE-136A-44A0-80C3-D01FFE00EC2E@jens-maus.de>
+ <sjmi6dftbgx56isfyjtaryehzq2iollwxm2etlspiygehh3n6v@k4ws56nsbgfn>
+ <6C9E5E0C-9C27-45A4-886F-8B8C641EF7A3@jens-maus.de>
+ <ejituxf7ggiu2ciswrwoeqqjytb7mj2vn6gkxllywtnlm4aefi@br4zq7rfytlo>
+ <3FB75D28-9BF9-4518-8BF1-519C884516F7@jens-maus.de>
+ <fa7j66z5r7pul6zp5ljcntrb7xbazqxesz6wysrslrpxxhpafc@krztduo6pjm6>
+To: "Ivan T. Ivanov" <iivanov@suse.de>
+X-Mailer: Apple Mail (2.3774.300.61.1.2)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,74 +80,31 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+> Am 19.01.2024 um 15:06 schrieb Ivan T. Ivanov <iivanov@suse.de>:
+>=20
+> On 01-19 14:54, Jens Maus wrote:
+>>=20
+>>> Am 19.01.2024 um 14:46 schrieb Ivan T. Ivanov <iivanov@suse.de>:
+>>>=20
+>>> Same here, expect that they are more memory banks, of course.
+>>> It is really strange that you don't seen even single message
+>>> from the U-Boot..
+>>=20
+>> Indeed. Not a single line, nor any U-Boot logo or anything on HDMI. =
+Do you see any debug output on the serial debug probe connection to the =
+rpi5?
+>=20
+> Yes, there is even small submarine on the top right side of the screen
+> while U-Boot is running.
 
-On 1/16/24 08:19, Patrice CHOTARD wrote:
-> Hi Marek
-> 
-> On 1/13/24 18:57, Marek Vasut wrote:
->> In case CONSOLE_MUX and SYS_CONSOLE_IS_IN_ENV are enabled, the console
->> stdin, stdout, stderr must be defined in environment. Define the default
->> settings to fix the following warning on boot:
->>
->> "
->> In:    No input devices available!
->> Out:   No output devices available!
->> Err:   No error devices available!
->> "
->>
->> Sort the default environment as well.
->>
->> Signed-off-by: Marek Vasut <marex@denx.de>
->> ---
->> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
->> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->> Cc: u-boot@dh-electronics.com
->> Cc: uboot-stm32@st-md-mailman.stormreply.com
->> ---
->>  include/configs/stm32mp15_dh_dhsom.h | 11 +++++++----
->>  1 file changed, 7 insertions(+), 4 deletions(-)
->>
->> diff --git a/include/configs/stm32mp15_dh_dhsom.h b/include/configs/stm32mp15_dh_dhsom.h
->> index 8ff882264f4..de39b19219d 100644
->> --- a/include/configs/stm32mp15_dh_dhsom.h
->> +++ b/include/configs/stm32mp15_dh_dhsom.h
->> @@ -12,14 +12,13 @@
->>  #define PHY_ANEG_TIMEOUT		20000
->>  
->>  #ifdef CONFIG_SPL_BUILD
->> -#define CFG_EXTRA_ENV_SETTINGS					\
->> +#define CFG_EXTRA_ENV_SETTINGS						\
->>  	"dfu_alt_info_ram=u-boot.itb ram "				\
->>  			__stringify(CONFIG_SPL_LOAD_FIT_ADDRESS)	\
->>  			" 0x800000\0"
->>  #endif
->>  
->> -#define STM32MP_BOARD_EXTRA_ENV \
->> -	"usb_pgood_delay=1000\0" \
->> +#define STM32MP_BOARD_EXTRA_ENV						\
->>  	"dh_update_sd_to_emmc=" /* Install U-Boot from SD to eMMC */	\
->>  		"setexpr loadaddr1 ${loadaddr} + 0x1000000 && "		\
->>  		"load mmc 0:4 ${loadaddr1} boot/u-boot-spl.stm32 && "	\
->> @@ -49,7 +48,11 @@
->>  		"sf update ${loadaddr1} 0x40000 ${filesize1} && "	\
->>  		"sf update ${loadaddr} 0x80000 ${filesize} && "		\
->>  		"env set filesize1 && env set loadaddr1\0"		\
->> -	"update_sf=run dh_update_sd_to_sf\0"
->> +	"stdin=serial\0"						\
->> +	"stdout=serial\0"						\
->> +	"stderr=serial\0"						\
->> +	"update_sf=run dh_update_sd_to_sf\0"				\
->> +	"usb_pgood_delay=1000\0"
->>  
->>  
->>  #include <configs/stm32mp15_common.h>
-> 
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> 
-> Thanks
-> Patrice
+On the HDMI port, right? But what about the serial UART output? Is there =
+anything U-Boot outputs right after the rpi boot loader is done? Here =
+not. And as said, the same u-boot.bin boots up perfectly with a rpi4 and =
+I can see the U-Boot submarine logo on the HDMI.
 
-Applied to u-boot-stm32/master
+regards,
+jens
+--=20
+Jens Maus, Dresden/Germany
+http://jens-maus.de/
 
-Thanks
-Patrice
