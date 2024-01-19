@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17C08C4725D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:10:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ABB9C4725D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:10:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE47687D3C;
-	Fri, 19 Jan 2024 17:09:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 56A7C87D47;
+	Fri, 19 Jan 2024 17:09:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T54eOaI9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DYzlqEQI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5C3C87CF4; Fri, 19 Jan 2024 17:09:10 +0100 (CET)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id AD3EC87D44; Fri, 19 Jan 2024 17:09:15 +0100 (CET)
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B64AB87D3C
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 17:09:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DB0687D42
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 17:09:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-5fa4b03f3f5so9388637b3.1
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 08:09:08 -0800 (PST)
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-dc250cff65aso779562276.1
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 08:09:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705680547; x=1706285347; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1705680552; x=1706285352; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=XPkzFc4Hg+mgopDJ71VUH49CI1mmoWW0znFk8WSuoRE=;
- b=T54eOaI9sWeH5wZbsjHokcCqhq4SlQ2ZkbPzZvh7RLtSNOEQpVYFyYljoJx7d5fNbP
- HK8YNEoEvlIBOwXm93WOZ+HrpOv97HgUhqgZOrN46qPlTErwX6759WvP96ScXQIQs0hi
- 89FqdJcsTvMVc6mKVFn19N2pVPBpbV107wgtA=
+ bh=S+fcS6OAKg0aVxG19grbVKC6aIyGsPEAJHAiA4bZgMM=;
+ b=DYzlqEQIPszt8DyPp7Msw4AdnmqO78I9UTtRdxbOqUh8DGmrb38QQ2Q9ln/umavRrY
+ snJ6RER6uSiA13d9FCE8AqA8xhh7VygH5jNzbsKjh0C7Brpsa3dKU63QrA8pQ2tYeM/s
+ 0MktL51pMWq7DqWgS73WRoI8iPv8B2Tta2lCQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705680547; x=1706285347;
+ d=1e100.net; s=20230601; t=1705680552; x=1706285352;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XPkzFc4Hg+mgopDJ71VUH49CI1mmoWW0znFk8WSuoRE=;
- b=bZsoadTurfKCML+mjQKBgXMcp/JfkVUwAes/vrSai3n9RpNMYW5YJslYCkPge5IFIB
- W1+fcRAJLacpJdXX8W8BZahI09axGs5CcpfWNoxz4PtRWFRm0OwUIPuE5TlLtIWkthEw
- yI3qtCYTeYJdVEjsvIjZGhQ0JhweZjIG2BGqRLQxs5GRYG0N26wmt0UFUgrX27W53oAI
- Cv6x0ORxA7Tmz4BEUQa7DQukELpgHe5Z2Ty/KADBf7rCNQO1v2XDyjymF3ZekSGZO/fU
- pUDUR8W4ATCQlAP2gRAxyLNwwwxLxTW9g8R84CeilEHaHrAqmGGwSWYYh5DNwHxOw4g2
- aAQQ==
-X-Gm-Message-State: AOJu0Yxhl7y/QUcQmaNSeQOYsd56YQtS0vbrBPRFVGEcFrlKMhxA72EL
- Fbb56j0vlTHa44Y8bt2STWc3E2t/9w9tGuT3elkAEeTSEN5875HXFsPx503hYkw=
-X-Google-Smtp-Source: AGHT+IHksSPHAV6BU7o1JELykqyL57Q8h+oRsf0EC/3srgDKfFk0nRQLZPArso8MX0dhF5WWNx47kg==
-X-Received: by 2002:a81:48c9:0:b0:5ec:2c54:5648 with SMTP id
- v192-20020a8148c9000000b005ec2c545648mr100306ywa.76.1705680547489; 
- Fri, 19 Jan 2024 08:09:07 -0800 (PST)
+ bh=S+fcS6OAKg0aVxG19grbVKC6aIyGsPEAJHAiA4bZgMM=;
+ b=KNCqKUrpzQpMw9jFcLPeBGidd3Jy9CePCqjKzIX4CaW/o1a5oOP2RfYBoaW+/kBOfK
+ g3Pj0Y1adVk5u47eR100kAWkxioQ8LEqWXIgoBsDK3n6gVHcxqQ/reHIZ4YAbNpGOtoF
+ cJ1xQ0cIgAT57RnNaQwnnBacWs6glZi29WtwY7fuPMsMdZYxPYDqaAcqZHX6rl8ADFSH
+ GoDz/yVCujQjBPlgmrAje0WTGZvl3H0xc9q08JKEQiPC7eGHrHUMwNmj4uNn11dxM4tv
+ vXu7VyO1VhF6+H1iHqV2Nkv8t1Cb+2os0rNCQBY8m+tjcYUZOwwVTUOVdi9gO+322VAd
+ xBEA==
+X-Gm-Message-State: AOJu0Yx/3PfaVqMZTu/47P0XmS/pBzA1lJmjMzB8VzvyVcufAH3FjAI1
+ YV1ri86kBvvzkcAVJc2e5rSuAG36hvM7yQCugMAwbHWv1lCy1cH+LgmWgjbbAHo=
+X-Google-Smtp-Source: AGHT+IHm6N8t2Q6wm8cZyGg8XelbJX1tPmollkt+NI6Kf9veZr2T7OfDEIP/5lO5rCmfGuXZwOyisg==
+X-Received: by 2002:a05:6902:2484:b0:dc2:403f:e3dc with SMTP id
+ ds4-20020a056902248400b00dc2403fe3dcmr136546ybb.1.1705680551351; 
+ Fri, 19 Jan 2024 08:09:11 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- s184-20020a819bc1000000b005ffa70964f4sm186568ywg.115.2024.01.19.08.09.06
+ g138-20020a815290000000b005ff8d24601fsm1195112ywb.124.2024.01.19.08.09.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jan 2024 08:09:07 -0800 (PST)
-Date: Fri, 19 Jan 2024 11:09:05 -0500
+ Fri, 19 Jan 2024 08:09:10 -0800 (PST)
+Date: Fri, 19 Jan 2024 11:09:09 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] smbios: buffer overflow when zeroing entry point
-Message-ID: <20240119160905.GV12635@bill-the-cat>
-References: <20240111063408.9807-1-heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Peter Robinson <pbrobinson@gmail.com>
+Subject: Re: [PATCH 1/2] smbios: shorten sysinfo_str declarations and use
+Message-ID: <20240119160909.GW12635@bill-the-cat>
+References: <20240111143936.983448-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+NATJogMBZmUXhVu"
+ protocol="application/pgp-signature"; boundary="F9aiaq9oKNgA0ZVN"
 Content-Disposition: inline
-In-Reply-To: <20240111063408.9807-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240111143936.983448-1-ilias.apalodimas@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,44 +93,39 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---+NATJogMBZmUXhVu
+--F9aiaq9oKNgA0ZVN
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 11, 2024 at 07:34:08AM +0100, Heinrich Schuchardt wrote:
+On Thu, Jan 11, 2024 at 04:39:35PM +0200, Ilias Apalodimas wrote:
 
-> A SMBIOS 3 entry point has a different length than an SMBIOS 2.1 entry
-> point.
+> sysinfo_str is a bit too long and makes indentation weird. Shorten it
+> to si_str.
 >=20
-> Fixes: 70924294f375 ("smbios: Use SMBIOS 3.0 to support an address above =
-4GB")
-> Fixes: 1c5f6fa3883d ("smbios: Drop support for SMBIOS2 tables")
-> Addresses-Coverity-ID: 477212 ("Wrong sizeof argument")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---+NATJogMBZmUXhVu
+--F9aiaq9oKNgA0ZVN
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWqnqEACgkQFHw5/5Y0
-tyymoAwAkyWx77lYjEsXveDY8gKyK/uHea9MTsZ0FAqB2GbZ81WA3dWgO2JpgCcZ
-pgEDOKASwUmOcCRs/j20d2+Gy9aQGAlr0covup/w1PdgRoHA8N+xGins7CS8QJbg
-3J2PCMTTMzk6aZV44iWEuENvRIXYzIbo1lsN4hNEEPrD+6dfSQQKSVDqxbQH3HMB
-0nsIj0RoYsRZEx2GASYAHCNYGaZ1ROi/PZ9EiQcS8ieb+JhlRxmOayABicTmAZti
-M8XS3fLHueX5zzxgi7gvS9n0nlvr/Pp37LLliRxGVCrIkgUJnOPg4TIkPuQUSMOU
-ACTH7bUQS0AnPNaQk3PrUBPKOvAsPMwo3VdVhF5xMJHyMh6X+NsmNCzKMfzqs2Xu
-WPbPXtks7+PItTiUHItvQ1uyaSvxY6GOk8QAW8/0wGalM2/7SKjct+UKcczExZ+D
-V7m/wfwKFR/3ZS6lpx6WsP9U/FWZDFaDTeabPMM5tQwwaIcUcQ9p23qO/6DgGjkd
-FyKPT+Ny
-=n58r
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWqnqUACgkQFHw5/5Y0
+tyzhIAwAlcGSBCOIADaO8PWL+0HUJpf2ZoARXd4tLD5KUXv69/gK2k+8Xg4Yk6p5
+NzTpzl3QNur0acreNMs1d/5WOUNZUPtB8MCpzb87c8zVEcfrBABB9lMWkBr668FT
+FghxevMoqmllvSvnq9ve7CuzYdNrtWAiKl+7FCRA9M22v6OF0lHkJ7UPFkQrxQJh
+iOuv0enJ8c/zD3TIZIP4lUAWwpaE/EfgJoycsxihDBjpz79AZG+EfWNXhGkFqP0E
+6J2seiWUh3U0bovNNNl1MMgyfI3gg4wEx5XyD5J+MS25+iaozEdPNrgmO99BWFaK
+SVxb7097sz5d0WGRqKvAc1KHzpraw3N8SAEjAGaXQrrAeaL4AxE4rG/pWCyYoXzA
+8aXIEw404643YvbgjlkmUmXItI4ZSsEkdU/nJKTcc6Bkh35S6Tou5NlN12Vs5x7s
+JON9BSPKmHOY3IwYyY91AnmDYS0mk7bqYcVJpNqK0jdlZYI4kivTlXM4ADRsTdDy
+scL177O+
+=z34k
 -----END PGP SIGNATURE-----
 
---+NATJogMBZmUXhVu--
+--F9aiaq9oKNgA0ZVN--
