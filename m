@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F31AC47DAF
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 13:01:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91EEFC4725D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 13:05:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9793C87BB8;
-	Fri, 19 Jan 2024 14:01:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BA0D2879F7;
+	Fri, 19 Jan 2024 14:05:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LY0zjZsr";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="iU33KYJk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1353C87BC5; Fri, 19 Jan 2024 14:01:17 +0100 (CET)
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
- [IPv6:2607:f8b0:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A8AD587BBC; Fri, 19 Jan 2024 14:05:42 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6E8287561
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 14:01:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BC9368793C
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 14:05:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1d51bf8a7dcso1410085ad.1
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 05:01:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705669273; x=1706274073; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=i9JRdBYLKZvFAYraSCF1gmn6Ya1O0idHcRoRpwdFRxQ=;
- b=LY0zjZsroTTTgrWOg5Z8otm/AT6CP8HO9+XDmIy5i2WOhz71kF1jyTl2khgnpMbNhr
- Op9rcooxamMjXUY/arXQrCCKS1UHFFtDfJiEwtfxPvCSuWc1MYjBBFTR48wwLHyAZdHt
- xvAITPvYrXJwPI5zksJGR6HSZUcUfgZpZ+ock6gkoutUiY/mAaLMNprtdvmbsg9qTP3y
- fUE3pjHUqRzzBijw+eY9y2oHDjn9nEw6k1T/RBZDrYlOidpM6Jl4O1tUW2X3m/n86u8X
- D+qG7DQx8mL3zjjKnsx4kOz4mihcrWwrV5hd+Iujy3wZc5IykGQOPhCZwK+hunE7zvbC
- Z1dw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705669273; x=1706274073;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=i9JRdBYLKZvFAYraSCF1gmn6Ya1O0idHcRoRpwdFRxQ=;
- b=t56dLPaMuCt7IRwsGJ6jvC6heDPztItT+8S5b/j8E3DP6VKrmHZ0/bvrLd/5QVFfT9
- fUVPFgMb8WvhSC247YvV/VPLBF0ms/IKzRmVWFIU1Ca9s73mYpiJ5r5giAoqRasj6p8W
- eka6COf6nmvfEW3dqVwzkGlmOyckTXnPNOtSs9nU4PbsXjSk5+VUI21mwru4Jn3NyrJT
- pL8at3k+RVgkIT7NXhivTj1lgLuyfLyJXRT28/QK3KLII6H0j6U4yJt8nRwt5hB1oa1e
- x5wWLBnkJWQEurxt70UX/et3xWzoWg7r9BcONv+j+EaQ5ZsZfag4A1nZ8tInbFFSuBhL
- EpKA==
-X-Gm-Message-State: AOJu0Yy87mMLi4fn1aUjLz/vnWIk2prP7W7XCsJaAtGr8uX7mLfUD1dG
- LS4BGzlMOR6o8OoEEid3ITZ/gD+LqaL4V7EG/jEXSqdj+PXNHTR5OzvjRupAEzVOGm/eMdYs0uX
- g1PlCDNs1lRbVS42nzWv38sV+woA=
-X-Google-Smtp-Source: AGHT+IH1j36U6yt73BSjh94GlkITsz1B8lQ04qYiyvCwGdoToE0MotUfyv9M8sGiwfsud83oXGeZng9tpw1dfQg1nP0=
-X-Received: by 2002:a17:90a:d384:b0:28e:8e5b:73fd with SMTP id
- q4-20020a17090ad38400b0028e8e5b73fdmr2002564pju.4.1705669272900; Fri, 19 Jan
- 2024 05:01:12 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=17487c629f=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 40J9aDss019271; Fri, 19 Jan 2024 14:05:38 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=d+1LoRAkD9aNZbvDx/g1cvQshQOu5YUrWBTARuyePcU=; b=iU
+ 33KYJk6+Ct/SsIkgU+SDEm9CC1P2bydZjaR9OeS2QfCOGsqLo4cpP04KQh12zKXL
+ dLoKtPWiW0Wb2FTNndSaukuXqd2cepQCtHw/KynDtMcXo5tqkI04ePV1lIFKpZMc
+ h7+VmAkGlwvj1XHjLziqMlpo20SdmCUBeDSFhU2grSxJ9D3IWRjjTSAocvh7Mkxq
+ jhKbWMjv0x8XRcpWgyzCi2+oyOatiHOmW0AC8BKDBZFV+2eiY3uVkaLX5k74aCRo
+ f1AA0ml5dskOUhoYkgDQkNOGH5dGaWMWXDF+yq4bN0votYu3HHioCjEkuKqr/m5N
+ V6KirF1ZAgtx/qpPP0nA==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vkmfyx9m0-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 19 Jan 2024 14:05:38 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B6355100081;
+ Fri, 19 Jan 2024 14:05:37 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A8FCB23C6A3;
+ Fri, 19 Jan 2024 14:05:37 +0100 (CET)
+Received: from [10.252.4.250] (10.252.4.250) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Jan
+ 2024 14:05:37 +0100
+Message-ID: <97fd2848-1bd9-4345-82ab-c1da2cbd6694@foss.st.com>
+Date: Fri, 19 Jan 2024 14:05:36 +0100
 MIME-Version: 1.0
-References: <20240119003742.251587-1-marex@denx.de>
-In-Reply-To: <20240119003742.251587-1-marex@denx.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 19 Jan 2024 10:01:01 -0300
-Message-ID: <CAOMZO5CLhRdELR=UpNO+NMZq_TPgV5g3YQbAQHViO3ehvZYS6w@mail.gmail.com>
-Subject: Re: [PATCH] ARM: imx: Enable SPL_BOARD_INIT on DH i.MX8M Plus DHCOM
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>,
- Stefano Babic <sbabic@denx.de>, u-boot@dh-electronics.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] ARM: dts: stm32: Fix reset for usart1 in scmi
+ configuration
+Content-Language: en-US
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+References: <20240104123750.232991-1-patrice.chotard@foss.st.com>
+ <042cbd96-55f4-40c4-957a-58d5d1efdd6b@foss.st.com>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <042cbd96-55f4-40c4-957a-58d5d1efdd6b@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.252.4.250]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-01-19_07,2024-01-19_02,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,12 +91,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jan 18, 2024 at 9:38=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
->
-> The CONFIG_SPL_BOARD_INIT lets SPL common code call spl_board_init()
-> during the SPL start up. On this particular system, spl_board_init()
-> is used to reconfigure GIC clock parent to PLL2 500M, which is the
-> configuration expected by the Linux kernel. Enable SPL_BOARD_INIT .
 
-Same as the other patch, please explain why setting the PLL2 to 500MHz
-is needed.
+
+On 1/4/24 18:33, Patrick DELAUNAY wrote:
+> Hi,
+> 
+> On 1/4/24 13:37, Patrice Chotard wrote:
+>> In SCMI configuration, usart1 is secure, so all its resources are secured
+>> (clock and reset) and can't be set/unset by non-secure world but by OP-TEE.
+>>
+>> Fixes: 6cccc8d396bf ("ARM: dts: stm32: add SCMI version of STM32 boards (DK1/DK2/ED1/EV1)")
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> ---
+>>
+>>   arch/arm/dts/stm32mp15-scmi-u-boot.dtsi | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/arch/arm/dts/stm32mp15-scmi-u-boot.dtsi b/arch/arm/dts/stm32mp15-scmi-u-boot.dtsi
+>> index 7c8fec6cbfb..79494ecad90 100644
+>> --- a/arch/arm/dts/stm32mp15-scmi-u-boot.dtsi
+>> +++ b/arch/arm/dts/stm32mp15-scmi-u-boot.dtsi
+>> @@ -135,7 +135,7 @@
+>>   };
+>>     &usart1 {
+>> -    resets = <&rcc USART1_R>;
+>> +    resets = <&scmi_reset RST_SCMI_USART1>;
+>>   };
+>>     &usart2 {
+> 
+> 
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> 
+> Thanks
+> Patrick
+> 
+> 
+
+
+Applied to u-boot-stm32/master
+
+Thanks
+Patrice
