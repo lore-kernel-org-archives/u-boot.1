@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B93FFC47DD9
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:08:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFD1CC47DD3
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:08:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A793587D13;
-	Fri, 19 Jan 2024 17:08:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2562187D05;
+	Fri, 19 Jan 2024 17:08:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JocHQ9cb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KaTNAE73";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F0D387CB6; Fri, 19 Jan 2024 17:08:28 +0100 (CET)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id DB55B87D05; Fri, 19 Jan 2024 17:08:32 +0100 (CET)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D40787CB6
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 17:08:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D3E2887D03
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 17:08:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-5ff88cbbcceso8637317b3.2
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 08:08:26 -0800 (PST)
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-5e54d40cca2so7454147b3.3
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 08:08:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705680505; x=1706285305; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1705680509; x=1706285309; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TBiD+TtELk84eN/ouaWLI/jcS9vEwni+p2hKVCdkEDk=;
- b=JocHQ9cbu1RswWQtW8rZsMNTq0Y6JnY0e92hpfA5GzzFR8K1H0eabvmsd+2sbv6hZX
- D10p6/weiySS/yZkx90Gzl03uDP6YjFcnfPrs9hlyMiJvzl2QWs8PiInW8Q9R591YKAh
- qTNB3FFvRyiwWRnQFzh5fZ/9JGrcbAaIQTkjI=
+ bh=Xc+255M1lLZXP+C5bbdQObvkiZLBJew64LnyoFaoJ5g=;
+ b=KaTNAE73MRacCkBPu9JtrKnwidxSdSS2yHKQ8RHYXy7AgKoMb7am5XNIw4ae3xIn5g
+ ROjDqdG9TsDFF4SkRzNgZBySsAe1TL3n8LR8gPGR5SjtDpyIB5n+XWSdUsICr/SSg4EU
+ uCOzZAdl1WUl7oZU3syNiBed/rLWCcKT8swHs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705680505; x=1706285305;
+ d=1e100.net; s=20230601; t=1705680509; x=1706285309;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TBiD+TtELk84eN/ouaWLI/jcS9vEwni+p2hKVCdkEDk=;
- b=Ponc2EyV60+Dpjj8kPdqTO6GgwqEQh0MzsbL99HdhVIJ2wbvcnxtLyoSTlPwkqd5OM
- X7yZCbEbyGUqaZMU31QQRu4k+Z231ENeIMlqO6KVInNugnV+y5hh1msWDuKqiKd7+MDD
- HAqm/SUWxdnvnyRjAIVHyvWmPZIRwePC8/ezsed47mjlBFtuTOGSUvU6VbxP7oVLJC16
- DagofeH1tOZ5mX7RPRpom8mMU1UDN5WGJ587EtMfROxHWqKM3nAC0jJ1b1rAg1u6WAQk
- kOdGkxrHeuD8vFUe+fWx3sASsLLKoH6qzUNDw4/1Akvs0WMAO9Nzkh16qkzWOnNoL2lk
- pdWw==
-X-Gm-Message-State: AOJu0Yw7axpowNuwHJNZvMTbGYa/JBoFh1g1pmuwNzfp/T5WLaDNKFSh
- /vox5k/DZISW/OfI51v6yO5E4w6Y13EsmNcNN8oA0HM5seEZHinMmdw6QhwIxL0=
-X-Google-Smtp-Source: AGHT+IFnnRk3Vosd5QWXXw9v5OKk412P6O4weXEJzvIwkkPPFzErpBYVIh+KFFkuEwvXMp7IpSC9Rg==
-X-Received: by 2002:a81:a20b:0:b0:5f6:e8c8:9b6c with SMTP id
- w11-20020a81a20b000000b005f6e8c89b6cmr123454ywg.46.1705680504991; 
- Fri, 19 Jan 2024 08:08:24 -0800 (PST)
+ bh=Xc+255M1lLZXP+C5bbdQObvkiZLBJew64LnyoFaoJ5g=;
+ b=PNWAhW1IStJXWxNCF+Co8XKOJpQfjM4U6011t6VoNp5MJN+gYma+64p/5+xv5JIxzX
+ 1QPJfeR1W+cVPOeqafsvppr3dYQxp3CsiNDK08wuaV7+nzC/WgJ2pXlZtoTIB9aGxHZa
+ I5lkybgSWXA2qJSxRVlP8QrrF9cdX7Vmz6Wen/GajqqIvakg7u8YVMubFqrRtOFuZLuH
+ FtVJ1UkClQR0ARwtiEnjxQhfwApODkU4nVV29gwvcBuuXsiZ7oqInfJaw3q/fR8BwlJK
+ wW5wHUjSaMPog2TRrnK+RqOZ9iOPE9DV6Pz9vaE+by5U0513yW0NKI9fgeskW/iNmSDS
+ 2LKA==
+X-Gm-Message-State: AOJu0YxMz/iDs6ri6VIIA1D1kJqtfHQi2nrSskixQhIouvQl8ISvnGfq
+ Achuw6lPkoPxsMoRhy+7EbCedFr87UEz2CfRdnzOss2RLC+tu4xN21Tk/XQKXYs=
+X-Google-Smtp-Source: AGHT+IFyKGhAgnBnHs2hY1QQ9D6Hr5R8t82L/sW4dp1PjHuHovLXyokm9tr4CqVJBZYnHfc5trQXAA==
+X-Received: by 2002:a81:4785:0:b0:5ff:5ad3:72c3 with SMTP id
+ u127-20020a814785000000b005ff5ad372c3mr97008ywa.94.1705680509619; 
+ Fri, 19 Jan 2024 08:08:29 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- gq8-20020a05690c444800b005ff992b46cesm716403ywb.36.2024.01.19.08.08.24
+ y78-20020a81a151000000b005ff62066830sm2561763ywg.107.2024.01.19.08.08.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jan 2024 08:08:24 -0800 (PST)
-Date: Fri, 19 Jan 2024 11:08:22 -0500
+ Fri, 19 Jan 2024 08:08:29 -0800 (PST)
+Date: Fri, 19 Jan 2024 11:08:27 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [resend PATCH] bootdev: avoid infinite probe loop
-Message-ID: <20240119160822.GL12635@bill-the-cat>
-References: <20240104160346.285881-1-caleb.connolly@linaro.org>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] boot: remove dead code in bootflow_check()
+Message-ID: <20240119160827.GM12635@bill-the-cat>
+References: <20240107084340.59954-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="bZwgcxBQ1CDavKPF"
+ protocol="application/pgp-signature"; boundary="wJjuOQyt46MbER3P"
 Content-Disposition: inline
-In-Reply-To: <20240104160346.285881-1-caleb.connolly@linaro.org>
+In-Reply-To: <20240107084340.59954-1-heinrich.schuchardt@canonical.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,45 +92,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---bZwgcxBQ1CDavKPF
+--wJjuOQyt46MbER3P
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 04, 2024 at 04:03:35PM +0000, Caleb Connolly wrote:
+On Sun, Jan 07, 2024 at 09:43:40AM +0100, Heinrich Schuchardt wrote:
 
-> Sometimes, when only one bootdev is available, and it fails to probe, we
-> end up in an infinite loop calling probe() on the same device over and
-> over. With only debug level log output.
+> The 'return 0;' statement is not reachable. Remove it.
+> 'else' is superfluous after an if statement with return.
 >=20
-> Break the loop if we fail to probe the same device twice in a row, and
-> promote the probe failure message to log_warning().
->=20
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+> Addresses-Coverity-ID: 352451 ("Logically dead code")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---bZwgcxBQ1CDavKPF
+--wJjuOQyt46MbER3P
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWqnnYACgkQFHw5/5Y0
-tywVkAv/RXz6IGaep7lkL2HhghSXG1ykNO42fp0nf3RM5MguwsLsNYwrtd1t1dvQ
-2RNJwK+pKh8rKfddaPPHhrT4N+zyR9LV9K+SJ9zF9wKyYDVStmSh9tLcMwDfkUqO
-5sXYIJIL3d1LnjbWNbIMP4a0p52CXpwjgg24JYrlU6B7ZqIsME/+2n6q0FcKTU8+
-mcqju0Wol3XxOCa+4s6tehIj7+riEJ6T+FyvC86Zc5p5AE1+JATaIsQH0ocnIflD
-Q2olN6emNLgHxUtDz1iFv97eo9OliZXZLI18ZlIPspG+yJGRMjMXlxbsSASrtOeg
-Oaif5EEy3Wm6sajR+vVgGi83+AhnF4pyhXWibV9kcRoH32Jb7lCJUPddLivEW2ir
-1mXQsxoiZO7KX+8dOv4XoDkPwWXdCLUqfOgwKgZsRpos6cEkvClPQT5Hd9hMApaJ
-vr1vxARPfBbc2mFE0IBx9zPy5cn71rgeam93lfZFo6nSnMDTFFyqwXssWBtNTjV5
-/5v4nMrl
-=tgCv
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWqnnsACgkQFHw5/5Y0
+tyzNigv/Tm5iJ/oKF9IkvkwxV3BjP4o9SqYytOt51gh1en6sVg6MToLGbiz4kubn
+0IQGinji1fHmg2DRNEzUh2N28vc13Juj2oWLFw6tDqcCC/Va4qpFPcDsPowRAQhn
+TLFD4/q6GBdeLch/qhb/iqz2yOgJ2WgIjjZANTffp4NWA66yGtpHCRIo1wGSz4XS
+APRzMWJrLwoOZCGmv88pWVi4iXsxH52CLrSVb1dVqh7Q+ravX8KeU/fD1LEidI9k
+s8nO61RUo9W6HsbQ6z+k9033JGN7iUNlD/SSDPzZKgOEEYwnVi4Kkz1xnLHXGppc
+CCwLRgciW66fQxlbyFu7j0sDuUc4L7QgNV+3XgrObDFrY7jfXupUVMxxWH6Kbp1n
+xP9x1g6ZulPRBXbzJZVWxDyzhu+EU18DkEwZ67q2plbt3uagReg0A5LdBEfi7SJa
+zjjIPqzhrfZsZIPJWS+HCWRJUjmsoLXIqkQXDRIlrmkmmJ+rrV3dzTepDddKmMAT
++XH4aAq9
+=bBdX
 -----END PGP SIGNATURE-----
 
---bZwgcxBQ1CDavKPF--
+--wJjuOQyt46MbER3P--
