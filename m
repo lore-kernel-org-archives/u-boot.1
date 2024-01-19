@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F86FC4725D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 17:03:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EF23C4725D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 17:25:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56F2587CCA;
-	Fri, 19 Jan 2024 18:03:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C471287CF9;
+	Fri, 19 Jan 2024 18:25:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M9Hf0RT+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FRGjTeF+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90A7387CCA; Fri, 19 Jan 2024 18:03:29 +0100 (CET)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id 213F287D24; Fri, 19 Jan 2024 18:25:44 +0100 (CET)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F03B587CC8
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 18:03:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A43787CF5
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 18:25:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-5ff84214fc7so10640377b3.0
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 09:03:25 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-3bc23738beaso54389b6e.1
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 09:25:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705683805; x=1706288605; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=b4z6MJ8duHPdeCXEYevtV/3annvngP1C50kXSwYDa/4=;
- b=M9Hf0RT+0EX2ktet4oxkf0q6zbK6qpaleOcV7sJ6/327DdkD79Cmh11FB1FTFLOk7w
- fWqvP63tTlyad0mVkmgymJZGABNiU+63fRV9ZcCZAt9ArPf5hvPL0OmQsrK09CKz2T/y
- bMny+P3J3xvPuX431xZGIwEc/x8/KVSk5Fxa0=
+ d=gmail.com; s=20230601; t=1705685140; x=1706289940; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TMuKzKgO07zkHGBhT5HamJkCdLxRUbM6j1aNel1iIcQ=;
+ b=FRGjTeF+8HNWRgpk2dWIZx216qDDbJ71ImarWxJarnwQjCadnBBB2eBOI+fALjNfKp
+ +CwrWIHWWY4fdX5MulA4N1Jve/SnF96FvT8oXZyo8bKvlFhBC4jCXrXUZqks8ByLkgJX
+ +dOSZuRAt/UIybG4uqUrgUpkt1oFHh7g1vrzjNdAkWXyqy/fux45ZXbEGdqjJUK9T2K3
+ +ekYE3Yotf454f7ZqYP8bVFSRcadBOfdxs8+zQkXUboAPoa0MqPevHQjedwEM0hPioH2
+ e1tKlvITaQAFSkmhHEcflc9usEqr3AvhqpRNx7QZGpESaEH6mZPXwD7fwWqIOl5DS0Mk
+ eIIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705683805; x=1706288605;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=b4z6MJ8duHPdeCXEYevtV/3annvngP1C50kXSwYDa/4=;
- b=Qz3gyC3SDgqso7/oVS3vbeIUzJXhZVDhwhpHIrC08WeRqHQRBBbUbKM0Vyn2CqJHWj
- a3qZZ4WMGKfVpcZRTo2xt+MEemMsQm7jBTjHKyIC1KHnS4rODHzoKRmxXauqfhIWkSly
- BfggotczP7Xg+w/x6NTm73E9SYKTdbNnRP9fM+NSzYnKTw+b4vMGKYP1cXOun28KvA7f
- DJXmkjMSxO1rvUbqxLUeQusrM1kgcOXeldRW0ls1a9o21GLgyWCdNekSoG9uZQ5WRu3I
- /2RX3mtK/+qcKKkjXo+a0e4gKJuJ/MCtIT0UksspB3aNlMzI+mPaTQ9QKAUycRWF6ev6
- fptA==
-X-Gm-Message-State: AOJu0YyVeXfu9ifd3waNCQ+zDx1cM3FTwKj05cr1U40hdX20Pe703gcY
- ITWB+kLct/x91p2qHjkOTK9ARlu9Vu+Ywaj48Y6j1hAhE6Q6wkNBmwEAPqTh9CI=
-X-Google-Smtp-Source: AGHT+IEybbibv2pI/J6OHmbDMH3kRpToA4FyHlqir7Ekp2mo/DszE4kBYTon1w9iwMlu4tJcXoMYWg==
-X-Received: by 2002:a0d:f0c7:0:b0:5ff:9ef9:913e with SMTP id
- z190-20020a0df0c7000000b005ff9ef9913emr203884ywe.23.1705683804681; 
- Fri, 19 Jan 2024 09:03:24 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
- [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- ft2-20020a05690c360200b005f953b9e217sm7424532ywb.61.2024.01.19.09.03.24
+ d=1e100.net; s=20230601; t=1705685140; x=1706289940;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TMuKzKgO07zkHGBhT5HamJkCdLxRUbM6j1aNel1iIcQ=;
+ b=w8Nz0s0yOxhRkOcGwiVENVGewHa5GAYdInozqc3kEowIthDch39QzenkDg8/wtyMQU
+ lVOkYgrpPbp3T9CXaA3fBmvKC+jhbDo2FDw+OzGqRx40rpjSVCusUsE8lO0E9uu389rZ
+ ZRp3lllG+G1p2k1AIqCV0zYjW2ezATvsz5qGXXanzzvqauhhFQ6tG25B0y0fkZ6KwjA8
+ jvVhZQOF4qWKyBC7kG3lMNQYEzbAAwfe+mCEvzs0kNKOs1+UriXnHO01FtkT9OBUIFol
+ oxnVY/wEaRO91HLXa87K21O56yGAISrhids9zh3CntA+KGFSopZ2ZyIvCz5YEk6fewhx
+ zt5A==
+X-Gm-Message-State: AOJu0YybtMnyW7OdrRr/eUMr/I5bzgEnJ2KSlnx9kyJwqnWqcJns0C/p
+ TwhIFm+FnYBX5I44uGIDapqd5Hw3qDKwltmiKrETqMXSijAe5z9szTh+Fcke
+X-Google-Smtp-Source: AGHT+IFC/LkFpd/JhvNSDxwIWuBGCvycwPDFZVhL+W4BqGIoPC20tUwKSDCGBtgrPhf9Pm2CxL5JKw==
+X-Received: by 2002:a05:6808:150a:b0:3bd:a49e:b63e with SMTP id
+ u10-20020a056808150a00b003bda49eb63emr126455oiw.3.1705685140500; 
+ Fri, 19 Jan 2024 09:25:40 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:a173:61bc:3362:89aa])
+ by smtp.gmail.com with ESMTPSA id
+ b24-20020a056808011800b003bd4237b300sm670902oie.35.2024.01.19.09.25.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jan 2024 09:03:24 -0800 (PST)
-Date: Fri, 19 Jan 2024 12:03:22 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Yann Gautier <yann.gautier@foss.st.com>
-Subject: Re: [PULL] Pull request for u-boot master / v2024.04 =
- u-boot-stm32-20240119
-Message-ID: <20240119170322.GN12635@bill-the-cat>
-References: <fc4c4d9c-187a-4e67-9be4-9e7ab9f414c3@foss.st.com>
+ Fri, 19 Jan 2024 09:25:40 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: sbabic@denx.de
+Cc: u-boot@lists.denx.de,
+	Fabio Estevam <festevam@gmail.com>
+Subject: [PATCH] wandboard: Convert to watchdog driver model
+Date: Fri, 19 Jan 2024 14:25:33 -0300
+Message-Id: <20240119172533.653865-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="xapqFvVW5SEOfOfv"
-Content-Disposition: inline
-In-Reply-To: <fc4c4d9c-187a-4e67-9be4-9e7ab9f414c3@foss.st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,59 +89,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Commit 68dcbdd594d4 ("ARM: imx: Add weak default reset_cpu()") caused
+the 'reset' command in U-Boot to not cause a board reset.
+    
+Fix it by switching to the watchdog driver model via sysreset, which
+is the preferred method for implementing the watchdog reset.
 
---xapqFvVW5SEOfOfv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Fabio Estevam <festevam@gmail.com>
+---
+ arch/arm/dts/imx6qdl-wandboard-u-boot.dtsi | 10 ++++++++++
+ configs/wandboard_defconfig                |  3 +++
+ 2 files changed, 13 insertions(+)
 
-On Fri, Jan 19, 2024 at 05:59:07PM +0100, Patrice CHOTARD wrote:
+diff --git a/arch/arm/dts/imx6qdl-wandboard-u-boot.dtsi b/arch/arm/dts/imx6qdl-wandboard-u-boot.dtsi
+index 46c4b3b31f4a..80921e80123f 100644
+--- a/arch/arm/dts/imx6qdl-wandboard-u-boot.dtsi
++++ b/arch/arm/dts/imx6qdl-wandboard-u-boot.dtsi
+@@ -6,4 +6,14 @@
+ 	aliases {
+ 		mmc0 = &usdhc3;
+ 	};
++
++	wdt-reboot {
++		compatible = "wdt-reboot";
++		wdt = <&wdog1>;
++		bootph-pre-ram;
++	};
++};
++
++&wdog1 {
++	bootph-pre-ram;
+ };
+diff --git a/configs/wandboard_defconfig b/configs/wandboard_defconfig
+index 168e2f086008..e9deab38038f 100644
+--- a/configs/wandboard_defconfig
++++ b/configs/wandboard_defconfig
+@@ -75,6 +75,8 @@ CONFIG_DM_PMIC_PFUZE100=y
+ CONFIG_SCSI=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_MXC_UART=y
++CONFIG_SYSRESET=y
++CONFIG_SYSRESET_WATCHDOG=y
+ CONFIG_DM_THERMAL=y
+ CONFIG_USB=y
+ CONFIG_VIDEO=y
+@@ -88,3 +90,4 @@ CONFIG_IMX_HDMI=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
+ CONFIG_BMP_16BPP=y
++CONFIG_IMX_WATCHDOG=y
+-- 
+2.34.1
 
-> Hi Tom
->=20
-> Please pull the STM32 related patches for u-boot/master, v2024.04: u-boot=
--stm32-20240119
->=20
-> CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipeline=
-s/19379
->=20
-> The following changes since commit f7cca7ccc5117eaafcc2bde91ad1bed6fee7cf=
-c3:
->=20
->   Revert "test: hush: dollar: fix bugous behavior" (2024-01-18 11:38:25 -=
-0500)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm=
-32-20240119
->=20
-> for you to fetch changes up to 8a4d098bb0859b3a26c9e1100ed08d7bd1f8ed30:
->=20
->   stm32mp2: Fix CONFIG_STM32MP25X flag usage (2024-01-19 15:49:20 +0100)
->=20
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---xapqFvVW5SEOfOfv
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWqq1oACgkQFHw5/5Y0
-tyxUoQwAn5o0QPf7TUJWKHIJaJyeXTaZ5Xh6ZNhk2LPMx8toCkh4oJ+nz0ZrMXdD
-ymfr3V6uxfBDznGXF5pF4RZyQVA8S2EmerlhfKACp73dD1tSm18n6DsTqarQi/MB
-m8SF7RlpgFNKWL7df1pTLzMfMukB8qbLGOtuCsFQ4wtl6kdvBL/UsnLA7/lCG5cY
-It9pWKkqGM3zNQlghYGbWS42ueaJgi7acTAk4w4C1jeR8R2/Om+ZtaKx/dDZteHg
-N32b/kCs0YW5iCgIuhcjqpjI8/N0mlviT24vYHp+uNr5muAE13k/RwMyfe2M0R1n
-q+7Vc0aoAwW47mniDNB/++g1SHPKPO0XReEJ8ncQKb0zXn2Kb+v5vh8kXFzv+BXV
-A8ITr9MMwClkkvTrxxd4073QdMKtrzT9s1wlO6wnkLDsh0Ro5qXFJSnNHbzzzlEs
-xDaNkMpsY/gef5paZfbclz8i5A+4FbuvJ6zPNlm3Yh6ddVwbMPyPRN5EnE0IZBL7
-JrOe02zR
-=mj9g
------END PGP SIGNATURE-----
-
---xapqFvVW5SEOfOfv--
