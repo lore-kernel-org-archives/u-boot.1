@@ -4,66 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E8B1C4725D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 10:50:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DB20C47DAF
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 10:54:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46A5687B4C;
-	Fri, 19 Jan 2024 11:50:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=jens-maus.de
+	by phobos.denx.de (Postfix) with ESMTP id 830C887A82;
+	Fri, 19 Jan 2024 11:54:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=jens-maus.de header.i=@jens-maus.de header.b="1rZzj4At";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qflSOj0g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC2AF87B93; Fri, 19 Jan 2024 11:50:07 +0100 (CET)
-Received: from mail.light-speed.de (mail.light-speed.de
- [IPv6:2a01:238:43f2:8900:dd04:e3a0:ee11:a73d])
+ id 3875087BA2; Fri, 19 Jan 2024 11:54:36 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B65487A82
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 11:50:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=jens-maus.de
+ by phobos.denx.de (Postfix) with ESMTPS id ED41F87A2A
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 11:54:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mail@jens-maus.de
-Received: from smtpclient.apple (unknown
- [IPv6:2a02:810a:8280:47aa:8cb:7c21:219f:c18e])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.light-speed.de (Postfix) with ESMTPSA id 4D16D3D486AC;
- Fri, 19 Jan 2024 11:50:04 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jens-maus.de;
- s=mail; t=1705661404;
- bh=3u7qHbBmOwIib9NGOLczwBlKwUQoZozfVKm0AoGlWXw=;
- h=Subject:From:In-Reply-To:Date:Cc:References:To;
- b=1rZzj4AtRFrT7QqsQxd1JBUmGElEvAEtkzsBRzPS2ZroTePifpklk2D52gSwNSXTB
- qR1G9ImQDAZGPpN5I5GXppzVDSUmg9iaUY3rW13pDW47NQW6WUI1r4DCr+34UbZgdf
- puBCJ8BbSjQH0RiLN/bBbOO5HCLN9MG6fqTiwVm8=
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.300.61.1.2\))
-Subject: Re: [PATCH v4 0/6] rpi5: initial support
-From: Jens Maus <mail@jens-maus.de>
-In-Reply-To: <03bbe9ad-7cc6-491d-8bd9-631f1cf04f39@gmx.net>
-Date: Fri, 19 Jan 2024 11:49:52 +0100
-Cc: "Ivan T. Ivanov" <iivanov@suse.de>,
- u-boot@lists.denx.de
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <418F8AAE-136A-44A0-80C3-D01FFE00EC2E@jens-maus.de>
-References: <BD4D4B77-9C54-4FD7-8EEF-A65E674E0747@jens-maus.de>
- <sfo77vzvmblyv5g5ek6uc6oxrf5n7dcp3vsw2g2lvfnnrlyaft@kc6s7vvspwvz>
- <4DCC64E0-F0E4-4AF6-8E81-62B156E81554@jens-maus.de>
- <2303FFA8-E2FA-4AA4-AE67-FF5E904D21DD@suse.de>
- <A796E025-0F6E-4FF7-BA4D-2F52CD763B4B@jens-maus.de>
- <9AFD4C3E-E1B7-4EA7-8589-7060A2747732@suse.de>
- <5C0A3CD4-2591-4266-B9CC-7EC38C6A88C3@jens-maus.de>
- <454FB8E4-52A8-482D-8671-5650F8C4773C@suse.de>
- <A26CEBAE-9950-4304-B3A2-1BAB4035437A@jens-maus.de>
- <zmxxqxlbhdhngu36ft4yrqxtjkmvalvhbgbl2uzsj2jgnq7zje@qtncpq2nss57>
- <DCAD0173-2377-4B89-92EB-F38ED1CA938B@jens-maus.de>
- <03bbe9ad-7cc6-491d-8bd9-631f1cf04f39@gmx.net>
-To: Stefan Wahren <wahrenst@gmx.net>
-X-Mailer: Apple Mail (2.3774.300.61.1.2)
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id EADB0CE21FC;
+ Fri, 19 Jan 2024 10:54:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 2998FC433C7;
+ Fri, 19 Jan 2024 10:54:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1705661671;
+ bh=iYSEmVDhPzlHgbzroKNR6x574WvpV2r+XoTDhCEru78=;
+ h=From:Date:Subject:To:Cc:Reply-To:From;
+ b=qflSOj0gwlCHgiTywY7KWbDumycLpAm7+0dRAIT1vpsw1SXoPqn/+xB+jciQa0LvD
+ S95AEconBEPr5VtyP8zHXtfz56yvirRo40DPBthDenlA08tspIYrU9omXwv75uQfAR
+ qiNM0cwm+rK4oYVBeqILODIlBcigxIWRkifjl9Wwmh4R4T51MYJQvmuZ/7/qSYJLnF
+ t4OOXX9d7YRe541/L/zg2wAPItIAtCqb7HAzNRBhJZVDASZeziDOby69Q0Lx5f61Sz
+ 3WODk27VaSYcmgCTVsIuUHgD+OVSFDO76cSsfMcg5QsQpzGUPsYZqEwdEwtA6qudjp
+ IrUV64pqM+sXA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 18E48C4725D;
+ Fri, 19 Jan 2024 10:54:31 +0000 (UTC)
+From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
+Date: Fri, 19 Jan 2024 18:54:30 +0800
+Subject: [PATCH] mmc: hi6220-dwmmc: handle clocks and resets if CONFIG_CLK
+ and CONFIG_DM_RESET enabled
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240119-mmc-v1-1-aee6b2cf6902@outlook.com>
+X-B4-Tracking: v=1; b=H4sIAOVUqmUC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxMDQ0NL3dzcZF3L5DTzNGMTU9PkJBMloMqCotS0zAqwKdGxtbUAnvgpvlU
+ AAAA=
+To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
+Cc: u-boot@lists.denx.de, Yang Xiwen <forbidden405@outlook.com>
+X-Mailer: b4 0.12.4
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1705661670; l=3913;
+ i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
+ bh=/ItHCpl7udwbXqqbtkYZmNscC8cLcFyaeQn6e9JmQuk=;
+ b=YvO+sc+FLsyiy1Ywf4IKb6f7+YWA3Pi+M9KWJlkNbuLq4oSpLHnvJedkLv9rY3Qaxt6OPXX32
+ g2EFcD3RZGtD8v8f2Cz32Xzf7T0h4j0cH3dr4IQ7jNJLO25oM3TmYFQ
+X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
+ pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
+X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
+ auth_id=67
+X-Original-From: Yang Xiwen <forbidden405@outlook.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,33 +79,138 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: forbidden405@outlook.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+From: Yang Xiwen <forbidden405@outlook.com>
 
-> Am 19.01.2024 um 10:20 schrieb Stefan Wahren <wahrenst@gmx.net>:
->=20
-> Another idea could be to dump the runtime DT of both variants via =
-sysfs
-> (using official RPi OS) and compare them with each other. In the past
-> there was a lot DT firmware hackery for the Raspberry Pi 4.
+This can avoid hardcoding a clock rate in driver. Also can enable the
+clocks and deassert the resets if the pre-bootloader does not do this
+for us.
 
-Good idea indeed. I just did that and executed "dtc -I fs =
-/sys/firmware/devicetree/base=E2=80=9C in a quick RaspberryPiOS =
-installation.
+Currently only enabled for Hi3798MV200.
 
-See [1] for the corresponding output. Hopefully Ivan can do the same so =
-that we can see if there are any differences that might explain why his =
-u-boot patches are working for him while they does not for me.
+Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
+---
+ drivers/mmc/hi6220_dw_mmc.c | 61 ++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 60 insertions(+), 1 deletion(-)
 
-Best Regards,
-Jens
+diff --git a/drivers/mmc/hi6220_dw_mmc.c b/drivers/mmc/hi6220_dw_mmc.c
+index 71962cd47e..a4b8072976 100644
+--- a/drivers/mmc/hi6220_dw_mmc.c
++++ b/drivers/mmc/hi6220_dw_mmc.c
+@@ -5,15 +5,24 @@
+  */
+ 
+ #include <common.h>
++#include <clk.h>
+ #include <dm.h>
+ #include <dwmmc.h>
+ #include <errno.h>
+ #include <fdtdec.h>
+ #include <malloc.h>
++#include <reset.h>
+ #include <asm/global_data.h>
++#include <dm/device_compat.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++enum hi6220_dwmmc_clk_type {
++	HI6220_DWMMC_CLK_BIU,
++	HI6220_DWMMC_CLK_CIU,
++	HI6220_DWMMC_CLK_CNT,
++};
++
+ struct hi6220_dwmmc_plat {
+ 	struct mmc_config cfg;
+ 	struct mmc mmc;
+@@ -21,6 +30,8 @@ struct hi6220_dwmmc_plat {
+ 
+ struct hi6220_dwmmc_priv_data {
+ 	struct dwmci_host host;
++	struct clk *clks[HI6220_DWMMC_CLK_CNT];
++	struct reset_ctl_bulk rsts;
+ };
+ 
+ struct hisi_mmc_data {
+@@ -32,7 +43,29 @@ static int hi6220_dwmmc_of_to_plat(struct udevice *dev)
+ {
+ 	struct hi6220_dwmmc_priv_data *priv = dev_get_priv(dev);
+ 	struct dwmci_host *host = &priv->host;
++	int ret;
+ 
++	if (CONFIG_IS_ENABLED(CLK) && CONFIG_IS_ENABLED(DM_RESET)) {
++		priv->clks[HI6220_DWMMC_CLK_BIU] = devm_clk_get(dev, "biu");
++		if (IS_ERR(priv->clks[HI6220_DWMMC_CLK_BIU])) {
++			ret = PTR_ERR(priv->clks[HI6220_DWMMC_CLK_BIU]);
++			dev_err(dev, "Failed to get BIU clock(ret = %d).\n", ret);
++			return log_msg_ret("clk", ret);
++		}
++
++		priv->clks[HI6220_DWMMC_CLK_CIU] = devm_clk_get(dev, "ciu");
++		if (IS_ERR(priv->clks[HI6220_DWMMC_CLK_CIU])) {
++			ret = PTR_ERR(priv->clks[HI6220_DWMMC_CLK_CIU]);
++			dev_err(dev, "Failed to get CIU clock(ret = %d).\n", ret);
++			return log_msg_ret("clk", ret);
++		}
++
++		ret = reset_get_bulk(dev, &priv->rsts);
++		if (ret) {
++			dev_err(dev, "Failed to get resets(ret = %d)", ret);
++			return log_msg_ret("rst", ret);
++		}
++	}
+ 	host->name = dev->name;
+ 	host->ioaddr = dev_read_addr_ptr(dev);
+ 	host->buswidth = fdtdec_get_int(gd->fdt_blob, dev_of_offset(dev),
+@@ -56,11 +89,37 @@ static int hi6220_dwmmc_probe(struct udevice *dev)
+ 	struct hi6220_dwmmc_priv_data *priv = dev_get_priv(dev);
+ 	struct dwmci_host *host = &priv->host;
+ 	struct hisi_mmc_data *mmc_data;
++	int ret;
+ 
+ 	mmc_data = (struct hisi_mmc_data *)dev_get_driver_data(dev);
+ 
+-	/* Use default bus speed due to absence of clk driver */
+ 	host->bus_hz = mmc_data->clock;
++	if (CONFIG_IS_ENABLED(CLK) && CONFIG_IS_ENABLED(DM_RESET)) {
++		ret = clk_prepare_enable(priv->clks[HI6220_DWMMC_CLK_BIU]);
++		if (ret) {
++			dev_err(dev, "Failed to enable biu clock(ret = %d).\n", ret);
++			return log_msg_ret("clk", ret);
++		}
++
++		ret = clk_prepare_enable(priv->clks[HI6220_DWMMC_CLK_CIU]);
++		if (ret) {
++			dev_err(dev, "Failed to enable ciu clock(ret = %d).\n", ret);
++			return log_msg_ret("clk", ret);
++		}
++
++		ret = reset_deassert_bulk(&priv->rsts);
++		if (ret) {
++			dev_err(dev, "Failed to deassert resets(ret = %d).\n", ret);
++			return log_msg_ret("rst", ret);
++		}
++
++		host->bus_hz = clk_get_rate(priv->clks[HI6220_DWMMC_CLK_CIU]);
++		if (host->bus_hz <= 0) {
++			dev_err(dev, "Failed to get ciu clock rate(ret = %d).\n", ret);
++			return log_msg_ret("clk", ret);
++		}
++	}
++	dev_dbg(dev, "bus clock rate: %d.\n", host->bus_hz);
+ 
+ 	dwmci_setup_cfg(&plat->cfg, host, host->bus_hz, 400000);
+ 	host->mmc = &plat->mmc;
 
-[1] https://gist.github.com/jens-maus/497e03cf1305ffe8a07e3196c27d6ebd
---=20
-Jens Maus, Dresden/Germany
-http://jens-maus.de/
+---
+base-commit: f7cca7ccc5117eaafcc2bde91ad1bed6fee7cfc3
+change-id: 20240119-mmc-9cf7f3455cb4
+
+Best regards,
+-- 
+Yang Xiwen <forbidden405@outlook.com>
 
