@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B2E7C47DD3
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:11:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 385CAC47DD3
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:11:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D398787D42;
-	Fri, 19 Jan 2024 17:09:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6080087D43;
+	Fri, 19 Jan 2024 17:09:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z4ySfY/X";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Wxgms3wN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F04E987D42; Fri, 19 Jan 2024 17:09:19 +0100 (CET)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id E5B8D87D46; Fri, 19 Jan 2024 17:09:22 +0100 (CET)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B0E687D4D
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 17:09:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DA28087D43
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 17:09:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-5f8cf76ef5bso10947967b3.0
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 08:09:16 -0800 (PST)
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-5f0629e67f4so9643807b3.3
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 08:09:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705680555; x=1706285355; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1705680559; x=1706285359; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0NJCxOnfDsVlY9+M6e5rkAxZoJ92IOvH6zk6bqDVmhU=;
- b=Z4ySfY/XmZSCbrNZSpbAaNfuKhLDQcf4FUe6iyDXyE/9Xg9t5AReLuLjspv+DKbusL
- eItBdkl7v60t1/WNSSG+n1bE3yFPPYlI2A3G60AUsrUZXIJwiGMVHvAkjGfUPezBgTy1
- yrmJlBUfshMRP2Y+Vdy/nbp2Izr6Veidblsxc=
+ bh=f6Ly+01pfYg1IV8+20wbs3kB2dvvtW1UCrlvHtQ6qdU=;
+ b=Wxgms3wNrKnmgRHgc+dHARItY7cbxA/DGTj4ejySojyWtLo9eAw7F7yh5bpOGO+hUr
+ DcehZFQ62QKjT/CglVJT2ItXHbUqVLvTHMVM07iuS+TjqpZVOkD4UhoEnIyshsOUOS2f
+ MfHCeZhZQPSv5xJm+APGR3nyD/t/QLqEbpve0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705680555; x=1706285355;
+ d=1e100.net; s=20230601; t=1705680559; x=1706285359;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0NJCxOnfDsVlY9+M6e5rkAxZoJ92IOvH6zk6bqDVmhU=;
- b=M19NBUxQbpCDVb00A5l9rq/f9iRmM9mctJgBDxyr9/AxVMPL41yxFM4w9PygDW11BD
- AzoC7AMkqj7P3BTd7gKaJMNKeqVC3h6gbC76LfXh4DgzkB4Ag574h/hZCHQipuZZtaJT
- Zr5VeO5FFRRshY0GnSSJMKxcWyKo66hEaCpQbhn9lXvKOZmkk4cZrE5oXrn/po5MFcNY
- YAtdwuiHIQ9ifzgQZEOIH53Pgzon+yca0wgvVRiI9JvCsmRfaQHVsTkG+IEnEgu4y1Tm
- 00VT2lAR9sM+ig7xJHdcFxQQ9i6IJQDyDgkEGpyNUcmydFKBiZHiPqGbQjRGkxpfNNnN
- kzaw==
-X-Gm-Message-State: AOJu0Yx96AWs0aTumHWF7hYiZL5ISAfqjG6g3HTs4JsphFATHSml1gdm
- tRBVffPMWfo8Uh8nSY9h5IcHIytI3aCpxqcX09Cb06E8yhFqdSDGp/5xLo7siQLauGkyZmTbRjW
- j
-X-Google-Smtp-Source: AGHT+IEbVm7PzbVDE4hNKWKl32YPknluo1ifFPp5ZyBIawWn9qiBXSxILUM10nDFb/vKDBJG9wstmw==
-X-Received: by 2002:a81:8201:0:b0:5ff:86ea:47be with SMTP id
- s1-20020a818201000000b005ff86ea47bemr123026ywf.92.1705680555424; 
- Fri, 19 Jan 2024 08:09:15 -0800 (PST)
+ bh=f6Ly+01pfYg1IV8+20wbs3kB2dvvtW1UCrlvHtQ6qdU=;
+ b=QiQuCXX9qXLSJdDybx3ogxyFeta0aoHkUkuFxFzkQY3zqY07vB/aZlyiLpu3LTo/Zq
+ m1N6j94rklgR5ZxMQhWbz6c1L1MLKDuTsH1+5Ox6R2LkYRwUA8yzziqp+ebb698cxP5s
+ i2m+g85vvxrh5edCcPACcg+yGVJFXC1fbMUWuuQnKUaGS2MeWxNJauUueXa4o5uLbBHH
+ 5Gx/WE/3gqseJLWkFup+WeSBY0TMdzQRaRcJyEKDgZdJZpUG/2em2QfgNTTJs1Rc+/E+
+ jdmVrlnduJYpaY1Dy4WSra2RkC81MMChhmiM6mTu/iJdgbV19+vcNHU20IyxTaWXAMfh
+ 14vg==
+X-Gm-Message-State: AOJu0YyACWurmOb7LPCraQrRpmngH7t6zky088mKyn9lRnZzBCZo8PCp
+ /K4m8GEYN4vVqRhAq407ItqsRpf0GCbS7ZjE2C4HBgfKo78JMNMWS0R6y7Vz5Bo=
+X-Google-Smtp-Source: AGHT+IEXZ+4o0Qx/U9OG4usQA4UfnN9+9QWB98DguPoTLA2cxupJvhks61jMtjwskGIMihEG4DoA4Q==
+X-Received: by 2002:a0d:d910:0:b0:5f0:cbce:669f with SMTP id
+ b16-20020a0dd910000000b005f0cbce669fmr102608ywe.22.1705680559682; 
+ Fri, 19 Jan 2024 08:09:19 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- g189-20020a0df6c6000000b005a4da74b869sm7624007ywf.139.2024.01.19.08.09.14
+ l85-20020a815758000000b005ff821bfdd3sm1561457ywb.27.2024.01.19.08.09.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jan 2024 08:09:15 -0800 (PST)
-Date: Fri, 19 Jan 2024 11:09:13 -0500
+ Fri, 19 Jan 2024 08:09:19 -0800 (PST)
+Date: Fri, 19 Jan 2024 11:09:17 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Peter Robinson <pbrobinson@gmail.com>
-Subject: Re: [PATCH 2/2] smbios: fix matching issues for table types
-Message-ID: <20240119160913.GX12635@bill-the-cat>
-References: <20240111143936.983448-1-ilias.apalodimas@linaro.org>
- <20240111143936.983448-2-ilias.apalodimas@linaro.org>
+To: Anthony Loiseau <anthony@loiseau.fr>
+Cc: u-boot@lists.denx.de, Anthony Loiseau <anthony.loiseau@allcircuits.com>
+Subject: Re: [PATCH 1/1] get_maintainer.pl: slightly modify penguin_chief
+Message-ID: <20240119160917.GY12635@bill-the-cat>
+References: <20240111165127.12882-1-anthony@loiseau.fr>
+ <20240111165127.12882-2-anthony@loiseau.fr>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="jQprGdx/NxbwQoD/"
+ protocol="application/pgp-signature"; boundary="IZ6KjKraFF+dY67Z"
 Content-Disposition: inline
-In-Reply-To: <20240111143936.983448-2-ilias.apalodimas@linaro.org>
+In-Reply-To: <20240111165127.12882-2-anthony@loiseau.fr>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,45 +92,58 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---jQprGdx/NxbwQoD/
+--IZ6KjKraFF+dY67Z
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 11, 2024 at 04:39:36PM +0200, Ilias Apalodimas wrote:
+On Thu, Jan 11, 2024 at 05:51:27PM +0100, Anthony Loiseau wrote:
 
-> commit 738b34668f28 ("smbios: Fallback to the default DT if sysinfo nodes=
- are missing")
-> allowed the code to fallback and fill in SMBIOS tables with properties
-> from the compatible and product nodes of the DT, in case the
-> 'smbios,sysinfo' node is missing.
-> That works fine for Type1/2 tables, but for other types we need to
-> match the smbios,sysinfo subnode name as well. So add it to the
-> smbios_ctx and check it during the sysinfo <-> DT mathcing
+> From: Anthony Loiseau <anthony.loiseau@allcircuits.com>
 >=20
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Penguin chiefs are actually stripped out from get_maintainer results unle=
+ss
+> --git-chief-penguins is provided, which appends them to all results inste=
+ad.
+>=20
+> This is a issue for U-Boot since Tom Rini (penguin chief) is also maintai=
+ner
+> of some sub-trees ("ARM", "ARM TI" and "THE REST").
+>=20
+> Hopefully, this match is performed case-senditive over name and email,
+> therefore upper-casing Tom Rini last name workarounds the issue.
+>=20
+> Important note: This also fixes "THE REST" catch all section resulting
+> in Tom Rini listed as (maintainer:THE REST) for all files. Hope there is =
+not
+> too much developers scripting their patch email header from get_maintaine=
+r.pl
+> output, otherwise Tom Rini may be flooded.
+>=20
+> Cc: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Anthony Loiseau <anthony.loiseau@allcircuits.com>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---jQprGdx/NxbwQoD/
+--IZ6KjKraFF+dY67Z
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWqnqkACgkQFHw5/5Y0
-tyzKOwv/VZTrZpnZ661+vbpArCB6fmnTPL8WryLl0IErvek2FkwgolWHR9vBPeK4
-mEUq6/3F+lhUO5Gc/tzoGoVNa6NrnAhYVJstZtr/gwD5esmVrFxFeWUrs2oX73/4
-ubQOd6J7kNF0RzfeGp/VGcQx19xaYfHsA6N/ub0Tr532eOVUeVnMDfzsPVXGd8h0
-DP90o1K3xYwnmAEo5wTVBzmmdzrc38ckX/RWnIx0YEKnyngRdwbJeq+rt39qA472
-fyozJJ8H95QZjsLJZbZiBcTFv0N5mhDSUx7f07kAtXQe/exjd9MWmfYaBVHfS/RH
-HeWWCil1QHDEo53qoJ3kWxY/qlA/+RSRzunmq9Hssvor+lBWWTNqqydI+YwFRF0h
-+zdH6Nb4A2Y3XNQcSLFTokIeVBPOIZJOLoCzp3SMeec9kbqCApL/Dlr7T8ST6mky
-xlqmC9SgcFKgTXuJ5Mxvmv0FCjZrQgkSRi87tyJMWUnNjjp8m+Y2MSbkbzn8RVbY
-/Ocs+71H
-=gJRw
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWqnq0ACgkQFHw5/5Y0
+tyyLtAwAsoV3JeUDNQ8R2vhHvFRctPXN6qLR5M0sgDrpOlBGXGg8oHN3W/DXsnZJ
+dQv5J9+MIMat72ndyvEMG0d4dYDuS5sS+YvmGEQnf9CHT+EpufwxWzwXbZG2cOa0
+OQk1n8DJedzlgiaTSoM/GX2cqJ98QSJFPHINl3PBLY9JSRmT7QX8+mWV3Gw6eFhm
+GT60oGTW3t+AVzid8+s0nOK+qRhsuvuhRj7QDxFAJA+wF8vcjVP5d5FUTq4JCHWD
+GhZNWJkvacTdLztL9wMDjG2Vh825NPWsrmHabWE4wlkxvPqANein8ynArrCpoC44
+ur0rpoSREG4rvxT6AefVfw54Xi/eMr0oIEGggRTjHM2Z2XV3tuvnbWDX+1kP16mO
+dM9mib1naKvogylcaejjmzK6lPG9B+uoi+UUaoeTgHH85hsr9x2q/b+fdlLf72ZX
+zYztrM56PZvczOjm1uehYuOokffgMI9bwWFPHy99hp8NY9tEEszI2Y2qWn+OMfMp
+6Gl0YUhL
+=AU4v
 -----END PGP SIGNATURE-----
 
---jQprGdx/NxbwQoD/--
+--IZ6KjKraFF+dY67Z--
