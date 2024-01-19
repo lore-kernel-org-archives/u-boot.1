@@ -4,55 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 358C2C47DB7
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 13:54:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78F91C4725D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 14:06:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B2B387705;
-	Fri, 19 Jan 2024 14:54:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=jens-maus.de
+	by phobos.denx.de (Postfix) with ESMTP id 99FA087BC5;
+	Fri, 19 Jan 2024 15:06:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=jens-maus.de header.i=@jens-maus.de header.b="ZyqgQuIm";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="wf6oLyGe";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="wHVRONWH";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="wf6oLyGe";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="wHVRONWH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A720C87B7F; Fri, 19 Jan 2024 14:54:30 +0100 (CET)
-Received: from mail.light-speed.de (mail.light-speed.de
- [IPv6:2a01:238:43f2:8900:dd04:e3a0:ee11:a73d])
+ id DD1B487C00; Fri, 19 Jan 2024 15:06:34 +0100 (CET)
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 932C786F67
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 14:54:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=jens-maus.de
+ by phobos.denx.de (Postfix) with ESMTPS id DC47487BBC
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 15:06:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mail@jens-maus.de
-Received: from smtpclient.apple (unknown
- [IPv6:2a02:810a:8280:47aa:8cb:7c21:219f:c18e])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=iivanov@suse.de
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mail.light-speed.de (Postfix) with ESMTPSA id EDA823D48651;
- Fri, 19 Jan 2024 14:54:27 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jens-maus.de;
- s=mail; t=1705672468;
- bh=Wuf+FgPXxEqzcxIh6PcvmxGRQPuTt4gwLeNsE61jIao=;
- h=Subject:From:In-Reply-To:Date:Cc:References:To;
- b=ZyqgQuImtNpt74Jmu7ADd7XRMByrzDFvZ7TeQptlpnmUwcFITa1RrZalbhj9ogpAQ
- I75EtHBwySER92i4UrmpfWYGddBOUDwAytX5TxUq/xLSNl/jO0ZcVYrcOrWCXtSMu7
- AY1OO/wBOli5qBvm8PZT0oOyj3Oi3k0edeyobhCg=
-Content-Type: text/plain;
-	charset=us-ascii
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.300.61.1.2\))
-Subject: Re: [PATCH v4 0/6] rpi5: initial support
-From: Jens Maus <mail@jens-maus.de>
-In-Reply-To: <ejituxf7ggiu2ciswrwoeqqjytb7mj2vn6gkxllywtnlm4aefi@br4zq7rfytlo>
-Date: Fri, 19 Jan 2024 14:54:17 +0100
-Cc: Stefan Wahren <wahrenst@gmx.net>,
- u-boot@lists.denx.de
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <3FB75D28-9BF9-4518-8BF1-519C884516F7@jens-maus.de>
-References: <9AFD4C3E-E1B7-4EA7-8589-7060A2747732@suse.de>
- <5C0A3CD4-2591-4266-B9CC-7EC38C6A88C3@jens-maus.de>
- <454FB8E4-52A8-482D-8671-5650F8C4773C@suse.de>
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 7AE031F7F1;
+ Fri, 19 Jan 2024 14:06:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1705673192; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=scw4rqVYLCW4AdkNUNYrq75K+1lLeBY3pbDIBeqj/H0=;
+ b=wf6oLyGeTHAKjY1UDuvtkoedI82rB+sZLW0MUdRuMdZ9pxiYQK+7hdnTw715KyxsT77U35
+ WgfAbYNCTyXd1cNCWD1POWEIqWT7uklhCjbzWDBFEUt8NhEPYmnmpyFz9e1wmqVpvoLb50
+ Xa/OoU4K9VXkSobLqpDgO8jmvdtC2SA=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1705673192;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=scw4rqVYLCW4AdkNUNYrq75K+1lLeBY3pbDIBeqj/H0=;
+ b=wHVRONWH5CgWkaXDtOQtR25QiRgvcWvi8yXUFe1wEAFq6V/qMb1kZLQ/9J0mVp2iWENI97
+ 248jIIwzBcKJUpAA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1705673192; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=scw4rqVYLCW4AdkNUNYrq75K+1lLeBY3pbDIBeqj/H0=;
+ b=wf6oLyGeTHAKjY1UDuvtkoedI82rB+sZLW0MUdRuMdZ9pxiYQK+7hdnTw715KyxsT77U35
+ WgfAbYNCTyXd1cNCWD1POWEIqWT7uklhCjbzWDBFEUt8NhEPYmnmpyFz9e1wmqVpvoLb50
+ Xa/OoU4K9VXkSobLqpDgO8jmvdtC2SA=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1705673192;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=scw4rqVYLCW4AdkNUNYrq75K+1lLeBY3pbDIBeqj/H0=;
+ b=wHVRONWH5CgWkaXDtOQtR25QiRgvcWvi8yXUFe1wEAFq6V/qMb1kZLQ/9J0mVp2iWENI97
+ 248jIIwzBcKJUpAA==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 616BC1388C;
+ Fri, 19 Jan 2024 14:06:32 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([10.150.64.162])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id /aFZFeiBqmXMKgAAD6G6ig
+ (envelope-from <iivanov@suse.de>); Fri, 19 Jan 2024 14:06:32 +0000
+Date: Fri, 19 Jan 2024 16:06:27 +0200
+From: "Ivan T. Ivanov" <iivanov@suse.de>
+To: Jens Maus <mail@jens-maus.de>
+Cc: Stefan Wahren <wahrenst@gmx.net>, u-boot@lists.denx.de
+Subject: Re: Re: [PATCH v4 0/6] rpi5: initial support
+Message-ID: <fa7j66z5r7pul6zp5ljcntrb7xbazqxesz6wysrslrpxxhpafc@krztduo6pjm6>
+References: <454FB8E4-52A8-482D-8671-5650F8C4773C@suse.de>
  <A26CEBAE-9950-4304-B3A2-1BAB4035437A@jens-maus.de>
  <zmxxqxlbhdhngu36ft4yrqxtjkmvalvhbgbl2uzsj2jgnq7zje@qtncpq2nss57>
  <DCAD0173-2377-4B89-92EB-F38ED1CA938B@jens-maus.de>
@@ -61,8 +89,26 @@ References: <9AFD4C3E-E1B7-4EA7-8589-7060A2747732@suse.de>
  <sjmi6dftbgx56isfyjtaryehzq2iollwxm2etlspiygehh3n6v@k4ws56nsbgfn>
  <6C9E5E0C-9C27-45A4-886F-8B8C641EF7A3@jens-maus.de>
  <ejituxf7ggiu2ciswrwoeqqjytb7mj2vn6gkxllywtnlm4aefi@br4zq7rfytlo>
-To: "Ivan T. Ivanov" <iivanov@suse.de>
-X-Mailer: Apple Mail (2.3774.300.61.1.2)
+ <3FB75D28-9BF9-4518-8BF1-519C884516F7@jens-maus.de>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <3FB75D28-9BF9-4518-8BF1-519C884516F7@jens-maus.de>
+Authentication-Results: smtp-out2.suse.de;
+	none
+X-Spamd-Result: default: False [-0.82 / 50.00]; ARC_NA(0.00)[];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; FROM_HAS_DN(0.00)[];
+ RCPT_COUNT_THREE(0.00)[3]; FREEMAIL_ENVRCPT(0.00)[gmx.net];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; MIME_GOOD(-0.10)[text/plain];
+ NEURAL_HAM_LONG(-1.00)[-1.000]; TO_DN_SOME(0.00)[];
+ RCVD_COUNT_THREE(0.00)[3];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ NEURAL_HAM_SHORT(-0.20)[-1.000];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_EQ_ENVFROM(0.00)[];
+ MIME_TRACE(0.00)[0:+]; MID_RHS_NOT_FQDN(0.50)[];
+ FREEMAIL_CC(0.00)[gmx.net,lists.denx.de]; RCVD_TLS_ALL(0.00)[];
+ BAYES_HAM(-0.02)[53.44%]
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,24 +125,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
-> Am 19.01.2024 um 14:46 schrieb Ivan T. Ivanov <iivanov@suse.de>:
->=20
-> Same here, expect that they are more memory banks, of course.
-> It is really strange that you don't seen even single message
-> from the U-Boot..
+On 01-19 14:54, Jens Maus wrote:
+> 
+> > Am 19.01.2024 um 14:46 schrieb Ivan T. Ivanov <iivanov@suse.de>:
+> > 
+> > Same here, expect that they are more memory banks, of course.
+> > It is really strange that you don't seen even single message
+> > from the U-Boot..
+> 
+> Indeed. Not a single line, nor any U-Boot logo or anything on HDMI. Do you see any debug output on the serial debug probe connection to the rpi5?
 
-Indeed. Not a single line, nor any U-Boot logo or anything on HDMI. Do =
-you see any debug output on the serial debug probe connection to the =
-rpi5?
+Yes, there is even small submarine on the top right side of the screen
+while U-Boot is running.
 
-Perhaps it is really dependent on the eeprom version? Can you perhaps =
-try to bump your eeprom version to the latest version to see if this =
-might be the culprit?
+> 
+> Perhaps it is really dependent on the eeprom version? Can you perhaps try to bump your eeprom version to the latest version to see if this might be the culprit?
+> 
 
-regards,
-jens
---=20
-Jens Maus, Dresden/Germany
-http://jens-maus.de/
+Yes, will do this.
+
+Regards,
+Ivan
 
