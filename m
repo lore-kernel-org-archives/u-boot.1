@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AB39C47DAF
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 15:10:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94FC7C4725D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 15:12:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13E5687C05;
-	Fri, 19 Jan 2024 16:10:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C305287CC1;
+	Fri, 19 Jan 2024 16:12:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lFBmiwzn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z2UJ/zTi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2512087CD9; Fri, 19 Jan 2024 16:10:23 +0100 (CET)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
+ id B0E2187CDD; Fri, 19 Jan 2024 16:12:10 +0100 (CET)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0598E87CC1
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 16:10:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 51C4387AEC
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 16:12:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-7831e87ba13so64477585a.0
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 07:10:20 -0800 (PST)
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-682bfd39ac5so3489926d6.2
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 07:12:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705677019; x=1706281819; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=8rrlaTPzy8RU3E3DjNdHfhP1f+HTNQanDLjSpiC9MQA=;
- b=lFBmiwzn1jnoYMnOD2j+qOPkzh+qAXMOsdLH5ZLnXwmUPj3wQLNtNJoW5T/aI41j+K
- 5HdFFFIPE0Ww7MRzbWogmMWxAW0NYZKpr4P/BIjdqsatwmMJglaqtdHEhBs0QYRlYQ/e
- /kFHfw292fzh2cBGrCCWp6xnobNkxpIebVWSWRtzUnL8T+wE9NkfxmMdSK5Fj+9pg0qN
- MqABaxyaVe7sgWMUWd8dn4Z5h3ttOusq21hIyf3ErXH06mb9F/5cwYnht5mNRr4IV2z3
- VqH/8z3pnzsLSYVqT2XcaVmFyd+F/r3t4fNOwRXAOB01YfyPhHYMP/HhO6K+y+ytNl7G
- xOiQ==
+ d=linaro.org; s=google; t=1705677126; x=1706281926; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KebDo8TeWIxSF2S0h4D1Oq0QWFRjBhCj6m9Tj1VWLyg=;
+ b=Z2UJ/zTiy5Etmj/ILPinqLoIsAza0ALpM56NGLsOpZmlqKszRDcrMBbN/RoCkD/maT
+ EzLbt/NqxCKAApJxkE9X2ja29oBksU1NUgw31SX+XIgL9NgYHLUKLmvlHSnEgQDV9Pu/
+ xZlIhOs8x13/IuOrS9GluJj/WCrs0ZaXxrGG4V9v7BEIWVFF7tFe3q4P36Gkc5NV93rp
+ 10k1cuHMT2OOspKPVC28xGCCOgSYcwYfVpw8b3rt7HvlMQpAhHy5psI/YEZCFhXLVZOF
+ oxaGs34oXynt3WH983xiO6HZdrq5RVKMc4ta84mcqlE85u9Urxk5cfToh4oyXYJLqZPa
+ mLYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705677019; x=1706281819;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8rrlaTPzy8RU3E3DjNdHfhP1f+HTNQanDLjSpiC9MQA=;
- b=uIa2VgUJAHDLye+6sMOCs2L2hQaygkmjmL9TXZ2pt+2gAdaB3/IGaJV1eDJaNe2H4J
- AoBWsfaTT6sr77+Vzly1S+rXO3yt+KeJehr1Xwo67ACZO8VY7NCXTFEJ/08HT0VU0xvD
- tL7Kb0/by7F3NKSPaJjIoXkpfcpITdq5fP/D5QkFNTM3PVRHMskasHtj4chrrDpUOoCu
- A55LivfQv/mJ+VbBb6aKiOVff1kx+Loj1QxvpAEkP4HcbgXqO2r1zEmVaHy7PdZNQffK
- 5LFzBOjtGn22Zq3dwy45OJboluBc7AbHq1BDjvqNPbHx+9rQ2AyLK8w3EZXXXdwlOxgT
- I/Fw==
-X-Gm-Message-State: AOJu0Yzf/4YlxVh6cNE96G2lIIIBoLM1VkR1Z/Ip36eUMXnWuP04htdt
- 12xwsigsLYxgnnGCb9JtAYSZCkxWYQtfzzZKgvXNvszbOL1bTBUReQ73JtKFCRtqNE45qNxW7FV
- 4
-X-Google-Smtp-Source: AGHT+IFMx0a1Z8UFHS1Z5LJYUAnkTnWvlG6jEcB8saFnLavdojE9LM1POiJlMnzVPdDiT0lfSqTKQA==
-X-Received: by 2002:a05:620a:2104:b0:781:7091:b641 with SMTP id
- l4-20020a05620a210400b007817091b641mr2704qkl.121.1705677019442; 
- Fri, 19 Jan 2024 07:10:19 -0800 (PST)
+ d=1e100.net; s=20230601; t=1705677126; x=1706281926;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=KebDo8TeWIxSF2S0h4D1Oq0QWFRjBhCj6m9Tj1VWLyg=;
+ b=uvhfc92aY9XoI/YBkdua3TTSDHZ8tRnztaJ/+ASNTvt6wWoMk8JPoH/d96Hp77ixLd
+ 2aaZTszgy9XJnrkfr5ynCx9R2r/UEACnHmhsUi9wGRTTO9SqU7evzbFCY8hqdq//TpLA
+ 2aaIZNgZXno4/IT5Ef+/Vpyqq29hJy9HtkwGt0WyGICceDNtkd6+56+B0cqcN6pP6khi
+ 6qioaMSfridORWpO6m5fiWaAtdD7qwvYrfGq+OErzmEDvtqFhlP1WTpqwsrk1pZhvtl1
+ vhUvDYEk+XPJRIV4TSIrt5Ri/iNoMrY50Dz7s48e6M5gMiTalq0Qg5P6mP1za1B/C+GQ
+ bnog==
+X-Gm-Message-State: AOJu0YxFwk9b1CJ3BbSKo4DF6svfbShKcKMc4yEVOcFbvGsUewCiLeXj
+ H36JvgBHGfzq9UefzqlcPtK7Y3fnGmE2ALOm2gWNJ3+2JJMUQ5oFogFHsiRDPIqElhLOAU3rJMC
+ q
+X-Google-Smtp-Source: AGHT+IHL6W2/lW6FeA93a08fkITFgm2M21xnunwnFISgF1ZU7YnS07+jT4Vm5H901xwTev3ahf2qfw==
+X-Received: by 2002:a05:6214:5297:b0:681:5e14:339a with SMTP id
+ kj23-20020a056214529700b006815e14339amr43243qvb.19.1705677126759; 
+ Fri, 19 Jan 2024 07:12:06 -0800 (PST)
 Received: from ubuntu.localdomain
  (cpe688f2e182063-cm688f2e182060.sdns.net.rogers.com. [174.115.4.214])
  by smtp.gmail.com with ESMTPSA id
- i8-20020a37c208000000b0078322dc4f97sm6142113qkm.26.2024.01.19.07.10.17
+ i8-20020a37c208000000b0078322dc4f97sm6142113qkm.26.2024.01.19.07.12.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jan 2024 07:10:18 -0800 (PST)
+ Fri, 19 Jan 2024 07:12:06 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
  jwerner@chromium.org
 Cc: Raymond Mao <raymond.mao@linaro.org>,
  Kevin Chen <kevin_chen@aspeedtech.com>,
  Sean Anderson <sean.anderson@seco.com>, Nikhil M Jain <n-jain1@ti.com>,
- Bin Meng <bmeng.cn@gmail.com>, Shiji Yang <yangshiji66@outlook.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michal Simek <michal.simek@amd.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Qu Wenruo <wqu@suse.com>
-Subject: [PATCH v7 0/7] Handoff bloblist from previous boot stage
-Date: Fri, 19 Jan 2024 07:09:56 -0800
-Message-Id: <20240119151007.715348-1-raymond.mao@linaro.org>
+ Bin Meng <bmeng.cn@gmail.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Shiji Yang <yangshiji66@outlook.com>, Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH v7 1/8] bloblist: add API to check the register conventions
+Date: Fri, 19 Jan 2024 07:09:57 -0800
+Message-Id: <20240119151007.715348-2-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240119151007.715348-1-raymond.mao@linaro.org>
+References: <20240119151007.715348-1-raymond.mao@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,47 +100,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch set adds/adapts a few bloblist APIs and implements Arm arch
-custom function to retrieve the bloblist (aka. Transfer List) from
-previous loader via boot arguments when BLOBLIST option is enabled and
-all boot arguments are compliant to the register conventions defined
-in the Firmware Handoff spec v0.9.
+Add bloblist_check_reg_conv() to check whether the bloblist is compliant
+to the register conventions defined in Firmware Handoff specification.
+This API can be used for all Arm platforms.
 
-If an arch wishes to have different behaviors for loading bloblist
-from the previous boot stage, it is required to implement the custom
-function xferlist_from_boot_arg().
+Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+---
+Changes in v2
+- Refactor of bloblist_check_reg_conv().
+Changes in v3
+- bloblist_check_reg_conv() returns -ENOENT if OF_BOARD is disabled.
+Changes in v4
+- Add checking of signature register.
+Changes in V5
+- Drop the dependence on OF_BOARD.
 
-V5:
-Drop [PATCH v4 8/9] fdt: update the document and Kconfig description.
-V6:
-Drop [PATCH v5 8/8] fdt: get FDT from bloblist.
-V7:
-Fixed CI pipeline failures.
+ common/bloblist.c  | 11 +++++++++++
+ include/bloblist.h | 20 ++++++++++++++++++++
+ 2 files changed, 31 insertions(+)
 
-Raymond Mao (8):
-  bloblist: add API to check the register conventions
-  bloblist: check bloblist with specified buffer size
-  bloblist: refactor of bloblist_reloc()
-  arm: armv7: save boot arguments
-  arm: armv8: save boot arguments
-  arm: Get bloblist from boot arguments
-  bloblist: Load the bloblist from the previous loader
-  dts: OF_HAS_PRIOR_STAGE should depend on !BLOBLIST
-
- arch/arm/cpu/armv7/start.S | 21 ++++++++++
- arch/arm/cpu/armv8/start.S | 16 +++++++
- arch/arm/lib/Makefile      |  2 +
- arch/arm/lib/xferlist.c    | 27 ++++++++++++
- arch/arm/lib/xferlist.h    | 19 +++++++++
- common/bloblist.c          | 85 ++++++++++++++++++++++++++++----------
- common/board_f.c           |  9 ++--
- dts/Kconfig                |  1 +
- include/bloblist.h         | 47 +++++++++++++++++----
- test/bloblist.c            |  8 ++--
- 10 files changed, 195 insertions(+), 40 deletions(-)
- create mode 100644 arch/arm/lib/xferlist.c
- create mode 100644 arch/arm/lib/xferlist.h
-
+diff --git a/common/bloblist.c b/common/bloblist.c
+index 2d373910b6..980b1ddbcb 100644
+--- a/common/bloblist.c
++++ b/common/bloblist.c
+@@ -542,3 +542,14 @@ int bloblist_maybe_init(void)
+ 
+ 	return 0;
+ }
++
++int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig)
++{
++	if (rzero || rsig != (BLOBLIST_MAGIC | BLOBLIST_REGCONV_VER) ||
++	    rfdt != (ulong)bloblist_find(BLOBLISTT_CONTROL_FDT, 0)) {
++		gd->bloblist = NULL;  /* Reset the gd bloblist pointer */
++		return -EIO;
++	}
++
++	return 0;
++}
+diff --git a/include/bloblist.h b/include/bloblist.h
+index 84fc943819..f7e800f681 100644
+--- a/include/bloblist.h
++++ b/include/bloblist.h
+@@ -78,6 +78,13 @@ enum {
+ 	BLOBLIST_VERSION	= 1,
+ 	BLOBLIST_MAGIC		= 0x4a0fb10b,
+ 
++	/*
++	 * FIXME:
++	 * Register convention version should be placed into a higher byte
++	 * https://github.com/FirmwareHandoff/firmware_handoff/issues/32
++	 */
++	BLOBLIST_REGCONV_VER	= 1 << 24,
++
+ 	BLOBLIST_BLOB_ALIGN_LOG2 = 3,
+ 	BLOBLIST_BLOB_ALIGN	 = 1 << BLOBLIST_BLOB_ALIGN_LOG2,
+ 
+@@ -461,4 +468,17 @@ static inline int bloblist_maybe_init(void)
+ }
+ #endif /* BLOBLIST */
+ 
++/**
++ * bloblist_check_reg_conv() - Check whether the bloblist is compliant to
++ *			       the register conventions according to the
++ *			       Firmware Handoff spec.
++ *
++ * @rfdt:  Register that holds the FDT base address.
++ * @rzero: Register that must be zero.
++ * @rsig:  Register that holds signature and register conventions version.
++ * Return: 0 if OK, -EIO if the bloblist is not compliant to the register
++ *	   conventions.
++ */
++int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig);
++
+ #endif /* __BLOBLIST_H */
 -- 
 2.25.1
 
