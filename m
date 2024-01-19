@@ -4,82 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CFC2C4725D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 07:21:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65223C4725D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 07:21:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12C1187745;
-	Fri, 19 Jan 2024 08:21:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 85A5187B8E;
+	Fri, 19 Jan 2024 08:21:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=jens-maus.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="kUPQi5Lx";
+	dkim=pass (1024-bit key; unprotected) header.d=jens-maus.de header.i=@jens-maus.de header.b="H1b/8OcD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71E7A8794A; Fri, 19 Jan 2024 08:21:38 +0100 (CET)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ id 5304F87B9D; Fri, 19 Jan 2024 08:21:55 +0100 (CET)
+Received: from mail.light-speed.de (mail.light-speed.de
+ [IPv6:2a01:238:43f2:8900:dd04:e3a0:ee11:a73d])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 42D748767C
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 08:21:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=jens-maus.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mail@jens-maus.de
+Received: from smtpclient.apple (unknown
+ [IPv6:2a02:810a:8280:47aa:8cb:7c21:219f:c18e])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A5CD8767C
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 08:21:35 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1705648895; x=1708240895;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lsClQQcOoOhHFj6pNyF296Mq11r5AF9ZXGErEmu30TY=;
- b=kUPQi5LxFYb/ZQDT7wI6XGGk1OGSaKWKZjreOug1lSJwU/17kcZeKh7jx9pcwu+N
- pVnirSYBbAQAUO6pFlPwhnEmi6SYJt6ZgFAYRiCkV2Os8zulCarLWkVO4zRjgPNJ
- ejOieUa5ycGajTmV33W9UXrzkuElF0GlN6HZMKFKeNI=;
-X-AuditID: ac14000a-fbefe7000000290d-97-65aa22ff69c8
-Received: from florix.phytec.de (Unknown_Domain [172.25.0.13])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id FA.19.10509.FF22AA56;
- Fri, 19 Jan 2024 08:21:35 +0100 (CET)
-Received: from Berlix.phytec.de (172.25.0.12) by Florix.phytec.de
- (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Fri, 19 Jan
- 2024 08:21:35 +0100
-Received: from Berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4]) by
- berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4%4]) with mapi id 15.01.2507.006;
- Fri, 19 Jan 2024 08:21:35 +0100
-From: Yannic Moog <Y.Moog@phytec.de>
-To: "festevam@gmail.com" <festevam@gmail.com>, "othacehe@gnu.org"
- <othacehe@gnu.org>, Christoph Stoidner <C.Stoidner@phytec.de>, Wadim Egorov
- <W.Egorov@phytec.de>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH] Add Phytec i.MX93 support
-Thread-Topic: [PATCH] Add Phytec i.MX93 support
-Thread-Index: AQHaSRot8kpDN1J+g0iVJFysGsaNDrDgrUgA
-Date: Fri, 19 Jan 2024 07:21:35 +0000
-Message-ID: <e88317c9172455727459367953e0bb2acbd63eab.camel@phytec.de>
-References: <20240117075254.8520-1-othacehe@gnu.org>
-In-Reply-To: <20240117075254.8520-1-othacehe@gnu.org>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.25.0.11]
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <A67A9D2C074C2445851519B179AD21E5@phytec.de>
-Content-Transfer-Encoding: base64
-MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprGIsWRmVeSWpSXmKPExsWyRpKBV/e/0qpUg137dSweXvW3OH93C7PF
- 272d7A7MHjtn3WX3aJtm5nH2zg7GAOYoLpuU1JzMstQifbsEroxJ+84xF1zzqlh74jtLA+MD
- jy5GTg4JAROJ+2/usoLYQgKLmST6Dyl2MXIB2fcZJW43X2OFcDYwSmz6PYMNpIpNQEXi5IxL
- jCAJEYFljBJzu1rYQRLMAoYSu/Y/AysSFtCTODSnjwnEFhHQl7jQupsdwjaSmPnxFlicRUBV
- 4vbSzyxdjBwcvAJuErP6JCGuMJGYs+4VWAmngKnE6unLwFoZBWQlNmw4zwyxSlxi07PvrBAf
- CEgs2QMRlxAQlXj5+B9UXF7ixK1pTCDjmQU0Jdbv0odotZB48/w0K4StKDGl+yHYeF4BQYmT
- M5+wTGAUn4VkwyyE7llIumch6Z6FpHsBI+sqRqHczOTs1KLMbL2CjMqS1GS9lNRNjKC4E2Hg
- 2sHYN8fjECMTB+MhRgkOZiURXn+DZalCvCmJlVWpRfnxRaU5qcWHGKU5WJTEeVd3BKcKCaQn
- lqRmp6YWpBbBZJk4OKUaGGc32uz+rSr57Jk4c9fO16+aOIONjGXOrmpY7DFvvakA0wqGA34z
- k0o1ZD3fnP74f6+GTWGbz+yiZcubPq0IEg1m7JKZXy3S36f7vsVJZWPKPI6XZ5/qLz28h+3c
- kvj7e8+Y790r3lN65sMOjqQ3XRNK12tPcGN8qr4i/MlW9rmaNUm8LeeO/1JiKc5INNRiLipO
- BABOjoqwqQIAAA==
+ by mail.light-speed.de (Postfix) with ESMTPSA id 77DCA3D486AC;
+ Fri, 19 Jan 2024 08:21:52 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jens-maus.de;
+ s=mail; t=1705648912;
+ bh=oLEWnBIn3ETV6iFcr0p2xoi2BKZsgWnEdFZVXIKUa8M=;
+ h=Subject:From:In-Reply-To:Date:Cc:References:To;
+ b=H1b/8OcDCHP/UIJ/PazEvfGz6LpfmPryUpyRD/Je+ejBrh/fVauLnvjplt/h09wdH
+ AbTMpRvNZlMBgAln31GVPna/+IZJoEzoDz3cipCLWblbX+7M3AvGd7Iq4r1MwVgvoo
+ d943iy6knbrHNKCKK7UirJacpG5ajnCCPSQK7NyM=
+Content-Type: text/plain;
+	charset=utf-8
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.300.61.1.2\))
+Subject: Re: [PATCH v4 0/6] rpi5: initial support
+From: Jens Maus <mail@jens-maus.de>
+In-Reply-To: <zmxxqxlbhdhngu36ft4yrqxtjkmvalvhbgbl2uzsj2jgnq7zje@qtncpq2nss57>
+Date: Fri, 19 Jan 2024 08:21:41 +0100
+Cc: u-boot@lists.denx.de
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <DCAD0173-2377-4B89-92EB-F38ED1CA938B@jens-maus.de>
+References: <BD4D4B77-9C54-4FD7-8EEF-A65E674E0747@jens-maus.de>
+ <sfo77vzvmblyv5g5ek6uc6oxrf5n7dcp3vsw2g2lvfnnrlyaft@kc6s7vvspwvz>
+ <4DCC64E0-F0E4-4AF6-8E81-62B156E81554@jens-maus.de>
+ <2303FFA8-E2FA-4AA4-AE67-FF5E904D21DD@suse.de>
+ <A796E025-0F6E-4FF7-BA4D-2F52CD763B4B@jens-maus.de>
+ <9AFD4C3E-E1B7-4EA7-8589-7060A2747732@suse.de>
+ <5C0A3CD4-2591-4266-B9CC-7EC38C6A88C3@jens-maus.de>
+ <454FB8E4-52A8-482D-8671-5650F8C4773C@suse.de>
+ <A26CEBAE-9950-4304-B3A2-1BAB4035437A@jens-maus.de>
+ <zmxxqxlbhdhngu36ft4yrqxtjkmvalvhbgbl2uzsj2jgnq7zje@qtncpq2nss57>
+To: "Ivan T. Ivanov" <iivanov@suse.de>
+X-Mailer: Apple Mail (2.3774.300.61.1.2)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,126 +77,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGVsbG8gTWF0aGlldQ0KDQpBcyBhIGhlYWRzLXVwOiB5b3UgbmVlZCB0byByZWJhc2UgYXMgYW02
-MiAoZG9jKSBnb3QgYXBwbGllZCBieSBUb20uDQoNCk9uIFdlZCwgMjAyNC0wMS0xNyBhdCAwODo1
-MiArMDEwMCwgTWF0aGlldSBPdGhhY2VoZSB3cm90ZToNCj4gQWRkIHN1cHBvcnQgZm9yIHRoZSBQ
-aHl0ZWMgaS5NWDkzIFNlZ2luIGV2YWx1YXRpb24ga2l0LiBUaGUgU29NIGNvbnNpc3RzDQo+IG9m
-IGFuIE5YUCBpLk1YOTMgZHVhbCBBNTUgQ1BVLiBUaGUgU29NIGlzIG1vdW50ZWQgb24gYSBQaHl0
-ZWMgU2VnaW4gU0JDLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogTWF0aGlldSBPdGhhY2VoZSA8b3Ro
-YWNlaGVAZ251Lm9yZz4NCj4gLS0tDQo+IMKgYXJjaC9hcm0vZHRzL01ha2VmaWxlwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgwqAgMyArLQ0KPiDC
-oGFyY2gvYXJtL2R0cy9pbXg5My1waHljb3JlLXNlZ2luLXUtYm9vdC5kdHNpwqAgfMKgIDI3NCAr
-KysNCj4gwqBhcmNoL2FybS9kdHMvaW14OTMtcGh5Y29yZS1zZWdpbi5kdHPCoMKgwqDCoMKgwqDC
-oMKgwqAgfMKgwqAgOTUgKw0KPiDCoGFyY2gvYXJtL2R0cy9pbXg5My1waHljb3JlLXNvbS5kdHNp
-wqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgNjQgKw0KPiDCoGFyY2gvYXJtL21hY2gtaW14L2lt
-eDkvS2NvbmZpZ8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoMKgIDYgKw0KPiDC
-oGJvYXJkL3BoeXRlYy9jb21tb24vbW1jLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgIHzCoMKgIDQ5ICsNCj4gwqBib2FyZC9waHl0ZWMvaW14OTNfcGh5Y29yZS9LY29u
-ZmlnwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCAyMSArDQo+IMKgYm9hcmQvcGh5dGVjL2lt
-eDkzX3BoeWNvcmUvTUFJTlRBSU5FUlPCoMKgwqDCoMKgwqDCoCB8wqDCoCAxMCArDQo+IMKgYm9h
-cmQvcGh5dGVjL2lteDkzX3BoeWNvcmUvTWFrZWZpbGXCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDC
-oCAxNiArDQo+IMKgYm9hcmQvcGh5dGVjL2lteDkzX3BoeWNvcmUvaW14OTNfcGh5Y29yZS5jwqDC
-oMKgIHzCoMKgIDg5ICsNCj4gwqBib2FyZC9waHl0ZWMvaW14OTNfcGh5Y29yZS9pbXg5M19waHlj
-b3JlLmVudsKgIHzCoMKgIDk2ICsNCj4gwqAuLi4vcGh5dGVjL2lteDkzX3BoeWNvcmUvbHBkZHI0
-X3RpbWluZ18xR0IuY8KgIHwgMTU0NiArKysrKysrKysrKysrKysrKw0KPiDCoGJvYXJkL3BoeXRl
-Yy9pbXg5M19waHljb3JlL3NwbC5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDE4MSAr
-Kw0KPiDCoGNvbmZpZ3MvaW14OTNfcGh5Y29yZV9kZWZjb25maWfCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgIHzCoCAxNDcgKysNCj4gwqBkb2MvYm9hcmQvcGh5dGVjL2lteDkzX3BoeWNvcmUu
-cnN0wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCA2OCArDQo+IMKgZG9jL2JvYXJkL3BoeXRl
-Yy9pbmRleC5yc3TCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoMKg
-IDEgKw0KPiDCoGluY2x1ZGUvY29uZmlncy9pbXg5M19waHljb3JlLmjCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgIHzCoMKgIDQ3ICsNCj4gwqAxNyBmaWxlcyBjaGFuZ2VkLCAyNzEyIGluc2Vy
-dGlvbnMoKyksIDEgZGVsZXRpb24oLSkNCj4gwqBjcmVhdGUgbW9kZSAxMDA2NDQgYXJjaC9hcm0v
-ZHRzL2lteDkzLXBoeWNvcmUtc2VnaW4tdS1ib290LmR0c2kNCj4gwqBjcmVhdGUgbW9kZSAxMDA2
-NDQgYXJjaC9hcm0vZHRzL2lteDkzLXBoeWNvcmUtc2VnaW4uZHRzDQo+IMKgY3JlYXRlIG1vZGUg
-MTAwNjQ0IGFyY2gvYXJtL2R0cy9pbXg5My1waHljb3JlLXNvbS5kdHNpDQo+IMKgY3JlYXRlIG1v
-ZGUgMTAwNjQ0IGJvYXJkL3BoeXRlYy9jb21tb24vbW1jLmMNCj4gwqBjcmVhdGUgbW9kZSAxMDA2
-NDQgYm9hcmQvcGh5dGVjL2lteDkzX3BoeWNvcmUvS2NvbmZpZw0KPiDCoGNyZWF0ZSBtb2RlIDEw
-MDY0NCBib2FyZC9waHl0ZWMvaW14OTNfcGh5Y29yZS9NQUlOVEFJTkVSUw0KPiDCoGNyZWF0ZSBt
-b2RlIDEwMDY0NCBib2FyZC9waHl0ZWMvaW14OTNfcGh5Y29yZS9NYWtlZmlsZQ0KPiDCoGNyZWF0
-ZSBtb2RlIDEwMDY0NCBib2FyZC9waHl0ZWMvaW14OTNfcGh5Y29yZS9pbXg5M19waHljb3JlLmMN
-Cj4gwqBjcmVhdGUgbW9kZSAxMDA2NDQgYm9hcmQvcGh5dGVjL2lteDkzX3BoeWNvcmUvaW14OTNf
-cGh5Y29yZS5lbnYNCj4gwqBjcmVhdGUgbW9kZSAxMDA2NDQgYm9hcmQvcGh5dGVjL2lteDkzX3Bo
-eWNvcmUvbHBkZHI0X3RpbWluZ18xR0IuYw0KPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBib2FyZC9w
-aHl0ZWMvaW14OTNfcGh5Y29yZS9zcGwuYw0KPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBjb25maWdz
-L2lteDkzX3BoeWNvcmVfZGVmY29uZmlnDQo+IMKgY3JlYXRlIG1vZGUgMTAwNjQ0IGRvYy9ib2Fy
-ZC9waHl0ZWMvaW14OTNfcGh5Y29yZS5yc3QNCj4gwqBjcmVhdGUgbW9kZSAxMDA2NDQgaW5jbHVk
-ZS9jb25maWdzL2lteDkzX3BoeWNvcmUuaA0KPiANCj4gDQoNCjxzbmlwPg0KDQo+IA0KPiBkaWZm
-IC0tZ2l0IGEvZG9jL2JvYXJkL3BoeXRlYy9pbXg5M19waHljb3JlLnJzdCBiL2RvYy9ib2FyZC9w
-aHl0ZWMvaW14OTNfcGh5Y29yZS5yc3QNCj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4gaW5kZXgg
-MDAwMDAwMDAwMDAuLmY5Yjg3NjkxY2RjDQo+IC0tLSAvZGV2L251bGwNCj4gKysrIGIvZG9jL2Jv
-YXJkL3BoeXRlYy9pbXg5M19waHljb3JlLnJzdA0KPiBAQCAtMCwwICsxLDY4IEBADQo+ICsuLiBT
-UERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMCsNCj4gKw0KPiAraW14OTNfcGh5dGVjDQo+
-ICs9PT09PT09PT09PT0NCg0KcmVuYW1lIGl0IHRvIHBoeUNPUkUtaS5NWCA5MyBwbGVhc2UsIGFz
-IHRoaXMgaXMgdGhlIG9mZmljaWFsIG5hbWUuIFNlZQ0KaHR0cHM6Ly93d3cucGh5dGVjLmV1L2Vu
-L3Byb2R1a3RlL3N5c3RlbS1vbi1tb2R1bGVzL3BoeWNvcmUtaW14LTkxLTkzLw0KDQo+ICsNCj4g
-K1UtQm9vdCBmb3IgdGhlIE5YUCBpLk1YOTMgUGh5dGVjIFNvTSBvZiBhIFNlZ2luIGJvYXJkDQoN
-ClNhbWUgaGVyZTsgVXNlIG9mZmljaWFsIG5hbWluZywgcGxlYXNlLg0KDQo+ICsNCj4gK1F1aWNr
-IFN0YXJ0DQo+ICstLS0tLS0tLS0tLQ0KPiArDQo+ICstIEdldCBhbmQgQnVpbGQgdGhlIEFSTSBU
-cnVzdGVkIGZpcm13YXJlDQo+ICstIEdldCB0aGUgRERSIGZpcm13YXJlDQo+ICstIEdldCBhaGFi
-LWNvbnRhaW5lci5pbWcNCj4gKy0gQnVpbGQgVS1Cb290DQo+ICstIEJvb3QNCj4gKw0KPiArR2V0
-IGFuZCBCdWlsZCB0aGUgQVJNIFRydXN0ZWQgZmlybXdhcmUNCj4gKy0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tDQo+ICsNCj4gK05vdGU6IHNyY3RyZWUgaXMgVS1Cb290IHNv
-dXJjZSBkaXJlY3RvcnkNCj4gK0dldCBBVEYgZnJvbTogaHR0cHM6Ly9naXRodWIuY29tL254cC1p
-bXgvaW14LWF0Zi8NCg0KSXMgdGhlIHRydXN0ZWQtZmlybXdhcmUtYSB1cHN0cmVhbSB2ZXJzaW9u
-IHdvcmtpbmc/IElmIHNvLCBwbGVhc2UgdXNlIHRoYXQgaW5zdGVhZC4NCg0KPiArYnJhbmNoOiBs
-Zl92Mi44DQo+ICsNCj4gKy4uIGNvZGUtYmxvY2s6OiBiYXNoDQo+ICsNCj4gK8KgwqAgJCB1bnNl
-dCBMREZMQUdTDQo+ICvCoMKgICQgbWFrZSBQTEFUPWlteDkzIGJsMzENCj4gK8KgwqAgJCBjcCBi
-dWlsZC9pbXg5My9yZWxlYXNlL2JsMzEuYmluICQoc3JjdHJlZSkNCj4gKw0KPiArR2V0IHRoZSBE
-RFIgZmlybXdhcmUNCj4gKy0tLS0tLS0tLS0tLS0tLS0tLS0tDQo+ICsNCj4gKy4uIGNvZGUtYmxv
-Y2s6OiBiYXNoDQo+ICsNCj4gK8KgwqAgJCB3Z2V0IGh0dHBzOi8vd3d3Lm54cC5jb20vbGdmaWxl
-cy9OTUcvTUFEL1lPQ1RPL2Zpcm13YXJlLWlteC04LjIxLmJpbg0KPiArwqDCoCAkIGNobW9kICt4
-IGZpcm13YXJlLWlteC04LjIxLmJpbg0KPiArwqDCoCAkIC4vZmlybXdhcmUtaW14LTguMjEuYmlu
-DQo+ICvCoMKgICQgY3AgZmlybXdhcmUtaW14LTguMjEvZmlybXdhcmUvZGRyL3N5bm9wc3lzL2xw
-ZGRyNCouYmluICQoc3JjdHJlZSkNCj4gKw0KPiArR2V0IGFoYWItY29udGFpbmVyLmltZw0KPiAr
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQo+ICsNCj4gKy4uIGNvZGUt
-YmxvY2s6OiBiYXNoDQo+ICsNCj4gK8KgwqAgJCB3Z2V0IGh0dHBzOi8vd3d3Lm54cC5jb20vbGdm
-aWxlcy9OTUcvTUFEL1lPQ1RPL2Zpcm13YXJlLXNlbnRpbmVsLTAuMTAuYmluDQo+ICvCoMKgICQg
-Y2htb2QgK3ggZmlybXdhcmUtc2VudGluZWwtMC4xMC5iaW4NCj4gK8KgwqAgJCAuL2Zpcm13YXJl
-LXNlbnRpbmVsLTAuMTAuYmluDQo+ICvCoMKgICQgY3AgZmlybXdhcmUtc2VudGluZWwtMC4xMC9t
-eDkzYTAtYWhhYi1jb250YWluZXIuaW1nICQoc3JjdHJlZSkNCj4gKw0KPiArQnVpbGQgVS1Cb290
-DQo+ICstLS0tLS0tLS0tLS0NCj4gKw0KPiArLi4gY29kZS1ibG9jazo6IGJhc2gNCj4gKw0KPiAr
-wqDCoCAkIGV4cG9ydCBDUk9TU19DT01QSUxFPWFhcmNoNjQtcG9reS1saW51eC0NCg0KTGVhdmUg
-dGhpcyBhcyBnZW5lcmljIGFzIHBvc3NpYmxlIHBsZWFzZS4gQVJNIHRvb2xjaGFpbiBzaG91bGQg
-YmUgc3VmZmljaWVudC4NCg0KPiArwqDCoCAkIG1ha2UgaW14OTNfcGh5dGVjX2RlZmNvbmZpZw0K
-PiArwqDCoCAkIG1ha2UNCj4gKw0KPiArQnVybiB0aGUgZmxhc2guYmluIHRvIE1pY3JvU0QgY2Fy
-ZCBvZmZzZXQgMzJLQjoNCj4gKw0KPiArLi4gY29kZS1ibG9jazo6IGJhc2gNCj4gKw0KPiArwqDC
-oCAkIGRkIGlmPWZsYXNoLmJpbiBvZj0vZGV2L3NkW3hdIGJzPTEwMjQgc2Vlaz0zMiBjb252PW5v
-dHJ1bmMNCj4gKw0KPiArQm9vdA0KPiArLS0tLQ0KPiArDQo+ICtTZXQgQm9vdCBzd2l0Y2ggdG8g
-U0QgYm9vdA0KDQpBZGQgaW5mbyB0byB3aGF0IHBvc2l0aW9uKHMpIHRoZSBib290IHN3aXRjaGVz
-IG11c3QgYmUgc2V0Lg0KIA0KPiBkaWZmIC0tZ2l0IGEvZG9jL2JvYXJkL3BoeXRlYy9pbmRleC5y
-c3QgYi9kb2MvYm9hcmQvcGh5dGVjL2luZGV4LnJzdA0KPiBpbmRleCA5OTk2YmNlOTc0MS4uYTc0
-MGYwY2JhZTQgMTAwNjQ0DQo+IC0tLSBhL2RvYy9ib2FyZC9waHl0ZWMvaW5kZXgucnN0DQo+ICsr
-KyBiL2RvYy9ib2FyZC9waHl0ZWMvaW5kZXgucnN0DQo+IEBAIC03LDUgKzcsNiBAQCBQSFlURUMN
-Cj4gwqDCoMKgIDptYXhkZXB0aDogMg0KPiDCoA0KPiDCoMKgwqAgaW14OG1tLXBoeWdhdGUtdGF1
-cmktbA0KPiArwqDCoCBpbXg5M19waHljb3JlDQo+IMKgwqDCoCBwaHljb3JlLWlteDhtbQ0KPiDC
-oMKgwqAgcGh5Y29yZS1pbXg4bXANCj4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvY29uZmlncy9pbXg5
-M19waHljb3JlLmggYi9pbmNsdWRlL2NvbmZpZ3MvaW14OTNfcGh5Y29yZS5oDQo+IG5ldyBmaWxl
-IG1vZGUgMTAwNjQ0DQo+IGluZGV4IDAwMDAwMDAwMDAwLi5lZTEzMjJjOWI1Mg0KPiAtLS0gL2Rl
-di9udWxsDQo+ICsrKyBiL2luY2x1ZGUvY29uZmlncy9pbXg5M19waHljb3JlLmgNCj4gQEAgLTAs
-MCArMSw0NyBAQA0KPiArLyogU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEdQTC0yLjArICovDQo+
-ICsvKg0KPiArICogQ29weXJpZ2h0IDIwMjIgTlhQDQo+ICsgKiBDb3B5cmlnaHQgKEMpIDIwMjMg
-UEhZVEVDIE1lc3N0ZWNobmlrIEdtYkgNCj4gKyAqIENocmlzdG9waCBTdG9pZG5lciA8Yy5zdG9p
-ZG5lckBwaHl0ZWMuZGU+DQo+ICsgKi8NCj4gKw0KPiArI2lmbmRlZiBfX0lNWDkzX1BIWUNPUkVf
-SA0KPiArI2RlZmluZSBfX0lNWDkzX1BIWUNPUkVfSA0KPiArDQo+ICsjaW5jbHVkZSA8bGludXgv
-c2l6ZXMuaD4NCj4gKyNpbmNsdWRlIDxsaW51eC9zdHJpbmdpZnkuaD4NCj4gKyNpbmNsdWRlIDxh
-c20vYXJjaC9pbXgtcmVncy5oPg0KPiArDQo+ICsjZGVmaW5lIENGR19TWVNfVUJPT1RfQkFTRQlc
-DQo+ICsJKFFTUEkwX0FNQkFfQkFTRSArIENPTkZJR19TWVNfTU1DU0RfUkFXX01PREVfVV9CT09U
-X1NFQ1RPUiAqIDUxMikNCj4gKw0KPiArI2RlZmluZSBCT09UX1RBUkdFVF9ERVZJQ0VTKGZ1bmMp
-IFwNCj4gKwlmdW5jKE1NQywgbW1jLCAwKSBcDQo+ICsJZnVuYyhNTUMsIG1tYywgMSkNCj4gKw0K
-PiArI2luY2x1ZGUgPGNvbmZpZ19kaXN0cm9fYm9vdGNtZC5oPg0KDQpJIGRvbid0IHNlZSBhIHNw
-ZWNpZmljIHJlYXNvbiB0byBoYXZlIHRoaXMgaW5jbHVkZSBzZXBhcmF0ZT8hIEdyb3VwIGl0IHdp
-dGggdGhlIG90aGVycywgcGxlYXNlLg0KDQpZYW5uaWMNCg0KPiArDQo+ICsvKiBJbml0aWFsIGVu
-dmlyb25tZW50IHZhcmlhYmxlcyAqLw0KPiArI2RlZmluZSBDRkdfRVhUUkFfRU5WX1NFVFRJTkdT
-IEJPT1RFTlYNCj4gKw0KPiArI2RlZmluZSBDRkdfU1lTX0lOSVRfUkFNX0FERFLCoMKgwqDCoMKg
-wqDCoCAweDgwMDAwMDAwDQo+ICsjZGVmaW5lIENGR19TWVNfSU5JVF9SQU1fU0laRcKgwqDCoMKg
-wqDCoMKgIDB4MjAwMDAwDQo+ICsNCj4gKyNkZWZpbmUgQ0ZHX1NZU19TRFJBTV9CQVNFwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgMHg4MDAwMDAwMA0KPiArI2RlZmluZSBQSFlTX1NEUkFNwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDB4ODAwMDAwMDANCj4gKyNkZWZpbmUgUEhZU19T
-RFJBTV9TSVpFwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgMHg4MDAwMDAwMA0KPiArDQo+ICsj
-ZGVmaW5lIENGR19TWVNfRlNMX1VTREhDX05VTQkyDQo+ICsNCj4gKy8qIFVzaW5nIFVMUCBXRE9H
-IGZvciByZXNldCAqLw0KPiArI2RlZmluZSBXRE9HX0JBU0VfQUREUsKgwqDCoMKgwqDCoMKgwqDC
-oCBXREczX0JBU0VfQUREUg0KPiArDQo+ICsjaWYgZGVmaW5lZChDT05GSUdfQ01EX05FVCkNCj4g
-KyNkZWZpbmUgUEhZX0FORUdfVElNRU9VVCAyMDAwMA0KPiArI2VuZGlmDQo+ICsNCj4gKyNpZmRl
-ZiBDT05GSUdfSU1YX01BVFRFUl9UUlVTVFkNCj4gKyNkZWZpbmUgTlNfQVJDSF9BUk02NCAxDQo+
-ICsjZW5kaWYNCj4gKw0KPiArI2VuZGlmDQoNCg==
+Hi,
+
+> Am 19.01.2024 um 06:29 schrieb Ivan T. Ivanov <iivanov@suse.de>:
+>=20
+> On 01-18 18:18, Jens Maus wrote:
+>>=20
+>>> I am afraid you will have to connect that UART debug cable and share
+>>> what is the memory map on your device :-)
+>>=20
+>> No problem.
+>=20
+> Thanks, but could you apply attached patch and send me
+> the logs when there is HDMI monitor connected to the board
+> and one when cable is unplugged.
+
+I applied that patch, but unfortunately no U-Boot specific output on the =
+special debug UART of the rpi5 at all. As I have shown in my earlier =
+email, the output ends with the =E2=80=9ENOTICE: BL31=E2=80=A6=E2=80=9C =
+messages and there is no single line coming from U-boot at all. Also =
+tried to add =E2=80=9E#define DEBUG=E2=80=9C to the fdtdec.c file and =
+added CONFIG_LOG=3Dy as well as raising the maximum debug level to 9 to =
+the U-boot build. This for some reason this does not end up in any =
+additional U-boot debug line output on the RPi debug probe connected to =
+the special UART of the rpi5. I even tried to connect the debug probe to =
+the UART pins of the GPIO but also there no U-Boot debug output at all, =
+I am afraid.
+
+So where should that U-Boot debug output actually appear with your =
+u-boot.bin patched version?
+
+Best Regards,
+jens
+--=20
+Jens Maus, Dresden/Germany
+http://jens-maus.de/
+
