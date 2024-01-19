@@ -4,69 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1514C4725D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 13:25:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 453F0C4725D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 13:25:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0ABB387C0F;
-	Fri, 19 Jan 2024 14:25:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 81FB887C82;
+	Fri, 19 Jan 2024 14:25:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="M1/G8XBS";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="jyD4Q8eZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF96B87BF9; Fri, 19 Jan 2024 14:25:04 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+ id DAF4C87C97; Fri, 19 Jan 2024 14:25:14 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F7EC87C5A
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 14:25:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1824C87BF9
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 14:25:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=17487c629f=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 40JBGaqB022593; Fri, 19 Jan 2024 14:24:59 +0100
+ 40JAjKYi016501; Fri, 19 Jan 2024 14:25:11 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=J+BTJ/VOnkL4WOaAH8V7uucTpTcbesH/XHJuW6zXVbI=; b=M1
- /G8XBSrkx5cTueImXe3bPF2p9YIFK+SNNH0XbpxfQ0GoXCgWX2gxEhmwsNFdk5qd
- 5lRgtKKKKUlArJaeopc9SJY5ipq3wlZugppPOP0/8GFOc5vGKpnu2cB3E2q2TDh7
- yxChS5jvhqSDcS2cWv7xORXZpqwVYTKyh6QoMGoUmAjr51+VGzz9dxslDh68oZKh
- Ic+HGgx3YOzGRl+WR/1+1531Buhm8vhHd1x57lDo75hPhGm4V4nuZqD1LJtISgic
- pxf3yFj36BoHrVDYKKk0F6/6rO9PqA833rtQlsVwfzWcTZPqQDCtZQKE1Wj/xjbM
- E0lc7/lR7Rr1ObzZ0lgw==
+ selector1; bh=3FNUn3yJgBJEy/20fT03PRfNe9JMl7zmB4riqq6Qd5o=; b=jy
+ D4Q8eZPGiFqv6dNbBmWpNWWmeU5HEucQFCOaCQh5HOydk27+Zm+5c09nT6Y+V2Ub
+ YZgxpB5FeCDcY4wCuenCeAnc0d4DxxjVqcEGAFbQ0mjQtHW3AOQVQV017dEN9w9c
+ 8QVNNsaf5cKQIa0cFFUGdCMY9VQflnXX1hiyT9kyy2MuCUzT5IHW/HuIVKBqaXvd
+ diEqjcW+eVk5IW1diXY6MwvQitz0UuuNnI0okmSkzPW4AcrReFn4lPonz0JKT+vy
+ 8lQRbWjP1SeDq15ExPSw/dK6sRuSDsavdtWPMiKqvrhahbILKymS4jXnXUdMAZC1
+ V2jIsj66VvpoviUtWyvQ==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vkmbhnu54-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vkma6e255-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 Jan 2024 14:24:59 +0100 (CET)
+ Fri, 19 Jan 2024 14:25:11 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2B476100081;
- Fri, 19 Jan 2024 14:24:59 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E7922100081;
+ Fri, 19 Jan 2024 14:25:10 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 22E1B245501;
- Fri, 19 Jan 2024 14:24:59 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E1076245506;
+ Fri, 19 Jan 2024 14:25:10 +0100 (CET)
 Received: from [10.252.4.250] (10.252.4.250) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Jan
- 2024 14:24:58 +0100
-Message-ID: <c0f5139c-dd7c-4cb9-bb72-20aa200160d6@foss.st.com>
-Date: Fri, 19 Jan 2024 14:24:58 +0100
+ 2024 14:25:09 +0100
+Message-ID: <c12cb3ab-c91a-4f9c-9f51-a45faf370987@foss.st.com>
+Date: Fri, 19 Jan 2024 14:25:09 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 04/14] stm32mp: bsec: add support of stm32mp25
+Subject: Re: [PATCH v2 05/14] configs: stm32mp25: add support of fuse command
 Content-Language: en-US
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-CC: Igor Opaniuk <igor.opaniuk@foundries.io>, Marek Vasut <marex@denx.de>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, Simon Glass
- <sjg@chromium.org>, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+CC: Simon Glass <sjg@chromium.org>, <uboot-stm32@st-md-mailman.stormreply.com>
 References: <20240115140557.57448-1-patrick.delaunay@foss.st.com>
- <20240115150451.v2.4.I81fedd3d2ff9635b3738dd1ef349c936bc9b433d@changeid>
+ <20240115150451.v2.5.I3c66d36ce7ac148b8d78855c73ea5f75ddde9b4f@changeid>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240115150451.v2.4.I81fedd3d2ff9635b3738dd1ef349c936bc9b433d@changeid>
+In-Reply-To: <20240115150451.v2.5.I3c66d36ce7ac148b8d78855c73ea5f75ddde9b4f@changeid>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.252.4.250]
@@ -94,7 +92,8 @@ X-Virus-Status: Clean
 
 
 On 1/15/24 15:05, Patrick Delaunay wrote:
-> Add support of BSEC for STM32MP25x family to access OTP.
+> Add support of the command fuse with CONFIG_CMD_FUSE to allow access
+> on OTP with command line.
 > 
 > Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
@@ -102,45 +101,21 @@ On 1/15/24 15:05, Patrick Delaunay wrote:
 > 
 > (no changes since v1)
 > 
->  arch/arm/mach-stm32mp/bsec.c               | 7 +++++++
->  arch/arm/mach-stm32mp/include/mach/stm32.h | 3 ++-
->  2 files changed, 9 insertions(+), 1 deletion(-)
+>  configs/stm32mp25_defconfig | 1 +
+>  1 file changed, 1 insertion(+)
 > 
-> diff --git a/arch/arm/mach-stm32mp/bsec.c b/arch/arm/mach-stm32mp/bsec.c
-> index 705c994d9307..5b869017ec1a 100644
-> --- a/arch/arm/mach-stm32mp/bsec.c
-> +++ b/arch/arm/mach-stm32mp/bsec.c
-> @@ -784,9 +784,16 @@ static const struct stm32mp_bsec_drvdata stm32mp15_data = {
->  	.size = 96,
->  	.ta = false,
->  };
-> +
-> +static const struct stm32mp_bsec_drvdata stm32mp25_data = {
-> +	.size = 368, /* 384 but no access to HWKEY and STM32PRVKEY */
-> +	.ta = true,
-> +};
-> +
->  static const struct udevice_id stm32mp_bsec_ids[] = {
->  	{ .compatible = "st,stm32mp13-bsec", .data = (ulong)&stm32mp13_data},
->  	{ .compatible = "st,stm32mp15-bsec", .data = (ulong)&stm32mp15_data},
-> +	{ .compatible = "st,stm32mp25-bsec", .data = (ulong)&stm32mp25_data},
->  	{}
->  };
->  
-> diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
-> index 46d469881b32..45c929aa605d 100644
-> --- a/arch/arm/mach-stm32mp/include/mach/stm32.h
-> +++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
-> @@ -197,7 +197,8 @@ enum forced_boot_mode {
->  #ifdef CONFIG_STM32MP25X
->  #define BSEC_OTP_SERIAL	5
->  #define BSEC_OTP_RPN	9
-> -#define BSEC_OTP_PKG	246
-> +#define BSEC_OTP_PKG	122
-> +#define BSEC_OTP_MAC	247
->  #endif
->  
->  #ifndef __ASSEMBLY__
+> diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
+> index 75f27c98b441..9fbd7eb15755 100644
+> --- a/configs/stm32mp25_defconfig
+> +++ b/configs/stm32mp25_defconfig
+> @@ -21,6 +21,7 @@ CONFIG_CMD_ADTIMG=y
+>  CONFIG_CMD_MEMINFO=y
+>  CONFIG_CMD_MEMTEST=y
+>  CONFIG_CMD_CLK=y
+> +CONFIG_CMD_FUSE=y
+>  CONFIG_CMD_GPIO=y
+>  # CONFIG_CMD_LOADB is not set
+>  CONFIG_CMD_CACHE=y
 Applied to u-boot-stm32/master
 
 Thanks
