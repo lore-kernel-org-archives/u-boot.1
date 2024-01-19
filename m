@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8D96C4725D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 15:57:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 646B4C47DD3
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:08:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF85987C05;
-	Fri, 19 Jan 2024 16:57:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id B508987CFE;
+	Fri, 19 Jan 2024 17:08:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AQu5PNZq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z49pue+W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2742B87CB6; Fri, 19 Jan 2024 16:57:10 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 84A2987CFE; Fri, 19 Jan 2024 17:08:23 +0100 (CET)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21FCF87A82;
- Fri, 19 Jan 2024 16:57:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2425A87CF0
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 17:08:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40JFulak043062;
- Fri, 19 Jan 2024 09:56:47 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1705679807;
- bh=3PdO6q3NWoROLWG9kG53LgxYWUNTQv0ztf8B9wM4kl0=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=AQu5PNZqtu527j6wv/Wr9Ie9CcDsN0d3/JPi5nzVClOgPMWYu/21CheuZrhqgYJM5
- 2suHtJ+fKxRmT3kRCBKCQsjObT+ZURNscqmM/P0JJIi3PkArfwiP/mWazN8aoZI/6E
- yqYkGBraN9xNRiF0cD//Wu+am8MgvZBbMovbTwq4=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40JFul4O006804
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 19 Jan 2024 09:56:47 -0600
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 19
- Jan 2024 09:56:46 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 19 Jan 2024 09:56:46 -0600
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40JFukgP026459;
- Fri, 19 Jan 2024 09:56:46 -0600
-Date: Fri, 19 Jan 2024 09:56:46 -0600
-From: Nishanth Menon <nm@ti.com>
-To: Sumit Garg <sumit.garg@linaro.org>
-CC: <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>,
- <u-boot-custodians@lists.denx.de>, <trini@konsulko.com>,
- <sjg@chromium.org>, <robh+dt@kernel.org>,
- <krzysztof.kozlowski+dt@linaro.org>, <conor@kernel.org>,
- <neil.armstrong@linaro.org>, <caleb.connolly@linaro.org>,
- <ff@shokubai.tech>, <daniel.thompson@linaro.org>,
- <dgilmore@fedoraproject.org>, <pbrobinson@gmail.com>,
- <ilias.apalodimas@linaro.org>, <maxim.uvarov@linaro.org>,
- <b.galvani@gmail.com>, <xypron.glpk@gmx.de>, <michal.simek@amd.com>,
- <seanga2@gmail.com>, <rasmus.villemoes@prevas.dk>, <peng.fan@nxp.com>,
- <jh80.chung@samsung.com>, <rfried.dev@gmail.com>, <marex@denx.de>,
- <mibodhi@gmail.com>, <bb@ti.com>, <mark.kettenis@xs4all.nl>
-Subject: Re: [PATCH v4 00/11] An effort to bring DT bindings compliance
- within U-Boot
-Message-ID: <20240119155646.qq7bvgmha6cyftkv@nullify>
-References: <20240110103547.719757-1-sumit.garg@linaro.org>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-5ebca94cf74so9411847b3.0
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 08:08:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1705680500; x=1706285300; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=OxhPnPq1T2HGQpxeG0pzbV/VasuZ89B3QedqqfjkjvM=;
+ b=Z49pue+WhqWYSeOffhcTum0Wu7TVs/2ALGRhxIASM3I3JJRbPkAFR4j545Dm8gjmGs
+ +X7rUQGjfbsRmrZnce590f9TrweBpCIMVp2tXWTxTt4yfsrmaZ+AOdFiLYHqJpt9xFiK
+ tA4JDrxt3RgBWf60C/rLplLKwcZBRNjkJES0E=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705680500; x=1706285300;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OxhPnPq1T2HGQpxeG0pzbV/VasuZ89B3QedqqfjkjvM=;
+ b=RFfiGiA2UmNbO4Nx/qJ4xWKGr6T6gJaSBgovl3/AReQ6nqYhbl/4h23QDLJbUIEwU8
+ HUMecMcmR9iXTTJ+E+GqYqFHIVKUHdRhflUI9WB4E7YcwCaaKmwKWpEHZc3WN6rwHEmG
+ L4pkoflj6CeQlm/S/OszggAciT8jZBJIvvYSLdcpFvpX3otw2ethmcR/nl4e6Ltsf4Ab
+ nT0cp1kAp8CD1diAPnPd8UmNz4UGPa80unYx7beOz+mFFnNIcC4QeIY5yB3ryg+e95vZ
+ qh29GoF6leRhze923K08DbCtoiWGA052D9CuCFrCjXsmr+ru8ynhPEkwe3k2i43kGCHe
+ 71xg==
+X-Gm-Message-State: AOJu0Yw9+KHIWEtscPn7qsWrAXjETBPCJEAecgrnb9hdv3VPvfqmkS/y
+ DKaZBhTUQBAVNSPBHhRzzy5rmuWO0nDtKh4vg3EdWdIrFrqA+cbF/twiOkWSpHmjUxvCVdcu7TE
+ R
+X-Google-Smtp-Source: AGHT+IGdYjmyfPhIcoL4IWnXlFtZzWLHLgXyi416kxOYhl3bcN4zjzFXnjbb5miFHfZHeiTnrel+yg==
+X-Received: by 2002:a0d:dd84:0:b0:5ff:9676:3658 with SMTP id
+ g126-20020a0ddd84000000b005ff96763658mr116524ywe.48.1705680499833; 
+ Fri, 19 Jan 2024 08:08:19 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
+ [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
+ s9-20020a819b09000000b005ff81bbfd66sm1588271ywg.136.2024.01.19.08.08.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 19 Jan 2024 08:08:19 -0800 (PST)
+Date: Fri, 19 Jan 2024 11:08:17 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Kever Yang <kever.yang@rock-chips.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: Pull request: u-boot-rockchip-20240119
+Message-ID: <20240119160817.GK12635@bill-the-cat>
+References: <20240119082023.552165-1-kever.yang@rock-chips.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="TUXEMJmqUFC4DFeV"
 Content-Disposition: inline
-In-Reply-To: <20240110103547.719757-1-sumit.garg@linaro.org>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+In-Reply-To: <20240119082023.552165-1-kever.yang@rock-chips.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,24 +91,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 16:05-20240110, Sumit Garg wrote:
-[...]
-> Prerequisite
-> ------------
-> 
-> This patch series requires devicetree-rebasing git repo to be added as a
-> subtree to the main U-Boot repo via:
-> 
-> $ git subtree add --prefix dts/upstream \
->       git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git \
 
-Please use https://
+--TUXEMJmqUFC4DFeV
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-also what is the baseline? didn't seem to apply on (fails at patch #2):
-next f28a77589e75 Merge tag 'dm-next-7jan23' of https://source.denx.de/u-boot/custodians/u-boot-dm into next
-master f7cca7ccc511 Revert "test: hush: dollar: fix bugous behavior"
+On Fri, Jan 19, 2024 at 04:20:23PM +0800, Kever Yang wrote:
 
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+> Hi Tom,
+>=20
+> Please pull the updates for rockchip platform:
+> - Add board: rk3328 FriendlyARM NanoPi R2C Plus, rk3588 Turing RK1 SoM;
+> - Enable SPI boot for rk3588 and rk3528;
+> - Set boot device in SPL as common code;
+> - other misc fixes;
+>=20
+> CI:
+> https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/19374
+>=20
+> Thanks,
+> - Kever
+>=20
+> The following changes since commit f7cca7ccc5117eaafcc2bde91ad1bed6fee7cf=
+c3:
+>=20
+>   Revert "test: hush: dollar: fix bugous behavior" (2024-01-18 11:38:25 -=
+0500)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boo=
+t-rockchip-20240119
+>=20
+> for you to fetch changes up to c16c7ac2fe69f3cebbfc921c5b023dccc12cd198:
+>=20
+>   rockchip: rk3128: remove noop file (2024-01-19 10:57:36 +0800)
+>=20
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--TUXEMJmqUFC4DFeV
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWqnm4ACgkQFHw5/5Y0
+tyzDCwv+PgVg/sK134hoWUCOhQF5/rW3zpW12IqMCO8TF2eu5GMjfsVZ493ncYcV
+aqbMDGe9AfPtb+8Gh83SPqJpRGQYHaOtnuqZfyNGMMeKRYE7Oj8N61weXNvgf3ks
+Lfbrknqb2+SoazrmQPmJyuI9+PfcmfchVBg+iEABnHmb+NocHKnOsu0U6GMcVWSw
+RZdadgdYFB6Eb2PUH6R0JmTEJZUluiYExDNQ3MA27v6tRLMxSYWbsys3rWZR4E++
+ezRtic5YxgtAzIwiPAoQ1gJ+cHxCE3ud2SrHzb5f3xjRNRYD7T9yICbZTXqfJ2RV
+QGKUhC91U6uDX++mQtyFYPVrBTaf6gcjwsakrqfoqASZKyss41L298M3/IMOyzmd
+pnsRnZbNoGgJC3065BvxsqD26h6oUn3+iKTbfYNjj4ExFXnsqYul9zUXngUyDvop
+iVw/UXgO/qJAuXcqpP3aQgMggPc8u0gXl5u3p5Dk3xops+p4ElrxtIA5AJaVeltt
+Xmsnawzs
+=w3ED
+-----END PGP SIGNATURE-----
+
+--TUXEMJmqUFC4DFeV--
