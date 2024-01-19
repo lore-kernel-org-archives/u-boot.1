@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91CF1C4725D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 17:52:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BDA5C47DD3
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 17:52:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73F3E87D0F;
-	Fri, 19 Jan 2024 18:51:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D803087DA8;
+	Fri, 19 Jan 2024 18:52:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PWZc0EhB";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="daa+o1JG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEA3E87DA6; Fri, 19 Jan 2024 18:51:57 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id B3DF687DAB; Fri, 19 Jan 2024 18:52:02 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A82487DA4
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 18:51:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4048E87DA7
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 18:52:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40JHpjDI087122;
- Fri, 19 Jan 2024 11:51:45 -0600
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40JHpqa1061155;
+ Fri, 19 Jan 2024 11:51:52 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1705686705;
- bh=HtaC0ym3JTY3z3IOZg8ZNkATx8te2fLAkLeCVdsHoDs=;
+ s=ti-com-17Q1; t=1705686712;
+ bh=fUUH1EiUzva1TWigrs1TY90N2d8emZbzqRiHdrktfPs=;
  h=From:To:Subject:Date:In-Reply-To:References;
- b=PWZc0EhBctGgH80u/IEt0snm6goR6a0TZRK2y57eTBfmiQuPOUt3eOU1vDhrCmRBM
- iBYduu7kODWOPErm2caj+VIJUWAqKUY5kRJLhg9OLwzmcBLbeUDwcEwjV9Nc/zMU5K
- hAypGDADXz6V0rfA3raMmhftrVdwlpaApLCbutYU=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40JHpjbo026108
+ b=daa+o1JGX/sZMn9w/QCTqm14eXNFgCaS1WJMIaT/UyaHply0SGwCPYwua0Cqczt3a
+ Wa8LObmJ5sg3Qz0LlrogvO97Pc3vhDoAb1HF3ypNyI6xLuwKWLlc+NoMhxJmWbQX9T
+ 9zVUzQ+1ePehkTGqfqqHi0xtlbRcwAvIOL+9Bi+c=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40JHpqmm100134
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 19 Jan 2024 11:51:45 -0600
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 19 Jan 2024 11:51:52 -0600
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 19
- Jan 2024 11:51:45 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 11:51:51 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 19 Jan 2024 11:51:45 -0600
+ Frontend Transport; Fri, 19 Jan 2024 11:51:51 -0600
 Received: from TI.dhcp.ti.com (ti.dhcp.ti.com [10.24.68.115] (may be forged))
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40JHoiDU054787; 
- Fri, 19 Jan 2024 11:51:39 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40JHoiDV054787; 
+ Fri, 19 Jan 2024 11:51:45 -0600
 From: Apurva Nandan <a-nandan@ti.com>
 To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
  Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
@@ -64,9 +64,9 @@ To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
  Marek Vasut <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
  <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
  <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
-Subject: [PATCH v8 08/16] drivers: dma: Add support for J784S4 SoC
-Date: Fri, 19 Jan 2024 23:20:35 +0530
-Message-ID: <20240119175043.3904751-9-a-nandan@ti.com>
+Subject: [PATCH v8 09/16] board: ti: j784s4: Add board support for J784S4 EVM
+Date: Fri, 19 Jan 2024 23:20:36 +0530
+Message-ID: <20240119175043.3904751-10-a-nandan@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240119175043.3904751-1-a-nandan@ti.com>
 References: <20240119175043.3904751-1-a-nandan@ti.com>
@@ -90,285 +90,233 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for DMA in J784S4 SoC.
+Add board files for J784S4 EVM.
 
-Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
+SYS_DISABLE_DCACHE_OPS is selected in the Kconfig because
+J784S4/AM69 are a coherent architecture at A72 level by
+MSMC support.
+
 Signed-off-by: Hari Nagalla <hnagalla@ti.com>
+[ add env and board specific yaml files for binman ]
+Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+[ cleaned up the env files ]
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
 Signed-off-by: Apurva Nandan <a-nandan@ti.com>
-Reviewed-by: Nishanth Menon <nm@ti.com>
+Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/dma/ti/Makefile               |   1 +
- drivers/dma/ti/k3-psil-j784s4.c       | 166 ++++++++++++++++++++++++++
- drivers/dma/ti/k3-psil-priv.h         |   1 +
- drivers/dma/ti/k3-psil.c              |   2 +
- drivers/firmware/ti_sci_static_data.h |  34 ++++++
- drivers/ram/Kconfig                   |   2 +-
- 6 files changed, 205 insertions(+), 1 deletion(-)
- create mode 100644 drivers/dma/ti/k3-psil-j784s4.c
+ arch/arm/mach-k3/Kconfig        |  1 +
+ arch/arm/mach-k3/j784s4/Kconfig | 34 ++++++++++++++++++++++++++
+ board/ti/j784s4/Kconfig         | 37 ++++++++++++++++++++++++++++
+ board/ti/j784s4/MAINTAINERS     | 14 +++++++++++
+ board/ti/j784s4/Makefile        |  7 ++++++
+ board/ti/j784s4/evm.c           | 43 +++++++++++++++++++++++++++++++++
+ include/configs/j784s4_evm.h    | 15 ++++++++++++
+ 7 files changed, 151 insertions(+)
+ create mode 100644 arch/arm/mach-k3/j784s4/Kconfig
+ create mode 100644 board/ti/j784s4/Kconfig
+ create mode 100644 board/ti/j784s4/MAINTAINERS
+ create mode 100644 board/ti/j784s4/Makefile
+ create mode 100644 board/ti/j784s4/evm.c
+ create mode 100644 include/configs/j784s4_evm.h
 
-diff --git a/drivers/dma/ti/Makefile b/drivers/dma/ti/Makefile
-index f4e0271efb..9e0b13e8c0 100644
---- a/drivers/dma/ti/Makefile
-+++ b/drivers/dma/ti/Makefile
-@@ -9,3 +9,4 @@ k3-psil-data-$(CONFIG_SOC_K3_J721S2) += k3-psil-j721s2.o
- k3-psil-data-$(CONFIG_SOC_K3_AM642) += k3-psil-am64.o
- k3-psil-data-$(CONFIG_SOC_K3_AM625) += k3-psil-am62.o
- k3-psil-data-$(CONFIG_SOC_K3_AM62A7) += k3-psil-am62a.o
-+k3-psil-data-$(CONFIG_SOC_K3_J784S4) += k3-psil-j784s4.o
-diff --git a/drivers/dma/ti/k3-psil-j784s4.c b/drivers/dma/ti/k3-psil-j784s4.c
+diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
+index 217def3bb4..fdde67c2d3 100644
+--- a/arch/arm/mach-k3/Kconfig
++++ b/arch/arm/mach-k3/Kconfig
+@@ -157,5 +157,6 @@ source "arch/arm/mach-k3/am62x/Kconfig"
+ source "arch/arm/mach-k3/am62ax/Kconfig"
+ source "arch/arm/mach-k3/j721e/Kconfig"
+ source "arch/arm/mach-k3/j721s2/Kconfig"
++source "arch/arm/mach-k3/j784s4/Kconfig"
+ 
+ endif
+diff --git a/arch/arm/mach-k3/j784s4/Kconfig b/arch/arm/mach-k3/j784s4/Kconfig
 new file mode 100644
-index 0000000000..7f06a1f307
+index 0000000000..1eadfb346a
 --- /dev/null
-+++ b/drivers/dma/ti/k3-psil-j784s4.c
-@@ -0,0 +1,166 @@
++++ b/arch/arm/mach-k3/j784s4/Kconfig
+@@ -0,0 +1,34 @@
++# SPDX-License-Identifier: GPL-2.0-or-later
++#
++# Copyright (C) 2023-2024 Texas Instruments Incorporated - https://www.ti.com/
++#	Hari Nagalla <hnagalla@ti.com>
++
++if SOC_K3_J784S4
++
++choice
++	prompt "K3 J784S4 board"
++	optional
++
++config TARGET_J784S4_A72_EVM
++	bool "TI K3 based J784S4 EVM running on A72"
++	select ARM64
++	select BOARD_LATE_INIT
++	select SYS_DISABLE_DCACHE_OPS
++	select BINMAN
++
++config TARGET_J784S4_R5_EVM
++	bool "TI K3 based J784S4 EVM running on R5"
++	select CPU_V7R
++	select SYS_THUMB_BUILD
++	select K3_LOAD_SYSFW
++	select RAM
++	select SPL_RAM
++	select K3_DDRSS
++	select BINMAN
++	imply SYS_K3_SPL_ATF
++
++endchoice
++
++source "board/ti/j784s4/Kconfig"
++
++endif
+diff --git a/board/ti/j784s4/Kconfig b/board/ti/j784s4/Kconfig
+new file mode 100644
+index 0000000000..490c7be66b
+--- /dev/null
++++ b/board/ti/j784s4/Kconfig
+@@ -0,0 +1,37 @@
++# SPDX-License-Identifier: GPL-2.0-or-later
++#
++# Copyright (C) 2023-2024 Texas Instruments Incorporated - https://www.ti.com/
++#	Hari Nagalla <hnagalla@ti.com>
++
++if TARGET_J784S4_A72_EVM
++
++config SYS_BOARD
++       default "j784s4"
++
++config SYS_VENDOR
++       default "ti"
++
++config SYS_CONFIG_NAME
++       default "j784s4_evm"
++
++source "board/ti/common/Kconfig"
++
++endif
++
++if TARGET_J784S4_R5_EVM
++
++config SYS_BOARD
++       default "j784s4"
++
++config SYS_VENDOR
++       default "ti"
++
++config SYS_CONFIG_NAME
++       default "j784s4_evm"
++
++config SPL_LDSCRIPT
++	default "arch/arm/mach-omap2/u-boot-spl.lds"
++
++source "board/ti/common/Kconfig"
++
++endif
+diff --git a/board/ti/j784s4/MAINTAINERS b/board/ti/j784s4/MAINTAINERS
+new file mode 100644
+index 0000000000..9e0df11503
+--- /dev/null
++++ b/board/ti/j784s4/MAINTAINERS
+@@ -0,0 +1,14 @@
++J784S4 EVM BOARD
++M:	Apurva Nandan <a-nandan@ti.com>
++S:	Maintained
++F:	board/ti/j784s4
++F:	arch/arm/mach-k3/j784s4
++F:	include/configs/j784s4_evm.h
++F:	arch/arm/dts/k3-j784s4.dtsi
++F:	arch/arm/dts/k3-j784s4-main.dtsi
++F:	arch/arm/dts/k3-j784s4-mcu-wakeup.dtsi
++F:	arch/arm/dts/k3-j784s4-thermal.dtsi
++F:	arch/arm/dts/k3-j784s4-evm.dts
++
++AM69 SK BOARD
++F:	arch/arm/dts/k3-am69-sk.dts
+diff --git a/board/ti/j784s4/Makefile b/board/ti/j784s4/Makefile
+new file mode 100644
+index 0000000000..60161a8b5c
+--- /dev/null
++++ b/board/ti/j784s4/Makefile
+@@ -0,0 +1,7 @@
++# SPDX-License-Identifier: GPL-2.0-or-later
++#
++# Copyright (C) 2023-2024 Texas Instruments Incorporated - https://www.ti.com/
++#	Hari Nagalla <hnagalla@ti.com>
++#
++
++obj-y += evm.o
+diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
+new file mode 100644
+index 0000000000..5af3e21ff0
+--- /dev/null
++++ b/board/ti/j784s4/evm.c
+@@ -0,0 +1,43 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
-+ *  Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com
++ * Board specific initialization for J784S4 EVM
++ *
++ * Copyright (C) 2023-2024 Texas Instruments Incorporated - https://www.ti.com/
++ *	Hari Nagalla <hnagalla@ti.com>
++ *
 + */
-+#include <linux/kernel.h>
 +
-+#include "k3-psil-priv.h"
++#include <image.h>
++#include <init.h>
++#include <spl.h>
++#include <stdlib.h>
++#include "../common/fdt_ops.h"
 +
-+#define PSIL_PDMA_XY_TR(x)				\
-+	{						\
-+		.thread_id = x,				\
-+		.ep_config = {				\
-+			.ep_type = PSIL_EP_PDMA_XY,	\
-+		},					\
-+	}
++DECLARE_GLOBAL_DATA_PTR;
 +
-+#define PSIL_PDMA_XY_PKT(x)				\
-+	{						\
-+		.thread_id = x,				\
-+		.ep_config = {				\
-+			.ep_type = PSIL_EP_PDMA_XY,	\
-+			.pkt_mode = 1,			\
-+		},					\
-+	}
++int board_init(void)
++{
++	return 0;
++}
 +
-+#define PSIL_PDMA_MCASP(x)				\
-+	{						\
-+		.thread_id = x,				\
-+		.ep_config = {				\
-+			.ep_type = PSIL_EP_PDMA_XY,	\
-+			.pdma_acc32 = 1,		\
-+			.pdma_burst = 1,		\
-+		},					\
-+	}
++int dram_init(void)
++{
++	return fdtdec_setup_mem_size_base();
++}
 +
-+#define PSIL_ETHERNET(x)				\
-+	{						\
-+		.thread_id = x,				\
-+		.ep_config = {				\
-+			.ep_type = PSIL_EP_NATIVE,	\
-+			.pkt_mode = 1,			\
-+			.needs_epib = 1,		\
-+			.psd_size = 16,			\
-+		},					\
-+	}
++int dram_init_banksize(void)
++{
++	return fdtdec_setup_memory_banksize();
++}
 +
-+#define PSIL_SA2UL(x, tx)				\
-+	{						\
-+		.thread_id = x,				\
-+		.ep_config = {				\
-+			.ep_type = PSIL_EP_NATIVE,	\
-+			.pkt_mode = 1,			\
-+			.needs_epib = 1,		\
-+			.psd_size = 64,			\
-+			.notdpkt = tx,			\
-+		},					\
-+	}
++#ifdef CONFIG_BOARD_LATE_INIT
++int board_late_init(void)
++{
++	ti_set_fdt_env(NULL, NULL);
++	return 0;
++}
++#endif
 +
-+/* PSI-L source thread IDs, used for RX (DMA_DEV_TO_MEM) */
-+static struct psil_ep j784s4_src_ep_map[] = {
-+	/* PDMA_MCASP - McASP0-4 */
-+	PSIL_PDMA_MCASP(0x4400),
-+	PSIL_PDMA_MCASP(0x4401),
-+	PSIL_PDMA_MCASP(0x4402),
-+	PSIL_PDMA_MCASP(0x4403),
-+	PSIL_PDMA_MCASP(0x4404),
-+	/* PDMA_SPI_G0 - SPI0-3 */
-+	PSIL_PDMA_XY_PKT(0x4600),
-+	PSIL_PDMA_XY_PKT(0x4601),
-+	PSIL_PDMA_XY_PKT(0x4602),
-+	PSIL_PDMA_XY_PKT(0x4603),
-+	PSIL_PDMA_XY_PKT(0x4604),
-+	PSIL_PDMA_XY_PKT(0x4605),
-+	PSIL_PDMA_XY_PKT(0x4606),
-+	PSIL_PDMA_XY_PKT(0x4607),
-+	PSIL_PDMA_XY_PKT(0x4608),
-+	PSIL_PDMA_XY_PKT(0x4609),
-+	PSIL_PDMA_XY_PKT(0x460a),
-+	PSIL_PDMA_XY_PKT(0x460b),
-+	PSIL_PDMA_XY_PKT(0x460c),
-+	PSIL_PDMA_XY_PKT(0x460d),
-+	PSIL_PDMA_XY_PKT(0x460e),
-+	PSIL_PDMA_XY_PKT(0x460f),
-+	/* PDMA_SPI_G1 - SPI4-7 */
-+	PSIL_PDMA_XY_PKT(0x4610),
-+	PSIL_PDMA_XY_PKT(0x4611),
-+	PSIL_PDMA_XY_PKT(0x4612),
-+	PSIL_PDMA_XY_PKT(0x4613),
-+	PSIL_PDMA_XY_PKT(0x4614),
-+	PSIL_PDMA_XY_PKT(0x4615),
-+	PSIL_PDMA_XY_PKT(0x4616),
-+	PSIL_PDMA_XY_PKT(0x4617),
-+	PSIL_PDMA_XY_PKT(0x4618),
-+	PSIL_PDMA_XY_PKT(0x4619),
-+	PSIL_PDMA_XY_PKT(0x461a),
-+	PSIL_PDMA_XY_PKT(0x461b),
-+	PSIL_PDMA_XY_PKT(0x461c),
-+	PSIL_PDMA_XY_PKT(0x461d),
-+	PSIL_PDMA_XY_PKT(0x461e),
-+	PSIL_PDMA_XY_PKT(0x461f),
-+	/* PDMA_USART_G0 - UART0-1 */
-+	PSIL_PDMA_XY_PKT(0x4700),
-+	PSIL_PDMA_XY_PKT(0x4701),
-+	/* PDMA_USART_G1 - UART2-3 */
-+	PSIL_PDMA_XY_PKT(0x4702),
-+	PSIL_PDMA_XY_PKT(0x4703),
-+	/* PDMA_USART_G2 - UART4-9 */
-+	PSIL_PDMA_XY_PKT(0x4704),
-+	PSIL_PDMA_XY_PKT(0x4705),
-+	PSIL_PDMA_XY_PKT(0x4706),
-+	PSIL_PDMA_XY_PKT(0x4707),
-+	PSIL_PDMA_XY_PKT(0x4708),
-+	PSIL_PDMA_XY_PKT(0x4709),
-+	/* CPSW0 */
-+	PSIL_ETHERNET(0x7000),
-+	/* MCU_PDMA0 (MCU_PDMA_MISC_G0) - SPI0 */
-+	PSIL_PDMA_XY_PKT(0x7100),
-+	PSIL_PDMA_XY_PKT(0x7101),
-+	PSIL_PDMA_XY_PKT(0x7102),
-+	PSIL_PDMA_XY_PKT(0x7103),
-+	/* MCU_PDMA1 (MCU_PDMA_MISC_G1) - SPI1-2 */
-+	PSIL_PDMA_XY_PKT(0x7200),
-+	PSIL_PDMA_XY_PKT(0x7201),
-+	PSIL_PDMA_XY_PKT(0x7202),
-+	PSIL_PDMA_XY_PKT(0x7203),
-+	PSIL_PDMA_XY_PKT(0x7204),
-+	PSIL_PDMA_XY_PKT(0x7205),
-+	PSIL_PDMA_XY_PKT(0x7206),
-+	PSIL_PDMA_XY_PKT(0x7207),
-+	/* MCU_PDMA2 (MCU_PDMA_MISC_G2) - UART0 */
-+	PSIL_PDMA_XY_PKT(0x7300),
-+	/* MCU_PDMA_ADC - ADC0-1 */
-+	PSIL_PDMA_XY_TR(0x7400),
-+	PSIL_PDMA_XY_TR(0x7401),
-+	PSIL_PDMA_XY_TR(0x7402),
-+	PSIL_PDMA_XY_TR(0x7403),
-+	/* SA2UL */
-+	PSIL_SA2UL(0x7500, 0),
-+	PSIL_SA2UL(0x7501, 0),
-+	PSIL_SA2UL(0x7502, 0),
-+	PSIL_SA2UL(0x7503, 0),
-+};
++void spl_board_init(void)
++{
++}
+diff --git a/include/configs/j784s4_evm.h b/include/configs/j784s4_evm.h
+new file mode 100644
+index 0000000000..4a2ccdce14
+--- /dev/null
++++ b/include/configs/j784s4_evm.h
+@@ -0,0 +1,15 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * Configuration header file for K3 J784S4 EVM
++ *
++ * Copyright (C) 2023-2024 Texas Instruments Incorporated - https://www.ti.com/
++ *	Hari Nagalla <hnagalla@ti.com>
++ */
 +
-+/* PSI-L destination thread IDs, used for TX (DMA_MEM_TO_DEV) */
-+static struct psil_ep j784s4_dst_ep_map[] = {
-+	/* CPSW0 */
-+	PSIL_ETHERNET(0xf000),
-+	PSIL_ETHERNET(0xf001),
-+	PSIL_ETHERNET(0xf002),
-+	PSIL_ETHERNET(0xf003),
-+	PSIL_ETHERNET(0xf004),
-+	PSIL_ETHERNET(0xf005),
-+	PSIL_ETHERNET(0xf006),
-+	PSIL_ETHERNET(0xf007),
-+	/* SA2UL */
-+	PSIL_SA2UL(0xf500, 1),
-+	PSIL_SA2UL(0xf501, 1),
-+};
++#ifndef __CONFIG_J784S4_EVM_H
++#define __CONFIG_J784S4_EVM_H
 +
-+struct psil_ep_map j784s4_ep_map = {
-+	.name = "j784s4",
-+	.src = j784s4_src_ep_map,
-+	.src_count = ARRAY_SIZE(j784s4_src_ep_map),
-+	.dst = j784s4_dst_ep_map,
-+	.dst_count = ARRAY_SIZE(j784s4_dst_ep_map),
-+};
-diff --git a/drivers/dma/ti/k3-psil-priv.h b/drivers/dma/ti/k3-psil-priv.h
-index 83f873b84c..02ea1e9ed3 100644
---- a/drivers/dma/ti/k3-psil-priv.h
-+++ b/drivers/dma/ti/k3-psil-priv.h
-@@ -43,5 +43,6 @@ extern struct psil_ep_map j721s2_ep_map;
- extern struct psil_ep_map am64_ep_map;
- extern struct psil_ep_map am62_ep_map;
- extern struct psil_ep_map am62a_ep_map;
-+extern struct psil_ep_map j784s4_ep_map;
- 
- #endif /* K3_PSIL_PRIV_H_ */
-diff --git a/drivers/dma/ti/k3-psil.c b/drivers/dma/ti/k3-psil.c
-index d4d4fede8f..d21ef193e8 100644
---- a/drivers/dma/ti/k3-psil.c
-+++ b/drivers/dma/ti/k3-psil.c
-@@ -28,6 +28,8 @@ struct psil_endpoint_config *psil_get_ep_config(u32 thread_id)
- 			soc_ep_map = &am62_ep_map;
- 		else if (IS_ENABLED(CONFIG_SOC_K3_AM62A7))
- 			soc_ep_map = &am62a_ep_map;
-+		else if (IS_ENABLED(CONFIG_SOC_K3_J784S4))
-+			soc_ep_map = &j784s4_ep_map;
- 	}
- 
- 	if (thread_id & K3_PSIL_DST_THREAD_ID_OFFSET && soc_ep_map->dst) {
-diff --git a/drivers/firmware/ti_sci_static_data.h b/drivers/firmware/ti_sci_static_data.h
-index 567ce8911a..789f0c6b2d 100644
---- a/drivers/firmware/ti_sci_static_data.h
-+++ b/drivers/firmware/ti_sci_static_data.h
-@@ -97,6 +97,40 @@ static struct ti_sci_resource_static_data rm_static_data[] = {
- };
- #endif /* CONFIG_SOC_K3_AM625 || CONFIG_SOC_K3_AM62A7 */
- 
-+#if IS_ENABLED(CONFIG_SOC_K3_J784S4)
-+static struct ti_sci_resource_static_data rm_static_data[] = {
-+	/* Free rings */
-+	{
-+		.dev_id = 328,
-+		.subtype = 1,
-+		.range_start = 208,
-+		.range_num = 32,
-+	},
-+	/* TX channels */
-+	{
-+		.dev_id = 329,
-+		.subtype = 13,
-+		.range_start = 40,
-+		.range_num = 3,
-+	},
-+	/* RX channels */
-+	{
-+		.dev_id = 329,
-+		.subtype = 10,
-+		.range_start = 40,
-+		.range_num = 3,
-+	},
-+	/* RX Free flows */
-+	{
-+		.dev_id = 329,
-+		.subtype = 0,
-+		.range_start = 84,
-+		.range_num = 8,
-+	},
-+	{ },
-+};
-+#endif /* CONFIG_SOC_K3_J784S4 */
++/* Now for the remaining common defines */
++#include <configs/ti_armv7_common.h>
 +
- #else
- static struct ti_sci_resource_static_data rm_static_data[] = {
- 	{ },
-diff --git a/drivers/ram/Kconfig b/drivers/ram/Kconfig
-index 5b07e92030..8e9e53cbb0 100644
---- a/drivers/ram/Kconfig
-+++ b/drivers/ram/Kconfig
-@@ -62,7 +62,7 @@ choice
- 	depends on K3_DDRSS
- 	prompt "K3 DDRSS Arch Support"
- 
--	default K3_J721E_DDRSS if SOC_K3_J721E || SOC_K3_J721S2
-+	default K3_J721E_DDRSS if SOC_K3_J721E || SOC_K3_J721S2 || SOC_K3_J784S4
- 	default K3_AM64_DDRSS if SOC_K3_AM642
- 	default K3_AM64_DDRSS if SOC_K3_AM625
- 	default K3_AM62A_DDRSS if SOC_K3_AM62A7
++#endif /* __CONFIG_J784S4_EVM_H */
 -- 
 2.34.1
 
