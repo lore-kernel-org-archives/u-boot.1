@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EF85C47DD3
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:11:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98F80C4725D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:11:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C666787D50;
-	Fri, 19 Jan 2024 17:09:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3A5F387D54;
+	Fri, 19 Jan 2024 17:09:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QTrtxtMO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IybaN9V2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C24BD87D5C; Fri, 19 Jan 2024 17:09:26 +0100 (CET)
-Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
- [IPv6:2607:f8b0:4864:20::12e])
+ id 6D27387D4C; Fri, 19 Jan 2024 17:09:32 +0100 (CET)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B363C87D51
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 17:09:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2EEE487CF4
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 17:09:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x12e.google.com with SMTP id
- e9e14a558f8ab-3606f3f2f37so5311155ab.0
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 08:09:24 -0800 (PST)
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-5f254d1a6daso10145937b3.2
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 08:09:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705680563; x=1706285363; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1705680568; x=1706285368; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JmRIe037xH0sYdsiKhwUbNkuCpyeLaXi0vr2sbXXQNQ=;
- b=QTrtxtMOuvXRTY6p7CHznfKETbGFwiX2DiuvOuf6DOV7i+a24WGBMRbXOYphG02EfH
- pyfeSgboGXFoRnGjzM8VMBQWGMGwpzF9S3/svVMVh3u+NCdOAYRD99D86rHAS1DmaOBD
- 8hvAxWIlOmfrFXBjqDugKP5fiKIYiIGhGfPug=
+ bh=mcIJ6Br888RFukRsP9lBIh6weIRkqoak3cDf3rxLes0=;
+ b=IybaN9V2v+gW/38kRYxJxpzRTzh1Ywll12SaaEF4eOv323Jhh9zmhCdfZp5LIN4pvE
+ pE+ZtepuPeJRJmUcVK06SK8JnmajSOJeWJpX4o4syK3pxwTYKXCmLsOxH38qLqYwyecp
+ EO6v6AdBe3tgNYnW+gpApqBhlHFDO9cueEdYI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705680563; x=1706285363;
+ d=1e100.net; s=20230601; t=1705680568; x=1706285368;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JmRIe037xH0sYdsiKhwUbNkuCpyeLaXi0vr2sbXXQNQ=;
- b=ReDJGcUwC0iTuvs01AoVuwuhSBGYGxItGmbsoHGQ0XPOafegeFipLAF72p1FRTTZOz
- +CjVT4DoFBG+uF4LVBLT3zBvxI4NGj7vrDv9EVcFgv/EqBGvpk2dxGSogFteGInKOJIn
- WPqlKs1hIhaEtxzMLkUpXtcbz9Xfq+NmnW4OW/J89/fcxcCkJDTNx2NqyJDTTVYh+nMF
- PdH756vcYWDqT4/u9AlbVSuc3GyCQAMWxDKiOSNAQUiVTUhZokfvVzBCH9uP1vcvP6As
- n8P4eu//Qx0EbkO4Kz6DL9gQdqucnTFWn56s6k/NZQG+R2lkzyibz4Z9XjEZolqg+TVX
- SLUg==
-X-Gm-Message-State: AOJu0YyG8AjyDHQNM9nOVe7LIqsQ5iz5tMconysX3ZbVO69F2cKkQjiP
- BEJ+g01Z0+TtToqErUywPMSsEpR0j7mtpCmu/BrK6H/BWNbs4ui4ZbfS8+TsZiY=
-X-Google-Smtp-Source: AGHT+IGxumf0uQ59NVs3mqXLYpoPJRSiP3muoF/83NP6Wgph2Sk5Igz5y5pnAopjFM0m1tr/6GHv6w==
-X-Received: by 2002:a05:6e02:811:b0:361:8ea2:3d3e with SMTP id
- u17-20020a056e02081100b003618ea23d3emr47265ilm.42.1705680563422; 
- Fri, 19 Jan 2024 08:09:23 -0800 (PST)
+ bh=mcIJ6Br888RFukRsP9lBIh6weIRkqoak3cDf3rxLes0=;
+ b=jGIZEM9v9X8HePXVdXMrLQRbFr4E+W6+4uQD9nkF/jv+kAGhBEwar/TK8T5HJfotFk
+ 5FNbaHbjf+TooESA2g21FzUrGXXha3kwl4W0pAUcaViq28jVunQcZ6r0Smx6rPDl5qzU
+ 1EGtRZWrRiX7XlMxAQHJVXxZJCNsDrk8zBqd58gYeBCfqZpbRpYkOiIqpiuPtt7G9+F4
+ W+lR0D6nkWcFDk/Jnb6CxbCRBP9dE2Yk4zmo62ot4nJFdbJz/uOknMoFILCqwmmF4HP5
+ ZFzsYJDTwDlziEyAF2q0GHp/uhwyvG34jsfxXjzAZucAjYZIGODqwr7kFT8tLXfTpL58
+ 7ORA==
+X-Gm-Message-State: AOJu0YxMISQmh1w7/XYeWB9dPh3T5v9qnIn6wyQAKjRzYSKdQhe2TsCZ
+ h6s36iY6hOQ1gunRFmnFpPceNap4B5kuQbMhmX6pAWA4nM0Vbk4zBjibzhIH5Yp5cIhKH3iBFW9
+ O
+X-Google-Smtp-Source: AGHT+IGMigBKYzHnEKcP4gxHKC0UoqCFfqpmLZLjejVMExyfUarDHPzNUykI2YdtznTLK0d09levbg==
+X-Received: by 2002:a81:ab4d:0:b0:5f9:60e7:a598 with SMTP id
+ d13-20020a81ab4d000000b005f960e7a598mr79019ywk.100.1705680567493; 
+ Fri, 19 Jan 2024 08:09:27 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- g83-20020a815256000000b005ff9b0ab578sm616611ywb.117.2024.01.19.08.09.22
+ fq17-20020a05690c351100b005e25dc30d2fsm7516505ywb.45.2024.01.19.08.09.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jan 2024 08:09:23 -0800 (PST)
-Date: Fri, 19 Jan 2024 11:09:21 -0500
+ Fri, 19 Jan 2024 08:09:27 -0800 (PST)
+Date: Fri, 19 Jan 2024 11:09:25 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Love Kumar <love.kumar@amd.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
-Subject: Re: [PATCH] test/py: bootstage: Add test for bootstage command
-Message-ID: <20240119160921.GZ12635@bill-the-cat>
-References: <9cded17d99c96ea34004783662e6bd366dca9852.1704791383.git.love.kumar@amd.com>
+To: Tobias Deiminger <tdmg@linutronix.de>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Harald Seiler <hws@denx.de>
+Subject: Re: [PATCH 1/1] test: Skip cleanup test if not built out of tree
+Message-ID: <20240119160925.GA12635@bill-the-cat>
+References: <20240108211100.112730-1-tdmg@linutronix.de>
+ <20240108211100.112730-2-tdmg@linutronix.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2w6/ViFIDlNXskJ6"
+ protocol="application/pgp-signature"; boundary="CYIwIFC18G95/sGh"
 Content-Disposition: inline
-In-Reply-To: <9cded17d99c96ea34004783662e6bd366dca9852.1704791383.git.love.kumar@amd.com>
+In-Reply-To: <20240108211100.112730-2-tdmg@linutronix.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,39 +94,47 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---2w6/ViFIDlNXskJ6
+--CYIwIFC18G95/sGh
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 09, 2024 at 02:39:57PM +0530, Love Kumar wrote:
+On Mon, Jan 08, 2024 at 10:11:00PM +0100, Tobias Deiminger wrote:
 
-> Add test cases for bootstage command to print the bootstage report, to
-> stash the data into memory and to unstash the data from memory.
+> 42c0e5bb054d ("test: Find leftovers after clean/mrproper") assumes out
+> of tree builds. test_clean and test_mrproper fail if the assumption
+> isn't met.
 >=20
-> Signed-off-by: Love Kumar <love.kumar@amd.com>
+> However there are valid scenarios where tests run with in source builds
+> (i.e., test.py --build-dir=3D.).
+>=20
+> Automatically skip cleanup tests in such scenarios to prevent false
+> positives.
+>=20
+> Signed-off-by: Tobias Deiminger <tdmg@linutronix.de>
+> Reviewed-by: Harald Seiler <u-boot@rahix.de>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---2w6/ViFIDlNXskJ6
+--CYIwIFC18G95/sGh
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWqnrEACgkQFHw5/5Y0
-tyyTHwv+KNvCFOADjYhFMY4hCzqKzIk6idfUCLs6kAojMV3r2j2CmKTLdOAIQSPY
-6JmFFBGM2Osr6KeIEWdBrS/03hdkPQwy4WT+Rd+LkEbrLADadf2IDG76iauOEifj
-6FQPr+ZexJCBHOQs0CKFajYLEvDqbgTqg1Fjyf9cHutctOHCkxZV2i/G4+Ld0sOH
-xNElyz8YE8CLCcaF4yhciaS9aAkkg7rACNhoitzMC9v15Ggkov8ItgLY3HRTrKn7
-KlI97ktwy64OlQmhkDxqM9+IQ7Cxrqvi6yX9ttpp8F25Tw2blHM4i/ip/1Qe2/yf
-8skkNAHTqX64NZyekvCgb4W7G8cNoJrP1X46HCwLRbJ8YMpKTVsXcEslNzvFlDnr
-SlFTCftur+TCHcKnuPt5zLlrTkPRb76zw3tNScQMvJviNHLbMngGooXnYkXzJJwB
-tpssZwD1jiXcLbnvdaaqbxxzLD88Bo39GY6OIEsMHD/JZ6JdICt9y49a6oJyKLUc
-x0CHs1VK
-=GQ6u
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWqnrUACgkQFHw5/5Y0
+tywQzwv/VBx3DH1e6EJ0CNvO8wYnKiCSNDT140o4Mefjs3h5YEkZc8SgltHcjuyw
+yvRDpV2nlfe8WyAsEf76OjnBq1ku/t0zgJ/P0xbpKVCQKE+/wysEb0wmkHSvfbC5
+1hKe0ZhBDXnQF/12JQmk7iNrem4yzyOowrSYblPft//hEvNa5V7ZunYrbt5+YUZD
+h04ImI5m2+Vf0dziN8N4cCV+Dgeb8ATiIo3bqhQFCb7nJADORaTJ+MFqQoCQYoQr
+xCjApcVj9ExXnOLIlJnnnyqaRUrM2ul9SiPiAagEui9Q1Jd+FnSCcNp1VSSZKRrF
+0cgM39VYG7f+alAg7jT/TC14HjPNYba6e3FuS1rsdVcT6aY9Nd4co2zuHSMV2gyE
+zVkfCP1jhOEAt3yLEoinIRz48bzMXq55scdJLxyTpkewBGjDFWk0x/gqK5RCoqTh
+DAh1eRdT3cGEfoYfX2LL42bM9ecYwjfFmxDU1mtAy6f+UXIeBjOZ8gW0Rf0yA9sy
+CGQoKi33
+=xNDZ
 -----END PGP SIGNATURE-----
 
---2w6/ViFIDlNXskJ6--
+--CYIwIFC18G95/sGh--
