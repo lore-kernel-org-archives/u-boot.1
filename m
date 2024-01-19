@@ -4,82 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F090C47DAF
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 00:48:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E145C4725D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 04:24:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA08187C8F;
-	Fri, 19 Jan 2024 01:48:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9020686E42;
+	Fri, 19 Jan 2024 05:24:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="c/Q5B5rs";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="rZ4C0pv8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DAB487B93; Fri, 19 Jan 2024 01:48:10 +0100 (CET)
-Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
- [IPv6:2607:f8b0:4864:20::42e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E3CC287B93; Fri, 19 Jan 2024 05:24:31 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B32C887C8A
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 01:48:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A6C8B86E42
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 05:24:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-6d9b050e88cso266461b3a.0
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 16:48:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705625279; x=1706230079; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=987e+i7Eq0JZrNoCQx7+nDA1NxECWTAY1oGiBHOp0Gg=;
- b=c/Q5B5rsgZQfTi8BJSq/rKlGfMzKtL9UwB+GXNps4IvRpUSIWZ9RYIfWqLsKvZM6C6
- Yvisq4d8S49Znz+ZbmBrIW/RpelLSK8lX4a0mXtAw/ik+OUwTvWwc5Ac/GDrXZ9LMn3R
- GBmUaZtePH22p0e8nq1fvH+ueMbb//ZwfHKqf66qRlg9OBJXgU+rjEtGT9oZhXRCS17V
- xOCShuOSddmwPsCjG/nAuO26VIm03AnBCnYC6JdNci7QoK23AwapS2r+zxETqB+P8jzI
- 4wqypCBaYszuOj6/1+J7OmM8jUOFUrH8RW82t9fVZnRDUpudZs0pJJbToMHAKJuzXNZZ
- RICg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705625279; x=1706230079;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=987e+i7Eq0JZrNoCQx7+nDA1NxECWTAY1oGiBHOp0Gg=;
- b=Ut1D1EnZk7O4EsmUNo/6fVKC6aFTOXY5EbPhEa85rT9oOvqeRdp5zsFv/uoByNCtCT
- Ixjd/7BkHftDsLyZrLFnHTuDxsKjc678Gb0dV+lgdOdtvFhbnBcOBbdWw1bgu24NfNJN
- QBJNIwfezsUhgvnyHz+6nOjYHQyR/dVAtk1+iPd66UQUNZ6TBg+PivtVFSOaeg2CydeI
- 1y+dcXkr5CBxZzAnpWaNWH0rXrKzmCa6W4WDTX07tmjfb+kHxZf5fGOLQzi0wJl2OdWe
- 3oNYNPGBpF2E/MtFYsig1Hf57ZpQH6WrqOUtjlC8T51nimQkjVtWK6+wgsTW5B7VlDgC
- egNw==
-X-Gm-Message-State: AOJu0Ywh58VFXN0WHQLTCcRIwfM4oflZ5GBwi41xLKDxFjR0nMWFLRML
- Pe3WHrilZ1Ce+c/YUbGXMuZCcXs1tedNWJ4y5fLSyHG2st2C2A0JCPx9CYfv9DvZFOA+U38GdpP
- d
-X-Google-Smtp-Source: AGHT+IE0SK9BefkkqheG079H7Syak/USbTnU4rMzE49w/ipXjmOBifeT0nVrb12WNSxsxBtf/VMU0A==
-X-Received: by 2002:a05:6a00:4b0a:b0:6d9:a651:4b07 with SMTP id
- kq10-20020a056a004b0a00b006d9a6514b07mr1837305pfb.46.1705625279649; 
- Thu, 18 Jan 2024 16:47:59 -0800 (PST)
-Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- a3-20020aa78643000000b006db97e2c4e9sm3874522pfo.181.2024.01.18.16.47.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Jan 2024 16:47:59 -0800 (PST)
-From: Masahisa Kojima <masahisa.kojima@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [PATCH v3 3/3] efi_loader: return immediately in UCLASS_EFI_LOADER
- removal
-Date: Fri, 19 Jan 2024 09:45:46 +0900
-Message-Id: <20240119004546.1084018-4-masahisa.kojima@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240119004546.1084018-1-masahisa.kojima@linaro.org>
-References: <20240119004546.1084018-1-masahisa.kojima@linaro.org>
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id D9208616D4;
+ Fri, 19 Jan 2024 04:24:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 6BD50C433F1;
+ Fri, 19 Jan 2024 04:24:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1705638267;
+ bh=1RB1sLtl4+tU/0coa5VstX8lCmyjeGcL7mkNaacnxXo=;
+ h=From:Date:Subject:To:Cc:Reply-To:From;
+ b=rZ4C0pv8RNsy2ZAjXS9GYGb7LRQ2DqGmOLHMLGIDZ4jUJtB9dhFal9UhvZjgxXvfS
+ qFUJDRgTMXLi7dh1Kan8qSSKayRKpEQmk2IjUbfEF1cSKIc7kcHd2azkIBMnXsWCbk
+ EivlDGDe+e/0gjbXTfDgXclqoI0qGZh4jLWCPQLA+bVrPP7vJPL60PL3g28kKLSrWD
+ T84jBxzegxh+yQMnp+9E0nvU5nKyMNIgs64+p5LBST2E01j+6JJbZ/rBdQFNOvCmHC
+ l7Od6hRjWKiMU4jk2P0r0JPm9wC+R90rmpSvoAJmtyChXllSg1QG5kgTtmnzuIuH5y
+ 16Stlg0VTxu8Q==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 5060AC4725D;
+ Fri, 19 Jan 2024 04:24:27 +0000 (UTC)
+From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
+Date: Fri, 19 Jan 2024 12:24:28 +0800
+Subject: [PATCH] wdt: add HiSilicon watchdog driver support
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240119-b4-wdt-v1-1-b117901385d7@outlook.com>
+X-B4-Tracking: v=1; b=H4sIAHv5qWUC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxMDQ0NL3SQT3fKUEt0UU8PUJOPEVDOjZEsloOKCotS0zAqwQdGxtbUAmvW
+ lUVgAAAA=
+To: Stefan Roese <sr@denx.de>
+Cc: David Yang <mmyangfl@gmail.com>, u-boot@lists.denx.de, 
+ Yang Xiwen <forbidden405@outlook.com>
+X-Mailer: b4 0.12.4
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1705638268; l=6751;
+ i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
+ bh=J7OZzpBCcAKp4e6kKPvlWBuQmgxpe0gSMju9TlFEDF0=;
+ b=PhTcA1Kg2sBu2B4O53aEjYqbqZrIarGLPhkHB8UxzJf3md3JRXkxte7IE5NVtrOrPN1ptvgrA
+ dVkppHAeZY/DWugKC4aitajOJf3+DBbkLJIQYBKgce6sdLtDf6Ou6dw
+X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
+ pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
+X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
+ auth_id=67
+X-Original-From: Yang Xiwen <forbidden405@outlook.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,53 +80,271 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: forbidden405@outlook.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In case of UCLASS_EFI_LOADER, EFI handles are managed by
-EFI application/driver, we must not delete EFI handles.
+From: Yang Xiwen <forbidden405@outlook.com>
 
-Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+This watchdog core is found on many HiSilicon SoCs. Add support for it.
+
+Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
 ---
- lib/efi_loader/efi_disk.c | 16 ++++++++++------
- 1 file changed, 10 insertions(+), 6 deletions(-)
+ drivers/watchdog/Kconfig    |  10 +++
+ drivers/watchdog/Makefile   |   1 +
+ drivers/watchdog/hisi_wdt.c | 196 ++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 207 insertions(+)
 
-diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-index e2edc69fcf..b1739d9920 100644
---- a/lib/efi_loader/efi_disk.c
-+++ b/lib/efi_loader/efi_disk.c
-@@ -731,8 +731,14 @@ int efi_disk_remove(void *ctx, struct event *event)
- 	switch (id) {
- 	case UCLASS_BLK:
- 		desc = dev_get_uclass_plat(dev);
--		if (desc && desc->uclass_id != UCLASS_EFI_LOADER)
--			diskobj = (struct efi_disk_obj *)handle;
-+		if (desc && desc->uclass_id == UCLASS_EFI_LOADER)
-+			/*
-+			 * EFI application/driver manages the EFI handle,
-+			 * no need to delete EFI handle.
-+			 */
-+			return 0;
+diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+index 569726119c..ddf44f63d2 100644
+--- a/drivers/watchdog/Kconfig
++++ b/drivers/watchdog/Kconfig
+@@ -32,6 +32,7 @@ config WATCHDOG_TIMEOUT_MSECS
+ 	default 16000 if ARCH_SUNXI
+ 	default 5376 if ULP_WATCHDOG
+ 	default 15000 if ARCH_BCM283X
++	range 500 180000 if ARCH_HISI
+ 	default 60000
+ 	help
+ 	  Watchdog timeout in msec
+@@ -171,6 +172,15 @@ config WDT_GPIO
+ 	  doc/device-tree-bindings/watchdog/gpio-wdt.txt for
+ 	  information on how to describe the watchdog in device tree.
+ 
++config WDT_HISI
++	bool "HiSilicon watchdog timer support"
++	depends on WDT
++	depends on CLK && DM_RESET
++	imply WATCHDOG
++	help
++	  Select this to enable HiSilicon watchdog timer.
++	  Currently supports Hi3798MV200 only.
 +
-+		diskobj = (struct efi_disk_obj *)handle;
- 		break;
- 	case UCLASS_PARTITION:
- 		diskobj = (struct efi_disk_obj *)handle;
-@@ -744,10 +750,8 @@ int efi_disk_remove(void *ctx, struct event *event)
- 		return 0;
- 	}
- 
--	if (diskobj) {
--		dp = diskobj->dp;
--		volume = diskobj->volume;
--	}
-+	dp = diskobj->dp;
-+	volume = diskobj->volume;
- 
- 	ret = efi_delete_handle(handle);
- 	/* Do not delete DM device if there are still EFI drivers attached. */
+ config WDT_MAX6370
+ 	bool "MAX6370 watchdog timer support"
+ 	depends on WDT
+diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+index 5520d3d9ae..3436aa6389 100644
+--- a/drivers/watchdog/Makefile
++++ b/drivers/watchdog/Makefile
+@@ -30,6 +30,7 @@ obj-$(CONFIG_WDT_ORION) += orion_wdt.o
+ obj-$(CONFIG_WDT_CDNS) += cdns_wdt.o
+ obj-$(CONFIG_WDT_FTWDT010) += ftwdt010_wdt.o
+ obj-$(CONFIG_WDT_GPIO) += gpio_wdt.o
++obj-$(CONFIG_WDT_HISI) += hisi_wdt.o
+ obj-$(CONFIG_WDT_MAX6370) += max6370_wdt.o
+ obj-$(CONFIG_WDT_MCF) += mcf_wdt.o
+ obj-$(CONFIG_WDT_MESON_GXBB) += meson_gxbb_wdt.o
+diff --git a/drivers/watchdog/hisi_wdt.c b/drivers/watchdog/hisi_wdt.c
+new file mode 100644
+index 0000000000..5be9e90865
+--- /dev/null
++++ b/drivers/watchdog/hisi_wdt.c
+@@ -0,0 +1,196 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Watchdog driver for HiSilicon SoCs
++ *
++ * Copyright 2024 (r) Yang Xiwen <forbidden405@outlook.com>
++ */
++
++#include <clk.h>
++#include <errno.h>
++#include <log.h>
++#include <reset.h>
++#include <wdt.h>
++#include <dm/device_compat.h>
++#include <dm/device.h>
++#include <dm/lists.h>
++#include <dm/read.h>
++#include <linux/delay.h>
++#include <linux/math64.h>
++#include <linux/types.h>
++
++/* CONTROL register definitions */
++#define HISI_WDG_RES_EN	BIT(1)
++#define HISI_WDG_INT_EN	BIT(0)
++
++/* RIS(Raw Interrupt Status) register definitions */
++#define HISI_WDG_RIS	BIT(0)
++
++/* MIS(Masked Interrupt Status) register definitions*/
++#define HISI_WDG_MIS	BIT(0)
++
++/* LOCK register magic */
++// Write this value to unlock watchdog
++#define HISI_WDG_LOCK_MAGIC	0x1ACCE551
++// Read values
++#define HISI_WDG_LOCK_WA	0x0
++#define HISI_WDG_LOCK_RO	0x1
++
++struct hisi_wdg_reg {
++	u32 load; // 0x0000
++	u32 value; // 0x0004
++	u32 control; // 0x0008
++	u32 intclr; // 0x000c
++	u32 ris; // 0x0010
++	u32 mis; // 0x0014
++	u32 reserved[762]; // 0x0018
++	u32 lock; // 0x0c00
++};
++
++struct hisi_wdt_priv {
++	struct hisi_wdg_reg __iomem *reg;
++	struct clk *clk;
++	struct reset_ctl *rst;
++};
++
++static inline void hisi_wdt_unlock(struct hisi_wdg_reg __iomem *reg)
++{
++	reg->lock = HISI_WDG_LOCK_MAGIC;
++}
++
++static inline void hisi_wdt_lock(struct hisi_wdg_reg __iomem *reg)
++{
++	// Any value other than HISI_WDG_LOCK_MAGIC would lock the registers
++	reg->lock = 0;
++}
++
++static int hisi_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
++{
++	struct hisi_wdt_priv *priv = dev_get_priv(dev);
++	u64 rate;
++	u64 val;
++
++	rate = clk_get_rate(priv->clk);
++
++	/* This may overflow */
++	val = mul_u64_u32_div(timeout_ms, rate, 1000);
++	if (val > UINT32_MAX) {
++		dev_warn(dev, "timeout_ms too large, using maximum.\n");
++		val = UINT32_MAX;
++	}
++
++	hisi_wdt_unlock(priv->reg);
++
++	priv->reg->load = (u32) val;
++	priv->reg->control |= (HISI_WDG_RES_EN | HISI_WDG_INT_EN);
++
++	hisi_wdt_lock(priv->reg);
++
++	return 0;
++}
++
++static int hisi_wdt_stop(struct udevice *dev)
++{
++	struct hisi_wdt_priv *priv = dev_get_priv(dev);
++
++	hisi_wdt_unlock(priv->reg);
++	// disabling interrupt also disables counting
++	priv->reg->control &= ~HISI_WDG_INT_EN;
++
++	hisi_wdt_lock(priv->reg);
++
++	return 0;
++}
++
++static int hisi_wdt_reset(struct udevice *dev)
++{
++	struct hisi_wdt_priv *priv = dev_get_priv(dev);
++
++	hisi_wdt_unlock(priv->reg);
++
++	// any value written to INTCLR would result a counter reload
++	priv->reg->intclr = 0;
++
++	hisi_wdt_lock(priv->reg);
++
++	return 0;
++}
++
++static int hisi_wdt_expire_now(struct udevice *dev, ulong flags)
++{
++	return hisi_wdt_start(dev, 1, flags);
++}
++
++static const struct wdt_ops hisi_wdt_ops = {
++	.start		= hisi_wdt_start,
++	.stop		= hisi_wdt_stop,
++	.reset		= hisi_wdt_reset,
++	.expire_now	= hisi_wdt_expire_now,
++};
++
++static int hisi_wdt_probe(struct udevice *dev)
++{
++	struct hisi_wdt_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	ret = clk_prepare_enable(priv->clk);
++	if (ret) {
++		dev_err(dev, "failed to enable clk: %d\n", ret);
++		return log_msg_ret("clk", ret);
++	}
++
++	ret = reset_assert(priv->rst);
++	if (ret) {
++		dev_err(dev, "failed to assert reset: %d\n", ret);
++		return log_msg_ret("rst", ret);
++	}
++
++	udelay(10);
++
++	ret = reset_deassert(priv->rst);
++	if (ret) {
++		dev_err(dev, "failed to deassert reset: %d\n", ret);
++		return log_msg_ret("rst", ret);
++	}
++
++	return 0;
++}
++
++static int hisi_wdt_of_to_plat(struct udevice *dev)
++{
++	struct hisi_wdt_priv *priv = dev_get_priv(dev);
++
++	priv->reg = dev_remap_addr(dev);
++	if (!priv->reg) {
++		dev_err(dev, "failed to remap\n");
++		return log_msg_ret("wdt", -EINVAL);
++	}
++
++	priv->clk = devm_clk_get(dev, NULL);
++	if (IS_ERR(priv->clk)) {
++		dev_err(dev, "failed to get clk: %ld\n", PTR_ERR(priv->clk));
++		return log_msg_ret("wdt", PTR_ERR(priv->clk));
++	}
++
++	priv->rst = devm_reset_control_get(dev, NULL);
++	if (IS_ERR(priv->rst)) {
++		dev_err(dev, "failed to get rst: %ld\n", PTR_ERR(priv->rst));
++		return log_msg_ret("wdt", PTR_ERR(priv->rst));
++	}
++
++	return 0;
++}
++
++static const struct udevice_id hisi_wdt_ids[] = {
++	{ .compatible = "hisilicon,wdt" },
++	{ /* sentinel */ }
++};
++
++U_BOOT_DRIVER(hisi_wdt) = {
++	.name		= "hisilicon_wdt",
++	.id		= UCLASS_WDT,
++	.of_match	= hisi_wdt_ids,
++	.of_to_plat	= hisi_wdt_of_to_plat,
++	.probe		= hisi_wdt_probe,
++	.priv_auto	= sizeof(struct hisi_wdt_priv),
++	.ops		= &hisi_wdt_ops,
++};
+
+---
+base-commit: 842c5b501be7fe23f618788002c5e81fd56ac382
+change-id: 20240119-b4-wdt-d51eb3ae62c9
+
+Best regards,
 -- 
-2.34.1
+Yang Xiwen <forbidden405@outlook.com>
 
