@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12570C47DD3
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 19:39:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABD0CC4725D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 19:41:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F26987C6B;
-	Fri, 19 Jan 2024 20:39:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9002387CAB;
+	Fri, 19 Jan 2024 20:41:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KFTbLOGM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jCi/ozGj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1965087CAB; Fri, 19 Jan 2024 20:39:26 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4AEF087D83; Fri, 19 Jan 2024 20:41:51 +0100 (CET)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4CF687BA2
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 20:39:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D22E087BA2
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 20:41:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40JJdEPE081963;
- Fri, 19 Jan 2024 13:39:14 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1705693154;
- bh=QF15GM2aiVQ2TKXTrom3wFxfltqsqWa4Yu9Ky9YGznk=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=KFTbLOGMhd3ABsj7WQoqzOFzt+eonsxx+wlrD3BVcfKwoVepYynUL4egbBvMgVA3d
- yn4+Cu9hMhz7fU/KGslilJYs78JXTF17euV+dDtP02dTsFYiPYEgvs+EwbQP/PkBkI
- cG6+88mZDJNF34lczhfZsxFCRSsKMBSZqdeTrITw=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40JJdEDP082517
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 19 Jan 2024 13:39:14 -0600
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 19
- Jan 2024 13:39:14 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 19 Jan 2024 13:39:13 -0600
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40JJdD0r076674;
- Fri, 19 Jan 2024 13:39:13 -0600
-Date: Fri, 19 Jan 2024 13:39:13 -0600
-From: Nishanth Menon <nm@ti.com>
-To: Apurva Nandan <a-nandan@ti.com>
-CC: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean
- Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Neha
- Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Andrew
- Davis <afd@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya
- <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Aradhya Bhatia
- <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>, Christian Gmeiner
- <christian.gmeiner@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Roger Quadros
- <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>, Ralph Siemsen
- <ralph.siemsen@linaro.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>,
- Sinthu Raja M <sinthu.raja@mistralsolutions.com>,
- Udit Kumar <u-kumar1@ti.com>
-Subject: Re: [PATCH v8 09/16] board: ti: j784s4: Add board support for J784S4
- EVM
-Message-ID: <20240119193913.ter2wn6krowklcr6@relenting>
-References: <20240119175043.3904751-1-a-nandan@ti.com>
- <20240119175043.3904751-10-a-nandan@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-1d48a8ed85bso2551125ad.0
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 11:41:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1705693307; x=1706298107; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=a8v5wm7eXyzF+W3FvXnAaxiUuWeSuv5ubPtPr/EnT3o=;
+ b=jCi/ozGjqUYljU9I9DsnSbxrHOG/C4fzZuC3cUrIC6Ghzg7l1sj30gcIGzSzM/4TJE
+ oTfLhP2rxBBUJaD1ZrfRE3C0jI20hFNT2yJX95LURdBB4wNoLwtmIRJ7VKn3jGXOUdwx
+ U/VPrl3/r2t1YX4EX/08LNeHJeYLmtoPEb3mpJy3bmJSIaUKiRxKeXoYnVDOV495QInn
+ j+d7rVikDrOqA5ElKMXeTtvU0r7R5VTjeSLXxWo1bDTHqQzrHxm+1j64tq1IYNsihJZH
+ nGdFO7IG+w6WWO91ScKJXBc5MzB7BORWsluxqGxLUp2ytcn/B5t0Lr17K3fXZYnvKKKO
+ AyOA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705693307; x=1706298107;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=a8v5wm7eXyzF+W3FvXnAaxiUuWeSuv5ubPtPr/EnT3o=;
+ b=fj5WD7f3kTfLo52lck3u9iF3bkiW8UZi4kB9VKigf53kBExGfYpZVu9hkHk9kUwx/e
+ BdLgexr4FzAEAORDNfBOXG+2l3a+qwo/MpWMMovayD8LU2mkomRGiqUumHMrvXre7v+q
+ TLWBLJi24GWmmF5+Hu+ulXtciAfrKfV3C12DyYqZ+UmHYwrqnb7/6+mQuhfvubLKgLf3
+ DAjUKOyQMTIrttQ57ZTzGs+3ToEGEGao4U1OA7l1xUhJPhogDLuS+F1/Ob9HmZ5/4I4V
+ sGkDda/T8Y7ri6sGUufUPu68le2TEx2aRPjC1yYuWHTAJ+HGkVEinz1Lym8+pRMGG2dN
+ ydXQ==
+X-Gm-Message-State: AOJu0YwaEc6xvWxQ+iF4mS4pnvF9f5uiXH7yMxAov0lYCK4t7HxAHpKX
+ 0b0PIBweWA3M+ax18/r+Qs30u/IHbDSzAEXDIhpOaCfpvhfFvZMN
+X-Google-Smtp-Source: AGHT+IF7Mr4AggeJpy1vEHh2DdqX4pVXr+cEqiR4gJI8SbY7Ojbzbca9GaNXeQnSjbxbALsm1bRrkA==
+X-Received: by 2002:a17:902:db09:b0:1d5:dfd8:a92a with SMTP id
+ m9-20020a170902db0900b001d5dfd8a92amr785640plx.1.1705693307108; 
+ Fri, 19 Jan 2024 11:41:47 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:a173:61bc:3362:89aa])
+ by smtp.gmail.com with ESMTPSA id
+ k13-20020a170902f28d00b001d70602f550sm3270636plc.27.2024.01.19.11.41.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 19 Jan 2024 11:41:46 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: sbabic@denx.de
+Cc: u-boot@lists.denx.de,
+	Fabio Estevam <festevam@gmail.com>
+Subject: [PATCH] pico-dwarf/hobbit-imx6ul: Convert to CONFIG_DM_SERIAL
+Date: Fri, 19 Jan 2024 16:41:34 -0300
+Message-Id: <20240119194134.681075-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240119175043.3904751-10-a-nandan@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,89 +89,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 23:20-20240119, Apurva Nandan wrote:
-> Add board files for J784S4 EVM.
-> 
-> SYS_DISABLE_DCACHE_OPS is selected in the Kconfig because
-> J784S4/AM69 are a coherent architecture at A72 level by
-> MSMC support.
-> 
-> Signed-off-by: Hari Nagalla <hnagalla@ti.com>
-> [ add env and board specific yaml files for binman ]
-Neither of them are part of this patch?
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> [ cleaned up the env files ]
-no env file in this patch?
+The conversion to CONFIG_DM_SERIAL is mandatory, so select
+this option.
 
-> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
-> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Fabio Estevam <festevam@gmail.com>
+---
+ configs/pico-dwarf-imx6ul_defconfig  | 1 +
+ configs/pico-hobbit-imx6ul_defconfig | 1 +
+ 2 files changed, 2 insertions(+)
 
-[...]
-
-> diff --git a/board/ti/j784s4/MAINTAINERS b/board/ti/j784s4/MAINTAINERS
-> new file mode 100644
-> index 0000000000..9e0df11503
-> --- /dev/null
-> +++ b/board/ti/j784s4/MAINTAINERS
-> @@ -0,0 +1,14 @@
-> +J784S4 EVM BOARD
-> +M:	Apurva Nandan <a-nandan@ti.com>
-> +S:	Maintained
-> +F:	board/ti/j784s4
-> +F:	arch/arm/mach-k3/j784s4
-> +F:	include/configs/j784s4_evm.h
-> +F:	arch/arm/dts/k3-j784s4.dtsi
-> +F:	arch/arm/dts/k3-j784s4-main.dtsi
-> +F:	arch/arm/dts/k3-j784s4-mcu-wakeup.dtsi
-> +F:	arch/arm/dts/k3-j784s4-thermal.dtsi
-> +F:	arch/arm/dts/k3-j784s4-evm.dts
-> +
-> +AM69 SK BOARD
-Don't all entries need a maintainer? I am not actually sure if the above
-M will fall through for SK board.
-
-> +F:	arch/arm/dts/k3-am69-sk.dts
-> diff --git a/board/ti/j784s4/Makefile b/board/ti/j784s4/Makefile
-> new file mode 100644
-> index 0000000000..60161a8b5c
-> --- /dev/null
-> +++ b/board/ti/j784s4/Makefile
-> @@ -0,0 +1,7 @@
-> +# SPDX-License-Identifier: GPL-2.0-or-later
-> +#
-> +# Copyright (C) 2023-2024 Texas Instruments Incorporated - https://www.ti.com/
-> +#	Hari Nagalla <hnagalla@ti.com>
-> +#
-> +
-> +obj-y += evm.o
-> diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
-> new file mode 100644
-> index 0000000000..5af3e21ff0
-> --- /dev/null
-> +++ b/board/ti/j784s4/evm.c
-> @@ -0,0 +1,43 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * Board specific initialization for J784S4 EVM
-> + *
-> + * Copyright (C) 2023-2024 Texas Instruments Incorporated - https://www.ti.com/
-> + *	Hari Nagalla <hnagalla@ti.com>
-> + *
-> + */
-> +
-> +#include <image.h>
-> +#include <init.h>
-> +#include <spl.h>
-> +#include <stdlib.h>
-
-Are you sure we need all the above headers?
-
-> +#include "../common/fdt_ops.h"
-[...]
-
+diff --git a/configs/pico-dwarf-imx6ul_defconfig b/configs/pico-dwarf-imx6ul_defconfig
+index 7ae37264612c..8b90285980f4 100644
+--- a/configs/pico-dwarf-imx6ul_defconfig
++++ b/configs/pico-dwarf-imx6ul_defconfig
+@@ -67,6 +67,7 @@ CONFIG_DM_REGULATOR=y
+ CONFIG_DM_REGULATOR_PFUZE100=y
+ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_DM_SERIAL=y
+ CONFIG_MXC_UART=y
+ CONFIG_USB=y
+ CONFIG_SPL_USB_HOST=y
+diff --git a/configs/pico-hobbit-imx6ul_defconfig b/configs/pico-hobbit-imx6ul_defconfig
+index fc5a54b4e5ed..e3aca6e82e16 100644
+--- a/configs/pico-hobbit-imx6ul_defconfig
++++ b/configs/pico-hobbit-imx6ul_defconfig
+@@ -70,6 +70,7 @@ CONFIG_DM_REGULATOR=y
+ CONFIG_DM_REGULATOR_PFUZE100=y
+ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_DM_SERIAL=y
+ CONFIG_MXC_UART=y
+ CONFIG_USB=y
+ CONFIG_SPL_USB_HOST=y
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+2.34.1
+
