@@ -4,74 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F28ACC4725D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 21:33:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FBDEC47DAF
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 21:57:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20E6687A2A;
-	Fri, 19 Jan 2024 22:33:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8BA4687C82;
+	Fri, 19 Jan 2024 22:57:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KmEurgHP";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E2EE87A2A; Fri, 19 Jan 2024 22:33:13 +0100 (CET)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FA8687920
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 22:33:11 +0100 (CET)
+ id A8C4087C9B; Fri, 19 Jan 2024 22:57:01 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 4373487BC5
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 22:56:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ralph.siemsen@linaro.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6817a470730so6041596d6.3
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 13:33:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705699990; x=1706304790; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Q9Irad7bq9Na7d+aOFd0r7sLjoV9DLczJTXO97vMqPg=;
- b=KmEurgHPC8BgEGvLkFnx9b7yBUfXRwVBDKBT+wIGcR7CIsLcUmhRsRlagNccDQTzkB
- 6ymLrS/RNzoxD1E55QEZNzHPq6zqfiR/HPi9kro0Scnkjm0t/y4bKNiQ0red9DA+kSaC
- TXr61qYgqiqDYwkeTr9wwNa87YMCkwdo1UrOnd5IDzbyphACm2UyYKOVGerFz4VaopMq
- 1CmbAyZnNEfxz2RdjcmNA2d3uQhRfzLlW7BTOYhJM2JY1n4BzmdYeikHnfSBaIQbDgpL
- 1JPxy50UZtdMcVMgf16pjuzdjU3Kb/GGnDrWhOBaJqOp0T0AnUtkDsN8KKk4DWQTwT3V
- 0smA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705699990; x=1706304790;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Q9Irad7bq9Na7d+aOFd0r7sLjoV9DLczJTXO97vMqPg=;
- b=jeTIwy+6V9DR+LtMz5/5/rEP8DdnUMvOEz2BGMLs1a9pPFa2r5clk14gUp1ca+DDRp
- Z6uQJyGb43AEni3aDPtxbivbOHtlKIGd7OB7QwXaHw3/GIRxOSDlHMefLBEJlK+GzONo
- Mtp83DXM2U2nStWylcrKgFtWkg2NVw6wnQPr3dKxY4FabIcHa8RN0kUPWHkovovDlcG6
- RIhjsBC5w2oRqyjmoKTZXLhPn77+5vGrgY10Y8gHi2ZE8uP47FCsfdRVctlsnKAYJODi
- cPLIbx1ygnaOMMmS0nKO3Oi8eyxt82Tuc1jumHfcoWLiCkEEMzEi1UKB4Txjs4FXdAsS
- AtCw==
-X-Gm-Message-State: AOJu0YyXTmIulr/8jKMvyQ2f8QBrTGqWzZRv8w1Wq3yqFwAZeJgamPBo
- mHba9YCieUwcVxS4yLK9uRhF+BZY+3Q9o+tYP3YHYJEWwUddsq83E0bBjQQMpQ4=
-X-Google-Smtp-Source: AGHT+IFBE/kNuBTTrVTvnR9xFNdx31u/CzvdONM1523lpMnnnJSPg8uFVJ4HJUGf0P6VekZwUxSReA==
-X-Received: by 2002:ad4:5ecd:0:b0:681:7ba3:3649 with SMTP id
- jm13-20020ad45ecd000000b006817ba33649mr656721qvb.63.1705699989923; 
- Fri, 19 Jan 2024 13:33:09 -0800 (PST)
-Received: from maple.home ([70.51.77.95]) by smtp.gmail.com with ESMTPSA id
- l15-20020ad44bcf000000b00684d962f0acsm39147qvw.83.2024.01.19.13.33.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jan 2024 13:33:09 -0800 (PST)
-From: Ralph Siemsen <ralph.siemsen@linaro.org>
-To: joe.hershberger@ni.com,
-	u-boot@lists.denx.de
-Cc: Ralph Siemsen <ralph.siemsen@linaro.org>
-Subject: [PATCH] env: sf: report malloc error to caller
-Date: Fri, 19 Jan 2024 16:32:17 -0500
-Message-Id: <20240119213216.3811402-1-ralph.siemsen@linaro.org>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 232EAFEC;
+ Fri, 19 Jan 2024 13:57:44 -0800 (PST)
+Received: from minigeek.lan (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 39A673F766;
+ Fri, 19 Jan 2024 13:56:57 -0800 (PST)
+Date: Fri, 19 Jan 2024 21:56:10 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Maxim Kiselev <bigunclemax@gmail.com>
+Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>, Ramon
+ Fried <rfried.dev@gmail.com>
+Subject: Re: [PATCH v1] net: sun8i-emac: Add support for fixed-link phy
+Message-ID: <20240119215610.3f5f467d@minigeek.lan>
+In-Reply-To: <CALHCpMiWc4ZNS9yUnc-pHLxb_t9Ydy3Nsv91jcq13k1i2QQz5w@mail.gmail.com>
+References: <20230614214405.1038301-1-bigunclemax@gmail.com>
+ <20240116001735.7c48ea88@minigeek.lan>
+ <CALHCpMg2atqadF4Kxt8E=+dh015sq4uN39TQbeOSWPkUkuMM8g@mail.gmail.com>
+ <20240119173519.19828363@donnerap.manchester.arm.com>
+ <CALHCpMiWc4ZNS9yUnc-pHLxb_t9Ydy3Nsv91jcq13k1i2QQz5w@mail.gmail.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,41 +60,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In the non-redundant code for env_sf_save(), a failure to malloc() the
-temporary buffer produces the following output:
+On Fri, 19 Jan 2024 21:11:07 +0300
+Maxim Kiselev <bigunclemax@gmail.com> wrote:
 
-    Saving Environment to SPIFlash... OK
+Hi Maxim,
 
-This is misleading as the flash has neither been erased nor written.
+> =D0=BF=D1=82, 19 =D1=8F=D0=BD=D0=B2. 2024=E2=80=AF=D0=B3. =D0=B2 20:35, A=
+ndre Przywara <andre.przywara@arm.com>:
+> >
+> > On Tue, 16 Jan 2024 19:58:56 +0300
+> > Maxim Kiselev <bigunclemax@gmail.com> wrote:
+> >
+> > Hi Maxim,
+> > =20
+> > > =D0=B2=D1=82, 16 =D1=8F=D0=BD=D0=B2. 2024=E2=80=AF=D0=B3. =D0=B2 03:1=
+8, Andre Przywara <andre.przywara@arm.com>: =20
+> > > >
+> > > > On Thu, 15 Jun 2023 00:44:06 +0300
+> > > > Maxim Kiselev <bigunclemax@gmail.com> wrote:
+> > > >
+> > > > Hi Maxim,
+> > > > =20
+> > > > > From: Maksim Kiselev <bigunclemax@gmail.com>
+> > > > >
+> > > > > Based on dt-specs fixed-link doesn't require phy-handle to be use=
+d. =20
+> > > >
+> > > > Do you have such a board? =20
+> > >
+> > > Yes, I had a custom board with T113 SoC which has fixed phy eth. =20
+> >
+> > So just to clarify: this board connected something like a switch direct=
+ly
+> > to the MAC, just using RMII/RGMII? And then you have a fixed-phy node in
+> > the DT, detailing the speed and duplex parameters? Matching the fixed-p=
+hy
+> > node description in ethernet-controller.yaml? And drivers/net/phy/fixed=
+.c
+> > takes care of parsing that? =20
+>=20
+> Yes, you are absolutely right. The T113s connected directly to the switch=
+ port
+> via RMII interface. Here is the part of DT, that describes that configura=
+tion
 
-Fix it to return an error to the caller, so the output will be:
+Excellent, thanks for the confirmation!
 
-    Saving Environment to SPIFlash... Failed (-12)
+Looking forward to v2!
 
-Note that there is another copy of env_sf_save() in the same file, for
-handling redundant environment, and it already has the same logic.
+Cheers,
+Andre
 
-Signed-off-by: Ralph Siemsen <ralph.siemsen@linaro.org>
----
- env/sf.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/env/sf.c b/env/sf.c
-index a425ecc11c8..8f5c03b00d3 100644
---- a/env/sf.c
-+++ b/env/sf.c
-@@ -210,8 +210,10 @@ static int env_sf_save(void)
- 		saved_size = sect_size - CONFIG_ENV_SIZE;
- 		saved_offset = CONFIG_ENV_OFFSET + CONFIG_ENV_SIZE;
- 		saved_buffer = malloc(saved_size);
--		if (!saved_buffer)
-+		if (!saved_buffer) {
-+			ret = -ENOMEM;
- 			goto done;
-+		}
- 
- 		ret = spi_flash_read(env_flash, saved_offset,
- 			saved_size, saved_buffer);
--- 
-2.25.1
+> &emac {
+>        pinctrl-names =3D "default";
+>        pinctrl-0 =3D <&rmii_pg_pins>;
+>        phy-mode =3D "rmii";
+>        snps,reset-gpio =3D <&pio 4 12 GPIO_ACTIVE_LOW>; /* PE12 */
+>        allwinner,tx-delay-ps =3D <700>;
+>        allwinner,rx-delay-ps =3D <3100>;
+>=20
+>        fixed-link {
+>                speed =3D <100>;
+>                full-duplex;
+>        };
+> };
+>=20
+> > =20
+> > > > And where is that written down? I don't see
+> > > > it explicitly mentioned as optional in ethernet-controller.yaml or =
+in
+> > > > the DT spec PDF. =20
+> > >
+> > > Sorry for that commit description. I just found the similar commit, t=
+hat
+> > > fixes the same problem for zynq_gem
+> > > 3888c8d1979289efe685fe29276aed4d4b685975 ("net: zynq_gem: Add support=
+ for
+> > > fixed-link phy") and copied the description from there.
+> > > =20
+> > > > The sun8i EMAC binding lists phy-handle as required,
+> > > > so that would need to be relaxed there then. =20
+> > >
+> > > Oh, indeed. So it will require to send dt-binding changes to Linux fi=
+rst...
+> > >
+> > > Therefore, I think we can live without fixed-phy support for sun8i EM=
+AC.
+> > > At least until some device with such a configuration appears on the
+> > > market :) =20
+> >
+> > Well, I am fine with that patch if it fixes a problem for you. It looks
+> > like requiring the phy-handle property is too strict, and just needs to=
+ be
+> > relaxed in the binding. If I see this correctly, the driver would still
+> > accept every valid DT, by today's and future bindings?
+> >
+> > If you could just confirm my above assumptions, and maybe send a v2 wit=
+h an
+> > amended commit message, I would be happy to merge that patch. =20
+>=20
+> Sure, I'll fix the commit description and send v2 asap.
+>=20
+> > Cheers,
+> > Andre
+> > =20
+> > > > > Fix driver to only read phy related setting when phy-handle is fo=
+und. =20
+> > > >
+> > > > The patch itself looks fine, we already specify -1 as the default w=
+hen
+> > > > the PHY DT node does not contain a reg property, so that looks like=
+ it
+> > > > would work.
+> > > >
+> > > > Cheers,
+> > > > Andre
+> > > > =20
+> > > > > Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
+> > > > > ---
+> > > > >  drivers/net/sun8i_emac.c | 7 ++-----
+> > > > >  1 file changed, 2 insertions(+), 5 deletions(-)
+> > > > >
+> > > > > diff --git a/drivers/net/sun8i_emac.c b/drivers/net/sun8i_emac.c
+> > > > > index 04c3274fbe..0e339d69e0 100644
+> > > > > --- a/drivers/net/sun8i_emac.c
+> > > > > +++ b/drivers/net/sun8i_emac.c
+> > > > > @@ -834,11 +834,8 @@ static int sun8i_emac_eth_of_to_plat(struct =
+udevice *dev)
+> > > > >       priv->use_internal_phy =3D false;
+> > > > >
+> > > > >       offset =3D fdtdec_lookup_phandle(gd->fdt_blob, node, "phy-h=
+andle");
+> > > > > -     if (offset < 0) {
+> > > > > -             debug("%s: Cannot find PHY address\n", __func__);
+> > > > > -             return -EINVAL;
+> > > > > -     }
+> > > > > -     priv->phyaddr =3D fdtdec_get_int(gd->fdt_blob, offset, "reg=
+", -1);
+> > > > > +     if (offset >=3D 0)
+> > > > > +             priv->phyaddr =3D fdtdec_get_int(gd->fdt_blob, offs=
+et, "reg", -1);
+> > > > >
+> > > > >       pdata->phy_interface =3D dev_read_phy_mode(dev);
+> > > > >       debug("phy interface %d\n", pdata->phy_interface); =20
+> > > > =20
+> > >
+> > > Best wishes,
+> > > Maksim =20
+> > =20
+>=20
+> Best wishes,
+> Maksim
 
