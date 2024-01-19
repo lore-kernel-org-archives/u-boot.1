@@ -4,77 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC2B8C4725D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 17:53:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FCD0C4725D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 18:06:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA5EF87DB4;
-	Fri, 19 Jan 2024 18:52:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 019EA87CF8;
+	Fri, 19 Jan 2024 19:06:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="gIo9LWhe";
+	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="rnbhYybf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7ECA087DB3; Fri, 19 Jan 2024 18:52:49 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 37BFF87B98; Fri, 19 Jan 2024 19:06:55 +0100 (CET)
+Received: from APC01-PSA-obe.outbound.protection.outlook.com
+ (mail-psaapc01olkn2082e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:feae::82e])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE5338718F
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 18:52:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 093BB87CF8
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 19:06:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40JHqcld074652;
- Fri, 19 Jan 2024 11:52:38 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1705686758;
- bh=1Vuwxxmxk286FArPPbYiKSGUBB1C5Gb2BJm3jOuRrV4=;
- h=From:To:Subject:Date:In-Reply-To:References;
- b=gIo9LWheMetw0jFzIgvkCD+P914nDvQUSrEChK44xS/0ao/m6fft5R/zSCBi1h4g1
- QEHSgy06r4v/IswzgaE8VK5pc0G/h7kMHJbsnLYaWPVo9drTB4xAJSk55YqX+dzgHg
- vItax8/9UAg8wmMmGEsbof7z3TPvide0NWbVsrMs=
-Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40JHqcgE099012
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 19 Jan 2024 11:52:38 -0600
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 19
- Jan 2024 11:52:38 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 19 Jan 2024 11:52:38 -0600
-Received: from TI.dhcp.ti.com (ti.dhcp.ti.com [10.24.68.115] (may be forged))
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40JHoiDc054787; 
- Fri, 19 Jan 2024 11:52:32 -0600
-From: Apurva Nandan <a-nandan@ti.com>
-To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
- Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
- Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>,
- Aradhya Bhatia <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>, Nishanth Menon
- <nm@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Marcel Ziswiler
- <marcel.ziswiler@toradex.com>, Roger Quadros <rogerq@kernel.org>, Jayesh
- Choudhary <j-choudhary@ti.com>, Ralph Siemsen <ralph.siemsen@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
- <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
-Subject: [PATCH v8 16/16] doc: board: ti: k3: Add J784S4 EVM and AM69 SK
- documentation
-Date: Fri, 19 Jan 2024 23:20:43 +0530
-Message-ID: <20240119175043.3904751-17-a-nandan@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240119175043.3904751-1-a-nandan@ti.com>
-References: <20240119175043.3904751-1-a-nandan@ti.com>
+ dmarc=pass (p=none dis=none) header.from=outlook.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=forbidden405@outlook.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Iuy0lTYxuvfqCz+zQk/5/j4XsD/zdstiueAb7YRfhzMJeKJ48o6R9mkMm490o2bTBjlVQvXlgapL58CN+TzbMtDI2zMdGr7AzqVWa0k4SNo/064YxFqQxYgtaqVFprjjA7YrQvsxjsf35QgCl/lnS0dqvT+ZovKvxHvKIJFiru2Ldjb1Cbvp+NjZ6jKjHgT6noHjh/8dfemupc0KibTDvays32HYOvWgGOSRFH8Ma+jQOsEy/JLNphfr1hl52TkvboofgBA51LKq5q+av4mrVFUO/eu/RT6tZVx+u4kratgCBSzcNGrUmGy3GHP+j9qdJ+FjRyL37j6x+PZzwzvsNg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Szi2kibWm1B/yOplf7S296FkjCkf7OsBONF6xGyz7CI=;
+ b=OQX4ZYckfC0zcBMKvlAJBPNnL0oLy+ynL8BCjSRxhyTHBviDvSJSilcDOaoVE3BaSNmcvASpQ0oKrLweDuTNMif+e+ZKJZgUHPHkQ46mPtMleyFslzo8yWJNMzQxdXSwkScGtNJ9+EX+7rjYftgn/hBsmP/TRPZHCjoYaMf8kdx1JvXTQ5PmQKxS2ueT+ye7D3YlXWVsIxNL7HbvezkbWoY6ktv1kTa3ZBGWJMah8u0qgSDyT9TlxLN7MHeGd0K3Cm2FkbLRgVpaftFNrML0lxDG/PpkfKI9JgiB+paKOtLWbHonPUWT2IIdwk4braXcDu1SH1RX461OoQi87IYYjA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Szi2kibWm1B/yOplf7S296FkjCkf7OsBONF6xGyz7CI=;
+ b=rnbhYybfSClFLdaqcvUij9fqMdIRkdfj0oedW6z6MM2tO5rrpTs+JCG3+9JTuhNaaWj6dQT64Y5ElsKmPj+DS0sERg0Pz10HFjtJbi7HQVTwjemQp0YvoRR60PZnaYrjuhNItzimLcUjxjY+Pc+U8yGLud/RzlOuXE8Gj7PeZfyZMcT3A4iMUCh0jU/N3DOVYS7X97k3/zpV6US0xWVnN3r680DM7XsnazaDfGmYkvF4DsR9GJIPP08lEYLXkpn2p4b3v+UHtURA8NrIsEpQHejENXDjabgPhBZFVW7A0bj+B4Y7se79KF+fGQ+N4X/1nCnX9XwCsFzzSSkBMSvfNg==
+Received: from SEZPR06MB6959.apcprd06.prod.outlook.com (2603:1096:101:1ed::14)
+ by TYZPR06MB7141.apcprd06.prod.outlook.com (2603:1096:405:b7::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7202.24; Fri, 19 Jan
+ 2024 18:06:49 +0000
+Received: from SEZPR06MB6959.apcprd06.prod.outlook.com
+ ([fe80::22e1:47ec:6e00:4900]) by SEZPR06MB6959.apcprd06.prod.outlook.com
+ ([fe80::22e1:47ec:6e00:4900%4]) with mapi id 15.20.7202.027; Fri, 19 Jan 2024
+ 18:06:49 +0000
+Message-ID: <SEZPR06MB6959615AC438A73759EACE5B96702@SEZPR06MB6959.apcprd06.prod.outlook.com>
+Date: Sat, 20 Jan 2024 02:06:44 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH] wdt: add HiSilicon watchdog driver support
+Content-Language: en-US
+To: Stefan Roese <sr@denx.de>
+Cc: David Yang <mmyangfl@gmail.com>, u-boot@lists.denx.de
+References: <20240119-b4-wdt-v1-1-b117901385d7@outlook.com>
+From: Yang Xiwen <forbidden405@outlook.com>
+In-Reply-To: <20240119-b4-wdt-v1-1-b117901385d7@outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-TMN: [lj6c7YD8A12+F4Jq0kglnpqMzdQ8oJ/Icxch1Mkz9Os=]
+X-ClientProxiedBy: TYCP301CA0017.JPNP301.PROD.OUTLOOK.COM
+ (2603:1096:400:381::8) To SEZPR06MB6959.apcprd06.prod.outlook.com
+ (2603:1096:101:1ed::14)
+X-Microsoft-Original-Message-ID: <26b6795c-c1df-ab07-64e2-add7b262e0de@outlook.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SEZPR06MB6959:EE_|TYZPR06MB7141:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3e8b67f4-bf6f-49df-1d9a-08dc1919663b
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 1D/cd4IgA6mve1AR+QIADw75P9Y1pLUZToDmjOaemQXR2CxvS1Lmy/Qe7uJlPb0165hqNKHzByHl/NAw+B24m0+UxRz3KfigTYxgUlKLGTS+3pCsAefbBsPBTPqkHAiDJyQ5hWcEwl59K0+y/Njo+hhh0th/JtDnJ3arppeIEdIOfjr2Q6OtecMlSlWNE++M18DZ/IGXFxvrLWfSOpTfUpusFTtQht3OmGxp89ziWAcDsozA0vmp9z26diwMBBmabt9oxGCcEhIrc/EJ4Gpb6m72l/FmOmmOUud9dCEemyzivR2YcOCl1LO5eGIlr7op++RPtRxLf1/KlmQ3p0xlhffWsOaxaMEfo4BcBmxPqtqjj1mD9IoRGEA2+S4m/2857MsjhzQ0p3Y/EefWqAPl55vc37nG07rX11PRi2nqPdmcqYUHLRi+RspxTpZXKw2bKbTeqp46t8cL3Qnzt8YQfmx3Oj+dPQbNkL6XQ/HOEteKUoYMWrh2QN3zm9cOeiUtKkoZ+4qm+OZLzpggxUBjs9u2kpoIjkKAEwZY+lVEXOmEgUnPKvjayhqQ4fa6tqIT
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TExOSzl4ejRnaDNlb3lFNDRscC9sZjM1QjJmclNJOXV3V2ptbTlRM3Q2bWth?=
+ =?utf-8?B?eXFYajFMVG5sNEhDTG94cm45ZlNxTHdEbmNYSmwyM1pqc2YzdktMcTNjbDhW?=
+ =?utf-8?B?MU9pVjJIRExxSjNiTDlPV2dUYTZGTExpK2VGcFQrRFlZeThvV25xTTZuWHhK?=
+ =?utf-8?B?YlY1WGUzbUdXblNKMWRKK3BoVmJtNHdKTzQ0MTFYQWowZEpnaGVtb3lXaW16?=
+ =?utf-8?B?eENSbGhlbG5YTjhjSUErem01elhCR2N5VzBuKzV2dVVUKzEwN0VSMmhPbExy?=
+ =?utf-8?B?Z3ZKWVhmSlpmL0c5N3NFczdBZnM5cW9DYlRyU2NreEpVclcrT0dyTUxoejNK?=
+ =?utf-8?B?Wk1CcU5IcllTNzJmVHgxWXQzRTA4aVFmNGx2YzNsNDJzbmV2WFUyeHJqMGVW?=
+ =?utf-8?B?cnA5aG1wekxRQnBPUHFndjZUWGZIUWpBQVY2WnR1cXVtbWdQdVZxRTVaRUtO?=
+ =?utf-8?B?U1FwaUo4MWxBcjQzZUVCekoyYzNvZkkxWGdXc05aS1MxVmQ1T2ZaaUJmL2Rq?=
+ =?utf-8?B?RkRkQ2JOaFNGNlE3N1RJb2ZEaGpJNUZZZXlEcHpPNVVTc3VtTGhGUUtlZVJj?=
+ =?utf-8?B?bTJ3Mm1nYksxYTdyWTRqRERJbVhlN2Vqb3gwcTZ0MThGMWlzdmhSR0s3MnBY?=
+ =?utf-8?B?MW56TkRLZmZJVDBKZHJyWEZFamRtSjZtM2JlUTNPWXZXRzNaVEVTMWgxRWdp?=
+ =?utf-8?B?aWVBZVMvYnhsbHdHYmZQQWI1MGh0YURnbGczc2M2Z2cwcTFHelVFTEFJcXcw?=
+ =?utf-8?B?UUNCNGxlaTJLTHY5YmhIY3daVm1DdjkyYmxkbExQVVZIei9jRHJjeFRrNGRk?=
+ =?utf-8?B?cDZMQ01hV25TUE1PWDZwbnlQYXFuMUhFZkxackY1RnExZmR0elNJS0l5TnZR?=
+ =?utf-8?B?bnQrcmZudU04OHlBYmRyRGptcUpXVyt4QXJxa05jeXErUDdncVk4V0hCVkty?=
+ =?utf-8?B?TC9UaXFSUmI5VWw0Skl4eW5QRUgyRlN4VExLUkswSjM0VzBVZ0tmY3JIN0hh?=
+ =?utf-8?B?eXkwMzErVEkzOS9yeWg1N09VclV4YmVJSVVPclZFWEk2WHpZdkhXRUlyVFZo?=
+ =?utf-8?B?Z0h0ZERDWldwSXFHZHpLSjhXL0gyUDlmVXR6V1k2dWxQRTVmSXJNOUF3aWpF?=
+ =?utf-8?B?Wm5MMDhxUUpCbXB2QjFpblhpZlU4THNZS2syQ2E5RmsvZk5Gbk1qRG55V29E?=
+ =?utf-8?B?UEFlQVdQUVh5emFxYmE4aU5VOVJlb1B1ZUowQUZEZlQzb3U3dVpOb2NiL3h4?=
+ =?utf-8?B?TGhrZ3B0dVA5allIbkdtZ01aeWxCbXp6QjBvOXBFTDhrZkYyWXVaa1Z0YzNv?=
+ =?utf-8?B?Nk85SGdBQTU4Z1duS0JpWUV6OWI1SzdWbVM3WG9JaHJRVy93NStSWUloMEhF?=
+ =?utf-8?B?MTFVYTJLSHRQK1BCYWRCYVBkY3IyZENXaVJUTDQ2ZlN3MzM0cjdXV1hWQ1hW?=
+ =?utf-8?B?MFB0VE9LRWQ4YXJpY3V2R3Q1SjlvVGN4N2syREsyU0Z1VlQ3L0dJZkFqR0pH?=
+ =?utf-8?B?Z1RUVlNqdzY0TXNoQ2FSSlltUzlGTDlhRmVkU1ViS2V0amFYVzBvaTdQRGFh?=
+ =?utf-8?B?bXJ6bUgvWTFDdGc0a1BOY0h5MWM4bkNubDBKWTBGdlZhQms4RkFHUHFCYTdJ?=
+ =?utf-8?Q?5xesPrBThc0VxYzd37PSB5W6mR437F6Xu3QXv2CnyOCc=3D?=
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3e8b67f4-bf6f-49df-1d9a-08dc1919663b
+X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB6959.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jan 2024 18:06:48.6688 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR06MB7141
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,347 +129,271 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-TI K3 J784S4 and AM69 are new additions to the K3 SoC family.
-Add documentation about the J784S4 EVM and AM69 SK.
+On 1/19/2024 12:24 PM, Yang Xiwen via B4 Relay wrote:
+> From: Yang Xiwen <forbidden405@outlook.com>
+>
+> This watchdog core is found on many HiSilicon SoCs. Add support for it.
+>
+> Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
+> ---
+>   drivers/watchdog/Kconfig    |  10 +++
+>   drivers/watchdog/Makefile   |   1 +
+>   drivers/watchdog/hisi_wdt.c | 196 ++++++++++++++++++++++++++++++++++++++++++++
+>   3 files changed, 207 insertions(+)
+>
+> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+> index 569726119c..ddf44f63d2 100644
+> --- a/drivers/watchdog/Kconfig
+> +++ b/drivers/watchdog/Kconfig
+> @@ -32,6 +32,7 @@ config WATCHDOG_TIMEOUT_MSECS
+>   	default 16000 if ARCH_SUNXI
+>   	default 5376 if ULP_WATCHDOG
+>   	default 15000 if ARCH_BCM283X
+> +	range 500 180000 if ARCH_HISI
+>   	default 60000
+>   	help
+>   	  Watchdog timeout in msec
+> @@ -171,6 +172,15 @@ config WDT_GPIO
+>   	  doc/device-tree-bindings/watchdog/gpio-wdt.txt for
+>   	  information on how to describe the watchdog in device tree.
+>   
+> +config WDT_HISI
+> +	bool "HiSilicon watchdog timer support"
+> +	depends on WDT
+> +	depends on CLK && DM_RESET
+> +	imply WATCHDOG
+> +	help
+> +	  Select this to enable HiSilicon watchdog timer.
+> +	  Currently supports Hi3798MV200 only.
+> +
+>   config WDT_MAX6370
+>   	bool "MAX6370 watchdog timer support"
+>   	depends on WDT
+> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+> index 5520d3d9ae..3436aa6389 100644
+> --- a/drivers/watchdog/Makefile
+> +++ b/drivers/watchdog/Makefile
+> @@ -30,6 +30,7 @@ obj-$(CONFIG_WDT_ORION) += orion_wdt.o
+>   obj-$(CONFIG_WDT_CDNS) += cdns_wdt.o
+>   obj-$(CONFIG_WDT_FTWDT010) += ftwdt010_wdt.o
+>   obj-$(CONFIG_WDT_GPIO) += gpio_wdt.o
+> +obj-$(CONFIG_WDT_HISI) += hisi_wdt.o
+>   obj-$(CONFIG_WDT_MAX6370) += max6370_wdt.o
+>   obj-$(CONFIG_WDT_MCF) += mcf_wdt.o
+>   obj-$(CONFIG_WDT_MESON_GXBB) += meson_gxbb_wdt.o
+> diff --git a/drivers/watchdog/hisi_wdt.c b/drivers/watchdog/hisi_wdt.c
+> new file mode 100644
+> index 0000000000..5be9e90865
+> --- /dev/null
+> +++ b/drivers/watchdog/hisi_wdt.c
+> @@ -0,0 +1,196 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * Watchdog driver for HiSilicon SoCs
+> + *
+> + * Copyright 2024 (r) Yang Xiwen <forbidden405@outlook.com>
+> + */
+> +
+> +#include <clk.h>
+> +#include <errno.h>
+> +#include <log.h>
+> +#include <reset.h>
+> +#include <wdt.h>
+> +#include <dm/device_compat.h>
+> +#include <dm/device.h>
+> +#include <dm/lists.h>
+> +#include <dm/read.h>
+> +#include <linux/delay.h>
+> +#include <linux/math64.h>
+> +#include <linux/types.h>
+> +
+> +/* CONTROL register definitions */
+> +#define HISI_WDG_RES_EN	BIT(1)
+> +#define HISI_WDG_INT_EN	BIT(0)
+> +
+> +/* RIS(Raw Interrupt Status) register definitions */
+> +#define HISI_WDG_RIS	BIT(0)
+> +
+> +/* MIS(Masked Interrupt Status) register definitions*/
+> +#define HISI_WDG_MIS	BIT(0)
+> +
+> +/* LOCK register magic */
+> +// Write this value to unlock watchdog
+> +#define HISI_WDG_LOCK_MAGIC	0x1ACCE551
+> +// Read values
+> +#define HISI_WDG_LOCK_WA	0x0
+> +#define HISI_WDG_LOCK_RO	0x1
+> +
+> +struct hisi_wdg_reg {
+> +	u32 load; // 0x0000
+> +	u32 value; // 0x0004
+> +	u32 control; // 0x0008
+> +	u32 intclr; // 0x000c
+> +	u32 ris; // 0x0010
+> +	u32 mis; // 0x0014
+> +	u32 reserved[762]; // 0x0018
+> +	u32 lock; // 0x0c00
+> +};
+> +
+> +struct hisi_wdt_priv {
+> +	struct hisi_wdg_reg __iomem *reg;
+> +	struct clk *clk;
+> +	struct reset_ctl *rst;
+> +};
+> +
+> +static inline void hisi_wdt_unlock(struct hisi_wdg_reg __iomem *reg)
+> +{
+> +	reg->lock = HISI_WDG_LOCK_MAGIC;
+> +}
+> +
+> +static inline void hisi_wdt_lock(struct hisi_wdg_reg __iomem *reg)
+> +{
+> +	// Any value other than HISI_WDG_LOCK_MAGIC would lock the registers
+> +	reg->lock = 0;
+> +}
+> +
+> +static int hisi_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+> +{
+> +	struct hisi_wdt_priv *priv = dev_get_priv(dev);
+> +	u64 rate;
+> +	u64 val;
+> +
+> +	rate = clk_get_rate(priv->clk);
+> +
+> +	/* This may overflow */
+> +	val = mul_u64_u32_div(timeout_ms, rate, 1000);
+> +	if (val > UINT32_MAX) {
+> +		dev_warn(dev, "timeout_ms too large, using maximum.\n");
+> +		val = UINT32_MAX;
+> +	}
+> +
+> +	hisi_wdt_unlock(priv->reg);
+> +
+> +	priv->reg->load = (u32) val;
+> +	priv->reg->control |= (HISI_WDG_RES_EN | HISI_WDG_INT_EN);
+> +
+> +	hisi_wdt_lock(priv->reg);
+> +
+> +	return 0;
+> +}
+> +
+> +static int hisi_wdt_stop(struct udevice *dev)
+> +{
+> +	struct hisi_wdt_priv *priv = dev_get_priv(dev);
+> +
+> +	hisi_wdt_unlock(priv->reg);
+> +	// disabling interrupt also disables counting
+> +	priv->reg->control &= ~HISI_WDG_INT_EN;
+> +
+> +	hisi_wdt_lock(priv->reg);
+> +
+> +	return 0;
+> +}
+> +
+> +static int hisi_wdt_reset(struct udevice *dev)
+> +{
+> +	struct hisi_wdt_priv *priv = dev_get_priv(dev);
+> +
+> +	hisi_wdt_unlock(priv->reg);
+> +
+> +	// any value written to INTCLR would result a counter reload
+> +	priv->reg->intclr = 0;
+> +
+> +	hisi_wdt_lock(priv->reg);
+> +
+> +	return 0;
+> +}
+> +
+> +static int hisi_wdt_expire_now(struct udevice *dev, ulong flags)
+> +{
+> +	return hisi_wdt_start(dev, 1, flags);
+> +}
+> +
+> +static const struct wdt_ops hisi_wdt_ops = {
+> +	.start		= hisi_wdt_start,
+> +	.stop		= hisi_wdt_stop,
+> +	.reset		= hisi_wdt_reset,
+> +	.expire_now	= hisi_wdt_expire_now,
+> +};
+> +
+> +static int hisi_wdt_probe(struct udevice *dev)
+> +{
+> +	struct hisi_wdt_priv *priv = dev_get_priv(dev);
+> +	int ret;
+> +
+> +	ret = clk_prepare_enable(priv->clk);
+> +	if (ret) {
+> +		dev_err(dev, "failed to enable clk: %d\n", ret);
+> +		return log_msg_ret("clk", ret);
+> +	}
+> +
+> +	ret = reset_assert(priv->rst);
+> +	if (ret) {
+> +		dev_err(dev, "failed to assert reset: %d\n", ret);
+> +		return log_msg_ret("rst", ret);
+> +	}
+> +
+> +	udelay(10);
+> +
+> +	ret = reset_deassert(priv->rst);
+> +	if (ret) {
+> +		dev_err(dev, "failed to deassert reset: %d\n", ret);
+> +		return log_msg_ret("rst", ret);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int hisi_wdt_of_to_plat(struct udevice *dev)
+> +{
+> +	struct hisi_wdt_priv *priv = dev_get_priv(dev);
+> +
+> +	priv->reg = dev_remap_addr(dev);
+> +	if (!priv->reg) {
+> +		dev_err(dev, "failed to remap\n");
+> +		return log_msg_ret("wdt", -EINVAL);
+> +	}
+> +
+> +	priv->clk = devm_clk_get(dev, NULL);
+> +	if (IS_ERR(priv->clk)) {
+> +		dev_err(dev, "failed to get clk: %ld\n", PTR_ERR(priv->clk));
+> +		return log_msg_ret("wdt", PTR_ERR(priv->clk));
+> +	}
+> +
+> +	priv->rst = devm_reset_control_get(dev, NULL);
+> +	if (IS_ERR(priv->rst)) {
+> +		dev_err(dev, "failed to get rst: %ld\n", PTR_ERR(priv->rst));
+> +		return log_msg_ret("wdt", PTR_ERR(priv->rst));
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct udevice_id hisi_wdt_ids[] = {
+> +	{ .compatible = "hisilicon,wdt" },
+> +	{ /* sentinel */ }
+> +};
+> +
+> +U_BOOT_DRIVER(hisi_wdt) = {
+> +	.name		= "hisilicon_wdt",
+> +	.id		= UCLASS_WDT,
+> +	.of_match	= hisi_wdt_ids,
+> +	.of_to_plat	= hisi_wdt_of_to_plat,
+> +	.probe		= hisi_wdt_probe,
+> +	.priv_auto	= sizeof(struct hisi_wdt_priv),
+> +	.ops		= &hisi_wdt_ops,
+> +};
+>
+> ---
+> base-commit: 842c5b501be7fe23f618788002c5e81fd56ac382
+> change-id: 20240119-b4-wdt-d51eb3ae62c9
+>
+> Best regards,
 
-Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
-Signed-off-by: Apurva Nandan <a-nandan@ti.com>
----
- board/ti/j784s4/MAINTAINERS |   1 +
- doc/board/ti/j784s4_evm.rst | 299 ++++++++++++++++++++++++++++++++++++
- doc/board/ti/k3.rst         |   1 +
- 3 files changed, 301 insertions(+)
- create mode 100644 doc/board/ti/j784s4_evm.rst
+I recently found that this is just a plain sp805 watchdog. Please just 
+ignore this patch.
 
-diff --git a/board/ti/j784s4/MAINTAINERS b/board/ti/j784s4/MAINTAINERS
-index 69be13f533..f61ecce632 100644
---- a/board/ti/j784s4/MAINTAINERS
-+++ b/board/ti/j784s4/MAINTAINERS
-@@ -15,6 +15,7 @@ F:	arch/arm/dts/k3-j784s4-evm-u-boot.dtsi
- F:	arch/arm/dts/k3-j784s4-r5-evm.dts
- F:	arch/arm/dts/k3-j784s4-ddr.dtsi
- F:	arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi
-+F:	doc/board/ti/j784s4_evm.rst
- 
- AM69 SK BOARD
- F:	arch/arm/dts/k3-am69-sk.dts
-diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
-new file mode 100644
-index 0000000000..a85d52ff19
---- /dev/null
-+++ b/doc/board/ti/j784s4_evm.rst
-@@ -0,0 +1,299 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-+.. sectionauthor:: Apurva Nandan <a-nandan@ti.com>
-+
-+J784S4 and AM69 Platforms
-+=========================
-+
-+Introduction
-+------------
-+The J784S4 SoC belongs to the K3 Multicore SoC architecture
-+platform, providing advanced system integration in automotive,
-+ADAS and industrial applications requiring AI at the network edge.
-+This SoC extends the K3 Jacinto 7 family of SoCs with focus on
-+raising performance and integration while providing interfaces,
-+memory architecture and compute performance for multi-sensor, high
-+concurrency applications.
-+
-+The device is partitioned into three functional domains, each containing
-+specific processing cores and peripherals:
-+
-+1. Wake-up (WKUP) domain
-+    * ARM Cortex-M4F processor, runs TI Foundational Security (TIFS)
-+
-+2. Microcontroller (MCU) domain
-+    * Dual core ARM Cortex-R5F processor, runs device management
-+      and SoC early boot
-+
-+3. MAIN domain
-+    * Two clusters of quad core 64-bit ARM Cortex-A72, runs HLOS
-+    * Dual core ARM Cortex-R5F processor used for RTOS applications
-+    * Four C7x DSPs used for Machine Learning applications.
-+
-+
-+More info can be found in TRM: http://www.ti.com/lit/zip/spruj52
-+
-+Platform information:
-+
-+* https://www.ti.com/tool/J784S4XEVM
-+* https://www.ti.com/tool/SK-AM69
-+
-+Boot Flow
-+---------
-+Below is the pictorial representation of boot flow:
-+
-+.. image:: img/boot_diagram_k3_current.svg
-+    :alt: K3 boot flow
-+
-+- On this platform, "TI Foundational Security" (TIFS) functions as the
-+  security enclave master. While "Device Manager" (DM), also known as the
-+  "TISCI server" in TI terminology, offers all the essential services.
-+
-+- As illustrated in the diagram above, R5 SPL manages power and clock
-+  services independently before handing over control to DM. The A72 or
-+  the C7x (Aux core) software components request TIFS/DM to handle
-+  security or device management services.
-+
-+Sources
-+-------
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_boot_sources
-+    :end-before: .. k3_rst_include_end_boot_sources
-+
-+Build procedure
-+---------------
-+0. Setup the environment variables:
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_common_env_vars_desc
-+    :end-before: .. k3_rst_include_end_common_env_vars_desc
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_board_env_vars_desc
-+    :end-before: .. k3_rst_include_end_board_env_vars_desc
-+
-+Set the variables corresponding to this platform:
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_common_env_vars_defn
-+    :end-before: .. k3_rst_include_end_common_env_vars_defn
-+.. code-block:: bash
-+
-+ $ export UBOOT_CFG_CORTEXR=j784s4_evm_r5_defconfig
-+ $ export UBOOT_CFG_CORTEXA=j784s4_evm_a72_defconfig
-+ $ export TFA_BOARD=j784s4
-+ $ export TFA_EXTRA_ARGS="K3_USART=0x8"
-+ $ export OPTEE_PLATFORM=k3-j784s4
-+ $ export OPTEE_EXTRA_ARGS="CFG_CONSOLE_UART=0x8"
-+
-+.. j784s4_evm_rst_include_start_build_steps
-+
-+1. Trusted Firmware-A
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_tfa
-+    :end-before: .. k3_rst_include_end_build_steps_tfa
-+
-+
-+2. OP-TEE
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_optee
-+    :end-before: .. k3_rst_include_end_build_steps_optee
-+
-+3. U-Boot
-+
-+.. _j784s4_evm_rst_u_boot_r5:
-+
-+* 3.1 R5
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_spl_r5
-+    :end-before: .. k3_rst_include_end_build_steps_spl_r5
-+
-+.. _j784s4_evm_rst_u_boot_a72:
-+
-+* 3.2 A72
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_uboot
-+    :end-before: .. k3_rst_include_end_build_steps_uboot
-+.. j784s4_evm_rst_include_end_build_steps
-+
-+Target Images
-+-------------
-+In order to boot we need tiboot3.bin, tispl.bin and u-boot.img. Each SoC
-+variant (GP, HS-FS, HS-SE) requires a different source for these files.
-+
-+ - GP
-+
-+    * tiboot3-j784s4-gp-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
-+    * tispl.bin_unsigned, u-boot.img_unsigned from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
-+
-+ - HS-FS
-+
-+    * tiboot3-j784s4-hs-fs-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
-+    * tispl.bin, u-boot.img from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
-+
-+ - HS-SE
-+
-+    * tiboot3-j784s4-hs-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
-+    * tispl.bin, u-boot.img from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
-+
-+Image formats
-+-------------
-+
-+- tiboot3.bin
-+
-+.. image:: img/multi_cert_tiboot3.bin.svg
-+    :alt: tiboot3.bin format
-+
-+- tispl.bin
-+
-+.. image:: img/dm_tispl.bin.svg
-+    :alt: tispl.bin format
-+
-+R5 Memory Map
-+-------------
-+
-+.. list-table::
-+   :widths: 16 16 16
-+   :header-rows: 1
-+
-+   * - Region
-+     - Start Address
-+     - End Address
-+
-+   * - SPL
-+     - 0x41c00000
-+     - 0x41c40000
-+
-+   * - EMPTY
-+     - 0x41c40000
-+     - 0x41c61f20
-+
-+   * - STACK
-+     - 0x41c65f20
-+     - 0x41c61f20
-+
-+   * - Global data
-+     - 0x41c65f20
-+     - 0x41c66000
-+
-+   * - Heap
-+     - 0x41c66000
-+     - 0x41c76000
-+
-+   * - BSS
-+     - 0x41c76000
-+     - 0x41c80000
-+
-+   * - DM DATA
-+     - 0x41c80000
-+     - 0x41c84130
-+
-+   * - EMPTY
-+     - 0x41c84130
-+     - 0x41cff9fc
-+
-+   * - MCU Scratchpad
-+     - 0x41cff9fc
-+     - 0x41cffbfc
-+
-+   * - ROM DATA
-+     - 0x41cffbfc
-+     - 0x41cfffff
-+
-+Switch Setting for Boot Mode
-+----------------------------
-+
-+Boot Mode pins provide means to select the boot mode and options before the
-+device is powered up. After every POR, they are the main source to populate
-+the Boot Parameter Tables.
-+
-+Boot Mode Pins for J784S4-EVM
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+The following tables show some common boot modes used on J784S4 EVM platform.
-+More details can be found in the Technical Reference Manual:
-+http://www.ti.com/lit/zip/spruj52 under the `Boot Mode Pins` section.
-+
-+.. list-table:: J784S4 EVM Boot Modes
-+   :widths: 16 16 16
-+   :header-rows: 1
-+
-+   * - Switch Label
-+     - SW9: 12345678
-+     - SW8: 12345678
-+
-+   * - SD
-+     - 00000000
-+     - 10000010
-+
-+   * - EMMC
-+     - 01000000
-+     - 10000000
-+
-+   * - OSPI
-+     - 01000000
-+     - 00000110
-+
-+   * - UART
-+     - 01110000
-+     - 00000000
-+
-+For SW8 and SW9, the switch state in the "ON" position = 1.
-+
-+Boot Mode Pins for AM69-SK
-+^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+The following table show some common boot modes used on AM69-SK platform.
-+More details can be found in the User Guide for AM69-SK:
-+https://www.ti.com/lit/ug/spruj70/spruj70.pdf under the `Bootmode Settings`
-+section.
-+
-+.. list-table:: AM69 SK Boot Modes
-+   :widths: 16 16
-+   :header-rows: 1
-+
-+   * - Switch Label
-+     - SW2: 1234
-+
-+   * - SD
-+     - 0000
-+
-+   * - EMMC
-+     - 0110
-+
-+   * - UART
-+     - 1010
-+
-+For SW2, the switch state in the "ON" position = 1.
-+
-+Debugging U-Boot
-+----------------
-+
-+See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
-+detailed setup information.
-+
-+.. warning::
-+
-+  **OpenOCD support since**: September 2023 (git master)
-+
-+  Until the next stable release of OpenOCD is available in your development
-+  environment's distribution, it might be necessary to build OpenOCD `from the
-+  source <https://github.com/openocd-org/openocd>`_.
-+
-+Debugging U-Boot on J784S4-EVM and AM69-SK
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_openocd_connect_XDS110
-+    :end-before: .. k3_rst_include_end_openocd_connect_XDS110
-+
-+To start OpenOCD and connect to J784S4-EVM or AM69-SK board, use the
-+following.
-+
-+.. code-block:: bash
-+
-+  openocd -f board/ti_j784s4evm.cfg
-diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index 7dfe39c5fa..93168b9cc2 100644
---- a/doc/board/ti/k3.rst
-+++ b/doc/board/ti/k3.rst
-@@ -40,6 +40,7 @@ K3 Based SoCs
-    ../beagle/j721e_beagleboneai64
-    j721e_evm
-    j721s2_evm
-+   j784s4_evm
- 
- Boot Flow Overview
- ------------------
 -- 
-2.34.1
+Regards,
+Yang Xiwen
 
