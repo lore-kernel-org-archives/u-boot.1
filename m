@@ -4,71 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E145C4725D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 04:24:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3971DC4725D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 05:29:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9020686E42;
-	Fri, 19 Jan 2024 05:24:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id F41F087B5F;
+	Fri, 19 Jan 2024 06:29:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="rZ4C0pv8";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="ocIiPgHg";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="VCFPrlyX";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="ocIiPgHg";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="VCFPrlyX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3CC287B93; Fri, 19 Jan 2024 05:24:31 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id 02F7487B8F; Fri, 19 Jan 2024 06:29:21 +0100 (CET)
+Received: from smtp-out2.suse.de (smtp-out2.suse.de
+ [IPv6:2a07:de40:b251:101:10:150:64:2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6C8B86E42
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 05:24:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 00F50875C5
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 06:29:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id D9208616D4;
- Fri, 19 Jan 2024 04:24:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 6BD50C433F1;
- Fri, 19 Jan 2024 04:24:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705638267;
- bh=1RB1sLtl4+tU/0coa5VstX8lCmyjeGcL7mkNaacnxXo=;
- h=From:Date:Subject:To:Cc:Reply-To:From;
- b=rZ4C0pv8RNsy2ZAjXS9GYGb7LRQ2DqGmOLHMLGIDZ4jUJtB9dhFal9UhvZjgxXvfS
- qFUJDRgTMXLi7dh1Kan8qSSKayRKpEQmk2IjUbfEF1cSKIc7kcHd2azkIBMnXsWCbk
- EivlDGDe+e/0gjbXTfDgXclqoI0qGZh4jLWCPQLA+bVrPP7vJPL60PL3g28kKLSrWD
- T84jBxzegxh+yQMnp+9E0nvU5nKyMNIgs64+p5LBST2E01j+6JJbZ/rBdQFNOvCmHC
- l7Od6hRjWKiMU4jk2P0r0JPm9wC+R90rmpSvoAJmtyChXllSg1QG5kgTtmnzuIuH5y
- 16Stlg0VTxu8Q==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 5060AC4725D;
- Fri, 19 Jan 2024 04:24:27 +0000 (UTC)
-From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
-Date: Fri, 19 Jan 2024 12:24:28 +0800
-Subject: [PATCH] wdt: add HiSilicon watchdog driver support
+ dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=iivanov@suse.de
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 4CE7A1FD0D;
+ Fri, 19 Jan 2024 05:29:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1705642158; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=c52IQJkprNc84m8E1WJa8SBtNgSKZrcCeuvI9v8IwGM=;
+ b=ocIiPgHgBoGQPKy24eS2shkqSz6RgpH0fPoP36zcBkV35mSASZ/9Q/XdYlNRPy75QSXOOg
+ tNh3oBWpsk22qlRRo9ArW9CYxn0rKxmS5fxpMbIpxD+brrAAMJ77d2LAE/OokuuWUa8lOr
+ YvVnvKY3pz6AY+cOfOys6CFQWxDW088=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1705642158;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=c52IQJkprNc84m8E1WJa8SBtNgSKZrcCeuvI9v8IwGM=;
+ b=VCFPrlyXGrcF6kiFS5Myq/Aa9rdK2ilUdTbKK27e/aPmM6gQ9CDnvKIQITyn1z+jcXMnwP
+ buEhBEDtEe7kwrCg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1705642158; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=c52IQJkprNc84m8E1WJa8SBtNgSKZrcCeuvI9v8IwGM=;
+ b=ocIiPgHgBoGQPKy24eS2shkqSz6RgpH0fPoP36zcBkV35mSASZ/9Q/XdYlNRPy75QSXOOg
+ tNh3oBWpsk22qlRRo9ArW9CYxn0rKxmS5fxpMbIpxD+brrAAMJ77d2LAE/OokuuWUa8lOr
+ YvVnvKY3pz6AY+cOfOys6CFQWxDW088=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1705642158;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=c52IQJkprNc84m8E1WJa8SBtNgSKZrcCeuvI9v8IwGM=;
+ b=VCFPrlyXGrcF6kiFS5Myq/Aa9rdK2ilUdTbKK27e/aPmM6gQ9CDnvKIQITyn1z+jcXMnwP
+ buEhBEDtEe7kwrCg==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3135D13777;
+ Fri, 19 Jan 2024 05:29:18 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([10.150.64.162])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id DNGGCa4IqmXEEgAAD6G6ig
+ (envelope-from <iivanov@suse.de>); Fri, 19 Jan 2024 05:29:18 +0000
+Date: Fri, 19 Jan 2024 07:29:17 +0200
+From: "Ivan T. Ivanov" <iivanov@suse.de>
+To: Jens Maus <mail@jens-maus.de>
+Cc: u-boot@lists.denx.de
+Subject: Re: Re: [PATCH v4 0/6] rpi5: initial support
+Message-ID: <zmxxqxlbhdhngu36ft4yrqxtjkmvalvhbgbl2uzsj2jgnq7zje@qtncpq2nss57>
+References: <BD4D4B77-9C54-4FD7-8EEF-A65E674E0747@jens-maus.de>
+ <sfo77vzvmblyv5g5ek6uc6oxrf5n7dcp3vsw2g2lvfnnrlyaft@kc6s7vvspwvz>
+ <4DCC64E0-F0E4-4AF6-8E81-62B156E81554@jens-maus.de>
+ <2303FFA8-E2FA-4AA4-AE67-FF5E904D21DD@suse.de>
+ <A796E025-0F6E-4FF7-BA4D-2F52CD763B4B@jens-maus.de>
+ <9AFD4C3E-E1B7-4EA7-8589-7060A2747732@suse.de>
+ <5C0A3CD4-2591-4266-B9CC-7EC38C6A88C3@jens-maus.de>
+ <454FB8E4-52A8-482D-8671-5650F8C4773C@suse.de>
+ <A26CEBAE-9950-4304-B3A2-1BAB4035437A@jens-maus.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240119-b4-wdt-v1-1-b117901385d7@outlook.com>
-X-B4-Tracking: v=1; b=H4sIAHv5qWUC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIxMDQ0NL3SQT3fKUEt0UU8PUJOPEVDOjZEsloOKCotS0zAqwQdGxtbUAmvW
- lUVgAAAA=
-To: Stefan Roese <sr@denx.de>
-Cc: David Yang <mmyangfl@gmail.com>, u-boot@lists.denx.de, 
- Yang Xiwen <forbidden405@outlook.com>
-X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1705638268; l=6751;
- i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
- bh=J7OZzpBCcAKp4e6kKPvlWBuQmgxpe0gSMju9TlFEDF0=;
- b=PhTcA1Kg2sBu2B4O53aEjYqbqZrIarGLPhkHB8UxzJf3md3JRXkxte7IE5NVtrOrPN1ptvgrA
- dVkppHAeZY/DWugKC4aitajOJf3+DBbkLJIQYBKgce6sdLtDf6Ou6dw
-X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
- pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
-X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
- auth_id=67
-X-Original-From: Yang Xiwen <forbidden405@outlook.com>
+Content-Type: multipart/mixed; boundary="rxj5ydmnonlpxmhi"
+Content-Disposition: inline
+In-Reply-To: <A26CEBAE-9950-4304-B3A2-1BAB4035437A@jens-maus.de>
+Authentication-Results: smtp-out2.suse.de;
+ dkim=pass header.d=suse.de header.s=susede2_rsa header.b=ocIiPgHg;
+ dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=VCFPrlyX
+X-Spamd-Result: default: False [-0.81 / 50.00]; ARC_NA(0.00)[];
+ RCVD_VIA_SMTP_AUTH(0.00)[];
+ R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+ FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[];
+ TO_MATCH_ENVRCPT_ALL(0.00)[];
+ MIME_GOOD(-0.10)[multipart/mixed,text/plain,text/x-patch];
+ HAS_ATTACHMENT(0.00)[]; DWL_DNSWL_LOW(-1.00)[suse.de:dkim];
+ RCVD_COUNT_THREE(0.00)[3];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ DKIM_TRACE(0.00)[suse.de:+]; RCPT_COUNT_TWO(0.00)[2];
+ MX_GOOD(-0.01)[]; FUZZY_BLOCKED(0.00)[rspamd.com];
+ FROM_EQ_ENVFROM(0.00)[]; MIME_TRACE(0.00)[0:+,1:+,2:+];
+ MID_RHS_NOT_FQDN(0.50)[]; RCVD_TLS_ALL(0.00)[];
+ BAYES_HAM(-0.00)[22.76%]
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Rspamd-Queue-Id: 4CE7A1FD0D
+X-Spamd-Bar: /
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,271 +127,61 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: forbidden405@outlook.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Yang Xiwen <forbidden405@outlook.com>
 
-This watchdog core is found on many HiSilicon SoCs. Add support for it.
+--rxj5ydmnonlpxmhi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
+On 01-18 18:18, Jens Maus wrote:
+> 
+> > I am afraid you will have to connect that UART debug cable and share
+> > what is the memory map on your device :-)
+> 
+> No problem.
+
+Thanks, but could you apply attached patch and send me
+the logs when there is HDMI monitor connected to the board
+and one when cable is unplugged.
+
+Regards,
+Ivan
+
+
+
+--rxj5ydmnonlpxmhi
+Content-Type: text/x-patch; charset=us-ascii
+Content-Disposition: attachment;
+	filename="0001-fdtdec-hack-Show-DRAM-size-parameters.patch"
+
+From f9e039d3febbb046fe06f72731e7ba558927aa55 Mon Sep 17 00:00:00 2001
+From: "Ivan T. Ivanov" <iivanov@suse.de>
+Date: Fri, 19 Jan 2024 07:22:39 +0200
+Subject: [PATCH] fdtdec: hack: Show DRAM size parameters
+
 ---
- drivers/watchdog/Kconfig    |  10 +++
- drivers/watchdog/Makefile   |   1 +
- drivers/watchdog/hisi_wdt.c | 196 ++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 207 insertions(+)
+ lib/fdtdec.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-index 569726119c..ddf44f63d2 100644
---- a/drivers/watchdog/Kconfig
-+++ b/drivers/watchdog/Kconfig
-@@ -32,6 +32,7 @@ config WATCHDOG_TIMEOUT_MSECS
- 	default 16000 if ARCH_SUNXI
- 	default 5376 if ULP_WATCHDOG
- 	default 15000 if ARCH_BCM283X
-+	range 500 180000 if ARCH_HISI
- 	default 60000
- 	help
- 	  Watchdog timeout in msec
-@@ -171,6 +172,15 @@ config WDT_GPIO
- 	  doc/device-tree-bindings/watchdog/gpio-wdt.txt for
- 	  information on how to describe the watchdog in device tree.
+diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+index b2c59ab381..84cbd82cdb 100644
+--- a/lib/fdtdec.c
++++ b/lib/fdtdec.c
+@@ -1107,7 +1107,7 @@ int fdtdec_setup_memory_banksize(void)
+ 		gd->bd->bi_dram[bank].size =
+ 			(phys_size_t)(res.end - res.start + 1);
  
-+config WDT_HISI
-+	bool "HiSilicon watchdog timer support"
-+	depends on WDT
-+	depends on CLK && DM_RESET
-+	imply WATCHDOG
-+	help
-+	  Select this to enable HiSilicon watchdog timer.
-+	  Currently supports Hi3798MV200 only.
-+
- config WDT_MAX6370
- 	bool "MAX6370 watchdog timer support"
- 	depends on WDT
-diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-index 5520d3d9ae..3436aa6389 100644
---- a/drivers/watchdog/Makefile
-+++ b/drivers/watchdog/Makefile
-@@ -30,6 +30,7 @@ obj-$(CONFIG_WDT_ORION) += orion_wdt.o
- obj-$(CONFIG_WDT_CDNS) += cdns_wdt.o
- obj-$(CONFIG_WDT_FTWDT010) += ftwdt010_wdt.o
- obj-$(CONFIG_WDT_GPIO) += gpio_wdt.o
-+obj-$(CONFIG_WDT_HISI) += hisi_wdt.o
- obj-$(CONFIG_WDT_MAX6370) += max6370_wdt.o
- obj-$(CONFIG_WDT_MCF) += mcf_wdt.o
- obj-$(CONFIG_WDT_MESON_GXBB) += meson_gxbb_wdt.o
-diff --git a/drivers/watchdog/hisi_wdt.c b/drivers/watchdog/hisi_wdt.c
-new file mode 100644
-index 0000000000..5be9e90865
---- /dev/null
-+++ b/drivers/watchdog/hisi_wdt.c
-@@ -0,0 +1,196 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Watchdog driver for HiSilicon SoCs
-+ *
-+ * Copyright 2024 (r) Yang Xiwen <forbidden405@outlook.com>
-+ */
-+
-+#include <clk.h>
-+#include <errno.h>
-+#include <log.h>
-+#include <reset.h>
-+#include <wdt.h>
-+#include <dm/device_compat.h>
-+#include <dm/device.h>
-+#include <dm/lists.h>
-+#include <dm/read.h>
-+#include <linux/delay.h>
-+#include <linux/math64.h>
-+#include <linux/types.h>
-+
-+/* CONTROL register definitions */
-+#define HISI_WDG_RES_EN	BIT(1)
-+#define HISI_WDG_INT_EN	BIT(0)
-+
-+/* RIS(Raw Interrupt Status) register definitions */
-+#define HISI_WDG_RIS	BIT(0)
-+
-+/* MIS(Masked Interrupt Status) register definitions*/
-+#define HISI_WDG_MIS	BIT(0)
-+
-+/* LOCK register magic */
-+// Write this value to unlock watchdog
-+#define HISI_WDG_LOCK_MAGIC	0x1ACCE551
-+// Read values
-+#define HISI_WDG_LOCK_WA	0x0
-+#define HISI_WDG_LOCK_RO	0x1
-+
-+struct hisi_wdg_reg {
-+	u32 load; // 0x0000
-+	u32 value; // 0x0004
-+	u32 control; // 0x0008
-+	u32 intclr; // 0x000c
-+	u32 ris; // 0x0010
-+	u32 mis; // 0x0014
-+	u32 reserved[762]; // 0x0018
-+	u32 lock; // 0x0c00
-+};
-+
-+struct hisi_wdt_priv {
-+	struct hisi_wdg_reg __iomem *reg;
-+	struct clk *clk;
-+	struct reset_ctl *rst;
-+};
-+
-+static inline void hisi_wdt_unlock(struct hisi_wdg_reg __iomem *reg)
-+{
-+	reg->lock = HISI_WDG_LOCK_MAGIC;
-+}
-+
-+static inline void hisi_wdt_lock(struct hisi_wdg_reg __iomem *reg)
-+{
-+	// Any value other than HISI_WDG_LOCK_MAGIC would lock the registers
-+	reg->lock = 0;
-+}
-+
-+static int hisi_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
-+{
-+	struct hisi_wdt_priv *priv = dev_get_priv(dev);
-+	u64 rate;
-+	u64 val;
-+
-+	rate = clk_get_rate(priv->clk);
-+
-+	/* This may overflow */
-+	val = mul_u64_u32_div(timeout_ms, rate, 1000);
-+	if (val > UINT32_MAX) {
-+		dev_warn(dev, "timeout_ms too large, using maximum.\n");
-+		val = UINT32_MAX;
-+	}
-+
-+	hisi_wdt_unlock(priv->reg);
-+
-+	priv->reg->load = (u32) val;
-+	priv->reg->control |= (HISI_WDG_RES_EN | HISI_WDG_INT_EN);
-+
-+	hisi_wdt_lock(priv->reg);
-+
-+	return 0;
-+}
-+
-+static int hisi_wdt_stop(struct udevice *dev)
-+{
-+	struct hisi_wdt_priv *priv = dev_get_priv(dev);
-+
-+	hisi_wdt_unlock(priv->reg);
-+	// disabling interrupt also disables counting
-+	priv->reg->control &= ~HISI_WDG_INT_EN;
-+
-+	hisi_wdt_lock(priv->reg);
-+
-+	return 0;
-+}
-+
-+static int hisi_wdt_reset(struct udevice *dev)
-+{
-+	struct hisi_wdt_priv *priv = dev_get_priv(dev);
-+
-+	hisi_wdt_unlock(priv->reg);
-+
-+	// any value written to INTCLR would result a counter reload
-+	priv->reg->intclr = 0;
-+
-+	hisi_wdt_lock(priv->reg);
-+
-+	return 0;
-+}
-+
-+static int hisi_wdt_expire_now(struct udevice *dev, ulong flags)
-+{
-+	return hisi_wdt_start(dev, 1, flags);
-+}
-+
-+static const struct wdt_ops hisi_wdt_ops = {
-+	.start		= hisi_wdt_start,
-+	.stop		= hisi_wdt_stop,
-+	.reset		= hisi_wdt_reset,
-+	.expire_now	= hisi_wdt_expire_now,
-+};
-+
-+static int hisi_wdt_probe(struct udevice *dev)
-+{
-+	struct hisi_wdt_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = clk_prepare_enable(priv->clk);
-+	if (ret) {
-+		dev_err(dev, "failed to enable clk: %d\n", ret);
-+		return log_msg_ret("clk", ret);
-+	}
-+
-+	ret = reset_assert(priv->rst);
-+	if (ret) {
-+		dev_err(dev, "failed to assert reset: %d\n", ret);
-+		return log_msg_ret("rst", ret);
-+	}
-+
-+	udelay(10);
-+
-+	ret = reset_deassert(priv->rst);
-+	if (ret) {
-+		dev_err(dev, "failed to deassert reset: %d\n", ret);
-+		return log_msg_ret("rst", ret);
-+	}
-+
-+	return 0;
-+}
-+
-+static int hisi_wdt_of_to_plat(struct udevice *dev)
-+{
-+	struct hisi_wdt_priv *priv = dev_get_priv(dev);
-+
-+	priv->reg = dev_remap_addr(dev);
-+	if (!priv->reg) {
-+		dev_err(dev, "failed to remap\n");
-+		return log_msg_ret("wdt", -EINVAL);
-+	}
-+
-+	priv->clk = devm_clk_get(dev, NULL);
-+	if (IS_ERR(priv->clk)) {
-+		dev_err(dev, "failed to get clk: %ld\n", PTR_ERR(priv->clk));
-+		return log_msg_ret("wdt", PTR_ERR(priv->clk));
-+	}
-+
-+	priv->rst = devm_reset_control_get(dev, NULL);
-+	if (IS_ERR(priv->rst)) {
-+		dev_err(dev, "failed to get rst: %ld\n", PTR_ERR(priv->rst));
-+		return log_msg_ret("wdt", PTR_ERR(priv->rst));
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id hisi_wdt_ids[] = {
-+	{ .compatible = "hisilicon,wdt" },
-+	{ /* sentinel */ }
-+};
-+
-+U_BOOT_DRIVER(hisi_wdt) = {
-+	.name		= "hisilicon_wdt",
-+	.id		= UCLASS_WDT,
-+	.of_match	= hisi_wdt_ids,
-+	.of_to_plat	= hisi_wdt_of_to_plat,
-+	.probe		= hisi_wdt_probe,
-+	.priv_auto	= sizeof(struct hisi_wdt_priv),
-+	.ops		= &hisi_wdt_ops,
-+};
-
----
-base-commit: 842c5b501be7fe23f618788002c5e81fd56ac382
-change-id: 20240119-b4-wdt-d51eb3ae62c9
-
-Best regards,
+-		debug("%s: DRAM Bank #%d: start = 0x%llx, size = 0x%llx\n",
++		printf("%s: DRAM Bank #%d: start = 0x%llx, size = 0x%llx\n",
+ 		      __func__, bank,
+ 		      (unsigned long long)gd->bd->bi_dram[bank].start,
+ 		      (unsigned long long)gd->bd->bi_dram[bank].size);
 -- 
-Yang Xiwen <forbidden405@outlook.com>
+2.35.3
 
+
+--rxj5ydmnonlpxmhi--
