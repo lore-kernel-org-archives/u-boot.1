@@ -4,77 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF63BC47DAF
-	for <u-boot@archiver.kernel.org>; Thu, 18 Jan 2024 23:04:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADD85C47422
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 00:37:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44D8C87BC5;
-	Fri, 19 Jan 2024 00:04:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BE00F87B7D;
+	Fri, 19 Jan 2024 01:37:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AizE58BR";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 1613487BA0; Thu, 18 Jan 2024 23:29:26 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1705624675;
+	bh=Pf0x/WKYknaRALZFkWJxnthapYWJQ2zZef92fYF4ETE=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=mQpGlO0diy1/wF0mHb2vcB0916VOn5Qf5y9PNhVq1nsha7GMrdbkCgcJ0T/7mPBbv
+	 p0sk/UhE06fCwEAWR/ydECAlkEgyIox6vseq+Y9qrr8ZuUV0d5dVr/mGinOp6tWliE
+	 XvWLSJha+8WZLDhge+zThy2Nwae33szn6tdQ7nMjThhsLib5inqMHXdkk2O01B4hq/
+	 Rw0Ouf98x8SCuHJ6clMnBuwql3dhRxaYA+X9IuAnSn5DNF3Pcsz24ZIrwfbaxpNkfn
+	 gCn3wjOrY7AK6fJH/aniZXO0zGlKOapHXJl+FbFEKJQtggYENaVThqewaUjIfri37Y
+	 95DAtjn7Ik9tA==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0946D87613
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 23:29:24 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=moritz.fischer.private@gmail.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5edfcba97e3so1528277b3.2
- for <u-boot@lists.denx.de>; Thu, 18 Jan 2024 14:29:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705616962; x=1706221762; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=v4c0D5qQkjAjkVsid+i7XkKsP5ZAGnL29alHCKrxqgw=;
- b=AizE58BRMkxs9bRh/mNKuiixT0UdIiKbKAPLO7yrWPWbtzZz4sDEXDcFmTqUT89+3X
- P7LbPiVxY1Zdm/698/G1D+xu6/Rrnox+mu/WPfg0mwu3JY0549WG8561XdxZsgGXUukA
- o60XbMlQFcZXqY3po10Vu6ArixwYbD1v3QsVXVE6j61bYm7In5Jj6yHvn0QX/KORJzk9
- S11VrgqXvWfHc0Ym/fG4GeBRDvnBgt/0TiKFnFAYVKPGy8n2agT149AA3VHaJKoGF6NH
- 6d0c3Kq6qbmn4uR8xE9NPW7FoNysCW0eir+oSpj1LvmaGrp9CgN3NRQ58B8W+yh2VreW
- iq2g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705616962; x=1706221762;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=v4c0D5qQkjAjkVsid+i7XkKsP5ZAGnL29alHCKrxqgw=;
- b=SNfnRS6z0vsv+HI1q+5f66WlXPjbEgHQ0tUgif9u5lM4LSfNk1fdpxcvELdxkVdVmU
- k6pjjQc6FlenXprAV9aXhcYIYBMYRfrLnk+tEVEsJy4/VzP7Ap61BnxkCj3tlT1UsHEK
- nIsn3cZlhlW0NBkt/0oykbfKlnUHseTUUQTQZ7fBbzOXLigwZb/fz92qP95CMIyjn7D3
- jY2UiOo4wmtBomFtQ6olDBGrqaxJ1eSZ9R9RI5f+9HhaxA5I102kAbDwJ0MWHDuT0cTp
- +mq4zeuSfEoSvsu8nAYqFyNf5EI8qiANU5rilAg9H3JEE1uj5x63K1uG/NBFcSfXPdFW
- 5IVA==
-X-Gm-Message-State: AOJu0Ywqg2vNSZw4jIrXTypZSJWwcQQOI7r98i+OHiw3FAQ2UwZpttPE
- A+LWkHVulGwyVXLRKE5AcrHQM0bsxdJBlDCdSD3e27cfTzsVvZYu+yNMh6dv2UWIRoj8u6RDPwy
- 5ZDeOsE6UzN1JpNa7RgOvEHM/vSE=
-X-Google-Smtp-Source: AGHT+IHZYT/gNVbz8JuPjIW00bIM9ZvkhxT1SEWC7Mdh/eCKOhc+x+cxOB4ISoDJIXqA2KczNqu+UGFxTw0qcT7uyvA=
-X-Received: by 2002:a0d:e657:0:b0:5ff:860f:21d5 with SMTP id
- p84-20020a0de657000000b005ff860f21d5mr1424629ywe.33.1705616962635; Thu, 18
- Jan 2024 14:29:22 -0800 (PST)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id E79058753C;
+ Fri, 19 Jan 2024 01:37:54 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1705624675;
+ bh=Pf0x/WKYknaRALZFkWJxnthapYWJQ2zZef92fYF4ETE=;
+ h=From:To:Cc:Subject:Date:From;
+ b=qc+RW0wjkBwiaSzCyl+nqGNmrmyNftvs7PBtJ4hxhW0xnxQ1vjsqEc66srmYGUwlC
+ xMwg8PQiJtHVToUpoVtVMWRZQeMZ0NLcqbkvu0OLbIRoqXMgcboOfxUDfqZ+aG+UOs
+ spvQJS87mb+jRF34/ZmVmleTuLqSE1zGvxiGOq4+8yP2sPGJhFuoB9r0OZrrF9/Q0h
+ gC7HmHRCacIx41eu85K0+N/fmNo27rK903gk/MD3dbt+bxVeePUyqczvBstA/UNfbC
+ pr5fpHbacJ0nTAkQ/GcoIdqzj+VnVAqd5Djk+5YD+f6LqoPJSg1AT0/3Dy/G7IHRi4
+ 0jKbyk2ZBc/VA==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@denx.de>,
+ Stefano Babic <sbabic@denx.de>, u-boot@dh-electronics.com
+Subject: [PATCH] ARM: imx: Enable SPL_BOARD_INIT on DH i.MX8M Plus DHCOM
+Date: Fri, 19 Jan 2024 01:37:27 +0100
+Message-ID: <20240119003742.251587-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20240110050448.1441657-1-moritzf@google.com>
- <20240110050448.1441657-2-moritzf@google.com>
-In-Reply-To: <20240110050448.1441657-2-moritzf@google.com>
-From: Moritz Fischer <moritz.fischer.private@gmail.com>
-Date: Thu, 18 Jan 2024 14:29:11 -0800
-Message-ID: <CAJYdmeORBWpwMFKA-C9Ybie20OgJDwUzdo+ZE7eESn7VpV_2PQ@mail.gmail.com>
-Subject: Re: [PATCH v2 RESEND 2/2] nvme: Update nvme_scan_namespace to keep
- trying on busy
-To: Moritz Fischer <moritzf@google.com>
-Cc: bmeng.cn@gmail.com, sjg@chromium.org, wenbin.song@nxp.com, 
- u-boot@lists.denx.de, trini@konsulko.com, patrick@blueri.se
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Fri, 19 Jan 2024 00:04:09 +0100
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,44 +64,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jan 9, 2024 at 9:05=E2=80=AFPM Moritz Fischer <moritzf@google.com> =
-wrote:
->
-> A busy controller shouldn't be game-over for all controllers,
-> so keep trying on hitting -EBUSY.
->
-> This change brings the actual behavior of the routine in line
-> with what the descriptions says.
->
-> Fixes: 982388eaa991 ("nvme: Add NVM Express driver support")
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Moritz Fischer <moritzf@google.com>
-> ---
->  drivers/nvme/nvme.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
-> index ec45f831a3..59a139baa0 100644
-> --- a/drivers/nvme/nvme.c
-> +++ b/drivers/nvme/nvme.c
-> @@ -695,7 +695,9 @@ int nvme_scan_namespace(void)
->                 if (ret) {
->                         log_err("Failed to probe '%s': err=3D%dE\n", dev-=
->name,
->                                 ret);
-> -                       return ret;
-> +                       /* Bail if we ran out of memory, else keep trying=
- */
-> +                       if (ret !=3D -EBUSY)
-> +                               return ret;
->                 }
->         }
->
-> --
-> 2.43.0.472.g3155946c3a-goog
->
+The CONFIG_SPL_BOARD_INIT lets SPL common code call spl_board_init()
+during the SPL start up. On this particular system, spl_board_init()
+is used to reconfigure GIC clock parent to PLL2 500M, which is the
+configuration expected by the Linux kernel. Enable SPL_BOARD_INIT .
 
-Gently ping on this. Is anything wrong with this series or why does it
-keep falling through the cracks?
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Fabio Estevam <festevam@denx.de>
+Cc: Stefano Babic <sbabic@denx.de>
+Cc: u-boot@dh-electronics.com
+---
+ configs/imx8mp_dhcom_pdk2_defconfig | 1 +
+ configs/imx8mp_dhcom_pdk3_defconfig | 1 +
+ 2 files changed, 2 insertions(+)
 
-- Moritz
+diff --git a/configs/imx8mp_dhcom_pdk2_defconfig b/configs/imx8mp_dhcom_pdk2_defconfig
+index dc482abad85..4f907ce00d0 100644
+--- a/configs/imx8mp_dhcom_pdk2_defconfig
++++ b/configs/imx8mp_dhcom_pdk2_defconfig
+@@ -54,6 +54,7 @@ CONFIG_SPL_MAX_SIZE=0x26000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x96fc00
+ CONFIG_SPL_BSS_MAX_SIZE=0x400
++CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_BOOTROM_SUPPORT=y
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+diff --git a/configs/imx8mp_dhcom_pdk3_defconfig b/configs/imx8mp_dhcom_pdk3_defconfig
+index 3442af6f00e..9972e2d96b6 100644
+--- a/configs/imx8mp_dhcom_pdk3_defconfig
++++ b/configs/imx8mp_dhcom_pdk3_defconfig
+@@ -55,6 +55,7 @@ CONFIG_SPL_MAX_SIZE=0x26000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x96fc00
+ CONFIG_SPL_BSS_MAX_SIZE=0x400
++CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_BOOTROM_SUPPORT=y
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-- 
+2.43.0
+
