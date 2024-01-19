@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BDA6C4725D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:10:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 911B9C47DD3
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:10:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7784987D1F;
-	Fri, 19 Jan 2024 17:09:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 66B6187D18;
+	Fri, 19 Jan 2024 17:09:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XBzcTNzQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="A8LAUZnP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11F2987D19; Fri, 19 Jan 2024 17:09:02 +0100 (CET)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id F170887CF4; Fri, 19 Jan 2024 17:09:05 +0100 (CET)
+Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
+ [IPv6:2607:f8b0:4864:20::b29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9995D87D37
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 17:08:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C3C6A87D38
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 17:09:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-5f3da7ba2bfso8507527b3.3
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 08:08:59 -0800 (PST)
+Received: by mail-yb1-xb29.google.com with SMTP id
+ 3f1490d57ef6-dc24f395c84so817985276.1
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 08:09:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705680538; x=1706285338; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1705680542; x=1706285342; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wFzZKR7WFKZUf/uBhrC4Kq77SgoVPnlxXu4coYegchY=;
- b=XBzcTNzQ0E0sYduxtetNSG9v9LbYwY5yyGrbkU1SalPP5o7RFcEV7d7yXXYQoDnFyH
- 3UNwlzMFUgglIB/Ee/3KjoN7x9Ozjl0X/a3MKwpyH/aSf9i3pKT97QCOQBdzajMQ6zcm
- lR9IIEHPyUzTEWMEK2Np22osCEiVwi2ziWKvQ=
+ bh=UWGTH00c/eiuOomdgRNL8/fytzJHzCacU2iKwLzNFYo=;
+ b=A8LAUZnPfFCUVM5agaDeEovzZHAfkb6nQ2sYrAn8qKX4pcLFIQUGHxZrt4/KJnO6Jk
+ 9JkPxbrII2WOMdeQF427SskW0oad49UtavsFrtqGHOBTYfthqbiMv/0cpB90gIb2+UyV
+ jAPoC28O9fapyzjWB6gQEVoWCOKHDtLKUaDX0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705680538; x=1706285338;
+ d=1e100.net; s=20230601; t=1705680542; x=1706285342;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wFzZKR7WFKZUf/uBhrC4Kq77SgoVPnlxXu4coYegchY=;
- b=CUzAWXxZcgQUWSLdSPTJRSDekPNWD+czUn/pMZTmxgUp+Xg/fOD8zXYrw+evUKO+0n
- gOuW0tJf6MP6GAExOg4/tb2lMKTsxdQHp1r5kq9C0Bv1ut85kh8wPB6lQvVsLX1sl7Ge
- H75nlhYHWOsibbPTsI3bt33w/B26Ju6aoQxxTzK4nZ8n4/Chhlx+ASt8r1FZBAQAo3rj
- Ll/KXkd8gnJTNT7ZJl9R0y+9qTP8CNreJS9zEDKNDBrIHtEdXhLRyqTqivIyJ1J/YC/9
- efKaLMU5kwCLIodyRgku55P4qSK/Z8kofJveCxcfk6C6UDh5wW8Z6Mrg3oB/JMi9iO71
- FAcA==
-X-Gm-Message-State: AOJu0YyfckCvUC7ypblLuNg8QQ5ilNh1Tdmusvn7vsh1r+1SvjuMg5rp
- nBK0FBEBbosUvbZPjwz7Ml3qXnAevMyzY2DDU3Mw/L8CIbhqf6dJbrSpaydf9u4=
-X-Google-Smtp-Source: AGHT+IEV642BllhepB0bpFW/7RbD/MqXmAt2Ksa7ydwsJRZMSvRxOcZjHl/RkcWtwxUCqw3TTs309A==
-X-Received: by 2002:a0d:f182:0:b0:5ff:9e41:bd13 with SMTP id
- a124-20020a0df182000000b005ff9e41bd13mr120083ywf.39.1705680538313; 
- Fri, 19 Jan 2024 08:08:58 -0800 (PST)
+ bh=UWGTH00c/eiuOomdgRNL8/fytzJHzCacU2iKwLzNFYo=;
+ b=txY+ChpL28G+d9ikt2OP25ykj8X2q2Vr4jRrybcYR3VpB5Ffdm8hsNWgNwHz9PPO0O
+ 99v2o01pQBZu6kmbviyIJuNtUX0tL+Q14xJg8PuFcyTmntbSwbTRB9nN82qD1hHaYdZ+
+ b2spMnR0BH+wyXS6p+qjnHImgjgtMsaG4ijpuzKc1N/Dc/VKYbdYo/oX5/5xR2e5pqzH
+ tfX4nUcng0emWN20QDX+DlGyaiXGZZ79WOzWTyqSbLNgigTlMOt0PVDZt0trDxCGBCgL
+ amrwJ6uC7UOn9xnRMz9G6SS2ES8wLdncCXtiKsDTxbbrWl7qrfnUKx1oNqmUCELoUCB4
+ Z0gQ==
+X-Gm-Message-State: AOJu0Yxj/ak1QIE+cK/kUidFMO8oj6N3Sttvin01lIIHvKQfNyjvrmlw
+ FrFal8xduWWevKMzI3/BIqdVVRK83xgevBPLNVWPcfV6WZ8IZ4IKR0wmsI6Th4NQ2ryQ/MV49X+
+ +
+X-Google-Smtp-Source: AGHT+IHQICpKff/mJiFU+p8IpwxUlt7sk6I9YabbFYkNiXsK4axswTYzwK0+MqjPYdgpk9/H7b3nHQ==
+X-Received: by 2002:a25:848b:0:b0:dc2:26e5:a76 with SMTP id
+ v11-20020a25848b000000b00dc226e50a76mr96995ybk.47.1705680542493; 
+ Fri, 19 Jan 2024 08:09:02 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
  [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
- bf22-20020a05690c029600b005d0fea7ad01sm7456862ywb.122.2024.01.19.08.08.57
+ 129-20020a250087000000b00dc23a0382c6sm2182869yba.6.2024.01.19.08.09.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Jan 2024 08:08:57 -0800 (PST)
-Date: Fri, 19 Jan 2024 11:08:56 -0500
+ Fri, 19 Jan 2024 08:09:02 -0800 (PST)
+Date: Fri, 19 Jan 2024 11:09:00 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Roger Quadros <rogerq@kernel.org>
-Cc: vigneshr@ti.com, praneeth@ti.com, nm@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH] board: ti: am64: Support TMDS64EVM
-Message-ID: <20240119160856.GT12635@bill-the-cat>
-References: <20240108131650.100519-1-rogerq@kernel.org>
+To: Sekhar Nori <nsekhar@ti.com>
+Cc: Nishanth Menon <nm@ti.com>, "Andrew F. Davis" <afd@ti.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH] arch: mach-k3: Fix incorrect mapping of higher DDR
+ addresses as device memory
+Message-ID: <20240119160900.GU12635@bill-the-cat>
+References: <20240109084551.21155-1-nsekhar@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="gbF2L9tHL7GhAKzp"
+ protocol="application/pgp-signature"; boundary="sOqJuEsR7/KHmqOz"
 Content-Disposition: inline
-In-Reply-To: <20240108131650.100519-1-rogerq@kernel.org>
+In-Reply-To: <20240109084551.21155-1-nsekhar@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,23 +94,34 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---gbF2L9tHL7GhAKzp
+--sOqJuEsR7/KHmqOz
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 08, 2024 at 03:16:50PM +0200, Roger Quadros wrote:
+On Tue, Jan 09, 2024 at 02:15:51PM +0530, Sekhar Nori wrote:
 
-> The TMDS64EVM [1] ships with AM64X SR2.0 HS-FS chip
-> and a slightly different board name in the board information
-> EEPROM header. Support this board.
+> Entry for physical address 0x500000000 in memory map table for MMU
+> configuration is spilling over and inadvertently making DDR available at
+> higher address (above 4GB address space) get mapped as device memory
+> (nGnRnE).
 >=20
-> [1] https://www.ti.com/tool/TMDS64EVM
+> Fix this by adjusting entry size. Tested on AM62A SK. Before this patch:
 >=20
-> Gets rid of below message at boot
-> "Unidentified board claims AM64-EVM in eeprom header"
+> =3D> time crc32 0x881000000 0x20000000
+> crc32 for 881000000 ... 8a0ffffff =3D=3D> 7f34d7ca
 >=20
-> Signed-off-by: Roger Quadros <rogerq@kernel.org>
+> time: 1 minutes, 14.716 seconds
+>=20
+> After patch:
+>=20
+> =3D> time crc32 0x881000000 0x20000000
+> crc32 for 881000000 ... 8a0ffffff =3D=3D> 7f34d7ca
+>=20
+> time: 2.710 seconds
+>=20
+> Acked-by: Andrew Davis <afd@ti.com>
+> Signed-off-by: Sekhar Nori <nsekhar@ti.com>
 > Reviewed-by: Nishanth Menon <nm@ti.com>
 
 Applied to u-boot/master, thanks!
@@ -115,22 +129,22 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---gbF2L9tHL7GhAKzp
+--sOqJuEsR7/KHmqOz
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWqnpgACgkQFHw5/5Y0
-tyxBgAv9HczIa9y3TqcbHWg+taofk6Ej9OipqnAS4IzJa6yQjHB1hDgT5254V4DO
-rvrhtWOBDjfH2eJ+Gz1eU8l58AhruhBtvweLAWRh7hRkA+0Y58hf+LwR2JGgqWTU
-WXuF7Mpfzx8BIVVrpEurAjtL01KnDxAcZTgCdEDcgSmEwSjdC6a8TJ0mzawRd17V
-9Pmpo0Z0CDV34Fk15wzGKvHY/wifkOF0gLCB4wmRxRW3QsZBhOp5+OieMrP2X/fO
-Wc6wjVGxbCYiPqLaBjy7XtNwZ/iNSnBkN6QtyHzP+9zacKRFOjUBq7IhXRxUJxse
-JL2cZI6bio8bvKapNeDnuySqg2+n9S5Wuz+jUsuFS2FH6i1NO+iUHaiXtXCGLR7Y
-9DePIVdi1CoNFjJDuJZOxMqiDUJ4daZCtxpTDnMXxyRVrZkgD3wON1LIqC3Qw884
-gMcI/uWchPU2oN/8SueL/2BqfPXHy5KDG124cbMOV+POjvrXeiN81v49Yku1xzEY
-/g22hvgd
-=Ltfi
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWqnpwACgkQFHw5/5Y0
+tywndwv/YzbbPlxzrwl8ZNPFd0DN3GI2XZSAwA7b77O286dFs38ityNt5ZwdmaJQ
+iLSEbj3MMZhw/P5hzMWyj9NYKFL6QzSElqkXm15AXr6TPTR7HboC3KB9qeRIKnIg
+EglopCwV/Ly3TIjcyrC6EyFm7tLdJOxuI3/IZ9E7+hnwXrGWQk5r4y6Smigd9pLM
+BJkUPSIbIJOnlcBoMEhsdjihD+fR04ywBjOmX1jOcjnG2Bw9Zcv4RpLl7RhRQ5+T
+uR/1xoEuqNK4sjT9B7VbflRnzktk9FDuF9Guk2+JJjgmU6iF7UJP/iNBg8Vmhu1a
+Ts5yDwIb4Z3YwECsBk/dC1IXUqjom6MkfDF0sN7nEpv5/y+nqgY6AfB1N3o3aI5b
+z1anSqfKQMsMpJwLX2fW+EoMxLNVtoTYU7NaQm5rT4OJBqiC4NwbUSu0KycSAdgf
+5XQxhNWXpCsLT3g9RdXmGqRHNWD5IoyjGPA1bIpcKEcJWSa8wAQk+3M4PyvjHzcF
+1nHSRH5c
+=DF7i
 -----END PGP SIGNATURE-----
 
---gbF2L9tHL7GhAKzp--
+--sOqJuEsR7/KHmqOz--
