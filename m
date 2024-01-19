@@ -4,50 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59795C47DD3
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:08:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B93FFC47DD9
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:08:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3ACAC87D0B;
-	Fri, 19 Jan 2024 17:08:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A793587D13;
+	Fri, 19 Jan 2024 17:08:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1705680508;
-	bh=GlZLFmtrYlQfQyk0PTT0Gv8uYjg7c0klMLMUSNtm/j0=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=FcDoL/88h6T6e7iLReDEFam1jhBAOr0SQ7f00471VfgOfqurBhLsGnTVvWMxgQG8j
-	 pQ3n6xSiws7nJcJUvSmeMtgJxHpDTaW0GNzyUdVHrFRR2CdYn3LR6Mnl+Ua6BIxPww
-	 /wW2iXcEBxp2VtTqn5j2TWFstTSDe3zUBZg7sX8MtvM0h/0p1rocB+kipBYQ70DkFC
-	 X9qRvNxUMdKi+wnu78v9mqQtf53vsmm82lUb5sY5EFzgmRfJNlDcagxYj5/kmVOkxK
-	 DhT/tW1+yV1ZMBACrhIriYL4gbk0C4NCpQOtwURNim7idXsN7mNEX4CalHWO4SXpuy
-	 kjaoT89RPwexw==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JocHQ9cb";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 3F0D387CB6; Fri, 19 Jan 2024 17:08:28 +0100 (CET)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 952B987CF0;
- Fri, 19 Jan 2024 17:08:24 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1705680504;
- bh=GlZLFmtrYlQfQyk0PTT0Gv8uYjg7c0klMLMUSNtm/j0=;
- h=From:To:Cc:Subject:Date:From;
- b=OW30y3OcLBoaKcXRxh/xGVIngnAi7HN/kLg8gX/vdIbaAn55866sy1NBHQHOdW85h
- dy+oiX0cK1cmBaT8hoDoUYE0FqQW3BlwR/8LdAuTAW3gdaMgxwHtE/9SKjji7Vb5sN
- AG23MKMLAvt5tN8nUzEIjlxhnDX/c9QMYxy1MhQwVIUrryMiXSGnfybk4XkmVijBQG
- A/M4/thpek7En7rIyrEyY4nfaXnRabsdUDULMb/ebFvgYFgp+YmlBHONIKRJlx1wnl
- nNMPOBnFYQBOMSab7BbJM0Ly8+l+s7A00uVMwIc9DRaLKupUmlaOXXfvXvk1Ws4rC4
- Jy/u6eCv/w2lQ==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@denx.de>,
- Stefano Babic <sbabic@denx.de>
-Subject: [PATCH v2] ARM: imx: Enable SPL_BOARD_INIT on DH i.MX8M Plus DHCOM
-Date: Fri, 19 Jan 2024 17:07:54 +0100
-Message-ID: <20240119160814.11387-1-marex@denx.de>
-X-Mailer: git-send-email 2.43.0
+ by phobos.denx.de (Postfix) with ESMTPS id 2D40787CB6
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 17:08:26 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-5ff88cbbcceso8637317b3.2
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 08:08:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1705680505; x=1706285305; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TBiD+TtELk84eN/ouaWLI/jcS9vEwni+p2hKVCdkEDk=;
+ b=JocHQ9cbu1RswWQtW8rZsMNTq0Y6JnY0e92hpfA5GzzFR8K1H0eabvmsd+2sbv6hZX
+ D10p6/weiySS/yZkx90Gzl03uDP6YjFcnfPrs9hlyMiJvzl2QWs8PiInW8Q9R591YKAh
+ qTNB3FFvRyiwWRnQFzh5fZ/9JGrcbAaIQTkjI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705680505; x=1706285305;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TBiD+TtELk84eN/ouaWLI/jcS9vEwni+p2hKVCdkEDk=;
+ b=Ponc2EyV60+Dpjj8kPdqTO6GgwqEQh0MzsbL99HdhVIJ2wbvcnxtLyoSTlPwkqd5OM
+ X7yZCbEbyGUqaZMU31QQRu4k+Z231ENeIMlqO6KVInNugnV+y5hh1msWDuKqiKd7+MDD
+ HAqm/SUWxdnvnyRjAIVHyvWmPZIRwePC8/ezsed47mjlBFtuTOGSUvU6VbxP7oVLJC16
+ DagofeH1tOZ5mX7RPRpom8mMU1UDN5WGJ587EtMfROxHWqKM3nAC0jJ1b1rAg1u6WAQk
+ kOdGkxrHeuD8vFUe+fWx3sASsLLKoH6qzUNDw4/1Akvs0WMAO9Nzkh16qkzWOnNoL2lk
+ pdWw==
+X-Gm-Message-State: AOJu0Yw7axpowNuwHJNZvMTbGYa/JBoFh1g1pmuwNzfp/T5WLaDNKFSh
+ /vox5k/DZISW/OfI51v6yO5E4w6Y13EsmNcNN8oA0HM5seEZHinMmdw6QhwIxL0=
+X-Google-Smtp-Source: AGHT+IFnnRk3Vosd5QWXXw9v5OKk412P6O4weXEJzvIwkkPPFzErpBYVIh+KFFkuEwvXMp7IpSC9Rg==
+X-Received: by 2002:a81:a20b:0:b0:5f6:e8c8:9b6c with SMTP id
+ w11-20020a81a20b000000b005f6e8c89b6cmr123454ywg.46.1705680504991; 
+ Fri, 19 Jan 2024 08:08:24 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1002.res6.spectrum.com.
+ [2603:6081:7b00:3119::1002]) by smtp.gmail.com with ESMTPSA id
+ gq8-20020a05690c444800b005ff992b46cesm716403ywb.36.2024.01.19.08.08.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 19 Jan 2024 08:08:24 -0800 (PST)
+Date: Fri, 19 Jan 2024 11:08:22 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [resend PATCH] bootdev: avoid infinite probe loop
+Message-ID: <20240119160822.GL12635@bill-the-cat>
+References: <20240104160346.285881-1-caleb.connolly@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="bZwgcxBQ1CDavKPF"
+Content-Disposition: inline
+In-Reply-To: <20240104160346.285881-1-caleb.connolly@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,51 +90,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The CONFIG_SPL_BOARD_INIT lets SPL common code call spl_board_init()
-during the SPL start up. On this particular system, spl_board_init()
-is used to reconfigure GIC clock parent to PLL2 500M, which is the
-configuration expected by the Linux kernel. Enable SPL_BOARD_INIT .
 
-Set GIC clock to 500 MHz for OD VDD_SOC. Kernel driver does not
-allow to change it. Should set the clock after PMIC setting done.
-Default is 400 MHz (system_pll1_800m with div = 2) set by ROM for
-ND VDD_SOC.
+--bZwgcxBQ1CDavKPF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Fabio Estevam <festevam@denx.de>
-Cc: Stefano Babic <sbabic@denx.de>
----
-V2: Duplicate code comment into commit message
----
- configs/imx8mp_dhcom_pdk2_defconfig | 1 +
- configs/imx8mp_dhcom_pdk3_defconfig | 1 +
- 2 files changed, 2 insertions(+)
+On Thu, Jan 04, 2024 at 04:03:35PM +0000, Caleb Connolly wrote:
 
-diff --git a/configs/imx8mp_dhcom_pdk2_defconfig b/configs/imx8mp_dhcom_pdk2_defconfig
-index dc482abad85..4f907ce00d0 100644
---- a/configs/imx8mp_dhcom_pdk2_defconfig
-+++ b/configs/imx8mp_dhcom_pdk2_defconfig
-@@ -54,6 +54,7 @@ CONFIG_SPL_MAX_SIZE=0x26000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x96fc00
- CONFIG_SPL_BSS_MAX_SIZE=0x400
-+CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_BOOTROM_SUPPORT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-diff --git a/configs/imx8mp_dhcom_pdk3_defconfig b/configs/imx8mp_dhcom_pdk3_defconfig
-index 3442af6f00e..9972e2d96b6 100644
---- a/configs/imx8mp_dhcom_pdk3_defconfig
-+++ b/configs/imx8mp_dhcom_pdk3_defconfig
-@@ -55,6 +55,7 @@ CONFIG_SPL_MAX_SIZE=0x26000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x96fc00
- CONFIG_SPL_BSS_MAX_SIZE=0x400
-+CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_BOOTROM_SUPPORT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
--- 
-2.43.0
+> Sometimes, when only one bootdev is available, and it fails to probe, we
+> end up in an infinite loop calling probe() on the same device over and
+> over. With only debug level log output.
+>=20
+> Break the loop if we fail to probe the same device twice in a row, and
+> promote the probe failure message to log_warning().
+>=20
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
 
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--bZwgcxBQ1CDavKPF
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWqnnYACgkQFHw5/5Y0
+tywVkAv/RXz6IGaep7lkL2HhghSXG1ykNO42fp0nf3RM5MguwsLsNYwrtd1t1dvQ
+2RNJwK+pKh8rKfddaPPHhrT4N+zyR9LV9K+SJ9zF9wKyYDVStmSh9tLcMwDfkUqO
+5sXYIJIL3d1LnjbWNbIMP4a0p52CXpwjgg24JYrlU6B7ZqIsME/+2n6q0FcKTU8+
+mcqju0Wol3XxOCa+4s6tehIj7+riEJ6T+FyvC86Zc5p5AE1+JATaIsQH0ocnIflD
+Q2olN6emNLgHxUtDz1iFv97eo9OliZXZLI18ZlIPspG+yJGRMjMXlxbsSASrtOeg
+Oaif5EEy3Wm6sajR+vVgGi83+AhnF4pyhXWibV9kcRoH32Jb7lCJUPddLivEW2ir
+1mXQsxoiZO7KX+8dOv4XoDkPwWXdCLUqfOgwKgZsRpos6cEkvClPQT5Hd9hMApaJ
+vr1vxARPfBbc2mFE0IBx9zPy5cn71rgeam93lfZFo6nSnMDTFFyqwXssWBtNTjV5
+/5v4nMrl
+=tgCv
+-----END PGP SIGNATURE-----
+
+--bZwgcxBQ1CDavKPF--
