@@ -4,65 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00EDEC4725D
-	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:53:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E4B0C4725D
+	for <u-boot@archiver.kernel.org>; Fri, 19 Jan 2024 16:59:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0933087BB5;
-	Fri, 19 Jan 2024 17:53:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=jens-maus.de
+	by phobos.denx.de (Postfix) with ESMTP id 87C0F87D5C;
+	Fri, 19 Jan 2024 17:59:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=jens-maus.de header.i=@jens-maus.de header.b="A2KKBF8L";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ksm+lK5W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86B0687B98; Fri, 19 Jan 2024 17:53:16 +0100 (CET)
-Received: from mail.light-speed.de (mail.light-speed.de
- [IPv6:2a01:238:43f2:8900:dd04:e3a0:ee11:a73d])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BF5687A2A
- for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 17:53:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=jens-maus.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mail@jens-maus.de
-Received: from smtpclient.apple (unknown
- [IPv6:2a02:810a:8280:47aa:e1ca:9c29:360a:5e29])
+ id 301A187B9D; Fri, 19 Jan 2024 17:59:13 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.light-speed.de (Postfix) with ESMTPSA id D6AAE3D48651;
- Fri, 19 Jan 2024 17:53:13 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jens-maus.de;
- s=mail; t=1705683194;
- bh=i4g8OPDUjFWMC7jE0H2y1bbKoet56CSqmdfL7gI78TI=;
- h=Subject:From:In-Reply-To:Date:Cc:References:To;
- b=A2KKBF8LdqbSxOmN4+XwJB97S8QVbYwURN2jDJBcuFd0EOPq2lb4Pkd+s/8Q7YZBy
- 71/MlbDBLNUDu49yjAutueVB2/F10rsokWD4D02xgvJ4VEfnuH5qQleAymI0au/fo/
- 6OPRJ73fg/A7sBUEw1e9S2n3xy14RMHsK7v5/d1M=
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.300.61.1.2\))
-Subject: Re: [PATCH v4 0/6] rpi5: initial support
-From: Jens Maus <mail@jens-maus.de>
-In-Reply-To: <dvpwizpui6a52dfmy57ghv4zmplvgqvow6oec7x5opwzh63zzl@jehyglofr6yh>
-Date: Fri, 19 Jan 2024 17:53:03 +0100
-Cc: Stefan Wahren <wahrenst@gmx.net>,
- u-boot@lists.denx.de
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <489FBAE5-501A-49F6-894D-58BE5C5429CC@jens-maus.de>
-References: <03bbe9ad-7cc6-491d-8bd9-631f1cf04f39@gmx.net>
- <418F8AAE-136A-44A0-80C3-D01FFE00EC2E@jens-maus.de>
- <sjmi6dftbgx56isfyjtaryehzq2iollwxm2etlspiygehh3n6v@k4ws56nsbgfn>
- <6C9E5E0C-9C27-45A4-886F-8B8C641EF7A3@jens-maus.de>
- <ejituxf7ggiu2ciswrwoeqqjytb7mj2vn6gkxllywtnlm4aefi@br4zq7rfytlo>
- <3FB75D28-9BF9-4518-8BF1-519C884516F7@jens-maus.de>
- <fa7j66z5r7pul6zp5ljcntrb7xbazqxesz6wysrslrpxxhpafc@krztduo6pjm6>
- <25AB43C7-829F-4F62-AC8E-3284B22ACB03@jens-maus.de>
- <E7BFDAEE-00A9-463A-AF73-75101AFF2BC6@suse.de>
- <FB66DFF3-03B0-4DA5-8916-AB80CA6C6EB5@jens-maus.de>
- <dvpwizpui6a52dfmy57ghv4zmplvgqvow6oec7x5opwzh63zzl@jehyglofr6yh>
-To: "Ivan T. Ivanov" <iivanov@suse.de>
-X-Mailer: Apple Mail (2.3774.300.61.1.2)
+ by phobos.denx.de (Postfix) with ESMTPS id 120DC87D60
+ for <u-boot@lists.denx.de>; Fri, 19 Jan 2024 17:59:11 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=17487c629f=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 40JDZkNQ021854; Fri, 19 Jan 2024 17:59:09 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:from:subject:to:cc:content-type
+ :content-transfer-encoding; s=selector1; bh=BxwPm2NhZVvvIgWD0K4F
+ 7/ogcL9Zf4oRh8vWJWAIWus=; b=ksm+lK5WrIotd/PLYXhcCHkt+zDU3uemO7xe
+ jhsauYPQQLz3s4H/rbITFU9x7gpgdpge8UJvyA0NRpNQYPn49O15epEsuy5tlf0o
+ VAFYVuMke2iK+MNl34WnoQvyUkPc3CSvWUlPCspTwgZRdtskO9KpA4+sNJsnlq3Z
+ dPO9Z+i9Myira1GTsziuieMexRS9bWMvHYuxTWlk8jQrYVjL/g2jNV0MQSNHLuIe
+ qBLNd4RTunP5f82CVFAh9lpt/tJ4Bdl/ts/uo1TysFi3Gb13T/9ecpPi9Tkbs/nY
+ 2Ky+25HFFcrJVUx7VxJvIC5ZHK6NnhqK2iyEqLUAIs/EmRKmhQ==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vkma6eu6w-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 19 Jan 2024 17:59:09 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 790D2100081;
+ Fri, 19 Jan 2024 17:59:08 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6D740260275;
+ Fri, 19 Jan 2024 17:59:08 +0100 (CET)
+Received: from [10.252.4.250] (10.252.4.250) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Jan
+ 2024 17:59:08 +0100
+Message-ID: <fc4c4d9c-187a-4e67-9be4-9e7ab9f414c3@foss.st.com>
+Date: Fri, 19 Jan 2024 17:59:07 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Subject: [PULL] Pull request for u-boot master / v2024.04 =
+ u-boot-stm32-20240119
+To: Tom Rini <trini@konsulko.com>
+CC: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
+ <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, Yann Gautier <yann.gautier@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.252.4.250]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-01-19_10,2024-01-19_02,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,100 +88,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom
 
-> Am 19.01.2024 um 17:29 schrieb Ivan T. Ivanov <iivanov@suse.de>:
->=20
->> So you say with your own u-boot.bin you see serial U-Boot output =
-after that =E2=80=9ENOTICE: BL31: =E2=80=A6=E2=80=9C lines? On that =
-special UART port on the rpi5 or on the UART on the GPIO header?
->>=20
->=20
-> Yes :-) See attached log file.
+Please pull the STM32 related patches for u-boot/master, v2024.04: u-boot-stm32-20240119
 
-Really strange that in your case U-Boot seems to come up nicely and =
-outputs something on the debug UART. Here definitely not. And the only =
-difference in the rpi boot loader log outputs I could spot between yours =
-and mine is:
+CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/19379
 
-=E2=80=94 cut here =E2=80=94
---- uboot2.log	2024-01-19 17:36:18.099674743 +0100
-+++ uboot1.log	2024-01-19 17:33:06.794258533 +0100
-@@ -1,13 +1,13 @@
--RPi: BOOTSYS release VERSION:30cc5f37 DATE: 2024/01/05 TIME: 15:57:40
--BOOTMODE: 0x06 partition 0 build-ts BUILD_TIMESTAMP=3D1704470260 serial =
-9127ae99 boardrev d04170 stc 930201
-+RPi: BOOTSYS release VERSION:30de0ba5 DATE: 2023/10/30 TIME: 16:45:10
-+BOOTMODE: 0x06 partition 0 build-ts BUILD_TIMESTAMP=3D1698684310 serial =
-3c533ede boardrev c04170 stc 815886
- AON_RESET: 00000003 PM_RSTS 00001000
- RP1_BOOT chip ID: 0x20001927
- PM_RSTS: 0x00001000
- part 00000000 reset_info 00000000
- PMIC reset-event 00000000 rtc 00000000 alarm 00000000 enabled 0
- uSD voltage 3.3V
--Initialising SDRAM 'Micron' 32Gb x2 total-size: 64 Gbit 4267
--DDR 4267 1 0 64 152
-+Initialising SDRAM 'Samsung' 16Gb x2 total-size: 32 Gbit 4267
-+DDR 4267 1 0 32 152
- RP1_BOOT chip ID: 0x20001927
-=20
- RP1_BOOT chip ID: 0x20001927
-@@ -17,18 +17,17 @@
- PCIe scan 00001de4:00000001
- RP1_CHIP_INFO 20001927
-=20
--RPi: BOOTLOADER release VERSION:30cc5f37 DATE: 2024/01/05 TIME: =
-15:57:40
--BOOTMODE: 0x06 partition 0 build-ts BUILD_TIMESTAMP=3D1704470260 serial =
-9127ae99 boardrev d04170 stc 3949421
-+RPi: BOOTLOADER release VERSION:30de0ba5 DATE: 2023/10/30 TIME: =
-16:45:10
-+BOOTMODE: 0x06 partition 0 build-ts BUILD_TIMESTAMP=3D1698684310 serial =
-3c533ede boardrev c04170 stc 3726990
- AON_RESET: 00000003 PM_RSTS 00001000
--M.2 PCIe HAT not detected.
- usb_pd_init status 1
- Boot mode: SD (01) order f4
- SD HOST: 200000000 CTL0: 0x00800000 BUS: 400000 Hz actual: 390625 HZ =
-div: 512 (256) status: 0x1fff0000 delay: 276
- SD HOST: 200000000 CTL0: 0x00800f00 BUS: 400000 Hz actual: 390625 HZ =
-div: 512 (256) status: 0x1fff0000 delay: 276
--OCR c0ff8000 [310]
--CID: 00035344534536344780519441cb0123
--CSD: 400e00325b590001dbd37f800a404000
--SD: bus-width: 4 spec: 2 SCR: 0x02458443 0x00000000
-+OCR c0ff8000 [118]
-+CID: 00035344534e33324780fa570bda0169
-+CSD: 400e00325b590000edb07f800a400000
-+SD: bus-width: 4 spec: 2 SCR: 0x02358483 0x00000000
- SD HOST: 200000000 CTL0: 0x00800f04 BUS: 50000000 Hz actual: 50000000 =
-HZ div: 4 (2) status: 0x1fff0000 delay: 2
- MBR: 0x00002000,  131072 type: 0x0c
- MBR: 0x00022000, 1024000 type: 0x82
-@@ -39,7 +38,6 @@
- rsc 4 fat-sectors 128 root dir cluster 1 sectors 32 entries 512
- FAT16 clusters 32695
- [sdcard] autoboot.txt not found
--Select partition rsts 0 C(boot_partition) 0 EEPROM config 0 result 0
- Trying partition: 0
- type: 16 lba: 8192 'mkfs.fat' '  V       ^ ' clusters 32695 (4)
- rsc 4 fat-sectors 128 root dir cluster 1 sectors 32 entries 512
-@@ -52,6 +50,7 @@
- Read bcm2712-rpi-5-b.dtb bytes    79357 hnd 0x139f
- dt-match: compatible: raspberrypi,5-model-b match: brcm,bcm2712
- dt-match: compatible: brcm,bcm2712 match: brcm,bcm2712
-+PM_RSTS 00001000
- Selecting USB low current limit
-=20
- NOTICE:  BL31: v2.6(release):v2.6-239-g2a9ede0bd
-=E2=80=94 cut here =E2=80=94
+The following changes since commit f7cca7ccc5117eaafcc2bde91ad1bed6fee7cfc3:
 
-So lets see if after you updated to a more recent rpi eeprom U-boot is =
-still able to boot=E2=80=A6
+  Revert "test: hush: dollar: fix bugous behavior" (2024-01-18 11:38:25 -0500)
 
-regards,
-jens
---=20
-Jens Maus, Dresden/Germany
-http://jens-maus.de/
+are available in the Git repository at:
 
+  https://source.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20240119
+
+for you to fetch changes up to 8a4d098bb0859b3a26c9e1100ed08d7bd1f8ed30:
+
+  stm32mp2: Fix CONFIG_STM32MP25X flag usage (2024-01-19 15:49:20 +0100)
+
+----------------------------------------------------------------
+Add CMDLINE dependecy for CMD_STM32KEY
+
+STM32MP1:
+---------
+Set stdio to serial on DH STM32MP15xx DHSOM
+Fix reset for usart1 in scmi configuration
+
+STM32MP2:
+---------
+Add BSEC and OTP support for STM32MP25
+Fix CONFIG_STM32MP25X flag usage
+
+----------------------------------------------------------------
+Marek Vasut (1):
+      ARM: stm32: Set stdio to serial on DH STM32MP15xx DHSOM
+
+Patrice Chotard (3):
+      ARM: dts: stm32: Fix reset for usart1 in scmi configuration
+      stm32mp: add setup_serial_number for stm32mp25
+      stm32mp2: Fix CONFIG_STM32MP25X flag usage
+
+Patrick Delaunay (13):
+      arm64: dts: st: add bsec support to stm32mp25
+      stm32mp: bsec: add driver data
+      stm32mp: bsec: add support of stm32mp25
+      configs: stm32mp25: add support of fuse command
+      stm32mp: add soc.c file
+      smt32mp: add setup_mac_address for stm32mp25
+      stm32mp: stm32prog: add support of stm32mp25
+      stm32mp: activate the command stboard for stm32mp25 boards
+      board: st: stm32mp2: add checkboard
+      board: st: stm32mp2: display the board identification
+      arm: Rename STM32MP13x
+      arm: Rename STM32MP15x
+      stm32mp: Add dependencies on CMDLINE for command stm32key
+
+Yann Gautier (1):
+      arm: stm32mp: add Rev.B support for STM32MP25
+
+ arch/arm/dts/Makefile                           |   4 ++--
+ arch/arm/dts/stm32mp15-scmi-u-boot.dtsi         |   2 +-
+ arch/arm/dts/stm32mp15-u-boot.dtsi              |   2 +-
+ arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi        |   4 ++--
+ arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi        |   4 ++--
+ arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi        |   4 ++--
+ arch/arm/dts/stm32mp25-u-boot.dtsi              |   4 ++++
+ arch/arm/dts/stm32mp251.dtsi                    |  16 ++++++++++++++++
+ arch/arm/mach-stm32mp/Kconfig                   |   9 +++++----
+ arch/arm/mach-stm32mp/Kconfig.13x               |   4 ++--
+ arch/arm/mach-stm32mp/Kconfig.15x               |   6 +++---
+ arch/arm/mach-stm32mp/Makefile                  |   5 +++--
+ arch/arm/mach-stm32mp/bsec.c                    |  45 +++++++++++++++++++++++++++++++++++++--------
+ arch/arm/mach-stm32mp/cmd_stm32key.c            |  20 ++++++++++----------
+ arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h |  12 ++++++++++--
+ arch/arm/mach-stm32mp/include/mach/stm32.h      |  24 +++++++++++++-----------
+ arch/arm/mach-stm32mp/include/mach/sys_proto.h  |   1 +
+ arch/arm/mach-stm32mp/soc.c                     | 118 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/mach-stm32mp/stm32mp1/Makefile         |   4 ++--
+ arch/arm/mach-stm32mp/stm32mp1/cpu.c            |  96 +-----------------------------------------------------------------------------------------------
+ arch/arm/mach-stm32mp/stm32mp1/fdt.c            |  10 +++++-----
+ arch/arm/mach-stm32mp/stm32mp2/cpu.c            |  14 +++-----------
+ arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c     |   3 +++
+ board/st/common/Kconfig                         |   2 +-
+ board/st/common/cmd_stboard.c                   |   2 ++
+ board/st/stm32mp1/Kconfig                       |   4 ++--
+ board/st/stm32mp1/stm32mp1.c                    |   6 +++---
+ board/st/stm32mp2/stm32mp2.c                    |  37 +++++++++++++++++++++++++++++++++++++
+ configs/stm32mp13_defconfig                     |   4 ++--
+ configs/stm32mp15_basic_defconfig               |   2 +-
+ configs/stm32mp15_defconfig                     |   2 +-
+ configs/stm32mp15_trusted_defconfig             |   4 ++--
+ configs/stm32mp25_defconfig                     |   1 +
+ drivers/clk/stm32/Kconfig                       |   4 ++--
+ include/configs/stm32mp15_dh_dhsom.h            |  11 +++++++----
+ 35 files changed, 307 insertions(+), 183 deletions(-)
+ create mode 100644 arch/arm/mach-stm32mp/soc.c
