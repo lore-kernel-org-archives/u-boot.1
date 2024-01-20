@@ -4,87 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 199D6C47258
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jan 2024 10:50:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFE7AC47258
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jan 2024 11:37:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D507E879CC;
-	Sat, 20 Jan 2024 11:50:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.net
+	by phobos.denx.de (Postfix) with ESMTP id B81EA87D95;
+	Sat, 20 Jan 2024 12:36:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.net header.i=wahrenst@gmx.net header.b="ZI887BQo";
+	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="SgmBYSJ+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB1F787D97; Sat, 20 Jan 2024 11:50:13 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 269A6879CB
- for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 11:50:10 +0100 (CET)
+ id CD26487DC8; Sat, 20 Jan 2024 12:36:56 +0100 (CET)
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.5])
+ by phobos.denx.de (Postfix) with ESMTP id EF27F87D90
+ for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 12:36:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wahrenst@gmx.net
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
- s=s31663417; t=1705747810; x=1706352610; i=wahrenst@gmx.net;
- bh=gW7f/ZZuMF8sCm5WJ09TvgLMKCuUFtG5p2QAn+rlXgY=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=ZI887BQo6uEXKWbfD7WlgKiMbCxQU3DQbbIhvQJG77rz0jvAi9igo6+jIR/Byi3Q
- z69BW2atkd/p6jkCRoKtOJ8xh1+qAdQvbeBYi9ajojxfaqwSOZ8iW7dLGw18VoX4U
- bTx+O1MGPspog85qkgD53m3oTUzU7zY/jq0z/aaai0Wc6JImDXBI93YH5T3U6Y5Br
- oZAWqye8DX0zzQS9eb52C3Hjaip0guzVhj6FtxoKGOHDU+3pa2zSEHtaPxF3b4i76
- gE5tooyxETwNWHBse8fD7mLi8f/VZj3dLwz30cN/MVaxVDKB6OnEZQKGK3l+v6D0C
- tVw9BkX2mWglyPGRNA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.1.167] ([37.4.248.43]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MiJZO-1qwlzb3yNi-00fPza; Sat, 20
- Jan 2024 11:50:10 +0100
-Message-ID: <ebffa598-6945-4a03-abe4-fe519df5fbfd@gmx.net>
-Date: Sat, 20 Jan 2024 11:50:09 +0100
+ dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=andyshrk@163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=GGTKj
+ BAQ3HjMsRUjyaABjeGOQMnoFHhWTlpCq69Cgm8=; b=SgmBYSJ+BTvbmenFAM/dc
+ 5zaaYOjFJkFnpn8fFagqdk1HYESI0U5Qmdalfn8EChzU6j5gbzqYGfngrHdvd/2Y
+ ZrnsTtr5YXix53qaIfyJTY+tE1x1yMnVRwk79OYpng0JgJZ2GVZz838my/pG0j6E
+ OPjGIRVRkxAr1NgLGcYyH0=
+Received: from ProDesk.. (unknown [58.22.7.114])
+ by gzga-smtp-mta-g0-4 (Coremail) with SMTP id _____wDnrxFHsKtltXQdAA--.4260S3; 
+ Sat, 20 Jan 2024 19:36:43 +0800 (CST)
+From: Andy Yan <andyshrk@163.com>
+To: kever.yang@rock-chips.com
+Cc: jonas@kwiboo.se,
+	u-boot@lists.denx.de,
+	Andy Yan <andyshrk@163.com>
+Subject: [PATCH 2/2] board: rockchip: Add support for rk3588 based Cool Pi CM5
+ EVB
+Date: Sat, 20 Jan 2024 19:36:37 +0800
+Message-Id: <20240120113637.22134-2-andyshrk@163.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240120113637.22134-1-andyshrk@163.com>
+References: <20240120113637.22134-1-andyshrk@163.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 0/6] rpi5: initial support
-To: Jens Maus <mail@jens-maus.de>
-Cc: "Ivan T. Ivanov" <iivanov@suse.de>, u-boot@lists.denx.de
-References: <03bbe9ad-7cc6-491d-8bd9-631f1cf04f39@gmx.net>
- <418F8AAE-136A-44A0-80C3-D01FFE00EC2E@jens-maus.de>
- <sjmi6dftbgx56isfyjtaryehzq2iollwxm2etlspiygehh3n6v@k4ws56nsbgfn>
- <6C9E5E0C-9C27-45A4-886F-8B8C641EF7A3@jens-maus.de>
- <ejituxf7ggiu2ciswrwoeqqjytb7mj2vn6gkxllywtnlm4aefi@br4zq7rfytlo>
- <3FB75D28-9BF9-4518-8BF1-519C884516F7@jens-maus.de>
- <fa7j66z5r7pul6zp5ljcntrb7xbazqxesz6wysrslrpxxhpafc@krztduo6pjm6>
- <25AB43C7-829F-4F62-AC8E-3284B22ACB03@jens-maus.de>
- <E7BFDAEE-00A9-463A-AF73-75101AFF2BC6@suse.de>
- <FB66DFF3-03B0-4DA5-8916-AB80CA6C6EB5@jens-maus.de>
- <dvpwizpui6a52dfmy57ghv4zmplvgqvow6oec7x5opwzh63zzl@jehyglofr6yh>
- <489FBAE5-501A-49F6-894D-58BE5C5429CC@jens-maus.de>
- <A0746263-646C-40C6-A2A6-659C39385E8B@jens-maus.de>
- <246035ba-0090-4cc3-982e-1de837ec7340@gmx.net>
- <6E2D7E91-E869-48C6-8CE8-0B410A2B67B9@jens-maus.de>
-Content-Language: en-US
-From: Stefan Wahren <wahrenst@gmx.net>
-In-Reply-To: <6E2D7E91-E869-48C6-8CE8-0B410A2B67B9@jens-maus.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:+mnteJr0QeieAvsjKoAH+ahsk/x/+PJNL3ejd00nxk6HLqvwLVn
- uH+H/GHYvUA78ClrwtaWnC5v5UGuQrWprs3hAuuOwqMFEwhFFcxEoBJBtDZa3iPwGXebPiZ
- AIreyumKxIptd2bVlVLsH9DLB6qTRCoW/CszGbidvYnfdDPhQIi838/vJnKs8DV1cw9/s/c
- YuPjWJCmv8WG/O6OQUGjw==
-UI-OutboundReport: notjunk:1;M01:P0:ZgJHNgqSrnI=;94fGdLpUbsKKZRsQmt1YCgZ+VMn
- eIC+XF+hQMzV/4br1XdH9e4hRYGm6MV/K3/CDNIM6aidJYEYxIZfSjz2l2O0OrtTcnZUrawJO
- mFVPcXHjATadAMJdoLvlWuAdqEWRPV1AItXWVVtUfrQ5Uk4YO1qxN1qGxfVRh1Y/Fe647XSfv
- LAbmXbIAqS6Xx77GRRbG574jznkRcrQwm5KVlPvHFvw5wszVZh5qCFUpbir0aMcy6qHSTw+QO
- BxT/m0ice3J+hJ+FXX4ARU5AdoQNUQWRZnBCg3sV6LkOoNrkvDTKjQUbF4IWihLc0Pa+p0lEG
- Ukn6MbtDAiYlr5BPK2505ex7zEvMz2qu+waEDMOwb/eW2wvATE0+Wxfy6K67itXCh9t3J2Fwp
- DX/LgfmxkWrzKVfFSbQtBZOoC5pzUxjPLCuH/Pkb0Ozc1vSPoew+b/q/yzE1QD5unza6ZRGIK
- x2NGPEGPEUacOzjbkhAvBoolvRupvOacEkDXk8AkPz3CSJxufAg2QZaQDfxotyFsdNDblrMDq
- h7zpHrQSpozcgqTVk8DE0TQxE7Y6uY3MUuPsrh86XOv6YVGs4B870z3bbzT+Li+MuBbiAld8j
- dxUxfkVZBO1tAcL7YSY13m3UfQ3R/pNpNuJAX2iJO7FstXTBfHKAKAynPbd1WjJfjFlfWzW5E
- hqDsvdsxM3Mh7RkhBqRyjmA0UxAbbE3/Jlv75XitkskLjFn8ESBSLTHezbuGWp3L2kc9jwmVb
- yDl+tiwZdPf5FI2scqR0XNE6tcvDNhGjgSa3av9UJSFFxojIk8LLQubS7rwHNKMHZ8z5urUSQ
- E0b6zyVftow/mpQSI2LKbjdHv1fqM7RPEybBMA5Tmh5hhDngtOo6QQhmhAwjrSxSyNfZvZzg6
- Cye0oaSCbMMWWeKUN+nGGKQm4lwVxc54N8tub6v0fCsmPsH+ZaB5mMx+cuIcq2FHL+pZh7MO3
- cZnBCg==
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: _____wDnrxFHsKtltXQdAA--.4260S3
+X-Coremail-Antispam: 1Uf129KBjvAXoWfuFW8XryUXF1fCw4UXFy3twb_yoW5Gr1fCo
+ ZFvry0vF40gF13Grn5JFWqkw4xX3y8GanakF45GF1rWr4rGwnFyFWYyayUWF17Gr10kryk
+ u3W3CFW5Zw17A3s5n29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+ AaLaJ3UbIYCTnIWIevJa73UjIFyTuYvjTRsID2DUUUU
+X-Originating-IP: [58.22.7.114]
+X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/xtbBEAtrXmVOB0qqugAAsY
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,86 +68,1085 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Cool Pi CM5 EVB works as a mother board connect with CM5.
 
-Am 20.01.24 um 10:48 schrieb Jens Maus:
-> Hi,
->
->> Am 20.01.2024 um 10:22 schrieb Stefan Wahren <wahrenst@gmx.net>:
->>
->> Am 19.01.24 um 22:26 schrieb Jens Maus:
->>> I actually do have some good and bad news:
->>>
->>> 1. Good news: I got u-boot finally showing up with my RaspberryPi5 8GB=
- both on the HDMI and on the serial debug UART like you reported.
->>>
->>> 2. Bad news: I actually got it working by downgrading the rpi-eeprom t=
-o the same 2023/10/30 (VERSION:30de0ba5) version like you have.
->>>
->>> So the issue I saw/reported seems to be somehow related/limited to new=
-er rpi-eeprom versions. Looking at my previous diff on the rpi bootloader =
-log output differences, the potentially relevant piece might be the "M.2 P=
-CIe HAT not detected.=E2=80=9C line that is only present in newer rpi-eepr=
-om version outputs.
->>>
->>> So hopefully you can reproduce that issue yourself when upgrading your=
- rpi-eeprom version to newer or also the latest version from 2024/01/15 av=
-ailable [1] and potentially find the actual piece that prevent your patchs=
-et from working on newer eeprom versions.
->> thanks for your work, but i think you are wasting your time. The
->> rpi-eeprom release 2024/01/15 seems to be broken [1]
->>
->> :-(
-> Thanks for that info. However, I also tested older eeprom versions to id=
-entify when the issue that u-boot cannot boot a rpi5 started to appear. An=
-d I am afraid, it already starts with version 2023-11-20 right after the 2=
-023-10-30 which currently seems to work fine with Ivan=E2=80=99s patches. =
-Looking at the release notes of rpi-eeprom [1] one can see the following e=
-ntries:
-sorry, i got it wrong. I thought only 2024-01-15 is affected.
-Unfortunately i'm not a U-Boot developer and i also don't have a RPi 5.
-So i only can give some (hopefully) smart advices :-)
+CM5 Specification:
+- Rockchip RK3588
+- LPDDR4 2/4/8/16 GB
+- TF scard slot
+- eMMC 8/32/64/128 GB module
+- SPI Nor 8MB
+- Gigabit ethernet x 1 with PHY YT8531
+- Gigabit ethernet x 1 drived by PCIE with YT6801S
 
-One idea would be to enable early debug in U-Boot (no idea how to
-achieve this). I assume U-Boot crashes before it's able to print the
-first line, but it's hard to believe it crashes at the very first
-instruction of U-Boot. So with some luck we should be able to narrow
-done the cause.
+CM5 EVB Specification:
+- HDMI Type A out x 2
+- HDMI Type D in x 1
+- USB 2.0 Host x 2
+- USB 3.0 OTG x 1
+- USB 3.0 Host x 1
+- PCIE M.2 E Key for Wireless connection
+- PCIE M.2 M Key for NVME connection
+- 40 pin header
 
-Another point would be to open an Github issue on rpi-eeprom and ask
-them for advice, why 2023-11-20 stops to work in our case. Sure they
-don't want to support U-Boot, but they are also interested in Linux
-Mainline support.
+The dts is from linux-6.8 rc1.
 
-Best regards
->
-> =E2=80=94 cut here =E2=80=94
-> 2023-11-20: Auto-detect support for PCIe expansion HAT (default + latest=
-)
->
->      =E2=80=A2 Add autodetect support for PCIe expansion HATs
->      =E2=80=A2 Add PCIE_PROBE=3D1 to the EEPROM config for custom PCIe e=
-xapansion designs that do not support the upcoming HAT spec. This gives si=
-milar behaviour to CM4 where PCIe x1 is enumerated to discover NVMe device=
-s.
->      =E2=80=A2 Fix loading of multiple initramfs images that are not 32-=
-bit aligned sizes raspberrypi/firmware#1843
->      =E2=80=A2 Kernel load performance improvement - remove a memcpy
-> =E2=80=94 cut here =E2=80=94
->
-> So as I stated earlier, one probable catch for the u-boot patches here m=
-ight be the mentioned PCIe changes with the rpi-eeprom 2023-11-20 version.=
- Or it might be related to the =E2=80=9Ekernel load performance improvemen=
-ts=E2=80=9C mentioned?!?
->
-> For now I am of course using the 2023-10-30 rpi-eeprom version and so fa=
-r it works flawlessly with Ivan=E2=80=99s u-boot patches. Still I hope Iva=
-n or someone else can have a closer look why with the 2023-11-20 version o=
-f rpi-eeprom u-boot immediately stops working at all.
->
-> best regards,
-> jens
->
-> [1] https://github.com/raspberrypi/rpi-eeprom/blob/master/firmware-2712/=
-release-notes.md
+Signed-off-by: Andy Yan <andyshrk@163.com>
+---
+
+ .../arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi |  30 +
+ arch/arm/dts/rk3588-coolpi-cm5-evb.dts        | 214 ++++++
+ arch/arm/dts/rk3588-coolpi-cm5.dtsi           | 650 ++++++++++++++++++
+ board/rockchip/evb_rk3588/MAINTAINERS         |   8 +
+ configs/coolpi-cm5-evb-rk3588_defconfig       | 105 +++
+ 5 files changed, 1007 insertions(+)
+ create mode 100644 arch/arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3588-coolpi-cm5-evb.dts
+ create mode 100644 arch/arm/dts/rk3588-coolpi-cm5.dtsi
+ create mode 100644 configs/coolpi-cm5-evb-rk3588_defconfig
+
+diff --git a/arch/arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi b/arch/arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi
+new file mode 100644
+index 00000000000..6b69ff424fa
+--- /dev/null
++++ b/arch/arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi
+@@ -0,0 +1,30 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++#include "rk3588s-u-boot.dtsi"
++
++/ {
++	chosen {
++		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci;
++	};
++};
++
++&fspim2_pins {
++	bootph-all;
++};
++
++&sfc {
++	bootph-pre-ram;
++	u-boot,spl-sfc-no-dma;
++	pinctrl-names = "default";
++	pinctrl-0 = <&fspim2_pins>;
++	status = "okay";
++
++	flash@0 {
++		bootph-pre-ram;
++		compatible = "jedec,spi-nor";
++		reg = <0>;
++		spi-max-frequency = <24000000>;
++		spi-rx-bus-width = <4>;
++		spi-tx-bus-width = <1>;
++	};
++};
+diff --git a/arch/arm/dts/rk3588-coolpi-cm5-evb.dts b/arch/arm/dts/rk3588-coolpi-cm5-evb.dts
+new file mode 100644
+index 00000000000..d4c70835e0f
+--- /dev/null
++++ b/arch/arm/dts/rk3588-coolpi-cm5-evb.dts
+@@ -0,0 +1,214 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2023 Rockchip Electronics Co., Ltd.
++ *
++ */
++
++/dts-v1/;
++
++#include <dt-bindings/leds/common.h>
++#include "rk3588-coolpi-cm5.dtsi"
++
++/ {
++	model = "RK3588 CoolPi CM5 EVB";
++	compatible = "coolpi,pi-cm5-evb", "coolpi,pi-cm5", "rockchip,rk3588";
++
++	backlight: backlight {
++		compatible = "pwm-backlight";
++		enable-gpios = <&gpio4 RK_PA3 GPIO_ACTIVE_HIGH>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&bl_en>;
++		power-supply = <&vcc12v_dcin>;
++		pwms = <&pwm2 0 25000 0>;
++	};
++
++	leds: leds {
++		compatible = "gpio-leds";
++
++		green_led: led-0 {
++			color = <LED_COLOR_ID_GREEN>;
++			function = LED_FUNCTION_STATUS;
++			gpios = <&gpio3 RK_PB7 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "heartbeat";
++		};
++	};
++
++	vcc12v_dcin: vcc12v-dcin-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc12v_dcin";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <12000000>;
++		regulator-max-microvolt = <12000000>;
++	};
++
++	vcc5v0_sys: vcc5v0-sys-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc5v0_sys";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		vin-supply = <&vcc12v_dcin>;
++	};
++
++	vcc3v3_sys: vcc3v3-sys-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc3v3_sys";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		vin-supply = <&vcc12v_dcin>;
++	};
++
++	vcc3v3_lcd: vcc3v3-lcd-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc3v3_lcd";
++		enable-active-high;
++		gpio = <&gpio1 RK_PC4 GPIO_ACTIVE_HIGH>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&lcdpwr_en>;
++		vin-supply = <&vcc3v3_sys>;
++	};
++
++	vcc5v0_usb30_host: vcc5v0-usb30-host-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc5v0_host";
++		regulator-boot-on;
++		regulator-always-on;
++		enable-active-high;
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		gpio = <&gpio1 RK_PD5 GPIO_ACTIVE_HIGH>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&usb_host_pwren>;
++		vin-supply = <&vcc5v0_sys>;
++	};
++
++	vcc5v0_usb30_otg: vcc5v0-usb30-otg-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc5v0_otg";
++		regulator-boot-on;
++		regulator-always-on;
++		enable-active-high;
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		gpios = <&gpio0 RK_PA0 GPIO_ACTIVE_HIGH>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&usb_otg_pwren>;
++		vin-supply = <&vcc5v0_sys>;
++	};
++};
++
++/* M.2 E-Key */
++&pcie2x1l1 {
++	reset-gpios = <&gpio4 RK_PA2 GPIO_ACTIVE_HIGH>;
++	vpcie3v3-supply = <&vcc3v3_sys>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pcie_clkreq &pcie_wake &pcie_rst &wifi_pwron &bt_pwron>;
++	status = "okay";
++};
++
++&pcie30phy {
++	status = "okay";
++};
++
++&pcie3x2 {
++	reset-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_HIGH>;
++	vpcie3v3-supply = <&vcc3v3_sys>;
++	status = "okay";
++};
++
++/* M.2 M-Key ssd */
++&pcie3x4 {
++	reset-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
++	vpcie3v3-supply = <&vcc3v3_sys>;
++	status = "okay";
++};
++
++&pinctrl {
++	lcd {
++		lcdpwr_en: lcdpwr-en {
++			rockchip,pins = <1 RK_PC4 RK_FUNC_GPIO &pcfg_pull_down>;
++		};
++
++		bl_en: bl-en {
++			rockchip,pins = <4 RK_PA3 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++
++	usb {
++		usb_host_pwren: usb-host-pwren {
++			rockchip,pins = <1 RK_PD5 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++
++		usb_otg_pwren: usb-otg-pwren {
++			rockchip,pins = <0 RK_PA0 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++	};
++
++	wifi {
++		bt_pwron: bt-pwron {
++			rockchip,pins = <3 RK_PA6 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++
++		pcie_clkreq: pcie-clkreq {
++			rockchip,pins = <4 RK_PA0 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++
++		pcie_rst: pcie-rst {
++			rockchip,pins = <4 RK_PA2 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++
++		wifi_pwron: wifi-pwron {
++			rockchip,pins = <3 RK_PB1 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++
++		pcie_wake: pcie-wake {
++			rockchip,pins = <4 RK_PA1 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++	};
++};
++
++&pwm2 {
++	status = "okay";
++};
++
++&sata1 {
++	status = "okay";
++};
++
++&u2phy2 {
++	status = "okay";
++};
++
++&u2phy3 {
++	status = "okay";
++};
++
++&u2phy2_host {
++	phy-supply = <&vcc5v0_usb30_host>;
++	status = "okay";
++};
++
++&u2phy3_host {
++	phy-supply = <&vcc5v0_usb30_host>;
++	status = "okay";
++};
++
++&usb_host0_ehci {
++	status = "okay";
++};
++
++&usb_host0_ohci {
++	status = "okay";
++};
++
++&usb_host1_ehci {
++	status = "okay";
++};
++
++&usb_host1_ohci {
++	status = "okay";
++};
+diff --git a/arch/arm/dts/rk3588-coolpi-cm5.dtsi b/arch/arm/dts/rk3588-coolpi-cm5.dtsi
+new file mode 100644
+index 00000000000..0b02f4d6e00
+--- /dev/null
++++ b/arch/arm/dts/rk3588-coolpi-cm5.dtsi
+@@ -0,0 +1,650 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2023 Rockchip Electronics Co., Ltd.
++ *
++ */
++
++/dts-v1/;
++
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/pwm/pwm.h>
++#include <dt-bindings/pinctrl/rockchip.h>
++#include "rk3588.dtsi"
++
++/ {
++	compatible = "coolpi,pi-cm5", "rockchip,rk3588";
++
++	aliases {
++		mmc0 = &sdhci;
++		mmc1 = &sdio;
++		mmc2 = &sdmmc;
++		serial2 = &uart2;
++	};
++
++	analog-sound {
++		compatible = "audio-graph-card";
++		dais = <&i2s0_8ch_p0>;
++		label = "rk3588-es8316";
++		routing = "MIC2", "Mic Jack",
++			  "Headphones", "HPOL",
++			  "Headphones", "HPOR";
++		widgets = "Microphone", "Mic Jack",
++			  "Headphone", "Headphones";
++	};
++
++	chosen {
++		stdout-path = "serial2:1500000n8";
++	};
++
++	avdd0v85_pcie20: avdd0v85-pcie20-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "avdd0v85_pcie20";
++		regulator-boot-on;
++		regulator-always-on;
++		regulator-min-microvolt = <850000>;
++		regulator-max-microvolt = <850000>;
++		vin-supply = <&vdd_0v85_s0>;
++	};
++
++	avdd1v8_pcie20: avdd1v8-pcie20-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "avdd1v8_pcie20";
++		regulator-boot-on;
++		regulator-always-on;
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++		vin-supply = <&avcc_1v8_s0>;
++	};
++
++	avdd0v75_pcie30: avdd0v75-pcie30-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "avdd0v75_pcie30";
++		regulator-boot-on;
++		regulator-always-on;
++		regulator-min-microvolt = <750000>;
++		regulator-max-microvolt = <750000>;
++		vin-supply = <&avdd_0v75_s0>;
++	};
++
++	pcie30_avdd1v8: avdd1v8-pcie30-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "pcie30_avdd1v8";
++		regulator-boot-on;
++		regulator-always-on;
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++		vin-supply = <&avcc_1v8_s0>;
++	};
++};
++
++&combphy0_ps {
++	status = "okay";
++};
++
++&combphy1_ps {
++	status = "okay";
++};
++
++&combphy2_psu {
++	status = "okay";
++};
++
++&cpu_b0 {
++	cpu-supply = <&vdd_cpu_big0_s0>;
++};
++
++&cpu_b1 {
++	cpu-supply = <&vdd_cpu_big0_s0>;
++};
++
++&cpu_b2 {
++	cpu-supply = <&vdd_cpu_big1_s0>;
++};
++
++&cpu_b3 {
++	cpu-supply = <&vdd_cpu_big1_s0>;
++};
++
++&cpu_l0 {
++	cpu-supply = <&vdd_cpu_lit_s0>;
++};
++
++&cpu_l1 {
++	cpu-supply = <&vdd_cpu_lit_s0>;
++};
++
++&cpu_l2 {
++	cpu-supply = <&vdd_cpu_lit_s0>;
++};
++
++&cpu_l3 {
++	cpu-supply = <&vdd_cpu_lit_s0>;
++};
++
++&gmac0 {
++	clock_in_out = "output";
++	phy-handle = <&rgmii_phy>;
++	phy-mode = "rgmii-rxid";
++	pinctrl-0 = <&gmac0_miim
++		     &gmac0_tx_bus2
++		     &gmac0_rx_bus2
++		     &gmac0_rgmii_clk
++		     &gmac0_rgmii_bus>;
++	pinctrl-names = "default";
++	rx_delay = <0x00>;
++	tx_delay = <0x43>;
++	status = "okay";
++};
++
++&i2c0 {
++	pinctrl-0 = <&i2c0m2_xfer>;
++	status = "okay";
++
++	vdd_cpu_big0_s0: regulator@42 {
++		compatible = "rockchip,rk8602";
++		reg = <0x42>;
++		fcs,suspend-voltage-selector = <1>;
++		regulator-name = "vdd_cpu_big0_s0";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <550000>;
++		regulator-max-microvolt = <1050000>;
++		regulator-ramp-delay = <2300>;
++		vin-supply = <&vcc5v0_sys>;
++
++		regulator-state-mem {
++			regulator-off-in-suspend;
++		};
++	};
++
++	vdd_cpu_big1_s0: regulator@43 {
++		compatible = "rockchip,rk8603", "rockchip,rk8602";
++		reg = <0x43>;
++		fcs,suspend-voltage-selector = <1>;
++		regulator-name = "vdd_cpu_big1_s0";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <550000>;
++		regulator-max-microvolt = <1050000>;
++		regulator-ramp-delay = <2300>;
++		vin-supply = <&vcc5v0_sys>;
++
++		regulator-state-mem {
++			regulator-off-in-suspend;
++		};
++	};
++};
++
++&i2c2 {
++	status = "okay";
++
++	vdd_npu_s0: regulator@42 {
++		compatible = "rockchip,rk8602";
++		reg = <0x42>;
++		fcs,suspend-voltage-selector = <1>;
++		regulator-name = "vdd_npu_s0";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <550000>;
++		regulator-max-microvolt = <950000>;
++		regulator-ramp-delay = <2300>;
++		vin-supply = <&vcc5v0_sys>;
++
++		regulator-state-mem {
++			regulator-off-in-suspend;
++		};
++	};
++};
++
++&i2c6 {
++	status = "okay";
++
++	hym8563: rtc@51 {
++		compatible = "haoyu,hym8563";
++		reg = <0x51>;
++		interrupt-parent = <&gpio0>;
++		interrupts = <RK_PD4 IRQ_TYPE_LEVEL_LOW>;
++		#clock-cells = <0>;
++		clock-output-names = "hym8563";
++		pinctrl-names = "default";
++		pinctrl-0 = <&hym8563_int>;
++		wakeup-source;
++	};
++};
++
++&i2c7 {
++	pinctrl-0 = <&i2c7m0_xfer>;
++	status = "okay";
++
++	es8316: audio-codec@11 {
++		compatible = "everest,es8316";
++		reg = <0x11>;
++		assigned-clocks = <&cru I2S0_8CH_MCLKOUT>;
++		assigned-clock-rates = <12288000>;
++		clocks = <&cru I2S0_8CH_MCLKOUT>;
++		clock-names = "mclk";
++		#sound-dai-cells = <0>;
++
++		port {
++			es8316_p0_0: endpoint {
++				remote-endpoint = <&i2s0_8ch_p0_0>;
++			};
++		};
++	};
++};
++
++&i2s0_8ch {
++	pinctrl-0 = <&i2s0_lrck
++		     &i2s0_mclk
++		     &i2s0_sclk
++		     &i2s0_sdi0
++		     &i2s0_sdo0>;
++	status = "okay";
++
++	i2s0_8ch_p0: port {
++		i2s0_8ch_p0_0: endpoint {
++			dai-format = "i2s";
++			mclk-fs = <256>;
++			remote-endpoint = <&es8316_p0_0>;
++		};
++	};
++};
++
++&mdio0 {
++	rgmii_phy: ethernet-phy@1 {
++		/* YT8531C/H */
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <0x1>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&yt8531_rst>;
++		reset-assert-us = <20000>;
++		reset-deassert-us = <100000>;
++		reset-gpios = <&gpio4 RK_PB3 GPIO_ACTIVE_LOW>;
++	};
++};
++
++/* ethernet */
++&pcie2x1l2 {
++	reset-gpios = <&gpio3 RK_PD1 GPIO_ACTIVE_HIGH>;
++	vpcie3v3-supply = <&vcc3v3_sys>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&yt6801_isolate>;
++	status = "okay";
++};
++
++&pinctrl {
++	hym8563 {
++		hym8563_int: hym8563-int {
++			rockchip,pins = <0 RK_PD4 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++	};
++
++	yt6801 {
++		yt6801_isolate: yt6801-isolate {
++			rockchip,pins = <1 RK_PA4 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++	};
++
++	yt8531 {
++		yt8531_rst: yt8531-rst {
++			rockchip,pins = <4 RK_PB3 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++};
++
++&saradc {
++	vref-supply = <&vcc_1v8_s0>;
++	status = "okay";
++};
++
++&sdhci {
++	bus-width = <8>;
++	max-frequency = <200000000>;
++	mmc-hs400-1_8v;
++	mmc-hs400-enhanced-strobe;
++	no-sdio;
++	no-sd;
++	non-removable;
++	status = "okay";
++};
++
++&sdmmc {
++	bus-width = <4>;
++	cap-mmc-highspeed;
++	cap-sd-highspeed;
++	disable-wp;
++	max-frequency = <150000000>;
++	no-sdio;
++	no-mmc;
++	sd-uhs-sdr104;
++	vqmmc-supply = <&vccio_sd_s0>;
++	status = "okay";
++};
++
++&spi2 {
++	assigned-clocks = <&cru CLK_SPI2>;
++	assigned-clock-rates = <200000000>;
++	num-cs = <1>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&spi2m2_cs0 &spi2m2_pins>;
++	status = "okay";
++
++	pmic@0 {
++		compatible = "rockchip,rk806";
++		reg = <0x0>;
++		interrupt-parent = <&gpio0>;
++		interrupts = <7 IRQ_TYPE_LEVEL_LOW>;
++		gpio-controller;
++		#gpio-cells = <2>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&pmic_pins>, <&rk806_dvs1_null>,
++			    <&rk806_dvs2_null>, <&rk806_dvs3_null>;
++		spi-max-frequency = <1000000>;
++		vcc1-supply = <&vcc5v0_sys>;
++		vcc2-supply = <&vcc5v0_sys>;
++		vcc3-supply = <&vcc5v0_sys>;
++		vcc4-supply = <&vcc5v0_sys>;
++		vcc5-supply = <&vcc5v0_sys>;
++		vcc6-supply = <&vcc5v0_sys>;
++		vcc7-supply = <&vcc5v0_sys>;
++		vcc8-supply = <&vcc5v0_sys>;
++		vcc9-supply = <&vcc5v0_sys>;
++		vcc10-supply = <&vcc5v0_sys>;
++		vcc11-supply = <&vcc_2v0_pldo_s3>;
++		vcc12-supply = <&vcc5v0_sys>;
++		vcc13-supply = <&vcc_2v0_pldo_s3>;
++		vcc14-supply = <&vcc_2v0_pldo_s3>;
++		vcca-supply = <&vcc5v0_sys>;
++
++		rk806_dvs1_null: dvs1-null-pins {
++			pins = "gpio_pwrctrl2";
++			function = "pin_fun0";
++		};
++
++		rk806_dvs2_null: dvs2-null-pins {
++			pins = "gpio_pwrctrl2";
++			function = "pin_fun0";
++		};
++
++		rk806_dvs3_null: dvs3-null-pins {
++			pins = "gpio_pwrctrl3";
++			function = "pin_fun0";
++		};
++
++		regulators {
++			vdd_gpu_s0: vdd_gpu_mem_s0: dcdc-reg1 {
++				regulator-boot-on;
++				regulator-min-microvolt = <550000>;
++				regulator-max-microvolt = <950000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vdd_gpu_s0";
++				regulator-enable-ramp-delay = <400>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_cpu_lit_s0: vdd_cpu_lit_mem_s0: dcdc-reg2 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <550000>;
++				regulator-max-microvolt = <950000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vdd_cpu_lit_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_log_s0: dcdc-reg3 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <675000>;
++				regulator-max-microvolt = <750000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vdd_log_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++					regulator-suspend-microvolt = <750000>;
++				};
++			};
++
++			vdd_vdenc_s0: vdd_vdenc_mem_s0: dcdc-reg4 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <550000>;
++				regulator-max-microvolt = <950000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vdd_vdenc_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_ddr_s0: dcdc-reg5 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <675000>;
++				regulator-max-microvolt = <900000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vdd_ddr_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++					regulator-suspend-microvolt = <850000>;
++				};
++			};
++
++			vdd2_ddr_s3: dcdc-reg6 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-name = "vdd2_ddr_s3";
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++				};
++			};
++
++			vcc_2v0_pldo_s3: dcdc-reg7 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <2000000>;
++				regulator-max-microvolt = <2000000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vdd_2v0_pldo_s3";
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <2000000>;
++				};
++			};
++
++			vcc_3v3_s3: dcdc-reg8 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-name = "vcc_3v3_s3";
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <3300000>;
++				};
++			};
++
++			vddq_ddr_s0: dcdc-reg9 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-name = "vddq_ddr_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc_1v8_s3: dcdc-reg10 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++				regulator-name = "vcc_1v8_s3";
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <1800000>;
++				};
++			};
++
++			avcc_1v8_s0: pldo-reg1 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++				regulator-name = "avcc_1v8_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc_1v8_s0: pldo-reg2 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++				regulator-name = "vcc_1v8_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++					regulator-suspend-microvolt = <1800000>;
++				};
++			};
++
++			avdd_1v2_s0: pldo-reg3 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1200000>;
++				regulator-max-microvolt = <1200000>;
++				regulator-name = "avdd_1v2_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc_3v3_s0: pldo-reg4 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vcc_3v3_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vccio_sd_s0: pldo-reg5 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-ramp-delay = <12500>;
++				regulator-name = "vccio_sd_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			pldo6_s3: pldo-reg6 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++				regulator-name = "pldo6_s3";
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <1800000>;
++				};
++			};
++
++			vdd_0v75_s3: nldo-reg1 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <750000>;
++				regulator-max-microvolt = <750000>;
++				regulator-name = "vdd_0v75_s3";
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <750000>;
++				};
++			};
++
++			vdd_ddr_pll_s0: nldo-reg2 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <850000>;
++				regulator-max-microvolt = <850000>;
++				regulator-name = "vdd_ddr_pll_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++					regulator-suspend-microvolt = <850000>;
++				};
++			};
++
++			avdd_0v75_s0: nldo-reg3 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <750000>;
++				regulator-max-microvolt = <750000>;
++				regulator-name = "avdd_0v75_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_0v85_s0: nldo-reg4 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <850000>;
++				regulator-max-microvolt = <850000>;
++				regulator-name = "vdd_0v85_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_0v75_s0: nldo-reg5 {
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <750000>;
++				regulator-max-microvolt = <750000>;
++				regulator-name = "vdd_0v75_s0";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++		};
++	};
++};
++
++&tsadc {
++	status = "okay";
++};
++
++&uart2 {
++	pinctrl-0 = <&uart2m0_xfer>;
++	status = "okay";
++};
+diff --git a/board/rockchip/evb_rk3588/MAINTAINERS b/board/rockchip/evb_rk3588/MAINTAINERS
+index 1604229759d..8ab58e3ce9d 100644
+--- a/board/rockchip/evb_rk3588/MAINTAINERS
++++ b/board/rockchip/evb_rk3588/MAINTAINERS
+@@ -5,6 +5,14 @@ F:	configs/coolpi-4b-rk3588s_defconfig
+ F:	arch/arm/dts/rk3588s-coolpi-4b.dts
+ F:	arch/arm/dts/rk3588s-coolpi-u-boot.dtsi
+ 
++COOLPI-CM5-EVB-RK3588
++M:	Andy Yan <andyshrk@163.com>
++S:	Maintained
++F:	configs/coolpi-cm5-evb-rk3588_defconfig
++F:	arch/arm/dts/rk3588-coolpi-cm5.dtsi
++F:	arch/arm/dts/rk3588-coolpi-cm5-evb.dts
++F:	arch/arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi
++
+ EVB-RK3588
+ M:	Kever Yang <kever.yang@rock-chips.com>
+ S:	Maintained
+diff --git a/configs/coolpi-cm5-evb-rk3588_defconfig b/configs/coolpi-cm5-evb-rk3588_defconfig
+new file mode 100644
+index 00000000000..debd9b64f9c
+--- /dev/null
++++ b/configs/coolpi-cm5-evb-rk3588_defconfig
+@@ -0,0 +1,105 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_TEXT_BASE=0x00a00000
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
++CONFIG_SF_DEFAULT_SPEED=24000000
++CONFIG_SF_DEFAULT_MODE=0x2000
++CONFIG_DEFAULT_DEVICE_TREE="rk3588-coolpi-cm5-evb"
++CONFIG_ROCKCHIP_RK3588=y
++CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
++CONFIG_ROCKCHIP_SPI_IMAGE=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_STACK_R_ADDR=0x600000
++CONFIG_TARGET_EVB_RK3588=y
++CONFIG_SPL_STACK=0x400000
++CONFIG_DEBUG_UART_BASE=0xFEB50000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_AHCI=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_OF_BOARD_SETUP=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-coolpi-cm5-evb.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x4000000
++CONFIG_SPL_BSS_MAX_SIZE=0x4000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++CONFIG_SPL_STACK_R=y
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
++CONFIG_SPL_ATF=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_USB=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_AHCI_PCI=y
++CONFIG_DWC_AHCI=y
++CONFIG_SPL_CLK=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_SF_DEFAULT_BUS=5
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_XMC=y
++CONFIG_SPI_FLASH_XTX=y
++CONFIG_PHY_MOTORCOMM=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_ROCKCHIP=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_PHY_ROCKCHIP_USBDP=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_SPL_RAM=y
++CONFIG_SCSI=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SFC=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_ERRNO_STR=y
+-- 
+2.34.1
 
