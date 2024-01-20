@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E27CC47DAF
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jan 2024 16:57:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A972C47258
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jan 2024 16:57:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D49687E23;
-	Sat, 20 Jan 2024 17:56:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4F6A887E67;
+	Sat, 20 Jan 2024 17:56:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RpVIq/OA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hyxo8oJz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 582D987E23; Sat, 20 Jan 2024 17:56:24 +0100 (CET)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id 6DB8887EE7; Sat, 20 Jan 2024 17:56:24 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF47487DF9
- for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 17:56:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 611C587E1D
+ for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 17:56:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-50eac018059so2391304e87.0
- for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 08:56:19 -0800 (PST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a2f79e79f0cso158279166b.2
+ for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 08:56:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705769779; x=1706374579; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1705769780; x=1706374580; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zerQ22x/x8UOxAW3Wsxy4H6ymQPKhUl2gDGa7gIhMSQ=;
- b=RpVIq/OALLlkUdSTkyr5e6HQA9le2lMrwB/skweVe3/GWpxQqehsR8gmvO+ji9oquK
- kXOsCmHd9BCbS7R2KiBVoFFEd461ugl860ZleGeTK1UIi1yuZiXkgvXtvfWn7RF7ZanN
- hzLAgGEhCr+XpT/953zcgLKG5zSqFZjZHL+2m+E2ohnuiZYsJZd8Or2JvShLGm7k2ZvC
- i7ylTzQEQQVNTPKKRy0F9Pe+ndich0NhlgWvdHUOcSDKK5cT/tQMa4FHRRnGL0gCAA8P
- TiR6uQBkJmBcXM5H/+fSdfdKuF01c0ItqkpeQlua0NO0fVnGoYEEcrqokqsCHpj4t8CO
- +CyA==
+ bh=wqfG3XPeqyBUzojtyvZepgeUN6eD0XN2Xqy3xM++kt8=;
+ b=hyxo8oJzavXrxt3Zc5O/meFbv0WvezRUYcQH7FyFwhg45wGEmEZZ3mlZadIsod5udY
+ qMQk3UWhAmXyreJ0Ly+tOJoZpxSCWvqQ0GGtzejVatVVO9bKCCelBziS79eDUXeB0uQ5
+ M8vZoXuU2ZJwi7TVuEn4NwhFdD/vUyeVexYBUrccMdTbVn3wjtZ2hv+t5mQvBFIrF2RL
+ o0dNE73p29wdzP93Nu0XyY5xA5OKjVmy70pHSbDV/E34IgX2OWDJzGFJ8xP0bJUZknSN
+ TTPypWQhuIfzztwsbWJu3LcWN0admgZTPNeUqGoMkwIjPK/3Wu+823G4QerCSalTmweT
+ hHFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705769779; x=1706374579;
+ d=1e100.net; s=20230601; t=1705769780; x=1706374580;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zerQ22x/x8UOxAW3Wsxy4H6ymQPKhUl2gDGa7gIhMSQ=;
- b=TwN7r46ppo4ouJap2jrasXr2pDHX/mc7xmEp5HBBkkIuGEXTzS4sPAEulHks2G05m6
- z7XOhE3GwBJfbJnepQn5n10J7oZAIqcGIX61/lTn/K1e+QoW6cMsbwN6hspE0c26oiFc
- bUHs/qxKxvXIirKva2oiORVxJ8Rc/+egskUz5Fld0nLtLMBFuECcApnC4TtuqLLykLas
- 4ScoE5tm8M1PuYi4K6tPpbPrAPBIHKErtu04foLHi2pjfbFh5bs5kSs41Jp6GPeZmppY
- CjiYiy0Rresl3mDsSoY8jEgdvzlw0gVpI+uff7snrXzMjDuJ4wLFjFshGWGRyTY4omef
- lqtw==
-X-Gm-Message-State: AOJu0YxmDh7WaA+n+GoUWQJoAGL4YoHNW0PrkJGb0iMhX6kt+9fzgjEd
- my2MPxqSisI8QrNkZOlpuDZLnMj9RP63FsueEx5CG7XVwPTDitzG
-X-Google-Smtp-Source: AGHT+IFgES5hP7bC/2njG0wYyndkftCwEcHrXZoEd77vpIYzydZJA2pGRqhM4hw8kBctHt9MJseWfA==
-X-Received: by 2002:a19:ca18:0:b0:50e:aedd:ed76 with SMTP id
- a24-20020a19ca18000000b0050eaedded76mr716712lfg.131.1705769779031; 
+ bh=wqfG3XPeqyBUzojtyvZepgeUN6eD0XN2Xqy3xM++kt8=;
+ b=PCNNGio1nAl7u3efENHgrJmNscQwz99MczZEwwK7pJhsiHji/Gmz+II5P3rUAdPbEW
+ qz6EozlRisnP50Dkw5BNGWxv8vSiiPG0+9n6v0F+lrDlBHpPS7U+lSJggKkrVJUqNZ0h
+ /0kALiC7nu1AospI+84cNWI2n1v/vVSaXP4BuKfjvaZrO5eg+XkO6Sv1xdcOrFy6Etki
+ AtYJB9xC8fmuDMLITglyKxatsQ3XSfce3JHeBgrZw5Q3XzNJDY6IPnILIbbifnrQpAQG
+ HVsSm1N3dCQwpsH0tSUh3XqkN5Vu9kc8OkkbRDXPDR69p+FvhgpkgusJwBCyrb/JU7Cl
+ zyEQ==
+X-Gm-Message-State: AOJu0YzUIsl+VIi/G7hXCbrXKyzV1Qs0fZU3N6CmFcRCFebQ5ufF4B53
+ EzeRnyzzXP7I8BvA5sAMDhtyfp0R1xYKnBpOuYLwjat6gBjvMINK
+X-Google-Smtp-Source: AGHT+IH3elE9y3DNjZm4BaCIegnJWa2kSbOKWsceqOPQAGnPA8Bg+GDmM7pTBUs9SUVoiA7XC4r2eg==
+X-Received: by 2002:a17:907:3182:b0:a29:1648:6030 with SMTP id
+ xe2-20020a170907318200b00a2916486030mr1143465ejb.86.1705769779730; 
  Sat, 20 Jan 2024 08:56:19 -0800 (PST)
 Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
- ca13-20020a170906a3cd00b00a2c869be22dsm11311548ejb.143.2024.01.20.08.56.18
+ ca13-20020a170906a3cd00b00a2c869be22dsm11311548ejb.143.2024.01.20.08.56.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 20 Jan 2024 08:56:18 -0800 (PST)
+ Sat, 20 Jan 2024 08:56:19 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Anatolij Gustschin <agust@denx.de>,
  Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v5 06/13] video: tegra20: dc: add reset support
-Date: Sat, 20 Jan 2024 18:55:36 +0200
-Message-Id: <20240120165543.10226-7-clamor95@gmail.com>
+Subject: [PATCH v5 07/13] video: tegra20: dc: add powergate
+Date: Sat, 20 Jan 2024 18:55:37 +0200
+Message-Id: <20240120165543.10226-8-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240120165543.10226-1-clamor95@gmail.com>
 References: <20240120165543.10226-1-clamor95@gmail.com>
@@ -91,62 +91,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement reset use to discard any changes which could have been
-applied to DC before and can interfere with current configuration.
+Add powergate use on T114 to complete resetting of DC.
 
-Tested-by: Agneli <poczt@protonmail.ch> # Toshiba AC100 T20
-Tested-by: Robert Eckelmann <longnoserob@gmail.com> # ASUS TF101
-Tested-by: Andreas Westman Dorcsak <hedmoo@yahoo.com> # ASUS Grouper E1565
-Tested-by: Ion Agorria <ion@agorria.com> # HTC One X
-Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # Nvidia Tegratab T114
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/tegra20/tegra-dc.c | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ drivers/video/tegra20/tegra-dc.c | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
 
 diff --git a/drivers/video/tegra20/tegra-dc.c b/drivers/video/tegra20/tegra-dc.c
-index 56a23b3c97..35abb6fe46 100644
+index 35abb6fe46..9a18e38cd8 100644
 --- a/drivers/video/tegra20/tegra-dc.c
 +++ b/drivers/video/tegra20/tegra-dc.c
-@@ -10,7 +10,9 @@
- #include <panel.h>
- #include <part.h>
- #include <pwm.h>
-+#include <reset.h>
- #include <video.h>
-+#include <linux/delay.h>
- #include <asm/cache.h>
- #include <asm/global_data.h>
- #include <asm/system.h>
-@@ -342,6 +344,7 @@ static int tegra_lcd_probe(struct udevice *dev)
- 	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
- 	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
- 	struct tegra_lcd_priv *priv = dev_get_priv(dev);
-+	struct reset_ctl reset_ctl;
- 	int ret;
+@@ -22,6 +22,7 @@
+ #include <asm/arch/clock.h>
+ #include <asm/arch/funcmux.h>
+ #include <asm/arch/pinmux.h>
++#include <asm/arch/powergate.h>
+ #include <asm/arch/pwm.h>
  
- 	/* Initialize the Tegra display controller */
-@@ -349,6 +352,20 @@ static int tegra_lcd_probe(struct udevice *dev)
- 	funcmux_select(PERIPH_ID_DISP1, FUNCMUX_DEFAULT);
- #endif
+ #include "tegra-dc.h"
+@@ -32,6 +33,7 @@ DECLARE_GLOBAL_DATA_PTR;
+ struct tegra_dc_soc_info {
+ 	bool has_timer;
+ 	bool has_rgb;
++	bool has_pgate;
+ };
  
-+	ret = reset_get_by_name(dev, "dc", &reset_ctl);
-+	if (ret) {
-+		log_err("reset_get_by_name() failed: %d\n", ret);
-+		return ret;
+ /* Information about the display controller */
+@@ -360,6 +362,28 @@ static int tegra_lcd_probe(struct udevice *dev)
+ 
+ 	clock_disable(priv->dc_clk[0]);
+ 
++	if (priv->soc->has_pgate) {
++		uint powergate;
++
++		if (priv->pipe)
++			powergate = TEGRA_POWERGATE_DISB;
++		else
++			powergate = TEGRA_POWERGATE_DIS;
++
++		ret = tegra_powergate_power_off(powergate);
++		if (ret < 0) {
++			log_err("failed to power off DISP gate: %d", ret);
++			return ret;
++		}
++
++		ret = tegra_powergate_sequence_power_up(powergate,
++							priv->dc_clk[0]);
++		if (ret < 0) {
++			log_err("failed to power up DISP gate: %d", ret);
++			return ret;
++		}
 +	}
 +
-+	clock_disable(priv->dc_clk[0]);
-+
-+	/* Reset everything set before */
-+	reset_assert(&reset_ctl);
-+	mdelay(4);
-+	reset_deassert(&reset_ctl);
-+	mdelay(4);
-+
- 	if (tegra_display_probe(priv, (void *)plat->base)) {
- 		debug("%s: Failed to probe display driver\n", __func__);
- 		return -1;
+ 	/* Reset everything set before */
+ 	reset_assert(&reset_ctl);
+ 	mdelay(4);
+@@ -510,16 +534,19 @@ static const struct video_ops tegra_lcd_ops = {
+ static const struct tegra_dc_soc_info tegra20_dc_soc_info = {
+ 	.has_timer = true,
+ 	.has_rgb = true,
++	.has_pgate = false,
+ };
+ 
+ static const struct tegra_dc_soc_info tegra30_dc_soc_info = {
+ 	.has_timer = false,
+ 	.has_rgb = true,
++	.has_pgate = false,
+ };
+ 
+ static const struct tegra_dc_soc_info tegra114_dc_soc_info = {
+ 	.has_timer = false,
+ 	.has_rgb = false,
++	.has_pgate = true,
+ };
+ 
+ static const struct udevice_id tegra_lcd_ids[] = {
 -- 
 2.40.1
 
