@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0613C47258
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jan 2024 16:56:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC79DC47DAF
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jan 2024 16:56:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0560E87E58;
-	Sat, 20 Jan 2024 17:56:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 73A8F87ED3;
+	Sat, 20 Jan 2024 17:56:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Fw8Ywirk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="G4F9FGT4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8558687E4F; Sat, 20 Jan 2024 17:56:17 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 63A4D87EC8; Sat, 20 Jan 2024 17:56:19 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8627987D28
- for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 17:56:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A7B2887E1D
+ for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 17:56:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a2c179aa5c4so185157366b.0
- for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 08:56:15 -0800 (PST)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a2f22bfb4e6so166828466b.0
+ for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 08:56:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705769775; x=1706374575; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=SvQf1/A1dohyrv2bRKG4tYh1LcoxqEah6+3//3lAO5k=;
- b=Fw8Ywirk4N/5iK5VYApcrzOqjjHlVPA5++cRXyhaPJSmGvBxFUwn8UZ/tD1QDOPZHl
- qHYBwtSkeynOGoqrQxqpLjJyWDKdDZfBECRlxKnLg6f0BQwZWVUslS97eGBOvXFzdl7Q
- 954Dz52gt7FoX5TrNqFZWOLf4w5AkgTiOOy7i8ajhWdEo2UYFbi/AOhsGNZYdrAe/89g
- CUZl9purAaHKZzCL1aw6OtsbNF98B3WycZfERXqbEWFjgZjxjDlsROih+uQoa0qisa6N
- nXQlonraDZPqgmFERDBgfrU40o36hhPNsurhfw9JMI6yeHPwoYEwH8x327Jc1HgtllEf
- n38Q==
+ d=gmail.com; s=20230601; t=1705769776; x=1706374576; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zPHHlg9FdQ90XVd55iFRYgLj7sgCzPVYVcdb591IuIs=;
+ b=G4F9FGT4QDTdqSd28oV5w6LlcRoMosGiZRn3jer/fQoiaOhLKMp9huyEx31mBxpZ3+
+ 006QbkHp5gKRNx+hhWVNw0kmcQQ2BIrTH6b1V5mtFXaxJMtzceF5RGkz0dCSKyTSKChV
+ RsGOIOrr5/dmz0X9DexvcvRSkb6IpMnfnYIFT7PKT6Amzyd+ZdA2iiKApl4r6PXpEAvO
+ kuZMZB4AobjqS9EEyBQrQyI+u75grErz6jVSTdnI41C7SZnOasJ4WLr8jNlYDBt/Zqnn
+ kCsJxwxRr/3pX2GkeoEMJDDQNXGI6luPbJjvugG3oM5VJ/fuG8nuFTbXwe7DPAbc0uHV
+ rjwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705769775; x=1706374575;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=SvQf1/A1dohyrv2bRKG4tYh1LcoxqEah6+3//3lAO5k=;
- b=oOPdlVOESk6pcScEdmEk7tpptN+qlvxsEiTpJWi+llQuhA5Kewl/3keCz/z66eSZIK
- dYCr+VKcHpEcEakOaVnT6F41aG+EbW/K9vhEm12bZq8Fx+AOgqfRIJLEihXQQIfI4yTH
- rvxsXH5MmWnx0lt4DzAnElfCvZT7M9qXlRfwtugepPs0UZl3FH4hZnukNaYJOPheULzZ
- sNOnknlRam6RNmYzbtss0D+julDOCT0SK/bpIDDZucACe5ZkekQMhwJxaVTx5ZQYRbdc
- LqxN8ACDxxsR8fDCh1Iqj/Ej0x222sBfLSBU/mUaaoHiAclZsU7rJjOz0FAuchKdrrsB
- xaqQ==
-X-Gm-Message-State: AOJu0YwdKtWEJODo9i7265Gn6rwI+UrRqfuDWCU6uNnPB02KRGQoXZQm
- S0C+EmjegE/1NJDZBjbzoXQ/fGy6bXX/3j9FdfORYdBiHKhsJcAt
-X-Google-Smtp-Source: AGHT+IG+YPPCkZV31Rwn6ryxhwkQa9lOOgLAlkYsus/vnfiN9IrgibE1zMUvpAgHn3lHU6+xxQ1A6w==
-X-Received: by 2002:a17:906:bfc8:b0:a2d:5d73:8fb5 with SMTP id
- us8-20020a170906bfc800b00a2d5d738fb5mr911858ejb.59.1705769774699; 
- Sat, 20 Jan 2024 08:56:14 -0800 (PST)
+ d=1e100.net; s=20230601; t=1705769776; x=1706374576;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zPHHlg9FdQ90XVd55iFRYgLj7sgCzPVYVcdb591IuIs=;
+ b=cbMQivpUolQ8f4v8P8Xyz5aG+RoMRuFhED/ZWpNORm+npqyyg+2VkH7n3knIdWzMHz
+ HYrllCkTkFsF7rQbQJWqvIV9SYfPUdZH5ca9vR3Vep6dOteIfGE/eBwyoNvW7o5HPrF0
+ tipKWaGhMf40h0F8gquqyZRnzglEcsRItORYE634o3AmEeKx2FlvKqVS5H4h7+tkATU3
+ 16Pkc2BPSX2IbSLQuLcPwkLcgVCOLGXNuh/SaI7A9xOJZ4ZFkkCIfMXrV4rd8MqOtJnP
+ vPWBLoJyIBM5KW2aXoSEzAQPjMWISVyPOIpI9Plh6ScXtcao8za64zWGOgosLwtDJk/o
+ lfHg==
+X-Gm-Message-State: AOJu0Yyl6/TZD3qUwQU48gAqGbFyiFNqi9t61wVX8c7UX70kYOCGnPe/
+ k6dPeV2FqFeUOEugKaNh7K9+IP1m8NyTGOMHN0UQsUoPoq8D04/iRQu91xEFX43OMQ==
+X-Google-Smtp-Source: AGHT+IGNdQ4qDPA88SasR76b+g0fWTNkR3wmpuoHKZi4lJ6OjJOsmRiiqUYjlKBhpr87QK3N7pLSRA==
+X-Received: by 2002:a17:906:7848:b0:a28:fa55:3597 with SMTP id
+ p8-20020a170906784800b00a28fa553597mr788681ejm.98.1705769776114; 
+ Sat, 20 Jan 2024 08:56:16 -0800 (PST)
 Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
- ca13-20020a170906a3cd00b00a2c869be22dsm11311548ejb.143.2024.01.20.08.56.13
+ ca13-20020a170906a3cd00b00a2c869be22dsm11311548ejb.143.2024.01.20.08.56.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 20 Jan 2024 08:56:14 -0800 (PST)
+ Sat, 20 Jan 2024 08:56:15 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Anatolij Gustschin <agust@denx.de>,
  Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v5 00/13] Add T114 video support
-Date: Sat, 20 Jan 2024 18:55:30 +0200
-Message-Id: <20240120165543.10226-1-clamor95@gmail.com>
+Subject: [PATCH v5 02/13] video: tegra20: dc: fix image shift on rotated panels
+Date: Sat, 20 Jan 2024 18:55:32 +0200
+Message-Id: <20240120165543.10226-3-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20240120165543.10226-1-clamor95@gmail.com>
+References: <20240120165543.10226-1-clamor95@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,77 +91,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T114 is not that different from T30 and all T30 drivers will work
-on T114 as well with some adjustments.
+Subtracting 1 from x and y fixes image shifting on rotated
+panels.
 
-Patches propose general improvements for existing Tegra DC and DSI
-drivers as well Tegra 114 video support (experimentl).
-
-Commits pass buildman for tegra.
-
+Tested-by: Robert Eckelmann <longnoserob@gmail.com> # ASUS Grouper E1565
+Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
-Changes from v4:
- - fixed typo in max rate to be divided (400KHz > 400MHz)
+ drivers/video/tegra20/tegra-dc.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Changes from v3:
- - fixed the clock divider calculation if PLLD/D2 is used
- - removed unnecessary pre-configuration
- - set correct video FIFO depth for DSI
-
-Changes from v2:
- - fixed image distortion on devices with 180deg rotation
-
-Changes from v1:
- - reworked patchset entirely
- - diverged DC configuration per-SOC
- - consolidated dc headers from different SOC gen
- - initial support of DC detection (tegra has 2 DC)
- - added PLLD2 support, resets and powergating
- - added T114+ MIPI calibration
- - added DSI detection (tegra has 2 DSI) and resets
----
-
-Jonas Schwöbel (2):
-  video: tegra20: dsi: remove pre-configuration
-  video: tegra20: dsi: set correct fifo depth
-
-Svyatoslav Ryhel (11):
-  video: tegra20: dc: diverge DC per-SOC
-  video: tegra20: dc: fix image shift on rotated panels
-  video: tegra20: consolidate DC header
-  video: tegra20: dc: pass DC id to internal devices
-  video: tegra20: dc: add PLLD2 parent support
-  video: tegra20: dc: add reset support
-  video: tegra20: dc: add powergate
-  video: tegra20: dc: fix the clock divider calculation if PLLD/D2 is
-    used
-  video: tegra20: add MIPI calibration driver
-  video: tegra20: dsi: add T114 support
-  video: tegra20: dsi: add reset support
-
- arch/arm/dts/tegra114-u-boot.dtsi             |  13 ++
- arch/arm/dts/tegra114.dtsi                    |   4 +-
- arch/arm/dts/tegra30-u-boot.dtsi              |   4 +
- arch/arm/dts/tegra30.dtsi                     |   2 +-
- arch/arm/include/asm/arch-tegra/dc.h          |   8 -
- arch/arm/include/asm/arch-tegra114/pwm.h      |  13 ++
- arch/arm/include/asm/arch-tegra20/display.h   |  28 ---
- arch/arm/include/asm/arch-tegra30/display.h   |  28 ---
- drivers/video/tegra20/Makefile                |   2 +-
- drivers/video/tegra20/tegra-dc.c              | 211 +++++++++++++-----
- drivers/video/tegra20/tegra-dc.h              |  44 ++++
- drivers/video/tegra20/tegra-dsi.c             |  98 +++++++-
- .../video/tegra20/tegra-dsi.h                 |  24 +-
- drivers/video/tegra20/tegra-mipi.c            | 188 ++++++++++++++++
- drivers/video/tegra20/tegra-pwm-backlight.c   |   3 +-
- 15 files changed, 540 insertions(+), 130 deletions(-)
- create mode 100644 arch/arm/include/asm/arch-tegra114/pwm.h
- delete mode 100644 arch/arm/include/asm/arch-tegra20/display.h
- delete mode 100644 arch/arm/include/asm/arch-tegra30/display.h
- create mode 100644 drivers/video/tegra20/tegra-dc.h
- rename arch/arm/include/asm/arch-tegra30/dsi.h => drivers/video/tegra20/tegra-dsi.h (90%)
- create mode 100644 drivers/video/tegra20/tegra-mipi.c
-
+diff --git a/drivers/video/tegra20/tegra-dc.c b/drivers/video/tegra20/tegra-dc.c
+index 7605e77bc1..bcc2748623 100644
+--- a/drivers/video/tegra20/tegra-dc.c
++++ b/drivers/video/tegra20/tegra-dc.c
+@@ -242,8 +242,8 @@ static int setup_window(struct tegra_lcd_priv *priv,
+ 			struct disp_ctl_win *win)
+ {
+ 	if (priv->rotation) {
+-		win->x = priv->width * 2;
+-		win->y = priv->height;
++		win->x = priv->width * 2 - 1;
++		win->y = priv->height - 1;
+ 	} else {
+ 		win->x = 0;
+ 		win->y = 0;
 -- 
 2.40.1
 
