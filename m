@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BA1AC47258
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jan 2024 16:58:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8433FC47258
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jan 2024 21:04:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E075487ED7;
-	Sat, 20 Jan 2024 17:56:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8D22687447;
+	Sat, 20 Jan 2024 22:04:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GkouKV3q";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mDGGh3/l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38BB487E5A; Sat, 20 Jan 2024 17:56:32 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 594F687073; Sat, 20 Jan 2024 22:04:14 +0100 (CET)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B05E87DFA
- for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 17:56:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C952087447
+ for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 22:04:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-55a539d205aso2027106a12.3
- for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 08:56:24 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-dc22ae44595so1729162276.1
+ for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 13:04:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705769784; x=1706374584; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1705784649; x=1706389449; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Yb+ttg64tTztrEbozQVb9yMpLf6tqGcEI47p0nRhVwA=;
- b=GkouKV3qXav4gawWZTsagT55Cve4Jo9gln+ntRoviSY3WE3DJbLwLaBYVonz9HFS4+
- ot7g+nWTguIhfxKmSudRJWB5W8Jn4MVe+N5NlhXLAyD7F7gNoh9WeHh6FzCAwe3YmIwL
- LvL6dXPj8LbjLZzz0MGns8ZE+thRRSa4WCu0qIftlUVfXROoRKxZEBQwg2YCTanPHNeI
- Mg8zvRT8jqCElUAYGqbGkSqW94jTdsTnD/7GsOjsehThZWF9uoy8NRaK3l8n75FoMwVr
- yTR0uZhYJJGbqcEfz4HO2oG3ILo4u2ep1/lYhFdIJ8yiA0B7pBXlwXyy7EVcb/yEyc0T
- ApCw==
+ bh=l/XOr0GD8seceViC42BgyAki/JEGlbO/J+h/wiRQ4Yc=;
+ b=mDGGh3/lO64PhTUE1Azbfa2MnuFx4JYui256MZyvx8uWIPEeLLKdsSgxybM1x/3eZT
+ lrmJuOszAhR/kkBeTYI2hXcPnnx+1Kgo+acwRdOWPkjnFUoalRMeMn5HhVWAJ24bBKTW
+ TkAl/+uYKXpqQ1NpXyY9STY3T/1XsBRLSeStw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705769784; x=1706374584;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1705784649; x=1706389449;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Yb+ttg64tTztrEbozQVb9yMpLf6tqGcEI47p0nRhVwA=;
- b=Iq7jx68U4Wv0A/Mq7ei1wzFjWm1ak1i7FW0wTbXuicRO4zo1MlvLY8azGrYtwrL980
- 4hweVhAEvozdwfzD3rkSRBv1OloWMkXNLysswn3E9tgfgOZXFU5GVlyu8w42ly8aKg9m
- m6J8dVecLLCHX0Ij0PejEupWCSWSHpD2L1GwU+OahF1hAraQLZAX385L5z9pg9IT5Qjs
- LOp3n7ztWOIyIm2+Y1dTglqefwC+TD7zjJUDRUY7L1kVGKBwxhpCxBjKqPNE9GuqsBXV
- r4gbtwJ8HoM/Rr63tRbIVjO5yI9+cXcllA0md/mFK5rkrRWz8S72Eg65ECNBeOh05/MB
- txcg==
-X-Gm-Message-State: AOJu0YyVcyC9y7chEqWyxKPtSyUFy8zZTBOgWx82nzN+5PNUGxHeDzDi
- sZCR2zTQBAvQyUUU+WEgszsq8HFSLqxUZ1LLTj6pqoZsqobJw/HS
-X-Google-Smtp-Source: AGHT+IFXBqYWj/ZtsCBsuh1pq23bJomRaFywdan0dR0324AGehfTBvc4s33b4PBm0bWy9gdppuH4Iw==
-X-Received: by 2002:a17:906:e084:b0:a2c:41f7:ed43 with SMTP id
- gh4-20020a170906e08400b00a2c41f7ed43mr803715ejb.151.1705769783838; 
- Sat, 20 Jan 2024 08:56:23 -0800 (PST)
-Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
- ca13-20020a170906a3cd00b00a2c869be22dsm11311548ejb.143.2024.01.20.08.56.23
+ bh=l/XOr0GD8seceViC42BgyAki/JEGlbO/J+h/wiRQ4Yc=;
+ b=qJcgixPk/ZRr/u3ZLepQbWdW5kkLS/Jo4VPFZX0zWpLTso1Zvk/B9RDFJ6X9GKM6uY
+ jX63StVpf/k6DK4bOlPqCwBCBo1LvWHS8HvdUGT4lINs5jyKzM37h4DUBTM0UY0z3yaT
+ ryWlsfJjxLFXN6KN5DTkwjmnmhqS7ppj6W4+EWeGkMqSKkiI5QyRcrD+kSt38rIr4cs/
+ l6YzKsKB980gMi9RmQepT8ZNJjyfB3nKQuFaMCgDHs+1SQmSnTeXCSNVZJJ3OZFQZ5O2
+ cdUMzkGdXmU7DBnsvkiNrS8qI4r6RRpDerey9Y0rIpPkeGKUPbSXyr5LB1It7Cf4ELHE
+ VtbQ==
+X-Gm-Message-State: AOJu0YwJSAHNXaMRy+WFgN0x6eQykuszZy8UOXR4D/sSaqmoMsGNoIWx
+ xmxem3Om7wN+8FR6Jaixs1LvSbVhazxj01U1SMzk3H2qZqOldrmUk9c3Z6hsEfU=
+X-Google-Smtp-Source: AGHT+IEgp1U2z5kfX5zOgs3rftlJ8t9e+KrPFNUpsBhsLv7QqrhkSfr0CFf3tWTnZ0N1OcMF6MGqQw==
+X-Received: by 2002:a81:4e86:0:b0:5ff:9d3d:290a with SMTP id
+ c128-20020a814e86000000b005ff9d3d290amr1192765ywb.56.1705784649383; 
+ Sat, 20 Jan 2024 13:04:09 -0800 (PST)
+Received: from [127.0.1.1]
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ l85-20020a815758000000b005ff821bfdd3sm2390414ywb.27.2024.01.20.13.04.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 20 Jan 2024 08:56:23 -0800 (PST)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Thierry Reding <treding@nvidia.com>, Anatolij Gustschin <agust@denx.de>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v5 13/13] video: tegra20: dsi: set correct fifo depth
-Date: Sat, 20 Jan 2024 18:55:43 +0200
-Message-Id: <20240120165543.10226-14-clamor95@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240120165543.10226-1-clamor95@gmail.com>
-References: <20240120165543.10226-1-clamor95@gmail.com>
+ Sat, 20 Jan 2024 13:04:08 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: nm@ti.com, robertcnelson@gmail.com, marex@denx.de, 
+ Roger Quadros <rogerq@kernel.org>
+Cc: n-francis@ti.com, praneeth@ti.com, s-vadapalli@ti.com, 
+ r-gunasekaran@ti.com, srk@ti.com, vigneshr@ti.com, u-boot@lists.denx.de
+In-Reply-To: <20240112124951.238098-1-rogerq@kernel.org>
+References: <20240112124951.238098-1-rogerq@kernel.org>
+Subject: Re: [PATCH 0/5] k3-j721e: beagleboneai: Fix USB
+Message-Id: <170578464815.3836582.4299053911769160839.b4-ty@konsulko.com>
+Date: Sat, 20 Jan 2024 16:04:08 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.12.4
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,36 +92,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jonas Schwöbel <jonasschwoebel@yahoo.de>
+On Fri, 12 Jan 2024 14:49:46 +0200, Roger Quadros wrote:
 
-According to Thierry Reding's commit in the linux kernel
+> This series fixes USB operation on k3-j721e based boards.
+> 
+> CI testing: https://github.com/u-boot/u-boot/pull/468
+> 
+> cheers,
+> -roger
+> 
+> [...]
 
-976cebc35bed0456a42bf96073a26f251d23b264
-"drm/tegra: dsi: Make FIFO depths host parameters"
+Applied to u-boot/master, thanks!
 
-correct depth of the video FIFO is 1920 *words* no *bytes*
-
-Tested-by: Ion Agorria <ion@agorria.com> # HTC One X
-Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # Nvidia Tegratab T114
-Signed-off-by: Jonas Schwöbel <jonasschwoebel@yahoo.de>
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- drivers/video/tegra20/tegra-dsi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/video/tegra20/tegra-dsi.c b/drivers/video/tegra20/tegra-dsi.c
-index e60a1d2ac4..4bd1ca7280 100644
---- a/drivers/video/tegra20/tegra-dsi.c
-+++ b/drivers/video/tegra20/tegra-dsi.c
-@@ -859,7 +859,7 @@ static int tegra_dsi_bridge_probe(struct udevice *dev)
- 		return -EINVAL;
- 	}
- 
--	priv->video_fifo_depth = 480;
-+	priv->video_fifo_depth = 1920;
- 	priv->host_fifo_depth = 64;
- 
- 	ret = reset_get_by_name(dev, "dsi", &reset_ctl);
 -- 
-2.40.1
+Tom
+
 
