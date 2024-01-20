@@ -4,51 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C84FBC47258
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jan 2024 09:49:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 199D6C47258
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jan 2024 10:50:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D229687D95;
-	Sat, 20 Jan 2024 10:48:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=jens-maus.de
+	by phobos.denx.de (Postfix) with ESMTP id D507E879CC;
+	Sat, 20 Jan 2024 11:50:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=jens-maus.de header.i=@jens-maus.de header.b="XRhEBlOp";
+	dkim=pass (2048-bit key; secure) header.d=gmx.net header.i=wahrenst@gmx.net header.b="ZI887BQo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 756A987D98; Sat, 20 Jan 2024 10:48:57 +0100 (CET)
-Received: from mail.light-speed.de (mail.light-speed.de [85.214.38.116])
+ id AB1F787D97; Sat, 20 Jan 2024 11:50:13 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C31987D25
- for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 10:48:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=jens-maus.de
+ by phobos.denx.de (Postfix) with ESMTPS id 269A6879CB
+ for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 11:50:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mail@jens-maus.de
-Received: from smtpclient.apple (unknown
- [IPv6:2a02:810a:8280:47aa:e1ca:9c29:360a:5e29])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.light-speed.de (Postfix) with ESMTPSA id 995433D48651;
- Sat, 20 Jan 2024 10:48:54 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jens-maus.de;
- s=mail; t=1705744135;
- bh=pCXvSrYq/uZCY6Ir0LnXdKkf+43vC0aHekeMBM8t58g=;
- h=Subject:From:In-Reply-To:Date:Cc:References:To;
- b=XRhEBlOpvRe0rHnpm+hWXc99cp5T6XSmltMvUMdM+dKKjjp1HfvKm3G6FFA0l2fYD
- QMuB3sKxsV8q0W0yIzgm8V/5ro2dGzvZplBJIzcQxYwmRgPq0VjTq1INCSuc6+kPBz
- BR1AOMoh3gfTtqB4wC6WgaQAMaZLvISBJMFod4Pc=
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3774.300.61.1.2\))
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wahrenst@gmx.net
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+ s=s31663417; t=1705747810; x=1706352610; i=wahrenst@gmx.net;
+ bh=gW7f/ZZuMF8sCm5WJ09TvgLMKCuUFtG5p2QAn+rlXgY=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=ZI887BQo6uEXKWbfD7WlgKiMbCxQU3DQbbIhvQJG77rz0jvAi9igo6+jIR/Byi3Q
+ z69BW2atkd/p6jkCRoKtOJ8xh1+qAdQvbeBYi9ajojxfaqwSOZ8iW7dLGw18VoX4U
+ bTx+O1MGPspog85qkgD53m3oTUzU7zY/jq0z/aaai0Wc6JImDXBI93YH5T3U6Y5Br
+ oZAWqye8DX0zzQS9eb52C3Hjaip0guzVhj6FtxoKGOHDU+3pa2zSEHtaPxF3b4i76
+ gE5tooyxETwNWHBse8fD7mLi8f/VZj3dLwz30cN/MVaxVDKB6OnEZQKGK3l+v6D0C
+ tVw9BkX2mWglyPGRNA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.1.167] ([37.4.248.43]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MiJZO-1qwlzb3yNi-00fPza; Sat, 20
+ Jan 2024 11:50:10 +0100
+Message-ID: <ebffa598-6945-4a03-abe4-fe519df5fbfd@gmx.net>
+Date: Sat, 20 Jan 2024 11:50:09 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v4 0/6] rpi5: initial support
-From: Jens Maus <mail@jens-maus.de>
-In-Reply-To: <246035ba-0090-4cc3-982e-1de837ec7340@gmx.net>
-Date: Sat, 20 Jan 2024 10:48:42 +0100
-Cc: "Ivan T. Ivanov" <iivanov@suse.de>,
- u-boot@lists.denx.de
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <6E2D7E91-E869-48C6-8CE8-0B410A2B67B9@jens-maus.de>
+To: Jens Maus <mail@jens-maus.de>
+Cc: "Ivan T. Ivanov" <iivanov@suse.de>, u-boot@lists.denx.de
 References: <03bbe9ad-7cc6-491d-8bd9-631f1cf04f39@gmx.net>
  <418F8AAE-136A-44A0-80C3-D01FFE00EC2E@jens-maus.de>
  <sjmi6dftbgx56isfyjtaryehzq2iollwxm2etlspiygehh3n6v@k4ws56nsbgfn>
@@ -63,8 +60,31 @@ References: <03bbe9ad-7cc6-491d-8bd9-631f1cf04f39@gmx.net>
  <489FBAE5-501A-49F6-894D-58BE5C5429CC@jens-maus.de>
  <A0746263-646C-40C6-A2A6-659C39385E8B@jens-maus.de>
  <246035ba-0090-4cc3-982e-1de837ec7340@gmx.net>
-To: Stefan Wahren <wahrenst@gmx.net>
-X-Mailer: Apple Mail (2.3774.300.61.1.2)
+ <6E2D7E91-E869-48C6-8CE8-0B410A2B67B9@jens-maus.de>
+Content-Language: en-US
+From: Stefan Wahren <wahrenst@gmx.net>
+In-Reply-To: <6E2D7E91-E869-48C6-8CE8-0B410A2B67B9@jens-maus.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:+mnteJr0QeieAvsjKoAH+ahsk/x/+PJNL3ejd00nxk6HLqvwLVn
+ uH+H/GHYvUA78ClrwtaWnC5v5UGuQrWprs3hAuuOwqMFEwhFFcxEoBJBtDZa3iPwGXebPiZ
+ AIreyumKxIptd2bVlVLsH9DLB6qTRCoW/CszGbidvYnfdDPhQIi838/vJnKs8DV1cw9/s/c
+ YuPjWJCmv8WG/O6OQUGjw==
+UI-OutboundReport: notjunk:1;M01:P0:ZgJHNgqSrnI=;94fGdLpUbsKKZRsQmt1YCgZ+VMn
+ eIC+XF+hQMzV/4br1XdH9e4hRYGm6MV/K3/CDNIM6aidJYEYxIZfSjz2l2O0OrtTcnZUrawJO
+ mFVPcXHjATadAMJdoLvlWuAdqEWRPV1AItXWVVtUfrQ5Uk4YO1qxN1qGxfVRh1Y/Fe647XSfv
+ LAbmXbIAqS6Xx77GRRbG574jznkRcrQwm5KVlPvHFvw5wszVZh5qCFUpbir0aMcy6qHSTw+QO
+ BxT/m0ice3J+hJ+FXX4ARU5AdoQNUQWRZnBCg3sV6LkOoNrkvDTKjQUbF4IWihLc0Pa+p0lEG
+ Ukn6MbtDAiYlr5BPK2505ex7zEvMz2qu+waEDMOwb/eW2wvATE0+Wxfy6K67itXCh9t3J2Fwp
+ DX/LgfmxkWrzKVfFSbQtBZOoC5pzUxjPLCuH/Pkb0Ozc1vSPoew+b/q/yzE1QD5unza6ZRGIK
+ x2NGPEGPEUacOzjbkhAvBoolvRupvOacEkDXk8AkPz3CSJxufAg2QZaQDfxotyFsdNDblrMDq
+ h7zpHrQSpozcgqTVk8DE0TQxE7Y6uY3MUuPsrh86XOv6YVGs4B870z3bbzT+Li+MuBbiAld8j
+ dxUxfkVZBO1tAcL7YSY13m3UfQ3R/pNpNuJAX2iJO7FstXTBfHKAKAynPbd1WjJfjFlfWzW5E
+ hqDsvdsxM3Mh7RkhBqRyjmA0UxAbbE3/Jlv75XitkskLjFn8ESBSLTHezbuGWp3L2kc9jwmVb
+ yDl+tiwZdPf5FI2scqR0XNE6tcvDNhGjgSa3av9UJSFFxojIk8LLQubS7rwHNKMHZ8z5urUSQ
+ E0b6zyVftow/mpQSI2LKbjdHv1fqM7RPEybBMA5Tmh5hhDngtOo6QQhmhAwjrSxSyNfZvZzg6
+ Cye0oaSCbMMWWeKUN+nGGKQm4lwVxc54N8tub6v0fCsmPsH+ZaB5mMx+cuIcq2FHL+pZh7MO3
+ cZnBCg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,70 +103,84 @@ X-Virus-Status: Clean
 
 Hi,
 
-> Am 20.01.2024 um 10:22 schrieb Stefan Wahren <wahrenst@gmx.net>:
->=20
-> Am 19.01.24 um 22:26 schrieb Jens Maus:
->> I actually do have some good and bad news:
->>=20
->> 1. Good news: I got u-boot finally showing up with my RaspberryPi5 =
-8GB both on the HDMI and on the serial debug UART like you reported.
->>=20
->> 2. Bad news: I actually got it working by downgrading the rpi-eeprom =
-to the same 2023/10/30 (VERSION:30de0ba5) version like you have.
->>=20
->> So the issue I saw/reported seems to be somehow related/limited to =
-newer rpi-eeprom versions. Looking at my previous diff on the rpi =
-bootloader log output differences, the potentially relevant piece might =
-be the "M.2 PCIe HAT not detected.=E2=80=9C line that is only present in =
-newer rpi-eeprom version outputs.
->>=20
->> So hopefully you can reproduce that issue yourself when upgrading =
-your rpi-eeprom version to newer or also the latest version from =
-2024/01/15 available [1] and potentially find the actual piece that =
-prevent your patchset from working on newer eeprom versions.
-> thanks for your work, but i think you are wasting your time. The
-> rpi-eeprom release 2024/01/15 seems to be broken [1]
->=20
-> :-(
+Am 20.01.24 um 10:48 schrieb Jens Maus:
+> Hi,
+>
+>> Am 20.01.2024 um 10:22 schrieb Stefan Wahren <wahrenst@gmx.net>:
+>>
+>> Am 19.01.24 um 22:26 schrieb Jens Maus:
+>>> I actually do have some good and bad news:
+>>>
+>>> 1. Good news: I got u-boot finally showing up with my RaspberryPi5 8GB=
+ both on the HDMI and on the serial debug UART like you reported.
+>>>
+>>> 2. Bad news: I actually got it working by downgrading the rpi-eeprom t=
+o the same 2023/10/30 (VERSION:30de0ba5) version like you have.
+>>>
+>>> So the issue I saw/reported seems to be somehow related/limited to new=
+er rpi-eeprom versions. Looking at my previous diff on the rpi bootloader =
+log output differences, the potentially relevant piece might be the "M.2 P=
+CIe HAT not detected.=E2=80=9C line that is only present in newer rpi-eepr=
+om version outputs.
+>>>
+>>> So hopefully you can reproduce that issue yourself when upgrading your=
+ rpi-eeprom version to newer or also the latest version from 2024/01/15 av=
+ailable [1] and potentially find the actual piece that prevent your patchs=
+et from working on newer eeprom versions.
+>> thanks for your work, but i think you are wasting your time. The
+>> rpi-eeprom release 2024/01/15 seems to be broken [1]
+>>
+>> :-(
+> Thanks for that info. However, I also tested older eeprom versions to id=
+entify when the issue that u-boot cannot boot a rpi5 started to appear. An=
+d I am afraid, it already starts with version 2023-11-20 right after the 2=
+023-10-30 which currently seems to work fine with Ivan=E2=80=99s patches. =
+Looking at the release notes of rpi-eeprom [1] one can see the following e=
+ntries:
+sorry, i got it wrong. I thought only 2024-01-15 is affected.
+Unfortunately i'm not a U-Boot developer and i also don't have a RPi 5.
+So i only can give some (hopefully) smart advices :-)
 
-Thanks for that info. However, I also tested older eeprom versions to =
-identify when the issue that u-boot cannot boot a rpi5 started to =
-appear. And I am afraid, it already starts with version 2023-11-20 right =
-after the 2023-10-30 which currently seems to work fine with Ivan=E2=80=99=
-s patches. Looking at the release notes of rpi-eeprom [1] one can see =
-the following entries:
+One idea would be to enable early debug in U-Boot (no idea how to
+achieve this). I assume U-Boot crashes before it's able to print the
+first line, but it's hard to believe it crashes at the very first
+instruction of U-Boot. So with some luck we should be able to narrow
+done the cause.
 
-=E2=80=94 cut here =E2=80=94
-2023-11-20: Auto-detect support for PCIe expansion HAT (default + =
-latest)
+Another point would be to open an Github issue on rpi-eeprom and ask
+them for advice, why 2023-11-20 stops to work in our case. Sure they
+don't want to support U-Boot, but they are also interested in Linux
+Mainline support.
 
-    =E2=80=A2 Add autodetect support for PCIe expansion HATs
-    =E2=80=A2 Add PCIE_PROBE=3D1 to the EEPROM config for custom PCIe =
-exapansion designs that do not support the upcoming HAT spec. This gives =
-similar behaviour to CM4 where PCIe x1 is enumerated to discover NVMe =
-devices.
-    =E2=80=A2 Fix loading of multiple initramfs images that are not =
-32-bit aligned sizes raspberrypi/firmware#1843
-    =E2=80=A2 Kernel load performance improvement - remove a memcpy
-=E2=80=94 cut here =E2=80=94=20
-
-So as I stated earlier, one probable catch for the u-boot patches here =
-might be the mentioned PCIe changes with the rpi-eeprom 2023-11-20 =
-version. Or it might be related to the =E2=80=9Ekernel load performance =
-improvements=E2=80=9C mentioned?!?
-
-For now I am of course using the 2023-10-30 rpi-eeprom version and so =
-far it works flawlessly with Ivan=E2=80=99s u-boot patches. Still I hope =
-Ivan or someone else can have a closer look why with the 2023-11-20 =
-version of rpi-eeprom u-boot immediately stops working at all.
-
-best regards,
-jens
-
-[1] =
-https://github.com/raspberrypi/rpi-eeprom/blob/master/firmware-2712/releas=
-e-notes.md
---=20
-Jens Maus, Dresden/Germany
-http://jens-maus.de/
+Best regards
+>
+> =E2=80=94 cut here =E2=80=94
+> 2023-11-20: Auto-detect support for PCIe expansion HAT (default + latest=
+)
+>
+>      =E2=80=A2 Add autodetect support for PCIe expansion HATs
+>      =E2=80=A2 Add PCIE_PROBE=3D1 to the EEPROM config for custom PCIe e=
+xapansion designs that do not support the upcoming HAT spec. This gives si=
+milar behaviour to CM4 where PCIe x1 is enumerated to discover NVMe device=
+s.
+>      =E2=80=A2 Fix loading of multiple initramfs images that are not 32-=
+bit aligned sizes raspberrypi/firmware#1843
+>      =E2=80=A2 Kernel load performance improvement - remove a memcpy
+> =E2=80=94 cut here =E2=80=94
+>
+> So as I stated earlier, one probable catch for the u-boot patches here m=
+ight be the mentioned PCIe changes with the rpi-eeprom 2023-11-20 version.=
+ Or it might be related to the =E2=80=9Ekernel load performance improvemen=
+ts=E2=80=9C mentioned?!?
+>
+> For now I am of course using the 2023-10-30 rpi-eeprom version and so fa=
+r it works flawlessly with Ivan=E2=80=99s u-boot patches. Still I hope Iva=
+n or someone else can have a closer look why with the 2023-11-20 version o=
+f rpi-eeprom u-boot immediately stops working at all.
+>
+> best regards,
+> jens
+>
+> [1] https://github.com/raspberrypi/rpi-eeprom/blob/master/firmware-2712/=
+release-notes.md
 
