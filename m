@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8433FC47258
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jan 2024 21:04:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B84AC47DD3
+	for <u-boot@archiver.kernel.org>; Sat, 20 Jan 2024 23:28:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D22687447;
-	Sat, 20 Jan 2024 22:04:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4C38E876F4;
+	Sun, 21 Jan 2024 00:28:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mDGGh3/l";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WVViGrg1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 594F687073; Sat, 20 Jan 2024 22:04:14 +0100 (CET)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+ id D7A9B87869; Sun, 21 Jan 2024 00:28:23 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C952087447
- for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 22:04:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DC7D5875C5
+ for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 00:28:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-dc22ae44595so1729162276.1
- for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 13:04:10 -0800 (PST)
+ spf=pass smtp.mailfrom=fr0st61te@gmail.com
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-50e7f58c5fbso2415902e87.1
+ for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 15:28:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705784649; x=1706389449; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=l/XOr0GD8seceViC42BgyAki/JEGlbO/J+h/wiRQ4Yc=;
- b=mDGGh3/lO64PhTUE1Azbfa2MnuFx4JYui256MZyvx8uWIPEeLLKdsSgxybM1x/3eZT
- lrmJuOszAhR/kkBeTYI2hXcPnnx+1Kgo+acwRdOWPkjnFUoalRMeMn5HhVWAJ24bBKTW
- TkAl/+uYKXpqQ1NpXyY9STY3T/1XsBRLSeStw=
+ d=gmail.com; s=20230601; t=1705793301; x=1706398101; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9edRhZV4RNwO8Pc3qdkyouN8izXXmhlK/VxhTNYo/PU=;
+ b=WVViGrg1yFQq0Pmff51y3NzxQ91R1L+cOT9jqAtibbdaMhcnoRbeD7kl8DWOHiKuLq
+ K6FPaoZj2mpfkpbVauvnBFtHKZ/fQuzZ74ox+PggGlBuNX8sOH01BlX3ublHpWHD/8lq
+ norunOwY8Eh1PzaV9JDIhPwe/KMgEEM+r1zs8Zoojhm//7GJY2QSg49H6k0L5AVxCXkk
+ ik/xnnfCqQrbKxWyZHfNI6Jiy9Mp/UugSx4majOaAT37hIR8IapuoTDxKOm5fe54CBaK
+ 7lajzof+D6zzDTOxe1kP670T/6B1O3SLB9lN8UOVFzDB1Sb2hE8CKbGFQ8RkCtiN087L
+ yHEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705784649; x=1706389449;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=l/XOr0GD8seceViC42BgyAki/JEGlbO/J+h/wiRQ4Yc=;
- b=qJcgixPk/ZRr/u3ZLepQbWdW5kkLS/Jo4VPFZX0zWpLTso1Zvk/B9RDFJ6X9GKM6uY
- jX63StVpf/k6DK4bOlPqCwBCBo1LvWHS8HvdUGT4lINs5jyKzM37h4DUBTM0UY0z3yaT
- ryWlsfJjxLFXN6KN5DTkwjmnmhqS7ppj6W4+EWeGkMqSKkiI5QyRcrD+kSt38rIr4cs/
- l6YzKsKB980gMi9RmQepT8ZNJjyfB3nKQuFaMCgDHs+1SQmSnTeXCSNVZJJ3OZFQZ5O2
- cdUMzkGdXmU7DBnsvkiNrS8qI4r6RRpDerey9Y0rIpPkeGKUPbSXyr5LB1It7Cf4ELHE
- VtbQ==
-X-Gm-Message-State: AOJu0YwJSAHNXaMRy+WFgN0x6eQykuszZy8UOXR4D/sSaqmoMsGNoIWx
- xmxem3Om7wN+8FR6Jaixs1LvSbVhazxj01U1SMzk3H2qZqOldrmUk9c3Z6hsEfU=
-X-Google-Smtp-Source: AGHT+IEgp1U2z5kfX5zOgs3rftlJ8t9e+KrPFNUpsBhsLv7QqrhkSfr0CFf3tWTnZ0N1OcMF6MGqQw==
-X-Received: by 2002:a81:4e86:0:b0:5ff:9d3d:290a with SMTP id
- c128-20020a814e86000000b005ff9d3d290amr1192765ywb.56.1705784649383; 
- Sat, 20 Jan 2024 13:04:09 -0800 (PST)
-Received: from [127.0.1.1]
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- l85-20020a815758000000b005ff821bfdd3sm2390414ywb.27.2024.01.20.13.04.08
+ d=1e100.net; s=20230601; t=1705793301; x=1706398101;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9edRhZV4RNwO8Pc3qdkyouN8izXXmhlK/VxhTNYo/PU=;
+ b=rxdSd8nVAbHn9S+ofTUnGa2fon4BPTJKIi8WwS06h4+ytQvwemvLKzrX+IdDsa1Sba
+ P7b3Kud4xuiFmY0fJbBQtXEJGvY+e+XTd3ebTU76c663Ts2gwmG65IgzJZ8FiOKl8JO4
+ 8nm3B8erSS9d/T8VuVIKDyyCVSYJVQ1o3jhCZD/OVsTLVUKvLPC92LWq/pJAIxSj23bp
+ MZ8Ul1rvNLun9XPgWSyjIdvxQcB14sE3Ujkj13bdF1DJiJP9HBErmdKEbI78kpnXQ2Xb
+ uKqOCAbI1lmXyJbCK7tVf67awPYsJrSe5JFrLwsuWVwZCR/DbmtDvkwy8ktJq9sbVzlg
+ RFWg==
+X-Gm-Message-State: AOJu0YyV9X/rvfYgMxuxzP7PJRQjsM7wzAFuomK4QJZ84brtZUZx27Cl
+ vo7WeHPkh/+ASnkPR9BBOWUUih3E5cjN0+D+2la5xeJrMq9cdm6+1PrylDLOlAzCnw==
+X-Google-Smtp-Source: AGHT+IGqec656dWjXblkH052MdUsIYmWTp/Q3eb+cv7rSNv1hkNN5duWuf/ufF1K1+lZAgZROGg/NQ==
+X-Received: by 2002:a05:6512:3b90:b0:50e:d5e2:92cc with SMTP id
+ g16-20020a0565123b9000b0050ed5e292ccmr1187939lfv.81.1705793300877; 
+ Sat, 20 Jan 2024 15:28:20 -0800 (PST)
+Received: from fr.lan ([81.200.17.74]) by smtp.googlemail.com with ESMTPSA id
+ x25-20020a19e019000000b0050e77abd553sm1475416lfg.76.2024.01.20.15.28.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 20 Jan 2024 13:04:08 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: nm@ti.com, robertcnelson@gmail.com, marex@denx.de, 
- Roger Quadros <rogerq@kernel.org>
-Cc: n-francis@ti.com, praneeth@ti.com, s-vadapalli@ti.com, 
- r-gunasekaran@ti.com, srk@ti.com, vigneshr@ti.com, u-boot@lists.denx.de
-In-Reply-To: <20240112124951.238098-1-rogerq@kernel.org>
-References: <20240112124951.238098-1-rogerq@kernel.org>
-Subject: Re: [PATCH 0/5] k3-j721e: beagleboneai: Fix USB
-Message-Id: <170578464815.3836582.4299053911769160839.b4-ty@konsulko.com>
-Date: Sat, 20 Jan 2024 16:04:08 -0500
+ Sat, 20 Jan 2024 15:28:20 -0800 (PST)
+From: Ivan Mikhaylov <fr0st61te@gmail.com>
+To: Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, openbmc@lists.ozlabs.org,
+ Ivan Mikhaylov <fr0st61te@gmail.com>
+Subject: [PATCH] pinctrl: aspeed: add pass-through pins and siopbi/siopbo
+Date: Sun, 21 Jan 2024 02:28:13 +0300
+Message-ID: <20240120232813.32474-1-fr0st61te@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.4
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,20 +91,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 12 Jan 2024 14:49:46 +0200, Roger Quadros wrote:
+Add THRU0-3 and SIOPBI/SIOPBO pin groups/functions.
 
-> This series fixes USB operation on k3-j721e based boards.
-> 
-> CI testing: https://github.com/u-boot/u-boot/pull/468
-> 
-> cheers,
-> -roger
-> 
-> [...]
+Signed-off-by: Ivan Mikhaylov <fr0st61te@gmail.com>
+---
+ arch/arm/dts/ast2600.dtsi                | 20 ++++++++++++++++
+ drivers/pinctrl/aspeed/pinctrl_ast2600.c | 30 ++++++++++++++++++++++++
+ 2 files changed, 50 insertions(+)
 
-Applied to u-boot/master, thanks!
-
+diff --git a/arch/arm/dts/ast2600.dtsi b/arch/arm/dts/ast2600.dtsi
+index beabcf14f8..43db80edfe 100644
+--- a/arch/arm/dts/ast2600.dtsi
++++ b/arch/arm/dts/ast2600.dtsi
+@@ -2028,6 +2028,26 @@
+ 		groups = "SPI2MOSI";
+ 	};
+ 
++	pinctrl_thru0_default: thru0_default {
++		function = "THRU0";
++		groups = "THRU0";
++	};
++
++	pinctrl_thru1_default: thru1_default {
++		function = "THRU1";
++		groups = "THRU1";
++	};
++
++	pinctrl_thru2_default: thru2_default {
++		function = "THRU2";
++		groups = "THRU2";
++	};
++
++	pinctrl_thru3_default: thru3_default {
++		function = "THRU3";
++		groups = "THRU3";
++	};
++
+ 	pinctrl_timer3_default: timer3_default {
+ 		function = "TIMER3";
+ 		groups = "TIMER3";
+diff --git a/drivers/pinctrl/aspeed/pinctrl_ast2600.c b/drivers/pinctrl/aspeed/pinctrl_ast2600.c
+index 97e8b4ec9b..8a4f9705ca 100644
+--- a/drivers/pinctrl/aspeed/pinctrl_ast2600.c
++++ b/drivers/pinctrl/aspeed/pinctrl_ast2600.c
+@@ -267,6 +267,14 @@ static struct aspeed_sig_desc fmcquad_link[] = {
+ 	{ 0x438, GENMASK(5, 4), 0 },
+ };
+ 
++static struct aspeed_sig_desc siopbi_link[] = {
++	{ 0x418, BIT(6), 0 },
++};
++
++static struct aspeed_sig_desc siopbo_link[] = {
++	{ 0x418, BIT(5), 0 },
++};
++
+ static struct aspeed_sig_desc spi1_link[] = {
+ 	{ 0x438, GENMASK(13, 11), 0 },
+ };
+@@ -303,6 +311,22 @@ static struct aspeed_sig_desc spi2quad_link[] = {
+ 	{ 0x434, GENMASK(31, 30), 0 },
+ };
+ 
++static struct aspeed_sig_desc thru0_link[] = {
++	{ 0x4bc, GENMASK(25, 24), 0 },
++};
++
++static struct aspeed_sig_desc thru1_link[] = {
++	{ 0x4bc, GENMASK(27, 26), 0 },
++};
++
++static struct aspeed_sig_desc thru2_link[] = {
++	{ 0x4bc, GENMASK(29, 28), 0 },
++};
++
++static struct aspeed_sig_desc thru3_link[] = {
++	{ 0x4bc, GENMASK(31, 30), 0 },
++};
++
+ static struct aspeed_sig_desc fsi1[] = {
+ 	{ 0xd48, GENMASK(21, 20), 0 },
+ };
+@@ -458,6 +482,8 @@ static const struct aspeed_group_config ast2600_groups[] = {
+ 	{ "EMMC", ARRAY_SIZE(emmc_link), emmc_link },
+ 	{ "EMMCG8", ARRAY_SIZE(emmcg8_link), emmcg8_link },
+ 	{ "FMCQUAD", ARRAY_SIZE(fmcquad_link), fmcquad_link },
++	{ "SIOPBI", ARRAY_SIZE(siopbi_link), siopbi_link },
++	{ "SIOPBO", ARRAY_SIZE(siopbo_link), siopbo_link },
+ 	{ "SPI1", ARRAY_SIZE(spi1_link), spi1_link },
+ 	{ "SPI1ABR", ARRAY_SIZE(spi1abr_link), spi1abr_link },
+ 	{ "SPI1CS1", ARRAY_SIZE(spi1cs1_link), spi1cs1_link },
+@@ -467,6 +493,10 @@ static const struct aspeed_group_config ast2600_groups[] = {
+ 	{ "SPI2CS1", ARRAY_SIZE(spi2cs1_link), spi2cs1_link },
+ 	{ "SPI2CS2", ARRAY_SIZE(spi2cs2_link), spi2cs2_link },
+ 	{ "SPI2QUAD", ARRAY_SIZE(spi2quad_link), spi2quad_link },
++	{ "THRU0", ARRAY_SIZE(thru0_link), thru0_link },
++	{ "THRU1", ARRAY_SIZE(thru1_link), thru1_link },
++	{ "THRU2", ARRAY_SIZE(thru2_link), thru2_link },
++	{ "THRU3", ARRAY_SIZE(thru3_link), thru3_link },
+ 	{ "I2C1", ARRAY_SIZE(i2c1_link), i2c1_link },
+ 	{ "I2C2", ARRAY_SIZE(i2c2_link), i2c2_link },
+ 	{ "I2C3", ARRAY_SIZE(i2c3_link), i2c3_link },
 -- 
-Tom
-
+2.43.0
 
