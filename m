@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2EDCC47422
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 15:11:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 847CFC47DAF
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 15:11:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 665B187842;
+	by phobos.denx.de (Postfix) with ESMTP id DAC558786B;
 	Sun, 21 Jan 2024 16:11:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="adVkiTJR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e3d8Ylb4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DF808774B; Sun, 21 Jan 2024 16:06:59 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id C406D87705; Sun, 21 Jan 2024 16:07:04 +0100 (CET)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 172B087705
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 16:06:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CA74B87708
+ for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 16:07:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seashell11234455@gmail.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-1d755e2f460so639695ad.0
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 07:06:57 -0800 (PST)
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-6dbcdbe13e1so526353b3a.3
+ for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 07:07:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705849614; x=1706454414; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1705849619; x=1706454419; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0ffGNn5Ds+0Fw94VsgHppvqzxxhSKyG29xLMAK/RkZ0=;
- b=adVkiTJR/ReN6B1BjGZT+Tw7793hRg2RWsI5B6nCehHQoUosMav4eVktIVkoFd9/tz
- Be9ZrSrJVyuv1U94NQqepNPVpllHaf6I/MMY541bxCRgSrYNHtqheSR6CocTf6/6x4tJ
- r3RgLHUuXjvjeVM3U490q06FAQI9rMKb8my3h1j+ZAJh3RGBK18clsSSX1FolCxqv012
- M9EX/3eZgkLC1BTFGe1Pdec81IZmByvkvXVa6o2/fhaFVG9/1QR35iPcn358P3Lh+Ged
- KgUq+K5DkqKEhwGcP1tMMFDYo1i33tWMCFlsYyxBxNA0qF7LxKtduyAkVkon6aDkN+uz
- x/TQ==
+ bh=1Psrw6t9YChHYoGUJlONXgotKNGhG2YNyD5Kf1SmmoM=;
+ b=e3d8Ylb4gCLWqot2YcpYP1Tny1ym5/BGwNUHpMZZUGUTxQK/yqAXKsen5MvHV5mBKZ
+ 1PBCrBDy11KVaZmGWWer+tDdCAJqpzPjTZIHhxB8s+i7AHr/fhUPcR432k6MTL4yu5o8
+ Qx652xp7ManhM/2QNHDL2Zvg/baX1fxNnruy1hcFLiNEi0cBp69UlgzasplRISj04osa
+ 7qXerpu3WLiILB2W8QKDiarXGPQBF+A+UGwl4aDtmn298uN3uOfGjw8cJ60YH+k5aP/e
+ YZMBUSIAGj9C62FgVN5xjL8hwaglN0E8Z1yGuByDvlOe8SYkAGHGxEor1irIVNLQYWVl
+ QEXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705849614; x=1706454414;
+ d=1e100.net; s=20230601; t=1705849619; x=1706454419;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0ffGNn5Ds+0Fw94VsgHppvqzxxhSKyG29xLMAK/RkZ0=;
- b=VSbTkXBFv4vbaCb/3Sphxr4SMRbIlDEsMMn8SSew2lOTCSZOBbkCiyGpWXPjI9YtJ7
- sRTnfoY4zp7ivbG/gjz5XtLaHnwkLeNc5zGazmmvSMCZ7nbzvqamSwRL8o9hYzoMvEc8
- vRq/3kazXEaiv79E1xh3nf1t5SRaJF/0yM7McyWo5NInEhLJZUMDVCP8Y38PeIHipVSU
- Jx0kdcrKuTzcxrTYldN6qXt0EeKwNQzOJaJP3yzxiwp6IMkPmd66jwzEhUD3LGenPb7R
- re+v4IHtJvQ3m94oMQWSusFfz/eOgWs9+coVTvJGtFBj5A/oHhS3XHSQhXcKYnuBMB+J
- uq1Q==
-X-Gm-Message-State: AOJu0Yw0SVKVxrAYAKKj6crHuCKUkhbbziNB0RX+w25cb9sDyv6AqKqH
- tw3/VwzIKW5vXqzd+jGMywh4XTp8lHT13Bd4pXiRBfY7U2x1Rr7a+Lpcga150bCPuQ==
-X-Google-Smtp-Source: AGHT+IGe2hMwweOVslugUZawR79xJnvhE/J0M3GcsWg+pdQBBgkNpmruLq3bpGLSssQMAswUvM3WPA==
-X-Received: by 2002:a17:902:ec92:b0:1d7:481c:2066 with SMTP id
- x18-20020a170902ec9200b001d7481c2066mr1326016plg.128.1705849614473; 
- Sun, 21 Jan 2024 07:06:54 -0800 (PST)
+ bh=1Psrw6t9YChHYoGUJlONXgotKNGhG2YNyD5Kf1SmmoM=;
+ b=wwFpzawnW/MJwbMP7BwahppObkMApvRp5igyZ11nQYCFlClNAk4trpwSnoTqTG1+sl
+ ZcHVf4I+LhVi8qcnsW83MqJSRJcr+Bb0G/viCMXMtaPfLepufPum0ijpOpjxyy8Ov2/g
+ n5UYOChQMcVadqMBf1S+kXxvm+aszrXZGhjArFBFfwlsm3NhoHLBAG5XNFi+ee27MtHG
+ 6c8zZerHaAMpsOLO97NG6BmS1PyEGJDrs53GZl+oVUGGvOnMugMis3CxtqihQ7Ffvvis
+ abWT6ujXLrm+7Mrd2LmBb0rF8uxe6fPkrhFNAzsSIx4HGZhYtIKsug3KyKeySmOIl3mK
+ c74g==
+X-Gm-Message-State: AOJu0YxreUnMcB4Kyyt7MIEwKilJCsXqNkxp3PsMO9hROQhHrbvigCXS
+ n+4PdWlV3yn1/7/79O+cpC/GVi70/z/O80laoIdGif9pYbdTraymmQyf1QQl0AZw7g==
+X-Google-Smtp-Source: AGHT+IHJVD6vhsY8BCILZEOpYAcUp81nIzyr+2BbOOHWjMYc9hhUwGm1UGte+OXJvY05cWuAIm7+4w==
+X-Received: by 2002:a17:902:6b02:b0:1d5:8c0e:2d05 with SMTP id
+ o2-20020a1709026b0200b001d58c0e2d05mr1066248plk.135.1705849619147; 
+ Sun, 21 Jan 2024 07:06:59 -0800 (PST)
 Received: from localhost.localdomain ([218.73.27.11])
  by smtp.gmail.com with ESMTPSA id
- ke5-20020a170903340500b001d33e6521b9sm5942139plb.14.2024.01.21.07.06.51
+ ke5-20020a170903340500b001d33e6521b9sm5942139plb.14.2024.01.21.07.06.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 21 Jan 2024 07:06:54 -0800 (PST)
+ Sun, 21 Jan 2024 07:06:58 -0800 (PST)
 From: Kongyang Liu <seashell11234455@gmail.com>
 To: u-boot@lists.denx.de
-Cc: Bin Meng <bmeng@tinylab.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Leo <ycliang@andestech.com>, Michal Simek <michal.simek@amd.com>,
- Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>,
- Samuel Holland <samuel@sholland.org>, Shengyu Qu <wiagn233@outlook.com>,
- Tom Rini <trini@konsulko.com>, Yu Chien Peter Lin <peterlin@andestech.com>
-Subject: [PATCH v3 2/3] riscv: sophgo: milkv_duo: initial support added
-Date: Sun, 21 Jan 2024 23:05:14 +0800
-Message-ID: <20240121150630.30588-3-seashell11234455@gmail.com>
+Cc: Adam Ford <aford173@gmail.com>, Chris Morgan <macromorgan@hotmail.com>,
+ Fabio Estevam <festevam@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Kever Yang <kever.yang@rock-chips.com>, Nishanth Menon <nm@ti.com>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
+ Wei Fu <wefu@redhat.com>, Yanhong Wang <yanhong.wang@starfivetech.com>,
+ Yannic Moog <y.moog@phytec.de>, Yixun Lan <dlan@gentoo.org>
+Subject: [PATCH v3 3/3] doc: sophgo: milkv_duo: document Milk-V Duo board
+Date: Sun, 21 Jan 2024 23:05:15 +0800
+Message-ID: <20240121150630.30588-4-seashell11234455@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240121150630.30588-1-seashell11234455@gmail.com>
 References: <20240121150630.30588-1-seashell11234455@gmail.com>
@@ -96,178 +99,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for Sophgo's Milk-V Duo board, only minimal device tree and
-serial console are enabled, and it can boot via vendor first stage
-bootloader.
+Add document for Milk-V Duo board which based on Sophgo's CV1800B SoC.
 
 Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
 
 ---
 
 Changes in v3:
-- Enable EFI loader
+- Add brief description of the procedure to run u-boot-dtb.bin
 
-Changes in v2:
-- Fold the defconfig patch to first patch
-- Remove unnecessary environment settings of consoledev and baudrate in
-  config
+ doc/board/index.rst            |  1 +
+ doc/board/sophgo/index.rst     |  8 +++++
+ doc/board/sophgo/milkv_duo.rst | 64 ++++++++++++++++++++++++++++++++++
+ 3 files changed, 73 insertions(+)
+ create mode 100644 doc/board/sophgo/index.rst
+ create mode 100644 doc/board/sophgo/milkv_duo.rst
 
- arch/riscv/Kconfig                 |  4 ++++
- board/sophgo/milkv_duo/Kconfig     | 28 ++++++++++++++++++++++++++++
- board/sophgo/milkv_duo/MAINTAINERS |  6 ++++++
- board/sophgo/milkv_duo/Makefile    |  5 +++++
- board/sophgo/milkv_duo/board.c     |  9 +++++++++
- configs/milkv_duo_defconfig        | 23 +++++++++++++++++++++++
- include/configs/milkv_duo.h        | 12 ++++++++++++
- 7 files changed, 87 insertions(+)
- create mode 100644 board/sophgo/milkv_duo/Kconfig
- create mode 100644 board/sophgo/milkv_duo/MAINTAINERS
- create mode 100644 board/sophgo/milkv_duo/Makefile
- create mode 100644 board/sophgo/milkv_duo/board.c
- create mode 100644 configs/milkv_duo_defconfig
- create mode 100644 include/configs/milkv_duo.h
-
-diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-index 67126d96af..ac52c5e6da 100644
---- a/arch/riscv/Kconfig
-+++ b/arch/riscv/Kconfig
-@@ -14,6 +14,9 @@ config TARGET_ANDES_AE350
- config TARGET_MICROCHIP_ICICLE
- 	bool "Support Microchip PolarFire-SoC Icicle Board"
- 
-+config TARGET_MILKV_DUO
-+	bool "Support Milk-v Duo Board"
-+
- config TARGET_OPENPITON_RISCV64
- 	bool "Support RISC-V cores on OpenPiton SoC"
- 
-@@ -83,6 +86,7 @@ source "board/openpiton/riscv64/Kconfig"
- source "board/sifive/unleashed/Kconfig"
- source "board/sifive/unmatched/Kconfig"
- source "board/sipeed/maix/Kconfig"
-+source "board/sophgo/milkv_duo/Kconfig"
- source "board/starfive/visionfive2/Kconfig"
- source "board/thead/th1520_lpi4a/Kconfig"
- source "board/xilinx/mbv/Kconfig"
-diff --git a/board/sophgo/milkv_duo/Kconfig b/board/sophgo/milkv_duo/Kconfig
+diff --git a/doc/board/index.rst b/doc/board/index.rst
+index c96e5fda28..d0f9f355d2 100644
+--- a/doc/board/index.rst
++++ b/doc/board/index.rst
+@@ -46,6 +46,7 @@ Board-specific doc
+    sifive/index
+    sipeed/index
+    socionext/index
++   sophgo/index
+    st/index
+    starfive/index
+    ste/index
+diff --git a/doc/board/sophgo/index.rst b/doc/board/sophgo/index.rst
 new file mode 100644
-index 0000000000..2a458f291c
+index 0000000000..e097afdac6
 --- /dev/null
-+++ b/board/sophgo/milkv_duo/Kconfig
-@@ -0,0 +1,28 @@
-+if TARGET_MILKV_DUO
++++ b/doc/board/sophgo/index.rst
+@@ -0,0 +1,8 @@
++.. SPDX-License-Identifier: GPL-2.0+
 +
-+config SYS_BOARD
-+	default "milkv_duo"
++Sophgo
++======
++.. toctree::
++   :maxdepth: 1
 +
-+config SYS_VENDOR
-+	default "sophgo"
-+
-+config SYS_CPU
-+	default "generic"
-+
-+config SYS_CONFIG_NAME
-+	default "milkv_duo"
-+
-+config TEXT_BASE
-+	default 0x80200000
-+
-+config ENV_SIZE
-+	default 0x20000
-+
-+config ENV_SECT_SIZE
-+	default 0x40000
-+
-+config BOARD_SPECIFIC_OPTIONS
-+	def_bool y
-+	select GENERIC_RISCV
-+
-+endif
-diff --git a/board/sophgo/milkv_duo/MAINTAINERS b/board/sophgo/milkv_duo/MAINTAINERS
++   milkv_duo
+diff --git a/doc/board/sophgo/milkv_duo.rst b/doc/board/sophgo/milkv_duo.rst
 new file mode 100644
-index 0000000000..651a0592f7
+index 0000000000..cb2ed1ad98
 --- /dev/null
-+++ b/board/sophgo/milkv_duo/MAINTAINERS
-@@ -0,0 +1,6 @@
++++ b/doc/board/sophgo/milkv_duo.rst
+@@ -0,0 +1,64 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
 +Milk-V Duo
-+M:	Kongyang Liu <seashell11234455@gmail.com>
-+S:	Maintained
-+F:	board/sophgo/milkv_duo/
-+F:	configs/milkv_duo_defconfig
-+F:	doc/board/sophgo/milkv_duo.rst
-diff --git a/board/sophgo/milkv_duo/Makefile b/board/sophgo/milkv_duo/Makefile
-new file mode 100644
-index 0000000000..a087013f5c
---- /dev/null
-+++ b/board/sophgo/milkv_duo/Makefile
-@@ -0,0 +1,5 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
++==========
 +
-+obj-y := board.o
-diff --git a/board/sophgo/milkv_duo/board.c b/board/sophgo/milkv_duo/board.c
-new file mode 100644
-index 0000000000..eaa47be173
---- /dev/null
-+++ b/board/sophgo/milkv_duo/board.c
-@@ -0,0 +1,9 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
-+ */
++CV1800B RISC-V SoC
++------------------
++The CV1800B is a high-performance, low-power 1+1 64-bit RISC-V SoC from Sophgo.
 +
-+int board_init(void)
-+{
-+	return 0;
-+}
-diff --git a/configs/milkv_duo_defconfig b/configs/milkv_duo_defconfig
-new file mode 100644
-index 0000000000..9eca6abfbc
---- /dev/null
-+++ b/configs/milkv_duo_defconfig
-@@ -0,0 +1,23 @@
-+CONFIG_RISCV=y
-+CONFIG_SYS_MALLOC_LEN=0x820000
-+CONFIG_SYS_MALLOC_F_LEN=0x2000
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x82300000
-+CONFIG_DEFAULT_DEVICE_TREE="cv1800b-milkv-duo"
-+CONFIG_IDENT_STRING="milkv_duo"
-+CONFIG_SYS_LOAD_ADDR=0x80080000
-+CONFIG_TARGET_MILKV_DUO=y
-+CONFIG_ARCH_RV64I=y
-+CONFIG_RISCV_SMODE=y
-+CONFIG_FIT=y
-+CONFIG_SUPPORT_RAW_INITRD=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_SYS_PROMPT="milkv_duo# "
-+CONFIG_SYS_MAXARGS=64
-+CONFIG_SYS_CBSIZE=512
-+CONFIG_SYS_PBSIZE=544
-+CONFIG_SYS_BOOTM_LEN=0x4000000
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_SYS_NS16550=y
-+CONFIG_SYS_NS16550_MEM32=y
-diff --git a/include/configs/milkv_duo.h b/include/configs/milkv_duo.h
-new file mode 100644
-index 0000000000..0b4109dc1f
---- /dev/null
-+++ b/include/configs/milkv_duo.h
-@@ -0,0 +1,12 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
-+ *
-+ */
++Mainline support
++----------------
++The support for following drivers are already enabled:
++1. ns16550 UART Driver.
 +
-+#ifndef __CONFIG_H
-+#define __CONFIG_H
++Building
++~~~~~~~~
++1. Add the RISC-V toolchain to your PATH.
++2. Setup ARCH & cross compilation environment variable:
 +
-+#define CFG_SYS_SDRAM_BASE         0x80000000
++.. code-block:: console
 +
-+#endif /* __CONFIG_H */
++   export CROSS_COMPILE=<riscv64 toolchain prefix>
++   cd <U-Boot-dir>
++   make milkv_duo_defconfig
++   make
++
++This will generate u-boot-dtb.bin
++
++Booting
++~~~~~~~
++Currently, we rely on vendor FSBL(First Stage Boot Loader) to initialize the
++clock and load the u-boot image, then bootup from it.
++
++Alternatively, to run u-boot-dtb.bin on top of FSBL, follow these steps:
++
++1. Use the vendor-provided tool to create a unified fip.bin file containing
++   FSBL, OpenSBI, and U-Boot.
++
++2. Place the generated fip.bin file into the FAT partition of the SD card.
++
++3. Insert the SD card into the board and power it on.
++
++The board will automatically execute the FSBL from the fip.bin file.
++Subsequently, it will transition to OpenSBI, and finally, OpenSBI will invoke
++U-Boot.
++
++
++Sample boot log from Milk-V Duo board
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++.. code-block:: none
++
++   U-Boot 2024.01-rc5-00010-g51965baa36 (Dec 28 2023 - 13:15:53 +0800)milkv_duo
++
++   DRAM:  63.3 MiB
++   Core:  10 devices, 8 uclasses, devicetree: separate
++   Loading Environment from nowhere... OK
++   In:    serial@4140000
++   Out:   serial@4140000
++   Err:   serial@4140000
++   Net:   No ethernet found.
++   milkv_duo# cpu detail
++     0: cpu@0      rv64imafdc
++      ID = 0, freq = 0 Hz: L1 cache, MMU
++   milkv_duo#
 -- 
 2.41.0
 
