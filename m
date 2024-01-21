@@ -4,86 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCA5BC47422
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 22:08:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02693C47422
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 22:41:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2CD6876F4;
-	Sun, 21 Jan 2024 23:08:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id F264487727;
+	Sun, 21 Jan 2024 23:41:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="INTyiKjq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vqAvf8OC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29764876E5; Sun, 21 Jan 2024 23:08:08 +0100 (CET)
-Received: from mail-vk1-xa2b.google.com (mail-vk1-xa2b.google.com
- [IPv6:2607:f8b0:4864:20::a2b])
+ id AB51987708; Sun, 21 Jan 2024 23:41:56 +0100 (CET)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFF0387897
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 23:08:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 68A3087727
+ for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 23:41:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-vk1-xa2b.google.com with SMTP id
- 71dfb90a1353d-4b72e63821eso2105742e0c.1
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 14:08:05 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-337b8da1f49so2364473f8f.0
+ for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 14:41:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1705874884; x=1706479684;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7Isi6Ek/FmMDNeaqeuDRFIGtM0qiAtCJK3NOONPDX78=;
- b=INTyiKjqcG7sbRtBd6DiYzNMRwcnKKPnn25H15opMUhfosfgp8VW4ra55klX4QwQrf
- vea6QvDY69a/2iCsTQDLmi2M3STMZk/DU9RI8PmzAfYUBA1KMXPDsuYObUFnyG7SFx88
- CLygpqzWOQnq/wDddZM0kPp0qoJi3gxdlcBt4uF7zqtdeAWse50IT5e0uWm9M5OwPPfQ
- tZOmUj/A36klX9f7yNrRxZuD/yNZ8NvSNAa2PSEEzMkmaJOvrzjMh76kZHfdtIui7vPv
- pHvm+8EXD91rkn7Efo+Bj/9qdHs3IU7xqG3E+Q3F55YSYKuhkaw8cG7DPpVcT7ynrjiG
- 9tdw==
+ d=linaro.org; s=google; t=1705876913; x=1706481713; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=JfPGc8XpEyojDhfAz4mBWFKXdiGaTdTqAoIaSywC5BY=;
+ b=vqAvf8OCHT2xApdZLGG5IEvt8Ljerft+oJAkeH4y2HikMOqI2rUXpDMTHOOQre37Ua
+ Y5w9c4Dq/HzF64ZFT0I3Ss3dQ1syc8Ek1Z/ApspSfU9ena4+1pw3Md1zp41gzVHXBjIt
+ v++CmirYOzco4tcKvUlssPsz5UexlWuTgILjYkCDoBilE7hO7+yg9TqSosCTiA8ugpJb
+ L5rAa92ax+zI9A4sZM3eihhyP8cIOjp34to8KZ3yS/MCTqUzcEJ+pNJUR87EBAggBhNl
+ a8Q6VnStlyixkqtRovnK8EpkSRhrzQlSM9AqdxEGGahdj495/t0bxbQqWdxubeMxUGnb
+ ZaMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705874884; x=1706479684;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7Isi6Ek/FmMDNeaqeuDRFIGtM0qiAtCJK3NOONPDX78=;
- b=l2Llxv7ssApK/d3pSPyOUiBNjDfHcs/kSP3NFg1LtnCTzQWl/4LHjRfX+W/m6FNI58
- rHlKBYeOQ9dbfWthM1OgYT9zAaDRoNEd/SSt4/TmqMDqvqjMT80dbrfopU1/Nd0m6jYk
- g8j1EyuPx4PFc5py8yt1Nzoq4aH9eoMapCNIpl8NXjzbY86BF+hYjyObbb6SLptb5Fyz
- z0/PYNUM2gBC+RAfc0MWEbBszMaj217zTzsZdI94uPBo8ZOpP8bjrzcU4cd1M2gssUo8
- n9fanfXySxfjArtsaTYcmP3UKqbuYdyhmgoCaonly6bPilPm3GZSoJs2g2ENcWxk4IKU
- Lb7A==
-X-Gm-Message-State: AOJu0Yy/DI7F7d03Lfhbb41TShVl8OW5EMp5q2Hk0AjGdvEING3nGLiD
- 9WNqpWH9mA+pueNsprH9wbK3KRZ1dL+jdMh1fY67vMCfwoTwm/UsJdXU5GGxg4MXytXeY/V4bkV
- yu2u5jNvU7HvaFxt8hMIvGhLehRD83NrkUfBoRg==
-X-Google-Smtp-Source: AGHT+IGeib4REoNY8Svsv7EQMtryOd5ssZEE2RhBTEfRkLcKGSW2QkNWdYG5AKIZLChadVncwvcoUVHhzvcHNJ9J1Jk=
-X-Received: by 2002:a05:6122:d1a:b0:4b6:c9fa:d8e0 with SMTP id
- az26-20020a0561220d1a00b004b6c9fad8e0mr2042561vkb.15.1705874884426; Sun, 21
- Jan 2024 14:08:04 -0800 (PST)
+ d=1e100.net; s=20230601; t=1705876913; x=1706481713;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=JfPGc8XpEyojDhfAz4mBWFKXdiGaTdTqAoIaSywC5BY=;
+ b=aotTaP/hBygiIP7FWCLre/pr2/p5J6q3Ws7HOMkShqNTY4mP3bczvXXXZy0efiXclM
+ dXPyr26gZNI0yi3j28erkBF7EJRhKI3EOumYHXKzXiQXIV2sYy/iXRZ5PIGtUNXGvAYI
+ CZbvYlgaYjxil+bjAzZXGMHnkeJNqW2CQa8k+GCReNcrHSD3/780Em1uMCb4F2Dw7pcr
+ Do03GH4TuooXmW9FcYQErxnDmj3eDZRaV7O4uoLNjKPHcX0E6cB9MRf21Ef+i8aPqLkC
+ Vv7579H4m44rUWgZINvSry7FSk31IWDQF0c8yzFl9o3yMIeI3DJcnpLPX7rFQYCVFlYf
+ xfeA==
+X-Gm-Message-State: AOJu0YxhhNEv4HqzNC6UvdoZnYnwWxpyL4xoKy6fpH6bW/VSSw567o4T
+ jDMGbmOWXoedeg1euXow3wmu/lbTUNG9Ty17/ZKc4ePuYb3GJE31yikkhyLJhDg=
+X-Google-Smtp-Source: AGHT+IF6/QNAGe2STqa+mqW6uwtjIdWYyinrMwf1MVvuyjnfhmIXSaHOSIf9sHR7nT8HUCRPrXxrJg==
+X-Received: by 2002:a5d:4605:0:b0:337:c73f:db07 with SMTP id
+ t5-20020a5d4605000000b00337c73fdb07mr1411798wrq.136.1705876912767; 
+ Sun, 21 Jan 2024 14:41:52 -0800 (PST)
+Received: from [192.168.1.17] (host-92-17-96-230.as13285.net. [92.17.96.230])
+ by smtp.gmail.com with ESMTPSA id
+ v9-20020a5d5909000000b0033936c34713sm1278295wrd.78.2024.01.21.14.41.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 21 Jan 2024 14:41:52 -0800 (PST)
+Message-ID: <7b4ff8e8-2f21-4d07-9848-fb0d5652819e@linaro.org>
+Date: Sun, 21 Jan 2024 22:41:51 +0000
 MIME-Version: 1.0
-References: <20231119172310.1307942-1-i@shantur.com>
- <CABEcMwW14BFrA1ZYWTh7iQTsnrXA7LdBPcREKf_QeO71op+Wdw@mail.gmail.com>
- <20231209191853.GA2513409@bill-the-cat>
- <CABEcMwU4C75Xsq9AYdugyPqjPYbrTf3C01gnE+sTM0WDyoMkQg@mail.gmail.com>
- <20231209204507.GH2513409@bill-the-cat>
- <5430e6c4-5d0d-4ddf-bc95-e3fbd2b046cd@rock-chips.com>
- <CABEcMwWfLJ_vHDBLNdFRe4U=+e2fWswF0FD0JAaDF49TtyDp1A@mail.gmail.com>
- <CABEcMwWt2yMXoRZG_s45G+AMDsuEVvNkdVo-8VA5pxN4wXWvCA@mail.gmail.com>
- <df499977-c373-4a95-abe7-3ec596d66050@rock-chips.com>
- <CABEcMwV3NWqjjdWP3aKj1iKSF7kn3FuDY=BAPr=UO-OEX6gcsA@mail.gmail.com>
- <f5332c95-c269-4ee4-85f0-c41476727be2@rock-chips.com>
-In-Reply-To: <f5332c95-c269-4ee4-85f0-c41476727be2@rock-chips.com>
-From: Shantur Rathore <i@shantur.com>
-Date: Sun, 21 Jan 2024 22:07:53 +0000
-Message-ID: <CABEcMwU2AOWseDTAtwcDT44XTQMynw29NZh4TzQa=Hb6xRtC7Q@mail.gmail.com>
-Subject: Re: [PATCH v3] arch: arm: Kconfig: Enable BOOTSTD_FULL for Rockchip
- SoCs
-To: Kever Yang <kever.yang@rock-chips.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- Simon Glass <sjg@chromium.org>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 00/11] An effort to bring DT bindings compliance within
+ U-Boot
+To: Marek Vasut <marex@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
+ u-boot@lists.denx.de, u-boot-amlogic@groups.io,
+ u-boot-custodians@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, robh+dt@kernel.org,
+ krzysztof.kozlowski+dt@linaro.org, conor@kernel.org,
+ neil.armstrong@linaro.org, ff@shokubai.tech, daniel.thompson@linaro.org,
+ dgilmore@fedoraproject.org, pbrobinson@gmail.com,
+ ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com,
+ xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com,
+ rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com,
+ rfried.dev@gmail.com, mibodhi@gmail.com, bb@ti.com, mark.kettenis@xs4all.nl
+References: <20240110103547.719757-1-sumit.garg@linaro.org>
+ <82d509de-3d47-4cc2-8217-c38dc78fad28@denx.de>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <82d509de-3d47-4cc2-8217-c38dc78fad28@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,124 +104,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kever,
 
-On Thu, Jan 18, 2024 at 3:10=E2=80=AFAM Kever Yang <kever.yang@rock-chips.c=
-om> wrote:
->
-> Hi Shantur,
->
-> On 2024/1/17 17:38, Shantur Rathore wrote:
-> > Hi Kever,
-> >
-> > On Wed, Jan 17, 2024 at 9:18=E2=80=AFAM Kever Yang <kever.yang@rock-chi=
-ps.com> wrote:
-> >> Hi Shantur,
-> >>
-> >> On 2024/1/17 14:26, Shantur Rathore wrote:
-> >>
-> >> Hi Kever,
-> >>
-> >> On Wed, Jan 10, 2024 at 11:58=E2=80=AFAM Shantur Rathore <i@shantur.co=
-m> wrote:
-> >>
-> >> Hi Kever,
-> >>
-> >> On Tue, Jan 9, 2024 at 10:55=E2=80=AFAM Kever Yang <kever.yang@rock-ch=
-ips.com> wrote:
-> >>
-> >> Hi Shantur, Tom,
-> >>
-> >> On 2023/12/10 04:45, Tom Rini wrote:
-> >>
-> >> On Sat, Dec 09, 2023 at 07:49:04PM +0000, Shantur Rathore wrote:
-> >>
-> >> On Sat, Dec 9, 2023 at 7:18=E2=80=AFPM Tom Rini <trini@konsulko.com> w=
-rote:
-> >>
-> >> On Fri, Dec 08, 2023 at 10:52:02AM +0000, Shantur Rathore wrote:
-> >>
-> >> Hi Tom / Kever
-> >>
-> >> On Sun, Nov 19, 2023 at 5:24=E2=80=AFPM Shantur Rathore <i@shantur.com=
-> wrote:
-> >>
-> >> Rockchip SoCs can support wide range of bootflows.
-> >> Without full bootflow commands, it can be difficult to
-> >> figure out issues if any, hence enable by default.
-> >>
-> >> Reviewed-by: Simon Glass <sjg@chromium.org>
-> >>
-> >> Signed-off-by: Shantur Rathore <i@shantur.com>
-> >> ---
-> >>
-> >> (no changes since v1)
-> >>
-> >>    arch/arm/Kconfig | 1 +
-> >>    1 file changed, 1 insertion(+)
-> >>
-> >> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> >> index d812685c98..fca6ef6d7e 100644
-> >> --- a/arch/arm/Kconfig
-> >> +++ b/arch/arm/Kconfig
-> >> @@ -1986,6 +1986,7 @@ config ARCH_ROCKCHIP
-> >>           imply CMD_DM
-> >>           imply DEBUG_UART_BOARD_INIT
-> >>           imply BOOTSTD_DEFAULTS
-> >> +       imply BOOTSTD_FULL if BOOTSTD_DEFAULTS
-> >>           imply FAT_WRITE
-> >>           imply SARADC_ROCKCHIP
-> >>           imply SPL_SYSRESET
-> >>
-> >> Can this please be merged in ?
-> >>
-> >> I wonder if we shouldn't really globally default to BOOTSTD_FULL if
-> >> BOOTSTD_DEFAULTS for everyone.
-> >>
-> >> Its matter of ~21KB in size, unless any platform is really to its
-> >> limits it should be alright.
-> >>
-> >> Maybe I need to re-check things too, since I wonder how much of that
-> >> growth is re-enabling things that were removed when dropping the DISTR=
-O
-> >> stuff, and so for platforms just migrating over now it would be smalle=
-r
-> >> in size if much.
-> >>
-> >> A board maintainer is free to enable this option, but I don't agree to
-> >> enable this for everyone.
-> >>
-> >> Not like rk3399 and rk3588, some of other SoCs always want a clean and
-> >> simple but usable U-Boot,
-> >>
-> >> eg. rk3036 and rk3308 are still in the list.
-> >>
-> >> The discussion is what we consider "usable U-Boot"
-> >> By default bootstd doesn't have any options and not even to show what
-> >> it's going to boot.
-> >>
-> >> Would it be acceptable if BOOTSTD_FULL is enabled for SoCs rather than=
- boards?
-> >>
-> >> Can you please suggest the way forward?
-> >> Initially the patch was for RockPro64 and then after discussion it was
-> >> suggested that as BOOTSTD_DEFAULT is very very limited
-> >> we should enable BOOTSTD_FULL for SoCs that can support multiple boot =
-modes.
-> >>
-> >> Let's enable it for RK3588 first and then maybe other SoCs which not c=
-ode size sensitive.
-> >>
-> > My requirement is for RK3399, so I will enable BOOTSTD_FULL for it.
-> > While at it do you want me to enable it for RK3588 as well ?
->
-> You can add for RK3399 or both RK3399 and RK3588.
->
 
-Patch v5 [0] has been submitted with RK3399 and RK3588
+On 21/01/2024 15:33, Marek Vasut wrote:
+> On 1/10/24 11:35, Sumit Garg wrote:
+>> Changes in v4:
+>> --------------
+>> - Switched subtree to be imported as dts/upstream sub-directory rather
+>>    than devicetree-rebasing sub-directory to better suite U-Boot
+>>    directory structure.
+>> - Since we now have v6.7-dts tag available now, so switch subtree to
+>>    that from its beginning.
+>> - Patch #2: Incorporate build fix to adjust Bindings Makefile rules to
+>>    old U-Boot Kbuild infrastructure.
+>> - Patch #3: Incorporate fix to resolve rk3399 migration issue reported
+>>    by Simon.
+>> - Patch #4: New patch to reuse upstream DT includes by U-Boot as per
+>>    Brian's use-case for TI K3 SoCs.
+>> - Patch #5: Added a note to OF_UPSTREAM Kconfig option.
+>> - Patch #6: New patch to add script dts/update-dts-subtree.sh as per
+>>    Rob's comments.
+>> - Patch #7: Separate patch to align documentation to use Kconfig symbols
+>>    instead.
+>> - Patch #8: Clarify subtree uprev schedule as a separate documentation
+>>    section. Also, fixed documentation typos.
+>> - Patch #9: Added commit description.
+>>
+>> Changes in v3:
+>> --------------
+>> - Patch #4: Minor commit message update
+>> - Patch #5: Replace CONFIG_* with Kconfig options
+>> - Patch #7: Dropped Makefile portion and enabled OF_UPSTREAM for SoC
+>>    instead.
+>> - Patch #1, #3, #6 and #8: Picked up review tags
+>>
+>> Changes in v2:
+>> --------------
+>> - Patch #1: excluded gitab CI config check and added commit description.
+>> - Patch #3: s/UBOOT_DTSI_LOC/u_boot_dtsi_loc/
+>> - Patch #4: s/DEVICE_TREE_LOC/dt_dir/ and s/U-boot/U-Boot/
+>> - Patch #5: s/U-boot/U-Boot/
+>> - Patch #6 and #7: Picked up review tags
+>>
+>> Prerequisite
+>> ------------
+>>
+>> This patch series requires devicetree-rebasing git repo to be added as a
+>> subtree to the main U-Boot repo via:
+>>
+>> $ git subtree add --prefix dts/upstream \
+>>        
+>> git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git \
+>>        v6.7-dts --squash
+>>
+>> Background
+>> ----------
+>>
+>> This effort started while I was reviewing patch series corresponding to
+>> Qcom platforms [1] which was about to import modified devicetree source
+>> files from Linux kernel. I suppose keeping devicetree files sync with
+>> Linux kernel without any DT bindings schema validation has been a pain
+>> for U-Boot SoC/platform maintainers. There has been past discussions
+>> about a single DT repo but that hasn't come up and Linux kernel remained
+>> the place where DT source files as well as bindings are placed and
+>> maintained.
+>>
+>> However, Linux kernel DT maintainers proposed [2] for U-Boot to rather
+>> use devicetree-rebasing repo [3] which is a forked copy from Linux
+>> kernel for DT source files as well as bindings. It is tagged at every
+>> Linux kernel major release or intermideate release candidates. So here I
+>> have tried to reuse that to bring DT bingings compliance as well as a
+>> standard way to maintain a regular sync of DT source files with Linux
+>> kernel.
+>>
+>> In order to maintain devicetree files sync, U-Boot will maintains a Git
+>> subtree for devicetee-rebasing repo as `dts/upstream` sub-directory.
+>> U-Boot will regularly sync `dts/upstream/` subtree whenever the next 
+>> window
+>> opens with the next available kernel major release.
+>> `dts/update-dts-subtree.sh` script provides a wrapper around git subtree
+>> pull command, usage from the top level U-Boot source tree, run:
+>>
+>> $ ./dts/update-dts-subtree.sh <devicetree-rebasing-release-tag>
+>>
+>> The RFC/prototype for this series has been discussed with Linux DT
+>> maintainers as well as U-Boot maintainers here [4]. Now we would like to
+>> reach out to wider U-Boot community to seek feedback.
+> 
+> I very much agree with the direction this is going in, but I do have two 
+> simple questions:
+> 
+> How do you propose to handle fixes to DTs which are applied to 
+> linux-stable releases ? For example, if Linux 6.6(.0) ships a DT which 
+> has some defect that is fixed in 6.6.1, how will that fix get into 
+> U-Boot DTs ?
 
-[0] - https://patchwork.ozlabs.org/project/uboot/patch/20240121220447.66340=
-7-1-i@shantur.com/
+This fix would also be in the latest Linux tags, so I think it would 
+find its way here - as I understand it patches aren't accepted into 
+Linux stable unless they land in torvalds tree.
+> 
+> Assume that there is some large breaking change in Linux 6.(n+1), 
+> something which would be problematic for specific U-Boot platform (e.g. 
+> i.MX) or would require a lot of work to sort out, will there be a way to 
+> temporarily pin DTs for specific platform to older DT version until that 
+> is resolved (e.g. pin to 6.n) ?
 
-Kind regards,
-Shantur
+(Upstream) devicetree has to be forwards and backwards compatible, were 
+such a breaking change to get merged without prior discussion with DT 
+users (i.e. U-Boot) then I think the correct course of action would be 
+to revert it.
+
+On a tangential note: as I understand it, DTs built from dt-rebasing are 
+still subject to U-Boot customisations via the "-u-boot.dtsi" include 
+files, this allows for dealing with incompatibilities due to missing 
+features in U-Boot.
+
+-- 
+// Caleb (they/them)
