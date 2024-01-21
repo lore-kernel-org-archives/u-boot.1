@@ -4,77 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B84AC47DD3
-	for <u-boot@archiver.kernel.org>; Sat, 20 Jan 2024 23:28:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32CDEC47258
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 01:16:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C38E876F4;
-	Sun, 21 Jan 2024 00:28:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0FE4E87831;
+	Sun, 21 Jan 2024 02:16:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WVViGrg1";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7A9B87869; Sun, 21 Jan 2024 00:28:23 +0100 (CET)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC7D5875C5
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 00:28:21 +0100 (CET)
+ id 140848783D; Sun, 21 Jan 2024 02:16:18 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id F3FA48782C
+ for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 02:16:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fr0st61te@gmail.com
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-50e7f58c5fbso2415902e87.1
- for <u-boot@lists.denx.de>; Sat, 20 Jan 2024 15:28:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705793301; x=1706398101; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=9edRhZV4RNwO8Pc3qdkyouN8izXXmhlK/VxhTNYo/PU=;
- b=WVViGrg1yFQq0Pmff51y3NzxQ91R1L+cOT9jqAtibbdaMhcnoRbeD7kl8DWOHiKuLq
- K6FPaoZj2mpfkpbVauvnBFtHKZ/fQuzZ74ox+PggGlBuNX8sOH01BlX3ublHpWHD/8lq
- norunOwY8Eh1PzaV9JDIhPwe/KMgEEM+r1zs8Zoojhm//7GJY2QSg49H6k0L5AVxCXkk
- ik/xnnfCqQrbKxWyZHfNI6Jiy9Mp/UugSx4majOaAT37hIR8IapuoTDxKOm5fe54CBaK
- 7lajzof+D6zzDTOxe1kP670T/6B1O3SLB9lN8UOVFzDB1Sb2hE8CKbGFQ8RkCtiN087L
- yHEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705793301; x=1706398101;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9edRhZV4RNwO8Pc3qdkyouN8izXXmhlK/VxhTNYo/PU=;
- b=rxdSd8nVAbHn9S+ofTUnGa2fon4BPTJKIi8WwS06h4+ytQvwemvLKzrX+IdDsa1Sba
- P7b3Kud4xuiFmY0fJbBQtXEJGvY+e+XTd3ebTU76c663Ts2gwmG65IgzJZ8FiOKl8JO4
- 8nm3B8erSS9d/T8VuVIKDyyCVSYJVQ1o3jhCZD/OVsTLVUKvLPC92LWq/pJAIxSj23bp
- MZ8Ul1rvNLun9XPgWSyjIdvxQcB14sE3Ujkj13bdF1DJiJP9HBErmdKEbI78kpnXQ2Xb
- uKqOCAbI1lmXyJbCK7tVf67awPYsJrSe5JFrLwsuWVwZCR/DbmtDvkwy8ktJq9sbVzlg
- RFWg==
-X-Gm-Message-State: AOJu0YyV9X/rvfYgMxuxzP7PJRQjsM7wzAFuomK4QJZ84brtZUZx27Cl
- vo7WeHPkh/+ASnkPR9BBOWUUih3E5cjN0+D+2la5xeJrMq9cdm6+1PrylDLOlAzCnw==
-X-Google-Smtp-Source: AGHT+IGqec656dWjXblkH052MdUsIYmWTp/Q3eb+cv7rSNv1hkNN5duWuf/ufF1K1+lZAgZROGg/NQ==
-X-Received: by 2002:a05:6512:3b90:b0:50e:d5e2:92cc with SMTP id
- g16-20020a0565123b9000b0050ed5e292ccmr1187939lfv.81.1705793300877; 
- Sat, 20 Jan 2024 15:28:20 -0800 (PST)
-Received: from fr.lan ([81.200.17.74]) by smtp.googlemail.com with ESMTPSA id
- x25-20020a19e019000000b0050e77abd553sm1475416lfg.76.2024.01.20.15.28.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 20 Jan 2024 15:28:20 -0800 (PST)
-From: Ivan Mikhaylov <fr0st61te@gmail.com>
-To: Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, openbmc@lists.ozlabs.org,
- Ivan Mikhaylov <fr0st61te@gmail.com>
-Subject: [PATCH] pinctrl: aspeed: add pass-through pins and siopbi/siopbo
-Date: Sun, 21 Jan 2024 02:28:13 +0300
-Message-ID: <20240120232813.32474-1-fr0st61te@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 17DD0DA7;
+ Sat, 20 Jan 2024 17:17:01 -0800 (PST)
+Received: from minigeek.lan (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C819E3F73F;
+ Sat, 20 Jan 2024 17:16:14 -0800 (PST)
+Date: Sun, 21 Jan 2024 01:15:28 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Chuanhong Guo <gch981213@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] sunxi: add defconfig for nanopi_duo2
+Message-ID: <20240121011528.3fb06011@minigeek.lan>
+In-Reply-To: <20231228052915.121433-1-gch981213@gmail.com>
+References: <20231228052915.121433-1-gch981213@gmail.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,107 +55,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add THRU0-3 and SIOPBI/SIOPBO pin groups/functions.
+On Thu, 28 Dec 2023 13:29:15 +0800
+Chuanhong Guo <gch981213@gmail.com> wrote:
 
-Signed-off-by: Ivan Mikhaylov <fr0st61te@gmail.com>
----
- arch/arm/dts/ast2600.dtsi                | 20 ++++++++++++++++
- drivers/pinctrl/aspeed/pinctrl_ast2600.c | 30 ++++++++++++++++++++++++
- 2 files changed, 50 insertions(+)
+Hi,
 
-diff --git a/arch/arm/dts/ast2600.dtsi b/arch/arm/dts/ast2600.dtsi
-index beabcf14f8..43db80edfe 100644
---- a/arch/arm/dts/ast2600.dtsi
-+++ b/arch/arm/dts/ast2600.dtsi
-@@ -2028,6 +2028,26 @@
- 		groups = "SPI2MOSI";
- 	};
- 
-+	pinctrl_thru0_default: thru0_default {
-+		function = "THRU0";
-+		groups = "THRU0";
-+	};
-+
-+	pinctrl_thru1_default: thru1_default {
-+		function = "THRU1";
-+		groups = "THRU1";
-+	};
-+
-+	pinctrl_thru2_default: thru2_default {
-+		function = "THRU2";
-+		groups = "THRU2";
-+	};
-+
-+	pinctrl_thru3_default: thru3_default {
-+		function = "THRU3";
-+		groups = "THRU3";
-+	};
-+
- 	pinctrl_timer3_default: timer3_default {
- 		function = "TIMER3";
- 		groups = "TIMER3";
-diff --git a/drivers/pinctrl/aspeed/pinctrl_ast2600.c b/drivers/pinctrl/aspeed/pinctrl_ast2600.c
-index 97e8b4ec9b..8a4f9705ca 100644
---- a/drivers/pinctrl/aspeed/pinctrl_ast2600.c
-+++ b/drivers/pinctrl/aspeed/pinctrl_ast2600.c
-@@ -267,6 +267,14 @@ static struct aspeed_sig_desc fmcquad_link[] = {
- 	{ 0x438, GENMASK(5, 4), 0 },
- };
- 
-+static struct aspeed_sig_desc siopbi_link[] = {
-+	{ 0x418, BIT(6), 0 },
-+};
-+
-+static struct aspeed_sig_desc siopbo_link[] = {
-+	{ 0x418, BIT(5), 0 },
-+};
-+
- static struct aspeed_sig_desc spi1_link[] = {
- 	{ 0x438, GENMASK(13, 11), 0 },
- };
-@@ -303,6 +311,22 @@ static struct aspeed_sig_desc spi2quad_link[] = {
- 	{ 0x434, GENMASK(31, 30), 0 },
- };
- 
-+static struct aspeed_sig_desc thru0_link[] = {
-+	{ 0x4bc, GENMASK(25, 24), 0 },
-+};
-+
-+static struct aspeed_sig_desc thru1_link[] = {
-+	{ 0x4bc, GENMASK(27, 26), 0 },
-+};
-+
-+static struct aspeed_sig_desc thru2_link[] = {
-+	{ 0x4bc, GENMASK(29, 28), 0 },
-+};
-+
-+static struct aspeed_sig_desc thru3_link[] = {
-+	{ 0x4bc, GENMASK(31, 30), 0 },
-+};
-+
- static struct aspeed_sig_desc fsi1[] = {
- 	{ 0xd48, GENMASK(21, 20), 0 },
- };
-@@ -458,6 +482,8 @@ static const struct aspeed_group_config ast2600_groups[] = {
- 	{ "EMMC", ARRAY_SIZE(emmc_link), emmc_link },
- 	{ "EMMCG8", ARRAY_SIZE(emmcg8_link), emmcg8_link },
- 	{ "FMCQUAD", ARRAY_SIZE(fmcquad_link), fmcquad_link },
-+	{ "SIOPBI", ARRAY_SIZE(siopbi_link), siopbi_link },
-+	{ "SIOPBO", ARRAY_SIZE(siopbo_link), siopbo_link },
- 	{ "SPI1", ARRAY_SIZE(spi1_link), spi1_link },
- 	{ "SPI1ABR", ARRAY_SIZE(spi1abr_link), spi1abr_link },
- 	{ "SPI1CS1", ARRAY_SIZE(spi1cs1_link), spi1cs1_link },
-@@ -467,6 +493,10 @@ static const struct aspeed_group_config ast2600_groups[] = {
- 	{ "SPI2CS1", ARRAY_SIZE(spi2cs1_link), spi2cs1_link },
- 	{ "SPI2CS2", ARRAY_SIZE(spi2cs2_link), spi2cs2_link },
- 	{ "SPI2QUAD", ARRAY_SIZE(spi2quad_link), spi2quad_link },
-+	{ "THRU0", ARRAY_SIZE(thru0_link), thru0_link },
-+	{ "THRU1", ARRAY_SIZE(thru1_link), thru1_link },
-+	{ "THRU2", ARRAY_SIZE(thru2_link), thru2_link },
-+	{ "THRU3", ARRAY_SIZE(thru3_link), thru3_link },
- 	{ "I2C1", ARRAY_SIZE(i2c1_link), i2c1_link },
- 	{ "I2C2", ARRAY_SIZE(i2c2_link), i2c2_link },
- 	{ "I2C3", ARRAY_SIZE(i2c3_link), i2c3_link },
--- 
-2.43.0
+thanks for taking care and sending a patch!
 
+> FriendlyElec NanoPi Duo2 is a tiny SBC with Allwinner H3 and
+> Ampak AP6212 WiFi module. The device-tree for it is already
+> available in u-boot source tree. Add a default config for it.
+> 
+> Signed-off-by: Chuanhong Guo <gch981213@gmail.com>
+> ---
+>  configs/nanopi_duo2_defconfig | 11 +++++++++++
+>  1 file changed, 11 insertions(+)
+>  create mode 100644 configs/nanopi_duo2_defconfig
+> 
+> diff --git a/configs/nanopi_duo2_defconfig b/configs/nanopi_duo2_defconfig
+> new file mode 100644
+> index 0000000000..5a2069789f
+> --- /dev/null
+> +++ b/configs/nanopi_duo2_defconfig
+> @@ -0,0 +1,11 @@
+> +CONFIG_ARM=y
+> +CONFIG_ARCH_SUNXI=y
+> +CONFIG_DEFAULT_DEVICE_TREE="sun8i-h3-nanopi-duo2"
+> +CONFIG_SPL=y
+> +CONFIG_MACH_SUN8I_H3=y
+> +CONFIG_DRAM_CLK=408
+> +# CONFIG_VIDEO_DE2 is not set
+> +# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+> +CONFIG_CONSOLE_MUX=y
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_OHCI_HCD=y
+
+Judging by the DT, this board has USB-OTG wired up correctly, so we
+should enable it, by adding:
+CONFIG_USB_MUSB_GADGET=y
+This would allow access to USB Ethernet, fastboot or UMS devices, which
+prove to be quite useful for U-Boot.
+
+Cheers,
+Andre
