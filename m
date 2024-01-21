@@ -4,46 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA301C47422
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 20:54:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6AD3C47DB7
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 20:56:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C95E877EC;
-	Sun, 21 Jan 2024 21:54:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 278D28786B;
+	Sun, 21 Jan 2024 21:55:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFF168785C; Sun, 21 Jan 2024 21:54:33 +0100 (CET)
+ id 6813B8785C; Sun, 21 Jan 2024 21:55:57 +0100 (CET)
 Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
  [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 2B62F87705
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 21:54:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 1D4D087705
+ for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 21:55:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.05,210,1701097200"; 
- d="asc'?scan'208";a="195104576"
+ d="asc'?scan'208";a="195104627"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 22 Jan 2024 05:54:29 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 22 Jan 2024 05:55:53 +0900
 Received: from [10.226.92.38] (unknown [10.226.92.38])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 7E8AA4012D35;
- Mon, 22 Jan 2024 05:54:28 +0900 (JST)
-Message-ID: <2f2f40cb-4c04-41de-ad72-01c651b268f9@bp.renesas.com>
-Date: Sun, 21 Jan 2024 20:54:27 +0000
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 71AFA40A4601;
+ Mon, 22 Jan 2024 05:55:52 +0900 (JST)
+Message-ID: <2b9fd6f2-4f67-4717-be19-cd1b1f6e0f9d@bp.renesas.com>
+Date: Sun, 21 Jan 2024 20:55:51 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 07/11] ARM: renesas: Add R8A779H0 V4M Kconfig entry and
- PRR ID
+Subject: Re: [PATCH 06/11] mtd: spi: renesas: Add R8A779H0 V4M support
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Hai Pham <hai.pham.ud@renesas.com>
+Cc: Hai Pham <hai.pham.ud@renesas.com>, Jagan Teki <jagan@amarulasolutions.com>
 References: <20240121174340.279465-1-marek.vasut+renesas@mailbox.org>
- <20240121174340.279465-7-marek.vasut+renesas@mailbox.org>
+ <20240121174340.279465-6-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20240121174340.279465-7-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240121174340.279465-6-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------OgRpCVI05GIa4Qvsbj0foQJq"
+ boundary="------------wnm5TJoxUu1DTIQhbP2ql79F"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,87 +60,58 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------OgRpCVI05GIa4Qvsbj0foQJq
-Content-Type: multipart/mixed; boundary="------------aPeFFYJDXW8gfGAkFnQitrGT";
+--------------wnm5TJoxUu1DTIQhbP2ql79F
+Content-Type: multipart/mixed; boundary="------------7nHFWfNo8rduH6evYrM6f9ep";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Hai Pham <hai.pham.ud@renesas.com>
-Message-ID: <2f2f40cb-4c04-41de-ad72-01c651b268f9@bp.renesas.com>
-Subject: Re: [PATCH 07/11] ARM: renesas: Add R8A779H0 V4M Kconfig entry and
- PRR ID
+Cc: Hai Pham <hai.pham.ud@renesas.com>,
+ Jagan Teki <jagan@amarulasolutions.com>
+Message-ID: <2b9fd6f2-4f67-4717-be19-cd1b1f6e0f9d@bp.renesas.com>
+Subject: Re: [PATCH 06/11] mtd: spi: renesas: Add R8A779H0 V4M support
 References: <20240121174340.279465-1-marek.vasut+renesas@mailbox.org>
- <20240121174340.279465-7-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240121174340.279465-7-marek.vasut+renesas@mailbox.org>
+ <20240121174340.279465-6-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240121174340.279465-6-marek.vasut+renesas@mailbox.org>
 
---------------aPeFFYJDXW8gfGAkFnQitrGT
-Content-Type: multipart/mixed; boundary="------------tIubTh4BUkOTKRFlK0vkQPDJ"
+--------------7nHFWfNo8rduH6evYrM6f9ep
+Content-Type: multipart/mixed; boundary="------------KQjU8MciLJuNCSBVI5iVV15y"
 
---------------tIubTh4BUkOTKRFlK0vkQPDJ
+--------------KQjU8MciLJuNCSBVI5iVV15y
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On 21/01/2024 17:41, Marek Vasut wrote:
 > From: Hai Pham <hai.pham.ud@renesas.com>
 >=20
-> Add Kconfig entry and PRR ID to support R8A779H0 V4M SoC.
+> Support RPC SPI on R8A779H0 V4M SoC.
 >=20
 > Signed-off-by: Hai Pham <hai.pham.ud@renesas.com>
 > ---
+> Cc: Jagan Teki <jagan@amarulasolutions.com>
 > Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
 > ---
->  arch/arm/mach-rmobile/Kconfig.rcar4          | 6 ++++++
->  arch/arm/mach-rmobile/cpu_info.c             | 1 +
->  arch/arm/mach-rmobile/include/mach/rmobile.h | 1 +
->  3 files changed, 8 insertions(+)
+>  drivers/spi/renesas_rpc_spi.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >=20
-> diff --git a/arch/arm/mach-rmobile/Kconfig.rcar4 b/arch/arm/mach-rmobil=
-e/Kconfig.rcar4
-> index d4f93c89cac..3c8d683974c 100644
-> --- a/arch/arm/mach-rmobile/Kconfig.rcar4
-> +++ b/arch/arm/mach-rmobile/Kconfig.rcar4
-> @@ -20,6 +20,12 @@ config R8A779G0
->  	imply CLK_R8A779G0
->  	imply PINCTRL_PFC_R8A779G0
-> =20
-> +config R8A779H0
-> +	bool "Renesas SoC R8A779H0"
-> +	select GICV3
-> +	imply CLK_R8A779H0
-> +	imply PINCTRL_PFC_R8A779H0
-> +
->  endmenu
-> =20
->  choice
-> diff --git a/arch/arm/mach-rmobile/cpu_info.c b/arch/arm/mach-rmobile/c=
-pu_info.c
-> index 895c0f5336b..3d5d5ba79a9 100644
-> --- a/arch/arm/mach-rmobile/cpu_info.c
-> +++ b/arch/arm/mach-rmobile/cpu_info.c
-> @@ -78,6 +78,7 @@ static const struct {
->  	{ RMOBILE_CPU_TYPE_R8A779A0, "R8A779A0" },
->  	{ RMOBILE_CPU_TYPE_R8A779F0, "R8A779F0" },
->  	{ RMOBILE_CPU_TYPE_R8A779G0, "R8A779G0" },
-> +	{ RMOBILE_CPU_TYPE_R8A779H0, "R8A779H0" },
->  	{ 0x0, "CPU" },
->  };
-> =20
-> diff --git a/arch/arm/mach-rmobile/include/mach/rmobile.h b/arch/arm/ma=
-ch-rmobile/include/mach/rmobile.h
-> index 88b8b78671b..f0216210ba9 100644
-> --- a/arch/arm/mach-rmobile/include/mach/rmobile.h
-> +++ b/arch/arm/mach-rmobile/include/mach/rmobile.h
-> @@ -43,6 +43,7 @@
->  #define RMOBILE_CPU_TYPE_R8A779A0	0x59
->  #define RMOBILE_CPU_TYPE_R8A779F0	0x5A
->  #define RMOBILE_CPU_TYPE_R8A779G0	0x5C
-> +#define RMOBILE_CPU_TYPE_R8A779H0	0x5D
->  #define RMOBILE_CPU_TYPE_R9A07G044L	0x9A070440
-> =20
->  #ifndef __ASSEMBLY__
+> diff --git a/drivers/spi/renesas_rpc_spi.c b/drivers/spi/renesas_rpc_sp=
+i.c
+> index 51c37d72eb6..3eb14061c81 100644
+> --- a/drivers/spi/renesas_rpc_spi.c
+> +++ b/drivers/spi/renesas_rpc_spi.c
+> @@ -215,7 +215,8 @@ static u32 rpc_spi_get_strobe_delay(void)
+>  	if (cpu_type =3D=3D RMOBILE_CPU_TYPE_R8A7796 && rmobile_get_cpu_rev_i=
+nteger() =3D=3D 1)
+>  		return RPC_PHYCNT_STRTIM(6);
+>  	else if (cpu_type =3D=3D RMOBILE_CPU_TYPE_R8A779F0 ||
+> -		 cpu_type =3D=3D RMOBILE_CPU_TYPE_R8A779G0)
+> +		 cpu_type =3D=3D RMOBILE_CPU_TYPE_R8A779G0 ||
+> +		 cpu_type =3D=3D RMOBILE_CPU_TYPE_R8A779H0)
+>  		return RPC_PHYCNT_STRTIM2(15);
+>  	else
+>  #endif
 
 Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
---------------tIubTh4BUkOTKRFlK0vkQPDJ
+--------------KQjU8MciLJuNCSBVI5iVV15y
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -205,21 +175,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------tIubTh4BUkOTKRFlK0vkQPDJ--
+--------------KQjU8MciLJuNCSBVI5iVV15y--
 
---------------aPeFFYJDXW8gfGAkFnQitrGT--
+--------------7nHFWfNo8rduH6evYrM6f9ep--
 
---------------OgRpCVI05GIa4Qvsbj0foQJq
+--------------wnm5TJoxUu1DTIQhbP2ql79F
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZa2EgwUDAAAAAAAKCRDbaV4Vf/JGvTy6
-AQDHeqXdlcWy2mJ42TwvGIhyWMJvpQPqywhVJh2STCvVuQEA/+HcoGI8TXJdEjIM6bit2TtNPojx
-4E4KDQlox2N5FwU=
-=BK8J
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZa2E2AUDAAAAAAAKCRDbaV4Vf/JGvb80
+AP9pESXxVW2SeCLzXIqmsFP5tbGybxgLthEGZ2e6MX3LJgD/Q0ywgdJSPKFGvF6lT9Chap9XMBbb
+AuhKZ7AOA79V/wQ=
+=OJBQ
 -----END PGP SIGNATURE-----
 
---------------OgRpCVI05GIa4Qvsbj0foQJq--
+--------------wnm5TJoxUu1DTIQhbP2ql79F--
