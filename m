@@ -4,45 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6AD3C47DB7
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 20:56:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0428C47422
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 20:59:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 278D28786B;
-	Sun, 21 Jan 2024 21:55:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 2DDF887708;
+	Sun, 21 Jan 2024 21:59:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 6813B8785C; Sun, 21 Jan 2024 21:55:57 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 1D4D087705
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 21:55:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.05,210,1701097200"; 
- d="asc'?scan'208";a="195104627"
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 22 Jan 2024 05:55:53 +0900
-Received: from [10.226.92.38] (unknown [10.226.92.38])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 71AFA40A4601;
- Mon, 22 Jan 2024 05:55:52 +0900 (JST)
-Message-ID: <2b9fd6f2-4f67-4717-be19-cd1b1f6e0f9d@bp.renesas.com>
-Date: Sun, 21 Jan 2024 20:55:51 +0000
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hjvhd1ic";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B7A9B877EC; Sun, 21 Jan 2024 21:18:02 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C427087796
+ for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 21:18:00 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=resch.max@gmail.com
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-40e76626170so29572325e9.2
+ for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 12:18:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1705868279; x=1706473079; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=avySH4vdJjuTYDcCEnORZM+d69G/g6r9bNaFUoTfxyw=;
+ b=hjvhd1ic7EZVEdGhJAHOikjmK0s5u36V7I9PMqxEELFZx/Wm72oWLF1rOqp59NUz35
+ YtttSFWzvi63z+Nxf8DEER2IkGLxrMXv02donGKRJhhtm2/D4Jp4CLZ4Tdk7XfmDqiyz
+ PwsEtjr9S0UAamxxY1K7GBoPP+L50Btf59S2EoUXDVgoYUXDMiiOekyn6xDihMlZHv/A
+ 5MxS+cXpfRVl0dks9ymNhNCukHSlrwIPgjPW2Y0aH1tcrJrOOf9W8aVVTgSrCTfDtysG
+ NAWgZ+HQLbE/3BXHHTbbr8FQHyPZu7uIpPOdZuU1uEa5kI4To4qiQI63YwpiWP1CSt6g
+ ogpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705868279; x=1706473079;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=avySH4vdJjuTYDcCEnORZM+d69G/g6r9bNaFUoTfxyw=;
+ b=gV5D0Kf16UcJaMnPSfHUC2dALpRgXbLsrhFYIBwdJ6/F9WYDxNJere2j2fN33BAz2k
+ OG33W5b8Sal5EH/NmK96qpNmtUsyFvpzmkFnyUqw9Q9fwZFlp19ea8j9O8OmK4QKZpXu
+ xnU632tXIFkzvJPGm5I/dq6dvDZ++OdQM6ow1RPlrEzZgYfpVjbYzVYmcTSLIc6vZ0T/
+ A8iTuDYWYBE9Nk5XzD5lbQKbM4v4kHWodfbtlxSqiwyo83vZr+dxTO8FCsCDVYvGza7q
+ dq7QofoSHsTJhAFCZzn3wm8yDztv6zhxvvqtEaivzcml38iyt1nuBhmgN4q0WCeGS/zw
+ gkxA==
+X-Gm-Message-State: AOJu0Yxc9I4GZDO5Krpa4LszMuV4IADX0ZeRl3pjhZ563dGt2rk1wt3L
+ JqQL1vdM1mpP/saUDOUKr2qN4HVthayDzTvu0zJOvgyiUXJsYrvZ/xCVekSg
+X-Google-Smtp-Source: AGHT+IFw1/Fe7J1t5uMQaovYzoprUzZNGMjI5raMIiO40Eyy8CqBAHzpCcIDzNiulQrPemEbZoWGYQ==
+X-Received: by 2002:a05:600c:1ca9:b0:40e:62d8:3326 with SMTP id
+ k41-20020a05600c1ca900b0040e62d83326mr1682110wms.16.1705868279127; 
+ Sun, 21 Jan 2024 12:17:59 -0800 (PST)
+Received: from niflheim.lan ([2001:871:223:517:1bcd:a630:f42f:3edc])
+ by smtp.gmail.com with ESMTPSA id
+ m10-20020adffa0a000000b003392172fd60sm6870676wrr.51.2024.01.21.12.17.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 21 Jan 2024 12:17:58 -0800 (PST)
+From: Max Resch <resch.max@gmail.com>
+To: u-boot@lists.denx.de
+Cc: sr@denx.de,
+	Max Resch <resch.max@gmail.com>
+Subject: [PATCH v2] rng: Add Turris Mox rWTM RNG driver
+Date: Sun, 21 Jan 2024 21:17:16 +0100
+Message-ID: <20240121201737.671340-1-resch.max@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 06/11] mtd: spi: renesas: Add R8A779H0 V4M support
-Content-Language: en-GB
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Hai Pham <hai.pham.ud@renesas.com>, Jagan Teki <jagan@amarulasolutions.com>
-References: <20240121174340.279465-1-marek.vasut+renesas@mailbox.org>
- <20240121174340.279465-6-marek.vasut+renesas@mailbox.org>
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20240121174340.279465-6-marek.vasut+renesas@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------wnm5TJoxUu1DTIQhbP2ql79F"
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 21 Jan 2024 21:59:12 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,137 +90,175 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------wnm5TJoxUu1DTIQhbP2ql79F
-Content-Type: multipart/mixed; boundary="------------7nHFWfNo8rduH6evYrM6f9ep";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Hai Pham <hai.pham.ud@renesas.com>,
- Jagan Teki <jagan@amarulasolutions.com>
-Message-ID: <2b9fd6f2-4f67-4717-be19-cd1b1f6e0f9d@bp.renesas.com>
-Subject: Re: [PATCH 06/11] mtd: spi: renesas: Add R8A779H0 V4M support
-References: <20240121174340.279465-1-marek.vasut+renesas@mailbox.org>
- <20240121174340.279465-6-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240121174340.279465-6-marek.vasut+renesas@mailbox.org>
+A RNG driver for Armada 3720 boards running the Turris Mox rWTM firmware
+from CZ.NIC in the secure processor.
 
---------------7nHFWfNo8rduH6evYrM6f9ep
-Content-Type: multipart/mixed; boundary="------------KQjU8MciLJuNCSBVI5iVV15y"
+Signed-off-by: Max Resch <resch.max@gmail.com>
+---
 
---------------KQjU8MciLJuNCSBVI5iVV15y
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Changes in v2:
+ - Removed ring buffer implementation
 
-On 21/01/2024 17:41, Marek Vasut wrote:
-> From: Hai Pham <hai.pham.ud@renesas.com>
->=20
-> Support RPC SPI on R8A779H0 V4M SoC.
->=20
-> Signed-off-by: Hai Pham <hai.pham.ud@renesas.com>
-> ---
-> Cc: Jagan Teki <jagan@amarulasolutions.com>
-> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-> ---
->  drivers/spi/renesas_rpc_spi.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->=20
-> diff --git a/drivers/spi/renesas_rpc_spi.c b/drivers/spi/renesas_rpc_sp=
-i.c
-> index 51c37d72eb6..3eb14061c81 100644
-> --- a/drivers/spi/renesas_rpc_spi.c
-> +++ b/drivers/spi/renesas_rpc_spi.c
-> @@ -215,7 +215,8 @@ static u32 rpc_spi_get_strobe_delay(void)
->  	if (cpu_type =3D=3D RMOBILE_CPU_TYPE_R8A7796 && rmobile_get_cpu_rev_i=
-nteger() =3D=3D 1)
->  		return RPC_PHYCNT_STRTIM(6);
->  	else if (cpu_type =3D=3D RMOBILE_CPU_TYPE_R8A779F0 ||
-> -		 cpu_type =3D=3D RMOBILE_CPU_TYPE_R8A779G0)
-> +		 cpu_type =3D=3D RMOBILE_CPU_TYPE_R8A779G0 ||
-> +		 cpu_type =3D=3D RMOBILE_CPU_TYPE_R8A779H0)
->  		return RPC_PHYCNT_STRTIM2(15);
->  	else
->  #endif
+ drivers/rng/Kconfig           |   8 +++
+ drivers/rng/Makefile          |   1 +
+ drivers/rng/turris_rwtm_rng.c | 122 ++++++++++++++++++++++++++++++++++
+ 3 files changed, 131 insertions(+)
+ create mode 100644 drivers/rng/turris_rwtm_rng.c
 
-Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
---------------KQjU8MciLJuNCSBVI5iVV15y
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
+index a89c899568..cd72852a47 100644
+--- a/drivers/rng/Kconfig
++++ b/drivers/rng/Kconfig
+@@ -105,4 +105,12 @@ config RNG_JH7110
+ 	help
+ 	  Enable True Random Number Generator in StarFive JH7110 SoCs.
+ 
++config RNG_TURRIS_RWTM
++	bool "Turris Mox TRNG in Secure Processor"
++	depends on DM_RNG && ARMADA_3700
++	help
++	  Use TRNG in Turris Mox Secure Processor Firmware. Can be used
++	  on other Armada-3700 devices (like EspressoBin) if Secure
++	  Firmware from CZ.NIC is used.
++
+ endif
+diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
+index 7e64c4cdfc..ecae1a3da3 100644
+--- a/drivers/rng/Makefile
++++ b/drivers/rng/Makefile
+@@ -17,3 +17,4 @@ obj-$(CONFIG_RNG_SMCCC_TRNG) += smccc_trng.o
+ obj-$(CONFIG_RNG_ARM_RNDR) += arm_rndr.o
+ obj-$(CONFIG_TPM_RNG) += tpm_rng.o
+ obj-$(CONFIG_RNG_JH7110) += jh7110_rng.o
++obj-$(CONFIG_RNG_TURRIS_RWTM) += turris_rwtm_rng.o
+diff --git a/drivers/rng/turris_rwtm_rng.c b/drivers/rng/turris_rwtm_rng.c
+new file mode 100644
+index 0000000000..143fe0b47f
+--- /dev/null
++++ b/drivers/rng/turris_rwtm_rng.c
+@@ -0,0 +1,122 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
++/*
++ * Copyright (c) 2024, Max Resch
++ */
++
++#include <dm.h>
++#include <malloc.h>
++#include <rng.h>
++#include <asm/dma-mapping.h>
++#include <asm/types.h>
++#include <mach/mbox.h>
++
++/* size of entropy buffer */
++#define RNG_BUFFER_SIZE	128U
++
++struct turris_rwtm_rng_priv {
++	phys_addr_t buffer;
++};
++
++static int turris_rwtm_rng_fill_entropy(phys_addr_t entropy, size_t size)
++{
++	u32 args[3] = { 1, (u32)entropy, size };
++	int ret;
++
++	/* flush data cache */
++	flush_dcache_range(entropy, entropy + size);
++
++	/*
++	 * get entropy
++	 * args[0] = 1 copies BYTES array in args[1] of length args[2]
++	 */
++	ret = mbox_do_cmd(MBOX_CMD_GET_RANDOM, args, 3, NULL, 0);
++	if (ret < 0)
++		return ret;
++
++	/* invalidate data cache */
++	invalidate_dcache_range(entropy, entropy + size);
++
++	return 0;
++}
++
++static int turris_rwtm_rng_random_read(struct udevice *dev, void *data, size_t count)
++{
++	phys_addr_t p;
++	size_t size;
++	int ret;
++
++	p = ((struct turris_rwtm_rng_priv *)dev_get_priv(dev))->buffer;
++
++	while (count) {
++		size = min_t(size_t, RNG_BUFFER_SIZE, count);
++
++		ret = turris_rwtm_rng_fill_entropy(p, size);
++
++		memcpy(data, (void *)p, size);
++		count -= size;
++		data = (u8 *)data + size;
++	}
++
++	return 0;
++}
++
++static int turris_rwtm_rng_probe(struct udevice *dev)
++{
++	struct turris_rwtm_rng_priv *priv;
++	u32 args[] = { 0 };
++	int ret;
++
++	/*
++	 * check if the random command is supported
++	 * args[0] = 0 would copy 16 DWORDS entropy to out but we ignore them
++	 */
++	ret = mbox_do_cmd(MBOX_CMD_GET_RANDOM, args, ARRAY_SIZE(args), NULL, 0);
++
++	if (ret < 0)
++		return ret;
++
++	/* entropy buffer */
++	priv = (struct turris_rwtm_rng_priv *)dev_get_priv(dev);
++	priv->buffer = 0;
++
++	/* buffer address need to be aligned */
++	dma_alloc_coherent(RNG_BUFFER_SIZE, (unsigned long *)&priv->buffer);
++	if (!priv->buffer)
++		return -ENOMEM;
++
++	return 0;
++}
++
++static int turris_rwtm_rng_remove(struct udevice *dev)
++{
++	phys_addr_t p;
++
++	p = ((struct turris_rwtm_rng_priv *)dev_get_priv(dev))->buffer;
++	dma_free_coherent((void *)p);
++
++	return 0;
++}
++
++static const struct dm_rng_ops turris_rwtm_rng_ops = {
++	.read = turris_rwtm_rng_random_read,
++};
++
++/*
++ * only Turris MOX firmware has the RNG but allow all probable devices to be
++ * probed the default firmware will just reject the probe
++ */
++static const struct udevice_id turris_rwtm_rng_match[] = {
++	{ .compatible = "cznic,turris-mox-rwtm" },
++	{ .compatible = "marvell,armada-3700-rwtm-firmware" },
++	{},
++};
++
++U_BOOT_DRIVER(turris_rwtm_rng) = {
++	.name	= "turris-rwtm-rng",
++	.id	= UCLASS_RNG,
++	.of_match = turris_rwtm_rng_match,
++	.ops	= &turris_rwtm_rng_ops,
++	.probe	= turris_rwtm_rng_probe,
++	.remove = turris_rwtm_rng_remove,
++	.priv_auto = sizeof(struct turris_rwtm_rng_priv),
++};
+-- 
+2.43.0
 
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------KQjU8MciLJuNCSBVI5iVV15y--
-
---------------7nHFWfNo8rduH6evYrM6f9ep--
-
---------------wnm5TJoxUu1DTIQhbP2ql79F
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZa2E2AUDAAAAAAAKCRDbaV4Vf/JGvb80
-AP9pESXxVW2SeCLzXIqmsFP5tbGybxgLthEGZ2e6MX3LJgD/Q0ywgdJSPKFGvF6lT9Chap9XMBbb
-AuhKZ7AOA79V/wQ=
-=OJBQ
------END PGP SIGNATURE-----
-
---------------wnm5TJoxUu1DTIQhbP2ql79F--
