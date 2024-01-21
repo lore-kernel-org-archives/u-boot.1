@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25661C47DB7
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 17:30:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6BBCC47422
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 17:30:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1E8E8783B;
-	Sun, 21 Jan 2024 18:30:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 62F428786B;
+	Sun, 21 Jan 2024 18:30:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="FKon3JGt";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="c4H6Z3Sf";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="rxxiDSoI";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="JfUM6Vd+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86698877F8; Sun, 21 Jan 2024 18:30:31 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id B1F96877D3; Sun, 21 Jan 2024 18:30:31 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD51F87796
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 18:30:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C6F768773D
+ for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 18:30:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,47 +31,47 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4TJ0jw3l06z9stT;
- Sun, 21 Jan 2024 18:30:28 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4TJ0jx4vj3z9sV0;
+ Sun, 21 Jan 2024 18:30:29 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1705858228;
+ s=mail20150812; t=1705858229;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=iHPgmPhV1Cs1WGMAUGGr5pLByQUtzJoVOjJBFh5DTjk=;
- b=FKon3JGtyMuPe+ZBqqbAkfOWo394toTqxrs7wHCqiJvmRPuxTkVLq8DUQ0szxaovdai27T
- DwopKWJfCKEnw470RlXNgFmBFjMVzJcnlER3u0vfp3FzeJDDiLDFEdapD928MZOZ8jLx5t
- c/TxcMO7MfGItflBifSZ5PUD79pgevXfkHF0W1D1Y0B7EdqbFGooU3RjkHUc2ymVNR+pVB
- J/o+HdcnAWOyh5J32CMjwIDgi+fvjixukivlzgrHVmT1c6B+P9nEKZ/jg2RSu4IFROPRWK
- +SnpNCwdwObrXwsMxNIv30hTWs2kBqAEX1FeJk9gSkC7OM2Y7mAzI1P8viSnlw==
+ bh=Wbi37R4OuGWUAKEVgr4shQnbdKJoJhHGMf5OWIjjq6g=;
+ b=rxxiDSoIK9q+afm2XNy4MkO58eiyEX4q4eFOYUOiBJQfNAmtcSXtF8+xK9qdaqZreHkw6Q
+ ITXovdeeQFN3JF8SVMj95YXhh3kh6R7Z1+//9Kh2rpVpQp3xBareBNkhlB7WnWH3X7oYuV
+ JN78CqgbBClhGJHLrbxPjGrs6IyGaXmkG5Mke3a3fozjSkSI+dJ0zMGLBMy3x5BUIcNJLq
+ rpstJUL5I/Y3b6ZbaUXtSXszLcLimw90K2g8Auf0+QtkM9xvMconaEB4JVEPZeBhmI/AHb
+ FkWV7MYIJgW/gzX0a4Pwh9YUlMjP6n+NAySKdBUCWGaMP2jXlebqCqMwiagPhA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1705858226;
+ s=mail20150812; t=1705858227;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=iHPgmPhV1Cs1WGMAUGGr5pLByQUtzJoVOjJBFh5DTjk=;
- b=c4H6Z3SfTeNq98KB1tkJ9OiBmxixHvVZNfxiWQFCo7hPCgexxjJH2BDwqUR+mt4FbgqmeR
- XYtxtnK9pORpHM5c68zB1nHH8SimgwGJ+czraI15k/gp+KqnYgGbaglSjGmsGNByZ/owDC
- GtYkkiTvjKhZzJMOuD0P4JWE3F7CN71GT0NzDIQZ5Jh3u7wWLPr1Z/utEDCk/4C73uDiY9
- 835NyVWUu7o88XVqn9zk4k+NIhhFZspT6j5g7ECr5r2yVH+EToJbBT6JYUbd0yGsj7ushL
- +tZ9w7fm/hvVydyb+0QAQNvrrg22cc/8l3s2jeaaIX2ssvGTmz+soAtj3/Cg9Q==
+ bh=Wbi37R4OuGWUAKEVgr4shQnbdKJoJhHGMf5OWIjjq6g=;
+ b=JfUM6Vd+EkMmA+OTZWTvBwu9I3oFV024CJmH2TkFMfV/nYlvn/91aTYoope2BbnKH9QbyZ
+ BZ8PhHkvt/ONxQbYrTJ9OEe+A/VoMWCmFCQoswU3W8oWFaGd1SkB3pFJYKIrdqu1IoFdpN
+ Vcyv8I3wUlR4O8s6akplVlHhnvfz24w8UWRrDBqqAKv9ee24iPijsZCSyJIpbqLrDBVolf
+ mBLPZojLvLDFwUy3m0cyM+snQ+9WRtzoO7wf5hpA3Q14tjop2f70Y0VH/VcK2aXW65AGhE
+ x+9lIx1WhO3q0nfXN9mWv2a3Hfhouj4eEjeWZIAfio9HgZxWXBwOdDu8sEDUrA==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Joe Hershberger <joe.hershberger@ni.com>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
  Ramon Fried <rfried.dev@gmail.com>
-Subject: [PATCH 2/3] net: sh_eth: Use PHY MDIO address from DT if available
-Date: Sun, 21 Jan 2024 18:29:34 +0100
-Message-ID: <20240121173006.273629-2-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 3/3] net: ravb: Use PHY MDIO address from DT if available
+Date: Sun, 21 Jan 2024 18:29:35 +0100
+Message-ID: <20240121173006.273629-3-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240121173006.273629-1-marek.vasut+renesas@mailbox.org>
 References: <20240121173006.273629-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 6dqc67y3j8rjgu3cuonadpsya5ok8ryy
-X-MBO-RS-ID: 0fc51963b6c3dfcd46e
+X-MBO-RS-ID: 7695f73a8a25a0d312b
+X-MBO-RS-META: z4do71qzf1wce1pmss6dq86kzey8ckf1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,34 +99,37 @@ Cc: Joe Hershberger <joe.hershberger@ni.com>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
 Cc: Ramon Fried <rfried.dev@gmail.com>
 ---
- drivers/net/ravb.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ drivers/net/sh_eth.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
-index 0bcd6cfd3f3..e1f61f514c8 100644
---- a/drivers/net/ravb.c
-+++ b/drivers/net/ravb.c
+diff --git a/drivers/net/sh_eth.c b/drivers/net/sh_eth.c
+index 7b1f59dc498..5e2e3054ecf 100644
+--- a/drivers/net/sh_eth.c
++++ b/drivers/net/sh_eth.c
 @@ -12,6 +12,7 @@
- #include <clk.h>
+ #include <common.h>
  #include <cpu_func.h>
- #include <dm.h>
+ #include <env.h>
 +#include <eth_phy.h>
- #include <errno.h>
  #include <log.h>
- #include <miiphy.h>
-@@ -309,9 +310,14 @@ static int ravb_phy_config(struct udevice *dev)
- 	struct ravb_priv *eth = dev_get_priv(dev);
+ #include <malloc.h>
+ #include <net.h>
+@@ -597,11 +598,16 @@ static int sh_eth_phy_config(struct udevice *dev)
+ 	struct sh_ether_priv *priv = dev_get_priv(dev);
  	struct eth_pdata *pdata = dev_get_plat(dev);
+ 	struct sh_eth_dev *eth = &priv->shdev;
+-	int ret = 0;
+ 	struct sh_eth_info *port_info = &eth->port_info[eth->port];
  	struct phy_device *phydev;
 +	int phy_addr;
- 	int reg;
- 
--	phydev = phy_connect(eth->bus, -1, dev, pdata->phy_interface);
++	int ret = 0;
++
 +	phy_addr = eth_phy_get_addr(dev);
 +	if (phy_addr < 0)
 +		phy_addr = -1;
-+
-+	phydev = phy_connect(eth->bus, phy_addr, dev, pdata->phy_interface);
+ 
+-	phydev = phy_connect(priv->bus, -1, dev, pdata->phy_interface);
++	phydev = phy_connect(priv->bus, phy_addr, dev, pdata->phy_interface);
  	if (!phydev)
  		return -ENODEV;
  
