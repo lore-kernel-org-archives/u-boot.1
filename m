@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF2C8C47422
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 21:02:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3C80C47422
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 21:02:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0996E87920;
-	Sun, 21 Jan 2024 22:02:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 719AC87708;
+	Sun, 21 Jan 2024 22:02:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Vch6Qv0s";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="PrNcOcC/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF1A6878FA; Sun, 21 Jan 2024 22:02:13 +0100 (CET)
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ id 1430B87927; Sun, 21 Jan 2024 22:02:15 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0418287705
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 22:02:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D65638783B
+ for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 22:02:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 8C8B7B80AFC;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 4EA7560EB6;
  Sun, 21 Jan 2024 21:02:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id E532CC433F1;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id F2FB8C43390;
  Sun, 21 Jan 2024 21:02:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705870930;
- bh=MRywOI5mMqqVDKrHwJcSWTqepGOtl1p18Ppgm5ATlB4=;
+ s=k20201202; t=1705870931;
+ bh=HiRZyyXC+JA0MQ1SbsqYBAPdtpB9R8g4hb3l8/6pBWw=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=Vch6Qv0sXZ3Z+hsmsRQKsw56rcZUSipdGrrAftXO09kxPePIBBOEVoUNOUAUqaljZ
- owupy0/Y+1HF0VYfUitV/4kOGhDfIwIAR77b8jVFdfpSa3VftSPhHEE9niImrUAK/K
- xl6lFoyjRfyPq/uAEgaNblUWa8wwVXpmom73x0XFOcvyHBIN9d3ufZux+UfA8pX1tN
- Qjl08c6iskdysv61DodS5CYy963Xm1wujWhej71RaQkjqD449Z4FHpsw2P/AMbSkz5
- 1LFuuUQo/jD4sYG36hLbG1B/brxjckEugRbmGMw4lNl2xmwBre0pqaA00wlT29MFsM
- kEDx3k7n5HZzg==
+ b=PrNcOcC/zuSuw6BoCCT9NwST6v/zgVyxMV8R02dA3Fjlw3CyvQjTPgmZBbV9hYvss
+ 4GHJMT5Q37oXyDkJTX1ihTACXqElL5a5wv0pAqiHRkX4QF9wIwvWPd2Gxoqu3FRifw
+ +MGl2d+o1LMu/wy5Hd/ScAQ6wJwqxKegTFLrbC1NqvsnCCiQxc3FGDVNfxntqrSlnY
+ HK4GO4oMdV8VMDuDDN0Qq63NMJFzG3CQuw09E6IP3mDmyMSrnWik5jkUf6MRFxTeIF
+ lgCqFd9koJxxMuliA8CqqLcqgQBSTAMXFhCroxfZRrp7seamgus7XA2YD7w/638Np/
+ PRe378sMZ4mJQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id CEB08C47DB7;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id D8430C47DDB;
  Sun, 21 Jan 2024 21:02:10 +0000 (UTC)
 From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
-Date: Mon, 22 Jan 2024 05:02:04 +0800
-Subject: [PATCH v2 1/4] net: hifemac_mdio: use log_msg_ret() correctly,
- report error by dev_err()
+Date: Mon, 22 Jan 2024 05:02:05 +0800
+Subject: [PATCH v2 2/4] net: hifemac: fix log reporting
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240122-net-v2-1-78a368896f62@outlook.com>
+Message-Id: <20240122-net-v2-2-78a368896f62@outlook.com>
 References: <20240122-net-v2-0-78a368896f62@outlook.com>
 In-Reply-To: <20240122-net-v2-0-78a368896f62@outlook.com>
 To: Joe Hershberger <joe.hershberger@ni.com>, 
  Ramon Fried <rfried.dev@gmail.com>
 Cc: u-boot@lists.denx.de, Yang Xiwen <forbidden405@outlook.com>
 X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1705870930; l=1755;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1705870930; l=6569;
  i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
- bh=hQDPCsolPbXnTnIjMDCaSwJsmF0AaJNRipJEFZgsKnM=;
- b=5U/Zegjwph914QyCx0s5B23YZnPIT5kreP4eC9a98ynPFiRD992pN8GkJgJd+Xuc8EVlOPaj9
- +PkN4xzJD2XDTb+oFA8Ch8JeszQkI5RxiOFgdUbMD11l9QtVvoa+l7Z
+ bh=5cyUg5mF3yyXwrX1AvQvJQpfQ3oNcmSAKW0TIb3hMNo=;
+ b=944ys5N0Hm/nWvqid4P2VC/0m3T30lfDJS9LkMGck8jWYkA+w12fCAPeCB3V8BaHLFEMjchpp
+ V9I/99le/b6DEGtQC1nK0RAs9xeQt2gdvLHmF025Z37S2IELojFul38
 X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
  pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
 X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
@@ -87,59 +86,211 @@ X-Virus-Status: Clean
 
 From: Yang Xiwen <forbidden405@outlook.com>
 
-The initial commit used log_msg_ret() wrongly. Fix that by moving error
-report to a separate dev_err() call and shrink the first argument of
-log_msg_ret() to no more than 4 chars.
+shrink the first argument of log_msg_ret(), add dev_xxx() functions for
+error reporting.
 
-Fixes: 6b5c8d98e204 ("net: add hifemac_mdio MDIO bus driver for HiSilicon platform")
+Fixes: 9d8f78a2a79f7 ("net: add hifemac Ethernet driver for HiSilicon platform")
 
 Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
 ---
- drivers/net/hifemac_mdio.c | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+ drivers/net/hifemac.c | 110 +++++++++++++++++++++++++++++++++-----------------
+ 1 file changed, 73 insertions(+), 37 deletions(-)
 
-diff --git a/drivers/net/hifemac_mdio.c b/drivers/net/hifemac_mdio.c
-index 343c5f3a38..0b59d06091 100644
---- a/drivers/net/hifemac_mdio.c
-+++ b/drivers/net/hifemac_mdio.c
-@@ -8,6 +8,7 @@
- #include <dm.h>
- #include <clk.h>
- #include <miiphy.h>
-+#include <dm/device_compat.h>
- #include <linux/io.h>
- #include <linux/iopoll.h>
+diff --git a/drivers/net/hifemac.c b/drivers/net/hifemac.c
+index b61a29e636..1088f3eca3 100644
+--- a/drivers/net/hifemac.c
++++ b/drivers/net/hifemac.c
+@@ -245,8 +245,10 @@ static int hisi_femac_start(struct udevice *dev)
+ 	hisi_femac_rx_refill(priv);
  
-@@ -74,7 +75,8 @@ static int hisi_femac_mdio_of_to_plat(struct udevice *dev)
- 	data->membase = dev_remap_addr(dev);
- 	if (IS_ERR(data->membase)) {
- 		ret = PTR_ERR(data->membase);
--		return log_msg_ret("Failed to remap base addr", ret);
-+		dev_err(dev, "Failed to remap base addr %d\n", ret);
-+		return log_msg_ret("mdio", ret);
+ 	ret = phy_startup(priv->phy);
+-	if (ret)
+-		return log_msg_ret("Failed to startup phy", ret);
++	if (ret) {
++		dev_err(dev, "Failed to startup phy: %d\n", ret);
++		return log_msg_ret("phy", ret);
++	}
+ 
+ 	if (!priv->phy->link) {
+ 		debug("%s: link down\n", __func__);
+@@ -281,8 +283,10 @@ static int hisi_femac_send(struct udevice *dev, void *packet, int length)
+ 
+ 	// wait until FIFO is empty
+ 	ret = wait_for_bit_le32(priv->glb_base + GLB_IRQ_RAW, IRQ_INT_TX_PER_PACKET, true, 50, false);
+-	if (ret == -ETIMEDOUT)
+-		return log_msg_ret("FIFO timeout", ret);
++	if (ret == -ETIMEDOUT) {
++		dev_err(dev, "FIFO timeout\n");
++		return log_msg_ret("net", ret);
++	}
+ 
+ 	return 0;
+ }
+@@ -340,35 +344,45 @@ int hisi_femac_of_to_plat(struct udevice *dev)
+ 	};
+ 
+ 	priv->port_base = dev_remap_addr_name(dev, "port");
+-	if (IS_ERR(priv->port_base))
+-		return log_msg_ret("Failed to remap port address space", PTR_ERR(priv->port_base));
++	if (!priv->port_base) {
++		dev_err(dev, "Failed to remap port address space\n");
++		return log_msg_ret("net", -EINVAL);
++	}
+ 
+ 	priv->glb_base = dev_remap_addr_name(dev, "glb");
+-	if (IS_ERR(priv->glb_base))
+-		return log_msg_ret("Failed to remap global address space", PTR_ERR(priv->glb_base));
++	if (IS_ERR(priv->glb_base)) {
++		dev_err(dev, "Failed to remap global address space\n");
++		return log_msg_ret("net", -EINVAL);
++	}
+ 
+ 	for (i = 0; i < ARRAY_SIZE(clk_strs); i++) {
+ 		priv->clks[i] = devm_clk_get(dev, clk_strs[i]);
+ 		if (IS_ERR(priv->clks[i])) {
+ 			dev_err(dev, "Error getting clock %s\n", clk_strs[i]);
+-			return log_msg_ret("Failed to get clocks", PTR_ERR(priv->clks[i]));
++			return log_msg_ret("clk", PTR_ERR(priv->clks[i]));
+ 		}
  	}
  
- 	// clk is optional
-@@ -89,8 +91,10 @@ static int hisi_femac_mdio_probe(struct udevice *dev)
- 	int ret;
+ 	priv->mac_rst = devm_reset_control_get(dev, "mac");
+-	if (IS_ERR(priv->mac_rst))
+-		return log_msg_ret("Failed to get MAC reset", PTR_ERR(priv->mac_rst));
++	if (IS_ERR(priv->mac_rst)) {
++		dev_err(dev, "Failed to get MAC reset %ld\n", PTR_ERR(priv->mac_rst));
++		return log_msg_ret("rst", PTR_ERR(priv->mac_rst));
++	}
  
- 	ret = clk_prepare_enable(data->clk);
--	if (ret)
--		return log_msg_ret("Failed to enable clk", ret);
-+	if (ret) {
-+		dev_err(dev, "Failed to enable clock: %d\n", ret);
+ 	priv->phy_rst = devm_reset_control_get(dev, "phy");
+-	if (IS_ERR(priv->phy_rst))
+-		return log_msg_ret("Failed to get PHY reset", PTR_ERR(priv->phy_rst));
++	if (IS_ERR(priv->phy_rst)) {
++		dev_err(dev, "Failed to get PHY reset %ld\n", PTR_ERR(priv->phy_rst));
++		return log_msg_ret("rst", PTR_ERR(priv->phy_rst));
++	}
+ 
+ 	ret = dev_read_u32_array(dev,
+ 				 PHY_RESET_DELAYS_PROPERTY,
+ 				 priv->phy_reset_delays,
+ 				 DELAYS_NUM);
+-	if (ret < 0)
+-		return log_msg_ret("Failed to get PHY reset delays", ret);
++	if (ret < 0) {
++		dev_err(dev, "Failed to get PHY reset delays %d\n", ret);
++		return log_msg_ret("rst", ret);
++	}
+ 
+ 	priv->mac_reset_delay = dev_read_u32_default(dev,
+ 						     MAC_RESET_DELAY_PROPERTY,
+@@ -385,32 +399,44 @@ static int hisi_femac_phy_reset(struct hisi_femac_priv *priv)
+ 
+ 	// Disable MAC clk before phy reset
+ 	ret = clk_disable(priv->clks[CLK_MAC]);
+-	if (ret < 0)
+-		return log_msg_ret("Failed to disable MAC clock", ret);
++	if (ret < 0) {
++		pr_err("%s: Failed to disable MAC clock %d\n", __func__, ret);
++		return log_msg_ret("clk", ret);
++	}
+ 	ret = clk_disable(priv->clks[CLK_BUS]);
+-	if (ret < 0)
+-		return log_msg_ret("Failed to disable bus clock", ret);
++	if (ret < 0) {
++		pr_err("%s: Failed to disable bus clock %d\n", __func__, ret);
++		return log_msg_ret("clk", ret);
++	}
+ 
+ 	udelay(delays[PRE_DELAY]);
+ 
+ 	ret = reset_assert(rst);
+-	if (ret < 0)
+-		return log_msg_ret("Failed to assert reset", ret);
++	if (ret < 0) {
++		pr_err("%s: Failed to assert reset %d\n", __func__, ret);
++		return log_msg_ret("rst", ret);
++	}
+ 
+ 	udelay(delays[PULSE]);
+ 
+ 	ret = reset_deassert(rst);
+-	if (ret < 0)
+-		return log_msg_ret("Failed to deassert reset", ret);
++	if (ret < 0) {
++		pr_err("%s: Failed to deassert reset %d\n", __func__, ret);
++		return log_msg_ret("rst", ret);
++	}
+ 
+ 	udelay(delays[POST_DELAY]);
+ 
+ 	ret = clk_enable(priv->clks[CLK_MAC]);
+-	if (ret < 0)
+-		return log_msg_ret("Failed to enable MAC clock", ret);
++	if (ret < 0) {
++		pr_err("%s: Failed to enable MAC clock %d\n", __func__, ret);
++		return log_msg_ret("clk", ret);
++	}
+ 	ret = clk_enable(priv->clks[CLK_BUS]);
+-	if (ret < 0)
+-		return log_msg_ret("Failed to enable MAC bus clock", ret);
++	if (ret < 0) {
++		pr_err("%s: Failed to enable MAC bus clock %d\n", __func__, ret);
 +		return log_msg_ret("clk", ret);
 +	}
  
  	return 0;
  }
-@@ -112,5 +116,6 @@ U_BOOT_DRIVER(hisi_femac_mdio_driver) = {
- 	.of_to_plat = hisi_femac_mdio_of_to_plat,
- 	.probe = hisi_femac_mdio_probe,
- 	.ops = &hisi_femac_mdio_ops,
-+	.plat_auto = sizeof(struct mdio_perdev_priv),
- 	.priv_auto = sizeof(struct hisi_femac_mdio_data),
- };
+@@ -423,30 +449,40 @@ int hisi_femac_probe(struct udevice *dev)
+ 	// Enable clocks
+ 	for (i = 0; i < CLK_NUM; i++) {
+ 		ret = clk_prepare_enable(priv->clks[i]);
+-		if (ret < 0)
+-			return log_msg_ret("Failed to enable clks", ret);
++		if (ret < 0) {
++			dev_err(dev, "Failed to enable clk %d: %d\n", i, ret);
++			return log_msg_ret("clk", ret);
++		}
+ 	}
+ 
+ 	// Reset MAC
+ 	ret = reset_assert(priv->mac_rst);
+-	if (ret < 0)
+-		return log_msg_ret("Failed to assert MAC reset", ret);
++	if (ret < 0) {
++		dev_err(dev, "Failed to assert MAC reset: %d\n", ret);
++		return log_msg_ret("net", ret);
++	}
+ 
+ 	udelay(priv->mac_reset_delay);
+ 
+ 	ret = reset_deassert(priv->mac_rst);
+-	if (ret < 0)
+-		return log_msg_ret("Failed to deassert MAC reset", ret);
++	if (ret < 0) {
++		dev_err(dev, "Failed to deassert MAC reset: %d\n", ret);
++		return log_msg_ret("net", ret);
++	}
+ 
+ 	// Reset PHY
+ 	ret = hisi_femac_phy_reset(priv);
+-	if (ret < 0)
+-		return log_msg_ret("Failed to reset phy", ret);
++	if (ret < 0) {
++		dev_err(dev, "Failed to reset PHY: %d\n", ret);
++		return log_msg_ret("net", ret);
++	}
+ 
+ 	// Connect to PHY
+ 	priv->phy = dm_eth_phy_connect(dev);
+-	if (!priv->phy)
+-		return log_msg_ret("Failed to connect to phy", -EINVAL);
++	if (!priv->phy) {
++		dev_err(dev, "Failed to connect to phy\n");
++		return log_msg_ret("phy", -EINVAL);
++	}
+ 
+ 	hisi_femac_port_init(priv);
+ 	return 0;
 
 -- 
 2.43.0
