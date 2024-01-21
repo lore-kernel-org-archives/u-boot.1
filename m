@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A15C1C47422
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 09:11:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B930FC47422
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 11:46:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92BA28777F;
-	Sun, 21 Jan 2024 10:11:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 766E4875B9;
+	Sun, 21 Jan 2024 12:46:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="XdQSNg4q";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="AkhgVCx+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 311A987796; Sun, 21 Jan 2024 10:11:00 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id E4BBB876B1; Sun, 21 Jan 2024 12:46:08 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4149187775
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 10:10:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 32114874BA
+ for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 12:46:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1705828257; x=1706433057; i=xypron.glpk@gmx.de;
- bh=UAlpcK/B6+/wuaZmZOo1bOkkihpR7YB8PNsDjVPppks=;
- h=X-UI-Sender-Class:Date:Subject:To:References:Cc:From:
- In-Reply-To;
- b=XdQSNg4qzSYZLwTOyDr109JfYu4uGRZJWdULEBmI1r47HKVowZuXz+Q6gfuO5F7/
- CLmO2WlrAf+XqU3W6rZsugf4l88hmjeLtaWksFNKBdTfS4iYeS1Z1s+fzC6woWOC3
- LDmXQMF+ew30M2ZYkKaWGk0UN1BMuDpqGY2OpEGR2kzuryO+eiHxXG7WNfTHXd/l5
- l8q1OXnZ2MSCKLtOyZIRD89Qp7RGY/TYmXLNwjFbx0eeWFWWgrfMHs7fFqJRnceQb
- qAqMtXtWEIh60Avhz1mGdQhyj7h9mv4rR3lUxuYFzQHqLTXPKvnd8GiOHohnXcxky
- BtKn4RXgajkTrci/OQ==
+ t=1705837563; x=1706442363; i=xypron.glpk@gmx.de;
+ bh=P6cMj36lnf4xl25l3NpjdRsb8ht1Tz9FG6SJDXqQz4U=;
+ h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
+ b=AkhgVCx+7Xa/j+uEYGmI4tyvr2M61Nv1ZX3dZ8E/Oku7ac4aM74epo/uTbtXQfTA
+ EAKybR6cjYA8H5dYQe4xl6GemTKT3CrfO3Ci+VFDkOsSoNUXstBJP/W8RF9OUFv2m
+ 3idRPo9F/PF3p1OhpisC10H1xHxPoKuSdisWA9L/FSyLSN5ekqL7tpfZDVLTQFrm7
+ RiN5xoGpq0V7ywwkE9GDWXBnafKLIZaVKJCQ71Tk0yF97oMeV7DkASt58wdIUOI3u
+ sz5LK6qzHDLZpJI2hh4og6z0yBkpvUWw8WV2M/ba0ZeIC9F67WzNcZoYIdYDY7ZCl
+ SYs9t3Sp7JkVK0MM4Q==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.161] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MvsEx-1r9OPG05e3-00syuc; Sun, 21
- Jan 2024 10:10:57 +0100
-Message-ID: <5f52720d-0d0e-4147-bd67-fcaac3853a18@gmx.de>
-Date: Sun, 21 Jan 2024 10:10:59 +0100
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N33ET-1qxnXC20CL-013P7X; Sun, 21
+ Jan 2024 12:46:03 +0100
+Message-ID: <37dc396d-7580-4373-b8e7-561a8f7fdca2@gmx.de>
+Date: Sun, 21 Jan 2024 12:46:05 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: uefi: remove duplicate word "has"
 Content-Language: en-US
-To: Wei Ming Chen <jj251510319013@gmail.com>
-References: <20240119013414.1407234-1-jj251510319013@gmail.com>
-Cc: u-boot@lists.denx.de
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Wei Ming Chen <jj251510319013@gmail.com>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240119013414.1407234-1-jj251510319013@gmail.com>
+Subject: Pull request efi-2024-04-rc1-3
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:8Q3LrBPxXYEK06FxvUV28sANrmccZSEj4rpWdVWKwrHYvpj2jQ/
- tY50p6os6ivxCgQ1xKfQPB3GIkHbcr2n0Bh/F1a/TlKgeBYZpnFGSIA+VAh1toJrhlZCJ9E
- BalAN2vH4AmNNKgSoZHApmR50ZQW5GRAOMWDdhEXXnSB2knU5+zS6YNeMYFalhN8FxgsaJF
- xofjTzTdNXImDkdmZfTNw==
-UI-OutboundReport: notjunk:1;M01:P0:iGXoygswGc4=;21wUqiWkTA0VD3FpCHrF2l9oXiS
- vev6IGrYwXvMMhTn+texCUUKBJyWmhiH3d+ADZJOXWW+8SHif62OPzQkDP84jxzyFRfOwDu6Y
- 91CPWHp3+Q8GvHbtTYxyhidQMjiWrxq1aEJaD5N9eG92Lc0L3f01Kih+c9gSRzDTlM8mk3MxP
- 3sZP2FsyWAGDsIyx0dv9GH+r+2OkvDwyawH/LDjD2XeJQjYAECA1rK1JbH3cdosHOdRTK3fLQ
- dsw3O6DvOJGpp9NceqeG9tYf9nTEJ6SB44Recsib4OAbxepV236DF6mXyFa8Imqx+Pbe3F8+0
- jEttom/6JFRenok585siHTozo2dVk9k0+1YLP884k9T/LZQ+YSxAnX6Xqje8owXLfhLckgZ+U
- McRdOpIzEKJmxPEo0uvve6AAuqGfSTxtBKVGouzn7J+hYxg8B5Inb4dXgAJWlZW2/shWVTZLV
- QP7gSsYWrIEvwY+7IUN2reDQBPH6oVEu6guzlnDey00MZ0wTjYfF89YzaS5x7J/hpQl9Dj4cP
- xNKQakDC9doEq/IkoDWzt/ho8kW/N5Of/MoBlISxvRiiOfGvhN98WeqJb5k+KCEB9VIRMTRps
- TQx78jp7jJQdaE0RX07BhyVp6V7SDLf2OlRDTqdKTJ3lxVQX3Jbqyu2SLAtZlNZ2PXo9tyH+m
- lgpzOhIZfZ61soCX2g/ZyRYPu01XoCWaWwpK0sLValE71jUKCUCcXcDl7HW7Jx+iCa1JWMzLz
- XcsL1M6ckRJyfOIIm/wB4U/W+bc/cYU4av3q7KH3hj0J4hrQgtbkERKUo6qnKJfkj4GSrYRF9
- +UhXzHHmP9zmr/sYb704BKuMwh8+kNfpH0K5P8cl6Q2bkreHfYqyXn6IK0sf4rr/HA7pa55+M
- 6TQPvFsOUDd9sb0TWi1CHfDXUzjf2xxNi7SQ/f02RF8l7JMWTjpL5VvSEu2lAF9eI+yGNIMJt
- Lw4/UA==
+X-Provags-ID: V03:K1:IUUEmgqb92pjYTBoBi4b3hP15D8Ra58oq3zjM6CHTuVVFkOIqco
+ ltHXSJtOVV2MMTMkjgpebrpYZKMLGcr3/csCm0/PjdaAjFjq+TFXWfbcqJ+GDYgQw36E688
+ Mc97XGW+AsNNORLIclkRi0jxYcyhcvjD/vJ4IWPCQ1cLTDP6iOAv3LtbfIbLEtb0TzSUJLr
+ zU9R9wOtM7DO5eUdeRahg==
+UI-OutboundReport: notjunk:1;M01:P0:owEKdFSuuZY=;MZhnBXdM7wQizbTKB1XY0uGTaOu
+ iq1Cowsubzvgx6l/JvtucsrjtakksILJCdpn/SlMGRVoFMqCbaVGmiHrxfGKI1ErTmDsc6z0K
+ 7xUsukqUiWz9+NNm3nnCELclpGmoKx9RK8lh+nnr+wVqCyByb1vLsCF4tNKHKftPCGqd8z/Jr
+ zR7gkWJWlJCZGPJH8qVeOIFKlUhZl/HVPtX9tmsyoCLcqKfmUgfhzb2SrTr7Hne+h6gqHxyn7
+ bqpGPK0o1T6AVD8zgS1uiIdO2cIn9lF0FYUGiNDniSg8tuM/Ik+NEZ+a+14GhqylywWYADQ9f
+ mrtcLVd1x5rI3VQ5RWe8biVOx+Y9uXzm38XK4tVFhg/5YknJtLRLW/lozC4CcHDhMGecw6sMM
+ 8IgODEzfCRSptDz65pi517ZWXvxRzU2MsNEyvwDVCOLVAMCabwfM3Clt+MdoZf6q8Yv7iSYsL
+ 6i23Yep5W9SwkTYX24tkTblUHM1KeWBniog404yAb4lMwJdxhqU3vhvqIAcxRg3zZetRtlWba
+ wnXPbdcVJi3rpAf7HSV/D6RJY5vnwRUOrSGN1eYZJu8GdfcpCBAu2NLXwVEsn2WLTmJHhRj57
+ h2B+ZHQ/c8Ipva3b/skLlyYh3ok+z8imw9lpk6TLa1W38vCVRClLjv5qjoQ5r5eMJxmtbD/D+
+ soGvrVICbF89a5kgMe1449aqYhYCG6ZNkdvBthOA+4C1gkjePiSdewb91e4z7fDKyIRACGnnp
+ Uj47QiznqjviBXRtssj1fB42c3i5LWc7v3tstE6Cl9tg+Tv+jBrE9oWT/ELcymClFXVmKBPgg
+ 2Hf4ASOKel5hLxXz53M4AzYDrhePnX9sj2WwokO8RL0nhd+YwNQmo4P/xxWVQmeLSbdgAn9zG
+ JAptYcf0w7VPZZuffDnPhQFGVkSS+Uy/ta5RGPgZF9osFqqdGEVWc1uB2E/45/zfEmWGs/Pto
+ QLvwiA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,9 +88,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/19/24 02:34, Wei Ming Chen wrote:
-> There should be only one "has" instead of "has has"
->
-> Signed-off-by: Wei Ming Chen <jj251510319013@gmail.com>
+Dear Tom,
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+The following changes since commit 3c04fcf3137d5f694d52b8f355373e4baabe5f7=
+8:
+
+   Merge patch series "k3-j721e: beagleboneai: Fix USB" (2024-01-20
+11:39:13 -0500)
+
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+tags/efi-2024-04-rc1-3
+
+for you to fetch changes up to 2c98f7435cc5edb2a0b96e9f398c0b7f084e83cd:
+
+   efi_loader: return immediately in UCLASS_EFI_LOADER removal
+(2024-01-21 11:24:24 +0100)
+
+Gitlab CI showed no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/19394
+
+=2D---------------------------------------------------------------
+Pull request efi-2024-04-rc1-3
+
+Documentation:
+
+* correct documentation of part_get_bootable()
+* remove duplicate word "has" in UEFI documentation
+
+UEFI:
+
+* rename check_disk_has_default_file function
+* auto-generate boot option for each blkio device
+* auto-generate removable media boot option first
+* avoid pointer access after calling efi_delete_handle
+* create common function to free struct efi_disk_obj
+* return immediately in UCLASS_EFI_LOADER removal
+
+=2D---------------------------------------------------------------
+Heinrich Schuchardt (1):
+       part: correct documentation of part_get_bootable()
+
+Masahisa Kojima (6):
+       efi_loader: rename check_disk_has_default_file function
+       efi_loader: auto-generate boot option for each blkio device
+       efi_loader: auto-generate removable media boot option first
+       efi_loader: avoid pointer access after calling efi_delete_handle
+       efi_loader: create common function to free struct efi_disk_obj
+       efi_loader: return immediately in UCLASS_EFI_LOADER removal
+
+Wei Ming Chen (1):
+       doc: uefi: remove duplicate word "has"
+
+  doc/develop/uefi/uefi.rst    |   2 +-
+  include/part.h               |   4 +-
+  lib/efi_loader/efi_bootmgr.c | 141
+++++++++++++++++++++++++++++++++-----------
+  lib/efi_loader/efi_disk.c    |  52 +++++++++++-----
+  4 files changed, 147 insertions(+), 52 deletions(-)
