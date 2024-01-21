@@ -4,77 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36F61C47422
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 21:37:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96F9CC47DB7
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 21:38:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86064877BB;
-	Sun, 21 Jan 2024 22:37:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id 01ADE87876;
+	Sun, 21 Jan 2024 22:37:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="fal6Msqn";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA21C8775F; Sun, 21 Jan 2024 22:37:47 +0100 (CET)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7854487872
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 22:37:45 +0100 (CET)
+ id 100D78775F; Sun, 21 Jan 2024 22:37:58 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id 625F88795D
+ for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 22:37:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6853f6ff6e1so13224896d6.2
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 13:37:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1705873064; x=1706477864;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ha36yMCgm77Hv/ChSoVe1yjlAR9tYzTBaLTrsZlQURY=;
- b=fal6Msqnu+rxsBejpEMqy537PelcMNaKBERQv+BoS5an9ooPBgMwUZbC6eLdhgHdTo
- hPKLLOpLmVkjOHwAqUYJTEckSRWa/nCEuZ71CtuzyrlQTUysbqJ1NXfiuUcyTh7WNYdW
- YZcwC7aGRiPAbKZ2Cpq09bxvG2WdQqu5yS3hIckyRo7EH1Hb94X+bPhUY+rw8aY+3wby
- oAXx/Jzp+tCb+LpHmK7LGohrcOnI8aIgQD4yjNqv/9w5IdP7vpZiuwB/GAR0TcvRN82/
- vzURilyAk8P40w9jgVwMKj0lELaNODjdggGE55wT32sC/MsD0sBl4kO57xeorqwNpGWw
- fiwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705873064; x=1706477864;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Ha36yMCgm77Hv/ChSoVe1yjlAR9tYzTBaLTrsZlQURY=;
- b=kkzozby3tsxDIgMOzmLOFptnNdiW3Xd7cxMHf/y6S/5txq6wzToCw+doM7aQK6YuPu
- cPn616ZCns2D/39i6kiBCBNKRMvIhcZUOSpt+waeZhUIO+6kYZmsFBVKn9yHaEGv2Cg7
- Iy46Qn8A+MxLwhRhjN6nSUOBl49j6iNjhAP2GsGlHT+dX38gGS0YigawfreIoc8+0woU
- MyVXArHNLNZjFdNmNf0/DNSLuwgYCJ5yDN0rUavmtmDmbyzHjf+5YOW0vVhyrSUbTlfD
- 4eiUpi9oEBwlJYhutS89rVCWo6SSRWfhVDi1vEZKV+otbsfIWt1gcPxAvSabb4a/EhA1
- VTiw==
-X-Gm-Message-State: AOJu0YwksdG/vTCLTrWWZeDl/zGbkECh/2G0fXhfINIixE+AscB5qtWY
- 56muK60LIr+VVtICmNSWmfmuZLoW7uFki1ZSc2um6oKCh3zXlfUwTu3YswXoo1/pZXhozpzCVBq
- Zs1gpgi0zH5Gr3iqMyxseDquX8uTkvmn2IcReGA==
-X-Google-Smtp-Source: AGHT+IEWo3nVlFmVpCDBwqCLVR/PZM60xSE2zQUKN7tvIYRed1fR1RM07XuqmN3BDnyzCNLR8feo8X5ymrFRB26BoyI=
-X-Received: by 2002:a0c:ca8f:0:b0:685:3856:5eff with SMTP id
- a15-20020a0cca8f000000b0068538565effmr3885852qvk.9.1705873064286; Sun, 21 Jan
- 2024 13:37:44 -0800 (PST)
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.05,211,1701097200"; 
+ d="asc'?scan'208";a="195107318"
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie6.idc.renesas.com with ESMTP; 22 Jan 2024 06:37:52 +0900
+Received: from [10.226.92.38] (unknown [10.226.92.38])
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id EA2E4400565A;
+ Mon, 22 Jan 2024 06:37:50 +0900 (JST)
+Message-ID: <3b289fbb-ad24-45d5-b7b9-d9af00baaf2f@bp.renesas.com>
+Date: Sun, 21 Jan 2024 21:37:49 +0000
 MIME-Version: 1.0
-References: <20231209181057.331815-1-i@shantur.com>
- <CABEcMwWzt=z=3XNWq5iAKmmnB+UsjTzp4_OUs3V8bNuc_i5zMw@mail.gmail.com>
- <0b0659ab-8361-481b-b863-0b4db0db53b5@denx.de>
-In-Reply-To: <0b0659ab-8361-481b-b863-0b4db0db53b5@denx.de>
-From: Shantur Rathore <i@shantur.com>
-Date: Sun, 21 Jan 2024 21:37:33 +0000
-Message-ID: <CABEcMwU-Pjn7wkWe2jipFHyQFF-_-G8ugH0ECvxqqZTFex3w5Q@mail.gmail.com>
-Subject: Re: [PATCH v3] common: usb-hub: Reset hub port before scanning
-To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Cc: bmeng.cn@gmail.com, clamor95@gmail.com, Hector Martin <marcan@marcan.st>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/3] net: ravb: Use PHY MDIO address from DT if available
+Content-Language: en-GB
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+References: <20240121173006.273629-1-marek.vasut+renesas@mailbox.org>
+ <20240121173006.273629-3-marek.vasut+renesas@mailbox.org>
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20240121173006.273629-3-marek.vasut+renesas@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------EKmnGLNrbBrcirky7ctc31Hs"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,86 +60,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jan 16, 2024 at 12:45=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
->
-> On 1/8/24 23:11, Shantur Rathore wrote:
-> > Hi Marex,
-> >
-> > On Sat, Dec 9, 2023 at 6:12=E2=80=AFPM Shantur Rathore <i@shantur.com> =
-wrote:
-> >>
-> >> Currently when a hub is turned on, all the ports are powered on.
-> >> This works well for hubs which have individual power control.
-> >>
-> >> For the hubs without individual power control this has no effect.
-> >> Mostly in these scenarios the hub port is powered before the USB
-> >> controller is enabled, this can lead to some devices in unexpected
-> >> state.
-> >>
-> >> With this patch, we explicitly reset the port while powering up hub
-> >> This resets the port for hubs without port power control and has
-> >> no effect on hubs with port power control as the port is still off.
-> >>
-> >> Before this patch AMicro AM8180 based NVME to USB adapter won't be
-> >> detected as a USB3.0 Mass Storage device but with this it works as
-> >> expected.
-> >>
-> >> Tested working after this patch:
-> >> 1. AMicro AM8180 based NVME to USB Adapter
-> >> 2. Kingston DataTraveler 3.0
-> >> 3. GenesysLogic USB3.0 Hub
-> >>
-> >> The drives were tested while connected directly and via the hub.
-> >>
-> >> Signed-off-by: Shantur Rathore <i@shantur.com>
-> >>
-> >> ---
-> >>
-> >> Changes in v3:
-> >> - Split up patches as seperate series
-> >>
-> >> Changes in v2:
-> >> - As requested, added fix for regulator-always-on in RockPro64
-> >>
-> >>   common/usb_hub.c | 4 +++-
-> >>   1 file changed, 3 insertions(+), 1 deletion(-)
-> >>
-> >> diff --git a/common/usb_hub.c b/common/usb_hub.c
-> >> index 70279f301d..3fb7e14d10 100644
-> >> --- a/common/usb_hub.c
-> >> +++ b/common/usb_hub.c
-> >> @@ -174,8 +174,10 @@ static void usb_hub_power_on(struct usb_hub_devic=
-e *hub)
-> >>
-> >>          debug("enabling power on all ports\n");
-> >>          for (i =3D 0; i < dev->maxchild; i++) {
-> >> +               usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESET);
-> >> +               debug("Reset : port %d returns %lX\n", i + 1, dev->sta=
-tus);
-> >>                  usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_POWER)=
-;
-> >> -               debug("port %d returns %lX\n", i + 1, dev->status);
-> >> +               debug("PowerOn : port %d returns %lX\n", i + 1, dev->s=
-tatus);
-> >>          }
-> >>
-> >>   #ifdef CONFIG_SANDBOX
-> >> --
-> >> 2.40.1
-> >>
-> >
-> > Do you think it is the right time to get this in early so it can be
-> > tested for a longer time before the next release ?
->
-> Yes, I think so, sorry for the delay.
->
-> I asked Tom to pick it directly and provided RB .
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------EKmnGLNrbBrcirky7ctc31Hs
+Content-Type: multipart/mixed; boundary="------------yZr1UPuoL3btOXywM657wX0i";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Message-ID: <3b289fbb-ad24-45d5-b7b9-d9af00baaf2f@bp.renesas.com>
+Subject: Re: [PATCH 3/3] net: ravb: Use PHY MDIO address from DT if available
+References: <20240121173006.273629-1-marek.vasut+renesas@mailbox.org>
+ <20240121173006.273629-3-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240121173006.273629-3-marek.vasut+renesas@mailbox.org>
 
-Thanks Marek,
+--------------yZr1UPuoL3btOXywM657wX0i
+Content-Type: multipart/mixed; boundary="------------A8Dc0rfPTXoVH4CqKB7ZPd1c"
 
-Just realised Tom isn't included in this chain.
+--------------A8Dc0rfPTXoVH4CqKB7ZPd1c
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-@Tom Rini - Can I request you to please merge this earlier in this release.
+On 21/01/2024 17:29, Marek Vasut wrote:
+> In case the PHY is fully described in DT, use PHY MDIO address
+> from DT directly instead of always using auto-detection. This
+> also fixes the behavior of 'mdio list' in such DT setup, which
+> now prints the PHY connected to the MAC correctly.
+>=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Joe Hershberger <joe.hershberger@ni.com>
+> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Cc: Ramon Fried <rfried.dev@gmail.com>
+> ---
+>  drivers/net/sh_eth.c | 10 ++++++++--
+>  1 file changed, 8 insertions(+), 2 deletions(-)
 
-Kind regards,
-Shantur
+I think the commit summaries are mixed up here - this patch says 'ravb'
+but changes 'sh_eth.c' and vice-versa with the other patch.
+
+>=20
+> diff --git a/drivers/net/sh_eth.c b/drivers/net/sh_eth.c
+> index 7b1f59dc498..5e2e3054ecf 100644
+> --- a/drivers/net/sh_eth.c
+> +++ b/drivers/net/sh_eth.c
+> @@ -12,6 +12,7 @@
+>  #include <common.h>
+>  #include <cpu_func.h>
+>  #include <env.h>
+> +#include <eth_phy.h>
+>  #include <log.h>
+>  #include <malloc.h>
+>  #include <net.h>
+> @@ -597,11 +598,16 @@ static int sh_eth_phy_config(struct udevice *dev)=
+
+>  	struct sh_ether_priv *priv =3D dev_get_priv(dev);
+>  	struct eth_pdata *pdata =3D dev_get_plat(dev);
+>  	struct sh_eth_dev *eth =3D &priv->shdev;
+> -	int ret =3D 0;
+>  	struct sh_eth_info *port_info =3D &eth->port_info[eth->port];
+>  	struct phy_device *phydev;
+> +	int phy_addr;
+> +	int ret =3D 0;
+> +
+> +	phy_addr =3D eth_phy_get_addr(dev);
+> +	if (phy_addr < 0)
+> +		phy_addr =3D -1;
+> =20
+> -	phydev =3D phy_connect(priv->bus, -1, dev, pdata->phy_interface);
+> +	phydev =3D phy_connect(priv->bus, phy_addr, dev, pdata->phy_interface=
+);
+>  	if (!phydev)
+>  		return -ENODEV;
+> =20
+
+I have a local patch to handle (phy_addr < 0) in phy_connect_phy_id()
+and lookup the address there. I think that's the better place to handle
+this as it's a universal fix for all users of CONFIG_PHY_ETHERNET_ID.
+Unfortunately I've been distracted by some higher priority work but I'm
+hoping to get back to this soon.
+
+I can do some quick testing with that patch and send it this week if
+that's helpful.
+
+Thanks,
+Paul
+--------------A8Dc0rfPTXoVH4CqKB7ZPd1c
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------A8Dc0rfPTXoVH4CqKB7ZPd1c--
+
+--------------yZr1UPuoL3btOXywM657wX0i--
+
+--------------EKmnGLNrbBrcirky7ctc31Hs
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZa2OrQUDAAAAAAAKCRDbaV4Vf/JGvWTA
+AQCvbmmNSyjUYwLcPIV0n3XjrC2AM5eOnf4M74UQhZ7uSwD/WAJJGPbNAlL9tt++O1q2m8zZGvcB
+HnCLj5Xlq8KqTQ8=
+=QPA6
+-----END PGP SIGNATURE-----
+
+--------------EKmnGLNrbBrcirky7ctc31Hs--
