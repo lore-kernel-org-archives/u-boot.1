@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F245C47422
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 17:30:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25661C47DB7
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 17:30:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 518888777F;
-	Sun, 21 Jan 2024 18:30:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E1E8E8783B;
+	Sun, 21 Jan 2024 18:30:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="OelzCR9+";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="pO6L6VSI";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="FKon3JGt";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="c4H6Z3Sf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA705877F4; Sun, 21 Jan 2024 18:30:29 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id 86698877F8; Sun, 21 Jan 2024 18:30:31 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE1088773D
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 18:30:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD51F87796
+ for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 18:30:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,43 +30,47 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4TJ0jv38LKz9sks;
- Sun, 21 Jan 2024 18:30:27 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4TJ0jw3l06z9stT;
+ Sun, 21 Jan 2024 18:30:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1705858227;
+ s=mail20150812; t=1705858228;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=wNq97WP7Lkf+06jKBmepE7SmUn5YcCINMfwezqReLWs=;
- b=OelzCR9+s6WOm4HNQfpOyQEMUeYsWjisFN3/JqV2RtQaVIESXNxFm+BzXuQ/W9dcxLorS2
- slQxv3/KhW76pLmyuyDwxhbBln+hcKESQ3OO8Kt3OZxCmI1ds+2hTF+jvlc+An77RPXpxL
- c1n+oWrHnFbyPttVCXfHWXEIL3URlmvt2Z9/5cgb0du9x9k3hrj/wDHII40YOoFwXtfRq0
- fkUtwf/PP5xRaGqaHWaDyhO52Fgt66/hQEciQwB9B+yHFm/n83XDUUpYFyHy9PAyrzG3CH
- 2YNVezV6HC87Gnl0VmpkIGtbM5AhQW7bBnMV18O1AmOUGZQUJyf0f7+IiTsocw==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=iHPgmPhV1Cs1WGMAUGGr5pLByQUtzJoVOjJBFh5DTjk=;
+ b=FKon3JGtyMuPe+ZBqqbAkfOWo394toTqxrs7wHCqiJvmRPuxTkVLq8DUQ0szxaovdai27T
+ DwopKWJfCKEnw470RlXNgFmBFjMVzJcnlER3u0vfp3FzeJDDiLDFEdapD928MZOZ8jLx5t
+ c/TxcMO7MfGItflBifSZ5PUD79pgevXfkHF0W1D1Y0B7EdqbFGooU3RjkHUc2ymVNR+pVB
+ J/o+HdcnAWOyh5J32CMjwIDgi+fvjixukivlzgrHVmT1c6B+P9nEKZ/jg2RSu4IFROPRWK
+ +SnpNCwdwObrXwsMxNIv30hTWs2kBqAEX1FeJk9gSkC7OM2Y7mAzI1P8viSnlw==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1705858225;
+ s=mail20150812; t=1705858226;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=wNq97WP7Lkf+06jKBmepE7SmUn5YcCINMfwezqReLWs=;
- b=pO6L6VSIRgLnxhrL0zeBa5W1YUu85oylrHXDfVcyzjBSViJNScYz6sn9vMmPTgiNEKgf+D
- 1wYJhE8GRFWEciTnJiG0jkIAEBaHOa1HGf6RXGk5/U5Q4R+UFj6dmGVATvjPkyMz5V1Zxd
- AlXx/3xhVZVURe/o8rd6viGLEXdjRX+b7q4sHu7Yv5yFNxFzVqo/FdGmo8jWJWmTo3/Kcl
- 7dXe7vGmlVegZm0WtnrK+O3wIDXYjl0DE4mfQP4UKr5FetKjynniy4/j/A28fPFzoo4xI+
- qQHfqORuAFLyMDC1zeo6DZlEsJ9k1k/NOLkmRPGKY5BeG/mf/RdWsHB8lXTU4w==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=iHPgmPhV1Cs1WGMAUGGr5pLByQUtzJoVOjJBFh5DTjk=;
+ b=c4H6Z3SfTeNq98KB1tkJ9OiBmxixHvVZNfxiWQFCo7hPCgexxjJH2BDwqUR+mt4FbgqmeR
+ XYtxtnK9pORpHM5c68zB1nHH8SimgwGJ+czraI15k/gp+KqnYgGbaglSjGmsGNByZ/owDC
+ GtYkkiTvjKhZzJMOuD0P4JWE3F7CN71GT0NzDIQZ5Jh3u7wWLPr1Z/utEDCk/4C73uDiY9
+ 835NyVWUu7o88XVqn9zk4k+NIhhFZspT6j5g7ECr5r2yVH+EToJbBT6JYUbd0yGsj7ushL
+ +tZ9w7fm/hvVydyb+0QAQNvrrg22cc/8l3s2jeaaIX2ssvGTmz+soAtj3/Cg9Q==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Joe Hershberger <joe.hershberger@ni.com>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
  Ramon Fried <rfried.dev@gmail.com>
-Subject: [PATCH 1/3] net: phy: Make eth_phy_get_addr() generic
-Date: Sun, 21 Jan 2024 18:29:33 +0100
-Message-ID: <20240121173006.273629-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 2/3] net: sh_eth: Use PHY MDIO address from DT if available
+Date: Sun, 21 Jan 2024 18:29:34 +0100
+Message-ID: <20240121173006.273629-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240121173006.273629-1-marek.vasut+renesas@mailbox.org>
+References: <20240121173006.273629-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 9dc165222c0fc0b0f90
-X-MBO-RS-META: jkc5e8e68c4wmp6rto1k45ghmtcio5oc
+X-MBO-RS-META: 6dqc67y3j8rjgu3cuonadpsya5ok8ryy
+X-MBO-RS-ID: 0fc51963b6c3dfcd46e
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,11 +87,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move eth_phy_get_addr() from drivers/net/eth-phy-uclass.c to
-drivers/net/phy/phy.c . The eth_phy_get_addr() code is generic
-and does not depend on DM_ETH_PHY , make it always available.
-
-The dm/device_compat.h is pulled in to make dev_dbg() available.
+In case the PHY is fully described in DT, use PHY MDIO address
+from DT directly instead of always using auto-detection. This
+also fixes the behavior of 'mdio list' in such DT setup, which
+now prints the PHY connected to the MAC correctly.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -95,80 +98,37 @@ Cc: Joe Hershberger <joe.hershberger@ni.com>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
 Cc: Ramon Fried <rfried.dev@gmail.com>
 ---
- drivers/net/eth-phy-uclass.c | 16 ----------------
- drivers/net/phy/phy.c        | 25 +++++++++++++++++++++++++
- 2 files changed, 25 insertions(+), 16 deletions(-)
+ drivers/net/ravb.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/net/eth-phy-uclass.c b/drivers/net/eth-phy-uclass.c
-index 9d1e8d38ffa..237c3b7de15 100644
---- a/drivers/net/eth-phy-uclass.c
-+++ b/drivers/net/eth-phy-uclass.c
-@@ -109,22 +109,6 @@ struct mii_dev *eth_phy_get_mdio_bus(struct udevice *eth_dev)
- 	return NULL;
- }
- 
--int eth_phy_get_addr(struct udevice *dev)
--{
--	struct ofnode_phandle_args phandle_args;
--	int reg;
--
--	if (dev_read_phandle_with_args(dev, "phy-handle", NULL, 0, 0,
--				       &phandle_args)) {
--		dev_dbg(dev, "Failed to find phy-handle");
--		return -ENODEV;
--	}
--
--	reg = ofnode_read_u32_default(phandle_args.node, "reg", 0);
--
--	return reg;
--}
--
- /* parsing generic properties of devicetree/bindings/net/ethernet-phy.yaml */
- static int eth_phy_of_to_plat(struct udevice *dev)
- {
-diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
-index 63b3e46f101..0d1a98bbbca 100644
---- a/drivers/net/phy/phy.c
-+++ b/drivers/net/phy/phy.c
-@@ -18,6 +18,7 @@
- #include <phy.h>
+diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
+index 0bcd6cfd3f3..e1f61f514c8 100644
+--- a/drivers/net/ravb.c
++++ b/drivers/net/ravb.c
+@@ -12,6 +12,7 @@
+ #include <clk.h>
+ #include <cpu_func.h>
+ #include <dm.h>
++#include <eth_phy.h>
  #include <errno.h>
- #include <asm/global_data.h>
-+#include <dm/device_compat.h>
- #include <dm/of_extra.h>
- #include <linux/bitops.h>
- #include <linux/delay.h>
-@@ -28,6 +29,30 @@ DECLARE_GLOBAL_DATA_PTR;
+ #include <log.h>
+ #include <miiphy.h>
+@@ -309,9 +310,14 @@ static int ravb_phy_config(struct udevice *dev)
+ 	struct ravb_priv *eth = dev_get_priv(dev);
+ 	struct eth_pdata *pdata = dev_get_plat(dev);
+ 	struct phy_device *phydev;
++	int phy_addr;
+ 	int reg;
  
- /* Generic PHY support and helper functions */
+-	phydev = phy_connect(eth->bus, -1, dev, pdata->phy_interface);
++	phy_addr = eth_phy_get_addr(dev);
++	if (phy_addr < 0)
++		phy_addr = -1;
++
++	phydev = phy_connect(eth->bus, phy_addr, dev, pdata->phy_interface);
+ 	if (!phydev)
+ 		return -ENODEV;
  
-+/**
-+ * eth_phy_get_addr - get PHY MDIO address from DT
-+ * @dev: the udevice struct of the MAC
-+ *
-+ * Return PHY MDIO address read out of a PHY DT node "reg" property.
-+ * The PHY DT node is located by resolving MAC "phy-handle" property.
-+ * Returns PHY MDIO address on success, negative on failure.
-+ */
-+int eth_phy_get_addr(struct udevice *dev)
-+{
-+	struct ofnode_phandle_args phandle_args;
-+	int reg;
-+
-+	if (dev_read_phandle_with_args(dev, "phy-handle", NULL, 0, 0,
-+				       &phandle_args)) {
-+		dev_dbg(dev, "Failed to find phy-handle");
-+		return -ENODEV;
-+	}
-+
-+	reg = ofnode_read_u32_default(phandle_args.node, "reg", 0);
-+
-+	return reg;
-+}
-+
- /**
-  * genphy_config_advert - sanitize and advertise auto-negotiation parameters
-  * @phydev: target phy_device struct
 -- 
 2.43.0
 
