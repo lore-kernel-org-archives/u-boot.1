@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C5B3C47422
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 20:49:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A410C47422
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 20:52:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5867887705;
-	Sun, 21 Jan 2024 21:49:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9937E87705;
+	Sun, 21 Jan 2024 21:52:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83FB287708; Sun, 21 Jan 2024 21:49:12 +0100 (CET)
+ id 8B617877EC; Sun, 21 Jan 2024 21:52:50 +0100 (CET)
 Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
  [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 38EB0876F4
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 21:49:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 0641E876F4
+ for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 21:52:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.05,210,1701097200"; 
- d="asc'?scan'208";a="195104426"
+ d="asc'?scan'208";a="195104527"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 22 Jan 2024 05:49:09 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 22 Jan 2024 05:52:45 +0900
 Received: from [10.226.92.38] (unknown [10.226.92.38])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id CF77440A2A2C;
- Mon, 22 Jan 2024 05:49:07 +0900 (JST)
-Message-ID: <0803cbe7-b0ab-40e3-ab61-4dd6c7a0a805@bp.renesas.com>
-Date: Sun, 21 Jan 2024 20:49:06 +0000
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 8B03D40A3B8A;
+ Mon, 22 Jan 2024 05:52:44 +0900 (JST)
+Message-ID: <afac41b9-fe68-499c-8994-d7254b8ed23e@bp.renesas.com>
+Date: Sun, 21 Jan 2024 20:52:43 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 08/11] ARM: dts: renesas: Add Renesas R8A779H0 V4M SoC
- support
+Subject: Re: [PATCH 09/11] ARM: dts: renesas: Add Renesas R8A779H0 V4M DT
+ extras
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Hai Pham <hai.pham.ud@renesas.com>
 References: <20240121174340.279465-1-marek.vasut+renesas@mailbox.org>
- <20240121174340.279465-8-marek.vasut+renesas@mailbox.org>
+ <20240121174340.279465-9-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20240121174340.279465-8-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240121174340.279465-9-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------00y1V0AKAaJ1047E9iUxYRKG"
+ boundary="------------6m2UkJZA99N2fsAowri6Gpa0"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,47 +61,75 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------00y1V0AKAaJ1047E9iUxYRKG
-Content-Type: multipart/mixed; boundary="------------heX3aDt3x0R16PR4IZVjSwei";
+--------------6m2UkJZA99N2fsAowri6Gpa0
+Content-Type: multipart/mixed; boundary="------------ZBTvMLjb28ouko0bQQgoJo2A";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Hai Pham <hai.pham.ud@renesas.com>
-Message-ID: <0803cbe7-b0ab-40e3-ab61-4dd6c7a0a805@bp.renesas.com>
-Subject: Re: [PATCH 08/11] ARM: dts: renesas: Add Renesas R8A779H0 V4M SoC
- support
+Message-ID: <afac41b9-fe68-499c-8994-d7254b8ed23e@bp.renesas.com>
+Subject: Re: [PATCH 09/11] ARM: dts: renesas: Add Renesas R8A779H0 V4M DT
+ extras
 References: <20240121174340.279465-1-marek.vasut+renesas@mailbox.org>
- <20240121174340.279465-8-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240121174340.279465-8-marek.vasut+renesas@mailbox.org>
+ <20240121174340.279465-9-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240121174340.279465-9-marek.vasut+renesas@mailbox.org>
 
---------------heX3aDt3x0R16PR4IZVjSwei
-Content-Type: multipart/mixed; boundary="------------iFcasX0GqFglJxmQ0Pm0ZIdC"
+--------------ZBTvMLjb28ouko0bQQgoJo2A
+Content-Type: multipart/mixed; boundary="------------KhbLCLNc7I4C9yoCvde1SjJB"
 
---------------iFcasX0GqFglJxmQ0Pm0ZIdC
+--------------KhbLCLNc7I4C9yoCvde1SjJB
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On 21/01/2024 17:41, Marek Vasut wrote:
 > From: Hai Pham <hai.pham.ud@renesas.com>
 >=20
-> Add initial support for the Renesas R8A779H0 (R-Car V4M) SoC.
+> Add Renesas R8A779H0 V4M DT extras for U-Boot.
 >=20
 > Signed-off-by: Hai Pham <hai.pham.ud@renesas.com>
 > ---
 > Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
 > ---
->  arch/arm/dts/r8a779h0.dtsi | 461 +++++++++++++++++++++++++++++++++++++=
+>  arch/arm/dts/r8a779h0-u-boot.dtsi | 27 +++++++++++++++++++++++++++
+>  1 file changed, 27 insertions(+)
+>  create mode 100644 arch/arm/dts/r8a779h0-u-boot.dtsi
+>=20
+> diff --git a/arch/arm/dts/r8a779h0-u-boot.dtsi b/arch/arm/dts/r8a779h0-=
+u-boot.dtsi
+> new file mode 100644
+> index 00000000000..b2f7e054eef
+> --- /dev/null
+> +++ b/arch/arm/dts/r8a779h0-u-boot.dtsi
+> @@ -0,0 +1,27 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Device Tree Source extras for U-Boot on R-Car R8A779H0 SoC
+> + *
+> + * Copyright (C) 2023 Renesas Electronics Corp.
+> + */
+> +
+> +#include "r8a779x-u-boot.dtsi"
+> +/ {
+> +	soc {
+> +		rpc: spi@ee200000 {
+> +			compatible =3D "renesas,r8a779h0-rpc-if", "renesas,rcar-gen4-rpc-if=
+";
+> +			reg =3D <0 0xee200000 0 0x200>, <0 0x08000000 0 0x04000000>;
+> +			interrupts =3D <GIC_SPI 225 IRQ_TYPE_LEVEL_HIGH>;
+> +			clocks =3D <&cpg CPG_MOD 629>;
+> +			power-domains =3D <&sysc R8A779H0_PD_ALWAYS_ON>;
+> +			resets =3D <&cpg 629>;
+> +			bank-width =3D <2>;
+> +			num-cs =3D <1>;
+> +			status =3D "disabled";
+> +		};
 
->  1 file changed, 461 insertions(+)
->  create mode 100644 arch/arm/dts/r8a779h0.dtsi
-
-Is this a sync from the Linux kernel? If so we should say which commit
-the dtsi file is taken from.
+Either the commit message or a comment should give some idea why this
+node is in a -u-boot.dtsi file instead of the r8a779h0.dtsi file itself.
 
 Thanks,
 Paul
-
---------------iFcasX0GqFglJxmQ0Pm0ZIdC
+--------------KhbLCLNc7I4C9yoCvde1SjJB
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -165,21 +193,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------iFcasX0GqFglJxmQ0Pm0ZIdC--
+--------------KhbLCLNc7I4C9yoCvde1SjJB--
 
---------------heX3aDt3x0R16PR4IZVjSwei--
+--------------ZBTvMLjb28ouko0bQQgoJo2A--
 
---------------00y1V0AKAaJ1047E9iUxYRKG
+--------------6m2UkJZA99N2fsAowri6Gpa0
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZa2DQgUDAAAAAAAKCRDbaV4Vf/JGvVdP
-AQC51N7FOSJ2ui0yJ97XSCmuFYKaSpnUQ/f6GLzKfWLCoAEA/IqmOnv+N+phkIu3uAjjAfZZMWoo
-vS41io7Kk3WNCQc=
-=lB7E
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZa2EGwUDAAAAAAAKCRDbaV4Vf/JGvYSO
+AQDeXzgfEyE1MgYXRlZ4CX+qsOCfErCYa3y23k4DW0XSiwEAqOOTeIEOKucYdux6v9hdQAYCfBe8
+gjoOYO4yOhZw9gM=
+=uWJW
 -----END PGP SIGNATURE-----
 
---------------00y1V0AKAaJ1047E9iUxYRKG--
+--------------6m2UkJZA99N2fsAowri6Gpa0--
