@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EBAFC47DB7
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 21:02:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26D0CC47422
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 21:02:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F2C78793F;
-	Sun, 21 Jan 2024 22:02:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0E3A387979;
+	Sun, 21 Jan 2024 22:02:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="hATgJeej";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="J0OQB5BA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE74487708; Sun, 21 Jan 2024 22:02:15 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id 457FB87708; Sun, 21 Jan 2024 22:02:16 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05A1F8785C
+ by phobos.denx.de (Postfix) with ESMTPS id EB05087705
  for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 22:02:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 5B27960EB8;
+ by sin.source.kernel.org (Postfix) with ESMTP id A0D4BCE240C;
  Sun, 21 Jan 2024 21:02:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 0BB04C433A6;
- Sun, 21 Jan 2024 21:02:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id DDC46C433C7;
+ Sun, 21 Jan 2024 21:02:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705870931;
- bh=fIYxm1hHp4URAyzkpAaMC6Gzasm/I70/PcHDFzDj/Y8=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=hATgJeej3/26C/Z21KsLxTtTuGNC2rBiMCFY0vgAlybrv+0lmHwsxYcD5rJ3EQhfy
- DJVmFOdXUrVwUzgDD09MEIHUYicVBTR+41l5aQwuaGf0S0YlNqTQPng2h9CtuoxC7A
- l0V1xaL8B5cM2YLamhEgjEgumiesgreRxfRw4qdm34TbgPouBAXZH/iY+ePWW2b5BU
- 8CwA6altgWEHyfuC5hPG++HShs6ZPjF8kGzGuHpmShEcxw8Pr7m5mIP+7YnwOzB+il
- 6FVZikkSvVNDcpAefjZVaqyk8zvqpU6uAXierj8nXXsaRzEogwQSc0xCcf6GDaX8mw
- FZ+S9pNsuxj6w==
+ s=k20201202; t=1705870930;
+ bh=rfTkZjUuZSdNKh1rlWNItJX6G5H9yB1K6D6UzoYxBC8=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=J0OQB5BA5FLW/mgOSDrwWbpZwKAFc12im6vIOH/etRwoYpxsef4nAkONnIEuvzIKk
+ 4I6hvC+Kk+cZ2kAQFvf5jEdfMdF9n4mMSBtbsimmdpKWO62EGPJtSZSc60TKDwzth/
+ dw04cBlF6RUYty38p8zcVWP3Fbs6Y14aMeSm44dvNxZFvvTr0xCxoLlcqxr3NYYetM
+ NcEfaGRhOqHUjcjGVjGWY9x1iW9C9EknG3s+QgATMLz/0qgWoywxSQ4jGtOC1kDVvH
+ 4nHnnp4pVV41BxZoh+nKvmf021TBg695F6ogdb3ShbT+Jmh5C6LGUQJMCSlWAPWsaZ
+ 8Xt/JzNtyUE1w==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id E8B6EC47DDE;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id C507EC47422;
  Sun, 21 Jan 2024 21:02:10 +0000 (UTC)
 From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
-Date: Mon, 22 Jan 2024 05:02:07 +0800
-Subject: [PATCH v2 4/4] net: hifemac: implement `net stats` needed ops
+Subject: [PATCH v2 0/4] net: hifemac: a few cleanups
+Date: Mon, 22 Jan 2024 05:02:03 +0800
+Message-Id: <20240122-net-v2-0-78a368896f62@outlook.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240122-net-v2-4-78a368896f62@outlook.com>
-References: <20240122-net-v2-0-78a368896f62@outlook.com>
-In-Reply-To: <20240122-net-v2-0-78a368896f62@outlook.com>
+X-B4-Tracking: v=1; b=H4sIAEyGrWUC/1WMQQ7CIBBFr9LMWgyDlaor72G6oHRqJyoYQKJpu
+ LvYncv3899bIFJginBqFgiUObJ3FdSmATsbdyXBY2VQUrUS8SgcJdEps1O62xMNLdTnM9DE77V
+ y6SvPHJMPnzWa8bf++xmFFCNONBwItbH67F/p7v1ta/0D+lLKF2ommeSYAAAA
 To: Joe Hershberger <joe.hershberger@ni.com>, 
  Ramon Fried <rfried.dev@gmail.com>
 Cc: u-boot@lists.denx.de, Yang Xiwen <forbidden405@outlook.com>
 X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1705870930; l=4411;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1705870930; l=968;
  i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
- bh=PWSJQpQzzsBqIpI4NTZc2hndLbZlKCxXE42lOYMvhRk=;
- b=9ZU94XWeu/OfoIAS9JftzYbZKEfpuAbY9alI8b0MamDDf+lcfMnAJJzNXxBuhUvxknCnzG5dc
- uFEtQ+ms29gCe97DEvWmq6X8xgsdIWdyjqX8Rq3ZrZmd7nHsqkTT0ID
+ bh=rfTkZjUuZSdNKh1rlWNItJX6G5H9yB1K6D6UzoYxBC8=;
+ b=vfjcjhsui3wt8ON0YId3zYCv34pQo2QkrQUdJoRs8Zwy6OmIc+opgqpVpvUAM+XDTT79eVBrk
+ n16W9sldqSZDjBHVPwP05rKek4qPUDeEB9Lfv4ga1ElojqOxyGL1MVU
 X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
  pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
 X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
@@ -85,136 +85,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Yang Xiwen <forbidden405@outlook.com>
+Fix the use of log_msg_ret() and add dev_xxx() for error reporting.
 
-3 operations needed by `net stats` are implemented. New `net stats`
-output some useful info.
+Register mdio subnode as a mdio bus device for hifemac.
+
+Implement ops needed by `net stats`
 
 Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
 ---
- drivers/net/hifemac.c | 87 +++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 87 insertions(+)
+Changes in v2:
+- hisi-femac: add statistics related operations
+- Link to v1: https://lore.kernel.org/r/20240119-net-v1-0-d1feb8e16ac6@outlook.com
 
-diff --git a/drivers/net/hifemac.c b/drivers/net/hifemac.c
-index 39c0233b62..24108bee4b 100644
---- a/drivers/net/hifemac.c
-+++ b/drivers/net/hifemac.c
-@@ -16,6 +16,8 @@
- #include <asm/io.h>
- #include <dm/device_compat.h>
- #include <dm/lists.h>
-+#include <linux/bitfield.h>
-+#include <linux/ethtool.h>
- #include <linux/delay.h>
- #include <linux/kernel.h>
- 
-@@ -125,6 +127,57 @@ struct hisi_femac_priv {
- 	u32 link_status;
- };
- 
-+struct hisi_femac_stat_entry {
-+	const char *name;
-+	u32 offset;
-+	u32 mask;
-+};
-+
-+/* please refer to the datasheet for the description of these entries */
-+const struct hisi_femac_stat_entry hisi_femac_stats_table[] = {
-+	{ "rxsof_cnt",		0x584,	GENMASK(31, 28) },
-+	{ "rxeof_cnt",		0x584,	GENMASK(27, 24) },
-+	{ "rxcrcok_cnt",	0x584,	GENMASK(23, 20) },
-+	{ "rxcrcbad_cnt",	0x584,	GENMASK(19, 16) },
-+	{ "txsof_cnt",		0x584,	GENMASK(15, 12) },
-+	{ "txeof_cnt",		0x584,	GENMASK(11, 8) },
-+	{ "txcrcok_cnt",	0x584,	GENMASK(7, 4) },
-+	{ "txcrcbad_cnt",	0x584,	GENMASK(3, 0) },
-+	{ "pkts_cpu",		0x5a0,	GENMASK(15, 0) },
-+	{ "addr_cpu",		0x5a4,	GENMASK(15, 0) },
-+	{ "pkts_port",		0x5a8,	GENMASK(15, 0) },
-+	{ "pkts_cpu2tx",	0x5ac,	GENMASK(15, 0) },
-+	{ "rxdvrise",		0x600,	GENMASK(31, 0) },
-+	{ "ifinoctets",		0x604,	GENMASK(31, 0) },
-+	{ "octets_rx",		0x608,	GENMASK(31, 0) },
-+	{ "local_mac_match",	0x60c,	GENMASK(31, 0) },
-+	{ "pkts",		0x610,	GENMASK(31, 0) },
-+	{ "broadcastpkts",	0x614,	GENMASK(31, 0) },
-+	{ "multicastpkts",	0x618,	GENMASK(31, 0) },
-+	{ "ifinucastpkts",	0x61c,	GENMASK(31, 0) },
-+	{ "ifinerrors",		0x620,	GENMASK(31, 0) },
-+	{ "crcerr",		0x624,	GENMASK(31, 0) },
-+	{ "abnormalsizepkts",	0x628,	GENMASK(31, 0) },
-+	{ "dot3alignmenterr",	0x62c,	GENMASK(31, 0) },
-+	{ "dot3pause",		0x630,	GENMASK(31, 0) },
-+	{ "dropevents",		0x634,	GENMASK(31, 0) },
-+	{ "flux_frame_cnt",	0x638,	GENMASK(31, 0) },
-+	{ "flux_drop_cnt",	0x63c,	GENMASK(31, 0) },
-+	{ "mac_not2cpu_pkts",	0x64c,	GENMASK(31, 0) },
-+	{ "pkts_tx",		0x780,	GENMASK(31, 0) },
-+	{ "broadcastpkts_tx",	0x784,	GENMASK(31, 0) },
-+	{ "multicastpkts_tx",	0x788,	GENMASK(31, 0) },
-+	{ "ifoutucastpkts_tx",	0x78c,	GENMASK(31, 0) },
-+	{ "octets_tx",		0x790,	GENMASK(31, 0) },
-+	{ "dot3pause",		0x794,	GENMASK(31, 0) },
-+	{ "retry_times_tx",	0x798,	GENMASK(31, 0) },
-+	{ "collisions",		0x79c,	GENMASK(31, 0) },
-+	{ "dot3latecol",	0x7a0,	GENMASK(31, 0) },
-+	{ "dot3colok",		0x7a4,	GENMASK(31, 0) },
-+	{ "dot3excessivecol",	0x7a8,	GENMASK(31, 0) },
-+	{ "dot3colcnt",		0x7ac,	GENMASK(31, 0) },
-+};
-+
- static void hisi_femac_irq_enable(struct hisi_femac_priv *priv, int irqs)
- {
- 	u32 val;
-@@ -334,6 +387,37 @@ static void hisi_femac_stop(struct udevice *dev)
- 	writel(SOFT_RESET_ALL, priv->glb_base + GLB_SOFT_RESET);
- }
- 
-+static int hisi_femac_get_sset_count(struct udevice *dev)
-+{
-+	return ARRAY_SIZE(hisi_femac_stats_table);
-+}
-+
-+static void hisi_femac_get_strings(struct udevice *dev, u8 *data)
-+{
-+	int i;
-+
-+	for (i = 0; i < ARRAY_SIZE(hisi_femac_stats_table); i++)
-+		strcpy(data + i * ETH_GSTRING_LEN, hisi_femac_stats_table[i].name);
-+}
-+
-+/* Non-constant mask variant of FIELD_GET/FIELD_PREP */
-+#define field_get(_mask, _reg) (((_reg) & (_mask)) >> (ffs(_mask) - 1))
-+
-+static void hisi_femac_get_stats(struct udevice *dev, u64 *data)
-+{
-+	int i;
-+	u32 mask, reg;
-+	struct hisi_femac_priv *priv = dev_get_priv(dev);
-+	void __iomem *port_base = priv->port_base;
-+
-+	for (i = 0; i < ARRAY_SIZE(hisi_femac_stats_table); i++) {
-+		mask = hisi_femac_stats_table[i].mask;
-+		reg = readl(port_base + hisi_femac_stats_table[i].offset);
-+
-+		data[i] = field_get(mask, reg);
-+	}
-+}
-+
- int hisi_femac_of_to_plat(struct udevice *dev)
- {
- 	int ret, i;
-@@ -523,6 +607,9 @@ static const struct eth_ops hisi_femac_ops = {
- 	.free_pkt	= hisi_femac_free_pkt,
- 	.stop		= hisi_femac_stop,
- 	.write_hwaddr	= hisi_femac_set_hw_mac_addr,
-+	.get_sset_count	= hisi_femac_get_sset_count,
-+	.get_strings	= hisi_femac_get_strings,
-+	.get_stats	= hisi_femac_get_stats,
- };
- 
- static const struct udevice_id hisi_femac_ids[] = {
+---
+Yang Xiwen (4):
+      net: hifemac_mdio: use log_msg_ret() correctly, report error by dev_err()
+      net: hifemac: fix log reporting
+      net: hifemac: register MDIO bus device for subnode
+      net: hifemac: implement `net stats` needed ops
 
+ drivers/net/hifemac.c      | 225 +++++++++++++++++++++++++++++++++++++--------
+ drivers/net/hifemac_mdio.c |  11 ++-
+ 2 files changed, 196 insertions(+), 40 deletions(-)
+---
+base-commit: f7cca7ccc5117eaafcc2bde91ad1bed6fee7cfc3
+change-id: 20240119-net-72a32675eeb4
+
+Best regards,
 -- 
-2.43.0
+Yang Xiwen <forbidden405@outlook.com>
 
