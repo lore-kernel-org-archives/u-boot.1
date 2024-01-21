@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A987CC47DB7
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 21:08:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2F5CC47422
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 21:14:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A98A8783B;
-	Sun, 21 Jan 2024 22:08:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 10CC7877D7;
+	Sun, 21 Jan 2024 22:14:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0534387859; Sun, 21 Jan 2024 22:08:37 +0100 (CET)
+ id 245BF877BB; Sun, 21 Jan 2024 22:14:18 +0100 (CET)
 Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
  [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id F0584877D7
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 22:08:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 9473C8780A
+ for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 22:14:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.05,210,1701097200"; 
- d="asc'?scan'208";a="191197195"
+ d="asc'?scan'208";a="191197700"
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 22 Jan 2024 06:08:31 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 22 Jan 2024 06:14:14 +0900
 Received: from [10.226.92.38] (unknown [10.226.92.38])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 0912340065D5;
- Mon, 22 Jan 2024 06:08:29 +0900 (JST)
-Message-ID: <657bb8dd-ceb5-4c55-978b-bb5f0bcb49e4@bp.renesas.com>
-Date: Sun, 21 Jan 2024 21:08:28 +0000
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id B9D7E400517E;
+ Mon, 22 Jan 2024 06:14:12 +0900 (JST)
+Message-ID: <e06c54a3-6497-4501-936a-ebc9f2b7cbed@bp.renesas.com>
+Date: Sun, 21 Jan 2024 21:14:11 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/11] clk: renesas: Add R8A779H0 V4M clock tables
+Subject: Re: [PATCH 02/11] dt-bindings: clock: Add R8A779H0 V4M CPG Core Clock
+ Definitions
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Hai Pham <hai.pham.ud@renesas.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>
+Cc: Duy Nguyen <duy.nguyen.rh@renesas.com>, Hai Pham <hai.pham.ud@renesas.com>
 References: <20240121174340.279465-1-marek.vasut+renesas@mailbox.org>
- <20240121174340.279465-3-marek.vasut+renesas@mailbox.org>
+ <20240121174340.279465-2-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20240121174340.279465-3-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240121174340.279465-2-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------xLVHZ8JQ30hah23MUu0v5ueZ"
+ boundary="------------A4TPIcnfoIZRi6OXbNYWEpAM"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,56 +61,48 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------xLVHZ8JQ30hah23MUu0v5ueZ
-Content-Type: multipart/mixed; boundary="------------3uM0MQlkn95VUtt1cYRxkXcF";
+--------------A4TPIcnfoIZRi6OXbNYWEpAM
+Content-Type: multipart/mixed; boundary="------------kssJiUCvThFat01vroIUARrf";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Hai Pham <hai.pham.ud@renesas.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>
-Message-ID: <657bb8dd-ceb5-4c55-978b-bb5f0bcb49e4@bp.renesas.com>
-Subject: Re: [PATCH 03/11] clk: renesas: Add R8A779H0 V4M clock tables
+Cc: Duy Nguyen <duy.nguyen.rh@renesas.com>, Hai Pham <hai.pham.ud@renesas.com>
+Message-ID: <e06c54a3-6497-4501-936a-ebc9f2b7cbed@bp.renesas.com>
+Subject: Re: [PATCH 02/11] dt-bindings: clock: Add R8A779H0 V4M CPG Core Clock
+ Definitions
 References: <20240121174340.279465-1-marek.vasut+renesas@mailbox.org>
- <20240121174340.279465-3-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240121174340.279465-3-marek.vasut+renesas@mailbox.org>
+ <20240121174340.279465-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240121174340.279465-2-marek.vasut+renesas@mailbox.org>
 
---------------3uM0MQlkn95VUtt1cYRxkXcF
-Content-Type: multipart/mixed; boundary="------------YuO1uxc7Sf9XADk7J5t0rawx"
+--------------kssJiUCvThFat01vroIUARrf
+Content-Type: multipart/mixed; boundary="------------R8Zi9Qo0ItmeVI46MPsQv7U6"
 
---------------YuO1uxc7Sf9XADk7J5t0rawx
+--------------R8Zi9Qo0ItmeVI46MPsQv7U6
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On 21/01/2024 17:41, Marek Vasut wrote:
-> From: Hai Pham <hai.pham.ud@renesas.com>
+> From: Duy Nguyen <duy.nguyen.rh@renesas.com>
 >=20
-> Add clock tables for R8A779H0 V4M SoC.
+> Add all Clock Pulse Generator Core Clock Outputs for the Renesas R-Car
+> V4M (R8A779H0) SoC.
 >=20
+> Signed-off-by: Duy Nguyen <duy.nguyen.rh@renesas.com>
 > Signed-off-by: Hai Pham <hai.pham.ud@renesas.com>
 > ---
-> Cc: Lukasz Majewski <lukma@denx.de>
 > Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Cc: Sean Anderson <seanga2@gmail.com>
 > ---
->  drivers/clk/renesas/Kconfig             |   6 +
->  drivers/clk/renesas/Makefile            |   1 +
->  drivers/clk/renesas/r8a779h0-cpg-mssr.c | 294 ++++++++++++++++++++++++=
+>  include/dt-bindings/clock/r8a779h0-cpg-mssr.h | 100 ++++++++++++++++++=
 
->  drivers/clk/renesas/rcar-gen3-cpg.h     |   1 +
->  4 files changed, 302 insertions(+)
->  create mode 100644 drivers/clk/renesas/r8a779h0-cpg-mssr.c
+>  1 file changed, 100 insertions(+)
+>  create mode 100644 include/dt-bindings/clock/r8a779h0-cpg-mssr.h
 
-How does this relate to the Linux kernel clk patch sent by Geert [1]? If
-this patch is based on that, then we should have a link to that patch in
-the commit message (since it hasn't appeared in a mainline kernel
-release yet).
-
-[1]: https://lore.kernel.org/all/0eb04b570d65d67de72069167e16d49e189dec54=
-=2E1704726960.git.geert+renesas@glider.be/
+We should reference the corresponding Linux kernel patch via
+lore.kernel.org if this isn't in the mainline kernel yet.
 
 Thanks,
 Paul
---------------YuO1uxc7Sf9XADk7J5t0rawx
+--------------R8Zi9Qo0ItmeVI46MPsQv7U6
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -174,21 +166,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------YuO1uxc7Sf9XADk7J5t0rawx--
+--------------R8Zi9Qo0ItmeVI46MPsQv7U6--
 
---------------3uM0MQlkn95VUtt1cYRxkXcF--
+--------------kssJiUCvThFat01vroIUARrf--
 
---------------xLVHZ8JQ30hah23MUu0v5ueZ
+--------------A4TPIcnfoIZRi6OXbNYWEpAM
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZa2HzAUDAAAAAAAKCRDbaV4Vf/JGvSQj
-AQD7Mjmq3rdshOE/sQlw3qwfbPGmlLRArZ8ZBGOMwEbGVAD/d0hp8LYfey0LtMYhmQhClAG5CHBq
-7OC99vDDReiAVw0=
-=h910
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZa2JIwUDAAAAAAAKCRDbaV4Vf/JGvTAo
+AP9OO3hnQc+l9GPzG+jkiei0l0kcbD/Dcd/LgWzBn2bA+AEAzTJTzHRAu4hC7Pg54dS0tWEX4rc9
+N90APwbOfbttCAI=
+=X3fy
 -----END PGP SIGNATURE-----
 
---------------xLVHZ8JQ30hah23MUu0v5ueZ--
+--------------A4TPIcnfoIZRi6OXbNYWEpAM--
