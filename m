@@ -4,76 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB674C47422
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 15:17:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F245C47422
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 17:30:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4AA987708;
-	Sun, 21 Jan 2024 16:17:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 518888777F;
+	Sun, 21 Jan 2024 18:30:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ae1F1ZRK";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="OelzCR9+";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="pO6L6VSI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 134628772A; Sun, 21 Jan 2024 16:17:29 +0100 (CET)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AA705877F4; Sun, 21 Jan 2024 18:30:29 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD620874B1
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 16:17:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AE1088773D
+ for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 18:30:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-dc22597dbfeso2572628276.3
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 07:17:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705850245; x=1706455045; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=tZr2OKAyCHvzFAI5AbcRSyoxj8LIRm/ltnvYOXHGJAE=;
- b=ae1F1ZRK9hEwxwk9EpGktsjy0TrsOIaz6ZsqbtMNbGj7Cc71OxeZUuKHytHf5ZXfhZ
- x3CKXv/w6RWzAWIdo87z/6ZB6zKABRZt2a+bQ+EmTs11rLhBwiIk7fgT6CUgdjENR6G+
- RHrN9zLLkNjMHDS5Cc2v7MhVHNil4yw9iEu+E=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705850245; x=1706455045;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tZr2OKAyCHvzFAI5AbcRSyoxj8LIRm/ltnvYOXHGJAE=;
- b=KBulaZgxANYmHTRSCDe35GoLiUD38peJ8znr/jlRtnYCGJGoL3ONqiLI1J71tV0bPJ
- 8BrnbzYVsHnCSiKObK2nbaUyGFiJzfjNqPhliMgd6DMnre11lp8zczUk1xiDBtbUvr9U
- YlLXaq3dtyUBAfE106DH3fI3amyCsT1pEUrXoVPqFzp/STgxxJVO4t8l83DrM7R4EKE6
- jecd3cX+UnLunP/WGKu3I4V5yyrxyiq1OFLFsRHOrpz9KPNaICLKetS++C2mnEF+o3sd
- xMVa5HfuQu33n8o4wlmBFyrVl9RljxRWzBGaUw1EglqM3/BXswGmPFQ/A2tXGR6e9nhZ
- Mwag==
-X-Gm-Message-State: AOJu0YyknOI69o9TsFHfv1IddAEfAaJoeyUH+ATAOCGWCYOsKKa6dOHT
- qIjxM21/CmpC5pnnQdW6KYkR0LmHCpIVV7McAfFA7szmeIiaBTWGDuGs1jeejcs=
-X-Google-Smtp-Source: AGHT+IHsf9j/X9G2G+d+PoeiOW5Iux30TUCV+WuagRqJd80hdnNZG9VcV50tLFz2FLqzvHBlNdX13w==
-X-Received: by 2002:a25:d895:0:b0:dc2:3853:c79b with SMTP id
- p143-20020a25d895000000b00dc23853c79bmr1433298ybg.102.1705850244438; 
- Sun, 21 Jan 2024 07:17:24 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- z15-20020a25868f000000b00dc252f785c3sm1044671ybk.17.2024.01.21.07.17.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 21 Jan 2024 07:17:23 -0800 (PST)
-Date: Sun, 21 Jan 2024 10:17:22 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-Subject: Re: ACPI Vendor ID Request
-Message-ID: <20240121151722.GD3652023@bill-the-cat>
-References: <e72c7ad5-e1db-4065-99f6-326b55e7556e@canonical.com>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4TJ0jv38LKz9sks;
+ Sun, 21 Jan 2024 18:30:27 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1705858227;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=wNq97WP7Lkf+06jKBmepE7SmUn5YcCINMfwezqReLWs=;
+ b=OelzCR9+s6WOm4HNQfpOyQEMUeYsWjisFN3/JqV2RtQaVIESXNxFm+BzXuQ/W9dcxLorS2
+ slQxv3/KhW76pLmyuyDwxhbBln+hcKESQ3OO8Kt3OZxCmI1ds+2hTF+jvlc+An77RPXpxL
+ c1n+oWrHnFbyPttVCXfHWXEIL3URlmvt2Z9/5cgb0du9x9k3hrj/wDHII40YOoFwXtfRq0
+ fkUtwf/PP5xRaGqaHWaDyhO52Fgt66/hQEciQwB9B+yHFm/n83XDUUpYFyHy9PAyrzG3CH
+ 2YNVezV6HC87Gnl0VmpkIGtbM5AhQW7bBnMV18O1AmOUGZQUJyf0f7+IiTsocw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1705858225;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=wNq97WP7Lkf+06jKBmepE7SmUn5YcCINMfwezqReLWs=;
+ b=pO6L6VSIRgLnxhrL0zeBa5W1YUu85oylrHXDfVcyzjBSViJNScYz6sn9vMmPTgiNEKgf+D
+ 1wYJhE8GRFWEciTnJiG0jkIAEBaHOa1HGf6RXGk5/U5Q4R+UFj6dmGVATvjPkyMz5V1Zxd
+ AlXx/3xhVZVURe/o8rd6viGLEXdjRX+b7q4sHu7Yv5yFNxFzVqo/FdGmo8jWJWmTo3/Kcl
+ 7dXe7vGmlVegZm0WtnrK+O3wIDXYjl0DE4mfQP4UKr5FetKjynniy4/j/A28fPFzoo4xI+
+ qQHfqORuAFLyMDC1zeo6DZlEsJ9k1k/NOLkmRPGKY5BeG/mf/RdWsHB8lXTU4w==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Subject: [PATCH 1/3] net: phy: Make eth_phy_get_addr() generic
+Date: Sun, 21 Jan 2024 18:29:33 +0100
+Message-ID: <20240121173006.273629-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="a8p4u1xQUq6o5VXa"
-Content-Disposition: inline
-In-Reply-To: <e72c7ad5-e1db-4065-99f6-326b55e7556e@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 9dc165222c0fc0b0f90
+X-MBO-RS-META: jkc5e8e68c4wmp6rto1k45ghmtcio5oc
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,51 +83,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Move eth_phy_get_addr() from drivers/net/eth-phy-uclass.c to
+drivers/net/phy/phy.c . The eth_phy_get_addr() code is generic
+and does not depend on DM_ETH_PHY , make it always available.
 
---a8p4u1xQUq6o5VXa
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The dm/device_compat.h is pulled in to make dev_dbg() available.
 
-On Sun, Jan 21, 2024 at 03:42:16PM +0100, Heinrich Schuchardt wrote:
-> Hello Tom,
->=20
-> as we have started to generate ACPI tables in U-Boot we should request an
-> ACPI vendor ID for the U-Boot project.
->=20
-> As described in https://uefi.org/PNP_ACPI_Registry this is done by sendin=
-g a
-> mail to vid-request@uefi.org.
->=20
-> As the ID is meant to have 4 letters I suggest to use 'UBOO'.
->=20
-> https://uefi.org/ACPI_ID_List shows existing IDs. I don't know if the own=
-er
-> must be a legal company (which probably needs to be member of the UEFI
-> forum) or we simply can have "Das U-Boot project" as owner.
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Ramon Fried <rfried.dev@gmail.com>
+---
+ drivers/net/eth-phy-uclass.c | 16 ----------------
+ drivers/net/phy/phy.c        | 25 +++++++++++++++++++++++++
+ 2 files changed, 25 insertions(+), 16 deletions(-)
 
-I see from the list that Coreboot has "BOOT" so presumably we can
-request UBOO for the project, and I've done so now.
+diff --git a/drivers/net/eth-phy-uclass.c b/drivers/net/eth-phy-uclass.c
+index 9d1e8d38ffa..237c3b7de15 100644
+--- a/drivers/net/eth-phy-uclass.c
++++ b/drivers/net/eth-phy-uclass.c
+@@ -109,22 +109,6 @@ struct mii_dev *eth_phy_get_mdio_bus(struct udevice *eth_dev)
+ 	return NULL;
+ }
+ 
+-int eth_phy_get_addr(struct udevice *dev)
+-{
+-	struct ofnode_phandle_args phandle_args;
+-	int reg;
+-
+-	if (dev_read_phandle_with_args(dev, "phy-handle", NULL, 0, 0,
+-				       &phandle_args)) {
+-		dev_dbg(dev, "Failed to find phy-handle");
+-		return -ENODEV;
+-	}
+-
+-	reg = ofnode_read_u32_default(phandle_args.node, "reg", 0);
+-
+-	return reg;
+-}
+-
+ /* parsing generic properties of devicetree/bindings/net/ethernet-phy.yaml */
+ static int eth_phy_of_to_plat(struct udevice *dev)
+ {
+diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
+index 63b3e46f101..0d1a98bbbca 100644
+--- a/drivers/net/phy/phy.c
++++ b/drivers/net/phy/phy.c
+@@ -18,6 +18,7 @@
+ #include <phy.h>
+ #include <errno.h>
+ #include <asm/global_data.h>
++#include <dm/device_compat.h>
+ #include <dm/of_extra.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+@@ -28,6 +29,30 @@ DECLARE_GLOBAL_DATA_PTR;
+ 
+ /* Generic PHY support and helper functions */
+ 
++/**
++ * eth_phy_get_addr - get PHY MDIO address from DT
++ * @dev: the udevice struct of the MAC
++ *
++ * Return PHY MDIO address read out of a PHY DT node "reg" property.
++ * The PHY DT node is located by resolving MAC "phy-handle" property.
++ * Returns PHY MDIO address on success, negative on failure.
++ */
++int eth_phy_get_addr(struct udevice *dev)
++{
++	struct ofnode_phandle_args phandle_args;
++	int reg;
++
++	if (dev_read_phandle_with_args(dev, "phy-handle", NULL, 0, 0,
++				       &phandle_args)) {
++		dev_dbg(dev, "Failed to find phy-handle");
++		return -ENODEV;
++	}
++
++	reg = ofnode_read_u32_default(phandle_args.node, "reg", 0);
++
++	return reg;
++}
++
+ /**
+  * genphy_config_advert - sanitize and advertise auto-negotiation parameters
+  * @phydev: target phy_device struct
+-- 
+2.43.0
 
---=20
-Tom
-
---a8p4u1xQUq6o5VXa
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWtNYIACgkQFHw5/5Y0
-tyzi2wv/fXWwzfUm/PnYXLH8TYSd1ZxZhLkYEvutobIO/8bQJ4VpkWC/J8rMl8+1
-HXwX6LfstjiaGfIdQNGWD4tQfw7Q9vHwIj7aUGquF49tnPNpSohe/aOIRISZmOiA
-chmYTYu6vRbHRZuiXafShl2LGsxjXj0z9DMty36nUjfuL7xkQ7Ly4esP4VfqKXbG
-MJa1/YxBoGtzvAw3vkSJunX8S2Vwt7DZzufwQxYf5+85Q5efHiQv+7fkgvYuhNbH
-Lutsjrx0ljgmYOUwoxPl0/I+cwLuvDaQqs0z2oVpIWgBswKShM5Uz8Kb6SZQzdyq
-GkgftYApfpQo2h7niCPV4VXNlGziHwIZvqeZGRimH8r62w/p2NvGjh2uAHBK0niZ
-yGB+8b6/UiTepHzTmoxe+88eDuB2VAC4TdNfd+xIIvV/5JAYhNXP+7BdVqz3NVHK
-FXQbd3gAHrmRyTRoPL6ErpcyvHuJOfyw4wRHL3tEdXtvCgddgWDvrnK3zvM78Jwa
-65zcloKN
-=xaoq
------END PGP SIGNATURE-----
-
---a8p4u1xQUq6o5VXa--
