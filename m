@@ -4,45 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AA61C47422
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 21:21:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48C5DC47422
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 21:23:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 152F5877BB;
-	Sun, 21 Jan 2024 22:21:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9D434877BB;
+	Sun, 21 Jan 2024 22:22:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D45F2877BB; Sun, 21 Jan 2024 22:21:54 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 4E8308775F
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 22:21:51 +0100 (CET)
+ id 8F970877D7; Sun, 21 Jan 2024 22:22:58 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 4D37D8775F
+ for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 22:22:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.05,210,1701097200"; 
- d="asc'?scan'208";a="195106753"
+ d="asc'?scan'208";a="191198065"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 22 Jan 2024 06:21:50 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 22 Jan 2024 06:22:54 +0900
 Received: from [10.226.92.38] (unknown [10.226.92.38])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id A4EA940AA85E;
- Mon, 22 Jan 2024 06:21:48 +0900 (JST)
-Message-ID: <774ed277-4240-4ee4-8a15-c9833d472b7a@bp.renesas.com>
-Date: Sun, 21 Jan 2024 21:21:47 +0000
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id C3AE340AACAE;
+ Mon, 22 Jan 2024 06:22:53 +0900 (JST)
+Message-ID: <ba75606e-d901-43f9-b366-ffb99bef2cd6@bp.renesas.com>
+Date: Sun, 21 Jan 2024 21:22:53 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/11] dt-bindings: power: Add R8A779H0 V4M SYSC power
- domain definitions
+Subject: Re: [PATCH] ARM: renesas: whitehawk: Drop extra leading space
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Duy Nguyen <duy.nguyen.rh@renesas.com>, Hai Pham <hai.pham.ud@renesas.com>
-References: <20240121174340.279465-1-marek.vasut+renesas@mailbox.org>
+References: <20240121173316.273796-1-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20240121174340.279465-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240121173316.273796-1-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------cGSSTPC0ezamwe34HwWuqO4k"
+ boundary="------------K4F3DOqOif0H18fdQObnJuKZ"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,51 +58,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------cGSSTPC0ezamwe34HwWuqO4k
-Content-Type: multipart/mixed; boundary="------------Fg6OgQalY0MJEpJ31vgfzjUV";
+--------------K4F3DOqOif0H18fdQObnJuKZ
+Content-Type: multipart/mixed; boundary="------------57T4WXsigd2PCgbjIP6tvvFO";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Duy Nguyen <duy.nguyen.rh@renesas.com>, Hai Pham <hai.pham.ud@renesas.com>
-Message-ID: <774ed277-4240-4ee4-8a15-c9833d472b7a@bp.renesas.com>
-Subject: Re: [PATCH 01/11] dt-bindings: power: Add R8A779H0 V4M SYSC power
- domain definitions
-References: <20240121174340.279465-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240121174340.279465-1-marek.vasut+renesas@mailbox.org>
+Message-ID: <ba75606e-d901-43f9-b366-ffb99bef2cd6@bp.renesas.com>
+Subject: Re: [PATCH] ARM: renesas: whitehawk: Drop extra leading space
+References: <20240121173316.273796-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240121173316.273796-1-marek.vasut+renesas@mailbox.org>
 
---------------Fg6OgQalY0MJEpJ31vgfzjUV
-Content-Type: multipart/mixed; boundary="------------99xBWNJ4vNzj1mU0HIM7Y7hk"
+--------------57T4WXsigd2PCgbjIP6tvvFO
+Content-Type: multipart/mixed; boundary="------------yR0pZU6zUEBq2z6SYCEPg57w"
 
---------------99xBWNJ4vNzj1mU0HIM7Y7hk
+--------------yR0pZU6zUEBq2z6SYCEPg57w
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 21/01/2024 17:41, Marek Vasut wrote:
-> From: Duy Nguyen <duy.nguyen.rh@renesas.com>
+On 21/01/2024 17:33, Marek Vasut wrote:
+> Drop leading space in front of a comment. No functional change.
 >=20
-> Add power domain indices for R-Car V4M (R8A779H0).
->=20
-> Signed-off-by: Duy Nguyen <duy.nguyen.rh@renesas.com>
-> Signed-off-by: Hai Pham <hai.pham.ud@renesas.com>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
 > Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
 > ---
->  include/dt-bindings/power/r8a779h0-sysc.h | 49 +++++++++++++++++++++++=
+>  board/renesas/whitehawk/whitehawk.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/board/renesas/whitehawk/whitehawk.c b/board/renesas/whiteh=
+awk/whitehawk.c
+> index 3423ebd2995..a72f5e0a7a5 100644
+> --- a/board/renesas/whitehawk/whitehawk.c
+> +++ b/board/renesas/whitehawk/whitehawk.c
+> @@ -31,7 +31,7 @@ static void init_generic_timer(void)
+> =20
+>  static void init_gic_v3(void)
+>  {
+> -	 /* GIC v3 power on */
+> +	/* GIC v3 power on */
+>  	writel(BIT(1), GICR_LPI_PWRR);
+> =20
+>  	/* Wait till the WAKER_CA_BIT changes to 0 */
 
->  1 file changed, 49 insertions(+)
->  create mode 100644 include/dt-bindings/power/r8a779h0-sysc.h
+Simple enough.
 
-We should reference the corresponding Linux kernel patch via
-lore.kernel.org if this isn't in the mainline kernel yet.
-
-Also, as a general series comment: I'd prefer to see a cover letter to
-say which interfaces and key features are supported on the V4M by this
-series. Is this enough to boot Linux from at least one interface (SDHI,
-Ethernet, etc)?
-
-Thanks,
-Paul
---------------99xBWNJ4vNzj1mU0HIM7Y7hk
+Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+--------------yR0pZU6zUEBq2z6SYCEPg57w
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -168,21 +167,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------99xBWNJ4vNzj1mU0HIM7Y7hk--
+--------------yR0pZU6zUEBq2z6SYCEPg57w--
 
---------------Fg6OgQalY0MJEpJ31vgfzjUV--
+--------------57T4WXsigd2PCgbjIP6tvvFO--
 
---------------cGSSTPC0ezamwe34HwWuqO4k
+--------------K4F3DOqOif0H18fdQObnJuKZ
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZa2K6wUDAAAAAAAKCRDbaV4Vf/JGvfR4
-AQCdmscLuT0eTIHcCcBr+A9M8Ev2ySMrpkwEbIZT8/x0/gEAx1h3pUMMQkuZfZPzA19yGpLefjco
-3fx1w1hQrDZa8wE=
-=crPv
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZa2LLQUDAAAAAAAKCRDbaV4Vf/JGvUHB
+AP9It4J3kr4d7t/qfDp5VLpqxaJOgtZj7ffTi2EQeb1grgEAyNhdtr7bzG0+4+aLS/TUI6CHi1bD
+M2Ty9zvuQOizkwM=
+=Gu8G
 -----END PGP SIGNATURE-----
 
---------------cGSSTPC0ezamwe34HwWuqO4k--
+--------------K4F3DOqOif0H18fdQObnJuKZ--
