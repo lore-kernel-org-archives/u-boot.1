@@ -4,56 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7300C47422
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 14:05:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36D8DC47422
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 14:33:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDD3E877B1;
-	Sun, 21 Jan 2024 15:05:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 2AB14877BB;
+	Sun, 21 Jan 2024 15:33:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="keSsDI0k";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 82C5C8780A; Sun, 21 Jan 2024 15:05:07 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1705847602;
+	bh=LrwLBFnO0HXkWuR1s9YFZTc/wREXVsH4sswbnOBbpYo=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=faEqmIE6dLl85pEB+oNG9leAP5c/itlLS35RGBJpTpZhj+y0mn/rHsLJRpRPMA/ct
+	 pMOBunitpf1i7V4jlRXAeDQEcf22PySeT4WX/PBt72Z+yB6bT4EjT/xlo/8h2Xo5pw
+	 sDG+uwDGGx16ybGDpQgYaRJXKQPYAU44VyDdFIL2iAunq4WnthLpF/Cm3EQ6DB4KJS
+	 3+fXmdwOqg8/kALlLuwrEgALZY0juNniQh5ISSF95Jkzf+MM1FIdiLJJCRoUU/HPkb
+	 k5eDsf5jElXIb3R6ngYiidI0fkracC2AveNgU+pklrS8Q/aQxxhpXXBQrHI6zDVIJt
+	 90M53VzExrRbw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BFF28775F
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 15:05:05 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from localhost.localdomain
- (ip-178-202-040-247.um47.pools.vodafone-ip.de [178.202.40.247])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 664263F722; 
- Sun, 21 Jan 2024 14:05:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1705845904;
- bh=mz4673nq7wk66FiVMt59yJch2BNuEmHfw/O0U65pRpM=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=keSsDI0kfUTEw0fmu0b8m2tqAj7afT+BEpCFWbmlwa/It4AcNjeX5knp7v3JHTti0
- t93NgHBydptHQugmA124m0kDo8W1MnZnkV1jHdmvUwK3o1q4AyDgOzhXU7VyUKReFj
- 0dzSROBDTo5x98AcBRN1cbnY6TPG1c8p1Colp5Fj78YUacaH9dwXM8laofA0vR9zMH
- 8qji93WFdwLFGVijska8NQn6v1sonGe2drSx5VIIngCsl6y7Fk0IHavkp955PnmGfB
- xB8Iad4JDlkBSTb9ofl2UGXbjbxouHF9kx6XfMmEkHCtIoeZNGi6HjsfdUhqSCE6FX
- Q70Qd3pXT5zgg==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] acpi: remove duplicate declaration of acpi_fill_header()
-Date: Sun, 21 Jan 2024 15:05:00 +0100
-Message-ID: <20240121140500.176028-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id EBEA9807E2;
+ Sun, 21 Jan 2024 15:33:17 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1705847600;
+ bh=LrwLBFnO0HXkWuR1s9YFZTc/wREXVsH4sswbnOBbpYo=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=mNRpxN7vVM+kXA5evrJWhlGfNqX+BDumInV4Mqae12wZeZGNQPnAgxNKicGErwewK
+ CbURqhRtojMIIHmpWj8zRW6WRLo07ML3RLp2XP8oetw+yt50fZaSuHlg0fH3H7FdOW
+ CkvE7DpykIawp94aFyfaGJ+9IfA09CmMGTr/csFCMVZLNpB77/hayYUwDXxhitf6sM
+ EZY17CrM11+o31I22SBwhEU3rQHol6QJmkPvGuNUHHiGrony1WIwg1nYf1cF42rtXk
+ hf8ioUpg6YzFUIgv5+A2yXeXD5Tkw9ctWg3gHyW5SsWSzIPlgDxnjHibifkrGctDMw
+ kIVqa7a6jmvAQ==
+Message-ID: <82d509de-3d47-4cc2-8217-c38dc78fad28@denx.de>
+Date: Sun, 21 Jan 2024 15:33:17 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 00/11] An effort to bring DT bindings compliance within
+ U-Boot
+Content-Language: en-US
+To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, robh+dt@kernel.org,
+ krzysztof.kozlowski+dt@linaro.org, conor@kernel.org,
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech,
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
+ pbrobinson@gmail.com, ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org,
+ b.galvani@gmail.com, xypron.glpk@gmx.de, michal.simek@amd.com,
+ seanga2@gmail.com, rasmus.villemoes@prevas.dk, peng.fan@nxp.com,
+ jh80.chung@samsung.com, rfried.dev@gmail.com, mibodhi@gmail.com, bb@ti.com,
+ mark.kettenis@xs4all.nl
+References: <20240110103547.719757-1-sumit.garg@linaro.org>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20240110103547.719757-1-sumit.garg@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,34 +78,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-acpi_fill_header() is declared twice in include/acpi/acpi_table.h
+On 1/10/24 11:35, Sumit Garg wrote:
+> Changes in v4:
+> --------------
+> - Switched subtree to be imported as dts/upstream sub-directory rather
+>    than devicetree-rebasing sub-directory to better suite U-Boot
+>    directory structure.
+> - Since we now have v6.7-dts tag available now, so switch subtree to
+>    that from its beginning.
+> - Patch #2: Incorporate build fix to adjust Bindings Makefile rules to
+>    old U-Boot Kbuild infrastructure.
+> - Patch #3: Incorporate fix to resolve rk3399 migration issue reported
+>    by Simon.
+> - Patch #4: New patch to reuse upstream DT includes by U-Boot as per
+>    Brian's use-case for TI K3 SoCs.
+> - Patch #5: Added a note to OF_UPSTREAM Kconfig option.
+> - Patch #6: New patch to add script dts/update-dts-subtree.sh as per
+>    Rob's comments.
+> - Patch #7: Separate patch to align documentation to use Kconfig symbols
+>    instead.
+> - Patch #8: Clarify subtree uprev schedule as a separate documentation
+>    section. Also, fixed documentation typos.
+> - Patch #9: Added commit description.
+> 
+> Changes in v3:
+> --------------
+> - Patch #4: Minor commit message update
+> - Patch #5: Replace CONFIG_* with Kconfig options
+> - Patch #7: Dropped Makefile portion and enabled OF_UPSTREAM for SoC
+>    instead.
+> - Patch #1, #3, #6 and #8: Picked up review tags
+> 
+> Changes in v2:
+> --------------
+> - Patch #1: excluded gitab CI config check and added commit description.
+> - Patch #3: s/UBOOT_DTSI_LOC/u_boot_dtsi_loc/
+> - Patch #4: s/DEVICE_TREE_LOC/dt_dir/ and s/U-boot/U-Boot/
+> - Patch #5: s/U-boot/U-Boot/
+> - Patch #6 and #7: Picked up review tags
+> 
+> Prerequisite
+> ------------
+> 
+> This patch series requires devicetree-rebasing git repo to be added as a
+> subtree to the main U-Boot repo via:
+> 
+> $ git subtree add --prefix dts/upstream \
+>        git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git \
+>        v6.7-dts --squash
+> 
+> Background
+> ----------
+> 
+> This effort started while I was reviewing patch series corresponding to
+> Qcom platforms [1] which was about to import modified devicetree source
+> files from Linux kernel. I suppose keeping devicetree files sync with
+> Linux kernel without any DT bindings schema validation has been a pain
+> for U-Boot SoC/platform maintainers. There has been past discussions
+> about a single DT repo but that hasn't come up and Linux kernel remained
+> the place where DT source files as well as bindings are placed and
+> maintained.
+> 
+> However, Linux kernel DT maintainers proposed [2] for U-Boot to rather
+> use devicetree-rebasing repo [3] which is a forked copy from Linux
+> kernel for DT source files as well as bindings. It is tagged at every
+> Linux kernel major release or intermideate release candidates. So here I
+> have tried to reuse that to bring DT bingings compliance as well as a
+> standard way to maintain a regular sync of DT source files with Linux
+> kernel.
+> 
+> In order to maintain devicetree files sync, U-Boot will maintains a Git
+> subtree for devicetee-rebasing repo as `dts/upstream` sub-directory.
+> U-Boot will regularly sync `dts/upstream/` subtree whenever the next window
+> opens with the next available kernel major release.
+> `dts/update-dts-subtree.sh` script provides a wrapper around git subtree
+> pull command, usage from the top level U-Boot source tree, run:
+> 
+> $ ./dts/update-dts-subtree.sh <devicetree-rebasing-release-tag>
+> 
+> The RFC/prototype for this series has been discussed with Linux DT
+> maintainers as well as U-Boot maintainers here [4]. Now we would like to
+> reach out to wider U-Boot community to seek feedback.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- include/acpi/acpi_table.h | 10 ----------
- 1 file changed, 10 deletions(-)
+I very much agree with the direction this is going in, but I do have two 
+simple questions:
 
-diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
-index e67562ef654..2e22ce92996 100644
---- a/include/acpi/acpi_table.h
-+++ b/include/acpi/acpi_table.h
-@@ -828,16 +828,6 @@ void acpi_create_dbg2(struct acpi_dbg2_header *dbg2,
- 		      struct acpi_gen_regaddr *address, uint32_t address_size,
- 		      const char *device_path);
- 
--/**
-- * acpi_fill_header() - Set up a new table header
-- *
-- * This sets all fields except length, revision, checksum and aslc_revision
-- *
-- * @header: ACPI header to update
-- * @signature: Table signature to use (4 characters)
-- */
--void acpi_fill_header(struct acpi_table_header *header, char *signature);
--
- /**
-  * acpi_align() - Align the ACPI output pointer to a 16-byte boundary
-  *
--- 
-2.43.0
+How do you propose to handle fixes to DTs which are applied to 
+linux-stable releases ? For example, if Linux 6.6(.0) ships a DT which 
+has some defect that is fixed in 6.6.1, how will that fix get into 
+U-Boot DTs ?
 
+Assume that there is some large breaking change in Linux 6.(n+1), 
+something which would be problematic for specific U-Boot platform (e.g. 
+i.MX) or would require a lot of work to sort out, will there be a way to 
+temporarily pin DTs for specific platform to older DT version until that 
+is resolved (e.g. pin to 6.n) ?
