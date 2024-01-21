@@ -4,70 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26D0CC47422
-	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 21:02:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A987CC47DB7
+	for <u-boot@archiver.kernel.org>; Sun, 21 Jan 2024 21:08:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E3A387979;
-	Sun, 21 Jan 2024 22:02:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 0A98A8783B;
+	Sun, 21 Jan 2024 22:08:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="J0OQB5BA";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 457FB87708; Sun, 21 Jan 2024 22:02:16 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB05087705
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 22:02:13 +0100 (CET)
+ id 0534387859; Sun, 21 Jan 2024 22:08:37 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id F0584877D7
+ for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 22:08:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id A0D4BCE240C;
- Sun, 21 Jan 2024 21:02:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id DDC46C433C7;
- Sun, 21 Jan 2024 21:02:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705870930;
- bh=rfTkZjUuZSdNKh1rlWNItJX6G5H9yB1K6D6UzoYxBC8=;
- h=From:Subject:Date:To:Cc:Reply-To:From;
- b=J0OQB5BA5FLW/mgOSDrwWbpZwKAFc12im6vIOH/etRwoYpxsef4nAkONnIEuvzIKk
- 4I6hvC+Kk+cZ2kAQFvf5jEdfMdF9n4mMSBtbsimmdpKWO62EGPJtSZSc60TKDwzth/
- dw04cBlF6RUYty38p8zcVWP3Fbs6Y14aMeSm44dvNxZFvvTr0xCxoLlcqxr3NYYetM
- NcEfaGRhOqHUjcjGVjGWY9x1iW9C9EknG3s+QgATMLz/0qgWoywxSQ4jGtOC1kDVvH
- 4nHnnp4pVV41BxZoh+nKvmf021TBg695F6ogdb3ShbT+Jmh5C6LGUQJMCSlWAPWsaZ
- 8Xt/JzNtyUE1w==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id C507EC47422;
- Sun, 21 Jan 2024 21:02:10 +0000 (UTC)
-From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
-Subject: [PATCH v2 0/4] net: hifemac: a few cleanups
-Date: Mon, 22 Jan 2024 05:02:03 +0800
-Message-Id: <20240122-net-v2-0-78a368896f62@outlook.com>
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.05,210,1701097200"; 
+ d="asc'?scan'208";a="191197195"
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie5.idc.renesas.com with ESMTP; 22 Jan 2024 06:08:31 +0900
+Received: from [10.226.92.38] (unknown [10.226.92.38])
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 0912340065D5;
+ Mon, 22 Jan 2024 06:08:29 +0900 (JST)
+Message-ID: <657bb8dd-ceb5-4c55-978b-bb5f0bcb49e4@bp.renesas.com>
+Date: Sun, 21 Jan 2024 21:08:28 +0000
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAEyGrWUC/1WMQQ7CIBBFr9LMWgyDlaor72G6oHRqJyoYQKJpu
- LvYncv3899bIFJginBqFgiUObJ3FdSmATsbdyXBY2VQUrUS8SgcJdEps1O62xMNLdTnM9DE77V
- y6SvPHJMPnzWa8bf++xmFFCNONBwItbH67F/p7v1ta/0D+lLKF2ommeSYAAAA
-To: Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>
-Cc: u-boot@lists.denx.de, Yang Xiwen <forbidden405@outlook.com>
-X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1705870930; l=968;
- i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
- bh=rfTkZjUuZSdNKh1rlWNItJX6G5H9yB1K6D6UzoYxBC8=;
- b=vfjcjhsui3wt8ON0YId3zYCv34pQo2QkrQUdJoRs8Zwy6OmIc+opgqpVpvUAM+XDTT79eVBrk
- n16W9sldqSZDjBHVPwP05rKek4qPUDeEB9Lfv4ga1ElojqOxyGL1MVU
-X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
- pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
-X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
- auth_id=67
-X-Original-From: Yang Xiwen <forbidden405@outlook.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 03/11] clk: renesas: Add R8A779H0 V4M clock tables
+Content-Language: en-GB
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Hai Pham <hai.pham.ud@renesas.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>
+References: <20240121174340.279465-1-marek.vasut+renesas@mailbox.org>
+ <20240121174340.279465-3-marek.vasut+renesas@mailbox.org>
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20240121174340.279465-3-marek.vasut+renesas@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------xLVHZ8JQ30hah23MUu0v5ueZ"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,39 +55,140 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: forbidden405@outlook.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix the use of log_msg_ret() and add dev_xxx() for error reporting.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------xLVHZ8JQ30hah23MUu0v5ueZ
+Content-Type: multipart/mixed; boundary="------------3uM0MQlkn95VUtt1cYRxkXcF";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Hai Pham <hai.pham.ud@renesas.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>
+Message-ID: <657bb8dd-ceb5-4c55-978b-bb5f0bcb49e4@bp.renesas.com>
+Subject: Re: [PATCH 03/11] clk: renesas: Add R8A779H0 V4M clock tables
+References: <20240121174340.279465-1-marek.vasut+renesas@mailbox.org>
+ <20240121174340.279465-3-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240121174340.279465-3-marek.vasut+renesas@mailbox.org>
 
-Register mdio subnode as a mdio bus device for hifemac.
+--------------3uM0MQlkn95VUtt1cYRxkXcF
+Content-Type: multipart/mixed; boundary="------------YuO1uxc7Sf9XADk7J5t0rawx"
 
-Implement ops needed by `net stats`
+--------------YuO1uxc7Sf9XADk7J5t0rawx
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
----
-Changes in v2:
-- hisi-femac: add statistics related operations
-- Link to v1: https://lore.kernel.org/r/20240119-net-v1-0-d1feb8e16ac6@outlook.com
+On 21/01/2024 17:41, Marek Vasut wrote:
+> From: Hai Pham <hai.pham.ud@renesas.com>
+>=20
+> Add clock tables for R8A779H0 V4M SoC.
+>=20
+> Signed-off-by: Hai Pham <hai.pham.ud@renesas.com>
+> ---
+> Cc: Lukasz Majewski <lukma@denx.de>
+> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Cc: Sean Anderson <seanga2@gmail.com>
+> ---
+>  drivers/clk/renesas/Kconfig             |   6 +
+>  drivers/clk/renesas/Makefile            |   1 +
+>  drivers/clk/renesas/r8a779h0-cpg-mssr.c | 294 ++++++++++++++++++++++++=
 
----
-Yang Xiwen (4):
-      net: hifemac_mdio: use log_msg_ret() correctly, report error by dev_err()
-      net: hifemac: fix log reporting
-      net: hifemac: register MDIO bus device for subnode
-      net: hifemac: implement `net stats` needed ops
+>  drivers/clk/renesas/rcar-gen3-cpg.h     |   1 +
+>  4 files changed, 302 insertions(+)
+>  create mode 100644 drivers/clk/renesas/r8a779h0-cpg-mssr.c
 
- drivers/net/hifemac.c      | 225 +++++++++++++++++++++++++++++++++++++--------
- drivers/net/hifemac_mdio.c |  11 ++-
- 2 files changed, 196 insertions(+), 40 deletions(-)
----
-base-commit: f7cca7ccc5117eaafcc2bde91ad1bed6fee7cfc3
-change-id: 20240119-net-72a32675eeb4
+How does this relate to the Linux kernel clk patch sent by Geert [1]? If
+this patch is based on that, then we should have a link to that patch in
+the commit message (since it hasn't appeared in a mainline kernel
+release yet).
 
-Best regards,
--- 
-Yang Xiwen <forbidden405@outlook.com>
+[1]: https://lore.kernel.org/all/0eb04b570d65d67de72069167e16d49e189dec54=
+=2E1704726960.git.geert+renesas@glider.be/
 
+Thanks,
+Paul
+--------------YuO1uxc7Sf9XADk7J5t0rawx
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xsFNBGS4BNsBEADEc28TO+aryCgRIuhxWAviuJl+f2TcZ1JeeaMzRLgSXKuXzkiI
+g6JIVfNvThjwJaBmb7+/5+D7kDLJuutu9MFfOzTS0QOQWppwIPgbfktvMvwwsq3m
+7e9Qb+S1LVeV0/ldZfuzgzAzHFDwmzryfIyt2JEbsBsGTq/QE+7hvLAe8R9xofIn
+z6/IndiiTYhNCNf06nFPR4Y5ZDZPGb9aw5Jisqh+OSxtc0BFHDSV8/35yWM/JLQ1
+Ja8AOHw1kP9KO+iE9rHMt0+7lH3mN1GBabxH26EdgFfPShsi14qmziLOuUlGLuwO
+ApIYqvdtCs+zlMA8PsiJIMuxizZ6qCLur3r2b+/YXoJjuFDcax9M+Pr0D7rZX0Hk
+6PW3dtvDQHfspwLY0FIlXbbtCfCqGLe47VaS7lvG0XeMlo3dUEsf707Q2h0+G1tm
+wyeuWSPEzZQq/KI7JIFlxr3N/3VCdGa9qVf/40QF0BXPfJdcwTEzmPlYetRgA11W
+bglw8DxWBv24a2gWeUkwBWFScR3QV4FAwVjmlCqrkw9dy/JtrFf4pwDoqSFUcofB
+95u6qlz/PC+ho9uvUo5uIwJyz3J5BIgfkMAPYcHNZZ5QrpI3mdwf66im1TOKKTuf
+3Sz/GKc14qAIQhxuUWrgAKTexBJYJmzDT0Mj4ISjlr9K6VXrQwTuj2zC4QARAQAB
+zStQYXVsIEJhcmtlciA8cGF1bC5iYXJrZXIuY3RAYnAucmVuZXNhcy5jb20+wsGU
+BBMBCgA+FiEE9KKf333+FIzPGaxOJ/SzRZ8AIlcFAmS4BNsCGwEFCQPCZwAFCwkI
+BwIGFQoJCAsCBBYCAwECHgECF4AACgkQJ/SzRZ8AIlfxaQ/8CM36qjfad7eBfwja
+cI1LlH1NwbSJ239rE0X7hU/5yra72egr3T5AUuYTt9ECNQ8Ld03BYhbC6hPki5rb
+OlFM2hEPUQYeohcJ4Na5iIFpTxoIuC49Hp2ce6ikvt9Hc4O2FAntabg+9hE8WA4f
+QWW+Qo5ve5OJ0sGylzu0mRZ2I3mTaDsxuDkXOICF5ggSdjT+rcd/pRVOugImjpZv
+/jzSgUfKV2wcZ8vVK0616K21tyPiRjYtDQjJAKff8gBY6ZvP5REPl+fYNvZm1y4l
+hsVupGHL3aV+BKooMsKRZIMTiKJCIy6YFKHOcgWFG62cuRrFDf4r54MJuUGzyeoF
+1XNFzbe1ySoRfU/HrEuBNqC+1CEBiduumh89BitfDNh6ecWVLw24fjsF1Ke6vYpU
+lK9/yGLV26lXYEN4uEJ9i6PjgJ+Q8fubizCVXVDPxmWSZIoJg8EspZ+Max03Lk3e
+flWQ0E3l6/VHmsFgkvqhjNlzFRrj/k86IKdOi0FOd0xtKh1p34rQ8S/4uUN9XCVj
+KtmyLfQgqPVEC6MKv7yFbextPoDUrFAzEgi4OBdqDJjPbdU9wUjONxuWJRrzRFcr
+nTIG7oC4dae0p1rs5uTlaSIKpB2yulaJLKjnNstAj9G9Evf4SE2PKH4l4Jlo/Hu1
+wOUqmCLRo3vFbn7xvfr1u0Z+oMTOOARkuAhwEgorBgEEAZdVAQUBAQdAcuNbK3VT
+WrRYypisnnzLAguqvKX3Vc1OpNE4f8pOcgMDAQgHwsF2BBgBCgAgFiEE9KKf333+
+FIzPGaxOJ/SzRZ8AIlcFAmS4CHACGwwACgkQJ/SzRZ8AIlc90BAAr0hmx8XU9KCj
+g4nJqfavlmKUZetoX5RB9g3hkpDlvjdQZX6lenw3yUzPj53eoiDKzsM03Tak/KFU
+FXGeq7UtPOfXMyIh5UZVdHQRxC4sIBMLKumBfC7LM6XeSegtaGEX8vSzjQICIbaI
+roF2qVUOTMGal2mvcYEvmObC08bUZuMd4nxLnHGiej2t85+9F3Y7GAKsA25EXbbm
+ziUg8IVXw3TojPNrNoQ3if2Z9NfKBhv0/s7x/3WhhIzOht+rAyZaaW+31btDrX4+
+Y1XLAzg9DAfuqkL6knHDMd9tEuK6m2xCOAeZazXaNeOTjQ/XqCHmZ+691VhmAHCI
+7Z7EBPh++TjEqn4ZH+4KPn6XD52+ruWXGbJP29zc+3bwQ+ZADfUaL3ADj69ySxzm
+bO24USHBAg+BhZAZMBkbkygbTen/umT6tBxG91krqbKlDdc8mhGonBN6i+nz8qv1
+6MdC5P1rDbo834rxNLvoFMSLCcpjoafiprl9qk0wQLq48WGphs9DX7V75ZAU5Lt6
+yA+je8i799EZJsVlB933Gpj688H4csaZqEMBjq7vMvI+a5MnLCGcjwRhsUfogpRb
+AWTx9ddVau4MJgEHzB7UU/VFyP2vku7XPj6mgSfSHyNVf2hqxwISQ8eZLoyxauOD
+Y61QMX6YFL170ylToSFjH627h6TzlUDOMwRkuAiAFgkrBgEEAdpHDwEBB0Bibkmu
+Sf7yECzrkBmjD6VGWNVxTdiqb2RuAfGFY9RjRsLB7QQYAQoAIBYhBPSin999/hSM
+zxmsTif0s0WfACJXBQJkuAiAAhsCAIEJECf0s0WfACJXdiAEGRYIAB0WIQSiu8gv
+1Xr0fIw/aoLbaV4Vf/JGvQUCZLgIgAAKCRDbaV4Vf/JGvZP9AQCwV06n3DZvuce3
+/BtzG5zqUuf6Kp2Esgr2FrD4fKVbogD/ZHpXfi9ELdH/JTSVyujaTqhuxQ5B7UzV
+CUIb1qbg1APIEA/+IaLJIBySehy8dHDZQXit/XQYeROQLTT9PvyM35rZVMGH6VG8
+Zb23BPCJ3N0ISOtVdG402lSP0ilP/zSyQAbJN6F0o2tiPd558lPerFd/KpbCIp8N
+kYaLlHWIDiN2AE3c6sfCiCPMtXOR7HCeQapGQBS/IMh1qYHffuzuEy7tbrMvjdra
+VN9Rqtp7PSuRTbO3jAhm0Oe4lDCAK4zyZfjwiZGxnj9s1dyEbxYB2GhTOgkiX/96
+Nw+m/ShaKqTM7o3pNUEs9J3oHeGZFCCaZBv97ctqrYhnNB4kzCxAaZ6K9HAAmcKe
+WT2q4JdYzwB6vEeHnvxl7M0Dj9pUTMujW77Qh5IkUQLYZ2XQYnKAV2WI90B0R1p9
+bXP+jqqkaNCrxKHV1tYOB6037CziGcZmiDneiTlM765MTLJLlHNqlXxDCzRwEazU
+y9dNzITjVT0qhc6th8/vqN9dqvQaAGa13u86Gbv4XPYdE+5MXPM/fTgkKaPBYcIV
+QMvLfoZxyaTk4nzNbBxwwEEHrvTcWDdWxGNtkWRZw0+U5JpXCOi9kBCtFrJ701UG
+UFs56zWndQUS/2xDyGk8GObGBSRLCwsXsKsF6hSX5aKXHyrAAxEUEscRaAmzd6O3
+ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------YuO1uxc7Sf9XADk7J5t0rawx--
+
+--------------3uM0MQlkn95VUtt1cYRxkXcF--
+
+--------------xLVHZ8JQ30hah23MUu0v5ueZ
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZa2HzAUDAAAAAAAKCRDbaV4Vf/JGvSQj
+AQD7Mjmq3rdshOE/sQlw3qwfbPGmlLRArZ8ZBGOMwEbGVAD/d0hp8LYfey0LtMYhmQhClAG5CHBq
+7OC99vDDReiAVw0=
+=h910
+-----END PGP SIGNATURE-----
+
+--------------xLVHZ8JQ30hah23MUu0v5ueZ--
