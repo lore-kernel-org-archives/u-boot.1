@@ -4,55 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E808C46CD2
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 21:02:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0E7CC46CD2
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 21:11:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9AF288793F;
-	Mon, 22 Jan 2024 22:02:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=aurel32.net
+	by phobos.denx.de (Postfix) with ESMTP id DCF1A875B9;
+	Mon, 22 Jan 2024 22:11:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=aurel32.net header.i=@aurel32.net header.b="nyxu3LtX";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Gp1W1LAJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47C8C87B30; Mon, 22 Jan 2024 22:02:41 +0100 (CET)
-Received: from hall.aurel32.net (hall.aurel32.net [IPv6:2001:bc8:30d7:100::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 66E57875C5; Mon, 22 Jan 2024 22:11:44 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2A38877CC
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 22:02:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 989DA8780E
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 22:11:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=aurel32.net
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aurelien@aurel32.net
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=aurel32.net
- ; s=202004.hall;
- h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:To:From:Date:Content-Transfer-Encoding:Cc:From:Reply-To:
- Subject:Content-ID:Content-Description:X-Debbugs-Cc;
- bh=h5MmCrVK68QuKoXcTMZ25qbZQMdmgxe8Wd5TbYl11cI=; b=nyxu3LtXWLHabcVyMmRgF/H0pd
- c79N/y5GexBBPrggidLKjLltDPGBqBgQtPWDC3Wg1R67cjgxSrxIU0K3AA49//EPcqC+TJtFi6Xp1
- 4kGJOvVufZDXISSceR9mJ+7jo4qDqyujZM2Kd3Py6vb6excfTi9Vyg4E1K8MqBnc9fiwDFf/wyW08
- nT+tItTXPu7AXj0Em/Rb+VIboT5ITiFYkJcLeqAWDs/qtAJiBXCIV8ltLr9DXakuhiiUU3ywEh2/G
- CX31tKy+6bfZJMzGVyVUJqhyg400GLsnF5pOcXeI6zXeNQFEyn3d6dNOdBR7L61h5IWnyhIHMgfrd
- ux7gRWOw==;
-Received: from ohm.aurel32.net ([2001:bc8:30d7:111::2] helo=ohm.rr44.fr)
- by hall.aurel32.net with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <aurelien@aurel32.net>) id 1rS1RD-00DGr5-2u;
- Mon, 22 Jan 2024 22:02:35 +0100
-Date: Mon, 22 Jan 2024 22:02:35 +0100
-From: Aurelien Jarno <aurelien@aurel32.net>
-To: u-boot@lists.denx.de, Yanhong Wang <yanhong.wang@starfivetech.com>
-Subject: Re: [PATCH] board: starfive: handle compatible property in dynamic
- DT configuration
-Message-ID: <Za7X6xFQqRnKVC3V@aurel32.net>
-References: <20240110201757.983435-1-aurelien@aurel32.net>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=reatmon@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40MLBaKq021893;
+ Mon, 22 Jan 2024 15:11:36 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1705957896;
+ bh=bqiaZ04lkvqPIPmMrkKvJsfjKszjgToanHb/g6K+SR8=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=Gp1W1LAJf2bmL2A7l5iF1cp3wXHkVQE4d68qF3XMKWSLb0757txJcFtRc5WtZCU9H
+ jdRxYkGM3LD1zTV2E0oZSGQcazdplWqaJex8g0cgNaDITf0VJW+aD80QIpVDnJCg3o
+ PkRypE6JhwMUM4mqNoHnl5BmnyTSfc6cGgVbwTIk=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40MLBapn004671
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 22 Jan 2024 15:11:36 -0600
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 22
+ Jan 2024 15:11:35 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 22 Jan 2024 15:11:35 -0600
+Received: from [10.249.39.53] ([10.249.39.53])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40MLBZ6D011291;
+ Mon, 22 Jan 2024 15:11:35 -0600
+Message-ID: <419c31bd-7cd8-4439-b001-adad75184cf9@ti.com>
+Date: Mon, 22 Jan 2024 15:11:35 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240110201757.983435-1-aurelien@aurel32.net>
-User-Agent: Mutt/2.2.12 (2023-09-09)
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] tools: binman: ti_board_cfg: Check for linting
+ problems
+Content-Language: en-US
+To: Max Krummenacher <max.oss.09@gmail.com>, Neha Malcom Francis
+ <n-francis@ti.com>
+CC: <sjg@chromium.org>, <vigneshr@ti.com>, <bb@ti.com>, <m-chawdhry@ti.com>,
+ <alpernebiyasak@gmail.com>, <nm@ti.com>, <u-boot@lists.denx.de>,
+ <vishalm@ti.com>, <jonas@kwiboo.se>, <sughosh.ganu@linaro.org>,
+ <lukas.funke@weidmueller.com>
+References: <20240105113917.1117945-1-n-francis@ti.com>
+ <20240105113917.1117945-3-n-francis@ti.com> <Za5munT0bYuZ5bio@toolbox>
+From: Ryan Eatmon <reatmon@ti.com>
+In-Reply-To: <Za5munT0bYuZ5bio@toolbox>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,62 +85,176 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Gentle ping. Note that the maintainer address bounces, I am not sure it
-is still valid. Thanks
 
-On 2024-01-10 21:17, Aurelien Jarno wrote:
-> The difference between the StarFive VisionFive 2 1.2A and 1.3B boards is
-> handled dynamically by looking at the PCB version in the EEPROM in order
-> to have a single u-boot version for both versions of the board. While
-> the "model" property is correctly handled, the "compatible" one is
-> always the the one of version 1.3b.
+
+On 1/22/2024 6:59 AM, Max Krummenacher wrote:
+> Hi
 > 
-> This patch add support for dynamically configuring that property.
+> On Fri, Jan 05, 2024 at 05:09:17PM +0530, Neha Malcom Francis wrote:
+>> Use yamllint for checking whether YAML configuration files are adhering
+>> to default yamllint rules.
 > 
-> Fixes: 9b7060bd15e7 ("riscv: dts: jh7110: Combine the board device tree files of 1.2A and 1.3B")
+> If I understand this correctly this patch now runs checks to verify
+> that yaml files which are part of the U-Boot source tree are correct.
 > 
-> Signed-off-by: Aurelien Jarno <aurelien@aurel32.net>
-> ---
->  board/starfive/visionfive2/spl.c | 4 ++++
->  1 file changed, 4 insertions(+)
+> Shouldn't this be done when one commits a yaml file, i.e. in U-Boot CI
+> rather than repeating the process on every build and thus having an
+> additional dependency to build U-Boot and additional build time?
 > 
-> diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive2/spl.c
-> index 336f0cdfc9..911add429d 100644
-> --- a/board/starfive/visionfive2/spl.c
-> +++ b/board/starfive/visionfive2/spl.c
-> @@ -61,11 +61,13 @@ static const struct starfive_vf2_pro starfive_verb[] = {
->  
->  void spl_fdt_fixup_version_a(void *fdt)
->  {
-> +	static const char compat[] = "starfive,visionfive-2-v1.2a\0starfive,jh7110";
->  	u32 phandle;
->  	u8 i;
->  	int offset;
->  	int ret;
->  
-> +	fdt_setprop(fdt, fdt_path_offset(fdt, "/"), "compatible", compat, sizeof(compat));
->  	fdt_setprop_string(fdt, fdt_path_offset(fdt, "/"), "model",
->  			   "StarFive VisionFive 2 v1.2A");
->  
-> @@ -106,11 +108,13 @@ void spl_fdt_fixup_version_a(void *fdt)
->  
->  void spl_fdt_fixup_version_b(void *fdt)
->  {
-> +	static const char compat[] = "starfive,visionfive-2-v1.3b\0starfive,jh7110";
->  	u32 phandle;
->  	u8 i;
->  	int offset;
->  	int ret;
->  
-> +	fdt_setprop(fdt, fdt_path_offset(fdt, "/"), "compatible", compat, sizeof(compat));
->  	fdt_setprop_string(fdt, fdt_path_offset(fdt, "/"), "model",
->  			   "StarFive VisionFive 2 v1.3B");
->  
-> -- 
-> 2.42.0
+> Note that in openembedded there is currently no python yamllint
+> recipe providing the used python module in the regularly used layers.
+> How do you plan to integrate the change in the OE U-Boot recipe?
+> At least our OE CI of latest master now fails (for a TI AM62 based SoM)
+> as the python module is missing.
+
+I have submitted a patch to oe-core for this missing recipe.
+
+https://lists.openembedded.org/g/openembedded-core/message/194192
+
+Hopefully they accept it.  Otherwise, we are going to "temporarily" 
+carrying the same recipe in meta-ti-extras until they accept it in oe-core.
+
+
+> Regards
+> Max
 > 
-> 
+>>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> Suggested-by: Nishanth Menon <nm@ti.com>
+>> ---
+>> Changes since v1:
+>> 	- add yamllint to requirements.txt (Nishanth)
+>>
+>>   tools/binman/etype/ti_board_config.py        |  5 +++++
+>>   tools/binman/ftest.py                        |  6 ++++++
+>>   tools/binman/test/323_ti_board_cfg_phony.dts | 14 ++++++++++++++
+>>   tools/binman/test/yaml/config.yaml           |  4 ++--
+>>   tools/binman/test/yaml/config_phony.yaml     | 18 ++++++++++++++++++
+>>   tools/buildman/requirements.txt              |  1 +
+>>   6 files changed, 46 insertions(+), 2 deletions(-)
+>>   create mode 100644 tools/binman/test/323_ti_board_cfg_phony.dts
+>>   create mode 100644 tools/binman/test/yaml/config_phony.yaml
+>>
+>> diff --git a/tools/binman/etype/ti_board_config.py b/tools/binman/etype/ti_board_config.py
+>> index 94f894c281..2c3bb8f7b5 100644
+>> --- a/tools/binman/etype/ti_board_config.py
+>> +++ b/tools/binman/etype/ti_board_config.py
+>> @@ -9,6 +9,7 @@
+>>   import os
+>>   import struct
+>>   import yaml
+>> +import yamllint
+>>   
+>>   from collections import OrderedDict
+>>   from jsonschema import validate
+>> @@ -18,6 +19,7 @@ from binman.entry import Entry
+>>   from binman.etype.section import Entry_section
+>>   from dtoc import fdt_util
+>>   from u_boot_pylib import tools
+>> +from yamllint import config
+>>   
+>>   BOARDCFG = 0xB
+>>   BOARDCFG_SEC = 0xD
+>> @@ -244,6 +246,9 @@ class Entry_ti_board_config(Entry_section):
+>>               with open(self._schema_file, 'r') as sch:
+>>                   self.schema_yaml = yaml.safe_load(sch)
+>>   
+>> +            yaml_config = config.YamlLintConfig("extends: default")
+>> +            for p in yamllint.linter.run(open(self._config_file, "r"), yaml_config):
+>> +                self.Raise(f"Yamllint error: {p.line}: {p.rule}")
+>>               try:
+>>                   validate(self.file_yaml, self.schema_yaml)
+>>               except Exception as e:
+>> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+>> index a4ac520cbb..1fbb0fef1a 100644
+>> --- a/tools/binman/ftest.py
+>> +++ b/tools/binman/ftest.py
+>> @@ -7030,6 +7030,12 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+>>           data = self._DoReadFile('293_ti_board_cfg.dts')
+>>           self.assertEqual(TI_BOARD_CONFIG_DATA, data)
+>>   
+>> +    def testTIBoardConfigLint(self):
+>> +        """Test that an incorrectly linted config file would generate error"""
+>> +        with self.assertRaises(ValueError) as e:
+>> +            data = self._DoReadFile('323_ti_board_cfg_phony.dts')
+>> +        self.assertIn("Yamllint error", str(e.exception))
+>> +
+>>       def testTIBoardConfigCombined(self):
+>>           """Test that a schema validated combined board config file can be generated"""
+>>           data = self._DoReadFile('294_ti_board_cfg_combined.dts')
+>> diff --git a/tools/binman/test/323_ti_board_cfg_phony.dts b/tools/binman/test/323_ti_board_cfg_phony.dts
+>> new file mode 100644
+>> index 0000000000..441296de4f
+>> --- /dev/null
+>> +++ b/tools/binman/test/323_ti_board_cfg_phony.dts
+>> @@ -0,0 +1,14 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/dts-v1/;
+>> +
+>> +/ {
+>> +	#address-cells = <1>;
+>> +	#size-cells = <1>;
+>> +
+>> +	binman {
+>> +		ti-board-config {
+>> +			config = "yaml/config_phony.yaml";
+>> +			schema = "yaml/schema.yaml";
+>> +		};
+>> +	};
+>> +};
+>> diff --git a/tools/binman/test/yaml/config.yaml b/tools/binman/test/yaml/config.yaml
+>> index 5f799a6e3a..c2be32128b 100644
+>> --- a/tools/binman/test/yaml/config.yaml
+>> +++ b/tools/binman/test/yaml/config.yaml
+>> @@ -10,9 +10,9 @@ main-branch:
+>>       b: 0
+>>     arr: [0, 0, 0, 0]
+>>     another-arr:
+>> -    - #1
+>> +    -  # 1
+>>         c: 0
+>>         d: 0
+>> -    - #2
+>> +    -  # 2
+>>         c: 0
+>>         d: 0
+>> diff --git a/tools/binman/test/yaml/config_phony.yaml b/tools/binman/test/yaml/config_phony.yaml
+>> new file mode 100644
+>> index 0000000000..d76fcb3b82
+>> --- /dev/null
+>> +++ b/tools/binman/test/yaml/config_phony.yaml
+>> @@ -0,0 +1,18 @@
+>> +# SPDX-License-Identifier: GPL-2.0+
+>> +#
+>> +# Test config
+>> +#
+>> +---
+>> +
+>> +main-branch :
+>> +  obj :
+>> +    a : 0x0
+>> +    b: 0
+>> +  arr: [0, 0, 0, 0]
+>> +  another-arr:
+>> +    -  # 1
+>> +      c: 0
+>> +      d: 0
+>> +    -  # 2
+>> +      c: 0
+>> +      d: 0
+>> diff --git a/tools/buildman/requirements.txt b/tools/buildman/requirements.txt
+>> index a1efcb9d4b..4a31e69e4c 100644
+>> --- a/tools/buildman/requirements.txt
+>> +++ b/tools/buildman/requirements.txt
+>> @@ -1,2 +1,3 @@
+>>   jsonschema==4.17.3
+>>   pyyaml==6.0
+>> +yamllint==1.26.3
+>> -- 
+>> 2.34.1
+>>
 
 -- 
-Aurelien Jarno                          GPG: 4096R/1DDD8C9B
-aurelien@aurel32.net                     http://aurel32.net
+Ryan Eatmon                reatmon@ti.com
+-----------------------------------------
+Texas Instruments, Inc.  -  LCPD  -  MGTS
