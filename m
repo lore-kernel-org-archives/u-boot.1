@@ -4,76 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01D50C4725D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 07:28:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C743C4725D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 07:47:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17EAB87708;
-	Mon, 22 Jan 2024 08:28:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 40F7387708;
+	Mon, 22 Jan 2024 08:47:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oEaVkaLt";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="E7nLxxHf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2766487776; Mon, 22 Jan 2024 08:28:32 +0100 (CET)
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
- [IPv6:2607:f8b0:4864:20::432])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C0D2A877F4; Mon, 22 Jan 2024 08:47:14 +0100 (CET)
+Received: from mail-m12739.qiye.163.com (mail-m12739.qiye.163.com
+ [115.236.127.39])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 793D0876B1
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 08:28:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 840EF876F4
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 08:47:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-6d9344f30caso1680302b3a.1
- for <u-boot@lists.denx.de>; Sun, 21 Jan 2024 23:28:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1705908506; x=1706513306; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=8om6QEIzofjENAff0O7c0R4K15koMexpSJCMBgdc8ZU=;
- b=oEaVkaLtT1YTVIyKUiTN055BynJZ6AAH2xWDLrXD6nTVnU6ampg9Sh2A4OhhszRxge
- VNL/K3VWJ/o+EPmG4SxHERIJWQlJJXXXZmUUtDVm+QEgYTK50lvZuQRpZ4YNoX8YlxL/
- BEpHsG9jutRa6IuJZnxumsKR8DFrbpZsIFL0vkHxib2gIYoKr4iLdlhZhzf5PKELILm7
- KD4g5UsQ9vQkifbrL9v52RlEX+WxoepGNIjxL8YYAKKtgpKBlJq112MgK/NRbfC3mmpC
- Z7qQdRU3gUaqym1RFkt+sipuePyyyGAk2vPSBbx+0hb3UOz5/p5P5OtUggo7Vz9ROSFg
- 9sqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705908506; x=1706513306;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8om6QEIzofjENAff0O7c0R4K15koMexpSJCMBgdc8ZU=;
- b=Gp/xSY6grU3FU4IlU1WJpdOnYQ+rLW7wUOTc98IrUphIsoyY6n7I3nbq49ixD3dT4r
- ClNZtCUtt1wTS5Ne+lAjjstfjnOvqyt293xZx1AkNY388poBhP7QJYQJscU5PtbXvh5M
- lgbz4av8aMEpZKIAMK/ngrfYzXCBi/PZ6UgvYAP3pv8h40RpoNKhowMLwUtCl+VGCK8D
- 2GWWrBudG+N81JG1clriiUlHZxjTE3R1q5t8j9yZTmnB0TERoasOzf0qx83oY7rmOo82
- A2a9lqgYzp37+vg45YOhPddWa9IwPajmDvzNEpM3tJ5jZfvcTkjtjz7CADfzKNfZ8zNR
- tFCw==
-X-Gm-Message-State: AOJu0YwnhXS44/x3/7n3Fy9PqiIQKmvXIcZ+ssOq5Cw7xEDGL/QcIl8A
- U4ixclsslzqQZiOVu2TcPEdFPMnZ0wMj7RmhJXxsuSoH1fOeQgdnQVLioAVTmhCAO0nk9arZvon
- b
-X-Google-Smtp-Source: AGHT+IGplOQc/FBGk5hBqF5sK4cKRF2qXHXHA4M9CPiMcCINBBRxijTsDYxwEKHh/I+kvpUulSkIjw==
-X-Received: by 2002:a05:6a00:a8d:b0:6db:d65d:39ae with SMTP id
- b13-20020a056a000a8d00b006dbd65d39aemr2935340pfl.29.1705908505897; 
- Sun, 21 Jan 2024 23:28:25 -0800 (PST)
-Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- y15-20020a62f24f000000b006d93ca7f8f3sm8891936pfl.150.2024.01.21.23.28.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 21 Jan 2024 23:28:25 -0800 (PST)
-From: Masahisa Kojima <masahisa.kojima@linaro.org>
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=E7nLxxHfulF5OCGIZ9t1Xamnai4HtiNgmQoBBhPcaVqaaL5R8wOHhosYgUjIGjEMQEe7ZO5VuM/W8KFw6FJ+W3nhKfjvRmFTqVYfKqRKWqpu3aAtodh5iVSPoY96tLWxFOryCh5D7FNZQ5zLFdtgdK4/JMBKhvWwsgW0dGC2IC0=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=wcYFzRUB8C2X6OWxit4uz23oGMdHgwsb/lqe6fmJiZg=;
+ h=date:mime-version:subject:message-id:from;
+Received: from localhost.localdomain (unknown [58.22.7.114])
+ by mail-m12771.qiye.163.com (Hmail) with ESMTPA id 8B1E6B4052B;
+ Mon, 22 Jan 2024 15:47:02 +0800 (CST)
+From: Kever Yang <kever.yang@rock-chips.com>
 To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [PATCH] efi_loader: check efi_get_variable_int return value
-Date: Mon, 22 Jan 2024 16:26:17 +0900
-Message-Id: <20240122072617.1104227-1-masahisa.kojima@linaro.org>
-X-Mailer: git-send-email 2.34.1
+Cc: YouMin Chen <cym@rock-chips.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] rockchip: sdram: fix LPDDR5 bank info for sys_reg version 3
+Date: Mon, 22 Jan 2024 15:46:34 +0800
+Message-Id: <20240122074633.654726-1-kever.yang@rock-chips.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGU5DSlZPGRgeTENOQ0wfS0NVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5JVUpLS1VKQl
+ kG
+X-HM-Tid: 0a8d302317e1b247kuuu8b1e6b4052b
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6P006MDo5DDwdIg8JA0sLESIc
+ IQkwCU1VSlVKTEtOQktCTUlISEJLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJSU9LNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,35 +72,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-efi_get_variable_int() may fail, the buffer should be
-cleared before using it.
+From: YouMin Chen <cym@rock-chips.com>
 
-Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-Addresses-Coverity-ID: 478333 ("Error handling issues")
+This patch add support for additional bank info used by LPDDR5.
+
+Signed-off-by: YouMin Chen <cym@rock-chips.com>
+Signed-off-by: Kever Yang <kever.yang@rock-chips.com>
 ---
- lib/efi_loader/efi_firmware.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-index 9fd13297a6..fb83fa8113 100644
---- a/lib/efi_loader/efi_firmware.c
-+++ b/lib/efi_loader/efi_firmware.c
-@@ -407,11 +407,11 @@ efi_status_t efi_firmware_set_fmp_state_var(struct fmp_state *state, u8 image_in
- 	/*
- 	 * GetVariable may fail, EFI_NOT_FOUND is returned if FmpState
- 	 * variable has not been set yet.
--	 * Ignore the error here since the correct FmpState variable
--	 * is set later.
- 	 */
--	efi_get_variable_int(varname, image_type_id, NULL, &size, var_state,
--			     NULL);
-+	ret = efi_get_variable_int(varname, image_type_id, NULL, &size,
-+				   var_state, NULL);
-+	if (ret != EFI_SUCCESS)
-+		memset(var_state, 0, num_banks * sizeof(*var_state));
- 
- 	/*
- 	 * Only the fw_version is set here.
+ arch/arm/mach-rockchip/sdram.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/arch/arm/mach-rockchip/sdram.c b/arch/arm/mach-rockchip/sdram.c
+index 99ecbdc3412..d65c48bf515 100644
+--- a/arch/arm/mach-rockchip/sdram.c
++++ b/arch/arm/mach-rockchip/sdram.c
+@@ -110,6 +110,13 @@ size_t rockchip_sdram_size(phys_addr_t reg)
+ 			  SYS_REG_COL_MASK);
+ 		cs1_col = cs0_col;
+ 		bk = 3 - ((sys_reg2 >> SYS_REG_BK_SHIFT(ch)) & SYS_REG_BK_MASK);
++		/*
++		 * SYS_REG_BK(Version 3):
++		 * 1) Except LPDDR5 0:8bank(bk=3), 1:4bank(bk=2)
++		 * 2) LPDDR5 0:8bank(bk=3), 1:16bank(bk=4)
++		 */
++		if (version == 3 && dram_type == LPDDR5 && bk == 2)
++			bk = 4;
+ 		if (version >= 2) {
+ 			cs1_col = 9 + (sys_reg3 >> SYS_REG_CS1_COL_SHIFT(ch) &
+ 				  SYS_REG_CS1_COL_MASK);
 -- 
-2.34.1
+2.25.1
 
