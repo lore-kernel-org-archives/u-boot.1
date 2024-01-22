@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A8B0C4725D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 09:15:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBD9FC47DAF
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 09:16:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8543E875E9;
-	Mon, 22 Jan 2024 10:15:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2E90C875E9;
+	Mon, 22 Jan 2024 10:16:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="NXrNa3aa";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="pTehmpHK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59E1087214; Mon, 22 Jan 2024 10:15:49 +0100 (CET)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id D50A987214; Mon, 22 Jan 2024 10:16:31 +0100 (CET)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8844875E9
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 10:15:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 778EB875E9
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 10:16:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mchitale@ventanamicro.com
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-42a032cf012so27380011cf.1
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 01:15:46 -0800 (PST)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-68183d4e403so18869736d6.1
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 01:16:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1705914945; x=1706519745; darn=lists.denx.de; 
+ d=ventanamicro.com; s=google; t=1705914988; x=1706519788; darn=lists.denx.de; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aOf0AVj1cqNhHrUNMd9M6PtkVLDRNIf+qCXdl+s9i0s=;
- b=NXrNa3aaOQRM8fyHF2Q1c5x5Of1Fc+g/gizKJ5hY4S9n9lFzMbaLP/HJzvd+12aZH8
- irmP8p2ZOOc59CO7j926ZSslUSEOYkhw0hZFdoHpekNKXwxNFORqYu/OklNEQHgDEjID
- gr+2ABXqZuiQlNG1imb9w6gxuqHMNKgC6XNLoc81ZXrW4SCwhxoppX6oBAmTpwhUg04t
- 8ub5t+3lqUMNFk+Lwiwv2lxBNV6cTpU0FA7vs85t5IcUPqPnS5lCeXbxleUjNZmUaDW0
- X6KobyzqQvfut6QKNkz3B08qhXwRSUkdYtozYDV6K1w7pYXThPanwIGtIOdjoZ5srM7w
- Alww==
+ bh=el/KKVb/DZ0QPxK42UZ9M7VbjIfhwWXIol5DYUbpRWc=;
+ b=pTehmpHK1YclBeh961KIiigpg89PHhvy9SM8DdXXdiom82O0a6RA+YWGg7KOe/RgxD
+ /bxOs1Lo5fJaE4K1+Uzpe25u5iqANrnk9mXTFV1rskLrK30e4ln92lzHnaycaOED0iLU
+ t09QFHwjgdiDo676l00d6/N5jLlC6zbEH885GB3y750IJQKHhX8Zq55lUz1zXPGH2x2a
+ Fdf7IOluofmA+/ySCdv4cnqfGKQCMxSXJMVb0ViFF5Clb3ygeDd0KhfFOuhAzCRm94lU
+ Q0plVEGw99PBMtLuYtNYW/5kCC/6BWSZxfLtqrhD1gpNQl2kTowc7au9Lw0+dynUYYMK
+ fmlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705914945; x=1706519745;
+ d=1e100.net; s=20230601; t=1705914988; x=1706519788;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=aOf0AVj1cqNhHrUNMd9M6PtkVLDRNIf+qCXdl+s9i0s=;
- b=wwawW36SYMAAuDDznZ0NNWyI1LqzB67nUCOiTySBYXTf9hXijK2hNE+7R7QKtg+f34
- eFACGTUFBe3ZYNG4lhS2Wb3sHU7QpSdFnVZh23VWHBbHn28e8eBdtbIc19avtXk8CQXZ
- 1YK29XS+mmSL0YKLt71Mv8eduPct7JuVAYlwYXZn0cCVC2yo249J+ZT4cZLkhwtTlKWv
- vvYvrgM8Gwj29MiQ1cHmTAqazAVXxcgSLma2+Vc+MK6d6MikHfZYd7I+gQagD2/NWqZ8
- itMcsdo8JIiQo4rh3tAlAS6xnFDJTPW8qUnv5c125xA3H2EIy/l7PtH4u5f8wlulnRNy
- FVlw==
-X-Gm-Message-State: AOJu0YyUb6yP1Ck0NNkAsZ+SX8ESnizoWpJ4ODsFQ05f6qi88ldjYjCk
- T4Jj7dZUaeejcnDLYA2ehUk/YtdIm1HWmyiROqZk6pSpFv82m5E/jDsFJPthZ0dxVh1gfhQkz0s
- Min6Q6d+1n9XxPqz/JyhrBz4EiiiPUVX9gLol0Q==
-X-Google-Smtp-Source: AGHT+IHRwD9J3N4KoQ9r+jOxXP4+RC/UmZ1mMci0IcrwRdWzD2u4jd96JO1q7nQZyojGfm3z2IkbAH9PoibDIoM2Ino=
-X-Received: by 2002:a05:6214:529a:b0:685:ac1d:8066 with SMTP id
- kj26-20020a056214529a00b00685ac1d8066mr4220363qvb.86.1705914945560; Mon, 22
- Jan 2024 01:15:45 -0800 (PST)
+ bh=el/KKVb/DZ0QPxK42UZ9M7VbjIfhwWXIol5DYUbpRWc=;
+ b=NA2Z97jOZwufrBgH5u/dO2rspLsF+U9Xj9inaCDR0XYcc6CnX3j7YZ0hQGr/kGQutq
+ Du/r6lpWo/MKZUGpRAGnrU6Hu18u+TbGrj6DIbPpwxKNoxOOn6twgPKItN2rjwEucJtz
+ 6RepCrxYUKqlVlD5du84Gw8dXY3NitznTLPZnFJhlfCZCkJKfhZBcfCBFCB8Qbk4I+YV
+ nqlgswlvFd0Ev0noBmAemd7C2t/LmFv6n//vdv1v9U2TFuzSbfATurIcY49+aBdBWuex
+ Pmv6WodPS3lwhoTAfgrCyj1SfsezBfEZ4LM1ESgpNjg61qhvqc/okisuX2P8fJj6m22m
+ AjjA==
+X-Gm-Message-State: AOJu0YyWRfEc3d6SIa9xwNOSeFFaGrNXvXVWS0Ryij/XAOBv6tcb48RL
+ jc/nNPJ+7p+kazYfeJexhljBK9c9kRelCsY9+AK1VPpxNkoQnR4+B5s9WqhVrDugLtVLjBQE+5L
+ CpH5cbcbPEeQn5snlU4s4q6hErgBGFO0YpLz2Lg==
+X-Google-Smtp-Source: AGHT+IEXR2w2f1wK/9NN9NzYhp5UvJDog0sBmFBYqLtuHzCaP00LbRS1rgeqbdweYdeU/fHqBnBdjApZTnirc35X4t8=
+X-Received: by 2002:a0c:f212:0:b0:685:97e7:afce with SMTP id
+ h18-20020a0cf212000000b0068597e7afcemr3466454qvk.10.1705914988154; Mon, 22
+ Jan 2024 01:16:28 -0800 (PST)
 MIME-Version: 1.0
 References: <20240116123643.563412-1-mchitale@ventanamicro.com>
  <20240116123643.563412-2-mchitale@ventanamicro.com>
- <d3d71b07-9636-42e9-b29b-31ae84d8e4b4@canonical.com>
-In-Reply-To: <d3d71b07-9636-42e9-b29b-31ae84d8e4b4@canonical.com>
+ <e3e76e8a-74e8-baa9-3605-6a3b3c5290e6@gmail.com>
+In-Reply-To: <e3e76e8a-74e8-baa9-3605-6a3b3c5290e6@gmail.com>
 From: Mayuresh Chitale <mchitale@ventanamicro.com>
-Date: Mon, 22 Jan 2024 14:45:09 +0530
-Message-ID: <CAN37VV5qGy=iEVgYE8ignm1=xz8c2m9r4b0hd9PVSFTLeHtK0w@mail.gmail.com>
+Date: Mon, 22 Jan 2024 14:45:52 +0530
+Message-ID: <CAN37VV7oX99U0YBkNow1S3aU=Z-EXRY9c7zL66J9x8ncpVuHJg@mail.gmail.com>
 Subject: Re: [PATCH v2 1/2] part: Add a function to find ESP partition
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng@tinylab.org>, 
- Tobias Waldekranz <tobias@waldekranz.com>, Joshua Watt <jpewhacker@gmail.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Johan Jonker <jbx6244@gmail.com>
+To: Sean Anderson <seanga2@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng@tinylab.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tobias Waldekranz <tobias@waldekranz.com>, 
+ Johan Jonker <jbx6244@gmail.com>, Joshua Watt <jpewhacker@gmail.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de, 
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
@@ -92,10 +94,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jan 16, 2024 at 7:15=E2=80=AFPM Heinrich Schuchardt <
-heinrich.schuchardt@canonical.com> wrote:
+On Wed, Jan 17, 2024 at 6:43=E2=80=AFAM Sean Anderson <seanga2@gmail.com> w=
+rote:
 
-> On 16.01.24 13:36, Mayuresh Chitale wrote:
+> On 1/16/24 07:36, Mayuresh Chitale wrote:
 > > If a disk has an EFI system partition (ESP) then it can be used to
 > > locate the boot files. Add a function to find the ESP.
 > >
@@ -143,23 +145,6 @@ heinrich.schuchardt@canonical.com> wrote:
 > > + *
 > > + * @desc: Block-device descriptor
 > > + * @Return the EFI system partition, or 0 if there is none
->
-> We want to be able to add the include to our API documentation. This
-> requires adhering to the Sphinx documentation style.
->
-> %s/@Return the/Return:/
->
-> Ok.
-
-> Cf.
->
-> https://www.kernel.org/doc/html/v6.7/doc-guide/kernel-doc.html#function-d=
-ocumentation
->
-> Best regards
->
-> Heinrich
->
 > > + */
 > > +int part_get_esp(struct blk_desc *desc);
 > > +
@@ -172,7 +157,19 @@ ocumentation
 > >   { return false; }
 > >
 > > +static inline bool part_get_esp(struct blk_desc *desc)
+>
+> Please use the same signature as above.
+>
+Yes.
+
 > > +{ return false; }
+>
+> The statement here should be on its own line.
+>
+> Ok.
+
+> --Sean
+>
 > > +
 > >   #endif /* CONFIG_PARTITIONS */
 > >
