@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B420CC47DAF
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 10:53:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 131A5C4725D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 10:53:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1ADC878F4;
-	Mon, 22 Jan 2024 11:52:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5BE7A8794A;
+	Mon, 22 Jan 2024 11:52:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=enrico.leto@siemens.com header.b="nqwqSWjy";
+	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=enrico.leto@siemens.com header.b="WaOYoQIW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E73E58793F; Mon, 22 Jan 2024 11:52:46 +0100 (CET)
+ id 02317878E5; Mon, 22 Jan 2024 11:52:47 +0100 (CET)
 Received: from mta-65-225.siemens.flowmailer.net
  (mta-65-225.siemens.flowmailer.net [185.136.65.225])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE64B878E5
+ by phobos.denx.de (Postfix) with ESMTPS id EBC6D878ED
  for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 11:52:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=enrico.leto@siemens.com
 Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id
- 202401221052431808a315b472fca8ef for <u-boot@lists.denx.de>;
+ 20240122105243448bf5b77d3447b7a4 for <u-boot@lists.denx.de>;
  Mon, 22 Jan 2024 11:52:43 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=enrico.leto@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=fYxdB6k5CwnFUWr/txVt0KG4W/dKGZtnB+cB7P4cJHM=;
- b=nqwqSWjyzM7Qbe9WbSzcVdJlXlmBL9sQ3tGnxvWsdeWZ0+faiMpZ1RJBDpRyCGtS6r+KpC
- wBzXZ8041cnOTAEuIDDuj9z95b5g9/TbWWRajR788/NVSmrIzK31E4ksyrGh1ifGi9/WrJu0
- KSvPR3ZgjcB6gYaWP5txpceIiDHb0=;
+ bh=HWWtJr7Vjec5wWBuBLUWsk5UmWCC+Vh7Y972yU2/5XU=;
+ b=WaOYoQIWEf9/jbaeF4yr+rMZtNu7rqwNtZ4q5eFKJu0rGO/LEZXzvx96hQqz8pIbfOf+VY
+ 5JgdMRNIcjOxxOQi5zgSST6vr24Cb5Olg960aspFVqX7FxIkSvMOzMV0Ng4uP7ro7ZbA4Qkr
+ nRaJxC6tBz6PZD0JQa13vAUT2jKv0=;
 From: Enrico Leto <enrico.leto@siemens.com>
 To: u-boot@lists.denx.de,
 	alexander.sverdlin@siemens.com
 Cc: trini@konsulko.com,
 	Enrico Leto <enrico.leto@siemens.com>
-Subject: [PATCH v5 3/7] siemens draco: i2c: use driver model for u-boot
-Date: Mon, 22 Jan 2024 11:52:33 +0100
-Message-Id: <20240122105237.939823-4-enrico.leto@siemens.com>
+Subject: [PATCH v5 4/7] siemens: board: etamin: remove deprecated nand config
+Date: Mon, 22 Jan 2024 11:52:34 +0100
+Message-Id: <20240122105237.939823-5-enrico.leto@siemens.com>
 In-Reply-To: <20240122105237.939823-1-enrico.leto@siemens.com>
 References: <20240122105237.939823-1-enrico.leto@siemens.com>
 MIME-Version: 1.0
@@ -66,64 +66,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for driver model where EEPROM data are read in draco board.
+NAND was used in the early development phase of etamin. The board runs now
+on MMC. This setting is no more used -> remove to simplify the board file.
 
-Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+Further clean-up of etamin should remove all NAND settings. Complete clean-
+up of etamin board will take place in a separate patch serie.
+
 Signed-off-by: Enrico Leto <enrico.leto@siemens.com>
 ---
- configs/draco-etamin_defconfig   | 4 +++-
- configs/draco-rastaban_defconfig | 4 +++-
- configs/draco-thuban_defconfig   | 4 +++-
- 3 files changed, 9 insertions(+), 3 deletions(-)
+ board/siemens/common/board.c |  4 ----
+ board/siemens/draco/Kconfig  |  2 --
+ board/siemens/draco/board.c  | 26 --------------------------
+ 3 files changed, 32 deletions(-)
 
-diff --git a/configs/draco-etamin_defconfig b/configs/draco-etamin_defconfig
-index a89494f9083..ec9331e625a 100644
---- a/configs/draco-etamin_defconfig
-+++ b/configs/draco-etamin_defconfig
-@@ -86,8 +86,10 @@ CONFIG_CLK=y
- CONFIG_CLK_TI_CTRL=y
- CONFIG_DFU_NAND=y
- CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
--CONFIG_SYS_I2C_LEGACY=y
-+CONFIG_DM_I2C=y
-+# CONFIG_SPL_DM_I2C is not set
- CONFIG_SPL_SYS_I2C_LEGACY=y
-+CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
- # CONFIG_SPL_DM_MMC is not set
- CONFIG_MMC_OMAP_HS=y
- CONFIG_MTD=y
-diff --git a/configs/draco-rastaban_defconfig b/configs/draco-rastaban_defconfig
-index f4a9b860bf0..03fbe494901 100644
---- a/configs/draco-rastaban_defconfig
-+++ b/configs/draco-rastaban_defconfig
-@@ -84,8 +84,10 @@ CONFIG_CLK=y
- CONFIG_CLK_TI_CTRL=y
- CONFIG_DFU_NAND=y
- CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
--CONFIG_SYS_I2C_LEGACY=y
-+CONFIG_DM_I2C=y
-+# CONFIG_SPL_DM_I2C is not set
- CONFIG_SPL_SYS_I2C_LEGACY=y
-+CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
- # CONFIG_MMC is not set
- CONFIG_MTD=y
- CONFIG_MTD_RAW_NAND=y
-diff --git a/configs/draco-thuban_defconfig b/configs/draco-thuban_defconfig
-index cf2c46b3d20..fcc9b0380f4 100644
---- a/configs/draco-thuban_defconfig
-+++ b/configs/draco-thuban_defconfig
-@@ -84,8 +84,10 @@ CONFIG_CLK=y
- CONFIG_CLK_TI_CTRL=y
- CONFIG_DFU_NAND=y
- CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
--CONFIG_SYS_I2C_LEGACY=y
-+CONFIG_DM_I2C=y
-+# CONFIG_SPL_DM_I2C is not set
- CONFIG_SPL_SYS_I2C_LEGACY=y
-+CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
- # CONFIG_MMC is not set
- CONFIG_MTD=y
- CONFIG_MTD_RAW_NAND=y
+diff --git a/board/siemens/common/board.c b/board/siemens/common/board.c
+index 80737838a23..9551a29f03d 100644
+--- a/board/siemens/common/board.c
++++ b/board/siemens/common/board.c
+@@ -135,10 +135,6 @@ int board_init(void)
+ 
+ 	gpmc_init();
+ 
+-#if CONFIG_IS_ENABLED(NAND_CS_INIT)
+-	board_nand_cs_init();
+-#endif
+-
+ 	return 0;
+ }
+ #endif /* #ifndef CONFIG_SPL_BUILD */
+diff --git a/board/siemens/draco/Kconfig b/board/siemens/draco/Kconfig
+index 0cdf5bc9812..9d45c4239be 100644
+--- a/board/siemens/draco/Kconfig
++++ b/board/siemens/draco/Kconfig
+@@ -44,6 +44,4 @@ config SYS_SOC
+ config SYS_CONFIG_NAME
+         default "draco-etamin"
+ 
+-config NAND_CS_INIT
+-	def_bool y
+ endif
+diff --git a/board/siemens/draco/board.c b/board/siemens/draco/board.c
+index a0a7d51db32..8c5783d0fb4 100644
+--- a/board/siemens/draco/board.c
++++ b/board/siemens/draco/board.c
+@@ -358,30 +358,4 @@ U_BOOT_CMD(
+ #endif /* #if defined(CONFIG_DRIVER_TI_CPSW) */
+ #endif /* #if (defined(CONFIG_DRIVER_TI_CPSW) && !defined(CONFIG_SPL_BUILD)) */
+ 
+-#if CONFIG_IS_ENABLED(NAND_CS_INIT)
+-#define ETAMIN_NAND_GPMC_CONFIG1	0x00000800
+-#define ETAMIN_NAND_GPMC_CONFIG2	0x001e1e00
+-#define ETAMIN_NAND_GPMC_CONFIG3	0x001e1e00
+-#define ETAMIN_NAND_GPMC_CONFIG4	0x16051807
+-#define ETAMIN_NAND_GPMC_CONFIG5	0x00151e1e
+-#define ETAMIN_NAND_GPMC_CONFIG6	0x16000f80
+-
+-/* GPMC definitions for second nand cs1 */
+-static const u32 gpmc_nand_config[] = {
+-	ETAMIN_NAND_GPMC_CONFIG1,
+-	ETAMIN_NAND_GPMC_CONFIG2,
+-	ETAMIN_NAND_GPMC_CONFIG3,
+-	ETAMIN_NAND_GPMC_CONFIG4,
+-	ETAMIN_NAND_GPMC_CONFIG5,
+-	ETAMIN_NAND_GPMC_CONFIG6,
+-	/*CONFIG7- computed as params */
+-};
+-
+-static void board_nand_cs_init(void)
+-{
+-	enable_gpmc_cs_config(gpmc_nand_config, &gpmc_cfg->cs[1],
+-			      0x18000000, GPMC_SIZE_16M);
+-}
+-#endif
+-
+ #include "../common/board.c"
 -- 
 2.30.2
 
