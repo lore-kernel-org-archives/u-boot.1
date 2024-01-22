@@ -4,46 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E561C4725D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 10:52:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E46AC47DAF
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 10:52:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D31787645;
-	Mon, 22 Jan 2024 11:52:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0A287878EC;
+	Mon, 22 Jan 2024 11:52:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=enrico.leto@siemens.com header.b="ctaVAP7Z";
+	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=enrico.leto@siemens.com header.b="F6tb9l0t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F222987927; Mon, 22 Jan 2024 11:52:44 +0100 (CET)
+ id 7D1A687927; Mon, 22 Jan 2024 11:52:45 +0100 (CET)
 Received: from mta-64-226.siemens.flowmailer.net
  (mta-64-226.siemens.flowmailer.net [185.136.64.226])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E885B8751B
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 11:52:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3709C87895
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 11:52:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=enrico.leto@siemens.com
 Received: by mta-64-226.siemens.flowmailer.net with ESMTPSA id
- 202401221052424b00e0edee5414472d for <u-boot@lists.denx.de>;
- Mon, 22 Jan 2024 11:52:42 +0100
+ 202401221052432deedfa151feae899a for <u-boot@lists.denx.de>;
+ Mon, 22 Jan 2024 11:52:43 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=enrico.leto@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=YRa/S9k1ZA8ZhLw+OTK/Z+nqhucY81OMpwJVPxgJUNY=;
- b=ctaVAP7ZfbxTt+O5Ed5yDwcL2KfnaEnGAy+ggQIn152P4g1EooYojHGGXRI17Ho6mlHWoi
- lw9u+ngG0AbBJ8EeGB3VWT5G26PR/CriSoisBbcFOWJ2u86VPMXK9LCBtdBsCV51ewDrysZz
- 4MxWJ5abvi1aohxfOpTYpeb1WI3Ks=;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
+ bh=sf9lW+WuIjK2SVqs/4vuc8aYUv4hBm1RoO6xAKbtOPs=;
+ b=F6tb9l0tlbP1BxruVhAInWmyh6jM8xTf+As+l2fd0UEKvfgHVOZ0MW6Un+c63mVkcrrrxn
+ qneRAR4LsobOI3VEEsIyWy81f99ALAlagIDwdjP7cK4Son6YxpeC0PxeATIYfEZ2qWAbF/u4
+ rz6wt2KRB1PjS1QE3Uuuc4j3Z/w/c=;
 From: Enrico Leto <enrico.leto@siemens.com>
 To: u-boot@lists.denx.de,
 	alexander.sverdlin@siemens.com
 Cc: trini@konsulko.com,
 	Enrico Leto <enrico.leto@siemens.com>
-Subject: [PATCH v5 0/7] board: siemens: clean up subfolders
-Date: Mon, 22 Jan 2024 11:52:30 +0100
-Message-Id: <20240122105237.939823-1-enrico.leto@siemens.com>
+Subject: [PATCH v5 2/7] siemens: eeprom: simplify setup & read
+Date: Mon, 22 Jan 2024 11:52:32 +0100
+Message-Id: <20240122105237.939823-3-enrico.leto@siemens.com>
+In-Reply-To: <20240122105237.939823-1-enrico.leto@siemens.com>
+References: <20240122105237.939823-1-enrico.leto@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -64,78 +66,307 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-    The common folder was initialially created for the common parts of
-    the products based on draco-am355x board family. We have the
-    product lines 'pxm2', 'rut' and the base line unfortunately named
-    'draco'! Adding the new capricorn-imx8 board family, the files
-    were enhanced without cleanup.
-
-    Simplify first EEPROM probe and access that implements both i2c
-    with & without driver model. Use abstraction functions for this.
-    
-    Move all am355x specifics to a new file 'board_am335x'.
-    
-    Clean-up includes, config checks, maintainer.
+Since we have boards using the driver model or not for i2c, use abstraction
+function to probe the i2c, check the EEPROM and read from EEPROM.
 
 Signed-off-by: Enrico Leto <enrico.leto@siemens.com>
 ---
-Changes for v2:
-- fix wrong value in CONFIG_IS_ENABLED
+ board/siemens/common/board.c      | 48 +++++++++++++++++++++--
+ board/siemens/common/board.h      |  3 ++
+ board/siemens/common/factoryset.c | 63 +++++--------------------------
+ board/siemens/draco/board.c       | 23 ++++-------
+ board/siemens/pxm2/board.c        |  2 +-
+ board/siemens/rut/board.c         |  2 +-
+ 6 files changed, 67 insertions(+), 74 deletions(-)
 
-Changes for v3:
-- rebased to the top of next branch
-
-Changes for v4:
-- remove compiler errors
-- fix patch style checks
-
-Changes for v5:
-- remove deprecated nand config for etamin that generates compiler error
-
-Enrico Leto (7):
-  siemens: eeprom: clean up definitions
-  siemens: eeprom: simplify setup & read
-  siemens draco: i2c: use driver model for u-boot
-  siemens: board: etamin: remove deprecated nand config
-  siemens: board: clean up draco products vs common
-  siemens: board: clean up includes
-  siemens: factoryset: use correct config for soc specific
-    implementation
-
- board/siemens/capricorn/board.c     |   5 +-
- board/siemens/common/board.c        | 114 +++++++++++-----------------
- board/siemens/common/board.h        |  24 ++++++
- board/siemens/common/board_am335x.c |  58 ++++++++++++++
- board/siemens/common/board_am335x.h |  38 ++++++++++
- board/siemens/common/factoryset.c   |  87 +++++----------------
- board/siemens/draco/Kconfig         |   2 -
- board/siemens/draco/Makefile        |   2 +
- board/siemens/draco/board.c         |  87 +++++----------------
- board/siemens/draco/board.h         |  32 ++------
- board/siemens/draco/mux.c           |   6 +-
- board/siemens/pxm2/MAINTAINERS      |   2 +-
- board/siemens/pxm2/Makefile         |   2 +
- board/siemens/pxm2/board.c          |  34 +++------
- board/siemens/pxm2/board.h          |  21 -----
- board/siemens/pxm2/mux.c            |   6 +-
- board/siemens/rut/MAINTAINERS       |   2 +-
- board/siemens/rut/Makefile          |   2 +
- board/siemens/rut/board.c           |  33 ++------
- board/siemens/rut/board.h           |  21 -----
- board/siemens/rut/mux.c             |   5 +-
- configs/draco-etamin_defconfig      |   4 +-
- configs/draco-rastaban_defconfig    |   4 +-
- configs/draco-thuban_defconfig      |   4 +-
- include/configs/draco-etamin.h      |   3 -
- include/configs/draco-rastaban.h    |   3 -
- include/configs/draco-thuban.h      |   3 -
- 27 files changed, 248 insertions(+), 356 deletions(-)
- create mode 100644 board/siemens/common/board.h
- create mode 100644 board/siemens/common/board_am335x.c
- create mode 100644 board/siemens/common/board_am335x.h
- delete mode 100644 board/siemens/pxm2/board.h
- delete mode 100644 board/siemens/rut/board.h
-
+diff --git a/board/siemens/common/board.c b/board/siemens/common/board.c
+index 7ad367439c1..80737838a23 100644
+--- a/board/siemens/common/board.c
++++ b/board/siemens/common/board.c
+@@ -39,6 +39,48 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++#if CONFIG_IS_ENABLED(DM_I2C)
++static struct udevice *i2c_dev;
++#endif
++
++/* Probe I2C and set-up EEPROM */
++int siemens_ee_setup(void)
++{
++#if CONFIG_IS_ENABLED(DM_I2C)
++	struct udevice *bus;
++	int ret;
++
++	ret = uclass_get_device_by_seq(UCLASS_I2C, SIEMENS_EE_I2C_BUS, &bus);
++	if (ret)
++		goto err;
++
++	ret = dm_i2c_probe(bus, SIEMENS_EE_I2C_ADDR, 0, &i2c_dev);
++	if (ret)
++		goto err;
++	if (i2c_set_chip_offset_len(i2c_dev, 2))
++		goto err;
++#else
++	i2c_set_bus_num(SIEMENS_EE_I2C_BUS);
++	if (i2c_probe(SIEMENS_EE_I2C_ADDR))
++		goto err;
++#endif
++	return 0;
++
++err:
++	printf("Could not probe the EEPROM; something fundamentally wrong on the I2C bus.\n");
++	return 1;
++}
++
++/* Read data from EEPROM */
++int siemens_ee_read_data(uint address, uchar *buffer, int len)
++{
++#if CONFIG_IS_ENABLED(DM_I2C)
++	return dm_i2c_read(i2c_dev, address, buffer, len);
++#else
++	return i2c_read(SIEMENS_EE_I2C_ADDR, address, 2, buffer, len);
++#endif
++}
++
+ #ifdef CONFIG_SPL_BUILD
+ void set_uart_mux_conf(void)
+ {
+@@ -49,12 +91,13 @@ void set_mux_conf_regs(void)
+ {
+ 	/* Initalize the board header */
+ 	enable_i2c0_pin_mux();
+-	i2c_set_bus_num(0);
+ 
+ 	/* enable early the console */
+ 	gd->baudrate = CONFIG_BAUDRATE;
+ 	serial_init();
+ 	gd->have_console = 1;
++
++	siemens_ee_setup();
+ 	if (read_eeprom() < 0)
+ 		puts("Could not get board ID.\n");
+ 
+@@ -79,8 +122,7 @@ int board_init(void)
+ #if defined(CONFIG_HW_WATCHDOG)
+ 	hw_watchdog_init();
+ #endif /* defined(CONFIG_HW_WATCHDOG) */
+-	i2c_set_bus_num(0);
+-	if (read_eeprom() < 0)
++	if (siemens_ee_setup() < 0)
+ 		puts("Could not get board ID.\n");
+ #ifdef CONFIG_MACH_TYPE
+ 	gd->bd->bi_arch_number = CONFIG_MACH_TYPE;
+diff --git a/board/siemens/common/board.h b/board/siemens/common/board.h
+index 0d5b369028f..2b49348919a 100644
+--- a/board/siemens/common/board.h
++++ b/board/siemens/common/board.h
+@@ -18,4 +18,7 @@
+ #define SIEMENS_EE_ADDR_CHIP		0x120
+ #define SIEMENS_EE_ADDR_FACTORYSET	0x400
+ 
++int siemens_ee_setup(void);
++int siemens_ee_read_data(uint address, uchar *buffer, int len);
++
+ #endif /* _BOARD_COMMON_H_ */
+diff --git a/board/siemens/common/factoryset.c b/board/siemens/common/factoryset.c
+index 94c671389dc..2b3e36d5812 100644
+--- a/board/siemens/common/factoryset.c
++++ b/board/siemens/common/factoryset.c
+@@ -148,39 +148,14 @@ int factoryset_read_eeprom(int i2c_addr)
+ 	int i, pages = 0, size = 0;
+ 	unsigned char eeprom_buf[0x3c00], hdr[4], buf[MAX_STRING_LENGTH];
+ 	unsigned char *cp, *cp1;
+-#if CONFIG_IS_ENABLED(DM_I2C)
+-	struct udevice *bus, *dev;
+-	int ret;
+-#endif
+ 
+ #if defined(CONFIG_DFU_OVER_USB)
+ 	factory_dat.usb_vendor_id = CONFIG_USB_GADGET_VENDOR_NUM;
+ 	factory_dat.usb_product_id = CONFIG_USB_GADGET_PRODUCT_NUM;
+ #endif
+ 
+-#if CONFIG_IS_ENABLED(DM_I2C)
+-	ret = uclass_get_device_by_seq(UCLASS_I2C, SIEMENS_EE_I2C_BUS, &bus);
+-	if (ret)
+-		goto err;
+-
+-	ret = dm_i2c_probe(bus, i2c_addr, 0, &dev);
+-	if (ret)
+-		goto err;
+-
+-	ret = i2c_set_chip_offset_len(dev, 2);
+-	if (ret)
+-		goto err;
+-
+-	ret = dm_i2c_read(dev, SIEMENS_EE_ADDR_FACTORYSET, hdr, sizeof(hdr));
+-	if (ret)
+-		goto err;
+-#else
+-	if (i2c_probe(i2c_addr))
+-		goto err;
+-
+-	if (i2c_read(i2c_addr, SIEMENS_EE_ADDR_FACTORYSET, 2, hdr, sizeof(hdr)))
++	if (siemens_ee_read_data(SIEMENS_EE_ADDR_FACTORYSET, hdr, sizeof(hdr)))
+ 		goto err;
+-#endif
+ 
+ 	if ((hdr[0] != 0x99) || (hdr[1] != 0x80)) {
+ 		printf("FactorySet is not right in eeprom.\n");
+@@ -201,33 +176,16 @@ int factoryset_read_eeprom(int i2c_addr)
+ 	 * data after every time we got a record from eeprom
+ 	 */
+ 	debug("Read eeprom page :\n");
+-	for (i = 0; i < pages; i++) {
+-#if CONFIG_IS_ENABLED(DM_I2C)
+-		ret = dm_i2c_read(dev, (OFF_PG + i) * EEPR_PG_SZ,
+-				  eeprom_buf + (i * EEPR_PG_SZ), EEPR_PG_SZ);
+-		if (ret)
++	for (i = 0; i < pages; i++)
++		if (siemens_ee_read_data((OFF_PG + i) * EEPR_PG_SZ,
++					 eeprom_buf + (i * EEPR_PG_SZ), EEPR_PG_SZ))
+ 			goto err;
+-#else
+-		if (i2c_read(i2c_addr, (OFF_PG + i) * EEPR_PG_SZ, 2,
+-			     eeprom_buf + (i * EEPR_PG_SZ), EEPR_PG_SZ))
+-			goto err;
+-#endif
+-	}
+ 
+-	if (size % EEPR_PG_SZ) {
+-#if CONFIG_IS_ENABLED(DM_I2C)
+-		ret = dm_i2c_read(dev, (OFF_PG + pages) * EEPR_PG_SZ,
+-				  eeprom_buf + (pages * EEPR_PG_SZ),
+-				  size % EEPR_PG_SZ);
+-		if (ret)
+-			goto err;
+-#else
+-		if (i2c_read(i2c_addr, (OFF_PG + pages) * EEPR_PG_SZ, 2,
+-			     eeprom_buf + (pages * EEPR_PG_SZ),
+-			     (size % EEPR_PG_SZ)))
++	if (size % EEPR_PG_SZ)
++		if (siemens_ee_read_data((OFF_PG + pages) * EEPR_PG_SZ,
++					 eeprom_buf + (pages * EEPR_PG_SZ),
++					 size % EEPR_PG_SZ))
+ 			goto err;
+-#endif
+-	}
+ 
+ 	/* we do below just for eeprom align */
+ 	for (i = 0; i < size; i++)
+@@ -249,9 +207,8 @@ int factoryset_read_eeprom(int i2c_addr)
+ 
+ #if CONFIG_IS_ENABLED(TARGET_GIEDI) || CONFIG_IS_ENABLED(TARGET_DENEB)
+ 	/* get mac address for WLAN */
+-	ret = get_factory_record_val(cp, size, (uchar *)"WLAN1", (uchar *)"mac",
+-				     buf, MAX_STRING_LENGTH);
+-	if (ret > 0) {
++	if (get_factory_record_val(cp, size, (uchar *)"WLAN1", (uchar *)"mac",
++				   buf, MAX_STRING_LENGTH) > 0) {
+ 		cp1 = buf;
+ 		for (i = 0; i < 6; i++) {
+ 			factory_dat.mac_wlan[i] = hextoul((char *)cp1, NULL);
+diff --git a/board/siemens/draco/board.c b/board/siemens/draco/board.c
+index 814959583f7..a0a7d51db32 100644
+--- a/board/siemens/draco/board.c
++++ b/board/siemens/draco/board.c
+@@ -138,8 +138,8 @@ static int draco_read_nand_geometry(void)
+ 	struct am335x_nand_geometry geo;
+ 
+ 	/* Read NAND geometry */
+-	if (i2c_read(SIEMENS_EE_I2C_ADDR, SIEMENS_EE_ADDR_NAND_GEO, 2,
+-		     (uchar *)&geo, sizeof(struct am335x_nand_geometry))) {
++	if (siemens_ee_read_data(SIEMENS_EE_ADDR_NAND_GEO, (uchar *)&geo,
++				 sizeof(struct am335x_nand_geometry))) {
+ 		printf("Could not read the NAND geomtery; something fundamentally wrong on the I2C bus.\n");
+ 		return -EIO;
+ 	}
+@@ -155,27 +155,21 @@ static int draco_read_nand_geometry(void)
+ 	return 0;
+ }
+ 
++#ifdef CONFIG_SPL_BUILD
+ /*
+  * Read header information from EEPROM into global structure.
+  */
+ static int read_eeprom(void)
+ {
+-	/* Check if baseboard eeprom is available */
+-	if (i2c_probe(SIEMENS_EE_I2C_ADDR)) {
+-		printf("Could not probe the EEPROM; something fundamentally wrong on the I2C bus.\n");
+-		return 1;
+-	}
+-
+-#ifdef CONFIG_SPL_BUILD
+ 	/* Read Siemens eeprom data (DDR3) */
+-	if (i2c_read(SIEMENS_EE_I2C_ADDR, SIEMENS_EE_ADDR_DDR3, 2,
+-		     (uchar *)&settings.ddr3, sizeof(struct ddr3_data))) {
++	if (siemens_ee_read_data(SIEMENS_EE_ADDR_DDR3, (uchar *)&settings.ddr3,
++				 sizeof(struct ddr3_data))) {
+ 		printf("Could not read the EEPROM; something fundamentally wrong on the I2C bus.\nUse default DDR3 timings\n");
+ 		set_default_ddr3_timings();
+ 	}
+ 	/* Read Siemens eeprom data (CHIP) */
+-	if (i2c_read(SIEMENS_EE_I2C_ADDR, SIEMENS_EE_ADDR_CHIP, 2,
+-		     (uchar *)&settings.chip, sizeof(settings.chip)))
++	if (siemens_ee_read_data(SIEMENS_EE_ADDR_CHIP, (uchar *)&settings.chip,
++				 sizeof(settings.chip)))
+ 		printf("Could not read chip settings\n");
+ 
+ 	if (ddr3_default.magic == settings.ddr3.magic &&
+@@ -199,11 +193,8 @@ static int read_eeprom(void)
+ 	print_ddr3_timings();
+ 
+ 	return draco_read_nand_geometry();
+-#endif
+-	return 0;
+ }
+ 
+-#ifdef CONFIG_SPL_BUILD
+ static void board_init_ddr(void)
+ {
+ struct emif_regs draco_ddr3_emif_reg_data = {
+diff --git a/board/siemens/pxm2/board.c b/board/siemens/pxm2/board.c
+index 40aee7c8b3e..2b061aedfc7 100644
+--- a/board/siemens/pxm2/board.c
++++ b/board/siemens/pxm2/board.c
+@@ -160,7 +160,6 @@ void spl_siemens_board_init(void)
+ 		printf("voltage update failed\n");
+ 	}
+ }
+-#endif /* if def CONFIG_SPL_BUILD */
+ 
+ int read_eeprom(void)
+ {
+@@ -168,6 +167,7 @@ int read_eeprom(void)
+ 
+ 	return 0;
+ }
++#endif /* if def CONFIG_SPL_BUILD */
+ 
+ #if (defined(CONFIG_DRIVER_TI_CPSW) && !defined(CONFIG_SPL_BUILD)) || \
+ 	(defined(CONFIG_SPL_ETH) && defined(CONFIG_SPL_BUILD))
+diff --git a/board/siemens/rut/board.c b/board/siemens/rut/board.c
+index bad0b71ce2d..a530b841a97 100644
+--- a/board/siemens/rut/board.c
++++ b/board/siemens/rut/board.c
+@@ -38,6 +38,7 @@
+ #include "board.h"
+ #include "../common/factoryset.h"
+ 
++#ifdef CONFIG_SPL_BUILD
+ /*
+  * Read header information from EEPROM into global structure.
+  */
+@@ -46,7 +47,6 @@ static int read_eeprom(void)
+ 	return 0;
+ }
+ 
+-#ifdef CONFIG_SPL_BUILD
+ static void board_init_ddr(void)
+ {
+ struct emif_regs rut_ddr3_emif_reg_data = {
 -- 
 2.30.2
 
