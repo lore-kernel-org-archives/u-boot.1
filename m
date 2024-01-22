@@ -4,125 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AE75C4725D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 13:46:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7620BC47DAF
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 14:16:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D6D6879A3;
-	Mon, 22 Jan 2024 14:46:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+	by phobos.denx.de (Postfix) with ESMTP id B7499878A1;
+	Mon, 22 Jan 2024 15:16:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="IZpopDzJ";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="RTJG0sH4";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="GH/EeNRU";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="RTJG0sH4";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="GH/EeNRU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A79087B13; Mon, 22 Jan 2024 14:46:50 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6C44C877EC; Mon, 22 Jan 2024 15:16:38 +0100 (CET)
+Received: from smtp-out2.suse.de (smtp-out2.suse.de
+ [IPv6:2a07:de40:b251:101:10:150:64:2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B0C387B6C
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 14:46:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=suse.com
+ by phobos.denx.de (Postfix) with ESMTPS id 6A8C087960
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 15:16:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mbrugger@suse.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-40e8d3b29f2so38458195e9.1
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 05:46:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1705931207; x=1706536007; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
- :to:content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Uyq/pqSJVqrCjpWTu0NnTfWKSTKTn/WP1KVFttkOAmQ=;
- b=IZpopDzJDcWGD5qzI86uM4gYguIuJzIxWMn6AhATnSteAmPtvVZOS2vuVmSYlmaXEp
- sUick00NaMSxNbbEqzAtbPzfrHvd5DNipwlcxSrKAVkzwmYO6y6Cshq8YF9j0ER5lM4Z
- kXGc3NRzAY3sPyOG5BWuTd4PmscRkWqUNI2G7IAtQOcfCXz03oEUlSqPB0Rn4vYqc6/J
- zTQTIeiGSu6V3jS5lAGlnS9l0R9doek3yxUvTIdWoV3M8eh6wZMY9/PlYKs8oPuEOi9j
- uY/XYwOSQYJmRmRSxnvidnpg6Jw46lrhlMUvCfMAXuZMoBVTtnm9ggjIfsOF7ZIqKH+E
- ibxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705931207; x=1706536007;
- h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
- :to:content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Uyq/pqSJVqrCjpWTu0NnTfWKSTKTn/WP1KVFttkOAmQ=;
- b=hbw/+4WJOmM777s9p1zlq/191FOWniV8PnhTY5Svj6quuM1rBu62Ex2xY2oFqKuOHS
- 4G6hrbGzKHmhu/MUTCmYexJgbQTl8MFM9NSI5AP4amDQli49epEH4CtqFNxdUU88xGx7
- tYWXrCN6OAJb9d3CFZ1JQy7v7EPX7zMjL0teogXA0ie+zxjN8bwSAb14G11oeFzcTf+M
- quW2GxchMCKkw7RYarJwH4FPGf0MLFuQ3Pb0oT0WIeiLfQqv6R1YZJBzsrgklbcOqqxb
- nyQQF3edSVXNBWBeUK7cDg0ncl8w6XLIm1xIIZNLFcWSuZ9ImqylnQGgcNcajSCjhpV2
- TINA==
-X-Gm-Message-State: AOJu0YyjKqd05KF1Zba0vB0biF0Dm7YgavBsBlBxWdpeTEGnf6XdGBT1
- 2H61YXUwYrGWf1Ro+8aHxSeyXV1kLMqHsPl9SDFxJ16yiGGQTiQ9r8trRpeDebg=
-X-Google-Smtp-Source: AGHT+IEU3l34DQXW/gsLNtW9//3/x/0ShcLO7TydF86hF/Fn8Gqig4I6uaUO9qfm+iH9HMvAqrO0AA==
-X-Received: by 2002:a05:600c:4f42:b0:40e:b0fe:882d with SMTP id
- m2-20020a05600c4f4200b0040eb0fe882dmr236476wmq.131.1705931206848; 
- Mon, 22 Jan 2024 05:46:46 -0800 (PST)
-Received: from [192.168.2.177] ([207.188.161.188])
- by smtp.gmail.com with ESMTPSA id
- k23-20020a05600c0b5700b0040e596320bfsm3883730wmr.0.2024.01.22.05.46.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 Jan 2024 05:46:46 -0800 (PST)
-Message-ID: <1f04368a-ecf8-4ad8-abf8-ede1160867bb@suse.com>
-Date: Mon, 22 Jan 2024 14:46:45 +0100
+ dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=iivanov@suse.de
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 587281FC04;
+ Mon, 22 Jan 2024 14:16:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1705932995; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=bZnrwX/0XUrW7jCVtQiuo3XgOVwUJu7XbUOFgVGM8jo=;
+ b=RTJG0sH4nrit36QHNL4LXRW86xcYiQXE1Jyv5D6bqLjN5LRTOo4DLv1MfRQzQsRkB+W7rG
+ wSfNw2D6UnNNQJpUFWDttkXbBq22xtJKpd9xQfkCGDDwTbkwPc2E4v4LBV3ptt5WeNpOBY
+ gQ1o84qy4rd1Lg2Ih4qotjs+OJrcsVA=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1705932995;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=bZnrwX/0XUrW7jCVtQiuo3XgOVwUJu7XbUOFgVGM8jo=;
+ b=GH/EeNRUBdLUCOlglIUQu0rkNekLCKmiaPZcLpI8JLKcnutL2YF3yX7JdCY6ah3oHTIvkg
+ zH6d/c1JQi6LUrCQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1705932995; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=bZnrwX/0XUrW7jCVtQiuo3XgOVwUJu7XbUOFgVGM8jo=;
+ b=RTJG0sH4nrit36QHNL4LXRW86xcYiQXE1Jyv5D6bqLjN5LRTOo4DLv1MfRQzQsRkB+W7rG
+ wSfNw2D6UnNNQJpUFWDttkXbBq22xtJKpd9xQfkCGDDwTbkwPc2E4v4LBV3ptt5WeNpOBY
+ gQ1o84qy4rd1Lg2Ih4qotjs+OJrcsVA=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1705932995;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=bZnrwX/0XUrW7jCVtQiuo3XgOVwUJu7XbUOFgVGM8jo=;
+ b=GH/EeNRUBdLUCOlglIUQu0rkNekLCKmiaPZcLpI8JLKcnutL2YF3yX7JdCY6ah3oHTIvkg
+ zH6d/c1JQi6LUrCQ==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 2455D13995;
+ Mon, 22 Jan 2024 14:16:35 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([10.150.64.162])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id dJ/1A8N4rmUNUgAAD6G6ig
+ (envelope-from <iivanov@suse.de>); Mon, 22 Jan 2024 14:16:35 +0000
+Date: Mon, 22 Jan 2024 16:16:34 +0200
+From: "Ivan T. Ivanov" <iivanov@suse.de>
+To: Stefan Wahren <wahrenst@gmx.net>
+Cc: Jens Maus <mail@jens-maus.de>, u-boot@lists.denx.de
+Subject: Re: Re: [PATCH v4 0/6] rpi5: initial support
+Message-ID: <uwh4skanpw4c42t5iefqiawfns2wglxl4rizmaexeaetyvahf3@yibnd3owvcn2>
+References: <25AB43C7-829F-4F62-AC8E-3284B22ACB03@jens-maus.de>
+ <E7BFDAEE-00A9-463A-AF73-75101AFF2BC6@suse.de>
+ <FB66DFF3-03B0-4DA5-8916-AB80CA6C6EB5@jens-maus.de>
+ <dvpwizpui6a52dfmy57ghv4zmplvgqvow6oec7x5opwzh63zzl@jehyglofr6yh>
+ <489FBAE5-501A-49F6-894D-58BE5C5429CC@jens-maus.de>
+ <A0746263-646C-40C6-A2A6-659C39385E8B@jens-maus.de>
+ <246035ba-0090-4cc3-982e-1de837ec7340@gmx.net>
+ <6E2D7E91-E869-48C6-8CE8-0B410A2B67B9@jens-maus.de>
+ <ebffa598-6945-4a03-abe4-fe519df5fbfd@gmx.net>
+ <223DA3F8-B17B-44CF-B247-12DEBD100A75@suse.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 0/6] rpi5: initial support
-Content-Language: en-US, ca-ES, es-ES
-To: "Ivan T. Ivanov" <iivanov@suse.de>, Peter Robinson <pbrobinson@gmail.com>
-Cc: Dmitry Malkin <dmitry@bedrocksystems.com>,
- Thomas Fitzsimmons <fitzsim@fitzsim.org>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>,
- wahrenst@gmx.net, florian.fainelli@broadcom.com, u-boot@lists.denx.de
-References: <20240110122908.31612-1-iivanov@suse.de>
-From: Matthias Brugger <mbrugger@suse.com>
-Autocrypt: addr=mbrugger@suse.com; keydata=
- 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
- PVrr2NoUqi/bxI8fFQJD1jVj8K0=
-In-Reply-To: <20240110122908.31612-1-iivanov@suse.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <223DA3F8-B17B-44CF-B247-12DEBD100A75@suse.de>
+Authentication-Results: smtp-out2.suse.de;
+ dkim=pass header.d=suse.de header.s=susede2_rsa header.b=RTJG0sH4;
+ dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b="GH/EeNRU"
+X-Spamd-Result: default: False [0.17 / 50.00]; ARC_NA(0.00)[];
+ RCVD_VIA_SMTP_AUTH(0.00)[];
+ R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+ FROM_HAS_DN(0.00)[]; RCPT_COUNT_THREE(0.00)[3];
+ FREEMAIL_ENVRCPT(0.00)[gmx.net]; TO_MATCH_ENVRCPT_ALL(0.00)[];
+ MIME_GOOD(-0.10)[text/plain]; TO_DN_SOME(0.00)[];
+ RCVD_COUNT_THREE(0.00)[3];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ DKIM_TRACE(0.00)[suse.de:+]; MX_GOOD(-0.01)[];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim];
+ FREEMAIL_TO(0.00)[gmx.net]; FUZZY_BLOCKED(0.00)[rspamd.com];
+ FROM_EQ_ENVFROM(0.00)[]; MIME_TRACE(0.00)[0:+];
+ MID_RHS_NOT_FQDN(0.50)[]; RCVD_TLS_ALL(0.00)[];
+ BAYES_HAM(-0.02)[54.58%];
+ RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Rspamd-Queue-Id: 587281FC04
+X-Spamd-Bar: /
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -139,72 +139,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
+On 01-22 13:57, Ivan T. Ivanov wrote:
+> > Am 20.01.24 um 10:48 schrieb Jens Maus:
+> >> Hi,
+> >> 
+> >>> Am 20.01.2024 um 10:22 schrieb Stefan Wahren <wahrenst@gmx.net>:
+> >>> 
+> >>> Am 19.01.24 um 22:26 schrieb Jens Maus:
+> >>>> I actually do have some good and bad news:
+> >>>> 
+> >>>> 1. Good news: I got u-boot finally showing up with my RaspberryPi5 8GB both on the HDMI and on the serial debug UART like you reported.
+> >>>> 
+> >>>> 2. Bad news: I actually got it working by downgrading the rpi-eeprom to the same 2023/10/30 (VERSION:30de0ba5) version like you have.
+> >>>> 
+> > 
+> > One idea would be to enable early debug in U-Boot (no idea how to
+> > achieve this). I assume U-Boot crashes before it's able to print the
+> > first line, but it's hard to believe it crashes at the very first
+> > instruction of U-Boot. So with some luck we should be able to narrow
+> > done the cause.
+> 
+> I was able to enable early debug UART in U-Boot and I will try to
+> find what is happening, once I get some free cycles.
 
-On 10/01/2024 13:29, Ivan T. Ivanov wrote:
-> Hi,
-> 
-> These patches are slight update for patches posted earlier here[1].
-> They are adding basic support for RPi5 and are based on v2 series
-> from Dmitry Malkin[2].
-> 
-> What changed:
-> 
-> * Initial memory map now includes whole first 1GB of DRAM. At runtime,
->    the firmware will adjust this size depending on whether an HDMI cable
->    is plugged in or not. If there is HDMI monitor connected it will reserve
->    framebufer memory region and will add simple-framebuffer device into
->    devicetree.
-> 
-> * Dynamically calculate bits per pixel in video driver. This works
->    on all prevous RPi's models that I have.
-> 
-> * I am dropping PCIe patch for now. I made some progress on porting changes
->    from vendor Linux tree to U-Boot. Unfortunatly testing it is little bit
->    tricky. They are many devices behind PCIe, but more or less all of them
->    requires missing either "reset-controller" or "clock-controller" or
->    "pin-controller" drivers. I was able to probe "cdns,macb" device, but
->    access to ethernet PHY over MDIO bus is stucking. Then I ported
->    "raspberrypi,rp1-adc" driver from vendor Linux tree, but it requires
->    missing clock. And on top of that machine that I used for developing this
->    crashed and I lost my PCIe changes :-|. Anyway.
-> 
-> These patches allows me to boot current openSUSE Tumbleweed without
-> modification. I can see serial console log and boot process on HDMI
-> connected monitor.
-> 
-> I think these patches should be enough for start. Please consider for
-> inclusion.
-> 
-> Thanks,
-> Ivan
-> 
-> [1] https://lore.kernel.org/all/20231218210341.30073-1-iivanov@suse.de/
-> [2] https://lore.kernel.org/all/CAKRNjQ0dsWozGo4n8g58m4cCEk3n=qx1R+L24WBgpo-iP1yo7A@mail.gmail.com/
-> 
-> Dmitry Malkin (2):
->    rpi5: add initial memory map for bcm2712
->    rpi5: Use devicetree as alternative way to read IO base addresses
-> 
-> Ivan T. Ivanov (4):
->    rpi5: Use devicetree to retrieve board revision
->    bcm2835: Dynamically calculate bytes per pixel parameter
->    mmc: bcmstb: Add support for bcm2712 SD controller
->    configs: rpi_arm64: enable SDHCI BCMSTB driver
-> 
+Ok, this was relatively easy to find :-)
 
-In the meantime I was able to test this series. So here my:
-Tested-by: Matthias Brugger <mbrugger@suse.com>
+New versions of EEPROM firmware change “kernel”/U-Boot load address 
+from 0x80000 to 0x200000. And because on RPi’s CONFIG_TEXT_BASE is
+hardcoded to 0x80000 code run through the fields. 
 
->   arch/arm/mach-bcm283x/include/mach/base.h  |   5 +-
->   arch/arm/mach-bcm283x/include/mach/mbox.h  |   3 +-
->   arch/arm/mach-bcm283x/include/mach/sdhci.h |   3 +-
->   arch/arm/mach-bcm283x/include/mach/timer.h |   3 +-
->   arch/arm/mach-bcm283x/include/mach/wdog.h  |   3 +-
->   arch/arm/mach-bcm283x/init.c               |  74 ++++++++-
->   board/raspberrypi/rpi/rpi.c                |  22 ++-
->   configs/rpi_arm64_defconfig                |   1 +
->   drivers/mmc/bcmstb_sdhci.c                 | 173 ++++++++++++++++++++-
->   drivers/video/bcm2835.c                    |  18 ++-
->   10 files changed, 282 insertions(+), 23 deletions(-)
-> 
+Hopefully simple patch like bellow make it work fine in older and
+newer EEPROM firmware versions.
+
+Regards,
+Ivan  
+
+diff --git a/configs/rpi_arm64_defconfig b/configs/rpi_arm64_defconfig
+index 11ede9435d..ce64f9554f 100644
+--- a/configs/rpi_arm64_defconfig
++++ b/configs/rpi_arm64_defconfig
+@@ -1,6 +1,7 @@
+ CONFIG_ARM=y
+ CONFIG_ARCH_BCM283X=y
+ CONFIG_TEXT_BASE=0x00080000
++CONFIG_POSITION_INDEPENDENT=y
+
