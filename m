@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEC51C4725D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 12:42:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AC22C4725D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 12:43:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D361879BE;
-	Mon, 22 Jan 2024 13:42:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D6D73879B2;
+	Mon, 22 Jan 2024 13:43:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="m7nUrQvn";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Pwc39a1m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFB3F879BE; Mon, 22 Jan 2024 13:42:04 +0100 (CET)
+ id 8D58D879CB; Mon, 22 Jan 2024 13:43:43 +0100 (CET)
 Received: from sin.source.kernel.org (sin.source.kernel.org
  [IPv6:2604:1380:40e1:4800::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2D80879BD
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 13:42:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9248987812
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 13:43:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 562E8CE2911;
- Mon, 22 Jan 2024 12:41:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A5A0DC43390;
- Mon, 22 Jan 2024 12:41:51 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id BAE5ECE2975;
+ Mon, 22 Jan 2024 12:43:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F7D1C433C7;
+ Mon, 22 Jan 2024 12:43:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705927317;
- bh=6YKrTNThHmZ17dDRB10/KjHfz3u1V5UvO9XdDHHgt/g=;
+ s=k20201202; t=1705927417;
+ bh=ZKRlQl+8PaImgsyKwewdXqP8qjLYmZaf/jkKC1WiD7g=;
  h=Date:Subject:To:References:From:In-Reply-To:From;
- b=m7nUrQvnTtBGh5x9TW/E43N4VG0mbjUn474L4Wo/pWhxqUHWxKBZ+J5y6/2esostN
- dt0bjIb8LozdQJo4MYqWid5dpzpkgpHZAGk+8K6d0JWoLY0Ptjou3fDaqYwuR4DnQd
- krgBzr1EM1kOAEp8+FBUQH335kj3C7HTrG5QfbNRv8fXN4B9MVd3xyIjBPowVuSFAr
- HIlqpalQW60h4CW52/ELbw5LZF8O6zA45IdmSKQ+EvPVjnqXY24arNLOQ+fEnCjFNe
- Q8/xF6r3YRBkS4JrEkDfoBzScqas8cHe9jrZlo9ghAVY6BMCsWONXGMtn5VFwPybxi
- OWIFTRwTOgsWg==
-Message-ID: <912c197e-1e5d-40ea-87d5-6ae2f8844372@kernel.org>
-Date: Mon, 22 Jan 2024 14:41:51 +0200
+ b=Pwc39a1myLGsfaj5n3wdE4NpCg4IPdcQPnajI52mPyqXY+w3sS+pHOhp5c64r7wL/
+ Uv9Fs+aK/Y246ScMAW/UXhQjROWp+w55q2gbTyO8QH2uCut3UxNq8Dj9IQgJOkXdNX
+ /KMSiS/Z1o7zdgk/xi5ppyFM38qm5X0E4sSgaOQkTPVYUuom2SUxrH0bdxu5/wWB5F
+ 5VMzH0BPT9pCfsXXLYUh8u0LZz3wZUq1RIKSCFRHf/YwhnD0tnB0s3/WtFtJ1TG/mH
+ h0J20WDcDdX+BRof5aM4yoqW2CVbyY+yhOEVMBjcyttEfxisAADlW2oEvKWqsdVlh1
+ v4Xb/cyu63EYQ==
+Message-ID: <e38ee3cb-8ae6-4890-a6b0-804c40508182@kernel.org>
+Date: Mon, 22 Jan 2024 14:43:31 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 06/16] soc: ti: k3-socinfo: Add entry for J784S4 SoC
+Subject: Re: [PATCH v8 07/16] arm: mach-k3: j784s4: Add clk and power support
 Content-Language: en-US
 To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
@@ -64,9 +64,9 @@ To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>,
  Sinthu Raja M <sinthu.raja@mistralsolutions.com>,
  Udit Kumar <u-kumar1@ti.com>
 References: <20240119175043.3904751-1-a-nandan@ti.com>
- <20240119175043.3904751-7-a-nandan@ti.com>
+ <20240119175043.3904751-8-a-nandan@ti.com>
 From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20240119175043.3904751-7-a-nandan@ti.com>
+In-Reply-To: <20240119175043.3904751-8-a-nandan@ti.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -88,10 +88,13 @@ X-Virus-Status: Clean
 
 
 On 19/01/2024 19:50, Apurva Nandan wrote:
-> Add support for J784S4 SoC Identification.
+> Add clk and device data which can be used by respective drivers
+> to configure clocks and PSC.
 > 
 > Signed-off-by: Hari Nagalla <hnagalla@ti.com>
 > Signed-off-by: Apurva Nandan <a-nandan@ti.com>
+> Reviewed-by: Sean Anderson <seanga2@gmail.com>
 > Reviewed-by: Nishanth Menon <nm@ti.com>
+> Reviewed-by: Bryan Brattlof <bb@ti.com>
 
 Reviewed-by: Roger Quadros <rogerq@kernel.org>
