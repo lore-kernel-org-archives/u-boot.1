@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45DB8C4725D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 13:01:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27D5EC4725D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 13:03:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FB21879CB;
-	Mon, 22 Jan 2024 14:01:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8A6D28796E;
+	Mon, 22 Jan 2024 14:03:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VhhfiU22";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Yld6+wtO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FF658796E; Mon, 22 Jan 2024 14:01:56 +0100 (CET)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id B8DF48796E; Mon, 22 Jan 2024 14:03:06 +0100 (CET)
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4094A87BF9
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 14:01:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AB1487960
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 14:03:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-29054ccb9e7so338205a91.1
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 05:01:54 -0800 (PST)
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-1d3ae9d1109so7504715ad.0
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 05:03:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705928512; x=1706533312; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IBCy9ldY/PVqkbAe1II8b9xlnjraYe1NMOdaxYqK0BI=;
- b=VhhfiU22XoG9tdXMRNV8l5lqVmzU59nhsQBSFSU5zHGM7v9VO39RRflwLeG43hLE3i
- T4eY81D6XkeQ2wHzT2V5r+eiJ7/CQjzQRak2Q+xcBctTvOuCxFHjbGiilvghkQ12ywvn
- Cc19OHAErjjyp2uc0q0mcMUAR378TtsEXUh4gFYArPgGYbufYGiegZvMKF7ec7opsAON
- 5M/1Pk57hQifMiokFngelTmnULqnP1MvA8MiIf/mc8NSIlRoF8LCjBi9qs5B1lKEBz3F
- KTTp4L0oOGX+e/W6UM3Pj2ao+SGroOqn+Zu8dnA0xaejwzZhZw5owgiIM+BDcFhg6Ic+
- qYew==
+ d=gmail.com; s=20230601; t=1705928582; x=1706533382; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=g4WWq8Z1wj+yoT2vDtBlhYNpKh3Ops0F94mi3mHupXk=;
+ b=Yld6+wtOEKQ3F/9nmeRguAGQuEIVx70amGFQ/gDl/GrKn55CLObBzje/W+3Oszk4f/
+ QyX5B7Mo/ymEqiRxIeSizCFW9NalSu2q3ToV4G6FUqDOXfAOndod3wGWWIUGGyfKP7uX
+ XbQ1x6tZ83XCym+SECkpbSWRAnir0BBG5yuEeL3ZQ0ATA1ezGzzvrrROywMSlujXFj7W
+ ZpwcqAVmP75CBDUbvN9NyybPNdaDGaOMZ5owrjxZ2yfxoHiflJDQlgvck3Fx+7per3iD
+ KnQSAX4PoUHJWUMoE+3RY2PUxr4ZauhDWKjfLGVIsWtagq/AfPlw5LP1LbNcW9j3xT2g
+ iMPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705928512; x=1706533312;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IBCy9ldY/PVqkbAe1II8b9xlnjraYe1NMOdaxYqK0BI=;
- b=ecyGQQ5EJpxX351FOo3pcVjWPnyPKZxlIJBzhmq4e3DJarZWZiPleNwdcwIKKPlJFD
- 6MUHWBI/OdO9SwGizlJgeemDkbhlYZKaiXJhlQqLqW5Pgt2HluBMlBRNaCiWb9JNe0rS
- d2KQkcbuuv8q335xvPxG1u1CTuso4QfDNuzHodyqquAWxnZBVQd3Rq9LSTS8Yrc332c7
- KrtB/D9mfu6kNqEgt4uPaOugb57CQWQVaiGskejjyZLhja09SMdD6AigQjr8eNvEQTql
- avUzFPhHW1SzD2bARuZhUG0z6CX9JlJb59J7FRsRBN/cFi/ZQYDqGSCD42iZIxfA0YwB
- 3oVw==
-X-Gm-Message-State: AOJu0YyYRD2BwZouxx5f9d5ZcOGax1FBQwCJfBIdbRS0YzZVRpIyk6f6
- 1YoJx+9xk01RncnplxqknQKC0/h9ciEfQrLeSbypVA/rikOmRI9BwWmXq8eDbs9zfgHmIfS9FNj
- /ZWh1f1wrewt5FCj94gcRNCWPMh4=
-X-Google-Smtp-Source: AGHT+IGSHRtHHdhOXfayL1Yf47qTj3L66qo2qTnWAxXoMZ1TtBxXL6qt8q8jJuoElYz8FB61G9kvx0DVgv7ZUl+mbO0=
-X-Received: by 2002:a17:90a:cb8c:b0:28e:8e5b:73fd with SMTP id
- a12-20020a17090acb8c00b0028e8e5b73fdmr5210904pju.4.1705928512334; Mon, 22 Jan
- 2024 05:01:52 -0800 (PST)
-MIME-Version: 1.0
-References: <20240120003610.124981-1-marex@denx.de>
-In-Reply-To: <20240120003610.124981-1-marex@denx.de>
+ d=1e100.net; s=20230601; t=1705928582; x=1706533382;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=g4WWq8Z1wj+yoT2vDtBlhYNpKh3Ops0F94mi3mHupXk=;
+ b=VLVJOBYBjROGkQ04NIuziDq1c6fua6yB0UK1knDw/LD75aM+6jMnGZaduQ0zATb5n6
+ +i4VG3znmtgiq1FLbmHVQwSlD55D7+5RfVWqUbh7GXT5S+bUQh911EKmHmNaMMLFpmrI
+ iNTs9EDHKctnBqU8DjkD7LjW6tsTwi3ilJTe/60oUAtX/aNZ66/X6gmySb+Yi9LPrS7B
+ 3BQ1/Y+yc4ExkDPCtzhJNsuYBv+KC0RbAt+GA9rffU/Rp19gIJir03taTRdX2q22gGdE
+ YYzKmVaDP0DWH0HLJGI8l0800C8JEVcosaGga6pTxxZrfxpvlXVlLE6QQivhrsDq4DdF
+ iZ/A==
+X-Gm-Message-State: AOJu0YzrCBJgZiUS9Il9WJPrDSSJ00EZrmGW6qdTuRjrUSAPYMXg8Frw
+ UkZmVmzw++or09NP1Ds11E7xr7pNxEmMMU7m0w9ZlsYkFreM+Z8CvjD0Rai9
+X-Google-Smtp-Source: AGHT+IF1ftPqM0zug5l/wZ0ZsHao5ie6i8jBzZmXwQwq0hcTuUl10+eBNS0XK2fsO7l+d994uAg2SA==
+X-Received: by 2002:a17:902:ee11:b0:1d6:f13b:e58e with SMTP id
+ z17-20020a170902ee1100b001d6f13be58emr8440352plb.2.1705928581951; 
+ Mon, 22 Jan 2024 05:03:01 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:e37a:e59d:de82:7f2b])
+ by smtp.gmail.com with ESMTPSA id
+ y6-20020a170902ed4600b001d73ac05559sm3006662plb.184.2024.01.22.05.03.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Jan 2024 05:03:01 -0800 (PST)
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 22 Jan 2024 10:01:41 -0300
-Message-ID: <CAOMZO5Bkrnn9oUnFrj5BBqiBSrFwQs4eaNMwoyt87S7oBXW-Pw@mail.gmail.com>
-Subject: Re: [PATCH] ARM: imx: Enable kaslrseed command on DH i.MX8M Plus DHCOM
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>,
- Stefano Babic <sbabic@denx.de>, u-boot@dh-electronics.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: trini@konsulko.com
+Cc: sbabic@denx.de,
+	u-boot@lists.denx.de
+Subject: Pull request: Please pull u-boot-imx-20240115
+Date: Mon, 22 Jan 2024 10:02:58 -0300
+Message-Id: <20240122130258.1161602-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,16 +89,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jan 19, 2024 at 9:36=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
->
-> Linux 6.6.y with KASLR enabled would print the following message on boot:
-> "
-> KASLR disabled due to lack of seed
-> "
-> Enable the 'kaslrseed' command so a random number seed can be pulled
-> from CAAM and inserted into the /chosen node 'kaslr-seed' property of
-> Linux kernel DT before boot, thus letting KASLR work properly.
->
-> Signed-off-by: Marek Vasut <marex@denx.de>
+Hi Tom,
 
-Applied, thanks.
+Please pull from u-boot-imx, thanks.
+
+The following changes since commit 3c04fcf3137d5f694d52b8f355373e4baabe5f78:
+
+  Merge patch series "k3-j721e: beagleboneai: Fix USB" (2024-01-20 11:39:13 -0500)
+
+are available in the Git repository at:
+
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20240122
+
+for you to fetch changes up to a80e0e7711a2b2890a583d88dcd9af978ddada32:
+
+  ARM: imx: Enable kaslrseed command on DH i.MX8M Plus DHCOM (2024-01-22 08:40:02 -0300)
+
+u-boot-imx-master-20240122
+--------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/19406
+
+- Allow i.MX8M Plus DHCOM to operate in overdrive mode.
+- Allow i.MX8M Plus eDM SBC to operate in overdrive mode.
+- Enable the 'kaslrseed' command on DH i.MX8M Plus DHCOM.
+- Select LTO by default on i.MX8M.
+- Convert pico-dwarf/hobbit-imx6ul to CONFIG_DM_SERIAL.
+- Fix 'reset' command on wandboard.
+
+----------------------------------------------------------------
+Fabio Estevam (3):
+      imx8m: Enable LTO by default
+      wandboard: Convert to watchdog driver model
+      pico-dwarf/hobbit-imx6ul: Convert to CONFIG_DM_SERIAL
+
+Marek Vasut (3):
+      ARM: imx: Enable SPL_BOARD_INIT on DH i.MX8M Plus DHCOM
+      ARM: imx: Configure GIC clock parent on Data Modul i.MX8M Plus eDM SBC
+      ARM: imx: Enable kaslrseed command on DH i.MX8M Plus DHCOM
+
+ arch/arm/dts/imx6qdl-wandboard-u-boot.dtsi  | 10 ++++++++++
+ arch/arm/mach-imx/imx8m/Kconfig             |  1 +
+ board/data_modul/imx8mp_edm_sbc/spl.c       | 13 +++++++++++++
+ configs/imx8mp_data_modul_edm_sbc_defconfig |  1 +
+ configs/imx8mp_dhcom_pdk2_defconfig         |  3 +++
+ configs/imx8mp_dhcom_pdk3_defconfig         |  3 +++
+ configs/pico-dwarf-imx6ul_defconfig         |  1 +
+ configs/pico-hobbit-imx6ul_defconfig        |  1 +
+ configs/wandboard_defconfig                 |  3 +++
+ 9 files changed, 36 insertions(+)
