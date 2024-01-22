@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54760C46CD2
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 22:40:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 763A0C47DDC
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 22:40:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40F4F87BFD;
+	by phobos.denx.de (Postfix) with ESMTP id B8A6287C8A;
 	Mon, 22 Jan 2024 23:39:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tLxiYOuh";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Rq6i1pE4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CAAC987C08; Mon, 22 Jan 2024 23:39:31 +0100 (CET)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id CFEC287C97; Mon, 22 Jan 2024 23:39:32 +0100 (CET)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA5E187BF6
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 23:39:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AB2DF87BFD
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 23:39:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-5ff88cbbcceso28858267b3.2
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 14:39:29 -0800 (PST)
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-dbed0710c74so3298368276.1
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 14:39:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705963168; x=1706567968; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1705963169; x=1706567969; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0h/E/soSVngWQTI2UyOFcYX19QLzklxMOULj1K/Goa4=;
- b=tLxiYOuh/HFVNSfgbEqd7CGOXTdg6rdwJ38waGOYnqFu3Yf/BYa+DoN0F63DhEaLV3
- xjTyNd37u8lViuMX13ca5jw8/j0TdC4PF2BV6/RawmyEBm6yHexPU5q5SsGDM+Bim3+g
- LBqHLoDVoW9CklQ474NC2kwzPOpCKAwLyigPY=
+ bh=YSWmxN4PZUsy5m1VPE5GWVk//BCRKJkgXHNv6QOq1F8=;
+ b=Rq6i1pE4Nx8gIYtawgHBofyJhrVDdeHo070Wta6JQy8F08yD7ThSvQCKeeRHxGT4JS
+ E4vrsi3SrKpd8qeC9xqbz9haI7vJAPjo5luAvJrlEbmC3shydHkq/Sg7bHjP8bzj6CLl
+ 2fKHJ23NJRBdw645Qu1TnPoDFU25B85Dbg/do=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705963168; x=1706567968;
+ d=1e100.net; s=20230601; t=1705963169; x=1706567969;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0h/E/soSVngWQTI2UyOFcYX19QLzklxMOULj1K/Goa4=;
- b=d0+eNevkYBAkR+lo+BJgZlFohy8hS43iw9djzrBxBD2gUf1CEpBG0TWXBK3Z70DYMl
- AGkZC4w33hFkFEbH2kUwbMcAyd/AjX0vVmHkxZrGgK+nEBKWFT4GE+2ddEnVVnV2hAGK
- 0hZFoU8nICQ8+56L1A4io4kuPdp5QLb5RN5hhhvmN2rD7vRCZ+MxZvSwTNc9ubDOaNoS
- Rtm1Kj+HUVa2O98vu6nOtLRZ7WNG+og03Esrib9Yi48WtHqxfgnIwdZbsQiSK3NP65cy
- n4asU15ezDyUYRt+hrTplWzFFajh0T4h9mOL0zN+X6FfX3rY5FPKYLhCPEWBNhFL8coz
- FSUA==
-X-Gm-Message-State: AOJu0Yy55eRE0bCxlOjpwp4/zAJi9YeCdd1WUGqi6UiKbheOV0Z6q6fE
- q/W5Y7jXMTteCgS8wmQhg0PlSJ5v9NAR2EXQDsvxGTGZfGSxrwChLYn0gD477WKT+YqzR4tlJel
- Z
-X-Google-Smtp-Source: AGHT+IHWQrIMUaDZ3MIgEaiLZ1yCv8lasIWPvRPtq8bI3HaRIDOKw8SeEG8l6+6EhsoIXn0iq+5h0A==
-X-Received: by 2002:a05:6902:2185:b0:dc2:239d:b01c with SMTP id
- dl5-20020a056902218500b00dc2239db01cmr3024474ybb.3.1705963168103; 
- Mon, 22 Jan 2024 14:39:28 -0800 (PST)
+ bh=YSWmxN4PZUsy5m1VPE5GWVk//BCRKJkgXHNv6QOq1F8=;
+ b=un9BqtQTuPaET7RKUhn0tk9/HBrjgd3c1sikeG1ZFGCPJIm3jeGt/DNDY67dLPbDzS
+ BQVvmWg3jqnDhHNICyf2ElJEgzhBdq7t1s3HOJQVBmEc+hROExEQjz2g3MYnO+O0ACWa
+ U6U7y86g90vB/zJXGkdtCQu3cXztXAWx5X82Ot7IEhNalidC3fnsOMqgULV+oJOwtOHG
+ ru7lUSgr3szUwQMXbIeR4lOmmjqkg5OgM7Y/iuY34a7R//4F99Fee/XlieuHzcwLVYGk
+ 4vEDE55ZqR/gHsn9Id0Ryyzo19ZmiEm5tOdiOJ1xt+uS1OJUt9oNkG0iqOLIYJvbRLvq
+ ZWnQ==
+X-Gm-Message-State: AOJu0Yy6ptt11e8Wc9JqIaQHcPhedpwv1VNGb0vbKUP4XVWzSEm9NzWt
+ KqkecwQsUYxpE5eefQyjG6NqPvx3c1PY/nJvt1d92uqbfTErtjJYWxtlLo7p0z9j4nbbhHD3//v
+ p
+X-Google-Smtp-Source: AGHT+IGOglM+jU530IwIp0kOsJUkNtNp7Z9l4rzxMrF40J3lsoeevxEmb48o4D9Mq607EOplTXRKAw==
+X-Received: by 2002:a25:9243:0:b0:dc2:2327:fcff with SMTP id
+ e3-20020a259243000000b00dc22327fcffmr3044963ybo.29.1705963169070; 
+ Mon, 22 Jan 2024 14:39:29 -0800 (PST)
 Received: from bill-the-cat..
  (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- c18-20020a5b0bd2000000b00dc255105656sm1773243ybr.4.2024.01.22.14.39.27
+ c18-20020a5b0bd2000000b00dc255105656sm1773243ybr.4.2024.01.22.14.39.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jan 2024 14:39:27 -0800 (PST)
+ Mon, 22 Jan 2024 14:39:28 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Subject: [PATCH 08/16] edison: Remove empty config header
-Date: Mon, 22 Jan 2024 17:39:12 -0500
-Message-Id: <20240122223920.3630168-8-trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+	Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH 09/16] efi-x86_app: Remove empty config header
+Date: Mon, 22 Jan 2024 17:39:13 -0500
+Message-Id: <20240122223920.3630168-9-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240122223920.3630168-1-trini@konsulko.com>
 References: <20240122223920.3630168-1-trini@konsulko.com>
@@ -91,52 +92,61 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Now that we support having CONFIG_SYS_CONFIG_NAME be unset to indicate a
-lack of board.h file, unset this on the edison platform and remove
+lack of board.h file, unset this on the efi-x86_app* platforms and remove
 the otherwise empty file.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 ---
- board/intel/edison/Kconfig     | 3 ---
- board/intel/edison/MAINTAINERS | 1 -
- include/configs/edison.h       | 4 ----
- 3 files changed, 8 deletions(-)
- delete mode 100644 include/configs/edison.h
+ board/efi/efi-x86_app/Kconfig     | 3 ---
+ board/efi/efi-x86_app/MAINTAINERS | 2 --
+ include/configs/efi-x86_app.h     | 4 ----
+ 3 files changed, 9 deletions(-)
+ delete mode 100644 include/configs/efi-x86_app.h
 
-diff --git a/board/intel/edison/Kconfig b/board/intel/edison/Kconfig
-index 5efda4b3a554..daa8d2035cd5 100644
---- a/board/intel/edison/Kconfig
-+++ b/board/intel/edison/Kconfig
+diff --git a/board/efi/efi-x86_app/Kconfig b/board/efi/efi-x86_app/Kconfig
+index ecd08d73146a..f9cbef0a864c 100644
+--- a/board/efi/efi-x86_app/Kconfig
++++ b/board/efi/efi-x86_app/Kconfig
 @@ -9,9 +9,6 @@ config SYS_VENDOR
  config SYS_SOC
- 	default "tangier"
+ 	default "efi"
  
 -config SYS_CONFIG_NAME
--	default "edison"
+-	default "efi-x86_app"
 -
- config SYS_MALLOC_LEN
- 	default 0x08000000
- 
-diff --git a/board/intel/edison/MAINTAINERS b/board/intel/edison/MAINTAINERS
-index 4bc4a00c8ad8..26b27c5dfe15 100644
---- a/board/intel/edison/MAINTAINERS
-+++ b/board/intel/edison/MAINTAINERS
-@@ -2,5 +2,4 @@ Intel Edison Board
- M:	Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+ config BOARD_SPECIFIC_OPTIONS # dummy
+ 	def_bool y
+ 	imply VIDEO_EFI
+diff --git a/board/efi/efi-x86_app/MAINTAINERS b/board/efi/efi-x86_app/MAINTAINERS
+index 584619c51dff..693f367311bc 100644
+--- a/board/efi/efi-x86_app/MAINTAINERS
++++ b/board/efi/efi-x86_app/MAINTAINERS
+@@ -3,7 +3,6 @@ M:	Simon Glass <sjg@chromium.org>
  S:	Maintained
- F:	board/intel/edison
--F:	include/configs/edison.h
- F:	configs/edison_defconfig
-diff --git a/include/configs/edison.h b/include/configs/edison.h
+ F:	board/efi/Kconfig
+ F:	board/efi/efi-x86_app/
+-F:	include/configs/efi-x86_app.h
+ F:	configs/efi-x86_app32_defconfig
+ 
+ EFI-X86_APP64 BOARD
+@@ -11,5 +10,4 @@ M:	Simon Glass <sjg@chromium.org>
+ S:	Maintained
+ F:	board/efi/Kconfig
+ F:	board/efi/efi-x86_app/
+-F:	include/configs/efi-x86_app.h
+ F:	configs/efi-x86_app64_defconfig
+diff --git a/include/configs/efi-x86_app.h b/include/configs/efi-x86_app.h
 deleted file mode 100644
-index 127c2c4546e0..000000000000
---- a/include/configs/edison.h
+index d5824049d697..000000000000
+--- a/include/configs/efi-x86_app.h
 +++ /dev/null
 @@ -1,4 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0+ */
 -/*
-- * Copyright (c) 2017 Intel Corp.
+- * Copyright (c) 2015 Google, Inc
 - */
 -- 
 2.34.1
