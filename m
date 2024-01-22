@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2F63C4725D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 12:47:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B1B8C4725D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 12:58:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16AD687BA2;
-	Mon, 22 Jan 2024 13:47:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D019D8799A;
+	Mon, 22 Jan 2024 13:58:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="o31PQPty";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Lcs0vbxl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EFD387B41; Mon, 22 Jan 2024 13:47:22 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id 34B0B8796E; Mon, 22 Jan 2024 13:58:42 +0100 (CET)
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48A3B87C05
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 13:47:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EF36A879A0
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 13:58:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 03B6561445;
- Mon, 22 Jan 2024 12:47:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C6CEC433C7;
- Mon, 22 Jan 2024 12:47:10 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTP id 4C430B80CB3;
+ Mon, 22 Jan 2024 12:58:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 02C8EC433F1;
+ Mon, 22 Jan 2024 12:58:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705927636;
- bh=BR2e5xw+2suooxPc3aS9CfZyxz3gyidlU8e3tQBS18o=;
+ s=k20201202; t=1705928318;
+ bh=JQpzIo12WaILrt1rdFPpdZsSsQ+cyvFN5ebuIJgLigY=;
  h=Date:Subject:To:References:From:In-Reply-To:From;
- b=o31PQPty62MKjHQ+MVggvEzfUuG1RUoL7O4Qx3L8ppO5DsDZeJosug2Jy49GZLLhG
- NmtJr+53L+GZFAkzT/SiDyDQKm5KZWOle5lkQqAlqy4HZQ5QCLjGCi3vXExDzvQsY4
- XqbZf/NM4oR05GoCbUHlWAwIodUxWkmzLEycfHhtsuNNp/Ql4GYxkjfdnRdyTtHCB6
- LD5r+0wppFUXMhh1Lq1yfsRDNVY2muBoQip15xg9oOHrZyqcpYOmK5y6EQRy0IArQg
- oIRsC1HdzpGQz2fBFEEYy6kWVjbyn++dobFpkdsUYP+tQHH2rDmop3PGTKqrm42x4y
- Zz9XrycZuWD6g==
-Message-ID: <67277138-b421-4823-9e64-222c114f8296@kernel.org>
-Date: Mon, 22 Jan 2024 14:47:08 +0200
+ b=Lcs0vbxlZhxgsPCHh0vkazIzJJEGTvBhbC4eIEK6XLbwMohnnsM+gk9Gqm6BnCeoF
+ rppNGmxEvjCOLTorr8OuLcBSNvdnUDQRmfcuWmw946jGFzj6xc84VgGN4rmh7IDSay
+ Tm3uElSrGw1aW7OgpdoakouPermLDpArNYS2/NastTp5LlRuGDTJUsIhW4V7pAk+KI
+ TXv2Y83oEehuTVVHzb+iiaMqqmazKEMZoFzaepv4lODB0H5V36v5ud26bYaEVJOLFs
+ SSSCOnUoCjYBFsgKRe8wCMiX03QbsJXf0UoCxhbAxYZtQ1up1hkRi63FpAk35bF4n6
+ EF6OTTeZajhCw==
+Message-ID: <e549c46f-af0d-43c5-b028-6a9bc5d9a1d9@kernel.org>
+Date: Mon, 22 Jan 2024 14:58:30 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 08/16] drivers: dma: Add support for J784S4 SoC
+Subject: Re: [PATCH v8 13/16] arm: dts: Introduce am69-sk u-boot dts files
 Content-Language: en-US
 To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
@@ -64,9 +64,9 @@ To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>,
  Sinthu Raja M <sinthu.raja@mistralsolutions.com>,
  Udit Kumar <u-kumar1@ti.com>
 References: <20240119175043.3904751-1-a-nandan@ti.com>
- <20240119175043.3904751-9-a-nandan@ti.com>
+ <20240119175043.3904751-14-a-nandan@ti.com>
 From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20240119175043.3904751-9-a-nandan@ti.com>
+In-Reply-To: <20240119175043.3904751-14-a-nandan@ti.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -88,293 +88,213 @@ X-Virus-Status: Clean
 
 
 On 19/01/2024 19:50, Apurva Nandan wrote:
-> Add support for DMA in J784S4 SoC.
+> From: Dasnavis Sabiya <sabiya.d@ti.com>
 > 
-> Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
-> Signed-off-by: Hari Nagalla <hnagalla@ti.com>
+> Introduce the base dts files needed for u-boot or to augment the linux
+> dtbs for use in the u-boot-spl and u-boot binaries.
+> 
+> Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
 > Signed-off-by: Apurva Nandan <a-nandan@ti.com>
-> Reviewed-by: Nishanth Menon <nm@ti.com>
 > ---
->  drivers/dma/ti/Makefile               |   1 +
->  drivers/dma/ti/k3-psil-j784s4.c       | 166 ++++++++++++++++++++++++++
->  drivers/dma/ti/k3-psil-priv.h         |   1 +
->  drivers/dma/ti/k3-psil.c              |   2 +
->  drivers/firmware/ti_sci_static_data.h |  34 ++++++
->  drivers/ram/Kconfig                   |   2 +-
->  6 files changed, 205 insertions(+), 1 deletion(-)
->  create mode 100644 drivers/dma/ti/k3-psil-j784s4.c
+>  arch/arm/dts/Makefile               |   1 +
+>  arch/arm/dts/k3-am69-r5-sk.dts      | 105 ++++++++++++++++++++++++++++
+>  arch/arm/dts/k3-am69-sk-u-boot.dtsi |  48 +++++++++++++
+>  board/ti/j784s4/MAINTAINERS         |   2 +
+>  4 files changed, 156 insertions(+)
+>  create mode 100644 arch/arm/dts/k3-am69-r5-sk.dts
+>  create mode 100644 arch/arm/dts/k3-am69-sk-u-boot.dtsi
 > 
-> diff --git a/drivers/dma/ti/Makefile b/drivers/dma/ti/Makefile
-> index f4e0271efb..9e0b13e8c0 100644
-> --- a/drivers/dma/ti/Makefile
-> +++ b/drivers/dma/ti/Makefile
-> @@ -9,3 +9,4 @@ k3-psil-data-$(CONFIG_SOC_K3_J721S2) += k3-psil-j721s2.o
->  k3-psil-data-$(CONFIG_SOC_K3_AM642) += k3-psil-am64.o
->  k3-psil-data-$(CONFIG_SOC_K3_AM625) += k3-psil-am62.o
->  k3-psil-data-$(CONFIG_SOC_K3_AM62A7) += k3-psil-am62a.o
-> +k3-psil-data-$(CONFIG_SOC_K3_J784S4) += k3-psil-j784s4.o
-> diff --git a/drivers/dma/ti/k3-psil-j784s4.c b/drivers/dma/ti/k3-psil-j784s4.c
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index 876802b88e..1c5a6662f6 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -1412,6 +1412,7 @@ dtb-$(CONFIG_SOC_K3_J721S2) += k3-am68-sk-base-board.dtb\
+>  			       k3-j721s2-r5-common-proc-board.dtb
+>  
+>  dtb-$(CONFIG_SOC_K3_J784S4) += k3-am69-sk.dtb \
+> +			       k3-am69-r5-sk.dtb \
+>  			       k3-j784s4-evm.dtb \
+>  			       k3-j784s4-r5-evm.dtb
+>  
+> diff --git a/arch/arm/dts/k3-am69-r5-sk.dts b/arch/arm/dts/k3-am69-r5-sk.dts
 > new file mode 100644
-> index 0000000000..7f06a1f307
+> index 0000000000..d2e73bd1bf
 > --- /dev/null
-> +++ b/drivers/dma/ti/k3-psil-j784s4.c
-> @@ -0,0 +1,166 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +++ b/arch/arm/dts/k3-am69-r5-sk.dts
+> @@ -0,0 +1,105 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
 > +/*
-> + *  Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com
+> + * Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
 > + */
-> +#include <linux/kernel.h>
 > +
-> +#include "k3-psil-priv.h"
+> +/dts-v1/;
 > +
-> +#define PSIL_PDMA_XY_TR(x)				\
-> +	{						\
-> +		.thread_id = x,				\
-> +		.ep_config = {				\
-> +			.ep_type = PSIL_EP_PDMA_XY,	\
-> +		},					\
-> +	}
+> +#include "k3-am69-sk.dts"
+> +#include "k3-j784s4-ddr-evm-lp4-4266.dtsi"
+> +#include "k3-j784s4-ddr.dtsi"
+> +#include "k3-am69-sk-u-boot.dtsi"
 > +
-> +#define PSIL_PDMA_XY_PKT(x)				\
-> +	{						\
-> +		.thread_id = x,				\
-> +		.ep_config = {				\
-> +			.ep_type = PSIL_EP_PDMA_XY,	\
-> +			.pkt_mode = 1,			\
-> +		},					\
-> +	}
+> +/ {
+> +	chosen {
+> +		tick-timer = &mcu_timer0;
+> +	};
 > +
-> +#define PSIL_PDMA_MCASP(x)				\
-> +	{						\
-> +		.thread_id = x,				\
-> +		.ep_config = {				\
-> +			.ep_type = PSIL_EP_PDMA_XY,	\
-> +			.pdma_acc32 = 1,		\
-> +			.pdma_burst = 1,		\
-> +		},					\
-> +	}
+> +	aliases {
+> +		remoteproc0 = &sysctrler;
+> +		remoteproc1 = &a72_0;
+> +	};
 > +
-> +#define PSIL_ETHERNET(x)				\
-> +	{						\
-> +		.thread_id = x,				\
-> +		.ep_config = {				\
-> +			.ep_type = PSIL_EP_NATIVE,	\
-> +			.pkt_mode = 1,			\
-> +			.needs_epib = 1,		\
-> +			.psd_size = 16,			\
-> +		},					\
-> +	}
+> +	a72_0: a72@0 {
+> +		compatible = "ti,am654-rproc";
+> +		reg = <0x0 0x00a90000 0x0 0x10>;
+> +		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
+> +				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>;
+> +		resets = <&k3_reset 202 0>;
+> +		clocks = <&k3_clks 61 0>;
+> +		assigned-clocks = <&k3_clks 61 0>, <&k3_clks 202 0>;
+> +		assigned-clock-parents = <&k3_clks 61 2>;
+> +		assigned-clock-rates = <200000000>, <2000000000>;
+> +		ti,sci = <&sms>;
+> +		ti,sci-proc-id = <32>;
+> +		ti,sci-host-id = <10>;
+> +		bootph-pre-ram;
+> +	};
 > +
-> +#define PSIL_SA2UL(x, tx)				\
-> +	{						\
-> +		.thread_id = x,				\
-> +		.ep_config = {				\
-> +			.ep_type = PSIL_EP_NATIVE,	\
-> +			.pkt_mode = 1,			\
-> +			.needs_epib = 1,		\
-> +			.psd_size = 64,			\
-> +			.notdpkt = tx,			\
-> +		},					\
-> +	}
-> +
-> +/* PSI-L source thread IDs, used for RX (DMA_DEV_TO_MEM) */
-> +static struct psil_ep j784s4_src_ep_map[] = {
-> +	/* PDMA_MCASP - McASP0-4 */
-> +	PSIL_PDMA_MCASP(0x4400),
-> +	PSIL_PDMA_MCASP(0x4401),
-> +	PSIL_PDMA_MCASP(0x4402),
-> +	PSIL_PDMA_MCASP(0x4403),
-> +	PSIL_PDMA_MCASP(0x4404),
-> +	/* PDMA_SPI_G0 - SPI0-3 */
-> +	PSIL_PDMA_XY_PKT(0x4600),
-> +	PSIL_PDMA_XY_PKT(0x4601),
-> +	PSIL_PDMA_XY_PKT(0x4602),
-> +	PSIL_PDMA_XY_PKT(0x4603),
-> +	PSIL_PDMA_XY_PKT(0x4604),
-> +	PSIL_PDMA_XY_PKT(0x4605),
-> +	PSIL_PDMA_XY_PKT(0x4606),
-> +	PSIL_PDMA_XY_PKT(0x4607),
-> +	PSIL_PDMA_XY_PKT(0x4608),
-> +	PSIL_PDMA_XY_PKT(0x4609),
-> +	PSIL_PDMA_XY_PKT(0x460a),
-> +	PSIL_PDMA_XY_PKT(0x460b),
-> +	PSIL_PDMA_XY_PKT(0x460c),
-> +	PSIL_PDMA_XY_PKT(0x460d),
-> +	PSIL_PDMA_XY_PKT(0x460e),
-> +	PSIL_PDMA_XY_PKT(0x460f),
-> +	/* PDMA_SPI_G1 - SPI4-7 */
-> +	PSIL_PDMA_XY_PKT(0x4610),
-> +	PSIL_PDMA_XY_PKT(0x4611),
-> +	PSIL_PDMA_XY_PKT(0x4612),
-> +	PSIL_PDMA_XY_PKT(0x4613),
-> +	PSIL_PDMA_XY_PKT(0x4614),
-> +	PSIL_PDMA_XY_PKT(0x4615),
-> +	PSIL_PDMA_XY_PKT(0x4616),
-> +	PSIL_PDMA_XY_PKT(0x4617),
-> +	PSIL_PDMA_XY_PKT(0x4618),
-> +	PSIL_PDMA_XY_PKT(0x4619),
-> +	PSIL_PDMA_XY_PKT(0x461a),
-> +	PSIL_PDMA_XY_PKT(0x461b),
-> +	PSIL_PDMA_XY_PKT(0x461c),
-> +	PSIL_PDMA_XY_PKT(0x461d),
-> +	PSIL_PDMA_XY_PKT(0x461e),
-> +	PSIL_PDMA_XY_PKT(0x461f),
-> +	/* PDMA_USART_G0 - UART0-1 */
-> +	PSIL_PDMA_XY_PKT(0x4700),
-> +	PSIL_PDMA_XY_PKT(0x4701),
-> +	/* PDMA_USART_G1 - UART2-3 */
-> +	PSIL_PDMA_XY_PKT(0x4702),
-> +	PSIL_PDMA_XY_PKT(0x4703),
-> +	/* PDMA_USART_G2 - UART4-9 */
-> +	PSIL_PDMA_XY_PKT(0x4704),
-> +	PSIL_PDMA_XY_PKT(0x4705),
-> +	PSIL_PDMA_XY_PKT(0x4706),
-> +	PSIL_PDMA_XY_PKT(0x4707),
-> +	PSIL_PDMA_XY_PKT(0x4708),
-> +	PSIL_PDMA_XY_PKT(0x4709),
-> +	/* CPSW0 */
-> +	PSIL_ETHERNET(0x7000),
-> +	/* MCU_PDMA0 (MCU_PDMA_MISC_G0) - SPI0 */
-> +	PSIL_PDMA_XY_PKT(0x7100),
-> +	PSIL_PDMA_XY_PKT(0x7101),
-> +	PSIL_PDMA_XY_PKT(0x7102),
-> +	PSIL_PDMA_XY_PKT(0x7103),
-> +	/* MCU_PDMA1 (MCU_PDMA_MISC_G1) - SPI1-2 */
-> +	PSIL_PDMA_XY_PKT(0x7200),
-> +	PSIL_PDMA_XY_PKT(0x7201),
-> +	PSIL_PDMA_XY_PKT(0x7202),
-> +	PSIL_PDMA_XY_PKT(0x7203),
-> +	PSIL_PDMA_XY_PKT(0x7204),
-> +	PSIL_PDMA_XY_PKT(0x7205),
-> +	PSIL_PDMA_XY_PKT(0x7206),
-> +	PSIL_PDMA_XY_PKT(0x7207),
-> +	/* MCU_PDMA2 (MCU_PDMA_MISC_G2) - UART0 */
-> +	PSIL_PDMA_XY_PKT(0x7300),
-> +	/* MCU_PDMA_ADC - ADC0-1 */
-> +	PSIL_PDMA_XY_TR(0x7400),
-> +	PSIL_PDMA_XY_TR(0x7401),
-> +	PSIL_PDMA_XY_TR(0x7402),
-> +	PSIL_PDMA_XY_TR(0x7403),
-> +	/* SA2UL */
-> +	PSIL_SA2UL(0x7500, 0),
-> +	PSIL_SA2UL(0x7501, 0),
-> +	PSIL_SA2UL(0x7502, 0),
-> +	PSIL_SA2UL(0x7503, 0),
+> +	dm_tifs: dm-tifs {
+> +		compatible = "ti,j721e-dm-sci";
+> +		ti,host-id = <3>;
+> +		ti,secure-host;
+> +		mbox-names = "rx", "tx";
+> +		mboxes= <&secure_proxy_mcu 21>, <&secure_proxy_mcu 23>;
+> +		bootph-pre-ram;
+> +	};
 > +};
 > +
-> +/* PSI-L destination thread IDs, used for TX (DMA_MEM_TO_DEV) */
-> +static struct psil_ep j784s4_dst_ep_map[] = {
-> +	/* CPSW0 */
-> +	PSIL_ETHERNET(0xf000),
-> +	PSIL_ETHERNET(0xf001),
-> +	PSIL_ETHERNET(0xf002),
-> +	PSIL_ETHERNET(0xf003),
-> +	PSIL_ETHERNET(0xf004),
-> +	PSIL_ETHERNET(0xf005),
-> +	PSIL_ETHERNET(0xf006),
-> +	PSIL_ETHERNET(0xf007),
-> +	/* SA2UL */
-> +	PSIL_SA2UL(0xf500, 1),
-> +	PSIL_SA2UL(0xf501, 1),
+> +&mcu_timer0 {
+> +	status = "okay";
+> +	clock-frequency = <250000000>;
+> +	bootph-pre-ram;
 > +};
 > +
-> +struct psil_ep_map j784s4_ep_map = {
-> +	.name = "j784s4",
-> +	.src = j784s4_src_ep_map,
-> +	.src_count = ARRAY_SIZE(j784s4_src_ep_map),
-> +	.dst = j784s4_dst_ep_map,
-> +	.dst_count = ARRAY_SIZE(j784s4_dst_ep_map),
+> +&secure_proxy_sa3 {
+> +	status = "okay";
+> +	bootph-pre-ram;
 > +};
-> diff --git a/drivers/dma/ti/k3-psil-priv.h b/drivers/dma/ti/k3-psil-priv.h
-> index 83f873b84c..02ea1e9ed3 100644
-> --- a/drivers/dma/ti/k3-psil-priv.h
-> +++ b/drivers/dma/ti/k3-psil-priv.h
-> @@ -43,5 +43,6 @@ extern struct psil_ep_map j721s2_ep_map;
->  extern struct psil_ep_map am64_ep_map;
->  extern struct psil_ep_map am62_ep_map;
->  extern struct psil_ep_map am62a_ep_map;
-> +extern struct psil_ep_map j784s4_ep_map;
->  
->  #endif /* K3_PSIL_PRIV_H_ */
-> diff --git a/drivers/dma/ti/k3-psil.c b/drivers/dma/ti/k3-psil.c
-> index d4d4fede8f..d21ef193e8 100644
-> --- a/drivers/dma/ti/k3-psil.c
-> +++ b/drivers/dma/ti/k3-psil.c
-> @@ -28,6 +28,8 @@ struct psil_endpoint_config *psil_get_ep_config(u32 thread_id)
->  			soc_ep_map = &am62_ep_map;
->  		else if (IS_ENABLED(CONFIG_SOC_K3_AM62A7))
->  			soc_ep_map = &am62a_ep_map;
-> +		else if (IS_ENABLED(CONFIG_SOC_K3_J784S4))
-> +			soc_ep_map = &j784s4_ep_map;
->  	}
->  
->  	if (thread_id & K3_PSIL_DST_THREAD_ID_OFFSET && soc_ep_map->dst) {
-> diff --git a/drivers/firmware/ti_sci_static_data.h b/drivers/firmware/ti_sci_static_data.h
-> index 567ce8911a..789f0c6b2d 100644
-> --- a/drivers/firmware/ti_sci_static_data.h
-> +++ b/drivers/firmware/ti_sci_static_data.h
-> @@ -97,6 +97,40 @@ static struct ti_sci_resource_static_data rm_static_data[] = {
->  };
->  #endif /* CONFIG_SOC_K3_AM625 || CONFIG_SOC_K3_AM62A7 */
->  
-> +#if IS_ENABLED(CONFIG_SOC_K3_J784S4)
-> +static struct ti_sci_resource_static_data rm_static_data[] = {
-> +	/* Free rings */
-> +	{
-> +		.dev_id = 328,
-> +		.subtype = 1,
-> +		.range_start = 208,
-> +		.range_num = 32,
-> +	},
-> +	/* TX channels */
-> +	{
-> +		.dev_id = 329,
-> +		.subtype = 13,
-> +		.range_start = 40,
-> +		.range_num = 3,
-> +	},
-> +	/* RX channels */
-> +	{
-> +		.dev_id = 329,
-> +		.subtype = 10,
-> +		.range_start = 40,
-> +		.range_num = 3,
-> +	},
-> +	/* RX Free flows */
-> +	{
-> +		.dev_id = 329,
-> +		.subtype = 0,
-> +		.range_start = 84,
-> +		.range_num = 8,
-> +	},
-> +	{ },
-> +};
-> +#endif /* CONFIG_SOC_K3_J784S4 */
 > +
->  #else
->  static struct ti_sci_resource_static_data rm_static_data[] = {
->  	{ },
-> diff --git a/drivers/ram/Kconfig b/drivers/ram/Kconfig
-> index 5b07e92030..8e9e53cbb0 100644
-> --- a/drivers/ram/Kconfig
-> +++ b/drivers/ram/Kconfig
-> @@ -62,7 +62,7 @@ choice
->  	depends on K3_DDRSS
->  	prompt "K3 DDRSS Arch Support"
+> +&secure_proxy_mcu {
+> +	status = "okay";
+> +	bootph-pre-ram;
+> +};
+> +
+> +&cbass_mcu_wakeup {
+> +	sysctrler: sysctrler {
+> +		compatible = "ti,am654-system-controller";
+> +		mboxes= <&secure_proxy_mcu 4>,
+> +			<&secure_proxy_mcu 5>,
+> +			<&secure_proxy_sa3 5>;
+> +		mbox-names = "tx", "rx", "boot_notify";
+> +		bootph-pre-ram;
+> +	};
+> +};
+> +
+> +&sms {
+> +	mboxes= <&secure_proxy_mcu 8>, <&secure_proxy_mcu 6>, <&secure_proxy_mcu 5>;
+> +	mbox-names = "tx", "rx", "notify";
+> +	ti,host-id = <4>;
+> +	ti,secure-host;
+> +	bootph-pre-ram;
+> +};
+> +
+> +&wkup_uart0 {
+> +	bootph-pre-ram;
+> +	status = "okay";
+
+In k3-am69-sk.dts this is marked as reserved. Why do you need to enable it here?
+Maybe a comment would help readers.
+
+> +};
+> +
+> +&ospi0 {
+> +	reg = <0x0 0x47040000 0x0 0x100>,
+> +	      <0x0 0x50000000 0x0 0x8000000>;
+> +};
+> +
+> +&ospi1 {
+> +	reg = <0x0 0x47050000 0x0 0x100>,
+> +	      <0x0 0x58000000 0x0 0x8000000>;
+> +};
+> +
+> +&mcu_ringacc {
+> +	ti,sci = <&dm_tifs>;
+> +};
+> +
+> +&mcu_udmap {
+> +	ti,sci = <&dm_tifs>;
+> +};
+> diff --git a/arch/arm/dts/k3-am69-sk-u-boot.dtsi b/arch/arm/dts/k3-am69-sk-u-boot.dtsi
+> new file mode 100644
+> index 0000000000..4f8c99a1e6
+> --- /dev/null
+> +++ b/arch/arm/dts/k3-am69-sk-u-boot.dtsi
+> @@ -0,0 +1,48 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
+> + */
+> +
+> +#include "k3-j784s4-binman.dtsi"
+> +
+> +&mcu_udmap {
+> +	reg =   <0x0 0x285c0000 0x0 0x100>,
+> +		<0x0 0x284c0000 0x0 0x4000>,
+> +		<0x0 0x2a800000 0x0 0x40000>,
+> +		<0x0 0x284a0000 0x0 0x4000>,
+> +		<0x0 0x2aa00000 0x0 0x40000>,
+> +		<0x0 0x28400000 0x0 0x2000>;
+> +	reg-names = "gcfg", "rchan", "rchanrt", "tchan",
+> +		    "tchanrt", "rflow";
+> +	bootph-pre-ram;
+> +};
+> +
+> +&sms {
+> +	k3_sysreset: sysreset-controller {
+> +		compatible = "ti,sci-sysreset";
+> +		bootph-pre-ram;
+> +	};
+> +};
+> +
+> +#ifdef CONFIG_TARGET_J784S4_A72_EVM
+> +
+> +#define SPL_AM69_SK_DTB "spl/dts/k3-am69-sk.dtb"
+> +#define AM69_SK_DTB "arch/arm/dts/k3-am69-sk.dtb"
+> +
+> +&spl_j784s4_evm_dtb {
+> +	filename = SPL_AM69_SK_DTB;
+> +};
+> +
+> +&j784s4_evm_dtb {
+> +	filename = AM69_SK_DTB;
+> +};
+> +
+> +&spl_j784s4_evm_dtb_unsigned {
+> +	filename = SPL_AM69_SK_DTB;
+> +};
+> +
+> +&j784s4_evm_dtb_unsigned {
+> +	filename = AM69_SK_DTB;
+> +};
+> +
+> +#endif
+> diff --git a/board/ti/j784s4/MAINTAINERS b/board/ti/j784s4/MAINTAINERS
+> index ac6db23da5..53bc4bab03 100644
+> --- a/board/ti/j784s4/MAINTAINERS
+> +++ b/board/ti/j784s4/MAINTAINERS
+> @@ -16,3 +16,5 @@ F:	arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi
 >  
-> -	default K3_J721E_DDRSS if SOC_K3_J721E || SOC_K3_J721S2
-> +	default K3_J721E_DDRSS if SOC_K3_J721E || SOC_K3_J721S2 || SOC_K3_J784S4
-
-Should DDR support patch be independent of DMA support?
-
-This change should have gone in patch 2 "arm: mach-k3: Add basic support for J784S4 SoC definition"
-
->  	default K3_AM64_DDRSS if SOC_K3_AM642
->  	default K3_AM64_DDRSS if SOC_K3_AM625
->  	default K3_AM62A_DDRSS if SOC_K3_AM62A7
-
-
-Reviewed-by: Roger Quadros <rogerq@kernel.org>
+>  AM69 SK BOARD
+>  F:	arch/arm/dts/k3-am69-sk.dts
+> +F:	arch/arm/dts/k3-am69-sk-u-boot.dtsi
+> +F:	arch/arm/dts/k3-am69-r5-sk.dts
 
 -- 
 cheers,
