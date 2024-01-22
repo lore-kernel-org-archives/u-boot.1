@@ -4,52 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FF3FC4725D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 10:48:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15894C47DAF
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 10:49:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 087D487859;
-	Mon, 22 Jan 2024 11:48:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id 55B53877CC;
+	Mon, 22 Jan 2024 11:49:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=enrico.leto@siemens.com header.b="Pn3FD6xs";
+	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="W8p5OjhR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 828AD87859; Mon, 22 Jan 2024 11:48:05 +0100 (CET)
-Received: from mta-65-226.siemens.flowmailer.net
- (mta-65-226.siemens.flowmailer.net [185.136.65.226])
+ id 41C08877F4; Mon, 22 Jan 2024 11:49:34 +0100 (CET)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::600])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2767A8751B
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 11:48:02 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=enrico.leto@siemens.com
-Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id
- 202401221048017eea159ddb2fbdad92 for <u-boot@lists.denx.de>;
- Mon, 22 Jan 2024 11:48:01 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=enrico.leto@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=vlY+i7x5nXNmEuTmNKRL2JVoNmMHpHUeT1wDeZk7+m0=;
- b=Pn3FD6xsvfVOmjyN04bL3kDJptuykE8qJEJ9AdGM9OCPKYqr4sUkWBehz687TEZx2CN/lf
- LGyvbWZBX6k8Ig3ek+aHybfLtAZpJs5CUKvWXY1mPWoWMb2QIinQLefoc0KFfKSaz4skOZkm
- OUz1zli3hBsOsk8P2Qytutc0CbgoY=;
-From: Enrico Leto <enrico.leto@siemens.com>
-To: u-boot@lists.denx.de,
-	alexander.sverdlin@siemens.com
-Cc: trini@konsulko.com,
-	Enrico Leto <enrico.leto@siemens.com>
-Subject: [PATCH v4 1/6] siemens: eeprom: clean up definitions
-Date: Mon, 22 Jan 2024 11:47:18 +0100
-Message-Id: <20240122104731.939408-2-enrico.leto@siemens.com>
-In-Reply-To: <20240122104731.939408-1-enrico.leto@siemens.com>
-References: <20240122104731.939408-1-enrico.leto@siemens.com>
-MIME-Version: 1.0
+ by phobos.denx.de (Postfix) with ESMTPS id C30F58751B
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 11:49:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=theobroma-systems.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=quentin.schulz@theobroma-systems.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=lZEmHKF9j4C6xWJZ80MZY29kBwQoKPBtbAEJK64COIJiJExv6ym7AAkbcaT9nmV6xkun6PVE9e3yvLiQVWSZToTvZkBsSpPQfgk2egk5sVfZA3QWsI3/JRm9A4Ohsn40dlIUzA7i0hl+07gAsaLFcAPBtoaFVamTiZ7CyUinML1KIxGWPgph6/jIQ24y5NOQjoPM8M4zqmNC2ofRAghVB/p8YQ2fLYYwKpvVQxcNlpQhPa6SqzBrtMRdGko5J010/L/i92WJTFG7lQUbrruzlif1+iY+V9tFQMX7klWPeIQqXDwIWsWCUEXZS5UxUQpUPbD3ajpjjqdnPMusYvOp6Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=u44b1pOw1j6WcF1cImd0ECfc7dRRNi6FwOEowaElBW8=;
+ b=MUKBAFmscnNGF9njstgts/wDDpfPc5Txi3aAEK6ks4IKoCsorLhhSvsjLQT0vEve1tY62J577jQ+dJS7u70NX7RALX6WPWr2QjOhohE2tXLLJRIfEqEfLSLTOLWiRLkhZfh7UoMpZyKIUpTqi5Rnnkrkm5WVUuSQG4FMnlQxvLt3KXM6yTV0al9WgiEHLRHHtBn/dsJwSFE1SaBn8PiZyoLD1Ty++RlBFwx6T8fIuAKUoffop07eXpXH8ZWFPnAgmD2rfG1V+sTdr/KHjFYrfXPS2BkpWOzfaxGQ3Aq1FVnBjvZfeRwPgl+hF007dziSTKFTOEs1VDDCReKt/NKOxw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
+ header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=u44b1pOw1j6WcF1cImd0ECfc7dRRNi6FwOEowaElBW8=;
+ b=W8p5OjhRH9YvPOs2zXenfxJXg3zEItFaskaHFhX3lDMQbZ/F9VTQqmEIm/FWe0nf/uW+Gs2ysqNm6iBCnDOt7FUsbcZX3N//YyCkWbeHyLuChyD5UXgxMDqExaXm7Z5wGNUffJhuY+lmb5nnJBQ5wIfLn5pg5yyRYgxlkuOG3AFc1+jjs+F+fRylUoxM92ne4Y/Y1ysArtkp6u4q16NTfQg2X3Fzpvg8PurdWji189TGcpIgT/ZIWOWlZIFKp5Hu2K9mZYMaqFuaFLqgZF92Vdsu5sbIKNTx/iQT29d06uZxMIfWY5Lb64uTtlsDPjFEEKZBDwi3K6iLufO3ok+aKg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=theobroma-systems.com;
+Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
+ by AM9PR04MB7682.eurprd04.prod.outlook.com (2603:10a6:20b:2db::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7202.31; Mon, 22 Jan
+ 2024 10:49:25 +0000
+Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
+ ([fe80::9ee0:71d6:cd29:289a]) by DU2PR04MB8536.eurprd04.prod.outlook.com
+ ([fe80::9ee0:71d6:cd29:289a%7]) with mapi id 15.20.7202.031; Mon, 22 Jan 2024
+ 10:49:25 +0000
+Message-ID: <ff2cd476-e230-41e9-b9b9-bbf15f8fcfcd@theobroma-systems.com>
+Date: Mon, 22 Jan 2024 11:49:23 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 4/6] rockchip: find U-boot proper boot device by
+ inverting the logic that sets it
+Content-Language: en-US
+To: Kever Yang <kever.yang@rock-chips.com>,
+ Quentin Schulz <foss+uboot@0leil.net>, heiko@sntech.de,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: u-boot@lists.denx.de, jonas@kwiboo.se
+References: <20240117-rk3588-spl-boot-dev-v3-0-72cb989e6da8@theobroma-systems.com>
+ <20240117-rk3588-spl-boot-dev-v3-4-72cb989e6da8@theobroma-systems.com>
+ <afc5d7e1-030b-48f4-b414-ab4a918debb9@rock-chips.com>
+From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+In-Reply-To: <afc5d7e1-030b-48f4-b414-ab4a918debb9@rock-chips.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-1320603:519-21489:flowmailer
+X-ClientProxiedBy: FR3P281CA0007.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:1d::6) To DU2PR04MB8536.eurprd04.prod.outlook.com
+ (2603:10a6:10:2d7::10)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|AM9PR04MB7682:EE_
+X-MS-Office365-Filtering-Correlation-Id: df0acb38-b2e7-42e7-314d-08dc1b37ccd3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: suqfELkxZfx/pWQikTlT7klQ+1yp5MYdQkAuQ9j4vlGo/gi+AP1PbYPZ3eYX5zTdIEF+SVHyI3Wviihv3Uq3J9ocdXlhwVs3nLvgFKZYaiJi3sViEHd4nWOyPjeNUrHYofUYdZvCodtctOmLAQIwtB0uc0itoknASjvytfCx8cGO8Z5YBPnTjRkk0f95qLemhl5TwC8zrDcoFYmzXxGTHYz2LVABvho0PWrGPWUODLB5T8GHcvt3tmsuYfC+dxRIxyXdm5HGkGqcgSCnTmGOG3F2InllO50LpMx7TYpsgdlCoukLOGxamCGgrDIj4dx+6Q7WUHntA+QIrSXpABC51vwBER9k7nS6lCQqILvLw5nA2ib5yyAehR+xre3VEIPU3sEsRkhgaMv5OU37lxjZh5en5RUAYsPgJKbNBnRyWrTrbK4HNowtp8u90pzMLW48st4YeFpyotOFt2ZNyYPa9UZl0c1WABeQeIm1pRtTo4ceiyG+ODbFdMcPm088JsmgMsigxsEwtkoZR/EbHDIbEvQ/DSNzpRwiaehJSYFFMLkUv1ZTc5HoZTgLZwSYWhNGw2n0JAAN3IWW4p7bx8wpHGPjfFrXEDBxc3DyN6PNB3ITzLNsSA8MLGTaQ+3zSKUO
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(136003)(39850400004)(396003)(346002)(376002)(366004)(230922051799003)(186009)(451199024)(64100799003)(1800799012)(26005)(6512007)(6506007)(2616005)(53546011)(5660300002)(83380400001)(2906002)(66556008)(8936002)(6486002)(966005)(66476007)(4326008)(8676002)(66946007)(478600001)(31696002)(316002)(110136005)(44832011)(86362001)(38100700002)(36756003)(41300700001)(31686004)(45980500001)(43740500002);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aW5vVGpBeHRKMElXM1JyZEtNSXg0eWtlb0tYcDM3a2JhSGpEYjJqczg3THkv?=
+ =?utf-8?B?QytyRFlNVUtySEZheWtTTzIzVVVIbU9uT2szUlp1VXZmT05iTkdQL1Y3MGpr?=
+ =?utf-8?B?N3UxSVhkbjgzUjkxalNuSzJSNlZQZ0JSaHYwNlVCZ3p1MjNnM1hCMXZBVm1M?=
+ =?utf-8?B?cmRlbGh6ek9LK28rRW95NllYOVBkTlJmMDVXeUV6SHhNWlE0QVJGZ0VpVzRD?=
+ =?utf-8?B?N1RGUUIrRFZWSmx0VVBEMWhsd0J4d3paVWIrd0JWMHFzZ2V3clczWk5CajBB?=
+ =?utf-8?B?RlI0dHdqR25DTEQ2SzB4RERrOXRORnhORm9RTWNVS3FCU0hBK2lZK3dGMkVK?=
+ =?utf-8?B?OGNyTDI2QnkydkEweXl4K1pVc1dHQUlybTRiTzFRa2dNckZtVUVNclB5S1Jh?=
+ =?utf-8?B?OGJXVE0wRmVsTVVaNGM0OVhqUFZVYUF2eCtXREdMKzVDeVhSMVJiMW9CbVI1?=
+ =?utf-8?B?bHJRR21IaWFsYUg5aTNMa1J5cmdQL1VtdjY4Z0tNUDNEUWJCNGp1Y3Zsa3Bi?=
+ =?utf-8?B?MW5JR0JGbUdQc1RMZnZ0TXd5WmN5NzFjL1ZTdnlXUDVuZXQ0ejE5NGgreWJF?=
+ =?utf-8?B?UVlqN3VaNFJNUWU5VmFGMXUzUUtvb1VyTmVPOXpWeW9DNWpqcWViSWV5dk5v?=
+ =?utf-8?B?WXdUNzRkWHltQ0pMa1ljakVjNkd5NldUdURRNkxBMGdRMTRHci9kL29ROSt1?=
+ =?utf-8?B?bDVLVGZqQW82L0pMNVBCanQ2aWFsbUpPT3h1ekRha3RTUk43Y1NWWDhZQTNW?=
+ =?utf-8?B?Q3EzS2hWdmdVaTNvbWN2V0w4VThVaGNXdlpHVjhIdWNlMjlYNDZ2bnZMZDQ1?=
+ =?utf-8?B?V1FLODFKdWs4VitoaytscjdFQ1Jjb2wvRTRiQlkzMzNlV2JVc1crS25aNFhq?=
+ =?utf-8?B?TTJrRWJGRFVmbk5lQ2U5alBPQzlzeFU4MXRNekM4VWlVbDllV2dpaWVURmhl?=
+ =?utf-8?B?MWJ5ZUh4aGFSdHVKczdRZ1dhZUdoaEVNaEdISUxxTDhyTVlXdFZtUXI3d0NV?=
+ =?utf-8?B?QzA2RmpQbG50eUJkL3V4NE5YNVJvcFBpTlBHS1AvRUMvOTdMK0JtTmtHK3FO?=
+ =?utf-8?B?Z1JjaE8weVAvNFdCRHcyb2pES3FJZGpQaVlUMHVhUXl0ODAzZTR2ZVZ1K3hy?=
+ =?utf-8?B?bVNhTTZjS0haWmU1aWxlM3ViY01HTlZsNmc0OGJpWEkvOVgxZU91SmRlRWpL?=
+ =?utf-8?B?eXJhcERlcVpMaUJiK0JHRXczOENkWlY0Z0tLWVh5cGF0NEt5VXdNOEJQREFO?=
+ =?utf-8?B?UHhmcE5yR242NUJLQnNzbE1MRjh1bzdyTE1vYkpLU3UrTU9NY01mOVowQ0tp?=
+ =?utf-8?B?U1hSay96aFBueWw2eXIzd21FaGxhZ3FyLzE4Vkt1allyMTR3TW95bTNJZHNz?=
+ =?utf-8?B?T0hwWlhQQ0Z1WHFDU29ibThvUWhWMDJ0MEMwTXdzT3Bva0dzRkZNYThxQUtD?=
+ =?utf-8?B?RUl6cXI5QURQWmFOdVVKWVNCaTh5MXFNdDFDaGdCZGcwNTg1MnhDZXNBRnNT?=
+ =?utf-8?B?RXFTc2dzclpBV1hEN1gwWU1sOS9iQjM4Ui9GUjBJVFFSaFFsTzRKbEF2VXNH?=
+ =?utf-8?B?UFlCNi9VNE9zbTVZNXlnNDhBN3JGWGszYnMydU1BYkhlODdLRHM3UTc5SWhy?=
+ =?utf-8?B?L251K0V3cFNvZmQ0ZEljVVhZSE1Ra283aW9sVDA5WlE4YmtHTXg2WVVHem5r?=
+ =?utf-8?B?eW85TFVlWUF0a3dSRWNsb3RaVXlGL1FkKzF2NUdwSG1LVGl1WUZsc3BUVmJG?=
+ =?utf-8?B?VVp1OHBnc2dqbmFBZm9NKzFnZWtJWDMvMVZsNmJyVkdPTVFwTVBMMFl0d3o4?=
+ =?utf-8?B?STk4aTFiY092MlB0NCtaREhuV2s2dUVYQitmL3Uzd3lmVWFJNnI4dC9KUHVB?=
+ =?utf-8?B?TFFRdWpPNjhlRnlBb3RFY1NzVmxNNXc0OU1ldDhOZTMxRWZXRGFUUjhpMms2?=
+ =?utf-8?B?NUJSeHVtOW1VU2VtcFpsaDVuRjVob0hDWnBBbldZRmp1SnV1TWNhVndzTkRX?=
+ =?utf-8?B?a0tsamFNTUh4WHQ5V215VG5KWUNvS3lxRldBTFNURjJpTnkvVDdjT0Zmd3Nn?=
+ =?utf-8?B?VmN0R1VIcThtcFlIV2lka2dTcXRGeDJGT1hpK3dpejFZaHY3MnQvUk1nSStX?=
+ =?utf-8?B?eEQ0dE1Lc3pRL09oeUI2bUM4cEREOXgrY05xZWV2eXE0TGJCVDEwaGs5RHYv?=
+ =?utf-8?Q?YBrJ+kjQZCWWO07CNUJSSIo=3D?=
+X-OriginatorOrg: theobroma-systems.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: df0acb38-b2e7-42e7-314d-08dc1b37ccd3
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jan 2024 10:49:25.4660 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: im5bViZrYDK61h0+eYga2If+zmWDDT9EVlP7tuIOxzmHKDpAcUNk501BWF4XrOJ8cfsKKl2oMIFJvkMEkR4LFQ0AlaKsm3WJd/bjdt9d0XWtDucDmVMGMqmeYeebJTHM
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB7682
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,248 +150,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move the I2C and EEPROM address definitions in common board header.
+Hi Kever,
 
-Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-Signed-off-by: Enrico Leto <enrico.leto@siemens.com>
----
- board/siemens/capricorn/board.c   |  5 ++---
- board/siemens/common/board.c      |  6 +++---
- board/siemens/common/board.h      | 21 +++++++++++++++++++++
- board/siemens/common/factoryset.c | 12 ++++++------
- board/siemens/draco/board.c       | 13 +++++--------
- include/configs/draco-etamin.h    |  3 ---
- include/configs/draco-rastaban.h  |  3 ---
- include/configs/draco-thuban.h    |  3 ---
- 8 files changed, 37 insertions(+), 29 deletions(-)
- create mode 100644 board/siemens/common/board.h
+On 1/18/24 11:12, Kever Yang wrote:
+> Hi Quentin,
+> 
+> On 2024/1/18 01:22, Quentin Schulz wrote:
+>> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+>>
+>> BOOT_DEVICE_* is set by spl_node_to_boot_device() depending on the block
+>> device number associated with the MMC device the SPL used to load U-Boot
+>> proper from. It is NOT related to the mmc alias in the Device Tree.
+>>
+>> For SPI flashes, all SPI flashes will return BOOT_DEVICE_SPI so there's
+>> currently no way to know from which one the SPL loaded U-Boot proper
+>> from. Therefore, let's just find the first valid candidate in
+>> /chosen/u-boot,spl-boot-order that is a SPI flash and return that path.
+>> This is a best effort.
+>>
+>> While the original implementation may have worked, using the exact same
+>> mechanism but in inverted fashion makes it less likely to have
+>> surprising corner-cases or side-effects.
+>>
+>> A nice side-effect is that all existing and future Rockchip SoCs now
+>> automatically have their /chosen/u-boot,spl-boot-device set.
+> 
+> Error happen in some 32bit SoC:
+> 
+> +arch/arm/mach-rockchip/spl-boot-order.c: In function 'spl_perform_fixups':
+> +arch/arm/mach-rockchip/spl-boot-order.c:242:31: error: 'struct 
+> spl_image_info' has no member named 'fdt_addr'
+> +  242 |         void *blob = spl_image->fdt_addr;
+> +      |                               ^~
+> +make[3]: *** [scripts/Makefile.build:257: 
+> spl/arch/arm/mach-rockchip/spl-boot-order.o] Error 1
+> 
+> 
 
-diff --git a/board/siemens/capricorn/board.c b/board/siemens/capricorn/board.c
-index 924c88e8fab..81fa340ca42 100644
---- a/board/siemens/capricorn/board.c
-+++ b/board/siemens/capricorn/board.c
-@@ -28,6 +28,7 @@
- #include <asm/arch-imx8/clock.h>
- #endif
- #include <linux/delay.h>
-+#include "../common/board.h"
- #include "../common/factoryset.h"
- 
- #define GPIO_PAD_CTRL \
-@@ -337,13 +338,11 @@ void board_late_mmc_env_init(void)
- }
- 
- #ifndef CONFIG_SPL_BUILD
--int factoryset_read_eeprom(int i2c_addr);
--
- static int load_parameters_from_factoryset(void)
- {
- 	int ret;
- 
--	ret = factoryset_read_eeprom(EEPROM_I2C_ADDR);
-+	ret = factoryset_read_eeprom(SIEMENS_EE_I2C_ADDR);
- 	if (ret)
- 		return ret;
- 
-diff --git a/board/siemens/common/board.c b/board/siemens/common/board.c
-index d077751cbe1..7ad367439c1 100644
---- a/board/siemens/common/board.c
-+++ b/board/siemens/common/board.c
-@@ -34,7 +34,8 @@
- #include <cpsw.h>
- #include <watchdog.h>
- #include <asm/mach-types.h>
--#include "../common/factoryset.h"
-+#include "board.h"
-+#include "factoryset.h"
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -70,7 +71,6 @@ void sdram_init(void)
- #endif /* #ifdef CONFIG_SPL_BUILD */
- 
- #ifndef CONFIG_SPL_BUILD
--#define FACTORYSET_EEPROM_ADDR		0x50
- /*
-  * Basic board specific setup.  Pinmux has been handled already.
-  */
-@@ -88,7 +88,7 @@ int board_init(void)
- 	gd->bd->bi_boot_params = CFG_SYS_SDRAM_BASE + 0x100;
- 
- #ifdef CONFIG_FACTORYSET
--	factoryset_read_eeprom(FACTORYSET_EEPROM_ADDR);
-+	factoryset_read_eeprom(SIEMENS_EE_I2C_ADDR);
- #endif
- 
- 	gpmc_init();
-diff --git a/board/siemens/common/board.h b/board/siemens/common/board.h
-new file mode 100644
-index 00000000000..0d5b369028f
---- /dev/null
-+++ b/board/siemens/common/board.h
-@@ -0,0 +1,21 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright Siemens AG 2023
-+ *
-+ * Common board definitions for siemens boards
-+ */
-+
-+#ifndef _BOARD_COMMON_H_
-+#define _BOARD_COMMON_H_
-+
-+/* EEPROM @ I2C */
-+#define SIEMENS_EE_I2C_BUS	0
-+#define SIEMENS_EE_I2C_ADDR	0x50
-+
-+/* EEPROM mapping */
-+#define SIEMENS_EE_ADDR_NAND_GEO	0x80
-+#define SIEMENS_EE_ADDR_DDR3		0x90
-+#define SIEMENS_EE_ADDR_CHIP		0x120
-+#define SIEMENS_EE_ADDR_FACTORYSET	0x400
-+
-+#endif /* _BOARD_COMMON_H_ */
-diff --git a/board/siemens/common/factoryset.c b/board/siemens/common/factoryset.c
-index 4e36a6f3199..94c671389dc 100644
---- a/board/siemens/common/factoryset.c
-+++ b/board/siemens/common/factoryset.c
-@@ -22,11 +22,11 @@
- #include <net.h>
- #include <errno.h>
- #include <g_dnl.h>
-+#include "board.h"
- #include "factoryset.h"
- 
--#define EEPR_PG_SZ		0x80
--#define EEPROM_FATORYSET_OFFSET	0x400
--#define OFF_PG            EEPROM_FATORYSET_OFFSET/EEPR_PG_SZ
-+#define EEPR_PG_SZ	0x80
-+#define OFF_PG		(SIEMENS_EE_ADDR_FACTORYSET / EEPR_PG_SZ)
- 
- /* Global variable that contains necessary information from FactorySet */
- struct factorysetcontainer factory_dat;
-@@ -159,7 +159,7 @@ int factoryset_read_eeprom(int i2c_addr)
- #endif
- 
- #if CONFIG_IS_ENABLED(DM_I2C)
--	ret = uclass_get_device_by_seq(UCLASS_I2C, EEPROM_I2C_BUS, &bus);
-+	ret = uclass_get_device_by_seq(UCLASS_I2C, SIEMENS_EE_I2C_BUS, &bus);
- 	if (ret)
- 		goto err;
- 
-@@ -171,14 +171,14 @@ int factoryset_read_eeprom(int i2c_addr)
- 	if (ret)
- 		goto err;
- 
--	ret = dm_i2c_read(dev, EEPROM_FATORYSET_OFFSET, hdr, sizeof(hdr));
-+	ret = dm_i2c_read(dev, SIEMENS_EE_ADDR_FACTORYSET, hdr, sizeof(hdr));
- 	if (ret)
- 		goto err;
- #else
- 	if (i2c_probe(i2c_addr))
- 		goto err;
- 
--	if (i2c_read(i2c_addr, EEPROM_FATORYSET_OFFSET, 2, hdr, sizeof(hdr)))
-+	if (i2c_read(i2c_addr, SIEMENS_EE_ADDR_FACTORYSET, 2, hdr, sizeof(hdr)))
- 		goto err;
- #endif
- 
-diff --git a/board/siemens/draco/board.c b/board/siemens/draco/board.c
-index 8b13d23aca7..814959583f7 100644
---- a/board/siemens/draco/board.c
-+++ b/board/siemens/draco/board.c
-@@ -37,6 +37,7 @@
- #include <watchdog.h>
- #include <linux/delay.h>
- #include "board.h"
-+#include "../common/board.h"
- #include "../common/factoryset.h"
- #include <nand.h>
- 
-@@ -132,16 +133,12 @@ struct am335x_nand_geometry {
- 	u8 nand_bus;
- };
- 
--#define EEPROM_ADDR		0x50
--#define EEPROM_ADDR_DDR3	0x90
--#define EEPROM_ADDR_CHIP	0x120
--
- static int draco_read_nand_geometry(void)
- {
- 	struct am335x_nand_geometry geo;
- 
- 	/* Read NAND geometry */
--	if (i2c_read(EEPROM_ADDR, 0x80, 2,
-+	if (i2c_read(SIEMENS_EE_I2C_ADDR, SIEMENS_EE_ADDR_NAND_GEO, 2,
- 		     (uchar *)&geo, sizeof(struct am335x_nand_geometry))) {
- 		printf("Could not read the NAND geomtery; something fundamentally wrong on the I2C bus.\n");
- 		return -EIO;
-@@ -164,20 +161,20 @@ static int draco_read_nand_geometry(void)
- static int read_eeprom(void)
- {
- 	/* Check if baseboard eeprom is available */
--	if (i2c_probe(EEPROM_ADDR)) {
-+	if (i2c_probe(SIEMENS_EE_I2C_ADDR)) {
- 		printf("Could not probe the EEPROM; something fundamentally wrong on the I2C bus.\n");
- 		return 1;
- 	}
- 
- #ifdef CONFIG_SPL_BUILD
- 	/* Read Siemens eeprom data (DDR3) */
--	if (i2c_read(EEPROM_ADDR, EEPROM_ADDR_DDR3, 2,
-+	if (i2c_read(SIEMENS_EE_I2C_ADDR, SIEMENS_EE_ADDR_DDR3, 2,
- 		     (uchar *)&settings.ddr3, sizeof(struct ddr3_data))) {
- 		printf("Could not read the EEPROM; something fundamentally wrong on the I2C bus.\nUse default DDR3 timings\n");
- 		set_default_ddr3_timings();
- 	}
- 	/* Read Siemens eeprom data (CHIP) */
--	if (i2c_read(EEPROM_ADDR, EEPROM_ADDR_CHIP, 2,
-+	if (i2c_read(SIEMENS_EE_I2C_ADDR, SIEMENS_EE_ADDR_CHIP, 2,
- 		     (uchar *)&settings.chip, sizeof(settings.chip)))
- 		printf("Could not read chip settings\n");
- 
-diff --git a/include/configs/draco-etamin.h b/include/configs/draco-etamin.h
-index 97585a4fd12..6ae85b575b7 100644
---- a/include/configs/draco-etamin.h
-+++ b/include/configs/draco-etamin.h
-@@ -69,9 +69,6 @@
- /* Physical Memory Map */
- #define CFG_MAX_RAM_BANK_SIZE       (1024 << 20)    /* 1GB */
- 
--#define EEPROM_ADDR_DDR3 0x90
--#define EEPROM_ADDR_CHIP 0x120
--
- /* nedded by compliance test in read mode */
- 
- #undef COMMON_ENV_DFU_ARGS
-diff --git a/include/configs/draco-rastaban.h b/include/configs/draco-rastaban.h
-index 0991ebfd00c..1b95606cca9 100644
---- a/include/configs/draco-rastaban.h
-+++ b/include/configs/draco-rastaban.h
-@@ -34,9 +34,6 @@
-  /* Physical Memory Map */
- #define CFG_MAX_RAM_BANK_SIZE	(1024 << 20)	/* 1GB */
- 
--#define EEPROM_ADDR_DDR3 0x90
--#define EEPROM_ADDR_CHIP 0x120
--
- /* Default env settings */
- #define CFG_EXTRA_ENV_SETTINGS \
- 	"hostname=rastaban\0" \
-diff --git a/include/configs/draco-thuban.h b/include/configs/draco-thuban.h
-index f4c04c55ebf..629558e27ec 100644
---- a/include/configs/draco-thuban.h
-+++ b/include/configs/draco-thuban.h
-@@ -27,9 +27,6 @@
-  /* Physical Memory Map */
- #define CFG_MAX_RAM_BANK_SIZE	(1024 << 20)	/* 1GB */
- 
--#define EEPROM_ADDR_DDR3 0x90
--#define EEPROM_ADDR_CHIP 0x120
--
- /* Default env settings */
- #define CFG_EXTRA_ENV_SETTINGS \
- 	"hostname=thuban\0" \
--- 
-2.30.2
+It'd be nice to say **which** boards aren't working so that I can 
+reproduce locally :)
 
+I eventually figured we have GitLab CI/CD for your maintainer 
+branch/repo here: 
+https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines. 
+This also helped me figure out this wasn't the only build failure and I 
+could send another patch before you had the opportunity to tell me I had 
+broken something else :)
+
+Giving the link of the failed pipeline would really help, please think 
+about it for next time :) Thanks!
+
+For people interested in build-testing all Rockchip platforms locally, I 
+used the following script:
+
+"""
+#!/bin/sh
+
+# Copy **some** TF-A binary in the parent directory of U-Boot git repo
+export BL31=../bl31.elf
+dd if=/dev/zero of=../zero.bin count=1
+export ROCKCHIP_TPL=../zero.bin
+
+for conf in $(git grep --files-with-matches ARCH_ROCKCHIP configs); do
+         git clean -ffdx > /dev/null
+	echo -n $conf=
+         make $(basename "$conf") > /dev/null
+	if grep -q -E "^CONFIG_ARM64=y" .config; then
+		CROSS_COMPILE="aarch64-linux-gnu-"
+		export TEE=
+	else
+		CROSS_COMPILE="arm-linux-gnu-"
+		export TEE=../zero.bin
+	fi
+	LOG=$(mktemp)
+	make KCFLAGS=-Werror CROSS_COMPILE="ccache $CROSS_COMPILE" -j$(nproc) > 
+"$LOG" 2>&1
+	RET=$?
+	echo $RET
+	if [ "$RET" != 0 ]; then
+		cat "$LOG"
+		exit $RET
+	fi
+done
+
+exit 0
+"""
+
+Cheers,
+Quentin
