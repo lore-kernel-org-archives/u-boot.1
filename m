@@ -4,73 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27D5EC4725D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 13:03:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD7B6C4725D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 13:04:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A6D28796E;
-	Mon, 22 Jan 2024 14:03:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2E62F87C05;
+	Mon, 22 Jan 2024 14:04:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Yld6+wtO";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="uVojMJTI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8DF48796E; Mon, 22 Jan 2024 14:03:06 +0100 (CET)
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
- [IPv6:2607:f8b0:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DC75987C0B; Mon, 22 Jan 2024 14:04:47 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AB1487960
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 14:03:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ED6158796E
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 14:04:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1d3ae9d1109so7504715ad.0
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 05:03:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705928582; x=1706533382; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=g4WWq8Z1wj+yoT2vDtBlhYNpKh3Ops0F94mi3mHupXk=;
- b=Yld6+wtOEKQ3F/9nmeRguAGQuEIVx70amGFQ/gDl/GrKn55CLObBzje/W+3Oszk4f/
- QyX5B7Mo/ymEqiRxIeSizCFW9NalSu2q3ToV4G6FUqDOXfAOndod3wGWWIUGGyfKP7uX
- XbQ1x6tZ83XCym+SECkpbSWRAnir0BBG5yuEeL3ZQ0ATA1ezGzzvrrROywMSlujXFj7W
- ZpwcqAVmP75CBDUbvN9NyybPNdaDGaOMZ5owrjxZ2yfxoHiflJDQlgvck3Fx+7per3iD
- KnQSAX4PoUHJWUMoE+3RY2PUxr4ZauhDWKjfLGVIsWtagq/AfPlw5LP1LbNcW9j3xT2g
- iMPA==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id D36ED3FD9F
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 13:04:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1705928684;
+ bh=OC6xGE7nxMgpdQeTrI3oBLj6e/KW7pOkFB6RWwqM7Nw=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=uVojMJTIAnzeCoEX/bjl04eSqnJa7Nc7DQ2fzW4Qd3091W5DESao0TZmyMnLAb3S3
+ Bi+L5bVjTN6Jlsr3e6ARWzjfeIyVId5e/QdPawF94YMNN8tVrRj1bsOIjKognW8cuX
+ YIAjd98gDDCWS/9bM5p1kunAf2Ind0LTwMwy4BCzDFMYMTNFA8/0gwqcjLYXFQ3mtp
+ u6FS+V1ftglqGCADFczUYgUJhUs2s8/X8muJgcTzvK6Tx8VEFVk0BIpLkjSefQ7FC5
+ EasbcHffDQQ7TXzzOOMAFjocAFzKq1RlD1EUidZiKXBBbqAVPzIhx1jAuOkDffKB8M
+ FYlP7tMrEsaNg==
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-40e49906305so11070285e9.2
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 05:04:44 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705928582; x=1706533382;
+ d=1e100.net; s=20230601; t=1705928684; x=1706533484;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=g4WWq8Z1wj+yoT2vDtBlhYNpKh3Ops0F94mi3mHupXk=;
- b=VLVJOBYBjROGkQ04NIuziDq1c6fua6yB0UK1knDw/LD75aM+6jMnGZaduQ0zATb5n6
- +i4VG3znmtgiq1FLbmHVQwSlD55D7+5RfVWqUbh7GXT5S+bUQh911EKmHmNaMMLFpmrI
- iNTs9EDHKctnBqU8DjkD7LjW6tsTwi3ilJTe/60oUAtX/aNZ66/X6gmySb+Yi9LPrS7B
- 3BQ1/Y+yc4ExkDPCtzhJNsuYBv+KC0RbAt+GA9rffU/Rp19gIJir03taTRdX2q22gGdE
- YYzKmVaDP0DWH0HLJGI8l0800C8JEVcosaGga6pTxxZrfxpvlXVlLE6QQivhrsDq4DdF
- iZ/A==
-X-Gm-Message-State: AOJu0YzrCBJgZiUS9Il9WJPrDSSJ00EZrmGW6qdTuRjrUSAPYMXg8Frw
- UkZmVmzw++or09NP1Ds11E7xr7pNxEmMMU7m0w9ZlsYkFreM+Z8CvjD0Rai9
-X-Google-Smtp-Source: AGHT+IF1ftPqM0zug5l/wZ0ZsHao5ie6i8jBzZmXwQwq0hcTuUl10+eBNS0XK2fsO7l+d994uAg2SA==
-X-Received: by 2002:a17:902:ee11:b0:1d6:f13b:e58e with SMTP id
- z17-20020a170902ee1100b001d6f13be58emr8440352plb.2.1705928581951; 
- Mon, 22 Jan 2024 05:03:01 -0800 (PST)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:e37a:e59d:de82:7f2b])
+ bh=OC6xGE7nxMgpdQeTrI3oBLj6e/KW7pOkFB6RWwqM7Nw=;
+ b=QlbJHpshzXfhwue0s+yz3p5gJr9yfBBWTIenK3/gYm1fbA/m0SXXU1jtSqTviy3pB1
+ kvjVClWABDY9xyVLnjzWzEhOZ4IykgxR4oDKFwpLsYTrPVVylf1RLgJZoNirAu565WXF
+ A2H4OgsMh8BGPYADpVxF4RuGCZV3UXVSNHFw5X25uTQBofsNkptLUBfnux8DdhWRPGZv
+ 7wfG/iQKp45z6XtZnJ7Zg3fYX+CgcmMwBYk7oPd8bQ8xgKTzdb4/ldPw9H2j0taeaovb
+ 4PN9nfHhj29TOzKyFtcgcXlcjPrcS0WWf6Wqcnsx3JmECB7MSwvfGxJpTdPnb1PwuoPS
+ 3vlg==
+X-Gm-Message-State: AOJu0YyKRC8NPiONCy3jRaIDUEcpqUi1h5kiNjzZ6GTH/kGdhKv07M8B
+ mKHmPxEa33q2x+n8rMf4aRHWDicB2YhHckNdKDTt4Zi0GUMDRyK/iXn7J/j1x4y1IYtVj/gWhT0
+ PK95NGl9GRBxki/uKSewlwzO20Em4/DrcSlD7/5NW+hMVMjJetpRQHurhkbvhvRnSc78=
+X-Received: by 2002:a05:600c:5d1:b0:40e:4aed:ad27 with SMTP id
+ p17-20020a05600c05d100b0040e4aedad27mr2119773wmd.144.1705928684499; 
+ Mon, 22 Jan 2024 05:04:44 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IH+OGWBDSQi9/O/avEcb/YehokV2J40GJUkJg33c803KXVH03AtbZEYgYY/6Xl51qgXiZ8Rkg==
+X-Received: by 2002:a05:600c:5d1:b0:40e:4aed:ad27 with SMTP id
+ p17-20020a05600c05d100b0040e4aedad27mr2119765wmd.144.1705928684127; 
+ Mon, 22 Jan 2024 05:04:44 -0800 (PST)
+Received: from workstation5.fritz.box
+ (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
  by smtp.gmail.com with ESMTPSA id
- y6-20020a170902ed4600b001d73ac05559sm3006662plb.184.2024.01.22.05.03.00
+ u17-20020a05600c19d100b0040e47dc2e8fsm38953969wmq.6.2024.01.22.05.04.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jan 2024 05:03:01 -0800 (PST)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: sbabic@denx.de,
-	u-boot@lists.denx.de
-Subject: Pull request: Please pull u-boot-imx-20240115
-Date: Mon, 22 Jan 2024 10:02:58 -0300
-Message-Id: <20240122130258.1161602-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ Mon, 22 Jan 2024 05:04:43 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] lib: support SMBIOS3 table in uuid_guid_get_str()
+Date: Mon, 22 Jan 2024 14:04:35 +0100
+Message-ID: <20240122130435.73871-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -89,52 +100,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+As we support installing SMBIOS3 tables in U-Boot we need to add this GUID
+to the translation table used buy uuid_guid_get_str().
 
-Please pull from u-boot-imx, thanks.
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ lib/uuid.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-The following changes since commit 3c04fcf3137d5f694d52b8f355373e4baabe5f78:
+diff --git a/lib/uuid.c b/lib/uuid.c
+index 0be22bc05f7..2d7d99535e7 100644
+--- a/lib/uuid.c
++++ b/lib/uuid.c
+@@ -176,6 +176,10 @@ static const struct {
+ 		"SMBIOS table",
+ 		SMBIOS_TABLE_GUID,
+ 	},
++	{
++		"SMBIOS3 table",
++		SMBIOS3_TABLE_GUID,
++	},
+ 	{
+ 		"Runtime properties",
+ 		EFI_RT_PROPERTIES_TABLE_GUID,
+-- 
+2.43.0
 
-  Merge patch series "k3-j721e: beagleboneai: Fix USB" (2024-01-20 11:39:13 -0500)
-
-are available in the Git repository at:
-
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20240122
-
-for you to fetch changes up to a80e0e7711a2b2890a583d88dcd9af978ddada32:
-
-  ARM: imx: Enable kaslrseed command on DH i.MX8M Plus DHCOM (2024-01-22 08:40:02 -0300)
-
-u-boot-imx-master-20240122
---------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/19406
-
-- Allow i.MX8M Plus DHCOM to operate in overdrive mode.
-- Allow i.MX8M Plus eDM SBC to operate in overdrive mode.
-- Enable the 'kaslrseed' command on DH i.MX8M Plus DHCOM.
-- Select LTO by default on i.MX8M.
-- Convert pico-dwarf/hobbit-imx6ul to CONFIG_DM_SERIAL.
-- Fix 'reset' command on wandboard.
-
-----------------------------------------------------------------
-Fabio Estevam (3):
-      imx8m: Enable LTO by default
-      wandboard: Convert to watchdog driver model
-      pico-dwarf/hobbit-imx6ul: Convert to CONFIG_DM_SERIAL
-
-Marek Vasut (3):
-      ARM: imx: Enable SPL_BOARD_INIT on DH i.MX8M Plus DHCOM
-      ARM: imx: Configure GIC clock parent on Data Modul i.MX8M Plus eDM SBC
-      ARM: imx: Enable kaslrseed command on DH i.MX8M Plus DHCOM
-
- arch/arm/dts/imx6qdl-wandboard-u-boot.dtsi  | 10 ++++++++++
- arch/arm/mach-imx/imx8m/Kconfig             |  1 +
- board/data_modul/imx8mp_edm_sbc/spl.c       | 13 +++++++++++++
- configs/imx8mp_data_modul_edm_sbc_defconfig |  1 +
- configs/imx8mp_dhcom_pdk2_defconfig         |  3 +++
- configs/imx8mp_dhcom_pdk3_defconfig         |  3 +++
- configs/pico-dwarf-imx6ul_defconfig         |  1 +
- configs/pico-hobbit-imx6ul_defconfig        |  1 +
- configs/wandboard_defconfig                 |  3 +++
- 9 files changed, 36 insertions(+)
