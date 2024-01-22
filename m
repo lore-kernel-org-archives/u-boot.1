@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 937ABC46CD2
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 23:31:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32B9BC46CD2
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 23:52:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E98B86FCE;
-	Tue, 23 Jan 2024 00:31:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 40A72879A3;
+	Tue, 23 Jan 2024 00:52:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Bg183LVQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="i2kvh0Ct";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F9FA8753C; Tue, 23 Jan 2024 00:31:03 +0100 (CET)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 43D7887579; Tue, 23 Jan 2024 00:52:18 +0100 (CET)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CE198640C
- for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 00:31:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 164C18753C
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 00:52:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-600094c5703so11744957b3.3
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 15:31:01 -0800 (PST)
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-6001449a2beso9215427b3.3
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 15:52:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705966259; x=1706571059; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1705967534; x=1706572334; darn=lists.denx.de;
  h=content-disposition:mime-version:message-id:subject:to:from:date
  :from:to:cc:subject:date:message-id:reply-to;
- bh=H4XHnT0DW1qgd60SLKEdvd1Vic25DF98KE0J6nWPV8g=;
- b=Bg183LVQLG2a4bwzlY90QUDEsFUMdoaqju1c6YqmbYLoMVuBq8QSgeXXX167tx3Rp0
- 6VGYRHzZXRjlwIZZP/QtyZ83jBQaNnAHfgej7Y4d6XrePlWdApqcYzOFrrxK35iUs6Ow
- aXog4h43mfDAWFoC+Qz6SXwoCNEGxteviV/gY=
+ bh=SLJgMRwvbJDj/liW7Deoa1yvyzlJKlDL4sLY5J9CANE=;
+ b=i2kvh0CtI9EO8QOWc+buNirceAcq3CB7v5QsIRWYOcKcIjugxCPUpWwKxsxT2bpr2w
+ VrDsWt7V/7S8ALKxojGA1iB01fRIIMEEWwDJhptn6X6LaDcv/CcGpIOBzIJotdJjbm6e
+ wsDEse/EVYyU/iPh8HGNy/d5pmpxIYD2UNUfQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705966259; x=1706571059;
+ d=1e100.net; s=20230601; t=1705967534; x=1706572334;
  h=content-disposition:mime-version:message-id:subject:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=H4XHnT0DW1qgd60SLKEdvd1Vic25DF98KE0J6nWPV8g=;
- b=M8DsIB8fXIUcrysFsUkSt6i33Z8eIz9CsHnkFklOcdBO9vE230tgAZq3CcpLg4cihW
- yppb5HSk9mKA5uLVAsfS+C8UfgnrHqZw3ZKT0E8Vibu7f0qn2jS4hqNeE9KRRys/jTsI
- FqaVyrs5BzM/JmULiUkF05dTojIVK+wf0JFUIRJZpATyxRzEb4YsPuEmW/T9kcvgSpUA
- ZQS7ABcFIcGJdAB1U4UHk8QQIS4zgnG2EmjHzAIy549IOEiNOWa0lYbakeRECn6UDCHS
- 4AYKjoHjY+a5vod7mdEAM4H09prKzJ5hfdBW/Fkc6cd4Lai7s5UZWDVeTRgOPa2/vnoX
- DSqg==
-X-Gm-Message-State: AOJu0Yyoz6q/ySwAXPMgf5jB05C6OxSeBtXZOBJxAw3HkKcEj55emgfM
- NZbLtBx70QsCk9manfNe4ixLkDaoX/QFAigk8hVFlR8DlTPMVhjAym3UDdltDGImmyAdnfshLa2
- H
-X-Google-Smtp-Source: AGHT+IFIFzcga4VFLlkQxgKDuorqzp7MekyD6bAWn1KHdf+xvTAUGi3XK+4Uhfwn08KXVq3iJuhYxg==
-X-Received: by 2002:a81:840a:0:b0:5f6:f591:ca13 with SMTP id
- u10-20020a81840a000000b005f6f591ca13mr3781143ywf.55.1705966259576; 
- Mon, 22 Jan 2024 15:30:59 -0800 (PST)
+ bh=SLJgMRwvbJDj/liW7Deoa1yvyzlJKlDL4sLY5J9CANE=;
+ b=UlW9XUE2dTfL7s2+fzatFNKZaTBj/cR2vIdiPVW8mGwGBGtWkFHqjfISob8RhSjtGf
+ fxQoq4MdZkAvLCDQ01rbHTfd+GTK0UqBR/XTZ7AhOPU9Nj6AWFdiGPg9dZkl82vGpcdv
+ qg5xtP76c0C2ERXsG9ezbp9wg9LnaM2ZTeIRDzwOHiwGLrKCz+Zk84lvw/QTG2eITX+2
+ J0ysMiJGritIvcfQ6ZXH6XfckuTFNO3aUn5UFVcqbx+FJYkatBpg+ktN39DW1W2GRRMI
+ vB74MKM1B1/lMlZMF4u37DhOwfxuoFQMRavqJKupeeXQ5JsHZOwf+JmQAn9DTkHXr/tk
+ gnHw==
+X-Gm-Message-State: AOJu0YwzzfQS2CS5eruDIhW9mLFtPNoob/FCZNoomX2tqKByvy/Zwg5a
+ tQX2irGaEMoYrZwfpQ2qrqKLbtT1dtNHuA071apT32LZGhYDFRPRecqCIC3aVmCqHJYKAaiVZL+
+ 6
+X-Google-Smtp-Source: AGHT+IHoPXxbbxs/7swMVxkGlnk8Ahp3vC3nTnpf+Y+ZDEfjnALfYNBLzbfmiybKnVzyy+ynBecSfw==
+X-Received: by 2002:a0d:f5c3:0:b0:5fb:da77:af07 with SMTP id
+ e186-20020a0df5c3000000b005fbda77af07mr4002058ywf.32.1705967534333; 
+ Mon, 22 Jan 2024 15:52:14 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- n16-20020a819e50000000b005ffb91a94e6sm1735133ywj.59.2024.01.22.15.30.58
+ e4-20020a81e944000000b005ffddb2369dsm1263931ywm.82.2024.01.22.15.52.13
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jan 2024 15:30:59 -0800 (PST)
-Date: Mon, 22 Jan 2024 18:30:57 -0500
+ Mon, 22 Jan 2024 15:52:13 -0800 (PST)
+Date: Mon, 22 Jan 2024 18:52:12 -0500
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Hugo Cornelis <hugo.cornelis@essensium.com>
+To: u-boot@lists.denx.de
 Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20240122233057.GR3652023@bill-the-cat>
+Message-ID: <20240122235212.GS3652023@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="e13dw8Nmmd8lsjTQ"
+ protocol="application/pgp-signature"; boundary="QX9ol6o2vVSqR7nq"
 Content-Disposition: inline
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
@@ -88,18 +89,17 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---e13dw8Nmmd8lsjTQ
+--QX9ol6o2vVSqR7nq
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hey all,
-
-Here's the latest Coverity scan report.
+I've now updated to the latest Coverity scan tool and that eliminated
+some previous defects and found two new ones:
 
 ---------- Forwarded message ---------
 =46rom: <scan-admin@coverity.com>
-Date: Mon, Jan 22, 2024 at 6:26=E2=80=AFPM
+Date: Mon, Jan 22, 2024 at 6:42=E2=80=AFPM
 Subject: New Defects reported by Coverity Scan for Das U-Boot
 To: <tom.rini@gmail.com>
 
@@ -109,63 +109,83 @@ Hi,
 Please find the latest report on new defect(s) introduced to Das
 U-Boot found with Coverity Scan.
 
-1 new defect(s) introduced to Das U-Boot found with Coverity Scan.
-7 defect(s), reported by Coverity Scan earlier, were marked fixed in
+2 new defect(s) introduced to Das U-Boot found with Coverity Scan.
+8 defect(s), reported by Coverity Scan earlier, were marked fixed in
 the recent build analyzed by Coverity Scan.
 
 New defect(s) Reported-by: Coverity Scan
-Showing 1 of 1 defect(s)
+Showing 2 of 2 defect(s)
 
 
-** CID 478860:  Code maintainability issues  (UNUSED_VALUE)
-/tools/image-host.c: 359 in fit_image_read_key_iv_data()
+** CID 478862:  Memory - corruptions  (OVERRUN)
 
 
 ___________________________________________________________________________=
 _____________________________
-*** CID 478860:  Code maintainability issues  (UNUSED_VALUE)
-/tools/image-host.c: 359 in fit_image_read_key_iv_data()
-353             if (ret >=3D sizeof(filename)) {
-354                     printf("Can't format the key or IV filename
-when setting up the cipher: insufficient buffer space\n");
-355                     ret =3D -1;
-356             }
-357             if (ret < 0) {
-358                     printf("Can't format the key or IV filename
-when setting up the cipher: snprintf error\n");
->>>     CID 478860:  Code maintainability issues  (UNUSED_VALUE)
->>>     Assigning value "-1" to "ret" here, but that stored value is overwr=
-itten before it can be used.
-359                     ret =3D -1;
-360             }
-361
-362             ret =3D fit_image_read_data(filename, key_iv_data, expected=
-_size);
-363
-364             return ret;
+*** CID 478862:  Memory - corruptions  (OVERRUN)
+/lib/initcall.c: 82 in initcall_run_list()
+76      if (ret) {
+77              if (CONFIG_IS_ENABLED(EVENT)) {
+78                      char buf[60];
+79
+80                      /* don't worry about buf size as we are dying here =
+*/
+81                      if (type) {
+>>>     CID 478862:  Memory - corruptions  (OVERRUN)
+>>>     Overrunning callee's array of size 15 by passing argument "type" (w=
+hich evaluates to 255) in call to "event_type_name".
+82                              sprintf(buf, "event %d/%s", type,
+83                                      event_type_name(type));
+84                      } else {
+85                              sprintf(buf, "call %p", func);
+86                      }
+87
+
+** CID 478861:  Memory - corruptions  (OVERRUN)
 
 
------ End forwarded message -----
+___________________________________________________________________________=
+_____________________________
+*** CID 478861:  Memory - corruptions  (OVERRUN)
+/cmd/nvedit.c: 356 in print_static_flags()
+350     static int print_static_flags(const char *var_name, const char *fla=
+gs,
+351                                   void *priv)
+352     {
+353             enum env_flags_vartype type =3D env_flags_parse_vartype(fla=
+gs);
+354             enum env_flags_varaccess access =3D
+env_flags_parse_varaccess(flags);
+355
+>>>     CID 478861:  Memory - corruptions  (OVERRUN)
+>>>     Overrunning callee's array of size 4 by passing argument "access" (=
+which evaluates to 4) in call to "env_flags_get_varaccess_name".
+356             printf("\t%-20s %-20s %-20s\n", var_name,
+357                     env_flags_get_vartype_name(type),
+358                     env_flags_get_varaccess_name(access));
+359
+360             return 0;
+361     }
 
 --=20
 Tom
 
---e13dw8Nmmd8lsjTQ
+--QX9ol6o2vVSqR7nq
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWu+q4ACgkQFHw5/5Y0
-tyz+Lgv/TD0A8Dgc7pBSjlE/1HS+tzGgreFITs1wAPM5wpUFvyxC3tFQ08eRSd8G
-L3ClJZr917UH44k0QxK+n/4htqBVcujSvbPo6x/0tgQ3zm5wK2SuaoL9frqkmCHZ
-/KMwG2fECWxzhISEK96xE+llP+prYXv4zPF8m0N+J3KjtajHp9pL37pmmaIXRwr+
-s26l6XsDdT1diQEmregfeh+ztauN3OVN3VRK3j/yJeYf3LrT4vP7bvklG+1wYXoN
-Cxe4fZQv8NyBAQvP10DKvKk9s4G4o43BmGjdxj3rW/0/rekG5wsZN0HWv+qNkxRj
-fgV8O24zf+wXh57aaBoL02W41c0hFo3ME9nuxhXsa7O7l2cV+ekgaIkaKQolkMEb
-telvOq2BvXX9CLRqJGOHr9G19pYy5lLq0iBIH9vi9b2r5Qg07yjx+jOTiVljBmRs
-Mi9m7UgOPhYc4DfN17mt8XoxqCA6Gq//HesvxhKeZ9APniuzJ9sNkdQ82y3NF/Gb
-UoU241oS
-=odxI
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWu/6gACgkQFHw5/5Y0
+tyxZpwv+LhevDi8ce0SzUyLylDQFx9KKYk1miZPzjxs2lf230tG1XVLcT7zUaGAr
+ALAdaOi60qtFlQk9VLK6McenQclQ+L0buzwC3BrR+GMwLjwrEs90ajxHYrm65ZhL
+7U+WtPzL88anX01kBV++cSbUAq8jNOqYJfZes0Gbf1s5uLcOoRAiuDGSdypbBVsq
+iCAxF5kJDYhgL2TRqI2B6xu7rQN82C5BmlzqB9kS/esF4WjcpG1gZNZMabLAMI1A
+tazFou8NA5UjvWirCR0CqK3ipLY4yKyzbUzp0gE/QkZKxeQvrOB1GqWIZPiRmiKO
+a6QsuGZX3hWGV7oqB1cM0XE9vJecr4BXrQySPmFmY4WSQj9KZ1WBRBzle+YGDagZ
+4ZM5wOJgv17ja7c5LCqqNR8UzgZmFSe/ueN7gRIgDxLa+6n0T0fn0ufcCUbLFhUA
+SI1tw57pLPVcVdHdbBdK7oZsAJFLXngt/EW8bDbziDpNjxQ9Z0w8GK084w3saHbZ
+Jszb+PfO
+=/hc/
 -----END PGP SIGNATURE-----
 
---e13dw8Nmmd8lsjTQ--
+--QX9ol6o2vVSqR7nq--
