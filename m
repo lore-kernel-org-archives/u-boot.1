@@ -4,88 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C466C47DD9
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 16:50:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06D6CC47DD9
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 17:54:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3454387A01;
-	Mon, 22 Jan 2024 17:50:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C1749879BD;
+	Mon, 22 Jan 2024 18:54:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LynEXh58";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ad7ZqIkB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31E5D8799A; Mon, 22 Jan 2024 17:50:06 +0100 (CET)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
+ id D4CD48798B; Mon, 22 Jan 2024 18:54:32 +0100 (CET)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00F0487872
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 17:50:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FB1687960
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 18:54:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-dc227feab99so3130045276.2
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 08:50:03 -0800 (PST)
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-5ff847429d4so30409247b3.1
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 09:54:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705942202; x=1706547002; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1705946069; x=1706550869; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=cTmln5YFkUcqsu7sdiN5m4jKouMH8CU6zI1qoD/6Fc8=;
- b=LynEXh58RgALkyTcik9WNx4ejPQbRFOw+W3xGopULTcQqc4cgYU09bOAdzvot33kX+
- xoRoxkYl+BQAYlP9Faf5bdswQOnqAcJfjHoIaPNIQ2mprI4cCW3u7TU3BF4yzJhn1EkD
- lliMU67GXNZdq+gvN4ck9EKd05j2px0c+GMa8=
+ bh=toizd7JF8gQ5DYC2FU1ES8rV3qWfWm59DVNDZ8+LjHk=;
+ b=Ad7ZqIkBtdNhzoDIZx2SgHoKyd7mSlt7Sy1M2ejMgqQVGD1Lt3zJqliLv+gDFJkTkS
+ iL+IIluyqr53b44iWCRpgALbR6+cWKTihOOTsYLMtIWwh58TeWVbzoJKjXhlaib4YWnX
+ 64XVhAYipiPAgIqlYP8ajVpiR3sB+BQJxXS7g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705942202; x=1706547002;
+ d=1e100.net; s=20230601; t=1705946069; x=1706550869;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cTmln5YFkUcqsu7sdiN5m4jKouMH8CU6zI1qoD/6Fc8=;
- b=SM62/NB/Rtv4c5jTHm7q9mdGrkZoUKjpFMaNgEw9w+HqG0FlOrZEDFkSQklIgV3TqN
- N9h0Nw/zIlioUvvCd7PMmB6HcnvmFgXoYroZ4Bc+ODuc1YWQhc8V74H9QtXQHC0gTIg9
- 2G6G4jdtgZE8U2QoCP33Ruw8I1GPZ8JtkFu8/DrUKwQ+uCfxM9fRWTd6BcCelhCX3pW/
- ryxqooFnPRxMguE01h7hYk1O7R4GGYYn7Jj+p3kg8881MMsWugP1DPtsaPxON+5j+Szb
- aYY7yZxVevDTauI077s2rPbD8ZQsj35HwFRyPx7+xT4wixjSIHMWEYvP5pT8xzpd5IzL
- nX/w==
-X-Gm-Message-State: AOJu0YwsBSGmhJwEJh1h2yJ5aOleRsltbwm9cFiitQzJfgtSCN2687iu
- srPbdYsdZIwyXNgLr4JJ+INe/KKicN3woH6ZKzIBoBbYjix2M+Y6EZpXwl6ZEUU=
-X-Google-Smtp-Source: AGHT+IEF6+TcUvCsIXLu6L95Op24cEXI9JOg3sW33H61TqcL9UGXaY2mLFN0Y3x3VUPWM7yyHTHigQ==
-X-Received: by 2002:a05:6902:107:b0:dc3:6a40:b6dc with SMTP id
- o7-20020a056902010700b00dc36a40b6dcmr591019ybh.113.1705942202672; 
- Mon, 22 Jan 2024 08:50:02 -0800 (PST)
+ bh=toizd7JF8gQ5DYC2FU1ES8rV3qWfWm59DVNDZ8+LjHk=;
+ b=o4U1alARihrWpcsY+uV9jxwalqYmm4sCr/ncflk764WaeHw+Std+RpWT6WPJQ5sjLK
+ gpmVq6hkrs3u2m7+gUAFSV6jfdXh+x2QuLuMtClg/AXaSXO1mRilOSDyR4ArTI4nz0oo
+ y0pfu75DBLb5nQKfhiz1UfITAt+iwkAFOB0QfDqfhgkt9bgu8xXQpz+qv9rcI7YzF3yY
+ eMfOyIJvGYOkImxZ+vR46SJmv1bbmDmRhcqx8ys0P0N3zR6nbPTMisLlqiBBxmvj7x0i
+ fsB+v6Hj/Edm1zDZzvIQy/wP7Je916IRv02G1POPWJvHecRoLdDQk1b/dEdgoYcSPQcd
+ GE+g==
+X-Gm-Message-State: AOJu0YzIVtcq9CJAabixy39YeoXfZ1sdASLRd+7cDCSOyvGqndOGm+ee
+ VACvuvxXUQnt0F7t/WCg2gqVIzJCi3TyQp8qy5aiorUpgmYz+5Hie84gz1A1GGA=
+X-Google-Smtp-Source: AGHT+IGG/qhxjKd1hWtbaln8D4PY+1e3sNZKJfuqJBCGhVZPuGJIcypQeX1shueXSKts+Wfvg5h9iA==
+X-Received: by 2002:a81:a0c9:0:b0:5ff:f6eb:8908 with SMTP id
+ x192-20020a81a0c9000000b005fff6eb8908mr1583614ywg.98.1705946068859; 
+ Mon, 22 Jan 2024 09:54:28 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- d1-20020a25eb01000000b00dc36ad3af97sm174583ybs.50.2024.01.22.08.50.01
+ n133-20020a81728b000000b005ffa141d9f4sm2400747ywc.18.2024.01.22.09.54.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jan 2024 08:50:02 -0800 (PST)
-Date: Mon, 22 Jan 2024 11:49:59 -0500
+ Mon, 22 Jan 2024 09:54:28 -0800 (PST)
+Date: Mon, 22 Jan 2024 12:54:26 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
- u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de,
- sjg@chromium.org, robh+dt@kernel.org,
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org,
- neil.armstrong@linaro.org, caleb.connolly@linaro.org,
- ff@shokubai.tech, daniel.thompson@linaro.org,
- dgilmore@fedoraproject.org, pbrobinson@gmail.com,
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org,
- b.galvani@gmail.com, xypron.glpk@gmx.de, michal.simek@amd.com,
- seanga2@gmail.com, rasmus.villemoes@prevas.dk, peng.fan@nxp.com,
- jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de,
- mibodhi@gmail.com, bb@ti.com, mark.kettenis@xs4all.nl
-Subject: Re: [PATCH v4 00/11] An effort to bring DT bindings compliance
- within U-Boot
-Message-ID: <20240122164959.GN3652023@bill-the-cat>
-References: <20240110103547.719757-1-sumit.garg@linaro.org>
- <20240122114515.760e9cd3@donnerap.manchester.arm.com>
+To: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Quentin Schulz <foss+uboot@0leil.net>, heiko@sntech.de,
+ Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, u-boot@lists.denx.de,
+ jonas@kwiboo.se
+Subject: Re: [PATCH v3 4/6] rockchip: find U-boot proper boot device by
+ inverting the logic that sets it
+Message-ID: <20240122175426.GO3652023@bill-the-cat>
+References: <20240117-rk3588-spl-boot-dev-v3-0-72cb989e6da8@theobroma-systems.com>
+ <20240117-rk3588-spl-boot-dev-v3-4-72cb989e6da8@theobroma-systems.com>
+ <afc5d7e1-030b-48f4-b414-ab4a918debb9@rock-chips.com>
+ <ff2cd476-e230-41e9-b9b9-bbf15f8fcfcd@theobroma-systems.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/gu2cU7P5GliUFp5"
+ protocol="application/pgp-signature"; boundary="Y9CytMBHNkThZd0y"
 Content-Disposition: inline
-In-Reply-To: <20240122114515.760e9cd3@donnerap.manchester.arm.com>
+In-Reply-To: <ff2cd476-e230-41e9-b9b9-bbf15f8fcfcd@theobroma-systems.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,79 +99,103 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---/gu2cU7P5GliUFp5
-Content-Type: text/plain; charset=us-ascii
+--Y9CytMBHNkThZd0y
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 22, 2024 at 11:45:15AM +0000, Andre Przywara wrote:
-> On Wed, 10 Jan 2024 16:05:36 +0530
-> Sumit Garg <sumit.garg@linaro.org> wrote:
+On Mon, Jan 22, 2024 at 11:49:23AM +0100, Quentin Schulz wrote:
+> Hi Kever,
 >=20
-> Hi,
->=20
-> I certainly welcome this more automatic synchronisation of the DTs,
-> however have one comment about the upcoming sync process:
->=20
-> > ...
-> > However, Linux kernel DT maintainers proposed [2] for U-Boot to rather
-> > use devicetree-rebasing repo [3] which is a forked copy from Linux
-> > kernel for DT source files as well as bindings. It is tagged at every
-> > Linux kernel major release or intermideate release candidates. So here I
-> > have tried to reuse that to bring DT bingings compliance as well as a
-> > standard way to maintain a regular sync of DT source files with Linux
-> > kernel.
+> On 1/18/24 11:12, Kever Yang wrote:
+> > Hi Quentin,
 > >=20
-> > In order to maintain devicetree files sync, U-Boot will maintains a Git
-> > subtree for devicetee-rebasing repo as `dts/upstream` sub-directory.
-> > U-Boot will regularly sync `dts/upstream/` subtree whenever the next wi=
-ndow
-> > opens with the next available kernel major release.
+> > On 2024/1/18 01:22, Quentin Schulz wrote:
+> > > From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+> > >=20
+> > > BOOT_DEVICE_* is set by spl_node_to_boot_device() depending on the bl=
+ock
+> > > device number associated with the MMC device the SPL used to load U-B=
+oot
+> > > proper from. It is NOT related to the mmc alias in the Device Tree.
+> > >=20
+> > > For SPI flashes, all SPI flashes will return BOOT_DEVICE_SPI so there=
+'s
+> > > currently no way to know from which one the SPL loaded U-Boot proper
+> > > from. Therefore, let's just find the first valid candidate in
+> > > /chosen/u-boot,spl-boot-order that is a SPI flash and return that pat=
+h.
+> > > This is a best effort.
+> > >=20
+> > > While the original implementation may have worked, using the exact sa=
+me
+> > > mechanism but in inverted fashion makes it less likely to have
+> > > surprising corner-cases or side-effects.
+> > >=20
+> > > A nice side-effect is that all existing and future Rockchip SoCs now
+> > > automatically have their /chosen/u-boot,spl-boot-device set.
+> >=20
+> > Error happen in some 32bit SoC:
+> >=20
+> > +arch/arm/mach-rockchip/spl-boot-order.c: In function 'spl_perform_fixu=
+ps':
+> > +arch/arm/mach-rockchip/spl-boot-order.c:242:31: error: 'struct
+> > spl_image_info' has no member named 'fdt_addr'
+> > +=A0 242 |=A0=A0=A0=A0=A0=A0=A0=A0 void *blob =3D spl_image->fdt_addr;
+> > +=A0=A0=A0=A0=A0 |=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 ^~
+> > +make[3]: *** [scripts/Makefile.build:257:
+> > spl/arch/arm/mach-rockchip/spl-boot-order.o] Error 1
+> >=20
+> >=20
 >=20
-> I hope this doesn't need to stay that restricted? Can we either sync more
-> often, or at least on the kernel's -rc1, and not only on a "full" release?
+> It'd be nice to say **which** boards aren't working so that I can reprodu=
+ce
+> locally :)
 >=20
-> The reason I ask is that we have a chicken-egg problem here: without a DT
-> merged into the kernel tree, no U-Boot board support can be merged. And
-> without U-Boot support, we cannot boot a kernel, at least not in the
-> canonical way.
+> I eventually figured we have GitLab CI/CD for your maintainer branch/repo
+> here: https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipeline=
+s.
+> This also helped me figure out this wasn't the only build failure and I
+> could send another patch before you had the opportunity to tell me I had
+> broken something else :)
 >=20
-> Since the U-Boot and kernel merge windows are not in phase, for sunxi I t=
-ry
-> to sync the kernel DTs either as early as possible (-rc1, sometimes even
-> before, when the maintainers have merged them into their tree), or
-> sometimes "out of season", if a board defconfig patch is coming up.
+> Giving the link of the failed pipeline would really help, please think ab=
+out
+> it for next time :) Thanks!
 >=20
-> Otherwise new board support, which typically has a very low regression ri=
-sk
-> for the rest of the code base, would need to be delayed until the next
-> release. In the worst case the U-Boot merge windows opens one week before
-> a kernel release, then new boards need to wait three months?
+> For people interested in build-testing all Rockchip platforms locally, I
+> used the following script:
 
-Would it be to bad to bring in board X with OF_UPSTREAM=3Dn for one U-Boot
-release, and then with the next one switch to OF_UPSTREAM=3Dy (and delete
-the dts from arch/) for the next release, when we would have gotten back
-in sync?
+Please note that you can also build all of the rockchip platforms
+locally with:
+tools/buildman/buildman --allow-missing rk rv
+
+It won't be bootable as it will fake all require blobs, but all
+platforms will be built. And buildman can be told a number of things to
+be built, but "rockchip" only catches the cases where the board vendor
+is "rockhip" rather than ARCH_ROCKCHIP, but "rk" and "rv" catch all of
+the rkXXXX and rvXXXX SoCs.
 
 --=20
 Tom
 
---/gu2cU7P5GliUFp5
+--Y9CytMBHNkThZd0y
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWunLQACgkQFHw5/5Y0
-tyxkFAwAmVK5A9Ioak+Y3y2oqk+t/z5JJRl4Z84ZR0kitSYj6iL938ayoYJGaFgM
-3eZVsw2zj9vBt5Ye6rI3d4Hale9z6JHbJYxjKunKlkUZu9TNmyb7rJMqg62uOnDN
-NqUU+fQqzNIZV28MGW9pvVhkkKSWWDPs+NYF66SlaXjXfup0Ro0OBe8NiX/1Qx0V
-8IcyUCjQQKTW4S8uyvEG2D18gLY0j0pjyAjokRIr65mZfbKSMcyN/ENqb0xWsYBr
-WHS1t5JmRJWSVGc+PiTzYnPjpoyMhtvozKgB+MB6mhKn2UJtJse+ZbuueOTQ1nn7
-Tuqcd2FuQDxai1b5mfxfsoTnWHmBH/6Xg8pQijv+H5EZaGICp9AXV4lK5juj0LAE
-OxszEP/cVKF7wCrdeAjoiK+6UeHqr2qCuRPWCwgc5EAB0MzaGGfVyOJ6LadiwoA6
-45uQ10FdrYdRyQpLSZXXaLugOZ592OaUz7RIxvzaWKanWWre4lCHACdr0WHf1f+W
-cLmVYIHv
-=yqYj
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWuq88ACgkQFHw5/5Y0
+tyzSCAwAs+2ASrR32WmMv2KV+OC7DCB+FePZKBtyWZDs2uurSJhOj012y3U7uAbX
+vdCcpFtuZn2EPTb7DpXDJhBsdjVv2gDKAIz5TcXJDlGqsgb3tVf9Ivdho/PdD5wP
+6uIIilfpejynV80TnViyW5PZ8pcEV/s2TcnsJJ24nCeSXlEEoP8EdAeLSzr6dJQi
+a76qnVwa51zKtVsHId4sDyIpLD8jpQYTAvz7ZRuTkZv/PHx98VN+W0YOdBio2OLv
+dlERtxHPzgwuqyRqZ5oqg0b6jPIt3Y7qJgvuSR5FgKNiW08F7SWYsumiNq+GIsea
+IeDv0XKFnRJQGbq0Rtd+OFKyaR6tdFEOBb78iMgj1jb4h94Aj5i+68RQgE2y71Hf
+q6wU46YNXZ4odMYvmG+cdDTkgB6NzLH8i1XkPYBTFDmrnsphk8plg1zCCLqdlBlk
+RtWOT42fjurcbTDZ4pKNL1gyY6qzzCYzurVJByCqk0YtDQruXSU75YAom6I2gP0U
+c1jkzXqa
+=jCcM
 -----END PGP SIGNATURE-----
 
---/gu2cU7P5GliUFp5--
+--Y9CytMBHNkThZd0y--
