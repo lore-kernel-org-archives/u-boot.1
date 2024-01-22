@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E3E8C46CD2
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 22:40:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81ED5C47E49
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 22:40:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AADDC87B93;
-	Mon, 22 Jan 2024 23:39:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3F9F087C3B;
+	Mon, 22 Jan 2024 23:39:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Aun0TUA3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YVjcKW5V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 393C987BC9; Mon, 22 Jan 2024 23:39:29 +0100 (CET)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
+ id 00B4287BFD; Mon, 22 Jan 2024 23:39:30 +0100 (CET)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04D7F879ED
+ by phobos.denx.de (Postfix) with ESMTPS id E00A9879CC
  for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 23:39:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-dc261316b0dso2704225276.3
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 14:39:26 -0800 (PST)
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-dc226bad48cso2276775276.3
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 14:39:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705963165; x=1706567965; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1705963166; x=1706567966; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AEQaeksex4jpEZckud7+vAwgTRE6cHmMjKpwkv+ZP/w=;
- b=Aun0TUA3QcAr+HFIo+tZ+OgRuGBD1jbBi22DzI4WTodW5wQRekjg7N3eoN5GPZPwKN
- k/G5XcpWlGLnag6tfYJMPka3i1XdM2bh2VS1fmdoutXl+BSFCL2H6vNLy3n8HRIqPmtr
- iYUAsm69s4+ytx5kXPZXydKAOzQqr6UqPHUqg=
+ bh=MaKkEWTRy7FKkqWWtCL+l1alTzGDd/6rK8fxtrxNki8=;
+ b=YVjcKW5V5j8AlA8gWF9wfUmdFPsGjt6UwxV+IrdFYXfyjaOJiImsMeSv2AbmVcDBG2
+ PiImji8PReHe2p78HcXvB/AcLer+dfGbEJJA3liCfjcDYrL+y47Cz1coviDnDmqjnuOE
+ Pxe4JpCk42xqJdLzJPL0bpoNf/weTd3Yj/Rdk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705963165; x=1706567965;
+ d=1e100.net; s=20230601; t=1705963166; x=1706567966;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AEQaeksex4jpEZckud7+vAwgTRE6cHmMjKpwkv+ZP/w=;
- b=lPymDHffbg8P7AVdKtC25jHGkCIdzKOy4l5pRrbBXyrJzNqKlcyP3wHq87DEPZZHqy
- YRj6vOB2yCJ1W9PjMGhnrNuWeAQbwCXhvln1x3gZiWaBHs6lCxc9QBU3J+zuWU0/q+0O
- i/uRuUeSJhkV3Ro9N+DMyzMlaWqCUQUHxGjM+/mxJ3yXwgPJ4ch9/b+XYkWoCfLKNDis
- 3MkSEzPryt/Xe+YK94hObyV8+wjhbHbVm7XBB16kvKQyThVcf/XNQLBX4ttfXPRQAm1x
- r8d9x2nTl9SS1Pj0tUz4DlLXl3cxqqld+iRIJa0SfIyv+0HMJNBvSR3AEaIyoF+2Xakd
- MQxA==
-X-Gm-Message-State: AOJu0Yzgbsj/aTKeh+F3C8G/kJjrjCCL8DrsKidFOE7w2uIy/RJzf7kT
- 1thjmzjp4LaGfDwKf0TJYK39fGfmrraf4JIB7UcPUMILVKVMVMJNBmZm2YacTwWywzjPO9Fs3XM
- 7
-X-Google-Smtp-Source: AGHT+IEGYt5sZ26WeO2m1Xsr7pMAbGFogGlQWRj1t13Cy9wmBkN6OPAjKMvQG7zZXb+SHpH87S4eeg==
-X-Received: by 2002:a25:c705:0:b0:dc2:526b:7949 with SMTP id
- w5-20020a25c705000000b00dc2526b7949mr2581198ybe.76.1705963165600; 
- Mon, 22 Jan 2024 14:39:25 -0800 (PST)
+ bh=MaKkEWTRy7FKkqWWtCL+l1alTzGDd/6rK8fxtrxNki8=;
+ b=eoF2jY06ATrIWRja6ESlzAjFsPMkOpiIrvCqDeK0xML1LqIxz0WO3vS2MCJMCSlnXa
+ pv6mPcgT1hMuno1zor8I/tLK2HEBSf2IYpzy70P4Y/JvfT8iQF/NzP2glwFjlYUw/6yl
+ NPhpgu+j0TVoRbAA0CcCL/PuX5RIp/TkFqC1+FwTtiQBX305USYr+nQwy7XblEZqS/Ca
+ iU0i75KYWQgVXQlciIvr3DRKE+ouBxoDyaJvvNbfhW9hxv8SVLSk7r5TFMvTKF8xSIZE
+ uevQiM414OvTclYfj/2G2S9DHYFBmOGaRobHgWrgULnbso4NwHF3u7XAJSzFCQ9SfcYs
+ 5NnA==
+X-Gm-Message-State: AOJu0YznW3JpxTceEhrZ3vEIFdVYGHQLxSxE4LuENLahwMkX6+Q+RHnU
+ bVwI/u5r5SmyQYUM/yLmkK1QlNgYq7m8U8A0+anXURzfCH8Zrz0r5XUT637G05Ck8BVxFD7cQaP
+ Z
+X-Google-Smtp-Source: AGHT+IE9L+B8GGs1LpXrwfcN0X34YldzPvn4sHunxQEbN5r2LM23mAOmNY7tAUc9MigmHjqF5dr0Hw==
+X-Received: by 2002:a5b:1ca:0:b0:dbd:72cc:75d8 with SMTP id
+ f10-20020a5b01ca000000b00dbd72cc75d8mr2355773ybp.71.1705963166369; 
+ Mon, 22 Jan 2024 14:39:26 -0800 (PST)
 Received: from bill-the-cat..
  (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- c18-20020a5b0bd2000000b00dc255105656sm1773243ybr.4.2024.01.22.14.39.24
+ c18-20020a5b0bd2000000b00dc255105656sm1773243ybr.4.2024.01.22.14.39.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 22 Jan 2024 14:39:25 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH 05/16] cherryhill: Remove empty config header
-Date: Mon, 22 Jan 2024 17:39:09 -0500
-Message-Id: <20240122223920.3630168-5-trini@konsulko.com>
+Subject: [PATCH 06/16] cougarcanyon2: Remove empty config header
+Date: Mon, 22 Jan 2024 17:39:10 -0500
+Message-Id: <20240122223920.3630168-6-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240122223920.3630168-1-trini@konsulko.com>
 References: <20240122223920.3630168-1-trini@konsulko.com>
@@ -91,52 +91,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Now that we support having CONFIG_SYS_CONFIG_NAME be unset to indicate a
-lack of board.h file, unset this on the cherryhill platform and remove
+lack of board.h file, unset this on the cougarcanyon2 platform and remove
 the otherwise empty file.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Bin Meng <bmeng.cn@gmail.com>
 ---
- board/intel/cherryhill/Kconfig     | 3 ---
- board/intel/cherryhill/MAINTAINERS | 1 -
- include/configs/cherryhill.h       | 4 ----
+ board/intel/cougarcanyon2/Kconfig     | 3 ---
+ board/intel/cougarcanyon2/MAINTAINERS | 1 -
+ include/configs/cougarcanyon2.h       | 4 ----
  3 files changed, 8 deletions(-)
- delete mode 100644 include/configs/cherryhill.h
+ delete mode 100644 include/configs/cougarcanyon2.h
 
-diff --git a/board/intel/cherryhill/Kconfig b/board/intel/cherryhill/Kconfig
-index 009cd93b6d44..28e4735e4d65 100644
---- a/board/intel/cherryhill/Kconfig
-+++ b/board/intel/cherryhill/Kconfig
+diff --git a/board/intel/cougarcanyon2/Kconfig b/board/intel/cougarcanyon2/Kconfig
+index 32407025bc16..841e041167e8 100644
+--- a/board/intel/cougarcanyon2/Kconfig
++++ b/board/intel/cougarcanyon2/Kconfig
 @@ -9,9 +9,6 @@ config SYS_VENDOR
  config SYS_SOC
- 	default "braswell"
+ 	default "ivybridge"
  
 -config SYS_CONFIG_NAME
--	default "cherryhill"
+-	default "cougarcanyon2"
 -
  config TEXT_BASE
  	default 0xffe00000
  
-diff --git a/board/intel/cherryhill/MAINTAINERS b/board/intel/cherryhill/MAINTAINERS
-index 6e90f642125e..7c1b311990c4 100644
---- a/board/intel/cherryhill/MAINTAINERS
-+++ b/board/intel/cherryhill/MAINTAINERS
-@@ -2,5 +2,4 @@ INTEL CHERRYHILL BOARD
+diff --git a/board/intel/cougarcanyon2/MAINTAINERS b/board/intel/cougarcanyon2/MAINTAINERS
+index a486739b5eea..a4f465cf5df3 100644
+--- a/board/intel/cougarcanyon2/MAINTAINERS
++++ b/board/intel/cougarcanyon2/MAINTAINERS
+@@ -2,5 +2,4 @@ INTEL COUGAR CANYON 2 BOARD
  M:	Bin Meng <bmeng.cn@gmail.com>
  S:	Maintained
- F:	board/intel/cherryhill/
--F:	include/configs/cherryhill.h
- F:	configs/cherryhill_defconfig
-diff --git a/include/configs/cherryhill.h b/include/configs/cherryhill.h
+ F:	board/intel/cougarcanyon2/
+-F:	include/configs/cougarcanyon2.h
+ F:	configs/cougarcanyon2_defconfig
+diff --git a/include/configs/cougarcanyon2.h b/include/configs/cougarcanyon2.h
 deleted file mode 100644
-index a3009571de98..000000000000
---- a/include/configs/cherryhill.h
+index 0406786f7c66..000000000000
+--- a/include/configs/cougarcanyon2.h
 +++ /dev/null
 @@ -1,4 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0+ */
 -/*
-- * Copyright (C) 2017, Bin Meng <bmeng.cn@gmail.com>
+- * Copyright (C) 2016, Bin Meng <bmeng.cn@gmail.com>
 - */
 -- 
 2.34.1
