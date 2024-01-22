@@ -4,57 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E48BCC47DAF
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 15:20:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B665BC47DD9
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 15:36:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34DA4879BD;
-	Mon, 22 Jan 2024 16:20:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id EA01A87872;
+	Mon, 22 Jan 2024 16:36:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1705936802;
-	bh=/jD4VR49GbyoImCRckqxS3ZsECxYwhI079fVXx5YMYA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=NI8/QGEjM83IiC+R3UDJEehHpgvBgrCOYY9F9OJDLkbP+hkXavj4gZ22dGiLSjEtN
-	 QAdZUJt6uBIRaYrrT7CY5w+FVbLaf4db7GFlfH/aPLSf8d7FdjNhaodF5mKEoZebtA
-	 QxhGggqr+TuyZt74ghyefnPWU7/oNxLhpvofWuj4ZG9WNjn3cbvwatS6dNwa9Dx25P
-	 WVd6KRXbyIVfh2/S5DY2PEcdgijjHaYcVss+1U7oblpxphZFLF2baUohaqesP51RG1
-	 SaRlSe90az8R7djWPJ8J/zX73y+5o7B7IwaGvDA9pyuNXTo97rYz1YczQZPcfgwuGu
-	 WL89gMVDfg/PQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id CC4FA8793F; Mon, 22 Jan 2024 16:20:00 +0100 (CET)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 625C5879CB
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 16:19:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JZWOj12w";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 505B78793F; Mon, 22 Jan 2024 16:36:27 +0100 (CET)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4TJYmr0vHtz9sNn;
- Mon, 22 Jan 2024 16:19:56 +0100 (CET)
-Message-ID: <b5abdde1-3087-413a-a8ab-73ba5f2dcb85@denx.de>
-Date: Mon, 22 Jan 2024 16:19:55 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 39F54877EC
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 16:36:25 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-5fc2e997804so27889707b3.3
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 07:36:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1705937784; x=1706542584; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=H58wDkKGINfeZTsmjoo8tY/J253uCoZXQoC8r9TVrPM=;
+ b=JZWOj12wwIszCMWClJW226WlQZZnzgwRsiZEwx+Pp+pbzA+1aDYFJ8+STWJy2f39tp
+ UrT/x21mnNIsqD5I9GpMNEgPEYwr2sSbeNfnxEvz4a4NJa8z0o/Gg9JB6D5QyFbk6krw
+ x0z7Yx4XGvziiW2TWIejD7o+DnLtIKfnddI2k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705937784; x=1706542584;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=H58wDkKGINfeZTsmjoo8tY/J253uCoZXQoC8r9TVrPM=;
+ b=abxdPF0bvtyI4wHE5wtPLgGULbly3IMB1WLXZpHNo2pV2+Grmc6K+Su77UZUwVmUK4
+ m9/ZdG1IaY4fGSZA55ixVO0GZ1SJFuX8xKyu71Wltns2wD2Ae1f+2aElkv5BAlEQ9e0q
+ fYgihdhWwNbzX264YChpATK6hofwbIND3ZqLUH1XRkbkyPe3azbvGsYxL+ZHhT8sUG4l
+ RpY2segqr4gFIPojDwG3Aap098rC833QgVizGbNw/oIGblhmYGW/S08wGuZuw4ZmZBk/
+ qJQuHPgpq8udnry4x1F40a5bktfYCZV8Xc3vkXjJyLhHruKMXAZ8aoymY+jlrd5wKr71
+ 0Mhg==
+X-Gm-Message-State: AOJu0YxT+wycr33bKDMBSMlwepFb2ixQB/JGdCuKxHom2HUMnDtFwUpn
+ 5Y5y00Ur8U3VBsUePPW8QW6r4OpcZ1IIXIHOXIjPwiLdYD6J5dmNWLLjLOlqt8/c1mgHKu5vmbD
+ o
+X-Google-Smtp-Source: AGHT+IHoaozHhd6SUYji0HkDdfcV4Jnn5cHoBzFhl7m4p4JvFfwIVf5WLHGYDXHn56Q/d4HaMs3QUg==
+X-Received: by 2002:a0d:fec1:0:b0:5ff:5d73:2fb1 with SMTP id
+ o184-20020a0dfec1000000b005ff5d732fb1mr3879221ywf.93.1705937783915; 
+ Mon, 22 Jan 2024 07:36:23 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ a126-20020a0dd884000000b005ffa3fa57f9sm2249948ywe.51.2024.01.22.07.36.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Jan 2024 07:36:23 -0800 (PST)
+Date: Mon, 22 Jan 2024 10:36:21 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Tim Lunn <tim@feathertop.org>
+Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 3/5] board: rockchip: Add Sonoff iHost board
+Message-ID: <20240122153621.GK3652023@bill-the-cat>
+References: <20240122124603.3341988-1-tim@feathertop.org>
+ <20240122124603.3341988-4-tim@feathertop.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 0/2] board: solidrun: clearfog gtr: add serdes
- configuration
-Content-Language: en-US
-To: Josua Mayer <josua@solid-run.com>
-Cc: u-boot@lists.denx.de
-References: <20240112-clearfog-gtr-serdes-v2-0-4c24b751d838@solid-run.com>
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20240112-clearfog-gtr-serdes-v2-0-4c24b751d838@solid-run.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 4TJYmr0vHtz9sNn
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="DN6Va/KjopDXmpKC"
+Content-Disposition: inline
+In-Reply-To: <20240122124603.3341988-4-tim@feathertop.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,33 +94,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/12/24 14:35, Josua Mayer wrote:
-> Add missing configuration options for clearog gtr serdes:
-> 
-> 1. select between sata and pci-e for serdes 0
-> 2. configure serdes 2 for 2.5Gbps link with managed switch
-> 
-> Signed-off-by: Josua Mayer <josua@solid-run.com>
-> ---
-> Changes in v2:
-> - change choice default logic to remove kconfig warning
-> - Link to v1: https://lore.kernel.org/r/20240106-clearfog-gtr-serdes-v1-0-66cbc350c58d@solid-run.com
-> 
-> ---
-> Josua Mayer (2):
->        arm: mvebu: clearfog gtr: add config option to select serdes0 interface
->        board: solidrun: clearfog: fix serdes 1 / eth2 speed for clearfog gtr
-> 
->   board/solidrun/clearfog/Kconfig    | 19 +++++++++++++++++++
->   board/solidrun/clearfog/clearfog.c | 19 ++++++++++++++++---
->   2 files changed, 35 insertions(+), 3 deletions(-)
-> ---
-> base-commit: 2ee7a8ec6f1711abe9619fd8765edc16742be9de
-> change-id: 20240106-clearfog-gtr-serdes-8a927f496bda
-> 
-> Sincerely,
 
-Applied to u-boot-mavell/master
+--DN6Va/KjopDXmpKC
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks,
-Stefan
+On Mon, Jan 22, 2024 at 11:46:01PM +1100, Tim Lunn wrote:
+
+> Sonoff iHost is gateway device designed to provide a Smart Home Hub,
+> it is based on Rockchip RV1126. There is also a version with 2GB RAM
+> based off the RV1109 dual core SoC however this works with the same
+> config as the RV1126 for uboot purposes.
+[snip]
+> diff --git a/include/configs/sonoff-ihost.h b/include/configs/sonoff-ihos=
+t.h
+> new file mode 100644
+> index 0000000000..8ed5d78687
+> --- /dev/null
+> +++ b/include/configs/sonoff-ihost.h
+> @@ -0,0 +1,18 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +
+> +#ifndef __SONOFF_IHOST_H
+> +#define __SONOFF_IHOST_H
+> +
+> +#define ROCKCHIP_DEVICE_SETTINGS \
+> +		"stdout=3Dserial\0" \
+> +		"stderr=3Dserial\0"
+> +
+> +#include <configs/rv1126_common.h>
+> +
+> +#undef BOOT_TARGET_DEVICES
+> +
+> +#define BOOT_TARGET_DEVICES(func) \
+> +	func(MMC, mmc, 0) \
+> +	func(MMC, mmc, 1)
+> +
+> +#endif /*  __SONOFF_IHOST_H */
+
+We should be using standard boot, which removes most of this, thanks.
+
+--=20
+Tom
+
+--DN6Va/KjopDXmpKC
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWui3EACgkQFHw5/5Y0
+tyzTLgv9Huk21UKTJfRozFVtE/DuRkdmMvtfRrdFZavx6AsSHYbVnTMt6QWOESU9
+YWmk5FcEv5MCiTmft1p4SMITnoFBvE+lxbgbo/Gn3UfHpvFfHp2wAEiLtmbBZhtz
+HkZlsriVxFHb7jtbZGLdNd139yRHzt1Ma67j5/Fs4HkkzkKpjDlh71wwg/pvDpL4
+FKz41vxO60E9MO6fdg6vZ57dBBdtt0tVJb4yX8b3jmZ58WiAAVvhoZfDdmoHlLxy
+TH2m+vGHuRJRE99DV8eBY+z5zkIpDEmRCXGTbsjbBGhcalBWXSBs9vNR9wOcI3DW
+kuSGBP5fzouOXJt2dahidLjuxF6oRcua6oy87LBkEQQANWSh2AfiXEdXbqD6HdaM
+lWVxlhY4pNQqq7z+ezwK7bsLHKRDFkr27xKhKZgdgMYcc+8pFldk234hk3fZwwOk
+2yrhK7Y62LnfxdO8PMxwY8scFrML6xEuy1F68K43kLTn+qXV0tYBmOmGiFHec+jK
+GD2dBbzb
+=eoGD
+-----END PGP SIGNATURE-----
+
+--DN6Va/KjopDXmpKC--
