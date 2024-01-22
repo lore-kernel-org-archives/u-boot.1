@@ -4,93 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A3DEC4725D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 12:46:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE01DC4725D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 12:46:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8016879B2;
-	Mon, 22 Jan 2024 13:46:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4D3D187B26;
+	Mon, 22 Jan 2024 13:46:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=feathertop.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=feathertop.org header.i=@feathertop.org header.b="Hq+7PmPt";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="QQxgZEcr";
+	dkim=pass (2048-bit key; unprotected) header.d=feathertop.org header.i=@feathertop.org header.b="AqfvUm4T";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="lWz1Ll0W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F690879B2; Mon, 22 Jan 2024 13:46:30 +0100 (CET)
+ id 44E6687B1F; Mon, 22 Jan 2024 13:46:34 +0100 (CET)
 Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
  [66.111.4.26])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2B0487812
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 13:46:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BC2487812
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 13:46:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=feathertop.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tim@feathertop.org
-Received: from compute7.internal (compute7.nyi.internal [10.202.2.48])
- by mailout.nyi.internal (Postfix) with ESMTP id D48AB5C00F8;
- Mon, 22 Jan 2024 07:46:22 -0500 (EST)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+ by mailout.nyi.internal (Postfix) with ESMTP id 9FEF65C0117;
+ Mon, 22 Jan 2024 07:46:30 -0500 (EST)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute7.internal (MEProxy); Mon, 22 Jan 2024 07:46:22 -0500
+ by compute6.internal (MEProxy); Mon, 22 Jan 2024 07:46:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=feathertop.org;
  h=cc:cc:content-transfer-encoding:content-type:date:date:from
- :from:in-reply-to:message-id:mime-version:reply-to:subject
- :subject:to:to; s=fm2; t=1705927582; x=1706013982; bh=2Ne8UAzm5r
- 1mGzhY6AmzMFprZYLOl3p4uaaEzDzbG7s=; b=Hq+7PmPtgGHqm/i4jQu2BQVsab
- Kl1Ysy/PIumoOZVe/u1FLZu7TDRamNZGcMHZMBksRQoT9o4Z54sqO6qb4gq5euE/
- G/H1JUessQn5U85da6t+IVGbzxorgUQjhbi55YS5Xmldv3J9+UxQ6WHqhFIUoLW6
- 8Vy43/4GbZ7JoVWMYsaQX8Gt0Qinm0ObMDg+uqSwjdFeI7cxTkr/ODSoUYr31TPn
- Z56Z7il6agC+KRh6ZmtJtFiwgDvbgJsaM6YnkNm4ZQlI9q2t2i7iVF+BR/8K4Uu8
- JhvzmIZ35WAZybitvhNJ2t3LSdLFd7LwHz9BnfWUZUWrefJRp48u/NlqppJg==
+ :from:in-reply-to:in-reply-to:message-id:mime-version:references
+ :reply-to:subject:subject:to:to; s=fm2; t=1705927590; x=
+ 1706013990; bh=nRSY5whvC7fmjMcDjIUGb1qwBpQGO8iqlHCl7om4ZE8=; b=A
+ qfvUm4TcZKFylSv4Gn7hGlvxTCQLOA0jD24sC6B9xlEN7nTDbghrOXvsPzPrQm29
+ enT1Mk30covaBQGda87NEav2ALgjApj1Ej0s5PfsgfLum7STj4kckhBBLEFrkFuZ
+ xZ84iahWMGx7sAFo+QKMUqdt0HhHfUUdyOusd8bIa6Td2Y6y1TD1gL7CIlYj1E/E
+ tAPLculUvsp6b0FDZlLRxC3fW3khZsbNjiM0EGTXmvQrZLCUZXFRmQj9Z8J1ztF1
+ PcKGiMKFpfYtOHH8wOH+njvZRQygGqTKRH70HMpoC7vZKWSdUmUYItnx0R5DMvFM
+ jEKjwReaGm50sHU6U5log==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:date:date:feedback-id:feedback-id:from:from
- :in-reply-to:message-id:mime-version:reply-to:subject:subject:to
- :to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm3; t=1705927582; x=1706013982; bh=2Ne8UAzm5r1mGzhY6AmzMFprZYLO
- l3p4uaaEzDzbG7s=; b=QQxgZEcrskKnzaXtrhjrWJBXtjKaRKGRwJWPKfJcyu+d
- WEQLf+CtSHh/YfB1QDNTWsdQeGd/oxrnGBesCjfE3+KNaK2r7rBnU1jGX62+WE27
- w7qykxuZlOTpG2PsZx/0m8Rj9ShfWOLWh94b3lK65CCqFWnYvAXulUt2bNIZHaxV
- WKCi2DV+zFnYEZJO3uRKpcSWnjI3zkV15AZ4M0LiSfJLdTC8KTIsdqhEVmuDp2Om
- 94WxLF/uSuRCruOW8NqY9twc0GDHqn0F5aRsdRLcbQig7wDkLpM6yJeo/Kdyaa1q
- +9DALBENRbegjeHDtjFfX6lGMPb8s3PTbfvsvHGxjg==
-X-ME-Sender: <xms:nWOuZeZHmVX9PrgjT9jPZgCA2AWAwiav65MFq82bt4Xi2xi0kA7HEg>
- <xme:nWOuZRZd2iyXAL1GKpxrDObleeoFH6uoE9k6MalilibGhj_IDJ8yvkA_P6Rh3iVtK
- 8Z_plOPhw>
-X-ME-Received: <xmr:nWOuZY--QyRP0mxVUK-OTBXmEe7QqXdTDE0BUKd3O6rXmknYRB38ONrg1_R9Ycg0fXyRvHtcQzMr0obMeaN8tPap24ujfFcre9w>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrvdekiedggedvucetufdoteggodetrfdotf
+ :in-reply-to:in-reply-to:message-id:mime-version:references
+ :reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1705927590; x=
+ 1706013990; bh=nRSY5whvC7fmjMcDjIUGb1qwBpQGO8iqlHCl7om4ZE8=; b=l
+ Wz1Ll0Wzuj+9FEhvJFDRJzYxx6kYZPCRQXQ6/8api/R4e9tPJeSgNgSPAHOjKICy
+ dass9bXvnIQP0vhrR0BFyzKS1j0UdSYbk7eyfpVHeu2v3KMaVTp11OtyWnqYqpjU
+ nzzfx5tulW3QE+rDbpwhdyEPclkLChSBbW5t/eaRxUFrTuIWLiNIdtb/aLSn9eC1
+ jPB8EjquL/9GZy86fIXQPXUv8EQqd253RR0ftr65arYqYRF9uoFmAfgt+ntNU+Dl
+ 0EI0tdLVrYA57fRFh3K5hK9rDVP8QzllvcADmCkkJrUmt3Ifz1wSQZiYoFOOWyxT
+ mL+PP++8ttc5alwyOnIlA==
+X-ME-Sender: <xms:pmOuZa2khuaYb1fLFIU7h2BAM53D0IWofrc1hL330DiMtoD2gchrtQ>
+ <xme:pmOuZdGnuTwKPwJ4IW80hPCxMgJuZbyALsssDaFTUYvggnqNiIAFfWZzoGnMvU61l
+ ysx1Vi2kg>
+X-ME-Received: <xmr:pmOuZS6S3pGkSS2bc-tUXEQxbliTQEXgNAObsvgoZWV1s3hivLGTsKpImHIZc45bYBLsPGXS0lpDSu12QXFKZcP66iUijjD-WEI>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrvdekiedggeefucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhephffvvefufffkofgggfestdekredtredttdenucfhrhhomhepvfhimhcunfhu
- nhhnuceothhimhesfhgvrghthhgvrhhtohhprdhorhhgqeenucggtffrrghtthgvrhhnpe
- duhfdtveeujeejjeffieevgfdtudegfeffvedugfetteehudevteehtefgieeitdenucev
- lhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehtihhmsehfvg
- grthhhvghrthhophdrohhrgh
-X-ME-Proxy: <xmx:nWOuZQoJxEB2warKgHTygp_8VH-P0dgn58YwlRdDPlo0LCLtRntP5Q>
- <xmx:nWOuZZqZEvF9zWeecULzII832JoEL7_JY5gT8sfStyF1lB5pbfiSyg>
- <xmx:nWOuZeReygHwVYkEAgI6Iqeh7aiu7PFGF3S8EwjvWV3oVg2z_1YtMw>
- <xmx:nmOuZaTyBceXFd_8xRj9HBT1R5WwK_dsWTXlrJdqXbRfyBCPHoz26A>
+ cujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepvfhimhcu
+ nfhunhhnuceothhimhesfhgvrghthhgvrhhtohhprdhorhhgqeenucggtffrrghtthgvrh
+ hnpeefffeuhfetgeeikeejvefgtdefteehgfdvhfetfeeuffeuhffhfeekgfekgeehieen
+ ucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehtihhmse
+ hfvggrthhhvghrthhophdrohhrgh
+X-ME-Proxy: <xmx:pmOuZb39ZP4Xw2oz3WDH5MDcJIlorKuPnbGRfu3zbytz7g_9wCmg3g>
+ <xmx:pmOuZdGbdxkZ0CdThD6qre3hx2AM8yAn2139IbOIA7Oc7pIK8eaV6w>
+ <xmx:pmOuZU-6fbFGJ54PxM5xCI4vBkJV1gC5NqneocjkcC7ONFkuf8fv8g>
+ <xmx:pmOuZWOSbZIH4LA68-OtqU_UopPfRwpmFYdtTCMqJl3m-3ic33KMQA>
 Feedback-ID: i1f8241ce:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 22 Jan 2024 07:46:15 -0500 (EST)
+ 22 Jan 2024 07:46:26 -0500 (EST)
 Received: by feathertop.org (sSMTP sendmail emulation);
- Mon, 22 Jan 2024 23:46:11 +1100
+ Mon, 22 Jan 2024 23:46:23 +1100
 From: Tim Lunn <tim@feathertop.org>
 To: u-boot@lists.denx.de
-Cc: Tim Lunn <tim@feathertop.org>, Jagan Teki <jagan@edgeble.ai>,
- Johan Jonker <jbx6244@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>,
- Massimo Pegorer <massimo.pegorer+oss@gmail.com>,
- Michal Simek <michal.simek@amd.com>,
+Cc: Tim Lunn <tim@feathertop.org>, Kever Yang <kever.yang@rock-chips.com>,
  Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 0/5] rockchip: Add support for rv1126 based Sonoff iHost
- Gateway
-Date: Mon, 22 Jan 2024 23:45:58 +1100
-Message-Id: <20240122124603.3341988-1-tim@feathertop.org>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/5] arm: dts: rockchip: Sync rv1126 dts from linux 6.8-rc1
+Date: Mon, 22 Jan 2024 23:45:59 +1100
+Message-Id: <20240122124603.3341988-2-tim@feathertop.org>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20240122124603.3341988-1-tim@feathertop.org>
+References: <20240122124603.3341988-1-tim@feathertop.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -109,72 +107,1027 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Sync linux dts files for rv1126 boards from linux v6.8-rc1 tag. Includes
+the newly added dts for Sonoff iHost.
 
-Sonoff iHost is gateway device designed to provide a Smart Home Hub,
-it is based on Rockchip RV1126. It features Wifi, BT and Zigbee radios
-as required by many smart home devices.
+Signed-off-by: Tim Lunn <tim@feathertop.org>
+---
 
-Features:
-- Rockchip RV1126
-- 4GB DDR4
-- 8GB eMMC
-- microSD slot
-- RMII Ethernet PHY
-- 1x USB 2.0 Host
-- 1x USB 2.0 OTG
-- Realtek RTL8723DS WiFi/BT
-- EFR32MG21 Silabs Zigbee radio
-- Speaker/Microphone
-
-Sync rv1126 dts from linux v6.8-rc1, add support for ddr4 ram and add
-board support for the Sonoff ihost.
-
-
-Tim Lunn (5):
-  arm: dts: rockchip: Sync rv1126 dts from linux 6.8-rc1
-  ram: rockchip: Add rv1126 ddr4 support
-  board: rockchip: Add Sonoff iHost board
-  rockchip: rv1126: select SPL_OPTEE_IMAGE
-  rockchip: rv1126: Move RAM disk address
-
- arch/arm/dts/rv1126-edgeble-neu2-io.dts       |  70 +++
- arch/arm/dts/rv1126-edgeble-neu2.dtsi         |  27 +-
- arch/arm/dts/rv1126-pinctrl.dtsi              | 130 ++++++
- arch/arm/dts/rv1126-sonoff-ihost-u-boot.dtsi  |  13 +
- arch/arm/dts/rv1126-sonoff-ihost.dts          |  29 ++
- arch/arm/dts/rv1126-sonoff-ihost.dtsi         | 404 ++++++++++++++++++
- arch/arm/dts/rv1126.dtsi                      | 185 ++++++++
- arch/arm/mach-rockchip/Kconfig                |   1 +
- arch/arm/mach-rockchip/rv1126/Kconfig         |   8 +
- board/itead/sonoff-ihost/Kconfig              |  16 +
- board/itead/sonoff-ihost/MAINTAINERS          |   6 +
- configs/sonoff-ihost-rv1126_defconfig         |  60 +++
- .../sdram-rv1126-ddr4-detect-1056.inc         |  75 ++++
- .../rockchip/sdram-rv1126-ddr4-detect-328.inc |  75 ++++
- .../rockchip/sdram-rv1126-ddr4-detect-396.inc |  75 ++++
- .../rockchip/sdram-rv1126-ddr4-detect-528.inc |  75 ++++
- .../rockchip/sdram-rv1126-ddr4-detect-664.inc |  75 ++++
- .../rockchip/sdram-rv1126-ddr4-detect-784.inc |  75 ++++
- .../rockchip/sdram-rv1126-ddr4-detect-924.inc |  75 ++++
- drivers/ram/rockchip/sdram_rv1126.c           |   8 +
- include/configs/rv1126_common.h               |   2 +-
- include/configs/sonoff-ihost.h                |  18 +
- 22 files changed, 1491 insertions(+), 11 deletions(-)
- create mode 100644 arch/arm/dts/rv1126-sonoff-ihost-u-boot.dtsi
+ arch/arm/dts/rv1126-edgeble-neu2-io.dts |  70 ++++
+ arch/arm/dts/rv1126-edgeble-neu2.dtsi   |  27 +-
+ arch/arm/dts/rv1126-pinctrl.dtsi        | 130 ++++++++
+ arch/arm/dts/rv1126-sonoff-ihost.dts    |  29 ++
+ arch/arm/dts/rv1126-sonoff-ihost.dtsi   | 404 ++++++++++++++++++++++++
+ arch/arm/dts/rv1126.dtsi                | 185 +++++++++++
+ 6 files changed, 835 insertions(+), 10 deletions(-)
  create mode 100644 arch/arm/dts/rv1126-sonoff-ihost.dts
  create mode 100644 arch/arm/dts/rv1126-sonoff-ihost.dtsi
- create mode 100644 board/itead/sonoff-ihost/Kconfig
- create mode 100644 board/itead/sonoff-ihost/MAINTAINERS
- create mode 100644 configs/sonoff-ihost-rv1126_defconfig
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-1056.inc
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-328.inc
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-396.inc
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-528.inc
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-664.inc
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-784.inc
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-924.inc
- create mode 100644 include/configs/sonoff-ihost.h
 
+diff --git a/arch/arm/dts/rv1126-edgeble-neu2-io.dts b/arch/arm/dts/rv1126-edgeble-neu2-io.dts
+index dded0a12f0..0c2396b8f8 100644
+--- a/arch/arm/dts/rv1126-edgeble-neu2-io.dts
++++ b/arch/arm/dts/rv1126-edgeble-neu2-io.dts
+@@ -20,6 +20,76 @@
+ 	chosen {
+ 		stdout-path = "serial2:1500000n8";
+ 	};
++
++	vcc12v_dcin: vcc12v-dcin-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc12v_dcin";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <12000000>;
++		regulator-max-microvolt = <12000000>;
++	};
++
++	vcc5v0_sys: vcc5v0-sys-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc5v0_sys";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		vin-supply = <&vcc12v_dcin>;
++	};
++
++	v3v3_sys: v3v3-sys-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "v3v3_sys";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		vin-supply = <&vcc5v0_sys>;
++	};
++};
++
++&gmac {
++	assigned-clocks = <&cru CLK_GMAC_SRC>, <&cru CLK_GMAC_TX_RX>,
++			  <&cru CLK_GMAC_ETHERNET_OUT>;
++	assigned-clock-parents = <&cru CLK_GMAC_SRC_M1>, <&cru RGMII_MODE_CLK>;
++	assigned-clock-rates = <125000000>, <0>, <25000000>;
++	clock_in_out = "input";
++	phy-handle = <&phy>;
++	phy-mode = "rgmii";
++	phy-supply = <&vcc_3v3>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&rgmiim1_miim &rgmiim1_bus2 &rgmiim1_bus4 &clk_out_ethernetm1_pins>;
++	tx_delay = <0x2a>;
++	rx_delay = <0x1a>;
++	status = "okay";
++};
++
++&mdio {
++	phy: ethernet-phy@0 {
++		compatible = "ethernet-phy-id001c.c916",
++			     "ethernet-phy-ieee802.3-c22";
++		reg = <0x0>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&eth_phy_rst>;
++		reset-assert-us = <20000>;
++		reset-deassert-us = <100000>;
++		reset-gpios = <&gpio0 RK_PB6 GPIO_ACTIVE_LOW>;
++	};
++};
++
++&pinctrl {
++	ethernet {
++		eth_phy_rst: eth-phy-rst {
++			rockchip,pins = <0 RK_PB6 RK_FUNC_GPIO &pcfg_pull_down>;
++		};
++	};
++};
++
++&pwm11 {
++	status = "okay";
+ };
+ 
+ &sdmmc {
+diff --git a/arch/arm/dts/rv1126-edgeble-neu2.dtsi b/arch/arm/dts/rv1126-edgeble-neu2.dtsi
+index cc64ba4be3..7ea8d7d16f 100644
+--- a/arch/arm/dts/rv1126-edgeble-neu2.dtsi
++++ b/arch/arm/dts/rv1126-edgeble-neu2.dtsi
+@@ -11,15 +11,6 @@
+ 		mmc0 = &emmc;
+ 	};
+ 
+-	vcc5v0_sys: vcc5v0-sys-regulator {
+-		compatible = "regulator-fixed";
+-		regulator-name = "vcc5v0_sys";
+-		regulator-always-on;
+-		regulator-boot-on;
+-		regulator-min-microvolt = <5000000>;
+-		regulator-max-microvolt = <5000000>;
+-	};
+-
+ 	vccio_flash: vccio-flash-regulator {
+ 		compatible = "regulator-fixed";
+ 		enable-active-high;
+@@ -52,7 +43,7 @@
+ 	bus-width = <8>;
+ 	non-removable;
+ 	pinctrl-names = "default";
+-	pinctrl-0 = <&emmc_bus8 &emmc_cmd &emmc_clk &emmc_rstnout>;
++	pinctrl-0 = <&emmc_bus8 &emmc_cmd &emmc_clk>;
+ 	rockchip,default-sample-phase = <90>;
+ 	vmmc-supply = <&vcc_3v3>;
+ 	vqmmc-supply = <&vccio_flash>;
+@@ -301,6 +292,22 @@
+ 	status = "okay";
+ };
+ 
++&sfc {
++	pinctrl-names = "default";
++	pinctrl-0 = <&fspi_pins>;
++	#address-cells = <1>;
++	#size-cells = <0>;
++	status = "okay";
++
++	flash@0 {
++		compatible = "jedec,spi-nor";
++		reg = <0>;
++		spi-max-frequency = <50000000>;
++		spi-rx-bus-width = <4>;
++		spi-tx-bus-width = <1>;
++	};
++};
++
+ &sdio {
+ 	bus-width = <4>;
+ 	cap-sd-highspeed;
+diff --git a/arch/arm/dts/rv1126-pinctrl.dtsi b/arch/arm/dts/rv1126-pinctrl.dtsi
+index 28d8d29942..f84f5f2d96 100644
+--- a/arch/arm/dts/rv1126-pinctrl.dtsi
++++ b/arch/arm/dts/rv1126-pinctrl.dtsi
+@@ -11,6 +11,14 @@
+  * by adding changes at end of this file.
+  */
+ &pinctrl {
++	clk_out_ethernet {
++		/omit-if-no-ref/
++		clk_out_ethernetm1_pins: clk-out-ethernetm1-pins {
++			rockchip,pins =
++				/* clk_out_ethernet_m1 */
++				<2 RK_PC5 2 &pcfg_pull_none>;
++		};
++	};
+ 	emmc {
+ 		/omit-if-no-ref/
+ 		emmc_rstnout: emmc-rstnout {
+@@ -51,6 +59,24 @@
+ 				<0 RK_PD5 2 &pcfg_pull_up_drv_level_2>;
+ 		};
+ 	};
++	fspi {
++		/omit-if-no-ref/
++		fspi_pins: fspi-pins {
++			rockchip,pins =
++				/* fspi_clk */
++				<1 RK_PA3 3 &pcfg_pull_down>,
++				/* fspi_cs0n */
++				<0 RK_PD4 3 &pcfg_pull_up>,
++				/* fspi_d0 */
++				<1 RK_PA0 3 &pcfg_pull_up>,
++				/* fspi_d1 */
++				<1 RK_PA1 3 &pcfg_pull_up>,
++				/* fspi_d2 */
++				<0 RK_PD6 3 &pcfg_pull_up>,
++				/* fspi_d3 */
++				<1 RK_PA2 3 &pcfg_pull_up>;
++		};
++	};
+ 	i2c0 {
+ 		/omit-if-no-ref/
+ 		i2c0_xfer: i2c0-xfer {
+@@ -61,6 +87,86 @@
+ 				<0 RK_PB5 1 &pcfg_pull_none_drv_level_0_smt>;
+ 		};
+ 	};
++	i2c2 {
++		/omit-if-no-ref/
++		i2c2_xfer: i2c2-xfer {
++			rockchip,pins =
++				/* i2c2_scl */
++				<0 RK_PC2 1 &pcfg_pull_none_drv_level_0_smt>,
++				/* i2c2_sda */
++				<0 RK_PC3 1 &pcfg_pull_none_drv_level_0_smt>;
++		};
++	};
++	pwm2 {
++		/omit-if-no-ref/
++		pwm2m0_pins: pwm2m0-pins {
++			rockchip,pins =
++				/* pwm2_pin_m0 */
++				<0 RK_PC0 3 &pcfg_pull_none>;
++		};
++	};
++	pwm11 {
++		/omit-if-no-ref/
++		pwm11m0_pins: pwm11m0-pins {
++			rockchip,pins =
++				/* pwm11_pin_m0 */
++				<3 RK_PA7 6 &pcfg_pull_none>;
++		};
++	};
++	rgmii {
++		/omit-if-no-ref/
++		rgmiim1_miim: rgmiim1-miim {
++			rockchip,pins =
++				/* rgmii_mdc_m1 */
++				<2 RK_PC2 2 &pcfg_pull_none>,
++				/* rgmii_mdio_m1 */
++				<2 RK_PC1 2 &pcfg_pull_none>;
++		};
++		/omit-if-no-ref/
++		rgmiim1_rxer: rgmiim1-rxer {
++			rockchip,pins =
++				/* rgmii_rxer_m1 */
++				<2 RK_PC0 2 &pcfg_pull_none>;
++		};
++		/omit-if-no-ref/
++		rgmiim1_bus2: rgmiim1-bus2 {
++			rockchip,pins =
++				/* rgmii_rxd0_m1 */
++				<2 RK_PB5 2 &pcfg_pull_none>,
++				/* rgmii_rxd1_m1 */
++				<2 RK_PB6 2 &pcfg_pull_none>,
++				/* rgmii_rxdv_m1 */
++				<2 RK_PB4 2 &pcfg_pull_none>,
++				/* rgmii_txd0_m1 */
++				<2 RK_PC3 2 &pcfg_pull_none_drv_level_3>,
++				/* rgmii_txd1_m1 */
++				<2 RK_PC4 2 &pcfg_pull_none_drv_level_3>,
++				/* rgmii_txen_m1 */
++				<2 RK_PC6 2 &pcfg_pull_none_drv_level_3>;
++		};
++		/omit-if-no-ref/
++		rgmiim1_bus4: rgmiim1-bus4 {
++			rockchip,pins =
++				/* rgmii_rxclk_m1 */
++				<2 RK_PD3 2 &pcfg_pull_none>,
++				/* rgmii_rxd2_m1 */
++				<2 RK_PC7 2 &pcfg_pull_none>,
++				/* rgmii_rxd3_m1 */
++				<2 RK_PD0 2 &pcfg_pull_none>,
++				/* rgmii_txclk_m1 */
++				<2 RK_PD2 2 &pcfg_pull_none_drv_level_3>,
++				/* rgmii_txd2_m1 */
++				<2 RK_PD1 2 &pcfg_pull_none_drv_level_3>,
++				/* rgmii_txd3_m1 */
++				<2 RK_PA4 2 &pcfg_pull_none_drv_level_3>;
++		};
++		/omit-if-no-ref/
++		rgmiim1_mclkinout: rgmiim1-mclkinout {
++			rockchip,pins =
++				/* rgmii_clk_m1 */
++				<2 RK_PB7 2 &pcfg_pull_none>;
++		};
++	};
+ 	sdmmc0 {
+ 		/omit-if-no-ref/
+ 		sdmmc0_bus4: sdmmc0-bus4 {
+@@ -187,6 +293,14 @@
+ 				/* uart3_tx_m0 */
+ 				<3 RK_PC6 4 &pcfg_pull_up>;
+ 		};
++		/omit-if-no-ref/
++		uart3m2_xfer: uart3m2-xfer {
++			rockchip,pins =
++				/* uart3_rx_m2 */
++				<3 RK_PA1 4 &pcfg_pull_up>,
++				/* uart3_tx_m2 */
++				<3 RK_PA0 4 &pcfg_pull_up>;
++		};
+ 	};
+ 	uart4 {
+ 		/omit-if-no-ref/
+@@ -197,6 +311,14 @@
+ 				/* uart4_tx_m0 */
+ 				<3 RK_PA4 4 &pcfg_pull_up>;
+ 		};
++		/omit-if-no-ref/
++		uart4m2_xfer: uart4m2-xfer {
++			rockchip,pins =
++				/* uart4_rx_m2 */
++				<1 RK_PD4 3 &pcfg_pull_up>,
++				/* uart4_tx_m2 */
++				<1 RK_PD5 3 &pcfg_pull_up>;
++		};
+ 	};
+ 	uart5 {
+ 		/omit-if-no-ref/
+@@ -207,5 +329,13 @@
+ 				/* uart5_tx_m0 */
+ 				<3 RK_PA6 4 &pcfg_pull_up>;
+ 		};
++		/omit-if-no-ref/
++		uart5m2_xfer: uart5m2-xfer {
++			rockchip,pins =
++				/* uart5_rx_m2 */
++				<2 RK_PA1 3 &pcfg_pull_up>,
++				/* uart5_tx_m2 */
++				<2 RK_PA0 3 &pcfg_pull_up>;
++		};
+ 	};
+ };
+diff --git a/arch/arm/dts/rv1126-sonoff-ihost.dts b/arch/arm/dts/rv1126-sonoff-ihost.dts
+new file mode 100644
+index 0000000000..77386a48d8
+--- /dev/null
++++ b/arch/arm/dts/rv1126-sonoff-ihost.dts
+@@ -0,0 +1,29 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2020 Rockchip Electronics Co., Ltd.
++ */
++
++/dts-v1/;
++#include "rv1126.dtsi"
++#include "rv1126-sonoff-ihost.dtsi"
++
++/ {
++	model = "Sonoff iHost 4G";
++	compatible = "itead,sonoff-ihost", "rockchip,rv1126";
++};
++
++&cpu0 {
++	cpu-supply = <&vdd_arm>;
++};
++
++&cpu1 {
++	cpu-supply = <&vdd_arm>;
++};
++
++&cpu2 {
++	cpu-supply = <&vdd_arm>;
++};
++
++&cpu3 {
++	cpu-supply = <&vdd_arm>;
++};
+diff --git a/arch/arm/dts/rv1126-sonoff-ihost.dtsi b/arch/arm/dts/rv1126-sonoff-ihost.dtsi
+new file mode 100644
+index 0000000000..32b329e87a
+--- /dev/null
++++ b/arch/arm/dts/rv1126-sonoff-ihost.dtsi
+@@ -0,0 +1,404 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2020 Rockchip Electronics Co., Ltd.
++ * Copyright (c) 2022 Edgeble AI Technologies Pvt. Ltd.
++ */
++
++/ {
++	aliases {
++		ethernet0 = &gmac;
++		mmc0 = &emmc;
++	};
++
++	chosen {
++		stdout-path = "serial2:1500000n8";
++	};
++
++	vcc5v0_sys: regulator-vcc5v0-sys {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc5v0_sys";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++	};
++
++	sdio_pwrseq: pwrseq-sdio {
++		compatible = "mmc-pwrseq-simple";
++		clocks = <&rk809 1>;
++		clock-names = "ext_clock";
++		pinctrl-names = "default";
++		pinctrl-0 = <&wifi_enable_h>;
++		reset-gpios = <&gpio1 RK_PD0 GPIO_ACTIVE_LOW>;
++	};
++};
++
++&emmc {
++	bus-width = <8>;
++	cap-mmc-highspeed;
++	mmc-hs200-1_8v;
++	non-removable;
++	pinctrl-names = "default";
++	pinctrl-0 = <&emmc_bus8 &emmc_cmd &emmc_clk &emmc_rstnout>;
++	rockchip,default-sample-phase = <90>;
++	vmmc-supply = <&vcc_3v3>;
++	vqmmc-supply = <&vcc_1v8>;
++	status = "okay";
++};
++
++&i2c0 {
++	clock-frequency = <400000>;
++	status = "okay";
++
++	rk809: pmic@20 {
++		compatible = "rockchip,rk809";
++		reg = <0x20>;
++		interrupt-parent = <&gpio0>;
++		interrupts = <RK_PB1 IRQ_TYPE_LEVEL_LOW>;
++		#clock-cells = <1>;
++		clock-output-names = "rk808-clkout1", "rk808-clkout2";
++		pinctrl-names = "default";
++		pinctrl-0 = <&pmic_int_l>;
++		rockchip,system-power-controller;
++		wakeup-source;
++
++		vcc1-supply = <&vcc5v0_sys>;
++		vcc2-supply = <&vcc5v0_sys>;
++		vcc3-supply = <&vcc5v0_sys>;
++		vcc4-supply = <&vcc5v0_sys>;
++		vcc5-supply = <&vcc_buck5>;
++		vcc6-supply = <&vcc_buck5>;
++		vcc7-supply = <&vcc5v0_sys>;
++		vcc8-supply = <&vcc3v3_sys>;
++		vcc9-supply = <&vcc5v0_sys>;
++
++		regulators {
++			vdd_npu_vepu: DCDC_REG1 {
++				regulator-name = "vdd_npu_vepu";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-initial-mode = <0x2>;
++				regulator-min-microvolt = <650000>;
++				regulator-max-microvolt = <950000>;
++				regulator-ramp-delay = <6001>;
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_arm: DCDC_REG2 {
++				regulator-name = "vdd_arm";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-initial-mode = <0x2>;
++				regulator-min-microvolt = <725000>;
++				regulator-max-microvolt = <1350000>;
++				regulator-ramp-delay = <6001>;
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc_ddr: DCDC_REG3 {
++				regulator-name = "vcc_ddr";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-initial-mode = <0x2>;
++				regulator-state-mem {
++					regulator-on-in-suspend;
++				};
++			};
++
++			vcc3v3_sys: DCDC_REG4 {
++				regulator-name = "vcc3v3_sys";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-initial-mode = <0x2>;
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <3300000>;
++				};
++			};
++
++			vcc_buck5: DCDC_REG5 {
++				regulator-name = "vcc_buck5";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <2200000>;
++				regulator-max-microvolt = <2200000>;
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <2200000>;
++				};
++			};
++
++			vcc_0v8: LDO_REG1 {
++				regulator-name = "vcc_0v8";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <800000>;
++				regulator-max-microvolt = <800000>;
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc1v8_pmu: LDO_REG2 {
++				regulator-name = "vcc1v8_pmu";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <1800000>;
++				};
++			};
++
++			vdd0v8_pmu: LDO_REG3 {
++				regulator-name = "vcc0v8_pmu";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <800000>;
++				regulator-max-microvolt = <800000>;
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <800000>;
++				};
++			};
++
++			vcc_1v8: LDO_REG4 {
++				regulator-name = "vcc_1v8";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <1800000>;
++				};
++			};
++
++			vcc_dovdd: LDO_REG5 {
++				regulator-name = "vcc_dovdd";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc_dvdd: LDO_REG6 {
++				regulator-name = "vcc_dvdd";
++				regulator-min-microvolt = <1200000>;
++				regulator-max-microvolt = <1200000>;
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc_avdd: LDO_REG7 {
++				regulator-name = "vcc_avdd";
++				regulator-min-microvolt = <2800000>;
++				regulator-max-microvolt = <2800000>;
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vccio_sd: LDO_REG8 {
++				regulator-name = "vccio_sd";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc3v3_sd: LDO_REG9 {
++				regulator-name = "vcc3v3_sd";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc_5v0: SWITCH_REG1 {
++				regulator-name = "vcc_5v0";
++			};
++
++			vcc_3v3: SWITCH_REG2 {
++				regulator-name = "vcc_3v3";
++				regulator-always-on;
++				regulator-boot-on;
++			};
++		};
++	};
++};
++
++&i2c2 {
++	status = "okay";
++	clock-frequency = <400000>;
++
++	pcf8563: rtc@51 {
++		compatible = "nxp,pcf8563";
++		reg = <0x51>;
++		#clock-cells = <0>;
++		interrupt-parent = <&gpio0>;
++		interrupts = <RK_PA2 IRQ_TYPE_LEVEL_LOW>;
++		clock-output-names = "xin32k";
++	};
++};
++
++&gmac {
++	assigned-clocks = <&cru CLK_GMAC_SRC_M1>, <&cru CLK_GMAC_SRC>,
++			  <&cru CLK_GMAC_TX_RX>;
++	assigned-clock-parents = <&cru CLK_GMAC_RGMII_M1>, <&cru CLK_GMAC_SRC_M1>,
++				 <&cru RMII_MODE_CLK>;
++	assigned-clock-rates = <0>, <50000000>;
++	clock_in_out = "output";
++	phy-handle = <&phy>;
++	phy-mode = "rmii";
++	phy-supply = <&vcc_3v3>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&rgmiim1_miim &rgmiim1_rxer &rgmiim1_bus2 &rgmiim1_mclkinout>;
++	status = "okay";
++};
++
++&mdio {
++	phy: ethernet-phy@0 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <0x0>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&eth_phy_rst>;
++		reset-active-low;
++		reset-assert-us = <50000>;
++		reset-deassert-us = <10000>;
++		reset-gpios = <&gpio2 RK_PA6 GPIO_ACTIVE_LOW>;
++	};
++};
++
++&pinctrl {
++	ethernet {
++		eth_phy_rst: eth-phy-rst {
++			rockchip,pins = <2 RK_PA6 RK_FUNC_GPIO &pcfg_pull_down>;
++		};
++	};
++	bt {
++		bt_enable: bt-enable {
++			rockchip,pins = <1 RK_PC6 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++
++		bt_wake_dev: bt-wake-dev {
++			rockchip,pins = <1 RK_PC7 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++
++		bt_wake_host: bt-wake-host {
++			rockchip,pins = <1 RK_PC5 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++
++	pmic {
++		pmic_int_l: pmic-int-l {
++			rockchip,pins = <0 RK_PB1 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++	};
++
++	wifi {
++		wifi_enable_h: wifi-enable-h {
++			rockchip,pins = <1 RK_PD0 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++};
++
++&pmu_io_domains {
++	pmuio0-supply = <&vcc1v8_pmu>;
++	pmuio1-supply = <&vcc3v3_sys>;
++	vccio1-supply = <&vcc_1v8>;
++	vccio2-supply = <&vccio_sd>;
++	vccio3-supply = <&vcc_1v8>;
++	vccio4-supply = <&vcc_dovdd>;
++	vccio5-supply = <&vcc_1v8>;
++	vccio6-supply = <&vcc_1v8>;
++	vccio7-supply = <&vcc_dovdd>;
++	status = "okay";
++};
++
++&saradc {
++	vref-supply = <&vcc_1v8>;
++	status = "okay";
++};
++
++&sdio {
++	bus-width = <4>;
++	cap-sd-highspeed;
++	cap-sdio-irq;
++	keep-power-in-suspend;
++	max-frequency = <100000000>;
++	mmc-pwrseq = <&sdio_pwrseq>;
++	non-removable;
++	pinctrl-names = "default";
++	pinctrl-0 = <&sdmmc1_clk &sdmmc1_cmd &sdmmc1_bus4>;
++	rockchip,default-sample-phase = <90>;
++	sd-uhs-sdr104;
++	vmmc-supply = <&vcc3v3_sys>;
++	vqmmc-supply = <&vcc_1v8>;
++	status = "okay";
++};
++
++&sdmmc {
++	bus-width = <4>;
++	cap-mmc-highspeed;
++	cap-sd-highspeed;
++	card-detect-delay = <200>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&sdmmc0_clk &sdmmc0_cmd &sdmmc0_bus4 &sdmmc0_det>;
++	rockchip,default-sample-phase = <90>;
++	sd-uhs-sdr12;
++	sd-uhs-sdr25;
++	sd-uhs-sdr104;
++	vqmmc-supply = <&vccio_sd>;
++	status = "okay";
++};
++
++&uart0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&uart0_xfer &uart0_ctsn &uart0_rtsn>;
++	uart-has-rtscts;
++	status = "okay";
++
++	bluetooth {
++		compatible = "realtek,rtl8723ds-bt";
++		device-wake-gpios = <&gpio1 RK_PC7 GPIO_ACTIVE_HIGH>; /* BT_WAKE */
++		enable-gpios = <&gpio1 RK_PC6 GPIO_ACTIVE_HIGH>; /* BT_RST */
++		host-wake-gpios = <&gpio1 RK_PC5 GPIO_ACTIVE_HIGH>; /* BT_WAKE_HOST */
++		max-speed = <2000000>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&bt_enable>, <&bt_wake_dev>, <&bt_wake_host>;
++	};
++};
++
++&uart2 {
++	status = "okay";
++};
++
++&uart3 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&uart3m2_xfer>;
++	status = "okay";
++};
++
++&uart4 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&uart4m2_xfer>;
++	status = "okay";
++};
+diff --git a/arch/arm/dts/rv1126.dtsi b/arch/arm/dts/rv1126.dtsi
+index 1cb43147e9..bb603cae13 100644
+--- a/arch/arm/dts/rv1126.dtsi
++++ b/arch/arm/dts/rv1126.dtsi
+@@ -21,6 +21,13 @@
+ 
+ 	aliases {
+ 		i2c0 = &i2c0;
++		i2c2 = &i2c2;
++		serial0 = &uart0;
++		serial1 = &uart1;
++		serial2 = &uart2;
++		serial3 = &uart3;
++		serial4 = &uart4;
++		serial5 = &uart5;
+ 	};
+ 
+ 	cpus {
+@@ -83,6 +90,11 @@
+ 		clock-frequency = <24000000>;
+ 	};
+ 
++	display_subsystem {
++		compatible = "rockchip,display-subsystem";
++		ports = <&vop_out>;
++	};
++
+ 	xin24m: oscillator {
+ 		compatible = "fixed-clock";
+ 		clock-frequency = <24000000>;
+@@ -125,6 +137,26 @@
+ 		reg = <0xfe86c000 0x20>;
+ 	};
+ 
++	qos_iep: qos@fe8a0000 {
++		compatible = "rockchip,rv1126-qos", "syscon";
++		reg = <0xfe8a0000 0x20>;
++	};
++
++	qos_rga_rd: qos@fe8a0080 {
++		compatible = "rockchip,rv1126-qos", "syscon";
++		reg = <0xfe8a0080 0x20>;
++	};
++
++	qos_rga_wr: qos@fe8a0100 {
++		compatible = "rockchip,rv1126-qos", "syscon";
++		reg = <0xfe8a0100 0x20>;
++	};
++
++	qos_vop: qos@fe8a0180 {
++		compatible = "rockchip,rv1126-qos", "syscon";
++		reg = <0xfe8a0180 0x20>;
++	};
++
+ 	gic: interrupt-controller@feff0000 {
+ 		compatible = "arm,gic-400";
+ 		interrupt-controller;
+@@ -170,6 +202,25 @@
+ 				pm_qos = <&qos_sdio>;
+ 				#power-domain-cells = <0>;
+ 			};
++
++			power-domain@RV1126_PD_VO {
++				reg = <RV1126_PD_VO>;
++				clocks = <&cru ACLK_RGA>,
++					 <&cru HCLK_RGA>,
++					 <&cru CLK_RGA_CORE>,
++					 <&cru ACLK_VOP>,
++					 <&cru HCLK_VOP>,
++					 <&cru DCLK_VOP>,
++					 <&cru PCLK_DSIHOST>,
++					 <&cru ACLK_IEP>,
++					 <&cru HCLK_IEP>,
++					 <&cru CLK_IEP_CORE>;
++				pm_qos = <&qos_rga_rd>,
++					 <&qos_rga_wr>,
++					 <&qos_vop>,
++					 <&qos_iep>;
++				#power-domain-cells = <0>;
++			};
+ 		};
+ 	};
+ 
+@@ -187,6 +238,20 @@
+ 		status = "disabled";
+ 	};
+ 
++	i2c2: i2c@ff400000 {
++		compatible = "rockchip,rv1126-i2c", "rockchip,rk3399-i2c";
++		reg = <0xff400000 0x1000>;
++		interrupts = <GIC_SPI 6 IRQ_TYPE_LEVEL_HIGH>;
++		rockchip,grf = <&pmugrf>;
++		clocks = <&pmucru CLK_I2C2>, <&pmucru PCLK_I2C2>;
++		clock-names = "i2c", "pclk";
++		pinctrl-names = "default";
++		pinctrl-0 = <&i2c2_xfer>;
++		#address-cells = <1>;
++		#size-cells = <0>;
++		status = "disabled";
++	};
++
+ 	uart1: serial@ff410000 {
+ 		compatible = "rockchip,rv1126-uart", "snps,dw-apb-uart";
+ 		reg = <0xff410000 0x100>;
+@@ -203,6 +268,17 @@
+ 		status = "disabled";
+ 	};
+ 
++	pwm2: pwm@ff430020 {
++		compatible = "rockchip,rv1126-pwm", "rockchip,rk3328-pwm";
++		reg = <0xff430020 0x10>;
++		clock-names = "pwm", "pclk";
++		clocks = <&pmucru CLK_PWM0>, <&pmucru PCLK_PWM0>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&pwm2m0_pins>;
++		#pwm-cells = <3>;
++		status = "disabled";
++	};
++
+ 	pmucru: clock-controller@ff480000 {
+ 		compatible = "rockchip,rv1126-pmucru";
+ 		reg = <0xff480000 0x1000>;
+@@ -232,6 +308,17 @@
+ 		clock-names = "apb_pclk";
+ 	};
+ 
++	pwm11: pwm@ff550030 {
++		compatible = "rockchip,rv1126-pwm", "rockchip,rk3328-pwm";
++		reg = <0xff550030 0x10>;
++		clock-names = "pwm", "pclk";
++		clocks = <&cru CLK_PWM2>, <&cru PCLK_PWM2>;
++		pinctrl-0 = <&pwm11m0_pins>;
++		pinctrl-names = "default";
++		#pwm-cells = <3>;
++		status = "disabled";
++	};
++
+ 	uart0: serial@ff560000 {
+ 		compatible = "rockchip,rv1126-uart", "snps,dw-apb-uart";
+ 		reg = <0xff560000 0x100>;
+@@ -332,6 +419,92 @@
+ 		clock-names = "pclk", "timer";
+ 	};
+ 
++	vop: vop@ffb00000 {
++		compatible = "rockchip,rv1126-vop";
++		reg = <0xffb00000 0x200>, <0xffb00a00 0x400>;
++		interrupts = <GIC_SPI 59 IRQ_TYPE_LEVEL_HIGH>;
++		clock-names = "aclk_vop", "dclk_vop", "hclk_vop";
++		clocks = <&cru ACLK_VOP>, <&cru DCLK_VOP>, <&cru HCLK_VOP>;
++		reset-names = "axi", "ahb", "dclk";
++		resets = <&cru SRST_VOP_A>, <&cru SRST_VOP_H>, <&cru SRST_VOP_D>;
++		iommus = <&vop_mmu>;
++		power-domains = <&power RV1126_PD_VO>;
++		status = "disabled";
++
++		vop_out: port {
++			#address-cells = <1>;
++			#size-cells = <0>;
++
++			vop_out_rgb: endpoint@0 {
++				reg = <0>;
++			};
++
++			vop_out_dsi: endpoint@1 {
++				reg = <1>;
++			};
++		};
++	};
++
++	vop_mmu: iommu@ffb00f00 {
++		compatible = "rockchip,iommu";
++		reg = <0xffb00f00 0x100>;
++		interrupts = <GIC_SPI 59 IRQ_TYPE_LEVEL_HIGH>;
++		clock-names = "aclk", "iface";
++		clocks = <&cru ACLK_VOP>, <&cru HCLK_VOP>;
++		#iommu-cells = <0>;
++		power-domains = <&power RV1126_PD_VO>;
++		status = "disabled";
++	};
++
++	gmac: ethernet@ffc40000 {
++		compatible = "rockchip,rv1126-gmac", "snps,dwmac-4.20a";
++		reg = <0xffc40000 0x4000>;
++		interrupts = <GIC_SPI 95 IRQ_TYPE_LEVEL_HIGH>,
++			     <GIC_SPI 96 IRQ_TYPE_LEVEL_HIGH>;
++		interrupt-names = "macirq", "eth_wake_irq";
++		rockchip,grf = <&grf>;
++		clocks = <&cru CLK_GMAC_SRC>, <&cru CLK_GMAC_TX_RX>,
++			 <&cru CLK_GMAC_TX_RX>, <&cru CLK_GMAC_REF>,
++			 <&cru ACLK_GMAC>, <&cru PCLK_GMAC>,
++			 <&cru CLK_GMAC_TX_RX>, <&cru CLK_GMAC_PTPREF>;
++		clock-names = "stmmaceth", "mac_clk_rx",
++			      "mac_clk_tx", "clk_mac_ref",
++			      "aclk_mac", "pclk_mac",
++			      "clk_mac_speed", "ptp_ref";
++		resets = <&cru SRST_GMAC_A>;
++		reset-names = "stmmaceth";
++
++		snps,mixed-burst;
++		snps,tso;
++
++		snps,axi-config = <&stmmac_axi_setup>;
++		snps,mtl-rx-config = <&mtl_rx_setup>;
++		snps,mtl-tx-config = <&mtl_tx_setup>;
++		status = "disabled";
++
++		mdio: mdio {
++			compatible = "snps,dwmac-mdio";
++			#address-cells = <0x1>;
++			#size-cells = <0x0>;
++		};
++
++		stmmac_axi_setup: stmmac-axi-config {
++			snps,wr_osr_lmt = <4>;
++			snps,rd_osr_lmt = <8>;
++			snps,blen = <0 0 0 0 16 8 4>;
++		};
++
++		mtl_rx_setup: rx-queues-config {
++			snps,rx-queues-to-use = <1>;
++			queue0 {};
++		};
++
++		mtl_tx_setup: tx-queues-config {
++			snps,tx-queues-to-use = <1>;
++			queue0 {};
++		};
++	};
++
+ 	emmc: mmc@ffc50000 {
+ 		compatible = "rockchip,rv1126-dw-mshc", "rockchip,rk3288-dw-mshc";
+ 		reg = <0xffc50000 0x4000>;
+@@ -370,6 +543,18 @@
+ 		status = "disabled";
+ 	};
+ 
++	sfc: spi@ffc90000  {
++		compatible = "rockchip,sfc";
++		reg = <0xffc90000 0x4000>;
++		interrupts = <GIC_SPI 80 IRQ_TYPE_LEVEL_HIGH>;
++		assigned-clocks = <&cru SCLK_SFC>;
++		assigned-clock-rates = <80000000>;
++		clock-names = "clk_sfc", "hclk_sfc";
++		clocks = <&cru SCLK_SFC>, <&cru HCLK_SFC>;
++		power-domains = <&power RV1126_PD_NVM>;
++		status = "disabled";
++	};
++
+ 	pinctrl: pinctrl {
+ 		compatible = "rockchip,rv1126-pinctrl";
+ 		rockchip,grf = <&grf>;
 -- 
 2.40.1
 
