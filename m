@@ -4,86 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22203C47DAF
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 18:01:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B653BC47DD3
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 18:17:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 566718777F;
-	Mon, 22 Jan 2024 19:01:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E35CA87872;
+	Mon, 22 Jan 2024 19:17:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PPaEAixk";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="U8qQiDlJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D5808777F; Mon, 22 Jan 2024 19:01:28 +0100 (CET)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D770687979; Mon, 22 Jan 2024 19:17:02 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95A798753A
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 19:01:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 97E9C8780E
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 19:17:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-5f2d4aaa2fdso33729237b3.1
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 10:01:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705946484; x=1706551284; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=jdzXx6uicy7aVvI5XZWGaF8LlacCt5+M9Moqvt1pwow=;
- b=PPaEAixk4fItmCFV0VTbCN0FhdXHcAYsp6ZTyT1cY00/tbs1tr3TTBBqtBKnfpXXGQ
- ysSh3NSMmwuEzjfz5F/zQLXfo+N3jCkUIH8uunBlbPIuGfGvAXmXtSGhAOu0mZ7fuNX7
- 7xpgA5vYUHkx7VzNwMB1aTLYR3EwxoTJrBEdA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705946484; x=1706551284;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jdzXx6uicy7aVvI5XZWGaF8LlacCt5+M9Moqvt1pwow=;
- b=QVM6CTD5iS1HUl2UdF7xnIjxEU+XNHqmixQbiRJQnjBSryIYSlpflkDpgIhvOX7O36
- qERxiciqAi34BIioYRIEcpPt7EuTaLAD4hyHcoouHnR1armlQcGosCn2UP6nnkQb6z2s
- bJeWPQrsgC8o0wByZkHi2Q8dJd4ccf6I6CmY5bxabFnNiEr+Hn3w2Dy/tLuj83tQCpP5
- l0UdXYMfTLZG/hwYc8HoOdLRKAys2QE44qmdEzuXuxH3VnFXDuaSRvRhZprm/tyVEpeM
- d7k2biER1nT9lXwTgZcrYuMK437N0yVbUrc6I10Gj/8BWmw3CZFQqYF9YzerZD2S7L3A
- OQVw==
-X-Gm-Message-State: AOJu0Yy3BR2G9voQ+GiRyw9rFIVKztEcd3oVg98cBU+P23DD1Eh49IJj
- rs0aRRxwEZdzv8P4C95mPXCoqXBeFIVgckL14KMfWH/tL3WTlfwVWTFX6cpSvUI=
-X-Google-Smtp-Source: AGHT+IHwQTuoGai/DofAtId7OoIQAKTBvX6r0f7BNW3ePxd/vLKS9iMtDvlEv1O1MwYPz2Te/2B2OQ==
-X-Received: by 2002:a81:8704:0:b0:5ed:8cf7:8233 with SMTP id
- x4-20020a818704000000b005ed8cf78233mr3677720ywf.87.1705946484278; 
- Mon, 22 Jan 2024 10:01:24 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- m15-20020a819e0f000000b005ff9d895d4fsm2470989ywj.8.2024.01.22.10.01.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jan 2024 10:01:23 -0800 (PST)
-Date: Mon, 22 Jan 2024 13:01:22 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: "Ivan T. Ivanov" <iivanov@suse.de>, wahrenst@gmx.net, mail@jens-maus.de,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v4 0/6] rpi5: initial support
-Message-ID: <20240122180122.GP3652023@bill-the-cat>
-References: <FB66DFF3-03B0-4DA5-8916-AB80CA6C6EB5@jens-maus.de>
- <dvpwizpui6a52dfmy57ghv4zmplvgqvow6oec7x5opwzh63zzl@jehyglofr6yh>
- <489FBAE5-501A-49F6-894D-58BE5C5429CC@jens-maus.de>
- <A0746263-646C-40C6-A2A6-659C39385E8B@jens-maus.de>
- <246035ba-0090-4cc3-982e-1de837ec7340@gmx.net>
- <6E2D7E91-E869-48C6-8CE8-0B410A2B67B9@jens-maus.de>
- <ebffa598-6945-4a03-abe4-fe519df5fbfd@gmx.net>
- <223DA3F8-B17B-44CF-B247-12DEBD100A75@suse.de>
- <uwh4skanpw4c42t5iefqiawfns2wglxl4rizmaexeaetyvahf3@yibnd3owvcn2>
- <87frypsaon.fsf@bloch.sibelius.xs4all.nl>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=33c1=JB=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1705947396;
+ bh=jlqyBEddrK4d4OIPUGccuocJltP0Olwk5Q1YkbJiy/c=;
+ b=U8qQiDlJOTruQeJvHWAOsnBd7dmVSXE10tN8jSVlwLsM4+IoAH1L+CDQq87MUJElgrvuZKJSX
+ LRHC5TB3gi/aLG8sd7QSbXfaDaEGDN+OiE6Vr20c9jtc4wcWrbzVZaiYbW27A4jexiBnXR3KX90
+ Q7TsZEzDE82+CKKQgqYAY0SL99Cg4jEeRYe0RSUUdlgsSIKCyOjqmiqsfAGRBzK8pD1A8BwSvvq
+ 7OBwJLlql5AJ3JhCOHHj10hIUxNzXjOpsaV5w1F6tRHwdzswij1eMvfjH7O/d9ZLh8GHfkl8Gj0
+ 3Trax1p2BnrsxMgr9q5qpQbcEtTGMs4DHd4ctV6vcDdg==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Philipp
+ Tomsich <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Jonas Karlman
+ <jonas@kwiboo.se>, u-boot@lists.denx.de
+Subject: [PATCH v2] rockchip: spl: Enable caches to speed up checksum
+ validation
+Date: Mon, 22 Jan 2024 18:16:29 +0000
+Message-ID: <20240122181631.2383743-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qnq5S4VZJ6NNXSty"
-Content-Disposition: inline
-In-Reply-To: <87frypsaon.fsf@bloch.sibelius.xs4all.nl>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 65aeb1049c22f20eaa36eb1a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,94 +69,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+FIT checksum validation is very slow in SPL due to D-cache not being
+enabled.
 
---qnq5S4VZJ6NNXSty
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Enable caches in SPL to speed up FIT checksum validation, from seconds
+to milliseconds.
 
-On Mon, Jan 22, 2024 at 03:30:00PM +0100, Mark Kettenis wrote:
-> > Date: Mon, 22 Jan 2024 16:16:34 +0200
-> > From: "Ivan T. Ivanov" <iivanov@suse.de>
-> >=20
-> > Hi,
-> >=20
-> > On 01-22 13:57, Ivan T. Ivanov wrote:
-> > > > Am 20.01.24 um 10:48 schrieb Jens Maus:
-> > > >> Hi,
-> > > >>=20
-> > > >>> Am 20.01.2024 um 10:22 schrieb Stefan Wahren <wahrenst@gmx.net>:
-> > > >>>=20
-> > > >>> Am 19.01.24 um 22:26 schrieb Jens Maus:
-> > > >>>> I actually do have some good and bad news:
-> > > >>>>=20
-> > > >>>> 1. Good news: I got u-boot finally showing up with my RaspberryP=
-i5 8GB both on the HDMI and on the serial debug UART like you reported.
-> > > >>>>=20
-> > > >>>> 2. Bad news: I actually got it working by downgrading the rpi-ee=
-prom to the same 2023/10/30 (VERSION:30de0ba5) version like you have.
-> > > >>>>=20
-> > > >=20
-> > > > One idea would be to enable early debug in U-Boot (no idea how to
-> > > > achieve this). I assume U-Boot crashes before it's able to print the
-> > > > first line, but it's hard to believe it crashes at the very first
-> > > > instruction of U-Boot. So with some luck we should be able to narrow
-> > > > done the cause.
-> > >=20
-> > > I was able to enable early debug UART in U-Boot and I will try to
-> > > find what is happening, once I get some free cycles.
-> >=20
-> > Ok, this was relatively easy to find :-)
-> >=20
-> > New versions of EEPROM firmware change =E2=80=9Ckernel=E2=80=9D/U-Boot =
-load address=20
-> > from 0x80000 to 0x200000. And because on RPi=E2=80=99s CONFIG_TEXT_BASE=
- is
-> > hardcoded to 0x80000 code run through the fields.=20
-> >=20
-> > Hopefully simple patch like bellow make it work fine in older and
-> > newer EEPROM firmware versions.
-> >=20
-> > Regards,
-> > Ivan =20
-> >=20
-> > diff --git a/configs/rpi_arm64_defconfig b/configs/rpi_arm64_defconfig
-> > index 11ede9435d..ce64f9554f 100644
-> > --- a/configs/rpi_arm64_defconfig
-> > +++ b/configs/rpi_arm64_defconfig
-> > @@ -1,6 +1,7 @@
-> >  CONFIG_ARM=3Dy
-> >  CONFIG_ARCH_BCM283X=3Dy
-> >  CONFIG_TEXT_BASE=3D0x00080000
-> > +CONFIG_POSITION_INDEPENDENT=3Dy
->=20
-> Not sure if it really matters, but for the Apple M1 config I set
-> CONFIG_TEXT_BASE to 0x00000000 (zero).
+This change enables caches in SPL on all Rockchip boards, the Kconfig
+options SPL_SYS_ICACHE_OFF and SPL_SYS_DCACHE_OFF can be enabled to
+disable caches for a specific board or SoC if needed.
 
-It shouldn't matter. 0x0 is the default for TEXT_BASE in this case, but
-also a number of platforms set it to something else seemingly valid,
-but could I suspect still drop the setting as it should not matter at
-run time.
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+Changes in v2:
+- None
 
---=20
-Tom
+This has been tested on multiple RK3288, RK3328, RK3399, RK356x and
+RK3588 boards without any issues, vendor U-Boot also enables caches in
+SPL for all SoCs.
 
---qnq5S4VZJ6NNXSty
-Content-Type: application/pgp-signature; name="signature.asc"
+Link to RFC: https://patchwork.ozlabs.org/patch/1802303/
+---
+ arch/arm/mach-rockchip/spl.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
------BEGIN PGP SIGNATURE-----
+diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
+index 87280e2ba7cc..e29c841100c8 100644
+--- a/arch/arm/mach-rockchip/spl.c
++++ b/arch/arm/mach-rockchip/spl.c
+@@ -136,6 +136,10 @@ void board_init_f(ulong dummy)
+ 	}
+ 	gd->ram_top = gd->ram_base + get_effective_memsize();
+ 	gd->ram_top = board_get_usable_ram_top(gd->ram_size);
++	gd->relocaddr = gd->ram_top;
++
++	arch_reserve_mmu();
++	enable_caches();
+ #endif
+ 	preloader_console_init();
+ }
+-- 
+2.43.0
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWurXIACgkQFHw5/5Y0
-tyydMQv/cNI5RhGjaprgVVuoeSWuD7I3H9nFTKeZEtnutLn/yxBrlcBzmPehQ5tD
-vgF3VnZmB9egyhC/PuCME5bV02z9QbUVh4RespI2gXG+oTW6BAZj4JI+vgRjtGZq
-/mCSpX26YwD/BkTajcbXGOwmDuygCX6a57BIK6MZzl7+pfVmqRHEcWLa5OMIBVOn
-I2K/z9lB8YtTbatqHCjpzuo6Se7AOzscIO7+h2Vjd24EQZE3lFqjCPqgEUlVPgae
-rJIf4BZzXRJgMPDbugdajzacGxrniF0Uxck2uXimS00lPb6+gOJrszwxCwMf+h9o
-yI+xVrmzLr2k89fUwXadMFYuCPR4zaoz3eJlkNNI4O8ahFHd+7WqxboTP7MUY71J
-YDS4zb4S4wcFbu3RnQqndc2ieUT3I5OIx2tpnaywviIyOrO3SFOlduTPArwjXVou
-XJdvFso2xC4Rj+iCTek5I8W7exzhRA9B8Dkn5C3MrrhZV6hr2AfEsoZvYg3DHPKb
-o5H+mhhW
-=O/ef
------END PGP SIGNATURE-----
-
---qnq5S4VZJ6NNXSty--
