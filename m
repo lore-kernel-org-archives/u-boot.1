@@ -4,77 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2854BC47422
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 00:48:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA729C47DD3
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 02:08:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D1C4878D0;
-	Mon, 22 Jan 2024 01:48:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id EB2E3877B1;
+	Mon, 22 Jan 2024 03:08:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="EIvOCDaU";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="jGwkQ11u";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="dFbSGsCc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43DC48785C; Mon, 22 Jan 2024 01:48:55 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id 88178877FB; Mon, 22 Jan 2024 03:08:12 +0100 (CET)
+Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3073B878D0
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 01:48:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 326E187447
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 03:08:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4TJBRm6szSz9sTc;
- Mon, 22 Jan 2024 01:48:52 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1705884532;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=dMLAkYVzVXEJwfIChV0AqFgZaRm1P4YrEXxInoMrpbU=;
- b=EIvOCDaUt+IV3cho/+PSTf3RdrpuEx+IWTn9IMicrhOZ5jBK2Bku46MfeH3JXndVEFGDH9
- bkfmWib19SIPbgOXCoKd3TmIfw/pblTGDW9zMylKppETE5vdvl3mo9V/uG1P8eeV+3Daxb
- LbnVbYcTyEUfHQNFh4MyrFDUTRMhUZsuuEmEBN2J8VP4cY+G9SJ8a3htAME+lc+gfOKhNn
- e69y8oS0eJ9zqz0fSzl5FvrnjY6cI9vYqoP3jZt1qM8l22GKxpNforAsIdosl04Ewu5l0W
- 7AKT2pdeiaRzWOakHVZd4sW73vszLV262CabtZzZ0eCE+8gRtX9qFRltVMrbBQ==
-Message-ID: <92da5e7f-c379-437c-b22a-8f80ea6a6f1d@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1705884531;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=dMLAkYVzVXEJwfIChV0AqFgZaRm1P4YrEXxInoMrpbU=;
- b=jGwkQ11umDniH8IVrXe54OCp4N1IMJCPJAIE4mhEvtf5Qc3ktwOAOD8q1DmdKw/fVfGGfC
- s+N/wS8oFrdF4sXipQg1Wq4B6VxvVpP8/ik0VUY28hmUjCOVoDoQFqSN+jpvqlRIPjqwz3
- FSu6SbtIUU/x8IGw40A1/rVV8BpEfyKdHaj03bc5HjD9zgVdz5L59Behzrwu6Ps+G5NMt6
- Y/vSPiEvpHNxFKHUCPvW2ouWsKfdpLLTU+eYxBbFZ4AIsk2XubzRqapk8YK3diKUglU2xY
- abIRly01bmd8sOupbc2HhY8/RfS1ZUF6o6WPjCfPwnwqDWwHJOnVVFnWtScDLA==
-Date: Mon, 22 Jan 2024 01:48:49 +0100
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: 0fe7b660b8cb11eea2298b7352fd921d-20240122
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
+ bh=a3qUThU+y1Pqn9D72NrXsva4ZGiSLEsYbxbc/AJGv9U=; 
+ b=dFbSGsCcNCv6i47GRkdRql3+hMoI3Ts4YdgamDvACMVeHaA4s0E8Len7jz98lf8CRqclxRgfus0DvwqkEEw7Oqt++pMYsxa4MhIwgI5mmZ+WPjRQbv3CcCTX6lYRE/yjnez+LF8I+si91Qg5rtJEjsMb62p5t99BV/m54foX91o=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.1.36, REQID:8849685b-0274-49bb-90fe-f2246dffc0f3, IP:0,
+ U
+ RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
+ :release,TS:-5
+X-CID-META: VersionHash:6e16cf4, CLOUDID:c09b1883-8d4f-477b-89d2-1e3bdbef96d1,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
+ RL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,
+ SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0
+X-CID-BVR: 0,NGT
+X-CID-BAS: 0,NGT,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-UUID: 0fe7b660b8cb11eea2298b7352fd921d-20240122
+Received: from mtkmbs11n2.mediatek.inc [(172.21.101.187)] by
+ mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 839997667; Mon, 22 Jan 2024 10:07:57 +0800
+Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
+ mtkmbs13n2.mediatek.inc (172.21.101.108) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.26; Mon, 22 Jan 2024 10:07:56 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.1118.26 via Frontend Transport; Mon, 22 Jan 2024 10:07:56 +0800
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: <u-boot@lists.denx.de>
+CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Daniel Golle
+ <daniel@makrotopia.org>, Frank Wunderlich <linux@fw-web.de>, Weijie Gao
+ <weijie.gao@mediatek.com>, Dong Huang <dong.huang@mediatek.com>
+Subject: [PATCH 01/60] arm: dts: mt7988-sd-rfb: add SD pin driving settings
+Date: Mon, 22 Jan 2024 10:07:54 +0800
+Message-ID: <20240122020754.143309-1-weijie.gao@mediatek.com>
+X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
-Subject: Re: [PATCH 09/11] ARM: dts: renesas: Add Renesas R8A779H0 V4M DT
- extras
-Content-Language: en-US
-To: Paul Barker <paul.barker.ct@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Hai Pham <hai.pham.ud@renesas.com>
-References: <20240121174340.279465-1-marek.vasut+renesas@mailbox.org>
- <20240121174340.279465-9-marek.vasut+renesas@mailbox.org>
- <afac41b9-fe68-499c-8994-d7254b8ed23e@bp.renesas.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <afac41b9-fe68-499c-8994-d7254b8ed23e@bp.renesas.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 0c5228df6c99233790c
-X-MBO-RS-META: 76q5cmo1bqt1ec7jspzeoaq4gjakeoum
+Content-Type: text/plain
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,52 +84,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/21/24 21:52, Paul Barker wrote:
-> On 21/01/2024 17:41, Marek Vasut wrote:
->> From: Hai Pham <hai.pham.ud@renesas.com>
->>
->> Add Renesas R8A779H0 V4M DT extras for U-Boot.
->>
->> Signed-off-by: Hai Pham <hai.pham.ud@renesas.com>
->> ---
->> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
->> ---
->>   arch/arm/dts/r8a779h0-u-boot.dtsi | 27 +++++++++++++++++++++++++++
->>   1 file changed, 27 insertions(+)
->>   create mode 100644 arch/arm/dts/r8a779h0-u-boot.dtsi
->>
->> diff --git a/arch/arm/dts/r8a779h0-u-boot.dtsi b/arch/arm/dts/r8a779h0-u-boot.dtsi
->> new file mode 100644
->> index 00000000000..b2f7e054eef
->> --- /dev/null
->> +++ b/arch/arm/dts/r8a779h0-u-boot.dtsi
->> @@ -0,0 +1,27 @@
->> +// SPDX-License-Identifier: GPL-2.0
->> +/*
->> + * Device Tree Source extras for U-Boot on R-Car R8A779H0 SoC
->> + *
->> + * Copyright (C) 2023 Renesas Electronics Corp.
->> + */
->> +
->> +#include "r8a779x-u-boot.dtsi"
->> +/ {
->> +	soc {
->> +		rpc: spi@ee200000 {
->> +			compatible = "renesas,r8a779h0-rpc-if", "renesas,rcar-gen4-rpc-if";
->> +			reg = <0 0xee200000 0 0x200>, <0 0x08000000 0 0x04000000>;
->> +			interrupts = <GIC_SPI 225 IRQ_TYPE_LEVEL_HIGH>;
->> +			clocks = <&cpg CPG_MOD 629>;
->> +			power-domains = <&sysc R8A779H0_PD_ALWAYS_ON>;
->> +			resets = <&cpg 629>;
->> +			bank-width = <2>;
->> +			num-cs = <1>;
->> +			status = "disabled";
->> +		};
-> 
-> Either the commit message or a comment should give some idea why this
-> node is in a -u-boot.dtsi file instead of the r8a779h0.dtsi file itself.
+Set SD pin driving to 4mA
 
-I suspect this won't be in the initial Linux DT, so its kept as an 
-extension here, so the GH board can use RPC to access SPI NOR . I 
-suspect this will go away once the RPC node lands in Linux DT. I will 
-add comment like that in V2 commit message.
+Signed-off-by: Dong Huang <dong.huang@mediatek.com>
+Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+---
+ arch/arm/dts/mt7988-sd-rfb.dts | 2 ++
+ arch/arm/dts/mt7988.dtsi       | 1 +
+ 2 files changed, 3 insertions(+)
+
+diff --git a/arch/arm/dts/mt7988-sd-rfb.dts b/arch/arm/dts/mt7988-sd-rfb.dts
+index a3df37d252..9aa198b84a 100644
+--- a/arch/arm/dts/mt7988-sd-rfb.dts
++++ b/arch/arm/dts/mt7988-sd-rfb.dts
+@@ -87,10 +87,12 @@
+ 			pins = "SPI2_CSB", "SPI2_MISO", "SPI2_MOSI",
+ 			       "SPI2_CLK", "SPI2_HOLD";
+ 			input-enable;
++			drive-strength = <MTK_DRIVE_4mA>;
+ 		};
+ 
+ 		conf-clk {
+ 			pins = "SPI2_WP";
++			drive-strength = <MTK_DRIVE_4mA>;
+ 		};
+ 	};
+ };
+diff --git a/arch/arm/dts/mt7988.dtsi b/arch/arm/dts/mt7988.dtsi
+index ac476d5cdd..5c0c5bcfd6 100644
+--- a/arch/arm/dts/mt7988.dtsi
++++ b/arch/arm/dts/mt7988.dtsi
+@@ -9,6 +9,7 @@
+ #include <dt-bindings/clock/mt7988-clk.h>
+ #include <dt-bindings/reset/mt7988-reset.h>
+ #include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/pinctrl/mt65xx.h>
+ #include <dt-bindings/phy/phy.h>
+ 
+ / {
+-- 
+2.34.1
+
