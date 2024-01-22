@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B1B8C4725D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 12:58:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E71D4C4725D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 12:59:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D019D8799A;
-	Mon, 22 Jan 2024 13:58:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 505AF8799A;
+	Mon, 22 Jan 2024 13:59:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Lcs0vbxl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N+Evrssz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34B0B8796E; Mon, 22 Jan 2024 13:58:42 +0100 (CET)
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 72649879E8; Mon, 22 Jan 2024 13:59:16 +0100 (CET)
+Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
+ [IPv6:2607:f8b0:4864:20::52b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF36A879A0
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 13:58:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 529D0879FA
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 13:59:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 4C430B80CB3;
- Mon, 22 Jan 2024 12:58:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 02C8EC433F1;
- Mon, 22 Jan 2024 12:58:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705928318;
- bh=JQpzIo12WaILrt1rdFPpdZsSsQ+cyvFN5ebuIJgLigY=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=Lcs0vbxlZhxgsPCHh0vkazIzJJEGTvBhbC4eIEK6XLbwMohnnsM+gk9Gqm6BnCeoF
- rppNGmxEvjCOLTorr8OuLcBSNvdnUDQRmfcuWmw946jGFzj6xc84VgGN4rmh7IDSay
- Tm3uElSrGw1aW7OgpdoakouPermLDpArNYS2/NastTp5LlRuGDTJUsIhW4V7pAk+KI
- TXv2Y83oEehuTVVHzb+iiaMqqmazKEMZoFzaepv4lODB0H5V36v5ud26bYaEVJOLFs
- SSSCOnUoCjYBFsgKRe8wCMiX03QbsJXf0UoCxhbAxYZtQ1up1hkRi63FpAk35bF4n6
- EF6OTTeZajhCw==
-Message-ID: <e549c46f-af0d-43c5-b028-6a9bc5d9a1d9@kernel.org>
-Date: Mon, 22 Jan 2024 14:58:30 +0200
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-5cf9e543562so153838a12.1
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 04:59:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1705928352; x=1706533152; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IBCy9ldY/PVqkbAe1II8b9xlnjraYe1NMOdaxYqK0BI=;
+ b=N+Evrssz9SNV5gkOqpRFJaMgydl6u10lwQ77yELZ3mjxQgieac/0RKMTXmXTeMpMIv
+ DCI3S2afs79Bf70b/AhvCZtVXruZSyd2jwF2RytD4mpXdhge1avDCXQu/gWhMqXjOvYL
+ +87B9dYKk/dYPQtOMBRZRUjyzanWVI72QcCkugj6/wclk+69wNFJor8hYSdGQQi1akQF
+ SjPk8wxEgHQ/m/UfMyyrZfnow/DkInRBl9YFZysK+kJ+lR2ZKzmkzd02NeCYGXbEmRUA
+ Pcnd15hsx/D5OO0/VJi/o//SocaAhMaA7l9LTyl7qeB6ooEuOlvmJe8AYH4wqIh8NzI7
+ WaXQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705928352; x=1706533152;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=IBCy9ldY/PVqkbAe1II8b9xlnjraYe1NMOdaxYqK0BI=;
+ b=TiGdorFFUYDQrWxmpjk+19Qgl4kofdm4QnnuwJKrx+gZ+OY4HgrsZxrxMGe6UYpgNM
+ lSoQIrflBW9FNZC+qirkfyPfxpLz8APSIR5HpKDBx9hKlNYjuY+e9Pw0axggyr/PxZrd
+ 2WLdf99pa+Wkgf7VMAQFQCiG2jA5FJHtbwrjhfN3hNbyg1Yv43DehMlEYCgdWh414TiC
+ ThFtTHy8Zr/IpOC7xh1dM3BNPdMx4wv3dL2HSrCiJiGsx+EHXvic75yegde7+R8MYhXE
+ 0Sot4LEhiipWTVAT3VOIHKTrug9Qi0Tbta488U+MdjZ/5pE6hQH/4nyUtq910EAFo0tz
+ STwA==
+X-Gm-Message-State: AOJu0YxsqzfXs4wV4nwzjqIrE6UrPpkXJsVHUEOjz5x/EcKKoPX/dwUs
+ wtt3IxUwNL7kqQaXzgmyYgxqZtK5nerCK8ExO7mfF6QpRNhboWCnoH62rZICfWbhWi6j/zhAvdP
+ 9KIIoJh5ZY+SKmn53YkIZOW17qa8=
+X-Google-Smtp-Source: AGHT+IF2IBGsxyM4GpFFtgs7O/2eiMaV0Sj/1bOle0592Y2Ox5+CaUEgaJflDfZQlU97nfdlwYDMHDo2PAev4utkvuk=
+X-Received: by 2002:a17:90a:c286:b0:290:19c1:103f with SMTP id
+ f6-20020a17090ac28600b0029019c1103fmr5238104pjt.1.1705928352528; Mon, 22 Jan
+ 2024 04:59:12 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 13/16] arm: dts: Introduce am69-sk u-boot dts files
-Content-Language: en-US
-To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
- Andrew Davis <afd@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>,
- Dasnavis Sabiya <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Aradhya Bhatia <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>, Nishanth Menon <nm@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Jayesh Choudhary <j-choudhary@ti.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de,
- Sinthu Raja M <sinthu.raja@mistralsolutions.com>,
- Udit Kumar <u-kumar1@ti.com>
-References: <20240119175043.3904751-1-a-nandan@ti.com>
- <20240119175043.3904751-14-a-nandan@ti.com>
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20240119175043.3904751-14-a-nandan@ti.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20240120003610.124981-1-marex@denx.de>
+In-Reply-To: <20240120003610.124981-1-marex@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 22 Jan 2024 09:59:00 -0300
+Message-ID: <CAOMZO5AQatdGbYDxLd9UaOGqvfZnBTp+R8NrQMUcJ2TJX54fFw@mail.gmail.com>
+Subject: Re: [PATCH] ARM: imx: Enable kaslrseed command on DH i.MX8M Plus DHCOM
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>,
+ Stefano Babic <sbabic@denx.de>, u-boot@dh-electronics.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,217 +88,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, Jan 19, 2024 at 9:36=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+>
+> Linux 6.6.y with KASLR enabled would print the following message on boot:
+> "
+> KASLR disabled due to lack of seed
+> "
+> Enable the 'kaslrseed' command so a random number seed can be pulled
+> from CAAM and inserted into the /chosen node 'kaslr-seed' property of
+> Linux kernel DT before boot, thus letting KASLR work properly.
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
-
-On 19/01/2024 19:50, Apurva Nandan wrote:
-> From: Dasnavis Sabiya <sabiya.d@ti.com>
-> 
-> Introduce the base dts files needed for u-boot or to augment the linux
-> dtbs for use in the u-boot-spl and u-boot binaries.
-> 
-> Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
-> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
-> ---
->  arch/arm/dts/Makefile               |   1 +
->  arch/arm/dts/k3-am69-r5-sk.dts      | 105 ++++++++++++++++++++++++++++
->  arch/arm/dts/k3-am69-sk-u-boot.dtsi |  48 +++++++++++++
->  board/ti/j784s4/MAINTAINERS         |   2 +
->  4 files changed, 156 insertions(+)
->  create mode 100644 arch/arm/dts/k3-am69-r5-sk.dts
->  create mode 100644 arch/arm/dts/k3-am69-sk-u-boot.dtsi
-> 
-> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index 876802b88e..1c5a6662f6 100644
-> --- a/arch/arm/dts/Makefile
-> +++ b/arch/arm/dts/Makefile
-> @@ -1412,6 +1412,7 @@ dtb-$(CONFIG_SOC_K3_J721S2) += k3-am68-sk-base-board.dtb\
->  			       k3-j721s2-r5-common-proc-board.dtb
->  
->  dtb-$(CONFIG_SOC_K3_J784S4) += k3-am69-sk.dtb \
-> +			       k3-am69-r5-sk.dtb \
->  			       k3-j784s4-evm.dtb \
->  			       k3-j784s4-r5-evm.dtb
->  
-> diff --git a/arch/arm/dts/k3-am69-r5-sk.dts b/arch/arm/dts/k3-am69-r5-sk.dts
-> new file mode 100644
-> index 0000000000..d2e73bd1bf
-> --- /dev/null
-> +++ b/arch/arm/dts/k3-am69-r5-sk.dts
-> @@ -0,0 +1,105 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
-> + */
-> +
-> +/dts-v1/;
-> +
-> +#include "k3-am69-sk.dts"
-> +#include "k3-j784s4-ddr-evm-lp4-4266.dtsi"
-> +#include "k3-j784s4-ddr.dtsi"
-> +#include "k3-am69-sk-u-boot.dtsi"
-> +
-> +/ {
-> +	chosen {
-> +		tick-timer = &mcu_timer0;
-> +	};
-> +
-> +	aliases {
-> +		remoteproc0 = &sysctrler;
-> +		remoteproc1 = &a72_0;
-> +	};
-> +
-> +	a72_0: a72@0 {
-> +		compatible = "ti,am654-rproc";
-> +		reg = <0x0 0x00a90000 0x0 0x10>;
-> +		power-domains = <&k3_pds 61 TI_SCI_PD_EXCLUSIVE>,
-> +				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>;
-> +		resets = <&k3_reset 202 0>;
-> +		clocks = <&k3_clks 61 0>;
-> +		assigned-clocks = <&k3_clks 61 0>, <&k3_clks 202 0>;
-> +		assigned-clock-parents = <&k3_clks 61 2>;
-> +		assigned-clock-rates = <200000000>, <2000000000>;
-> +		ti,sci = <&sms>;
-> +		ti,sci-proc-id = <32>;
-> +		ti,sci-host-id = <10>;
-> +		bootph-pre-ram;
-> +	};
-> +
-> +	dm_tifs: dm-tifs {
-> +		compatible = "ti,j721e-dm-sci";
-> +		ti,host-id = <3>;
-> +		ti,secure-host;
-> +		mbox-names = "rx", "tx";
-> +		mboxes= <&secure_proxy_mcu 21>, <&secure_proxy_mcu 23>;
-> +		bootph-pre-ram;
-> +	};
-> +};
-> +
-> +&mcu_timer0 {
-> +	status = "okay";
-> +	clock-frequency = <250000000>;
-> +	bootph-pre-ram;
-> +};
-> +
-> +&secure_proxy_sa3 {
-> +	status = "okay";
-> +	bootph-pre-ram;
-> +};
-> +
-> +&secure_proxy_mcu {
-> +	status = "okay";
-> +	bootph-pre-ram;
-> +};
-> +
-> +&cbass_mcu_wakeup {
-> +	sysctrler: sysctrler {
-> +		compatible = "ti,am654-system-controller";
-> +		mboxes= <&secure_proxy_mcu 4>,
-> +			<&secure_proxy_mcu 5>,
-> +			<&secure_proxy_sa3 5>;
-> +		mbox-names = "tx", "rx", "boot_notify";
-> +		bootph-pre-ram;
-> +	};
-> +};
-> +
-> +&sms {
-> +	mboxes= <&secure_proxy_mcu 8>, <&secure_proxy_mcu 6>, <&secure_proxy_mcu 5>;
-> +	mbox-names = "tx", "rx", "notify";
-> +	ti,host-id = <4>;
-> +	ti,secure-host;
-> +	bootph-pre-ram;
-> +};
-> +
-> +&wkup_uart0 {
-> +	bootph-pre-ram;
-> +	status = "okay";
-
-In k3-am69-sk.dts this is marked as reserved. Why do you need to enable it here?
-Maybe a comment would help readers.
-
-> +};
-> +
-> +&ospi0 {
-> +	reg = <0x0 0x47040000 0x0 0x100>,
-> +	      <0x0 0x50000000 0x0 0x8000000>;
-> +};
-> +
-> +&ospi1 {
-> +	reg = <0x0 0x47050000 0x0 0x100>,
-> +	      <0x0 0x58000000 0x0 0x8000000>;
-> +};
-> +
-> +&mcu_ringacc {
-> +	ti,sci = <&dm_tifs>;
-> +};
-> +
-> +&mcu_udmap {
-> +	ti,sci = <&dm_tifs>;
-> +};
-> diff --git a/arch/arm/dts/k3-am69-sk-u-boot.dtsi b/arch/arm/dts/k3-am69-sk-u-boot.dtsi
-> new file mode 100644
-> index 0000000000..4f8c99a1e6
-> --- /dev/null
-> +++ b/arch/arm/dts/k3-am69-sk-u-boot.dtsi
-> @@ -0,0 +1,48 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
-> + */
-> +
-> +#include "k3-j784s4-binman.dtsi"
-> +
-> +&mcu_udmap {
-> +	reg =   <0x0 0x285c0000 0x0 0x100>,
-> +		<0x0 0x284c0000 0x0 0x4000>,
-> +		<0x0 0x2a800000 0x0 0x40000>,
-> +		<0x0 0x284a0000 0x0 0x4000>,
-> +		<0x0 0x2aa00000 0x0 0x40000>,
-> +		<0x0 0x28400000 0x0 0x2000>;
-> +	reg-names = "gcfg", "rchan", "rchanrt", "tchan",
-> +		    "tchanrt", "rflow";
-> +	bootph-pre-ram;
-> +};
-> +
-> +&sms {
-> +	k3_sysreset: sysreset-controller {
-> +		compatible = "ti,sci-sysreset";
-> +		bootph-pre-ram;
-> +	};
-> +};
-> +
-> +#ifdef CONFIG_TARGET_J784S4_A72_EVM
-> +
-> +#define SPL_AM69_SK_DTB "spl/dts/k3-am69-sk.dtb"
-> +#define AM69_SK_DTB "arch/arm/dts/k3-am69-sk.dtb"
-> +
-> +&spl_j784s4_evm_dtb {
-> +	filename = SPL_AM69_SK_DTB;
-> +};
-> +
-> +&j784s4_evm_dtb {
-> +	filename = AM69_SK_DTB;
-> +};
-> +
-> +&spl_j784s4_evm_dtb_unsigned {
-> +	filename = SPL_AM69_SK_DTB;
-> +};
-> +
-> +&j784s4_evm_dtb_unsigned {
-> +	filename = AM69_SK_DTB;
-> +};
-> +
-> +#endif
-> diff --git a/board/ti/j784s4/MAINTAINERS b/board/ti/j784s4/MAINTAINERS
-> index ac6db23da5..53bc4bab03 100644
-> --- a/board/ti/j784s4/MAINTAINERS
-> +++ b/board/ti/j784s4/MAINTAINERS
-> @@ -16,3 +16,5 @@ F:	arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi
->  
->  AM69 SK BOARD
->  F:	arch/arm/dts/k3-am69-sk.dts
-> +F:	arch/arm/dts/k3-am69-sk-u-boot.dtsi
-> +F:	arch/arm/dts/k3-am69-r5-sk.dts
-
--- 
-cheers,
--roger
+Applied, thanks.
