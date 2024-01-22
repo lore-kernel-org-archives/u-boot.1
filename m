@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC110C47DDC
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 22:40:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A12BC46CD2
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 22:41:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A0A387CA7;
-	Mon, 22 Jan 2024 23:39:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C408987BA2;
+	Mon, 22 Jan 2024 23:39:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qMFMwCe8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pr4PPRNY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86EB3879FB; Mon, 22 Jan 2024 23:39:33 +0100 (CET)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
+ id A2A0F87B77; Mon, 22 Jan 2024 23:39:34 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75A9F87949
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 23:39:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 28B7587C0B
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 23:39:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-dbedb1ee3e4so3262472276.3
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 14:39:31 -0800 (PST)
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-5ffd5620247so17615617b3.0
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 14:39:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705963170; x=1706567970; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1705963171; x=1706567971; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XL8m8MSlA/b6/iFQY4g2PE2JVw8Ea39v6Lj3WM1biuE=;
- b=qMFMwCe80occi0IoVOk3P5CUegG2hNo97oTPzmAoLasJN/tBjxTvOyMT3EYjH92F+7
- oLijzwMjXVDeT6TNXOKFbs5kokQkw54Dh9VAkrz2uROxMLuRk67lcoRCb7MOpHwlWT6X
- NYgpcXLIm73gfOZDbOsd+J6OKca051F2CotgM=
+ bh=ls/N0tWyzPus4HfY/dZSNJSFRq7T9GY2FxdT7cxCEDA=;
+ b=pr4PPRNYpXbqZTdnul6XimHdfaw/a/Je5bqyQwpNlbQgDYyehmOocP/gyJ6SQUqup9
+ CI9j950B4pWHwgG9U9SaQczEQO/Xzx7xGcAv4pKQdzgVycLeqZnc4jRUbyrUzqBiBhST
+ WBA142D6QXz7RsHWOGdEp5w6rX6G/prX/nsZQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705963170; x=1706567970;
+ d=1e100.net; s=20230601; t=1705963171; x=1706567971;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XL8m8MSlA/b6/iFQY4g2PE2JVw8Ea39v6Lj3WM1biuE=;
- b=hzGr3PMmLhY4043c2VcuukCwVnwP8eeRPnOr3VCmtbPRXsObaBzwOL03z3mDuXOZbQ
- YIDQoDjbFFljqu42GBQeiUPt4+5hNzAKUnojkQdjX27YRKIfEvG6v0cfjENXhaF5Vte0
- gsnjyb8MsswCZ3xwHhlM6WBu4GRXADmGX++Z8V7DcDUQl9MNB4Q36IKFA7AToJamMwA5
- GjzHjCdJuw/Uouo1EjFht5Bp+QHDWes5BF1ubrPTFb05SqiGlbYQHBWFkF3NYs1iDfNC
- GFwTufJTwgyeqLfKMIMY00ZF8XT540N3NI3FNSP11aZWi08HoLNsTfyOzgLqq64Xp1Zk
- q4XQ==
-X-Gm-Message-State: AOJu0YzvKgtV1NKoNQNXxluv1mfmX46xKVpOUtBdhFP+YYpQzHpk5M6M
- APiMajhPiw+gdqVGaA4qeWoW2bk7+ykMBua2Q1NkTuzp2KhJyAq/h97grWhzb+lbR/cLRVe+Gul
- f
-X-Google-Smtp-Source: AGHT+IEJGY7SbUK/Kkn5EfoSv7hZl6JPliK6ajZkiMsg86RSJWAOw5CxMfbigcqMfrfwddloLGKfyw==
-X-Received: by 2002:a25:c788:0:b0:dc2:40d8:ac5e with SMTP id
- w130-20020a25c788000000b00dc240d8ac5emr2854927ybe.1.1705963169955; 
- Mon, 22 Jan 2024 14:39:29 -0800 (PST)
+ bh=ls/N0tWyzPus4HfY/dZSNJSFRq7T9GY2FxdT7cxCEDA=;
+ b=kai4JBQLfnwHVrII/tFYhNGJIqh9qV4D6N62c9ggY/isgUFVxT08B61pcSLGnkueqX
+ CFbrZEZiSuq1eCIG9Y/XpMqzYhqIrAv6shn6KzxwOum2Egwi6GBKclmaPK1AHmASmAwt
+ niIR71japuTZm++Icv/IsJOk7UryE0eLNBaHGSvfQIvAbwratTvdb0ZeizaLRIg4SE/y
+ +unMiRvZypXOnA0ubaeaEucbDG9nCrA+t5N5mCxl1oES5hxX3BWqCGKceh0eNBRwy/M7
+ 9YnbVvpAGlNSxZ6+EnHzO+gZbNJ8ezDLb3fQJzTWbocok3qPDAr348LcbDYTR2x5dE7F
+ JrzA==
+X-Gm-Message-State: AOJu0Yw2d8Enl/RJ++6TiF7y2U/cW5ftaX4l24xfybQiLqa/3b5dxUcY
+ Io57lqddEsT1cMoHgwJ9ApXSzy24wcylC0P7DtApDtAb/40YqXVEDiSMFymX48Gojxspox694HR
+ A
+X-Google-Smtp-Source: AGHT+IFb31ri43M6X9qVO2iKMYP8QKEoMxm6+uCkJQE2Z3lZnq2sksxAX3zDmT8Ba3E7EjIk9wuquw==
+X-Received: by 2002:a25:aa72:0:b0:dc2:4103:e0ac with SMTP id
+ s105-20020a25aa72000000b00dc24103e0acmr3174487ybi.89.1705963170777; 
+ Mon, 22 Jan 2024 14:39:30 -0800 (PST)
 Received: from bill-the-cat..
  (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- c18-20020a5b0bd2000000b00dc255105656sm1773243ybr.4.2024.01.22.14.39.29
+ c18-20020a5b0bd2000000b00dc255105656sm1773243ybr.4.2024.01.22.14.39.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jan 2024 14:39:29 -0800 (PST)
+ Mon, 22 Jan 2024 14:39:30 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>,
-	Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH 10/16] efi-x86_payload: Remove empty config header
-Date: Mon, 22 Jan 2024 17:39:14 -0500
-Message-Id: <20240122223920.3630168-10-trini@konsulko.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>
+Subject: [PATCH 11/16] galileo: Remove empty config header
+Date: Mon, 22 Jan 2024 17:39:15 -0500
+Message-Id: <20240122223920.3630168-11-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240122223920.3630168-1-trini@konsulko.com>
 References: <20240122223920.3630168-1-trini@konsulko.com>
@@ -92,54 +91,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Now that we support having CONFIG_SYS_CONFIG_NAME be unset to indicate a
-lack of board.h file, unset this on the efi-x86_payload* platforms and remove
+lack of board.h file, unset this on the galileo platform and remove
 the otherwise empty file.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Bin Meng <bmeng.cn@gmail.com>
 ---
- board/efi/efi-x86_payload/Kconfig     | 3 ---
- board/efi/efi-x86_payload/MAINTAINERS | 1 -
- include/configs/efi-x86_payload.h     | 4 ----
+ board/intel/galileo/Kconfig     | 3 ---
+ board/intel/galileo/MAINTAINERS | 1 -
+ include/configs/galileo.h       | 4 ----
  3 files changed, 8 deletions(-)
- delete mode 100644 include/configs/efi-x86_payload.h
+ delete mode 100644 include/configs/galileo.h
 
-diff --git a/board/efi/efi-x86_payload/Kconfig b/board/efi/efi-x86_payload/Kconfig
-index 6d062499346d..c500ca02ebf5 100644
---- a/board/efi/efi-x86_payload/Kconfig
-+++ b/board/efi/efi-x86_payload/Kconfig
+diff --git a/board/intel/galileo/Kconfig b/board/intel/galileo/Kconfig
+index 4c0451da48da..15c8d1254089 100644
+--- a/board/intel/galileo/Kconfig
++++ b/board/intel/galileo/Kconfig
 @@ -9,9 +9,6 @@ config SYS_VENDOR
  config SYS_SOC
- 	default "efi"
+ 	default "quark"
  
 -config SYS_CONFIG_NAME
--	default "efi-x86_payload"
+-	default "galileo"
 -
  config TEXT_BASE
- 	default 0x00200000
+ 	default 0xfff10000
  
-diff --git a/board/efi/efi-x86_payload/MAINTAINERS b/board/efi/efi-x86_payload/MAINTAINERS
-index d795d60e09e4..3c5d48aa84cc 100644
---- a/board/efi/efi-x86_payload/MAINTAINERS
-+++ b/board/efi/efi-x86_payload/MAINTAINERS
-@@ -3,6 +3,5 @@ M:	Bin Meng <bmeng.cn@gmail.com>
+diff --git a/board/intel/galileo/MAINTAINERS b/board/intel/galileo/MAINTAINERS
+index dbbc82e8a1db..a5dcde7ad09d 100644
+--- a/board/intel/galileo/MAINTAINERS
++++ b/board/intel/galileo/MAINTAINERS
+@@ -2,5 +2,4 @@ INTEL GALILEO BOARD
+ M:	Bin Meng <bmeng.cn@gmail.com>
  S:	Maintained
- F:	board/efi/Kconfig
- F:	board/efi/efi-x86_payload/
--F:	include/configs/efi-x86_payload.h
- F:	configs/efi-x86_payload32_defconfig
- F:	configs/efi-x86_payload64_defconfig
-diff --git a/include/configs/efi-x86_payload.h b/include/configs/efi-x86_payload.h
+ F:	board/intel/galileo/
+-F:	include/configs/galileo.h
+ F:	configs/galileo_defconfig
+diff --git a/include/configs/galileo.h b/include/configs/galileo.h
 deleted file mode 100644
-index e00c408f29a5..000000000000
---- a/include/configs/efi-x86_payload.h
+index 9b0f5cedcd79..000000000000
+--- a/include/configs/galileo.h
 +++ /dev/null
 @@ -1,4 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0+ */
 -/*
-- * Copyright (C) 2018, Bin Meng <bmeng.cn@gmail.com>
+- * Copyright (C) 2015, Bin Meng <bmeng.cn@gmail.com>
 - */
 -- 
 2.34.1
