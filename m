@@ -4,70 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92F04C47DD9
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 20:14:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FE47C47DD3
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 20:39:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD75D879B2;
-	Mon, 22 Jan 2024 21:13:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id D363A8792D;
+	Mon, 22 Jan 2024 21:39:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="mPU1mT2y";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IMmXuQea";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78BE98792D; Mon, 22 Jan 2024 21:13:57 +0100 (CET)
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C939A8793F; Mon, 22 Jan 2024 21:39:52 +0100 (CET)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A504087B44
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 21:13:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B5230878BA
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 21:39:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 37BE6B81133;
- Mon, 22 Jan 2024 20:13:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 8FF75C433F1;
- Mon, 22 Jan 2024 20:13:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1705954434;
- bh=6sYGTjpuzuLQ6HfO0rAlXXMGNX2T9OcyivBH3FIIdpo=;
- h=From:Date:Subject:To:Cc:Reply-To:From;
- b=mPU1mT2yIEdDlIYiCdPN4oQMc8kfv1mkyQh2Mnlged85SUJTyBELlT5dvf/pEBAp4
- eAC5J3VTvW3rv16sn3mdom4iJZRh4MGAeOtrZGKP0WwrpWX+wUtytCrwyHQgyUyke7
- ZbEkw2fVmVJ6nSF/J/CUodJMp6k6LOYnxrQUOldScfEfHAQtRRN1MTOciVPygBNMR3
- r+YbydE8gba7rKsXraXxhxMnNAtiu+W8Kvxnonegca7JyLpLUDg5s7F73yGlsIZo8w
- 39d+U1vhr87s4ZwKxVdSd4BObh5SFTqRK2SpuLFzbOF+NlrBgTaLAOV06aFcp7hwNB
- bK2yRjA1nXGzw==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 7F5F2C47DD9;
- Mon, 22 Jan 2024 20:13:54 +0000 (UTC)
-From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
-Date: Tue, 23 Jan 2024 04:13:52 +0800
-Subject: [PATCH] serial: pl01x: set baudrate when probing
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-5ff7ec8772dso28043567b3.0
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 12:39:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1705955989; x=1706560789; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=8KtVandrZkU7bU/uhTgPoisvLhn4oNZNMQA0uH0AqIU=;
+ b=IMmXuQeaHkAO42LBtbHGHM89EBfdrKHXk6aZz/zGqx9OEBXvh7sTK9H0Ubqc4SIwwl
+ mzSnEBvvTYPw7+DP7xm4uUXiXI7BAynAqNSFC9JtqECzVf3iV1PoSVf4JVrNru/wx75r
+ AAR5HIH7bUWc8Vy+qhamqeraxcj8dHtFu/CQQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705955989; x=1706560789;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8KtVandrZkU7bU/uhTgPoisvLhn4oNZNMQA0uH0AqIU=;
+ b=EZhOEz2ORpigPhD0nCG1CuqvB6LjnF2pRcXilIoQqPXiZ0kOmBD1SF8ARxZuUaLPnI
+ t6EsuxWg5VMvupThmM+qYTB9BuUJ5/lA1i19viaWVCRtJ0+K0U9amN85BqA2ok3vAVwp
+ 2DsrGmxGdmGnYwwjbMlrKYxIlws3rfBDEjJJzGP7xxf1adD48pa8hyu9N2aFcJKt3MSG
+ 2eAZWc8QDA4dcA48yJ/XTM0PomUOyqi34ugjfizUM5yCQm5ojO18mD8g66dsgbbTSKox
+ z81ukBeB0aI13qBDciSS0wk2q4XMLfHvwMVy886niDQIY1JYXXzkMMLiqmR0uxvlVeSj
+ Owdw==
+X-Gm-Message-State: AOJu0YwngpFfhBdOWrQsXNJzi/0FaDz1b31gmDd8CBcES+7X+VU7ckla
+ a8UmBSQVcPzjeMWHwczzsNlpcWbKRseUXQkqmkugfkqR0zNIqDHroz+zrBu/DaYVS3bG2OOvU4G
+ w
+X-Google-Smtp-Source: AGHT+IEacSUaG1enIc8E/xf29LGIcJseM+NCk3WLRxLD+Kf3BejEBkZZ6D0srRQc9bt0NvztzFhiVw==
+X-Received: by 2002:a0d:c785:0:b0:5d3:fb01:d880 with SMTP id
+ j127-20020a0dc785000000b005d3fb01d880mr3879503ywd.25.1705955989120; 
+ Mon, 22 Jan 2024 12:39:49 -0800 (PST)
+Received: from [127.0.1.1]
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ g141-20020a0ddd93000000b005ff9a21d042sm2851497ywe.46.2024.01.22.12.39.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Jan 2024 12:39:48 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20240110184610.3909763-1-trini@konsulko.com>
+References: <20240110184610.3909763-1-trini@konsulko.com>
+Subject: Re: [PATCH 1/5] omap3: Make SPL_OMAP3_ID_NAND depend on NAND_OMAP_GPMC
+Message-Id: <170595598773.1572668.17990226622185263823.b4-ty@konsulko.com>
+Date: Mon, 22 Jan 2024 15:39:47 -0500
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240123-b4-pl011-v1-1-fb576d0a714f@outlook.com>
-X-B4-Tracking: v=1; b=H4sIAH/MrmUC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIxMDQyNj3SQT3YIcA0ND3dRUS1Nz07Q0o0RjCyWg8oKi1LTMCrBR0bG1tQB
- fV1B5WgAAAA==
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Lukasz Majewski <lukma@denx.de>
-Cc: Yang Xiwen <forbidden405@outlook.com>
 X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1705954432; l=1467;
- i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
- bh=jw8To+ODKdNHWBou76VXfDtPPAkq6OFIkYy2gU13KU8=;
- b=8p9Dm3o/pbms9fV4ou//OSYQ0G3TlV7KWpjZLslP9+5tPgvgtNNgh+Abxw+HGGPp0Ic0Fp3l5
- 052pue3ZYO3Ds1PCOvu4ccrK1xi8liBwltxjuxo3frF+GoCvFzQ0ajy
-X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
- pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
-X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
- auth_id=67
-X-Original-From: Yang Xiwen <forbidden405@outlook.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,60 +84,23 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: forbidden405@outlook.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Yang Xiwen <forbidden405@outlook.com>
+On Wed, 10 Jan 2024 13:46:06 -0500, Tom Rini wrote:
 
-It is found that when DM is enabled, only generic init function is
-called in .probe(). Baudrate is never honored. Add a function call
-to .setbrg() when probing so that we can update the baudrate of the
-serial device.
+> This specific bit logic is used to determine what NAND chip is present
+> on a board in order to then know what revision of the board we have and
+> so what DDR chips are present. We can only do this if we have a NAND
+> chip, and so we will have NAND_OMAP_GPMC enabled.
+> 
+> 
 
-Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
----
- drivers/serial/serial_pl01x.c | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+Applied to u-boot/master, thanks!
 
-diff --git a/drivers/serial/serial_pl01x.c b/drivers/serial/serial_pl01x.c
-index 428a4d210d..57bbcaf3b6 100644
---- a/drivers/serial/serial_pl01x.c
-+++ b/drivers/serial/serial_pl01x.c
-@@ -290,6 +290,7 @@ int pl01x_serial_probe(struct udevice *dev)
- {
- 	struct pl01x_serial_plat *plat = dev_get_plat(dev);
- 	struct pl01x_priv *priv = dev_get_priv(dev);
-+	int ret;
- 
- #if CONFIG_IS_ENABLED(OF_PLATDATA)
- 	struct dtd_serial_pl01x *dtplat = &plat->dtplat;
-@@ -301,10 +302,14 @@ int pl01x_serial_probe(struct udevice *dev)
- #endif
- 	priv->type = plat->type;
- 
--	if (!plat->skip_init)
--		return pl01x_generic_serial_init(priv->regs, priv->type);
--	else
-+	if (!plat->skip_init) {
-+		ret = pl01x_generic_serial_init(priv->regs, priv->type);
-+		if (!ret)
-+			return ret;
-+		return pl01x_serial_setbrg(dev, gd->baudrate);
-+	} else {
- 		return 0;
-+	}
- }
- 
- int pl01x_serial_getc(struct udevice *dev)
-
----
-base-commit: f7cca7ccc5117eaafcc2bde91ad1bed6fee7cfc3
-change-id: 20240123-b4-pl011-ee9575ff2a38
-
-Best regards,
 -- 
-Yang Xiwen <forbidden405@outlook.com>
+Tom
+
 
