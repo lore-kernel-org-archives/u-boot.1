@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0A6CC47DD9
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 02:08:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2A86C47422
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 02:08:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83D5A8786B;
-	Mon, 22 Jan 2024 03:08:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2A72A87954;
+	Mon, 22 Jan 2024 03:08:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="Q61j6mrS";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="AnnTBJ1c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BE4487867; Mon, 22 Jan 2024 03:08:23 +0100 (CET)
-Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
+ id 807258785F; Mon, 22 Jan 2024 03:08:29 +0100 (CET)
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8618F8786B
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 03:08:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 84946878FA
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 03:08:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 19831ff2b8cb11eea2298b7352fd921d-20240122
+X-UUID: 1cfee850b8cb11ee9e680517dc993faa-20240122
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
  s=dk; 
  h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
- bh=cJ2OswlD1Oq09hoGWa82uBzeoipX11lw/8/RQuMFoaI=; 
- b=Q61j6mrSOcRiULqvJFGjSBXnUvTfgEK04NC+zMRMSge9A9J8xOwjXoT20TA8Pe+jv6qtwTpNPM9kSZjIOKk2xb5P0IU8kzAPYFQHVeXf1RiaqM4sBM5IHIXzHT7ysZjjHQhZrtqqcpXvXPcK9K2UXiAnIdx+e2TOv1alSOn53wM=;
+ bh=oY4KNO75pKv7DBdccGUiMasnZzlwVWYjabXQX0a/Mts=; 
+ b=AnnTBJ1cm1SdOSsHH+CBu5t1OtxCJE4uf4MQJFPFVYobOEX34qV795KrjPbsJFLWYJtv50OJ07rO5Q/5jRhLWuwGUumzwh/UjZp7jn27JLRy4nL6B3/7jyC8ZW3YH08IdHgY4M+6I4jIhwDwE7R0pHUyCEdzaSo/jLZL/cknSXs=;
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.36, REQID:5360429a-bb55-444a-b22e-e6edf84a46f2, IP:0,
+X-CID-O-INFO: VERSION:1.1.36, REQID:aa4d94b6-e775-4db3-b777-fc9ed9121bef, IP:0,
  U
  RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
  release,TS:0
-X-CID-META: VersionHash:6e16cf4, CLOUDID:6b9c1883-8d4f-477b-89d2-1e3bdbef96d1,
+X-CID-META: VersionHash:6e16cf4, CLOUDID:05bc7f8e-e2c0-40b0-a8fe-7c7e47299109,
  B
  ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
  RL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,
  SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0
-X-CID-BVR: 0,NGT
-X-CID-BAS: 0,NGT,0,_
+X-CID-BVR: 0
+X-CID-BAS: 0,_,0,_
 X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: 19831ff2b8cb11eea2298b7352fd921d-20240122
-Received: from mtkmbs13n1.mediatek.inc [(172.21.101.193)] by
- mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+X-UUID: 1cfee850b8cb11ee9e680517dc993faa-20240122
+Received: from mtkmbs10n2.mediatek.inc [(172.21.101.183)] by
+ mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
  (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1274231021; Mon, 22 Jan 2024 10:08:14 +0800
+ with ESMTP id 202044717; Mon, 22 Jan 2024 10:08:19 +0800
 Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
  mtkmbs10n2.mediatek.inc (172.21.101.183) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.26; Mon, 22 Jan 2024 10:08:12 +0800
+ 15.2.1118.26; Mon, 22 Jan 2024 10:08:18 +0800
 Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
  mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1118.26 via Frontend Transport; Mon, 22 Jan 2024 10:08:11 +0800
+ 15.2.1118.26 via Frontend Transport; Mon, 22 Jan 2024 10:08:17 +0800
 From: Weijie Gao <weijie.gao@mediatek.com>
 To: <u-boot@lists.denx.de>
 CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Daniel Golle
@@ -63,23 +63,24 @@ CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Daniel Golle
  Joe Hershberger
  <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, Weijie Gao
  <weijie.gao@mediatek.com>, Bo-Cun Chen <bc-bocun.chen@mediatek.com>
-Subject: [PATCH 02/60] net: mediatek: add support for adjusting MDIO clock
-Date: Mon, 22 Jan 2024 10:08:11 +0800
-Message-ID: <20240122020811.143358-1-weijie.gao@mediatek.com>
+Subject: [PATCH 03/60] net: mediatek: add support for XGMII interface
+Date: Mon, 22 Jan 2024 10:08:16 +0800
+Message-ID: <20240122020816.143402-1-weijie.gao@mediatek.com>
 X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
 Content-Type: text/plain
 X-TM-AS-Product-Ver: SMEX-14.0.0.3152-9.1.1006-23728.005
-X-TM-AS-Result: No-10--5.484500-8.000000
-X-TMASE-MatchedRID: XR7mIL8ZhIoJnHuXjHwi9wPZZctd3P4BWjWsWQUWzVrgr/zYTDOZCJj2
- 3DP9jL7jprhPLBzR/tFCKM8UL7o4C4QHE7x6AHFuDB+ErBr0bAPbKTxp3+WtINEsTITobgNE/Ge
- vfoH427p8p1FS+daYYNJHai6GfGFVHxPMjOKY7A8LbigRnpKlKTpcQTtiHDgWc8yolV7AhwQyYr
- b2qf+8i1QW0friuNMz5Q5RhxvPkUOVkPAbEE+6Gw==
+X-TM-AS-Result: No-10--1.817100-8.000000
+X-TMASE-MatchedRID: 6pbNFWS8cDvRpd8KAFU/vR+WEMjoO9WWTJDl9FKHbrkKogmGusPLbwfo
+ RwTLQ8VIQx8Td33i8d2N/3dDbj3CNTNBg7c5UYh83fn7n/ZHGqZ9LQinZ4QefPcjNeVeWlqY+gt
+ Hj7OwNO22utO5qEfOUbLvcsRbiXPIv1CxsDAJ2IQXEwMGZQWJdrxI9pu8BD/2yfzG03q29Ft25/
+ 6oul14mvomEzDK7sbdck3k3R9L50QZYOgZ5btsuEma3zYT97IFAYfQIAUhBayZvmCbKVb49sZL6
+ x5U/HriPpCuffGH9zI=
 X-TM-AS-User-Approved-Sender: No
 X-TM-AS-User-Blocked-Sender: No
-X-TMASE-Result: 10--5.484500-8.000000
+X-TMASE-Result: 10--1.817100-8.000000
 X-TMASE-Version: SMEX-14.0.0.3152-9.1.1006-23728.005
-X-TM-SNTS-SMTP: 44D5B5DDBE4B331BF0F6115BC8F553C92DA71F2343B10B328D96D01BCBB280102000:8
+X-TM-SNTS-SMTP: 16AF0A38997682C652F01FB50B9A8B5B8D655420EB5B3C0BA45B2A147793AB3C2000:8
 X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,121 +98,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-User can assign a specific MDC speed to the eth node as follow:
-
-&eth {
-	...
-	phy-mode = "usxgmii";
-	phy-handle = <&phy8>;
-
-	mdio {
-		clock-frequency = <10500000>;
-	};
-
-	phy8: eth-phy@8 {
-	      compatible = "ethernet-phy-id31c3.1c12";
-	...
-};
+This patch add XGMII support for connecting 2.5G PHY.
 
 Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
 Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 ---
- drivers/net/mtk_eth.c | 35 +++++++++++++++++++++++++++++++++++
- drivers/net/mtk_eth.h |  7 +++++++
- 2 files changed, 42 insertions(+)
+ drivers/net/mtk_eth.c | 22 ++++++++++++++--------
+ drivers/net/mtk_eth.h |  2 +-
+ 2 files changed, 15 insertions(+), 9 deletions(-)
 
 diff --git a/drivers/net/mtk_eth.c b/drivers/net/mtk_eth.c
-index 3cfce05845..726aedad3f 100644
+index 726aedad3f..75e7bcf83b 100644
 --- a/drivers/net/mtk_eth.c
 +++ b/drivers/net/mtk_eth.c
-@@ -137,6 +137,7 @@ struct mtk_eth_priv {
- 	int force_mode;
- 	int speed;
- 	int duplex;
-+	int mdc;
- 	bool pn_swap;
+@@ -1246,7 +1246,8 @@ static int mtk_phy_start(struct mtk_eth_priv *priv)
+ 	}
  
- 	struct phy_device *phydev;
-@@ -1607,6 +1608,26 @@ static void mtk_eth_fifo_init(struct mtk_eth_priv *priv)
- 	mtk_pdma_write(priv, PDMA_RST_IDX_REG, RST_DTX_IDX0 | RST_DRX_IDX0);
- }
+ 	if (!priv->force_mode) {
+-		if (priv->phy_interface == PHY_INTERFACE_MODE_USXGMII)
++		if (priv->phy_interface == PHY_INTERFACE_MODE_USXGMII ||
++		    priv->phy_interface == PHY_INTERFACE_MODE_XGMII)
+ 			mtk_xphy_link_adjust(priv);
+ 		else
+ 			mtk_phy_link_adjust(priv);
+@@ -1516,7 +1517,7 @@ static void mtk_mac_init(struct mtk_eth_priv *priv)
  
-+static void mtk_eth_mdc_init(struct mtk_eth_priv *priv)
-+{
-+	u32 divider;
-+
-+	if (priv->mdc == 0)
-+		return;
-+
-+	divider = min_t(u32, DIV_ROUND_UP(MDC_MAX_FREQ, priv->mdc), MDC_MAX_DIVIDER);
-+
-+	/* Configure MDC turbo mode */
-+	if (MTK_HAS_CAPS(priv->soc->caps, MTK_NETSYS_V3))
-+		mtk_gmac_rmw(priv, GMAC_MAC_MISC_REG, 0, MISC_MDC_TURBO);
-+	else
-+		mtk_gmac_rmw(priv, GMAC_PPSC_REG, 0, MISC_MDC_TURBO);
-+
-+	/* Configure MDC divider */
-+	mtk_gmac_rmw(priv, GMAC_PPSC_REG, PHY_MDC_CFG,
-+		     FIELD_PREP(PHY_MDC_CFG, divider));
-+}
-+
- static int mtk_eth_start(struct udevice *dev)
+ static void mtk_xmac_init(struct mtk_eth_priv *priv)
  {
- 	struct mtk_eth_priv *priv = dev_get_priv(dev);
-@@ -1803,6 +1824,9 @@ static int mtk_eth_probe(struct udevice *dev)
- 		noncached_alloc(priv->soc->rxd_size * NUM_RX_DESC,
- 				ARCH_DMA_MINALIGN);
+-	u32 sts;
++	u32 force_link = 0;
  
-+	/* Set MDC divider */
-+	mtk_eth_mdc_init(priv);
+ 	switch (priv->phy_interface) {
+ 	case PHY_INTERFACE_MODE_USXGMII:
+@@ -1531,15 +1532,19 @@ static void mtk_xmac_init(struct mtk_eth_priv *priv)
+ 		       SYSCFG0_GE_MODE_M << SYSCFG0_GE_MODE_S(priv->gmac_id),
+ 		       0);
+ 
+-	if (priv->gmac_id == 1) {
++	if (priv->phy_interface == PHY_INTERFACE_MODE_USXGMII &&
++	    priv->gmac_id == 1) {
+ 		mtk_infra_rmw(priv, TOPMISC_NETSYS_PCS_MUX,
+ 			      NETSYS_PCS_MUX_MASK, MUX_G2_USXGMII_SEL);
+-	} else if (priv->gmac_id == 2) {
+-		sts = mtk_gmac_read(priv, XGMAC_STS(priv->gmac_id));
+-		sts |= XGMAC_FORCE_LINK;
+-		mtk_gmac_write(priv, XGMAC_STS(priv->gmac_id), sts);
+ 	}
+ 
++	if (priv->phy_interface == PHY_INTERFACE_MODE_XGMII ||
++	    priv->gmac_id == 2)
++		force_link = XGMAC_FORCE_LINK(priv->gmac_id);
 +
++	mtk_gmac_rmw(priv, XGMAC_STS(priv->gmac_id),
++		     XGMAC_FORCE_LINK(priv->gmac_id), force_link);
++
+ 	/* Force GMAC link down */
+ 	mtk_gmac_write(priv, GMAC_PORT_MCR(priv->gmac_id), FORCE_MODE);
+ }
+@@ -1828,7 +1833,8 @@ static int mtk_eth_probe(struct udevice *dev)
+ 	mtk_eth_mdc_init(priv);
+ 
  	/* Set MAC mode */
- 	if (priv->phy_interface == PHY_INTERFACE_MODE_USXGMII)
+-	if (priv->phy_interface == PHY_INTERFACE_MODE_USXGMII)
++	if (priv->phy_interface == PHY_INTERFACE_MODE_USXGMII ||
++	    priv->phy_interface == PHY_INTERFACE_MODE_XGMII)
  		mtk_xmac_init(priv);
-@@ -1881,6 +1905,17 @@ static int mtk_eth_of_to_plat(struct udevice *dev)
- 
- 	priv->gmac_id = dev_read_u32_default(dev, "mediatek,gmac-id", 0);
- 
-+	priv->mdc = 0;
-+	subnode = ofnode_find_subnode(dev_ofnode(dev), "mdio");
-+	if (ofnode_valid(subnode)) {
-+		priv->mdc = ofnode_read_u32_default(subnode, "clock-frequency", 2500000);
-+		if (priv->mdc > MDC_MAX_FREQ ||
-+		    priv->mdc < MDC_MAX_FREQ / MDC_MAX_DIVIDER) {
-+			printf("error: MDIO clock frequency out of range\n");
-+			return -EINVAL;
-+		}
-+	}
-+
- 	/* Interface mode is required */
- 	pdata->phy_interface = dev_read_phy_mode(dev);
- 	priv->phy_interface = pdata->phy_interface;
+ 	else
+ 		mtk_mac_init(priv);
 diff --git a/drivers/net/mtk_eth.h b/drivers/net/mtk_eth.h
-index 491cac56a8..45229c0f9a 100644
+index 45229c0f9a..fd31c782c7 100644
 --- a/drivers/net/mtk_eth.h
 +++ b/drivers/net/mtk_eth.h
-@@ -180,6 +180,12 @@ enum mkt_eth_capabilities {
+@@ -268,7 +268,7 @@ enum mkt_eth_capabilities {
  
- /* GMAC Registers */
+ /* XGMAC Status Registers */
+ #define XGMAC_STS(x)			(((x) == 2) ? 0x001C : 0x000C)
+-#define XGMAC_FORCE_LINK		BIT(15)
++#define XGMAC_FORCE_LINK(x)		(((x) == 1) ? BIT(31) : BIT(15))
  
-+#define GMAC_PPSC_REG			0x0000
-+#define PHY_MDC_CFG			GENMASK(29, 24)
-+#define MDC_TURBO			BIT(20)
-+#define MDC_MAX_FREQ			25000000
-+#define MDC_MAX_DIVIDER			63
-+
- #define GMAC_PIAC_REG			0x0004
- #define PHY_ACS_ST			BIT(31)
- #define MDIO_REG_ADDR_S			25
-@@ -197,6 +203,7 @@ enum mkt_eth_capabilities {
- #define P1_XGMAC_FORCE_LINK		BIT(15)
- 
- #define GMAC_MAC_MISC_REG		0x0010
-+#define MISC_MDC_TURBO			BIT(4)
- 
- #define GMAC_GSW_CFG_REG		0x0080
- #define GSWTX_IPG_M			0xF0000
+ /* XGMAC Registers */
+ #define XGMAC_PORT_MCR(x)		(0x2000 + (((x) - 1) * 0x1000))
 -- 
 2.34.1
 
