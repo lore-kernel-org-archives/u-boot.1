@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53550C4725D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 12:46:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A291C47DAF
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 12:47:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA671879CC;
-	Mon, 22 Jan 2024 13:46:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 42BBF87B4D;
+	Mon, 22 Jan 2024 13:46:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=feathertop.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=feathertop.org header.i=@feathertop.org header.b="p4XKJola";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="MQhNfTT8";
+	dkim=pass (2048-bit key; unprotected) header.d=feathertop.org header.i=@feathertop.org header.b="Rm//7TK6";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="Ejf927oe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94C91879CC; Mon, 22 Jan 2024 13:46:41 +0100 (CET)
+ id 8101D87B41; Mon, 22 Jan 2024 13:46:50 +0100 (CET)
 Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
  [66.111.4.26])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 263CF879FB
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 13:46:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BE1B487B78
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 13:46:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=feathertop.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tim@feathertop.org
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailout.nyi.internal (Postfix) with ESMTP id 5423B5C0117;
- Mon, 22 Jan 2024 07:46:38 -0500 (EST)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailout.nyi.internal (Postfix) with ESMTP id E33B75C0100;
+ Mon, 22 Jan 2024 07:46:45 -0500 (EST)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute5.internal (MEProxy); Mon, 22 Jan 2024 07:46:38 -0500
+ by compute4.internal (MEProxy); Mon, 22 Jan 2024 07:46:45 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=feathertop.org;
  h=cc:cc:content-transfer-encoding:content-type:date:date:from
  :from:in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:subject:subject:to:to; s=fm2; t=1705927598; x=
- 1706013998; bh=xTifUcPZUOwG/qSlThWr1ysrkOdEAwvuBBRDl9WUR8o=; b=p
- 4XKJolaGEAr4EkjjtUvAz/zzyZ2p0YTckmQ3ULQwcHGdxhTcqQKnFyjo4HHWnZyt
- Lk7Wzrr7MmpS49JkmbUxWilWKQ96pfezPqDqaHGnpp2wTTuSSSqFSZEMY3KliGm4
- ljri/cswA5LrQwjSjyHYxMB3Z87hzKO09DIIqUb6mtwGOYZoc2O1Pthm4zrj8mwh
- 2VOaCVITFvR9jGNaisIAHTK29N9kEpj+wVqAw2Y7s7dj+g/QgHxGpuYK8v09Pm26
- VL0DZAXO8cPDTT4Q5C84arIJ+ArnVtw4rp5cnEVhlRnOEnj45548qUm4vT4cmOHE
- cb965Q6UZaT0XSGGNEbGg==
+ :reply-to:subject:subject:to:to; s=fm2; t=1705927605; x=
+ 1706014005; bh=G8fbouIyzvbKS4F2jS4+OrqbiIsOdeKJ1BGz0pN/kUA=; b=R
+ m//7TK65npXKWWIWK8zEOqzEt7rNmWi+WqNXZKxKem6x7nqpvJJfPKsVHsP50IJg
+ sypifIBqBbcJ8K1yglruWZ32e8gkXhimniMSNCNM7IBeS7q0yHll5LRWQOkutj3F
+ NFzf3m5UpTB6SyofT0yZpua87ZvmRJ59FrJJXZLP6rICfsVFQxb8C+2ITdYbtue0
+ kbdAULS0oXchlpCdE6fgjiMIQ6Cu7SiqppNfUScOFFenEx3v/IdTL6hCQgBZn6B0
+ SMvxJGkMx4PaZQb0MZ0zJ3JZ7JeJCVQteV/PjFgHQRC4HKiUuVVHOUDGlR9hyCGp
+ yI1r7YaiCE1tohj4E/OTA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:date:date:feedback-id:feedback-id:from:from
  :in-reply-to:in-reply-to:message-id:mime-version:references
  :reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1705927598; x=
- 1706013998; bh=xTifUcPZUOwG/qSlThWr1ysrkOdEAwvuBBRDl9WUR8o=; b=M
- QhNfTT8aZ1CTCXu840dN703EWcmuNw+3YK1uJhsLt5JH/dHjEEstfB3EvmesmtvZ
- 0r+j+vjZdH6T9qRZlce+a2In+G/GqorDzt4+UE7YVtA/sCm9PyCJIaXo+unDmTDm
- Mz9K6mm8Ssp5946wu63/H9X6Mh4UnXnjyTNjGaA7HS1RFiar7GP8f8beQ14wkQ85
- 3mAPO9sSyHIcXBDk6LUeN2a4J/icwRxHsnqHo07A7/yfUy1pX8nldkyNi4ha30ze
- +zBOoBqzCwmmjE82D4slZoV2f+viB3Ote2ZsKdYZw0ccrHRheFHK6Als8pVvh302
- czp8ch+zxN4iu4mA42KOQ==
-X-ME-Sender: <xms:rmOuZXc0de8G_7-nsG58P36ZFPB_h6mTGpyvqMHS_tgBuU_MBwY0_g>
- <xme:rmOuZdNctBm5icmU-uwaFk-Ez-JEkqCEPdG5gpk_hfumHDFIvgFWnaNr2R4AltAQN
- MHs8I5ARA>
-X-ME-Received: <xmr:rmOuZQhwFYHTA6ctRAzgbXRpMHcSXbhiqI0wXWVDpPaOXBC8NO3tU908L8-_D8ya6p1YhUn2Y_l6r3Ovc-ZACdJDjYDuMuZFk6U>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1705927605; x=
+ 1706014005; bh=G8fbouIyzvbKS4F2jS4+OrqbiIsOdeKJ1BGz0pN/kUA=; b=E
+ jf927oeaqaZJiVKnuHKU6CPxC3AGTWNS8/u1v6sW7xCr0K8vCa2H67jhsLlpm6W7
+ q3jC4p7uV4zdzAT5BbaThXlFRw1YLZGD10oKtqoUSQeT6ukbGVaE0ibpP/+9oiXO
+ TKhbChZURHR5s31TEhNjT8uWzjp3m6lj4PaGY59QWqiKSkKAZ2W4JXGwjf9ggSPQ
+ iEEWmWD9KNQ6LS6NI1IkhLneQTSvqxR1leJEeqbf9FG5aa+zdois6XkaUBO9TAjO
+ 3iAmdJ1hXYt7bnIFYDR+3Rdn/L5zA4/7EGsizue9CkacBcJmrK6niOHV9kAx1STl
+ 9s3aekbhEoZWqTdAU4RVw==
+X-ME-Sender: <xms:tWOuZeZnnx69h63SenDuQtu89PxiQRr9s-neJOD3txkP2s-1xatKBQ>
+ <xme:tWOuZRb9NcUHFTbR69sPw9kR4YaUbd1waDLDyGes7TPcB9Pr7PMW0VdYOFIKbBbqv
+ K5NgNFVCw>
+X-ME-Received: <xmr:tWOuZY_eBtUJV6w2NVAx-huC9KXk-Y15Vy_J5Eylb-wbJ94JVQ4HLv2u8M_cnDAzVX_2bwg9mKIpODcuUsctpkU-b3F5brSRO0I>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrvdekiedggeefucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
@@ -68,24 +68,24 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrvdekiedggeefucetufdoteggod
  hnpeefffeuhfetgeeikeejvefgtdefteehgfdvhfetfeeuffeuhffhfeekgfekgeehieen
  ucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehtihhmse
  hfvggrthhhvghrthhophdrohhrgh
-X-ME-Proxy: <xmx:rmOuZY9PC7UqUCJyv2SywY1jOA99co-GnfxvbyGC6nNxenDzlmSMOw>
- <xmx:rmOuZTseY9W9pmX9UO9BNGEUfO8I959ngS0DyMBvk5CLnoaDYOtL9g>
- <xmx:rmOuZXF9p3FE-W-jjfAtb9A_8JwFekYOpZtJL4MWr5fboXGpLcIkiQ>
- <xmx:rmOuZZXbrYBCPO--3Zp9DipRNsz8h88ZwFl6kx6SQXM4EU68VEaX0Q>
+X-ME-Proxy: <xmx:tWOuZQqpmFJERUDX4ICQSf2WpVCX0fPFhOLcMtmwH9-cZYsMUJ6SZw>
+ <xmx:tWOuZZq5WhA_f2d2cA-Uuy0t1sN7W_fyh6C4G_1pPqSXZTbPtx5ydA>
+ <xmx:tWOuZeT-P6DJzyVNeF3rBEmlUH0UHxDREDRsYl_FdiueYyfBXzxhlQ>
+ <xmx:tWOuZSDsV_wQqe1dtpjlWxCpM1qk00m1R4OhJYVVA8vLPlc4ydng4A>
 Feedback-ID: i1f8241ce:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 22 Jan 2024 07:46:34 -0500 (EST)
+ 22 Jan 2024 07:46:41 -0500 (EST)
 Received: by feathertop.org (sSMTP sendmail emulation);
- Mon, 22 Jan 2024 23:46:31 +1100
+ Mon, 22 Jan 2024 23:46:38 +1100
 From: Tim Lunn <tim@feathertop.org>
 To: u-boot@lists.denx.de
 Cc: Tim Lunn <tim@feathertop.org>, Kever Yang <kever.yang@rock-chips.com>,
  Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/5] ram: rockchip: Add rv1126 ddr4 support
-Date: Mon, 22 Jan 2024 23:46:00 +1100
-Message-Id: <20240122124603.3341988-3-tim@feathertop.org>
+Subject: [PATCH 3/5] board: rockchip: Add Sonoff iHost board
+Date: Mon, 22 Jan 2024 23:46:01 +1100
+Message-Id: <20240122124603.3341988-4-tim@feathertop.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240122124603.3341988-1-tim@feathertop.org>
 References: <20240122124603.3341988-1-tim@feathertop.org>
@@ -107,616 +107,207 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for ddr4 on rv1126. Timing detection files are imported
-from downstream Rockchip BSP u-boot. Allow selecting ddr4 ram with
-define CONFIG_RAM_ROCKCHIP_DDR4.
+Sonoff iHost is gateway device designed to provide a Smart Home Hub,
+it is based on Rockchip RV1126. There is also a version with 2GB RAM
+based off the RV1109 dual core SoC however this works with the same
+config as the RV1126 for uboot purposes.
+
+Features:
+- Rockchip RV1126
+- 4GB DDR4
+- 8GB eMMC
+- microSD slot
+- RMII Ethernet PHY
+- 1x USB 2.0 Host
+- 1x USB 2.0 OTG
+- Realtek RTL8723DS WiFi/BT
+- EFR32MG21 Silabs Zigbee radio
+- Speaker/Microphone
 
 Signed-off-by: Tim Lunn <tim@feathertop.org>
 ---
 
- .../sdram-rv1126-ddr4-detect-1056.inc         | 75 +++++++++++++++++++
- .../rockchip/sdram-rv1126-ddr4-detect-328.inc | 75 +++++++++++++++++++
- .../rockchip/sdram-rv1126-ddr4-detect-396.inc | 75 +++++++++++++++++++
- .../rockchip/sdram-rv1126-ddr4-detect-528.inc | 75 +++++++++++++++++++
- .../rockchip/sdram-rv1126-ddr4-detect-664.inc | 75 +++++++++++++++++++
- .../rockchip/sdram-rv1126-ddr4-detect-784.inc | 75 +++++++++++++++++++
- .../rockchip/sdram-rv1126-ddr4-detect-924.inc | 75 +++++++++++++++++++
- drivers/ram/rockchip/sdram_rv1126.c           |  8 ++
- 8 files changed, 533 insertions(+)
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-1056.inc
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-328.inc
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-396.inc
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-528.inc
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-664.inc
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-784.inc
- create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-924.inc
+ arch/arm/dts/rv1126-sonoff-ihost-u-boot.dtsi | 13 +++++
+ arch/arm/mach-rockchip/rv1126/Kconfig        |  8 +++
+ board/itead/sonoff-ihost/Kconfig             | 16 ++++++
+ board/itead/sonoff-ihost/MAINTAINERS         |  6 ++
+ configs/sonoff-ihost-rv1126_defconfig        | 60 ++++++++++++++++++++
+ include/configs/sonoff-ihost.h               | 18 ++++++
+ 6 files changed, 121 insertions(+)
+ create mode 100644 arch/arm/dts/rv1126-sonoff-ihost-u-boot.dtsi
+ create mode 100644 board/itead/sonoff-ihost/Kconfig
+ create mode 100644 board/itead/sonoff-ihost/MAINTAINERS
+ create mode 100644 configs/sonoff-ihost-rv1126_defconfig
+ create mode 100644 include/configs/sonoff-ihost.h
 
-diff --git a/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-1056.inc b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-1056.inc
+diff --git a/arch/arm/dts/rv1126-sonoff-ihost-u-boot.dtsi b/arch/arm/dts/rv1126-sonoff-ihost-u-boot.dtsi
 new file mode 100644
-index 0000000000..295b0871e0
+index 0000000000..a625660d58
 --- /dev/null
-+++ b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-1056.inc
-@@ -0,0 +1,75 @@
-+{
-+	{
-+		{
-+			.rank = 0x1,
-+			.col = 0xA,
-+			.bk = 0x2,
-+			.bw = 0x1,
-+			.dbw = 0x0,
-+			.row_3_4 = 0x0,
-+			.cs0_row = 0x11,
-+			.cs1_row = 0x0,
-+			.cs0_high16bit_row = 0x11,
-+			.cs1_high16bit_row = 0x0,
-+			.ddrconfig = 0
-+		},
-+		{
-+			{0x561d1219},
-+			{0x10030703},
-+			{0x00000002},
-+			{0x00001111},
-+			{0x0000000c},
-+			{0x0000034b},
-+			0x000000ff
-+		}
-+	},
-+	{
-+		.ddr_freq = 1056,	/* clock rate(MHz) */
-+		.dramtype = DDR4,
-+		.num_channels = 1,
-+		.stride = 0,
-+		.odt = 1
-+	},
-+	{
-+		{
-+			{0x00000000, 0x43041010},	/* MSTR */
-+			{0x00000064, 0x008000b9},	/* RFSHTMG */
-+			{0x000000d0, 0x00020103},	/* INIT0 */
-+			{0x000000d4, 0x00690000},	/* INIT1 */
-+			{0x000000d8, 0x00000100},	/* INIT2 */
-+			{0x000000dc, 0x07340401},	/* INIT3 */
-+			{0x000000e0, 0x00100000},	/* INIT4 */
-+			{0x000000e4, 0x00110000},	/* INIT5 */
-+			{0x000000e8, 0x00000420},	/* INIT6 */
-+			{0x000000ec, 0x00000800},	/* INIT7 */
-+			{0x000000f4, 0x000f011f},	/* RANKCTL */
-+			{0x00000100, 0x0f102411},	/* DRAMTMG0 */
-+			{0x00000104, 0x0004041a},	/* DRAMTMG1 */
-+			{0x00000108, 0x0608060d},	/* DRAMTMG2 */
-+			{0x0000010c, 0x0040400c},	/* DRAMTMG3 */
-+			{0x00000110, 0x08030409},	/* DRAMTMG4 */
-+			{0x00000114, 0x06060403},	/* DRAMTMG5 */
-+			{0x00000120, 0x07070d07},	/* DRAMTMG8 */
-+			{0x00000124, 0x00020309},	/* DRAMTMG9 */
-+			{0x00000180, 0x01000040},	/* ZQCTL0 */
-+			{0x00000184, 0x00000000},	/* ZQCTL1 */
-+			{0x00000190, 0x07060004},	/* DFITMG0 */
-+			{0x00000198, 0x07000101},	/* DFILPCFG0 */
-+			{0x000001a0, 0xc0400003},	/* DFIUPD0 */
-+			{0x00000240, 0x06000614},	/* ODTCFG */
-+			{0x00000244, 0x00000201},	/* ODTMAP */
-+			{0x00000250, 0x00001f00},	/* SCHED */
-+			{0x00000490, 0x00000001},	/* PCTRL_0 */
-+			{0xffffffff, 0xffffffff}
-+		}
-+	},
-+	{
-+		{
-+			{0x00000004, 0x0000008c},	/* PHYREG01 */
-+			{0x00000014, 0x00000010},	/* PHYREG05 */
-+			{0x00000018, 0x00000000},	/* PHYREG06 */
-+			{0x0000001c, 0x0000000b},	/* PHYREG07 */
-+			{0xffffffff, 0xffffffff}
-+		}
-+	}
-+},
-diff --git a/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-328.inc b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-328.inc
++++ b/arch/arm/dts/rv1126-sonoff-ihost-u-boot.dtsi
+@@ -0,0 +1,13 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++#include "rv1126-u-boot.dtsi"
++
++/ {
++	chosen {
++		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &emmc;
++	};
++};
++
++&sdio {
++	status = "disabled";
++};
+diff --git a/arch/arm/mach-rockchip/rv1126/Kconfig b/arch/arm/mach-rockchip/rv1126/Kconfig
+index a6e2b5903c..55b1112120 100644
+--- a/arch/arm/mach-rockchip/rv1126/Kconfig
++++ b/arch/arm/mach-rockchip/rv1126/Kconfig
+@@ -14,6 +14,13 @@ config TARGET_RV1126_NEU2
+ 	  IO board and Neu2 needs to mount on top of this IO board in order to
+ 	  create complete Edgeble Neural Compute Module 2(Neu2) IO platform.
+ 
++config TARGET_RV1126_SONOFF_IHOST
++	bool "Sonoff iHost smart home hub"
++	help
++	  Sonoff iHost is a smart home gateway based on Rockchip RV1126 SoC.
++	  It features Wifi, Bluetooth and Zigbee radios that are used by many
++	  smart home devices.
++
+ config SOC_SPECIFIC_OPTIONS # dummy
+ 	def_bool y
+ 	select HAS_CUSTOM_SYS_INIT_SP_ADDR
+@@ -58,5 +65,6 @@ config TEXT_BASE
+ 	default 0x600000
+ 
+ source board/edgeble/neural-compute-module-2/Kconfig
++source board/itead/sonoff-ihost/Kconfig
+ 
+ endif
+diff --git a/board/itead/sonoff-ihost/Kconfig b/board/itead/sonoff-ihost/Kconfig
 new file mode 100644
-index 0000000000..4b424fb440
+index 0000000000..30d9a6b3e6
 --- /dev/null
-+++ b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-328.inc
-@@ -0,0 +1,75 @@
-+{
-+	{
-+		{
-+			.rank = 0x1,
-+			.col = 0xA,
-+			.bk = 0x2,
-+			.bw = 0x1,
-+			.dbw = 0x0,
-+			.row_3_4 = 0x0,
-+			.cs0_row = 0x11,
-+			.cs1_row = 0x0,
-+			.cs0_high16bit_row = 0x11,
-+			.cs1_high16bit_row = 0x0,
-+			.ddrconfig = 0
-+		},
-+		{
-+			{0x4d110a08},
-+			{0x06020501},
-+			{0x00000002},
-+			{0x00001111},
-+			{0x0000000c},
-+			{0x00000232},
-+			0x000000ff
-+		}
-+	},
-+	{
-+		.ddr_freq = 328,	/* clock rate(MHz) */
-+		.dramtype = DDR4,
-+		.num_channels = 1,
-+		.stride = 0,
-+		.odt = 0
-+	},
-+	{
-+		{
-+			{0x00000000, 0x43049010},	/* MSTR */
-+			{0x00000064, 0x0027003a},	/* RFSHTMG */
-+			{0x000000d0, 0x00020052},	/* INIT0 */
-+			{0x000000d4, 0x00220000},	/* INIT1 */
-+			{0x000000d8, 0x00000100},	/* INIT2 */
-+			{0x000000dc, 0x00040000},	/* INIT3 */
-+			{0x000000e0, 0x00000000},	/* INIT4 */
-+			{0x000000e4, 0x00110000},	/* INIT5 */
-+			{0x000000e8, 0x00000420},	/* INIT6 */
-+			{0x000000ec, 0x00000400},	/* INIT7 */
-+			{0x000000f4, 0x000f011f},	/* RANKCTL */
-+			{0x00000100, 0x09060b06},	/* DRAMTMG0 */
-+			{0x00000104, 0x00020209},	/* DRAMTMG1 */
-+			{0x00000108, 0x0505040a},	/* DRAMTMG2 */
-+			{0x0000010c, 0x0040400c},	/* DRAMTMG3 */
-+			{0x00000110, 0x05030206},	/* DRAMTMG4 */
-+			{0x00000114, 0x03030202},	/* DRAMTMG5 */
-+			{0x00000120, 0x03030b03},	/* DRAMTMG8 */
-+			{0x00000124, 0x00020208},	/* DRAMTMG9 */
-+			{0x00000180, 0x01000040},	/* ZQCTL0 */
-+			{0x00000184, 0x00000000},	/* ZQCTL1 */
-+			{0x00000190, 0x07030003},	/* DFITMG0 */
-+			{0x00000198, 0x07000101},	/* DFILPCFG0 */
-+			{0x000001a0, 0xc0400003},	/* DFIUPD0 */
-+			{0x00000240, 0x06000604},	/* ODTCFG */
-+			{0x00000244, 0x00000201},	/* ODTMAP */
-+			{0x00000250, 0x00001f00},	/* SCHED */
-+			{0x00000490, 0x00000001},	/* PCTRL_0 */
-+			{0xffffffff, 0xffffffff}
-+		}
-+	},
-+	{
-+		{
-+			{0x00000004, 0x0000008c},	/* PHYREG01 */
-+			{0x00000014, 0x0000000a},	/* PHYREG05 */
-+			{0x00000018, 0x00000000},	/* PHYREG06 */
-+			{0x0000001c, 0x00000009},	/* PHYREG07 */
-+			{0xffffffff, 0xffffffff}
-+		}
-+	}
-+},
-diff --git a/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-396.inc b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-396.inc
++++ b/board/itead/sonoff-ihost/Kconfig
+@@ -0,0 +1,16 @@
++if TARGET_RV1126_SONOFF_IHOST
++
++config SYS_BOARD
++	default "sonoff-ihost"
++
++config SYS_VENDOR
++	default "itead"
++
++config SYS_CONFIG_NAME
++	default "sonoff-ihost"
++
++config BOARD_SPECIFIC_OPTIONS # dummy
++	def_bool y
++	select RAM_ROCKCHIP_DDR4
++
++endif
+diff --git a/board/itead/sonoff-ihost/MAINTAINERS b/board/itead/sonoff-ihost/MAINTAINERS
 new file mode 100644
-index 0000000000..980be8cf18
+index 0000000000..eff9274bea
 --- /dev/null
-+++ b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-396.inc
-@@ -0,0 +1,75 @@
-+{
-+	{
-+		{
-+			.rank = 0x1,
-+			.col = 0xA,
-+			.bk = 0x2,
-+			.bw = 0x1,
-+			.dbw = 0x0,
-+			.row_3_4 = 0x0,
-+			.cs0_row = 0x11,
-+			.cs1_row = 0x0,
-+			.cs0_high16bit_row = 0x11,
-+			.cs1_high16bit_row = 0x0,
-+			.ddrconfig = 0
-+		},
-+		{
-+			{0x4d110a0a},
-+			{0x07020501},
-+			{0x00000002},
-+			{0x00001111},
-+			{0x0000000c},
-+			{0x00000232},
-+			0x000000ff
-+		}
-+	},
-+	{
-+		.ddr_freq = 396,	/* clock rate(MHz) */
-+		.dramtype = DDR4,
-+		.num_channels = 1,
-+		.stride = 0,
-+		.odt = 0
-+	},
-+	{
-+		{
-+			{0x00000000, 0x43049010},	/* MSTR */
-+			{0x00000064, 0x00300046},	/* RFSHTMG */
-+			{0x000000d0, 0x00020062},	/* INIT0 */
-+			{0x000000d4, 0x00280000},	/* INIT1 */
-+			{0x000000d8, 0x00000100},	/* INIT2 */
-+			{0x000000dc, 0x00040000},	/* INIT3 */
-+			{0x000000e0, 0x00000000},	/* INIT4 */
-+			{0x000000e4, 0x00110000},	/* INIT5 */
-+			{0x000000e8, 0x00000420},	/* INIT6 */
-+			{0x000000ec, 0x00000400},	/* INIT7 */
-+			{0x000000f4, 0x000f011f},	/* RANKCTL */
-+			{0x00000100, 0x09070d07},	/* DRAMTMG0 */
-+			{0x00000104, 0x0002020a},	/* DRAMTMG1 */
-+			{0x00000108, 0x0505040a},	/* DRAMTMG2 */
-+			{0x0000010c, 0x0040400c},	/* DRAMTMG3 */
-+			{0x00000110, 0x05030206},	/* DRAMTMG4 */
-+			{0x00000114, 0x03030202},	/* DRAMTMG5 */
-+			{0x00000120, 0x04040b04},	/* DRAMTMG8 */
-+			{0x00000124, 0x00020208},	/* DRAMTMG9 */
-+			{0x00000180, 0x01000040},	/* ZQCTL0 */
-+			{0x00000184, 0x00000000},	/* ZQCTL1 */
-+			{0x00000190, 0x07030003},	/* DFITMG0 */
-+			{0x00000198, 0x07000101},	/* DFILPCFG0 */
-+			{0x000001a0, 0xc0400003},	/* DFIUPD0 */
-+			{0x00000240, 0x06000604},	/* ODTCFG */
-+			{0x00000244, 0x00000201},	/* ODTMAP */
-+			{0x00000250, 0x00001f00},	/* SCHED */
-+			{0x00000490, 0x00000001},	/* PCTRL_0 */
-+			{0xffffffff, 0xffffffff}
-+		}
-+	},
-+	{
-+		{
-+			{0x00000004, 0x0000008c},	/* PHYREG01 */
-+			{0x00000014, 0x0000000a},	/* PHYREG05 */
-+			{0x00000018, 0x00000000},	/* PHYREG06 */
-+			{0x0000001c, 0x00000009},	/* PHYREG07 */
-+			{0xffffffff, 0xffffffff}
-+		}
-+	}
-+},
-diff --git a/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-528.inc b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-528.inc
++++ b/board/itead/sonoff-ihost/MAINTAINERS
+@@ -0,0 +1,6 @@
++RV1126-SONOFF-IHOST
++M:	Tim Lunn <tim@feathertop.org>
++S:	Maintained
++F:	board/itead/sonoff-ihost
++F:	include/configs/sonoff-ihost.h
++F:	configs/sonoff-ihost-rv1126_defconfig
+diff --git a/configs/sonoff-ihost-rv1126_defconfig b/configs/sonoff-ihost-rv1126_defconfig
 new file mode 100644
-index 0000000000..3bde055e8d
+index 0000000000..fe99bd92f9
 --- /dev/null
-+++ b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-528.inc
-@@ -0,0 +1,75 @@
-+{
-+	{
-+		{
-+			.rank = 0x1,
-+			.col = 0xA,
-+			.bk = 0x2,
-+			.bw = 0x1,
-+			.dbw = 0x0,
-+			.row_3_4 = 0x0,
-+			.cs0_row = 0x11,
-+			.cs1_row = 0x0,
-+			.cs0_high16bit_row = 0x11,
-+			.cs1_high16bit_row = 0x0,
-+			.ddrconfig = 0
-+		},
-+		{
-+			{0x4d120a0d},
-+			{0x09020501},
-+			{0x00000002},
-+			{0x00001111},
-+			{0x0000000c},
-+			{0x00000232},
-+			0x000000ff
-+		}
-+	},
-+	{
-+		.ddr_freq = 528,	/* clock rate(MHz) */
-+		.dramtype = DDR4,
-+		.num_channels = 1,
-+		.stride = 0,
-+		.odt = 0
-+	},
-+	{
-+		{
-+			{0x00000000, 0x43049010},	/* MSTR */
-+			{0x00000064, 0x0040005d},	/* RFSHTMG */
-+			{0x000000d0, 0x00020082},	/* INIT0 */
-+			{0x000000d4, 0x00350000},	/* INIT1 */
-+			{0x000000d8, 0x00000100},	/* INIT2 */
-+			{0x000000dc, 0x00040000},	/* INIT3 */
-+			{0x000000e0, 0x00000000},	/* INIT4 */
-+			{0x000000e4, 0x00110000},	/* INIT5 */
-+			{0x000000e8, 0x00000420},	/* INIT6 */
-+			{0x000000ec, 0x00000400},	/* INIT7 */
-+			{0x000000f4, 0x000f011f},	/* RANKCTL */
-+			{0x00000100, 0x0a0a1209},	/* DRAMTMG0 */
-+			{0x00000104, 0x0002020e},	/* DRAMTMG1 */
-+			{0x00000108, 0x0505040a},	/* DRAMTMG2 */
-+			{0x0000010c, 0x0040400c},	/* DRAMTMG3 */
-+			{0x00000110, 0x05030206},	/* DRAMTMG4 */
-+			{0x00000114, 0x03030202},	/* DRAMTMG5 */
-+			{0x00000120, 0x04040b04},	/* DRAMTMG8 */
-+			{0x00000124, 0x00020208},	/* DRAMTMG9 */
-+			{0x00000180, 0x01000040},	/* ZQCTL0 */
-+			{0x00000184, 0x00000000},	/* ZQCTL1 */
-+			{0x00000190, 0x07030003},	/* DFITMG0 */
-+			{0x00000198, 0x07000101},	/* DFILPCFG0 */
-+			{0x000001a0, 0xc0400003},	/* DFIUPD0 */
-+			{0x00000240, 0x06000604},	/* ODTCFG */
-+			{0x00000244, 0x00000201},	/* ODTMAP */
-+			{0x00000250, 0x00001f00},	/* SCHED */
-+			{0x00000490, 0x00000001},	/* PCTRL_0 */
-+			{0xffffffff, 0xffffffff}
-+		}
-+	},
-+	{
-+		{
-+			{0x00000004, 0x0000008c},	/* PHYREG01 */
-+			{0x00000014, 0x0000000a},	/* PHYREG05 */
-+			{0x00000018, 0x00000000},	/* PHYREG06 */
-+			{0x0000001c, 0x00000009},	/* PHYREG07 */
-+			{0xffffffff, 0xffffffff}
-+		}
-+	}
-+},
-diff --git a/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-664.inc b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-664.inc
++++ b/configs/sonoff-ihost-rv1126_defconfig
+@@ -0,0 +1,60 @@
++CONFIG_ARM=y
++CONFIG_SPL_SKIP_LOWLEVEL_INIT_ONLY=y
++CONFIG_TPL_SKIP_LOWLEVEL_INIT_ONLY=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_SYS_ARCH_TIMER=y
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_NR_DRAM_BANKS=1
++CONFIG_DEFAULT_DEVICE_TREE="rv1126-sonoff-ihost"
++CONFIG_SYS_MONITOR_LEN=614400
++CONFIG_ROCKCHIP_RV1126=y
++CONFIG_TARGET_RV1126_SONOFF_IHOST=y
++CONFIG_DEBUG_UART_BASE=0xff570000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SYS_LOAD_ADDR=0xe00800
++CONFIG_DEBUG_UART=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_SPL_FIT=y
++CONFIG_SPL_LOAD_FIT=y
++# CONFIG_USE_SPL_FIT_GENERATOR is not set
++CONFIG_SYS_BOOTM_LEN=0x4000000
++CONFIG_DEFAULT_FDT_FILE="rv1126-sonoff-ihost.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_PAD_TO=0x7f8000
++CONFIG_SPL_NO_BSS_LIMIT=y
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++# CONFIG_CMD_BOOTD is not set
++# CONFIG_CMD_ELF is not set
++# CONFIG_CMD_IMI is not set
++# CONFIG_CMD_XIMG is not set
++CONFIG_CMD_GPT=y
++# CONFIG_CMD_LOADB is not set
++# CONFIG_CMD_LOADS is not set
++CONFIG_CMD_MMC=y
++# CONFIG_CMD_ITEST is not set
++# CONFIG_CMD_SETEXPR is not set
++# CONFIG_SPL_DOS_PARTITION is not set
++# CONFIG_ISO_PARTITION is not set
++CONFIG_EFI_PARTITION_ENTRIES_NUMBERS=64
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_MISC=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_REGULATOR_PWM=y
++CONFIG_PWM_ROCKCHIP=y
++# CONFIG_RAM_ROCKCHIP_DEBUG is not set
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYSRESET=y
++# CONFIG_TPL_SYSRESET is not set
++CONFIG_DM_THERMAL=y
++CONFIG_SPL_TINY_MEMSET=y
++CONFIG_LZO=y
++CONFIG_ERRNO_STR=y
+diff --git a/include/configs/sonoff-ihost.h b/include/configs/sonoff-ihost.h
 new file mode 100644
-index 0000000000..c9341166d6
+index 0000000000..8ed5d78687
 --- /dev/null
-+++ b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-664.inc
-@@ -0,0 +1,75 @@
-+{
-+	{
-+		{
-+			.rank = 0x1,
-+			.col = 0xA,
-+			.bk = 0x2,
-+			.bw = 0x1,
-+			.dbw = 0x0,
-+			.row_3_4 = 0x0,
-+			.cs0_row = 0x11,
-+			.cs1_row = 0x0,
-+			.cs0_high16bit_row = 0x11,
-+			.cs1_high16bit_row = 0x0,
-+			.ddrconfig = 0
-+		},
-+		{
-+			{0x4d130a11},
-+			{0x0c020501},
-+			{0x00000002},
-+			{0x00001111},
-+			{0x0000000c},
-+			{0x0000023a},
-+			0x000000ff
-+		}
-+	},
-+	{
-+		.ddr_freq = 664,	/* clock rate(MHz) */
-+		.dramtype = DDR4,
-+		.num_channels = 1,
-+		.stride = 0,
-+		.odt = 1
-+	},
-+	{
-+		{
-+			{0x00000000, 0x43041010},	/* MSTR */
-+			{0x00000064, 0x00500075},	/* RFSHTMG */
-+			{0x000000d0, 0x000200a4},	/* INIT0 */
-+			{0x000000d4, 0x00420000},	/* INIT1 */
-+			{0x000000d8, 0x00000100},	/* INIT2 */
-+			{0x000000dc, 0x01040401},	/* INIT3 */
-+			{0x000000e0, 0x00000000},	/* INIT4 */
-+			{0x000000e4, 0x00110000},	/* INIT5 */
-+			{0x000000e8, 0x00000420},	/* INIT6 */
-+			{0x000000ec, 0x00000400},	/* INIT7 */
-+			{0x000000f4, 0x000f011f},	/* RANKCTL */
-+			{0x00000100, 0x0b0c160c},	/* DRAMTMG0 */
-+			{0x00000104, 0x00020211},	/* DRAMTMG1 */
-+			{0x00000108, 0x0505040a},	/* DRAMTMG2 */
-+			{0x0000010c, 0x0040400c},	/* DRAMTMG3 */
-+			{0x00000110, 0x05030306},	/* DRAMTMG4 */
-+			{0x00000114, 0x04040302},	/* DRAMTMG5 */
-+			{0x00000120, 0x05050b05},	/* DRAMTMG8 */
-+			{0x00000124, 0x00020208},	/* DRAMTMG9 */
-+			{0x00000180, 0x01000040},	/* ZQCTL0 */
-+			{0x00000184, 0x00000000},	/* ZQCTL1 */
-+			{0x00000190, 0x07030003},	/* DFITMG0 */
-+			{0x00000198, 0x07000101},	/* DFILPCFG0 */
-+			{0x000001a0, 0xc0400003},	/* DFIUPD0 */
-+			{0x00000240, 0x06000604},	/* ODTCFG */
-+			{0x00000244, 0x00000201},	/* ODTMAP */
-+			{0x00000250, 0x00001f00},	/* SCHED */
-+			{0x00000490, 0x00000001},	/* PCTRL_0 */
-+			{0xffffffff, 0xffffffff}
-+		}
-+	},
-+	{
-+		{
-+			{0x00000004, 0x0000008c},	/* PHYREG01 */
-+			{0x00000014, 0x0000000a},	/* PHYREG05 */
-+			{0x00000018, 0x00000000},	/* PHYREG06 */
-+			{0x0000001c, 0x00000009},	/* PHYREG07 */
-+			{0xffffffff, 0xffffffff}
-+		}
-+	}
-+},
-diff --git a/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-784.inc b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-784.inc
-new file mode 100644
-index 0000000000..ef2e9347bf
---- /dev/null
-+++ b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-784.inc
-@@ -0,0 +1,75 @@
-+{
-+	{
-+		{
-+			.rank = 0x1,
-+			.col = 0xA,
-+			.bk = 0x2,
-+			.bw = 0x1,
-+			.dbw = 0x0,
-+			.row_3_4 = 0x0,
-+			.cs0_row = 0x11,
-+			.cs1_row = 0x0,
-+			.cs0_high16bit_row = 0x11,
-+			.cs1_high16bit_row = 0x0,
-+			.ddrconfig = 0
-+		},
-+		{
-+			{0x50160d14},
-+			{0x0e020502},
-+			{0x00000002},
-+			{0x00001111},
-+			{0x0000000c},
-+			{0x0000033a},
-+			0x000000ff
-+		}
-+	},
-+	{
-+		.ddr_freq = 784,	/* clock rate(MHz) */
-+		.dramtype = DDR4,
-+		.num_channels = 1,
-+		.stride = 0,
-+		.odt = 1
-+	},
-+	{
-+		{
-+			{0x00000000, 0x43041010},	/* MSTR */
-+			{0x00000064, 0x005f008a},	/* RFSHTMG */
-+			{0x000000d0, 0x000200c1},	/* INIT0 */
-+			{0x000000d4, 0x004e0000},	/* INIT1 */
-+			{0x000000d8, 0x00000100},	/* INIT2 */
-+			{0x000000dc, 0x03140401},	/* INIT3 */
-+			{0x000000e0, 0x00000000},	/* INIT4 */
-+			{0x000000e4, 0x00110000},	/* INIT5 */
-+			{0x000000e8, 0x00000420},	/* INIT6 */
-+			{0x000000ec, 0x00000400},	/* INIT7 */
-+			{0x000000f4, 0x000f011f},	/* RANKCTL */
-+			{0x00000100, 0x0c0e1a0e},	/* DRAMTMG0 */
-+			{0x00000104, 0x00030314},	/* DRAMTMG1 */
-+			{0x00000108, 0x0506050b},	/* DRAMTMG2 */
-+			{0x0000010c, 0x0040400c},	/* DRAMTMG3 */
-+			{0x00000110, 0x06030307},	/* DRAMTMG4 */
-+			{0x00000114, 0x04040302},	/* DRAMTMG5 */
-+			{0x00000120, 0x06060b06},	/* DRAMTMG8 */
-+			{0x00000124, 0x00020308},	/* DRAMTMG9 */
-+			{0x00000180, 0x01000040},	/* ZQCTL0 */
-+			{0x00000184, 0x00000000},	/* ZQCTL1 */
-+			{0x00000190, 0x07040003},	/* DFITMG0 */
-+			{0x00000198, 0x07000101},	/* DFILPCFG0 */
-+			{0x000001a0, 0xc0400003},	/* DFIUPD0 */
-+			{0x00000240, 0x0600060c},	/* ODTCFG */
-+			{0x00000244, 0x00000201},	/* ODTMAP */
-+			{0x00000250, 0x00001f00},	/* SCHED */
-+			{0x00000490, 0x00000001},	/* PCTRL_0 */
-+			{0xffffffff, 0xffffffff}
-+		}
-+	},
-+	{
-+		{
-+			{0x00000004, 0x0000008c},	/* PHYREG01 */
-+			{0x00000014, 0x0000000c},	/* PHYREG05 */
-+			{0x00000018, 0x00000000},	/* PHYREG06 */
-+			{0x0000001c, 0x00000009},	/* PHYREG07 */
-+			{0xffffffff, 0xffffffff}
-+		}
-+	}
-+},
-diff --git a/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-924.inc b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-924.inc
-new file mode 100644
-index 0000000000..acb33bd315
---- /dev/null
-+++ b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-924.inc
-@@ -0,0 +1,75 @@
-+{
-+	{
-+		{
-+			.rank = 0x1,
-+			.col = 0xA,
-+			.bk = 0x2,
-+			.bw = 0x1,
-+			.dbw = 0x0,
-+			.row_3_4 = 0x0,
-+			.cs0_row = 0x11,
-+			.cs1_row = 0x0,
-+			.cs0_high16bit_row = 0x11,
-+			.cs1_high16bit_row = 0x0,
-+			.ddrconfig = 0
-+		},
-+		{
-+			{0x531a0f17},
-+			{0x0e020603},
-+			{0x00000002},
-+			{0x00001111},
-+			{0x0000000c},
-+			{0x00000342},
-+			0x000000ff
-+		}
-+	},
-+	{
-+		.ddr_freq = 924,	/* clock rate(MHz) */
-+		.dramtype = DDR4,
-+		.num_channels = 1,
-+		.stride = 0,
-+		.odt = 1
-+	},
-+	{
-+		{
-+			{0x00000000, 0x43041010},	/* MSTR */
-+			{0x00000064, 0x007000a2},	/* RFSHTMG */
-+			{0x000000d0, 0x000200e3},	/* INIT0 */
-+			{0x000000d4, 0x005c0000},	/* INIT1 */
-+			{0x000000d8, 0x00000100},	/* INIT2 */
-+			{0x000000dc, 0x05240401},	/* INIT3 */
-+			{0x000000e0, 0x00080000},	/* INIT4 */
-+			{0x000000e4, 0x00110000},	/* INIT5 */
-+			{0x000000e8, 0x00000420},	/* INIT6 */
-+			{0x000000ec, 0x00000400},	/* INIT7 */
-+			{0x000000f4, 0x000f011f},	/* RANKCTL */
-+			{0x00000100, 0x0e0e1f10},	/* DRAMTMG0 */
-+			{0x00000104, 0x00030317},	/* DRAMTMG1 */
-+			{0x00000108, 0x0507050c},	/* DRAMTMG2 */
-+			{0x0000010c, 0x0040400c},	/* DRAMTMG3 */
-+			{0x00000110, 0x07030308},	/* DRAMTMG4 */
-+			{0x00000114, 0x05050303},	/* DRAMTMG5 */
-+			{0x00000120, 0x07070b07},	/* DRAMTMG8 */
-+			{0x00000124, 0x00020309},	/* DRAMTMG9 */
-+			{0x00000180, 0x01000040},	/* ZQCTL0 */
-+			{0x00000184, 0x00000000},	/* ZQCTL1 */
-+			{0x00000190, 0x07050003},	/* DFITMG0 */
-+			{0x00000198, 0x07000101},	/* DFILPCFG0 */
-+			{0x000001a0, 0xc0400003},	/* DFIUPD0 */
-+			{0x00000240, 0x06000610},	/* ODTCFG */
-+			{0x00000244, 0x00000201},	/* ODTMAP */
-+			{0x00000250, 0x00001f00},	/* SCHED */
-+			{0x00000490, 0x00000001},	/* PCTRL_0 */
-+			{0xffffffff, 0xffffffff}
-+		}
-+	},
-+	{
-+		{
-+			{0x00000004, 0x0000008c},	/* PHYREG01 */
-+			{0x00000014, 0x0000000e},	/* PHYREG05 */
-+			{0x00000018, 0x00000000},	/* PHYREG06 */
-+			{0x0000001c, 0x0000000a},	/* PHYREG07 */
-+			{0xffffffff, 0xffffffff}
-+		}
-+	}
-+},
-diff --git a/drivers/ram/rockchip/sdram_rv1126.c b/drivers/ram/rockchip/sdram_rv1126.c
-index 9e1376a940..0a78e18c73 100644
---- a/drivers/ram/rockchip/sdram_rv1126.c
-+++ b/drivers/ram/rockchip/sdram_rv1126.c
-@@ -76,6 +76,14 @@ struct rv1126_sdram_params sdram_configs[] = {
- # include	"sdram-rv1126-lpddr4-detect-784.inc"
- # include	"sdram-rv1126-lpddr4-detect-924.inc"
- # include	"sdram-rv1126-lpddr4-detect-1056.inc"
-+#elif defined(CONFIG_RAM_ROCKCHIP_DDR4)
-+# include	"sdram-rv1126-ddr4-detect-328.inc"
-+# include	"sdram-rv1126-ddr4-detect-396.inc"
-+# include	"sdram-rv1126-ddr4-detect-528.inc"
-+# include	"sdram-rv1126-ddr4-detect-664.inc"
-+# include	"sdram-rv1126-ddr4-detect-784.inc"
-+# include	"sdram-rv1126-ddr4-detect-924.inc"
-+# include	"sdram-rv1126-ddr4-detect-1056.inc"
- #else
- # include	"sdram-rv1126-ddr3-detect-328.inc"
- # include	"sdram-rv1126-ddr3-detect-396.inc"
++++ b/include/configs/sonoff-ihost.h
+@@ -0,0 +1,18 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++
++#ifndef __SONOFF_IHOST_H
++#define __SONOFF_IHOST_H
++
++#define ROCKCHIP_DEVICE_SETTINGS \
++		"stdout=serial\0" \
++		"stderr=serial\0"
++
++#include <configs/rv1126_common.h>
++
++#undef BOOT_TARGET_DEVICES
++
++#define BOOT_TARGET_DEVICES(func) \
++	func(MMC, mmc, 0) \
++	func(MMC, mmc, 1)
++
++#endif /*  __SONOFF_IHOST_H */
 -- 
 2.40.1
 
