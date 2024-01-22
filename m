@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 849B1C4725D
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 11:57:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43677C4725D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 11:57:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D37E687CA4;
-	Mon, 22 Jan 2024 12:56:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 603B4879FC;
+	Mon, 22 Jan 2024 12:56:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 191C887BB3; Mon, 22 Jan 2024 12:56:06 +0100 (CET)
+ id 22BA687BC9; Mon, 22 Jan 2024 12:56:08 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id F3A1687CAD
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 12:56:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 1D2DB87C9D
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 12:56:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 788BE1FB;
- Mon, 22 Jan 2024 03:56:48 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9D8461FB;
+ Mon, 22 Jan 2024 03:56:51 -0800 (PST)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C3DA03F73F;
- Mon, 22 Jan 2024 03:55:59 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EB6873F73F;
+ Mon, 22 Jan 2024 03:56:02 -0800 (PST)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -36,9 +36,9 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Yann Gautier <yann.gautier@st.com>,
  Etienne Carriere <etienne.carriere@foss.st.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 16/18] tools: mkfwumdata: Migrate to metadata version 2
-Date: Mon, 22 Jan 2024 17:24:37 +0530
-Message-Id: <20240122115439.653871-17-sughosh.ganu@linaro.org>
+Subject: [PATCH 17/18] configs: fwu: Re-enable FWU configs
+Date: Mon, 22 Jan 2024 17:24:38 +0530
+Message-Id: <20240122115439.653871-18-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240122115439.653871-1-sughosh.ganu@linaro.org>
 References: <20240122115439.653871-1-sughosh.ganu@linaro.org>
@@ -60,139 +60,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Migrate the metadata generation tool to generate the version 2
-metadata.
+Now that the migration to the FWU metadata version 2 is complete, the
+feature can be re-enabled on platforms which had it enabled.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
- tools/mkfwumdata.c | 43 ++++++++++++++++++++++++++++++++-----------
- 1 file changed, 32 insertions(+), 11 deletions(-)
+ configs/corstone1000_defconfig           | 2 ++
+ configs/sandbox64_defconfig              | 1 +
+ configs/synquacer_developerbox_defconfig | 3 +++
+ 3 files changed, 6 insertions(+)
 
-diff --git a/tools/mkfwumdata.c b/tools/mkfwumdata.c
-index 9732a8ddc5..b43cf38457 100644
---- a/tools/mkfwumdata.c
-+++ b/tools/mkfwumdata.c
-@@ -14,12 +14,13 @@
- #include <unistd.h>
- #include <uuid/uuid.h>
- 
--/* This will dynamically allocate the fwu_mdata */
--#define CONFIG_FWU_NUM_BANKS		0
--#define CONFIG_FWU_NUM_IMAGES_PER_BANK	0
--
- /* Since we can not include fwu.h, redefine version here. */
--#define FWU_MDATA_VERSION		1
-+#define FWU_MDATA_VERSION		2
-+
-+#define MAX_BANKS			4
-+
-+#define BANK_INVALID			0xFF
-+#define BANK_ACCEPTED			0xFC
- 
- typedef uint8_t u8;
- typedef int16_t s16;
-@@ -29,8 +30,6 @@ typedef uint64_t u64;
- 
- #include <fwu_mdata.h>
- 
--/* TODO: Endianness conversion may be required for some arch. */
--
- static const char *opts_short = "b:i:a:p:gh";
- 
- static struct option options[] = {
-@@ -48,7 +47,7 @@ static void print_usage(void)
- 	fprintf(stderr, "Usage: mkfwumdata [options] <UUIDs list> <output file>\n");
- 	fprintf(stderr, "Options:\n"
- 		"\t-i, --images <num>          Number of images (mandatory)\n"
--		"\t-b, --banks  <num>          Number of banks (mandatory)\n"
-+		"\t-b, --banks  <num>          Number of banks(1-4) (mandatory)\n"
- 		"\t-a, --active-bank  <num>    Active bank (default=0)\n"
- 		"\t-p, --previous-bank  <num>  Previous active bank (default=active_bank - 1)\n"
- 		"\t-g, --guid                  Use GUID instead of UUID\n"
-@@ -85,6 +84,7 @@ static struct fwu_mdata_object *fwu_alloc_mdata(size_t images, size_t banks)
- 		return NULL;
- 
- 	mobj->size = sizeof(struct fwu_mdata) +
-+		sizeof(struct fwu_fw_store_desc) +
- 		(sizeof(struct fwu_image_entry) +
- 		 sizeof(struct fwu_image_bank_info) * banks) * images;
- 	mobj->images = images;
-@@ -105,6 +105,7 @@ fwu_get_image(struct fwu_mdata_object *mobj, size_t idx)
- 	size_t offset;
- 
- 	offset = sizeof(struct fwu_mdata) +
-+		sizeof(struct fwu_fw_store_desc) +
- 		(sizeof(struct fwu_image_entry) +
- 		 sizeof(struct fwu_image_bank_info) * mobj->banks) * idx;
- 
-@@ -117,6 +118,7 @@ fwu_get_bank(struct fwu_mdata_object *mobj, size_t img_idx, size_t bnk_idx)
- 	size_t offset;
- 
- 	offset = sizeof(struct fwu_mdata) +
-+		sizeof(struct fwu_fw_store_desc) +
- 		(sizeof(struct fwu_image_entry) +
- 		 sizeof(struct fwu_image_bank_info) * mobj->banks) * img_idx +
- 		sizeof(struct fwu_image_entry) +
-@@ -188,7 +190,7 @@ fwu_parse_fill_image_uuid(struct fwu_mdata_object *mobj,
- 		return -EINVAL;
- 
- 	if (strcmp(uuid, "0") &&
--	    uuid_guid_parse(uuid, (unsigned char *)&image->location_uuid) < 0)
-+	    uuid_guid_parse(uuid, (unsigned char *)&image->location_guid) < 0)
- 		return -EINVAL;
- 
- 	/* Image type UUID */
-@@ -196,7 +198,7 @@ fwu_parse_fill_image_uuid(struct fwu_mdata_object *mobj,
- 	if (!uuid)
- 		return -EINVAL;
- 
--	if (uuid_guid_parse(uuid, (unsigned char *)&image->image_type_uuid) < 0)
-+	if (uuid_guid_parse(uuid, (unsigned char *)&image->image_type_guid) < 0)
- 		return -EINVAL;
- 
- 	/* Fill bank image-UUID */
-@@ -210,7 +212,7 @@ fwu_parse_fill_image_uuid(struct fwu_mdata_object *mobj,
- 			return -EINVAL;
- 
- 		if (strcmp(uuid, "0") &&
--		    uuid_guid_parse(uuid, (unsigned char *)&bank->image_uuid) < 0)
-+		    uuid_guid_parse(uuid, (unsigned char *)&bank->image_guid) < 0)
- 			return -EINVAL;
- 	}
- 	return 0;
-@@ -225,6 +227,19 @@ static int fwu_parse_fill_uuids(struct fwu_mdata_object *mobj, char *uuids[])
- 	mdata->version = FWU_MDATA_VERSION;
- 	mdata->active_index = active_bank;
- 	mdata->previous_active_index = previous_bank;
-+	mdata->metadata_size = mobj->size;
-+	mdata->desc_offset = sizeof(struct fwu_mdata);
-+
-+	for (i = 0; i < MAX_BANKS; i++)
-+		mdata->bank_state[i] = i < mobj->banks ?
-+			BANK_ACCEPTED : BANK_INVALID;
-+
-+	mdata->fw_desc[0].num_banks = mobj->banks;
-+	mdata->fw_desc[0].num_images = mobj->images;
-+	mdata->fw_desc[0].img_entry_size = sizeof(struct fwu_image_entry) +
-+		(sizeof(struct fwu_image_bank_info) * mobj->banks);
-+	mdata->fw_desc[0].bank_info_entry_size =
-+		sizeof(struct fwu_image_bank_info);
- 
- 	for (i = 0; i < mobj->images; i++) {
- 		ret = fwu_parse_fill_image_uuid(mobj, i, uuids[i]);
-@@ -313,6 +328,12 @@ int main(int argc, char *argv[])
- 		return -EINVAL;
- 	}
- 
-+	if (banks > MAX_BANKS) {
-+		fprintf(stderr, "Error: The number of banks must not be more than %u.\n",
-+			MAX_BANKS);
-+		return -EINVAL;
-+	}
-+
- 	/* This command takes UUIDs * images and output file. */
- 	if (optind + images + 1 != argc) {
- 		fprintf(stderr, "Error: UUID list or output file is not specified or too much.\n");
+diff --git a/configs/corstone1000_defconfig b/configs/corstone1000_defconfig
+index 24b7984959..e45415b90c 100644
+--- a/configs/corstone1000_defconfig
++++ b/configs/corstone1000_defconfig
+@@ -25,6 +25,7 @@ CONFIG_BOARD_LATE_INIT=y
+ CONFIG_SYS_PROMPT="corstone1000# "
+ CONFIG_SYS_MAXARGS=64
+ # CONFIG_CMD_CONSOLE is not set
++CONFIG_CMD_FWU_METADATA=y
+ CONFIG_CMD_BOOTZ=y
+ # CONFIG_CMD_XIMG is not set
+ CONFIG_CMD_GPT=y
+@@ -66,3 +67,4 @@ CONFIG_FFA_SHARED_MM_BUF_OFFSET=0
+ CONFIG_FFA_SHARED_MM_BUF_ADDR=0x02000000
+ CONFIG_EFI_CAPSULE_ON_DISK=y
+ CONFIG_EFI_IGNORE_OSINDICATIONS=y
++CONFIG_FWU_MULTI_BANK_UPDATE=y
+diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+index 7b5888af38..996bb7aa4f 100644
+--- a/configs/sandbox64_defconfig
++++ b/configs/sandbox64_defconfig
+@@ -274,6 +274,7 @@ CONFIG_EFI_CAPSULE_ON_DISK=y
+ CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+ CONFIG_EFI_SECURE_BOOT=y
+ CONFIG_TEST_FDTDEC=y
++CONFIG_FWU_MULTI_BANK_UPDATE=y
+ CONFIG_UNIT_TEST=y
+ CONFIG_UT_TIME=y
+ CONFIG_UT_DM=y
+diff --git a/configs/synquacer_developerbox_defconfig b/configs/synquacer_developerbox_defconfig
+index 616d410074..1bb55be0a7 100644
+--- a/configs/synquacer_developerbox_defconfig
++++ b/configs/synquacer_developerbox_defconfig
+@@ -17,6 +17,7 @@ CONFIG_SYS_BOOTM_LEN=0x800000
+ CONFIG_BOOTSTAGE_STASH_SIZE=4096
+ CONFIG_HUSH_PARSER=y
+ CONFIG_SYS_MAXARGS=128
++CONFIG_CMD_FWU_METADATA=y
+ CONFIG_CMD_IMLS=y
+ CONFIG_CMD_ERASEENV=y
+ CONFIG_CMD_NVEDIT_EFI=y
+@@ -51,6 +52,7 @@ CONFIG_DFU_TFTP=y
+ CONFIG_DFU_MTD=y
+ CONFIG_DFU_RAM=y
+ CONFIG_DFU_SF=y
++CONFIG_FWU_MDATA_MTD=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_SYNQUACER=y
+ CONFIG_MMC_SDHCI=y
+@@ -93,3 +95,4 @@ CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+ CONFIG_EFI_CAPSULE_ON_DISK=y
+ CONFIG_EFI_IGNORE_OSINDICATIONS=y
+ CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
++CONFIG_FWU_MULTI_BANK_UPDATE=y
 -- 
 2.34.1
 
