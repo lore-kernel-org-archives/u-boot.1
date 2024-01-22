@@ -4,93 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF91FC47DAF
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 12:47:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2F63C4725D
+	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 12:47:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58E0C87BC5;
-	Mon, 22 Jan 2024 13:47:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=feathertop.org
+	by phobos.denx.de (Postfix) with ESMTP id 16AD687BA2;
+	Mon, 22 Jan 2024 13:47:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=feathertop.org header.i=@feathertop.org header.b="YJFdUh5r";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="SAH4m2lx";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="o31PQPty";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7822487BB3; Mon, 22 Jan 2024 13:47:05 +0100 (CET)
-Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
- [66.111.4.26])
+ id 7EFD387B41; Mon, 22 Jan 2024 13:47:22 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80D9087B41
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 13:47:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=feathertop.org
+ by phobos.denx.de (Postfix) with ESMTPS id 48A3B87C05
+ for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 13:47:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tim@feathertop.org
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
- by mailout.nyi.internal (Postfix) with ESMTP id A9B3D5C00F8;
- Mon, 22 Jan 2024 07:47:02 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute6.internal (MEProxy); Mon, 22 Jan 2024 07:47:02 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=feathertop.org;
- h=cc:cc:content-transfer-encoding:content-type:date:date:from
- :from:in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:subject:subject:to:to; s=fm2; t=1705927622; x=
- 1706014022; bh=g3C1lXy3XVr6CYdiJH7FwdwwY8j3Js8rPoNvFN0NoOI=; b=Y
- JFdUh5ruQbUPYUXN6AFDI6GAv1l5J4WW29Z3wWa8NPtzCjDnDhyC0keJC8Vn8b2V
- YfSXjJrWQumbVlVwlk0o689rr+wSL1xa5FX0yGPDDbcSpJyIn1A6PkopCBIPYlE8
- EPvvlTAA6qInVo03dwsoRr//5/B5Vc3jJQLM3f1TRZsBeyBMX/KP3pFb2r3xjeiG
- 3y5HHup4sjU+VmzOLFsaDGmceGPdikYSZ3IwpwGUqRiA5/OGJrYvv182qAkzf/C6
- BKN7vQerXkLrweaSfXdCQiPrQd639E+lGTTUAfKyZRPZJ8GF77aGm3C7VOdZTgms
- NHk9lepJt2ybr+MQJ78aw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:date:date:feedback-id:feedback-id:from:from
- :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1705927622; x=
- 1706014022; bh=g3C1lXy3XVr6CYdiJH7FwdwwY8j3Js8rPoNvFN0NoOI=; b=S
- AH4m2lxPBrlzrWyLi1mMKBYOUnn+SVYzezo5saWF0fDvHD9DEUjLcL8JVtDSf9j9
- GZsU7izsES614bnZOMeBacArYpCmnikD+gb4qOJpYy/DVjsX3sEJE8Qr+ze/qgqq
- UmX75FLXLrkuK9ehmnBbl8scmPF1A9wv9iTYgwxbm4L+x4lELA2Oq73XtJZkWSnr
- ln0h01yRb4qLjpjTg4LdEGgG7K0Samc9TrZ/iY1Xw0LUQsef4k3mDWDZY8OdLqER
- ZfNm/wv1ONJ4WzQYRo9vivBI8GVfx3olwoeZBKb9cbr3BuMl+TarBTJ7yv+7oery
- jTvpnNqwbcDDu8Cm1B9HQ==
-X-ME-Sender: <xms:xmOuZb4aDnza9yMg9EbJ9-EnKyea_7IlNBP1lrcDJ98BPeOD-ZN5sg>
- <xme:xmOuZQ4zJjFXuZ9KROYyF0ckr4zCAcLKTDGsCYGrMVWCX8gSHATTvfZH8TRmYu3XU
- DDyxif0yw>
-X-ME-Received: <xmr:xmOuZSepamsehIXpVMsVW5HGi20hw5QSpe-4bMgcfcs3hnNll6W1OU5u6qXwVD9xKur_R8wS_Mwf9uE5-xxSvgDFNGc_rrXjhmI>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrvdekiedggeefucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepvfhimhcu
- nfhunhhnuceothhimhesfhgvrghthhgvrhhtohhprdhorhhgqeenucggtffrrghtthgvrh
- hnpeefffeuhfetgeeikeejvefgtdefteehgfdvhfetfeeuffeuhffhfeekgfekgeehieen
- ucevlhhushhtvghrufhiiigvpedunecurfgrrhgrmhepmhgrihhlfhhrohhmpehtihhmse
- hfvggrthhhvghrthhophdrohhrgh
-X-ME-Proxy: <xmx:xmOuZcJ7Opdd-5_X6IXTfv2OVtXodL-D_-ygJW9CIwEW0hPwEqvNoA>
- <xmx:xmOuZfLBMn5qxpPNJQ-46RayiY4WqUYclXL-h1WAL7aBhSmrXnmJow>
- <xmx:xmOuZVyc2n0nwQJYJKWXfos81rkaqtchKs20Ue-QpxGCCXewf_3yAg>
- <xmx:xmOuZVjBxvJxtxU3yVQ-RhbpZHKadB_bGi5jJLeK0S0u9L1di5RMwg>
-Feedback-ID: i1f8241ce:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 22 Jan 2024 07:46:58 -0500 (EST)
-Received: by feathertop.org (sSMTP sendmail emulation);
- Mon, 22 Jan 2024 23:46:55 +1100
-From: Tim Lunn <tim@feathertop.org>
-To: u-boot@lists.denx.de
-Cc: Tim Lunn <tim@feathertop.org>, Jagan Teki <jagan@edgeble.ai>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 5/5] rockchip: rv1126: Move RAM disk address
-Date: Mon, 22 Jan 2024 23:46:03 +1100
-Message-Id: <20240122124603.3341988-6-tim@feathertop.org>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240122124603.3341988-1-tim@feathertop.org>
-References: <20240122124603.3341988-1-tim@feathertop.org>
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 03B6561445;
+ Mon, 22 Jan 2024 12:47:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C6CEC433C7;
+ Mon, 22 Jan 2024 12:47:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1705927636;
+ bh=BR2e5xw+2suooxPc3aS9CfZyxz3gyidlU8e3tQBS18o=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=o31PQPty62MKjHQ+MVggvEzfUuG1RUoL7O4Qx3L8ppO5DsDZeJosug2Jy49GZLLhG
+ NmtJr+53L+GZFAkzT/SiDyDQKm5KZWOle5lkQqAlqy4HZQ5QCLjGCi3vXExDzvQsY4
+ XqbZf/NM4oR05GoCbUHlWAwIodUxWkmzLEycfHhtsuNNp/Ql4GYxkjfdnRdyTtHCB6
+ LD5r+0wppFUXMhh1Lq1yfsRDNVY2muBoQip15xg9oOHrZyqcpYOmK5y6EQRy0IArQg
+ oIRsC1HdzpGQz2fBFEEYy6kWVjbyn++dobFpkdsUYP+tQHH2rDmop3PGTKqrm42x4y
+ Zz9XrycZuWD6g==
+Message-ID: <67277138-b421-4823-9e64-222c114f8296@kernel.org>
+Date: Mon, 22 Jan 2024 14:47:08 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 08/16] drivers: dma: Add support for J784S4 SoC
+Content-Language: en-US
+To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
+ Andrew Davis <afd@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>,
+ Dasnavis Sabiya <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Aradhya Bhatia <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>, Nishanth Menon <nm@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Jayesh Choudhary <j-choudhary@ti.com>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de,
+ Sinthu Raja M <sinthu.raja@mistralsolutions.com>,
+ Udit Kumar <u-kumar1@ti.com>
+References: <20240119175043.3904751-1-a-nandan@ti.com>
+ <20240119175043.3904751-9-a-nandan@ti.com>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20240119175043.3904751-9-a-nandan@ti.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,31 +85,297 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-OPTEE gets loaded into a memory region overlapping with the ram disk.
 
-Fix the ramdisk address so it doesn't overlap with the OPTEE memory
-region.
 
-Signed-off-by: Tim Lunn <tim@feathertop.org>
+On 19/01/2024 19:50, Apurva Nandan wrote:
+> Add support for DMA in J784S4 SoC.
+> 
+> Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
+> Signed-off-by: Hari Nagalla <hnagalla@ti.com>
+> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
+> Reviewed-by: Nishanth Menon <nm@ti.com>
+> ---
+>  drivers/dma/ti/Makefile               |   1 +
+>  drivers/dma/ti/k3-psil-j784s4.c       | 166 ++++++++++++++++++++++++++
+>  drivers/dma/ti/k3-psil-priv.h         |   1 +
+>  drivers/dma/ti/k3-psil.c              |   2 +
+>  drivers/firmware/ti_sci_static_data.h |  34 ++++++
+>  drivers/ram/Kconfig                   |   2 +-
+>  6 files changed, 205 insertions(+), 1 deletion(-)
+>  create mode 100644 drivers/dma/ti/k3-psil-j784s4.c
+> 
+> diff --git a/drivers/dma/ti/Makefile b/drivers/dma/ti/Makefile
+> index f4e0271efb..9e0b13e8c0 100644
+> --- a/drivers/dma/ti/Makefile
+> +++ b/drivers/dma/ti/Makefile
+> @@ -9,3 +9,4 @@ k3-psil-data-$(CONFIG_SOC_K3_J721S2) += k3-psil-j721s2.o
+>  k3-psil-data-$(CONFIG_SOC_K3_AM642) += k3-psil-am64.o
+>  k3-psil-data-$(CONFIG_SOC_K3_AM625) += k3-psil-am62.o
+>  k3-psil-data-$(CONFIG_SOC_K3_AM62A7) += k3-psil-am62a.o
+> +k3-psil-data-$(CONFIG_SOC_K3_J784S4) += k3-psil-j784s4.o
+> diff --git a/drivers/dma/ti/k3-psil-j784s4.c b/drivers/dma/ti/k3-psil-j784s4.c
+> new file mode 100644
+> index 0000000000..7f06a1f307
+> --- /dev/null
+> +++ b/drivers/dma/ti/k3-psil-j784s4.c
+> @@ -0,0 +1,166 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + *  Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com
+> + */
+> +#include <linux/kernel.h>
+> +
+> +#include "k3-psil-priv.h"
+> +
+> +#define PSIL_PDMA_XY_TR(x)				\
+> +	{						\
+> +		.thread_id = x,				\
+> +		.ep_config = {				\
+> +			.ep_type = PSIL_EP_PDMA_XY,	\
+> +		},					\
+> +	}
+> +
+> +#define PSIL_PDMA_XY_PKT(x)				\
+> +	{						\
+> +		.thread_id = x,				\
+> +		.ep_config = {				\
+> +			.ep_type = PSIL_EP_PDMA_XY,	\
+> +			.pkt_mode = 1,			\
+> +		},					\
+> +	}
+> +
+> +#define PSIL_PDMA_MCASP(x)				\
+> +	{						\
+> +		.thread_id = x,				\
+> +		.ep_config = {				\
+> +			.ep_type = PSIL_EP_PDMA_XY,	\
+> +			.pdma_acc32 = 1,		\
+> +			.pdma_burst = 1,		\
+> +		},					\
+> +	}
+> +
+> +#define PSIL_ETHERNET(x)				\
+> +	{						\
+> +		.thread_id = x,				\
+> +		.ep_config = {				\
+> +			.ep_type = PSIL_EP_NATIVE,	\
+> +			.pkt_mode = 1,			\
+> +			.needs_epib = 1,		\
+> +			.psd_size = 16,			\
+> +		},					\
+> +	}
+> +
+> +#define PSIL_SA2UL(x, tx)				\
+> +	{						\
+> +		.thread_id = x,				\
+> +		.ep_config = {				\
+> +			.ep_type = PSIL_EP_NATIVE,	\
+> +			.pkt_mode = 1,			\
+> +			.needs_epib = 1,		\
+> +			.psd_size = 64,			\
+> +			.notdpkt = tx,			\
+> +		},					\
+> +	}
+> +
+> +/* PSI-L source thread IDs, used for RX (DMA_DEV_TO_MEM) */
+> +static struct psil_ep j784s4_src_ep_map[] = {
+> +	/* PDMA_MCASP - McASP0-4 */
+> +	PSIL_PDMA_MCASP(0x4400),
+> +	PSIL_PDMA_MCASP(0x4401),
+> +	PSIL_PDMA_MCASP(0x4402),
+> +	PSIL_PDMA_MCASP(0x4403),
+> +	PSIL_PDMA_MCASP(0x4404),
+> +	/* PDMA_SPI_G0 - SPI0-3 */
+> +	PSIL_PDMA_XY_PKT(0x4600),
+> +	PSIL_PDMA_XY_PKT(0x4601),
+> +	PSIL_PDMA_XY_PKT(0x4602),
+> +	PSIL_PDMA_XY_PKT(0x4603),
+> +	PSIL_PDMA_XY_PKT(0x4604),
+> +	PSIL_PDMA_XY_PKT(0x4605),
+> +	PSIL_PDMA_XY_PKT(0x4606),
+> +	PSIL_PDMA_XY_PKT(0x4607),
+> +	PSIL_PDMA_XY_PKT(0x4608),
+> +	PSIL_PDMA_XY_PKT(0x4609),
+> +	PSIL_PDMA_XY_PKT(0x460a),
+> +	PSIL_PDMA_XY_PKT(0x460b),
+> +	PSIL_PDMA_XY_PKT(0x460c),
+> +	PSIL_PDMA_XY_PKT(0x460d),
+> +	PSIL_PDMA_XY_PKT(0x460e),
+> +	PSIL_PDMA_XY_PKT(0x460f),
+> +	/* PDMA_SPI_G1 - SPI4-7 */
+> +	PSIL_PDMA_XY_PKT(0x4610),
+> +	PSIL_PDMA_XY_PKT(0x4611),
+> +	PSIL_PDMA_XY_PKT(0x4612),
+> +	PSIL_PDMA_XY_PKT(0x4613),
+> +	PSIL_PDMA_XY_PKT(0x4614),
+> +	PSIL_PDMA_XY_PKT(0x4615),
+> +	PSIL_PDMA_XY_PKT(0x4616),
+> +	PSIL_PDMA_XY_PKT(0x4617),
+> +	PSIL_PDMA_XY_PKT(0x4618),
+> +	PSIL_PDMA_XY_PKT(0x4619),
+> +	PSIL_PDMA_XY_PKT(0x461a),
+> +	PSIL_PDMA_XY_PKT(0x461b),
+> +	PSIL_PDMA_XY_PKT(0x461c),
+> +	PSIL_PDMA_XY_PKT(0x461d),
+> +	PSIL_PDMA_XY_PKT(0x461e),
+> +	PSIL_PDMA_XY_PKT(0x461f),
+> +	/* PDMA_USART_G0 - UART0-1 */
+> +	PSIL_PDMA_XY_PKT(0x4700),
+> +	PSIL_PDMA_XY_PKT(0x4701),
+> +	/* PDMA_USART_G1 - UART2-3 */
+> +	PSIL_PDMA_XY_PKT(0x4702),
+> +	PSIL_PDMA_XY_PKT(0x4703),
+> +	/* PDMA_USART_G2 - UART4-9 */
+> +	PSIL_PDMA_XY_PKT(0x4704),
+> +	PSIL_PDMA_XY_PKT(0x4705),
+> +	PSIL_PDMA_XY_PKT(0x4706),
+> +	PSIL_PDMA_XY_PKT(0x4707),
+> +	PSIL_PDMA_XY_PKT(0x4708),
+> +	PSIL_PDMA_XY_PKT(0x4709),
+> +	/* CPSW0 */
+> +	PSIL_ETHERNET(0x7000),
+> +	/* MCU_PDMA0 (MCU_PDMA_MISC_G0) - SPI0 */
+> +	PSIL_PDMA_XY_PKT(0x7100),
+> +	PSIL_PDMA_XY_PKT(0x7101),
+> +	PSIL_PDMA_XY_PKT(0x7102),
+> +	PSIL_PDMA_XY_PKT(0x7103),
+> +	/* MCU_PDMA1 (MCU_PDMA_MISC_G1) - SPI1-2 */
+> +	PSIL_PDMA_XY_PKT(0x7200),
+> +	PSIL_PDMA_XY_PKT(0x7201),
+> +	PSIL_PDMA_XY_PKT(0x7202),
+> +	PSIL_PDMA_XY_PKT(0x7203),
+> +	PSIL_PDMA_XY_PKT(0x7204),
+> +	PSIL_PDMA_XY_PKT(0x7205),
+> +	PSIL_PDMA_XY_PKT(0x7206),
+> +	PSIL_PDMA_XY_PKT(0x7207),
+> +	/* MCU_PDMA2 (MCU_PDMA_MISC_G2) - UART0 */
+> +	PSIL_PDMA_XY_PKT(0x7300),
+> +	/* MCU_PDMA_ADC - ADC0-1 */
+> +	PSIL_PDMA_XY_TR(0x7400),
+> +	PSIL_PDMA_XY_TR(0x7401),
+> +	PSIL_PDMA_XY_TR(0x7402),
+> +	PSIL_PDMA_XY_TR(0x7403),
+> +	/* SA2UL */
+> +	PSIL_SA2UL(0x7500, 0),
+> +	PSIL_SA2UL(0x7501, 0),
+> +	PSIL_SA2UL(0x7502, 0),
+> +	PSIL_SA2UL(0x7503, 0),
+> +};
+> +
+> +/* PSI-L destination thread IDs, used for TX (DMA_MEM_TO_DEV) */
+> +static struct psil_ep j784s4_dst_ep_map[] = {
+> +	/* CPSW0 */
+> +	PSIL_ETHERNET(0xf000),
+> +	PSIL_ETHERNET(0xf001),
+> +	PSIL_ETHERNET(0xf002),
+> +	PSIL_ETHERNET(0xf003),
+> +	PSIL_ETHERNET(0xf004),
+> +	PSIL_ETHERNET(0xf005),
+> +	PSIL_ETHERNET(0xf006),
+> +	PSIL_ETHERNET(0xf007),
+> +	/* SA2UL */
+> +	PSIL_SA2UL(0xf500, 1),
+> +	PSIL_SA2UL(0xf501, 1),
+> +};
+> +
+> +struct psil_ep_map j784s4_ep_map = {
+> +	.name = "j784s4",
+> +	.src = j784s4_src_ep_map,
+> +	.src_count = ARRAY_SIZE(j784s4_src_ep_map),
+> +	.dst = j784s4_dst_ep_map,
+> +	.dst_count = ARRAY_SIZE(j784s4_dst_ep_map),
+> +};
+> diff --git a/drivers/dma/ti/k3-psil-priv.h b/drivers/dma/ti/k3-psil-priv.h
+> index 83f873b84c..02ea1e9ed3 100644
+> --- a/drivers/dma/ti/k3-psil-priv.h
+> +++ b/drivers/dma/ti/k3-psil-priv.h
+> @@ -43,5 +43,6 @@ extern struct psil_ep_map j721s2_ep_map;
+>  extern struct psil_ep_map am64_ep_map;
+>  extern struct psil_ep_map am62_ep_map;
+>  extern struct psil_ep_map am62a_ep_map;
+> +extern struct psil_ep_map j784s4_ep_map;
+>  
+>  #endif /* K3_PSIL_PRIV_H_ */
+> diff --git a/drivers/dma/ti/k3-psil.c b/drivers/dma/ti/k3-psil.c
+> index d4d4fede8f..d21ef193e8 100644
+> --- a/drivers/dma/ti/k3-psil.c
+> +++ b/drivers/dma/ti/k3-psil.c
+> @@ -28,6 +28,8 @@ struct psil_endpoint_config *psil_get_ep_config(u32 thread_id)
+>  			soc_ep_map = &am62_ep_map;
+>  		else if (IS_ENABLED(CONFIG_SOC_K3_AM62A7))
+>  			soc_ep_map = &am62a_ep_map;
+> +		else if (IS_ENABLED(CONFIG_SOC_K3_J784S4))
+> +			soc_ep_map = &j784s4_ep_map;
+>  	}
+>  
+>  	if (thread_id & K3_PSIL_DST_THREAD_ID_OFFSET && soc_ep_map->dst) {
+> diff --git a/drivers/firmware/ti_sci_static_data.h b/drivers/firmware/ti_sci_static_data.h
+> index 567ce8911a..789f0c6b2d 100644
+> --- a/drivers/firmware/ti_sci_static_data.h
+> +++ b/drivers/firmware/ti_sci_static_data.h
+> @@ -97,6 +97,40 @@ static struct ti_sci_resource_static_data rm_static_data[] = {
+>  };
+>  #endif /* CONFIG_SOC_K3_AM625 || CONFIG_SOC_K3_AM62A7 */
+>  
+> +#if IS_ENABLED(CONFIG_SOC_K3_J784S4)
+> +static struct ti_sci_resource_static_data rm_static_data[] = {
+> +	/* Free rings */
+> +	{
+> +		.dev_id = 328,
+> +		.subtype = 1,
+> +		.range_start = 208,
+> +		.range_num = 32,
+> +	},
+> +	/* TX channels */
+> +	{
+> +		.dev_id = 329,
+> +		.subtype = 13,
+> +		.range_start = 40,
+> +		.range_num = 3,
+> +	},
+> +	/* RX channels */
+> +	{
+> +		.dev_id = 329,
+> +		.subtype = 10,
+> +		.range_start = 40,
+> +		.range_num = 3,
+> +	},
+> +	/* RX Free flows */
+> +	{
+> +		.dev_id = 329,
+> +		.subtype = 0,
+> +		.range_start = 84,
+> +		.range_num = 8,
+> +	},
+> +	{ },
+> +};
+> +#endif /* CONFIG_SOC_K3_J784S4 */
+> +
+>  #else
+>  static struct ti_sci_resource_static_data rm_static_data[] = {
+>  	{ },
+> diff --git a/drivers/ram/Kconfig b/drivers/ram/Kconfig
+> index 5b07e92030..8e9e53cbb0 100644
+> --- a/drivers/ram/Kconfig
+> +++ b/drivers/ram/Kconfig
+> @@ -62,7 +62,7 @@ choice
+>  	depends on K3_DDRSS
+>  	prompt "K3 DDRSS Arch Support"
+>  
+> -	default K3_J721E_DDRSS if SOC_K3_J721E || SOC_K3_J721S2
+> +	default K3_J721E_DDRSS if SOC_K3_J721E || SOC_K3_J721S2 || SOC_K3_J784S4
 
----
+Should DDR support patch be independent of DMA support?
 
- include/configs/rv1126_common.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+This change should have gone in patch 2 "arm: mach-k3: Add basic support for J784S4 SoC definition"
 
-diff --git a/include/configs/rv1126_common.h b/include/configs/rv1126_common.h
-index a64c0c6364..6961dbe20b 100644
---- a/include/configs/rv1126_common.h
-+++ b/include/configs/rv1126_common.h
-@@ -26,7 +26,7 @@
- 	"fdt_addr_r=0x08300000\0" \
- 	"fdtoverlay_addr_r=0x02000000\0" \
- 	"kernel_addr_r=0x02008000\0" \
--	"ramdisk_addr_r=0x0a200000\0"
-+	"ramdisk_addr_r=0x0a400000\0"
- 
- #include <config_distro_bootcmd.h>
- #define CFG_EXTRA_ENV_SETTINGS \
+>  	default K3_AM64_DDRSS if SOC_K3_AM642
+>  	default K3_AM64_DDRSS if SOC_K3_AM625
+>  	default K3_AM62A_DDRSS if SOC_K3_AM62A7
+
+
+Reviewed-by: Roger Quadros <rogerq@kernel.org>
+
 -- 
-2.40.1
-
+cheers,
+-roger
