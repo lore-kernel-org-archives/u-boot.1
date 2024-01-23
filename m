@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6A51C47DDB
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 17:18:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39926C47258
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 17:18:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBD0587E58;
-	Tue, 23 Jan 2024 18:17:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 365DC87D29;
+	Tue, 23 Jan 2024 18:17:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ihH6BA81";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="X60h0I9D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D305187D63; Tue, 23 Jan 2024 18:17:12 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 5D37587DBA; Tue, 23 Jan 2024 18:17:15 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3299387D6B
- for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 18:17:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A79987D7A
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 18:17:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a26f73732c5so504138666b.3
- for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 09:17:08 -0800 (PST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a29c4bbb2f4so428376166b.1
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 09:17:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706030227; x=1706635027; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1706030229; x=1706635029; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bA8dIPyuevVt49I0mtLgTHbxtNgE3Zzcp8vc5MXLjDA=;
- b=ihH6BA81rrLre0hBVVS22cmhhqg+D2DncIRejYYALbM5z1D5B1fptVZHz+y0wv++fn
- fG8lRoG756dDlnyeNLPg86I8zYUtGHpdJ1/v84ql5q17GgQMLw3XVefKNHvH5TV06Jl5
- /k2gzkj311T+VN3OBbSMQ+WiJewr31pi00S1i3A/bsoOJeZnVjALPILvRJnpjOPUOvxV
- ppwgQDAjL2xicRhA2pBWTcVzrZZhgF+Y2MmIit55GbltE53WPAwT74SepdqTiZp2eD99
- m/myBEfrx35bl6LVypefBOmjvxkzFmkj/m6/ahx1OsmV7tXeAIfWlNQBLoevIjMx3BiC
- 7cow==
+ bh=wqfG3XPeqyBUzojtyvZepgeUN6eD0XN2Xqy3xM++kt8=;
+ b=X60h0I9DR14nuVj5wrwC2c3aJTEBdCct4sHtHP+w454kFNIJKbXzb3DQNXa8ZGZ6pG
+ WYlZwKTCZOIWe9Ik8XY0PV9OP1BX4lNX/yRsHSRVSeSx9RPx7qXxL3vhR0ExLUeZRm6U
+ 3fpNDefbEnimM3pR2H1YmxBCRtl+D2Kg8hgu5zF+BVVYaVrIUTbPWKmGFo168vRR8Kmh
+ fMqwga6mrDOUZLCQG9890i6q/2R7zFBh4mnJaZJyeEPuF4yC/+qlcUyU+59fR7ZumvuO
+ hdb3PO7UN/eL7G7q3HqWbALk9Zm+4m8D95JcDVYCOzWcX1b2xIDMhHnk8tovOT1zKL2S
+ TJ0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706030227; x=1706635027;
+ d=1e100.net; s=20230601; t=1706030229; x=1706635029;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bA8dIPyuevVt49I0mtLgTHbxtNgE3Zzcp8vc5MXLjDA=;
- b=mcKfsGkn+Jm+3qUUzZARUA5J+YzTN064QXuORg/L+f8ECjEsDHwgFwNvH/8afFyGhk
- WzJGqM5C0M0RvnhiTvJipGQpKq2JsruW/t+8zmnIzcnY3UcRuIrJYd6hHZHkAg6ZS3tr
- 4AE3e5uQG8Z6pZfUbYi/fQhAgYjsAzSV1Mo5Y6o/iorrJlomdxoc5w7PNJzKOsiOnrOt
- add7nnZvndiQuIDydoCStMqJH7+MNK/b3cbbXdx16OaDu+CTB3Ykjoch4KJ7yU1riT0o
- ndJYCaWUHyAHCR2hwuwx3qoma7D9WSuW7brvvEj09iDAhkNoMEhtAXWvYFBEgFZP5XIQ
- XC9g==
-X-Gm-Message-State: AOJu0Yy1od8eP4Rb9wmb2bc8Ef1ghXfFVvlhipF+W0ymYBjN/Tzyv6o1
- dx+WoVNFxMReAN9U7NKexAHVfzkm1TIzNro3Q2WO4Vdl8aa6VR+x
-X-Google-Smtp-Source: AGHT+IHtHANZCCEDeKFDv6jJP/r98NeTINiryga0s8ihc69X8CPZJxOHH4R0lvMQDNGNF4VvrG0VSg==
-X-Received: by 2002:a17:907:9843:b0:a30:e893:4a35 with SMTP id
- jj3-20020a170907984300b00a30e8934a35mr73340ejc.155.1706030227696; 
- Tue, 23 Jan 2024 09:17:07 -0800 (PST)
+ bh=wqfG3XPeqyBUzojtyvZepgeUN6eD0XN2Xqy3xM++kt8=;
+ b=LBet9qQj7OTAvCb4GDiPmUEbFzTfB3b5JbmY2KWKiARjy8Bzc5U5DO+nfEJZKpIuqF
+ TaF2rExX0gQ8fn9rFLALeg81jJ8jMCxC1CaWMUK4jCRasSjKsKsVzm7bQQrTExofiTlO
+ gbEMBK8a3rO4qP6xljRDiakeqLpmgyy0QB4E6IIkCEUeZU/T1U5UeYgbiWtAreYWcoph
+ bs9YNXmJ7bwpOmaS4BPlQspI/eEySk10HL5AXI/IRsyRpmSS+Ko2VM2Xsjn65INLrYLT
+ bthBZq4fw3TltzjyH8/Kmw8ZWXiT96ybaIHETMzc97Z8pti5xL4HsRTecOhhNRiBTunb
+ S9Bg==
+X-Gm-Message-State: AOJu0YzJfqPfQOhfNS7vq3uvXLM58vjcOEWL3u9ZPdyCProjWruOiXrr
+ jt2vQLlx/v390vY5udP/y5ofVQk0kv12Jcahr/gzcTjuUZodWw8fUp53MdGXLP6TmQ==
+X-Google-Smtp-Source: AGHT+IHSOKc/rWLMDdJjZwKpNR/F2hp4ah25rYxY7km+GPYsidso41u204aZKGaEscPJITu6o6w4MQ==
+X-Received: by 2002:a17:906:4089:b0:a2e:d5c7:425c with SMTP id
+ u9-20020a170906408900b00a2ed5c7425cmr125906ejj.30.1706030228952; 
+ Tue, 23 Jan 2024 09:17:08 -0800 (PST)
 Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
- m27-20020a1709060d9b00b00a2c7d34157asm14269068eji.180.2024.01.23.09.17.07
+ m27-20020a1709060d9b00b00a2c7d34157asm14269068eji.180.2024.01.23.09.17.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jan 2024 09:17:07 -0800 (PST)
+ Tue, 23 Jan 2024 09:17:08 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Anatolij Gustschin <agust@denx.de>,
  Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v6 05/18] video: tegra20: dc: add PLLD2 parent support
-Date: Tue, 23 Jan 2024 19:16:20 +0200
-Message-Id: <20240123171633.246057-6-clamor95@gmail.com>
+Subject: [PATCH v6 07/18] video: tegra20: dc: add powergate
+Date: Tue, 23 Jan 2024 19:16:22 +0200
+Message-Id: <20240123171633.246057-8-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240123171633.246057-1-clamor95@gmail.com>
 References: <20240123171633.246057-1-clamor95@gmail.com>
@@ -91,36 +91,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T30+ SOC have second PLLD - PLLD2 which can be actively used by
-DC and act as main DISP1/2 clock parent.
+Add powergate use on T114 to complete resetting of DC.
 
-Tested-by: Agneli <poczt@protonmail.ch> # Toshiba AC100 T20
-Tested-by: Robert Eckelmann <longnoserob@gmail.com> # ASUS TF101
-Tested-by: Andreas Westman Dorcsak <hedmoo@yahoo.com> # ASUS Grouper E1565
-Tested-by: Ion Agorria <ion@agorria.com> # HTC One X
-Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # Nvidia Tegratab T114
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/tegra20/tegra-dc.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ drivers/video/tegra20/tegra-dc.c | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
 
 diff --git a/drivers/video/tegra20/tegra-dc.c b/drivers/video/tegra20/tegra-dc.c
-index 0e94e665ef..56a23b3c97 100644
+index 35abb6fe46..9a18e38cd8 100644
 --- a/drivers/video/tegra20/tegra-dc.c
 +++ b/drivers/video/tegra20/tegra-dc.c
-@@ -304,6 +304,12 @@ static int tegra_display_probe(struct tegra_lcd_priv *priv,
- 	if (priv->dc_clk[1] == CLOCK_ID_DISPLAY)
- 		rate /= 2;
+@@ -22,6 +22,7 @@
+ #include <asm/arch/clock.h>
+ #include <asm/arch/funcmux.h>
+ #include <asm/arch/pinmux.h>
++#include <asm/arch/powergate.h>
+ #include <asm/arch/pwm.h>
  
-+#ifndef CONFIG_TEGRA20
-+	/* PLLD2 obeys same rules as PLLD but it is present only on T30+ */
-+	if (priv->dc_clk[1] == CLOCK_ID_DISPLAY2)
-+		rate /= 2;
-+#endif
+ #include "tegra-dc.h"
+@@ -32,6 +33,7 @@ DECLARE_GLOBAL_DATA_PTR;
+ struct tegra_dc_soc_info {
+ 	bool has_timer;
+ 	bool has_rgb;
++	bool has_pgate;
+ };
+ 
+ /* Information about the display controller */
+@@ -360,6 +362,28 @@ static int tegra_lcd_probe(struct udevice *dev)
+ 
+ 	clock_disable(priv->dc_clk[0]);
+ 
++	if (priv->soc->has_pgate) {
++		uint powergate;
 +
- 	/*
- 	 * HOST1X is init by default at 150MHz with PLLC as parent
- 	 */
++		if (priv->pipe)
++			powergate = TEGRA_POWERGATE_DISB;
++		else
++			powergate = TEGRA_POWERGATE_DIS;
++
++		ret = tegra_powergate_power_off(powergate);
++		if (ret < 0) {
++			log_err("failed to power off DISP gate: %d", ret);
++			return ret;
++		}
++
++		ret = tegra_powergate_sequence_power_up(powergate,
++							priv->dc_clk[0]);
++		if (ret < 0) {
++			log_err("failed to power up DISP gate: %d", ret);
++			return ret;
++		}
++	}
++
+ 	/* Reset everything set before */
+ 	reset_assert(&reset_ctl);
+ 	mdelay(4);
+@@ -510,16 +534,19 @@ static const struct video_ops tegra_lcd_ops = {
+ static const struct tegra_dc_soc_info tegra20_dc_soc_info = {
+ 	.has_timer = true,
+ 	.has_rgb = true,
++	.has_pgate = false,
+ };
+ 
+ static const struct tegra_dc_soc_info tegra30_dc_soc_info = {
+ 	.has_timer = false,
+ 	.has_rgb = true,
++	.has_pgate = false,
+ };
+ 
+ static const struct tegra_dc_soc_info tegra114_dc_soc_info = {
+ 	.has_timer = false,
+ 	.has_rgb = false,
++	.has_pgate = true,
+ };
+ 
+ static const struct udevice_id tegra_lcd_ids[] = {
 -- 
 2.40.1
 
