@@ -4,53 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78C18C46CD2
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 01:09:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5E31C46CD2
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 02:20:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BADC3875E9;
-	Tue, 23 Jan 2024 02:09:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=free.fr
+	by phobos.denx.de (Postfix) with ESMTP id E395187B44;
+	Tue, 23 Jan 2024 03:20:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=feathertop.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="IYu9WNLU";
+	dkim=pass (2048-bit key; unprotected) header.d=feathertop.org header.i=@feathertop.org header.b="Hd/eU0ui";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="CKuv4jPw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7861B8780E; Mon, 22 Jan 2024 23:12:28 +0100 (CET)
-Received: from smtp6-g21.free.fr (smtp6-g21.free.fr [IPv6:2a01:e0c:1:1599::15])
+ id 65E02879F6; Tue, 23 Jan 2024 03:20:54 +0100 (CET)
+Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
+ [66.111.4.28])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 533E887559
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 23:12:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AF2E687707
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 03:20:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=feathertop.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=free.fr
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrick9876@free.fr
-Received: from hulk.fork.zz (unknown [82.65.94.41])
- (Authenticated sender: patrick9876@free.fr)
- by smtp6-g21.free.fr (Postfix) with ESMTPSA id 5A31F78032A;
- Mon, 22 Jan 2024 23:12:22 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1705961545;
- bh=UKgZzxcgMNB3ga36OmcGrvq+ftwIHwA1un5Z/cHM+U0=;
- h=From:To:Cc:Subject:Date:Reply-To:From;
- b=IYu9WNLU31kHyRBq+5vR5PpUw6bEicoGt6q2hPeUJC0HGDjeX64lLMJ4jL0nDELoy
- 402zmcPsKWtmpU2xUOs8sXfU72Bf1qM4siJkDnbRAnxoQY1DizDhnkeU/ODI+3LBK4
- XPkWZMeyxVBg+3e+PnHoFzO+fssVRMdE0PUvhDqPGsLgCGFkEYBJ8EFMtDeOz1oPbx
- rt9xTqrj1W4lS+4h9xuspOjobebHI/QCAmTpMLlqtcdA2qc90EqqKdjhBFhpvjGZHR
- JVmdN2gDQ5h/UUxyDvBaW1K0tRxL95imeGylLzVTs50lbC/coMYGOu7AMGUJhjtvBt
- LWfwQuPonaxog==
-From: patrick9876@free.fr
-To: u-boot@lists.denx.de
-Cc: jernej.skrabec@siol.net, andre.przywara@arm.com,
- Patrick Lerda <patrick9876@free.fr>
-Subject: [PATCH] sunxi: dram: h6: fix the unreliability related to the DDR3
- sequence
-Date: Mon, 22 Jan 2024 23:12:18 +0100
-Message-ID: <20240122221220.22587-1-patrick9876@free.fr>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=tim@feathertop.org
+Received: from compute7.internal (compute7.nyi.internal [10.202.2.48])
+ by mailout.nyi.internal (Postfix) with ESMTP id E47875C038B;
+ Mon, 22 Jan 2024 21:20:48 -0500 (EST)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute7.internal (MEProxy); Mon, 22 Jan 2024 21:20:48 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=feathertop.org;
+ h=cc:cc:content-transfer-encoding:content-type:content-type
+ :date:date:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:subject:subject:to:to; s=fm2;
+ t=1705976448; x=1706062848; bh=raEvyfonb+xtVTJ1uD3sM9B0GQgo8qwV
+ fX5DHCBj/20=; b=Hd/eU0uilaVfdFLEjI9aJaNl3g+ZMYqT94w09vsMVvMRp4ef
+ TYW767mhfZE7+0MNXFC9XZQKRQ4GqciFn0wZ4JMXVbFZ8nevX1oShOuTyRJjU0xO
+ bRJ2b3IGiAyy6SjPGd1cZM3TeXCWPirxZuZaUFsB+5PmXNvvi0Lt0JT1LhdAO+aC
+ YPZp91GYbGeoLoI46XrOxXc3HHtTwKR9rFyN8CG0q+Ji4Vagk3h/1Z3v0NyEFMG+
+ fJMKmgIBifpuyHloWh+CiwTPf074sJ1Cn1rNfMTyqqCqI731nx32UfsjdFQEMPj6
+ FF6hl7Bq5dhPdETBgfom9i/i5Aqs8tkq5LVppQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1705976448; x=
+ 1706062848; bh=raEvyfonb+xtVTJ1uD3sM9B0GQgo8qwVfX5DHCBj/20=; b=C
+ Kuv4jPw45oO4RoRIhycuf94iVLtuI4Zm1vynoBmDoj/staIVAyxFQTNd6Qbn/F1O
+ 8Ln8tw8mtSKgdssV0Hvyx845L3PzHlCGCt2L0fdX7il3AEfcikNktrZpCP3ulU4B
+ VRkMXrI+n1z1n3qoTq/kRENZ0pV2z7hrFMKiOrxxS2ovqURMYjmCDrpgKTT5s6Da
+ G9N0HEeUI93dDtclucdfo1hlduu5PodcrG51EJuMRJUf2W6suecLM3wH0wIIFFiX
+ 4ybORgg8ex9gcmpYM20St6/isg+D3YumXNHw8rCccO2b9wgsgPmtu3Cqc3MUHiKT
+ 1HfRbEDdcOfxUlVKdh99g==
+X-ME-Sender: <xms:gCKvZeSp9bSFqPZQAv4QFfc8g-2jg858DQs5P_hKIA9TsqDwxfWRkA>
+ <xme:gCKvZTxKYmGMk0isSlND4XyxT3JW76yLFj9wLtVHOB4iiuOQQ0fGQm_37YB-vFN7r
+ ZK1_jRepA>
+X-ME-Received: <xmr:gCKvZb3bOzTXSsmTdoZuIdSlDbQ3FhR2TULvZ3IDMmPbTm3PGU5S89360MX40hgZDc3EbQ723pqJ2zlBr7v4yXTuZAIPFmACupPaVQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrvdekjedggeefucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepkfffgggfuffvvehfhfgjtgfgsehtkeertddtvdejnecuhfhrohhmpefvihhm
+ ucfnuhhnnhcuoehtihhmsehfvggrthhhvghrthhophdrohhrgheqnecuggftrfgrthhtvg
+ hrnhepueegfefgveeuiedtheffgfefveejkeetiefhhfdvjeevlefhueekudeuleeghfek
+ necuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepthhimh
+ esfhgvrghthhgvrhhtohhprdhorhhg
+X-ME-Proxy: <xmx:gCKvZaDJB8LPoPCc6t62_Q4ADamymRoUhVODh_f5hdM9cm9VdoQz9A>
+ <xmx:gCKvZXhdOnhC-vpAukwDfHq1zp9m5ryX46PCQgYTg1HgW6-AwOYGBA>
+ <xmx:gCKvZWo4WlxnPzaaKiuNF3t6zSgFWRtNxd0IgWcgUjdcxltLMGbDTw>
+ <xmx:gCKvZXcOWeO7MDqVCuaOdwNuRnVQYNpckhNPiR0sSLwIGLVVIP5FUQ>
+Feedback-ID: i1f8241ce:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 22 Jan 2024 21:20:45 -0500 (EST)
+Message-ID: <86fdbd38-7263-4a56-8191-e422ede98ee0@feathertop.org>
+Date: Tue, 23 Jan 2024 13:20:41 +1100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/5] board: rockchip: Add Sonoff iHost board
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>
+References: <20240122124603.3341988-1-tim@feathertop.org>
+ <20240122124603.3341988-4-tim@feathertop.org>
+ <20240122153621.GK3652023@bill-the-cat>
+From: Tim Lunn <tim@feathertop.org>
+In-Reply-To: <20240122153621.GK3652023@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 23 Jan 2024 02:09:39 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,264 +103,48 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: patrick9876@free.fr
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Patrick Lerda <patrick9876@free.fr>
+Hi Tom,
 
-Indeed, the DDR3 has a non-zero probability to not be properly
-initialized. This could be the PLL that is not locked or anything else.
-When this happens and the code tests the correct board configuration,
-the proper board configuration is not set. The board could end with
-half the expected memory size, or u-boot could stall.
+On 1/23/24 02:36, Tom Rini wrote:
+> On Mon, Jan 22, 2024 at 11:46:01PM +1100, Tim Lunn wrote:
+>
+>> Sonoff iHost is gateway device designed to provide a Smart Home Hub,
+>> it is based on Rockchip RV1126. There is also a version with 2GB RAM
+>> based off the RV1109 dual core SoC however this works with the same
+>> config as the RV1126 for uboot purposes.
+> [snip]
+>> diff --git a/include/configs/sonoff-ihost.h b/include/configs/sonoff-ihost.h
+>> new file mode 100644
+>> index 0000000000..8ed5d78687
+>> --- /dev/null
+>> +++ b/include/configs/sonoff-ihost.h
+>> @@ -0,0 +1,18 @@
+>> +/* SPDX-License-Identifier: GPL-2.0+ */
+>> +
+>> +#ifndef __SONOFF_IHOST_H
+>> +#define __SONOFF_IHOST_H
+>> +
+>> +#define ROCKCHIP_DEVICE_SETTINGS \
+>> +		"stdout=serial\0" \
+>> +		"stderr=serial\0"
+>> +
+>> +#include <configs/rv1126_common.h>
+>> +
+>> +#undef BOOT_TARGET_DEVICES
+>> +
+>> +#define BOOT_TARGET_DEVICES(func) \
+>> +	func(MMC, mmc, 0) \
+>> +	func(MMC, mmc, 1)
+>> +
+>> +#endif /*  __SONOFF_IHOST_H */
+> We should be using standard boot, which removes most of this, thanks.
+Thanks for the tip, I will check this out and fix for v2.
 
-This change adds a loop to execute the DDR3 sequence again until the
-stable state is reached.
-
-My H6 TX6 board was prone to this issue. Once fixed with this change,
-the same board can now handle 10000+ consecutive reboots properly.
-
-Fixes: ec9cdaaa13d ("sunxi: dram: h6: Improve DDR3 config detection")
-Signed-off-by: Patrick Lerda <patrick9876@free.fr>
----
- arch/arm/mach-sunxi/dram_sun50i_h6.c | 207 ++++++++++++++-------------
- 1 file changed, 111 insertions(+), 96 deletions(-)
-
-diff --git a/arch/arm/mach-sunxi/dram_sun50i_h6.c b/arch/arm/mach-sunxi/dram_sun50i_h6.c
-index 62bc2a0231..462adb1c9e 100644
---- a/arch/arm/mach-sunxi/dram_sun50i_h6.c
-+++ b/arch/arm/mach-sunxi/dram_sun50i_h6.c
-@@ -420,116 +420,131 @@ static bool mctl_channel_init(struct dram_para *para)
- 			(struct sunxi_mctl_ctl_reg *)SUNXI_DRAM_CTL0_BASE;
- 	struct sunxi_mctl_phy_reg * const mctl_phy =
- 			(struct sunxi_mctl_phy_reg *)SUNXI_DRAM_PHY0_BASE;
--	int i;
-+	int i, j = 0;
- 	u32 val;
- 
--	setbits_le32(&mctl_ctl->dfiupd[0], BIT(31) | BIT(30));
--	setbits_le32(&mctl_ctl->zqctl[0], BIT(31) | BIT(30));
--	writel(0x2f05, &mctl_ctl->sched[0]);
--	setbits_le32(&mctl_ctl->rfshctl3, BIT(0));
--	setbits_le32(&mctl_ctl->dfimisc, BIT(0));
--	setbits_le32(&mctl_ctl->unk_0x00c, BIT(8));
--	clrsetbits_le32(&mctl_phy->pgcr[1], 0x180, 0xc0);
--	/* TODO: non-LPDDR3 types */
--	clrsetbits_le32(&mctl_phy->pgcr[2], GENMASK(17, 0), ns_to_t(7800));
--	clrbits_le32(&mctl_phy->pgcr[6], BIT(0));
--	clrsetbits_le32(&mctl_phy->dxccr, 0xee0, 0x220);
--	/* TODO: VT compensation */
--	clrsetbits_le32(&mctl_phy->dsgcr, BIT(0), 0x440060);
--	clrbits_le32(&mctl_phy->vtcr[1], BIT(1));
--
--	for (i = 0; i < 4; i++)
--		clrsetbits_le32(&mctl_phy->dx[i].gcr[0], 0xe00, 0x800);
--	for (i = 0; i < 4; i++)
--		clrsetbits_le32(&mctl_phy->dx[i].gcr[2], 0xffff, 0x5555);
--	for (i = 0; i < 4; i++)
--		clrsetbits_le32(&mctl_phy->dx[i].gcr[3], 0x3030, 0x1010);
--
--	udelay(100);
-+	do {
-+		setbits_le32(&mctl_ctl->dfiupd[0], BIT(31) | BIT(30));
-+		setbits_le32(&mctl_ctl->zqctl[0], BIT(31) | BIT(30));
-+		writel(0x2f05, &mctl_ctl->sched[0]);
-+		setbits_le32(&mctl_ctl->rfshctl3, BIT(0));
-+		setbits_le32(&mctl_ctl->dfimisc, BIT(0));
-+		setbits_le32(&mctl_ctl->unk_0x00c, BIT(8));
-+		clrsetbits_le32(&mctl_phy->pgcr[1], 0x180, 0xc0);
-+		/* TODO: non-LPDDR3 types */
-+		clrsetbits_le32(&mctl_phy->pgcr[2], GENMASK(17, 0),
-+				ns_to_t(7800));
-+		clrbits_le32(&mctl_phy->pgcr[6], BIT(0));
-+		clrsetbits_le32(&mctl_phy->dxccr, 0xee0, 0x220);
-+		/* TODO: VT compensation */
-+		clrsetbits_le32(&mctl_phy->dsgcr, BIT(0), 0x440060);
-+		clrbits_le32(&mctl_phy->vtcr[1], BIT(1));
- 
--	if (para->ranks == 2)
--		setbits_le32(&mctl_phy->dtcr[1], 0x30000);
--	else
--		clrsetbits_le32(&mctl_phy->dtcr[1], 0x30000, 0x10000);
-+		for (i = 0; i < 4; i++)
-+			clrsetbits_le32(&mctl_phy->dx[i].gcr[0], 0xe00, 0x800);
-+		for (i = 0; i < 4; i++)
-+			clrsetbits_le32(&mctl_phy->dx[i].gcr[2], 0xffff,
-+					0x5555);
-+		for (i = 0; i < 4; i++)
-+			clrsetbits_le32(&mctl_phy->dx[i].gcr[3], 0x3030,
-+					0x1010);
- 
--	if (sunxi_dram_is_lpddr(para->type))
--		clrbits_le32(&mctl_phy->dtcr[1], BIT(1));
--	if (para->ranks == 2) {
--		writel(0x00010001, &mctl_phy->rankidr);
--		writel(0x20000, &mctl_phy->odtcr);
--	} else {
--		writel(0x0, &mctl_phy->rankidr);
--		writel(0x10000, &mctl_phy->odtcr);
--	}
-+		udelay(100);
- 
--	/* set bits [3:0] to 1? 0 not valid in ZynqMP d/s */
--	if (para->type == SUNXI_DRAM_TYPE_LPDDR3)
--		clrsetbits_le32(&mctl_phy->dtcr[0], 0xF0000000, 0x10000040);
--	else
--		clrsetbits_le32(&mctl_phy->dtcr[0], 0xF0000000, 0x10000000);
--	if (para->clk <= 792) {
--		if (para->clk <= 672) {
--			if (para->clk <= 600)
--				val = 0x300;
--			else
--				val = 0x400;
-+		if (para->ranks == 2)
-+			setbits_le32(&mctl_phy->dtcr[1], 0x30000);
-+		else
-+			clrsetbits_le32(&mctl_phy->dtcr[1], 0x30000, 0x10000);
-+
-+		if (sunxi_dram_is_lpddr(para->type))
-+			clrbits_le32(&mctl_phy->dtcr[1], BIT(1));
-+		if (para->ranks == 2) {
-+			writel(0x00010001, &mctl_phy->rankidr);
-+			writel(0x20000, &mctl_phy->odtcr);
- 		} else {
--			val = 0x500;
-+			writel(0x0, &mctl_phy->rankidr);
-+			writel(0x10000, &mctl_phy->odtcr);
- 		}
--	} else {
--		val = 0x600;
--	}
--	/* FIXME: NOT REVIEWED YET */
--	clrsetbits_le32(&mctl_phy->zq[0].zqcr, 0x700, val);
--	clrsetbits_le32(&mctl_phy->zq[0].zqpr[0], 0xff,
--			CONFIG_DRAM_ZQ & 0xff);
--	clrbits_le32(&mctl_phy->zq[0].zqor[0], 0xfffff);
--	setbits_le32(&mctl_phy->zq[0].zqor[0], (CONFIG_DRAM_ZQ >> 8) & 0xff);
--	setbits_le32(&mctl_phy->zq[0].zqor[0], (CONFIG_DRAM_ZQ & 0xf00) - 0x100);
--	setbits_le32(&mctl_phy->zq[0].zqor[0], (CONFIG_DRAM_ZQ & 0xff00) << 4);
--	clrbits_le32(&mctl_phy->zq[1].zqpr[0], 0xfffff);
--	setbits_le32(&mctl_phy->zq[1].zqpr[0], (CONFIG_DRAM_ZQ >> 16) & 0xff);
--	setbits_le32(&mctl_phy->zq[1].zqpr[0], ((CONFIG_DRAM_ZQ >> 8) & 0xf00) - 0x100);
--	setbits_le32(&mctl_phy->zq[1].zqpr[0], (CONFIG_DRAM_ZQ & 0xff0000) >> 4);
--	if (para->type == SUNXI_DRAM_TYPE_LPDDR3) {
--		for (i = 1; i < 14; i++)
--			writel(0x06060606, &mctl_phy->acbdlr[i]);
--	}
- 
--	val = PIR_ZCAL | PIR_DCAL | PIR_PHYRST | PIR_DRAMINIT | PIR_QSGATE |
--	      PIR_RDDSKW | PIR_WRDSKW | PIR_RDEYE | PIR_WREYE;
--	if (para->type == SUNXI_DRAM_TYPE_DDR3)
--		val |= PIR_DRAMRST | PIR_WL;
--	mctl_phy_pir_init(val);
-+		/* set bits [3:0] to 1? 0 not valid in ZynqMP d/s */
-+		if (para->type == SUNXI_DRAM_TYPE_LPDDR3)
-+			clrsetbits_le32(&mctl_phy->dtcr[0], 0xF0000000,
-+					0x10000040);
-+		else
-+			clrsetbits_le32(&mctl_phy->dtcr[0], 0xF0000000,
-+					0x10000000);
-+		if (para->clk <= 792) {
-+			if (para->clk <= 672) {
-+				if (para->clk <= 600)
-+					val = 0x300;
-+				else
-+					val = 0x400;
-+			} else {
-+				val = 0x500;
-+			}
-+		} else {
-+			val = 0x600;
-+		}
-+		/* FIXME: NOT REVIEWED YET */
-+		clrsetbits_le32(&mctl_phy->zq[0].zqcr, 0x700, val);
-+		clrsetbits_le32(&mctl_phy->zq[0].zqpr[0], 0xff,
-+				CONFIG_DRAM_ZQ & 0xff);
-+		clrbits_le32(&mctl_phy->zq[0].zqor[0], 0xfffff);
-+		setbits_le32(&mctl_phy->zq[0].zqor[0],
-+			     (CONFIG_DRAM_ZQ >> 8) & 0xff);
-+		setbits_le32(&mctl_phy->zq[0].zqor[0],
-+			     (CONFIG_DRAM_ZQ & 0xf00) - 0x100);
-+		setbits_le32(&mctl_phy->zq[0].zqor[0], (CONFIG_DRAM_ZQ & 0xff00)
-+							       << 4);
-+		clrbits_le32(&mctl_phy->zq[1].zqpr[0], 0xfffff);
-+		setbits_le32(&mctl_phy->zq[1].zqpr[0],
-+			     (CONFIG_DRAM_ZQ >> 16) & 0xff);
-+		setbits_le32(&mctl_phy->zq[1].zqpr[0],
-+			     ((CONFIG_DRAM_ZQ >> 8) & 0xf00) - 0x100);
-+		setbits_le32(&mctl_phy->zq[1].zqpr[0],
-+			     (CONFIG_DRAM_ZQ & 0xff0000) >> 4);
-+		if (para->type == SUNXI_DRAM_TYPE_LPDDR3) {
-+			for (i = 1; i < 14; i++)
-+				writel(0x06060606, &mctl_phy->acbdlr[i]);
-+		}
- 
--	/* TODO: DDR4 types ? */
--	for (i = 0; i < 4; i++)
--		writel(0x00000909, &mctl_phy->dx[i].gcr[5]);
-+		val = PIR_ZCAL | PIR_DCAL | PIR_PHYRST | PIR_DRAMINIT |
-+		      PIR_QSGATE | PIR_RDDSKW | PIR_WRDSKW | PIR_RDEYE |
-+		      PIR_WREYE;
-+		if (para->type == SUNXI_DRAM_TYPE_DDR3)
-+			val |= PIR_DRAMRST | PIR_WL;
-+		mctl_phy_pir_init(val);
- 
--	for (i = 0; i < 4; i++) {
--		if (IS_ENABLED(CONFIG_DRAM_ODT_EN))
--			val = 0x0;
--		else
--			val = 0xaaaa;
--		clrsetbits_le32(&mctl_phy->dx[i].gcr[2], 0xffff, val);
-+		/* TODO: DDR4 types ? */
-+		for (i = 0; i < 4; i++)
-+			writel(0x00000909, &mctl_phy->dx[i].gcr[5]);
- 
--		if (IS_ENABLED(CONFIG_DRAM_ODT_EN))
--			val = 0x0;
--		else
--			val = 0x2020;
--		clrsetbits_le32(&mctl_phy->dx[i].gcr[3], 0x3030, val);
--	}
-+		for (i = 0; i < 4; i++) {
-+			if (IS_ENABLED(CONFIG_DRAM_ODT_EN))
-+				val = 0x0;
-+			else
-+				val = 0xaaaa;
-+			clrsetbits_le32(&mctl_phy->dx[i].gcr[2], 0xffff, val);
- 
--	mctl_bit_delay_set(para);
--	udelay(1);
-+			if (IS_ENABLED(CONFIG_DRAM_ODT_EN))
-+				val = 0x0;
-+			else
-+				val = 0x2020;
-+			clrsetbits_le32(&mctl_phy->dx[i].gcr[3], 0x3030, val);
-+		}
- 
--	setbits_le32(&mctl_phy->pgcr[6], BIT(0));
--	clrbits_le32(&mctl_phy->pgcr[6], 0xfff8);
--	for (i = 0; i < 4; i++)
--		clrbits_le32(&mctl_phy->dx[i].gcr[3], ~0x3ffff);
--	udelay(10);
-+		mctl_bit_delay_set(para);
-+		udelay(1);
-+
-+		setbits_le32(&mctl_phy->pgcr[6], BIT(0));
-+		clrbits_le32(&mctl_phy->pgcr[6], 0xfff8);
-+		for (i = 0; i < 4; i++)
-+			clrbits_le32(&mctl_phy->dx[i].gcr[3], ~0x3ffff);
-+		udelay(10);
-+		val = readl(&mctl_phy->pgsr[0]) & 0xff00000;
-+	} while (val && j++ < 64);
- 
--	if (readl(&mctl_phy->pgsr[0]) & 0xff00000) {
-+	if (val) {
- 		/* Oops! There's something wrong! */
- 		debug("PLL = %x\n", readl(0x3001010));
- 		debug("DRAM PHY PGSR0 = %x\n", readl(&mctl_phy->pgsr[0]));
--- 
-2.43.0
-
+Regards
+    Tim
+>
