@@ -4,83 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B641C47258
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 10:06:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD48CC47DDC
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 10:16:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABD6287B36;
-	Tue, 23 Jan 2024 11:06:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BF2C587CC0;
+	Tue, 23 Jan 2024 11:16:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QXGzvtJr";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="RUBSpA90";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E64E87B9E; Tue, 23 Jan 2024 11:06:37 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9763487CA1; Tue, 23 Jan 2024 11:16:40 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C45F187A0E
- for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 11:06:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 37C9687D06
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 11:16:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=max.oss.09@gmail.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-40e8fec0968so53048495e9.1
- for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 02:06:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706004394; x=1706609194; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=27ffTG+0hiVj6c0wIfq1GplM3iPSqVyrAN+jPwuGaMg=;
- b=QXGzvtJrge2aIQkpDGiWe5iCUSqhu0+oCfwprdrmzP4gZmOWePjEgnmUy+HQ9AEeJf
- URPYiwoB4NsY+oRs7rpy21SF+r828tSUFLUkOm6UiRxxTfqyyOxTTli5xmECIlsSJ2Fk
- fcxvHXCNnYGbgzOC0Hc7vI6UwIoNAxM65Rh/iY65Z6TQ0aQUBNkIwMAhinikrKXTvbwL
- hBJff7m4Ass7cyUst7vsj+coJra5AYC2MZ1o4UCQSuaLGmYOtfSJL5V7psuruRluVxCf
- MBghFKpv9wicCNWR8pU8gob4U4rjfLrsi5XLGHlLkMy2Pblci7GXs6GfYUBt3WKZxnST
- ArLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706004394; x=1706609194;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=27ffTG+0hiVj6c0wIfq1GplM3iPSqVyrAN+jPwuGaMg=;
- b=h5WtVTjRhg015oLkyWFm4428uNOYjklg+ugx77dS9MzaIL2J3TcHGL4CMWot6/eEge
- DISFt4iKD3d/qap4gveM9Uq+PWO0x6NLXF0hYtE0r7ZXA5OLoaG6xJCl14u7UEZ/VY55
- JDG07FiwQAFCubdErqTu8lMJX/C8wPVhFExADTUyd5UKpCT/B4BycarxArasyzpOKfMv
- sABFguc6iAj1kNUNtH+m8WRKjVkGK1euF5SEahQJ2Om2R7zCGEo9BlmpD9ZTDDDnQYNO
- Ad4LjTvew5EjgGXhEN4GOsu9sISaUQdGX7Z4vPk+KA23pSuPDpofUmMDCu09VzDOrS2S
- eQuQ==
-X-Gm-Message-State: AOJu0Yyk8Uqp28vwvCWamd9X2wTnLEZvqag4zZ5nQ3dg1toLVBc7zqSW
- +38RqSNm7GpvYEQgTHsJ6uOca3L9vMZltdD1qNGLE4GZnmGR//sZ
-X-Google-Smtp-Source: AGHT+IHKM4Ef4DxDPYvVB/D3ewfrTKvibSiGQYud3oPzKRoCONWd4KLkpCcAD3YENryFBzuc10rSRg==
-X-Received: by 2002:a05:600c:4f04:b0:40e:3505:32eb with SMTP id
- l4-20020a05600c4f0400b0040e350532ebmr361961wmq.133.1706004394033; 
- Tue, 23 Jan 2024 02:06:34 -0800 (PST)
-Received: from toolbox (31-10-206-125.static.upc.ch. [31.10.206.125])
- by smtp.gmail.com with ESMTPSA id
- iv17-20020a05600c549100b0040e5034d8e0sm46167654wmb.43.2024.01.23.02.06.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jan 2024 02:06:33 -0800 (PST)
-Date: Tue, 23 Jan 2024 11:06:32 +0100
-From: Max Krummenacher <max.oss.09@gmail.com>
-To: Ryan Eatmon <reatmon@ti.com>
-Cc: Neha Malcom Francis <n-francis@ti.com>, sjg@chromium.org,
- vigneshr@ti.com, bb@ti.com, m-chawdhry@ti.com,
- alpernebiyasak@gmail.com, nm@ti.com, u-boot@lists.denx.de,
- vishalm@ti.com, jonas@kwiboo.se, sughosh.ganu@linaro.org
-Subject: Re: [PATCH v2 2/2] tools: binman: ti_board_cfg: Check for linting
- problems
-Message-ID: <Za-PqGxk6is1ToLc@toolbox>
-References: <20240105113917.1117945-1-n-francis@ti.com>
- <20240105113917.1117945-3-n-francis@ti.com>
- <Za5munT0bYuZ5bio@toolbox>
- <419c31bd-7cd8-4439-b001-adad75184cf9@ti.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=33c1=JB=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1706004981;
+ bh=cCSVYjcwFv/QKrKrZQQw+T+ni4qe0GD2zv63emHCzcs=;
+ b=RUBSpA90W04XrXxQCH+k/xFJ4YWMsgr6tqpSTdNlJAjGyhnnOYfcPL3uPLd1zthi+L0XW7HXb
+ 8emBEu/EXx/CCS69N+yn82k2THc/lZQqgThNNuL0wzIDbFkl7pJxMCFbzY4yOJFKOjehBuyA+vI
+ Ns3uO+5n8liEyi4AWF8i7QFBwc7Vc6E3W8DK+Cg3AWE4w56OBLgsyGSj61m7z/piP3boKdaumWp
+ 437im/d1U/DizyE9cvTnPEfysV/xR6VlMmcbFaugKQeipryKpZJc1n/NatTGVQN8Dzb4naWdMfx
+ PNPram93H9dVXzG9cGEBjLljwcIg1NbXpTpXWs/ReWxg==
+Message-ID: <358939ff-0379-40ec-875e-80f608a21c40@kwiboo.se>
+Date: Tue, 23 Jan 2024 11:16:17 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <419c31bd-7cd8-4439-b001-adad75184cf9@ti.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] rockchip: spl: Enable caches to speed up checksum
+ validation
+To: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, u-boot@lists.denx.de
+References: <20240122181631.2383743-1-jonas@kwiboo.se>
+ <3c5babfa-6ce3-4629-8694-692bda20b3e5@rock-chips.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <3c5babfa-6ce3-4629-8694-692bda20b3e5@rock-chips.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 65af91f547ae9d353e475bd8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,47 +74,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jan 22, 2024 at 03:11:35PM -0600, Ryan Eatmon wrote:
-> 
-> 
-> On 1/22/2024 6:59 AM, Max Krummenacher wrote:
-> > Hi
-> > 
-> > On Fri, Jan 05, 2024 at 05:09:17PM +0530, Neha Malcom Francis wrote:
-> > > Use yamllint for checking whether YAML configuration files are adhering
-> > > to default yamllint rules.
-> > 
-> > If I understand this correctly this patch now runs checks to verify
-> > that yaml files which are part of the U-Boot source tree are correct.
-> > 
-> > Shouldn't this be done when one commits a yaml file, i.e. in U-Boot CI
-> > rather than repeating the process on every build and thus having an
-> > additional dependency to build U-Boot and additional build time?
-> > 
-> > Note that in openembedded there is currently no python yamllint
-> > recipe providing the used python module in the regularly used layers.
-> > How do you plan to integrate the change in the OE U-Boot recipe?
-> > At least our OE CI of latest master now fails (for a TI AM62 based SoM)
-> > as the python module is missing.
-> 
-> I have submitted a patch to oe-core for this missing recipe.
-> 
-> https://lists.openembedded.org/g/openembedded-core/message/194192
-> 
-> Hopefully they accept it.  Otherwise, we are going to "temporarily" carrying
-> the same recipe in meta-ti-extras until they accept it in oe-core.
+Hi Kever,
 
-Hi Ryan
+On 2024-01-23 03:36, Kever Yang wrote:
+> Hi Jonas,
+> 
+> On 2024/1/23 02:16, Jonas Karlman wrote:
+>> FIT checksum validation is very slow in SPL due to D-cache not being
+>> enabled.
+>>
+>> Enable caches in SPL to speed up FIT checksum validation, from seconds
+>> to milliseconds.
+>>
+>> This change enables caches in SPL on all Rockchip boards, the Kconfig
+>> options SPL_SYS_ICACHE_OFF and SPL_SYS_DCACHE_OFF can be enabled to
+>> disable caches for a specific board or SoC if needed.
+> It should invalidate cache before go to next stage, but the U-Boot 
+> proper and SPL
+> are using different memory area and U-Boot calls cleanup_before_linux() 
+> at last,
+> this patch should be safe in current code structure.
 
-Thanks for looking into it.
-Max
+Thanks for input, since the commit 6826c432e351 ("spl: Jump to image at
+end of board_init_r") the spl_board_prepare_for_boot() will be called
+before next stage after SPL regardless of TF-A, OPTEE, linux or U-Boot
+proper.
+
+Sounds like I should add something like the following in v3, after some
+re-testing to ensure all caches are disabled before next stage.
+
+void spl_board_prepare_for_boot(void)
+{
+	cleanup_before_linux();
+}
+
+Regards,
+Jonas
+
 > 
+> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 > 
-> > Regards
-> > Max
-> > 
+> Thanks,
+> - Kever
 > 
-> -- 
-> Ryan Eatmon                reatmon@ti.com
-> -----------------------------------------
-> Texas Instruments, Inc.  -  LCPD  -  MGTS
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>> Changes in v2:
+>> - None
+>>
+>> This has been tested on multiple RK3288, RK3328, RK3399, RK356x and
+>> RK3588 boards without any issues, vendor U-Boot also enables caches in
+>> SPL for all SoCs.
+>>
+>> Link to RFC: https://patchwork.ozlabs.org/patch/1802303/
+>> ---
+>>   arch/arm/mach-rockchip/spl.c | 4 ++++
+>>   1 file changed, 4 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
+>> index 87280e2ba7cc..e29c841100c8 100644
+>> --- a/arch/arm/mach-rockchip/spl.c
+>> +++ b/arch/arm/mach-rockchip/spl.c
+>> @@ -136,6 +136,10 @@ void board_init_f(ulong dummy)
+>>   	}
+>>   	gd->ram_top = gd->ram_base + get_effective_memsize();
+>>   	gd->ram_top = board_get_usable_ram_top(gd->ram_size);
+>> +	gd->relocaddr = gd->ram_top;
+>> +
+>> +	arch_reserve_mmu();
+>> +	enable_caches();
+>>   #endif
+>>   	preloader_console_init();
+>>   }
+
