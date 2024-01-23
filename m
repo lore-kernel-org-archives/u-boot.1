@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92687C47258
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 14:54:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEE35C47DDB
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 14:54:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0260D87D3E;
-	Tue, 23 Jan 2024 15:51:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C83D987D5E;
+	Tue, 23 Jan 2024 15:51:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AbNWhqyK";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AS4P4EkM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 488C787D51; Tue, 23 Jan 2024 15:51:21 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id EC27987D52; Tue, 23 Jan 2024 15:51:53 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9914087D49
- for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 15:51:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C55187D79
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 15:51:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40NEp7C4018639;
- Tue, 23 Jan 2024 08:51:07 -0600
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40NEpc4g066604;
+ Tue, 23 Jan 2024 08:51:38 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1706021467;
- bh=p6mYxuiie7XImkTFkkPZWeLtL6cSf6+/Z2wFUZ44i78=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=AbNWhqyKLKhPJ8nUMapaTGI5VqnlRWoQHaX+kEZrXBFJKiqq4usIWAH+JWOwDEljJ
- cHlIRNombi70B4rfPIE1siLr9p2rdgFiQwx7OGN9kkt8NjItdbub1wlFVJMxLyMOuy
- cgWfTfljG+XZGq8M1mDR7wkgAObz0fQW6XM/2MZU=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40NEp7mx015693
+ s=ti-com-17Q1; t=1706021498;
+ bh=na6oqgW8j0ipcuqweLYRFsB+P/GuLQ8piZYrH4/rESQ=;
+ h=Date:Subject:To:References:From:In-Reply-To;
+ b=AS4P4EkMtZjkT5oM7BckMEdfKdZ62WLdTQBLlcxWGH5PFVXxFzE7Kqj/CMKOZp6g+
+ +ZskpwzleZ3o+UnnHXRp88SJPD6plux58KqGddTSNqvxM/Tmtt4mmixnHTHXRLTnXB
+ jFjDgZiHUVwLApGOBHmLDwGPKWZI7L17UGven8po=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40NEpcWG011238
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 23 Jan 2024 08:51:07 -0600
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 23 Jan 2024 08:51:38 -0600
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 23
- Jan 2024 08:51:06 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 08:51:37 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 23 Jan 2024 08:51:06 -0600
+ Frontend Transport; Tue, 23 Jan 2024 08:51:37 -0600
 Received: from [10.24.68.115] (ti.dhcp.ti.com [10.24.68.115] (may be forged))
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40NEp0nh118897; 
- Tue, 23 Jan 2024 08:51:01 -0600
-Message-ID: <c5fd33d8-a1be-41e0-974e-7b4c5f80b318@ti.com>
-Date: Tue, 23 Jan 2024 20:21:00 +0530
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40NEp0ni118897; 
+ Tue, 23 Jan 2024 08:51:32 -0600
+Message-ID: <41b7c330-97db-4f6a-9b99-ebfcba2219d8@ti.com>
+Date: Tue, 23 Jan 2024 20:21:31 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 02/16] arm: mach-k3: Add basic support for J784S4 SoC
- definition
+Subject: Re: [PATCH v8 08/16] drivers: dma: Add support for J784S4 SoC
 Content-Language: en-US
-To: Nishanth Menon <nm@ti.com>
-CC: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean
- Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Neha
- Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Andrew
- Davis <afd@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya
- <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Aradhya Bhatia
- <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>, Christian Gmeiner
- <christian.gmeiner@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Roger Quadros
- <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>, Ralph Siemsen
- <ralph.siemsen@linaro.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>,
- Sinthu Raja M <sinthu.raja@mistralsolutions.com>,
- Udit Kumar <u-kumar1@ti.com>
+To: Roger Quadros <rogerq@kernel.org>, Hari Nagalla <hnagalla@ti.com>, Lukasz
+ Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>,
+ Aradhya Bhatia <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>, Nishanth Menon
+ <nm@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Marcel Ziswiler
+ <marcel.ziswiler@toradex.com>, Jayesh Choudhary <j-choudhary@ti.com>, Ralph
+ Siemsen <ralph.siemsen@linaro.org>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
+ <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
 References: <20240119175043.3904751-1-a-nandan@ti.com>
- <20240119175043.3904751-3-a-nandan@ti.com>
- <20240119193403.kgzt2zcxa55wexr3@skedaddle>
+ <20240119175043.3904751-9-a-nandan@ti.com>
+ <67277138-b421-4823-9e64-222c114f8296@kernel.org>
 From: Apurva Nandan <a-nandan@ti.com>
-In-Reply-To: <20240119193403.kgzt2zcxa55wexr3@skedaddle>
+In-Reply-To: <67277138-b421-4823-9e64-222c114f8296@kernel.org>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -95,127 +94,295 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 20/01/24 01:04, Nishanth Menon wrote:
-> On 23:20-20240119, Apurva Nandan wrote:
+On 22/01/24 18:17, Roger Quadros wrote:
 >
-> [...]
->
->> +void k3_spl_init(void)
->> +{
->> +	struct udevice *dev;
->> +	int ret;
+> On 19/01/2024 19:50, Apurva Nandan wrote:
+>> Add support for DMA in J784S4 SoC.
+>>
+>> Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
+>> Signed-off-by: Hari Nagalla <hnagalla@ti.com>
+>> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
+>> Reviewed-by: Nishanth Menon <nm@ti.com>
+>> ---
+>>   drivers/dma/ti/Makefile               |   1 +
+>>   drivers/dma/ti/k3-psil-j784s4.c       | 166 ++++++++++++++++++++++++++
+>>   drivers/dma/ti/k3-psil-priv.h         |   1 +
+>>   drivers/dma/ti/k3-psil.c              |   2 +
+>>   drivers/firmware/ti_sci_static_data.h |  34 ++++++
+>>   drivers/ram/Kconfig                   |   2 +-
+>>   6 files changed, 205 insertions(+), 1 deletion(-)
+>>   create mode 100644 drivers/dma/ti/k3-psil-j784s4.c
+>>
+>> diff --git a/drivers/dma/ti/Makefile b/drivers/dma/ti/Makefile
+>> index f4e0271efb..9e0b13e8c0 100644
+>> --- a/drivers/dma/ti/Makefile
+>> +++ b/drivers/dma/ti/Makefile
+>> @@ -9,3 +9,4 @@ k3-psil-data-$(CONFIG_SOC_K3_J721S2) += k3-psil-j721s2.o
+>>   k3-psil-data-$(CONFIG_SOC_K3_AM642) += k3-psil-am64.o
+>>   k3-psil-data-$(CONFIG_SOC_K3_AM625) += k3-psil-am62.o
+>>   k3-psil-data-$(CONFIG_SOC_K3_AM62A7) += k3-psil-am62a.o
+>> +k3-psil-data-$(CONFIG_SOC_K3_J784S4) += k3-psil-j784s4.o
+>> diff --git a/drivers/dma/ti/k3-psil-j784s4.c b/drivers/dma/ti/k3-psil-j784s4.c
+>> new file mode 100644
+>> index 0000000000..7f06a1f307
+>> --- /dev/null
+>> +++ b/drivers/dma/ti/k3-psil-j784s4.c
+>> @@ -0,0 +1,166 @@
+>> +// SPDX-License-Identifier: GPL-2.0-or-later
+>> +/*
+>> + *  Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com
+>> + */
+>> +#include <linux/kernel.h>
 >> +
->> +	/*
->> +	 * Cannot delay this further as there is a chance that
->> +	 * K3_BOOT_PARAM_TABLE_INDEX can be over written by SPL MALLOC section.
->> +	 */
->> +	store_boot_info_from_rom();
+>> +#include "k3-psil-priv.h"
 >> +
->> +	/* Make all control module registers accessible */
->> +	ctrl_mmr_unlock();
->> +
->> +	if (IS_ENABLED(CONFIG_CPU_V7R)) {
->> +		disable_linefill_optimization();
->> +		setup_k3_mpu_regions();
+>> +#define PSIL_PDMA_XY_TR(x)				\
+>> +	{						\
+>> +		.thread_id = x,				\
+>> +		.ep_config = {				\
+>> +			.ep_type = PSIL_EP_PDMA_XY,	\
+>> +		},					\
 >> +	}
 >> +
->> +	/* Init DM early */
->> +	ret = spl_early_init();
->> +
->> +	/* Prepare console output */
->> +	preloader_console_init();
->> +
->> +	if (IS_ENABLED(CONFIG_CPU_V7R)) {
->> +		/*
->> +		 * Process pinctrl for the serial0 a.k.a. WKUP_UART0 module and continue
->> +		 * regardless of the result of pinctrl. Do this without probing the
->> +		 * device, but instead by searching the device that would request the
->> +		 * given sequence number if probed. The UART will be used by the system
->> +		 * firmware (SYSFW) image for various purposes and SYSFW depends on us
-> Nit pick - there is no SYSFW image anymore - it is either TIFS or DM.
->
->> +		 * to initialize its pin settings.
->> +		 */
->> +		ret = uclass_find_device_by_seq(UCLASS_SERIAL, 0, &dev);
->> +		if (!ret)
->> +			pinctrl_select_state(dev, "default");
->> +
->> +		/*
->> +		 * Load, start up, and configure system controller firmware. Provide
->> +		 * the U-Boot console init function to the SYSFW post-PM configuration
->> +		 * callback hook, effectively switching on (or over) the console
->> +		 * output.
->> +		 */
->> +		k3_sysfw_loader(is_rom_loaded_sysfw(&bootdata), NULL, NULL);
->> +
->> +		if (IS_ENABLED(CONFIG_SPL_CLK_K3)) {
->> +			/*
->> +			 * Force probe of clk_k3 driver here to ensure basic default clock
->> +			 * configuration is always done for enabling PM services.
->> +			 */
->> +			ret = uclass_get_device_by_driver(UCLASS_CLK,
->> +							  DM_DRIVER_GET(ti_clk),
->> +							  &dev);
->> +			if (ret)
->> +				panic("Failed to initialize clk-k3!\n");
->> +		}
->> +
->> +		remove_fwl_configs(cbass_hc_cfg0_fwls, ARRAY_SIZE(cbass_hc_cfg0_fwls));
->> +		remove_fwl_configs(cbass_hc2_fwls, ARRAY_SIZE(cbass_hc2_fwls));
->> +		remove_fwl_configs(cbass_rc_cfg0_fwls, ARRAY_SIZE(cbass_rc_cfg0_fwls));
->> +		remove_fwl_configs(infra_cbass0_fwls, ARRAY_SIZE(infra_cbass0_fwls));
->> +		remove_fwl_configs(mcu_cbass0_fwls, ARRAY_SIZE(mcu_cbass0_fwls));
->> +		remove_fwl_configs(wkup_cbass0_fwls, ARRAY_SIZE(wkup_cbass0_fwls));
->> +		remove_fwl_configs(navss_cbass0_fwls, ARRAY_SIZE(navss_cbass0_fwls));
+>> +#define PSIL_PDMA_XY_PKT(x)				\
+>> +	{						\
+>> +		.thread_id = x,				\
+>> +		.ep_config = {				\
+>> +			.ep_type = PSIL_EP_PDMA_XY,	\
+>> +			.pkt_mode = 1,			\
+>> +		},					\
 >> +	}
 >> +
->> +	/* Output System Firmware version info */
->> +	k3_sysfw_print_ver();
->> +}
+>> +#define PSIL_PDMA_MCASP(x)				\
+>> +	{						\
+>> +		.thread_id = x,				\
+>> +		.ep_config = {				\
+>> +			.ep_type = PSIL_EP_PDMA_XY,	\
+>> +			.pdma_acc32 = 1,		\
+>> +			.pdma_burst = 1,		\
+>> +		},					\
+>> +	}
 >> +
->> +void k3_mem_init(void)
->> +{
->> +	struct udevice *dev;
->> +	int ret, ctr = 1;
+>> +#define PSIL_ETHERNET(x)				\
+>> +	{						\
+>> +		.thread_id = x,				\
+>> +		.ep_config = {				\
+>> +			.ep_type = PSIL_EP_NATIVE,	\
+>> +			.pkt_mode = 1,			\
+>> +			.needs_epib = 1,		\
+>> +			.psd_size = 16,			\
+>> +		},					\
+>> +	}
 >> +
->> +	if (IS_ENABLED(CONFIG_K3_J721E_DDRSS)) {
->> +		ret = uclass_get_device(UCLASS_RAM, 0, &dev);
->> +		if (ret)
->> +			panic("DRAM 0 init failed: %d\n", ret);
+>> +#define PSIL_SA2UL(x, tx)				\
+>> +	{						\
+>> +		.thread_id = x,				\
+>> +		.ep_config = {				\
+>> +			.ep_type = PSIL_EP_NATIVE,	\
+>> +			.pkt_mode = 1,			\
+>> +			.needs_epib = 1,		\
+>> +			.psd_size = 64,			\
+>> +			.notdpkt = tx,			\
+>> +		},					\
+>> +	}
 >> +
->> +		while (dev) {
-> why loop on dev? is it possible to have ret != 0 and dev = 0?
+>> +/* PSI-L source thread IDs, used for RX (DMA_DEV_TO_MEM) */
+>> +static struct psil_ep j784s4_src_ep_map[] = {
+>> +	/* PDMA_MCASP - McASP0-4 */
+>> +	PSIL_PDMA_MCASP(0x4400),
+>> +	PSIL_PDMA_MCASP(0x4401),
+>> +	PSIL_PDMA_MCASP(0x4402),
+>> +	PSIL_PDMA_MCASP(0x4403),
+>> +	PSIL_PDMA_MCASP(0x4404),
+>> +	/* PDMA_SPI_G0 - SPI0-3 */
+>> +	PSIL_PDMA_XY_PKT(0x4600),
+>> +	PSIL_PDMA_XY_PKT(0x4601),
+>> +	PSIL_PDMA_XY_PKT(0x4602),
+>> +	PSIL_PDMA_XY_PKT(0x4603),
+>> +	PSIL_PDMA_XY_PKT(0x4604),
+>> +	PSIL_PDMA_XY_PKT(0x4605),
+>> +	PSIL_PDMA_XY_PKT(0x4606),
+>> +	PSIL_PDMA_XY_PKT(0x4607),
+>> +	PSIL_PDMA_XY_PKT(0x4608),
+>> +	PSIL_PDMA_XY_PKT(0x4609),
+>> +	PSIL_PDMA_XY_PKT(0x460a),
+>> +	PSIL_PDMA_XY_PKT(0x460b),
+>> +	PSIL_PDMA_XY_PKT(0x460c),
+>> +	PSIL_PDMA_XY_PKT(0x460d),
+>> +	PSIL_PDMA_XY_PKT(0x460e),
+>> +	PSIL_PDMA_XY_PKT(0x460f),
+>> +	/* PDMA_SPI_G1 - SPI4-7 */
+>> +	PSIL_PDMA_XY_PKT(0x4610),
+>> +	PSIL_PDMA_XY_PKT(0x4611),
+>> +	PSIL_PDMA_XY_PKT(0x4612),
+>> +	PSIL_PDMA_XY_PKT(0x4613),
+>> +	PSIL_PDMA_XY_PKT(0x4614),
+>> +	PSIL_PDMA_XY_PKT(0x4615),
+>> +	PSIL_PDMA_XY_PKT(0x4616),
+>> +	PSIL_PDMA_XY_PKT(0x4617),
+>> +	PSIL_PDMA_XY_PKT(0x4618),
+>> +	PSIL_PDMA_XY_PKT(0x4619),
+>> +	PSIL_PDMA_XY_PKT(0x461a),
+>> +	PSIL_PDMA_XY_PKT(0x461b),
+>> +	PSIL_PDMA_XY_PKT(0x461c),
+>> +	PSIL_PDMA_XY_PKT(0x461d),
+>> +	PSIL_PDMA_XY_PKT(0x461e),
+>> +	PSIL_PDMA_XY_PKT(0x461f),
+>> +	/* PDMA_USART_G0 - UART0-1 */
+>> +	PSIL_PDMA_XY_PKT(0x4700),
+>> +	PSIL_PDMA_XY_PKT(0x4701),
+>> +	/* PDMA_USART_G1 - UART2-3 */
+>> +	PSIL_PDMA_XY_PKT(0x4702),
+>> +	PSIL_PDMA_XY_PKT(0x4703),
+>> +	/* PDMA_USART_G2 - UART4-9 */
+>> +	PSIL_PDMA_XY_PKT(0x4704),
+>> +	PSIL_PDMA_XY_PKT(0x4705),
+>> +	PSIL_PDMA_XY_PKT(0x4706),
+>> +	PSIL_PDMA_XY_PKT(0x4707),
+>> +	PSIL_PDMA_XY_PKT(0x4708),
+>> +	PSIL_PDMA_XY_PKT(0x4709),
+>> +	/* CPSW0 */
+>> +	PSIL_ETHERNET(0x7000),
+>> +	/* MCU_PDMA0 (MCU_PDMA_MISC_G0) - SPI0 */
+>> +	PSIL_PDMA_XY_PKT(0x7100),
+>> +	PSIL_PDMA_XY_PKT(0x7101),
+>> +	PSIL_PDMA_XY_PKT(0x7102),
+>> +	PSIL_PDMA_XY_PKT(0x7103),
+>> +	/* MCU_PDMA1 (MCU_PDMA_MISC_G1) - SPI1-2 */
+>> +	PSIL_PDMA_XY_PKT(0x7200),
+>> +	PSIL_PDMA_XY_PKT(0x7201),
+>> +	PSIL_PDMA_XY_PKT(0x7202),
+>> +	PSIL_PDMA_XY_PKT(0x7203),
+>> +	PSIL_PDMA_XY_PKT(0x7204),
+>> +	PSIL_PDMA_XY_PKT(0x7205),
+>> +	PSIL_PDMA_XY_PKT(0x7206),
+>> +	PSIL_PDMA_XY_PKT(0x7207),
+>> +	/* MCU_PDMA2 (MCU_PDMA_MISC_G2) - UART0 */
+>> +	PSIL_PDMA_XY_PKT(0x7300),
+>> +	/* MCU_PDMA_ADC - ADC0-1 */
+>> +	PSIL_PDMA_XY_TR(0x7400),
+>> +	PSIL_PDMA_XY_TR(0x7401),
+>> +	PSIL_PDMA_XY_TR(0x7402),
+>> +	PSIL_PDMA_XY_TR(0x7403),
+>> +	/* SA2UL */
+>> +	PSIL_SA2UL(0x7500, 0),
+>> +	PSIL_SA2UL(0x7501, 0),
+>> +	PSIL_SA2UL(0x7502, 0),
+>> +	PSIL_SA2UL(0x7503, 0),
+>> +};
+>> +
+>> +/* PSI-L destination thread IDs, used for TX (DMA_MEM_TO_DEV) */
+>> +static struct psil_ep j784s4_dst_ep_map[] = {
+>> +	/* CPSW0 */
+>> +	PSIL_ETHERNET(0xf000),
+>> +	PSIL_ETHERNET(0xf001),
+>> +	PSIL_ETHERNET(0xf002),
+>> +	PSIL_ETHERNET(0xf003),
+>> +	PSIL_ETHERNET(0xf004),
+>> +	PSIL_ETHERNET(0xf005),
+>> +	PSIL_ETHERNET(0xf006),
+>> +	PSIL_ETHERNET(0xf007),
+>> +	/* SA2UL */
+>> +	PSIL_SA2UL(0xf500, 1),
+>> +	PSIL_SA2UL(0xf501, 1),
+>> +};
+>> +
+>> +struct psil_ep_map j784s4_ep_map = {
+>> +	.name = "j784s4",
+>> +	.src = j784s4_src_ep_map,
+>> +	.src_count = ARRAY_SIZE(j784s4_src_ep_map),
+>> +	.dst = j784s4_dst_ep_map,
+>> +	.dst_count = ARRAY_SIZE(j784s4_dst_ep_map),
+>> +};
+>> diff --git a/drivers/dma/ti/k3-psil-priv.h b/drivers/dma/ti/k3-psil-priv.h
+>> index 83f873b84c..02ea1e9ed3 100644
+>> --- a/drivers/dma/ti/k3-psil-priv.h
+>> +++ b/drivers/dma/ti/k3-psil-priv.h
+>> @@ -43,5 +43,6 @@ extern struct psil_ep_map j721s2_ep_map;
+>>   extern struct psil_ep_map am64_ep_map;
+>>   extern struct psil_ep_map am62_ep_map;
+>>   extern struct psil_ep_map am62a_ep_map;
+>> +extern struct psil_ep_map j784s4_ep_map;
+>>   
+>>   #endif /* K3_PSIL_PRIV_H_ */
+>> diff --git a/drivers/dma/ti/k3-psil.c b/drivers/dma/ti/k3-psil.c
+>> index d4d4fede8f..d21ef193e8 100644
+>> --- a/drivers/dma/ti/k3-psil.c
+>> +++ b/drivers/dma/ti/k3-psil.c
+>> @@ -28,6 +28,8 @@ struct psil_endpoint_config *psil_get_ep_config(u32 thread_id)
+>>   			soc_ep_map = &am62_ep_map;
+>>   		else if (IS_ENABLED(CONFIG_SOC_K3_AM62A7))
+>>   			soc_ep_map = &am62a_ep_map;
+>> +		else if (IS_ENABLED(CONFIG_SOC_K3_J784S4))
+>> +			soc_ep_map = &j784s4_ep_map;
+>>   	}
+>>   
+>>   	if (thread_id & K3_PSIL_DST_THREAD_ID_OFFSET && soc_ep_map->dst) {
+>> diff --git a/drivers/firmware/ti_sci_static_data.h b/drivers/firmware/ti_sci_static_data.h
+>> index 567ce8911a..789f0c6b2d 100644
+>> --- a/drivers/firmware/ti_sci_static_data.h
+>> +++ b/drivers/firmware/ti_sci_static_data.h
+>> @@ -97,6 +97,40 @@ static struct ti_sci_resource_static_data rm_static_data[] = {
+>>   };
+>>   #endif /* CONFIG_SOC_K3_AM625 || CONFIG_SOC_K3_AM62A7 */
+>>   
+>> +#if IS_ENABLED(CONFIG_SOC_K3_J784S4)
+>> +static struct ti_sci_resource_static_data rm_static_data[] = {
+>> +	/* Free rings */
+>> +	{
+>> +		.dev_id = 328,
+>> +		.subtype = 1,
+>> +		.range_start = 208,
+>> +		.range_num = 32,
+>> +	},
+>> +	/* TX channels */
+>> +	{
+>> +		.dev_id = 329,
+>> +		.subtype = 13,
+>> +		.range_start = 40,
+>> +		.range_num = 3,
+>> +	},
+>> +	/* RX channels */
+>> +	{
+>> +		.dev_id = 329,
+>> +		.subtype = 10,
+>> +		.range_start = 40,
+>> +		.range_num = 3,
+>> +	},
+>> +	/* RX Free flows */
+>> +	{
+>> +		.dev_id = 329,
+>> +		.subtype = 0,
+>> +		.range_start = 84,
+>> +		.range_num = 8,
+>> +	},
+>> +	{ },
+>> +};
+>> +#endif /* CONFIG_SOC_K3_J784S4 */
+>> +
+>>   #else
+>>   static struct ti_sci_resource_static_data rm_static_data[] = {
+>>   	{ },
+>> diff --git a/drivers/ram/Kconfig b/drivers/ram/Kconfig
+>> index 5b07e92030..8e9e53cbb0 100644
+>> --- a/drivers/ram/Kconfig
+>> +++ b/drivers/ram/Kconfig
+>> @@ -62,7 +62,7 @@ choice
+>>   	depends on K3_DDRSS
+>>   	prompt "K3 DDRSS Arch Support"
+>>   
+>> -	default K3_J721E_DDRSS if SOC_K3_J721E || SOC_K3_J721S2
+>> +	default K3_J721E_DDRSS if SOC_K3_J721E || SOC_K3_J721S2 || SOC_K3_J784S4
+> Should DDR support patch be independent of DMA support?
 >
-Some variable needs to be used for loop condition, do you want it to be ret?
-or maybe you can suggest your idea for this please.
->> +			ret = uclass_next_device_err(&dev);
->> +			if (ret) {
->> +				printf("Initialized %d DRAM controllers\n", ctr);
->> +				break;
->> +			}
->> +			ctr++;
-> What is the use of ctr++ ?? please do a limit check for instances.
-This is to keep the logic independent of board evm, so that no include 
-of EVM config is needed.
-ctr is just used to notify user about how many DDR are up during boot, 
-else it is not needed.
-
-I can remove the ctr and printf, if you want.
-
-For a limit check, how can we get number of DDR instances on the EVM, I 
-don't know, can you please suggest some way?
-
-There is no config that stores this info afaik.
-
+> This change should have gone in patch 2 "arm: mach-k3: Add basic support for J784S4 SoC definition"
+Will fix.
+>>   	default K3_AM64_DDRSS if SOC_K3_AM642
+>>   	default K3_AM64_DDRSS if SOC_K3_AM625
+>>   	default K3_AM62A_DDRSS if SOC_K3_AM62A7
 >
-> [...]
+> Reviewed-by: Roger Quadros <rogerq@kernel.org>
 >
-> Next time, please respond to the review comment questions so that I
-> know that you have considered and decided something is not necessary
-> or something was missed in the new version - for example what happened
-> to mmc_stop/restart?
-mmc_stop/restart were removed (mentioned in series changelog)
-
 -- 
 Regards,
 Apurva Nandan,
