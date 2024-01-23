@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8671C47258
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 17:19:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2C86C47DDB
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 17:19:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B764C87DAD;
-	Tue, 23 Jan 2024 18:17:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AF35387D33;
+	Tue, 23 Jan 2024 18:17:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BB8c8H6g";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XNyS5Fi3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB70687D29; Tue, 23 Jan 2024 18:17:20 +0100 (CET)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id 8032087D4B; Tue, 23 Jan 2024 18:17:22 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77C8087D9B
- for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 18:17:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 02AFB87D6B
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 18:17:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2cf0390eddbso21745161fa.3
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a309c0a5593so160557766b.1
  for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 09:17:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20230601; t=1706030232; x=1706635032; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dBqxs24A75qIySiG5LZS+FbS3OjiLjbjCzMo+fZTuQs=;
- b=BB8c8H6gQ0F7gfEkRtDKVJBIOfDK5BVfnXYFuDY7+vICNhgiyRYLNBTYkrFioYvOkC
- bQjsWrXl0zkx+iavw+lW0FvbWQtmrnp+sIy7fyQlGQXWVLibxWUufdNqKX3Kb91YLjuZ
- dNUKSCMmC4WG3GMmPN3mW43c4R4tfp5shbwvWX0lxSXYQJ0T61J1n/7n/ELO+LzU0GZ0
- kq/q0DNgEVG4EXuaxgehM3KqTwpf6z7z1CBsMt+sABhczc/hq1fdbNNZuLOxq7MmX3B+
- w1OwNlIQ868QkeBIb3g1XPDysb3sgM4L0nleV/d15fizaaYLsnJcyhbtzdOG9wShDuoT
- 4cqA==
+ bh=Mw8MlDEi4PUQoh2XT7hXXtH4HTnzVaV0XqCBnmzXZJI=;
+ b=XNyS5Fi3USQb5AxHg4uTs22xaRUpF/8fCjE9Gfbov35qplO/W1syy33tKJeqmZnM1y
+ OuxsZwmJFFMP6+u79A6viBGXzzc2oCJ1K5x3EoMAuQAg0u3BOReYZC6L6YSkZC6P4GUJ
+ KtEzBUgj8ZzA+UbtNt1BtQQ0Ir5+PFZ2+Hy0PPPpH5TLwro6R6MwTnRWQAt9zX0gYOW2
+ UVKPcCUesHiYE8PeaMPw/1FEaVbhGdhqMSj6PYmmy4WvC+5SMPiFSlrYYdEhL2llIS7V
+ OCcRlLKkw8WS/0kkH9H5OgZuU0/S8lbZEhCr5oWpEvYbwKg3Bo8UJLcduGcKxpC4EOMQ
+ OBCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1706030232; x=1706635032;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dBqxs24A75qIySiG5LZS+FbS3OjiLjbjCzMo+fZTuQs=;
- b=wYWsfSzMYuT+Gb/9K9cAjuh1rvUTGHQ0RGS3mp/hV9+IMideHuyxq5Y8xLBEGqlaaw
- qUtq59hEqcda+bvIwcItFPQCP54OF+7HwWSCkr7e6XojyVX/M7I3L17eEG0r85+HLwKw
- BOzKWk00XLkACGHbL5fbZRjWaMHVx8GEwjKZqJ/PFBjtpY7Y3YB6j9PuTgI9sskHnsir
- S+BZUzZkLMtjVKQfusQWZBtKhiUNvy9etEHaiiS75mnKPoMRDUTxV4eShsrIEX9J4flV
- JIuw0arD35yZazmYz/nVZt9eP/53mgcbVnIOaSQNXMjh68kyfJww0FR+549t5YL8jAr+
- 6Kuw==
-X-Gm-Message-State: AOJu0Yyytfl0pJ3BVvTj3a6VJo28HbAR1h4HvzY+F0ubw0//x3JPe8/3
- hgbZ4Yi0cCaWdrpKS3VxZ5x+MqPe+yWZgJu6y1eviP1i61kyI7QQP+qpMRFW5I/Csw==
-X-Google-Smtp-Source: AGHT+IGhVFgBbD5QUDcBxQcxb9Ga1Z6wxltbDgqndJn/tTWJwl8zm3LPj+H778Hf+n9FPbFlcdfb1w==
-X-Received: by 2002:a05:651c:81d:b0:2cd:3e51:8d85 with SMTP id
- r29-20020a05651c081d00b002cd3e518d85mr55672ljb.70.1706030231540; 
- Tue, 23 Jan 2024 09:17:11 -0800 (PST)
+ bh=Mw8MlDEi4PUQoh2XT7hXXtH4HTnzVaV0XqCBnmzXZJI=;
+ b=JifyijgWyCozd70eyibAh22RoNjnsg6KC101LJ6S1OEH2aEl00zh+G++jx6UYL71ca
+ W/0gVW1iCVmLp9sNTNfusn0GodVeBQrf+yC/FFAgsepimw47uLhoYd89EFtIWrcVD5eb
+ kxNMg/zNosvTG8LpiviIVrLywsufr5C/qcTdbEXT1sq7uekTfJrNYOw0E6LNTv7WRtzP
+ G6uAtTERc8af1iKyYz2NYWTIkM7lY2MpBRkd0RMedXFz1hytscaTwiPXbL9dt3+02EAJ
+ xQAoMU5khyvbpiCAaBPp60JsNfV2ZbjxrB31Bw0uJfM0S5mwjW6HOePM7HHQ4Z+qx6Ak
+ l7Tw==
+X-Gm-Message-State: AOJu0YzRIAlOgs95+OMFUtWvs8heNa08s1whSAwliYQtDDC3ZR0XkE7r
+ 75KsRWjOuR5uAYs1iNli+GWMqbj008sCkJMFTosCj5VWT7L3rgfA
+X-Google-Smtp-Source: AGHT+IFn09Fiz3fcwDtt2aTIS4cJsqDliTcDkUmwkHrNGPZxnDz8h7/fMFDfhc9VN3dB3jH1c6FJdw==
+X-Received: by 2002:a17:907:b001:b0:a30:33bd:78b6 with SMTP id
+ fu1-20020a170907b00100b00a3033bd78b6mr65992ejc.180.1706030232222; 
+ Tue, 23 Jan 2024 09:17:12 -0800 (PST)
 Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
  m27-20020a1709060d9b00b00a2c7d34157asm14269068eji.180.2024.01.23.09.17.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jan 2024 09:17:11 -0800 (PST)
+ Tue, 23 Jan 2024 09:17:12 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Anatolij Gustschin <agust@denx.de>,
  Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v6 11/18] video: tegra20: dc: clean framebuffer memory block
-Date: Tue, 23 Jan 2024 19:16:26 +0200
-Message-Id: <20240123171633.246057-12-clamor95@gmail.com>
+Subject: [PATCH v6 12/18] video: tegra20: dc: parameterize V- and H-sync
+ polarities
+Date: Tue, 23 Jan 2024 19:16:27 +0200
+Message-Id: <20240123171633.246057-13-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240123171633.246057-1-clamor95@gmail.com>
 References: <20240123171633.246057-1-clamor95@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,39 +92,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jonas Schwöbel <jonasschwoebel@yahoo.de>
+Based on Thierry Reding's Linux commit:
 
-Fill the framebuffer memory with zeros to avoid visual glitches.
+'commit 1716b1891e1de05e2c20ccafa9f58550f3539717
+("drm/tegra: rgb: Parameterize V- and H-sync polarities")'
 
-Signed-off-by: Jonas Schwöbel <jonasschwoebel@yahoo.de>
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/tegra20/tegra-dc.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ arch/arm/include/asm/arch-tegra/dc.h |  5 +++++
+ drivers/video/tegra20/tegra-dc.c     | 22 ++++++++++++++++++++--
+ 2 files changed, 25 insertions(+), 2 deletions(-)
 
+diff --git a/arch/arm/include/asm/arch-tegra/dc.h b/arch/arm/include/asm/arch-tegra/dc.h
+index 6444af2993..ca3718411a 100644
+--- a/arch/arm/include/asm/arch-tegra/dc.h
++++ b/arch/arm/include/asm/arch-tegra/dc.h
+@@ -443,6 +443,11 @@ enum win_color_depth_id {
+ #define	WINDOW_D_SELECT		BIT(7)
+ #define	WINDOW_H_SELECT		BIT(8)
+ 
++/* DC_COM_PIN_OUTPUT_POLARITY1 0x307 */
++#define LHS_OUTPUT_POLARITY_LOW		BIT(30)
++#define LVS_OUTPUT_POLARITY_LOW		BIT(28)
++#define LSC0_OUTPUT_POLARITY_LOW	BIT(24)
++
+ /* DC_DISP_DISP_WIN_OPTIONS 0x402 */
+ #define	CURSOR_ENABLE		BIT(16)
+ #define	SOR_ENABLE		BIT(25)
 diff --git a/drivers/video/tegra20/tegra-dc.c b/drivers/video/tegra20/tegra-dc.c
-index ac6833229a..caeec94468 100644
+index caeec94468..ffa81eeac3 100644
 --- a/drivers/video/tegra20/tegra-dc.c
 +++ b/drivers/video/tegra20/tegra-dc.c
-@@ -4,6 +4,7 @@
-  */
+@@ -220,8 +220,11 @@ static const u32 rgb_sel_tab[PIN_OUTPUT_SEL_COUNT] = {
+ 	0x00020000,
+ };
  
- #include <backlight.h>
-+#include <cpu_func.h>
- #include <dm.h>
- #include <fdtdec.h>
- #include <log.h>
-@@ -398,6 +399,10 @@ static int tegra_lcd_probe(struct udevice *dev)
- 		priv->scdiv = dc_plat->scdiv;
+-static void rgb_enable(struct dc_com_reg *com)
++static void rgb_enable(struct tegra_lcd_priv *priv)
+ {
++	struct dc_com_reg *com = &priv->dc->com;
++	struct display_timing *dt = &priv->timing;
++	u32 value;
+ 	int i;
+ 
+ 	for (i = 0; i < PIN_REG_COUNT; i++) {
+@@ -230,6 +233,21 @@ static void rgb_enable(struct dc_com_reg *com)
+ 		writel(rgb_data_tab[i], &com->pin_output_data[i]);
  	}
  
-+	/* Clean the framebuffer area */
-+	memset((u8 *)plat->base, 0, plat->size);
-+	flush_dcache_all();
++	/* configure H- and V-sync signal polarities */
++	value = readl(&com->pin_output_polarity[1]);
 +
- 	if (tegra_display_probe(priv, (void *)plat->base)) {
- 		debug("%s: Failed to probe display driver\n", __func__);
- 		return -1;
++	if (dt->flags & DISPLAY_FLAGS_HSYNC_LOW)
++		value |= LHS_OUTPUT_POLARITY_LOW;
++	else
++		value &= ~LHS_OUTPUT_POLARITY_LOW;
++
++	if (dt->flags & DISPLAY_FLAGS_VSYNC_LOW)
++		value |= LVS_OUTPUT_POLARITY_LOW;
++	else
++		value &= ~LVS_OUTPUT_POLARITY_LOW;
++
++	writel(value, &com->pin_output_polarity[1]);
++
+ 	for (i = 0; i < PIN_OUTPUT_SEL_COUNT; i++)
+ 		writel(rgb_sel_tab[i], &com->pin_output_sel[i]);
+ }
+@@ -329,7 +347,7 @@ static int tegra_display_probe(struct tegra_lcd_priv *priv,
+ 		basic_init_timer(&priv->dc->disp);
+ 
+ 	if (priv->soc->has_rgb)
+-		rgb_enable(&priv->dc->com);
++		rgb_enable(priv);
+ 
+ 	if (priv->pixel_clock)
+ 		update_display_mode(priv);
 -- 
 2.40.1
 
