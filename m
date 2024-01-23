@@ -4,88 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27264C47258
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 19:21:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF6CAC47258
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 20:39:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F51F87CA1;
-	Tue, 23 Jan 2024 20:21:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=supermicro.com
+	by phobos.denx.de (Postfix) with ESMTP id 8ED6D87BC3;
+	Tue, 23 Jan 2024 21:39:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=supermicro.com header.i=@supermicro.com header.b="S87XTxTf";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ZjBVCnbV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D22F887CAA; Tue, 23 Jan 2024 20:20:29 +0100 (CET)
-Received: from MGA.supermicro.com (mga.supermicro.com [207.212.57.84])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 65C5A87B75; Tue, 23 Jan 2024 21:38:59 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7C5E8746C
- for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 20:20:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=supermicro.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0F60187CAF
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 21:38:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=liuw@supermicro.com
-Received: from pps.filterd (MGA.supermicro.com [127.0.0.1])
- by MGA.supermicro.com (8.17.1.19/8.17.1.19) with ESMTP id 40NEvfjH027367;
- Tue, 23 Jan 2024 11:20:22 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=supermicro.com;
- h=from : to : cc :
- subject : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=DKIM;
- bh=gKg1nKUkKJ0ydezwxx+gVoX3Jet+CCp/cmuTDKH8TEs=;
- b=S87XTxTfCsztc9q0ittdoP+iukcXK4bLnexz83bK71RNvf0EoPLKrsMowPRqsigtm0f1
- NT6uhwFmU/Qrygb1UoT/qJled7YhwEh1jOll9H1ABN2zyrg+HlN1pl7cuFa9AP/p7bXG
- xoKTv7mtg9U7W/8wYHybV9uRVvgSCH6zcl1x7RI1K0mlir6T+XAJ7/75zViwvaWI7H4H
- 4AdOudanIGJCvMK3P2brlel8KZC2+l80AfRjm9FDpLBkcBJ9mslC/K4TvDYQesmiUKUR
- 5532WNaZ2Mkq5NYhenw1sursGaTAZ+DCCVlOIQHPCdvcOjLXQY9/SIGp5MHwgaSLUZQH dg== 
-Received: from ex2013-mbx3.supermicro.com (EX2013-MBX3.supermicro.com
- [10.2.1.46]) by MGA.supermicro.com (PPS) with ESMTPS id 3vrenwv3p9-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
- Tue, 23 Jan 2024 11:20:22 -0800
-Received: from us-ex2019-mbx4.supermicro.com (10.2.6.160) by
- EX2013-MBX3.supermicro.com (10.2.1.46) with Microsoft SMTP Server (TLS) id
- 15.0.1497.42; Tue, 23 Jan 2024 11:20:17 -0800
-Received: from us-ex2019-mbx1.supermicro.com (10.2.6.157) by
- us-ex2019-mbx4.supermicro.com (10.2.6.160) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Tue, 23 Jan 2024 11:20:17 -0800
-Received: from us-ex2019-mbx1.supermicro.com ([fe80::37c2:47e5:2f5d:450f]) by
- us-ex2019-mbx1.supermicro.com ([fe80::37c2:47e5:2f5d:450f%16]) with
- mapi id 15.02.1118.037; Tue, 23 Jan 2024 11:20:17 -0800
-From: Liu Wang <liuw@supermicro.com>
-To: Fabio Estevam <festevam@gmail.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: RE: Could you please help me in resolving the "
- /reset.c:42:(.text.do_reset+0x20): undefined reference to `reset_cpu'?"
-Thread-Topic: Could you please help me in resolving the "
- /reset.c:42:(.text.do_reset+0x20): undefined reference to `reset_cpu'?"
-Thread-Index: AQHaTZ8+mgOmQY3mrU+FK1vlIrAoDrDnNtEAgACLaRA=
-Date: Tue, 23 Jan 2024 19:20:16 +0000
-Message-ID: <169de53f8b31460db561e775657492a3@supermicro.com>
-References: <2dba1330181940c78b5ad47f18ee43fa@supermicro.com>
- <CAOMZO5DTw2uU+uEmVLR9nbFkR4QPgmhuY9VUAz-sgg+GppMG9g@mail.gmail.com>
- <0934648988c9444aaf85f2e3163c0f4b@supermicro.com>
- <CAOMZO5Cy8as7b_cup6J+PYbN-stkj4Vz2wsLB_1=NN3vx5SVWQ@mail.gmail.com>
- <728CCDD9-CEA4-4ED1-9143-189C3F257097@supermicro.com>
- <9c2e7790f0c94b0ebf0e840100eae2c0@supermicro.com>
- <be10a49d2381407fb955958fbc87ecd4@supermicro.com>
- <CAOMZO5D5g6izBC=aCumX_H1tbo5uXTfuhQekSuH_XDqUAN91Kg@mail.gmail.com>
- <8ACC66AF-9761-44E2-A36E-62C8EAADA09C@supermicro.com>
- <509c10723aed4965aceabbd28d36b847@supermicro.com>
- <CAOMZO5DUrxpRAt6Fn7xofHGH7B3ngrkdPm9c0YUd4r-19CB+ng@mail.gmail.com>
-In-Reply-To: <CAOMZO5DUrxpRAt6Fn7xofHGH7B3ngrkdPm9c0YUd4r-19CB+ng@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.2.8.23]
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1706042331; x=1706647131; i=xypron.glpk@gmx.de;
+ bh=f9dD4J4beP1DaRU077zDtxQfkMizU7cj9qUXljbHiOo=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=ZjBVCnbVJZOZRedUQfOSjxiZaH9yEV4y6EPoMqMpbU6Obyi90bai9gSTm5VWXrIu
+ 8RPkZ4lTf5GKlLYWgnzv1N0BGVoYiK470Q4ABtl7jHM6F16bX5x3TvywA9hSzSbuc
+ t0dtPqs3eB+JTVvziFS2kUDD9E4NpFte7KF6M8eqwpsdj8eGROiUyYQ9UmOx4Ukd0
+ 460dU16SsHG10G3qUabMCI7oC81AGL9jYK3a36R+75AluCITEA0+FlDz8Jx8eN5ZP
+ K/R1+X6rAgRgmbJyY+m7tq8r39qmyL8l5SBK88VytnRyoJRHK+11YIF+fCceVUzT4
+ EpnFWGboqO95pzsllw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([178.202.40.247]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MYvcG-1rWpVj0JXc-00UsAK; Tue, 23
+ Jan 2024 21:38:51 +0100
+Message-ID: <d3f3fc7f-b29a-4503-9fe0-97468bbe1f71@gmx.de>
+Date: Tue, 23 Jan 2024 21:38:43 +0100
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-01-23_11,2024-01-23_02,2023-05-22_02
-X-Mailman-Approved-At: Tue, 23 Jan 2024 20:21:55 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] efi_loader : Suppress error print message
+To: "Bhumkar, Tejas Arvind" <tejas.arvind.bhumkar@amd.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "trini@konsulko.com" <trini@konsulko.com>,
+ "sjg@chromium.org" <sjg@chromium.org>, "Simek, Michal"
+ <michal.simek@amd.com>, "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
+ "git@xilinx.com" <git@xilinx.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20240122191242.2989327-1-tejas.arvind.bhumkar@amd.com>
+ <CAC_iWjKEMs_0WHyu7ttfvP30vG=sJnhY5XWY=5hGBTAW_5oxyg@mail.gmail.com>
+ <d2b79924-87bc-42a2-9d06-6fcba06ed267@gmx.de>
+ <BL3PR12MB64505057156F40CDD884FB90D8742@BL3PR12MB6450.namprd12.prod.outlook.com>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <BL3PR12MB64505057156F40CDD884FB90D8742@BL3PR12MB6450.namprd12.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:QmcH2TAS9a2wC3yEk/+Om9bW5EGt63Vq/9+2vd1lw7EGFvjLfpl
+ Uy5IjvJSx6iDGvq7oqal28Ssgsvq1s9kPOvJEV7JuaJwJp09IpuCLVL/iewPvZokgiBeol8
+ /sTzpdKZSvSyLyF0CuhHjXqc4xzNwPAHRBdzw78F/WEcrQT4mBrKs+G/45SwR/t470xOCqj
+ q3loaeksmmI8NXfu0NNEg==
+UI-OutboundReport: notjunk:1;M01:P0:6J2ieXlE6hc=;jJxUvzgSpYAgpSCALSrXbdQ5NA3
+ hYrlRyKZptjxTQHSoCaUgF6HJWz1jNY7/mf9DCjW3siPyVErQ4O0s7aDHuuBVdBaxbGnCDVMK
+ vj1Ll/8m8Bf15DL4tCjvMtMC96jrWfNIdVUprKDG+RU9hHjtI2VpNqEk6rRFvO33CtsihOz3e
+ XtvQTKL7bJvZe6D9RuWWsIcnP2dh14LIXXlkHB845o3OFlx2vyKxknAM07K9VRfu+QiKWqlzI
+ M+UvnDdaPwPzhwUNC46xUDMiVF/vd5YkA8gFkC3iMavmbNcO0XkZyhykPV2EVW42SfSFPCPBn
+ r352VmcrGkXvPG4dN+QS2ypMNB5us+3hmqXFw/L5jyJDzZbM3Jd+5JQ7PnsYSmDBQl3srrSbW
+ eqL6ukK5pMDVOUYY3VzAlp7yXOQcrig02wGy7Xhz3OE5Nqh59VGUVx/FMQIjMinIf8ZZlESvQ
+ fazcipMgOvtj8JGPqAw4kNGqrKliK2NaurSlUpB9VJO31HHLLiX2SY2lm5WbT2IawO2TQFJJn
+ i9aDbOi4KFJZfx89JeaQeab178SmcH4ylPt84CQFTfZsmJ1LveQ4COWnE2BewICo+Iw7FffRF
+ pxE/CgJWLfVhRpCHRT+5mxJPvbAze8i0any4BQT0pttf3DpOe08wLjz2/+kEFkcST7QKEV6KL
+ GauM/CgHp1ZcDTJOaqKMhfQXyahu2eJtzS6y+zBVtawP2wHX86QnDn8Mwk6VcnzXIOKFsKItm
+ xhhv0/ssns71DwvC9E96GjhRfPNxQMwAEs6MWr7mv/mOZMjOLW5CNMT0BX/I2QgR1lxPgibfc
+ odSBI0FyEAUYrQr7cF0wtv0/jGTto3vLgA6bV448haJmx8B4f5tZYJurG+NocqWEbDfrwXoVW
+ BDSSrBM8SDeEfnvuIY8UFOcYXaf1NL3A/ntWLPe5GCvr47tx2Z5u+4Z+CSKgPsmg+PMD1YOhG
+ 9tsjbg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,66 +96,164 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgRmFiaW8sDQoNClRoYW5rIHlvdSBmb3IgeW91ciBoZWxwLg0KDQpBdHRhY2hlZCBpcyB0aGUg
-J2dpdCBzdGF0dXMnIGFuZCAnZ2l0IGxvZycgaW4gbXkgcG9ydGluZyB1LWJvb3QgdG8gbXkgY3Nl
-X3B0am9iX2NiM19yMTAyIGNvbnRyb2wgYm9hcmQgYnkgZm9sbG93aW5nIFJFQURNRSBpbiB1LWJv
-b3QgYW5kIGJlaW5nIGJsb2NrZWQgd2l0aCB0aGUgaHVyZGxlIG9mICAidW5kZWZpbmVkIHJlZmVy
-ZW5jZSB0byBgcmVzZXRfY3B1JyIgaW4gaG9wZSB5b3Ugc3BvdCBzb21ldGhpbmcgZmFtaWxpYXIg
-YW5kIHNoZWQgYSBsaWdodCBpbiBteSBidWlsZGluZyBlZmZvcnQuDQoNClNpbmNlcmVseSwNCkxp
-dSBXYW5nDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KbGl1
-d0BsaXV3LVNZUy1FMTAwLTEyVC1IOn4vRG93bmxvYWRzL3UtYm9vdCQgZ2l0IGxvZw0KY29tbWl0
-IDA1MGFjZWUxMTliMzc1N2ZlZTNiZDEyOGY1NWQ3MjBmZGQ5YmI4OTAgKEhFQUQsIHRhZzogdjIw
-MjAuMTAsIGxpc3QpDQpBdXRob3I6IFRvbSBSaW5pIDx0cmluaUBrb25zdWxrby5jb20+DQpEYXRl
-OiAgIE1vbiBPY3QgNSAxMToxNTozMiAyMDIwIC0wNDAwDQoNCiAgICBQcmVwYXJlIHYyMDIwLjEw
-DQogICAgDQogICAgU2lnbmVkLW9mZi1ieTogVG9tIFJpbmkgPHRyaW5pQGtvbnN1bGtvLmNvbT4N
-Cg0KY29tbWl0IDBmM2UyOTQyYzllMDFiNWRmYzAxZjNkYWJlMGUyZjJhYjhmZDhiODQNCkF1dGhv
-cjogU29lcmVuIE1vY2ggPHNtb2NoQHdlYi5kZT4NCkRhdGU6ICAgVGh1IEF1ZyAyNyAyMTo1Mjo0
-NiAyMDIwICswMjAwDQoNCiAgICBib2FyZDogdGJzMjkxMDogVXNlIHJlY29tbWVuZGVkIGRpc3Ry
-b2Jvb3QgYWRkcmVzc2VzDQogICAgDQogICAgQWNjb3JkaW5nIHRvIGRvYy9SRUFETUUuZGlzdHJv
-IGZkdF9hZGRyIG11c3Qgbm90IGJlIHNldCB3aGVuIERUQiBpcyBub3QNCiAgICBhdmFpbGFibGUg
-ZnJvbSBoYXJkd2FyZS4gU28gcmVtb3ZlIHRoaXMgZW50cnkuDQogICAgDQogICAgVXNlIGFkZHJl
-c3MgMzJNQiBhYm92ZSB0aGUgc3RhcnQgb2YgRFJBTSBmb3Iga2VybmVsX2FkZHJfci4gVGhpcyB3
-YXkNCiAgICB3ZSBsaWtlbHkgY2FuIGF2b2lkIHRoZSBzZWxmLXJlbG9jYXRpb24gb2YgdGhlIGNv
-bXByZXNzZWQga2VybmVsIGltYWdlDQogICAgYmVmb3JlIGl0IGRlY29tcHJlc3NlcyB0byBvZmZz
-ZXQgMHg4MDAwIGZyb20gc3RhcnQgb2YgRFJBTS4NCiAgICANCiAgICBVc2UgYWRkcmVzcyAxMjhN
-QiBhYm92ZSB0aGUgc3RhcnQgb2YgRFJBTSBmb3IgZmR0X2FkZHJfciwgc2luY2UgdGhpcyBpcw0K
-ICAgIHRoZSBtYXhpbXVtIGxvY2F0aW9uIGZvciB0aGUgZW5kIG9mIHRoZSBrZXJuZWwuIFNvIHdl
-IGF2b2lkIG92ZXJ3cml0aW5nDQogICAgdGhlIERUQi4NCiAgICANCiAgICBVc2UgNTEyayBhYm92
-ZSB0aGF0IGZvciByYW1kaXNrX2FkZHJfci4gVGhpcyBzaG91bGQgYmUgZW5vdWdoIGZvciB0aGUN
-CiAgICBEVEIsIHJlc3Qgb2YgRFJBTSBjYW4gYmUgdXNlZCBmb3IgaW5pdHJkLg0KICAgIA0KbGl1
-d0BsaXV3LVNZUy1FMTAwLTEyVC1IOn4vRG93bmxvYWRzL3UtYm9vdCQNCg0KLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0NCmxpdXdAbGl1dy1TWVMtRTEwMC0xMlQtSDp+L0Rvd25sb2Fkcy91LWJvb3QkIGdp
-dCBzdGF0dXMNCkhFQUQgZGV0YWNoZWQgYXQgdjIwMjAuMTANCkNoYW5nZXMgbm90IHN0YWdlZCBm
-b3IgY29tbWl0Og0KICAodXNlICJnaXQgYWRkIDxmaWxlPi4uLiIgdG8gdXBkYXRlIHdoYXQgd2ls
-bCBiZSBjb21taXR0ZWQpDQogICh1c2UgImdpdCByZXN0b3JlIDxmaWxlPi4uLiIgdG8gZGlzY2Fy
-ZCBjaGFuZ2VzIGluIHdvcmtpbmcgZGlyZWN0b3J5KQ0KCW1vZGlmaWVkOiAgIGFyY2gvYXJtL0tj
-b25maWcNCgltb2RpZmllZDogICBhcmNoL2FybS9pbmNsdWRlL2FzbS9hcmNoLWFzcGVlZC9wbGF0
-Zm9ybS5oDQoJbW9kaWZpZWQ6ICAgYXJjaC9hcm0vaW5jbHVkZS9hc20vZ2xvYmFsX2RhdGEuaA0K
-CW1vZGlmaWVkOiAgIGNtZC9ib290bS5jDQoJbW9kaWZpZWQ6ICAgY21kL2kyYy5jDQoJbW9kaWZp
-ZWQ6ICAgY21kL2xvYWQuYw0KCW1vZGlmaWVkOiAgIGNtZC9zb3VyY2UuYw0KCW1vZGlmaWVkOiAg
-IGNvbW1vbi9pbWFnZS5jDQoJbW9kaWZpZWQ6ICAgZnMvZnMuYw0KCW1vZGlmaWVkOiAgIGluY2x1
-ZGUvY29tbWFuZC5oDQoJbW9kaWZpZWQ6ICAgaW5jbHVkZS9uczE2NTUwLmgNCg0KVW50cmFja2Vk
-IGZpbGVzOg0KICAodXNlICJnaXQgYWRkIDxmaWxlPi4uLiIgdG8gaW5jbHVkZSBpbiB3aGF0IHdp
-bGwgYmUgY29tbWl0dGVkKQ0KCWJvYXJkL3N1cGVybWljcm8vDQoJY29uZmlncy9jc2VfcHRqb2Jf
-Y2IzX3IxMDJfZGVmY29uZmlnDQoJaW5jbHVkZS9jb25maWdzL2Nhc3RfY29tbW9uLmgNCglpbmNs
-dWRlL2NvbmZpZ3MvY3NlX3B0am9iX2NiM19yMTAyLmgNCglsaXN0QmluDQoJbG9nMjAyNDAxMTYx
-Nm1ha2VBbGwueW1sDQoJbG9nbWFrZWFsbDIwMjQwMTIyMTgNCgltYWtlbG9nDQoNCm5vIGNoYW5n
-ZXMgYWRkZWQgdG8gY29tbWl0ICh1c2UgImdpdCBhZGQiIGFuZC9vciAiZ2l0IGNvbW1pdCAtYSIp
-DQpsaXV3QGxpdXctU1lTLUUxMDAtMTJULUg6fi9Eb3dubG9hZHMvdS1ib290JA0KDQoNCg0KLS0t
-LS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCkZyb206IEZhYmlvIEVzdGV2YW0gPGZlc3RldmFtQGdt
-YWlsLmNvbT4gDQpTZW50OiBNb25kYXksIEphbnVhcnkgMjIsIDIwMjQgNjo0NCBQTQ0KVG86IExp
-dSBXYW5nIChIVykgPGxpdXdAc3VwZXJtaWNyby5jb20+DQpDYzogdS1ib290QGxpc3RzLmRlbngu
-ZGUNClN1YmplY3Q6IFJlOiBDb3VsZCB5b3UgcGxlYXNlIGhlbHAgbWUgaW4gcmVzb2x2aW5nIHRo
-ZSAiIC9yZXNldC5jOjQyOigudGV4dC5kb19yZXNldCsweDIwKTogdW5kZWZpbmVkIHJlZmVyZW5j
-ZSB0byBgcmVzZXRfY3B1Jz8iDQoNCltDQVVUSU9OOiBFeHRlcm5hbCBNYWlsXQ0KDQpIaSBMaXUg
-V2FuZywNCg0KT24gTW9uLCBKYW4gMjIsIDIwMjQgYXQgMTA6NTXigK9QTSBMaXUgV2FuZyA8bGl1
-d0BzdXBlcm1pY3JvLmNvbT4gd3JvdGU6DQo+DQo+IEhpIEZhYmlvLA0KPg0KPiBDb3VsZCB5b3Ug
-cGxlYXNlIGhlbHAgbWUgaW4gcmVzb2x2aW5nIHRoZSAiIC9yZXNldC5jOjQyOigudGV4dC5kb19y
-ZXNldCsweDIwKTogdW5kZWZpbmVkIHJlZmVyZW5jZSB0byBgcmVzZXRfY3B1Jz8iIGZyb206IHUt
-Ym9vdCRtYWtlIGFsbDoNCg0KTG9va2luZyBhdCB0aGUgZXJyb3JzIGJlbG93LCB0aGVyZSBhcmUg
-c2V2ZXJhbCBlcnJvcnMgYmVzaWRlcyB0aGUgcmVzZXRfY3B1IG9uZS4NCg0KQXMgeW91IGFyZSB1
-c2luZyBhbiBvdXQtb2YtdHJlZSBVLUJvb3QsIHRoZXJlIGlzIG5vdCBtdWNoIHRoZSBVLUJvb3QN
-CmNvbW11bml0eSBjYW4gZG8gdG8gaGVscCB5b3UsIHNvcnJ5Lg0KDQpZb3UgbmVlZCB0byBnZXQg
-YXNzaXN0YW5jZSBmcm9tIHRoZSBVLUJvb3QgcHJvdmlkZXIgdGhhdCB5b3UgYXJlIHVzaW5nLg0K
+On 1/23/24 19:53, Bhumkar, Tejas Arvind wrote:
+> [AMD Official Use Only - General]
+>
+> Hi Ilias & Heinrich,
+>
+>> -----Original Message-----
+>> From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>> Sent: Tuesday, January 23, 2024 3:30 PM
+>> To: Ilias Apalodimas <ilias.apalodimas@linaro.org>; Bhumkar, Tejas Arvi=
+nd
+>> <tejas.arvind.bhumkar@amd.com>
+>> Cc: u-boot@lists.denx.de; xypron.glpk@gmx.de; trini@konsulko.com;
+>> sjg@chromium.org; Simek, Michal <michal.simek@amd.com>; Abbarapu,
+>> Venkatesh <venkatesh.abbarapu@amd.com>; git@xilinx.com
+>> Subject: Re: [PATCH] efi_loader : Suppress error print message
+>>
+>> Caution: This message originated from an External Source. Use proper ca=
+ution
+>> when opening attachments, clicking links, or responding.
+>>
+>>
+>> On 1/23/24 09:33, Ilias Apalodimas wrote:
+>>> Hi Tejas,
+>>>
+>>> On Mon, 22 Jan 2024 at 21:12, Tejas Bhumkar
+>>> <tejas.arvind.bhumkar@amd.com> wrote:
+>>>>
+>>>> Currently, on certain Xilinx platforms, an issue has been identified,
+>>>> manifesting as follows:
+>>
+>> Hello Tejas,
+>>
+>> thank you for bringing forward this issue.
+>>
+>> Which defconfig are you relating to?
+>
+> [Tejas]:
+> Checking with xilinx_zynqmp_virt_defconfig
+>
+>>
+>>>>
+>>>> Starting kernel ...
+>>>>
+>>>> efi_free_pool: illegal free 0x0000000077830040
+>>>> efi_free_pool: illegal free 0x000000007782d040
+>>>> efi_free_pool: illegal free 0x000000007782c040
+>>>>
+>>>> The issue arises when the ramdisk image is relocated, placing it
+>>>> within the previously allocated EFI memory region( as EFI is
+>>>> established quite early in U-Boot).
+>>
+>> Which version of U-Boot are you on? Commit 06d514d77c37 ("lmb: consider=
+ EFI
+>> memory map") was meant to avoid such a situation.
+>
+> [Tejas] :
+> I'm verifying against the latest changes in the master branch. The intro=
+duction of commit 06d514d77c37 ("lmb: consider EFI memory map") has resolv=
+ed the occurrence of the "efi_free_pool: illegal free" error. but, it lead=
+s to a new error, as detailed in the following patch: https://lore.kernel.=
+org/all/20230212150706.2967007-1-sjoerd@collabora.com/
+
+Could you, please, try to reproduce your issues with origin/master as of
+today and provide the full boot log. Please, also provide the output of
+the bdinfo and the printenv command as well as the sizes of the kernel
+and the RAM disk.
+
+Best regards
+
+Heinrich
+
+>
+>>
+>>>
+>>> I don't mind suppressing the print for some time, but out of
+>>> curiosity, how is the ramdisk relocated? LMB should be aware of the
+>>> EFI regions by then, so I assume the relocation code doesn't check
+>>> those?
+>
+>
+> [Tejas] :  I observe that the relocation of the RAM disk is taking place=
+ in the line below.
+> https://github.com/u-boot/u-boot/blob/master/lib/lmb.c#L480-L491
+> Yes, the relocated code specifically examines the LMB region and does no=
+t consider the EFI region.
+>
+>>
+>> The indicated situation is serious. If the EFI sub-system is using the =
+same memory
+>> area as the ramdisk, this may lead to corruption of the ramdisk. Suppre=
+ssing the
+>> messages is by no means adequate to solve the problem.
+>
+> [Tejas] :
+> The challenge arises when relocating the ramdisk image, inserting it int=
+o the previously assigned EFI memory region,
+> established early in U-Boot. Consequently, when attempting to release me=
+mory in the EFI region during the handover
+> process to the kernel in the efi_free_pool function, we first verify if =
+the memory was allocated by efi_allocate_pool().
+> The issue originates from a checksum mismatch because, during the ramdis=
+k relocation, we overwrite memory allocated by EFI.
+> This leads to the appearance of the error message: efi_free_pool: illega=
+l free 0x0000000077830040.
+> Crucially, there is no corruption of the ramdisk seen since we do not ac=
+tually releasing memory due to the checksum mismatch.
+> In our testing, this issue was observed only when the ramdisk size excee=
+ded approximately 24 MB.
+>
+>>
+>> Best regards
+>>
+>> Heinrich
+>>
+>>
+>>>
+>>> Thanks
+>>> /Ilias
+>>>
+>>>> Consequently, when
+>>>> attempting to release memory in the EFI memory region during the
+>>>> handover process to the kernel,we encounter memory violations.
+>>>>
+>>>> Highlighting that EFI remains active primarily during the booting of
+>>>> an EFI application, and the lmb persists while configuring images for
+>>>> the boot process. Since we aren't utilizing the EFI memory region
+>>>> during the boot process, there is no adverse impact even in the event
+>>>> of a violation.
+>>>>
+>>>> Currently, there is an ongoing discussion regarding the handling
+>>>> strategies of three memory allocators: malloc, lmb, and EFI. This
+>>>> discussion is documented in the email chain titled "Proposal: U-Boot
+>>>> memory management."
+>>>>
+>>>> Therefore, it is advisable to suppress the print message during the
+>>>> boot process for now.
+>>>>
+>>>> Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+>>>> ---
+>>>>    lib/efi_loader/efi_memory.c | 2 +-
+>>>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>>>
+>>>> diff --git a/lib/efi_loader/efi_memory.c
+>>>> b/lib/efi_loader/efi_memory.c index edfad2d95a..821fe7616e 100644
+>>>> --- a/lib/efi_loader/efi_memory.c
+>>>> +++ b/lib/efi_loader/efi_memory.c
+>>>> @@ -713,7 +713,7 @@ efi_status_t efi_free_pool(void *buffer)
+>>>>           /* Check that this memory was allocated by efi_allocate_poo=
+l() */
+>>>>           if (((uintptr_t)alloc & EFI_PAGE_MASK) ||
+>>>>               alloc->checksum !=3D checksum(alloc)) {
+>>>> -               printf("%s: illegal free 0x%p\n", __func__, buffer);
+>>>> +               debug("%s: illegal free 0x%p\n", __func__, buffer);
+>>>>                   return EFI_INVALID_PARAMETER;
+>>>>           }
+>>>>           /* Avoid double free */
+>>>> --
+>>>> 2.27.0
+>>>>
+>
+
