@@ -4,57 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4FE0C47258
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 14:42:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BFF7C47258
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 14:43:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4209F87BFD;
-	Tue, 23 Jan 2024 15:42:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E38B787B51;
+	Tue, 23 Jan 2024 15:43:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cOMbUaL6";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="B9bSK3wq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45BDB87D18; Tue, 23 Jan 2024 15:42:30 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 1B82C87D27; Tue, 23 Jan 2024 15:43:09 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DFA95878A5
- for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 15:42:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B91EB87B51
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 15:43:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40NEgGBZ064656;
- Tue, 23 Jan 2024 08:42:16 -0600
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40NEgskx016057;
+ Tue, 23 Jan 2024 08:42:54 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1706020936;
- bh=mplLwIUDC/Mk4zIfdBUG1/hz5TUP+xl8oPQ0opwKwL8=;
+ s=ti-com-17Q1; t=1706020974;
+ bh=ly7MBJI3ehpmo4B4pmaR3oXVO05B0Mou21lF46iXp/o=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=cOMbUaL6vHt8CZpCud5ar+HnJ3v1erDMM6Fr/TmWlfqpoPPt7WULnOvfqPx4o+WoL
- maiCNkm0sOKh4Qtd37bAV9yYeXv8X0IVMIXhC4+Ix02hfWP0fDfZsMrYa6ARl3W0/M
- hbOhUxhcB0AEtLx76aAo+rLckfaTa0nhDmUxyA1U=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40NEgGvZ130735
+ b=B9bSK3wqFOnH1qjiET69YQHaQL2gvbY+SI4AAvJXW574IFPIv6Z22g4nicBzv4WmQ
+ iQJFoWJ7HOf3hEnoPJYyUUDcu3F98hykFPtgowskhkBCKgeF/s03noS2SRf8PPdOIZ
+ LJ8YVditBMaBIMjbgaiFAkRYl80iaYCOefW/9d8g=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40NEgsMF045055
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 23 Jan 2024 08:42:16 -0600
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 23 Jan 2024 08:42:54 -0600
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 23
- Jan 2024 08:42:15 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 08:42:54 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 23 Jan 2024 08:42:15 -0600
+ Frontend Transport; Tue, 23 Jan 2024 08:42:54 -0600
 Received: from [10.24.68.115] (ti.dhcp.ti.com [10.24.68.115] (may be forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40NEdu0i079783; 
- Tue, 23 Jan 2024 08:42:10 -0600
-Message-ID: <2d43b124-2e92-4c0d-9dcf-9d92e18c440f@ti.com>
-Date: Tue, 23 Jan 2024 20:12:09 +0530
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40NEdu0j079783; 
+ Tue, 23 Jan 2024 08:42:48 -0600
+Message-ID: <7ea85460-5fb9-4f4f-a023-32662d1f54fc@ti.com>
+Date: Tue, 23 Jan 2024 20:12:48 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 09/16] board: ti: j784s4: Add board support for J784S4
- EVM
+Subject: Re: [PATCH v8 04/16] arm: dts: Add bootph-all for memory node
 Content-Language: en-US
 To: Nishanth Menon <nm@ti.com>
 CC: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean
@@ -71,10 +70,10 @@ CC: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean
  Sinthu Raja M <sinthu.raja@mistralsolutions.com>,
  Udit Kumar <u-kumar1@ti.com>
 References: <20240119175043.3904751-1-a-nandan@ti.com>
- <20240119175043.3904751-10-a-nandan@ti.com>
- <20240119193913.ter2wn6krowklcr6@relenting>
+ <20240119175043.3904751-5-a-nandan@ti.com>
+ <20240119192545.dybq7b5yy22oar75@observer>
 From: Apurva Nandan <a-nandan@ti.com>
-In-Reply-To: <20240119193913.ter2wn6krowklcr6@relenting>
+In-Reply-To: <20240119192545.dybq7b5yy22oar75@observer>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -94,92 +93,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Nishanth
 
-On 20/01/24 01:09, Nishanth Menon wrote:
+On 20/01/24 00:55, Nishanth Menon wrote:
 > On 23:20-20240119, Apurva Nandan wrote:
->> Add board files for J784S4 EVM.
->>
->> SYS_DISABLE_DCACHE_OPS is selected in the Kconfig because
->> J784S4/AM69 are a coherent architecture at A72 level by
->> MSMC support.
->>
->> Signed-off-by: Hari Nagalla <hnagalla@ti.com>
->> [ add env and board specific yaml files for binman ]
-> Neither of them are part of this patch?
->> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->> [ cleaned up the env files ]
-> no env file in this patch?
-Will fix.
->
->> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
->> Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
->> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
->> Reviewed-by: Tom Rini <trini@konsulko.com>
 > [...]
 >
->> diff --git a/board/ti/j784s4/MAINTAINERS b/board/ti/j784s4/MAINTAINERS
->> new file mode 100644
->> index 0000000000..9e0df11503
->> --- /dev/null
->> +++ b/board/ti/j784s4/MAINTAINERS
->> @@ -0,0 +1,14 @@
->> +J784S4 EVM BOARD
->> +M:	Apurva Nandan <a-nandan@ti.com>
->> +S:	Maintained
->> +F:	board/ti/j784s4
->> +F:	arch/arm/mach-k3/j784s4
->> +F:	include/configs/j784s4_evm.h
->> +F:	arch/arm/dts/k3-j784s4.dtsi
->> +F:	arch/arm/dts/k3-j784s4-main.dtsi
->> +F:	arch/arm/dts/k3-j784s4-mcu-wakeup.dtsi
->> +F:	arch/arm/dts/k3-j784s4-thermal.dtsi
->> +F:	arch/arm/dts/k3-j784s4-evm.dts
->> +
->> +AM69 SK BOARD
-> Don't all entries need a maintainer? I am not actually sure if the above
-> M will fall through for SK board.
-Okay, will add M for AM69 as well.
+>> diff --git a/arch/arm/dts/k3-am69-sk.dts b/arch/arm/dts/k3-am69-sk.dts
+>> index 9868c7049b..29884097b9 100644
+>> --- a/arch/arm/dts/k3-am69-sk.dts
+>> +++ b/arch/arm/dts/k3-am69-sk.dts
+> I think you mis-interpreted
+> https://lore.kernel.org/u-boot/20240103175221.ovjzcwwljnjhka2n@expire/
+> comment to modify kernel board.dts. I meant for you to squash that
+> correct change  to the patch that introduces board-u-boot.dtsi and r5.dts
 >
->> +F:	arch/arm/dts/k3-am69-sk.dts
->> diff --git a/board/ti/j784s4/Makefile b/board/ti/j784s4/Makefile
->> new file mode 100644
->> index 0000000000..60161a8b5c
->> --- /dev/null
->> +++ b/board/ti/j784s4/Makefile
->> @@ -0,0 +1,7 @@
->> +# SPDX-License-Identifier: GPL-2.0-or-later
->> +#
->> +# Copyright (C) 2023-2024 Texas Instruments Incorporated - https://www.ti.com/
->> +#	Hari Nagalla <hnagalla@ti.com>
->> +#
->> +
->> +obj-y += evm.o
->> diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
->> new file mode 100644
->> index 0000000000..5af3e21ff0
->> --- /dev/null
->> +++ b/board/ti/j784s4/evm.c
->> @@ -0,0 +1,43 @@
->> +// SPDX-License-Identifier: GPL-2.0-or-later
->> +/*
->> + * Board specific initialization for J784S4 EVM
->> + *
->> + * Copyright (C) 2023-2024 Texas Instruments Incorporated - https://www.ti.com/
->> + *	Hari Nagalla <hnagalla@ti.com>
->> + *
->> + */
->> +
->> +#include <image.h>
->> +#include <init.h>
->> +#include <spl.h>
->> +#include <stdlib.h>
-> Are you sure we need all the above headers?
-Ok, will cleanup
+> Now that i read my comment, I can see why it might have been
+> mis-interpreted. Sorry about that - please squash your v7 patch
+> instead to appropriate patch.
+Okay, will do.
 >
->> +#include "../common/fdt_ops.h"
-> [...]
->
+>> @@ -33,6 +33,7 @@
+>>   
+>>   	memory@80000000 {
+>>   		device_type = "memory";
+>> +		bootph-all;
+>>   		/* 32G RAM */
+>>   		reg = <0x00 0x80000000 0x00 0x80000000>,
+>>   		      <0x08 0x80000000 0x07 0x80000000>;
+>> diff --git a/arch/arm/dts/k3-j784s4-evm.dts b/arch/arm/dts/k3-j784s4-evm.dts
+>> index f1f4c8634a..662552c872 100644
+>> --- a/arch/arm/dts/k3-j784s4-evm.dts
+>> +++ b/arch/arm/dts/k3-j784s4-evm.dts
+>> @@ -31,6 +31,7 @@
+>>   
+>>   	memory@80000000 {
+>>   		device_type = "memory";
+>> +		bootph-all;
+>>   		/* 32G RAM */
+>>   		reg = <0x00 0x80000000 0x00 0x80000000>,
+>>   		      <0x08 0x80000000 0x07 0x80000000>;
+>> -- 
+>> 2.34.1
+>>
 -- 
 Regards,
 Apurva Nandan,
