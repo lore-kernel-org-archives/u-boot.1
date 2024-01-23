@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA7AAC47258
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 17:20:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04C9EC47DDB
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 17:20:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5449F87DC8;
+	by phobos.denx.de (Postfix) with ESMTP id DC86087E67;
 	Tue, 23 Jan 2024 18:17:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WFAaIqgA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Nr38dw1Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F08387DAE; Tue, 23 Jan 2024 18:17:31 +0100 (CET)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 45A2087D61; Tue, 23 Jan 2024 18:17:32 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF9F687D86
+ by phobos.denx.de (Postfix) with ESMTPS id 5537E87DD6
  for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 18:17:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-55c2c90c67dso2941305a12.1
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a2d7e2e7fe0so777122866b.1
  for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 09:17:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20230601; t=1706030236; x=1706635036; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=A0X0ka47ay529bYddxaRPmhyOVqMPvkiJ3wYymdD15c=;
- b=WFAaIqgAOakRWVwpLuurZQS9xHp1+OEeZtZkTSIzxfd01jhE2BeOr80Xjeb0LuOwsZ
- 1qRqXnUC6eh5M/juEcOFVCPIQfeQ7ix6x0IvG7KuZnapIH3RrCo1fQE9zGGOyb0zl401
- g36zVlpKGed2UEBhL8xVjZIcTQZa6VRQjMYSIDUHvlEpCfehTXUAdSzLrkBwLdeUauJN
- BexSpZpdPUogtR7FygV+PtKGwEOQmXCI1rBxZqECz92/IppY8AcF/jZdf9jxt60MlFlF
- LgZIb1ZzpI1eBkKmPVqQqmoSOCMoR4i0SZHNQcWYUq7Dr5FqFcD13kWRbBY/6ArKiVcg
- h9FA==
+ bh=1i01SyKX8F3P2rsPYsskPptwo3VebpTco09Xd3yBJfk=;
+ b=Nr38dw1QrtIlKyscfCFneop25t5EEgpYYnWPRX7bk9JHaYHBQkcngET+4wMNqnYtTA
+ LD501cwFQR2swc0XVHFutklEJJn/MFbWW6gg39lsBLs+Sg0/oFoNzf0FGLXNkP6AjZXC
+ NfNtkIq5NPvDlyN31SGqmeS2EU/Ec3MglTNij+Z9Pu+hlz3rtqxyTOsNIssPzFMaUcQh
+ ctC6Deahuq3oKOuEVc9eWA3R9Zcj2+Pt1oXh92Zw5YCAR6HThb+usQznVy+3IJvSx+IC
+ qXt2FM1MmVBblrlVEdBl+ctZgQ5t4SJCJuIjzFAI9FW0gWZHTpnglfzleAL5Cfnu3lO8
+ XidA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1706030236; x=1706635036;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=A0X0ka47ay529bYddxaRPmhyOVqMPvkiJ3wYymdD15c=;
- b=nV4ZxMuXXaB/t3LE6250DV1w8AeR9GnMTqRQcIVkQGr/6x4A6PRoMvkHR8jm8NvV/s
- Z46I6AsA7P5AgM8RqH5kK4K1YKfUsuvqyEzpQ3+wcUmUkPwqgWeevnbnDPdW3Wl56P0J
- Z6sa6YSKyt92BkIziqsITWYSZX8OiBPUtN85hyRPsDZ+5bUgRVxU5mxgCDLdESLv3zvp
- 0GidV9tp37wuV1eshXgjNKbfc/HavdVf9EyD47nJwX96AA9Dt9j3bdB57EAeSzJLma4n
- RQM+mHKVJGOkFwqg0/KsXCgt4ZHBbNvb5E/GoESPdil77vVtabIZdrRet+moVhDcRxYt
- xtiQ==
-X-Gm-Message-State: AOJu0YwJZ+uu1bSO0xql+L5Jzu5LRvRgAKaxIhwB+03mHG3xcRSc8nHB
- vEXZPmJql+R1H/VBbmwEQpnUHHPt3Lpu9fmDnHenNVz5PQPp6u7t
-X-Google-Smtp-Source: AGHT+IHXPG37Ic33mmNHKjUrCq/1Ib0cMC7M/7BPw6WPNODUZk6gqIqiczxSZJDO2y8lnXVkneJjHw==
-X-Received: by 2002:a17:907:7b8a:b0:a2f:dc6:afe9 with SMTP id
- ne10-20020a1709077b8a00b00a2f0dc6afe9mr101823ejc.55.1706030236183; 
- Tue, 23 Jan 2024 09:17:16 -0800 (PST)
+ bh=1i01SyKX8F3P2rsPYsskPptwo3VebpTco09Xd3yBJfk=;
+ b=HPEB173Qd5sLTEDiT7eh5TLk/gmQvprkb0iqi1kjRX4+R6xMdxopJ1sAJUwnU+tUqZ
+ hUf4ARsLWYysLF2pXSsUrtO2CDDgraBt1gzFAB87ddFmjp0WAnjJm8YK/w36pbDbHJ0i
+ JRzPmgnZPlKn0V3fEIZK4WkV5QXJwSAWswqkIjKGDKxe4sHuY1aJNBTefifNNpdtdOju
+ KPJ/R6o0BHFJLmNevcSurFUoI5YwQcAHyJrkkmM3gtFu67feJ6wrHw7CUJdt2dBw44Jz
+ bPB+ShykgUVTmxIXwa4lh83ba9GSLVuY0s0aGz38oSiS+Xg5BQ+8dbNB5QLq282ZdXrH
+ czKw==
+X-Gm-Message-State: AOJu0YzuL3jOWGJfPNay8PSSMhAhqvzMtnF7TkeCdgpla/GF/kCAu31Y
+ avslXQyirqGvzjYy2bCE0CHBr070voWtinRHvxKL2x3lxTDIHA2z
+X-Google-Smtp-Source: AGHT+IGrvht2leyn4f5rwR17BMkArfIKNSRhdgS0Zt5lJ5pd+iqzoK6RLO9LhY+iFT3tS1nM0soo9Q==
+X-Received: by 2002:a17:907:8b87:b0:a2d:f6b9:b94c with SMTP id
+ tb7-20020a1709078b8700b00a2df6b9b94cmr131267ejc.20.1706030235594; 
+ Tue, 23 Jan 2024 09:17:15 -0800 (PST)
 Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
- m27-20020a1709060d9b00b00a2c7d34157asm14269068eji.180.2024.01.23.09.17.15
+ m27-20020a1709060d9b00b00a2c7d34157asm14269068eji.180.2024.01.23.09.17.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jan 2024 09:17:16 -0800 (PST)
+ Tue, 23 Jan 2024 09:17:15 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Anatolij Gustschin <agust@denx.de>,
  Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v6 18/18] video: tegra20: dsi: use set_backlight for backlight
- only
-Date: Tue, 23 Jan 2024 19:16:33 +0200
-Message-Id: <20240123171633.246057-19-clamor95@gmail.com>
+Subject: [PATCH v6 17/18] video: tegra20: dsi: set correct fifo depth
+Date: Tue, 23 Jan 2024 19:16:32 +0200
+Message-Id: <20240123171633.246057-18-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240123171633.246057-1-clamor95@gmail.com>
 References: <20240123171633.246057-1-clamor95@gmail.com>
@@ -95,43 +94,34 @@ X-Virus-Status: Clean
 
 From: Jonas Schwöbel <jonasschwoebel@yahoo.de>
 
-Shift the backlight set further to prevent visual glitches on
-panel init.
+According to Thierry Reding's commit in the linux kernel
 
+976cebc35bed0456a42bf96073a26f251d23b264
+"drm/tegra: dsi: Make FIFO depths host parameters"
+
+correct depth of the video FIFO is 1920 *words* no *bytes*
+
+Tested-by: Ion Agorria <ion@agorria.com> # HTC One X
+Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # Nvidia Tegratab T114
 Signed-off-by: Jonas Schwöbel <jonasschwoebel@yahoo.de>
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/tegra20/tegra-dsi.c | 10 ++++------
- 1 file changed, 4 insertions(+), 6 deletions(-)
+ drivers/video/tegra20/tegra-dsi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/video/tegra20/tegra-dsi.c b/drivers/video/tegra20/tegra-dsi.c
-index 7d63557d1b..13dae37806 100644
+index ddd74540f2..7d63557d1b 100644
 --- a/drivers/video/tegra20/tegra-dsi.c
 +++ b/drivers/video/tegra20/tegra-dsi.c
-@@ -766,10 +766,6 @@ static int tegra_dsi_encoder_enable(struct udevice *dev)
- 	if (ret)
- 		return ret;
+@@ -873,7 +873,7 @@ static int tegra_dsi_bridge_probe(struct udevice *dev)
+ 		return -EINVAL;
+ 	}
  
--	ret = panel_set_backlight(priv->panel, BACKLIGHT_DEFAULT);
--	if (ret)
--		return ret;
--
- 	tegra_dsi_configure(dev, device->mode_flags);
+-	priv->video_fifo_depth = 480;
++	priv->video_fifo_depth = 1920;
+ 	priv->host_fifo_depth = 64;
  
- 	tegra_dc_enable_controller(dev);
-@@ -784,8 +780,10 @@ static int tegra_dsi_encoder_enable(struct udevice *dev)
- 
- static int tegra_dsi_bridge_set_panel(struct udevice *dev, int percent)
- {
--	/* Is not used in tegra dc */
--	return 0;
-+	struct tegra_dsi_priv *priv = dev_get_priv(dev);
-+
-+	/* Turn on/off backlight */
-+	return panel_set_backlight(priv->panel, percent);
- }
- 
- static int tegra_dsi_panel_timings(struct udevice *dev,
+ 	ret = reset_get_by_name(dev, "dsi", &reset_ctl);
 -- 
 2.40.1
 
