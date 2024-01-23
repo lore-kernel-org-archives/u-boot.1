@@ -4,74 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32B9BC46CD2
-	for <u-boot@archiver.kernel.org>; Mon, 22 Jan 2024 23:52:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F4EAC47DDB
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 00:59:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40A72879A3;
-	Tue, 23 Jan 2024 00:52:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BE4E887895;
+	Tue, 23 Jan 2024 01:59:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="i2kvh0Ct";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43D7887579; Tue, 23 Jan 2024 00:52:18 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 164C18753C
- for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 00:52:16 +0100 (CET)
+ id 9A91B87B41; Tue, 23 Jan 2024 01:59:30 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 522D887895;
+ Tue, 23 Jan 2024 01:59:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-6001449a2beso9215427b3.3
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 15:52:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1705967534; x=1706572334; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=SLJgMRwvbJDj/liW7Deoa1yvyzlJKlDL4sLY5J9CANE=;
- b=i2kvh0CtI9EO8QOWc+buNirceAcq3CB7v5QsIRWYOcKcIjugxCPUpWwKxsxT2bpr2w
- VrDsWt7V/7S8ALKxojGA1iB01fRIIMEEWwDJhptn6X6LaDcv/CcGpIOBzIJotdJjbm6e
- wsDEse/EVYyU/iPh8HGNy/d5pmpxIYD2UNUfQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705967534; x=1706572334;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=SLJgMRwvbJDj/liW7Deoa1yvyzlJKlDL4sLY5J9CANE=;
- b=UlW9XUE2dTfL7s2+fzatFNKZaTBj/cR2vIdiPVW8mGwGBGtWkFHqjfISob8RhSjtGf
- fxQoq4MdZkAvLCDQ01rbHTfd+GTK0UqBR/XTZ7AhOPU9Nj6AWFdiGPg9dZkl82vGpcdv
- qg5xtP76c0C2ERXsG9ezbp9wg9LnaM2ZTeIRDzwOHiwGLrKCz+Zk84lvw/QTG2eITX+2
- J0ysMiJGritIvcfQ6ZXH6XfckuTFNO3aUn5UFVcqbx+FJYkatBpg+ktN39DW1W2GRRMI
- vB74MKM1B1/lMlZMF4u37DhOwfxuoFQMRavqJKupeeXQ5JsHZOwf+JmQAn9DTkHXr/tk
- gnHw==
-X-Gm-Message-State: AOJu0YwzzfQS2CS5eruDIhW9mLFtPNoob/FCZNoomX2tqKByvy/Zwg5a
- tQX2irGaEMoYrZwfpQ2qrqKLbtT1dtNHuA071apT32LZGhYDFRPRecqCIC3aVmCqHJYKAaiVZL+
- 6
-X-Google-Smtp-Source: AGHT+IHoPXxbbxs/7swMVxkGlnk8Ahp3vC3nTnpf+Y+ZDEfjnALfYNBLzbfmiybKnVzyy+ynBecSfw==
-X-Received: by 2002:a0d:f5c3:0:b0:5fb:da77:af07 with SMTP id
- e186-20020a0df5c3000000b005fbda77af07mr4002058ywf.32.1705967534333; 
- Mon, 22 Jan 2024 15:52:14 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- e4-20020a81e944000000b005ffddb2369dsm1263931ywm.82.2024.01.22.15.52.13
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Jan 2024 15:52:13 -0800 (PST)
-Date: Mon, 22 Jan 2024 18:52:12 -0500
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20240122235212.GS3652023@bill-the-cat>
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 119101FB;
+ Mon, 22 Jan 2024 17:00:13 -0800 (PST)
+Received: from minigeek.lan (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CE2983F762;
+ Mon, 22 Jan 2024 16:59:23 -0800 (PST)
+Date: Tue, 23 Jan 2024 00:58:34 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de,
+ sjg@chromium.org, robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org,
+ conor@kernel.org, neil.armstrong@linaro.org, caleb.connolly@linaro.org,
+ ff@shokubai.tech, daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
+ pbrobinson@gmail.com, ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org,
+ b.galvani@gmail.com, xypron.glpk@gmx.de, michal.simek@amd.com,
+ seanga2@gmail.com, rasmus.villemoes@prevas.dk, peng.fan@nxp.com,
+ jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de,
+ mibodhi@gmail.com, bb@ti.com, mark.kettenis@xs4all.nl
+Subject: Re: [PATCH v4 00/11] An effort to bring DT bindings compliance
+ within U-Boot
+Message-ID: <20240123005834.4ab47bf5@minigeek.lan>
+In-Reply-To: <20240122164959.GN3652023@bill-the-cat>
+References: <20240110103547.719757-1-sumit.garg@linaro.org>
+ <20240122114515.760e9cd3@donnerap.manchester.arm.com>
+ <20240122164959.GN3652023@bill-the-cat>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="QX9ol6o2vVSqR7nq"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,104 +67,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 22 Jan 2024 11:49:59 -0500
+Tom Rini <trini@konsulko.com> wrote:
 
---QX9ol6o2vVSqR7nq
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Tom,
 
-I've now updated to the latest Coverity scan tool and that eliminated
-some previous defects and found two new ones:
+> On Mon, Jan 22, 2024 at 11:45:15AM +0000, Andre Przywara wrote:
+> > On Wed, 10 Jan 2024 16:05:36 +0530
+> > Sumit Garg <sumit.garg@linaro.org> wrote:
+> > 
+> > Hi,
+> > 
+> > I certainly welcome this more automatic synchronisation of the DTs,
+> > however have one comment about the upcoming sync process:
+> >   
+> > > ...
+> > > However, Linux kernel DT maintainers proposed [2] for U-Boot to rather
+> > > use devicetree-rebasing repo [3] which is a forked copy from Linux
+> > > kernel for DT source files as well as bindings. It is tagged at every
+> > > Linux kernel major release or intermideate release candidates. So here I
+> > > have tried to reuse that to bring DT bingings compliance as well as a
+> > > standard way to maintain a regular sync of DT source files with Linux
+> > > kernel.
+> > > 
+> > > In order to maintain devicetree files sync, U-Boot will maintains a Git
+> > > subtree for devicetee-rebasing repo as `dts/upstream` sub-directory.
+> > > U-Boot will regularly sync `dts/upstream/` subtree whenever the next window
+> > > opens with the next available kernel major release.  
+> > 
+> > I hope this doesn't need to stay that restricted? Can we either sync more
+> > often, or at least on the kernel's -rc1, and not only on a "full" release?
+> > 
+> > The reason I ask is that we have a chicken-egg problem here: without a DT
+> > merged into the kernel tree, no U-Boot board support can be merged. And
+> > without U-Boot support, we cannot boot a kernel, at least not in the
+> > canonical way.
+> > 
+> > Since the U-Boot and kernel merge windows are not in phase, for sunxi I try
+> > to sync the kernel DTs either as early as possible (-rc1, sometimes even
+> > before, when the maintainers have merged them into their tree), or
+> > sometimes "out of season", if a board defconfig patch is coming up.
+> > 
+> > Otherwise new board support, which typically has a very low regression risk
+> > for the rest of the code base, would need to be delayed until the next
+> > release. In the worst case the U-Boot merge windows opens one week before
+> > a kernel release, then new boards need to wait three months?  
+> 
+> Would it be to bad to bring in board X with OF_UPSTREAM=n for one U-Boot
+> release, and then with the next one switch to OF_UPSTREAM=y (and delete
+> the dts from arch/) for the next release, when we would have gotten back
+> in sync?
 
----------- Forwarded message ---------
-=46rom: <scan-admin@coverity.com>
-Date: Mon, Jan 22, 2024 at 6:42=E2=80=AFPM
-Subject: New Defects reported by Coverity Scan for Das U-Boot
-To: <tom.rini@gmail.com>
+Ah, I didn't look into the actual patches, but if this provision is
+there, that sounds surely acceptable. It might still be good to sync
+earlier than the .0 kernel release: if it appears in Linus' tree, it
+had already seen a good share of review and testing. And with the
+U-Boot releases being always further away than the next kernel release,
+we could pull fixes still in time. So we could pick the latest -rc (or
+.0 release, whichever is more recent) when the U-Boot merge window
+opens?
 
-
-Hi,
-
-Please find the latest report on new defect(s) introduced to Das
-U-Boot found with Coverity Scan.
-
-2 new defect(s) introduced to Das U-Boot found with Coverity Scan.
-8 defect(s), reported by Coverity Scan earlier, were marked fixed in
-the recent build analyzed by Coverity Scan.
-
-New defect(s) Reported-by: Coverity Scan
-Showing 2 of 2 defect(s)
-
-
-** CID 478862:  Memory - corruptions  (OVERRUN)
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 478862:  Memory - corruptions  (OVERRUN)
-/lib/initcall.c: 82 in initcall_run_list()
-76      if (ret) {
-77              if (CONFIG_IS_ENABLED(EVENT)) {
-78                      char buf[60];
-79
-80                      /* don't worry about buf size as we are dying here =
-*/
-81                      if (type) {
->>>     CID 478862:  Memory - corruptions  (OVERRUN)
->>>     Overrunning callee's array of size 15 by passing argument "type" (w=
-hich evaluates to 255) in call to "event_type_name".
-82                              sprintf(buf, "event %d/%s", type,
-83                                      event_type_name(type));
-84                      } else {
-85                              sprintf(buf, "call %p", func);
-86                      }
-87
-
-** CID 478861:  Memory - corruptions  (OVERRUN)
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 478861:  Memory - corruptions  (OVERRUN)
-/cmd/nvedit.c: 356 in print_static_flags()
-350     static int print_static_flags(const char *var_name, const char *fla=
-gs,
-351                                   void *priv)
-352     {
-353             enum env_flags_vartype type =3D env_flags_parse_vartype(fla=
-gs);
-354             enum env_flags_varaccess access =3D
-env_flags_parse_varaccess(flags);
-355
->>>     CID 478861:  Memory - corruptions  (OVERRUN)
->>>     Overrunning callee's array of size 4 by passing argument "access" (=
-which evaluates to 4) in call to "env_flags_get_varaccess_name".
-356             printf("\t%-20s %-20s %-20s\n", var_name,
-357                     env_flags_get_vartype_name(type),
-358                     env_flags_get_varaccess_name(access));
-359
-360             return 0;
-361     }
-
---=20
-Tom
-
---QX9ol6o2vVSqR7nq
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWu/6gACgkQFHw5/5Y0
-tyxZpwv+LhevDi8ce0SzUyLylDQFx9KKYk1miZPzjxs2lf230tG1XVLcT7zUaGAr
-ALAdaOi60qtFlQk9VLK6McenQclQ+L0buzwC3BrR+GMwLjwrEs90ajxHYrm65ZhL
-7U+WtPzL88anX01kBV++cSbUAq8jNOqYJfZes0Gbf1s5uLcOoRAiuDGSdypbBVsq
-iCAxF5kJDYhgL2TRqI2B6xu7rQN82C5BmlzqB9kS/esF4WjcpG1gZNZMabLAMI1A
-tazFou8NA5UjvWirCR0CqK3ipLY4yKyzbUzp0gE/QkZKxeQvrOB1GqWIZPiRmiKO
-a6QsuGZX3hWGV7oqB1cM0XE9vJecr4BXrQySPmFmY4WSQj9KZ1WBRBzle+YGDagZ
-4ZM5wOJgv17ja7c5LCqqNR8UzgZmFSe/ueN7gRIgDxLa+6n0T0fn0ufcCUbLFhUA
-SI1tw57pLPVcVdHdbBdK7oZsAJFLXngt/EW8bDbziDpNjxQ9Z0w8GK084w3saHbZ
-Jszb+PfO
-=/hc/
------END PGP SIGNATURE-----
-
---QX9ol6o2vVSqR7nq--
+Cheers,
+Andre
