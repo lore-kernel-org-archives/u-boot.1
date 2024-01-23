@@ -4,84 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F91BC46CD2
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 02:44:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D09AC46CD2
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 03:07:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8555E87994;
-	Tue, 23 Jan 2024 03:43:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 541E08798C;
+	Tue, 23 Jan 2024 04:07:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bJbxEncv";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="GpJIb1gZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7710F87A01; Tue, 23 Jan 2024 03:43:58 +0100 (CET)
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
- [IPv6:2607:f8b0:4864:20::42a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B724D8798C; Tue, 23 Jan 2024 04:07:14 +0100 (CET)
+Received: from mail-m49215.qiye.163.com (mail-m49215.qiye.163.com
+ [45.254.49.215])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CDF587947
- for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 03:43:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 80F278793F
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 04:07:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-6dbcf819511so408094b3a.1
- for <u-boot@lists.denx.de>; Mon, 22 Jan 2024 18:43:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1705977834; x=1706582634; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=V+B30mwf9O82znIPlL54PQNu16n+n9bVRImSYOxhpMk=;
- b=bJbxEncvNKXA1OlF3hhfzcn0tWjjqfX4mJ1VhJODv5By6gcMxN5/k7bCm1VGQjFyiw
- 114rFiL/RmaETMV/kcFhea3V7KSw6bvRaGfcSI8H9FcjlB82G9rN9V/lnhDV/WamJTnX
- G/Blf65QyVjONtNpLYANI4WbkV5+z9MxSVaBnB5x6PfTbK3r6MwOHNraPuXJjKJ126Co
- JWOR9Sh/VnDfJvvR5D0OV8CFtKWAROcCCDbnlwb2M5vXpIGuFy3SSm2nWRyCnjdEHZZ5
- MAMLcpG6hiFtCUaQIVKXZsDye3s3gWYTBbPllWocUvXgWfCLj3wlvefcIdFa/LGcU26D
- voxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1705977834; x=1706582634;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=V+B30mwf9O82znIPlL54PQNu16n+n9bVRImSYOxhpMk=;
- b=j+qFlKyGx5mmPK0bttvc4PzkIp/sIKL67b/fTRa1RyGuo0XIIqb9ZdbZkHS6BNO5pt
- nH2pg8eQ3ClGtoZNdz894JwRCy32XORjIwEca2oviQDi9PtJwRKoGKny7GfxL8fp0PJj
- HAuPrWI6YrOIvzYummj29yXrb0xk5fGNWS0wQlYdPI/f3HwoKOpJkjWPDqTuFQSlJvjE
- 6YTucpa1r1xp3TXqnbA8eZtRiUrfepQM6uNjw0mj4vNc5a4AKOApCtq/9jTW9p4mv92Z
- Z0OOhdE6BJ9Z5p1Pv8eBpjPn89l5j7Ucwal4+48GVetObsip/CIQg4VBSicMprwKNq6g
- iAQg==
-X-Gm-Message-State: AOJu0YwnXUqIRGy+zcB/AVXHS4Bj7wCCAnPCWA4OiPO5Y+i2WbjZvjZF
- JH0kddiDYEajJovO9eI9peyql7xFPAXjWG5QkRnEib0kXt4PmCJl9S26WPJTdiL01aMGCPgceoO
- 4WOoIC72albcfnhnTGtDKOLVAa1I=
-X-Google-Smtp-Source: AGHT+IEriwlsMoEp4FqHfnp5YIDoofCcTpT99TJjjmb5zyQO4eE7w8NTCqb7x4DUeDdJggCy+0dgS50wz6mpZeM8us0=
-X-Received: by 2002:a05:6a21:6801:b0:19a:49c8:b9e6 with SMTP id
- wr1-20020a056a21680100b0019a49c8b9e6mr11920243pzb.0.1705977834575; Mon, 22
- Jan 2024 18:43:54 -0800 (PST)
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=GpJIb1gZz0xE90eyYL6KXNpzQrDJpZPWLJQvelP0jnTTEapuCINO5dc1A9A1Ccea0Qys2medrWHDEzivb4upn8BthevVkYezZr1Pde+DGCxTJKo8E69Ez6i/d8ORh2R6kL7om5kXFQjyeBwJZfNQbR6mKMapYqE+ynNPKJWqAeU=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=6xLCCmPc+sbY1i3pTiKWE4dr825e+bKprnznPsJSDhY=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.93] (unknown [58.22.7.114])
+ by mail-m11874.qiye.163.com (Hmail) with ESMTPA id B6F0B3C0195;
+ Tue, 23 Jan 2024 11:07:03 +0800 (CST)
+Message-ID: <f062df17-972c-46e8-ae7d-e8e58de733a5@rock-chips.com>
+Date: Tue, 23 Jan 2024 11:07:03 +0800
 MIME-Version: 1.0
-References: <2dba1330181940c78b5ad47f18ee43fa@supermicro.com>
- <CAOMZO5DTw2uU+uEmVLR9nbFkR4QPgmhuY9VUAz-sgg+GppMG9g@mail.gmail.com>
- <0934648988c9444aaf85f2e3163c0f4b@supermicro.com>
- <CAOMZO5Cy8as7b_cup6J+PYbN-stkj4Vz2wsLB_1=NN3vx5SVWQ@mail.gmail.com>
- <728CCDD9-CEA4-4ED1-9143-189C3F257097@supermicro.com>
- <9c2e7790f0c94b0ebf0e840100eae2c0@supermicro.com>
- <be10a49d2381407fb955958fbc87ecd4@supermicro.com>
- <CAOMZO5D5g6izBC=aCumX_H1tbo5uXTfuhQekSuH_XDqUAN91Kg@mail.gmail.com>
- <8ACC66AF-9761-44E2-A36E-62C8EAADA09C@supermicro.com>
- <509c10723aed4965aceabbd28d36b847@supermicro.com>
-In-Reply-To: <509c10723aed4965aceabbd28d36b847@supermicro.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 22 Jan 2024 23:43:42 -0300
-Message-ID: <CAOMZO5DUrxpRAt6Fn7xofHGH7B3ngrkdPm9c0YUd4r-19CB+ng@mail.gmail.com>
-Subject: Re: Could you please help me in resolving the "
- /reset.c:42:(.text.do_reset+0x20):
- undefined reference to `reset_cpu'?"
-To: Liu Wang <liuw@supermicro.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rockchip: sdram: fix LPDDR5 bank info for sys_reg version
+ 3
+Content-Language: en-US
+To: Jonas Karlman <jonas@kwiboo.se>, YouMin Chen <cym@rock-chips.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20240122074633.654726-1-kever.yang@rock-chips.com>
+ <3739f50b-faa7-42ab-856e-44eee3709957@kwiboo.se>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <3739f50b-faa7-42ab-856e-44eee3709957@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQhhISFZKSR5PSU1OQ05DT0xVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8d34491f7f2eb0kusnb6f0b3c0195
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PDY6Ajo4IzwfFA1JAR04PDcX
+ HQNPCw9VSlVKTEtOQkxCSUlPT01CVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPQklNNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,20 +77,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Liu Wang,
+Hi Jonas,
 
-On Mon, Jan 22, 2024 at 10:55=E2=80=AFPM Liu Wang <liuw@supermicro.com> wro=
-te:
+On 2024/1/23 01:55, Jonas Karlman wrote:
+> Hi,
 >
-> Hi Fabio,
+> On 2024-01-22 08:46, Kever Yang wrote:
+>> From: YouMin Chen <cym@rock-chips.com>
+>>
+>> This patch add support for additional bank info used by LPDDR5.
+>>
+>> Signed-off-by: YouMin Chen <cym@rock-chips.com>
+>> Signed-off-by: Kever Yang <kever.yang@rock-chips.com>
+>> ---
+>>
+>>   arch/arm/mach-rockchip/sdram.c | 7 +++++++
+>>   1 file changed, 7 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-rockchip/sdram.c b/arch/arm/mach-rockchip/sdram.c
+>> index 99ecbdc3412..d65c48bf515 100644
+>> --- a/arch/arm/mach-rockchip/sdram.c
+>> +++ b/arch/arm/mach-rockchip/sdram.c
+>> @@ -110,6 +110,13 @@ size_t rockchip_sdram_size(phys_addr_t reg)
+>>   			  SYS_REG_COL_MASK);
+>>   		cs1_col = cs0_col;
+>>   		bk = 3 - ((sys_reg2 >> SYS_REG_BK_SHIFT(ch)) & SYS_REG_BK_MASK);
+>> +		/*
+>> +		 * SYS_REG_BK(Version 3):
+>> +		 * 1) Except LPDDR5 0:8bank(bk=3), 1:4bank(bk=2)
+>> +		 * 2) LPDDR5 0:8bank(bk=3), 1:16bank(bk=4)
+>> +		 */
+>> +		if (version == 3 && dram_type == LPDDR5 && bk == 2)
+>> +			bk = 4;
+> The version == 3 test is not really needed because dram_type cannot be
+> assigned to LPDDR5 (9) since the dram_type high bits is only read for
+> version >= 3.
 >
-> Could you please help me in resolving the " /reset.c:42:(.text.do_reset+0=
-x20): undefined reference to `reset_cpu'?" from: u-boot$make all:
+> Also not sure I fully like the if bk==2 then bk=4 override code style
+> here because the code comment do not fully match the code flow. I had to
+> stop and think twice on why the test was for bk==2 when it is bk bit = 1
+> that should result in bk=4.
+>
+> Maybe we can make the code closer match the comment with something like
+> the following:
+>
+>
+> @@ -109,7 +109,14 @@ size_t rockchip_sdram_size(phys_addr_t reg)
+>   		cs0_col = 9 + (sys_reg2 >> SYS_REG_COL_SHIFT(ch) &
+>   			  SYS_REG_COL_MASK);
+>   		cs1_col = cs0_col;
+> -		bk = 3 - ((sys_reg2 >> SYS_REG_BK_SHIFT(ch)) & SYS_REG_BK_MASK);
+> +		if (dram_type == LPDDR5)
+> +			/* LPDDR5: 0:8bank(bk=3), 1:16bank(bk=4) */
+> +			bk = 3 + ((sys_reg2 >> SYS_REG_BK_SHIFT(ch)) &
+> +				  SYS_REG_BK_MASK);
+> +		else
+> +			/* Other: 0:8bank(bk=3), 1:4bank(bk=2) */
+> +			bk = 3 - ((sys_reg2 >> SYS_REG_BK_SHIFT(ch)) &
+> +				  SYS_REG_BK_MASK);
 
-Looking at the errors below, there are several errors besides the reset_cpu=
- one.
+This is better to understand, LPDDR5 has different bank definition with 
+other type dram.
 
-As you are using an out-of-tree U-Boot, there is not much the U-Boot
-community can do to help you, sorry.
+Thanks,
 
-You need to get assistance from the U-Boot provider that you are using.
+- Kever
+
+>   		if (version >= 2) {
+>   			cs1_col = 9 + (sys_reg3 >> SYS_REG_CS1_COL_SHIFT(ch) &
+>   				  SYS_REG_CS1_COL_MASK);
+>
+>
+> or possible use of a conditional operator:
+>
+>
+> @@ -109,7 +109,13 @@ size_t rockchip_sdram_size(phys_addr_t reg)
+>   		cs0_col = 9 + (sys_reg2 >> SYS_REG_COL_SHIFT(ch) &
+>   			  SYS_REG_COL_MASK);
+>   		cs1_col = cs0_col;
+> -		bk = 3 - ((sys_reg2 >> SYS_REG_BK_SHIFT(ch)) & SYS_REG_BK_MASK);
+> +		/*
+> +		 * SYS_REG_BK:
+> +		 * LPDDR5: 0:8bank(bk=3), 1:16bank(bk=4)
+> +		 * Other: 0:8bank(bk=3), 1:4bank(bk=2)
+> +		 */
+> +		bk = (sys_reg2 >> SYS_REG_BK_SHIFT(ch)) & SYS_REG_BK_MASK;
+> +		bk = (dram_type == LPDDR5) ? 3 + bk : 3 - bk;
+>   		if (version >= 2) {
+>   			cs1_col = 9 + (sys_reg3 >> SYS_REG_CS1_COL_SHIFT(ch) &
+>   				  SYS_REG_CS1_COL_MASK);
+>
+>
+> Not sure any of the above suggestions makes the code any easier to
+> understand.
+>
+> Regards,
+> Jonas
+>
+>>   		if (version >= 2) {
+>>   			cs1_col = 9 + (sys_reg3 >> SYS_REG_CS1_COL_SHIFT(ch) &
+>>   				  SYS_REG_CS1_COL_MASK);
