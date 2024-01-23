@@ -4,30 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DF21C47258
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 14:53:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF4A5C47258
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 14:53:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9354887D99;
-	Tue, 23 Jan 2024 15:50:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8F3D187D36;
+	Tue, 23 Jan 2024 15:50:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBF6F87D58; Tue, 23 Jan 2024 15:50:23 +0100 (CET)
-Received: from smtp-190c.mail.infomaniak.ch (smtp-190c.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::190c])
+ id E1DE587D93; Tue, 23 Jan 2024 15:50:24 +0100 (CET)
+Received: from smtp-bc0e.mail.infomaniak.ch (smtp-bc0e.mail.infomaniak.ch
+ [45.157.188.14])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5279187D6F
+ by phobos.denx.de (Postfix) with ESMTPS id 63B0087DAE
  for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 15:50:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0001.mail.infomaniak.ch (unknown [10.7.10.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TK93x4yvSzMqW4j;
- Tue, 23 Jan 2024 15:50:05 +0100 (CET)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TK94025HyzMrcS7;
+ Tue, 23 Jan 2024 15:50:08 +0100 (CET)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4TK93w3mjKzVwk; Tue, 23 Jan 2024 15:50:04 +0100 (CET)
+ id 4TK93z0hfTzX3V; Tue, 23 Jan 2024 15:50:07 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
 To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
@@ -46,10 +46,10 @@ To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Anatolij Gustschin <agust@denx.de>
 Cc: heiko@sntech.de, Quentin Schulz <foss+uboot@0leil.net>,
  u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Subject: [PATCH 13/18] rockchip: rk3588: fix non-working SD controller if
- booting from other media
-Date: Tue, 23 Jan 2024 15:49:21 +0100
-Message-ID: <20240123-jaguar-v1-13-1eec1c34953c@theobroma-systems.com>
+Subject: [PATCH 15/18] rockchip: migrate hardware.h inclusion into appropriate
+ files
+Date: Tue, 23 Jan 2024 15:49:23 +0100
+Message-ID: <20240123-jaguar-v1-15-1eec1c34953c@theobroma-systems.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240123-jaguar-v1-0-1eec1c34953c@theobroma-systems.com>
 References: <20240123-jaguar-v1-0-1eec1c34953c@theobroma-systems.com>
@@ -76,109 +76,157 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-Rockchip SoCs have some jtag/sdmmc autoswitching that simply doesn't
-work really well.[00] The Linux kernel disables it for all SoCs[01], so
-U-Boot needs to do the same in order to fix issues related to SD card on
-RK3588. This autoswitching is enabled (by default) via the force_jtag
-bitfield in SYS_GRF_SOC_CON6 in the TRM part1.
-
-For some reason, when booting from SD card, the BootROM does mux the
-SDMMC controller in the proper configuration for the RK3588-Jaguar. But
-when we don't boot from SD card, U-Boot needs to set it up correctly to
-allow accessing SD cards in that configuration.
-
-Therefore, let's disable the JTAG mode for the SDMMC pins so that the SD
-controller can be used either as a fallback mechanism to find U-Boot
-proper when the boot medium used to load TPL/SPL cannot find U-Boot
-proper, or to be used in U-Boot CLI.
-
-Note that soc_con[0] is reserved. But considering that it's way more
-user-friendly to access soc_con1 from the TRM with soc_con[1] than
-soc_con[0], and that soc_con0 would actually be located at 4 bytes
-before soc_con1, let's just make soc_con0 part of the soc_con array.
-
-[00] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=c9b75d51c940c25587a2ad72ec7ec60490abfb6c
-[01] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/soc/rockchip/grf.c
+Nothing of the hardware.h is used in include/configs, therefore, let's
+move that include to the files that actually require this include.
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- arch/arm/include/asm/arch-rockchip/grf_rk3588.h | 24 ++++++++++++++++++++++++
- arch/arm/mach-rockchip/rk3588/rk3588.c          |  7 +++++++
- 2 files changed, 31 insertions(+)
+ arch/arm/mach-rockchip/rk3066/rk3066.c | 1 +
+ drivers/ram/rockchip/dmc-rk3368.c      | 1 +
+ drivers/ram/rockchip/sdram_rk3188.c    | 1 +
+ drivers/ram/rockchip/sdram_rk3288.c    | 1 +
+ include/configs/rk3036_common.h        | 1 -
+ include/configs/rk3066_common.h        | 1 -
+ include/configs/rk3188_common.h        | 1 -
+ include/configs/rk322x_common.h        | 1 -
+ include/configs/rk3288_common.h        | 1 -
+ include/configs/rk3368_common.h        | 1 -
+ include/configs/rv1108_common.h        | 1 -
+ 11 files changed, 4 insertions(+), 7 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-rockchip/grf_rk3588.h b/arch/arm/include/asm/arch-rockchip/grf_rk3588.h
-index e0694068bb1..f0ecff97f0b 100644
---- a/arch/arm/include/asm/arch-rockchip/grf_rk3588.h
-+++ b/arch/arm/include/asm/arch-rockchip/grf_rk3588.h
-@@ -32,4 +32,28 @@ struct rk3588_pmu1grf {
- 
- check_member(rk3588_pmu1grf, sd_detect_cnt, 0x03b0);
- 
-+#define SYS_GRF_BASE	0xfd58c000
-+
-+struct rk3588_sysgrf {
-+	unsigned int wdt_con0;
-+	unsigned int reserved0[(0x0010 - 0x0000) / 4 - 1];
-+	unsigned int uart_con[2];
-+	unsigned int reserved1[(0x00c0 - 0x0014) / 4 - 1];
-+	unsigned int gic_con0;
-+	unsigned int reserved2[(0x0200 - 0x00c0) / 4 - 1];
-+	unsigned int memcfg_con[32];
-+	unsigned int reserved3[(0x0300 - 0x027c) / 4 - 1];
-+	/* soc_con0 is reserved */
-+	unsigned int soc_con[14];
-+	unsigned int reserved4[(0x0380 - 0x0334) / 4 - 1];
-+	unsigned int soc_status[4];
-+	unsigned int reserved5[(0x0500 - 0x038c) / 4 - 1];
-+	unsigned int otp_key08;
-+	unsigned int otp_key0d;
-+	unsigned int otp_key0e;
-+	unsigned int reserved6[(0x0600 - 0x0508) / 4 - 1];
-+	unsigned int chip_id;
-+};
-+
-+check_member(rk3588_sysgrf, chip_id, 0x0600);
- #endif /*__SOC_ROCKCHIP_RK3588_GRF_H__ */
-diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-index 38e95a6e2b2..c5eeda9d751 100644
---- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-+++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-@@ -11,6 +11,7 @@
+diff --git a/arch/arm/mach-rockchip/rk3066/rk3066.c b/arch/arm/mach-rockchip/rk3066/rk3066.c
+index 78c7d894f90..6661b788295 100644
+--- a/arch/arm/mach-rockchip/rk3066/rk3066.c
++++ b/arch/arm/mach-rockchip/rk3066/rk3066.c
+@@ -7,6 +7,7 @@
+ #include <asm/io.h>
  #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/hardware.h>
- #include <asm/arch-rockchip/ioc_rk3588.h>
-+#include <asm/arch-rockchip/grf_rk3588.h>
+ #include <asm/arch-rockchip/grf_rk3066.h>
++#include <asm/arch-rockchip/hardware.h>
  
- #define FIREWALL_DDR_BASE		0xfe030000
- #define FW_DDR_MST5_REG			0x54
-@@ -35,6 +36,8 @@
- #define BUS_IOC_GPIO2D_IOMUX_SEL_H	0x5c
- #define BUS_IOC_GPIO3A_IOMUX_SEL_L	0x60
+ #define GRF_BASE	0x20008000
  
-+#define SYS_GRF_FORCE_JTAG		BIT(14)
-+
- /**
-  * Boot-device identifiers used by the BROM on RK3588 when device is booted
-  * from SPI flash. IOMUX used for SPI flash affect the value used by the BROM
-@@ -134,6 +137,7 @@ void rockchip_stimer_init(void)
- int arch_cpu_init(void)
- {
- #ifdef CONFIG_SPL_BUILD
-+	static struct rk3588_sysgrf * const sys_grf = (void *)SYS_GRF_BASE;
- 	int secure_reg;
+diff --git a/drivers/ram/rockchip/dmc-rk3368.c b/drivers/ram/rockchip/dmc-rk3368.c
+index f36be941a38..74d8aed571c 100644
+--- a/drivers/ram/rockchip/dmc-rk3368.c
++++ b/drivers/ram/rockchip/dmc-rk3368.c
+@@ -20,6 +20,7 @@
+ #include <asm/arch-rockchip/ddr_rk3368.h>
+ #include <asm/arch-rockchip/sdram.h>
+ #include <asm/arch-rockchip/sdram_rk3288.h>
++#include <asm/arch-rockchip/hardware.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+ #include <linux/err.h>
+diff --git a/drivers/ram/rockchip/sdram_rk3188.c b/drivers/ram/rockchip/sdram_rk3188.c
+index ad9f936df55..16a68885f1f 100644
+--- a/drivers/ram/rockchip/sdram_rk3188.c
++++ b/drivers/ram/rockchip/sdram_rk3188.c
+@@ -25,6 +25,7 @@
+ #include <asm/arch-rockchip/pmu_rk3188.h>
+ #include <asm/arch-rockchip/sdram.h>
+ #include <asm/arch-rockchip/sdram_rk3288.h>
++#include <asm/arch-rockchip/hardware.h>
+ #include <linux/delay.h>
+ #include <linux/err.h>
  
- 	/* Set the SDMMC eMMC crypto_ns FSPI access secure area */
-@@ -168,6 +172,9 @@ int arch_cpu_init(void)
- 	secure_reg = readl(FIREWALL_SYSMEM_BASE + FW_SYSM_MST27_REG);
- 	secure_reg &= 0xffff0000;
- 	writel(secure_reg, FIREWALL_SYSMEM_BASE + FW_SYSM_MST27_REG);
-+
-+	/* Disable JTAG exposed on SDMMC */
-+	rk_clrreg(&sys_grf->soc_con[6], SYS_GRF_FORCE_JTAG);
- #endif
+diff --git a/drivers/ram/rockchip/sdram_rk3288.c b/drivers/ram/rockchip/sdram_rk3288.c
+index c99118fd612..ec6bdcb2015 100644
+--- a/drivers/ram/rockchip/sdram_rk3288.c
++++ b/drivers/ram/rockchip/sdram_rk3288.c
+@@ -25,6 +25,7 @@
+ #include <asm/arch-rockchip/pmu_rk3288.h>
+ #include <asm/arch-rockchip/sdram.h>
+ #include <asm/arch-rockchip/sdram_rk3288.h>
++#include <asm/arch-rockchip/hardware.h>
+ #include <linux/delay.h>
+ #include <linux/err.h>
+ #include <power/regulator.h>
+diff --git a/include/configs/rk3036_common.h b/include/configs/rk3036_common.h
+index c2abd14e114..0bf9e8b9a2e 100644
+--- a/include/configs/rk3036_common.h
++++ b/include/configs/rk3036_common.h
+@@ -5,7 +5,6 @@
+ #ifndef __CONFIG_RK3036_COMMON_H
+ #define __CONFIG_RK3036_COMMON_H
  
- 	return 0;
+-#include <asm/arch-rockchip/hardware.h>
+ #include "rockchip-common.h"
+ 
+ #define CFG_SYS_HZ_CLOCK		24000000
+diff --git a/include/configs/rk3066_common.h b/include/configs/rk3066_common.h
+index d70c8f77d48..6a3b6900463 100644
+--- a/include/configs/rk3066_common.h
++++ b/include/configs/rk3066_common.h
+@@ -6,7 +6,6 @@
+ #ifndef __CONFIG_RK3066_COMMON_H
+ #define __CONFIG_RK3066_COMMON_H
+ 
+-#include <asm/arch-rockchip/hardware.h>
+ #include "rockchip-common.h"
+ 
+ #define CFG_IRAM_BASE		0x10080000
+diff --git a/include/configs/rk3188_common.h b/include/configs/rk3188_common.h
+index a8cee1e44d4..98f2c25f3cf 100644
+--- a/include/configs/rk3188_common.h
++++ b/include/configs/rk3188_common.h
+@@ -6,7 +6,6 @@
+ #ifndef __CONFIG_RK3188_COMMON_H
+ #define __CONFIG_RK3188_COMMON_H
+ 
+-#include <asm/arch-rockchip/hardware.h>
+ #include "rockchip-common.h"
+ 
+ #define CFG_IRAM_BASE	0x10080000
+diff --git a/include/configs/rk322x_common.h b/include/configs/rk322x_common.h
+index 15f77df3e17..bab4ca015f7 100644
+--- a/include/configs/rk322x_common.h
++++ b/include/configs/rk322x_common.h
+@@ -5,7 +5,6 @@
+ #ifndef __CONFIG_RK322X_COMMON_H
+ #define __CONFIG_RK322X_COMMON_H
+ 
+-#include <asm/arch-rockchip/hardware.h>
+ #include "rockchip-common.h"
+ 
+ #define CFG_SYS_HZ_CLOCK		24000000
+diff --git a/include/configs/rk3288_common.h b/include/configs/rk3288_common.h
+index 3063076a97a..0c449e31099 100644
+--- a/include/configs/rk3288_common.h
++++ b/include/configs/rk3288_common.h
+@@ -6,7 +6,6 @@
+ #ifndef __CONFIG_RK3288_COMMON_H
+ #define __CONFIG_RK3288_COMMON_H
+ 
+-#include <asm/arch-rockchip/hardware.h>
+ #include "rockchip-common.h"
+ 
+ #define CFG_SYS_HZ_CLOCK		24000000
+diff --git a/include/configs/rk3368_common.h b/include/configs/rk3368_common.h
+index ccb5369b901..d488f8d477a 100644
+--- a/include/configs/rk3368_common.h
++++ b/include/configs/rk3368_common.h
+@@ -8,7 +8,6 @@
+ 
+ #include "rockchip-common.h"
+ 
+-#include <asm/arch-rockchip/hardware.h>
+ #include <linux/sizes.h>
+ 
+ #define CFG_SYS_SDRAM_BASE		0
+diff --git a/include/configs/rv1108_common.h b/include/configs/rv1108_common.h
+index 3bf70a0e0ae..ff28236a21d 100644
+--- a/include/configs/rv1108_common.h
++++ b/include/configs/rv1108_common.h
+@@ -5,7 +5,6 @@
+ #ifndef __CONFIG_RV1108_COMMON_H
+ #define __CONFIG_RV1108_COMMON_H
+ 
+-#include <asm/arch-rockchip/hardware.h>
+ #include "rockchip-common.h"
+ 
+ #define CFG_IRAM_BASE		0x10080000
 
 -- 
 2.43.0
