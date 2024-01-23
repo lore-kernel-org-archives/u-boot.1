@@ -4,30 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF4A5C47258
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 14:53:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EAEAC47DDB
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 14:53:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F3D187D36;
-	Tue, 23 Jan 2024 15:50:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 29C1987DC6;
+	Tue, 23 Jan 2024 15:50:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1DE587D93; Tue, 23 Jan 2024 15:50:24 +0100 (CET)
-Received: from smtp-bc0e.mail.infomaniak.ch (smtp-bc0e.mail.infomaniak.ch
- [45.157.188.14])
+ id 6406F87D7B; Tue, 23 Jan 2024 15:50:26 +0100 (CET)
+Received: from smtp-8faa.mail.infomaniak.ch (smtp-8faa.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::8faa])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63B0087DAE
+ by phobos.denx.de (Postfix) with ESMTPS id 6DBB987DC0
  for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 15:50:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0001.mail.infomaniak.ch (unknown [10.7.10.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TK94025HyzMrcS7;
- Tue, 23 Jan 2024 15:50:08 +0100 (CET)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TK93y6sVDzMrY5H;
+ Tue, 23 Jan 2024 15:50:06 +0100 (CET)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4TK93z0hfTzX3V; Tue, 23 Jan 2024 15:50:07 +0100 (CET)
+ id 4TK93x50zhzVyr; Tue, 23 Jan 2024 15:50:05 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
 To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
@@ -46,10 +46,10 @@ To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Anatolij Gustschin <agust@denx.de>
 Cc: heiko@sntech.de, Quentin Schulz <foss+uboot@0leil.net>,
  u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Subject: [PATCH 15/18] rockchip: migrate hardware.h inclusion into appropriate
- files
-Date: Tue, 23 Jan 2024 15:49:23 +0100
-Message-ID: <20240123-jaguar-v1-15-1eec1c34953c@theobroma-systems.com>
+Subject: [PATCH 14/18] rockchip: rk3588: add constants for some register
+ address spaces
+Date: Tue, 23 Jan 2024 15:49:22 +0100
+Message-ID: <20240123-jaguar-v1-14-1eec1c34953c@theobroma-systems.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240123-jaguar-v1-0-1eec1c34953c@theobroma-systems.com>
 References: <20240123-jaguar-v1-0-1eec1c34953c@theobroma-systems.com>
@@ -76,157 +76,80 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-Nothing of the hardware.h is used in include/configs, therefore, let's
-move that include to the files that actually require this include.
+It's one thing to have the register mapped via a well-defined struct but
+it's another to be able to make use of it. For that to happen, one needs
+to cast the physical address memory of the beginning of the register
+address space with the struct. Since this cannot change, let's hardcode
+it in the include files so that users do not need to duplicate this line
+of code in their own implementation.
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- arch/arm/mach-rockchip/rk3066/rk3066.c | 1 +
- drivers/ram/rockchip/dmc-rk3368.c      | 1 +
- drivers/ram/rockchip/sdram_rk3188.c    | 1 +
- drivers/ram/rockchip/sdram_rk3288.c    | 1 +
- include/configs/rk3036_common.h        | 1 -
- include/configs/rk3066_common.h        | 1 -
- include/configs/rk3188_common.h        | 1 -
- include/configs/rk322x_common.h        | 1 -
- include/configs/rk3288_common.h        | 1 -
- include/configs/rk3368_common.h        | 1 -
- include/configs/rv1108_common.h        | 1 -
- 11 files changed, 4 insertions(+), 7 deletions(-)
+ arch/arm/include/asm/arch-rockchip/cru_rk3588.h | 2 ++
+ arch/arm/include/asm/arch-rockchip/ioc_rk3588.h | 6 ++++++
+ arch/arm/mach-rockchip/rk3588/rk3588.c          | 4 ----
+ 3 files changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/rk3066/rk3066.c b/arch/arm/mach-rockchip/rk3066/rk3066.c
-index 78c7d894f90..6661b788295 100644
---- a/arch/arm/mach-rockchip/rk3066/rk3066.c
-+++ b/arch/arm/mach-rockchip/rk3066/rk3066.c
-@@ -7,6 +7,7 @@
- #include <asm/io.h>
- #include <asm/arch-rockchip/bootrom.h>
- #include <asm/arch-rockchip/grf_rk3066.h>
-+#include <asm/arch-rockchip/hardware.h>
+diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
+index 7f4a9085392..a4507e5fdd7 100644
+--- a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
++++ b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
+@@ -63,6 +63,8 @@ struct rk3588_pll {
+ 	unsigned int reserved0[3];
+ };
  
- #define GRF_BASE	0x20008000
++#define CRU_BASE	0xfd7c0000
++
+ struct rk3588_cru {
+ 	struct rk3588_pll pll[18];
+ 	unsigned int reserved0[16];/* Address Offset: 0x0240 */
+diff --git a/arch/arm/include/asm/arch-rockchip/ioc_rk3588.h b/arch/arm/include/asm/arch-rockchip/ioc_rk3588.h
+index 5a656f850c7..7ad98466c39 100644
+--- a/arch/arm/include/asm/arch-rockchip/ioc_rk3588.h
++++ b/arch/arm/include/asm/arch-rockchip/ioc_rk3588.h
+@@ -5,6 +5,8 @@
+ #ifndef _ASM_ARCH_IOC_RK3588_H
+ #define _ASM_ARCH_IOC_RK3588_H
  
-diff --git a/drivers/ram/rockchip/dmc-rk3368.c b/drivers/ram/rockchip/dmc-rk3368.c
-index f36be941a38..74d8aed571c 100644
---- a/drivers/ram/rockchip/dmc-rk3368.c
-+++ b/drivers/ram/rockchip/dmc-rk3368.c
-@@ -20,6 +20,7 @@
- #include <asm/arch-rockchip/ddr_rk3368.h>
- #include <asm/arch-rockchip/sdram.h>
- #include <asm/arch-rockchip/sdram_rk3288.h>
-+#include <asm/arch-rockchip/hardware.h>
- #include <linux/bitops.h>
- #include <linux/delay.h>
- #include <linux/err.h>
-diff --git a/drivers/ram/rockchip/sdram_rk3188.c b/drivers/ram/rockchip/sdram_rk3188.c
-index ad9f936df55..16a68885f1f 100644
---- a/drivers/ram/rockchip/sdram_rk3188.c
-+++ b/drivers/ram/rockchip/sdram_rk3188.c
-@@ -25,6 +25,7 @@
- #include <asm/arch-rockchip/pmu_rk3188.h>
- #include <asm/arch-rockchip/sdram.h>
- #include <asm/arch-rockchip/sdram_rk3288.h>
-+#include <asm/arch-rockchip/hardware.h>
- #include <linux/delay.h>
- #include <linux/err.h>
++#define BUS_IOC_BASE	0xfd5f8000
++
+ struct rk3588_bus_ioc {
+ 	unsigned int reserved0000[3];      /* Address Offset: 0x0000 */
+ 	unsigned int gpio0b_iomux_sel_h;   /* Address Offset: 0x000C */
+@@ -48,6 +50,8 @@ struct rk3588_bus_ioc {
  
-diff --git a/drivers/ram/rockchip/sdram_rk3288.c b/drivers/ram/rockchip/sdram_rk3288.c
-index c99118fd612..ec6bdcb2015 100644
---- a/drivers/ram/rockchip/sdram_rk3288.c
-+++ b/drivers/ram/rockchip/sdram_rk3288.c
-@@ -25,6 +25,7 @@
- #include <asm/arch-rockchip/pmu_rk3288.h>
- #include <asm/arch-rockchip/sdram.h>
- #include <asm/arch-rockchip/sdram_rk3288.h>
-+#include <asm/arch-rockchip/hardware.h>
- #include <linux/delay.h>
- #include <linux/err.h>
- #include <power/regulator.h>
-diff --git a/include/configs/rk3036_common.h b/include/configs/rk3036_common.h
-index c2abd14e114..0bf9e8b9a2e 100644
---- a/include/configs/rk3036_common.h
-+++ b/include/configs/rk3036_common.h
-@@ -5,7 +5,6 @@
- #ifndef __CONFIG_RK3036_COMMON_H
- #define __CONFIG_RK3036_COMMON_H
+ check_member(rk3588_bus_ioc, gpio4d_iomux_sel_h, 0x009C);
  
--#include <asm/arch-rockchip/hardware.h>
- #include "rockchip-common.h"
++#define PMU1_IOC_BASE	0xfd5f0000
++
+ struct rk3588_pmu1_ioc {
+ 	unsigned int gpio0a_iomux_sel_l;   /* Address Offset: 0x0000 */
+ 	unsigned int gpio0a_iomux_sel_h;   /* Address Offset: 0x0004 */
+@@ -70,6 +74,8 @@ struct rk3588_pmu1_ioc {
  
- #define CFG_SYS_HZ_CLOCK		24000000
-diff --git a/include/configs/rk3066_common.h b/include/configs/rk3066_common.h
-index d70c8f77d48..6a3b6900463 100644
---- a/include/configs/rk3066_common.h
-+++ b/include/configs/rk3066_common.h
-@@ -6,7 +6,6 @@
- #ifndef __CONFIG_RK3066_COMMON_H
- #define __CONFIG_RK3066_COMMON_H
+ check_member(rk3588_pmu1_ioc, xin_con, 0x0040);
  
--#include <asm/arch-rockchip/hardware.h>
- #include "rockchip-common.h"
++#define PMU2_IOC_BASE	0xfd5f4000
++
+ struct rk3588_pmu2_ioc {
+ 	unsigned int gpio0b_iomux_sel_h;  /* Address Offset: 0x0000 */
+ 	unsigned int gpio0c_iomux_sel_l;  /* Address Offset: 0x0004 */
+diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
+index c5eeda9d751..53ee9f1cebc 100644
+--- a/arch/arm/mach-rockchip/rk3588/rk3588.c
++++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
+@@ -26,10 +26,6 @@
+ #define FW_SYSM_MST26_REG		0xa8
+ #define FW_SYSM_MST27_REG		0xac
  
- #define CFG_IRAM_BASE		0x10080000
-diff --git a/include/configs/rk3188_common.h b/include/configs/rk3188_common.h
-index a8cee1e44d4..98f2c25f3cf 100644
---- a/include/configs/rk3188_common.h
-+++ b/include/configs/rk3188_common.h
-@@ -6,7 +6,6 @@
- #ifndef __CONFIG_RK3188_COMMON_H
- #define __CONFIG_RK3188_COMMON_H
- 
--#include <asm/arch-rockchip/hardware.h>
- #include "rockchip-common.h"
- 
- #define CFG_IRAM_BASE	0x10080000
-diff --git a/include/configs/rk322x_common.h b/include/configs/rk322x_common.h
-index 15f77df3e17..bab4ca015f7 100644
---- a/include/configs/rk322x_common.h
-+++ b/include/configs/rk322x_common.h
-@@ -5,7 +5,6 @@
- #ifndef __CONFIG_RK322X_COMMON_H
- #define __CONFIG_RK322X_COMMON_H
- 
--#include <asm/arch-rockchip/hardware.h>
- #include "rockchip-common.h"
- 
- #define CFG_SYS_HZ_CLOCK		24000000
-diff --git a/include/configs/rk3288_common.h b/include/configs/rk3288_common.h
-index 3063076a97a..0c449e31099 100644
---- a/include/configs/rk3288_common.h
-+++ b/include/configs/rk3288_common.h
-@@ -6,7 +6,6 @@
- #ifndef __CONFIG_RK3288_COMMON_H
- #define __CONFIG_RK3288_COMMON_H
- 
--#include <asm/arch-rockchip/hardware.h>
- #include "rockchip-common.h"
- 
- #define CFG_SYS_HZ_CLOCK		24000000
-diff --git a/include/configs/rk3368_common.h b/include/configs/rk3368_common.h
-index ccb5369b901..d488f8d477a 100644
---- a/include/configs/rk3368_common.h
-+++ b/include/configs/rk3368_common.h
-@@ -8,7 +8,6 @@
- 
- #include "rockchip-common.h"
- 
--#include <asm/arch-rockchip/hardware.h>
- #include <linux/sizes.h>
- 
- #define CFG_SYS_SDRAM_BASE		0
-diff --git a/include/configs/rv1108_common.h b/include/configs/rv1108_common.h
-index 3bf70a0e0ae..ff28236a21d 100644
---- a/include/configs/rv1108_common.h
-+++ b/include/configs/rv1108_common.h
-@@ -5,7 +5,6 @@
- #ifndef __CONFIG_RV1108_COMMON_H
- #define __CONFIG_RV1108_COMMON_H
- 
--#include <asm/arch-rockchip/hardware.h>
- #include "rockchip-common.h"
- 
- #define CFG_IRAM_BASE		0x10080000
+-#define PMU1_IOC_BASE			0xfd5f0000
+-#define PMU2_IOC_BASE			0xfd5f4000
+-
+-#define BUS_IOC_BASE			0xfd5f8000
+ #define BUS_IOC_GPIO2A_IOMUX_SEL_L	0x40
+ #define BUS_IOC_GPIO2B_IOMUX_SEL_L	0x48
+ #define BUS_IOC_GPIO2D_IOMUX_SEL_L	0x58
 
 -- 
 2.43.0
