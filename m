@@ -4,78 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C873C47DDB
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 17:59:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 266BDC47258
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 18:03:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDA8F87EE6;
-	Tue, 23 Jan 2024 18:58:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 816E787D73;
+	Tue, 23 Jan 2024 19:03:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pV0sp+8L";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UM1i9lxq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A70DE87BBC; Tue, 23 Jan 2024 18:58:56 +0100 (CET)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id D284687A17; Tue, 23 Jan 2024 19:03:08 +0100 (CET)
+Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
+ [IPv6:2607:f8b0:4864:20::b34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FFE687E70
- for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 18:58:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8ADC587D73
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 19:03:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-5ff84214fc7so43529097b3.0
- for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 09:58:54 -0800 (PST)
+Received: by mail-yb1-xb34.google.com with SMTP id
+ 3f1490d57ef6-dbed179f0faso4245713276.1
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 10:03:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1706032733; x=1706637533; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1706032983; x=1706637783; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=k76tXF1EEl5BumP+88mSzGHFk6sV2Ks+IRcGxKRSwS0=;
- b=pV0sp+8Lp7/6sLaybnZdX8MGBSH32y3HD3ZZL72P7BBZPOYXl+V86LiEw7WlNn2D8c
- mEVsffvAzJKHwptBDn6XayTXD6bocuAedvQ4U9tKWn5X0szAPtDBYLF0tlw8Vm2wmlsn
- Hxr5OyBz8zBXA1fpIspe3AjIicbxJVMXgNKNI=
+ bh=INFn+A3se0KcsTlYBBRzoGqX/LAPR+prAZTjOjLpM0E=;
+ b=UM1i9lxqvFSlcN2RS6UHgRK0WXCywA7HfZUI7+/5cg/3bndjg1X3oXJfKVIEtVkOf3
+ zwtlrTX3dM30elN5UJOWozKN/6zveZmM0LIflKMbmoQqOGKA7FKMwNWaA79bq7lNo8G7
+ 7VMqEFeHl3qZepwPWYd8rVpmszOONm9d8UI78=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706032733; x=1706637533;
+ d=1e100.net; s=20230601; t=1706032983; x=1706637783;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=k76tXF1EEl5BumP+88mSzGHFk6sV2Ks+IRcGxKRSwS0=;
- b=NCp9+WBG3ihywA2Ghny6qzD03/bSpQiWU7s5sgmr2CuPHI3kCJPPztlxZUJV9Zpyfq
- qh4RA/nyPDXtVcjcLjPhR30LppD46t1fdcie61b3eDJAY+T5Ch07pV1+fEgf+MUflpyD
- IEYD1n2wyUAOCY///CXIhsfZ4uz8FaIhZLMFY+aZzJf8o0by3sIoRtr8cxjYfNVRxo2m
- qzyFbktB8/g0F1n5IF2c4/oyHWGbnB1oXa+hZS13SvHmWKvGoIVTKvD8CFHHAyqYnr5W
- AEdGDndkacfKjdev233kc3ReBEYvl1OjWm0DQlYH6pEzep9bsQfcQirR+Y+lg/gj3VoK
- OKBA==
-X-Gm-Message-State: AOJu0Yzf1adwp/bxuZYh++J3gP6tfcFcUqT++dh8FzCB3NsjAw9qfb9b
- EJKAEUKkThOamYNKPGHc3en81cN+oTLsqmq+oXPq5SxG8dplxqZJReIKJhfV9L/RHgAkQw1oMn3
- F
-X-Google-Smtp-Source: AGHT+IHUm1WpX4HR0ax2Gg8/g8+ri1KtFKZLjz+cZDhDtvxTUhokJdos8GOZD4DdUAZjm5D6+a85Mg==
-X-Received: by 2002:a0d:e657:0:b0:5ff:ab70:843f with SMTP id
- p84-20020a0de657000000b005ffab70843fmr4313348ywe.58.1706032733178; 
- Tue, 23 Jan 2024 09:58:53 -0800 (PST)
+ bh=INFn+A3se0KcsTlYBBRzoGqX/LAPR+prAZTjOjLpM0E=;
+ b=pG2mUMGO4l0favfcILR0mDp1kYwFgIVaghxMbF0wZnfyLQLIjkxjTHQIcL6qUQNgOq
+ kTnH3DbxviHE09QqXlRU+yOTQNZl2+y5L3rYE5VqTi4V/IT56TpujxZahNyyPND2O3Ir
+ yCz4knihoOnoqEaUciU1QlkBrLN34raUGLf0O2Fhk7gkeL0Qm/JmpOX77TRTRmtNuWs+
+ BLk07ZJ9pg8vus3eZXPRCq9Os++8GHX5qz737f23Xv61jwP9vppw3j/aOeoIVD1BDUmj
+ 4dXChTvwfXW4AvSbSRN8lVcSJJxTX7kMGFS5Wl6FS7/WNc/gvzqtWoXhGauNrFU1u8Qn
+ /PUg==
+X-Gm-Message-State: AOJu0YzelTDmtY7IshQJZNGkxR2sMyneGIXQIPq2J/d5UjVvrCcrVMFq
+ KyZ75yn9pN4Q1W6NhJukn3eYFQXF9IFvNRMTrlW6wN54iq+B8D922Q5OvLL7IBArCR43t+vFhqr
+ q
+X-Google-Smtp-Source: AGHT+IEmYztKsOleGeaCS5Mq8pZWRJ5zCBPIRc9waq8LHKCzSMPp9QWsB/V6YVVwENUZNjKHqn9/tw==
+X-Received: by 2002:a81:4785:0:b0:5ff:9dea:3777 with SMTP id
+ u127-20020a814785000000b005ff9dea3777mr4820400ywa.13.1706032982749; 
+ Tue, 23 Jan 2024 10:03:02 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- p68-20020a819847000000b005ffbee10d14sm2241487ywg.10.2024.01.23.09.58.52
+ n4-20020a817204000000b005ff6419ec70sm5208008ywc.109.2024.01.23.10.03.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jan 2024 09:58:52 -0800 (PST)
-Date: Tue, 23 Jan 2024 12:58:51 -0500
+ Tue, 23 Jan 2024 10:03:02 -0800 (PST)
+Date: Tue, 23 Jan 2024 13:03:00 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 02/16] xilinx_mbv: Remove empty config header
-Message-ID: <20240123175851.GU3652023@bill-the-cat>
-References: <20240122223920.3630168-1-trini@konsulko.com>
- <20240122223920.3630168-2-trini@konsulko.com>
- <d6f63f01-5b53-48da-ab50-75bf8f0d83c3@amd.com>
+To: Conor Dooley <conor@kernel.org>
+Cc: Conor Dooley <conor.dooley@microchip.com>, Simon Glass <sjg@chromium.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Raymond Mao <raymond.mao@linaro.org>, Marek Vasut <marex@denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Andre Przywara <andre.przywara@arm.com>, Baruch Siach <baruch@tkos.co.il>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerry Van Baren <vanbaren@cideas.com>, Johan Jonker <jbx6244@gmail.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Samuel Holland <samuel@sholland.org>, Shiji Yang <yangshiji66@outlook.com>
+Subject: Re: [PATCH v7] fdt: Allow the devicetree to come from a bloblist
+Message-ID: <20240123180300.GW3652023@bill-the-cat>
+References: <20240104014919.413568-1-sjg@chromium.org>
+ <20240116-snowbound-symptom-aa07c4dcf736@wendy>
+ <20240122-pranker-shininess-8953eb6182b4@spud>
+ <20240122184717.GQ3652023@bill-the-cat>
+ <20240122-finicky-ancient-797ba048f927@spud>
+ <20240123-aviation-caretaker-3c49d8da42dd@spud>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="dHfXl6Sip7sibDoc"
+ protocol="application/pgp-signature"; boundary="VEdfzAiLimgR7c6d"
 Content-Disposition: inline
-In-Reply-To: <d6f63f01-5b53-48da-ab50-75bf8f0d83c3@amd.com>
+In-Reply-To: <20240123-aviation-caretaker-3c49d8da42dd@spud>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,95 +105,77 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---dHfXl6Sip7sibDoc
+--VEdfzAiLimgR7c6d
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 23, 2024 at 08:53:21AM +0100, Michal Simek wrote:
->=20
->=20
-> On 1/22/24 23:39, Tom Rini wrote:
-> > Now that we support having CONFIG_SYS_CONFIG_NAME be unset to indicate a
-> > lack of board.h file, unset this on the xilinx_mbv platforms and remove
-> > the otherwise empty file.
+On Tue, Jan 23, 2024 at 11:27:57AM +0000, Conor Dooley wrote:
+> On Mon, Jan 22, 2024 at 06:55:01PM +0000, Conor Dooley wrote:
+> > On Mon, Jan 22, 2024 at 01:47:17PM -0500, Tom Rini wrote:
+> > > On Mon, Jan 22, 2024 at 06:36:31PM +0000, Conor Dooley wrote:
+> > > > Hey,
+> > > >=20
+> > > > On Tue, Jan 16, 2024 at 01:48:06PM +0000, Conor Dooley wrote:
+> > > > > Yo,
+> > > > >=20
+> > > > > On Wed, Jan 03, 2024 at 06:49:19PM -0700, Simon Glass wrote:
+> > > > > > Standard passage provides for a bloblist to be passed from one =
+firmware
+> > > > > > phase to the next. That can be used to pass the devicetree alon=
+g as well.
+> > > > > > Add an option to support this.
+> > > > > >=20
+> > > > > > Tests for this will be added as part of the Universal Payload w=
+ork.
+> > > > > >=20
+> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > >=20
+> > > > > Since this was merged into master, U-Boot is no longer booting on=
+ my
+> > > > > icicle kit (At least that's what my bisection tells me). This is a
+> > > > > RISC-V board and U-Boot for it is built from
+> > > > > microchip_mpfs_icicle_defconfig.
+> > > > >=20
+> > > > > There's zero output on the console from U-Boot at all, the last t=
+hing
+> > > > > that I see is OpenSBI before things grind to a halt.
+> > > >=20
+> > > > Just wondering if there's anything I can do to help this one along?
+> > > > Got a red CI complaining at me every morning about it :|
+> > >=20
+> > > Well, can you please look in to what part of this is causing the
+> > > failure? I don't really see what would have changed on
+> > > microchip_mpfs_icicle_defconfig from this as BLOBLIST isn't set before
+> > > nor after this change.
 > >=20
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> > Cc: Michal Simek <michal.simek@amd.com>
-> > ---
-> >   board/xilinx/mbv/Kconfig     | 3 ---
-> >   board/xilinx/mbv/MAINTAINERS | 1 -
-> >   include/configs/xilinx_mbv.h | 6 ------
-> >   3 files changed, 10 deletions(-)
-> >   delete mode 100644 include/configs/xilinx_mbv.h
-> >=20
-> > diff --git a/board/xilinx/mbv/Kconfig b/board/xilinx/mbv/Kconfig
-> > index 4bc9f72c541b..d2dec397ed6f 100644
-> > --- a/board/xilinx/mbv/Kconfig
-> > +++ b/board/xilinx/mbv/Kconfig
-> > @@ -9,9 +9,6 @@ config SYS_VENDOR
-> >   config SYS_CPU
-> >   	default "generic"
-> > -config SYS_CONFIG_NAME
-> > -	default "xilinx_mbv"
-> > -
-> >   config TEXT_BASE
-> >   	default 0x80000000 if !RISCV_SMODE
-> >   	default 0x80400000 if RISCV_SMODE && ARCH_RV32I
-> > diff --git a/board/xilinx/mbv/MAINTAINERS b/board/xilinx/mbv/MAINTAINERS
-> > index 445654fe740e..db9f03388df9 100644
-> > --- a/board/xilinx/mbv/MAINTAINERS
-> > +++ b/board/xilinx/mbv/MAINTAINERS
-> > @@ -4,4 +4,3 @@ S:	Maintained
-> >   F:	arch/riscv/dts/xilinx-mbv*
-> >   F:	board/xilinx/mbv/
-> >   F:	configs/xilinx_mbv*
-> > -F:	include/configs/xilinx_mbv.h
-> > diff --git a/include/configs/xilinx_mbv.h b/include/configs/xilinx_mbv.h
-> > deleted file mode 100644
-> > index dba398aeec49..000000000000
-> > --- a/include/configs/xilinx_mbv.h
-> > +++ /dev/null
-> > @@ -1,6 +0,0 @@
-> > -/* SPDX-License-Identifier: GPL-2.0 */
-> > -/*
-> > - * (C) Copyright 2023, Advanced Micro Devices, Inc.
-> > - *
-> > - * Michal Simek <michal.simek@amd.com>
-> > - */
+> > Sure. I'll try to look into it more tomorrow.
 >=20
-> Acked-by: Michal Simek <michal.simek@amd.com>
->=20
-> But maybe in future we need to revert this patch to add more options ther=
-e.
-> Or do you plan to remove all of these configs?
-> I can imagine distro boot wiring but that can be done via vars file only =
-but
-> it is not practical.
+> I gave it a try, it seems to be the FDTSRC_BLOBLIST additions that kill
+> it, not the actual code in fdtdec_setup().
 
-Do you mean that plain text environment feels impractical for standard
-boot (which should be used instead of the pure scripts of distro_boot) ?
+Well that's very unexpected. Can you see what boundary we're crossing or
+whatever has overflowed now or something on your platform?
 
 --=20
 Tom
 
---dHfXl6Sip7sibDoc
+--VEdfzAiLimgR7c6d
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWv/lsACgkQFHw5/5Y0
-tyxDBQwAiaSBfHKf0WGHDZQto3eKYbIPPTyl2xiLbEVlOUnpe/4v5SKkEDsGaljl
-+LLiDzMg4VCsqg6qmmWPBy4nx83pFncezNODXe9GYNJhH0dOJHFq08FyLeTfrzD/
-uPPBwU9K8o8DTLXtSJrrB863sKUaAgie3VEpW1jk+SiKlvqWHsAUc4AL24IH3j6p
-TFLJob+EoyrmkTzUC5v7dJljBQzaze65BbMKZpd0bW2jWj3chTFM/VIVcpPH8N2B
-/Dlm8Scg3Wm+pycob8L/K4VGPkWJHVsEnkkeCwmN4ZWb7I2nT8cJKYZK+h8uW49D
-kPoHFETChG+A82saqQjZ4lOIctmJk/3IwqArU+EeXtl6ORgan24wK2EGXmwLo5Bj
-FJQCXl2TTORLWW+0BkK9+lu7bRjyTt3loci+XXsT++AV9jsU8tnFDmrYPoif+Kgf
-wbnbd09kQkl2Tv/30oZd93i0/qIlJAQLgfIqdVI8kNvV6BTIkohox4gbxbDaiCL4
-Gpvmd2a2
-=Bac8
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWv/1QACgkQFHw5/5Y0
+tywDhgv9ErIcGBfI8eGRbVJ4uq/4ZvFou1Oe8nXmYoxQHB61r8FP40bJ/aLmWWtm
+iAeTyt0Rz1RqLj4LUUu3pw+UyWLkcZhYUAtGDUWoZZL+yUArjooWvAB6zn0w2bU8
+svD377DWL0x6rMvqYhWT9V3E21IusPB+/xQSUi6ktKCuUAP49a5Qph2KO7iBoXqD
+E+kfCqwzvGhkEmr7rJjYi2mf2qRS5ujX4P5DmpF2ib4VYojKx5XM1NhYPRsCKNQT
+XVP9szMKSl70jMv0hpuMHIO0zbnltXVVe7SZNvcxq7gAywS9i7uXYM+6R9Qtbo9v
+Z/MEMBnuwlHJVUlxi5pERb4Re4aBfZ55cIblJHrKwPFNEeu3HdCxhUpRCGTX2a2R
+BHj4Z5FaEFrcV6js3pcfH1X4wNj420lb+LLdSG8wMi725peDFwsftYYazetY54fI
+lJG3gitHhhKnzhNW2OvFKBJmQxOtKiZByOF8vrbqC0Gx4zNG3BSvAR8+dlX6i5hC
+3MPOojaC
+=piVn
 -----END PGP SIGNATURE-----
 
---dHfXl6Sip7sibDoc--
+--VEdfzAiLimgR7c6d--
