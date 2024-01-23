@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 223BEC47258
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 17:58:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C873C47DDB
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 17:59:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5976A87D73;
-	Tue, 23 Jan 2024 18:58:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CDA8F87EE6;
+	Tue, 23 Jan 2024 18:58:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Gz+RJcsm";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pV0sp+8L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A30DD87BBC; Tue, 23 Jan 2024 18:58:52 +0100 (CET)
+ id A70DE87BBC; Tue, 23 Jan 2024 18:58:56 +0100 (CET)
 Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
  [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85B4687DA1
- for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 18:58:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8FFE687E70
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 18:58:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-5ffcb478512so19841847b3.0
- for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 09:58:50 -0800 (PST)
+ 00721157ae682-5ff84214fc7so43529097b3.0
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 09:58:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1706032729; x=1706637529; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1706032733; x=1706637533; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3z5iXHQaRsOpt3nxVnJSwFMI8Dep99DGwU2xMfYZJ10=;
- b=Gz+RJcsmwnVXpXaqzmKhU36M6reaj3OmeZZmtaLjwydYdtzMCLQmsxwg/wm7P+0trt
- c3VatSn2/U2R/oKbfMYOKDbzNE0TDqT5igJmBqVDisWNd4Lf6HwERrLEuUlcbm1NUW6n
- 2cDK3SzxYRTRNRNr+NYXgGPH0SxmFIVjssnY8=
+ bh=k76tXF1EEl5BumP+88mSzGHFk6sV2Ks+IRcGxKRSwS0=;
+ b=pV0sp+8Lp7/6sLaybnZdX8MGBSH32y3HD3ZZL72P7BBZPOYXl+V86LiEw7WlNn2D8c
+ mEVsffvAzJKHwptBDn6XayTXD6bocuAedvQ4U9tKWn5X0szAPtDBYLF0tlw8Vm2wmlsn
+ Hxr5OyBz8zBXA1fpIspe3AjIicbxJVMXgNKNI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706032729; x=1706637529;
+ d=1e100.net; s=20230601; t=1706032733; x=1706637533;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3z5iXHQaRsOpt3nxVnJSwFMI8Dep99DGwU2xMfYZJ10=;
- b=T5ab4zsOl3JJqTuJ0+C6SKhg7YlODw2Y1qvWydVl699ckrJCbnwnOlTCAEji/o7jZb
- EvpiaMpKX81TzCqJ3DIXYmPAEO0FdoyZIANIfp+az/Iaq62Wyq8SP4rA0SrLbspNt6dL
- 9g4yl6pUM9l9N8oPpuSCEHgN41znJmGNi+5CnyPZnQL+yIEr4m7WBo634NoGhv3DSwKk
- 67VEepYD81CpTEznWLYJncx+EzSlooZC2hQxK2pA+vpZhZGCLDO5HCn6kX0um64G5/M5
- JpoUvEBcz/0bxEL2nnT8LWfVcq+iE7U7ppD9BAtB38AHN7znn1wVHH3CFFCKISJzHomM
- MObw==
-X-Gm-Message-State: AOJu0YwzdfE6r1xNcafSIMVBmKilN6O+eUO0oS3FYjugD4h8UrkvLGCc
- gx6yfxj7MlOxozRL+xkkbIt2TYRlOxpKVyTrWFyzJ0CioQ0OuGHa6QSpII/usRQxkdaLrqdSDmW
- K
-X-Google-Smtp-Source: AGHT+IGGY6P4LTdaRjERYIBhcXDM4oKdAXzMd/ienAw3Jc+BBK5hJusVoFFH2tUnRBojIMdgt4PstQ==
-X-Received: by 2002:a81:4785:0:b0:5ff:9dea:3777 with SMTP id
- u127-20020a814785000000b005ff9dea3777mr4811665ywa.13.1706032729223; 
- Tue, 23 Jan 2024 09:58:49 -0800 (PST)
+ bh=k76tXF1EEl5BumP+88mSzGHFk6sV2Ks+IRcGxKRSwS0=;
+ b=NCp9+WBG3ihywA2Ghny6qzD03/bSpQiWU7s5sgmr2CuPHI3kCJPPztlxZUJV9Zpyfq
+ qh4RA/nyPDXtVcjcLjPhR30LppD46t1fdcie61b3eDJAY+T5Ch07pV1+fEgf+MUflpyD
+ IEYD1n2wyUAOCY///CXIhsfZ4uz8FaIhZLMFY+aZzJf8o0by3sIoRtr8cxjYfNVRxo2m
+ qzyFbktB8/g0F1n5IF2c4/oyHWGbnB1oXa+hZS13SvHmWKvGoIVTKvD8CFHHAyqYnr5W
+ AEdGDndkacfKjdev233kc3ReBEYvl1OjWm0DQlYH6pEzep9bsQfcQirR+Y+lg/gj3VoK
+ OKBA==
+X-Gm-Message-State: AOJu0Yzf1adwp/bxuZYh++J3gP6tfcFcUqT++dh8FzCB3NsjAw9qfb9b
+ EJKAEUKkThOamYNKPGHc3en81cN+oTLsqmq+oXPq5SxG8dplxqZJReIKJhfV9L/RHgAkQw1oMn3
+ F
+X-Google-Smtp-Source: AGHT+IHUm1WpX4HR0ax2Gg8/g8+ri1KtFKZLjz+cZDhDtvxTUhokJdos8GOZD4DdUAZjm5D6+a85Mg==
+X-Received: by 2002:a0d:e657:0:b0:5ff:ab70:843f with SMTP id
+ p84-20020a0de657000000b005ffab70843fmr4313348ywe.58.1706032733178; 
+ Tue, 23 Jan 2024 09:58:53 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- i142-20020a816d94000000b005ffa1fbfa7esm3111562ywc.101.2024.01.23.09.58.48
+ p68-20020a819847000000b005ffbee10d14sm2241487ywg.10.2024.01.23.09.58.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Jan 2024 09:58:48 -0800 (PST)
-Date: Tue, 23 Jan 2024 12:58:47 -0500
+ Tue, 23 Jan 2024 09:58:52 -0800 (PST)
+Date: Tue, 23 Jan 2024 12:58:51 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Kever Yang <kever.yang@rock-chips.com>
+To: Michal Simek <michal.simek@amd.com>
 Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 01/20] Convert CONFIG_SPL_STACK to Kconfig
-Message-ID: <20240123175847.GT3652023@bill-the-cat>
-References: <20220529165521.912054-1-trini@konsulko.com>
- <CAKUh=RyhSZKzh+ab6kq1ZLYqEonhbjikJcaDASqhbdo6kQ+-Lg@mail.gmail.com>
+Subject: Re: [PATCH 02/16] xilinx_mbv: Remove empty config header
+Message-ID: <20240123175851.GU3652023@bill-the-cat>
+References: <20240122223920.3630168-1-trini@konsulko.com>
+ <20240122223920.3630168-2-trini@konsulko.com>
+ <d6f63f01-5b53-48da-ab50-75bf8f0d83c3@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="k5rYeUdgP7sO+RKm"
+ protocol="application/pgp-signature"; boundary="dHfXl6Sip7sibDoc"
 Content-Disposition: inline
-In-Reply-To: <CAKUh=RyhSZKzh+ab6kq1ZLYqEonhbjikJcaDASqhbdo6kQ+-Lg@mail.gmail.com>
+In-Reply-To: <d6f63f01-5b53-48da-ab50-75bf8f0d83c3@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,60 +94,95 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---k5rYeUdgP7sO+RKm
+--dHfXl6Sip7sibDoc
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 23, 2024 at 11:53:18AM +0800, Kever Yang wrote:
-
-> Hi Tom,
+On Tue, Jan 23, 2024 at 08:53:21AM +0100, Michal Simek wrote:
 >=20
-> rk3036 only has small size internal sram, so it can only use very
-> simple SPL which only including dram init, and no SPL_FRAMEWORK
-> support.
-> In this convert, the CONFIG_SPL_STACK is lost for this SoC, any
-> suggestions on this kind of issue?
+>=20
+> On 1/22/24 23:39, Tom Rini wrote:
+> > Now that we support having CONFIG_SYS_CONFIG_NAME be unset to indicate a
+> > lack of board.h file, unset this on the xilinx_mbv platforms and remove
+> > the otherwise empty file.
+> >=20
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> > Cc: Michal Simek <michal.simek@amd.com>
+> > ---
+> >   board/xilinx/mbv/Kconfig     | 3 ---
+> >   board/xilinx/mbv/MAINTAINERS | 1 -
+> >   include/configs/xilinx_mbv.h | 6 ------
+> >   3 files changed, 10 deletions(-)
+> >   delete mode 100644 include/configs/xilinx_mbv.h
+> >=20
+> > diff --git a/board/xilinx/mbv/Kconfig b/board/xilinx/mbv/Kconfig
+> > index 4bc9f72c541b..d2dec397ed6f 100644
+> > --- a/board/xilinx/mbv/Kconfig
+> > +++ b/board/xilinx/mbv/Kconfig
+> > @@ -9,9 +9,6 @@ config SYS_VENDOR
+> >   config SYS_CPU
+> >   	default "generic"
+> > -config SYS_CONFIG_NAME
+> > -	default "xilinx_mbv"
+> > -
+> >   config TEXT_BASE
+> >   	default 0x80000000 if !RISCV_SMODE
+> >   	default 0x80400000 if RISCV_SMODE && ARCH_RV32I
+> > diff --git a/board/xilinx/mbv/MAINTAINERS b/board/xilinx/mbv/MAINTAINERS
+> > index 445654fe740e..db9f03388df9 100644
+> > --- a/board/xilinx/mbv/MAINTAINERS
+> > +++ b/board/xilinx/mbv/MAINTAINERS
+> > @@ -4,4 +4,3 @@ S:	Maintained
+> >   F:	arch/riscv/dts/xilinx-mbv*
+> >   F:	board/xilinx/mbv/
+> >   F:	configs/xilinx_mbv*
+> > -F:	include/configs/xilinx_mbv.h
+> > diff --git a/include/configs/xilinx_mbv.h b/include/configs/xilinx_mbv.h
+> > deleted file mode 100644
+> > index dba398aeec49..000000000000
+> > --- a/include/configs/xilinx_mbv.h
+> > +++ /dev/null
+> > @@ -1,6 +0,0 @@
+> > -/* SPDX-License-Identifier: GPL-2.0 */
+> > -/*
+> > - * (C) Copyright 2023, Advanced Micro Devices, Inc.
+> > - *
+> > - * Michal Simek <michal.simek@amd.com>
+> > - */
+>=20
+> Acked-by: Michal Simek <michal.simek@amd.com>
+>=20
+> But maybe in future we need to revert this patch to add more options ther=
+e.
+> Or do you plan to remove all of these configs?
+> I can imagine distro boot wiring but that can be done via vars file only =
+but
+> it is not practical.
 
-Does this work?
-
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index e7b84fc1fa68..9deee0fdbea8 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -372,7 +372,8 @@ config SPL_SHARES_INIT_SP_ADDR
-=20
- config SPL_STACK
- 	hex "Initial stack pointer location"
--	depends on (ARM || ARCH_JZ47XX || MICROBLAZE || RISCV) && SPL_FRAMEWORK
-+	depends on (ARM || ARCH_JZ47XX || MICROBLAZE || RISCV) && \
-+		SPL_FRAMEWORK || ROCKCHIP_RK3036
- 	depends on !SPL_SHARES_INIT_SP_ADDR
- 	default 0x946bb8 if ARCH_MX7
- 	default 0x93ffb8 if ARCH_MX6 && MX6_OCRAM_256KB
-
-You will have to update the ROCKCHIP_RK3036 platforms otherwise the
-build will hang now.
+Do you mean that plain text environment feels impractical for standard
+boot (which should be used instead of the pure scripts of distro_boot) ?
 
 --=20
 Tom
 
---k5rYeUdgP7sO+RKm
+--dHfXl6Sip7sibDoc
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWv/lAACgkQFHw5/5Y0
-tywx/gwAoPXIZiJjdTcqR6j1fYvzHr3xRb8JZrWSWAC3nLfJEdFqs/VyjsinBxL7
-u/In3s01UqJxedf5aAq14J5Rg4NvhuDcPUXU2Zdao2mDqA+Mzjtxzo7wl9yryfrQ
-URqKO6doJK3az8I7jGhGYDN7pDLf2K4SrV+sz8ibEWZ3PAJ4Ve694UEC4Uep+w5q
-ns+Rr8xD/xSi+WVDp3MMJp339WD7W5hz6imCngCxayUm9D7Tnvt4sCuyLKAmKnGj
-jmD2kQLeg2qz5mRiKLR7w+tPPLcUnIBG4KcNuDYdCSoM6eOcQ356Z6U3O5sxPYIg
-as5rB08TxpvJ0odl1q+hRKf81CAY2zZUrQ/qV8Y+tO1kAY5gi9l31nT9ugWqo2Zn
-GYF2EsHImIOC78ZzxXI/IVpkEKPRH6X4rdQHgYwaiQJwc1e2hlLuZRhK5tU9jv2R
-MKsoksQ1G48CjHYv8D8VcnljLN612iu+K2IZkEcUFKZPRDJ8Uc8KyyDrqMuWk1WE
-+86B2Ahh
-=W7ss
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWv/lsACgkQFHw5/5Y0
+tyxDBQwAiaSBfHKf0WGHDZQto3eKYbIPPTyl2xiLbEVlOUnpe/4v5SKkEDsGaljl
++LLiDzMg4VCsqg6qmmWPBy4nx83pFncezNODXe9GYNJhH0dOJHFq08FyLeTfrzD/
+uPPBwU9K8o8DTLXtSJrrB863sKUaAgie3VEpW1jk+SiKlvqWHsAUc4AL24IH3j6p
+TFLJob+EoyrmkTzUC5v7dJljBQzaze65BbMKZpd0bW2jWj3chTFM/VIVcpPH8N2B
+/Dlm8Scg3Wm+pycob8L/K4VGPkWJHVsEnkkeCwmN4ZWb7I2nT8cJKYZK+h8uW49D
+kPoHFETChG+A82saqQjZ4lOIctmJk/3IwqArU+EeXtl6ORgan24wK2EGXmwLo5Bj
+FJQCXl2TTORLWW+0BkK9+lu7bRjyTt3loci+XXsT++AV9jsU8tnFDmrYPoif+Kgf
+wbnbd09kQkl2Tv/30oZd93i0/qIlJAQLgfIqdVI8kNvV6BTIkohox4gbxbDaiCL4
+Gpvmd2a2
+=Bac8
 -----END PGP SIGNATURE-----
 
---k5rYeUdgP7sO+RKm--
+--dHfXl6Sip7sibDoc--
