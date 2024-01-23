@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B30DC47258
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 10:00:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B641C47258
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 10:06:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8198187C3B;
-	Tue, 23 Jan 2024 11:00:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id ABD6287B36;
+	Tue, 23 Jan 2024 11:06:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="CfZ5xWku";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QXGzvtJr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9F6C87BF9; Tue, 23 Jan 2024 11:00:34 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2E64E87B9E; Tue, 23 Jan 2024 11:06:37 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F3C587A0E
- for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 11:00:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C45F187A0E
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 11:06:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1706004024; x=1706608824; i=xypron.glpk@gmx.de;
- bh=R0dG1rdTpwNgoBPYA4UZXnNXdjyXy++07U0CW5wbAls=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=CfZ5xWkuV/GbhGd//N5JKmqxgjPvcqQI1FwuPZmSqQa0w2eYUQayLw1Qh7KyRrjT
- 4krjmjg0UmxA17Gbpdjsr2FOsgbOMwnUMeyIysSvP37CNWY0pl78uaHUbR2zuk8Sx
- 0KbjpI6/TckVWm+U3R1MFo0fsgKhC6hJh1B0kxOK/o7p3BHoFTi/rXY1dLcH3Fri0
- EdbAGrfIqUDIimTJGeB+HLcWX80sEmLHqiQ7ntaVHYU6/VhbYDtGMC8oJtfWJwwo9
- U/qg0Oll18D/cxMka2boiL4HhvDBajRlB+PWFf4IgCzFcZ0CCB2rE3OEHcNZ2q7oF
- 9wAu+JlUKh6TgssLIw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([178.202.40.247]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MIdif-1rMUXN34Tt-00Ee9G; Tue, 23
- Jan 2024 11:00:24 +0100
-Message-ID: <d2b79924-87bc-42a2-9d06-6fcba06ed267@gmx.de>
-Date: Tue, 23 Jan 2024 11:00:23 +0100
+ spf=pass smtp.mailfrom=max.oss.09@gmail.com
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-40e8fec0968so53048495e9.1
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 02:06:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706004394; x=1706609194; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=27ffTG+0hiVj6c0wIfq1GplM3iPSqVyrAN+jPwuGaMg=;
+ b=QXGzvtJrge2aIQkpDGiWe5iCUSqhu0+oCfwprdrmzP4gZmOWePjEgnmUy+HQ9AEeJf
+ URPYiwoB4NsY+oRs7rpy21SF+r828tSUFLUkOm6UiRxxTfqyyOxTTli5xmECIlsSJ2Fk
+ fcxvHXCNnYGbgzOC0Hc7vI6UwIoNAxM65Rh/iY65Z6TQ0aQUBNkIwMAhinikrKXTvbwL
+ hBJff7m4Ass7cyUst7vsj+coJra5AYC2MZ1o4UCQSuaLGmYOtfSJL5V7psuruRluVxCf
+ MBghFKpv9wicCNWR8pU8gob4U4rjfLrsi5XLGHlLkMy2Pblci7GXs6GfYUBt3WKZxnST
+ ArLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706004394; x=1706609194;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=27ffTG+0hiVj6c0wIfq1GplM3iPSqVyrAN+jPwuGaMg=;
+ b=h5WtVTjRhg015oLkyWFm4428uNOYjklg+ugx77dS9MzaIL2J3TcHGL4CMWot6/eEge
+ DISFt4iKD3d/qap4gveM9Uq+PWO0x6NLXF0hYtE0r7ZXA5OLoaG6xJCl14u7UEZ/VY55
+ JDG07FiwQAFCubdErqTu8lMJX/C8wPVhFExADTUyd5UKpCT/B4BycarxArasyzpOKfMv
+ sABFguc6iAj1kNUNtH+m8WRKjVkGK1euF5SEahQJ2Om2R7zCGEo9BlmpD9ZTDDDnQYNO
+ Ad4LjTvew5EjgGXhEN4GOsu9sISaUQdGX7Z4vPk+KA23pSuPDpofUmMDCu09VzDOrS2S
+ eQuQ==
+X-Gm-Message-State: AOJu0Yyk8Uqp28vwvCWamd9X2wTnLEZvqag4zZ5nQ3dg1toLVBc7zqSW
+ +38RqSNm7GpvYEQgTHsJ6uOca3L9vMZltdD1qNGLE4GZnmGR//sZ
+X-Google-Smtp-Source: AGHT+IHKM4Ef4DxDPYvVB/D3ewfrTKvibSiGQYud3oPzKRoCONWd4KLkpCcAD3YENryFBzuc10rSRg==
+X-Received: by 2002:a05:600c:4f04:b0:40e:3505:32eb with SMTP id
+ l4-20020a05600c4f0400b0040e350532ebmr361961wmq.133.1706004394033; 
+ Tue, 23 Jan 2024 02:06:34 -0800 (PST)
+Received: from toolbox (31-10-206-125.static.upc.ch. [31.10.206.125])
+ by smtp.gmail.com with ESMTPSA id
+ iv17-20020a05600c549100b0040e5034d8e0sm46167654wmb.43.2024.01.23.02.06.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 23 Jan 2024 02:06:33 -0800 (PST)
+Date: Tue, 23 Jan 2024 11:06:32 +0100
+From: Max Krummenacher <max.oss.09@gmail.com>
+To: Ryan Eatmon <reatmon@ti.com>
+Cc: Neha Malcom Francis <n-francis@ti.com>, sjg@chromium.org,
+ vigneshr@ti.com, bb@ti.com, m-chawdhry@ti.com,
+ alpernebiyasak@gmail.com, nm@ti.com, u-boot@lists.denx.de,
+ vishalm@ti.com, jonas@kwiboo.se, sughosh.ganu@linaro.org
+Subject: Re: [PATCH v2 2/2] tools: binman: ti_board_cfg: Check for linting
+ problems
+Message-ID: <Za-PqGxk6is1ToLc@toolbox>
+References: <20240105113917.1117945-1-n-francis@ti.com>
+ <20240105113917.1117945-3-n-francis@ti.com>
+ <Za5munT0bYuZ5bio@toolbox>
+ <419c31bd-7cd8-4439-b001-adad75184cf9@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi_loader : Suppress error print message
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
-Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, trini@konsulko.com,
- sjg@chromium.org, michal.simek@amd.com, venkatesh.abbarapu@amd.com,
- git@xilinx.com
-References: <20240122191242.2989327-1-tejas.arvind.bhumkar@amd.com>
- <CAC_iWjKEMs_0WHyu7ttfvP30vG=sJnhY5XWY=5hGBTAW_5oxyg@mail.gmail.com>
-Content-Language: en-US, de-DE
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAC_iWjKEMs_0WHyu7ttfvP30vG=sJnhY5XWY=5hGBTAW_5oxyg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:MOkojv3W4p6N6f9FJBGepeyoyifquB2/IIggurA6LVZFXtgWISd
- lS0W4qqseiVAhw0FaJmZZNX3RBKfIkmg5VLoih/vySVSrD5l/J4sgsMwMNWQBBCl/XQSUeN
- kEdwYvwTOGSGpTKtdJm0Psif8iZA6L9QMhdqgBdaH+3irgtXkB7CVBoXSch/MBmWopTPGcN
- C4XgTau86opnukkqtgLsg==
-UI-OutboundReport: notjunk:1;M01:P0:aFtAdxL5e4s=;wv5JB4fTYU+J2MVMZ5gjqib1N/1
- 7oobbIG6ThhbsqRd+1oE45WbrUn1EQ854lVliTGiyjsN95Z1PTk0WwfdbwAzjzMBaxICBNr+C
- E0Inic3fvJwdPndwio+cqXgU4xE5uRj61naTMAE6Z68kG2KRacV5hunuP/Rc7F3qwUgXR7ARQ
- 4n9ZqRnjGv3HP3ob/HtN6tisXB74ALXvL7xH7iF9JI54RsSTcb8jgJhEeBBYZOCPXso5uU8mA
- e6GsJoaFfjOcyQK7YhWzD5Ko3+IPpHpxRPJ4QLJSSRM7sm7l+6PjrHWOdp28ZMuP+cGe9TN4T
- gone6j9zRKO+tBB+RaD7GQ0dmH6RN169KGhQsf6/rOD0IOImVHuNWoD1PYHMGN1ps7EYKUAnq
- bUZiJB/sW/3PPSxlYWcYniiiW6qMwCzqSDyjxegVjEDiHOdb/Mmj5pO473evzew17rRUwT3/k
- /YUtWutYs4cuWi6tqoxEupmAwUFcDcHIpH3PZxiNyS1u1MojXQtF+4yUi/fuuS8geGXOtBuMm
- vw8mc5yM0zLPBc0L43+6e9mrNOk+xp8sJHWFgWV8QOuwKNqypSZOgIuED3BPGKJSPV0aINxpL
- O5vVbef75iFCce0iOMn4tOEHfvvC9HFqJXXsPnFOUAdk9oU1o55lDFy1FPz1tODRBAgjexbwg
- +6xultAAKq6m0lOvX1h2RorGpe6RtaAApExzA7sJteF9WyzM8tC/bsElF2SPSiAq2S+qsTivv
- hNvnV/5Q+TfBQj4Vn2HgA3DV8QsJo3YGlFt4rheIXsjjX2Lgdv+Mg2ZPS6q61VFADvZW5Uabu
- m7443f3lsNSUJ0pGW+LbwPyqgikSB49jMEEdt09giFUxofGy+AFWcxxOf0PS9uDH/L5suzij1
- e+BoffgdqKZCo9yTndrHVGrbsDOZwGFSjsvzecQ2P40y6tzKPdz0V3UnNLZdcB3qn/sKa1siZ
- UIMELnjwHSBN7avHgGOvlJLpizQ=
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <419c31bd-7cd8-4439-b001-adad75184cf9@ti.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,93 +97,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/23/24 09:33, Ilias Apalodimas wrote:
-> Hi Tejas,
->
-> On Mon, 22 Jan 2024 at 21:12, Tejas Bhumkar
-> <tejas.arvind.bhumkar@amd.com> wrote:
->>
->> Currently, on certain Xilinx platforms, an issue has been
->> identified, manifesting as follows:
+On Mon, Jan 22, 2024 at 03:11:35PM -0600, Ryan Eatmon wrote:
+> 
+> 
+> On 1/22/2024 6:59 AM, Max Krummenacher wrote:
+> > Hi
+> > 
+> > On Fri, Jan 05, 2024 at 05:09:17PM +0530, Neha Malcom Francis wrote:
+> > > Use yamllint for checking whether YAML configuration files are adhering
+> > > to default yamllint rules.
+> > 
+> > If I understand this correctly this patch now runs checks to verify
+> > that yaml files which are part of the U-Boot source tree are correct.
+> > 
+> > Shouldn't this be done when one commits a yaml file, i.e. in U-Boot CI
+> > rather than repeating the process on every build and thus having an
+> > additional dependency to build U-Boot and additional build time?
+> > 
+> > Note that in openembedded there is currently no python yamllint
+> > recipe providing the used python module in the regularly used layers.
+> > How do you plan to integrate the change in the OE U-Boot recipe?
+> > At least our OE CI of latest master now fails (for a TI AM62 based SoM)
+> > as the python module is missing.
+> 
+> I have submitted a patch to oe-core for this missing recipe.
+> 
+> https://lists.openembedded.org/g/openembedded-core/message/194192
+> 
+> Hopefully they accept it.  Otherwise, we are going to "temporarily" carrying
+> the same recipe in meta-ti-extras until they accept it in oe-core.
 
-Hello Tejas,
+Hi Ryan
 
-thank you for bringing forward this issue.
-
-Which defconfig are you relating to?
-
->>
->> Starting kernel ...
->>
->> efi_free_pool: illegal free 0x0000000077830040
->> efi_free_pool: illegal free 0x000000007782d040
->> efi_free_pool: illegal free 0x000000007782c040
->>
->> The issue arises when the ramdisk image is relocated, placing
->> it within the previously allocated EFI memory region( as EFI
->> is established quite early in U-Boot).
-
-Which version of U-Boot are you on? Commit 06d514d77c37 ("lmb: consider
-EFI memory map") was meant to avoid such a situation.
-
->
-> I don't mind suppressing the print for some time, but out of
-> curiosity, how is the ramdisk relocated? LMB should be aware of the
-> EFI regions by then, so I assume the relocation code doesn't check
-> those?
-
-The indicated situation is serious. If the EFI sub-system is using the
-same memory area as the ramdisk, this may lead to corruption of the
-ramdisk. Suppressing the messages is by no means adequate to solve the
-problem.
-
-Best regards
-
-Heinrich
-
-
->
-> Thanks
-> /Ilias
->
->> Consequently, when
->> attempting to release memory in the EFI memory region during
->> the handover process to the kernel,we encounter memory violations.
->>
->> Highlighting that EFI remains active primarily during the
->> booting of an EFI application, and the lmb persists while
->> configuring images for the boot process. Since we aren't
->> utilizing the EFI memory region during the boot process,
->> there is no adverse impact even in the event of a violation.
->>
->> Currently, there is an ongoing discussion regarding the handling
->> strategies of three memory allocators: malloc, lmb, and EFI. This
->> discussion is documented in the email chain
->> titled "Proposal: U-Boot memory management."
->>
->> Therefore, it is advisable to suppress the print message during
->> the boot process for now.
->>
->> Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
->> ---
->>   lib/efi_loader/efi_memory.c | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
->> index edfad2d95a..821fe7616e 100644
->> --- a/lib/efi_loader/efi_memory.c
->> +++ b/lib/efi_loader/efi_memory.c
->> @@ -713,7 +713,7 @@ efi_status_t efi_free_pool(void *buffer)
->>          /* Check that this memory was allocated by efi_allocate_pool()=
- */
->>          if (((uintptr_t)alloc & EFI_PAGE_MASK) ||
->>              alloc->checksum !=3D checksum(alloc)) {
->> -               printf("%s: illegal free 0x%p\n", __func__, buffer);
->> +               debug("%s: illegal free 0x%p\n", __func__, buffer);
->>                  return EFI_INVALID_PARAMETER;
->>          }
->>          /* Avoid double free */
->> --
->> 2.27.0
->>
-
+Thanks for looking into it.
+Max
+> 
+> 
+> > Regards
+> > Max
+> > 
+> 
+> -- 
+> Ryan Eatmon                reatmon@ti.com
+> -----------------------------------------
+> Texas Instruments, Inc.  -  LCPD  -  MGTS
