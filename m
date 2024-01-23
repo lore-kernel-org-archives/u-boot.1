@@ -4,44 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BE95C47DDB
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 09:28:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32C1DC47258
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 09:29:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D997587994;
-	Tue, 23 Jan 2024 10:28:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8510187994;
+	Tue, 23 Jan 2024 10:29:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 600D687BBC; Tue, 23 Jan 2024 10:28:08 +0100 (CET)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 9A52E87701
- for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 10:28:05 +0100 (CET)
+ id A90FC87994; Tue, 23 Jan 2024 10:29:38 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id 25A4187701
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 10:29:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.05,213,1701097200"; 
- d="asc'?scan'208";a="191419015"
+X-IronPort-AV: E=Sophos;i="6.05,214,1701097200"; 
+ d="asc'?scan'208";a="195327754"
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 23 Jan 2024 18:28:04 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 23 Jan 2024 18:29:33 +0900
 Received: from [10.226.92.252] (unknown [10.226.92.252])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 98DB8400F737;
- Tue, 23 Jan 2024 18:28:03 +0900 (JST)
-Message-ID: <92a6bca5-2f9c-49f4-9b92-87527018244a@bp.renesas.com>
-Date: Tue, 23 Jan 2024 09:28:02 +0000
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 0B045400F737;
+ Tue, 23 Jan 2024 18:29:31 +0900 (JST)
+Message-ID: <2e8156d5-f43c-4c7d-9898-a64476d7ad3b@bp.renesas.com>
+Date: Tue, 23 Jan 2024 09:29:31 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] pinctrl: renesas: Drop include common.h
+Subject: Re: [PATCH 3/3] ARM: renesas: Drop include common.h
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Adam Ford <aford173@gmail.com>
 References: <20240121173211.273726-1-marek.vasut+renesas@mailbox.org>
- <20240121173211.273726-2-marek.vasut+renesas@mailbox.org>
+ <20240121173211.273726-3-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20240121173211.273726-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240121173211.273726-3-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------A8IvgqNvsJSKcYBeXXOfGFYy"
+ boundary="------------OFlEu7EMos50NGQrAQjvzjkq"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,21 +60,22 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------A8IvgqNvsJSKcYBeXXOfGFYy
-Content-Type: multipart/mixed; boundary="------------wzK4dRL7H8XMZDylgOIL4aif";
+--------------OFlEu7EMos50NGQrAQjvzjkq
+Content-Type: multipart/mixed; boundary="------------s1bmefSc0ATPmrcd07lxToKp";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Message-ID: <92a6bca5-2f9c-49f4-9b92-87527018244a@bp.renesas.com>
-Subject: Re: [PATCH 2/3] pinctrl: renesas: Drop include common.h
+Cc: Adam Ford <aford173@gmail.com>
+Message-ID: <2e8156d5-f43c-4c7d-9898-a64476d7ad3b@bp.renesas.com>
+Subject: Re: [PATCH 3/3] ARM: renesas: Drop include common.h
 References: <20240121173211.273726-1-marek.vasut+renesas@mailbox.org>
- <20240121173211.273726-2-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240121173211.273726-2-marek.vasut+renesas@mailbox.org>
+ <20240121173211.273726-3-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240121173211.273726-3-marek.vasut+renesas@mailbox.org>
 
---------------wzK4dRL7H8XMZDylgOIL4aif
-Content-Type: multipart/mixed; boundary="------------yMWV1YiipYKn02F7y0OnNglB"
+--------------s1bmefSc0ATPmrcd07lxToKp
+Content-Type: multipart/mixed; boundary="------------X4kFModoN3Vgee9kVl4m80UP"
 
---------------yMWV1YiipYKn02F7y0OnNglB
+--------------X4kFModoN3Vgee9kVl4m80UP
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -81,243 +83,560 @@ On 21/01/2024 17:31, Marek Vasut wrote:
 > The header file is not necessary in either of those files,
 > remove it as common.h is going away.
 >=20
+> Include missing asm/arch/rmobile.h in board/renesas/rcar-common/v3-comm=
+on.c
+> to prevent build failure of r8a77970_eagle r8a779a0_falcon r8a77980_v3h=
+sk
+> and r8a77970_v3msk .
+>=20
+> Include missing asm/u-boot.h in falcon.c and grpeach.c to fix build fai=
+lure
+> due to missing definition of struct bd_info . Include errno.h in grpeac=
+h.c
+> to fix build error due to missing definition of EINVAL.
+>=20
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
+> Cc: Adam Ford <aford173@gmail.com>
 > Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
 > ---
->  drivers/pinctrl/renesas/pfc-r8a7790.c  | 1 -
->  drivers/pinctrl/renesas/pfc-r8a7791.c  | 1 -
->  drivers/pinctrl/renesas/pfc-r8a7792.c  | 1 -
->  drivers/pinctrl/renesas/pfc-r8a7794.c  | 1 -
->  drivers/pinctrl/renesas/pfc-r8a77951.c | 1 -
->  drivers/pinctrl/renesas/pfc-r8a7796.c  | 1 -
->  drivers/pinctrl/renesas/pfc-r8a77965.c | 1 -
->  drivers/pinctrl/renesas/pfc-r8a77970.c | 1 -
->  drivers/pinctrl/renesas/pfc-r8a77980.c | 1 -
->  drivers/pinctrl/renesas/pfc-r8a77990.c | 1 -
->  drivers/pinctrl/renesas/pfc-r8a77995.c | 1 -
->  drivers/pinctrl/renesas/pfc-r8a779a0.c | 1 -
->  drivers/pinctrl/renesas/pfc-r8a779f0.c | 1 -
->  drivers/pinctrl/renesas/pfc-r8a779g0.c | 1 -
->  drivers/pinctrl/renesas/pfc.c          | 1 -
->  drivers/pinctrl/renesas/pinctrl-rza1.c | 1 -
->  16 files changed, 16 deletions(-)
+>  board/renesas/alt/alt.c               | 1 -
+>  board/renesas/alt/alt_spl.c           | 1 -
+>  board/renesas/alt/qos.c               | 1 -
+>  board/renesas/blanche/blanche.c       | 1 -
+>  board/renesas/blanche/qos.c           | 1 -
+>  board/renesas/draak/draak.c           | 1 -
+>  board/renesas/falcon/falcon.c         | 2 +-
+>  board/renesas/gose/gose.c             | 1 -
+>  board/renesas/gose/gose_spl.c         | 1 -
+>  board/renesas/gose/qos.c              | 1 -
+>  board/renesas/grpeach/grpeach.c       | 3 ++-
+>  board/renesas/koelsch/koelsch.c       | 1 -
+>  board/renesas/koelsch/koelsch_spl.c   | 1 -
+>  board/renesas/koelsch/qos.c           | 1 -
+>  board/renesas/lager/lager.c           | 1 -
+>  board/renesas/lager/lager_spl.c       | 1 -
+>  board/renesas/lager/qos.c             | 1 -
+>  board/renesas/porter/porter.c         | 1 -
+>  board/renesas/porter/porter_spl.c     | 1 -
+>  board/renesas/porter/qos.c            | 1 -
+>  board/renesas/r2dplus/r2dplus.c       | 1 -
+>  board/renesas/rcar-common/common.c    | 1 -
+>  board/renesas/rcar-common/gen3-spl.c  | 1 -
+>  board/renesas/rcar-common/v3-common.c | 2 +-
+>  board/renesas/salvator-x/salvator-x.c | 1 -
+>  board/renesas/silk/qos.c              | 1 -
+>  board/renesas/silk/silk.c             | 1 -
+>  board/renesas/silk/silk_spl.c         | 1 -
+>  board/renesas/spider/spider.c         | 1 -
+>  board/renesas/stout/cpld.c            | 1 -
+>  board/renesas/stout/qos.c             | 1 -
+>  board/renesas/stout/stout.c           | 1 -
+>  board/renesas/stout/stout_spl.c       | 1 -
+>  board/renesas/ulcb/cpld.c             | 1 -
+>  board/renesas/ulcb/ulcb.c             | 1 -
+>  board/renesas/v3hsk/cpld.c            | 1 -
+>  board/renesas/v3msk/cpld.c            | 1 -
+>  board/renesas/whitehawk/whitehawk.c   | 1 -
+>  38 files changed, 4 insertions(+), 38 deletions(-)
 >=20
-> diff --git a/drivers/pinctrl/renesas/pfc-r8a7790.c b/drivers/pinctrl/re=
-nesas/pfc-r8a7790.c
-> index 7203648bbc8..e1811c4c908 100644
-> --- a/drivers/pinctrl/renesas/pfc-r8a7790.c
-> +++ b/drivers/pinctrl/renesas/pfc-r8a7790.c
-> @@ -8,7 +8,6 @@
->   * Copyright (C) 2012  Kuninori Morimoto <kuninori.morimoto.gx@renesas=
-=2Ecom>
->   */
-> =20
-> -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <dm/pinctrl.h>
-> diff --git a/drivers/pinctrl/renesas/pfc-r8a7791.c b/drivers/pinctrl/re=
-nesas/pfc-r8a7791.c
-> index b25453ed285..fa94a51e5e7 100644
-> --- a/drivers/pinctrl/renesas/pfc-r8a7791.c
-> +++ b/drivers/pinctrl/renesas/pfc-r8a7791.c
-> @@ -6,7 +6,6 @@
->   * Copyright (C) 2014-2017 Cogent Embedded, Inc.
->   */
-> =20
-> -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <dm/pinctrl.h>
-> diff --git a/drivers/pinctrl/renesas/pfc-r8a7792.c b/drivers/pinctrl/re=
-nesas/pfc-r8a7792.c
-> index 08f1f97af6e..7c1e6d40749 100644
-> --- a/drivers/pinctrl/renesas/pfc-r8a7792.c
-> +++ b/drivers/pinctrl/renesas/pfc-r8a7792.c
-> @@ -6,7 +6,6 @@
->   * Copyright (C) 2016 Cogent Embedded, Inc., <source@cogentembedded.co=
-m>
->   */
-> =20
-> -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <dm/pinctrl.h>
-> diff --git a/drivers/pinctrl/renesas/pfc-r8a7794.c b/drivers/pinctrl/re=
-nesas/pfc-r8a7794.c
-> index e5d125ceca0..29eab2610c1 100644
-> --- a/drivers/pinctrl/renesas/pfc-r8a7794.c
-> +++ b/drivers/pinctrl/renesas/pfc-r8a7794.c
-> @@ -7,7 +7,6 @@
->   * Copyright (C) 2015-2017 Cogent Embedded, Inc. <source@cogentembedde=
-d.com>
->   */
-> =20
-> -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <dm/pinctrl.h>
-> diff --git a/drivers/pinctrl/renesas/pfc-r8a77951.c b/drivers/pinctrl/r=
-enesas/pfc-r8a77951.c
-> index 5d1c81c3eae..81568ae4a5e 100644
-> --- a/drivers/pinctrl/renesas/pfc-r8a77951.c
-> +++ b/drivers/pinctrl/renesas/pfc-r8a77951.c
+> diff --git a/board/renesas/alt/alt.c b/board/renesas/alt/alt.c
+> index 85fbaf0b28b..be77cade01b 100644
+> --- a/board/renesas/alt/alt.c
+> +++ b/board/renesas/alt/alt.c
 > @@ -5,7 +5,6 @@
->   * Copyright (C) 2015-2019 Renesas Electronics Corporation
+>   * Copyright (C) 2014, 2015 Renesas Electronics Corporation
 >   */
 > =20
 > -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <dm/pinctrl.h>
-> diff --git a/drivers/pinctrl/renesas/pfc-r8a7796.c b/drivers/pinctrl/re=
-nesas/pfc-r8a7796.c
-> index 163d1805dfb..3de43febbd3 100644
-> --- a/drivers/pinctrl/renesas/pfc-r8a7796.c
-> +++ b/drivers/pinctrl/renesas/pfc-r8a7796.c
-> @@ -11,7 +11,6 @@
->   * Copyright (C) 2015  Renesas Electronics Corporation
+>  #include <cpu_func.h>
+>  #include <env.h>
+>  #include <hang.h>
+> diff --git a/board/renesas/alt/alt_spl.c b/board/renesas/alt/alt_spl.c
+> index cdaa04e4f4c..fc9dac55e6a 100644
+> --- a/board/renesas/alt/alt_spl.c
+> +++ b/board/renesas/alt/alt_spl.c
+> @@ -5,7 +5,6 @@
+>   * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
 >   */
 > =20
 > -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <dm/pinctrl.h>
-> diff --git a/drivers/pinctrl/renesas/pfc-r8a77965.c b/drivers/pinctrl/r=
-enesas/pfc-r8a77965.c
-> index 377143d3918..3a6813cee61 100644
-> --- a/drivers/pinctrl/renesas/pfc-r8a77965.c
-> +++ b/drivers/pinctrl/renesas/pfc-r8a77965.c
-> @@ -12,7 +12,6 @@
->   * Copyright (C) 2015  Renesas Electronics Corporation
+>  #include <cpu_func.h>
+>  #include <init.h>
+>  #include <malloc.h>
+> diff --git a/board/renesas/alt/qos.c b/board/renesas/alt/qos.c
+> index 2f657505ceb..38dfa647e81 100644
+> --- a/board/renesas/alt/qos.c
+> +++ b/board/renesas/alt/qos.c
+> @@ -6,7 +6,6 @@
+>   *
 >   */
 > =20
 > -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <dm/pinctrl.h>
-> diff --git a/drivers/pinctrl/renesas/pfc-r8a77970.c b/drivers/pinctrl/r=
-enesas/pfc-r8a77970.c
-> index 1cc6fa4f3fc..3c9c060d245 100644
-> --- a/drivers/pinctrl/renesas/pfc-r8a77970.c
-> +++ b/drivers/pinctrl/renesas/pfc-r8a77970.c
-> @@ -12,7 +12,6 @@
->   * Copyright (C) 2015  Renesas Electronics Corporation
+>  #include <asm/processor.h>
+>  #include <asm/mach-types.h>
+>  #include <asm/io.h>
+> diff --git a/board/renesas/blanche/blanche.c b/board/renesas/blanche/bl=
+anche.c
+> index 8e1ae29e221..c6ecea2afcf 100644
+> --- a/board/renesas/blanche/blanche.c
+> +++ b/board/renesas/blanche/blanche.c
+> @@ -6,7 +6,6 @@
+>   * Copyright (C) 2016 Renesas Electronics Corporation
 >   */
 > =20
 > -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <dm/pinctrl.h>
-> diff --git a/drivers/pinctrl/renesas/pfc-r8a77980.c b/drivers/pinctrl/r=
-enesas/pfc-r8a77980.c
-> index 523faa0ac8f..14a4b4dc731 100644
-> --- a/drivers/pinctrl/renesas/pfc-r8a77980.c
-> +++ b/drivers/pinctrl/renesas/pfc-r8a77980.c
-> @@ -12,7 +12,6 @@
->   * Copyright (C) 2015 Renesas Electronics Corporation
+>  #include <cpu_func.h>
+>  #include <init.h>
+>  #include <net.h>
+> diff --git a/board/renesas/blanche/qos.c b/board/renesas/blanche/qos.c
+> index e3ad83ee0c2..3134b36a443 100644
+> --- a/board/renesas/blanche/qos.c
+> +++ b/board/renesas/blanche/qos.c
+> @@ -5,7 +5,6 @@
+>   * Copyright (C) 2016 Renesas Electronics Corporation
 >   */
 > =20
 > -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <dm/pinctrl.h>
-> diff --git a/drivers/pinctrl/renesas/pfc-r8a77990.c b/drivers/pinctrl/r=
-enesas/pfc-r8a77990.c
-> index 215a19ef9cd..e3a9c5e053d 100644
-> --- a/drivers/pinctrl/renesas/pfc-r8a77990.c
-> +++ b/drivers/pinctrl/renesas/pfc-r8a77990.c
-> @@ -11,7 +11,6 @@
->   * Copyright (C) 2016-2017 Renesas Electronics Corp.
+>  #include <asm/processor.h>
+>  #include <asm/mach-types.h>
+>  #include <asm/io.h>
+> diff --git a/board/renesas/draak/draak.c b/board/renesas/draak/draak.c
+> index 1ed72d34a74..06a3a832984 100644
+> --- a/board/renesas/draak/draak.c
+> +++ b/board/renesas/draak/draak.c
+> @@ -6,7 +6,6 @@
+>   * Copyright (C) 2017 Marek Vasut <marek.vasut+renesas@gmail.com>
 >   */
 > =20
 > -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <dm/pinctrl.h>
-> diff --git a/drivers/pinctrl/renesas/pfc-r8a77995.c b/drivers/pinctrl/r=
-enesas/pfc-r8a77995.c
-> index c0d69937ddb..eccf5c15907 100644
-> --- a/drivers/pinctrl/renesas/pfc-r8a77995.c
-> +++ b/drivers/pinctrl/renesas/pfc-r8a77995.c
-> @@ -11,7 +11,6 @@
->   * Copyright (C) 2015  Renesas Electronics Corporation
+>  #include <cpu_func.h>
+>  #include <hang.h>
+>  #include <init.h>
+> diff --git a/board/renesas/falcon/falcon.c b/board/renesas/falcon/falco=
+n.c
+> index 0aa0f1afcbf..cd86bb3108c 100644
+> --- a/board/renesas/falcon/falcon.c
+> +++ b/board/renesas/falcon/falcon.c
+> @@ -6,7 +6,6 @@
+>   * Copyright (C) 2020 Renesas Electronics Corp.
 >   */
 > =20
 > -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <dm/pinctrl.h>
-> diff --git a/drivers/pinctrl/renesas/pfc-r8a779a0.c b/drivers/pinctrl/r=
-enesas/pfc-r8a779a0.c
-> index 3c4b03b1b4c..6f898385027 100644
-> --- a/drivers/pinctrl/renesas/pfc-r8a779a0.c
-> +++ b/drivers/pinctrl/renesas/pfc-r8a779a0.c
+>  #include <asm/arch/rmobile.h>
+>  #include <asm/arch/sys_proto.h>
+>  #include <asm/global_data.h>
+> @@ -15,6 +14,7 @@
+>  #include <asm/processor.h>
+>  #include <linux/errno.h>
+>  #include <asm/system.h>
+> +#include <asm/u-boot.h>
+> =20
+>  DECLARE_GLOBAL_DATA_PTR;
+> =20
+> diff --git a/board/renesas/gose/gose.c b/board/renesas/gose/gose.c
+> index 2d1435acff6..6edbdac3ded 100644
+> --- a/board/renesas/gose/gose.c
+> +++ b/board/renesas/gose/gose.c
+> @@ -5,7 +5,6 @@
+>   * Copyright (C) 2014 Renesas Electronics Corporation
+>   */
+> =20
+> -#include <common.h>
+>  #include <clock_legacy.h>
+>  #include <cpu_func.h>
+>  #include <env.h>
+> diff --git a/board/renesas/gose/gose_spl.c b/board/renesas/gose/gose_sp=
+l.c
+> index c0bf7204439..87126a0fc15 100644
+> --- a/board/renesas/gose/gose_spl.c
+> +++ b/board/renesas/gose/gose_spl.c
+> @@ -5,7 +5,6 @@
+>   * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+>   */
+> =20
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <init.h>
+>  #include <malloc.h>
+> diff --git a/board/renesas/gose/qos.c b/board/renesas/gose/qos.c
+> index 1c4ebfc6a8a..9944df76759 100644
+> --- a/board/renesas/gose/qos.c
+> +++ b/board/renesas/gose/qos.c
+> @@ -6,7 +6,6 @@
+>   * Copyright (C) 2014 Renesas Electronics Corporation
+>   */
+> =20
+> -#include <common.h>
+>  #include <asm/processor.h>
+>  #include <asm/mach-types.h>
+>  #include <asm/io.h>
+> diff --git a/board/renesas/grpeach/grpeach.c b/board/renesas/grpeach/gr=
+peach.c
+> index f609e4f0728..c475c3f50ab 100644
+> --- a/board/renesas/grpeach/grpeach.c
+> +++ b/board/renesas/grpeach/grpeach.c
+> @@ -4,12 +4,13 @@
+>   * Copyright (C) Chris Brandt
+>   */
+> =20
+> -#include <common.h>
+>  #include <cpu_func.h>
+> +#include <errno.h>
+>  #include <init.h>
+>  #include <asm/global_data.h>
+>  #include <asm/io.h>
+>  #include <asm/arch/sys_proto.h>
+> +#include <asm/u-boot.h>
+> =20
+>  #define RZA1_WDT_BASE	0xfcfe0000
+>  #define WTCSR		0x00
+> diff --git a/board/renesas/koelsch/koelsch.c b/board/renesas/koelsch/ko=
+elsch.c
+> index c3ebcd3e39f..ee5597ad3d9 100644
+> --- a/board/renesas/koelsch/koelsch.c
+> +++ b/board/renesas/koelsch/koelsch.c
+> @@ -6,7 +6,6 @@
+>   *
+>   */
+> =20
+> -#include <common.h>
+>  #include <clock_legacy.h>
+>  #include <cpu_func.h>
+>  #include <env.h>
+> diff --git a/board/renesas/koelsch/koelsch_spl.c b/board/renesas/koelsc=
+h/koelsch_spl.c
+> index b377f707158..7581920f577 100644
+> --- a/board/renesas/koelsch/koelsch_spl.c
+> +++ b/board/renesas/koelsch/koelsch_spl.c
+> @@ -5,7 +5,6 @@
+>   * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+>   */
+> =20
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <init.h>
+>  #include <malloc.h>
+> diff --git a/board/renesas/koelsch/qos.c b/board/renesas/koelsch/qos.c
+> index f884e5fe650..70cd117ba6b 100644
+> --- a/board/renesas/koelsch/qos.c
+> +++ b/board/renesas/koelsch/qos.c
+> @@ -6,7 +6,6 @@
+>   *
+>   */
+> =20
+> -#include <common.h>
+>  #include <asm/processor.h>
+>  #include <asm/mach-types.h>
+>  #include <asm/io.h>
+> diff --git a/board/renesas/lager/lager.c b/board/renesas/lager/lager.c
+> index 1437875cfa7..0daad0b1e6d 100644
+> --- a/board/renesas/lager/lager.c
+> +++ b/board/renesas/lager/lager.c
 > @@ -7,7 +7,6 @@
->   * This file is based on the drivers/pinctrl/renesas/pfc-r8a7795.c
+>   * Copyright (C) 2013 Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.=
+com>
 >   */
 > =20
 > -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <dm/pinctrl.h>
-> diff --git a/drivers/pinctrl/renesas/pfc-r8a779f0.c b/drivers/pinctrl/r=
-enesas/pfc-r8a779f0.c
-> index 5123e26e0ac..de5ec6c812a 100644
-> --- a/drivers/pinctrl/renesas/pfc-r8a779f0.c
-> +++ b/drivers/pinctrl/renesas/pfc-r8a779f0.c
+>  #include <clock_legacy.h>
+>  #include <cpu_func.h>
+>  #include <env.h>
+> diff --git a/board/renesas/lager/lager_spl.c b/board/renesas/lager/lage=
+r_spl.c
+> index d3d397e8f0a..df3e240599a 100644
+> --- a/board/renesas/lager/lager_spl.c
+> +++ b/board/renesas/lager/lager_spl.c
+> @@ -5,7 +5,6 @@
+>   * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+>   */
+> =20
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <init.h>
+>  #include <malloc.h>
+> diff --git a/board/renesas/lager/qos.c b/board/renesas/lager/qos.c
+> index f01ca2fac71..ddc831c0c21 100644
+> --- a/board/renesas/lager/qos.c
+> +++ b/board/renesas/lager/qos.c
+> @@ -5,7 +5,6 @@
+>   * Copyright (C) 2013,2014 Renesas Electronics Corporation
+>   */
+> =20
+> -#include <common.h>
+>  #include <asm/processor.h>
+>  #include <asm/mach-types.h>
+>  #include <asm/io.h>
+> diff --git a/board/renesas/porter/porter.c b/board/renesas/porter/porte=
+r.c
+> index db1fb4b035f..2e6051addb1 100644
+> --- a/board/renesas/porter/porter.c
+> +++ b/board/renesas/porter/porter.c
+> @@ -6,7 +6,6 @@
+>   * Copyright (C) 2015 Cogent Embedded, Inc.
+>   */
+> =20
+> -#include <common.h>
+>  #include <clock_legacy.h>
+>  #include <cpu_func.h>
+>  #include <env.h>
+> diff --git a/board/renesas/porter/porter_spl.c b/board/renesas/porter/p=
+orter_spl.c
+> index 8595770c364..039fc7b719e 100644
+> --- a/board/renesas/porter/porter_spl.c
+> +++ b/board/renesas/porter/porter_spl.c
+> @@ -5,7 +5,6 @@
+>   * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+>   */
+> =20
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <init.h>
+>  #include <malloc.h>
+> diff --git a/board/renesas/porter/qos.c b/board/renesas/porter/qos.c
+> index bca54f7f74c..e4d8f3dfafe 100644
+> --- a/board/renesas/porter/qos.c
+> +++ b/board/renesas/porter/qos.c
 > @@ -7,7 +7,6 @@
->   * This file is based on the drivers/pinctrl/renesas/pfc-r8a779a0.c
+>   *
 >   */
 > =20
 > -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <dm/pinctrl.h>
-> diff --git a/drivers/pinctrl/renesas/pfc-r8a779g0.c b/drivers/pinctrl/r=
-enesas/pfc-r8a779g0.c
-> index 20498a1c2f7..6749c15f4ea 100644
-> --- a/drivers/pinctrl/renesas/pfc-r8a779g0.c
-> +++ b/drivers/pinctrl/renesas/pfc-r8a779g0.c
+>  #include <asm/processor.h>
+>  #include <asm/mach-types.h>
+>  #include <asm/io.h>
+> diff --git a/board/renesas/r2dplus/r2dplus.c b/board/renesas/r2dplus/r2=
+dplus.c
+> index 4b9959a4326..78b8cb4ac34 100644
+> --- a/board/renesas/r2dplus/r2dplus.c
+> +++ b/board/renesas/r2dplus/r2dplus.c
+> @@ -4,7 +4,6 @@
+>   * Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+>   */
+> =20
+> -#include <common.h>
+>  #include <ide.h>
+>  #include <init.h>
+>  #include <net.h>
+> diff --git a/board/renesas/rcar-common/common.c b/board/renesas/rcar-co=
+mmon/common.c
+> index ed3f093bf3c..66eb6a2002c 100644
+> --- a/board/renesas/rcar-common/common.c
+> +++ b/board/renesas/rcar-common/common.c
 > @@ -7,7 +7,6 @@
->   * This file is based on the drivers/pinctrl/renesas/pfc-r8a779a0.c
+>   * Copyright (C) 2015 Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 >   */
 > =20
 > -#include <common.h>
 >  #include <dm.h>
->  #include <errno.h>
->  #include <dm/pinctrl.h>
-> diff --git a/drivers/pinctrl/renesas/pfc.c b/drivers/pinctrl/renesas/pf=
-c.c
-> index 3ac25cbd080..4ceb5db47ff 100644
-> --- a/drivers/pinctrl/renesas/pfc.c
-> +++ b/drivers/pinctrl/renesas/pfc.c
-> @@ -11,7 +11,6 @@
-> =20
->  #define DRV_NAME "sh-pfc"
-> =20
-> -#include <common.h>
->  #include <dm.h>
->  #include <errno.h>
->  #include <dm/device_compat.h>
-> diff --git a/drivers/pinctrl/renesas/pinctrl-rza1.c b/drivers/pinctrl/r=
-enesas/pinctrl-rza1.c
-> index a445cdba713..2d993be2b2a 100644
-> --- a/drivers/pinctrl/renesas/pinctrl-rza1.c
-> +++ b/drivers/pinctrl/renesas/pinctrl-rza1.c
+>  #include <fdt_support.h>
+>  #include <hang.h>
+> diff --git a/board/renesas/rcar-common/gen3-spl.c b/board/renesas/rcar-=
+common/gen3-spl.c
+> index b02a946a21d..44a20cef2df 100644
+> --- a/board/renesas/rcar-common/gen3-spl.c
+> +++ b/board/renesas/rcar-common/gen3-spl.c
 > @@ -5,7 +5,6 @@
 >   * Copyright (C) 2019 Marek Vasut <marek.vasut@gmail.com>
 >   */
 > =20
 > -#include <common.h>
->  #include <dm.h>
+>  #include <cpu_func.h>
+>  #include <image.h>
+>  #include <init.h>
+> diff --git a/board/renesas/rcar-common/v3-common.c b/board/renesas/rcar=
+-common/v3-common.c
+> index 7c6202ea499..26c589d03e9 100644
+> --- a/board/renesas/rcar-common/v3-common.c
+> +++ b/board/renesas/rcar-common/v3-common.c
+> @@ -3,8 +3,8 @@
+>   * Copyright (C) 2017-2023 Marek Vasut <marek.vasut+renesas@mailbox.or=
+g>
+>   */
+> =20
+> -#include <common.h>
+>  #include <clock_legacy.h>
+> +#include <asm/arch/rmobile.h>
+>  #include <asm/io.h>
+> =20
+>  #define CPGWPR  0xE6150900
+> diff --git a/board/renesas/salvator-x/salvator-x.c b/board/renesas/salv=
+ator-x/salvator-x.c
+> index 939b48ee300..d8312ddb8a9 100644
+> --- a/board/renesas/salvator-x/salvator-x.c
+> +++ b/board/renesas/salvator-x/salvator-x.c
+> @@ -7,7 +7,6 @@
+>   * Copyright (C) 2015 Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+>   */
+> =20
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <image.h>
+>  #include <init.h>
+> diff --git a/board/renesas/silk/qos.c b/board/renesas/silk/qos.c
+> index 43a29898657..bdd76461b6a 100644
+> --- a/board/renesas/silk/qos.c
+> +++ b/board/renesas/silk/qos.c
+> @@ -7,7 +7,6 @@
+>   *
+>   */
+> =20
+> -#include <common.h>
+>  #include <asm/processor.h>
+>  #include <asm/mach-types.h>
+>  #include <asm/io.h>
+> diff --git a/board/renesas/silk/silk.c b/board/renesas/silk/silk.c
+> index 6ecebfe814d..18ff7591228 100644
+> --- a/board/renesas/silk/silk.c
+> +++ b/board/renesas/silk/silk.c
+> @@ -6,7 +6,6 @@
+>   * Copyright (C) 2015 Cogent Embedded, Inc.
+>   */
+> =20
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <env.h>
+>  #include <hang.h>
+> diff --git a/board/renesas/silk/silk_spl.c b/board/renesas/silk/silk_sp=
+l.c
+> index afb9f85ffc2..b899442c25a 100644
+> --- a/board/renesas/silk/silk_spl.c
+> +++ b/board/renesas/silk/silk_spl.c
+> @@ -5,7 +5,6 @@
+>   * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+>   */
+> =20
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <init.h>
+>  #include <malloc.h>
+> diff --git a/board/renesas/spider/spider.c b/board/renesas/spider/spide=
+r.c
+> index fd83a72229e..1eb75a6397f 100644
+> --- a/board/renesas/spider/spider.c
+> +++ b/board/renesas/spider/spider.c
+> @@ -6,7 +6,6 @@
+>   * Copyright (C) 2021 Renesas Electronics Corp.
+>   */
+> =20
+> -#include <common.h>
+>  #include <asm/arch/rmobile.h>
+>  #include <asm/arch/sys_proto.h>
 >  #include <asm/global_data.h>
->  #include <dm/lists.h>
+> diff --git a/board/renesas/stout/cpld.c b/board/renesas/stout/cpld.c
+> index b7c75f5aa65..f5bb549b7c0 100644
+> --- a/board/renesas/stout/cpld.c
+> +++ b/board/renesas/stout/cpld.c
+> @@ -7,7 +7,6 @@
+>   * Copyright (C) 2015 Cogent Embedded, Inc.
+>   */
+> =20
+> -#include <common.h>
+>  #include <command.h>
+>  #include <cpu_func.h>
+>  #include <asm/io.h>
+> diff --git a/board/renesas/stout/qos.c b/board/renesas/stout/qos.c
+> index c2f0b853871..9030ba7f61f 100644
+> --- a/board/renesas/stout/qos.c
+> +++ b/board/renesas/stout/qos.c
+> @@ -7,7 +7,6 @@
+>   * Copyright (C) 2015 Cogent Embedded, Inc.
+>   */
+> =20
+> -#include <common.h>
+>  #include <asm/processor.h>
+>  #include <asm/mach-types.h>
+>  #include <asm/io.h>
+> diff --git a/board/renesas/stout/stout.c b/board/renesas/stout/stout.c
+> index f069eccde97..131deac1c7a 100644
+> --- a/board/renesas/stout/stout.c
+> +++ b/board/renesas/stout/stout.c
+> @@ -8,7 +8,6 @@
+>   * Copyright (C) 2015 Cogent Embedded, Inc.
+>   */
+> =20
+> -#include <common.h>
+>  #include <clock_legacy.h>
+>  #include <env.h>
+>  #include <init.h>
+> diff --git a/board/renesas/stout/stout_spl.c b/board/renesas/stout/stou=
+t_spl.c
+> index c37c0557132..8ec02168106 100644
+> --- a/board/renesas/stout/stout_spl.c
+> +++ b/board/renesas/stout/stout_spl.c
+> @@ -5,7 +5,6 @@
+>   * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+>   */
+> =20
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <init.h>
+>  #include <malloc.h>
+> diff --git a/board/renesas/ulcb/cpld.c b/board/renesas/ulcb/cpld.c
+> index 0c060a5323d..e72e45e3fb4 100644
+> --- a/board/renesas/ulcb/cpld.c
+> +++ b/board/renesas/ulcb/cpld.c
+> @@ -6,7 +6,6 @@
+>   * Copyright (C) 2017 Cogent Embedded, Inc.
+>   */
+> =20
+> -#include <common.h>
+>  #include <command.h>
+>  #include <asm/gpio.h>
+>  #include <asm/io.h>
+> diff --git a/board/renesas/ulcb/ulcb.c b/board/renesas/ulcb/ulcb.c
+> index 1477750f921..b2a16b03513 100644
+> --- a/board/renesas/ulcb/ulcb.c
+> +++ b/board/renesas/ulcb/ulcb.c
+> @@ -6,7 +6,6 @@
+>   * Copyright (C) 2017 Renesas Electronics Corporation
+>   */
+> =20
+> -#include <common.h>
+>  #include <image.h>
+>  #include <init.h>
+>  #include <malloc.h>
+> diff --git a/board/renesas/v3hsk/cpld.c b/board/renesas/v3hsk/cpld.c
+> index 6016f6daef9..1272aec7302 100644
+> --- a/board/renesas/v3hsk/cpld.c
+> +++ b/board/renesas/v3hsk/cpld.c
+> @@ -7,7 +7,6 @@
+>   *
+>   */
+> =20
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+>  #include <i2c.h>
+> diff --git a/board/renesas/v3msk/cpld.c b/board/renesas/v3msk/cpld.c
+> index aed616ac859..260755ac746 100644
+> --- a/board/renesas/v3msk/cpld.c
+> +++ b/board/renesas/v3msk/cpld.c
+> @@ -7,7 +7,6 @@
+>   *
+>   */
+> =20
+> -#include <common.h>
+>  #include <asm/gpio.h>
+>  #include <asm/io.h>
+>  #include <dm.h>
+> diff --git a/board/renesas/whitehawk/whitehawk.c b/board/renesas/whiteh=
+awk/whitehawk.c
+> index 32284b2ecc0..3423ebd2995 100644
+> --- a/board/renesas/whitehawk/whitehawk.c
+> +++ b/board/renesas/whitehawk/whitehawk.c
+> @@ -6,7 +6,6 @@
+>   * Copyright (C) 2021 Renesas Electronics Corp.
+>   */
+> =20
+> -#include <common.h>
+>  #include <asm/arch/rmobile.h>
+>  #include <asm/arch/sys_proto.h>
+>  #include <asm/global_data.h>
 
 Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
---------------yMWV1YiipYKn02F7y0OnNglB
+--------------X4kFModoN3Vgee9kVl4m80UP
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -381,21 +700,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------yMWV1YiipYKn02F7y0OnNglB--
+--------------X4kFModoN3Vgee9kVl4m80UP--
 
---------------wzK4dRL7H8XMZDylgOIL4aif--
+--------------s1bmefSc0ATPmrcd07lxToKp--
 
---------------A8IvgqNvsJSKcYBeXXOfGFYy
+--------------OFlEu7EMos50NGQrAQjvzjkq
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZa+GowUDAAAAAAAKCRDbaV4Vf/JGvZRE
-AP9zZ4iDhPWZqI7pbgqQyuj6mKb6tJNQrKYGEqtzrte4+gEAvI9+bON8DCsKw4qC14L4f1iBl7fA
-pgEPW9PlXOqm2AM=
-=mgaV
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZa+G+wUDAAAAAAAKCRDbaV4Vf/JGvSa5
+AQDtiK58k6dqYXbW21gnKVbdxXFgE6cQa4cdlz5XBCTcrAD8Dl8c0bIyhNt0EjqC9PjA7nMDmJm2
++pxfA7Y6PmR92gQ=
+=m6i0
 -----END PGP SIGNATURE-----
 
---------------A8IvgqNvsJSKcYBeXXOfGFYy--
+--------------OFlEu7EMos50NGQrAQjvzjkq--
