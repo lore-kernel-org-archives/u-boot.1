@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C381C47258
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 09:27:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BE95C47DDB
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 09:28:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D3088799A;
-	Tue, 23 Jan 2024 10:27:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D997587994;
+	Tue, 23 Jan 2024 10:28:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67D6387B9E; Tue, 23 Jan 2024 10:27:32 +0100 (CET)
+ id 600D687BBC; Tue, 23 Jan 2024 10:28:08 +0100 (CET)
 Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
  [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 5AC6C8799A
- for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 10:27:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 9A52E87701
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 10:28:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.05,213,1701097200"; 
- d="asc'?scan'208";a="191418950"
+ d="asc'?scan'208";a="191419015"
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 23 Jan 2024 18:27:25 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 23 Jan 2024 18:28:04 +0900
 Received: from [10.226.92.252] (unknown [10.226.92.252])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 3320F400F737;
- Tue, 23 Jan 2024 18:27:23 +0900 (JST)
-Message-ID: <55fb536e-aae8-48c2-bcba-873461aa8c04@bp.renesas.com>
-Date: Tue, 23 Jan 2024 09:27:22 +0000
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 98DB8400F737;
+ Tue, 23 Jan 2024 18:28:03 +0900 (JST)
+Message-ID: <92a6bca5-2f9c-49f4-9b92-87527018244a@bp.renesas.com>
+Date: Tue, 23 Jan 2024 09:28:02 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] clk: renesas: Drop include common.h
+Subject: Re: [PATCH 2/3] pinctrl: renesas: Drop include common.h
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
 References: <20240121173211.273726-1-marek.vasut+renesas@mailbox.org>
+ <20240121173211.273726-2-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20240121173211.273726-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240121173211.273726-2-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------77q456z0dpb46aypSgIA000V"
+ boundary="------------A8IvgqNvsJSKcYBeXXOfGFYy"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,21 +59,21 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------77q456z0dpb46aypSgIA000V
-Content-Type: multipart/mixed; boundary="------------R6N80MaAbfUGPaubekGinZuX";
+--------------A8IvgqNvsJSKcYBeXXOfGFYy
+Content-Type: multipart/mixed; boundary="------------wzK4dRL7H8XMZDylgOIL4aif";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
-Message-ID: <55fb536e-aae8-48c2-bcba-873461aa8c04@bp.renesas.com>
-Subject: Re: [PATCH 1/3] clk: renesas: Drop include common.h
+Message-ID: <92a6bca5-2f9c-49f4-9b92-87527018244a@bp.renesas.com>
+Subject: Re: [PATCH 2/3] pinctrl: renesas: Drop include common.h
 References: <20240121173211.273726-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240121173211.273726-1-marek.vasut+renesas@mailbox.org>
+ <20240121173211.273726-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240121173211.273726-2-marek.vasut+renesas@mailbox.org>
 
---------------R6N80MaAbfUGPaubekGinZuX
-Content-Type: multipart/mixed; boundary="------------bERM5EmwYohEYZiLYKGEM0av"
+--------------wzK4dRL7H8XMZDylgOIL4aif
+Content-Type: multipart/mixed; boundary="------------yMWV1YiipYKn02F7y0OnNglB"
 
---------------bERM5EmwYohEYZiLYKGEM0av
+--------------yMWV1YiipYKn02F7y0OnNglB
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -83,337 +83,241 @@ On 21/01/2024 17:31, Marek Vasut wrote:
 >=20
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
-> Cc: Lukasz Majewski <lukma@denx.de>
 > Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Cc: Sean Anderson <seanga2@gmail.com>
 > ---
->  drivers/clk/renesas/clk-rcar-gen2.c     | 1 -
->  drivers/clk/renesas/clk-rcar-gen3.c     | 1 -
->  drivers/clk/renesas/r8a774a1-cpg-mssr.c | 1 -
->  drivers/clk/renesas/r8a774b1-cpg-mssr.c | 1 -
->  drivers/clk/renesas/r8a774c0-cpg-mssr.c | 1 -
->  drivers/clk/renesas/r8a774e1-cpg-mssr.c | 1 -
->  drivers/clk/renesas/r8a7790-cpg-mssr.c  | 1 -
->  drivers/clk/renesas/r8a7791-cpg-mssr.c  | 1 -
->  drivers/clk/renesas/r8a7792-cpg-mssr.c  | 1 -
->  drivers/clk/renesas/r8a7794-cpg-mssr.c  | 1 -
->  drivers/clk/renesas/r8a7795-cpg-mssr.c  | 1 -
->  drivers/clk/renesas/r8a7796-cpg-mssr.c  | 1 -
->  drivers/clk/renesas/r8a77965-cpg-mssr.c | 1 -
->  drivers/clk/renesas/r8a77970-cpg-mssr.c | 1 -
->  drivers/clk/renesas/r8a77980-cpg-mssr.c | 1 -
->  drivers/clk/renesas/r8a77990-cpg-mssr.c | 1 -
->  drivers/clk/renesas/r8a77995-cpg-mssr.c | 1 -
->  drivers/clk/renesas/r8a779a0-cpg-mssr.c | 1 -
->  drivers/clk/renesas/r8a779f0-cpg-mssr.c | 1 -
->  drivers/clk/renesas/r8a779g0-cpg-mssr.c | 1 -
->  drivers/clk/renesas/r9a06g032-clocks.c  | 1 -
->  drivers/clk/renesas/rcar-cpg-lib.c      | 1 -
->  drivers/clk/renesas/renesas-cpg-mssr.c  | 1 -
->  23 files changed, 23 deletions(-)
+>  drivers/pinctrl/renesas/pfc-r8a7790.c  | 1 -
+>  drivers/pinctrl/renesas/pfc-r8a7791.c  | 1 -
+>  drivers/pinctrl/renesas/pfc-r8a7792.c  | 1 -
+>  drivers/pinctrl/renesas/pfc-r8a7794.c  | 1 -
+>  drivers/pinctrl/renesas/pfc-r8a77951.c | 1 -
+>  drivers/pinctrl/renesas/pfc-r8a7796.c  | 1 -
+>  drivers/pinctrl/renesas/pfc-r8a77965.c | 1 -
+>  drivers/pinctrl/renesas/pfc-r8a77970.c | 1 -
+>  drivers/pinctrl/renesas/pfc-r8a77980.c | 1 -
+>  drivers/pinctrl/renesas/pfc-r8a77990.c | 1 -
+>  drivers/pinctrl/renesas/pfc-r8a77995.c | 1 -
+>  drivers/pinctrl/renesas/pfc-r8a779a0.c | 1 -
+>  drivers/pinctrl/renesas/pfc-r8a779f0.c | 1 -
+>  drivers/pinctrl/renesas/pfc-r8a779g0.c | 1 -
+>  drivers/pinctrl/renesas/pfc.c          | 1 -
+>  drivers/pinctrl/renesas/pinctrl-rza1.c | 1 -
+>  16 files changed, 16 deletions(-)
 >=20
-> diff --git a/drivers/clk/renesas/clk-rcar-gen2.c b/drivers/clk/renesas/=
-clk-rcar-gen2.c
-> index 850d6411190..66ffef96b69 100644
-> --- a/drivers/clk/renesas/clk-rcar-gen2.c
-> +++ b/drivers/clk/renesas/clk-rcar-gen2.c
-> @@ -10,7 +10,6 @@
->   * Copyright (C) 2016 Glider bvba
+> diff --git a/drivers/pinctrl/renesas/pfc-r8a7790.c b/drivers/pinctrl/re=
+nesas/pfc-r8a7790.c
+> index 7203648bbc8..e1811c4c908 100644
+> --- a/drivers/pinctrl/renesas/pfc-r8a7790.c
+> +++ b/drivers/pinctrl/renesas/pfc-r8a7790.c
+> @@ -8,7 +8,6 @@
+>   * Copyright (C) 2012  Kuninori Morimoto <kuninori.morimoto.gx@renesas=
+=2Ecom>
 >   */
 > =20
 > -#include <common.h>
->  #include <clk-uclass.h>
 >  #include <dm.h>
 >  #include <errno.h>
-> diff --git a/drivers/clk/renesas/clk-rcar-gen3.c b/drivers/clk/renesas/=
-clk-rcar-gen3.c
-> index 0d274bb986e..196903e406c 100644
-> --- a/drivers/clk/renesas/clk-rcar-gen3.c
-> +++ b/drivers/clk/renesas/clk-rcar-gen3.c
-> @@ -10,7 +10,6 @@
->   * Copyright (C) 2016 Glider bvba
+>  #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/renesas/pfc-r8a7791.c b/drivers/pinctrl/re=
+nesas/pfc-r8a7791.c
+> index b25453ed285..fa94a51e5e7 100644
+> --- a/drivers/pinctrl/renesas/pfc-r8a7791.c
+> +++ b/drivers/pinctrl/renesas/pfc-r8a7791.c
+> @@ -6,7 +6,6 @@
+>   * Copyright (C) 2014-2017 Cogent Embedded, Inc.
 >   */
 > =20
 > -#include <common.h>
->  #include <clk-uclass.h>
 >  #include <dm.h>
->  #include <dm/device-internal.h>
-> diff --git a/drivers/clk/renesas/r8a774a1-cpg-mssr.c b/drivers/clk/rene=
-sas/r8a774a1-cpg-mssr.c
-> index 6f94906cc99..d23041a8026 100644
-> --- a/drivers/clk/renesas/r8a774a1-cpg-mssr.c
-> +++ b/drivers/clk/renesas/r8a774a1-cpg-mssr.c
-> @@ -9,7 +9,6 @@
->   * Copyright (C) 2016 Glider bvba
+>  #include <errno.h>
+>  #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/renesas/pfc-r8a7792.c b/drivers/pinctrl/re=
+nesas/pfc-r8a7792.c
+> index 08f1f97af6e..7c1e6d40749 100644
+> --- a/drivers/pinctrl/renesas/pfc-r8a7792.c
+> +++ b/drivers/pinctrl/renesas/pfc-r8a7792.c
+> @@ -6,7 +6,6 @@
+>   * Copyright (C) 2016 Cogent Embedded, Inc., <source@cogentembedded.co=
+m>
 >   */
 > =20
 > -#include <common.h>
->  #include <clk-uclass.h>
 >  #include <dm.h>
-> =20
-> diff --git a/drivers/clk/renesas/r8a774b1-cpg-mssr.c b/drivers/clk/rene=
-sas/r8a774b1-cpg-mssr.c
-> index 1a794980319..81d7dfe5421 100644
-> --- a/drivers/clk/renesas/r8a774b1-cpg-mssr.c
-> +++ b/drivers/clk/renesas/r8a774b1-cpg-mssr.c
-> @@ -9,7 +9,6 @@
->   * Copyright (C) 2016 Glider bvba
+>  #include <errno.h>
+>  #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/renesas/pfc-r8a7794.c b/drivers/pinctrl/re=
+nesas/pfc-r8a7794.c
+> index e5d125ceca0..29eab2610c1 100644
+> --- a/drivers/pinctrl/renesas/pfc-r8a7794.c
+> +++ b/drivers/pinctrl/renesas/pfc-r8a7794.c
+> @@ -7,7 +7,6 @@
+>   * Copyright (C) 2015-2017 Cogent Embedded, Inc. <source@cogentembedde=
+d.com>
 >   */
 > =20
 > -#include <common.h>
->  #include <clk-uclass.h>
 >  #include <dm.h>
-> =20
-> diff --git a/drivers/clk/renesas/r8a774c0-cpg-mssr.c b/drivers/clk/rene=
-sas/r8a774c0-cpg-mssr.c
-> index ec8ce6ad7d6..f92fd25c0f7 100644
-> --- a/drivers/clk/renesas/r8a774c0-cpg-mssr.c
-> +++ b/drivers/clk/renesas/r8a774c0-cpg-mssr.c
-> @@ -10,7 +10,6 @@
->   * Copyright (C) 2015 Renesas Electronics Corp.
+>  #include <errno.h>
+>  #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/renesas/pfc-r8a77951.c b/drivers/pinctrl/r=
+enesas/pfc-r8a77951.c
+> index 5d1c81c3eae..81568ae4a5e 100644
+> --- a/drivers/pinctrl/renesas/pfc-r8a77951.c
+> +++ b/drivers/pinctrl/renesas/pfc-r8a77951.c
+> @@ -5,7 +5,6 @@
+>   * Copyright (C) 2015-2019 Renesas Electronics Corporation
 >   */
 > =20
 > -#include <common.h>
->  #include <clk-uclass.h>
 >  #include <dm.h>
->  #include <linux/bitops.h>
-> diff --git a/drivers/clk/renesas/r8a774e1-cpg-mssr.c b/drivers/clk/rene=
-sas/r8a774e1-cpg-mssr.c
-> index 6a8fe92b975..7c7cb7b6a05 100644
-> --- a/drivers/clk/renesas/r8a774e1-cpg-mssr.c
-> +++ b/drivers/clk/renesas/r8a774e1-cpg-mssr.c
-> @@ -9,7 +9,6 @@
->   * Copyright (C) 2015 Glider bvba
->   */
-> =20
-> -#include <common.h>
->  #include <clk-uclass.h>
->  #include <dm.h>
->  #include <linux/bitops.h>
-> diff --git a/drivers/clk/renesas/r8a7790-cpg-mssr.c b/drivers/clk/renes=
-as/r8a7790-cpg-mssr.c
-> index 686f2af0052..190b68ee7d3 100644
-> --- a/drivers/clk/renesas/r8a7790-cpg-mssr.c
-> +++ b/drivers/clk/renesas/r8a7790-cpg-mssr.c
-> @@ -9,7 +9,6 @@
->   * Copyright (C) 2013 Ideas On Board SPRL
->   */
-> =20
-> -#include <common.h>
->  #include <clk-uclass.h>
->  #include <dm.h>
->  #include <linux/bitops.h>
-> diff --git a/drivers/clk/renesas/r8a7791-cpg-mssr.c b/drivers/clk/renes=
-as/r8a7791-cpg-mssr.c
-> index dcb0fd85c52..30711bf8921 100644
-> --- a/drivers/clk/renesas/r8a7791-cpg-mssr.c
-> +++ b/drivers/clk/renesas/r8a7791-cpg-mssr.c
-> @@ -9,7 +9,6 @@
->   * Copyright (C) 2013 Ideas On Board SPRL
->   */
-> =20
-> -#include <common.h>
->  #include <clk-uclass.h>
->  #include <dm.h>
->  #include <linux/bitops.h>
-> diff --git a/drivers/clk/renesas/r8a7792-cpg-mssr.c b/drivers/clk/renes=
-as/r8a7792-cpg-mssr.c
-> index 496e51aa73f..623981e9c38 100644
-> --- a/drivers/clk/renesas/r8a7792-cpg-mssr.c
-> +++ b/drivers/clk/renesas/r8a7792-cpg-mssr.c
-> @@ -9,7 +9,6 @@
->   * Copyright (C) 2013 Ideas On Board SPRL
->   */
-> =20
-> -#include <common.h>
->  #include <clk-uclass.h>
->  #include <dm.h>
->  #include <linux/bitops.h>
-> diff --git a/drivers/clk/renesas/r8a7794-cpg-mssr.c b/drivers/clk/renes=
-as/r8a7794-cpg-mssr.c
-> index f1828a6e543..c4124917923 100644
-> --- a/drivers/clk/renesas/r8a7794-cpg-mssr.c
-> +++ b/drivers/clk/renesas/r8a7794-cpg-mssr.c
-> @@ -9,7 +9,6 @@
->   * Copyright (C) 2013 Ideas On Board SPRL
->   */
-> =20
-> -#include <common.h>
->  #include <clk-uclass.h>
->  #include <dm.h>
->  #include <linux/bitops.h>
-> diff --git a/drivers/clk/renesas/r8a7795-cpg-mssr.c b/drivers/clk/renes=
-as/r8a7795-cpg-mssr.c
-> index 0e9b9ccf979..e511f74982b 100644
-> --- a/drivers/clk/renesas/r8a7795-cpg-mssr.c
-> +++ b/drivers/clk/renesas/r8a7795-cpg-mssr.c
-> @@ -10,7 +10,6 @@
->   * Copyright (C) 2015 Renesas Electronics Corp.
->   */
-> =20
-> -#include <common.h>
->  #include <clk-uclass.h>
->  #include <dm.h>
->  #include <linux/bitops.h>
-> diff --git a/drivers/clk/renesas/r8a7796-cpg-mssr.c b/drivers/clk/renes=
-as/r8a7796-cpg-mssr.c
-> index d741d547ec8..02b078ad3df 100644
-> --- a/drivers/clk/renesas/r8a7796-cpg-mssr.c
-> +++ b/drivers/clk/renesas/r8a7796-cpg-mssr.c
-> @@ -12,7 +12,6 @@
->   * Copyright (C) 2015 Renesas Electronics Corp.
->   */
-> =20
-> -#include <common.h>
->  #include <clk-uclass.h>
->  #include <dm.h>
->  #include <linux/bitops.h>
-> diff --git a/drivers/clk/renesas/r8a77965-cpg-mssr.c b/drivers/clk/rene=
-sas/r8a77965-cpg-mssr.c
-> index cf4503803d0..037861eb9b4 100644
-> --- a/drivers/clk/renesas/r8a77965-cpg-mssr.c
-> +++ b/drivers/clk/renesas/r8a77965-cpg-mssr.c
+>  #include <errno.h>
+>  #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/renesas/pfc-r8a7796.c b/drivers/pinctrl/re=
+nesas/pfc-r8a7796.c
+> index 163d1805dfb..3de43febbd3 100644
+> --- a/drivers/pinctrl/renesas/pfc-r8a7796.c
+> +++ b/drivers/pinctrl/renesas/pfc-r8a7796.c
 > @@ -11,7 +11,6 @@
->   * Copyright (C) 2015 Renesas Electronics Corp.
+>   * Copyright (C) 2015  Renesas Electronics Corporation
 >   */
 > =20
 > -#include <common.h>
->  #include <clk-uclass.h>
 >  #include <dm.h>
->  #include <linux/bitops.h>
-> diff --git a/drivers/clk/renesas/r8a77970-cpg-mssr.c b/drivers/clk/rene=
-sas/r8a77970-cpg-mssr.c
-> index 32923b423fe..d8bb5aab1fe 100644
-> --- a/drivers/clk/renesas/r8a77970-cpg-mssr.c
-> +++ b/drivers/clk/renesas/r8a77970-cpg-mssr.c
-> @@ -9,7 +9,6 @@
->   * Copyright (C) 2015 Glider bvba
+>  #include <errno.h>
+>  #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/renesas/pfc-r8a77965.c b/drivers/pinctrl/r=
+enesas/pfc-r8a77965.c
+> index 377143d3918..3a6813cee61 100644
+> --- a/drivers/pinctrl/renesas/pfc-r8a77965.c
+> +++ b/drivers/pinctrl/renesas/pfc-r8a77965.c
+> @@ -12,7 +12,6 @@
+>   * Copyright (C) 2015  Renesas Electronics Corporation
 >   */
 > =20
 > -#include <common.h>
->  #include <clk-uclass.h>
 >  #include <dm.h>
->  #include <linux/bitops.h>
-> diff --git a/drivers/clk/renesas/r8a77980-cpg-mssr.c b/drivers/clk/rene=
-sas/r8a77980-cpg-mssr.c
-> index f35032b95f1..9d8335af783 100644
-> --- a/drivers/clk/renesas/r8a77980-cpg-mssr.c
-> +++ b/drivers/clk/renesas/r8a77980-cpg-mssr.c
-> @@ -10,7 +10,6 @@
->   * Copyright (C) 2015 Glider bvba
+>  #include <errno.h>
+>  #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/renesas/pfc-r8a77970.c b/drivers/pinctrl/r=
+enesas/pfc-r8a77970.c
+> index 1cc6fa4f3fc..3c9c060d245 100644
+> --- a/drivers/pinctrl/renesas/pfc-r8a77970.c
+> +++ b/drivers/pinctrl/renesas/pfc-r8a77970.c
+> @@ -12,7 +12,6 @@
+>   * Copyright (C) 2015  Renesas Electronics Corporation
 >   */
 > =20
 > -#include <common.h>
->  #include <clk-uclass.h>
 >  #include <dm.h>
->  #include <linux/bitops.h>
-> diff --git a/drivers/clk/renesas/r8a77990-cpg-mssr.c b/drivers/clk/rene=
-sas/r8a77990-cpg-mssr.c
-> index 87b06666c8b..4c9acd76e18 100644
-> --- a/drivers/clk/renesas/r8a77990-cpg-mssr.c
-> +++ b/drivers/clk/renesas/r8a77990-cpg-mssr.c
-> @@ -10,7 +10,6 @@
->   * Copyright (C) 2015 Renesas Electronics Corp.
+>  #include <errno.h>
+>  #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/renesas/pfc-r8a77980.c b/drivers/pinctrl/r=
+enesas/pfc-r8a77980.c
+> index 523faa0ac8f..14a4b4dc731 100644
+> --- a/drivers/pinctrl/renesas/pfc-r8a77980.c
+> +++ b/drivers/pinctrl/renesas/pfc-r8a77980.c
+> @@ -12,7 +12,6 @@
+>   * Copyright (C) 2015 Renesas Electronics Corporation
 >   */
 > =20
 > -#include <common.h>
->  #include <clk-uclass.h>
 >  #include <dm.h>
->  #include <linux/bitops.h>
-> diff --git a/drivers/clk/renesas/r8a77995-cpg-mssr.c b/drivers/clk/rene=
-sas/r8a77995-cpg-mssr.c
-> index dd2c9483292..f49faa47cb3 100644
-> --- a/drivers/clk/renesas/r8a77995-cpg-mssr.c
-> +++ b/drivers/clk/renesas/r8a77995-cpg-mssr.c
-> @@ -10,7 +10,6 @@
->   * Copyright (C) 2015 Renesas Electronics Corp.
+>  #include <errno.h>
+>  #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/renesas/pfc-r8a77990.c b/drivers/pinctrl/r=
+enesas/pfc-r8a77990.c
+> index 215a19ef9cd..e3a9c5e053d 100644
+> --- a/drivers/pinctrl/renesas/pfc-r8a77990.c
+> +++ b/drivers/pinctrl/renesas/pfc-r8a77990.c
+> @@ -11,7 +11,6 @@
+>   * Copyright (C) 2016-2017 Renesas Electronics Corp.
 >   */
 > =20
 > -#include <common.h>
->  #include <clk-uclass.h>
 >  #include <dm.h>
->  #include <linux/bitops.h>
-> diff --git a/drivers/clk/renesas/r8a779a0-cpg-mssr.c b/drivers/clk/rene=
-sas/r8a779a0-cpg-mssr.c
-> index 652bfe4f6d3..ba086be0268 100644
-> --- a/drivers/clk/renesas/r8a779a0-cpg-mssr.c
-> +++ b/drivers/clk/renesas/r8a779a0-cpg-mssr.c
-> @@ -10,7 +10,6 @@
->   * Copyright (C) 2015 Renesas Electronics Corp.
+>  #include <errno.h>
+>  #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/renesas/pfc-r8a77995.c b/drivers/pinctrl/r=
+enesas/pfc-r8a77995.c
+> index c0d69937ddb..eccf5c15907 100644
+> --- a/drivers/pinctrl/renesas/pfc-r8a77995.c
+> +++ b/drivers/pinctrl/renesas/pfc-r8a77995.c
+> @@ -11,7 +11,6 @@
+>   * Copyright (C) 2015  Renesas Electronics Corporation
 >   */
 > =20
 > -#include <common.h>
->  #include <clk-uclass.h>
 >  #include <dm.h>
-> =20
-> diff --git a/drivers/clk/renesas/r8a779f0-cpg-mssr.c b/drivers/clk/rene=
-sas/r8a779f0-cpg-mssr.c
-> index 643e8b8da97..108655f145d 100644
-> --- a/drivers/clk/renesas/r8a779f0-cpg-mssr.c
-> +++ b/drivers/clk/renesas/r8a779f0-cpg-mssr.c
+>  #include <errno.h>
+>  #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/renesas/pfc-r8a779a0.c b/drivers/pinctrl/r=
+enesas/pfc-r8a779a0.c
+> index 3c4b03b1b4c..6f898385027 100644
+> --- a/drivers/pinctrl/renesas/pfc-r8a779a0.c
+> +++ b/drivers/pinctrl/renesas/pfc-r8a779a0.c
 > @@ -7,7 +7,6 @@
->   * Based on r8a779a0-cpg-mssr.c
+>   * This file is based on the drivers/pinctrl/renesas/pfc-r8a7795.c
 >   */
 > =20
 > -#include <common.h>
->  #include <clk-uclass.h>
 >  #include <dm.h>
-> =20
-> diff --git a/drivers/clk/renesas/r8a779g0-cpg-mssr.c b/drivers/clk/rene=
-sas/r8a779g0-cpg-mssr.c
-> index 219024a7416..781806eed58 100644
-> --- a/drivers/clk/renesas/r8a779g0-cpg-mssr.c
-> +++ b/drivers/clk/renesas/r8a779g0-cpg-mssr.c
+>  #include <errno.h>
+>  #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/renesas/pfc-r8a779f0.c b/drivers/pinctrl/r=
+enesas/pfc-r8a779f0.c
+> index 5123e26e0ac..de5ec6c812a 100644
+> --- a/drivers/pinctrl/renesas/pfc-r8a779f0.c
+> +++ b/drivers/pinctrl/renesas/pfc-r8a779f0.c
 > @@ -7,7 +7,6 @@
->   * Based on r8a779f0-cpg-mssr.c
+>   * This file is based on the drivers/pinctrl/renesas/pfc-r8a779a0.c
 >   */
 > =20
 > -#include <common.h>
->  #include <clk-uclass.h>
 >  #include <dm.h>
-> =20
-> diff --git a/drivers/clk/renesas/r9a06g032-clocks.c b/drivers/clk/renes=
-as/r9a06g032-clocks.c
-> index d2f61236fee..d207bf615ce 100644
-> --- a/drivers/clk/renesas/r9a06g032-clocks.c
-> +++ b/drivers/clk/renesas/r9a06g032-clocks.c
+>  #include <errno.h>
+>  #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/renesas/pfc-r8a779g0.c b/drivers/pinctrl/r=
+enesas/pfc-r8a779g0.c
+> index 20498a1c2f7..6749c15f4ea 100644
+> --- a/drivers/pinctrl/renesas/pfc-r8a779g0.c
+> +++ b/drivers/pinctrl/renesas/pfc-r8a779g0.c
 > @@ -7,7 +7,6 @@
->   * Michel Pollet <michel.pollet@bp.renesas.com>, <buserror@gmail.com>
+>   * This file is based on the drivers/pinctrl/renesas/pfc-r8a779a0.c
 >   */
 > =20
 > -#include <common.h>
->  #include <clk-uclass.h>
 >  #include <dm.h>
+>  #include <errno.h>
+>  #include <dm/pinctrl.h>
+> diff --git a/drivers/pinctrl/renesas/pfc.c b/drivers/pinctrl/renesas/pf=
+c.c
+> index 3ac25cbd080..4ceb5db47ff 100644
+> --- a/drivers/pinctrl/renesas/pfc.c
+> +++ b/drivers/pinctrl/renesas/pfc.c
+> @@ -11,7 +11,6 @@
+> =20
+>  #define DRV_NAME "sh-pfc"
+> =20
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
 >  #include <dm/device_compat.h>
-> diff --git a/drivers/clk/renesas/rcar-cpg-lib.c b/drivers/clk/renesas/r=
-car-cpg-lib.c
-> index a2fca660a8e..8862fbc7579 100644
-> --- a/drivers/clk/renesas/rcar-cpg-lib.c
-> +++ b/drivers/clk/renesas/rcar-cpg-lib.c
-> @@ -10,7 +10,6 @@
->   * Copyright (C) 2016 Glider bvba
+> diff --git a/drivers/pinctrl/renesas/pinctrl-rza1.c b/drivers/pinctrl/r=
+enesas/pinctrl-rza1.c
+> index a445cdba713..2d993be2b2a 100644
+> --- a/drivers/pinctrl/renesas/pinctrl-rza1.c
+> +++ b/drivers/pinctrl/renesas/pinctrl-rza1.c
+> @@ -5,7 +5,6 @@
+>   * Copyright (C) 2019 Marek Vasut <marek.vasut@gmail.com>
 >   */
 > =20
 > -#include <common.h>
->  #include <clk-uclass.h>
 >  #include <dm.h>
->  #include <errno.h>
-> diff --git a/drivers/clk/renesas/renesas-cpg-mssr.c b/drivers/clk/renes=
-as/renesas-cpg-mssr.c
-> index 10bd54d6002..35bad7f5f73 100644
-> --- a/drivers/clk/renesas/renesas-cpg-mssr.c
-> +++ b/drivers/clk/renesas/renesas-cpg-mssr.c
-> @@ -9,7 +9,6 @@
->   *
->   * Copyright (C) 2016 Glider bvba
->   */
-> -#include <common.h>
->  #include <clk-uclass.h>
->  #include <dm.h>
->  #include <errno.h>
+>  #include <asm/global_data.h>
+>  #include <dm/lists.h>
 
 Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
---------------bERM5EmwYohEYZiLYKGEM0av
+
+--------------yMWV1YiipYKn02F7y0OnNglB
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -477,21 +381,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------bERM5EmwYohEYZiLYKGEM0av--
+--------------yMWV1YiipYKn02F7y0OnNglB--
 
---------------R6N80MaAbfUGPaubekGinZuX--
+--------------wzK4dRL7H8XMZDylgOIL4aif--
 
---------------77q456z0dpb46aypSgIA000V
+--------------A8IvgqNvsJSKcYBeXXOfGFYy
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZa+GegUDAAAAAAAKCRDbaV4Vf/JGvW0Y
-AP4qZs6Jnn5ELzw60WZ2N3/hh2J9qFJWm8DJoYPQ0B95QQEAilM01UsutoTA9nc77orDH5wOAJVI
-Bn+uuPKOop5anwo=
-=1Haf
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZa+GowUDAAAAAAAKCRDbaV4Vf/JGvZRE
+AP9zZ4iDhPWZqI7pbgqQyuj6mKb6tJNQrKYGEqtzrte4+gEAvI9+bON8DCsKw4qC14L4f1iBl7fA
+pgEPW9PlXOqm2AM=
+=mgaV
 -----END PGP SIGNATURE-----
 
---------------77q456z0dpb46aypSgIA000V--
+--------------A8IvgqNvsJSKcYBeXXOfGFYy--
