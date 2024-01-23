@@ -4,30 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4FE8C47DDB
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 14:51:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFF7CC47258
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 14:51:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3C1387DA0;
-	Tue, 23 Jan 2024 15:50:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1CCA787D32;
+	Tue, 23 Jan 2024 15:50:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20BC587D36; Tue, 23 Jan 2024 15:50:00 +0100 (CET)
+ id A189487DA0; Tue, 23 Jan 2024 15:50:12 +0100 (CET)
 Received: from smtp-42ac.mail.infomaniak.ch (smtp-42ac.mail.infomaniak.ch
- [84.16.66.172])
+ [IPv6:2001:1600:4:17::42ac])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4019987D51
+ by phobos.denx.de (Postfix) with ESMTPS id A953C87D78
  for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 15:49:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0001.mail.infomaniak.ch (unknown [10.7.10.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TK93l0v6jzMrcS7;
- Tue, 23 Jan 2024 15:49:55 +0100 (CET)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4TK93m2dMkzMq3Zl;
+ Tue, 23 Jan 2024 15:49:56 +0100 (CET)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4TK93j6G38zVhH; Tue, 23 Jan 2024 15:49:53 +0100 (CET)
+ id 4TK93l1WThzWMh; Tue, 23 Jan 2024 15:49:55 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
 To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
@@ -46,10 +46,10 @@ To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Anatolij Gustschin <agust@denx.de>
 Cc: heiko@sntech.de, Quentin Schulz <foss+uboot@0leil.net>,
  u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Subject: [PATCH 05/18] rockchip: google: gru: migrate to
+Subject: [PATCH 06/18] rockchip: pine64: pinebook: migrate to
  rockchip_early_misc_init_r
-Date: Tue, 23 Jan 2024 15:49:13 +0100
-Message-ID: <20240123-jaguar-v1-5-1eec1c34953c@theobroma-systems.com>
+Date: Tue, 23 Jan 2024 15:49:14 +0100
+Message-ID: <20240123-jaguar-v1-6-1eec1c34953c@theobroma-systems.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240123-jaguar-v1-0-1eec1c34953c@theobroma-systems.com>
 References: <20240123-jaguar-v1-0-1eec1c34953c@theobroma-systems.com>
@@ -76,30 +76,34 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-Only setup_iodomain() differs from the original misc_init_r from
-Rockchip mach code, so let's use rockchip_early_misc_init_r instead of
-reimplementing the whole misc_init_r from Rockchip.
+Compared to the original misc_init_r from Rockchip mach code,
+setup_iodomain() is added and rockchip_setup_macaddr() is not called.
+
+It is assumed adding rockchip_setup_macaddr() back is fine.
+Let's use rockchip_early_misc_init_r instead of reimplementing the whole
+misc_init_r from Rockchip (the side effect being that
+rockchip_setup_macaddr() is back).
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- board/google/gru/gru.c | 20 ++------------------
- 1 file changed, 2 insertions(+), 18 deletions(-)
+ board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c | 18 ++----------------
+ 1 file changed, 2 insertions(+), 16 deletions(-)
 
-diff --git a/board/google/gru/gru.c b/board/google/gru/gru.c
-index fbcf845e87d..ecbf702b035 100644
---- a/board/google/gru/gru.c
-+++ b/board/google/gru/gru.c
+diff --git a/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c b/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
+index 4ad780767ea..2408a367305 100644
+--- a/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
++++ b/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
 @@ -11,7 +11,6 @@
  #include <asm/arch-rockchip/clock.h>
  #include <asm/arch-rockchip/grf_rk3399.h>
  #include <asm/arch-rockchip/hardware.h>
 -#include <asm/arch-rockchip/misc.h>
+ #include <linux/printk.h>
+ #include <power/regulator.h>
  
- #define GRF_IO_VSEL_BT656_SHIFT 0
- #define GRF_IO_VSEL_AUDIO_SHIFT 1
-@@ -85,24 +84,9 @@ static void setup_iodomain(void)
- 				      1 << PMUGRF_CON0_VOL_SHIFT));
+@@ -54,23 +53,10 @@ static void setup_iodomain(void)
+ 	rk_setreg(&pmugrf->soc_con0, 1 << PMUGRF_CON0_VSEL_SHIFT);
  }
  
 -int misc_init_r(void)
@@ -120,11 +124,10 @@ index fbcf845e87d..ecbf702b035 100644
 -	if (ret)
 -		return ret;
 -
--	ret = rockchip_setup_macaddr();
--
 -	return ret;
 +	return 0;
  }
+ #endif
 
 -- 
 2.43.0
