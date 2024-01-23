@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32A53C47258
-	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 16:42:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85034C47258
+	for <u-boot@archiver.kernel.org>; Tue, 23 Jan 2024 17:17:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E04487D3B;
-	Tue, 23 Jan 2024 17:42:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id AAA1E87D7F;
+	Tue, 23 Jan 2024 18:17:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Xr5atbMq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E6jByxB8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 592F0878A5; Tue, 23 Jan 2024 17:42:22 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 39BF6877BC; Tue, 23 Jan 2024 18:17:08 +0100 (CET)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5894878A5;
- Tue, 23 Jan 2024 17:42:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A3A0877BC
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 18:17:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robh+dt@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 9B9EDCE2E02;
- Tue, 23 Jan 2024 16:42:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CCEACC43399;
- Tue, 23 Jan 2024 16:42:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1706028136;
- bh=yH1uuCzUiU/1B9PhsPmw/wF2HgavGtBVha2NbfoLW7s=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=Xr5atbMqB4Fl/9cCTz0qDb2d4WK4d9o0XpojLJWIF+G1LcQ87aPslCX+LpAsrn5k6
- kMZrKrTAZFyTSkFtmo0PiJAxBlpMClyUpw/hi6ZTZ3R3j4sHdQhDhyJVxdiYmHEQMd
- zLd3Pzcd44PAoX6rM0wPbH1nnGq+OWFrZ9sFWXSbnFkkHukv9Lyp4n9P5Pwka79Suk
- BR9P5ZlgrWMv25cIdNN30eM1PkasYqEiAydtP9gbVfiOeboKCe/68joCZ1AsjltDXY
- lxY25aBkSI0FV6/tw92F+FtuYdDzSA1VF/fCzO9xbE+gej3ExAJ+PIgkJvqg0GHxT5
- wQJ/Of3Q8OHPg==
-Received: by mail-lj1-f172.google.com with SMTP id
- 38308e7fff4ca-2cf1c3b23aeso925001fa.1; 
- Tue, 23 Jan 2024 08:42:16 -0800 (PST)
-X-Gm-Message-State: AOJu0YzWe0lnVdSB3udAuYOV3t8gMMN1MTCxbotN7u7y1fEWlzD2i28I
- xsjiJrXWbt1FCzBxbcBmIqowyezmsE3BOPvA1Smym+vhRWiYODpF8UMMm4RYgS7R4JCp0g1fCxC
- zVR5GpZ3iQYeQtHhnv3bIaqvlXw==
-X-Google-Smtp-Source: AGHT+IHo/4zH0Zjk5iMrEJaPKPIJTagPw6LMJoTVMO01HF6UxBJCyzb5JGkxG5onXJWJYjT3EjdCjfB54LPjmLEgLOo=
-X-Received: by 2002:a2e:3019:0:b0:2ce:fc69:47fd with SMTP id
- w25-20020a2e3019000000b002cefc6947fdmr35118ljw.16.1706028135002; Tue, 23 Jan
- 2024 08:42:15 -0800 (PST)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-50e72e3d435so4202264e87.2
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 09:17:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706030224; x=1706635024; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=VsmZdxW7GW3kXi3zP+a0PadSCBTosXm1XrPVNaOHHTE=;
+ b=E6jByxB8RNXiKDGVbLEmFh8tNjgvyy3jWtxKHYoKxPoF4M+iIukTgVzms8hyxIC4Kf
+ K3pZgpi3ghulzk0mEn5b7/DpJ/GNLV6LDss3lfM2RhHqy+NEsufu1WpbuQvPHeAn1B5T
+ Hn1UyRH5f9DxwAdeooAef0STIhlPzMJEyolBhAzNlx3CFBXXWYp2wMUJ0mTE+WJ9hNpJ
+ +DrbKHkfVVlLv+GWNVu6J3kD7pn8T2ZOEZfaPqqHC8lOq+rubQFSO1Vou9GbYXB07Odj
+ qNN0K30vw3jTDci8FmYkWe2EIprhYjSd87D0DPh7qaFJwQVhAIFRz5anAjWfobf70qum
+ MyVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706030224; x=1706635024;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VsmZdxW7GW3kXi3zP+a0PadSCBTosXm1XrPVNaOHHTE=;
+ b=ArZY696Za2dSHmWeIfJJj+Phs5tjg23Tyiqr0IGKIOo6cpsGLUuQaXnCgPN4SahbWk
+ O6GJumEkoMRO9hJ6rIWdD7bnqFjE4AlW7cZMLaqi8MugkMXWE98u4R+GF+kMlexXGexK
+ N0yO2QPYLCY0QOIOSz5ug3FoE3vWEVmWAsU3bcjAPt/okfLztDcrwsVInClWdWymdowB
+ bw/dZgrOs3v/U5Kausw7NKs0iyqqiBEbajWu6cz76X6OwPXVB0lnWcrvB3LjD7DVcoBU
+ vT5jY+12yuilIqq6gNL86mOmO1YZdMmG2O0ya+x11aFQaUKC0JTfqtsTS7WiTwgjPbz9
+ w6sA==
+X-Gm-Message-State: AOJu0Yw+U0FkgGuSyltBm72cqrKgDaGrS+1Tb2dTQFvSl1p5/C9TOvhE
+ WgmAEe2mJbWye0fGXa4I1W0lJtCDdLBAsTLe0zRwKp96DI7x0TGj
+X-Google-Smtp-Source: AGHT+IHDC6YoYCzys4ik/pX8b+8tiMa9BBTgW0vZymnu4Ahut0f7w9P3pRigzmoDtYgqCiJDU5OA5A==
+X-Received: by 2002:a05:6512:3d0d:b0:50e:b1fa:8645 with SMTP id
+ d13-20020a0565123d0d00b0050eb1fa8645mr2268370lfv.109.1706030224264; 
+ Tue, 23 Jan 2024 09:17:04 -0800 (PST)
+Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
+ m27-20020a1709060d9b00b00a2c7d34157asm14269068eji.180.2024.01.23.09.17.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 23 Jan 2024 09:17:04 -0800 (PST)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Thierry Reding <treding@nvidia.com>, Anatolij Gustschin <agust@denx.de>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v6 00/18] Add T114 video support
+Date: Tue, 23 Jan 2024 19:16:15 +0200
+Message-Id: <20240123171633.246057-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20240110103547.719757-1-sumit.garg@linaro.org>
- <20240122114515.760e9cd3@donnerap.manchester.arm.com>
- <20240122164959.GN3652023@bill-the-cat>
- <20240123005834.4ab47bf5@minigeek.lan>
-In-Reply-To: <20240123005834.4ab47bf5@minigeek.lan>
-From: Rob Herring <robh+dt@kernel.org>
-Date: Tue, 23 Jan 2024 10:42:02 -0600
-X-Gmail-Original-Message-ID: <CAL_JsqJ1azgskDucTVkF0u_bKJUtNhhiufGdN6OOYicxwHW2_Q@mail.gmail.com>
-Message-ID: <CAL_JsqJ1azgskDucTVkF0u_bKJUtNhhiufGdN6OOYicxwHW2_Q@mail.gmail.com>
-Subject: Re: [PATCH v4 00/11] An effort to bring DT bindings compliance within
- U-Boot
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>,
- u-boot@lists.denx.de, 
- u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de, sjg@chromium.org, 
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
- rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com, bb@ti.com, 
- mark.kettenis@xs4all.nl
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,98 +89,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jan 22, 2024 at 6:59=E2=80=AFPM Andre Przywara <andre.przywara@arm.=
-com> wrote:
->
-> On Mon, 22 Jan 2024 11:49:59 -0500
-> Tom Rini <trini@konsulko.com> wrote:
->
-> Hi Tom,
->
-> > On Mon, Jan 22, 2024 at 11:45:15AM +0000, Andre Przywara wrote:
-> > > On Wed, 10 Jan 2024 16:05:36 +0530
-> > > Sumit Garg <sumit.garg@linaro.org> wrote:
-> > >
-> > > Hi,
-> > >
-> > > I certainly welcome this more automatic synchronisation of the DTs,
-> > > however have one comment about the upcoming sync process:
-> > >
-> > > > ...
-> > > > However, Linux kernel DT maintainers proposed [2] for U-Boot to rat=
-her
-> > > > use devicetree-rebasing repo [3] which is a forked copy from Linux
-> > > > kernel for DT source files as well as bindings. It is tagged at eve=
-ry
-> > > > Linux kernel major release or intermideate release candidates. So h=
-ere I
-> > > > have tried to reuse that to bring DT bingings compliance as well as=
- a
-> > > > standard way to maintain a regular sync of DT source files with Lin=
-ux
-> > > > kernel.
-> > > >
-> > > > In order to maintain devicetree files sync, U-Boot will maintains a=
- Git
-> > > > subtree for devicetee-rebasing repo as `dts/upstream` sub-directory=
-.
-> > > > U-Boot will regularly sync `dts/upstream/` subtree whenever the nex=
-t window
-> > > > opens with the next available kernel major release.
-> > >
-> > > I hope this doesn't need to stay that restricted? Can we either sync =
-more
-> > > often, or at least on the kernel's -rc1, and not only on a "full" rel=
-ease?
-> > >
-> > > The reason I ask is that we have a chicken-egg problem here: without =
-a DT
-> > > merged into the kernel tree, no U-Boot board support can be merged. A=
-nd
-> > > without U-Boot support, we cannot boot a kernel, at least not in the
-> > > canonical way.
-> > >
-> > > Since the U-Boot and kernel merge windows are not in phase, for sunxi=
- I try
-> > > to sync the kernel DTs either as early as possible (-rc1, sometimes e=
-ven
-> > > before, when the maintainers have merged them into their tree), or
-> > > sometimes "out of season", if a board defconfig patch is coming up.
-> > >
-> > > Otherwise new board support, which typically has a very low regressio=
-n risk
-> > > for the rest of the code base, would need to be delayed until the nex=
-t
-> > > release. In the worst case the U-Boot merge windows opens one week be=
-fore
-> > > a kernel release, then new boards need to wait three months?
-> >
-> > Would it be to bad to bring in board X with OF_UPSTREAM=3Dn for one U-B=
-oot
-> > release, and then with the next one switch to OF_UPSTREAM=3Dy (and dele=
-te
-> > the dts from arch/) for the next release, when we would have gotten bac=
-k
-> > in sync?
->
-> Ah, I didn't look into the actual patches, but if this provision is
-> there, that sounds surely acceptable. It might still be good to sync
-> earlier than the .0 kernel release: if it appears in Linus' tree, it
-> had already seen a good share of review and testing. And with the
-> U-Boot releases being always further away than the next kernel release,
-> we could pull fixes still in time. So we could pick the latest -rc (or
-> .0 release, whichever is more recent) when the U-Boot merge window
-> opens?
+T114 is not that different from T30 and all T30 drivers will work
+on T114 as well with some adjustments.
 
-That should be mostly fine IMO, but there are the occasional "oops,
-let's change/fix the binding before it's released".
+Patches propose general improvements for existing Tegra DC and DSI
+drivers as well Tegra 114 video support (experimentl).
 
-Couldn't you pull in the latest rc in the merge window, but only if
-the .0 release will happen before the next u-boot release. And then
-update from rc to .0 before the u-boot release.
+Commits pass buildman for tegra.
 
-Also, from a quick look at the dts changes during rc releases, they
-tend to come in the later rc releases. Probably that's just the
-latency of going to sub-arch maintainer->SoC->Linus.
+---
+Changes from v5:
+ - backlight enable moved to the last step of setup for DSI
+ - parameterized V- and H-sync polarities
+ - added framebuffer clearing on probe to avoid glitches
+ - backlight enable moved after DC is fully configured
+ - fixed printing framebuffer pointer instead of address
+ - moved scdiv calculation to tegra DSI if it is used
 
-Rob
+Changes from v4:
+ - fixed typo in max rate to be divided (400KHz > 400MHz)
+
+Changes from v3:
+ - fixed the clock divider calculation if PLLD/D2 is used
+ - removed unnecessary pre-configuration
+ - set correct video FIFO depth for DSI
+
+Changes from v2:
+ - fixed image distortion on devices with 180deg rotation
+
+Changes from v1:
+ - reworked patchset entirely
+ - diverged DC configuration per-SOC
+ - consolidated dc headers from different SOC gen
+ - initial support of DC detection (tegra has 2 DC)
+ - added PLLD2 support, resets and powergating
+ - added T114+ MIPI calibration
+ - added DSI detection (tegra has 2 DSI) and resets
+---
+
+Jonas Schwöbel (6):
+  video: tegra20: dc: fix printing of framebuffer address
+  video: tegra20: dc: enable backlight after DC is configured
+  video: tegra20: dc: clean framebuffer memory block
+  video: tegra20: dsi: remove pre-configuration
+  video: tegra20: dsi: set correct fifo depth
+  video: tegra20: dsi: use set_backlight for backlight only
+
+Svyatoslav Ryhel (12):
+  video: tegra20: dc: diverge DC per-SOC
+  video: tegra20: dc: fix image shift on rotated panels
+  video: tegra20: consolidate DC header
+  video: tegra20: dc: pass DC id to internal devices
+  video: tegra20: dc: add PLLD2 parent support
+  video: tegra20: dc: add reset support
+  video: tegra20: dc: add powergate
+  video: tegra20: dc: configure behavior if PLLD/D2 is used
+  video: tegra20: dc: parameterize V- and H-sync polarities
+  video: tegra20: add MIPI calibration driver
+  video: tegra20: dsi: add T114 support
+  video: tegra20: dsi: add reset support
+
+ arch/arm/dts/tegra114-u-boot.dtsi             |  13 +
+ arch/arm/dts/tegra114.dtsi                    |   4 +-
+ arch/arm/dts/tegra30-u-boot.dtsi              |   4 +
+ arch/arm/dts/tegra30.dtsi                     |   2 +-
+ arch/arm/include/asm/arch-tegra/dc.h          |  13 +-
+ arch/arm/include/asm/arch-tegra114/pwm.h      |  13 +
+ arch/arm/include/asm/arch-tegra20/display.h   |  28 --
+ arch/arm/include/asm/arch-tegra30/display.h   |  28 --
+ drivers/video/tegra20/Makefile                |   2 +-
+ drivers/video/tegra20/tegra-dc.c              | 239 +++++++++++++-----
+ drivers/video/tegra20/tegra-dc.h              |  45 ++++
+ drivers/video/tegra20/tegra-dsi.c             | 122 ++++++++-
+ .../video/tegra20/tegra-dsi.h                 |  24 +-
+ drivers/video/tegra20/tegra-mipi.c            | 188 ++++++++++++++
+ drivers/video/tegra20/tegra-pwm-backlight.c   |   3 +-
+ 15 files changed, 583 insertions(+), 145 deletions(-)
+ create mode 100644 arch/arm/include/asm/arch-tegra114/pwm.h
+ delete mode 100644 arch/arm/include/asm/arch-tegra20/display.h
+ delete mode 100644 arch/arm/include/asm/arch-tegra30/display.h
+ create mode 100644 drivers/video/tegra20/tegra-dc.h
+ rename arch/arm/include/asm/arch-tegra30/dsi.h => drivers/video/tegra20/tegra-dsi.h (90%)
+ create mode 100644 drivers/video/tegra20/tegra-mipi.c
+
+-- 
+2.40.1
+
