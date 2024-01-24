@@ -4,83 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F168C46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 11:25:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9006DC46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 11:52:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 756A187C37;
-	Wed, 24 Jan 2024 12:25:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C5A1987C3D;
+	Wed, 24 Jan 2024 12:51:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EudfTCWK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QX57cBep";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 044B787C37; Wed, 24 Jan 2024 12:25:21 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id E494487C45; Wed, 24 Jan 2024 12:51:57 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B62218786C
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 12:25:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D39A87BEF
+ for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 12:51:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-55817a12ad8so6045450a12.2
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 03:25:14 -0800 (PST)
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-55a9008c185so6794262a12.1
+ for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 03:51:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706095514; x=1706700314; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Tu5C0VVE7ea2RWIVKdjLka0E4Tw1KGDZHn5sRxkMCR8=;
- b=EudfTCWKlqDqzjSdEUborQEnWQujIUM7eVGQEbm461FjgxmMoN/fNmh7mdYj9Cg1X/
- C12hM0E7YMDTLOwdMQgTb94diOXpLG/DJ4spAO0dNLPslDtu8Qb3pxQsdQa9XSw2x/CG
- GXqKtixuNnQw/uKFfrTKjNnfR9uYxxZ0OlN0AdZ0fnl8jYOgOB1z8/8wfkgbqSRPsjl/
- iOirDO1cg7TSOh0DGj6gmVOBLbNCj5YzNMuo4rbrBVLv/qQhBDTFPbPOABIwF21yo+Oj
- 8f4mcfpTdbdMT/iuVjl5QOVb2AwIOZXU7PxAaW1IwldPAwcHbhL4QXPg5fLnwokEtu45
- 8msQ==
+ d=linaro.org; s=google; t=1706097115; x=1706701915; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=BA3/uv7LC41P94NMR62PNjj3EJp6SdAwNQ28z/amLsY=;
+ b=QX57cBepWmVENtbEoM7SjhhLEGw+8fGzjiKnYVkQo8C8kRqtojjsEAeoqH4B1zT8gs
+ 0XvJxFp8qsBftfMlpTPfOOFJaQRAIS5uZHGqf2lPtuCQXJDaE7e4hFwS2K0IXLfVkN4+
+ IRUk7XhzFdqCQXaCVl3S5hyepzlwbidGBDkkBFiuz3vIrvM1xkQjToP5BVxGLLNFZNdl
+ khb2KXC/eFD8l4SnBdSfSCawxK080oEpqZWqKqes+FmH00BITFSzgkvYI7aU5QOETQy9
+ mPeG20ml35eqOH3omgN6QlfyDaVEJFcBuUo+O8+sC1UZEmcmqqD9O3mR1Exe8TWOKH1U
+ wbyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706095514; x=1706700314;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Tu5C0VVE7ea2RWIVKdjLka0E4Tw1KGDZHn5sRxkMCR8=;
- b=wyGaWAbDB0GFd0wmnntayOcC+1dgribXjDt+28twwX0iuQCpfsO/ATRQ8pIcHXEAre
- gsRBDD4nT7C/4BmIrAblSziZkFgRubTXFXlKWJcKgieKfadXzbmLKZXjsSCtdKuCgM8z
- +mL5n7TOfPDyQ3PXTuWtik+Y9MeAdZI8mWnMuKtJOgai0+8OW2j3QMN3tlfVf3k0HCft
- 1eKJL9OA9mY1bBj5BiIwK6Ei5w8L1qGq3G4d4kPFchZm89dbdNA1onmkXhnHufUelYNm
- COcpBttuam8CtrGVo94WKVysbaxhzovi3WedQgyUGzh/QVjFygI3f6o2iSfxC2exs0p1
- 06KA==
-X-Gm-Message-State: AOJu0YxUJ6PbjbLS3HX1Wsw2vKpWTUt6PO4tuUxZKiJQyoth7tygvfix
- HP3608+A8JkXvwxvXyyMHd3J3QR5K6dRbHwK3m42SAwOmBayEt1sMVE1b3r05pw=
-X-Google-Smtp-Source: AGHT+IH/NLoqmp2/Sv5ti3fxP51Fga9E1FwUPxFotML/BHO0dkoTb02IxY9WV1FnvM2mA67tNJINBg==
-X-Received: by 2002:a17:906:b88a:b0:a27:7075:7613 with SMTP id
- hb10-20020a170906b88a00b00a2770757613mr632828ejb.67.1706095513985; 
- Wed, 24 Jan 2024 03:25:13 -0800 (PST)
-Received: from hera (ppp089210121239.access.hol.gr. [89.210.121.239])
- by smtp.gmail.com with ESMTPSA id
- tl7-20020a170907c30700b00a310a3548dasm744504ejc.177.2024.01.24.03.25.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jan 2024 03:25:13 -0800 (PST)
-Date: Wed, 24 Jan 2024 13:25:11 +0200
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Yann Gautier <yann.gautier@st.com>,
- Etienne Carriere <etienne.carriere@foss.st.com>
-Subject: Re: [PATCH 01/18] configs: fwu: Remove FWU configs for metadata V2
- migration
-Message-ID: <ZbDzl9Jcg4cbHpp6@hera>
-References: <20240122115439.653871-1-sughosh.ganu@linaro.org>
- <20240122115439.653871-2-sughosh.ganu@linaro.org>
+ d=1e100.net; s=20230601; t=1706097115; x=1706701915;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=BA3/uv7LC41P94NMR62PNjj3EJp6SdAwNQ28z/amLsY=;
+ b=gT056y+NxovX8MHSQhJin9jYbVwdd2KZ5L3oMwD3OFeJWSAKs1y/2boPUbBPNZiNmb
+ XImqwDbZtRJkRiN28HPncmEdhzOpNLlbJ5WHSIQgNbX9MY+uqFXeCyWkDo2DY2vY45mA
+ 5P9OiKX9k2M7S1xCletyWG1vX5HBUW1WzuH69CjQsvl8UaNVDwGEtZHBTN3m94V5mbFy
+ GBaPphDP7QOWblg0zMWosnQ2aU1JRaonWOTreSbnOj/IJFrct8g3N6Np3XFvIDOk5Ot1
+ cvPT6z/aeOi6PF11DJskGPOCO9KLXGg23eOLW/kPBPfDqTOvG3r7xJkC1/G7ObmL52ZI
+ vARw==
+X-Gm-Message-State: AOJu0Yws0w8j9jR5Di+xMV3E6NTwEs27Xy+TkiUmK7WrbqHxJaZO2/Kl
+ uW+ffoo509m+I0PcBuxm179WjpNqqGcTNKvF3/KxJZi7f3m9SjNZOW21w1JjgMa0Ak5LB9NsxO+
+ HtFxkFaUgJ5f9iOtiqxUJI9qdYzXJTRkDyWL95PC22mCqZrtRf1M=
+X-Google-Smtp-Source: AGHT+IEMy/kmwlZ+40ieXAcz9V09w+mQSJufVfSic2LwBIUG5hvcre0mnHoq2F0EUYQqcuWEuIulUCXMzHSogscrskY=
+X-Received: by 2002:aa7:d293:0:b0:55c:7bb6:f612 with SMTP id
+ w19-20020aa7d293000000b0055c7bb6f612mr1102902edq.16.1706097114682; Wed, 24
+ Jan 2024 03:51:54 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240122115439.653871-2-sughosh.ganu@linaro.org>
+References: <20240124091507.1173469-1-masahisa.kojima@linaro.org>
+ <be7e671d-8dfe-4d7e-94ad-ac30641cb96c@gmx.de>
+In-Reply-To: <be7e671d-8dfe-4d7e-94ad-ac30641cb96c@gmx.de>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Wed, 24 Jan 2024 20:51:43 +0900
+Message-ID: <CADQ0-X-iRybEguG1xj9yr7JDWbcDsZ13v5gmAcdo1jnyzsRDxw@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: migrate SMBIOS 3.0 entry point structure for
+ measurement
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,81 +88,329 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jan 22, 2024 at 05:24:22PM +0530, Sughosh Ganu wrote:
-> The FWU metadata is to be migrated to version 2. Disable the FWU
-> feature on platforms that enable it for the migration.
->
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> ---
->  configs/corstone1000_defconfig           | 2 --
->  configs/sandbox64_defconfig              | 1 -
->  configs/synquacer_developerbox_defconfig | 4 ----
->  3 files changed, 7 deletions(-)
->
-> diff --git a/configs/corstone1000_defconfig b/configs/corstone1000_defconfig
-> index e45415b90c..24b7984959 100644
-> --- a/configs/corstone1000_defconfig
-> +++ b/configs/corstone1000_defconfig
-> @@ -25,7 +25,6 @@ CONFIG_BOARD_LATE_INIT=y
->  CONFIG_SYS_PROMPT="corstone1000# "
->  CONFIG_SYS_MAXARGS=64
->  # CONFIG_CMD_CONSOLE is not set
-> -CONFIG_CMD_FWU_METADATA=y
->  CONFIG_CMD_BOOTZ=y
->  # CONFIG_CMD_XIMG is not set
->  CONFIG_CMD_GPT=y
-> @@ -67,4 +66,3 @@ CONFIG_FFA_SHARED_MM_BUF_OFFSET=0
->  CONFIG_FFA_SHARED_MM_BUF_ADDR=0x02000000
->  CONFIG_EFI_CAPSULE_ON_DISK=y
->  CONFIG_EFI_IGNORE_OSINDICATIONS=y
-> -CONFIG_FWU_MULTI_BANK_UPDATE=y
-> diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
-> index 996bb7aa4f..7b5888af38 100644
-> --- a/configs/sandbox64_defconfig
-> +++ b/configs/sandbox64_defconfig
-> @@ -274,7 +274,6 @@ CONFIG_EFI_CAPSULE_ON_DISK=y
->  CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
->  CONFIG_EFI_SECURE_BOOT=y
->  CONFIG_TEST_FDTDEC=y
-> -CONFIG_FWU_MULTI_BANK_UPDATE=y
->  CONFIG_UNIT_TEST=y
->  CONFIG_UT_TIME=y
->  CONFIG_UT_DM=y
-> diff --git a/configs/synquacer_developerbox_defconfig b/configs/synquacer_developerbox_defconfig
-> index 2a0407de40..616d410074 100644
-> --- a/configs/synquacer_developerbox_defconfig
-> +++ b/configs/synquacer_developerbox_defconfig
-> @@ -11,14 +11,12 @@ CONFIG_DM_GPIO=y
->  CONFIG_DEFAULT_DEVICE_TREE="synquacer-sc2a11-developerbox"
->  CONFIG_SYS_LOAD_ADDR=0x80000000
->  CONFIG_TARGET_DEVELOPERBOX=y
-> -CONFIG_FWU_NUM_IMAGES_PER_BANK=1
->  CONFIG_AHCI=y
->  CONFIG_FIT=y
->  CONFIG_SYS_BOOTM_LEN=0x800000
->  CONFIG_BOOTSTAGE_STASH_SIZE=4096
->  CONFIG_HUSH_PARSER=y
->  CONFIG_SYS_MAXARGS=128
-> -CONFIG_CMD_FWU_METADATA=y
->  CONFIG_CMD_IMLS=y
->  CONFIG_CMD_ERASEENV=y
->  CONFIG_CMD_NVEDIT_EFI=y
-> @@ -53,7 +51,6 @@ CONFIG_DFU_TFTP=y
->  CONFIG_DFU_MTD=y
->  CONFIG_DFU_RAM=y
->  CONFIG_DFU_SF=y
-> -CONFIG_FWU_MDATA_MTD=y
->  CONFIG_DM_I2C=y
->  CONFIG_SYS_I2C_SYNQUACER=y
->  CONFIG_MMC_SDHCI=y
-> @@ -96,4 +93,3 @@ CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
->  CONFIG_EFI_CAPSULE_ON_DISK=y
->  CONFIG_EFI_IGNORE_OSINDICATIONS=y
->  CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-> -CONFIG_FWU_MULTI_BANK_UPDATE=y
-> --
-> 2.34.1
->
+Hi Heinrich,
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On Wed, 24 Jan 2024 at 18:29, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 1/24/24 10:15, Masahisa Kojima wrote:
+> > Current U-Boot only supports the SMBIOS 3.0 entry point structure.
+> > TCG2 measurement code should migrate to SMBIOS 3.0 entry
+> > point structure.
+> >
+> > efi_selftest tcg2 test also needs to be updated, and expected
+> > PCR[1] result is changed since guid for SMBIOS EFI system table
+> > uses different guid SMBIOS3_TABLE_GUID instead of SMBIOS_TABLE_GUID.
+> >
+> > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+>
+> Hello Maasahisa,
+>
+> Thank you for looking into this.
+>
+> SMBIOS tables may be provided by QEMU. Depending on the architecture and
+> the QEMU release we will see SMBIOS2.1 and SMBIOS3 tables. We should
+> support measuring for both.
 
+With this commit, I assume that only SMBIOS 3.0 is supported in an EFI
+enabled system.
+ # Sorry but I don't fully follow the recent SMBIOS discussion in U-Boot ML.
+
+commit aa8499680c14afa80ed731b4cfcd6934b4f93712
+    "efi: smbios: Drop support for SMBIOS2 tables"
+
+If QEMU provides the SMBIOS 2.1 tables, do we need to revert the above patch?
+
+Thanks,
+Masahisa Kojima
+
+>
+> Best regards
+>
+> Heinrich
+>
+> > ---
+> >   include/efi_loader.h                 |  1 +
+> >   include/smbios.h                     |  4 +-
+> >   lib/efi_loader/efi_tcg2.c            | 14 ++--
+> >   lib/efi_selftest/efi_selftest_tcg2.c | 97 +++++++++++++---------------
+> >   lib/smbios-parser.c                  |  9 ++-
+> >   5 files changed, 61 insertions(+), 64 deletions(-)
+> >
+> > diff --git a/include/efi_loader.h b/include/efi_loader.h
+> > index d5fca2fa5e..5c5af4f7fd 100644
+> > --- a/include/efi_loader.h
+> > +++ b/include/efi_loader.h
+> > @@ -340,6 +340,7 @@ extern const efi_guid_t efi_guid_firmware_management_protocol;
+> >   extern const efi_guid_t efi_esrt_guid;
+> >   /* GUID of the SMBIOS table */
+> >   extern const efi_guid_t smbios_guid;
+> > +extern const efi_guid_t smbios3_guid;
+> >   /*GUID of console */
+> >   extern const efi_guid_t efi_guid_text_input_protocol;
+> >   extern const efi_guid_t efi_guid_text_output_protocol;
+> > diff --git a/include/smbios.h b/include/smbios.h
+> > index b507b9d9d7..e45303d0d3 100644
+> > --- a/include/smbios.h
+> > +++ b/include/smbios.h
+> > @@ -326,10 +326,10 @@ int smbios_update_version_full(void *smbios_tab, const char *version);
+> >    * This function clear the device dependent parameters such as
+> >    * serial number for the measurement.
+> >    *
+> > - * @entry: pointer to a struct smbios_entry
+> > + * @entry: pointer to a struct smbios3_entry
+> >    * @header: pointer to a struct smbios_header
+> >    */
+> > -void smbios_prepare_measurement(const struct smbios_entry *entry,
+> > +void smbios_prepare_measurement(const struct smbios3_entry *entry,
+> >                               struct smbios_header *header);
+> >
+> >   #endif /* _SMBIOS_H_ */
+> > diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
+> > index 8db35d0b3c..8b4f2fd2da 100644
+> > --- a/lib/efi_loader/efi_tcg2.c
+> > +++ b/lib/efi_loader/efi_tcg2.c
+> > @@ -1075,7 +1075,7 @@ error:
+> >    */
+> >   static efi_status_t
+> >   tcg2_measure_smbios(struct udevice *dev,
+> > -                 const struct smbios_entry *entry)
+> > +                 const struct smbios3_entry *entry)
+> >   {
+> >       efi_status_t ret;
+> >       struct smbios_header *smbios_copy;
+> > @@ -1093,7 +1093,7 @@ tcg2_measure_smbios(struct udevice *dev,
+> >        */
+> >       event_size = sizeof(struct smbios_handoff_table_pointers2) +
+> >                    FIELD_SIZEOF(struct efi_configuration_table, guid) +
+> > -                  entry->struct_table_length;
+> > +                  entry->max_struct_size;
+> >       event = calloc(1, event_size);
+> >       if (!event) {
+> >               ret = EFI_OUT_OF_RESOURCES;
+> > @@ -1104,11 +1104,11 @@ tcg2_measure_smbios(struct udevice *dev,
+> >       memcpy(event->table_description, SMBIOS_HANDOFF_TABLE_DESC,
+> >              sizeof(SMBIOS_HANDOFF_TABLE_DESC));
+> >       put_unaligned_le64(1, &event->number_of_tables);
+> > -     guidcpy(&event->table_entry[0].guid, &smbios_guid);
+> > +     guidcpy(&event->table_entry[0].guid, &smbios3_guid);
+> >       smbios_copy = (struct smbios_header *)((uintptr_t)&event->table_entry[0].table);
+> >       memcpy(&event->table_entry[0].table,
+> >              (void *)((uintptr_t)entry->struct_table_address),
+> > -            entry->struct_table_length);
+> > +            entry->max_struct_size);
+> >
+> >       smbios_prepare_measurement(entry, smbios_copy);
+> >
+> > @@ -1133,7 +1133,7 @@ static void *find_smbios_table(void)
+> >       u32 i;
+> >
+> >       for (i = 0; i < systab.nr_tables; i++) {
+> > -             if (!guidcmp(&smbios_guid, &systab.tables[i].guid))
+> > +             if (!guidcmp(&smbios3_guid, &systab.tables[i].guid))
+> >                       return systab.tables[i].table;
+> >       }
+> >
+> > @@ -1360,7 +1360,7 @@ efi_status_t efi_tcg2_measure_efi_app_invocation(struct efi_loaded_image_obj *ha
+> >       u32 pcr_index;
+> >       struct udevice *dev;
+> >       u32 event = 0;
+> > -     struct smbios_entry *entry;
+> > +     struct smbios3_entry *entry;
+> >
+> >       if (!is_tcg2_protocol_installed())
+> >               return EFI_SUCCESS;
+> > @@ -1382,7 +1382,7 @@ efi_status_t efi_tcg2_measure_efi_app_invocation(struct efi_loaded_image_obj *ha
+> >       if (ret != EFI_SUCCESS)
+> >               goto out;
+> >
+> > -     entry = (struct smbios_entry *)find_smbios_table();
+> > +     entry = (struct smbios3_entry *)find_smbios_table();
+> >       if (entry) {
+> >               ret = tcg2_measure_smbios(dev, entry);
+> >               if (ret != EFI_SUCCESS)
+> > diff --git a/lib/efi_selftest/efi_selftest_tcg2.c b/lib/efi_selftest/efi_selftest_tcg2.c
+> > index 67a886efaa..fb8b997653 100644
+> > --- a/lib/efi_selftest/efi_selftest_tcg2.c
+> > +++ b/lib/efi_selftest/efi_selftest_tcg2.c
+> > @@ -126,41 +126,40 @@ static u8 boot_order[] = {0x02, 0x10, 0x00, 0x10, 0x01, 0x10};
+> >
+> >   static void *orig_smbios_table;
+> >   static u64 dmi_addr = U32_MAX;
+> > -#define SMBIOS_ENTRY_HEADER_SIZE 0x20
+> > +#define SMBIOS3_ENTRY_HEADER_SIZE 0x18
+> >   /* smbios table for the measurement test */
+> > -static u8 smbios_table_test[] = {
+> > -0x5f, 0x53, 0x4d, 0x5f, 0x2c, 0x1f, 0x03, 0x00, 0x54, 0x00, 0x00, 0x00,
+> > -0x00, 0x00, 0x00, 0x00, 0x5f, 0x44, 0x4d, 0x49, 0x5f, 0xe4, 0x5c, 0x01,
+> > -0x20, 0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00, 0x18, 0x00, 0x00,
+> > -0x01, 0x02, 0x00, 0x00, 0x03, 0x00, 0x80, 0x08, 0x01, 0x00, 0x00, 0x00,
+> > -0x00, 0x00, 0x00, 0x0c, 0x15, 0x0a, 0xff, 0xff, 0x55, 0x2d, 0x42, 0x6f,
+> > -0x6f, 0x74, 0x00, 0x32, 0x30, 0x32, 0x31, 0x2e, 0x31, 0x30, 0x2d, 0x72,
+> > -0x63, 0x34, 0x2d, 0x30, 0x30, 0x30, 0x30, 0x35, 0x2d, 0x67, 0x37, 0x32,
+> > -0x37, 0x63, 0x33, 0x66, 0x33, 0x32, 0x35, 0x39, 0x2d, 0x64, 0x69, 0x72,
+> > -0x74, 0x79, 0x00, 0x31, 0x30, 0x2f, 0x30, 0x31, 0x2f, 0x32, 0x30, 0x32,
+> > -0x31, 0x00, 0x00, 0x01, 0x1b, 0x01, 0x00, 0x01, 0x02, 0x00, 0x03, 0x31,
+> > -0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x00, 0x00, 0x00, 0x00, 0x00,
+> > -0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x55, 0x6e, 0x6b, 0x6e, 0x6f, 0x77,
+> > -0x6e, 0x00, 0x55, 0x6e, 0x6b, 0x6e, 0x6f, 0x77, 0x6e, 0x20, 0x50, 0x72,
+> > -0x6f, 0x64, 0x75, 0x63, 0x74, 0x00, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36,
+> > -0x37, 0x38, 0x00, 0x00, 0x02, 0x0e, 0x02, 0x00, 0x01, 0x02, 0x00, 0x04,
+> > -0x03, 0x01, 0x01, 0x01, 0x00, 0x0a, 0x55, 0x6e, 0x6b, 0x6e, 0x6f, 0x77,
+> > -0x6e, 0x00, 0x55, 0x6e, 0x6b, 0x6e, 0x6f, 0x77, 0x6e, 0x20, 0x50, 0x72,
+> > -0x6f, 0x64, 0x75, 0x63, 0x74, 0x00, 0x33, 0x33, 0x33, 0x33, 0x33, 0x33,
+> > -0x33, 0x33, 0x00, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x00,
+> > -0x00, 0x03, 0x15, 0x03, 0x00, 0x01, 0x03, 0x00, 0x02, 0x03, 0x03, 0x03,
+> > -0x03, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0x6e,
+> > -0x6b, 0x6e, 0x6f, 0x77, 0x6e, 0x00, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36,
+> > -0x37, 0x38, 0x00, 0x33, 0x33, 0x33, 0x33, 0x33, 0x33, 0x33, 0x33, 0x00,
+> > -0x00, 0x04, 0x30, 0x04, 0x00, 0x00, 0x03, 0x02, 0x01, 0x00, 0x00, 0x00,
+> > -0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x0c, 0x00, 0x00, 0x00, 0x00, 0x00,
+> > -0x00, 0x01, 0x06, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x02, 0x03, 0x04,
+> > -0x04, 0x04, 0x08, 0x00, 0x00, 0x02, 0x00, 0x08, 0x00, 0x08, 0x00, 0x01,
+> > -0x00, 0x55, 0x6e, 0x6b, 0x6e, 0x6f, 0x77, 0x6e, 0x00, 0x31, 0x32, 0x33,
+> > -0x34, 0x35, 0x36, 0x37, 0x38, 0x00, 0x33, 0x33, 0x33, 0x33, 0x33, 0x33,
+> > -0x33, 0x33, 0x00, 0x35, 0x35, 0x35, 0x35, 0x35, 0x35, 0x35, 0x35, 0x00,
+> > -0x00, 0x20, 0x0b, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+> > -0x00, 0x00, 0x7f, 0x04, 0x06, 0x00, 0x00, 0x00
+> > +static u8 smbios3_table_test[] = {
+> > +0x5f, 0x53, 0x4d, 0x33, 0x5f, 0x00, 0x18, 0x03, 0x07, 0x00, 0x01, 0x00,
+> > +0x5c, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+> > +0x00, 0x18, 0x00, 0x00, 0x01, 0x02, 0x00, 0x00, 0x03, 0x00, 0x80, 0x08,
+> > +0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0c, 0x15, 0x0a, 0xff, 0xff,
+> > +0x55, 0x2d, 0x42, 0x6f, 0x6f, 0x74, 0x00, 0x32, 0x30, 0x32, 0x31, 0x2e,
+> > +0x31, 0x30, 0x2d, 0x72, 0x63, 0x34, 0x2d, 0x30, 0x30, 0x30, 0x30, 0x35,
+> > +0x2d, 0x67, 0x37, 0x32, 0x37, 0x63, 0x33, 0x66, 0x33, 0x32, 0x35, 0x39,
+> > +0x2d, 0x64, 0x69, 0x72, 0x74, 0x79, 0x00, 0x31, 0x30, 0x2f, 0x30, 0x31,
+> > +0x2f, 0x32, 0x30, 0x32, 0x31, 0x00, 0x00, 0x01, 0x1b, 0x01, 0x00, 0x01,
+> > +0x02, 0x00, 0x03, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x00,
+> > +0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x55, 0x6e,
+> > +0x6b, 0x6e, 0x6f, 0x77, 0x6e, 0x00, 0x55, 0x6e, 0x6b, 0x6e, 0x6f, 0x77,
+> > +0x6e, 0x20, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x00, 0x31, 0x32,
+> > +0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x00, 0x00, 0x02, 0x0e, 0x02, 0x00,
+> > +0x01, 0x02, 0x00, 0x04, 0x03, 0x01, 0x01, 0x01, 0x00, 0x0a, 0x55, 0x6e,
+> > +0x6b, 0x6e, 0x6f, 0x77, 0x6e, 0x00, 0x55, 0x6e, 0x6b, 0x6e, 0x6f, 0x77,
+> > +0x6e, 0x20, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x00, 0x33, 0x33,
+> > +0x33, 0x33, 0x33, 0x33, 0x33, 0x33, 0x00, 0x31, 0x32, 0x33, 0x34, 0x35,
+> > +0x36, 0x37, 0x38, 0x00, 0x00, 0x03, 0x15, 0x03, 0x00, 0x01, 0x03, 0x00,
+> > +0x02, 0x03, 0x03, 0x03, 0x03, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+> > +0x00, 0x00, 0x55, 0x6e, 0x6b, 0x6e, 0x6f, 0x77, 0x6e, 0x00, 0x31, 0x32,
+> > +0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x00, 0x33, 0x33, 0x33, 0x33, 0x33,
+> > +0x33, 0x33, 0x33, 0x00, 0x00, 0x04, 0x30, 0x04, 0x00, 0x00, 0x03, 0x02,
+> > +0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x0c, 0x00,
+> > +0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x06, 0xff, 0xff, 0xff, 0xff, 0xff,
+> > +0xff, 0x02, 0x03, 0x04, 0x04, 0x04, 0x08, 0x00, 0x00, 0x02, 0x00, 0x08,
+> > +0x00, 0x08, 0x00, 0x01, 0x00, 0x55, 0x6e, 0x6b, 0x6e, 0x6f, 0x77, 0x6e,
+> > +0x00, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x00, 0x33, 0x33,
+> > +0x33, 0x33, 0x33, 0x33, 0x33, 0x33, 0x00, 0x35, 0x35, 0x35, 0x35, 0x35,
+> > +0x35, 0x35, 0x35, 0x00, 0x00, 0x20, 0x0b, 0x05, 0x00, 0x00, 0x00, 0x00,
+> > +0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7f, 0x04, 0x06, 0x00, 0x00, 0x00
+> >   };
+> >
+> >   #define IDX_ARRAY_SZ 3 /* support 24 PCRs */
+> > @@ -179,10 +178,10 @@ static u8 expected_pcrs[EFI_TCG2_MAX_PCR_INDEX + 1][TPM2_SHA256_DIGEST_SIZE] = {
+> >        0x7b, 0xb9, 0xfe, 0xa1, 0xcd, 0x64, 0x49, 0xdd,
+> >        0xed, 0xe2, 0x65, 0x82, 0xc5, 0x3e, 0xf4, 0xc4},
+> >
+> > -     {0xf5, 0x79, 0xf3, 0x20, 0x62, 0x6e, 0x8b, 0x58,
+> > -      0x62, 0xa3, 0x4e, 0x2f, 0xb7, 0x10, 0xac, 0x34,
+> > -      0x4e, 0x68, 0x94, 0x37, 0x87, 0x29, 0xc4, 0xbe,
+> > -      0xa3, 0xc4, 0xd9, 0x14, 0x2b, 0x66, 0x79, 0x9b},
+> > +     {0x75, 0xb5, 0x91, 0x54, 0x12, 0xa8, 0xa4, 0x25,
+> > +      0x73, 0x79, 0xa7, 0x47, 0xd9, 0x32, 0x54, 0x78,
+> > +      0x9a, 0x80, 0x3f, 0xa8, 0x34, 0xfe, 0xd2, 0xae,
+> > +      0x76, 0xd3, 0x16, 0x4a, 0xb2, 0x03, 0xac, 0xe6},
+> >
+> >       {0x3d, 0x45, 0x8c, 0xfe, 0x55, 0xcc, 0x03, 0xea,
+> >        0x1f, 0x44, 0x3f, 0x15, 0x62, 0xbe, 0xec, 0x8d,
+> > @@ -543,7 +542,7 @@ static void *find_smbios_table(const struct efi_system_table *systable)
+> >       u32 i;
+> >
+> >       for (i = 0; i < systable->nr_tables; i++) {
+> > -             if (!guidcmp(&smbios_guid, &systable->tables[i].guid))
+> > +             if (!guidcmp(&smbios3_guid, &systable->tables[i].guid))
+> >                       return systable->tables[i].table;
+> >       }
+> >
+> > @@ -558,14 +557,12 @@ static void *find_smbios_table(const struct efi_system_table *systable)
+> >    */
+> >   static efi_status_t setup_smbios_table(const struct efi_system_table *systable)
+> >   {
+> > -     struct smbios_entry *se;
+> > +     struct smbios3_entry *se;
+> >       efi_status_t ret;
+> >       /* Map within the low 32 bits, to allow for 32bit SMBIOS tables */
+> >       void *dmi;
+> > -     char *istart;
+> > -     int isize;
+> >
+> > -     if (sizeof(smbios_table_test) > EFI_PAGE_SIZE)
+> > +     if (sizeof(smbios3_table_test) > EFI_PAGE_SIZE)
+> >               return EFI_OUT_OF_RESOURCES;
+> >
+> >       orig_smbios_table = find_smbios_table(systable);
+> > @@ -586,19 +583,15 @@ static efi_status_t setup_smbios_table(const struct efi_system_table *systable)
+> >
+> >       dmi = (void *)(uintptr_t)dmi_addr;
+> >       se = dmi;
+> > -     boottime->copy_mem(se, smbios_table_test, sizeof(smbios_table_test));
+> > +     boottime->copy_mem(se, smbios3_table_test, sizeof(smbios3_table_test));
+> >
+> >       /* update smbios table start address */
+> > -     se->struct_table_address = (uintptr_t)((u8 *)dmi + SMBIOS_ENTRY_HEADER_SIZE);
+> > +     se->struct_table_address = (uintptr_t)((u8 *)dmi + SMBIOS3_ENTRY_HEADER_SIZE);
+> >
+> > -     /* calculate checksums */
+> > -     istart = (char *)se + SMBIOS_INTERMEDIATE_OFFSET;
+> > -     isize = sizeof(struct smbios_entry) - SMBIOS_INTERMEDIATE_OFFSET;
+> > -     se->intermediate_checksum = table_compute_checksum(istart, isize);
+> > -     se->checksum = table_compute_checksum(se, sizeof(struct smbios_entry));
+> > +     se->checksum = table_compute_checksum(se, sizeof(struct smbios3_entry));
+> >
+> >       /* Install SMBIOS information as configuration table */
+> > -     ret = boottime->install_configuration_table(&smbios_guid, dmi);
+> > +     ret = boottime->install_configuration_table(&smbios3_guid, dmi);
+> >       if (ret != EFI_SUCCESS) {
+> >               efi_st_error("Cannot install SMBIOS table\n");
+> >               boottime->free_pages(dmi_addr, 1);
+> > @@ -992,7 +985,7 @@ static int efi_st_tcg2_teardown(void)
+> >        * If orig_smbios_table is NULL, calling install_configuration_table()
+> >        * removes dummy SMBIOS table form systab.
+> >        */
+> > -     r = boottime->install_configuration_table(&smbios_guid, orig_smbios_table);
+> > +     r = boottime->install_configuration_table(&smbios3_guid, orig_smbios_table);
+> >       if (r != EFI_SUCCESS) {
+> >               efi_st_error("Failed to restore SMBOIS table\n");
+> >               return EFI_ST_FAILURE;
+> > diff --git a/lib/smbios-parser.c b/lib/smbios-parser.c
+> > index ac9a367a87..f48d743657 100644
+> > --- a/lib/smbios-parser.c
+> > +++ b/lib/smbios-parser.c
+> > @@ -223,21 +223,24 @@ static void clear_smbios_table(struct smbios_header *header,
+> >       }
+> >   }
+> >
+> > -void smbios_prepare_measurement(const struct smbios_entry *entry,
+> > +void smbios_prepare_measurement(const struct smbios3_entry *entry,
+> >                               struct smbios_header *smbios_copy)
+> >   {
+> >       u32 i, j;
+> > +     void *table_end;
+> >       struct smbios_header *header;
+> >
+> > +     table_end = (void *)((u8 *)smbios_copy + entry->max_struct_size);
+> > +
+> >       for (i = 0; i < ARRAY_SIZE(smbios_filter_tables); i++) {
+> >               header = smbios_copy;
+> > -             for (j = 0; j < entry->struct_count; j++) {
+> > +             for (j = 0; (void *)header < table_end; j++) {
+> >                       if (header->type == smbios_filter_tables[i].type)
+> >                               break;
+> >
+> >                       header = get_next_header(header);
+> >               }
+> > -             if (j >= entry->struct_count)
+> > +             if ((void *)header >= table_end)
+> >                       continue;
+> >
+> >               clear_smbios_table(header,
+>
