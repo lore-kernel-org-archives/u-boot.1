@@ -4,75 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7F79C46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 07:27:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AD22C46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 07:36:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CED987BE7;
-	Wed, 24 Jan 2024 08:26:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 53B9787BF1;
+	Wed, 24 Jan 2024 08:36:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="gEvyQAg9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GmQk1GRs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 989B687BE7; Wed, 24 Jan 2024 08:26:43 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B40CD87BF1; Wed, 24 Jan 2024 08:36:23 +0100 (CET)
+Received: from mail-vk1-xa2a.google.com (mail-vk1-xa2a.google.com
+ [IPv6:2607:f8b0:4864:20::a2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D268887613
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 08:26:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 901C787BCE
+ for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 08:36:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40O7Qc6c054982
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 01:26:38 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1706081198;
- bh=2BOrv03jvY0jQfhDNcvubHfbiKN3DvYOGQgUU9Jd5B0=;
- h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=gEvyQAg9w0neyT0+MT2HoU3TcOSdgB5T8L0IgnxmOsUI/zanfoPRr+U50IewInA/3
- hroVu8FoQu5BgTOZHeSxgzzfgILH7HYldSTakKrg4yT+IQxWtqy1Md0AeM9gcSzuQu
- Ic8w+pS5AMqqnnTPLphcg6PDEiuyV4SYIIpKWvpE=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40O7QcAG010973
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 01:26:38 -0600
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 24
- Jan 2024 01:26:38 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 24 Jan 2024 01:26:38 -0600
-Received: from [127.0.1.1] (uda0497581.dhcp.ti.com [10.24.68.185])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40O7QTGj015268;
- Wed, 24 Jan 2024 01:26:35 -0600
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Wed, 24 Jan 2024 12:56:26 +0530
-Subject: [PATCH 2/2] doc: k3: update documentation for uEnv.txt
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-vk1-xa2a.google.com with SMTP id
+ 71dfb90a1353d-4bd3dcee54eso653016e0c.0
+ for <u-boot@lists.denx.de>; Tue, 23 Jan 2024 23:36:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1706081780; x=1706686580; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=XwLkLXos8arye6Q9LT/d+K7t8p5sAS/biFkdo8KW8M4=;
+ b=GmQk1GRsScH9S0V0ES+TuwoPOP3yjwr4x/O/Hfkjc24BCYFV7v5qzWkThJoVIupzVS
+ GTYVNM0skGA25DietAT0CCxrvOpvkycAzQFEgXPvIK5fhtV3CZ1o/uiMEMOtgSbTV2bk
+ NQExsuP3J7oaxhWo/ouzx5EpBmevM2SKXlND5RWX15/duvcRxqN/8RS3VTlvziMIuuCd
+ 7YlqprmOEPfbuqakm4p4XfQkF8QQDXTB4xQMrrWDPOVXB89GWtjbLNBSr1K+Au1A8bea
+ V5IaefRth0wNbqx9+bVXxIo2jBknu0PZ2aePnLrtBB1+IittjANgKSTFhy0DDFjLWSNc
+ l8Bg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706081780; x=1706686580;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XwLkLXos8arye6Q9LT/d+K7t8p5sAS/biFkdo8KW8M4=;
+ b=XZxeb0p7niDgAG+X+wVbL5Kwiyul5MvmPeUZAt9tWT2LkCgSvWdOffKQ/UzEVSmjQJ
+ vN3w14xaU4irMhw9rpWDum8RlvFrGBxDek4CdW7sIeVzw+WarJ1/Xsj/4GGQYHNy0vI0
+ uP8U7eC47lY7ielfedQPYRJgBfHPm1Ra2dvMDECVKuwpJSknrNu5WUSE9imUNVK/2uHQ
+ 9Jl7Dv8IRfqHIeP5wIfuuDw3RlVX/cF42b0SrblsCtVkpxv0q2JOGpPEU4L8Wjhzwf6k
+ k+zIaiDSZ4QpbSjTPppw3nYVyTPKIX+bsLw3bxiJHtpKH3jxTKp8VayYEbwhEIhkhEcu
+ ssVw==
+X-Gm-Message-State: AOJu0YzLMz1p7r6DVNLNQH2bD03WvfxYczg+N6C8JbG07l6X3jTtWhVB
+ IQIqlF2kTjsdM5AgC5PkkHUpXP8nMVHJWAJjsbMsopwyUHvFCoJVXvHIhaBTT05nl7CU7s4FHQK
+ BuKZawN1zzf/gADNgo5mjf5fDpEIPC+1vL7NFMg==
+X-Google-Smtp-Source: AGHT+IGMpWXZhSjESRfcE+CaD4uCOdOSqylccXv8iswNuKTUjyEslIwh2ZXnMpAp0s8lRGZU2tE+BL9seLIjNn44Qls=
+X-Received: by 2002:a05:6122:3685:b0:4b7:2382:b4 with SMTP id
+ ec5-20020a056122368500b004b7238200b4mr516576vkb.6.1706081780295; Tue, 23 Jan
+ 2024 23:36:20 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20240124-b4-upstream-save_uenv-v1-2-4a4dfbd3eca9@ti.com>
-References: <20240124-b4-upstream-save_uenv-v1-0-4a4dfbd3eca9@ti.com>
-In-Reply-To: <20240124-b4-upstream-save_uenv-v1-0-4a4dfbd3eca9@ti.com>
-To: Udit Kumar <u-kumar1@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
- Andrew Davis <afd@ti.com>, Nishanth Menon <nm@ti.com>
-CC: <u-boot@lists.denx.de>, Vignesh Raghavendra <vigneshr@ti.com>, Keerthy J
- <j-keerthy@ti.com>, Aniket Limaye <a-limaye@ti.com>, Manorit Chawdhry
- <m-chawdhry@ti.com>
-X-Mailer: b4 0.13-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1706081189; l=2085;
- i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
- bh=+aE3O9XdnIXHzdNG7VxLIyD/UoJelk4O5uQRxE53wUA=;
- b=FOZtn6G+keK5m5REldMCBjc/W3Sn41EIhpzmb7yGbCV7gUjd1Inx6IFOdgmmFZnP2s5FZidY3
- wX1Ydkbf+tYCdmFcwREpMLkq5xeLV7/xVgyYtQytpNB6eqYHvnyS8Eu
-X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
- pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240110103547.719757-1-sumit.garg@linaro.org>
+ <82d509de-3d47-4cc2-8217-c38dc78fad28@denx.de>
+ <7b4ff8e8-2f21-4d07-9848-fb0d5652819e@linaro.org>
+ <20240122000103.GE3652023@bill-the-cat>
+In-Reply-To: <20240122000103.GE3652023@bill-the-cat>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Wed, 24 Jan 2024 13:06:09 +0530
+Message-ID: <CAFA6WYMB_vpBHacNUARNa8q7c8BYn65rNoQNMNLeQ18Vh8T6+Q@mail.gmail.com>
+Subject: Re: [PATCH v4 00/11] An effort to bring DT bindings compliance within
+ U-Boot
+To: Tom Rini <trini@konsulko.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de, 
+ u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de, sjg@chromium.org, 
+ robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
+ neil.armstrong@linaro.org, ff@shokubai.tech, daniel.thompson@linaro.org, 
+ dgilmore@fedoraproject.org, pbrobinson@gmail.com, ilias.apalodimas@linaro.org, 
+ maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de, 
+ michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk, 
+ peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com, 
+ mibodhi@gmail.com, bb@ti.com, mark.kettenis@xs4all.nl
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,63 +98,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the information for the save_uenv command and refactor the
-documentation to remove the eMMC information that was wrong.
+On Mon, 22 Jan 2024 at 05:31, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sun, Jan 21, 2024 at 10:41:51PM +0000, Caleb Connolly wrote:
+> >
+> >
+> > On 21/01/2024 15:33, Marek Vasut wrote:
+> [snip]
+> > > Assume that there is some large breaking change in Linux 6.(n+1),
+> > > something which would be problematic for specific U-Boot platform (e.g.
+> > > i.MX) or would require a lot of work to sort out, will there be a way to
+> > > temporarily pin DTs for specific platform to older DT version until that
+> > > is resolved (e.g. pin to 6.n) ?
+> >
+> > (Upstream) devicetree has to be forwards and backwards compatible, were such
+> > a breaking change to get merged without prior discussion with DT users (i.e.
+> > U-Boot) then I think the correct course of action would be to revert it.
+>
+> The caveat is "unless it was wrong before", which happens more often
+> than is generally thought of I think. I'm not sure off-hand the best way
+> to deal with that.
 
-Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
----
- doc/board/ti/k3.rst | 24 ++++++++++++++----------
- 1 file changed, 14 insertions(+), 10 deletions(-)
+I think that's the reason we just want to pull DT at once in the
+beginning of the next window and allow U-Boot developers/maintainers
+to detect and fix problems during the full U-Boot release cycle.
+However, we are open to discussions for a revert if there is a major
+DT ABI break among Linux major (.0) releases affecting many U-Boot
+platforms.
 
-diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index 7dfe39c5fa57..e95779e32566 100644
---- a/doc/board/ti/k3.rst
-+++ b/doc/board/ti/k3.rst
-@@ -594,20 +594,21 @@ Refer (:ref:`U-boot ARMV8 build <k3_rst_include_start_build_steps_uboot>`)
- Saving environment
- ------------------
- 
--SAVEENV is disabled by default and for the new flow uses Uenv.txt as the default
--way for saving the environments. This has been done as Uenv.txt is more granular
--then the saveenv command and can be used across various bootmodes too.
-+CONFIG_CMD_SAVEENV is disabled by default and for the new flow uses
-+uEnv.txt as the default way for saving the environments. This has been done
-+as uEnv.txt is more granular then the saveenv command and can be used
-+across various bootmodes too.
- 
--**Writing to MMC/EMMC**
-+**Writing to MMC**
- 
- .. prompt:: bash =>
- 
--  env export -t $loadaddr <list of variables>
--  fatwrite mmc ${mmcdev} ${loadaddr} ${bootenvfile} ${filesize}
-+  setenv save_to_env <variables to be saved in uEnv.txt>
-+  run save_uenv
- 
--**Reading from MMC/EMMC**
-+**Reading from MMC**
- 
--By default run envboot will read it from the MMC/EMMC partition ( based on
-+By default run envboot will read it from the MMC partition ( based on
- mmcdev) and set the environments.
- 
- If manually needs to be done then the environment can be read from the
-@@ -615,8 +616,11 @@ filesystem and then imported
- 
- .. prompt:: bash =>
- 
--  fatload mmc ${mmcdev} ${loadaddr} ${bootenvfile}
--  env import -t ${loadaddr} ${filesize}
-+  run envboot
-+
-+To read from eMMC, the save_uenv and envboot commands would need to be
-+changed to pickup the bootenvfile from eMMC. Mainly the write and read
-+commands would change to eMMC.
- 
- .. _k3_rst_refer_openocd:
- 
+-Sumit
 
--- 
-2.43.0
-
+>
+> --
+> Tom
