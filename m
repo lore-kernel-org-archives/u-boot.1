@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2993CC46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 12:43:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02987C47E49
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 12:43:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B189587CA5;
-	Wed, 24 Jan 2024 13:42:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3EB9987D03;
+	Wed, 24 Jan 2024 13:42:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AyiA2MMX";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ny3bR0q/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7452987BDE; Wed, 24 Jan 2024 07:50:10 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id DB42C87BDB; Wed, 24 Jan 2024 07:50:11 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45499879F6
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 07:50:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BA33C87BC3
+ for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 07:50:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40O6nqmw039422;
- Wed, 24 Jan 2024 00:49:52 -0600
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40O6nsn3046290;
+ Wed, 24 Jan 2024 00:49:54 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1706078992;
- bh=AqH51YFDMsvXlsQJam52pKi8BK7FsHn3egqombLWBTk=;
+ s=ti-com-17Q1; t=1706078994;
+ bh=x7aY9ffWo9JhqOF3C72DnKKwvNRELhyVld2cFIeWDZI=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=AyiA2MMXECf/I5vcS/3QDjW1BfE/i7GvzF+Y6MZzKMsGs09KKJWMzgv0Xi6TH3ts4
- ly23KL00UcwtkoY2MgelF3SBxt7q3DRFXojvGNnXVyyD8Up0LXjcHxf56jnJjzkeVL
- EzJmdIeSfekH1V9UxJbnYFjVdo5ixPIWwTJKvfN8=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40O6nq3q009073
+ b=ny3bR0q/tbT4+d/VnwPVjlDFSsI2egBDGNzax0ZonOOQbdcCsk3HnIDbDamh9x6xS
+ PJRYZ4JEM0he15YSzI12PtzhV2Q8Xs7GVisEau96BuSEf6QqhOTF4ItsAV9i/91rv7
+ h3h4dXLK5r/uXz3R49QBONmAgDfvreSXSCyuTpdM=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40O6nsRT069040
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 24 Jan 2024 00:49:52 -0600
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 24 Jan 2024 00:49:54 -0600
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 24
- Jan 2024 00:49:51 -0600
-Received: from fllvsmtp7.itg.ti.com (10.64.40.31) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 00:49:53 -0600
+Received: from fllvsmtp7.itg.ti.com (10.64.40.31) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 24 Jan 2024 00:49:51 -0600
+ Frontend Transport; Wed, 24 Jan 2024 00:49:53 -0600
 Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
- by fllvsmtp7.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40O6nprA098821;
- Wed, 24 Jan 2024 00:49:51 -0600
+ by fllvsmtp7.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40O6nr9h098836;
+ Wed, 24 Jan 2024 00:49:53 -0600
 Received: from localhost (danish-tpc.dhcp.ti.com [10.24.69.25])
- by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 40O6noAe010990;
- Wed, 24 Jan 2024 00:49:51 -0600
+ by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 40O6nqum010998;
+ Wed, 24 Jan 2024 00:49:53 -0600
 From: MD Danish Anwar <danishanwar@ti.com>
 To: Dan Carpenter <dan.carpenter@linaro.org>, Maxime Ripard
  <mripard@kernel.org>, Siddharth Vadapalli <s-vadapalli@ti.com>,
@@ -75,10 +75,10 @@ To: Dan Carpenter <dan.carpenter@linaro.org>, Maxime Ripard
  Kever Yang <kever.yang@rock-chips.com>, Ramon Fried <rfried.dev@gmail.com>,
  Joe Hershberger <joe.hershberger@ni.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>
-Subject: [RFC PATCH v3 08/15] net: ti: icssg: Add support sending FDB command
- to update rx_flow_id
-Date: Wed, 24 Jan 2024 12:19:23 +0530
-Message-ID: <20240124064930.1787929-9-danishanwar@ti.com>
+Subject: [RFC PATCH v3 09/15] net: ti: icssg: Enforce pinctrl state on the
+ MDIO child node
+Date: Wed, 24 Jan 2024 12:19:24 +0530
+Message-ID: <20240124064930.1787929-10-danishanwar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240124064930.1787929-1-danishanwar@ti.com>
 References: <20240124064930.1787929-1-danishanwar@ti.com>
@@ -103,174 +103,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ICSSG firmware supports FDB commands. Add support to send FDB commands
-from driver. Once rx_flow_id is obtained from dma, let firmware know that
-we are using this rx_flow_id by sending a FDB command.
+The binding represents the MDIO controller as a child device tree
+node of the MAC device tree node.
+
+The U-Boot driver mostly ignores that child device tree node and just
+hardcodes the resources it uses to support both the MAC and MDIO in a
+single driver.
+
+However, some resources like pinctrl muxing states are thus ignored.
+This has been a problem with some device trees that will put some
+pinctrl states on the MDIO device tree node.
+
+Let's rework the driver a bit to create a dummy MDIO driver that we will
+then get during our initialization to force the core to select the right
+muxing.
 
 Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
 ---
- drivers/net/ti/icssg_config.c | 66 +++++++++++++++++++++++++++++++++++
- drivers/net/ti/icssg_config.h | 18 ++++++++++
- drivers/net/ti/icssg_prueth.c |  6 ++++
- drivers/net/ti/icssg_prueth.h |  6 ++++
- 4 files changed, 96 insertions(+)
+ drivers/net/ti/Kconfig        |  1 +
+ drivers/net/ti/icssg_prueth.c | 59 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 60 insertions(+)
 
-diff --git a/drivers/net/ti/icssg_config.c b/drivers/net/ti/icssg_config.c
-index 0dc2c0fa3a..630698add4 100644
---- a/drivers/net/ti/icssg_config.c
-+++ b/drivers/net/ti/icssg_config.c
-@@ -9,6 +9,7 @@
- #include "icssg_switch_map.h"
- #include "icss_mii_rt.h"
- #include <dm/device_compat.h>
-+#include <linux/iopoll.h>
- 
- /* TX IPG Values to be set for 100M and 1G link speeds.  These values are
-  * in ocp_clk cycles. So need change if ocp_clk is changed for a specific
-@@ -395,3 +396,68 @@ int emac_set_port_state(struct prueth *prueth,
- 
+diff --git a/drivers/net/ti/Kconfig b/drivers/net/ti/Kconfig
+index 9fead2c7ce..6935b70e12 100644
+--- a/drivers/net/ti/Kconfig
++++ b/drivers/net/ti/Kconfig
+@@ -53,6 +53,7 @@ config TI_AM65_CPSW_NUSS
+ config TI_ICSSG_PRUETH
+ 	bool "TI Gigabit PRU Ethernet driver"
+ 	depends on ARCH_K3
++	imply DM_MDIO
+ 	select PHYLIB
+ 	help
+ 	  Support Gigabit Ethernet ports over the ICSSG PRU Subsystem
+diff --git a/drivers/net/ti/icssg_prueth.c b/drivers/net/ti/icssg_prueth.c
+index 50af9a2bc6..225928e477 100644
+--- a/drivers/net/ti/icssg_prueth.c
++++ b/drivers/net/ti/icssg_prueth.c
+@@ -13,6 +13,7 @@
+ #include <dm/device.h>
+ #include <dma-uclass.h>
+ #include <dm/of_access.h>
++#include <dm/pinctrl.h>
+ #include <fs_loader.h>
+ #include <miiphy.h>
+ #include <net.h>
+@@ -103,9 +104,56 @@ static int icssg_phy_init(struct udevice *dev)
  	return ret;
  }
-+
-+int icssg_send_fdb_msg(struct prueth *prueth, struct mgmt_cmd *cmd,
-+		       struct mgmt_cmd_rsp *rsp)
+ 
++static ofnode prueth_find_mdio(ofnode parent)
 +{
-+	int slice = prueth->slice;
-+	int ret, addr;
++	ofnode node;
 +
-+	addr = icssg_queue_pop(prueth, slice == 0 ?
-+			       ICSSG_CMD_POP_SLICE0 : ICSSG_CMD_POP_SLICE1);
-+	if (addr < 0)
-+		return addr;
++	ofnode_for_each_subnode(node, parent)
++		if (ofnode_device_is_compatible(node, "ti,davinci_mdio"))
++			return node;
 +
-+	/* First 4 bytes have FW owned buffer linking info which should
-+	 * not be touched
++	return ofnode_null();
++}
++
++static int prueth_mdio_setup(struct udevice *dev)
++{
++	struct prueth *priv = dev_get_priv(dev);
++	struct udevice *mdio_dev;
++	ofnode mdio;
++	int ret;
++
++	mdio = prueth_find_mdio(dev_ofnode(priv->pruss));
++	if (!ofnode_valid(mdio))
++		return 0;
++
++	/*
++	 * The MDIO controller is represented in the DT binding by a
++	 * subnode of the MAC controller.
++	 *
++	 * We don't have a DM driver for the MDIO device yet, and thus any
++	 * pinctrl setting on its node will be ignored.
++	 *
++	 * However, we do need to make sure the pins states tied to the
++	 * MDIO node are configured properly. Fortunately, the core DM
++	 * does that for use when we get a device, so we can work around
++	 * that whole issue by just requesting a dummy MDIO driver to
++	 * probe, and our pins will get muxed.
 +	 */
-+	memcpy_toio((void __iomem *)prueth->shram.pa + addr + 4, cmd, sizeof(*cmd));
-+	icssg_queue_push(prueth, slice == 0 ?
-+			 ICSSG_CMD_PUSH_SLICE0 : ICSSG_CMD_PUSH_SLICE1, addr);
-+	ret = read_poll_timeout(icssg_queue_pop, addr, addr >= 0,
-+				2000, 20000000, prueth, slice == 0 ?
-+				ICSSG_RSP_POP_SLICE0 : ICSSG_RSP_POP_SLICE1);
-+
-+	if (ret) {
-+		dev_err(prueth->dev, "Timedout sending HWQ message\n");
++	ret = uclass_get_device_by_ofnode(UCLASS_MDIO, mdio, &mdio_dev);
++	if (ret)
 +		return ret;
-+	}
-+
-+	memcpy_fromio(rsp, (void __iomem *)prueth->shram.pa + addr, sizeof(*rsp));
-+	/* Return buffer back for to pool */
-+	icssg_queue_push(prueth, slice == 0 ?
-+			 ICSSG_RSP_PUSH_SLICE0 : ICSSG_RSP_PUSH_SLICE1, addr);
 +
 +	return 0;
 +}
 +
-+int emac_fdb_flow_id_updated(struct prueth *prueth)
-+{
-+	struct mgmt_cmd_rsp fdb_cmd_rsp = { 0 };
-+	int slice = prueth->slice;
-+	struct mgmt_cmd fdb_cmd = { 0 };
-+	int ret = 0;
+ static int icssg_mdio_init(struct udevice *dev)
+ {
+ 	struct prueth *prueth = dev_get_priv(dev);
++	int ret;
 +
-+	fdb_cmd.header = ICSSG_FW_MGMT_CMD_HEADER;
-+	fdb_cmd.type   = ICSSG_FW_MGMT_FDB_CMD_TYPE_RX_FLOW;
-+	fdb_cmd.seqnum = ++(prueth->icssg_hwcmdseq);
-+	fdb_cmd.param  = 0;
-+
-+	fdb_cmd.param |= (slice << 4);
-+	fdb_cmd.cmd_args[0] = 0;
-+
-+	ret = icssg_send_fdb_msg(prueth, &fdb_cmd, &fdb_cmd_rsp);
++	ret = prueth_mdio_setup(dev);
 +	if (ret)
 +		return ret;
-+
-+	if (fdb_cmd.seqnum != fdb_cmd_rsp.seqnum) {
-+		dev_err(prueth->dev, "seqnum doesn't match, cmd.seqnum %d != rsp.seqnum %d\n",
-+			fdb_cmd.seqnum, fdb_cmd_rsp.seqnum);
-+		return -EINVAL;
-+	}
-+
-+	if (fdb_cmd_rsp.status == 1)
-+		return 0;
-+
-+	return -EINVAL;
-+}
-diff --git a/drivers/net/ti/icssg_config.h b/drivers/net/ti/icssg_config.h
-index fc6eae0426..156127bd3d 100644
---- a/drivers/net/ti/icssg_config.h
-+++ b/drivers/net/ti/icssg_config.h
-@@ -80,6 +80,7 @@ struct icssg_rxq_ctx {
- #define ICSSG_FW_MGMT_FDB_CMD_TYPE	0x03
- #define ICSSG_FW_MGMT_CMD_TYPE		0x04
- #define ICSSG_FW_MGMT_PKT		0x80000000
-+#define ICSSG_FW_MGMT_FDB_CMD_TYPE_RX_FLOW	0x05
  
- struct icssg_r30_cmd {
- 	u32 cmd[4];
-@@ -156,6 +157,23 @@ struct icssg_setclock_desc {
- 	u32 CMP0_new;
- } __packed;
- 
-+struct mgmt_cmd {
-+	u8 param;
-+	u8 seqnum;
-+	u8 type;
-+	u8 header;
-+	u32 cmd_args[3];
-+} __packed;
-+
-+struct mgmt_cmd_rsp {
-+	u32 reserved;
-+	u8 status;
-+	u8 seqnum;
-+	u8 type;
-+	u8 header;
-+	u32 cmd_args[3];
-+} __packed;
-+
- #define ICSSG_CMD_POP_SLICE0	56
- #define ICSSG_CMD_POP_SLICE1	60
- 
-diff --git a/drivers/net/ti/icssg_prueth.c b/drivers/net/ti/icssg_prueth.c
-index cd6ff1a7fe..50af9a2bc6 100644
---- a/drivers/net/ti/icssg_prueth.c
-+++ b/drivers/net/ti/icssg_prueth.c
-@@ -351,6 +351,12 @@ static int prueth_start(struct udevice *dev)
- 	dev_info(dev, "K3 ICSSG: rflow_id_base: %u, chn_name = %s\n",
- 		 dma_rx_cfg_data->flow_id_base, chn_name);
- 
-+	ret = emac_fdb_flow_id_updated(priv);
-+	if (ret) {
-+		dev_err(dev, "Failed to update Rx Flow ID %d", ret);
-+		goto phy_fail;
-+	}
-+
- 	ret = phy_startup(priv->phydev);
- 	if (ret) {
- 		dev_err(dev, "phy_startup failed\n");
-diff --git a/drivers/net/ti/icssg_prueth.h b/drivers/net/ti/icssg_prueth.h
-index fb76668f90..24dda1fee8 100644
---- a/drivers/net/ti/icssg_prueth.h
-+++ b/drivers/net/ti/icssg_prueth.h
-@@ -71,6 +71,7 @@ struct prueth {
- 	u8			pru_core_id;
- 	u8			rtu_core_id;
- 	u8			txpru_core_id;
-+	u8			icssg_hwcmdseq;
+ 	prueth->bus = cpsw_mdio_init(dev->name, prueth->mdio_base,
+ 				     prueth->mdio_freq,
+@@ -701,3 +749,14 @@ U_BOOT_DRIVER(prueth) = {
+ 	.plat_auto = sizeof(struct eth_pdata),
+ 	.flags = DM_FLAG_ALLOC_PRIV_DMA,
  };
- 
- /* config helpers */
-@@ -83,4 +84,9 @@ int icssg_queue_pop(struct prueth *prueth, u8 queue);
- void icssg_queue_push(struct prueth *prueth, int queue, u16 addr);
- u32 icssg_queue_level(struct prueth *prueth, int queue);
- 
-+/* FDB helpers */
-+int icssg_send_fdb_msg(struct prueth *prueth, struct mgmt_cmd *cmd,
-+		       struct mgmt_cmd_rsp *rsp);
-+int emac_fdb_flow_id_updated(struct prueth *prueth);
 +
- #endif /* __NET_TI_ICSSG_PRUETH_H */
++static const struct udevice_id prueth_mdio_ids[] = {
++	{ .compatible = "ti,davinci_mdio" },
++	{ }
++};
++
++U_BOOT_DRIVER(prueth_mdio) = {
++	.name		= "prueth_mdio",
++	.id		= UCLASS_MDIO,
++	.of_match	= prueth_mdio_ids,
++};
 -- 
 2.34.1
 
