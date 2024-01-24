@@ -4,83 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36800C46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 08:17:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5E40C46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 08:37:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FCE087BDF;
-	Wed, 24 Jan 2024 09:17:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 109AD87BF8;
+	Wed, 24 Jan 2024 09:37:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NjZr8AwD";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1706085468;
+	bh=66dlI/v0gOkOwnZHyVL8OyWKzYMbalVJYNa/GgDgQm8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Ln/R+YfYy+7egOryN8TolqM+J+3aDzjVw6wY3KuQTN6MNPzVhRvoKwoeiW0Lsi6dk
+	 72I8dnlQbSZpG6KzMYwLYbNyU6l4/ljF8HwbitaRWu+ynNYlVy8pI87NWA+yMF9k+Y
+	 Kbvw/9Rsn0fyYdHNMRrHCnU0iADUPuzodixZoc4I9n1BVbCk+nLW42xGj3eu90CS4O
+	 NGBt3eNlPBL/1WAkELd9gBJUwidiRYV6SjeqIVjVZ8wsZjLG0QMzvbeNH1qmSyreoo
+	 jLVdzpcS27X/krygGjjQbLCHmr24T2YQKybXZTBTdwHV01vXaJbxSyU018PYToE7ki
+	 vYX+uSAjDdqrA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F67C87BCE; Wed, 24 Jan 2024 09:17:04 +0100 (CET)
-Received: from mail-vk1-xa34.google.com (mail-vk1-xa34.google.com
- [IPv6:2607:f8b0:4864:20::a34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 63BA187C0A; Wed, 24 Jan 2024 09:37:47 +0100 (CET)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0BD087BF1
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 09:16:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E971987BF8
+ for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 09:37:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vk1-xa34.google.com with SMTP id
- 71dfb90a1353d-4b739b49349so932157e0c.1
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 00:16:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706084218; x=1706689018; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Kcu2qB5NydoTUxTRUtIRMPtVzR48LuxFWR1j3xm7f9o=;
- b=NjZr8AwDabMEJQ5Wh1P+xIl6R850+wEe2XTb/BRKVWLg+oHZHGQaPj9yB9rxHFi8Yw
- BdMUIUnYoYmt2GtbxAuTto+ISw2tKuhrkI2klAmQBathuOkJfAve004mSgo6a2AIQWlg
- QxQeTC4A0FfPODb2+YUEte9hYbH77vYuRp9pT7Z0qM3SFAsnA8JjMn+mQeZSy2O/iFlz
- RR/I4DavBGO8ejbkWoogH/lU4geDQdB5ZF35IXADbBNGIymscJCwP1yTA6ectOvzfKpf
- KloWnCD/ZPGQtrSH/isxVGxLUstwLA+ZCoCLANmJwJTjhd6mSn2FAe5GvypjsXI3ra0w
- W3Fg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706084218; x=1706689018;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Kcu2qB5NydoTUxTRUtIRMPtVzR48LuxFWR1j3xm7f9o=;
- b=Rh6Rrg3YD/b3/0u9lcXUPex6H2e3qgg0AjKtNMa38DTqVcYD8RWRFQhgzPHsj0p5xH
- JmKQb2ntxVTaudt/T0bckTzEEG3fRpanQRUTmlvgcXnhzyAiPJxopFeldPpX0tzBhtwZ
- cbRKGJ3cVbm0g9Ksh57qAMu0hBYZa2Qtnt30WXth8zTctfFcR8lAableaRnYDWdMTyM9
- TEKluviXxDnc050AJgZ11a1OxTk4Er3EJBwl7AbUBGbZt/Mwtkkte9G9urKIRllJ+5eg
- R559bxQBp+BfoT83aqk6mWTDRsxzTP2FZZLX0+ipiTy3Zei3E2xe1enVSe1u0cXmZ7Go
- FgRA==
-X-Gm-Message-State: AOJu0Yw7a9JJZ8jI5ns1TZGYv+5byMeyLpcL6vvJ9CPf1ZsR0PlLTIag
- 73jhEAEHjpd2G5xLJfkUGJho2MSA8PAL0HNffyV2BYIAmSYp3ywHvI5WjR2CcMob72cJAKKS98F
- FSzPlVFKIkcXL2Je3ql1eq2IHxmByj0/EZh5KHA==
-X-Google-Smtp-Source: AGHT+IEhYOR1QLdRCSuB6qqXqIl3m2xLIv+DZnR7s6FI5/rS9odFQ/SiLTTuZw83MelpqTowOf6wb1qZjroB7kki5Rw=
-X-Received: by 2002:a05:6122:4499:b0:4bb:3b81:d21 with SMTP id
- cz25-20020a056122449900b004bb3b810d21mr3055698vkb.21.1706084218361; Wed, 24
- Jan 2024 00:16:58 -0800 (PST)
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4TKclp461pz9sl3;
+ Wed, 24 Jan 2024 09:37:42 +0100 (CET)
+Message-ID: <5a7375c1-1b3d-4085-847e-1be68b049423@denx.de>
+Date: Wed, 24 Jan 2024 09:37:41 +0100
 MIME-Version: 1.0
-References: <20240110103547.719757-1-sumit.garg@linaro.org>
- <82d509de-3d47-4cc2-8217-c38dc78fad28@denx.de>
- <7b4ff8e8-2f21-4d07-9848-fb0d5652819e@linaro.org>
- <4d8aede8-5ea8-45a4-87fe-d555a025ef8e@denx.de>
-In-Reply-To: <4d8aede8-5ea8-45a4-87fe-d555a025ef8e@denx.de>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 24 Jan 2024 13:46:47 +0530
-Message-ID: <CAFA6WYN1tFs1id7UxTwLEyp69zx2BPUP7bffVZn80FKPLx2yJw@mail.gmail.com>
-Subject: Re: [PATCH v4 00/11] An effort to bring DT bindings compliance within
- U-Boot
-To: Marek Vasut <marex@denx.de>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de, 
- u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de, trini@konsulko.com, 
- sjg@chromium.org, robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, 
- conor@kernel.org, neil.armstrong@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
- rfried.dev@gmail.com, mibodhi@gmail.com, bb@ti.com, mark.kettenis@xs4all.nl
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH V4 2/2] configs: andes: add watchdog support fot andes
+ ae350
+Content-Language: en-US
+To: Randolph <randolph@andestech.com>, u-boot@lists.denx.de
+Cc: randolph.sklin@gmail.com, CL Wang <cl634@andestech.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>
+References: <20240124062133.439469-1-randolph@andestech.com>
+ <20240124062133.439469-2-randolph@andestech.com>
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20240124062133.439469-2-randolph@andestech.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4TKclp461pz9sl3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,90 +72,193 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Randolph,
 
-On Mon, 22 Jan 2024 at 05:47, Marek Vasut <marex@denx.de> wrote:
->
-> On 1/21/24 23:41, Caleb Connolly wrote:
->
-> Hi,
->
-> [...]
->
-> >> How do you propose to handle fixes to DTs which are applied to
-> >> linux-stable releases ? For example, if Linux 6.6(.0) ships a DT which
-> >> has some defect that is fixed in 6.6.1, how will that fix get into
-> >> U-Boot DTs ?
-> >
-> > This fix would also be in the latest Linux tags, so I think it would
-> > find its way here - as I understand it patches aren't accepted into
-> > Linux stable unless they land in torvalds tree.
->
-> See the devicetree-rebasing.git:
->
-> https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git/refs/
->
-> That only contains refs for release versions (v6.6-dts, v6.7-dts etc),
-> not any follow-up updates from linux-stable (like current 6.6.13 etc).
->
+On 1/24/24 07:21, Randolph wrote:
+> It adds the ATCWDT200 support for Andes AE350 platform.
+> It also enables wdt command support.
+> 
+> Signed-off-by: CL Wang <cl634@andestech.com>
+> Signed-off-by: Randolph <randolph@andestech.com>
+> Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
 
-Here we should only consider fixes which are critical to U-Boot. I
-think -u-boot.dtsi files would be suitable to carry those fixes until
-next uprev. However, if there is a fix affecting many platforms than
-we can consider pulling that standalone too.
+This fails in world CI build in "test.py for sandbox":
 
-> Would this require syncing in -rc versions of Linux DTs to get the
-> latest fixes in ?
+https://dev.azure.com/sr0718/0cded7c3-6e6a-4b57-8d0f-65c99496c42f/_apis/build/builds/338/logs/181
 
-Syncing -rc versions makes U-Boot more prone to DT ABI breakages. So
-its a chicken and egg problem as per your comments below. However, we
-can revisit our syncing strategy based on how the current one pans
-out.
+Not sure how this is related. Could you please take a look?
 
->
-> >> Assume that there is some large breaking change in Linux 6.(n+1),
-> >> something which would be problematic for specific U-Boot platform
-> >> (e.g. i.MX) or would require a lot of work to sort out, will there be
-> >> a way to temporarily pin DTs for specific platform to older DT version
-> >> until that is resolved (e.g. pin to 6.n) ?
-> >
-> > (Upstream) devicetree has to be forwards and backwards compatible, were
-> > such a breaking change to get merged without prior discussion with DT
-> > users (i.e. U-Boot) then I think the correct course of action would be
-> > to revert it.
->
-> Not really, this could be a perfectly valid change, and would work for
-> Linux just fine, it might simply be pulling in something which is not
-> supported by U-Boot just yet and therefore syncing the DTs into U-Boot
-> would break U-Boot on that platform . Using older version of DTs for a
-> platform could work as a stopgap measure until the functionality is
-> implemented. Is this possible ?
+Thanks,
+Stefan
 
-For this particular reason we want to pull once during beginning on
-U-Boot next window and allow sufficient time for platform maintainers
-to adapt to it. However, OF_UPSTREAM=n can be an alternative for a
-stopgap solution.
+> ---
+>   configs/ae350_rv32_defconfig         | 4 ++++
+>   configs/ae350_rv32_spl_defconfig     | 4 ++++
+>   configs/ae350_rv32_spl_xip_defconfig | 4 ++++
+>   configs/ae350_rv32_xip_defconfig     | 4 ++++
+>   configs/ae350_rv64_defconfig         | 4 ++++
+>   configs/ae350_rv64_spl_defconfig     | 4 ++++
+>   configs/ae350_rv64_spl_xip_defconfig | 4 ++++
+>   configs/ae350_rv64_xip_defconfig     | 4 ++++
+>   8 files changed, 32 insertions(+)
+> 
+> diff --git a/configs/ae350_rv32_defconfig b/configs/ae350_rv32_defconfig
+> index 3bfa3e9f8e..35ad62c845 100644
+> --- a/configs/ae350_rv32_defconfig
+> +++ b/configs/ae350_rv32_defconfig
+> @@ -23,6 +23,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+>   CONFIG_CMD_IMLS=y
+>   CONFIG_CMD_MMC=y
+>   CONFIG_CMD_SF_TEST=y
+> +CONFIG_CMD_WDT=y
+>   # CONFIG_CMD_SETEXPR is not set
+>   CONFIG_BOOTP_PREFER_SERVERIP=y
+>   CONFIG_CMD_CACHE=y
+> @@ -49,3 +50,6 @@ CONFIG_BAUDRATE=38400
+>   CONFIG_SYS_NS16550=y
+>   CONFIG_SPI=y
+>   CONFIG_ATCSPI200_SPI=y
+> +# CONFIG_WATCHDOG_AUTOSTART is not set
+> +CONFIG_WDT=y
+> +CONFIG_WDT_ATCWDT200=y
+> diff --git a/configs/ae350_rv32_spl_defconfig b/configs/ae350_rv32_spl_defconfig
+> index aeb50206d2..41cd457bc3 100644
+> --- a/configs/ae350_rv32_spl_defconfig
+> +++ b/configs/ae350_rv32_spl_defconfig
+> @@ -33,6 +33,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+>   CONFIG_CMD_IMLS=y
+>   CONFIG_CMD_MMC=y
+>   CONFIG_CMD_SF_TEST=y
+> +CONFIG_CMD_WDT=y
+>   # CONFIG_CMD_SETEXPR is not set
+>   CONFIG_BOOTP_PREFER_SERVERIP=y
+>   CONFIG_CMD_CACHE=y
+> @@ -58,3 +59,6 @@ CONFIG_SYS_NS16550=y
+>   CONFIG_SPI=y
+>   CONFIG_ATCSPI200_SPI=y
+>   # CONFIG_BINMAN_FDT is not set
+> +# CONFIG_WATCHDOG_AUTOSTART is not set
+> +CONFIG_WDT=y
+> +CONFIG_WDT_ATCWDT200=y
+> diff --git a/configs/ae350_rv32_spl_xip_defconfig b/configs/ae350_rv32_spl_xip_defconfig
+> index f15ec301ce..954e2f2de7 100644
+> --- a/configs/ae350_rv32_spl_xip_defconfig
+> +++ b/configs/ae350_rv32_spl_xip_defconfig
+> @@ -34,6 +34,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+>   CONFIG_CMD_IMLS=y
+>   CONFIG_CMD_MMC=y
+>   CONFIG_CMD_SF_TEST=y
+> +CONFIG_CMD_WDT=y
+>   # CONFIG_CMD_SETEXPR is not set
+>   CONFIG_BOOTP_PREFER_SERVERIP=y
+>   CONFIG_CMD_CACHE=y
+> @@ -59,3 +60,6 @@ CONFIG_SYS_NS16550=y
+>   CONFIG_SPI=y
+>   CONFIG_ATCSPI200_SPI=y
+>   # CONFIG_BINMAN_FDT is not set
+> +# CONFIG_WATCHDOG_AUTOSTART is not set
+> +CONFIG_WDT=y
+> +CONFIG_WDT_ATCWDT200=y
+> diff --git a/configs/ae350_rv32_xip_defconfig b/configs/ae350_rv32_xip_defconfig
+> index c40eb043c5..95863595d2 100644
+> --- a/configs/ae350_rv32_xip_defconfig
+> +++ b/configs/ae350_rv32_xip_defconfig
+> @@ -24,6 +24,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+>   CONFIG_CMD_IMLS=y
+>   CONFIG_CMD_MMC=y
+>   CONFIG_CMD_SF_TEST=y
+> +CONFIG_CMD_WDT=y
+>   # CONFIG_CMD_SETEXPR is not set
+>   CONFIG_BOOTP_PREFER_SERVERIP=y
+>   CONFIG_CMD_CACHE=y
+> @@ -50,3 +51,6 @@ CONFIG_BAUDRATE=38400
+>   CONFIG_SYS_NS16550=y
+>   CONFIG_SPI=y
+>   CONFIG_ATCSPI200_SPI=y
+> +# CONFIG_WATCHDOG_AUTOSTART is not set
+> +CONFIG_WDT=y
+> +CONFIG_WDT_ATCWDT200=y
+> diff --git a/configs/ae350_rv64_defconfig b/configs/ae350_rv64_defconfig
+> index 7ae938aeb2..988214285a 100644
+> --- a/configs/ae350_rv64_defconfig
+> +++ b/configs/ae350_rv64_defconfig
+> @@ -23,6 +23,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+>   CONFIG_CMD_IMLS=y
+>   CONFIG_CMD_MMC=y
+>   CONFIG_CMD_SF_TEST=y
+> +CONFIG_CMD_WDT=y
+>   # CONFIG_CMD_SETEXPR is not set
+>   CONFIG_BOOTP_PREFER_SERVERIP=y
+>   CONFIG_CMD_CACHE=y
+> @@ -49,3 +50,6 @@ CONFIG_BAUDRATE=38400
+>   CONFIG_SYS_NS16550=y
+>   CONFIG_SPI=y
+>   CONFIG_ATCSPI200_SPI=y
+> +# CONFIG_WATCHDOG_AUTOSTART is not set
+> +CONFIG_WDT=y
+> +CONFIG_WDT_ATCWDT200=y
+> diff --git a/configs/ae350_rv64_spl_defconfig b/configs/ae350_rv64_spl_defconfig
+> index 68ac4325ab..e929320433 100644
+> --- a/configs/ae350_rv64_spl_defconfig
+> +++ b/configs/ae350_rv64_spl_defconfig
+> @@ -33,6 +33,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+>   CONFIG_CMD_IMLS=y
+>   CONFIG_CMD_MMC=y
+>   CONFIG_CMD_SF_TEST=y
+> +CONFIG_CMD_WDT=y
+>   # CONFIG_CMD_SETEXPR is not set
+>   CONFIG_BOOTP_PREFER_SERVERIP=y
+>   CONFIG_CMD_CACHE=y
+> @@ -58,3 +59,6 @@ CONFIG_SYS_NS16550=y
+>   CONFIG_SPI=y
+>   CONFIG_ATCSPI200_SPI=y
+>   # CONFIG_BINMAN_FDT is not set
+> +# CONFIG_WATCHDOG_AUTOSTART is not set
+> +CONFIG_WDT=y
+> +CONFIG_WDT_ATCWDT200=y
+> diff --git a/configs/ae350_rv64_spl_xip_defconfig b/configs/ae350_rv64_spl_xip_defconfig
+> index 839ca335d4..3f92643b07 100644
+> --- a/configs/ae350_rv64_spl_xip_defconfig
+> +++ b/configs/ae350_rv64_spl_xip_defconfig
+> @@ -34,6 +34,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+>   CONFIG_CMD_IMLS=y
+>   CONFIG_CMD_MMC=y
+>   CONFIG_CMD_SF_TEST=y
+> +CONFIG_CMD_WDT=y
+>   # CONFIG_CMD_SETEXPR is not set
+>   CONFIG_BOOTP_PREFER_SERVERIP=y
+>   CONFIG_CMD_CACHE=y
+> @@ -59,3 +60,6 @@ CONFIG_SYS_NS16550=y
+>   CONFIG_SPI=y
+>   CONFIG_ATCSPI200_SPI=y
+>   # CONFIG_BINMAN_FDT is not set
+> +# CONFIG_WATCHDOG_AUTOSTART is not set
+> +CONFIG_WDT=y
+> +CONFIG_WDT_ATCWDT200=y
+> diff --git a/configs/ae350_rv64_xip_defconfig b/configs/ae350_rv64_xip_defconfig
+> index 5432b6d6d7..835f020990 100644
+> --- a/configs/ae350_rv64_xip_defconfig
+> +++ b/configs/ae350_rv64_xip_defconfig
+> @@ -24,6 +24,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+>   CONFIG_CMD_IMLS=y
+>   CONFIG_CMD_MMC=y
+>   CONFIG_CMD_SF_TEST=y
+> +CONFIG_CMD_WDT=y
+>   # CONFIG_CMD_SETEXPR is not set
+>   CONFIG_BOOTP_PREFER_SERVERIP=y
+>   CONFIG_CMD_CACHE=y
+> @@ -50,3 +51,6 @@ CONFIG_BAUDRATE=38400
+>   CONFIG_SYS_NS16550=y
+>   CONFIG_SPI=y
+>   CONFIG_ATCSPI200_SPI=y
+> +# CONFIG_WATCHDOG_AUTOSTART is not set
+> +CONFIG_WDT=y
+> +CONFIG_WDT_ATCWDT200=y
 
->
-> > On a tangential note: as I understand it, DTs built from dt-rebasing are
-> > still subject to U-Boot customisations via the "-u-boot.dtsi" include
-> > files, this allows for dealing with incompatibilities due to missing
-> > features in U-Boot.
->
-> Would it be possible to auto-update those -u-boot.dtsi files during
-> sync, to minimize the resulting DT blob delta before/after update, and
-> thus also minimize the likelihood of causing breakage ?
+Viele Grüße,
+Stefan Roese
 
-In the long run the DT community would like to avoid any DT ABI
-breakages at all. Rob is already working on a DT ABI check tool and
-seeking inputs for what could be an ABI break [1] from U-Boot
-perspective too. Feel free to provide your inputs.
-
-Along with that we wouldn't need -u-boot.dtsi files once we make
-U-Boot fully compliant with DT bindings. Until that point U-Boot
-platform maintainers have to keep their -u-boot.dtsi files updated
-corresponding to latest DT rebasing releases.
-
-[1] https://lore.kernel.org/all/CAL_JsqLo4nXrJ93dDsfp3UYLs08V02aMnbCCnsDj0MBBomc35w@mail.gmail.com/
-
--Sumit
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
