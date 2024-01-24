@@ -4,77 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8C55C46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 15:25:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C035CC46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 16:39:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCFB487C61;
-	Wed, 24 Jan 2024 16:25:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A22BD87C4F;
+	Wed, 24 Jan 2024 17:39:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Kh0tfCSs";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SENlKSyV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9C0587C96; Wed, 24 Jan 2024 16:24:59 +0100 (CET)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DEC4C87C4F; Wed, 24 Jan 2024 17:39:14 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3B5387C60
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 16:24:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4729087BC7
+ for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 17:39:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-6002317a427so25404087b3.2
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 07:24:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1706109896; x=1706714696; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=7r9vl0ghhiLEA4QZOaINrIvJHoFfDkXVstXNU+wfAWc=;
- b=Kh0tfCSs1Jaunt4fnbqDSAQJFl4fEJyvpLnR4U5FqRjMR82D73tarakyw7CQ2iN2OA
- +KKnod3V2+0tMylvu3JJDGq0ZHPndAVnLcydtAulzKmgTqygtpoXkA6hQ4qkh0U5YOrV
- TrmAXlGUmxcqjrTuQ8nDUGATMCqJfkND7Artg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706109896; x=1706714696;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7r9vl0ghhiLEA4QZOaINrIvJHoFfDkXVstXNU+wfAWc=;
- b=QeoKlByvqmmefZER1FwBI/GT85DIR/pkWN/cwmZvondwVqn6bCILujG/v3Rr2ehliZ
- l0MNOL7n6B/LXEhiMFeZNwd72h1trTRksAlUyrI52iiWs2jJd/hEpik8ZSuvd+z4O8rY
- WDOZX+tnrQAWkAjA1Jx89Vj0s5UnRz6RC1xtHGCXkHINKTQO6fsFKuz+haSr9A+VaIGZ
- k7DVpFs4BEUcpphNfHvbfOiltlJxH4Dlr6HUXVefWJidt9Xld7EyZGgspiN9c9CPOWsB
- xqKa/6RbZ9gTgxbgEVqvgI7XpfoJ/gzn+QQxtPrnZdoF4+yQ/IX0BZXVEYcZqIqV/62y
- M3zQ==
-X-Gm-Message-State: AOJu0Yzjr2oqwWlcuTDhSTIIlH0c/fVF+EELDm05d826BuIapmElr7sz
- 0yOzy3Xuf3vQWMgHnTJgs9vKJYXvaiz+i9taY4ebgdmPYKZfQa6HtN8Zpg2T62tdBIwVYrtvzBI
- W
-X-Google-Smtp-Source: AGHT+IG85Z5abjsKyiuA+tVRNCmsJqJ4kax485hh0QvF4FPAvakSxMKp1WttULFEBB5wro6iaJZbdg==
-X-Received: by 2002:a0d:fac2:0:b0:5ff:9554:96bf with SMTP id
- k185-20020a0dfac2000000b005ff955496bfmr944982ywf.48.1706109896341; 
- Wed, 24 Jan 2024 07:24:56 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- n3-20020a819c43000000b005ffd1bf706fsm2586041ywa.96.2024.01.24.07.24.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jan 2024 07:24:55 -0800 (PST)
-Date: Wed, 24 Jan 2024 10:24:54 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Enrico Leto <enrico.leto@siemens.com>
-Cc: u-boot@lists.denx.de, alexander.sverdlin@siemens.com
-Subject: Re: [PATCH v6 0/7] board: siemens: clean up subfolders
-Message-ID: <20240124152454.GE3652023@bill-the-cat>
-References: <20240124144355.2040380-1-enrico.leto@siemens.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40OGdA93058608;
+ Wed, 24 Jan 2024 10:39:10 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1706114350;
+ bh=jy/Ok9TmlWnhNQEm5l4yAvH1KeQfthNZ7LcybmWYZqs=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=SENlKSyV6kJi6Bq+7aUBBY+NU9YFfbS5wvIbenxloeJCG0lB8FT/4UwcrC30+2kIq
+ G2O9W7CqGQj1Eks4jQRo2DizUOzkQAbQAP1ber0BIjhk0KSXBHtADbRummr2AySyH/
+ 5ekKQYFWO+Jt5hVWZWOM207xwyM27Kejf1pZU3ak=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40OGdAMP018178
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 24 Jan 2024 10:39:10 -0600
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 24
+ Jan 2024 10:39:10 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 24 Jan 2024 10:39:10 -0600
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40OGdAGc121956;
+ Wed, 24 Jan 2024 10:39:10 -0600
+Date: Wed, 24 Jan 2024 10:39:10 -0600
+From: Nishanth Menon <nm@ti.com>
+To: Dhruva Gole <d-gole@ti.com>
+CC: Kamlesh Gurudasani <kamlesh@ti.com>, Tom Rini <trini@konsulko.com>,
+ <u-boot@lists.denx.de>, Neha Francis <n-francis@ti.com>, Manorit Chawdhry
+ <m-chawdhry@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>
+Subject: Re: [PATCH] firmware: ti_sci: fix the secure_hdr in do_xfer
+Message-ID: <20240124163910.sp7gt56lihoujm7k@etching>
+References: <20240124101558.184411-1-d-gole@ti.com>
+ <87fryn7zoz.fsf@kamlesh.i-did-not-set--mail-host-address--so-tickle-me>
+ <20240124130859.sdldy4jafknoa23q@dhruva>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="GHM4rqyei06NResb"
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20240124144355.2040380-1-enrico.leto@siemens.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20240124130859.sdldy4jafknoa23q@dhruva>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,54 +81,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 18:38-20240124, Dhruva Gole wrote:
+> On Jan 24, 2024 at 16:42:12 +0530, Kamlesh Gurudasani wrote:
+> > Dhruva Gole <d-gole@ti.com> writes:
+> > 
+> > > The secure_hdr needs to be 0 init-ed however this was never being put
+> > > into the secure_buf, leading to possibility of the first 4 bytes of
+> > > secure_buf being possibly garbage.
+> > >
+> > > Fix this by initialising the secure_hdr itself to the secure_buf
+> > > location, thus when we make it 0, it automatically ensures the first 4
+> > > bytes are 0.
+> > >
+> > > Fixes: 32cd25128bd849 ("firmware: Add basic support for TI System Control Interface (TI SCI)")
+> > > Signed-off-by: Dhruva Gole <d-gole@ti.com>
+> > > ---
+> > >
+> > > Boot tested for sanity on AM62x SK
+> > > https://gist.github.com/DhruvaG2000/724ceba3a0db03f4b0bff47de1160074
+> > >
+> > > Cc: Nishanth Menon <nm@ti.com>
+> > > Cc: Tom Rini <trini@konsulko.com>
+> > >
+> > >  drivers/firmware/ti_sci.c | 6 +++---
+> > >  1 file changed, 3 insertions(+), 3 deletions(-)
+> > >
+> > > diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
+> > > index f5f659c11274..83ee8401a731 100644
+> > > --- a/drivers/firmware/ti_sci.c
+> > > +++ b/drivers/firmware/ti_sci.c
+> > > @@ -236,13 +236,13 @@ static int ti_sci_do_xfer(struct ti_sci_info *info,
+> > >  {
+> > >  	struct k3_sec_proxy_msg *msg = &xfer->tx_message;
+> > >  	u8 secure_buf[info->desc->max_msg_size];
+> > > -	struct ti_sci_secure_msg_hdr secure_hdr;
+> > > +	struct ti_sci_secure_msg_hdr *secure_hdr = (struct ti_sci_secure_msg_hdr *)secure_buf;
+> > >  	int ret;
+> > >  
+> > >  	if (info->is_secure) {
+> > >  		/* ToDo: get checksum of the entire message */
+> > > -		secure_hdr.checksum = 0;
+> > > -		secure_hdr.reserved = 0;
+> > > +		secure_hdr->checksum = 0;
+> > > +		secure_hdr->reserved = 0;
+> > >  		memcpy(&secure_buf[sizeof(secure_hdr)],xfer->tx_message.buf,
+> > secure_hdr is pointer now, the value may be same but (struct
+> > ti_sci_secure_msg_hdr) would make more sense
+> 
+> Good catch Kamlesh! I have sent a new revision addressing this.
+> 
 
---GHM4rqyei06NResb
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Makes no sense why we have secure API support in U-Boot. what is using
+this?
 
-On Wed, Jan 24, 2024 at 03:43:48PM +0100, Enrico Leto wrote:
-
->     The common folder was initialially created for the common parts of
->     the products based on draco-am355x board family. We have the
->     product lines 'pxm2', 'rut' and the base line unfortunately named
->     'draco'! Adding the new capricorn-imx8 board family, the files
->     were enhanced without cleanup.
->=20
->     Simplify first EEPROM probe and access that implements both i2c
->     with & without driver model. Use abstraction functions for this.
->    =20
->     Move all am355x specifics to a new file 'board_am335x'.
->    =20
->     Clean-up includes, config checks, maintainer.
->=20
-> Signed-off-by: Enrico Leto <enrico.leto@siemens.com>
-
-Thanks, this is indeed building for me as well and I'll apply it soon.
-
-In terms of future work, many of the siemens platforms need to migrate
-to using DM_I2C, and should also move from using OF_EMBED to using
-OF_SEPARATE if possible.
-
---=20
-Tom
-
---GHM4rqyei06NResb
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWxK8IACgkQFHw5/5Y0
-tywFowwAtudcM4PsTj4dqAziSvHwU0EyEMxmzXohtdaFM4EfNc77VPr4AjrABjhO
-T8iz1iM5lHUjjPo7/f4FogyM2jvLBZ1b/ygbrZILU2NB6GLB263/mJWvxwX2FRgb
-oKS+Zo6JAa+cJhY4iyiTCYRY3Gri7Q5Ni1CrfdCbck8VORs8yBzwn7c36w7dh8cP
-YTsTGa9skIszIRmVAMHzhNh2LMWa2YL6cT8bsoqEnUDXpia90nkxKawRnMLJfFgq
-G2G4s7EBjCseTljyXF8zg8zI+01UoqsRstsTBvxHdM8NtQ66GlGKhwaIyfERyOBn
-rv1TLU0oOiaiVBWTjaN2AQn77kdYyMtHpb5ss69HgYEnNye+znmTwKnxq0TptGIZ
-HI9LGSNAguk0tWipYbWOF4F3CVhjnSXmGy6oc6K0xgPeXqluh8E3OUkdkwRwhQ6e
-wZBS9wNCiTZ8Ze2fGJ33YhCgn9YzS4CpRcdB3NV49W7rvG8cfRMRQmLycx1V0Cgd
-7IzR5RnZ
-=jojO
------END PGP SIGNATURE-----
-
---GHM4rqyei06NResb--
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
