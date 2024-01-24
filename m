@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F85DC47422
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 14:44:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D171CC46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 14:44:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95C2B87E70;
-	Wed, 24 Jan 2024 15:44:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CEFC387D58;
+	Wed, 24 Jan 2024 15:44:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=enrico.leto@siemens.com header.b="O21E1TYp";
+	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=enrico.leto@siemens.com header.b="D5H/TCsb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EAC087D58; Wed, 24 Jan 2024 15:44:08 +0100 (CET)
-Received: from mta-64-227.siemens.flowmailer.net
- (mta-64-227.siemens.flowmailer.net [185.136.64.227])
+ id 5A2DB87D48; Wed, 24 Jan 2024 15:44:09 +0100 (CET)
+Received: from mta-64-225.siemens.flowmailer.net
+ (mta-64-225.siemens.flowmailer.net [185.136.64.225])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AD5787D82
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 15:44:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BF16F87CB4
+ for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 15:44:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=enrico.leto@siemens.com
-Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id
- 2024012414440236213387822a3f2d12 for <u-boot@lists.denx.de>;
- Wed, 24 Jan 2024 15:44:02 +0100
+Received: by mta-64-225.siemens.flowmailer.net with ESMTPSA id
+ 20240124144400a01e397028a1dbfa69 for <u-boot@lists.denx.de>;
+ Wed, 24 Jan 2024 15:44:00 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=enrico.leto@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=mG/iJMaN7tCEGnGZFHQfz9h6GrSQkMdjWvsLbOup8p4=;
- b=O21E1TYp52+qdGP2S9Jf4stcUd4a4bg/rji/yw2lLPvYqz8rhT9Q5nT24fTjW/jeWXnleG
- lEFBvWm5fgWViK91wmGiQFi3rLJNtmyiWA0ie65S5VdYGx9b70JLqya1THshUuiTZBCx5aGH
- tEM5GD9sPcIfdHC6L9XJ5NHmEuBKk=;
+ bh=Kt/GUHrSDUNHixhqw4JdagbOWTSqB0vGqyZRpX7CNVg=;
+ b=D5H/TCsbOdV4gtlDxLjuTHyMK4Eg/kfl4dMX4e1jzO4pMCBe2SafBP2DPGQLA8oggEwefy
+ 7OREFikJ7G8iP2vyiQhFHu4aeQU3eTNAxrs83G4oP3HdG3FdKu7q3ZVMbgLI9Ze3ymo1fmrM
+ CA/tDW17WaBOG3kQ6jx3VMbu+0lg0=;
 From: Enrico Leto <enrico.leto@siemens.com>
 To: u-boot@lists.denx.de,
 	alexander.sverdlin@siemens.com
 Cc: trini@konsulko.com,
 	Enrico Leto <enrico.leto@siemens.com>
-Subject: [PATCH v6 6/7] siemens: board: clean up includes
-Date: Wed, 24 Jan 2024 15:43:54 +0100
-Message-Id: <20240124144355.2040380-7-enrico.leto@siemens.com>
+Subject: [PATCH v6 2/7] siemens: eeprom: simplify setup & read
+Date: Wed, 24 Jan 2024 15:43:50 +0100
+Message-Id: <20240124144355.2040380-3-enrico.leto@siemens.com>
 In-Reply-To: <20240124144355.2040380-1-enrico.leto@siemens.com>
 References: <20240124144355.2040380-1-enrico.leto@siemens.com>
 MIME-Version: 1.0
@@ -66,282 +66,414 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Many includes were not removed when code parts were moved or removed.
+Since we have boards using the driver model or not for i2c, use abstraction
+function to probe the i2c, check the EEPROM and read from EEPROM.
 
 Signed-off-by: Enrico Leto <enrico.leto@siemens.com>
 ---
- board/siemens/capricorn/board.c     |  1 -
- board/siemens/common/board_am335x.c | 19 +------------------
- board/siemens/common/factoryset.c   | 12 ++----------
- board/siemens/draco/board.c         | 25 ++++++-------------------
- board/siemens/draco/mux.c           |  4 +---
- board/siemens/pxm2/board.c          | 26 ++++++--------------------
- board/siemens/pxm2/mux.c            |  4 +---
- board/siemens/rut/board.c           | 25 +++++--------------------
- board/siemens/rut/mux.c             |  4 +---
- 9 files changed, 23 insertions(+), 97 deletions(-)
+ board/siemens/capricorn/Makefile  |  1 +
+ board/siemens/common/board.c      |  8 ++--
+ board/siemens/common/eeprom.c     | 52 +++++++++++++++++++++++++
+ board/siemens/common/eeprom.h     |  3 ++
+ board/siemens/common/factoryset.c | 63 +++++--------------------------
+ board/siemens/draco/Makefile      |  1 +
+ board/siemens/draco/board.c       | 23 ++++-------
+ board/siemens/draco/mux.c         |  2 +-
+ board/siemens/pxm2/Makefile       |  1 +
+ board/siemens/pxm2/board.c        |  2 +-
+ board/siemens/pxm2/mux.c          |  2 +-
+ board/siemens/rut/Makefile        |  1 +
+ board/siemens/rut/board.c         |  2 +-
+ 13 files changed, 84 insertions(+), 77 deletions(-)
+ create mode 100644 board/siemens/common/eeprom.c
 
-diff --git a/board/siemens/capricorn/board.c b/board/siemens/capricorn/board.c
-index 5f7e2b1e899..0d66a75bbfa 100644
---- a/board/siemens/capricorn/board.c
-+++ b/board/siemens/capricorn/board.c
-@@ -22,7 +22,6 @@
- #include <asm/gpio.h>
- #include <asm/arch/imx8-pins.h>
- #include <asm/arch/iomux.h>
--#include <firmware/imx/sci/sci.h>
- #include <asm/arch/sys_proto.h>
- #ifndef CONFIG_SPL
- #include <asm/arch-imx8/clock.h>
-diff --git a/board/siemens/common/board_am335x.c b/board/siemens/common/board_am335x.c
-index c55ca983bdd..445af9ddbf6 100644
---- a/board/siemens/common/board_am335x.c
-+++ b/board/siemens/common/board_am335x.c
-@@ -9,29 +9,12 @@
-  * Copyright (C) 2011, Texas Instruments, Incorporated - https://www.ti.com/
-  */
+diff --git a/board/siemens/capricorn/Makefile b/board/siemens/capricorn/Makefile
+index d5846cc8e3c..4dafac10829 100644
+--- a/board/siemens/capricorn/Makefile
++++ b/board/siemens/capricorn/Makefile
+@@ -4,6 +4,7 @@
+ #
  
--#include <common.h>
- #include <command.h>
--#include <env.h>
--#include <errno.h>
--#include <init.h>
--#include <malloc.h>
- #include <serial.h>
--#include <spl.h>
--#include <asm/arch/cpu.h>
--#include <asm/arch/hardware.h>
--#include <asm/arch/omap.h>
--#include <asm/arch/ddr_defs.h>
-+#include <watchdog.h>
- #include <asm/arch/clock.h>
--#include <asm/arch/gpio.h>
--#include <asm/arch/mmc_host_def.h>
- #include <asm/arch/sys_proto.h>
--#include <asm/global_data.h>
--#include <asm/io.h>
--#include <asm/emif.h>
+ obj-y += board.o
++obj-y += ../common/eeprom.o
+ 
+ ifdef CONFIG_SPL_BUILD
+ obj-y += spl.o
+diff --git a/board/siemens/common/board.c b/board/siemens/common/board.c
+index 420c4965816..e412858c4a9 100644
+--- a/board/siemens/common/board.c
++++ b/board/siemens/common/board.c
+@@ -29,7 +29,6 @@
+ #include <asm/io.h>
+ #include <asm/emif.h>
  #include <asm/gpio.h>
--#include <miiphy.h>
--#include <cpsw.h>
--#include <watchdog.h>
- #include <asm/mach-types.h>
- #include "board_am335x.h"
- #include "eeprom.h"
+-#include <i2c.h>
+ #include <miiphy.h>
+ #include <cpsw.h>
+ #include <watchdog.h>
+@@ -39,6 +38,7 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++
+ #ifdef CONFIG_SPL_BUILD
+ void set_uart_mux_conf(void)
+ {
+@@ -49,12 +49,13 @@ void set_mux_conf_regs(void)
+ {
+ 	/* Initalize the board header */
+ 	enable_i2c0_pin_mux();
+-	i2c_set_bus_num(0);
+ 
+ 	/* enable early the console */
+ 	gd->baudrate = CONFIG_BAUDRATE;
+ 	serial_init();
+ 	gd->have_console = 1;
++
++	siemens_ee_setup();
+ 	if (read_eeprom() < 0)
+ 		puts("Could not get board ID.\n");
+ 
+@@ -79,8 +80,7 @@ int board_init(void)
+ #if defined(CONFIG_HW_WATCHDOG)
+ 	hw_watchdog_init();
+ #endif /* defined(CONFIG_HW_WATCHDOG) */
+-	i2c_set_bus_num(0);
+-	if (read_eeprom() < 0)
++	if (siemens_ee_setup() < 0)
+ 		puts("Could not get board ID.\n");
+ #ifdef CONFIG_MACH_TYPE
+ 	gd->bd->bi_arch_number = CONFIG_MACH_TYPE;
+diff --git a/board/siemens/common/eeprom.c b/board/siemens/common/eeprom.c
+new file mode 100644
+index 00000000000..fc93df91d52
+--- /dev/null
++++ b/board/siemens/common/eeprom.c
+@@ -0,0 +1,52 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ *
++ * Read EEPROM data
++ * (C) Copyright 2024 Siemens AG
++ */
++
++#include <dm/uclass.h>
++#include <i2c.h>
++#include "eeprom.h"
++
++#if CONFIG_IS_ENABLED(DM_I2C)
++static struct udevice *i2c_dev;
++#endif
++
++/* Probe I2C and set-up EEPROM */
++int siemens_ee_setup(void)
++{
++#if CONFIG_IS_ENABLED(DM_I2C)
++	struct udevice *bus;
++	int ret;
++
++	ret = uclass_get_device_by_seq(UCLASS_I2C, SIEMENS_EE_I2C_BUS, &bus);
++	if (ret)
++		goto err;
++
++	ret = dm_i2c_probe(bus, SIEMENS_EE_I2C_ADDR, 0, &i2c_dev);
++	if (ret)
++		goto err;
++	if (i2c_set_chip_offset_len(i2c_dev, 2))
++		goto err;
++#else
++	i2c_set_bus_num(SIEMENS_EE_I2C_BUS);
++	if (i2c_probe(SIEMENS_EE_I2C_ADDR))
++		goto err;
++#endif
++	return 0;
++
++err:
++	printf("Could not probe the EEPROM; something fundamentally wrong on the I2C bus.\n");
++	return 1;
++}
++
++/* Read data from EEPROM */
++int siemens_ee_read_data(uint address, uchar *buffer, int len)
++{
++#if CONFIG_IS_ENABLED(DM_I2C)
++	return dm_i2c_read(i2c_dev, address, buffer, len);
++#else
++	return i2c_read(SIEMENS_EE_I2C_ADDR, address, 2, buffer, len);
++#endif
++}
+diff --git a/board/siemens/common/eeprom.h b/board/siemens/common/eeprom.h
+index a21d42789a5..a5ef5abbafd 100644
+--- a/board/siemens/common/eeprom.h
++++ b/board/siemens/common/eeprom.h
+@@ -18,4 +18,7 @@
+ #define SIEMENS_EE_ADDR_CHIP		0x120
+ #define SIEMENS_EE_ADDR_FACTORYSET	0x400
+ 
++int siemens_ee_setup(void);
++int siemens_ee_read_data(uint address, uchar *buffer, int len);
++
+ #endif /* _COMMON_EEPROM_H_ */
 diff --git a/board/siemens/common/factoryset.c b/board/siemens/common/factoryset.c
-index 4a1277340a7..b20af95d13d 100644
+index b5befab9f52..4a1277340a7 100644
 --- a/board/siemens/common/factoryset.c
 +++ b/board/siemens/common/factoryset.c
-@@ -7,21 +7,13 @@
+@@ -148,39 +148,14 @@ int factoryset_read_eeprom(int i2c_addr)
+ 	int i, pages = 0, size = 0;
+ 	unsigned char eeprom_buf[0x3c00], hdr[4], buf[MAX_STRING_LENGTH];
+ 	unsigned char *cp, *cp1;
+-#if CONFIG_IS_ENABLED(DM_I2C)
+-	struct udevice *bus, *dev;
+-	int ret;
+-#endif
  
- #if !defined(CONFIG_SPL_BUILD)
- 
--#include <common.h>
- #include <env.h>
--#include <dm.h>
--#include <env_internal.h>
--#include <i2c.h>
--#include <log.h>
-+#include <g_dnl.h>
-+#include <net.h>
- #include <asm/io.h>
- #if !CONFIG_IS_ENABLED(TARGET_GIEDI) && !CONFIG_IS_ENABLED(TARGET_DENEB)
- #include <asm/arch/cpu.h>
+ #if defined(CONFIG_DFU_OVER_USB)
+ 	factory_dat.usb_vendor_id = CONFIG_USB_GADGET_VENDOR_NUM;
+ 	factory_dat.usb_product_id = CONFIG_USB_GADGET_PRODUCT_NUM;
  #endif
--#include <asm/arch/sys_proto.h>
--#include <asm/unaligned.h>
--#include <net.h>
--#include <errno.h>
--#include <g_dnl.h>
- #include "eeprom.h"
- #include "factoryset.h"
  
+-#if CONFIG_IS_ENABLED(DM_I2C)
+-	ret = uclass_get_device_by_seq(UCLASS_I2C, SIEMENS_EE_I2C_BUS, &bus);
+-	if (ret)
+-		goto err;
+-
+-	ret = dm_i2c_probe(bus, i2c_addr, 0, &dev);
+-	if (ret)
+-		goto err;
+-
+-	ret = i2c_set_chip_offset_len(dev, 2);
+-	if (ret)
+-		goto err;
+-
+-	ret = dm_i2c_read(dev, SIEMENS_EE_ADDR_FACTORYSET, hdr, sizeof(hdr));
+-	if (ret)
+-		goto err;
+-#else
+-	if (i2c_probe(i2c_addr))
+-		goto err;
+-
+-	if (i2c_read(i2c_addr, SIEMENS_EE_ADDR_FACTORYSET, 2, hdr, sizeof(hdr)))
++	if (siemens_ee_read_data(SIEMENS_EE_ADDR_FACTORYSET, hdr, sizeof(hdr)))
+ 		goto err;
+-#endif
+ 
+ 	if ((hdr[0] != 0x99) || (hdr[1] != 0x80)) {
+ 		printf("FactorySet is not right in eeprom.\n");
+@@ -201,33 +176,16 @@ int factoryset_read_eeprom(int i2c_addr)
+ 	 * data after every time we got a record from eeprom
+ 	 */
+ 	debug("Read eeprom page :\n");
+-	for (i = 0; i < pages; i++) {
+-#if CONFIG_IS_ENABLED(DM_I2C)
+-		ret = dm_i2c_read(dev, (OFF_PG + i) * EEPR_PG_SZ,
+-				  eeprom_buf + (i * EEPR_PG_SZ), EEPR_PG_SZ);
+-		if (ret)
++	for (i = 0; i < pages; i++)
++		if (siemens_ee_read_data((OFF_PG + i) * EEPR_PG_SZ,
++					 eeprom_buf + (i * EEPR_PG_SZ), EEPR_PG_SZ))
+ 			goto err;
+-#else
+-		if (i2c_read(i2c_addr, (OFF_PG + i) * EEPR_PG_SZ, 2,
+-			     eeprom_buf + (i * EEPR_PG_SZ), EEPR_PG_SZ))
+-			goto err;
+-#endif
+-	}
+ 
+-	if (size % EEPR_PG_SZ) {
+-#if CONFIG_IS_ENABLED(DM_I2C)
+-		ret = dm_i2c_read(dev, (OFF_PG + pages) * EEPR_PG_SZ,
+-				  eeprom_buf + (pages * EEPR_PG_SZ),
+-				  size % EEPR_PG_SZ);
+-		if (ret)
+-			goto err;
+-#else
+-		if (i2c_read(i2c_addr, (OFF_PG + pages) * EEPR_PG_SZ, 2,
+-			     eeprom_buf + (pages * EEPR_PG_SZ),
+-			     (size % EEPR_PG_SZ)))
++	if (size % EEPR_PG_SZ)
++		if (siemens_ee_read_data((OFF_PG + pages) * EEPR_PG_SZ,
++					 eeprom_buf + (pages * EEPR_PG_SZ),
++					 size % EEPR_PG_SZ))
+ 			goto err;
+-#endif
+-	}
+ 
+ 	/* we do below just for eeprom align */
+ 	for (i = 0; i < size; i++)
+@@ -249,9 +207,8 @@ int factoryset_read_eeprom(int i2c_addr)
+ 
+ #if CONFIG_IS_ENABLED(TARGET_GIEDI) || CONFIG_IS_ENABLED(TARGET_DENEB)
+ 	/* get mac address for WLAN */
+-	ret = get_factory_record_val(cp, size, (uchar *)"WLAN1", (uchar *)"mac",
+-				     buf, MAX_STRING_LENGTH);
+-	if (ret > 0) {
++	if (get_factory_record_val(cp, size, (uchar *)"WLAN1", (uchar *)"mac",
++				   buf, MAX_STRING_LENGTH) > 0) {
+ 		cp1 = buf;
+ 		for (i = 0; i < 6; i++) {
+ 			factory_dat.mac_wlan[i] = hextoul((char *)cp1, NULL);
+diff --git a/board/siemens/draco/Makefile b/board/siemens/draco/Makefile
+index e94456ab1c3..1d0cb82bcb6 100644
+--- a/board/siemens/draco/Makefile
++++ b/board/siemens/draco/Makefile
+@@ -14,6 +14,7 @@ obj-y	:= mux.o
+ endif
+ 
+ obj-y	+= board.o
++obj-y += ../common/eeprom.o
+ ifndef CONFIG_SPL_BUILD
+ obj-y += ../common/factoryset.o
+ endif
 diff --git a/board/siemens/draco/board.c b/board/siemens/draco/board.c
-index 2412a04a9a1..fc3eb06ccf2 100644
+index 367a300b897..30ad9d7ab3a 100644
 --- a/board/siemens/draco/board.c
 +++ b/board/siemens/draco/board.c
-@@ -12,34 +12,21 @@
-  * Copyright (C) 2011, Texas Instruments, Incorporated - https://www.ti.com/
+@@ -138,8 +138,8 @@ static int draco_read_nand_geometry(void)
+ 	struct am335x_nand_geometry geo;
+ 
+ 	/* Read NAND geometry */
+-	if (i2c_read(SIEMENS_EE_I2C_ADDR, SIEMENS_EE_ADDR_NAND_GEO, 2,
+-		     (uchar *)&geo, sizeof(struct am335x_nand_geometry))) {
++	if (siemens_ee_read_data(SIEMENS_EE_ADDR_NAND_GEO, (uchar *)&geo,
++				 sizeof(struct am335x_nand_geometry))) {
+ 		printf("Could not read the NAND geomtery; something fundamentally wrong on the I2C bus.\n");
+ 		return -EIO;
+ 	}
+@@ -155,27 +155,21 @@ static int draco_read_nand_geometry(void)
+ 	return 0;
+ }
+ 
++#ifdef CONFIG_SPL_BUILD
+ /*
+  * Read header information from EEPROM into global structure.
   */
+ static int read_eeprom(void)
+ {
+-	/* Check if baseboard eeprom is available */
+-	if (i2c_probe(SIEMENS_EE_I2C_ADDR)) {
+-		printf("Could not probe the EEPROM; something fundamentally wrong on the I2C bus.\n");
+-		return 1;
+-	}
+-
+-#ifdef CONFIG_SPL_BUILD
+ 	/* Read Siemens eeprom data (DDR3) */
+-	if (i2c_read(SIEMENS_EE_I2C_ADDR, SIEMENS_EE_ADDR_DDR3, 2,
+-		     (uchar *)&settings.ddr3, sizeof(struct ddr3_data))) {
++	if (siemens_ee_read_data(SIEMENS_EE_ADDR_DDR3, (uchar *)&settings.ddr3,
++				 sizeof(struct ddr3_data))) {
+ 		printf("Could not read the EEPROM; something fundamentally wrong on the I2C bus.\nUse default DDR3 timings\n");
+ 		set_default_ddr3_timings();
+ 	}
+ 	/* Read Siemens eeprom data (CHIP) */
+-	if (i2c_read(SIEMENS_EE_I2C_ADDR, SIEMENS_EE_ADDR_CHIP, 2,
+-		     (uchar *)&settings.chip, sizeof(settings.chip)))
++	if (siemens_ee_read_data(SIEMENS_EE_ADDR_CHIP, (uchar *)&settings.chip,
++				 sizeof(settings.chip)))
+ 		printf("Could not read chip settings\n");
  
--#include <common.h>
- #include <command.h>
-+#include <cpsw.h>
- #include <env.h>
--#include <errno.h>
- #include <init.h>
--#include <net.h>
--#include <spl.h>
--#include <asm/arch/cpu.h>
--#include <asm/arch/hardware.h>
--#include <asm/arch/omap.h>
--#include <asm/arch/ddr_defs.h>
-+#include <linux/delay.h>
-+#include <nand.h>
- #include <asm/arch/clock.h>
--#include <asm/arch/gpio.h>
--#include <asm/arch/mmc_host_def.h>
--#include <asm/arch/sys_proto.h>
-+#include <asm/arch/ddr_defs.h>
- #include <asm/arch/mem.h>
--#include <asm/io.h>
--#include <asm/emif.h>
-+#include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
--#include <i2c.h>
--#include <miiphy.h>
--#include <cpsw.h>
--#include <watchdog.h>
--#include <linux/delay.h>
-+#include <asm/io.h>
- #include "board.h"
- #include "../common/eeprom.h"
- #include "../common/factoryset.h"
--#include <nand.h>
+ 	if (ddr3_default.magic == settings.ddr3.magic &&
+@@ -199,11 +193,8 @@ static int read_eeprom(void)
+ 	print_ddr3_timings();
  
- #ifdef CONFIG_SPL_BUILD
- static struct draco_baseboard_id __section(".data") settings;
+ 	return draco_read_nand_geometry();
+-#endif
+-	return 0;
+ }
+ 
+-#ifdef CONFIG_SPL_BUILD
+ static void board_init_ddr(void)
+ {
+ struct emif_regs draco_ddr3_emif_reg_data = {
 diff --git a/board/siemens/draco/mux.c b/board/siemens/draco/mux.c
-index 56d8f45c349..4149e628475 100644
+index 2632f050336..56d8f45c349 100644
 --- a/board/siemens/draco/mux.c
 +++ b/board/siemens/draco/mux.c
-@@ -10,12 +10,10 @@
-  * Copyright (C) 2011 Texas Instruments Incorporated - https://www.ti.com/
-  */
- 
--#include <common.h>
-+#include <asm/io.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/arch/hardware.h>
+@@ -16,7 +16,7 @@
  #include <asm/arch/mux.h>
--#include <asm/io.h>
--#include <i2c.h>
- #include "eeprom.h"
+ #include <asm/io.h>
+ #include <i2c.h>
+-#include "board.h"
++#include "eeprom.h"
  
  static struct module_pin_mux uart0_pin_mux[] = {
+ 	{OFFSET(uart0_rxd), (MODE(0) | PULLUP_EN | RXACTIVE)},	/* UART0_RXD */
+diff --git a/board/siemens/pxm2/Makefile b/board/siemens/pxm2/Makefile
+index e94456ab1c3..1d0cb82bcb6 100644
+--- a/board/siemens/pxm2/Makefile
++++ b/board/siemens/pxm2/Makefile
+@@ -14,6 +14,7 @@ obj-y	:= mux.o
+ endif
+ 
+ obj-y	+= board.o
++obj-y += ../common/eeprom.o
+ ifndef CONFIG_SPL_BUILD
+ obj-y += ../common/factoryset.o
+ endif
 diff --git a/board/siemens/pxm2/board.c b/board/siemens/pxm2/board.c
-index bff6d20251e..888c7c09baf 100644
+index 9e85d9b921d..16b0d3df757 100644
 --- a/board/siemens/pxm2/board.c
 +++ b/board/siemens/pxm2/board.c
-@@ -12,35 +12,21 @@
-  * Copyright (C) 2011, Texas Instruments, Incorporated - https://www.ti.com/
-  */
+@@ -161,7 +161,6 @@ void spl_siemens_board_init(void)
+ 		printf("voltage update failed\n");
+ 	}
+ }
+-#endif /* if def CONFIG_SPL_BUILD */
  
--#include <common.h>
-+#include <cpsw.h>
- #include <env.h>
--#include <errno.h>
-+#include <i2c.h>
- #include <init.h>
--#include <log.h>
--#include <malloc.h>
-+#include <nand.h>
- #include <net.h>
--#include <spl.h>
--#include <asm/arch/cpu.h>
--#include <asm/arch/hardware.h>
--#include <asm/arch/omap.h>
--#include <asm/arch/ddr_defs.h>
- #include <asm/arch/clock.h>
--#include <asm/arch/gpio.h>
--#include <asm/arch/mmc_host_def.h>
-+#include <asm/arch/ddr_defs.h>
- #include <asm/arch/sys_proto.h>
--#include <asm/io.h>
--#include <asm/emif.h>
- #include <asm/gpio.h>
--#include <i2c.h>
--#include <miiphy.h>
--#include <cpsw.h>
--#include <watchdog.h>
-+#include <asm/io.h>
-+#include "pmic.h"
- #include "../common/board_am335x.h"
- #include "../common/eeprom.h"
- #include "../common/factoryset.h"
--#include "pmic.h"
--#include <nand.h>
--#include <bmp_layout.h>
+ int read_eeprom(void)
+ {
+@@ -169,6 +168,7 @@ int read_eeprom(void)
  
- #ifdef CONFIG_SPL_BUILD
- void draco_init_ddr(void)
+ 	return 0;
+ }
++#endif /* if def CONFIG_SPL_BUILD */
+ 
+ #if (defined(CONFIG_DRIVER_TI_CPSW) && !defined(CONFIG_SPL_BUILD)) || \
+ 	(defined(CONFIG_SPL_ETH) && defined(CONFIG_SPL_BUILD))
 diff --git a/board/siemens/pxm2/mux.c b/board/siemens/pxm2/mux.c
-index 07cf5675927..bdf460b5920 100644
+index d21ef47771d..07cf5675927 100644
 --- a/board/siemens/pxm2/mux.c
 +++ b/board/siemens/pxm2/mux.c
-@@ -11,12 +11,10 @@
-  * Copyright (C) 2011 Texas Instruments Incorporated - https://www.ti.com/
-  */
- 
--#include <common.h>
-+#include <asm/io.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/arch/hardware.h>
+@@ -17,7 +17,7 @@
  #include <asm/arch/mux.h>
--#include <asm/io.h>
--#include <i2c.h>
- #include "eeprom.h"
+ #include <asm/io.h>
+ #include <i2c.h>
+-#include "board.h"
++#include "eeprom.h"
  
  static struct module_pin_mux uart0_pin_mux[] = {
+ 	{OFFSET(uart0_rxd), (MODE(0) | PULLUP_EN | RXACTIVE)},	/* UART0_RXD */
+diff --git a/board/siemens/rut/Makefile b/board/siemens/rut/Makefile
+index e94456ab1c3..1d0cb82bcb6 100644
+--- a/board/siemens/rut/Makefile
++++ b/board/siemens/rut/Makefile
+@@ -14,6 +14,7 @@ obj-y	:= mux.o
+ endif
+ 
+ obj-y	+= board.o
++obj-y += ../common/eeprom.o
+ ifndef CONFIG_SPL_BUILD
+ obj-y += ../common/factoryset.o
+ endif
 diff --git a/board/siemens/rut/board.c b/board/siemens/rut/board.c
-index 1e0e131addf..8d316918e7a 100644
+index 49318b32035..d9e84db03ef 100644
 --- a/board/siemens/rut/board.c
 +++ b/board/siemens/rut/board.c
-@@ -10,31 +10,16 @@
-  * Copyright (C) 2011, Texas Instruments, Incorporated - https://www.ti.com/
-  */
- 
--#include <common.h>
-+#include <cpsw.h>
- #include <env.h>
--#include <errno.h>
- #include <init.h>
--#include <malloc.h>
--#include <net.h>
--#include <spi.h>
--#include <spl.h>
--#include <asm/arch/cpu.h>
--#include <asm/arch/hardware.h>
--#include <asm/arch/omap.h>
--#include <asm/arch/ddr_defs.h>
-+#include <linux/delay.h>
-+#include <nand.h>
- #include <asm/arch/clock.h>
--#include <asm/arch/gpio.h>
--#include <asm/arch/mmc_host_def.h>
-+#include <asm/arch/ddr_defs.h>
- #include <asm/arch/sys_proto.h>
--#include <asm/io.h>
--#include <asm/emif.h>
- #include <asm/gpio.h>
--#include <i2c.h>
--#include <miiphy.h>
--#include <cpsw.h>
--#include <video.h>
--#include <watchdog.h>
--#include <linux/delay.h>
-+#include <asm/io.h>
- #include "../common/board_am335x.h"
+@@ -39,6 +39,7 @@
  #include "../common/eeprom.h"
  #include "../common/factoryset.h"
-diff --git a/board/siemens/rut/mux.c b/board/siemens/rut/mux.c
-index 894a9bf1e3d..8947e4e537c 100644
---- a/board/siemens/rut/mux.c
-+++ b/board/siemens/rut/mux.c
-@@ -11,12 +11,10 @@
-  * Copyright (C) 2011 Texas Instruments Incorporated - https://www.ti.com/
+ 
++#ifdef CONFIG_SPL_BUILD
+ /*
+  * Read header information from EEPROM into global structure.
   */
+@@ -47,7 +48,6 @@ static int read_eeprom(void)
+ 	return 0;
+ }
  
--#include <common.h>
-+#include <asm/io.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/arch/hardware.h>
- #include <asm/arch/mux.h>
--#include <asm/io.h>
--#include <i2c.h>
- 
- static struct module_pin_mux uart0_pin_mux[] = {
- 	{OFFSET(uart0_rxd), (MODE(0) | PULLUDDIS | RXACTIVE)},	/* UART0_RXD */
+-#ifdef CONFIG_SPL_BUILD
+ static void board_init_ddr(void)
+ {
+ struct emif_regs rut_ddr3_emif_reg_data = {
 -- 
 2.30.2
 
