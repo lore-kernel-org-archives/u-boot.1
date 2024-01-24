@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C05E3C47422
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 07:26:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E50BEC46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 07:26:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8231E87BC3;
-	Wed, 24 Jan 2024 08:26:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5E5A487BF0;
+	Wed, 24 Jan 2024 08:26:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MLzwEmr6";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="DD1kYeS2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BA2287BDE; Wed, 24 Jan 2024 08:26:39 +0100 (CET)
+ id 6C54587613; Wed, 24 Jan 2024 08:26:39 +0100 (CET)
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7438087613
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 08:26:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6503887BBA
+ for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 08:26:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=m-chawdhry@ti.com
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40O7QWnE035746
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 01:26:32 -0600
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40O7QZs1035752
+ for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 01:26:35 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1706081192;
- bh=7CF4FaKXN7AD1h6KdtqNKz99AXOUCqQDrZK8xMQyS3Q=;
- h=From:Subject:Date:To:CC;
- b=MLzwEmr6TtR9Nqpd/w6TQgVUxbZTYVXm/tJi2HJzByVeKQIZYmukYid7cztKa+1cT
- xCY+Q562tmHl2MhhvIPOwBghPeQj1Wmlw07kJdopW0cnOP4vqT/7dXqos3DlTsJGaI
- 2PaOldUi2C2RrlFM11fhDiFEMxAU+bxe9/nCCTe0=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40O7QWl0010913
+ s=ti-com-17Q1; t=1706081195;
+ bh=HzWtKdcVXBC1Y7UM5bvWG04LIixHubqWnXa/gZrQPp8=;
+ h=From:Date:Subject:References:In-Reply-To:To:CC;
+ b=DD1kYeS28NOLJyl8VVhcya5vGhOmC6g5ODooXLvpvmo7tbTNJrKnSF0ZMAlzzpjjq
+ EARuYIlR2ePSUC7CNZJj3TyTemSope6w9tR46NiLfGue2wCvYO/p6O40DtmxZb2Pgv
+ fJZbofVONULYyd44NGmQxU/XoodylLGcc0eV/1Ek=
+Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40O7QZk4010943
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 01:26:32 -0600
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 01:26:35 -0600
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 24
- Jan 2024 01:26:32 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 01:26:34 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 24 Jan 2024 01:26:32 -0600
+ Frontend Transport; Wed, 24 Jan 2024 01:26:35 -0600
 Received: from [127.0.1.1] (uda0497581.dhcp.ti.com [10.24.68.185])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40O7QTGh015268;
- Wed, 24 Jan 2024 01:26:30 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40O7QTGi015268;
+ Wed, 24 Jan 2024 01:26:32 -0600
 From: Manorit Chawdhry <m-chawdhry@ti.com>
-Subject: [PATCH 0/2] Add save_uenv command
-Date: Wed, 24 Jan 2024 12:56:24 +0530
-Message-ID: <20240124-b4-upstream-save_uenv-v1-0-4a4dfbd3eca9@ti.com>
+Date: Wed, 24 Jan 2024 12:56:25 +0530
+Subject: [PATCH 1/2] env: ti: mmc: add save_uenv command
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAKC7sGUC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIxMDQyMT3SQT3dKC4pKi1MRc3eLEstT40tS8Ml1DcwsTEzPjtFSTlEQloN6
- CotS0zAqwudGxtbUAYFSZkmcAAAA=
+Message-ID: <20240124-b4-upstream-save_uenv-v1-1-4a4dfbd3eca9@ti.com>
+References: <20240124-b4-upstream-save_uenv-v1-0-4a4dfbd3eca9@ti.com>
+In-Reply-To: <20240124-b4-upstream-save_uenv-v1-0-4a4dfbd3eca9@ti.com>
 To: Udit Kumar <u-kumar1@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
  Andrew Davis <afd@ti.com>, Nishanth Menon <nm@ti.com>
 CC: <u-boot@lists.denx.de>, Vignesh Raghavendra <vigneshr@ti.com>, Keerthy J
  <j-keerthy@ti.com>, Aniket Limaye <a-limaye@ti.com>, Manorit Chawdhry
  <m-chawdhry@ti.com>
 X-Mailer: b4 0.13-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1706081189; l=653;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1706081189; l=737;
  i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
- bh=3FxUgnSCDpQKEvZCBWM77ptzwgXE8di6J2KKPtm8dZ8=;
- b=ftNM+42wE9Hy0j5i+CnafZEg+G9uJAvlajLQLToI6u3sNEZ6xL7EvqU8k1K5wMBu15yl6HwpQ
- YQv6BP5NTZOCMcQTqo4WSlvl/OQH/1nhgqJ5wNQWERbLmc4rdrkOZGj
+ bh=9HrQWhIVrTlnEVJ73RpS9KsroLBIVJ9NINusFpCtmNc=;
+ b=60Fe1Lz1ZPhxaCed/ODotTAP8cyJgxlWWoGfOTLng9M1zZXi5WuZc7DmWRUWGOn2VWGxdtTZi
+ IndvZ6H6E/ZBxcHVyoGl8GOlty6chi3JyZHYF6ruRbQ4EB416uKKstB
 X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
  pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -90,24 +89,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adding this command for easier development to update uEnv.txt from
-u-boot on the u-boot prompt and track the variables being updated in
-uEnv.txt as well.
+This is to make easier development with uEnv.txt to update from the
+board on the fly from u-boot to MMC boot media.
 
 Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 ---
-Manorit Chawdhry (2):
-      env: ti: mmc: add save_uenv command
-      doc: k3: update documentation for uEnv.txt
+ include/env/ti/mmc.env | 3 +++
+ 1 file changed, 3 insertions(+)
 
- doc/board/ti/k3.rst    | 24 ++++++++++++++----------
- include/env/ti/mmc.env |  3 +++
- 2 files changed, 17 insertions(+), 10 deletions(-)
----
-base-commit: f28a77589e7505535a4eebdc7269df98f67dbe68
-change-id: 20240124-b4-upstream-save_uenv-1784463fe4da
+diff --git a/include/env/ti/mmc.env b/include/env/ti/mmc.env
+index 0256a2d2aaca..886e4cab36fe 100644
+--- a/include/env/ti/mmc.env
++++ b/include/env/ti/mmc.env
+@@ -34,6 +34,9 @@ envboot=if mmc dev ${mmcdev}; then
+ 		fi;
+ 	fi;
+   fi;
++save_uenv=
++	env export -t $loadaddr $save_to_env save_to_env;
++	fatwrite mmc ${mmcdev} ${loadaddr} ${bootenvfile} ${filesize};
+ mmcloados=
+ 	if test ${boot_fdt} = yes || test ${boot_fdt} = try; then
+ 		if run get_fdt_mmc; then
 
-Best regards,
 -- 
-Manorit Chawdhry <m-chawdhry@ti.com>
+2.43.0
 
