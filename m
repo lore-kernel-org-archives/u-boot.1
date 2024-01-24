@@ -4,60 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B73AC46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 04:06:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38472C46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 06:22:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2581387BD3;
-	Wed, 24 Jan 2024 05:06:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
+	by phobos.denx.de (Postfix) with ESMTP id 1A04387BD3;
+	Wed, 24 Jan 2024 07:21:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="Ra5wn+9j";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84A3787BC7; Wed, 24 Jan 2024 05:06:35 +0100 (CET)
-Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
- [IPv6:2a00:1098:ed:100::25])
+ id B72C9878A5; Wed, 24 Jan 2024 07:21:56 +0100 (CET)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92D848783B
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 05:06:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=collabora.com
+ by phobos.denx.de (Postfix) with ESMTPS id 5B94587BD3
+ for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 07:21:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1706069193;
- bh=zrAUeuw7lJyuuSnefYFCyayPOSTbpVhr0OZyDrZhaKM=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Ra5wn+9jxwZj9VpT7j/ea8lBXO4huAkBaurvEfDOffvxsvgpHgxyVgHcdrd5QNf5e
- /FasRhsLx1rtk//UqrhvxU6ZyggjBo8bHtqvwH/YEF1N3B/Ym0SwT47LF3orL/bs2T
- vKr8kkT4zdhIN9W8kAEe7PhcKHwS+8N5v7LfP6qnThSVu6W0DuplsKWRL/uS2ol+Df
- H7geJyslwOBh4+MChibtBT1+5z0A1AQN+ka5zU8J3KulZkCLNMvDUHJp+rW5xEzSBI
- gShybCfkOLxUOtuJnesYQP5FYXjXtOqT9ap1/p3Bphbg6c3wmWhiJtF5+EsSresRZl
- aFwc2Kuimvi+g==
-Received: from [100.90.194.27] (cola.collaboradmins.com [195.201.22.229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: ehristev)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id 08ED537810CD;
- Wed, 24 Jan 2024 04:06:30 +0000 (UTC)
-Message-ID: <8c0a3a40-2d1b-47e9-9fb2-9b5e409f96d7@collabora.com>
-Date: Wed, 24 Jan 2024 06:06:30 +0200
+ spf=pass smtp.mailfrom=randolph@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 40O6LeX2037453;
+ Wed, 24 Jan 2024 14:21:40 +0800 (+08)
+ (envelope-from randolph@andestech.com)
+Received: from atctrx.andestech.com (10.0.15.173) by ATCPCS16.andestech.com
+ (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Wed, 24 Jan 2024
+ 14:21:40 +0800
+From: Randolph <randolph@andestech.com>
+To: <u-boot@lists.denx.de>
+CC: <randolph.sklin@gmail.com>, <sr@denx.de>, Randolph
+ <randolph@andestech.com>, CL Wang <cl634@andestech.com>, Leo Yu-Chi Liang
+ <ycliang@andestech.com>
+Subject: [PATCH V4 1/2] drivers: watchdog: add andes atcwdt200 support
+Date: Wed, 24 Jan 2024 14:21:32 +0800
+Message-ID: <20240124062133.439469-1-randolph@andestech.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/4] Facilitate new atmel raw nand driver for SAMA5D2
-Content-Language: en-US
-To: Alexander Dahl <ada@thorsis.com>, u-boot@lists.denx.de
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Wenyou Yang <wenyou.yang@microchip.com>,
- Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
-References: <20231212160423.44290-1-ada@thorsis.com>
-From: Eugen Hristev <eugen.hristev@collabora.com>
-In-Reply-To: <20231212160423.44290-1-ada@thorsis.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.0.15.173]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 40O6LeX2037453
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,76 +61,273 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/12/23 18:04, Alexander Dahl wrote:
-> Hei hei,
-> 
-> for some downstream boards with SAMA5D27 SiP SoCs with raw NAND flash I
-> added the necessary nodes to sama5d2.dtsi with just one little
-> guesswork: the clocks.  Motivation was to fix reading from raw nand
-> flash which failed on some of those boards, while others worked fine.
-> So I suppose the timings for the external interface were set to too slow
-> values. (IIRC I took them from the sama5d2_ptc_ek_nandflash board code
-> back in 2019.)
-> 
-> The solution was basically to switch from the old non-DM driver with
-> hardcoded timings for the external memory interface to the new DM based
-> driver introduced earlier this year, which sets the timings based on
-> ONFI parameters read from the flash chip.
-> 
-> Works for me, but I have no boards with that SoC _and_ a raw NAND flash
-> at hand, which are supported by upstream U-Boot.  The only matching
-> upstream config is sama5d2_ptc_ek_nandflash_defconfig but because we
-> don't have that board, I did not touch it.
-> 
-> (When that driver was added with 6a8dfd57220d ("nand: atmel: Add DM
-> based NAND driver") the author claims in the commit message it was
-> tested on SAMA5D3, but none of the sama5d3 configs actually uses it.)
-> 
-> Some more changes to the board dts are necessary, but porting from Linux
-> is straightforward.  The necessary changes to the defconfig should look
-> like this:
-> 
->  # CONFIG_I2C is not set
->  CONFIG_LED=y
->  CONFIG_LED_GPIO=y
-> +CONFIG_ATMEL_EBI=y
-> +CONFIG_MFD_ATMEL_SMC=y
->  # CONFIG_MMC is not set
->  CONFIG_MTD=y
-> -CONFIG_NAND_ATMEL=y
-> -CONFIG_ATMEL_NAND_HW_PMECC=y
-> -CONFIG_PMECC_CAP=8
-> +CONFIG_DM_MTD=y
-> +CONFIG_DM_NAND_ATMEL=y
->  CONFIG_SYS_NAND_ONFI_DETECTION=y
->  CONFIG_PHY_SMSC=y
->  CONFIG_MACB=y
-> 
-> Hope the changes are acceptable nevertheless.  The last patch has a
-> trivial fix for the new atmel raw nand driver which I came up with while
-> working on this.
-> 
-> Greets
-> Alex
-> 
-> Cc: Eugen Hristev <eugen.hristev@collabora.com>
-> Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> Cc: Michael Trimarchi <michael@amarulasolutions.com>
-> Cc: Wenyou Yang <wenyou.yang@microchip.com>
-> Cc: Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
-> 
-> Alexander Dahl (4):
->   ARM: dts: at91: sama5d2: Move sfr node
->   ARM: dts: at91: sama5d2: Port ebi/nand nodes from linux
->   ARM: dts: at91: sama5d2: Align more node names with Linux
->   mtd: nand: raw: atmel: Remove duplicate definitions
-> 
->  arch/arm/dts/sama5d2.dtsi          | 74 ++++++++++++++++++++++++++----
->  drivers/mtd/nand/raw/atmel/pmecc.c |  3 --
->  2 files changed, 65 insertions(+), 12 deletions(-)
-> 
-> 
-> base-commit: 2f0282922b2c458eea7f85c500a948a587437b63
+This patch adds an implementation of the Andes watchdog ATCWDT200 driver.
 
+Signed-off-by: CL Wang <cl634@andestech.com>
+Signed-off-by: Randolph <randolph@andestech.com>
+Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+---
+ drivers/watchdog/Kconfig         |   6 +
+ drivers/watchdog/Makefile        |   1 +
+ drivers/watchdog/atcwdt200_wdt.c | 220 +++++++++++++++++++++++++++++++
+ 3 files changed, 227 insertions(+)
+ create mode 100644 drivers/watchdog/atcwdt200_wdt.c
 
-Applied series to u-boot-at91/master, thanks !
+diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+index 569726119c..8318fd77a3 100644
+--- a/drivers/watchdog/Kconfig
++++ b/drivers/watchdog/Kconfig
+@@ -130,6 +130,12 @@ config WDT_AT91
+ 	  Select this to enable Microchip watchdog timer, which can be found on
+ 	  some AT91 devices.
+ 
++config WDT_ATCWDT200
++	bool "Andes watchdog timer support"
++	depends on WDT
++	help
++	  Select this to enable Andes ATCWDT200 watchdog timer
++
+ config WDT_BCM6345
+ 	bool "BCM6345 watchdog timer support"
+ 	depends on WDT && (ARCH_BMIPS || BCM6856 || \
+diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+index 5520d3d9ae..7b39adcf0f 100644
+--- a/drivers/watchdog/Makefile
++++ b/drivers/watchdog/Makefile
+@@ -22,6 +22,7 @@ obj-$(CONFIG_WDT_ARM_SMC) += arm_smc_wdt.o
+ obj-$(CONFIG_WDT_ARMADA_37XX) += armada-37xx-wdt.o
+ obj-$(CONFIG_WDT_ASPEED) += ast_wdt.o
+ obj-$(CONFIG_WDT_AST2600) += ast2600_wdt.o
++obj-$(CONFIG_WDT_ATCWDT200) += atcwdt200_wdt.o
+ obj-$(CONFIG_WDT_BCM2835) += bcm2835_wdt.o
+ obj-$(CONFIG_WDT_BCM6345) += bcm6345_wdt.o
+ obj-$(CONFIG_WDT_BOOKE) += booke_wdt.o
+diff --git a/drivers/watchdog/atcwdt200_wdt.c b/drivers/watchdog/atcwdt200_wdt.c
+new file mode 100644
+index 0000000000..a29b42d607
+--- /dev/null
++++ b/drivers/watchdog/atcwdt200_wdt.c
+@@ -0,0 +1,220 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C)  2023 Andes Technology Corporation.
++ *
++ */
++
++#include <asm/io.h>
++#include <dm.h>
++#include <hang.h>
++#include <linux/bitops.h>
++#include <wdt.h>
++
++#define NODE_NOT_FOUND     0xFFFFFFFF
++
++#define WDT_WP_MAGIC       0x5aa5
++#define WDT_RESTART_MAGIC  0xcafe
++
++/* Control Register */
++#define REG_WDT_ID         0x00
++#define REG_WDT_CFG        0x10
++#define REG_WDT_RS         0x14
++#define REG_WDT_WE         0x18
++#define REG_WDT_STA        0x1C
++
++#define RST_TIME_OFF       8
++#define RST_TIME_MSK       (0x7 << RST_TIME_OFF)
++#define RST_CLK_128        (0 << RST_TIME_OFF)
++#define RST_CLK_256        (1 << RST_TIME_OFF)
++#define RST_CLK_512        (2 << RST_TIME_OFF)
++#define RST_CLK_1024       (3 << RST_TIME_OFF)
++#define INT_TIME_OFF       4
++#define INT_TIME_MSK       (0xf << INT_TIME_OFF)
++#define INT_CLK_2_6        (0 << INT_TIME_OFF)  /* clk period*2^6  */
++#define INT_CLK_2_8        (1 << INT_TIME_OFF)  /* clk period*2^8  */
++#define INT_CLK_2_10       (2 << INT_TIME_OFF)  /* clk period*2^10 */
++#define INT_CLK_2_11       (3 << INT_TIME_OFF)  /* clk period*2^11 */
++#define INT_CLK_2_12       (4 << INT_TIME_OFF)  /* clk period*2^12 */
++#define INT_CLK_2_13       (5 << INT_TIME_OFF)  /* clk period*2^13 */
++#define INT_CLK_2_14       (6 << INT_TIME_OFF)  /* clk period*2^14 */
++#define INT_CLK_2_15       (7 << INT_TIME_OFF)  /* clk period*2^15 */
++#define INT_CLK_2_17       (8 << INT_TIME_OFF)  /* clk period*2^17 */
++#define INT_CLK_2_19       (9 << INT_TIME_OFF)  /* clk period*2^19 */
++#define INT_CLK_2_21       (10 << INT_TIME_OFF) /* clk period*2^21 */
++#define INT_CLK_2_23       (11 << INT_TIME_OFF) /* clk period*2^23 */
++#define INT_CLK_2_25       (12 << INT_TIME_OFF) /* clk period*2^25 */
++#define INT_CLK_2_27       (13 << INT_TIME_OFF) /* clk period*2^27 */
++#define INT_CLK_2_29       (14 << INT_TIME_OFF) /* clk period*2^29 */
++#define INT_CLK_2_31       (15 << INT_TIME_OFF) /* clk period*2^31 */
++#define INT_CLK_MIN        0x0
++#define INT_CLK_MAX_16B    0x7
++#define INT_CLK_MAX_32B    0xF
++#define RST_EN             BIT(3)
++#define INT_EN             BIT(2)
++#define CLK_PCLK           BIT(1)
++#define WDT_EN             BIT(0)
++#define INT_EXPIRED        BIT(0)
++
++#define INT_TIME_ARRAY     16
++#define RST_TIME_ARRAY     8
++
++struct wdt_priv {
++	void __iomem *base;
++	u32 wdt_clk_src;
++	u32 clk_freq;
++	u8  max_clk;
++};
++
++static inline u8 atcwdt_get_2_power_of_n(u8 index, u8 type)
++{
++	const u8 div_int[INT_TIME_ARRAY] = {6, 8, 10, 11, 12, 13, 14, 15,
++					    17, 19, 21, 23, 25, 27, 29, 31};
++	const u8 div_rst[RST_TIME_ARRAY] = {7, 8, 9, 10, 11, 12, 13, 14};
++	const u8 *pdiv;
++
++	if (type == RST_TIME_ARRAY)
++		pdiv = div_rst;
++	else
++		pdiv = div_int;
++
++	if (index >= type)
++		index = type - 1;
++
++	return pdiv[index];
++}
++
++static u8 atcwdt_search_msb(u64 freq_ms, u8 type)
++{
++	u64 result;
++	u64 freq_sec;
++	u8 index;
++
++	freq_sec = freq_ms / 1000;
++	for (index = 0; index < type; index++) {
++		result = freq_sec >> atcwdt_get_2_power_of_n(index, type);
++
++		if (result <= 1)
++			break;
++	}
++
++	return index;
++}
++
++static int atcwdt_wdt_start(struct udevice *dev, u64 timeout, ulong flags)
++{
++	struct wdt_priv *priv = dev_get_priv(dev);
++	u64 rst_max_count;
++	u32 rst_max_time_ms;
++	u64 rst_time_ms;
++	u64 int_time_ms;
++	u8  rst_time;
++	u8  int_time;
++
++	rst_max_count = 1 << atcwdt_get_2_power_of_n(RST_TIME_ARRAY, RST_TIME_ARRAY);
++	rst_max_time_ms = (rst_max_count * 1000) / priv->clk_freq;
++
++	if (timeout > rst_max_time_ms) {
++		int_time_ms = timeout - rst_max_time_ms;
++		rst_time_ms = rst_max_time_ms;
++	} else {
++		int_time_ms = 0;
++		rst_time_ms = timeout;
++	}
++
++	rst_time = atcwdt_search_msb(rst_time_ms * priv->clk_freq, RST_TIME_ARRAY);
++
++	if (int_time_ms) {
++		int_time = atcwdt_search_msb(int_time_ms * priv->clk_freq, INT_TIME_ARRAY);
++		if (int_time > priv->max_clk)
++			int_time = priv->max_clk;
++	} else {
++		int_time = 0;
++	}
++
++	writel(WDT_WP_MAGIC, priv->base + REG_WDT_WE);
++	writel(((rst_time << RST_TIME_OFF) & RST_TIME_MSK) | ((int_time << INT_TIME_OFF) &
++		INT_TIME_MSK) | INT_EN | RST_EN | priv->wdt_clk_src | WDT_EN,
++		priv->base + REG_WDT_CFG);
++
++	return 0;
++}
++
++static int atcwdt_wdt_stop(struct udevice *dev)
++{
++	struct wdt_priv *priv = dev_get_priv(dev);
++
++	writel(WDT_WP_MAGIC, priv->base + REG_WDT_WE);
++	writel(0, priv->base + REG_WDT_CFG);
++
++	return 0;
++}
++
++static int atcwdt_wdt_restart(struct udevice *dev)
++{
++	struct wdt_priv *priv = dev_get_priv(dev);
++
++	writel(WDT_WP_MAGIC, priv->base + REG_WDT_WE);
++	writel(WDT_RESTART_MAGIC, priv->base + REG_WDT_RS);
++	setbits_le32(priv->base + REG_WDT_STA, INT_EXPIRED);
++
++	return 0;
++}
++
++static int atcwdt_wdt_expire_now(struct udevice *dev, ulong flags)
++{
++	atcwdt_wdt_start(dev, 0, 0);
++	hang();
++
++	return 0;
++}
++
++static int atcwdt_wdt_probe(struct udevice *dev)
++{
++	struct wdt_priv *priv = dev_get_priv(dev);
++	int timer_16bit;
++
++	priv->base = dev_remap_addr_index(dev, 0);
++	if (!priv->base)
++		return -EFAULT;
++
++	priv->wdt_clk_src = dev_read_u32_default(dev, "clock-source", NODE_NOT_FOUND);
++	if (priv->wdt_clk_src == NODE_NOT_FOUND || priv->wdt_clk_src > 1)
++		priv->wdt_clk_src = CLK_PCLK;
++
++	timer_16bit = dev_read_u32_default(dev, "16bit_timer", NODE_NOT_FOUND);
++	if (timer_16bit == 1 || timer_16bit == NODE_NOT_FOUND)
++		priv->max_clk = INT_CLK_MAX_16B;
++	else
++		priv->max_clk = INT_CLK_MAX_32B;
++
++	priv->clk_freq = dev_read_u32_default(dev, "clock-frequency", NODE_NOT_FOUND);
++	if (priv->clk_freq == NODE_NOT_FOUND) {
++		printf("atcwdt200: Please provide a valid \"clock-frequency\" in DTB\n");
++		return -EINVAL;
++	}
++
++	atcwdt_wdt_stop(dev);
++
++	return 0;
++}
++
++static const struct wdt_ops atcwdt_wdt_ops = {
++	.start = atcwdt_wdt_start,
++	.reset = atcwdt_wdt_restart,
++	.stop = atcwdt_wdt_stop,
++	.expire_now = atcwdt_wdt_expire_now,
++};
++
++static const struct udevice_id atcwdt_wdt_ids[] = {
++	{.compatible = "andestech,atcwdt200"},
++	{}
++};
++
++U_BOOT_DRIVER(atcwdt) = {
++	.name = "atcwdt200",
++	.id = UCLASS_WDT,
++	.probe = atcwdt_wdt_probe,
++	.of_match = atcwdt_wdt_ids,
++	.ops = &atcwdt_wdt_ops,
++	.priv_auto = sizeof(struct wdt_priv),
++};
+-- 
+2.34.1
+
