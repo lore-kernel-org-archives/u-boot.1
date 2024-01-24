@@ -4,47 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB4D1C46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 14:45:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3C14C46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 14:45:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C05C87E68;
-	Wed, 24 Jan 2024 15:44:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 061B987D80;
+	Wed, 24 Jan 2024 15:44:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=enrico.leto@siemens.com header.b="Kn6xlKjv";
+	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=enrico.leto@siemens.com header.b="JcxF2E/B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31FAB87C71; Wed, 24 Jan 2024 15:44:10 +0100 (CET)
-Received: from mta-65-226.siemens.flowmailer.net
- (mta-65-226.siemens.flowmailer.net [185.136.65.226])
+ id 5DD7887B51; Wed, 24 Jan 2024 15:44:10 +0100 (CET)
+Received: from mta-64-227.siemens.flowmailer.net
+ (mta-64-227.siemens.flowmailer.net [185.136.64.227])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45B3287D94
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 15:44:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D1D8587D6F
+ for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 15:44:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=enrico.leto@siemens.com
-Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id
- 20240124144402263e092b4ed8490543 for <u-boot@lists.denx.de>;
- Wed, 24 Jan 2024 15:44:02 +0100
+Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id
+ 20240124144401765e779aa9bae20027 for <u-boot@lists.denx.de>;
+ Wed, 24 Jan 2024 15:44:01 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=enrico.leto@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=6UD2LWhbx3Df2e47huKbfbcDdj5ZEnhIPZ6rkHKeFYc=;
- b=Kn6xlKjvUJKa1QPUbNy3BNFUf60tu01oiN4nR1PQ/ItFY7it+Go/gQIlXmASdXq6L7FzbK
- is/44m6HK2MYeFQTwuo660A2TMaaaEdQERKxiQhj3F0cgo5kgRBqrRCLeFKfNlfoRP3GOSQ8
- 6J1pCaPqWOcKTsPI+cMlEhBfvn9ws=;
+ bh=Ik/ZCHLBuD++ogKZoR5B27ECWlxi0jgDUZ/okRGtYGM=;
+ b=JcxF2E/BVgkvTuM45GdtCxKxU6UC9VkDWrCk9FHGMndlCn+mMerCOKZoDho3js1vMkPiLC
+ F2HVF4u6NG1eniTBCocdAcXQUPlPwmDTJ3QryflyEeq8XTGRpn9eoQESO4w/hYIKXgisnauQ
+ XQ36cqBuuOr6BTVxp7IKqLPOwcv7k=;
 From: Enrico Leto <enrico.leto@siemens.com>
 To: u-boot@lists.denx.de,
 	alexander.sverdlin@siemens.com
 Cc: trini@konsulko.com,
 	Enrico Leto <enrico.leto@siemens.com>
-Subject: [PATCH v6 7/7] siemens: factoryset: use correct config for soc
- specific implementation
-Date: Wed, 24 Jan 2024 15:43:55 +0100
-Message-Id: <20240124144355.2040380-8-enrico.leto@siemens.com>
+Subject: [PATCH v6 4/7] siemens: board: etamin: remove deprecated nand config
+Date: Wed, 24 Jan 2024 15:43:52 +0100
+Message-Id: <20240124144355.2040380-5-enrico.leto@siemens.com>
 In-Reply-To: <20240124144355.2040380-1-enrico.leto@siemens.com>
 References: <20240124144355.2040380-1-enrico.leto@siemens.com>
 MIME-Version: 1.0
@@ -67,61 +66,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adding the capricorn board family some parts diverge from draco family.
-The switches used were not pertinent and need to be enhanced for each new
-board of the capricorn family. Replace them through the SOC name 'AM33XX'
-and 'IMX8'.
+NAND was used in the early development phase of etamin. The board runs now
+on MMC. This setting is no more used -> remove to simplify the board file.
+
+Further clean-up of etamin should remove all NAND settings. Complete clean-
+up of etamin board will take place in a separate patch serie.
 
 Signed-off-by: Enrico Leto <enrico.leto@siemens.com>
 ---
- board/siemens/common/factoryset.c | 6 +++---
- board/siemens/common/factoryset.h | 2 +-
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ board/siemens/common/board.c |  4 ----
+ board/siemens/draco/Kconfig  |  2 --
+ board/siemens/draco/board.c  | 26 --------------------------
+ 3 files changed, 32 deletions(-)
 
-diff --git a/board/siemens/common/factoryset.c b/board/siemens/common/factoryset.c
-index b20af95d13d..a250ccfe252 100644
---- a/board/siemens/common/factoryset.c
-+++ b/board/siemens/common/factoryset.c
-@@ -11,7 +11,7 @@
- #include <g_dnl.h>
- #include <net.h>
- #include <asm/io.h>
--#if !CONFIG_IS_ENABLED(TARGET_GIEDI) && !CONFIG_IS_ENABLED(TARGET_DENEB)
-+#if CONFIG_IS_ENABLED(AM33XX)
- #include <asm/arch/cpu.h>
- #endif
- #include "eeprom.h"
-@@ -197,7 +197,7 @@ int factoryset_read_eeprom(int i2c_addr)
- 		cp1 += 3;
- 	}
+diff --git a/board/siemens/common/board.c b/board/siemens/common/board.c
+index e412858c4a9..e5a42d734bb 100644
+--- a/board/siemens/common/board.c
++++ b/board/siemens/common/board.c
+@@ -93,10 +93,6 @@ int board_init(void)
  
--#if CONFIG_IS_ENABLED(TARGET_GIEDI) || CONFIG_IS_ENABLED(TARGET_DENEB)
-+#if CONFIG_IS_ENABLED(IMX8)
- 	/* get mac address for WLAN */
- 	if (get_factory_record_val(cp, size, (uchar *)"WLAN1", (uchar *)"mac",
- 				   buf, MAX_STRING_LENGTH) > 0) {
-@@ -304,7 +304,7 @@ static int factoryset_mac_env_set(void)
+ 	gpmc_init();
  
- 	eth_env_set_enetaddr("ethaddr", mac_addr);
+-#if CONFIG_IS_ENABLED(NAND_CS_INIT)
+-	board_nand_cs_init();
+-#endif
+-
+ 	return 0;
+ }
+ #endif /* #ifndef CONFIG_SPL_BUILD */
+diff --git a/board/siemens/draco/Kconfig b/board/siemens/draco/Kconfig
+index 0cdf5bc9812..9d45c4239be 100644
+--- a/board/siemens/draco/Kconfig
++++ b/board/siemens/draco/Kconfig
+@@ -44,6 +44,4 @@ config SYS_SOC
+ config SYS_CONFIG_NAME
+         default "draco-etamin"
  
--#if CONFIG_IS_ENABLED(TARGET_GIEDI) || CONFIG_IS_ENABLED(TARGET_DENEB)
-+#if CONFIG_IS_ENABLED(IMX8)
- 	eth_env_set_enetaddr("eth1addr", mac_addr);
+-config NAND_CS_INIT
+-	def_bool y
+ endif
+diff --git a/board/siemens/draco/board.c b/board/siemens/draco/board.c
+index 30ad9d7ab3a..d108d3e49db 100644
+--- a/board/siemens/draco/board.c
++++ b/board/siemens/draco/board.c
+@@ -358,30 +358,4 @@ U_BOOT_CMD(
+ #endif /* #if defined(CONFIG_DRIVER_TI_CPSW) */
+ #endif /* #if (defined(CONFIG_DRIVER_TI_CPSW) && !defined(CONFIG_SPL_BUILD)) */
  
- 	/* wlan mac */
-diff --git a/board/siemens/common/factoryset.h b/board/siemens/common/factoryset.h
-index 8fa6c3b3d3b..ee8bcd0f20d 100644
---- a/board/siemens/common/factoryset.h
-+++ b/board/siemens/common/factoryset.h
-@@ -11,7 +11,7 @@
- 
- struct factorysetcontainer {
- 	uchar mac[6];
--#if CONFIG_IS_ENABLED(TARGET_GIEDI) || CONFIG_IS_ENABLED(TARGET_DENEB)
-+#if CONFIG_IS_ENABLED(IMX8)
- 	uchar mac_wlan[6];
- #endif
- 	int usb_vendor_id;
+-#if CONFIG_IS_ENABLED(NAND_CS_INIT)
+-#define ETAMIN_NAND_GPMC_CONFIG1	0x00000800
+-#define ETAMIN_NAND_GPMC_CONFIG2	0x001e1e00
+-#define ETAMIN_NAND_GPMC_CONFIG3	0x001e1e00
+-#define ETAMIN_NAND_GPMC_CONFIG4	0x16051807
+-#define ETAMIN_NAND_GPMC_CONFIG5	0x00151e1e
+-#define ETAMIN_NAND_GPMC_CONFIG6	0x16000f80
+-
+-/* GPMC definitions for second nand cs1 */
+-static const u32 gpmc_nand_config[] = {
+-	ETAMIN_NAND_GPMC_CONFIG1,
+-	ETAMIN_NAND_GPMC_CONFIG2,
+-	ETAMIN_NAND_GPMC_CONFIG3,
+-	ETAMIN_NAND_GPMC_CONFIG4,
+-	ETAMIN_NAND_GPMC_CONFIG5,
+-	ETAMIN_NAND_GPMC_CONFIG6,
+-	/*CONFIG7- computed as params */
+-};
+-
+-static void board_nand_cs_init(void)
+-{
+-	enable_gpmc_cs_config(gpmc_nand_config, &gpmc_cfg->cs[1],
+-			      0x18000000, GPMC_SIZE_16M);
+-}
+-#endif
+-
+ #include "../common/board.c"
 -- 
 2.30.2
 
