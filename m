@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A86A5C47DDF
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 12:42:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D3C0C47DDF
+	for <u-boot@archiver.kernel.org>; Wed, 24 Jan 2024 12:42:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F6C587C66;
-	Wed, 24 Jan 2024 13:42:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3642687C6F;
+	Wed, 24 Jan 2024 13:42:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qtwTaLzc";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EjcHete/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6392F87BBA; Wed, 24 Jan 2024 07:49:59 +0100 (CET)
+ id 4034F87BEC; Wed, 24 Jan 2024 07:50:01 +0100 (CET)
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55F5487BE8
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 07:49:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 984ED878A5
+ for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 07:49:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40O6ncto046242;
- Wed, 24 Jan 2024 00:49:38 -0600
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40O6nfmv046253;
+ Wed, 24 Jan 2024 00:49:41 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1706078978;
- bh=vu8KjV24vjq7BffiG1/1xHaK2er2ksotIvKTZ8mjc8Q=;
+ s=ti-com-17Q1; t=1706078981;
+ bh=pS0x6qzppQ1eh6xyBXCC61Y+A7dLgo3zysq5GZoRKl8=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=qtwTaLzc0ArQVc66MRq7Dm7fXCGUZyqofGjJs12zl/TiAua6NTclaOm1FtBB7HDDs
- fDEalaASx8od7D7DPF5/U9drOsRqLKsMDT1gBUBtnWNlbsBsEEuO2z1fYRCDQQ97v3
- qMJpB/VxdvSGULPkgaYcLicTpCkHt9tbrBmu1bgg=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40O6nb9l068639
+ b=EjcHete/x/0U1FmUpowOy38neoo8x0btZQPyl631eDYr32mpdbDcDIr5izyu4GEHJ
+ FtYURWRQ1YqHV+t2DAhrhXmbi7ulO00dY2aa7eJg/NVElewZ6dDlC1k0ORfgK4Dg8F
+ 82bC0g9qCq0UzNJxzGRg6bXiyKckyw9d/oqrKYwg=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40O6nfo0008834
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 24 Jan 2024 00:49:37 -0600
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 24 Jan 2024 00:49:41 -0600
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 24
- Jan 2024 00:49:37 -0600
-Received: from fllvsmtp8.itg.ti.com (10.64.41.158) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 00:49:41 -0600
+Received: from fllvsmtp7.itg.ti.com (10.64.40.31) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 24 Jan 2024 00:49:37 -0600
+ Frontend Transport; Wed, 24 Jan 2024 00:49:41 -0600
 Received: from fllv0122.itg.ti.com (fllv0122.itg.ti.com [10.247.120.72])
- by fllvsmtp8.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40O6nbH3059687;
- Wed, 24 Jan 2024 00:49:37 -0600
+ by fllvsmtp7.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40O6nfIe098720;
+ Wed, 24 Jan 2024 00:49:41 -0600
 Received: from localhost (danish-tpc.dhcp.ti.com [10.24.69.25])
- by fllv0122.itg.ti.com (8.14.7/8.14.7) with ESMTP id 40O6na5Y024463;
- Wed, 24 Jan 2024 00:49:37 -0600
+ by fllv0122.itg.ti.com (8.14.7/8.14.7) with ESMTP id 40O6nevm024476;
+ Wed, 24 Jan 2024 00:49:41 -0600
 From: MD Danish Anwar <danishanwar@ti.com>
 To: Dan Carpenter <dan.carpenter@linaro.org>, Maxime Ripard
  <mripard@kernel.org>, Siddharth Vadapalli <s-vadapalli@ti.com>,
@@ -75,10 +75,10 @@ To: Dan Carpenter <dan.carpenter@linaro.org>, Maxime Ripard
  Kever Yang <kever.yang@rock-chips.com>, Ramon Fried <rfried.dev@gmail.com>,
  Joe Hershberger <joe.hershberger@ni.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>
-Subject: [RFC PATCH v3 01/15] dma: ti: k3-udma: Use ring_idx to pair k3 nav
- rings
-Date: Wed, 24 Jan 2024 12:19:16 +0530
-Message-ID: <20240124064930.1787929-2-danishanwar@ti.com>
+Subject: [RFC PATCH v3 03/15] remoteproc: uclass: Add methods to load firmware
+ to rproc and boot rproc
+Date: Wed, 24 Jan 2024 12:19:18 +0530
+Message-ID: <20240124064930.1787929-4-danishanwar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240124064930.1787929-1-danishanwar@ti.com>
 References: <20240124064930.1787929-1-danishanwar@ti.com>
@@ -103,42 +103,205 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use ring_idx to pair rings. ring_idx will be same as tx flow_id for all
-non-negative flow_ids. For negative flow_ids, ring_idx will be tchan->id
-added with bchan_cnt.
+Add APIs to set a firmware_name to a rproc and boot the rproc with the
+same firmware.
+
+Clients can call rproc_set_firmware() API to set firmware_name for a rproc
+whereas rproc_boot() will load the firmware set by rproc_set_firmware() to
+a buffer by calling request_firmware_into_buf(). rproc_boot() will then
+load the firmware file to the remote processor and start the remote
+processor.
+
+Also include "fs-loader.h" and make remoteproc driver select FS_LOADER in
+Kconfig so that we can call request_firmware_into_buf() from remoteproc
+driver.
 
 Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
 ---
- drivers/dma/ti/k3-udma.c | 11 +++++++++--
- 1 file changed, 9 insertions(+), 2 deletions(-)
+ drivers/remoteproc/Kconfig        |  1 +
+ drivers/remoteproc/rproc-uclass.c | 85 +++++++++++++++++++++++++++++++
+ include/remoteproc.h              | 35 +++++++++++++
+ 3 files changed, 121 insertions(+)
 
-diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
-index 8a62d63dfe..eea9ec9659 100644
---- a/drivers/dma/ti/k3-udma.c
-+++ b/drivers/dma/ti/k3-udma.c
-@@ -876,13 +876,20 @@ static int udma_alloc_tx_resources(struct udma_chan *uc)
- {
- 	struct k3_nav_ring_cfg ring_cfg;
- 	struct udma_dev *ud = uc->ud;
--	int ret;
-+	struct udma_tchan *tchan;
-+	int ring_idx, ret;
+diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
+index 781de530af..0fdf1b38ea 100644
+--- a/drivers/remoteproc/Kconfig
++++ b/drivers/remoteproc/Kconfig
+@@ -10,6 +10,7 @@ menu "Remote Processor drivers"
+ # All users should depend on DM
+ config REMOTEPROC
+ 	bool
++	select FS_LOADER
+ 	depends on DM
  
- 	ret = udma_get_tchan(uc);
- 	if (ret)
- 		return ret;
+ # Please keep the configuration alphabetically sorted.
+diff --git a/drivers/remoteproc/rproc-uclass.c b/drivers/remoteproc/rproc-uclass.c
+index 28b362c887..76db4157f7 100644
+--- a/drivers/remoteproc/rproc-uclass.c
++++ b/drivers/remoteproc/rproc-uclass.c
+@@ -13,6 +13,7 @@
+ #include <log.h>
+ #include <malloc.h>
+ #include <virtio_ring.h>
++#include <fs_loader.h>
+ #include <remoteproc.h>
+ #include <asm/io.h>
+ #include <dm/device-internal.h>
+@@ -961,3 +962,87 @@ unsigned long rproc_parse_resource_table(struct udevice *dev, struct rproc *cfg)
  
--	ret = k3_nav_ringacc_request_rings_pair(ud->ringacc, uc->tchan->id, -1,
-+	tchan = uc->tchan;
-+	if (tchan->tflow_id >= 0)
-+		ring_idx = tchan->tflow_id;
-+	else
-+		ring_idx = ud->bchan_cnt + tchan->id;
+ 	return 1;
+ }
 +
-+	ret = k3_nav_ringacc_request_rings_pair(ud->ringacc, ring_idx, -1,
- 						&uc->tchan->t_ring,
- 						&uc->tchan->tc_ring);
- 	if (ret) {
++int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name)
++{
++	struct dm_rproc_uclass_pdata *uc_pdata;
++	int len;
++	char *p;
++
++	if (!rproc_dev || !fw_name)
++		return -EINVAL;
++
++	uc_pdata = dev_get_uclass_plat(rproc_dev);
++
++	len = strcspn(fw_name, "\n");
++	if (!len) {
++		debug("can't provide empty string for firmware name\n");
++		return -EINVAL;
++	}
++
++	p = strndup(fw_name, len);
++	if (!p)
++		return -ENOMEM;
++
++	uc_pdata->fw_name = p;
++
++	return 0;
++}
++
++int rproc_boot(struct udevice *rproc_dev, size_t fw_size)
++{
++	struct dm_rproc_uclass_pdata *uc_pdata;
++	struct udevice *fs_loader;
++	void *addr = malloc(fw_size);
++	int core_id, ret = 0;
++	char *firmware;
++	ulong rproc_addr;
++
++	if (!rproc_dev)
++		return -EINVAL;
++
++	if (!addr)
++		return -ENOMEM;
++
++	uc_pdata = dev_get_uclass_plat(rproc_dev);
++	core_id = dev_seq(rproc_dev);
++	firmware = uc_pdata->fw_name;
++
++	if (!firmware) {
++		debug("No firmware set for rproc core %d\n", core_id);
++		return -EINVAL;
++	}
++
++	/* Initialize all rproc cores */
++	rproc_init();
++
++	/* Loading firmware to a given address */
++	ret = get_fs_loader(&fs_loader);
++	if (ret) {
++		debug("could not get fs loader: %d\n", ret);
++		return ret;
++	}
++
++	ret = request_firmware_into_buf(fs_loader, firmware, addr, fw_size, 0);
++	if (ret < 0) {
++		debug("could not request %s: %d\n", firmware, ret);
++		return ret;
++	}
++
++	rproc_addr = (ulong)addr;
++
++	ret = rproc_load(core_id, rproc_addr, ret);
++	if (ret) {
++		debug("failed to load %s to rproc core %d from addr 0x%08lX err %d\n",
++		      uc_pdata->fw_name, core_id, rproc_addr, ret);
++		return ret;
++	}
++
++	ret = rproc_start(core_id);
++	if (ret) {
++		debug("failed to start rproc core %d\n", core_id);
++		return ret;
++	}
++
++	return ret;
++}
+diff --git a/include/remoteproc.h b/include/remoteproc.h
+index a11dc8a9b6..65b0ff7477 100644
+--- a/include/remoteproc.h
++++ b/include/remoteproc.h
+@@ -402,6 +402,7 @@ enum rproc_mem_type {
+  * @name: Platform-specific way of naming the Remote proc
+  * @mem_type: one of 'enum rproc_mem_type'
+  * @driver_plat_data: driver specific platform data that may be needed.
++ * @fw_name: firmware name
+  *
+  * This can be accessed with dev_get_uclass_plat() for any UCLASS_REMOTEPROC
+  * device.
+@@ -411,6 +412,7 @@ struct dm_rproc_uclass_pdata {
+ 	const char *name;
+ 	enum rproc_mem_type mem_type;
+ 	void *driver_plat_data;
++	char *fw_name;
+ };
+ 
+ /**
+@@ -704,6 +706,35 @@ unsigned long rproc_parse_resource_table(struct udevice *dev,
+ struct resource_table *rproc_find_resource_table(struct udevice *dev,
+ 						 unsigned int addr,
+ 						 int *tablesz);
++/**
++ * rproc_set_firmware() - assign a new firmware
++ * @rproc_dev: device for wich new firmware is being assigned
++ * @fw_name: new firmware name to be assigned
++ *
++ * This function allows remoteproc drivers or clients to configure a custom
++ * firmware name. The function does not trigger a remote processor boot,
++ * only sets the firmware name used for a subsequent boot.
++ *
++ * This function sets the fw_name field in uclass pdata of the Remote proc
++ *
++ * Return: 0 on success or a negative value upon failure
++ */
++int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name);
++
++/**
++ * rproc_boot() - boot a remote processor
++ * @rproc_dev: rproc device to boot
++ * @fw_size: Size of the memory to allocate for firmeware
++ *
++ * Boot a remote processor (i.e. load its firmware, power it on, ...).
++ *
++ * This function first loads the firmware set in the uclass pdata of Remote
++ * processor to a buffer and then loads firmware to the remote processor
++ * using rproc_load().
++ *
++ * Return: 0 on success, and an appropriate error value otherwise
++ */
++int rproc_boot(struct udevice *rproc_dev, size_t fw_size);
+ #else
+ static inline int rproc_init(void) { return -ENOSYS; }
+ static inline int rproc_dev_init(int id) { return -ENOSYS; }
+@@ -743,6 +774,10 @@ static inline int rproc_elf_load_rsc_table(struct udevice *dev, ulong fw_addr,
+ 					   ulong fw_size, ulong *rsc_addr,
+ 					   ulong *rsc_size)
+ { return -ENOSYS; }
++static inline int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name)
++{ return -ENOSYS; }
++static inline int rproc_boot(struct udevice *rproc_dev, size_t fw_size)
++{ return -ENOSYS; }
+ #endif
+ 
+ #endif	/* _RPROC_H_ */
 -- 
 2.34.1
 
