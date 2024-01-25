@@ -4,76 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8B34C47258
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 10:45:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 569E7C47258
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 11:02:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98DE787134;
-	Thu, 25 Jan 2024 11:45:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CC696871A6;
+	Thu, 25 Jan 2024 12:02:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZeZJfrnn";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="nGj0Rtkr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66E0786FCE; Thu, 25 Jan 2024 11:45:39 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B953A87527; Thu, 25 Jan 2024 12:02:22 +0100 (CET)
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FFB7874CC
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 11:45:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 49A9E87168
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 12:02:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-55a684acf92so7492367a12.0
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 02:45:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706179537; x=1706784337; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IenhAk4joqIjqCkEM8jxJ+2GhQqI+f0wvmGk0QU+lDQ=;
- b=ZeZJfrnne3KBbyoD/RUqIpWbcaxoEDnT7UVoVNQfXVqLLN6FRWeYNTNf4+pRhN5j5s
- KxSflJLJ0QaknJlve1LKLU5JAmVaps/V7AuiD6EokTvVf4uJeKWSSS8Jel5MCTU/8lr2
- rSH5AZcU0p3+Fw5PLGDpQgvAuVDLwkARXTd1spgShZvjkwxGGP4p2P7TVJ6GcVAll4V7
- 6nWVtNHK/64eFYhXqYN+9pBmoC9adw0409t13/eWl64Xk4hLwV/o1FxcofHZHUIpwERV
- U+sQUVMCmM2xaTDmEKK0rs+YolZ2HzZ/rqTpSI3W8y1OolGS+BmBgItb8vSS1rRGyjwV
- CIWg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706179537; x=1706784337;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=IenhAk4joqIjqCkEM8jxJ+2GhQqI+f0wvmGk0QU+lDQ=;
- b=mx9XryLPKQ2KvLkym6YuySYwOOoEwZckcMrbghHS0hu7jDneP34oCMNO1bxxzU7w/M
- EyZ5n82D2NRv6KRyqCDI7epWCqWwCeC6QIWbb7VbY4Rx6JZGszGLnPWEJ3afvfUF6lum
- Y/Wty3StkoMsTNlGcEqL03xkX15uaS3d8JW4raDdsK3vPhQLANPhKHc8VwQ4Bi1YTWVI
- L8S+XZ80wip3/ZeH+NOKoLOOsYb4QzoVcJAH6al2u7ndrvk0F2Ohqy1LhnmYs4QaFxpi
- uGtjYnbJdjxvPcEWGGf9brS9cJsOxAIkYe1oRd+XUxJHIpJLWHZbkIDDcZKRl4DOrbYW
- +W6A==
-X-Gm-Message-State: AOJu0YyWAQOF0mf0jF2LUkLyol+goqPTejBVkC/zaWi3Wcx6YcQ2lLSy
- ZupBjjf9uw/8WlY92hM/17x8DlhA7cn9r2jIIlMibvBxHipRRQZ5b2bAW+dQzjnvm5ds8gJTWQl
- wtKG2iL7AiZuYA1CuvAWpn0pAjRg=
-X-Google-Smtp-Source: AGHT+IFFAQEdOZzVsAbNEOrtlYfypk8QxzCM2WT8gY7+ZOw+K6kkMW/gXyH6ZLgoXF7+Za5/C21K6W3rRKjNSlOHPvA=
-X-Received: by 2002:aa7:d98d:0:b0:55d:b2a:15f3 with SMTP id
- u13-20020aa7d98d000000b0055d0b2a15f3mr152650eds.27.1706179536643; Thu, 25 Jan
- 2024 02:45:36 -0800 (PST)
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 6A130224D2;
+ Thu, 25 Jan 2024 12:02:19 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1706180539;
+ bh=jvDQvq9jrMENWMyw6Qks7tlN2gmfJ8dbI+L347wesQw=; h=From:To:Subject;
+ b=nGj0RtkrVXef7OxdARr/7J8lcMVoIdeELeeev24eB8cJLtiLGthvlP3OMKBbOUH9p
+ 7EmXjHp7UvCLPsMGeTxGy8B6VqDcEiqB16gCaCcKTOKAqs7uhyN3N9256Htb6hbyOq
+ y2P+gRhN2ITvMvor7148YPaOA7lkjRStLKTfiZqujMw+KtwTz2+rjc/ASVcfLAJJ1t
+ f5InJySm1psbLNwDrwC+iFLL1YVvGsVnmfCesMvsqGsLEXRS7vU3H8KjyvvIPbtn5M
+ WqwUrpjoxAbnx5vBq5gCao7NazW5ffOloG7CeBjbmlxtiC2rV+rdGE8TaNEX6qu5q6
+ lFWCIXoaWzSdQ==
+Date: Thu, 25 Jan 2024 12:02:14 +0100
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Joao Paulo Goncalves <joao.goncalves@toradex.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] toradex: tdx-cfg-block: Add new apalis and colibri pid
+Message-ID: <20240125110214.GA12545@francesco-nb>
+References: <20240122200930.673447-1-jpaulo.silvagoncalves@gmail.com>
 MIME-Version: 1.0
-References: <20240117153347.85074-1-heinrich.schuchardt@canonical.com>
- <20240117153347.85074-2-heinrich.schuchardt@canonical.com>
- <20240124211658.GA493567@bill-the-cat>
- <496ce6bb-8437-4ce5-9935-808b0e833ae4@canonical.com>
-In-Reply-To: <496ce6bb-8437-4ce5-9935-808b0e833ae4@canonical.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 25 Jan 2024 10:45:25 +0000
-Message-ID: <CALeDE9NzCZ0SqEwc-gn7GTmXoRObbQPgWk3GTyBjYE=9_ZZeYg@mail.gmail.com>
-Subject: Re: [PATCH v2 2/4] cmd: provide command to display SMBIOS information
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Bin Meng <bmeng.cn@gmail.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240122200930.673447-1-jpaulo.silvagoncalves@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,44 +65,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 25 Jan 2024 at 03:02, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> On 1/24/24 22:16, Tom Rini wrote:
-> > On Wed, Jan 17, 2024 at 04:33:45PM +0100, Heinrich Schuchardt wrote:
-> >
-> >> U-Boot can either generated an SMBIOS table or copy it from a prior boot
-> >> stage, e.g. QEMU.
-> >>
-> >> Provide a command to display the SMBIOS information.
-> >>
-> >> Currently only type 1 and 2 are translated to human readable text.
-> >> Other types may be added later. Currently only a hexdump and the list of
-> >> strings is provided for these.
-> >>
-> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >> Reviewed-by: Simon Glass <sjg@chromium.org>
-> >> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > [snip]
-> >> @@ -227,6 +227,13 @@ config CMD_SBI
-> >>      help
-> >>        Display information about the SBI implementation.
-> >>
-> >> +config CMD_SMBIOS
-> >> +    bool "smbios"
-> >> +    depends on SMBIOS
-> >> +    default y
-> >> +    help
-> >> +      Display the SMBIOS information.
-> >> +
-> >
-> > So this would be enabled (today) on 888 boards and is a bit more than a
-> > kilobyte. I think we can just let this be enabled as needed in
-> > defconfigs?
-> >
->
-> As needed would be the boards where we want to run the related Python
-> test. Sandbox and QEMU should be good enough?
+On Mon, Jan 22, 2024 at 05:09:30PM -0300, Joao Paulo Goncalves wrote:
+> From: Joao Paulo Goncalves <joao.goncalves@toradex.com>
+> 
+> Add new apalis imx6 and colibri imx6/imx7 products IDs.
+> 
+> Signed-off-by: Joao Paulo Goncalves <joao.goncalves@toradex.com>
+> ---
+>  board/toradex/common/tdx-cfg-block.c | 9 +++++++++
+>  board/toradex/common/tdx-cfg-block.h | 9 +++++++++
+>  2 files changed, 18 insertions(+)
+> 
+> diff --git a/board/toradex/common/tdx-cfg-block.c b/board/toradex/common/tdx-cfg-block.c
+> index 7187e1ba377..7affc290395 100644
+> --- a/board/toradex/common/tdx-cfg-block.c
+> +++ b/board/toradex/common/tdx-cfg-block.c
+> @@ -147,6 +147,15 @@ const struct toradex_som toradex_modules[] = {
+>  	[74] = { "Verdin AM62 Dual 1GB IT",              TARGET_IS_ENABLED(VERDIN_AM62_A53) },
+>  	[75] = { "Verdin AM62 Dual 1GB WB IT",           TARGET_IS_ENABLED(VERDIN_AM62_A53) },
+>  	[76] = { "Verdin AM62 Quad 2GB WB IT",           TARGET_IS_ENABLED(VERDIN_AM62_A53) },
+> +	[77] = { "Colibri iMX6S 256MB",                  TARGET_IS_ENABLED(COLIBRI_IMX6)    },
+> +	[78] = { "Colibri iMX6S 256MB IT",               TARGET_IS_ENABLED(COLIBRI_IMX6)    },
+> +	[79] = { "Colibri iMX6DL 512MB",                 TARGET_IS_ENABLED(COLIBRI_IMX6)    },	
+there is some trailing space here at the end of the line.
 
-Yes, I think for most users seeing the smbios tables is probably not
-particularly useful.
+Fabio, can you fix this up before applying?
+
+Francesco
+
