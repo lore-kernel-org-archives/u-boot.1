@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33FEAC47258
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 15:55:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60992C47422
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 15:55:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73AF387B8A;
-	Thu, 25 Jan 2024 16:54:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 31E0D87B71;
+	Thu, 25 Jan 2024 16:55:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="M54Vi4fz";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="F73MqtyP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A525E87B6C; Thu, 25 Jan 2024 16:54:57 +0100 (CET)
+ id 8DDED87B58; Thu, 25 Jan 2024 16:54:58 +0100 (CET)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 965B5878CB
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 16:54:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8110D87B58
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 16:54:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 41B8040588
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 9573740590
  for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 15:54:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
  s=20210705; t=1706198094;
- bh=9t6Y4fssieyLhdAICmgDBbYCvyS7fRRMzlIFUVbeXWc=;
+ bh=SbEgx2jC8ACGiB8Ink1AMVwhfuqAOLdbxo75Sm/7DXw=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=M54Vi4fzlM1y20IxOAIOD4y35TuNKqoqGTnGfY1Ba9KJ2BBU62klcHeNypMx7ucpM
- 6aDkrTTjFqh1l4XZ660WIirrvNcWvjNq7FP+fJDMzvZhel098Q9G6b7ACmp9dbwgW3
- OWmfFIhop++03hxu2Mmbkz8/5biOrHSBwfO2PLje1h3lbCp0itoScVezYGeXuZC9PU
- wKthBQPYRg4nCseTEA8+Tn0LwC4irva7QmV/UEVLC9t5iupPRBVxIuUUQKdm9kynPO
- nbtHDpxqB6YiAv2fBT/CZbbE1iO5ynyTUwjrKXNloVzVtXgzbYkBJQikOBncrUh0Vs
- ZeC8xlIQ/W7Kg==
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-337bf78ef28so2768213f8f.3
+ b=F73MqtyPtcAODokobIisijQrxCsYI3iIqmgU1aVlsEAVuYR8JPwrPD1zhllwR3R2V
+ YdSvGxAqTqUli2De8Du2C3Zll5y643QZvLFpUFeXwfK5buOtrizQ9cJvh9w5s+hSvi
+ +XCyIexneOxGT2B1p7GY5TqWQR9LU0iL2pL8/Dfa/CL6LWskZWHRX8kziMHNDdGgW9
+ eoeCpTXisF8bhJByEQA5scUbjMcZYCYdxIpZLn/9k1sNh7HFaiZQkVMD+C22CfYDti
+ VOE2WkeilbtHjyo8LUO3VY6r7Kr9mMaWzX/3sOkOi8xvj7XK/zCH7VcfJUJeDKQTd8
+ z5zbw7AEWw8sw==
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-40e5317c7a5so51333695e9.0
  for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 07:54:54 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706198092; x=1706802892;
+ d=1e100.net; s=20230601; t=1706198093; x=1706802893;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9t6Y4fssieyLhdAICmgDBbYCvyS7fRRMzlIFUVbeXWc=;
- b=d3P+7rsep6g8aPnQjqmaolD1V3HANPUiBFpmc5v4FVuFe5+bPjDTXE0Jj/S3jgYCG3
- QCNmhDjtIDyYxLEvwMASCxx1pRZuAcwK5eYcu69SIx5tB4OOR/IjoOU+bdimSU35FCpr
- SmVpa3rRTGmDSNo6DxGaUodurvxZTHBjo2rO0WgLp2VVRD/hxhKCUbmw1UfFwzbSOoey
- tlp0zLWI3UgbHe+Cyj6WG9HuGHLaYZ4ELJRPF0qwv5nnl5e8rABCQoUMUiD1MIpZRdJM
- ba1OnDcICfvMjgR7SpafJ/ZkVWPXP4qBEfGN7JELrx8bNW8EZmS2Iv4X6wzfBT+MPf2D
- wM/w==
-X-Gm-Message-State: AOJu0Yxr3oMGm+bODw7rQkbXlYqH5zEZAYltE9KSczWKxAO4zdxR/Y+U
- MkfXKCddxjKSkYWufZZG77c23MhxN5C/tLCDTU0B18rNEOJXn+qmjEmXsZkqv1Qlb8AfK7Dj41b
- YAxoOBQfT9ASDPDCxezYyq1aEe6g4WSLZEYs5PUQpr9LsqJwkuy1qtntCfImNLy56XRs=
-X-Received: by 2002:adf:ce88:0:b0:337:c267:7642 with SMTP id
- r8-20020adfce88000000b00337c2677642mr587474wrn.140.1706198092416; 
+ bh=SbEgx2jC8ACGiB8Ink1AMVwhfuqAOLdbxo75Sm/7DXw=;
+ b=A01H9EdULKtM6Wzd0LsBNHiX/D9vW+jE95+h93mwxHi83MqvWDn8Gmqz/Btz7VF/aZ
+ bkFraBSRtGhqHF/GqzJnztvPdi4Yu35+OmrLxRa5+VKgwlmJ9XHVwgU933YcCQgf+G9S
+ XFW1SUoXxUeznVD25c2s7qCowxxaC1zs5Rc2CJGtP9abD/8+xSUegh0KtWGGt8bwzKQI
+ 5thXPcsBzneKDojKmB7q/A795o8wJIv3G4HZaXDIy/0Dxk3nTCYmhOcSFZttW7LY9Rz0
+ ihh23Ba8Ogzf3hqUHdGOjUGyD1ODy90Jf1ap26eSAOg7lSzHB4cI3aztMLEyeINZciSG
+ L8Fw==
+X-Gm-Message-State: AOJu0YxzOjyzp6H223mfpNGUT6KCspbTnC4Dym2Z3pSIp/9lEadJYqde
+ Yg4ey8Gvv0Ek1gplLjQxDGYNWld0Jwdirl/obJsS3okW4YTSJM14tKeIkJQ+a4XsCU8c/iL5FFy
+ S+320Hjts/V3evkDJqZ0/N/n1pcE/ocaUs39xUaIGt1TIRTpmhydFCXKZdj+CkndTheY=
+X-Received: by 2002:a5d:414a:0:b0:337:c031:7f94 with SMTP id
+ c10-20020a5d414a000000b00337c0317f94mr934915wrq.78.1706198093028; 
+ Thu, 25 Jan 2024 07:54:53 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IG58rFjOjtxm3lHePfssoXVldU4UOW6aYezzgDgpjrbXH0tIPI4JmDRD5DKcVL3Nqq0Au65TQ==
+X-Received: by 2002:a5d:414a:0:b0:337:c031:7f94 with SMTP id
+ c10-20020a5d414a000000b00337c0317f94mr934905wrq.78.1706198092743; 
  Thu, 25 Jan 2024 07:54:52 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEGrpuzw0lkVNkMWMk1HsmXsIKoY/Jju6jJkuSfTpUGUnnteOuYiDu52CQoLeJFpyspe+UBag==
-X-Received: by 2002:adf:ce88:0:b0:337:c267:7642 with SMTP id
- r8-20020adfce88000000b00337c2677642mr587469wrn.140.1706198091928; 
- Thu, 25 Jan 2024 07:54:51 -0800 (PST)
 Received: from workstation5.fritz.box
  (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
  by smtp.gmail.com with ESMTPSA id
- c16-20020a5d4f10000000b003393592ef8dsm10557471wru.54.2024.01.25.07.54.51
+ c16-20020a5d4f10000000b003393592ef8dsm10557471wru.54.2024.01.25.07.54.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jan 2024 07:54:51 -0800 (PST)
+ Thu, 25 Jan 2024 07:54:52 -0800 (PST)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
@@ -82,9 +82,9 @@ Cc: Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
  Bin Meng <bmeng.cn@gmail.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v3 4/6] test: unit test for smbios command
-Date: Thu, 25 Jan 2024 16:54:36 +0100
-Message-ID: <20240125155438.47617-5-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v3 5/6] configs: enable smbios command on sandbox
+Date: Thu, 25 Jan 2024 16:54:37 +0100
+Message-ID: <20240125155438.47617-6-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240125155438.47617-1-heinrich.schuchardt@canonical.com>
 References: <20240125155438.47617-1-heinrich.schuchardt@canonical.com>
@@ -106,70 +106,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide a unit test for the smbios command.
-
-Provide different test functions for QEMU, sandbox, and other systems.
+To make use of the Python smbios test we need the smbios command.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 v3:
-	no change
-v2:
-	for generic boards we only can assume that a type 127 table exists
-	email address updated
+	new patch
 ---
- test/py/tests/test_smbios.py | 41 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 41 insertions(+)
- create mode 100644 test/py/tests/test_smbios.py
+ configs/sandbox_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/test/py/tests/test_smbios.py b/test/py/tests/test_smbios.py
-new file mode 100644
-index 00000000000..82b0b689830
---- /dev/null
-+++ b/test/py/tests/test_smbios.py
-@@ -0,0 +1,41 @@
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+
-+"""Test smbios command"""
-+
-+import pytest
-+
-+@pytest.mark.buildconfigspec('cmd_smbios')
-+@pytest.mark.notbuildconfigspec('qfw_smbios')
-+@pytest.mark.notbuildconfigspec('sandbox')
-+def test_cmd_smbios(u_boot_console):
-+    """Run the smbios command"""
-+    output = u_boot_console.run_command('smbios')
-+    assert 'DMI type 127,' in output
-+
-+@pytest.mark.buildconfigspec('cmd_smbios')
-+@pytest.mark.buildconfigspec('qfw_smbios')
-+@pytest.mark.notbuildconfigspec('sandbox')
-+# TODO:
-+# QEMU v8.2.0 lacks SMBIOS support for RISC-V
-+# Once support is available in our Docker image we can remove the constraint.
-+@pytest.mark.notbuildconfigspec('riscv')
-+def test_cmd_smbios_qemu(u_boot_console):
-+    """Run the smbios command on QEMU"""
-+    output = u_boot_console.run_command('smbios')
-+    assert 'DMI type 1,' in output
-+    assert 'Manufacturer: QEMU' in output
-+    assert 'DMI type 127,' in output
-+
-+@pytest.mark.buildconfigspec('cmd_smbios')
-+@pytest.mark.buildconfigspec('sandbox')
-+def test_cmd_smbios_sandbox(u_boot_console):
-+    """Run the smbios command on the sandbox"""
-+    output = u_boot_console.run_command('smbios')
-+    assert 'DMI type 0,' in output
-+    assert 'String 1: U-Boot' in output
-+    assert 'DMI type 1,' in output
-+    assert 'Manufacturer: sandbox' in output
-+    assert 'DMI type 2,' in output
-+    assert 'DMI type 3,' in output
-+    assert 'DMI type 4,' in output
-+    assert 'DMI type 127,' in output
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index ea4e2c1ec39..a8df5e635b2 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -42,6 +42,7 @@ CONFIG_STACKPROTECTOR=y
+ CONFIG_ANDROID_AB=y
+ CONFIG_CMD_CPU=y
+ CONFIG_CMD_LICENSE=y
++CONFIG_CMD_SMBIOS=y
+ CONFIG_CMD_BOOTM_PRE_LOAD=y
+ CONFIG_CMD_BOOTZ=y
+ CONFIG_BOOTM_OPENRTOS=y
 -- 
 2.43.0
 
