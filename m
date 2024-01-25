@@ -4,84 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55AA3C47258
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 20:35:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D399C47258
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 20:41:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53CDB87527;
-	Thu, 25 Jan 2024 21:35:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 97EFC87996;
+	Thu, 25 Jan 2024 21:41:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BU1qoVYS";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Sw/yxNvI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8085A87447; Thu, 25 Jan 2024 21:35:27 +0100 (CET)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 83B6886FB2; Thu, 25 Jan 2024 21:41:17 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BAA187527
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 21:35:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BFF187B98
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 21:41:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-2906bcae4feso2848967a91.3
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 12:35:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706214923; x=1706819723; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dsuKO57qcKYbcrHGBoB5C1n/yB5Vi8/rqGbf1rA2Q/4=;
- b=BU1qoVYSxtBeGz99Y/P5CVvGKTueygmwUrypM5F5ryNbSCmhYExD0fP2KnpTIG6qOD
- +47ye+ia8KEDbnWXbn2BkZP2yeOJsOuSPbNza0FDJaEF3QfFe6cH874eAhnQbm3lHbpD
- gefssB0wEFMDqyem+GsDTeG9PVobPglOU9keehZxksUKfte1e9c7wCVSkcs4MAyNisKw
- lsPE9CClRB/ypgGWcDeul2/j8CXd4V5IqAVsGEoumOKFaIGzCz6O1pdvEi5JqXvb7Gv7
- +gnNnaTZb3Crs8WjR4qWqVIgu0IQeaE95CKBv1vYFH1JfEcktJV9CoYCL+Rj/m/WAJaI
- geXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706214923; x=1706819723;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dsuKO57qcKYbcrHGBoB5C1n/yB5Vi8/rqGbf1rA2Q/4=;
- b=Cze3iDxcZiwTg+q1A409DmhE5aqc6x21Fw4r/1XWeftuh4pfTDnXr4WYqDTFP6cC7/
- c9hMeXBB4qrUDoSMpuFsEXKEIMjv3wPEtIMP2C/xuwneBJetmkju+AvwaJGvpEnFvSA6
- /ex8uuTMKyUHdkNjTeoP5tEgXf47i2GcNFF6nxPdQSdpZXPNVwCQEj2w5g2Kv76f34sP
- PvKfx1JeSr/ccHYG3WWWg6sUJwNSYwe5/wdpmE1Mes7YyNJ/3auJAjDS8UbjSjvH5e7i
- iFBXnWjeBUEwSEBUwlw3hgVFVo7EuSJYyFErHppPumm+yzAuVufaCjRyRioX00FX4rWB
- W0hg==
-X-Gm-Message-State: AOJu0YxT/bXj8PAW4/2sqdNIeOYLjBka6xwbMfySc3kzTbDAlNVBfso3
- CUvXpINB8h45ccglFA3vDEnX+ZlB3uXPkVdUEhK8l3BUfp4A9N/bXNWoQIn4esc97oQmQ2DpP8a
- 122B1ybk4GoctsH+LIPaDNyRNmho=
-X-Google-Smtp-Source: AGHT+IHfu5q8B4XtdUkp3jT3uvwRksGK1Bkj9Hv3xDbFtnXBIh+onHY5M2o0cW6w/9HhURnkQlBAVtLrLFYOWCI/Ybk=
-X-Received: by 2002:a17:90a:ba92:b0:290:1f0e:ed44 with SMTP id
- t18-20020a17090aba9200b002901f0eed44mr173939pjr.12.1706214922971; Thu, 25 Jan
- 2024 12:35:22 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1706215271; x=1706820071; i=xypron.glpk@gmx.de;
+ bh=3Tq3kvLpZVAI+GImuuHz8Ug0+kOggoCBxCpQkHxN0aY=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=Sw/yxNvIhI+fCJTrJ/GRHqY7FiRV3lvnvthJmLXfBcdhQVD7PuYk3SeqUC6Mwokv
+ yzOcptX5IsF01s/IC0zyRQkxsotoLGv8FPvT1JgQvOqGECdcjBG/cNtH9lhMl+88U
+ pzmFn2M79IqyGtoZ+KFq176vSLLBostVQPI+E7J6lvTYFruN7LByO8qfwhzBKCqYR
+ +PKGURvDbairTm7Iar4QcI0h+33A6O7uCE8Fu89LLN5fS1RwBta1QBWf8k3ZNeb6X
+ i3/jqZbG8pxBsN29FA1ldK/2VJoCtCBBL5Er/ujiVJlXitmkvfg0Jf3i591yGXbGE
+ GO1o+gpBOAQ0/crQIw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([178.202.40.247]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MMofW-1rljJT1amS-00Inc2; Thu, 25
+ Jan 2024 21:41:11 +0100
+Message-ID: <ebd16ea3-d8af-47f2-83d5-0141e15c4790@gmx.de>
+Date: Thu, 25 Jan 2024 21:40:13 +0100
 MIME-Version: 1.0
-References: <20240124021516.280026-1-Mr.Bossman075@gmail.com>
- <CAOMZO5DLFfx35pcseW5Ojqbj6QcqXtMBDhDgYsj-Kya7c9EB=w@mail.gmail.com>
-In-Reply-To: <CAOMZO5DLFfx35pcseW5Ojqbj6QcqXtMBDhDgYsj-Kya7c9EB=w@mail.gmail.com>
-From: Adam Ford <aford173@gmail.com>
-Date: Thu, 25 Jan 2024 14:35:11 -0600
-Message-ID: <CAHCN7xL7umTbjXn56Y5nUtkDB_8VwtYGVnmZba58OpHXUEoGgA@mail.gmail.com>
-Subject: Re: [PATCH v1] tools: mkimage: Add support for i.MXRT FlexSPI Header
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Jesse Taube <mr.bossman075@gmail.com>, u-boot@lists.denx.de, 
- Tom Rini <trini@konsulko.com>,
- Giulio Benetti <giulio.benetti@benettiengineering.com>, 
- Mamta Shukla <mamta.shukla@leica-geosystems.com>, 
- Thomas Haemmerle <thomas.haemmerle@leica-geosystems.com>,
- Fabio Estevam <festevam@denx.de>, 
- Simon Glass <sjg@chromium.org>, Jassi Brar <jaswinder.singh@linaro.org>, 
- Paul-Erwan Rio <paulerwan.rio@gmail.com>, Alexander Dahl <ada@thorsis.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Masami Hiramatsu <masami.hiramatsu@linaro.org>, 
- Mikhail Ilin <ilin.mikhail.ol@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] smbios: use struct_table_length to get SMBIOS 2.1 total
+ table length
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+References: <20240125011128.1176557-1-masahisa.kojima@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240125011128.1176557-1-masahisa.kojima@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:8zVcgtGZPJySOiyVqJ2aJHPIs3MNgAgrqWZjEGepVerocroI5Pz
+ sLNLy8xuLhwG6xGPjpXciXOW92v/vClEahv/nmLDkKLe1z+z+IAZ5QFSeM2Yaik3ykTOc6Y
+ TaIQUajDMH7ATt0EWdea4ms1FSJ1RFuDWF3L1Z9pC8icofyIVOHG2ZsXJKRvRwKPEhQMaG8
+ 73PPWy3ACO1++JcGWOi/w==
+UI-OutboundReport: notjunk:1;M01:P0:Kjwbdb6jp7E=;DjjHAPCd7bNnpr96CqEzdPFTObu
+ NLsZxiXdPIO+upLqz2s626F02UYnl6uOMncKJmoDg5yeo7uyqrfpjP0iZbWmgOSPXlHagEdJR
+ odTcpqIAhhOdGiQJ5xbGU62T93w6YYKk6pPzHAFln4G5EdX6cmMkjSunopRYtOudkRhD1t5px
+ iSddcOH9S5uyuyQoB4RfoJs1hj9JVZMGn5xeWTePCsWmP1emzucqyeS2IdfWUvOhTdzMbF7Me
+ ifDIhqArboNqAImSc8JBEEiGu4V+6Xt7+no8iSWqgZSm1ci8F4+8OkSU5JZKXPP3pMLOH4MzE
+ thWMt5bjRYzAKiyO3kFZ6bKiAZD69Qc6fkaJLPt7pYnywe5v3a47pN4FV+4TivYCYscJGr0bf
+ jB8hfkgeAknxLi7MFHyfxwGgvTy1ulNkKTK4Fp7jXBdypqx9OIcVlnqBD7/hIkb4c78S6ZHa2
+ tjNifphrt8Tp+hgTXp1qUE08HRI1TXd9Bomr7nIDsDQjN7KFwRlBTIP7UtfkOq21mbStNsJ3s
+ UWi9nMvdOQqOLxOTZ9TI5ghO8h4sR9F6SUKLoH1QVKpYw9LqMyY3+CylbhI5GMeLpDJWQC8lf
+ Dd8jnDN96Qpag4Tk9kKbe2GFMw3IsOvfeJaB3qskqZtjewHTWz4h+zquXh+Akz8f5juHc/t3K
+ t5vi52mD2rZILp3goBUsnzkjDb5yxqCKDJx9z5j4fF5c/4cVd4QstcshM/uiz1YfK+YTvenWW
+ 74QxoPgq9jTgpJ8XTvzbMBgXhagT67AvVGXvCl6ZYch2dBoPFOHrc50M06qDtEUyyEpNpVLfD
+ Nahc/v2l/gAtoo77xOEb0CpRWT3w8xirqdxmCyx2iscITvVonc5YeHONdkNbqPTRIYQc6cJyg
+ 88BBgrw6Ug8/NNPCYZZALTxdPCH/XT3vqc/Pe+M/p63EsJnTLNK0rsFoJsDHggaI/bPH+xbwE
+ M8JdyE8lmvEbYnVHrfyozCJY4Jw=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,22 +91,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jan 25, 2024 at 2:10=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
-wrote:
+On 1/25/24 02:11, Masahisa Kojima wrote:
+> The current code convert the SMBIOS 2.1 entry point structure to
+> SMBIOS 3.0 entry point structure. The max_struct_size member in
+> SMBIOS 2.1 entry point structure indicates
+> "Size of the largest SMBIOS structure, in bytes".
+> We need to use struct_table_length instead.
 >
-> Hi Adam,
+> Fixes: 1c5aab803c0b ("smbios: copy QEMU tables")
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> ---
+>   drivers/misc/qfw_smbios.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> On Tue, Jan 23, 2024 at 11:15=E2=80=AFPM Jesse Taube <mr.bossman075@gmail=
-.com> wrote:
-> >
-> > Modify imx8m Flex SPI Configuration Block to work with imxrt.
-> > Add more Flex SPI configuration options to Kconfig.
-> >
-> > Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
->
-> Could you please test it on imx8mn_beacon_fspi_defconfig ?
+> diff --git a/drivers/misc/qfw_smbios.c b/drivers/misc/qfw_smbios.c
+> index 9019345783..a898cb4eea 100644
+> --- a/drivers/misc/qfw_smbios.c
+> +++ b/drivers/misc/qfw_smbios.c
+> @@ -90,7 +90,7 @@ static int qfw_parse_smbios_anchor(struct udevice *dev=
+,
+>   		entry->length =3D sizeof(struct smbios3_entry);
+>   		entry->major_ver =3D entry2->major_ver;
+>   		entry->minor_ver =3D entry2->minor_ver;
+> -		entry->max_struct_size =3D entry2->max_struct_size;
+> +		entry->max_struct_size =3D entry2->struct_table_length;
 
-Yes.  I was planning on doing it this weekend.  I'll try to get it
-done sooner and report back the results.
+Thank you for catching this.
 
-adam
+These are the definitions:
+
+SMBIOS 2.1 (offset 0x08): Maximum Structure Size:
+Size of the largest SMBIOS structure, in bytes, and encompasses the
+structure=E2=80=99s formatted area and text strings
+
+SMBIOS 2.1 (offset 0x16): Structure Table Length:
+Total length of SMBIOS Structure Table, pointed to by the Structure
+Table Address, in bytes
+
+SMBIOS 3 (offset 0x0c) - Structure table maximum size
+Maximum size of SMBIOS Structure Table, pointed to by the Structure
+Table Address, in bytes. The actual size is guaranteed to be less or
+equal to the maximum size.
+
+SmbiosCreateTable() in EDK has this logic:
+
+       EntryPointStructure->TableLength =3D
+(UINT16)(EntryPointStructure->TableLength + RecordSize);
+       if (RecordSize > EntryPointStructure->MaxStructureSize) {
+         EntryPointStructure->MaxStructureSize =3D (UINT16)RecordSize;
+       }
+
+qemu-system-x86 gives me these values:
+
+entry2->max_struct_size: 81
+entry2->struct_table_length: 321
+
+I think we should rename the field in the SMBIOS3 header (e.g. to
+table_max_size) to avoid future confusion.
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
+>   	} else {
+>   		ret =3D -ENOENT;
+>   		goto out;
+
