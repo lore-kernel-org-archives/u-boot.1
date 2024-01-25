@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED608C47422
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 20:17:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55AA3C47258
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 20:35:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82EE587B98;
-	Thu, 25 Jan 2024 21:17:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 53CDB87527;
+	Thu, 25 Jan 2024 21:35:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Sog5WPBJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BU1qoVYS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FE7F87447; Thu, 25 Jan 2024 21:17:20 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 8085A87447; Thu, 25 Jan 2024 21:35:27 +0100 (CET)
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84BA2876FA
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 21:17:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BAA187527
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 21:35:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a33604b00c6so75154466b.1
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 12:17:18 -0800 (PST)
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-2906bcae4feso2848967a91.3
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 12:35:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706213838; x=1706818638; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1706214923; x=1706819723; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=muAQPZLs0Y1yh5Cz1NYzmD3BKvyKDIPZGfuEeWyICW0=;
- b=Sog5WPBJsOCfcV6WyTNEOefnun3lX9MKxovP/cMZ3c7Rxrx7rCQwS0DR9nj/Nw3aWi
- gB8YdVTD9tm7i4oNEySilhh1C8fLbBzhhPzkPOczVr8/q4cCQTyHbeyf+kIezS0MX/mw
- snlu2fDbPPal/yzwGs+K8TMNz/Wz35Ls3dyw30eDU0gqiDDxLqMCHDkelp76Ud5XBYj1
- +h2dEQRuWTmJurIrMZI251/FaFEBx+wS7j+XzNhbuA4IaVtbBGD8yjAQ11kRO1CNS8eT
- sMcNe0BS5iLkw0v+j+xzk3n+ekiu2wef8EMJ7waV0sgJ+4NVYfPo/r2sfONVSLMZIvtg
- g8tg==
+ bh=dsuKO57qcKYbcrHGBoB5C1n/yB5Vi8/rqGbf1rA2Q/4=;
+ b=BU1qoVYSxtBeGz99Y/P5CVvGKTueygmwUrypM5F5ryNbSCmhYExD0fP2KnpTIG6qOD
+ +47ye+ia8KEDbnWXbn2BkZP2yeOJsOuSPbNza0FDJaEF3QfFe6cH874eAhnQbm3lHbpD
+ gefssB0wEFMDqyem+GsDTeG9PVobPglOU9keehZxksUKfte1e9c7wCVSkcs4MAyNisKw
+ lsPE9CClRB/ypgGWcDeul2/j8CXd4V5IqAVsGEoumOKFaIGzCz6O1pdvEi5JqXvb7Gv7
+ +gnNnaTZb3Crs8WjR4qWqVIgu0IQeaE95CKBv1vYFH1JfEcktJV9CoYCL+Rj/m/WAJaI
+ geXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706213838; x=1706818638;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1706214923; x=1706819723;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=muAQPZLs0Y1yh5Cz1NYzmD3BKvyKDIPZGfuEeWyICW0=;
- b=TifmFboCxRtygP25nLXEiFYtDdpD8PqMZl2x/UxuH2EBu8oaMhiLqI5JvhKySj+cMK
- hzaIe0XC69IxvFKgNr6rdVSYxFad8BV63DnBOWJAd0yBJYc0SLyssyjnRhevl7AmqKct
- ESPikpucQqd9I892E8vl30tI8hxDvkkEXbgALxIZrZ0l4VWSBM8fCXI1cvYWkGxN6i90
- 0Z08mQAkm1hEQa6r63lqMUpfQUYkVIX5wvKrZPQFTPN8z8mejdnTyswVey2jw0Iw5iF1
- 8S01QvlOLsi0rvIoU2OVy4R4pov0SPBjX92B6i9i36h4kpjVPylrnBZtWMK3btTn4lcK
- 7LIg==
-X-Gm-Message-State: AOJu0YzJXqf+KZFgN9Ian4KG2ktHClSm7eRK8fF11HO5nYZjfMyHDkLj
- 1v2r0/ZBxp18ytAsO5JwN4GsJao4W03hfbln2j2DW0BD8mF77phl
-X-Google-Smtp-Source: AGHT+IFXTDjxY3gJpZLmapL+M0zm08SjNZMerTz+Vp1MTjPRgzcei8ooKoq3timh3JZG7CSV4qqX4Q==
-X-Received: by 2002:a17:906:741:b0:a31:8d44:99d1 with SMTP id
- z1-20020a170906074100b00a318d4499d1mr67905ejb.12.1706213837910; 
- Thu, 25 Jan 2024 12:17:17 -0800 (PST)
-Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
- tz3-20020a170907c78300b00a3472ae7782sm318738ejc.100.2024.01.25.12.17.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jan 2024 12:17:17 -0800 (PST)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Thomas Mittelstaedt <thomas.mittelstaedt@de.bosch.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Sean Edmond <seanedmond@microsoft.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 1/1] boot: pxe_utils: skip fdt setup in case legacy kernel
- is booted
-Date: Thu, 25 Jan 2024 22:16:54 +0200
-Message-Id: <20240125201654.17685-2-clamor95@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240125201654.17685-1-clamor95@gmail.com>
-References: <20240125201654.17685-1-clamor95@gmail.com>
+ bh=dsuKO57qcKYbcrHGBoB5C1n/yB5Vi8/rqGbf1rA2Q/4=;
+ b=Cze3iDxcZiwTg+q1A409DmhE5aqc6x21Fw4r/1XWeftuh4pfTDnXr4WYqDTFP6cC7/
+ c9hMeXBB4qrUDoSMpuFsEXKEIMjv3wPEtIMP2C/xuwneBJetmkju+AvwaJGvpEnFvSA6
+ /ex8uuTMKyUHdkNjTeoP5tEgXf47i2GcNFF6nxPdQSdpZXPNVwCQEj2w5g2Kv76f34sP
+ PvKfx1JeSr/ccHYG3WWWg6sUJwNSYwe5/wdpmE1Mes7YyNJ/3auJAjDS8UbjSjvH5e7i
+ iFBXnWjeBUEwSEBUwlw3hgVFVo7EuSJYyFErHppPumm+yzAuVufaCjRyRioX00FX4rWB
+ W0hg==
+X-Gm-Message-State: AOJu0YxT/bXj8PAW4/2sqdNIeOYLjBka6xwbMfySc3kzTbDAlNVBfso3
+ CUvXpINB8h45ccglFA3vDEnX+ZlB3uXPkVdUEhK8l3BUfp4A9N/bXNWoQIn4esc97oQmQ2DpP8a
+ 122B1ybk4GoctsH+LIPaDNyRNmho=
+X-Google-Smtp-Source: AGHT+IHfu5q8B4XtdUkp3jT3uvwRksGK1Bkj9Hv3xDbFtnXBIh+onHY5M2o0cW6w/9HhURnkQlBAVtLrLFYOWCI/Ybk=
+X-Received: by 2002:a17:90a:ba92:b0:290:1f0e:ed44 with SMTP id
+ t18-20020a17090aba9200b002901f0eed44mr173939pjr.12.1706214922971; Thu, 25 Jan
+ 2024 12:35:22 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20240124021516.280026-1-Mr.Bossman075@gmail.com>
+ <CAOMZO5DLFfx35pcseW5Ojqbj6QcqXtMBDhDgYsj-Kya7c9EB=w@mail.gmail.com>
+In-Reply-To: <CAOMZO5DLFfx35pcseW5Ojqbj6QcqXtMBDhDgYsj-Kya7c9EB=w@mail.gmail.com>
+From: Adam Ford <aford173@gmail.com>
+Date: Thu, 25 Jan 2024 14:35:11 -0600
+Message-ID: <CAHCN7xL7umTbjXn56Y5nUtkDB_8VwtYGVnmZba58OpHXUEoGgA@mail.gmail.com>
+Subject: Re: [PATCH v1] tools: mkimage: Add support for i.MXRT FlexSPI Header
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Jesse Taube <mr.bossman075@gmail.com>, u-boot@lists.denx.de, 
+ Tom Rini <trini@konsulko.com>,
+ Giulio Benetti <giulio.benetti@benettiengineering.com>, 
+ Mamta Shukla <mamta.shukla@leica-geosystems.com>, 
+ Thomas Haemmerle <thomas.haemmerle@leica-geosystems.com>,
+ Fabio Estevam <festevam@denx.de>, 
+ Simon Glass <sjg@chromium.org>, Jassi Brar <jaswinder.singh@linaro.org>, 
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>, Alexander Dahl <ada@thorsis.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Masami Hiramatsu <masami.hiramatsu@linaro.org>, 
+ Mikhail Ilin <ilin.mikhail.ol@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,87 +98,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently, if boot with extlinux.conf and do not set the fdt
-U-Boot will provide its own device tree. This behavior is
-beneficial if the U-Boot device tree is in sync with Linux,
-but it totally halts the booting of pre-dtb kernels (3.4 for
-example) since it uses ATAGs. To fix this, pass `-` in the
-fdt extlinux field as a signal that no tree should be used.
+On Thu, Jan 25, 2024 at 2:10=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+wrote:
+>
+> Hi Adam,
+>
+> On Tue, Jan 23, 2024 at 11:15=E2=80=AFPM Jesse Taube <mr.bossman075@gmail=
+.com> wrote:
+> >
+> > Modify imx8m Flex SPI Configuration Block to work with imxrt.
+> > Add more Flex SPI configuration options to Kconfig.
+> >
+> > Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
+>
+> Could you please test it on imx8mn_beacon_fspi_defconfig ?
 
-Suggested-by: Jonas Schwöbel <jonasschwoebel@yahoo.de>
-Tested-by: Jethro Bull <jethrob@hotmail.com>
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- boot/pxe_utils.c       | 27 ++++++++++++++++++++++-----
- doc/develop/distro.rst |  6 ++++++
- 2 files changed, 28 insertions(+), 5 deletions(-)
+Yes.  I was planning on doing it this weekend.  I'll try to get it
+done sooner and report back the results.
 
-diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index 83bc167785..9620562675 100644
---- a/boot/pxe_utils.c
-+++ b/boot/pxe_utils.c
-@@ -634,7 +634,12 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
- 		char *fdtfilefree = NULL;
- 
- 		if (label->fdt) {
--			fdtfile = label->fdt;
-+			if (IS_ENABLED(CONFIG_SUPPORT_PASSING_ATAGS)) {
-+				if (strcmp("-", label->fdt))
-+					fdtfile = label->fdt;
-+			} else {
-+				fdtfile = label->fdt;
-+			}
- 		} else if (label->fdtdir) {
- 			char *f1, *f2, *f3, *f4, *slash;
- 
-@@ -731,14 +736,26 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
- 		zboot_argc = 5;
- 	}
- 
--	if (!bootm_argv[3])
--		bootm_argv[3] = env_get("fdt_addr");
-+	if (!bootm_argv[3]) {
-+		if (IS_ENABLED(CONFIG_SUPPORT_PASSING_ATAGS)) {
-+			if (strcmp("-", label->fdt))
-+				bootm_argv[3] = env_get("fdt_addr");
-+		} else {
-+			bootm_argv[3] = env_get("fdt_addr");
-+		}
-+	}
- 
- 	kernel_addr_r = genimg_get_kernel_addr(kernel_addr);
- 	buf = map_sysmem(kernel_addr_r, 0);
- 
--	if (!bootm_argv[3] && genimg_get_format(buf) != IMAGE_FORMAT_FIT)
--		bootm_argv[3] = env_get("fdtcontroladdr");
-+	if (!bootm_argv[3] && genimg_get_format(buf) != IMAGE_FORMAT_FIT) {
-+		if (IS_ENABLED(CONFIG_SUPPORT_PASSING_ATAGS)) {
-+			if (strcmp("-", label->fdt))
-+				bootm_argv[3] = env_get("fdtcontroladdr");
-+		} else {
-+			bootm_argv[3] = env_get("fdtcontroladdr");
-+		}
-+	}
- 
- 	if (bootm_argv[3]) {
- 		if (!bootm_argv[2])
-diff --git a/doc/develop/distro.rst b/doc/develop/distro.rst
-index 8016acad09..9e715b23eb 100644
---- a/doc/develop/distro.rst
-+++ b/doc/develop/distro.rst
-@@ -81,6 +81,12 @@ as specified at `Boot Loader Specification`_:
- * Does not document the fdtdir option, which automatically selects the DTB to
-   pass to the kernel.
- 
-+* If no fdt/fdtdir is provided, the U-Boot will pass its own currently used
-+  device tree.
-+
-+* If ``-`` is passed as fdt argument and ``CONFIG_SUPPORT_PASSING_ATAGS`` is
-+  enabled, then no device tree will be used (legacy booting / pre-dtb kernel).
-+
- See also doc/README.pxe under 'pxe file format'.
- 
- One example extlinux.conf generated by the Fedora installer is::
--- 
-2.40.1
-
+adam
