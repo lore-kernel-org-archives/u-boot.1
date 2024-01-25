@@ -4,60 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6D28C47258
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 08:39:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B51BBC47258
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 08:52:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86247871A7;
-	Thu, 25 Jan 2024 09:38:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id ED17F86E42;
+	Thu, 25 Jan 2024 09:52:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Rv+wPE3c";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aWBD8/L3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30C9586FB2; Thu, 25 Jan 2024 09:38:31 +0100 (CET)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 54CE686F67; Thu, 25 Jan 2024 09:52:49 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 813B387015
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 09:38:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 291BA80245
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 09:52:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from localhost.localdomain
- (ip-178-202-040-247.um47.pools.vodafone-ip.de [178.202.40.247])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id E9BCC40E5F; 
- Thu, 25 Jan 2024 08:38:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1706171907;
- bh=eIfpT1E9W5EbAuIbSIB4LKt9y6yIosDqhu2gequQWOY=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=Rv+wPE3cZjb0xbMTYFsWAx+laKFEApv5utdlwul0XTHICHvlwRmFjeYhwRbxeAV0j
- Dm9ATEm0UXPPWEMJfvbTTfPnPmbOZ2L1GAp8Q6LSv+VUhiVBGpF8Aj5bA3dT3Ggg62
- h+ZzuHhGguMjhMd9MW0sW2EexsWcOQGeqcXMbu3JhqIX39gf+BXJVFWaMrq48Y/oaD
- Er7RC7jFwnkpVrMCjk6mfN1Bu3Bx7c2aVOiwf7QoOak2Op/foDf0ND+k8H3FeSTgLC
- F0kIFRg23GyQayopElERW4l/bY169+Kad2btvB8XtLTWLavmWsuS6wpvXCo3369hcs
- BL6t50+E+UQNQ==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 3/3] riscv: separate .data and .text sections of EFI
- binaries
-Date: Thu, 25 Jan 2024 09:38:15 +0100
-Message-ID: <20240125083815.12623-4-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240125083815.12623-1-heinrich.schuchardt@canonical.com>
-References: <20240125083815.12623-1-heinrich.schuchardt@canonical.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-50eabfac2b7so8249882e87.0
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 00:52:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1706172765; x=1706777565; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=LRBttucsko3pzX+Rj7K1wVdlJjPreRKXUeiAcMMmky0=;
+ b=aWBD8/L3KufiKwq6eVPYCzwsbZM2BeD6MJTX6zxj2rjUIJKLsmoyPH4jjarP2+L0RU
+ scA0zkawJyuaGiOCcNoeVFcP+PrWv4qrtwjVi5J8VAg5gN4pHtb7pkLFNopk/QYuyAYE
+ zlxshskWWwH1+2o/kEWNr0zNf7RdRd3FXFkFFkxSA6W94aY8IVjpwm0rDUKTXGQLN65P
+ BhP9jGOaisGZtdrPMW/XWRG4K6sYbREV+khDTIKvFXv4VtUEFHX8YqKJQJjPhhkN5Jha
+ dQJ906Q2xGhBHlofKhOs8wSa/JvoKHl2zOQat/buikjox1IWrvOGBEZLjeQ1ZhqP//R9
+ lwyg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706172765; x=1706777565;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LRBttucsko3pzX+Rj7K1wVdlJjPreRKXUeiAcMMmky0=;
+ b=bver6RKHLvu8RIgT9rqX6c3EsM17TIh7hpzWES0TefxTSUFENP2FzLNy8OeYuLMHdv
+ +J+x44UirxeYyKMBV8Bd98d9AfiP8Gf8xacZdeyw2SLE7yw0ULVClTbzoI7leifWYMZE
+ rnd7tdt99fkgQc9pu3SnVDNOqgp8SE3fboP0RHEagpy+LdItLzWED6GkXchkN2E/tf4n
+ XAPm8CVUqxuKT9hAm+ibBuR/mOHYKjg1UiWu2jLWT5ZQ3C1x2jA4FVgr5cdm5zj6UYJ/
+ cpGF73UoabRhNqcx0KIEaXvjm+ntJNriWJU7u4qMI5BHai/r5S1l37XzQVpMe4Oyi+rA
+ 1KzA==
+X-Gm-Message-State: AOJu0YwSTrZy3rvTWYORJaU7wqj/4ZsjAmxJ+9r3OzQmESxZEl9UM+lV
+ GmwShNcPnMS/gIiw9HtCBpzohaeEzr1FOIGVekz8g0Ex9mlQwXIynCwSWiX19xcR7YIVyYU5FuB
+ XfA0inMTj5T6pmIzfIdnNk5rcTM9HVXhV87Lm0w==
+X-Google-Smtp-Source: AGHT+IGQa4uEdEAhtoymOnXGfOEJTRnwNMgKxk2cUJY2R6AbftxIPXg/CZTvD2yxX0I8KaQpnDs8CZIsqEWX6C14k0o=
+X-Received: by 2002:ac2:465e:0:b0:50e:b3bc:4aa with SMTP id
+ s30-20020ac2465e000000b0050eb3bc04aamr324396lfo.57.1706172765551; Thu, 25 Jan
+ 2024 00:52:45 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240124200433.23543-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240124200433.23543-1-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 25 Jan 2024 10:52:09 +0200
+Message-ID: <CAC_iWj+PpUY13jCHuwxMOEpPc6JFsN1MBGjvpY+y2WAHZJk=jg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_selftest: add missing line feed in
+ efi_selftest_miniapp_exit
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,178 +86,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-EFI binaries should not contain sections that are both writable and
-executable. Separate the RX .text section from the RW .data section
-
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-v2:
-	split patches
----
- arch/riscv/lib/crt0_riscv_efi.S    | 37 ++++++++++++++++++++++--------
- arch/riscv/lib/elf_riscv32_efi.lds | 22 ++++++++++++------
- arch/riscv/lib/elf_riscv64_efi.lds | 22 ++++++++++++------
- 3 files changed, 58 insertions(+), 23 deletions(-)
-
-diff --git a/arch/riscv/lib/crt0_riscv_efi.S b/arch/riscv/lib/crt0_riscv_efi.S
-index ffe18fa387b..46b08552371 100644
---- a/arch/riscv/lib/crt0_riscv_efi.S
-+++ b/arch/riscv/lib/crt0_riscv_efi.S
-@@ -53,7 +53,7 @@ pe_header:
- 	.long	IMAGE_NT_SIGNATURE		/* 'PE' */
- coff_header:
- 	.short	PE_MACHINE			/* RISC-V 64/32-bit */
--	.short	2				/* nr_sections */
-+	.short	3				/* nr_sections */
- 	.long	0				/* TimeDateStamp */
- 	.long	0				/* PointerToSymbolTable */
- 	.long	0				/* NumberOfSymbols */
-@@ -144,16 +144,35 @@ section_table:
- 	.byte	0
- 	.byte	0
- 	.byte	0			/* end of 0 padding of section name */
--	.long	_edata - _start		/* VirtualSize */
-+	.long	_etext - _start		/* VirtualSize */
- 	.long	_start - ImageBase	/* VirtualAddress */
--	.long	_edata - _start		/* SizeOfRawData */
-+	.long	_etext - _start		/* SizeOfRawData */
- 	.long	_start - ImageBase	/* PointerToRawData */
--
--	.long	0		/* PointerToRelocations (0 for executables) */
--	.long	0		/* PointerToLineNumbers (0 for executables) */
--	.short	0		/* NumberOfRelocations  (0 for executables) */
--	.short	0		/* NumberOfLineNumbers  (0 for executables) */
--	.long	0xe0500020	/* Characteristics (section flags) */
-+	.long	0			/* PointerToRelocations (0 for executables) */
-+	.long	0			/* PointerToLineNumbers (0 for executables) */
-+	.short	0			/* NumberOfRelocations  (0 for executables) */
-+	.short	0			/* NumberOfLineNumbers  (0 for executables) */
-+	/* Characteristics (section flags) */
-+	.long	(IMAGE_SCN_MEM_READ | \
-+		 IMAGE_SCN_MEM_EXECUTE | \
-+		 IMAGE_SCN_CNT_CODE)
-+
-+	.ascii	".data"
-+	.byte	0
-+	.byte	0
-+	.byte	0			/* end of 0 padding of section name */
-+	.long	_edata - _data		/* VirtualSize */
-+	.long	_data - ImageBase	/* VirtualAddress */
-+	.long	_edata - _data		/* SizeOfRawData */
-+	.long	_data - ImageBase	/* PointerToRawData */
-+	.long	0			/* PointerToRelocations */
-+	.long	0			/* PointerToLineNumbers */
-+	.short	0			/* NumberOfRelocations */
-+	.short	0			/* NumberOfLineNumbers */
-+	/* Characteristics (section flags) */
-+	.long	(IMAGE_SCN_MEM_WRITE | \
-+		 IMAGE_SCN_MEM_READ | \
-+		 IMAGE_SCN_CNT_INITIALIZED_DATA)
- 
- 	.align		12
- _start:
-diff --git a/arch/riscv/lib/elf_riscv32_efi.lds b/arch/riscv/lib/elf_riscv32_efi.lds
-index 940a5816b82..7b9bd7b7f15 100644
---- a/arch/riscv/lib/elf_riscv32_efi.lds
-+++ b/arch/riscv/lib/elf_riscv32_efi.lds
-@@ -7,6 +7,12 @@
- 
- OUTPUT_FORMAT("elf32-littleriscv", "elf32-littleriscv", "elf32-littleriscv")
- OUTPUT_ARCH(riscv)
-+
-+PHDRS
-+{
-+	data PT_LOAD FLAGS(3); /* SHF_WRITE | SHF_ALLOC */
-+}
-+
- ENTRY(_start)
- SECTIONS
- {
-@@ -18,11 +24,17 @@ SECTIONS
- 		*(.gnu.linkonce.t.*)
- 		*(.srodata)
- 		*(.rodata*)
-+		. = ALIGN(16);
-+		*(.dynamic);
- 		. = ALIGN(512);
- 	}
-+	.rela.dyn : { *(.rela.dyn) }
-+	.rela.plt : { *(.rela.plt) }
-+	.rela.got : { *(.rela.got) }
-+	.rela.data : { *(.rela.data) *(.rela.data*) }
- 	_etext = .;
- 	_text_size = . - _text;
--	.dynamic  : { *(.dynamic) }
-+	. = ALIGN(4096);
- 	.data : {
- 		_data = .;
- 		*(.sdata)
-@@ -47,12 +59,8 @@ SECTIONS
- 		. = ALIGN(512);
- 		_bss_end = .;
- 		_edata = .;
--	}
--	.rela.dyn : { *(.rela.dyn) }
--	.rela.plt : { *(.rela.plt) }
--	.rela.got : { *(.rela.got) }
--	.rela.data : { *(.rela.data) *(.rela.data*) }
--	_data_size = . - _etext;
-+	} :data
-+	_data_size = _edata - _data;
- 
- 	. = ALIGN(4096);
- 	.dynsym   : { *(.dynsym) }
-diff --git a/arch/riscv/lib/elf_riscv64_efi.lds b/arch/riscv/lib/elf_riscv64_efi.lds
-index be9f0ac6022..d0b4f3d1d64 100644
---- a/arch/riscv/lib/elf_riscv64_efi.lds
-+++ b/arch/riscv/lib/elf_riscv64_efi.lds
-@@ -7,6 +7,12 @@
- 
- OUTPUT_FORMAT("elf64-littleriscv", "elf64-littleriscv", "elf64-littleriscv")
- OUTPUT_ARCH(riscv)
-+
-+PHDRS
-+{
-+	data PT_LOAD FLAGS(3); /* SHF_WRITE | SHF_ALLOC */
-+}
-+
- ENTRY(_start)
- SECTIONS
- {
-@@ -18,11 +24,17 @@ SECTIONS
- 		*(.gnu.linkonce.t.*)
- 		*(.srodata)
- 		*(.rodata*)
-+		. = ALIGN(16);
-+		*(.dynamic);
- 		. = ALIGN(512);
- 	}
-+	.rela.dyn : { *(.rela.dyn) }
-+	.rela.plt : { *(.rela.plt) }
-+	.rela.got : { *(.rela.got) }
-+	.rela.data : { *(.rela.data) *(.rela.data*) }
- 	_etext = .;
- 	_text_size = . - _text;
--	.dynamic  : { *(.dynamic) }
-+	. = ALIGN(4096);
- 	.data : {
- 		_data = .;
- 		*(.sdata)
-@@ -47,12 +59,8 @@ SECTIONS
- 		. = ALIGN(512);
- 		_bss_end = .;
- 		_edata = .;
--	}
--	.rela.dyn : { *(.rela.dyn) }
--	.rela.plt : { *(.rela.plt) }
--	.rela.got : { *(.rela.got) }
--	.rela.data : { *(.rela.data) *(.rela.data*) }
--	_data_size = . - _etext;
-+	} :data
-+	_data_size = _edata - _data;
- 
- 	. = ALIGN(4096);
- 	.dynsym   : { *(.dynsym) }
--- 
-2.43.0
-
+On Wed, 24 Jan 2024 at 22:04, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> If an error occurs we may see an output like:
+>
+>     EFI application calling Exit
+>
+>     Could not open loaded image protocolLoaded image protocol missing
+>
+> Add the missing line feed.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  lib/efi_selftest/efi_selftest_miniapp_exit.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/lib/efi_selftest/efi_selftest_miniapp_exit.c b/lib/efi_selftest/efi_selftest_miniapp_exit.c
+> index 8b2e60cc711..0909a5ca748 100644
+> --- a/lib/efi_selftest/efi_selftest_miniapp_exit.c
+> +++ b/lib/efi_selftest/efi_selftest_miniapp_exit.c
+> @@ -39,7 +39,7 @@ static efi_status_t EFIAPI check_loaded_image_protocol
+>                                   NULL, EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+>         if (ret != EFI_SUCCESS) {
+>                 cout->output_string(cout,
+> -                                   u"Could not open loaded image protocol");
+> +                                   u"Could not open loaded image protocol\n");
+>                 return ret;
+>         }
+>         if ((void *)check_loaded_image_protocol <
+> --
+> 2.43.0
+>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
