@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 095F9C47258
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 16:15:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AC99C47258
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 16:15:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92EE587BFC;
-	Thu, 25 Jan 2024 17:14:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 202DF87BDC;
+	Thu, 25 Jan 2024 17:14:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JbJT9KkA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZxMTuoVA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DE7D87BCB; Thu, 25 Jan 2024 17:14:44 +0100 (CET)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id 0A75F87BCB; Thu, 25 Jan 2024 17:14:50 +0100 (CET)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77EF487BDC
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 17:14:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 464F587C08
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 17:14:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-5ff828b93f0so62953207b3.3
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 08:14:42 -0800 (PST)
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-5ebca94cf74so68000127b3.0
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 08:14:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1706199281; x=1706804081; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1706199286; x=1706804086; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KJlIQux0E+olezznUXX50CptQrrc3J/XXhE79pzvT2A=;
- b=JbJT9KkAymwUxNvAXEIEGK0XnfyE2PE7aDyih9UHbmpTDkiesEIXR2xujvf6+uKeIB
- pcGFujdy91ddSxiAWJcEtfHH8zF4OPviJrjEzTDUKj7K6WL7OM74vRyU3pjbAWdS22sT
- a3L4XajEbsvKKI0NPmPXfvaaq4MhCGRxR09Cc=
+ bh=xEJ9KYA+vQtgAGhHVjiW8lWboE4jHkh4LJ8KcrWFaBU=;
+ b=ZxMTuoVAwh6h/qDdx+scH7pgCqtlkvYXkcvmo8k8MoTGfmkSwcnLTnLKvpdXx7EMBE
+ FwP1sr0Kml5uC0y5IocKaARjU6Y6TY6beRf10zcmkzkf2ZMbJduIKGPdxCMk1bbuYtlJ
+ 6uHHH5KUuV1DaCSV7zAVpr8uMTqklfcpFq0J4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706199281; x=1706804081;
+ d=1e100.net; s=20230601; t=1706199286; x=1706804086;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KJlIQux0E+olezznUXX50CptQrrc3J/XXhE79pzvT2A=;
- b=UnR3vrPxxHiKdq9sl1BUFx4iLE2ykTrNjldl7+59wJhsUlHEAwy5GuZsf2K//uLZct
- xv7jneBQ16nIk+YJDajxDIbazDEtSHyhtpAIVfIsPrYWUEDQwPf2+LGPyXEimGfVWdDd
- lvhNS5HXw3R5F30U+y5Fmqk9VcMyH8jy8rckMK8Y5ZIu+iK2xi0iz7Q5Z4gWI0SBWNFt
- FpQZHJx4GP1UYJlueaCwxCM6us+rJPZTWJ+pox4yjEadcebsmG5+V2jkYQ5TlltVWN46
- 9n68Uxnr9lJQNg7Lba923eG9KyWi6m34eVm6CKjh3BhQPuWNoxTk1UIoXl53Ocd8rnK+
- zPlQ==
-X-Gm-Message-State: AOJu0Yy8H2ffwrS+XuJgccK7/kCInc7AV7qOSnDR1dowiS0l21KNc/QQ
- 0r+PLrnpoZ49NDBipZvr3V2gKGHXo145cZX5ZMKxZcD1gZ+8Wc1bwEiZJxJ9mAE=
-X-Google-Smtp-Source: AGHT+IEE4Iylw2vDJ3b7ANoBf72GKO/hQ3g03q2mVHTGFmxrt7J4rZqfj0sNfl4vFKRKIH5pR6S91w==
-X-Received: by 2002:a81:ac46:0:b0:5f0:618b:c292 with SMTP id
- z6-20020a81ac46000000b005f0618bc292mr27982ywj.66.1706199281275; 
- Thu, 25 Jan 2024 08:14:41 -0800 (PST)
+ bh=xEJ9KYA+vQtgAGhHVjiW8lWboE4jHkh4LJ8KcrWFaBU=;
+ b=hgx/W18SKY5IJv/vKndU9/OthrEBd/H1XL+WmyRAXNgVaGnXStNTTzONCNfnRkKDQ6
+ 7fCAMiotkwWKLRFgAhvkjrCR9KoSZOkwNLKSBmHRLwhmwd6WLbCTiUvawndwVGDeoB65
+ rb+9R/7VHhzU7bZldyZ2SgqLljgInx9O8qXOhZjPcDeSf3qLQPAJK4K7P9ap76NwGY0H
+ ssDep0PXxS1hiOAieHkJjJgcmnR6uw+s+Y4ZwOE/XlNYnD4m1s7FPfiz9xshjZAADTbx
+ qfBzus9i+X01+NUsjutwNCpeeAFwQppYi1rt8yjPlMPTH3qWtRXRKOokv1toKuGzr9nO
+ ctFQ==
+X-Gm-Message-State: AOJu0YzTALwmkcsSV/Mx+KkbJyC01eVEKbPTKkd/Z2Upck/n9x2K9rsJ
+ FO4+hJQ2SKY3N9caBgliWzf6RsaxqVlm4TxdNHf4CAts55IXWsG/vuzYe3L+l0rsuUyW+BZ3yTj
+ c
+X-Google-Smtp-Source: AGHT+IEZCALIGKFSfR+YJ67oflusiEaI3kLRsCWKXAuuQNpg55UlEXSbSBSagUaMwuGgtsu9YsK2Wg==
+X-Received: by 2002:a81:9b17:0:b0:5e8:61ec:4d7f with SMTP id
+ s23-20020a819b17000000b005e861ec4d7fmr35213ywg.38.1706199286000; 
+ Thu, 25 Jan 2024 08:14:46 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- fd2-20020a05690c318200b00602b374919esm500595ywb.53.2024.01.25.08.14.40
+ bg10-20020a05690c030a00b005e703079702sm737046ywb.87.2024.01.25.08.14.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jan 2024 08:14:40 -0800 (PST)
-Date: Thu, 25 Jan 2024 11:14:39 -0500
+ Thu, 25 Jan 2024 08:14:45 -0800 (PST)
+Date: Thu, 25 Jan 2024 11:14:43 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Masahisa Kojima <masahisa.kojima@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/1] cmd: bootmenu: rename U-Boot console to Exit
-Message-ID: <20240125161439.GS3652023@bill-the-cat>
-References: <20240117105546.7282-1-clamor95@gmail.com>
- <20240117105546.7282-2-clamor95@gmail.com>
+To: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: u-boot@lists.denx.de, Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Bin Meng <bmeng@tinylab.org>, Ion Agorria <ion@agorria.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>
+Subject: Re: [PATCH v2] common: console: Fix print complete stdio device list
+Message-ID: <20240125161443.GT3652023@bill-the-cat>
+References: <20240117123714.50380-1-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="k6yC2djOQDjFwRdq"
+ protocol="application/pgp-signature"; boundary="lDoYZQjGBiCxMcjv"
 Content-Disposition: inline
-In-Reply-To: <20240117105546.7282-2-clamor95@gmail.com>
+In-Reply-To: <20240117123714.50380-1-patrice.chotard@foss.st.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,43 +97,44 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---k6yC2djOQDjFwRdq
+--lDoYZQjGBiCxMcjv
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 17, 2024 at 12:55:46PM +0200, Svyatoslav Ryhel wrote:
+On Wed, Jan 17, 2024 at 01:37:13PM +0100, Patrice Chotard wrote:
 
-> It seems that the U-Boot console entry of the bootmenu has lost
-> its original meaning. Now, even if it is chosen, the probability
-> that you will enter the actual U-Boot console is quite low.
-> Boot env, bootflow, bootcommand script may appear, but not the
-> actual console. Hence, let's remove ambiguity and name this
-> entry by what it actually does: 'Exit' the bootmenu.
+> In case CONSOLE_MUX and SYS_CONSOLE_IS_IN_ENV are on and
+> stdin or stdout or stderr are missing in environment, as fallback, get
+> these either from stdio_devices[std] or stdio_devices[std]->name.
 >=20
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> Fixes: 6b343ab38d ("console: Print out complete stdio device list")
+>=20
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---k6yC2djOQDjFwRdq
+--lDoYZQjGBiCxMcjv
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWyiO8ACgkQFHw5/5Y0
-tyx83wv9FgACqRBwa3QEwP9nnJYWwUQ/9p6+7Q3e3jzy+4V3YJCtPF9dVqJ1jkU0
-mbjxq4129yCENO1G+EpFAlxdpb8ZmY1V9UuPkbd5J2Xc5m9iJf7+OKiAWiqwGf4N
-TItx9iibJAZLwCiecbhTaYqy7ZbSygJGhJFFfMpy3p3lXPvGg0iK/bhVTOWIhOW+
-eKAzjpmYbF9fmxYGe17ps9beSk5YqgW0cz1k/HHQSnsgyEZwcG3mBMH1RCx0aSR6
-0Iv2B5wNO93dUGFgFaacHkjF0K8bpD/g1oWsoSRyKD8JDUw3e/gWp29vXzawsZaC
-p6LSrTGbyQ8dYocF2DTj0tzguDHGBwvWLGBvalUbpPldjbRpEScXwOHQ28GIhRU5
-MOG/GGY48Kp2ZK9ICVGLkN87gTo40PVviT2izvSOg0up/IFM0oUb16TaVLwSGg1i
-HDEH/Pm3iFKs3Qg40Q6QQtJiIgY9ZqKVAjva7hDkvdvhPVT4MmBoOaOgVlSlLkfk
-KAzH6KIL
-=n3p7
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWyiPMACgkQFHw5/5Y0
+tyxbHQwAsXS+tNUymfVqnuB3gPO5CfvWRKPjdpAPdibWLyD4E4T6G5JSlKVzoOsq
+p8jqa5WEw3BJjtm956fRH+ghpNvX5pIZGv7THO78QVjMvtCwt55/XEdYNHOR3L3m
+IMjj3/RBKftq9agl9X2wMFFXtr1p63DYy8bPdxWZ7UWJpXmesFz7DkAKL2Jl/xNb
+KWHgA0Ar7XavMkFU1THqe2wdzFco40Oz0M9jbgY2VFFMZc7f2MvATffPj4SooL2I
+WRoubSvCDIhhPiBv9CQAxJYE+O0YnZmyFk5nKY95v4w7ebGxATVlvywlInrcN1w4
+YDe58P+GjrdpSLgVTil17siSRWyKTMD6Kznxqx0pJWqo9KCQDNKZ8N16iVaEJYhH
+l0gLDi5TO727+SQHH5F7p3wvbw5oCU3m/DEmsqN7CTvGaeU8d4dQWbW1Ba8D5B3h
+7eW0E9Po73ES9NZnLd5EvM8qkKyJQOjkonGDI4i9PaTwwDysf4u7nN/wJd1AwGHe
+i8FUGxlr
+=YKtV
 -----END PGP SIGNATURE-----
 
---k6yC2djOQDjFwRdq--
+--lDoYZQjGBiCxMcjv--
