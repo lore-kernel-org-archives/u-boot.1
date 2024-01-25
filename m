@@ -4,75 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9232FC47258
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 07:03:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63F8CC47258
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 07:24:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 572BD86FCE;
-	Thu, 25 Jan 2024 08:03:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 60B3C870E3;
+	Thu, 25 Jan 2024 08:24:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bIvfJ7rg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="R4YNzMQg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98D0C87073; Thu, 25 Jan 2024 08:03:07 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
+ id 4DE588718F; Thu, 25 Jan 2024 08:24:38 +0100 (CET)
+Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
+ [IPv6:2607:f8b0:4864:20::92c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9EA3B86FB2
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 08:03:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BA22180090
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 08:24:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tobetter@gmail.com
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1d76671e5a4so26603055ad.0
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 23:03:04 -0800 (PST)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x92c.google.com with SMTP id
+ a1e0cc1a2514c-7cbeaacbcb8so1658317241.0
+ for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 23:24:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706166183; x=1706770983; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/u7XFDvT8osLx3lj3gaCRiOCaA1rdwoLC8RCJ6uKPdE=;
- b=bIvfJ7rg2/qYO6Jr89USNmU+TK5BvBB0mN1zqQdPd/oPrXbzdKHkSWPButLRUO+ZYv
- S5vLfIFbFbeOftctAgNJLZ04RQ+4UR1vYmW7Z+l9TNaiNOVXJt2fr5VZcOzjjC0Lumob
- XcZBey2BNvMsf8gsV3hSGpV0lKIg6eOT1zrPGtYU5nEp8CIMA4iW7u6fKooIq0eMnfpu
- 4MJbJv5JrxrQR2XPRYRbMAwafnHOA4NzieXcmu1fl6qV43hUPxCKXq3/92ZfvaIo+8YY
- zF1m/wA8aF3lnqul7Md1cegZDuCFA09anbwnII+8BUey3rtLv9e+HhVx4/JzYDNg70Hb
- UUDg==
+ d=linaro.org; s=google; t=1706167473; x=1706772273; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=iN21WrMtUYkRqaQ8ZNuCFFZhmIui9MC0Ig/SSeZ/cn4=;
+ b=R4YNzMQguyaRnte2zBGSflsqBxdfIjJUX/TGNewIT/Imiivfh+EI4uXe71bqBZJ3SC
+ h7RTLGATjMhJiKvXGTSbf2HQw5Mu7NJ4gO78DoON1pMAmV9ZPlLvaWkWDrPdo3X8qph8
+ ud9t29Ysyc0RQ+d965cKqPfFMRdCV3CEqS+wugc0K98SrXjto5UsCLFbp+ZbjsWzzDnU
+ peDJkg2s41V4+GQyVZE/QudmOi1625Ysx+Szo19nGWZketTsALrYntkdnZCMisoFkfxo
+ xNsJ+/zxPQIJEmrbh9ifBFGiJ4TlD2wKRicy4r80vqMJyJOE2iLiDmYCJ0swHSTfrcwY
+ YlsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706166183; x=1706770983;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1706167473; x=1706772273;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/u7XFDvT8osLx3lj3gaCRiOCaA1rdwoLC8RCJ6uKPdE=;
- b=Hwuenmvoj7bIabTMWw++jyf/VYY05YA6Yr/8zck9a8zBEMwp9jlDDj17lVRdESdt0h
- 6EMHtYiCTem6lda7zwDZ+0klrgmNHy0+VpXvsXAA6Ic7FkZyjNannRF97b5YnyNthvz/
- 0Oz7YmQQcNseV6mmT6OQD8i80XFCELudaEElYvf/j9IE2I90wv+ZUqhUg2ZaX3M4sBVy
- y0brEomRmw5+PaVzQVwidAzRCdmZycBx8eRgHQIaRuehdHzXGtFbXPxC5+zKImvfivf6
- Ae1nQhVF7Cyh9ypoAcszr2SBbv7lWNCYaTib/UAbogNTCqNG4mZER5OMazgjygax3mNQ
- bN9w==
-X-Gm-Message-State: AOJu0Yy/5SmRgIWCUN37FT5ugjbs64T/0s4D9DgikDfajM1Rz2NmIKe+
- eQyNa1WluOJDzvjsnNyOCsMuzVda/HNXTcbu4a9zIMj+SLLsXuBOiU/A6WtgepA=
-X-Google-Smtp-Source: AGHT+IEyiIz8VnqHQSLgwRDeN5CQ+bT174mYRDxunlAzYFKzaXXZXx4QSfScQ3orkeZ0JpNUVNWSmQ==
-X-Received: by 2002:a17:902:b491:b0:1d6:f3a8:ade7 with SMTP id
- y17-20020a170902b49100b001d6f3a8ade7mr516743plr.69.1706166182539; 
- Wed, 24 Jan 2024 23:03:02 -0800 (PST)
-Received: from anyang.. ([106.250.177.234])
- by smtp.googlemail.com with ESMTPSA id
- z7-20020a1709028f8700b001d71935e5c1sm9868171plo.195.2024.01.24.23.03.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jan 2024 23:03:02 -0800 (PST)
-From: Dongjin Kim <tobetter@gmail.com>
-To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] board: rockchip: Add Hardkernel ODROID-M1S
-Date: Thu, 25 Jan 2024 16:02:51 +0900
-Message-Id: <20240125070252.2057679-1-tobetter@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ bh=iN21WrMtUYkRqaQ8ZNuCFFZhmIui9MC0Ig/SSeZ/cn4=;
+ b=f1RW9WXne6kFb+h41PkVe/RqlSjK0utcdOCVG84wpV7hbgq8lrUpdwC7BabCHCkc3W
+ 5UV8Wgj/I3U99ZHBfXkWyyRfPXqBJ5HEG7TCjbBKtvrTduvUyKzDzCfKr9IdLZd+yOnY
+ wh1x3StOx7Dor8ZhwfCNL2wHq5+4bZIooljUaQoIeWUNrgSd7dnIacC5Q7cmbLoVyGIf
+ cI4u68lPdkyEJFYyTWkT6Wu2sB7JRGHQcyBvh0LcLsZuGvz4AAZjLCsE5Ae/Gv+yChVt
+ gmVbbOADUXT5ecnlovSPCUTKS4YhKbuwpQaq8r1my6wdjRe99o65yppzcDqASJWlKcv+
+ 5O2Q==
+X-Gm-Message-State: AOJu0YxrChTkb0i+ZvVdvVGwTNVwLyassWCW9eSqyfipJq5JLkv1qurj
+ FriLABsv2Af6T72dEJMJx7Cp8Iu/J/nsNVvPZBhSVTqd5BP8YXvk13e2Wr6m4kOJ6c1gZNyab26
+ qzHEMNSlIiKPXiDbNmH9PHpoaoLYII2y6PF1edw==
+X-Google-Smtp-Source: AGHT+IGZ9ClGDc7gM4sBNqFErzmGniytRb4nT5jUMplOQfewIAzBOrSskQWwLKASTlmKV7LAbop4e0qc1lVYwfxMnB4=
+X-Received: by 2002:a05:6102:2908:b0:46a:cc14:bba2 with SMTP id
+ cz8-20020a056102290800b0046acc14bba2mr446666vsb.4.1706167473372; Wed, 24 Jan
+ 2024 23:24:33 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240110103547.719757-1-sumit.garg@linaro.org>
+ <82d509de-3d47-4cc2-8217-c38dc78fad28@denx.de>
+ <7b4ff8e8-2f21-4d07-9848-fb0d5652819e@linaro.org>
+ <4d8aede8-5ea8-45a4-87fe-d555a025ef8e@denx.de>
+ <CAFA6WYN1tFs1id7UxTwLEyp69zx2BPUP7bffVZn80FKPLx2yJw@mail.gmail.com>
+ <48125705-e78e-438f-90ac-2816432cd747@denx.de>
+In-Reply-To: <48125705-e78e-438f-90ac-2816432cd747@denx.de>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Thu, 25 Jan 2024 12:54:22 +0530
+Message-ID: <CAFA6WYMuerS5YTsquGvc+OHr+0a3JXrM4AQ_ReV4tPhvxv9H0w@mail.gmail.com>
+Subject: Re: [PATCH v4 00/11] An effort to bring DT bindings compliance within
+ U-Boot
+To: Marek Vasut <marex@denx.de>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de, 
+ u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de, trini@konsulko.com, 
+ sjg@chromium.org, robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, 
+ conor@kernel.org, neil.armstrong@linaro.org, ff@shokubai.tech, 
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
+ ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
+ xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
+ rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
+ rfried.dev@gmail.com, mibodhi@gmail.com, bb@ti.com, mark.kettenis@xs4all.nl
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,1045 +99,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hardkernel ODROID-M1S is a single board computer with a RK3566 SoC,
-a slightly modified version of the RK3566 SoC.
+On Thu, 25 Jan 2024 at 07:36, Marek Vasut <marex@denx.de> wrote:
+>
+> On 1/24/24 09:16, Sumit Garg wrote:
+>
+> Hi,
+>
+> >>>> How do you propose to handle fixes to DTs which are applied to
+> >>>> linux-stable releases ? For example, if Linux 6.6(.0) ships a DT which
+> >>>> has some defect that is fixed in 6.6.1, how will that fix get into
+> >>>> U-Boot DTs ?
+> >>>
+> >>> This fix would also be in the latest Linux tags, so I think it would
+> >>> find its way here - as I understand it patches aren't accepted into
+> >>> Linux stable unless they land in torvalds tree.
+> >>
+> >> See the devicetree-rebasing.git:
+> >>
+> >> https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git/refs/
+> >>
+> >> That only contains refs for release versions (v6.6-dts, v6.7-dts etc),
+> >> not any follow-up updates from linux-stable (like current 6.6.13 etc).
+> >>
+> >
+> > Here we should only consider fixes which are critical to U-Boot. I
+> > think -u-boot.dtsi files would be suitable to carry those fixes until
+> > next uprev. However, if there is a fix affecting many platforms than
+> > we can consider pulling that standalone too.
+>
+> That would mean extra duplicate work -- the critical fixes have already
+> been selected into linux-stable, that work is already done, I don't
+> think it makes sense to re-do it again.
+>
+> Furthermore, I do not like the new necessity to start porting those
+> fixes from linux-stable and converting them to adjustments to
+> *-u-boot.dtsi files, this is tedious and error prone, so it would have
+> to be automated.
+>
+> But I still think it is much better to simply take the fixes directly
+> from linux-stable as-is instead.
 
-Features tested on a ODROID-M1S 8GB v1.0 2023-08-10:
-    - SD-card boot
-    - eMMC boot
-    - PCIe/NVMe
+That's fair, it would essentially be a DT ABI breakage for U-Boot for
+which a fix has to be taken in U-Boot from Linux stable release. So I
+am fine with that.
 
-Signed-off-by: Dongjin Kim <tobetter@gmail.com>
----
- arch/arm/dts/rk3566-odroid-m1s-u-boot.dtsi |  28 +
- arch/arm/dts/rk3566-odroid-m1s.dts         | 665 +++++++++++++++++++++
- arch/arm/mach-rockchip/rk3568/Kconfig      |   6 +
- board/hardkernel/odroid_m1s/Kconfig        |  15 +
- board/hardkernel/odroid_m1s/MAINTAINERS    |   9 +
- board/hardkernel/odroid_m1s/Makefile       |   7 +
- board/hardkernel/odroid_m1s/board.c        |  80 +++
- configs/odroid-m1s-rk3566_defconfig        | 109 ++++
- doc/board/rockchip/rockchip.rst            |   1 +
- include/configs/odroid_m1s.h               |  12 +
- 10 files changed, 932 insertions(+)
- create mode 100644 arch/arm/dts/rk3566-odroid-m1s-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3566-odroid-m1s.dts
- create mode 100644 board/hardkernel/odroid_m1s/Kconfig
- create mode 100644 board/hardkernel/odroid_m1s/MAINTAINERS
- create mode 100644 board/hardkernel/odroid_m1s/Makefile
- create mode 100644 board/hardkernel/odroid_m1s/board.c
- create mode 100644 configs/odroid-m1s-rk3566_defconfig
- create mode 100644 include/configs/odroid_m1s.h
+But at this point we have to move away from apprehensions about DT ABI
+breakages and provide real examples of the DT ABI breakages in the
+past. Are you aware of any DT ABI breaking change backported to Linux
+stable releases? This is the sort of information we would like to make
+DT bindings maintainers aware about.
 
-diff --git a/arch/arm/dts/rk3566-odroid-m1s-u-boot.dtsi b/arch/arm/dts/rk3566-odroid-m1s-u-boot.dtsi
-new file mode 100644
-index 00000000000..33a1d142b8c
---- /dev/null
-+++ b/arch/arm/dts/rk3566-odroid-m1s-u-boot.dtsi
-@@ -0,0 +1,28 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk356x-u-boot.dtsi"
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/leds/common.h>
-+
-+/ {
-+	chosen {
-+		stdout-path = &uart2;
-+		u-boot,spl-boot-order = &sdmmc0, &sdhci;
-+	};
-+};
-+
-+&sdhci {
-+	cap-mmc-highspeed;
-+	mmc-ddr-1_8v;
-+	mmc-hs200-1_8v;
-+	mmc-hs400-1_8v;
-+	mmc-hs400-enhanced-strobe;
-+	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
-+};
-+
-+&uart2 {
-+	bootph-all;
-+	clock-frequency = <24000000>;
-+	status = "okay";
-+};
-diff --git a/arch/arm/dts/rk3566-odroid-m1s.dts b/arch/arm/dts/rk3566-odroid-m1s.dts
-new file mode 100644
-index 00000000000..73e29d80c71
---- /dev/null
-+++ b/arch/arm/dts/rk3566-odroid-m1s.dts
-@@ -0,0 +1,665 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (c) 2024 Hardkernel Co., Ltd.
-+ *
-+ */
-+
-+/dts-v1/;
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/leds/common.h>
-+#include <dt-bindings/pinctrl/rockchip.h>
-+#include <dt-bindings/soc/rockchip,vop2.h>
-+#include "rk3566.dtsi"
-+
-+/ {
-+	model = "Hardkernel ODROID-M1S";
-+	compatible = "hardkernel,rk3568-odroid-m1s", "rockchip,rk3568";
-+
-+	aliases {
-+		ethernet0 = &gmac1;
-+		i2c0 = &i2c3;
-+		i2c3 = &i2c0;
-+		mmc0 = &sdhci;
-+		mmc1 = &sdmmc0;
-+		serial0 = &uart1;
-+		serial1 = &uart0;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial2:1500000n8";
-+	};
-+
-+	gmac1_clkin: external-gmac1-clock {
-+		compatible = "fixed-clock";
-+		clock-frequency = <125000000>;
-+		clock-output-names = "gmac1_clkin";
-+		#clock-cells = <0>;
-+	};
-+
-+	hdmi-con {
-+		compatible = "hdmi-connector";
-+		type = "a";
-+
-+		port {
-+			hdmi_con_in: endpoint {
-+				remote-endpoint = <&hdmi_out_con>;
-+			};
-+		};
-+	};
-+
-+	leds {
-+		compatible = "gpio-leds";
-+
-+		led_power: led-0 {
-+			gpios = <&gpio0 RK_PC6 GPIO_ACTIVE_HIGH>;
-+			function = LED_FUNCTION_POWER;
-+			color = <LED_COLOR_ID_RED>;
-+			default-state = "keep";
-+			linux,default-trigger = "default-on";
-+			pinctrl-names = "default";
-+			pinctrl-0 = <&led_power_pin>;
-+		};
-+		led_work: led-1 {
-+			gpios = <&gpio0 RK_PB7 GPIO_ACTIVE_HIGH>;
-+			function = LED_FUNCTION_HEARTBEAT;
-+			color = <LED_COLOR_ID_BLUE>;
-+			linux,default-trigger = "heartbeat";
-+			pinctrl-names = "default";
-+			pinctrl-0 = <&led_work_pin>;
-+		};
-+	};
-+
-+	pcie20_3v3: pcie20-3v3-regulator {
-+		compatible = "regulator-fixed";
-+		enable-active-high;
-+		gpios = <&gpio2 RK_PC2 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&vcc3v3_pcie20_en_pin>;
-+		regulator-name = "pcie20_3v3";
-+		regulator-always-on;
-+		regulator-boot-on;
-+	};
-+
-+	rk809-sound {
-+		compatible = "simple-audio-card";
-+		simple-audio-card,name = "Analog RK817";
-+		simple-audio-card,format = "i2s";
-+		simple-audio-card,mclk-fs = <256>;
-+		simple-audio-card,widgets =
-+			"Headphone", "Headphones",
-+			"Speaker", "Speaker";
-+		simple-audio-card,routing =
-+			"Headphones", "HPOL",
-+			"Headphones", "HPOR",
-+			"Speaker", "SPKO";
-+
-+		simple-audio-card,cpu {
-+			sound-dai = <&i2s1_8ch>;
-+		};
-+
-+		simple-audio-card,codec {
-+			sound-dai = <&rk809>;
-+		};
-+	};
-+
-+	spdif_dit: spdif-dit {
-+		compatible = "linux,spdif-dit";
-+		#sound-dai-cells = <0>;
-+		status = "disabled";
-+	};
-+
-+	spdif_sound: spdif-sound {
-+		compatible = "simple-audio-card";
-+		status = "disabled";
-+
-+		simple-audio-card,cpu {
-+			sound-dai = <&spdif>;
-+		};
-+
-+		simple-audio-card,codec {
-+			sound-dai = <&spdif_dit>;
-+		};
-+	};
-+
-+	vcc3v3_sys: vcc3v3-sys-regulator {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc3v3_sys";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		vin-supply = <&vcc5v0_sys>;
-+	};
-+
-+	vcc5v0_sys: vcc5v0-sys-regulator {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc5v0_sys";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		vin-supply = <&vcc5v_dcin>;
-+	};
-+
-+	vcc5v_dcin: vcc5v0-dcin {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc-5v0";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+	};
-+
-+	vcc5v0_usb_host: vcc5v0-usb-host-regulator {
-+		compatible = "regulator-fixed";
-+		enable-active-high;
-+		gpio = <&gpio0 RK_PA5 GPIO_ACTIVE_HIGH>;
-+		pinctrl-0 = <&vcc5v0_usb_host_en_pin>;
-+		pinctrl-names = "default";
-+		regulator-max-microvolt = <5000000>;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-name = "vcc5v0_usb_host";
-+		vin-supply = <&vcc5v0_sys>;
-+	};
-+
-+	vcc5v0_usb_otg: vcc5v0-usb-otg-regulator {
-+		compatible = "regulator-fixed";
-+		enable-active-high;
-+		gpio = <&gpio0 RK_PA6 GPIO_ACTIVE_HIGH>;
-+		pinctrl-0 = <&vcc5v0_usb_otg_en_pin>;
-+		pinctrl-names = "default";
-+		regulator-max-microvolt = <5000000>;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-name = "vcc5v0_usb_otg";
-+		vin-supply = <&vcc5v0_sys>;
-+	};
-+};
-+
-+&combphy1 {
-+	phy-supply = <&vcc5v0_usb_host>;
-+	status = "okay";
-+};
-+
-+&combphy2 {
-+	status = "okay";
-+};
-+
-+&cpu0 {
-+	cpu-supply = <&vdd_cpu>;
-+};
-+
-+&cpu1 {
-+	cpu-supply = <&vdd_cpu>;
-+};
-+
-+&cpu2 {
-+	cpu-supply = <&vdd_cpu>;
-+};
-+
-+&cpu3 {
-+	cpu-supply = <&vdd_cpu>;
-+};
-+
-+&gmac1 {
-+	assigned-clock-parents = <&cru SCLK_GMAC1_RGMII_SPEED>;
-+	assigned-clock-rates = <0>, <125000000>;
-+	assigned-clocks = <&cru SCLK_GMAC1_RX_TX>, <&cru SCLK_GMAC1>;
-+	clock_in_out = "output";
-+	phy-handle = <&rgmii_phy1>;
-+	phy-mode = "rgmii";
-+	phy-supply = <&vcc3v3_sys>;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&gmac1m1_miim
-+		     &gmac1m1_tx_bus2
-+		     &gmac1m1_rx_bus2
-+		     &gmac1m1_rgmii_clk
-+		     &gmac1m1_rgmii_bus
-+		     &gmac1m1_clkinout>;
-+	status = "okay";
-+
-+	tx_delay = <0x4f>;
-+	rx_delay = <0x2d>;
-+};
-+
-+&gpu {
-+	mali-supply = <&vdd_gpu>;
-+	status = "okay";
-+};
-+
-+&hdmi {
-+	avdd-0v9-supply = <&vdda0v9_image>;
-+	avdd-1v8-supply = <&vcca1v8_image>;
-+	status = "okay";
-+};
-+
-+&hdmi_in {
-+	hdmi_in_vp0: endpoint {
-+		remote-endpoint = <&vp0_out_hdmi>;
-+	};
-+};
-+
-+&hdmi_out {
-+	hdmi_out_con: endpoint {
-+		remote-endpoint = <&hdmi_con_in>;
-+	};
-+};
-+
-+&hdmi_sound {
-+	status = "okay";
-+};
-+
-+&i2c0 {
-+	status = "okay";
-+
-+	vdd_cpu: regulator@1c {
-+		compatible = "tcs,tcs4525";
-+		reg = <0x1c>;
-+		fcs,suspend-voltage-selector = <1>;
-+		regulator-name = "vdd_cpu";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <800000>;
-+		regulator-max-microvolt = <1150000>;
-+		regulator-ramp-delay = <2300>;
-+		vin-supply = <&vcc3v3_sys>;
-+
-+		regulator-state-mem {
-+			regulator-off-in-suspend;
-+		};
-+	};
-+
-+	rk809: pmic@20 {
-+		compatible = "rockchip,rk809";
-+		reg = <0x20>;
-+		interrupt-parent = <&gpio0>;
-+		interrupts = <RK_PA3 IRQ_TYPE_LEVEL_LOW>;
-+		assigned-clocks = <&cru I2S1_MCLKOUT_TX>;
-+		assigned-clock-parents = <&cru CLK_I2S1_8CH_TX>;
-+		#clock-cells = <1>;
-+		clock-names = "mclk";
-+		clocks = <&cru I2S1_MCLKOUT_TX>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&pmic_int_l>, <&i2s1m0_mclk>;
-+		rockchip,system-power-controller;
-+		#sound-dai-cells = <0>;
-+		vcc1-supply = <&vcc3v3_sys>;
-+		vcc2-supply = <&vcc3v3_sys>;
-+		vcc3-supply = <&vcc3v3_sys>;
-+		vcc4-supply = <&vcc3v3_sys>;
-+		vcc5-supply = <&vcc3v3_sys>;
-+		vcc6-supply = <&vcc3v3_sys>;
-+		vcc7-supply = <&vcc3v3_sys>;
-+		vcc8-supply = <&vcc3v3_sys>;
-+		vcc9-supply = <&vcc3v3_sys>;
-+		wakeup-source;
-+
-+		regulators {
-+			vdd_logic: DCDC_REG1 {
-+				regulator-name = "vdd_logic";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-init-microvolt = <900000>;
-+				regulator-initial-mode = <0x2>;
-+				regulator-min-microvolt = <500000>;
-+				regulator-max-microvolt = <1350000>;
-+				regulator-ramp-delay = <6001>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdd_gpu: DCDC_REG2 {
-+				regulator-name = "vdd_gpu";
-+				regulator-always-on;
-+				regulator-init-microvolt = <900000>;
-+				regulator-initial-mode = <0x2>;
-+				regulator-min-microvolt = <500000>;
-+				regulator-max-microvolt = <1350000>;
-+				regulator-ramp-delay = <6001>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vcc_ddr: DCDC_REG3 {
-+				regulator-name = "vcc_ddr";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-initial-mode = <0x2>;
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+				};
-+			};
-+
-+			vdd_npu: DCDC_REG4 {
-+				regulator-name = "vdd_npu";
-+				regulator-init-microvolt = <900000>;
-+				regulator-initial-mode = <0x2>;
-+				regulator-min-microvolt = <500000>;
-+				regulator-max-microvolt = <1350000>;
-+				regulator-ramp-delay = <6001>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vcc_1v8: DCDC_REG5 {
-+				regulator-name = "vcc_1v8";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdda0v9_image: LDO_REG1 {
-+				regulator-name = "vdda0v9_image";
-+				regulator-always-on;
-+				regulator-min-microvolt = <900000>;
-+				regulator-max-microvolt = <900000>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdda_0v9: LDO_REG2 {
-+				regulator-name = "vdda_0v9";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <900000>;
-+				regulator-max-microvolt = <900000>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdda0v9_pmu: LDO_REG3 {
-+				regulator-name = "vdda0v9_pmu";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <900000>;
-+				regulator-max-microvolt = <900000>;
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <900000>;
-+				};
-+			};
-+
-+			vccio_acodec: LDO_REG4 {
-+				regulator-name = "vccio_acodec";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <3300000>;
-+				regulator-max-microvolt = <3300000>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vccio_sd: LDO_REG5 {
-+				regulator-name = "vccio_sd";
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <3300000>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vcc3v3_pmu: LDO_REG6 {
-+				regulator-name = "vcc3v3_pmu";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <3300000>;
-+				regulator-max-microvolt = <3300000>;
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <3300000>;
-+				};
-+			};
-+
-+			vcca_1v8: LDO_REG7 {
-+				regulator-name = "vcca_1v8";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vcca1v8_pmu: LDO_REG8 {
-+				regulator-name = "vcca1v8_pmu";
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <1800000>;
-+				};
-+			};
-+
-+			vcca1v8_image: LDO_REG9 {
-+				regulator-name = "vcca1v8_image";
-+				regulator-always-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vcc_3v3: SWITCH_REG1 {
-+				regulator-name = "vcc_3v3";
-+				regulator-always-on;
-+				regulator-boot-on;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vcc3v3_sd: SWITCH_REG2 {
-+				regulator-name = "vcc3v3_sd";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&i2s0_8ch {
-+	status = "okay";
-+};
-+
-+&i2s1_8ch {
-+	rockchip,trcm-sync-tx-only;
-+	status = "okay";
-+};
-+
-+&mdio1 {
-+	rgmii_phy1: ethernet-phy@0 {
-+		compatible = "ethernet-phy-ieee802.3-c22";
-+		reg = <0x0>;
-+	};
-+};
-+
-+&pcie2x1 {
-+	pinctrl-0 = <&pcie20m2_pins>;
-+	reset-gpios = <&gpio1 RK_PB2 GPIO_ACTIVE_HIGH>;
-+	status = "okay";
-+	vpcie3v3-supply = <&pcie20_3v3>;
-+};
-+
-+&pinctrl {
-+	leds {
-+		led_power_pin: led-power-pin {
-+			rockchip,pins = <0 RK_PC6 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+		led_work_pin: led-work-pin {
-+			rockchip,pins = <0 RK_PB7 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+
-+	pcie {
-+		vcc3v3_pcie20_en_pin: vcc3v3-pcie20-en-pin {
-+			rockchip,pins = <2 RK_PC2 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+
-+	pmic {
-+		pmic_int_l: pmic-int-l {
-+			rockchip,pins = <0 RK_PA3 RK_FUNC_GPIO &pcfg_pull_up>;
-+		};
-+	};
-+
-+	usb {
-+		vcc5v0_usb_host_en_pin: vcc5v0-usb-host-en-pin {
-+			rockchip,pins = <0 RK_PA5 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+		vcc5v0_usb_otg_en_pin: vcc5v0-usb-dr-en-pin {
-+			rockchip,pins = <0 RK_PA6 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+};
-+
-+&pmu_io_domains {
-+	pmuio1-supply = <&vcc3v3_pmu>;
-+	pmuio2-supply = <&vcc3v3_pmu>;
-+	vccio1-supply = <&vccio_acodec>;
-+	vccio2-supply = <&vcc_1v8>;
-+	vccio3-supply = <&vccio_sd>;
-+	vccio4-supply = <&vcc_3v3>;
-+	vccio5-supply = <&vcc_3v3>;
-+	vccio6-supply = <&vcc_3v3>;
-+	vccio7-supply = <&vcc_3v3>;
-+	status = "okay";
-+};
-+
-+&saradc {
-+	vref-supply = <&vcca_1v8>;
-+	status = "okay";
-+};
-+
-+&sdhci {
-+	bus-width = <8>;
-+	max-frequency = <200000000>;
-+	non-removable;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe &emmc_rstnout>;
-+	vmmc-supply = <&vcc_3v3>;
-+	vqmmc-supply = <&vcc_1v8>;
-+	status = "okay";
-+};
-+
-+&sdmmc0 {
-+	bus-width = <4>;
-+	cap-sd-highspeed;
-+	cd-gpios = <&gpio0 RK_PA4 GPIO_ACTIVE_LOW>;
-+	disable-wp;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&sdmmc0_bus4 &sdmmc0_clk &sdmmc0_cmd &sdmmc0_det>;
-+	sd-uhs-sdr50;
-+	vmmc-supply = <&vcc3v3_sd>;
-+	vqmmc-supply = <&vccio_sd>;
-+	status = "okay";
-+};
-+
-+&tsadc {
-+	rockchip,hw-tshut-mode = <1>;
-+	rockchip,hw-tshut-polarity = <0>;
-+	status = "okay";
-+};
-+
-+&uart2 {
-+	status = "okay";
-+};
-+
-+&usb_host0_ehci {
-+	status = "okay";
-+};
-+
-+&usb_host0_ohci {
-+	status = "okay";
-+};
-+
-+&usb_host0_xhci {
-+	dr_mode = "otg";
-+	status = "okay";
-+};
-+
-+&usb_host1_ehci {
-+	status = "okay";
-+};
-+
-+&usb_host1_ohci {
-+	status = "okay";
-+};
-+
-+&usb_host1_xhci {
-+	status = "okay";
-+};
-+
-+&usb2phy0 {
-+	status = "okay";
-+};
-+
-+&usb2phy0_host {
-+	phy-supply = <&vcc5v0_usb_host>;
-+	status = "okay";
-+};
-+
-+&usb2phy0_otg {
-+	phy-supply = <&vcc5v0_usb_otg>;
-+	status = "okay";
-+};
-+
-+&usb2phy1 {
-+	status = "okay";
-+};
-+
-+&usb2phy1_host {
-+	phy-supply = <&vcc5v0_usb_host>;
-+	status = "okay";
-+};
-+
-+&usb2phy1_otg {
-+	phy-supply = <&vcc5v0_usb_host>;
-+	status = "okay";
-+};
-+
-+&vop {
-+	assigned-clocks = <&cru DCLK_VOP0>, <&cru DCLK_VOP1>;
-+	assigned-clock-parents = <&pmucru PLL_HPLL>, <&cru PLL_VPLL>;
-+	status = "okay";
-+};
-+
-+&vop_mmu {
-+	status = "okay";
-+};
-+
-+&vp0 {
-+	vp0_out_hdmi: endpoint@ROCKCHIP_VOP2_EP_HDMI0 {
-+		reg = <ROCKCHIP_VOP2_EP_HDMI0>;
-+		remote-endpoint = <&hdmi_in_vp0>;
-+	};
-+};
-diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
-index baa51349f4b..2f03b983ee5 100644
---- a/arch/arm/mach-rockchip/rk3568/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3568/Kconfig
-@@ -22,6 +22,11 @@ config TARGET_ODROID_M1_RK3568
- 	help
- 	  Hardkernel ODROID-M1 single board computer with a RK3568B2 SoC.
- 
-+config TARGET_ODROID_M1S_RK3566
-+	bool "ODROID-M1S"
-+	help
-+	  Hardkernel ODROID-M1S single board computer with a RK3566 SoC.
-+
- config TARGET_QUARTZ64_RK3566
- 	bool "Pine64 Quartz64"
- 	help
-@@ -44,6 +49,7 @@ config SYS_MALLOC_F_LEN
- source "board/rockchip/evb_rk3568/Kconfig"
- source "board/anbernic/rgxx3_rk3566/Kconfig"
- source "board/hardkernel/odroid_m1/Kconfig"
-+source "board/hardkernel/odroid_m1s/Kconfig"
- source "board/pine64/quartz64_rk3566/Kconfig"
- 
- endif
-diff --git a/board/hardkernel/odroid_m1s/Kconfig b/board/hardkernel/odroid_m1s/Kconfig
-new file mode 100644
-index 00000000000..0acea61dac4
---- /dev/null
-+++ b/board/hardkernel/odroid_m1s/Kconfig
-@@ -0,0 +1,15 @@
-+if TARGET_ODROID_M1S_RK3566
-+
-+config SYS_BOARD
-+	default "odroid_m1s"
-+
-+config SYS_VENDOR
-+	default "hardkernel"
-+
-+config SYS_CONFIG_NAME
-+	default "odroid_m1s"
-+
-+config BOARD_SPECIFIC_OPTIONS # dummy
-+	def_bool y
-+
-+endif
-diff --git a/board/hardkernel/odroid_m1s/MAINTAINERS b/board/hardkernel/odroid_m1s/MAINTAINERS
-new file mode 100644
-index 00000000000..20fc277ccc6
---- /dev/null
-+++ b/board/hardkernel/odroid_m1s/MAINTAINERS
-@@ -0,0 +1,9 @@
-+ODROID-M1S
-+M:	Dongjin Kim <tobetter@gmail.com>
-+S:	Maintained
-+F:	arch/arm/dts/rk3566-odroid-m1s-u-boot.dtsi
-+F:	arch/arm/dts/rk3566-odroid-m1s.dts
-+F:	board/hardkernel/odroid_m1s/
-+F:	board/hardkernel/odroid_m1s/board.c
-+F:	configs/odroid-m1s-rk3566_defconfig
-+F:	include/configs/odroid_m1s.h
-diff --git a/board/hardkernel/odroid_m1s/Makefile b/board/hardkernel/odroid_m1s/Makefile
-new file mode 100644
-index 00000000000..6ca49c49b71
---- /dev/null
-+++ b/board/hardkernel/odroid_m1s/Makefile
-@@ -0,0 +1,7 @@
-+#
-+# Copyright (c) 2024 Hardkernel Co,. Ltd
-+#
-+# SPDX-License-Identifier:     GPL-2.0+
-+#
-+
-+obj-y	+= board.o
-diff --git a/board/hardkernel/odroid_m1s/board.c b/board/hardkernel/odroid_m1s/board.c
-new file mode 100644
-index 00000000000..de7b160a51a
---- /dev/null
-+++ b/board/hardkernel/odroid_m1s/board.c
-@@ -0,0 +1,80 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * (C) Copyright 2024 Hardkernel Co., Ltd
-+ */
-+
-+#include <asm/unaligned.h>
-+#include <mmc.h>
-+#include <net.h>
-+#include <asm/arch-rockchip/misc.h>
-+
-+#ifdef CONFIG_MISC_INIT_R
-+
-+/* Read first block 512 bytes from the first BOOT partition of eMMC
-+ * that stores device identifcation sting in UUID type 1, this string
-+ * is written in factory to give device seranl number and MAC address.
-+ */
-+static int odroid_setup_macaddr(void)
-+{
-+	struct mmc *mmc;
-+	struct blk_desc *desc;
-+	unsigned long mac_addr;
-+	unsigned long count;
-+	int ret;
-+	u8 buf[512];
-+
-+	mmc = find_mmc_device(0);
-+	if (!mmc)
-+		return -ENODEV;
-+
-+	desc = mmc_get_blk_desc(mmc);
-+
-+	// Switch to the first BOOT partition
-+	ret = blk_select_hwpart_devnum(UCLASS_MMC, 0, 1);
-+	if (ret)
-+		return -EIO;
-+
-+	count = blk_dread(desc, 0, 1, (void *)buf);
-+
-+	// Switch back to USER partition
-+	ret = blk_dselect_hwpart(desc, 0);
-+	if (ret || count != 1)
-+		return -EIO;
-+
-+	*(char *)(buf + 36) = 0;
-+
-+	// Serial number
-+	env_set("serial#", (char *)buf);
-+
-+	// MAC address
-+	mac_addr = cpu_to_be64(simple_strtoul((char *)buf + 24, NULL, 16)) >> 16;
-+
-+	eth_env_set_enetaddr("ethaddr", (unsigned char *)&mac_addr);
-+	eth_env_set_enetaddr("eth1addr", (unsigned char *)&mac_addr);
-+
-+	return 0;
-+}
-+
-+int misc_init_r(void)
-+{
-+	const u32 cpuid_offset = CFG_CPUID_OFFSET;
-+	const u32 cpuid_length = 0x10;
-+	u8 cpuid[cpuid_length];
-+	int ret;
-+
-+	ret = odroid_setup_macaddr();
-+	if (ret) {
-+		ret = rockchip_setup_macaddr();
-+		if (ret)
-+			return ret;
-+	}
-+
-+	ret = rockchip_cpuid_from_efuse(cpuid_offset, cpuid_length, cpuid);
-+	if (ret)
-+		return ret;
-+
-+	ret = rockchip_cpuid_set(cpuid, cpuid_length);
-+
-+	return ret;
-+}
-+#endif
-diff --git a/configs/odroid-m1s-rk3566_defconfig b/configs/odroid-m1s-rk3566_defconfig
-new file mode 100644
-index 00000000000..d70a10dc080
---- /dev/null
-+++ b/configs/odroid-m1s-rk3566_defconfig
-@@ -0,0 +1,109 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_TEXT_BASE=0x00a00000
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
-+CONFIG_SF_DEFAULT_SPEED=24000000
-+CONFIG_SF_DEFAULT_MODE=0x1000
-+CONFIG_DEFAULT_DEVICE_TREE="rk3566-odroid-m1s"
-+CONFIG_ROCKCHIP_RK3568=y
-+CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
-+CONFIG_ROCKCHIP_SPI_IMAGE=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_STACK_R_ADDR=0x600000
-+CONFIG_TARGET_ODROID_M1S_RK3566=y
-+CONFIG_SPL_STACK=0x400000
-+CONFIG_DEBUG_UART_BASE=0xFE660000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_SPL_SPI_FLASH_SUPPORT=y
-+CONFIG_SPL_SPI=y
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_AHCI=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-odroid-m1s.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_PAD_TO=0x7f8000
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_START_ADDR=0x4000000
-+CONFIG_SPL_BSS_MAX_SIZE=0x4000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_STACK_R=y
-+CONFIG_SPL_SPI_LOAD=y
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0x100000
-+CONFIG_SPL_ATF=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_USB=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_INI=y
-+CONFIG_CMD_PMIC=y
-+CONFIG_CMD_REGULATOR=y
-+CONFIG_CMD_CRAMFS=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_AHCI_PCI=y
-+CONFIG_DWC_AHCI=y
-+CONFIG_SPL_CLK=y
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_SF_DEFAULT_BUS=4
-+CONFIG_PHY_REALTEK=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_DW_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_PHY_ROCKCHIP_PCIE=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_RK8XX=y
-+CONFIG_REGULATOR_RK8XX=y
-+CONFIG_PWM_ROCKCHIP=y
-+CONFIG_SPL_RAM=y
-+CONFIG_SCSI=y
-+CONFIG_DM_SCSI=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_SYSRESET=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_FS_CRAMFS=y
-+CONFIG_ERRNO_STR=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x0800
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 18d0b6f0891..3ce9966fc13 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -93,6 +93,7 @@ List of mainline supported Rockchip boards:
- 
- * rk3566
-      - Anbernic RGxx3 (anbernic-rgxx3-rk3566)
-+     - Hardkernel ODROID-M1S (odroid-m1s-rk3566)
-      - Pine64 Quartz64-A Board (quartz64-a-rk3566)
-      - Pine64 Quartz64-B Board (quartz64-b-rk3566)
-      - Pine64 SOQuartz on Blade (soquartz-blade-rk3566)
-diff --git a/include/configs/odroid_m1s.h b/include/configs/odroid_m1s.h
-new file mode 100644
-index 00000000000..b2718613886
---- /dev/null
-+++ b/include/configs/odroid_m1s.h
-@@ -0,0 +1,12 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+
-+#ifndef __ODROID_M1S_H
-+#define __ODROID_M1S_H
-+
-+#include <configs/rk3568_common.h>
-+
-+#define ROCKCHIP_DEVICE_SETTINGS \
-+		"stdout=serial\0" \
-+		"stderr=serial\0"
-+
-+#endif
--- 
-2.34.1
+>
+> >> Would this require syncing in -rc versions of Linux DTs to get the
+> >> latest fixes in ?
+> >
+> > Syncing -rc versions makes U-Boot more prone to DT ABI breakages. So
+> > its a chicken and egg problem as per your comments below. However, we
+> > can revisit our syncing strategy based on how the current one pans
+> > out.
+> >
+> >>
+> >>>> Assume that there is some large breaking change in Linux 6.(n+1),
+> >>>> something which would be problematic for specific U-Boot platform
+> >>>> (e.g. i.MX) or would require a lot of work to sort out, will there be
+> >>>> a way to temporarily pin DTs for specific platform to older DT version
+> >>>> until that is resolved (e.g. pin to 6.n) ?
+> >>>
+> >>> (Upstream) devicetree has to be forwards and backwards compatible, were
+> >>> such a breaking change to get merged without prior discussion with DT
+> >>> users (i.e. U-Boot) then I think the correct course of action would be
+> >>> to revert it.
+> >>
+> >> Not really, this could be a perfectly valid change, and would work for
+> >> Linux just fine, it might simply be pulling in something which is not
+> >> supported by U-Boot just yet and therefore syncing the DTs into U-Boot
+> >> would break U-Boot on that platform . Using older version of DTs for a
+> >> platform could work as a stopgap measure until the functionality is
+> >> implemented. Is this possible ?
+> >
+> > For this particular reason we want to pull once during beginning on
+> > U-Boot next window and allow sufficient time for platform maintainers
+> > to adapt to it. However, OF_UPSTREAM=n can be an alternative for a
+> > stopgap solution.
+>
+> That pull would break other peoples platforms. It would be no different
+> than adding broken patch into the code base.
 
+The platforms which get converted to OF_UPSTREAM=y are the ones which
+would be compliant with upstream DT bindings. So any DT ABI change
+among major Linux .0 releases would be the reason for that breakage.
+And we are happy to accept a revert for that change and feed that
+information back to Linux DT bindings maintainers.
+
+Also as above, are you aware of any past DT ABI breakages for U-Boot
+since people have already been doing DT syncing from Linux manually.
+This series allows to reduce that pain and try to bring DT bindings
+compliance in U-Boot.
+
+> What I think would be an
+> option is that there is a pull (as in patch) and people should be able
+> to test it before it is applied.
+
+We can't modify that pull but rather accept changes on top of it. IMO,
+it will get widely tested in U-Boot next branch.
+
+> If one platform is severely affected
+> while other platforms are fine, the one platform should be able to use
+> the current working version of DTs, while the other platforms should not
+> be blocked by it. Is that what OF_UPSTREAM=n does ?
+>
+> As far as I understand OF_UPSTREAM=n, it would require re-importing DTs
+> into the codebase ?
+
+No you don't have to re-import everything but rather import a board
+DTS file to the arch/ folder and reuse all the DT includes from
+dts/upstream subtree as per this [1] patch.
+
+[1] https://lore.kernel.org/all/20240110103547.719757-5-sumit.garg@linaro.org/
+
+>
+> >>> On a tangential note: as I understand it, DTs built from dt-rebasing are
+> >>> still subject to U-Boot customisations via the "-u-boot.dtsi" include
+> >>> files, this allows for dealing with incompatibilities due to missing
+> >>> features in U-Boot.
+> >>
+> >> Would it be possible to auto-update those -u-boot.dtsi files during
+> >> sync, to minimize the resulting DT blob delta before/after update, and
+> >> thus also minimize the likelihood of causing breakage ?
+> >
+> > In the long run the DT community would like to avoid any DT ABI
+> > breakages at all. Rob is already working on a DT ABI check tool and
+> > seeking inputs for what could be an ABI break [1] from U-Boot
+> > perspective too. Feel free to provide your inputs.
+> >
+> > Along with that we wouldn't need -u-boot.dtsi files once we make
+> > U-Boot fully compliant with DT bindings. Until that point U-Boot
+> > platform maintainers have to keep their -u-boot.dtsi files updated
+> > corresponding to latest DT rebasing releases.
+>
+> I think upstreaming the bootph* properties would still take a while, but
+> is not relevant to the aforementioned question.
+>
+> Assume there is a sync, would the current in-tree -u-boot.dtsi files get
+> updated to work correctly with the newly synced DTs ?
+
+As long as they contain nodes/properties (eg. bootph* etc.) which are
+compliant with upstream DT bindings then yes they should work
+correctly with the newly synced DTs.
+
+-Sumit
