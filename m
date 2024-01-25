@@ -4,82 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2262AC47258
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 22:37:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C3B5C47DDF
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 23:19:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16ACD874CC;
-	Thu, 25 Jan 2024 23:37:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1AB2587447;
+	Fri, 26 Jan 2024 00:19:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TWc3jzXC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="diu5kzz/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 605BC865F5; Thu, 25 Jan 2024 23:37:20 +0100 (CET)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
+ id 123348784D; Fri, 26 Jan 2024 00:19:41 +0100 (CET)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 282A6874CC
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 23:37:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D041187447
+ for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 00:19:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-5d731b1a038so519551a12.2
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 14:37:17 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-db3a09e96daso6499569276.3
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 15:19:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706222235; x=1706827035; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=97oYQzz+b2Ws96t04BlzUrAHH6TUGeYY0Q7PgBN0kXw=;
- b=TWc3jzXCvm5yeOWsiQDxi/GfZ+yLPNeZb0Yz15mSdk75K8rLLPdlvXhK+DNYebTE7S
- JpUe+7RY5EXseliFP/EW542QK5CSWgX1mdHRF72zNR+MeIRiXrBHKmhb92+voVFLdlTb
- JvUp799JsJc7sAOoYKiyVTs3lkWIsS2Ee11gXuAEGRtSu0xe1DDLdq9B7aRnKlmOtFYI
- +dZxIjxv4g9QOFoXvRM6pC3LPNeELUblI7KmdZoab92U9DCw6hkL7j+CWDJfF4bDvrSz
- OgDlGnZtCFCLmsRZE+VuaUoRTliKSeqWcsUbkkMfuCaSmopmu98ETvoORcio48vCe2IW
- qJsg==
+ d=konsulko.com; s=google; t=1706224776; x=1706829576; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=HyB3+MFRc+CXevMRbIV5T1heUI7kjAxFRQH0VJ2CWW0=;
+ b=diu5kzz/EzpdI87eXGB1QjYHCKHWfVCODRsY7CzS3LHHzjhAKTKJqUiBZjEbjqkItF
+ II8hz56TGDNLXFIFHLwnV0FXZjLbvEtzyZSvD3coAlqlj2gGHP1DgLOSaJLOlE4ElyY4
+ 639J6BTj8md+662wddNLgVwQz3sq3rOUl58M8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706222235; x=1706827035;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=97oYQzz+b2Ws96t04BlzUrAHH6TUGeYY0Q7PgBN0kXw=;
- b=Q/yhOepcBX/2bpGz+cICpvDXZpDdaQsO4vD9DA67GuvxZWghE31mQfIo6Da5JUbYW5
- dF031WrWaeeF1CsL5Ot5h8zLUyuyxN6KzHy46dqpcrRsfAXVED4MKxefTKV6ETQybRNb
- Dt7Rxqc9OXvds/reo783vVDYfqaOAEMn2SKzjMdYj1AhZ0al+0ze0+J+79R+ej3GNvZ8
- vI0qrnJ7FdDtnvpQ5kZ7C3o7qN8jogEUK0G/9uWog6xQpF/0YLLEU6lMGFEQkCRNLNIY
- 2n3UJHPVCdRP00qP6IF7aLcbI2d8GKwewpEBcmwtpYtS2PTRkqXWqijgqzAa5l5ZSnqR
- UGDg==
-X-Gm-Message-State: AOJu0YyVOX4S8oD/DrzCq2FCUWRgaQzva0Gnk18QPP25FI6/jZdAmEgT
- BSuwLyh4aFHE0tFIDkb8KkNhtWx2FVTEsRsF7lw4Wzpy40DRFE8WeF4JQpsAX08T6C6bYDdsWCl
- 72uVe/3lgkDet0MhSRGqRjc1c5+Y=
-X-Google-Smtp-Source: AGHT+IH1Mv6eZkDgJBisBHHcY1pm2MgdfUJZ4gUHCNosbEy6EuxKDxNdA8TeT0hdfM+0FR1KEcZm8UaqJ1nCQ1ppvBE=
-X-Received: by 2002:a05:6a20:7aa7:b0:19c:5c71:8221 with SMTP id
- u39-20020a056a207aa700b0019c5c718221mr322634pzh.76.1706222235203; Thu, 25 Jan
- 2024 14:37:15 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706224776; x=1706829576;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HyB3+MFRc+CXevMRbIV5T1heUI7kjAxFRQH0VJ2CWW0=;
+ b=r0s76UmC9kuGJDIHAaX8xqa3eKD/DTiYMMY550UVJlgSOe7YOrJrFBwhPTOk6K8zxv
+ UJIsqDr77FmUQ5TpmG1VGmDPDvWY39WFy4JawfMAOwhIs5MUoaRCeAfE/7/nb+tJBA1K
+ zFWVZVcoi36JO8oHHwgmL5HjoViW/WKY6BUf+8d3L61ihFulv4yqCy2iSbayVkMCaLT5
+ P+uZV6LgjTI8MVOahM/SGLKPDwmdIdwtBKN04c5KQgY25fuszRC+/B+9l4usSIMfm8VJ
+ vFHUM4kWB3sT6c5sxXfyH7IhosHw/3ntyVCP5cM/ZwW5mO1oUO8+R9fq5LP6oDRuBeKH
+ XY/Q==
+X-Gm-Message-State: AOJu0YxW23zKHcV+p5dr0GNcX3kBnFIWquRzNvnaI+cSbah2vXjgvImR
+ eMdO3qfJLbei2+o7BtPiQyfphn8d4Hh7ZzMolpjrx6pH14yqTG3EBylD6dia4H0=
+X-Google-Smtp-Source: AGHT+IFnV1Re2aoyI8LY5T3+HgIuxcnWMCo08BR7J6XzzRrMXTwjjT16cbm4q79QNSBSU1xWhFJu9Q==
+X-Received: by 2002:a25:a108:0:b0:dc2:2666:efc6 with SMTP id
+ z8-20020a25a108000000b00dc22666efc6mr498806ybh.11.1706224776488; 
+ Thu, 25 Jan 2024 15:19:36 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ s2-20020a25aa02000000b00dbf3dbedd69sm3785941ybi.53.2024.01.25.15.19.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 Jan 2024 15:19:36 -0800 (PST)
+Date: Thu, 25 Jan 2024 18:19:33 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marex@denx.de>
+Cc: Sumit Garg <sumit.garg@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de,
+ sjg@chromium.org, robh+dt@kernel.org,
+ krzysztof.kozlowski+dt@linaro.org, conor@kernel.org,
+ neil.armstrong@linaro.org, ff@shokubai.tech,
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
+ pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
+ maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de,
+ michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk,
+ peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com,
+ mibodhi@gmail.com, bb@ti.com, mark.kettenis@xs4all.nl
+Subject: Re: [PATCH v4 00/11] An effort to bring DT bindings compliance
+ within U-Boot
+Message-ID: <20240125231933.GY3652023@bill-the-cat>
+References: <20240110103547.719757-1-sumit.garg@linaro.org>
+ <82d509de-3d47-4cc2-8217-c38dc78fad28@denx.de>
+ <7b4ff8e8-2f21-4d07-9848-fb0d5652819e@linaro.org>
+ <4d8aede8-5ea8-45a4-87fe-d555a025ef8e@denx.de>
+ <CAFA6WYN1tFs1id7UxTwLEyp69zx2BPUP7bffVZn80FKPLx2yJw@mail.gmail.com>
+ <48125705-e78e-438f-90ac-2816432cd747@denx.de>
+ <CAFA6WYMuerS5YTsquGvc+OHr+0a3JXrM4AQ_ReV4tPhvxv9H0w@mail.gmail.com>
+ <20240125150400.GM3652023@bill-the-cat>
+ <79439bfb-5ae0-4492-a298-788fb46eafa3@denx.de>
 MIME-Version: 1.0
-References: <20240124021516.280026-1-Mr.Bossman075@gmail.com>
-In-Reply-To: <20240124021516.280026-1-Mr.Bossman075@gmail.com>
-From: Adam Ford <aford173@gmail.com>
-Date: Thu, 25 Jan 2024 16:37:04 -0600
-Message-ID: <CAHCN7xKcoQixHvZbXos7kiBrZnMD12-q1UfDze+1Y220g_Oq8w@mail.gmail.com>
-Subject: Re: [PATCH v1] tools: mkimage: Add support for i.MXRT FlexSPI Header
-To: Jesse Taube <mr.bossman075@gmail.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Giulio Benetti <giulio.benetti@benettiengineering.com>, 
- Mamta Shukla <mamta.shukla@leica-geosystems.com>, 
- Thomas Haemmerle <thomas.haemmerle@leica-geosystems.com>,
- Fabio Estevam <festevam@denx.de>, 
- Simon Glass <sjg@chromium.org>, Jassi Brar <jaswinder.singh@linaro.org>, 
- Paul-Erwan Rio <paulerwan.rio@gmail.com>, Alexander Dahl <ada@thorsis.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Masami Hiramatsu <masami.hiramatsu@linaro.org>, 
- Mikhail Ilin <ilin.mikhail.ol@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="hPfmvEEpyR1Haj/t"
+Content-Disposition: inline
+In-Reply-To: <79439bfb-5ae0-4492-a298-788fb46eafa3@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,302 +110,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jan 23, 2024 at 8:15=E2=80=AFPM Jesse Taube <mr.bossman075@gmail.co=
-m> wrote:
->
-> Modify imx8m Flex SPI Configuration Block to work with imxrt.
-> Add more Flex SPI configuration options to Kconfig.
->
-> Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
 
-I had to go back in time, because it appears the current version of
-'master' doesn't fully boot the FSPI, but when I applied this patch
-against a working version, it still worked when I was done.  I'll try
-to git bisect the issue when I have time, but for now:
+--hPfmvEEpyR1Haj/t
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Tested-by:  Adam Ford <aford173@gmail.com> #imx8mn-beacon
+On Thu, Jan 25, 2024 at 05:38:23PM +0100, Marek Vasut wrote:
+> On 1/25/24 16:04, Tom Rini wrote:
+> > On Thu, Jan 25, 2024 at 12:54:22PM +0530, Sumit Garg wrote:
+> >=20
+> > [snip]
+> > > But at this point we have to move away from apprehensions about DT ABI
+> > > breakages and provide real examples of the DT ABI breakages in the
+> > > past. Are you aware of any DT ABI breaking change backported to Linux
+> > > stable releases? This is the sort of information we would like to make
+> > > DT bindings maintainers aware about.
+> >=20
+> > Well, how far back are we going? There was a serial related one, but it
+> > was probably closer than not to 10 years ago and lessons have been
+> > learned from it already.
+> >=20
+> > The real breakage comes in the form of (from the Linux kernel):
+> > commit 37685f6a63eeca2135d1f704e7638409a071b1f6
+> > Author: Peter Ujfalusi <peter.ujfalusi@ti.com>
+> > Date:   Tue Feb 19 08:46:33 2019 -0800
+> >=20
+> >      ARM: dts: am335x-evm: Fix PHY mode for ethernet
+> >=20
+> >      The PHY must add both tx and rx delay and not only on the tx clock.
+> >      The board uses AR8031_AL1A PHY where the rx delay is enabled by de=
+fault,
+> >      the tx dealy is disabled.
+> >=20
+> >      The reason why rgmii-txid worked because the rx delay was not disa=
+bled by
+> >      the driver so essentially we ended up with rgmii-id PHY mode.
+> >=20
+> >      Signed-off-by: Peter Ujfalusi <peter.ujfalusi@ti.com>
+> >      Signed-off-by: Tony Lindgren <tony@atomide.com>
+> >=20
+> > And this is of the style "the DTS was wrong before so we can break it".
+> > This is the specific example (as the board is in my lab) that comes most
+> > clearly to mind but there have been similar examples in 2022/2023.
+> >=20
+> > The other just as painful examples I think may be where Marek is
+> > concerned and it's around nodes being renamed for correctness. We've had
+> > a number of cases where a - turned to _ (or vice versa?) and whoops,
+> > platform stops booting. Down the line, tooling would catch that, and
+> > it's a problem of not being able to use better tooling until we have the
+> > updates that might break the boards that need the better tooling.
+> >=20
+> > And really this gets to the crux of the problem, how much testing do we
+> > insist happens prior to a re-sync being merged? Do we want to go with
+> > the whole of the dts files are re-synced, or do we leave it per vendor?
+>=20
+> I'd much prefer to leave it per vendor, with the recommendation to use
+> synced DTs. Eventually things will stabilize and vendors will start
+> switching over.
 
-adam
-> ---
->  include/imximage.h | 42 +++++++++++++------------
->  tools/Kconfig      | 21 +++++++++++++
->  tools/imx8mimage.c | 41 ++++++++++++------------
->  tools/imximage.c   | 77 ++++++++++++++++++++++++++++++++++++++++++++++
->  4 files changed, 143 insertions(+), 38 deletions(-)
->
-> diff --git a/include/imximage.h b/include/imximage.h
-> index c1ecc0b7cb..a951699d0a 100644
-> --- a/include/imximage.h
-> +++ b/include/imximage.h
-> @@ -210,33 +210,37 @@ typedef struct {
->         uint8_t datasetup;
->         uint8_t coladdrwidth;
->         uint8_t devcfgenable;
-> -       uint8_t reserved_2[3];
-> +       uint8_t deviceModeType;
-> +       uint16_t waitTimeCfgCommands;
->         uint8_t devmodeseq[4];
-> -       uint8_t devmodearg[4];
-> +       uint32_t devmodearg;
->         uint8_t cmd_enable;
-> -       uint8_t reserved_3[3];
-> +       uint8_t configModeType[3];
->         uint8_t cmd_seq[16] ;
->         uint8_t cmd_arg[16];
-> -       uint8_t controllermisc[4];
-> +       uint32_t controllermisc;
->         uint8_t dev_type;
->         uint8_t sflash_pad;
->         uint8_t serial_clk;
-> -       uint8_t lut_custom ;
-> -       uint8_t reserved_4[8];
-> -       uint8_t sflashA1[4];
-> -       uint8_t sflashA2[4];
-> -       uint8_t sflashB1[4];
-> -       uint8_t sflashB2[4];
-> -       uint8_t cspadover[4];
-> -       uint8_t sclkpadover[4];
-> -       uint8_t datapadover[4];
-> -       uint8_t dqspadover[4];
-> -       uint8_t timeout[4];
-> -       uint8_t commandInt[4];
-> -       uint8_t datavalid[4];
-> -       uint8_t busyoffset[2];
-> -       uint8_t busybitpolarity[2];
-> +       uint8_t lut_custom;
-> +       uint8_t reserved_2[8];
-> +       uint32_t sflashA1;
-> +       uint32_t sflashA2;
-> +       uint32_t sflashB1;
-> +       uint32_t sflashB2;
-> +       uint32_t cspadover;
-> +       uint32_t sclkpadover;
-> +       uint32_t datapadover;
-> +       uint32_t dqspadover;
-> +       uint32_t timeout;
-> +       uint32_t commandInt;
-> +       uint16_t datavalid[2];
-> +       uint16_t busyoffset;
-> +       uint16_t busybitpolarity;
->         uint8_t lut[256];
-> +       uint8_t lutCustomSeq[48];
-> +       uint8_t reserved_3[16];
-> +
->  } __attribute__((packed)) fspi_conf;
->
->  typedef void (*set_dcd_val_t)(struct imx_header *imxhdr,
-> diff --git a/tools/Kconfig b/tools/Kconfig
-> index f01ed783e6..667807b331 100644
-> --- a/tools/Kconfig
-> +++ b/tools/Kconfig
-> @@ -148,6 +148,27 @@ config SERIAL_CLK_FREQUENCY
->           Chip specific frequency: other value 30MHz
->           1-30MHz  2-50MHz 3-60MHz 4-75MHz 5-80MHz 6-100MHz 7-133MHz 8-16=
-6MHz
->
-> +config FSPI_COL_ADDR_W
-> +       hex "Column Address With"
-> +       default 0x00
-> +       depends on FSPI_CONF_HEADER
-> +       help
-> +         Default 0. For HyperBus protocol, it is fixed to 3
-> +
-> +config FSPI_CONTROLLER_MISC
-> +       hex "FSPI miscellaneous control"
-> +       default 0x00000000
-> +       depends on FSPI_CONF_HEADER
-> +       help
-> +         Default 0. [0x40] Controller Misc Options
-> +
-> +config FSPI_FLASH_A1_SIZE
-> +       hex "Size in bytes of Flash A1"
-> +       default 0x10000000
-> +       depends on FSPI_CONF_HEADER
-> +       help
-> +         Size of Flash connected to A1 in bytes
-> +
->  config LUT_CUSTOM_SEQUENCE
->         hex "Enable Custom Look Up Table(LUT) Sequence"
->         default 0x00
-> diff --git a/tools/imx8mimage.c b/tools/imx8mimage.c
-> index 21075c2379..939f829a9f 100644
-> --- a/tools/imx8mimage.c
-> +++ b/tools/imx8mimage.c
-> @@ -426,36 +426,39 @@ static int generate_fspi_header (int ifd)
->         .read_sample =3D CONFIG_READ_CLK_SOURCE,
->         .datahold =3D  0x03,
->         .datasetup =3D 0x03,
-> -       .coladdrwidth =3D 0x00,
-> +       .coladdrwidth =3D CONFIG_FSPI_COL_ADDR_W,
->         .devcfgenable =3D 0x00,
-> -       .reserved_2 =3D {0x00, 0x00, 0x00},
-> +       .deviceModeType =3D 0x00,
-> +       .waitTimeCfgCommands =3D 0x0000,
->         .devmodeseq =3D  {0x00, 0x00, 0x00, 0x00},
-> -       .devmodearg =3D  {0x00, 0x00, 0x00, 0x00},
-> +       .devmodearg =3D  0x00000000,
->         .cmd_enable =3D  0x00,
-> -       .reserved_3 =3D {0x00},
-> +       .configModeType =3D {0x00},
->         .cmd_seq =3D {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0=
-0, 0x00,
->                                                         0x00, 0x00, 0x00,=
- 0x00, 0x00, 0x00},
->         .cmd_arg =3D {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0=
-0, 0x00,
->                                                         0x00, 0x00, 0x00,=
- 0x00, 0x00, 0x00},
-> -       .controllermisc =3D {0x00, 0x00, 0x00, 0x00},
-> +       .controllermisc =3D cpu_to_le32(CONFIG_FSPI_CONTROLLER_MISC),
->         .dev_type =3D CONFIG_DEVICE_TYPE,
->         .sflash_pad =3D CONFIG_FLASH_PAD_TYPE,
->         .serial_clk =3D CONFIG_SERIAL_CLK_FREQUENCY,
->         .lut_custom =3D CONFIG_LUT_CUSTOM_SEQUENCE,
-> -       .reserved_4 =3D {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
-> -       .sflashA1  =3D  {0x00, 0x00, 0x00, 0x10},
-> -       .sflashA2 =3D {0x00, 0x00, 0x00, 0x00},
-> -       .sflashB1 =3D {0x00, 0x00, 0x00, 0x00},
-> -       .sflashB2 =3D  {0x00, 0x00, 0x00, 0x00},
-> -       .cspadover =3D {0x00, 0x00, 0x00, 0x00},
-> -       .sclkpadover =3D {0x00, 0x00, 0x00, 0x00},
-> -       .datapadover =3D {0x00, 0x00, 0x00, 0x00},
-> -       .dqspadover =3D {0x00, 0x00, 0x00, 0x00},
-> -       .timeout =3D  {0x00, 0x00, 0x00, 0x00},
-> -       .commandInt =3D {0x00, 0x00, 0x00, 0x00},
-> -       .datavalid  =3D {0x00, 0x00, 0x00, 0x00},
-> -       .busyoffset =3D {0x00, 0x00},
-> -       .busybitpolarity =3D {0x00, 0x00},
-> +       .reserved_2 =3D {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
-> +       .sflashA1  =3D  cpu_to_le32(CONFIG_FSPI_FLASH_A1_SIZE),
-> +       .sflashA2 =3D 0x00000000,
-> +       .sflashB1 =3D 0x00000000,
-> +       .sflashB2 =3D 0x00000000,
-> +       .cspadover =3D 0x00000000,
-> +       .sclkpadover =3D 0x00000000,
-> +       .datapadover =3D 0x00000000,
-> +       .dqspadover =3D 0x00000000,
-> +       .timeout =3D  0x00000000,
-> +       .commandInt =3D 0x00000000,
-> +       .datavalid  =3D {0x0000, 0x0000},
-> +       .busyoffset =3D 0x0000,
-> +       .busybitpolarity =3D 0x0000,
-> +       .lutCustomSeq =3D {0x00},
-> +       .reserved_3 =3D {0x00}
->         };
->
->         for (val =3D strtok(lut_str, ","); val; val =3D strtok(NULL, ",")=
-) {
-> diff --git a/tools/imximage.c b/tools/imximage.c
-> index b3da1f244c..2df4c7dd49 100644
-> --- a/tools/imximage.c
-> +++ b/tools/imximage.c
-> @@ -908,6 +908,64 @@ int imximage_check_params(struct image_tool_params *=
-params)
->                 (params->xflag) || !(strlen(params->imagename));
->  }
->
-> +#ifdef CONFIG_FSPI_CONF_HEADER
-> +static void generate_fspi_header(int ifd)
-> +{
-> +       int i =3D 0;
-> +       char *val;
-> +       char lut_str[] =3D CONFIG_LUT_SEQUENCE;
-> +
-> +       fspi_conf fspi_conf_data =3D {
-> +       .tag =3D {0x46, 0x43, 0x46, 0x42},
-> +       .version =3D {0x00, 0x00, 0x01, 0x56},
-> +       .reserved_1 =3D {0x00, 0x00, 0x00, 0x00},
-> +       .read_sample =3D CONFIG_READ_CLK_SOURCE,
-> +       .datahold =3D  0x03,
-> +       .datasetup =3D 0x03,
-> +       .coladdrwidth =3D CONFIG_FSPI_COL_ADDR_W,
-> +       .devcfgenable =3D 0x00,
-> +       .deviceModeType =3D 0x00,
-> +       .waitTimeCfgCommands =3D 0x0000,
-> +       .devmodeseq =3D  {0x00, 0x00, 0x00, 0x00},
-> +       .devmodearg =3D  0x00000000,
-> +       .cmd_enable =3D  0x00,
-> +       .configModeType =3D {0x00},
-> +       .cmd_seq =3D {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0=
-0, 0x00,
-> +                                                       0x00, 0x00, 0x00,=
- 0x00, 0x00, 0x00},
-> +       .cmd_arg =3D {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0=
-0, 0x00,
-> +                                                       0x00, 0x00, 0x00,=
- 0x00, 0x00, 0x00},
-> +       .controllermisc =3D cpu_to_le32(CONFIG_FSPI_CONTROLLER_MISC),
-> +       .dev_type =3D CONFIG_DEVICE_TYPE,
-> +       .sflash_pad =3D CONFIG_FLASH_PAD_TYPE,
-> +       .serial_clk =3D CONFIG_SERIAL_CLK_FREQUENCY,
-> +       .lut_custom =3D CONFIG_LUT_CUSTOM_SEQUENCE,
-> +       .reserved_2 =3D {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
-> +       .sflashA1  =3D  cpu_to_le32(CONFIG_FSPI_FLASH_A1_SIZE),
-> +       .sflashA2 =3D 0x00000000,
-> +       .sflashB1 =3D 0x00000000,
-> +       .sflashB2 =3D 0x00000000,
-> +       .cspadover =3D 0x00000000,
-> +       .sclkpadover =3D 0x00000000,
-> +       .datapadover =3D 0x00000000,
-> +       .dqspadover =3D 0x00000000,
-> +       .timeout =3D  0x00000000,
-> +       .commandInt =3D 0x00000000,
-> +       .datavalid  =3D {0x0000, 0x0000},
-> +       .busyoffset =3D 0x0000,
-> +       .busybitpolarity =3D 0x0000,
-> +       .lutCustomSeq =3D {0x00},
-> +       .reserved_3 =3D {0x00}
-> +       };
-> +
-> +       for (val =3D strtok(lut_str, ","); val; val =3D strtok(NULL, ",")=
-)
-> +               fspi_conf_data.lut[i++] =3D strtoul(val, NULL, 16);
-> +
-> +       lseek(ifd, 0, SEEK_CUR);
-> +       if (write(ifd, &fspi_conf_data, sizeof(fspi_conf_data)) =3D=3D -1=
-)
-> +               exit(EXIT_FAILURE);
-> +}
-> +#endif
-> +
->  static int imximage_generate(struct image_tool_params *params,
->         struct image_type_params *tparams)
->  {
-> @@ -917,6 +975,11 @@ static int imximage_generate(struct image_tool_param=
-s *params,
->         char *datafile =3D params->datafile;
->         uint32_t pad_len, header_size;
->
-> +#ifdef CONFIG_FSPI_CONF_HEADER
-> +       int fspi_fd;
-> +       char *fspi;
-> +#endif
-> +
->         memset(&imximage_header, 0, sizeof(imximage_header));
->
->         /*
-> @@ -977,6 +1040,20 @@ static int imximage_generate(struct image_tool_para=
-ms *params,
->
->         pad_len =3D ROUND(sbuf.st_size, 4096) - sbuf.st_size;
->
-> +#ifdef CONFIG_FSPI_CONF_HEADER
-> +       fspi =3D CONFIG_FSPI_CONF_FILE;
-> +       fspi_fd =3D open(fspi, O_RDWR | O_CREAT, S_IRWXU);
-> +       if (fspi_fd < 0) {
-> +               fprintf(stderr, "Can't open %s: %s\n",
-> +                       fspi, strerror(errno));
-> +               exit(EXIT_FAILURE);
-> +       }
-> +
-> +       generate_fspi_header(fspi_fd);
-> +       close(fspi_fd);
-> +
-> +#endif
-> +
->         return pad_len;
->  }
->
-> --
-> 2.43.0
->
+To be clear, every SoC (or really, board) has to opt-in to OF_UPSTREAM
+to start with. With that, I see switching to OF_UPSTREAM meaning that
+there's a commitment to keeping up with dts change in upstream dts that
+might lead to issues within U-Boot. Do you still feel it would be better
+to have the re-sync _also_ be per custodian tree? That might be a bit
+harder to handle.
+
+--=20
+Tom
+
+--hPfmvEEpyR1Haj/t
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWy7H4ACgkQFHw5/5Y0
+tyx4rwv+PJflPEzRznmjHsZwbLApxsJmQl4z10hMGt+h2V8F9aZZyD4fCnLavImt
+cqccskA/sner+ZnQKVnPaKIL/p4GgWCWF4bkLyajEzYob9FjDaVA7LN+fMvuiLI9
+ZtjkPoLcFFVXTKCSBRApQBZF0yz2l59jS8ncviad3qHGWDo6fKdz5nH+D+eSwtFS
+v+QX0CwPoOacan3SdNERDcyRthuwETegrv9lvlpV26zDVSwsaWEyNP/qputwO/Gu
+yqO3iwBkT1WFj2f/rSOWB1h/oT0Opt4WpxnYwxp7pc+M1YbgFvoI2TlWVYN7KMTt
+FULLXAyNoJlsT6291HgqtNchxq234v/e6XrG+AswA2GOr1zwnfD4YwjJtMiojcYx
+oqNc0hVj1Mu7vjcOagWHlxGfYWxUFmeU51ZazOqq/DJ0Um0U+NOqNZUjT3QocHU4
+cak/+1x2PK6umgCnQ6Fzc7xG0lTycVYmmE6/Tn/lTT2Vjz9EwRjdKi30kTirHR8+
+y2SkFfFc
+=w+z7
+-----END PGP SIGNATURE-----
+
+--hPfmvEEpyR1Haj/t--
