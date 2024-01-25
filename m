@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65BF1C47422
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 15:55:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0EA5C48260
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 15:55:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C2BB87BAD;
-	Thu, 25 Jan 2024 16:55:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 95F7387BCE;
+	Thu, 25 Jan 2024 16:55:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ZqonJilU";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="bdtJCl2B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E060687B6C; Thu, 25 Jan 2024 16:55:03 +0100 (CET)
+ id 9793E879B5; Thu, 25 Jan 2024 16:55:04 +0100 (CET)
 Received: from smtp-relay-internal-1.canonical.com
  (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3631A877BC
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 16:55:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B56A87B8C
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 16:55:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71])
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id EC20840A19
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 15:54:53 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 57CE540A26
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 15:55:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1706198093;
- bh=v22VSEEYdOwT1U2meZe/9I9UPnZulk1qE928OtwyDFY=;
+ s=20210705; t=1706198100;
+ bh=j5bdO5KjFq2mPgFJkOMYbcGFWORCMWB2uT32Atl8NZI=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=ZqonJilUEvK1Ylyp7/jSHkdQhuJUkfKPx1IEKcvRJo4jc71tgJcMU3I4L5zx/BRt6
- 8QaaQYsIk2URot3+dMA3uTZRi0g6+uJpuQoC4Fmc7fBlcTQ8cqVIzZBxj1evTixW7T
- q3uJNj4noGIZ0ICEA5RS8yWgMewHJXd/75Vh3oNXfC3yb9mSvEAU1twkvEA4ceq7fc
- WvIlJp0+ZlfYqMwQoKeJdbiJLRvvUVQSNnQBaY+v5A6IZepPijYQUAt3dnl+iLHxjW
- kKz39O7J6RkAtZolRE3vyl5L+tKXWohnvLQiYi+bQaBvcUZSXmL/E6MrhnD8HZ7iLw
- jO8O0fyOCeSjA==
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-3395bc0ff5bso452935f8f.1
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 07:54:53 -0800 (PST)
+ b=bdtJCl2BojGXyGznpLyy/2Z2NTAM3orWAyZTZzQcM7Q38F0gHjEN90O8ojETsG9lX
+ HumxdQsAHS/96F+HsqAhl9Si/vOJoQtdYiVZPdALS0aQQHWJourAAtA16OqHvY74eX
+ d7K+PxLw3TVf8t/WYSevLnvt8Xodt8TjquLPPDZDbKvm+TD7a8b4EXi6no4pdjNHsc
+ sQUp8k7O4sYeHk9qsV9ahjAl3m4Y7Ud3Z/mv43PrmRLxXE9/fpjN6jzVm9nFuaUz+7
+ pnLDVqz1t7JsAtfYlcBAMgqeo3OiWcKXMwVhbufR/ilgcvjNzG83Bgn0dBva2CyBAS
+ ubNzrOpk8hdXg==
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-40ed389a4dbso3891025e9.2
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 07:55:00 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706198090; x=1706802890;
+ d=1e100.net; s=20230601; t=1706198094; x=1706802894;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=v22VSEEYdOwT1U2meZe/9I9UPnZulk1qE928OtwyDFY=;
- b=emce1QPMvB509rSN5OWbpiggiU9HHR2TLnWXiH6055Oszv/5uWYN5r6DEuZj6lSoFu
- jegd4D6oia3g7/YT0lpbAO5XmzcxKNlzkrrXIUFfB/L3igAA/OTwh5OKTuBAgbQPlYBF
- Ly8JajPdPk2OGJhf4jOXGQ8mdcDx0oQGYmeBxBsqM7FsO+A0YRrrwdk9tcMZTcr5jFtK
- kG8aQZDGnFR62xQzQ5wejOKoyHb325VL8OHpKwniTOzRJ2JoCoj6KSL/eOgSIlu8Bc2E
- IoHKybwCx9IO+1Q9WO+miohKB+uC58Rcd1eEJUQP/NTF9na16DFcPrmHMO+2T53DiEGD
- b/gw==
-X-Gm-Message-State: AOJu0YxYzD9JG0zwiLuIzJ7e2yPWdvp81BOay5CftmnOwgHHmGu0ykYM
- tXHrKvHqTfYd1riIKlvyLmUqPcPYkHpD8kMuOrqKOqYwUWbXppg0gagVkuAOS/sPauJrQE+1RHZ
- c07rufCXMPMfhsKnPPrvtADkAi3a9ypGRwYb2j6kDyB4/OndYO/Yl3aQjMzeSWPZCGKfbjDzDjc
- k=
-X-Received: by 2002:a5d:6288:0:b0:339:39c3:d284 with SMTP id
- k8-20020a5d6288000000b0033939c3d284mr1315wru.67.1706198090425; 
- Thu, 25 Jan 2024 07:54:50 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IG7oI1jAxnq3OMKBBqpFrr+o/1A5f4uIDDbakptUgRihIDeHqbBoYQDLwWFin+e48FeHVDEuQ==
-X-Received: by 2002:a5d:6288:0:b0:339:39c3:d284 with SMTP id
- k8-20020a5d6288000000b0033939c3d284mr1310wru.67.1706198090140; 
- Thu, 25 Jan 2024 07:54:50 -0800 (PST)
+ bh=j5bdO5KjFq2mPgFJkOMYbcGFWORCMWB2uT32Atl8NZI=;
+ b=gYB/TXJuE8cKFlkH60CWkMzRnTcVGgoaFtLvqWr9tqevRg/PZsp2JhJi1uUVMvg3OP
+ FSM0j3Vy9ip8SDElH4p3CE3JhWt1CGRZONUxuENe6RXTJvUcVmfGqbs6ZePmWKWGX9AI
+ PVsbBlvbEc3dlZTJCijsCjjF8bsOrVBhU/+GPQhbYvnsOkTKKT3TC09wyGSfQBSZfR+q
+ kbRQ1lWanaQLPM9YDBoVDbuhSuAMpNWQh+fLtpFWtbYIc7a97AfbycdNi4YdMG6CiY6c
+ 5RRBP3Nlq/CBASC9MUSsW1T9KKI93hfc3lHWBhPDEXl+1U7SjlNRM7XC5Jscu8q4aAn1
+ yiog==
+X-Gm-Message-State: AOJu0YxwWMlDtryd2YTUwhC5IS3v/kppcaTG45xBl3IFGKgt232Hsyd4
+ nYE3wZTCyFhaxsz+kd+jd3Cfp2+IyZdTYR0NvEOeT3eR64rIAuADHd3I0LKoEX70DQERutE4I/P
+ pWHXLs8cgdkJtRR45VJL0FRd+egXuauB5MeA9SL1asmXBGxoyhgHYzR+U9SIfmiQkeik=
+X-Received: by 2002:a05:600c:34ce:b0:40e:416c:c03f with SMTP id
+ d14-20020a05600c34ce00b0040e416cc03fmr669938wmq.212.1706198094047; 
+ Thu, 25 Jan 2024 07:54:54 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGq13dX8v9Tg8WgmzHWfb0ZVco+CE0NgCp8kb+Brdg0Zn3QMN8LN8Ltuc0XqU2iCngnCxbI4A==
+X-Received: by 2002:a05:600c:34ce:b0:40e:416c:c03f with SMTP id
+ d14-20020a05600c34ce00b0040e416cc03fmr669932wmq.212.1706198093794; 
+ Thu, 25 Jan 2024 07:54:53 -0800 (PST)
 Received: from workstation5.fritz.box
  (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
  by smtp.gmail.com with ESMTPSA id
- c16-20020a5d4f10000000b003393592ef8dsm10557471wru.54.2024.01.25.07.54.49
+ c16-20020a5d4f10000000b003393592ef8dsm10557471wru.54.2024.01.25.07.54.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jan 2024 07:54:49 -0800 (PST)
+ Thu, 25 Jan 2024 07:54:53 -0800 (PST)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
@@ -83,9 +82,9 @@ Cc: Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
  Bin Meng <bmeng.cn@gmail.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v3 2/6] cmd: provide command to display SMBIOS information
-Date: Thu, 25 Jan 2024 16:54:34 +0100
-Message-ID: <20240125155438.47617-3-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v3 6/6] configs: enable smbios command on qemu_arm64_defconfig
+Date: Thu, 25 Jan 2024 16:54:38 +0100
+Message-ID: <20240125155438.47617-7-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240125155438.47617-1-heinrich.schuchardt@canonical.com>
 References: <20240125155438.47617-1-heinrich.schuchardt@canonical.com>
@@ -107,256 +106,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot can either generated an SMBIOS table or copy it from a prior boot
-stage, e.g. QEMU.
-
-Provide a command to display the SMBIOS information.
-
-Currently only type 1 and 2 are translated to human readable text.
-Other types may be added later. Currently only a hexdump and the list of
-strings is provided for these.
+We have a Python test the copying of SMBIOS tables from QEMU.
+To make use of the test we need the smbios command.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 v3:
-	do not enable the command by default
-v2:
-	email address updated
+	no change
 ---
- cmd/Kconfig  |   6 ++
- cmd/Makefile |   1 +
- cmd/smbios.c | 191 +++++++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 198 insertions(+)
- create mode 100644 cmd/smbios.c
+ configs/qemu_arm64_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 58ab357c707..435bb04e551 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -232,6 +232,12 @@ config CMD_SBI
- 	help
- 	  Display information about the SBI implementation.
- 
-+config CMD_SMBIOS
-+	bool "smbios"
-+	depends on SMBIOS
-+	help
-+	  Display the SMBIOS information.
-+
- endmenu
- 
- menu "Boot commands"
-diff --git a/cmd/Makefile b/cmd/Makefile
-index e2a2b16ab25..87133cc27a8 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -168,6 +168,7 @@ obj-$(CONFIG_CMD_SETEXPR) += setexpr.o
- obj-$(CONFIG_CMD_SETEXPR_FMT) += printf.o
- obj-$(CONFIG_CMD_SPI) += spi.o
- obj-$(CONFIG_CMD_STRINGS) += strings.o
-+obj-$(CONFIG_CMD_SMBIOS) += smbios.o
- obj-$(CONFIG_CMD_SMC) += smccc.o
- obj-$(CONFIG_CMD_SYSBOOT) += sysboot.o
- obj-$(CONFIG_CMD_STACKPROTECTOR_TEST) += stackprot_test.o
-diff --git a/cmd/smbios.c b/cmd/smbios.c
-new file mode 100644
-index 00000000000..feebf930b79
---- /dev/null
-+++ b/cmd/smbios.c
-@@ -0,0 +1,191 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * The 'smbios' command displays information from the SMBIOS table.
-+ *
-+ * Copyright (c) 2023, Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-+ */
-+
-+#include <command.h>
-+#include <hexdump.h>
-+#include <mapmem.h>
-+#include <smbios.h>
-+#include <tables_csum.h>
-+#include <asm/global_data.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+/**
-+ * smbios_get_string() - get SMBIOS string from table
-+ *
-+ * @table:	SMBIOS table
-+ * @index:	index of the string
-+ * Return:	address of string, may point to empty string
-+ */
-+static const char *smbios_get_string(void *table, int index)
-+{
-+	const char *str = (char *)table +
-+			  ((struct smbios_header *)table)->length;
-+
-+	if (!*str)
-+		++str;
-+	for (--index; *str && index; --index)
-+		str += strlen(str) + 1;
-+
-+	return str;
-+}
-+
-+static struct smbios_header *next_table(struct smbios_header *table)
-+{
-+	const char *str;
-+
-+	if (table->type == SMBIOS_END_OF_TABLE)
-+		return NULL;
-+
-+	str = smbios_get_string(table, 0);
-+	return (struct smbios_header *)(++str);
-+}
-+
-+static void smbios_print_generic(struct smbios_header *table)
-+{
-+	char *str = (char *)table + table->length;
-+
-+	if (CONFIG_IS_ENABLED(HEXDUMP)) {
-+		printf("Header and Data:\n");
-+		print_hex_dump("\t", DUMP_PREFIX_OFFSET, 16, 1,
-+			       table, table->length, false);
-+	}
-+	if (*str) {
-+		printf("Strings:\n");
-+		for (int index = 1; *str; ++index) {
-+			printf("\tString %u: %s\n", index, str);
-+			str += strlen(str) + 1;
-+		}
-+	}
-+}
-+
-+void smbios_print_str(const char *label, void *table, u8 index)
-+{
-+	printf("\t%s: %s\n", label, smbios_get_string(table, index));
-+}
-+
-+static void smbios_print_type1(struct smbios_type1 *table)
-+{
-+	printf("System Information\n");
-+	smbios_print_str("Manufacturer", table, table->manufacturer);
-+	smbios_print_str("Product Name", table, table->product_name);
-+	smbios_print_str("Version", table, table->version);
-+	smbios_print_str("Serial Number", table, table->serial_number);
-+	if (table->length >= 0x19) {
-+		printf("\tUUID %pUl\n", table->uuid);
-+		smbios_print_str("Wake Up Type", table, table->serial_number);
-+	}
-+	if (table->length >= 0x1b) {
-+		smbios_print_str("Serial Number", table, table->serial_number);
-+		smbios_print_str("SKU Number", table, table->sku_number);
-+	}
-+}
-+
-+static void smbios_print_type2(struct smbios_type2 *table)
-+{
-+	u16 *handle;
-+
-+	printf("Base Board Information\n");
-+	smbios_print_str("Manufacturer", table, table->manufacturer);
-+	smbios_print_str("Product Name", table, table->product_name);
-+	smbios_print_str("Version", table, table->version);
-+	smbios_print_str("Serial Number", table, table->serial_number);
-+	smbios_print_str("Asset Tag", table, table->asset_tag_number);
-+	printf("\tFeature Flags: 0x%2x\n", table->feature_flags);
-+	smbios_print_str("Chassis Location", table, table->chassis_location);
-+	printf("\tChassis Handle: 0x%2x\n", table->chassis_handle);
-+	smbios_print_str("Board Type", table, table->board_type);
-+	printf("\tContained Object Handles: ");
-+	handle = (void *)table->eos;
-+	for (int i = 0; i < table->number_contained_objects; ++i)
-+		printf("0x%04x ", handle[i]);
-+	printf("\n");
-+}
-+
-+static void smbios_print_type127(struct smbios_type127 *table)
-+{
-+	printf("End Of Table\n");
-+}
-+
-+static int do_smbios(struct cmd_tbl *cmdtp, int flag, int argc,
-+		     char *const argv[])
-+{
-+	ulong addr;
-+	void *entry;
-+	u32 size;
-+	char version[12];
-+	struct smbios_header *table;
-+	static const char smbios_sig[] = "_SM_";
-+	static const char smbios3_sig[] = "_SM3_";
-+	size_t count = 0;
-+	u32 max_struct_size;
-+
-+	addr = gd_smbios_start();
-+	if (!addr) {
-+		log_warning("SMBIOS not available\n");
-+		return CMD_RET_FAILURE;
-+	}
-+	entry = map_sysmem(addr, 0);
-+	if (!memcmp(entry, smbios3_sig, sizeof(smbios3_sig) - 1)) {
-+		struct smbios3_entry *entry3 = entry;
-+
-+		table = (void *)(uintptr_t)entry3->struct_table_address;
-+		snprintf(version, sizeof(version), "%d.%d.%d",
-+			 entry3->major_ver, entry3->minor_ver, entry3->doc_rev);
-+		table = (void *)(uintptr_t)entry3->struct_table_address;
-+		size = entry3->length;
-+		max_struct_size = entry3->max_struct_size;
-+	} else if (!memcmp(entry, smbios_sig, sizeof(smbios_sig) - 1)) {
-+		struct smbios_entry *entry2 = entry;
-+
-+		snprintf(version, sizeof(version), "%d.%d",
-+			 entry2->major_ver, entry2->minor_ver);
-+		table = (void *)(uintptr_t)entry2->struct_table_address;
-+		size = entry2->length;
-+		max_struct_size = entry2->max_struct_size;
-+	} else {
-+		log_err("Unknown SMBIOS anchor format\n");
-+		return CMD_RET_FAILURE;
-+	}
-+	if (table_compute_checksum(entry, size)) {
-+		log_err("Invalid anchor checksum\n");
-+		return CMD_RET_FAILURE;
-+	}
-+	printf("SMBIOS %s present.\n", version);
-+
-+	for (struct smbios_header *pos = table; pos; pos = next_table(pos))
-+		++count;
-+	printf("%zd structures occupying %d bytes\n", count, max_struct_size);
-+	printf("Table at 0x%llx\n", (unsigned long long)map_to_sysmem(table));
-+
-+	for (struct smbios_header *pos = table; pos; pos = next_table(pos)) {
-+		printf("\nHandle 0x%04x, DMI type %d, %d bytes at 0x%llx\n",
-+		       pos->handle, pos->type, pos->length,
-+		       (unsigned long long)map_to_sysmem(pos));
-+		switch (pos->type) {
-+		case 1:
-+			smbios_print_type1((struct smbios_type1 *)pos);
-+			break;
-+		case 2:
-+			smbios_print_type2((struct smbios_type2 *)pos);
-+			break;
-+		case 127:
-+			smbios_print_type127((struct smbios_type127 *)pos);
-+			break;
-+		default:
-+			smbios_print_generic(pos);
-+			break;
-+		}
-+	}
-+
-+	return CMD_RET_SUCCESS;
-+}
-+
-+U_BOOT_LONGHELP(smbios, "- display SMBIOS information");
-+
-+U_BOOT_CMD(smbios, 1, 0, do_smbios, "display SMBIOS information",
-+	   smbios_help_text);
+diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
+index 5100e193be6..631d8866f62 100644
+--- a/configs/qemu_arm64_defconfig
++++ b/configs/qemu_arm64_defconfig
+@@ -27,6 +27,7 @@ CONFIG_USE_PREBOOT=y
+ # CONFIG_DISPLAY_CPUINFO is not set
+ # CONFIG_DISPLAY_BOARDINFO is not set
+ CONFIG_PCI_INIT_R=y
++CONFIG_CMD_SMBIOS=y
+ CONFIG_CMD_BOOTZ=y
+ CONFIG_CMD_BOOTEFI_SELFTEST=y
+ CONFIG_CMD_NVEDIT_EFI=y
 -- 
 2.43.0
 
