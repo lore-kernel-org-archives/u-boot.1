@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96AEDC47258
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 16:14:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4E05C47422
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 16:14:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D55B68785A;
-	Thu, 25 Jan 2024 17:14:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6D6338783B;
+	Thu, 25 Jan 2024 17:14:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZZD74JuF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a1eOnIQU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FE3D8783B; Thu, 25 Jan 2024 17:14:20 +0100 (CET)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id 6336B87B8C; Thu, 25 Jan 2024 17:14:28 +0100 (CET)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7453878ED
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 17:14:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0883687B58
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 17:14:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-5ff7dc53ce0so52463037b3.1
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 08:14:17 -0800 (PST)
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-60032f9e510so27247007b3.2
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 08:14:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1706199256; x=1706804056; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1706199262; x=1706804062; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3x+/V4EQZ/jEYcAsAIkYuz7zS96K9aKPn5uiueyC0Yo=;
- b=ZZD74JuFwQVqdqfY1G608xNdkZiP5hn19FHkaVKjvtVFFlG4mR2qTlO9OFC9gkfPtk
- ZprPxuEsUhyufUve30Nwd9eFyvA5T0/Ncs3sNVnXVr38+EALEpFH3FwHg7lF6WHmrbto
- XjCG/ko/3az3kQvRFNors7fc6tCSozR8AthiE=
+ bh=u0SqUiK35ke15qZJLOB7RQJM03JxtYknqnnDhq4ojaA=;
+ b=a1eOnIQUhBkBLMRdjCEOthJpysDB5Mg9U+Jh3fWgztgs0/jXixAlJWWvhAVwf7ZF6q
+ lllAXuDFiex8NS5X/YFk9Awb/VSryYbzxqCnd/we/v5rqMpmuKtEHa6JgnjQSzDIFH4/
+ UxiLhQ8eJA5TOQ8E/cqjY41AN92VrytcSyhrQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706199256; x=1706804056;
+ d=1e100.net; s=20230601; t=1706199262; x=1706804062;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3x+/V4EQZ/jEYcAsAIkYuz7zS96K9aKPn5uiueyC0Yo=;
- b=rjFapKkvuvbrVFhmXXRIyBAa3rntOxJDHHqCQ9Imfi+9FahLRduoBKtNmgVuDS+nuk
- 86EXfARXsI0ZjylHZf+2j9touMKLq41j/1sSkT6pvKcBasN57dw5njURaM4FZDap7JFj
- CsOp9qYFya1p2Baix09eVeoW04nLq/3ilDzyaaP0PnFrxyh+SECwnJ8J3JHKTGmX9t1Z
- 9VHQsPb8W58r/+Yj4qPnBVdJODDFcHoQI5RdCcgzPjARvSeU0wqV5sLGslKX/c+3ecaw
- RqfsXsfPFxvjP+1td7cecLshRoMeFRaP7d+/DBys3upVaUxgvLOl0km7nb5UTrFECT1Z
- 1FAw==
-X-Gm-Message-State: AOJu0YwGzgkb2oXI3KanOXZGiC/6K4Sc0K9d23jssX8pZThKQBDp3Hbi
- goN7QcUnreZm52MjXieqwuz50eyixQWeyqw/FHoMQXQTj0hfCcwgOOnDxejSkyE=
-X-Google-Smtp-Source: AGHT+IEFO8AyRjBcT9inV/zic1lVVD/xaBSmQPa8jRMd2hPpdLISM3wh0TeDJ4TBJJLd6EIifsTqBw==
-X-Received: by 2002:a81:4045:0:b0:5eb:47b3:f7bd with SMTP id
- m5-20020a814045000000b005eb47b3f7bdmr35518ywn.40.1706199256495; 
- Thu, 25 Jan 2024 08:14:16 -0800 (PST)
+ bh=u0SqUiK35ke15qZJLOB7RQJM03JxtYknqnnDhq4ojaA=;
+ b=DjwRxtjpqk6F9KI9MlC+/V7eA5pDxRh53lYzFvq4GHQoUvOL39N9kqXaDF4+/NRbsm
+ bHkQywnDTkO6c7MKVryV+KMCvzLOyXrQWUO2Rk0zd24pDNXDfO1bvRRMvr9JKXHkThh6
+ v9r1BYTUl2X6nH+jXPfRxVrV5bjAloPT/XkfsFSPOAQEmFzF4Qof54eZABFGCMCjH06R
+ EnrjQHxf+HfBik5PqODOaAjPtKIyqgRzjeAOjjueWleQxz04/uBIqQd8Zh2pbx6bi8IV
+ DhBgDN8Xg6fRl1NrF4GmYkyStt5TCffHD2izImd4iE/ZbnRYOrCfxGvkWh61u2bA2hsA
+ 3AYA==
+X-Gm-Message-State: AOJu0Yyb/zdJt5rwUxt19QP9Y3hSly8XDTYfyoZl5UcCcwp8pyWVmij/
+ bgdP8/RwxE0jiPDXh5cZ0VKlgN6d9hzoypZoqeEjXs3+qU4cJ1OI7glNjL3RVDE=
+X-Google-Smtp-Source: AGHT+IHgaUlrALMF29MBbUS28zs3ylQAfT063AwlBe7ZxnMuldf2HodpbP1/TckElGin/FDST7rS6Q==
+X-Received: by 2002:a81:6d15:0:b0:5ff:8fae:aa47 with SMTP id
+ i21-20020a816d15000000b005ff8faeaa47mr34912ywc.55.1706199261853; 
+ Thu, 25 Jan 2024 08:14:21 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- w203-20020a8149d4000000b00602b93f6f27sm360559ywa.120.2024.01.25.08.14.15
+ n6-20020a0de406000000b005ff8179bbfesm739573ywe.104.2024.01.25.08.14.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jan 2024 08:14:16 -0800 (PST)
-Date: Thu, 25 Jan 2024 11:14:14 -0500
+ Thu, 25 Jan 2024 08:14:21 -0800 (PST)
+Date: Thu, 25 Jan 2024 11:14:19 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, u-boot@lists.denx.de
-Subject: Re: [PATCH v3 5/6] configs: enable smbios command on sandbox
-Message-ID: <20240125161414.GN3652023@bill-the-cat>
-References: <20240125155438.47617-1-heinrich.schuchardt@canonical.com>
- <20240125155438.47617-6-heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Evgeny Bachinin <EABachinin@sberdevices.ru>,
+ Yurii Monakov <monakov.y@gmail.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Harald Seiler <hws@denx.de>, Dave Jones <dave.jones@canonical.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] cmd: increase default for SYS_MAXARGS
+Message-ID: <20240125161419.GO3652023@bill-the-cat>
+References: <20240115134656.50917-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="6oLNJqTWhj1eKBhs"
+ protocol="application/pgp-signature"; boundary="7sgZep8pwqcHFtjf"
 Content-Disposition: inline
-In-Reply-To: <20240125155438.47617-6-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240115134656.50917-1-heinrich.schuchardt@canonical.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,47 +98,43 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---6oLNJqTWhj1eKBhs
+--7sgZep8pwqcHFtjf
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 25, 2024 at 04:54:37PM +0100, Heinrich Schuchardt wrote:
+On Mon, Jan 15, 2024 at 02:46:56PM +0100, Heinrich Schuchardt wrote:
 
-> To make use of the Python smbios test we need the smbios command.
+> The value of CONFIG SYS_MAXARGS limits the usability of the 'for' command.
+> The current default of 16 is too low for some use case. Cf.
+> https://bugs.launchpad.net/snap-core18/+bug/1910094
 >=20
+> Increase the default to 64.
+>=20
+> Reported-by: Dave Jones <dave.jones@canonical.com>
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
-> v3:
-> 	new patch
-> ---
->  configs/sandbox_defconfig | 1 +
->  1 file changed, 1 insertion(+)
 
-We should do sandbox64 too I think? Ilias was saying something I believe
-about testing one path via sandbox and another via sandbox64 (since they
-have different base dts files, putting stuff for one code path in one
-and stuff for the other in the other).
+Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---6oLNJqTWhj1eKBhs
+--7sgZep8pwqcHFtjf
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWyiNIACgkQFHw5/5Y0
-tyzLAwv9EcCjRvTj1iVKP5dpLDbIGbTwnHEwRsy1r8n3YUftA20/P4cgeZE7kkmN
-04BicCn7QB07HjPdubwMbbFTmQBV91tuNOML6iYmX+pBcteTQvScQc8rq1mR9i56
-XVUS8pnxWGv3xv6beskfohkH38oo1dR6smrQl7WXkxsQqmYxR7MFz7CepSzvPzRv
-tC8JGFqUkiueyeLzIm79c0yRFSZx1wJHsbZ2W47cQ06K4X5Ljr2hGHHq6fktOQEO
-ZWV1fGF4FJdaIa9Iw1/QehIjzDa1VOuGatbiT9AeMD0jBBZhRjSZiR2MBzbJDS1W
-G2u6/r7BkdGqOXQKuSoEyUBZpF7/9NrF3pkkftGtnnrbhZyqkhJ+qXYnIpQxZQ8R
-1x/5kRE6PH5f68Z9vV9/OI8ANkau+sHsZh56kDQubF7MFYlmHUvenm9mtQgBL25E
-CoZUMtCVZWzLrMnjUHmMmetny8lZErI0zIaa1Ex9WpQ+FRDe7oKOqjx/ku9B6usg
-v8iNtWPS
-=TFFJ
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWyiNsACgkQFHw5/5Y0
+tyxZAQwAjC08eR+x2BGvjprfBeZ6P2WQF6a9/w3+YfobPyVi0ZN3PhkAcpdui2+P
+Wcx8QUTufjHwPR10qKIBnX0In8sma4mZV8UsnHOofcyrNbeTpZ6BpvG16LgRhq6A
+TtHb9+0LuJUwMe02O/xl6TYDMik69nXr4klqjdSH3Up6eO/FjxsiXjBQhiVSNOUx
+pct/wuANKyHOjPJkYq55stH2lHXegxq3DGlXgfR0M0iMqXm3vnJCAbBB7omlExq8
+HtcuRo4RoU1nbTjphQUlefp0PohSrcxJfKyQN2dyKDGjnd05tdh9gNkHVMY/9gqk
+8jT6kZfd/7yw4ETowrr7IPTsdUMGiiUcl6SFc6CDhlrzE493yOPA58gOOFg4qqwA
+VDttvNj18DMQ4LW/pbdMD02xosiTJTG9OK6+5c+/UsF7+kUzM7cHiRydGD/cBqbC
+c/Bp47aNyWNsGCjDbJsK7YzVr3hoShAXg7J3/t68OXaNWYFLVBiP8C9YTq9KVvdW
+JZr84aN4
+=svMF
 -----END PGP SIGNATURE-----
 
---6oLNJqTWhj1eKBhs--
+--7sgZep8pwqcHFtjf--
