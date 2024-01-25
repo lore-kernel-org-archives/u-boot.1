@@ -4,80 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E247C47258
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 15:36:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 698BBC47422
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 15:54:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 551098753E;
-	Thu, 25 Jan 2024 16:36:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 675878783B;
+	Thu, 25 Jan 2024 16:54:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="XkcTs/vE";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="EvSjdDBb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 916C3875FC; Thu, 25 Jan 2024 16:36:27 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id CEEC28785A; Thu, 25 Jan 2024 16:54:51 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95E3587186
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 16:36:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BA1FA877BC
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 16:54:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1706196981; x=1706801781; i=xypron.glpk@gmx.de;
- bh=G507zl5CZuHyUfy3towluECaBlOd161UGNqn0VwxBeM=;
- h=X-UI-Sender-Class:Date:Subject:To:References:Cc:From:
- In-Reply-To;
- b=XkcTs/vEb45LyYxbjLG24VgHDPxOvZbFoj5QK34e5CVOkADZL2K9LmTFDxiEY6gh
- 7NQXZnDoGuv7Xl1xGJHJmiKWaMTHExxrTAMIDIVfsHPUVokgBTI62R/SaoDyrNd2Q
- mL5ffAczlcXOvV7HrvcMTVFStxJSiLl7P+x4EgOcg3nPoyXKF2eRjKSP8udfMkTUk
- pheuLTUhdpJnELTxhkBllso72j9F31fYkLliDAUR3DWqEUdZkYuymMSjdzlVsDsDS
- fAKZE0uRwpsHP7miKxr+nbjVn6Uw9/0SOsOj1mAzbmz+/53joGo8+beW04yHfZ00U
- JLRioKbC0nUUisMaxw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MZkpb-1rY7kY1aKN-00WnKU; Thu, 25
- Jan 2024 16:36:21 +0100
-Message-ID: <02bd585e-0e88-4227-bd3c-3972e1c40014@gmx.de>
-Date: Thu, 25 Jan 2024 16:36:20 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] firmware: psci: Fix bind_smccc_features psci check
-Content-Language: en-US
-To: Weizhao Ouyang <o451686892@gmail.com>
-References: <20240125140502.22400-1-o451686892@gmail.com>
- <20240125140502.22400-2-o451686892@gmail.com>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
- Etienne Carriere <etienne.carriere@linaro.org>,
- Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>,
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id D35CD404A5
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 15:54:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1706198088;
+ bh=jGcJcjPdErD1nDhA76P64BoqkaCrwD1NyMvuzTpgjtQ=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=EvSjdDBbGv+/f21KJ4249YHuWosH6r2tfS7Z6tgyiQ64vkfITXkPltwh3PaHLWC2F
+ 6EjbEyBF6j4+yaZNWrAqTXeWNdcLXclKrsStdmK3dx/fiWZqzMlnFeHZt3UZlP4ugs
+ XRKbT+8EB+cwX86bGoKrNTaD9ldS5YJ6akzuTn/Lbl5QykiBMwFanufVhmlmba5EzW
+ XNWqvLf2nEUnANYinj4uR8/AFgeyRzQnX556kzaekV4NHHCAdd6x3WfC6w9kmsIwya
+ G8g2awjjWDUsGJBrEXrnfl2ynUImKNactJ8MfVA42axp3iXfHGm1WgI0HxhuYSlTeW
+ MOT3u2S7Sx0Ug==
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-337d988a508so3348505f8f.3
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 07:54:48 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706198088; x=1706802888;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jGcJcjPdErD1nDhA76P64BoqkaCrwD1NyMvuzTpgjtQ=;
+ b=kwXbqpZJjXl+sIqPFxo9yrtxIbzXeQkLU46TxHejVoniyTDMEBE+NybH/VfJDQw9z0
+ x3e+JQnXm4smlDaGYMWF4I0fjKIbMcn/ovPvt+kkBqr9dpUpvVBLyC71aH4oHdFHgwxB
+ lTbX71MEDqxj1nTqgFYWJ/UmfakRrSk4VWvp8SrIED43ezazYx6OvPDjnYz6xdruOgDz
+ 9343pHaYOfatHsDdAJ4kS6MIe8Mhwe3V+Nw87BVM67ErIIC+vbWMvdtAx/v0bNrr1b+g
+ N2W/GG2YwVWqvyK5mVLj5Wsw9gBAt9XXuatAGnvBZz14NmRP4FKgvLzVKZxLpBouum9/
+ c9cA==
+X-Gm-Message-State: AOJu0YyBB21JpNaNljXA70d9kGZx7Rm0s7DPVqPrzJs8qAZXZajOV3e7
+ 8wyedIql4FgDzeo75xXNyBAnM7MuRzqDmvNIUP7d3wZhsVD1EytM7mJFJ/6vXj+EVrOyjtrtrJx
+ qhVhgRMGQIPvJVXmHxP34ytWXZWDzJ0Ny0QhBaiv6Gu2+8oI5SkaGvykJOj3lSpLWFq8=
+X-Received: by 2002:a5d:4c4c:0:b0:337:7096:f54c with SMTP id
+ n12-20020a5d4c4c000000b003377096f54cmr685315wrt.125.1706198088384; 
+ Thu, 25 Jan 2024 07:54:48 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFph1LtzKaKcM0rDriXiDrq/41rASwvRg8yznvxmLt0mPvDpx4q7CF9/cVON0gLoaV4uexstA==
+X-Received: by 2002:a5d:4c4c:0:b0:337:7096:f54c with SMTP id
+ n12-20020a5d4c4c000000b003377096f54cmr685305wrt.125.1706198087994; 
+ Thu, 25 Jan 2024 07:54:47 -0800 (PST)
+Received: from workstation5.fritz.box
+ (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
+ by smtp.gmail.com with ESMTPSA id
+ c16-20020a5d4f10000000b003393592ef8dsm10557471wru.54.2024.01.25.07.54.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 Jan 2024 07:54:47 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, u-boot@lists.denx.de
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240125140502.22400-2-o451686892@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:lOQsoTTzIvVozAuxRMincPZVigvSHONtv74ridRUuVVEdA1uk7E
- uBYfdEEFUyxvarWQaT3eto7IQIjl5wHTmWPVKBgStob+z9ouozpJMJdYQ9p0N+SP/FBDRcz
- o0SEm1061LbvhZt1UnXBIi+XpgIZp34PqyTxdMy17eRGH5mhZ1mDnSKOR7LZyZuMLl+DiqM
- sMp0H+wliAgQhEIQrlrJA==
-UI-OutboundReport: notjunk:1;M01:P0:PLJh7zug5Ss=;XOGttejHBNnCnykdbPKTXd84Tnn
- 2/IB+MvFuozFsdTEuBzO6isWU60i1cnY4rYtoNAhqsjFoOjrBYH4vaXztKWinz9lTW8adePKk
- tEs8hCimwOQSk5xGfSoAeJJnweLUNoud2mCiLSzqrD5DPeZelA5S7Dn46qYs8LN0ovRfAGyVB
- iaBHqdXl+tqKsC/Z/ju7GNlPTYMrtKrq32synqI1QFlKp1bjnXXIyG2PReNkpNSCFJpAHrAqp
- PvwV13Jpca3vAvMjjBuybin/sHdVTvV0f/awCmPIAdNn+xE8k+b5Kkr4qlNoeZuTJFRgh4nVh
- F1KrApkp2Jk/kl0KsCyB+81mjYNMKs334Yq91CqzFrU4dDRK+DLZRXEThvhfb/iXiSUd7Grzp
- a8OI8km8m3otZkxgrdey+2uG/5IEYeTp6+BEbq5NsPf5PYs1UyMa3UADIOfZuIMElub2t7plI
- vFUHYg1BMefXregmfj7afGw40FhZ+4U8uaQm2BTgz05PPz3rcw2nj5n27RoSJUS4gn21YGgwb
- yqPT3VOxQFRZyvrYFrDg8oDIoM7lViBj8i5czV6EPDPORorg0qAXKQnKsMAG0dnVXYZW2yUN2
- kULQmfcOYAr737cJnQEAaipdcqwjrc/Zn0x1/RnQPATFdt2GNesaZCj01uBAYy6nH2x6LNIz6
- E4jSX4Qp4QkjwonRw/GRRrlJldXZVZ5w2RKtomi7adVQ26IaMCu6GtR4ni8L1VPOT7j/cloBD
- 6fQ1/sAsrYO9tyhmFBSEIcZPoPbsuPzG/7M9GH6XiGjqkK543TKustnhQBQ0I+Qx3JLc2b6fm
- oy6mFa22a6AF0/dsL/Ax2HxsfYrgeV7qL2B/hbWDK6PlLZMKFgdazHI/OW5KD386OOimWEt4v
- mTJ717dzoQB6rcA9x0WdHIiUBl+gEkmwCsgyTTyOwrCEyUYbWQiV0TfkUNegSlcgTNoYBOjW4
- 2r8/PHVonRT8ofzjwd8oWu4KJzk=
+ Bin Meng <bmeng.cn@gmail.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v3 0/6] cmd: provide command to display SMBIOS information
+Date: Thu, 25 Jan 2024 16:54:32 +0100
+Message-ID: <20240125155438.47617-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,48 +103,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 25.01.24 15:05, Weizhao Ouyang wrote:
-> According to PSCI specification DEN0022F, PSCI_FEATURES is used to check
-> whether the SMCCC is implemented by discovering SMCCC_VERSION.
->
-> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
+U-Boot may supply an SMBIOS table or they may be copied from QEMU.
 
-5.15.2 Implementation responsibilities
+Provide a command to display the SMBIOS information.
 
-PSCI_FEATURES should report the presence of SMCCC_VERSION in privileged
-platform firmware compliant with PSCI v1.0 and later revisions.
+Currently only type 1 and 2 are translated to human readable text.
+Other types may be added later. Currently only a hexdump and the list of
+strings is provided for these.
 
-Acked-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+The following prerequisite had to be fixed:
 
-> ---
->   drivers/firmware/psci.c   | 2 +-
->   include/linux/arm-smccc.h | 1 +
->   2 files changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/drivers/firmware/psci.c b/drivers/firmware/psci.c
-> index c6b9efab41..894be8128d 100644
-> --- a/drivers/firmware/psci.c
-> +++ b/drivers/firmware/psci.c
-> @@ -135,7 +135,7 @@ static int bind_smccc_features(struct udevice *dev, =
-int psci_method)
->   	    PSCI_VERSION_MAJOR(psci_0_2_get_version()) =3D=3D 0)
->   		return 0;
->
-> -	if (request_psci_features(ARM_SMCCC_ARCH_FEATURES) =3D=3D
-> +	if (request_psci_features(ARM_SMCCC_VERSION) =3D=3D
->   	    PSCI_RET_NOT_SUPPORTED)
->   		return 0;
->
-> diff --git a/include/linux/arm-smccc.h b/include/linux/arm-smccc.h
-> index f44e9e8f93..453017eb5f 100644
-> --- a/include/linux/arm-smccc.h
-> +++ b/include/linux/arm-smccc.h
-> @@ -55,6 +55,7 @@
->   #define ARM_SMCCC_QUIRK_NONE		0
->   #define ARM_SMCCC_QUIRK_QCOM_A6		1 /* Save/restore register a6 */
->
-> +#define ARM_SMCCC_VERSION		0x80000000
->   #define ARM_SMCCC_ARCH_FEATURES		0x80000001
->
->   #define ARM_SMCCC_RET_NOT_SUPPORTED	((unsigned long)-1)
+* The definition of SMBIOS type 2 lacked a field.
+
+v3:
+	enable smbios command only on sandbox and qemu_arm64_defconfig
+v2:
+	for generic boards we only can assume that a type 127 table exists
+	email address updated
+
+Heinrich Schuchardt (6):
+  smbios: type2: contained object handles
+  cmd: provide command to display SMBIOS information
+  doc: man-page for smbios command
+  test: unit test for smbios command
+  configs: enable smbios command on sandbox
+  configs: enable smbios command on qemu_arm64_defconfig
+
+ cmd/Kconfig                  |   6 ++
+ cmd/Makefile                 |   1 +
+ cmd/smbios.c                 | 191 +++++++++++++++++++++++++++++++++++
+ configs/qemu_arm64_defconfig |   1 +
+ configs/sandbox_defconfig    |   1 +
+ doc/usage/cmd/smbios.rst     |  93 +++++++++++++++++
+ doc/usage/index.rst          |   1 +
+ include/smbios.h             |   1 +
+ test/py/tests/test_smbios.py |  41 ++++++++
+ 9 files changed, 336 insertions(+)
+ create mode 100644 cmd/smbios.c
+ create mode 100644 doc/usage/cmd/smbios.rst
+ create mode 100644 test/py/tests/test_smbios.py
+
+-- 
+2.43.0
 
