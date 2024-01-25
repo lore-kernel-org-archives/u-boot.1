@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 698BBC47422
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 15:54:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39423C47422
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 15:55:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 675878783B;
-	Thu, 25 Jan 2024 16:54:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3242587A80;
+	Thu, 25 Jan 2024 16:54:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="EvSjdDBb";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="UKsxoXt2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEEC28785A; Thu, 25 Jan 2024 16:54:51 +0100 (CET)
+ id 97A6587A80; Thu, 25 Jan 2024 16:54:54 +0100 (CET)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA1FA877BC
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 16:54:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CBE8878CB
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 16:54:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69])
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id D35CD404A5
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 15:54:48 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id EA8B2404AC
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 15:54:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1706198088;
- bh=jGcJcjPdErD1nDhA76P64BoqkaCrwD1NyMvuzTpgjtQ=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=EvSjdDBbGv+/f21KJ4249YHuWosH6r2tfS7Z6tgyiQ64vkfITXkPltwh3PaHLWC2F
- 6EjbEyBF6j4+yaZNWrAqTXeWNdcLXclKrsStdmK3dx/fiWZqzMlnFeHZt3UZlP4ugs
- XRKbT+8EB+cwX86bGoKrNTaD9ldS5YJ6akzuTn/Lbl5QykiBMwFanufVhmlmba5EzW
- XNWqvLf2nEUnANYinj4uR8/AFgeyRzQnX556kzaekV4NHHCAdd6x3WfC6w9kmsIwya
- G8g2awjjWDUsGJBrEXrnfl2ynUImKNactJ8MfVA42axp3iXfHGm1WgI0HxhuYSlTeW
- MOT3u2S7Sx0Ug==
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-337d988a508so3348505f8f.3
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 07:54:48 -0800 (PST)
+ s=20210705; t=1706198089;
+ bh=z4uHYQIhRuc0FwuJZgCHGF0TZ+UMp8vyNkfFcH0H5RQ=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=UKsxoXt2u807dfBTgrQYhpKgsLbdO9WcBkDf/U16aZhWbkYaZjAjRHl40zrMlUDCL
+ PpYa/gxBSN6WbQLW48tzATUmPYSH2MOuRclLuiaaQZ6vd0hRgeRQbkrlTRomgN3b3J
+ yxDa9hJZ5n1Besg4Y5YDINUMOz5jskru2Q/SAYed3mWvX1ZqQv/GoW1XLkESbyZNIq
+ KkshmfTlqmvCcoAWNZCRuILj1W/7NQGIoQjB4GsZ65IV/TPJMH4NG1/sVlATgZyYcK
+ WEFCKQsD3eicZxZ6PyDvep56v+voHtcclFgqpYwdw3i9sXEs8VopSs6VyQina0O+eA
+ dJu98inxSuRdw==
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-337d589ef4dso4675516f8f.0
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 07:54:49 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706198088; x=1706802888;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jGcJcjPdErD1nDhA76P64BoqkaCrwD1NyMvuzTpgjtQ=;
- b=kwXbqpZJjXl+sIqPFxo9yrtxIbzXeQkLU46TxHejVoniyTDMEBE+NybH/VfJDQw9z0
- x3e+JQnXm4smlDaGYMWF4I0fjKIbMcn/ovPvt+kkBqr9dpUpvVBLyC71aH4oHdFHgwxB
- lTbX71MEDqxj1nTqgFYWJ/UmfakRrSk4VWvp8SrIED43ezazYx6OvPDjnYz6xdruOgDz
- 9343pHaYOfatHsDdAJ4kS6MIe8Mhwe3V+Nw87BVM67ErIIC+vbWMvdtAx/v0bNrr1b+g
- N2W/GG2YwVWqvyK5mVLj5Wsw9gBAt9XXuatAGnvBZz14NmRP4FKgvLzVKZxLpBouum9/
- c9cA==
-X-Gm-Message-State: AOJu0YyBB21JpNaNljXA70d9kGZx7Rm0s7DPVqPrzJs8qAZXZajOV3e7
- 8wyedIql4FgDzeo75xXNyBAnM7MuRzqDmvNIUP7d3wZhsVD1EytM7mJFJ/6vXj+EVrOyjtrtrJx
- qhVhgRMGQIPvJVXmHxP34ytWXZWDzJ0Ny0QhBaiv6Gu2+8oI5SkaGvykJOj3lSpLWFq8=
-X-Received: by 2002:a5d:4c4c:0:b0:337:7096:f54c with SMTP id
- n12-20020a5d4c4c000000b003377096f54cmr685315wrt.125.1706198088384; 
- Thu, 25 Jan 2024 07:54:48 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFph1LtzKaKcM0rDriXiDrq/41rASwvRg8yznvxmLt0mPvDpx4q7CF9/cVON0gLoaV4uexstA==
-X-Received: by 2002:a5d:4c4c:0:b0:337:7096:f54c with SMTP id
- n12-20020a5d4c4c000000b003377096f54cmr685305wrt.125.1706198087994; 
- Thu, 25 Jan 2024 07:54:47 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706198089; x=1706802889;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=z4uHYQIhRuc0FwuJZgCHGF0TZ+UMp8vyNkfFcH0H5RQ=;
+ b=pLWOFS0xNj8cGNFJeO95f2j925KQBQ+ynTPwVH5qf5GwCCjyptNJO2iUfNLzGsVbfM
+ TPpSdscDNu2VN1uqOyvkoP4m5JpLdYdFuYlIGQA4b4I+C+jMBVRQQdxRjAPCr1XPR8ZS
+ 3LmZ9yQ4Pc7tgS95nIa/RJOv8g8fNgzRLNu2dpVloUAiYINTnJ+w+y6Hq29af7xxzmAY
+ Ie4ZLqrH2O4gub23N4NF56IOTOAnkyAAtRiDItAIRZ9ta75bOe+jXvYxRb3K+nrIrseY
+ 4gWC0GBWa5dGpdI4JMI6ixw3+BJ7jiJHerWTHOpfy2B0xa/BAS9wd+oulInlCMbyYCZF
+ /tiw==
+X-Gm-Message-State: AOJu0YxleIHw//XQdC9JZ36YJZm2NIULO1PmQIYQLIjcXf4eWzgYYS6T
+ Nex3CEc4q2deGJCWZP/gjSKvZO8KKQRZK3/CdUtB5ayUZEUIg4LTSoBqZIeSP+peiqztCYp6CTc
+ yszzIGJn3i/qFM/afe+7qBwsKiwGZvO+TFb/ljvNWlYOZPHkkaYpAq45cqzIa1NdOBnY=
+X-Received: by 2002:adf:f548:0:b0:337:9d27:ae28 with SMTP id
+ j8-20020adff548000000b003379d27ae28mr755099wrp.97.1706198089626; 
+ Thu, 25 Jan 2024 07:54:49 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGr3ghItosWQPA0aO/CsfLAm+55Ytfmnqfbmk3osiMMvfrlxILWXzIb94Mkw/BdcwPgUrCckg==
+X-Received: by 2002:adf:f548:0:b0:337:9d27:ae28 with SMTP id
+ j8-20020adff548000000b003379d27ae28mr755093wrp.97.1706198089293; 
+ Thu, 25 Jan 2024 07:54:49 -0800 (PST)
 Received: from workstation5.fritz.box
  (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
  by smtp.gmail.com with ESMTPSA id
- c16-20020a5d4f10000000b003393592ef8dsm10557471wru.54.2024.01.25.07.54.47
+ c16-20020a5d4f10000000b003393592ef8dsm10557471wru.54.2024.01.25.07.54.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jan 2024 07:54:47 -0800 (PST)
+ Thu, 25 Jan 2024 07:54:48 -0800 (PST)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
@@ -81,10 +82,12 @@ Cc: Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
  Bin Meng <bmeng.cn@gmail.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v3 0/6] cmd: provide command to display SMBIOS information
-Date: Thu, 25 Jan 2024 16:54:32 +0100
-Message-ID: <20240125155438.47617-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v3 1/6] smbios: type2: contained object handles
+Date: Thu, 25 Jan 2024 16:54:33 +0100
+Message-ID: <20240125155438.47617-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240125155438.47617-1-heinrich.schuchardt@canonical.com>
+References: <20240125155438.47617-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -103,46 +106,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot may supply an SMBIOS table or they may be copied from QEMU.
+The type 2 structure must include information about the contained objects.
+It is fine to set the number of contained object handles to 0.
 
-Provide a command to display the SMBIOS information.
+Add the missing field.
 
-Currently only type 1 and 2 are translated to human readable text.
-Other types may be added later. Currently only a hexdump and the list of
-strings is provided for these.
-
-The following prerequisite had to be fixed:
-
-* The definition of SMBIOS type 2 lacked a field.
-
+Fixes: 721e992a8af5 ("x86: Add SMBIOS table support")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
 v3:
-	enable smbios command only on sandbox and qemu_arm64_defconfig
+	no change
 v2:
-	for generic boards we only can assume that a type 127 table exists
 	email address updated
+---
+ include/smbios.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-Heinrich Schuchardt (6):
-  smbios: type2: contained object handles
-  cmd: provide command to display SMBIOS information
-  doc: man-page for smbios command
-  test: unit test for smbios command
-  configs: enable smbios command on sandbox
-  configs: enable smbios command on qemu_arm64_defconfig
-
- cmd/Kconfig                  |   6 ++
- cmd/Makefile                 |   1 +
- cmd/smbios.c                 | 191 +++++++++++++++++++++++++++++++++++
- configs/qemu_arm64_defconfig |   1 +
- configs/sandbox_defconfig    |   1 +
- doc/usage/cmd/smbios.rst     |  93 +++++++++++++++++
- doc/usage/index.rst          |   1 +
- include/smbios.h             |   1 +
- test/py/tests/test_smbios.py |  41 ++++++++
- 9 files changed, 336 insertions(+)
- create mode 100644 cmd/smbios.c
- create mode 100644 doc/usage/cmd/smbios.rst
- create mode 100644 test/py/tests/test_smbios.py
-
+diff --git a/include/smbios.h b/include/smbios.h
+index b507b9d9d72..98bb9e52cdf 100644
+--- a/include/smbios.h
++++ b/include/smbios.h
+@@ -139,6 +139,7 @@ struct __packed smbios_type2 {
+ 	u8 chassis_location;
+ 	u16 chassis_handle;
+ 	u8 board_type;
++	u8 number_contained_objects;
+ 	char eos[SMBIOS_STRUCT_EOS_BYTES];
+ };
+ 
 -- 
 2.43.0
 
