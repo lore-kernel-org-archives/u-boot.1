@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D67D0C48260
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 14:06:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25C96C48260
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 14:07:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CA4687887;
-	Thu, 25 Jan 2024 15:05:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 88925875FC;
+	Thu, 25 Jan 2024 15:07:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ti2f4SBx";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JHbgADyU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FDED87866; Thu, 25 Jan 2024 15:05:46 +0100 (CET)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id 59D8E87866; Thu, 25 Jan 2024 15:07:27 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58C6D8786C
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 15:05:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 77F2787559
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 15:07:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=o451686892@gmail.com
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1d71e1d7c78so41334015ad.3
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 06:05:44 -0800 (PST)
+ spf=pass smtp.mailfrom=malu.bertsch@gmail.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-55a8fd60af0so6302052a12.1
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 06:07:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706191542; x=1706796342; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1706191645; x=1706796445; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=9QfwjjOjTYSvR4bsSBfYeLV+M7GwON/WlQUjHkqYUeI=;
- b=Ti2f4SBxtxHKUj2OIGXjRHOKxhFwpRA5KkAIIzUqv7G8F+ejpqHsTRbblslXDcSNpQ
- glSF+Irx9oBO9TU87grK+IuKzi0rk/pe6yRRniSFfcueCN72pQZYsZ/O9IOkxDpnFSuR
- kuUVAD2BpAx8z1FtNUgMGzAdzF7ltVWYiXFqQYO3eWSfeG8aT08GzEYgrh3DAVOPSQgi
- QTI2xiYTYUGwFNxG6y5QvFNulfGcQV/wiKBjoloelAeGLFOTD/C4hcIhKw3MmXVYjw8v
- 1jEu2LTxrdYk6Iu0oy44qrg3ag4PBiLDfOE2gI8AjC/25khqw6FjPtEh30DN66lUogtf
- +TOg==
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MfL9iV7HORAJ3cSGjooCve57K/z2peoN1aPOKL5EWos=;
+ b=JHbgADyUb0KsfMMnfg53Evm8VtbJznH/kFEkeGyj101cDQCf6tvJmHr/+++wtf/aHv
+ 8mwkvaZm8uW5eY3LKs+fhBtR3xZHsau5spRRofSoF51LANYehYxmiEKo16YPfH5EF5xw
+ 81bO6BxFgTWZLAxkrEQ9RGjuqEt/NKUcbErCHU8rvNtBoFN9OSrsj78iH2e0gsrwJiBW
+ LrRfFtj4pYImGe/9asdOPXsUA45AOLEdm17fXeuxUvddeL1OqIa6a8YiePyc1Y2umVPK
+ iKzrqrJP4iwVKMOuP7ElHC+JDAfNdqk6v3oPhjdjFMKFvs022izKtx9B2+aEyA3DWXPE
+ WCfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706191542; x=1706796342;
+ d=1e100.net; s=20230601; t=1706191645; x=1706796445;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9QfwjjOjTYSvR4bsSBfYeLV+M7GwON/WlQUjHkqYUeI=;
- b=lWy8v6KnzQbMsFvOyUNyQgzYYrTFkcIp+b8hjP0R3AF0KgdG72raPtea32CuF0aKZy
- OIwS5n9rAb8R2t1as/vwMijRLJW9/X2WQCPj//XWX5M19FvLZBl6qi8zeuXj739Zjo5m
- 4iI3GLnukQY2/hCqZE+lPuIHMPR1fAuPAtXdZ7GTqs+Ayk1w1Tji2M+MY8gieO7vr768
- /BAb70SKTDsBFRqQPxeR84X7ogQMn7P3XpwvPpZuuVCvJpqEGJExqhQXDmoFLreM3TU0
- 5W9+uBjfpCuJp2tt/0+HBV3M+a3yMq24uBQfkfH5xtbb6Wi39QUBNL9gWsUh8JQh4NYw
- /GVA==
-X-Gm-Message-State: AOJu0Yy6B0Hxb5+80kXISA56EplpHCmPpzyCFAyak99dDCy6Z8O70d3X
- /KeCmkwBACP1BQaJWk/c46kyjVyxPUNTNErYn5X2sCRn4Z2e+cHlGNPiWdwk/w8=
-X-Google-Smtp-Source: AGHT+IFN+oiAP8lCibcu2IxCg1JTbA4m59tlrFfhOhG/fqzQRRcEp+wkwHgkYGfNPqnQuQAUnhtjkA==
-X-Received: by 2002:a17:902:d905:b0:1d7:27a0:127b with SMTP id
- c5-20020a170902d90500b001d727a0127bmr882523plz.19.1706191541869; 
- Thu, 25 Jan 2024 06:05:41 -0800 (PST)
-Received: from ownia.localdomain ([8.210.91.195])
- by smtp.gmail.com with ESMTPSA id
- p18-20020a170902ead200b001d705836d0dsm11925699pld.200.2024.01.25.06.05.39
+ bh=MfL9iV7HORAJ3cSGjooCve57K/z2peoN1aPOKL5EWos=;
+ b=ZljnnixWZf5KEb1iWVgAC4HnIqkA4uJrfhXQzAQC4F4vPeP+ywMZab7P1wVKNEmXMa
+ qi04RWGvG6YhStchNDpof9FT9Xv+kXte9spvTE+T2HgZPqF++O/GsyhXeFv6+pWyOlrq
+ I+6cS16BELX1eiLZNWzGPN4to8I8PvxpgXQMRZsXSKuw0+jM/uzGQUFvcjBXtPhFX3PK
+ TSWYyjRVCxS71gLmu5tJaBF9vzgofwe1MQANMQwVSF52hRFn/ZLDeeHmRbRV/ZFGD8xv
+ 9YsVOjMHGjWJFmMQQKvZ2pd2w0+x/VbzBTfwapWNgBHo4QRLgt1spoEagixFrH5k8gVE
+ YfTg==
+X-Gm-Message-State: AOJu0YxK+AZRUZdEUqMh+GiiRWOd10zCQntJMgHxx8CP/9jOXToB0psJ
+ CFXB1sgy0/tqgCdWDfXZrwQC5rDONz4o9C10E1nBemWxegMFPt1/vC91FPNMSeo=
+X-Google-Smtp-Source: AGHT+IE6CQEEKhpUarsaLd4NB+hp+x+jZUOVyk17ddZuYu3r5Cv6c4Ojd1YhoNTjV1MijWFe59G8XQ==
+X-Received: by 2002:a05:6402:105a:b0:55a:6dc3:59e3 with SMTP id
+ e26-20020a056402105a00b0055a6dc359e3mr333659edu.139.1706191644311; 
+ Thu, 25 Jan 2024 06:07:24 -0800 (PST)
+Received: from localhost.localdomain (pd9fafaa6.dip0.t-ipconnect.de.
+ [217.250.250.166]) by smtp.gmail.com with ESMTPSA id
+ ee15-20020a056402290f00b0055d18d6a586sm83136edb.13.2024.01.25.06.07.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jan 2024 06:05:41 -0800 (PST)
-From: Weizhao Ouyang <o451686892@gmail.com>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Etienne Carriere <etienne.carriere@linaro.org>,
- Weizhao Ouyang <o451686892@gmail.com>, Simon Glass <sjg@chromium.org>,
- Peng Fan <peng.fan@nxp.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, u-boot@lists.denx.de
-Subject: [PATCH 3/3] cmd: rng: Add rng list command
-Date: Thu, 25 Jan 2024 14:05:02 +0000
-Message-Id: <20240125140502.22400-4-o451686892@gmail.com>
+ Thu, 25 Jan 2024 06:07:23 -0800 (PST)
+From: "=?UTF-8?q?kleines=20Filmr=C3=B6llchen?=" <malu.bertsch@gmail.com>
+X-Google-Original-From: =?UTF-8?q?kleines=20Filmr=C3=B6llchen?=
+ <filmroellchen@serenityos.org>
+To: u-boot@lists.denx.de
+Cc: =?UTF-8?q?kleines=20Filmr=C3=B6llchen?= <filmroellchen@serenityos.org>,
+ Bin Meng <bmeng@tinylab.org>, Leo <ycliang@andestech.com>,
+ Rick Chen <rick@andestech.com>, Samuel Holland <samuel@sholland.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 0/1] riscv: Support building with Clang
+Date: Thu, 25 Jan 2024 15:06:58 +0100
+Message-Id: <20240125140659.28229-1-filmroellchen@serenityos.org>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240125140502.22400-1-o451686892@gmail.com>
-References: <20240125140502.22400-1-o451686892@gmail.com>
+In-Reply-To: <20240120002049.GO12635@bill-the-cat>
+References: <20240120002049.GO12635@bill-the-cat>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,46 +97,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add rng list command to list all probed RNG device.
 
-Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
----
- cmd/rng.c | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+Hello everyone!
 
-diff --git a/cmd/rng.c b/cmd/rng.c
-index 52f722c7af..4818133f94 100644
---- a/cmd/rng.c
-+++ b/cmd/rng.c
-@@ -18,6 +18,19 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	int devnum;
- 	struct udevice *dev;
- 	int ret = CMD_RET_SUCCESS;
-+	int idx;
-+
-+	if (argc == 2 && !strcmp(argv[1], "list")) {
-+		uclass_foreach_dev_probe(UCLASS_RNG, dev) {
-+			printf("RNG #%d - %s\n", dev->seq_, dev->name);
-+		}
-+
-+		if (!idx) {
-+			printf("*** no RNG devices available ***\n");
-+			return CMD_RET_FAILURE;
-+		}
-+		return CMD_RET_SUCCESS;
-+	}
- 
- 	switch (argc) {
- 	case 1:
-@@ -57,6 +70,8 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- }
- 
- U_BOOT_LONGHELP(rng,
-+	"[list]\n"
-+	"  - list all the probe rng device\n"
- 	"[dev [n]]\n"
- 	"  - print n random bytes(max 64) read from dev\n");
- 
+This is a minimal patchset for making U-Boot build with Clang on RISC-V,
+something I stumbled upon while writing U-Boot build scripts for
+SerenityOS's RISC-V port. The only change is a (for unclear reasons...)
+differently-named flag for fixing the global pointer.
+
+Notably, this patch does not make U-Boot actually functional under
+Clang. Booting this on QEMU (`-M virt -kernel path/to/u-boot -serial
+stdio`) hangs after the image is loaded. I do not have the motivation to
+debug this, but it may be helpful for further work on getting a working
+build out of Clang on this architecture.
+
+Greetings,
+kleines Filmröllchen
+
+Changes in v2:
+- Removed copyright attribution
+- Use -ffixed-x3 unconditionally as it is also supported by GCC
+
+kleines Filmröllchen (1):
+  riscv: Support building with Clang
+
+ arch/riscv/config.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
 -- 
 2.39.2
 
