@@ -4,85 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D966C47258
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 06:51:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9232FC47258
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 07:03:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EE7987480;
-	Thu, 25 Jan 2024 07:51:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 572BD86FCE;
+	Thu, 25 Jan 2024 08:03:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KWH3O/sU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bIvfJ7rg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99CC3871D7; Thu, 25 Jan 2024 07:51:14 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 98D0C87073; Thu, 25 Jan 2024 08:03:07 +0100 (CET)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8DAF87536
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 07:51:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9EA3B86FB2
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 08:03:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-55cec718c30so668487a12.1
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 22:51:12 -0800 (PST)
+ spf=pass smtp.mailfrom=tobetter@gmail.com
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1d76671e5a4so26603055ad.0
+ for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 23:03:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706165472; x=1706770272; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=meqpnQTf1NElwfudNlP81TMsU4diDS0jGPRafGIj9ng=;
- b=KWH3O/sU0qL7NYjxU1eUYu3jSX8g+QGI69Yu60GmE6ACfYYAjBKU82RXH7fWol9/Gx
- 9h1atngCXCniEQiWEQ2UvKJrk829RD38W06X38TgOD3+y+gl0JU7e3nIqDhtIuShoj6X
- He/waWHJ5vhDRMfwCTv4nZd5jm73gkcpUXDSVvCAGWcmf/NRqKTRH1aH5kN4wgngsBJ6
- 41IYq65mtqVqGVOAwzMEPVuV2RWhviWiubWwGc0ZM5iHoVo2vf9p7V+525NGQCrTgk6y
- eVbFra7tgOOc+d0fCIAv/wccauljNTwF6kF9UUkxx/INi3VNde+vbajWuuFJfgWAJXNx
- MOPQ==
+ d=gmail.com; s=20230601; t=1706166183; x=1706770983; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/u7XFDvT8osLx3lj3gaCRiOCaA1rdwoLC8RCJ6uKPdE=;
+ b=bIvfJ7rg2/qYO6Jr89USNmU+TK5BvBB0mN1zqQdPd/oPrXbzdKHkSWPButLRUO+ZYv
+ S5vLfIFbFbeOftctAgNJLZ04RQ+4UR1vYmW7Z+l9TNaiNOVXJt2fr5VZcOzjjC0Lumob
+ XcZBey2BNvMsf8gsV3hSGpV0lKIg6eOT1zrPGtYU5nEp8CIMA4iW7u6fKooIq0eMnfpu
+ 4MJbJv5JrxrQR2XPRYRbMAwafnHOA4NzieXcmu1fl6qV43hUPxCKXq3/92ZfvaIo+8YY
+ zF1m/wA8aF3lnqul7Md1cegZDuCFA09anbwnII+8BUey3rtLv9e+HhVx4/JzYDNg70Hb
+ UUDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706165472; x=1706770272;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=meqpnQTf1NElwfudNlP81TMsU4diDS0jGPRafGIj9ng=;
- b=PEQGnpJuaN5g75CKGaRCxd6cfc4Guzi48EhRwg+U24+iy7j9QKA24kOqjeyHF1DfYr
- uFKVtf393T8XXgt6NucvVvevwtrn+dOqEzbQe5pla+/RWioU4wzelbPh0kqgfeF5mdEG
- BxGACJWKkHuOezsV7uX4ShPTeyZ04tTSBEKphuSQNV0lwXsxqPzfcLwoyWoaV1+3r5k3
- ycF8UlPI36H/ugVXUU8MXTmdfi/iP9r9j068nhFLnUtwiDZFnKTIBj7jb5+wOKfrjbWc
- AkP1d5Xi8iKVdzxTIvkEEDA68u4GxmQ2DQOvOv6KXDpiFJFqJDT73gB928Rh/EiiFF1m
- F1Ww==
-X-Gm-Message-State: AOJu0YzIw44O5DO4BZoOy2iI6/D4cUFmY4dB7qGbk55KorJ3aH/hOIBF
- W7GHcHX4IPkZeEKCWc/2cNGiaNDwO0sD9ttFY6eZaddPq1ZhkQnm
-X-Google-Smtp-Source: AGHT+IGk6UmjqiCSS91w3R0mgS4UUDD5NibHWD6qpRWtJUtMy9SZPz7f6ODctDMCy4GZKmJrX+4qog==
-X-Received: by 2002:a17:906:329a:b0:a30:e8de:7317 with SMTP id
- 26-20020a170906329a00b00a30e8de7317mr247178ejw.39.1706165471934; 
- Wed, 24 Jan 2024 22:51:11 -0800 (PST)
-Received: from [127.0.0.1] ([46.211.116.76]) by smtp.gmail.com with ESMTPSA id
- s9-20020a1709066c8900b00a2c70ec1533sm684733ejr.66.2024.01.24.22.51.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 24 Jan 2024 22:51:11 -0800 (PST)
-Date: Thu, 25 Jan 2024 08:51:09 +0200
-From: Svyatoslav <clamor95@gmail.com>
-To: Dan Carpenter <dan.carpenter@linaro.org>
-CC: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Thomas Mittelstaedt <thomas.mittelstaedt@de.bosch.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sean Edmond <seanedmond@microsoft.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- =?ISO-8859-1?Q?Jonas_Schw=F6bel?= <jonasschwoebel@yahoo.de>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v1 0/1] Fix booting kernels with ATAGS and extlinux
-User-Agent: K-9 Mail for Android
-In-Reply-To: <4b77da9a-9700-43de-a833-14f809e2919b@moroto.mountain>
-References: <20240124202731.39212-1-clamor95@gmail.com>
- <4b77da9a-9700-43de-a833-14f809e2919b@moroto.mountain>
-Message-ID: <FDCB4AEF-9106-421F-BB9F-16E2339B2148@gmail.com>
+ d=1e100.net; s=20230601; t=1706166183; x=1706770983;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/u7XFDvT8osLx3lj3gaCRiOCaA1rdwoLC8RCJ6uKPdE=;
+ b=Hwuenmvoj7bIabTMWw++jyf/VYY05YA6Yr/8zck9a8zBEMwp9jlDDj17lVRdESdt0h
+ 6EMHtYiCTem6lda7zwDZ+0klrgmNHy0+VpXvsXAA6Ic7FkZyjNannRF97b5YnyNthvz/
+ 0Oz7YmQQcNseV6mmT6OQD8i80XFCELudaEElYvf/j9IE2I90wv+ZUqhUg2ZaX3M4sBVy
+ y0brEomRmw5+PaVzQVwidAzRCdmZycBx8eRgHQIaRuehdHzXGtFbXPxC5+zKImvfivf6
+ Ae1nQhVF7Cyh9ypoAcszr2SBbv7lWNCYaTib/UAbogNTCqNG4mZER5OMazgjygax3mNQ
+ bN9w==
+X-Gm-Message-State: AOJu0Yy/5SmRgIWCUN37FT5ugjbs64T/0s4D9DgikDfajM1Rz2NmIKe+
+ eQyNa1WluOJDzvjsnNyOCsMuzVda/HNXTcbu4a9zIMj+SLLsXuBOiU/A6WtgepA=
+X-Google-Smtp-Source: AGHT+IEyiIz8VnqHQSLgwRDeN5CQ+bT174mYRDxunlAzYFKzaXXZXx4QSfScQ3orkeZ0JpNUVNWSmQ==
+X-Received: by 2002:a17:902:b491:b0:1d6:f3a8:ade7 with SMTP id
+ y17-20020a170902b49100b001d6f3a8ade7mr516743plr.69.1706166182539; 
+ Wed, 24 Jan 2024 23:03:02 -0800 (PST)
+Received: from anyang.. ([106.250.177.234])
+ by smtp.googlemail.com with ESMTPSA id
+ z7-20020a1709028f8700b001d71935e5c1sm9868171plo.195.2024.01.24.23.03.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 24 Jan 2024 23:03:02 -0800 (PST)
+From: Dongjin Kim <tobetter@gmail.com>
+To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] board: rockchip: Add Hardkernel ODROID-M1S
+Date: Thu, 25 Jan 2024 16:02:51 +0900
+Message-Id: <20240125070252.2057679-1-tobetter@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,35 +89,1045 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hardkernel ODROID-M1S is a single board computer with a RK3566 SoC,
+a slightly modified version of the RK3566 SoC.
 
+Features tested on a ODROID-M1S 8GB v1.0 2023-08-10:
+    - SD-card boot
+    - eMMC boot
+    - PCIe/NVMe
 
-25 =D1=81=D1=96=D1=87=D0=BD=D1=8F 2024=E2=80=AF=D1=80=2E 08:29:54 GMT+02:0=
-0, Dan Carpenter <dan=2Ecarpenter@linaro=2Eorg> =D0=BD=D0=B0=D0=BF=D0=B8=D1=
-=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
->On Wed, Jan 24, 2024 at 10:27:30PM +0200, Svyatoslav Ryhel wrote:
->> Currently, if boot with extlinux=2Econf and do not set the fdt
->> U-Boot will provide its own device tree=2E This behavior is
->> beneficial if the U-Boot device tree is in sync with Linux,
->> but it totally halts the booting of pre-dtb kernels (3=2E4 for
->> example) since it uses ATAGs=2E To fix this, pass `-` in the
->> fdt extlinux field as a signal that no tree should be used=2E
->
->Passing - doesn't seem like the most intuitive thing=2E=2E=2E  Is there a
->different argument we could use?
->
+Signed-off-by: Dongjin Kim <tobetter@gmail.com>
+---
+ arch/arm/dts/rk3566-odroid-m1s-u-boot.dtsi |  28 +
+ arch/arm/dts/rk3566-odroid-m1s.dts         | 665 +++++++++++++++++++++
+ arch/arm/mach-rockchip/rk3568/Kconfig      |   6 +
+ board/hardkernel/odroid_m1s/Kconfig        |  15 +
+ board/hardkernel/odroid_m1s/MAINTAINERS    |   9 +
+ board/hardkernel/odroid_m1s/Makefile       |   7 +
+ board/hardkernel/odroid_m1s/board.c        |  80 +++
+ configs/odroid-m1s-rk3566_defconfig        | 109 ++++
+ doc/board/rockchip/rockchip.rst            |   1 +
+ include/configs/odroid_m1s.h               |  12 +
+ 10 files changed, 932 insertions(+)
+ create mode 100644 arch/arm/dts/rk3566-odroid-m1s-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3566-odroid-m1s.dts
+ create mode 100644 board/hardkernel/odroid_m1s/Kconfig
+ create mode 100644 board/hardkernel/odroid_m1s/MAINTAINERS
+ create mode 100644 board/hardkernel/odroid_m1s/Makefile
+ create mode 100644 board/hardkernel/odroid_m1s/board.c
+ create mode 100644 configs/odroid-m1s-rk3566_defconfig
+ create mode 100644 include/configs/odroid_m1s.h
 
-I agree that `-` is not the most intuitive argument,
-but this is a way to implement a fix with the least
-code posssible=2E To make this less obscure I have
-adjusted documentation=2E=20
+diff --git a/arch/arm/dts/rk3566-odroid-m1s-u-boot.dtsi b/arch/arm/dts/rk3566-odroid-m1s-u-boot.dtsi
+new file mode 100644
+index 00000000000..33a1d142b8c
+--- /dev/null
++++ b/arch/arm/dts/rk3566-odroid-m1s-u-boot.dtsi
+@@ -0,0 +1,28 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++#include "rk356x-u-boot.dtsi"
++
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/leds/common.h>
++
++/ {
++	chosen {
++		stdout-path = &uart2;
++		u-boot,spl-boot-order = &sdmmc0, &sdhci;
++	};
++};
++
++&sdhci {
++	cap-mmc-highspeed;
++	mmc-ddr-1_8v;
++	mmc-hs200-1_8v;
++	mmc-hs400-1_8v;
++	mmc-hs400-enhanced-strobe;
++	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
++};
++
++&uart2 {
++	bootph-all;
++	clock-frequency = <24000000>;
++	status = "okay";
++};
+diff --git a/arch/arm/dts/rk3566-odroid-m1s.dts b/arch/arm/dts/rk3566-odroid-m1s.dts
+new file mode 100644
+index 00000000000..73e29d80c71
+--- /dev/null
++++ b/arch/arm/dts/rk3566-odroid-m1s.dts
+@@ -0,0 +1,665 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2024 Hardkernel Co., Ltd.
++ *
++ */
++
++/dts-v1/;
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/leds/common.h>
++#include <dt-bindings/pinctrl/rockchip.h>
++#include <dt-bindings/soc/rockchip,vop2.h>
++#include "rk3566.dtsi"
++
++/ {
++	model = "Hardkernel ODROID-M1S";
++	compatible = "hardkernel,rk3568-odroid-m1s", "rockchip,rk3568";
++
++	aliases {
++		ethernet0 = &gmac1;
++		i2c0 = &i2c3;
++		i2c3 = &i2c0;
++		mmc0 = &sdhci;
++		mmc1 = &sdmmc0;
++		serial0 = &uart1;
++		serial1 = &uart0;
++	};
++
++	chosen {
++		stdout-path = "serial2:1500000n8";
++	};
++
++	gmac1_clkin: external-gmac1-clock {
++		compatible = "fixed-clock";
++		clock-frequency = <125000000>;
++		clock-output-names = "gmac1_clkin";
++		#clock-cells = <0>;
++	};
++
++	hdmi-con {
++		compatible = "hdmi-connector";
++		type = "a";
++
++		port {
++			hdmi_con_in: endpoint {
++				remote-endpoint = <&hdmi_out_con>;
++			};
++		};
++	};
++
++	leds {
++		compatible = "gpio-leds";
++
++		led_power: led-0 {
++			gpios = <&gpio0 RK_PC6 GPIO_ACTIVE_HIGH>;
++			function = LED_FUNCTION_POWER;
++			color = <LED_COLOR_ID_RED>;
++			default-state = "keep";
++			linux,default-trigger = "default-on";
++			pinctrl-names = "default";
++			pinctrl-0 = <&led_power_pin>;
++		};
++		led_work: led-1 {
++			gpios = <&gpio0 RK_PB7 GPIO_ACTIVE_HIGH>;
++			function = LED_FUNCTION_HEARTBEAT;
++			color = <LED_COLOR_ID_BLUE>;
++			linux,default-trigger = "heartbeat";
++			pinctrl-names = "default";
++			pinctrl-0 = <&led_work_pin>;
++		};
++	};
++
++	pcie20_3v3: pcie20-3v3-regulator {
++		compatible = "regulator-fixed";
++		enable-active-high;
++		gpios = <&gpio2 RK_PC2 GPIO_ACTIVE_HIGH>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&vcc3v3_pcie20_en_pin>;
++		regulator-name = "pcie20_3v3";
++		regulator-always-on;
++		regulator-boot-on;
++	};
++
++	rk809-sound {
++		compatible = "simple-audio-card";
++		simple-audio-card,name = "Analog RK817";
++		simple-audio-card,format = "i2s";
++		simple-audio-card,mclk-fs = <256>;
++		simple-audio-card,widgets =
++			"Headphone", "Headphones",
++			"Speaker", "Speaker";
++		simple-audio-card,routing =
++			"Headphones", "HPOL",
++			"Headphones", "HPOR",
++			"Speaker", "SPKO";
++
++		simple-audio-card,cpu {
++			sound-dai = <&i2s1_8ch>;
++		};
++
++		simple-audio-card,codec {
++			sound-dai = <&rk809>;
++		};
++	};
++
++	spdif_dit: spdif-dit {
++		compatible = "linux,spdif-dit";
++		#sound-dai-cells = <0>;
++		status = "disabled";
++	};
++
++	spdif_sound: spdif-sound {
++		compatible = "simple-audio-card";
++		status = "disabled";
++
++		simple-audio-card,cpu {
++			sound-dai = <&spdif>;
++		};
++
++		simple-audio-card,codec {
++			sound-dai = <&spdif_dit>;
++		};
++	};
++
++	vcc3v3_sys: vcc3v3-sys-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc3v3_sys";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		vin-supply = <&vcc5v0_sys>;
++	};
++
++	vcc5v0_sys: vcc5v0-sys-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc5v0_sys";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		vin-supply = <&vcc5v_dcin>;
++	};
++
++	vcc5v_dcin: vcc5v0-dcin {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc-5v0";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++	};
++
++	vcc5v0_usb_host: vcc5v0-usb-host-regulator {
++		compatible = "regulator-fixed";
++		enable-active-high;
++		gpio = <&gpio0 RK_PA5 GPIO_ACTIVE_HIGH>;
++		pinctrl-0 = <&vcc5v0_usb_host_en_pin>;
++		pinctrl-names = "default";
++		regulator-max-microvolt = <5000000>;
++		regulator-min-microvolt = <5000000>;
++		regulator-name = "vcc5v0_usb_host";
++		vin-supply = <&vcc5v0_sys>;
++	};
++
++	vcc5v0_usb_otg: vcc5v0-usb-otg-regulator {
++		compatible = "regulator-fixed";
++		enable-active-high;
++		gpio = <&gpio0 RK_PA6 GPIO_ACTIVE_HIGH>;
++		pinctrl-0 = <&vcc5v0_usb_otg_en_pin>;
++		pinctrl-names = "default";
++		regulator-max-microvolt = <5000000>;
++		regulator-min-microvolt = <5000000>;
++		regulator-name = "vcc5v0_usb_otg";
++		vin-supply = <&vcc5v0_sys>;
++	};
++};
++
++&combphy1 {
++	phy-supply = <&vcc5v0_usb_host>;
++	status = "okay";
++};
++
++&combphy2 {
++	status = "okay";
++};
++
++&cpu0 {
++	cpu-supply = <&vdd_cpu>;
++};
++
++&cpu1 {
++	cpu-supply = <&vdd_cpu>;
++};
++
++&cpu2 {
++	cpu-supply = <&vdd_cpu>;
++};
++
++&cpu3 {
++	cpu-supply = <&vdd_cpu>;
++};
++
++&gmac1 {
++	assigned-clock-parents = <&cru SCLK_GMAC1_RGMII_SPEED>;
++	assigned-clock-rates = <0>, <125000000>;
++	assigned-clocks = <&cru SCLK_GMAC1_RX_TX>, <&cru SCLK_GMAC1>;
++	clock_in_out = "output";
++	phy-handle = <&rgmii_phy1>;
++	phy-mode = "rgmii";
++	phy-supply = <&vcc3v3_sys>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&gmac1m1_miim
++		     &gmac1m1_tx_bus2
++		     &gmac1m1_rx_bus2
++		     &gmac1m1_rgmii_clk
++		     &gmac1m1_rgmii_bus
++		     &gmac1m1_clkinout>;
++	status = "okay";
++
++	tx_delay = <0x4f>;
++	rx_delay = <0x2d>;
++};
++
++&gpu {
++	mali-supply = <&vdd_gpu>;
++	status = "okay";
++};
++
++&hdmi {
++	avdd-0v9-supply = <&vdda0v9_image>;
++	avdd-1v8-supply = <&vcca1v8_image>;
++	status = "okay";
++};
++
++&hdmi_in {
++	hdmi_in_vp0: endpoint {
++		remote-endpoint = <&vp0_out_hdmi>;
++	};
++};
++
++&hdmi_out {
++	hdmi_out_con: endpoint {
++		remote-endpoint = <&hdmi_con_in>;
++	};
++};
++
++&hdmi_sound {
++	status = "okay";
++};
++
++&i2c0 {
++	status = "okay";
++
++	vdd_cpu: regulator@1c {
++		compatible = "tcs,tcs4525";
++		reg = <0x1c>;
++		fcs,suspend-voltage-selector = <1>;
++		regulator-name = "vdd_cpu";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <800000>;
++		regulator-max-microvolt = <1150000>;
++		regulator-ramp-delay = <2300>;
++		vin-supply = <&vcc3v3_sys>;
++
++		regulator-state-mem {
++			regulator-off-in-suspend;
++		};
++	};
++
++	rk809: pmic@20 {
++		compatible = "rockchip,rk809";
++		reg = <0x20>;
++		interrupt-parent = <&gpio0>;
++		interrupts = <RK_PA3 IRQ_TYPE_LEVEL_LOW>;
++		assigned-clocks = <&cru I2S1_MCLKOUT_TX>;
++		assigned-clock-parents = <&cru CLK_I2S1_8CH_TX>;
++		#clock-cells = <1>;
++		clock-names = "mclk";
++		clocks = <&cru I2S1_MCLKOUT_TX>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&pmic_int_l>, <&i2s1m0_mclk>;
++		rockchip,system-power-controller;
++		#sound-dai-cells = <0>;
++		vcc1-supply = <&vcc3v3_sys>;
++		vcc2-supply = <&vcc3v3_sys>;
++		vcc3-supply = <&vcc3v3_sys>;
++		vcc4-supply = <&vcc3v3_sys>;
++		vcc5-supply = <&vcc3v3_sys>;
++		vcc6-supply = <&vcc3v3_sys>;
++		vcc7-supply = <&vcc3v3_sys>;
++		vcc8-supply = <&vcc3v3_sys>;
++		vcc9-supply = <&vcc3v3_sys>;
++		wakeup-source;
++
++		regulators {
++			vdd_logic: DCDC_REG1 {
++				regulator-name = "vdd_logic";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-init-microvolt = <900000>;
++				regulator-initial-mode = <0x2>;
++				regulator-min-microvolt = <500000>;
++				regulator-max-microvolt = <1350000>;
++				regulator-ramp-delay = <6001>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdd_gpu: DCDC_REG2 {
++				regulator-name = "vdd_gpu";
++				regulator-always-on;
++				regulator-init-microvolt = <900000>;
++				regulator-initial-mode = <0x2>;
++				regulator-min-microvolt = <500000>;
++				regulator-max-microvolt = <1350000>;
++				regulator-ramp-delay = <6001>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc_ddr: DCDC_REG3 {
++				regulator-name = "vcc_ddr";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-initial-mode = <0x2>;
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++				};
++			};
++
++			vdd_npu: DCDC_REG4 {
++				regulator-name = "vdd_npu";
++				regulator-init-microvolt = <900000>;
++				regulator-initial-mode = <0x2>;
++				regulator-min-microvolt = <500000>;
++				regulator-max-microvolt = <1350000>;
++				regulator-ramp-delay = <6001>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc_1v8: DCDC_REG5 {
++				regulator-name = "vcc_1v8";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdda0v9_image: LDO_REG1 {
++				regulator-name = "vdda0v9_image";
++				regulator-always-on;
++				regulator-min-microvolt = <900000>;
++				regulator-max-microvolt = <900000>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdda_0v9: LDO_REG2 {
++				regulator-name = "vdda_0v9";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <900000>;
++				regulator-max-microvolt = <900000>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vdda0v9_pmu: LDO_REG3 {
++				regulator-name = "vdda0v9_pmu";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <900000>;
++				regulator-max-microvolt = <900000>;
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <900000>;
++				};
++			};
++
++			vccio_acodec: LDO_REG4 {
++				regulator-name = "vccio_acodec";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vccio_sd: LDO_REG5 {
++				regulator-name = "vccio_sd";
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <3300000>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc3v3_pmu: LDO_REG6 {
++				regulator-name = "vcc3v3_pmu";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <3300000>;
++				};
++			};
++
++			vcca_1v8: LDO_REG7 {
++				regulator-name = "vcca_1v8";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcca1v8_pmu: LDO_REG8 {
++				regulator-name = "vcca1v8_pmu";
++				regulator-always-on;
++				regulator-boot-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <1800000>;
++				};
++			};
++
++			vcca1v8_image: LDO_REG9 {
++				regulator-name = "vcca1v8_image";
++				regulator-always-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc_3v3: SWITCH_REG1 {
++				regulator-name = "vcc_3v3";
++				regulator-always-on;
++				regulator-boot-on;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++
++			vcc3v3_sd: SWITCH_REG2 {
++				regulator-name = "vcc3v3_sd";
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++		};
++	};
++};
++
++&i2s0_8ch {
++	status = "okay";
++};
++
++&i2s1_8ch {
++	rockchip,trcm-sync-tx-only;
++	status = "okay";
++};
++
++&mdio1 {
++	rgmii_phy1: ethernet-phy@0 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <0x0>;
++	};
++};
++
++&pcie2x1 {
++	pinctrl-0 = <&pcie20m2_pins>;
++	reset-gpios = <&gpio1 RK_PB2 GPIO_ACTIVE_HIGH>;
++	status = "okay";
++	vpcie3v3-supply = <&pcie20_3v3>;
++};
++
++&pinctrl {
++	leds {
++		led_power_pin: led-power-pin {
++			rockchip,pins = <0 RK_PC6 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++		led_work_pin: led-work-pin {
++			rockchip,pins = <0 RK_PB7 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++
++	pcie {
++		vcc3v3_pcie20_en_pin: vcc3v3-pcie20-en-pin {
++			rockchip,pins = <2 RK_PC2 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++
++	pmic {
++		pmic_int_l: pmic-int-l {
++			rockchip,pins = <0 RK_PA3 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++	};
++
++	usb {
++		vcc5v0_usb_host_en_pin: vcc5v0-usb-host-en-pin {
++			rockchip,pins = <0 RK_PA5 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++		vcc5v0_usb_otg_en_pin: vcc5v0-usb-dr-en-pin {
++			rockchip,pins = <0 RK_PA6 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++};
++
++&pmu_io_domains {
++	pmuio1-supply = <&vcc3v3_pmu>;
++	pmuio2-supply = <&vcc3v3_pmu>;
++	vccio1-supply = <&vccio_acodec>;
++	vccio2-supply = <&vcc_1v8>;
++	vccio3-supply = <&vccio_sd>;
++	vccio4-supply = <&vcc_3v3>;
++	vccio5-supply = <&vcc_3v3>;
++	vccio6-supply = <&vcc_3v3>;
++	vccio7-supply = <&vcc_3v3>;
++	status = "okay";
++};
++
++&saradc {
++	vref-supply = <&vcca_1v8>;
++	status = "okay";
++};
++
++&sdhci {
++	bus-width = <8>;
++	max-frequency = <200000000>;
++	non-removable;
++	pinctrl-names = "default";
++	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe &emmc_rstnout>;
++	vmmc-supply = <&vcc_3v3>;
++	vqmmc-supply = <&vcc_1v8>;
++	status = "okay";
++};
++
++&sdmmc0 {
++	bus-width = <4>;
++	cap-sd-highspeed;
++	cd-gpios = <&gpio0 RK_PA4 GPIO_ACTIVE_LOW>;
++	disable-wp;
++	pinctrl-names = "default";
++	pinctrl-0 = <&sdmmc0_bus4 &sdmmc0_clk &sdmmc0_cmd &sdmmc0_det>;
++	sd-uhs-sdr50;
++	vmmc-supply = <&vcc3v3_sd>;
++	vqmmc-supply = <&vccio_sd>;
++	status = "okay";
++};
++
++&tsadc {
++	rockchip,hw-tshut-mode = <1>;
++	rockchip,hw-tshut-polarity = <0>;
++	status = "okay";
++};
++
++&uart2 {
++	status = "okay";
++};
++
++&usb_host0_ehci {
++	status = "okay";
++};
++
++&usb_host0_ohci {
++	status = "okay";
++};
++
++&usb_host0_xhci {
++	dr_mode = "otg";
++	status = "okay";
++};
++
++&usb_host1_ehci {
++	status = "okay";
++};
++
++&usb_host1_ohci {
++	status = "okay";
++};
++
++&usb_host1_xhci {
++	status = "okay";
++};
++
++&usb2phy0 {
++	status = "okay";
++};
++
++&usb2phy0_host {
++	phy-supply = <&vcc5v0_usb_host>;
++	status = "okay";
++};
++
++&usb2phy0_otg {
++	phy-supply = <&vcc5v0_usb_otg>;
++	status = "okay";
++};
++
++&usb2phy1 {
++	status = "okay";
++};
++
++&usb2phy1_host {
++	phy-supply = <&vcc5v0_usb_host>;
++	status = "okay";
++};
++
++&usb2phy1_otg {
++	phy-supply = <&vcc5v0_usb_host>;
++	status = "okay";
++};
++
++&vop {
++	assigned-clocks = <&cru DCLK_VOP0>, <&cru DCLK_VOP1>;
++	assigned-clock-parents = <&pmucru PLL_HPLL>, <&cru PLL_VPLL>;
++	status = "okay";
++};
++
++&vop_mmu {
++	status = "okay";
++};
++
++&vp0 {
++	vp0_out_hdmi: endpoint@ROCKCHIP_VOP2_EP_HDMI0 {
++		reg = <ROCKCHIP_VOP2_EP_HDMI0>;
++		remote-endpoint = <&hdmi_in_vp0>;
++	};
++};
+diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
+index baa51349f4b..2f03b983ee5 100644
+--- a/arch/arm/mach-rockchip/rk3568/Kconfig
++++ b/arch/arm/mach-rockchip/rk3568/Kconfig
+@@ -22,6 +22,11 @@ config TARGET_ODROID_M1_RK3568
+ 	help
+ 	  Hardkernel ODROID-M1 single board computer with a RK3568B2 SoC.
+ 
++config TARGET_ODROID_M1S_RK3566
++	bool "ODROID-M1S"
++	help
++	  Hardkernel ODROID-M1S single board computer with a RK3566 SoC.
++
+ config TARGET_QUARTZ64_RK3566
+ 	bool "Pine64 Quartz64"
+ 	help
+@@ -44,6 +49,7 @@ config SYS_MALLOC_F_LEN
+ source "board/rockchip/evb_rk3568/Kconfig"
+ source "board/anbernic/rgxx3_rk3566/Kconfig"
+ source "board/hardkernel/odroid_m1/Kconfig"
++source "board/hardkernel/odroid_m1s/Kconfig"
+ source "board/pine64/quartz64_rk3566/Kconfig"
+ 
+ endif
+diff --git a/board/hardkernel/odroid_m1s/Kconfig b/board/hardkernel/odroid_m1s/Kconfig
+new file mode 100644
+index 00000000000..0acea61dac4
+--- /dev/null
++++ b/board/hardkernel/odroid_m1s/Kconfig
+@@ -0,0 +1,15 @@
++if TARGET_ODROID_M1S_RK3566
++
++config SYS_BOARD
++	default "odroid_m1s"
++
++config SYS_VENDOR
++	default "hardkernel"
++
++config SYS_CONFIG_NAME
++	default "odroid_m1s"
++
++config BOARD_SPECIFIC_OPTIONS # dummy
++	def_bool y
++
++endif
+diff --git a/board/hardkernel/odroid_m1s/MAINTAINERS b/board/hardkernel/odroid_m1s/MAINTAINERS
+new file mode 100644
+index 00000000000..20fc277ccc6
+--- /dev/null
++++ b/board/hardkernel/odroid_m1s/MAINTAINERS
+@@ -0,0 +1,9 @@
++ODROID-M1S
++M:	Dongjin Kim <tobetter@gmail.com>
++S:	Maintained
++F:	arch/arm/dts/rk3566-odroid-m1s-u-boot.dtsi
++F:	arch/arm/dts/rk3566-odroid-m1s.dts
++F:	board/hardkernel/odroid_m1s/
++F:	board/hardkernel/odroid_m1s/board.c
++F:	configs/odroid-m1s-rk3566_defconfig
++F:	include/configs/odroid_m1s.h
+diff --git a/board/hardkernel/odroid_m1s/Makefile b/board/hardkernel/odroid_m1s/Makefile
+new file mode 100644
+index 00000000000..6ca49c49b71
+--- /dev/null
++++ b/board/hardkernel/odroid_m1s/Makefile
+@@ -0,0 +1,7 @@
++#
++# Copyright (c) 2024 Hardkernel Co,. Ltd
++#
++# SPDX-License-Identifier:     GPL-2.0+
++#
++
++obj-y	+= board.o
+diff --git a/board/hardkernel/odroid_m1s/board.c b/board/hardkernel/odroid_m1s/board.c
+new file mode 100644
+index 00000000000..de7b160a51a
+--- /dev/null
++++ b/board/hardkernel/odroid_m1s/board.c
+@@ -0,0 +1,80 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * (C) Copyright 2024 Hardkernel Co., Ltd
++ */
++
++#include <asm/unaligned.h>
++#include <mmc.h>
++#include <net.h>
++#include <asm/arch-rockchip/misc.h>
++
++#ifdef CONFIG_MISC_INIT_R
++
++/* Read first block 512 bytes from the first BOOT partition of eMMC
++ * that stores device identifcation sting in UUID type 1, this string
++ * is written in factory to give device seranl number and MAC address.
++ */
++static int odroid_setup_macaddr(void)
++{
++	struct mmc *mmc;
++	struct blk_desc *desc;
++	unsigned long mac_addr;
++	unsigned long count;
++	int ret;
++	u8 buf[512];
++
++	mmc = find_mmc_device(0);
++	if (!mmc)
++		return -ENODEV;
++
++	desc = mmc_get_blk_desc(mmc);
++
++	// Switch to the first BOOT partition
++	ret = blk_select_hwpart_devnum(UCLASS_MMC, 0, 1);
++	if (ret)
++		return -EIO;
++
++	count = blk_dread(desc, 0, 1, (void *)buf);
++
++	// Switch back to USER partition
++	ret = blk_dselect_hwpart(desc, 0);
++	if (ret || count != 1)
++		return -EIO;
++
++	*(char *)(buf + 36) = 0;
++
++	// Serial number
++	env_set("serial#", (char *)buf);
++
++	// MAC address
++	mac_addr = cpu_to_be64(simple_strtoul((char *)buf + 24, NULL, 16)) >> 16;
++
++	eth_env_set_enetaddr("ethaddr", (unsigned char *)&mac_addr);
++	eth_env_set_enetaddr("eth1addr", (unsigned char *)&mac_addr);
++
++	return 0;
++}
++
++int misc_init_r(void)
++{
++	const u32 cpuid_offset = CFG_CPUID_OFFSET;
++	const u32 cpuid_length = 0x10;
++	u8 cpuid[cpuid_length];
++	int ret;
++
++	ret = odroid_setup_macaddr();
++	if (ret) {
++		ret = rockchip_setup_macaddr();
++		if (ret)
++			return ret;
++	}
++
++	ret = rockchip_cpuid_from_efuse(cpuid_offset, cpuid_length, cpuid);
++	if (ret)
++		return ret;
++
++	ret = rockchip_cpuid_set(cpuid, cpuid_length);
++
++	return ret;
++}
++#endif
+diff --git a/configs/odroid-m1s-rk3566_defconfig b/configs/odroid-m1s-rk3566_defconfig
+new file mode 100644
+index 00000000000..d70a10dc080
+--- /dev/null
++++ b/configs/odroid-m1s-rk3566_defconfig
+@@ -0,0 +1,109 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_TEXT_BASE=0x00a00000
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
++CONFIG_SF_DEFAULT_SPEED=24000000
++CONFIG_SF_DEFAULT_MODE=0x1000
++CONFIG_DEFAULT_DEVICE_TREE="rk3566-odroid-m1s"
++CONFIG_ROCKCHIP_RK3568=y
++CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
++CONFIG_ROCKCHIP_SPI_IMAGE=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_STACK_R_ADDR=0x600000
++CONFIG_TARGET_ODROID_M1S_RK3566=y
++CONFIG_SPL_STACK=0x400000
++CONFIG_DEBUG_UART_BASE=0xFE660000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_AHCI=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-odroid-m1s.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x4000000
++CONFIG_SPL_BSS_MAX_SIZE=0x4000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++CONFIG_SPL_STACK_R=y
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x100000
++CONFIG_SPL_ATF=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_USB=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_INI=y
++CONFIG_CMD_PMIC=y
++CONFIG_CMD_REGULATOR=y
++CONFIG_CMD_CRAMFS=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_AHCI_PCI=y
++CONFIG_DWC_AHCI=y
++CONFIG_SPL_CLK=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_SF_DEFAULT_BUS=4
++CONFIG_PHY_REALTEK=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_ROCKCHIP=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_PHY_ROCKCHIP_PCIE=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_RK8XX=y
++CONFIG_REGULATOR_RK8XX=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_SPL_RAM=y
++CONFIG_SCSI=y
++CONFIG_DM_SCSI=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_FS_CRAMFS=y
++CONFIG_ERRNO_STR=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x0800
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index 18d0b6f0891..3ce9966fc13 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -93,6 +93,7 @@ List of mainline supported Rockchip boards:
+ 
+ * rk3566
+      - Anbernic RGxx3 (anbernic-rgxx3-rk3566)
++     - Hardkernel ODROID-M1S (odroid-m1s-rk3566)
+      - Pine64 Quartz64-A Board (quartz64-a-rk3566)
+      - Pine64 Quartz64-B Board (quartz64-b-rk3566)
+      - Pine64 SOQuartz on Blade (soquartz-blade-rk3566)
+diff --git a/include/configs/odroid_m1s.h b/include/configs/odroid_m1s.h
+new file mode 100644
+index 00000000000..b2718613886
+--- /dev/null
++++ b/include/configs/odroid_m1s.h
+@@ -0,0 +1,12 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++
++#ifndef __ODROID_M1S_H
++#define __ODROID_M1S_H
++
++#include <configs/rk3568_common.h>
++
++#define ROCKCHIP_DEVICE_SETTINGS \
++		"stdout=serial\0" \
++		"stderr=serial\0"
++
++#endif
+-- 
+2.34.1
 
-Currently if no fdt is specified u-boot will pass its
-own device tree and if leave fdt field blank u-boot
-will fail with the wrong name for the device tree=2E
-So there is NO way to boot ATAGs based kernel
-if u-boot has an appended tree and fdt support=20
-built in=2E
-
->regards,
->dan carpenter
->
