@@ -4,93 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58512C47258
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 15:04:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D72F0C47DDF
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 15:11:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 889E587559;
-	Thu, 25 Jan 2024 16:04:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0F5E587015;
+	Thu, 25 Jan 2024 16:11:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Tykr44FX";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LDAQ1vSa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D89D87897; Thu, 25 Jan 2024 16:04:10 +0100 (CET)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id 66D8B8753E; Thu, 25 Jan 2024 16:11:42 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28E0B87134
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 16:04:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BB5C86FC9
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 16:11:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-6818d263cb3so47520726d6.2
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 07:04:06 -0800 (PST)
+ spf=pass smtp.mailfrom=o451686892@gmail.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-55790581457so9069582a12.3
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 07:11:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1706195045; x=1706799845; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zHj+GY+dKxCo9JwwpM78JMUy6biA2WMU4dqQ3GsXW2I=;
- b=Tykr44FXprnRW2yUCNeefkLLSV0kgCzRbY8aj37yNSLtmoe/NKDJbo0HYtp8/U4Okn
- XDlrJ1t/7vopMF+Tfx142YeuJh46MOEv2y3jVtGgt6TiPqYyfZRBSUXpGXUrXOTFtPH+
- g5c+8vANpRrGBQab+wN06+pVAq1imyCNkWzgk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706195045; x=1706799845;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1706195500; x=1706800300; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zHj+GY+dKxCo9JwwpM78JMUy6biA2WMU4dqQ3GsXW2I=;
- b=jLpT6KkiOydtAiHZHT0oJLgJ0Kokb33Qowt7RkldTOZbszt/kG2oFNbykw9r3JmqZl
- rF1+M3iLkGsa2PfX2vUIzOuvLox/3/oQlM3S8Yr7iZwwnJA4FEQqn+wTyfbV6hgZEINa
- yieCMd/hC0W9QWVs0/fBh7WD8vJ6CLrmynFfppol3vMT7x0aPMo/MSKKAh2PW7FIwpJl
- IHKZu7FISo0ESseTB1LcbQ9GB7nD4Xl+KlgBQG7eWVNClNJgVHWOXq5/nha11kTeN3H4
- jR1XbrKnxDA9p6IkV5ztCLYytz3EqtOUZ9L70e918O+OW8UIW2h9/BO+s12JbSJTJEj8
- ASdw==
-X-Gm-Message-State: AOJu0YwM5Of8733jtSJSRULb8JkGR6hHco93J29A33K5pnFnddu0cT3k
- /InbeTyuO6tluEOJhqf8dYz6zP8GjpEuKZQO6IHd5T8H4GgX6adNc9hndaHpIic=
-X-Google-Smtp-Source: AGHT+IGuohF7IVVqZS0ugmYETim1ESaYT8qCB9JPSkJ38LIl/3VaeLcW7S0hYsVnBgG1OEVKcTtYcA==
-X-Received: by 2002:ad4:5c44:0:b0:684:e4e3:3a49 with SMTP id
- a4-20020ad45c44000000b00684e4e33a49mr1688219qva.48.1706195044631; 
- Thu, 25 Jan 2024 07:04:04 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- ny18-20020a056214399200b006868e6d8b37sm4206977qvb.23.2024.01.25.07.04.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jan 2024 07:04:04 -0800 (PST)
-Date: Thu, 25 Jan 2024 10:04:00 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Marek Vasut <marex@denx.de>, Caleb Connolly <caleb.connolly@linaro.org>,
- u-boot@lists.denx.de, u-boot-amlogic@groups.io,
- u-boot-custodians@lists.denx.de, sjg@chromium.org,
- robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org,
- conor@kernel.org, neil.armstrong@linaro.org, ff@shokubai.tech,
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
- pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
- maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de,
- michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk,
- peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com,
- mibodhi@gmail.com, bb@ti.com, mark.kettenis@xs4all.nl
-Subject: Re: [PATCH v4 00/11] An effort to bring DT bindings compliance
- within U-Boot
-Message-ID: <20240125150400.GM3652023@bill-the-cat>
-References: <20240110103547.719757-1-sumit.garg@linaro.org>
- <82d509de-3d47-4cc2-8217-c38dc78fad28@denx.de>
- <7b4ff8e8-2f21-4d07-9848-fb0d5652819e@linaro.org>
- <4d8aede8-5ea8-45a4-87fe-d555a025ef8e@denx.de>
- <CAFA6WYN1tFs1id7UxTwLEyp69zx2BPUP7bffVZn80FKPLx2yJw@mail.gmail.com>
- <48125705-e78e-438f-90ac-2816432cd747@denx.de>
- <CAFA6WYMuerS5YTsquGvc+OHr+0a3JXrM4AQ_ReV4tPhvxv9H0w@mail.gmail.com>
+ bh=jXrFXM0iFuHvt0wya5vpWiTfPGtef5N5mA6Wopfus1I=;
+ b=LDAQ1vSaVJpj57QsiSdO0vlWkZ60OJBLA9pJ90riH8szdqJWGyqbgJ+4wskpV9W3Zu
+ qNM2wEEjc0oUWgMyphLxkVW2ZLjTSbSJo9SSFPbvjEZ9MOycXIYmLeHnLetFNPrwUTOc
+ 0oekjlNk/+oREEtumQYXWsAYM2BRSMj57fgkvYLnws9o50BKky+dJWKaIZg6A+FQzr5r
+ l/ZOaPS3RVeVbgR7mmOLor674WE1Xujzix/oLiyLvGLXmK14vGBNslPX0mweraIXOEY+
+ tD4c+UMCd3yEceSbvceRDJ6JP1wG6ScopUOfMrV2dvAyPrjJ9Bt2rA0VXHD5D4x0VFnN
+ Cm5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706195500; x=1706800300;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jXrFXM0iFuHvt0wya5vpWiTfPGtef5N5mA6Wopfus1I=;
+ b=b3lHX23Rbe2Hgd35i/7vjy4Wks25hpg0FobuDSDQMPTqYN4HWhTK4slgjPHWDCRqMZ
+ Ff6lI3yT9XwEVyfBmYm9puKyfchtbe69vPnPPgo3aYPL1J+dQWoM4/VOhS6dVJKW+EHB
+ rCqN7K+0QDrTY/ooXvaa/4BKfAgeXuZjkxQEyTJs7caV2bImVCyLdDjfS45L20Z0jwTQ
+ NSeINNdfdC+7WfqW5XYvraRcG+NI/cmLbwf0MVbktX8bRyRbA5YCmrZsvlmEtfdGyES6
+ KC8LknlNnHn4CLMspCFoHd3d1AIwQckEA3gg0u5HbKmC5raNYq2xLxpXoD0xTf0MvfGw
+ G4Vw==
+X-Gm-Message-State: AOJu0YxuAERZ3iapGr9pdjV3PiHugKbFMofgKzhfTq7y449QsdVmr5XU
+ 5ecLaGDxCTWJlksxDwNo7fh6F57ysq6Fgu+oSZ0ycHZV77LbrIJv3lHKcvPvO6DV78oHWWSs3oQ
+ 4HmfUo2v8kODymY0Idk4bUgplXz0=
+X-Google-Smtp-Source: AGHT+IEJSu9wnD66DUQQ8XTMSlHQJZNoGdga63Pri2oKiNlkXTi6JLWsyNCenXjuV6yyszhy1kfcNwjKQZeullZ8TjE=
+X-Received: by 2002:aa7:d491:0:b0:55a:7385:e9d8 with SMTP id
+ b17-20020aa7d491000000b0055a7385e9d8mr694583edr.27.1706195498762; Thu, 25 Jan
+ 2024 07:11:38 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ve8452iyz3omAKn5"
-Content-Disposition: inline
-In-Reply-To: <CAFA6WYMuerS5YTsquGvc+OHr+0a3JXrM4AQ_ReV4tPhvxv9H0w@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240125140502.22400-1-o451686892@gmail.com>
+ <20240125140502.22400-4-o451686892@gmail.com>
+ <94019c2e-44bb-49d5-b1ce-beebb0085871@gmx.de>
+In-Reply-To: <94019c2e-44bb-49d5-b1ce-beebb0085871@gmx.de>
+From: Weizhao Ouyang <o451686892@gmail.com>
+Date: Thu, 25 Jan 2024 23:11:27 +0800
+Message-ID: <CAHk0HotuzT+ZYFrR74hK6aOqFKGrOhAyXt2YXxn-UGAa9V_V0Q@mail.gmail.com>
+Subject: Re: [PATCH 3/3] cmd: rng: Add rng list command
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, u-boot@lists.denx.de, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Etienne Carriere <etienne.carriere@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,107 +94,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Jan 25, 2024 at 10:49=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@g=
+mx.de> wrote:
+>
+> On 25.01.24 15:05, Weizhao Ouyang wrote:
+> > Add rng list command to list all probed RNG device.
+>
+> Thank you for your contribution.
+>
+> Would the following be more accurate?
+>
+> The 'rng list' command probes all RNG devices and list those devices
+> that are successfully probed.
 
---ve8452iyz3omAKn5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Yeah.
 
-On Thu, Jan 25, 2024 at 12:54:22PM +0530, Sumit Garg wrote:
-
-[snip]
-> But at this point we have to move away from apprehensions about DT ABI
-> breakages and provide real examples of the DT ABI breakages in the
-> past. Are you aware of any DT ABI breaking change backported to Linux
-> stable releases? This is the sort of information we would like to make
-> DT bindings maintainers aware about.
-
-Well, how far back are we going? There was a serial related one, but it
-was probably closer than not to 10 years ago and lessons have been
-learned from it already.
-
-The real breakage comes in the form of (from the Linux kernel):
-commit 37685f6a63eeca2135d1f704e7638409a071b1f6
-Author: Peter Ujfalusi <peter.ujfalusi@ti.com>
-Date:   Tue Feb 19 08:46:33 2019 -0800
-
-    ARM: dts: am335x-evm: Fix PHY mode for ethernet
-
-    The PHY must add both tx and rx delay and not only on the tx clock.
-    The board uses AR8031_AL1A PHY where the rx delay is enabled by default,
-    the tx dealy is disabled.
-
-    The reason why rgmii-txid worked because the rx delay was not disabled =
-by
-    the driver so essentially we ended up with rgmii-id PHY mode.
-
-    Signed-off-by: Peter Ujfalusi <peter.ujfalusi@ti.com>
-    Signed-off-by: Tony Lindgren <tony@atomide.com>
-
-And this is of the style "the DTS was wrong before so we can break it".
-This is the specific example (as the board is in my lab) that comes most
-clearly to mind but there have been similar examples in 2022/2023.
-
-The other just as painful examples I think may be where Marek is
-concerned and it's around nodes being renamed for correctness. We've had
-a number of cases where a - turned to _ (or vice versa?) and whoops,
-platform stops booting. Down the line, tooling would catch that, and
-it's a problem of not being able to use better tooling until we have the
-updates that might break the boards that need the better tooling.
-
-And really this gets to the crux of the problem, how much testing do we
-insist happens prior to a re-sync being merged? Do we want to go with
-the whole of the dts files are re-synced, or do we leave it per vendor?
-I think it's been noted that a subtree merge commit doesn't really "git
-send-email" well.
-
-I really am inclined to start with keeping everyone to the release tags
-for everyone and merging them as soon as the next window opens. I
-_think__ and we'll be able to find out quickly enough, that we can
-cherry-pick fixes from upstream in to our subtree and have subtree Do
-The Right Thing in the next merge window.
-
-[snip]
-> > I think upstreaming the bootph* properties would still take a while, but
-> > is not relevant to the aforementioned question.
+>
 > >
-> > Assume there is a sync, would the current in-tree -u-boot.dtsi files get
-> > updated to work correctly with the newly synced DTs ?
->=20
-> As long as they contain nodes/properties (eg. bootph* etc.) which are
-> compliant with upstream DT bindings then yes they should work
-> correctly with the newly synced DTs.
+> > Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
+> > ---
+> >   cmd/rng.c | 15 +++++++++++++++
+> >   1 file changed, 15 insertions(+)
+> >
+> > diff --git a/cmd/rng.c b/cmd/rng.c
+> > index 52f722c7af..4818133f94 100644
+> > --- a/cmd/rng.c
+> > +++ b/cmd/rng.c
+> > @@ -18,6 +18,19 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, i=
+nt argc, char *const argv[])
+> >       int devnum;
+> >       struct udevice *dev;
+> >       int ret =3D CMD_RET_SUCCESS;
+> > +     int idx;
+>
+> Please, put the definition into the code block where it is used.
 
-This is a good specific example. The bootph* properties should _now_ be
-easier to get accepted upstream as our tooling handles the transitive
-property of them correctly and so they don't need to be manually applied
-so much (a problem upstream maintainers had, after the binding was
-accepted, was the sheer number of them being added, this is now fixed).
-But also applying these properties via -u-boot.dtsi was tripped up in
-resyncs where the parent node was renamed for correctness and there's no
-tooling that we had that complained. In the future, this would have been
-caught because we would have been dtbs_check clean, or at least clean
-enough that I'd be running it and caring about deltas from before/after.
+Sorry I imported the draft code, will remove it in the next version.
 
---=20
-Tom
+>
+> > +
+> > +     if (argc =3D=3D 2 && !strcmp(argv[1], "list")) {
+>
+> int idx =3D 0;
+>
+> > +             uclass_foreach_dev_probe(UCLASS_RNG, dev) {
+> > +                     printf("RNG #%d - %s\n", dev->seq_, dev->name);
+>
+> ++idx;
+>
+> > +             }
+> > +
+> > +             if (!idx) {
+> > +                     printf("*** no RNG devices available ***\n");
+>
+> If idx is not initialized, depending on the random value of idx on the
+> stack you get a printout or not, e.g.
+>
+> =3D> rng list
+> RNG #0 - riscv_zkr
+> RNG #1 - virtio-rng#8
+> *** no RNG devices available ***
+>
+> Do we need the message to be so noisy? How about
+>
+> log_err("No RNG device\n");
+>
+>
+> > +                     return CMD_RET_FAILURE;
+> > +             }
+>
+> We prefer having an empty line before return statements.
+>
+> Best regards
+>
+> Heinrich
+>
+> > +             return CMD_RET_SUCCESS;
+> > +     }
+> >
+> >       switch (argc) {
+> >       case 1:
+> > @@ -57,6 +70,8 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, in=
+t argc, char *const argv[])
+> >   }
+> >
+> >   U_BOOT_LONGHELP(rng,
+> > +     "[list]\n"
+> > +     "  - list all the probe rng device\n"
+> >       "[dev [n]]\n"
+> >       "  - print n random bytes(max 64) read from dev\n");
+> >
+>
 
---ve8452iyz3omAKn5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWyeF0ACgkQFHw5/5Y0
-tyx5ugv+PBFaZTYi7jWCJPRlFphI1G24s6Zqd9w4jX8oLzdsfpuVygzycneYrtyb
-4+i6bSOLLwjZnGwqps9JTMtqAJ/oOLdIHo9/7MTKmdUeX70R/1FKGGxlgO3/jMJj
-0IUo5NW9dZsUyIR3OD0/Se3ZmzE85QGLpe9oSwOcZQXGw9iyskdAnJlTdQ/hdnbw
-8HpHoDk0JT7ikqFhFx7zgFurpkkfv95/SiH8JDyzUi/jwRGQSjfFcVQSdoFwNZg8
-msMkyNVoh4iWtAaIY1KulO1S/T3SHOh30DEMrjEqmAMY/mkRtxE0BwPzuXidWR79
-Jq+E9PulWxgbBJ8Kcrrnd4SXfqZ0XZKniBwijgfomM10Rz3oXb8mZkEPcxtp4+Tb
-EcxLD1+QKYKLSu/LWATXRDbSh1rflowvAOyc2Bxh8PXof8RvsHs/W7ajzXoZ6zY6
-NwyOCmG2fqEqfBaYrltHbC7XIz1VDzTfPDb9yVImhUFhJSslOCO8tNmldb8WIRxf
-zpQ6wuPb
-=195M
------END PGP SIGNATURE-----
-
---ve8452iyz3omAKn5--
+BR,
+Weizhao
