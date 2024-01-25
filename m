@@ -4,73 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 763BEC47258
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 17:13:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B45AEC47258
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 18:19:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C457878C9;
-	Thu, 25 Jan 2024 18:13:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id ED8CC877BC;
+	Thu, 25 Jan 2024 19:19:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hJuzxBfK";
+	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="FHp8E1n2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D9BE876FA; Thu, 25 Jan 2024 18:13:40 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 65B5C87B58; Thu, 25 Jan 2024 17:29:22 +0100 (CET)
+Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E497F875FC
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 18:13:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CE0787536
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 17:29:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40PHDZUQ049543;
- Thu, 25 Jan 2024 11:13:35 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1706202816;
- bh=+XcYLAiYoacnhRASWzcOPzhJmynyWP72X3UE17v6Yfk=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=hJuzxBfKXWp+tnaJrw71tC29+9YtyLglU1ljG8vQHiHsklUU9ylxOdXJdnfLJcyt+
- SyYpWtIcGhsH3tUHTxo3j6D/GBKDSz5e2Gr0J69s60lsiYU2sFMbQ0d80YGUdpYn+P
- FxrjM2yZQ6JeLLF8UDNpPw4Kfk8zIYUtKNvqJfUQ=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40PHDZxH047749
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 25 Jan 2024 11:13:35 -0600
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 25
- Jan 2024 11:13:35 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 25 Jan 2024 11:13:35 -0600
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40PHDZWr055772;
- Thu, 25 Jan 2024 11:13:35 -0600
-Date: Thu, 25 Jan 2024 11:13:35 -0600
-From: Nishanth Menon <nm@ti.com>
-To: Andrew Davis <afd@ti.com>
-CC: Dhruva Gole <d-gole@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Tom Rini
- <trini@konsulko.com>, <u-boot@lists.denx.de>, Neha Francis
- <n-francis@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>
-Subject: Re: [PATCH] firmware: ti_sci: fix the secure_hdr in do_xfer
-Message-ID: <20240125171335.qoxphnemadkh7xjd@gullible>
-References: <20240124101558.184411-1-d-gole@ti.com>
- <87fryn7zoz.fsf@kamlesh.i-did-not-set--mail-host-address--so-tickle-me>
- <20240124130859.sdldy4jafknoa23q@dhruva>
- <20240124163910.sp7gt56lihoujm7k@etching>
- <20240124173723.3wfiwfgf6rhwgwaa@dhruva>
- <20240124180813.azl3ldrrg7a5iosz@spoils>
- <20240125054334.zjll7j4fpv66ciyn@dhruva>
- <948db6de-8150-493e-9a15-62aeac9aea6f@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gnu.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
+Received: from fencepost.gnu.org ([2001:470:142:3::e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
+ id 1rT2bJ-0000wR-KK; Thu, 25 Jan 2024 11:29:13 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
+ s=fencepost-gnu-org; h=MIME-Version:Date:References:In-Reply-To:Subject:To:
+ From; bh=9GOO6oAM/h0hRlrUxQvDQ/+eM6mlxoK1udFfaQwBbM0=; b=FHp8E1n2dubQKktWVsh1
+ r1HiZnlIasozMWSwUsh/kAO7w3Inb8Bw5sYeI5oM38dboWDVLDKHxlDfEWyrlWbeD/TY/3vHKmWma
+ fBkhQ2MlymJ5Vyhd74et6bj1sD6JKQlEmZXyIIBx89RIRQYvkmB7yAWVpbpk6dEHWotNEjHNllL3I
+ hPFcurBicct2X2nC6WnyLwqJPHGUM8GPscJoNydBDhRL0qi+ohPAREcmKkFkPPr0IwnVJiPuSpjDZ
+ /dPTNRW5dvb8eI/vBXT66uA3YkuBoHEJtkyLpRnA/i4FIVAktnB55b4WDkcaE4bSX05JM21V43bAb
+ sJE3WawbUaE2Vg==;
+From: Mathieu Othacehe <othacehe@gnu.org>
+To: Primoz Fiser <primoz.fiser@norik.com>
+Cc: Peng Fan <peng.fan@nxp.com>,  Tom Rini <trini@konsulko.com>,  Stefano
+ Babic <sbabic@denx.de>,  Fabio Estevam <festevam@gmail.com>,  "NXP i . MX
+ U-Boot Team" <uboot-imx@nxp.com>,  Christoph Stoidner
+ <c.stoidner@phytec.de>,  Wadim Egorov <w.egorov@phytec.de>,  Yannic Moog
+ <Y.Moog@phytec.de>,  u-boot@lists.denx.de,  upstream@lists.phytec.de
+Subject: Re: [PATCH v2] Add Phytec i.MX93 support
+In-Reply-To: <4f0dcc58-7a9f-41d9-9604-f9fe2336eb25@norik.com> (Primoz Fiser's
+ message of "Thu, 25 Jan 2024 12:47:28 +0100")
+References: <20240124134237.819-1-othacehe@gnu.org>
+ <4f0dcc58-7a9f-41d9-9604-f9fe2336eb25@norik.com>
+Date: Thu, 25 Jan 2024 17:29:02 +0100
+Message-ID: <87cytpml69.fsf@gnu.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <948db6de-8150-493e-9a15-62aeac9aea6f@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
+X-Mailman-Approved-At: Thu, 25 Jan 2024 19:19:55 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,24 +70,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10:55-20240125, Andrew Davis wrote:
-> I'd say since U-Boot today cannot send over secure channels anyway,
-> lets just drop this code and if we ever need it then we add it back
-> over in the right spot at that time.
 
+Hello,
 
-Chatting with manorit, the reason why we need the secure code is
-because of boot R5. boot R5 starts of in "secure mode" when it hands
-off from Boot ROM over to the Secondary bootloader. The initial set of
-calls we have to make unfortunately needs to be on secure pipe (think
-j721e load sysfw call, board config load call etc..) - which needs
-this support - which again, we should probably document in the code so
-that people don't go scratching our heads again.
+Thanks for having a look!
 
-That is unfortunately confusing enough for code since 99% of rest of
-u-boot flow does not use secure comm path.
+> Here are my findings:
+>
+> - FEC ethernet doesn't work
+> - distroboot doesn't work
+>
+> Did you expirience the same?
 
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+I have not tested Ethernet ports on u-boot yet. I removed distroboot
+support as you proposed later in the review.
+
+Note that my evaluation board has a hardware issue on the eMMC module. I
+am testing this patch my flashing the bootloader on the SD card using
+the commands in the proposed documentation, and booting on the SD card.
+
+> Can you rework you commit msg + title please?
+
+Done.
+
+> Can you rename to match other?
+
+Sure.
+
+> Can you add:
+>
+> &wdog3 {
+> 	bootph-all;
+> 	bootph-pre-ram;
+> };
+>
+> here to also enable WDT in SPL, please.
+
+OK.
+
+> I don't think this is necessary?
+>
+> You are using CONFIG_DM_SERIAL.
+
+It is not necessary indeed.
+
+> IMHO I would disable distroboot and sync with downstream.
+
+Done.
+
+I synced the configuration and environment files to be closer to the
+downstream versions.
+
+I will send a v3 soon.
+
+Thanks,
+
+Mathieu
