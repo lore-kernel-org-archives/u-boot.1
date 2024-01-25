@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62ECBC47258
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 13:56:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC0EEC48260
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 14:05:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6024787559;
-	Thu, 25 Jan 2024 14:56:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=litinow.com
+	by phobos.denx.de (Postfix) with ESMTP id 06D5A876A7;
+	Thu, 25 Jan 2024 15:05:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=litinow.com header.i=@litinow.com header.b="dMRNUfHp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BZ5JrUGB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65034871A6; Thu, 25 Jan 2024 13:05:29 +0100 (CET)
-Received: from cpanel35.fastsecurehost.com (cpanel35.fastsecurehost.com
- [217.115.119.35])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 66AE3875FC; Thu, 25 Jan 2024 15:05:36 +0100 (CET)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3442186FB2
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 13:05:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 53C4487447
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 15:05:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=litinow.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mauricio.penteado@litinow.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=litinow.com
- ; s=default;
- h=Content-Transfer-Encoding:Content-Type:Message-ID:Subject:To:
- From:Date:MIME-Version:Sender:Reply-To:Cc:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=bulkMqnwvCMz/iQnKLiNjGT/YaMnyYJ3ca+4oPJRIgs=; b=dMRNUfHpKwpWKlbA+SosRxiJAB
- INo0husRKeiNjFSOIJjETE7gDM9zj8OGmoekl9G60QvT2QizngEdFSyWGntHOGWEu0vqDrUhcjb6p
- 4X1yZzgY9KhOXrJ76vQeOpxbXBFS0RPGDRisTyzvrs2LJhaEbH6pNm+WOiq7XetyAO4CfecW1MCBU
- XXPl2OueiDqszs0eGYNcoeq/Z7kidBS+MDENHIdCut12uHpOr7bKtc2mAwDi9on73nIqf7vhPiwPP
- 9BdYkj7Ce+aJTC+DMs/O2TSB/aZfPAp4yiDxnjbp+vK0NSvTEBFhoG6MpJEQcpnI2pnfmvjU6uiOE
- o0obqvbA==;
-X-fastsecurehost-MailScanner-From: mauricio.penteado@litinow.com
-X-fastsecurehost-MailScanner-SpamCheck: 
-X-fastsecurehost-MailScanner: Found to be clean
-X-fastsecurehost-MailScanner-ID: 1rSyTv-00FY2a-1v
-X-fastsecurehost-MailScanner-Information: Please contact the ISP for more
- information
-Received: from [::1] (port=36518 helo=cpanel35.fastsecurehost.com)
- by cpanel35.fastsecurehost.com with esmtpa (Exim 4.96.2)
- (envelope-from <mauricio.penteado@litinow.com>) id 1rSyTv-00FY2a-1v
- for u-boot@lists.denx.de; Thu, 25 Jan 2024 12:05:19 +0000
+ spf=pass smtp.mailfrom=o451686892@gmail.com
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-1d75ea3a9b6so35842005ad.2
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 06:05:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706191532; x=1706796332; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=SsKxPiftVH2kq5bjTW/mjM0D5nFde6Gh8xr0vhsSeV8=;
+ b=BZ5JrUGBCdxHQOliPuyrxmKmLxud3/648aGKfcTD4uCE30byqvJ+I+rZqDTkx15I6c
+ wkJ3EW11c0qw/cXbkcK33fiyZnoRIOaed6jFdNxV4C1GIqB41Sj2b/IH+MzfujhlGkGl
+ l9LP2pi/rOIYVCnBgA+p5AFEls2tSd9gXjgcPQTi/DDmsm9calYV6hsZNFDkJ2+KcnKh
+ U8YuJenPKDv79tNE7pkXpHFzENVMuaml85B/38VB3AJnNAMfr6a+rgDSjdpkZ/q8HHHY
+ Z+o00C2rDySWuG2sApwZR3rwAj0+PLx2Nd1ocvFVGEMYeAW8rK7297SVfWZMBcA+rL3w
+ VKHA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706191532; x=1706796332;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=SsKxPiftVH2kq5bjTW/mjM0D5nFde6Gh8xr0vhsSeV8=;
+ b=cItnOflIZ7Nsp48/gBGXzqKWakgb1EcfuP11hPIdr5lBaq6/bTLzmj2FcuzEWJ75uX
+ GhsAyzdYE+uvK6rBcAgI5MHqMrsElpyvwkeoxqDF5DrWPVS33aQ8fpudkB++KYH9BoO4
+ LUKNEZJgBN4KK97OmWAWBNmbEGrC8Ik0hMoqUxkcVFVlisP4UBBPTrUVkObhh0jZpoFD
+ Z8xp5bLJNSamHcibPrZMnbR0o+W9tQJGz7MadF5c+uUOlqgdxyFFmWpY/pNsrigNm2xk
+ 9nDxAh4v84KY5zpm2oVMPkdujHJEzWC+0joV80yGhnYMRhCTEvhJgDdUXwQpuFWhF4lB
+ f4QQ==
+X-Gm-Message-State: AOJu0Yz8jbtnWXYYEzQUzMe5/w1uUUjkyE35NylPQrx8W4YLbTibymEG
+ RnYNtHlCyoezSJsJUuQvEdtoB3urBlYum2IrwLD1HB6eYfAfiiUF
+X-Google-Smtp-Source: AGHT+IG1hWX940GUJipCdVbA+vlQJpOOlfDhBOGjDxNrFSvp2m3zGaKnqKr9Vry2SVi/YqCw6Y1/Sg==
+X-Received: by 2002:a17:902:e805:b0:1d7:8541:f914 with SMTP id
+ u5-20020a170902e80500b001d78541f914mr1331462plg.26.1706191532016; 
+ Thu, 25 Jan 2024 06:05:32 -0800 (PST)
+Received: from ownia.localdomain ([8.210.91.195])
+ by smtp.gmail.com with ESMTPSA id
+ p18-20020a170902ead200b001d705836d0dsm11925699pld.200.2024.01.25.06.05.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 Jan 2024 06:05:31 -0800 (PST)
+From: Weizhao Ouyang <o451686892@gmail.com>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Etienne Carriere <etienne.carriere@linaro.org>,
+ Weizhao Ouyang <o451686892@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Peng Fan <peng.fan@nxp.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, u-boot@lists.denx.de
+Subject: [PATCH 0/3] Random Number Generator fixes
+Date: Thu, 25 Jan 2024 14:04:59 +0000
+Message-Id: <20240125140502.22400-1-o451686892@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Date: Thu, 25 Jan 2024 12:05:19 +0000
-From: mauricio.penteado@litinow.com
-To: u-boot@lists.denx.de
-Subject: U-Boot for Terasic - Cyclone 5 - DE10-standard board
-User-Agent: Roundcube Webmail/1.6.0
-Message-ID: <3b518bf1d756c2510c9bf64efacbf0bc@litinow.com>
-X-Sender: mauricio.penteado@litinow.com
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
 Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cpanel35.fastsecurehost.com
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - litinow.com
-X-Get-Message-Sender-Via: cpanel35.fastsecurehost.com: authenticated_id:
- mauricio.penteado@litinow.com
-X-Authenticated-Sender: cpanel35.fastsecurehost.com: mauricio.penteado@litinow.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Mailman-Approved-At: Thu, 25 Jan 2024 14:56:44 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,32 +93,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For some time I have been trying to understand how to build an embedded 
-Linux to my terasic de10-standard board, without success.
+This series aim to fix smccc bind issue and add a list command for RNG
+devices.
 
-After booting the provided Linux image that is available for download 
-from the terasic website, I was able to check the following information:
+Weizhao Ouyang (3):
+  firmware: psci: Fix bind_smccc_features psci check
+  driver: rng: Fix SMCCC TRNG crash
+  cmd: rng: Add rng list command
 
-U-Boot: 2013.01.01
-Kernel version: 4.5
-Machine model: Terasic DE1_SoC
-Shall I try to build my embedded Linux using these versions of u-boot, 
-kernel and machine model?
+ cmd/rng.c                 | 15 +++++++++++++++
+ drivers/firmware/psci.c   |  2 +-
+ drivers/rng/smccc_trng.c  |  2 +-
+ include/linux/arm-smccc.h |  1 +
+ 4 files changed, 18 insertions(+), 2 deletions(-)
 
-I’m asking this because I’ve already tried the most up-to-date versions 
-of u-boot, kernel and already used a machine model that matches my 
-board, but unfortunately I’m not able to change the “soc_system.rbf” to 
-reprogram my board at booting time.
+-- 
+2.39.2
 
-Changing the “soc_system.rbf” when using the terasic’s provided Linux 
-image works pretty well.
-
-The problem with the most updated versions are probably linked to 
-changes on u-boot, which combines support for the secondary preloader 
-and u-boot into one u-boot-with-spl binary.
-
-Whatever, I wonder if I should invest some time building my embedded 
-Linux using these outdated versions of u-boot, kernel and machine model 
-or I will waste my time.
-
-Could anyone help?
