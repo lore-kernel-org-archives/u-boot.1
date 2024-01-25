@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 099CFC47258
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 14:07:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB756C48260
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 14:12:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35A61878ED;
-	Thu, 25 Jan 2024 15:07:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E87FA876A7;
+	Thu, 25 Jan 2024 15:12:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XKx+K6nt";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IaZqZxKS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7213E878C9; Thu, 25 Jan 2024 15:07:43 +0100 (CET)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id 50277876A9; Thu, 25 Jan 2024 15:12:43 +0100 (CET)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E1D2878ED
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 15:07:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 05653865F5
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 15:12:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=malu.bertsch@gmail.com
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2cd0d05838fso80518501fa.1
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 06:07:40 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6818f3cf006so35399976d6.2
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 06:12:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706191659; x=1706796459; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=B3JOvTDjKUDxMBUyWCcpMmYfR44EjTqUq1rmcvqJzWs=;
- b=XKx+K6ntxtqKAWafgGcjoxVToALSnjFc+bhzHswkH4Fg8DoqMy+0OVaFcsjG/7yVD0
- FDIrs4Aw6rfkHDUK7xX0ihikpK3Xc7BNHTywpkqp6J7i0cuRCtqCcn7BQSOpTytY8GGB
- lqI2BgpQPNBot/GP0J2Kcfwnf3DAJvTpl6eO4mx9CXjsvqmGHnlsMkjdc3mK2TUUM7zQ
- ilUiyN73Ayt7u3EADyXa0F94Jk1s9C5LL+AKA4tEzZqqa1yzbzqkej4Ryod+h31dBmAv
- tooU1WA6+GJcNd7cPL1Bb13oXvev022aBq/ZFQ1fq95vd+EI6SOORNYg6ttsLp0CElnu
- 4noA==
+ d=konsulko.com; s=google; t=1706191959; x=1706796759; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=n/+H6+0s9UuLL7FR/lHqyap6YPakx+d6K6M1JOmgOI0=;
+ b=IaZqZxKShUGbX0jUa0ySghjsHdRUEIrmuoDZT0y6aeMcSbajyRVUN6LOi6A7LAaP2Y
+ VA3rNTPc3v5YCqIOZEDm2V6w6nSZkM7uGDrFQXjUw9JvcXL8rjVEwaUbmgXnP/Q/hqT7
+ Upx1Wgl3uFGGe7Ane97mnY2AhT0tfuN0jachM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706191659; x=1706796459;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=B3JOvTDjKUDxMBUyWCcpMmYfR44EjTqUq1rmcvqJzWs=;
- b=V4/eQm5kf7QbZjmaZRWdjxuLYpKzkchBrYMmKvHS23DK8sHtYtHxorp7fU7SeY0di0
- 0zcKwVs//lAfleoN6uZpsE6XcMfWlsdxnHJECOirqPs7laAQbFpbu8Jj6NpBVFeVMSVr
- Xe2lgDDga/MvgjiAqarQzo0gK81xyAXK4m+rY9tRKlj2VfqiE6iCStJmxpnztFL8lehs
- WICDnhyv/48Y8Tj85mKVvEaH3NG5NULqkGHw7CKNck42XfrHknLwwKKkswVwybUg2MHb
- c4wPBTsmiv6WqkqknC7dFlkaS4TDTSSvbePXMDC4hJ1KmhvHuewsvH7Ln8DK16cgRh2u
- HvxA==
-X-Gm-Message-State: AOJu0YzEXEQvsQXj9M5sy89Ylw/91aP3FtNWbhmfY5Aj8FHMIkVVHUmy
- h6Zi1JVHc7xMAbQ9+cpkW4gClkaGt9qD7LDX/9S89eb/Whe/7oUZJwdloRM0PZY=
-X-Google-Smtp-Source: AGHT+IFiNrCeLI6YQDSRjslh8wVJKMfZ45RujFYkBSyWjP2Nf6M6H6nT6CRYxXXcIVlGxdXpN0ucew==
-X-Received: by 2002:a2e:9bc3:0:b0:2cf:15a8:3bc6 with SMTP id
- w3-20020a2e9bc3000000b002cf15a83bc6mr509372ljj.28.1706191659132; 
- Thu, 25 Jan 2024 06:07:39 -0800 (PST)
-Received: from localhost.localdomain (pd9fafaa6.dip0.t-ipconnect.de.
- [217.250.250.166]) by smtp.gmail.com with ESMTPSA id
- ee15-20020a056402290f00b0055d18d6a586sm83136edb.13.2024.01.25.06.07.38
+ d=1e100.net; s=20230601; t=1706191959; x=1706796759;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=n/+H6+0s9UuLL7FR/lHqyap6YPakx+d6K6M1JOmgOI0=;
+ b=G8nkmeCgJkBi1F/zqZuppjkgXOIeg2yS7wus/T+98k1q8TCMXlJN2w3iTY4mqSx5mx
+ GEiq3nXNgrSNv6ZUBWHujifwTCdVH3DePSVurlMhlkhy4LiAVdG2+hZPJfYx/nCPp+mL
+ k7mLOSLFsVPhlTcyMFL0PXTwjGvfLvKXPa01bO5XpDeKozuVttDP8cFV8QSxk0aON1HE
+ 04NS9sn/F7NhglHeTsli+VYagT/IvJTSEgJN9ld2KzGUP47bAPDdJzfj9jeUPlkICWdJ
+ 2/KuHkizGPhGyGcHTKhq02kbc0jb0xsOxlM5Sx7SgVBY0VlAHucBZCYtP/7doTuLDp/y
+ uB3A==
+X-Gm-Message-State: AOJu0YwhZYAkt6+MPrQceO8+KDlGBV+UoGI/fhgucRkVG729nLCAI044
+ zDM+uZ4hqU0CNsK+V4xwyJede64Xp2TH4OLow+eg3wLupCIKL6ctOBCnPyMgkxU=
+X-Google-Smtp-Source: AGHT+IGOMPN9foYbM2AzjWZ9qd1xprtUdNdMbd3FzcWYCAKF6Q4JRX3n1UPa5OgFuSmZydhTKjUF3Q==
+X-Received: by 2002:a05:6214:5195:b0:681:7c9d:9eeb with SMTP id
+ kl21-20020a056214519500b006817c9d9eebmr1051297qvb.56.1706191959742; 
+ Thu, 25 Jan 2024 06:12:39 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ n2-20020a0ce942000000b0067f032cf59bsm5436394qvo.27.2024.01.25.06.12.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jan 2024 06:07:38 -0800 (PST)
-From: "=?UTF-8?q?kleines=20Filmr=C3=B6llchen?=" <malu.bertsch@gmail.com>
-X-Google-Original-From: =?UTF-8?q?kleines=20Filmr=C3=B6llchen?=
- <filmroellchen@serenityos.org>
-To: u-boot@lists.denx.de
-Cc: =?UTF-8?q?kleines=20Filmr=C3=B6llchen?= <filmroellchen@serenityos.org>,
- Bin Meng <bmeng@tinylab.org>, Leo <ycliang@andestech.com>,
- Rick Chen <rick@andestech.com>, Samuel Holland <samuel@sholland.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 1/1] riscv: Support building with Clang
-Date: Thu, 25 Jan 2024 15:06:59 +0100
-Message-Id: <20240125140659.28229-2-filmroellchen@serenityos.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240125140659.28229-1-filmroellchen@serenityos.org>
-References: <20240120002049.GO12635@bill-the-cat>
- <20240125140659.28229-1-filmroellchen@serenityos.org>
+ Thu, 25 Jan 2024 06:12:39 -0800 (PST)
+Date: Thu, 25 Jan 2024 09:12:36 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Svyatoslav <clamor95@gmail.com>
+Cc: Dan Carpenter <dan.carpenter@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Thomas Mittelstaedt <thomas.mittelstaedt@de.bosch.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sean Edmond <seanedmond@microsoft.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Jonas =?iso-8859-1?Q?Schw=F6bel?= <jonasschwoebel@yahoo.de>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v1 0/1] Fix booting kernels with ATAGS and extlinux
+Message-ID: <20240125141236.GI3652023@bill-the-cat>
+References: <20240124202731.39212-1-clamor95@gmail.com>
+ <4b77da9a-9700-43de-a833-14f809e2919b@moroto.mountain>
+ <FDCB4AEF-9106-421F-BB9F-16E2339B2148@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="IxlxWKwhFW/A6Ll5"
+Content-Disposition: inline
+In-Reply-To: <FDCB4AEF-9106-421F-BB9F-16E2339B2148@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,32 +98,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The -ffixed-gp option of GCC has an exact equivalent of -ffixed-x3 in
-Clang.
 
-Signed-off-by: kleines Filmröllchen <filmroellchen@serenityos.org>
----
+--IxlxWKwhFW/A6Ll5
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Changes in v2:
-- Removed copyright attribution
-- Use -ffixed-x3 unconditionally as it is also supported by GCC
+On Thu, Jan 25, 2024 at 08:51:09AM +0200, Svyatoslav wrote:
+>=20
+>=20
+> 25 =D1=81=D1=96=D1=87=D0=BD=D1=8F 2024=E2=80=AF=D1=80. 08:29:54 GMT+02:00=
+, Dan Carpenter <dan.carpenter@linaro.org> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=
+=D0=B0=D0=B2(-=D0=BB=D0=B0):
+> >On Wed, Jan 24, 2024 at 10:27:30PM +0200, Svyatoslav Ryhel wrote:
+> >> Currently, if boot with extlinux.conf and do not set the fdt
+> >> U-Boot will provide its own device tree. This behavior is
+> >> beneficial if the U-Boot device tree is in sync with Linux,
+> >> but it totally halts the booting of pre-dtb kernels (3.4 for
+> >> example) since it uses ATAGs. To fix this, pass `-` in the
+> >> fdt extlinux field as a signal that no tree should be used.
+> >
+> >Passing - doesn't seem like the most intuitive thing...  Is there a
+> >different argument we could use?
+> >
+>=20
+> I agree that `-` is not the most intuitive argument,
+> but this is a way to implement a fix with the least
+> code posssible. To make this less obscure I have
+> adjusted documentation.=20
 
- arch/riscv/config.mk | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+It's also how historically we do similar things. eg, "bootm
+$kernel_addr_r - $fdt_addr_r". My question is can we re-work this,
+cleanly, with guards around SUPPORT_PASSING_ATAGS to not increase size
+anywhere that doesn't need this legacy case.
 
-diff --git a/arch/riscv/config.mk b/arch/riscv/config.mk
-index 9cf2aef0a4..9f16dda92a 100644
---- a/arch/riscv/config.mk
-+++ b/arch/riscv/config.mk
-@@ -25,7 +25,7 @@ EFI_LDS			:= elf_riscv64_efi.lds
- PLATFORM_ELFFLAGS	+= -B riscv -O elf64-littleriscv
- endif
- 
--PLATFORM_CPPFLAGS	+= -ffixed-gp -fpic
-+PLATFORM_CPPFLAGS	+= -ffixed-x3 -fpic
- PLATFORM_RELFLAGS	+= -fno-common -ffunction-sections -fdata-sections
- LDFLAGS_u-boot		+= --gc-sections -static -pie
- 
--- 
-2.39.2
+--=20
+Tom
 
+--IxlxWKwhFW/A6Ll5
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWybFEACgkQFHw5/5Y0
+tywjxgwAncesERdBd3z5JNK4VJnPhujX7skidoDIg4j8qfUrho9FO/nRh5JWuhxU
+37MmARh0zqYtqfd3892otojp+QyB86dO2oGSv5dprqtj5Y66DvI0EdhyIZtxfrre
+01rt+WzFsda284n74PP+7GVM8mtuH5zAr/M/k6Vt9By+/fXyv/cLrX7QS4AdV3AW
+mdn2uZYgC2ALKCfe4eWKIx7CZ2g4UvfO30tQGnfNE6B8Q9kBUQR2VRgYUPDrJBBx
+zQfiV/4yT2mxj0oFDZPXe69WoEBWGwjuygA7M27eADh38oVBU0MWNNo3Rvt6P1WC
+QbDYYNfEhLtCUyAGAX9lzIxhle68uH8RdV2R20q0CHXIk2M2Q2+uCrjRH57++V7+
+R/PPuvC4TFAUREu+86OlhBosbuNeO/p4D2N0PGJDJ5k9S3sQQN4I+R3C/ISLfLNH
+j413W1OwDEUQFfN8jZPha8yHh5dwRDq2eF7DBpI6U132bfD8Cv70v1Y6iiqBi4cj
+BRLc4RZR
+=t53/
+-----END PGP SIGNATURE-----
+
+--IxlxWKwhFW/A6Ll5--
