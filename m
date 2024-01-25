@@ -4,77 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D399C47258
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 20:41:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A59AC47258
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 21:19:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97EFC87996;
-	Thu, 25 Jan 2024 21:41:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 5CD8486FB2;
+	Thu, 25 Jan 2024 22:19:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Sw/yxNvI";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="j7NwuuXH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83B6886FB2; Thu, 25 Jan 2024 21:41:17 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id D1D89878ED; Thu, 25 Jan 2024 22:19:23 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BFF187B98
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 21:41:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D7DBB86314
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 22:19:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1706215271; x=1706820071; i=xypron.glpk@gmx.de;
- bh=3Tq3kvLpZVAI+GImuuHz8Ug0+kOggoCBxCpQkHxN0aY=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=Sw/yxNvIhI+fCJTrJ/GRHqY7FiRV3lvnvthJmLXfBcdhQVD7PuYk3SeqUC6Mwokv
- yzOcptX5IsF01s/IC0zyRQkxsotoLGv8FPvT1JgQvOqGECdcjBG/cNtH9lhMl+88U
- pzmFn2M79IqyGtoZ+KFq176vSLLBostVQPI+E7J6lvTYFruN7LByO8qfwhzBKCqYR
- +PKGURvDbairTm7Iar4QcI0h+33A6O7uCE8Fu89LLN5fS1RwBta1QBWf8k3ZNeb6X
- i3/jqZbG8pxBsN29FA1ldK/2VJoCtCBBL5Er/ujiVJlXitmkvfg0Jf3i591yGXbGE
- GO1o+gpBOAQ0/crQIw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([178.202.40.247]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MMofW-1rljJT1amS-00Inc2; Thu, 25
- Jan 2024 21:41:11 +0100
-Message-ID: <ebd16ea3-d8af-47f2-83d5-0141e15c4790@gmx.de>
-Date: Thu, 25 Jan 2024 21:40:13 +0100
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=f328=JE=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1706217551;
+ bh=B6QkAWmM3uM8udS/a3/0dXXechsRudXnJUcIV4Tn+hg=;
+ b=j7NwuuXHLS+R1lhi6BGv+ArfsDWuHAWbFBuGQ2o2EYio5CMUX9lAPQEaG4W2gaz7xSR4+rxXB
+ KMH5STbR6xoeE27iv0yWEgBrrCcJnljBgiuh83P99AlvsSCf3Yrk6tlHLGOJKsi2d0bO1e0pcHT
+ TwlC1MIYUZCS61neUUGlYrkwp5wQ9jSYg5tko2BRmgEFzCZ1YeDeDNFpJOhx80G6Q4Njxt3Hc5O
+ fPae7Z7dGnhRr2JTxjRw97b5svw2zFQd6Io7I1EL1428xHFUlWb7NCaF14Aez9ESX0LAKoSgcVg
+ DwpZ2EAwUx47ZEQRlj/nkEF0hlOq7pEOJnm5gNIyyzKQ==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Philipp
+ Tomsich <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Jonas Karlman
+ <jonas@kwiboo.se>, u-boot@lists.denx.de
+Subject: [PATCH v3] rockchip: spl: Enable caches to speed up checksum
+ validation
+Date: Thu, 25 Jan 2024 21:19:03 +0000
+Message-ID: <20240125211905.3649948-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] smbios: use struct_table_length to get SMBIOS 2.1 total
- table length
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-References: <20240125011128.1176557-1-masahisa.kojima@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240125011128.1176557-1-masahisa.kojima@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:8zVcgtGZPJySOiyVqJ2aJHPIs3MNgAgrqWZjEGepVerocroI5Pz
- sLNLy8xuLhwG6xGPjpXciXOW92v/vClEahv/nmLDkKLe1z+z+IAZ5QFSeM2Yaik3ykTOc6Y
- TaIQUajDMH7ATt0EWdea4ms1FSJ1RFuDWF3L1Z9pC8icofyIVOHG2ZsXJKRvRwKPEhQMaG8
- 73PPWy3ACO1++JcGWOi/w==
-UI-OutboundReport: notjunk:1;M01:P0:Kjwbdb6jp7E=;DjjHAPCd7bNnpr96CqEzdPFTObu
- NLsZxiXdPIO+upLqz2s626F02UYnl6uOMncKJmoDg5yeo7uyqrfpjP0iZbWmgOSPXlHagEdJR
- odTcpqIAhhOdGiQJ5xbGU62T93w6YYKk6pPzHAFln4G5EdX6cmMkjSunopRYtOudkRhD1t5px
- iSddcOH9S5uyuyQoB4RfoJs1hj9JVZMGn5xeWTePCsWmP1emzucqyeS2IdfWUvOhTdzMbF7Me
- ifDIhqArboNqAImSc8JBEEiGu4V+6Xt7+no8iSWqgZSm1ci8F4+8OkSU5JZKXPP3pMLOH4MzE
- thWMt5bjRYzAKiyO3kFZ6bKiAZD69Qc6fkaJLPt7pYnywe5v3a47pN4FV+4TivYCYscJGr0bf
- jB8hfkgeAknxLi7MFHyfxwGgvTy1ulNkKTK4Fp7jXBdypqx9OIcVlnqBD7/hIkb4c78S6ZHa2
- tjNifphrt8Tp+hgTXp1qUE08HRI1TXd9Bomr7nIDsDQjN7KFwRlBTIP7UtfkOq21mbStNsJ3s
- UWi9nMvdOQqOLxOTZ9TI5ghO8h4sR9F6SUKLoH1QVKpYw9LqMyY3+CylbhI5GMeLpDJWQC8lf
- Dd8jnDN96Qpag4Tk9kKbe2GFMw3IsOvfeJaB3qskqZtjewHTWz4h+zquXh+Akz8f5juHc/t3K
- t5vi52mD2rZILp3goBUsnzkjDb5yxqCKDJx9z5j4fF5c/4cVd4QstcshM/uiz1YfK+YTvenWW
- 74QxoPgq9jTgpJ8XTvzbMBgXhagT67AvVGXvCl6ZYch2dBoPFOHrc50M06qDtEUyyEpNpVLfD
- Nahc/v2l/gAtoo77xOEb0CpRWT3w8xirqdxmCyx2iscITvVonc5YeHONdkNbqPTRIYQc6cJyg
- 88BBgrw6Ug8/NNPCYZZALTxdPCH/XT3vqc/Pe+M/p63EsJnTLNK0rsFoJsDHggaI/bPH+xbwE
- M8JdyE8lmvEbYnVHrfyozCJY4Jw=
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 65b2d04e9ddb5e78b0fe1fab
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,67 +69,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/25/24 02:11, Masahisa Kojima wrote:
-> The current code convert the SMBIOS 2.1 entry point structure to
-> SMBIOS 3.0 entry point structure. The max_struct_size member in
-> SMBIOS 2.1 entry point structure indicates
-> "Size of the largest SMBIOS structure, in bytes".
-> We need to use struct_table_length instead.
->
-> Fixes: 1c5aab803c0b ("smbios: copy QEMU tables")
-> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-> ---
->   drivers/misc/qfw_smbios.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/misc/qfw_smbios.c b/drivers/misc/qfw_smbios.c
-> index 9019345783..a898cb4eea 100644
-> --- a/drivers/misc/qfw_smbios.c
-> +++ b/drivers/misc/qfw_smbios.c
-> @@ -90,7 +90,7 @@ static int qfw_parse_smbios_anchor(struct udevice *dev=
-,
->   		entry->length =3D sizeof(struct smbios3_entry);
->   		entry->major_ver =3D entry2->major_ver;
->   		entry->minor_ver =3D entry2->minor_ver;
-> -		entry->max_struct_size =3D entry2->max_struct_size;
-> +		entry->max_struct_size =3D entry2->struct_table_length;
+FIT checksum validation is very slow in SPL due to D-cache not being
+enabled.
 
-Thank you for catching this.
+Enable caches in SPL on ARM64 SoCs to speed up FIT checksum validation,
+from seconds to milliseconds.
 
-These are the definitions:
+This change enables caches in SPL on all Rockchip ARM64 boards, the
+Kconfig options SPL_SYS_ICACHE_OFF and SPL_SYS_DCACHE_OFF can be used to
+disable caches for a specific board or SoC if needed.
 
-SMBIOS 2.1 (offset 0x08): Maximum Structure Size:
-Size of the largest SMBIOS structure, in bytes, and encompasses the
-structure=E2=80=99s formatted area and text strings
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+---
+Changes in v3:
+- Limit to ARM64 SoCs
+- Fix build with SPL_SYS_ICACHE_OFF or SPL_SYS_DCACHE_OFF enabled
+- Use cleanup_before_linux() in spl_board_prepare_for_boot() to disable
+  caches before jumping from SPL to next stage
+- Collect r-b tag
 
-SMBIOS 2.1 (offset 0x16): Structure Table Length:
-Total length of SMBIOS Structure Table, pointed to by the Structure
-Table Address, in bytes
+Changes in v2:
+- None
 
-SMBIOS 3 (offset 0x0c) - Structure table maximum size
-Maximum size of SMBIOS Structure Table, pointed to by the Structure
-Table Address, in bytes. The actual size is guaranteed to be less or
-equal to the maximum size.
+This has been tested on multiple RK3328, RK3399, RK356x and RK3588
+boards without any issues, vendor U-Boot also enables caches in SPL for
+all SoCs.
 
-SmbiosCreateTable() in EDK has this logic:
+This only worked on RK3288 because the default enable_caches() that does
+not enable caches was being used. Trying to enable caches on my RK3288
+froze my boards in mmu_setup(). So v3 limits the enable_caches() call to
+only include ARM64 SoCs.
 
-       EntryPointStructure->TableLength =3D
-(UINT16)(EntryPointStructure->TableLength + RecordSize);
-       if (RecordSize > EntryPointStructure->MaxStructureSize) {
-         EntryPointStructure->MaxStructureSize =3D (UINT16)RecordSize;
-       }
+Link to RFC: https://patchwork.ozlabs.org/patch/1802303/
+Link to v2: https://patchwork.ozlabs.org/patch/1889319/
+---
+ arch/arm/mach-rockchip/spl.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-qemu-system-x86 gives me these values:
-
-entry2->max_struct_size: 81
-entry2->struct_table_length: 321
-
-I think we should rename the field in the SMBIOS3 header (e.g. to
-table_max_size) to avoid future confusion.
-
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
->   	} else {
->   		ret =3D -ENOENT;
->   		goto out;
+diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
+index 87280e2ba7cc..c4d3983a6735 100644
+--- a/arch/arm/mach-rockchip/spl.c
++++ b/arch/arm/mach-rockchip/spl.c
+@@ -136,6 +136,20 @@ void board_init_f(ulong dummy)
+ 	}
+ 	gd->ram_top = gd->ram_base + get_effective_memsize();
+ 	gd->ram_top = board_get_usable_ram_top(gd->ram_size);
++
++	if (IS_ENABLED(CONFIG_ARM64) && !CONFIG_IS_ENABLED(SYS_DCACHE_OFF)) {
++		gd->relocaddr = gd->ram_top;
++		arch_reserve_mmu();
++		enable_caches();
++	}
+ #endif
+ 	preloader_console_init();
+ }
++
++void spl_board_prepare_for_boot(void)
++{
++	if (!IS_ENABLED(CONFIG_ARM64) || CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
++		return;
++
++	cleanup_before_linux();
++}
+-- 
+2.43.0
 
