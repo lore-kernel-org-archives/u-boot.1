@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A2D2C47258
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 16:54:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DE56C47258
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 16:55:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AEA787B84;
-	Thu, 25 Jan 2024 17:53:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6850D876EA;
+	Thu, 25 Jan 2024 17:55:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CYO8XuJz";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KntQOxdI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8A1E875FC; Thu, 25 Jan 2024 17:53:57 +0100 (CET)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C46F18785A; Thu, 25 Jan 2024 17:55:47 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 127C7878CB
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 17:53:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 39D1C875FC
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 17:55:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-510218ab26fso656754e87.2
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 08:53:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706201634; x=1706806434; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FdvPsZD2ypC1pxcvbGkYbo4IMa0jO5s4aEN03m041qY=;
- b=CYO8XuJzl8Se/cAGPx4Bhx4fJjVSt5wqx0k6mnKzALZbEwkZ0ZgQF9AuWH1zPoW+do
- 7CGM4WNadwSadkH2DpUwIrcuV507ZzkgKWXVmD/DHmKNWf8vtWnUHe1DS6NiOD4VtpFL
- vZkufJ4Yx+gg7FT98n43Xxu4FTOpG1p2sdaZS3wWNpAwP8NZ54oibKcBoUHg4z9pwvla
- /n1EW2lXxZ9ekl46UfWUd7gmJQl983QLkb30ejT3l2WJy/om0gRYNg0Gqtjt3SoGVqeg
- 14BSfj+PossA4iFxb8bFHSXwo42ShEpGiyLc6pZpqczBDw8RAtsTxUuP00IbZMCz6+g9
- mSQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706201634; x=1706806434;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=FdvPsZD2ypC1pxcvbGkYbo4IMa0jO5s4aEN03m041qY=;
- b=q5sfoNCKDbYk0WoZVDV5TiuuCKdsorgIw0gbeldKyi73qVrnoQuLDFtXGuEX5HZoQv
- Mercezyqk6/twiBg54AeCtTTlBxDAgFr/q6yGZ32eJaiVBlE9CQ9QTnbpnGRDV1DFeN/
- cRjtK6J321HcLTt4uCZobLCy+Kj4wVFGhywouRAj48ron42MVKN50KJStrJAAJhTetaL
- ZxQ+xOyvMO0kjZqMF93m4a9EQglmwlbK1nGsLcsLjmVeY4cSmsR6To5Vr5nU++/6vWV4
- R3U0Oiir2xEMZ37hJxuQ0aMkLAPjyPqwR+x0JO4dqywzvMtfR0jBj9XELkGN4oS/dGaI
- 9eAA==
-X-Gm-Message-State: AOJu0Yw5YMaGt0+R+kq9d4rVg43e+YPMG3KzajyhvkrADtBdTvZEdGiU
- Mg6MEl6B7wEKU+w6hx/qs0M0Ryipc6YC746U8ioYXTAjLwq2wQuhplve1xHsCE5LbTVGcrgkgK9
- /6DrU92GJXFUal8cCue8TQcsKcFgnGiGJyMswyg==
-X-Google-Smtp-Source: AGHT+IHnN7PTy5RwpYs6XRJpR4MhB8D4phgUOYMskRyKuOh/C2kQaOiyk90XrNhPilopeUt0N7ID4W3IfPOnRnNwI9k=
-X-Received: by 2002:a19:770d:0:b0:50e:7749:7b99 with SMTP id
- s13-20020a19770d000000b0050e77497b99mr68321lfc.37.1706201634177; Thu, 25 Jan
- 2024 08:53:54 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40PGtgpb092232;
+ Thu, 25 Jan 2024 10:55:42 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1706201742;
+ bh=YgJw5m6RQzV12Sh1dTjhLQiQTR+n+GRdiVeFliBPBvM=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=KntQOxdIihkOVahL56B3+cMLAfaR1AsDMKmYgKq4GWqzEKYJyg1j9a0cObLpZ5UaI
+ v1oaH1vrNBud21UsBr5Yb6DfWbAVqqjJ6KCx+/kAvz2/XTzb+e97vu1JpeGAu+D1Y9
+ SNMEVwkE33rFF+CGpAY8zrA5uoy5yRXRuUgb1Xoc=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40PGtgWW028152
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 25 Jan 2024 10:55:42 -0600
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 25
+ Jan 2024 10:55:41 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 25 Jan 2024 10:55:41 -0600
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40PGtfLu091362;
+ Thu, 25 Jan 2024 10:55:41 -0600
+Message-ID: <948db6de-8150-493e-9a15-62aeac9aea6f@ti.com>
+Date: Thu, 25 Jan 2024 10:55:41 -0600
 MIME-Version: 1.0
-References: <20240125155438.47617-1-heinrich.schuchardt@canonical.com>
- <20240125155438.47617-6-heinrich.schuchardt@canonical.com>
- <20240125161414.GN3652023@bill-the-cat>
- <fe5d249b-70f9-4465-9c65-90c16d2c5e82@canonical.com>
-In-Reply-To: <fe5d249b-70f9-4465-9c65-90c16d2c5e82@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 25 Jan 2024 18:53:18 +0200
-Message-ID: <CAC_iWjKKZezEio47=z7+eMkQ1AS8ju1WP5EGcyfbaRWrEVpq8g@mail.gmail.com>
-Subject: Re: [PATCH v3 5/6] configs: enable smbios command on sandbox
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] firmware: ti_sci: fix the secure_hdr in do_xfer
+Content-Language: en-US
+To: Dhruva Gole <d-gole@ti.com>, Nishanth Menon <nm@ti.com>
+CC: Kamlesh Gurudasani <kamlesh@ti.com>, Tom Rini <trini@konsulko.com>,
+ <u-boot@lists.denx.de>, Neha Francis <n-francis@ti.com>, Manorit Chawdhry
+ <m-chawdhry@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>
+References: <20240124101558.184411-1-d-gole@ti.com>
+ <87fryn7zoz.fsf@kamlesh.i-did-not-set--mail-host-address--so-tickle-me>
+ <20240124130859.sdldy4jafknoa23q@dhruva>
+ <20240124163910.sp7gt56lihoujm7k@etching>
+ <20240124173723.3wfiwfgf6rhwgwaa@dhruva>
+ <20240124180813.azl3ldrrg7a5iosz@spoils>
+ <20240125054334.zjll7j4fpv66ciyn@dhruva>
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20240125054334.zjll7j4fpv66ciyn@dhruva>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,52 +87,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 25 Jan 2024 at 18:26, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> On 25.01.24 17:14, Tom Rini wrote:
-> > On Thu, Jan 25, 2024 at 04:54:37PM +0100, Heinrich Schuchardt wrote:
-> >
-> >> To make use of the Python smbios test we need the smbios command.
-> >>
-> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >> ---
-> >> v3:
-> >>      new patch
-> >> ---
-> >>   configs/sandbox_defconfig | 1 +
-> >>   1 file changed, 1 insertion(+)
-> >
-> > We should do sandbox64 too I think? Ilias was saying something I believe
-> > about testing one path via sandbox and another via sandbox64 (since they
-> > have different base dts files, putting stuff for one code path in one
-> > and stuff for the other in the other).
->
-> Currently the test asserts nothing that would be sandbox64 specific:
->
->      assert 'DMI type 0,' in output
->      assert 'String 1: U-Boot' in output
->      assert 'DMI type 1,' in output
->      assert 'Manufacturer: sandbox' in output
->      assert 'DMI type 2,' in output
->      assert 'DMI type 3,' in output
->      assert 'DMI type 4,' in output
->      assert 'DMI type 127,' in output
->
-> In a future series we might check more and then adding
-> sandbox64_defconfig may make sense.
->
+On 1/24/24 11:43 PM, Dhruva Gole wrote:
+> On Jan 24, 2024 at 12:08:13 -0600, Nishanth Menon wrote:
+>> On 23:07-20240124, Dhruva Gole wrote:
+>>> On Jan 24, 2024 at 10:39:10 -0600, Nishanth Menon wrote:
+>>>> On 18:38-20240124, Dhruva Gole wrote:
+>>>>> On Jan 24, 2024 at 16:42:12 +0530, Kamlesh Gurudasani wrote:
+>>>>>> Dhruva Gole <d-gole@ti.com> writes:
+>>>>>>
+>>>>>>> The secure_hdr needs to be 0 init-ed however this was never being put
+>>>>>>> into the secure_buf, leading to possibility of the first 4 bytes of
+>>>>>>> secure_buf being possibly garbage.
+>>>>>>>
+>>>>>>> Fix this by initialising the secure_hdr itself to the secure_buf
+>>>>>>> location, thus when we make it 0, it automatically ensures the first 4
+>>>>>>> bytes are 0.
+>>>>>>>
+>>>>>>> Fixes: 32cd25128bd849 ("firmware: Add basic support for TI System Control Interface (TI SCI)")
+>>>>>>> Signed-off-by: Dhruva Gole <d-gole@ti.com>
+>>>>>>> ---
+>>>>>>>
+>>>>>>> Boot tested for sanity on AM62x SK
+>>>>>>> https://gist.github.com/DhruvaG2000/724ceba3a0db03f4b0bff47de1160074
+>>>>>>>
+>>>>>>> Cc: Nishanth Menon <nm@ti.com>
+>>>>>>> Cc: Tom Rini <trini@konsulko.com>
+>>>>>>>
+>>>>>>>   drivers/firmware/ti_sci.c | 6 +++---
+>>>>>>>   1 file changed, 3 insertions(+), 3 deletions(-)
+>>>>>>>
+>>>>>>> diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
+>>>>>>> index f5f659c11274..83ee8401a731 100644
+>>>>>>> --- a/drivers/firmware/ti_sci.c
+>>>>>>> +++ b/drivers/firmware/ti_sci.c
+>>>>>>> @@ -236,13 +236,13 @@ static int ti_sci_do_xfer(struct ti_sci_info *info,
+>>>>>>>   {
+>>>>>>>   	struct k3_sec_proxy_msg *msg = &xfer->tx_message;
+>>>>>>>   	u8 secure_buf[info->desc->max_msg_size];
+>>>>>>> -	struct ti_sci_secure_msg_hdr secure_hdr;
+>>>>>>> +	struct ti_sci_secure_msg_hdr *secure_hdr = (struct ti_sci_secure_msg_hdr *)secure_buf;
+>>>>>>>   	int ret;
+>>>>>>>   
+>>>>>>>   	if (info->is_secure) {
+>>>>>>>   		/* ToDo: get checksum of the entire message */
+>>>>>>> -		secure_hdr.checksum = 0;
+>>>>>>> -		secure_hdr.reserved = 0;
+>>>>>>> +		secure_hdr->checksum = 0;
+>>>>>>> +		secure_hdr->reserved = 0;
+>>>>>>>   		memcpy(&secure_buf[sizeof(secure_hdr)],xfer->tx_message.buf,
+>>>>>> secure_hdr is pointer now, the value may be same but (struct
+>>>>>> ti_sci_secure_msg_hdr) would make more sense
+>>>>>
+>>>>> Good catch Kamlesh! I have sent a new revision addressing this.
+>>>>>
+>>>>
+>>>> Makes no sense why we have secure API support in U-Boot. what is using
+>>>> this?
+>>>
+>>> In my understanding of generic K3 boot flow, things like proc_boot and
+>>> even applying or removing of firewalls will need a secure channel to
+>>> talk to TIFS right? From my understanding secure host can only talk to
+>>> TIFS and make such requests hence secure API.
+>>
+>> U-boot runs in NS world, you cant even talk to the Trustzone Sec proxy
+>> without triggering a firewall violation.
+> 
+> I am not going to debate on whether U-Boot is or isn't a secure entity.
+> The original code base was making secure_hdr.checksum = 0;
+> 
+> But this wasn't really being used anywhere. I am just making sure what the
+> original code base intended to do is being actually done.
+> 
+>>
+>>
+>> https://software-dl.ti.com/tisci/esd/latest/2_tisci_msgs/general/TISCI_header.html?highlight=header#secure-messaging-header
+>> "The Secure Messaging Header is only required when sending messages over
+>> secure transport. Messages sent over non-secure transport must not
+>> contain the secure messaging header."
+> 
+> Yes, understood. I do not have the context behind the commit
+> 32cd25128bd849 ("firmware: Add basic support for TI System Control
+> Interface (TI SCI)") but perhaps you do. So please help me understand
+> why there's this code:
 
-I plan to use sandbox to parse the smbios table provided by the
-sysinfo specific DT entry and sanbbox64 for the fallback code we
-added. I'll enable it as part of my patchseries
+A little background, this checksum was envisioned to help protect
+messages from glitches in-flight for security/safety reasons. For
+whatever reason it was only ever added for messages sent over
+"secure" channels. Which means the message sent changes based
+on what channel you use to send the message (which is a bit of a
+layering violation IMHO but anyway..).
 
-Cheers
-/Ilias
-> Probably this would also require providing text output for other SMBIOS
-> table types.
->
-> Best regards
->
-> Heinrich
->
+In TFA/OP-TEE which *can* send messages over secure channels we
+append this header in the transport layer (secure proxy driver),
+not here in the message protocol driver. If we decide to keep this
+secure header code then it should be moved into the transport driver
+(mailbox/k3-sec-proxy.c) as only it would know what channel the
+message will be sent on (and so if it should have the header).
+
+I'd say since U-Boot today cannot send over secure channels anyway,
+lets just drop this code and if we ever need it then we add it back
+over in the right spot at that time.
+
+Andrew
+
+> memcpy(&secure_buf[sizeof(secure_hdr)], xfer->tx_message.buf, xfer->tx_message.len);
+> 
+> which is basically trying to create a 4 byte offset (trying to abide by the secure
+> msg format?)
+> If UBoot as you say is non secure let's just send regular TISCI messages. Are you
+> suggesting that we trim all of if (info->is_secure) and related "secure"
+> code from uboot? Then that's a separate cleanup we need to have.
+> 
+> 
+>>
+>> btw, that checksum field should be renamed integ_check, but anyways..
+>>
+>> So, I do not see a reason to even have that if condition in the first
+>> place and what real bug was getting fixed in this patch.
+> 
+> "Real" bug or "potential" bug, the code did not seem to be doing what it should have
+> been doing, that's all. For anyone reading the checksum = 0 that is
+> there in today's code it's super confusing.
+> 
+> Either get rid of it completely, or else make it do what it was trying
+> to do. Let me know how we should proceed.
+> 
+> 
