@@ -4,88 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F47EC47258
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 04:53:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B82BEC47258
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 05:43:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4ED3F8716D;
-	Thu, 25 Jan 2024 05:53:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6CCCD86F6F;
+	Thu, 25 Jan 2024 06:43:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dfj3K+Ha";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HcKaw5+V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D02487128; Thu, 25 Jan 2024 05:45:49 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 301B58701D; Thu, 25 Jan 2024 06:43:41 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54D47870D9
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 05:45:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EC04C86F67
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 06:43:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40P4jN9v092173;
- Wed, 24 Jan 2024 22:45:23 -0600
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40P5hZXI029818;
+ Wed, 24 Jan 2024 23:43:35 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1706157923;
- bh=xFqLMb8AvIitOhtJvoMV66DShF2dmy8z0jhZMLrTYYA=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=dfj3K+HagnmCdxgU/WZiAJjH/+OIdiOPicDmZsOH8llsLZ6uXw38eXFcpGU2QLENj
- /qJsSbU2uq8dfKp3u3GJyVCExUbDvmdzyHX0iGZQlpjZwcJTNOv2AKjgE6yAGTOzlX
- weN14Is0IGZqBGTF6ORgPFQUuEcYuSuiqtayeq+M=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40P4jN9L116827
+ s=ti-com-17Q1; t=1706161415;
+ bh=w9w5b5WtDmtqVhGC/J2ui+nlm37vlaGGCB5DUDwqVJI=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=HcKaw5+VnDiyh5dSBMyoNpNfVAzCGBz9euiIlEVPC8d05PUprWz04WzzKOE6RGyY4
+ ujnltSOTjo0Hl/zeQGMnmxlYndhDZLl5Flha89XakSSQVbqS/egPYYUjlSqhibJVDh
+ 50wS0/z1i2V6hFgBwvqQhYRgU0pekzLeL3HSkHGI=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40P5hZSU010455
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 24 Jan 2024 22:45:23 -0600
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 24 Jan 2024 23:43:35 -0600
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 24
- Jan 2024 22:45:22 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 23:43:35 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 24 Jan 2024 22:45:22 -0600
-Received: from [10.249.135.225] ([10.249.135.225])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40P4jCKb014024;
- Wed, 24 Jan 2024 22:45:13 -0600
-Message-ID: <428ef951-f00d-4938-8663-d59a47e9fcfe@ti.com>
-Date: Thu, 25 Jan 2024 10:15:11 +0530
+ Frontend Transport; Wed, 24 Jan 2024 23:43:35 -0600
+Received: from localhost (dhruva.dhcp.ti.com [172.24.227.68])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40P5hY2e040024;
+ Wed, 24 Jan 2024 23:43:35 -0600
+Date: Thu, 25 Jan 2024 11:13:34 +0530
+From: Dhruva Gole <d-gole@ti.com>
+To: Nishanth Menon <nm@ti.com>
+CC: Kamlesh Gurudasani <kamlesh@ti.com>, Tom Rini <trini@konsulko.com>,
+ <u-boot@lists.denx.de>, Neha Francis <n-francis@ti.com>, Manorit Chawdhry
+ <m-chawdhry@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>
+Subject: Re: [PATCH] firmware: ti_sci: fix the secure_hdr in do_xfer
+Message-ID: <20240125054334.zjll7j4fpv66ciyn@dhruva>
+References: <20240124101558.184411-1-d-gole@ti.com>
+ <87fryn7zoz.fsf@kamlesh.i-did-not-set--mail-host-address--so-tickle-me>
+ <20240124130859.sdldy4jafknoa23q@dhruva>
+ <20240124163910.sp7gt56lihoujm7k@etching>
+ <20240124173723.3wfiwfgf6rhwgwaa@dhruva>
+ <20240124180813.azl3ldrrg7a5iosz@spoils>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v3 02/15] misc: fs-loader: Use fw_storage_interface
- instead of storage_interface
-To: Nishanth Menon <nm@ti.com>, MD Danish Anwar <danishanwar@ti.com>
-CC: Dan Carpenter <dan.carpenter@linaro.org>, Maxime Ripard
- <mripard@kernel.org>, Siddharth Vadapalli <s-vadapalli@ti.com>,
- Roger Quadros <rogerq@kernel.org>,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
- Stefan Roese <sr@denx.de>, Qu Wenruo <wqu@suse.com>, Bryan Brattlof
- <bb@ti.com>, Sean Anderson <seanga2@gmail.com>, Martyn Welch
- <martyn.welch@collabora.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Christian Gmeiner <christian.gmeiner@gmail.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Nikhil M Jain <n-jain1@ti.com>, Kamlesh Gurudasani
- <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Neha Malcom Francis
- <n-francis@ti.com>, Andrew Davis <afd@ti.com>, Simon Glass
- <sjg@chromium.org>, FUKAUMI Naoki <naoki@radxa.com>, Christian Hewitt
- <christianshewitt@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>,
- Kever Yang <kever.yang@rock-chips.com>, Ramon Fried <rfried.dev@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, <u-boot@lists.denx.de>,
- <srk@ti.com>, <r-gunasekaran@ti.com>
-References: <20240124064930.1787929-1-danishanwar@ti.com>
- <20240124064930.1787929-3-danishanwar@ti.com>
- <20240124181041.ai4wjfvz7vfieluo@wages>
-Content-Language: en-US
-From: "Anwar, Md Danish" <a0501179@ti.com>
-In-Reply-To: <20240124181041.ai4wjfvz7vfieluo@wages>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20240124180813.azl3ldrrg7a5iosz@spoils>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-Mailman-Approved-At: Thu, 25 Jan 2024 05:53:11 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,79 +84,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Nishant,
-
-On 1/24/2024 11:40 PM, Nishanth Menon wrote:
-> On 12:19-20240124, MD Danish Anwar wrote:
->> The fs-loader driver reads env storage_interface and uses it to load
->> firmware file into memory using the medium set by env. Update the driver
->> to use env fw_storage_interface as this variable is only used to load
->> firmwares. The env storage_interface will act as fallback so that the
->> existing implementations do not break.
->>
->> Also update the FS Loader documentation accordingly.
->>
->> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
->> ---
->>  doc/develop/driver-model/fs_firmware_loader.rst | 5 ++++-
->>  drivers/misc/fs_loader.c                        | 5 ++++-
->>  2 files changed, 8 insertions(+), 2 deletions(-)
->>
->> diff --git a/doc/develop/driver-model/fs_firmware_loader.rst b/doc/develop/driver-model/fs_firmware_loader.rst
->> index 149b8b436e..410cc1442d 100644
->> --- a/doc/develop/driver-model/fs_firmware_loader.rst
->> +++ b/doc/develop/driver-model/fs_firmware_loader.rst
->> @@ -98,8 +98,11 @@ through the U-Boot environment variable during run time.
->>  
->>  For examples:
->>  
->> +fw_storage_interface:
->> +  Firmware storage interface, it can be "mmc", "usb", "sata" or "ubi".
->>  storage_interface:
->> -  Storage interface, it can be "mmc", "usb", "sata" or "ubi".
->> +  Storage interface, it can be "mmc", "usb", "sata" or "ubi". This acts
->> +  as a fallback if fw_storage_interface is not set.
->>  fw_dev_part:
->>    Block device number and its partition, it can be "0:1".
->>  fw_ubi_mtdpart:
->> diff --git a/drivers/misc/fs_loader.c b/drivers/misc/fs_loader.c
->> index 1ffc199ba1..3798dab5b6 100644
->> --- a/drivers/misc/fs_loader.c
->> +++ b/drivers/misc/fs_loader.c
->> @@ -153,7 +153,10 @@ static int fw_get_filesystem_firmware(struct udevice *dev)
->>  	char *storage_interface, *dev_part, *ubi_mtdpart, *ubi_volume;
->>  	int ret;
->>  
->> -	storage_interface = env_get("storage_interface");
->> +	storage_interface = env_get("fw_storage_interface");
->> +	if (!storage_interface)
->> +		storage_interface = env_get("storage_interface");
->> +
->>  	dev_part = env_get("fw_dev_part");
->>  	ubi_mtdpart = env_get("fw_ubi_mtdpart");
->>  	ubi_volume = env_get("fw_ubi_volume");
->> -- 
->> 2.34.1
->>
+On Jan 24, 2024 at 12:08:13 -0600, Nishanth Menon wrote:
+> On 23:07-20240124, Dhruva Gole wrote:
+> > On Jan 24, 2024 at 10:39:10 -0600, Nishanth Menon wrote:
+> > > On 18:38-20240124, Dhruva Gole wrote:
+> > > > On Jan 24, 2024 at 16:42:12 +0530, Kamlesh Gurudasani wrote:
+> > > > > Dhruva Gole <d-gole@ti.com> writes:
+> > > > > 
+> > > > > > The secure_hdr needs to be 0 init-ed however this was never being put
+> > > > > > into the secure_buf, leading to possibility of the first 4 bytes of
+> > > > > > secure_buf being possibly garbage.
+> > > > > >
+> > > > > > Fix this by initialising the secure_hdr itself to the secure_buf
+> > > > > > location, thus when we make it 0, it automatically ensures the first 4
+> > > > > > bytes are 0.
+> > > > > >
+> > > > > > Fixes: 32cd25128bd849 ("firmware: Add basic support for TI System Control Interface (TI SCI)")
+> > > > > > Signed-off-by: Dhruva Gole <d-gole@ti.com>
+> > > > > > ---
+> > > > > >
+> > > > > > Boot tested for sanity on AM62x SK
+> > > > > > https://gist.github.com/DhruvaG2000/724ceba3a0db03f4b0bff47de1160074
+> > > > > >
+> > > > > > Cc: Nishanth Menon <nm@ti.com>
+> > > > > > Cc: Tom Rini <trini@konsulko.com>
+> > > > > >
+> > > > > >  drivers/firmware/ti_sci.c | 6 +++---
+> > > > > >  1 file changed, 3 insertions(+), 3 deletions(-)
+> > > > > >
+> > > > > > diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
+> > > > > > index f5f659c11274..83ee8401a731 100644
+> > > > > > --- a/drivers/firmware/ti_sci.c
+> > > > > > +++ b/drivers/firmware/ti_sci.c
+> > > > > > @@ -236,13 +236,13 @@ static int ti_sci_do_xfer(struct ti_sci_info *info,
+> > > > > >  {
+> > > > > >  	struct k3_sec_proxy_msg *msg = &xfer->tx_message;
+> > > > > >  	u8 secure_buf[info->desc->max_msg_size];
+> > > > > > -	struct ti_sci_secure_msg_hdr secure_hdr;
+> > > > > > +	struct ti_sci_secure_msg_hdr *secure_hdr = (struct ti_sci_secure_msg_hdr *)secure_buf;
+> > > > > >  	int ret;
+> > > > > >  
+> > > > > >  	if (info->is_secure) {
+> > > > > >  		/* ToDo: get checksum of the entire message */
+> > > > > > -		secure_hdr.checksum = 0;
+> > > > > > -		secure_hdr.reserved = 0;
+> > > > > > +		secure_hdr->checksum = 0;
+> > > > > > +		secure_hdr->reserved = 0;
+> > > > > >  		memcpy(&secure_buf[sizeof(secure_hdr)],xfer->tx_message.buf,
+> > > > > secure_hdr is pointer now, the value may be same but (struct
+> > > > > ti_sci_secure_msg_hdr) would make more sense
+> > > > 
+> > > > Good catch Kamlesh! I have sent a new revision addressing this.
+> > > > 
+> > > 
+> > > Makes no sense why we have secure API support in U-Boot. what is using
+> > > this?
+> > 
+> > In my understanding of generic K3 boot flow, things like proc_boot and
+> > even applying or removing of firewalls will need a secure channel to
+> > talk to TIFS right? From my understanding secure host can only talk to
+> > TIFS and make such requests hence secure API.
 > 
-> You should move these specific patches out of the series and debate on
-> their merits seperately. mixing things like these in a single series
-> that needs to go to multiple u-boot custodians just creates problems for
-> everyone.
+> U-boot runs in NS world, you cant even talk to the Trustzone Sec proxy
+> without triggering a firewall violation.
+
+I am not going to debate on whether U-Boot is or isn't a secure entity.
+The original code base was making secure_hdr.checksum = 0;
+
+But this wasn't really being used anywhere. I am just making sure what the
+original code base intended to do is being actually done.
+
 > 
+> 
+> https://software-dl.ti.com/tisci/esd/latest/2_tisci_msgs/general/TISCI_header.html?highlight=header#secure-messaging-header
+> "The Secure Messaging Header is only required when sending messages over
+> secure transport. Messages sent over non-secure transport must not
+> contain the secure messaging header."
 
-I have kept these patches in the series because ICSSG driver depends on
-these patches. I didn't want to post multiple series and map
-dependencies so I posted all patches in one series. Patch 1 to 3 are
-dependency for ICSSG driver. Patch 4 to 9 are ICSSG driver patches.
-Patch 10 to 15 are AM65x-EVM specific patches (DTS and configs).
+Yes, understood. I do not have the context behind the commit
+32cd25128bd849 ("firmware: Add basic support for TI System Control
+Interface (TI SCI)") but perhaps you do. So please help me understand
+why there's this code:
+memcpy(&secure_buf[sizeof(secure_hdr)], xfer->tx_message.buf, xfer->tx_message.len);
 
-The first 3 patches will also go to different u-boot custodians as first
-one is dma related, second one is related to fs-loader driver and the
-third one modifies the remoteproc driver. So instead of posting all
-these separately, I wanted to post it along with the ICSSG driver series
-so that folks can understand why these three patches are needed.
+which is basically trying to create a 4 byte offset (trying to abide by the secure
+msg format?) 
+If UBoot as you say is non secure let's just send regular TISCI messages. Are you
+suggesting that we trim all of if (info->is_secure) and related "secure"
+code from uboot? Then that's a separate cleanup we need to have.
+
+
+> 
+> btw, that checksum field should be renamed integ_check, but anyways..
+> 
+> So, I do not see a reason to even have that if condition in the first
+> place and what real bug was getting fixed in this patch.
+
+"Real" bug or "potential" bug, the code did not seem to be doing what it should have
+been doing, that's all. For anyone reading the checksum = 0 that is
+there in today's code it's super confusing.
+
+Either get rid of it completely, or else make it do what it was trying
+to do. Let me know how we should proceed.
+
 
 -- 
-Thanks and Regards,
-Md Danish Anwar
+Best regards,
+Dhruva Gole <d-gole@ti.com>
