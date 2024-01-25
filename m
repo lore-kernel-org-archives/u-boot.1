@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A89B2C48260
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 14:05:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33932C47258
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 14:05:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FD7487559;
-	Thu, 25 Jan 2024 15:05:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DF8488799C;
+	Thu, 25 Jan 2024 15:05:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WQEtnEEb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lMajJreQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93672876FF; Thu, 25 Jan 2024 15:05:39 +0100 (CET)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
+ id 307EF8799C; Thu, 25 Jan 2024 15:05:43 +0100 (CET)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7461787447
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 15:05:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 128BF877BC
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 15:05:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=o451686892@gmail.com
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-1d751bc0c15so41334635ad.2
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 06:05:37 -0800 (PST)
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-1d71207524dso29393405ad.1
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 06:05:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706191536; x=1706796336; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1706191539; x=1706796339; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=JJRrfJa0Or+UJAFVxi6i/FIkYVEA7m44U3O+kQ18FQI=;
- b=WQEtnEEb6lBDQjIJhyxJvbR/Sw2LKLZ3PJ4RKrUqE3E/w7t7WevyesV/xDpGKWzIMl
- wQr4IPsRHXN4gFduOsxeFpy/KSvL2a8T3LYiIzuP3udQK05MX4+3+UyNHgbrlT/df/Sx
- ppUqwWbgBrLCoxMfhaidwh8r4zfKedWZfe+957njTiezW9nNxTU9uGtvNBpOD/nOL2BT
- ttLbYzHsYSJtM6f+e7pXIjFioHDqcLRPGCEDnSAg82XdytzCPoHUDX9T8j3xg+Snxjsf
- xWZ+BrO9PuwSGBu9PWvaqRT9diuiwTDhyLeXCxq+jeCP97E/JQ77NqiN2UHB2kvdu3lw
- Xehw==
+ :reply-to; bh=O2ngYXwY+cKFGpNDkR+ROk1lRTC9/m7Kj3St2IuESVI=;
+ b=lMajJreQacs7TiLvEAwObMcDiaThNnmUhHT6UgTL8hyGMbypZPjDlraM1P986sBT0A
+ UDSE2rvucdjJuyjTPf18iBcxL8Ah1FWFh8DHENL/81C3LTxdEgtw7UV4bwf4qMKZtuyh
+ fqwVce8FQWQNRLyPhcEErduANE+0F0L92Ycai27fCf1qZqk6aF6Atv0IQQsAECWlnugN
+ P6TxScwSLvWGk1LyGzjqHtnzIiSXL5VRABmF1Bw5WQ8FffPMOl5KBXBcic1nammdKEqr
+ ncZlNabkZT2cfTOrU9WB1i3GMeEVdKzAWFsbJMHAJApRpht7CAv22NIb8nfNVUrMXVgi
+ ZKGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706191536; x=1706796336;
+ d=1e100.net; s=20230601; t=1706191539; x=1706796339;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JJRrfJa0Or+UJAFVxi6i/FIkYVEA7m44U3O+kQ18FQI=;
- b=PZyQBbbOQnMrR1lxjIlnM0BEATcMtGBdi3JKj4i7Ajkt0N3lUaWLHmy5Nz6voo2owi
- bFUP2VwWUDi1G5v+e3lOLCEZmSsreWoX4NsDv4KM2pT5d69sU33yOkpKkzwzb/FpLhmG
- 8YtdPSVoX+cPI9l8jEgURW0fQuhJE8SsPmLus/AFj335bb3vbQwSIqsT1x8L5mUNIxzP
- bsK0E2Q0pmJ33yG6rNIia1GrKHURGTaiQwJEdvSvfr+bP3gq+I7hUluybNQorkaz9isd
- 7Ea8boBS19prPwoBC9TlPKu5AdLkhDqoT7Max2LRYcWLQMNmeIxUSe4Rwx15pL5p5EIb
- E28w==
-X-Gm-Message-State: AOJu0YxyBCSput7TCdoKIbgrQGEjuO8thRBG/9PsTHYRzIFbteo4RFlb
- ThZ7eehEBQFvq/MTDDXnoo7qtxGXNxekTsnIU4Zb6LyAnfNQ2sAL
-X-Google-Smtp-Source: AGHT+IFaUtKiV8Hn4YoeOYNikMqYqFfJVzOc0tAmnxgUg21kW8GWsNVoQfOQ+Fjb3B5l26kMD8W8Dw==
-X-Received: by 2002:a17:902:724b:b0:1d7:9290:8e32 with SMTP id
- c11-20020a170902724b00b001d792908e32mr1066849pll.86.1706191535155; 
- Thu, 25 Jan 2024 06:05:35 -0800 (PST)
+ bh=O2ngYXwY+cKFGpNDkR+ROk1lRTC9/m7Kj3St2IuESVI=;
+ b=CcuBYl7/GRppX5fHBzGX18InXaNS2XuQz2Xm2WY35WyzYNTSx/W8IpkZ4YJ1+YE6vD
+ oPEIhy7rq/EF1gmzAIWJaWHaHo3tWFE95EXPSnLia6lqXmfUjzCVM/441IRlGl5cN/o7
+ 75Uxmh1I6F7WDcTC4O+sUTGQua2cIo0hSPYXn4zd1RbcEMXq5CmBEbLH8fFEKCJuQi/v
+ CX2Ix3X3jxqXFOpw2HbH3ht/u36YlUpqs+gyMX7dXjPJtIEnj/zTRYfWDzm6mTOGU14a
+ 1cM+nlfsQBA5u4gOJ+WUSDW+96rmNSG0Hc0MeW+gBmJVt9fK3NeHkz4gw33iaDz0NeOo
+ lTtQ==
+X-Gm-Message-State: AOJu0YzKzjV4W+HAk3wSCNh6S3OjiLtW2TIh+YNDilLbUsi2HzQdX4wy
+ qcNFPAab5AoVjDKxDLTiy9znQ3QKDvWVEl+bBpBVVswJRuNo988K
+X-Google-Smtp-Source: AGHT+IHsbr7CoOItIr+LEdK8VkABYPgypFXwrUJCRQxsz1nzKeTtJAUuXi41oHnUTa3pZqCm8ED6mw==
+X-Received: by 2002:a17:902:fc8d:b0:1d7:1e5d:ab39 with SMTP id
+ mf13-20020a170902fc8d00b001d71e5dab39mr1064455plb.80.1706191538791; 
+ Thu, 25 Jan 2024 06:05:38 -0800 (PST)
 Received: from ownia.localdomain ([8.210.91.195])
  by smtp.gmail.com with ESMTPSA id
- p18-20020a170902ead200b001d705836d0dsm11925699pld.200.2024.01.25.06.05.32
+ p18-20020a170902ead200b001d705836d0dsm11925699pld.200.2024.01.25.06.05.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jan 2024 06:05:34 -0800 (PST)
+ Thu, 25 Jan 2024 06:05:37 -0800 (PST)
 From: Weizhao Ouyang <o451686892@gmail.com>
 To: Sughosh Ganu <sughosh.ganu@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
@@ -72,9 +72,9 @@ To: Sughosh Ganu <sughosh.ganu@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jens Wiklander <jens.wiklander@linaro.org>,
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, u-boot@lists.denx.de
-Subject: [PATCH 1/3] firmware: psci: Fix bind_smccc_features psci check
-Date: Thu, 25 Jan 2024 14:05:00 +0000
-Message-Id: <20240125140502.22400-2-o451686892@gmail.com>
+Subject: [PATCH 2/3] driver: rng: Fix SMCCC TRNG crash
+Date: Thu, 25 Jan 2024 14:05:01 +0000
+Message-Id: <20240125140502.22400-3-o451686892@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240125140502.22400-1-o451686892@gmail.com>
 References: <20240125140502.22400-1-o451686892@gmail.com>
@@ -96,40 +96,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-According to PSCI specification DEN0022F, PSCI_FEATURES is used to check
-whether the SMCCC is implemented by discovering SMCCC_VERSION.
+Fix a SMCCC TRNG null pointer crash due to a failed smccc feature
+binding.
 
 Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
 ---
- drivers/firmware/psci.c   | 2 +-
- include/linux/arm-smccc.h | 1 +
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ drivers/rng/smccc_trng.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/firmware/psci.c b/drivers/firmware/psci.c
-index c6b9efab41..894be8128d 100644
---- a/drivers/firmware/psci.c
-+++ b/drivers/firmware/psci.c
-@@ -135,7 +135,7 @@ static int bind_smccc_features(struct udevice *dev, int psci_method)
- 	    PSCI_VERSION_MAJOR(psci_0_2_get_version()) == 0)
- 		return 0;
+diff --git a/drivers/rng/smccc_trng.c b/drivers/rng/smccc_trng.c
+index 3a4bb33941..3087cb991a 100644
+--- a/drivers/rng/smccc_trng.c
++++ b/drivers/rng/smccc_trng.c
+@@ -166,7 +166,7 @@ static int smccc_trng_probe(struct udevice *dev)
+ 	struct smccc_trng_priv *priv = dev_get_priv(dev);
+ 	struct arm_smccc_res res;
  
--	if (request_psci_features(ARM_SMCCC_ARCH_FEATURES) ==
-+	if (request_psci_features(ARM_SMCCC_VERSION) ==
- 	    PSCI_RET_NOT_SUPPORTED)
- 		return 0;
+-	if (!(smccc_trng_is_supported(smccc->invoke_fn)))
++	if (!smccc || !(smccc_trng_is_supported(smccc->invoke_fn)))
+ 		return -ENODEV;
  
-diff --git a/include/linux/arm-smccc.h b/include/linux/arm-smccc.h
-index f44e9e8f93..453017eb5f 100644
---- a/include/linux/arm-smccc.h
-+++ b/include/linux/arm-smccc.h
-@@ -55,6 +55,7 @@
- #define ARM_SMCCC_QUIRK_NONE		0
- #define ARM_SMCCC_QUIRK_QCOM_A6		1 /* Save/restore register a6 */
- 
-+#define ARM_SMCCC_VERSION		0x80000000
- #define ARM_SMCCC_ARCH_FEATURES		0x80000001
- 
- #define ARM_SMCCC_RET_NOT_SUPPORTED	((unsigned long)-1)
+ 	/* At least one of 64bit and 32bit interfaces is available */
 -- 
 2.39.2
 
