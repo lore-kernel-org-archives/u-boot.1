@@ -4,85 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63F8CC47258
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 07:24:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30089C47258
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jan 2024 08:08:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60B3C870E3;
-	Thu, 25 Jan 2024 08:24:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1B1B486308;
+	Thu, 25 Jan 2024 09:08:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="R4YNzMQg";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="eQhEUWKH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DE588718F; Thu, 25 Jan 2024 08:24:38 +0100 (CET)
-Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
- [IPv6:2607:f8b0:4864:20::92c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3F05A8644E; Thu, 25 Jan 2024 09:08:09 +0100 (CET)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2009::601])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA22180090
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 08:24:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 588908078B
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 09:08:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x92c.google.com with SMTP id
- a1e0cc1a2514c-7cbeaacbcb8so1658317241.0
- for <u-boot@lists.denx.de>; Wed, 24 Jan 2024 23:24:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706167473; x=1706772273; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=iN21WrMtUYkRqaQ8ZNuCFFZhmIui9MC0Ig/SSeZ/cn4=;
- b=R4YNzMQguyaRnte2zBGSflsqBxdfIjJUX/TGNewIT/Imiivfh+EI4uXe71bqBZJ3SC
- h7RTLGATjMhJiKvXGTSbf2HQw5Mu7NJ4gO78DoON1pMAmV9ZPlLvaWkWDrPdo3X8qph8
- ud9t29Ysyc0RQ+d965cKqPfFMRdCV3CEqS+wugc0K98SrXjto5UsCLFbp+ZbjsWzzDnU
- peDJkg2s41V4+GQyVZE/QudmOi1625Ysx+Szo19nGWZketTsALrYntkdnZCMisoFkfxo
- xNsJ+/zxPQIJEmrbh9ifBFGiJ4TlD2wKRicy4r80vqMJyJOE2iLiDmYCJ0swHSTfrcwY
- YlsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706167473; x=1706772273;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=iN21WrMtUYkRqaQ8ZNuCFFZhmIui9MC0Ig/SSeZ/cn4=;
- b=f1RW9WXne6kFb+h41PkVe/RqlSjK0utcdOCVG84wpV7hbgq8lrUpdwC7BabCHCkc3W
- 5UV8Wgj/I3U99ZHBfXkWyyRfPXqBJ5HEG7TCjbBKtvrTduvUyKzDzCfKr9IdLZd+yOnY
- wh1x3StOx7Dor8ZhwfCNL2wHq5+4bZIooljUaQoIeWUNrgSd7dnIacC5Q7cmbLoVyGIf
- cI4u68lPdkyEJFYyTWkT6Wu2sB7JRGHQcyBvh0LcLsZuGvz4AAZjLCsE5Ae/Gv+yChVt
- gmVbbOADUXT5ecnlovSPCUTKS4YhKbuwpQaq8r1my6wdjRe99o65yppzcDqASJWlKcv+
- 5O2Q==
-X-Gm-Message-State: AOJu0YxrChTkb0i+ZvVdvVGwTNVwLyassWCW9eSqyfipJq5JLkv1qurj
- FriLABsv2Af6T72dEJMJx7Cp8Iu/J/nsNVvPZBhSVTqd5BP8YXvk13e2Wr6m4kOJ6c1gZNyab26
- qzHEMNSlIiKPXiDbNmH9PHpoaoLYII2y6PF1edw==
-X-Google-Smtp-Source: AGHT+IGZ9ClGDc7gM4sBNqFErzmGniytRb4nT5jUMplOQfewIAzBOrSskQWwLKASTlmKV7LAbop4e0qc1lVYwfxMnB4=
-X-Received: by 2002:a05:6102:2908:b0:46a:cc14:bba2 with SMTP id
- cz8-20020a056102290800b0046acc14bba2mr446666vsb.4.1706167473372; Wed, 24 Jan
- 2024 23:24:33 -0800 (PST)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=M/UVUc1RNs7x258tpqPGA4N/w58GkoveP6NenxXGkVhB+27sw+xhZXSqOVvZZ5VTVne4QSVii4YAXNh7Fl1MGTpTnyxWmQbwEq9UB1dP+bMAJ5Nhe33QTTPfD+lfsy4LnC58wk6xJNglL78N7GJUo5hrIUVgAjFVyqUQWcQoqlhp3Re33MblVlQ0sG4lNsOZjic1XvEjB+wtosJ/IHxJjeF1SPPVq0j/LkNFwxqwmx9z3lIjAz7wL72B5638hPkfOFL+zceY5/m273K5lxlR5wZlPdkwzYL1lrQEC1gaBeEzn6DqtTox9eri51gGmgj6AKLFpHBHDl355Ya+qSd+KA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PQWisZNSZtbE1u3bSO+POD/ZZGwNNDQmEzd74lWn624=;
+ b=gYN9NuxhWMgpF0aoUagrN+ViOz3f4j5Hqk4mBzHshOh9PMTPPmq+s/pEuroJytZr1SJIdVzZHdTZb+ryWX+nPdyVOOBwhZZYCfWGIbXK204s2pdxuyEDqJQ6IgAz81KPq1pQIcharOnkSDe5Y7rUWkpVDTlU3krwIZr9KYn/I3bywAB/Gk80jT1Fh+s+t1O7A5o65gsawoHgHJDV4uv7WnDVuQneCe5UuTJOiBlC/Uh7PilPglA9GUKtNs8EVuaDTbuSNMPdJ7Ww7i5+tIKB6eZW7S6lBZpBugBobsZb9eFBj4ZxRxCWJ6BOrww9CjwzBRIc3yvLXoJJ/ICth5DVbw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PQWisZNSZtbE1u3bSO+POD/ZZGwNNDQmEzd74lWn624=;
+ b=eQhEUWKH1QybxR3A5v+eudHHrVK5lgJG/e3vfA2WiK2aw0/swzcElOeeIM3GpHsYD2eJ9YW6qqJqlSAjS7LXcwXHbwoA+3eaqQd44WHWFofuQ1R2Q844pUUZd82Z/zFBiBtUlz+aSCy7mdvJMMO6hMwinJfwIiRgsxNejgPjxtM=
+Received: from SJ0PR03CA0157.namprd03.prod.outlook.com (2603:10b6:a03:338::12)
+ by MN2PR12MB4551.namprd12.prod.outlook.com (2603:10b6:208:263::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7228.22; Thu, 25 Jan
+ 2024 08:08:03 +0000
+Received: from CO1PEPF000042AD.namprd03.prod.outlook.com
+ (2603:10b6:a03:338:cafe::61) by SJ0PR03CA0157.outlook.office365.com
+ (2603:10b6:a03:338::12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7228.22 via Frontend
+ Transport; Thu, 25 Jan 2024 08:08:03 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CO1PEPF000042AD.mail.protection.outlook.com (10.167.243.42) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7228.16 via Frontend Transport; Thu, 25 Jan 2024 08:08:02 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Thu, 25 Jan
+ 2024 02:08:01 -0600
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Saeed Nowshadi <saeed.nowshadi@amd.com>, Radhey Shyam Pandey
+ <radhey.shyam.pandey@amd.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] arm64: zynqmp: Add 'silabs,
+ skip-recall' to all si570 clk nodes
+Date: Thu, 25 Jan 2024 09:07:58 +0100
+Message-ID: <bbb2322c94503f0e6b369c60312b7546500fad95.1706170068.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-References: <20240110103547.719757-1-sumit.garg@linaro.org>
- <82d509de-3d47-4cc2-8217-c38dc78fad28@denx.de>
- <7b4ff8e8-2f21-4d07-9848-fb0d5652819e@linaro.org>
- <4d8aede8-5ea8-45a4-87fe-d555a025ef8e@denx.de>
- <CAFA6WYN1tFs1id7UxTwLEyp69zx2BPUP7bffVZn80FKPLx2yJw@mail.gmail.com>
- <48125705-e78e-438f-90ac-2816432cd747@denx.de>
-In-Reply-To: <48125705-e78e-438f-90ac-2816432cd747@denx.de>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Thu, 25 Jan 2024 12:54:22 +0530
-Message-ID: <CAFA6WYMuerS5YTsquGvc+OHr+0a3JXrM4AQ_ReV4tPhvxv9H0w@mail.gmail.com>
-Subject: Re: [PATCH v4 00/11] An effort to bring DT bindings compliance within
- U-Boot
-To: Marek Vasut <marex@denx.de>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de, 
- u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de, trini@konsulko.com, 
- sjg@chromium.org, robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, 
- conor@kernel.org, neil.armstrong@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
- rfried.dev@gmail.com, mibodhi@gmail.com, bb@ti.com, mark.kettenis@xs4all.nl
-Content-Type: text/plain; charset="UTF-8"
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1912; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=ARjlu6GoLz/TEBmxqWRtJ4f1xybfWsSIdCeVCZhdxOY=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhtRNYleFY2/2fBbtlNddd6DpntufvwsnJCw8wRbvwnJt+
+ coQI+ttHbEsDIJMDLJiiizSNlfO7K2cMUX44mE5mDmsTCBDGLg4BWAiM+oZ5qkK+Sw4N3fdjygm
+ 7q1dmWtulhxpZ2WYwz+VYUHdpgX+od6fGn/s3+up/+nRHQA=
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000042AD:EE_|MN2PR12MB4551:EE_
+X-MS-Office365-Filtering-Correlation-Id: 59101678-3602-41dd-96f8-08dc1d7cc100
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: jgWXN8H4qHpEfzMUpmSWT1i2d0B47Mhx2h9peV1IzGoD7VQfiVkaqhhp0+41bIprRqodcm3Pda87+iIH2Ki3Yqtgdf9RlVowRToz+nZXn2sw44uzxa9Eg03bZdkt0NMdOVvNRVHOKEkxIBxq1smWEaQodekKI4It+HQzgHdfOlhwU7zaMFoTvgrSC27y0K3j0N2GTB/Oz8UjPCpiA3Pl/RIGJmhLlq7dO7HYr81LoM+uFZdFZz3/Tg1cFpbmSLpUqRr2gbiiZZ2V/xci41xAH6nBfuIx0BYkQeGaaKfhDjeT3bDJ01rlnh72zP+Z3QmRrQGWwduwoyQPf0/2TcVAREWG43S1UFptcko3UMb6wn89IUDCFxK4JizkLyc/rumjybjjl2tFIe0x4dzl4bn54wVrnnAFghWTE9iTvC8rKixSzh4MpZ3jPIRREiHCHg9zoxmaLYigjBwvS3EZSzc/0tJL9Q6Ex510RQsE69VoSp4Ohme5nyhwunIkz5KgVVeisi2F4a924ufKjM0UkqRKFmCbxOsTclzKfbmCvNiH3+QjCaoUEJY1foMgm4+gKQWwsgo6oZE5J3mYElf9EBdhZE+VzpaW6Kb9JOmnNqhQniWxl8mYC9HltzJAfI8ucSMqdTN3dT8G/EGNlPxBYUvXDOP0QftBRrMgGk8e1PLgC4FKqWvpvrQX56ErXX+Qfi33hZMDrduEy+r0MyIs3L9ExTUqbSNswnzJuMHqXgOaI+iS4nIBqyTTS53gEzUtAHeCP0UuFGMLEw2CHhIYgUQVxw==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(136003)(376002)(396003)(346002)(39860400002)(230922051799003)(186009)(1800799012)(451199024)(64100799003)(82310400011)(46966006)(36840700001)(40470700004)(40480700001)(336012)(426003)(40460700003)(6666004)(478600001)(36860700001)(2616005)(16526019)(26005)(47076005)(82740400003)(83380400001)(110136005)(356005)(86362001)(36756003)(2906002)(70206006)(54906003)(316002)(41300700001)(70586007)(8936002)(81166007)(8676002)(4326008)(44832011)(5660300002)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jan 2024 08:08:02.9553 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 59101678-3602-41dd-96f8-08dc1d7cc100
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000042AD.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4551
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,152 +126,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 25 Jan 2024 at 07:36, Marek Vasut <marex@denx.de> wrote:
->
-> On 1/24/24 09:16, Sumit Garg wrote:
->
-> Hi,
->
-> >>>> How do you propose to handle fixes to DTs which are applied to
-> >>>> linux-stable releases ? For example, if Linux 6.6(.0) ships a DT which
-> >>>> has some defect that is fixed in 6.6.1, how will that fix get into
-> >>>> U-Boot DTs ?
-> >>>
-> >>> This fix would also be in the latest Linux tags, so I think it would
-> >>> find its way here - as I understand it patches aren't accepted into
-> >>> Linux stable unless they land in torvalds tree.
-> >>
-> >> See the devicetree-rebasing.git:
-> >>
-> >> https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git/refs/
-> >>
-> >> That only contains refs for release versions (v6.6-dts, v6.7-dts etc),
-> >> not any follow-up updates from linux-stable (like current 6.6.13 etc).
-> >>
-> >
-> > Here we should only consider fixes which are critical to U-Boot. I
-> > think -u-boot.dtsi files would be suitable to carry those fixes until
-> > next uprev. However, if there is a fix affecting many platforms than
-> > we can consider pulling that standalone too.
->
-> That would mean extra duplicate work -- the critical fixes have already
-> been selected into linux-stable, that work is already done, I don't
-> think it makes sense to re-do it again.
->
-> Furthermore, I do not like the new necessity to start porting those
-> fixes from linux-stable and converting them to adjustments to
-> *-u-boot.dtsi files, this is tedious and error prone, so it would have
-> to be automated.
->
-> But I still think it is much better to simply take the fixes directly
-> from linux-stable as-is instead.
+From: Saeed Nowshadi <saeed.nowshadi@amd.com>
 
-That's fair, it would essentially be a DT ABI breakage for U-Boot for
-which a fix has to be taken in U-Boot from Linux stable release. So I
-am fine with that.
+Without 'silabs,skip-recall' property, the driver on System Controller
+re-calibrates the output clock frequency at probe() time based on the NVRAM
+setting.  This re-calibration causes a glitch on the output clock.  At
+power-on, Versal is also booting and expecting a glitch-free clock for
+its correct operation.  System Controller should skip the re-calibration
+step to prevent any clock instability for Versal.
 
-But at this point we have to move away from apprehensions about DT ABI
-breakages and provide real examples of the DT ABI breakages in the
-past. Are you aware of any DT ABI breaking change backported to Linux
-stable releases? This is the sort of information we would like to make
-DT bindings maintainers aware about.
+Signed-off-by: Saeed Nowshadi <saeed.nowshadi@amd.com>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
->
-> >> Would this require syncing in -rc versions of Linux DTs to get the
-> >> latest fixes in ?
-> >
-> > Syncing -rc versions makes U-Boot more prone to DT ABI breakages. So
-> > its a chicken and egg problem as per your comments below. However, we
-> > can revisit our syncing strategy based on how the current one pans
-> > out.
-> >
-> >>
-> >>>> Assume that there is some large breaking change in Linux 6.(n+1),
-> >>>> something which would be problematic for specific U-Boot platform
-> >>>> (e.g. i.MX) or would require a lot of work to sort out, will there be
-> >>>> a way to temporarily pin DTs for specific platform to older DT version
-> >>>> until that is resolved (e.g. pin to 6.n) ?
-> >>>
-> >>> (Upstream) devicetree has to be forwards and backwards compatible, were
-> >>> such a breaking change to get merged without prior discussion with DT
-> >>> users (i.e. U-Boot) then I think the correct course of action would be
-> >>> to revert it.
-> >>
-> >> Not really, this could be a perfectly valid change, and would work for
-> >> Linux just fine, it might simply be pulling in something which is not
-> >> supported by U-Boot just yet and therefore syncing the DTs into U-Boot
-> >> would break U-Boot on that platform . Using older version of DTs for a
-> >> platform could work as a stopgap measure until the functionality is
-> >> implemented. Is this possible ?
-> >
-> > For this particular reason we want to pull once during beginning on
-> > U-Boot next window and allow sufficient time for platform maintainers
-> > to adapt to it. However, OF_UPSTREAM=n can be an alternative for a
-> > stopgap solution.
->
-> That pull would break other peoples platforms. It would be no different
-> than adding broken patch into the code base.
+ arch/arm/dts/zynqmp-e-a2197-00-revA.dts | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-The platforms which get converted to OF_UPSTREAM=y are the ones which
-would be compliant with upstream DT bindings. So any DT ABI change
-among major Linux .0 releases would be the reason for that breakage.
-And we are happy to accept a revert for that change and feed that
-information back to Linux DT bindings maintainers.
+diff --git a/arch/arm/dts/zynqmp-e-a2197-00-revA.dts b/arch/arm/dts/zynqmp-e-a2197-00-revA.dts
+index f1b0a4aa65dd..0b97fa3f28ac 100644
+--- a/arch/arm/dts/zynqmp-e-a2197-00-revA.dts
++++ b/arch/arm/dts/zynqmp-e-a2197-00-revA.dts
+@@ -449,6 +449,7 @@
+ 				factory-fout = <156250000>;
+ 				clock-frequency = <156250000>;
+ 				clock-output-names = "si570_zsfp_clk";
++				silabs,skip-recall;
+ 			};
+ 		};
+ 		i2c@6 { /* USER_SI570_1 */
+@@ -463,6 +464,7 @@
+ 				factory-fout = <100000000>;
+ 				clock-frequency = <100000000>;
+ 				clock-output-names = "si570_user1";
++				silabs,skip-recall;
+ 			};
+ 
+ 		};
+@@ -560,6 +562,7 @@
+ 				factory-fout = <200000000>;
+ 				clock-frequency = <200000000>;
+ 				clock-output-names = "si570_lpddr4_clk2";
++				silabs,skip-recall;
+ 			};
+ 		};
+ 		i2c@5 { /* LPDDR4_SI570_CLK1 */
+@@ -574,6 +577,7 @@
+ 				factory-fout = <200000000>;
+ 				clock-frequency = <200000000>;
+ 				clock-output-names = "si570_lpddr4_clk1";
++				silabs,skip-recall;
+ 			};
+ 		};
+ 		i2c@6 { /* HSDP_SI570 */
+@@ -588,6 +592,7 @@
+ 				factory-fout = <156250000>;
+ 				clock-frequency = <156250000>;
+ 				clock-output-names = "si570_hsdp_clk";
++				silabs,skip-recall;
+ 			};
+ 		};
+ 		i2c@7 { /* 8A34001 - U219B and J310 connector */
+-- 
+2.36.1
 
-Also as above, are you aware of any past DT ABI breakages for U-Boot
-since people have already been doing DT syncing from Linux manually.
-This series allows to reduce that pain and try to bring DT bindings
-compliance in U-Boot.
-
-> What I think would be an
-> option is that there is a pull (as in patch) and people should be able
-> to test it before it is applied.
-
-We can't modify that pull but rather accept changes on top of it. IMO,
-it will get widely tested in U-Boot next branch.
-
-> If one platform is severely affected
-> while other platforms are fine, the one platform should be able to use
-> the current working version of DTs, while the other platforms should not
-> be blocked by it. Is that what OF_UPSTREAM=n does ?
->
-> As far as I understand OF_UPSTREAM=n, it would require re-importing DTs
-> into the codebase ?
-
-No you don't have to re-import everything but rather import a board
-DTS file to the arch/ folder and reuse all the DT includes from
-dts/upstream subtree as per this [1] patch.
-
-[1] https://lore.kernel.org/all/20240110103547.719757-5-sumit.garg@linaro.org/
-
->
-> >>> On a tangential note: as I understand it, DTs built from dt-rebasing are
-> >>> still subject to U-Boot customisations via the "-u-boot.dtsi" include
-> >>> files, this allows for dealing with incompatibilities due to missing
-> >>> features in U-Boot.
-> >>
-> >> Would it be possible to auto-update those -u-boot.dtsi files during
-> >> sync, to minimize the resulting DT blob delta before/after update, and
-> >> thus also minimize the likelihood of causing breakage ?
-> >
-> > In the long run the DT community would like to avoid any DT ABI
-> > breakages at all. Rob is already working on a DT ABI check tool and
-> > seeking inputs for what could be an ABI break [1] from U-Boot
-> > perspective too. Feel free to provide your inputs.
-> >
-> > Along with that we wouldn't need -u-boot.dtsi files once we make
-> > U-Boot fully compliant with DT bindings. Until that point U-Boot
-> > platform maintainers have to keep their -u-boot.dtsi files updated
-> > corresponding to latest DT rebasing releases.
->
-> I think upstreaming the bootph* properties would still take a while, but
-> is not relevant to the aforementioned question.
->
-> Assume there is a sync, would the current in-tree -u-boot.dtsi files get
-> updated to work correctly with the newly synced DTs ?
-
-As long as they contain nodes/properties (eg. bootph* etc.) which are
-compliant with upstream DT bindings then yes they should work
-correctly with the newly synced DTs.
-
--Sumit
