@@ -4,151 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E50DAC47422
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 13:46:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0EE7C47422
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 14:17:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2865879A2;
-	Fri, 26 Jan 2024 14:46:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
+	by phobos.denx.de (Postfix) with ESMTP id C81A687B98;
+	Fri, 26 Jan 2024 15:17:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="WyKo71eR";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AEA6187B63; Fri, 26 Jan 2024 14:46:21 +0100 (CET)
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur04on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260f::600])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D82DD8786E
- for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 14:46:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=theobroma-systems.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=quentin.schulz@theobroma-systems.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fJeZj3SeU06Z+V5RUptfuRGwNib3ct1Jt8sL9pP8nZelgORIXQ7yS79CGG+kCa+KTsrDoM0TMy0YlXFEsmo3TO10MdTnZKalln1L8KE0PFCdiyb68gMfV1GbckaQc4TxeED3u/cnvSxMWCQwsYaR5jzSiDTut+for1pzfHV8r/hUc0QZAmij4HroL9a5F4B22Tqur15265g+iV+W4HjlAxq9dS0NlYYrJr8Qp49O6+kvQx556tB3pXKQVTpt62Kw5HcGl6Tt5T3wGjROvpbPhMbNTtoJP4DGKt+p2N1wTTtB8+SIWRfrJRX7PToID0IB7w2qQ+vgVYRneit0D0iRKQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZdYc2E8JBKif3FgS+mwyZWl+4SBq5f1Rt3X7/CHGA5U=;
- b=SuoGL+EMDZvU1ucvid43iJodgjUAcbpZuTrhk8xPS4kpLeVZJo82f3B+mH6rWy0RlgQcS06I43/t1qdgG4gurf3FZqI1hudzLXnQhSkALaxz3dqbaaquxm4qSDre4gWKamDp7S/rhLe5fwly5quJ9OxolKF9h8HkLRQ09EyfJGvMTs/yja5+Y2XmYME5oJ2MUddJhsr6bO95YO49gQnuFNZhiGgjT3oKTc9SNungQlpOvvXzq9qqmr5abJE2dWhON3XkoHpz+guSKtnaA1tJtfZGkWYy1h+qrHIJ2CnF8QcrTV2gQvmox5klD59MIZ8fEEbNhcI7orZv9wLr2dt72Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
- header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZdYc2E8JBKif3FgS+mwyZWl+4SBq5f1Rt3X7/CHGA5U=;
- b=WyKo71eR3f7E/J4b1d6/eeo4LtZKYUM6WdRrlR50E+KEBw89CH0o2mKixzLmscrZ/QvWQV6yXdc1GvrRWrZBuBII0bFTOv0Iia9wNn2oFKOgR9LVBbD4MHDtOVAHEMbLOlVC5Oepf7ZNi9isfsQJ4xdzfvVe9+WyGIu2FtIGSxI0sAXWgm+rBRWK8nQrBDHlFcPo0J3vuGaAHRRmpKh0MTtGx9g9vh/ZqeLB0bhN1t67n5zOhR1NHZYb2Zx0UE4SgTzX0dwhP0Lu0VcxG8XBS51jX9j6R2M5ccOVYxI2aM+8Fs/X3qoCuSUHF5Hw5THOc68SPo96t4IiuEMsSjHaTg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=theobroma-systems.com;
-Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
- by DBAPR04MB7240.eurprd04.prod.outlook.com (2603:10a6:10:1af::23)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7228.27; Fri, 26 Jan
- 2024 13:46:15 +0000
-Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
- ([fe80::550d:ad96:e3cb:9a6e]) by DU2PR04MB8536.eurprd04.prod.outlook.com
- ([fe80::550d:ad96:e3cb:9a6e%4]) with mapi id 15.20.7228.022; Fri, 26 Jan 2024
- 13:46:15 +0000
-Message-ID: <0e3cc574-23bc-4a0d-9f1b-421e5bce77b7@theobroma-systems.com>
-Date: Fri, 26 Jan 2024 14:46:12 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 13/18] rockchip: rk3588: fix non-working SD controller if
- booting from other media
-Content-Language: en-US
-To: Dragan Simic <dsimic@manjaro.org>
-Cc: Kever Yang <kever.yang@rock-chips.com>,
- Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Klaus Goger <klaus.goger@theobroma-systems.com>,
- Heiko Stuebner <heiko.stuebner@cherry.de>, =?UTF-8?B?5rSq5oWn5paM?=
- <hhb@rock-chips.com>, heiko@sntech.de, u-boot@lists.denx.de
-References: <20240123-jaguar-v1-0-1eec1c34953c@theobroma-systems.com>
- <20240123-jaguar-v1-13-1eec1c34953c@theobroma-systems.com>
- <10ebfefd-1619-4b08-b15d-ec8ca8e798f3@rock-chips.com>
- <c33d0c58-cd95-490f-9514-8d61e1e70925@theobroma-systems.com>
- <31e7cb6e-7ef1-4069-a38e-b61677a8d76e@rock-chips.com>
- <2f6e9491-9ae1-498c-b269-c0a8fbe27552@theobroma-systems.com>
- <609c74a8-80b0-48a2-ae0a-78264014accd@rock-chips.com>
- <82b8fd76-8a84-4253-93b0-bf1bde85121b@theobroma-systems.com>
- <0a9a81f47864fd566206f5e62c3df192@manjaro.org>
- <daf26efb-888c-4903-b8b1-c6d72556fe9c@theobroma-systems.com>
- <4000d538ec88400f0ceaa9f13b6cd489@manjaro.org>
- <31404375-a811-459c-b9d6-87333550954a@theobroma-systems.com>
- <cd2927612a52bf88b7a2b2c937ccd62f@manjaro.org>
-From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-In-Reply-To: <cd2927612a52bf88b7a2b2c937ccd62f@manjaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR0P281CA0100.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a9::6) To DU2PR04MB8536.eurprd04.prod.outlook.com
- (2603:10a6:10:2d7::10)
+ id 6C7A487BCE; Fri, 26 Jan 2024 15:17:42 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 3835087B8C
+ for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 15:17:39 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EB5641FB;
+ Fri, 26 Jan 2024 06:18:22 -0800 (PST)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AF9B23F73F;
+ Fri, 26 Jan 2024 06:17:37 -0800 (PST)
+Date: Fri, 26 Jan 2024 14:17:31 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: "linux-sunxi@lists.linux.dev" <linux-sunxi@lists.linux.dev>
+Cc: u-boot@lists.denx.de, Jernej Skrabec <jernej.skrabec@gmail.com>, Samuel
+ Holland <samuel@sholland.org>
+Subject: Re: [PATCH] sunxi: dts: update devicetree files from Linux-v6.8-rc1
+Message-ID: <20240126141731.068d6e53@donnerap.manchester.arm.com>
+In-Reply-To: <20240122110931.903085-1-andre.przywara@arm.com>
+References: <20240122110931.903085-1-andre.przywara@arm.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|DBAPR04MB7240:EE_
-X-MS-Office365-Filtering-Correlation-Id: 82c72251-0f4f-46b1-8cfb-08dc1e752a40
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: dLFEGpywrM2sceuxcetLmzk13SQnvXTsZ1K+oxsjqmPUWnRIVZouNicoFpC6//60ScCAafGM0IM6Jvu2gaRjEwsO8Z1l90VyWyu+9RjSi1Xl51SRr4gt+KjmxKDUZJY9kRj8nd2n5P/LKS2VaDGToqB89JZZNbwVhBaEoKIwNplzrMy+edZxXZxgm5IjXxRixKdlIQZX7cnucJJlXDk5YGj1z6o02JaNK4O63m+Fh93s/m/F8f7Kmf5y14gVhk2+SzfeOy29p3/s69i9sCD1PXTLd4mCAYAVblVWmcGcn9pYL+tTrlq+lEomMdakzBsAwnp59qLBcnpBm7B0miKuqH4AOb3ar9HotduQpQNY8kOIqlSEJNtig1ii/OaUHPHVs7VkvQ80LNUqVNdSTmY5U185X9KEnqUy1zZlhD8XjBwcQtnV2KLSSf/knOwiFNnz+uEXRyMScSuJbkiipSFFXbvauB/wPp1dMLHqIDW57KRhkDpxXQMHMcg+E6turx7FZk33fdq2NB1QTnCgQUpia33a1OF+CXbAxLwovgGH/K93f+p3/cvktLwlgoDGLaGuytTSbDV0qOkrC97Lza0xTgxroZtpvXW+rIj6GPQPwJ/z8MdhoytEaVBjlmJgQ37Q
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(39840400004)(366004)(136003)(376002)(396003)(346002)(230922051799003)(64100799003)(1800799012)(186009)(451199024)(31686004)(83380400001)(36756003)(86362001)(31696002)(8936002)(44832011)(4326008)(5660300002)(8676002)(53546011)(38100700002)(2616005)(316002)(7416002)(66556008)(54906003)(66476007)(6916009)(66946007)(6486002)(6512007)(2906002)(478600001)(41300700001)(6506007)(6666004)(966005)(45080400002)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MjdtWXFnQTFOdFdyWFRFV1pNRTZtQ0l0R253V0V2S0lBaW14UFBtcmhoNXFl?=
- =?utf-8?B?SVo1ejJrRW91b1VJellUeFR2bzVQUGNUUWI5SXNKUkRIZEVBL3JPZzg3eGRT?=
- =?utf-8?B?K1NLZW16NzduSDR6ekFUSEkvc3ZJV1A3aG9NSHYzUWdqV2RKMnpIZkFhTFph?=
- =?utf-8?B?OU5YMklhYnd0cS9IZGJ6bG9hcmJYWFhGK3BWazR2Z2pPVEIxRzN6RFIwSE5Q?=
- =?utf-8?B?cG9SVUpZTU1IcUhMNThXVDhXVXlQanN3bHU3VVBJTFgxRnZvN2xYZ0hBZ0tF?=
- =?utf-8?B?Wjg3RUVSOGpCeUtXNmFHT3U5eWU3RTVVdUtZc2IvRmFtUk1ZWFZ1S0RJYWlJ?=
- =?utf-8?B?Q01iU3o4ZDdTSzFDbVY1RXQxU0lMT0dGRVBKdEhDTEI2dVJ2cEJOc2ZUUE94?=
- =?utf-8?B?V1FnOHJxWW4vQnEvbjJvVUNtTmJXRmpmRzY2VUJEMGxjZXR6V0hyRm1FT0FL?=
- =?utf-8?B?RVVsZ2lPUHNlL1BURTRybWJwWEZSMFBaWWtxaml6MkhQQ0tOVzEraW1JeWZu?=
- =?utf-8?B?YnpJOS9aZ1BzM1NFRGwvK3BkamFqTzVHNHFMZE1Yb2l4N0ZGTVNSYmZPYWJ6?=
- =?utf-8?B?Z25vSGltNWNVc085R3kwMkp5Smh0ZHQ2TjVKWlFmMXhZMHpNV0NOTlZKSGRV?=
- =?utf-8?B?SFFLeDFCTk04dFVIeUFJRFA4Wm5JTldNbldoZUhCZmRaZWk5Y3pLcUZtblV3?=
- =?utf-8?B?Ri9FT2xKY2p1cHQ1a1hVQ3l1V0NPQWtJYlNLaFB1eDc2U0tlVEhDL2dhZnVp?=
- =?utf-8?B?Y3NOTkdmTnAvQ1B5d1lneGYrT29BeEV2dFFHalJ4YmtraWcwbWhVdlZVMGNJ?=
- =?utf-8?B?aWIyOE13RVFHbE85WFplN3p1ZmtFcGhxSlZpbWhKdnVFckYxT0poOFY1dUlt?=
- =?utf-8?B?V1NaVzhQenhsa3BQbkNEU1Zuc1pTREl5Mks0QURoODkxSkpOK1JCVnV6ZGVh?=
- =?utf-8?B?MUlHOGNnSERuYzZmWDNOTC8wQzhWRlB0YjJzUG5TOHVIN2JsZGJucEpET3V3?=
- =?utf-8?B?T3hLYUNKRHF0N0tNU0lPQTdlUnlKYmN1U1l6NDNkZm9JYVFvUVR6NVNHMXdh?=
- =?utf-8?B?SVlNMm90aTJ4NWRPMmJpMlVhYmdpdVlrbnJRRXBhNExpbUY0NGNmb29TL3pm?=
- =?utf-8?B?eXI2NlFHWTlHUlpIQTlaNDg1TFRtQ2Fod2wzNHZvelhxV3l0R1dZdFlWQUg3?=
- =?utf-8?B?TzEwOTlLRythWVhHeFFkb0xTRUZCWXI4UVFSWG0rZVNqbmRDTEhBZGNObGN1?=
- =?utf-8?B?ekZnVnZ2ZWNGTVJxUGZpS2xTQTE4ay93ckNSZkI5bFNXeXcvc056V3Eyc0t6?=
- =?utf-8?B?YXNhWitGQk0zUnI4M211YnpWdk5Vc2ZwUm5FSmtSVXRtTWFGRDhIaXVSbTJz?=
- =?utf-8?B?WnFneXl3SmlFb1g5NlkwWCt3Mno5YlFHSHFFTmhxL1dVMnd4VEQzYkUzeHlM?=
- =?utf-8?B?TUE1NktXcnpzVnhPajJUQnJVL0Z5Rk1wc1dnTGNFUm91SFZjQVlXaC96TTEy?=
- =?utf-8?B?SWk0Sk10Q1dsa3pYb2NMTEg3VVBKL1hBdURlamlIS3VlUGFqTkdSMWJEQTVW?=
- =?utf-8?B?WTd4a3lybVFheWJsL3BpSktiZVdEdG9oaDcwRXJSYUM2ekFzekw4eWwwWTNH?=
- =?utf-8?B?M2ZxOTBUVmcwZ0FNTHNNbHo4YnZIZnlqRm9rK2k5UkI4cm4xWU9rVnByaUlO?=
- =?utf-8?B?ejRwUTIrOWx3eTRyVmZHWW1XOXRpSXYzM0NnT1JuSThvTUNQN3doSHVZaHZG?=
- =?utf-8?B?MXU2eUZOd200aERaWWtncU5lbmRnWEJEalE3SzZmNUZybkQwa3JsZ0pVck1v?=
- =?utf-8?B?UVFPeFFUTjVFY3g2TXZiVm5TL2IzT2c3M3B1RVJ6VTlFMlI0UjY3MkxCNUIw?=
- =?utf-8?B?VUkxRkhQa1Fnb2pZaXh6OEpsZHFBcDVIbi9VUEFQTjVMVkdlQnFtbnpKVUVL?=
- =?utf-8?B?dngybC9jSWVsZ2RaVFJvNEpHMUpJUm5RMWZ4TlBacXNiM0N3YTJhVVdXOWFh?=
- =?utf-8?B?STI3WTVGQXlYZmllZGhTeVRTeGxEV0EyMEdjL0owY1dGTTQzY0xNWStuWUZn?=
- =?utf-8?B?R3kxZjIrL0FQYXRtSjNaeVlrbHNIRFZ0N1JQYU0wU0J5WENEUGtyenZSdkh5?=
- =?utf-8?B?VU9sa2NzTjlyYnpPVDNLNWh4WHpOTVQ3Q29IcytCU1pDSmdmUllqMVZwNFJr?=
- =?utf-8?B?enVVeXZxZkNvbE9mZ0pnOEFNbW9EdDJzQTZDRk1TR1NEdS93Qnp5NVh5Um1r?=
- =?utf-8?B?QkpseHNFb1hzb0JUREZUU09xQTRnPT0=?=
-X-OriginatorOrg: theobroma-systems.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 82c72251-0f4f-46b1-8cfb-08dc1e752a40
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jan 2024 13:46:15.2017 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Ugz1ySa8EhoL8q2JWWlcDv3J2OFqBEcsQ09mMfmr+eARp6VY1J1zsbtX/D2VxrMAowRtKET0846WUSSPbi4E1wEjbdY6U0JTmAANFjWz4WLHY2QdikgPLW0u8HuJc5vD
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR04MB7240
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -165,67 +57,1017 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dragan,
+On Mon, 22 Jan 2024 11:09:31 +0000
+Andre Przywara <andre.przywara@arm.com> wrote:
 
-On 1/26/24 12:33, Dragan Simic wrote:
-> On 2024-01-26 12:29, Quentin Schulz wrote:
->> On 1/26/24 12:24, Dragan Simic wrote:
->>> On 2024-01-26 12:09, Quentin Schulz wrote:
->>>> On 1/26/24 12:04, Dragan Simic wrote:
->>>>> On 2024-01-26 11:37, Quentin Schulz wrote:
->>>>>> On 1/26/24 03:57, Kever Yang wrote:
->>>>>>> On 2024/1/25 19:02, Quentin Schulz wrote:
->>>>>>>> We don't have a dedicated CD pin for the SD card connector.
->>>>>>>> https://www.digikey.com/en/products/detail/molex/0472192001/3044807
->>>>>>>> is the SD card connector we use.
->>>>>>>
->>>>>>> Thanks for your information, but I think you are using the wrong
->>>>>>> microSD connector for rk3588 and maybe also for other rockchip SoCs.
->>>>>>> Here are four microSD card connector from the web you provide, all
->>>>>>> of
->>>>>>> them have card detect signal available for pcb:
->>>>>>> https://www.digikey.com/en/product-highlight/m/molex-connector/sd-memory-card-connectors
->>>>>>
->>>>>> None of those fit our requirements. We need a safe system that
->>>>>> doesn't
->>>>>> break because of vibrations or shocks. Push-pull connectors are out
->>>>>> of
->>>>>> question for our design. We have had issues with our Q7 devkit with
->>>>>> push-pull connector with SD cards slightly smaller or inserted
->>>>>> somewhat the wrong way. I can recall also countless of discussions in
->>>>>> the early days of the Raspberry Pis where there were a lot of issues
->>>>>> related to SD cards.
->>>>>>
->>>>>> This is basically the mechanism we are using
->>>>>> https://media.distrelec.com/Web/WebShopImages/landscape_large/4-/01/Molex-500901-0801-30161714-01.jpg
->>>>>
->>>>> Please, allow me to interject...  I'm really curious why don't you
->>>>> use eMMC chips instead of microSD cards?  I mean, if the reliability
->>>>> is of utmost importance, I wouldn't even consider microSD cards, not
->>>>> even the high-endurance variants.
->>>>
->>>> We have both :)
->>>
->>> Ah, I see. :)  Perhaps my question wasn't precise enough;  actually,
->>> now I'd like to know what do you use as the primary storage for the
->>> operating system installation -- eMMC chip or microSD cards?  Is the
->>> eMMC chip soldered?  I'm just curious. :)
->>>
->> Soldered eMMC is the primary (expected) storage. If both eMMC and SD
->> card are inserted and properly flashed, it'll boot from eMMC except if
->> the BIOS button is pressed, in which case SD card will be selected
->> instead. If SD card is missing/improperly flashed, it'll boot into USB
->> flashing mode (rkdeveloptool/rockusb) if the BIOS button is pressed
->> (similar to when no storage media is properly flashed).
+Hi,
+
+I just realised that I forgot to CC: the linux-sunxi list on this.
+Could anyone please have a brief look and confirm that I didn't miss
+anything in this update? It's mostly about adding DTs for new boards, so
+that we can add U-Boot support for them. I would feel better merging my
+own patches if someone confirms them ;-)
+
+Cheers,
+Andre.
+
+P.S. There are discussions underway to automatically sync the DT rebase
+repo into U-Boot, so we should get fresh DTs automatically:
+https://lore.kernel.org/u-boot/20240110103547.719757-1-sumit.garg@linaro.org/
+
+> Sync the devicetree files from the official Linux kernel tree, v6.8-rc1.
+> This time only small changes in the existing files, but five new boards
+> got added, which opens the door for their respective defconfig files.
 > 
-> Thanks for the clarification.  Just one more question, please:  is the
-> BIOS button handled in software (i.e. in U-Boot), or does it disable the
-> eMMC chip by shorting its clock or a data line to ground?
+> As before, this omits the non-backwards compatible changes to the R_INTC
+> controller, to remain compatible with older kernels.
+> 
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> ---
+>  .../dts/sun50i-h616-bigtreetech-cb1-manta.dts |  35 +++
+>  arch/arm/dts/sun50i-h616-bigtreetech-cb1.dtsi | 138 +++++++++
+>  arch/arm/dts/sun50i-h616-bigtreetech-pi.dts   |  63 ++++
+>  arch/arm/dts/sun50i-h616.dtsi                 |   7 +
+>  arch/arm/dts/sun50i-h618-orangepi-zero2w.dts  | 176 +++++++++++
+>  .../arm/dts/sun50i-h618-transpeed-8k618-t.dts | 161 ++++++++++
+>  arch/arm/dts/sun8i-r40.dtsi                   |   2 +
+>  arch/arm/dts/sun8i-v3s-anbernic-rg-nano.dts   | 276 ++++++++++++++++++
+>  arch/arm/dts/sun8i-v3s.dtsi                   |  35 +++
+>  9 files changed, 893 insertions(+)
+>  create mode 100644 arch/arm/dts/sun50i-h616-bigtreetech-cb1-manta.dts
+>  create mode 100644 arch/arm/dts/sun50i-h616-bigtreetech-cb1.dtsi
+>  create mode 100644 arch/arm/dts/sun50i-h616-bigtreetech-pi.dts
+>  create mode 100644 arch/arm/dts/sun50i-h618-orangepi-zero2w.dts
+>  create mode 100644 arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts
+>  create mode 100644 arch/arm/dts/sun8i-v3s-anbernic-rg-nano.dts
+> 
+> diff --git a/arch/arm/dts/sun50i-h616-bigtreetech-cb1-manta.dts b/arch/arm/dts/sun50i-h616-bigtreetech-cb1-manta.dts
+> new file mode 100644
+> index 00000000000..dbce61b355d
+> --- /dev/null
+> +++ b/arch/arm/dts/sun50i-h616-bigtreetech-cb1-manta.dts
+> @@ -0,0 +1,35 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ or MIT)
+> +/*
+> + * Copyright (C) 2023 Martin Botka <martin.botka@somainline.org>.
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include "sun50i-h616-bigtreetech-cb1.dtsi"
+> +
+> +/ {
+> +	model = "BigTreeTech CB1";
+> +	compatible = "bigtreetech,cb1-manta", "bigtreetech,cb1", "allwinner,sun50i-h616";
+> +
+> +	aliases {
+> +		serial0 = &uart0;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = "serial0:115200n8";
+> +	};
+> +};
+> +
+> +&ehci1 {
+> +	status = "okay";
+> +};
+> +
+> +&ohci1 {
+> +	status = "okay";
+> +};
+> +
+> +&uart0 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&uart0_ph_pins>;
+> +	status = "okay";
+> +};
+> diff --git a/arch/arm/dts/sun50i-h616-bigtreetech-cb1.dtsi b/arch/arm/dts/sun50i-h616-bigtreetech-cb1.dtsi
+> new file mode 100644
+> index 00000000000..1fed2b46cfe
+> --- /dev/null
+> +++ b/arch/arm/dts/sun50i-h616-bigtreetech-cb1.dtsi
+> @@ -0,0 +1,138 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ or MIT)
+> +/*
+> + * Copyright (C) 2023 Martin Botka <martin.botka@somainline.org>.
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include "sun50i-h616.dtsi"
+> +
+> +#include <dt-bindings/gpio/gpio.h>
+> +#include <dt-bindings/interrupt-controller/arm-gic.h>
+> +#include <dt-bindings/leds/common.h>
+> +
+> +/ {
+> +	aliases {
+> +		ethernet0 = &rtl8189ftv;
+> +	};
+> +
+> +	leds {
+> +		compatible = "gpio-leds";
+> +
+> +		led-0 {
+> +			function = LED_FUNCTION_STATUS;
+> +			color = <LED_COLOR_ID_GREEN>;
+> +			gpios = <&pio 7 5 GPIO_ACTIVE_HIGH>; /* PH5 */
+> +		};
+> +	};
+> +
+> +	reg_vcc5v: regulator-vcc5v {
+> +		/* board wide 5V supply from carrier boards */
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc-5v";
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +		regulator-always-on;
+> +	};
+> +
+> +	reg_vcc33_wifi: vcc33-wifi {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc33-wifi";
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		regulator-always-on;
+> +		vin-supply = <&reg_vcc5v>;
+> +	};
+> +
+> +	reg_vcc_wifi_io: vcc-wifi-io {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc-wifi-io";
+> +		regulator-min-microvolt = <1800000>;
+> +		regulator-max-microvolt = <1800000>;
+> +		regulator-always-on;
+> +		vin-supply = <&reg_vcc33_wifi>;
+> +	};
+> +
+> +	wifi_pwrseq: wifi-pwrseq {
+> +		compatible = "mmc-pwrseq-simple";
+> +		clocks = <&rtc 1>;
+> +		clock-names = "ext_clock";
+> +		reset-gpios = <&pio 6 18 GPIO_ACTIVE_LOW>; /* PG18 */
+> +		post-power-on-delay-ms = <200>;
+> +	};
+> +};
+> +
+> +&mmc0 {
+> +	vmmc-supply = <&reg_dldo1>;
+> +	/* Card detection pin is not connected */
+> +	broken-cd;
+> +	bus-width = <4>;
+> +	status = "okay";
+> +};
+> +
+> +&mmc1 {
+> +	vmmc-supply = <&reg_vcc33_wifi>;
+> +	vqmmc-supply = <&reg_vcc_wifi_io>;
+> +	mmc-pwrseq = <&wifi_pwrseq>;
+> +	bus-width = <4>;
+> +	non-removable;
+> +	mmc-ddr-1_8v;
+> +	status = "okay";
+> +
+> +	rtl8189ftv: wifi@1 {
+> +		reg = <1>;
+> +	};
+> +};
+> +
+> +&r_i2c {
+> +	status = "okay";
+> +
+> +	axp313a: pmic@36 {
+> +		compatible = "x-powers,axp313a";
+> +		reg = <0x36>;
+> +		interrupt-controller;
+> +		#interrupt-cells = <1>;
+> +
+> +		regulators{
+> +			reg_dcdc1: dcdc1 {
+> +				regulator-name = "vdd-gpu-sys";
+> +				regulator-min-microvolt = <810000>;
+> +				regulator-max-microvolt = <990000>;
+> +				regulator-always-on;
+> +			};
+> +
+> +			reg_dcdc2: dcdc2 {
+> +				regulator-name = "vdd-cpu";
+> +				regulator-min-microvolt = <810000>;
+> +				regulator-max-microvolt = <1100000>;
+> +				regulator-ramp-delay = <200>;
+> +				regulator-always-on;
+> +			};
+> +
+> +			reg_dcdc3: dcdc3 {
+> +				regulator-name = "vcc-dram";
+> +				regulator-min-microvolt = <1350000>;
+> +				regulator-max-microvolt = <1500000>;
+> +				regulator-always-on;
+> +			};
+> +
+> +			reg_aldo1: aldo1 {
+> +				regulator-name = "vcc-1v8-pll";
+> +				regulator-min-microvolt = <1800000>;
+> +				regulator-max-microvolt = <1800000>;
+> +				regulator-always-on;
+> +			};
+> +
+> +			reg_dldo1: dldo1 {
+> +				regulator-name = "vcc-3v3-io";
+> +				regulator-min-microvolt = <3300000>;
+> +				regulator-max-microvolt = <3300000>;
+> +				regulator-always-on;
+> +			};
+> +		};
+> +	};
+> +};
+> +
+> +&usbphy {
+> +	status = "okay";
+> +};
+> diff --git a/arch/arm/dts/sun50i-h616-bigtreetech-pi.dts b/arch/arm/dts/sun50i-h616-bigtreetech-pi.dts
+> new file mode 100644
+> index 00000000000..832f08b2b26
+> --- /dev/null
+> +++ b/arch/arm/dts/sun50i-h616-bigtreetech-pi.dts
+> @@ -0,0 +1,63 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ or MIT)
+> +/*
+> + * Copyright (C) 2023 Martin Botka <martin@biqu3d.com>.
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include "sun50i-h616-bigtreetech-cb1.dtsi"
+> +
+> +/ {
+> +	model = "BigTreeTech Pi";
+> +	compatible = "bigtreetech,pi", "allwinner,sun50i-h616";
+> +
+> +	aliases {
+> +		serial0 = &uart0;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = "serial0:115200n8";
+> +	};
+> +};
+> +
+> +&ehci0 {
+> +	status = "okay";
+> +};
+> +
+> +&ehci1 {
+> +	status = "okay";
+> +};
+> +
+> +&ehci2 {
+> +	status = "okay";
+> +};
+> +
+> +&ehci3 {
+> +	status = "okay";
+> +};
+> +
+> +&ir {
+> +	status = "okay";
+> +};
+> +
+> +&ohci0 {
+> +	status = "okay";
+> +};
+> +
+> +&ohci1 {
+> +	status = "okay";
+> +};
+> +
+> +&ohci2 {
+> +	status = "okay";
+> +};
+> +
+> +&ohci3 {
+> +	status = "okay";
+> +};
+> +
+> +&uart0 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&uart0_ph_pins>;
+> +	status = "okay";
+> +};
+> diff --git a/arch/arm/dts/sun50i-h616.dtsi b/arch/arm/dts/sun50i-h616.dtsi
+> index 74aed0d232a..d549d277d97 100644
+> --- a/arch/arm/dts/sun50i-h616.dtsi
+> +++ b/arch/arm/dts/sun50i-h616.dtsi
+> @@ -133,6 +133,13 @@
+>  			#reset-cells = <1>;
+>  		};
+>  
+> +		sid: efuse@3006000 {
+> +			compatible = "allwinner,sun50i-h616-sid", "allwinner,sun50i-a64-sid";
+> +			reg = <0x03006000 0x1000>;
+> +			#address-cells = <1>;
+> +			#size-cells = <1>;
+> +		};
+> +
+>  		watchdog: watchdog@30090a0 {
+>  			compatible = "allwinner,sun50i-h616-wdt",
+>  				     "allwinner,sun6i-a31-wdt";
+> diff --git a/arch/arm/dts/sun50i-h618-orangepi-zero2w.dts b/arch/arm/dts/sun50i-h618-orangepi-zero2w.dts
+> new file mode 100644
+> index 00000000000..21ca1977055
+> --- /dev/null
+> +++ b/arch/arm/dts/sun50i-h618-orangepi-zero2w.dts
+> @@ -0,0 +1,176 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (C) 2023 Arm Ltd.
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include "sun50i-h616.dtsi"
+> +
+> +#include <dt-bindings/gpio/gpio.h>
+> +#include <dt-bindings/interrupt-controller/arm-gic.h>
+> +#include <dt-bindings/leds/common.h>
+> +
+> +/ {
+> +	model = "OrangePi Zero 2W";
+> +	compatible = "xunlong,orangepi-zero2w", "allwinner,sun50i-h618";
+> +
+> +	aliases {
+> +		serial0 = &uart0;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = "serial0:115200n8";
+> +	};
+> +
+> +	leds {
+> +		compatible = "gpio-leds";
+> +
+> +		led-0 {
+> +			function = LED_FUNCTION_STATUS;
+> +			color = <LED_COLOR_ID_GREEN>;
+> +			gpios = <&pio 2 13 GPIO_ACTIVE_HIGH>; /* PC13 */
+> +		};
+> +	};
+> +
+> +	reg_vcc5v: vcc5v {
+> +		/* board wide 5V supply directly from the USB-C socket */
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc-5v";
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +		regulator-always-on;
+> +	};
+> +
+> +	reg_vcc3v3: vcc3v3 {
+> +		/* SY8089 DC/DC converter */
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc-3v3";
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		vin-supply = <&reg_vcc5v>;
+> +		regulator-always-on;
+> +	};
+> +};
+> +
+> +&ehci1 {
+> +	status = "okay";
+> +};
+> +
+> +/* USB 2 & 3 are on the FPC connector (or the exansion board) */
+> +
+> +&mmc0 {
+> +	cd-gpios = <&pio 5 6 GPIO_ACTIVE_LOW>;	/* PF6 */
+> +	bus-width = <4>;
+> +	vmmc-supply = <&reg_vcc3v3>;
+> +	status = "okay";
+> +};
+> +
+> +&ohci1 {
+> +	status = "okay";
+> +};
+> +
+> +&pio {
+> +	vcc-pc-supply = <&reg_dldo1>;
+> +	vcc-pf-supply = <&reg_dldo1>;	/* internally via VCC-IO */
+> +	vcc-pg-supply = <&reg_aldo1>;
+> +	vcc-ph-supply = <&reg_dldo1>;	/* internally via VCC-IO */
+> +	vcc-pi-supply = <&reg_dldo1>;
+> +};
+> +
+> +&r_i2c {
+> +	status = "okay";
+> +
+> +	axp313: pmic@36 {
+> +		compatible = "x-powers,axp313a";
+> +		reg = <0x36>;
+> +		#interrupt-cells = <1>;
+> +		interrupt-controller;
+> +		interrupt-parent = <&pio>;
+> +		interrupts = <2 9 IRQ_TYPE_LEVEL_LOW>;	/* PC9 */
+> +
+> +		vin1-supply = <&reg_vcc5v>;
+> +		vin2-supply = <&reg_vcc5v>;
+> +		vin3-supply = <&reg_vcc5v>;
+> +
+> +		regulators {
+> +			/* Supplies VCC-PLL and DRAM */
+> +			reg_aldo1: aldo1 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <1800000>;
+> +				regulator-max-microvolt = <1800000>;
+> +				regulator-name = "vcc1v8";
+> +			};
+> +
+> +			/* Supplies VCC-IO, so needs to be always on. */
+> +			reg_dldo1: dldo1 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <3300000>;
+> +				regulator-max-microvolt = <3300000>;
+> +				regulator-name = "vcc3v3";
+> +			};
+> +
+> +			reg_dcdc1: dcdc1 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <810000>;
+> +				regulator-max-microvolt = <990000>;
+> +				regulator-name = "vdd-gpu-sys";
+> +			};
+> +
+> +			reg_dcdc2: dcdc2 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <810000>;
+> +				regulator-max-microvolt = <1100000>;
+> +				regulator-name = "vdd-cpu";
+> +			};
+> +
+> +			reg_dcdc3: dcdc3 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <1100000>;
+> +				regulator-max-microvolt = <1100000>;
+> +				regulator-name = "vdd-dram";
+> +			};
+> +		};
+> +	};
+> +};
+> +
+> +&spi0  {
+> +	status = "okay";
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&spi0_pins>, <&spi0_cs0_pin>;
+> +
+> +	flash@0 {
+> +		#address-cells = <1>;
+> +		#size-cells = <1>;
+> +		compatible = "jedec,spi-nor";
+> +		reg = <0>;
+> +		spi-max-frequency = <40000000>;
+> +	};
+> +};
+> +
+> +&uart0 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&uart0_ph_pins>;
+> +	status = "okay";
+> +};
+> +
+> +&usbotg {
+> +	/*
+> +	 * PHY0 pins are connected to a USB-C socket, but a role switch
+> +	 * is not implemented: both CC pins are pulled to GND.
+> +	 * The VBUS pins power the device, so a fixed peripheral mode
+> +	 * is the best choice.
+> +	 * The board can be powered via GPIOs, in this case port0 *can*
+> +	 * act as a host (with a cable/adapter ignoring CC), as VBUS is
+> +	 * then provided by the GPIOs. Any user of this setup would
+> +	 * need to adjust the DT accordingly: dr_mode set to "host",
+> +	 * enabling OHCI0 and EHCI0.
+> +	 */
+> +	dr_mode = "peripheral";
+> +	status = "okay";
+> +};
+> +
+> +&usbphy {
+> +	usb1_vbus-supply = <&reg_vcc5v>;
+> +	status = "okay";
+> +};
+> diff --git a/arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts b/arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts
+> new file mode 100644
+> index 00000000000..8ea1fd41aeb
+> --- /dev/null
+> +++ b/arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts
+> @@ -0,0 +1,161 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (C) 2023 Arm Ltd.
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include "sun50i-h616.dtsi"
+> +
+> +#include <dt-bindings/gpio/gpio.h>
+> +#include <dt-bindings/interrupt-controller/arm-gic.h>
+> +
+> +/ {
+> +	model = "Transpeed 8K618-T";
+> +	compatible = "transpeed,8k618-t", "allwinner,sun50i-h618";
+> +
+> +	aliases {
+> +		serial0 = &uart0;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = "serial0:115200n8";
+> +	};
+> +
+> +	reg_vcc5v: vcc5v {
+> +		/* board wide 5V supply directly from the DC input */
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc-5v";
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +		regulator-always-on;
+> +	};
+> +
+> +	reg_vcc3v3: vcc3v3 {
+> +		/* discrete 3.3V regulator */
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc-3v3";
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		regulator-always-on;
+> +	};
+> +};
+> +
+> +&ehci0 {
+> +	status = "okay";
+> +};
+> +
+> +&ehci1 {
+> +	status = "okay";
+> +};
+> +
+> +&ir {
+> +	status = "okay";
+> +};
+> +
+> +&mmc0 {
+> +	vmmc-supply = <&reg_dldo1>;
+> +	cd-gpios = <&pio 8 16 GPIO_ACTIVE_LOW>;	/* PI16 */
+> +	bus-width = <4>;
+> +	status = "okay";
+> +};
+> +
+> +&mmc2 {
+> +	vmmc-supply = <&reg_dldo1>;
+> +	vqmmc-supply = <&reg_aldo1>;
+> +	bus-width = <8>;
+> +	non-removable;
+> +	cap-mmc-hw-reset;
+> +	mmc-ddr-1_8v;
+> +	mmc-hs200-1_8v;
+> +	status = "okay";
+> +};
+> +
+> +&ohci0 {
+> +	status = "okay";
+> +};
+> +
+> +&ohci1 {
+> +	status = "okay";
+> +};
+> +
+> +&r_i2c {
+> +	status = "okay";
+> +
+> +	axp313: pmic@36 {
+> +		compatible = "x-powers,axp313a";
+> +		reg = <0x36>;
+> +		#interrupt-cells = <1>;
+> +		interrupt-controller;
+> +
+> +		vin1-supply = <&reg_vcc5v>;
+> +		vin2-supply = <&reg_vcc5v>;
+> +		vin3-supply = <&reg_vcc5v>;
+> +
+> +		regulators {
+> +			reg_aldo1: aldo1 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <1800000>;
+> +				regulator-max-microvolt = <1800000>;
+> +				regulator-name = "vcc-1v8-pll";
+> +			};
+> +
+> +			reg_dldo1: dldo1 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <3300000>;
+> +				regulator-max-microvolt = <3300000>;
+> +				regulator-name = "vcc-3v3-io-mmc";
+> +			};
+> +
+> +			reg_dcdc1: dcdc1 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <810000>;
+> +				regulator-max-microvolt = <990000>;
+> +				regulator-name = "vdd-gpu-sys";
+> +			};
+> +
+> +			reg_dcdc2: dcdc2 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <810000>;
+> +				regulator-max-microvolt = <1100000>;
+> +				regulator-name = "vdd-cpu";
+> +			};
+> +
+> +			reg_dcdc3: dcdc3 {
+> +				regulator-always-on;
+> +				regulator-min-microvolt = <1360000>;
+> +				regulator-max-microvolt = <1360000>;
+> +				regulator-name = "vdd-dram";
+> +			};
+> +		};
+> +	};
+> +};
+> +
+> +&pio {
+> +	vcc-pc-supply = <&reg_aldo1>;
+> +	vcc-pg-supply = <&reg_dldo1>;
+> +	vcc-ph-supply = <&reg_dldo1>;
+> +	vcc-pi-supply = <&reg_dldo1>;
+> +};
+> +
+> +&uart0 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&uart0_ph_pins>;
+> +	status = "okay";
+> +};
+> +
+> +&uart1 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&uart1_pins>, <&uart1_rts_cts_pins>;
+> +	uart-has-rtscts;
+> +	status = "okay";
+> +};
+> +
+> +&usbotg {
+> +	dr_mode = "host";	/* USB A type receptable */
+> +	status = "okay";
+> +};
+> +
+> +&usbphy {
+> +	status = "okay";
+> +};
+> diff --git a/arch/arm/dts/sun8i-r40.dtsi b/arch/arm/dts/sun8i-r40.dtsi
+> index 4ef26d8f534..a5b1f1e3900 100644
+> --- a/arch/arm/dts/sun8i-r40.dtsi
+> +++ b/arch/arm/dts/sun8i-r40.dtsi
+> @@ -338,6 +338,8 @@
+>  			resets = <&ccu RST_BUS_VE>;
+>  			interrupts = <GIC_SPI 53 IRQ_TYPE_LEVEL_HIGH>;
+>  			allwinner,sram = <&ve_sram 1>;
+> +			interconnects = <&mbus 4>;
+> +			interconnect-names = "dma-mem";
+>  		};
+>  
+>  		mmc0: mmc@1c0f000 {
+> diff --git a/arch/arm/dts/sun8i-v3s-anbernic-rg-nano.dts b/arch/arm/dts/sun8i-v3s-anbernic-rg-nano.dts
+> new file mode 100644
+> index 00000000000..f34dfdf1566
+> --- /dev/null
+> +++ b/arch/arm/dts/sun8i-v3s-anbernic-rg-nano.dts
+> @@ -0,0 +1,276 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +/dts-v1/;
+> +#include <dt-bindings/input/linux-event-codes.h>
+> +#include "sun8i-v3s.dtsi"
+> +#include "sunxi-common-regulators.dtsi"
+> +
+> +/ {
+> +	model = "Anbernic RG Nano";
+> +	compatible = "anbernic,rg-nano", "allwinner,sun8i-v3s";
+> +
+> +	aliases {
+> +		rtc0 = &pcf8563;
+> +		rtc1 = &rtc;
+> +		serial0 = &uart0;
+> +	};
+> +
+> +	backlight: backlight {
+> +		compatible = "pwm-backlight";
+> +		brightness-levels = <0 1 2 3 8 14 21 32 46 60 80 100>;
+> +		default-brightness-level = <11>;
+> +		power-supply = <&reg_vcc5v0>;
+> +		pwms = <&pwm 0 40000 1>;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = "serial0:115200n8";
+> +	};
+> +
+> +	gpio_keys: gpio-keys {
+> +		compatible = "gpio-keys";
+> +
+> +		button-a {
+> +			gpios = <&gpio_expander 12 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+> +			label = "BTN-A";
+> +			linux,code = <BTN_EAST>;
+> +		};
+> +
+> +		button-b {
+> +			gpios = <&gpio_expander 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+> +			label = "BTN-B";
+> +			linux,code = <BTN_SOUTH>;
+> +		};
+> +
+> +		button-down {
+> +			gpios = <&gpio_expander 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+> +			label = "DPAD-DOWN";
+> +			linux,code = <BTN_DPAD_DOWN>;
+> +		};
+> +
+> +		button-left {
+> +			gpios = <&gpio_expander 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+> +			label = "DPAD-LEFT";
+> +			linux,code = <BTN_DPAD_LEFT>;
+> +		};
+> +
+> +		button-right {
+> +			gpios = <&gpio_expander 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+> +			label = "DPAD-RIGHT";
+> +			linux,code = <BTN_DPAD_RIGHT>;
+> +		};
+> +
+> +		button-se {
+> +			gpios = <&gpio_expander 7 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+> +			label = "BTN-SELECT";
+> +			linux,code = <BTN_SELECT>;
+> +		};
+> +
+> +		button-st {
+> +			gpios = <&gpio_expander 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+> +			label = "BTN-START";
+> +			linux,code = <BTN_START>;
+> +		};
+> +
+> +		button-tl {
+> +			gpios = <&gpio_expander 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+> +			label = "BTN-L";
+> +			linux,code = <BTN_TL>;
+> +		};
+> +
+> +		button-tr {
+> +			gpios = <&gpio_expander 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+> +			label = "BTN-R";
+> +			linux,code = <BTN_TR>;
+> +		};
+> +
+> +		button-up {
+> +			gpios = <&gpio_expander 3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+> +			label = "DPAD-UP";
+> +			linux,code = <BTN_DPAD_UP>;
+> +		};
+> +
+> +		button-x {
+> +			gpios = <&gpio_expander 11 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+> +			label = "BTN-X";
+> +			linux,code = <BTN_NORTH>;
+> +		};
+> +
+> +		button-y {
+> +			gpios = <&gpio_expander 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+> +			label = "BTN-Y";
+> +			linux,code = <BTN_WEST>;
+> +		};
+> +	};
+> +};
+> +
+> +&codec {
+> +	allwinner,audio-routing = "Speaker", "HP",
+> +				  "MIC1", "Mic",
+> +				  "Mic", "HBIAS";
+> +	allwinner,pa-gpios = <&pio 5 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* PF6 */
+> +	status = "okay";
+> +};
+> +
+> +&ehci {
+> +	status = "okay";
+> +};
+> +
+> +&i2c0 {
+> +	status = "okay";
+> +
+> +	gpio_expander: gpio@20 {
+> +		compatible = "nxp,pcal6416";
+> +		reg = <0x20>;
+> +		gpio-controller;
+> +		#gpio-cells = <2>;
+> +		#interrupt-cells = <2>;
+> +		interrupt-controller;
+> +		interrupt-parent = <&pio>;
+> +		interrupts = <1 3 IRQ_TYPE_EDGE_BOTH>; /* PB3/EINT3 */
+> +		vcc-supply = <&reg_vcc3v3>;
+> +	};
+> +
+> +	axp209: pmic@34 {
+> +		reg = <0x34>;
+> +		interrupt-parent = <&pio>;
+> +		interrupts = <1 5 IRQ_TYPE_EDGE_FALLING>; /* PB5/EINT5 */
+> +	};
+> +
+> +	pcf8563: rtc@51 {
+> +		compatible = "nxp,pcf8563";
+> +		reg = <0x51>;
+> +	};
+> +};
+> +
+> +#include "axp209.dtsi"
+> +
+> +&battery_power_supply {
+> +	status = "okay";
+> +};
+> +
+> +&mmc0 {
+> +	broken-cd;
+> +	bus-width = <4>;
+> +	disable-wp;
+> +	vmmc-supply = <&reg_vcc3v3>;
+> +	vqmmc-supply = <&reg_vcc3v3>;
+> +	status = "okay";
+> +};
+> +
+> +&ohci {
+> +	status = "okay";
+> +};
+> +
+> +&pio {
+> +	vcc-pb-supply = <&reg_vcc3v3>;
+> +	vcc-pc-supply = <&reg_vcc3v3>;
+> +	vcc-pf-supply = <&reg_vcc3v3>;
+> +	vcc-pg-supply = <&reg_vcc3v3>;
+> +
+> +	spi0_no_miso_pins: spi0-no-miso-pins {
+> +		pins = "PC1", "PC2", "PC3";
+> +		function = "spi0";
+> +	};
+> +};
+> +
+> +&pwm {
+> +	pinctrl-0 = <&pwm0_pin>;
+> +	pinctrl-names = "default";
+> +	status = "okay";
+> +};
+> +
+> +/* DCDC2 wired into vdd-cpu, vdd-sys, and vdd-ephy. */
+> +&reg_dcdc2 {
+> +	regulator-always-on;
+> +	regulator-max-microvolt = <1250000>;
+> +	regulator-min-microvolt = <1250000>;
+> +	regulator-name = "vdd-cpu";
+> +};
+> +
+> +/* DCDC3 wired into every 3.3v input that isn't the RTC. */
+> +&reg_dcdc3 {
+> +	regulator-always-on;
+> +	regulator-max-microvolt = <3300000>;
+> +	regulator-min-microvolt = <3300000>;
+> +	regulator-name = "vcc-io";
+> +};
+> +
+> +/* LDO1 wired into RTC, voltage is hard-wired at 3.3v. */
+> +&reg_ldo1 {
+> +	regulator-always-on;
+> +	regulator-name = "vcc-rtc";
+> +};
+> +
+> +/* LDO2 wired into VCC-PLL and audio codec. */
+> +&reg_ldo2 {
+> +	regulator-always-on;
+> +	regulator-max-microvolt = <3000000>;
+> +	regulator-min-microvolt = <3000000>;
+> +	regulator-name = "vcc-pll";
+> +};
+> +
+> +/* LDO3, LDO4, and LDO5 unused. */
+> +&reg_ldo3 {
+> +	status = "disabled";
+> +};
+> +
+> +&reg_ldo4 {
+> +	status = "disabled";
+> +};
+> +
+> +/* RTC uses internal oscillator */
+> +&rtc {
+> +	/delete-property/ clocks;
+> +};
+> +
+> +&spi0 {
+> +	pinctrl-0 = <&spi0_no_miso_pins>;
+> +	pinctrl-names = "default";
+> +	status = "okay";
+> +
+> +	display@0 {
+> +		compatible = "saef,sftc154b", "panel-mipi-dbi-spi";
+> +		reg = <0>;
+> +		backlight = <&backlight>;
+> +		dc-gpios = <&pio 2 0 GPIO_ACTIVE_HIGH>; /* PC0 */
+> +		reset-gpios = <&pio 1 2 GPIO_ACTIVE_HIGH>; /* PB2 */
+> +		spi-max-frequency = <100000000>;
+> +
+> +		height-mm = <39>;
+> +		width-mm = <39>;
+> +
+> +		/* Set hb-porch to compensate for non-visible area */
+> +		panel-timing {
+> +			hactive = <240>;
+> +			vactive = <240>;
+> +			hback-porch = <80>;
+> +			vback-porch = <0>;
+> +			clock-frequency = <0>;
+> +			hfront-porch = <0>;
+> +			hsync-len = <0>;
+> +			vfront-porch = <0>;
+> +			vsync-len = <0>;
+> +		};
+> +	};
+> +};
+> +
+> +&uart0 {
+> +	pinctrl-0 = <&uart0_pb_pins>;
+> +	pinctrl-names = "default";
+> +	status = "okay";
+> +};
+> +
+> +&usb_otg {
+> +	dr_mode = "otg";
+> +	status = "okay";
+> +};
+> +
+> +&usb_power_supply {
+> +	status = "okay";
+> +};
+> +
+> +&usbphy {
+> +	usb0_id_det-gpios = <&pio 6 5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* PG5 */
+> +	status = "okay";
+> +};
+> diff --git a/arch/arm/dts/sun8i-v3s.dtsi b/arch/arm/dts/sun8i-v3s.dtsi
+> index 3b9a282c274..e8a04476b77 100644
+> --- a/arch/arm/dts/sun8i-v3s.dtsi
+> +++ b/arch/arm/dts/sun8i-v3s.dtsi
+> @@ -319,6 +319,29 @@
+>  			#phy-cells = <1>;
+>  		};
+>  
+> +		ehci: usb@1c1a000 {
+> +			compatible = "allwinner,sun8i-v3s-ehci", "generic-ehci";
+> +			reg = <0x01c1a000 0x100>;
+> +			interrupts = <GIC_SPI 72 IRQ_TYPE_LEVEL_HIGH>;
+> +			clocks = <&ccu CLK_BUS_EHCI0>, <&ccu CLK_BUS_OHCI0>;
+> +			resets = <&ccu RST_BUS_EHCI0>, <&ccu RST_BUS_OHCI0>;
+> +			phys = <&usbphy 0>;
+> +			phy-names = "usb";
+> +			status = "disabled";
+> +		};
+> +
+> +		ohci: usb@1c1a400 {
+> +			compatible = "allwinner,sun8i-v3s-ohci", "generic-ohci";
+> +			reg = <0x01c1a400 0x100>;
+> +			interrupts = <GIC_SPI 73 IRQ_TYPE_LEVEL_HIGH>;
+> +			clocks = <&ccu CLK_BUS_EHCI0>, <&ccu CLK_BUS_OHCI0>,
+> +				 <&ccu CLK_USB_OHCI0>;
+> +			resets = <&ccu RST_BUS_EHCI0>, <&ccu RST_BUS_OHCI0>;
+> +			phys = <&usbphy 0>;
+> +			phy-names = "usb";
+> +			status = "disabled";
+> +		};
+> +
+>  		ccu: clock@1c20000 {
+>  			compatible = "allwinner,sun8i-v3s-ccu";
+>  			reg = <0x01c20000 0x400>;
+> @@ -414,6 +437,18 @@
+>  				bias-pull-up;
+>  			};
+>  
+> +			/omit-if-no-ref/
+> +			pwm0_pin: pwm0-pin {
+> +				pins = "PB4";
+> +				function = "pwm0";
+> +			};
+> +
+> +			/omit-if-no-ref/
+> +			pwm1_pin: pwm1-pin {
+> +				pins = "PB5";
+> +				function = "pwm1";
+> +			};
+> +
+>  			spi0_pins: spi0-pins {
+>  				pins = "PC0", "PC1", "PC2", "PC3";
+>  				function = "spi0";
 
-None of those options :)
-
-On RK3588, the boot media selection and order is done via the channel 0 
-of the SARADC. So a specific voltage is provided to boot from eMMC or 
-from SD card.
-
-Quentin
