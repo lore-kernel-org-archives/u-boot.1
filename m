@@ -4,61 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF382C47422
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 12:19:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D98FC47422
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 12:25:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1AC887B8C;
-	Fri, 26 Jan 2024 13:19:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
+	by phobos.denx.de (Postfix) with ESMTP id 46E8187B8C;
+	Fri, 26 Jan 2024 13:24:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="vRllS2+A";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="OGAQ5eBk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="U45gvdoW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7108B87BF2; Fri, 26 Jan 2024 13:19:56 +0100 (CET)
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 11073862DA; Fri, 26 Jan 2024 08:53:23 +0100 (CET)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33AEA878AA
- for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 13:19:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E4FCD862DA
+ for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 08:53:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linutronix.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=namcao@linutronix.de
-Date: Fri, 26 Jan 2024 13:19:51 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1706271593;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=L+KB2iZx3SsU0JkPrlJLHUQ89sWJ72RUs5+KTLfC2gw=;
- b=vRllS2+AS8V7UAx8gwTaue9puBtM2ZApQGtAQo2XJa3rpOmSEyJRm059Ryh/K/nMPAllpV
- Ooogv1gFRLCWOdK6xCSJHofB/xYxExiEPN6VFYRil1T2KjhFK38coSKvUpR9Iq19Ww7fOR
- Fq/EHxMcG5mewlZUzXSK4sdgsJXfxHx/hDufryosQFRktGPeL199IUbhhVtxPZCqFpE4cX
- fkxD6JQG213npAmd1H8V1KC/wZARrAOpb6SXHbeU7l6y+s/e0dJO53Mug2BasSLs9220wG
- JOVJS9CGon9RT9gEuDsIteA+zsqJ9lesq++aoXB2GykB6k9gn7XchqwS92Iehw==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1706271593;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=L+KB2iZx3SsU0JkPrlJLHUQ89sWJ72RUs5+KTLfC2gw=;
- b=OGAQ5eBkoyDrNVBvAWchg1K6fZqWPmMKXj5k8CpTSJXGrwOb4uE2LnuGVYo39zb6P+ME8+
- rCpRh7jubUj5vAAg==
-From: Nam Cao <namcao@linutronix.de>
-To: E Shattow <lucent@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: riscv defconfig starfive visionfive2 env is nowhere, missing
- axp15060 regulator, misc vendor hacks for Milk-V Mars CM Lite
-Message-ID: <20240126131951.24af4e07@namcao>
-In-Reply-To: <CANV2PTO9aVPxkvWp_PY+NwB+bzzNtJ211NxQLHxi_uz_1Gce4w@mail.gmail.com>
-References: <CANV2PTO9aVPxkvWp_PY+NwB+bzzNtJ211NxQLHxi_uz_1Gce4w@mail.gmail.com>
+ spf=pass smtp.mailfrom=jj251510319013@gmail.com
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-290449c30d4so31263a91.2
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 23:53:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706255599; x=1706860399; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=1AdZnUKsDHNb9ZXt8ZZMmA1adutidBal3qNKttGZLpw=;
+ b=U45gvdoWaAFBHvIuXFIw7ug0gTzpukuET2sHabEtsvdtonj/6PlziAGrVGK7Y3CGjz
+ jT5KcKv6mk6DRR0eUZpxUjGXRqrSHwReF479tmqlwdc/yaWizC0Kqg9E9CF7FFlNpO/B
+ I10Ick9l8vJs42f2yxCaTBUAx66h9+YvEvcWwGQPwmmhSyFqqNFKYSBX6Oq9A7ALu21j
+ O1+DneUzfIy12X7gUX0jbc8CpuzEIZJJXCw72HFWlm9TC3waymSYkJEEVM6HlV6Iv42X
+ 8fYbVTBbLtiU0Qnx2AM2BIfJ8ez/u/u4kz3zx+QgBiIl2CWs9sPdyDJqI+LO3+5R2gl5
+ 5Bsw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706255599; x=1706860399;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1AdZnUKsDHNb9ZXt8ZZMmA1adutidBal3qNKttGZLpw=;
+ b=KwNQO9e48Cu1+b8TUH7BF5SHwuiS3FoMk6seFlFvhVUVV0zaoq+RlbvinCczyD1Jte
+ QugJ2DObupz8YfcJPU/idJqxPg8s6B9ERymbncegoBHFF4FPdGc1QNGSkeJS1qQ1k5Z5
+ mEHjaAoG6vOBLVAB3Q8F9vX0ED4Vl/qTjSnW3GFrVIj6USSnRtqY5kai4mmdb50hW75D
+ MqGf9k0rs3cpL8Tm9rRuHndnYFpAPHY2uNc/7s5oUl9xgrnC6bB61ZfECOhiC2Znt8yP
+ 1RNcynL2OzH1I/8sTZ47GLKULyYHgxdzLSGadLGrln3N31WNFar9lBfo9XuILIP8+oty
+ FYJw==
+X-Gm-Message-State: AOJu0YyrjQyz8afkrSuHfjPCu9CZ/UDBermVN/36ikc2bETp40kUhKCw
+ 6JocwigQaUpJzTsONXnQgEAAWxBzKI3LyBQzb64/e15E+7h5u4ql3VIUGC6la0s=
+X-Google-Smtp-Source: AGHT+IEJd3B9r/DVkLSlRE5t7gCuJ+mxf64sJTCJe2m/5SYWnBjCPw+Cx7lcGfiT1PAf5syGJX/+GA==
+X-Received: by 2002:a17:90a:498c:b0:28d:b5de:91e with SMTP id
+ d12-20020a17090a498c00b0028db5de091emr1048681pjh.32.1706255598588; 
+ Thu, 25 Jan 2024 23:53:18 -0800 (PST)
+Received: from localhost.localdomain (118-163-61-247.hinet-ip.hinet.net.
+ [118.163.61.247]) by smtp.gmail.com with ESMTPSA id
+ x5-20020a17090a388500b00290f8afd8acsm688761pjb.47.2024.01.25.23.53.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 Jan 2024 23:53:18 -0800 (PST)
+From: Wei Ming Chen <jj251510319013@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Wei Ming Chen <jj251510319013@gmail.com>
+Subject: [PATCH] doc: uefi: remove ".py" suffix for pytest.py command
+Date: Fri, 26 Jan 2024 15:52:19 +0800
+Message-Id: <20240126075219.1521605-1-jj251510319013@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 26 Jan 2024 13:24:57 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,20 +89,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 26 Jan 2024 02:53:45 -0800 E Shattow <lucent@gmail.com> wrote:
-> There is missing the AXP15060 power regulation in u-boot needed for SDCard
-> and networking. As it is happens to work for some variants and not others,
-> and not always. The AXP15060 driver exists in mainline Linux as a variant
-> of AXP20x and there are corresponding devicetree entries of the StarFive
-> JH7110-based VisionFive2 variants queued up (ref: *1 Patchwork series
-> 806238).
+the file pytest.py does not exist
 
-I sent a patch to add AXP15060 power regulation device tree node:
-https://lists.denx.de/pipermail/u-boot/2024-January/543614.html
+Signed-off-by: Wei Ming Chen <jj251510319013@gmail.com>
+---
+ doc/develop/uefi/uefi.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-However, I sent it because it is needed by OpenSBI to reboot/shutdown. I
-was not aware that U-Boot also needs this.
-
-Best regards,
-Nam
+diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+index c739242b6a..0389b269c0 100644
+--- a/doc/develop/uefi/uefi.rst
++++ b/doc/develop/uefi/uefi.rst
+@@ -193,7 +193,7 @@ on the sandbox
+ .. code-block:: bash
+ 
+     cd <U-Boot source directory>
+-    pytest.py test/py/tests/test_efi_secboot/test_signed.py --bd sandbox
++    pytest test/py/tests/test_efi_secboot/test_signed.py --bd sandbox
+ 
+ UEFI binaries may be signed by Microsoft using the following certificates:
+ 
+-- 
+2.34.1
 
