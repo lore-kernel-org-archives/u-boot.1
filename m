@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09631C47DDF
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 12:25:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0C33C47DDF
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 12:25:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28E4887C3F;
-	Fri, 26 Jan 2024 13:25:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DD09687C51;
+	Fri, 26 Jan 2024 13:25:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timesys.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="H6wE2ld1";
+	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="3eGTlb7+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 283A3879A2; Fri, 26 Jan 2024 10:26:16 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 21B3186784; Fri, 26 Jan 2024 10:26:21 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26A5886784
- for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 10:26:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 264EC879A2
+ for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 10:26:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=timesys.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=piotr.wojtaszczyk@timesys.com
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a34b468154fso13439166b.1
- for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 01:26:14 -0800 (PST)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-40eb2f392f0so2173805e9.1
+ for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 01:26:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1706261173; x=1706865973;
+ d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1706261178; x=1706865978;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=b3lHITaxpwd7fKXH7IiwiS3Alv6/xbZxawqyZpoVw1I=;
- b=H6wE2ld1oYlgY437CQlAeBTJOwjPeqOHp8lyYC55YmYAVRe+Pf0ezk/YDy9PNPTqqy
- ydE3hxWaUBiyU3OD8oUVCZRKb17lAroUqSWgsyNj3tID1c2iagQgzPEnq75cXGglbAWg
- zUWdECAGY9yCKEvhbp6DvQkjUgvAOdhPVZqYzD5rf2+10iJ2YmY2AZLDlEe2eX19GVGD
- 573zFdmicM9hq1NLK2bD663+VhtH8i8L7FZEGi7bwCo9SezhC3hLTvyXR6Z8/LJi+P/s
- 2fFms0yvmSn0SZOq6Kwj/7NHGyVh25zbG9B4HdaKzHBxqo7R9QyXTBh5+UyY1MRWFe9/
- IjvA==
+ bh=1eLGsOTTLsYbJKwmkTuJYL1GGe/9k/bGvpbbeMKKS3g=;
+ b=3eGTlb7+F/vtV7xuch0+a0CBh0Axabt0J7cmpnCPmdqrqoId/aGQrrudkYefhadq8o
+ MgLuw7TgGTpZ4uu2gj/x6XQ5VWWNnnpge0JBWmEnVVipTyvzMsZaEDxt1Vbwwi7StxMK
+ X1p4YPo7VMsqKG3WRKvUWm+Ck7HfgXl1WK/c6ZKBMuMdVQ6ywJpdcolb6ho5Hev42kF7
+ 7EC2pFC28I41bc1+b6ulc+QIWKy8Agjkwm3OUy2o3jSkxg8qC6mobijmWPWYKgpUhT9W
+ hGjc+6fXhQyDLjdZf+kY6xJZBoyc04ZIkwyTPK8ICVV3amd73s99NYvOzZJoZZq+nObe
+ FoIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706261173; x=1706865973;
+ d=1e100.net; s=20230601; t=1706261178; x=1706865978;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=b3lHITaxpwd7fKXH7IiwiS3Alv6/xbZxawqyZpoVw1I=;
- b=Tk08WI9KdBnnzzccdmOB8ZhTWoOmlb6kGpUzwYusUnhwMqN3USAnwanb2rPJ73+6LW
- m86ex0V99tbnT6wRHxQyrEuBHImHEflSe8X0EnAgMaDGJaoXQOcFGtaDOzutyGYQzKcZ
- 3eqMK7jn8dBPHsw+M/go/sxIpWPaMJ2fSWQsatC/wpiSAI2I7CTkLJOMQloyKq3wSgtM
- 6C98zmLhfsTAGPUZp+u0hNBiZatX/lJNuCls/gVm05y+6iyqUE3CsFzh7AhHzMH+Jsue
- itBo4NZfI42AJAcUzg/Z3I8JmchQpdmUYaupl/2SaZiZMZmNwmpg+wo1TUxdeKpLA++n
- WT3g==
-X-Gm-Message-State: AOJu0YzrbHYSMdzMoZeoOfYWgjqlxzxnf5Xg1eMoISR9qmos4+1ALrWI
- kMQpF9NE8WthewjTNmyFT9td5fosiaED32RjhTIOrhf4gkG/3Qr6cMkmSxDazBpyXAkZUJ6JPcC
- f+UI=
-X-Google-Smtp-Source: AGHT+IG+ucExO8bHpyUq2ml5roYhZ7cF5PqQ1VmKqkFb2ko1iVxYseO6xo5Y1NxCNtFbHn1Umsv+qg==
-X-Received: by 2002:a17:906:e0c9:b0:a34:97d1:48f0 with SMTP id
- gl9-20020a170906e0c900b00a3497d148f0mr397668ejb.76.1706261173520; 
- Fri, 26 Jan 2024 01:26:13 -0800 (PST)
+ bh=1eLGsOTTLsYbJKwmkTuJYL1GGe/9k/bGvpbbeMKKS3g=;
+ b=O4WYgiRYFie5sIwOn5tKtgU/js1HFMf2KRyN2SW2VJFv8r1u//YPQRapWMDhjs17yi
+ ctvLhfbyZ2+CyJm1ATg7cOVk4OeI4mkkpoZuUZVgRzsgJ+rD9lqd+/XAvIezL9XPXnNy
+ AlQ5YnGxv+qsGo2HxLNtKxLAMF8/IJKXnC56ylynumyOqWM08mOD8kiqC3eWV+g0sRSZ
+ bV3P0V0Iszv8mjlKN8ZtlxyF5xc/kKN+zWhTAoNOKpYBj/3DAwcuLrEPNnuvoq5JJcd8
+ 4QG77mOMnM9CNnKngGxZRvSRyxDG+e+a/xUfMMltCamK4W4VeR56lc9d/5zFSitjasLj
+ +eOQ==
+X-Gm-Message-State: AOJu0YwxMRUMI7WR1huMTXvcnhJmqXdxK+ySxORo8t0wLed1IZhVKvDy
+ 6quZfZWLZoFJpJpP6HA4k8altjmfN2bVGkgQD+Emm0h6UVUk9kW3A4t4EHApFq9wTaoE2EVqXVL
+ vy9s=
+X-Google-Smtp-Source: AGHT+IF3HPakt07EatQ9CWj3qgwcifnuKEzq8eJMfuOVj7j3IY84eYU6gUafZibPh1v/4U0cqNlf8Q==
+X-Received: by 2002:a05:600c:3798:b0:40e:b21a:7aa0 with SMTP id
+ o24-20020a05600c379800b0040eb21a7aa0mr674624wmr.172.1706261178409; 
+ Fri, 26 Jan 2024 01:26:18 -0800 (PST)
 Received: from localhost.localdomain ([91.216.213.152])
  by smtp.gmail.com with ESMTPSA id
- t24-20020a1709064f1800b00a349a5f9f77sm416208eju.47.2024.01.26.01.26.12
+ t24-20020a1709064f1800b00a349a5f9f77sm416208eju.47.2024.01.26.01.26.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jan 2024 01:26:13 -0800 (PST)
+ Fri, 26 Jan 2024 01:26:18 -0800 (PST)
 From: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
 To: u-boot@lists.denx.de
 Cc: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 4/5] lpc32xx: Make XTAL OSC freq configurable,
- add UART input clock selection
-Date: Fri, 26 Jan 2024 10:25:31 +0100
-Message-Id: <20240126092533.20709-4-piotr.wojtaszczyk@timesys.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>, Marek Vasut <marex@denx.de>,
+ Michal Simek <michal.simek@amd.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Trevor Woerner <twoerner@gmail.com>
+Subject: [PATCH 5/5] usb: lpc32xx: add DM_USB support
+Date: Fri, 26 Jan 2024 10:25:32 +0100
+Message-Id: <20240126092533.20709-5-piotr.wojtaszczyk@timesys.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240126092533.20709-1-piotr.wojtaszczyk@timesys.com>
 References: <20240126092533.20709-1-piotr.wojtaszczyk@timesys.com>
@@ -96,183 +98,246 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allow to configure external XTAL OSC or external clock frequency.
-Add source clock selection for UART, selecting HCLK may be needed for
-higher clock resolution for specific XTAL OSC and baud rate combinations.
-HSUART is always driven by PERIPH_CLK.
+The legacy USB driver is modified into UCLASS_PHY which works with
+drivers/usb/host/ohci-generic.c
+This brings back USB functionality for LPC32xx.
 
 Signed-off-by: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
 ---
 
- arch/arm/include/asm/arch-lpc32xx/clk.h    |  3 +-
- arch/arm/include/asm/arch-lpc32xx/config.h |  2 +-
- arch/arm/mach-lpc32xx/Kconfig              | 23 +++++++++++++
- arch/arm/mach-lpc32xx/clk.c                |  8 +++--
- arch/arm/mach-lpc32xx/devices.c            | 38 +++++++++++++++++-----
- 5 files changed, 60 insertions(+), 14 deletions(-)
+ arch/arm/dts/lpc3250-ea3250-u-boot.dtsi |  9 +++
+ arch/arm/dts/lpc32xx-u-boot.dtsi        |  4 ++
+ configs/ea-lpc3250devkitv2_defconfig    |  5 ++
+ drivers/usb/host/Kconfig                | 13 ++--
+ drivers/usb/host/ohci-lpc32xx.c         | 79 ++++++++++++++-----------
+ 5 files changed, 71 insertions(+), 39 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-lpc32xx/clk.h b/arch/arm/include/asm/arch-lpc32xx/clk.h
-index 5ab48a9d3c..75dce06104 100644
---- a/arch/arm/include/asm/arch-lpc32xx/clk.h
-+++ b/arch/arm/include/asm/arch-lpc32xx/clk.h
-@@ -8,8 +8,7 @@
+diff --git a/arch/arm/dts/lpc3250-ea3250-u-boot.dtsi b/arch/arm/dts/lpc3250-ea3250-u-boot.dtsi
+index 0c82e512c6..5c15302bf7 100644
+--- a/arch/arm/dts/lpc3250-ea3250-u-boot.dtsi
++++ b/arch/arm/dts/lpc3250-ea3250-u-boot.dtsi
+@@ -13,3 +13,12 @@
+ &uart5 {
+ 	compatible = "nxp,lpc3220-uart", "ns16550a";
+ };
++
++&isp1301 {
++	#phy-cells = <0>;
++};
++
++&ohci {
++	phys = <&isp1301>;
++	phy-names = "usb";
++};
+diff --git a/arch/arm/dts/lpc32xx-u-boot.dtsi b/arch/arm/dts/lpc32xx-u-boot.dtsi
+index 1df71d16a3..d950192eb3 100644
+--- a/arch/arm/dts/lpc32xx-u-boot.dtsi
++++ b/arch/arm/dts/lpc32xx-u-boot.dtsi
+@@ -6,6 +6,10 @@
  
- #include <asm/types.h>
+ #include <config.h>
  
--#define OSC_CLK_FREQUENCY	13000000
--#define RTC_CLK_FREQUENCY	32768
-+#define LPC32XX_RTC_CLK_FREQUENCY	32768
++&ohci {
++	compatible = "generic-ohci";
++};
++
+ #ifdef CONFIG_SPL
+ / {
+ 	binman: binman {
+diff --git a/configs/ea-lpc3250devkitv2_defconfig b/configs/ea-lpc3250devkitv2_defconfig
+index af9fc5f2f5..73108835c9 100644
+--- a/configs/ea-lpc3250devkitv2_defconfig
++++ b/configs/ea-lpc3250devkitv2_defconfig
+@@ -24,6 +24,7 @@ CONFIG_BOARD_EARLY_INIT_F=y
+ CONFIG_SYS_PROMPT="EA-LPC3250v2=> "
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
++CONFIG_CMD_USB=y
+ CONFIG_OF_CONTROL=y
+ # CONFIG_NET is not set
+ CONFIG_LPC32XX_GPIO=y
+@@ -32,4 +33,8 @@ CONFIG_SYS_I2C_LPC32XX=y
+ CONFIG_SPECIFY_CONSOLE_INDEX=y
+ CONFIG_CONS_INDEX=5
+ CONFIG_SYS_NS16550=y
++CONFIG_USB=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_OHCI_LPC32XX=y
+ CONFIG_PANIC_HANG=y
+diff --git a/drivers/usb/host/Kconfig b/drivers/usb/host/Kconfig
+index 0dd5736433..b3a2c1c14e 100644
+--- a/drivers/usb/host/Kconfig
++++ b/drivers/usb/host/Kconfig
+@@ -363,6 +363,13 @@ config USB_OHCI_DA8XX
+ 	help
+ 	  Enable support for the da850 USB controller.
  
- /* Clocking and Power Control Registers */
- struct clk_pm_regs {
-diff --git a/arch/arm/include/asm/arch-lpc32xx/config.h b/arch/arm/include/asm/arch-lpc32xx/config.h
-index 41160384a4..836e29bd96 100644
---- a/arch/arm/include/asm/arch-lpc32xx/config.h
-+++ b/arch/arm/include/asm/arch-lpc32xx/config.h
-@@ -12,7 +12,7 @@
- /* Basic CPU architecture */
- 
- #if !defined(CFG_SYS_NS16550_CLK)
--#define CFG_SYS_NS16550_CLK		13000000
-+#define CFG_SYS_NS16550_CLK		get_serial_clock()
- #endif
- 
- #define CFG_SYS_BAUDRATE_TABLE	\
-diff --git a/arch/arm/mach-lpc32xx/Kconfig b/arch/arm/mach-lpc32xx/Kconfig
-index 185bda41c2..6b54ec6220 100644
---- a/arch/arm/mach-lpc32xx/Kconfig
-+++ b/arch/arm/mach-lpc32xx/Kconfig
-@@ -17,6 +17,29 @@ config TARGET_EA_LPC3250DEVKITV2
++config USB_OHCI_LPC32XX
++	bool "Support for LPC32xx OHCI USB"
++	depends on ARCH_LPC32XX && DM_I2C && USB_OHCI_GENERIC
++	select USB_OHCI_NEW
++	help
++	  Enable support for the LPC32xx USB controller with ISP1301/STOTG04 phy.
++
+ config USB_OHCI_NPCM
+ 	bool "Support for Nuvoton NPCM on-chip OHCI USB controller"
+ 	depends on ARCH_NPCM
+@@ -447,12 +454,6 @@ config USB_ATMEL_CLK_SEL_UPLL
  
  endchoice
  
-+choice
-+	prompt "LPC32xx clock source for standard UARTs"
-+	help
-+		Select clock source for standard UART baudrate divider.
-+
-+config LPC32XX_UART_PERIPH_CLK
-+	bool "PERIPH as clock source"
-+	help
-+		Slower than HCLK, less resolution, lower power consumption.
-+
-+config LPC32XX_UART_HCLK_CLK
-+	bool "HCLK as clock source"
-+	help
-+		Faster than PERIPH, better resolution, higher power consumption.
-+
-+endchoice
-+
-+config LPC32XX_OSC_CLK_FREQUENCY
-+	int "LPC32xx external XTAL OSC or clock source frequency"
-+	default 13000000
-+	help
-+		LPC32xx external XTAL OSC or clock source frequency.
-+
- source "board/timll/devkit3250/Kconfig"
- source "board/work-microwave/work_92105/Kconfig"
- source "board/ea/ea-lpc3250devkitv2/Kconfig"
-diff --git a/arch/arm/mach-lpc32xx/clk.c b/arch/arm/mach-lpc32xx/clk.c
-index cb2344d79f..f327e0e876 100644
---- a/arch/arm/mach-lpc32xx/clk.c
-+++ b/arch/arm/mach-lpc32xx/clk.c
-@@ -15,9 +15,9 @@ static struct clk_pm_regs *clk = (struct clk_pm_regs *)CLK_PM_BASE;
- unsigned int get_sys_clk_rate(void)
- {
- 	if (readl(&clk->sysclk_ctrl) & CLK_SYSCLK_PLL397)
--		return RTC_CLK_FREQUENCY * 397;
-+		return LPC32XX_RTC_CLK_FREQUENCY * 397;
- 	else
--		return OSC_CLK_FREQUENCY;
-+		return CONFIG_LPC32XX_OSC_CLK_FREQUENCY;
- }
+-config USB_OHCI_LPC32XX
+-	bool "LPC32xx USB OHCI support"
+-	depends on ARCH_LPC32XX
+-	select SYS_USB_OHCI_CPU_INIT
+-	select USB_OHCI_NEW
+-
+ config USB_MAX_CONTROLLER_COUNT
+ 	int "Maximum number of USB host controllers"
+ 	depends on USB_EHCI_FSL || USB_XHCI_FSL || \
+diff --git a/drivers/usb/host/ohci-lpc32xx.c b/drivers/usb/host/ohci-lpc32xx.c
+index a04b2961b9..7163bef71a 100644
+--- a/drivers/usb/host/ohci-lpc32xx.c
++++ b/drivers/usb/host/ohci-lpc32xx.c
+@@ -5,6 +5,7 @@
+  * @Descr: USB driver - Embedded Artists LPC3250 OEM Board support functions
+  *
+  * Copyright (c) 2015 Tyco Fire Protection Products.
++ * Copyright 2024 Timesys <piotr.wojtaszczyk@timesys.com>
+  */
  
- unsigned int get_hclk_pll_rate(void)
-@@ -134,5 +134,9 @@ unsigned int get_sdram_clk_rate(void)
- 
- int get_serial_clock(void)
- {
-+#if IS_ENABLED(CONFIG_LPC32XX_UART_HCLK_CLK)
-+	return get_hclk_clk_rate();
-+#else
- 	return get_periph_clk_rate();
-+#endif
- }
-diff --git a/arch/arm/mach-lpc32xx/devices.c b/arch/arm/mach-lpc32xx/devices.c
-index 6a67a3591a..27061b6212 100644
---- a/arch/arm/mach-lpc32xx/devices.c
-+++ b/arch/arm/mach-lpc32xx/devices.c
-@@ -6,6 +6,7 @@
  #include <common.h>
- #include <dm.h>
- #include <ns16550.h>
-+#include <clock_legacy.h>
+@@ -19,6 +20,7 @@
+ #include <asm/arch/i2c.h>
+ #include <usb.h>
+ #include <i2c.h>
++#include <generic-phy.h>
  
- #include <asm/arch/clk.h>
- #include <asm/arch/uart.h>
-@@ -16,6 +17,13 @@ static struct clk_pm_regs    *clk  = (struct clk_pm_regs *)CLK_PM_BASE;
- static struct uart_ctrl_regs *ctrl = (struct uart_ctrl_regs *)UART_CTRL_BASE;
- static struct mux_regs *mux = (struct mux_regs *)MUX_BASE;
+ /* OTG I2C controller module register structures */
+ struct otgi2c_regs {
+@@ -69,8 +71,6 @@ struct otg_regs {
+ #define OTG1_DM_PULLDOWN		(1 << 3)
+ #define OTG1_VBUS_DRV			(1 << 5)
  
-+#define LPC32XX_USB_RATE 1000000
-+#define LPC32XX_USB_DIV ((CONFIG_LPC32XX_OSC_CLK_FREQUENCY/LPC32XX_USB_RATE)-1)
-+
-+#if !CONFIG_IS_ENABLED(OF_CONTROL)
-+static struct ns16550_plat lpc32xx_uart[4];
-+#endif
-+
- void lpc32xx_uart_init(unsigned int uart_id)
+-#define ISP1301_I2C_ADDR		CFG_USB_ISP1301_I2C_ADDR
+-
+ #define ISP1301_I2C_MODE_CONTROL_1_SET		0x04
+ #define ISP1301_I2C_MODE_CONTROL_1_CLR		0x05
+ #define ISP1301_I2C_MODE_CONTROL_2_SET		0x12
+@@ -86,19 +86,11 @@ static struct clk_pm_regs *clk_pwr = (struct clk_pm_regs *)CLK_PM_BASE;
+ 
+ static int isp1301_set_value(struct udevice *dev, int reg, u8 value)
  {
- 	if (uart_id < 1 || uart_id > 7)
-@@ -36,20 +44,30 @@ void lpc32xx_uart_init(unsigned int uart_id)
- 			UART_CLKMODE_AUTO(uart_id));
- 
- 	/* Bypass pre-divider of UART clock */
-+#if IS_ENABLED(CONFIG_LPC32XX_UART_HCLK_CLK)
-+	/* Use HCLK as input for baudrate divider */
-+	writel(CLK_UART_HCLK | CLK_UART_X_DIV(1) | CLK_UART_Y_DIV(1),
-+	       &clk->u3clk + (uart_id - 3));
-+#else
-+	/* Use PERIPH as input for baudrate divider */
- 	writel(CLK_UART_X_DIV(1) | CLK_UART_Y_DIV(1),
- 	       &clk->u3clk + (uart_id - 3));
-+#endif
-+
-+#if !CONFIG_IS_ENABLED(OF_CONTROL)
-+	int i;
-+	for (i = 0; i < ARRAY_SIZE(lpc32xx_uart); i++) {
-+		lpc32xx_uart[i].clock = get_serial_clock();
-+	}
-+#endif
+-#if !CONFIG_IS_ENABLED(DM_I2C)
+-	return i2c_write(ISP1301_I2C_ADDR, reg, 1, &value, 1);
+-#else
+ 	return dm_i2c_write(dev, reg, &value, 1);
+-#endif
  }
  
- #if !CONFIG_IS_ENABLED(OF_CONTROL)
--static const struct ns16550_plat lpc32xx_uart[] = {
--	{ .base = UART3_BASE, .reg_shift = 2,
--	  .clock = CFG_SYS_NS16550_CLK, .fcr = UART_FCR_DEFVAL, },
--	{ .base = UART4_BASE, .reg_shift = 2,
--	  .clock = CFG_SYS_NS16550_CLK, .fcr = UART_FCR_DEFVAL, },
--	{ .base = UART5_BASE, .reg_shift = 2,
--	  .clock = CFG_SYS_NS16550_CLK, .fcr = UART_FCR_DEFVAL, },
--	{ .base = UART6_BASE, .reg_shift = 2,
--	  .clock = CFG_SYS_NS16550_CLK, .fcr = UART_FCR_DEFVAL, },
-+static struct ns16550_plat lpc32xx_uart[] = {
-+	{ .base = UART3_BASE, .reg_shift = 2, .fcr = UART_FCR_DEFVAL, },
-+	{ .base = UART4_BASE, .reg_shift = 2, .fcr = UART_FCR_DEFVAL, },
-+	{ .base = UART5_BASE, .reg_shift = 2, .fcr = UART_FCR_DEFVAL, },
-+	{ .base = UART6_BASE, .reg_shift = 2, .fcr = UART_FCR_DEFVAL, },
- };
- 
- U_BOOT_DRVINFOS(lpc32xx_uarts) = {
-@@ -94,6 +112,8 @@ void lpc32xx_usb_init(void)
+ static void isp1301_configure(struct udevice *dev)
  {
- 	/* Do not route the UART 5 Tx/Rx pins to the USB D+ and USB D- pins. */
- 	clrbits_le32(&ctrl->ctrl, UART_CTRL_UART5_USB_MODE);
-+
-+	writel(LPC32XX_USB_DIV, &clk->usbdiv_ctrl);
+-#if !CONFIG_IS_ENABLED(DM_I2C)
+-	i2c_set_bus_num(I2C_2);
+-#endif
+-
+ 	/*
+ 	 * LPC32XX only supports DAT_SE0 USB mode
+ 	 * This sequence is important
+@@ -155,18 +147,10 @@ static int usbpll_setup(void)
+ 	return 0;
  }
  
- void lpc32xx_i2c_init(unsigned int devnum)
+-int usb_cpu_init(void)
++static int isp1301_phy_init(struct phy *usb_phy)
+ {
+ 	u32 ret;
+-	struct udevice *dev = NULL;
+-
+-#if CONFIG_IS_ENABLED(DM_I2C)
+-	ret = i2c_get_chip_for_busnum(I2C_2, ISP1301_I2C_ADDR, 1, &dev);
+-	if (ret) {
+-		debug("%s: No bus %d\n", __func__, I2C_2);
+-		return ret;
+-	}
+-#endif
++	struct udevice *dev = usb_phy->dev;
+ 
+ 	/*
+ 	 * USB pins routing setup is done by "lpc32xx_usb_init()" and should
+@@ -211,21 +195,13 @@ int usb_cpu_init(void)
+ 	return 0;
+ }
+ 
+-int usb_cpu_stop(void)
++int isp1301_phy_exit(struct phy *usb_phy)
+ {
+-	struct udevice *dev = NULL;
++	struct udevice *dev = usb_phy->dev;
+ 	int ret = 0;
+ 
+-#if CONFIG_IS_ENABLED(DM_I2C)
+-	ret = i2c_get_chip_for_busnum(I2C_2, ISP1301_I2C_ADDR, 1, &dev);
+-	if (ret) {
+-		debug("%s: No bus %d\n", __func__, I2C_2);
+-		return ret;
+-	}
+-#endif
+-
+ 	/* vbus off */
+-	isp1301_set_value(dev, ISP1301_I2C_OTG_CONTROL_1_SET, OTG1_VBUS_DRV);
++	isp1301_set_value(dev, ISP1301_I2C_OTG_CONTROL_1_CLR, OTG1_VBUS_DRV);
+ 
+ 	clrbits_le32(&otg->otg_sts_ctrl, OTG_HOST_EN);
+ 
+@@ -234,7 +210,44 @@ int usb_cpu_stop(void)
+ 	return ret;
+ }
+ 
+-int usb_cpu_init_fail(void)
++static int isp1301_phy_set_on(struct phy *usb_phy)
++{
++	struct udevice *dev = usb_phy->dev;
++	int ret;
++	ret = isp1301_set_value(dev, ISP1301_I2C_OTG_CONTROL_1_SET, OTG1_VBUS_DRV);
++	mdelay(10); /* ramp up delay */
++	return ret;
++}
++
++static int isp1301_phy_set_off(struct phy *usb_phy)
++{
++	struct udevice *dev = usb_phy->dev;
++	int ret;
++	ret = isp1301_set_value(dev, ISP1301_I2C_OTG_CONTROL_1_CLR, OTG1_VBUS_DRV);
++	return ret;
++}
++
++int isp1301_probe(struct udevice *dev)
+ {
+-	return usb_cpu_stop();
++	return 0;
+ }
++
++static const struct udevice_id isp1301_usb_phy_of_match[] = {
++	{.compatible = "nxp,isp1301" },
++	{},
++};
++
++struct phy_ops isp1301_usb_phy_ops = {
++	.init = isp1301_phy_init,
++	.power_on = isp1301_phy_set_on,
++	.power_off = isp1301_phy_set_off,
++	.exit = isp1301_phy_exit,
++};
++
++U_BOOT_DRIVER(nxp_isp1301_usb_phy) = {
++	.name = "nxp_isp1301_usb_phy",
++	.id = UCLASS_PHY,
++	.of_match = isp1301_usb_phy_of_match,
++	.probe = isp1301_probe,
++	.ops = &isp1301_usb_phy_ops,
++};
 -- 
 2.25.1
 
