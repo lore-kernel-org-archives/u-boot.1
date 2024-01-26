@@ -4,107 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 211E2C47258
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 03:30:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F114AC47422
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 06:07:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08FC78753E;
-	Fri, 26 Jan 2024 04:30:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
+	by phobos.denx.de (Postfix) with ESMTP id 14F868786E;
+	Fri, 26 Jan 2024 07:07:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="S8tJMXcB";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hS8Wxq2p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B9858785A; Fri, 26 Jan 2024 04:30:18 +0100 (CET)
-Received: from APC01-TYZ-obe.outbound.protection.outlook.com
- (mail-tyzapc01olkn20800.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:280c::800])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5C61C87897; Fri, 26 Jan 2024 07:07:15 +0100 (CET)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5941F8746C
- for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 04:30:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 68EFA87801
+ for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 07:07:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=outlook.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=forbidden405@outlook.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=EpW8E8wWf7CiVaYwxlRnJbJCKLLknhCR4KMZlV1vIvjo47vCN3vJw/puG0vaslLHDjagulFqI1iFup+cy78h1VAwRRjMjBqzfcSCDQp0FoJnmtfKwL9qxRgEWVDYNG3CkvIdhnGUnRxS5fPk1ff4K4HTvnfU/X2yz7aHbv2hwLBDyBwvY4bfQA5rM2egQfx6uuMpxxhQDCTxfGb7McZSYhnYzMNMy73WgQNcH2xTODgiOJPzlSil3mouF9LCesW4Hyje9fPqo+hwdI/tqsQ5gDkOdGDBCA8PmzpcmtlSlnN6gHSUXpdYDMAvMHw1I5RMLOSElzyySjJPgLpS8znyvA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0tI709wN+nIEu4B7+dAhsnG6owfstPrJHT/eB0FleDk=;
- b=Oi90q8ezq5hwDHKs55f4SVzlobQqF1y3MBkGelVR8XuKvP2rBf8Oo4UuyDkLC94T51nb5ILOalWlj+M/Te3d9K2fk8fxYo4mgWWocsIPUJ28+EH3uLeCouv4GpUfwSUzFkmyhWePoRCmLaN4tO4ND76Y2C4uSw3ET3zZ/ZeXwbQ6e/W943hrsp8RrsBENs3oX+7Uom2SyWYYt0MsHxPljezn7cqRoQgqvFjllvc9hsMmhXOuKARIHGzMTwyNxI9t98u2L+CJrYHBEcINyhpICHXZ7SOZTaVUIBPl2j4MmdHDjBKJ3JxJ5Cp+vgui+ctPAdB+6kIBPfNKjvxKxs6wLA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0tI709wN+nIEu4B7+dAhsnG6owfstPrJHT/eB0FleDk=;
- b=S8tJMXcBeRCjR3sU1xh/JZAYx+IYKuNe3LmaEq9J01bP87NdBx9P3XWSLHGSTwSKW8zyeM5acB1dV8HgnFV+bzSqmqihUjdd7khvP2qHaOB2YNuNxsiCmrXagh2vHrs0m6FU1gXPjU5xLXk3lBaQUU0MiKhZyDfyxO/kAHs0HnsslAEQ+PleAOoDh2rNQiuHfi6kBKxblxvH6o4/IBbMBS1b1K/lPClbVvbxVDik2uZI9Vkj+CtGta/Xlj4vheiS25D9RUjiIoENozX6vuELtOUZAD5NHf+hfO2qP3Jblta546xUFuEBLl34Zl35cH6Mosute2VqQVwky7Sz2q7LIw==
-Received: from SEZPR06MB6959.apcprd06.prod.outlook.com (2603:1096:101:1ed::14)
- by TY0PR06MB5030.apcprd06.prod.outlook.com (2603:1096:400:1be::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7228.27; Fri, 26 Jan
- 2024 03:30:11 +0000
-Received: from SEZPR06MB6959.apcprd06.prod.outlook.com
- ([fe80::22e1:47ec:6e00:4900]) by SEZPR06MB6959.apcprd06.prod.outlook.com
- ([fe80::22e1:47ec:6e00:4900%4]) with mapi id 15.20.7202.028; Fri, 26 Jan 2024
- 03:30:11 +0000
-From: Yang Xiwen <forbidden405@outlook.com>
-To: Peng Fan <peng.fan@nxp.com>,
-	Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Yang Xiwen <forbidden405@outlook.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH] mmc: dw_mmc: Don't return error if data busy timeout
-Date: Fri, 26 Jan 2024 11:29:54 +0800
-Message-ID: <SEZPR06MB6959712A2AFE3C6C9B49FC2296792@SEZPR06MB6959.apcprd06.prod.outlook.com>
-X-Mailer: git-send-email 2.43.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-TMN: [QFhaQ3sGQo7XSmnwoxbI9hecy/1X8Rn5/AaSjKeEAko=]
-X-ClientProxiedBy: TY2PR02CA0011.apcprd02.prod.outlook.com
- (2603:1096:404:56::23) To SEZPR06MB6959.apcprd06.prod.outlook.com
- (2603:1096:101:1ed::14)
-X-Microsoft-Original-Message-ID: <20240126032956.22634-1-forbidden405@outlook.com>
+ spf=pass smtp.mailfrom=promsoft@gmail.com
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-21424f34003so28112fac.1
+ for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 22:07:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706249231; x=1706854031; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=2OoPgC3cZRZDCEBgM2//JYGHvmZDvA4DfE0icwMINKA=;
+ b=hS8Wxq2pu7aw6Igh/q0RXhb9f3NjKDVnIwAE5bIzSAnknXGpGYQDOqJ0YqVMq/aiJh
+ Gef1cpp0KPMMqpoHhWH3i/H023ojttAMj7mbKxx9OwQc/y3pvhexHN1SVk/O4+75DAYa
+ S+xGBbGnbPw+spvUl7/nRdNwmTD1OziolB5qyG6dI42D/27JOFW8ke8QQkvdQSjqzq8J
+ YVXsWU+8K/hHDddbibOosf2Pw5XKy4fUR8SMCirujPzGi1cFRY1oHhXy3B8JfyujP5/Y
+ gjseVa1PBCrwRYPRgmHBYGoXsAM5OClGHRU2UrrCqyTp71sfsQ/gpxaesyPaekQ6VxcG
+ AEhg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706249231; x=1706854031;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2OoPgC3cZRZDCEBgM2//JYGHvmZDvA4DfE0icwMINKA=;
+ b=FXk8RaXcaIY5Fgz2f8U0vCShaJbJt1ko7QTBg50E1gPiT9ob7oR2caNu0NjdX5AnOP
+ /Jl91KWQqyadp+86xURpETrl4j1bUkT66Nj2jupRW6uEHkiUKo1ax7Z5kyegH7cdfl0G
+ HyIBnVvWHNCJVVXTi847aFtYVDh35D55SSxyswyFCDFkPtaf4ZQLEpE9fx18BBTnSo/s
+ eqjuFmHNriI/hC7no1xLpgYyySWKhgfCbDjLy5FV9HMqiAANuOEIaCqSIttt+XTz95hP
+ 7rw6Pvy0GnzGtNDYG+z2mn3FZ8ZhXUSXh6kxS/S9uMayDvPeiBtzpRmEfj+Pb5jxrH7Z
+ U/Ig==
+X-Gm-Message-State: AOJu0YzVZ2MjylBiMwvnHagbm3bkcm1Og0VroyiINT/WMOb9VzvKLx6r
+ ZRxIPeG6BFlxQy3iKDgAg2B8G4qHTxtDaEKozs5CnpD9mNW7WpFy9TrDA3UT9aXjmYUlfQEh5MU
+ suLwOZMyZ2hGhkiH8TMoyNe14y3o=
+X-Google-Smtp-Source: AGHT+IFwk6ZgO9IaVWFyTtriv0SgYsTcNUuetYTbWYtoyYZtuzUukuzdLS5VvKzr5KoSarX+n5YRbQS5rmJ7sxZYtj8=
+X-Received: by 2002:a05:6870:219c:b0:210:7a6e:1042 with SMTP id
+ l28-20020a056870219c00b002107a6e1042mr803944oae.119.1706249230775; Thu, 25
+ Jan 2024 22:07:10 -0800 (PST)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB6959:EE_|TY0PR06MB5030:EE_
-X-MS-Office365-Filtering-Correlation-Id: 62712ef7-5b4f-439f-a0b3-08dc1e1f19e0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: JhxnsloXmbq/gqlYpCe2aKiVH9BB0H0KuhzwnguoI7j5LzmJ+H8phA0FLHB/hkE38Bq01OGgjSKszuq4BdX0/roeyHOGbVFWCaEiB7k6ESB3ZKDBPY11+hQWrMdDY1fGf4acN/yP7T80T58Sy7Sc7x0HFOCvbzvirpIKgX2yl1De7rDjvbz1ZScvz8xLg/ZzNJRt/thqsjhG5OnuPPfYfG9psO8IKSYTy6FlKDIvttsb+dTdrYjYkeq31JLcjg/xf5oosn8ysJ2KT6/mLA6fAjoGWaZGzzO4u9QjRg5VYDkg+Nqa/HhLmh/TGv2f978RJpL7Q5miitqi0LeJe+KzCPXjUNWeYlvGOvznMfQG5P9POOqLRq2b5VNAf6E7E/erhrRePpdcRigkxMmwuad9G1kntvMabe2yJzJmsGRRy61ZlRjJVza/n2YeouwvC5XHXtN+bIcNa1ncz9Kso8haahZVB/+Fpb3upeQCbh2qCF6qAO/uwSY0Pr2fSMF3bMJpBrGNa6vds2FOVIQ68RmECwRSJ3uzzHZdQbGXdJNupsSAG8NCCnIlIY1gFBAme3jo7BYLk+bBD//o7YBBLisDyuvaJZnQ+e4o6nEnKk23WFM8vtlkvp5jiD0NsTFo7rIW
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5hRTzaJU8kwV/owCAc8ABfRLsGrf89isnqb1+vnXdemPKXxcc2zrIJjRdBUK?=
- =?us-ascii?Q?GXylUdMG+/M8kXas5DGW+7N/jputAjoS2SbnmmBLZ3GaFf5a5lrguApqwpMr?=
- =?us-ascii?Q?aMzGySQPvqKzMyeX451OVNIGHcmbrKCSVAkFkYNv+i7FWHIUA4a1Y7W/Q/ge?=
- =?us-ascii?Q?5t5U3U7mY0qjWmZGz649DL1QCt1s4VTPcBEtT4WmFM+oD0m+AQ9yuGtpFYzW?=
- =?us-ascii?Q?VE0/d+R4L1x6SUjTgxnFGkd3nqq6dHgY83Ad8rwwQoMAhPdUf5bsLDt9PCe9?=
- =?us-ascii?Q?7njNjCERln1cNw1PyMd93Fn9SObjpw/rlm3bc8cYlHOgBD49Zt3go8QuwEvI?=
- =?us-ascii?Q?Dht0zzhioKqFttwxeBXBWah1XB/tJkGW8WVDjQLnXHBIMjXnAFQsEuZGecAX?=
- =?us-ascii?Q?mY0wAeNky9+eIE3kHTqMyxXmG20nuJHc4/v9netc/sZDfUSIOkBJd4hdO/Wg?=
- =?us-ascii?Q?BL70mBh+PEhme8MU4dj6CzwLNAkca5lHyHv0c53XwRrzm0m1FV2WEcAiXSNy?=
- =?us-ascii?Q?mvD7dWWS42E/yGiajnVX56xpbpjgPVfKGWVSgf3+z5pw0wuCVlnSB0lcTQu6?=
- =?us-ascii?Q?E11SDhoA2oIr4nNMhwpjZYZiI06jcIVWWhoAtLsgIeUgXVhK/3oalyzebsSL?=
- =?us-ascii?Q?mySIbgxMpp+NyP6WEFSJw1AYmc8pDnlG0ot5NbSWZshOAxH6i70zF+5cwQTZ?=
- =?us-ascii?Q?xyGwFPaqHryXtgiVSHoqGrmhirf+D72PHMtuYlvIaNGcqnewWCuw4hd/QO7X?=
- =?us-ascii?Q?ezF/KP1vylYuaHyVYMu2335Ie8egW7Fgr80cN1kGy21Rop9PtK3z853Idgl+?=
- =?us-ascii?Q?rty7Q9Id7kx7L1cV+PAXr79UDQnMuMSswlBNBTFKL6aETDkes8KWQrtugIMi?=
- =?us-ascii?Q?XousqipRfJThjgFvS9kjeDClKj7n9cC9jNKkV/ANAeT1WDbrihZMcoJy0QUX?=
- =?us-ascii?Q?eHKGiE8XwxAkDQTb+P2hBCODbFj2JIJVzyI9RaSfwlv2H51oIGtv01UO9268?=
- =?us-ascii?Q?zqxPBbHoOHlnVYfzZVjEzvc8jsAFB0AD6dhom0i1d5z/JUKygufP8LaNdBsn?=
- =?us-ascii?Q?yQF+RXKYnhOaX7ZM9kufiI38Ybmzub/573gkcPOLBr6U6dl90xK/eCYGVAh8?=
- =?us-ascii?Q?Zl8/vipD2C/hLY/LGjuM2mlhT8RlaPs8xM+4QI6XbgecdzIZJ6PL8L1IwlKp?=
- =?us-ascii?Q?9zmHt84Urw0mOAR31saUina+z+UWxkv0ThYMLG8cSwUwrxedYqi62wwF6l0?=
- =?us-ascii?Q?=3D?=
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 62712ef7-5b4f-439f-a0b3-08dc1e1f19e0
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB6959.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jan 2024 03:30:10.9824 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY0PR06MB5030
+References: <20240111030909.27373-1-semen.protsenko@linaro.org>
+ <CAPLW+4kdpQZtwmXH6kGqOOkXqzniagiaQHzVwP6zKBZ7Ze0ZFQ@mail.gmail.com>
+In-Reply-To: <CAPLW+4kdpQZtwmXH6kGqOOkXqzniagiaQHzVwP6zKBZ7Ze0ZFQ@mail.gmail.com>
+From: Minkyu Kang <promsoft@gmail.com>
+Date: Fri, 26 Jan 2024 15:06:59 +0900
+Message-ID: <CALrBrZ2JgyG8L4Xdm36jz9-VhZYB8GY1G+qb5WGvx7k5BS_qOQ@mail.gmail.com>
+Subject: Re: [PATCH v2 00/13] arm: exynos: Add E850-96 board
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Chanho Park <chanho61.park@samsung.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,32 +91,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As described in [1], some poor hardware or cards would fail to release
-the bus and keep driving data lines low. Ignore it and send the next cmd
-directly seems okay for most cases.
+Hi,
 
-[1]: https://patchwork.kernel.org/project/linux-mmc/patch/1424458179-5456-1-git-send-email-dianders@chromium.org/
+On Tue, 23 Jan 2024 at 04:52, Sam Protsenko <semen.protsenko@linaro.org>
+wrote:
 
-Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
----
- drivers/mmc/dw_mmc.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+> Hey Tom, Minkyu,
+>
+> If there are no outstanding concerns about this series, can you please
+> apply it?
+>
+> Thanks!
+>
+> On Wed, Jan 10, 2024 at 9:09=E2=80=AFPM Sam Protsenko
+> <semen.protsenko@linaro.org> wrote:
+> >
+> > Add Exynos850 SoC and WinLink's E850-96 board support. A short overview
+> > of series additions and modifications:
+> >   * USI driver: configures UART block
+> >   * PMU driver: connects AP UART lines to uart1 pins)
+> >   * Exynos850 clock driver: generates UART clocks
+> >   * Exynos850 pinctrl driver: mux UART pins
+> >   * serial_s5p: UART driver
+> >   * Exynos850 SoC: dtsi files and MMU maps
+> >   * E850-96 board: dts files, defconfig, board file and doc
+> >
+> > Most of the code was borrowed from mainline Linux kernel (where this
+> > board is already enabled) and adapted for U-Boot. Preliminary
+> > preparation for this series includes next patches / series (already
+> > merged):
+> >
+> >   * commit 585a2aaac2ac ("arm: exynos: Include missing CPU header in
+> >                           soc.c")
+> >   * commit c9ab9f30c8e4 ("arm: exynos: Include missing CPU header in
+> >                           gpio.h")
+> >   * commit 11bd2787deff ("watchdog: s5p_wdt: Include missing CPU
+> >                           header")
+> >   * commit 08cfa971a717 ("exynos: Avoid duplicate reset_cpu with
+> >                           SYSRESET enabled")
+> >   * commit f655090901dc ("clk: exynos: Add header guard for clk-pll.h")
+> >   * commit 2227f4c0afed ("serial: s5p: Fix clk_get_by_index() error cod=
+e
+> >                           check")
+> >   * commit a0615ffc99a5 ("serial: s5p: Remove common.h inclusion")
+> >   * commit 5ad21de6bae0 ("serial: s5p: Use livetree API to get "id"
+> >                           property")
+> >   * commit e79f630dbf67 ("serial: s5p: Use named constants for register
+> >                           values")
+> >   * commit a627f2802a71 ("serial: s5p: Improve coding style")
+> >   * commit 33e7ca5a9b6a ("serial: s5p: Use dev_read_addr_ptr() to get
+> >                           base address")
+> >   * commit 6219b47c4d91 ("board: samsung: Fix SYS_CONFIG_NAME configs i=
+n
+> >                           axy17lte Kconfig")
+> >   * commit 470682ace1e0 ("configs: Remove unneeded SYS_CONFIG_NAME from
+> >                           a*y17lte defconfigs")
+> >
+> > and series [1]. For more detailed description please see the board
+> > documentation (added in PATCH #12) and corresponding commit messages.
+> >
+> > Changes in v2:
+> >   - PATCH 4: Removed unnecessary mode param
+> >   - PATCH 4: Removed usi->dev and used priv data instead
+> >   - PATCH 4: Used .of_plat_data callback for dts parsing
+> >   - PATCH 7: Fixed Thomas Abraham e-mail
+> >   - PATCH 9: Fixed incorrect driver description (comment)
+> >   - Collected Reviewed-by tags
+> >   - Rebased on top of most recent U-Boot/master
+> >
+> > [1] https://lists.denx.de/pipermail/u-boot/2023-November/539033.html
+> >
+> > Sam Protsenko (13):
+> >   dt-bindings: soc: samsung: Add Exynos USI
+> >   dt-bindings: soc: samsung: Add Exynos PMU
+> >   dt-bindings: clock: Add Exynos850 clock controller
+> >   soc: samsung: Add Exynos USI driver
+> >   soc: samsung: Add Exynos PMU driver
+> >   clk: exynos: Move pll code into clk-exynos7420
+> >   clk: exynos: Add Samsung clock framework
+> >   clk: exynos: Add Exynos850 clock driver
+> >   pinctrl: exynos: Add pinctrl support for Exynos850
+> >   serial: s5p: Add Exynos850 compatible
+> >   arm: exynos: Add Exynos850 SoC support
+> >   board: samsung: Add support for E850-96 board
+> >   MAINTAINERS: Add new Samsung subsystems
+> >
+> >  MAINTAINERS                                   |   25 +
+> >  arch/arm/dts/Makefile                         |    1 +
+> >  arch/arm/dts/exynos-pinctrl.h                 |   79 +
+> >  arch/arm/dts/exynos850-e850-96-u-boot.dtsi    |   37 +
+> >  arch/arm/dts/exynos850-e850-96.dts            |  273 ++++
+> >  arch/arm/dts/exynos850-pinctrl.dtsi           |  663 +++++++++
+> >  arch/arm/dts/exynos850.dtsi                   |  809 +++++++++++
+> >  arch/arm/mach-exynos/Kconfig                  |   28 +-
+> >  arch/arm/mach-exynos/mmu-arm64.c              |   34 +
+> >  board/samsung/e850-96/Kconfig                 |   16 +
+> >  board/samsung/e850-96/MAINTAINERS             |    9 +
+> >  board/samsung/e850-96/Makefile                |    6 +
+> >  board/samsung/e850-96/e850-96.c               |   22 +
+> >  configs/e850-96_defconfig                     |   21 +
+> >  doc/board/samsung/e850-96.rst                 |   87 ++
+> >  .../img/exynos850-boot-architecture.svg       | 1283 +++++++++++++++++
+> >  doc/board/samsung/index.rst                   |    1 +
+> >  .../clock/samsung,exynos850-clock.yaml        |  307 ++++
+> >  .../soc/samsung/exynos-pmu.yaml               |   85 ++
+> >  .../soc/samsung/exynos-usi.yaml               |  162 +++
+> >  drivers/clk/exynos/Kconfig                    |    7 +
+> >  drivers/clk/exynos/Makefile                   |   11 +-
+> >  drivers/clk/exynos/clk-exynos7420.c           |   25 +-
+> >  drivers/clk/exynos/clk-exynos850.c            |  189 +++
+> >  drivers/clk/exynos/clk-pll.c                  |  167 ++-
+> >  drivers/clk/exynos/clk-pll.h                  |   16 +-
+> >  drivers/clk/exynos/clk.c                      |  121 ++
+> >  drivers/clk/exynos/clk.h                      |  228 +++
+> >  drivers/pinctrl/exynos/Kconfig                |    8 +
+> >  drivers/pinctrl/exynos/Makefile               |    1 +
+> >  drivers/pinctrl/exynos/pinctrl-exynos850.c    |  125 ++
+> >  drivers/serial/serial_s5p.c                   |    1 +
+> >  drivers/soc/Kconfig                           |    1 +
+> >  drivers/soc/Makefile                          |    1 +
+> >  drivers/soc/samsung/Kconfig                   |   33 +
+> >  drivers/soc/samsung/Makefile                  |    4 +
+> >  drivers/soc/samsung/exynos-pmu.c              |  102 ++
+> >  drivers/soc/samsung/exynos-usi.c              |  208 +++
+> >  include/configs/e850-96.h                     |   12 +
+> >  include/dt-bindings/clock/exynos850.h         |  337 +++++
+> >  include/dt-bindings/soc/samsung,exynos-usi.h  |   17 +
+> >  41 files changed, 5538 insertions(+), 24 deletions(-)
+> >  create mode 100644 arch/arm/dts/exynos-pinctrl.h
+> >  create mode 100644 arch/arm/dts/exynos850-e850-96-u-boot.dtsi
+> >  create mode 100644 arch/arm/dts/exynos850-e850-96.dts
+> >  create mode 100644 arch/arm/dts/exynos850-pinctrl.dtsi
+> >  create mode 100644 arch/arm/dts/exynos850.dtsi
+> >  create mode 100644 board/samsung/e850-96/Kconfig
+> >  create mode 100644 board/samsung/e850-96/MAINTAINERS
+> >  create mode 100644 board/samsung/e850-96/Makefile
+> >  create mode 100644 board/samsung/e850-96/e850-96.c
+> >  create mode 100644 configs/e850-96_defconfig
+> >  create mode 100644 doc/board/samsung/e850-96.rst
+> >  create mode 100644 doc/board/samsung/img/exynos850-boot-architecture.s=
+vg
+> >  create mode 100644
+> doc/device-tree-bindings/clock/samsung,exynos850-clock.yaml
+> >  create mode 100644 doc/device-tree-bindings/soc/samsung/exynos-pmu.yam=
+l
+> >  create mode 100644 doc/device-tree-bindings/soc/samsung/exynos-usi.yam=
+l
+> >  create mode 100644 drivers/clk/exynos/clk-exynos850.c
+> >  create mode 100644 drivers/clk/exynos/clk.c
+> >  create mode 100644 drivers/clk/exynos/clk.h
+> >  create mode 100644 drivers/pinctrl/exynos/pinctrl-exynos850.c
+> >  create mode 100644 drivers/soc/samsung/Kconfig
+> >  create mode 100644 drivers/soc/samsung/Makefile
+> >  create mode 100644 drivers/soc/samsung/exynos-pmu.c
+> >  create mode 100644 drivers/soc/samsung/exynos-usi.c
+> >  create mode 100644 include/configs/e850-96.h
+> >  create mode 100644 include/dt-bindings/clock/exynos850.h
+> >  create mode 100644 include/dt-bindings/soc/samsung,exynos-usi.h
+> >
+> > --
+> > 2.39.2
+> >
+>
 
-diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
-index 400066fa99..e103664145 100644
---- a/drivers/mmc/dw_mmc.c
-+++ b/drivers/mmc/dw_mmc.c
-@@ -262,8 +262,8 @@ static int dwmci_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
- 
- 	while (dwmci_readl(host, DWMCI_STATUS) & DWMCI_BUSY) {
- 		if (get_timer(start) > timeout) {
--			debug("%s: Timeout on data busy\n", __func__);
--			return -ETIMEDOUT;
-+			debug("%s: Timeout on data busy, continue anyway\n", __func__);
-+			break;
- 		}
- 	}
- 
--- 
-2.43.0
+applied to u-boot-samsung
 
+--=20
+Thanks,
+Minkyu Kang.
