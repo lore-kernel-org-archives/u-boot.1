@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79B79C47422
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 11:34:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1104CC47422
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 11:37:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA37A87866;
-	Fri, 26 Jan 2024 12:34:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3B6E287C10;
+	Fri, 26 Jan 2024 12:37:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="nlN7UtvJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rKW3cBW3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16F8987996; Fri, 26 Jan 2024 12:34:03 +0100 (CET)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EA35887C08; Fri, 26 Jan 2024 12:36:59 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1FD687808
- for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 12:34:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 94DA587808
+ for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 12:36:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-55a86795a3bso172572a12.1
+ for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 03:36:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1706269017; x=1706873817; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=odWHHLOAfKoziKxHV7BnTgdbKf83b1odaSGj6R93j48=;
+ b=rKW3cBW3+R7T8hy2tO8Q/Ot3y4y/RVZr9LSQtqdjxTYq1e4Ua1acf65Mtl4W2oJslD
+ r7Q5PMoKdLFDLddMMMy1ir9tzyzvpVmtfpoR8Q+Ay0vVFDrsauxveoP0HRyt4hP5b6Vq
+ A2kJqldpi6hLoRZmi7kIqBE7iV2XcHaBBGC4OB44kNE83xzoPk+Oi6+JoMstourzpwbO
+ wkimN6QN1Ubne1reMveYIkC9HbGTIm/ajYm+pgBMVA0bzCuYZOeJ91gVKtca8p1y3oIx
+ J++GNdZrqPqWgCS8kKWwmoHnKFEF+0C5UEb80JoZLmCYjqPQwETkQ5oS6FW42VhBslQg
+ 9plg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706269017; x=1706873817;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=odWHHLOAfKoziKxHV7BnTgdbKf83b1odaSGj6R93j48=;
+ b=PNKwV+1ogh49EQENIgpnRk9UyBRJTRz7E0Pxnpcbzxq1Q1CjWjh9sb3fxJMtarnZwG
+ frCoqKI7xBn4es6wYcobAABRYMy6DjeK0SqcEVTVNrXXjjZhxj1yz+VfD6lIeOMDiHYn
+ cTm0BI8X3e4Nesm9cB+M2Fld9R3+ot/BLX+LCC4tv4FFLkJXz3BESqHZhepGD4r8W0qJ
+ jQqDlgAOYq2lHx9YlwXKvM0rrjlwQpF0zDdll6Blsqxsf/1RdKX/XJaMQE5TwscvD+Lc
+ 0x043vT2Nc/8/KWK9p5QPXJo1W+FFv6xbCR60KOlJxE3nFshrWD/1LhR4m3wayTL+NCO
+ duiw==
+X-Gm-Message-State: AOJu0YwRF+6cltScdVHbv5FFBunAQLcQLbD1uOrNEJi8D5V2M2YI0nGo
+ N1BKhOq7oDYr5IuiaFBda7eeeQh9ftxo6gBgncbTDViWEcocpSFqsWtEYLU23C4buJG8xa/HnYL
+ Tmtv41wgXCfLZ1Cftt53uSk0rNFCR5QJjnYOq7mlnsCH5/LbT
+X-Google-Smtp-Source: AGHT+IHBY80ZhcQJJI6Uho1OTdOzGdQhfH5s1DPK4S6kDJOJOZJ3wnt5AE6G3eMkUlDvE05Rux26gfUXHPoUFG8QhJM=
+X-Received: by 2002:aa7:d607:0:b0:55d:2f63:8b33 with SMTP id
+ c7-20020aa7d607000000b0055d2f638b33mr446763edr.1.1706269017002; Fri, 26 Jan
+ 2024 03:36:57 -0800 (PST)
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1706268840;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=B5RL3lM7p0jIKI3/U5w4HYoOxAVA3gH8aaWxd1GoKzI=;
- b=nlN7UtvJrFW7DKxGgmxM2mW8kGGEGz2TZbBFF1fBeggTnCRafA3VYHUalQ1DKbLqBIiKkv
- OPsyBTK7pZq8nTr6d3hCazHzzHxZPBI9v/kPOIHllUGe1YNck5fsN8k+QfOxd3B4TEKnUz
- WEav+CpwbaFpBJs/kJOoeOwTaezQ3xUIMpsyN/t/BpMNS9SknKAHuhoxOJYdSe/6B29xhK
- TTAb/4hZqPQ4ppPwOL4ZjwdPZ2/9IyhBn+qHxbPD+N+fhFqts0I8AZFM10+aiRdUoKGwS6
- A4p+/xOOkFRgV73a/JPdxKUJFO+RoXF/jtrr1nl42hMF7dttJxn2SVYj8P1leQ==
-Date: Fri, 26 Jan 2024 12:33:59 +0100
-From: Dragan Simic <dsimic@manjaro.org>
-To: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Quentin Schulz
- <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>, Jagan Teki
- <jagan@amarulasolutions.com>, Klaus Goger
- <klaus.goger@theobroma-systems.com>, Heiko Stuebner
- <heiko.stuebner@cherry.de>, =?UTF-8?Q?=E6=B4=AA=E6=85=A7=E6=96=8C?=
- <hhb@rock-chips.com>, heiko@sntech.de, u-boot@lists.denx.de
-Subject: Re: [PATCH 13/18] rockchip: rk3588: fix non-working SD controller if
- booting from other media
-In-Reply-To: <31404375-a811-459c-b9d6-87333550954a@theobroma-systems.com>
-References: <20240123-jaguar-v1-0-1eec1c34953c@theobroma-systems.com>
- <20240123-jaguar-v1-13-1eec1c34953c@theobroma-systems.com>
- <10ebfefd-1619-4b08-b15d-ec8ca8e798f3@rock-chips.com>
- <c33d0c58-cd95-490f-9514-8d61e1e70925@theobroma-systems.com>
- <31e7cb6e-7ef1-4069-a38e-b61677a8d76e@rock-chips.com>
- <2f6e9491-9ae1-498c-b269-c0a8fbe27552@theobroma-systems.com>
- <609c74a8-80b0-48a2-ae0a-78264014accd@rock-chips.com>
- <82b8fd76-8a84-4253-93b0-bf1bde85121b@theobroma-systems.com>
- <0a9a81f47864fd566206f5e62c3df192@manjaro.org>
- <daf26efb-888c-4903-b8b1-c6d72556fe9c@theobroma-systems.com>
- <4000d538ec88400f0ceaa9f13b6cd489@manjaro.org>
- <31404375-a811-459c-b9d6-87333550954a@theobroma-systems.com>
-Message-ID: <cd2927612a52bf88b7a2b2c937ccd62f@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+References: <20240122072617.1104227-1-masahisa.kojima@linaro.org>
+ <5da90978-3d5d-4458-b2c9-476a7e390406@gmx.de>
+In-Reply-To: <5da90978-3d5d-4458-b2c9-476a7e390406@gmx.de>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Fri, 26 Jan 2024 20:36:44 +0900
+Message-ID: <CADQ0-X8mRuLnG132hhNr4tZF+9neb=8wjrjBXbJ_bx8LfdhL2w@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: check efi_get_variable_int return value
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,59 +86,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2024-01-26 12:29, Quentin Schulz wrote:
-> On 1/26/24 12:24, Dragan Simic wrote:
->> On 2024-01-26 12:09, Quentin Schulz wrote:
->>> On 1/26/24 12:04, Dragan Simic wrote:
->>>> On 2024-01-26 11:37, Quentin Schulz wrote:
->>>>> On 1/26/24 03:57, Kever Yang wrote:
->>>>>> On 2024/1/25 19:02, Quentin Schulz wrote:
->>>>>>> We don't have a dedicated CD pin for the SD card connector.
->>>>>>> https://www.digikey.com/en/products/detail/molex/0472192001/3044807
->>>>>>> is the SD card connector we use.
->>>>>> 
->>>>>> Thanks for your information, but I think you are using the wrong
->>>>>> microSD connector for rk3588 and maybe also for other rockchip 
->>>>>> SoCs.
->>>>>> Here are four microSD card connector from the web you provide, all
->>>>>> of
->>>>>> them have card detect signal available for pcb:
->>>>>> https://www.digikey.com/en/product-highlight/m/molex-connector/sd-memory-card-connectors
->>>>> 
->>>>> None of those fit our requirements. We need a safe system that
->>>>> doesn't
->>>>> break because of vibrations or shocks. Push-pull connectors are out
->>>>> of
->>>>> question for our design. We have had issues with our Q7 devkit with
->>>>> push-pull connector with SD cards slightly smaller or inserted
->>>>> somewhat the wrong way. I can recall also countless of discussions 
->>>>> in
->>>>> the early days of the Raspberry Pis where there were a lot of 
->>>>> issues
->>>>> related to SD cards.
->>>>> 
->>>>> This is basically the mechanism we are using
->>>>> https://media.distrelec.com/Web/WebShopImages/landscape_large/4-/01/Molex-500901-0801-30161714-01.jpg
->>>> 
->>>> Please, allow me to interject...  I'm really curious why don't you
->>>> use eMMC chips instead of microSD cards?  I mean, if the reliability
->>>> is of utmost importance, I wouldn't even consider microSD cards, not
->>>> even the high-endurance variants.
->>> 
->>> We have both :)
->> 
->> Ah, I see. :)  Perhaps my question wasn't precise enough;  actually,
->> now I'd like to know what do you use as the primary storage for the
->> operating system installation -- eMMC chip or microSD cards?  Is the
->> eMMC chip soldered?  I'm just curious. :)
->> 
-> Soldered eMMC is the primary (expected) storage. If both eMMC and SD
-> card are inserted and properly flashed, it'll boot from eMMC except if
-> the BIOS button is pressed, in which case SD card will be selected
-> instead. If SD card is missing/improperly flashed, it'll boot into USB
-> flashing mode (rkdeveloptool/rockusb) if the BIOS button is pressed
-> (similar to when no storage media is properly flashed).
+Hi Heinrich,
 
-Thanks for the clarification.  Just one more question, please:  is the
-BIOS button handled in software (i.e. in U-Boot), or does it disable the
-eMMC chip by shorting its clock or a data line to ground?
+On Fri, 26 Jan 2024 at 16:20, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 1/22/24 08:26, Masahisa Kojima wrote:
+> > efi_get_variable_int() may fail, the buffer should be
+> > cleared before using it.
+> >
+> > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> > Addresses-Coverity-ID: 478333 ("Error handling issues")
+> > ---
+> >   lib/efi_loader/efi_firmware.c | 8 ++++----
+> >   1 file changed, 4 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
+> > index 9fd13297a6..fb83fa8113 100644
+> > --- a/lib/efi_loader/efi_firmware.c
+> > +++ b/lib/efi_loader/efi_firmware.c
+> > @@ -407,11 +407,11 @@ efi_status_t efi_firmware_set_fmp_state_var(struct fmp_state *state, u8 image_in
+> >       /*
+> >        * GetVariable may fail, EFI_NOT_FOUND is returned if FmpState
+> >        * variable has not been set yet.
+> > -      * Ignore the error here since the correct FmpState variable
+> > -      * is set later.
+> >        */
+> > -     efi_get_variable_int(varname, image_type_id, NULL, &size, var_state,
+> > -                          NULL);
+> > +     ret = efi_get_variable_int(varname, image_type_id, NULL, &size,
+> > +                                var_state, NULL);
+> > +     if (ret != EFI_SUCCESS)
+> > +             memset(var_state, 0, num_banks * sizeof(*var_state));
+>
+> Hello Masahisa,
+>
+> We allocate var_state with calloc(). So it is cleared before we call
+> GetVariable(). Do we have an implementation of GetVariable() that would
+> fill it with data before returning an error code?
+
+No, current GetVariable() implementations do not fill the buffer
+when GetVariable() returns an error.
+This is why my original implementation does not clear the buffer in
+case of error.
+
+Anyway, I agree with your previous comment.
+I think it is better to clear the buffer in case of error for safety,
+because UEFI spec does not say GetVariable() will not fill the
+buffer in case of error.
+
+Thanks,
+Masahisa Kojima
+
+
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> >       /*
+> >        * Only the fw_version is set here.
+>
