@@ -4,86 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 739E4C47422
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 19:57:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD35BC47422
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 22:15:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4ADDA87B84;
-	Fri, 26 Jan 2024 20:57:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2072287D42;
+	Fri, 26 Jan 2024 23:15:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YWNfGjuC";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Hr+zqMrH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32B3587B84; Fri, 26 Jan 2024 20:57:23 +0100 (CET)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B114A87D42; Fri, 26 Jan 2024 23:15:25 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2ADE7879F6
- for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 20:57:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 25AFC87D40
+ for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 23:15:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linus.walleij@linaro.org
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-5edfcba97e3so8506487b3.2
- for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 11:57:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706299039; x=1706903839; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=b/2UoLYjF9OM7FQ+Tt2pSrSAf75X2teuzF/Eln58rKs=;
- b=YWNfGjuC0afGXq5syVTDG9Mjbwk/jbbYsEDmHHvxzx++m0pFPu46d5ex3opF3V8L9C
- 2TK5TSr9bl2Fxxbz5da1KxYIw3x7BMwXFnxMClvpvhsHvNS7OlmWcmKURobybuiTgRXA
- Gqgz2EqpV7c9D1UZhPhLUvYZFI/RPVCWax2ouVhHdxKQLGsbOOr7vKxdXzNyy+N+aTBn
- 9q/h3BniNclLYpbra4uECPygGfTLVfpLX4xp8IiA4evrvHelio2x8ooxtUx1j2fPQKiU
- jQc3J9/ORAnA35i62gRJEyZNIgdH50mJ+k3GnZyA/fdEL0kVe001TKg3NdQFEjE4uBWe
- dRMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706299039; x=1706903839;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=b/2UoLYjF9OM7FQ+Tt2pSrSAf75X2teuzF/Eln58rKs=;
- b=MDASIFMl2OfuV9HbCySsvIahDdEBghyYX6bEZih6VI6IA6tfURBcT7TOOv+10BL+zL
- /03fg4F5Jg6PQNMdMlBgTD2dINoMugF4mX4fTL13XxCWglc5VeMDq/pNdE4qX2u7ZR7F
- N9X1Cd9f5d5NMtrV7D8B0JD/2Ek8Bhrdtp+Vie8jL0GOmo4dS8x2/NUaPZHrJPjVsXq8
- PWB+yc7RvMexosm6t3Ludb2p3S2rdtOcDjUvLMPc3eJC9tJRATmijwr3XaKDnLrbIU3v
- QqDs7LK3ez/H0orur8y4EKmOQpjL0lMfvSnsd/Ao8ZDYoc0NGciOSIM9JGxkqFm6UUle
- +Zww==
-X-Gm-Message-State: AOJu0YwQt2jCPfc9olvCnndJbFaOP87k5zUXrHaS0rjsSxlvsb+Q6Kll
- W1+xGUVmCPFrbMFZnqnU798zPH4CN/LmuuMKeEPohqkah1BO3KIsFL7XaMD8ZhePnNkBQ6jTp2z
- Vt/bEa1kuasXq0nk4XrSD7Un4hKxp6kenzurvPA==
-X-Google-Smtp-Source: AGHT+IHTn+/mUcfiZb0FYQ+12Ys2e+tjbtyo73Ocf9TDOtwyObwmAq+KLoR55/DF2nHCMK0N1g1WIz+Pp18GBjJxWj8=
-X-Received: by 2002:a0d:d68b:0:b0:5fb:5b9:65c1 with SMTP id
- y133-20020a0dd68b000000b005fb05b965c1mr400456ywd.96.1706299038900; Fri, 26
- Jan 2024 11:57:18 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=0bb9=JF=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1706307315;
+ bh=kWk18PXcW+ttC5+4LCwI/Mmi2daLJ3zQ79/WgBSL+Q0=;
+ b=Hr+zqMrHB9g+pBUYzh5i/05Fumx+4RUigP7hDi7UasevVzV5YWXYZ/eNCAxAVoKyf9TSP3Al8
+ 64JDWeuzg6Ufwl8vBh7M9+8Exy2mT8lX2BfvlaZTa++LkmQPitHek/TLHgow4uY9iyGkMmmUKdQ
+ CWEsBJELL6IXhGy0w8V2CB8hc53UuMADfEan6zwVsDAFEUa7PQ6ZKwHdA2k27Zp/kH3GgLPhoX2
+ od329pj+rGkzrz/6KD2iCVxtwiPw3JMKKeQxRBUmbAoTa99EI0h0sEly6BrKRMlg/rSX7mSLUKG
+ O2/GQQmf5bh+mttmRK6S1KQ8wb/7z4XbHQPubZejt6hQ==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 0/7] rockchip: rk35xx: Sync device tree with linux v6.8-rc1
+Date: Fri, 26 Jan 2024 22:14:48 +0000
+Message-ID: <20240126221508.4093334-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20240126124801.1164892-1-ole.orhagen@northern.tech>
-In-Reply-To: <20240126124801.1164892-1-ole.orhagen@northern.tech>
-From: Linus Walleij <linus.walleij@linaro.org>
-Date: Fri, 26 Jan 2024 20:57:07 +0100
-Message-ID: <CACRpkdYLizF9Duy3ZCfqRsY-NMoLZJO8+TCyBHbQDqSOWuzonQ@mail.gmail.com>
-Subject: Re: [PATCH v1] vexpress_ca9x4: Enable DM_SERIAL
-To: "Ole P. Orhagen" <ole.orhagen@northern.tech>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Kristian Amlie <kristian.amlie@northern.tech>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>, 
- Fabio Estevam <festevam@denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Liviu Dudau <liviu.dudau@foss.arm.com>, Mark Kettenis <kettenis@openbsd.org>, 
- Patryk Biel <pbiel7@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Peter Robinson <pbrobinson@gmail.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Simon Glass <sjg@chromium.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Yang Xiwen <forbidden405@outlook.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 65b42ef30365e200626455be
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,36 +67,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jan 26, 2024 at 1:48=E2=80=AFPM Ole P. Orhagen
-<ole.orhagen@northern.tech> wrote:
+This series sync RK356x and RK3588 device tree with linux v6.8-rc1. It
+also moves some common/default props into the SoC u-boot.dtsi files.
 
-> This commit enables support for DM_SERIAL in the vexpress_ca9x4 boards.
->
-> When running the board with the DM_SERIAL driver, the board ran out of
-> memory in SPL when initialising the DM serial driver.
->
-> Thus this required an increase in the pre-allocated SRAM memory. I did
-> increase it to 0x800, and it now works graciously.
->
-> It could probably be set lower, but I do not see any reason not to use th=
-e
-> available SRAM at this point.
->
-> Also adds stdout-path to the 'chosen' node in the device tree.
->
-> Signed-off-by: Ole P. Orhagen <ole.orhagen@northern.tech>
+Also drop the rockchip,rk3568-dwc3 compatible now that dwc3-generic
+driver support the rockchip,rk3588-dwc3 compatible.
 
-Nice!
-Reviewed-by: Linus Walleij <linus.walleij@linaro.org>
+Patch 1-2 sync rk356x device trees
+Patch 3 move common uart2 props to rk356x-u-boot.dtsi
+Patch 4-5 sync rk3588 device trees
+Patch 6 add default u-boot,spl-boot-order prop to rk3588s-u-boot.dtsi
+Patch 7 remove unnecessary status = "okay" props
 
-Are you using the actual hardware, or QEMU?
+Jonas Karlman (7):
+  rockchip: rk356x: Sync device tree from linux v6.7
+  rockchip: rk356x: Sync device tree from linux v6.8-rc1
+  rockchip: rk356x: Move common uart2 props to rk356x-u-boot.dtsi
+  rockchip: rk3588: Sync device tree with linux v6.7
+  rockchip: rk3588: Sync device tree from linux v6.8-rc1
+  rockchip: rk3588: Add default u-boot,spl-boot-order prop
+  rockchip: rk35xx: Remove unnecessary status props
 
-> -       chosen { };
-> +       chosen {
-> +               stdout-path =3D &v2m_serial0;
-> +       };
+ .../arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi |   7 -
+ arch/arm/dts/rk3566-anbernic-rgxx3.dtsi       |  42 ++---
+ arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi    |  12 --
+ arch/arm/dts/rk3566-quartz64-a.dts            |   7 +-
+ arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi    |  12 --
+ arch/arm/dts/rk3566-quartz64-b.dts            |   2 -
+ arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi  |  12 --
+ arch/arm/dts/rk3566-radxa-cm3-io.dts          |   5 +-
+ arch/arm/dts/rk3566-soquartz-blade.dts        |   4 +
+ arch/arm/dts/rk3566-soquartz-cm4.dts          |   4 +
+ arch/arm/dts/rk3566-soquartz-model-a.dts      |   4 +
+ arch/arm/dts/rk3566-soquartz-u-boot.dtsi      |  12 --
+ arch/arm/dts/rk3566-soquartz.dtsi             |   4 -
+ arch/arm/dts/rk3568-bpi-r2-pro-u-boot.dtsi    |  13 --
+ arch/arm/dts/rk3568-evb-u-boot.dtsi           |  17 --
+ arch/arm/dts/rk3568-evb.dts                   |   3 -
+ arch/arm/dts/rk3568-generic-u-boot.dtsi       |  11 --
+ arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi    |  12 --
+ arch/arm/dts/rk3568-lubancat-2.dts            |   3 -
+ arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi    |  12 --
+ arch/arm/dts/rk3568-nanopi-r5s.dtsi           |   3 -
+ arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi     |  12 --
+ arch/arm/dts/rk3568-odroid-m1.dts             |   3 -
+ arch/arm/dts/rk3568-radxa-cm3i.dtsi           |   3 -
+ arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi     |  12 --
+ arch/arm/dts/rk3568-rock-3a-u-boot.dtsi       |  12 --
+ arch/arm/dts/rk3568-rock-3a.dts               |   7 +-
+ arch/arm/dts/rk356x-u-boot.dtsi               |  12 +-
+ arch/arm/dts/rk356x.dtsi                      |  20 ++-
+ arch/arm/dts/rk3588-edgeble-neu6a-io.dts      |   4 -
+ arch/arm/dts/rk3588-edgeble-neu6b-io.dts      |   6 +-
+ arch/arm/dts/rk3588-evb1-v10.dts              |  99 +++++++++++-
+ arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi     |   6 -
+ arch/arm/dts/rk3588-nanopc-t6.dts             |  10 +-
+ .../dts/rk3588-orangepi-5-plus-u-boot.dtsi    |   6 -
+ arch/arm/dts/rk3588-orangepi-5-plus.dts       |   1 -
+ arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi   |   6 -
+ arch/arm/dts/rk3588-quartzpro64.dts           |   2 +-
+ arch/arm/dts/rk3588-rock-5b-u-boot.dtsi       |  12 --
+ arch/arm/dts/rk3588-rock-5b.dts               |  13 +-
+ arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi    |   7 -
+ arch/arm/dts/rk3588-turing-rk1.dtsi           |   6 +-
+ arch/arm/dts/rk3588-u-boot.dtsi               |   2 +-
+ arch/arm/dts/rk3588s-orangepi-5.dts           |   9 +-
+ arch/arm/dts/rk3588s-pinctrl.dtsi             |   2 +-
+ arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi      |   6 -
+ arch/arm/dts/rk3588s-rock-5a.dts              |  10 +-
+ arch/arm/dts/rk3588s-u-boot.dtsi              |  49 ++----
+ arch/arm/dts/rk3588s.dtsi                     | 152 ++++++++++++++++++
+ arch/arm/mach-rockchip/rk3588/syscon_rk3588.c |   2 +-
+ include/dt-bindings/clock/rk3568-cru.h        |   1 +
+ include/dt-bindings/soc/rockchip,vop2.h       |   4 +
+ 52 files changed, 372 insertions(+), 325 deletions(-)
 
-Can you please send this patch also to the Linux codebase.
+-- 
+2.43.0
 
-Yours,
-Linus Walleij
