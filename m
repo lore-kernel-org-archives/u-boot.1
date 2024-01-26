@@ -4,72 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D98FC47422
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 12:25:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DB05C47422
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 12:25:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46E8187B8C;
+	by phobos.denx.de (Postfix) with ESMTP id D41D087C26;
 	Fri, 26 Jan 2024 13:24:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timesys.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="U45gvdoW";
+	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="AOX6eLtx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11073862DA; Fri, 26 Jan 2024 08:53:23 +0100 (CET)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
+ id 25D0C87BBC; Fri, 26 Jan 2024 10:25:41 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4FCD862DA
- for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 08:53:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 05763878AA
+ for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 10:25:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=timesys.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jj251510319013@gmail.com
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-290449c30d4so31263a91.2
- for <u-boot@lists.denx.de>; Thu, 25 Jan 2024 23:53:20 -0800 (PST)
+ spf=pass smtp.mailfrom=piotr.wojtaszczyk@timesys.com
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a293f2280c7so9548366b.1
+ for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 01:25:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706255599; x=1706860399; darn=lists.denx.de;
+ d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1706261138; x=1706865938;
+ darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=1AdZnUKsDHNb9ZXt8ZZMmA1adutidBal3qNKttGZLpw=;
- b=U45gvdoWaAFBHvIuXFIw7ug0gTzpukuET2sHabEtsvdtonj/6PlziAGrVGK7Y3CGjz
- jT5KcKv6mk6DRR0eUZpxUjGXRqrSHwReF479tmqlwdc/yaWizC0Kqg9E9CF7FFlNpO/B
- I10Ick9l8vJs42f2yxCaTBUAx66h9+YvEvcWwGQPwmmhSyFqqNFKYSBX6Oq9A7ALu21j
- O1+DneUzfIy12X7gUX0jbc8CpuzEIZJJXCw72HFWlm9TC3waymSYkJEEVM6HlV6Iv42X
- 8fYbVTBbLtiU0Qnx2AM2BIfJ8ez/u/u4kz3zx+QgBiIl2CWs9sPdyDJqI+LO3+5R2gl5
- 5Bsw==
+ bh=r7Pqrr7BDDT65ASHJTxB5D+GRiaFKxCGiIcpt+J0OD8=;
+ b=AOX6eLtxu8o0uuF4mwrv3Qy31/Px6wzLVlgedDY+5yTi8eblFWbmld0lDphY9SvJME
+ GyEzoaj9wVywfcwl8yQGnOy/qdVVe7ibNpHih4Gmr+D5ZJRA0p/zXNdi7reNNYCyGuqk
+ pGB+eFbGh6atgExici16EQicxuOHIWA60xvWY2MLGKmc0al/RIHvFLJedSrXtrMtjXrf
+ DSfq0/+EC+dxnS/msFJqiqSt953GvNUQsj36uCCt7gNhSxfOWE29/lTnVk/W4GmBdJlq
+ 4V+PZDL4qG7NLgmXvbfXyjmW5gfw3NT0f1+Nh3XoPW0pcoI86ChjcguKbEx9Cx4dkJBJ
+ MeqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706255599; x=1706860399;
+ d=1e100.net; s=20230601; t=1706261138; x=1706865938;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1AdZnUKsDHNb9ZXt8ZZMmA1adutidBal3qNKttGZLpw=;
- b=KwNQO9e48Cu1+b8TUH7BF5SHwuiS3FoMk6seFlFvhVUVV0zaoq+RlbvinCczyD1Jte
- QugJ2DObupz8YfcJPU/idJqxPg8s6B9ERymbncegoBHFF4FPdGc1QNGSkeJS1qQ1k5Z5
- mEHjaAoG6vOBLVAB3Q8F9vX0ED4Vl/qTjSnW3GFrVIj6USSnRtqY5kai4mmdb50hW75D
- MqGf9k0rs3cpL8Tm9rRuHndnYFpAPHY2uNc/7s5oUl9xgrnC6bB61ZfECOhiC2Znt8yP
- 1RNcynL2OzH1I/8sTZ47GLKULyYHgxdzLSGadLGrln3N31WNFar9lBfo9XuILIP8+oty
- FYJw==
-X-Gm-Message-State: AOJu0YyrjQyz8afkrSuHfjPCu9CZ/UDBermVN/36ikc2bETp40kUhKCw
- 6JocwigQaUpJzTsONXnQgEAAWxBzKI3LyBQzb64/e15E+7h5u4ql3VIUGC6la0s=
-X-Google-Smtp-Source: AGHT+IEJd3B9r/DVkLSlRE5t7gCuJ+mxf64sJTCJe2m/5SYWnBjCPw+Cx7lcGfiT1PAf5syGJX/+GA==
-X-Received: by 2002:a17:90a:498c:b0:28d:b5de:91e with SMTP id
- d12-20020a17090a498c00b0028db5de091emr1048681pjh.32.1706255598588; 
- Thu, 25 Jan 2024 23:53:18 -0800 (PST)
-Received: from localhost.localdomain (118-163-61-247.hinet-ip.hinet.net.
- [118.163.61.247]) by smtp.gmail.com with ESMTPSA id
- x5-20020a17090a388500b00290f8afd8acsm688761pjb.47.2024.01.25.23.53.17
+ bh=r7Pqrr7BDDT65ASHJTxB5D+GRiaFKxCGiIcpt+J0OD8=;
+ b=ATrarG+1H0lD/J7SC1+dRFU96RhcAVcTVd7sxhsQDLjM4Qs6lnypzUUPgeZkfJ5ZfR
+ jONUMoZd49KqCpMAWwPS9fzNembliYle1jeO6P30I6+paaGEvCfUTYpWpydpewUfzIUD
+ nA4WbxXjh+XF7f74Gcl7mVX5Z1reLloasN5HzcWk2LwwR1O/dirA5R6fmC1nl2BSt7QV
+ MEujHcrqgmUfcLSBsei3lzCHZOzWt9AH3jz8OChN5jEQZpHrGUSn5mWKrY7jvJMmbsUK
+ jpFL+Svg40Y5+vvboA5jqgSqA7erYr8RuG3svYpuYwsVh28MLNsRdwuBnLvlWnNVAVhS
+ rs5w==
+X-Gm-Message-State: AOJu0Yw/lEmSldchGmiOlWvaWlLhOQd2Cp61tSj6cS89IxJyiysd5sDM
+ DK0L3/ZnddXlwmgZIhit1NTkldi/B+51d32ljC8k28ml6cwpZiJUH8ag2LHD9O9AMo2kgK+TkJI
+ K
+X-Google-Smtp-Source: AGHT+IFhHKgfN0M6AdNqJSM8Sta98hV2f7nS/UeZgZwANi/Vx/OrBukXHOJF1oGXr5r3/tRyambQIg==
+X-Received: by 2002:a17:906:ae50:b0:a2b:63ca:cee0 with SMTP id
+ lf16-20020a170906ae5000b00a2b63cacee0mr308603ejb.11.1706261138174; 
+ Fri, 26 Jan 2024 01:25:38 -0800 (PST)
+Received: from localhost.localdomain ([91.216.213.152])
+ by smtp.gmail.com with ESMTPSA id
+ t24-20020a1709064f1800b00a349a5f9f77sm416208eju.47.2024.01.26.01.25.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jan 2024 23:53:18 -0800 (PST)
-From: Wei Ming Chen <jj251510319013@gmail.com>
+ Fri, 26 Jan 2024 01:25:37 -0800 (PST)
+From: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
 To: u-boot@lists.denx.de
-Cc: Wei Ming Chen <jj251510319013@gmail.com>
-Subject: [PATCH] doc: uefi: remove ".py" suffix for pytest.py command
-Date: Fri, 26 Jan 2024 15:52:19 +0800
-Message-Id: <20240126075219.1521605-1-jj251510319013@gmail.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>, Xavier Drudis Ferran <xdrudis@tinet.cat>
+Subject: [PATCH 1/5] usb: ohci-generic: ignore ENOSYS and ENOTSUPP errors from
+ clk and reset
+Date: Fri, 26 Jan 2024 10:25:28 +0100
+Message-Id: <20240126092533.20709-1-piotr.wojtaszczyk@timesys.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 26 Jan 2024 13:24:57 +0100
@@ -89,26 +94,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-the file pytest.py does not exist
+If a machine doesn't have CONFIG_CLK set the call to clk_get_bulk()
+returns '-ENOSYS' error which should be handled the same way as
+'-ENOENT' error. The same applies to reset_get_bulk() and 'ENOTSUPP'.
 
-Signed-off-by: Wei Ming Chen <jj251510319013@gmail.com>
+Signed-off-by: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
 ---
- doc/develop/uefi/uefi.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-index c739242b6a..0389b269c0 100644
---- a/doc/develop/uefi/uefi.rst
-+++ b/doc/develop/uefi/uefi.rst
-@@ -193,7 +193,7 @@ on the sandbox
- .. code-block:: bash
+ drivers/usb/host/ohci-generic.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/usb/host/ohci-generic.c b/drivers/usb/host/ohci-generic.c
+index ceed1911a9..28512c081f 100644
+--- a/drivers/usb/host/ohci-generic.c
++++ b/drivers/usb/host/ohci-generic.c
+@@ -28,7 +28,7 @@ static int ohci_usb_probe(struct udevice *dev)
+ 	int err, ret;
  
-     cd <U-Boot source directory>
--    pytest.py test/py/tests/test_efi_secboot/test_signed.py --bd sandbox
-+    pytest test/py/tests/test_efi_secboot/test_signed.py --bd sandbox
+ 	ret = clk_get_bulk(dev, &priv->clocks);
+-	if (ret && ret != -ENOENT) {
++	if (ret && !((ret == -ENOENT) || (ret == -ENOSYS))) {
+ 		dev_err(dev, "Failed to get clocks (ret=%d)\n", ret);
+ 		return ret;
+ 	}
+@@ -40,7 +40,7 @@ static int ohci_usb_probe(struct udevice *dev)
+ 	}
  
- UEFI binaries may be signed by Microsoft using the following certificates:
+ 	err = reset_get_bulk(dev, &priv->resets);
+-	if (err && err != -ENOENT) {
++	if (err && !((err == -ENOENT) || (err == -ENOTSUPP))) {
+ 		dev_err(dev, "failed to get resets (err=%d)\n", err);
+ 		goto clk_err;
+ 	}
+@@ -72,7 +72,7 @@ reset_err:
+ 		dev_err(dev, "failed to release resets (ret=%d)\n", ret);
+ clk_err:
+ 	ret = clk_release_bulk(&priv->clocks);
+-	if (ret)
++	if (ret && (ret != -ENOSYS))
+ 		dev_err(dev, "failed to release clocks (ret=%d)\n", ret);
  
+ 	return err;
+@@ -95,7 +95,11 @@ static int ohci_usb_remove(struct udevice *dev)
+ 	if (ret)
+ 		return ret;
+ 
+-	return clk_release_bulk(&priv->clocks);
++	ret = clk_release_bulk(&priv->clocks);
++	if (ret && (ret != -ENOSYS))
++		return ret;
++
++	return 0;
+ }
+ 
+ static const struct udevice_id ohci_usb_ids[] = {
 -- 
-2.34.1
+2.25.1
 
