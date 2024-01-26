@@ -4,89 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2339FC47422
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 12:57:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A82F6C47DDF
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 12:58:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9139087C15;
-	Fri, 26 Jan 2024 13:57:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=northern.tech
+	by phobos.denx.de (Postfix) with ESMTP id 2CC1587C3E;
+	Fri, 26 Jan 2024 13:58:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=northern.tech header.i=@northern.tech header.b="lKWP0qyn";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="R0vxGC5U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67E9087C11; Fri, 26 Jan 2024 13:48:35 +0100 (CET)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3DC7287C3E; Fri, 26 Jan 2024 13:58:42 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3140987BAD
- for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 13:48:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=northern.tech
+ by phobos.denx.de (Postfix) with ESMTPS id 4658987808
+ for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 13:58:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ole.orhagen@northern.tech
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-5101f2dfdadso666601e87.2
- for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 04:48:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=northern.tech; s=google; t=1706273312; x=1706878112; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gYeNtYvdoUZadzKy2xMIPAFBNn5hKoeZTZ/PTgZLd0w=;
- b=lKWP0qyn1PQmSUE3915qwby2DUwv8Qej5Zu2K7BVgGbXD+zYIs/Pzupz3IlkfZe4PG
- DfXgpUEMF3rXw5B8irBmN6F2N/lp56fyi1GWj8zFU9JBOxNoUUcnJJ+KE43ZuNWBG1Fh
- zReUX5poSezMoQkYsBBCSqql6ew3L4W2kjkbRCaLLDqtEnmSBtKbaFTc74GCy4Ta5nQw
- jPCPMFctB8o/wopSRjt3PgPZiJFmyF9eu0QwBr6nK5riJoBfziGooEDafVWj+ahhS+Wy
- lEyp18dEaR9cmX3z6w98HYaM4S5z5AXXUyFaGRSHRHk8Kr9bCXx8o+Pc1Z3Xh1XxQXOS
- cLMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706273312; x=1706878112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gYeNtYvdoUZadzKy2xMIPAFBNn5hKoeZTZ/PTgZLd0w=;
- b=v8rXtsrFcw4NkLq84Np8f9qYErlaLYra/EkyTwOri0l8SOMf0R9xuyj8qOGQY+68Zs
- LVJrgPOU8/DVXLstbFGNgHz0hKX/U5N1sTH1uGuWm3HbEFVP/JdTFgj//QEb/zFNbi/E
- yNBtKZx6zkpFqqAgkbBs1sCJkk4O5F/PTjmGE7f+q0h647Hydh+CEaj2soRVxq+Pc/9c
- LLGJjBnk4RoXQ3VtUtN19NbTsm3hLfb/cPsUHN59prq2MNPljk0rj0vd4sYNVM2LqjfC
- 7axKuDJqVvQbE4pKPMn9gXj92ZhSWsL/O/dbvpnZSz558AI7VpHxYHqTl/Lx5y6uOCvW
- r5JA==
-X-Gm-Message-State: AOJu0Yw4CaI0DxXKEV7+ksk7AYyYA83WXRuAkTD9V2kLaS2ly6oS/NFR
- dkxx2mqPo5MFfSBWZPeNd2W4jr3kOwp5oC5w46riWr4WH2+pqTIiTLaMskfHealeU23bPMu98u4
- pMbRYdevQngRJbiKGEkOyx48huBm1kXQIHa4QvFg+S/9/nXW1XNZN/w6eBBo=
-X-Google-Smtp-Source: AGHT+IEB4L33lGhATgIhi9WXFzSziAaYdvuvgDZnjP6Gtf3re+yXWkXLhE25wwUVBjV5mdYTUPPd6A==
-X-Received: by 2002:a05:651c:316:b0:2cf:16f2:b058 with SMTP id
- a22-20020a05651c031600b002cf16f2b058mr710992ljp.106.1706273312052; 
- Fri, 26 Jan 2024 04:48:32 -0800 (PST)
-Received: from olepor.localhost ([91.232.32.37])
- by smtp.gmail.com with ESMTPSA id
- y18-20020a2e9d52000000b002cf1a94c216sm152556ljj.2.2024.01.26.04.48.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jan 2024 04:48:31 -0800 (PST)
-From: "Ole P. Orhagen" <ole.orhagen@northern.tech>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Kristian Amlie <kristian.amlie@northern.tech>,
- "Ole P. Orhagen" <ole.orhagen@northern.tech>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?= <csokas.bence@prolan.hu>,
- Fabio Estevam <festevam@denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Linus Walleij <linus.walleij@linaro.org>,
- Liviu Dudau <liviu.dudau@foss.arm.com>,
- Mark Kettenis <kettenis@openbsd.org>, Patryk Biel <pbiel7@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>, Yang Xiwen <forbidden405@outlook.com>
-Subject: [PATCH v1] vexpress_ca9x4: Enable DM_SERIAL
-Date: Fri, 26 Jan 2024 13:47:50 +0100
-Message-ID: <20240126124801.1164892-1-ole.orhagen@northern.tech>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1706273919; x=1706878719; i=xypron.glpk@gmx.de;
+ bh=PNsoL/6puPYd2B8NamnwhcJ+gcYGlokyUbX7Blxt50o=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=R0vxGC5Ua3ZtIPgDKrhahLHAv3dOo+XleZAqLOv2x4NgCEP/M75bjnYKIUrLucQs
+ DfC8uYcIYCnTaiMZ5DSViBi+7sJtTMoFeaJBAWRHGQS4ab5an/CCnW8XXqkrhbNFS
+ aJK2ZPXG/Mr8+5EpJhhRtrD32EHDBFvzSVArfEdTMk/KLNeilCWx1mIe/Fux9tGHD
+ mr0+MAfzeiWTcOj8/HYLwOCMBqs8pCTJahOd2TP3idrWkYK1IHll95MA/d6JL2HSl
+ lCwwNVOp2O+A/TUXo2Kl0gyubYSOnt31stGMlDPPQuklI/9r1ssAftVYc9pW1C/Y7
+ 8QafQi75oyeZvXqL3Q==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MEFzr-1rLL221Kab-00AGju; Fri, 26
+ Jan 2024 13:58:39 +0100
+Message-ID: <f5dc6d03-985f-4ab3-a6fb-eaa87593d630@gmx.de>
+Date: Fri, 26 Jan 2024 13:58:29 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 26 Jan 2024 13:57:38 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] efi_loader: check efi_get_variable_int return value
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20240122072617.1104227-1-masahisa.kojima@linaro.org>
+ <5da90978-3d5d-4458-b2c9-476a7e390406@gmx.de>
+ <CADQ0-X8mRuLnG132hhNr4tZF+9neb=8wjrjBXbJ_bx8LfdhL2w@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CADQ0-X8mRuLnG132hhNr4tZF+9neb=8wjrjBXbJ_bx8LfdhL2w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:HVBa6YTkcF08XgBrh5JdDQ2DSQBl0korzyoYhhkZA658bgtLvtA
+ Zztseqasokero1+7Yh5QtLgNhJSc+tsFtmeVJv21cJCXMEOSgGrQndgnfkhepL69Ykqb6MK
+ tMzSGiTBsj3bLPt/TsP3N7OXjI6r299xpIvkrcphtuX0DsFKCEzOcNpXpNQE4TPUwXZn+1W
+ GYGOJ/o1EMlG4APyPAXsQ==
+UI-OutboundReport: notjunk:1;M01:P0:uBIHnSClJow=;XqoKS6JnacRGrdAjlUzV3joOe3+
+ HK76pyPtUW9v/2pWtIjCQb3WvGT8bQTl7DU1ZrC2my1cHk/tEI/3hp4HnxKUjRBnzAylvMgP5
+ QsFKz+HlMctTuwLP73kX3FMNMjh3JsJuZb2XVaa49LGFGgGTX2BleSs/n1Z9k+1kw0KI6HgUV
+ Xj2B2/aWUwVWyeYYR0XVPxgZNwbxA7AW81aJ7lSQhsETSFurqY6bJOrFN5dQ1bWLSnbvN2/45
+ Uw2r7nNjdb1LMXRhymwjcf45rj7K+EOlQWssYJf9/FXcIWzkxWgQ69Rv3QAsw8YShJgDORv/6
+ nk9r7yQhBkFGGR6YhT7802j2CEpOUP0P7J6QR229ktFR7BVv4KFQQc7LgmQjYO/fnEg9ocqe9
+ shYadQC3s3bjpEsPKflRnEEHDtguDH+4sCG7aWCpJd276r/uhAz+Bu6LUQomLVsuw3gbLZ9BR
+ ztjDSopszfjK+J/Yo536GRzKSjmPjBhdI4YdffEjxsAzBYUkm6zic6qyfiIpaCq20ehUitgwT
+ /rFUYwJDlcwMlpLnmwwZzhYziuSnUZ4Kwyt+Gq7x72NFZgwQxBxc5/4oXbjk204amkiF0bfJm
+ T8dYxyogRdrciXClJ2USqa9KgnNKmyLLw/Mc6oiTRBIIxWh+VFQperIJY1jqq39IG1fibF6Ha
+ 8pS3LAXvp9PHoGSQVa7079nejIJdFSu4CyTzSOxilcRuWX+7/8J5Ow1ev6YNrrHCHJETV9QMN
+ 64RzzJK7UQ1IvADKmexK+5MrQ/NbD4pmRfSTPdLURDR0pY6YYENOVWXbTeQm5oMWpC3lUFZ9E
+ SOOsF3C8xC6/DU5dERQ6NvQIITjBH0eFM6TvkuNH1/GSfBn1i1yWLGuxdalYs+ALJ2dxSypHd
+ zy8WfhnsD/OM7AWHed+Qaf+1MQoYFgrWjW4ECFKuJ5H6uk+Ex2ozCas6Mm9o3maQBBUIbp2rc
+ 7lWXvgM7NOAL5B9ApMTZ/KhcZX4=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,77 +90,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This commit enables support for DM_SERIAL in the vexpress_ca9x4 boards.
+On 26.01.24 12:36, Masahisa Kojima wrote:
+> Hi Heinrich,
+>
+> On Fri, 26 Jan 2024 at 16:20, Heinrich Schuchardt <xypron.glpk@gmx.de> w=
+rote:
+>>
+>> On 1/22/24 08:26, Masahisa Kojima wrote:
+>>> efi_get_variable_int() may fail, the buffer should be
+>>> cleared before using it.
+>>>
+>>> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+>>> Addresses-Coverity-ID: 478333 ("Error handling issues")
+>>> ---
+>>>    lib/efi_loader/efi_firmware.c | 8 ++++----
+>>>    1 file changed, 4 insertions(+), 4 deletions(-)
+>>>
+>>> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmwa=
+re.c
+>>> index 9fd13297a6..fb83fa8113 100644
+>>> --- a/lib/efi_loader/efi_firmware.c
+>>> +++ b/lib/efi_loader/efi_firmware.c
+>>> @@ -407,11 +407,11 @@ efi_status_t efi_firmware_set_fmp_state_var(stru=
+ct fmp_state *state, u8 image_in
+>>>        /*
+>>>         * GetVariable may fail, EFI_NOT_FOUND is returned if FmpState
+>>>         * variable has not been set yet.
+>>> -      * Ignore the error here since the correct FmpState variable
+>>> -      * is set later.
+>>>         */
+>>> -     efi_get_variable_int(varname, image_type_id, NULL, &size, var_st=
+ate,
+>>> -                          NULL);
+>>> +     ret =3D efi_get_variable_int(varname, image_type_id, NULL, &size=
+,
+>>> +                                var_state, NULL);
+>>> +     if (ret !=3D EFI_SUCCESS)
+>>> +             memset(var_state, 0, num_banks * sizeof(*var_state));
+>>
+>> Hello Masahisa,
+>>
+>> We allocate var_state with calloc(). So it is cleared before we call
+>> GetVariable(). Do we have an implementation of GetVariable() that would
+>> fill it with data before returning an error code?
+>
+> No, current GetVariable() implementations do not fill the buffer
+> when GetVariable() returns an error.
+> This is why my original implementation does not clear the buffer in
+> case of error.
+>
+> Anyway, I agree with your previous comment.
+> I think it is better to clear the buffer in case of error for safety,
+> because UEFI spec does not say GetVariable() will not fill the
+> buffer in case of error.
 
-When running the board with the DM_SERIAL driver, the board ran out of
-memory in SPL when initialising the DM serial driver.
+In this case I guess malloc() is good enough. No need to use calloc().
 
-Thus this required an increase in the pre-allocated SRAM memory. I did
-increase it to 0x800, and it now works graciously.
+Best regards
 
-It could probably be set lower, but I do not see any reason not to use the
-available SRAM at this point.
+Heinrich
 
-Also adds stdout-path to the 'chosen' node in the device tree.
-
-Signed-off-by: Ole P. Orhagen <ole.orhagen@northern.tech>
-
----
-
- arch/arm/Kconfig                  | 2 +-
- arch/arm/dts/vexpress-v2p-ca9.dts | 4 +++-
- configs/vexpress_ca9x4_defconfig  | 3 ++-
- 3 files changed, 6 insertions(+), 3 deletions(-)
-
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index abd7c6c79a..8e9aaf70d2 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -678,7 +678,7 @@ config ARCH_BCMBCA
- config TARGET_VEXPRESS_CA9X4
- 	bool "Support vexpress_ca9x4"
- 	select CPU_V7A
--	select PL011_SERIAL
-+	select PL01X_SERIAL
- 
- config TARGET_BCMNS
- 	bool "Support Broadcom Northstar"
-diff --git a/arch/arm/dts/vexpress-v2p-ca9.dts b/arch/arm/dts/vexpress-v2p-ca9.dts
-index bf00c62bcf..e5b86c0d67 100644
---- a/arch/arm/dts/vexpress-v2p-ca9.dts
-+++ b/arch/arm/dts/vexpress-v2p-ca9.dts
-@@ -20,7 +20,9 @@
- 	#address-cells = <1>;
- 	#size-cells = <1>;
- 
--	chosen { };
-+	chosen {
-+		stdout-path = &v2m_serial0;
-+	};
- 
- 	aliases {
- 		serial0 = &v2m_serial0;
-diff --git a/configs/vexpress_ca9x4_defconfig b/configs/vexpress_ca9x4_defconfig
-index 2601e55ebf..f8e93bef4e 100644
---- a/configs/vexpress_ca9x4_defconfig
-+++ b/configs/vexpress_ca9x4_defconfig
-@@ -2,7 +2,7 @@ CONFIG_ARM=y
- CONFIG_SYS_L2CACHE_OFF=y
- CONFIG_TARGET_VEXPRESS_CA9X4=y
- CONFIG_TEXT_BASE=0x60800000
--CONFIG_SYS_MALLOC_F_LEN=0x400
-+CONFIG_SYS_MALLOC_F_LEN=0x800
- CONFIG_NR_DRAM_BANKS=2
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x60000f10
-@@ -41,6 +41,7 @@ CONFIG_ARM_PL180_MMCI=y
- CONFIG_SYS_MMC_MAX_BLK_COUNT=127
- CONFIG_MTD=y
- CONFIG_DM_MTD=y
-+CONFIG_DM_SERIAL=y
- CONFIG_MTD_NOR_FLASH=y
- CONFIG_SYS_FLASH_CFI_WIDTH_32BIT=y
- CONFIG_FLASH_SHOW_PROGRESS=0
--- 
-2.43.0
+>
+> Thanks,
+> Masahisa Kojima
+>
+>
+>>
+>> Best regards
+>>
+>> Heinrich
+>>
+>>>
+>>>        /*
+>>>         * Only the fw_version is set here.
+>>
 
