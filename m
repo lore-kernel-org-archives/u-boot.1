@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B75DC47422
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 22:15:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3F8AC47DDB
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 22:16:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1813287D49;
-	Fri, 26 Jan 2024 23:15:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 08CD087D6D;
+	Fri, 26 Jan 2024 23:15:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="GfACnOw1";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="fkv9Daca";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C20B87D48; Fri, 26 Jan 2024 23:15:43 +0100 (CET)
+ id 56A4F87D57; Fri, 26 Jan 2024 23:15:54 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0BB287D48
- for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 23:15:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 54E9B87D57
+ for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 23:15:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,20 +28,26 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1706307333; bh=mFO7hypQELWRUhvcskJczFCbCGyTwEtwAzDhHpl7HYY=;
- b=GfACnOw1yP0pGPQLxZx07ccABqMmWllUU+izcsl0nn7sHKej0l233jRNhstQIBBT0jLIu8Pdj
- KJYuSXHintayQijK1oVtBmKC6UH2coygTydiVhZcg/4xg8IssGo0uhnzYCvDH834Ea6k5h2OLx4
- De2zP9eNE/cnpeje4D+g8gx1MQvirsSFpbS/5QPl1vK5YZIAIZX/lobUYwNdNtgpGFzlA+S55qF
- bHGGlFWJPYDJfwKdaxZNS367Yg9b8gyuFUaV5WOkj3yUUrrdtI++nlPRd96FmP6ef5DkNDPmVj6
- WpcI0qprePHPBGNSmblph0eQugAcBPmqG4uIgV54QNzg==
+ t=1706307329; bh=0yEohCiqen+Fu9TAU8xkOzxk1/r64hHiArgc9WSZfps=;
+ b=fkv9DacayEFGJA1Q3VCnpgnOud0QAQvUEbxT1FwWRTFc7eVaaEFHuzBIme93XH3RLWF5bJz/d
+ ZTidPfh3xRBHLGz8XkRkWMTC+Y02cNB6AbExEkGLzfQ/UTAXUVYWQsry0WOSLC8/l/2Jc+zXAkp
+ rmyPJ1HeBcWk3avtiDGWrRiiadBf24aWUmMMsE0ifqCrOnDDqPPU2ZQl2kvDoveg1OOT+e9gPO+
+ mhirKOQ1O/5qEycxvm5RPfRCM6NDwvtmo/xDDUW2nHhcPjtvlX5zG7Yy2ar4DU0U1XTA1tYRt8j
+ XNV9v696FnrYYDfEU3l4KDf237fViCFBK0sipR6Hsxmw==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Joshua Riek <jjriek@verizon.net>, Jonas Karlman <jonas@kwiboo.se>
+ Chris Morgan <macromorgan@hotmail.com>, Nicolas Frattaroli
+ <frattaroli.nicolas@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, Jagan
+ Teki <jagan@amarulasolutions.com>, Frank Wunderlich
+ <frank-w@public-files.de>, Joseph Chen <chenjh@rock-chips.com>, Andy Yan
+ <andyshrk@163.com>, Tianling Shen <cnsztl@gmail.com>, Akash Gajjar
+ <gajjar04akash@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH 4/7] rockchip: rk3588: Sync device tree with linux v6.7
-Date: Fri, 26 Jan 2024 22:14:52 +0000
-Message-ID: <20240126221508.4093334-5-jonas@kwiboo.se>
+Subject: [PATCH 3/7] rockchip: rk356x: Move common uart2 props to
+ rk356x-u-boot.dtsi
+Date: Fri, 26 Jan 2024 22:14:51 +0000
+Message-ID: <20240126221508.4093334-4-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240126221508.4093334-1-jonas@kwiboo.se>
 References: <20240126221508.4093334-1-jonas@kwiboo.se>
@@ -53,7 +59,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 65b42f040365e20062645613
+X-ForwardEmail-ID: 65b42f000365e20062645605
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,206 +76,389 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sync rk3588 device tree from linux v6.7.
+Move uart2 bootph-pre-ram and clock-frequency props from board to SoC
+u-boot.dtsi. Regular board device tree already enables the uart2 node,
+so status prop is dropped from u-boot.dtsi file.
 
-Also drop the rockchip,rk3568-dwc3 compatible now that dwc3-generic
-driver support the rockchip,rk3588-dwc3 compatible.
+Also remove unnecessary stdout-path = &uart2, regular board device tree
+already provide a stdout-path = "serial2:" value.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/dts/rk3588-turing-rk1.dtsi           |  4 +--
- arch/arm/dts/rk3588-u-boot.dtsi               |  2 +-
- arch/arm/dts/rk3588s-orangepi-5.dts           |  2 +-
- arch/arm/dts/rk3588s-pinctrl.dtsi             |  2 +-
- arch/arm/dts/rk3588s-u-boot.dtsi              | 33 +++--------------
- arch/arm/dts/rk3588s.dtsi                     | 36 +++++++++++++++++++
- arch/arm/mach-rockchip/rk3588/syscon_rk3588.c |  2 +-
- 7 files changed, 47 insertions(+), 34 deletions(-)
+ arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi |  7 -------
+ arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi     | 12 ------------
+ arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi     | 12 ------------
+ arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi   | 12 ------------
+ arch/arm/dts/rk3566-soquartz-u-boot.dtsi       | 12 ------------
+ arch/arm/dts/rk3568-bpi-r2-pro-u-boot.dtsi     | 13 -------------
+ arch/arm/dts/rk3568-evb-u-boot.dtsi            | 17 -----------------
+ arch/arm/dts/rk3568-generic-u-boot.dtsi        | 11 -----------
+ arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi     | 12 ------------
+ arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi     | 12 ------------
+ arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi      | 12 ------------
+ arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi      | 12 ------------
+ arch/arm/dts/rk3568-rock-3a-u-boot.dtsi        | 12 ------------
+ arch/arm/dts/rk356x-u-boot.dtsi                |  5 +++++
+ 14 files changed, 5 insertions(+), 156 deletions(-)
 
-diff --git a/arch/arm/dts/rk3588-turing-rk1.dtsi b/arch/arm/dts/rk3588-turing-rk1.dtsi
-index 9570b34aca2e..d88c0e852356 100644
---- a/arch/arm/dts/rk3588-turing-rk1.dtsi
-+++ b/arch/arm/dts/rk3588-turing-rk1.dtsi
-@@ -235,13 +235,13 @@
- &pinctrl {
- 	fan {
- 		fan_int: fan-int {
--			rockchip,pins = <0 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
-+			rockchip,pins = <0 RK_PA4 RK_FUNC_GPIO &pcfg_pull_up>;
- 		};
- 	};
- 
- 	hym8563 {
- 		hym8563_int: hym8563-int {
--			rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
-+			rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_up>;
- 		};
- 	};
- 
-diff --git a/arch/arm/dts/rk3588-u-boot.dtsi b/arch/arm/dts/rk3588-u-boot.dtsi
-index 31046fc7febb..992f7b5d6637 100644
---- a/arch/arm/dts/rk3588-u-boot.dtsi
-+++ b/arch/arm/dts/rk3588-u-boot.dtsi
-@@ -7,7 +7,7 @@
+diff --git a/arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi b/arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi
+index f986e1941e7f..fa3df73c33db 100644
+--- a/arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi
++++ b/arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi
+@@ -4,7 +4,6 @@
  
  / {
- 	usb_host1_xhci: usb@fc400000 {
--		compatible = "rockchip,rk3588-dwc3", "rockchip,rk3568-dwc3", "snps,dwc3";
-+		compatible = "rockchip,rk3588-dwc3", "snps,dwc3";
- 		reg = <0x0 0xfc400000 0x0 0x400000>;
- 		interrupts = <GIC_SPI 221 IRQ_TYPE_LEVEL_HIGH 0>;
- 		clocks = <&cru REF_CLK_USB3OTG1>, <&cru SUSPEND_CLK_USB3OTG1>,
-diff --git a/arch/arm/dts/rk3588s-orangepi-5.dts b/arch/arm/dts/rk3588s-orangepi-5.dts
-index 8f399c4317bd..e3a839a12dc6 100644
---- a/arch/arm/dts/rk3588s-orangepi-5.dts
-+++ b/arch/arm/dts/rk3588s-orangepi-5.dts
-@@ -38,7 +38,7 @@
- 	leds {
- 		compatible = "gpio-leds";
- 		pinctrl-names = "default";
--		pinctrl-0 =<&leds_gpio>;
-+		pinctrl-0 = <&leds_gpio>;
- 
- 		led-1 {
- 			gpios = <&gpio1 RK_PA2 GPIO_ACTIVE_HIGH>;
-diff --git a/arch/arm/dts/rk3588s-pinctrl.dtsi b/arch/arm/dts/rk3588s-pinctrl.dtsi
-index 63151d9d2377..30db12c4fc82 100644
---- a/arch/arm/dts/rk3588s-pinctrl.dtsi
-+++ b/arch/arm/dts/rk3588s-pinctrl.dtsi
-@@ -369,7 +369,7 @@
- 		emmc_data_strobe: emmc-data-strobe {
- 			rockchip,pins =
- 				/* emmc_data_strobe */
--				<2 RK_PA2 1 &pcfg_pull_none>;
-+				<2 RK_PA2 1 &pcfg_pull_down>;
- 		};
+ 	chosen {
+-		stdout-path = &uart2;
+ 		u-boot,spl-boot-order = "same-as-spl", &sdmmc1, &sdmmc0;
  	};
  
-diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
-index c0fd16c4022b..ebee2131ceeb 100644
---- a/arch/arm/dts/rk3588s-u-boot.dtsi
-+++ b/arch/arm/dts/rk3588s-u-boot.dtsi
-@@ -22,7 +22,7 @@
- 	};
- 
- 	usb_host0_xhci: usb@fc000000 {
--		compatible = "rockchip,rk3588-dwc3", "rockchip,rk3568-dwc3", "snps,dwc3";
-+		compatible = "rockchip,rk3588-dwc3", "snps,dwc3";
- 		reg = <0x0 0xfc000000 0x0 0x400000>;
- 		interrupts = <GIC_SPI 220 IRQ_TYPE_LEVEL_HIGH 0>;
- 		clocks = <&cru REF_CLK_USB3OTG0>, <&cru SUSPEND_CLK_USB3OTG0>,
-@@ -43,33 +43,6 @@
- 		status = "disabled";
- 	};
- 
--	usb_host2_xhci: usb@fcd00000 {
--		compatible = "rockchip,rk3588-dwc3", "rockchip,rk3568-dwc3", "snps,dwc3";
--		reg = <0x0 0xfcd00000 0x0 0x400000>;
--		interrupts = <GIC_SPI 222 IRQ_TYPE_LEVEL_HIGH 0>;
--		clocks = <&cru REF_CLK_USB3OTG2>, <&cru SUSPEND_CLK_USB3OTG2>,
--			 <&cru ACLK_USB3OTG2>, <&cru CLK_UTMI_OTG2>,
--			 <&cru CLK_PIPEPHY2_PIPE_U3_G>;
--		clock-names = "ref_clk", "suspend_clk", "bus_clk", "utmi", "pipe";
--		dr_mode = "host";
--		phys = <&combphy2_psu PHY_TYPE_USB3>;
--		phy-names = "usb3-phy";
--		phy_type = "utmi_wide";
--		resets = <&cru SRST_A_USB3OTG2>;
--		snps,dis_enblslpm_quirk;
--		snps,dis-u2-freeclk-exists-quirk;
--		snps,dis-del-phy-power-chg-quirk;
--		snps,dis-tx-ipgap-linecheck-quirk;
--		snps,dis_rxdet_inp3_quirk;
--		status = "disabled";
--	};
--
--	pmu1_grf: syscon@fd58a000 {
--		bootph-all;
--		compatible = "rockchip,rk3588-pmu1-grf", "syscon";
--		reg = <0x0 0xfd58a000 0x0 0x2000>;
--	};
--
- 	usbdpphy0_grf: syscon@fd5c8000 {
- 		compatible = "rockchip,rk3588-usbdpphy-grf", "syscon";
- 		reg = <0x0 0xfd5c8000 0x0 0x4000>;
-@@ -206,6 +179,10 @@
+@@ -88,9 +87,3 @@
+ 	vqmmc-supply = <&vcc_1v8>;
  	status = "okay";
  };
+-
+-&uart2 {
+-	clock-frequency = <24000000>;
+-	bootph-all;
+-	status = "okay";
+-};
+diff --git a/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi b/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi
+index 06cc15ed21b8..11976fd3a6e0 100644
+--- a/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi
++++ b/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi
+@@ -2,12 +2,6 @@
  
-+&pmu1grf {
-+	bootph-all;
-+};
-+
- &scmi {
+ #include "rk356x-u-boot.dtsi"
+ 
+-/ {
+-	chosen {
+-		stdout-path = &uart2;
+-	};
+-};
+-
+ &gpio0 {
+ 	bootph-all;
+ };
+@@ -28,12 +22,6 @@
+ 	};
+ };
+ 
+-&uart2 {
+-	bootph-all;
+-	clock-frequency = <24000000>;
+-	status = "okay";
+-};
+-
+ /*
+  * U-Boot does not support multiple regulators using the same gpio,
+  * use vcc5v0_usb20_host to fix use of USB 2.0 port
+diff --git a/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi b/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi
+index 3c2c54e94183..8de9d1535efb 100644
+--- a/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi
++++ b/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi
+@@ -2,12 +2,6 @@
+ 
+ #include "rk356x-u-boot.dtsi"
+ 
+-/ {
+-	chosen {
+-		stdout-path = &uart2;
+-	};
+-};
+-
+ &sdhci {
+ 	cap-mmc-highspeed;
+ 	mmc-ddr-1_8v;
+@@ -24,12 +18,6 @@
+ 	};
+ };
+ 
+-&uart2 {
+-	bootph-all;
+-	clock-frequency = <24000000>;
+-	status = "okay";
+-};
+-
+ &usb_host0_xhci {
+ 	dr_mode = "host";
+ };
+diff --git a/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi b/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
+index c925439f71cd..158f652cb3b1 100644
+--- a/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
++++ b/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
+@@ -5,19 +5,7 @@
+ 
+ #include "rk356x-u-boot.dtsi"
+ 
+-/ {
+-	chosen {
+-		stdout-path = &uart2;
+-	};
+-};
+-
+ &sdhci {
+ 	cap-mmc-highspeed;
+ 	mmc-ddr-1_8v;
+ };
+-
+-&uart2 {
+-	clock-frequency = <24000000>;
+-	bootph-all;
+-	status = "okay";
+-};
+diff --git a/arch/arm/dts/rk3566-soquartz-u-boot.dtsi b/arch/arm/dts/rk3566-soquartz-u-boot.dtsi
+index 793cca2ceaca..f65f4067f3e9 100644
+--- a/arch/arm/dts/rk3566-soquartz-u-boot.dtsi
++++ b/arch/arm/dts/rk3566-soquartz-u-boot.dtsi
+@@ -2,12 +2,6 @@
+ 
+ #include "rk356x-u-boot.dtsi"
+ 
+-/ {
+-	chosen {
+-		stdout-path = &uart2;
+-	};
+-};
+-
+ &sdhci {
+ 	cap-mmc-highspeed;
+ 	mmc-ddr-1_8v;
+@@ -15,12 +9,6 @@
+ 	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
+ };
+ 
+-&uart2 {
+-	bootph-all;
+-	clock-frequency = <24000000>;
+-	status = "okay";
+-};
+-
+ &usb_host0_xhci {
+ 	dr_mode = "host";
+ };
+diff --git a/arch/arm/dts/rk3568-bpi-r2-pro-u-boot.dtsi b/arch/arm/dts/rk3568-bpi-r2-pro-u-boot.dtsi
+index 60a3b21f2d45..5f4f14b3bdae 100644
+--- a/arch/arm/dts/rk3568-bpi-r2-pro-u-boot.dtsi
++++ b/arch/arm/dts/rk3568-bpi-r2-pro-u-boot.dtsi
+@@ -4,16 +4,3 @@
+  */
+ 
+ #include "rk356x-u-boot.dtsi"
+-
+-/ {
+-	chosen {
+-		stdout-path = &uart2;
+-	};
+-};
+-
+-&uart2 {
+-	clock-frequency = <24000000>;
+-	bootph-pre-ram;
+-	status = "okay";
+-};
+-
+diff --git a/arch/arm/dts/rk3568-evb-u-boot.dtsi b/arch/arm/dts/rk3568-evb-u-boot.dtsi
+index 382a52a28b10..5f4f14b3bdae 100644
+--- a/arch/arm/dts/rk3568-evb-u-boot.dtsi
++++ b/arch/arm/dts/rk3568-evb-u-boot.dtsi
+@@ -4,20 +4,3 @@
+  */
+ 
+ #include "rk356x-u-boot.dtsi"
+-
+-/ {
+-	chosen {
+-		stdout-path = &uart2;
+-		u-boot,spl-boot-order = "same-as-spl", &sdmmc0, &sdhci;
+-	};
+-};
+-
+-&sdmmc0 {
+-	status = "okay";
+-};
+-
+-&uart2 {
+-	clock-frequency = <24000000>;
+-	bootph-pre-ram;
+-	status = "okay";
+-};
+diff --git a/arch/arm/dts/rk3568-generic-u-boot.dtsi b/arch/arm/dts/rk3568-generic-u-boot.dtsi
+index 90022580a13b..6e8307e3bdf6 100644
+--- a/arch/arm/dts/rk3568-generic-u-boot.dtsi
++++ b/arch/arm/dts/rk3568-generic-u-boot.dtsi
+@@ -1,14 +1,3 @@
+ // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+ 
+ #include "rk356x-u-boot.dtsi"
+-
+-/ {
+-	chosen {
+-		stdout-path = &uart2;
+-	};
+-};
+-
+-&uart2 {
+-	bootph-pre-ram;
+-	clock-frequency = <24000000>;
+-};
+diff --git a/arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi b/arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi
+index 27c627752333..a44ac35bdacd 100644
+--- a/arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi
++++ b/arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi
+@@ -6,12 +6,6 @@
+ 
+ #include "rk356x-u-boot.dtsi"
+ 
+-/ {
+-	chosen {
+-		stdout-path = &uart2;
+-	};
+-};
+-
+ &sdhci {
+ 	cap-mmc-highspeed;
+ 	mmc-ddr-1_8v;
+@@ -19,9 +13,3 @@
+ 	mmc-hs400-enhanced-strobe;
+ 	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
+ };
+-
+-&uart2 {
+-	bootph-all;
+-	clock-frequency = <24000000>;
+-	status = "okay";
+-};
+diff --git a/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi b/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi
+index 880f8ff91fcb..62f572c4cf9f 100644
+--- a/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi
++++ b/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi
+@@ -8,12 +8,6 @@
+ 
+ #include "rk356x-u-boot.dtsi"
+ 
+-/ {
+-	chosen {
+-		stdout-path = &uart2;
+-	};
+-};
+-
+ &pcie3x1 {
+ 	/delete-property/ vpcie3v3-supply;
+ };
+@@ -27,12 +21,6 @@
+ 	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
+ };
+ 
+-&uart2 {
+-	clock-frequency = <24000000>;
+-	bootph-all;
+-	status = "okay";
+-};
+-
+ &vcc5v0_usb_host {
+ 	/delete-property/ regulator-always-on;
+ 	/delete-property/ regulator-boot-on;
+diff --git a/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi b/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi
+index 0fc360b06df7..ecba91aa30f5 100644
+--- a/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi
++++ b/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi
+@@ -2,12 +2,6 @@
+ 
+ #include "rk356x-u-boot.dtsi"
+ 
+-/ {
+-	chosen {
+-		stdout-path = &uart2;
+-	};
+-};
+-
+ &fspi_dual_io_pins {
+ 	bootph-all;
+ };
+@@ -29,9 +23,3 @@
+ 		bootph-pre-ram;
+ 	};
+ };
+-
+-&uart2 {
+-	bootph-all;
+-	clock-frequency = <24000000>;
+-	status = "okay";
+-};
+diff --git a/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi b/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
+index 1136f0bb3b81..caf524443079 100644
+--- a/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
++++ b/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
+@@ -2,12 +2,6 @@
+ 
+ #include "rk356x-u-boot.dtsi"
+ 
+-/ {
+-	chosen {
+-		stdout-path = &uart2;
+-	};
+-};
+-
+ &pcie3x1 {
+ 	pinctrl-0 = <&pcie30x1_reset_h>;
+ };
+@@ -28,12 +22,6 @@
+ 	mmc-hs400-enhanced-strobe;
+ };
+ 
+-&uart2 {
+-	bootph-all;
+-	clock-frequency = <24000000>;
+-	status = "okay";
+-};
+-
+ &usb_host0_xhci {
+ 	dr_mode = "host";
+ };
+diff --git a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
+index b05b7151e6c7..46ebb77283f1 100644
+--- a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
++++ b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
+@@ -6,12 +6,6 @@
+ 
+ #include "rk356x-u-boot.dtsi"
+ 
+-/ {
+-	chosen {
+-		stdout-path = &uart2;
+-	};
+-};
+-
+ &pcie3x2 {
+ 	pinctrl-0 = <&pcie3x2_reset_h>;
+ };
+@@ -48,9 +42,3 @@
+ 		spi-tx-bus-width = <1>;
+ 	};
+ };
+-
+-&uart2 {
+-	clock-frequency = <24000000>;
+-	bootph-all;
+-	status = "okay";
+-};
+diff --git a/arch/arm/dts/rk356x-u-boot.dtsi b/arch/arm/dts/rk356x-u-boot.dtsi
+index 354b6958e572..cacd45348a49 100644
+--- a/arch/arm/dts/rk356x-u-boot.dtsi
++++ b/arch/arm/dts/rk356x-u-boot.dtsi
+@@ -141,6 +141,11 @@
  	bootph-pre-ram;
  };
-diff --git a/arch/arm/dts/rk3588s.dtsi b/arch/arm/dts/rk3588s.dtsi
-index 61a9a11c3bb0..8aa0499f9b03 100644
---- a/arch/arm/dts/rk3588s.dtsi
-+++ b/arch/arm/dts/rk3588s.dtsi
-@@ -443,6 +443,32 @@
- 		status = "disabled";
- 	};
  
-+	usb_host2_xhci: usb@fcd00000 {
-+		compatible = "rockchip,rk3588-dwc3", "snps,dwc3";
-+		reg = <0x0 0xfcd00000 0x0 0x400000>;
-+		interrupts = <GIC_SPI 222 IRQ_TYPE_LEVEL_HIGH 0>;
-+		clocks = <&cru REF_CLK_USB3OTG2>, <&cru SUSPEND_CLK_USB3OTG2>,
-+			 <&cru ACLK_USB3OTG2>, <&cru CLK_UTMI_OTG2>,
-+			 <&cru CLK_PIPEPHY2_PIPE_U3_G>;
-+		clock-names = "ref_clk", "suspend_clk", "bus_clk", "utmi", "pipe";
-+		dr_mode = "host";
-+		phys = <&combphy2_psu PHY_TYPE_USB3>;
-+		phy-names = "usb3-phy";
-+		phy_type = "utmi_wide";
-+		resets = <&cru SRST_A_USB3OTG2>;
-+		snps,dis_enblslpm_quirk;
-+		snps,dis-u2-freeclk-exists-quirk;
-+		snps,dis-del-phy-power-chg-quirk;
-+		snps,dis-tx-ipgap-linecheck-quirk;
-+		snps,dis_rxdet_inp3_quirk;
-+		status = "disabled";
-+	};
++&uart2 {
++	bootph-pre-ram;
++	clock-frequency = <24000000>;
++};
 +
-+	pmu1grf: syscon@fd58a000 {
-+		compatible = "rockchip,rk3588-pmugrf", "syscon", "simple-mfd";
-+		reg = <0x0 0xfd58a000 0x0 0x10000>;
-+	};
-+
- 	sys_grf: syscon@fd58c000 {
- 		compatible = "rockchip,rk3588-sys-grf", "syscon";
- 		reg = <0x0 0xfd58c000 0x0 0x1000>;
-@@ -1329,6 +1355,16 @@
- 		};
- 	};
- 
-+	dfi: dfi@fe060000 {
-+		reg = <0x00 0xfe060000 0x00 0x10000>;
-+		compatible = "rockchip,rk3588-dfi";
-+		interrupts = <GIC_SPI 28 IRQ_TYPE_LEVEL_HIGH 0>,
-+			     <GIC_SPI 38 IRQ_TYPE_LEVEL_HIGH 0>,
-+			     <GIC_SPI 48 IRQ_TYPE_LEVEL_HIGH 0>,
-+			     <GIC_SPI 58 IRQ_TYPE_LEVEL_HIGH 0>;
-+		rockchip,pmu = <&pmu1grf>;
-+	};
-+
- 	gmac1: ethernet@fe1c0000 {
- 		compatible = "rockchip,rk3588-gmac", "snps,dwmac-4.20a";
- 		reg = <0x0 0xfe1c0000 0x0 0x10000>;
-diff --git a/arch/arm/mach-rockchip/rk3588/syscon_rk3588.c b/arch/arm/mach-rockchip/rk3588/syscon_rk3588.c
-index e8772d3a3824..7b2cf37d9da1 100644
---- a/arch/arm/mach-rockchip/rk3588/syscon_rk3588.c
-+++ b/arch/arm/mach-rockchip/rk3588/syscon_rk3588.c
-@@ -10,7 +10,7 @@
- 
- static const struct udevice_id rk3588_syscon_ids[] = {
- 	{ .compatible = "rockchip,rk3588-sys-grf", .data = ROCKCHIP_SYSCON_GRF },
--	{ .compatible = "rockchip,rk3588-pmu1-grf", .data = ROCKCHIP_SYSCON_PMUGRF },
-+	{ .compatible = "rockchip,rk3588-pmugrf",  .data = ROCKCHIP_SYSCON_PMUGRF },
- 	{ .compatible = "rockchip,rk3588-vop-grf", .data = ROCKCHIP_SYSCON_VOP_GRF },
- 	{ .compatible = "rockchip,rk3588-vo-grf",  .data = ROCKCHIP_SYSCON_VO_GRF },
- 	{ .compatible = "rockchip,pcie30-phy-grf", .data = ROCKCHIP_SYSCON_PCIE30_PHY_GRF },
+ #ifdef CONFIG_ROCKCHIP_SPI_IMAGE
+ &binman {
+ 	simple-bin-spi {
 -- 
 2.43.0
 
