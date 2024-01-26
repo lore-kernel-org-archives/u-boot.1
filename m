@@ -4,73 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26009C47258
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 02:12:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71D76C47DDF
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 02:58:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 825AC86D82;
-	Fri, 26 Jan 2024 03:12:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 75390876EF;
+	Fri, 26 Jan 2024 03:58:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1706235176;
-	bh=Ptbl3flbo0eNj4Jv6mvKOn5hVHiG86xn0qRvc5mnCIo=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=QhWSSA6H00udUq/8KV9r1e0ziSeIloYusuknzIqZoLeTaYb9m5x3pqfbEYQIMvcwS
-	 sNAOvwF0MAjHrmm7fyMVSPNda2wxXST4n3dqbTCABGFAlcLtpIUIAAqoOSk7VW8a4J
-	 tfHIFQYV5ubIETr6uxsHG62mmH7stL/dn2J2UCugrh2GlwOn6skiT86Xy3XEcA0FvX
-	 zL7CJm96BSYEahw9v7dnf3HU7CBOrv0OFVC10hxJL1tU790xpBg59cbUlnPC94llUT
-	 dp8gp9XFgG4G7HwPXWR0VxbX/Tx3SjO+rNCGFKUaHfF7QlTHQhxzTl1efalDxTU4Or
-	 kmlh9469ltTJw==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="BccwOo+P";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 49D858746C; Fri, 26 Jan 2024 03:58:13 +0100 (CET)
+Received: from mail-m12798.qiye.163.com (mail-m12798.qiye.163.com
+ [115.236.127.98])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 0690F8657F;
- Fri, 26 Jan 2024 03:12:52 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1706235175;
- bh=Ptbl3flbo0eNj4Jv6mvKOn5hVHiG86xn0qRvc5mnCIo=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=KQNk9d9K0l63gK90/dBvQewWwd+h5C00v3oOuwnGDxox5abnFYPjw1F253JBBG6+b
- HS8CZT1rgf/7I2kQ+rUeXboCp72symyc5WdXJLSH08cEasbhMAXkt6W1zfC3uDjaL7
- b+47qq0E5mTCb2nuRpzz4UN9srpJNN4ve0g1HmeQazatvxvo8kLavKu7bLo2PJeQF4
- DuRim/WlldedRxUoZCazdOONrXdZJ+7ayfQ9RctVPWqKtm2txYmjX5ZKZDMm4AXq2B
- 2cyxpOZTRHGGMB+j0MTJ0Ggmt3NHd2gF9HmDzs8anwhZS7NgFGMl9/fQEhQGZtpSPJ
- +PRsKj1n9ogUw==
-Message-ID: <0d4ed462-a5ec-4114-84ab-d2e2a6d79b69@denx.de>
-Date: Fri, 26 Jan 2024 03:10:49 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id E6A3886308
+ for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 03:58:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=BccwOo+PpkpAY/EIW5ExxYpGayHvD3JWcSc6pRIi/XnLZ0xqx6r3Ic1c5uQYzCrmHSfhvrPIfMk2t/su4txd04qzxLf01Ymf9UGjnOmZOZdJucCudJTugibfnYA3shlSR51/F8HYZCg4nnp4Zj4rDSEv8YaJe2VsmBS/QtwPYrM=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=P8eynX95+9bp8HRQb2VFbbIcMXhehTQ/iW7oJdIX54E=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [192.168.60.65] (unknown [103.29.142.67])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 3D67F9001FE;
+ Fri, 26 Jan 2024 10:57:43 +0800 (CST)
+Message-ID: <609c74a8-80b0-48a2-ae0a-78264014accd@rock-chips.com>
+Date: Fri, 26 Jan 2024 10:57:43 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 00/11] An effort to bring DT bindings compliance within
- U-Boot
+Subject: Re: [PATCH 13/18] rockchip: rk3588: fix non-working SD controller if
+ booting from other media
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: Sumit Garg <sumit.garg@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de,
- u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de, sjg@chromium.org,
- robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, conor@kernel.org,
- neil.armstrong@linaro.org, ff@shokubai.tech, daniel.thompson@linaro.org,
- dgilmore@fedoraproject.org, pbrobinson@gmail.com,
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com,
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com,
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com,
- rfried.dev@gmail.com, mibodhi@gmail.com, bb@ti.com, mark.kettenis@xs4all.nl
-References: <20240110103547.719757-1-sumit.garg@linaro.org>
- <82d509de-3d47-4cc2-8217-c38dc78fad28@denx.de>
- <7b4ff8e8-2f21-4d07-9848-fb0d5652819e@linaro.org>
- <4d8aede8-5ea8-45a4-87fe-d555a025ef8e@denx.de>
- <CAFA6WYN1tFs1id7UxTwLEyp69zx2BPUP7bffVZn80FKPLx2yJw@mail.gmail.com>
- <48125705-e78e-438f-90ac-2816432cd747@denx.de>
- <CAFA6WYMuerS5YTsquGvc+OHr+0a3JXrM4AQ_ReV4tPhvxv9H0w@mail.gmail.com>
- <20240125150400.GM3652023@bill-the-cat>
- <79439bfb-5ae0-4492-a298-788fb46eafa3@denx.de>
- <20240125231933.GY3652023@bill-the-cat>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240125231933.GY3652023@bill-the-cat>
+To: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Klaus Goger <klaus.goger@theobroma-systems.com>,
+ Heiko Stuebner <heiko.stuebner@cherry.de>, =?UTF-8?B?5rSq5oWn5paM?=
+ <hhb@rock-chips.com>
+Cc: heiko@sntech.de, u-boot@lists.denx.de
+References: <20240123-jaguar-v1-0-1eec1c34953c@theobroma-systems.com>
+ <20240123-jaguar-v1-13-1eec1c34953c@theobroma-systems.com>
+ <10ebfefd-1619-4b08-b15d-ec8ca8e798f3@rock-chips.com>
+ <c33d0c58-cd95-490f-9514-8d61e1e70925@theobroma-systems.com>
+ <31e7cb6e-7ef1-4069-a38e-b61677a8d76e@rock-chips.com>
+ <2f6e9491-9ae1-498c-b269-c0a8fbe27552@theobroma-systems.com>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <2f6e9491-9ae1-498c-b269-c0a8fbe27552@theobroma-systems.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZSRlPVk0eTEwdSBkeHx9MT1UTARMWGhIXJBQOD1
+ lXWRgSC1lBWUpLSFVJQlVKT0lVTUxZV1kWGg8SFR0UWUFZT0tIVUpNT0lOSFVKS0tVSkJLS1kG
+X-HM-Tid: 0a8d43b3a9a503a9kunm3d67f9001fe
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Nz46DCo6GjMRFA85Sw89ED42
+ UTAaCRFVSlVKTEtNSUhMQ01PQ0pPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUpLTE5INwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,67 +83,206 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/26/24 00:19, Tom Rini wrote:
-> On Thu, Jan 25, 2024 at 05:38:23PM +0100, Marek Vasut wrote:
->> On 1/25/24 16:04, Tom Rini wrote:
->>> On Thu, Jan 25, 2024 at 12:54:22PM +0530, Sumit Garg wrote:
->>>
->>> [snip]
->>>> But at this point we have to move away from apprehensions about DT ABI
->>>> breakages and provide real examples of the DT ABI breakages in the
->>>> past. Are you aware of any DT ABI breaking change backported to Linux
->>>> stable releases? This is the sort of information we would like to make
->>>> DT bindings maintainers aware about.
->>>
->>> Well, how far back are we going? There was a serial related one, but it
->>> was probably closer than not to 10 years ago and lessons have been
->>> learned from it already.
->>>
->>> The real breakage comes in the form of (from the Linux kernel):
->>> commit 37685f6a63eeca2135d1f704e7638409a071b1f6
->>> Author: Peter Ujfalusi <peter.ujfalusi@ti.com>
->>> Date:   Tue Feb 19 08:46:33 2019 -0800
->>>
->>>       ARM: dts: am335x-evm: Fix PHY mode for ethernet
->>>
->>>       The PHY must add both tx and rx delay and not only on the tx clock.
->>>       The board uses AR8031_AL1A PHY where the rx delay is enabled by default,
->>>       the tx dealy is disabled.
->>>
->>>       The reason why rgmii-txid worked because the rx delay was not disabled by
->>>       the driver so essentially we ended up with rgmii-id PHY mode.
->>>
->>>       Signed-off-by: Peter Ujfalusi <peter.ujfalusi@ti.com>
->>>       Signed-off-by: Tony Lindgren <tony@atomide.com>
->>>
->>> And this is of the style "the DTS was wrong before so we can break it".
->>> This is the specific example (as the board is in my lab) that comes most
->>> clearly to mind but there have been similar examples in 2022/2023.
->>>
->>> The other just as painful examples I think may be where Marek is
->>> concerned and it's around nodes being renamed for correctness. We've had
->>> a number of cases where a - turned to _ (or vice versa?) and whoops,
->>> platform stops booting. Down the line, tooling would catch that, and
->>> it's a problem of not being able to use better tooling until we have the
->>> updates that might break the boards that need the better tooling.
->>>
->>> And really this gets to the crux of the problem, how much testing do we
->>> insist happens prior to a re-sync being merged? Do we want to go with
->>> the whole of the dts files are re-synced, or do we leave it per vendor?
+Hi Quentin,
+
+On 2024/1/25 19:02, Quentin Schulz wrote:
+> Hi Kever,
+>
+> On 1/25/24 11:29, Kever Yang wrote:
+>> Hi Quentin,
 >>
->> I'd much prefer to leave it per vendor, with the recommendation to use
->> synced DTs. Eventually things will stabilize and vendors will start
->> switching over.
-> 
-> To be clear, every SoC (or really, board) has to opt-in to OF_UPSTREAM
-> to start with. With that, I see switching to OF_UPSTREAM meaning that
-> there's a commitment to keeping up with dts change in upstream dts that
-> might lead to issues within U-Boot. Do you still feel it would be better
-> to have the re-sync _also_ be per custodian tree? That might be a bit
-> harder to handle.
+>> On 2024/1/24 18:50, Quentin Schulz wrote:
+>>> Hi Kever,
+>>>
+>>> On 1/24/24 11:19, Kever Yang wrote:
+>>>> Hi Quentin,
+>>>>
+>>>> On 2024/1/23 22:49, Quentin Schulz wrote:
+>>>>> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+>>>>>
+>>>>> Rockchip SoCs have some jtag/sdmmc autoswitching that simply doesn't
+>>>>> work really well.[00] The Linux kernel disables it for all 
+>>>>> SoCs[01], so
+>>>>> U-Boot needs to do the same in order to fix issues related to SD 
+>>>>> card on
+>>>>> RK3588. This autoswitching is enabled (by default) via the force_jtag
+>>>>> bitfield in SYS_GRF_SOC_CON6 in the TRM part1.
+>>>>>
+>>>>> For some reason, when booting from SD card, the BootROM does mux the
+>>>>> SDMMC controller in the proper configuration for the 
+>>>>> RK3588-Jaguar. But
+>>>>> when we don't boot from SD card, U-Boot needs to set it up 
+>>>>> correctly to
+>>>>> allow accessing SD cards in that configuration.
+>>>>
+>>>> Could you share what's the really issue you met in your board?
+>>>>
+>>>
+>>> I revert the patch and then I have the following when booting from 
+>>> eMMC:
+>>>
+>>> """
+>>> DDR V1.11 f1474cf52f cym 23/05/09-11:02:36
+>>> LPDDR4X, 2112MHz
+>>> channel[0] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB
+>>> channel[1] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB
+>>> channel[2] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB
+>>> channel[3] BW=16 Col=10 Bk=8 CS0 Row=16 CS=1 Die BW=16 Size=1024MB
+>>> Manufacturer ID:0x1
+>>> CH0 RX Vref:27.1%, TX Vref:21.8%,0.0%
+>>> CH1 RX Vref:30.1%, TX Vref:20.8%,0.0%
+>>> CH2 RX Vref:27.9%, TX Vref:21.8%,0.0%
+>>> CH3 RX Vref:31.4%, TX Vref:19.8%,0.0%
+>>> change to F1: 528MHz
+>>> change to F2: 1068MHz
+>>> change to F3: 1560MHz
+>>> change to F0: 2112MHz
+>>> out
+>>>
+>>> U-Boot SPL 2024.01-00344-gf1fab3b9557 (Jan 24 2024 - 11:33:43 +0100)
+>>> Trying to boot from MMC1
+>>> ## Checking hash(es) for config config-1 ... OK
+>>> ## Checking hash(es) for Image atf-1 ... sha256+ OK
+>>> ## Checking hash(es) for Image u-boot ... sha256+ OK
+>>> ## Checking hash(es) for Image fdt-1 ... sha256+ OK
+>>> ## Checking hash(es) for Image atf-2 ... sha256+ OK
+>>> ## Checking hash(es) for Image atf-3 ... sha256+ OK
+>>> INFO:    Preloader serial: 2
+>>> NOTICE:  BL31: v2.3():v2.3-589-g3389cfdda:derrick.huang
+>>> NOTICE:  BL31: Built : 10:14:29, May  9 2023
+>>> INFO:    spec: 0x1
+>>> INFO:    ext 32k is not valid
+>>> INFO:    ddr: stride-en 4CH
+>>> INFO:    GICv3 without legacy support detected.
+>>> INFO:    ARM GICv3 driver initialized in EL3
+>>> INFO:    valid_cpu_msk=0xff bcore0_rst = 0x0, bcore1_rst = 0x0
+>>> INFO:    system boots from cpu-hwid-0
+>>> INFO:    idle_st=0x21fff, pd_st=0x11fff9, repair_st=0xfff70001
+>>> INFO:    dfs DDR fsp_params[0].freq_mhz= 2112MHz
+>>> INFO:    dfs DDR fsp_params[1].freq_mhz= 528MHz
+>>> INFO:    dfs DDR fsp_params[2].freq_mhz= 1068MHz
+>>> INFO:    dfs DDR fsp_params[3].freq_mhz= 1560MHz
+>>> INFO:    BL31: Initialising Exception Handling Framework
+>>> INFO:    BL31: Initializing runtime services
+>>> WARNING: No OPTEE provided by BL2 boot loader, Booting device 
+>>> without OPTEE initialization. SMC`s destined for OPTEE will return 
+>>> SMC_UNK
+>>> ERROR:   Error initializing runtime service opteed_fast
+>>> INFO:    BL31: Preparing for EL3 exit to normal world
+>>> INFO:    Entry point address = 0xa00000
+>>> INFO:    SPSR = 0x3c9
+>>>
+>>>
+>>> U-Boot 2024.01-00344-gf1fab3b9557 (Jan 24 2024 - 11:33:43 +0100)
+>>>
+>>> Model: Theobroma Systems RK3588-SBC Jaguar
+>>> DRAM:  4 GiB (effective 3.7 GiB)
+>>> Core:  327 devices, 26 uclasses, devicetree: separate
+>>> MMC:   mmc@fe2c0000: 1, mmc@fe2e0000: 0
+>>> Loading Environment from MMC... *** Warning - bad CRC, using default 
+>>> environment
+>>>
+>>> In:    serial@feb50000
+>>> Out:   serial@feb50000
+>>> Err:   serial@feb50000
+>>> Model: Theobroma Systems RK3588-SBC Jaguar
+>>> Net:   eth0: ethernet@fe1b0000
+>>> Hit any key to stop autoboot:  0
+>>> => mmc dev 1
+>>> unable to select a mode
+>>> =>
+>>> """
+>>>
+>>>> The SD card will need to enable SD-DET for SD card function int he 
+>>>> hardware design,
+>>>>
+>>>
+>>> We do not have an SD-DET on that board, this is not possible (the 
+>>> connector doesn't support it).
+>>>
+>>> SDMMC_DET/GPIO0_A4_u signal is pulled low in HW if left floating 
+>>> (the state by default since we expose it on an external connector) 
+>>> but we plan to let customer use it as a GPIO.
+>>
+>>
+>> I didn't follow this issue closely in kernel side before, but I would 
+>> like to know why this happen.
+>> Is it possible to share the schematic of your board? I want to 
+>> understand why you didn't use SDMMC_DET for the card slot in hardware 
+>> design, which always need an IO for driver to detect the card.
+>
+> We don't have a dedicated CD pin for the SD card connector.
+>
+> https://www.digikey.com/en/products/detail/molex/0472192001/3044807 is 
+> the SD card connector we use.
 
-Maybe the best thing we can do is just give it a try and see how it 
-works out, esp. since it is opt-in per board .
+Thanks for your information, but I think you are using the wrong microSD 
+connector for rk3588 and maybe also for other rockchip SoCs.
+Here are four microSD card connector from the web you provide, all of 
+them have card detect signal available for pcb:
+https://www.digikey.com/en/product-highlight/m/molex-connector/sd-memory-card-connectors
+>
+> This is allowed by the SD spec, c.f. Table 3-1 : SD Memory Card Pad 
+> Assignment[1]
+>
+> """
+> 1 CD/DAT3(2) I/O/PP(3) Card Detect/Data Line [Bit 3]
+>
+> 2) The extended DAT lines (DAT1-DAT3) are input on power up. They 
+> start to operate as DAT lines after SET_BUS_WIDTH command. The Host 
+> shall keep its own DAT1-DAT3 lines in input mode, as well, while they 
+> are not used.
+> 3) At power up this line has a 50KOhm pull up enabled in the card. 
+> This resistor serves two functions Card detection and Mode Selection. 
+> For Mode Selection, the host can drive the line high or let it be 
+> pulled high to select SD mode. If the host wants to select SPI mode it 
+> should drive the line low. For Card detection, the host detects that 
+> the line is pulled high. This pull-up should be disconnected by the 
+> user, during regular data transfer, with SET_CLR_CARD_DETECT (ACMD42) 
+> command
+> """
 
-It would still be good to solve the part about pulling in fixes from 
-linux-stable though .
+Yes, you are right for the SD spec, there is another design for Card 
+detection, which need the controller
+supports SET_CLR_CARD_DETECT command, and like many other SoCs, rk3588 
+does not support it.
+Only RTS5208(a Realtek PCI-E Card Reader) supports this command when I 
+search this cmd in kernel code.
+
+Back to this patch, I think it would be better to turn off the 
+force_jtag in board level instead of soc level for now.
+
+
+Thanks,
+- Kever
+>
+> [1] 
+> https://academy.cba.mit.edu/classes/networking_communications/SD/SD.pdf
+>
+>> What I know is if the SD card using all the IO including SDMMC_DET 
+>> with its iomux set to sdmmc function, then the force_jtag should work 
+>> correctly.
+>> If you only use IO signal other than SDMMC_DET as sdmmc function, and 
+>> set SDMMC_DET iomux work as GPIO, then yes, you need to disable the 
+>> force_jtag.
+>> Since SDMMC_DET in rk3588 is an IO only have one function(not like 
+>> other GPIOs may have more than 2 functions for choice), this IO can 
+>> always be used as SDMMC_DET without conflict when the board has 
+>> SDcard support.
+>>
+>
+> We don't use SDMMC_DET for card detection, but in GPIO mode **and** we 
+> cannot use SDMMC_DET for card detection because the connector doesn't 
+> expose a card detect pin.
+>
+> We just use broken-cd; property (c.f. 
+> https://elixir.bootlin.com/linux/v6.8-rc1/source/arch/arm64/boot/dts/rockchip/rk3588-jaguar.dts#L402) 
+> to do polling for card detect in the kernel, but we wouldn't mind too 
+> much if there's no detection for the SD card anyway as it is 
+> cumbersome to replace the SD card (which is the purpose of this 
+> connector, it needs be extra secure since the board is supposed to be 
+> used in moving robots) so not much of a use-case to detect an 
+> insertion/removal at runtime.
+>
+> Cheers,
+> Quentin
