@@ -4,74 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0923DC47422
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 23:35:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A447BC47422
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 23:39:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 541B587DBB;
-	Sat, 27 Jan 2024 00:35:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id F093587DD3;
+	Sat, 27 Jan 2024 00:39:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hVOKsaO1";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="KzM7a0HE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5306787DC3; Sat, 27 Jan 2024 00:35:50 +0100 (CET)
-Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
- [IPv6:2607:f8b0:4864:20::92c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6E77287DD4; Sat, 27 Jan 2024 00:39:32 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCA3C87DA8
- for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 00:35:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F09387DD1
+ for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 00:39:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-ua1-x92c.google.com with SMTP id
- a1e0cc1a2514c-7d2dfa80009so520523241.0
- for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 15:35:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706312146; x=1706916946; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9uTmJ799kbCd/oKOhxppd0+MO8nhCT1oaif8V3jG5bE=;
- b=hVOKsaO14CjYgcR039euOpclLVBv6+c+FemnJLMDf9UXS8bZXe0788zlv+syRCb8nz
- mhL2dQt8dsUmHjBO8KftFxuUgprubuNG5hek99Xq97SZ+jOlO0/ygECsqYwTl4lo5siE
- KGsAXKj45e+/X/2hctU51QRFr0b4T3RhiKjcwiIBvUyFsc8oJy419z0CMdfIa68eUpvL
- t1ZqH2mht7PtDc8ebvvijopf/9GRBapUhqwA7dehE3bEf9zWLcyDjw2ssQjF+IBzAAu+
- iDwJe6Kv2tUvYeo9ZtMPy09x69NiR0Jfq4PJxsB5QbVGEst3nb4Tl0AV4vIKUH2QV09u
- C8Cw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706312146; x=1706916946;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9uTmJ799kbCd/oKOhxppd0+MO8nhCT1oaif8V3jG5bE=;
- b=UXCnweiXSvY1RvJjtwwXZgvx0W9cld+J90DnJNnQG8FWOs6qWdfkJWB3WeJ6+sebxp
- fIbFvhNTsM2XH3mw30XzN0amc/O2NIyxIKq7H5HhkZcohXlOcj8JOFXvMzNKMcrQ9dJu
- owHbYYVgKYUEa4/rPUGb208yyIERQYTPqb1fn/lOF2p1GGSryR0PhKjK7Oj/H1hlZuFB
- l3aVAIju/wP4oRMEMEtZHcCkBktBQvx6b+4iLmWQWfIBJPjDfzGopifGJZKoHJOX/Die
- 8HEq+80rKLEXES1baiKedDcu9909cWfTrqB9vXeyC9y0dA1FAElIKXdGIolyeoAgQtSS
- UKnA==
-X-Gm-Message-State: AOJu0YwKxaQKIaSDkRpWF4Mdcyax31MLXX2YnkZ8uKGGtApcW6O00ZPT
- OlAHOfnuVFmOpSg73sdPaiFKWz/sWpef2DuVX4lziTyCa3Ubxr1txLP3LgeugABienqKWNL9+zo
- QjGItUPnZIFcaMn29AOURdnBJJv6xmHj4k9M=
-X-Google-Smtp-Source: AGHT+IGecmqKM2jBSiPwnPWYALCcFMBKvL0W5wMxoH4B6m9bFDfwo1AfqUyfT6bqo074dYMkDfiJE1ysXsATy31LPSM=
-X-Received: by 2002:a05:6122:4592:b0:4b6:bee9:3cbd with SMTP id
- de18-20020a056122459200b004b6bee93cbdmr592342vkb.5.1706312146455; Fri, 26 Jan
- 2024 15:35:46 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=0bb9=JF=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1706312353;
+ bh=g2RXuS+6h59G7XEt4vVsmykRmrQxfu6qSxevVWppp7Q=;
+ b=KzM7a0HE9JtNHVnZzjmeohgDVH9RmOdAg0W+56psx0xJzQlxSXukljnBLLLJBETejNRGOJd43
+ QJ0jKqqwwBubzIDy6OBShAOiFMWTtCR6NryhIn9l6I+YdhnNTnPYT3t/CgFkk/VP5Ln6JtY9euR
+ OPI99h8lUXqW/4teyyuPkB300Q4LH0MnRinZoKx0R7X37V4U8xS1wJVl8arUCI9qSMMvs/W8Ue5
+ 84UbqiU95muAQC70IBqPE1sbvwWdb3vVrumhkAU8K+DaHiUJyTf+3m4oeWavWFgatJcjgWZOeJn
+ kcZxbL+AB6r5dZJayk19gBR4cJsTdCCyHaVqzt4ea4VQ==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
+Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH] rockchip: rk3588-quartzpro64: Enable AHCI, PCI and USB
+Date: Fri, 26 Jan 2024 23:39:05 +0000
+Message-ID: <20240126233907.19287-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <CANV2PTO9aVPxkvWp_PY+NwB+bzzNtJ211NxQLHxi_uz_1Gce4w@mail.gmail.com>
- <20240126131951.24af4e07@namcao>
-In-Reply-To: <20240126131951.24af4e07@namcao>
-From: E Shattow <lucent@gmail.com>
-Date: Fri, 26 Jan 2024 15:35:34 -0800
-Message-ID: <CANV2PTMV80wNesNHSYdDwO2a1T1GPrA0orivnMWZXkV2WYzuZQ@mail.gmail.com>
-Subject: Re: riscv defconfig starfive visionfive2 env is nowhere, missing
- axp15060 regulator, misc vendor hacks for Milk-V Mars CM Lite
-To: Nam Cao <namcao@linutronix.de>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 65b442a059c89db01a28612b
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,48 +68,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Aside: Mailing list archive mangles devicetree node names in the patch as
-if it were an email address to obscure.
+Enable Kconfig options to support AHCI, PCI and USB features. This help
+keep rk3588-quartzpro64 in sync with other RK3588 boards.
 
-related linux dts axp15060 node naming updates:
-https://github.com/MichaIng/linux/commit/1419a6eeb6a8b834ce9631fc558a57fb63=
-4f6949
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+Please note that this has not been runtime tested, this enables features
+that are defines in the device tree and work on other RK3588 boards.
 
-GMAC and eMMC functions depend on power regulation.
+This patch may depend on the series "rockchip: rk35xx: Sync device tree
+with linux v6.8-rc1" [1].
 
-The sus commit for ENV_IS_NOWHERE=3Dy in the starfive_visionfive2 defconfig=
-:
-https://github.com/u-boot/u-boot/commit/7d79bed00c9e02187a09e74e90c5bd5a927=
-a6a61
+[1] https://patchwork.ozlabs.org/cover/1891669/
+---
+ configs/quartzpro64-rk3588_defconfig | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-Why should ENV_IS_NOWHERE=3Dy and CONFIG_ENV_IS_IN_SPI_FLASH=3Dy both survi=
-ve a
-make oldconfig, I would think they will be mutually exclusive. Local
-testing make starfive_visionfive2, disable ENV_IS_NOWHERE, compile and
-flash to the board and saveenv works as expected.
+diff --git a/configs/quartzpro64-rk3588_defconfig b/configs/quartzpro64-rk3588_defconfig
+index fd8304debdbb..bbbd2770f364 100644
+--- a/configs/quartzpro64-rk3588_defconfig
++++ b/configs/quartzpro64-rk3588_defconfig
+@@ -1,5 +1,6 @@
+ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_SYS_HAS_NONCACHED_MEMORY=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+ CONFIG_TEXT_BASE=0x00a00000
+@@ -18,7 +19,9 @@ CONFIG_SPL_STACK=0x400000
+ CONFIG_DEBUG_UART_BASE=0xFEB50000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_PCI=y
+ CONFIG_DEBUG_UART=y
++CONFIG_AHCI=y
+ CONFIG_FIT=y
+ CONFIG_FIT_VERBOSE=y
+ CONFIG_SPL_FIT_SIGNATURE=y
+@@ -39,15 +42,21 @@ CONFIG_SPL_STACK_R=y
+ CONFIG_SPL_ATF=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_USB=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_CMD_REGULATOR=y
+ # CONFIG_SPL_DOS_PARTITION is not set
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_LIVE=y
+ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_SPL_REGMAP=y
+ CONFIG_SPL_SYSCON=y
++CONFIG_AHCI_PCI=y
++CONFIG_DWC_AHCI=y
+ CONFIG_SPL_CLK=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
+@@ -63,11 +72,27 @@ CONFIG_MMC_SDHCI_ROCKCHIP=y
+ CONFIG_PHY_REALTEK=y
+ CONFIG_DWC_ETH_QOS=y
+ CONFIG_DWC_ETH_QOS_ROCKCHIP=y
++CONFIG_RTL8169=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_PHY_ROCKCHIP_USBDP=y
++CONFIG_SPL_PINCTRL=y
+ CONFIG_REGULATOR_PWM=y
+ CONFIG_PWM_ROCKCHIP=y
+ CONFIG_SPL_RAM=y
++CONFIG_SCSI=y
+ CONFIG_BAUDRATE=1500000
+ CONFIG_DEBUG_UART_SHIFT=2
+ CONFIG_SYS_NS16550_MEM32=y
+ CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
+ CONFIG_ERRNO_STR=y
+-- 
+2.43.0
 
-On Fri, Jan 26, 2024 at 4:19=E2=80=AFAM Nam Cao <namcao@linutronix.de> wrot=
-e:
-
-> On Fri, 26 Jan 2024 02:53:45 -0800 E Shattow <lucent@gmail.com> wrote:
-> > There is missing the AXP15060 power regulation in u-boot needed for
-> SDCard
-> > and networking. As it is happens to work for some variants and not
-> others,
-> > and not always. The AXP15060 driver exists in mainline Linux as a varia=
-nt
-> > of AXP20x and there are corresponding devicetree entries of the StarFiv=
-e
-> > JH7110-based VisionFive2 variants queued up (ref: *1 Patchwork series
-> > 806238).
->
-> I sent a patch to add AXP15060 power regulation device tree node:
-> https://lists.denx.de/pipermail/u-boot/2024-January/543614.html
->
-> However, I sent it because it is needed by OpenSBI to reboot/shutdown. I
-> was not aware that U-Boot also needs this.
->
-> Best regards,
-> Nam
->
->
