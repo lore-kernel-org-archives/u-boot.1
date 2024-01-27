@@ -4,54 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A447BC47422
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jan 2024 23:39:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2C08C47DA9
+	for <u-boot@archiver.kernel.org>; Sat, 27 Jan 2024 01:58:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F093587DD3;
-	Sat, 27 Jan 2024 00:39:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id A68A587E50;
+	Sat, 27 Jan 2024 02:58:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="KzM7a0HE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Az6y7gWe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E77287DD4; Sat, 27 Jan 2024 00:39:32 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1D24E87E52; Sat, 27 Jan 2024 02:58:47 +0100 (CET)
+Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
+ [IPv6:2607:f8b0:4864:20::52a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F09387DD1
- for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 00:39:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F363B87E4B
+ for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 02:58:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=0bb9=JF=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1706312353;
- bh=g2RXuS+6h59G7XEt4vVsmykRmrQxfu6qSxevVWppp7Q=;
- b=KzM7a0HE9JtNHVnZzjmeohgDVH9RmOdAg0W+56psx0xJzQlxSXukljnBLLLJBETejNRGOJd43
- QJ0jKqqwwBubzIDy6OBShAOiFMWTtCR6NryhIn9l6I+YdhnNTnPYT3t/CgFkk/VP5Ln6JtY9euR
- OPI99h8lUXqW/4teyyuPkB300Q4LH0MnRinZoKx0R7X37V4U8xS1wJVl8arUCI9qSMMvs/W8Ue5
- 84UbqiU95muAQC70IBqPE1sbvwWdb3vVrumhkAU8K+DaHiUJyTf+3m4oeWavWFgatJcjgWZOeJn
- kcZxbL+AB6r5dZJayk19gBR4cJsTdCCyHaVqzt4ea4VQ==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
-Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH] rockchip: rk3588-quartzpro64: Enable AHCI, PCI and USB
-Date: Fri, 26 Jan 2024 23:39:05 +0000
-Message-ID: <20240126233907.19287-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pg1-x52a.google.com with SMTP id
+ 41be03b00d2f7-5ce2aada130so642237a12.1
+ for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 17:58:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706320723; x=1706925523; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=y6D1hBR4wr/PpJjK7uRSDLvHjpWa4RDYMlC0zPYoT6s=;
+ b=Az6y7gWezaMZ0QlZsYi7PK3o/ex4O4KjKXuJoPwoAA8jt4v1fBWfYjmuA/7Xznz0m5
+ SgAGngVJBAO5owrzrb/m2amqdg426bXI1d/SX0/Sq+qji0dy/F3G8v9e8Pil64+x0s+w
+ YakTa7bDsuI6YvE/oNuS1UbzO5i/84GnraKGUO6GGgdbWaEgHTXxr9iBmt3LdtAHgJOO
+ d3umyF7gYJp54mNIHz8f/6FkXAcWCuCMJU0HUbTsqii7GM0L2fzGAtybs+kZkeotNmfS
+ T+sTZ0i6gYUAuScJ21jpYr1rassBDFPZOHuGfbB5ahKl9nBN9Vb8DI5qZPqrwHrBaGVo
+ hDBw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706320723; x=1706925523;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=y6D1hBR4wr/PpJjK7uRSDLvHjpWa4RDYMlC0zPYoT6s=;
+ b=u7/Fn8+6udnNhrdICPSxeb0c3aGbWOeE9v+JA4PaDLBnmk096BsaFxfQJsx5RQCbCU
+ vt65oPhKmNRC+Nsjrr8rdCHy3lx9AyRyz8eAn/SlNkxN/GrzVmEBsT7FLOy5LmgK15ww
+ 7UayPV/UvqYXImxcdotGgll0xts0ivd10fZVEdd9Uc231MyQFzfwNAeEv57xR5psVnmY
+ mjKg5DRZYD10CcbeFKo4zwjCNGmS9BEC/lddc/9z9wVhaU4HSjAtE+wsuqxicr2UgZpA
+ mL1nobSREdgBeY9DgZx9pURhxgFjTprBY6NeWhTFP3bhbZUqdLb7/N+C3K0eLTiBUnBT
+ 0VCA==
+X-Gm-Message-State: AOJu0YyKI2mhXnPi08nJY6HUOXWhRA/lLTyCR98dmEq/KLDzsTb6GOq4
+ g0e6uWKHXc40i/WFjNQm/R+EMev/MKEtZwuLSwzUYFubcJvem2rVRixa+BB+cfBpjYb9i2/rOIt
+ rftE0T/ayOOW+WHqny86w2FX3jFw=
+X-Google-Smtp-Source: AGHT+IG7PPmYo7pgEFGVUSScn5rBx4lfamF5t/rPLN4EQN5TuUS+bToyotWtkw6FQYUs8AAd19FR3zpLOcDh+QdwrUA=
+X-Received: by 2002:aa7:8a4f:0:b0:6dd:81dd:862d with SMTP id
+ n15-20020aa78a4f000000b006dd81dd862dmr591811pfa.42.1706320722931; Fri, 26 Jan
+ 2024 17:58:42 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 65b442a059c89db01a28612b
+References: <20240124021516.280026-1-Mr.Bossman075@gmail.com>
+ <CAHCN7xKcoQixHvZbXos7kiBrZnMD12-q1UfDze+1Y220g_Oq8w@mail.gmail.com>
+ <CAOMZO5DZF72Uumk9bQJ-R=4kNOLz-EtJUgrLz_87Y1yOi8cCTg@mail.gmail.com>
+In-Reply-To: <CAOMZO5DZF72Uumk9bQJ-R=4kNOLz-EtJUgrLz_87Y1yOi8cCTg@mail.gmail.com>
+From: Adam Ford <aford173@gmail.com>
+Date: Fri, 26 Jan 2024 19:58:31 -0600
+Message-ID: <CAHCN7xKOTE4CC5Zt28tWD6WO_dTEtDtaj+sV4YLHhVBgKwGkJg@mail.gmail.com>
+Subject: Re: [PATCH v1] tools: mkimage: Add support for i.MXRT FlexSPI Header
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Jesse Taube <mr.bossman075@gmail.com>, u-boot@lists.denx.de, 
+ Tom Rini <trini@konsulko.com>,
+ Giulio Benetti <giulio.benetti@benettiengineering.com>, 
+ Mamta Shukla <mamta.shukla@leica-geosystems.com>, 
+ Thomas Haemmerle <thomas.haemmerle@leica-geosystems.com>,
+ Fabio Estevam <festevam@denx.de>, 
+ Simon Glass <sjg@chromium.org>, Jassi Brar <jaswinder.singh@linaro.org>, 
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>, Alexander Dahl <ada@thorsis.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Masami Hiramatsu <masami.hiramatsu@linaro.org>, 
+ Mikhail Ilin <ilin.mikhail.ol@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,93 +99,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable Kconfig options to support AHCI, PCI and USB features. This help
-keep rk3588-quartzpro64 in sync with other RK3588 boards.
+On Fri, Jan 26, 2024 at 1:11=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+wrote:
+>
+> Hi Adam,
+>
+> On Thu, Jan 25, 2024 at 7:37=E2=80=AFPM Adam Ford <aford173@gmail.com> wr=
+ote:
+>
+> > I had to go back in time, because it appears the current version of
+> > 'master' doesn't fully boot the FSPI, but when I applied this patch
+> > against a working version, it still worked when I was done.  I'll try
+> > to git bisect the issue when I have time, but for now:
+> >
+> > Tested-by:  Adam Ford <aford173@gmail.com> #imx8mn-beacon
+>
+> Thanks for testing, appreciate it. I will queue this one.
+>
+No problem.  Sorry it took so long.
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
-Please note that this has not been runtime tested, this enables features
-that are defines in the device tree and work on other RK3588 boards.
+> Hopefully, we can figure out the cause of the regression.
 
-This patch may depend on the series "rockchip: rk35xx: Sync device tree
-with linux v6.8-rc1" [1].
+I must have done something wrong when I tested this before, because
+it's working fine for me now even when applied against the main trunk,
+so I think all is good.
 
-[1] https://patchwork.ozlabs.org/cover/1891669/
----
- configs/quartzpro64-rk3588_defconfig | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
-
-diff --git a/configs/quartzpro64-rk3588_defconfig b/configs/quartzpro64-rk3588_defconfig
-index fd8304debdbb..bbbd2770f364 100644
---- a/configs/quartzpro64-rk3588_defconfig
-+++ b/configs/quartzpro64-rk3588_defconfig
-@@ -1,5 +1,6 @@
- CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_SYS_HAS_NONCACHED_MEMORY=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_TEXT_BASE=0x00a00000
-@@ -18,7 +19,9 @@ CONFIG_SPL_STACK=0x400000
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_PCI=y
- CONFIG_DEBUG_UART=y
-+CONFIG_AHCI=y
- CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_SPL_FIT_SIGNATURE=y
-@@ -39,15 +42,21 @@ CONFIG_SPL_STACK_R=y
- CONFIG_SPL_ATF=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_REGULATOR=y
- # CONFIG_SPL_DOS_PARTITION is not set
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_LIVE=y
- CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_SPL_REGMAP=y
- CONFIG_SPL_SYSCON=y
-+CONFIG_AHCI_PCI=y
-+CONFIG_DWC_AHCI=y
- CONFIG_SPL_CLK=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-@@ -63,11 +72,27 @@ CONFIG_MMC_SDHCI_ROCKCHIP=y
- CONFIG_PHY_REALTEK=y
- CONFIG_DWC_ETH_QOS=y
- CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-+CONFIG_RTL8169=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_DW_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_PHY_ROCKCHIP_USBDP=y
-+CONFIG_SPL_PINCTRL=y
- CONFIG_REGULATOR_PWM=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_SPL_RAM=y
-+CONFIG_SCSI=y
- CONFIG_BAUDRATE=1500000
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
- CONFIG_ERRNO_STR=y
--- 
-2.43.0
-
+adam
