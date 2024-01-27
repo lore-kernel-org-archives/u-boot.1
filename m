@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD5FAC46CD2
-	for <u-boot@archiver.kernel.org>; Sat, 27 Jan 2024 12:52:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B27BC47DA9
+	for <u-boot@archiver.kernel.org>; Sat, 27 Jan 2024 12:52:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D42A787D9E;
-	Sat, 27 Jan 2024 13:52:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9182F87D93;
+	Sat, 27 Jan 2024 13:52:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="O8FkvuQj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Dmqy+pUu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EB0B87DAE; Sat, 27 Jan 2024 13:52:15 +0100 (CET)
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
+ id 61DAD87DB3; Sat, 27 Jan 2024 13:52:47 +0100 (CET)
+Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
+ [IPv6:2607:f8b0:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DB8087D93
- for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 13:52:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4251C8773F
+ for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 13:52:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-5a0dc313058so334696a12.0
- for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 04:52:13 -0800 (PST)
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-5cfcf509fbdso286718a12.1
+ for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 04:52:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706359931; x=1706964731; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1706359963; x=1706964763; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NSaeeK4676k/Td/ON4C5NjrO/rdAccyHGbIJmdGX/4o=;
- b=O8FkvuQjOwnILTpktGV8hjm1sUcPkPu6twhDRIFB+pZqfrKRwvO/jy1NbqOQ13z1H1
- ICshgG1RMs7UpccjmWdSfViyMOj9DTavYiGEjBQZXlOpu4wdY6+xWCsJ8Ho0oID2bpXw
- A3NYjnbKBuYhXl7spEJ52u6y2Ph88J96AagWTPkajfV5jDTXu01jtYWt4NBgV8vQ+A7K
- wO/LP7WjqqJr5fWONOlKJSxpy4ZmKr/EPoSUQcINnzBCickjbONFiSKuJxoJhYXUZEAp
- 8SNFMdXRPggeQVLAF6C5qrsxKXPDRvJwsj1DFJAk8N3K0F+9ooR+z6Vzxodn9OxsxhvM
- UwfA==
+ bh=07aYIa7h+2LhXngEvwflOk9iFgxvhkiIgUouVu2im5k=;
+ b=Dmqy+pUu8NeXTBB+AyBXy/RNe3vWxQAQDV7iPfao0rROtJGNLav74am7JGz5t3zn9K
+ 6Yl+/kAPxuX47RIrRNYW63TY5CVu5B2kCgRuEbZVbdHgi/dzDFP8ZD0Ud6kEMhUDreA+
+ FNjW6PKPp7lK3cwb1rfPs8Vx06Q8nGreNAwdr4oYO4hGPXeKLmIBBSPgOdDTFeS0DedG
+ PAU8Os/z/HVsca8Kq5iQ94gSIqi9k86VcEdwiG7g8d0bFJIV6ZZR36UoJ6N9j5LuLJe1
+ 78n+5hBsOoJhbP4euNtKcgh20buykGVtDuMW9Ty4y32Qchby0qmsuML4mdyy+pTUKwvD
+ rLmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706359931; x=1706964731;
+ d=1e100.net; s=20230601; t=1706359963; x=1706964763;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NSaeeK4676k/Td/ON4C5NjrO/rdAccyHGbIJmdGX/4o=;
- b=QTOjWmKZLgXQIaa8EKxFdoGJzmwEXRI0EgEVz/CV1GAQx+WJgmE1TCFdh2Fw9c5P4q
- SQQ1CAPEJhnQwdruJtTVua0nAzHj0/EaHt4wYgpcQFILKfQlwso1UR2zkBphycxeqmqP
- YBV/qGq5NCcvaCxqzljViqYWiBNI2JxjbNILgsrgXD2PpzBfky7b8abja4lbM6TJaqq/
- r7bzVDGI5TnnOTqbMEMeJ4HLjxciLrzl2smb3+Ea6QltthmzHrpZJI+nQAw0Jg/eCdBf
- lLTEiRQ5FpnvHS2bZtCfOnYEVi7tANSLgM3EFCJDBpzy5ydg0742aAbbD0ODcIESQ1ZP
- Xs4A==
-X-Gm-Message-State: AOJu0YyM670h8RB8km1lwS20b7zwlqPLArSeCgokC1p9n9yJy1YwWTEz
- Z5nNd+8agJ2lo54sVoISDTPe+Yy5EJrx9wcer8YLUYUj4WKjyzIXCAitpyF2tIabj59Uxsux7xC
- oHDnsV4Rf+5rwrBl9bzF2vRgnKEU=
-X-Google-Smtp-Source: AGHT+IGJYf6Umy4iJ067CL87ygfvchUj+erEyg6Ngg3Crr/d4lgrXxdqJU/y7swWGCjARsdg0qZMQi7ge2dqgEwKRmw=
-X-Received: by 2002:a05:6a20:144f:b0:19c:a0ea:5515 with SMTP id
- a15-20020a056a20144f00b0019ca0ea5515mr441828pzi.2.1706359931483; Sat, 27 Jan
- 2024 04:52:11 -0800 (PST)
+ bh=07aYIa7h+2LhXngEvwflOk9iFgxvhkiIgUouVu2im5k=;
+ b=Gc8GWUeXX1ZKY67nEtNLLvNjDHfNnJHBtHjsRbbZg8JxNtACriW8YpBkrmckdK3CXH
+ a0qfuqmhHF2HMaOFacxnPW00tsUKZBCroRkwq9bIQPR/lW3ZUeG4ArANyi5ZRHXJan5J
+ BhoHCpo0WlgBVbnsj1pDoUEGCUHPGye+Xr0dnqrdSmTv1TvP+RB8wt4L17D/tGd0AT+G
+ ggOAhxE4CtOtOjzm+bQoCU2fQA649o+mWiclj9uTuqjL4iczN/nC5SGVlf/mjp6kKZTH
+ vBXapBvCmVUb+jH5jO8Qtlygu14jCwwtL7QfjdltGOaS3tI1Gp0IBKW4oolnte3H6ExD
+ K93Q==
+X-Gm-Message-State: AOJu0Yy5flTLtofzaAB2hxL6BH57RnQSvZX0ixzcK2q5VDyHWAHjY5sL
+ +XuiWRY9yUvcNK28yqYnykJS/0gk5ouKyew5gFhtqzjJPRmVP2taExvvOsXd5k7JkTJF4pwyyHr
+ bZQJX7u5Fp34bhq4loUAoPi+MXyArcLVW
+X-Google-Smtp-Source: AGHT+IGyHqfTRHloVNVZKBECuDaanNiCrydIPQAjYWHrToDNIWaRVfavNSH9ryXqOVP+OmDFn5sQQgRGvcDuN7a5Kqk=
+X-Received: by 2002:a05:6a20:1444:b0:19c:a03d:d8a4 with SMTP id
+ a4-20020a056a20144400b0019ca03dd8a4mr731577pzi.2.1706359963561; Sat, 27 Jan
+ 2024 04:52:43 -0800 (PST)
 MIME-Version: 1.0
-References: <20240122200930.673447-1-jpaulo.silvagoncalves@gmail.com>
- <20240125110214.GA12545@francesco-nb>
-In-Reply-To: <20240125110214.GA12545@francesco-nb>
+References: <20240122145604.171415-1-marex@denx.de>
+In-Reply-To: <20240122145604.171415-1-marex@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 27 Jan 2024 09:52:01 -0300
-Message-ID: <CAOMZO5DWuUouoUbBDCihU8aLacF5x0eH7kxjJMX_ySkBB2znGg@mail.gmail.com>
-Subject: Re: [PATCH] toradex: tdx-cfg-block: Add new apalis and colibri pid
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Joao Paulo Goncalves <joao.goncalves@toradex.com>, u-boot@lists.denx.de
+Date: Sat, 27 Jan 2024 09:52:33 -0300
+Message-ID: <CAOMZO5C9B0KqF7PJkUik8Y2T6O8nDAnZ=CM20uADhM91kOEt+Q@mail.gmail.com>
+Subject: Re: [PATCH] ARM: imx: Enable kaslrseed command on Data Modul i.MX8M
+ Mini/Plus eDM SBC
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>,
+ Stefano Babic <sbabic@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -89,11 +89,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jan 25, 2024 at 8:02=E2=80=AFAM Francesco Dolcini <francesco@dolcin=
-i.it> wrote:
-
-> there is some trailing space here at the end of the line.
+On Mon, Jan 22, 2024 at 11:56=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
 >
-> Fabio, can you fix this up before applying?
+> Linux 6.6.y with KASLR enabled would print the following message on boot:
+> "
+> KASLR disabled due to lack of seed
+> "
+> Enable the 'kaslrseed' command so a random number seed can be pulled
+> from CAAM and inserted into the /chosen node 'kaslr-seed' property of
+> Linux kernel DT before boot, thus letting KASLR work properly.
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
-Removed the whitespace and applied it, thanks.
+Applied, thanks.
