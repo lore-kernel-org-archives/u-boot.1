@@ -4,40 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45707C46CD2
-	for <u-boot@archiver.kernel.org>; Sat, 27 Jan 2024 16:07:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 030ACC46CD2
+	for <u-boot@archiver.kernel.org>; Sat, 27 Jan 2024 16:40:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D06587E3C;
-	Sat, 27 Jan 2024 17:07:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
+	by phobos.denx.de (Postfix) with ESMTP id 3FCDA87F1A;
+	Sat, 27 Jan 2024 17:40:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="GYtMqrgi";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89C0287EA9; Sat, 27 Jan 2024 17:07:54 +0100 (CET)
-Received: from smtp.gentoo.org (woodpecker.gentoo.org [140.211.166.183])
+ id C6C0687F1B; Sat, 27 Jan 2024 17:40:07 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C82C987E36
- for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 17:07:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F1F1387E3B
+ for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 17:40:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=gentoo.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
-Date: Sat, 27 Jan 2024 16:07:37 +0000
-From: Yixun Lan <dlan@gentoo.org>
-To: Kongyang Liu <seashell11234455@gmail.com>
-Cc: u-boot@lists.denx.de, Conor Dooley <conor.dooley@microchip.com>,
- Leo <ycliang@andestech.com>, Michal Simek <michal.simek@amd.com>,
- Padmarao Begari <padmarao.begari@microchip.com>,
- Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>,
- Tom Rini <trini@konsulko.com>, Yanhong Wang <yanhong.wang@starfivetech.com>
-Subject: Re: [PATCH v3 1/3] riscv: dts: sophgo: add basic device tree for
- Milk-V Duo board
-Message-ID: <20240127160737.GA2281748@ofsar>
-References: <20240121150630.30588-1-seashell11234455@gmail.com>
- <20240121150630.30588-2-seashell11234455@gmail.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=4854=JG=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1706373579;
+ bh=qxEvz5RmGrCbAcgJ/2pj1mk5CCnH7tKyvQiPnviDwG0=;
+ b=GYtMqrginRLA1m5WyEyQgRiMdP26qJFFlidVAgRdrZkmsdO2x6ohaJ1g8be+X2Sn0E7HyXCPU
+ F1BHVKXYWr93dnYkDQA6LCfC76WVJbXtEX7jgjKgNwBV4twlMGpxI8wsmqWyiZoZmqWWUq1hFy+
+ B44BXcVRrvaRB5Qe8cCIw5QQYo2+Xz1BeDv0iAbr7Nalv7l7gh4y9y0XW5OmMAjWdMS+DtJxshN
+ fuXeW7IzZY/LoXA8/lYkg6RqYmIkhWBtmMshO/YJOtEMJ+X9XzXsjMarJclSrkrxME8iZlfgD8C
+ S4afiaXjIMTR8zMTdmkpRiAtiQGdBfCLTHm8Bs8I27gw==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: Ferass El Hafidi <vitali64pmemail@protonmail.com>,
+ u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v2] mmc: Remove alignment hole for cmdidx in struct mmc_cmd
+Date: Sat, 27 Jan 2024 16:29:21 +0000
+Message-ID: <20240127162922.284598-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240121150630.30588-2-seashell11234455@gmail.com>
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 65b52f676797215511302433
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -54,223 +68,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kongyang:
+The alignment hole caused by cmdidx in struct mmc_cmd cause strange
+issues together with the peephole2 optimization on Amlogic SoCs.
+Following was observed while working on SPL support for Amlogic SoCs.
 
-On 23:05 Sun 21 Jan     , Kongyang Liu wrote:
-> Import device tree from Linux kernel to add basic support for CPU, PLIC,
-> UART and Timer. The name cv1800b in the filename represent the chip used
-> on Milk-V Duo board.
-> 
-> Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
-> 
-> ---
-> 
-> Changes in v3:
-> - Swap patch 1 and 2 duo to dependency of defconfig and device tree
-> 
->  arch/riscv/dts/Makefile              |   1 +
->  arch/riscv/dts/cv1800b-milkv-duo.dts |  38 +++++++++
->  arch/riscv/dts/cv1800b.dtsi          | 123 +++++++++++++++++++++++++++
->  3 files changed, 162 insertions(+)
->  create mode 100644 arch/riscv/dts/cv1800b-milkv-duo.dts
->  create mode 100644 arch/riscv/dts/cv1800b.dtsi
+sd_get_capabilities() normally issue a CMD55 followed by a CMD51.
+However, on at least Amlogic S905 (Cortex-A53) and S905X3 (Cortex-A55),
+CMD55 was instead followed by CMD8 (and a few reties) in SPL.
 
-since these dts files are took from kernel tree,
-it'd be wise to keep them sync.. please take a look at
-(should be easy for us to add more SoCs support later)
+Code from the call site:
 
-https://lore.kernel.org/all/IA1PR20MB4953C128FDDE7A2249669213BBD5A@IA1PR20MB4953.namprd20.prod.outlook.com/
+  cmd.cmdidx = SD_CMD_APP_SEND_SCR; // 51
+  ...
+  data.blocksize = 8;
+  ...
+  err = mmc_send_cmd_retry(mmc, &cmd, &data, 3);
 
-> 
-> diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
-> index b05bb5607f..17cda483e1 100644
-> --- a/arch/riscv/dts/Makefile
-> +++ b/arch/riscv/dts/Makefile
-> @@ -2,6 +2,7 @@
->  
->  dtb-$(CONFIG_TARGET_ANDES_AE350) += ae350_32.dtb ae350_64.dtb
->  dtb-$(CONFIG_TARGET_MICROCHIP_ICICLE) += mpfs-icicle-kit.dtb
-> +dtb-$(CONFIG_TARGET_MILKV_DUO) += cv1800b-milkv-duo.dtb
->  dtb-$(CONFIG_TARGET_QEMU_VIRT) += qemu-virt32.dtb qemu-virt64.dtb
->  dtb-$(CONFIG_TARGET_OPENPITON_RISCV64) += openpiton-riscv64.dtb
->  dtb-$(CONFIG_TARGET_SIFIVE_UNLEASHED) += hifive-unleashed-a00.dtb
-> diff --git a/arch/riscv/dts/cv1800b-milkv-duo.dts b/arch/riscv/dts/cv1800b-milkv-duo.dts
-> new file mode 100644
-> index 0000000000..3af9e34b3b
-> --- /dev/null
-> +++ b/arch/riscv/dts/cv1800b-milkv-duo.dts
-> @@ -0,0 +1,38 @@
-> +// SPDX-License-Identifier: (GPL-2.0 OR MIT)
-> +/*
-> + * Copyright (C) 2023 Jisheng Zhang <jszhang@kernel.org>
-> + */
-> +
-> +/dts-v1/;
-> +
-> +#include "cv1800b.dtsi"
-> +
-> +/ {
-> +	model = "Milk-V Duo";
-> +	compatible = "milkv,duo", "sophgo,cv1800b";
-> +
-> +	aliases {
-> +		serial0 = &uart0;
-> +		serial1 = &uart1;
-> +		serial2 = &uart2;
-> +		serial3 = &uart3;
-> +		serial4 = &uart4;
-> +	};
-> +
-> +	chosen {
-> +		stdout-path = "serial0:115200n8";
-> +	};
-> +
-> +	memory@80000000 {
-> +		device_type = "memory";
-> +		reg = <0x80000000 0x3f40000>;
-> +	};
-> +};
-> +
-> +&osc {
-> +	clock-frequency = <25000000>;
-> +};
-> +
-> +&uart0 {
-> +	status = "okay";
-> +};
-> diff --git a/arch/riscv/dts/cv1800b.dtsi b/arch/riscv/dts/cv1800b.dtsi
-> new file mode 100644
-> index 0000000000..df40e87ee0
-> --- /dev/null
-> +++ b/arch/riscv/dts/cv1800b.dtsi
-> @@ -0,0 +1,123 @@
-> +// SPDX-License-Identifier: (GPL-2.0 OR MIT)
-> +/*
-> + * Copyright (C) 2023 Jisheng Zhang <jszhang@kernel.org>
-> + */
-> +
-> +#include <dt-bindings/interrupt-controller/irq.h>
-> +
-> +/ {
-> +	compatible = "sophgo,cv1800b";
-> +	#address-cells = <1>;
-> +	#size-cells = <1>;
-> +
-> +	cpus: cpus {
-> +		#address-cells = <1>;
-> +		#size-cells = <0>;
-> +		timebase-frequency = <25000000>;
-> +
-> +		cpu0: cpu@0 {
-> +			compatible = "thead,c906", "riscv";
-> +			device_type = "cpu";
-> +			reg = <0>;
-> +			d-cache-block-size = <64>;
-> +			d-cache-sets = <512>;
-> +			d-cache-size = <65536>;
-> +			i-cache-block-size = <64>;
-> +			i-cache-sets = <128>;
-> +			i-cache-size = <32768>;
-> +			mmu-type = "riscv,sv39";
-> +			riscv,isa = "rv64imafdc";
-> +			riscv,isa-base = "rv64i";
-> +			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "zicntr", "zicsr",
-> +					       "zifencei", "zihpm";
-> +
-> +			cpu0_intc: interrupt-controller {
-> +				compatible = "riscv,cpu-intc";
-> +				interrupt-controller;
-> +				#address-cells = <0>;
-> +				#interrupt-cells = <1>;
-> +			};
-> +		};
-> +	};
-> +
-> +	osc: oscillator {
-> +		compatible = "fixed-clock";
-> +		clock-output-names = "osc_25m";
-> +		#clock-cells = <0>;
-> +	};
-> +
-> +	soc {
-> +		compatible = "simple-bus";
-> +		interrupt-parent = <&plic>;
-> +		#address-cells = <1>;
-> +		#size-cells = <1>;
-> +		dma-noncoherent;
-> +		ranges;
-> +
-> +		uart0: serial@4140000 {
-> +			compatible = "snps,dw-apb-uart";
-> +			reg = <0x04140000 0x100>;
-> +			interrupts = <44 IRQ_TYPE_LEVEL_HIGH>;
-> +			clocks = <&osc>;
-> +			reg-shift = <2>;
-> +			reg-io-width = <4>;
-> +			status = "disabled";
-> +		};
-> +
-> +		uart1: serial@4150000 {
-> +			compatible = "snps,dw-apb-uart";
-> +			reg = <0x04150000 0x100>;
-> +			interrupts = <45 IRQ_TYPE_LEVEL_HIGH>;
-> +			clocks = <&osc>;
-> +			reg-shift = <2>;
-> +			reg-io-width = <4>;
-> +			status = "disabled";
-> +		};
-> +
-> +		uart2: serial@4160000 {
-> +			compatible = "snps,dw-apb-uart";
-> +			reg = <0x04160000 0x100>;
-> +			interrupts = <46 IRQ_TYPE_LEVEL_HIGH>;
-> +			clocks = <&osc>;
-> +			reg-shift = <2>;
-> +			reg-io-width = <4>;
-> +			status = "disabled";
-> +		};
-> +
-> +		uart3: serial@4170000 {
-> +			compatible = "snps,dw-apb-uart";
-> +			reg = <0x04170000 0x100>;
-> +			interrupts = <47 IRQ_TYPE_LEVEL_HIGH>;
-> +			clocks = <&osc>;
-> +			reg-shift = <2>;
-> +			reg-io-width = <4>;
-> +			status = "disabled";
-> +		};
-> +
-> +		uart4: serial@41c0000 {
-> +			compatible = "snps,dw-apb-uart";
-> +			reg = <0x041c0000 0x100>;
-> +			interrupts = <48 IRQ_TYPE_LEVEL_HIGH>;
-> +			clocks = <&osc>;
-> +			reg-shift = <2>;
-> +			reg-io-width = <4>;
-> +			status = "disabled";
-> +		};
-> +
-> +		plic: interrupt-controller@70000000 {
-> +			compatible = "sophgo,cv1800b-plic", "thead,c900-plic";
-> +			reg = <0x70000000 0x4000000>;
-> +			interrupts-extended = <&cpu0_intc 11>, <&cpu0_intc 9>;
-> +			interrupt-controller;
-> +			#address-cells = <0>;
-> +			#interrupt-cells = <2>;
-> +			riscv,ndev = <101>;
-> +		};
-> +
-> +		clint: timer@74000000 {
-> +			compatible = "sophgo,cv1800b-clint", "thead,c900-clint";
-> +			reg = <0x74000000 0x10000>;
-> +			interrupts-extended = <&cpu0_intc 3>, <&cpu0_intc 7>;
-> +		};
-> +	};
-> +};
-> -- 
-> 2.41.0
+Running the code with MMC_TRACE enabled shows:
 
+CMD_SEND:55
+                ARG                      0x50480000
+                MMC_RSP_R1,5,6,7         0x00000920
+CMD_SEND:8
+                ARG                      0x00000000
+                RET                      -110
+
+Removing the alignment hole by changing cmdidx from ushort to uint or
+building with -fno-peephole2 flag seem to resolve this issue.
+
+CMD_SEND:55
+                ARG                      0x50480000
+                MMC_RSP_R1,5,6,7         0x00000920
+CMD_SEND:51
+                ARG                      0x00000000
+                MMC_RSP_R1,5,6,7         0x00000920
+
+Same issue was observed building U-Boot with gcc 8 - 13.
+
+Remove this alignment hole by changing cmdidx from ushort to uint.
+
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+Changes in v2:
+- Drop use of -fno-peephole2 flag
+
+Link to RFC: https://patchwork.ozlabs.org/patch/1841495/
+---
+ include/mmc.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/mmc.h b/include/mmc.h
+index 1022db3ffa7c..031ea0fb3545 100644
+--- a/include/mmc.h
++++ b/include/mmc.h
+@@ -413,7 +413,7 @@ struct mmc_cid {
+ };
+ 
+ struct mmc_cmd {
+-	ushort cmdidx;
++	uint cmdidx;
+ 	uint resp_type;
+ 	uint cmdarg;
+ 	uint response[4];
 -- 
-Yixun Lan (dlan)
-Gentoo Linux Developer
-GPG Key ID AABEFD55
+2.43.0
+
