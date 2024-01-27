@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E9DBC46CD2
-	for <u-boot@archiver.kernel.org>; Sat, 27 Jan 2024 20:56:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2005DC46CD2
+	for <u-boot@archiver.kernel.org>; Sat, 27 Jan 2024 23:31:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47A1C88015;
-	Sat, 27 Jan 2024 21:56:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2B445880E0;
+	Sun, 28 Jan 2024 00:31:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="GwyscsOt";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q2HNysi9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D3DA88016; Sat, 27 Jan 2024 21:56:09 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 20F7688093; Sat, 27 Jan 2024 23:55:07 +0100 (CET)
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
+ [IPv6:2607:f8b0:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9340988010
- for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 21:56:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CE0C9880A7
+ for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 23:55:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1706388964; x=1706993764; i=xypron.glpk@gmx.de;
- bh=J8KffdsJ/DFd5T3HnQIWn/rqrnnpK2xYId4zEbuXpMA=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
- References;
- b=GwyscsOtSsGmob7PDRRvesmS9fXuy9JajSoFhmMpFfELXwCOycQPTAiM6HX19i6E
- cZmFgnc3uj4AdFRtHrIyV2DVyhK8f8Pqi1xbihWFW1idgxSLLqzS2646VcnvWEmne
- KxvCQl7deUvXs9jilc0JReVLLk7d57OIiVCEdem/7O4Z+EFCBTWlNYkho9Pxv2TUa
- ZwCLCTMUHRKjlSg60AgkkwupwQj9XtqYiIc+9uRg8x0cDte0Vz9mdN2uteKp9FBma
- m87JLhZkc2dKLTTIPZrRnASGHsy7dT1ee5yU1c42qF9ddUwyA37lpbZGdAHR6YAsZ
- OsVmFGW1Vg/YGJukYA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mdvqg-1quDic1gzW-00b1oS; Sat, 27
- Jan 2024 21:56:04 +0100
-Date: Sat, 27 Jan 2024 21:56:03 +0100
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Tom Rini <trini@konsulko.com>
-CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20240127154018.GC785631@bill-the-cat>
-References: <20240127154018.GC785631@bill-the-cat>
-Message-ID: <70BB005F-709B-4B50-AFDB-85EAD7BFC5E8@gmx.de>
+ spf=pass smtp.mailfrom=raj.khem@gmail.com
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-5ca29c131ebso1721309a12.0
+ for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 14:55:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706396103; x=1707000903; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=gFthddfxLg04QYvDdQOCyfM6gabE/bjKlk/Kgca75Tc=;
+ b=Q2HNysi9w9tIF8ue7nX4RSw5C44pwLRirCSqgrVFEskKFypoXOucL6TMlkwUnGyeth
+ 5DbheFBB0Wzmoj6Zncr4T/aARc294Uofi3HcftXh7Pg9UhW9BfZrDi/OYOqtzwp4/BjT
+ kCwGqujAe3PcZb5msl/fYRegezNSgO3OMxIc7imFVDwOjlvp0a6cJaDEDiEGfUo1KgYN
+ YVfcidvvnG7bPm6LfbSsPbWejC8ndUzB4OkSwHWyv2hEGxCIq3Qol4niHqQPxJdfweo7
+ ruEbhJWSZsoDImhvNVKdLslQz7KTahvNm9dKeTXYdyy/Fmayuu97uMYD8KYNoW8XNru5
+ cUGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706396103; x=1707000903;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=gFthddfxLg04QYvDdQOCyfM6gabE/bjKlk/Kgca75Tc=;
+ b=oTQnGpPBZhPhh5w4jSQI1xYcVbsN500Bh+jn9WdN5B2mrSriiQ2rd7b9t1ZTq6HcpO
+ d2NhI6m0S62PjAs+NEKnfdrrONcDag9RULjav7AnHXxJMBYrefFooWJ3ARK8zZiyLh8a
+ sDR1POCYV7wPLSSKZ94QgT1EXwAu/4gFnwD6DvWHvgmdQTAy5wsl/0LQ7ipppuxihgVF
+ ctPDdjEgjuIWgBBA/ytI8kb8AMgeLfIHRSMpKpfO7a10Jh6zp/IOslJBCiabadZPvyZJ
+ BvsPMXnjsGxIplcPstXDW6A1x89tKCOZNvZay9shBkzC5tYbgVFjMTVg0atYJH6FaxoU
+ nBTQ==
+X-Gm-Message-State: AOJu0YzzS67EoBIgNCwY+Hkr26uEXLqopdv2mOwIJUtxRGXLk+FMbLNu
+ w+BQKP9JCmQUqTsxmgHZSEWdr8W8X7tlSB/8235y32EMdJ1oYatLyI5iSEpThXc=
+X-Google-Smtp-Source: AGHT+IFSuCJ7HLWWoEhklXTpcQZvF4GfsutLy5UnoXqa57hO57CvxRAq/QnPWM6u/GWNbxqyh0IhPw==
+X-Received: by 2002:a05:6a20:43a2:b0:19c:a481:fa5b with SMTP id
+ i34-20020a056a2043a200b0019ca481fa5bmr570793pzl.0.1706396102614; 
+ Sat, 27 Jan 2024 14:55:02 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::b77b])
+ by smtp.gmail.com with ESMTPSA id
+ p3-20020aa79e83000000b006dddd3e31a8sm3242758pfq.219.2024.01.27.14.55.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 27 Jan 2024 14:55:02 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Khem Raj <raj.khem@gmail.com>, Anatolij Gustschin <agust@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] video: dw_hdmi: Fix compiler warnings with gcc-14
+Date: Sat, 27 Jan 2024 14:54:59 -0800
+Message-ID: <20240127225459.3064283-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:PvfGZgqmaK8/fvXqM4r0ZPZcQo57+YlLXR5UqN2TLdsUoZt7Swl
- X4tlQU8z+g8embuYsnIc0OmkeuEg8nBp/ZJjZYFoKBWpYjj9sxip7sdt7qZPYkaCXGSWsl9
- MCxdjrheFNawjMl4HfKWSUXZwyi+WYLiX5O4u2fHafqMH9umyigDJ24VhPsKl/+tf5Uf41H
- JFWx94+BN6wb7oQYdutBQ==
-UI-OutboundReport: notjunk:1;M01:P0:wnuC9nqDlJU=;bji8nSRJ93PcG03GmUOcfLRhGBC
- Wh1ZCkUR2uBh+QJoMddYXwZUBEEEzS0wlvfGyVjbd/OQA5CGBgIt0yMjFRmRHh2qWK7z4vhGE
- W7CM6D0XFTzIDA+eAArK2NFXwK8LxA1bCEOlMrU7mZ/97YNcblpj4L8f4nRykljWyDyB2VbpE
- /HDCf0JPajO/2JyG6TqWRoB0W7RFXt4KOKBcQJee9IBl5Nf6SywvUiWEJ6zfOchttAyhu9Xie
- vZ7td/ikUXQRnCnOIre2XSUNXxdereUPZAd7cVvNUHmIkHVXjtSiiyDaHpl0TF/TSH/bedVuh
- BGTWXOlnQCntIow/cbHfsi4mhtJcyNovJ5snyOCP2NkbpUZjzhVLPQU9DKXqk4ZmFODxhPXIj
- NBjlxGZI4LN6rvygjeVoDfUNnfLu4am3NogGRb3dDfcqsTQfhqdVyV1ArwZQm2faRTgz3kKHD
- Nb586xcMG3I6u3zKQyMYLjNd47tCs2yM/D8YVIV8YtbDfMMoiyHozwOT5krBm4Hwql31PmKhw
- Lwjk6jEKV8zySUmSuLvdumFhkFrZ1bNGROgZ+F/BcK3soVxTCfPe1mgEp1rESfKBucPaVsRWj
- 4B6ooX7muSOMh/mtqtHSDYfaG+NYXJX98fsZ+qg/aoXw9eHtaLYEHhzycSq1/vIHDAobk6AcU
- RpJO4BSnQ/hyjSkt1AqwGfwVqhX9bv7VfpYUsB76KZNr+3QOul6/W7f4nblwvxUShT2JA85W8
- 6Jbx1LL0uKQDWs/s6dTGTX4b2Dj4SdcnlqMpmLnAX/RgoNFCfhuz+h6W71ALDM15HUO6OpgTN
- t1hwzNP21e7GebGE3Wjzb+Dv/tk60/AcuKXFzwhg0wN4nIReP3NfujU7THQr3vmnf5C879W3W
- 7hJEWyasSMnr6iLmyrJJMwGWNO2cQ9/69cqTeZgE+e0Yema0z+1Csyj9lkV+UdPH/rKRg3/tN
- Y4628hCUgRB2ZrArmMDyY4NKzPM=
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 28 Jan 2024 00:31:53 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,264 +90,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+GCC-14 find more warnings like
+"make pointer from integer without a cast"
+fix them by adding a type cast.
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Anatolij Gustschin <agust@denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+---
+ drivers/video/dw_hdmi.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-Am 27=2E Januar 2024 16:40:18 MEZ schrieb Tom Rini <trini@konsulko=2Ecom>:
->Hey, I'll just pass this on directly rather than to the list=2E
->
->---------- Forwarded message ---------
->From: <scan-admin@coverity=2Ecom>
->Date: Sat, Jan 27, 2024 at 10:36=E2=80=AFAM
->Subject: New Defects reported by Coverity Scan for Das U-Boot
->To: <tom=2Erini@gmail=2Ecom>
->
->
->Hi,
->
->Please find the latest report on new defect(s) introduced to Das
->U-Boot found with Coverity Scan=2E
->
->1 new defect(s) introduced to Das U-Boot found with Coverity Scan=2E
->
->
->New defect(s) Reported-by: Coverity Scan
->Showing 1 of 1 defect(s)
->
->
->** CID 479279:    (TAINTED_SCALAR)
->
->
->_________________________________________________________________________=
-_______________________________
->*** CID 479279:    (TAINTED_SCALAR)
->/cmd/smbios=2Ec: 180 in do_smbios()
->174                             smbios_print_type2((struct smbios_type2 *=
-)pos);
->175                             break;
->176                     case 127:
->177                             smbios_print_type127((struct
->smbios_type127 *)pos);
->178                             break;
->179                     default:
->>>>     CID 479279:    (TAINTED_SCALAR)
->>>>     Passing tainted expression "pos->length" to "smbios_print_generic=
-", which uses it as a loop boundary=2E
->180                             smbios_print_generic(pos);
->181                             break;
->182                     }
->183             }
->184
->185             return CMD_RET_SUCCESS;
->/cmd/smbios=2Ec: 154 in do_smbios()
->148                     size =3D entry2->length;
->149                     max_struct_size =3D entry2->max_struct_size;
->150             } else {
->151                     log_err("Unknown SMBIOS anchor format\n");
->152                     return CMD_RET_FAILURE;
->153             }
->>>>     CID 479279:    (TAINTED_SCALAR)
->>>>     Passing tainted expression "size" to "table_compute_checksum", wh=
-ich uses it as a loop boundary=2E
->154             if (table_compute_checksum(entry, size)) {
->155                     log_err("Invalid anchor checksum\n");
->156                     return CMD_RET_FAILURE;
->157             }
->158             printf("SMBIOS %s present=2E\n", version);
->159
->/cmd/smbios=2Ec: 174 in do_smbios()
->168                            (unsigned long long)map_to_sysmem(pos));
->169                     switch (pos->type) {
->170                     case 1:
->171                             smbios_print_type1((struct smbios_type1 *=
-)pos);
->172                             break;
->173                     case 2:
->>>>     CID 479279:    (TAINTED_SCALAR)
->>>>     Passing tainted expression "((struct smbios_type2 *)pos)->number_=
-contained_objects" to "smbios_print_type2", which uses it as a loop boundar=
-y=2E
->174                             smbios_print_type2((struct smbios_type2 *=
-)pos);
->175                             break;
->176                     case 127:
->177                             smbios_print_type127((struct
->smbios_type127 *)pos);
->178                             break;
->179                     default:
->/cmd/smbios=2Ec: 154 in do_smbios()
->148                     size =3D entry2->length;
->149                     max_struct_size =3D entry2->max_struct_size;
->150             } else {
->151                     log_err("Unknown SMBIOS anchor format\n");
->152                     return CMD_RET_FAILURE;
->153             }
->>>>     CID 479279:    (TAINTED_SCALAR)
->>>>     Passing tainted expression "size" to "table_compute_checksum", wh=
-ich uses it as a loop boundary=2E
->154             if (table_compute_checksum(entry, size)) {
->155                     log_err("Invalid anchor checksum\n");
->156                     return CMD_RET_FAILURE;
->157             }
->158             printf("SMBIOS %s present=2E\n", version);
->159
->/cmd/smbios=2Ec: 180 in do_smbios()
->174                             smbios_print_type2((struct smbios_type2 *=
-)pos);
->175                             break;
->176                     case 127:
->177                             smbios_print_type127((struct
->smbios_type127 *)pos);
->178                             break;
->179                     default:
->>>>     CID 479279:    (TAINTED_SCALAR)
->>>>     Passing tainted expression "pos->length" to "smbios_print_generic=
-", which uses it as a loop boundary=2E
->180                             smbios_print_generic(pos);
->181                             break;
->182                     }
->183             }
->184
->185             return CMD_RET_SUCCESS;
->/cmd/smbios=2Ec: 174 in do_smbios()
->168                            (unsigned long long)map_to_sysmem(pos));
->169                     switch (pos->type) {
->170                     case 1:
->171                             smbios_print_type1((struct smbios_type1 *=
-)pos);
->172                             break;
->173                     case 2:
->>>>     CID 479279:    (TAINTED_SCALAR)
->>>>     Passing tainted expression "((struct smbios_type2 *)pos)->number_=
-contained_objects" to "smbios_print_type2", which uses it as a loop boundar=
-y=2E
->174                             smbios_print_type2((struct smbios_type2 *=
-)pos);
->175                             break;
->176                     case 127:
->177                             smbios_print_type127((struct
->smbios_type127 *)pos);
->178                             break;
->179                     default:
->/cmd/smbios=2Ec: 174 in do_smbios()
->168                            (unsigned long long)map_to_sysmem(pos));
->169                     switch (pos->type) {
->170                     case 1:
->171                             smbios_print_type1((struct smbios_type1 *=
-)pos);
->172                             break;
->173                     case 2:
->>>>     CID 479279:    (TAINTED_SCALAR)
->>>>     Passing tainted expression "((struct smbios_type2 *)pos)->number_=
-contained_objects" to "smbios_print_type2", which uses it as a loop boundar=
-y=2E
->174                             smbios_print_type2((struct smbios_type2 *=
-)pos);
->175                             break;
->176                     case 127:
->177                             smbios_print_type127((struct
->smbios_type127 *)pos);
->178                             break;
->179                     default:
->/cmd/smbios=2Ec: 180 in do_smbios()
->174                             smbios_print_type2((struct smbios_type2 *=
-)pos);
->175                             break;
->176                     case 127:
->177                             smbios_print_type127((struct
->smbios_type127 *)pos);
->178                             break;
->179                     default:
->>>>     CID 479279:    (TAINTED_SCALAR)
->>>>     Passing tainted expression "pos->length" to "smbios_print_generic=
-", which uses it as a loop boundary=2E
->180                             smbios_print_generic(pos);
->181                             break;
->182                     }
->183             }
->184
->185             return CMD_RET_SUCCESS;
->/cmd/smbios=2Ec: 180 in do_smbios()
->174                             smbios_print_type2((struct smbios_type2 *=
-)pos);
->175                             break;
->176                     case 127:
->177                             smbios_print_type127((struct
->smbios_type127 *)pos);
->178                             break;
->179                     default:
->>>>     CID 479279:    (TAINTED_SCALAR)
->>>>     Passing tainted expression "pos->length" to "smbios_print_generic=
-", which uses it as a loop boundary=2E
->180                             smbios_print_generic(pos);
->181                             break;
->182                     }
->183             }
->184
->185             return CMD_RET_SUCCESS;
->/cmd/smbios=2Ec: 174 in do_smbios()
->168                            (unsigned long long)map_to_sysmem(pos));
->169                     switch (pos->type) {
->170                     case 1:
->171                             smbios_print_type1((struct smbios_type1 *=
-)pos);
->172                             break;
->173                     case 2:
->>>>     CID 479279:    (TAINTED_SCALAR)
->>>>     Passing tainted expression "((struct smbios_type2 *)pos)->number_=
-contained_objects" to "smbios_print_type2", which uses it as a loop boundar=
-y=2E
->174                             smbios_print_type2((struct smbios_type2 *=
-)pos);
->175                             break;
->176                     case 127:
->177                             smbios_print_type127((struct
->smbios_type127 *)pos);
->178                             break;
->179                     default:
->/cmd/smbios=2Ec: 180 in do_smbios()
->174                             smbios_print_type2((struct smbios_type2 *=
-)pos);
->175                             break;
->176                     case 127:
->177                             smbios_print_type127((struct
->smbios_type127 *)pos);
->178                             break;
->179                     default:
->>>>     CID 479279:    (TAINTED_SCALAR)
->>>>     Passing tainted expression "pos->length" to "smbios_print_generic=
-", which uses it as a loop boundary=2E
->180                             smbios_print_generic(pos);
->181                             break;
->182                     }
->183             }
->184
->185             return CMD_RET_SUCCESS;
->/cmd/smbios=2Ec: 174 in do_smbios()
->168                            (unsigned long long)map_to_sysmem(pos));
->169                     switch (pos->type) {
->170                     case 1:
->171                             smbios_print_type1((struct smbios_type1 *=
-)pos);
->172                             break;
->173                     case 2:
->>>>     CID 479279:    (TAINTED_SCALAR)
->>>>     Passing tainted expression "((struct smbios_type2 *)pos)->number_=
-contained_objects" to "smbios_print_type2", which uses it as a loop boundar=
-y=2E
->174                             smbios_print_type2((struct smbios_type2 *=
-)pos);
->175                             break;
->176                     case 127:
->177                             smbios_print_type127((struct
->smbios_type127 *)pos);
->178                             break;
->179                     default:
->
+diff --git a/drivers/video/dw_hdmi.c b/drivers/video/dw_hdmi.c
+index c4fbb18294..9294d9a82a 100644
+--- a/drivers/video/dw_hdmi.c
++++ b/drivers/video/dw_hdmi.c
+@@ -78,10 +78,10 @@ static void dw_hdmi_write(struct dw_hdmi *hdmi, u8 val, int offset)
+ {
+ 	switch (hdmi->reg_io_width) {
+ 	case 1:
+-		writeb(val, hdmi->ioaddr + offset);
++		writeb(val, (void *)(hdmi->ioaddr + offset));
+ 		break;
+ 	case 4:
+-		writel(val, hdmi->ioaddr + (offset << 2));
++		writel(val, (void *)(hdmi->ioaddr + (offset << 2)));
+ 		break;
+ 	default:
+ 		debug("reg_io_width has unsupported width!\n");
+@@ -93,9 +93,9 @@ static u8 dw_hdmi_read(struct dw_hdmi *hdmi, int offset)
+ {
+ 	switch (hdmi->reg_io_width) {
+ 	case 1:
+-		return readb(hdmi->ioaddr + offset);
++		return readb((void *)(hdmi->ioaddr + offset));
+ 	case 4:
+-		return readl(hdmi->ioaddr + (offset << 2));
++		return readl((void *)(hdmi->ioaddr + (offset << 2)));
+ 	default:
+ 		debug("reg_io_width has unsupported width!\n");
+ 		break;
+-- 
+2.43.0
 
-The values may come from QEMU, so may be "tainted"=2E We could check the l=
-ength of the individual structures against the total size of the SMBIOS tab=
-le=2E
-
-Best regards
-
-Heinrich
