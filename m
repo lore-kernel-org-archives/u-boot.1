@@ -4,85 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2C08C47DA9
-	for <u-boot@archiver.kernel.org>; Sat, 27 Jan 2024 01:58:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D2DDC46CD2
+	for <u-boot@archiver.kernel.org>; Sat, 27 Jan 2024 03:48:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A68A587E50;
-	Sat, 27 Jan 2024 02:58:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4D30C87ECA;
+	Sat, 27 Jan 2024 04:48:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Az6y7gWe";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="XQ9arP5z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D24E87E52; Sat, 27 Jan 2024 02:58:47 +0100 (CET)
-Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
- [IPv6:2607:f8b0:4864:20::52a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C980587ECE; Sat, 27 Jan 2024 04:48:20 +0100 (CET)
+Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
+ [46.235.227.194])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F363B87E4B
- for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 02:58:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D04B687EC9
+ for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 04:48:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-5ce2aada130so642237a12.1
- for <u-boot@lists.denx.de>; Fri, 26 Jan 2024 17:58:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706320723; x=1706925523; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=y6D1hBR4wr/PpJjK7uRSDLvHjpWa4RDYMlC0zPYoT6s=;
- b=Az6y7gWezaMZ0QlZsYi7PK3o/ex4O4KjKXuJoPwoAA8jt4v1fBWfYjmuA/7Xznz0m5
- SgAGngVJBAO5owrzrb/m2amqdg426bXI1d/SX0/Sq+qji0dy/F3G8v9e8Pil64+x0s+w
- YakTa7bDsuI6YvE/oNuS1UbzO5i/84GnraKGUO6GGgdbWaEgHTXxr9iBmt3LdtAHgJOO
- d3umyF7gYJp54mNIHz8f/6FkXAcWCuCMJU0HUbTsqii7GM0L2fzGAtybs+kZkeotNmfS
- T+sTZ0i6gYUAuScJ21jpYr1rassBDFPZOHuGfbB5ahKl9nBN9Vb8DI5qZPqrwHrBaGVo
- hDBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706320723; x=1706925523;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=y6D1hBR4wr/PpJjK7uRSDLvHjpWa4RDYMlC0zPYoT6s=;
- b=u7/Fn8+6udnNhrdICPSxeb0c3aGbWOeE9v+JA4PaDLBnmk096BsaFxfQJsx5RQCbCU
- vt65oPhKmNRC+Nsjrr8rdCHy3lx9AyRyz8eAn/SlNkxN/GrzVmEBsT7FLOy5LmgK15ww
- 7UayPV/UvqYXImxcdotGgll0xts0ivd10fZVEdd9Uc231MyQFzfwNAeEv57xR5psVnmY
- mjKg5DRZYD10CcbeFKo4zwjCNGmS9BEC/lddc/9z9wVhaU4HSjAtE+wsuqxicr2UgZpA
- mL1nobSREdgBeY9DgZx9pURhxgFjTprBY6NeWhTFP3bhbZUqdLb7/N+C3K0eLTiBUnBT
- 0VCA==
-X-Gm-Message-State: AOJu0YyKI2mhXnPi08nJY6HUOXWhRA/lLTyCR98dmEq/KLDzsTb6GOq4
- g0e6uWKHXc40i/WFjNQm/R+EMev/MKEtZwuLSwzUYFubcJvem2rVRixa+BB+cfBpjYb9i2/rOIt
- rftE0T/ayOOW+WHqny86w2FX3jFw=
-X-Google-Smtp-Source: AGHT+IG7PPmYo7pgEFGVUSScn5rBx4lfamF5t/rPLN4EQN5TuUS+bToyotWtkw6FQYUs8AAd19FR3zpLOcDh+QdwrUA=
-X-Received: by 2002:aa7:8a4f:0:b0:6dd:81dd:862d with SMTP id
- n15-20020aa78a4f000000b006dd81dd862dmr591811pfa.42.1706320722931; Fri, 26 Jan
- 2024 17:58:42 -0800 (PST)
+ spf=pass smtp.mailfrom=eugen.hristev@collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1706327298;
+ bh=2tbt8WDT7MRlVC2CV//DdhhR2xyIRrYw+aWBJl0hsC0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=XQ9arP5zLizBulquVWRXsdVKac4v0vSuEnOGk/mU9y1D5ZFJAX5oynQa70hg9pkWD
+ MyQEjnn5D3IctNbgt6dBO3AkLfzy2wV4LP1ZrTacl8fsaqg9/NV423WWFBJWlrhuEq
+ +66kZG8SvVmZxQwauyNz8KojQfEIa/3QJ6tZtBeinJa+WLlFH0OvPPp+21LBX46BOg
+ RaBx4nNAGOu9IWAKzKzX1vIweND4mIK0JJ9mlq3a7BdTSCSKblqiEeuySFZKL58bzT
+ AWFMC0MIkPXK8ac+PoRVvCsIeptTqbbnk25B7vaUG8OVd+zLRAXE9Mh3B5cMVL8UA/
+ 9K9mePdGIYwtA==
+Received: from [100.90.194.27] (cola.collaboradmins.com [195.201.22.229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: ehristev)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id 7F86C3780629;
+ Sat, 27 Jan 2024 03:48:14 +0000 (UTC)
+Message-ID: <515157a9-8d19-42f9-ae6d-914aaea8a3ba@collabora.com>
+Date: Sat, 27 Jan 2024 05:48:11 +0200
 MIME-Version: 1.0
-References: <20240124021516.280026-1-Mr.Bossman075@gmail.com>
- <CAHCN7xKcoQixHvZbXos7kiBrZnMD12-q1UfDze+1Y220g_Oq8w@mail.gmail.com>
- <CAOMZO5DZF72Uumk9bQJ-R=4kNOLz-EtJUgrLz_87Y1yOi8cCTg@mail.gmail.com>
-In-Reply-To: <CAOMZO5DZF72Uumk9bQJ-R=4kNOLz-EtJUgrLz_87Y1yOi8cCTg@mail.gmail.com>
-From: Adam Ford <aford173@gmail.com>
-Date: Fri, 26 Jan 2024 19:58:31 -0600
-Message-ID: <CAHCN7xKOTE4CC5Zt28tWD6WO_dTEtDtaj+sV4YLHhVBgKwGkJg@mail.gmail.com>
-Subject: Re: [PATCH v1] tools: mkimage: Add support for i.MXRT FlexSPI Header
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Jesse Taube <mr.bossman075@gmail.com>, u-boot@lists.denx.de, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] rockchip: rk35xx: Remove use of eMMC DDR52 mode
+Content-Language: en-US
+To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Tom Rini <trini@konsulko.com>,
- Giulio Benetti <giulio.benetti@benettiengineering.com>, 
- Mamta Shukla <mamta.shukla@leica-geosystems.com>, 
- Thomas Haemmerle <thomas.haemmerle@leica-geosystems.com>,
- Fabio Estevam <festevam@denx.de>, 
- Simon Glass <sjg@chromium.org>, Jassi Brar <jaswinder.singh@linaro.org>, 
- Paul-Erwan Rio <paulerwan.rio@gmail.com>, Alexander Dahl <ada@thorsis.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Masami Hiramatsu <masami.hiramatsu@linaro.org>, 
- Mikhail Ilin <ilin.mikhail.ol@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Andy Yan <andyshrk@163.com>,
+ Tianling Shen <cnsztl@gmail.com>, Akash Gajjar <gajjar04akash@gmail.com>,
+ Joshua Riek <jjriek@verizon.net>
+Cc: u-boot@lists.denx.de
+References: <20240126232615.6826-1-jonas@kwiboo.se>
+ <20240126232615.6826-2-jonas@kwiboo.se>
+From: Eugen Hristev <eugen.hristev@collabora.com>
+In-Reply-To: <20240126232615.6826-2-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,29 +78,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jan 26, 2024 at 1:11=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
-wrote:
->
-> Hi Adam,
->
-> On Thu, Jan 25, 2024 at 7:37=E2=80=AFPM Adam Ford <aford173@gmail.com> wr=
-ote:
->
-> > I had to go back in time, because it appears the current version of
-> > 'master' doesn't fully boot the FSPI, but when I applied this patch
-> > against a working version, it still worked when I was done.  I'll try
-> > to git bisect the issue when I have time, but for now:
-> >
-> > Tested-by:  Adam Ford <aford173@gmail.com> #imx8mn-beacon
->
-> Thanks for testing, appreciate it. I will queue this one.
->
-No problem.  Sorry it took so long.
+Hi Jonas,
 
-> Hopefully, we can figure out the cause of the regression.
 
-I must have done something wrong when I tested this before, because
-it's working fine for me now even when applied against the main trunk,
-so I think all is good.
+On 1/27/24 01:26, Jonas Karlman wrote:
+> Writing to eMMC using DDR52 mode does not work reliably or at all on
+> RK356x and RK3588 boards.
+> 
 
-adam
+
+This is related to the old issue I encountered last year with mmc write?
+
+Thanks,
+Eugen
+
+> Fix this by removing the mmc-ddr-1_8v prop from sdhci nodes.
+> 
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> ---
+>  arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi   | 1 -
+>  arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi   | 1 -
+>  arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi | 1 -
+>  arch/arm/dts/rk3566-soquartz-u-boot.dtsi     | 1 -
+>  arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi   | 1 -
+>  arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi   | 1 -
+>  arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi    | 1 -
+>  arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi    | 1 -
+>  arch/arm/dts/rk3568-rock-3a-u-boot.dtsi      | 1 -
+>  arch/arm/dts/rk3588-rock-5b-u-boot.dtsi      | 1 -
+>  arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi   | 1 -
+>  arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi     | 1 -
+>  12 files changed, 12 deletions(-)
+> 
+> diff --git a/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi b/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi
+> index 11976fd3a6e0..930d660868bb 100644
+> --- a/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi
+> @@ -8,7 +8,6 @@
+>  
+>  &sdhci {
+>  	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>  	pinctrl-names = "default";
+>  	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
+>  };
+> diff --git a/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi b/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi
+> index 8de9d1535efb..c235b4357f7d 100644
+> --- a/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi
+> @@ -4,7 +4,6 @@
+>  
+>  &sdhci {
+>  	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>  	pinctrl-names = "default";
+>  	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
+>  };
+> diff --git a/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi b/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
+> index 158f652cb3b1..e0e501deccfe 100644
+> --- a/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
+> @@ -7,5 +7,4 @@
+>  
+>  &sdhci {
+>  	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>  };
+> diff --git a/arch/arm/dts/rk3566-soquartz-u-boot.dtsi b/arch/arm/dts/rk3566-soquartz-u-boot.dtsi
+> index f65f4067f3e9..5e46a2422d60 100644
+> --- a/arch/arm/dts/rk3566-soquartz-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3566-soquartz-u-boot.dtsi
+> @@ -4,7 +4,6 @@
+>  
+>  &sdhci {
+>  	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>  	pinctrl-names = "default";
+>  	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
+>  };
+> diff --git a/arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi b/arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi
+> index a44ac35bdacd..1597473017ed 100644
+> --- a/arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi
+> @@ -8,7 +8,6 @@
+>  
+>  &sdhci {
+>  	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>  	mmc-hs400-1_8v;
+>  	mmc-hs400-enhanced-strobe;
+>  	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
+> diff --git a/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi b/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi
+> index 62f572c4cf9f..64c43374c042 100644
+> --- a/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi
+> @@ -14,7 +14,6 @@
+>  
+>  &sdhci {
+>  	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>  	mmc-hs200-1_8v;
+>  	mmc-hs400-1_8v;
+>  	mmc-hs400-enhanced-strobe;
+> diff --git a/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi b/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi
+> index ecba91aa30f5..1fc71faa9e07 100644
+> --- a/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi
+> @@ -8,7 +8,6 @@
+>  
+>  &sdhci {
+>  	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>  	mmc-hs200-1_8v;
+>  	mmc-hs400-1_8v;
+>  	mmc-hs400-enhanced-strobe;
+> diff --git a/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi b/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
+> index caf524443079..74755a44eaee 100644
+> --- a/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
+> @@ -16,7 +16,6 @@
+>  
+>  &sdhci {
+>  	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>  	mmc-hs200-1_8v;
+>  	mmc-hs400-1_8v;
+>  	mmc-hs400-enhanced-strobe;
+> diff --git a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
+> index 46ebb77283f1..5b823fcca5fb 100644
+> --- a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
+> @@ -20,7 +20,6 @@
+>  
+>  &sdhci {
+>  	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>  	mmc-hs200-1_8v;
+>  	mmc-hs400-1_8v;
+>  	mmc-hs400-enhanced-strobe;
+> diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+> index e99e60185ebe..9ee9dd051e32 100644
+> --- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+> @@ -31,7 +31,6 @@
+>  
+>  &sdhci {
+>  	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>  	mmc-hs200-1_8v;
+>  };
+>  
+> diff --git a/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi b/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
+> index 471508a9ed74..ca2a684f3541 100644
+> --- a/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
+> @@ -8,7 +8,6 @@
+>  
+>  &sdhci {
+>  	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>  	mmc-hs200-1_8v;
+>  };
+>  
+> diff --git a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
+> index 9a6a353088df..efba0c359ba5 100644
+> --- a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
+> @@ -7,6 +7,5 @@
+>  
+>  &sdhci {
+>  	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>  	mmc-hs200-1_8v;
+>  };
+
