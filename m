@@ -4,62 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1D60C47DDB
-	for <u-boot@archiver.kernel.org>; Sat, 27 Jan 2024 07:27:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FC77C46CD2
+	for <u-boot@archiver.kernel.org>; Sat, 27 Jan 2024 08:20:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F387C87F13;
-	Sat, 27 Jan 2024 08:27:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
+	by phobos.denx.de (Postfix) with ESMTP id 9BC9B87ECB;
+	Sat, 27 Jan 2024 09:20:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="3QzIS5Gd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gkA0VPk4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7ECDD87ED0; Sat, 27 Jan 2024 08:27:36 +0100 (CET)
-Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
- [46.235.227.194])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BC4D287EC9; Sat, 27 Jan 2024 09:20:54 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76C2F87EB7
- for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 08:27:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=collabora.com
+ by phobos.denx.de (Postfix) with ESMTPS id 85FDF87ECB
+ for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 09:20:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1706340453;
- bh=7BRmzPrtG+M0uYp2moHkrg7R29ZuPRYcbZ7CKqa7Z40=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=3QzIS5GdXK7uiSq70VI2IqD9ouo00rjnHbY4weG6p9pwXEhV2YgWCs1nQ0s5yl5/e
- 35koIU5iCs5NYrURooXb27lNjKdiUjbOs1cWjCTQ+h7NVmytIf6/l7eoGXK1xd2Bgt
- 3PFqaCnmfdRp3u0BNt+4ygmNMK5AfGQiTSGboRsOCBGaISkPemvvcuitRab2LkH3wq
- QM4FbONmYketMAxnbmTXSHN7T2UlHnK9v3SC2zavhPF0ClZ8zAcq8I0n3RNPC/3Lpa
- fIaS3b2186y+7AownU9p7t2eTjMCVJ1XGTV9rRkMbCI04ORy++XjRIoBlXToXx0B/K
- l3qRxCpbRg30g==
-Received: from [100.90.194.27] (cola.collaboradmins.com [195.201.22.229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: ehristev)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id F2F0E37813CF;
- Sat, 27 Jan 2024 07:27:30 +0000 (UTC)
-Message-ID: <2e2d046b-9e7e-479e-997d-a14cd57f98ab@collabora.com>
-Date: Sat, 27 Jan 2024 09:27:27 +0200
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=bigunclemax@gmail.com
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-55790581457so895658a12.3
+ for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 00:20:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706343652; x=1706948452; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eg8LgevGiZ3QQNCt/W1XZCHJdnVFMH9aJZ9lCWTlvTk=;
+ b=gkA0VPk4cvRV/fgFr7xJKotaKSE0llKiwi8em6Kn9mUNEjYLp3E/HKlF+/ucvYX+Na
+ T+PxixGWqs5GlRq97MC6aV2XplKG2wJs4VSEGSxBppGk6mt3Fr/hiP5ZDAP+C5AkTHfZ
+ YuDf9V/r/ZUvlRc4hoMhpyQabGDrKTvRQvoQY3ZnsIJxDF/4cVORGLBVnD6ENuJwgHx0
+ Upbek03NhiZkXiTYnhyTQ1pkN3wSNA5FWQrIipVC57/uW4WgGbqHMBtXAOGH5RGDqul6
+ B72IcE4eVV9pjGlaNhR9xyxE38chXp2Px7oPwr88mFNwzZJ62mL6fyvu8AkOM1GpcXfs
+ s1zw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706343652; x=1706948452;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=eg8LgevGiZ3QQNCt/W1XZCHJdnVFMH9aJZ9lCWTlvTk=;
+ b=vMq70N/GXEalhaI/7jxJ8NjKu95VixTGufGhpTEg/jkr0Q9zCWB1KwUTCm5dJBK0j6
+ x0r22/80TXmQpO6dKSUVawiai7jwi0sYqTxKQqx7G4fXBMYhKPM3PZD6A8JSU5gC8y1C
+ ukKKQiuhMpbgHlNmkTi/pasfZGVUq0uLQn4HpN39tu5KjmyQAtJNSvakePQe5768mFHt
+ NYstYjh2F6qVW22ObpAY5KEnJoCG9YRR5oDltTVEGxrmh9b4xoU1Pl4oUt63SZ2sdFSA
+ TetVW5OGQFtO8yQ4zT4rReBLAojT/mAvf494nfCTTyQDRjJw9eqlFf7kdmsC1ikCsZIn
+ plwQ==
+X-Gm-Message-State: AOJu0YyecxSP20DbP90gg48Zl5dcUAqkpuxY6fCKsGEY/uFuCPKjT+Tn
+ i8KBWr2BmNEZxRNvOjTGQkY179V8TTtX+A5+eh3uZGWkaiVHDUqZvOo0zfwvDxLjhIbfpXaGS7g
+ IBDYMluiVYk7qTv/xVQXuQMuEXYo=
+X-Google-Smtp-Source: AGHT+IGf5wa4yDeK1l3lwdcRcrRaGGJNh/sYcRbxw3KiJfNsLVw7OUxDIX15TAZfKrTtoEdWTHWC14xXzETCJiolQ7w=
+X-Received: by 2002:a17:906:a042:b0:a31:58fc:bd83 with SMTP id
+ bg2-20020a170906a04200b00a3158fcbd83mr716723ejb.10.1706343651693; Sat, 27 Jan
+ 2024 00:20:51 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 6/7] rockchip: rk3588: Add default u-boot,spl-boot-order
- prop
-Content-Language: en-US
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>, John Clark <inindev@gmail.com>,
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>, Joshua Riek <jjriek@verizon.net>
-Cc: u-boot@lists.denx.de
-References: <20240126221508.4093334-1-jonas@kwiboo.se>
- <20240126221508.4093334-7-jonas@kwiboo.se>
-From: Eugen Hristev <eugen.hristev@collabora.com>
-In-Reply-To: <20240126221508.4093334-7-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20240121114909.2909574-1-bigunclemax@gmail.com>
+ <20240126171100.3d10e8b1@donnerap.manchester.arm.com>
+In-Reply-To: <20240126171100.3d10e8b1@donnerap.manchester.arm.com>
+From: Maxim Kiselev <bigunclemax@gmail.com>
+Date: Sat, 27 Jan 2024 11:20:40 +0300
+Message-ID: <CALHCpMhJZmiKXTMJdoE4a6UzzMzU3x-koBBjmnAKTKiipFzdgQ@mail.gmail.com>
+Subject: Re: [PATCH v1] sunxi: R528: add UART1 support
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Samuel Holland <samuel@sholland.org>, 
+ Marek Vasut <marex@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,133 +91,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/27/24 00:14, Jonas Karlman wrote:
-> Add a default u-boot,spl-boot-order prop to rk3588s-u-boot.dtsi and
-> remove the prop from board u-boot.dtsi files using the default value.
-> 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+=D0=BF=D1=82, 26 =D1=8F=D0=BD=D0=B2. 2024=E2=80=AF=D0=B3. =D0=B2 20:11, And=
+re Przywara <andre.przywara@arm.com>:
+>
+> On Sun, 21 Jan 2024 14:49:08 +0300
+> Maksim Kiselev <bigunclemax@gmail.com> wrote:
+>
+> > Add PG6-PG7 pins configuration for the SPL to allow use UART1
+> > on boards with the Allwinner R528/T113 family.
+>
+> That looks alright. Not super happy to take yet another combination, but
+> well. Also see below.
+>
+> > Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
+>
+> Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+>
+> > ---
+> >
+> > I tested this patch on LC-PI-T113 board.
+> > This board can be found on eBay or Aliexpress, and looks like
+> > that it is widespread enough to send this patch to the upstream :)
+>
+> ... it would be even better to have a DT and defconfig then, right?
+> Then we would have a user for this code part then. Any chance you could
+> send something to that effect?
 
-Reviewed-by: Eugen Hristev <eugen.hristev@collabora.com>
-> ---
->  arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi       | 6 ------
->  arch/arm/dts/rk3588-orangepi-5-plus-u-boot.dtsi | 6 ------
->  arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi     | 6 ------
->  arch/arm/dts/rk3588-rock-5b-u-boot.dtsi         | 4 ----
->  arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi      | 6 ------
->  arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi        | 6 ------
->  arch/arm/dts/rk3588s-u-boot.dtsi                | 4 ++++
->  7 files changed, 4 insertions(+), 34 deletions(-)
-> 
-> diff --git a/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi b/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
-> index 87831c9d432a..60494bb8485f 100644
-> --- a/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
-> @@ -6,12 +6,6 @@
->  
->  #include "rk3588-u-boot.dtsi"
->  
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci;
-> -	};
-> -};
-> -
->  &fspim1_pins {
->  	bootph-all;
->  };
-> diff --git a/arch/arm/dts/rk3588-orangepi-5-plus-u-boot.dtsi b/arch/arm/dts/rk3588-orangepi-5-plus-u-boot.dtsi
-> index b0f5c667197c..5d5fa6ffb214 100644
-> --- a/arch/arm/dts/rk3588-orangepi-5-plus-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-orangepi-5-plus-u-boot.dtsi
-> @@ -2,12 +2,6 @@
->  
->  #include "rk3588-u-boot.dtsi"
->  
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci;
-> -	};
-> -};
-> -
->  &fspim1_pins {
->  	bootph-all;
->  };
-> diff --git a/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi b/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
-> index 191ec988c459..7b937943a53c 100644
-> --- a/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
-> @@ -4,9 +4,3 @@
->   */
->  
->  #include "rk3588-u-boot.dtsi"
-> -
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci;
-> -	};
-> -};
-> diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> index 5fa20cecc044..e99e60185ebe 100644
-> --- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> @@ -7,10 +7,6 @@
->  #include <dt-bindings/usb/pd.h>
->  
->  / {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci;
-> -	};
-> -
->  	vcc12v_dcin: vcc12v-dcin-regulator {
->  		compatible = "regulator-fixed";
->  		regulator-name = "vcc12v_dcin";
-> diff --git a/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi b/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
-> index 06c6f327c14b..e791b572b6bf 100644
-> --- a/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
-> @@ -6,12 +6,6 @@
->  
->  #include "rk3588-u-boot.dtsi"
->  
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci;
-> -	};
-> -};
-> -
->  &sdhci {
->  	cap-mmc-highspeed;
->  	mmc-ddr-1_8v;
-> diff --git a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-> index 584476f77b13..9a6a353088df 100644
-> --- a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-> @@ -5,12 +5,6 @@
->  
->  #include "rk3588s-u-boot.dtsi"
->  
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci;
-> -	};
-> -};
-> -
->  &sdhci {
->  	cap-mmc-highspeed;
->  	mmc-ddr-1_8v;
-> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
-> index d251a210b313..945b2d62a75e 100644
-> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
-> @@ -10,6 +10,10 @@
->  		spi5 = &sfc;
->  	};
->  
-> +	chosen {
-> +		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci;
-> +	};
-> +
->  	dmc {
->  		compatible = "rockchip,rk3588-dmc";
->  		bootph-all;
+Well, I can try to do this.
 
+> Are there any BSP code drops, or a schematic or some other documentation?
+> I couldn't find something on a quick search.
+
+The google drive link
+https://drive.google.com/drive/folders/1lrqDsxtGl8WvU7o547lT9IkHwGyAHXFU
+is the only =E2=80=9Cofficial=E2=80=9D documentation that I found.
+It contains a board scheme, some datasheets and a useless fw image :)
+
+> Cheers,
+> Andre
+>
+>
+> >  arch/arm/mach-sunxi/board.c | 4 ++++
+> >  1 file changed, 4 insertions(+)
+> >
+> > diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
+> > index 11a4941822..9dedcd45f5 100644
+> > --- a/arch/arm/mach-sunxi/board.c
+> > +++ b/arch/arm/mach-sunxi/board.c
+> > @@ -159,6 +159,10 @@ static int gpio_init(void)
+> >       sunxi_gpio_set_cfgpin(SUNXI_GPG(3), SUN5I_GPG_UART1);
+> >       sunxi_gpio_set_cfgpin(SUNXI_GPG(4), SUN5I_GPG_UART1);
+> >       sunxi_gpio_set_pull(SUNXI_GPG(4), SUNXI_GPIO_PULL_UP);
+> > +#elif CONFIG_CONS_INDEX =3D=3D 2 && defined(CONFIG_MACH_SUN8I_R528)
+> > +     sunxi_gpio_set_cfgpin(SUNXI_GPG(6), 2);
+> > +     sunxi_gpio_set_cfgpin(SUNXI_GPG(7), 2);
+> > +     sunxi_gpio_set_pull(SUNXI_GPG(7), SUNXI_GPIO_PULL_UP);
+> >  #elif CONFIG_CONS_INDEX =3D=3D 3 && defined(CONFIG_MACH_SUN8I_H3)
+> >       sunxi_gpio_set_cfgpin(SUNXI_GPA(0), SUN8I_H3_GPA_UART2);
+> >       sunxi_gpio_set_cfgpin(SUNXI_GPA(1), SUN8I_H3_GPA_UART2);
+>
+
+Best wishes,
+Maksim
