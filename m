@@ -4,64 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EA37C46CD2
-	for <u-boot@archiver.kernel.org>; Sat, 27 Jan 2024 11:16:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD5FAC46CD2
+	for <u-boot@archiver.kernel.org>; Sat, 27 Jan 2024 12:52:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA66D86BFA;
-	Sat, 27 Jan 2024 12:16:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id D42A787D9E;
+	Sat, 27 Jan 2024 13:52:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="LoX7cBK5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="O8FkvuQj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AE12875A0; Sat, 27 Jan 2024 12:16:20 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8EB0B87DAE; Sat, 27 Jan 2024 13:52:15 +0100 (CET)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3109C869F7
- for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 12:16:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DB8087D93
+ for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 13:52:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=0bb9=JF=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1706354161;
- bh=CGaaZ8oPwBOjpH4w+CzQQZvpHh3U5qOprROqYBOaPAk=;
- b=LoX7cBK5r+ACktkcBu0Z5s/CLFMADxTAtx+A/YoqMJxbWo58ep0zpUhd/kJRIxnkBIJIJ/DsI
- tGEdicPVGI6mALixPQmwmQdayJ1nYk4/jt2C20jCyZylzvQDKWv67ELyyF7G3NUBWpV/YR3Pn8u
- PjXbB1qaX6KHc6onGnQETYObgvd9O+FkIIPqXQuGXPY6flM5b8JjaqD7QLlxfhX3gmqJSmyXIYF
- gou2Ws0wmCj7H2J5sZsb4lhbzg3ax2DzikD9a4iqD5BwKRcZxD6FuozReH3g2nIqBdSrtfYmE6u
- uc10H9qG1Pw0XRo4i6E5rPf8DcwCViISoYNaqPaMSD3Q==
-Message-ID: <e1417a87-15ee-4e1b-9513-c101a02118d4@kwiboo.se>
-Date: Sat, 27 Jan 2024 12:15:55 +0100
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-5a0dc313058so334696a12.0
+ for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 04:52:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706359931; x=1706964731; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NSaeeK4676k/Td/ON4C5NjrO/rdAccyHGbIJmdGX/4o=;
+ b=O8FkvuQjOwnILTpktGV8hjm1sUcPkPu6twhDRIFB+pZqfrKRwvO/jy1NbqOQ13z1H1
+ ICshgG1RMs7UpccjmWdSfViyMOj9DTavYiGEjBQZXlOpu4wdY6+xWCsJ8Ho0oID2bpXw
+ A3NYjnbKBuYhXl7spEJ52u6y2Ph88J96AagWTPkajfV5jDTXu01jtYWt4NBgV8vQ+A7K
+ wO/LP7WjqqJr5fWONOlKJSxpy4ZmKr/EPoSUQcINnzBCickjbONFiSKuJxoJhYXUZEAp
+ 8SNFMdXRPggeQVLAF6C5qrsxKXPDRvJwsj1DFJAk8N3K0F+9ooR+z6Vzxodn9OxsxhvM
+ UwfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706359931; x=1706964731;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NSaeeK4676k/Td/ON4C5NjrO/rdAccyHGbIJmdGX/4o=;
+ b=QTOjWmKZLgXQIaa8EKxFdoGJzmwEXRI0EgEVz/CV1GAQx+WJgmE1TCFdh2Fw9c5P4q
+ SQQ1CAPEJhnQwdruJtTVua0nAzHj0/EaHt4wYgpcQFILKfQlwso1UR2zkBphycxeqmqP
+ YBV/qGq5NCcvaCxqzljViqYWiBNI2JxjbNILgsrgXD2PpzBfky7b8abja4lbM6TJaqq/
+ r7bzVDGI5TnnOTqbMEMeJ4HLjxciLrzl2smb3+Ea6QltthmzHrpZJI+nQAw0Jg/eCdBf
+ lLTEiRQ5FpnvHS2bZtCfOnYEVi7tANSLgM3EFCJDBpzy5ydg0742aAbbD0ODcIESQ1ZP
+ Xs4A==
+X-Gm-Message-State: AOJu0YyM670h8RB8km1lwS20b7zwlqPLArSeCgokC1p9n9yJy1YwWTEz
+ Z5nNd+8agJ2lo54sVoISDTPe+Yy5EJrx9wcer8YLUYUj4WKjyzIXCAitpyF2tIabj59Uxsux7xC
+ oHDnsV4Rf+5rwrBl9bzF2vRgnKEU=
+X-Google-Smtp-Source: AGHT+IGJYf6Umy4iJ067CL87ygfvchUj+erEyg6Ngg3Crr/d4lgrXxdqJU/y7swWGCjARsdg0qZMQi7ge2dqgEwKRmw=
+X-Received: by 2002:a05:6a20:144f:b0:19c:a0ea:5515 with SMTP id
+ a15-20020a056a20144f00b0019ca0ea5515mr441828pzi.2.1706359931483; Sat, 27 Jan
+ 2024 04:52:11 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] rockchip: rk35xx: Remove use of eMMC DDR52 mode
-Content-Language: en-US
-To: Eugen Hristev <eugen.hristev@collabora.com>
-Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>, Simon
- Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom
- Rini <trini@konsulko.com>, Nicolas Frattaroli
- <frattaroli.nicolas@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Andy Yan <andyshrk@163.com>, Tianling Shen <cnsztl@gmail.com>, Akash
- Gajjar <gajjar04akash@gmail.com>, Joshua Riek <jjriek@verizon.net>
-References: <20240126232615.6826-1-jonas@kwiboo.se>
- <20240126232615.6826-2-jonas@kwiboo.se>
- <515157a9-8d19-42f9-ae6d-914aaea8a3ba@collabora.com>
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <515157a9-8d19-42f9-ae6d-914aaea8a3ba@collabora.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 65b4e5f081d7e96d10ccd4d8
+References: <20240122200930.673447-1-jpaulo.silvagoncalves@gmail.com>
+ <20240125110214.GA12545@francesco-nb>
+In-Reply-To: <20240125110214.GA12545@francesco-nb>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sat, 27 Jan 2024 09:52:01 -0300
+Message-ID: <CAOMZO5DWuUouoUbBDCihU8aLacF5x0eH7kxjJMX_ySkBB2znGg@mail.gmail.com>
+Subject: Re: [PATCH] toradex: tdx-cfg-block: Add new apalis and colibri pid
+To: Francesco Dolcini <francesco@dolcini.it>
+Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
+ Joao Paulo Goncalves <joao.goncalves@toradex.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,63 +89,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Eugen,
+On Thu, Jan 25, 2024 at 8:02=E2=80=AFAM Francesco Dolcini <francesco@dolcin=
+i.it> wrote:
 
-On 2024-01-27 04:48, Eugen Hristev wrote:
-> Hi Jonas,
-> 
-> 
-> On 1/27/24 01:26, Jonas Karlman wrote:
->> Writing to eMMC using DDR52 mode does not work reliably or at all on
->> RK356x and RK3588 boards.
->>
-> 
-> 
-> This is related to the old issue I encountered last year with mmc write?
+> there is some trailing space here at the end of the line.
+>
+> Fabio, can you fix this up before applying?
 
-Yes, I think it is.
-
-I did some testing on RK3566/RK3568/RK3588S/RK3588 boards with different
-eMMC modules with following result:
-
-Read seem to work with all enabled modes:
-RK3566: MMC legacy, MMC High Speed (26MHz), MMC High Speed (52MHz),
-        MMC DDR52 (52MHz) and HS200 (200MHz)
-RK3568/RK3588S/RK3588: all above + HS400 (200MHz) and HS400ES (200MHz)
-
-However, write had issues with some of the modes:
-MMC DDR52 (52MHz): all RK35xx
-HS400/HS400ES: only on RK3568 after changing hs400_txclk_tapnum to 8
-
-HS200 seem to be the most stable write speed that worked on all SoCs.
-
-So, dropping MMC DDR52 (52MHz) and enable use of HS200 (200MHz) seem to
-be the best option to get speedy and working read and write eMMC.
-
-Regards,
-Jonas
-
-> 
-> Thanks,
-> Eugen
-> 
->> Fix this by removing the mmc-ddr-1_8v prop from sdhci nodes.
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->>  arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi   | 1 -
->>  arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi   | 1 -
->>  arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi | 1 -
->>  arch/arm/dts/rk3566-soquartz-u-boot.dtsi     | 1 -
->>  arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi   | 1 -
->>  arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi   | 1 -
->>  arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi    | 1 -
->>  arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi    | 1 -
->>  arch/arm/dts/rk3568-rock-3a-u-boot.dtsi      | 1 -
->>  arch/arm/dts/rk3588-rock-5b-u-boot.dtsi      | 1 -
->>  arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi   | 1 -
->>  arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi     | 1 -
->>  12 files changed, 12 deletions(-)
->>
-
-[snip]
+Removed the whitespace and applied it, thanks.
