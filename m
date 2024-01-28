@@ -4,23 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68E6CC47DA9
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jan 2024 15:56:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C7F0C47258
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jan 2024 15:56:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 347A487FA3;
-	Sun, 28 Jan 2024 16:55:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E516587EE9;
+	Sun, 28 Jan 2024 16:55:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="SzaJdyTh";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Yz6RLEbG";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="dCuTl04Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1626887DC1; Sun, 28 Jan 2024 16:55:53 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id 02BD787F68; Sun, 28 Jan 2024 16:55:56 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D838F87E48
- for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 16:55:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F80587F07
+ for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 16:55:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,34 +32,48 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4TNGHS3S6Xz9sTM;
- Sun, 28 Jan 2024 16:55:48 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4TNGHX2VbGz9stL;
+ Sun, 28 Jan 2024 16:55:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1706457348;
+ s=mail20150812; t=1706457352;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=C97UbHxi4ZBukoiyvyyD86S2shs+h6aMXv91DjytkUc=;
- b=SzaJdyThL1QHl4Yd3w7k9Gc5kg2nOg7nTl7AtbBgg8g+5fSJKVEEyKCU8/fUQhmedwcJG+
- WJGweMkYenoKXK8QPblwH3cxCLvIRYlSGriCya68ONIm+4ZeVYk2AXJUngTqf2qzuuUjuI
- 2SP3D91HI9SNmobSPuJM+4GSRXICQMoY2MgxsPUZJXG73SS8ENCuQF8Q+5UEcvsPoh3oPv
- rdHoGiX9bkjLCMAM2gzwWLcnoJ8MTXh1CaeU1YPJw0th1WohdL2C6rH1ipY6hhxZK2DGER
- ePrx45gagELFwXLj/I0x4f4d4NJIKa7bi7ySOZ+mYdtHc7c/PR7epqzubeHrMQ==
+ bh=ahOM/G4q+u6NGFRsXGi3C+AOj7fnyj5PJo2bXKGOo1U=;
+ b=Yz6RLEbGMxERWAHCZ4F16viLz8TDoEbSQgUl4MvV6boaxJwGe5BTjoBu9UMpcL00ISactc
+ dP5W3ovn5mEG29Z+JibBV3psdS/MWbFnicnskVS23FBPqfGG1F2VO1ZpqT9is3zbUjvciH
+ XYkSy+sroP3HVUJE/Xo7h5TSw5CbFGTVBoMxLTQccB7I5we/ytWO/zNYrjwi1D4Bha18+u
+ FEpL3WOZbdlqXe2k7HFrX0q2e2CwyEV7CwkNXYQvYSQRn/M0Z+ZVD+w10RiEUcyD65vtVT
+ bAB2asz/88OZwSMFO0t6qnfE/bO3K9VcT+piqAf4FBTSHDDNy7cW1TlFSh26Ag==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1706457350;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ahOM/G4q+u6NGFRsXGi3C+AOj7fnyj5PJo2bXKGOo1U=;
+ b=dCuTl04Z30Dfaf/G14X4gcdjS7dk2aCWoyzNQqhKHhrF7HayKThD5pnM6aAk5GeYhRSPVJ
+ 9rVkhnhZ5nl5dtFLKikxlRmMnUcuY+Gv71rugizetsGe/5Qf4Dnossn/9nfDDaq4cOMY5h
+ HB4EQ6/gDZ2QiuYjI0aQ6SFhfcEiXZ9D+gqk/2+qpfGxm1l2CaAP/AqOp0dytwkjjJEtmB
+ InYGlFeM4YzhYR67Cre49y+Q0Oxp4ZcDY4rgHRd7LvRDNx48Lmb2ESEd1TeRwbr7HLs22g
+ yxY/LEv1ACae2Yef6AoZI2Cx30xJ0b7gngJDII+Kb00qTf6ezm0ty3JHurqgtA==
 To: u-boot@lists.denx.de
-Cc: Duy Nguyen <duy.nguyen.rh@renesas.com>, Hai Pham <hai.pham.ud@renesas.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>
-Subject: [PATCH v2 02/11] dt-bindings: power: Add R8A779H0 V4M SYSC power
- domain definitions
-Date: Sun, 28 Jan 2024 16:52:00 +0100
-Message-ID: <20240128155458.56712-2-marek.vasut+renesas@mailbox.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH v2 04/11] clk: renesas: Implement R8A779H0 V4M PLL7 support
+Date: Sun, 28 Jan 2024 16:52:02 +0100
+Message-ID: <20240128155458.56712-4-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240128155458.56712-1-marek.vasut+renesas@mailbox.org>
 References: <20240128155458.56712-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: ced4a2c7e7f211115dd
-X-MBO-RS-META: d4ra1m59dqhapmzi3w73wa7yhope5zoo
+X-MBO-RS-ID: 0a50f6d91f2ca583d10
+X-MBO-RS-META: rhmqfuq88gmnxst1pbcyz7oa3yggip1r
+X-Rspamd-Queue-Id: 4TNGHX2VbGz9stL
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,79 +90,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Duy Nguyen <duy.nguyen.rh@renesas.com>
+Add PLL7 support to Gen3/Gen4 common clock driver. Add initial PLL7
+multiplier and divider values into table in R8A779H0 V4M clock driver.
 
-Add power domain indices for R-Car V4M (R8A779H0).
+The PLL7 is new PLL added in R8A779H0 V4M SoC. Only integer multiplication
+mode is supported by PLL7. The PLL reference clock are either 16.66 MHz or
+20 MHz on R8A779H0 V4M SoC, and the output frequency must be 2000 MHz. The
+multiplier values fitting this requirement are calculated to 120 or 100.
 
-The current version is imported from:
-https://lore.kernel.org/linux-renesas-soc/c5cbef71178cada761e9da7bcbb6f21334f93ef8.1706194617.git.geert+renesas@glider.be/
-
-Signed-off-by: Duy Nguyen <duy.nguyen.rh@renesas.com>
-Signed-off-by: Hai Pham <hai.pham.ud@renesas.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
+Cc: Lukasz Majewski <lukma@denx.de>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Sean Anderson <seanga2@gmail.com>
 ---
-V2: Update to version submitted to Linux kernel upstream
+V2: No change
 ---
- .../dt-bindings/power/renesas,r8a779h0-sysc.h | 49 +++++++++++++++++++
- 1 file changed, 49 insertions(+)
- create mode 100644 include/dt-bindings/power/renesas,r8a779h0-sysc.h
+ drivers/clk/renesas/clk-rcar-gen3.c     |  6 ++++++
+ drivers/clk/renesas/r8a779h0-cpg-mssr.c | 10 +++++-----
+ drivers/clk/renesas/rcar-gen3-cpg.h     |  2 ++
+ 3 files changed, 13 insertions(+), 5 deletions(-)
 
-diff --git a/include/dt-bindings/power/renesas,r8a779h0-sysc.h b/include/dt-bindings/power/renesas,r8a779h0-sysc.h
-new file mode 100644
-index 00000000000..f27976f523e
---- /dev/null
-+++ b/include/dt-bindings/power/renesas,r8a779h0-sysc.h
-@@ -0,0 +1,49 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-+/*
-+ * Copyright (C) 2023 Renesas Electronics Corp.
-+ */
-+#ifndef __DT_BINDINGS_POWER_RENESAS_R8A779H0_SYSC_H__
-+#define __DT_BINDINGS_POWER_RENESAS_R8A779H0_SYSC_H__
+diff --git a/drivers/clk/renesas/clk-rcar-gen3.c b/drivers/clk/renesas/clk-rcar-gen3.c
+index 196903e406c..b84024266f4 100644
+--- a/drivers/clk/renesas/clk-rcar-gen3.c
++++ b/drivers/clk/renesas/clk-rcar-gen3.c
+@@ -306,6 +306,12 @@ static u64 gen3_clk_get_rate64(struct clk *clk)
+ 						gen4_pll_config->pll6_div,
+ 						"PLL6");
+ 
++	case CLK_TYPE_GEN4_PLL7:
++		return gen3_clk_get_rate64_pll_mul_reg(priv, &parent,
++						0, gen4_pll_config->pll7_mult,
++						gen4_pll_config->pll7_div,
++						"PLL7");
 +
-+/*
-+ * These power domain indices match the Power Domain Register Numbers (PDR)
-+ */
-+
-+#define R8A779H0_PD_A1E0D0C0		0
-+#define R8A779H0_PD_A1E0D0C1		1
-+#define R8A779H0_PD_A1E0D0C2		2
-+#define R8A779H0_PD_A1E0D0C3		3
-+#define R8A779H0_PD_A2E0D0		16
-+#define R8A779H0_PD_A3CR0		21
-+#define R8A779H0_PD_A3CR1		22
-+#define R8A779H0_PD_A3CR2		23
-+#define R8A779H0_PD_A33DGA		24
-+#define R8A779H0_PD_A23DGB		25
-+#define R8A779H0_PD_C4			31
-+#define R8A779H0_PD_A1DSP0		33
-+#define R8A779H0_PD_A2IMP01		34
-+#define R8A779H0_PD_A2PSC		35
-+#define R8A779H0_PD_A2CV0		36
-+#define R8A779H0_PD_A2CV1		37
-+#define R8A779H0_PD_A3IMR0		38
-+#define R8A779H0_PD_A3IMR1		39
-+#define R8A779H0_PD_A3VC		40
-+#define R8A779H0_PD_A2CN0		42
-+#define R8A779H0_PD_A1CN0		44
-+#define R8A779H0_PD_A1DSP1		45
-+#define R8A779H0_PD_A2DMA		47
-+#define R8A779H0_PD_A2CV2		48
-+#define R8A779H0_PD_A2CV3		49
-+#define R8A779H0_PD_A3IMR2		50
-+#define R8A779H0_PD_A3IMR3		51
-+#define R8A779H0_PD_A3PCI		52
-+#define R8A779H0_PD_A2PCIPHY		53
-+#define R8A779H0_PD_A3VIP0		56
-+#define R8A779H0_PD_A3VIP2		58
-+#define R8A779H0_PD_A3ISP0		60
-+#define R8A779H0_PD_A3DUL		62
-+
-+/* Always-on power area */
-+#define R8A779H0_PD_ALWAYS_ON		64
-+
-+#endif /* __DT_BINDINGS_POWER_RENESAS_R8A779H0_SYSC_H__ */
+ 	case CLK_TYPE_FF:
+ 		return gen3_clk_get_rate64_pll_mul_reg(priv, &parent,
+ 						0, core->mult, core->div,
+diff --git a/drivers/clk/renesas/r8a779h0-cpg-mssr.c b/drivers/clk/renesas/r8a779h0-cpg-mssr.c
+index 8bb7b41c787..502b20b554a 100644
+--- a/drivers/clk/renesas/r8a779h0-cpg-mssr.c
++++ b/drivers/clk/renesas/r8a779h0-cpg-mssr.c
+@@ -206,11 +206,11 @@ static const struct mssr_mod_clk r8a779h0_mod_clks[] = {
+ 					 (((md) & BIT(13)) >> 13))
+ 
+ static const struct rcar_gen4_cpg_pll_config cpg_pll_configs[4] = {
+-	/* EXTAL div	PLL1 mult/div	PLL2 mult/div	PLL3 mult/div	PLL4 mult/div	PLL5 mult/div	PLL6 mult/div	OSC prediv */
+-	{ 1,		192,	1,	240,	1,	192,	1,	240,	1,	192,	1,	168,	1,	16,	},
+-	{ 1,		160,	1,	200,	1,	160,	1,	200,	1,	160,	1,	140,	1,	19,	},
+-	{ 0,		0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	},
+-	{ 2,		192,	1,	240,	1,	192,	1,	240,	1,	192,	1,	168,	1,	32,	},
++	/* EXTAL div	PLL1 mult/div	PLL2 mult/div	PLL3 mult/div	PLL4 mult/div	PLL5 mult/div	PLL6 mult/div	OSC prediv	PLL7 mult/div */
++	{ 1,		192,	1,	240,	1,	192,	1,	240,	1,	192,	1,	168,	1,	16,		120,	1,	},
++	{ 1,		160,	1,	200,	1,	160,	1,	200,	1,	160,	1,	140,	1,	19,		100,	1,	},
++	{ 0,		0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,		0,	0,	},
++	{ 2,		192,	1,	240,	1,	192,	1,	240,	1,	192,	1,	168,	1,	32,		120,	1,	},
+ };
+ 
+ /*
+diff --git a/drivers/clk/renesas/rcar-gen3-cpg.h b/drivers/clk/renesas/rcar-gen3-cpg.h
+index 7bea09c4827..4efb9b6ceef 100644
+--- a/drivers/clk/renesas/rcar-gen3-cpg.h
++++ b/drivers/clk/renesas/rcar-gen3-cpg.h
+@@ -131,6 +131,8 @@ struct rcar_gen4_cpg_pll_config {
+ 	u8 pll6_mult;
+ 	u8 pll6_div;
+ 	u8 osc_prediv;
++	u8 pll7_mult;
++	u8 pll7_div;
+ };
+ 
+ #define CPG_RST_MODEMR	0x060
 -- 
 2.43.0
 
