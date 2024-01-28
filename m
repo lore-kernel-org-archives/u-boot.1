@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FF29C47258
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jan 2024 21:43:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF4BEC47258
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jan 2024 21:43:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2888387B13;
-	Sun, 28 Jan 2024 22:43:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7BC4687B4D;
+	Sun, 28 Jan 2024 22:43:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jOTEBuNK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jhDhXuia";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 603F487A0E; Sun, 28 Jan 2024 22:43:42 +0100 (CET)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id 016D687A0E; Sun, 28 Jan 2024 22:43:43 +0100 (CET)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7B7287B13
- for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 22:43:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B311087B4D
+ for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 22:43:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mr.bossman075@gmail.com
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-68c420bf6e1so9827736d6.2
- for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 13:43:38 -0800 (PST)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-68c420bf6e1so9827836d6.2
+ for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 13:43:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706478217; x=1707083017; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=d3Y8dh3C15/awf6wcSOaxL+cIZTxdAlIiNjsycYvdS8=;
- b=jOTEBuNKAwsb0e549gpoYS2h57n7MJzOukT4nbTg9D8l3KCWImKy0lxcIaVUaP0y8B
- R9/ygljlwJLWE4O2D2PLyM6pI8q9AMg2BAlF+uMsUKayJ8Jkv8sf4S9SVfbfk0xe0+pJ
- 5GEA8jlnSbA12tkXFh8yZjgDs6adAnAB13DNrUKWu+riymWGUmUAnAzKXW23BDeKUf1E
- hZR8WcWZzZuQ2RF0qkU2dV4Z4JKRNl+H32kgbBzfdZTFHLCpUfeIYHQUWQRe8aNConqc
- +NRUbUXCmXGUWF/ecjAMJaWb+IhpbrgpqT0ndHycn+Ebsx2dpa7d3/rI04vA1AG4x7pK
- H/FA==
+ d=gmail.com; s=20230601; t=1706478218; x=1707083018; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QLKwNgaxKMRI/cadOo2mEnW0RzNIdW5wOiZqD9DcP44=;
+ b=jhDhXuiabp7xHUPj5R/alnv3TFL0FIYakHEWFsWdOeV5+DVCpX6NOzfym5uQ7v9/Vw
+ 5CvXtNgcl1Ru/hJqxcSfvPVjb9bQwINL1d8ShyI6xOEFepomxRbd5DuMtb0gMNEajPti
+ +EAtAr5s2OfMKW8DkgAD5UOAjK24t/OLBJp0JUk5ZUddPzUDPwnvdu4ZGEJOAHzYqYjO
+ 4QzlUNRg9wcsIRUQb1Z/Evkr6bYpOmeKlfFc4UvVzOAhDei5Fcc8Bnq3QfKDNZDw0/M6
+ ImRyzIygdHl+ELrniAQnqq8sRBzpClEpYcvoIYygzVV8OIeCOMM+FZxeRVx3gDskXo++
+ qPsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706478217; x=1707083017;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=d3Y8dh3C15/awf6wcSOaxL+cIZTxdAlIiNjsycYvdS8=;
- b=IWQSbBAg/0yb9CafCmBKcChxnpK/c6HKjEFJ1LPN7RWZaccuFHiXH4Xf90jCvimxHS
- IYStXL4+Y/mwzYauO0THVR3efbZYmUWZOeZmNW9YOXvYxMYXdX7EqKuj1DMdEEgzVevA
- MU+ZkcTdbvz4b/UiUB31f2pUDfUassQV0rCds8q2NsDw4KKRUolKKJ1/jL20DQpSImYs
- MJzWZCA/0kSbB0CoL4Pq81gISyR55cXKWt+SrgiLGoy3t85W+nUzIOSPMQ/NYrIS4Bi+
- utAtKxUGP2UFD4AMs2Iksp58xU9SoQQ/Bgbn2hon5o4dXg2uDCJ972a6VVfv9mCMI96o
- H4AQ==
-X-Gm-Message-State: AOJu0YwTvYSisP/ouoo81+w8SnDN59lY89VS95z8KwsyJtrrWepUJn/T
- F0jIwHR/oagrmbrmOkC89oiW/70M/Km3CAFsvmvi3/RbPB/6ddzhWp60bV0YJQ4=
-X-Google-Smtp-Source: AGHT+IGj2HkAQ4XBeQpiCJpNaUiZVgngJYOAW745KHY3saTLXhRCmr/cYZuo9CPjmQFAxgqC8sxaxg==
-X-Received: by 2002:a05:6214:248e:b0:68c:499f:f803 with SMTP id
- gi14-20020a056214248e00b0068c499ff803mr2388818qvb.30.1706478217049; 
- Sun, 28 Jan 2024 13:43:37 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706478218; x=1707083018;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QLKwNgaxKMRI/cadOo2mEnW0RzNIdW5wOiZqD9DcP44=;
+ b=Yt9IR61ds2m89SoLibfO5fcD09FMKzsQd+WD1/+nr7NVVlXr0l13bkdZrLR0XYv/s7
+ SporNn6xmEzHBApRQWfRwhCrb0LAm9Ao15LnQ3aRI8h6zxQuQvSRykoOmokdenNAqz8H
+ mck0UVM00yWlOW90hM8dSOepzTsDzb6eiwQgg9PFV2kKD2Asbv5U41D5Gc2xdXnRfl0f
+ /ukqwXo63P7Bzr7mtmDcWm6/LlkALQZgt1dKPzU9AuvgkbTYtmhjWDjZbc/gupJmVsHr
+ mQwRPqzILJUM3gRgZ1b/z+ABFMwrAmI64yAL4CyIdhvFPnzuom9L76TbAs5UtDplts79
+ RDMg==
+X-Gm-Message-State: AOJu0YzGcSlaxB7NQikYN8r/NMKXjqK/ts+KgtR6iZthefJQ/SEuT8pp
+ Y4ZzjjPdMdsQAaurldjdgQ6tciQIzvWhvjrZgUCRAnYmD3RTlfYjWHO8hPaBGWo=
+X-Google-Smtp-Source: AGHT+IFPtettCa6Gayio7ex7/tm8lWD3mT9IOhwQzROZcnkGO4VXTEZK4KUmQPLQB601BX5U9zguTQ==
+X-Received: by 2002:ad4:5dc2:0:b0:685:bd10:75dc with SMTP id
+ m2-20020ad45dc2000000b00685bd1075dcmr7599059qvh.0.1706478218071; 
+ Sun, 28 Jan 2024 13:43:38 -0800 (PST)
 Received: from jesse-desktop.jtp-bos.lab
  (pool-108-26-179-17.bstnma.fios.verizon.net. [108.26.179.17])
  by smtp.gmail.com with ESMTPSA id
- kf4-20020a056214524400b006837a012417sm2768347qvb.51.2024.01.28.13.43.36
+ kf4-20020a056214524400b006837a012417sm2768347qvb.51.2024.01.28.13.43.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 28 Jan 2024 13:43:36 -0800 (PST)
+ Sun, 28 Jan 2024 13:43:37 -0800 (PST)
 From: Jesse Taube <mr.bossman075@gmail.com>
 X-Google-Original-From: Jesse Taube <Mr.Bossman075@gmail.com>
 To: u-boot@lists.denx.de
@@ -72,10 +73,12 @@ Cc: Jesse Taube <Mr.Bossman075@gmail.com>,
  Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v1 1/2] imx: imxrt1050-evk: Add support for SPI flash booting
-Date: Sun, 28 Jan 2024 16:43:34 -0500
-Message-ID: <20240128214335.120280-1-Mr.Bossman075@gmail.com>
+Subject: [PATCH v1 2/2] imx: imxrt1050-evk: Add documentation for SPI boot
+Date: Sun, 28 Jan 2024 16:43:35 -0500
+Message-ID: <20240128214335.120280-2-Mr.Bossman075@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240128214335.120280-1-Mr.Bossman075@gmail.com>
+References: <20240128214335.120280-1-Mr.Bossman075@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,330 +97,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This add some macros to change addresses to use flexspi.
-
-This commit adds support for booting the imxrt1050-evk from spi.
-It adds imximage config and the ability for SPL to boot from NOR.
+Adds documentation for SPI boot.
 
 Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
 ---
- arch/arm/dts/imxrt1050-evk-u-boot.dtsi        |  31 ++++++
- arch/arm/mach-imx/imxrt/Kconfig               |   1 +
- .../freescale/imxrt1050-evk/imximage-nor.cfg  |  41 +++++++
- board/freescale/imxrt1050-evk/imximage.cfg    |  10 +-
- board/freescale/imxrt1050-evk/imxrt1050-evk.c |   7 +-
- configs/imxrt1050-evk_defconfig               |   8 +-
- configs/imxrt1050-evk_fspi_defconfig          | 100 ++++++++++++++++++
- include/configs/imxrt1050-evk.h               |   6 ++
- 8 files changed, 198 insertions(+), 6 deletions(-)
- create mode 100644 board/freescale/imxrt1050-evk/imximage-nor.cfg
- create mode 100644 configs/imxrt1050-evk_fspi_defconfig
+ doc/board/nxp/imxrt1050-evk.rst | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
 
-diff --git a/arch/arm/dts/imxrt1050-evk-u-boot.dtsi b/arch/arm/dts/imxrt1050-evk-u-boot.dtsi
-index a9095e736b..3f54411b7b 100644
---- a/arch/arm/dts/imxrt1050-evk-u-boot.dtsi
-+++ b/arch/arm/dts/imxrt1050-evk-u-boot.dtsi
-@@ -8,6 +8,10 @@
- #include "imxrt1050-pinfunc.h"
+diff --git a/doc/board/nxp/imxrt1050-evk.rst b/doc/board/nxp/imxrt1050-evk.rst
+index c1fb48f0cd..aca5071181 100644
+--- a/doc/board/nxp/imxrt1050-evk.rst
++++ b/doc/board/nxp/imxrt1050-evk.rst
+@@ -39,3 +39,32 @@ switch label numbers reference).
+   The USB console connector is the one close the ethernet connector
  
- / {
-+	binman: binman {
-+		multiple-images;
-+	};
+ - Insert the micro SD card in the board, power it up and U-Boot messages should come up.
 +
- 	aliases {
- 		display0 = &lcdif;
- 		usbphy0 = &usbphy1;
-@@ -113,6 +117,33 @@
- 	};
- };
- 
-+&binman {
-+#ifdef CONFIG_FSPI_CONF_HEADER
-+	imx-boot {
-+		filename = "flash.bin";
-+		pad-byte = <0x00>;
 +
-+		fspi_conf_block {
-+			filename = CONFIG_FSPI_CONF_FILE;
-+			type = "blob-ext";
-+			offset = <0x0>;
-+		};
++How to use U-Boot with SPI flash on NXP i.MXRT1050 EVK
++------------------------------------------------------
 +
-+		spl {
-+			filename = "SPL";
-+			offset = <0x1000>;
-+			type = "blob-ext";
-+		};
++- Build U-Boot for i.MXRT1050 EVK:
 +
-+		binman_uboot: uboot {
-+			filename = "u-boot.img";
-+			offset = <0x10000>;
-+			type = "blob-ext";
-+		};
-+	};
-+#endif
-+};
++.. code-block:: bash
 +
- &osc {
- 	bootph-pre-ram;
- };
-diff --git a/arch/arm/mach-imx/imxrt/Kconfig b/arch/arm/mach-imx/imxrt/Kconfig
-index c1d6b09e77..ccccf702f6 100644
---- a/arch/arm/mach-imx/imxrt/Kconfig
-+++ b/arch/arm/mach-imx/imxrt/Kconfig
-@@ -2,6 +2,7 @@ if ARCH_IMXRT
- 
- config IMXRT
- 	bool
-+	select BINMAN
- 	select SYS_FSL_ERRATUM_ESDHC135
- 
- config IMXRT1020
-diff --git a/board/freescale/imxrt1050-evk/imximage-nor.cfg b/board/freescale/imxrt1050-evk/imximage-nor.cfg
-new file mode 100644
-index 0000000000..fb7b6489a3
---- /dev/null
-+++ b/board/freescale/imxrt1050-evk/imximage-nor.cfg
-@@ -0,0 +1,41 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2019
-+ * Author(s): Giulio Benetti <giulio.benetti@benettiengineering.com>
-+ */
++   $ make mrproper
++   $ make imxrt1050-evk_spi_defconfig
++   $ make
 +
-+#include <config.h>
++This will generate SPL, uboot.img, fspi_header.bin, and the final image (flash.bin).
 +
-+/* image version */
++To boot from SPI flash on other boards you may need to change the flash header config,
++that is specific to your flash chip, in Kconfig.
++The flash config is 4K in size and is documented on page 217 of the imxrt1050RM.
 +
-+IMAGE_VERSION 2
++- Jumper settings::
 +
-+/*
-+ * Boot Device : one of
-+ * spi/sd/nand/onenand, qspi/nor
-+ */
++   SW7: 0 1 1 0
 +
-+BOOT_FROM	nor
++where 0 means bottom position and 1 means top position (from the
++switch label numbers reference).
 +
-+/*
-+ * Device Configuration Data (DCD)
-+ *
-+ * Each entry must have the format:
-+ * Addr-type           Address        Value
-+ *
-+ * where:
-+ *	Addr-type register length (1,2 or 4 bytes)
-+ *	Address	  absolute address of the register
-+ *	value	  value to be stored in the register
-+ */
++- Connect the USB cable between the EVK and the PC for the console.
 +
-+/*
-+ * 0x400AC044 is used to configure the flexram.
-+ * Unfortunatly seting all to OCRAM only works for MMC
-+ * and setting all to DTCM only works for FLEXSPI NOR.
-+ * This configureation fortunaly works for both SPI and MMC.
-+*/
-+/* Set first two banks FlexRAM as OCRAM(01b) and the rest to DTCM(10b) */
-+DATA 4 0x400AC044 0x55aaaaaa
-+/* Use FLEXRAM_BANK_CFG to config FlexRAM */
-+SET_BIT 4 0x400AC040 0x4
-diff --git a/board/freescale/imxrt1050-evk/imximage.cfg b/board/freescale/imxrt1050-evk/imximage.cfg
-index f1f09fd7eb..dd5c231b39 100644
---- a/board/freescale/imxrt1050-evk/imximage.cfg
-+++ b/board/freescale/imxrt1050-evk/imximage.cfg
-@@ -29,7 +29,13 @@ BOOT_FROM	sd
-  *	value	  value to be stored in the register
-  */
- 
--/* Set all FlexRAM as OCRAM(01b) */
--DATA 4 0x400AC044 0x55555555
-+/*
-+ * 0x400AC044 is used to configure the flexram.
-+ * Unfortunatly seting all to OCRAM only works for MMC
-+ * and setting all to DTCM only works for FLEXSPI NOR.
-+ * This configureation fortunaly works for both SPI and MMC.
-+*/
-+/* Set first two banks FlexRAM as OCRAM(01b) and the rest to DTCM(10b) */
-+DATA 4 0x400AC044 0x55aaaaaa
- /* Use FLEXRAM_BANK_CFG to config FlexRAM */
- SET_BIT 4 0x400AC040 0x4
-diff --git a/board/freescale/imxrt1050-evk/imxrt1050-evk.c b/board/freescale/imxrt1050-evk/imxrt1050-evk.c
-index 4b82ee5e9c..d4e39fd914 100644
---- a/board/freescale/imxrt1050-evk/imxrt1050-evk.c
-+++ b/board/freescale/imxrt1050-evk/imxrt1050-evk.c
-@@ -68,7 +68,12 @@ void spl_board_init(void)
- 
- u32 spl_boot_device(void)
- {
--	return BOOT_DEVICE_MMC1;
-+	/* There is no way to find boot device so look if there is valid IVT in RAM for MMC*/
-+	u32 nor_ivt = *(u32 *)(CONFIG_SYS_LOAD_ADDR - 0xC00);
-+
-+	if (nor_ivt == 0x402000d1)
-+		return BOOT_DEVICE_MMC1;
-+	return BOOT_DEVICE_NOR;
- }
- #endif
- 
-diff --git a/configs/imxrt1050-evk_defconfig b/configs/imxrt1050-evk_defconfig
-index 8b5ce4e735..086fc47ec2 100644
---- a/configs/imxrt1050-evk_defconfig
-+++ b/configs/imxrt1050-evk_defconfig
-@@ -10,21 +10,22 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
- CONFIG_SPL_LIBGENERIC_SUPPORT=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20280000
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20020000
- CONFIG_ENV_OFFSET=0x80000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="imxrt1050-evk"
--CONFIG_SPL_TEXT_BASE=0x20209000
-+CONFIG_SPL_TEXT_BASE=0x20002000
- CONFIG_TARGET_IMXRT1050_EVK=y
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_SIZE_LIMIT=0x20000
- CONFIG_SPL=y
--CONFIG_SYS_LOAD_ADDR=0x20209000
-+CONFIG_SYS_LOAD_ADDR=0x20002000
- CONFIG_HAVE_SYS_UBOOT_START=y
- CONFIG_SYS_UBOOT_START=0x800023FD
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_SD_BOOT=y
-+CONFIG_SPI_BOOT=y
- # CONFIG_USE_BOOTCOMMAND is not set
- CONFIG_SYS_CBSIZE=256
- CONFIG_SYS_PBSIZE=276
-@@ -36,6 +37,7 @@ CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
-+CONFIG_SPL_NOR_SUPPORT=y
- # CONFIG_BOOTM_NETBSD is not set
- # CONFIG_BOOTM_PLAN9 is not set
- # CONFIG_BOOTM_RTEMS is not set
-diff --git a/configs/imxrt1050-evk_fspi_defconfig b/configs/imxrt1050-evk_fspi_defconfig
-new file mode 100644
-index 0000000000..4b252cfa5d
---- /dev/null
-+++ b/configs/imxrt1050-evk_fspi_defconfig
-@@ -0,0 +1,100 @@
-+CONFIG_ARM=y
-+CONFIG_SYS_DCACHE_OFF=y
-+# CONFIG_SPL_SYS_DCACHE_OFF is not set
-+CONFIG_ARCH_IMXRT=y
-+CONFIG_TEXT_BASE=0x80002000
-+CONFIG_SYS_MALLOC_LEN=0x40000
-+CONFIG_SYS_MALLOC_F_LEN=0x8000
-+CONFIG_SPL_GPIO=y
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20020000
-+CONFIG_ENV_OFFSET=0x80000
-+CONFIG_IMX_CONFIG="board/freescale/imxrt1050-evk/imximage-nor.cfg"
-+CONFIG_DM_GPIO=y
-+CONFIG_DEFAULT_DEVICE_TREE="imxrt1050-evk"
-+CONFIG_SPL_TEXT_BASE=0x20002000
-+CONFIG_TARGET_IMXRT1050_EVK=y
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_SIZE_LIMIT=0x20000
-+CONFIG_SPL=y
-+CONFIG_SYS_LOAD_ADDR=0x20002000
-+CONFIG_HAVE_SYS_UBOOT_START=y
-+CONFIG_SYS_UBOOT_START=0x800023FD
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_SD_BOOT=y
-+CONFIG_SPI_BOOT=y
-+# CONFIG_USE_BOOTCOMMAND is not set
-+CONFIG_SYS_CBSIZE=256
-+CONFIG_SYS_PBSIZE=276
-+CONFIG_SYS_CONSOLE_ENV_OVERWRITE=y
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_SPL_NO_BSS_LIMIT=y
-+CONFIG_SPL_BOARD_INIT=y
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
-+CONFIG_SPL_NOR_SUPPORT=y
-+# CONFIG_BOOTM_NETBSD is not set
-+# CONFIG_BOOTM_PLAN9 is not set
-+# CONFIG_BOOTM_RTEMS is not set
-+# CONFIG_BOOTM_VXWORKS is not set
-+CONFIG_CMD_USB=y
-+# CONFIG_CMD_MII is not set
-+# CONFIG_SPL_DOS_PARTITION is not set
-+# CONFIG_ISO_PARTITION is not set
-+# CONFIG_EFI_PARTITION is not set
-+CONFIG_OF_CONTROL=y
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_ENV_IS_NOWHERE=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_TFTP_BLOCKSIZE=512
-+CONFIG_SPL_DM=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+# CONFIG_OF_TRANSLATE is not set
-+CONFIG_SPL_CLK_IMXRT1050=y
-+CONFIG_CLK_IMXRT1050=y
-+# CONFIG_SPL_DM_GPIO is not set
-+CONFIG_MXC_GPIO=y
-+# CONFIG_INPUT is not set
-+CONFIG_FSL_USDHC=y
-+CONFIG_PINCTRL=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_PINCTRL_IMXRT=y
-+CONFIG_RAM=y
-+CONFIG_SPL_RAM=y
-+CONFIG_IMXRT_SDRAM=y
-+CONFIG_FSL_LPUART=y
-+CONFIG_TIMER=y
-+CONFIG_SPL_TIMER=y
-+CONFIG_IMX_GPT_TIMER=y
-+CONFIG_USB=y
-+# CONFIG_SPL_DM_USB is not set
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_VIDEO=y
-+CONFIG_VIDEO_LOGO=y
-+CONFIG_BACKLIGHT_GPIO=y
-+CONFIG_SYS_WHITE_ON_BLACK=y
-+CONFIG_VIDEO_MXS=y
-+CONFIG_SPLASH_SCREEN=y
-+CONFIG_SPLASH_SCREEN_ALIGN=y
-+CONFIG_BMP_16BPP=y
-+CONFIG_SHA1=y
-+CONFIG_SHA256=y
-+CONFIG_HEXDUMP=y
-+CONFIG_FSPI_CONF_HEADER=y
-+CONFIG_FSPI_CONF_FILE="fspi_header.bin"
-+CONFIG_READ_CLK_SOURCE=0x03
-+CONFIG_DEVICE_TYPE=0x00
-+CONFIG_FLASH_PAD_TYPE=0x08
-+CONFIG_SERIAL_CLK_FREQUENCY=0x07
-+CONFIG_FSPI_COL_ADDR_W=0x03
-+CONFIG_FSPI_CONTROLLER_MISC=0x00000059
-+CONFIG_FSPI_FLASH_A1_SIZE=0x04000000
-+CONFIG_LUT_SEQUENCE="0xa0, 0x87, 0x18, 0x8b, 0x10, 0x8f, 0x06, 0xb3, 0x04, 0xa7"
-diff --git a/include/configs/imxrt1050-evk.h b/include/configs/imxrt1050-evk.h
-index 2af2dde2ae..b370e25105 100644
---- a/include/configs/imxrt1050-evk.h
-+++ b/include/configs/imxrt1050-evk.h
-@@ -25,4 +25,10 @@
- 		"stderr=serial,vidconsole\0"
- #endif
- 
-+/*
-+ * Address of U-Boot for SPI NOR boot
-+ */
-+
-+#define CFG_SYS_UBOOT_BASE			0x60010000
-+
- #endif /* __IMXRT1050_EVK_H */
++- Use either JTAG or SWD to write `flash.bin` to the NOR. I used Mcuexpresso IDE's GUI flash tool.
 -- 
 2.43.0
 
