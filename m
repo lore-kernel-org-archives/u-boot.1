@@ -4,44 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6269FC47258
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jan 2024 15:05:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99A67C47258
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jan 2024 15:55:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E29187E48;
-	Sun, 28 Jan 2024 16:05:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
+	by phobos.denx.de (Postfix) with ESMTP id 6C20987F30;
+	Sun, 28 Jan 2024 16:55:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="SI/jTSAe";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79B9B87E81; Sun, 28 Jan 2024 16:05:24 +0100 (CET)
-Received: from smtp.gentoo.org (dev.gentoo.org
- [IPv6:2001:470:ea4a:1:5054:ff:fec7:86e4])
+ id C080987F2D; Sun, 28 Jan 2024 16:55:52 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D89E787DED
- for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 16:05:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F2D787DC1
+ for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 16:55:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=gentoo.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
-Date: Sun, 28 Jan 2024 15:05:09 +0000
-From: Yixun Lan <dlan@gentoo.org>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Kongyang Liu <seashell11234455@gmail.com>, Adam Ford <aford173@gmail.com>,
- Chris Morgan <macromorgan@hotmail.com>,
- Fabio Estevam <festevam@denx.de>, Nishanth Menon <nm@ti.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
- Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
- Wei Fu <wefu@redhat.com>, Yanhong Wang <yanhong.wang@starfivetech.com>,
- Yannic Moog <y.moog@phytec.de>, u-boot@lists.denx.de
-Subject: Re: [PATCH v4 3/3] doc: sophgo: milkv_duo: document Milk-V Duo board
-Message-ID: <20240128150509.GA3546240@ofsar>
-References: <20240128070614.7702-1-seashell11234455@gmail.com>
- <20240128070614.7702-4-seashell11234455@gmail.com>
- <2acf8505-315e-486d-a07d-c91fddfe6671@gmx.de>
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4TNGHR63XQz9sVN;
+ Sun, 28 Jan 2024 16:55:47 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1706457347;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=w9gciAEJVrOyWUEmm6wacPIDF1i7cbdhHbA4/PH/Sv4=;
+ b=SI/jTSAeIvCIPhFIE2HFLwP0uJHlEt1qD6PoedRxMcqQP57thDhws3BIvO/2EdXiMZJnws
+ cZuRQEAj9TIfr6L95eTaNObYJr1b8vbkHkOKPgEf37FevsBcmq6c3vkro5M0Aa/IVI8Zjh
+ 3IxFS+BM7YXLFnxR+YhAaHZgjqNDKffq9b8NZnUtxNrE82iy/bk16DxWEYg9EbnZ9W2qHP
+ ytNEgN2LJ7Q7mFVICSgxNkjOoYT0PNnHuNROWhC7fBoe3/HgCoLd7YMdn4wUzZ54qxu1tl
+ MoqNbbF5Jy5zB9DAv8/FM+C5o2naBlu1QrfjH+TaiXcjqClLkAA6PTfSHE74tw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+To: u-boot@lists.denx.de
+Cc: Duy Nguyen <duy.nguyen.rh@renesas.com>, Hai Pham <hai.pham.ud@renesas.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>
+Subject: [PATCH v2 01/11] dt-bindings: clock: Add R8A779H0 V4M CPG Core Clock
+ Definitions
+Date: Sun, 28 Jan 2024 16:51:59 +0100
+Message-ID: <20240128155458.56712-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <2acf8505-315e-486d-a07d-c91fddfe6671@gmx.de>
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: ae3ac5c295a104fb9f8
+X-MBO-RS-META: 48rf5ygz36epzgiorbbq55zx4n68ws9y
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,150 +71,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich S
+From: Duy Nguyen <duy.nguyen.rh@renesas.com>
 
+Add all Clock Pulse Generator Core Clock Outputs for the Renesas R-Car
+V4M (R8A779H0) SoC.
 
-On 10:16 Sun 28 Jan     , Heinrich Schuchardt wrote:
-> On 1/28/24 08:05, Kongyang Liu wrote:
-> > Add document for Milk-V Duo board which based on Sophgo's CV1800B SoC.
-> >
-> > Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
-> >
-> > ---
-> >
-> > (no changes since v3)
-> >
-> > Changes in v3:
-> > - Add brief description of the procedure to run u-boot-dtb.bin
-> >
-> >   doc/board/index.rst            |  1 +
-> >   doc/board/sophgo/index.rst     |  8 +++++
-> >   doc/board/sophgo/milkv_duo.rst | 64 ++++++++++++++++++++++++++++++++++
-> >   3 files changed, 73 insertions(+)
-> >   create mode 100644 doc/board/sophgo/index.rst
-> >   create mode 100644 doc/board/sophgo/milkv_duo.rst
-> >
-> > diff --git a/doc/board/index.rst b/doc/board/index.rst
-> > index c96e5fda28..d0f9f355d2 100644
-> > --- a/doc/board/index.rst
-> > +++ b/doc/board/index.rst
-> > @@ -46,6 +46,7 @@ Board-specific doc
-> >      sifive/index
-> >      sipeed/index
-> >      socionext/index
-> > +   sophgo/index
-> >      st/index
-> >      starfive/index
-> >      ste/index
-> > diff --git a/doc/board/sophgo/index.rst b/doc/board/sophgo/index.rst
-> > new file mode 100644
-> > index 0000000000..e097afdac6
-> > --- /dev/null
-> > +++ b/doc/board/sophgo/index.rst
-> > @@ -0,0 +1,8 @@
-> > +.. SPDX-License-Identifier: GPL-2.0+
-> > +
-> > +Sophgo
-> > +======
-> > +.. toctree::
-> > +   :maxdepth: 1
-> > +
-> > +   milkv_duo
-> > diff --git a/doc/board/sophgo/milkv_duo.rst b/doc/board/sophgo/milkv_duo.rst
-> > new file mode 100644
-> > index 0000000000..cb2ed1ad98
-> > --- /dev/null
-> > +++ b/doc/board/sophgo/milkv_duo.rst
-> > @@ -0,0 +1,64 @@
-> > +.. SPDX-License-Identifier: GPL-2.0+
-> > +
-> > +Milk-V Duo
-> > +==========
-> > +
-> > +CV1800B RISC-V SoC
-> > +------------------
-> > +The CV1800B is a high-performance, low-power 1+1 64-bit RISC-V SoC from Sophgo.
-> > +
-> > +Mainline support
-> > +----------------
-> > +The support for following drivers are already enabled:
-> > +1. ns16550 UART Driver.
-> > +
-> > +Building
-> > +~~~~~~~~
-> > +1. Add the RISC-V toolchain to your PATH.
-> > +2. Setup ARCH & cross compilation environment variable:
-> > +
-> > +.. code-block:: console
-> > +
-> > +   export CROSS_COMPILE=<riscv64 toolchain prefix>
-> > +   cd <U-Boot-dir>
-> > +   make milkv_duo_defconfig
-> > +   make
-> > +
-> > +This will generate u-boot-dtb.bin
-> > +
-> > +Booting
-> > +~~~~~~~
-> > +Currently, we rely on vendor FSBL(First Stage Boot Loader) to initialize the
-> > +clock and load the u-boot image, then bootup from it.
-> > +
-> > +Alternatively, to run u-boot-dtb.bin on top of FSBL, follow these steps:
-> > +
-> > +1. Use the vendor-provided tool to create a unified fip.bin file containing
-> > +   FSBL, OpenSBI, and U-Boot.
-> 
-> Hello Kongyang,
-> 
-> thank you for providing a documentation for the board.
-> 
-> Concerning the usage of fip.bin it would be helpful to add more detail:
-> 
-> * From where can the vendor code be downloaded?
-..
+The current version is imported from:
+https://lore.kernel.org/linux-renesas-soc/11acbd2a30b58607474e9c32eb798b3a00e85e73.1706194617.git.geert+renesas@glider.be/
 
-> * Which are the commands to execute?
-for fip.bin, which is located inside the first vfat partition of SD card, it will
-be parsed & loaded & excuted by ROM after power on (haven't looked too deep into this)
+Signed-off-by: Duy Nguyen <duy.nguyen.rh@renesas.com>
+Signed-off-by: Hai Pham <hai.pham.ud@renesas.com>
+---
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+---
+V2: Update to version submitted to Linux kernel upstream
+---
+ .../clock/renesas,r8a779h0-cpg-mssr.h         | 96 +++++++++++++++++++
+ 1 file changed, 96 insertions(+)
+ create mode 100644 include/dt-bindings/clock/renesas,r8a779h0-cpg-mssr.h
 
-also the fip.bin image is a combination of FSBL+DDR param+ATF?/OpenSBI+U-boot
-please see the link below if you're interested
- https://github.com/milkv-duo/duo-buildroot-sdk/blob/develop/fsbl/plat/cv180x/fiptool.py#L201
-
-> 
-> Best regards
-> 
-> Heinrich
-> 
-> > +
-> > +2. Place the generated fip.bin file into the FAT partition of the SD card.
-> > +
-> > +3. Insert the SD card into the board and power it on.
-> > +
-> > +The board will automatically execute the FSBL from the fip.bin file.
-> > +Subsequently, it will transition to OpenSBI, and finally, OpenSBI will invoke
-> > +U-Boot.
-> > +
-> > +
-> > +Sample boot log from Milk-V Duo board
-> > +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> > +.. code-block:: none
-> > +
-> > +   U-Boot 2024.01-rc5-00010-g51965baa36 (Dec 28 2023 - 13:15:53 +0800)milkv_duo
-> > +
-> > +   DRAM:  63.3 MiB
-> > +   Core:  10 devices, 8 uclasses, devicetree: separate
-> > +   Loading Environment from nowhere... OK
-> > +   In:    serial@4140000
-> > +   Out:   serial@4140000
-> > +   Err:   serial@4140000
-> > +   Net:   No ethernet found.
-> > +   milkv_duo# cpu detail
-> > +     0: cpu@0      rv64imafdc
-> > +      ID = 0, freq = 0 Hz: L1 cache, MMU
-> > +   milkv_duo#
-
+diff --git a/include/dt-bindings/clock/renesas,r8a779h0-cpg-mssr.h b/include/dt-bindings/clock/renesas,r8a779h0-cpg-mssr.h
+new file mode 100644
+index 00000000000..7ab6cfbaf90
+--- /dev/null
++++ b/include/dt-bindings/clock/renesas,r8a779h0-cpg-mssr.h
+@@ -0,0 +1,96 @@
++/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
++/*
++ * Copyright (C) 2023 Renesas Electronics Corp.
++ */
++#ifndef __DT_BINDINGS_CLOCK_RENESAS_R8A779H0_CPG_MSSR_H__
++#define __DT_BINDINGS_CLOCK_RENESAS_R8A779H0_CPG_MSSR_H__
++
++#include <dt-bindings/clock/renesas-cpg-mssr.h>
++
++/* r8a779h0 CPG Core Clocks */
++
++#define R8A779H0_CLK_ZX			0
++#define R8A779H0_CLK_ZD			1
++#define R8A779H0_CLK_ZS			2
++#define R8A779H0_CLK_ZT			3
++#define R8A779H0_CLK_ZTR		4
++#define R8A779H0_CLK_S0D2		5
++#define R8A779H0_CLK_S0D3		6
++#define R8A779H0_CLK_S0D4		7
++#define R8A779H0_CLK_S0D1_VIO		8
++#define R8A779H0_CLK_S0D2_VIO		9
++#define R8A779H0_CLK_S0D4_VIO		10
++#define R8A779H0_CLK_S0D8_VIO		11
++#define R8A779H0_CLK_VIOBUSD1		12
++#define R8A779H0_CLK_VIOBUSD2		13
++#define R8A779H0_CLK_S0D1_VC		14
++#define R8A779H0_CLK_S0D2_VC		15
++#define R8A779H0_CLK_S0D4_VC		16
++#define R8A779H0_CLK_VCBUSD1		17
++#define R8A779H0_CLK_VCBUSD2		18
++#define R8A779H0_CLK_S0D2_MM		19
++#define R8A779H0_CLK_S0D4_MM		20
++#define R8A779H0_CLK_S0D2_U3DG		21
++#define R8A779H0_CLK_S0D4_U3DG		22
++#define R8A779H0_CLK_S0D2_RT		23
++#define R8A779H0_CLK_S0D3_RT		24
++#define R8A779H0_CLK_S0D4_RT		25
++#define R8A779H0_CLK_S0D6_RT		26
++#define R8A779H0_CLK_S0D2_PER		27
++#define R8A779H0_CLK_S0D3_PER		28
++#define R8A779H0_CLK_S0D4_PER		29
++#define R8A779H0_CLK_S0D6_PER		30
++#define R8A779H0_CLK_S0D12_PER		31
++#define R8A779H0_CLK_S0D24_PER		32
++#define R8A779H0_CLK_S0D1_HSC		33
++#define R8A779H0_CLK_S0D2_HSC		34
++#define R8A779H0_CLK_S0D4_HSC		35
++#define R8A779H0_CLK_S0D8_HSC		36
++#define R8A779H0_CLK_SVD1_IR		37
++#define R8A779H0_CLK_SVD2_IR		38
++#define R8A779H0_CLK_IMPAD1		39
++#define R8A779H0_CLK_IMPAD4		40
++#define R8A779H0_CLK_IMPB		41
++#define R8A779H0_CLK_SVD1_VIP		42
++#define R8A779H0_CLK_SVD2_VIP		43
++#define R8A779H0_CLK_CL			44
++#define R8A779H0_CLK_CL16M		45
++#define R8A779H0_CLK_CL16M_MM		46
++#define R8A779H0_CLK_CL16M_RT		47
++#define R8A779H0_CLK_CL16M_PER		48
++#define R8A779H0_CLK_CL16M_HSC		49
++#define R8A779H0_CLK_ZC0		50
++#define R8A779H0_CLK_ZC1		51
++#define R8A779H0_CLK_ZC2		52
++#define R8A779H0_CLK_ZC3		53
++#define R8A779H0_CLK_ZB3		54
++#define R8A779H0_CLK_ZB3D2		55
++#define R8A779H0_CLK_ZB3D4		56
++#define R8A779H0_CLK_ZG			57
++#define R8A779H0_CLK_SD0H		58
++#define R8A779H0_CLK_SD0		59
++#define R8A779H0_CLK_RPC		60
++#define R8A779H0_CLK_RPCD2		61
++#define R8A779H0_CLK_MSO		62
++#define R8A779H0_CLK_CANFD		63
++#define R8A779H0_CLK_CSI		64
++#define R8A779H0_CLK_FRAY		65
++#define R8A779H0_CLK_IPC		66
++#define R8A779H0_CLK_SASYNCRT		67
++#define R8A779H0_CLK_SASYNCPERD1	68
++#define R8A779H0_CLK_SASYNCPERD2	69
++#define R8A779H0_CLK_SASYNCPERD4	70
++#define R8A779H0_CLK_DSIEXT		71
++#define R8A779H0_CLK_DSIREF		72
++#define R8A779H0_CLK_ADGH		73
++#define R8A779H0_CLK_OSC		74
++#define R8A779H0_CLK_ZR0		75
++#define R8A779H0_CLK_ZR1		76
++#define R8A779H0_CLK_ZR2		77
++#define R8A779H0_CLK_RGMII		78
++#define R8A779H0_CLK_CPEX		79
++#define R8A779H0_CLK_CP			80
++#define R8A779H0_CLK_CBFUSA		81
++#define R8A779H0_CLK_R			82
++
++#endif /* __DT_BINDINGS_CLOCK_RENESAS_R8A779H0_CPG_MSSR_H__ */
 -- 
-Yixun Lan (dlan)
-Gentoo Linux Developer
-GPG Key ID AABEFD55
+2.43.0
+
