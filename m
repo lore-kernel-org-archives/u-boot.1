@@ -4,106 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52000C47DDB
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jan 2024 05:16:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F3ACC47258
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jan 2024 05:19:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 334C4880E1;
-	Sun, 28 Jan 2024 06:16:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 84C25880E1;
+	Sun, 28 Jan 2024 06:19:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="faW23muy";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="zf+REt21";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25997880E5; Sun, 28 Jan 2024 06:16:41 +0100 (CET)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2418::600])
+ id A0AF2880EC; Sun, 28 Jan 2024 06:19:38 +0100 (CET)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:200a::601])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D77788093
- for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 06:16:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 55F0B8784B
+ for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 06:19:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=tejas.arvind.bhumkar@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=UW6KOwhrENaMDRBJqcIuOyiaO+PPcR53gEkeyBQd68Xv9y/Uz5Z0iSdIv77aaU05L5kH2w5OmGAydZGmgCRp8dVNyOjEB2tbUyP66byKzvCaSvlZbYV4XLEDfqKdoapT22BtubjcTYhxalFoEVYnb6qyVAa1yv6kY30DKj6K3RVs2c582UvvsFScssz0UINsNOGBFARFLxzenusXocePiL/F+74Bu5rf5cHO1kSc0YMxKywywt8Smk6Kb+ewmbkbcEx2iBxMAX0WS3wXzTGnIa6XUPD3aSxpfrlT198ovX8QPxHYfXXiZ1pi6so+LahwQTSQRB8TsdQmVSjub8DQfA==
+ b=de3XSH3xKTtDHM86X2aXXP9PyK8MuZj+6GuE7orhwBjDKcU5vuUSEbdtQKE9dwkkt9XFaY4OkgKbR2tC/djEFx5te1h519Kp75H3Cp3bh0ZdnoJPnOYsqPxpdnEggfDtP1aWA+9WjkffLWDgyUUkuyZ+6hgGUjuZuUXOD7DBT0+cOjb4rGiBP1nsSw1bmE3DWrix/Z8ZG9vEcTlEL/eonP3bBoFSyGSPBuJrpd0TFzZLl/XpLolroJRokcSJQ7YsdPyYPVCV6boDxieO7YogW9dy+Zv0YIUvnDSTdPkNUUW1odxbQw7AEBTYS5jM6L93K0iGjX4pw6CXlT9vLiEj/A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=TDAJJXHXsK3X4+DeFYsaX1JH2Umjs/mvRvMiyKPunaU=;
- b=EGhyaX+EKRq9EmB3iWZDcc0KCkYWpvsVuOXRLKtmcfwvZuEhXoF3EI87Ih/gTp5Ies/pQoTwZzbDPmdIRTrGdQrjjVTm7liIWcmJSH30vSeg2eXUpRYVp4eyI84N8OCEPYkP4UQ4Qfs+UjMzBOON0KqJZ63XF5l2Md9lNjyXA+WzYlETYENNf2i8e92i2roAi8jWDlAP+Gi+lK0HYEgsruolR1cXkxlZX2LMKMZaoA5NsQWdWKoj9WVPw0rgPjag5qCrARytLOooTqeAD+NXTorDi0+BDSA76IYLaASq7P9k7tkFcc7VDDN7ENhesTJcjVGtF2slXsXKaHdKWSCEVQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
+ bh=0kKbMF5uRFFTTcfur9P2V2W1Z/LmFTEZ7fu2zi6hlaA=;
+ b=Yt5upnWjMYqMzeewxx3IukmpfqxQky4Swu7s53FG3Dzx5ZbFtxWsFZ6UJRSd0+l+5v659MA1JtPrIfGiABMAqclDgB9hzpnOVxRCB2BdILLTR5Arz8MiSx4lD1dQqk7EKA25E7tC69PKVfJsrypVDkG8eFC2vdoQjs3ZuDHmWQ4ODCLjsO/4+9QAQ648aENKtSsZSnpH6+rQgpAd2t7PLpRhzuzGZ+oaQ+1ePi5zLhwltKG5TfI4P1RfgISNuLbSTP/Ig6s0QrCyibeK+F1VauolA9UdvWTcvlAzYMnl2XEW3QXyvTGe1eQYQx5+vbmg//+9NZjGlcc9c9rq21Qb0g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=TDAJJXHXsK3X4+DeFYsaX1JH2Umjs/mvRvMiyKPunaU=;
- b=faW23muywWzqoOZWFWBb48+twPFRQvbglp4T9U7PysnCpkoas7qK0slY3LnPXjp9MZcb1jGHFfZni3zxwAOxDTbUw6jVMrk44lMLL0EuUi0Vm+OG8F7SiSGHZLwCcDSMP/DbIiwrpm1OSlGcLmA/LoRpg41vuwcow4vmzdkTUoA=
-Received: from BN0PR04CA0199.namprd04.prod.outlook.com (2603:10b6:408:e9::24)
- by PH0PR12MB7487.namprd12.prod.outlook.com (2603:10b6:510:1e9::5)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=0kKbMF5uRFFTTcfur9P2V2W1Z/LmFTEZ7fu2zi6hlaA=;
+ b=zf+REt21/EHZehZ4Iep5qQJk8Ta8RxqYcioNMp8bcUfP3wVSOuP2muHvq2RBEgZLYc0w9nmYwriCiYEXhohdRiFYmHMWaqcazp3jvl0uc99kSKVYMfgtlqiwiSNF2d3c+7yHxz3lhCg2Ia+dwDkPnVSczZXPPuLoxU5nicoi01w=
+Received: from BL3PR12MB6450.namprd12.prod.outlook.com (2603:10b6:208:3b9::22)
+ by DM6PR12MB4122.namprd12.prod.outlook.com (2603:10b6:5:214::17) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7228.31; Sun, 28 Jan
- 2024 05:16:34 +0000
-Received: from BN3PEPF0000B077.namprd04.prod.outlook.com
- (2603:10b6:408:e9:cafe::eb) by BN0PR04CA0199.outlook.office365.com
- (2603:10b6:408:e9::24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7228.31 via Frontend
- Transport; Sun, 28 Jan 2024 05:16:33 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN3PEPF0000B077.mail.protection.outlook.com (10.167.243.122) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7249.19 via Frontend Transport; Sun, 28 Jan 2024 05:16:33 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Sat, 27 Jan
- 2024 23:16:26 -0600
-Received: from xhdcl190040.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34 via Frontend
- Transport; Sat, 27 Jan 2024 23:16:24 -0600
-From: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <jagan@amarulasolutions.com>, <n-francis@ti.com>, <d-gole@ti.com>,
- <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>, <git@xilinx.com>
-Subject: [PATCH] spi: cadence_qspi: Address the comparison failure for 0-8
- bytes of data
-Date: Sun, 28 Jan 2024 10:46:17 +0530
-Message-ID: <20240128051617.1538326-1-tejas.arvind.bhumkar@amd.com>
-X-Mailer: git-send-email 2.27.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B077:EE_|PH0PR12MB7487:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1f1f71d6-2d8e-4d8f-2bb9-08dc1fc04b2e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: XLIHG1cyf1x/IcDbkzSTsc7YwCPHxnidLn7ltVs4W31eToCXNx1g7lTNFfj8oXr/mtGwXzoCwZd6RC696CuZDGMXq4hpOohwo0V9xtOplacIx0wf93ulC1fjsW+QjzkIwcsUlzeFLqhwzWnXF8/DUXPyyKXyhSjyqP7QlOPn0sbE9LvjqlZwD0FJIde89vhi4lzpFnizlnd7MfN230indcQ/q3oZJtWh8Xho4ghldZ/kknvUm2WnUKTjC+66xgwIqWiz2qVD4t88HQmfsUPVna3PJa/S/B0V7wZZEeFyb2BFl1QOkeEQTYEuIBgkXN04p8S7CgckLUY+GYIwRTi9hColTzj5X4n+UCS7LyFc3x5R0/HDXQPXN7F/kOmxBPzdGZFFfx7bzLQdFNkbL2jSqj2IYArZqpia4u2RhgCY3jF1iPxDIWwdZHJGVFPu+MieCbaLeH4T0u/Nbd2M8oXbIQPmROMLCWVsbcNaOrDQzkEbJbCOeW2lzcOvbvZNHcUBRFCmss5AeCY9s/58OnrZnn14Ag5bxg4OScS7ZPa8Qvut1NgQs+oUF7ziUBMOZzdhUgziAVE2LTUCGeNoEtL9yQZ/FwT2FGNcFNpsvngBmCaj0FdMXoGq2WVzSgW+bcu0DczmS10DuYu2gfcxG33pQUMARk4neEbmU0AFQed4FmOhWvdeDOrJU2yuIoF9SaJOojcfaQWgNgRdpoJaHfHdMSbMu5yIdsbi63QjuxsrgTGMSKI14BuB3SQDOSzjsM6Hy2da1F5zCOvNhp6PGSc8FA==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(136003)(346002)(376002)(396003)(39860400002)(230922051799003)(1800799012)(64100799003)(186009)(82310400011)(451199024)(40470700004)(46966006)(36840700001)(8936002)(8676002)(4326008)(103116003)(2906002)(5660300002)(86362001)(70586007)(70206006)(54906003)(6916009)(316002)(36756003)(36860700001)(47076005)(82740400003)(356005)(81166007)(478600001)(6666004)(83380400001)(26005)(1076003)(107886003)(2616005)(426003)(336012)(41300700001)(40480700001)(40460700003)(36900700001);
+ 2024 05:19:26 +0000
+Received: from BL3PR12MB6450.namprd12.prod.outlook.com
+ ([fe80::39dd:303b:6776:9ebd]) by BL3PR12MB6450.namprd12.prod.outlook.com
+ ([fe80::39dd:303b:6776:9ebd%6]) with mapi id 15.20.7228.029; Sun, 28 Jan 2024
+ 05:19:26 +0000
+From: "Bhumkar, Tejas Arvind" <tejas.arvind.bhumkar@amd.com>
+To: "Bhumkar, Tejas Arvind" <tejas.arvind.bhumkar@amd.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: "jagan@amarulasolutions.com" <jagan@amarulasolutions.com>,
+ "sjg@chromium.org" <sjg@chromium.org>, "d-gole@ti.com" <d-gole@ti.com>,
+ "a-nandan@ti.com" <a-nandan@ti.com>, "Simek, Michal" <michal.simek@amd.com>,
+ "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>, "git@xilinx.com"
+ <git@xilinx.com>
+Subject: RE: [PATCH RFC] spi: cadence_qspi: Address the comparison failure for
+ 0-8
+Thread-Topic: [PATCH RFC] spi: cadence_qspi: Address the comparison failure
+ for 0-8
+Thread-Index: AQHaTSQiTnVxSJ/wUUqWc/J5Tz7UKLDuuDUA
+Date: Sun, 28 Jan 2024 05:19:26 +0000
+Message-ID: <BL3PR12MB6450C213AFE0605391A3643FD87F2@BL3PR12MB6450.namprd12.prod.outlook.com>
+References: <20240122111345.2383833-1-tejas.arvind.bhumkar@amd.com>
+In-Reply-To: <20240122111345.2383833-1-tejas.arvind.bhumkar@amd.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: MSIP_Label_4342314e-0df4-4b58-84bf-38bed6170a0f_ActionId=fec25ff2-ee18-4afc-bd14-30d0522a30a6;
+ MSIP_Label_4342314e-0df4-4b58-84bf-38bed6170a0f_ContentBits=0;
+ MSIP_Label_4342314e-0df4-4b58-84bf-38bed6170a0f_Enabled=true;
+ MSIP_Label_4342314e-0df4-4b58-84bf-38bed6170a0f_Method=Standard;
+ MSIP_Label_4342314e-0df4-4b58-84bf-38bed6170a0f_Name=General;
+ MSIP_Label_4342314e-0df4-4b58-84bf-38bed6170a0f_SetDate=2024-01-28T05:17:11Z;
+ MSIP_Label_4342314e-0df4-4b58-84bf-38bed6170a0f_SiteId=3dd8961f-e488-4e60-8e11-a82d994e183d;
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BL3PR12MB6450:EE_|DM6PR12MB4122:EE_
+x-ms-office365-filtering-correlation-id: e61b4a86-1c14-489a-e3cd-08dc1fc0b23b
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 2r2w1rm7vg4DkAherPXQwTgqOO7uR0IOMPdv2pi0wVbUPqDoFo2sGY1BcHkGXkDZS1Zu13kbZdy3OmW4UhT9Yx4FR5rVNtueJGA3+sueUl02U1gLRg6HrZi4zTE0f9ytPdO2Q2t3QJBoPGGCLAI2AjYS/cFsnJOlLqqZyILAw8Ximjmy/fvTKaqNL2N3PctNAe5X9gKsseXnhN7rnACr/in/p7DL0sRKUX+OYqhxYc1RqMZm3Dob5MWV5gduoHh/F9YrUtgoqLx2OmmugWR95umwAIcRuPmSNUOXUbbZbQTPVQR/x4FDVP/ZGg0Wfry2av70hlQ8pUHyh7rcoL7rS4dFQdOVjzFV3WGKv3z/y3IIX8MSwgWDYBNupcvGkZfd4isHB2u4OLjrwfZS7XD9SdqepE6g2ALgPP7SpCrsN2oKdI89U1ydyY5osqjDK5pup/ZHpg8hYHvznPnVXTAoI/yTkss00c6PF31ekDylbxQF7dr4rUyylGbwYQa0LmAW2VFDVLJ/Nw/SpSA1T/yWu97WYdtbF86yolC7JPuxlo9veoA4EXl0a1sPbKk43Yp0qX6pRdX3RoBe+6X9qlPIaY/lXgIuhhVkpFshJxC6rbR2bXaYLpiHUEY0uQ4Dvark1KwLP44nnlpM2sbvQ/d19f/6fhqP59wjhO8duJfz0Ag=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BL3PR12MB6450.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(346002)(39860400002)(396003)(366004)(136003)(376002)(230922051799003)(230173577357003)(230273577357003)(451199024)(1800799012)(186009)(64100799003)(83380400001)(9686003)(26005)(38100700002)(122000001)(52536014)(5660300002)(4326008)(8676002)(8936002)(2906002)(478600001)(6506007)(7696005)(53546011)(71200400001)(54906003)(64756008)(66446008)(66476007)(66556008)(66946007)(76116006)(316002)(110136005)(41300700001)(38070700009)(86362001)(33656002)(55016003);
  DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?sEQnPiNeg4rRY9ru3RhElz0Xqh93ftUbF2MG0WvooCR075/0dhZaLs0moAGv?=
+ =?us-ascii?Q?B6d/T0+Z4NYAB3RQBP/QU+8u0J3WEITaDRkEGR4CcKUDzsZITxDGJ0kIFMe7?=
+ =?us-ascii?Q?FSvGt+F7QWSVRE9IUz3GMtBdEk/rSrirNJE0l4R8073vdY9z2XlQZVc6eCIU?=
+ =?us-ascii?Q?NVP6czyjlNMpYj9mSxJKEY4Cl7edOoXYflhTNhpvn9e29rJAHer5iIi30NZm?=
+ =?us-ascii?Q?iqfOFTWrcrhrEOTux6z9aNid3oWKJ3KTGBbVaXqZrlZtT0YM8oFHtkm4i3hY?=
+ =?us-ascii?Q?YpBbA2S9hbwLXhuUHxuf+oetQND+1s10/L1njElnf4fLDKDw40mh4zJBUdPE?=
+ =?us-ascii?Q?wxhFWwfY1KIGoXOrXJ72ThxCCeLdOm3k63Kh+C55v9yyDMSN8psIDtL01IGj?=
+ =?us-ascii?Q?7NvT8N2g/rv2wsF5Jml5/J6bPNOfqJ92ykP1wpIH7KlxEeJKI3TU87hI6X6t?=
+ =?us-ascii?Q?kby9dS7lEwtF9nxH1lzvUrxpK6Vs+TDBe5dH6n8tDVfXRiiyojfeY+BiJDKs?=
+ =?us-ascii?Q?FBstwLfmPEJR89B74Y6U8359Oi3rSVYSG+M0wnX/rKBjOX15K9QzfmsSo95G?=
+ =?us-ascii?Q?eZuxz7cOQJDGAVQyG2BfuTuoaWe7Le3EIYr+kEQmXFYXp8wpWvt/sqdFcXSB?=
+ =?us-ascii?Q?nDOUnEDp11s2lpySfsB7fnao31cShgBBwjYWQyqU7mrTy3H35L+HLfd65v3y?=
+ =?us-ascii?Q?Vvny9+7SW3LIR8ZlpbK6dhD+HN1z0LBYhAy+VgoReWmi05tEvR+3K9YasoE8?=
+ =?us-ascii?Q?i6nsT0rECrOlW9IWpSkmO2PgoxBK7KP09mPq7duTFBbfuF34Y6Y5ElB1O5iq?=
+ =?us-ascii?Q?+RV36lTqbgHrAC6ejnL4hdO5FLYFMM15n/bnBIFt/vBHvv68he25ELlsqz/6?=
+ =?us-ascii?Q?2A6babxcQlJG5So/cvOwGtXdbjFoXmC6azjWn5By+62AuhWaNRBHtdOHOrAm?=
+ =?us-ascii?Q?z3YvMPwMAM14rylb1ihB3pIkleT9B2K9e1IACgnAYacoKERWQTWYjSSEy689?=
+ =?us-ascii?Q?j2+axvwh/mrppOTAeKqcmDLZlVh0hmcMr7/LiIiQ2AYi5u4Q55LcMKBhnPkU?=
+ =?us-ascii?Q?N/ptIi6oKjZTzGQamdkPw3j5OUHfcMJjistP+cyO0keNddkTyo5W+ceQcbWs?=
+ =?us-ascii?Q?vzJqqmszhsfqSjccrE4AJplEdvauKFnrESqei/lFcEox7Z2OrR0beGv8LTFy?=
+ =?us-ascii?Q?w8q9XANLkjI3rXK+Wl9x6B0HhLhu+xQN87AqgsPzvtvoIW5LydvhmqLurYm3?=
+ =?us-ascii?Q?V48JqmREn913PyT8F069tJgHEpWfhY/LKfyA+rbM/L2PHfQFtrL5+8ADENfF?=
+ =?us-ascii?Q?7YzgjFV/FBpHSyQaSBw8wdG7JGC+Gu+S1Hbp4/lpuLl1+uutNnb9kzzVDw9Q?=
+ =?us-ascii?Q?edqLXK/+IPIlNU1epV9/PlE/xHC27+v2fvBS+PrQeRKj8SM6wPGtYRGFJ76g?=
+ =?us-ascii?Q?uIfSkNptQL7l0thZCplbt/VSq6BWBtrhZH5s99mhNMwPA3MYFdV1xBJzknBt?=
+ =?us-ascii?Q?8JsyYwAA1xiY87dS01GkWCZHkoNVAu4d/BkFjtaCpYXnw8MQ3YP6vlaz/DId?=
+ =?us-ascii?Q?PSk/8c0sgtLkBqWSyZA=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jan 2024 05:16:33.4798 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1f1f71d6-2d8e-4d8f-2bb9-08dc1fc04b2e
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B077.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB7487
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BL3PR12MB6450.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e61b4a86-1c14-489a-e3cd-08dc1fc0b23b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Jan 2024 05:19:26.3996 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: VSE3lvN1sIQlVNk7da0T4brzW1ymhgA4siFTQJNdcKuTDZS/l3F2DXRpMVKOkV23wT2XIwh7Tq9Wb8XScW0xBg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4122
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,51 +148,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current implementation encounters issues when testing data ranging
-from 0 to 8 bytes. This was confirmed through testing with both ISSI
-(IS25WX256) and Micron (MT35XU02G) Flash exclusively in SDR mode.
+[AMD Official Use Only - General]
 
-Upon investigation, it was observed that utilizing the
-"SPI_NOR_OCTAL_READ" flag and attempting to read less than 8 bytes in
-STIG mode results in a read failure, leading to a compare test failure.
+Please ignore this patch, as I've submitted another one to address this pro=
+blem.
 
-To resolve this issue, the CMD_4BYTE_FAST_READ opcode is now utilized
-instead of CMD_4BYTE_OCTAL_READ, specifically in SDR mode.
-
-Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
----
- drivers/spi/cadence_qspi.h     | 3 +++
- drivers/spi/cadence_qspi_apb.c | 3 +++
- 2 files changed, 6 insertions(+)
-
-diff --git a/drivers/spi/cadence_qspi.h b/drivers/spi/cadence_qspi.h
-index 12825f8911..3b9cee25fa 100644
---- a/drivers/spi/cadence_qspi.h
-+++ b/drivers/spi/cadence_qspi.h
-@@ -33,6 +33,9 @@
- #define CQSPI_DUMMY_BYTES_MAX                   4
- #define CQSPI_DUMMY_CLKS_MAX                    31
- 
-+#define CMD_4BYTE_FAST_READ			0x0C
-+#define CMD_4BYTE_OCTAL_READ			0x7c
-+
- /****************************************************************************
-  * Controller's configuration and status register (offset from QSPI_BASE)
-  ****************************************************************************/
-diff --git a/drivers/spi/cadence_qspi_apb.c b/drivers/spi/cadence_qspi_apb.c
-index d033184aa4..fb90532217 100644
---- a/drivers/spi/cadence_qspi_apb.c
-+++ b/drivers/spi/cadence_qspi_apb.c
-@@ -469,6 +469,9 @@ int cadence_qspi_apb_command_read(struct cadence_spi_priv *priv,
- 	else
- 		opcode = op->cmd.opcode;
- 
-+	if (opcode == CMD_4BYTE_OCTAL_READ && !priv->dtr)
-+		opcode = CMD_4BYTE_FAST_READ;
-+
- 	reg = opcode << CQSPI_REG_CMDCTRL_OPCODE_LSB;
- 
- 	/* Set up dummy cycles. */
--- 
-2.27.0
+Thank You,
+Tejas
+> -----Original Message-----
+> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Tejas Bhumkar
+> Sent: Monday, January 22, 2024 4:44 PM
+> To: u-boot@lists.denx.de
+> Cc: jagan@amarulasolutions.com; sjg@chromium.org; d-gole@ti.com; a-
+> nandan@ti.com; Simek, Michal <michal.simek@amd.com>; Abbarapu, Venkatesh
+> <venkatesh.abbarapu@amd.com>; git@xilinx.com
+> Subject: [PATCH RFC] spi: cadence_qspi: Address the comparison failure fo=
+r 0-8
+>
+> Caution: This message originated from an External Source. Use proper caut=
+ion
+> when opening attachments, clicking links, or responding.
+>
+>
+> In the current implementation, the test for data ranging from 0 to 8 byte=
+s is
+> encountering failures. This has been confirmed through testing with both =
+ISSI
+> (IS25WX256) and Micron (MT35XU02G) Flash in SDR mode exclusively.
+>
+> Upon analysis, it was observed that utilizing the "SPI_NOR_OCTAL_READ"
+> flag and attempting to read less than 8 bytes in STIG mode results in a f=
+ailure to
+> read, leading to a failure in the compare test.
+>
+> Upon reviewing the Micron OSPI flash data sheet, it was noted that for pr=
+otocol
+> 1-1-8, 8 dummy clock cycles are required. While the current implementatio=
+n
+> achieves this, it still results in a compare test failure.
+>
+> Therefore, the code has been revised to include DMA read for operations
+> involving less than 8 bytes as well.
+>
+> Fixes: 53f4ef0 ("spi: cadence_qspi: use STIG mode for small reads")
+>
+> Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+> ---
+>  drivers/spi/cadence_qspi.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/spi/cadence_qspi.c b/drivers/spi/cadence_qspi.c inde=
+x
+> dfc74c882d..a6477dbfcf 100644
+> --- a/drivers/spi/cadence_qspi.c
+> +++ b/drivers/spi/cadence_qspi.c
+> @@ -313,7 +313,7 @@ static int cadence_spi_mem_exec_op(struct spi_slave
+> *spi,
+>                  * which is unsupported on some flash devices during regi=
+ster
+>                  * reads, prefer STIG mode for such small reads.
+>                  */
+> -               if (op->data.nbytes <=3D CQSPI_STIG_DATA_LEN_MAX)
+> +               if (!op->addr.nbytes)
+>                         mode =3D CQSPI_STIG_READ;
+>                 else
+>                         mode =3D CQSPI_READ;
+> --
+> 2.27.0
 
