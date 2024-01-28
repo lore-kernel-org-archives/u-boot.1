@@ -4,83 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2755FC47258
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jan 2024 14:11:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA320C47258
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jan 2024 14:24:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E455B87EE9;
-	Sun, 28 Jan 2024 15:10:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4348C87DED;
+	Sun, 28 Jan 2024 15:24:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ntMqpJbR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rDyTnSHf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5086687D65; Sun, 28 Jan 2024 15:09:58 +0100 (CET)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id 2C65F87E2C; Sun, 28 Jan 2024 15:24:24 +0100 (CET)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1C9B87D8E
- for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 15:09:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AD26E87DC6
+ for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 15:24:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seashell11234455@gmail.com
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-33ae5e7d787so884194f8f.1
- for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 06:09:54 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-602cf7dfeb1so16530517b3.0
+ for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 06:24:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706450994; x=1707055794; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XN2y7OK0g4OdphcZeVBsRi2Mu70cnfA/vqRgZlyhbh4=;
- b=ntMqpJbR/dq0LVrr9l/Vgb0p+UApat7jQybb9+3iKicRIKgfL+SzRDNWcQHGKTAOrm
- 8kiAe0PmDlOXAVrtM7lcpfJ0ulBRzrOPycMAA6QFHA2+Dddwgn675P1mpDrMrCfrN8tJ
- xUtbhGw6mHCsYyw2sXlZiUCqYj20vxCNhWxjS1pvHzuUDlYqp47J98njCFgduBwoGWd7
- DdGTrCGE5F9k/4dqedNQ0hpXaFcLDSPJ5UnnOPRxmM0xu1Gh3Hbtg/ji/AgVu+++OlMQ
- Jt2dwOd3BIfIZDYoEpO6YGwnSaBS53+SDpEanJRm2B7ylhdOMcnOwJpHPpfH6MIcxKB9
- Tymw==
+ d=konsulko.com; s=google; t=1706451860; x=1707056660; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=pNZqgW5DQXUs4Tcrh/YLJoYzlcTnAKui0i+BTB0l8Hk=;
+ b=rDyTnSHfFayTd3BrWvaarIGRwsikNd+jHx0ZDCK0/lgrhpCRXSEKvtL8ElVMTE+isq
+ dmH1WUm1+FlPcLOohJeMkxP2gncc78WPH0W74tOypjW7hG52IqifJfUO7lcSC4GA2FkF
+ XEvDGH8LiqTd2VA69yvBQMOkt8rnpQ7pSxilg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706450994; x=1707055794;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=XN2y7OK0g4OdphcZeVBsRi2Mu70cnfA/vqRgZlyhbh4=;
- b=k8bB/YV8HWLSZOTPAuFSrtxPktGQgtMaDn7n+us3xRBCXfcxSftKZsqFs0W/m7eTvD
- iyksLbP7bNxHInuIG6AFlnyrHTWpDp86RvvTi5UtoKfSJs7eRrvt+s/lYqDtyGI9BgzP
- WV92YXOw7hrDedpWEb6YESQA36nTM1xxcXCL6qAxB8IYhClZGbbzICe/CXK/LLvoMcn+
- QZu2mZxU220WfPT6bK1Zm/N8WUJOjjHumpRyiSBcQ1K2cMDaGhefdw/SIOVxO+Ymygxc
- QC+yNSbqKmQJDc6iEHqxOhnpdY3IwQ5obNcxefEA2+IUpVzR4qbPyK7yt7gAWrDHMTDY
- 2ovg==
-X-Gm-Message-State: AOJu0YyB9kUjfBgJs8/tR90oT1+gz4x5ge86e6JHGMmsHJUPwUxkRxZW
- +CC1dNZtpEv0AAYAV+FtmnUugF0ft7OwIG69mfAoiqFMOVvJAjjcK3hgoswHUo52PeXcsAf8xkR
- zJnVH3ayxWgdz4hZKYixKuoggb58=
-X-Google-Smtp-Source: AGHT+IGEVkv9Ar5ffh5mcqv7s4ujxzfxpg3kW/R7o8n2CZr9NUm2JibQbCsSdDH92tOanMgL7T2auZoKiGW0W67tl1s=
-X-Received: by 2002:a5d:6ac5:0:b0:33a:ec25:60b3 with SMTP id
- u5-20020a5d6ac5000000b0033aec2560b3mr815263wrw.68.1706450993735; Sun, 28 Jan
- 2024 06:09:53 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706451860; x=1707056660;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pNZqgW5DQXUs4Tcrh/YLJoYzlcTnAKui0i+BTB0l8Hk=;
+ b=kjZ+FQNcE5PkfzdNv+A65nRjJQs6u10QirS89+qn+gUIT5t0g+DdhmikCzgFsMc+H4
+ utrhiqug/qsvTCIcobI6H/P+/WeTMP6Lrwhxc8YeP+cAA+7F32q9CWNkwf4zVydroWjR
+ ISeG4LufSglW9tSrs5FZcZBOKRgHPn8fHSFDm/8K0v0zEQEO/GjP2sdl7BDcw/bA2ANi
+ ZVLEQLJm1cLDddVejMxPfDw9EOZZhURpVZfl53FaVrpcCRq0PROHQMtMK9cheuflbVEx
+ 81Qkgg7DKmvbRDNILeEhopTbkTkQmr4nAjfYPCrm+zRu01EDsiLP+6FjZwRxVwtRWJ2H
+ WJ5w==
+X-Gm-Message-State: AOJu0YyNX04t2+PsTSXfkRGm1PhjfsBQVn4InxVoI2d9KGP4I3ol3ED5
+ yijUuyhXeLnorl9YJYBszOtbAUuR+0GXcXxxHpDNPQh6iabhFhhA37rjLTFZZzU=
+X-Google-Smtp-Source: AGHT+IHQllpXKSyEb9wXkKIsivxwHMrn0yyBpsjecQbnIti2DnACTxccdS/30+X6MYqRruy1bsew/g==
+X-Received: by 2002:a0d:cb41:0:b0:600:255e:9320 with SMTP id
+ n62-20020a0dcb41000000b00600255e9320mr2272481ywd.21.1706451860355; 
+ Sun, 28 Jan 2024 06:24:20 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ x84-20020a0dd557000000b005ffa1fbfa7esm1779904ywd.101.2024.01.28.06.24.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 28 Jan 2024 06:24:19 -0800 (PST)
+Date: Sun, 28 Jan 2024 09:24:18 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PULL] u-boot-sh/master-cleanup
+Message-ID: <20240128142418.GD785631@bill-the-cat>
+References: <20240128012125.60127-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20240128070614.7702-1-seashell11234455@gmail.com>
- <20240128070614.7702-4-seashell11234455@gmail.com>
- <2acf8505-315e-486d-a07d-c91fddfe6671@gmx.de>
-In-Reply-To: <2acf8505-315e-486d-a07d-c91fddfe6671@gmx.de>
-From: Kongyang Liu <seashell11234455@gmail.com>
-Date: Sun, 28 Jan 2024 22:09:43 +0800
-Message-ID: <CAOKwTdoDyOGK9bV-jP=RczotQW2gderVqw0ru3CpQ=+80=Whzw@mail.gmail.com>
-Subject: Re: [PATCH v4 3/3] doc: sophgo: milkv_duo: document Milk-V Duo board
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Adam Ford <aford173@gmail.com>, Chris Morgan <macromorgan@hotmail.com>, 
- Fabio Estevam <festevam@denx.de>, Nishanth Menon <nm@ti.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>, 
- Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
- Wei Fu <wefu@redhat.com>, 
- Yanhong Wang <yanhong.wang@starfivetech.com>, Yannic Moog <y.moog@phytec.de>, 
- Yixun Lan <dlan@gentoo.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sun, 28 Jan 2024 15:10:42 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="N+6bD5sUB76ZaTqB"
+Content-Disposition: inline
+In-Reply-To: <20240128012125.60127-1-marek.vasut+renesas@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,155 +90,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Heinrich Schuchardt <xypron.glpk@gmx.de> =E4=BA=8E2024=E5=B9=B41=E6=9C=8828=
-=E6=97=A5=E5=91=A8=E6=97=A5 17:16=E5=86=99=E9=81=93=EF=BC=9A
->
-> On 1/28/24 08:05, Kongyang Liu wrote:
-> > Add document for Milk-V Duo board which based on Sophgo's CV1800B SoC.
-> >
-> > Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
-> >
-> > ---
-> >
-> > (no changes since v3)
-> >
-> > Changes in v3:
-> > - Add brief description of the procedure to run u-boot-dtb.bin
-> >
-> >   doc/board/index.rst            |  1 +
-> >   doc/board/sophgo/index.rst     |  8 +++++
-> >   doc/board/sophgo/milkv_duo.rst | 64 +++++++++++++++++++++++++++++++++=
-+
-> >   3 files changed, 73 insertions(+)
-> >   create mode 100644 doc/board/sophgo/index.rst
-> >   create mode 100644 doc/board/sophgo/milkv_duo.rst
-> >
-> > diff --git a/doc/board/index.rst b/doc/board/index.rst
-> > index c96e5fda28..d0f9f355d2 100644
-> > --- a/doc/board/index.rst
-> > +++ b/doc/board/index.rst
-> > @@ -46,6 +46,7 @@ Board-specific doc
-> >      sifive/index
-> >      sipeed/index
-> >      socionext/index
-> > +   sophgo/index
-> >      st/index
-> >      starfive/index
-> >      ste/index
-> > diff --git a/doc/board/sophgo/index.rst b/doc/board/sophgo/index.rst
-> > new file mode 100644
-> > index 0000000000..e097afdac6
-> > --- /dev/null
-> > +++ b/doc/board/sophgo/index.rst
-> > @@ -0,0 +1,8 @@
-> > +.. SPDX-License-Identifier: GPL-2.0+
-> > +
-> > +Sophgo
-> > +=3D=3D=3D=3D=3D=3D
-> > +.. toctree::
-> > +   :maxdepth: 1
-> > +
-> > +   milkv_duo
-> > diff --git a/doc/board/sophgo/milkv_duo.rst b/doc/board/sophgo/milkv_du=
-o.rst
-> > new file mode 100644
-> > index 0000000000..cb2ed1ad98
-> > --- /dev/null
-> > +++ b/doc/board/sophgo/milkv_duo.rst
-> > @@ -0,0 +1,64 @@
-> > +.. SPDX-License-Identifier: GPL-2.0+
-> > +
-> > +Milk-V Duo
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +
-> > +CV1800B RISC-V SoC
-> > +------------------
-> > +The CV1800B is a high-performance, low-power 1+1 64-bit RISC-V SoC fro=
-m Sophgo.
-> > +
-> > +Mainline support
-> > +----------------
-> > +The support for following drivers are already enabled:
-> > +1. ns16550 UART Driver.
-> > +
-> > +Building
-> > +~~~~~~~~
-> > +1. Add the RISC-V toolchain to your PATH.
-> > +2. Setup ARCH & cross compilation environment variable:
-> > +
-> > +.. code-block:: console
-> > +
-> > +   export CROSS_COMPILE=3D<riscv64 toolchain prefix>
-> > +   cd <U-Boot-dir>
-> > +   make milkv_duo_defconfig
-> > +   make
-> > +
-> > +This will generate u-boot-dtb.bin
-> > +
-> > +Booting
-> > +~~~~~~~
-> > +Currently, we rely on vendor FSBL(First Stage Boot Loader) to initiali=
-ze the
-> > +clock and load the u-boot image, then bootup from it.
-> > +
-> > +Alternatively, to run u-boot-dtb.bin on top of FSBL, follow these step=
-s:
-> > +
-> > +1. Use the vendor-provided tool to create a unified fip.bin file conta=
-ining
-> > +   FSBL, OpenSBI, and U-Boot.
->
-> Hello Kongyang,
->
-> thank you for providing a documentation for the board.
->
-> Concerning the usage of fip.bin it would be helpful to add more detail:
->
-> * From where can the vendor code be downloaded?
-> * Which are the commands to execute?
->
 
-We have leveraged the BuildSDK from the Milk-V Duo project
-(https://github.com/milkv-duo/duo-buildroot-sdk) and made slight modificati=
-ons
-to ensure compatibility with the mainline OpenSBI and U-Boot. After the
-repository reaches a stable state, we will publish it on GitHub.
+--N+6bD5sUB76ZaTqB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Best regards
-Kongyang Liu
+On Sun, Jan 28, 2024 at 02:20:50AM +0100, Marek Vasut wrote:
+> The following changes since commit fea3efb757f7a9c6831c023cb456f9fa5fd027=
+8e:
 
-> Best regards
->
-> Heinrich
->
-> > +
-> > +2. Place the generated fip.bin file into the FAT partition of the SD c=
-ard.
-> > +
-> > +3. Insert the SD card into the board and power it on.
-> > +
-> > +The board will automatically execute the FSBL from the fip.bin file.
-> > +Subsequently, it will transition to OpenSBI, and finally, OpenSBI will=
- invoke
-> > +U-Boot.
-> > +
-> > +
-> > +Sample boot log from Milk-V Duo board
-> > +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> > +.. code-block:: none
-> > +
-> > +   U-Boot 2024.01-rc5-00010-g51965baa36 (Dec 28 2023 - 13:15:53 +0800)=
-milkv_duo
-> > +
-> > +   DRAM:  63.3 MiB
-> > +   Core:  10 devices, 8 uclasses, devicetree: separate
-> > +   Loading Environment from nowhere... OK
-> > +   In:    serial@4140000
-> > +   Out:   serial@4140000
-> > +   Err:   serial@4140000
-> > +   Net:   No ethernet found.
-> > +   milkv_duo# cpu detail
-> > +     0: cpu@0      rv64imafdc
-> > +      ID =3D 0, freq =3D 0 Hz: L1 cache, MMU
-> > +   milkv_duo#
->
+>=20
+>   Kconfig: boot: Imply BOOTSTD_DEFAULT when BOOTSTD_FULL=3Dy (2024-01-19 =
+18:30:08 -0500)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-sh.git master-cleanup
+>=20
+> for you to fetch changes up to 8a725c610675846b380d865ad68c2295cf15782e:
+>=20
+>   ARM: renesas: whitehawk: Drop extra leading space (2024-01-27 20:17:04 =
++0100)
+>=20
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--N+6bD5sUB76ZaTqB
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmW2Y4gACgkQFHw5/5Y0
+tyzmGAv/ZMuhGmpg5AIvgE1JeT8Od60cMTp+zQLHdE+ySkNgiTaKBzGBmpMNgkZl
+CvUl7lBiy6g2MtByCaG8el5sOH7v6OepRxWlSdYSNLswsEOrdetC957cXVo465pz
+alQeLJcy/tHPQqjqhPSkCM//YQVXXgjlXZ41yv7QRt5JblZtQwNrOnvNCMP+iEEv
+fuPi8e/zx5KbS99Kg2damwNONsRde7GRnPnltqLXK/FDIrlmvjfMKDIKXp5PG8d5
+YsOcNUBv1pVHRsdAe2G8O5dx5QklfPzoUQCLCEU7fzJAt5JtD+NrJZZV9YT9IZAh
+fOAUNWmGFF4dM+khX4HbPiHF7h3hPm2/cGJ2ebrGlL7s4Brcx1dMNMgD7Wpdgo7P
+Pxb+J8ZaDu1gkzzhRKptFQ1rUoB/1IUKmGMO5csWWvG5HZxMILPqZ6eP44ZiBzXz
+pxH7T/T6Ns8ZQXS7IGw7Fsl254rF3e8NPFnn1tKfDx3PhFxoRNHbMcajLgPP7iUN
+kAdCLX1E
+=Pp0a
+-----END PGP SIGNATURE-----
+
+--N+6bD5sUB76ZaTqB--
