@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB035C47258
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jan 2024 08:36:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB388C47258
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jan 2024 08:51:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 155A7880E6;
-	Sun, 28 Jan 2024 09:36:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id ED2EB88120;
+	Sun, 28 Jan 2024 09:51:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="PlvDHHDn";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="omJvJcux";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D62B488067; Sun, 28 Jan 2024 09:36:48 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id 1FDEC88121; Sun, 28 Jan 2024 09:51:37 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E011E88067
- for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 09:36:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E36B38803F
+ for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 09:51:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1706431005; x=1707035805; i=xypron.glpk@gmx.de;
- bh=ADV8ZWoAxZBqjKSovbamQcz2rHFt4I3D7eRt+RWm76Q=;
- h=X-UI-Sender-Class:Date:Subject:To:References:Cc:From:
+ t=1706431893; x=1707036693; i=xypron.glpk@gmx.de;
+ bh=19IjJG0POn8CP/ZSV1/bokw2/kNxY3uQnUztI13aP60=;
+ h=X-UI-Sender-Class:Date:Subject:From:To:Cc:References:
  In-Reply-To;
- b=PlvDHHDndV/xEvOEMwgO8/pDS3bDJGtf6KZBcY3eGjRqM0ceLDT9wlcy+8u0jenF
- ZaOE1R4JnKOWFWORv9/XFUPMoWSCs8ZZcnAdQ+S7L+R0/PCm89SOaOHKSFVaysE2W
- 60HKUBvcmYPsBA+Y2Yy0daqpFOpPgCW7PDT7XW8/yHBxi+kMAD7+4fJ8i2G/xkc8/
- gKQUJSHjj53Aj9C7JGyh26s9tc+9EdhTn2+fvBKXJ0nh7Iuuq+Oqdoibog7Aq3gE1
- ApRfavOrSRwID9quGGDia9kMZmAP49hWAZ5REceKIA/8Q6/RQjks5hEW/JwMykHGU
- u/KxgoTGqMkqaSYZPw==
+ b=omJvJcuxqHae1MSydP9rcIMbrUw6FhDohy55smHzGRMwlCTb4ukifggsNVlfVJqa
+ EDIPkqj/7Q0An0SC0f837wJJnLDZx4GiB9BvaznJL1sctq1zgXOu8S7sUhftsA4jc
+ UEhBtqnwf7GdjFLsktyrbp6KebR7b75+xGGjw2j157MGldt5nd0em/2iFsk5+QRFb
+ BYV3KkAViG8HlszNbQNE+iS1bSPKP0MN7blbpPSjxNLZul1PtQ+aMP0jJB2brlmc8
+ xHgiuRZZKtZbGezfyxHEM3Sxaq4Rx3ZZV1R8wymkmKlovOhc3J9uby4/UhIhvoNHO
+ ItcyS4Tht8IWrjZCkA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.161] ([178.202.40.247]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MWASe-1ra9Ti3fas-00XeoF; Sun, 28
- Jan 2024 09:36:44 +0100
-Message-ID: <dac04f9a-6657-4727-ac9f-c94793b2c07a@gmx.de>
-Date: Sun, 28 Jan 2024 09:36:32 +0100
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MZTqW-1rWqah1pFG-00WYoT; Sun, 28
+ Jan 2024 09:51:33 +0100
+Message-ID: <eb078cd8-a041-4b35-b3f3-def5e1919477@gmx.de>
+Date: Sun, 28 Jan 2024 09:51:35 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] image-host: Fix error value paths and emit error messages
- to stderr.
-To: Hugo Cornelis <hugo.cornelis@essensium.com>
-References: <20240122233057.GR3652023@bill-the-cat>
- <20240123081556.418900-1-hugo.cornelis@essensium.com>
- <20240123081556.418900-2-hugo.cornelis@essensium.com>
+Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
 Content-Language: en-US, de-DE
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240123081556.418900-2-hugo.cornelis@essensium.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20240127154018.GC785631@bill-the-cat>
+ <70BB005F-709B-4B50-AFDB-85EAD7BFC5E8@gmx.de>
+In-Reply-To: <70BB005F-709B-4B50-AFDB-85EAD7BFC5E8@gmx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:1VnM/I2eiexgHceJpaNsK20cKeN/lkq1e4+WrQpWvbJDivbvKrw
- qKtsrp7oPQovzGmZApNnj1C9nki0hJ7pCYMoGkqXAh8jvRUTfrysgZghPpcbxr9lITbTdGz
- 0utu0AOhwChhb7KHiZRTaxV2Sriwh9Q9FYSFooH81wsG7TAvsrCPfPYO3XKQAXFfx4/UGU3
- toNiOJ6IZzelcXDfOEsTw==
-UI-OutboundReport: notjunk:1;M01:P0:nyYgu3JSC2Q=;rgpGzoHcqfXYE6fbojC4CxWCtYP
- gUApxO0s/geSoMiTt0gyOkiq0nCZjDTVWmmXlvckQLXlMxs1W0Ok0fn5yK9mmYxI29RH09vMm
- St0+9Uw5r6dr6TiTCQiOYuL+3G/0dY9UrABURP9Rvp+h7ZR1VWmJdZU13SqnF5VMwrYSj/rXL
- lIMupEa/hIbV0YvZUkHbnyQIVvBUc6cZ+48OhsbqSYI3Fvn0gOnoQcV8+V2q0ygPcfmgAHOFJ
- kIcWS17qh/mIF1Dsd2vlpTs95dRaT/53ocg0unfPRWnPKF07ujfFTP+UQV9s41loLs1JpcpQ/
- eWivfbqy2Y5o81fsDh8WjPT7AMsNiraIQpE1pM8TjJJr+Yd0kMtxQW0nJ26BAYV4nQ5H9vCFR
- 79+iGCAQySagEvdIOwBHLS208AbFsp4BFKuD1wEzCiY/19JfxZyyhKl9cymDtcDXwilo8X+TD
- t/rJKbKcx8mICAaVwBY304Pr3oVrAX8LSJNY+KQVyeopNcE4SOQLSLO3m/BsXbBQmZ+6OM0yN
- Zi3WG7KF8bd4OcTMEuAGFzIiFtNWFszSDJvbNetSvmPjtdlkvuHCadBgB5D63BdgP7V/EBAoH
- V5ciSAn2baOiNSgv98khY4L69XG++CqS3zGgs9kNLIYIuASNrf5FbQ9jVh+cI6JKUmI4bu9D+
- /DV0VQee2CLposT/acLpwJR74I05S4XvMz8BL9c7JdvMSOoL9ubvEzC2Irvtf3/dRcBeLPXWG
- 9Y+deJBy8l63yKumViOJoBhZvi0U4Lvu/Sv1yWUhkyoJoK9UsofvCsZ5ZbhVo4O6l9xo0guzF
- CI1Xzq/gZZqKwttIz+vKlGYCHVdKTWkwjUICPGeOPQH7ci4Rrk5un33yDRBghUUsptCRNXeTj
- vDSjGWDAIhWw2TFm0Qo1SG4k0zOoMVQHxRaU3CLYSRsTwZvp43AogafWGP89B+V8iZhCiddus
- 4VYOvNd3KW/wUHJ3T0vnGKeGjfs=
+X-Provags-ID: V03:K1:7msbH6L5NqnvfQ4o2JOFU2E/3nliRzukKCFnzVHHtxYI14JfcVH
+ ADD3AcabZLORZ6l7yGflKpUBM1mRWhb7rL/JVXzZow/wacgD8i0TGp7BAMnD39o2vJGDO/Q
+ h8ed7KeD+JS1hOVJJb4EJGQ8+1YCebvWPRKzphBomtslNmHbYSHhSStwMlffuZhiYQjewK7
+ sxCqFU2zctpJvHhyW+/sw==
+UI-OutboundReport: notjunk:1;M01:P0:V+bOuYsTb4M=;gT9Q2fjoF/B9H7H3Mgp0v25qHzJ
+ f0a0ts3DW1SgVP/4lEKVRDmHTd2H4rTzSvajvdW+SfLAXbAgDIH5ya6k9+irUVQDA3ichCacX
+ qbWJoYcubzAANC2gHI2spdGzShm1jCCOT4q1QERICXzWuIyO1H+aa9oLC5Tljb1ENfh5hU1Px
+ ElVT3UXg5RYaNZQg5U9kYkJe7bbsMFBLEuDRVYCnj89C2pBWniHaZ1FCvOp1meU+vjoHkKD76
+ cj0RjwI12nxb5RrM8NcHqOOQmHuLCKUkLKOIFYtL1UFnEk+IFnOBRplTpWXohQ/sfwSfmI6dm
+ 5JJfgJP5uLQffBN5tn/a2BvVXwaIYn0TaPCD/jDrmaELm6gcKDcCXO5pVPr7y3YhjSxVNvdLt
+ 3cJ72rX9eML+xStyb+RPmTkYIrBANcrQbGrilvYNQME9pbXTNmxuX/8nAQh7zmCxc4PILmr+8
+ JDJF8UrgD8TOdVQ5QnW9vKbM+t4maVcJAtqXmqLOhy579loXcKI/vTIkfTZNJG8hxMKOCcL8u
+ A5s5LWPiAnjenCqKeTkkzFQL4AKHEnZJr9smH73jJm6ugi3uHE4s497jtqQg09lhBJudzf1X4
+ wE9F6UauGOQnoKtQNh++5CIMmdsHBr1FvWv2llQZS+5qCkOUrjzNjTUP92uuk5niaxMpI3xez
+ cRGCbtsRz+zosglGqs9HsLOzheH6uk27M2zlPQyZo3kBn51Kpugqgrdh9DxfzGxJzDY2do0kw
+ plgmSd2r8+eHhNrH2GXbmux4MPMGdrf9OA9oXWqTvB1CxCkEWEIAsTg/jX4tR5rAcXffq397D
+ 2xSUCSCtF2sJh+025bPwc/JIP+fHcE1elUOrTRRQ2S7+uB8p2+j0sr4fgIQRg/AJ0I97N593w
+ nCyVD/hedYFLYNZkTUvX8/ybPojF8uiYFxutnKL6JUlriPc3tOyXmAmCFNzg2Qpktx0BZfXKw
+ REKXK6aZHP66I6o2iQ6+Hyn6Org=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,58 +89,274 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/23/24 09:15, Hugo Cornelis wrote:
+On 1/27/24 21:56, Heinrich Schuchardt wrote:
+>
+>
+> Am 27. Januar 2024 16:40:18 MEZ schrieb Tom Rini <trini@konsulko.com>:
+>> Hey, I'll just pass this on directly rather than to the list.
+>>
+>> ---------- Forwarded message ---------
+>> From: <scan-admin@coverity.com>
+>> Date: Sat, Jan 27, 2024 at 10:36=E2=80=AFAM
+>> Subject: New Defects reported by Coverity Scan for Das U-Boot
+>> To: <tom.rini@gmail.com>
+>>
+>>
+>> Hi,
+>>
+>> Please find the latest report on new defect(s) introduced to Das
+>> U-Boot found with Coverity Scan.
+>>
+>> 1 new defect(s) introduced to Das U-Boot found with Coverity Scan.
+>>
+>>
+>> New defect(s) Reported-by: Coverity Scan
+>> Showing 1 of 1 defect(s)
+>>
+>>
+>> ** CID 479279:    (TAINTED_SCALAR)
+>>
+>>
+>> _______________________________________________________________________=
+_________________________________
+>> *** CID 479279:    (TAINTED_SCALAR)
+>> /cmd/smbios.c: 180 in do_smbios()
+>> 174                             smbios_print_type2((struct smbios_type2=
+ *)pos);
+>> 175                             break;
+>> 176                     case 127:
+>> 177                             smbios_print_type127((struct
+>> smbios_type127 *)pos);
+>> 178                             break;
+>> 179                     default:
+>>>>>      CID 479279:    (TAINTED_SCALAR)
+>>>>>      Passing tainted expression "pos->length" to "smbios_print_gener=
+ic", which uses it as a loop boundary.
+>> 180                             smbios_print_generic(pos);
+>> 181                             break;
+>> 182                     }
+>> 183             }
+>> 184
+>> 185             return CMD_RET_SUCCESS;
+>> /cmd/smbios.c: 154 in do_smbios()
+>> 148                     size =3D entry2->length;
+>> 149                     max_struct_size =3D entry2->max_struct_size;
+>> 150             } else {
+>> 151                     log_err("Unknown SMBIOS anchor format\n");
+>> 152                     return CMD_RET_FAILURE;
+>> 153             }
+>>>>>      CID 479279:    (TAINTED_SCALAR)
+>>>>>      Passing tainted expression "size" to "table_compute_checksum", =
+which uses it as a loop boundary.
+>> 154             if (table_compute_checksum(entry, size)) {
+>> 155                     log_err("Invalid anchor checksum\n");
+>> 156                     return CMD_RET_FAILURE;
+>> 157             }
+>> 158             printf("SMBIOS %s present.\n", version);
+>> 159
+>> /cmd/smbios.c: 174 in do_smbios()
+>> 168                            (unsigned long long)map_to_sysmem(pos));
+>> 169                     switch (pos->type) {
+>> 170                     case 1:
+>> 171                             smbios_print_type1((struct smbios_type1=
+ *)pos);
+>> 172                             break;
+>> 173                     case 2:
+>>>>>      CID 479279:    (TAINTED_SCALAR)
+>>>>>      Passing tainted expression "((struct smbios_type2 *)pos)->numbe=
+r_contained_objects" to "smbios_print_type2", which uses it as a loop boun=
+dary.
+>> 174                             smbios_print_type2((struct smbios_type2=
+ *)pos);
+>> 175                             break;
+>> 176                     case 127:
+>> 177                             smbios_print_type127((struct
+>> smbios_type127 *)pos);
+>> 178                             break;
+>> 179                     default:
+>> /cmd/smbios.c: 154 in do_smbios()
+>> 148                     size =3D entry2->length;
+>> 149                     max_struct_size =3D entry2->max_struct_size;
+>> 150             } else {
+>> 151                     log_err("Unknown SMBIOS anchor format\n");
+>> 152                     return CMD_RET_FAILURE;
+>> 153             }
+>>>>>      CID 479279:    (TAINTED_SCALAR)
+>>>>>      Passing tainted expression "size" to "table_compute_checksum", =
+which uses it as a loop boundary.
+>> 154             if (table_compute_checksum(entry, size)) {
+>> 155                     log_err("Invalid anchor checksum\n");
+>> 156                     return CMD_RET_FAILURE;
+>> 157             }
+>> 158             printf("SMBIOS %s present.\n", version);
+>> 159
+>> /cmd/smbios.c: 180 in do_smbios()
+>> 174                             smbios_print_type2((struct smbios_type2=
+ *)pos);
+>> 175                             break;
+>> 176                     case 127:
+>> 177                             smbios_print_type127((struct
+>> smbios_type127 *)pos);
+>> 178                             break;
+>> 179                     default:
+>>>>>      CID 479279:    (TAINTED_SCALAR)
+>>>>>      Passing tainted expression "pos->length" to "smbios_print_gener=
+ic", which uses it as a loop boundary.
+>> 180                             smbios_print_generic(pos);
+>> 181                             break;
+>> 182                     }
+>> 183             }
+>> 184
+>> 185             return CMD_RET_SUCCESS;
+>> /cmd/smbios.c: 174 in do_smbios()
+>> 168                            (unsigned long long)map_to_sysmem(pos));
+>> 169                     switch (pos->type) {
+>> 170                     case 1:
+>> 171                             smbios_print_type1((struct smbios_type1=
+ *)pos);
+>> 172                             break;
+>> 173                     case 2:
+>>>>>      CID 479279:    (TAINTED_SCALAR)
+>>>>>      Passing tainted expression "((struct smbios_type2 *)pos)->numbe=
+r_contained_objects" to "smbios_print_type2", which uses it as a loop boun=
+dary.
+>> 174                             smbios_print_type2((struct smbios_type2=
+ *)pos);
+>> 175                             break;
+>> 176                     case 127:
+>> 177                             smbios_print_type127((struct
+>> smbios_type127 *)pos);
+>> 178                             break;
+>> 179                     default:
+>> /cmd/smbios.c: 174 in do_smbios()
+>> 168                            (unsigned long long)map_to_sysmem(pos));
+>> 169                     switch (pos->type) {
+>> 170                     case 1:
+>> 171                             smbios_print_type1((struct smbios_type1=
+ *)pos);
+>> 172                             break;
+>> 173                     case 2:
+>>>>>      CID 479279:    (TAINTED_SCALAR)
+>>>>>      Passing tainted expression "((struct smbios_type2 *)pos)->numbe=
+r_contained_objects" to "smbios_print_type2", which uses it as a loop boun=
+dary.
+>> 174                             smbios_print_type2((struct smbios_type2=
+ *)pos);
+>> 175                             break;
+>> 176                     case 127:
+>> 177                             smbios_print_type127((struct
+>> smbios_type127 *)pos);
+>> 178                             break;
+>> 179                     default:
+>> /cmd/smbios.c: 180 in do_smbios()
+>> 174                             smbios_print_type2((struct smbios_type2=
+ *)pos);
+>> 175                             break;
+>> 176                     case 127:
+>> 177                             smbios_print_type127((struct
+>> smbios_type127 *)pos);
+>> 178                             break;
+>> 179                     default:
+>>>>>      CID 479279:    (TAINTED_SCALAR)
+>>>>>      Passing tainted expression "pos->length" to "smbios_print_gener=
+ic", which uses it as a loop boundary.
+>> 180                             smbios_print_generic(pos);
+>> 181                             break;
+>> 182                     }
+>> 183             }
+>> 184
+>> 185             return CMD_RET_SUCCESS;
+>> /cmd/smbios.c: 180 in do_smbios()
+>> 174                             smbios_print_type2((struct smbios_type2=
+ *)pos);
+>> 175                             break;
+>> 176                     case 127:
+>> 177                             smbios_print_type127((struct
+>> smbios_type127 *)pos);
+>> 178                             break;
+>> 179                     default:
+>>>>>      CID 479279:    (TAINTED_SCALAR)
+>>>>>      Passing tainted expression "pos->length" to "smbios_print_gener=
+ic", which uses it as a loop boundary.
+>> 180                             smbios_print_generic(pos);
+>> 181                             break;
+>> 182                     }
+>> 183             }
+>> 184
+>> 185             return CMD_RET_SUCCESS;
+>> /cmd/smbios.c: 174 in do_smbios()
+>> 168                            (unsigned long long)map_to_sysmem(pos));
+>> 169                     switch (pos->type) {
+>> 170                     case 1:
+>> 171                             smbios_print_type1((struct smbios_type1=
+ *)pos);
+>> 172                             break;
+>> 173                     case 2:
+>>>>>      CID 479279:    (TAINTED_SCALAR)
+>>>>>      Passing tainted expression "((struct smbios_type2 *)pos)->numbe=
+r_contained_objects" to "smbios_print_type2", which uses it as a loop boun=
+dary.
+>> 174                             smbios_print_type2((struct smbios_type2=
+ *)pos);
+>> 175                             break;
+>> 176                     case 127:
+>> 177                             smbios_print_type127((struct
+>> smbios_type127 *)pos);
+>> 178                             break;
+>> 179                     default:
+>> /cmd/smbios.c: 180 in do_smbios()
+>> 174                             smbios_print_type2((struct smbios_type2=
+ *)pos);
+>> 175                             break;
+>> 176                     case 127:
+>> 177                             smbios_print_type127((struct
+>> smbios_type127 *)pos);
+>> 178                             break;
+>> 179                     default:
+>>>>>      CID 479279:    (TAINTED_SCALAR)
+>>>>>      Passing tainted expression "pos->length" to "smbios_print_gener=
+ic", which uses it as a loop boundary.
+>> 180                             smbios_print_generic(pos);
+>> 181                             break;
+>> 182                     }
+>> 183             }
+>> 184
+>> 185             return CMD_RET_SUCCESS;
+>> /cmd/smbios.c: 174 in do_smbios()
+>> 168                            (unsigned long long)map_to_sysmem(pos));
+>> 169                     switch (pos->type) {
+>> 170                     case 1:
+>> 171                             smbios_print_type1((struct smbios_type1=
+ *)pos);
+>> 172                             break;
+>> 173                     case 2:
+>>>>>      CID 479279:    (TAINTED_SCALAR)
+>>>>>      Passing tainted expression "((struct smbios_type2 *)pos)->numbe=
+r_contained_objects" to "smbios_print_type2", which uses it as a loop boun=
+dary.
+>> 174                             smbios_print_type2((struct smbios_type2=
+ *)pos);
+>> 175                             break;
+>> 176                     case 127:
+>> 177                             smbios_print_type127((struct
+>> smbios_type127 *)pos);
+>> 178                             break;
+>> 179                     default:
+>>
+>
+> The values may come from QEMU, so may be "tainted". We could check the l=
+ength of the individual structures against the total size of the SMBIOS ta=
+ble.
+>
 
-Thanks Hugo for addressing the issue. Could you, please, resend the
-patch with an appropriate commit message. Please, use
-scripts/get_maintainers.pl to determine the list of addressees.
+In Coverity I marked this as false positive with the following comment:
 
-Otherwise the patch looks good to me.
-
-The initial assignment in fit_image_read_key_iv_data()
-
-     int ret =3D -1;
-
-is superfluous. You may want to fix that too
-
-It helps to know which patch introduced the problem. Please, add
-
-Fixes: bc01d9ff93f3 ("image-host: refactor and protect for very long
-filenames")
+"The only case in which the data is tainted is when copying the smbios
+table from a prior firmware state when running as EFI app or from QEMU.
+Sanity checks should not be in the smbios command but where we import
+the table."
 
 Best regards
 
 Heinrich
-
-> Signed-off-by: Hugo Cornelis <hugo.cornelis@essensium.com>
-> ---
->   tools/image-host.c | 8 ++++----
->   1 file changed, 4 insertions(+), 4 deletions(-)
->
-> diff --git a/tools/image-host.c b/tools/image-host.c
-> index b2a0f2e6d1..06b05dcacb 100644
-> --- a/tools/image-host.c
-> +++ b/tools/image-host.c
-> @@ -351,12 +351,12 @@ static int fit_image_read_key_iv_data(const char *=
-keydir, const char *key_iv_nam
->   	ret =3D snprintf(filename, sizeof(filename), "%s/%s%s",
->   		       keydir, key_iv_name, ".bin");
->   	if (ret >=3D sizeof(filename)) {
-> -		printf("Can't format the key or IV filename when setting up the ciphe=
-r: insufficient buffer space\n");
-> -		ret =3D -1;
-> +		fprintf(stderr, "Can't format the key or IV filename when setting up =
-the cipher: insufficient buffer space\n");
-> +		return -1;
->   	}
->   	if (ret < 0) {
-> -		printf("Can't format the key or IV filename when setting up the ciphe=
-r: snprintf error\n");
-> -		ret =3D -1;
-> +		fprintf(stderr, "Can't format the key or IV filename when setting up =
-the cipher: snprintf error\n");
-> +		return -1;
->   	}
->
->   	ret =3D fit_image_read_data(filename, key_iv_data, expected_size);
 
