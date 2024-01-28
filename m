@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4648BC47258
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jan 2024 09:16:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78E9EC47258
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jan 2024 09:20:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 525A18811C;
-	Sun, 28 Jan 2024 10:16:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8CC7988145;
+	Sun, 28 Jan 2024 10:20:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="U8OfZ0+T";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="V5GJFxJf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9753488140; Sun, 28 Jan 2024 10:16:27 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id 9032888154; Sun, 28 Jan 2024 10:20:45 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96846880C3
- for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 10:16:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B288988121
+ for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 10:20:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1706433368; x=1707038168; i=xypron.glpk@gmx.de;
- bh=rpOlNDZSIIYZ6VC739DW9zYHA03bjZ2TAZrDGw7EZlE=;
+ t=1706433636; x=1707038436; i=xypron.glpk@gmx.de;
+ bh=yVDNJJ7KAL322Pg7PnvmqLXjYOaT3fwfbMaX9ejQwC0=;
  h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
  In-Reply-To;
- b=U8OfZ0+TNAnwOd7eeyOOL6B9TdVGbLxLhaodo35SBQ1bE+0LzXYsDZm2q1tx0ODG
- 4PCGE3ROyN2UVVuI1S8uIaaW/T+YtS4rSfX0ZtgYF9IWslZQhpe368hSxmW2pO8dO
- F/D1H+3jbF5NGV7IkkSCxAU5MS9h4icsNmjkr/oHW49fu6lFFOqPHlPRsIaCbVgLf
- Qbkxe6V83YVvMnkcvIN2cjaOeyltotykoZuvC8DF7DIvfgE9ExW+7TdaU+W5unBBY
- biRn5liRqrYw3JvNgFVOiGOvwLYQM4cnB+XruTpxbuQr4DrQgf3nNssPDpCAP1UAu
- hNFY6bZbHWBzKRU5qA==
+ b=V5GJFxJfP+Mcw73rZO/+5rba4VW4XNIQg4s3nu6/q5WggqMwY5UQ1bHhvS5fFNQY
+ ROCrDowFWuLFqouuKqkIMd8nYO99/Giz3V/tpbaOZKL1tcBn839oNDUgNZ0gvmvNB
+ R+/fO795Hmfrdb6yHSuFKVRGxWxWRj8hIKi2RKYkVr+hxZP5LDHhK0POw/2Vdejo1
+ JlhbWiluFxybv5YgU7UqZ1X5z2pC4+l0Z+RxfJ2IeoHJi5YeYbnWIPoGVEO33rbtr
+ I4fxVYUCeWjwMN054JKIHi9bX/Ql8howPQqihlN9s5lNYW9SIAIfRntMbcw5+MQnq
+ TpAXFBcMJiUwGtlCsg==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([178.202.40.247]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MZkpR-1rX8Bz0IkB-00Wpui; Sun, 28
- Jan 2024 10:16:08 +0100
-Message-ID: <2acf8505-315e-486d-a07d-c91fddfe6671@gmx.de>
-Date: Sun, 28 Jan 2024 10:16:08 +0100
+Received: from [192.168.123.161] ([178.202.40.247]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MowGa-1qiJmk14BC-00qSLF; Sun, 28
+ Jan 2024 10:20:36 +0100
+Message-ID: <5fb62d66-3aad-475b-9175-86e53e06fde6@gmx.de>
+Date: Sun, 28 Jan 2024 10:20:38 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 3/3] doc: sophgo: milkv_duo: document Milk-V Duo board
+Subject: Re: [PATCH] efi_loader : Suppress error print message
 Content-Language: en-US, de-DE
-To: Kongyang Liu <seashell11234455@gmail.com>
-Cc: Adam Ford <aford173@gmail.com>, Chris Morgan <macromorgan@hotmail.com>,
- Fabio Estevam <festevam@denx.de>, Nishanth Menon <nm@ti.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
- Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
- Wei Fu <wefu@redhat.com>, Yanhong Wang <yanhong.wang@starfivetech.com>,
- Yannic Moog <y.moog@phytec.de>, Yixun Lan <dlan@gentoo.org>,
- u-boot@lists.denx.de
-References: <20240128070614.7702-1-seashell11234455@gmail.com>
- <20240128070614.7702-4-seashell11234455@gmail.com>
+To: "Bhumkar, Tejas Arvind" <tejas.arvind.bhumkar@amd.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "trini@konsulko.com" <trini@konsulko.com>,
+ "sjg@chromium.org" <sjg@chromium.org>, "Simek, Michal"
+ <michal.simek@amd.com>, "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
+ "git@xilinx.com" <git@xilinx.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20240122191242.2989327-1-tejas.arvind.bhumkar@amd.com>
+ <CAC_iWjKEMs_0WHyu7ttfvP30vG=sJnhY5XWY=5hGBTAW_5oxyg@mail.gmail.com>
+ <d2b79924-87bc-42a2-9d06-6fcba06ed267@gmx.de>
+ <BL3PR12MB64505057156F40CDD884FB90D8742@BL3PR12MB6450.namprd12.prod.outlook.com>
+ <d3f3fc7f-b29a-4503-9fe0-97468bbe1f71@gmx.de>
+ <BL3PR12MB645027991850D2C0887FA80DD87F2@BL3PR12MB6450.namprd12.prod.outlook.com>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240128070614.7702-4-seashell11234455@gmail.com>
+In-Reply-To: <BL3PR12MB645027991850D2C0887FA80DD87F2@BL3PR12MB6450.namprd12.prod.outlook.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:5I7fXL8K6aIaXEGw+aJuAjemB6xDPxB+VSoxPDBHkczf+Cq1QyQ
- ++vob4trbOZyA9htqKzggL7+H2M+4hbCjgdbh+hFozu/OBCcOVA6Ir3ZfXTWHmvBVVWplEY
- pA32ppgCCfVwn8sMpODurN5aV7skiRZdHx6HvVpCbf0AdvWJG/lrKR9C/bpQxyYVcLkLUWB
- 3hiT0SytetaWoUsQoI8wA==
-UI-OutboundReport: notjunk:1;M01:P0:U7s0WT668CE=;cALbD7pHRoDCcvhZ7GxAjLOBA4Z
- rREP04+q64AgCY+FayT/e3UFqG9dPiu+VIb49ZTixldW/6IXre1QvDzFfN9aZibfF06eaxLhK
- ce6EwklCGu5kVjCR28aYopGotodi16rZfe2epZtE0pPxA0DnvwQlKLRZBJGUpnPt0icuaOK/y
- KEdmlBXFgP+nYOrzeRteOcFlgza0UtUZUCjYAB3hv6EEWRgULhqXEsMJAk+uvSuxjWZ3yKXCq
- 2zqM0FBaKrtZldLZZukX9mR2wrJtytGsmoRyQqSwGwMi9Pe7ZWTyHOmR2C5agt3XJFV9IX4pT
- ky7C3sFWFAIRqtp9/XdzfO91ZUtnLrkGJgGSIcGNvFv2cYrkzpi5TYpWanvgl1KaCHYykn2jy
- mkdfvoQurB8oqJfSJsDExexCowlztUDMOpKHu0XRN5MxHHJvLxGxm80o4DuDR8p/I6RWybePu
- ydNUBH6PRnk8jrIekcTNrDw4rjVNeZrTIUXddG8G5cN2gmpANFzDqZAk66FcpMkz2Q/UjBZ5x
- SmT4Vh1gLSBavsc3zz7ZVBq85YPA5qWpxFUhwL+5bfgNtkLZv2SQCXR+BfJR3FNu2NyYk3gZK
- cHm6SpvKpX1gSJoF53J/VcxaB47EgA4mxSncKQYWSxWA4unvJn1Kb5lE0SZYYn6EvJfyd/ibv
- UKaLJ3uvKG3NTS81lDg5fQIRVMhqILzLz32rHpVTKUPZVkEkDxTN6cT9hGgUD+f8suzH/lBcA
- YOj/UAf4HtrSMB2GK/wULC7XIN5DHOTPSs6hsiHuTDpCH6qs4dB1lT9IZb0oUKWKv6YQ/LNaF
- RicNej2fPSw3UtFG7LF9XtzBTHlpW7jLPCh492XyMXMB+FmhmmEN4crM2Cw2MADnXoaABh3Jn
- koeMj9gNzREcuyqqf7dCI/EKj4u5+rHd0i7+QURUo9TQ5yFqw8bD7vs8XMg74GsxvJ3v1WGf1
- TtP5mNWdvE1RzqGmtfrAO0VZS7c=
+X-Provags-ID: V03:K1:IoUJ9NOqxGAc6sD1COpyBC8LsivbCCKMv6Quoys2MSaYKmICLE8
+ YZw1CLzdODAvwZIOGz7viI5X2Rs1cKxJDit7pcF1rLanz+UbFcxtklbyvAV0VrqCW+MzGNP
+ N5adHgrIpogpKx994XEF6c4qpiNj9G4umpZ0fuc75X5ZKKLtnPsg3Ov2yqncBvf0/lwmQ+1
+ +pRF+9eL90m784bnRwPiQ==
+UI-OutboundReport: notjunk:1;M01:P0:DJxlJXN+/go=;hTE+VupfkcqoN2t1TvTPZiyCMuZ
+ SQZ5t7XWX5zSuBydmaRx25yChdDmvbhBs+7z6jmocQ/Jlx5AdyVRN2QGJsV6dX5ZMYThqCRT7
+ /bD8eQRMaCDUmA31fxFMoOh2ohqbli93sz8t5BFPJBB68tdWIu/km40mYEPY7Kd8zLLfgPov5
+ aAXW89oMnL6eEvoBJz/ppxktT+84YeUj8tcSDTzD358Gc+mmHp5CKfJ/ttzgNbhUg6D33jA6P
+ MfnBl5+GzvE8OppjEG7hJR4H3RB8fm/jcomvxmvdMXskNpKmDoynbHj/yd7RtvqdbLNUbmc51
+ NGarDv4kC0PIajmgXTcatq7eNz/16l4BL+0FTpULMdH0At58nrcGIi5Hyn3pfh+TK44CkXoYd
+ E+5+El8jEFAf2Jj7kOaH2LtDRyL2ib2rjptXKY9TLoYPxI6dURCCB+Aij9BV6eEV85/BUZPUS
+ pAL/KrLXUovZoKDJhDXqb5WNNZ3GbW9bWw0Ns4Sd2aX7PPvmOYBLRzBpYDqh4OEoQjHelf8IR
+ SW40A/rGC7a7RUwHv7y05IRH6ye98J78kaRaCJ0T6nSOrGDEXeSOUJgNV4iN0Fyel1zLTTPQy
+ JzFT1NinSUKXfFpEHUihi6cnO11L3hliaQFxeTr4+Xtsvyq8ShQ5dMFnexKkMPA/whM994gEe
+ XfyVKVFnsQty3bTg9kxoY0+062prMaME201OFH47bu8rr1qBM26exzl1AM7oZl5bvKpVwJawd
+ Q0ze92N4R1JE02Rz05E3BYuDwX22bqxu/JqLGSOyE9GeeSe41tuV/HWFuFyzKiFSAN9MVI9b3
+ p/bs6DmzgWpYiouFPq2BfhURiXe4DIGb9wLbp0dTyYf+9o6H9Yd9BvekQu8vRaYVfR+NG18WY
+ Euq26P7wZFqSqmiIZWwpuZg8ZzX3PtX5b30f4ydPAvnCmTqSs/eR2rVpuuyFzu4CyUXmjA6z/
+ qhLlYb3WYY1xUUXg+X+tcKTE4Cg=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,141 +98,210 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/28/24 08:05, Kongyang Liu wrote:
-> Add document for Milk-V Duo board which based on Sophgo's CV1800B SoC.
+On 1/28/24 06:20, Bhumkar, Tejas Arvind wrote:
+> [AMD Official Use Only - General]
 >
-> Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
+> Hi Heinrich,
 >
-> ---
+>> -----Original Message-----
+>> From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>> Sent: Wednesday, January 24, 2024 2:09 AM
+>> To: Bhumkar, Tejas Arvind <tejas.arvind.bhumkar@amd.com>
+>> Cc: u-boot@lists.denx.de; trini@konsulko.com; sjg@chromium.org; Simek, =
+Michal
+>> <michal.simek@amd.com>; Abbarapu, Venkatesh
+>> <venkatesh.abbarapu@amd.com>; git@xilinx.com; Ilias Apalodimas
+>> <ilias.apalodimas@linaro.org>
+>> Subject: Re: [PATCH] efi_loader : Suppress error print message
+>>
+>> Caution: This message originated from an External Source. Use proper ca=
+ution
+>> when opening attachments, clicking links, or responding.
+>>
+>>
+>> On 1/23/24 19:53, Bhumkar, Tejas Arvind wrote:
+>>> [AMD Official Use Only - General]
+>>>
+>>> Hi Ilias & Heinrich,
+>>>
+>>>> -----Original Message-----
+>>>> From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>>>> Sent: Tuesday, January 23, 2024 3:30 PM
+>>>> To: Ilias Apalodimas <ilias.apalodimas@linaro.org>; Bhumkar, Tejas
+>>>> Arvind <tejas.arvind.bhumkar@amd.com>
+>>>> Cc: u-boot@lists.denx.de; xypron.glpk@gmx.de; trini@konsulko.com;
+>>>> sjg@chromium.org; Simek, Michal <michal.simek@amd.com>; Abbarapu,
+>>>> Venkatesh <venkatesh.abbarapu@amd.com>; git@xilinx.com
+>>>> Subject: Re: [PATCH] efi_loader : Suppress error print message
+>>>>
+>>>> Caution: This message originated from an External Source. Use proper
+>>>> caution when opening attachments, clicking links, or responding.
+>>>>
+>>>>
+>>>> On 1/23/24 09:33, Ilias Apalodimas wrote:
+>>>>> Hi Tejas,
+>>>>>
+>>>>> On Mon, 22 Jan 2024 at 21:12, Tejas Bhumkar
+>>>>> <tejas.arvind.bhumkar@amd.com> wrote:
+>>>>>>
+>>>>>> Currently, on certain Xilinx platforms, an issue has been
+>>>>>> identified, manifesting as follows:
+>>>>
+>>>> Hello Tejas,
+>>>>
+>>>> thank you for bringing forward this issue.
+>>>>
+>>>> Which defconfig are you relating to?
+>>>
+>>> [Tejas]:
+>>> Checking with xilinx_zynqmp_virt_defconfig
+>>>
+>>>>
+>>>>>>
+>>>>>> Starting kernel ...
+>>>>>>
+>>>>>> efi_free_pool: illegal free 0x0000000077830040
+>>>>>> efi_free_pool: illegal free 0x000000007782d040
+>>>>>> efi_free_pool: illegal free 0x000000007782c040
+>>>>>>
+>>>>>> The issue arises when the ramdisk image is relocated, placing it
+>>>>>> within the previously allocated EFI memory region( as EFI is
+>>>>>> established quite early in U-Boot).
+>>>>
+>>>> Which version of U-Boot are you on? Commit 06d514d77c37 ("lmb:
+>>>> consider EFI memory map") was meant to avoid such a situation.
+>>>
+>>> [Tejas] :
+>>> I'm verifying against the latest changes in the master branch. The
+>>> introduction of commit 06d514d77c37 ("lmb: consider EFI memory map")
+>>> has resolved the occurrence of the "efi_free_pool: illegal free"
+>>> error. but, it leads to a new error, as detailed in the following
+>>> patch:
+>>> https://lore.kernel.org/all/20230212150706.2967007-1-sjoerd@collabora.
+>>> com/
+>>
+>> Could you, please, try to reproduce your issues with origin/master as o=
+f today and
+>> provide the full boot log. Please, also provide the output of the bdinf=
+o and the
+>> printenv command as well as the sizes of the kernel and the RAM disk.
 >
-> (no changes since v3)
+> [Tejas]: I've provided two logs: one obtained from the latest u-boot ori=
+gin/master, resulting in the "ERROR: reserving fdt memory region failed" e=
+rror, and the other from reverting commit 06d514d77c37 ("lmb: consider EFI=
+ memory map"), which leads to the "efi_free_pool: illegal free" error.
 >
-> Changes in v3:
-> - Add brief description of the procedure to run u-boot-dtb.bin
->
->   doc/board/index.rst            |  1 +
->   doc/board/sophgo/index.rst     |  8 +++++
->   doc/board/sophgo/milkv_duo.rst | 64 ++++++++++++++++++++++++++++++++++
->   3 files changed, 73 insertions(+)
->   create mode 100644 doc/board/sophgo/index.rst
->   create mode 100644 doc/board/sophgo/milkv_duo.rst
->
-> diff --git a/doc/board/index.rst b/doc/board/index.rst
-> index c96e5fda28..d0f9f355d2 100644
-> --- a/doc/board/index.rst
-> +++ b/doc/board/index.rst
-> @@ -46,6 +46,7 @@ Board-specific doc
->      sifive/index
->      sipeed/index
->      socionext/index
-> +   sophgo/index
->      st/index
->      starfive/index
->      ste/index
-> diff --git a/doc/board/sophgo/index.rst b/doc/board/sophgo/index.rst
-> new file mode 100644
-> index 0000000000..e097afdac6
-> --- /dev/null
-> +++ b/doc/board/sophgo/index.rst
-> @@ -0,0 +1,8 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
-> +
-> +Sophgo
-> +=3D=3D=3D=3D=3D=3D
-> +.. toctree::
-> +   :maxdepth: 1
-> +
-> +   milkv_duo
-> diff --git a/doc/board/sophgo/milkv_duo.rst b/doc/board/sophgo/milkv_duo=
-.rst
-> new file mode 100644
-> index 0000000000..cb2ed1ad98
-> --- /dev/null
-> +++ b/doc/board/sophgo/milkv_duo.rst
-> @@ -0,0 +1,64 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
-> +
-> +Milk-V Duo
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +CV1800B RISC-V SoC
-> +------------------
-> +The CV1800B is a high-performance, low-power 1+1 64-bit RISC-V SoC from=
- Sophgo.
-> +
-> +Mainline support
-> +----------------
-> +The support for following drivers are already enabled:
-> +1. ns16550 UART Driver.
-> +
-> +Building
-> +~~~~~~~~
-> +1. Add the RISC-V toolchain to your PATH.
-> +2. Setup ARCH & cross compilation environment variable:
-> +
-> +.. code-block:: console
-> +
-> +   export CROSS_COMPILE=3D<riscv64 toolchain prefix>
-> +   cd <U-Boot-dir>
-> +   make milkv_duo_defconfig
-> +   make
-> +
-> +This will generate u-boot-dtb.bin
-> +
-> +Booting
-> +~~~~~~~
-> +Currently, we rely on vendor FSBL(First Stage Boot Loader) to initializ=
-e the
-> +clock and load the u-boot image, then bootup from it.
-> +
-> +Alternatively, to run u-boot-dtb.bin on top of FSBL, follow these steps=
-:
-> +
-> +1. Use the vendor-provided tool to create a unified fip.bin file contai=
-ning
-> +   FSBL, OpenSBI, and U-Boot.
+> Thank You,
+> Tejas.
 
-Hello Kongyang,
-
-thank you for providing a documentation for the board.
-
-Concerning the usage of fip.bin it would be helpful to add more detail:
-
-* From where can the vendor code be downloaded?
-* Which are the commands to execute?
+Where can I find these logs?
 
 Best regards
 
 Heinrich
 
-> +
-> +2. Place the generated fip.bin file into the FAT partition of the SD ca=
-rd.
-> +
-> +3. Insert the SD card into the board and power it on.
-> +
-> +The board will automatically execute the FSBL from the fip.bin file.
-> +Subsequently, it will transition to OpenSBI, and finally, OpenSBI will =
-invoke
-> +U-Boot.
-> +
-> +
-> +Sample boot log from Milk-V Duo board
-> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> +.. code-block:: none
-> +
-> +   U-Boot 2024.01-rc5-00010-g51965baa36 (Dec 28 2023 - 13:15:53 +0800)m=
-ilkv_duo
-> +
-> +   DRAM:  63.3 MiB
-> +   Core:  10 devices, 8 uclasses, devicetree: separate
-> +   Loading Environment from nowhere... OK
-> +   In:    serial@4140000
-> +   Out:   serial@4140000
-> +   Err:   serial@4140000
-> +   Net:   No ethernet found.
-> +   milkv_duo# cpu detail
-> +     0: cpu@0      rv64imafdc
-> +      ID =3D 0, freq =3D 0 Hz: L1 cache, MMU
-> +   milkv_duo#
+>
+>>
+>> Best regards
+>>
+>> Heinrich
+>>
+>>>
+>>>>
+>>>>>
+>>>>> I don't mind suppressing the print for some time, but out of
+>>>>> curiosity, how is the ramdisk relocated? LMB should be aware of the
+>>>>> EFI regions by then, so I assume the relocation code doesn't check
+>>>>> those?
+>>>
+>>>
+>>> [Tejas] :  I observe that the relocation of the RAM disk is taking pla=
+ce in the line
+>> below.
+>>> https://github.com/u-boot/u-boot/blob/master/lib/lmb.c#L480-L491
+>>> Yes, the relocated code specifically examines the LMB region and does =
+not
+>> consider the EFI region.
+>>>
+>>>>
+>>>> The indicated situation is serious. If the EFI sub-system is using
+>>>> the same memory area as the ramdisk, this may lead to corruption of
+>>>> the ramdisk. Suppressing the messages is by no means adequate to solv=
+e the
+>> problem.
+>>>
+>>> [Tejas] :
+>>> The challenge arises when relocating the ramdisk image, inserting it
+>>> into the previously assigned EFI memory region, established early in
+>>> U-Boot. Consequently, when attempting to release memory in the EFI reg=
+ion
+>> during the handover process to the kernel in the efi_free_pool function=
+, we first
+>> verify if the memory was allocated by efi_allocate_pool().
+>>> The issue originates from a checksum mismatch because, during the ramd=
+isk
+>> relocation, we overwrite memory allocated by EFI.
+>>> This leads to the appearance of the error message: efi_free_pool: ille=
+gal free
+>> 0x0000000077830040.
+>>> Crucially, there is no corruption of the ramdisk seen since we do not =
+actually
+>> releasing memory due to the checksum mismatch.
+>>> In our testing, this issue was observed only when the ramdisk size exc=
+eeded
+>> approximately 24 MB.
+>>>
+>>>>
+>>>> Best regards
+>>>>
+>>>> Heinrich
+>>>>
+>>>>
+>>>>>
+>>>>> Thanks
+>>>>> /Ilias
+>>>>>
+>>>>>> Consequently, when
+>>>>>> attempting to release memory in the EFI memory region during the
+>>>>>> handover process to the kernel,we encounter memory violations.
+>>>>>>
+>>>>>> Highlighting that EFI remains active primarily during the booting
+>>>>>> of an EFI application, and the lmb persists while configuring
+>>>>>> images for the boot process. Since we aren't utilizing the EFI
+>>>>>> memory region during the boot process, there is no adverse impact
+>>>>>> even in the event of a violation.
+>>>>>>
+>>>>>> Currently, there is an ongoing discussion regarding the handling
+>>>>>> strategies of three memory allocators: malloc, lmb, and EFI. This
+>>>>>> discussion is documented in the email chain titled "Proposal:
+>>>>>> U-Boot memory management."
+>>>>>>
+>>>>>> Therefore, it is advisable to suppress the print message during the
+>>>>>> boot process for now.
+>>>>>>
+>>>>>> Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+>>>>>> ---
+>>>>>>     lib/efi_loader/efi_memory.c | 2 +-
+>>>>>>     1 file changed, 1 insertion(+), 1 deletion(-)
+>>>>>>
+>>>>>> diff --git a/lib/efi_loader/efi_memory.c
+>>>>>> b/lib/efi_loader/efi_memory.c index edfad2d95a..821fe7616e 100644
+>>>>>> --- a/lib/efi_loader/efi_memory.c
+>>>>>> +++ b/lib/efi_loader/efi_memory.c
+>>>>>> @@ -713,7 +713,7 @@ efi_status_t efi_free_pool(void *buffer)
+>>>>>>            /* Check that this memory was allocated by efi_allocate_=
+pool() */
+>>>>>>            if (((uintptr_t)alloc & EFI_PAGE_MASK) ||
+>>>>>>                alloc->checksum !=3D checksum(alloc)) {
+>>>>>> -               printf("%s: illegal free 0x%p\n", __func__, buffer)=
+;
+>>>>>> +               debug("%s: illegal free 0x%p\n", __func__, buffer);
+>>>>>>                    return EFI_INVALID_PARAMETER;
+>>>>>>            }
+>>>>>>            /* Avoid double free */
+>>>>>> --
+>>>>>> 2.27.0
+>>>>>>
+>>>
+>
 
