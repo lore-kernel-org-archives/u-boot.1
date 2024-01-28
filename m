@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08610C47258
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jan 2024 17:17:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25483C47258
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jan 2024 19:35:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49478879BB;
-	Sun, 28 Jan 2024 18:17:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 39477879F3;
+	Sun, 28 Jan 2024 20:35:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Bnssj/KA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZmwZDGt6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B81B87B6B; Sun, 28 Jan 2024 18:17:13 +0100 (CET)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id 783E787B13; Sun, 28 Jan 2024 20:23:37 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 736A087866
- for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 18:17:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 91E74879ED
+ for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 20:23:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-5ffe7e7b7b3so18113307b3.3
- for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 09:17:11 -0800 (PST)
+ spf=pass smtp.mailfrom=tekieli.lukasz@gmail.com
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a293f2280c7so181723066b.1
+ for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 11:23:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1706462230; x=1707067030; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Ci9RH1PrO47nv+P3R4EnhkXvUXDYHcxomi7p+5U/vSY=;
- b=Bnssj/KAt3kaOm+ZErMiCyF2yz7NT26HkxmCPQq9WgSJqP1R4RSPPlU7lvs53GOvmM
- bg0a60aPj1PiLfhr6v/hbHXc+8AoFS3gmCjEqy1Iq2leMzHj34x2yjutEmq0YuWWaeGz
- q9A/uuZF2wKXeWNw63YOsHxEwLRzToJxkKqMU=
+ d=gmail.com; s=20230601; t=1706469815; x=1707074615; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=GP4u4YshRIVXdR9PyPfJdODv2yI7kCWt050WFm9uXGI=;
+ b=ZmwZDGt66w2MBmO/ViukaaC0/NStZ15VmhUmnqxa2F2cWFU5TaXw9DIjp4czqTAG83
+ 2vrfDEhqC6zZVdw8KX1LWTa5PgCMczxxso4lggLrchi3K+018UwgqjVCxO9BuhfXxxUP
+ rVcVcsNqzkmZx5f9M33P+VsLwnVbJpZHpPEY1ePe3j9IdqRBBMFoa8ShM9PrmaZmamwy
+ xIttz2glMeZjOXqEuGIVkcdgfMQJ8ikjnhjJjgcNyO+W4KqOyUxNP/5/azcQupJerCAZ
+ XDT5XI1/fk1VEM9S6RmkkkcPcwt2nZUOckEiE4NcoY1WkCR70WFLICOgfLlxAAyU/oi2
+ 3iRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706462230; x=1707067030;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ci9RH1PrO47nv+P3R4EnhkXvUXDYHcxomi7p+5U/vSY=;
- b=PqtcAPyI8NnMjaCffL3ZC9a6FwazjOCN7nCExJl/yO8GXV2++GLgorabxA2xIcdmve
- gmgvT0CA+Cc2/uF+2R/xfYODugMcurBZrj+OCwscuA/r+m5k33rYEBF1w/a6CfU0D1Ng
- no+lhQOD6KPtyIYO0+D9a8vwDDRddK6NX8HerHCxv3xteFSgBxEBI7sl2Zhb1SpD4Cc8
- lzUIJu/465HkpP6GHl5KWNlxfPCJ+F65dyREcfFGov2oDPh6HYvsNWztlOYdPXnGEQ0A
- 6QonALVfiV6Jkq+pp7mpLCnBRKRhtQnVopwRpG1PTOo9RBJ4tZ1meyxmkNKcBZ3M1lBh
- yMOA==
-X-Gm-Message-State: AOJu0YwVp6VEak2zzQsS3NxVebYZKk0ymSmc5iSQNu2s9fvW70uo/+Hz
- 2JmPpNEX55IypFxC0TjoKA273RvG+mDEdkgQNuRQd7ZmXipmexFnwgyM6AI2plk=
-X-Google-Smtp-Source: AGHT+IG1Mq/5PhHM6td/mnVTnc+M4yjOYD7GZjATfwLddrIijn7B6As2mBotEFMtZoPisevp25SnZA==
-X-Received: by 2002:a0d:cd06:0:b0:5ff:9305:133f with SMTP id
- p6-20020a0dcd06000000b005ff9305133fmr2281168ywd.94.1706462230103; 
- Sun, 28 Jan 2024 09:17:10 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- fv8-20020a05690c370800b005ff9264e841sm1848987ywb.6.2024.01.28.09.17.08
+ d=1e100.net; s=20230601; t=1706469815; x=1707074615;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GP4u4YshRIVXdR9PyPfJdODv2yI7kCWt050WFm9uXGI=;
+ b=XlDiZhJU3Rzq4ISMN//AYus1LBTAU0nIDGitrQeOWM9E7WbgJ5hGncYEkwd3RYL+FV
+ YN9bnTp5i+2f109cnqXosz/ZIYJjn/0uMBI/kjvcaLX5NDSVkzUAycnYqVkL5L94ifpr
+ Dma8X+qUMlAMJr2WQMvQqrJEhAD4fzTZiSVSpZU52kCA8xroXW+c05MU/ZVbA8Uy6qx0
+ lFOMqhypZePRzZlHfwxiXZsCRiVHky1pDrFtQggVpppP039R3t+Q02rhbzHlwU6V3GEJ
+ veIqVXtoasKySN0eA9zy66RJZlQSXgJIY1adTbWyNLHxCkVx+QAoijRsyMLQaSo1Rqif
+ NT7w==
+X-Gm-Message-State: AOJu0YwP1j/y7uP3pxe3LhCQuxTcM0s0tMm+sX3ENavGEV9K1pRZxOP9
+ uUQKd2dzEx+HCjBiwxI9dFs3PiZkmPCEVH2U8nLzy8wxx/X+P5hN
+X-Google-Smtp-Source: AGHT+IE0O7ismJ3QSUEb1cKXNenqqjYOphKnscjpfR9jXA2bYVxMFVrnCKk588VXXkArvEwJaII9cA==
+X-Received: by 2002:a17:906:3c59:b0:a35:2841:2aaf with SMTP id
+ i25-20020a1709063c5900b00a3528412aafmr3193906ejg.38.1706469814816; 
+ Sun, 28 Jan 2024 11:23:34 -0800 (PST)
+Received: from yoga7.fritz.box (ip5f5bff47.dynamic.kabel-deutschland.de.
+ [95.91.255.71]) by smtp.gmail.com with ESMTPSA id
+ l17-20020a1709061c5100b00a3472da6696sm3107999ejg.159.2024.01.28.11.23.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 28 Jan 2024 09:17:09 -0800 (PST)
-Date: Sun, 28 Jan 2024 12:17:06 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/3] riscv: conflicting SPDX license linker scripts
-Message-ID: <20240128171706.GE785631@bill-the-cat>
-References: <20240125083815.12623-1-heinrich.schuchardt@canonical.com>
- <20240125083815.12623-2-heinrich.schuchardt@canonical.com>
+ Sun, 28 Jan 2024 11:23:34 -0800 (PST)
+From: Lukasz Tekieli <tekieli.lukasz@gmail.com>
+To: yanhong.wang@starfivetech.com, trini@konsulko.com, joe.hershberger@ni.com,
+ rfried.dev@gmail.com
+Cc: ycliang@andestech.com, sjg@chromium.org, chanho61.park@samsung.com,
+ frattaroli.nicolas@gmail.com, u-boot@lists.denx.de,
+ Lukasz Tekieli <tekieli.lukasz@gmail.com>
+Subject: [PATCH 0/2] board: visionfive2: add pad drive strength config
+Date: Sun, 28 Jan 2024 20:22:46 +0100
+Message-Id: <20240128192248.64407-1-tekieli.lukasz@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="conK0FBp+r/IikQW"
-Content-Disposition: inline
-In-Reply-To: <20240125083815.12623-2-heinrich.schuchardt@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 28 Jan 2024 20:35:18 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,43 +92,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+gmac0 does not work correctly with the default settings of the pad
+drive strength. 100Mbit link does not work at all. This series fixes
+the issue by porting the pad drive strength register configuration
+from the Linux driver from commit
+67a8976780858461b3c2d0dc501d207452543c53.
 
---conK0FBp+r/IikQW
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Lukasz Tekieli (2):
+  net: phy: motorcomm: configure pad drive strength register
+  board: visionfive2: configure PHY pad drive strength
 
-On Thu, Jan 25, 2024 at 09:38:13AM +0100, Heinrich Schuchardt wrote:
+ board/starfive/visionfive2/spl.c |   8 ++
+ drivers/net/phy/motorcomm.c      | 130 +++++++++++++++++++++++++++++++
+ 2 files changed, 138 insertions(+)
 
-> Fix conflicting SPDX license information in linker scripts introduced by
-> commit 7215787c4ea4 ("SPDX: Convert single license tags to Linux Kernel
-> style").
->=20
-> Fixes: 7215787c4ea4 ("SPDX: Convert single license tags to Linux Kernel s=
-tyle")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+--
+2.39.2
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---conK0FBp+r/IikQW
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmW2jA8ACgkQFHw5/5Y0
-tyzRZgv8DnlQO5dG8YUZDxxbmJG3beXLde+ddXgXLbArhd/d+brUChgoi8AMM/xn
-BGPfjfM50TwF4kYTHx7KBmsiHHwChJC9v21KwXgq810+rnzt82eebLnTC8KXw5jE
-iga4S7kxURbGA8nP79C3ZV4c1OmkyAsOGIAnd5IwBWHmes0uk8I0leZegZlOBHpn
-D+u6TTuqJKGXPf2faBmMB+szn5zAUIW7tbBp7s23ziP+4ezNzPfdtGF+h4ICTRsw
-Bn0xn/BKZ9B7ERPK/g8zVr6FMUTzDrYfCGG2nODqtobkQBRz8MNznjRg2XEhtQtE
-9PGbi0oCO/ItuVnSg/TrIv91HFGdNjAopvzV0fLTXo9w/4XsRdl6B6efvpPvenoE
-23dmKca24rxuevXXS6623NchuATZ8RMvI1qaB/8scrPIv1vM/yWApnvVnRm1M2Kl
-IFYYyG4hBEQBjBatoJU25yc8VrVBOx45L7uqkIrf5IXnSSBtwtjGM+VfoIYPv7To
-psZWFKux
-=CX02
------END PGP SIGNATURE-----
-
---conK0FBp+r/IikQW--
