@@ -4,76 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2005DC46CD2
-	for <u-boot@archiver.kernel.org>; Sat, 27 Jan 2024 23:31:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03EF0C46CD2
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jan 2024 01:20:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B445880E0;
-	Sun, 28 Jan 2024 00:31:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D941A880E7;
+	Sun, 28 Jan 2024 02:20:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q2HNysi9";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="BQQXeGWA";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="TI7B9UmH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20F7688093; Sat, 27 Jan 2024 23:55:07 +0100 (CET)
-Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
- [IPv6:2607:f8b0:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B0D8988135; Sun, 28 Jan 2024 02:20:22 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE0C9880A7
- for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 23:55:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 48F3188093
+ for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 02:20:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raj.khem@gmail.com
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-5ca29c131ebso1721309a12.0
- for <u-boot@lists.denx.de>; Sat, 27 Jan 2024 14:55:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706396103; x=1707000903; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gFthddfxLg04QYvDdQOCyfM6gabE/bjKlk/Kgca75Tc=;
- b=Q2HNysi9w9tIF8ue7nX4RSw5C44pwLRirCSqgrVFEskKFypoXOucL6TMlkwUnGyeth
- 5DbheFBB0Wzmoj6Zncr4T/aARc294Uofi3HcftXh7Pg9UhW9BfZrDi/OYOqtzwp4/BjT
- kCwGqujAe3PcZb5msl/fYRegezNSgO3OMxIc7imFVDwOjlvp0a6cJaDEDiEGfUo1KgYN
- YVfcidvvnG7bPm6LfbSsPbWejC8ndUzB4OkSwHWyv2hEGxCIq3Qol4niHqQPxJdfweo7
- ruEbhJWSZsoDImhvNVKdLslQz7KTahvNm9dKeTXYdyy/Fmayuu97uMYD8KYNoW8XNru5
- cUGA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706396103; x=1707000903;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gFthddfxLg04QYvDdQOCyfM6gabE/bjKlk/Kgca75Tc=;
- b=oTQnGpPBZhPhh5w4jSQI1xYcVbsN500Bh+jn9WdN5B2mrSriiQ2rd7b9t1ZTq6HcpO
- d2NhI6m0S62PjAs+NEKnfdrrONcDag9RULjav7AnHXxJMBYrefFooWJ3ARK8zZiyLh8a
- sDR1POCYV7wPLSSKZ94QgT1EXwAu/4gFnwD6DvWHvgmdQTAy5wsl/0LQ7ipppuxihgVF
- ctPDdjEgjuIWgBBA/ytI8kb8AMgeLfIHRSMpKpfO7a10Jh6zp/IOslJBCiabadZPvyZJ
- BvsPMXnjsGxIplcPstXDW6A1x89tKCOZNvZay9shBkzC5tYbgVFjMTVg0atYJH6FaxoU
- nBTQ==
-X-Gm-Message-State: AOJu0YzzS67EoBIgNCwY+Hkr26uEXLqopdv2mOwIJUtxRGXLk+FMbLNu
- w+BQKP9JCmQUqTsxmgHZSEWdr8W8X7tlSB/8235y32EMdJ1oYatLyI5iSEpThXc=
-X-Google-Smtp-Source: AGHT+IFSuCJ7HLWWoEhklXTpcQZvF4GfsutLy5UnoXqa57hO57CvxRAq/QnPWM6u/GWNbxqyh0IhPw==
-X-Received: by 2002:a05:6a20:43a2:b0:19c:a481:fa5b with SMTP id
- i34-20020a056a2043a200b0019ca481fa5bmr570793pzl.0.1706396102614; 
- Sat, 27 Jan 2024 14:55:02 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::b77b])
- by smtp.gmail.com with ESMTPSA id
- p3-20020aa79e83000000b006dddd3e31a8sm3242758pfq.219.2024.01.27.14.55.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 27 Jan 2024 14:55:02 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4TMtsH6JDtz9sV3;
+ Sun, 28 Jan 2024 02:20:19 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1706404819;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Z6ANC1vf3NafOUKDiresf6K4An2JTSSMTM8eiQoWupQ=;
+ b=BQQXeGWArr49lxUEUEWV/l8TGa2jrCi6p8kwtyfmzsob1cwEDdpt3IeZbi7FXqhhwimCbN
+ cYO7zsqLCKmZva3IrzjwjWuwIcw8u/ZgcteZH2FM2ajQH0n7k7hKhkp1i/+OdfaO232j+s
+ cKGNGR0K96ZJeTM5fD01BIImomJGEoP9Cb2W0TeZxTfspMJHKzyhdGrvpZKeNBx/Qt0Cie
+ YEwZrMrbAiStldkxP5M+sr0U8W2f3xiNsUUQIcuye8T17zo0CF2l7BXxzl79NoYcUGUqL9
+ KlFeVMzM1rAJrBu6MnFD46SckhbLhOD18W5nILSJdmbXIqFBTkSmwt7ZmPQrJA==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1706404818;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Z6ANC1vf3NafOUKDiresf6K4An2JTSSMTM8eiQoWupQ=;
+ b=TI7B9UmHjBLBwRPkRj175WI9am1qKwxkK2jr5c/bazZyLVVcZ3tqIXM4WpDug7gVs4Lp/V
+ MKZl6OKD25t/szpYG59E88ouCAQCDXCAfC0xWGDexoVjzRVppvNhVTdldf3XLScFzqTAUO
+ dD/r9qM+ag/v3xxUOqkwyEgW2GCiN9P2XDcB4OVeR0gpl/iHk8K5TePiCYkkLgfGtsNyxT
+ pJHSpCLS41BOAVk6nCY5GioA0Cm3wT2bWK35oKmiDme/TsGVQ+cr+z+pvNTFO22xU2y+VQ
+ DQjAanfJgvRo3Yt+2gHGjGZP1prFVRdk1oUnojUDxAGH5qiUeK3waY7Nk7EnmQ==
 To: u-boot@lists.denx.de
-Cc: Khem Raj <raj.khem@gmail.com>, Anatolij Gustschin <agust@denx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] video: dw_hdmi: Fix compiler warnings with gcc-14
-Date: Sat, 27 Jan 2024 14:54:59 -0800
-Message-ID: <20240127225459.3064283-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Subject: [PATCH v2] net: phy: Use PHY MDIO address from DT if available
+Date: Sun, 28 Jan 2024 02:19:40 +0100
+Message-ID: <20240128011959.59995-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sun, 28 Jan 2024 00:31:53 +0100
+X-MBO-RS-ID: ef5e10c1dd42f0ca03e
+X-MBO-RS-META: rznf1fq5onyjukkfag177w6rsjcaxmib
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,46 +83,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-GCC-14 find more warnings like
-"make pointer from integer without a cast"
-fix them by adding a type cast.
+In case the PHY is fully described in DT, use PHY MDIO address
+from DT directly instead of always using auto-detection. This
+also fixes the behavior of 'mdio list' in such DT setup, which
+now prints the PHY connected to the MAC correctly.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Anatolij Gustschin <agust@denx.de>
-Cc: Tom Rini <trini@konsulko.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- drivers/video/dw_hdmi.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Ramon Fried <rfried.dev@gmail.com>
+---
+V2: This patch is generic replacement for
+    - net: ravb: Use PHY MDIO address from DT if available
+    - net: sh_eth: Use PHY MDIO address from DT if available
+---
+ drivers/net/phy/ethernet_id.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/drivers/video/dw_hdmi.c b/drivers/video/dw_hdmi.c
-index c4fbb18294..9294d9a82a 100644
---- a/drivers/video/dw_hdmi.c
-+++ b/drivers/video/dw_hdmi.c
-@@ -78,10 +78,10 @@ static void dw_hdmi_write(struct dw_hdmi *hdmi, u8 val, int offset)
- {
- 	switch (hdmi->reg_io_width) {
- 	case 1:
--		writeb(val, hdmi->ioaddr + offset);
-+		writeb(val, (void *)(hdmi->ioaddr + offset));
- 		break;
- 	case 4:
--		writel(val, hdmi->ioaddr + (offset << 2));
-+		writel(val, (void *)(hdmi->ioaddr + (offset << 2)));
- 		break;
- 	default:
- 		debug("reg_io_width has unsupported width!\n");
-@@ -93,9 +93,9 @@ static u8 dw_hdmi_read(struct dw_hdmi *hdmi, int offset)
- {
- 	switch (hdmi->reg_io_width) {
- 	case 1:
--		return readb(hdmi->ioaddr + offset);
-+		return readb((void *)(hdmi->ioaddr + offset));
- 	case 4:
--		return readl(hdmi->ioaddr + (offset << 2));
-+		return readl((void *)(hdmi->ioaddr + (offset << 2)));
- 	default:
- 		debug("reg_io_width has unsupported width!\n");
- 		break;
+diff --git a/drivers/net/phy/ethernet_id.c b/drivers/net/phy/ethernet_id.c
+index 877a51c3d00..6cb1fd4453e 100644
+--- a/drivers/net/phy/ethernet_id.c
++++ b/drivers/net/phy/ethernet_id.c
+@@ -71,6 +71,9 @@ struct phy_device *phy_connect_phy_id(struct mii_dev *bus, struct udevice *dev,
+ 		}
+ 	}
+ 
++	if (phyaddr == -1)
++		phyaddr = ofnode_read_u32_default(phandle_args.node, "reg", -1);
++
+ 	id =  vendor << 16 | device;
+ 	phydev = phy_device_create(bus, phyaddr, id, false);
+ 	if (phydev)
 -- 
 2.43.0
 
