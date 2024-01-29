@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D141C47422
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 12:14:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3675C47422
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 12:15:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE08687C37;
-	Mon, 29 Jan 2024 13:14:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 55B1D87C37;
+	Mon, 29 Jan 2024 13:15:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="EfVwNiqb";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="e/qMGj4U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28D9787D8A; Mon, 29 Jan 2024 13:14:56 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id 667C087D8D; Mon, 29 Jan 2024 13:15:54 +0100 (CET)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BCBF876F8
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 13:14:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 317B8876F8
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 13:15:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-5ff7a8b5e61so23879737b3.2
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 04:14:53 -0800 (PST)
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-dc64926af85so2005389276.0
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 04:15:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1706530493; x=1707135293;
+ d=amarulasolutions.com; s=google; t=1706530551; x=1707135351;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=i9sGTdOwJ/XZLCQtC9PSKLfeES0/sCXvvsHgy5bNkxc=;
- b=EfVwNiqbeSfHPGfpFNgsVwZQOETGemAjJLf7FMEuT34/bO5kVKbEHkrl+TuwAnxM0q
- ui52hRrYnSpSVw+v5jDv3RvcbwebHjZHD7VvpgBOOPtk7UJNr/bQOL98HyEqXiJmaFaN
- yazCkPrkLcjcRBTj5w7RrN1YB8CgIo0CUzhtc=
+ bh=dvVNq0oCK3nsF2GI9cT51KdxUGnuFY6W+Yzo/mDt5ME=;
+ b=e/qMGj4UTuNhzTyx46QgQ3+/SvAkjJWtgm2xlmZhVwq+BMjZkeaGNOPgGHwQU2uhTc
+ qh0cy+jdrlO+igeRWFeH9YfwzEeAbBNee7YtTMYf5UHw7Ab19iTu0982+rGtPZEcUK8n
+ eudNRAblY0r4BDVLXzF8MWBttjdEEPWVlf8Io=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706530493; x=1707135293;
+ d=1e100.net; s=20230601; t=1706530551; x=1707135351;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=i9sGTdOwJ/XZLCQtC9PSKLfeES0/sCXvvsHgy5bNkxc=;
- b=fMXHUygZRwwYAKDlTMMOcdSClxZPcKKd1jt/rfSFdDQbR+YRhqUUBVghk2IttvufRh
- eyECpveVYSCwSU5W/s0uJXa4/soePiBLhuE8a1bP7nPWJNJ1O4oKvbMjfLIgjvoxgigg
- nS2cgXL+ASOFKRSdaYJJQe3hxC4ze2QiKLYM9NF7U6Fybcr/U1/atZkVa7tLrmSx2Gae
- e/2Jz+O99gWFXrwDiOR3zbQapV21hCdGgaSKL4P3ixB2NxTblxtdjDPlswKQ6QIqMLiP
- Ph3Dz8tgld0KBj56h1kWADxOBmF/DYoUlMXhRizYFaQGNs2XbddOfUvSx1/p+ejKlk+5
- Kzjw==
-X-Gm-Message-State: AOJu0Yy2kWSl7a9/p811xfJHQuRsUyhv0kFNDjfnYWZ+r0vOsWlLaEY6
- 14XVfigAHeaCzotviTD6sfv1dd/qK+FVjUFq176vczhk1Ms+zRVlxOO81p5fvCUve7bWETKOYNp
- JcPjfI7WoMUvdoeMctkgfYCEd/ndB1x4LjVCQM+NWgeD+6nVaiZv5lA==
-X-Google-Smtp-Source: AGHT+IFL3oVgyUlYFR678BRI/xlfxECX7SJdMTs1wEhW3iCgvAwB7QvD4Fa2h/yX3yMzuJlmoMx/cxdeQ4HihBjX6VU=
-X-Received: by 2002:a81:ad18:0:b0:5ff:c4b8:9517 with SMTP id
- l24-20020a81ad18000000b005ffc4b89517mr3504160ywh.25.1706530492818; Mon, 29
- Jan 2024 04:14:52 -0800 (PST)
+ bh=dvVNq0oCK3nsF2GI9cT51KdxUGnuFY6W+Yzo/mDt5ME=;
+ b=pOIlk6EZqieL5iTIYSkEr1itZtEtQ1WDmaF7ogrkvQVqwPVnf/SjR9veUnnHLDDZl3
+ w58dYDM1KUjFfSaeAgM6IgKGYVa0GfUyJbej5NDbEiPbs/TmM+Cxb4vCa/OfigiU1CzY
+ q6KEzZxUSkT7EAEANWFx7a+AgypYCtPSK9FtiGWJRi5ISqZHbWkMFdFo5zLxqvN2u62z
+ cl58YkEMmuOCxiOUOLwnYHjfp0MKf5Jo3/YC398w8NkdB/fq8zv4tZHpyZB3f7MIV0xK
+ Bsp4Ug32fBtlH0+tUfl+spwwewDk5B0drvgAQ6WjvDKcDZtJU1Olsy24NyZhln1kM1uo
+ Kv3A==
+X-Gm-Message-State: AOJu0YxnK6LszIRlfG9pM4G7jXfljyQYpQxO+C2q2hZQZDi0nrD1mlQo
+ W2Q4cTpctKcWF0Z0Z4CIWCM3opbOmHIRl+SnlUwCrMLva2IVCAgxbKWl/LP5ueBLgKvjIWdpIxU
+ aEPs6v5Pg54E59JxO7N0sk3x/gCU8ij2R/4Y6Bw==
+X-Google-Smtp-Source: AGHT+IFUGzUD9PBM9hUZ0JkgxDZnKOM1Mg2qePTCvFjUgy0d/ZYAFO2gkWbS7KKJuLgswwyDlpKdE/0RGDLjmYA88Iw=
+X-Received: by 2002:a25:b82:0:b0:dc6:4e33:10b8 with SMTP id
+ 124-20020a250b82000000b00dc64e3310b8mr2155221ybl.124.1706530550977; Mon, 29
+ Jan 2024 04:15:50 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1703220284.git.Takahiro.Kuwano@infineon.com>
- <ceb99692ba605ef079c6f796082055bed047248b.1703220284.git.Takahiro.Kuwano@infineon.com>
-In-Reply-To: <ceb99692ba605ef079c6f796082055bed047248b.1703220284.git.Takahiro.Kuwano@infineon.com>
+ <590a68b594f61e8ec2315f3c0b17e7dc43a21a5d.1703220284.git.Takahiro.Kuwano@infineon.com>
+In-Reply-To: <590a68b594f61e8ec2315f3c0b17e7dc43a21a5d.1703220284.git.Takahiro.Kuwano@infineon.com>
 From: Jagan Teki <jagan@amarulasolutions.com>
-Date: Mon, 29 Jan 2024 17:44:41 +0530
-Message-ID: <CAMty3ZCyRdZkMoRZSB32cFd2CV2fb9xaGZDJnpVr01BSX_d2dQ@mail.gmail.com>
-Subject: Re: [PATCH v2 4/9] mtd: spi-nor-core: Use CLPEF(0x82) as alternative
- to CLSR(0x30) for S25 and S28
+Date: Mon, 29 Jan 2024 17:45:40 +0530
+Message-ID: <CAMty3ZAnTZqwd+DgNC=+LF7=_CsegqP3fVHXXp+4Wff3nSDfqQ@mail.gmail.com>
+Subject: Re: [PATCH v2 5/9] mtd: spi-nor-core: Rework s25_mdp_ready() to
+ support Octal DTR mode
 To: tkuw584924@gmail.com
 Cc: u-boot@lists.denx.de, vigneshr@ti.com, tudor.ambarus@linaro.org, 
  pratyush@kernel.org, d-gole@ti.com, Bacem.Daassi@infineon.com, 
@@ -93,16 +93,10 @@ On Fri, Dec 22, 2023 at 11:16=E2=80=AFAM <tkuw584924@gmail.com> wrote:
 >
 > From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 >
-> Infineon(Cypress) S28Hx-T family does not support legacy CLSR(0x30) opcod=
-e.
-> Instead, it supports CLPEF(0x82) which has the same functionality as CLSR=
-.
-> spansion_sr_ready() is for multi-die package parts including S28HS02GT, s=
-o
-> we need to use CLPEF instead of CLSR.
->
-> This change does not affect to S25x02GT which uses spansion_sr_ready() as
-> S25Hx-T family also supports CLPEF(0x82) as well as CLSR(0x30).
+> s25_mdp_ready() handles status polling for multi-die package parts that
+> requires to read and check status register for each die. To support
+> S28HS02GT(dual-die package with Octal DTR support), rename function and
+> use nor->rdsr_dummy in octal DTR mode.
 >
 > Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 > ---
