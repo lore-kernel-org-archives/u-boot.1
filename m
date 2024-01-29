@@ -4,77 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 638E0C47422
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 12:22:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02DE6C47DA9
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 12:24:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5BE687DB8;
-	Mon, 29 Jan 2024 13:22:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2FE9E87C9B;
+	Mon, 29 Jan 2024 13:24:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="pWHRVYGu";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="pijQoY39";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFC8B87DC2; Mon, 29 Jan 2024 13:22:14 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id F2D0187CE2; Mon, 29 Jan 2024 13:24:13 +0100 (CET)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCF7B87C9B
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 13:22:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 499F08798C
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 13:24:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-602c91a76b1so34163277b3.2
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 04:22:11 -0800 (PST)
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-6039716f285so17610077b3.2
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 04:24:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1706530930; x=1707135730;
+ d=amarulasolutions.com; s=google; t=1706531047; x=1707135847;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KTRQgSdur4F6F+bMLblXihAr959Et1m7uAjmr2z4x7A=;
- b=pWHRVYGufhqp4sRHmjtz10+QoQW1KF06VeNSsAlfHRTKY19wmBFrWZYx9HHbD3sVdw
- 9LBkVmhSY147YreH1Qz/JbZjY2eBCZthXDKKOlUES0H8eI9AZTeXfBFZ3jzKgOWcuaTn
- 6tAbSf5kbzaOl9bBjupsbaCfgQI90h/ZRZpCs=
+ bh=E2idnBMfhO9uerqo7ZWilRdDMThGh/0eq+hVA9ncs0A=;
+ b=pijQoY39YL0D7GPKLbg1RGbuSP1VpdBxriRbemnmYQFJnQoKJZp0tHxPCujmSN1TsX
+ 2FWXfDdBgkPcF3ADl6H9MvIAVi8t14NFMOusmj9kkfE6UYiSsmP3DjPHDxjQ1AVspLj7
+ V4tqcoiOpb0mg/KWKHZoPTzQREbY73gR47Rmo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706530930; x=1707135730;
+ d=1e100.net; s=20230601; t=1706531047; x=1707135847;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KTRQgSdur4F6F+bMLblXihAr959Et1m7uAjmr2z4x7A=;
- b=rH6REj9VhYot6PmND+NP7DUvYLd5GDnt76kjYQVmrrwEggxtP30gF3LMVb+eUKhFGn
- 2hqXRouW9bLgRxwVOhUdo8ahUAvJqQqKZXT84kGGO10n1qxAotBc9fnVi6448IXVm5Zc
- USZYk8FUNMn9+9NQUxhqeRzG/t8XP0oR4aLHYsrEoMvsCmKxeyK2mcPT8uDhKeBXsW3n
- Zv+/khaWMd+0rMq/LG3BtG87nSZ2MXXi9uA9TsYx7CET4wkSm9TW3ZgHjFgnswYxBc0w
- CPmk0HTBe1UFOCfI2EdcZTDWY5JMMOZ2LpBRn+OaAZy6HdFoRo8ELDCcg7fMSzJQFkzd
- 9eFw==
-X-Gm-Message-State: AOJu0YxHVPSFp12H6ZlH0+if7NkYXbpI1MDiojllp48a73iiDuX+WFSn
- s/j58145h1eHwh0qBRqfYRze+7E4/KwraSuHAxm656ppU5sbJzV5tgGrlqzksHvztC/4Kc4pgMo
- mdxjstR1Pkl/8k0ytDnmOFrPXROKY7sf9T1imMPQiYO6QjH7CHNE=
-X-Google-Smtp-Source: AGHT+IHbsQv/rNJWUA+lnT9h7hg8Mmo7f8oe8BcbGHAM11OwQnHSkpkg+HNRDrIjpjNl2vq5mTWlQHIXGGdonpd/JhY=
-X-Received: by 2002:a81:e505:0:b0:5ff:9fb4:33fc with SMTP id
- s5-20020a81e505000000b005ff9fb433fcmr5234488ywl.6.1706530930345; Mon, 29 Jan
- 2024 04:22:10 -0800 (PST)
+ bh=E2idnBMfhO9uerqo7ZWilRdDMThGh/0eq+hVA9ncs0A=;
+ b=QPudToq/fPBG+OdDHVGEYnR+c3JdPd2VIaxk0MrlVUpny6+sBllEHJy/Bc6AhutNKj
+ OUZr576GcnjEE3zLTmh67A485d5ONFhFIg9Hj/I/AeuiScBZkc4svG8eLhKDUF7naIqs
+ 1kqF/cD8O5DiSXLC1w9sgQjQSmKkXZ5b8VsTQazsH4PV/UNRuW35fIR401lF6wjvKU92
+ c74eneJJnBVROZSOTuDOMyOeq7ENt8Ia+M+Kv+IPgucjkkMmf5J2M8kpYeETvhdTs235
+ E4YgzeY0zjVpVO+59BOf96Vqd1VarNUJgZH+tpX5IZwjjj0MvbgCDuIXAnJTFG8FuLEb
+ omFw==
+X-Gm-Message-State: AOJu0YyJ+W3NSuq2z4Bs0+sTQJMf+duqbuaqzoFSUiVgTDhiDW9v4PH9
+ XLdNzWgwI8A6IT9OB3pgRVeZUYdKbd9WBSMYwA3o3kcICgqTE9jo8CJnt7pAvBAp3WXJDYMczCn
+ HcX4dKDWFDf/UFqV9ecFSz/WvKcvWRa0X3nmYJQ==
+X-Google-Smtp-Source: AGHT+IH9r3cd8XTrdYkQnFhSGl4CJsrnXNWlfiy+5hoRaEzJJ8xiSXNtasWm7X1HycTufN7cFVvgI1GxyjsbexF1ZfM=
+X-Received: by 2002:a0d:df16:0:b0:5f0:42de:8c3b with SMTP id
+ i22-20020a0ddf16000000b005f042de8c3bmr4312840ywe.36.1706531046971; Mon, 29
+ Jan 2024 04:24:06 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1701853668.git.tejas.arvind.bhumkar@amd.com>
- <86732ea5dfb703525e50bfbfbdeea188832611c1.1701853668.git.tejas.arvind.bhumkar@amd.com>
- <CAMty3ZDaZO_QCSx0MNUdtHqfzyDB-uRKc3QN+fRj02TzkCsMAA@mail.gmail.com>
- <BL3PR12MB64506B6013FFB4CFAD2D0746D863A@BL3PR12MB6450.namprd12.prod.outlook.com>
-In-Reply-To: <BL3PR12MB64506B6013FFB4CFAD2D0746D863A@BL3PR12MB6450.namprd12.prod.outlook.com>
+In-Reply-To: <cover.1701853668.git.tejas.arvind.bhumkar@amd.com>
 From: Jagan Teki <jagan@amarulasolutions.com>
-Date: Mon, 29 Jan 2024 17:51:59 +0530
-Message-ID: <CAMty3ZAnzbY3+ES8KQUWKBSx4vinKZo3rZzZRJPTEmxJfVqOyA@mail.gmail.com>
-Subject: Re: [PATCH v2 01/30] mtd: spi-nor: Add config to enable flash DTR
-To: "Bhumkar, Tejas Arvind" <tejas.arvind.bhumkar@amd.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "joe.hershberger@ni.com" <joe.hershberger@ni.com>, 
- "rfried.dev@gmail.com" <rfried.dev@gmail.com>, "Simek,
- Michal" <michal.simek@amd.com>, 
- "vigneshr@ti.com" <vigneshr@ti.com>, "git@xilinx.com" <git@xilinx.com>, 
- T Karthik Reddy <t.karthik.reddy@amd.com>
+Date: Mon, 29 Jan 2024 17:53:55 +0530
+Message-ID: <CAMty3ZBMd06bj8gJOv99nMfmk70BmBRiPaFdRVBh9CKgmxDapw@mail.gmail.com>
+Subject: Re: [PATCH v2 00/30] Fix issues with QSPI and OSPI compare failures
+To: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com, 
+ michal.simek@amd.com, vigneshr@ti.com, git@xilinx.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -93,52 +86,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Dec 31, 2023 at 11:27=E2=80=AFPM Bhumkar, Tejas Arvind
+On Wed, Dec 6, 2023 at 3:02=E2=80=AFPM Tejas Bhumkar
 <tejas.arvind.bhumkar@amd.com> wrote:
 >
-> [AMD Official Use Only - General]
+> A set of patches has been developed to resolve concerns regarding data
+> integrity failures in QSPI and OSPI for the Versal, Versal NET, Zynq,
+> and ZynqMP platforms.
 >
-> Hi Jagan,
+> The series has undergone testing with flashes on the default setup,
+> and comprehensive testing is currently underway to test the series
+> with all available flash parts.
 >
-> > -----Original Message-----
-> > From: Jagan Teki <jagan@amarulasolutions.com>
-> > Sent: Wednesday, December 20, 2023 1:00 PM
-> > To: Bhumkar, Tejas Arvind <tejas.arvind.bhumkar@amd.com>
-> > Cc: u-boot@lists.denx.de; joe.hershberger@ni.com; rfried.dev@gmail.com;
-> > Simek, Michal <michal.simek@amd.com>; vigneshr@ti.com; git@xilinx.com; =
-T
-> > Karthik Reddy <t.karthik.reddy@amd.com>
-> > Subject: Re: [PATCH v2 01/30] mtd: spi-nor: Add config to enable flash =
-DTR
-> >
-> > Caution: This message originated from an External Source. Use proper ca=
-ution
-> > when opening attachments, clicking links, or responding.
-> >
-> >
-> > On Wed, Dec 6, 2023 at 3:02=E2=80=AFPM Tejas Bhumkar
-> > <tejas.arvind.bhumkar@amd.com> wrote:
-> > >
-> > > From: T Karthik Reddy <t.karthik.reddy@amd.com>
-> > >
-> > > The spi-nor framework will set up the flash parameters by reading the
-> > > flash id table flags, which include cmd opcodes, address width, dummy
-> > > bytes, and bus width. In case, flash supports octal DTR mode and the
-> > > controller does not support the DTR. There is no process to switch
-> > > back to SDR mode.
-> > > To avoid this issue, create a Kconfig option SPI_FLASH_DTR_ENABLE to
-> > > explicitly specify to enable/disable flash DTR support.
-> > > This config is disabled by default.
-> >
-> > We cannot control controller fixup in flash, DTR read based on the DTR =
-flag I don't
-> > think adding extra CONFIG to hack the controller with impact is.
-> [Tejas] : By default, this configuration is set to Disabled. It serves as=
- a convenient option for operating the flash
->         between SDR and DDR without requiring any adjustments to the nor-=
-id table flags.
+> These patches are built upon the v5 series, which can be found at the
+> following link:
+> https://lore.kernel.org/all/20231201031839.239567-1-venkatesh.abbarapu@am=
+d.com/
+>
+> Changes in v2:
+> - Removed the SPI_NOR_HAS_TB flag for gd25lx256e and is25wx256 flashes
+>   since it already exists in a tree.
+>
+> Algapally Santosh Sagar (1):
+>   mtd: spi-nor-ids: Add support for W25Q02NW
+>
+> Ashok Reddy Soma (10):
+>   mtd: spi-nor: Enable mt35xu512aba_fixups for all mt35xx flashes
+>   mtd: spi-nor: Add support for cross die read in dual flash
+>     configuration
+>   mtd: spi-nor: Enable DTR octal flash program
+>   mtd: spi-nor: Send write disable cmd after every write enable
+>   mtd: spi-nor: Check SNOR_F_IO_MODE_EN_VOLATILE only if SFDP is enabled
+>   spi: cadence_qspi: Set tshsl_ns to at least one sclk_ns
+>   spi: cadence_qspi: Clean up registers in init
+>   spi: cadence_qspi: Initialize read and write watermark registers
+>   spi: cadence_qspi: Enable ECO bit for higher frequencies
+>   spi: cadence_qspi: Write aligned byte length to ahbbase
+>
+> T Karthik Reddy (9):
+>   mtd: spi-nor: Add config to enable flash DTR
+>   mtd: spi-nor-core: Set dummy buswidth equal to data buswidth
+>   spi: mtd: Use split reads if multi-die flag is set
+>   mtd: spi-nor: program quad enable bit for winbond flashes
+>   spi: cadence_qspi: Setup ddr mode in cadence qspi driver
+>   spi: cadence-qspi: Switch SDR/DTR using SPI_FLASH_DTR_ENABLE config
+>   spi: cadence_ospi_versal: ospi ddr changes in cadence ospi versal
+>     driver
+>   spi: cadence_qspi: Add spi mem dtr support ops
+>   mtd: spi-nor: Add block protection support for micron flashes
+>
+> Tejas Bhumkar (5):
+>   arm64: versal: Enable defconfig for Micron octal flashes
+>   mtd: spi-nor: Update erase operation function
+>   spi: cadence_qspi: Fix versal ospi indirect write timed out issue
+>   arm64: versal: Enable soft reset support for xspi flashes
+>   arm64: versal: Enable octal DTR mode
+>
+> Venkatesh Yadav Abbarapu (5):
+>   mtd: spi-nor: Update block protection flags for flash parts
+>   mtd: spi-nor: Add support for locking on Macronix nor flashes
+>   mtd: spi-nor: Add support for locking on ISSI nor flashes
+>   mtd: spi-nor: Add support for locking on GIGADEVICE nor flashes
+>   mtd: spi-nor: Add support for locking on Spansion nor flashes
 
-This look like controller hack to me, may be a clear negotiation b/w
-controller and flag might have proper solution.
+Look like there are 3 or more topics are covered in single patch set,
+please break them and send separate series.
 
-Jagan.
+Jagan
