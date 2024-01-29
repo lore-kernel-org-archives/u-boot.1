@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2138C47DDB
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 17:53:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C4CCC47DB3
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 17:54:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BF9887C13;
-	Mon, 29 Jan 2024 18:53:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=edgeble.ai
+	by phobos.denx.de (Postfix) with ESMTP id E4C4F87C13;
+	Mon, 29 Jan 2024 18:54:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=edgeble-ai.20230601.gappssmtp.com header.i=@edgeble-ai.20230601.gappssmtp.com header.b="KjKbiptp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Dgz1cQ63";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A106487C13; Mon, 29 Jan 2024 18:53:36 +0100 (CET)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
+ id 9F1D187CAD; Mon, 29 Jan 2024 18:54:50 +0100 (CET)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1132B87BDF
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 18:53:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6748187BDF
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 18:54:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=edgeble.ai
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jagan@edgeble.ai
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-6de2e24ea87so660399b3a.3
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 09:53:33 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-5ff7a098ab8so29332787b3.3
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 09:54:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=edgeble-ai.20230601.gappssmtp.com; s=20230601; t=1706550812; x=1707155612;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=xl+KgigAI7mivVPuZIZxxwpi2VZD9et+jJ1bBxDREAc=;
- b=KjKbiptpTmzfcgkytWEs/P0HM0twcIqRdq9HwM5R8Z8ohCeGhg5tNCdKYg/Ut0/buM
- d5k8Mg1HIGrcOCTNHDmyF0d3rAWr2QpWj/BTB757KR9h3dmp0pQeUiv/MxM2PL5Wlijt
- /ejSi/DkfKFyLW/iSGEr5QDF2nKGjfcbRc4ANFcwhYB251wVgF8KKzvuzdbPgMW9X7H6
- dIi6c+VPUHy4ZfHqDRa7SXEl7sVKUYN9akVNculoOlAEb35NI5tBA8LeuP86LAkbGcKU
- qHrCfX/YIrMKDBVqSIqDYtAnXQj9nZcvB2zY/3LGy+ZQ/aY6myEbAexLcWR3Q3RPs/f9
- pS7g==
+ d=konsulko.com; s=google; t=1706550887; x=1707155687; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=tV1GRPQ1oK1cNZajPRNuHSzs/3wdymn5YwYsdchb5PU=;
+ b=Dgz1cQ63Ck+UGSYIO7Q6c8cb4vf7CE4tNjw2fm5ZM2p2FKcTSjxFlZvfKIEaIt5+hm
+ z1MkFDzVhS2Y1fDSbCR/cbkKHLAwGAFkp06qenbn/r07OpZM8TuHxBkx+XO73KLIrZq1
+ H+/UYFHML7B5zDJ3BS3Uo47FqHcSSSWACrCpo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706550812; x=1707155612;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xl+KgigAI7mivVPuZIZxxwpi2VZD9et+jJ1bBxDREAc=;
- b=i3QnMW+MYSAV+bJuqCgkBH/Aw4najekCOs/buH8benv9oLeq99CjGrXgcHhjLHKSfw
- qJt5U3YyVda+VUC+B8bO2EBHGYgrStnowKZz3biJGx4mGWnX4VPN2FxT9EqPYV5vim7p
- jGkhXFtMnzvNv9Dp9oQRsQl+mH+h4l3M3oHrvLhKqMByt4n6PEBBrijv9QoqprOS/YNa
- dJZdOFVNAgHInvz0/ZJOgr5R+aY7RVPs0X87NbRDTDH1ebcte1O7tXJRFC5cC3/Nxstp
- hWv3/4rf+iXqBL0VuaFWeF7HbxMcr5ikppdVXkYemxdhUA081DVra8RkYDQsSfvRGBvN
- 9KbQ==
-X-Gm-Message-State: AOJu0YyJ0JX7RH809u5aX/aMBFXyL3IqSINoYaxPp4N5C4+X6fyJPD+V
- dByww8/gaklpON40X7PEiSyICi94T7GYgbYijeWhUnxSg9qrwu2N8PLhFbyLIlY=
-X-Google-Smtp-Source: AGHT+IGij3ga+u8sM5OogthBZfYDX8tNgRgGdDu1k6CfCTwTzmN2oUEjPDTpgJfM8aduS5KErQ5tFQ==
-X-Received: by 2002:a05:6a00:1805:b0:6db:cf34:8a96 with SMTP id
- y5-20020a056a00180500b006dbcf348a96mr5511128pfa.26.1706550812302; 
- Mon, 29 Jan 2024 09:53:32 -0800 (PST)
-Received: from localhost.localdomain ([2405:201:c00a:a208:826d:69af:676d:87bf])
- by smtp.gmail.com with ESMTPSA id
- o123-20020a62cd81000000b006ddc133f1d3sm6419041pfg.194.2024.01.29.09.53.29
+ d=1e100.net; s=20230601; t=1706550887; x=1707155687;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tV1GRPQ1oK1cNZajPRNuHSzs/3wdymn5YwYsdchb5PU=;
+ b=dGbVO5WcylVjYCjTuBiYgtgwxNZieDdQ3nG7U3jGh7mj2reGpA4NHsELWTdA264ZuP
+ DQv/Tnpj1+HRp6qoTVkYD9XTSaqXt43qtqPkyKEwuXjsjkMRvBXfqD9Qe1vXSOvBM4vi
+ PTLBK/I3WEYbHiXEz5NFLvEIStT8bLcCLSHkJUHr5jETWBhXvSB+P+gndNqEo3/hSKF5
+ QKrblVT3cmuYUPu6SUI1neXK5KGWtCdhKTm7zYp4Heb8iB+H2PIz0f1A3sZuaAYmUpJE
+ 8/pDEw70Gu3VgBICltXYyxfppxgZEbAHFnmCIhfAlyH1nyTOl83EKLX0fMu57xs8gBUJ
+ SxfQ==
+X-Gm-Message-State: AOJu0Yy00RU1CFwgIr/k0KdT+x9+URWDwftZJOrApbS7LgFVUkM+rF0X
+ azjOeqMaLGqzlCsQC/YDDD7LmipX0pguEMibzVWhR7J3rPd/APFt/gec+cLnXPrnNQ6eTDEToa0
+ l
+X-Google-Smtp-Source: AGHT+IFbi/xDTg+IYA2GCSFSdl0SL+k+R7EuG2owgZeg48xbUMY/BwQaXP/sG7JSFOX3c2sA7CCnXA==
+X-Received: by 2002:a81:c14a:0:b0:5ff:6ca0:4b19 with SMTP id
+ e10-20020a81c14a000000b005ff6ca04b19mr5407001ywl.31.1706550887206; 
+ Mon, 29 Jan 2024 09:54:47 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ ez10-20020a05690c308a00b005ff9154001fsm1990215ywb.140.2024.01.29.09.54.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jan 2024 09:53:30 -0800 (PST)
-From: Jagan Teki <jagan@edgeble.ai>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: Pull request: u-boot-spi/master
-Date: Mon, 29 Jan 2024 23:23:25 +0530
-Message-ID: <20240129175325.5175-1-jagan@edgeble.ai>
-X-Mailer: git-send-email 2.43.0
+ Mon, 29 Jan 2024 09:54:46 -0800 (PST)
+Date: Mon, 29 Jan 2024 12:54:45 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Love Kumar <love.kumar@amd.com>
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
+Subject: Re: [PATCH] test/py: spi: Add tests for SPI flash device
+Message-ID: <20240129175445.GB1152441@bill-the-cat>
+References: <b769de202357f13b1fcf43de81a3c5a36d3fc610.1705674984.git.love.kumar@amd.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="tXjbjaO6URGg5+lz"
+Content-Disposition: inline
+In-Reply-To: <b769de202357f13b1fcf43de81a3c5a36d3fc610.1705674984.git.love.kumar@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,58 +91,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-Please pull this PR.
+--tXjbjaO6URGg5+lz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Summary:
-- Support Infineon S28HS02GT (Takahiro)
+On Fri, Jan 19, 2024 at 08:06:54PM +0530, Love Kumar wrote:
 
-CI:
-- https://source.denx.de/u-boot/custodians/u-boot-spi/-/pipelines/19467
+> Add test cases for sf commands to verify various SPI flash operations
+> such as erase, write and read. It also adds qspi lock unlock cases.
+> This test relies on boardenv_* configurations to run it for different
+> SPI flash family such as single SPI, QSPI, and OSPI.
+>=20
+> Signed-off-by: Love Kumar <love.kumar@amd.com>
+> ---
+>  test/py/tests/test_spi.py | 626 ++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 626 insertions(+)
+>  create mode 100644 test/py/tests/test_spi.py
 
-thanks,
-Jagan. 
+This has a number of pylint errors:
+test/py/tests/test_spi.py:253:4: E1120: No value for argument 'erase_size' =
+in function call (no-value-for-parameter)
+test/py/tests/test_spi.py:253:4: E1120: No value for argument 'total_size' =
+in function call (no-value-for-parameter)
+test/py/tests/test_spi.py:376:46: E0602: Undefined variable 'erase_size' (u=
+ndefined-variable)
+test/py/tests/test_spi.py:381:24: E0602: Undefined variable 'erase_size' (u=
+ndefined-variable)
+test/py/tests/test_spi.py:385:47: E0602: Undefined variable 'erase_size' (u=
+ndefined-variable)
+test/py/tests/test_spi.py:389:39: E0602: Undefined variable 'erase_size' (u=
+ndefined-variable)
+test/py/tests/test_spi.py:419:77: E0602: Undefined variable 'erase_size' (u=
+ndefined-variable)
+test/py/tests/test_spi.py:420:19: E0602: Undefined variable 'erase_size' (u=
+ndefined-variable)
+test/py/tests/test_spi.py:422:12: E0602: Undefined variable 'erase_size' (u=
+ndefined-variable)
+test/py/tests/test_spi.py:422:68: E0602: Undefined variable 'erase_size' (u=
+ndefined-variable)
+test/py/tests/test_spi.py:425:25: E0602: Undefined variable 'erase_size' (u=
+ndefined-variable)
+test/py/tests/test_spi.py:447:56: E0602: Undefined variable 'erase_size' (u=
+ndefined-variable)
+test/py/tests/test_spi.py:449:25: E0602: Undefined variable 'erase_size' (u=
+ndefined-variable)
+test/py/tests/test_spi.py:451:16: E0602: Undefined variable 'erase_size' (u=
+ndefined-variable)
+test/py/tests/test_spi.py:451:78: E0602: Undefined variable 'erase_size' (u=
+ndefined-variable)
+test/py/tests/test_spi.py:454:31: E0602: Undefined variable 'erase_size' (u=
+ndefined-variable)
+test/py/tests/test_spi.py:479:77: E0602: Undefined variable 'erase_size' (u=
+ndefined-variable)
+test/py/tests/test_spi.py:480:19: E0602: Undefined variable 'erase_size' (u=
+ndefined-variable)
+test/py/tests/test_spi.py:482:12: E0602: Undefined variable 'erase_size' (u=
+ndefined-variable)
+test/py/tests/test_spi.py:482:68: E0602: Undefined variable 'erase_size' (u=
+ndefined-variable)
+test/py/tests/test_spi.py:485:25: E0602: Undefined variable 'erase_size' (u=
+ndefined-variable)
 
-The following changes since commit 526a865fe4fea59fb2638726c26e39557eb97fdd:
+Please see .azure-pipelines for how to run pylint, if needed.
 
-  Merge branch 'master-cleanup' of https://source.denx.de/u-boot/custodians/u-boot-sh (2024-01-27 20:43:20 -0500)
+--=20
+Tom
 
-are available in the Git repository at:
+--tXjbjaO6URGg5+lz
+Content-Type: application/pgp-signature; name="signature.asc"
 
-  https://source.denx.de/u-boot/custodians/u-boot-spi master
+-----BEGIN PGP SIGNATURE-----
 
-for you to fetch changes up to 16dd10951015183f87b8202b8d4c8617da4f6d44:
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmW35mIACgkQFHw5/5Y0
+tywSIQwAjTauRpDwgpkzqVQ2kGFOMqGhfwt7wDlpmXXl4HKWu1vCpCit4XUKgyx+
+OW81Ki3X64TVdMMDIiOH03+xfFIerFVj7Dg9EHxMAZFg7z5+nFzhi5Ul/TFJWW6P
+vEkCsgLJfhuK48/a1Uim7l77fxAFxUnSyMJGDmG4ENL4gca8o38boNUTPXJFm4fY
+DuxReun1ag8bbfFsS9W2BLLQA48ic1QOBYZiOZsMr4Gnv5kB1lndJmkGnnlI4q8o
+0igRHim5PZC/zhpXxiVXywVJ26Lhqa04spXcMELqRq0ZVdZ3SC7lbXI6WQVAUJR2
+DQ4aUSjGzgfx/XGlDJXqpGA2+VZRPcFM5Gji2rYCRFEIEvK9WuqzLBRwCLwJld5M
+hBOVDvbVVrBTwQeH2S0GtUIRnJERZO4rT+k9RIGvrOr3rQgvsVMxP0drpDals0Cr
+4zK/z/WuMH40veuNwnKaFcKJxm7rg4hPfDenFgaxwEC9U6yAQjPqhCL4G3JOTRkj
+2lDwf/l4
+=iYOH
+-----END PGP SIGNATURE-----
 
-  mtd: spi-nor-ids: Add Infineon(Cypress) s28hs02gt ID (2024-01-29 19:34:17 +0530)
-
-----------------------------------------------------------------
-Maksim Kiselev (1):
-      spi: dw: add check for Rx FIFO overflow
-
-Ssunk (1):
-      mtd: spi: spi-nor-ids: Add more XM25Q series chips
-
-Takahiro Kuwano (9):
-      mtd: spi-nor-core: Clean up macros for Infineon(Cypress) S25 and S28
-      mtd: spi-nor-core: Consolidate non-uniform erase helpers for S25 and S28
-      mtd: spi-nor-core: Rework spansion_read_any_reg() to support Octal DTR mode
-      mtd: spi-nor-core: Use CLPEF(0x82) as alternative to CLSR(0x30) for S25 and S28
-      mtd: spi-nor-core: Rework s25_mdp_ready() to support Octal DTR mode
-      mtd: spi-nor-core: Consolidate setup() hook for Infineon(Cypress) S25 and S28
-      mtd: spi-nor-core: Consolidate post_bfpt_fixup() for Infineon(Cypress) S25 and S28
-      mtd: spi-nor-core: Rework spi_nor_cypress_octal_dtr_enable()
-      mtd: spi-nor-ids: Add Infineon(Cypress) s28hs02gt ID
-
-Tejas Bhumkar (2):
-      mtd: spi-nor-ids: Add is25lx512 chip
-      spi: cadence_qspi: Address the comparison failure for 0-8 bytes of data
-
- drivers/mtd/spi/spi-nor-core.c    | 224 +++++++++++++++-----------------------
- drivers/mtd/spi/spi-nor-ids.c     |   7 ++
- drivers/spi/cadence_ospi_versal.c |   3 -
- drivers/spi/cadence_qspi.h        |   4 +
- drivers/spi/cadence_qspi_apb.c    |   3 +
- drivers/spi/designware_spi.c      |  18 ++-
- include/linux/mtd/spi-nor.h       |  14 +--
- 7 files changed, 119 insertions(+), 154 deletions(-)
+--tXjbjaO6URGg5+lz--
