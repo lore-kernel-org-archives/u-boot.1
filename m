@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67658C47422
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 08:43:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 852DAC47DA9
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 08:43:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3A6B87CD9;
-	Mon, 29 Jan 2024 09:43:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5985187CE0;
+	Mon, 29 Jan 2024 09:43:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="4BIGg6ew";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="p2CXcIYk";
+	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="RIh2oFt5";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="LuKnacni";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 384FC879A0; Mon, 29 Jan 2024 09:43:25 +0100 (CET)
+ id E681787CE1; Mon, 29 Jan 2024 09:43:26 +0100 (CET)
 Received: from galois.linutronix.de (Galois.linutronix.de
  [IPv6:2a0a:51c0:0:12e:550::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EF2387CBE
+ by phobos.denx.de (Postfix) with ESMTPS id A3AE587CCE
  for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 09:43:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linutronix.de
@@ -34,21 +34,21 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
  to:to:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=OtVrnwcXYgjFMLLWptyHNIr0OXeRBNlCDep0mkrEyCg=;
- b=4BIGg6ewPpn+RurWkqxp1dt8X3PWMJ4NzlqzLoRHgJ7+3Np0szRcpjb8tFYNO6hi4Lhcnv
- IUC+7Kl8gHn+3EaKCr83dGZ0/KH64r2SH0F5KwoBOrFJXIW41qMLeIpjNOZAy+Ewz6nJVj
- jmnK85aBg9IauklxMQ4GOT7zOApmNZoN2e5cp3YSag17+/XuNzMX/FSSfFDuiA2ZCeSL3A
- arh+9c0wDs6zztFaNNa0ai6vXUcaKcqXyVx1MAnnLxY7o8FHoXWG4ZwUaMalltOZl21KhS
- XYUgPBDHyO3pMXzOFrDeXeYOlurrXA8N2u3AL5OiLnvBSYw6x0o32KgasBRZEA==
+ bh=R8d99MbAAb9e6Z792/MKRWK97zPxviiA6xBfQdB4Azw=;
+ b=RIh2oFt5SPTGa4YE9UOt1nA7wbnqKb6lQETWhZHRq4ys7//Hon4HIAtmtMf1ZrZ05M0eaY
+ 3+eFIE7lbqgsuOrYROC+5I5JXL1Aaa8f5dINPq6lcMqyU50y/YS+s9Hsbygw2oxV7XX65D
+ A47dt5xcDSDpoHwiDIMf7K1GVFHeRV+m4RvuP3EWO4R85zBOiWh/vxcr8GRYgeB+nPYM/4
+ FlRXdEa+ApnTEqm6rV8UwNUFFoBfwdqla7LlnfBqTPDaID+Gv+66+zT8YQ2BfwRJJmwdhp
+ wyNJ3D1EK5Jw970wVYYT1l5Zjp/P95g9guz3GMl4zpRrbCHlh2VHx5NRZs3k7Q==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
  s=2020e; t=1706517803;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=OtVrnwcXYgjFMLLWptyHNIr0OXeRBNlCDep0mkrEyCg=;
- b=p2CXcIYkUx8sXlhS+b+0ipAoSrE3YFLUZ98Ic6S3ZepNF6KR+2EY5/iTGRW6vFXOa/0Lab
- QkOTph1GhqjPkFDg==
+ bh=R8d99MbAAb9e6Z792/MKRWK97zPxviiA6xBfQdB4Azw=;
+ b=LuKnacnikurnTD1e2QRVvHB+ad4++vOI9jN23owIDFN6z4UUzEFSQRS5a4E4gZMOZDwf5h
+ YVW5Qpez/IJoxyAQ==
 To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Tom Rini <trini@konsulko.com>,
  Yanhong Wang <yanhong.wang@starfivetech.com>,
@@ -57,10 +57,9 @@ To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Mason Huo <mason.huo@starfivetech.com>,
  Hal Feng <hal.feng@starfivetech.com>,
  Chanho Park <chanho61.park@samsung.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 1/2] riscv: dts: jh7110: add power management unit
- controller node
-Date: Mon, 29 Jan 2024 09:43:08 +0100
-Message-Id: <05a8be865b0686a916d7ec7ba8fbc64ecb33ad14.1706517351.git.namcao@linutronix.de>
+Subject: [PATCH v2 2/2] riscv: dts: starfive: add regulator device
+Date: Mon, 29 Jan 2024 09:43:09 +0100
+Message-Id: <47fd2b2225f52a2d5c3a91494ef7b9036e944199.1706517351.git.namcao@linutronix.de>
 In-Reply-To: <cover.1706517351.git.namcao@linutronix.de>
 References: <cover.1706517351.git.namcao@linutronix.de>
 MIME-Version: 1.0
@@ -81,32 +80,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-JH7110 has a power management unit controller node. Add this node.
-
-This device is used by OpenSBI during board reset/shutdown.
+Add the axp15060 regulator device. OpenSBI uses this device to perform
+board reset and shutdown.
 
 Signed-off-by: Nam Cao <namcao@linutronix.de>
 ---
- arch/riscv/dts/jh7110.dtsi | 6 ++++++
- 1 file changed, 6 insertions(+)
+v2: "stf,axp15060-regulator" -> "x-powers,axp15060" to match Linux.
 
-diff --git a/arch/riscv/dts/jh7110.dtsi b/arch/riscv/dts/jh7110.dtsi
-index ec237a46ff..56e34fd560 100644
---- a/arch/riscv/dts/jh7110.dtsi
-+++ b/arch/riscv/dts/jh7110.dtsi
-@@ -473,6 +473,12 @@
- 			status =3D "disabled";
- 		};
+ arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi b/arch/riscv/=
+dts/jh7110-starfive-visionfive-2.dtsi
+index e40f57a150..fe4b3e71ae 100644
+--- a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
++++ b/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
+@@ -122,6 +122,11 @@
+ 	pinctrl-0 =3D <&i2c5_pins>;
+ 	status =3D "okay";
 =20
-+		power-controller@17030000 {
-+			compatible =3D "starfive,jh7110-pmu";
-+			reg =3D <0x0 0x17030000 0x0 0x10000>;
-+			interrupts =3D <111>;
-+		};
++	pmic@36 {
++		compatible =3D "x-powers,axp15060";
++		reg =3D <0x36>;
++	};
 +
- 		qspi: spi@13010000 {
- 			compatible =3D "cdns,qspi-nor";
- 			reg =3D <0x0 0x13010000 0x0 0x10000
+ 	eeprom@50 {
+ 		compatible =3D "atmel,24c04";
+ 		reg =3D <0x50>;
 --=20
 2.39.2
 
