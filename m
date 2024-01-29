@@ -4,77 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 561A9C47DB3
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 18:50:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88707C47DA9
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 21:05:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BD1587BAD;
-	Mon, 29 Jan 2024 19:50:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9DDA687C5B;
+	Mon, 29 Jan 2024 22:05:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mbh095pi";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="IQtesnh/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E7E587C52; Mon, 29 Jan 2024 19:50:30 +0100 (CET)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D359987CD5; Mon, 29 Jan 2024 22:05:05 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F5C887B89
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 19:50:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D7B7187B1D
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 22:05:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-5ff7dc53ce0so25290967b3.1
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 10:50:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1706554227; x=1707159027; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=5WP99vjicGr16zVj5huAI1+J4AjoDA5WMv1nxjXuRLg=;
- b=mbh095pis7rRTZsk722h0Hbi9aee5/KFBAmMmU322bCXWjadjj91NrfnMLy7QM7OBn
- j4IZPWJnT7A13pqcrcDLlCAxxxSFKzUKgkbKpQeDruuRJV4igeZG0pRh7pr4SRxqR98F
- VLPiNRIVk2ThjiWr++8ZyqBHVcWkbBxSlHI2A=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706554227; x=1707159027;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5WP99vjicGr16zVj5huAI1+J4AjoDA5WMv1nxjXuRLg=;
- b=KH4EDQh6vx2yU/2+ND4q4NkEcz/eJZHsBaV7WDt1JvUB0kOlZpnlUCuUDx5wexunyG
- zMApRQqDvrhydCtao37BZ5XolYTGOQ4rHUEOm3HG4jFlNxWT9aw84j1LDG/HTvLGGscJ
- V3L4Osgn0bI5Gx+KQ8IZG79lMjMozETMKFHo3t/1YypSkgRw7qmbSjklmhrgL07YVvZV
- 9FUyYEaSkRQy55f/YNyT3tzitTLK1niQPKyfkbGZLwATyh3XMICkxDFNco6ZPUsQ38v3
- wpW5o9o4RmtIj0MPSA3FXFfc7aGGNGj6l1h3p+djevAXNYmi1WWnRJtupNcPDMvTcROc
- AiRw==
-X-Gm-Message-State: AOJu0YygMD0Uu6tODxc2eevYMuoZqM07rw72CP8buRITITdwZWcvBffk
- sEef9J6I/SjacGV0ockQNOtKUKndCjo8NgiJPdsMWDC2+iLVIvQzKv0wkH4ctIVnCbdVEVR8dA2
- o
-X-Google-Smtp-Source: AGHT+IF6/C28VE5pRRxixOoIe1K+vubBZwhJ2LwKLe+N1hH2LGOMRoc61UCwA1ZXiWII0MRYC/hG5Q==
-X-Received: by 2002:a81:ae0f:0:b0:5f8:1016:9095 with SMTP id
- m15-20020a81ae0f000000b005f810169095mr3907067ywh.61.1706554226710; 
- Mon, 29 Jan 2024 10:50:26 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
- [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
- fq5-20020a05690c350500b005ff7e023754sm2598162ywb.55.2024.01.29.10.50.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jan 2024 10:50:26 -0800 (PST)
-Date: Mon, 29 Jan 2024 13:50:24 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Jagan Teki <jagan@edgeble.ai>
-Cc: u-boot@lists.denx.de
-Subject: Re: Pull request: u-boot-spi/master
-Message-ID: <20240129185024.GM1152441@bill-the-cat>
-References: <20240129175325.5175-1-jagan@edgeble.ai>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
+ [178.202.40.247])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 4963A3F8C7; 
+ Mon, 29 Jan 2024 21:04:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1706562296;
+ bh=yBbwlXR4BpJo9oZ+PSNE7hH1YwEwAwGZv3lpPIOxJ50=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=IQtesnh/uTzGOqp9jiHqQDy1q793xgAJfwY9kAXRaQHqocIdDHr5qmgbuOJJzKUI6
+ aAMmNg+bCkTeI0mS5xH46wtxckp6cAeGjGxOaLkQCNlwpglrIWQmW71uARI9oWIi4/
+ a5DsXccOWBSYlBB8Yn4vPqES2vUWrrPnHlyafvFNA+fPrImWVATkKcxpPjjMhUfyqN
+ 4p8RBYnEhMLnys/3yxE1VntYyF6y29YtaU32Zz6SlOFoyfmjyVbl8+0L+6Y4jGDhlH
+ oapUX5IqwtAYoj+gPnIe/wtxtLF4ldpXQrvvgCSYUMnl/I/j70mD+pV4kR1j9xwA3I
+ CqIE0dJLlL8QQ==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>,
+ u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/7] cmd: smbios: always use '0x%04x' for printing handles
+Date: Mon, 29 Jan 2024 22:04:47 +0100
+Message-ID: <20240129210453.31070-2-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240129210453.31070-1-heinrich.schuchardt@canonical.com>
+References: <20240129210453.31070-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8UPxoFzVL+Z9vVDT"
-Content-Disposition: inline
-In-Reply-To: <20240129175325.5175-1-jagan@edgeble.ai>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,64 +74,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Handles are u16 numbers. Consistently use '0x%04x' to print them.
 
---8UPxoFzVL+Z9vVDT
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ cmd/smbios.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-On Mon, Jan 29, 2024 at 11:23:25PM +0530, Jagan Teki wrote:
+diff --git a/cmd/smbios.c b/cmd/smbios.c
+index feebf930b79..67f3a9f5f19 100644
+--- a/cmd/smbios.c
++++ b/cmd/smbios.c
+@@ -95,9 +95,9 @@ static void smbios_print_type2(struct smbios_type2 *table)
+ 	smbios_print_str("Version", table, table->version);
+ 	smbios_print_str("Serial Number", table, table->serial_number);
+ 	smbios_print_str("Asset Tag", table, table->asset_tag_number);
+-	printf("\tFeature Flags: 0x%2x\n", table->feature_flags);
++	printf("\tFeature Flags: 0x%04x\n", table->feature_flags);
+ 	smbios_print_str("Chassis Location", table, table->chassis_location);
+-	printf("\tChassis Handle: 0x%2x\n", table->chassis_handle);
++	printf("\tChassis Handle: 0x%04x\n", table->chassis_handle);
+ 	smbios_print_str("Board Type", table, table->board_type);
+ 	printf("\tContained Object Handles: ");
+ 	handle = (void *)table->eos;
+-- 
+2.43.0
 
-> Hi Tom,
->=20
-> Please pull this PR.
->=20
-> Summary:
-> - Support Infineon S28HS02GT (Takahiro)
->=20
-> CI:
-> - https://source.denx.de/u-boot/custodians/u-boot-spi/-/pipelines/19467
->=20
-> thanks,
-> Jagan.=20
->=20
-> The following changes since commit 526a865fe4fea59fb2638726c26e39557eb97f=
-dd:
->=20
->   Merge branch 'master-cleanup' of https://source.denx.de/u-boot/custodia=
-ns/u-boot-sh (2024-01-27 20:43:20 -0500)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-spi master
->=20
-> for you to fetch changes up to 16dd10951015183f87b8202b8d4c8617da4f6d44:
->=20
->   mtd: spi-nor-ids: Add Infineon(Cypress) s28hs02gt ID (2024-01-29 19:34:=
-17 +0530)
->=20
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---8UPxoFzVL+Z9vVDT
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmW382kACgkQFHw5/5Y0
-tyxkLgwAl9KmbHlcg8sG5NDUN0Z+XCO0M313BDjYec5rGnfkSMKqdaFJ7tiSeneT
-RWqfUnRTeNGuWCIo+KpQzfl4Qn39iN9mccOecNOcqzPCTkgM+a3On8xNGjY33Ump
-NmnYFvw4MQqdgjyVlpkXuy2fR8WZE17wBnXrQh7pioM+K0iXR+E81WlQIjbdCKKQ
-DykjFsZEq8GIPC0EO4hbGcN1gRa56HXMCmVMQwO9Gb/xBE6T2+of5g3WqZ/05wBq
-SThl64203WpXD6F1/eurVZ/6MTxYbrN0Z/Cu5TwBFpkKu65tdYJylQiF5jWb++5O
-yWnbD3XZF15FSgNM7o3aQrZe1ZuYZavEE/VvnBbqyF5357jiwQLZfvgJo4AtNBk3
-Ej6pYXDi5xll6OGBvZ7Du9HcLa6nR6ad8tj3fRxmOPWKRaPKT7XWwHyXIyj7a6wH
-aXmhjrCjqkr72b8YSRgE4bTjQq300D5KU2cCAHaL2TO/cUEZqE0DlA+cEbsP9vt4
-1yV6SdK8
-=FK/s
------END PGP SIGNATURE-----
-
---8UPxoFzVL+Z9vVDT--
