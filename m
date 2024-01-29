@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C4CCC47DB3
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 17:54:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E28AC47DB3
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 17:55:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4C4F87C13;
-	Mon, 29 Jan 2024 18:54:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 643A387CCE;
+	Mon, 29 Jan 2024 18:55:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Dgz1cQ63";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jHz4sxSh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F1D187CAD; Mon, 29 Jan 2024 18:54:50 +0100 (CET)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id D5D7C87CCE; Mon, 29 Jan 2024 18:54:58 +0100 (CET)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6748187BDF
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 18:54:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EA39D87D64
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 18:54:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-5ff7a098ab8so29332787b3.3
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 09:54:48 -0800 (PST)
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-dc22ae44595so3345981276.1
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 09:54:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1706550887; x=1707155687; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1706550894; x=1707155694; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=tV1GRPQ1oK1cNZajPRNuHSzs/3wdymn5YwYsdchb5PU=;
- b=Dgz1cQ63Ck+UGSYIO7Q6c8cb4vf7CE4tNjw2fm5ZM2p2FKcTSjxFlZvfKIEaIt5+hm
- z1MkFDzVhS2Y1fDSbCR/cbkKHLAwGAFkp06qenbn/r07OpZM8TuHxBkx+XO73KLIrZq1
- H+/UYFHML7B5zDJ3BS3Uo47FqHcSSSWACrCpo=
+ bh=dJET5ywRfZ4G4OMpk7pQlwdxH0IQcqnk5vi/eWLzKwU=;
+ b=jHz4sxShtwgtf2l0I53BE7EAKIWPR5muK1p49wR1lumkRP9FO9/sVZjE8sjPXTjkLi
+ hr9k0u1fT0y8oxklWwUnjaKPf0cN2uZ/ipAFphpAjKIoiXEr3LIyBaXBLrgxHnsWScRI
+ TVRcgdiI4H8lhY/BJd5KOuHWWO/d7EsWH+GL0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706550887; x=1707155687;
+ d=1e100.net; s=20230601; t=1706550894; x=1707155694;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tV1GRPQ1oK1cNZajPRNuHSzs/3wdymn5YwYsdchb5PU=;
- b=dGbVO5WcylVjYCjTuBiYgtgwxNZieDdQ3nG7U3jGh7mj2reGpA4NHsELWTdA264ZuP
- DQv/Tnpj1+HRp6qoTVkYD9XTSaqXt43qtqPkyKEwuXjsjkMRvBXfqD9Qe1vXSOvBM4vi
- PTLBK/I3WEYbHiXEz5NFLvEIStT8bLcCLSHkJUHr5jETWBhXvSB+P+gndNqEo3/hSKF5
- QKrblVT3cmuYUPu6SUI1neXK5KGWtCdhKTm7zYp4Heb8iB+H2PIz0f1A3sZuaAYmUpJE
- 8/pDEw70Gu3VgBICltXYyxfppxgZEbAHFnmCIhfAlyH1nyTOl83EKLX0fMu57xs8gBUJ
- SxfQ==
-X-Gm-Message-State: AOJu0Yy00RU1CFwgIr/k0KdT+x9+URWDwftZJOrApbS7LgFVUkM+rF0X
- azjOeqMaLGqzlCsQC/YDDD7LmipX0pguEMibzVWhR7J3rPd/APFt/gec+cLnXPrnNQ6eTDEToa0
- l
-X-Google-Smtp-Source: AGHT+IFbi/xDTg+IYA2GCSFSdl0SL+k+R7EuG2owgZeg48xbUMY/BwQaXP/sG7JSFOX3c2sA7CCnXA==
-X-Received: by 2002:a81:c14a:0:b0:5ff:6ca0:4b19 with SMTP id
- e10-20020a81c14a000000b005ff6ca04b19mr5407001ywl.31.1706550887206; 
- Mon, 29 Jan 2024 09:54:47 -0800 (PST)
+ bh=dJET5ywRfZ4G4OMpk7pQlwdxH0IQcqnk5vi/eWLzKwU=;
+ b=lZGHGkuNxWuQYCvmQeegXumAh4d1mZi001gf0OnjVlhuhpX9hx3G33scl1gc1ZG7eP
+ 0crYghOwq3phNFPCdcm+ASozLgV+nN3USPVMFoEDbH9eK/j3ZeDdwD+wi0jy2S6Ah1ZF
+ tYuHSTzR/5nIqCd8c1mspePiGN1y4M/Z7G/qvTxUqNbU6/WHPiGi0WYyCdCh966rZw5j
+ iZpbcbGgY/9b9hY5YopRgFt+W4+8n5RQbxc6aTB1lKgTGMKdcuQC0sh+U3/lMMrp/qBo
+ v5BP7sv95K/PoWQrBueySVfZNL7OfyucqiFHuJNWP9MCXCGpylumlQjP+T5lbifvN0DE
+ MutA==
+X-Gm-Message-State: AOJu0Yw7+6PAt7m1ztAf4nHdrWdbkQzJ4Bai2Qfww2tFr33QTSLUGE3z
+ gcwlLkDRWnSgzhQ55Dv42nx8868+niLdTqNI+8y9J//RW9SEhSFvI5Qic6Far5Q=
+X-Google-Smtp-Source: AGHT+IGykoYwEzBxnat9jeyatobXHBhMCDcLqyHKGb3tLLFdJdmRuWYsnfuUPQiFASPUdC5x1PIQ/g==
+X-Received: by 2002:a25:ab05:0:b0:dbd:54cf:a6e3 with SMTP id
+ u5-20020a25ab05000000b00dbd54cfa6e3mr3590671ybi.12.1706550894668; 
+ Mon, 29 Jan 2024 09:54:54 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- ez10-20020a05690c308a00b005ff9154001fsm1990215ywb.140.2024.01.29.09.54.46
+ 64-20020a251543000000b00dbd15c3b753sm2409998ybv.46.2024.01.29.09.54.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jan 2024 09:54:46 -0800 (PST)
-Date: Mon, 29 Jan 2024 12:54:45 -0500
+ Mon, 29 Jan 2024 09:54:54 -0800 (PST)
+Date: Mon, 29 Jan 2024 12:54:52 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Love Kumar <love.kumar@amd.com>
 Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
-Subject: Re: [PATCH] test/py: spi: Add tests for SPI flash device
-Message-ID: <20240129175445.GB1152441@bill-the-cat>
-References: <b769de202357f13b1fcf43de81a3c5a36d3fc610.1705674984.git.love.kumar@amd.com>
+Subject: Re: [PATCH] test/py: nand: Add tests for NAND flash device
+Message-ID: <20240129175452.GC1152441@bill-the-cat>
+References: <e24fb8aa7d61923eec9901683295c65979496044.1705674029.git.love.kumar@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tXjbjaO6URGg5+lz"
+ protocol="application/pgp-signature"; boundary="VXVVVT/qQT1tS8D3"
 Content-Disposition: inline
-In-Reply-To: <b769de202357f13b1fcf43de81a3c5a36d3fc610.1705674984.git.love.kumar@amd.com>
+In-Reply-To: <e24fb8aa7d61923eec9901683295c65979496044.1705674029.git.love.kumar@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,89 +91,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---tXjbjaO6URGg5+lz
+--VXVVVT/qQT1tS8D3
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 19, 2024 at 08:06:54PM +0530, Love Kumar wrote:
+On Fri, Jan 19, 2024 at 07:56:19PM +0530, Love Kumar wrote:
 
-> Add test cases for sf commands to verify various SPI flash operations
-> such as erase, write and read. It also adds qspi lock unlock cases.
-> This test relies on boardenv_* configurations to run it for different
-> SPI flash family such as single SPI, QSPI, and OSPI.
+> Add tests for nand commands to test various NAND flash operations such
+> as erase, write and read.
 >=20
 > Signed-off-by: Love Kumar <love.kumar@amd.com>
-> ---
->  test/py/tests/test_spi.py | 626 ++++++++++++++++++++++++++++++++++++++
->  1 file changed, 626 insertions(+)
->  create mode 100644 test/py/tests/test_spi.py
 
-This has a number of pylint errors:
-test/py/tests/test_spi.py:253:4: E1120: No value for argument 'erase_size' =
-in function call (no-value-for-parameter)
-test/py/tests/test_spi.py:253:4: E1120: No value for argument 'total_size' =
-in function call (no-value-for-parameter)
-test/py/tests/test_spi.py:376:46: E0602: Undefined variable 'erase_size' (u=
-ndefined-variable)
-test/py/tests/test_spi.py:381:24: E0602: Undefined variable 'erase_size' (u=
-ndefined-variable)
-test/py/tests/test_spi.py:385:47: E0602: Undefined variable 'erase_size' (u=
-ndefined-variable)
-test/py/tests/test_spi.py:389:39: E0602: Undefined variable 'erase_size' (u=
-ndefined-variable)
-test/py/tests/test_spi.py:419:77: E0602: Undefined variable 'erase_size' (u=
-ndefined-variable)
-test/py/tests/test_spi.py:420:19: E0602: Undefined variable 'erase_size' (u=
-ndefined-variable)
-test/py/tests/test_spi.py:422:12: E0602: Undefined variable 'erase_size' (u=
-ndefined-variable)
-test/py/tests/test_spi.py:422:68: E0602: Undefined variable 'erase_size' (u=
-ndefined-variable)
-test/py/tests/test_spi.py:425:25: E0602: Undefined variable 'erase_size' (u=
-ndefined-variable)
-test/py/tests/test_spi.py:447:56: E0602: Undefined variable 'erase_size' (u=
-ndefined-variable)
-test/py/tests/test_spi.py:449:25: E0602: Undefined variable 'erase_size' (u=
-ndefined-variable)
-test/py/tests/test_spi.py:451:16: E0602: Undefined variable 'erase_size' (u=
-ndefined-variable)
-test/py/tests/test_spi.py:451:78: E0602: Undefined variable 'erase_size' (u=
-ndefined-variable)
-test/py/tests/test_spi.py:454:31: E0602: Undefined variable 'erase_size' (u=
-ndefined-variable)
-test/py/tests/test_spi.py:479:77: E0602: Undefined variable 'erase_size' (u=
-ndefined-variable)
-test/py/tests/test_spi.py:480:19: E0602: Undefined variable 'erase_size' (u=
-ndefined-variable)
-test/py/tests/test_spi.py:482:12: E0602: Undefined variable 'erase_size' (u=
-ndefined-variable)
-test/py/tests/test_spi.py:482:68: E0602: Undefined variable 'erase_size' (u=
-ndefined-variable)
-test/py/tests/test_spi.py:485:25: E0602: Undefined variable 'erase_size' (u=
-ndefined-variable)
-
-Please see .azure-pipelines for how to run pylint, if needed.
+Please fix:
+test/py/tests/test_nand.py:62
+  /u/test/py/tests/test_nand.py:62: DeprecationWarning: invalid escape sequ=
+ence '\s'
 
 --=20
 Tom
 
---tXjbjaO6URGg5+lz
+--VXVVVT/qQT1tS8D3
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmW35mIACgkQFHw5/5Y0
-tywSIQwAjTauRpDwgpkzqVQ2kGFOMqGhfwt7wDlpmXXl4HKWu1vCpCit4XUKgyx+
-OW81Ki3X64TVdMMDIiOH03+xfFIerFVj7Dg9EHxMAZFg7z5+nFzhi5Ul/TFJWW6P
-vEkCsgLJfhuK48/a1Uim7l77fxAFxUnSyMJGDmG4ENL4gca8o38boNUTPXJFm4fY
-DuxReun1ag8bbfFsS9W2BLLQA48ic1QOBYZiOZsMr4Gnv5kB1lndJmkGnnlI4q8o
-0igRHim5PZC/zhpXxiVXywVJ26Lhqa04spXcMELqRq0ZVdZ3SC7lbXI6WQVAUJR2
-DQ4aUSjGzgfx/XGlDJXqpGA2+VZRPcFM5Gji2rYCRFEIEvK9WuqzLBRwCLwJld5M
-hBOVDvbVVrBTwQeH2S0GtUIRnJERZO4rT+k9RIGvrOr3rQgvsVMxP0drpDals0Cr
-4zK/z/WuMH40veuNwnKaFcKJxm7rg4hPfDenFgaxwEC9U6yAQjPqhCL4G3JOTRkj
-2lDwf/l4
-=iYOH
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmW35mwACgkQFHw5/5Y0
+tyw3TAv+K+RtW2fGLwEKWsiC3tFcIvVlXfhLsP/5qJD39nOC6rars+/f/81ju5Jm
+T7HCv0kgdCqeaVH2tNFUm2mW6twS22mgd7YecJkcHomjv/qZHywRiBptJBANEMX3
+tcydTIeRu2LRnRTRYO9bFXdMmfktfi93selKLZUvmvc81gGHK+DXHhGlV+DO6+6n
+FMHT/WPwzylpxgQEdlzquw+8dRpiyPvAhXoxyC/NbDlz14rq87JUnOADRTDfvket
+6wfHfwU73yGpKsuZKCPH5+JU+MBX64tgoUfvJXZe5h5us1v9NwxlJnJUvklIg/RJ
+fx7SzFqFNQ9g8HS3ydZEMZLLjr1veBZ+UqEyX3gDp8SegjZAv2L9NXuB3DRFRED5
+0K02BVsIUw+fYGnyFbC5Y+M56qZYpk1wLE+SYa+TcSkunMC/YFKbIGtA7HJqWcFP
+1KTrxDV629ZBackq0J312Z5I5SIfEqdRUVudnqSTb/moPhVarDtFg05QDyrtVtVR
+aNokYcM8
+=1kOo
 -----END PGP SIGNATURE-----
 
---tXjbjaO6URGg5+lz--
+--VXVVVT/qQT1tS8D3--
