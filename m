@@ -4,71 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D8DFC47422
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 13:22:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85617C47422
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 13:27:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B455A87BB5;
-	Mon, 29 Jan 2024 14:22:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D9EA5879A0;
+	Mon, 29 Jan 2024 14:27:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yjRI5wHk";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="JfCUC2II";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="NW32z6AC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4A6A87C9B; Mon, 29 Jan 2024 14:22:28 +0100 (CET)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1A46B87CDD; Mon, 29 Jan 2024 14:27:46 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4FB487808
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 14:22:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 690D28798B
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 14:27:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2cf338e1438so26559971fa.0
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 05:22:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706534546; x=1707139346; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kXrtqe/l/RjjWKCzA1an0+3fOhl4nP7PwHO6kMwHmLQ=;
- b=yjRI5wHk0Hj7QrP4BerAkFuKrByFFUCW5o2GEpxmgJ/t5zdQDQ9gWf5N9aejos5SfU
- AsLqS/O3/RZJ4Dbu9LsAygidwWbHY/257/B9t6kbxbclzqjlVL3Ij0Yd8gn1hmmb5RI+
- 0JVAMXD45rEl+RvpDPxxkyEgC0EN2v9ta3HNehQ9lTPTSywcsY8QnRp1u35o6H8dYvRj
- 1MrrzFw0kEv9Yl08/l1YbnzkYxMOcE1sGA6ADYP0CzNhg9r23O9uKjDHtaXW/D2ez3v9
- 0Go6yh+iqYVBMj772Oifp5aJ++iKhBJ68xF5oM0Brr206y+9uyqiwenvLjVhzqZA2St7
- 6X8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706534546; x=1707139346;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=kXrtqe/l/RjjWKCzA1an0+3fOhl4nP7PwHO6kMwHmLQ=;
- b=hFXGj/PQ7qABDc4JKBrRolUQCAB7W/P3nAP5a6MHz9B6N5AjaLZ6clU6wT1tT3eQc4
- yor1mi/bf7NQ4G5UaKI0fAzdzV2/wZvKyDjvdzqDahwilAyvuSATqUv3jR4bFWIo+vhu
- QjVmSD3wD8FKaj1O7naHDIPUtBb2nYqrPerNG86BSHr5TbVUPok2YIkoR4SAT5ue3zxb
- U5/7TBTkkXtZl2lIxoMkTSbUIgSrWrWJB3TB5oSS35MfsNmGVXZsP5cmtjfFP6L0MQ2e
- YGn4y3b7kz7rbBw/ykX1m1v17eiWc2HXZJu/mdTACJ2Ub5hWOBkw2MJj8BDpyxVr1Ehq
- 0kDQ==
-X-Gm-Message-State: AOJu0YxeeXrZm2Y6vFzCjSvHuKlqYLwADsB5t5xXnTvKgsoebguFwuv/
- WnLL20+rWPwYNq9cqqg4Q2jPKQBuAhCp4XAc+gNdlu41SgsmanBsO1YVl5fmbD8CeYAT3zt8u7V
- m6V33jvSvvnpHolyp9jIvDnvcr44eicSdyNm9XA==
-X-Google-Smtp-Source: AGHT+IElXN4aGU53Lr7cZNX0O9Vod0WP29gVrFBsV4a/XfYinwDrmbtj0iUdCTmU7mhgomu/8nd29jwNWKepLu/CAwk=
-X-Received: by 2002:a2e:be06:0:b0:2cb:280a:ad3c with SMTP id
- z6-20020a2ebe06000000b002cb280aad3cmr2441723ljq.13.1706534545941; Mon, 29 Jan
- 2024 05:22:25 -0800 (PST)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4TNpy71W5Nz9smn;
+ Mon, 29 Jan 2024 14:27:43 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1706534863;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=7yw5IlaLt7kispchsghzeBWPui5/GcbKrsU7SwBN79g=;
+ b=JfCUC2IIGcAYiKAvpLPfuo/j+/60gB7IoCGD6WIG3yqWAenvMBEMwIHFDsGZ7fm7xc9l6V
+ kjHcyPHfha7OCdmqOFF5LNR53NXv5HZE1Ga5eF3nAiO5Hz/Bwm+oo8Owi9CeBTAiTGqh2U
+ k37SIELEciwFwt4v2ayRwytDCNfIOuInjXBttrdV4caUu0kCIw5pidLLxIE5/ibntxgpQL
+ 31BxwAiRmk2L4g+MAszR/1wlJt/mTI4z0k0110pc3cjzLTQAIrkPdGBou8MxXb6yEN8H4K
+ tBRO9mE7ED5cZWz7zNtEI7JqMFAEl7pj1pXj19p83oY8AgG9of5Shb8Jmlcrcg==
+Message-ID: <aa6740c9-4568-4469-9790-635d68a08473@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1706534861;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=7yw5IlaLt7kispchsghzeBWPui5/GcbKrsU7SwBN79g=;
+ b=NW32z6ACZ8qQni2Jmi8W2CO4/UWMOdLqGerLN/v54tHQsM+wb2jniALfYezdBsDGNgqN88
+ zrzmqMsaGkV2Mtc5oUNBKwubBSceNCencF5yHS2uk7Sxt8FjKI2T/13Bjm+GDr7yX6N5zu
+ NjDnIGnpY8xYmTU2XGNBrtClA9a6ZcbfcDnm7avXk9uHFx27EdwkvHBsJ2SwDLWcRyNgJf
+ 4wKnev/okRrHGkBf5RBKUJglfey4FvkpOxMLff0FT99pXdRsI7fC87ODIJMGwpN0UoxBF4
+ lE/6t8sP0pMk1u/yuMpJ4f2ihKuZqXZ78usMI2+olRcSuAgH82rOgxtomy9i4Q==
+Date: Mon, 29 Jan 2024 14:27:38 +0100
 MIME-Version: 1.0
-References: <20240129125818.47453-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240129125818.47453-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 29 Jan 2024 15:21:50 +0200
-Message-ID: <CAC_iWjKOjRYgTpbqjfB6Ygari2hRYvN2A0SZGx8yVveovyc-wA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] smbios: get_str_from_dt() - add sysinfo_id description
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH v2 07/11] mtd: spi: renesas: Add R8A779H0 V4M support
+Content-Language: en-US
+To: Jagan Teki <jagan@amarulasolutions.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Hai Pham <hai.pham.ud@renesas.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>
+References: <20240128155458.56712-1-marek.vasut+renesas@mailbox.org>
+ <20240128155458.56712-7-marek.vasut+renesas@mailbox.org>
+ <CAMty3ZA7sEks59cdQhHCZR+R8fSxHdAtgHUupem=X61KDUALSA@mail.gmail.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <CAMty3ZA7sEks59cdQhHCZR+R8fSxHdAtgHUupem=X61KDUALSA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: xcdr8pc68masne5wxcwf5rtn5ryraod6
+X-MBO-RS-ID: c9fbde2dd9a97ab1572
+X-Rspamd-Queue-Id: 4TNpy71W5Nz9smn
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,30 +93,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 29 Jan 2024 at 14:58, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> Add description for parameter sysinfo_id of function get_str_from_dt().
->
-> Fixes: 07c9e683a484 ("smbios: Allow a few values to come from sysinfo")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/smbios.c | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/lib/smbios.c b/lib/smbios.c
-> index 7bd9805fec0..11b7611a84e 100644
-> --- a/lib/smbios.c
-> +++ b/lib/smbios.c
-> @@ -207,6 +207,7 @@ void get_str_from_dt(const struct map_sysinfo *nprop, char *str, size_t size)
->   *
->   * @ctx:       context for writing the tables
->   * @prop:      property to write
-> + * @sysinfo_id: unique identifier for the string value to be read
->   * @dval:      Default value to use if the string is not found or is empty
->   * Return:     0 if not found, else SMBIOS string number (1 or more)
->   */
-> --
-> 2.43.0
->
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On 1/29/24 12:52, Jagan Teki wrote:
+> On Sun, Jan 28, 2024 at 9:25 PM Marek Vasut
+> <marek.vasut+renesas@mailbox.org> wrote:
+>>
+>> From: Hai Pham <hai.pham.ud@renesas.com>
+>>
+>> Support RPC SPI on R8A779H0 V4M SoC.
+>>
+>> Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+>> Signed-off-by: Hai Pham <hai.pham.ud@renesas.com>
+>> ---
+>> Cc: Jagan Teki <jagan@amarulasolutions.com>
+>> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+>> ---
+> 
+> Applied to u-boot-spi/master
+
+I don't think this will build without 06/11 macro addition, so I'll pull 
+this via u-boot-sh tree if that's OK with you ?
+
+I could use a RB though .
