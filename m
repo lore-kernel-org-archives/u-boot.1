@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9B16C47DDB
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 18:26:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 561A9C47DB3
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 18:50:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6992F87C52;
-	Mon, 29 Jan 2024 19:26:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7BD1587BAD;
+	Mon, 29 Jan 2024 19:50:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TgtU51nz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mbh095pi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A61587C68; Mon, 29 Jan 2024 19:26:43 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5E7E587C52; Mon, 29 Jan 2024 19:50:30 +0100 (CET)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6EE087C4C
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 19:26:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F5C887B89
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 19:50:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40TIQVNj092029;
- Mon, 29 Jan 2024 12:26:31 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1706552791;
- bh=CIkrAEITL4sQsjkLCCCX1oLHP/v5sLe1qIw0j3CD0T0=;
- h=Date:Subject:To:References:From:In-Reply-To;
- b=TgtU51nzLP1ORFG9F9dkC3+zQoxLdf0ISnqbk8TquB9Fh/mHovcuH0F/FCY1ofSMK
- hXDJXPaul/XXiPN+vCjqZUxuKdpj5ErbRdltxsj2kd+j37QKI7FEgSqkvaRGq2GEVD
- Ql3AjPsm5Xbt/H7XRvaRU3sRgK8CuJJHNfLourRE=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40TIQUbA014712
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 29 Jan 2024 12:26:30 -0600
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 29
- Jan 2024 12:26:30 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 29 Jan 2024 12:26:30 -0600
-Received: from [10.24.68.115] (ti.dhcp.ti.com [10.24.68.115] (may be forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40TIQOwF067050; 
- Mon, 29 Jan 2024 12:26:24 -0600
-Message-ID: <2146baaa-c66e-4e08-b97d-b6cc1791ccaf@ti.com>
-Date: Mon, 29 Jan 2024 23:56:23 +0530
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-5ff7dc53ce0so25290967b3.1
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 10:50:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1706554227; x=1707159027; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=5WP99vjicGr16zVj5huAI1+J4AjoDA5WMv1nxjXuRLg=;
+ b=mbh095pis7rRTZsk722h0Hbi9aee5/KFBAmMmU322bCXWjadjj91NrfnMLy7QM7OBn
+ j4IZPWJnT7A13pqcrcDLlCAxxxSFKzUKgkbKpQeDruuRJV4igeZG0pRh7pr4SRxqR98F
+ VLPiNRIVk2ThjiWr++8ZyqBHVcWkbBxSlHI2A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706554227; x=1707159027;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5WP99vjicGr16zVj5huAI1+J4AjoDA5WMv1nxjXuRLg=;
+ b=KH4EDQh6vx2yU/2+ND4q4NkEcz/eJZHsBaV7WDt1JvUB0kOlZpnlUCuUDx5wexunyG
+ zMApRQqDvrhydCtao37BZ5XolYTGOQ4rHUEOm3HG4jFlNxWT9aw84j1LDG/HTvLGGscJ
+ V3L4Osgn0bI5Gx+KQ8IZG79lMjMozETMKFHo3t/1YypSkgRw7qmbSjklmhrgL07YVvZV
+ 9FUyYEaSkRQy55f/YNyT3tzitTLK1niQPKyfkbGZLwATyh3XMICkxDFNco6ZPUsQ38v3
+ wpW5o9o4RmtIj0MPSA3FXFfc7aGGNGj6l1h3p+djevAXNYmi1WWnRJtupNcPDMvTcROc
+ AiRw==
+X-Gm-Message-State: AOJu0YygMD0Uu6tODxc2eevYMuoZqM07rw72CP8buRITITdwZWcvBffk
+ sEef9J6I/SjacGV0ockQNOtKUKndCjo8NgiJPdsMWDC2+iLVIvQzKv0wkH4ctIVnCbdVEVR8dA2
+ o
+X-Google-Smtp-Source: AGHT+IF6/C28VE5pRRxixOoIe1K+vubBZwhJ2LwKLe+N1hH2LGOMRoc61UCwA1ZXiWII0MRYC/hG5Q==
+X-Received: by 2002:a81:ae0f:0:b0:5f8:1016:9095 with SMTP id
+ m15-20020a81ae0f000000b005f810169095mr3907067ywh.61.1706554226710; 
+ Mon, 29 Jan 2024 10:50:26 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
+ [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
+ fq5-20020a05690c350500b005ff7e023754sm2598162ywb.55.2024.01.29.10.50.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 29 Jan 2024 10:50:26 -0800 (PST)
+Date: Mon, 29 Jan 2024 13:50:24 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Jagan Teki <jagan@edgeble.ai>
+Cc: u-boot@lists.denx.de
+Subject: Re: Pull request: u-boot-spi/master
+Message-ID: <20240129185024.GM1152441@bill-the-cat>
+References: <20240129175325.5175-1-jagan@edgeble.ai>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 15/16] configs: Add am69_sk_* defconfig fragments
-Content-Language: en-US
-To: Andrew Davis <afd@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski
- <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
- Simon Glass <sjg@chromium.org>, Kamlesh Gurudasani <kamlesh@ti.com>,
- Dasnavis Sabiya <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Aradhya Bhatia <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Nishanth Menon <nm@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Roger Quadros <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
- <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
-References: <20240119175043.3904751-1-a-nandan@ti.com>
- <20240119175043.3904751-16-a-nandan@ti.com>
- <1e5c60a4-0200-4207-8485-c3fb26d87f3e@ti.com>
- <9d81618b-26e8-498e-8866-f03e3e0697e5@ti.com>
- <f768b142-15e3-46c3-a39c-f3f3674af798@ti.com>
-From: Apurva Nandan <a-nandan@ti.com>
-In-Reply-To: <f768b142-15e3-46c3-a39c-f3f3674af798@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="8UPxoFzVL+Z9vVDT"
+Content-Disposition: inline
+In-Reply-To: <20240129175325.5175-1-jagan@edgeble.ai>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,121 +92,63 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 23/01/24 20:31, Andrew Davis wrote:
-> On 1/23/24 8:39 AM, Apurva Nandan wrote:
->> Hi Andrew,
->>
->> On 20/01/24 00:43, Andrew Davis wrote:
->>> On 1/19/24 11:50 AM, Apurva Nandan wrote:
->>>> From: Dasnavis Sabiya <sabiya.d@ti.com>
->>>>
->>>> Add config fragments for am69_sk A72 and R5 configuration.
->>>>
->>>> This applies on to:
->>>> j784s4_evm_a72_defconfig -> am69_sk_a72.config
->>>> j784s4_evm_r5_defconfig -> am69_sk_r5.config
->>>>
->>>> The usage model (with the fragment) would be:
->>>> make j784s4_evm_a72_defconfig am69_sk_a72.config
->>>> make
->>>>
->>>> OR
->>>>
->>>> make j784s4_evm_r5_defconfig am69_sk_r5.config
->>>> make
->>>>
->>>> Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
->>>> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
->>>> ---
->>>>   board/ti/j784s4/MAINTAINERS | 2 ++
->>>>   configs/am69_sk_a72.config  | 5 +++++
->>>>   configs/am69_sk_r5.config   | 5 +++++
->>>>   3 files changed, 12 insertions(+)
->>>>   create mode 100644 configs/am69_sk_a72.config
->>>>   create mode 100644 configs/am69_sk_r5.config
->>>>
->>>> diff --git a/board/ti/j784s4/MAINTAINERS b/board/ti/j784s4/MAINTAINERS
->>>> index 4433ead66b..69be13f533 100644
->>>> --- a/board/ti/j784s4/MAINTAINERS
->>>> +++ b/board/ti/j784s4/MAINTAINERS
->>>> @@ -20,3 +20,5 @@ AM69 SK BOARD
->>>>   F:    arch/arm/dts/k3-am69-sk.dts
->>>>   F:    arch/arm/dts/k3-am69-sk-u-boot.dtsi
->>>>   F:    arch/arm/dts/k3-am69-r5-sk.dts
->>>> +F:    configs/am69_sk_r5.config
->>>> +F:    configs/am69_sk_a72.config
->>>> diff --git a/configs/am69_sk_a72.config b/configs/am69_sk_a72.config
->>>> new file mode 100644
->>>> index 0000000000..03e74a8a56
->>>> --- /dev/null
->>>> +++ b/configs/am69_sk_a72.config
->>>
->>> Just going to ignore the comments on v7 about putting this
->>> in board/ti/..?
->>>
->>
->> Sorry, somehow this got missed. Thanks for bringing up.
->>
->>
->>> Anyway, we can now do includes in defconfigs, so no config
->>> fragments needed, you can just add `configs/am69_evm_a72_defconfig`
->>> with the content:
->>>
->>> ```
->>> #include <configs/j784s4_evm_a72_defconfig>
->>>
->>> CONFIG_ARM=y
->>> CONFIG_ARCH_K3=y
->>> CONFIG_SOC_K3_J784S4=y
->>> CONFIG_TARGET_J784S4_A72_EVM=y
->>>
->>> CONFIG_DEFAULT_DEVICE_TREE="k3-am69-sk"
->>> CONFIG_SPL_OF_LIST="k3-am69-sk"
->>> CONFIG_OF_LIST="k3-am69-sk"
->>> ```
->>>
->>> (note we need to duplicate the _ARM/_TARGET currently to
->>> not confuse buildman which seems to directly parse the configs
->>> for arch detection).
->>>
->>
->> I tried it, but I don't think this works as '#' signifies a comment 
->> in defconfig, isn't that true?
->>
->
-> The ability to do this was just added recently, try it again :)
->
-> Andrew
->
-Actually, I tried on the latest uboot next, but I still don't see things 
-being included from j784s4_evm_a72_defconfig
+--8UPxoFzVL+Z9vVDT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Can you point to the commit where this was introduced?
+On Mon, Jan 29, 2024 at 11:23:25PM +0530, Jagan Teki wrote:
 
+> Hi Tom,
+>=20
+> Please pull this PR.
+>=20
+> Summary:
+> - Support Infineon S28HS02GT (Takahiro)
+>=20
+> CI:
+> - https://source.denx.de/u-boot/custodians/u-boot-spi/-/pipelines/19467
+>=20
+> thanks,
+> Jagan.=20
+>=20
+> The following changes since commit 526a865fe4fea59fb2638726c26e39557eb97f=
+dd:
+>=20
+>   Merge branch 'master-cleanup' of https://source.denx.de/u-boot/custodia=
+ns/u-boot-sh (2024-01-27 20:43:20 -0500)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-spi master
+>=20
+> for you to fetch changes up to 16dd10951015183f87b8202b8d4c8617da4f6d44:
+>=20
+>   mtd: spi-nor-ids: Add Infineon(Cypress) s28hs02gt ID (2024-01-29 19:34:=
+17 +0530)
+>=20
 
->>
->>> Andrew
->>>
->>>> @@ -0,0 +1,5 @@
->>>> +# Defconfig fragment to apply on top of j784s4_evm_a72_defconfig
->>>> +
->>>> +CONFIG_DEFAULT_DEVICE_TREE="k3-am69-sk"
->>>> +CONFIG_SPL_OF_LIST="k3-am69-sk"
->>>> +CONFIG_OF_LIST="k3-am69-sk"
->>>> diff --git a/configs/am69_sk_r5.config b/configs/am69_sk_r5.config
->>>> new file mode 100644
->>>> index 0000000000..c42b6f3380
->>>> --- /dev/null
->>>> +++ b/configs/am69_sk_r5.config
->>>> @@ -0,0 +1,5 @@
->>>> +# Defconfig fragment to apply on top of j784s4_evm_r5_defconfig
->>>> +
->>>> +CONFIG_DEFAULT_DEVICE_TREE="k3-am69-sk"
->>>> +CONFIG_SPL_OF_LIST="k3-am69-r5-sk"
->>>> +CONFIG_OF_LIST="k3-am69-r5-sk"
->>
--- 
-Regards,
-Apurva Nandan,
-Texas Instruments.
+Applied to u-boot/master, thanks!
 
+--=20
+Tom
+
+--8UPxoFzVL+Z9vVDT
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmW382kACgkQFHw5/5Y0
+tyxkLgwAl9KmbHlcg8sG5NDUN0Z+XCO0M313BDjYec5rGnfkSMKqdaFJ7tiSeneT
+RWqfUnRTeNGuWCIo+KpQzfl4Qn39iN9mccOecNOcqzPCTkgM+a3On8xNGjY33Ump
+NmnYFvw4MQqdgjyVlpkXuy2fR8WZE17wBnXrQh7pioM+K0iXR+E81WlQIjbdCKKQ
+DykjFsZEq8GIPC0EO4hbGcN1gRa56HXMCmVMQwO9Gb/xBE6T2+of5g3WqZ/05wBq
+SThl64203WpXD6F1/eurVZ/6MTxYbrN0Z/Cu5TwBFpkKu65tdYJylQiF5jWb++5O
+yWnbD3XZF15FSgNM7o3aQrZe1ZuYZavEE/VvnBbqyF5357jiwQLZfvgJo4AtNBk3
+Ej6pYXDi5xll6OGBvZ7Du9HcLa6nR6ad8tj3fRxmOPWKRaPKT7XWwHyXIyj7a6wH
+aXmhjrCjqkr72b8YSRgE4bTjQq300D5KU2cCAHaL2TO/cUEZqE0DlA+cEbsP9vt4
+1yV6SdK8
+=FK/s
+-----END PGP SIGNATURE-----
+
+--8UPxoFzVL+Z9vVDT--
