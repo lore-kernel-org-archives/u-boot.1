@@ -4,87 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2990C47DDB
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 13:31:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B71F2C47DDB
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 13:34:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29C3787BDB;
-	Mon, 29 Jan 2024 14:31:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 252AE87DB1;
+	Mon, 29 Jan 2024 14:34:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tjLQlWe2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k9NHco6p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE98287BDB; Mon, 29 Jan 2024 14:31:17 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id A0AF687DB0; Mon, 29 Jan 2024 14:34:40 +0100 (CET)
+Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
+ [IPv6:2607:f8b0:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82F7487D6C
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 14:31:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A6F087BDB
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 14:34:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linus.walleij@linaro.org
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-602cf7dfeb1so24751917b3.0
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 05:31:15 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-5cfb8126375so543656a12.1
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 05:34:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706535074; x=1707139874; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1706535276; x=1707140076; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kPx+yQ14k8oVPGoYCKK3Vr0CF+CdmENX2ZHSLPbxytc=;
- b=tjLQlWe2a3IGlEtySp92n3YGxQgC29tefshKqYrWpMDqiG9baSYWIzUSwjkaUWkAMN
- TuGNZJ2RB69j6GiMx+KrMTNrWipFRBQePBVNXZFATjRqH+2/VUhfNUNAv1uxkH2kF1Tn
- docCSSUuB5Gd50i64z5Km8IHlbPfJyPMJtc7ulUw6ZOhtiw8+H1gpE2wVoTtPDB2U1kt
- h5fFhMP39WC5XWwBMtM0Bo2S1FPf55Nj21yOPgrGicLvuQdu18zxkl1jVTazME7HYWBl
- F3RpBPrejRwQL9J4N9HKy4NVdgUYdTqRXpm2WYMpd0gqUcLUgDUXHJ+zGSeH7MAMNm2T
- J5bQ==
+ bh=hwCcPxLAaApgBPW7zKhxkqCWhc05QN/1Qle+1vMBJB8=;
+ b=k9NHco6pRV5Jm/O18ed5cDgRrawi+BFD5PZFFBrO/i40+sAl7yyB7leMHf7T4YOKJw
+ IHJytnxQYMZyntZ/psgNvonhzoDDjTy1fRrvqsDLXI2ub1J5hu5Gq3EWao/9C320vvdn
+ 8ePdkzQJoJtz0sjYP/tie1jv8yR8oTzD77ww7BO3MHezXOYJbuQnnq9FByFVGLknGBTG
+ ZzUuiq37GAPDHp5x/SJVNdbuI9VHXCI5NayKwuSDB62SsZF9l4lvnpepaH3n3s9L8oeG
+ FG2Z3YD290ay/xC7xgcbBfOYJNFcVtv/EYvkwWjmryAZQdGiKLRvYxjgbFF5yZZYIq0v
+ PXbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706535074; x=1707139874;
+ d=1e100.net; s=20230601; t=1706535276; x=1707140076;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kPx+yQ14k8oVPGoYCKK3Vr0CF+CdmENX2ZHSLPbxytc=;
- b=vUQsTN9mfN1tYrC5DFQ3Ezd6JnGZOj5ZixkHeJjPygtCX6vmPcE5vOJ4wVM1b9eeKS
- +WrvCBGyMelpglFAcSEjqFcWrNcjxzqn+YStn3uxcLbT1ZGP3dOI55znzmda/smpdMIB
- YRFRDe24Q50rPYusotOrlxIzdrGJfFyXYQlTS7alSKBx3u/i4EZmApa85/h7IZ1vNxOc
- LiVS0OeNfxZy1NO6qII70lqCC93/sAeNArtT1PtQnhBh4H/1ISSPpG17xHZqWvHm6cJr
- vpscUS0+gTLMLQaDfuieUx57rkzmUWdeQ5XZnQHF+Od9BEYa04EmjFBcc5Uo9rY3eKoS
- KVWg==
-X-Gm-Message-State: AOJu0YxvcpsfWgjhrVpNPpfrvctu8u2CivTVR7yyZsvSSL0zJGCfWG5Z
- 8g95wOotM4oqjD2ObFya9SaTiN8l+PbpUZjgbNwbwbihPessWjgfPsT0GNbTXYQ8SANj6tuNJVk
- 9Aqx9kKLArm2+fDKpWbVMQP9/d7yC14KgI4cjEv7/91FP7ldo
-X-Google-Smtp-Source: AGHT+IHRby8C6HJ8F3nWGgkcH6ZyY072fK9q0RNyQUMQM+SSn1Hir0fk9MuDujNwGsx7ccqPZPoSpRVrKY0SeMe7M7w=
-X-Received: by 2002:a81:ac57:0:b0:600:23d2:8db8 with SMTP id
- z23-20020a81ac57000000b0060023d28db8mr3219059ywj.56.1706535074190; Mon, 29
- Jan 2024 05:31:14 -0800 (PST)
+ bh=hwCcPxLAaApgBPW7zKhxkqCWhc05QN/1Qle+1vMBJB8=;
+ b=oh5MXtBNmJug9OXhqDrh4rhjBvX45gUwIVTnSy16kZjCUJy53IEjbhK0gxWNIsk5R1
+ cuTMWxv8NmBwQi4IjsdqeL+lXIZ1npEMiIH5UjlH+tMgyqRw5vejCm8xhFxTPXifJoOZ
+ QVZE+tqOrSH6fdvH15wGoasBBJfPC1OdacdgrG0rpjh5yCADivYPpGhwkuqSv+1jee2C
+ X1IYYol7JD4EsLfo9W68TM0IJEgY/HJMMwiYld3vmoCB7iP2pvmeEBKBDrX8hMlacNLk
+ 5Hgnxz9L+4F6uiJgH5u3/hzGYY9Fqqk1uEUwmFC65jnuln5HufkhHdwU521/3Y3bwXlZ
+ LsOg==
+X-Gm-Message-State: AOJu0YwepW8LFLZPGx7A5rhJz2vR9oiTXRNwXRo4GiHx8c31ktu1ij7+
+ SNJom1jqjoKsAZVbaYb10hk4MWg2118A6dZglP1H7Ojh3hMWghHgECkfYo9f1l8+YiX7ZGpYd0A
+ 6Iu74YKk2ieeQsZVeQ4vbjGvdM24=
+X-Google-Smtp-Source: AGHT+IF7BvbaocEv3S98eFB0h1hUE4sQhh1Gzm2iBYsEnCQsq0eT7xGeGJ58zKMS+8Wgf6Hqk+fGYdQvqXWmHcpBv+E=
+X-Received: by 2002:aa7:98c1:0:b0:6dd:c870:2f7c with SMTP id
+ e1-20020aa798c1000000b006ddc8702f7cmr7121806pfm.2.1706535276546; Mon, 29 Jan
+ 2024 05:34:36 -0800 (PST)
 MIME-Version: 1.0
-References: <20240126124801.1164892-1-ole.orhagen@northern.tech>
- <CACRpkdYLizF9Duy3ZCfqRsY-NMoLZJO8+TCyBHbQDqSOWuzonQ@mail.gmail.com>
- <CAD5A3Cuba_EchhDWBfej5HGHsP-T6smgL-L+C6SV_bONf6EqYA@mail.gmail.com>
- <ed02c9b9-5505-4aad-bc92-a2678607ff54@northern.tech>
-In-Reply-To: <ed02c9b9-5505-4aad-bc92-a2678607ff54@northern.tech>
-From: Linus Walleij <linus.walleij@linaro.org>
-Date: Mon, 29 Jan 2024 14:31:02 +0100
-Message-ID: <CACRpkdaiYgmzjsX8SPMFOFo=iK19s2y8Uuaysc+46Ba7D1PFBg@mail.gmail.com>
-Subject: Re: [PATCH v1] vexpress_ca9x4: Enable DM_SERIAL
-To: Kristian Amlie <kristian.amlie@northern.tech>
-Cc: Ole Orhagen <ole.orhagen@northern.tech>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>, 
- Fabio Estevam <festevam@denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Liviu Dudau <liviu.dudau@foss.arm.com>, Mark Kettenis <kettenis@openbsd.org>, 
- Patryk Biel <pbiel7@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Peter Robinson <pbrobinson@gmail.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Simon Glass <sjg@chromium.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Yang Xiwen <forbidden405@outlook.com>
+References: <20240128214335.120280-1-Mr.Bossman075@gmail.com>
+In-Reply-To: <20240128214335.120280-1-Mr.Bossman075@gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 29 Jan 2024 10:34:26 -0300
+Message-ID: <CAOMZO5BJRDdD5a7JZ+ws7aqz0p0nmK_vXiq33=V3s5X_4m8+-Q@mail.gmail.com>
+Subject: Re: [PATCH v1 1/2] imx: imxrt1050-evk: Add support for SPI flash
+ booting
+To: Jesse Taube <mr.bossman075@gmail.com>
+Cc: u-boot@lists.denx.de, 
+ Giulio Benetti <giulio.benetti@benettiengineering.com>,
+ Stefano Babic <sbabic@denx.de>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -103,34 +92,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jan 29, 2024 at 12:54=E2=80=AFPM Kristian Amlie
-<kristian.amlie@northern.tech> wrote:
-> On 29/01/2024 12:41, Ole Orhagen wrote:
-> > On Fri, Jan 26, 2024 at 8:57=E2=80=AFPM Linus Walleij <linus.walleij@li=
-naro.org
-> > <mailto:linus.walleij@linaro.org>> wrote:
+On Sun, Jan 28, 2024 at 6:43=E2=80=AFPM Jesse Taube <mr.bossman075@gmail.co=
+m> wrote:
 
-> >     Are you using the actual hardware, or QEMU?
-> >
-> >
-> > I only have QEMU available, unfortunately.
->
-> Just providing some context, since I'm listed as maintainer: This board
-> was going to be removed some time ago, but was resurrected specifically
-> to work with QEMU. The "virt" board, at least at that time, did not
-> support some key ARM features that we need in our testing, such as SD
-> cards and Flash. Hence we opted to keep this board around. So
-> compatibility with hardware is not important to us at least, unless
-> someone else is requesting it.
+> +++ b/configs/imxrt1050-evk_fspi_defconfig
+> @@ -0,0 +1,100 @@
+> +CONFIG_ARM=3Dy
+> +CONFIG_SYS_DCACHE_OFF=3Dy
 
-I actually have this hardware.
-
-Last time I tried to bring it up it had severe problems with caches,
-especially following the meltdown/spectre workarounds that start
-to really stress the cache, and probably the caches simply have to
-be disabled to make it work.
-
-But I will try to dust it off and test it again.
-
-Yours,
-Linus Walleij
+Out of curiosity: what are the problems if the D-Cache is turned on?
