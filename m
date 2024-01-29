@@ -4,42 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CC9AC47DDB
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 15:56:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6E4DC47DB3
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 16:08:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE9BC87BB5;
-	Mon, 29 Jan 2024 16:56:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 132D787BB5;
+	Mon, 29 Jan 2024 17:08:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EWBUw1/6";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 016DB87BCB; Mon, 29 Jan 2024 16:55:59 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id BECBC8775F
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 16:55:55 +0100 (CET)
+ id 7ACD287BCB; Mon, 29 Jan 2024 17:08:01 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E0BD287BAD
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 17:07:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0DBF8DA7;
- Mon, 29 Jan 2024 07:56:39 -0800 (PST)
-Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.32.100.28])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EAD923F738;
- Mon, 29 Jan 2024 07:55:53 -0800 (PST)
-From: Andre Przywara <andre.przywara@arm.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>,
- Samuel Holland <samuel@sholland.org>,
- Maksim Kiselev <bigunclemax@gmail.com>,
- Nick Alilovic <nickalilovic@gmail.com>,
- Chuanhong Guo <gch981213@gmail.com>, linux-sunxi@lists.linux.dev,
- u-boot@lists.denx.de
-Subject: Pull request: u-boot-sunxi/master for v2024.04
-Date: Mon, 29 Jan 2024 15:55:43 +0000
-Message-Id: <20240129155543.2439451-1-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40TG7s4n006322;
+ Mon, 29 Jan 2024 10:07:54 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1706544474;
+ bh=aPJe6Mo4+SXXuxY0XP0F0I0KbjNuf5r/fc0j9/v+Ed8=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=EWBUw1/6wtUvdafIQ/fqi8UXZqwjEO7FyVlrQujl5UdO/DGFzmFDC+aWoeqjnyBtm
+ l8oZu1s6JvV6ogfEGiipylV6kQClb9XB/aGdJjIbeWZYIDLtjGrQyfk1Kdipgllvq4
+ IiL3ibB7wSQz/XRss5NH0Qbh2pKKMcEWWSba9Fj4=
+Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40TG7swk008823
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 29 Jan 2024 10:07:54 -0600
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 29
+ Jan 2024 10:07:53 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 29 Jan 2024 10:07:53 -0600
+Received: from [10.249.128.48] ([10.249.128.48])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40TG7oNc025641;
+ Mon, 29 Jan 2024 10:07:50 -0600
+Message-ID: <4adff3fe-524c-8835-85d2-65830789d453@ti.com>
+Date: Mon, 29 Jan 2024 21:37:47 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH v2] common: splash_source: Don't compile ubifs splash cmd
+ for SPL build
+Content-Language: en-US
+To: Nikhil Jain <n-jain1@ti.com>, <u-boot@lists.denx.de>, <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>
+CC: <praneeth@ti.com>, <nm@ti.com>, <vigneshr@ti.com>, <a-bhatia1@ti.com>,
+ <j-luthra@ti.com>, <nsekhar@ti.com>
+References: <20240124090509.303787-1-devarsht@ti.com>
+ <ce659935-93e6-4f7f-b511-b452d08d74e9@ti.com>
+From: Devarsh Thakkar <devarsht@ti.com>
+In-Reply-To: <ce659935-93e6-4f7f-b511-b452d08d74e9@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,128 +84,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Simon, Tom,
 
-please pull the sunxi/master branch, containing the first part of the
-2024.04 changes. I had some more (USB regulator) changes queued, but
-found regressions during the final testing, so had to drop some. If I
-can find reasons and simple fixes for those, I would send them later.
+On 24/01/24 17:26, Nikhil Jain wrote:
+> Hi Devarsh,
+> 
+> On 24/01/24 14:35, Devarsh Thakkar wrote:
+>> Don't compile ubifs splash mount command for SPL build as this command
+>> is not supported (and also not enabled) during SPL stage.
+>>
+>> This fixes below compilation error, when CONFIG_CMD_UBIFS is enabled in
+>> defconfig along with splash screen enabled at SPL stage:
+>>
+>> "aarch64-none-linux-gnu-ld.bfd: common/cli.o: in function `run_command':
+>> u-boot-next/u-boot/common/cli.c:51: undefined reference to
+>> `parse_string_outer'
+>> u-boot-next/u-boot/common/cli.c:51:(.text.run_command+0x10): relocation
+>> truncated to fit: R_AARCH64_JUMP26 against undefined symbol
+>> `parse_string_outer' make[2]: ***
+>> [u-boot-next/u-boot/scripts/Makefile.spl:527: spl/u-boot-spl] Error 1
+>> make[1]: *** [u-boot-next/u-boot/Makefile:2053: spl/u-boot-spl] Error 2
+>> make[1]: Leaving directory 'u-boot-next/u-boot/out/a53' make: ***
+>> [Makefile:177: sub-make] Error 2"
+>>
+>> Fixes: eb9217dc03 ("common: Enable splash functions at SPL")
+>> Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
+> Reviewed-by: Nikhil M Jain <n-jain1@ti.com>
 
-So for now these are some rather easy changes:
-- Some cleanups in header files: those do not affect the generated
-binaries at all.
-- The usual update of DT files from the kernel repo, mostly adding new
-board files this time. On the wake of this there is one defconfig to
-enable a new board, some H618 TV box branded as "Transpeed".
-- Samuel's series to support SPL FIT image loading for 32-bit SoCs as
-well, so far this was restricted to ARM64 boards. I refrained from
-automatically enabling this everywhere, instead this requires user
-intervention during board configuration. This allows to ship the "crust"
-management processor firmware on H3 boards, which enables better power
-saving.
-- One defconfig for an older H3 board. There was a close-by defconfig for
-a related board, but there are some differences which deserve a separate
-file.
-- Support for the EMAC driver to work with fixed-link PHYs, which allows
-to directly wire the MAC to a switch IC.
+Sorry for the rush, but just wanted to check if it is possible to pull 
+this in for current merge window for v2024.04 ?
 
-The branch survived build testing for all 167 sunxi boards, and Linux
-boot testing on some selected boards.
-
-Please pull!
-
-Cheers,
-Andre
-
-==================
-The following changes since commit 526a865fe4fea59fb2638726c26e39557eb97fdd:
-
-  Merge branch 'master-cleanup' of https://source.denx.de/u-boot/custodians/u-boot-sh (2024-01-27 20:43:20 -0500)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-sunxi.git master
-
-for you to fetch changes up to 539612e27690a8df7f197cd1e9f4c2cf6ee1ac64:
-
-  sunxi: Consider SPL size limitations for FIT loading (2024-01-29 14:31:00 +0000)
-
-----------------------------------------------------------------
-Andre Przywara (7):
-      sunxi: cleanup sunxi-common.h
-      sunxi: sun50i-h6: remove unneeded base addresses from header
-      sunxi: sun4i: remove unneeded base addresses from header
-      sunxi: sun9i: remove unneeded base addresses from header
-      sunxi: remove common.h inclusion
-      sunxi: simplify U-Boot proper only builds
-      sunxi: dts: update devicetree files from Linux-v6.8-rc1
-
-Chuanhong Guo (1):
-      sunxi: add defconfig for nanopi_duo2
-
-Maksim Kiselev (1):
-      net: sun8i-emac: Add support for fixed-link phy
-
-Nick Alilovic (1):
-      sunxi: add Transpeed 8K618-T board support
-
-Samuel Holland (4):
-      sunxi: spl: Disable padding from SPL_PAD_TO
-      sunxi: binman: Move BL31 and SCP firmware addresses to Kconfig
-      sunxi: binman: Support FIT generation for 32-bit SoCs
-      sunxi: Consider SPL size limitations for FIT loading
-
- arch/arm/Kconfig                                   |   4 +-
- arch/arm/dts/Makefile                              |   1 +
- arch/arm/dts/sun50i-h616-bigtreetech-cb1-manta.dts |  35 +++
- arch/arm/dts/sun50i-h616-bigtreetech-cb1.dtsi      | 138 +++++++++++
- arch/arm/dts/sun50i-h616-bigtreetech-pi.dts        |  63 +++++
- arch/arm/dts/sun50i-h616.dtsi                      |   7 +
- arch/arm/dts/sun50i-h618-orangepi-zero2w.dts       | 176 +++++++++++++
- arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts     | 161 ++++++++++++
- arch/arm/dts/sun8i-r40.dtsi                        |   2 +
- arch/arm/dts/sun8i-v3s-anbernic-rg-nano.dts        | 276 +++++++++++++++++++++
- arch/arm/dts/sun8i-v3s.dtsi                        |  35 +++
- arch/arm/dts/sunxi-u-boot.dtsi                     |  41 +--
- arch/arm/include/asm/arch-sunxi/cpu_sun4i.h        |  47 ----
- arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h    |  21 --
- arch/arm/include/asm/arch-sunxi/cpu_sun9i.h        |  41 ---
- arch/arm/mach-sunxi/Kconfig                        |  33 ++-
- arch/arm/mach-sunxi/board.c                        |   1 -
- arch/arm/mach-sunxi/clock.c                        |   1 -
- arch/arm/mach-sunxi/clock_sun4i.c                  |   1 -
- arch/arm/mach-sunxi/clock_sun50i_h6.c              |   1 -
- arch/arm/mach-sunxi/clock_sun6i.c                  |   1 -
- arch/arm/mach-sunxi/clock_sun8i_a83t.c             |   1 -
- arch/arm/mach-sunxi/clock_sun9i.c                  |   1 -
- arch/arm/mach-sunxi/cpu_info.c                     |   1 -
- arch/arm/mach-sunxi/dram_helpers.c                 |   3 +-
- arch/arm/mach-sunxi/dram_sun4i.c                   |   1 -
- arch/arm/mach-sunxi/dram_sun50i_h6.c               |   1 -
- arch/arm/mach-sunxi/dram_sun50i_h616.c             |   1 -
- arch/arm/mach-sunxi/dram_sun6i.c                   |   1 -
- arch/arm/mach-sunxi/dram_sun8i_a23.c               |   1 -
- arch/arm/mach-sunxi/dram_sun8i_a33.c               |   1 -
- arch/arm/mach-sunxi/dram_sun8i_a83t.c              |   1 -
- arch/arm/mach-sunxi/dram_sun9i.c                   |   1 -
- arch/arm/mach-sunxi/dram_suniv.c                   |   2 +-
- arch/arm/mach-sunxi/dram_sunxi_dw.c                |   1 -
- arch/arm/mach-sunxi/gtbus_sun9i.c                  |   1 -
- arch/arm/mach-sunxi/pmic_bus.c                     |   1 -
- arch/arm/mach-sunxi/prcm.c                         |   1 -
- arch/arm/mach-sunxi/spl_spi_sunxi.c                |   1 -
- arch/arm/mach-sunxi/timer.c                        |   1 -
- common/spl/Kconfig                                 |   6 +-
- configs/nanopi_duo2_defconfig                      |  12 +
- configs/transpeed-8k618-t_defconfig                |  27 ++
- drivers/net/sun8i_emac.c                           |   7 +-
- include/configs/sunxi-common.h                     |  56 +----
- 45 files changed, 1002 insertions(+), 214 deletions(-)
- create mode 100644 arch/arm/dts/sun50i-h616-bigtreetech-cb1-manta.dts
- create mode 100644 arch/arm/dts/sun50i-h616-bigtreetech-cb1.dtsi
- create mode 100644 arch/arm/dts/sun50i-h616-bigtreetech-pi.dts
- create mode 100644 arch/arm/dts/sun50i-h618-orangepi-zero2w.dts
- create mode 100644 arch/arm/dts/sun50i-h618-transpeed-8k618-t.dts
- create mode 100644 arch/arm/dts/sun8i-v3s-anbernic-rg-nano.dts
- create mode 100644 configs/nanopi_duo2_defconfig
- create mode 100644 configs/transpeed-8k618-t_defconfig
+Regards
+Devarsh
