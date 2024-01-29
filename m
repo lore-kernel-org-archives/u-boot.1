@@ -4,69 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0628C47DA9
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 11:49:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8396BC47DA9
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 11:52:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 120AE8785A;
-	Mon, 29 Jan 2024 12:49:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B1EEF8785A;
+	Mon, 29 Jan 2024 12:52:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="kGnS89Db";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="G44S7EEU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C67EA8784B; Mon, 29 Jan 2024 12:49:13 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id DEEF287CFE; Mon, 29 Jan 2024 12:52:45 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3893E87A00
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 12:49:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CD3B18784B
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 12:52:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-5ff7dc53ce0so19769507b3.1
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 03:49:11 -0800 (PST)
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-5ff821b9acfso24083617b3.1
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 03:52:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1706528950; x=1707133750;
+ d=amarulasolutions.com; s=google; t=1706529162; x=1707133962;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vkY/lkm6KeTH5UkyWCMXsTl4VJNTxEignO8o6JXzqnk=;
- b=kGnS89DbfwWox8NSbKo/o9+klcQrukFgE2p1zqaRATo+6RxzCmWXozLf/Fjy9f1OAa
- VeLiv54+QR/k4P/Od6uIwHMvx5zoln7vrHwK2X+e4680tBkshbUWxC7A3tqE66bDjtQW
- gy/cEwJXFZVYvIQbBvY5EcGld7+qN4nLJyS7U=
+ bh=Y1/VNbW1FuOA1iWCAbah5MY149FkOzFjEU9svAgwL+8=;
+ b=G44S7EEU3hASqVVOrHxJMlGppluciyP468jmMIyEIy7k5uqLsZFW72FCh/IshiVUnI
+ 0Mx/+u/V5R3IfT7k+aL5gHLhxfsSEfRc1qsaBO9z8TmvutezdIn0EbOqdsYV6amPk/4r
+ esD/UrNPN8rPjsFjOA3aRMH6ofwpXQR1+5YLQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706528950; x=1707133750;
+ d=1e100.net; s=20230601; t=1706529162; x=1707133962;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vkY/lkm6KeTH5UkyWCMXsTl4VJNTxEignO8o6JXzqnk=;
- b=Z3zGx7klyCvUPsk3WevTpNQjUdt/D4D5o7AdaWoiNJToX6chsc7X6DPa5AXqUz+KM2
- XQuuwmuOzDFJPXQWWnVPGHow7cqwgYW6mtkEGkP+MzAunz4liO91yJsobfRWqVr4BlWP
- baAaF/ctARN8Uo4vEr856wSp/ax8rzOkYAjFlfZbrD3hRoedtbtnBRVFu4ohXXAyGN4D
- 8HizX0L5LdR1+hmmTX0CJVPTQBf6A8d34Zg24tMiUiOTMqV44XBBbSD4ogtYnRY131bp
- EU52uN67+ckgyLWzK0XITcfHZy2aDQhU3lt1lTiRfFhFpLY0c6EykZs25DttGeECQB/v
- 2XrA==
-X-Gm-Message-State: AOJu0YxrSW2RJDJEhPXG/CATF6OdSlokN5y9XrzdHYSmh4RUEkXdUGPt
- 6wfRe4DTosdRI3vCudEtvHB2/Pa55KeU/cwjcXkWC/+u1YOLEygIYTt7LRWoSCjNunKz9DE/6vw
- T+eGz1fONzgmB+d3abEDNcieexG0dbeRZhnHoYQ==
-X-Google-Smtp-Source: AGHT+IEU6Fl0HPApj64i4mHYTlas6F8VdHjXUiwP4/50ZVPwc4vVT/lODLBz1zQVEy/GFksqdvaxZpjRsdgA1l+xY6k=
-X-Received: by 2002:a81:e809:0:b0:5ff:abb7:2234 with SMTP id
- a9-20020a81e809000000b005ffabb72234mr3032437ywm.25.1706528949761; Mon, 29 Jan
- 2024 03:49:09 -0800 (PST)
+ bh=Y1/VNbW1FuOA1iWCAbah5MY149FkOzFjEU9svAgwL+8=;
+ b=RVL586AfzysdXlJRuWxk0fNSDy6k7VA7sxPeTh1xm2irhmZwRS1jTs2cSaziJk1kEt
+ P8spJyXNO3LsRu1Iv2q8vam+2EyLYQvSpPptBcFCinSPDzmQpLCRnDJ9PcnlASe3JOCN
+ OoOyCiN9ANVCUE3yUvzz1foGMP5qs2qfd/48qeyN9SMyu77rboEwo11SGMiuyxxV1bVo
+ ftGcMmYuMBQnNR/MJ6jcDsutKyitO/TXUaxOr/jyH4mXzQuJBZCsRswdjWF2tzfqTKbn
+ mGL/yFiNnouBxKOhklvTw2IrKf5POTx16OL6q60GcuatATEytgC1vhcN8ZF1VWPSWXbo
+ WeoQ==
+X-Gm-Message-State: AOJu0YzHztsoCi1EvMwFqc+cXJ/QddVlszk2+a6uWdnaonz8RfxWRhF1
+ 8x4gMG3W1Qal+/hM0CINuloNAwMzficy9OXSoOJ6kK2yqfndk99cpV7IAx1e8T2ml8futO+K13O
+ 5F8/XTKz/dj/K9GlfxNwVfSctbxDeA1iSmlxn5A==
+X-Google-Smtp-Source: AGHT+IHYhxr3ZY84i4aKv5A/DE751uQpelhz+M90xPl4EvVhIgtFqfrTCWc0kATWmiFX1btMEk75Z2xWNgrSLO1ruio=
+X-Received: by 2002:a81:ed09:0:b0:5ff:8155:c994 with SMTP id
+ k9-20020a81ed09000000b005ff8155c994mr3151956ywm.74.1706529162513; Mon, 29 Jan
+ 2024 03:52:42 -0800 (PST)
 MIME-Version: 1.0
-References: <20231221101331.3263153-1-bigunclemax@gmail.com>
-In-Reply-To: <20231221101331.3263153-1-bigunclemax@gmail.com>
+References: <20240128155458.56712-1-marek.vasut+renesas@mailbox.org>
+ <20240128155458.56712-7-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240128155458.56712-7-marek.vasut+renesas@mailbox.org>
 From: Jagan Teki <jagan@amarulasolutions.com>
-Date: Mon, 29 Jan 2024 17:18:58 +0530
-Message-ID: <CAMty3ZA=aWmEPHKLP7dY5+Vd4Adi=EPop1R8gG8X0PdM-LyHHw@mail.gmail.com>
-Subject: Re: [PATCH v2] spi: dw: add check for Rx FIFO overflow
-To: Maksim Kiselev <bigunclemax@gmail.com>
-Cc: u-boot@lists.denx.de
+Date: Mon, 29 Jan 2024 17:22:31 +0530
+Message-ID: <CAMty3ZA7sEks59cdQhHCZR+R8fSxHdAtgHUupem=X61KDUALSA@mail.gmail.com>
+Subject: Re: [PATCH v2 07/11] mtd: spi: renesas: Add R8A779H0 V4M support
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Hai Pham <hai.pham.ud@renesas.com>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -85,18 +87,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Dec 21, 2023 at 3:43=E2=80=AFPM Maksim Kiselev <bigunclemax@gmail.c=
-om> wrote:
+On Sun, Jan 28, 2024 at 9:25=E2=80=AFPM Marek Vasut
+<marek.vasut+renesas@mailbox.org> wrote:
 >
-> If even one byte is lost due to Rx FIFO overflow then we will never
-> exit the read loop. Because the (priv->rx !=3D priv->rx_end) condition wi=
-ll
-> be always true.
+> From: Hai Pham <hai.pham.ud@renesas.com>
 >
-> Let's check if Rx FIFO overflow occurred and exit the read loop
-> in this case.
+> Support RPC SPI on R8A779H0 V4M SoC.
 >
-> Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
+> Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Signed-off-by: Hai Pham <hai.pham.ud@renesas.com>
+> ---
+> Cc: Jagan Teki <jagan@amarulasolutions.com>
+> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
 > ---
 
 Applied to u-boot-spi/master
