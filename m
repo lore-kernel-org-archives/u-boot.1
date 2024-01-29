@@ -4,66 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 852DAC47DA9
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 08:43:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25E44C47DA9
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 09:13:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5985187CE0;
-	Mon, 29 Jan 2024 09:43:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
+	by phobos.denx.de (Postfix) with ESMTP id 3011587CD1;
+	Mon, 29 Jan 2024 10:13:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="RIh2oFt5";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="LuKnacni";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="ULs2+JtM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E681787CE1; Mon, 29 Jan 2024 09:43:26 +0100 (CET)
-Received: from galois.linutronix.de (Galois.linutronix.de
- [IPv6:2a0a:51c0:0:12e:550::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D79D287CE9; Mon, 29 Jan 2024 10:13:24 +0100 (CET)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3AE587CCE
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 09:43:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EAFBE877E2
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 10:13:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linutronix.de
+ dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=namcao@linutronix.de
-From: Nam Cao <namcao@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1706517803;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=R8d99MbAAb9e6Z792/MKRWK97zPxviiA6xBfQdB4Azw=;
- b=RIh2oFt5SPTGa4YE9UOt1nA7wbnqKb6lQETWhZHRq4ys7//Hon4HIAtmtMf1ZrZ05M0eaY
- 3+eFIE7lbqgsuOrYROC+5I5JXL1Aaa8f5dINPq6lcMqyU50y/YS+s9Hsbygw2oxV7XX65D
- A47dt5xcDSDpoHwiDIMf7K1GVFHeRV+m4RvuP3EWO4R85zBOiWh/vxcr8GRYgeB+nPYM/4
- FlRXdEa+ApnTEqm6rV8UwNUFFoBfwdqla7LlnfBqTPDaID+Gv+66+zT8YQ2BfwRJJmwdhp
- wyNJ3D1EK5Jw970wVYYT1l5Zjp/P95g9guz3GMl4zpRrbCHlh2VHx5NRZs3k7Q==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1706517803;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=R8d99MbAAb9e6Z792/MKRWK97zPxviiA6xBfQdB4Azw=;
- b=LuKnacnikurnTD1e2QRVvHB+ad4++vOI9jN23owIDFN6z4UUzEFSQRS5a4E4gZMOZDwf5h
- YVW5Qpez/IJoxyAQ==
-To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Tom Rini <trini@konsulko.com>,
- Yanhong Wang <yanhong.wang@starfivetech.com>,
- Minda Chen <minda.chen@starfivetech.com>, Torsten Duwe <duwe@suse.de>,
- Nam Cao <namcao@linutronix.de>, Xingyu Wu <xingyu.wu@starfivetech.com>,
- Mason Huo <mason.huo@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>,
- Chanho Park <chanho61.park@samsung.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 2/2] riscv: dts: starfive: add regulator device
-Date: Mon, 29 Jan 2024 09:43:09 +0100
-Message-Id: <47fd2b2225f52a2d5c3a91494ef7b9036e944199.1706517351.git.namcao@linutronix.de>
-In-Reply-To: <cover.1706517351.git.namcao@linutronix.de>
-References: <cover.1706517351.git.namcao@linutronix.de>
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1706519602; x=1709111602;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=3xYS3Lan1k3yh2pEbN1kVN5BEOmFsU+X5zibbqyq1lE=;
+ b=ULs2+JtMrp9sIthhH+w2kcp+OvcKl9O661h+LT+w5/MgcCLyQ9F/p3UM1JHiAQ0s
+ MC87DaDlLlJ53go7AeJde+vGmZv1dJm+mFtnl8I522clcCJIREf/BKXn/0qzBr9X
+ P19POXOxa5RN1mKU/FIqu8VT2hZoLfBjVufl7aYw0do=;
+X-AuditID: ac14000a-fadff7000000290d-15-65b76c32cb84
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 96.62.10509.23C67B56;
+ Mon, 29 Jan 2024 10:13:22 +0100 (CET)
+Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 29 Jan
+ 2024 10:13:22 +0100
+From: Wadim Egorov <w.egorov@phytec.de>
+To: <u-boot@lists.denx.de>
+CC: <nm@ti.com>, <d-gole@ti.com>, <trini@konsulko.com>,
+ <upstream@lists.phytec.de>
+Subject: [PATCH 0/2] *** Add support for phyCORE-AM64x ***
+Date: Mon, 29 Jan 2024 10:13:12 +0100
+Message-ID: <20240129091314.925120-1-w.egorov@phytec.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrJLMWRmVeSWpSXmKPExsWyRpKBR9coZ3uqwfMjOhYtaz0s3vw4y2Qx
+ ddJmdou3ezvZLbrfqTuwerw6sIrd4+ydHYwe/d0trB7Hb2xnCmCJ4rJJSc3JLEst0rdL4Mro
+ PbiLvaBLtOLs5QmMDYzTBLsYOTgkBEwkVvyy6GLk5BASWMwkMf+6fxcjF5D9mFFizf1XzCAJ
+ NgF1iTsbvrGC2CICUhIvOzeCxZkFQiQWXpvBDmILC1hJ7G/pArNZBFQldizYAlbDK2Ah8XHm
+ Y7BeCQF5iZmXvrNDxAUlTs58wgIxR16ieetsqJkSEgdfvGCGOEhe4sWl5SwwvdPOvWaGsEMl
+ jmxazTSBUWAWklGzkIyahWTUAkbmVYxCuZnJ2alFmdl6BRmVJanJeimpmxhBwSvCwLWDsW+O
+ xyFGJg7GQ4wSHMxKIrw/NbemCvGmJFZWpRblxxeV5qQWH2KU5mBREudd3RGcKiSQnliSmp2a
+ WpBaBJNl4uCUamBskxQr/jYhbk3Q6qJ/bC6f31RmdZd+OxDAwM9mohvyZNKL9TMPex3unC2R
+ /mPZw/KFy88mHzghcfnW9Z64kCyJ+rv68QJ3uc+57Sp0LMsU2Nz2W/vNme8bT2/u3Mz09avh
+ 97drZf0O5TorThPo6X+1Vmkpo9f6lqIvXfzx7xRUsp3c039kukcpsRRnJBpqMRcVJwIAMfYk
+ TkwCAAA=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,33 +86,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the axp15060 regulator device. OpenSBI uses this device to perform
-board reset and shutdown.
+Add basic support for the phyCORE-AM64x..
 
-Signed-off-by: Nam Cao <namcao@linutronix.de>
----
-v2: "stf,axp15060-regulator" -> "x-powers,axp15060" to match Linux.
+Wadim Egorov (2):
+  board: phytec: am64x: Add PHYTEC phyCORE-AM64x SoM
+  doc: board: phytec: Add phyCORE-AM64x
 
- arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi | 5 +++++
- 1 file changed, 5 insertions(+)
+ arch/arm/dts/Makefile                         |    4 +-
+ .../arm/dts/k3-am64-phycore-som-ddr4-2gb.dtsi | 2189 +++++++++++++++++
+ arch/arm/dts/k3-am64-phycore-som.dtsi         |  320 +++
+ .../k3-am642-phyboard-electra-rdk-u-boot.dtsi |  147 ++
+ .../arm/dts/k3-am642-phyboard-electra-rdk.dts |  302 +++
+ arch/arm/dts/k3-am642-phycore-som-binman.dtsi |  457 ++++
+ arch/arm/dts/k3-am642-r5-phycore-som-2gb.dts  |  140 ++
+ arch/arm/mach-k3/am64x/Kconfig                |   19 +
+ board/phytec/phycore_am64x/Kconfig            |   33 +
+ board/phytec/phycore_am64x/MAINTAINERS        |   15 +
+ board/phytec/phycore_am64x/Makefile           |    9 +
+ board/phytec/phycore_am64x/board-cfg.yaml     |   36 +
+ board/phytec/phycore_am64x/phycore-am64x.c    |   50 +
+ board/phytec/phycore_am64x/phycore_am64x.env  |   23 +
+ board/phytec/phycore_am64x/pm-cfg.yaml        |   12 +
+ board/phytec/phycore_am64x/rm-cfg.yaml        | 1215 +++++++++
+ board/phytec/phycore_am64x/sec-cfg.yaml       |  379 +++
+ configs/phycore_am64x_a53_defconfig           |  168 ++
+ configs/phycore_am64x_r5_defconfig            |  180 ++
+ doc/board/phytec/index.rst                    |    1 +
+ doc/board/phytec/phycore-am64x.rst            |  159 ++
+ include/configs/phycore_am64x.h               |   15 +
+ 22 files changed, 5872 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/k3-am64-phycore-som-ddr4-2gb.dtsi
+ create mode 100644 arch/arm/dts/k3-am64-phycore-som.dtsi
+ create mode 100644 arch/arm/dts/k3-am642-phyboard-electra-rdk-u-boot.dtsi
+ create mode 100644 arch/arm/dts/k3-am642-phyboard-electra-rdk.dts
+ create mode 100644 arch/arm/dts/k3-am642-phycore-som-binman.dtsi
+ create mode 100644 arch/arm/dts/k3-am642-r5-phycore-som-2gb.dts
+ create mode 100644 board/phytec/phycore_am64x/Kconfig
+ create mode 100644 board/phytec/phycore_am64x/MAINTAINERS
+ create mode 100644 board/phytec/phycore_am64x/Makefile
+ create mode 100644 board/phytec/phycore_am64x/board-cfg.yaml
+ create mode 100644 board/phytec/phycore_am64x/phycore-am64x.c
+ create mode 100644 board/phytec/phycore_am64x/phycore_am64x.env
+ create mode 100644 board/phytec/phycore_am64x/pm-cfg.yaml
+ create mode 100644 board/phytec/phycore_am64x/rm-cfg.yaml
+ create mode 100644 board/phytec/phycore_am64x/sec-cfg.yaml
+ create mode 100644 configs/phycore_am64x_a53_defconfig
+ create mode 100644 configs/phycore_am64x_r5_defconfig
+ create mode 100644 doc/board/phytec/phycore-am64x.rst
+ create mode 100644 include/configs/phycore_am64x.h
 
-diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi b/arch/riscv/=
-dts/jh7110-starfive-visionfive-2.dtsi
-index e40f57a150..fe4b3e71ae 100644
---- a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
-+++ b/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
-@@ -122,6 +122,11 @@
- 	pinctrl-0 =3D <&i2c5_pins>;
- 	status =3D "okay";
-=20
-+	pmic@36 {
-+		compatible =3D "x-powers,axp15060";
-+		reg =3D <0x36>;
-+	};
-+
- 	eeprom@50 {
- 		compatible =3D "atmel,24c04";
- 		reg =3D <0x50>;
---=20
-2.39.2
+-- 
+2.34.1
 
