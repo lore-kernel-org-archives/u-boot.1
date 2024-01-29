@@ -4,73 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 996B0C47422
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 13:30:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2990C47DDB
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 13:31:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A098587BDB;
-	Mon, 29 Jan 2024 14:30:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 29C3787BDB;
+	Mon, 29 Jan 2024 14:31:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="EOVBYn/Q";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tjLQlWe2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20DFD87BDB; Mon, 29 Jan 2024 14:30:44 +0100 (CET)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
+ id DE98287BDB; Mon, 29 Jan 2024 14:31:17 +0100 (CET)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 075BA8798B
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 14:30:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 82F7487D6C
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 14:31:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-dc22ade26d8so2278463276.1
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 05:30:41 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=linus.walleij@linaro.org
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-602cf7dfeb1so24751917b3.0
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 05:31:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1706535041; x=1707139841;
- darn=lists.denx.de; 
+ d=linaro.org; s=google; t=1706535074; x=1707139874; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5bhBbomiJXz2hVO1BcM+CRcdMMS9XLDrgOh9ZfQ2yD4=;
- b=EOVBYn/QQ9ypq3yRZ+utzMm/CXhDMPjvher+Jq7zG2XqjekJGa8Oeax3QEaiaHUJJA
- 3D8wnvcyO7hdbv59Py+4Z5TktTiGjUCKWZvXXCpR6EFPz1mbJNL/gz4dY9GVZiCQn4LD
- 2r1fLzhzX9GCizDa7+xBiGVGyBLhW/8NylD1c=
+ bh=kPx+yQ14k8oVPGoYCKK3Vr0CF+CdmENX2ZHSLPbxytc=;
+ b=tjLQlWe2a3IGlEtySp92n3YGxQgC29tefshKqYrWpMDqiG9baSYWIzUSwjkaUWkAMN
+ TuGNZJ2RB69j6GiMx+KrMTNrWipFRBQePBVNXZFATjRqH+2/VUhfNUNAv1uxkH2kF1Tn
+ docCSSUuB5Gd50i64z5Km8IHlbPfJyPMJtc7ulUw6ZOhtiw8+H1gpE2wVoTtPDB2U1kt
+ h5fFhMP39WC5XWwBMtM0Bo2S1FPf55Nj21yOPgrGicLvuQdu18zxkl1jVTazME7HYWBl
+ F3RpBPrejRwQL9J4N9HKy4NVdgUYdTqRXpm2WYMpd0gqUcLUgDUXHJ+zGSeH7MAMNm2T
+ J5bQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706535041; x=1707139841;
+ d=1e100.net; s=20230601; t=1706535074; x=1707139874;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5bhBbomiJXz2hVO1BcM+CRcdMMS9XLDrgOh9ZfQ2yD4=;
- b=tUMcJjse32tf23ljtXozuFtEqH2MylRbChwWsH2YWec6AzGbjRvb2mNji2QwdZwSM6
- dmR7z7+R9PoRuVryuorSONdAUf9y7cQgfXIYKF7ZGzVVAg8et0ia6TsR+J4aexD6fqvk
- Io5c92KUXAErV1HINgsND5NdHyR5IpsnPXt2MGtNLExq46xnOlJUsgDRzviRn1+4NcGb
- qZHsLzCeO/sP8hQVMKaWwMGoHiG7kR5mwoyhMqOLYYC5zr7BltWHa/xMxDTccJne5duU
- 8Zcswu6rTOjOowAgCs44KDgqt+6tRwvjK0k53bREmIDu3GoDJX4AwjrOxrolwckdpwuD
- TCdA==
-X-Gm-Message-State: AOJu0Yzu/NhR+zM72KHjVuiuZ7Dd/uDBwYCTYH9xnq6s81X2bpfI3Lxb
- OqTk6fpWk1tJ9Q4FyoIzY5OvaQtNwMEdAGn003ryNheiHpM6c6tJWDgy7Ck3qZ3Yk27jQEJiZk4
- 1g7OwRrjj6rfwHqt3WXE/ZO+yC9tuxaTbkXBKpg==
-X-Google-Smtp-Source: AGHT+IGnsw/esIc7lV412VfrNKJf4zOWTQ1DDFF+4+ySeEil/hWdnsRTOhLh6TihUOBZ2rnetOMtzGfbqabeIOCI4gI=
-X-Received: by 2002:a5b:dcf:0:b0:dc6:4b5a:410a with SMTP id
- t15-20020a5b0dcf000000b00dc64b5a410amr2491517ybr.12.1706535040671; Mon, 29
- Jan 2024 05:30:40 -0800 (PST)
+ bh=kPx+yQ14k8oVPGoYCKK3Vr0CF+CdmENX2ZHSLPbxytc=;
+ b=vUQsTN9mfN1tYrC5DFQ3Ezd6JnGZOj5ZixkHeJjPygtCX6vmPcE5vOJ4wVM1b9eeKS
+ +WrvCBGyMelpglFAcSEjqFcWrNcjxzqn+YStn3uxcLbT1ZGP3dOI55znzmda/smpdMIB
+ YRFRDe24Q50rPYusotOrlxIzdrGJfFyXYQlTS7alSKBx3u/i4EZmApa85/h7IZ1vNxOc
+ LiVS0OeNfxZy1NO6qII70lqCC93/sAeNArtT1PtQnhBh4H/1ISSPpG17xHZqWvHm6cJr
+ vpscUS0+gTLMLQaDfuieUx57rkzmUWdeQ5XZnQHF+Od9BEYa04EmjFBcc5Uo9rY3eKoS
+ KVWg==
+X-Gm-Message-State: AOJu0YxvcpsfWgjhrVpNPpfrvctu8u2CivTVR7yyZsvSSL0zJGCfWG5Z
+ 8g95wOotM4oqjD2ObFya9SaTiN8l+PbpUZjgbNwbwbihPessWjgfPsT0GNbTXYQ8SANj6tuNJVk
+ 9Aqx9kKLArm2+fDKpWbVMQP9/d7yC14KgI4cjEv7/91FP7ldo
+X-Google-Smtp-Source: AGHT+IHRby8C6HJ8F3nWGgkcH6ZyY072fK9q0RNyQUMQM+SSn1Hir0fk9MuDujNwGsx7ccqPZPoSpRVrKY0SeMe7M7w=
+X-Received: by 2002:a81:ac57:0:b0:600:23d2:8db8 with SMTP id
+ z23-20020a81ac57000000b0060023d28db8mr3219059ywj.56.1706535074190; Mon, 29
+ Jan 2024 05:31:14 -0800 (PST)
 MIME-Version: 1.0
-References: <20240128155458.56712-1-marek.vasut+renesas@mailbox.org>
- <20240128155458.56712-7-marek.vasut+renesas@mailbox.org>
- <CAMty3ZA7sEks59cdQhHCZR+R8fSxHdAtgHUupem=X61KDUALSA@mail.gmail.com>
- <aa6740c9-4568-4469-9790-635d68a08473@mailbox.org>
-In-Reply-To: <aa6740c9-4568-4469-9790-635d68a08473@mailbox.org>
-From: Jagan Teki <jagan@amarulasolutions.com>
-Date: Mon, 29 Jan 2024 19:00:29 +0530
-Message-ID: <CAMty3ZBBcwt8Ur9v2pyojioJQVXc+m9+NG9z08DOTEMQqFzX5Q@mail.gmail.com>
-Subject: Re: [PATCH v2 07/11] mtd: spi: renesas: Add R8A779H0 V4M support
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de, 
- Hai Pham <hai.pham.ud@renesas.com>, Paul Barker <paul.barker.ct@bp.renesas.com>
+References: <20240126124801.1164892-1-ole.orhagen@northern.tech>
+ <CACRpkdYLizF9Duy3ZCfqRsY-NMoLZJO8+TCyBHbQDqSOWuzonQ@mail.gmail.com>
+ <CAD5A3Cuba_EchhDWBfej5HGHsP-T6smgL-L+C6SV_bONf6EqYA@mail.gmail.com>
+ <ed02c9b9-5505-4aad-bc92-a2678607ff54@northern.tech>
+In-Reply-To: <ed02c9b9-5505-4aad-bc92-a2678607ff54@northern.tech>
+From: Linus Walleij <linus.walleij@linaro.org>
+Date: Mon, 29 Jan 2024 14:31:02 +0100
+Message-ID: <CACRpkdaiYgmzjsX8SPMFOFo=iK19s2y8Uuaysc+46Ba7D1PFBg@mail.gmail.com>
+Subject: Re: [PATCH v1] vexpress_ca9x4: Enable DM_SERIAL
+To: Kristian Amlie <kristian.amlie@northern.tech>
+Cc: Ole Orhagen <ole.orhagen@northern.tech>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>, 
+ Fabio Estevam <festevam@denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Liviu Dudau <liviu.dudau@foss.arm.com>, Mark Kettenis <kettenis@openbsd.org>, 
+ Patryk Biel <pbiel7@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Yang Xiwen <forbidden405@outlook.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -89,32 +103,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jan 29, 2024 at 6:57=E2=80=AFPM Marek Vasut <marek.vasut@mailbox.or=
-g> wrote:
->
-> On 1/29/24 12:52, Jagan Teki wrote:
-> > On Sun, Jan 28, 2024 at 9:25=E2=80=AFPM Marek Vasut
-> > <marek.vasut+renesas@mailbox.org> wrote:
-> >>
-> >> From: Hai Pham <hai.pham.ud@renesas.com>
-> >>
-> >> Support RPC SPI on R8A779H0 V4M SoC.
-> >>
-> >> Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-> >> Signed-off-by: Hai Pham <hai.pham.ud@renesas.com>
-> >> ---
-> >> Cc: Jagan Teki <jagan@amarulasolutions.com>
-> >> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-> >> ---
+On Mon, Jan 29, 2024 at 12:54=E2=80=AFPM Kristian Amlie
+<kristian.amlie@northern.tech> wrote:
+> On 29/01/2024 12:41, Ole Orhagen wrote:
+> > On Fri, Jan 26, 2024 at 8:57=E2=80=AFPM Linus Walleij <linus.walleij@li=
+naro.org
+> > <mailto:linus.walleij@linaro.org>> wrote:
+
+> >     Are you using the actual hardware, or QEMU?
 > >
-> > Applied to u-boot-spi/master
+> >
+> > I only have QEMU available, unfortunately.
 >
-> I don't think this will build without 06/11 macro addition, so I'll pull
-> this via u-boot-sh tree if that's OK with you ?
->
-> I could use a RB though .
+> Just providing some context, since I'm listed as maintainer: This board
+> was going to be removed some time ago, but was resurrected specifically
+> to work with QEMU. The "virt" board, at least at that time, did not
+> support some key ARM features that we need in our testing, such as SD
+> cards and Flash. Hence we opted to keep this board around. So
+> compatibility with hardware is not important to us at least, unless
+> someone else is requesting it.
 
-Yeah. Got the runner failure. Please proceed to pick this vi -sh
+I actually have this hardware.
 
-Thanks,
-Jagan.
+Last time I tried to bring it up it had severe problems with caches,
+especially following the meltdown/spectre workarounds that start
+to really stress the cache, and probably the caches simply have to
+be disabled to make it work.
+
+But I will try to dust it off and test it again.
+
+Yours,
+Linus Walleij
