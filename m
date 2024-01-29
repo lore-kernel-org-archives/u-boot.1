@@ -4,74 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D75FFC47258
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 02:22:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77326C47258
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 02:48:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21AE787BAD;
-	Mon, 29 Jan 2024 03:22:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CAAE2879CC;
+	Mon, 29 Jan 2024 03:48:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jUISSsKa";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P1CbHSBR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9C7387BCB; Mon, 29 Jan 2024 03:22:51 +0100 (CET)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id 8EF5087BAD; Mon, 29 Jan 2024 03:48:05 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC7FA862DA
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 03:22:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 696AC879BD
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 03:48:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2cf2fdd518bso17764271fa.1
- for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 18:22:48 -0800 (PST)
+ spf=pass smtp.mailfrom=o451686892@gmail.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-55783b7b47aso2367582a12.0
+ for <u-boot@lists.denx.de>; Sun, 28 Jan 2024 18:48:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706494968; x=1707099768; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=SDAMVeWqIjHRK/oQKKH0OFg1fblTfXuOLP63f3JQkuo=;
- b=jUISSsKatDGxV4xRUR1g6nD5t1DGYWMud6lDrNbxOFt74tpwOH6+CS5CJJZinvDp/4
- LWPKDY7bBTouV/BU5rCjL9Qf7EqCC1BeRJrDW0Hw8ldBz3Wj0FUWO+vC6dtOziisBpru
- L86LhzQoptPr8m1Tz7IfVgcL2B7mFwuykNMDVkgWylJu4usjM91laYgCdOqboMoqYtRJ
- DIY8PWW8jJt/OWn3+zbbmiqvLiY+m/7fA8HBE1sNvRYnhcrVJ2avHFmgXeovbQnV+aLq
- 8mcIJ5oAa5wnZUEFJ7kZXJ7hCaDPsKu3MJzXPi7XcnM6PX8S4urfQg5q2Cru8YVwHtHm
- SAmg==
+ d=gmail.com; s=20230601; t=1706496483; x=1707101283; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EP9BDnUkx7JbYrjAyE4ZwFUfQkAMz3WRWSw7MYP6SYk=;
+ b=P1CbHSBR6caBXK5lf1mOQrjW7xLpPDtKHo2DOkG3WWOUVdHirtVlhe8Wumcd+/UfGS
+ cauCN5eolM5hRezqBaf9A37TwDtzcozawWF+wZdHXlvIKBkYza0WKGvZ7jX6DwRE9cc7
+ yeCriM0IJ3x8VXQvemP9WknPusw/k8xyUHXbnekD5hKj50NAQiYHN/vE2Lu0rF9GKmoH
+ 80xqSYMCvFDAY1i0HXTsNs5mAMa3prWulYSMlwUQ96IN2PJKsr3C0aL3hmFsrYodABGX
+ JU/hGbisuj+zh4Y6jINf5J7wfSxeSOP1dtBe2hFySWifrkCoR7ey5287L/AeEnOVYI8h
+ e8nA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706494968; x=1707099768;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=SDAMVeWqIjHRK/oQKKH0OFg1fblTfXuOLP63f3JQkuo=;
- b=eX3On4T9lvXyV6cjz4P4+ll8X7BlLixl9ksFK92gz/1mlPxoxvwJhiYrcQ9XFMUWkl
- mmO9UFBQzqGn+72DyIxnH8Z+nYBAf5NdhaGAEicoT5frvBACzBm898uGn/SR0nwe3AN3
- iHVsccCToTrwXXPJSNV4orBHtTk4Fc6/3eHMh3soflp+RSHy3KJhuhXC+mLM2CR/XUuh
- NjyKAHzlRKlztEV0JDyccVSdBIlasI7kodjxHGsRPh2uOwRJLwQCzKn8oyg8ZDNnVvLK
- ieBMFshcyUIxKfdd9j3cg2ZaLtbz+ImJ78PgW56pa5sBVYjBiKRwKvgmxz7SlPUYutD8
- dgRw==
-X-Gm-Message-State: AOJu0YwyT/KQiwn76TcmeNuonK65C5727XY9lc5E8C61uttKLe1nzuJM
- N2yqRIWcwRImf3fMIJgImzmKsi59B+MuBx87snEin1DVxqaeMF7LQxn9OZ6i1gSti8zokWowdeF
- 7xViBKMNcI/6wpUI7K55q3SkUZUQMM5BWlbRIKg==
-X-Google-Smtp-Source: AGHT+IFKlJ3tFhHX6KDZwHQ6LL/OkmWg2tjxYgb5hcaZ7h6dIs4HihsToVKU6KupXl0f6meQjuRduAyQaMucLkFjB18=
-X-Received: by 2002:a2e:87c4:0:b0:2cc:830f:69f8 with SMTP id
- v4-20020a2e87c4000000b002cc830f69f8mr2542096ljj.11.1706494967927; Sun, 28 Jan
- 2024 18:22:47 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706496483; x=1707101283;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=EP9BDnUkx7JbYrjAyE4ZwFUfQkAMz3WRWSw7MYP6SYk=;
+ b=qTtXNFL45oB3PEIOV//Uon759Zj4pZy4dPIsBtJ3ZtltYlF4ZObxs+CQg5aZgSDM7O
+ b6Lf5+Oq2rs+oiRgXNf+kMWGKHwqLDlvmxP3MzUGQN++MkE8pittxNFeSALyxHV3TzPZ
+ nem91CRmo858408vXtQ4nmCb8sYUDqdEtujR4HhLrydYRYIHlCYiyh4Fyzbobw3sgk0R
+ kqBXaQckravbq2oYa+TfjmLmq2pwACN0XI79+XQJ8Ul4P3V78xllQ+1AF5Y7aLeZ/P7d
+ u2XEPSEyoM4SMnpmeGjeuZvJLUYQ4gUAMkCrVSqiQU7cp9A6avC6N47y5DFmpHZWC+NZ
+ mMnA==
+X-Gm-Message-State: AOJu0YzaNY8aBTFNRlwy/yqFIJxDCUxB9yCaym5joUD1WH77ICoIYLxb
+ N8jXk3lcxNabcEWJqN/gSVcppPkJC/HSqpx93YGayG2eQ6s8sJw/NEvsqLUHYhrIuc9rgq+ZOYk
+ hFh2LwSAwP1mvKMpgYEaxXqz42ak=
+X-Google-Smtp-Source: AGHT+IGyFkHz9MPT9Xd4mnDe5ZiO+EXraYRlBMcfnifGvSjp9jKYOeMe8F6uZXaMQN5FHRm+1bc9bb+C+vPFT1NMjqk=
+X-Received: by 2002:a05:6402:27d0:b0:55e:d8a8:ef6d with SMTP id
+ c16-20020a05640227d000b0055ed8a8ef6dmr2325720ede.35.1706496482191; Sun, 28
+ Jan 2024 18:48:02 -0800 (PST)
 MIME-Version: 1.0
-References: <20240122072617.1104227-1-masahisa.kojima@linaro.org>
- <5da90978-3d5d-4458-b2c9-476a7e390406@gmx.de>
- <CADQ0-X8mRuLnG132hhNr4tZF+9neb=8wjrjBXbJ_bx8LfdhL2w@mail.gmail.com>
- <f5dc6d03-985f-4ab3-a6fb-eaa87593d630@gmx.de>
-In-Reply-To: <f5dc6d03-985f-4ab3-a6fb-eaa87593d630@gmx.de>
-From: Masahisa Kojima <masahisa.kojima@linaro.org>
-Date: Mon, 29 Jan 2024 11:22:36 +0900
-Message-ID: <CADQ0-X_1T9ZrvFKpxXGXYzPPixeWF64m7AB1Z1A5Yh=MqnVrzQ@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: check efi_get_variable_int return value
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20240125140502.22400-1-o451686892@gmail.com>
+ <20240125140502.22400-2-o451686892@gmail.com>
+ <20240126112028.GA62785@e130802.arm.com>
+In-Reply-To: <20240126112028.GA62785@e130802.arm.com>
+From: Weizhao Ouyang <o451686892@gmail.com>
+Date: Mon, 29 Jan 2024 10:47:51 +0800
+Message-ID: <CAHk0HotF6HVcPBk4CABR=k9k7OcwJn2Z+qw6GUXJAJw+7Oi3tA@mail.gmail.com>
+Subject: Re: [PATCH 1/3] firmware: psci: Fix bind_smccc_features psci check
+To: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Tom Rini <trini@konsulko.com>, Etienne Carriere <etienne.carriere@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>, 
+ u-boot@lists.denx.de, nd@arm.com
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,81 +95,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 26 Jan 2024 at 21:58, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 26.01.24 12:36, Masahisa Kojima wrote:
-> > Hi Heinrich,
-> >
-> > On Fri, 26 Jan 2024 at 16:20, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >>
-> >> On 1/22/24 08:26, Masahisa Kojima wrote:
-> >>> efi_get_variable_int() may fail, the buffer should be
-> >>> cleared before using it.
-> >>>
-> >>> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-> >>> Addresses-Coverity-ID: 478333 ("Error handling issues")
-> >>> ---
-> >>>    lib/efi_loader/efi_firmware.c | 8 ++++----
-> >>>    1 file changed, 4 insertions(+), 4 deletions(-)
-> >>>
-> >>> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-> >>> index 9fd13297a6..fb83fa8113 100644
-> >>> --- a/lib/efi_loader/efi_firmware.c
-> >>> +++ b/lib/efi_loader/efi_firmware.c
-> >>> @@ -407,11 +407,11 @@ efi_status_t efi_firmware_set_fmp_state_var(struct fmp_state *state, u8 image_in
-> >>>        /*
-> >>>         * GetVariable may fail, EFI_NOT_FOUND is returned if FmpState
-> >>>         * variable has not been set yet.
-> >>> -      * Ignore the error here since the correct FmpState variable
-> >>> -      * is set later.
-> >>>         */
-> >>> -     efi_get_variable_int(varname, image_type_id, NULL, &size, var_state,
-> >>> -                          NULL);
-> >>> +     ret = efi_get_variable_int(varname, image_type_id, NULL, &size,
-> >>> +                                var_state, NULL);
-> >>> +     if (ret != EFI_SUCCESS)
-> >>> +             memset(var_state, 0, num_banks * sizeof(*var_state));
-> >>
-> >> Hello Masahisa,
-> >>
-> >> We allocate var_state with calloc(). So it is cleared before we call
-> >> GetVariable(). Do we have an implementation of GetVariable() that would
-> >> fill it with data before returning an error code?
-> >
-> > No, current GetVariable() implementations do not fill the buffer
-> > when GetVariable() returns an error.
-> > This is why my original implementation does not clear the buffer in
-> > case of error.
-> >
-> > Anyway, I agree with your previous comment.
-> > I think it is better to clear the buffer in case of error for safety,
-> > because UEFI spec does not say GetVariable() will not fill the
-> > buffer in case of error.
->
-> In this case I guess malloc() is good enough. No need to use calloc().
+Hi Abdellatif,
 
-OK, I will fix it.
+On Fri, Jan 26, 2024 at 7:20=E2=80=AFPM Abdellatif El Khlifi
+<abdellatif.elkhlifi@arm.com> wrote:
+>
+> Hi Weizhao,
+>
+> On Thu, Jan 25, 2024 at 02:05:00PM +0000, Weizhao Ouyang wrote:
+> > According to PSCI specification DEN0022F, PSCI_FEATURES is used to chec=
+k
+> > whether the SMCCC is implemented by discovering SMCCC_VERSION.
+> >
+> > Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
+> > ---
+> >  drivers/firmware/psci.c   | 2 +-
+> >  include/linux/arm-smccc.h | 1 +
+> >  2 files changed, 2 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/firmware/psci.c b/drivers/firmware/psci.c
+> > index c6b9efab41..894be8128d 100644
+> > --- a/drivers/firmware/psci.c
+> > +++ b/drivers/firmware/psci.c
+> > @@ -135,7 +135,7 @@ static int bind_smccc_features(struct udevice *dev,=
+ int psci_method)
+> >           PSCI_VERSION_MAJOR(psci_0_2_get_version()) =3D=3D 0)
+> >               return 0;
+> >
+> > -     if (request_psci_features(ARM_SMCCC_ARCH_FEATURES) =3D=3D
+> > +     if (request_psci_features(ARM_SMCCC_VERSION) =3D=3D
+> >           PSCI_RET_NOT_SUPPORTED)
+> >               return 0;
+>
+> I suggest we add checks on the SMCCC version like this:
+>
+>     if SMCCC_VERSION >=3D 1.1
+>        assume SMCCC_ARCH_FEATURES is supported
+>        discover arch features and bind drivers/devices
+>     else
+>        error
 
-Thanks,
-Masahisa Kojima
+Okay, I will add it.
+
+BR,
+Weizhao
 
 >
-> Best regards
+> For more details [1][2].
 >
-> Heinrich
 >
-> >
-> > Thanks,
-> > Masahisa Kojima
-> >
-> >
-> >>
-> >> Best regards
-> >>
-> >> Heinrich
-> >>
-> >>>
-> >>>        /*
-> >>>         * Only the fw_version is set here.
-> >>
+> [1]: SMC Calling Convention 1.5 (https://developer.arm.com/documentation/=
+den0028/latest/)
 >
+> SMCCC_ARCH_FEATURES MANDATORY from SMCCC v1.1
+>
+> The implementation of this function can be detected by checking the SMCCC=
+ version. This function is mandatory
+> if SMCCC_VERSION indicates that version 1.1 or later is implemented.
+>
+> [2]: Linux checks SMCCC v1.1: https://elixir.bootlin.com/linux/latest/sou=
+rce/drivers/firmware/psci/psci.c#L597
+>
+> Cheers,
+> Abdellatif
