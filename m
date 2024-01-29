@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55050C47DDB
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 17:56:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E30EC47DB3
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 17:56:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AB9787DB9;
-	Mon, 29 Jan 2024 18:55:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D941B87DC2;
+	Mon, 29 Jan 2024 18:55:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="I4jXI8Ra";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="R61HtsQV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1A8A87DC1; Mon, 29 Jan 2024 18:55:43 +0100 (CET)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id 4113187BDF; Mon, 29 Jan 2024 18:55:53 +0100 (CET)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCC5E87DB9
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 18:55:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EE12B87DC2
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 18:55:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-6002317a427so24680557b3.2
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 09:55:41 -0800 (PST)
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-dc68150f46fso1101644276.3
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 09:55:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1706550940; x=1707155740; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1706550949; x=1707155749; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=EazdJiCXqmjUpid2y8fHUChpeYt/eeU8OR9nqJlvQQM=;
- b=I4jXI8RasLz/13rU4xdB2xKS9Lo4ZKfNYdCV5h5j3MPNM1P6hM1dAI2NFf1Q0oPH0d
- cMxjUO2KudsixHFPCuGfeaaQh+Dr8ouN/xqEEKKUVoiZn0rItsHAoT2l564Xi/C/Iqbr
- QPrYK3Hw53UNR8RCDCtg7UWzeoC20PeUh/6IA=
+ bh=RbNgooIDVua8rtysxwQclvj8DtNvqqlvvISW7liWHsE=;
+ b=R61HtsQVRIrICblqxvJndzn9+RGi4ueT074KDNpPgv569aOUA/hrwj2TGlRh2GCymX
+ VhEvOGPKLb9q+QWRKyw3ZltU5P2LyMN+3+1WHSkh0lFoOUNRmxWDuVNCTKTufSGgYC1F
+ 0wxFE3jEvTFVeASbWODI2RfOvttuFCPuqbw9Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706550940; x=1707155740;
+ d=1e100.net; s=20230601; t=1706550949; x=1707155749;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EazdJiCXqmjUpid2y8fHUChpeYt/eeU8OR9nqJlvQQM=;
- b=NSs2+W2QknHVUYeC4a97qSPuqmUILCeV17e/AEW/KEdKe3NZOfKDQmjQ15ROS0JecF
- lf7CJyHiCECkDWnbZzhfVM5mT7IWx7wJdcWWgx6BOyd8kwIMGkGhGgA0vsEDF5fXd9Kn
- F0uXtRkp/YEAXaBQHlhinn3Y00H5JvLQsKn1Y2IgluuUoQpW6GWDQ3BOcOiofLc7Vj1c
- W/gOj4rhvNonYgCdTb8vpKXPS4dqsniw3aLRqwcOl+6Q4q14R96tYrePphV/FxFISmrZ
- +CcrhqKS+u4+qOhJzkkl7pUniYVGTSlOKAvgFg3WTRPyaoIXWnxFSJIIOyaxIINRI3ga
- c9MQ==
-X-Gm-Message-State: AOJu0Ywf7MUlVdPcBoW1Ts4ANEFMe8dWmPwxaIjT8hUkJDccJ3qqE4Wg
- Sfi8gZ4888p//PIU6GSnF0sEKgeZM3Rsv/JcALrdZil4IPOpD1Iw4lsl29LyYkh/G+J1yjV9e3B
- f
-X-Google-Smtp-Source: AGHT+IF6vuFMd+DEcIF1FMfUehF83TDYFM1kvjERpZd8ICN9icpmmTbqIhSVbzOVL6F9AWFc5PXOyA==
-X-Received: by 2002:a0d:f4c3:0:b0:5ff:55f6:7537 with SMTP id
- d186-20020a0df4c3000000b005ff55f67537mr4444736ywf.5.1706550940623; 
- Mon, 29 Jan 2024 09:55:40 -0800 (PST)
+ bh=RbNgooIDVua8rtysxwQclvj8DtNvqqlvvISW7liWHsE=;
+ b=qgkaSdrJATxexeEI3Aa6WuuU+FGcDzV7ZeOciF9miN3RlVcySnZgC0RHRujWPIM4Th
+ yawv2Pm/cTadDLPUN1rZC1+R6hH9AlGpqOY+9z2g3Cg4d+apuKL3+TCYAH2GM0Vv81NY
+ fCWA/1bKfXotNfUJuzLJe/za1mrlJ2tAoKIxV5KdZ5ymJsm5d5PAS70eOo+6PM+XHvbH
+ GsyEg5o7/eu0Q+joYsB8TJbC92hVSG7nThJGR5hCkkfbw12Rc1np1zEP2TtqbTaiAjp8
+ /LMDRx+XExjFupSY2tjibnBz5a/39bnCec1nT8x21FvZwtK75n0tTVQ+boZ9KDPZsXFB
+ AVAg==
+X-Gm-Message-State: AOJu0YxmZn66NzlNGvXbES+4zxk5pr/+V6V3nrsT/6MHMTUrUolstjoN
+ YbRAzH9zHACDRb3ok99iwJGuDlNdJkTMrVwD+KemEkii45Rphi6LOlDZb+lW5U0=
+X-Google-Smtp-Source: AGHT+IEY9Plb5Jtnp904TLpuh86l/y0l3H145ZoKY/YGCVZE4Nx/WqSZ5t0NKZsEQBQ8sbwC9FgrMQ==
+X-Received: by 2002:a05:6902:2742:b0:dbd:4dca:7082 with SMTP id
+ ea2-20020a056902274200b00dbd4dca7082mr4278475ybb.34.1706550948951; 
+ Mon, 29 Jan 2024 09:55:48 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- q131-20020a819989000000b00600392410ffsm2631389ywg.73.2024.01.29.09.55.39
+ f128-20020a255186000000b00dc25528fe9fsm2405452ybb.9.2024.01.29.09.55.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jan 2024 09:55:39 -0800 (PST)
-Date: Mon, 29 Jan 2024 12:55:37 -0500
+ Mon, 29 Jan 2024 09:55:48 -0800 (PST)
+Date: Mon, 29 Jan 2024 12:55:46 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Love Kumar <love.kumar@amd.com>
 Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
-Subject: Re: [PATCH] test/py: usb: Add tests for USB device
-Message-ID: <20240129175537.GK1152441@bill-the-cat>
-References: <5b52177849019cb9a9847c987032343c0dc280d7.1705665742.git.love.kumar@amd.com>
+Subject: Re: [PATCH] test/py: scsi: Add test for scsi commands
+Message-ID: <20240129175546.GL1152441@bill-the-cat>
+References: <3f58ca31c93ba7fa3e0981035b251a5ebcb150ec.1705663831.git.love.kumar@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="aOqGkF6G/nYUzWcI"
+ protocol="application/pgp-signature"; boundary="pGSv0REJ66sGmV2k"
 Content-Disposition: inline
-In-Reply-To: <5b52177849019cb9a9847c987032343c0dc280d7.1705665742.git.love.kumar@amd.com>
+In-Reply-To: <3f58ca31c93ba7fa3e0981035b251a5ebcb150ec.1705663831.git.love.kumar@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,17 +91,19 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---aOqGkF6G/nYUzWcI
+--pGSv0REJ66sGmV2k
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 19, 2024 at 07:56:02PM +0530, Love Kumar wrote:
+On Fri, Jan 19, 2024 at 08:07:13PM +0530, Love Kumar wrote:
 
-> Add the test cases for usb commands to test its various functionality
-> such as start, stop, reset, info, tree, storage, dev, part, ls, load,
-> and save. It also adds different file systems cases such as fat32, ext2
-> and ext4.
+> Add a following test cases for scsi commands:
+> scsi_reset - To reset SCSI controller
+> scsi_info - To show available SCSI devices
+> scsi_scan - To (re-)scan SCSI bus
+> scsi_device - To show or set surrent device
+> scsi_part - To print partition table of selected SCSI device
 >=20
 > Signed-off-by: Love Kumar <love.kumar@amd.com>
 
@@ -111,22 +112,22 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---aOqGkF6G/nYUzWcI
+--pGSv0REJ66sGmV2k
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmW35pkACgkQFHw5/5Y0
-tyy+Zgv9EJb/lzfse9nSDqWRYuprMtrBk2uedjeX718o+PAJb+bEVb9f97MoI3jE
-eGMf+EfqzHQe7uA0yedorV0GnkmgvptzLRsPwGR9xPsbNqw3vzJwPGFNWhU8sF3I
-T+bO9OBfnQ3ZuEpv7sir2uPnsOsQAflFPDnf2hTboCn+bhNBpIA7NSpVT1zwz9AE
-zZjTLt9t2acs7ANrThk4S3v7vi4B4rL90O0gvYaDda5BgoPVm/LkkOTmHzhmthYW
-de5uT63Mb3vDwACZEfbGpC9XKnlJn4SJ28lTqVYZ18Ju9xhvSCo66tzOw0FndddC
-sRKiEPYEoY0Z0r3I8PcFnwRu5AJw8S9rkMPIjgjQ7hEwH+iA2zl6xg9XUdYok7Sd
-cUMUoEFKUTSqT8HecUR+SrQIw4pt58+YKJOdIiwfHLwaXb6Nw9Uu+HOqIK7BZAto
-hQQJyaX9vJBzpVWt37yFJw2EaWsRB2DAJ1vbHqt35wKLZYExyFId09KcOvcp6ugE
-xGbG38tf
-=A6D2
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmW35qIACgkQFHw5/5Y0
+tyyAIgv/a3AZfnGikVzdsVxTHyZSLrXvVn2qEUxML+ZIpwI7dP5QoBsyYuBFI7kK
+jMhuleROpdbG1tJgvohyj16cRqLMxz2m6E/gxUtnX5wzd04kW09A5hqQrD2BQ/mg
+33Ax1Wbg+BbSBjb78MQhhLFp5/Z8NdLCdtJZ77bUYqHr7YE4ifdbgYVJIFaiu8kZ
+kNshURIv2zkFw38/vobEywSFFw084PIWNIC1uvP7eznkfWu/g0JexWpzcgnNbIgK
+Sz7ZwFgcXzh2ilGGBDJGiflMwnsxOKPAztHRvdRSOCJJaNvXeRSS4oAksmA1dPDZ
+iigu7P/PPiUNJJDGnBM78+fK3KCBVmulIXr1reZpEu2ivi5Rjf6vFR/526/ZK9jo
+4zwQF+Bgh7sHGzjL5T/OSidW1jBrS8P7pbIJcIPO9AxqmqmgonAGmCwS2hlu8CbE
+3N+6sT2iMT+stuzCcSB8lMYy0mur0GmfeXyOzbMxA40m7incl9o1qLLzbf2rncfe
+PV6+cQWN
+=EFfO
 -----END PGP SIGNATURE-----
 
---aOqGkF6G/nYUzWcI--
+--pGSv0REJ66sGmV2k--
