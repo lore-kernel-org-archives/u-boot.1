@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98D51C47DA9
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 12:03:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86242C47422
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 12:07:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F53C87C9B;
-	Mon, 29 Jan 2024 13:03:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6DAFB87C37;
+	Mon, 29 Jan 2024 13:07:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="TI+mZ/kF";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="OkljTSdX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E00387C37; Mon, 29 Jan 2024 13:03:29 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id 9438287C9B; Mon, 29 Jan 2024 13:07:21 +0100 (CET)
+Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
+ [IPv6:2607:f8b0:4864:20::b34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DFEEE87CFE
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 13:03:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A494877DA
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 13:07:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-5ff7ec8772dso27422307b3.0
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 04:03:26 -0800 (PST)
+Received: by mail-yb1-xb34.google.com with SMTP id
+ 3f1490d57ef6-dc22ade26d8so2187343276.1
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 04:07:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1706529805; x=1707134605;
+ d=amarulasolutions.com; s=google; t=1706530038; x=1707134838;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iq2VF/LGK6hCW0sppxbtdQihaOFDWR/IAllkZGtvFWM=;
- b=TI+mZ/kFbGAoJpANXP7IDcL6BFAa6ofVOZyDg/gKJcTfj1p5W91+i1UanhjWbA1mdh
- oRJnuuBMdHso54oG7GJ1yd+ZFe7pZj/hEjNdADuMiWNiu/cOqQwCjAt8dBl1BsauvOiK
- tpxRT8lrquh1WqAXMV/DZ7F0lJvxrdVc11O9o=
+ bh=Fdey2SNi9ypVkk7NpUglkMKuNyZMA+hzkultGcfWMQY=;
+ b=OkljTSdX+Dm7L5vrTxv/2pW5yOBS8ZsqsUtQPeJmwnNwHov9RZyOyI+nepEJcUj7lt
+ tBQo8aWo2fX54OC/rK1NPvtiJMueucRo4rplagkQ1+BA6OO3jvKIGxPn2VqB4zmSBZCa
+ +VN7mZnc+j02JktqjXAKmxcHLLsJ0AuYgKkzw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706529805; x=1707134605;
+ d=1e100.net; s=20230601; t=1706530038; x=1707134838;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iq2VF/LGK6hCW0sppxbtdQihaOFDWR/IAllkZGtvFWM=;
- b=ijA9uD4L2u7QmmlWk8vFYr1pq/lNUA1CNeiwjEjyHBTwGJDgLevdDLmi6CB2+cwn3j
- ULSqlg8PAYlwbT0B91TudoB4uWZzT/s/VcWBXM57ttiPCF2JcXtMMUeZXoQEnhVhcMN2
- XOdF2KZaD6GLettTaGBCFUIt1SSGzCl7N4T+d7hi/FdBNjdtkQXBLAFEJiYbwk3WgJiw
- CqxCnSiFONgD5aEHCEC4g8aV/Rxw6Rr4rHB9NYt7QUAjo+5EPQwo2UHPvANAuHDNvPEa
- CVNqItZ23nXo3uio4hAWPGkhQfYvd9AFd7j6P9BEU49Hnc5cWVVkNa1IX0dmA+VXhWvs
- zwVQ==
-X-Gm-Message-State: AOJu0YxhpKzoGjzuy3CvkZJVPOlLFlpwtw/S6v3OgIDWG9I5ezQq4MkA
- rWIAchaPQbFyzvfZs+rEWMv39PWiVa6xy4gJXD1Lnz1oxTss4IhfQjBwS5G/n7FhffwOP6ZlalU
- 9kTJn4leBj/8pcm21uZgESdk80m1AYWv/wpJroQ==
-X-Google-Smtp-Source: AGHT+IHt4RSkR5p0IBABniSPGL/fLkLG67LIr2Y8qx84zJk654ajftg6fMUEUbBaWLi9CTJHBtxj+rRcZovm0gUuLqA=
-X-Received: by 2002:a5b:406:0:b0:dc2:5140:8b4e with SMTP id
- m6-20020a5b0406000000b00dc251408b4emr2529912ybp.91.1706529805604; Mon, 29 Jan
- 2024 04:03:25 -0800 (PST)
+ bh=Fdey2SNi9ypVkk7NpUglkMKuNyZMA+hzkultGcfWMQY=;
+ b=AzD3uDUe5KkNrTzlhTv1L7ik6OHbYM0jNaXyS8bCKPX7zCjGolR1mOq+18Di5q95Nw
+ jI1LvQwCaY4o5XgXR7tWn5CspbMs3UdBLiir3t9YQrtjRqLHGq+I6xRix3NI/asNyKeQ
+ ZobUXzjV4lDlFFU9t3ceevxirSDgjFacq4RCaP7bBi2fbfQbxsHVQm2WB4ISRiBWoyNP
+ ZaZm8rZ1jmjjoytXFuezzQr0mXJl472zdZeWKlWxHsjzn0CpiymLHUGXNJZQQeyby/0X
+ K2Uf1qhPZurVXE45V/MCI/7r+gMbTFSfcNxTDO5gAWRh0K6ZjwHNmAUAwqKSIojE6583
+ fXEQ==
+X-Gm-Message-State: AOJu0Ywy5DlxHGFwHZW3G1MxU6GbRutAsdH1jKM5qvg9v/oHgySqMfd6
+ xTTbk9jslVJxbfaQ9GDYl/YHfeYaRgSxpjK5VsTOc9w5mH53UJ8chfhsRZauKbch6oQldDWf43c
+ I4hysYyXsEIn1GHC18dC6srOdFKMdvIfYhZGMeg==
+X-Google-Smtp-Source: AGHT+IEMUfHpwVKY+CJI8nojTGL7hmMAyJqQiS3N8tTAAEwuQqxnL96zaSFLwl2GyGfq2QnFCtCeE21+7Gf8tcDbT9Q=
+X-Received: by 2002:a05:6902:2388:b0:dc2:5573:42df with SMTP id
+ dp8-20020a056902238800b00dc2557342dfmr2394631ybb.25.1706530037752; Mon, 29
+ Jan 2024 04:07:17 -0800 (PST)
 MIME-Version: 1.0
-References: <20240128063746.1552081-1-tejas.arvind.bhumkar@amd.com>
-In-Reply-To: <20240128063746.1552081-1-tejas.arvind.bhumkar@amd.com>
+References: <CAMty3ZCo4NyOo8c7Msn5Ub+B7eTA-MEoFXh7_jeFPVUvVWMyPg@mail.gmail.com>
+ <20240116053834.3628-1-ssunkkan@gmail.com>
+In-Reply-To: <20240116053834.3628-1-ssunkkan@gmail.com>
 From: Jagan Teki <jagan@amarulasolutions.com>
-Date: Mon, 29 Jan 2024 17:33:14 +0530
-Message-ID: <CAMty3ZA0V6zgaa28Lje_O_TyEYT+ttMcOTZS8oiZbMmb0s+f2w@mail.gmail.com>
-Subject: Re: [PATCH v2] spi: cadence_qspi: Address the comparison failure for
- 0-8 bytes of data
-To: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
-Cc: u-boot@lists.denx.de, n-francis@ti.com, d-gole@ti.com, 
- michal.simek@amd.com, venkatesh.abbarapu@amd.com, git@xilinx.com
+Date: Mon, 29 Jan 2024 17:37:07 +0530
+Message-ID: <CAMty3ZB2A9gZtkMX-je6qovq6r0GBhyG0NWX+y+PeoDw3=02DA@mail.gmail.com>
+Subject: Re: [PATCH] Add XMC
+ XM25QH128C/XM25QH256C/XM25QU256C/XM25QH512C/XM25QU512C
+ site: https://www.xmcwh.com/site/product
+To: Ssunk <ssunkkan@gmail.com>
+Cc: chiawei_wang@aspeedtech.com, u-boot@lists.denx.de, vigneshr@ti.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,25 +88,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Jan 28, 2024 at 12:08=E2=80=AFPM Tejas Bhumkar
-<tejas.arvind.bhumkar@amd.com> wrote:
+On Tue, Jan 16, 2024 at 11:09=E2=80=AFAM Ssunk <ssunkkan@gmail.com> wrote:
 >
-> The current implementation encounters issues when testing data ranging
-> from 0 to 8 bytes. This was confirmed through testing with both ISSI
-> (IS25WX256) and Micron (MT35XU02G) Flash exclusively in SDR mode.
->
-> Upon investigation, it was observed that utilizing the
-> "SPI_NOR_OCTAL_READ" flag and attempting to read less than 8 bytes in
-> STIG mode results in a read failure, leading to a compare test failure.
->
-> To resolve this issue, the CMD_4BYTE_FAST_READ opcode is now utilized
-> instead of CMD_4BYTE_OCTAL_READ, specifically in SDR mode.
->
-> This is based on patch series:
-> https://lore.kernel.org/all/cover.1701853668.git.tejas.arvind.bhumkar@amd=
-.com/
->
-> Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+> Signed-off-by: Kankan Sun <ssunkkan@gmail.com>
 > ---
 
 Applied to u-boot-spi/master
