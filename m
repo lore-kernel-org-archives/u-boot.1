@@ -4,79 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBE64C47DA9
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 23:40:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5799FC47DA9
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 23:55:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6AE787BDB;
-	Tue, 30 Jan 2024 00:40:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B188C87BDB;
+	Tue, 30 Jan 2024 00:55:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dMF11z5A";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TZOWvZcQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22A5887BEE; Tue, 30 Jan 2024 00:40:21 +0100 (CET)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id 687B687BEE; Tue, 30 Jan 2024 00:55:43 +0100 (CET)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB9D187B77
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 00:40:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 484DB87B77
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 00:55:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-602c714bdbeso25491457b3.1
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 15:40:18 -0800 (PST)
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-602a0a45dd6so31083207b3.1
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 15:55:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1706571617; x=1707176417; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=LB8/KRUwBhjfYUkfSqxhvUh52i9YKvca5uWas7qw6OQ=;
- b=dMF11z5AK0OLKKsUvBKGQTkdbGyM9SrFefz5Eqwr9+MhglvywvfHXbZOQFKbM/6BnP
- UnfNzME9uRnug5PkSN2ehFLLI/kirljA3ws2jBBGAPerIhxrgX48fEesFfVwiTAdpcit
- Go5ShBn3dMXGBYGXfmpNMR3yiosZ9ByVZH5Zk=
+ d=konsulko.com; s=google; t=1706572540; x=1707177340; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ZL1FW0lEq/DX13jB7HvCpe/2KReZwy4tdMSfxaf2ako=;
+ b=TZOWvZcQ834rddkn5EO5EaS7GfNF0xg4lNoQdinVpRW44KMjCCGLk1W0NqwttG8zwF
+ S4O77xt3JgzuzpwvrpPdgGWd47LinI7X7/CIPSY9VqEg5VdN/bBbxpdaAsa5JV9K7nSp
+ MfKISOGreRV+cZLssAi+43oikLSt2HL5QnFf8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706571617; x=1707176417;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LB8/KRUwBhjfYUkfSqxhvUh52i9YKvca5uWas7qw6OQ=;
- b=nfmALNF1aEtna3nxjmavAqzE0GPzcHoVCV9rns4H1/HfSu/ZZYV80iezh+yaipCxy1
- IzBp+3gCKY4g45CWDBcJE+YOMDffv9c3y10/IJeHomx4KVx5+QA1X0LGHwgtBRQtZW3z
- H9rVFKB9pKV8VffoLsqXLXjeHlMARGxIkCQuST0CGJNFjPj0A5qKLuIuQNw3GrjWPxQl
- yZvhsZkaBZt31jTOnWUPWAUnK/XWvcZBTueVLcZe9iwec9AIwKmn50NATz2r/Ls4+/FI
- Sq2UShUB1e2I22iHuH3/2TKQk0wwVWP9yn8qikJANIwjPezf+mIIHirfHJisq1nMkFpf
- o5vw==
-X-Gm-Message-State: AOJu0Yzk2SrANtYsOpk1tOInvVTZt/LVhAKIGC+bXVHh8xCnNP3UXC7U
- 3QurcApuv6N3iTQN1FOmodIs50qPt0QmnfLLps0DPWaORYSBpmDYB+HkSaG1DwBWI+OawK733zd
- l
-X-Google-Smtp-Source: AGHT+IG0wYI8zR09kBUMcGveu4Ctc6xV9NVjRx+rSQXE7Dta5AGy2yybFEQs9qIoqlTKDoNSPjj2nw==
-X-Received: by 2002:a81:ac5f:0:b0:602:9fc4:bc82 with SMTP id
- z31-20020a81ac5f000000b006029fc4bc82mr28620ywj.23.1706571617026; 
- Mon, 29 Jan 2024 15:40:17 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706572540; x=1707177340;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZL1FW0lEq/DX13jB7HvCpe/2KReZwy4tdMSfxaf2ako=;
+ b=WbGcxOa1Kup/bcJwQsNxGgaZIOk9YpFVCemRRpPgkVoAkoQ+Z8JBLORVaRfYJgVhWd
+ ZlYtOVeNPW7iG3auuJ0hq8cxJLa4fMbSt8PlRQdpCf9hy7F299P/g7Zh3HioWnKT94Em
+ 7WLgQH+TzPUCZF08G9BSleP/sCByjdmc9DSF3sn7TCONe5DdBtk03Eyq3Vjcwjk/C/cr
+ 4VpYyG5Na6L57T/mGgRLG+QbPAWmocDqcO/tb4e8M5gs2Zqcp0JELfj1OPQnse+WKnHE
+ L6E8BspiFSxJmu0VPqb366fVLbpzpERarH3pN4tGTsgq2ogyoqC86WKUb7H6Ai+YSUTm
+ OIhA==
+X-Gm-Message-State: AOJu0YzBcTId/Imk/drzGeYjc/mDRI/39aa/TEAwJhOmJz9mh/hhVugQ
+ fuQw4XzLiaVCRUj5kgIhXasB36zCx0gM6AOtCTLKG5hdRNbxUbq/HLvbWzt8sxzJ/9r+uBYBSAV
+ 3
+X-Google-Smtp-Source: AGHT+IGyZd+t2gFnWbb7F9AiCpHqI0muuPLqiwSGAeJsbcmfox31xcMu+gBRb4ajhSQ/2NLGOvmUtw==
+X-Received: by 2002:a05:690c:3603:b0:602:c2e0:39e4 with SMTP id
+ ft3-20020a05690c360300b00602c2e039e4mr6422987ywb.16.1706572539846; 
+ Mon, 29 Jan 2024 15:55:39 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
  [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
- u79-20020a0deb52000000b005ff8b88a631sm2831748ywe.133.2024.01.29.15.40.16
+ fq14-20020a05690c350e00b0060076613cbesm2809386ywb.86.2024.01.29.15.55.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jan 2024 15:40:16 -0800 (PST)
-Date: Mon, 29 Jan 2024 18:40:14 -0500
+ Mon, 29 Jan 2024 15:55:39 -0800 (PST)
+Date: Mon, 29 Jan 2024 18:55:37 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- Wei Ming Chen <jj251510319013@gmail.com>, Alexander Dahl <ada@thorsis.com>
-Subject: Re: Pull request efi-2024-04-rc1-4
-Message-ID: <20240129234014.GN1152441@bill-the-cat>
-References: <4c82ae6a-c70b-4997-b023-8261ef6a1604@canonical.com>
+To: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Message-ID: <20240129235537.GO1152441@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zQ1CigNjbpj36GQC"
+ protocol="application/pgp-signature"; boundary="zL3wNefqe+ZQEN70"
 Content-Disposition: inline
-In-Reply-To: <4c82ae6a-c70b-4997-b023-8261ef6a1604@canonical.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,57 +88,86 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---zQ1CigNjbpj36GQC
-Content-Type: text/plain; charset=us-ascii
+--zL3wNefqe+ZQEN70
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 29, 2024 at 10:18:34PM +0100, Heinrich Schuchardt wrote:
+Here's the latest report.
 
-> Dear Tom,
->=20
-> The following changes since commit 526a865fe4fea59fb2638726c26e39557eb97f=
-dd:
->=20
->   Merge branch 'master-cleanup' of
-> https://source.denx.de/u-boot/custodians/u-boot-sh (2024-01-27 20:43:20
-> -0500)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-2024-04-rc1-4
->=20
-> for you to fetch changes up to 21489b4478a72d6c682f24dea80d5ac7790e2692:
->=20
->   efi_loader: check efi_get_variable_int return value (2024-01-29 11:31:44
-> +0100)
->=20
-> Gitlab CI reported no issues:
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/19460
->=20
+---------- Forwarded message ---------
+=46rom: <scan-admin@coverity.com>
+Date: Mon, Jan 29, 2024 at 6:51=E2=80=AFPM
+Subject: New Defects reported by Coverity Scan for Das U-Boot
+To: <tom.rini@gmail.com>
 
-Applied to u-boot/master, thanks!
+
+Hi,
+
+Please find the latest report on new defect(s) introduced to Das
+U-Boot found with Coverity Scan.
+
+1 new defect(s) introduced to Das U-Boot found with Coverity Scan.
+1 defect(s), reported by Coverity Scan earlier, were marked fixed in
+the recent build analyzed by Coverity Scan.
+
+New defect(s) Reported-by: Coverity Scan
+Showing 1 of 1 defect(s)
+
+
+** CID 480240:  Insecure data handling  (TAINTED_SCALAR)
+/cmd/efidebug.c: 192 in do_efi_capsule_esrt()
+
+
+___________________________________________________________________________=
+_____________________________
+*** CID 480240:  Insecure data handling  (TAINTED_SCALAR)
+/cmd/efidebug.c: 192 in do_efi_capsule_esrt()
+186
+187             printf("=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D\n");
+188             printf("ESRT: fw_resource_count=3D%d\n", esrt->fw_resource_=
+count);
+189             printf("ESRT: fw_resource_count_max=3D%d\n",
+esrt->fw_resource_count_max);
+190             printf("ESRT: fw_resource_version=3D%lld\n",
+esrt->fw_resource_version);
+191
+>>>     CID 480240:  Insecure data handling  (TAINTED_SCALAR)
+>>>     Using tainted variable "esrt->fw_resource_count" as a loop boundary.
+192             for (int idx =3D 0; idx < esrt->fw_resource_count; idx++) {
+193                     printf("[entry
+%d]=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D\n", idx);
+194                     printf("ESRT: fw_class=3D%pUL\n",
+&esrt->entries[idx].fw_class);
+195                     printf("ESRT: fw_type=3D%s\n",
+EFI_FW_TYPE_STR_GET(esrt->entries[idx].fw_type));
+196                     printf("ESRT: fw_version=3D%d\n",
+esrt->entries[idx].fw_version);
+197                     printf("ESRT: lowest_supported_fw_version=3D%d\n",
+
+----- End forwarded message -----
 
 --=20
 Tom
 
---zQ1CigNjbpj36GQC
+--zL3wNefqe+ZQEN70
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmW4N1sACgkQFHw5/5Y0
-tyx56wv/YUrI5ZzysywW7wDQGr0cfkYY2rhdl6XreQ1BFsnTseoD6HvUDA537dFN
-tcgX5VEDhdGoTIq7YkRE4AHGbNpdeWCDSJL4KWi4UmptDUQvOPkQJQUYS21YmKte
-swNhyvpPbVzwPP7AYznEUTr8Bo5rAvtlMVGXABKU/sZWE9FMDwH4sk41EiSNKZwb
-2nfvR7uNjWsc9DgzPo2BFWoEH5MsikHwgD/Kx0rEJAqfMNpE9w0g9FJcL0kRzt6t
-NwEHmEkM40+UfFf3jdP54nI05FA1skwNN7QkU8iMixeEbEQ5kzFpq3ZiPzzXQG6i
-BxkmXIINH0RXCaZxu0xS4atLVdjQ02WmauHnmqMED7bbc17T4xjgYAunSpE+x89L
-4bvCjxrZ36/1dVSak0wKJNLhfQPC0VmnoLKd62OWVBXinxiWQYGfUW4GXX6SiplV
-rrsF2LctSeVzns1nSX7iem0weAabiSjGrU31vx9Ai+u5N1fLVzBQN1G1iGhNPw8z
-dzhltJUl
-=SQ1c
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmW4OvYACgkQFHw5/5Y0
+tyxYGgwAk0CqscFqGba+R+WGMicDI9YaZkLbxVK/3yfrCvsFWJutA5y4oLHnrl0n
+CJEXSgFHbgaY6YcaVcvMA3sJBW+NERYaDa7c2HfTFWoIDfn1IV0mscKwoSzAnPDe
+2DGcNnN8l+xLeIjdMNaCOMmSOnlOwZfB2W+9MJCnZg6AhF8sL4DiDLY5fjE9mKuM
+tYShUEByMc93E7cbejRDlRmpuWPYv97K1J1mlwws/WYFrDhhEn9s2afIt/atyV45
+KypnNjBTpy1eo8I3tK9jqyZpml1/uXP/ITqeIxKDHNzBKKeFVOa0sKlWU890wQzv
+GNsb/cUj+4valhWXw4cKusr4b/8Qct2dC0agGT8BJ3lOTsmR8UAtcCoEYaacV05H
+NPPjX8Fpq8XeAP5ybu2S0kyFDo2gioAZbf9qst0LqiiWmMZpIe3LU2Rz+ueJ7FHd
+IASW/ZRUX7TvhRWGRLVVxmnyancExZ5l/mkB1ruEm1M5Ut0+Q920CLimuYIC8zzY
+DpIEn9Ls
+=tHuU
 -----END PGP SIGNATURE-----
 
---zQ1CigNjbpj36GQC--
+--zL3wNefqe+ZQEN70--
