@@ -4,76 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E30EC47DB3
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 17:56:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B75DAC47DDB
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jan 2024 18:03:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D941B87DC2;
-	Mon, 29 Jan 2024 18:55:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3349087C52;
+	Mon, 29 Jan 2024 19:03:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="R61HtsQV";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lqTTZSJ/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4113187BDF; Mon, 29 Jan 2024 18:55:53 +0100 (CET)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 83D1F87C68; Mon, 29 Jan 2024 19:03:32 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE12B87DC2
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 18:55:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7140387C20
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 19:03:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-dc68150f46fso1101644276.3
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 09:55:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1706550949; x=1707155749; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RbNgooIDVua8rtysxwQclvj8DtNvqqlvvISW7liWHsE=;
- b=R61HtsQVRIrICblqxvJndzn9+RGi4ueT074KDNpPgv569aOUA/hrwj2TGlRh2GCymX
- VhEvOGPKLb9q+QWRKyw3ZltU5P2LyMN+3+1WHSkh0lFoOUNRmxWDuVNCTKTufSGgYC1F
- 0wxFE3jEvTFVeASbWODI2RfOvttuFCPuqbw9Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706550949; x=1707155749;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RbNgooIDVua8rtysxwQclvj8DtNvqqlvvISW7liWHsE=;
- b=qgkaSdrJATxexeEI3Aa6WuuU+FGcDzV7ZeOciF9miN3RlVcySnZgC0RHRujWPIM4Th
- yawv2Pm/cTadDLPUN1rZC1+R6hH9AlGpqOY+9z2g3Cg4d+apuKL3+TCYAH2GM0Vv81NY
- fCWA/1bKfXotNfUJuzLJe/za1mrlJ2tAoKIxV5KdZ5ymJsm5d5PAS70eOo+6PM+XHvbH
- GsyEg5o7/eu0Q+joYsB8TJbC92hVSG7nThJGR5hCkkfbw12Rc1np1zEP2TtqbTaiAjp8
- /LMDRx+XExjFupSY2tjibnBz5a/39bnCec1nT8x21FvZwtK75n0tTVQ+boZ9KDPZsXFB
- AVAg==
-X-Gm-Message-State: AOJu0YxmZn66NzlNGvXbES+4zxk5pr/+V6V3nrsT/6MHMTUrUolstjoN
- YbRAzH9zHACDRb3ok99iwJGuDlNdJkTMrVwD+KemEkii45Rphi6LOlDZb+lW5U0=
-X-Google-Smtp-Source: AGHT+IEY9Plb5Jtnp904TLpuh86l/y0l3H145ZoKY/YGCVZE4Nx/WqSZ5t0NKZsEQBQ8sbwC9FgrMQ==
-X-Received: by 2002:a05:6902:2742:b0:dbd:4dca:7082 with SMTP id
- ea2-20020a056902274200b00dbd4dca7082mr4278475ybb.34.1706550948951; 
- Mon, 29 Jan 2024 09:55:48 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- f128-20020a255186000000b00dc25528fe9fsm2405452ybb.9.2024.01.29.09.55.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jan 2024 09:55:48 -0800 (PST)
-Date: Mon, 29 Jan 2024 12:55:46 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Love Kumar <love.kumar@amd.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
-Subject: Re: [PATCH] test/py: scsi: Add test for scsi commands
-Message-ID: <20240129175546.GL1152441@bill-the-cat>
-References: <3f58ca31c93ba7fa3e0981035b251a5ebcb150ec.1705663831.git.love.kumar@amd.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40TI3GqH065990;
+ Mon, 29 Jan 2024 12:03:16 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1706551396;
+ bh=T+B3LiRDa+qemzWfdCfE5Z9pdcb2LYJKEszLyVUbcrs=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=lqTTZSJ/nf4vbE0FTcJjPuqiYhp8LPrM3LWFGYoMW+OllDjCyD7nDAy0Vq9SkcfY/
+ uEQItZPNh3QwiHmuc2gBvs4IAIwAMz5Ym0iPps74DK++qdV0dh1yJNQ2DOdLpIHQf8
+ yLwmEyGIG2RN6Qk0BL32IhOdlE9C2gNTbQU3txCU=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40TI3GBJ023157
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 29 Jan 2024 12:03:16 -0600
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 29
+ Jan 2024 12:03:16 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 29 Jan 2024 12:03:16 -0600
+Received: from [10.24.68.115] (ti.dhcp.ti.com [10.24.68.115] (may be forged))
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40TI3APw038234; 
+ Mon, 29 Jan 2024 12:03:10 -0600
+Message-ID: <3a7c817b-de29-463a-b4b6-d62c0df66ade@ti.com>
+Date: Mon, 29 Jan 2024 23:33:09 +0530
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="pGSv0REJ66sGmV2k"
-Content-Disposition: inline
-In-Reply-To: <3f58ca31c93ba7fa3e0981035b251a5ebcb150ec.1705663831.git.love.kumar@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 02/16] arm: mach-k3: Add basic support for J784S4 SoC
+ definition
+Content-Language: en-US
+To: Nishanth Menon <nm@ti.com>
+CC: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean
+ Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Neha
+ Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Andrew
+ Davis <afd@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya
+ <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Aradhya Bhatia
+ <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>, Christian Gmeiner
+ <christian.gmeiner@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Roger Quadros
+ <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>, Ralph Siemsen
+ <ralph.siemsen@linaro.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>,
+ Sinthu Raja M <sinthu.raja@mistralsolutions.com>,
+ Udit Kumar <u-kumar1@ti.com>
+References: <20240119175043.3904751-1-a-nandan@ti.com>
+ <20240119175043.3904751-3-a-nandan@ti.com>
+ <20240119193403.kgzt2zcxa55wexr3@skedaddle>
+ <c5fd33d8-a1be-41e0-974e-7b4c5f80b318@ti.com>
+ <20240123204710.hlv4x4y3gst7utoe@squealing>
+ <2d566dde-5428-400e-a30e-47cb80ccf5d1@ti.com>
+ <20240129121917.j3sy2bkzu2berjkg@audition>
+From: Apurva Nandan <a-nandan@ti.com>
+In-Reply-To: <20240129121917.j3sy2bkzu2berjkg@audition>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,43 +99,81 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---pGSv0REJ66sGmV2k
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 29/01/24 17:49, Nishanth Menon wrote:
+> On 17:02-20240129, Apurva Nandan wrote:
+>> Hi,
+>>
+>> On 24/01/24 02:17, Nishanth Menon wrote:
+>>> On 20:21-20240123, Apurva Nandan wrote:
+>>> [...]
+>>>>>> +void k3_mem_init(void)
+>>>>>> +{
+>>>>>> +	struct udevice *dev;
+>>>>>> +	int ret, ctr = 1;
+>>>>>> +
+>>>>>> +	if (IS_ENABLED(CONFIG_K3_J721E_DDRSS)) {
+>>>>>> +		ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+>>>>>> +		if (ret)
+>>>>>> +			panic("DRAM 0 init failed: %d\n", ret);
+>>>>>> +
+>>>>>> +		while (dev) {
+>>>>> why loop on dev? is it possible to have ret != 0 and dev = 0?
+>>>>>
+>>>> Some variable needs to be used for loop condition, do you want it to be ret?
+>>>> or maybe you can suggest your idea for this please.
+>>>>>> +			ret = uclass_next_device_err(&dev);
+>>>>>> +			if (ret) {
+>>>>>> +				printf("Initialized %d DRAM controllers\n", ctr);
+>>>>>> +				break;
+>>>>>> +			}
+>>>>>> +			ctr++;
+>>>>> What is the use of ctr++ ?? please do a limit check for instances.
+>>>> This is to keep the logic independent of board evm, so that no include of
+>>>> EVM config is needed.
+>>>> ctr is just used to notify user about how many DDR are up during boot, else
+>>>> it is not needed.
+>>>>
+>>>> I can remove the ctr and printf, if you want.
+>>>>
+>>>> For a limit check, how can we get number of DDR instances on the EVM, I
+>>>> don't know, can you please suggest some way?
+>>>>
+>>>> There is no config that stores this info afaik.
+>>> Why? J784s4 has only specific number of controllerns, correct?
+>>>
+>>> A variant of the below -> but still have a question:
+>>>
+>>> while (ctrl < J784S4_MAX_CONTROLLERS) {
+>> Is J784S4_MAX_CONTROLLERS going to be a #define in j784s4_init.c
+>>
+>> Or a Kconfig option like:
+>>
+>> config DDR_MAX_CONTROLLERS
+>>      int "Max number of DRAM controllers"
+>>      default 4 if SOC_K3_J784S4
+>>      default 1
+>>      help
+>>
+> I dont see a need for Kconfig - but that is just me.
+Ohkay, sending with #define.
+>>> 	ret = uclass_next_device_err(&ret);
+>>> 	if (ret) /* Question: How do we differentiate between valid
+>>> 		  * failure and next instance not being present? */
+>>> 		break;
+>> how about:
+>>
+>>              ...
+>>              if (ret == -ENODEV)
+>>                  break;
+>>
+>>              if (ret)
+>>                   panic("DRAM %d init failed: %d\n", ctrl,  ret);
+>>              ...
+> What ever is appropriate.
+>
+>
+-- 
+Regards,
+Apurva Nandan,
+Texas Instruments.
 
-On Fri, Jan 19, 2024 at 08:07:13PM +0530, Love Kumar wrote:
-
-> Add a following test cases for scsi commands:
-> scsi_reset - To reset SCSI controller
-> scsi_info - To show available SCSI devices
-> scsi_scan - To (re-)scan SCSI bus
-> scsi_device - To show or set surrent device
-> scsi_part - To print partition table of selected SCSI device
->=20
-> Signed-off-by: Love Kumar <love.kumar@amd.com>
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---pGSv0REJ66sGmV2k
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmW35qIACgkQFHw5/5Y0
-tyyAIgv/a3AZfnGikVzdsVxTHyZSLrXvVn2qEUxML+ZIpwI7dP5QoBsyYuBFI7kK
-jMhuleROpdbG1tJgvohyj16cRqLMxz2m6E/gxUtnX5wzd04kW09A5hqQrD2BQ/mg
-33Ax1Wbg+BbSBjb78MQhhLFp5/Z8NdLCdtJZ77bUYqHr7YE4ifdbgYVJIFaiu8kZ
-kNshURIv2zkFw38/vobEywSFFw084PIWNIC1uvP7eznkfWu/g0JexWpzcgnNbIgK
-Sz7ZwFgcXzh2ilGGBDJGiflMwnsxOKPAztHRvdRSOCJJaNvXeRSS4oAksmA1dPDZ
-iigu7P/PPiUNJJDGnBM78+fK3KCBVmulIXr1reZpEu2ivi5Rjf6vFR/526/ZK9jo
-4zwQF+Bgh7sHGzjL5T/OSidW1jBrS8P7pbIJcIPO9AxqmqmgonAGmCwS2hlu8CbE
-3N+6sT2iMT+stuzCcSB8lMYy0mur0GmfeXyOzbMxA40m7incl9o1qLLzbf2rncfe
-PV6+cQWN
-=EFfO
------END PGP SIGNATURE-----
-
---pGSv0REJ66sGmV2k--
