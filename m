@@ -4,79 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8423EC47DDF
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 13:08:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 600F5C47DDF
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 13:08:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E921B87DE4;
-	Tue, 30 Jan 2024 14:06:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
+	by phobos.denx.de (Postfix) with ESMTP id 58E5587DE8;
+	Tue, 30 Jan 2024 14:06:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="nz44n+Ca";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WZua0UUY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20A1887D74; Tue, 30 Jan 2024 14:06:41 +0100 (CET)
-Received: from cpanel.siel.si (cpanel.siel.si [46.19.9.99])
+ id B7D5687DE6; Tue, 30 Jan 2024 14:06:41 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C30B87DBB
+ by phobos.denx.de (Postfix) with ESMTPS id 8D1F087DC1
  for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 14:06:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=norik.com
-Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=primoz.fiser@norik.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
- s=default;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=v5Azji4frY+cjxhYAFdnB8oztIIY2g5HS9QEA5PKacY=; b=nz44n+Ca3pynY7aq4AENm6b0ck
- lug2HmHAly8b8QC4z4IJDvPbnhS+yPPfVM2YwK/W393sFpvEF27B1I3GkJsqhIbgKCdMU2fnFwaPt
- hWdDCjU3QkSP3eK6p8Y+CGIyYMqSSPv6aowKBhOOiFhVdEo8aQsui1YA/kr0C8wPf0RTnXO/R9bUy
- OOeZEiKV8hF6PYbKhcdMud9OKF4YRwKDGeyO7KOmaYoWEtR8p8w5oohfhVFXf7TO2RyMinoaab0Ku
- KJImG1d5KsucEXpNCxEeWWNVLhG7m3VUoNk2J8v41wwYIYIBSJT01Rx/3Vjq0RF5MW6zHY/0C115S
- Ks1K8N+g==;
-Received: from [89.212.21.243] (port=38836 helo=[192.168.69.116])
- by cpanel.siel.si with esmtpsa (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96.2)
- (envelope-from <primoz.fiser@norik.com>) id 1rUnox-00AC7s-2N;
- Tue, 30 Jan 2024 14:06:35 +0100
-Message-ID: <21b0d615-e5fd-4f44-aea3-ee4236ff9a0c@norik.com>
-Date: Tue, 30 Jan 2024 14:06:35 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40UD6LIa115506;
+ Tue, 30 Jan 2024 07:06:21 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1706619981;
+ bh=Nf/w5XUAd+Ax1G+JGtrVGJjNxhqlWhUwqVFBxHe9Ijg=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=WZua0UUYjaI7x/4CaMrXTWDhIsf7LdqnMpPlTb3yt/2ob4RgpbRi1Jw8O6P/nWD1D
+ Gq1u1w15nlzbvKZOrG2Ir5CqiWcqUtYS3i//TSn+hxqrvtD6aRTQ+RWhtxB+92VP2V
+ ijA3JhXVcR1AfZYI1dcQVL0fUUF/PJ6gzx2pmepo=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40UD6Lbw129756
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 30 Jan 2024 07:06:21 -0600
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 30
+ Jan 2024 07:06:21 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 30 Jan 2024 07:06:21 -0600
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40UD6Lfs098259;
+ Tue, 30 Jan 2024 07:06:21 -0600
+From: Nishanth Menon <nm@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Kamlesh Gurudasani <kamlesh@ti.com>, Sinthu Raja <sinthu.raja@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Roger Quadros <rogerq@kernel.org>, Simon Glass
+ <sjg@chromium.org>, Andrew Davis <afd@ti.com>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
+ <u-boot@lists.denx.de>, Jon Humphreys <j-humphreys@ti.com>,
+ Nishanth Menon <nm@ti.com>
+Subject: [PATCH V3 06/11] board: ti: am65x: Set fdtfile from C code instead of
+ findfdt script
+Date: Tue, 30 Jan 2024 07:06:10 -0600
+Message-ID: <20240130130615.670783-7-nm@ti.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240130130615.670783-1-nm@ti.com>
+References: <20240130130615.670783-1-nm@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] board: phytec: phycore-imx93: Add
- phyBOARD-Segin-i.MX93 support
-Content-Language: en-US
-To: Mathieu Othacehe <m.othacehe@gmail.com>
-Cc: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
- Christoph Stoidner <c.stoidner@phytec.de>, Wadim Egorov
- <w.egorov@phytec.de>, Yannic Moog <Y.Moog@phytec.de>, u-boot@lists.denx.de,
- upstream@lists.phytec.de
-References: <20240125164503.32097-1-othacehe@gnu.org>
- <9f20708a-eefb-4a27-a413-8a9f5a472788@norik.com> <878r472m2n.fsf@gmail.com>
- <99d704dc-8133-45e1-a346-ab1d05d5fb7b@norik.com> <874jev2dgp.fsf@gmail.com>
-From: Primoz Fiser <primoz.fiser@norik.com>
-Organization: Norik systems d.o.o.
-In-Reply-To: <874jev2dgp.fsf@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cpanel.siel.si
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - norik.com
-X-Get-Message-Sender-Via: cpanel.siel.si: authenticated_id:
- primoz.fiser@norik.com
-X-Authenticated-Sender: cpanel.siel.si: primoz.fiser@norik.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Organization: Texas Instruments, Inc.
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,75 +88,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mathieu,
+We now can provide a map and have the standard fdtfile variable set from
+code itself. This allows for bootstd to "just work".
 
-On 30. 01. 24 13:49, Mathieu Othacehe wrote:
->=20
-> Hey,
->=20
->> Can you re-check, please?
->>
->> Maybe check your include/generated/environment.h?
->=20
-> Thanks for checking. It is strange that you do not reproduce that one.
->=20
-> My include/generated/environment.h looks like:
->=20
-> --8<---------------cut here---------------start------------->8---
-> #define CONFIG_EXTRA_ENV_TEXT "bootenv=3Dbootenv.txt\0bootenv_addr=3D0x=
-83500000\0console=3DttyLP0\0fdt_addr=3D0x83000000\0fdt_file=3D\"oftree\"\=
-0fdto_addr=3D0x830c0000\0image=3DImage\0ip_dyn=3Dyes\0loadfdt=3Dfatload m=
-mc ${mmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}\0loadimage=3Dfatload mmc =
-${mmcdev}:${mmcpart} ${loadaddr} ${image}\0mmc_apply_overlays=3Dfdt addre=
-ss ${fdt_addr}; for overlay in ${overlays}; do; if run mmc_load_overlay; =
-then fdt resize ${filesize}; fdt apply ${fdto_addr}; fi; done;\0mmc_load_=
-bootenv=3Dfatload mmc ${mmcdev}:${mmcpart} ${bootenv_addr} ${bootenv}\0mm=
-c_load_overlay=3Dfatload mmc ${mmcdev}:${mmcpart} ${fdto_addr} ${overlay}=
-\0mmcargs=3Dsetenv bootargs console=3D${console},${baudrate} earlycon roo=
-t=3D/dev/mmcblk${mmcdev}p${mmcroot} ${raucargs} rootwait rw\0mmcautodetec=
-t=3Dyes\0mmcboot=3Decho Booting from mmc ...; if run mmc_load_bootenv; th=
-en env import -t ${bootenv_addr} ${filesize}; fi; run mmcargs; if run loa=
-dfdt; then run mmc_apply_overlays; booti ${loadaddr} - ${fdt_addr}; else =
-echo WARN: Cannot load the DT; fi;\0mmcdev=3D1\0mmcpart=3D1\0mmcroot=3D2\=
-0net_apply_overlays=3Dfdt address ${fdt_addr}; for overlay in ${overlays}=
-; do; if run net_load_overlay; then fdt resize ${filesize}; fdt apply ${f=
-dto_addr}; fi; done;\0net_load_bootenv=3D${get_cmd} ${bootenv_addr} ${boo=
-tenv}\0net_load_overlay=3D${get_cmd} ${fdto_addr} ${overlay}\0netargs=3Ds=
-etenv bootargs console=3D${console},${baudrate} earlycon root=3D/dev/nfs =
-ip=3D${nfsip} nfsroot=3D${serverip}:${nfsroot},v3,tcp\0netboot=3Decho Boo=
-ting from net ...; run netargs; if test ${ip_dyn} =3D yes; then setenv ge=
-t_cmd dhcp; else setenv get_cmd tftp; fi; if run net_load_bootenv; then e=
-nv import -t ${bootenv_addr} ${filesize}; fi; ${get_cmd} ${loadaddr} ${im=
-age}; if ${get_cmd} ${fdt_addr} ${fdt_file}; then run net_apply_overlays;=
- booti ${loadaddr} - ${fdt_addr}; else echo WARN: Cannot load the DT; fi;=
-\0nfsroot=3D/nfs\0"
-> --8<---------------cut here---------------end--------------->8---
->=20
-> Note that fdt_file=3D\"oftree\" which explains the issue on my side. Do=
+While at this, replace findfdt in environment with a warning as it is no
+longer needed.
 
-> you have a similar environment.h?
+Reviewed-by: Jonathan Humphreys <j-humphreys@ti.com>
+Reviewed-by: Roger Quadros <rogerq@kernel.org>
+Signed-off-by: Nishanth Menon <nm@ti.com>
+---
+Changes in V3:
+- none other than picking up reviews.
 
-I have the same.
+V2: https://lore.kernel.org/r/20240109191506.3820908-6-nm@ti.com
 
->=20
-> What u-boot commit are you based on?
+ board/ti/am65x/am65x.env | 3 ---
+ board/ti/am65x/evm.c     | 2 ++
+ 2 files changed, 2 insertions(+), 3 deletions(-)
 
-I am based on latest master 6faba41927bd (tag: v2024.04-rc1)
+diff --git a/board/ti/am65x/am65x.env b/board/ti/am65x/am65x.env
+index 286b9c300c05..814374d68cf0 100644
+--- a/board/ti/am65x/am65x.env
++++ b/board/ti/am65x/am65x.env
+@@ -5,9 +5,6 @@
+ #include <env/ti/k3_rproc.env>
+ #endif
+ 
+-findfdt=
+-	setenv name_fdt ti/k3-am654-base-board.dtb;
+-	setenv fdtfile ${name_fdt}
+ name_kern=Image
+ console=ttyS2,115200n8
+ args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
+diff --git a/board/ti/am65x/evm.c b/board/ti/am65x/evm.c
+index df209021c1b7..3109c9a2acac 100644
+--- a/board/ti/am65x/evm.c
++++ b/board/ti/am65x/evm.c
+@@ -22,6 +22,7 @@
+ #include <linux/printk.h>
+ 
+ #include "../common/board_detect.h"
++#include "../common/fdt_ops.h"
+ 
+ #define board_is_am65x_base_board()	board_ti_is("AM6-COMPROCEVM")
+ 
+@@ -141,6 +142,7 @@ static void setup_board_eeprom_env(void)
+ 
+ invalid_eeprom:
+ 	set_board_info_env_am6(name);
++	ti_set_fdt_env(NULL, NULL);
+ }
+ 
+ static int init_daughtercard_det_gpio(char *gpio_name, struct gpio_desc *desc)
+-- 
+2.43.0
 
->=20
-> Mathieu
-
-
-To Tom:
-
-> And what awk do you both have? environment.h is generated via
-> scripts/env2string.awk
-
-Using Ubuntu 20.04 LTS
-
-$ awk --version
-GNU Awk 5.0.1, API: 2.0 (GNU MPFR 4.0.2, GNU MP 6.2.0)
-Copyright (C) 1989, 1991-2019 Free Software Foundation.
-
-BR,
-Primoz
