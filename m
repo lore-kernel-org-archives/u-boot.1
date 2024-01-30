@@ -4,76 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6764DC47DB3
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 03:00:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E137C47DB3
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 03:11:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52E8187BCB;
-	Tue, 30 Jan 2024 04:00:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 61AFC87BEE;
+	Tue, 30 Jan 2024 04:11:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NwqWQMGu";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="ir9d7q5m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA89687BC6; Tue, 30 Jan 2024 04:00:11 +0100 (CET)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3990A87BCB
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 04:00:05 +0100 (CET)
+ id C5F0187C29; Tue, 30 Jan 2024 04:11:42 +0100 (CET)
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.4])
+ by phobos.denx.de (Postfix) with ESMTP id 3159987BCB
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 04:11:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=gch981213@gmail.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-dc64926af85so2785790276.0
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 19:00:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706583604; x=1707188404; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9AinedqN5a23j8ZNdRuRz3oB1vBeWeHq7pPCHPeFpYI=;
- b=NwqWQMGutoeQ83W2dLI+2nA0PLTmL/76/MEhwkU/mhF83h77PBx1W/T1u6opxrBLAC
- JrkoKsLhIudy+t5+sONt0K5348ZfHFpiW/O2B1+uMrSKLPSm0Zi9SB81fyRbY/ZvVX7D
- 0B2zC9Hlfronu6tNUcDjk3iqG1VR/qX3zGB9hbe6JfPjMCqfNeyc+N8cxNUlavZZM8LK
- IDfs5bktUoyQ9rogpjyZdgEOzLpmTTg56GmOdK3NpHDP37MDPFX9gggiRptOQ08gvimE
- EYQZqZvOrRKKyDpNU9Mksp5+jcA124xo0LFGtIjpmHwJAVi38pm3uDiAx384swjuZGb5
- 2UVg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706583604; x=1707188404;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9AinedqN5a23j8ZNdRuRz3oB1vBeWeHq7pPCHPeFpYI=;
- b=mH0aOeTMQ8/oJCiDQv2uosvDGo5fqkwT4Ajc0I4iYDWtQDvoH28iYl2jc8UV706AhV
- cvzqsDi1My/qXyDz+NiQI3m2SLS37El4LS/XWsLngttjcziOlO9BKWxJwC6DY1/jr7Sx
- bmIawbvSw41DdR3JmNIwvxTeRyfnxmdUqUV8ughWJagEhP0T/2uninogTLfUMhvlC7Kq
- freKCMM52My6dIYwkOwB/mIUbWe+b3vz+tNhlXtEf1ZJ/E+OjFFDt8PJRu1771hnuMnJ
- yel333T/BngB1U0JDXt0c1yCfR+EZBhpxtw2wHc6dUcDw8rPtrY55cdHAEUZeVLohXC7
- k8NA==
-X-Gm-Message-State: AOJu0YxvyI6GA/l6Yc50AtSBSfCMKcTgY/PgSteVSB/+HPpkOp08bMgw
- mDnlEJISXYmPxOzgWWwgV+mzH8026+9bXfGB6jahE73x2pvi4Q9Sy9UCrKhMWEY0GHDwcEl46xh
- IHWrQFdK4UwRbhCFuBBZ6N19ZcQ8=
-X-Google-Smtp-Source: AGHT+IGGbkcyqEhUK6J+QjJKin3B2BB5a3FyF8ieekc1Tt5hc6phHe/Zn3a53JXvgVFC2vZvrdVAfa5Vahkn0ASZ35A=
-X-Received: by 2002:a25:eb0a:0:b0:dc2:5436:7acd with SMTP id
- d10-20020a25eb0a000000b00dc254367acdmr3450207ybs.42.1706583603875; Mon, 29
- Jan 2024 19:00:03 -0800 (PST)
+ spf=pass smtp.mailfrom=bruce_suen@163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=Content-Type:Message-ID:Date:MIME-Version:Subject:
+ From; bh=l5o1RIX+rOsYlc3yZQs1247j1uUhpMEpMnxAx5LUgoE=; b=ir9d7q5
+ m3kYcdFSVXWyKbkhMO+YNolUj0sV0GG+O1ioubrIMI+gLSQ1HJsmEINtTYZVXm4M
+ BCVr6CGvyijYzHg7bdLhOlWwQlTEM7k4ERF+2gSEbqVhHzOUW168RygKLj1IATZR
+ UgcIsYLId3HW6DPJFWBeAr6ntpi8MtH99Gl4=
+Received: from [192.168.107.56] (unknown [113.110.215.190])
+ by gzga-smtp-mta-g0-0 (Coremail) with SMTP id _____wCnT6DZaLhleh_KBQ--.23367S2;
+ Tue, 30 Jan 2024 11:11:22 +0800 (CST)
+Message-ID: <286a15d2-b2e5-4291-8e54-516f7242812e@163.com>
+Date: Tue, 30 Jan 2024 11:11:21 +0800
 MIME-Version: 1.0
-References: <20231228052915.121433-1-gch981213@gmail.com>
- <20240121011528.3fb06011@minigeek.lan>
- <20240129165555.63ddd462@donnerap.manchester.arm.com>
-In-Reply-To: <20240129165555.63ddd462@donnerap.manchester.arm.com>
-From: Chuanhong Guo <gch981213@gmail.com>
-Date: Tue, 30 Jan 2024 10:59:52 +0800
-Message-ID: <CAJsYDVLTW7PvUF8Gc+8YL+xgrrZmCNJpQM-dMriF3=r2sajU_w@mail.gmail.com>
-Subject: Re: [PATCH] sunxi: add defconfig for nanopi_duo2
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, 
- "linux-sunxi@lists.linux.dev" <linux-sunxi@lists.linux.dev>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mtd: spinand: Add support for XTX XT26xxxDxxxxx
+To: Jagan Teki <jagan@amarulasolutions.com>
+Cc: u-boot@lists.denx.de, dario.binacchi@amarulasolutions.com,
+ michael@amarulasolutions.com, frieder.schrempf@kontron.de,
+ bruce.sun@xtxtech.com
+References: <20231226075812.3803-1-bruce_suen@163.com>
+ <CAMty3ZDRSsR-RNapU5npfdG7CixSV3NocJ4Q0oNwv9V21THRjQ@mail.gmail.com>
+From: Bruce Sun <bruce_suen@163.com>
+In-Reply-To: <CAMty3ZDRSsR-RNapU5npfdG7CixSV3NocJ4Q0oNwv9V21THRjQ@mail.gmail.com>
+X-CM-TRANSID: _____wCnT6DZaLhleh_KBQ--.23367S2
+X-Coremail-Antispam: 1Uf129KBjvdXoWrtw45AF4kXFyruw4ktF47Jwb_yoW3WFgE9F
+ ZYyr1DK3yDKry0qrn7JwnIqrW5C34DCF18ur12grWUurySvrnYgw1DZas0gFW8tFZrKF9x
+ Kr9xZ39FkryF9jkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUvcSsGvfC2KfnxnUUI43ZEXa7xR_rgA5UUUUU==
+X-Originating-IP: [113.110.215.190]
+X-CM-SenderInfo: 5euxuvpbvxv0i6rwjhhfrp/1tbitx91KGV4HtU-hgAAsa
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,27 +71,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi!
 
-On Tue, Jan 30, 2024 at 12:56=E2=80=AFAM Andre Przywara <andre.przywara@arm=
-.com> wrote:
->
-> > Judging by the DT, this board has USB-OTG wired up correctly, so we
-> > should enable it, by adding:
-> > CONFIG_USB_MUSB_GADGET=3Dy
-> > This would allow access to USB Ethernet, fastboot or UMS devices, which
-> > prove to be quite useful for U-Boot.
->
-> So I merged this patch, after adding the USB_MUSB_GADGET option.
-> I just see that the CI complained about a missing maintainer entry, I wil=
-l
-> fix this up in a follow-up patch.
-
-Oops. I forgot to follow up your previous email.
-
-This board does have a working USB OTG port.
-Thanks for fixing the patch for me!
-
---=20
-Regards,
-Chuanhong Guo
+On 1/29/2024 8:00 PM, Jagan Teki wrote:
+> On Tue, Dec 26, 2023 at 1:28 PM Bruce Suen<bruce_suen@163.com>  wrote:
+>> Add Support XTX Technology XT26G01DXXXXX, XT26G11DXXXXX, XT26Q01DXXXXX,
+>> XT26G02DXXXXX, XT26G12DXXXXX, XT26Q02DXXXXX, XT26G04DXXXXX, and
+>> XT26Q04DXXXXX SPI NAND.
+>>
+>> These are 3V/1.8V 1G/2G/4Gbit serial SLC NAND flash device with on-die
+>> ECC(8bit strength per 512bytes).
+>>
+>> Datasheet Links:
+>> -http://www.xtxtech.com/download/?AId=458
+>> -http://www.xtxtech.com/download/?AId=495
+>>
+>> Signed-off-by: Bruce Suen<bruce_suen@163.com>
+>> ---
+> This won't apply on my spi tree, maybe some out-of-master changes are stopping.
+can you give me your spi tree? I use 
+"https://source.denx.de/u-boot/custodians/u-boot-nand-flash.git“ before.
