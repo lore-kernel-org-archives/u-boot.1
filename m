@@ -4,39 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 769F5C46CD2
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 14:17:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39638C46CD2
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 14:20:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D940D87DE9;
-	Tue, 30 Jan 2024 15:16:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 8EE4187DCA;
+	Tue, 30 Jan 2024 15:20:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="XwnKX0v9";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 853AF87DE2; Tue, 30 Jan 2024 15:16:58 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id D083B87E01
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 15:16:54 +0100 (CET)
+ id 6F74D87DE9; Tue, 30 Jan 2024 15:16:04 +0100 (CET)
+Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8586287DE9
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 15:16:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5667DDA7;
- Tue, 30 Jan 2024 06:17:37 -0800 (PST)
-Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.32.100.28])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BF05F3F762;
- Tue, 30 Jan 2024 06:16:51 -0800 (PST)
-From: Andre Przywara <andre.przywara@arm.com>
-To: Jagan Teki <jagan@amarulasolutions.com>,
-	linux-sunxi@lists.linux.dev
-Cc: u-boot@lists.denx.de, Jernej Skrabec <jernej.skrabec@gmail.com>,
- Marc Zyngier <maz@kernel.org>, James McGregor <james.mcgregor2@arm.com>
-Subject: [PATCH] sunxi: H616: Add OrangePi Zero 2W board support
-Date: Tue, 30 Jan 2024 14:16:42 +0000
-Message-Id: <20240130141642.2714470-1-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=gnu.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
+Received: from fencepost.gnu.org ([2001:470:142:3::e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
+ id 1rUou2-000748-Je; Tue, 30 Jan 2024 09:15:54 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
+ s=fencepost-gnu-org; h=MIME-Version:Date:References:In-Reply-To:Subject:To:
+ From; bh=cDe8BiTYjAtzajkZcOS+epW3kLCt1a1x2hqEp5mUu2g=; b=XwnKX0v93zvoyvhQFDij
+ T+fO+KZsmbbQP2wYC5g6MzCb1RLPsUmhJ8r79+2O7w9Xu+Ipu4dzd9r/a9EXKkhy6dPHCCezhhQD2
+ 6UYBDNVVc/VsENuMpWXlr20a/3C6mSUpZARMqW+dfXsIZEekAI7w2ODq4eTGel+5KmjsNdrN7X0MF
+ GKCLhJ2nYYPuOv/R5GLHhSV7jAlxwcfVlPUyefnkyE/XUAS523AdQGdB2EEOikfocMpQa0U57YH+j
+ OW3AQZNjFsDEoAzxjPXdLrhRO4quxt7v6pUS5xxjeOJ85pItbxutcgvYsh7r0PL4YaIK4ssxjOV+C
+ ijHaUIAHNqr1iA==;
+From: Mathieu Othacehe <othacehe@gnu.org>
+To: Primoz Fiser <primoz.fiser@norik.com>
+Cc: Stefano Babic <sbabic@denx.de>,  Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,  Tom Rini
+ <trini@konsulko.com>,  Peng Fan <peng.fan@nxp.com>,  Ye Li
+ <ye.li@nxp.com>,  Jacky Bai <ping.bai@nxp.com>,  =?utf-8?Q?S=C3=A9bastien?=
+ Szymanski <sebastien.szymanski@armadeus.com>,  u-boot@lists.denx.de,
+ upstream@lists.phytec.de
+Subject: Re: [PATCH] imx9: clock: Fix board_interface_eth_init for FEC
+In-Reply-To: <20240130124337.497748-1-primoz.fiser@norik.com> (Primoz Fiser's
+ message of "Tue, 30 Jan 2024 13:43:37 +0100")
+References: <20240130124337.497748-1-primoz.fiser@norik.com>
+Date: Tue, 30 Jan 2024 15:15:48 +0100
+Message-ID: <87cyti52ln.fsf@gnu.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Mailman-Approved-At: Tue, 30 Jan 2024 15:20:20 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -53,93 +70,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The OrangePi Zero 2W is a tiny development board featuring the Allwinner
-H618 SoC, shipping with up to 4GB of LPDDR4 DRAM, a mini-HDMI connector,
-two USB Type-C sockets and a 16MB SPI NOR flash.
-There is an FPC connector to connect an expansion board, which sports
-two more USB Type-A sockets and a 100MBit Ethernet port. Support for
-the expansion board is not in the DT yet, probably a DT overlay would
-cover this in the future.
 
-Add a defconfig file selecting the right drivers and DRAM options.
-Since the .dts file was synced from the Linux kernel repo already, we
-just need to add one line to the Makefile to actually build the .dtb.
+Hello,
 
-The DRAM parameters were derived from the values found in the BSP DRAM
-drivers on the SPI NOR flash.
+> Fixes: d5eae216d833 ("net: dwc_eth_qos: Add board_interface_eth_init() for i.MX93")
+> Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
 
-Signed-off-by: Andre Przywara <andre.przywara@arm.com>
----
- arch/arm/dts/Makefile             |  1 +
- board/sunxi/MAINTAINERS           |  5 +++++
- configs/orangepi_zero2w_defconfig | 30 ++++++++++++++++++++++++++++++
- 3 files changed, 36 insertions(+)
- create mode 100644 configs/orangepi_zero2w_defconfig
+I confirm that it fixes Ethernet connection when using FEC as a primary
+port on the phyBOARD-Segin-i.MX93.
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 0d4b917fb3b..ed3978037ed 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -837,6 +837,7 @@ dtb-$(CONFIG_MACH_SUN50I_H6) += \
- 	sun50i-h6-tanix-tx6-mini.dtb
- dtb-$(CONFIG_MACH_SUN50I_H616) += \
- 	sun50i-h616-orangepi-zero2.dtb \
-+	sun50i-h618-orangepi-zero2w.dtb \
- 	sun50i-h618-orangepi-zero3.dtb \
- 	sun50i-h618-transpeed-8k618-t.dtb \
- 	sun50i-h616-x96-mate.dtb
-diff --git a/board/sunxi/MAINTAINERS b/board/sunxi/MAINTAINERS
-index a2da6a4a7a2..4bcd9b9af7f 100644
---- a/board/sunxi/MAINTAINERS
-+++ b/board/sunxi/MAINTAINERS
-@@ -460,6 +460,11 @@ M:	Jernej Skrabec <jernej.skrabec@siol.net>
- S:	Maintained
- F:	configs/orangepi_zero2_defconfig
- 
-+ORANGEPI ZERO 2W BOARD
-+M:	Andre Przywara <andre.przywara@arm.com>
-+S:	Maintained
-+F:	configs/orangepi_zero2w_defconfig
-+
- ORANGEPI ZERO 3 BOARD
- M:	Andre Przywara <andre.przywara@arm.com>
- S:	Maintained
-diff --git a/configs/orangepi_zero2w_defconfig b/configs/orangepi_zero2w_defconfig
-new file mode 100644
-index 00000000000..5734d9d839c
---- /dev/null
-+++ b/configs/orangepi_zero2w_defconfig
-@@ -0,0 +1,30 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_SUNXI=y
-+CONFIG_DEFAULT_DEVICE_TREE="sun50i-h618-orangepi-zero2w"
-+CONFIG_SPL=y
-+CONFIG_DRAM_SUN50I_H616_DX_ODT=0x07070707
-+CONFIG_DRAM_SUN50I_H616_DX_DRI=0x0e0e0e0e
-+CONFIG_DRAM_SUN50I_H616_CA_DRI=0x0e0e
-+CONFIG_DRAM_SUN50I_H616_ODT_EN=0xaaaaeeee
-+CONFIG_DRAM_SUN50I_H616_TPR6=0x48808080
-+CONFIG_DRAM_SUN50I_H616_TPR10=0x402f6663
-+CONFIG_DRAM_SUN50I_H616_TPR11=0x26262524
-+CONFIG_DRAM_SUN50I_H616_TPR12=0x100f100f
-+CONFIG_MACH_SUN50I_H616=y
-+CONFIG_SUNXI_DRAM_H616_LPDDR4=y
-+CONFIG_DRAM_CLK=792
-+CONFIG_R_I2C_ENABLE=y
-+CONFIG_SPL_SPI_SUNXI=y
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_SPL_I2C=y
-+CONFIG_SPL_SYS_I2C_LEGACY=y
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_SYS_I2C_SLAVE=0x7f
-+CONFIG_SYS_I2C_SPEED=400000
-+CONFIG_MTD=y
-+CONFIG_SPI_FLASH_ZBIT=y
-+CONFIG_AXP313_POWER=y
-+CONFIG_SPI=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_MUSB_GADGET=y
--- 
-2.25.1
+Tested-by: Mathieu Othacehe <m.othacehe@gmail.com>
 
+Mathieu
