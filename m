@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 475C6C46CD2
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 14:07:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72EFBC46CD2
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 14:07:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D991A87E3F;
-	Tue, 30 Jan 2024 15:05:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5445987E43;
+	Tue, 30 Jan 2024 15:05:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bgA9c47I";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jvITzF7p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACCBA87E30; Tue, 30 Jan 2024 15:05:25 +0100 (CET)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id B5A5087E32; Tue, 30 Jan 2024 15:05:27 +0100 (CET)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D794587DCF
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 15:05:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E0BB87DF8
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 15:05:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-5111ef545bfso826506e87.1
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 06:05:19 -0800 (PST)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-40faff092a2so1648465e9.2
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 06:05:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706623519; x=1707228319; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1706623520; x=1707228320; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=qKR8YxB6uXda+sUnTr7LYGgrSBzhxyEw3hRg6oJNg6Y=;
- b=bgA9c47IhiTO8+n26lQ5JDN0icUaXv4rP0WRKjv+KTt/eqihiRj1XcM/qKZJ2NAEku
- IAxgaSrqNpp9EFYorYf+1WDSpKqN1a0uyRlSCBteze6i8CPxi4YZ3Vyl2f12YLSXYm9c
- F9+fvKy3hVJjYnixTnGYT2gqfzW8v1VcH8we/GJSok+X+B8TJsU3HvkmEraGVvrmB/5f
- fiobLEOvV1em8drT0GEJBLkk42wbGnBmaVNGPs6p4boffZ3J8NZEtp7zDmLqHu3/6Z6z
- nw0sLSD4wNqGCia0qVJn52ZHjKXdpTRrEdZhjwhgcSo4v0DuJ56kB69iU7sdU6EYp4pZ
- AsaQ==
+ :reply-to; bh=wFp1hHRR/1SlOW6t5sCZNic6sCRFVKX2pLY+ZrtFe1M=;
+ b=jvITzF7pECTlnOcEaNRQXSauNg1kUB6VdvYjIceqV1AHyDTgJevzTSL80GeLztSkfH
+ vSOJQ2dirpIidH1gXt8absVaYqa4cq0jWPb7ZVjQaLTIyHgOvYP1d8mI1EoW1LZE3fHK
+ 2w8RTO98bMVliDivzxsxxsdCTqZDWNwflRv4eVaHMDktQHvhIARRdU0tAYaQbAnduu2u
+ wKZCZq3Fuos9HF8v8ZS2G2L4WgBj3ZyE7hkUquK4D/4J4zJljhXCdoEgEfmpdF8uhnp9
+ li3jgp18JRWWxtt1CiiqIBDLYHFBugj67VbaM3+A/lQPFH00QGbDt7yOFE/4jUd1Zhiq
+ jfLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706623519; x=1707228319;
+ d=1e100.net; s=20230601; t=1706623520; x=1707228320;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qKR8YxB6uXda+sUnTr7LYGgrSBzhxyEw3hRg6oJNg6Y=;
- b=GOzj/RYHkvP2ZyLY7sJT3M4NPdp7WqmOSVfSebSG/HhUqNEsOMn5cMf1imqWlRf+Rm
- iFIT5xUBhLyw+dKcpNfFxAI2/2MC/IgcqLK+p5Qh4631PsQNz5MmSZwb9M+YpSsdFvze
- 8FxPsgffTaGkDOtXGB5jAXJNiy1iINQcH80D/AJaHyOMBJPSkWpHakimgXtAoo++7qz5
- l5Nju/p5QkjF+bQIr265sJtQq+ZjY7WBGFkpn4x5FW4AYnYYjRwxzzVoOxh9R21VT+OS
- CsNdi2BJMq3zTaJua4viQVcBhGRS+HoJJLASWgyKfptKuz7WajpEtLRsC69DKF64BtmM
- zoMg==
-X-Gm-Message-State: AOJu0YzR0Gp9REvfqUSak5J6L4pV90a4rDhkrrmfgkumqRs4+LCaX1T/
- NXdzV26HOfEhKYP3f9Z9Ae5UhXHqSRv9p8FQHtVshvZVkoGp7O0YoaoGOIiEgEU=
-X-Google-Smtp-Source: AGHT+IHgut0gl90G+5/OrOW29UIqHrQyq6i8igjuThoxc8uFjur9QhfIv0DBc9PaN+w0zjmTNygt7w==
-X-Received: by 2002:a05:6512:550:b0:511:20e3:e456 with SMTP id
- h16-20020a056512055000b0051120e3e456mr274691lfl.49.1706623519317; 
- Tue, 30 Jan 2024 06:05:19 -0800 (PST)
+ bh=wFp1hHRR/1SlOW6t5sCZNic6sCRFVKX2pLY+ZrtFe1M=;
+ b=Tnr2Qc0eFWKKdoKqz54E0W2Uc//kTrgZ6ARz75/pqRAxerreqCf89I7JcauOUHUJjD
+ C7UTP/m0RrAR9bwxYxK7iD8nAwPXaBkGw3HFs9JYyV5Wbz9A1yJ807A6UQE2wvGhmfIe
+ NXlomuMEchZWjR5cZxf+NuZzszWjs7lzH8EBSCMJWx4FBtTsqb0k2R7UmAeNdH71FFA3
+ U9MUllrS/M6zkPmKHFvJw7esfDd0nMBUYUwrk9TTkkeGaD7y3qEIJhzFBniTdsrTPrvb
+ Dl3G75LFGxDmpZ6nHEUGtulQmNeuvrXAvId+5b2UiaDA4mEtobDbr3PgCvwlQfzVHTv2
+ t6xA==
+X-Gm-Message-State: AOJu0YziuS7+6BXj8cszEppzjV5KD7eESfSfzwrBGgjUvFb7y1brQycK
+ i7zm5JbpY4im+H0heoHniOJ76xhOaqYI4SyPhcxjmhMrF/3fanRTzydGLC/z8bM=
+X-Google-Smtp-Source: AGHT+IEK0alLT7Jwm5EQl2NavEB7u0ofiGAGrsrJCmlBSNCJl6AM1KknvmdstVNt5/Aemv8oVigwDA==
+X-Received: by 2002:a05:600c:a384:b0:40f:24e:d480 with SMTP id
+ hn4-20020a05600ca38400b0040f024ed480mr1361996wmb.18.1706623520197; 
+ Tue, 30 Jan 2024 06:05:20 -0800 (PST)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- g11-20020a05600c310b00b0040f035bebfcsm1799017wmo.12.2024.01.30.06.05.18
+ g11-20020a05600c310b00b0040f035bebfcsm1799017wmo.12.2024.01.30.06.05.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jan 2024 06:05:18 -0800 (PST)
+ Tue, 30 Jan 2024 06:05:19 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 30 Jan 2024 14:04:58 +0000
-Subject: [PATCH v3 10/36] gpio: qcom_pmic: 1-based GPIOs
+Date: Tue, 30 Jan 2024 14:04:59 +0000
+Subject: [PATCH v3 11/36] gpio: qcom_pmic: add a quirk to skip GPIO
+ configuration
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240130-b4-qcom-common-target-v3-10-e523cbf9e556@linaro.org>
+Message-Id: <20240130-b4-qcom-common-target-v3-11-e523cbf9e556@linaro.org>
 References: <20240130-b4-qcom-common-target-v3-0-e523cbf9e556@linaro.org>
 In-Reply-To: <20240130-b4-qcom-common-target-v3-0-e523cbf9e556@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -83,13 +84,13 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1524;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2074;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=PTYGGsesPNEUSn9mdotJjj9IvPSphi8HF0gXMeC1zhw=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSdTAIOu/jl0wqNI9pkgy9enRCx4UltvvWr5ZGbom0mZ
- U5I2Lylo5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAExkYxAjQ8uJG6VHNG/s2fIu
- 4fWhZe9ncOho7PZT/sN5WPaUr3+P6waGfwa3Uup3aS7KY9B8OpOZ9ebTDVF9MmFzNKPOFyc2t2n
- /PwoA
+ bh=ymwAonFlifJ0H9BsiASyOwN2adBqwArF+W83RQBLkgg=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSdTAKv6/idDygWTt+qKnGrOu9BPee6z+y/HH7nGB3cX
+ TErXreto5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAEyk8hXDf5+ChyX6giX5lyxd
+ n52tmf/vbXlverr61PM9LMEr83ZvtmT4nyr9fOrngGyj7frvuQ7PT9t/6e+SH0XrM8PbopJ7+L9
+ MdwMA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -108,54 +109,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Qualcomm PMICs number their GPIOs starting from 1, implement a custom
-.xlate method to handle this.
+Some platforms hard reset when attempting to configure PMIC GPIOs. Add
+support for quirks specified in match data with a single quirk to skip
+this configuration. We rely on the GPIO already be configured correctly,
+which is always the case for volume up (the only current user of these
+GPIOs).
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/gpio/qcom_pmic_gpio.c | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
+ drivers/gpio/qcom_pmic_gpio.c | 18 ++++++++++++++++--
+ 1 file changed, 16 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
-index 6167c8411678..2a4fef8d28cb 100644
+index 2a4fef8d28cb..198cd84bc31e 100644
 --- a/drivers/gpio/qcom_pmic_gpio.c
 +++ b/drivers/gpio/qcom_pmic_gpio.c
-@@ -209,12 +209,34 @@ static int qcom_gpio_set_value(struct udevice *dev, unsigned offset,
- 				       REG_CTL_OUTPUT_MASK, !!value);
- }
+@@ -64,6 +64,15 @@
+ #define REG_EN_CTL             0x46
+ #define REG_EN_CTL_ENABLE      (1 << 7)
  
-+static int qcom_gpio_xlate(struct udevice *dev, struct gpio_desc *desc,
-+			   struct ofnode_phandle_args *args)
-+{
-+	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
++/**
++ * pmic_gpio_match_data - platform specific configuration
++ *
++ * @PMIC_MATCH_READONLY: treat all GPIOs as readonly, don't attempt to configure them
++ */
++enum pmic_gpio_quirks {
++	QCOM_PMIC_QUIRK_READONLY = (1 << 0),
++};
 +
-+	if (args->args_count < 1)
-+		return -EINVAL;
+ struct qcom_gpio_bank {
+ 	uint32_t pid; /* Peripheral ID on SPMI bus */
+ 	bool     lv_mv_type; /* If subtype is GPIO_LV(0x10) or GPIO_MV(0x11) */
+@@ -75,7 +84,12 @@ static int qcom_gpio_set_direction(struct udevice *dev, unsigned offset,
+ 	struct qcom_gpio_bank *priv = dev_get_priv(dev);
+ 	uint32_t gpio_base = priv->pid + REG_OFFSET(offset);
+ 	uint32_t reg_ctl_val;
+-	int ret;
++	ulong quirks = dev_get_driver_data(dev);
++	int ret = 0;
 +
-+	/* GPIOs in DT are 1-based */
-+	desc->offset = args->args[0] - 1;
-+	if (desc->offset >= uc_priv->gpio_count)
-+		return -EINVAL;
-+
-+	if (args->args_count < 2)
++	/* Some PMICs don't like their GPIOs being configured */
++	if (quirks & QCOM_PMIC_QUIRK_READONLY)
 +		return 0;
-+
-+	desc->flags = gpio_flags_xlate(args->args[1]);
-+
-+	return 0;
-+}
-+
- static const struct dm_gpio_ops qcom_gpio_ops = {
- 	.direction_input	= qcom_gpio_direction_input,
- 	.direction_output	= qcom_gpio_direction_output,
- 	.get_value		= qcom_gpio_get_value,
- 	.set_value		= qcom_gpio_set_value,
- 	.get_function		= qcom_gpio_get_function,
-+	.xlate			= qcom_gpio_xlate,
- };
  
- static int qcom_gpio_probe(struct udevice *dev)
+ 	/* Disable the GPIO */
+ 	ret = pmic_clrsetbits(dev->parent, gpio_base + REG_EN_CTL,
+@@ -304,7 +318,7 @@ static int qcom_gpio_of_to_plat(struct udevice *dev)
+ static const struct udevice_id qcom_gpio_ids[] = {
+ 	{ .compatible = "qcom,pm8916-gpio" },
+ 	{ .compatible = "qcom,pm8994-gpio" },	/* 22 GPIO's */
+-	{ .compatible = "qcom,pm8998-gpio" },
++	{ .compatible = "qcom,pm8998-gpio", .data = QCOM_PMIC_QUIRK_READONLY },
+ 	{ .compatible = "qcom,pms405-gpio" },
+ 	{ }
+ };
 
 -- 
 2.43.0
