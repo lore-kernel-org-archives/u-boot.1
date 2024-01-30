@@ -4,77 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED560C46CD2
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 12:39:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E927EC46CD2
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 12:43:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08BE587D6C;
-	Tue, 30 Jan 2024 13:39:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6D3EB87CFF;
+	Tue, 30 Jan 2024 13:43:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Z+itSySj";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="NTkX5rg+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9697487CC0; Tue, 30 Jan 2024 13:39:56 +0100 (CET)
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
- [IPv6:2607:f8b0:4864:20::102a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3165787CFF; Tue, 30 Jan 2024 13:43:42 +0100 (CET)
+Received: from cpanel.siel.si (cpanel.siel.si [46.19.9.99])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8068687D6C
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 13:39:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DAD1687CC0
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 13:43:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=norik.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-290c5c705d5so356665a91.0
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 04:39:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706618393; x=1707223193; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uPJynva6mjRSvyoOup0FFA/ObH99e8tXSmSgLHXvpTo=;
- b=Z+itSySjDvhVARsmnZvg9QrqAIk8nHBdLwLo++HlOp+GdOr46owbZDYx41Z6nKzaup
- ZjzDBvqMR9AT+utVDm6B0Jcg9Ygeaxpb1Vx+WrHFc8Zukzsise8yC8IraGQux3jb5rvG
- w80GwudlrkW9cQjmNxmbZ8THORqR9sS3LLdoWLKc6byydLIlIOo7ctPvVeVdy1a71s0k
- 8qc7XfWeoeakBZkCzpWX8Lealc946IUHelXagL26jFg6MXg3bzPPyvRWm+OaxyGL0dCZ
- bVRRK4Ey0Bq55bmaKqoXdeVfGcPmOEyrhAOKZZn4waQ/+LEm25P1WHgC7PWJ1SfWeo2Z
- 8dHg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706618393; x=1707223193;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=uPJynva6mjRSvyoOup0FFA/ObH99e8tXSmSgLHXvpTo=;
- b=KPzCyje64T045J37ahAHsFbRgN+9Jj1VdKwp46tT+JkjLzf6Ltr6H9nqx57jJQWZzG
- anDFw9eOUlCqPCrqeZlhORq0gvAAl+E/y5K5pRlliXYttckNpnLzqITbbg+iMq0gIEDm
- UdDnPRDPA/t138JLHZPMzsfnIziEyD1Cnj15OXZIWjooTHFoSKGlylh4MPvDRO3Py+mC
- 1abK/qmqX/Xw2tjOtkS2GwGkmKYKGV5liexe1FY3s3d7iy5L3dVM/3F1sLqv7RrHqMxh
- ot8FA19SRomF3+fVY38jnav5DdZirtFbEo0oTT6+/3JKf5HsVi23FlB2ogQjgQ6LuZYd
- mEqg==
-X-Gm-Message-State: AOJu0Ywggg34yAMgivUHAWaj1lo8BtA9H0dHemXN1dFg00+kohGx5sSv
- yQzepi8E2P57sx6+rjvyWXfCDiZWQnKXF6Ah0VJxBXF7oIRKpkGvPV+GMQ7zOCLIUJOvoOdlj6r
- QGBdUePr8/das3rkGtTj1nUYdNyL8Vvhh
-X-Google-Smtp-Source: AGHT+IGFXYR+Xkn3hvVpv0q98AXtFNcKmwzIrO/t+1oB09pQmg8T9XcZxTiu6Q4vrhUaG3pK6oaQXqIZ1E3GIQauTvc=
-X-Received: by 2002:a17:90a:8b89:b0:291:465:db9e with SMTP id
- z9-20020a17090a8b8900b002910465db9emr9251650pjn.1.1706618392895; Tue, 30 Jan
- 2024 04:39:52 -0800 (PST)
-MIME-Version: 1.0
-References: <20240129-usb_support-v1-0-8bd2fe84005b@phytec.de>
- <20240129-usb_support-v1-3-8bd2fe84005b@phytec.de>
-In-Reply-To: <20240129-usb_support-v1-3-8bd2fe84005b@phytec.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 30 Jan 2024 09:39:42 -0300
-Message-ID: <CAOMZO5CLRqVP_ZsZzZOC4cNjPccYQvka4Uf0ruOQdBP422ttAA@mail.gmail.com>
-Subject: Re: [PATCH 3/3] phycore-imx8mp: add support for booting and flashing
- emmc via UUU
-To: Benjamin Hahn <B.Hahn@phytec.de>
-Cc: Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Teresa Remmet <t.remmet@phytec.de>, Tom Rini <trini@konsulko.com>,
+ spf=none smtp.mailfrom=primoz.fiser@norik.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
+ s=default;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=zpK1768T2KCW81if3epyoouSZCUXHFE4GBEq18NKCHM=; b=NTkX5rg+F+78QmvYRiY/AGDXTH
+ ZhlwExLKi3JFIVrgmVjGP5gwXsjL+HtYiHnRB/oKCyhSD87/pXGQUtQGgB07j1YR4r5FTHVHJCCTR
+ +RYb/lYU4eJMPG0Q6i26Hnti8DbrwE0+xx3Pfmd1KQYDeYQv+3/VgZjtCDj8iBqrS5W20TbhyqrYo
+ QmD5rrGXaqec+HkfOk56MboNCf+tEWCooJTA2GSLvNmaMbKaj1+LosFwy4PHwBYl0SaEoSOAdKdhA
+ UQS6hz1DTEh2/xPZBjKqDK+btwB5azTy5TkDYcvQzOvkCIHsdbIlsOh4eWGSD//iJtv9iPGL2b7YN
+ AEHJ5pIg==;
+Received: from [89.212.21.243] (port=40348 helo=localhost.localdomain)
+ by cpanel.siel.si with esmtpsa (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96.2)
+ (envelope-from <primoz.fiser@norik.com>) id 1rUnSk-00A5HC-1g;
+ Tue, 30 Jan 2024 13:43:38 +0100
+From: Primoz Fiser <primoz.fiser@norik.com>
+To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Jacky Bai <ping.bai@nxp.com>,
+ =?UTF-8?q?S=C3=A9bastien=20Szymanski?= <sebastien.szymanski@armadeus.com>,
  u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cc: upstream@lists.phytec.de
+Subject: [PATCH] imx9: clock: Fix board_interface_eth_init for FEC
+Date: Tue, 30 Jan 2024 13:43:37 +0100
+Message-Id: <20240130124337.497748-1-primoz.fiser@norik.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cpanel.siel.si
+X-AntiAbuse: Original Domain - lists.denx.de
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - norik.com
+X-Get-Message-Sender-Via: cpanel.siel.si: authenticated_id:
+ primoz.fiser@norik.com
+X-Authenticated-Sender: cpanel.siel.si: primoz.fiser@norik.com
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,12 +85,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Jan 29, 2024 at 4:56=E2=80=AFAM Benjamin Hahn <B.Hahn@phytec.de> wr=
-ote:
->
-> add support for Serial Downloader Boot via UUU as well as flashing emmc
-> via UUU on USB0 Port of phyBOARD Pollux.
->
-> Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
+Commit d5eae216d833 ("net: dwc_eth_qos: Add board_interface_eth_init()
+for i.MX93") implemented board_interface_eth_init for i.MX9 platforms.
+However it only accounted for the EQOS interface while any board using
+FEC as primary Ethernet interface was left out as return value -EINVAL
+is always returned from the function in such case.
 
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
+Fix this by returning 0 (success) when FEC interface is primarily used
+instead of EQOS interface on i.MX93.
+
+Fixes: d5eae216d833 ("net: dwc_eth_qos: Add board_interface_eth_init() for i.MX93")
+Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
+---
+ arch/arm/mach-imx/imx9/clock.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/arch/arm/mach-imx/imx9/clock.c b/arch/arm/mach-imx/imx9/clock.c
+index 92c41e9a67bf..75d92af036a1 100644
+--- a/arch/arm/mach-imx/imx9/clock.c
++++ b/arch/arm/mach-imx/imx9/clock.c
+@@ -882,6 +882,11 @@ int board_interface_eth_init(struct udevice *dev, phy_interface_t interface_type
+ 	    device_is_compatible(dev, "nxp,imx93-dwmac-eqos"))
+ 		return imx93_eqos_interface_init(dev, interface_type);
+ 
++	if (IS_ENABLED(CONFIG_IMX93) &&
++	    IS_ENABLED(CONFIG_FEC_MXC) &&
++	    device_is_compatible(dev, "fsl,imx93-fec"))
++		return 0;
++
+ 	return -EINVAL;
+ }
+ 
+-- 
+2.25.1
+
