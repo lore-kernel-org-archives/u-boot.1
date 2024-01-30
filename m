@@ -4,110 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B34CC46CD2
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 04:46:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 253C3C46CD2
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 06:18:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 451FD87DDA;
-	Tue, 30 Jan 2024 05:45:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 54DF587BAD;
+	Tue, 30 Jan 2024 07:18:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="yCKydet3";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="E1S7cxI3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7501587D78; Tue, 30 Jan 2024 05:45:30 +0100 (CET)
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:200a::600])
+ id 1145087BB4; Tue, 30 Jan 2024 07:18:31 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7878987751
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 05:45:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AB6587B3D
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 07:18:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kG91trolM+HJUlgadOD73yrMjauxChorXkUNMbmlk/4zONRYQ5QdmePhgLtCSO8359MDtJEv2GjjKUOeR96MtU/5Eo0Yg6ywfbohJRfYIsy8fYfF6DRXo2cUUUAPLT0etMp+6BjA+O/11VRGeRBdFAP9tTTlruFyddz6nHqrGMM4uNMoFcUFg90IA4bo48wU/G/U1VXP80RkFhWO6Zexo1M5dd/Um6+ZpHvb1qPRNHC0PaW2ZoHltaaujYURr97BE29DHN3jrleaIHugStcZ7QMdyZjQbQ51NVZGvwX1hahOT/Of+cvtFsaeGEbw0tT8f+6JusNA75QQATL1qxzXWQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2MDYvGllRDcGcaggeGh53RL7GHTCEMfyfFE6/DlJgig=;
- b=E3mQ484MDpBAegRcr8i2/Ldfx4igXeZQPmYhVN1CTyfc7WKvzq/RuUAo778fzp15uu3+sdvUAX1quhw0MXPycEmZibMR4hZuNvzU4U7usd7zMv0Ftw9Jf73by6C6YdRmk0F7vAKfztILGp0AqVSsfpCYHYLRfkKJzx3OXJLw1FDxx3Ra3UwfZ9c8yXclKVExTm39MwxjvalRzfgKexeb7/I+SsSEgASrWuu2qCrv4F+IEw0wIBm0PW5qRuprHYlSy/B8ZPbM3YfMnYFcWCsIDV6P/CYL5hptDvPBhyKVRkLIYRdCM6vlGuojGEZUiYllLqexZluJHoeQc0gKA4lrWA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2MDYvGllRDcGcaggeGh53RL7GHTCEMfyfFE6/DlJgig=;
- b=yCKydet3dZetszQMP9UINaAVjdKvHvD/KDInUFxxNvXBnivDyFheS8zr54e8x+t3P7Q1FkQQpKKahN4Hj31XOJ9KqnKM7Fr2JezCP25bLiIKJIhGjBvOca7b2zJ33g0pyiWmo2fAXfpFkoUemOuqrkTrJUX2okvF1Yxa5Pseb2U=
-Received: from BN0PR08CA0010.namprd08.prod.outlook.com (2603:10b6:408:142::11)
- by MW4PR12MB6924.namprd12.prod.outlook.com (2603:10b6:303:207::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7202.32; Tue, 30 Jan
- 2024 04:45:25 +0000
-Received: from BN2PEPF000044A6.namprd04.prod.outlook.com
- (2603:10b6:408:142:cafe::d2) by BN0PR08CA0010.outlook.office365.com
- (2603:10b6:408:142::11) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7228.34 via Frontend
- Transport; Tue, 30 Jan 2024 04:45:25 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BN2PEPF000044A6.mail.protection.outlook.com (10.167.243.100) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7249.19 via Frontend Transport; Tue, 30 Jan 2024 04:45:25 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Mon, 29 Jan
- 2024 22:45:25 -0600
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Mon, 29 Jan
- 2024 22:45:10 -0600
-Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34 via Frontend
- Transport; Mon, 29 Jan 2024 22:45:08 -0600
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <git@xilinx.com>
-Subject: [PATCH v10 8/8] config: xea: Enable the SPI_ADVANCE config option
-Date: Tue, 30 Jan 2024 10:14:23 +0530
-Message-ID: <20240130044423.1391251-9-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240130044423.1391251-1-venkatesh.abbarapu@amd.com>
-References: <20240130044423.1391251-1-venkatesh.abbarapu@amd.com>
+ spf=pass smtp.mailfrom=danishanwar@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40U6IHju126141;
+ Tue, 30 Jan 2024 00:18:17 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1706595497;
+ bh=mActO3s2qalpuJmmXBYEOV/K2ulX68VGTr7y0aZdk3c=;
+ h=From:To:CC:Subject:Date;
+ b=E1S7cxI3pH25kBsZoB8JYQz4DFddvCiFXXfotEay3SQdAA+AN7lxrx2S8BTjmujxR
+ qB7hX5ves7gvTNPe2c31zbOQCll8Gvd7RY/Edgl4HB2B7SIdN4VD3a4uTNJ8u0EWjU
+ 0KiRqG9+Q3kx0GTaP+ucVnAJDrqor3mdYv286bNU=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40U6IHNF080594
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 30 Jan 2024 00:18:17 -0600
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 30
+ Jan 2024 00:18:07 -0600
+Received: from fllvsmtp7.itg.ti.com (10.64.40.31) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 30 Jan 2024 00:18:07 -0600
+Received: from fllv0122.itg.ti.com (fllv0122.itg.ti.com [10.247.120.72])
+ by fllvsmtp7.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40U6I7Ro005396;
+ Tue, 30 Jan 2024 00:18:07 -0600
+Received: from localhost (danish-tpc.dhcp.ti.com [10.24.69.25])
+ by fllv0122.itg.ti.com (8.14.7/8.14.7) with ESMTP id 40U6I6wC030975;
+ Tue, 30 Jan 2024 00:18:06 -0600
+From: MD Danish Anwar <danishanwar@ti.com>
+To: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, MD Danish Anwar
+ <danishanwar@ti.com>, Nishanth Menon <nm@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>, Roger
+ Quadros <rogerq@kernel.org>
+Subject: [PATCH v4] dma: ti: k3-udma: Use ring_idx to pair k3 nav rings
+Date: Tue, 30 Jan 2024 11:48:04 +0530
+Message-ID: <20240130061804.2342672-1-danishanwar@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000044A6:EE_|MW4PR12MB6924:EE_
-X-MS-Office365-Filtering-Correlation-Id: f3d97ffd-9faa-4b30-a7c0-08dc214e4697
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 0a6wX2piW3PYZWXEBYPKm6vNArlINyw02TMWQinsTBYopWsyyn2vOJKZrXfweUbiBHQXJkRcsVaB3wWDxD9QJJHa7MnrmvJHVR2mMSbeqgQEnQeZvSDP8B9m908YqckvIiECftgQs+yIp1tpKH3Ob7lAtSbRaS5LV2D7kZPHArSx8TGTazlf1wGakbPZZKbKiTGEP3b7HCc9JEP5001vbZ099z1gkXjUkxCav2WUokfdo0KadmlyyKfGQ+hhBbPdDp8ODktWKrVfwjmTU5fUSfHW9mAvxyZj+GBTm0HhgRuTeUafN3uambkzDVPaeUq/qQ7PVEboIWT2WXM6/d9Bm77hsMEzytEbxRpBJfkelTzAdG8eCcq1SP9r87TewtR9OJR+lJmyJhIXVvmrG7/iF+8Crnee9fk/ZHFc0EJtPyK2HXM0gWB6V5HZcBD751l4+aHPd0Nkv1WOEUUt84jQvYHHSVJ/dOUm2vkZyhoPrOYEUTN7J4CinmNoo56URAIdjCWqMnPw2SqEbCY7vUikjpsY5VRtKfQX/VLu6vqdHHsMaQsPkKkRyK4Zi+wKAG3OVWTy1RrUHFz1x7stpMHx9cW8ky1ArMK2Jm3QoAXEYYXJRUGJZJfv2ZDUVZv46OJsd8/gov5FAzpKmTrYhk6Ok0Xv1aR/tVYXwKXOaRQkfHWPMtHui577oo06VrIv/RRzJKyjDgiRSBX9qizJcOmT6miaY1i/PA48FR3gNQfUtbF4YGd/iZRRBQ5h/w4w+pKzLtqUg5gLHBH3cbWPfGIrVw==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(39860400002)(396003)(346002)(376002)(136003)(230922051799003)(1800799012)(451199024)(186009)(64100799003)(82310400011)(36840700001)(46966006)(40470700004)(41300700001)(2616005)(6666004)(478600001)(1076003)(26005)(107886003)(336012)(426003)(4326008)(8676002)(5660300002)(8936002)(4744005)(2906002)(47076005)(70206006)(54906003)(316002)(70586007)(86362001)(36860700001)(356005)(81166007)(82740400003)(6916009)(36756003)(40460700003)(40480700001)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jan 2024 04:45:25.4808 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f3d97ffd-9faa-4b30-a7c0-08dc214e4697
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A6.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB6924
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,29 +84,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Disable the config SPI_ADVANCE, as getting the below error
-../arm-xilinx-linux-gnueabi-ld.bfd.real: drivers/core/ofnode.o: in function
-`ofnode_get_property':
-/u-boot/drivers/core/ofnode.c:1185: undefined reference to `fdt_getprop'
-make[1]: *** [scripts/Makefile.spl:527: spl/u-boot-spl] Error 1
+Use ring_idx to pair rings. ring_idx will be same as tx flow_id for all
+non-negative flow_ids. For negative flow_ids, ring_idx will be tchan->id
+added with bchan_cnt.
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
 ---
- configs/imx28_xea_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+Changes from v3 to v4:
+*) No functional change. Splitted the patch out of the series as suggested
+   by Nishant.
 
-diff --git a/configs/imx28_xea_defconfig b/configs/imx28_xea_defconfig
-index 64a0561a34..36d3e73d0a 100644
---- a/configs/imx28_xea_defconfig
-+++ b/configs/imx28_xea_defconfig
-@@ -122,6 +122,7 @@ CONFIG_SPECIFY_CONSOLE_INDEX=y
- CONFIG_DM_SERIAL=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
-+# CONFIG_SPI_ADVANCE is not set
- CONFIG_MXS_SPI=y
- CONFIG_SPL_CRC8=y
- # CONFIG_SPL_OF_LIBFDT is not set
+v3: https://lore.kernel.org/all/20240124064930.1787929-2-danishanwar@ti.com/
+
+ drivers/dma/ti/k3-udma.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
+index 8a62d63dfe..eea9ec9659 100644
+--- a/drivers/dma/ti/k3-udma.c
++++ b/drivers/dma/ti/k3-udma.c
+@@ -876,13 +876,20 @@ static int udma_alloc_tx_resources(struct udma_chan *uc)
+ {
+ 	struct k3_nav_ring_cfg ring_cfg;
+ 	struct udma_dev *ud = uc->ud;
+-	int ret;
++	struct udma_tchan *tchan;
++	int ring_idx, ret;
+ 
+ 	ret = udma_get_tchan(uc);
+ 	if (ret)
+ 		return ret;
+ 
+-	ret = k3_nav_ringacc_request_rings_pair(ud->ringacc, uc->tchan->id, -1,
++	tchan = uc->tchan;
++	if (tchan->tflow_id >= 0)
++		ring_idx = tchan->tflow_id;
++	else
++		ring_idx = ud->bchan_cnt + tchan->id;
++
++	ret = k3_nav_ringacc_request_rings_pair(ud->ringacc, ring_idx, -1,
+ 						&uc->tchan->t_ring,
+ 						&uc->tchan->tc_ring);
+ 	if (ret) {
 -- 
-2.25.1
+2.34.1
 
