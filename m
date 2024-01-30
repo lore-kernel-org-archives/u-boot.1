@@ -4,78 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CBE8C46CD2
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 19:31:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEE10C47DA9
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 19:55:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFA4C8785A;
-	Tue, 30 Jan 2024 20:31:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D1AA28799C;
+	Tue, 30 Jan 2024 20:55:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DWYs1cJu";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="UZ8WllAL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C579878CB; Tue, 30 Jan 2024 20:31:23 +0100 (CET)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 274D8879AF; Tue, 30 Jan 2024 20:55:54 +0100 (CET)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B4728784B
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 20:31:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 170B08796B
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 20:55:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2950a3fcf42so986731a91.0
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 11:31:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706643079; x=1707247879; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1wN5Gyj1e0HZl/puOag7EjRUCI0qBttQK4ComtSyqes=;
- b=DWYs1cJuINWqXCmgtG1Jcj66CoCZjwhf3ij9SgqX4yqBAe5mb5C59rbHDguz2ZJzOh
- qFJfvSf+YooXGBlHFEj2ZXg6gh9DGOt41JTSJzWLTxO7EA9x6s1LeXHec1CSwnvJXW4T
- 49gKwqHqE9Vhw/P496I9859uPTRem1h9jup54ij92aJX9efwGHgbnYU2e7/8x/rXmBZu
- XSpg4EywZFUVo2cGt1+tlaZSd8Tr2NiSp+ApnbZ4aSpBXqd7drHp3iqWMLoC640sWE+k
- P6gefXE/2FoTMMIlVqpmfK/U4yKntElWIkK+SnjpLvZgZV5smFcyRWp5h+d3USaCGS82
- ZaMA==
+ spf=pass smtp.mailfrom=mzamazal@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1706644550;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=pKpT/omlVx5JaA7IiPmKX2JMOmfs0ZiCJWi7ztT22CU=;
+ b=UZ8WllALLaerPdhUM+LtkAUqN+SdmhQv8xuwyVLiVn9okVoF3WbLQcLtUKxxWZDW18AV8U
+ oz287YikJSoXaSV4kS/GUMx20EPvHpFZNFi/OxAQwLYpRCjTVOmykvrhLXa7OWplaycnlS
+ YqcwUEcmCzrZASCttuNhKNrRGJoXOo4=
+Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
+ [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-570-16JY13-TNC2fPNLxj1n9GA-1; Tue, 30 Jan 2024 14:55:49 -0500
+X-MC-Unique: 16JY13-TNC2fPNLxj1n9GA-1
+Received: by mail-lj1-f200.google.com with SMTP id
+ 38308e7fff4ca-2d05c9cbc92so10734861fa.2
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 11:55:49 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706643079; x=1707247879;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1wN5Gyj1e0HZl/puOag7EjRUCI0qBttQK4ComtSyqes=;
- b=Rz+hv+jWBVCzAuYSth6w0F75UsJwfyMOjPdS2XywTQq4Xqe9ojMchjoV4yDSyTwDp8
- c2kP+vYGWNn8Y82Put+SK5X3r9nmopb8/xSjFTqh1Lr65uV3vV7BcP7zdJjAPep6x4Za
- NY2ib5rSWb8i0B6QBGrkX6hgKCMf3uNnG0hk98Ea98ESlJKCE8EfFa4OjU53tu5y7fvR
- CZYfa2uK7e9T1hty/8ihUFPmr54s8Ya/USxWupuqTe6sJPWrB48qjkL4Y3Qz0RIKmYmv
- FXO2IY6UsMvz5jdtokpd8rrOl0qjN5gXbHlzzhzr6Mmy0Ks+/XBmTs5w2JBosG2fnTQf
- VFTQ==
+ d=1e100.net; s=20230601; t=1706644547; x=1707249347;
+ h=content-transfer-encoding:mime-version:user-agent:message-id:date
+ :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=pKpT/omlVx5JaA7IiPmKX2JMOmfs0ZiCJWi7ztT22CU=;
+ b=YaFmqLIJdRLbnt2BKzRaX5StlLmOivv18uqjPGa6NBryd7XzMXOpJTLBUKUGsrVB+N
+ YIZ4tYS8aDxGoPii4StIFAVDaI/T9TuAPlXrTBeNHHggi07cE67mDbC2rDvg760uUd+K
+ uJuf8L/4mzIlUxDQwOOyclm5hhlaaX9N+d6nAAY+XeU19I0yxajcrFPAVP2cPZyMUvYp
+ cj335OrDjBTDyLaY5Wgde0u5yJxqWsrYptVO6LTBg5id6rg4dOWzVOOLmtIIH7S1HhEB
+ TQq04CyiMbqpYNVRiQB/OAoNV+XUvHggjIYWFFwnNCtyc1qTi+U34OuZEYRZU6YWQG4a
+ X6tw==
+X-Gm-Message-State: AOJu0YymM+RBl/YGhwrceP7eTimAsBMmxb8lFIIt07AMaPkFxx6WEguh
+ a9GSKo2fS/ZpVAcleWtW1mN00OGj15SjOegr+RLzn3zxYSFe/8bWBWTdNkOXRRg432oY1oHEip9
+ xtYn0biphSAitcRzH33HJcxrtBiYUrJHwQIrRz7F1uwImJoiIX1YQ9bZbW1yq6rnRSfIuduraXY
+ ou0gZ8gdifZzaAx4woAyfsRMjE+PVHSNfMyoo=
+X-Received: by 2002:a2e:8ed9:0:b0:2cf:1dc1:7faa with SMTP id
+ e25-20020a2e8ed9000000b002cf1dc17faamr2043935ljl.16.1706644547552; 
+ Tue, 30 Jan 2024 11:55:47 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEGmQvw1LLXyQ1nAQU4umJg39U8uzElzXGcRd7KD0P3k9L2AkXPcsc5r7Flp9BgxowfUnwxNw==
+X-Received: by 2002:a2e:8ed9:0:b0:2cf:1dc1:7faa with SMTP id
+ e25-20020a2e8ed9000000b002cf1dc17faamr2043925ljl.16.1706644547164; 
+ Tue, 30 Jan 2024 11:55:47 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCX95u7SK8CQOywMCaknHFZQU1gf7vHOCFQu31p+DPcJFgYustzF53tW5hqmDE5OdUYpExEHb7ePIzjkXBuKChDLsYy3Lg==
-X-Gm-Message-State: AOJu0YwATGZg2XF2y+rehJ/R5CqobeaiLxlaSTETPAAM7DbYzY8yzNyU
- HwFSir6pNc13dCmflEFb/DBzZvznd4uyxRaN0N1Fj/ZubWXz90fBn4MCiREJCt/McfA0KnSHiQ0
- MtiSbYkShHlcJEH9qRftqUMf70g4=
-X-Google-Smtp-Source: AGHT+IHKCpPioqrcPETWEBtfrcJT/MlFg7qOEZNvL8LapYGEGVkks+hixsQNq1t36x/CDSyCJEPuHEywhk48W84mACY=
-X-Received: by 2002:a17:90a:df11:b0:290:f5f7:caff with SMTP id
- gp17-20020a17090adf1100b00290f5f7caffmr735291pjb.3.1706643079598; Tue, 30 Jan
- 2024 11:31:19 -0800 (PST)
-MIME-Version: 1.0
+ AJvYcCXYE35kjB4Ala+d88k+lc+Dxe61eJjqpR9WHBUAzZdaQ9Sl9F6nC7cR+4Phovbc+b6BNpSU6NvA9gLgOGWURDg5/dkx0kv7IRvANn2qSpkIEaIRlgef7lbsEpt+B0ZkezP16fuLR947Aqtit0VU
+Received: from nuthatch (ip-77-48-47-2.net.vodafone.cz. [77.48.47.2])
+ by smtp.gmail.com with ESMTPSA id
+ wb14-20020a170907d50e00b00a35adbc019asm2768920ejc.111.2024.01.30.11.55.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 Jan 2024 11:55:46 -0800 (PST)
+From: Milan Zamazal <mzamazal@redhat.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Gilles Talis <gilles.talis@gmail.com>,  Peng Fan <peng.fan@oss.nxp.com>,
+ uboot-imx@nxp.com,  u-boot@lists.denx.de
+Subject: Re: [PATCH v2] imx: imx8mp: Add support for Polyhex Debix Model A SBC
+In-Reply-To: <CAOMZO5A2W4ZZBdUjNkA9fqB+kBgASM7esfcLL3RvdwmCi9qakw@mail.gmail.com>
+ (Fabio Estevam's message of "Tue, 30 Jan 2024 16:31:09 -0300")
 References: <20230523192155.33222-1-gilles.talis@gmail.com>
- <58a07085-3926-b942-fb8c-58f1f5eac421@oss.nxp.com> <877clq6odx.fsf@redhat.com>
+ <58a07085-3926-b942-fb8c-58f1f5eac421@oss.nxp.com>
+ <877clq6odx.fsf@redhat.com>
  <CAKcgs2x1FdvW0afXN=GGRc5nb8rhZtm70xzkURFeworcmTHPpg@mail.gmail.com>
  <87bkavbo6c.fsf@redhat.com> <877cjrss43.fsf@redhat.com>
-In-Reply-To: <877cjrss43.fsf@redhat.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 30 Jan 2024 16:31:09 -0300
-Message-ID: <CAOMZO5A2W4ZZBdUjNkA9fqB+kBgASM7esfcLL3RvdwmCi9qakw@mail.gmail.com>
-Subject: Re: [PATCH v2] imx: imx8mp: Add support for Polyhex Debix Model A SBC
-To: Milan Zamazal <mzamazal@redhat.com>
-Cc: Gilles Talis <gilles.talis@gmail.com>, Peng Fan <peng.fan@oss.nxp.com>,
- uboot-imx@nxp.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ <CAOMZO5A2W4ZZBdUjNkA9fqB+kBgASM7esfcLL3RvdwmCi9qakw@mail.gmail.com>
+Date: Tue, 30 Jan 2024 20:55:45 +0100
+Message-ID: <87r0hy38am.fsf@redhat.com>
+User-Agent: Gnus/5.13 (Gnus v5.13)
+MIME-Version: 1.0
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,28 +111,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Milan,
+Fabio Estevam <festevam@gmail.com> writes:
 
-On Tue, Jan 30, 2024 at 9:22=E2=80=AFAM Milan Zamazal <mzamazal@redhat.com>=
- wrote:
+> Hi Milan,
+>
+> On Tue, Jan 30, 2024 at 9:22=E2=80=AFAM Milan Zamazal <mzamazal@redhat.co=
+m> wrote:
+>
+>> Well, after trying both the SD cards again with fresh reinstallations, i=
+t works
+>> with a 32 GB card and I get the error above with a 64 GB card.  Is it po=
+ssible
+>> that there is something wrong with SDXC cards?
+>
+> Does the change below help?
+>
+> --- a/arch/arm/dts/imx8mp-debix-model-a-u-boot.dtsi
+> +++ b/arch/arm/dts/imx8mp-debix-model-a-u-boot.dtsi
+> @@ -128,6 +128,9 @@
+>         bootph-pre-ram;
+>         sd-uhs-sdr104;
+>         sd-uhs-ddr50;
+> +       assigned-clocks =3D <&clk IMX8MP_CLK_USDHC2>;
+> +       assigned-clock-rates =3D <400000000>;
+> +       assigned-clock-parents =3D <&clk IMX8MP_SYS_PLL1_400M>;
+>  };
+>
+>  &usdhc3 {
 
-> Well, after trying both the SD cards again with fresh reinstallations, it=
- works
-> with a 32 GB card and I get the error above with a 64 GB card.  Is it pos=
-sible
-> that there is something wrong with SDXC cards?
+No, the same error. :-(
 
-Does the change below help?
+Regards,
+Milan
 
---- a/arch/arm/dts/imx8mp-debix-model-a-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mp-debix-model-a-u-boot.dtsi
-@@ -128,6 +128,9 @@
-        bootph-pre-ram;
-        sd-uhs-sdr104;
-        sd-uhs-ddr50;
-+       assigned-clocks =3D <&clk IMX8MP_CLK_USDHC2>;
-+       assigned-clock-rates =3D <400000000>;
-+       assigned-clock-parents =3D <&clk IMX8MP_SYS_PLL1_400M>;
- };
-
- &usdhc3 {
