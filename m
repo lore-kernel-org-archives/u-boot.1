@@ -4,75 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F6B1C47DB3
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 01:54:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22DD7C47DB3
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 01:54:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D56E687C29;
-	Tue, 30 Jan 2024 02:54:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 62D5F87D18;
+	Tue, 30 Jan 2024 02:54:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tn99MRXS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iH4PcKp2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE9DB87D18; Tue, 30 Jan 2024 02:54:14 +0100 (CET)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id 3543D87C3B; Tue, 30 Jan 2024 02:54:15 +0100 (CET)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E785187C29
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 02:54:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A2B687BEE
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 02:54:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-603edb4c126so4867687b3.3
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 17:54:11 -0800 (PST)
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-5ff7a098ab8so33557007b3.3
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 17:54:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1706579650; x=1707184450; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1706579652; x=1707184452; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rqaLWrtBr2J/ptehxZs/qRqPgUsXcX+d1Ob2jjfo+zM=;
- b=tn99MRXSV4RAbrDRyJHVUxlbf4g+Sm4kSUkZ7t3YkQpAXxhBS8MgUK6wPTLPQDCNlx
- rF4xMj/5CoU+CmCWTROaMictaueL4XHsEtwaxNQgQDQdoQGlMmG4yxSssONz+gdA9bHW
- PBaMRrkpSfchUcoz2E/FE+T5g4g5bbFb3iAbQ=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=vfiZzKTo5zdc3rAQSZcmfVHbUkb4wAvvbGKap7trJjQ=;
+ b=iH4PcKp2kMg1XYUnMSwJPHo+Q4jvaitnJBItTCHQa6y0NMpy2h8brY+2JB260MZMjT
+ olGefbFRfkvXyTQd9Pi7CQYknYKfoT92GWMBRq6plpRb89wW1oE7KgAWBeQwt3RyWaHI
+ J+FamB4GSnjd1+wEPRvzxwN2YEUdyTqNRJ2Pk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706579650; x=1707184450;
+ d=1e100.net; s=20230601; t=1706579652; x=1707184452;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rqaLWrtBr2J/ptehxZs/qRqPgUsXcX+d1Ob2jjfo+zM=;
- b=TnPzYsPdR/CSH6Jef9rCLacwfdS6N9+DJ/ftPcWVePjbKCyhpmGsqLApDy6ZhCXslH
- oRywZYCnTdoOrvXVSDEFZV2tMCglUX6xx2MHIwEkQ7AxrFcKayP7DiFWZbVsv87kO39c
- JEszLdkNliYWSEmd7/Tohyfi3mj9dRnn/7q/dom5yAZWKTJYKerjxckn6PYXp9/LACT4
- 9AhCvKrVoxkgpLnIi3BZpK6mLrP4mn952eeKyB0aSqqSXLwJNWlQTXR1NlTrOMiUkvdx
- Jhg7CjwvK+cWdopazCIDI9Uh/Ba2Ia1XNmPvhD+nVjGkN8jTNsSfxodgSQlE8zBBNQc6
- bQvw==
-X-Gm-Message-State: AOJu0YzQccLbFNX1qzuyOoxF1zsp6l/2r5rkP4UBRpCiVqccJXrLllB/
- AmjnbDjnaBwK7GCMvwbdRoKTVY5jmqMDDuY10yohL2PNdXUw2E5Qa8avUZsekLw=
-X-Google-Smtp-Source: AGHT+IFyede8Jc8In9eaEiCKFfaQ6L06VsbnYL/22Y2nnBumg4ajC8z1/rVro8EzlGq7dEqzfcorMw==
-X-Received: by 2002:a81:ae28:0:b0:5eb:d94d:4300 with SMTP id
- m40-20020a81ae28000000b005ebd94d4300mr4954849ywh.19.1706579650214; 
- Mon, 29 Jan 2024 17:54:10 -0800 (PST)
+ bh=vfiZzKTo5zdc3rAQSZcmfVHbUkb4wAvvbGKap7trJjQ=;
+ b=JF1vwIPMMfI0Qp/16TXPPWaDKh0L8U1bpy1ao1IgKoPuLIdAwVOoW7l6cLkHQ/7ArJ
+ drlZv89KOST32x9yzZ64msfA2lSrBSWxMpGffW55+uuPx7aQ90hLe3q0prImC8nTelUN
+ OJxfztNE56kUFWPU/yqbBF/GrlM/AE8YkwYQhomnnDlQdzH0zaMbEh0lqRWZid/OEF0W
+ QQoghOwlA37h7cYBq+KUIRgG8XzvbRKl8LXv9C27xhqldQURJSXNW9deCQg9GgTw4tg6
+ EEBhDNTZKJ/4aOM9DWohWF8U7dD7PaeWXMlj9dJkP38MkZNh3DO/3jdhDpb2s/KuN44Q
+ KzIQ==
+X-Gm-Message-State: AOJu0YyNuxqDX2bKUisWfcer57TGrH9RdBtjTXwWwZXowPV7oKH7ArAs
+ 8++vN10QFJCJTvKU3Q75lTUkQO7TZZKr4YfwWM/XYMkm8lx5tUFsXSiMRnv06Ig=
+X-Google-Smtp-Source: AGHT+IGqX5SbujmB586V06ijhzsrR2EHADHMVllfEsf35rFtdKPXHslKfGHZRbYXxrGmASlCVVAg1A==
+X-Received: by 2002:a0d:cc04:0:b0:603:edeb:6007 with SMTP id
+ o4-20020a0dcc04000000b00603edeb6007mr303896ywd.4.1706579651837; 
+ Mon, 29 Jan 2024 17:54:11 -0800 (PST)
 Received: from [127.0.1.1]
  (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
  [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
- x124-20020a81a082000000b005ff93c11cf5sm2881712ywg.100.2024.01.29.17.54.09
+ x124-20020a81a082000000b005ff93c11cf5sm2881712ywg.100.2024.01.29.17.54.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jan 2024 17:54:09 -0800 (PST)
+ Mon, 29 Jan 2024 17:54:11 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, sjg@chromium.org, n-jain1@ti.com, 
- Devarsh Thakkar <devarsht@ti.com>
-Cc: praneeth@ti.com, nm@ti.com, vigneshr@ti.com, a-bhatia1@ti.com, 
- j-luthra@ti.com, nsekhar@ti.com
-In-Reply-To: <20240124090509.303787-1-devarsht@ti.com>
-References: <20240124090509.303787-1-devarsht@ti.com>
-Subject: Re: [PATCH v2] common: splash_source: Don't compile ubifs splash
- cmd for SPL build
-Message-Id: <170657964938.1823400.14777098223707220298.b4-ty@konsulko.com>
-Date: Mon, 29 Jan 2024 20:54:09 -0500
+To: joe.hershberger@ni.com, u-boot@lists.denx.de, 
+ Ralph Siemsen <ralph.siemsen@linaro.org>
+In-Reply-To: <20240119213216.3811402-1-ralph.siemsen@linaro.org>
+References: <20240119213216.3811402-1-ralph.siemsen@linaro.org>
+Subject: Re: [PATCH] env: sf: report malloc error to caller
+Message-Id: <170657965136.1823400.13403258904847442881.b4-ty@konsulko.com>
+Date: Mon, 29 Jan 2024 20:54:11 -0500
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -93,24 +89,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 24 Jan 2024 14:35:09 +0530, Devarsh Thakkar wrote:
+On Fri, 19 Jan 2024 16:32:17 -0500, Ralph Siemsen wrote:
 
-> Don't compile ubifs splash mount command for SPL build as this command
-> is not supported (and also not enabled) during SPL stage.
+> In the non-redundant code for env_sf_save(), a failure to malloc() the
+> temporary buffer produces the following output:
 > 
-> This fixes below compilation error, when CONFIG_CMD_UBIFS is enabled in
-> defconfig along with splash screen enabled at SPL stage:
+>     Saving Environment to SPIFlash... OK
 > 
-> "aarch64-none-linux-gnu-ld.bfd: common/cli.o: in function `run_command':
-> u-boot-next/u-boot/common/cli.c:51: undefined reference to
-> `parse_string_outer'
-> u-boot-next/u-boot/common/cli.c:51:(.text.run_command+0x10): relocation
-> truncated to fit: R_AARCH64_JUMP26 against undefined symbol
-> `parse_string_outer' make[2]: ***
-> [u-boot-next/u-boot/scripts/Makefile.spl:527: spl/u-boot-spl] Error 1
-> make[1]: *** [u-boot-next/u-boot/Makefile:2053: spl/u-boot-spl] Error 2
-> make[1]: Leaving directory 'u-boot-next/u-boot/out/a53' make: ***
-> [Makefile:177: sub-make] Error 2"
+> This is misleading as the flash has neither been erased nor written.
 > 
 > [...]
 
