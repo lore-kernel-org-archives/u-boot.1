@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5596CC47DDF
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 12:54:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EDD5C46CD2
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 12:54:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EDC787D80;
+	by phobos.denx.de (Postfix) with ESMTP id A667687D8C;
 	Tue, 30 Jan 2024 13:53:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ChvFLsYv";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KDaiP4tU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABCA687C44; Tue, 30 Jan 2024 11:35:29 +0100 (CET)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
+ id D453D87C44; Tue, 30 Jan 2024 11:40:54 +0100 (CET)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74FD08796E
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 11:35:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F365877AF
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 11:40:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ppighouse@gmail.com
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-6ddc1b30458so3323958b3a.1
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 02:35:27 -0800 (PST)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1d74045c463so20023015ad.3
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 02:40:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706610925; x=1707215725; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1706611250; x=1707216050; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
  bh=79Ldr126af2p6IhRGQAFww97a5z+iXTLxFVEAw1gyOU=;
- b=ChvFLsYv/DNzR/NmPMWU0WUtUViB/4cLx9EPGy2Wdhr/uwdiYLQ6yHXsNWe2duL6ny
- wg5QTesyCBokUuAJuZ1N8gUggHr6d4kW3yQhgfRMqRvfvDJ0To0HqTlQSZ+8CiirPW5I
- ccm3uwb//qu/TT/vYF6ZxsFDOxTcGtZVUIucNcZJVXhcLK4sZtg+Q2Vc/SBEl/VKRdyC
- eSx2EJ66q3JMLdAfkky0kpFxcHo3ZxPQANgv/9qZdVj2yhLsnotEQTbvS6RzjTzS8knx
- kkMmuv3phT9mxLTJZAKZKhQ6g5tc9O0/2IQ3fmxEna2tOujtQCakWRokmNejglw/9F1Q
- UEVw==
+ b=KDaiP4tUYp12D2/38M+Rp94yVbb0PMTJ+mP+F80XE0BTZrIiNRUEJnhf8UxciBi6Yk
+ m2YhQvi4rnlqIXf8cAVKlJU1rAZj88/3efvgcQZUcFzO/HIKk8AclJg1XQOuLD/YIz5m
+ bf5eGG598vcrdcNTDQBDHelffh/vfu8hALiEisVSRSfSKKIzWFYWRI2ymin3NqCCnV+0
+ 9z5U6vp93qSduNBioHJCKyr9ixG29ufE69AzufgmkO81wca+nfxJCcY619u21ItZ2REK
+ FdnY4uxZOAhZdvlOze5bc2D5kuE/eINNtZrWLWjMIrHZfJw0pKdLveRNgLHglmBF99Ca
+ vVVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706610925; x=1707215725;
+ d=1e100.net; s=20230601; t=1706611250; x=1707216050;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
  bh=79Ldr126af2p6IhRGQAFww97a5z+iXTLxFVEAw1gyOU=;
- b=XthfqJ6+JGeQDwUNpRpI1nNgQ6ulloxpq4T5ODpa2tjoPYpHv1N/R4Ddl5MbfJw//G
- kIhdCtoih+LM66W99mmAI0N5Oe4v4IR+Wki81ULOPYi4xoBGLDONNrPaIyS+xOUeWcXP
- Cbr/byWtbo6Bmi15vCUDG8cqpCZYcVEKDkncXt02w9aNSDZ87g+FM7skUZ6edslx2Orn
- zPSGIy7GH3snWWsTzEF0jaIvmf6FnWMYvwJWNLZN1TUa0pSH4EUino5MJODITNOc9fyR
- sGRJAdESJBYQjJFj6idzfTewZLjDJCiSgrq29qTm1tcWBPUTVOpisc+WnvUUfAtrW8F3
- x8zA==
-X-Gm-Message-State: AOJu0YwdGYY3guOeCglI9DlWQPVmB5CXu6sovxMga8ajZojNrqgLAgud
- WXsh3YlkzqkAXy0zRZs6ptksQyjDXvI6CqzFcSCKC9e/HrKNWP0YQY5HqoXzZps=
-X-Google-Smtp-Source: AGHT+IG3gZAMbjyIKVXuc3cLRY+bylc1VYEr/lcolGEUmNMs0ehXhS5XFT4lV4g5FHE0G24Ncjdd/g==
-X-Received: by 2002:a05:6a00:2b4f:b0:6db:d1b4:1b27 with SMTP id
- du15-20020a056a002b4f00b006dbd1b41b27mr6095329pfb.4.1706610925179; 
- Tue, 30 Jan 2024 02:35:25 -0800 (PST)
+ b=wtFwGb4WtJQB2zGNHE62M3VAy17YGCpBCJ8YSBfFRTZexKJ/oEY9Pk5qDOa8bK4azI
+ MZzEkLjJT4AJhNsF6OzdcuAer3ckCflCy9FaZZO9EDsr8LeEAQ1r8vNOmBzbK8s8jldd
+ /1b8V6YKDYk/CIpJ3fHBQBjAMSUAlYcVJ800z0Jh2COyyRlHIDvSv88/VcZF9jIf1el4
+ Ch5VbXhaZFaVMZy6zGkyFYM0nAlJyZnAD/0xf0TXEiMCR+oIMeLstbI/BAxkNZlIj3UZ
+ 1LDaantt2fTg9DvM8UwlLVsNlcIpbEVPSNhYU4MWtAwSMUf9NB1+gMFIEPgmkk4H5AFy
+ ftYQ==
+X-Gm-Message-State: AOJu0YymTUGt54xqBm+jJfuDPfehv81UgCQGySI98HF24nbFdeNM8Zej
+ SraMTEr/Gy519JQnO+AxNsoh0wtdRwJKfuOtW2a4kRJ8XiU54pkfd4FIU9LZX6g=
+X-Google-Smtp-Source: AGHT+IE7uu8+wo+5kHWQILEBLhyyXFL5yhJpFeBR9YxETUCzWm2S7aBrjkRQG4eEmrGzqIDw8AElbQ==
+X-Received: by 2002:a17:903:2581:b0:1d9:f6e:a1a8 with SMTP id
+ jb1-20020a170903258100b001d90f6ea1a8mr662844plb.53.1706611249986; 
+ Tue, 30 Jan 2024 02:40:49 -0800 (PST)
 Received: from localhost.localdomain ([124.218.12.74])
  by smtp.gmail.com with ESMTPSA id
- 36-20020a630c64000000b005cf5cbac29asm7864287pgm.53.2024.01.30.02.35.23
+ jk5-20020a170903330500b001d740687d1csm3994672plb.193.2024.01.30.02.40.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jan 2024 02:35:24 -0800 (PST)
+ Tue, 30 Jan 2024 02:40:49 -0800 (PST)
 From: Kelly Hung <ppighouse@gmail.com>
 X-Google-Original-From: Kelly Hung <Kelly_Hung@asus.com>
 To: u-boot@lists.denx.de
 Cc: openbmc@lists.ozlabs.org, kelly_hung@asus.com,
  Kelly Hung <Kelly_Hung@asus.com>
-Subject: [PATCH] ARM: dts: ast2600: add dts for asus product
-Date: Tue, 30 Jan 2024 18:35:19 +0800
-Message-Id: <20240130103519.199646-1-Kelly_Hung@asus.com>
+Subject: [PATCH] dts: ast2600: add x4tf dts for asus product
+Date: Tue, 30 Jan 2024 18:40:45 +0800
+Message-Id: <20240130104045.199879-1-Kelly_Hung@asus.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
