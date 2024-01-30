@@ -4,78 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7511CC46CD2
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 12:25:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E8E3C46CD2
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 12:29:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDF8187C26;
-	Tue, 30 Jan 2024 13:25:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
+	by phobos.denx.de (Postfix) with ESMTP id AD62B87C05;
+	Tue, 30 Jan 2024 13:29:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="P9RsP6BH";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dViDE2Vl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 452A787B05; Tue, 30 Jan 2024 13:25:18 +0100 (CET)
-Received: from cpanel.siel.si (cpanel.siel.si [46.19.9.99])
+ id 9A77D87C2F; Tue, 30 Jan 2024 13:29:31 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2841187C26
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 13:25:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1EEB986FCE
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 13:29:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=norik.com
-Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=primoz.fiser@norik.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
- s=default;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hOo8FVbtHrpZVwnJAg+p1IedLHI+Xv+CFa1yCqfBmoM=; b=P9RsP6BHBaHXjBWj0C5HYL9CDx
- D3VhB5TXyQG7C0OJSa20ARgl35OImbkiopuhPpqNAk3o/wj7zlwgPSF8L3OM1Za+UodxPgQVTPJMj
- rEpxySipPCPoMhXxq700QQXCLilZQVjmuTXlkTJBzQS8344MMZKlVdF29fb6G/TVHWmzWra2YgVQW
- XOjbyroAl+TTh1CKpkTxF6iNTCWzeQoDV+WGDZWsHKLlbMoUQbAEvtjquHWrmBYvwxCg1XSr5y9Se
- jsxLZ+vj6fQMlpK124h9H/K6w1LDoKZvjs9riMx2mUfDqFFMb67fikRRI4+mYknYFdtKpe/TbZ1GG
- GB5ErBXQ==;
-Received: from [89.212.21.243] (port=54746 helo=[192.168.69.116])
- by cpanel.siel.si with esmtpsa (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96.2)
- (envelope-from <primoz.fiser@norik.com>) id 1rUnAx-00A2KJ-2K;
- Tue, 30 Jan 2024 13:25:15 +0100
-Message-ID: <99d704dc-8133-45e1-a346-ab1d05d5fb7b@norik.com>
-Date: Tue, 30 Jan 2024 13:25:15 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40UCTRQ4069603;
+ Tue, 30 Jan 2024 06:29:27 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1706617767;
+ bh=uL0plh0BLI1cn396oRLU2xy+KhvOjyn211tkYV4E3oA=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=dViDE2VlKKLun3pu2CRwE4hDMVGfZsiup4fs2x+tOYyDp0lNI6duyKikVx21gEIHY
+ RhVgnUxM4TLqbstKY/3PZqjf5FXsiJxvI9SbHqpfBZeIpIDwrVRs9wON3rh7dfMARU
+ AtFr4K9a/gKKPmgsBCxp+FbsnH0x1CJhCZjS3T3E=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40UCTRY1093364
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 30 Jan 2024 06:29:27 -0600
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 30
+ Jan 2024 06:29:26 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 30 Jan 2024 06:29:26 -0600
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40UCTQc9073619;
+ Tue, 30 Jan 2024 06:29:26 -0600
+Date: Tue, 30 Jan 2024 06:29:26 -0600
+From: Nishanth Menon <nm@ti.com>
+To: Dhruva Gole <d-gole@ti.com>
+CC: <trini@konsulko.com>, <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>
+Subject: Re: [PATCH V4 1/2] firmware: ti_sci: fix the secure_hdr in do_xfer
+Message-ID: <20240130122926.mwtho3l36xphqrql@unmindful>
+References: <20240130115847.860345-1-d-gole@ti.com>
+ <20240130115847.860345-2-d-gole@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] board: phytec: phycore-imx93: Add
- phyBOARD-Segin-i.MX93 support
-Content-Language: en-US
-To: Mathieu Othacehe <m.othacehe@gmail.com>
-Cc: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
- Christoph Stoidner <c.stoidner@phytec.de>, Wadim Egorov
- <w.egorov@phytec.de>, Yannic Moog <Y.Moog@phytec.de>, u-boot@lists.denx.de,
- upstream@lists.phytec.de
-References: <20240125164503.32097-1-othacehe@gnu.org>
- <9f20708a-eefb-4a27-a413-8a9f5a472788@norik.com> <878r472m2n.fsf@gmail.com>
-From: Primoz Fiser <primoz.fiser@norik.com>
-Organization: Norik systems d.o.o.
-In-Reply-To: <878r472m2n.fsf@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cpanel.siel.si
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - norik.com
-X-Get-Message-Sender-Via: cpanel.siel.si: authenticated_id:
- primoz.fiser@norik.com
-X-Authenticated-Sender: cpanel.siel.si: primoz.fiser@norik.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20240130115847.860345-2-d-gole@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,173 +79,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mathieu,
-
-On 30. 01. 24 10:43, Mathieu Othacehe wrote:
+On 17:28-20240130, Dhruva Gole wrote:
+> The ti_sci driver in U-Boot has support for secure_msg as part of it's
+> do_xfer function. This let's U-boot send secure messages during boot up.
 > 
-> Hello,
+> The protocol to send such secure messages is described as part of the
+> struct ti_sci_secure_msg_hdr. As part of this, there are 2 fields for
+> checksum and reserved that occupy the first 4 bytes of any secure
+> message. This is called as the secure_hdr.
 > 
->> Please remove findfdt script.
->>
->> Not needed when you set fdt_file to CONFIG_DEFAULT_FDT_FILE above.
+> As of now, the secure_hdr needs to be 0 init-ed before sending secure
+> messages. However the existing code was never putting the zero-inited vars
+> into the secure_buf, leading to possibility of the first 4 bytes of
+> secure_buf being possibly garbage.
 > 
-> The reason I used findfdt is that CONFIG_DEFAULT_FDT_FILE is a string
-> so, we end up with:
+> Fix this by initialising the secure_hdr itself to the secure_buf
+> location, thus when we make secure_hdr members 0, it automatically ensures
+> the first 4 bytes of secure_buf are 0.
 > 
-> --8<---------------cut here---------------start------------->8---
-> fdt_file="oftree"
-> --8<---------------cut here---------------end--------------->8---
+> Fixes: 32cd25128bd849 ("firmware: Add basic support for TI System Control Interface (TI SCI)")
+> Cc: Nishanth Menon <nm@ti.com>
+> Cc: Andrew Davis <afd@ti.com>
+> Cc: Manorit Chawdhry <m-chawdhry@ti.com>
+> Signed-off-by: Dhruva Gole <d-gole@ti.com>
+> ---
+>  drivers/firmware/ti_sci.c | 12 ++++++------
+>  1 file changed, 6 insertions(+), 6 deletions(-)
 > 
-> which gives:
+> diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
+> index 6e9f93e9a302..49d2696a6d09 100644
+> --- a/drivers/firmware/ti_sci.c
+> +++ b/drivers/firmware/ti_sci.c
+> @@ -236,21 +236,21 @@ static int ti_sci_do_xfer(struct ti_sci_info *info,
+>  {
+>  	struct k3_sec_proxy_msg *msg = &xfer->tx_message;
+>  	u8 secure_buf[info->desc->max_msg_size];
+> -	struct ti_sci_secure_msg_hdr secure_hdr;
+> +	struct ti_sci_secure_msg_hdr *secure_hdr = (struct ti_sci_secure_msg_hdr *)secure_buf;
+>  	int ret;
+>  
+>  	if (info->is_secure) {
+>  		/* ToDo: get checksum of the entire message */
+> -		secure_hdr.checksum = 0;
+> -		secure_hdr.reserved = 0;
+
+I was thinking originally just adding memcpy(secure_buf, secure_hdr,
+sizeof(secure_hdr)) would save all the churn.. but anyways.. we save
+allocating secure_hdr struct.. not a big saving, but better code
+anyways..
+
+> -		memcpy(&secure_buf[sizeof(secure_hdr)], xfer->tx_message.buf,
+> +		secure_hdr->checksum = 0;
+> +		secure_hdr->reserved = 0;
+> +		memcpy(&secure_buf[sizeof(struct ti_sci_secure_msg_hdr)], xfer->tx_message.buf,
+>  		       xfer->tx_message.len);
+
+here and below:
+
+s/sizeof(var)/sizeof(*var) instead of sizeof(struct ... ) is probably
+all the change we need? rather than converting it to sizeof(struct ..)?
+same below. this would allow (theoretically), that the structure
+name to change for secure_hdr and there would be less churn? not that it
+matters here.. just a style thing..
+
+Either way:
+
+Reviewed-by: Nishanth Menon <nm@ti.com>
+
+>  
+>  		xfer->tx_message.buf = (u32 *)secure_buf;
+> -		xfer->tx_message.len += sizeof(secure_hdr);
+> +		xfer->tx_message.len += sizeof(struct ti_sci_secure_msg_hdr);
+>  
+>  		if (xfer->rx_len)
+> -			xfer->rx_len += sizeof(secure_hdr);
+> +			xfer->rx_len += sizeof(struct ti_sci_secure_msg_hdr);
+>  	}
+>  
+>  	/* Send the message */
+> -- 
+> 2.34.1
 > 
-> --8<---------------cut here---------------start------------->8---
-> u-boot=> run loadfdt
-> Failed to load '"oftree"'
-> --8<---------------cut here---------------end--------------->8---
-> 
-> whereas, if I set:
-> 
-> --8<---------------cut here---------------start------------->8---
-> u-boot=> setenv fdt_file oftree
-> u-boot=> run loadfdt           
-> 24579 bytes read in 5 ms (4.7 MiB/s)
-> --8<---------------cut here---------------end--------------->8---
-> 
-> I then see three options: introduce an unstrigify macro, hardcode
-> fdt_file=oftree in the env file, or use the findfdt hack.
 
-On my side there is no problem, see my output here:
-
-U-Boot 2024.04-rc1-00004-g686cb1ca1391-dirty (Jan 30 2024 - 10:58:24 +0100)
-
-CPU:   i.MX93 rev1.1
-Model: PHYTEC phyBOARD-Segin-i.MX93
-DRAM:  1 GiB
-Core:  184 devices, 22 uclasses, devicetree: separate
-WDT:   Started wdog@42490000 with servicing every 1000ms (40s timeout)
-MMC:   FSL_SDHC: 0, FSL_SDHC: 1
-Loading Environment from MMC... OK
-In:    serial@44380000
-Out:   serial@44380000
-Err:   serial@44380000
-Net:   eth0: ethernet@42890000
-Hit any key to stop autoboot:  0
-u-boot=>
-u-boot=> env default -a
-## Resetting to default environment
-u-boot=> saveenv; saveenv
-Saving Environment to MMC... Writing to redundant MMC(1)... OK
-Saving Environment to MMC... Writing to MMC(1)... OK
-u-boot=> printenv fdt_file
-fdt_file="oftree"
-u-boot=> run loadfdt
-48532 bytes read in 5 ms (9.3 MiB/s)
-u-boot=> boot
-switch to partitions #0, OK
-mmc1 is current device
-32688640 bytes read in 411 ms (75.8 MiB/s)
-Booting from mmc ...
-83 bytes read in 1 ms (81.1 KiB/s)
-48532 bytes read in 4 ms (11.6 MiB/s)
-Working FDT set to 83000000
-3615 bytes read in 3 ms (1.1 MiB/s)
-1209 bytes read in 2 ms (589.8 KiB/s)
-## Flattened Device Tree blob at 83000000
-   Booting using the fdt blob at 0x83000000
-Working FDT set to 83000000
-   Loading Device Tree to 00000000bcf0a000, end 00000000bcf19fff ... OK
-Working FDT set to bcf0a000
-
-Starting kernel ...
-
-
-
-Here is my diff compared to your v3:
-
---- a/board/phytec/phycore_imx93/phycore_imx93.env
-+++ b/board/phytec/phycore_imx93/phycore_imx93.env
-@@ -5,7 +5,7 @@ console=ttyLP0
- fdt_addr=0x83000000
- fdto_addr=0x830c0000
- bootenv_addr=0x83500000
--fdt_file=undefined
-+fdt_file=CONFIG_DEFAULT_FDT_FILE
- ipaddr=192.168.3.11
- serverip=192.168.3.10
- netmask=255.255.255.0
-@@ -22,11 +22,7 @@ mmcautodetect=yes
- mmcargs=setenv bootargs ${mcore_clk} console=${console},${baudrate}
-earlycon
-        root=/dev/mmcblk${mmcdev}p${mmcroot} ${raucargs} rootwait rw
- loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
--findfdt=if test $fdt_file = undefined; then
--            setenv fdt_file CONFIG_DEFAULT_FDT_FILE ;
--        fi;
--        echo fdt_file=${fdt_file};
--loadfdt=run findfdt;fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr}
-${fdt_file}
-+loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}
- mmc_load_overlay=fatload mmc ${mmcdev}:${mmcpart} ${fdto_addr} ${overlay}
- mmc_apply_overlays=
-
-
-
-So this should work. We have the same in the downstream u-boot-imx.
-
-Also, in-tree, phycore_am62x.env has the same:
-
-fdtfile=CONFIG_DEFAULT_FDT_FILE
-loadfdt=load mmc ${mmcdev}:${mmcpart} ${fdtaddr} ${fdtfile}
-
-Can you re-check, please?
-
-Maybe check your include/generated/environment.h?
-
-> 
-> I'm not sure which one is the better?
-> 
-> I will fix all the other remarks in the v4.
-
-OK, thanks.
-
-I spotted additional remark that was not fixed in v3:
-
-In file doc/board/phytec/imx93-phyboard-segin.rst, can you please change
-title from:
-
-phyCORE-i.MX 93 on a phyBOARD-Segin
-===================================
-
-to:
-
-phyBOARD-Segin-i.MX93
-=====================
-
-and this text from:
-
-U-Boot for the phyCORE-i.MX 93 on a phyBOARD-Segin.
-
-to:
-
-U-Boot for the phyBOARD-Segin-i.MX93.
-
-
-Last but not least, please remove:
-
-#define EEPROM_ADDR            0x50
-
-from board/phytec/phycore_imx93/spl.c
-
-As support for PHYTEC_EEPROM will come later and that define will be
-part of that series.
-
-Thanks and best regards,
-Primoz
-
-> 
-> Thanks,
-> 
-> Mathieu
-
-
-
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
