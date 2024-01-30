@@ -4,72 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C98EC46CD2
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 06:33:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 755C0C46CD2
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 07:39:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEF9687BAD;
-	Tue, 30 Jan 2024 07:33:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id A844987BDB;
+	Tue, 30 Jan 2024 08:39:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HxelPCvI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gXejulAK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F1BA87C4D; Tue, 30 Jan 2024 07:33:34 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 381E387C39; Tue, 30 Jan 2024 08:39:16 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCDE487A07
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 07:33:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DB60875B9
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 08:39:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40U6XPnd129137;
- Tue, 30 Jan 2024 00:33:25 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1706596405;
- bh=T4wV7UIt/N3ikmYc4B5oKQjAeTlncqZcD3BySHzb1VA=;
- h=From:To:CC:Subject:Date;
- b=HxelPCvIuvuS/Tdxf/MvqWQ0JzMZvjVbxN4uRrn4bS/vwR0HU8an3YiQQJ5Nd5KMh
- /2c/mr1cLPzsjM0VWjR2BwngOrxGCVsqFobDqr992fegO5xLYDafokmyayVs6tJP8Q
- ZmGcFlgzNviU/ugr7tT0GHF8OW4ZdHK97/91gu1k=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40U6XP3K001003
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 30 Jan 2024 00:33:25 -0600
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 30
- Jan 2024 00:33:25 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 30 Jan 2024 00:33:25 -0600
-Received: from fllv0122.itg.ti.com (fllv0122.itg.ti.com [10.247.120.72])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40U6XPGX125354;
- Tue, 30 Jan 2024 00:33:25 -0600
-Received: from localhost (danish-tpc.dhcp.ti.com [10.24.69.25])
- by fllv0122.itg.ti.com (8.14.7/8.14.7) with ESMTP id 40U6XOOo001561;
- Tue, 30 Jan 2024 00:33:24 -0600
-From: MD Danish Anwar <danishanwar@ti.com>
-To: Max Krummenacher <max.krummenacher@toradex.com>, Francesco Dolcini
- <francesco.dolcini@toradex.com>, Dan Carpenter <dan.carpenter@linaro.org>,
- Simon Glass <sjg@chromium.org>, MD Danish Anwar <danishanwar@ti.com>,
- Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, <r-gunasekaran@ti.com>,
- Roger Quadros <rogerq@kernel.org>
-Subject: [PATCH v4] remoteproc: uclass: Add methods to load firmware to rproc
- and boot rproc
-Date: Tue, 30 Jan 2024 12:03:22 +0530
-Message-ID: <20240130063322.2345057-1-danishanwar@ti.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=dan.carpenter@linaro.org
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-40ef6f10b56so13314635e9.2
+ for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 23:39:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1706600353; x=1707205153; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+E7CMtUJ8GxQP6QPzm+BVgA/i/C/pDwVetyq4YN7Cto=;
+ b=gXejulAKAuPhnNefDKowj9jfg9IxQ+MnXEIQh2y/Y2WQPOM7srIhjvJJ7L3OzeO489
+ lZaerqyMQDgL+FOXxY3BmaeZtJLoAaUxrN7xedholvu2jhlq7omXBKhVDOtLUGpJNatD
+ 7iK1Y8EfQwvhgjLc24AOEGlRKy3WziGcmz3YmcdacnamFq1CoAjW+4DOI8/65bYUTmHk
+ eFxMc/mqcx9B9TsGsD5BGx9ALZ4v5dEvgPQwDPS3geYBF9ZIMQvguI3eTccm+az5FXTA
+ erJz1GyeicdAWK0M6xo7Hwxiz3W/ZN9wnDVgq0U3PCIELTq1owRFBywMq3w5WrVsbtMI
+ 6Qjg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706600353; x=1707205153;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+E7CMtUJ8GxQP6QPzm+BVgA/i/C/pDwVetyq4YN7Cto=;
+ b=bq4AdGs8H57b+sX/IBd1Wr0HSQ77JlGSiCOWNea/lsJiV8RKGnDoR2WOpz8Npi5sUb
+ BTCoGQ9b0skwgrt0kc8WC4aTnalYNqpR+j947AWEW6tlVUrLNqN29W/6+m99jKab0ReL
+ FfaxKMo+sfnO/RD1QARlBeLxFpKiurp09d9d2ukWVu02aekU+HP9a2INrKvZymR4NWC4
+ UqoAEWzqXUu6sWS99D58JvASKtTlkJyw+Y7IqKVlvtbjRn+VpljzAV7TbWZ1zWyaoMQ0
+ yR5bB0+Jdr7byV7GHdpC2fCntByfBMfcEY2tfwuouJaAHhsMq0fly2hkkaaCVcHsPyBs
+ j4yA==
+X-Gm-Message-State: AOJu0Yz8ptJ5I75lCxxAgtk2acVBu1z5+jSuwWVW0MrN+hapyQsaHYUL
+ uzZuSDreEzTkf5qQOc9teJoe81YxJbBKIyDf1xKFUzgiSTLnZsVjW3UHquP/38Y=
+X-Google-Smtp-Source: AGHT+IHfeQOCk/T6pX7M2ch3Dlp/XCM9HHhY2gOwZTljV61FTxkyZfj1EhY+kjxnH48EU5AeUV+xzw==
+X-Received: by 2002:a05:600c:3b83:b0:40e:ef9f:de89 with SMTP id
+ n3-20020a05600c3b8300b0040eef9fde89mr5388744wms.6.1706600353590; 
+ Mon, 29 Jan 2024 23:39:13 -0800 (PST)
+Received: from localhost ([102.140.209.237]) by smtp.gmail.com with ESMTPSA id
+ fj12-20020a05600c0c8c00b0040f02b92e95sm939662wmb.22.2024.01.29.23.39.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 29 Jan 2024 23:39:13 -0800 (PST)
+Date: Tue, 30 Jan 2024 10:39:08 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, jagan@amarulasolutions.com,
+ git@xilinx.com, Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+Subject: Re: [PATCH v10 1/8] mtd: spi-nor: Add parallel and stacked memories
+ support
+Message-ID: <2cbba0e2-c048-4adf-a2a4-77d3dd2802b0@moroto.mountain>
+References: <20240130044423.1391251-1-venkatesh.abbarapu@amd.com>
+ <20240130044423.1391251-2-venkatesh.abbarapu@amd.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240130044423.1391251-2-venkatesh.abbarapu@amd.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,212 +92,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add APIs to set a firmware_name to a rproc and boot the rproc with the
-same firmware.
+On Tue, Jan 30, 2024 at 10:14:16AM +0530, Venkatesh Yadav Abbarapu wrote:
+> @@ -1444,28 +1465,66 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+>  {
+>  	struct spi_nor *nor = mtd_to_spi_nor(mtd);
+>  	int ret;
+> +	u32 offset = from;
 
-Clients can call rproc_set_firmware() API to set firmware_name for a rproc
-whereas rproc_boot() will load the firmware set by rproc_set_firmware() to
-a buffer by calling request_firmware_into_buf(). rproc_boot() will then
-load the firmware file to the remote processor and start the remote
-processor.
+Declare offset as loff_t otherwise it's limited to 4GB.  I don't know if
+we support more than 4GB here but it's just weird and forces us to add
+casts later...
 
-Also include "fs-loader.h" and make remoteproc driver select FS_LOADER in
-Kconfig so that we can call request_firmware_into_buf() from remoteproc
-driver.
+> +	u32 stack_shift = 0;
 
-Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
----
-Changes from v3 to v4:
-*) No functional change. Splitted the patch out of the series as suggested
-   by Nishant.
-*) Droppped the RFC tag.
+This variable is never used.
 
-v3: https://lore.kernel.org/all/20240124064930.1787929-4-danishanwar@ti.com/
+> +	u32 read_len = 0;
+> +	u32 rem_bank_len = 0;
+> +	u8 bank;
+> +	u8 is_ofst_odd = 0;
 
- drivers/remoteproc/Kconfig        |  1 +
- drivers/remoteproc/rproc-uclass.c | 85 +++++++++++++++++++++++++++++++
- include/remoteproc.h              | 35 +++++++++++++
- 3 files changed, 121 insertions(+)
+If you wanted, you could make this bool true/false.
 
-diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
-index 781de530af..0fdf1b38ea 100644
---- a/drivers/remoteproc/Kconfig
-+++ b/drivers/remoteproc/Kconfig
-@@ -10,6 +10,7 @@ menu "Remote Processor drivers"
- # All users should depend on DM
- config REMOTEPROC
- 	bool
-+	select FS_LOADER
- 	depends on DM
- 
- # Please keep the configuration alphabetically sorted.
-diff --git a/drivers/remoteproc/rproc-uclass.c b/drivers/remoteproc/rproc-uclass.c
-index 28b362c887..76db4157f7 100644
---- a/drivers/remoteproc/rproc-uclass.c
-+++ b/drivers/remoteproc/rproc-uclass.c
-@@ -13,6 +13,7 @@
- #include <log.h>
- #include <malloc.h>
- #include <virtio_ring.h>
-+#include <fs_loader.h>
- #include <remoteproc.h>
- #include <asm/io.h>
- #include <dm/device-internal.h>
-@@ -961,3 +962,87 @@ unsigned long rproc_parse_resource_table(struct udevice *dev, struct rproc *cfg)
- 
- 	return 1;
- }
-+
-+int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name)
-+{
-+	struct dm_rproc_uclass_pdata *uc_pdata;
-+	int len;
-+	char *p;
-+
-+	if (!rproc_dev || !fw_name)
-+		return -EINVAL;
-+
-+	uc_pdata = dev_get_uclass_plat(rproc_dev);
-+
-+	len = strcspn(fw_name, "\n");
-+	if (!len) {
-+		debug("can't provide empty string for firmware name\n");
-+		return -EINVAL;
-+	}
-+
-+	p = strndup(fw_name, len);
-+	if (!p)
-+		return -ENOMEM;
-+
-+	uc_pdata->fw_name = p;
-+
-+	return 0;
-+}
-+
-+int rproc_boot(struct udevice *rproc_dev, size_t fw_size)
-+{
-+	struct dm_rproc_uclass_pdata *uc_pdata;
-+	struct udevice *fs_loader;
-+	void *addr = malloc(fw_size);
-+	int core_id, ret = 0;
-+	char *firmware;
-+	ulong rproc_addr;
-+
-+	if (!rproc_dev)
-+		return -EINVAL;
-+
-+	if (!addr)
-+		return -ENOMEM;
-+
-+	uc_pdata = dev_get_uclass_plat(rproc_dev);
-+	core_id = dev_seq(rproc_dev);
-+	firmware = uc_pdata->fw_name;
-+
-+	if (!firmware) {
-+		debug("No firmware set for rproc core %d\n", core_id);
-+		return -EINVAL;
-+	}
-+
-+	/* Initialize all rproc cores */
-+	rproc_init();
-+
-+	/* Loading firmware to a given address */
-+	ret = get_fs_loader(&fs_loader);
-+	if (ret) {
-+		debug("could not get fs loader: %d\n", ret);
-+		return ret;
-+	}
-+
-+	ret = request_firmware_into_buf(fs_loader, firmware, addr, fw_size, 0);
-+	if (ret < 0) {
-+		debug("could not request %s: %d\n", firmware, ret);
-+		return ret;
-+	}
-+
-+	rproc_addr = (ulong)addr;
-+
-+	ret = rproc_load(core_id, rproc_addr, ret);
-+	if (ret) {
-+		debug("failed to load %s to rproc core %d from addr 0x%08lX err %d\n",
-+		      uc_pdata->fw_name, core_id, rproc_addr, ret);
-+		return ret;
-+	}
-+
-+	ret = rproc_start(core_id);
-+	if (ret) {
-+		debug("failed to start rproc core %d\n", core_id);
-+		return ret;
-+	}
-+
-+	return ret;
-+}
-diff --git a/include/remoteproc.h b/include/remoteproc.h
-index 91a88791a4..e53f85ba51 100644
---- a/include/remoteproc.h
-+++ b/include/remoteproc.h
-@@ -403,6 +403,7 @@ enum rproc_mem_type {
-  * @name: Platform-specific way of naming the Remote proc
-  * @mem_type: one of 'enum rproc_mem_type'
-  * @driver_plat_data: driver specific platform data that may be needed.
-+ * @fw_name: firmware name
-  *
-  * This can be accessed with dev_get_uclass_plat() for any UCLASS_REMOTEPROC
-  * device.
-@@ -412,6 +413,7 @@ struct dm_rproc_uclass_pdata {
- 	const char *name;
- 	enum rproc_mem_type mem_type;
- 	void *driver_plat_data;
-+	char *fw_name;
- };
- 
- /**
-@@ -705,6 +707,35 @@ unsigned long rproc_parse_resource_table(struct udevice *dev,
- struct resource_table *rproc_find_resource_table(struct udevice *dev,
- 						 unsigned int addr,
- 						 int *tablesz);
-+/**
-+ * rproc_set_firmware() - assign a new firmware
-+ * @rproc_dev: device for wich new firmware is being assigned
-+ * @fw_name: new firmware name to be assigned
-+ *
-+ * This function allows remoteproc drivers or clients to configure a custom
-+ * firmware name. The function does not trigger a remote processor boot,
-+ * only sets the firmware name used for a subsequent boot.
-+ *
-+ * This function sets the fw_name field in uclass pdata of the Remote proc
-+ *
-+ * Return: 0 on success or a negative value upon failure
-+ */
-+int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name);
-+
-+/**
-+ * rproc_boot() - boot a remote processor
-+ * @rproc_dev: rproc device to boot
-+ * @fw_size: Size of the memory to allocate for firmeware
-+ *
-+ * Boot a remote processor (i.e. load its firmware, power it on, ...).
-+ *
-+ * This function first loads the firmware set in the uclass pdata of Remote
-+ * processor to a buffer and then loads firmware to the remote processor
-+ * using rproc_load().
-+ *
-+ * Return: 0 on success, and an appropriate error value otherwise
-+ */
-+int rproc_boot(struct udevice *rproc_dev, size_t fw_size);
- #else
- static inline int rproc_init(void) { return -ENOSYS; }
- static inline int rproc_dev_init(int id) { return -ENOSYS; }
-@@ -744,6 +775,10 @@ static inline int rproc_elf_load_rsc_table(struct udevice *dev, ulong fw_addr,
- 					   ulong fw_size, ulong *rsc_addr,
- 					   ulong *rsc_size)
- { return -ENOSYS; }
-+static inline int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name)
-+{ return -ENOSYS; }
-+static inline int rproc_boot(struct udevice *rproc_dev, size_t fw_size)
-+{ return -ENOSYS; }
- #endif
- 
- #endif	/* _RPROC_H_ */
--- 
-2.34.1
+>  
+>  	dev_dbg(nor->dev, "from 0x%08x, len %zd\n", (u32)from, len);
+>  
+> +	if ((nor->flags & SNOR_F_HAS_PARALLEL) && (offset & 1)) {
+> +	    /* We can hit this case when we use file system like ubifs */
+> +		from = (loff_t)(from - 1);
+> +		len = (size_t)(len + 1);
+
+These casts are unnecessary.  Just write:
+
+		from--;
+		len++;
+
+> +		is_ofst_odd = 1;
+> +	}
+> +
+>  	while (len) {
+> -		loff_t addr = from;
+> -		size_t read_len = len;
+> +		if (nor->addr_width == 3) {
+> +			if (nor->flags & SNOR_F_HAS_PARALLEL) {
+> +				bank = (u32)from / (SZ_16M << 0x01);
+> +				rem_bank_len = ((SZ_16M << 0x01) *
+> +					(bank + 1)) - from;
+> +			} else {
+> +				bank = (u32)from / SZ_16M;
+> +				rem_bank_len = (SZ_16M * (bank + 1)) - from;
+> +			}
+> +		}
+
+If nor->addr_width != 3 then rem_bank_len is zero and I think we're
+going to have a problem...
+
+> +		offset = from;
+> +
+> +		if (nor->flags & SNOR_F_HAS_STACKED) {
+> +			stack_shift = 1;
+> +			if (offset >= (mtd->size / 2)) {
+> +				offset = offset - (mtd->size / 2);
+> +				nor->spi->flags |= SPI_XFER_U_PAGE;
+> +			} else {
+> +				nor->spi->flags &= ~SPI_XFER_U_PAGE;
+> +			}
+> +		}
+>  
+> -#ifdef CONFIG_SPI_FLASH_BAR
+> -		u32 remain_len;
+> +		if (nor->flags & SNOR_F_HAS_PARALLEL)
+> +			offset /= 2;
+>  
+> -		ret = write_bar(nor, addr);
+> -		if (ret < 0)
+> -			return log_ret(ret);
+> -		remain_len = (SZ_16M * (nor->bank_curr + 1)) - addr;
+> +		if (nor->addr_width == 3) {
+> +#ifdef CONFIG_SPI_FLASH_BAR
+> +			ret = write_bar(nor, offset);
+> +			if (ret < 0)
+> +				return log_ret(ret);
+> +#endif
+> +		}
+>  
+> -		if (len < remain_len)
+> +		if (len < rem_bank_len)
+>  			read_len = len;
+>  		else
+> -			read_len = remain_len;
+> -#endif
+> +			read_len = rem_bank_len;
+
+If rem_bank_len is zero then read_len is zero.
+
+> +
+> +		ret = spi_nor_wait_till_ready(nor);
+> +		if (ret)
+> +			goto read_err;
+>  
+> -		ret = nor->read(nor, addr, read_len, buf);
+> +		ret = nor->read(nor, offset, read_len, buf);
+>  		if (ret == 0) {
+>  			/* We shouldn't see 0-length reads */
+>  			ret = -EIO;
+
+When read_len is zero we return -EIO.
+
+> @@ -1474,8 +1533,15 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+>  		if (ret < 0)
+>  			goto read_err;
+>  
+> -		*retlen += ret;
+> -		buf += ret;
+> +		if (is_ofst_odd == 1) {
+> +			memcpy(buf, (buf + 1), (len - 1));
+
+This needs to be memmove().  memcpy() is undefined for overlapped
+buffers.
+
+> +			*retlen += (ret - 1);
+> +			buf += ret - 1;
+> +			is_ofst_odd = 0;
+> +		} else {
+> +			*retlen += ret;
+> +			buf += ret;
+> +		}
+>  		from += ret;
+>  		len -= ret;
+>  	}
+
+regards,
+dan carpenter
 
