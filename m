@@ -4,78 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 755C0C46CD2
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 07:39:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DC28C46CD2
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 07:41:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A844987BDB;
-	Tue, 30 Jan 2024 08:39:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E55E587CC1;
+	Tue, 30 Jan 2024 08:41:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gXejulAK";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="A5o18QQx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 381E387C39; Tue, 30 Jan 2024 08:39:16 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 61E5087CD5; Tue, 30 Jan 2024 08:41:49 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DB60875B9
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 08:39:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 98BEB875B9
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 08:41:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dan.carpenter@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-40ef6f10b56so13314635e9.2
- for <u-boot@lists.denx.de>; Mon, 29 Jan 2024 23:39:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706600353; x=1707205153; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+E7CMtUJ8GxQP6QPzm+BVgA/i/C/pDwVetyq4YN7Cto=;
- b=gXejulAKAuPhnNefDKowj9jfg9IxQ+MnXEIQh2y/Y2WQPOM7srIhjvJJ7L3OzeO489
- lZaerqyMQDgL+FOXxY3BmaeZtJLoAaUxrN7xedholvu2jhlq7omXBKhVDOtLUGpJNatD
- 7iK1Y8EfQwvhgjLc24AOEGlRKy3WziGcmz3YmcdacnamFq1CoAjW+4DOI8/65bYUTmHk
- eFxMc/mqcx9B9TsGsD5BGx9ALZ4v5dEvgPQwDPS3geYBF9ZIMQvguI3eTccm+az5FXTA
- erJz1GyeicdAWK0M6xo7Hwxiz3W/ZN9wnDVgq0U3PCIELTq1owRFBywMq3w5WrVsbtMI
- 6Qjg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706600353; x=1707205153;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+E7CMtUJ8GxQP6QPzm+BVgA/i/C/pDwVetyq4YN7Cto=;
- b=bq4AdGs8H57b+sX/IBd1Wr0HSQ77JlGSiCOWNea/lsJiV8RKGnDoR2WOpz8Npi5sUb
- BTCoGQ9b0skwgrt0kc8WC4aTnalYNqpR+j947AWEW6tlVUrLNqN29W/6+m99jKab0ReL
- FfaxKMo+sfnO/RD1QARlBeLxFpKiurp09d9d2ukWVu02aekU+HP9a2INrKvZymR4NWC4
- UqoAEWzqXUu6sWS99D58JvASKtTlkJyw+Y7IqKVlvtbjRn+VpljzAV7TbWZ1zWyaoMQ0
- yR5bB0+Jdr7byV7GHdpC2fCntByfBMfcEY2tfwuouJaAHhsMq0fly2hkkaaCVcHsPyBs
- j4yA==
-X-Gm-Message-State: AOJu0Yz8ptJ5I75lCxxAgtk2acVBu1z5+jSuwWVW0MrN+hapyQsaHYUL
- uzZuSDreEzTkf5qQOc9teJoe81YxJbBKIyDf1xKFUzgiSTLnZsVjW3UHquP/38Y=
-X-Google-Smtp-Source: AGHT+IHfeQOCk/T6pX7M2ch3Dlp/XCM9HHhY2gOwZTljV61FTxkyZfj1EhY+kjxnH48EU5AeUV+xzw==
-X-Received: by 2002:a05:600c:3b83:b0:40e:ef9f:de89 with SMTP id
- n3-20020a05600c3b8300b0040eef9fde89mr5388744wms.6.1706600353590; 
- Mon, 29 Jan 2024 23:39:13 -0800 (PST)
-Received: from localhost ([102.140.209.237]) by smtp.gmail.com with ESMTPSA id
- fj12-20020a05600c0c8c00b0040f02b92e95sm939662wmb.22.2024.01.29.23.39.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jan 2024 23:39:13 -0800 (PST)
-Date: Tue, 30 Jan 2024 10:39:08 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, jagan@amarulasolutions.com,
- git@xilinx.com, Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-Subject: Re: [PATCH v10 1/8] mtd: spi-nor: Add parallel and stacked memories
- support
-Message-ID: <2cbba0e2-c048-4adf-a2a4-77d3dd2802b0@moroto.mountain>
-References: <20240130044423.1391251-1-venkatesh.abbarapu@amd.com>
- <20240130044423.1391251-2-venkatesh.abbarapu@amd.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40U7fhCB115155;
+ Tue, 30 Jan 2024 01:41:43 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1706600503;
+ bh=15iuQ/KbjThdtDYNxXMGIBrlP0/bpAtUq/kE5WpBhVI=;
+ h=From:To:CC:Subject:Date;
+ b=A5o18QQxTrwDMz4AAadrL6hqBOSEh1iIoUihlYsXEaBi2gL/3uv3b8hNUkPKvjyNC
+ bU85sOq6M0fTETKLJVPA9K8Dt1jgTG0aM+xECDXFeOmyIt6LYtDWxzl2wfz69nJSkV
+ hJIcPWFnuQW3naebCjnFnm17n0X6PsedpjIbd3JA=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40U7fhOA066297
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 30 Jan 2024 01:41:43 -0600
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 30
+ Jan 2024 01:41:43 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 30 Jan 2024 01:41:43 -0600
+Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40U7fdwT067121;
+ Tue, 30 Jan 2024 01:41:40 -0600
+From: Neha Malcom Francis <n-francis@ti.com>
+To: <trini@konsulko.com>, <m-chawdhry@ti.com>
+CC: <u-kumar1@ti.com>, <n-francis@ti.com>, <afd@ti.com>,
+ <christian.gmeiner@gmail.com>, <j-choudhary@ti.com>, <nm@ti.com>,
+ <d.haller@phytec.de>, <joao.goncalves@toradex.com>, <u-boot@lists.denx.de>
+Subject: [PATCH] arm: mach-k3: j721s2_init: Support less than max DDR
+ controllers
+Date: Tue, 30 Jan 2024 13:11:39 +0530
+Message-ID: <20240130074139.2627793-1-n-francis@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240130044423.1391251-2-venkatesh.abbarapu@amd.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,136 +80,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jan 30, 2024 at 10:14:16AM +0530, Venkatesh Yadav Abbarapu wrote:
-> @@ -1444,28 +1465,66 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
->  {
->  	struct spi_nor *nor = mtd_to_spi_nor(mtd);
->  	int ret;
-> +	u32 offset = from;
+The number of DDR controllers to be initialised and used should depend
+on the device tree with the constraint of the maximum number of
+controllers the device supports. Since J721S2 has multiple (2)
+controllers, instead of hardcoding the number of probes, move to
+depending on the device tree UCLASS_RAM nodes present.
 
-Declare offset as loff_t otherwise it's limited to 4GB.  I don't know if
-we support more than 4GB here but it's just weird and forces us to add
-casts later...
+Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+---
+Boot logs:
+https://gist.github.com/nehamalcom/07fedf4aa173590214b5cef6e1688fa1
 
-> +	u32 stack_shift = 0;
+This was also parallely proposed in [1] on the mailing-list for J784S4.
 
-This variable is never used.
+[1] https://lore.kernel.org/all/3a7c817b-de29-463a-b4b6-d62c0df66ade@ti.com/
 
-> +	u32 read_len = 0;
-> +	u32 rem_bank_len = 0;
-> +	u8 bank;
-> +	u8 is_ofst_odd = 0;
+ arch/arm/mach-k3/j721s2_init.c | 15 +++++++++++----
+ 1 file changed, 11 insertions(+), 4 deletions(-)
 
-If you wanted, you could make this bool true/false.
-
->  
->  	dev_dbg(nor->dev, "from 0x%08x, len %zd\n", (u32)from, len);
->  
-> +	if ((nor->flags & SNOR_F_HAS_PARALLEL) && (offset & 1)) {
-> +	    /* We can hit this case when we use file system like ubifs */
-> +		from = (loff_t)(from - 1);
-> +		len = (size_t)(len + 1);
-
-These casts are unnecessary.  Just write:
-
-		from--;
-		len++;
-
-> +		is_ofst_odd = 1;
-> +	}
-> +
->  	while (len) {
-> -		loff_t addr = from;
-> -		size_t read_len = len;
-> +		if (nor->addr_width == 3) {
-> +			if (nor->flags & SNOR_F_HAS_PARALLEL) {
-> +				bank = (u32)from / (SZ_16M << 0x01);
-> +				rem_bank_len = ((SZ_16M << 0x01) *
-> +					(bank + 1)) - from;
-> +			} else {
-> +				bank = (u32)from / SZ_16M;
-> +				rem_bank_len = (SZ_16M * (bank + 1)) - from;
-> +			}
-> +		}
-
-If nor->addr_width != 3 then rem_bank_len is zero and I think we're
-going to have a problem...
-
-> +		offset = from;
-> +
-> +		if (nor->flags & SNOR_F_HAS_STACKED) {
-> +			stack_shift = 1;
-> +			if (offset >= (mtd->size / 2)) {
-> +				offset = offset - (mtd->size / 2);
-> +				nor->spi->flags |= SPI_XFER_U_PAGE;
-> +			} else {
-> +				nor->spi->flags &= ~SPI_XFER_U_PAGE;
-> +			}
-> +		}
->  
-> -#ifdef CONFIG_SPI_FLASH_BAR
-> -		u32 remain_len;
-> +		if (nor->flags & SNOR_F_HAS_PARALLEL)
-> +			offset /= 2;
->  
-> -		ret = write_bar(nor, addr);
-> -		if (ret < 0)
-> -			return log_ret(ret);
-> -		remain_len = (SZ_16M * (nor->bank_curr + 1)) - addr;
-> +		if (nor->addr_width == 3) {
-> +#ifdef CONFIG_SPI_FLASH_BAR
-> +			ret = write_bar(nor, offset);
-> +			if (ret < 0)
-> +				return log_ret(ret);
-> +#endif
-> +		}
->  
-> -		if (len < remain_len)
-> +		if (len < rem_bank_len)
->  			read_len = len;
->  		else
-> -			read_len = remain_len;
-> -#endif
-> +			read_len = rem_bank_len;
-
-If rem_bank_len is zero then read_len is zero.
-
-> +
-> +		ret = spi_nor_wait_till_ready(nor);
-> +		if (ret)
-> +			goto read_err;
->  
-> -		ret = nor->read(nor, addr, read_len, buf);
-> +		ret = nor->read(nor, offset, read_len, buf);
->  		if (ret == 0) {
->  			/* We shouldn't see 0-length reads */
->  			ret = -EIO;
-
-When read_len is zero we return -EIO.
-
-> @@ -1474,8 +1533,15 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
->  		if (ret < 0)
->  			goto read_err;
->  
-> -		*retlen += ret;
-> -		buf += ret;
-> +		if (is_ofst_odd == 1) {
-> +			memcpy(buf, (buf + 1), (len - 1));
-
-This needs to be memmove().  memcpy() is undefined for overlapped
-buffers.
-
-> +			*retlen += (ret - 1);
-> +			buf += ret - 1;
-> +			is_ofst_odd = 0;
-> +		} else {
-> +			*retlen += ret;
-> +			buf += ret;
-> +		}
->  		from += ret;
->  		len -= ret;
->  	}
-
-regards,
-dan carpenter
+diff --git a/arch/arm/mach-k3/j721s2_init.c b/arch/arm/mach-k3/j721s2_init.c
+index fb0708bae1..ff21619506 100644
+--- a/arch/arm/mach-k3/j721s2_init.c
++++ b/arch/arm/mach-k3/j721s2_init.c
+@@ -213,10 +213,12 @@ bool check_rom_loaded_sysfw(void)
+ 	return is_rom_loaded_sysfw(&bootdata);
+ }
+ 
++#define J721S2_MAX_CONTROLLERS	2
++
+ void k3_mem_init(void)
+ {
+ 	struct udevice *dev;
+-	int ret;
++	int ret, ctr = 1;
+ 
+ 	if (IS_ENABLED(CONFIG_K3_J721E_DDRSS)) {
+ 		ret = uclass_get_device_by_name(UCLASS_MISC, "msmc", &dev);
+@@ -227,9 +229,14 @@ void k3_mem_init(void)
+ 		if (ret)
+ 			panic("DRAM 0 init failed: %d\n", ret);
+ 
+-		ret = uclass_next_device_err(&dev);
+-		if (ret)
+-			panic("DRAM 1 init failed: %d\n", ret);
++		while (ctr < J721S2_MAX_CONTROLLERS) {
++			ret = uclass_next_device_err(&dev);
++			if (ret == -ENODEV)
++				break;
++			if (ret)
++				panic("DRAM %d init failed: %d\n", ctr, ret);
++			ctr++;
++		}
+ 	}
+ 	spl_enable_cache();
+ }
+-- 
+2.34.1
 
