@@ -4,83 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20717C46CD2
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 12:54:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5596CC47DDF
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 12:54:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FF8987D18;
-	Tue, 30 Jan 2024 13:53:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1EDC787D80;
+	Tue, 30 Jan 2024 13:53:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FH/2uwb7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ChvFLsYv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2458C871A7; Tue, 30 Jan 2024 10:43:33 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id ABCA687C44; Tue, 30 Jan 2024 11:35:29 +0100 (CET)
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4231387C4C
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 10:43:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 74FD08796E
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 11:35:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m.othacehe@gmail.com
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-40ef3f351d2so11560205e9.1
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 01:43:31 -0800 (PST)
+ spf=pass smtp.mailfrom=ppighouse@gmail.com
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-6ddc1b30458so3323958b3a.1
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 02:35:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706607811; x=1707212611; darn=lists.denx.de;
- h=mime-version:user-agent:message-id:date:references:in-reply-to
- :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=3W9avAebxFt3LTB7sGOWhFapOo7qPtS8PoGD6WvLeiA=;
- b=FH/2uwb7LVpziSnpMuM3EnpNYnBIspY8y4TAMeFdTi5JwaVYInerl3kWMhp8OKthB5
- Vq+Z6SxqDWjrWUspRjd+v5+omeldaBL42X9MdfjYc/Zh968EDcJAX2pJOcd6gSMpGqah
- h7hfFYoUk5a0kTWdY3wzoi+Z5uCztfB8FKc1xazwDV5WX0hEcAWvMiUX7y3P9vmtRhad
- pVaK3TC/pW9nVoECs7pzyPNAMgYKOrWCohq0kCbJ3/WCnV5L/RwfXVZgt9vLOFwRLXCn
- YDrmPRW02m5osvzBdVx7Zm+LvO5FGWa7pvKDCgV37bTrPcmM7g/RpdQNdHseB0yY7Wp7
- tFlg==
+ d=gmail.com; s=20230601; t=1706610925; x=1707215725; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=79Ldr126af2p6IhRGQAFww97a5z+iXTLxFVEAw1gyOU=;
+ b=ChvFLsYv/DNzR/NmPMWU0WUtUViB/4cLx9EPGy2Wdhr/uwdiYLQ6yHXsNWe2duL6ny
+ wg5QTesyCBokUuAJuZ1N8gUggHr6d4kW3yQhgfRMqRvfvDJ0To0HqTlQSZ+8CiirPW5I
+ ccm3uwb//qu/TT/vYF6ZxsFDOxTcGtZVUIucNcZJVXhcLK4sZtg+Q2Vc/SBEl/VKRdyC
+ eSx2EJ66q3JMLdAfkky0kpFxcHo3ZxPQANgv/9qZdVj2yhLsnotEQTbvS6RzjTzS8knx
+ kkMmuv3phT9mxLTJZAKZKhQ6g5tc9O0/2IQ3fmxEna2tOujtQCakWRokmNejglw/9F1Q
+ UEVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706607811; x=1707212611;
- h=mime-version:user-agent:message-id:date:references:in-reply-to
- :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3W9avAebxFt3LTB7sGOWhFapOo7qPtS8PoGD6WvLeiA=;
- b=hAA8itCi9V4YSXyFtW5FCkkNR9BeTvvjZ83fI61kbfWtkmg9vilXdjWgHqZzANg1F3
- gg1pnJbLEdNZohT8UdXspGYblOWPCzeTAmcasEqZxqxawVcIpBWd5ruu/hQpYSN8zBw1
- M/PhALje/t7kKJc95L/RWcryVTIdZ85JLlm7jFlDbs86PbWNGJD4Yvb389CiW5ENpAHK
- 2ViAeo/CWpODBBE8T0f5uc21CqN6jXJBZjDv3825nNkWUdHX//UNkaueMNiYRNalRWI+
- WUXfR8/Z4iew/e39Qm7R1cj/CKW8OC31kVcJ/9Y5QJrdT1dmU+ta5b2ID5yKQtaRHhBw
- lQZA==
-X-Gm-Message-State: AOJu0YwEQvBFpO9dZijRthxuOr+Ov08Bl6oalDvWuDgvhRvhHdP2c5s3
- rOxf8J/NCTvMLLs01Gs04wUme2VZ7X1+01hbwaQhjlEiUZdwpp4v
-X-Google-Smtp-Source: AGHT+IHGZPCYnE4XKSDzEFJiZeglO0TLzoVglYTJ79XMTZxAEXRYpyNBrIOSuBPGwTSKk4rKlrORuA==
-X-Received: by 2002:a5d:5002:0:b0:33a:ec95:3168 with SMTP id
- e2-20020a5d5002000000b0033aec953168mr998823wrt.13.1706607810409; 
- Tue, 30 Jan 2024 01:43:30 -0800 (PST)
-Received: from meije ([2a01:e0a:ab1:5c70:2d72:bfc1:4136:432c])
+ d=1e100.net; s=20230601; t=1706610925; x=1707215725;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=79Ldr126af2p6IhRGQAFww97a5z+iXTLxFVEAw1gyOU=;
+ b=XthfqJ6+JGeQDwUNpRpI1nNgQ6ulloxpq4T5ODpa2tjoPYpHv1N/R4Ddl5MbfJw//G
+ kIhdCtoih+LM66W99mmAI0N5Oe4v4IR+Wki81ULOPYi4xoBGLDONNrPaIyS+xOUeWcXP
+ Cbr/byWtbo6Bmi15vCUDG8cqpCZYcVEKDkncXt02w9aNSDZ87g+FM7skUZ6edslx2Orn
+ zPSGIy7GH3snWWsTzEF0jaIvmf6FnWMYvwJWNLZN1TUa0pSH4EUino5MJODITNOc9fyR
+ sGRJAdESJBYQjJFj6idzfTewZLjDJCiSgrq29qTm1tcWBPUTVOpisc+WnvUUfAtrW8F3
+ x8zA==
+X-Gm-Message-State: AOJu0YwdGYY3guOeCglI9DlWQPVmB5CXu6sovxMga8ajZojNrqgLAgud
+ WXsh3YlkzqkAXy0zRZs6ptksQyjDXvI6CqzFcSCKC9e/HrKNWP0YQY5HqoXzZps=
+X-Google-Smtp-Source: AGHT+IG3gZAMbjyIKVXuc3cLRY+bylc1VYEr/lcolGEUmNMs0ehXhS5XFT4lV4g5FHE0G24Ncjdd/g==
+X-Received: by 2002:a05:6a00:2b4f:b0:6db:d1b4:1b27 with SMTP id
+ du15-20020a056a002b4f00b006dbd1b41b27mr6095329pfb.4.1706610925179; 
+ Tue, 30 Jan 2024 02:35:25 -0800 (PST)
+Received: from localhost.localdomain ([124.218.12.74])
  by smtp.gmail.com with ESMTPSA id
- u17-20020adff891000000b0033ae55db108sm7674539wrp.20.2024.01.30.01.43.29
+ 36-20020a630c64000000b005cf5cbac29asm7864287pgm.53.2024.01.30.02.35.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jan 2024 01:43:29 -0800 (PST)
-From: Mathieu Othacehe <m.othacehe@gmail.com>
-To: Primoz Fiser <primoz.fiser@norik.com>
-Cc: Peng Fan <peng.fan@nxp.com>,  Tom Rini <trini@konsulko.com>,  Stefano
- Babic <sbabic@denx.de>,  Fabio Estevam <festevam@gmail.com>,  "NXP i . MX
- U-Boot Team" <uboot-imx@nxp.com>,  Christoph Stoidner
- <c.stoidner@phytec.de>,  Wadim Egorov <w.egorov@phytec.de>,  Yannic Moog
- <Y.Moog@phytec.de>,  u-boot@lists.denx.de,  upstream@lists.phytec.de
-Subject: Re: [PATCH v3] board: phytec: phycore-imx93: Add
- phyBOARD-Segin-i.MX93 support
-In-Reply-To: <9f20708a-eefb-4a27-a413-8a9f5a472788@norik.com> (Primoz Fiser's
- message of "Mon, 29 Jan 2024 11:24:38 +0100")
-References: <20240125164503.32097-1-othacehe@gnu.org>
- <9f20708a-eefb-4a27-a413-8a9f5a472788@norik.com>
-Date: Tue, 30 Jan 2024 10:43:28 +0100
-Message-ID: <878r472m2n.fsf@gmail.com>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ Tue, 30 Jan 2024 02:35:24 -0800 (PST)
+From: Kelly Hung <ppighouse@gmail.com>
+X-Google-Original-From: Kelly Hung <Kelly_Hung@asus.com>
+To: u-boot@lists.denx.de
+Cc: openbmc@lists.ozlabs.org, kelly_hung@asus.com,
+ Kelly Hung <Kelly_Hung@asus.com>
+Subject: [PATCH] ARM: dts: ast2600: add dts for asus product
+Date: Tue, 30 Jan 2024 18:35:19 +0800
+Message-Id: <20240130103519.199646-1-Kelly_Hung@asus.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 30 Jan 2024 13:53:57 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,42 +91,275 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This initial device-tree provides the necessary configuration for
+basic BMC functionality and work on ASUS X4TF production.
 
-Hello,
+Signed-off-by: Kelly Hung <Kelly_Hung@asus.com>
+---
+ arch/arm/dts/Makefile         |   3 +-
+ arch/arm/dts/ast2600-x4tf.dts | 239 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 241 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/ast2600-x4tf.dts
 
-> Please remove findfdt script.
->
-> Not needed when you set fdt_file to CONFIG_DEFAULT_FDT_FILE above.
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index 37675a32..6d4a6ed0 100755
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -698,7 +698,8 @@ dtb-$(CONFIG_ARCH_ASPEED) += \
+ 	ast2600-slt.dtb \
+ 	ast2600-tacoma.dtb \
+ 	ast2600-intel.dtb \
+-	ast2600-tacoma.dtb
++	ast2600-tacoma.dtb \
++	ast2600-x4tf.dtb
+ 
+ dtb-$(CONFIG_ARCH_STI) += stih410-b2260.dtb
+ 
+diff --git a/arch/arm/dts/ast2600-x4tf.dts b/arch/arm/dts/ast2600-x4tf.dts
+new file mode 100644
+index 00000000..3c478058
+--- /dev/null
++++ b/arch/arm/dts/ast2600-x4tf.dts
+@@ -0,0 +1,239 @@
++// SPDX-License-Identifier: GPL-2.0+
++// Copyright 2020 IBM Corp.
++/dts-v1/;
++
++#include "ast2600-u-boot.dtsi"
++
++/ {
++	model = "AST2600 ASUS";
++	compatible = "aspeed,ast2600-evb", "aspeed,ast2600";
++
++	memory {
++		device_type = "memory";
++		reg = <0x80000000 0x20000000>;
++	};
++
++	chosen {
++		stdout-path = &uart5;
++	};
++
++	aliases {
++		spi0 = &fmc;
++		ethernet0 = &mac2;
++		ethernet1 = &mac3;
++	};
++
++	cpus {
++		cpu@0 {
++			clock-frequency = <800000000>;
++		};
++		cpu@1 {
++			clock-frequency = <800000000>;
++		};
++	};
++};
++
++&uart5 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++};
++
++&sdrammc {
++	clock-frequency = <400000000>;
++};
++
++&wdt1 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++};
++
++&wdt2 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++};
++
++&wdt3 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++};
++
++&mdio {
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <	&pinctrl_mdio3_default &pinctrl_mdio4_default>;
++	#address-cells = <1>;
++	#size-cells = <0>;
++	ethphy2: ethernet-phy@2 {
++		reg = <0>;
++	};
++
++	ethphy3: ethernet-phy@3 {
++		reg = <0>;
++	};
++};
++
++&mac2 {
++	status = "okay";
++	phy-mode = "rmii";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_rmii3_default>;
++};
++
++&mac3 {
++	status = "okay";
++	phy-mode = "rmii";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_rmii4_default>;
++};
++
++&fmc {
++	status = "okay";
++	flash@0 {
++		compatible = "jedec,spi-nor", "macronix,mx66l2g45g";
++		status = "okay";
++		spi-max-frequency = <25000000>;
++		spi-tx-bus-width = <2>;
++		spi-rx-bus-width = <2>;
++	};
++
++	flash@1 {
++		compatible = "spi-flash", "sst,w25q256";
++		status = "okay";
++		spi-max-frequency = <25000000>;
++		spi-tx-bus-width = <4>;
++		spi-rx-bus-width = <4>;
++	};
++};
++
++&emmc_slot0 {
++	status = "okay";
++	bus-width = <4>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_emmc_default>;
++};
++
++&hace {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++};
++
++&acry {
++	u-boot,dm-pre-reloc;
++	status = "disabled";
++};
++
++&i2c0 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c1_default>;
++};
++
++&i2c1 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c2_default>;
++};
++
++&i2c2 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c3_default>;
++};
++
++&i2c3 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c4_default>;
++};
++
++&i2c4 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c5_default>;
++};
++
++&i2c5 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c6_default>;
++};
++
++&i2c6 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c7_default>;
++};
++
++&i2c7 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c8_default>;
++};
++
++&i2c8 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c9_default>;
++};
++
++&i2c9 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c10_default>;
++};
++
++&i2c10 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c11_default>;
++};
++
++&i2c11 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c12_default>;
++};
++
++&i2c12 {
++	u-boot,dm-pre-reloc;
++	status = "disabled";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c13_default>;
++};
++
++&i2c13 {
++	u-boot,dm-pre-reloc;
++	status = "disabled";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c14_default>;
++};
++
++&i2c14 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c15_default>;
++};
++
++&i2c15 {
++	u-boot,dm-pre-reloc;
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c16_default>;
++};
++
++&display_port {
++	status = "okay";
++};
+-- 
+2.25.1
 
-The reason I used findfdt is that CONFIG_DEFAULT_FDT_FILE is a string
-so, we end up with:
-
---8<---------------cut here---------------start------------->8---
-fdt_file="oftree"
---8<---------------cut here---------------end--------------->8---
-
-which gives:
-
---8<---------------cut here---------------start------------->8---
-u-boot=> run loadfdt
-Failed to load '"oftree"'
---8<---------------cut here---------------end--------------->8---
-
-whereas, if I set:
-
---8<---------------cut here---------------start------------->8---
-u-boot=> setenv fdt_file oftree
-u-boot=> run loadfdt           
-24579 bytes read in 5 ms (4.7 MiB/s)
---8<---------------cut here---------------end--------------->8---
-
-I then see three options: introduce an unstrigify macro, hardcode
-fdt_file=oftree in the env file, or use the findfdt hack.
-
-I'm not sure which one is the better?
-
-I will fix all the other remarks in the v4.
-
-Thanks,
-
-Mathieu
