@@ -4,52 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39638C46CD2
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 14:20:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82F15C47DDF
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 14:20:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EE4187DCA;
-	Tue, 30 Jan 2024 15:20:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
+	by phobos.denx.de (Postfix) with ESMTP id 0F97187DEE;
+	Tue, 30 Jan 2024 15:20:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="XwnKX0v9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YBsrgVQS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F74D87DE9; Tue, 30 Jan 2024 15:16:04 +0100 (CET)
-Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 979E987E0C; Tue, 30 Jan 2024 15:16:56 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8586287DE9
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 15:16:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A3C287DE9
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 15:16:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gnu.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
-Received: from fencepost.gnu.org ([2001:470:142:3::e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
- id 1rUou2-000748-Je; Tue, 30 Jan 2024 09:15:54 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
- s=fencepost-gnu-org; h=MIME-Version:Date:References:In-Reply-To:Subject:To:
- From; bh=cDe8BiTYjAtzajkZcOS+epW3kLCt1a1x2hqEp5mUu2g=; b=XwnKX0v93zvoyvhQFDij
- T+fO+KZsmbbQP2wYC5g6MzCb1RLPsUmhJ8r79+2O7w9Xu+Ipu4dzd9r/a9EXKkhy6dPHCCezhhQD2
- 6UYBDNVVc/VsENuMpWXlr20a/3C6mSUpZARMqW+dfXsIZEekAI7w2ODq4eTGel+5KmjsNdrN7X0MF
- GKCLhJ2nYYPuOv/R5GLHhSV7jAlxwcfVlPUyefnkyE/XUAS523AdQGdB2EEOikfocMpQa0U57YH+j
- OW3AQZNjFsDEoAzxjPXdLrhRO4quxt7v6pUS5xxjeOJ85pItbxutcgvYsh7r0PL4YaIK4ssxjOV+C
- ijHaUIAHNqr1iA==;
-From: Mathieu Othacehe <othacehe@gnu.org>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m.othacehe@gmail.com
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-40f021d3f00so5990945e9.0
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 06:16:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706624213; x=1707229013; darn=lists.denx.de;
+ h=mime-version:user-agent:message-id:date:references:in-reply-to
+ :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=CAaoJXhqrtMqqcnqLrQ7G7DkmZ1ZeYNeZBbsYTG1EMQ=;
+ b=YBsrgVQS+TKmnl86lKpWdJXpYDjL8Ihoaw7NWQDxn1PnpVikveIglRj0thMWLiKQ/w
+ 30ioTD/o7O7SjBG7PTXBEGEj5UebBoCG3br955ViFoCEuh4osUU+HHWESz4WZNGYnbPC
+ cJJbgeXIfwRF6itE+TYgd/Tz2+k3xQ5NrTmDKUxVHiGxad3olka81g478OhMU/Mc+Qjq
+ 0nkAeh0BGqRrwjolgcVFdJBw5EYtOQ+7zAlYpegNRM1oatapZJVOBhUhbPid8fnPAMRI
+ Tm6HP9wUIgPzCzrdcOqBM1LKwMHUNoEIlhT7fiizZ27d6CuxOE2QnFzkR3Q6ywrYQaTM
+ YKBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706624213; x=1707229013;
+ h=mime-version:user-agent:message-id:date:references:in-reply-to
+ :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CAaoJXhqrtMqqcnqLrQ7G7DkmZ1ZeYNeZBbsYTG1EMQ=;
+ b=n5RP9XVJ+Ybea8T/axMQZ6+AY6wszEpk2HdQ31GJ/s+hfgDeiinZSbXhFfWTk1QRXG
+ jC9VUwtYN5dPXtsnewlJJnr6A17zvGY2UKDDYGqbhWd5ENu2NMkR3Ut2FwTtePJvxurh
+ bx/2zcr7AQ+ik+9JaDuj9/10qiZJRIApjjnILZQA2mOHYnNez9CKf496QH5fZGZJUxfd
+ tQsYUj21+f0l8CYyJDV/fswzCIaT2pSL3e1vtL5qqAITA4Vfl1vf+ljAgHk+sKMUQnAm
+ sd6SD36BobLWIi2GCkE9Cf79gI1BzKpn7ej5jEnxYtwLg/a7XhACdmkPkzhO2BGj0K98
+ JsGA==
+X-Gm-Message-State: AOJu0Yymn/UtMki00QqSsCx2v95YlcjPnFYOR/OQc+qmWp5+lSUDY2gq
+ CXugu1Ggg0Q1u8zvp4/GAyhEQQfKatFBsLBv96g7b+C8hnCVpsKW
+X-Google-Smtp-Source: AGHT+IFVUEvfh9CN9CdWW/ZWL8Od2KhPxI8E+favoilO90n1z1sgIZJSejt3WS/EIV2HJGpDi94eyQ==
+X-Received: by 2002:a05:600c:4fc9:b0:40f:cd:3885 with SMTP id
+ o9-20020a05600c4fc900b0040f00cd3885mr1752098wmq.25.1706624212572; 
+ Tue, 30 Jan 2024 06:16:52 -0800 (PST)
+Received: from meije ([2a01:e0a:ab1:5c70:ddd3:fad7:e5a6:7e01])
+ by smtp.gmail.com with ESMTPSA id
+ h9-20020a05600c350900b0040fa661ee82sm1171984wmq.44.2024.01.30.06.16.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 Jan 2024 06:16:52 -0800 (PST)
+From: Mathieu Othacehe <m.othacehe@gmail.com>
 To: Primoz Fiser <primoz.fiser@norik.com>
-Cc: Stefano Babic <sbabic@denx.de>,  Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,  Tom Rini
- <trini@konsulko.com>,  Peng Fan <peng.fan@nxp.com>,  Ye Li
- <ye.li@nxp.com>,  Jacky Bai <ping.bai@nxp.com>,  =?utf-8?Q?S=C3=A9bastien?=
- Szymanski <sebastien.szymanski@armadeus.com>,  u-boot@lists.denx.de,
- upstream@lists.phytec.de
-Subject: Re: [PATCH] imx9: clock: Fix board_interface_eth_init for FEC
-In-Reply-To: <20240130124337.497748-1-primoz.fiser@norik.com> (Primoz Fiser's
- message of "Tue, 30 Jan 2024 13:43:37 +0100")
-References: <20240130124337.497748-1-primoz.fiser@norik.com>
-Date: Tue, 30 Jan 2024 15:15:48 +0100
-Message-ID: <87cyti52ln.fsf@gnu.org>
+Cc: Peng Fan <peng.fan@nxp.com>,  Tom Rini <trini@konsulko.com>,  Stefano
+ Babic <sbabic@denx.de>,  Fabio Estevam <festevam@gmail.com>,  "NXP i . MX
+ U-Boot Team" <uboot-imx@nxp.com>,  Christoph Stoidner
+ <c.stoidner@phytec.de>,  Wadim Egorov <w.egorov@phytec.de>,  Yannic Moog
+ <Y.Moog@phytec.de>,  u-boot@lists.denx.de,  upstream@lists.phytec.de
+Subject: Re: [PATCH v3] board: phytec: phycore-imx93: Add
+ phyBOARD-Segin-i.MX93 support
+In-Reply-To: <b0dfa219-7946-4328-9518-591f87f1dc3c@norik.com> (Primoz Fiser's
+ message of "Tue, 30 Jan 2024 14:42:06 +0100")
+References: <20240125164503.32097-1-othacehe@gnu.org>
+ <9f20708a-eefb-4a27-a413-8a9f5a472788@norik.com>
+ <878r472m2n.fsf@gmail.com>
+ <99d704dc-8133-45e1-a346-ab1d05d5fb7b@norik.com>
+ <874jev2dgp.fsf@gmail.com>
+ <21b0d615-e5fd-4f44-aea3-ee4236ff9a0c@norik.com>
+ <87h6iv3pta.fsf@gmail.com>
+ <b0dfa219-7946-4328-9518-591f87f1dc3c@norik.com>
+Date: Tue, 30 Jan 2024 15:16:50 +0100
+Message-ID: <878r4652jx.fsf@gmail.com>
 User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -71,14 +105,13 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-Hello,
+Hey,
 
-> Fixes: d5eae216d833 ("net: dwc_eth_qos: Add board_interface_eth_init() for i.MX93")
-> Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
+> And see if it fixes Ethernet on the board?
 
-I confirm that it fixes Ethernet connection when using FEC as a primary
-port on the phyBOARD-Segin-i.MX93.
+Yes, it works! That allowed me to check that netboot was working as well
+on my patch.
 
-Tested-by: Mathieu Othacehe <m.othacehe@gmail.com>
+Thanks,
 
 Mathieu
