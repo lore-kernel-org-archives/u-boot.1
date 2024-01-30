@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3317CC46CD2
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 14:09:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83253C46CD2
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 14:09:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9208E87E4F;
-	Tue, 30 Jan 2024 15:05:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 086F487E55;
+	Tue, 30 Jan 2024 15:05:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RkCEE/Ud";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SIZT8tCU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90A7387EC5; Tue, 30 Jan 2024 15:05:42 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 7BAD287E48; Tue, 30 Jan 2024 15:05:44 +0100 (CET)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B09F587E26
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 15:05:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D7B787E4B
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 15:05:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-40f02b8d176so5460585e9.1
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 06:05:29 -0800 (PST)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-5102a877d50so4266720e87.0
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 06:05:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706623529; x=1707228329; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1706623530; x=1707228330; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=BVzgV+ZnnG9GkmvhHdBEcm+/iVq+Y+1mFbYWhchC46Q=;
- b=RkCEE/UdouWq64ahv4DmzDImXH3W8JHYu1mW6nDPJrP4zb2P1xU17PSSYt4mcFL0XY
- 1pfETU76eCrBMff8LE0zE/ZFknngXlycKIV68S/MLKKOp2oXbABIgf3l4xGL9Qbd45hd
- LfdWkNgd8TCiq3A0R6NtxIbNYdNPU0r73ZzmGc9Yf4XPUOHyPSRYAdGuveQQwYFhZ3u2
- sbmae00fdPCY2SwGOicL1L3B/3MkiKzYmA5bYwmHuOssIvCABwt1y/v7lc3F/JRN5yzF
- Yyd2uFYWd5gF8otzpHiuiWchUgLGxo5gh090yADqUIi5glTJLz4IlqSAXg1jBx4nizs2
- 6miQ==
+ :reply-to; bh=z/xg/fewQeF9fgszkOpwWp5tF3VWPXaBOn0/agYKx8E=;
+ b=SIZT8tCUB3PKweOR8Ec1KATaFRaDGtGDM2OnVrMrUygZaJsADK608eFhFT2zCjR4qT
+ a4oQmfFxCWzgHwhKK8eF9Z3Z3VdGdk+CqBD1guVkngtrp0SyrsVQXsVuKy1ZZS+QUEhO
+ PwCq+NVTzBTy90zn2HLv3rPTwe8AdNwVFTesB7epgF9yV/BhrMraLH1GYgeHok0GQc/8
+ STb6ZY8q6iaM9kr0iFS4Sy6I/k09QmYFLdgRi4ZF9a0JGnMHdcmW1QIqJFM20XDnBsUc
+ 7dp9iJynvJtyNHP1Awk37fAPw8HmzMGFa2WE8Ua/1Q4U5QUVOBA3f5wqsX75cB5f2SkI
+ 2pTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706623529; x=1707228329;
+ d=1e100.net; s=20230601; t=1706623530; x=1707228330;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BVzgV+ZnnG9GkmvhHdBEcm+/iVq+Y+1mFbYWhchC46Q=;
- b=bKqSj/qsGj1uh9Z32QE2MpFdpdtqYAsNn+q1ZtcDbqlJI7rL1oqAXHYwXVNjcMV/FJ
- Jg+Dt0RQ4zjuNUeXLoiUHQQN1MJFrQ2iCS9xl5mN3g2FKSrjkQOeSh41u40SHcE4v1LI
- md8hFYIcmtl+NZQho032XT02xVjlmjnYzuQsRwa+cxwGZORjnGgSamsYlZhynXOjstsA
- nBlzCSpibN8MNjc0VuWvNUdDL/gXf3I18qfp+caCxTJPVwBmoBqD6FL0TjYswrdVHh2I
- lp84qncu4FM5W3r1p0AN7B22fcRhm+hh21OmUrFLlgpOJG0JWk1QISSvdOjuQzFZg8v9
- arog==
-X-Gm-Message-State: AOJu0YxEJhuQwlSm0Gw5lC8uDlii5+7yxYvm1eSkFYssrYmOX9hq1rZh
- B+qsvF8aIfZHJ75h6iE8GQtpMe4DzEo1H7zSwcRPRoLj/hxYGVgyH4hDhgO0/N8=
-X-Google-Smtp-Source: AGHT+IESYDl/EQ4I42Uv1grcHhJfqgphsUDYwHU2nmwF3LxDsZEzrCtjuOPeRQE8PhMObPZKoWdzAw==
-X-Received: by 2002:a05:600c:4fc9:b0:40f:cd:3885 with SMTP id
- o9-20020a05600c4fc900b0040f00cd3885mr1721777wmq.25.1706623529226; 
- Tue, 30 Jan 2024 06:05:29 -0800 (PST)
+ bh=z/xg/fewQeF9fgszkOpwWp5tF3VWPXaBOn0/agYKx8E=;
+ b=KDD15Tqs63oZsLaQLoM4VfIs1bmWBGbAonAPBzBqgsUdzRGdyWz+nHBaRluw0ceZ73
+ iFKM1DBKhQYt822rzlvYgbg2nCBO3iaqfArNie1sU4/MKpjxj/fn47xxxG6w7jYH4j08
+ SjyAwUyPF7cp3dSNPaU6jlo5jLtLPbUH5sFQhw+dw2UNzVbULG3bglINOnjyJZzF/3CX
+ 3hHMzjvF+ciY/RYwC46q/kTZ+mkf1i1Exs3afGU4XOg2Kzfcq1lH999M2N2SLiJc2Dfh
+ 8VxkIEwno9/VNWqhlNXjPxCCX7eKCQ71Pksta90jeqFv5P4w/BK1WvQHLZ5RmPxTTh3t
+ RumQ==
+X-Gm-Message-State: AOJu0YyEmtPh1YYqDfTZuVYpwCAtokbw/zVTai+UEDAEUE2pBIYRTRre
+ 5ozA8Poxfp80hyjLm/WtpfdZpNo8V87UavlZU7kwrjZgKpWfJYbpq9cshttypJY=
+X-Google-Smtp-Source: AGHT+IFvdjHfSBYdTIVLb0lob4cgYzht3DqFZtkOlJ6DOpaCkB9kjS/nzoDlOT7+9LR/PIm9kxUVDg==
+X-Received: by 2002:a05:6512:34c6:b0:510:694:13e6 with SMTP id
+ w6-20020a05651234c600b00510069413e6mr4752965lfr.15.1706623530297; 
+ Tue, 30 Jan 2024 06:05:30 -0800 (PST)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- g11-20020a05600c310b00b0040f035bebfcsm1799017wmo.12.2024.01.30.06.05.28
+ g11-20020a05600c310b00b0040f035bebfcsm1799017wmo.12.2024.01.30.06.05.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jan 2024 06:05:28 -0800 (PST)
+ Tue, 30 Jan 2024 06:05:29 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 30 Jan 2024 14:05:08 +0000
-Subject: [PATCH v3 20/36] mach-snapdragon: carve out no-map regions
+Date: Tue, 30 Jan 2024 14:05:09 +0000
+Subject: [PATCH v3 21/36] doc: board/qualcomm: document generic targets
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240130-b4-qcom-common-target-v3-20-e523cbf9e556@linaro.org>
+Message-Id: <20240130-b4-qcom-common-target-v3-21-e523cbf9e556@linaro.org>
 References: <20240130-b4-qcom-common-target-v3-0-e523cbf9e556@linaro.org>
 In-Reply-To: <20240130-b4-qcom-common-target-v3-0-e523cbf9e556@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -83,13 +83,13 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8408;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=13843;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=eup42pSlkSski4u/DSwnay4Y+bOVlTp/vaI9F/w5rNA=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSdTILthZn1X32ZzHu62fXtP/FE7T6sKZelGWt6adHBL
- 6Wdrzo6SlkYBDkYZMUUWcRPLLNsWnvZXmP7ggswc1iZQIYwcHEKwEQCdzH8s8mYUa38O+zvgS/L
- 9U99Ewpce0pEwuFbw/23nrfulWyeV8jIsGfyz69cDJGvTG5onGrld7ubUDRxwaklrSozApniXHW
- EEwE=
+ bh=uTd5MZ+owi0DyqxUPKNwWzHVmdPYAxG8TsgacTbX0zQ=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSdTIKuM9VEr+TZLmfIqHS4Z5l19fpXcXeW+uw/nD7eG
+ 080i/3vKGVhEORgkBVTZBE/scyyae1le43tCy7AzGFlAhnCwMUpABNZeY3hN6v1m3P7zxgG71XY
+ kCD2JEjumMUdf83HGktdF57JFt8rnsPwvzii5K3Cj6vr5k3+nrJf2d4+9FOe+uszTIJfs9axG+R
+ HhAAA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -108,249 +108,491 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Qualcomm platforms, the TZ may already have certain memory regions
-under protection by the time U-Boot starts. There is a rare case on some
-platforms where the prefetcher might speculatively access one of these
-regions resulting in a board crash (TZ traps and then resets the board).
+Replace the board specific docs with a generic board.rst file which
+documents the build/boot process for the sdm845 and qcs404 boards now
+that the only differences are the DTB in use.
 
-We shouldn't be accessing these regions from within U-Boot anyway, so
-let's mark them all with PTE_TYPE_FAULT to prevent any speculative
-access and correctly trap in EL1 rather than EL3.
+At the same time, create a debugging page to document some useful
+snippets and tips for working with Qualcomm platforms.
 
-This is quite costly with caches off (takes ~2 seconds on SDM845 vs 35ms
-with caches on). So to minimise the impact this is only enabled on
-QCS404 for now (where the issue is known to occur).
-
-In the future, we should try to find a more efficient way to handle
-this, perhaps by turning on the MMU in stages.
-
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- abort                            |  20 ++++++
- arch/arm/mach-snapdragon/board.c | 151 ++++++++++++++++++++++++++++++++-------
- 2 files changed, 147 insertions(+), 24 deletions(-)
+ doc/board/qualcomm/board.rst     | 125 +++++++++++++++++++++++++++++
+ doc/board/qualcomm/debugging.rst |  61 ++++++++++++++
+ doc/board/qualcomm/index.rst     |   4 +-
+ doc/board/qualcomm/qcs404.rst    |  79 ------------------
+ doc/board/qualcomm/sdm845.rst    | 167 ---------------------------------------
+ 5 files changed, 188 insertions(+), 248 deletions(-)
 
-diff --git a/abort b/abort
+diff --git a/doc/board/qualcomm/board.rst b/doc/board/qualcomm/board.rst
 new file mode 100644
-index 000000000000..34c3e2f0596a
+index 000000000000..4d793209f9e3
 --- /dev/null
-+++ b/abort
-@@ -0,0 +1,20 @@
-+"Synchronous Abort" handler, esr 0x96000007, far 0x0
-+elr: 0000000000005070 lr : 00000000000039a8 (reloc)
-+elr: 000000017ff27070 lr : 000000017ff259a8
-+x0 : 0000000000000000 x1 : 0000000000000000
-+x2 : 000000017faeb328 x3 : 000000017faeb320
-+x4 : 00000000000feae8 x5 : 00000000feae8000
-+x6 : 0000000000000007 x7 : 0000000000000004
-+x8 : 0000000000000000 x9 : 000000017eae7000
-+x10: 0000000000000000 x11: 000000027c89ffff
-+x12: 000000017fffffff x13: 0000000180000000
-+x14: 0000000000518db0 x15: 000000017faeb0cc
-+x16: 000000017ff2edac x17: 0000000000000000
-+x18: 000000017fb02d50 x19: 000000017ffbd600
-+x20: 000000017ffbd600 x21: 0000000000000000
-+x22: 0000000000001f1f x23: 000000017faeb370
-+x24: 000000017ffbd000 x25: 000000017ff94993
-+x26: 0000000000000030 x27: 000000017ffbecf0
-+x28: 0000000000000000 x29: 000000017faeb2a0
++++ b/doc/board/qualcomm/board.rst
+@@ -0,0 +1,125 @@
++.. SPDX-License-Identifier: GPL-2.0+
++.. sectionauthor:: Dzmitry Sankouski <dsankouski@gmail.com>
 +
-+Code: a94153f3 f94013f5 a8c47bfd d65f03c0 (b9400002) 
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index 9d8684a21fa1..ca300dc843a9 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -6,8 +6,9 @@
-  * Author: Caleb Connolly <caleb.connolly@linaro.org>
-  */
++Qualcomm generic boards
++=======================
++
++About this
++----------
++This document describes how to build and run U-Boot for Qualcomm generic
++boards. Right now the generic target supports the Snapdragon 845 SoC, however
++it's expected to support more SoCs going forward.
++
++SDM845 - high-end qualcomm chip, introduced in late 2017.
++Mostly used in flagship phones and tablets of 2018.
++
++The current boot flow support loading u-boot as an Android boot image via
++Qualcomm's UEFI-based ABL (Android) Bootloader. The DTB used by U-Boot will
++be appended to the U-Boot image the same way as when booting Linux. U-Boot
++will then retrieve the DTB during init. This way the memory layout and KASLR
++offset will be populated by ABL.
++
++Installation
++------------
++Build
++^^^^^
++
++	$ ./tools/buildman/buildman -o .output qcom
++
++This will build ``.output/u-boot-nodtb.bin`` using the ``qcom_defconfig``.
++
++Generate FIT image (optional)
++^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++See doc/uImage.FIT for more details
++
++Pack android boot image
++^^^^^^^^^^^^^^^^^^^^^^^
++We'll assemble android boot image with ``u-boot-nodtb.bin`` instead of linux kernel,
++and FIT image instead of ``initramfs``. Android bootloader expect gzipped kernel
++with appended dtb, so let's mimic linux to satisfy stock bootloader.
++
++Boards
++------
++
++starqlte
++^^^^^^^^
++
++The starqltechn is a production board for Samsung S9 (SM-G9600) phone,
++based on the Qualcomm SDM845 SoC.
++
++This device is supported by the common qcom_defconfig.
++
++The DTB is called "sdm845-samsung-starqltechn.dtb"
++
++More information can be found on the `Samsung S9 page`_.
++
++dragonboard845c
++^^^^^^^^^^^^^^^
++
++The dragonboard845c is a Qualcomm Robotics RB3 Development Platform, based on
++the Qualcomm SDM845 SoC.
++
++This device is supported by the common qcom_defconfig
++
++The DTB is called "sdm845-db845c.dtb"
++
++More information can be found on the `DragonBoard 845c page`_.
++
++qcs404-evb
++^^^^^^^^^^
++
++The QCS404 EvB is a Qualcomm Development Platform, based on the Qualcomm QCS404 SoC.
++
++This device is supported by the common qcom_defconfig
++
++The DTB is called "qcs404-evb-4000.dtb"
++
++Building steps
++--------------
++
++Steps:
++
++- Build u-boot
++
++As above::
++
++	./tools/buildman/buildman -o .output qcom
++
++Or for db410c (and other boards not supported by the generic target)::
++
++	make CROSS_COMPILE=aarch64-linux-gnu- O=.output dragonboard410c_defconfig
++	make O=.output -j$(nproc)
++
++- gzip u-boot::
++
++	gzip u-boot-nodtb.bin
++
++- Append dtb to gzipped u-boot::
++
++	cat u-boot-nodtb.bin.gz arch/arm/dts/your-board.dtb > u-boot-nodtb.bin.gz-dtb
++
++- If you chose to build a FIT image, A ``qcom.its`` file can be found in ``board/qualcomm/generic/``
++  directory. It expects a folder as ``qcom_imgs/`` in the main directory containing pre-built kernel,
++  dts and ramdisk images. See ``qcom.its`` for full path to images::
++
++	mkimage -f qcom.its qcom.itb
++
++- Now we've got everything to build android boot image::
++
++	mkbootimg --kernel u-boot-nodtb.bin.gz-dtb --ramdisk db845c.itb \
++	--output boot.img --pagesize 4096 --base 0x80000000
++
++Or with no FIT image::
++
++	mkbootimg --kernel u-boot-nodtb.bin.gz-dtb \
++	--output boot.img --pagesize 4096 --base 0x80000000
++
++- Flash boot.img using fastboot and erase dtbo to avoid conflicts with our DTB:
++
++  .. code-block:: bash
++
++	fastboot flash boot boot.img
++	fastboot erase dtbo
++
++.. _Samsung S9 page: https://en.wikipedia.org/wiki/Samsung_Galaxy_S9
++.. _DragonBoard 845c page: https://www.96boards.org/product/rb3-platform/
+diff --git a/doc/board/qualcomm/debugging.rst b/doc/board/qualcomm/debugging.rst
+new file mode 100644
+index 000000000000..1c35d1909d12
+--- /dev/null
++++ b/doc/board/qualcomm/debugging.rst
+@@ -0,0 +1,61 @@
++.. SPDX-License-Identifier: GPL-2.0+
++.. sectionauthor:: Caleb Connolly <caleb.connolly@linaro.org>
++
++Qualcomm debugging
++==================
++
++About this
++----------
++
++This page describes how to enable early UART and other debugging techniques
++for Qualcomm boards.
++
++Enable debug UART
++-----------------
++
++Newer boards (SDM845 and newer, those with GENI SE UART)
++^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++
++Open ``configs/qcom_defconfig`` and add the following snippet to the bottom:
++
++	CONFIG_BAUDRATE=115200
++
++	# Uncomment to enable UART pre-relocation
++	CONFIG_DEBUG_UART=y
++	CONFIG_DEBUG_UART_ANNOUNCE=y
++	# This is the address of the debug-uart peripheral
++	# The value here is for SDM845, other platforms will vary
++	CONFIG_DEBUG_UART_BASE=0xa84000
++	# Boards older than ~2018 pre-date the GENI driver and unfortunately
++	# aren't supported here
++	CONFIG_DEBUG_UART_MSM_GENI=y
++	# For sdm845 this is the UART clock rate
++	CONFIG_DEBUG_UART_CLOCK=7372800
++	# Most newer boards have an oversampling value of 16 instead
++	# of 32, they need the clock rate to be doubled
++	#CONFIG_DEBUG_UART_CLOCK=14745600
++
++Then build as normal (don't forget to ``make qcom_defconfig``` again).
++
++Older boards (db410c and db820c)
++^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++
++Open ``configs/dragonboard<BOARD>_defconfig``
++
++	CONFIG_BAUDRATE=115200
++	CONFIG_DEBUG_UART=y
++	CONFIG_DEBUG_UART_ANNOUNCE=y
++	# db410c - 0x78b0000
++	# db820c - 0x75b0000
++	CONFIG_DEBUG_UART_BASE=0x75b0000
++	CONFIG_DEBUG_UART_MSM=y
++	CONFIG_DEBUG_UART_CLOCK=7372800
++	#CONFIG_DEBUG_UART_SKIP_INIT=y
++
++	CONFIG_LOG=y
++	CONFIG_HEXDUMP=y
++	CONFIG_CMD_LOG=y
++	CONFIG_LOG_MAX_LEVEL=9
++	CONFIG_LOG_DEFAULT_LEVEL=9
++	CONFIG_LOGLEVEL=9
++
+diff --git a/doc/board/qualcomm/index.rst b/doc/board/qualcomm/index.rst
+index 0f9c4299569a..4955274a39bc 100644
+--- a/doc/board/qualcomm/index.rst
++++ b/doc/board/qualcomm/index.rst
+@@ -7,5 +7,5 @@ Qualcomm
+    :maxdepth: 2
  
--#define LOG_DEBUG
-+//#define LOG_DEBUG
- 
-+#include "time.h"
- #include <asm/armv8/mmu.h>
- #include <asm/gpio.h>
- #include <asm/io.h>
-@@ -26,6 +27,7 @@
- #include <lmb.h>
- #include <malloc.h>
- #include <usb.h>
-+#include <sort.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -297,7 +299,7 @@ int board_late_init(void)
- 
- static void build_mem_map(void)
- {
--	int i;
-+	int i, j;
- 
- 	/*
- 	 * Ensure the peripheral block is sized to correctly cover the address range
-@@ -313,39 +315,140 @@ static void build_mem_map(void)
- 			 PTE_BLOCK_NON_SHARE |
- 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN;
- 
--	debug("Configured memory map:\n");
--	debug("  0x%016llx - 0x%016llx: Peripheral block\n",
--	      mem_map[0].phys, mem_map[0].phys + mem_map[0].size);
+    dragonboard410c
+-   sdm845
+-   qcs404
++   board
++   debugging
+diff --git a/doc/board/qualcomm/qcs404.rst b/doc/board/qualcomm/qcs404.rst
+deleted file mode 100644
+index 0cb71d97c987..000000000000
+--- a/doc/board/qualcomm/qcs404.rst
++++ /dev/null
+@@ -1,79 +0,0 @@
+-.. SPDX-License-Identifier: GPL-2.0+
+-.. sectionauthor:: Sumit Garg <sumit.garg@linaro.org>
 -
--	/*
--	 * Now add memory map entries for each DRAM bank, ensuring we don't
--	 * overwrite the list terminator
--	 */
--	for (i = 0; i < ARRAY_SIZE(rbx_mem_map) - 2 && gd->bd->bi_dram[i].size; i++) {
--		if (i == ARRAY_SIZE(rbx_mem_map) - 1) {
--			log_warning("Too many DRAM banks!\n");
--			break;
--		}
--		mem_map[i + 1].phys = gd->bd->bi_dram[i].start;
--		mem_map[i + 1].virt = mem_map[i + 1].phys;
--		mem_map[i + 1].size = gd->bd->bi_dram[i].size;
--		mem_map[i + 1].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
--				     PTE_BLOCK_INNER_SHARE;
+-QCS404 EVB
+-==========
 -
--		debug("  0x%016llx - 0x%016llx: DDR bank %d\n",
--		      mem_map[i + 1].phys, mem_map[i + 1].phys + mem_map[i + 1].size, i);
-+	for (i = 1, j = 0; i < ARRAY_SIZE(rbx_mem_map) - 1 && gd->bd->bi_dram[j].size; i++, j++) {
-+		mem_map[i].phys = gd->bd->bi_dram[j].start;
-+		mem_map[i].virt = mem_map[i].phys;
-+		mem_map[i].size = gd->bd->bi_dram[j].size;
-+		mem_map[i].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | \
-+				   PTE_BLOCK_INNER_SHARE;
- 	}
-+
-+	mem_map[i].phys = UINT64_MAX;
-+	mem_map[i].size = 0;
-+
-+	debug("Configured memory map:\n");
-+	for (i = 0; mem_map[i].size; i++)
-+		debug("  0x%016llx - 0x%016llx: entry %d\n",
-+		      mem_map[i].phys, mem_map[i].phys + mem_map[i].size, i);
- }
- 
- u64 get_page_table_size(void)
- {
--	return SZ_64K;
-+	return SZ_256K;
- }
- 
-+static int fdt_cmp_res(const void *v1, const void *v2)
-+{
-+	const struct fdt_resource *res1 = v1, *res2 = v2;
-+
-+	return res1->start - res2->start;
-+}
-+
-+#define N_RESERVED_REGIONS 32
-+
-+/* Mark all no-map regions as PTE_TYPE_FAULT to prevent speculative access.
-+ * On some platforms this is enough to trigger a security violation and trap
-+ * to EL3.
-+ */
-+static void carve_out_reserved_memory(void)
-+{
-+	static struct fdt_resource res[N_RESERVED_REGIONS] = { 0 };
-+	int parent, rmem, count, i = 0;
-+	phys_addr_t start;
-+	size_t size;
-+
-+	/* Some reserved nodes must be carved out, as the cache-prefetcher may otherwise
-+	 * attempt to access them, causing a security exception.
-+	 */
-+	parent = fdt_path_offset(gd->fdt_blob, "/reserved-memory");
-+	if (parent <= 0) {
-+		log_err("No reserved memory regions found\n");
-+		return;
-+	}
-+	count = fdtdec_get_child_count(gd->fdt_blob, parent);
-+	if (count > N_RESERVED_REGIONS) {
-+		log_err("Too many reserved memory regions!\n");
-+		count = N_RESERVED_REGIONS;
-+	}
-+
-+	/* Collect the reserved memory regions */
-+	fdt_for_each_subnode(rmem, gd->fdt_blob, parent) {
-+		if (!fdt_getprop(gd->fdt_blob, rmem, "no-map", NULL))
-+			continue;
-+		if (fdt_getprop(gd->fdt_blob, rmem, "compatible", NULL))
-+			continue;
-+		/* Skip regions that don't have a fixed address/size */
-+		if (fdt_get_resource(gd->fdt_blob, rmem, "reg", 0, &res[i++]))
-+			i--;
-+	}
-+
-+	/* Sort the reserved memory regions by address */
-+	count = i;
-+	qsort(res, count, sizeof(struct fdt_resource), fdt_cmp_res);
-+
-+	/* Now set the right attributes for them. Often a lot of the regions are tightly packed together
-+	 * so we can optimise the number of calls to mmu_change_region_attr() by combining adjacent
-+	 * regions.
-+	 */
-+	start = ALIGN_DOWN(res[0].start, SZ_2M);
-+	size = ALIGN(res[0].end, SZ_4K) - start;
-+	for (i = 1; i < count; i++) {
-+		/* We ideally want to 2M align everything for more efficient pagetables, but we must avoid
-+		 * overwriting reserved memory regions which shouldn't be mapped as FAULT (like those with
-+		 * compatible properties).
-+		 * If within 2M of the previous region, bump the size to include this region. Otherwise
-+		 * start a new region.
-+		 */
-+		if (start + size < res[i].start - SZ_2M) {
-+			debug("  0x%016llx - 0x%016llx FAULT\n",
-+			      start, start + size);
-+			mmu_change_region_attr(start, size, PTE_TYPE_FAULT);
-+			start = ALIGN_DOWN(res[i].start, SZ_2M);
-+			size = ALIGN(res[i].end, SZ_4K) - start;
-+		} else {
-+			/* Bump size if this region is immediately after the previous one */
-+			size = ALIGN(res[i].end, SZ_4K) - start;
-+		}
-+	}
-+}
-+
-+/* This function open-codes setup_all_pgtables() so that we can
-+ * insert additional mappings *before* turning on the MMU.
-+ */
- void enable_caches(void)
- {
-+	u64 tlb_addr = gd->arch.tlb_addr;
-+	u64 tlb_size = gd->arch.tlb_size;
-+	ulong carveout_start;
-+
-+	gd->arch.tlb_fillptr = tlb_addr;
-+
- 	build_mem_map();
- 
- 	icache_enable();
-+
-+	/* Create normal system page tables */
-+	setup_pgtables();
-+
-+	/* Create emergency page tables */
-+	gd->arch.tlb_size -= (uintptr_t)gd->arch.tlb_fillptr -
-+			     (uintptr_t)gd->arch.tlb_addr;
-+	gd->arch.tlb_addr = gd->arch.tlb_fillptr;
-+	setup_pgtables();
-+	gd->arch.tlb_emerg = gd->arch.tlb_addr;
-+	gd->arch.tlb_addr = tlb_addr;
-+	gd->arch.tlb_size = tlb_size;
-+
-+	/* Doing this has a noticeable impact on boot time, so until we can
-+	 * find a more efficient solution, just enable the workaround for
-+	 * the one board where it's necessary. Without this there seems to
-+	 * be a speculative access to a region which is protected by the TZ.
-+	 */
-+	if (of_machine_is_compatible("qcom,qcs404")) {
-+		carveout_start = get_timer(0);
-+		carve_out_reserved_memory();
-+		debug("carveout time: %lums\n", get_timer(carveout_start));
-+	}
-+
- 	dcache_enable();
- }
+-About this
+-----------
+-This document describes the information about Qualcomm QCS404 evaluation board
+-and it's usage steps.
+-
+-The current boot flow support loading u-boot as an Android boot image via
+-Qualcomm's UEFI-based ABL (Android) Bootloader.
+-
+-Installation
+-------------
+-Build
+-^^^^^
+-Setup ``CROSS_COMPILE`` for aarch64 and build U-Boot for your board::
+-
+-	$ export CROSS_COMPILE=<aarch64 toolchain prefix>
+-	$ make qcs404evb_defconfig
+-	$ make
+-
+-This will build ``u-boot.bin`` in the configured output directory.
+-
+-Generate FIT image
+-^^^^^^^^^^^^^^^^^^
+-A ``qcs404.its`` file can be found in ``board/qualcomm/qcs404-evb/`` directory.
+-It expects a folder as ``qcs404_imgs/`` in the main directory containing
+-pre-built kernel, dts and ramdisk images. See ``qcs404.its`` for full path to
+-images.
+-
+-- Build FIT image::
+-
+-	mkimage -f qcs404-evb.its qcs404-evb.itb
+-
+-Pack android boot image
+-^^^^^^^^^^^^^^^^^^^^^^^
+-We'll assemble android boot image with ``u-boot.bin`` instead of linux kernel,
+-and FIT image instead of ``initramfs``. Android bootloader expect gzipped kernel
+-with appended dtb, so let's mimic linux to satisfy stock bootloader:
+-
+-- create dump dtb::
+-
+-	workdir=/tmp/prepare_payload
+-	mkdir -p "$workdir"
+-	cd "$workdir"
+-	mock_dtb="$workdir"/payload_mock.dtb
+-
+-	dtc -I dts -O dtb -o "$mock_dtb" << EOF
+-	/dts-v1/;
+-	/ {
+-		model = "Qualcomm Technologies, Inc. QCS404 EVB 4000";
+-		compatible = "qcom,qcs404-evb-4000", "qcom,qcs404-evb", "qcom,qcs404";
+-
+-		#address-cells = <2>;
+-		#size-cells = <2>;
+-
+-		memory@80000000 {
+-			device_type = "memory";
+-			/* We expect the bootloader to fill in the size */
+-			reg = <0 0x80000000 0 0>;
+-		};
+-
+-		chosen { };
+-	};
+-	EOF
+-
+-- gzip u-boot ``gzip u-boot.bin``
+-- append dtb to gzipped u-boot: ``cat u-boot.bin.gz "$mock_dtb" > u-boot.bin.gz-dtb``
+-
+-Now we've got everything to build android boot image:::
+-
+-	mkbootimg --kernel u-boot.bin.gz-dtb \
+-	--ramdisk qcs404-evb.itb --pagesize 4096 \
+-	--base 0x80000000 --output boot.img
+-
+-Flash image on qcs404-evb using fastboot method.
+diff --git a/doc/board/qualcomm/sdm845.rst b/doc/board/qualcomm/sdm845.rst
+deleted file mode 100644
+index a65f00df39f5..000000000000
+--- a/doc/board/qualcomm/sdm845.rst
++++ /dev/null
+@@ -1,167 +0,0 @@
+-.. SPDX-License-Identifier: GPL-2.0+
+-.. sectionauthor:: Dzmitry Sankouski <dsankouski@gmail.com>
+-
+-Snapdragon 845
+-==============
+-
+-About this
+-----------
+-
+-This document describes the information about Qualcomm Snapdragon 845
+-supported boards and it's usage steps.
+-
+-SDM845 - hi-end qualcomm chip, introduced in late 2017.
+-Mostly used in flagship phones and tablets of 2018.
+-
+-The current boot flow support loading u-boot as an Android boot image via
+-Qualcomm's UEFI-based ABL (Android) Bootloader.
+-
+-Installation
+-------------
+-
+-Build
+-^^^^^
+-
+-Setup ``CROSS_COMPILE`` for aarch64 and build U-Boot for your board::
+-
+-	$ export CROSS_COMPILE=<aarch64 toolchain prefix>
+-	$ make <your board name here, see Boards section>_defconfig
+-	$ make
+-
+-This will build ``u-boot.bin`` in the configured output directory.
+-
+-Generate FIT image
+-^^^^^^^^^^^^^^^^^^
+-
+-See doc/uImage.FIT for more details
+-
+-Pack android boot image
+-^^^^^^^^^^^^^^^^^^^^^^^
+-
+-We'll assemble android boot image with ``u-boot.bin`` instead of linux kernel,
+-and FIT image instead of ``initramfs``. Android bootloader expect gzipped kernel
+-with appended dtb, so let's mimic linux to satisfy stock bootloader.
+-
+-Boards
+-------
+-
+-starqlte
+-^^^^^^^^
+-
+-The starqltechn is a production board for Samsung S9 (SM-G9600) phone,
+-based on the Qualcomm SDM845 SoC.
+-
+-Steps:
+-
+-- Build u-boot::
+-
+-	$ export CROSS_COMPILE=<aarch64 toolchain prefix>
+-	$ make starqltechn_defconfig
+-	$ make
+-
+-- Create dump dtb::
+-
+-	workdir=/tmp/prepare_payload
+-	mkdir -p "$workdir"
+-	cd "$workdir"
+-	mock_dtb="$workdir"/payload_mock.dtb
+-
+-	dtc -I dts -O dtb -o "$mock_dtb" << EOF
+-	/dts-v1/;
+-	/ {
+-		memory {
+-			/* We expect the bootloader to fill in the size */
+-			reg = <0 0 0 0>;
+-		};
+-
+-		chosen { };
+-	};
+-	EOF
+-
+-- gzip u-boot::
+-
+-	gzip u-boot.bin
+-
+-- Append dtb to gzipped u-boot::
+-
+-	cat u-boot.bin.gz "$mock_dtb" > u-boot.bin.gz-dtb
+-
+-- Now we've got everything to build android boot image::
+-
+-	mkbootimg --base 0x0 --kernel_offset 0x00008000 \
+-	--ramdisk_offset 0x02000000 --tags_offset 0x01e00000 \
+-	--pagesize 4096 --second_offset 0x00f00000 \
+-	--ramdisk "$fit_image" \
+-	--kernel u-boot.bin.gz-dtb \
+-	-o boot.img
+-
+-- Flash image with your phone's flashing method.
+-
+-More information can be found on the `Samsung S9 page`_.
+-
+-dragonboard845c
+-^^^^^^^^^^^^^^^
+-
+-The dragonboard845c is a Qualcomm Robotics RB3 Development Platform, based on
+-the Qualcomm SDM845 SoC.
+-
+-Steps:
+-
+-- Build u-boot::
+-
+-	$ export CROSS_COMPILE=<aarch64 toolchain prefix>
+-	$ make dragonboard845c_defconfig
+-	$ make
+-
+-- Create dummy dtb::
+-
+-	workdir=/tmp/prepare_payload
+-	mkdir -p "$workdir"
+-	mock_dtb="$workdir"/payload_mock.dtb
+-
+-	dtc -I dts -O dtb -o "$mock_dtb" << EOF
+-	/dts-v1/;
+-	/ {
+-		#address-cells = <2>;
+-		#size-cells = <2>;
+-
+-		memory@80000000 {
+-			device_type = "memory";
+-			/* We expect the bootloader to fill in the size */
+-			reg = <0 0x80000000 0 0>;
+-		};
+-
+-		chosen { };
+-	};
+-	EOF
+-
+-- gzip u-boot::
+-
+-	gzip u-boot.bin
+-
+-- Append dtb to gzipped u-boot::
+-
+-	 cat u-boot.bin.gz "$mock_dtb" > u-boot.bin.gz-dtb
+-
+-- A ``db845c.its`` file can be found in ``board/qualcomm/dragonboard845c/``
+-  directory. It expects a folder as ``db845c_imgs/`` in the main directory
+-  containing pre-built kernel, dts and ramdisk images. See ``db845c.its``
+-  for full path to images::
+-
+-	mkimage -f db845c.its db845c.itb
+-
+-- Now we've got everything to build android boot image::
+-
+-	mkbootimg --kernel u-boot.bin.gz-dtb --ramdisk db845c.itb \
+-	--output boot.img --pagesize 4096 --base 0x80000000
+-
+-- Flash boot.img using db845c fastboot method:
+-
+-  .. code-block:: bash
+-
+-      sudo fastboot flash boot boot.img
+-
+-More information can be found on the `DragonBoard 845c page`_.
+-
+-.. _Samsung S9 page: https://en.wikipedia.org/wiki/Samsung_Galaxy_S9
+-.. _DragonBoard 845c page: https://www.96boards.org/product/rb3-platform/
 
 -- 
 2.43.0
