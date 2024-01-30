@@ -4,70 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 639E7C46CD2
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 08:31:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2560FC46CD2
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 08:36:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94C21879AF;
-	Tue, 30 Jan 2024 09:31:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 572188798C;
+	Tue, 30 Jan 2024 09:36:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MWsJevZT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ROaYzTqy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8C51879B0; Tue, 30 Jan 2024 09:31:52 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E771287C5B; Tue, 30 Jan 2024 09:36:21 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4319F8721A
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 09:31:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 99BF98796E
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 09:36:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40U8VmZT009998;
- Tue, 30 Jan 2024 02:31:48 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1706603508;
- bh=jQBZIf7goHHG7X8z8VQh8njCq+eJTM6hPaMgwPDqyR0=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=MWsJevZTb4mG26xjkK2oMqE9/YAfGxruqn2CqjZrOLobgY2vvGCNYz6pN8LXLHbHh
- 7jT5j9ewgjcYkEa6mrKwy7COzsT5e2ATtW0D1M298NQySj3YgoeeIPHqmliGp4P1yz
- inJz3u+HxOG7diRZ9KzYqeBwbk/kQSBapt7mnU+c=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40U8Vm0k078909
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 30 Jan 2024 02:31:48 -0600
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 30
- Jan 2024 02:31:47 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 30 Jan 2024 02:31:47 -0600
-Received: from [172.24.227.36]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40U8Vi4m024467;
- Tue, 30 Jan 2024 02:31:44 -0600
-Message-ID: <283f3440-2c87-453e-9ec7-e4ff54821bc5@ti.com>
-Date: Tue, 30 Jan 2024 14:01:43 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-40eebe7767cso29300175e9.1
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 00:36:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1706603779; x=1707208579; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2G/9gPb36hARfgLfZlAOvqoJL4XCWUO1fPWYyKzP6T4=;
+ b=ROaYzTqyprimsFt1au8B8ZskZtlhGEqni31tcR2hEkHQ5CX2QRcZkALVcMjactNIWY
+ d9a6FRnpFN8GlcvQcjZM+bCQeq8FPlLChnhtrbYdu668lcAXqiz0dnn5NjTmNm2gL0er
+ WvkHHGGOrwE+3A7dXR6Ib+b9HDtZEeaDWrKQFzNnjIAE6pfRoy/ndRf2jUY5ZS/7lS6c
+ paPCJZOFtAN1varxZZduMJihEhRDvNo6MCHti1VJMVVILovvkhPGj65meZ5TiZiovhkZ
+ JcpxCjwA9N1ekX9dPi57Kf9wXneNwh/CD9rCkxK0/6mGIA5ydcYAD2lHB6cQztKqHIKw
+ ysdw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706603779; x=1707208579;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2G/9gPb36hARfgLfZlAOvqoJL4XCWUO1fPWYyKzP6T4=;
+ b=Ra/CVBCEmzwWGQmM24nlyp+nqBAr9gvqeHPHUbOUe7M7pJr81QPO/ibpnWwRzZMSo8
+ CTcV3cGh0hSHbOeG3SpxwoxOMJ9y1+RhTP4SFZSTqhDBWhWNhsonRUk9T+7roPIYCgeg
+ DRSoAHnsz72BbkeXfmB9/wCmJLH4TcCPkD0qXuo2ETLE+o7pnzVZZE9DvjWYN72fM2jZ
+ C9HpLsi7J2pbyb9xi330qfb4ATNuSwePuy0KADoZfwc4qwMf1E+7OuhEKmvCC4Kias+Z
+ 7qm0CGHyj03ExF1KY9eelEPJwReoAX6a4be6iWv190ggHhfJI+1UMViaFtDa4uQ6hDDy
+ h30w==
+X-Gm-Message-State: AOJu0YwmbEntDViADxJk+UKlVzFsAZNC8nJZ1YWih83pWWNmRiP0Mk8l
+ babqTJlkKYDsaeM8EbsPf68vaZThCAUQRjJOgpStOO3oikEfKJINYNzua+j5Gbk=
+X-Google-Smtp-Source: AGHT+IGQPLEkUgtTIP7g1JTl6y4HMUQvAZiT3N1VkbXGjaTX9FWk/JeI8GqdbTmD6LOJ+GW8Q053tA==
+X-Received: by 2002:a05:600c:35d1:b0:40e:6238:e9e8 with SMTP id
+ r17-20020a05600c35d100b0040e6238e9e8mr7307095wmq.1.1706603778910; 
+ Tue, 30 Jan 2024 00:36:18 -0800 (PST)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
+ by smtp.gmail.com with ESMTPSA id
+ o34-20020a05600c512200b0040ef6aa8870sm5564733wms.24.2024.01.30.00.36.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 Jan 2024 00:36:18 -0800 (PST)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+To: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
+In-Reply-To: <20240124-u-boot-model-print-fix-v1-1-484960069623@linaro.org>
+References: <20240124-u-boot-model-print-fix-v1-1-484960069623@linaro.org>
+Subject: Re: [PATCH] ARM: meson: stop printing board model after sysinfo update
+Message-Id: <170660377823.1669123.4283726180918846122.b4-ty@linaro.org>
+Date: Tue, 30 Jan 2024 09:36:18 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: mach-k3: j721s2_init: Support less than max DDR
- controllers
-Content-Language: en-US
-To: "Kumar, Udit" <u-kumar1@ti.com>, <trini@konsulko.com>, <m-chawdhry@ti.com>
-CC: <afd@ti.com>, <christian.gmeiner@gmail.com>, <j-choudhary@ti.com>,
- <nm@ti.com>, <d.haller@phytec.de>, <joao.goncalves@toradex.com>,
- <u-boot@lists.denx.de>
-References: <20240130074139.2627793-1-n-francis@ti.com>
- <d4ff51e8-9361-45ed-927b-96a5ce234849@ti.com>
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <d4ff51e8-9361-45ed-927b-96a5ce234849@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.12.4
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,77 +92,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Udit
+Hi,
 
-On 30/01/24 13:53, Kumar, Udit wrote:
-> 
-> On 1/30/2024 1:11 PM, Neha Malcom Francis wrote:
->> The number of DDR controllers to be initialised and used should depend
->> on the device tree with the constraint of the maximum number of
->> controllers the device supports. Since J721S2 has multiple (2)
->> controllers, instead of hardcoding the number of probes, move to
->> depending on the device tree UCLASS_RAM nodes present.
->>
->> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->> ---
->> Boot logs:
->> https://gist.github.com/nehamalcom/07fedf4aa173590214b5cef6e1688fa1
->>
->> This was also parallely proposed in [1] on the mailing-list for J784S4.
->>
->> [1] https://lore.kernel.org/all/3a7c817b-de29-463a-b4b6-d62c0df66ade@ti.com/
->>
->>   arch/arm/mach-k3/j721s2_init.c | 15 +++++++++++----
->>   1 file changed, 11 insertions(+), 4 deletions(-)
->>
->> diff --git a/arch/arm/mach-k3/j721s2_init.c b/arch/arm/mach-k3/j721s2_init.c
->> index fb0708bae1..ff21619506 100644
->> --- a/arch/arm/mach-k3/j721s2_init.c
->> +++ b/arch/arm/mach-k3/j721s2_init.c
->> @@ -213,10 +213,12 @@ bool check_rom_loaded_sysfw(void)
->>       return is_rom_loaded_sysfw(&bootdata);
->>   }
->> +#define J721S2_MAX_CONTROLLERS    2
->> +
->>   void k3_mem_init(void)
->>   {
->>       struct udevice *dev;
->> -    int ret;
->> +    int ret, ctr = 1;
->>       if (IS_ENABLED(CONFIG_K3_J721E_DDRSS)) {
->>           ret = uclass_get_device_by_name(UCLASS_MISC, "msmc", &dev);
->> @@ -227,9 +229,14 @@ void k3_mem_init(void)
->>           if (ret)
->>               panic("DRAM 0 init failed: %d\n", ret);
->> -        ret = uclass_next_device_err(&dev);
->> -        if (ret)
->> -            panic("DRAM 1 init failed: %d\n", ret);
-> 
-> Since there are two controllers only and you need to call uclass_get_device and 
-> uclass_next_device_err
-> 
-> what about just checking error in above removed code, something like
-> 
->          ret = uclass_next_device_err(&dev);
->          if (ret!=ENODEV)
->              panic("DRAM 1 init failed: %d\n", ret);
+On Wed, 24 Jan 2024 13:47:25 +0100, Neil Armstrong wrote:
+> After the sysinfo update, Model is printed twice, remove
+> the now duplicate Model print from mach-meson/board-info.
 > 
 > 
 
-Yes... since AEP has only 2 controllers, this will suffice.
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic)
 
->> +        while (ctr < J721S2_MAX_CONTROLLERS) {
->> +            ret = uclass_next_device_err(&dev);
->> +            if (ret == -ENODEV)
->> +                break;
->> +            if (ret)
->> +                panic("DRAM %d init failed: %d\n", ctr, ret);
->> +            ctr++;
->> +        }
->>       }
->>       spl_enable_cache();
->>   }
+[1/1] ARM: meson: stop printing board model after sysinfo update
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/076529725f16f07a5cb2d5feba25d62b5f5a5872
 
 -- 
-Thanking You
-Neha Malcom Francis
+Neil
+
