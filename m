@@ -4,97 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEE10C47DA9
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 19:55:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2523CC46CD2
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jan 2024 21:45:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1AA28799C;
-	Tue, 30 Jan 2024 20:55:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id 2D8AB878CB;
+	Tue, 30 Jan 2024 22:45:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="UZ8WllAL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QOKaFyKv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 274D8879AF; Tue, 30 Jan 2024 20:55:54 +0100 (CET)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DFF428792D; Tue, 30 Jan 2024 22:30:02 +0100 (CET)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 170B08796B
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 20:55:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AC72A875FC
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 22:29:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=redhat.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mzamazal@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1706644550;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=pKpT/omlVx5JaA7IiPmKX2JMOmfs0ZiCJWi7ztT22CU=;
- b=UZ8WllALLaerPdhUM+LtkAUqN+SdmhQv8xuwyVLiVn9okVoF3WbLQcLtUKxxWZDW18AV8U
- oz287YikJSoXaSV4kS/GUMx20EPvHpFZNFi/OxAQwLYpRCjTVOmykvrhLXa7OWplaycnlS
- YqcwUEcmCzrZASCttuNhKNrRGJoXOo4=
-Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
- [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-570-16JY13-TNC2fPNLxj1n9GA-1; Tue, 30 Jan 2024 14:55:49 -0500
-X-MC-Unique: 16JY13-TNC2fPNLxj1n9GA-1
-Received: by mail-lj1-f200.google.com with SMTP id
- 38308e7fff4ca-2d05c9cbc92so10734861fa.2
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 11:55:49 -0800 (PST)
+ spf=pass smtp.mailfrom=stephen.graf@gmail.com
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-1d8da50bfd9so15004895ad.1
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 13:29:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706650198; x=1707254998; darn=lists.denx.de;
+ h=content-transfer-encoding:subject:from:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=P8AOBi40VDTlU03/hJQ9M2O8GUEpP3sPbr8dwGDMaBg=;
+ b=QOKaFyKvZ+8/eTH8zdR5LEW17X+uMsGfyS4bZC3MPs9SXB6dxJlQShH49cN7IQR6X7
+ umlig+iBQCTMtNXcjmbfbt5IJtGQ7Y/Pfa9BtVjdfqKxLmkT0mNKb9QJoctuNfW7Aqym
+ wSePvtvS9YzquMyXbg080JWK23qYq+Fr9AhdqX7GDU6vbf/lMVdgF2VJJJTYvCL7PUye
+ WwjDaAt7cxmZYvG0RRuuKZ1E0CEGRyCmWwDGpDDqFV5jttlseU+VP/GjROnyzvuCoxAP
+ ePrF2z4RZeXiaVEGmOMqPJxHJ4hxWGJ0gsJDb+eFb5CnSM4xCBZzqogcjFrY1ZmdoHj/
+ epbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706644547; x=1707249347;
- h=content-transfer-encoding:mime-version:user-agent:message-id:date
- :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=pKpT/omlVx5JaA7IiPmKX2JMOmfs0ZiCJWi7ztT22CU=;
- b=YaFmqLIJdRLbnt2BKzRaX5StlLmOivv18uqjPGa6NBryd7XzMXOpJTLBUKUGsrVB+N
- YIZ4tYS8aDxGoPii4StIFAVDaI/T9TuAPlXrTBeNHHggi07cE67mDbC2rDvg760uUd+K
- uJuf8L/4mzIlUxDQwOOyclm5hhlaaX9N+d6nAAY+XeU19I0yxajcrFPAVP2cPZyMUvYp
- cj335OrDjBTDyLaY5Wgde0u5yJxqWsrYptVO6LTBg5id6rg4dOWzVOOLmtIIH7S1HhEB
- TQq04CyiMbqpYNVRiQB/OAoNV+XUvHggjIYWFFwnNCtyc1qTi+U34OuZEYRZU6YWQG4a
- X6tw==
-X-Gm-Message-State: AOJu0YymM+RBl/YGhwrceP7eTimAsBMmxb8lFIIt07AMaPkFxx6WEguh
- a9GSKo2fS/ZpVAcleWtW1mN00OGj15SjOegr+RLzn3zxYSFe/8bWBWTdNkOXRRg432oY1oHEip9
- xtYn0biphSAitcRzH33HJcxrtBiYUrJHwQIrRz7F1uwImJoiIX1YQ9bZbW1yq6rnRSfIuduraXY
- ou0gZ8gdifZzaAx4woAyfsRMjE+PVHSNfMyoo=
-X-Received: by 2002:a2e:8ed9:0:b0:2cf:1dc1:7faa with SMTP id
- e25-20020a2e8ed9000000b002cf1dc17faamr2043935ljl.16.1706644547552; 
- Tue, 30 Jan 2024 11:55:47 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEGmQvw1LLXyQ1nAQU4umJg39U8uzElzXGcRd7KD0P3k9L2AkXPcsc5r7Flp9BgxowfUnwxNw==
-X-Received: by 2002:a2e:8ed9:0:b0:2cf:1dc1:7faa with SMTP id
- e25-20020a2e8ed9000000b002cf1dc17faamr2043925ljl.16.1706644547164; 
- Tue, 30 Jan 2024 11:55:47 -0800 (PST)
-X-Forwarded-Encrypted: i=0;
- AJvYcCXYE35kjB4Ala+d88k+lc+Dxe61eJjqpR9WHBUAzZdaQ9Sl9F6nC7cR+4Phovbc+b6BNpSU6NvA9gLgOGWURDg5/dkx0kv7IRvANn2qSpkIEaIRlgef7lbsEpt+B0ZkezP16fuLR947Aqtit0VU
-Received: from nuthatch (ip-77-48-47-2.net.vodafone.cz. [77.48.47.2])
+ d=1e100.net; s=20230601; t=1706650198; x=1707254998;
+ h=content-transfer-encoding:subject:from:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=P8AOBi40VDTlU03/hJQ9M2O8GUEpP3sPbr8dwGDMaBg=;
+ b=LGX5Kc0jxgMGDjsID4GHQm6777wInRQYBYEpFTrTRmKOgNTTur80V0+Rw6irAU+CJa
+ JdfRBwBlEN658+M8Jk/DDo/jmARKB9zAkpgFOrwUkJJszh5R0eJF2y/tjxeAa13agqKX
+ FcRTqxlrG3Osq7V7TTaCqc/MueiXNV2weSqOGfdwS4pu7SIbifS6ca7OzIyG7E2GepUh
+ DltFEg1q4x4lIW0ayMGs+ydkZkO+GP/rsecVYz52PRoYpxr/x2UtKLNZ8zz00BKkdhHs
+ OZKaKfAz5gVm9XfC2LuDwDKaqkGbNcaZU+csWcWP945IANeSHoLD9oAgxJtnWDprAk/T
+ 9/Yg==
+X-Gm-Message-State: AOJu0YyKZm5lD4Dxl+EiJGuJIf/kKk8X6WzkYhwmLntlQBBLMEbqFZdQ
+ QMaGVVhRYbTvx2jxs9OKb2VTochHffL9Yd8AlcwkPVkfCmisDndx431Sz2Sl
+X-Google-Smtp-Source: AGHT+IG3Q0eiNAQiWXhX4X80afOyJ6np0BwYwxZ8vMY4XlofNLFlv9CC8VFercYXjbqXl37Q9pKIWg==
+X-Received: by 2002:a17:902:e5c3:b0:1d8:b473:b316 with SMTP id
+ u3-20020a170902e5c300b001d8b473b316mr692246plf.49.1706650197840; 
+ Tue, 30 Jan 2024 13:29:57 -0800 (PST)
+Received: from [192.168.1.3] (d23-16-72-139.bchsia.telus.net. [23.16.72.139])
  by smtp.gmail.com with ESMTPSA id
- wb14-20020a170907d50e00b00a35adbc019asm2768920ejc.111.2024.01.30.11.55.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jan 2024 11:55:46 -0800 (PST)
-From: Milan Zamazal <mzamazal@redhat.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Gilles Talis <gilles.talis@gmail.com>,  Peng Fan <peng.fan@oss.nxp.com>,
- uboot-imx@nxp.com,  u-boot@lists.denx.de
-Subject: Re: [PATCH v2] imx: imx8mp: Add support for Polyhex Debix Model A SBC
-In-Reply-To: <CAOMZO5A2W4ZZBdUjNkA9fqB+kBgASM7esfcLL3RvdwmCi9qakw@mail.gmail.com>
- (Fabio Estevam's message of "Tue, 30 Jan 2024 16:31:09 -0300")
-References: <20230523192155.33222-1-gilles.talis@gmail.com>
- <58a07085-3926-b942-fb8c-58f1f5eac421@oss.nxp.com>
- <877clq6odx.fsf@redhat.com>
- <CAKcgs2x1FdvW0afXN=GGRc5nb8rhZtm70xzkURFeworcmTHPpg@mail.gmail.com>
- <87bkavbo6c.fsf@redhat.com> <877cjrss43.fsf@redhat.com>
- <CAOMZO5A2W4ZZBdUjNkA9fqB+kBgASM7esfcLL3RvdwmCi9qakw@mail.gmail.com>
-Date: Tue, 30 Jan 2024 20:55:45 +0100
-Message-ID: <87r0hy38am.fsf@redhat.com>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ jy12-20020a17090342cc00b001d8d04472absm4897683plb.154.2024.01.30.13.29.57
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 30 Jan 2024 13:29:57 -0800 (PST)
+Message-ID: <f252aa37-c672-4fda-903b-8ec033bc35b2@gmail.com>
+Date: Tue, 30 Jan 2024 13:29:56 -0800
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Content-Language: en-CA
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+From: Stephen Graf <stephen.graf@gmail.com>
+Subject: usb3 device not detected on usb2 port
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Tue, 30 Jan 2024 22:45:22 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,36 +92,202 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fabio Estevam <festevam@gmail.com> writes:
+I am using an orangepizero3 and trying to boot from spi flash and then a usb3 SSD on usb-1 port, which is usb2.  U-boot does not detect the usb3 SSD drive.
 
-> Hi Milan,
->
-> On Tue, Jan 30, 2024 at 9:22=E2=80=AFAM Milan Zamazal <mzamazal@redhat.co=
-m> wrote:
->
->> Well, after trying both the SD cards again with fresh reinstallations, i=
-t works
->> with a 32 GB card and I get the error above with a 64 GB card.  Is it po=
-ssible
->> that there is something wrong with SDXC cards?
->
-> Does the change below help?
->
-> --- a/arch/arm/dts/imx8mp-debix-model-a-u-boot.dtsi
-> +++ b/arch/arm/dts/imx8mp-debix-model-a-u-boot.dtsi
-> @@ -128,6 +128,9 @@
->         bootph-pre-ram;
->         sd-uhs-sdr104;
->         sd-uhs-ddr50;
-> +       assigned-clocks =3D <&clk IMX8MP_CLK_USDHC2>;
-> +       assigned-clock-rates =3D <400000000>;
-> +       assigned-clock-parents =3D <&clk IMX8MP_SYS_PLL1_400M>;
->  };
->
->  &usdhc3 {
+I have been booting Armbian regularly from an old usb2 hard disk drive in the same way.
 
-No, the same error. :-(
+After Armbian starts the usb3 SSD drive is detected by the os and works properly in the os.  Some console log output below shows the issue.
 
-Regards,
-Milan
+Has anyone experienced this?
 
+*** boot from SD card
+
+U-Boot 2024.01-rc5-armbian (Jan 13 2024 - 14:13:09 +0000) Allwinner Technology
+
+CPU:   Allwinner H616 (SUN50I)
+Model: OrangePi Zero3
+DRAM:  1 GiB
+Core:  57 devices, 25 uclasses, devicetree: separate
+WDT:   Not starting watchdog@30090a0
+MMC:   mmc@4020000: 0
+Loading Environment from FAT... Unable to use mmc 0:1...
+In:    serial@5000000
+Out:   serial@5000000
+Err:   serial@5000000
+Allwinner mUSB OTG (Peripheral)
+Net:   Unsupported value 13, using default (13)
+Unsupported value 13, using default (13)
+eth0: ethernet@5020000using musb-hdrc, OUT ep1out IN ep1in STATUS ep2in
+MAC de:ad:be:ef:00:01
+HOST MAC de:ad:be:ef:00:00
+RNDIS ready
+, eth1: usb_ether
+starting USB...
+Bus usb@5200000: USB EHCI 1.00
+Bus usb@5200400: USB OHCI 1.0
+scanning bus usb@5200000 for devices... 1 USB Device(s) found
+scanning bus usb@5200400 for devices... 1 USB Device(s) found
+        scanning usb for storage devices... 0 Storage Device(s) found
+Autoboot in 1 seconds, press <Space> to stop
+switch to partitions #0, OK
+mmc0 is current device
+Scanning mmc 0:1...
+Found U-Boot script /boot/boot.scr
+
+*** test usb3 SSD in usb-1 after boot
+
+root@orangepizero3:~# lsusb
+Bus 009 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 004 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 008 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 005 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 002 Device 002: ID 152d:0578 JMicron Technology Corp. / JMicron USA Technology Corp. JMS578 SATA 6Gb/s
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 006 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 007 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+
+
+root@orangepizero3:~# mount /dev/sda1 /mnt
+mount: (hint) your fstab has been modified, but systemd still uses
+        the old version; use 'systemctl daemon-reload' to reload.
+root@orangepizero3:~# ls -alh /mnt
+total 88K
+drwxr-xr-x 19 root root 4.0K Jan 29 21:37 .
+drwxr-xr-x 19 root root 4.0K Jan 16 12:29 ..
+lrwxrwxrwx  1 root root    7 Jan 13 02:56 bin -> usr/bin
+drwxr-xr-x  3 root root 4.0K Jan 29 21:39 boot
+drwxr-xr-x  2 root root 4.0K Jan 29 21:30 dev
+drwxr-xr-x 96 root root 4.0K Jan 29 21:37 etc
+drwxr-xr-x  2 root root 4.0K Dec  9 13:08 home
+lrwxrwxrwx  1 root root   34 Jan 29 21:32 initrd.img -> boot/initrd.img-6.7.2-edge-sunxi64
+lrwxrwxrwx  1 root root   34 Jan 29 21:32 initrd.img.old -> boot/initrd.img-6.7.2-edge-sunxi64
+lrwxrwxrwx  1 root root    7 Jan 13 02:56 lib -> usr/lib
+drwx------  2 root root  16K Jan 29 21:37 lost+found
+drwxr-xr-x  2 root root 4.0K Jan 13 02:56 media
+drwxr-xr-x  2 root root 4.0K Jan 13 02:56 mnt
+drwxr-xr-x  2 root root 4.0K Jan 13 02:56 opt
+drwxr-xr-x  2 root root 4.0K Jan 13 02:56 proc
+drwx------  3 root root 4.0K Jan 29 21:34 root
+drwxr-xr-x  4 root root 4.0K Jan 29 21:38 run
+lrwxrwxrwx  1 root root    8 Jan 13 02:56 sbin -> usr/sbin
+drwxrwxr-x  2 root root 4.0K Jan 29 21:30 selinux
+drwxr-xr-x  2 root root 4.0K Jan 13 02:56 srv
+drwxr-xr-x  2 root root 4.0K Dec  9 13:08 sys
+drwxrwxrwt  2 root root 4.0K Jan 13 02:57 tmp
+drwxr-xr-x 11 root root 4.0K Jan 13 02:56 usr
+drwxr-xr-x 12 root root 4.0K Jan 29 21:30 var
+lrwxrwxrwx  1 root root   31 Jan 29 21:32 vmlinuz -> boot/vmlinuz-6.7.2-edge-sunxi64
+lrwxrwxrwx  1 root root   31 Jan 29 21:32 vmlinuz.old -> boot/vmlinuz-6.7.2-edge-sunxi64
+
+
+
+*** boot from spi flash and usb2 hard drive in usb-1
+
+U-Boot 2024.01-rc5-armbian (Dec 25 2023 - 16:25:36 -0800) Allwinner Technology
+
+CPU:   Allwinner H616 (SUN50I)
+Model: OrangePi Zero3
+DRAM:  1 GiB
+Core:  57 devices, 25 uclasses, devicetree: separate
+WDT:   Not starting watchdog@30090a0
+MMC:   mmc@4020000: 0
+Loading Environment from SPIFlash... SF: Detected zb25vq128 with page size 256 Bytes, erase size 4 KiB, total 16 MiB
+OK
+In:    serial@5000000
+Out:   serial@5000000
+Err:   serial@5000000
+Allwinner mUSB OTG (Peripheral)
+Net:   Unsupported value 13, using default (13)
+Unsupported value 13, using default (13)
+eth0: ethernet@5020000using musb-hdrc, OUT ep1out IN ep1in STATUS ep2in
+MAC de:ad:be:ef:00:01
+HOST MAC de:ad:be:ef:00:00
+RNDIS ready
+, eth1: usb_ether
+starting USB...
+Bus usb@5200000: USB EHCI 1.00
+Bus usb@5200400: USB OHCI 1.0
+scanning bus usb@5200000 for devices... 2 USB Device(s) found
+scanning bus usb@5200400 for devices... 1 USB Device(s) found
+        scanning usb for storage devices... 1 Storage Device(s) found
+Autoboot in 2 seconds, press <Space> to stop
+Card did not respond to voltage select! : -110
+
+Device 0: Vendor: Toshiba  Rev: 0001 Prod: External USB 3.0
+             Type: Hard Disk
+             Capacity: 476940.0 MB = 465.7 GB (976773168 x 512)
+... is now current device
+Scanning usb 0:1...
+Found U-Boot script /boot/boot.scr
+
+
+*** boot from spi flash and usb3 SSD in usb-1
+
+U-Boot 2024.01-rc5-armbian (Dec 25 2023 - 16:25:36 -0800) Allwinner Technology
+
+CPU:   Allwinner H616 (SUN50I)
+Model: OrangePi Zero3
+DRAM:  1 GiB
+Core:  57 devices, 25 uclasses, devicetree: separate
+WDT:   Not starting watchdog@30090a0
+MMC:   mmc@4020000: 0
+Loading Environment from SPIFlash... SF: Detected zb25vq128 with page size 256 Bytes, erase size 4 KiB, total 16 MiB
+OK
+In:    serial@5000000
+Out:   serial@5000000
+Err:   serial@5000000
+Allwinner mUSB OTG (Peripheral)
+Net:   Unsupported value 13, using default (13)
+Unsupported value 13, using default (13)
+eth0: ethernet@5020000using musb-hdrc, OUT ep1out IN ep1in STATUS ep2in
+MAC de:ad:be:ef:00:01
+HOST MAC de:ad:be:ef:00:00
+RNDIS ready
+, eth1: usb_ether
+starting USB...
+Bus usb@5200000: USB EHCI 1.00
+Bus usb@5200400: USB OHCI 1.0
+scanning bus usb@5200000 for devices... 1 USB Device(s) found
+scanning bus usb@5200400 for devices... 1 USB Device(s) found
+        scanning usb for storage devices... 0 Storage Device(s) found
+Autoboot in 2 seconds, press <Space> to stop
+Card did not respond to voltage select! : -110
+
+Device 0: unknown device
+
+
+boot from SD card with usb3 SSD in usb1
+
+U-Boot 2024.01-rc5-armbian (Jan 13 2024 - 14:13:09 +0000) Allwinner Technology
+
+CPU:   Allwinner H616 (SUN50I)
+Model: OrangePi Zero3
+DRAM:  1 GiB
+Core:  57 devices, 25 uclasses, devicetree: separate
+WDT:   Not starting watchdog@30090a0
+MMC:   mmc@4020000: 0
+Loading Environment from FAT... Unable to use mmc 0:1...
+In:    serial@5000000
+Out:   serial@5000000
+Err:   serial@5000000
+Allwinner mUSB OTG (Peripheral)
+Net:   Unsupported value 13, using default (13)
+Unsupported value 13, using default (13)
+eth0: ethernet@5020000using musb-hdrc, OUT ep1out IN ep1in STATUS ep2in
+MAC de:ad:be:ef:00:01
+HOST MAC de:ad:be:ef:00:00
+RNDIS ready
+, eth1: usb_ether
+starting USB...
+Bus usb@5200000: USB EHCI 1.00
+Bus usb@5200400: USB OHCI 1.0
+scanning bus usb@5200000 for devices... 1 USB Device(s) found
+scanning bus usb@5200400 for devices... 1 USB Device(s) found
+        scanning usb for storage devices... 0 Storage Device(s) found
+Autoboot in 1 seconds, press <Space> to stop
+switch to partitions #0, OK
+mmc0 is current device
+Scanning mmc 0:1...
+Found U-Boot script /boot/boot.scr
