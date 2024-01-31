@@ -4,83 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8369BC47258
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 11:13:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24EAFC47DB3
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 11:44:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4044D876F4;
-	Wed, 31 Jan 2024 12:12:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 55A1487727;
+	Wed, 31 Jan 2024 12:44:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QDukzsUH";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jOZZH0s3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A5EE8746C; Wed, 31 Jan 2024 12:12:51 +0100 (CET)
-Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
- [IPv6:2607:f8b0:4864:20::c34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5CCB5878CB; Wed, 31 Jan 2024 07:02:38 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A64B987C39
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 12:12:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ED19C87796
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 07:02:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=o451686892@gmail.com
-Received: by mail-oo1-xc34.google.com with SMTP id
- 006d021491bc7-59a8ee08c23so253270eaf.2
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 03:12:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706699566; x=1707304366; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=kciYJNZYjKPX3+jaEJgC81JS0GkYBkCy5iTG5hyXqpA=;
- b=QDukzsUHLwwGm9xpbiASyzssk9u6yEPUglilD3pUM5TcbM+hT+384Jrr+6OTLJPyjw
- Q7quJKcNQRiQX282Uk5EFyzgtTZPemjjFPh8MCUVhPIpk52uYRxv1F1Ay+cjt8QYvRLy
- kee2lR7SI3m5EwRtcovZPrNDur2xskp/O+Dx4FclLiS93DbQc9nFlSw8pHMRu5g2LIk8
- 5HOwhRuM0/Ucymev0jcgeGTTDsQ5C2FUiW6gZu8EHqgE2FMKZplHCjLRAYso4TGMAomc
- tWbHIfrZnniWYgH+hUEZQwfBxZKgd5xbfLjLjlDizrn19SjSGSZubr8yz8+5uUrXq22C
- R3lw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706699566; x=1707304366;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kciYJNZYjKPX3+jaEJgC81JS0GkYBkCy5iTG5hyXqpA=;
- b=AmYV9DfJXWK5S/nyeCfJu7JUOu0eX2gT83GyIZtN98JbgBGaT4jqz8OMtQhX0kOxhJ
- 42NY4lqLnjrbkS5EVWjJWfk7DFUsVNHoDb4TvjRcCcIcFaaJ9HkqcELrnWHVn+/MjKWQ
- bSx3/s0Atav8pwCbaAgl0crg4dTMG7GDRu01gzoMbeJBMCor2ceRm/onbpw5f3UaeyhQ
- iywEnMH6bIATqItSYj22o95KntncF+I7tUif6nPdwo6UOcVFGwr+nK2RAbCN0jEnhRKJ
- Ey9JRQYSdZ/G/5Suf7HXXNBfCit0vKQSkgOiokqzfSd7RxI5eWRDYV5FIbCVUXieAnn0
- BOzg==
-X-Gm-Message-State: AOJu0YwS4gXnrDs14vftGuKs/VjtCt3kqHOKt/wrC/CN79OaWuDQcmB8
- 4S156Bepi7bPr7vVbOZiDNnA9nKxBzeS8VioC7C8zKSFZYSO5tXz
-X-Google-Smtp-Source: AGHT+IGPqfozzQkwGQhzCxIDCdS6pSGj3d9tzsgub5gssOy+JJn6UGG5pd0u8/rPgevUYE3ugJL6PA==
-X-Received: by 2002:a05:6358:6a56:b0:176:cf6d:20a6 with SMTP id
- c22-20020a0563586a5600b00176cf6d20a6mr1049217rwh.19.1706699565272; 
- Wed, 31 Jan 2024 03:12:45 -0800 (PST)
-X-Forwarded-Encrypted: i=0;
- AJvYcCUK7eC28Lg1R9eIIR7czTqikIIp6rlAsPH3hx1cB2a6Ti0xiD2HxWYtGFeMJii0SrolBgfdIYqQQHqe15CiAm3T66HC9i3hxUbqKLmg4gZUFbgk1CmCXZBkqzPWTQvGt0zObeCv8iNulYuEp9ehwgC6jbmHmTlyaJtKXmtnYi2gW6Vy8OYYG8Q1pFTeTVSZy1EDXzVivWEGyNXtBiLpgGH0Ud1MC1SQ2tcb8SMXH+G7cDtxMNqGa5eiLBkoLI5DXbc7Vi/k029RHa+83bbrJuEjTM3At7QDHGL5vgZi3qWQ68/LUUlAN7H2zJ4vXTiZmyaPzHc4Xmk5W+glCg==
-Received: from ownia.localdomain ([8.210.91.195])
- by smtp.gmail.com with ESMTPSA id
- m1-20020a62f201000000b006ddc03c425bsm9535007pfh.180.2024.01.31.03.12.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jan 2024 03:12:44 -0800 (PST)
-From: Weizhao Ouyang <o451686892@gmail.com>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Weizhao Ouyang <o451686892@gmail.com>, Simon Glass <sjg@chromium.org>,
- Peng Fan <peng.fan@nxp.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 3/3] cmd: rng: Add rng list command
-Date: Wed, 31 Jan 2024 11:12:17 +0000
-Message-Id: <20240131111217.30124-4-o451686892@gmail.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240131111217.30124-1-o451686892@gmail.com>
-References: <20240131111217.30124-1-o451686892@gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-k6@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40V62W7G117509;
+ Wed, 31 Jan 2024 00:02:32 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1706680952;
+ bh=jCjQCalEKnJubeo7EBHH5JmmGsN4mc0quk7OAOI8qNs=;
+ h=From:To:CC:Subject:Date;
+ b=jOZZH0s3sE+pKZXx5wJ4lEJ9YryEiM6rzpN2wb4gcgE4inHZayLbTa+OsoFoq+Ff4
+ WulWKhHk2oEpSez2dmBFTiut7LXL+nulhz+CgEapNuxKh3gTSaf5ELSQXTsuBBgosI
+ y2+fpeyxE9vJTgx/MKejk02Lki8rjppql7qWGG0s=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40V62WvP009152
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 31 Jan 2024 00:02:32 -0600
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 31
+ Jan 2024 00:02:32 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 31 Jan 2024 00:02:32 -0600
+Received: from santhoshkumark.dhcp.ti.com (santhoshkumark.dhcp.ti.com
+ [172.24.227.241])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40V62Uta062916;
+ Wed, 31 Jan 2024 00:02:30 -0600
+From: Santhosh Kumar K <s-k6@ti.com>
+To: <trini@konsulko.com>, <nm@ti.com>, <vigneshr@ti.com>, <bb@ti.com>
+CC: <u-boot@lists.denx.de>
+Subject: [PATCH 00/10] ECC Series
+Date: Wed, 31 Jan 2024 11:32:03 +0530
+Message-ID: <20240131060213.1128024-1-s-k6@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Mailman-Approved-At: Wed, 31 Jan 2024 12:44:04 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,58 +78,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The 'rng list' command probes all RNG devices and list those devices
-that are successfully probed. Also update the help info.
+This series is to:
+1. Enable ECC priming with BIST engine (Patch 1)
+2. Add a function to store base address and size of RAM's banks
+   in a 64 bit device private data (Patch 2)
+3. Setup the ECC region start and range (Patch 3)
+4. Enable ECC 1 bit error, 2 bit error and multiple bit
+   error interrupts (Patch 4)
+5. Add CONFIG_K3_INLINE_ECC (Patch 5)
+6. Pull the redundant DDR functions to a common location (Patch 6)
+7. Remove redundant DDR functions (Patch 7, 8)
+8. Fixup DDR size when ECC is enabled (Patch 9)
+9. Add ss_cfg reg entry (Patch 10)
 
-Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
----
-v2: update commit message and rng help info
----
- cmd/rng.c | 23 ++++++++++++++++++-----
- 1 file changed, 18 insertions(+), 5 deletions(-)
+Tested on AM62X and AM62A, results:
+AM62X: https://gist.github.com/santhosh21/c5f07cd921bd2b12d12385f22c698ee6
+AM62A: https://gist.github.com/santhosh21/e5fa684d890d65b4034346435213ec8b
 
-diff --git a/cmd/rng.c b/cmd/rng.c
-index 52f722c7af..b073a6c849 100644
---- a/cmd/rng.c
-+++ b/cmd/rng.c
-@@ -19,6 +19,22 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	struct udevice *dev;
- 	int ret = CMD_RET_SUCCESS;
- 
-+	if (argc == 2 && !strcmp(argv[1], "list")) {
-+		int idx = 0;
-+
-+		uclass_foreach_dev_probe(UCLASS_RNG, dev) {
-+			idx++;
-+			printf("RNG #%d - %s\n", dev->seq_, dev->name);
-+		}
-+
-+		if (!idx) {
-+			log_err("No RNG device\n");
-+			return CMD_RET_FAILURE;
-+		}
-+
-+		return CMD_RET_SUCCESS;
-+	}
-+
- 	switch (argc) {
- 	case 1:
- 		devnum = 0;
-@@ -56,12 +72,9 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	return ret;
- }
- 
--U_BOOT_LONGHELP(rng,
--	"[dev [n]]\n"
--	"  - print n random bytes(max 64) read from dev\n");
--
- U_BOOT_CMD(
- 	rng, 3, 0, do_rng,
- 	"print bytes from the hardware random number generator",
--	rng_help_text
-+	"list         - list all the probed rng devices\n"
-+	"rng [dev] [n]    - print n random bytes(max 64) read from dev\n"
- );
+Things to look in the test log:
+1. Time-taken for priming
+2. Fixed up DDR size (RAM size =- ECC reserved space).
+
+Thanks and Regards,
+Santhosh.
+
+Georgi Vlaev (1):
+  ram: k3-ddrss: Use the DDR controller BIST engine for ECC priming
+
+Neha Malcom Francis (1):
+  drivers: ram: Kconfig: Add CONFIG_K3_INLINE_ECC
+
+Santhosh Kumar K (8):
+  ram: k3-ddrss: Add k3_ddrss_ddr_bank_base_size_calc() to solve
+    'calculations restricted to 32 bits' issue
+  ram: k3-ddrss: Setup ECC region start and range
+  ram: k3-ddrss: Enable ECC interrupts
+  board: ti: common: k3-ddr-init: Pull redundant DDR functions to a
+    common location
+  board: ti: am64x: evm: Remove redundant DDR functions
+  board: ti: am62x: evm: Remove redundant DDR functions
+  board: ti: am62ax: evm: Fixup DDR size when ECC is enabled
+  arm: dts: k3-am62a-ddr: Add ss_cfg reg entry
+
+ arch/arm/dts/k3-am62a-ddr.dtsi  |   7 +-
+ board/ti/am62ax/evm.c           |  16 +--
+ board/ti/am62x/evm.c            |  61 +---------
+ board/ti/am64x/evm.c            |  71 +----------
+ board/ti/common/k3-ddr-init.c   |  75 ++++++++++++
+ board/ti/common/k3-ddr-init.h   |  15 +++
+ drivers/ram/Kconfig             |  11 ++
+ drivers/ram/k3-ddrss/k3-ddrss.c | 209 +++++++++++++++++++++++++++-----
+ 8 files changed, 307 insertions(+), 158 deletions(-)
+ create mode 100644 board/ti/common/k3-ddr-init.c
+ create mode 100644 board/ti/common/k3-ddr-init.h
+
 -- 
-2.39.2
+2.34.1
 
