@@ -4,52 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1C2AC47258
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 08:15:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AD34C4828C
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 08:25:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1307387579;
-	Wed, 31 Jan 2024 09:15:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 43FC387718;
+	Wed, 31 Jan 2024 09:25:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9446387579; Wed, 31 Jan 2024 09:15:20 +0100 (CET)
+ id 7FEBB876EA; Wed, 31 Jan 2024 09:25:48 +0100 (CET)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01B1B87252
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 09:15:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 50385876E4
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 09:25:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 40V8F6D7035183;
- Wed, 31 Jan 2024 16:15:06 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 40V8PEOD039264;
+ Wed, 31 Jan 2024 16:25:14 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
  with Microsoft SMTP Server id 14.3.498.0;
- Wed, 31 Jan 2024 16:15:02 +0800
-Date: Wed, 31 Jan 2024 16:14:59 +0800
+ Wed, 31 Jan 2024 16:25:10 +0800
+Date: Wed, 31 Jan 2024 16:25:08 +0800
 From: Leo Liang <ycliang@andestech.com>
 To: Kongyang Liu <seashell11234455@gmail.com>
-CC: <u-boot@lists.denx.de>, Bin Meng <bmeng@tinylab.org>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Michal Simek <michal.simek@amd.com>, Randolph
- <randolph@andestech.com>, Rick Chen <rick@andestech.com>, Samuel Holland
- <samuel@sholland.org>, Shengyu Qu <wiagn233@outlook.com>, Tom Rini
- <trini@konsulko.com>, Yu Chien Peter Lin <peterlin@andestech.com>
-Subject: Re: [PATCH v4 2/3] riscv: sophgo: milkv_duo: initial support added
-Message-ID: <ZboBg8a_F9q8Sc9m@swlinux02>
+CC: <u-boot@lists.denx.de>, Adam Ford <aford173@gmail.com>, Chris Morgan
+ <macromorgan@hotmail.com>, Fabio Estevam <festevam@denx.de>, "Heinrich
+ Schuchardt" <xypron.glpk@gmx.de>, Nishanth Menon <nm@ti.com>, Ralph Siemsen
+ <ralph.siemsen@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, "Thierry
+ Reding" <treding@nvidia.com>, Tim Harvey <tharvey@gateworks.com>, Tom Rini
+ <trini@konsulko.com>, Wei Fu <wefu@redhat.com>, Yanhong Wang
+ <yanhong.wang@starfivetech.com>, Yannic Moog <y.moog@phytec.de>, Yixun Lan
+ <dlan@gentoo.org>
+Subject: Re: [PATCH v4 3/3] doc: sophgo: milkv_duo: document Milk-V Duo board
+Message-ID: <ZboD5Ld38r1_166X@swlinux02>
 References: <20240128070614.7702-1-seashell11234455@gmail.com>
- <20240128070614.7702-3-seashell11234455@gmail.com>
+ <20240128070614.7702-4-seashell11234455@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20240128070614.7702-3-seashell11234455@gmail.com>
+In-Reply-To: <20240128070614.7702-4-seashell11234455@gmail.com>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 40V8F6D7035183
+X-MAIL: Atcsqr.andestech.com 40V8PEOD039264
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,10 +69,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Jan 28, 2024 at 03:05:25PM +0800, Kongyang Liu wrote:
-> Add support for Sophgo's Milk-V Duo board, only minimal device tree and
-> serial console are enabled, and it can boot via vendor first stage
-> bootloader.
+On Sun, Jan 28, 2024 at 03:05:26PM +0800, Kongyang Liu wrote:
+> Add document for Milk-V Duo board which based on Sophgo's CV1800B SoC.
 > 
 > Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
 > ---
@@ -77,26 +78,13 @@ On Sun, Jan 28, 2024 at 03:05:25PM +0800, Kongyang Liu wrote:
 > (no changes since v3)
 > 
 > Changes in v3:
-> - Enable EFI loader
+> - Add brief description of the procedure to run u-boot-dtb.bin
 > 
-> Changes in v2:
-> - Fold the defconfig patch to first patch
-> - Remove unnecessary environment settings of consoledev and baudrate in
->   config
-> 
->  arch/riscv/Kconfig                 |  4 ++++
->  board/sophgo/milkv_duo/Kconfig     | 28 ++++++++++++++++++++++++++++
->  board/sophgo/milkv_duo/MAINTAINERS |  6 ++++++
->  board/sophgo/milkv_duo/Makefile    |  5 +++++
->  board/sophgo/milkv_duo/board.c     |  9 +++++++++
->  configs/milkv_duo_defconfig        | 23 +++++++++++++++++++++++
->  include/configs/milkv_duo.h        | 12 ++++++++++++
->  7 files changed, 87 insertions(+)
->  create mode 100644 board/sophgo/milkv_duo/Kconfig
->  create mode 100644 board/sophgo/milkv_duo/MAINTAINERS
->  create mode 100644 board/sophgo/milkv_duo/Makefile
->  create mode 100644 board/sophgo/milkv_duo/board.c
->  create mode 100644 configs/milkv_duo_defconfig
->  create mode 100644 include/configs/milkv_duo.h
+>  doc/board/index.rst            |  1 +
+>  doc/board/sophgo/index.rst     |  8 +++++
+>  doc/board/sophgo/milkv_duo.rst | 64 ++++++++++++++++++++++++++++++++++
+>  3 files changed, 73 insertions(+)
+>  create mode 100644 doc/board/sophgo/index.rst
+>  create mode 100644 doc/board/sophgo/milkv_duo.rst
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
