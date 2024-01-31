@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7DD8C47DB3
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 11:44:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D315C47DB3
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 11:44:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 008F687C13;
+	by phobos.denx.de (Postfix) with ESMTP id 9AD3587C26;
 	Wed, 31 Jan 2024 12:44:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xhLHwZRi";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="u4NSvoKR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5CB4879AF; Wed, 31 Jan 2024 07:02:43 +0100 (CET)
+ id DC89687796; Wed, 31 Jan 2024 07:02:44 +0100 (CET)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4CB08782E
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 07:02:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C171D8792D
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 07:02:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-k6@ti.com
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40V62ejl125691;
- Wed, 31 Jan 2024 00:02:40 -0600
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40V62fte125696;
+ Wed, 31 Jan 2024 00:02:41 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1706680960;
- bh=7OBRJE94gmVx1X0je7oCPkFDu8jMObZBm+21qWcJg6s=;
+ s=ti-com-17Q1; t=1706680961;
+ bh=Og2O2MqvBNiYgVtwLGZHiX5vFYicati5xVCg8uBEBVA=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=xhLHwZRi7UX4Qd/iBUyj/BJuO5seKOkAQ3sxNKdcmOXLkBeTk9RG2UjwEviFFCr9r
- XHddvyOyT913y94vlexZKfVdH1x3xcA0PJYbs1AcqZTCrs0zJA+IGRn2hI6ALTChGR
- ZdJwAlXxOFvS1J0KfcubmsKrQJgB+iwSQliIMtLA=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40V62ehD002159
+ b=u4NSvoKRNFzQsGnYWgcqIKd4yD4aItYKIACcaOOOwkXpGew/IIunQmSmP2lDIbWER
+ rxOms53MOIqFaD3ZwHkCspH5EmNZolN/rW4GScS598Te0qBJusVa2HiT3zwNaB+WmU
+ +r/z19PemxRk9V9XCn6sDFmpNMePNm9LygPuMHes=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40V62fNN002172
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 31 Jan 2024 00:02:40 -0600
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 31 Jan 2024 00:02:41 -0600
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 31
- Jan 2024 00:02:39 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 00:02:40 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 31 Jan 2024 00:02:39 -0600
+ Frontend Transport; Wed, 31 Jan 2024 00:02:38 -0600
 Received: from santhoshkumark.dhcp.ti.com (santhoshkumark.dhcp.ti.com
  [172.24.227.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40V62Ute062916;
- Wed, 31 Jan 2024 00:02:38 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40V62Utd062916;
+ Wed, 31 Jan 2024 00:02:36 -0600
 From: Santhosh Kumar K <s-k6@ti.com>
 To: <trini@konsulko.com>, <nm@ti.com>, <vigneshr@ti.com>, <bb@ti.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH 04/10] ram: k3-ddrss: Enable ECC interrupts
-Date: Wed, 31 Jan 2024 11:32:07 +0530
-Message-ID: <20240131060213.1128024-5-s-k6@ti.com>
+Subject: [PATCH 03/10] ram: k3-ddrss: Setup ECC region start and range
+Date: Wed, 31 Jan 2024 11:32:06 +0530
+Message-ID: <20240131060213.1128024-4-s-k6@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240131060213.1128024-1-s-k6@ti.com>
 References: <20240131060213.1128024-1-s-k6@ti.com>
@@ -80,40 +80,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable ECC 1-bit error, 2-bit error, multiple 1-bit error interrupts
-by setting the respective bits in the DDRSS_V2A_INT_SET_REG register.
+Setup the ECC region's start and range using the device private data,
+ddrss->ddr_bank_base[0] and ddrss->ddr_ram_size. Also, move start and
+range of ECC regions from 32 bits to 64 bits to accommodate for
+DDR greater than or equal to 4GB.
 
 Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 ---
- drivers/ram/k3-ddrss/k3-ddrss.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ drivers/ram/k3-ddrss/k3-ddrss.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
 diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
-index de1441f94a87..37cc15dcfd07 100644
+index 0e77b58edf4d..de1441f94a87 100644
 --- a/drivers/ram/k3-ddrss/k3-ddrss.c
 +++ b/drivers/ram/k3-ddrss/k3-ddrss.c
-@@ -46,6 +46,11 @@
- #define DDRSS_ECC_R2_STR_ADDR_REG		0x0140
- #define DDRSS_ECC_R2_END_ADDR_REG		0x0144
- #define DDRSS_ECC_1B_ERR_CNT_REG		0x0150
-+#define DDRSS_V2A_INT_SET_REG			0x00a8
-+
-+#define DDRSS_V2A_INT_SET_REG_ECC1BERR_EN 	BIT(3)
-+#define DDRSS_V2A_INT_SET_REG_ECC2BERR_EN 	BIT(4)
-+#define DDRSS_V2A_INT_SET_REG_ECCM1BERR_EN	BIT(5)
+@@ -122,8 +122,8 @@ struct k3_msmc {
+ #define K3_DDRSS_MAX_ECC_REGIONS		3
  
- #define SINGLE_DDR_SUBSYSTEM	0x1
- #define MULTI_DDR_SUBSYSTEM	0x2
-@@ -747,6 +752,9 @@ static void k3_ddrss_lpddr4_ecc_init(struct k3_ddrss_desc *ddrss)
- 	/* Clear Error Count Register */
- 	writel(0x1, base + DDRSS_ECC_1B_ERR_CNT_REG);
+ struct k3_ddrss_ecc_region {
+-	u32 start;
+-	u32 range;
++	u64 start;
++	u64 range;
+ };
  
-+	writel(DDRSS_V2A_INT_SET_REG_ECC1BERR_EN | DDRSS_V2A_INT_SET_REG_ECC2BERR_EN |
-+		   DDRSS_V2A_INT_SET_REG_ECCM1BERR_EN, base + DDRSS_V2A_INT_SET_REG);
-+
- 	/* Enable ECC Check */
- 	val = readl(base + DDRSS_ECC_CTRL_REG);
- 	val |= DDRSS_ECC_CTRL_REG_ECC_CK;
+ struct k3_ddrss_desc {
+@@ -727,13 +727,13 @@ static void k3_ddrss_lpddr4_ecc_calc_reserved_mem(struct k3_ddrss_desc *ddrss)
+ 
+ static void k3_ddrss_lpddr4_ecc_init(struct k3_ddrss_desc *ddrss)
+ {
+-	u32 ecc_region_start = ddrss->ecc_regions[0].start;
+-	u32 ecc_range = ddrss->ecc_regions[0].range;
++	u64 ecc_region_start = ddrss->ecc_regions[0].start;
++	u64 ecc_range = ddrss->ecc_regions[0].range;
+ 	u32 base = (u32)ddrss->ddrss_ss_cfg;
+ 	u32 val;
+ 
+ 	/* Only Program region 0 which covers full ddr space */
+-	k3_ddrss_set_ecc_range_r0(base, ecc_region_start - gd->ram_base, ecc_range);
++	k3_ddrss_set_ecc_range_r0(base, ecc_region_start - ddrss->ddr_bank_base[0], ecc_range);
+ 
+ 	/* Enable ECC, RMW, WR_ALLOC */
+ 	writel(DDRSS_ECC_CTRL_REG_ECC_EN | DDRSS_ECC_CTRL_REG_RMW_EN |
+@@ -799,8 +799,8 @@ static int k3_ddrss_probe(struct udevice *dev)
+ 		k3_ddrss_lpddr4_ecc_calc_reserved_mem(ddrss);
+ 
+ 		/* Always configure one region that covers full DDR space */
+-		ddrss->ecc_regions[0].start = gd->ram_base;
+-		ddrss->ecc_regions[0].range = gd->ram_size - ddrss->ecc_reserved_space;
++		ddrss->ecc_regions[0].start = ddrss->ddr_bank_base[0];
++		ddrss->ecc_regions[0].range = ddrss->ddr_ram_size - ddrss->ecc_reserved_space;
+ 		k3_ddrss_lpddr4_ecc_init(ddrss);
+ 	}
+ 
 -- 
 2.34.1
 
