@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 563AEC47DB3
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 15:17:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7E20C47DB3
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 15:17:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5534287D3B;
-	Wed, 31 Jan 2024 16:17:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E85F287DC1;
+	Wed, 31 Jan 2024 16:17:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="u5QkAKwg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mbTTHWQ+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA3C387C26; Wed, 31 Jan 2024 16:17:06 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id BE9EE87D88; Wed, 31 Jan 2024 16:17:08 +0100 (CET)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 691CE87D03
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 16:17:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5303687B1D
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 16:17:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-40e800461baso64526715e9.3
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 07:17:04 -0800 (PST)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3394bec856fso670046f8f.0
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 07:17:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706714223; x=1707319023; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1706714224; x=1707319024; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=C4tobKv+CKE+CLdoggOlcYFIZKT8rWqapVdpNSo9lOw=;
- b=u5QkAKwgJS6t3DIdunZUjASJPtnD9hbd7LiGLLP10dr0SWMpc8bFV+migSaSiSWZ9J
- ERgOYdU4hMSytA71zxymjSwa+iFc+50OcrZzhDUXX2Q7V1NZxHuR22Co0AGDyi9jq9z7
- uvFJz3QTIgefVt/rQF9bYqWUUn0LTrlPjRbF8gNADlea2XF49fjf6hYUucYKe0Xz0xxR
- f9wdy5gwBMLj8yZIhPWWzlKsgZfHaWEPEPtYiuJHzt09ofNGaYxqVKKTaFrUvb43R1Cx
- pbveLD/GeizXqjzCkPy5GvzzBEa6BRUz+cGwOuxpOh1grZNo+X410te6VwhZhdbVRUKg
- Fn2Q==
+ :reply-to; bh=lQc3ADq7JG+XC6HPi3rN3iHdyesyW4jGzfzKMeaxjEY=;
+ b=mbTTHWQ+tUz7QbzqpQvxC2WYj9SkU4gCool15weHxON3PtDA8gC/VdLMLtV2JTXG06
+ UaRkMXUZfvytHbwZwsOnrDpzbZIiB+3aCfFbyfylNJxwh7lI/LuwThEH8rJwUOe4rtJm
+ U/eTHisCOH5w1F/Ba3c+NzupMu4yqCiDQ50HrGw4GU7nyOoGbR2HDB1xwIsBun+uglGf
+ pyY9OfqKSZzbGuoyptPS+KWJJVspZnZqfeqwM0euzR45GEcipiu4BrYQzjtEt5RhTBmM
+ 90gLUIc8IaJElM0wuvt6RF48+VCvX+CZHtDb2brzH4D3CLN7k63LuRZG9W5sehlY0W0H
+ sLKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706714223; x=1707319023;
+ d=1e100.net; s=20230601; t=1706714224; x=1707319024;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=C4tobKv+CKE+CLdoggOlcYFIZKT8rWqapVdpNSo9lOw=;
- b=oJ/4c8XeFeBdtfwcJSQjIwjyEojHcxNc5O1tuBS004ucTHq6OqeqfH/thVJfU8FZ3z
- cWkU3RByNtuXevMK+fvIQj5Z13Uu5tOv8jZDXLw1MWjefpcB49pqF+fch5nIK4BB/Y0o
- RFizcq+Zfzc52F+1Yb/c/pmiZ//hXRJ4G8pmlzDyMO0VauHXUu9r5zybSbh84s7xVhbd
- V042fM3rosB6cR/kZJ7LGJj882T6V7TzGEDEHPVE4xp84Z0hQ10JeMk3ZaOUsl5sW6E2
- 1gvpxmDeXeeCUIeeIXYHdUJzWYjRx6LohPAgryi8LWwKAiHw1sLA6VTny85oA7ObmByF
- 4mBA==
-X-Gm-Message-State: AOJu0YxmLStBrYOviC18bmREYrOXE8YStLB+RDGF6CRZliwh9OPhq+Ip
- ddwPAlCXYBdBBd05DjOvgfKhwsMCjiVehYlm30zQV3Z6AP3kwK27y3OAF3281cUevdaHElDSt+d
- 3
-X-Google-Smtp-Source: AGHT+IEl/5sAJkx94RIXLErOQ/bb6+cMmEzMzVqXW6LEBHY8Xtc60tPBfUXUeFz3BP/W6EpVCr8Rhg==
-X-Received: by 2002:adf:fd82:0:b0:33b:e62:63c7 with SMTP id
- d2-20020adffd82000000b0033b0e6263c7mr212502wrr.61.1706714223513; 
- Wed, 31 Jan 2024 07:17:03 -0800 (PST)
+ bh=lQc3ADq7JG+XC6HPi3rN3iHdyesyW4jGzfzKMeaxjEY=;
+ b=in2svNbUwF4km5O5EiDRuP/iJq4NljCjxJTkBPQ5dEunq0OVrMv/dK6uYvRIcIZTzB
+ /uEEqi0YxEt/D0QCq8B6J4GkYm1KF6shRzAfEEu+1KXgVdEUFLvLpvhmVTZKmJDPTDc2
+ q7tQ8fENZMz3VNgNpoRj6c0nBIKulWzWH1U+0q2Q9PsODtTnlAKR33O/aLqNtBTZ1Odp
+ 2ZtUWsIHU5SlOquvXWxjW6NSc7qEbDsCjhodQN/G+U5Ny8p8a92JASCJtZpD+N28Bowh
+ Ob6El9MSGiVn2P5+pPQ/56DPrQoRMZfx6c89SpdwP3IRnrv+NWJZZB6WMYkepBAmjTJC
+ rSxQ==
+X-Gm-Message-State: AOJu0YyGkTwvGSMNS0fiF16oHc6FyUxT2UX7X9KOUOC/dlGtHrqV4J+M
+ m2tw8nYpBpd2UymrfWBPtcJJBLn6RLkTbCfdslXwrpKwZdDHcX5ldo/IC2L8zA5b8ca2MswGFNh
+ w
+X-Google-Smtp-Source: AGHT+IFjsmNUVmZCDTwtaE2uxd7rvQGm/ymjvEwBOQEP65JMAzxCsZ8zYCehHq7JIpaw8iOmOOCKDw==
+X-Received: by 2002:adf:eb4f:0:b0:33a:fe4a:90be with SMTP id
+ u15-20020adfeb4f000000b0033afe4a90bemr1835882wrn.23.1706714224536; 
+ Wed, 31 Jan 2024 07:17:04 -0800 (PST)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- en6-20020a056000420600b0033ae5b637d4sm11109031wrb.35.2024.01.31.07.17.02
+ en6-20020a056000420600b0033ae5b637d4sm11109031wrb.35.2024.01.31.07.17.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 31 Jan 2024 07:17:03 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Wed, 31 Jan 2024 15:16:54 +0000
-Subject: [PATCH 02/13] phy: qcom: add Qualcomm QUSB2 USB PHY driver
+Date: Wed, 31 Jan 2024 15:16:55 +0000
+Subject: [PATCH 03/13] phy: qcom: Add USB HS 7nm PHY driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240131-b4-qcom-livetree-v1-2-4071c0787db0@linaro.org>
+Message-Id: <20240131-b4-qcom-livetree-v1-3-4071c0787db0@linaro.org>
 References: <20240131-b4-qcom-livetree-v1-0-4071c0787db0@linaro.org>
 In-Reply-To: <20240131-b4-qcom-livetree-v1-0-4071c0787db0@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -81,13 +81,13 @@ To: Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, Bhupesh Sharma <bhupesh.linux@gmail.com>, 
  Bhupesh Sharma <bhupesh.linux@gmail.com>
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=14813;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=9701;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=4FiWejoY7+qLMHEOYdFGdLBql0JC5Gm4IwK54xWhxqw=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtRdKdmTlH8xJkrFpu8o5K6fN0PX6rtGkt6Cx4H3ZD6/F
- 7q9e6p7RykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZjIupWMDFtaVGc4WNZLbZgQ
- xm++c86OBddCxQxqTlWzX70TukP0cCMjw4LnTyt/S7mxON2NOFu08QSDadnlQ98+PK3tWGjdt6D
- 912EA
+ bh=bVyBUWrmB+ud+t8QvIiY7KrTX0FEL8AvxznCejpPZPw=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtRdKdmrn4QfSxL+NPtM1IpnPxsMPxy/tuDHpyw95pOS7
+ IvyOLo1OkpZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBELtkz/GRstTnwsOnr6bnB
+ PMb7HKw+dWRN/nZO899DWe13vU2Xr3cw/NMtZFOeWbvhlsKjm69rDJ/W9hxreNnUfarvrPK8uRt
+ ixCwA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -108,54 +108,57 @@ X-Virus-Status: Clean
 
 From: Bhupesh Sharma <bhupesh.linux@gmail.com>
 
-The Snapdragon 845 and several other Qualcomm SoCs feature this
-USB high-speed phy. Add a driver for it based on the Linux driver, with
-support for the SDM845, and the QCM2290 and SM6115 SoCs which will gain
-support in U-Boot in future patches.
+Some Qualcomm SoCs newer than SDM845 feature a so-called "7nm phy"
+driver, notable the SM8250 SoC which will gain U-Boot support in
+upcoming patches.
+
+Introduce a driver based on the Linux driver.
 
 Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
-[code cleanup, switch to clk_bulk]
+[code cleanup, switch to clk/reset_bulk APIs]
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/phy/qcom/Kconfig          |   7 +
- drivers/phy/qcom/Makefile         |   1 +
- drivers/phy/qcom/phy-qcom-qusb2.c | 468 ++++++++++++++++++++++++++++++++++++++
- 3 files changed, 476 insertions(+)
+ drivers/phy/qcom/Kconfig               |   8 +
+ drivers/phy/qcom/Makefile              |   1 +
+ drivers/phy/qcom/phy-qcom-usb-hs-7nm.c | 295 +++++++++++++++++++++++++++++++++
+ 3 files changed, 304 insertions(+)
 
 diff --git a/drivers/phy/qcom/Kconfig b/drivers/phy/qcom/Kconfig
-index f4ca174805a4..361dfb6e1126 100644
+index 361dfb6e1126..3fc59dc65650 100644
 --- a/drivers/phy/qcom/Kconfig
 +++ b/drivers/phy/qcom/Kconfig
-@@ -12,6 +12,13 @@ config PHY_QCOM_IPQ4019_USB
- 	help
- 	  Support for the USB PHY-s on Qualcomm IPQ40xx SoC-s.
+@@ -19,6 +19,14 @@ config PHY_QCOM_QUSB2
+ 	  Enable this to support the Super-Speed USB transceiver on various
+ 	  Qualcomm chipsets.
  
-+config PHY_QCOM_QUSB2
-+	tristate "Qualcomm USB QUSB2 PHY driver"
++config PHY_QCOM_USB_HS_7NM
++	tristate "Qualcomm 7nm High-Speed PHY"
 +	depends on PHY && ARCH_SNAPDRAGON
 +	help
-+	  Enable this to support the Super-Speed USB transceiver on various
-+	  Qualcomm chipsets.
++	  Enable this to support the Qualcomm Synopsys DesignWare Core 7nm
++	  High-Speed PHY driver. This driver supports the Hi-Speed PHY which
++	  is usually paired with Synopsys DWC3 USB IPs on MSM SOCs.
 +
  config PHY_QCOM_USB_HS_28NM
  	tristate "Qualcomm 28nm High-Speed PHY"
  	depends on PHY && ARCH_SNAPDRAGON
 diff --git a/drivers/phy/qcom/Makefile b/drivers/phy/qcom/Makefile
-index 2113f178c0c7..f6af985666a4 100644
+index f6af985666a4..39219ecd24aa 100644
 --- a/drivers/phy/qcom/Makefile
 +++ b/drivers/phy/qcom/Makefile
-@@ -1,4 +1,5 @@
+@@ -1,5 +1,6 @@
  obj-$(CONFIG_PHY_QCOM_IPQ4019_USB) += phy-qcom-ipq4019-usb.o
  obj-$(CONFIG_MSM8916_USB_PHY) += msm8916-usbh-phy.o
-+obj-$(CONFIG_PHY_QCOM_QUSB2) += phy-qcom-qusb2.o
+ obj-$(CONFIG_PHY_QCOM_QUSB2) += phy-qcom-qusb2.o
++obj-$(CONFIG_PHY_QCOM_USB_HS_7NM) += phy-qcom-usb-hs-7nm.o
  obj-$(CONFIG_PHY_QCOM_USB_HS_28NM) += phy-qcom-usb-hs-28nm.o
  obj-$(CONFIG_PHY_QCOM_USB_SS) += phy-qcom-usb-ss.o
-diff --git a/drivers/phy/qcom/phy-qcom-qusb2.c b/drivers/phy/qcom/phy-qcom-qusb2.c
+diff --git a/drivers/phy/qcom/phy-qcom-usb-hs-7nm.c b/drivers/phy/qcom/phy-qcom-usb-hs-7nm.c
 new file mode 100644
-index 000000000000..5b654403a181
+index 000000000000..65128b45937b
 --- /dev/null
-+++ b/drivers/phy/qcom/phy-qcom-qusb2.c
-@@ -0,0 +1,468 @@
++++ b/drivers/phy/qcom/phy-qcom-usb-hs-7nm.c
+@@ -0,0 +1,295 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2023 Bhupesh Sharma <bhupesh.sharma@linaro.org>
@@ -163,466 +166,293 @@ index 000000000000..5b654403a181
 + * Based on Linux driver
 + */
 +
-+#include <dm.h>
-+#include <generic-phy.h>
-+#include <linux/bitops.h>
-+#include <asm/io.h>
-+#include <reset.h>
 +#include <clk.h>
++#include <clk-uclass.h>
++#include <dm.h>
++#include <dm/device_compat.h>
++#include <dm/devres.h>
++#include <generic-phy.h>
++#include <malloc.h>
++#include <reset.h>
++
++#include <asm/io.h>
++#include <linux/bitops.h>
++#include <linux/clk-provider.h>
 +#include <linux/delay.h>
++#include <linux/iopoll.h>
 +
-+#include <dt-bindings/phy/phy-qcom-qusb2.h>
++#define USB2_PHY_USB_PHY_UTMI_CTRL0 (0x3c)
++#define SLEEPM BIT(0)
++#define OPMODE_MASK GENMASK(4, 3)
++#define OPMODE_NORMAL (0x00)
++#define OPMODE_NONDRIVING BIT(3)
++#define TERMSEL BIT(5)
 +
-+#define QUSB2PHY_PLL 0x0
-+#define QUSB2PHY_PLL_TEST 0x04
-+#define CLK_REF_SEL BIT(7)
++#define USB2_PHY_USB_PHY_UTMI_CTRL1 (0x40)
++#define XCVRSEL BIT(0)
 +
-+#define QUSB2PHY_PLL_TUNE 0x08
-+#define QUSB2PHY_PLL_USER_CTL1 0x0c
-+#define QUSB2PHY_PLL_USER_CTL2 0x10
-+#define QUSB2PHY_PLL_AUTOPGM_CTL1 0x1c
-+#define QUSB2PHY_PLL_PWR_CTRL 0x18
++#define USB2_PHY_USB_PHY_UTMI_CTRL5 (0x50)
++#define POR BIT(1)
 +
-+/* QUSB2PHY_PLL_STATUS register bits */
-+#define PLL_LOCKED BIT(5)
++#define USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON0 (0x54)
++#define SIDDQ BIT(2)
++#define RETENABLEN BIT(3)
++#define FSEL_MASK GENMASK(6, 4)
++#define FSEL_DEFAULT (0x3 << 4)
 +
-+/* QUSB2PHY_PLL_COMMON_STATUS_ONE register bits */
-+#define CORE_READY_STATUS BIT(0)
++#define USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON1 (0x58)
++#define VBUSVLDEXTSEL0 BIT(4)
++#define PLLBTUNE BIT(5)
 +
-+/* QUSB2PHY_PORT_POWERDOWN register bits */
-+#define CLAMP_N_EN BIT(5)
-+#define FREEZIO_N BIT(1)
-+#define POWER_DOWN BIT(0)
++#define USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON2 (0x5c)
++#define VREGBYPASS BIT(0)
 +
-+/* QUSB2PHY_PWR_CTRL1 register bits */
-+#define PWR_CTRL1_VREF_SUPPLY_TRIM BIT(5)
-+#define PWR_CTRL1_CLAMP_N_EN BIT(1)
++#define USB2_PHY_USB_PHY_HS_PHY_CTRL1 (0x60)
++#define VBUSVLDEXT0 BIT(0)
 +
-+#define QUSB2PHY_REFCLK_ENABLE BIT(0)
++#define USB2_PHY_USB_PHY_HS_PHY_CTRL2 (0x64)
++#define USB2_AUTO_RESUME BIT(0)
++#define USB2_SUSPEND_N BIT(2)
++#define USB2_SUSPEND_N_SEL BIT(3)
 +
-+#define PHY_CLK_SCHEME_SEL BIT(0)
++#define USB2_PHY_USB_PHY_HS_PHY_OVERRIDE_X0 (0x6c)
++#define USB2_PHY_USB_PHY_HS_PHY_OVERRIDE_X1 (0x70)
++#define USB2_PHY_USB_PHY_HS_PHY_OVERRIDE_X2 (0x74)
++#define USB2_PHY_USB_PHY_HS_PHY_OVERRIDE_X3 (0x78)
++#define PARAM_OVRD_MASK 0xFF
 +
-+/* QUSB2PHY_INTR_CTRL register bits */
-+#define DMSE_INTR_HIGH_SEL BIT(4)
-+#define DPSE_INTR_HIGH_SEL BIT(3)
-+#define CHG_DET_INTR_EN BIT(2)
-+#define DMSE_INTR_EN BIT(1)
-+#define DPSE_INTR_EN BIT(0)
++#define USB2_PHY_USB_PHY_CFG0 (0x94)
++#define UTMI_PHY_DATAPATH_CTRL_OVERRIDE_EN BIT(0)
++#define UTMI_PHY_CMN_CTRL_OVERRIDE_EN BIT(1)
 +
-+/* QUSB2PHY_PLL_CORE_INPUT_OVERRIDE register bits */
-+#define CORE_PLL_EN_FROM_RESET BIT(4)
-+#define CORE_RESET BIT(5)
-+#define CORE_RESET_MUX BIT(6)
++#define USB2_PHY_USB_PHY_REFCLK_CTRL (0xa0)
++#define REFCLK_SEL_MASK GENMASK(1, 0)
++#define REFCLK_SEL_DEFAULT (0x2 << 0)
 +
-+/* QUSB2PHY_IMP_CTRL1 register bits */
-+#define IMP_RES_OFFSET_MASK GENMASK(5, 0)
-+#define IMP_RES_OFFSET_SHIFT 0x0
++#define HS_DISCONNECT_MASK GENMASK(2, 0)
++#define SQUELCH_DETECTOR_MASK GENMASK(7, 5)
 +
-+/* QUSB2PHY_PLL_BIAS_CONTROL_2 register bits */
-+#define BIAS_CTRL2_RES_OFFSET_MASK GENMASK(5, 0)
-+#define BIAS_CTRL2_RES_OFFSET_SHIFT 0x0
++#define HS_AMPLITUDE_MASK GENMASK(3, 0)
++#define PREEMPHASIS_DURATION_MASK BIT(5)
++#define PREEMPHASIS_AMPLITUDE_MASK GENMASK(7, 6)
 +
-+/* QUSB2PHY_CHG_CONTROL_2 register bits */
-+#define CHG_CTRL2_OFFSET_MASK GENMASK(5, 4)
-+#define CHG_CTRL2_OFFSET_SHIFT 0x4
++#define HS_RISE_FALL_MASK GENMASK(1, 0)
++#define HS_CROSSOVER_VOLTAGE_MASK GENMASK(3, 2)
++#define HS_OUTPUT_IMPEDANCE_MASK GENMASK(5, 4)
 +
-+/* QUSB2PHY_PORT_TUNE1 register bits */
-+#define HSTX_TRIM_MASK GENMASK(7, 4)
-+#define HSTX_TRIM_SHIFT 0x4
-+#define PREEMPH_WIDTH_HALF_BIT BIT(2)
-+#define PREEMPHASIS_EN_MASK GENMASK(1, 0)
-+#define PREEMPHASIS_EN_SHIFT 0x0
++#define LS_FS_OUTPUT_IMPEDANCE_MASK GENMASK(3, 0)
 +
-+/* QUSB2PHY_PORT_TUNE2 register bits */
-+#define HSDISC_TRIM_MASK GENMASK(1, 0)
-+#define HSDISC_TRIM_SHIFT 0x0
++#define SNPS_HS_NUM_VREGS ARRAY_SIZE(hs_7nm_vreg_names)
 +
-+#define QUSB2PHY_PLL_ANALOG_CONTROLS_TWO 0x04
-+#define QUSB2PHY_PLL_CLOCK_INVERTERS 0x18c
-+#define QUSB2PHY_PLL_CMODE 0x2c
-+#define QUSB2PHY_PLL_LOCK_DELAY 0x184
-+#define QUSB2PHY_PLL_DIGITAL_TIMERS_TWO 0xb4
-+#define QUSB2PHY_PLL_BIAS_CONTROL_1 0x194
-+#define QUSB2PHY_PLL_BIAS_CONTROL_2 0x198
-+#define QUSB2PHY_PWR_CTRL2 0x214
-+#define QUSB2PHY_IMP_CTRL1 0x220
-+#define QUSB2PHY_IMP_CTRL2 0x224
-+#define QUSB2PHY_CHG_CTRL2 0x23c
-+
-+struct qusb2_phy_init_tbl {
-+	unsigned int offset;
-+	unsigned int val;
-+	/*
-+	 * register part of layout ?
-+	 * if yes, then offset gives index in the reg-layout
-+	 */
-+	int in_layout;
++struct override_param {
++	s32 value;
++	u8 reg_val;
 +};
 +
-+struct qusb2_phy_cfg {
-+	const struct qusb2_phy_init_tbl *tbl;
-+	/* number of entries in the table */
-+	unsigned int tbl_num;
-+	/* offset to PHY_CLK_SCHEME register in TCSR map */
-+	unsigned int clk_scheme_offset;
-+
-+	/* array of registers with different offsets */
-+	const unsigned int *regs;
-+	unsigned int mask_core_ready;
-+	unsigned int disable_ctrl;
-+	unsigned int autoresume_en;
-+
-+	/* true if PHY has PLL_TEST register to select clk_scheme */
-+	bool has_pll_test;
-+
-+	/* true if TUNE1 register must be updated by fused value, else TUNE2 */
-+	bool update_tune1_with_efuse;
-+
-+	/* true if PHY has PLL_CORE_INPUT_OVERRIDE register to reset PLL */
-+	bool has_pll_override;
++struct override_param_map {
++	const char *prop_name;
++	const struct override_param *param_table;
++	u8 table_size;
++	u8 reg_offset;
++	u8 param_mask;
 +};
 +
-+/* set of registers with offsets different per-PHY */
-+enum qusb2phy_reg_layout {
-+	QUSB2PHY_PLL_CORE_INPUT_OVERRIDE,
-+	QUSB2PHY_PLL_STATUS,
-+	QUSB2PHY_PORT_TUNE1,
-+	QUSB2PHY_PORT_TUNE2,
-+	QUSB2PHY_PORT_TUNE3,
-+	QUSB2PHY_PORT_TUNE4,
-+	QUSB2PHY_PORT_TUNE5,
-+	QUSB2PHY_PORT_TEST1,
-+	QUSB2PHY_PORT_TEST2,
-+	QUSB2PHY_PORT_POWERDOWN,
-+	QUSB2PHY_INTR_CTRL,
++struct phy_override_seq {
++	bool need_update;
++	u8 offset;
++	u8 value;
++	u8 mask;
 +};
 +
-+#define QUSB2_PHY_INIT_CFG(o, v)       \
-+	{                              \
-+		.offset = o, .val = v, \
-+	}
++#define NUM_HSPHY_TUNING_PARAMS (9)
 +
-+#define QUSB2_PHY_INIT_CFG_L(o, v)                     \
-+	{                                              \
-+		.offset = o, .val = v, .in_layout = 1, \
-+	}
++/* struct hs_7nm_phy_cfg - per-PHY initialization config */
++struct hs_7nm_phy_cfg {
++	/* resets to be requested */
++	struct reset_ctl *resets;
++	int num_resets;
 +
-+static const struct qusb2_phy_init_tbl sm6115_init_tbl[] = {
-+	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE1, 0xf8),
-+	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE2, 0x53),
-+	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE3, 0x81),
-+	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE4, 0x17),
-+
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_TUNE, 0x30),
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_USER_CTL1, 0x79),
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_USER_CTL2, 0x21),
-+
-+	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TEST2, 0x14),
-+
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_AUTOPGM_CTL1, 0x9f),
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_PWR_CTRL, 0x00),
-+};
-+
-+static const unsigned int sm6115_regs_layout[] = {
-+	[QUSB2PHY_PLL_STATUS] = 0x38,	  [QUSB2PHY_PORT_TUNE1] = 0x80,
-+	[QUSB2PHY_PORT_TUNE2] = 0x84,	  [QUSB2PHY_PORT_TUNE3] = 0x88,
-+	[QUSB2PHY_PORT_TUNE4] = 0x8c,	  [QUSB2PHY_PORT_TUNE5] = 0x90,
-+	[QUSB2PHY_PORT_TEST1] = 0xb8,	  [QUSB2PHY_PORT_TEST2] = 0x9c,
-+	[QUSB2PHY_PORT_POWERDOWN] = 0xb4, [QUSB2PHY_INTR_CTRL] = 0xbc,
-+};
-+
-+static const struct qusb2_phy_init_tbl qusb2_v2_init_tbl[] = {
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_ANALOG_CONTROLS_TWO, 0x03),
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_CLOCK_INVERTERS, 0x7c),
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_CMODE, 0x80),
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_LOCK_DELAY, 0x0a),
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_DIGITAL_TIMERS_TWO, 0x19),
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_BIAS_CONTROL_1, 0x40),
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_PLL_BIAS_CONTROL_2, 0x20),
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_PWR_CTRL2, 0x21),
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_IMP_CTRL1, 0x0),
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_IMP_CTRL2, 0x58),
-+
-+	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE1, 0x30),
-+	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE2, 0x29),
-+	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE3, 0xca),
-+	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE4, 0x04),
-+	QUSB2_PHY_INIT_CFG_L(QUSB2PHY_PORT_TUNE5, 0x03),
-+
-+	QUSB2_PHY_INIT_CFG(QUSB2PHY_CHG_CTRL2, 0x0),
-+};
-+
-+static const unsigned int qusb2_v2_regs_layout[] = {
-+	[QUSB2PHY_PLL_CORE_INPUT_OVERRIDE] = 0xa8,
-+	[QUSB2PHY_PLL_STATUS] = 0x1a0,
-+	[QUSB2PHY_PORT_TUNE1] = 0x240,
-+	[QUSB2PHY_PORT_TUNE2] = 0x244,
-+	[QUSB2PHY_PORT_TUNE3] = 0x248,
-+	[QUSB2PHY_PORT_TUNE4] = 0x24c,
-+	[QUSB2PHY_PORT_TUNE5] = 0x250,
-+	[QUSB2PHY_PORT_TEST1] = 0x254,
-+	[QUSB2PHY_PORT_TEST2] = 0x258,
-+	[QUSB2PHY_PORT_POWERDOWN] = 0x210,
-+	[QUSB2PHY_INTR_CTRL] = 0x230,
-+};
-+
-+static const struct qusb2_phy_cfg sm6115_phy_cfg = {
-+	.tbl = sm6115_init_tbl,
-+	.tbl_num = ARRAY_SIZE(sm6115_init_tbl),
-+	.regs = sm6115_regs_layout,
-+
-+	.has_pll_test = true,
-+	.disable_ctrl = (CLAMP_N_EN | FREEZIO_N | POWER_DOWN),
-+	.mask_core_ready = PLL_LOCKED,
-+	.autoresume_en = BIT(3),
-+};
-+
-+static const struct qusb2_phy_cfg qusb2_v2_phy_cfg = {
-+	.tbl = qusb2_v2_init_tbl,
-+	.tbl_num = ARRAY_SIZE(qusb2_v2_init_tbl),
-+	.regs = qusb2_v2_regs_layout,
-+
-+	.disable_ctrl = (PWR_CTRL1_VREF_SUPPLY_TRIM | PWR_CTRL1_CLAMP_N_EN |
-+			 POWER_DOWN),
-+	.mask_core_ready = CORE_READY_STATUS,
-+	.has_pll_override = true,
-+	.autoresume_en = BIT(0),
-+	.update_tune1_with_efuse = true,
++	struct override_param_map *map_cfg;
++	struct phy_override_seq update_seq_cfg[NUM_HSPHY_TUNING_PARAMS];
 +};
 +
 +/**
-+ * struct qusb2_phy - structure holding qusb2 phy attributes
-+ *
-+ * @phy: generic phy
-+ * @base: iomapped memory space for qubs2 phy
-+ *
-+ * @cfg_ahb_clk: AHB2PHY interface clock
-+ * @phy_rst: phy reset control
-+ *
-+ * @cfg: phy config data
-+ * @has_se_clk_scheme: indicate if PHY has single-ended ref clock scheme
++ * struct hs_7nm_phy_priv - snps hs phy attributes
 + */
-+struct qusb2_phy {
-+	struct phy *phy;
++struct hs_7nm_phy_priv {
 +	void __iomem *base;
 +
-+	struct clk cfg_ahb_clk;
-+	struct reset_ctl phy_rst;
++	/* clocks to be requested */
++	struct clk_bulk clks;
 +
-+	const struct qusb2_phy_cfg *cfg;
-+	bool has_se_clk_scheme;
++	/* resets to be requested */
++	struct reset_ctl_bulk resets;
++
++	struct hs_7nm_phy_cfg *cfg;
 +};
 +
-+static inline void qusb2_write_mask(void __iomem *base, u32 offset, u32 val,
-+				    u32 mask)
++static inline void hs_7nm_write_mask(void __iomem *base, u32 offset, u32 mask,
++				     u32 val)
 +{
 +	u32 reg;
 +
-+	reg = readl(base + offset);
++	reg = readl_relaxed(base + offset);
++
 +	reg &= ~mask;
 +	reg |= val & mask;
-+	writel(reg, base + offset);
++	writel_relaxed(reg, base + offset);
 +
 +	/* Ensure above write is completed */
-+	readl(base + offset);
++	readl_relaxed(base + offset);
 +}
 +
-+static inline void qusb2_setbits(void __iomem *base, u32 offset, u32 val)
++static int hs_7nm_usb_init(struct phy *phy)
 +{
-+	u32 reg;
++	struct hs_7nm_phy_priv *hs_7nm = dev_get_priv(phy->dev);
 +
-+	reg = readl(base + offset);
-+	reg |= val;
-+	writel(reg, base + offset);
++	hs_7nm_write_mask(hs_7nm->base, USB2_PHY_USB_PHY_CFG0,
++			  UTMI_PHY_CMN_CTRL_OVERRIDE_EN,
++			  UTMI_PHY_CMN_CTRL_OVERRIDE_EN);
++	hs_7nm_write_mask(hs_7nm->base, USB2_PHY_USB_PHY_UTMI_CTRL5, POR, POR);
++	hs_7nm_write_mask(hs_7nm->base, USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON0,
++			  FSEL_MASK, 0);
++	hs_7nm_write_mask(hs_7nm->base, USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON1,
++			  PLLBTUNE, PLLBTUNE);
++	hs_7nm_write_mask(hs_7nm->base, USB2_PHY_USB_PHY_REFCLK_CTRL,
++			  REFCLK_SEL_DEFAULT, REFCLK_SEL_MASK);
++	hs_7nm_write_mask(hs_7nm->base, USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON1,
++			  VBUSVLDEXTSEL0, VBUSVLDEXTSEL0);
++	hs_7nm_write_mask(hs_7nm->base, USB2_PHY_USB_PHY_HS_PHY_CTRL1,
++			  VBUSVLDEXT0, VBUSVLDEXT0);
 +
-+	/* Ensure above write is completed */
-+	readl(base + offset);
++	hs_7nm_write_mask(hs_7nm->base, USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON2,
++			  VREGBYPASS, VREGBYPASS);
++
++	hs_7nm_write_mask(hs_7nm->base, USB2_PHY_USB_PHY_HS_PHY_CTRL2,
++			  USB2_SUSPEND_N_SEL | USB2_SUSPEND_N,
++			  USB2_SUSPEND_N_SEL | USB2_SUSPEND_N);
++
++	hs_7nm_write_mask(hs_7nm->base, USB2_PHY_USB_PHY_UTMI_CTRL0, SLEEPM,
++			  SLEEPM);
++
++	hs_7nm_write_mask(hs_7nm->base, USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON0,
++			  SIDDQ, 0);
++
++	hs_7nm_write_mask(hs_7nm->base, USB2_PHY_USB_PHY_UTMI_CTRL5, POR, 0);
++
++	hs_7nm_write_mask(hs_7nm->base, USB2_PHY_USB_PHY_HS_PHY_CTRL2,
++			  USB2_SUSPEND_N_SEL, 0);
++
++	hs_7nm_write_mask(hs_7nm->base, USB2_PHY_USB_PHY_CFG0,
++			  UTMI_PHY_CMN_CTRL_OVERRIDE_EN, 0);
++
++	return 0;
 +}
 +
-+static inline void qusb2_clrbits(void __iomem *base, u32 offset, u32 val)
++static int hs_7nm_phy_power_on(struct phy *phy)
 +{
-+	u32 reg;
-+
-+	reg = readl(base + offset);
-+	reg &= ~val;
-+	writel(reg, base + offset);
-+
-+	/* Ensure above write is completed */
-+	readl(base + offset);
-+}
-+
-+static inline void qusb2_phy_configure(void __iomem *base,
-+				       const unsigned int *regs,
-+				       const struct qusb2_phy_init_tbl tbl[],
-+				       int num)
-+{
-+	int i;
-+
-+	for (i = 0; i < num; i++) {
-+		if (tbl[i].in_layout)
-+			writel(tbl[i].val, base + regs[tbl[i].offset]);
-+		else
-+			writel(tbl[i].val, base + tbl[i].offset);
-+	}
-+}
-+
-+static int qusb2phy_do_reset(struct qusb2_phy *qphy)
-+{
++	struct hs_7nm_phy_priv *hs_7nm = dev_get_priv(phy->dev);
 +	int ret;
 +
-+	ret = reset_assert(&qphy->phy_rst);
++	clk_enable_bulk(&hs_7nm->clks);
++
++	ret = reset_deassert_bulk(&hs_7nm->resets);
 +	if (ret)
 +		return ret;
 +
-+	udelay(10);
-+
-+	ret = reset_deassert(&qphy->phy_rst);
++	ret = hs_7nm_usb_init(phy);
 +	if (ret)
 +		return ret;
 +
 +	return 0;
 +}
 +
-+static int qusb2phy_power_on(struct phy *phy)
++static int hs_7nm_phy_power_off(struct phy *phy)
 +{
-+	struct qusb2_phy *qphy = dev_get_priv(phy->dev);
-+	const struct qusb2_phy_cfg *cfg = qphy->cfg;
-+	int ret;
-+	u32 val;
++	struct hs_7nm_phy_priv *hs_7nm = dev_get_priv(phy->dev);
 +
-+	ret = qusb2phy_do_reset(qphy);
-+	if (ret)
-+		return ret;
-+
-+	/* Disable the PHY */
-+	qusb2_setbits(qphy->base, cfg->regs[QUSB2PHY_PORT_POWERDOWN],
-+		      qphy->cfg->disable_ctrl);
-+
-+	if (cfg->has_pll_test) {
-+		/* save reset value to override reference clock scheme later */
-+		val = readl(qphy->base + QUSB2PHY_PLL_TEST);
-+	}
-+
-+	qusb2_phy_configure(qphy->base, cfg->regs, cfg->tbl, cfg->tbl_num);
-+
-+	/* Enable the PHY */
-+	qusb2_clrbits(qphy->base, cfg->regs[QUSB2PHY_PORT_POWERDOWN],
-+		      POWER_DOWN);
-+
-+	/* Required to get phy pll lock successfully */
-+	udelay(150);
-+
-+	if (cfg->has_pll_test) {
-+		val |= CLK_REF_SEL;
-+
-+		writel(val, qphy->base + QUSB2PHY_PLL_TEST);
-+
-+		/* ensure above write is through */
-+		readl(qphy->base + QUSB2PHY_PLL_TEST);
-+	}
-+
-+	/* Required to get phy pll lock successfully */
-+	udelay(100);
-+
-+	val = readb(qphy->base + cfg->regs[QUSB2PHY_PLL_STATUS]);
-+	if (!(val & cfg->mask_core_ready)) {
-+		pr_err("QUSB2PHY pll lock failed: status reg = %x\n", val);
-+		ret = -EBUSY;
-+		return ret;
-+	}
++	reset_assert_bulk(&hs_7nm->resets);
++	clk_disable_bulk(&hs_7nm->clks);
 +
 +	return 0;
 +}
 +
-+static int qusb2phy_power_off(struct phy *phy)
-+{
-+	struct qusb2_phy *qphy = dev_get_priv(phy->dev);
-+
-+	/* Disable the PHY */
-+	qusb2_setbits(qphy->base, qphy->cfg->regs[QUSB2PHY_PORT_POWERDOWN],
-+		      qphy->cfg->disable_ctrl);
-+
-+	reset_assert(&qphy->phy_rst);
-+
-+	clk_disable(&qphy->cfg_ahb_clk);
-+
-+	return 0;
-+}
-+
-+static int qusb2phy_clk_init(struct udevice *dev, struct qusb2_phy *qphy)
++static int hs_7nm_phy_clk_init(struct udevice *dev,
++			       struct hs_7nm_phy_priv *hs_7nm)
 +{
 +	int ret;
 +
-+	/* We ignore the ref clock as we currently lack a driver for rpmcc/rpmhcc where
-+	 * it usually comes from - we assume it's always on.
-+	 */
-+	ret = clk_get_by_name(dev, "cfg_ahb", &qphy->cfg_ahb_clk);
-+	if (ret == -ENOSYS || ret == -ENOENT)
++	ret = clk_get_bulk(dev, &hs_7nm->clks);
++	/* We may have no clocks */
++	if (ret == -ENOENT) {
++		debug("%s: no clocks\n", __func__);
 +		return 0;
-+	if (ret)
-+		return ret;
-+
-+	ret = clk_enable(&qphy->cfg_ahb_clk);
-+	if (ret) {
++	}
++	if (ret < 0) {
++		printf("%s: Failed to get clocks %d\n", __func__, ret);
 +		return ret;
 +	}
 +
 +	return 0;
 +}
 +
-+static int qusb2phy_probe(struct udevice *dev)
++static int hs_7nm_phy_probe(struct udevice *dev)
 +{
-+	struct qusb2_phy *qphy = dev_get_priv(dev);
++	struct hs_7nm_phy_priv *hs_7nm = dev_get_priv(dev);
 +	int ret;
 +
-+	qphy->base = (void __iomem *)dev_read_addr(dev);
-+	if (IS_ERR(qphy->base))
-+		return PTR_ERR(qphy->base);
++	hs_7nm->base = (void __iomem *)dev_read_addr(dev);
++	if (IS_ERR(hs_7nm->base))
++		return PTR_ERR(hs_7nm->base);
 +
-+	ret = qusb2phy_clk_init(dev, qphy);
++	hs_7nm->cfg = (struct hs_7nm_phy_cfg *)dev_get_driver_data(dev);
++
++	ret = hs_7nm_phy_clk_init(dev, hs_7nm);
 +	if (ret) {
-+		printf("%s: Couldn't get clocks: %d\n", __func__, ret);
++		printf("%s: hs_7nm_phy_clk_init %d\n", __func__, ret);
 +		return ret;
 +	}
 +
-+	ret = reset_get_by_index(dev, 0, &qphy->phy_rst);
-+	if (ret) {
-+		printf("%s: Couldn't get resets: %d\n", __func__, ret);
++	ret = reset_get_bulk(dev, &hs_7nm->resets);
++	if (ret < 0) {
++		printf("failed to get resets, ret = %d\n", ret);
 +		return ret;
 +	}
 +
-+	qphy->cfg = (const struct qusb2_phy_cfg *)dev_get_driver_data(dev);
-+	if (!qphy->cfg) {
-+		printf("%s: Couldn't get driver data\n", __func__);
-+		return -EINVAL;
-+	}
++	clk_enable_bulk(&hs_7nm->clks);
++	reset_deassert_bulk(&hs_7nm->resets);
 +
-+	debug("%s success qusb phy cfg %p\n", __func__, qphy->cfg);
 +	return 0;
 +}
 +
-+static struct phy_ops qusb2phy_ops = {
-+	.power_on = qusb2phy_power_on,
-+	.power_off = qusb2phy_power_off,
++static struct phy_ops hs_7nm_phy_ops = {
++	.power_on = hs_7nm_phy_power_on,
++	.power_off = hs_7nm_phy_power_off,
 +};
 +
-+static const struct udevice_id qusb2phy_ids[] = {
-+	{ .compatible = "qcom,qusb2-phy" },
-+	{ .compatible = "qcom,qcm2290-qusb2-phy",
-+	  .data = (ulong)&sm6115_phy_cfg },
-+	{ .compatible = "qcom,sm6115-qusb2-phy",
-+	  .data = (ulong)&sm6115_phy_cfg },
-+	{ .compatible = "qcom,qusb2-v2-phy", .data = (ulong)&qusb2_v2_phy_cfg },
++static const struct udevice_id hs_7nm_phy_ids[] = {
++	{
++		.compatible = "qcom,sm8150-usb-hs-phy",
++	},
++	{
++		.compatible = "qcom,usb-snps-hs-5nm-phy",
++	},
++	{
++		.compatible = "qcom,usb-snps-hs-7nm-phy",
++	},
++	{
++		.compatible = "qcom,usb-snps-femto-v2-phy",
++	},
 +	{}
 +};
 +
-+U_BOOT_DRIVER(qcom_qusb2_phy) = {
-+	.name = "qcom-qusb2-phy",
++U_BOOT_DRIVER(qcom_usb_hs_7nm) = {
++	.name = "qcom-usb-hs-7nm",
 +	.id = UCLASS_PHY,
-+	.of_match = qusb2phy_ids,
-+	.ops = &qusb2phy_ops,
-+	.probe = qusb2phy_probe,
-+	.priv_auto = sizeof(struct qusb2_phy),
++	.of_match = hs_7nm_phy_ids,
++	.ops = &hs_7nm_phy_ops,
++	.probe = hs_7nm_phy_probe,
++	.priv_auto = sizeof(struct hs_7nm_phy_priv),
 +};
 
 -- 
