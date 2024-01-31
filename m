@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27F2DC47258
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 12:49:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51706C47DB3
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 12:49:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D64587BDD;
-	Wed, 31 Jan 2024 13:49:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0B3D787BDA;
+	Wed, 31 Jan 2024 13:49:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="bFZiQ4F3";
+	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="Br4NP7t2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99031876EA; Wed, 31 Jan 2024 13:49:32 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 1DE1C87BFD; Wed, 31 Jan 2024 13:49:35 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B603487BC4
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 13:49:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B64787BC4
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 13:49:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=foundries.io
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-33ae3be1c37so532583f8f.0
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 04:49:30 -0800 (PST)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-40faf6788d1so4942105e9.0
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 04:49:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1706705369; x=1707310169; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=9ewp29h7S15WTg0Ww4Pwq0FHhbhWAA5B3F29UviF9/U=;
- b=bFZiQ4F39bfeh/3x+5cy7VYvrdRiwBhFQRWKnLlGgARY++Da5UM+29L3kSzKczAmgj
- lj2JNe5NuWbTaZZVhj+vFm9vY+RiTLi2FjhEOuciI3uPWP5mtEdKprXr9duhwYXpkLLU
- EZE9vGfwa6G2S5aBy+ULHgSgk8mfx3wL0oD+37FhMy9Od1E4p5w2dil+mCziJOWg1UpK
- bQc+SM1mGGt/7HsDA8SiKkLWAbfyYNGtv7u7HLKv1zaT4k/xxRlHDuY31U4ReEGxfT2H
- IqePD1tK/AltnV74gZcqNNDfu+C87X7fD9cJ/tX0Z3JbK1UnYNQeHHpiL7D85OvTgNF1
- chSQ==
+ d=foundries.io; s=google; t=1706705372; x=1707310172; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4wW3SyTaw8jdBLrMQYVF5f2gYEg5VAJpl07mBsLOeCg=;
+ b=Br4NP7t2sG7QYg06Uq6SO2mTrsVBV3yQ7ofFWM1T6yOIXkGxWz5lGYNQz72WZ+pEnu
+ IJ4XRr+uKrxLRvmCZyp4f78KyJfDBYyPOaYhDhWC/XvT0gZKtr6YrjBqpGq7u/Qlr3HF
+ KPa3f5DIoG+35hadSuNsE3i7WBoPJwLn/kGtFVwHCKEAkPi8uAwiQftVDNzhupKCB3qh
+ rPnWfiKE6/xqud+Fe/ktLOk/XQKBdmP0r4aQk75EdWiKn6lHUQ6Ry+qAfiHBDjlHQamS
+ PvfW7HT4PWYmADWceI2Un/AsV8d0LnHqwEOA/g7wix0Mry8sQ5B40Dimgw5smlEJyXPc
+ 3RXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706705369; x=1707310169;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9ewp29h7S15WTg0Ww4Pwq0FHhbhWAA5B3F29UviF9/U=;
- b=e4ewlZ9lGfU7jzyi5LXSsTxzBfXxfhA06vL4d49Nfz6QM2YLTcFfy8ca0Aux+ANkp8
- 5MQy1/U5p818TYwBFA4OXd+pEAv4BGb6KkClWRdCcOdTPU+6+Ik+tK727aezMiJvQiXN
- WpHiBFEYNDcuXWNL8FIOZkkmiBNFDHF8TBmd7IjKWaC9F73Q3NPH0jS81vXlDNdoWkZ9
- qQcyg5JqNuZD+EuOqUEWDQi4EvepFRdmfOO3nRKT2idD1U6OnceldxDiB43Imrrb+aXp
- WjTyOVvJH9gN4qMAMC7CX7YcDf0UBB8ad3d+hGTj2Jhx8J8T1cc40mk65DkAF2964AKK
- 26nw==
-X-Gm-Message-State: AOJu0YyozkOJrpYfIjESmoj1e8l9nmrnhpNvlQu9JJEzjXYIjo6/jfFY
- SaCwjyLxTH+5PVoTYrYlbmdWulyLfbGxG31AnQgvk15xDnY29ZraerqFM7PyDRyxLq5qNSbDV34
- w/Bg=
-X-Google-Smtp-Source: AGHT+IHoGlXmKd3jfuKuz1plpfAbUfTBR1fDm42lyfnqKxFz2zVa0aGko0sfU1lCo8E2f9+eRmFzUw==
-X-Received: by 2002:a5d:64c3:0:b0:337:aa92:74cb with SMTP id
- f3-20020a5d64c3000000b00337aa9274cbmr2040157wri.0.1706705369505; 
- Wed, 31 Jan 2024 04:49:29 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706705372; x=1707310172;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=4wW3SyTaw8jdBLrMQYVF5f2gYEg5VAJpl07mBsLOeCg=;
+ b=ayfhRqpmTDRkVnPiWX1C1T6u499yiubvLEifaL6/CU8eOCgwUh6ATi8jlFQBNiTCWz
+ t7OQqH/1F32RdZLrNwTk4O92RSHMYLans0s/HKH7qvuWce8EcY7POTLUMtr6BYnyGg0U
+ eua+OsR8vfGcbh70Y2LTRNK/SLLNZxprF6lCssg+cVqw15Fy93TliRZFOeheoaSz4zCE
+ bbaH3F+wEqv9OdhMrPGU497mSmm+6irlqnl/StpcSt3upoXhXRuja98ZvdCGekrelBgn
+ qmKDSqiHHIfFHyxeqqbc4LKCRa1vm/YDK+rgke0xnyP3jlYjJuhbQknzhobAH/zk4Ymr
+ 6HsA==
+X-Gm-Message-State: AOJu0YzQQ346uS6r4jOrHLrfOg3BGIAtZWMp0HrV1VmNBtDH2F/iAk9h
+ zeIXRseYQZhcyepTBXAk1lphj7WfIWF4UeobgKy5exTjyqjAqwHZ7uA+RQacUpdf1T+YRG9cE/B
+ G+Pk=
+X-Google-Smtp-Source: AGHT+IEp+qK8+Pyy1HDX14cw9VRaWfqR9jk+upzzU4UiDphBzxLN8QRChmFYv5ZQhogLzHb2f/Lwjw==
+X-Received: by 2002:a05:600c:1f96:b0:40f:b24f:de51 with SMTP id
+ je22-20020a05600c1f9600b0040fb24fde51mr2043491wmb.18.1706705372243; 
+ Wed, 31 Jan 2024 04:49:32 -0800 (PST)
 Received: from localhost ([109.108.76.111]) by smtp.gmail.com with ESMTPSA id
- cl3-20020a5d5f03000000b0033afd49cac7sm3618650wrb.43.2024.01.31.04.49.28
+ z23-20020a1c4c17000000b0040efa7e0ef6sm1795930wmf.1.2024.01.31.04.49.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jan 2024 04:49:28 -0800 (PST)
+ Wed, 31 Jan 2024 04:49:31 -0800 (PST)
 From: Igor Opaniuk <igor.opaniuk@foundries.io>
 To: u-boot@lists.denx.de
 Cc: Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
- Igor Opaniuk <igor.opaniuk@foundries.io>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Peng Fan <peng.fan@nxp.com>,
- Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>
-Subject: [PATCH v1 1/2] imx: scu_api: add implementation of sc_pm_reset_reason
-Date: Wed, 31 Jan 2024 13:49:25 +0100
-Message-Id: <20240131124926.222556-1-igor.opaniuk@foundries.io>
+ Igor Opaniuk <igor.opaniuk@foundries.io>, Bin Meng <bmeng.cn@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Ye Li <ye.li@nxp.com>
+Subject: [PATCH v1 2/2] imx: imx8: print reset cause
+Date: Wed, 31 Jan 2024 13:49:26 +0100
+Message-Id: <20240131124926.222556-2-igor.opaniuk@foundries.io>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240131124926.222556-1-igor.opaniuk@foundries.io>
+References: <20240131124926.222556-1-igor.opaniuk@foundries.io>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,73 +95,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add implementation of sc_pm_reset_reason() call for obtaining
-reset reason.
+Add support for printing reset cause during boot.
 
 Signed-off-by: Igor Opaniuk <igor.opaniuk@foundries.io>
 ---
 
- drivers/misc/imx8/scu_api.c    | 22 ++++++++++++++++++++++
- include/firmware/imx/sci/sci.h |  6 ++++++
- 2 files changed, 28 insertions(+)
+ arch/arm/mach-imx/imx8/cpu.c | 41 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 41 insertions(+)
 
-diff --git a/drivers/misc/imx8/scu_api.c b/drivers/misc/imx8/scu_api.c
-index 3e3002ba6df..6e2c678e614 100644
---- a/drivers/misc/imx8/scu_api.c
-+++ b/drivers/misc/imx8/scu_api.c
-@@ -882,6 +882,28 @@ void sc_pm_reboot(sc_ipc_t ipc, sc_pm_reset_type_t type)
- 	misc_call(dev, SC_TRUE, &msg, size, &msg, size);
+diff --git a/arch/arm/mach-imx/imx8/cpu.c b/arch/arm/mach-imx/imx8/cpu.c
+index 39ac0bc4140..0b91e448a5d 100644
+--- a/arch/arm/mach-imx/imx8/cpu.c
++++ b/arch/arm/mach-imx/imx8/cpu.c
+@@ -45,6 +45,45 @@ struct pass_over_info_t *get_pass_over_info(void)
+ 	return p;
  }
  
-+int sc_pm_reset_reason(sc_ipc_t ipc, sc_pm_reset_reason_t *reason)
++static char *get_reset_cause(void)
 +{
-+	struct udevice *dev = gd->arch.scu_dev;
-+	struct sc_rpc_msg_s msg;
-+	int size = sizeof(struct sc_rpc_msg_s);
-+	int ret;
++	sc_pm_reset_reason_t reason;
 +
-+	RPC_VER(&msg) = SC_RPC_VERSION;
-+	RPC_SVC(&msg) = (u8)SC_RPC_SVC_PM;
-+	RPC_FUNC(&msg) = (u8)PM_FUNC_RESET_REASON;
-+	RPC_SIZE(&msg) = 1U;
++	if (sc_pm_reset_reason(-1, &reason) != SC_ERR_NONE)
++		return "Unknown reset";
 +
-+	ret = misc_call(dev, SC_FALSE, &msg, size, &msg, size);
-+	if (ret)
-+		printf("%s: res:%d\n", __func__, RPC_U8(&msg, 0U));
-+
-+	if (reason)
-+		*reason = RPC_U8(&msg, 0U);
-+
-+	return ret;
++	switch (reason) {
++	case SC_PM_RESET_REASON_POR:
++		return "POR";
++	case SC_PM_RESET_REASON_JTAG:
++		return "JTAG reset ";
++	case SC_PM_RESET_REASON_SW:
++		return "Software reset";
++	case SC_PM_RESET_REASON_WDOG:
++		return "Watchdog reset";
++	case SC_PM_RESET_REASON_LOCKUP:
++		return "SCU lockup reset";
++	case SC_PM_RESET_REASON_SNVS:
++		return "SNVS reset";
++	case SC_PM_RESET_REASON_TEMP:
++		return "Temp panic reset";
++	case SC_PM_RESET_REASON_MSI:
++		return "MSI reset";
++	case SC_PM_RESET_REASON_UECC:
++		return "ECC reset";
++	case SC_PM_RESET_REASON_SCFW_WDOG:
++		return "SCFW watchdog reset";
++	case SC_PM_RESET_REASON_ROM_WDOG:
++		return "SCU ROM watchdog reset";
++	case SC_PM_RESET_REASON_SECO:
++		return "SECO reset";
++	case SC_PM_RESET_REASON_SCFW_FAULT:
++		return "SCFW fault reset";
++	default:
++		return "Unknown reset";
++	}
 +}
 +
- int sc_pm_get_resource_power_mode(sc_ipc_t ipc, sc_rsrc_t resource,
- 				  sc_pm_power_mode_t *mode)
+ int arch_cpu_init(void)
  {
-diff --git a/include/firmware/imx/sci/sci.h b/include/firmware/imx/sci/sci.h
-index f832982b3de..7d8499f070a 100644
---- a/include/firmware/imx/sci/sci.h
-+++ b/include/firmware/imx/sci/sci.h
-@@ -75,6 +75,7 @@ int sc_pm_set_clock_parent(sc_ipc_t ipc, sc_rsrc_t resource, sc_pm_clk_t clk,
- int sc_pm_cpu_start(sc_ipc_t ipc, sc_rsrc_t resource, sc_bool_t enable,
- 		    sc_faddr_t address);
- void sc_pm_reboot(sc_ipc_t ipc, sc_pm_reset_type_t type);
-+int sc_pm_reset_reason(sc_ipc_t ipc, sc_pm_reset_reason_t *reason);
- sc_bool_t sc_pm_is_partition_started(sc_ipc_t ipc, sc_rm_pt_t pt);
- int sc_pm_resource_reset(sc_ipc_t ipc, sc_rsrc_t resource);
+ #if defined(CONFIG_SPL_BUILD) && defined(CONFIG_SPL_RECOVER_DATA_SECTION)
+@@ -322,6 +361,8 @@ int print_bootinfo(void)
+ 		break;
+ 	}
  
-@@ -385,6 +386,11 @@ static inline void sc_pm_reboot(sc_ipc_t ipc, sc_pm_reset_type_t type)
- {
++	printf("Reset cause: %s\n", get_reset_cause());
++
+ 	return 0;
  }
  
-+static inline int sc_pm_reset_reason(sc_ipc_t ipc, sc_pm_reset_reason_t *reason)
-+{
-+	return -EOPNOTSUPP;
-+}
-+
- static inline int sc_seco_v2x_build_info(sc_ipc_t ipc, u32 *version, u32 *commit)
- {
- 	return -EOPNOTSUPP;
 -- 
 2.34.1
 
