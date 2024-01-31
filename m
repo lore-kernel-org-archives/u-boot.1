@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC4BEC47258
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 14:15:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84151C47258
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 14:16:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77BB087D88;
-	Wed, 31 Jan 2024 15:14:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 024BA87C39;
+	Wed, 31 Jan 2024 15:16:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OTz7sqQu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ise1BjKc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B7A687D88; Wed, 31 Jan 2024 15:14:56 +0100 (CET)
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
+ id 4800787C68; Wed, 31 Jan 2024 15:16:06 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0D1787D67
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 15:14:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5805B879A2
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 15:16:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=o451686892@gmail.com
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-29080973530so4194319a91.1
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 06:14:53 -0800 (PST)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-40e5afc18f5so52990625e9.3
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 06:16:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706710492; x=1707315292; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=CuP93CYwzP9yQnUWNs+A0plEMcmZDayNh7fHrs8JGi4=;
- b=OTz7sqQujjKlTSUNFhLzdJ+A3i/iCuyTHqGvOPqKN2g2GKtA44h4Snt+5l5aS2q4VX
- FLsPiRckTZuxRElEb9q6W6Es1ALu2u/aC7HTLzQz1pspg7BLhiJmKO770sd7+Sf//XwV
- zTkcTFEv8dEyM/R389d0pz+xKY0ltGrYInwATmZvxRkzOgX4/OawqxYqa7qMXFvAfb0/
- vtitkUyoJ+LAPpPoe8wFkqpN66NnjUyw1McUZJW0zwJAOrONUsNNX+aJ3UnT0Y0sh2wR
- zdmWzsPdNfYPMnM3qzs63/Cl0hMJvsR6f+r+Kl7O2LHU+l90zNpcfB3D5aHIwH+P5b5y
- bipg==
+ d=linaro.org; s=google; t=1706710564; x=1707315364; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=k8fkWTv6vAfYHXabnMelSAacYtCYVlJ7pnkZmqEvs8M=;
+ b=ise1BjKc2rxd6xODXrqCKmXsfEDV6djboRx+LzTTwdrtza+BiwUwvKZmVsBmKgvKg9
+ hz+lUSmsiJztDomsdqNa2n0/9pVklbIBHFAyVchpFPA+ypTSJpcFYLI2zMNl+/HJHALv
+ h6B1T83rKO1LIYgU6TS2AiEjNRooFxuSyYbJzO7m57VJV3onkzDLLrNPUtYMq6H2ldTi
+ vrDtf645wXuIoA7BZIegyBphMWlzG0rfCDNYuQuafGpFNuBB26LaAsrjorss32kzn4ll
+ Cur02uJsjOyTlThZvaPR3FcTM5wlTPipijXnV5/F2crOh5dWvni/3tQMsJmg/JOKYJDu
+ 5wHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706710492; x=1707315292;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CuP93CYwzP9yQnUWNs+A0plEMcmZDayNh7fHrs8JGi4=;
- b=kalvjHk/GuMH7evLS4SIoDJkLrdDncNysrqHumvJ3gAz4euGdhk6FMGwFx2irThk79
- yABogxRACzQwmh6Y76bpHSbeH7CvYmiMiYGH/5E9U7ywskccm/ZkCZzCkYkgUfAxI0Jw
- NyI0lOqBd9dS4mDfYNvwqNdhnb/TDC1Ux+ZRNaFGjGOsxzareuif0c9BcmJkJiiIr0l8
- rqWQUGapoyzWOYaY3K4aUrwaiQkeX5g/cvmwbNxc4W9twC/c3yMEE/TWsc+WQq4zMnH2
- MLpikgrdIJiwrN0PTHmkLCr8RIuWiUV2yG+Tdlh7t/60lykhB3vcZmbzQnaESb/L1cKF
- WoGg==
-X-Gm-Message-State: AOJu0YzxODjoCTp0WOltb/nHGE+No8DeOO/hXerxmiZJHeVexusl9iKa
- oLVfiHhAr+68olXczxoYqdsLEXUKhPLa+td2PU67cwYjKnXErPSw
-X-Google-Smtp-Source: AGHT+IFzLMFtnBYfrWKJtGdC47j9Z4x4nioRrRxl2Xa0mZ+4e2jNNTrjgw55lToA+Qluefwk623aHw==
-X-Received: by 2002:a17:90a:cb8d:b0:295:c0dd:cb2e with SMTP id
- a13-20020a17090acb8d00b00295c0ddcb2emr1927242pju.25.1706710491722; 
- Wed, 31 Jan 2024 06:14:51 -0800 (PST)
-X-Forwarded-Encrypted: i=0;
- AJvYcCX49srJKIiac4NH9Gd4pvohOBrQwH49WYbHH7HKz5oI413AP3Nq/TQNZuxIbe+kXr0KBCS2wxiHryqB2IT/H4/5Pf0/L4AaZ93GnF3WeyJoOVD3yq+XhD5KR/CVcxQqhT9HUXNndjzlK7gkQudTurB5amPc3gwMNx7xZm7c1ZDygMRz+qDRUSCTy3lu+EPdERMG8zoR5XwV94/7oP+Chi63GslaY5X/E7iZ1fwgv1PZQmKowAELUoMXZDmxcnjPRVkY/zQNWamOHhi47wuJLTA6KZJEVVLjEdswweRZ3lylwtsOSlRomRswO2ud5wUZyEbBPUCbcI8CaNd0YS9rJ0+kCgF+ZO3S3ripPb294rTRHuPbr/gmSxwcbQ==
-Received: from ownia.localdomain ([8.210.91.195])
+ d=1e100.net; s=20230601; t=1706710564; x=1707315364;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=k8fkWTv6vAfYHXabnMelSAacYtCYVlJ7pnkZmqEvs8M=;
+ b=l/lsRoAzx4urYn1UTVsPk8xCTaq8Qe18QLFng0lidYtsclDh47bIraLC88JkUpuzMn
+ ln+HiRC8FxfGnlaAnI5LN2JHNUAe5V8SQOL4S8LaA+gSGfNgDSldBAPfkw0HZWkkJiNJ
+ 8jowwG3PKJJd/GqmMHAM8B6k3E1/viJDmEiz5G9p/IOFKStJqyExOXh6QAk3JIOwx+vT
+ QAga4L3rr+y0vi/vEgjeyKsDs4xqi8Xd2dqykYCVcmy9iw9q3sKPOgQeRr9cHUU5yFrQ
+ ppbO9G20wtqdkbFrxZFcgT2s6GvXRcsVqZUDKRZAYaM2EraEmon1mScCM9hQioXkasm5
+ Jf3Q==
+X-Gm-Message-State: AOJu0Yz6aVBDo2JtMRqkQN2eZ+Bia0StonpXUZuwveGEMUrahZmKrxaP
+ yJw8zUhlGlhdw+dd5wUZZQlCLJ7krJ2xth+2iQ4JauyY9HZlNYO8qVqHmla4TC4=
+X-Google-Smtp-Source: AGHT+IGg8Q9nnxZUHNleMff5gxzyN54iRkjTgbLd7mjI5S6v3/rQwdsvmDe86uc/1XyVnYzxTcvBlA==
+X-Received: by 2002:a05:600c:4f4f:b0:40e:a421:4c5d with SMTP id
+ m15-20020a05600c4f4f00b0040ea4214c5dmr1323929wmq.31.1706710563776; 
+ Wed, 31 Jan 2024 06:16:03 -0800 (PST)
+Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- mm3-20020a17090b358300b00295bafadb4fsm1534954pjb.57.2024.01.31.06.14.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jan 2024 06:14:51 -0800 (PST)
-From: Weizhao Ouyang <o451686892@gmail.com>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Etienne Carriere <etienne.carriere@foss.st.com>,
- Weizhao Ouyang <o451686892@gmail.com>, Simon Glass <sjg@chromium.org>,
- Peng Fan <peng.fan@nxp.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, u-boot@lists.denx.de
-Subject: [PATCH v3 3/3] cmd: rng: Add rng list command
-Date: Wed, 31 Jan 2024 14:14:26 +0000
-Message-Id: <20240131141426.34926-4-o451686892@gmail.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240131141426.34926-1-o451686892@gmail.com>
-References: <20240131141426.34926-1-o451686892@gmail.com>
+ fo4-20020a056000290400b0033af3294417sm7091582wrb.21.2024.01.31.06.16.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 31 Jan 2024 06:16:03 -0800 (PST)
+Message-ID: <a8566993-3da8-4cc6-8e10-0761e996e8a4@linaro.org>
+Date: Wed, 31 Jan 2024 14:16:02 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] button: qcom-pmic: fix some error checking
+Content-Language: en-US
+To: Dan Carpenter <dan.carpenter@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+References: <12e63b80-3c65-494c-94b4-bfd949232ef7@moroto.mountain>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <12e63b80-3c65-494c-94b4-bfd949232ef7@moroto.mountain>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,57 +95,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The 'rng list' command probes all RNG devices and list those devices
-that are successfully probed. Also update the help info.
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
----
- cmd/rng.c | 23 ++++++++++++++++++-----
- 1 file changed, 18 insertions(+), 5 deletions(-)
 
-diff --git a/cmd/rng.c b/cmd/rng.c
-index 52f722c7af..b073a6c849 100644
---- a/cmd/rng.c
-+++ b/cmd/rng.c
-@@ -19,6 +19,22 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	struct udevice *dev;
- 	int ret = CMD_RET_SUCCESS;
- 
-+	if (argc == 2 && !strcmp(argv[1], "list")) {
-+		int idx = 0;
-+
-+		uclass_foreach_dev_probe(UCLASS_RNG, dev) {
-+			idx++;
-+			printf("RNG #%d - %s\n", dev->seq_, dev->name);
-+		}
-+
-+		if (!idx) {
-+			log_err("No RNG device\n");
-+			return CMD_RET_FAILURE;
-+		}
-+
-+		return CMD_RET_SUCCESS;
-+	}
-+
- 	switch (argc) {
- 	case 1:
- 		devnum = 0;
-@@ -56,12 +72,9 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	return ret;
- }
- 
--U_BOOT_LONGHELP(rng,
--	"[dev [n]]\n"
--	"  - print n random bytes(max 64) read from dev\n");
--
- U_BOOT_CMD(
- 	rng, 3, 0, do_rng,
- 	"print bytes from the hardware random number generator",
--	rng_help_text
-+	"list         - list all the probed rng devices\n"
-+	"rng [dev] [n]    - print n random bytes(max 64) read from dev\n"
- );
+On 31/01/2024 07:09, Dan Carpenter wrote:
+> The pmic_reg_read() function can return errors.  Add a check for that.
+> 
+> Fixes: 4e8aa0065d4b ("button: qcom-pmic: introduce Qualcomm PMIC button driver")
+> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+> This patch is mostly to make static checkers happy but it's obvious and
+> harmless.
+> 
+>  drivers/button/button-qcom-pmic.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/button/button-qcom-pmic.c b/drivers/button/button-qcom-pmic.c
+> index 34a976d1e6c6..e778e51a4f36 100644
+> --- a/drivers/button/button-qcom-pmic.c
+> +++ b/drivers/button/button-qcom-pmic.c
+> @@ -86,7 +86,7 @@ static int qcom_pwrkey_probe(struct udevice *dev)
+>  	}
+>  
+>  	ret = pmic_reg_read(priv->pmic, priv->base + REG_SUBTYPE);
+> -	if ((ret & 0x7) == 0) {
+> +	if (ret < 0 || (ret & 0x7) == 0) {
+>  		printf("%s: unexpected PMCI function subtype %d\n", dev->name, ret);
+>  		return -ENXIO;
+>  	}
+
 -- 
-2.39.2
-
+// Caleb (they/them)
