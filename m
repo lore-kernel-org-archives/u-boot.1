@@ -4,67 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50848C47258
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 06:11:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69F0CC47258
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 06:31:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7706F8785F;
-	Wed, 31 Jan 2024 07:11:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9859B878CB;
+	Wed, 31 Jan 2024 07:31:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vFPI1guk";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F63587887; Wed, 31 Jan 2024 07:11:40 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4CE608798B; Wed, 31 Jan 2024 07:31:04 +0100 (CET)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DBEC87796
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 07:11:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DB2D87887
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 07:31:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40V6BaEU129415;
- Wed, 31 Jan 2024 00:11:36 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1706681496;
- bh=mdgvSTOodNfM7L6QN9M3RNrNHAOv7OE4vSngiNw/PwI=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=vFPI1gukYQIaYRpDygan91nym1lSHZxkLCCu4KnN2/FsDfQp+DNRpobUAUqRkxDm8
- JGuJ17RjQz/j+F7pqx7jqT2Q1BK9D4i24L+AxlSZOgNlb/i/pVbXRZr71C//08QVFm
- 0byMulih41nR0SIGvqQa63tSK52ocQhrm9P7/jIo=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40V6BakU024802
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 31 Jan 2024 00:11:36 -0600
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 31
- Jan 2024 00:11:35 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 31 Jan 2024 00:11:35 -0600
-Received: from localhost (uda0497581.dhcp.ti.com [10.24.68.185])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40V6BY6n075453;
- Wed, 31 Jan 2024 00:11:35 -0600
-Date: Wed, 31 Jan 2024 11:41:34 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-CC: <trini@konsulko.com>, <u-kumar1@ti.com>, <afd@ti.com>,
- <christian.gmeiner@gmail.com>, <j-choudhary@ti.com>, <nm@ti.com>,
- <d.haller@phytec.de>, <joao.goncalves@toradex.com>, <u-boot@lists.denx.de>
-Subject: Re: [RESEND PATCH v2] arm: mach-k3: j721s2_init: Support less than
- max DDR controllers
-Message-ID: <20240131061134.3swmvabc3xvkdvj2@uda0497581>
-References: <20240130102356.2762733-1-n-francis@ti.com>
+ spf=pass smtp.mailfrom=randolph@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 40V6Unkw056020;
+ Wed, 31 Jan 2024 14:30:49 +0800 (+08)
+ (envelope-from randolph@andestech.com)
+Received: from atctrx (10.0.15.173) by ATCPCS16.andestech.com (10.0.1.222)
+ with Microsoft SMTP Server id 14.3.498.0; Wed, 31 Jan 2024 14:30:48 +0800
+Date: Wed, 31 Jan 2024 14:30:41 +0800
+From: Randolph Lin <randolph@andestech.com>
+To: Stefan Roese <sr@denx.de>
+CC: <u-boot@lists.denx.de>, <randolph.sklin@gmail.com>, CL Wang
+ <cl634@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>
+Subject: Re: [PATCH V4 2/2] configs: andes: add watchdog support fot andes
+ ae350
+Message-ID: <ZbnpEQkMqIT3u7Bz@atctrx>
+References: <20240124062133.439469-1-randolph@andestech.com>
+ <20240124062133.439469-2-randolph@andestech.com>
+ <5a7375c1-1b3d-4085-847e-1be68b049423@denx.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
-In-Reply-To: <20240130102356.2762733-1-n-francis@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <5a7375c1-1b3d-4085-847e-1be68b049423@denx.de>
+User-Agent: Mutt/2.2.12 (2023-09-09)
+X-Originating-IP: [10.0.15.173]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 40V6Unkw056020
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,47 +65,202 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neha,
+On Wed, Jan 24, 2024 at 09:37:41AM +0100, Stefan Roese wrote:
+Hi Stefan,
+Thank you for testing and reviewing.
+I have checked the error message and the relationship to my patch.
+The reason for the failure has nothing to do with my patch.
+Could you kindly help me run the CI test again?
 
-On 15:53-20240130, Neha Malcom Francis wrote:
-> The number of DDR controllers to be initialised and used should depend
-> on the device tree with the constraint of the maximum number of
-> controllers the device supports. Since J721S2 has multiple (2)
-> controllers, instead of hardcoding the number of probes, move to
-> depending on the device tree UCLASS_RAM nodes present.
+Randolph
+Sincerely
+> Hi Randolph,
 > 
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> ---
-> Changes since v1:
-> https://lore.kernel.org/all/20240130074139.2627793-1-n-francis@ti.com/
-> - Moved away from using loop since J721S2 has only two controllers
->   (Udit)
+> On 1/24/24 07:21, Randolph wrote:
+> > It adds the ATCWDT200 support for Andes AE350 platform.
+> > It also enables wdt command support.
+> > 
+> > Signed-off-by: CL Wang <cl634@andestech.com>
+> > Signed-off-by: Randolph <randolph@andestech.com>
+> > Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
 > 
-> Boot logs:
-> https://gist.github.com/nehamalcom/740e3dcc1e94ca36250f0248d73f6b37
+> This fails in world CI build in "test.py for sandbox":
 > 
-> arch/arm/mach-k3/j721s2_init.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> https://dev.azure.com/sr0718/0cded7c3-6e6a-4b57-8d0f-65c99496c42f/_apis/build/builds/338/logs/181
 > 
-> diff --git a/arch/arm/mach-k3/j721s2_init.c b/arch/arm/mach-k3/j721s2_init.c
-> index fb0708bae1..3374889558 100644
-> --- a/arch/arm/mach-k3/j721s2_init.c
-> +++ b/arch/arm/mach-k3/j721s2_init.c
-> @@ -228,7 +228,7 @@ void k3_mem_init(void)
->  			panic("DRAM 0 init failed: %d\n", ret);
->  
->  		ret = uclass_next_device_err(&dev);
-> -		if (ret)
-> +		if (ret && ret != -ENODEV)
->  			panic("DRAM 1 init failed: %d\n", ret);
-
-Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
-
-Regards,
-Manorit
-
->  	}
->  	spl_enable_cache();
+> Not sure how this is related. Could you please take a look?
+> 
+> Thanks,
+> Stefan
+> 
+> > ---
+> >   configs/ae350_rv32_defconfig         | 4 ++++
+> >   configs/ae350_rv32_spl_defconfig     | 4 ++++
+> >   configs/ae350_rv32_spl_xip_defconfig | 4 ++++
+> >   configs/ae350_rv32_xip_defconfig     | 4 ++++
+> >   configs/ae350_rv64_defconfig         | 4 ++++
+> >   configs/ae350_rv64_spl_defconfig     | 4 ++++
+> >   configs/ae350_rv64_spl_xip_defconfig | 4 ++++
+> >   configs/ae350_rv64_xip_defconfig     | 4 ++++
+> >   8 files changed, 32 insertions(+)
+> > 
+> > diff --git a/configs/ae350_rv32_defconfig b/configs/ae350_rv32_defconfig
+> > index 3bfa3e9f8e..35ad62c845 100644
+> > --- a/configs/ae350_rv32_defconfig
+> > +++ b/configs/ae350_rv32_defconfig
+> > @@ -23,6 +23,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+> >   CONFIG_CMD_IMLS=y
+> >   CONFIG_CMD_MMC=y
+> >   CONFIG_CMD_SF_TEST=y
+> > +CONFIG_CMD_WDT=y
+> >   # CONFIG_CMD_SETEXPR is not set
+> >   CONFIG_BOOTP_PREFER_SERVERIP=y
+> >   CONFIG_CMD_CACHE=y
+> > @@ -49,3 +50,6 @@ CONFIG_BAUDRATE=38400
+> >   CONFIG_SYS_NS16550=y
+> >   CONFIG_SPI=y
+> >   CONFIG_ATCSPI200_SPI=y
+> > +# CONFIG_WATCHDOG_AUTOSTART is not set
+> > +CONFIG_WDT=y
+> > +CONFIG_WDT_ATCWDT200=y
+> > diff --git a/configs/ae350_rv32_spl_defconfig b/configs/ae350_rv32_spl_defconfig
+> > index aeb50206d2..41cd457bc3 100644
+> > --- a/configs/ae350_rv32_spl_defconfig
+> > +++ b/configs/ae350_rv32_spl_defconfig
+> > @@ -33,6 +33,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+> >   CONFIG_CMD_IMLS=y
+> >   CONFIG_CMD_MMC=y
+> >   CONFIG_CMD_SF_TEST=y
+> > +CONFIG_CMD_WDT=y
+> >   # CONFIG_CMD_SETEXPR is not set
+> >   CONFIG_BOOTP_PREFER_SERVERIP=y
+> >   CONFIG_CMD_CACHE=y
+> > @@ -58,3 +59,6 @@ CONFIG_SYS_NS16550=y
+> >   CONFIG_SPI=y
+> >   CONFIG_ATCSPI200_SPI=y
+> >   # CONFIG_BINMAN_FDT is not set
+> > +# CONFIG_WATCHDOG_AUTOSTART is not set
+> > +CONFIG_WDT=y
+> > +CONFIG_WDT_ATCWDT200=y
+> > diff --git a/configs/ae350_rv32_spl_xip_defconfig b/configs/ae350_rv32_spl_xip_defconfig
+> > index f15ec301ce..954e2f2de7 100644
+> > --- a/configs/ae350_rv32_spl_xip_defconfig
+> > +++ b/configs/ae350_rv32_spl_xip_defconfig
+> > @@ -34,6 +34,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+> >   CONFIG_CMD_IMLS=y
+> >   CONFIG_CMD_MMC=y
+> >   CONFIG_CMD_SF_TEST=y
+> > +CONFIG_CMD_WDT=y
+> >   # CONFIG_CMD_SETEXPR is not set
+> >   CONFIG_BOOTP_PREFER_SERVERIP=y
+> >   CONFIG_CMD_CACHE=y
+> > @@ -59,3 +60,6 @@ CONFIG_SYS_NS16550=y
+> >   CONFIG_SPI=y
+> >   CONFIG_ATCSPI200_SPI=y
+> >   # CONFIG_BINMAN_FDT is not set
+> > +# CONFIG_WATCHDOG_AUTOSTART is not set
+> > +CONFIG_WDT=y
+> > +CONFIG_WDT_ATCWDT200=y
+> > diff --git a/configs/ae350_rv32_xip_defconfig b/configs/ae350_rv32_xip_defconfig
+> > index c40eb043c5..95863595d2 100644
+> > --- a/configs/ae350_rv32_xip_defconfig
+> > +++ b/configs/ae350_rv32_xip_defconfig
+> > @@ -24,6 +24,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+> >   CONFIG_CMD_IMLS=y
+> >   CONFIG_CMD_MMC=y
+> >   CONFIG_CMD_SF_TEST=y
+> > +CONFIG_CMD_WDT=y
+> >   # CONFIG_CMD_SETEXPR is not set
+> >   CONFIG_BOOTP_PREFER_SERVERIP=y
+> >   CONFIG_CMD_CACHE=y
+> > @@ -50,3 +51,6 @@ CONFIG_BAUDRATE=38400
+> >   CONFIG_SYS_NS16550=y
+> >   CONFIG_SPI=y
+> >   CONFIG_ATCSPI200_SPI=y
+> > +# CONFIG_WATCHDOG_AUTOSTART is not set
+> > +CONFIG_WDT=y
+> > +CONFIG_WDT_ATCWDT200=y
+> > diff --git a/configs/ae350_rv64_defconfig b/configs/ae350_rv64_defconfig
+> > index 7ae938aeb2..988214285a 100644
+> > --- a/configs/ae350_rv64_defconfig
+> > +++ b/configs/ae350_rv64_defconfig
+> > @@ -23,6 +23,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+> >   CONFIG_CMD_IMLS=y
+> >   CONFIG_CMD_MMC=y
+> >   CONFIG_CMD_SF_TEST=y
+> > +CONFIG_CMD_WDT=y
+> >   # CONFIG_CMD_SETEXPR is not set
+> >   CONFIG_BOOTP_PREFER_SERVERIP=y
+> >   CONFIG_CMD_CACHE=y
+> > @@ -49,3 +50,6 @@ CONFIG_BAUDRATE=38400
+> >   CONFIG_SYS_NS16550=y
+> >   CONFIG_SPI=y
+> >   CONFIG_ATCSPI200_SPI=y
+> > +# CONFIG_WATCHDOG_AUTOSTART is not set
+> > +CONFIG_WDT=y
+> > +CONFIG_WDT_ATCWDT200=y
+> > diff --git a/configs/ae350_rv64_spl_defconfig b/configs/ae350_rv64_spl_defconfig
+> > index 68ac4325ab..e929320433 100644
+> > --- a/configs/ae350_rv64_spl_defconfig
+> > +++ b/configs/ae350_rv64_spl_defconfig
+> > @@ -33,6 +33,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+> >   CONFIG_CMD_IMLS=y
+> >   CONFIG_CMD_MMC=y
+> >   CONFIG_CMD_SF_TEST=y
+> > +CONFIG_CMD_WDT=y
+> >   # CONFIG_CMD_SETEXPR is not set
+> >   CONFIG_BOOTP_PREFER_SERVERIP=y
+> >   CONFIG_CMD_CACHE=y
+> > @@ -58,3 +59,6 @@ CONFIG_SYS_NS16550=y
+> >   CONFIG_SPI=y
+> >   CONFIG_ATCSPI200_SPI=y
+> >   # CONFIG_BINMAN_FDT is not set
+> > +# CONFIG_WATCHDOG_AUTOSTART is not set
+> > +CONFIG_WDT=y
+> > +CONFIG_WDT_ATCWDT200=y
+> > diff --git a/configs/ae350_rv64_spl_xip_defconfig b/configs/ae350_rv64_spl_xip_defconfig
+> > index 839ca335d4..3f92643b07 100644
+> > --- a/configs/ae350_rv64_spl_xip_defconfig
+> > +++ b/configs/ae350_rv64_spl_xip_defconfig
+> > @@ -34,6 +34,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+> >   CONFIG_CMD_IMLS=y
+> >   CONFIG_CMD_MMC=y
+> >   CONFIG_CMD_SF_TEST=y
+> > +CONFIG_CMD_WDT=y
+> >   # CONFIG_CMD_SETEXPR is not set
+> >   CONFIG_BOOTP_PREFER_SERVERIP=y
+> >   CONFIG_CMD_CACHE=y
+> > @@ -59,3 +60,6 @@ CONFIG_SYS_NS16550=y
+> >   CONFIG_SPI=y
+> >   CONFIG_ATCSPI200_SPI=y
+> >   # CONFIG_BINMAN_FDT is not set
+> > +# CONFIG_WATCHDOG_AUTOSTART is not set
+> > +CONFIG_WDT=y
+> > +CONFIG_WDT_ATCWDT200=y
+> > diff --git a/configs/ae350_rv64_xip_defconfig b/configs/ae350_rv64_xip_defconfig
+> > index 5432b6d6d7..835f020990 100644
+> > --- a/configs/ae350_rv64_xip_defconfig
+> > +++ b/configs/ae350_rv64_xip_defconfig
+> > @@ -24,6 +24,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+> >   CONFIG_CMD_IMLS=y
+> >   CONFIG_CMD_MMC=y
+> >   CONFIG_CMD_SF_TEST=y
+> > +CONFIG_CMD_WDT=y
+> >   # CONFIG_CMD_SETEXPR is not set
+> >   CONFIG_BOOTP_PREFER_SERVERIP=y
+> >   CONFIG_CMD_CACHE=y
+> > @@ -50,3 +51,6 @@ CONFIG_BAUDRATE=38400
+> >   CONFIG_SYS_NS16550=y
+> >   CONFIG_SPI=y
+> >   CONFIG_ATCSPI200_SPI=y
+> > +# CONFIG_WATCHDOG_AUTOSTART is not set
+> > +CONFIG_WDT=y
+> > +CONFIG_WDT_ATCWDT200=y
+> 
+> Viele Grüße,
+> Stefan Roese
+> 
 > -- 
-> 2.34.1
-> 
+> DENX Software Engineering GmbH,      Managing Director: Erika Unter
+> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+> Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
