@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3546DC48285
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 07:09:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FFE3C47258
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 07:09:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E2D8879B5;
-	Wed, 31 Jan 2024 08:09:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 826468798B;
+	Wed, 31 Jan 2024 08:09:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TxQkCVFE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kkgVh7eS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8BEA879F0; Wed, 31 Jan 2024 08:09:21 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 29A9D8798B; Wed, 31 Jan 2024 08:09:49 +0100 (CET)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C616F8780A
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 08:09:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 50C8D87A23
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 08:09:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dan.carpenter@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-33ae4eb360aso2851053f8f.0
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 23:09:19 -0800 (PST)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-40efcb37373so16900285e9.2
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 23:09:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706684959; x=1707289759; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1706684985; x=1707289785; darn=lists.denx.de;
  h=content-disposition:mime-version:message-id:subject:cc:to:from:date
  :from:to:cc:subject:date:message-id:reply-to;
- bh=4HIj7n3eX+mYVWMQ6iMRCcoQNj+RTN7tO4TQbJ+zWDs=;
- b=TxQkCVFE2AzaVq0o4lVPwj93pNg6G5zZssboK1uI/7fI9Cfjp9HMKOfz9g25iC1TBx
- gdXf2DPxY5vCIRmrolQSXAchObI8oHcfIUymrST1AU0PC6n0kQQLoDdSIxU0S29fXnFa
- WGZ5nce+tWds8kzVZ0bvMdaZwwTUIVju1JyDapAcv1yfIc95hLfdsUVpMcuut4HwGyEz
- 1UTWLiOgxdH4sz9tJmG0tUUGvdwiGzXadi/q4NlsSgh/JWfepVL2/OhoCq/5E9rXCFBT
- uBGn+P+Kp6sQ3e1VqKc1qlLkppeNxKpWxe49Yc4fmIlFSvKItxDF7VyHTEDdKw9TdGci
- xTKw==
+ bh=GnvJ9BEJhaTmxxdSlAReQLQKslNYpYTBFduajb3Rc7A=;
+ b=kkgVh7eS3FFbeD9vaYpM5f2wVt3P8tzp5qkK0Ts/0OPTNJ0xOexxtEKLwV24I+VS93
+ hobKgMnjuSXawLE2cVzYVu0MQvtYIgAe7IRiTIEVEnEJuzWx/ZT0XGFCTLAcLwerZAWd
+ WkjJ43noV0sfTmCDXivxdCx8+Zxl5FxzbHFJce9ZJNlr6tA/6iC6kEPo6Q7nCXxAv4pB
+ wrm67khJwDmC/MO2WL6U26UiMNJdZXvsUJrKeuo39ZrYYDPvAaBwFcL080/Q7d575Mzf
+ 3VhTd9do3gc7FEfVQCyO3uNEg6wkPMKeOA6uxQXHFFHUs0wN7ftSIO9+Hbyv1+TcqFLj
+ bxuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706684959; x=1707289759;
+ d=1e100.net; s=20230601; t=1706684985; x=1707289785;
  h=content-disposition:mime-version:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4HIj7n3eX+mYVWMQ6iMRCcoQNj+RTN7tO4TQbJ+zWDs=;
- b=tcM3hdoehHjunlAUbkmi0/Z9zV/5LsN3DqzLSUBeVBHUI0wEgVBy0ypK7SFUzxaEh9
- Vss01L3Ee81N2DgqnoGXOLeKJt1fi+8tpUNS/JDbqp+c1RSK4YpBOUjJUjRCIU1VcAWD
- OXJ8xZp/nBbK0zkgZfXu23r2VgG/NLMfSd4ZtO6CU8XJiI31uHkSseODtAQwRV457bi6
- HuNmrFKV6ezsdKCymElsAQ35zFvCx7vVMHl3l05oLVCU0h/0n6tA7+HCwZ5jBvB7ngv9
- DOwvJZXlENzukAQo5OpjttNG1fLFTUV4YUfmr7bqElGfdGP+79eHaglDY7LDTNWdrthF
- ICWw==
-X-Gm-Message-State: AOJu0YywdAlC5YDMmhSYqJ9eTCWIMOqdsgbAXScr5kLGueqx1n9sahZP
- MBS7QuQIbTF61gQ8VuGUFmWVOXLWv1zGjGAVK8NiI2LqMLMHZc9lbL4O9VclU7c=
-X-Google-Smtp-Source: AGHT+IFUP1k0wmW5hzbXlA/5aPqS3culnkL1tX5NG8wpZXy0L5Hj1E6PGwuqdxtRFQKoDm3zF4o39A==
-X-Received: by 2002:adf:ef12:0:b0:33a:ed59:c137 with SMTP id
- e18-20020adfef12000000b0033aed59c137mr533709wro.40.1706684959150; 
- Tue, 30 Jan 2024 23:09:19 -0800 (PST)
+ bh=GnvJ9BEJhaTmxxdSlAReQLQKslNYpYTBFduajb3Rc7A=;
+ b=BVzCRuYRJ6OpVwAtQoCkTWojRz6eaW8jz/bPGGqdiZ9CLsaweLI25dTH4K645+25Kq
+ PCZvAr0Ek3A0dvKqR1YzXEVr2XiexZmtTJHr6sPu/mN8gfR+VryZzkEGG57PzxOnQTgx
+ H/WhONUb42LOd08lQX1zGp9sWhKMs1TlHXBluv+G62hwSPSG5i9i9txMcho4b79315iK
+ L5m7w6xiF3b0DHTWF3C+PRuOIGppJ3D/BoWkZs6yl8pSTw24rRZ38Subhh6vSeQjgYaj
+ /t1Vh7oGB94jigY7q8QOIGeWf6nXFyExQN3IZnNG80P6a3f9hQ5P9cDJmKJbbCzzU3O4
+ Zwgg==
+X-Gm-Message-State: AOJu0Yzz+S4J4uVNbEDNWo4kwFn7FJT0eppYH3RxnFq/Qcu7ii1qbv5p
+ lo5u4RR7amri9wzsmuWYWBy/t+LDInMKD8N00isNIVV43rYfncTCzJIjCq5K9/g=
+X-Google-Smtp-Source: AGHT+IHGJxIZL6rP3RBYzSVW68xBu/BeZ9z7p36l7QYkPQfyaOF9zK/c2KO3xHw4nOFRB+sRK7Sujg==
+X-Received: by 2002:a05:600c:3b20:b0:40f:af67:5275 with SMTP id
+ m32-20020a05600c3b2000b0040faf675275mr578888wms.4.1706684985194; 
+ Tue, 30 Jan 2024 23:09:45 -0800 (PST)
 Received: from localhost ([102.140.226.10]) by smtp.gmail.com with ESMTPSA id
- h4-20020adfa4c4000000b00337d4eed87asm12640621wrb.115.2024.01.30.23.09.18
+ u13-20020a05600c00cd00b0040f02114906sm649507wmm.16.2024.01.30.23.09.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jan 2024 23:09:18 -0800 (PST)
-Date: Wed, 31 Jan 2024 10:09:15 +0300
+ Tue, 30 Jan 2024 23:09:44 -0800 (PST)
+Date: Wed, 31 Jan 2024 10:09:41 +0300
 From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+To: Przemyslaw Marczak <p.marczak@samsung.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
  Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: [PATCH] button: qcom-pmic: fix some error checking
-Message-ID: <12e63b80-3c65-494c-94b4-bfd949232ef7@moroto.mountain>
+Subject: [PATCH] power: regulator: Fix error code in regulator_list_autoset()
+Message-ID: <06ee0d87-35f0-4fe4-87b2-e498b2263ee5@moroto.mountain>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
@@ -89,30 +91,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The pmic_reg_read() function can return errors.  Add a check for that.
+This condition has a bitwise & vs logical && typo so it only preserves
+odd number error codes.
 
-Fixes: 4e8aa0065d4b ("button: qcom-pmic: introduce Qualcomm PMIC button driver")
+Fixes: 3b880757abca ("dm: regulator: uclass driver code cleanup")
 Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
 ---
-This patch is mostly to make static checkers happy but it's obvious and
-harmless.
-
- drivers/button/button-qcom-pmic.c | 2 +-
+ drivers/power/regulator/regulator-uclass.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/button/button-qcom-pmic.c b/drivers/button/button-qcom-pmic.c
-index 34a976d1e6c6..e778e51a4f36 100644
---- a/drivers/button/button-qcom-pmic.c
-+++ b/drivers/button/button-qcom-pmic.c
-@@ -86,7 +86,7 @@ static int qcom_pwrkey_probe(struct udevice *dev)
- 	}
+diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
+index 77d101f262e2..de2bb3b1cd88 100644
+--- a/drivers/power/regulator/regulator-uclass.c
++++ b/drivers/power/regulator/regulator-uclass.c
+@@ -390,7 +390,7 @@ int regulator_list_autoset(const char *list_platname[],
+ 		ret = regulator_autoset_by_name(list_platname[i], &dev);
+ 		if (ret != -EMEDIUMTYPE && verbose)
+ 			regulator_show(dev, ret);
+-		if (ret & !error)
++		if (ret && !error)
+ 			error = ret;
  
- 	ret = pmic_reg_read(priv->pmic, priv->base + REG_SUBTYPE);
--	if ((ret & 0x7) == 0) {
-+	if (ret < 0 || (ret & 0x7) == 0) {
- 		printf("%s: unexpected PMCI function subtype %d\n", dev->name, ret);
- 		return -ENXIO;
- 	}
+ 		if (list_devp)
 -- 
 2.43.0
 
