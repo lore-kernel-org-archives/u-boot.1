@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D98A8C48285
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 06:57:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B471DC48285
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 06:58:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2199B87BCB;
-	Wed, 31 Jan 2024 07:57:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3271D87A17;
+	Wed, 31 Jan 2024 07:57:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EvmZmOjJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="O616QFOr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CFA7879B0; Wed, 31 Jan 2024 07:57:46 +0100 (CET)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id 6661F879B5; Wed, 31 Jan 2024 07:57:46 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41B70879B5
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 07:57:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 53AE987A23
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 07:57:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-510faac8c57so563258e87.1
- for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 22:57:43 -0800 (PST)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-51120e285f6so1218577e87.2
+ for <u-boot@lists.denx.de>; Tue, 30 Jan 2024 22:57:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706684262; x=1707289062; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1706684263; x=1707289063; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HseZ4Amk00nzL0KGQLkpyxdV5KqbgCLiVbXogMuYcV8=;
- b=EvmZmOjJbnl9bsG1FfGMtmyyMNT0DiMG7nVu4e4OxW9Fsv4o0db2ug6IVnZEJLutOE
- jinnOYdni2XlNYr+sV618HNPwlTfaaN6NT2yfeWrarQ8zUw4AcWXUZxDI5okfgkGe+pV
- seTeyiNU2urWL9SqDZU1DM2hVO9OEBIiMZ58VyOVkLLiIujNlvxqa6rsGW/t8CO9b9Ca
- P8z9wJ+IE268Xd3ejnG+UbRgCrvrMQapC/5ffIhlyI4wvlLrPpRK+XPd9DW00qmHQuHv
- nTIe4dnsdt1vWgHWH3LwolieAbuGILaZVQ1N2ciZe6G3JEOkeSN9xw3gRtIPNfON9X2a
- 8u5g==
+ bh=JGR8ictgxW5r/D8M2esRO7fnajcFEX/FnUfXIR2EzDo=;
+ b=O616QFOrcAL1OL9m5OVCbvNVqVJlBJSQNE6oWWNqRbb+rP0h+nyRDpRkmxNin9LyLn
+ J5SMz9XCZngnMdKytT+YD95c6O77L1fv+zp6PKSL+TuotYTqji8Yi3b2XrlhMNF9Xp3j
+ ihdUdOMs82KJANZKaCSfOFKc9aja8CDykpPlNQndgqUYUzJ+/iKHmyeEtYqrvkthDxe9
+ 41wM+w34sGtRYQqLcgMJBYEJ84J+0LLf6tCPw2TZXo4yd7w39YiIxb2qwPBYcOzJrDaP
+ g+mtYwR0CxrpYu35TBh0PlH1TGEFaXQaOK1pKcC1ZbRAKXwpBYN+v+IcMId+UWYP3Ear
+ 6CDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706684262; x=1707289062;
+ d=1e100.net; s=20230601; t=1706684263; x=1707289063;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HseZ4Amk00nzL0KGQLkpyxdV5KqbgCLiVbXogMuYcV8=;
- b=CUzV08ObAKon7Ai5/9mo0ulQ2SWb5FcB5eh9wbQ/49+uO5n6CB9TRxQ/yLyRhDSj6M
- pz8mCIZmvkEzxT094SOj8epooFNuFrrGBm6w5eXnT7Ecam6oYgs0fb3loHGe9Pgr8kzf
- WvUYxH7MN+l07OMwCIr+NWfJ3sFTPZ0f+mLHZMvNOQRz+1qCY7XATcw4XI0vBEfgwVkN
- lbt8xmj9ZakQAnW0PrTeD5rXFjcIKR4j1e1xm1NnCIsoL3QnwBavSzYeabEDSpkBn5gF
- KKsXWWy8at8ZQ56rfjAvUh2iAfFCmH7tOFIB8OGoMGkzlpf0ydke5DaGpm+DWM2Vjn5j
- nT/g==
-X-Gm-Message-State: AOJu0Yy9Kyiu1AkSumw7cnLM+DdKUvY+afnB5FI0G6/rYSCubNozYO6Y
- S+g/KWCOOZXgybt3dGAIbtuMwIBtgZ5zira13pm2qyj0Axs5HuKg
-X-Google-Smtp-Source: AGHT+IEIrY0t15fGOVibHuQ3Eic3LR6t0YkFbEJpYh7G4WmqrI/j9wt7WmsiYaerowG4ldNNEFgh1g==
-X-Received: by 2002:a05:6512:1154:b0:510:9a2:1b6a with SMTP id
- m20-20020a056512115400b0051009a21b6amr242019lfg.29.1706684262364; 
- Tue, 30 Jan 2024 22:57:42 -0800 (PST)
+ bh=JGR8ictgxW5r/D8M2esRO7fnajcFEX/FnUfXIR2EzDo=;
+ b=O2+FbnySVN2nd4xMDLf1LaqiICIpaYg15tfHsP3H9x6x0MkGFj3aEgGa0+bJ2lk8tB
+ /uS5bMKPuJSfIx1FGKtnI/fDCXC6E0m4wnJkyJXx8JLKnsxZroCvQMZ5hk8Iis4S/FQ8
+ syizlraX+2gFcJcZVf7zIAaXHsx/9VUFD441kuBZ2Liu7Y0DvzJ/ebVQzlKY2Ad7i51V
+ 6w92Vczm9k/FfBCXnyAM8UpFX2hQljkz8o6FVZ2Jstrx7+9p5uC+IjDWcNGP0kQCDv1N
+ EIZZkex8Tm7NEa3g16IG3i2krWhn8l5YCXSw7OZk5PDtnT9Mv7xB26rqbySXt6NdJOqU
+ hURg==
+X-Gm-Message-State: AOJu0Yy5LEsCa7VwNbd1FJsR0yNTPE22I1CBOIl1EnfHEg+RUFpvPqll
+ Vkt1B9Gw1jr9SrD6nbH8PViNcB0p4aSyrXfhCuMSUxw+bx0HcZ+u
+X-Google-Smtp-Source: AGHT+IGDTrKp80O0lvhb8HZPLYmS6wyaoBeBlH9yQDZay7/bOoEB/uii6ZoHuGrx5Gj8NxlEHWZArA==
+X-Received: by 2002:a05:6512:3f28:b0:510:e08:c908 with SMTP id
+ y40-20020a0565123f2800b005100e08c908mr642437lfa.57.1706684263400; 
+ Tue, 30 Jan 2024 22:57:43 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCULrm0RIstikoDiNrDSJAwgCwJw7ZaYw0wxUHsXP+hYyjqUTubYQChmFI8tXWV+Jp8R2FA2wsOnk0rFIfIQSzBFAr8Yu4+qCA0gMaS12Ldsff5G+wGcBZnV+y68pe7PgRqQmd4Tqlqxwvh4l93FTFpHWRtB95uyf9chHWM+KKO3ybOY3KRxhuiwgSgBSPw2K0Y/jCb1LQ==
+ AJvYcCVLGZAo4XCsw2TmQ/uYcmwgODsczieFrSHgblsN1XP38O1QBacqkUaL/qIEDsS+FEQ5FjjsOc3enAt1Nln+JPOYJzWFfq4utIujsjOwDJydukWebGt4p0t+HTZrEprbhBnXkJlxcFsgIp+4iQLP51adOENlDogHAFxSANIgVr/1fEs4iMHmBOg2VmuyvbPBcPvXLhQE1Q==
 Received: from xeon.. ([188.163.112.73]) by smtp.gmail.com with ESMTPSA id
- s11-20020a19770b000000b0051023c2e95asm1760796lfc.209.2024.01.30.22.57.41
+ s11-20020a19770b000000b0051023c2e95asm1760796lfc.209.2024.01.30.22.57.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jan 2024 22:57:42 -0800 (PST)
+ Tue, 30 Jan 2024 22:57:43 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
  Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Anton Bambura <jenneron@protonmail.com>,
  =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 1/7] video: panel: add LG LG070WX3 MIPI DSI panel driver
-Date: Wed, 31 Jan 2024 08:57:15 +0200
-Message-Id: <20240131065721.4245-2-clamor95@gmail.com>
+Subject: [PATCH v2 2/7] video: panel: add Samsung LTL106HL02 MIPI DSI panel
+ driver
+Date: Wed, 31 Jan 2024 08:57:16 +0200
+Message-Id: <20240131065721.4245-3-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20240131065721.4245-1-clamor95@gmail.com>
 References: <20240131065721.4245-1-clamor95@gmail.com>
@@ -96,63 +97,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The LD070WX3 is a Color Active Matrix Liquid Crystal Display with
-an integral Light Emitting Diode (LED) backlight system. The
-matrix employs a-Si Thin Film Transistor as the active element. It
-is a transmissive type display operating in the normally Black
-mode. This TFT-LCD has 7.0 inches diagonally measured active
-display area with WXGA resolution (800 by 1280 pixel array).
+From: Anton Bambura <jenneron@protonmail.com>
 
+LTL106HL02 is a color active matrix TFT (Thin Film Transistor)
+liquid crystal display (LCD) that uses amorphous silicon TFT as
+switching devices. This model is composed of a TFT LCD panel, a
+driver circuit and a backlight unit. The resolution of a 10.6"
+contains 1920 x 1080 pixels and can display up to 16,8M color
+with wide viewing angle.
+
+Co-developed-by: Jonas Schwöbel <jonasschwoebel@yahoo.de>
+Signed-off-by: Jonas Schwöbel <jonasschwoebel@yahoo.de>
+Co-developed-by: Svyatoslav Ryhel <clamor95@gmail.com>
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+Signed-off-by: Anton Bambura <jenneron@protonmail.com>
 ---
- drivers/video/Kconfig       |   8 ++
- drivers/video/Makefile      |   1 +
- drivers/video/lg-ld070wx3.c | 186 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 195 insertions(+)
- create mode 100644 drivers/video/lg-ld070wx3.c
+ drivers/video/Kconfig              |   9 ++
+ drivers/video/Makefile             |   1 +
+ drivers/video/samsung-ltl106hl02.c | 157 +++++++++++++++++++++++++++++
+ 3 files changed, 167 insertions(+)
+ create mode 100644 drivers/video/samsung-ltl106hl02.c
 
 diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-index e2016d73d1..05567a0095 100644
+index 05567a0095..52b515197d 100644
 --- a/drivers/video/Kconfig
 +++ b/drivers/video/Kconfig
-@@ -522,6 +522,14 @@ config VIDEO_LCD_ORISETECH_OTM8009A
- 	Say Y here if you want to enable support for Orise Technology
- 	otm8009a 480x800 dsi 2dl panel.
+@@ -555,6 +555,15 @@ config VIDEO_LCD_RENESAS_R69328
+ 	  IPS-LCD module with Renesas R69328 IC. The panel has a 720x1280
+ 	  resolution and uses 24 bit RGB per pixel.
  
-+config VIDEO_LCD_LG_LD070WX3
-+	bool "LD070WX3 DSI LCD panel support"
++config VIDEO_LCD_SAMSUNG_LTL106HL02
++	tristate "Samsung LTL106HL02 1920x1080 DSI video mode panel"
 +	depends on PANEL && BACKLIGHT
 +	select VIDEO_MIPI_DSI
 +	help
-+	  Say Y here if you want to enable support for LG LD070WX3
-+	  800x1280 DSI video mode panel.
++	  Say Y here if you want to enable support for Samsung LTL106HL02
++	  LCD module found in Microsoft Surface 2. The panel has a FullHD
++	  resolution (1920x1080).
 +
- config VIDEO_LCD_RAYDIUM_RM68200
- 	bool "RM68200 DSI LCD panel support"
- 	select VIDEO_MIPI_DSI
+ config VIDEO_LCD_SSD2828
+ 	bool "SSD2828 bridge chip"
+ 	---help---
 diff --git a/drivers/video/Makefile b/drivers/video/Makefile
-index fdc2937632..bb6d9b74b9 100644
+index bb6d9b74b9..f3f70cd04a 100644
 --- a/drivers/video/Makefile
 +++ b/drivers/video/Makefile
-@@ -58,6 +58,7 @@ obj-$(CONFIG_VIDEO_LCD_ANX9804) += anx9804.o
- obj-$(CONFIG_VIDEO_LCD_ENDEAVORU) += endeavoru-panel.o
- obj-$(CONFIG_VIDEO_LCD_HIMAX_HX8394) += himax-hx8394.o
- obj-$(CONFIG_VIDEO_LCD_HITACHI_TX18D42VM) += hitachi_tx18d42vm_lcd.o
-+obj-$(CONFIG_VIDEO_LCD_LG_LD070WX3) += lg-ld070wx3.o
- obj-$(CONFIG_VIDEO_LCD_ORISETECH_OTM8009A) += orisetech_otm8009a.o
+@@ -63,6 +63,7 @@ obj-$(CONFIG_VIDEO_LCD_ORISETECH_OTM8009A) += orisetech_otm8009a.o
  obj-$(CONFIG_VIDEO_LCD_RAYDIUM_RM68200) += raydium-rm68200.o
  obj-$(CONFIG_VIDEO_LCD_RENESAS_R61307) += renesas-r61307.o
-diff --git a/drivers/video/lg-ld070wx3.c b/drivers/video/lg-ld070wx3.c
+ obj-$(CONFIG_VIDEO_LCD_RENESAS_R69328) += renesas-r69328.o
++obj-$(CONFIG_VIDEO_LCD_SAMSUNG_LTL106HL02) += samsung-ltl106hl02.o
+ obj-$(CONFIG_VIDEO_LCD_SSD2828) += ssd2828.o
+ obj-$(CONFIG_VIDEO_LCD_TDO_TL070WSH30) += tdo-tl070wsh30.o
+ obj-$(CONFIG_VIDEO_MCDE_SIMPLE) += mcde_simple.o
+diff --git a/drivers/video/samsung-ltl106hl02.c b/drivers/video/samsung-ltl106hl02.c
 new file mode 100644
-index 0000000000..610a06ffe7
+index 0000000000..5e6c11c4be
 --- /dev/null
-+++ b/drivers/video/lg-ld070wx3.c
-@@ -0,0 +1,186 @@
++++ b/drivers/video/samsung-ltl106hl02.c
+@@ -0,0 +1,157 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * LG LD070WX3-SL01 DSI panel driver
++ * Samsung LTL106HL02-001 DSI panel driver
 + *
++ * Copyright (c) 2020 Anton Bambura <jenneron@protonmail.com>
 + * Copyright (c) 2023 Svyatoslav Ryhel <clamor95@gmail.com>
++ * Copyright (c) 2024 Jonas Schwöbel <jonasschwoebel@yahoo.de>
 + */
 +
 +#include <backlight.h>
@@ -160,69 +170,57 @@ index 0000000000..610a06ffe7
 +#include <panel.h>
 +#include <log.h>
 +#include <mipi_dsi.h>
++#include <asm/gpio.h>
 +#include <linux/delay.h>
 +#include <power/regulator.h>
 +
-+struct lg_ld070wx3_priv {
++struct samsung_ltl106hl02_priv {
 +	struct udevice *vdd;
-+	struct udevice *vcc;
-+
 +	struct udevice *backlight;
++
++	struct gpio_desc reset_gpio;
 +};
 +
 +static struct display_timing default_timing = {
-+	.pixelclock.typ		= 70000000,
-+	.hactive.typ		= 800,
++	.pixelclock.typ		= 137000000,
++	.hactive.typ		= 1920,
 +	.hfront_porch.typ	= 32,
-+	.hback_porch.typ	= 48,
-+	.hsync_len.typ		= 8,
-+	.vactive.typ		= 1280,
-+	.vfront_porch.typ	= 5,
-+	.vback_porch.typ	= 3,
-+	.vsync_len.typ		= 1,
++	.hback_porch.typ	= 64,
++	.hsync_len.typ		= 32,
++	.vactive.typ		= 1080,
++	.vfront_porch.typ	= 2,
++	.vback_porch.typ	= 26,
++	.vsync_len.typ		= 3,
 +};
 +
-+static void dcs_write_one(struct mipi_dsi_device *dsi, u8 cmd, u8 data)
-+{
-+	mipi_dsi_dcs_write(dsi, cmd, &data, 1);
-+}
-+
-+static int lg_ld070wx3_enable_backlight(struct udevice *dev)
++static int samsung_ltl106hl02_enable_backlight(struct udevice *dev)
 +{
 +	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
 +	struct mipi_dsi_device *dsi = plat->device;
 +	int ret;
 +
-+	ret = mipi_dsi_dcs_soft_reset(dsi);
++	ret = mipi_dsi_dcs_exit_sleep_mode(dsi);
 +	if (ret < 0) {
-+		log_debug("%s: failed to soft reset panel: %d\n",
++		log_debug("%s: failed to exit sleep mode: %d\n",
 +			  __func__, ret);
 +		return ret;
 +	}
++	mdelay(70);
 +
-+	/* Delay before sending new command after soft reset */
-+	mdelay(20);
-+
-+	/* Differential input impedance selection */
-+	dcs_write_one(dsi, 0xAE, 0x0B);
-+
-+	/* Enter test mode 1 and 2*/
-+	dcs_write_one(dsi, 0xEE, 0xEA);
-+	dcs_write_one(dsi, 0xEF, 0x5F);
-+
-+	/* Increased MIPI CLK driving ability */
-+	dcs_write_one(dsi, 0xF2, 0x68);
-+
-+	/* Exit test mode 1 and 2 */
-+	dcs_write_one(dsi, 0xEE, 0x00);
-+	dcs_write_one(dsi, 0xEF, 0x00);
++	ret = mipi_dsi_dcs_set_display_on(dsi);
++	if (ret < 0) {
++		log_debug("%s: failed to enable display: %d\n",
++			  __func__, ret);
++		return ret;
++	}
++	mdelay(5);
 +
 +	return 0;
 +}
 +
-+static int lg_ld070wx3_set_backlight(struct udevice *dev, int percent)
++static int samsung_ltl106hl02_set_backlight(struct udevice *dev, int percent)
 +{
-+	struct lg_ld070wx3_priv *priv = dev_get_priv(dev);
++	struct samsung_ltl106hl02_priv *priv = dev_get_priv(dev);
 +	int ret;
 +
 +	ret = backlight_enable(priv->backlight);
@@ -232,16 +230,16 @@ index 0000000000..610a06ffe7
 +	return backlight_set_brightness(priv->backlight, percent);
 +}
 +
-+static int lg_ld070wx3_timings(struct udevice *dev,
-+			       struct display_timing *timing)
++static int samsung_ltl106hl02_timings(struct udevice *dev,
++				      struct display_timing *timing)
 +{
 +	memcpy(timing, &default_timing, sizeof(*timing));
 +	return 0;
 +}
 +
-+static int lg_ld070wx3_of_to_plat(struct udevice *dev)
++static int samsung_ltl106hl02_of_to_plat(struct udevice *dev)
 +{
-+	struct lg_ld070wx3_priv *priv = dev_get_priv(dev);
++	struct samsung_ltl106hl02_priv *priv = dev_get_priv(dev);
 +	int ret;
 +
 +	ret = uclass_get_device_by_phandle(UCLASS_PANEL_BACKLIGHT, dev,
@@ -254,54 +252,35 @@ index 0000000000..610a06ffe7
 +
 +	ret = uclass_get_device_by_phandle(UCLASS_REGULATOR, dev,
 +					   "vdd-supply", &priv->vdd);
-+	if (ret) {
-+		log_debug("%s: cannot get vdd-supply: ret = %d\n",
++	if (ret)
++		log_debug("%s: cannot get vdd-supply: error %d\n",
 +			  __func__, ret);
-+		return ret;
-+	}
 +
-+	ret = uclass_get_device_by_phandle(UCLASS_REGULATOR, dev,
-+					   "vcc-supply", &priv->vcc);
-+	if (ret) {
-+		log_debug("%s: cannot get vcc-supply: ret = %d\n",
++	ret = gpio_request_by_name(dev, "reset-gpios", 0,
++				   &priv->reset_gpio, GPIOD_IS_OUT);
++	if (ret)
++		log_debug("%s: cannot get reset-gpios: error %d\n",
 +			  __func__, ret);
-+		return ret;
-+	}
 +
 +	return 0;
 +}
 +
-+static int lg_ld070wx3_hw_init(struct udevice *dev)
++static int samsung_ltl106hl02_hw_init(struct udevice *dev)
 +{
-+	struct lg_ld070wx3_priv *priv = dev_get_priv(dev);
-+	int ret;
++	struct samsung_ltl106hl02_priv *priv = dev_get_priv(dev);
 +
-+	ret = regulator_set_enable_if_allowed(priv->vcc, 1);
-+	if (ret) {
-+		log_debug("%s: enabling vcc-supply failed (%d)\n",
-+			  __func__, ret);
-+		return ret;
-+	}
++	dm_gpio_set_value(&priv->reset_gpio, 1);
++	regulator_set_enable_if_allowed(priv->vdd, 1);
 +
-+	ret = regulator_set_enable_if_allowed(priv->vdd, 1);
-+	if (ret) {
-+		log_debug("%s: enabling vdd-supply failed (%d)\n",
-+			  __func__, ret);
-+		return ret;
-+	}
++	/* Dataheets states at least 8.5 msec for vdd stabilization */
++	mdelay(10);
 +
-+	/*
-+	 * According to spec delay between enabling supply is 0,
-+	 * for regulators to reach required voltage ~5ms needed.
-+	 * MIPI interface signal for setup requires additional
-+	 * 110ms which in total results in 115ms.
-+	 */
-+	mdelay(115);
++	dm_gpio_set_value(&priv->reset_gpio, 0);
 +
 +	return 0;
 +}
 +
-+static int lg_ld070wx3_probe(struct udevice *dev)
++static int samsung_ltl106hl02_probe(struct udevice *dev)
 +{
 +	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
 +
@@ -310,29 +289,29 @@ index 0000000000..610a06ffe7
 +	plat->format = MIPI_DSI_FMT_RGB888;
 +	plat->mode_flags = MIPI_DSI_MODE_VIDEO;
 +
-+	return lg_ld070wx3_hw_init(dev);
++	return samsung_ltl106hl02_hw_init(dev);
 +}
 +
-+static const struct panel_ops lg_ld070wx3_ops = {
-+	.enable_backlight	= lg_ld070wx3_enable_backlight,
-+	.set_backlight		= lg_ld070wx3_set_backlight,
-+	.get_display_timing	= lg_ld070wx3_timings,
++static const struct panel_ops samsung_ltl106hl02_ops = {
++	.enable_backlight	= samsung_ltl106hl02_enable_backlight,
++	.set_backlight		= samsung_ltl106hl02_set_backlight,
++	.get_display_timing	= samsung_ltl106hl02_timings,
 +};
 +
-+static const struct udevice_id lg_ld070wx3_ids[] = {
-+	{ .compatible = "lg,ld070wx3-sl01" },
++static const struct udevice_id samsung_ltl106hl02_ids[] = {
++	{ .compatible = "samsung,ltl106hl02-001" },
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(lg_ld070wx3) = {
-+	.name		= "lg_ld070wx3",
++U_BOOT_DRIVER(samsung_ltl106hl02) = {
++	.name		= "samsung_ltl106hl02",
 +	.id		= UCLASS_PANEL,
-+	.of_match	= lg_ld070wx3_ids,
-+	.ops		= &lg_ld070wx3_ops,
-+	.of_to_plat	= lg_ld070wx3_of_to_plat,
-+	.probe		= lg_ld070wx3_probe,
++	.of_match	= samsung_ltl106hl02_ids,
++	.ops		= &samsung_ltl106hl02_ops,
++	.of_to_plat	= samsung_ltl106hl02_of_to_plat,
++	.probe		= samsung_ltl106hl02_probe,
 +	.plat_auto	= sizeof(struct mipi_dsi_panel_plat),
-+	.priv_auto	= sizeof(struct lg_ld070wx3_priv),
++	.priv_auto	= sizeof(struct samsung_ltl106hl02_priv),
 +};
 -- 
 2.40.1
