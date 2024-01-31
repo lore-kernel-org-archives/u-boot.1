@@ -4,49 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D504C47DDB
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 02:50:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBE30C47DDB
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 02:51:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF1B7877D3;
-	Wed, 31 Jan 2024 03:50:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4FDD9877D3;
+	Wed, 31 Jan 2024 03:51:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B20B1877EC; Wed, 31 Jan 2024 03:50:15 +0100 (CET)
+ id 1935B877EC; Wed, 31 Jan 2024 03:51:43 +0100 (CET)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8327875A0
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 03:50:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD979875A0
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 03:51:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 40V2nvJU004714;
- Wed, 31 Jan 2024 10:49:57 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 40V2pXSK005169;
+ Wed, 31 Jan 2024 10:51:33 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
  with Microsoft SMTP Server id 14.3.498.0;
- Wed, 31 Jan 2024 10:49:54 +0800
-Date: Wed, 31 Jan 2024 10:49:50 +0800
+ Wed, 31 Jan 2024 10:51:31 +0800
+Date: Wed, 31 Jan 2024 10:51:27 +0800
 From: Leo Liang <ycliang@andestech.com>
 To: Randolph <randolph@andestech.com>
 CC: <u-boot@lists.denx.de>, <randolph.sklin@gmail.com>, <dylan@andestech.com>, 
  <tim609@andestech.com>
-Subject: Re: [PATCH V4 1/3] doc: falcon: riscv: Falcon Mode boot on RISC-V
-Message-ID: <Zbm1Tms45colwXv4@swlinux02>
+Subject: Re: [PATCH V4 2/3] spl: riscv: falcon: move fdt blob to specified
+ address
+Message-ID: <Zbm1r5eO5QoxwEjq@swlinux02>
 References: <20231229083223.3867307-1-randolph@andestech.com>
- <20231229083223.3867307-2-randolph@andestech.com>
+ <20231229083223.3867307-3-randolph@andestech.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20231229083223.3867307-2-randolph@andestech.com>
+In-Reply-To: <20231229083223.3867307-3-randolph@andestech.com>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 40V2nvJU004714
+X-MAIL: Atcsqr.andestech.com 40V2pXSK005169
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,13 +64,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Dec 29, 2023 at 04:32:21PM +0800, Randolph wrote:
-> Add documentation to introduce the Falcon Mode on RISC-V.
-> In this mode, the boot sequence is SPL -> OpenSBI -> Linux kernel.
+On Fri, Dec 29, 2023 at 04:32:22PM +0800, Randolph wrote:
+> In Falcon Boot mode, the fdt blob should be move to the RAM from
+> kernel BSS section. To avoid being cleared by BSS initialisation.
+> SPL_PAYLOAD_ARGS_ADDR is the address where SPL copies.
 > 
 > Signed-off-by: Randolph <randolph@andestech.com>
 > ---
->  doc/develop/falcon.rst | 158 +++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 158 insertions(+)
+>  board/AndesTech/ae350/ae350.c | 25 -------------------------
+>  common/spl/Kconfig            |  2 +-
+>  common/spl/spl_opensbi.c      | 15 +++++++++++++++
+>  3 files changed, 16 insertions(+), 26 deletions(-)
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
