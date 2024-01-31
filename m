@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8044C47DB3
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 12:36:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27F2DC47258
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 12:49:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B199387C01;
-	Wed, 31 Jan 2024 13:36:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 7D64587BDD;
+	Wed, 31 Jan 2024 13:49:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="atg4mP7W";
+	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="bFZiQ4F3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CD2B87C02; Wed, 31 Jan 2024 13:36:53 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 99031876EA; Wed, 31 Jan 2024 13:49:32 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0330A87B71
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 13:36:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B603487BC4
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 13:49:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=foundries.io
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1706704606; x=1707309406; i=xypron.glpk@gmx.de;
- bh=6yTNCG+Eh8cKXHSZTPBX1e67+V4b79vwrg7kXr3IDd4=;
- h=X-UI-Sender-Class:Date:Subject:To:References:Cc:From:
- In-Reply-To;
- b=atg4mP7WptXwGyATrsMs7jkBMO4O9t+qwIi7sCXBZIG8hDvKq5y0ycik2k3f2W0E
- 0+pBmeawRQfL40Rm+ewGwBRoiojQWRy7gpLbA/fbMCq2e94E7LnGrjKHfLLZZlsD/
- 2U6UM1PNir+21HCJTaB/B5uJl54cxdpHcbX7CGHb6WxaN+FyXlm+U9Jq8Z0k1YovS
- iZV6I/T+oby6KXysc6sv34lLDP+7uJh870BsxB9bnJH4LFo7GDQ5C+EIs5SxM0DSl
- ZP9Gxm4R8aX10uw7fbj08p/pgDkikpld5ebyfRsIoBOpmTm2IqHdUcR3N9wR/IpIK
- ZEaoLS/auHyLjPGobw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MOzOm-1rhIMD3iJg-00PLs6; Wed, 31
- Jan 2024 13:36:45 +0100
-Message-ID: <9f196161-e94a-4416-984b-afb7f310508d@gmx.de>
-Date: Wed, 31 Jan 2024 13:36:45 +0100
+ spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-33ae3be1c37so532583f8f.0
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 04:49:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=foundries.io; s=google; t=1706705369; x=1707310169; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9ewp29h7S15WTg0Ww4Pwq0FHhbhWAA5B3F29UviF9/U=;
+ b=bFZiQ4F39bfeh/3x+5cy7VYvrdRiwBhFQRWKnLlGgARY++Da5UM+29L3kSzKczAmgj
+ lj2JNe5NuWbTaZZVhj+vFm9vY+RiTLi2FjhEOuciI3uPWP5mtEdKprXr9duhwYXpkLLU
+ EZE9vGfwa6G2S5aBy+ULHgSgk8mfx3wL0oD+37FhMy9Od1E4p5w2dil+mCziJOWg1UpK
+ bQc+SM1mGGt/7HsDA8SiKkLWAbfyYNGtv7u7HLKv1zaT4k/xxRlHDuY31U4ReEGxfT2H
+ IqePD1tK/AltnV74gZcqNNDfu+C87X7fD9cJ/tX0Z3JbK1UnYNQeHHpiL7D85OvTgNF1
+ chSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706705369; x=1707310169;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9ewp29h7S15WTg0Ww4Pwq0FHhbhWAA5B3F29UviF9/U=;
+ b=e4ewlZ9lGfU7jzyi5LXSsTxzBfXxfhA06vL4d49Nfz6QM2YLTcFfy8ca0Aux+ANkp8
+ 5MQy1/U5p818TYwBFA4OXd+pEAv4BGb6KkClWRdCcOdTPU+6+Ik+tK727aezMiJvQiXN
+ WpHiBFEYNDcuXWNL8FIOZkkmiBNFDHF8TBmd7IjKWaC9F73Q3NPH0jS81vXlDNdoWkZ9
+ qQcyg5JqNuZD+EuOqUEWDQi4EvepFRdmfOO3nRKT2idD1U6OnceldxDiB43Imrrb+aXp
+ WjTyOVvJH9gN4qMAMC7CX7YcDf0UBB8ad3d+hGTj2Jhx8J8T1cc40mk65DkAF2964AKK
+ 26nw==
+X-Gm-Message-State: AOJu0YyozkOJrpYfIjESmoj1e8l9nmrnhpNvlQu9JJEzjXYIjo6/jfFY
+ SaCwjyLxTH+5PVoTYrYlbmdWulyLfbGxG31AnQgvk15xDnY29ZraerqFM7PyDRyxLq5qNSbDV34
+ w/Bg=
+X-Google-Smtp-Source: AGHT+IHoGlXmKd3jfuKuz1plpfAbUfTBR1fDm42lyfnqKxFz2zVa0aGko0sfU1lCo8E2f9+eRmFzUw==
+X-Received: by 2002:a5d:64c3:0:b0:337:aa92:74cb with SMTP id
+ f3-20020a5d64c3000000b00337aa9274cbmr2040157wri.0.1706705369505; 
+ Wed, 31 Jan 2024 04:49:29 -0800 (PST)
+Received: from localhost ([109.108.76.111]) by smtp.gmail.com with ESMTPSA id
+ cl3-20020a5d5f03000000b0033afd49cac7sm3618650wrb.43.2024.01.31.04.49.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 31 Jan 2024 04:49:28 -0800 (PST)
+From: Igor Opaniuk <igor.opaniuk@foundries.io>
+To: u-boot@lists.denx.de
+Cc: Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>
+Subject: [PATCH v1 1/2] imx: scu_api: add implementation of sc_pm_reset_reason
+Date: Wed, 31 Jan 2024 13:49:25 +0100
+Message-Id: <20240131124926.222556-1-igor.opaniuk@foundries.io>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] cmd: rng: Add rng list command
-Content-Language: en-US
-To: Weizhao Ouyang <o451686892@gmail.com>
-References: <20240131111217.30124-1-o451686892@gmail.com>
- <20240131111217.30124-4-o451686892@gmail.com>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, u-boot@lists.denx.de
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240131111217.30124-4-o451686892@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:XX09bV+i9deKVfn9O6ASTHcCCI6UyNGd6i0HBpZz3XaRoGRGRfC
- 9joKQgexMsRnldEVTfpHSpOWMXlOqohYVVHtQrVb4DarAsfqOPnP3vKVf+XBsXXJfZprwaP
- uCdgMvZoPZ5lfsq+zvwdmo6OhldQ/M/SvqaHVSvuVIq0+dcUA1CEsTMYww4hRTt3dhOCmvA
- QVg3vTC8apPgwoJ5ATA5A==
-UI-OutboundReport: notjunk:1;M01:P0:zim8QnPf+xM=;AQoMmTIzUeUpPjPK14Lp01iFK5A
- bgUzYyjS2CSNi2BBs7o/HYjOlJR1VorWWjP1eDOs9FhWTsnCRBTgxXj/w5kbGs+BpFbVq30z5
- WVygpTbkbISBeFoDqKZrYbfkplW3U+RaV1ezyNj1FwayXNtgVy366kI532Hw+b7sJbvP9TJfI
- UNwAdSk/4jMPLYudp6HROHcxwpfiQLQnA9ac77nEm053Q8SqD+0SKUFr1ZbrQatBIPhiOC8Jt
- C+0AdEf1M4rwX3dPOH2HE8CcOmQ9lQ5pRX4/uAtkaTTLs9cL26EN4iB0apqhXCrwbivgoFfih
- IX8/h0nUBvklKLIm3QL76bIZtJEDcIyrQSW3foFf8sCVSBse8h6VUucZvjBfKO0OsgyuF0d+l
- ty4QKk4uQCikSmp8lrCh3xql/v0NBACJPCP65CrGoh664LS7siUqnm2yKZyqyXsVtiZyraHVt
- rLUSHacohCuXz7w0Bb9c2YAM4A+XeHl4VBfGPMy2cRkmTvTI6PZq+x/KCx04WLGBXsai9Bf3M
- Or1dEJ3s/sGWmrcQ1BcCsAVtcor9g+66NI04EChd91cIVozpUlxUH7i/vHxmxACC2EVpqytOG
- fJ6+M7drEXuJO7XqbEMBP1SBstwK8ndYDfXDm/F07vFOWPCzso+quMKIsngLD7y8Un3zCCGpj
- v3G027q1NbdZYUKgYVECEHK5lF3qtHmsjTiutuHV0q11LB0IPAE/WaYk2XaHviw5Wbesb2MFr
- hLhr5TPhmLYWhatqDkq4yTbSmVuloQ0fr5OHFMIy886nfOcr6O7NjSCCKTkb27on8SToElpu5
- HUvMToNToY4Z8UIBYQYHYqpnUt4UpezZOiYpq/c0Sesm0=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,64 +91,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 31.01.24 12:12, Weizhao Ouyang wrote:
-> The 'rng list' command probes all RNG devices and list those devices
-> that are successfully probed. Also update the help info.
->
-> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
-> ---
-> v2: update commit message and rng help info
+Add implementation of sc_pm_reset_reason() call for obtaining
+reset reason.
 
-Thanks for updating.
+Signed-off-by: Igor Opaniuk <igor.opaniuk@foundries.io>
+---
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+ drivers/misc/imx8/scu_api.c    | 22 ++++++++++++++++++++++
+ include/firmware/imx/sci/sci.h |  6 ++++++
+ 2 files changed, 28 insertions(+)
 
-> ---
->   cmd/rng.c | 23 ++++++++++++++++++-----
->   1 file changed, 18 insertions(+), 5 deletions(-)
->
-> diff --git a/cmd/rng.c b/cmd/rng.c
-> index 52f722c7af..b073a6c849 100644
-> --- a/cmd/rng.c
-> +++ b/cmd/rng.c
-> @@ -19,6 +19,22 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, in=
-t argc, char *const argv[])
->   	struct udevice *dev;
->   	int ret =3D CMD_RET_SUCCESS;
->
-> +	if (argc =3D=3D 2 && !strcmp(argv[1], "list")) {
-> +		int idx =3D 0;
-> +
-> +		uclass_foreach_dev_probe(UCLASS_RNG, dev) {
-> +			idx++;
-> +			printf("RNG #%d - %s\n", dev->seq_, dev->name);
-> +		}
-> +
-> +		if (!idx) {
-> +			log_err("No RNG device\n");
-> +			return CMD_RET_FAILURE;
-> +		}
-> +
-> +		return CMD_RET_SUCCESS;
-> +	}
-> +
->   	switch (argc) {
->   	case 1:
->   		devnum =3D 0;
-> @@ -56,12 +72,9 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, in=
-t argc, char *const argv[])
->   	return ret;
->   }
->
-> -U_BOOT_LONGHELP(rng,
-> -	"[dev [n]]\n"
-> -	"  - print n random bytes(max 64) read from dev\n");
-> -
->   U_BOOT_CMD(
->   	rng, 3, 0, do_rng,
->   	"print bytes from the hardware random number generator",
-> -	rng_help_text
-> +	"list         - list all the probed rng devices\n"
-> +	"rng [dev] [n]    - print n random bytes(max 64) read from dev\n"
->   );
+diff --git a/drivers/misc/imx8/scu_api.c b/drivers/misc/imx8/scu_api.c
+index 3e3002ba6df..6e2c678e614 100644
+--- a/drivers/misc/imx8/scu_api.c
++++ b/drivers/misc/imx8/scu_api.c
+@@ -882,6 +882,28 @@ void sc_pm_reboot(sc_ipc_t ipc, sc_pm_reset_type_t type)
+ 	misc_call(dev, SC_TRUE, &msg, size, &msg, size);
+ }
+ 
++int sc_pm_reset_reason(sc_ipc_t ipc, sc_pm_reset_reason_t *reason)
++{
++	struct udevice *dev = gd->arch.scu_dev;
++	struct sc_rpc_msg_s msg;
++	int size = sizeof(struct sc_rpc_msg_s);
++	int ret;
++
++	RPC_VER(&msg) = SC_RPC_VERSION;
++	RPC_SVC(&msg) = (u8)SC_RPC_SVC_PM;
++	RPC_FUNC(&msg) = (u8)PM_FUNC_RESET_REASON;
++	RPC_SIZE(&msg) = 1U;
++
++	ret = misc_call(dev, SC_FALSE, &msg, size, &msg, size);
++	if (ret)
++		printf("%s: res:%d\n", __func__, RPC_U8(&msg, 0U));
++
++	if (reason)
++		*reason = RPC_U8(&msg, 0U);
++
++	return ret;
++}
++
+ int sc_pm_get_resource_power_mode(sc_ipc_t ipc, sc_rsrc_t resource,
+ 				  sc_pm_power_mode_t *mode)
+ {
+diff --git a/include/firmware/imx/sci/sci.h b/include/firmware/imx/sci/sci.h
+index f832982b3de..7d8499f070a 100644
+--- a/include/firmware/imx/sci/sci.h
++++ b/include/firmware/imx/sci/sci.h
+@@ -75,6 +75,7 @@ int sc_pm_set_clock_parent(sc_ipc_t ipc, sc_rsrc_t resource, sc_pm_clk_t clk,
+ int sc_pm_cpu_start(sc_ipc_t ipc, sc_rsrc_t resource, sc_bool_t enable,
+ 		    sc_faddr_t address);
+ void sc_pm_reboot(sc_ipc_t ipc, sc_pm_reset_type_t type);
++int sc_pm_reset_reason(sc_ipc_t ipc, sc_pm_reset_reason_t *reason);
+ sc_bool_t sc_pm_is_partition_started(sc_ipc_t ipc, sc_rm_pt_t pt);
+ int sc_pm_resource_reset(sc_ipc_t ipc, sc_rsrc_t resource);
+ 
+@@ -385,6 +386,11 @@ static inline void sc_pm_reboot(sc_ipc_t ipc, sc_pm_reset_type_t type)
+ {
+ }
+ 
++static inline int sc_pm_reset_reason(sc_ipc_t ipc, sc_pm_reset_reason_t *reason)
++{
++	return -EOPNOTSUPP;
++}
++
+ static inline int sc_seco_v2x_build_info(sc_ipc_t ipc, u32 *version, u32 *commit)
+ {
+ 	return -EOPNOTSUPP;
+-- 
+2.34.1
 
