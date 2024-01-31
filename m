@@ -4,81 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBA73C47258
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 16:25:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 499B4C47DB3
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 16:28:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC9FF8798B;
-	Wed, 31 Jan 2024 17:25:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
+	by phobos.denx.de (Postfix) with ESMTP id 8052F87613;
+	Wed, 31 Jan 2024 17:28:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="kC3mzyvK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rd/F/DH4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D02F8799C; Wed, 31 Jan 2024 17:25:38 +0100 (CET)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id 7F1668798B; Wed, 31 Jan 2024 17:28:12 +0100 (CET)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83A5D87964
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 17:25:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=foundries.io
+ by phobos.denx.de (Postfix) with ESMTPS id 2682A875FC
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 17:28:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2d057003864so30242161fa.3
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 08:25:36 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-42ab7522c75so11209901cf.0
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 08:28:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1706718336; x=1707323136; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=l1AG12KtR6ke4ZjVDEwe5vb3LV65DDly51UW1Kwfdug=;
- b=kC3mzyvKPDSQIdL51X/DEmAy5xY3lKLh4BCBxqj45XRA59tT0amA4j7DWjHdcyscAd
- cDM5vCTdbhgQjiTQHXZ5/ZLpRAFuqGQ1yVAdexG4QayQVH+60DirZzx/pAi+GzrGjhpL
- vryzOXybnXs1iPOKwb2rGE8vzk5P66Olnhh/r67az6iMlFxZUp5bNsVjI0crrEnoP0rL
- SRXlhXKOD3XhPZTJYrg/umuvXUqJhGXldO5cb7LkkoCzGAzkDODzTHqN4srTQUYiX/VU
- CVY65fHJ9Yb6eBgzz1p/Iznp1uEq99IuSO5SOcAKVsNOkUWyNiqrTVFRSY/VUeHZCuJw
- 6Eaw==
+ d=konsulko.com; s=google; t=1706718489; x=1707323289; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=XRecwSlU4tfrBlEFxmWwWXAkJm1hm5ZYeXWnscBSGF8=;
+ b=rd/F/DH4X4rNuQ4ExdEg8ja8ffAC0vcqIK1q6+UfruABEgBi9FVnvgIgwIEdJV5eNF
+ yrTvoOWOw7mCCkgpBGDbqd4IQt5pks5abxjJ950Ww65pogHxr8DhMTSpkqbEP1B9nNK6
+ ieXYCX1MIk9Pn0pqDGUQL8HtZpAvOh0hulEXE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706718336; x=1707323136;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=l1AG12KtR6ke4ZjVDEwe5vb3LV65DDly51UW1Kwfdug=;
- b=foX8eAu2iyNLapsDZSk87VS5x4N3GyVNdAelohGNFTYUCZ01sYabnCYeCYo9bRfOhh
- DPxFRdxVl3FkklfrgmBznuAXohs+kkU1p5W92YJtjQ78Ci6jDnRnJ4cc5jsxP49JtsbK
- D2cmICiK9nK0wpkZ0VszfYZF9u4RcDamuo8OVL4ilg5A+60Kvb9ligwtyclrhgarDAIu
- c9RqwblyACcQNBiOynSMWClCBUQYpM9fX875rdjErlz1oZs+gbk36udrwzkY9AbFlAWM
- DKeX9KztA1fF0+dgtCDS61M4YGPy3UF+/A6s0YwS4xAKNN6DymOEhxKP/CFXNUOqLp0n
- PDiQ==
-X-Gm-Message-State: AOJu0Ywzj9njyCkreleo/6ZYzdWWYSC966nw0ovnMGg1WctMtIKNIrdE
- MnN4MwBdT9tLsMV3Ed45NJjOHzxLpfhv17khe6qcfVxVuOE6uFJsndRfJTenZzYvzkK1gH5u1HL
- gXjUJeqsf+A8L3bcpLTRWbbl5btnkIenFDa3XjQ==
-X-Google-Smtp-Source: AGHT+IENDJXsrWZTBqykVSvLEaOzCchmGeviQhcvQZe4vhdDKl7mfP7SEUjnbIZuSXlJvfs3a8B7QQmLpmFwC/b2aUw=
-X-Received: by 2002:a2e:2c01:0:b0:2d0:4e22:cc99 with SMTP id
- s1-20020a2e2c01000000b002d04e22cc99mr1478091ljs.24.1706718335526; Wed, 31 Jan
- 2024 08:25:35 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706718489; x=1707323289;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XRecwSlU4tfrBlEFxmWwWXAkJm1hm5ZYeXWnscBSGF8=;
+ b=L3ljUuKI50LFyHCPJkY3EzrYfBdVqEGccmfBaZLGFSSh3rUocM5oe9HKQ0CO22PPfd
+ qnL9inr8rzNuj6MYVm69hIsFirC08VUp0WVcV3ER4jLhJDkWprqwAFvukp5BcU4sMhAa
+ MTOlVvLF64zoFVEXApafeQi5/Rk0IAOr3KKj0fPvY6gRXfUWpFEylulGrcqzEqc1vUVz
+ zsAneO/CQKlL1OMVuj5Q7LGvi22TMs1a3PeR5hHaKxfsCzLCE/uhDjkh2ofxy3XZck9v
+ gFIG/FuMq0kuZN7kfmszXiQFnUZ1qMLZX4wo9sVpWsCAezQam9YnEx1DUgpbA/19JuXs
+ BRbw==
+X-Gm-Message-State: AOJu0YxwVNDILgFi1PM2a21thoaBkFVS4Ux2lGQjjSh2x9txkltKFdo6
+ ldjnN7wBSjBVi2TNPTRJq2fy2T+6evZPGCZKGoVa7bZ2qxKMh1Bw7tLp6yzrWpE=
+X-Google-Smtp-Source: AGHT+IFv1dOd01Z38TmQkQfaqlpC5U/LyhVepDnfR4C2A5x062RprBIbpldyeoQr41aBPkkZ3lDRdg==
+X-Received: by 2002:a05:622a:598f:b0:42b:e7f2:bbef with SMTP id
+ gb15-20020a05622a598f00b0042be7f2bbefmr2928650qtb.22.1706718488923; 
+ Wed, 31 Jan 2024 08:28:08 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
+ [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
+ cn5-20020a05622a248500b0042a29013f15sm5611711qtb.82.2024.01.31.08.28.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 31 Jan 2024 08:28:08 -0800 (PST)
+Date: Wed, 31 Jan 2024 11:28:06 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Eugen Hristev <eugen.hristev@collabora.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PULL] u-boot-at91-2024.04-a
+Message-ID: <20240131162806.GW1152441@bill-the-cat>
+References: <3e025444-6116-4898-a718-d718265e233a@collabora.com>
 MIME-Version: 1.0
-References: <20210211120426.159999-1-igor.opaniuk@gmail.com>
- <0c73452b-96b7-e58d-b1ec-7630dad9e94b@gmx.de>
- <CAMj1kXEcq6pxbFYtKA_ZO8KSx2JHB6oShEyY1XL459UVDyyw1A@mail.gmail.com>
- <986a6edd-b53b-969d-6153-91db9227665c@gmx.de>
- <CAL6CDMFAaaQ7rj5yBJ62ik-i+pJ6=vZAkNzejbDohEMyncJ09w@mail.gmail.com>
-In-Reply-To: <CAL6CDMFAaaQ7rj5yBJ62ik-i+pJ6=vZAkNzejbDohEMyncJ09w@mail.gmail.com>
-From: Igor Opaniuk <igor.opaniuk@foundries.io>
-Date: Wed, 31 Jan 2024 17:25:23 +0100
-Message-ID: <CAL6CDMFgNh+Ywpz8XFHA6LuJbpJZThVqZa8o_biY6icYnbaGTg@mail.gmail.com>
-Subject: Re: [PATCH v1] qemu-arm: round down memory to multiple of 2MB
-To: Ard Biesheuvel <ardb@kernel.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Jens Wiklander <jens.wiklander@linaro.org>, 
- Andre Przywara <andre.przywara@arm.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="oDc5wQs2EBHcPDRc"
+Content-Disposition: inline
+In-Reply-To: <3e025444-6116-4898-a718-d718265e233a@collabora.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,171 +90,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Ard,
 
-Just a quick follow-up for this old thread,
+--oDc5wQs2EBHcPDRc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I've again stumbled upon the same issue recently and it turned out
-that I've already sent a fix for that here :)
+On Wed, Jan 31, 2024 at 05:43:49PM +0200, Eugen Hristev wrote:
 
-Considering Heinrich's comment about memory granularity, does it still make
-sense to land this patch? If not, what objections/suggestions do you
-have in mind?
+> Hello Tom,
+>=20
+> Please pull tag u-boot-at91-2024.04-a , the first set of at91 features
+> for 2024.04 cycle.
+>=20
+> This set includes some DT alignments and solves a compile issue for custo=
+m nand
+> defconfigs.
+>=20
+> Thanks,
+> Eugen
+>=20
+> The following changes since commit 3c04fcf3137d5f694d52b8f355373e4baabe5f=
+78:
+>=20
+>   Merge patch series "k3-j721e: beagleboneai: Fix USB" (2024-01-20 11:39:=
+13 -0500)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-at91.git tags/u-boot-at=
+91-2024.04-a
+>=20
+> for you to fetch changes up to a1c6b08274e18e4afc0f78a2f63609880aa7ef08:
+>=20
+>   mtd: nand: raw: atmel: Remove duplicate definitions (2024-01-22 06:05:2=
+6 +0200)
+>=20
 
-Thanks!
-
-Regards,
-Igor
-
-On Thu, Feb 11, 2021 at 4:39=E2=80=AFPM Igor Opaniuk <igor.opaniuk@foundrie=
-s.io> wrote:
->
-> Hi Heinrich,
->
-> On Thu, Feb 11, 2021 at 5:34 PM Heinrich Schuchardt <xypron.glpk@gmx.de> =
-wrote:
-> >
-> > On 11.02.21 15:56, Ard Biesheuvel wrote:
-> > > On Thu, 11 Feb 2021 at 15:18, Heinrich Schuchardt <xypron.glpk@gmx.de=
-> wrote:
-> > >>
-> > >> On 11.02.21 13:04, Igor Opaniuk wrote:
-> > >>> From: Igor Opaniuk <igor.opaniuk@foundries.io>
-> > >>>
-> > >>> When LPAE is enabled, 1:1 mapping is created using 2 MB blocks.
-> > >>> In case amount of memory provided to QEMU is not multiple
-> > >>> of 2 MB, round down the amount of available memory to avoid hang
-> > >>> during MMU initialization.
-> > >>>
-> > >>> How to reproduce:
-> > >>> qemu-system-arm -machine virt -m 1058 -nographic -bios u-boot.bin -=
- boots
-> > >>> qemu-system-arm -machine virt -m 1057 -nographic -bios u-boot.bin -=
- hangs
-> > >>>
-> > >>> DRAM:  1 GiB
-> > >>> initcall: 60011df8
-> > >>> initcall: 60011904
-> > >>> New Stack Pointer is: 80fffe90
-> > >>> initcall: 60011a20
-> > >>> initcall: 60011bcc
-> > >>> initcall: 60011bd4
-> > >>> initcall: 600119b4
-> > >>> Relocation Offset is: 22042000
-> > >>> Relocating to 82042000, new gd at 81001ed0, sp at 80fffe90
-> > >>> initcall: 60011b8c
-> > >>> initcall: 82053ea0
-> > >>> initcall: 82053ea8
-> > >>> initcall: 60012040 (relocated to 82054040)
-> > >>> dram_bank_mmu_setup: bank: 0
-> > >>> --- hang here during mmu init ---
-> > >>>
-> > >>> Fixes: 3fa914af82("arm: qemu: implement enable_caches()")
-> > >>> Signed-off-by: Igor Opaniuk <igor.opaniuk@foundries.io>
-> > >>>
-> > >>> ---
-> > >>>
-> > >>>  board/emulation/qemu-arm/qemu-arm.c | 12 ++++++++++++
-> > >>>  1 file changed, 12 insertions(+)
-> > >>>
-> > >>> diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/=
-qemu-arm/qemu-arm.c
-> > >>> index aa68bef469..841dd7af0e 100644
-> > >>> --- a/board/emulation/qemu-arm/qemu-arm.c
-> > >>> +++ b/board/emulation/qemu-arm/qemu-arm.c
-> > >>> @@ -84,6 +84,18 @@ int dram_init(void)
-> > >>>       if (fdtdec_setup_mem_size_base() !=3D 0)
-> > >>>               return -EINVAL;
-> > >>>
-> > >>> +     /*
-> > >>> +      * When LPAE is enabled (ARMv7),
-> > >>> +      * 1:1 mapping is created using 2 MB blocks.
-> > >>> +      *
-> > >>> +      * In case amount of memory provided to QEMU
-> > >>> +      * is not multiple of 2 MB, round down the amount
-> > >>> +      * of available memory to avoid hang during MMU
-> > >>> +      * initialization.
-> > >>> +      */
-> > >>> +     if (CONFIG_IS_ENABLED(ARMV7_LPAE))
-> > >>> +             gd->ram_size -=3D (gd->ram_size % 0x200000);
-> > >>
-> > >> Is the problem LPAE specific?
-> > >> Couldn't you provoke same problem using an odd memory size without L=
-PAE,
-> > >> e.g qemu-system-arm -m 536870908 (512 MiB - 4)?
-> > >>
-> > >
-> > > The above value means 512 GiB - 4 MiB, so that shouldn't be a problem=
-.
-> > > I don't think QEMU's -m option takes fractional megabyte values.
-> > >
-> >
-> > $ qemu-system-arm -machine virt -cpu cortex-a15 -m 100005k \
-> > -bios denx/u-boot.bin -nographic
-> >
-> > =3D> fdt addr $fdt_addr
-> > =3D> fdt print /memory@40000000
-> > memory@40000000 {
-> >         reg =3D <0x00000000 0x40000000 0x00000000 0x061aa000>;
-> >         device_type =3D "memory";
-> > };
-> >
-> > Granularity seems to be 0x2000 =3D 8 KiB.
-> I've just run some tests (including the mem=3D100005k ) with LPAE disable=
-d
-> and haven't faced any issues:
->
-> $ cat .config | grep LPAE
-> # CONFIG_ARMV7_LPAE is not set
->
-> $ qemu-system-arm -machine virt -m 1057 -nographic -bios u-boot.bin
-> U-Boot 2021.04-rc1-01218-g85e959f09c-dirty (Feb 11 2021 - 17:31:31 +0200)
->
-> DRAM:  1 GiB
-> Flash: 128 MiB
-> ...
-> =3D>
->
-> $ qemu-system-arm -machine virt -m 1058 -nographic -bios u-boot.bin
->
-> U-Boot 2021.04-rc1-01218-g85e959f09c-dirty (Feb 11 2021 - 17:31:31 +0200)
->
-> DRAM:  1 GiB
-> Flash: 128 MiB
-> ...
-> =3D>
->
-> $ qemu-system-arm -machine virt -m 100005k -nographic -bios u-boot.bin
->
-> U-Boot 2021.04-rc1-01218-g85e959f09c-dirty (Feb 11 2021 - 17:31:31 +0200)
-> DRAM:  97.7 MiB
-> Flash: 128 MiB
-> ...
-> =3D>
->
-> >
-> > Best regards
-> >
-> > Heinrich
->
-> Regards,
-> Igor
->
-> --
-> Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
->
-> Igor Opaniuk
-> Embedded Software Engineer
-> T:  +380 938364067
-> E: igor.opaniuk@foundries.io
-> W: www.foundries.io
-
-
+Applied to u-boot/master, thanks!
 
 --=20
-Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
+Tom
 
-Igor Opaniuk
-Senior Software Engineer, Embedded & Security
-E: igor.opaniuk@foundries.io
-W: www.foundries.io
+--oDc5wQs2EBHcPDRc
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmW6dRMACgkQFHw5/5Y0
+tywcXAv9FVAbvQ4eoxybbsqGF4rySNvp3rDAjZ79n8E4IckWG2LhkY8emKgUbtx7
++Oz41LqkbRmZyyYony7WklxYowT4Kk3wbFVD5/nrLlQG9N8xiUe50+HAMLAUzDUr
+IGBgUY0q3DFrxpNGpwEmFfxn3MO8SEwirssBmH2E2EMVkfTzIK4cBSC8wZA+kxTZ
+ldxqL6uAT5mptyyz3Bx0abLaOiHDkqzcbq0ZTUruvl6Kk0ZSbJsP5E61GLHDOkLk
+MC4IKjy90HCga5ABySrlH6WHamiP+6qoVu7wU8UqSPNSAPe/JY+FbFZ6yTfVX+A2
+msQr9veJcO+/cIWORoe9qiXaPhCUTurdIrJgZcRGyL+vuHzVTiiq+UVuEOAHM2aZ
+irmXDzdmJ0o7TZ+I+td60E9ompFE/MPUVLWgi26/l0ipfHU5S1YfXLLDSjwq9xZ8
+d8UXC4S7qJyBnkFhWqo4SE5lXLFYfnI6dqmgTX4Hj4k09mgxsIsjQ147ebkH6a3C
+pUsIjWxY
+=YSTg
+-----END PGP SIGNATURE-----
+
+--oDc5wQs2EBHcPDRc--
