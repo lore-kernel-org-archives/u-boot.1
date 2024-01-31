@@ -4,59 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB678C47258
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 11:44:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7DD8C47DB3
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 11:44:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E37287BDB;
-	Wed, 31 Jan 2024 12:44:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 008F687C13;
+	Wed, 31 Jan 2024 12:44:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cRjTPXUR";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xhLHwZRi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B55678782E; Wed, 31 Jan 2024 07:02:40 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id E5CB4879AF; Wed, 31 Jan 2024 07:02:43 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB5BF878BA
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 07:02:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E4CB08782E
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 07:02:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-k6@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40V62aSG117520;
- Wed, 31 Jan 2024 00:02:36 -0600
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40V62ejl125691;
+ Wed, 31 Jan 2024 00:02:40 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1706680956;
- bh=jzXhlwCMJHZHM5L6db6ckp2uTJALXkO7pDpT3zPVdSM=;
+ s=ti-com-17Q1; t=1706680960;
+ bh=7OBRJE94gmVx1X0je7oCPkFDu8jMObZBm+21qWcJg6s=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=cRjTPXURugxefIgQ88l3rfwgmqMJFQzqbQ9Gc9yqSgqPuoSk+K3gIiKRbnc1m79F0
- mwIx/tS12lGxgd8TlwuwkbFUq3greK4dp07KdQZcmQdZt7yhTmVt2bfFwjbiz460/k
- Q1ZdR/vUOqA3ZpvFzvicOFgOMjEpcegB2FJKQcaQ=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40V62arV009192
+ b=xhLHwZRi7UX4Qd/iBUyj/BJuO5seKOkAQ3sxNKdcmOXLkBeTk9RG2UjwEviFFCr9r
+ XHddvyOyT913y94vlexZKfVdH1x3xcA0PJYbs1AcqZTCrs0zJA+IGRn2hI6ALTChGR
+ ZdJwAlXxOFvS1J0KfcubmsKrQJgB+iwSQliIMtLA=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40V62ehD002159
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 31 Jan 2024 00:02:36 -0600
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 31 Jan 2024 00:02:40 -0600
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 31
- Jan 2024 00:02:36 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ Jan 2024 00:02:39 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 31 Jan 2024 00:02:36 -0600
+ Frontend Transport; Wed, 31 Jan 2024 00:02:39 -0600
 Received: from santhoshkumark.dhcp.ti.com (santhoshkumark.dhcp.ti.com
  [172.24.227.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40V62Utc062916;
- Wed, 31 Jan 2024 00:02:34 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40V62Ute062916;
+ Wed, 31 Jan 2024 00:02:38 -0600
 From: Santhosh Kumar K <s-k6@ti.com>
 To: <trini@konsulko.com>, <nm@ti.com>, <vigneshr@ti.com>, <bb@ti.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH 02/10] ram: k3-ddrss: Add k3_ddrss_ddr_bank_base_size_calc()
- to solve 'calculations restricted to 32 bits' issue
-Date: Wed, 31 Jan 2024 11:32:05 +0530
-Message-ID: <20240131060213.1128024-3-s-k6@ti.com>
+Subject: [PATCH 04/10] ram: k3-ddrss: Enable ECC interrupts
+Date: Wed, 31 Jan 2024 11:32:07 +0530
+Message-ID: <20240131060213.1128024-5-s-k6@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240131060213.1128024-1-s-k6@ti.com>
 References: <20240131060213.1128024-1-s-k6@ti.com>
@@ -81,145 +80,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As R5 is a 32 bit processor, the RAM banks' base and size calculation
-is restricted to 32 bits, which results in wrong values if bank's base
-is greater than 32 bits or bank's size is greater than or equal to 4GB.
-
-So, add k3_ddrss_ddr_bank_base_size_calc() to get the base address and
-size of RAM's banks from the device tree memory node, and store in a
-64 bit device private data which can be used for ECC reserved memory
-calculation, Setting ECC range and Fixing up bank size in device tree
-when ECC is enabled.
+Enable ECC 1-bit error, 2-bit error, multiple 1-bit error interrupts
+by setting the respective bits in the DDRSS_V2A_INT_SET_REG register.
 
 Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
-Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 ---
- drivers/ram/k3-ddrss/k3-ddrss.c | 69 ++++++++++++++++++++++++++-------
- 1 file changed, 55 insertions(+), 14 deletions(-)
+ drivers/ram/k3-ddrss/k3-ddrss.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
 diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
-index b656721e8e5b..0e77b58edf4d 100644
+index de1441f94a87..37cc15dcfd07 100644
 --- a/drivers/ram/k3-ddrss/k3-ddrss.c
 +++ b/drivers/ram/k3-ddrss/k3-ddrss.c
-@@ -148,6 +148,9 @@ struct k3_ddrss_desc {
- 	struct k3_ddrss_ecc_region ecc_regions[K3_DDRSS_MAX_ECC_REGIONS];
- 	u64 ecc_reserved_space;
- 	bool ti_ecc_enabled;
-+	unsigned long long ddr_bank_base[CONFIG_NR_DRAM_BANKS];
-+	unsigned long long ddr_bank_size[CONFIG_NR_DRAM_BANKS];
-+	unsigned long long ddr_ram_size;
- };
+@@ -46,6 +46,11 @@
+ #define DDRSS_ECC_R2_STR_ADDR_REG		0x0140
+ #define DDRSS_ECC_R2_END_ADDR_REG		0x0144
+ #define DDRSS_ECC_1B_ERR_CNT_REG		0x0150
++#define DDRSS_V2A_INT_SET_REG			0x00a8
++
++#define DDRSS_V2A_INT_SET_REG_ECC1BERR_EN 	BIT(3)
++#define DDRSS_V2A_INT_SET_REG_ECC2BERR_EN 	BIT(4)
++#define DDRSS_V2A_INT_SET_REG_ECCM1BERR_EN	BIT(5)
  
- struct reginitdata {
-@@ -669,11 +672,53 @@ static void k3_ddrss_lpddr4_preload_full_mem(struct k3_ddrss_desc *ddrss,
- 	printf("ECC: priming DDR completed in %lu msec\n", get_timer(done));
- }
- 
-+static void k3_ddrss_ddr_bank_base_size_calc(struct k3_ddrss_desc *ddrss)
-+{
-+	int bank, na, ns, len, parent;
-+	const fdt32_t *ptr, *end;
-+
-+	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-+		ddrss->ddr_bank_base[bank] = 0;
-+		ddrss->ddr_bank_size[bank] = 0;
-+	}
-+
-+	ofnode mem = ofnode_null();
-+
-+	do {
-+		mem = ofnode_by_prop_value(mem, "device_type", "memory", 7);
-+	} while (!ofnode_is_enabled(mem));
-+
-+	const void *fdt = ofnode_to_fdt(mem);
-+	int node = ofnode_to_offset(mem);
-+	const char *property = "reg";
-+
-+	parent = fdt_parent_offset(fdt, node);
-+	na = fdt_address_cells(fdt, parent);
-+	ns = fdt_size_cells(fdt, parent);
-+	ptr = fdt_getprop(fdt, node, property, &len);
-+	end = ptr + len / sizeof(*ptr);
-+
-+	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-+		if (ptr + na + ns <= end) {
-+			if (CONFIG_IS_ENABLED(OF_TRANSLATE))
-+				ddrss->ddr_bank_base[bank] = fdt_translate_address(fdt, node, ptr);
-+			else
-+				ddrss->ddr_bank_base[bank] = fdtdec_get_number(ptr, na);
-+
-+			ddrss->ddr_bank_size[bank] = fdtdec_get_number(&ptr[na], ns);
-+		}
-+		ptr += na + ns;
-+	}
-+
-+	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++)
-+		ddrss->ddr_ram_size += ddrss->ddr_bank_size[bank];
-+}
-+
- static void k3_ddrss_lpddr4_ecc_calc_reserved_mem(struct k3_ddrss_desc *ddrss)
- {
- 	fdtdec_setup_mem_size_base_lowest();
- 
--	ddrss->ecc_reserved_space = gd->ram_size;
-+	ddrss->ecc_reserved_space = ddrss->ddr_ram_size;
- 	do_div(ddrss->ecc_reserved_space, 9);
- 
- 	/* Round to clean number */
-@@ -697,7 +742,7 @@ static void k3_ddrss_lpddr4_ecc_init(struct k3_ddrss_desc *ddrss)
- 	/* Preload the full memory with 0's using the BIST engine of
- 	 * the LPDDR4 controller.
- 	 */
--	k3_ddrss_lpddr4_preload_full_mem(ddrss, gd->ram_size, 0);
-+	k3_ddrss_lpddr4_preload_full_mem(ddrss, ddrss->ddr_ram_size, 0);
- 
+ #define SINGLE_DDR_SUBSYSTEM	0x1
+ #define MULTI_DDR_SUBSYSTEM	0x2
+@@ -747,6 +752,9 @@ static void k3_ddrss_lpddr4_ecc_init(struct k3_ddrss_desc *ddrss)
  	/* Clear Error Count Register */
  	writel(0x1, base + DDRSS_ECC_1B_ERR_CNT_REG);
-@@ -742,6 +787,8 @@ static int k3_ddrss_probe(struct udevice *dev)
  
- 	k3_lpddr4_start(ddrss);
- 
-+	k3_ddrss_ddr_bank_base_size_calc(ddrss);
++	writel(DDRSS_V2A_INT_SET_REG_ECC1BERR_EN | DDRSS_V2A_INT_SET_REG_ECC2BERR_EN |
++		   DDRSS_V2A_INT_SET_REG_ECCM1BERR_EN, base + DDRSS_V2A_INT_SET_REG);
 +
- 	if (ddrss->ti_ecc_enabled) {
- 		if (!ddrss->ddrss_ss_cfg) {
- 			printf("%s: ss_cfg is required if ecc is enabled but not provided.",
-@@ -763,29 +810,23 @@ static int k3_ddrss_probe(struct udevice *dev)
- int k3_ddrss_ddr_fdt_fixup(struct udevice *dev, void *blob, struct bd_info *bd)
- {
- 	struct k3_ddrss_desc *ddrss = dev_get_priv(dev);
--	u64 start[CONFIG_NR_DRAM_BANKS];
--	u64 size[CONFIG_NR_DRAM_BANKS];
- 	int bank;
- 
- 	if (ddrss->ecc_reserved_space == 0)
- 		return 0;
- 
- 	for (bank = CONFIG_NR_DRAM_BANKS - 1; bank >= 0; bank--) {
--		if (ddrss->ecc_reserved_space > bd->bi_dram[bank].size) {
--			ddrss->ecc_reserved_space -= bd->bi_dram[bank].size;
--			bd->bi_dram[bank].size = 0;
-+		if (ddrss->ecc_reserved_space > ddrss->ddr_bank_size[bank]) {
-+			ddrss->ecc_reserved_space -= ddrss->ddr_bank_size[bank];
-+			ddrss->ddr_bank_size[bank] = 0;
- 		} else {
--			bd->bi_dram[bank].size -= ddrss->ecc_reserved_space;
-+			ddrss->ddr_bank_size[bank] -= ddrss->ecc_reserved_space;
- 			break;
- 		}
- 	}
- 
--	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
--		start[bank] =  bd->bi_dram[bank].start;
--		size[bank] = bd->bi_dram[bank].size;
--	}
--
--	return fdt_fixup_memory_banks(blob, start, size, CONFIG_NR_DRAM_BANKS);
-+	return fdt_fixup_memory_banks(blob, ddrss->ddr_bank_base,
-+					ddrss->ddr_bank_size, CONFIG_NR_DRAM_BANKS);
- }
- 
- static int k3_ddrss_get_info(struct udevice *dev, struct ram_info *info)
+ 	/* Enable ECC Check */
+ 	val = readl(base + DDRSS_ECC_CTRL_REG);
+ 	val |= DDRSS_ECC_CTRL_REG_ECC_CK;
 -- 
 2.34.1
 
