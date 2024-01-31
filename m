@@ -4,78 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ADADC47258
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 15:38:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46635C47258
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 15:43:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D95378745E;
-	Wed, 31 Jan 2024 16:38:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C00E48745E;
+	Wed, 31 Jan 2024 16:43:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Pdb+HTC0";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="dUERiLM2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2378E87964; Wed, 31 Jan 2024 16:38:23 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C615887732; Wed, 31 Jan 2024 16:43:54 +0100 (CET)
+Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
+ [46.235.227.194])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36E128745E
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 16:38:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A3F218718A
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 16:43:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dan.carpenter@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-40fb63c40c0so4269445e9.2
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 07:38:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706715500; x=1707320300; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4mJxMKgUDTI0iKHmeOvXtEfmRzesVmscOJGI+FdKxyw=;
- b=Pdb+HTC0xmrrzbHlZqLvgtKk6a3YtRQh+/L1Ya/GskqcqZoiPfz7kSd4Kl49pQfYH4
- ZueifMzZZNuTBdnO9f7LzPPZ5Z+YqGOQnwl1hEYUxWuIRSyUYML5V6qQH2lnZI7c/exU
- +OHWJDXdABAsRDxZGrX5WVseq6gmgX0aqQmXxzrUwo7jQb49ZdCENF8gbdtKN8YbaUDR
- wchIWByBGz+ZxyHypJGmYpsdrbaJ3ZMKIjxf72BeBggDiirabrHxgiNYR+4iouJnH0wQ
- vOGBNov4t6y68Cfq/gkpdG6elXHzmUbd06meY1WsS6clfkvP9RJniHsjHX6Iu5sHYGMp
- aDSw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706715500; x=1707320300;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4mJxMKgUDTI0iKHmeOvXtEfmRzesVmscOJGI+FdKxyw=;
- b=qz314hDzCvOnRhozkk4eT4ujxpO51C52bXpWhLS3s6nRtLYrtifBvWYQUhO3vC7CR5
- uKBWU00ia1qanLQxnTAYKMAE8izTzJU5D3mej1RLeGn3e2WW2mknkAExDecjFWcP9jVw
- 7kteVQ7mfNgFrg/VDZxbzbu2V/beCzeEZmLor90aJNkMsFJf8XJ/trQQCaEtiX0GeUPf
- sMAnBn+BoxV7O3dcCOhjuHsePPu3Xe0tBtNERWNxbzb5hz3XMPoAtur8vFtQ9noKz8fE
- AVgh1WGXEi5n84MDDc6wx50IAUfwiMPiKFB5J1qrT6gETUOFOSGWJymFtyo4mIKOYNPC
- dkCA==
-X-Gm-Message-State: AOJu0YxFUH5a84IGT7eHeahhelnpRo4ZottYTXGjnkRuANQkB8xiRhh6
- n/QfdHfp5fXGZrYAw0/SBDPKX+kqM2VV84v9UB2L4S5vd5bzHS33NN1880M2ZpU=
-X-Google-Smtp-Source: AGHT+IHJ+YY6J1j112LX7xely0ldx6kEU+3L+QhP9XwWJ5X98o/Bg5xZ5kXQtZ+IIYiZsImy0irdLw==
-X-Received: by 2002:a05:600c:c7:b0:40f:5f76:1b21 with SMTP id
- u7-20020a05600c00c700b0040f5f761b21mr1689639wmm.39.1706715500619; 
- Wed, 31 Jan 2024 07:38:20 -0800 (PST)
-Received: from localhost ([102.140.226.10]) by smtp.gmail.com with ESMTPSA id
- j13-20020a05600c190d00b0040e88d1422esm1956366wmq.31.2024.01.31.07.38.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jan 2024 07:38:20 -0800 (PST)
-Date: Wed, 31 Jan 2024 18:38:17 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 06/13] clk/qcom: sdm845: add USB clocks
-Message-ID: <a305146c-3921-4ff3-a687-cd6a63d0b8aa@moroto.mountain>
-References: <20240131-b4-qcom-livetree-v1-0-4071c0787db0@linaro.org>
- <20240131-b4-qcom-livetree-v1-6-4071c0787db0@linaro.org>
+ spf=pass smtp.mailfrom=eugen.hristev@collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1706715832;
+ bh=jCcaIv9VznjsRafXYln25vjfGDjetw13elLa1Bfrvh4=;
+ h=Date:To:From:Subject:From;
+ b=dUERiLM20c9rCGnh2/tKr+qQnNC7mfg7yI1OvsV0N7BFgWQqFIepRT7hD+QJfPMa1
+ jRb8QWdDaTtmS8pF2xRjHZ0aV7dJZJu5XzKxFS0ILRaPkSyMTyJpvsh7DnNFhf9Lwi
+ mKTPKIF+/z0fKIyM6KwLgQ2Dvq+cgJOKikAm9tMKoAyZCEZTSdbLpfTVQtzkf7EQb6
+ VxBHK/VnGJo1HMnRspqryc0oh7DBYejODh1Q1YyFOBOpEImai/SNiK4CXm2pgO2urN
+ r+syc0Lh/G5NAJp3qDJqvdC2wimDJoR6tiJhJmh5e9EhgxQudi4JTNsq7cTJDCb6na
+ 7pfoGu173Kj5w==
+Received: from [100.90.194.27] (cola.collaboradmins.com [195.201.22.229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: ehristev)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id 72DE037803EE;
+ Wed, 31 Jan 2024 15:43:51 +0000 (UTC)
+Message-ID: <3e025444-6116-4898-a718-d718265e233a@collabora.com>
+Date: Wed, 31 Jan 2024 17:43:49 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240131-b4-qcom-livetree-v1-6-4071c0787db0@linaro.org>
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+From: Eugen Hristev <eugen.hristev@collabora.com>
+Subject: [PULL] u-boot-at91-2024.04-a
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,35 +68,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jan 31, 2024 at 03:16:58PM +0000, Caleb Connolly wrote:
-> @@ -121,6 +130,26 @@ static int sdm845_clk_enable(struct clk *clk)
->  
->  	debug("%s: clk %s\n", __func__, sdm845_clks[clk->id].name);
->  
-> +	switch (clk->id) {
-> +	case GCC_USB30_PRIM_MASTER_CLK:
-> +		gdsc_enable(priv->base + USB30_PRIM_GDSCR);
-> +		qcom_gate_clk_en(priv, GCC_USB_PHY_CFG_AHB2PHY_CLK);
-> +		/* These numbers are just pulled from the frequency tables in the Linux driver */
-> +		clk_rcg_set_rate_mnd(priv->base, USB30_PRIM_MASTER_CLK_CMD_RCGR,
-> +				     (4.5 * 2) - 1, 0, 0, 1 << 8, 8);
-> +		clk_rcg_set_rate_mnd(priv->base, USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR,
-> +				     1, 0, 0, 0, 8);
-> +		clk_rcg_set_rate_mnd(priv->base, USB3_PRIM_PHY_AUX_CMD_RCGR,
-> +				     1, 0, 0, 0, 8);
-> +	case GCC_USB30_SEC_MASTER_CLK:
+Hello Tom,
 
-Is this supposed to break?  Otherwise can we add a "fallthrough;"
-annotation?
+Please pull tag u-boot-at91-2024.04-a , the first set of at91 features
+for 2024.04 cycle.
 
-> +		gdsc_enable(priv->base + USB30_SEC_GDSCR);
-> +		qcom_gate_clk_en(priv, GCC_USB3_SEC_PHY_AUX_CLK);
-> +
-> +		qcom_gate_clk_en(priv, GCC_USB3_SEC_CLKREF_CLK);
-> +		qcom_gate_clk_en(priv, GCC_USB3_SEC_PHY_COM_AUX_CLK);
-> +		break;
-> +	}
+This set includes some DT alignments and solves a compile issue for custom nand
+defconfigs.
 
-regards,
-dan carpenter
+Thanks,
+Eugen
 
+The following changes since commit 3c04fcf3137d5f694d52b8f355373e4baabe5f78:
+
+  Merge patch series "k3-j721e: beagleboneai: Fix USB" (2024-01-20 11:39:13 -0500)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-at91.git tags/u-boot-at91-2024.04-a
+
+for you to fetch changes up to a1c6b08274e18e4afc0f78a2f63609880aa7ef08:
+
+  mtd: nand: raw: atmel: Remove duplicate definitions (2024-01-22 06:05:26 +0200)
+
+----------------------------------------------------------------
+First set of u-boot-at91 features for the 2024.04 cycle
+
+----------------------------------------------------------------
+Alexander Dahl (4):
+      ARM: dts: at91: sama5d2: Move sfr node
+      ARM: dts: at91: sama5d2: Port ebi/nand nodes from linux
+      ARM: dts: at91: sama5d2: Align more node names with Linux
+      mtd: nand: raw: atmel: Remove duplicate definitions
+
+ arch/arm/dts/sama5d2.dtsi          | 74 +++++++++++++++++++++++++++++++++-----
+ drivers/mtd/nand/raw/atmel/pmecc.c |  3 --
+ 2 files changed, 65 insertions(+), 12 deletions(-)
