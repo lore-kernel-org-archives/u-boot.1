@@ -4,54 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3924FC47258
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 22:09:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47B99C47258
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 22:41:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 836B887626;
-	Wed, 31 Jan 2024 23:09:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 5B4A087727;
+	Wed, 31 Jan 2024 23:41:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="0JpMbfRn";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cMobx6J6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 688378760D; Wed, 31 Jan 2024 23:09:11 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CC6D887732; Wed, 31 Jan 2024 23:41:33 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AC4C87732
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 23:09:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4649B87642
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 23:41:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=8890=JK=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1706738941;
- bh=8Xnvm98uquRHvAdUHBmu33WdTxVSLZl8zhJkXOrkaU0=;
- b=0JpMbfRnY4L58slqLKS8QzsVQ45spLaxlxjEZkS/1NBfGeneNJxtO9WeVCXRvY3u2HkWN9qgh
- w8fRM1bDVZP3MHTQwB1QawyBzvMFUP/j5xQK+b2mBqqyCp1fs6CI6GVb/7vGl4kiEUIg0qp38T4
- /7QkatLPSNf4psJYN+bnkHGuDup+ZzCkwc35R5ncIpt/uU94tBNXPqzdOS9rsiMpGYP/ewbhYRS
- C86aaWjggErGubhrxoqkR2YAgYc1HeFRYORoDhF64QBsOKyb13sK4IqufzqIoBYnEBRVzs57PP0
- Yp8IwLO2y9dr3x7OosiVexuskWYpwM9ybv0iXrZzxylA==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jonas Karlman <jonas@kwiboo.se>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] rockchip: board: Add minimal generic RK3588S/RK3588 board
-Date: Wed, 31 Jan 2024 22:08:51 +0000
-Message-ID: <20240131220854.117650-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 40VMfJCR018122;
+ Wed, 31 Jan 2024 16:41:19 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1706740879;
+ bh=x8TezbdY1lLUZVRGvQmvf3wFhXbnW+CgekoRN6dWEEk=;
+ h=Date:Subject:To:References:From:In-Reply-To;
+ b=cMobx6J6xFxT3Ie8tP+tL4ElFBCXYKE32Fnl83Yd+cKn3RCBFSvdRcC00ZaItFFcF
+ yTKiusnu5w2srbN98/rAcKBfjU4NOe5xDBtOpWnbqkQRvhtxX4k/cwxTQl0Kuam5YM
+ NJ1pmO+3/53y3yJrR8N7VhVzS+H0+3Wo+uskkvxk=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 40VMfJwf103129
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 31 Jan 2024 16:41:19 -0600
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 31
+ Jan 2024 16:41:19 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 31 Jan 2024 16:41:19 -0600
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 40VMfIBr130431;
+ Wed, 31 Jan 2024 16:41:18 -0600
+Message-ID: <051f0503-ae03-4939-ab34-085f212dea02@ti.com>
+Date: Wed, 31 Jan 2024 16:41:18 -0600
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 15/16] configs: Add am69_sk_* defconfig fragments
+Content-Language: en-US
+To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
+ Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Simon Glass <sjg@chromium.org>, Kamlesh Gurudasani <kamlesh@ti.com>,
+ Dasnavis Sabiya <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Aradhya Bhatia <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Nishanth Menon <nm@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Roger Quadros <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
+ <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
+References: <20240119175043.3904751-1-a-nandan@ti.com>
+ <20240119175043.3904751-16-a-nandan@ti.com>
+ <1e5c60a4-0200-4207-8485-c3fb26d87f3e@ti.com>
+ <9d81618b-26e8-498e-8866-f03e3e0697e5@ti.com>
+ <f768b142-15e3-46c3-a39c-f3f3674af798@ti.com>
+ <2146baaa-c66e-4e08-b97d-b6cc1791ccaf@ti.com>
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <2146baaa-c66e-4e08-b97d-b6cc1791ccaf@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 65bac4fc619a1500cde84e11
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,220 +96,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a minimal generic RK3588S/RK3588 board that only have eMMC and SDMMC
-enabled. This defconfig can be used to boot from eMMC or SD-card on most
-RK3588S/RK3588 boards that follow reference board design.
+On 1/29/24 12:26 PM, Apurva Nandan wrote:
+> 
+> On 23/01/24 20:31, Andrew Davis wrote:
+>> On 1/23/24 8:39 AM, Apurva Nandan wrote:
+>>> Hi Andrew,
+>>>
+>>> On 20/01/24 00:43, Andrew Davis wrote:
+>>>> On 1/19/24 11:50 AM, Apurva Nandan wrote:
+>>>>> From: Dasnavis Sabiya <sabiya.d@ti.com>
+>>>>>
+>>>>> Add config fragments for am69_sk A72 and R5 configuration.
+>>>>>
+>>>>> This applies on to:
+>>>>> j784s4_evm_a72_defconfig -> am69_sk_a72.config
+>>>>> j784s4_evm_r5_defconfig -> am69_sk_r5.config
+>>>>>
+>>>>> The usage model (with the fragment) would be:
+>>>>> make j784s4_evm_a72_defconfig am69_sk_a72.config
+>>>>> make
+>>>>>
+>>>>> OR
+>>>>>
+>>>>> make j784s4_evm_r5_defconfig am69_sk_r5.config
+>>>>> make
+>>>>>
+>>>>> Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
+>>>>> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
+>>>>> ---
+>>>>>   board/ti/j784s4/MAINTAINERS | 2 ++
+>>>>>   configs/am69_sk_a72.config  | 5 +++++
+>>>>>   configs/am69_sk_r5.config   | 5 +++++
+>>>>>   3 files changed, 12 insertions(+)
+>>>>>   create mode 100644 configs/am69_sk_a72.config
+>>>>>   create mode 100644 configs/am69_sk_r5.config
+>>>>>
+>>>>> diff --git a/board/ti/j784s4/MAINTAINERS b/board/ti/j784s4/MAINTAINERS
+>>>>> index 4433ead66b..69be13f533 100644
+>>>>> --- a/board/ti/j784s4/MAINTAINERS
+>>>>> +++ b/board/ti/j784s4/MAINTAINERS
+>>>>> @@ -20,3 +20,5 @@ AM69 SK BOARD
+>>>>>   F:    arch/arm/dts/k3-am69-sk.dts
+>>>>>   F:    arch/arm/dts/k3-am69-sk-u-boot.dtsi
+>>>>>   F:    arch/arm/dts/k3-am69-r5-sk.dts
+>>>>> +F:    configs/am69_sk_r5.config
+>>>>> +F:    configs/am69_sk_a72.config
+>>>>> diff --git a/configs/am69_sk_a72.config b/configs/am69_sk_a72.config
+>>>>> new file mode 100644
+>>>>> index 0000000000..03e74a8a56
+>>>>> --- /dev/null
+>>>>> +++ b/configs/am69_sk_a72.config
+>>>>
+>>>> Just going to ignore the comments on v7 about putting this
+>>>> in board/ti/..?
+>>>>
+>>>
+>>> Sorry, somehow this got missed. Thanks for bringing up.
+>>>
+>>>
+>>>> Anyway, we can now do includes in defconfigs, so no config
+>>>> fragments needed, you can just add `configs/am69_evm_a72_defconfig`
+>>>> with the content:
+>>>>
+>>>> ```
+>>>> #include <configs/j784s4_evm_a72_defconfig>
+>>>>
+>>>> CONFIG_ARM=y
+>>>> CONFIG_ARCH_K3=y
+>>>> CONFIG_SOC_K3_J784S4=y
+>>>> CONFIG_TARGET_J784S4_A72_EVM=y
+>>>>
+>>>> CONFIG_DEFAULT_DEVICE_TREE="k3-am69-sk"
+>>>> CONFIG_SPL_OF_LIST="k3-am69-sk"
+>>>> CONFIG_OF_LIST="k3-am69-sk"
+>>>> ```
+>>>>
+>>>> (note we need to duplicate the _ARM/_TARGET currently to
+>>>> not confuse buildman which seems to directly parse the configs
+>>>> for arch detection).
+>>>>
+>>>
+>>> I tried it, but I don't think this works as '#' signifies a comment in defconfig, isn't that true?
+>>>
+>>
+>> The ability to do this was just added recently, try it again :)
+>>
+>> Andrew
+>>
+> Actually, I tried on the latest uboot next, but I still don't see things being included from j784s4_evm_a72_defconfig
+> 
+> Can you point to the commit where this was introduced?
+> 
 
-Also fix the alphabetical order of RK3588 boards listed in Makefile and
-documentation.
+https://source.denx.de/u-boot/u-boot/-/commit/2027e99e61aab6fd8b06e2d752e0e538cff26eb6
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
-This patch depend on the series "rockchip: rk35xx: Sync device tree
-with linux v6.8-rc1" [1].
+Andrew
 
-[1] https://patchwork.ozlabs.org/cover/1891669/
----
- arch/arm/dts/Makefile                   |  5 +-
- arch/arm/dts/rk3588-generic-u-boot.dtsi |  3 ++
- arch/arm/dts/rk3588-generic.dts         | 44 ++++++++++++++++
- board/rockchip/evb_rk3588/MAINTAINERS   |  7 +++
- configs/generic-rk3588_defconfig        | 68 +++++++++++++++++++++++++
- doc/board/rockchip/rockchip.rst         |  3 +-
- 6 files changed, 127 insertions(+), 3 deletions(-)
- create mode 100644 arch/arm/dts/rk3588-generic-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3588-generic.dts
- create mode 100644 configs/generic-rk3588_defconfig
-
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 0fcae77cefe3..6361bc5abc37 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -193,13 +193,14 @@ dtb-$(CONFIG_ROCKCHIP_RK3588) += \
- 	rk3588-edgeble-neu6a-io.dtb \
- 	rk3588-edgeble-neu6b-io.dtb \
- 	rk3588-evb1-v10.dtb \
-+	rk3588-generic.dtb \
- 	rk3588-nanopc-t6.dtb \
- 	rk3588s-orangepi-5.dtb \
- 	rk3588-orangepi-5-plus.dtb \
- 	rk3588-quartzpro64.dtb \
--	rk3588-turing-rk1.dtb \
- 	rk3588s-rock-5a.dtb \
--	rk3588-rock-5b.dtb
-+	rk3588-rock-5b.dtb \
-+	rk3588-turing-rk1.dtb
- 
- dtb-$(CONFIG_ROCKCHIP_RV1108) += \
- 	rv1108-elgin-r1.dtb \
-diff --git a/arch/arm/dts/rk3588-generic-u-boot.dtsi b/arch/arm/dts/rk3588-generic-u-boot.dtsi
-new file mode 100644
-index 000000000000..853ed58cfe58
---- /dev/null
-+++ b/arch/arm/dts/rk3588-generic-u-boot.dtsi
-@@ -0,0 +1,3 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk3588s-u-boot.dtsi"
-diff --git a/arch/arm/dts/rk3588-generic.dts b/arch/arm/dts/rk3588-generic.dts
-new file mode 100644
-index 000000000000..e4721d97a87d
---- /dev/null
-+++ b/arch/arm/dts/rk3588-generic.dts
-@@ -0,0 +1,44 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Minimal generic DT for RK3588S/RK3588 with eMMC and SD-card enabled
-+ */
-+
-+/dts-v1/;
-+#include "rk3588s.dtsi"
-+
-+/ {
-+	model = "Generic RK3588S/RK3588";
-+	compatible = "rockchip,rk3588";
-+
-+	aliases {
-+		mmc0 = &sdhci;
-+		mmc1 = &sdmmc;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial2:1500000n8";
-+	};
-+};
-+
-+&sdhci {
-+	bus-width = <8>;
-+	cap-mmc-highspeed;
-+	mmc-hs200-1_8v;
-+	no-sd;
-+	no-sdio;
-+	non-removable;
-+	status = "okay";
-+};
-+
-+&sdmmc {
-+	bus-width = <4>;
-+	cap-sd-highspeed;
-+	disable-wp;
-+	no-mmc;
-+	no-sdio;
-+	status = "okay";
-+};
-+
-+&uart2 {
-+	status = "okay";
-+};
-diff --git a/board/rockchip/evb_rk3588/MAINTAINERS b/board/rockchip/evb_rk3588/MAINTAINERS
-index 2bd44bc58728..eb771da7b7a0 100644
---- a/board/rockchip/evb_rk3588/MAINTAINERS
-+++ b/board/rockchip/evb_rk3588/MAINTAINERS
-@@ -7,6 +7,13 @@ F:	configs/evb-rk3588_defconfig
- F:	arch/arm/dts/rk3588-evb1-v10.dts
- F:	arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
- 
-+GENERIC-RK3588
-+M:	Jonas Karlman <jonas@kwiboo.se>
-+S:	Maintained
-+F:	configs/generic-rk3588_defconfig
-+F:	arch/arm/dts/rk3588-generic.dts
-+F:	arch/arm/dts/rk3588-generic-u-boot.dtsi
-+
- ORANGEPI-5-RK3588
- M:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
-diff --git a/configs/generic-rk3588_defconfig b/configs/generic-rk3588_defconfig
-new file mode 100644
-index 000000000000..4755b27c1dea
---- /dev/null
-+++ b/configs/generic-rk3588_defconfig
-@@ -0,0 +1,68 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_TEXT_BASE=0x00a00000
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
-+CONFIG_DEFAULT_DEVICE_TREE="rk3588-generic"
-+CONFIG_ROCKCHIP_RK3588=y
-+CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_STACK_R_ADDR=0x600000
-+CONFIG_TARGET_EVB_RK3588=y
-+CONFIG_SPL_STACK=0x400000
-+CONFIG_DEBUG_UART_BASE=0xFEB50000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_DEBUG_UART=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_OF_BOARD_SETUP=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-generic.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_PAD_TO=0x7f8000
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_START_ADDR=0x4000000
-+CONFIG_SPL_BSS_MAX_SIZE=0x4000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_STACK_R=y
-+CONFIG_SPL_ATF=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_MMC=y
-+# CONFIG_CMD_SETEXPR is not set
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_SPL_CLK=y
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_MISC=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_HS200_SUPPORT=y
-+CONFIG_SPL_MMC_HS200_SUPPORT=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_SPL_RAM=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_SYSRESET=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 9fe69fc9422f..393c84a1309c 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -116,10 +116,11 @@ List of mainline supported Rockchip boards:
-      - Edgeble Neural Compute Module 6A SoM - Neu6a (neu6a-io-rk3588)
-      - Edgeble Neural Compute Module 6B SoM - Neu6b (neu6b-io-rk3588)
-      - FriendlyElec NanoPC-T6 (nanopc-t6-rk3588)
-+     - Generic RK3588S/RK3588 (generic-rk3588)
-      - Pine64 QuartzPro64 (quartzpro64-rk3588)
--     - Turing Machines RK1 (turing-rk1-rk3588)
-      - Radxa ROCK 5A (rock5a-rk3588s)
-      - Radxa ROCK 5B (rock5b-rk3588)
-+     - Turing Machines RK1 (turing-rk1-rk3588)
-      - Xunlong Orange Pi 5 (orangepi-5-rk3588s)
-      - Xunlong Orange Pi 5 Plus (orangepi-5-plus-rk3588)
- 
--- 
-2.43.0
-
+> 
+>>>
+>>>> Andrew
+>>>>
+>>>>> @@ -0,0 +1,5 @@
+>>>>> +# Defconfig fragment to apply on top of j784s4_evm_a72_defconfig
+>>>>> +
+>>>>> +CONFIG_DEFAULT_DEVICE_TREE="k3-am69-sk"
+>>>>> +CONFIG_SPL_OF_LIST="k3-am69-sk"
+>>>>> +CONFIG_OF_LIST="k3-am69-sk"
+>>>>> diff --git a/configs/am69_sk_r5.config b/configs/am69_sk_r5.config
+>>>>> new file mode 100644
+>>>>> index 0000000000..c42b6f3380
+>>>>> --- /dev/null
+>>>>> +++ b/configs/am69_sk_r5.config
+>>>>> @@ -0,0 +1,5 @@
+>>>>> +# Defconfig fragment to apply on top of j784s4_evm_r5_defconfig
+>>>>> +
+>>>>> +CONFIG_DEFAULT_DEVICE_TREE="k3-am69-sk"
+>>>>> +CONFIG_SPL_OF_LIST="k3-am69-r5-sk"
+>>>>> +CONFIG_OF_LIST="k3-am69-r5-sk"
+>>>
