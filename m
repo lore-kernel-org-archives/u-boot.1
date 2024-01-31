@@ -4,91 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE9D4C47258
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 15:19:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2021C47DB3
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 15:35:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9843A87DDB;
-	Wed, 31 Jan 2024 16:17:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CE8088745E;
+	Wed, 31 Jan 2024 16:35:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="q8NidTz2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IDFAI4oa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9527587D6B; Wed, 31 Jan 2024 16:17:19 +0100 (CET)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id 0BAFF8745E; Wed, 31 Jan 2024 16:35:16 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7523887D8E
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 16:17:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7DD7D87441
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 16:35:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-51120e2864fso1722250e87.1
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 07:17:14 -0800 (PST)
+ spf=pass smtp.mailfrom=dan.carpenter@linaro.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-40faff092a2so12664215e9.2
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 07:35:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706714233; x=1707319033; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=hJTsHECS24vGCObVThDn1gZyJSGsUl9Dz7bFF4jZ1Kg=;
- b=q8NidTz2O9LQ2n86jPqissOkDo8rzrvlISRDoaSjDk0KtzdY1ZjC35hFI+qMFSC45u
- MBxlSoFsFkWIELewK9z1jqhxbh+iTrJX1nwhUXtteWqBihGBPax9U0/sELNLAYcsrQGz
- /4z6x9DTCDHI0VL/pWdYjY/SMog6ZeVgWBkp/TivOTf3B2rgXbFVTWsz3JYcROhC4lEW
- g5zA/JbGEAHPhbA6VEohEmyXvhrhkDALqGx8ZQ6LpWWHhFvriL0ubnqngCV6N3tSD0wG
- fiZ7DX1GpQiGSoZ8qSVldGlPMwAvFseAcPHKTLChf3UtCQGfTUurtyNksQxTvTpIlRId
- BNzQ==
+ d=linaro.org; s=google; t=1706715313; x=1707320113; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=varB8Z9vwyNZpbOjnc+DhRTHW54W52QkS/b2zAVDtC8=;
+ b=IDFAI4oarZCVgDxhH5SuspYes3Bc+GBzTiDIuxsT5TEJOmNK8yELgqLpGguFn4+3J/
+ 7Qlrz2Ni0kODiJ3lPEzYxMyhTNgmTVe3ryc1zOkrnq64TPXB+WSnZKbDp87ao56OS+cr
+ hyLveiwfMLZvwO9V+vKcJcR3F2tW5IdQIBFcnY9kT+Zq/Xe/CvHGOcmBeyBDbSbxdtgB
+ BhEmQ5Y6FDmzskuvSNAyqi14xq39Cv7qoqcgmIlwhTQaljzCZUOdHhV+FqIdpKgiRZGU
+ diM9lqfSjUZ0N4Pw4JgkI8p+/DHT1uEmioOclblJSxUc+0hO0gYLXWNBWeOq2MT0b1Cl
+ uyNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706714233; x=1707319033;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hJTsHECS24vGCObVThDn1gZyJSGsUl9Dz7bFF4jZ1Kg=;
- b=N7Eu4+66AnM+CTx9NS4/HkDZytR8B1O1M46U2QUhHzLvr5F6jVOunJ4P1YuEpQ/rxx
- S0ftOkuB6ad0vXseyvX2HQJ9UWmCZrMpKX+xc2gECLUGY8RMfgD9/MmzvoxSxu0YOW62
- zib1Mp7Uw6jSIoaKNbrQMY5hSE7iuAeDt5IdFfu2UhKXSaNKXtiMBAvpIkAZF5XDpec3
- 2dlT4P0XpEkb3VpaeYnJOaUHUJKhsLJ/2fW8gTrSwGbZil0sIbMU6WTDfT/4qdnuSo9r
- mU/9Yp5gdX9rX53RsGFeo9deCRARIhSmlNi87GVMXD3TWEDlh3LIlSJKPmCYhHSL18MB
- n15A==
-X-Gm-Message-State: AOJu0YyX/NwROWC07qQUl7ivZiy7QqBDHF498FasLuKPzbUa435UTaIl
- BMqcRxhGsX/SedmONR4hzBPXJF0BO6yT/NthZeE7Czft/gHYETa/lgA8WLKrV7p1+hL9uM2smTc
- z
-X-Google-Smtp-Source: AGHT+IEvlKV7OI6IYmwUHii7IN/Xfp4QODZ7Kdbyc5jZSoFtRWqFP7DOFG+rf/n2Q4Et16uUp8OOlw==
-X-Received: by 2002:a05:6512:1251:b0:510:280a:baf2 with SMTP id
- fb17-20020a056512125100b00510280abaf2mr1722138lfb.12.1706714233467; 
- Wed, 31 Jan 2024 07:17:13 -0800 (PST)
-Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
- by smtp.gmail.com with ESMTPSA id
- en6-20020a056000420600b0033ae5b637d4sm11109031wrb.35.2024.01.31.07.17.12
+ d=1e100.net; s=20230601; t=1706715313; x=1707320113;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=varB8Z9vwyNZpbOjnc+DhRTHW54W52QkS/b2zAVDtC8=;
+ b=FYqtSGvTpFJDIgmxp/+nRA+2HFPYE29Ox9yARPSWDAb5K4NdLUGx1/SE9iRvDbi3vX
+ +NSbyrDmikpnYV6eVKS0Uk2mcnNTY5fNhHQ57+bst73qhNxtp3CUlDZOvIfmfRab7Ro7
+ /H4cQvMpOMqh5WPWy0d91WMsZulOZHaHux9IbFpp2iBCkzeU+LM8FV0oys/Du9Mn6uUY
+ NTVpmBO8cHnRJDRAbckE3/wsELvEfbIJ3jROtNWIF2SzlORmct3po5+RwdocH+3joHkW
+ uI364fl6zs/l9pED5y89981jydzzdJn18bC2eI6muFD1x3H1KgEyu7GCXOttATYbxsmW
+ oosg==
+X-Gm-Message-State: AOJu0YwEww++kzLZln0U55LiJD1F9heh7LmDzyMlBPZx94OAf8IXHeU4
+ O6Bw4kXaP4bJ99nTAVsNHxdWoEpNtONwISOerwgLnmVVXFtTnMCFb6MEedgYgEo=
+X-Google-Smtp-Source: AGHT+IHrey19PY2HbVKfWrCKFHbFIAtazmOccki1mqLSgAeVIkWOotBqD9BtEf0aCkonppsIZoSKcA==
+X-Received: by 2002:a05:600c:1912:b0:40e:b4a0:277b with SMTP id
+ j18-20020a05600c191200b0040eb4a0277bmr1506376wmq.39.1706715312933; 
+ Wed, 31 Jan 2024 07:35:12 -0800 (PST)
+Received: from localhost ([102.140.226.10]) by smtp.gmail.com with ESMTPSA id
+ o7-20020a05600c4fc700b0040fb44a9288sm1922885wmq.48.2024.01.31.07.35.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jan 2024 07:17:12 -0800 (PST)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Wed, 31 Jan 2024 15:17:05 +0000
-Subject: [PATCH 13/13] qcom_defconfig: enable USB
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240131-b4-qcom-livetree-v1-13-4071c0787db0@linaro.org>
+ Wed, 31 Jan 2024 07:35:12 -0800 (PST)
+Date: Wed, 31 Jan 2024 18:35:02 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 07/13] gpio: msm_gpio: add .set_flags op
+Message-ID: <db08ffb8-fb64-4e19-ab0d-4f5603d51ca6@moroto.mountain>
 References: <20240131-b4-qcom-livetree-v1-0-4071c0787db0@linaro.org>
-In-Reply-To: <20240131-b4-qcom-livetree-v1-0-4071c0787db0@linaro.org>
-To: Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de
-X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2022;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=SM8R83lPmNm2vkoJLzCW97VuijG2vHV1ie7IOHBvDcY=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtRdKTnPKrM03XNUtMoKjc5+6ixMSp/4b/1Bj/evarYuM
- Yi2frmmo5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAExE/xPDP3UxcyWvoxNPvlAr
- PeafkcihyR3iIfnwxpzprGuClTf/cmP4Z6T5wK88KeVpiGbZtTnr782KW6HaVSiSVHjRsv7+wY0
- f7QA=
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+ <20240131-b4-qcom-livetree-v1-7-4071c0787db0@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240131-b4-qcom-livetree-v1-7-4071c0787db0@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,81 +92,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable support for the DWC3 USB controller and required dependencies for
-Qualcomm boards, specifically the DB845c:
-* IOMMU / SMMU
-* USB high-speed PHYs
-* Mass storage and ACM gadgets
+On Wed, Jan 31, 2024 at 03:16:59PM +0000, Caleb Connolly wrote:
+> diff --git a/drivers/gpio/msm_gpio.c b/drivers/gpio/msm_gpio.c
+> index 80cd28bb231f..0230305af299 100644
+> --- a/drivers/gpio/msm_gpio.c
+> +++ b/drivers/gpio/msm_gpio.c
+> @@ -72,6 +72,23 @@ static int msm_gpio_direction_output(struct udevice *dev, unsigned int gpio,
+>  	return 0;
+>  }
+>  
+> +static int msm_gpio_set_flags(struct udevice *dev, unsigned int gpio, ulong flags)
+> +{
+> +	if (flags & GPIOD_IS_OUT_ACTIVE) {
+> +		return msm_gpio_direction_output(dev, gpio, 1);
+> +	} else if (flags & GPIOD_IS_OUT) {
+> +		return msm_gpio_direction_output(dev, gpio, 0);
+> +	} else if (flags & GPIOD_IS_IN) {
+> +		return msm_gpio_direction_input(dev, gpio);
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- configs/qcom_defconfig | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+> +		if (flags & GPIOD_PULL_UP)
+> +			return msm_gpio_set_value(dev, gpio, 1);
+> +		else if (flags & GPIOD_PULL_DOWN)
+> +			return msm_gpio_set_value(dev, gpio, 0);
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index 3935fe2ef59f..dedd5f20b719 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -13,6 +13,7 @@ CONFIG_BOOTSTD_FULL=y
- CONFIG_BOOTDELAY=1
- CONFIG_USE_PREBOOT=y
- CONFIG_SYS_CBSIZE=512
-+# CONFIG_SYS_DEVICE_NULLDEV is not set
- CONFIG_LOG_MAX_LEVEL=9
- CONFIG_LOG_DEFAULT_LEVEL=4
- # CONFIG_DISPLAY_CPUINFO is not set
-@@ -26,6 +27,8 @@ CONFIG_CMD_MMC=y
- CONFIG_CMD_PART=y
- CONFIG_CMD_UFS=y
- CONFIG_CMD_USB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+CONFIG_CMD_UMS_ABORT_KEYED=y
- CONFIG_CMD_CAT=y
- CONFIG_CMD_BMP=y
- CONFIG_CMD_FAT=y
-@@ -35,6 +38,7 @@ CONFIG_EFI_PARTITION=y
- CONFIG_OF_LIVE=y
- # CONFIG_NET is not set
- # CONFIG_OFNODE_MULTI_TREE is not set
-+CONFIG_DM_WARN=y
- CONFIG_BUTTON_QCOM_PMIC=y
- CONFIG_CLK=y
- CONFIG_CLK_QCOM_QCS404=y
-@@ -43,14 +47,21 @@ CONFIG_MSM_GPIO=y
- CONFIG_QCOM_PMIC_GPIO=y
- CONFIG_DM_KEYBOARD=y
- CONFIG_BUTTON_KEYBOARD=y
-+CONFIG_IOMMU=y
-+CONFIG_QCOM_HYP_SMMU=y
-+CONFIG_MISC=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_MSM=y
- CONFIG_PHY=y
-+CONFIG_PHY_QCOM_QUSB2=y
-+CONFIG_PHY_QCOM_USB_HS_7NM=y
- CONFIG_PINCTRL=y
- CONFIG_PINCTRL_QCOM_QCS404=y
- CONFIG_PINCTRL_QCOM_SDM845=y
- CONFIG_DM_PMIC=y
- CONFIG_PMIC_QCOM=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_SCSI=y
- CONFIG_MSM_SERIAL=y
- CONFIG_MSM_GENI_SERIAL=y
-@@ -61,7 +72,11 @@ CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_STORAGE=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_USB_FUNCTION_ACM=y
- CONFIG_UFS=y
- CONFIG_VIDEO=y
- # CONFIG_VIDEO_FONT_8X16 is not set
+These lines are unreachable code.
 
--- 
-2.43.0
+> +	}
+> +
+> +	return 0;
+> +}
+
+regards,
+dan carpenter
 
