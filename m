@@ -4,48 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E5C5C47DDB
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 02:56:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 879E8C4828C
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 02:57:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9418C8785E;
-	Wed, 31 Jan 2024 03:56:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0BEF1875E9;
+	Wed, 31 Jan 2024 03:57:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00C59878CB; Wed, 31 Jan 2024 03:56:43 +0100 (CET)
+ id 42FDA8785F; Wed, 31 Jan 2024 03:57:50 +0100 (CET)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31E66875A0
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 03:56:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F726875A0
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 03:57:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 40V2uCm6008365;
- Wed, 31 Jan 2024 10:56:12 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 40V2vXCb008707;
+ Wed, 31 Jan 2024 10:57:33 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
  with Microsoft SMTP Server id 14.3.498.0;
- Wed, 31 Jan 2024 10:56:07 +0800
-Date: Wed, 31 Jan 2024 10:56:04 +0800
+ Wed, 31 Jan 2024 10:57:28 +0800
+Date: Wed, 31 Jan 2024 10:57:25 +0800
 From: Leo Liang <ycliang@andestech.com>
 To: Aurelien Jarno <aurelien@aurel32.net>
-CC: <u-boot@lists.denx.de>, Yanhong Wang <yanhong.wang@starfivetech.com>
-Subject: Re: [PATCH] board: starfive: handle compatible property in dynamic
- DT configuration
-Message-ID: <Zbm2xN2ULrWjO52v@swlinux02>
-References: <20240110201757.983435-1-aurelien@aurel32.net>
+CC: <u-boot@lists.denx.de>
+Subject: Re: [PATCH] riscv: qemu: enable booting on a second virtio device
+Message-ID: <Zbm3FRB8fZNaquA8@swlinux02>
+References: <20240110202656.984622-1-aurelien@aurel32.net>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20240110201757.983435-1-aurelien@aurel32.net>
+In-Reply-To: <20240110202656.984622-1-aurelien@aurel32.net>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 40V2uCm6008365
+X-MAIL: Atcsqr.andestech.com 40V2vXCb008707
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,20 +61,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jan 10, 2024 at 09:17:44PM +0100, Aurelien Jarno wrote:
-> The difference between the StarFive VisionFive 2 1.2A and 1.3B boards is
-> handled dynamically by looking at the PCB version in the EEPROM in order
-> to have a single u-boot version for both versions of the board. While
-> the "model" property is correctly handled, the "compatible" one is
-> always the the one of version 1.3b.
-> 
-> This patch add support for dynamically configuring that property.
-> 
-> Fixes: 9b7060bd15e7 ("riscv: dts: jh7110: Combine the board device tree files of 1.2A and 1.3B")
+On Wed, Jan 10, 2024 at 09:26:53PM +0100, Aurelien Jarno wrote:
+> QEMU RISC-V supports multiple virtio devices, but only tries to boot to
+> the first one. Enable support for a second virtio device, that is useful
+> for instance to boot on a disk image + an installer. Ideally that should
+> be made dynamic, but that's a first step.
 > 
 > Signed-off-by: Aurelien Jarno <aurelien@aurel32.net>
 > ---
->  board/starfive/visionfive2/spl.c | 4 ++++
->  1 file changed, 4 insertions(+)
+>  include/configs/qemu-riscv.h | 1 +
+>  1 file changed, 1 insertion(+)
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
