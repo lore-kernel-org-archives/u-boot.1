@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD67FC47DB3
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 15:18:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34464C47DB3
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 15:18:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C31E87D18;
+	by phobos.denx.de (Postfix) with ESMTP id E571787DB3;
 	Wed, 31 Jan 2024 16:17:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wGq4/tp3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KrJmLV5O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AD4987DD8; Wed, 31 Jan 2024 16:17:13 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 70DB187CE9; Wed, 31 Jan 2024 16:17:15 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57BDD87D7E
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 16:17:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 73FAF87D9E
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 16:17:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-40ef6f10b56so26391315e9.2
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 07:17:09 -0800 (PST)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-33aed096cb3so2613742f8f.1
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 07:17:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706714228; x=1707319028; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1706714229; x=1707319029; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=9d6pK+oluV5IpInoW43059fRkUOQBE+4Tw5fwZZIJpI=;
- b=wGq4/tp3O7pJ58by8H16Y1h5RJ2BPtWvrrqISK8waNpoxb0K8RF5st6Qp/5gQkVWdq
- d27YD+AnEHL8ZKz0haPVBPUVR1mA/+TrdeBZRCaThLED7wSyjwgBm4LnyGz1VkwlvNX5
- r0u6JCMC+h2TNoDg/kYnn1BZRdK8JFcEiprZWYQ7wXNg7a5iLCRYbIhnLQrqP3GeTT6W
- sdM5r4YXFkBZtsN5huyUjjYy++he4QbCty83N2IblQ8HLCG8VeBLL1adppSr3+m0gP2x
- oxbsHSrRv2My+j6V6mT35JFe8XzpZzlmDUjunEDWVZNEK4T48sqbTTXWf06m53TE4i96
- Mz/g==
+ :reply-to; bh=1K2UpMRlfHQyCWRzBdmc6/7/huOXjQDmSO+ysf6rEtw=;
+ b=KrJmLV5Ooni1Gwh0AKzbk2W4erstloh5adfny4cDmUJ/SuIFelpHSl0RhpvabW0nWw
+ NOB54e3Qf7C6hnSQD+uCUcdQ0xKTUPc9K5Wm5jwXCc6nCARfJ6HMCm9vnifu0oAMxkOK
+ no9/dYnLyVVFys4BSy6ulRucDAgedhVX8RN09EDrE1/QG/IxSfofBEH9hyS51NoHmM94
+ TQfFqxGDy+lPEWHn8tWiMfhzjE9WH5VDmePaAbQautDS2+OB4dvyPgtJW6Pm52D+1ixL
+ tvRc1t5ZaDTH20b7Dx1LCYz9/C2FPSAf+v5pJGf0eFMkeDW+7UnKH8uN/bRgxG3MAhZa
+ 8OvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706714228; x=1707319028;
+ d=1e100.net; s=20230601; t=1706714229; x=1707319029;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9d6pK+oluV5IpInoW43059fRkUOQBE+4Tw5fwZZIJpI=;
- b=jcW0DyaRdu3dI0vMdGYH1Hhnku1X7YJo3lRvheSgGIlYgdLgIfM2f3V6c91W4D8inN
- gLz6cdvIl44YVsee6AsSkbjoVjD5xgj13OnIME4My9nN1GcMsHO6zUaavlaeyK2WcUPO
- UF6IZklPXhqbqNZFRW2DhaUNWCb2iPmM4C5d/FTOEghjlChlkd0E3rGllm2rVCvVBd1O
- xT8VfsO++ZAbtZsi2Gb/bxer/36tnFOA/suZp3rDIq7KXiBzbolvZEBOEla/5fnJbvbp
- A+Nrth1IOfl4GsxnpxiskqGS2ba5N5EuUzTgeA6c28ZxJNu8QE76UYTDTW+yvO/d3JYN
- +8xQ==
-X-Gm-Message-State: AOJu0Yzly9L6slxJ0+npCynjCdFBcwtqMVpR5abxdEKXCwBQe1OdRzle
- YFBKDxnFFUI+p/1tVR2B2sR9nwrQ4v80LpkTxnqIe1iQ87QdNrPv3amcJGBCeSD2dAwnrBgg7CJ
- g
-X-Google-Smtp-Source: AGHT+IFJ4C1QJSvUaXMjK7QtcZrq/XJ4ofzGOYJQwdMglcJT/IZ/h0DDMevTFGOAB8DmLSrwBnqVkA==
-X-Received: by 2002:a05:600c:3544:b0:40f:b335:fe7c with SMTP id
- i4-20020a05600c354400b0040fb335fe7cmr1470483wmq.39.1706714228657; 
- Wed, 31 Jan 2024 07:17:08 -0800 (PST)
+ bh=1K2UpMRlfHQyCWRzBdmc6/7/huOXjQDmSO+ysf6rEtw=;
+ b=ZKGBqtUw6aJOy+6WmZ1tjWJlMHvLbyxa8HKqCqJSzt2MPu/bNcusI43dD/iO7TkmS8
+ ZbtXknTxwzAZSaLCp7Jtx1/e0iIhpC8H3FF6aZYb+FSY2cpaAXbA/r2o9ooPp9zVQZC2
+ dOpQRiqB8xZr17/3ZGoJ6cg1wq4tlG4wvqHGdr5KH/sWuOm2Vupp3p5Er6X0aF5umP6y
+ Zteg5NXlDTmGuJ83ee02T0xKqGLTKhAHzhHOanUdd3Cclrqq43w8PbXkAskpZAV6jxW1
+ 7uuEiDUiNbQdKmSrhOmDfXbgSG3fQ04SgOHD9/8UJbvVEf4ns6S4nFl7Npw47ddjTGJT
+ 3K+A==
+X-Gm-Message-State: AOJu0Yw//U5jkgUOejrJii1SEcyrJLUmEkJEhZZWwk3Ra7MG4q2lG95i
+ HxYCyRaKdGEix4OlmeONFMp5UpasTJfuYZ8+UmJ+sP2NFLlCs0g9QAwdt4EEmrdOp4sVSb5Pbln
+ 9
+X-Google-Smtp-Source: AGHT+IE+JNvjGmsk6qsnzZz4Cyc84RnOLxAK8VjBZq89HW1Mj5X431NpftRgALTPmQXFSVc0KHm4iw==
+X-Received: by 2002:adf:fdd2:0:b0:33a:e504:9fe0 with SMTP id
+ i18-20020adffdd2000000b0033ae5049fe0mr1226186wrs.64.1706714229718; 
+ Wed, 31 Jan 2024 07:17:09 -0800 (PST)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
  en6-20020a056000420600b0033ae5b637d4sm11109031wrb.35.2024.01.31.07.17.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jan 2024 07:17:08 -0800 (PST)
+ Wed, 31 Jan 2024 07:17:09 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Wed, 31 Jan 2024 15:17:00 +0000
-Subject: [PATCH 08/13] serial: msm-geni: support livetree
+Date: Wed, 31 Jan 2024 15:17:01 +0000
+Subject: [PATCH 09/13] mach-snapdragon: fixup USB nodes
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240131-b4-qcom-livetree-v1-8-4071c0787db0@linaro.org>
+Message-Id: <20240131-b4-qcom-livetree-v1-9-4071c0787db0@linaro.org>
 References: <20240131-b4-qcom-livetree-v1-0-4071c0787db0@linaro.org>
 In-Reply-To: <20240131-b4-qcom-livetree-v1-0-4071c0787db0@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -80,13 +80,13 @@ To: Tom Rini <trini@konsulko.com>,
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1030;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4114;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=kxKkRT67ZfSHqA1UC4TLHGzsRNTPg9F90ko30AeYXqo=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtRdKTm5BtZ/fkvfmTPl6veP4dwJF3aErxcovjDxdn/xA
- velBseWdpSyMAhyMMiKKbKIn1hm2bT2sr3G9gUXYOawMoEMYeDiFICJ6CYw/M96snFaVtT73DQn
- W6dZhc9Xqd2wnnNc18n7bP7l19/C0lUZ/lkruOxc+sg83bhvttT7DwGJd6tm/Jq268ero/bV97l
- mndcFAA==
+ bh=nFJ1Rg1PfcJyJ/579wdX+LmX63sts5GorAFhcmezZ2Y=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtRdKTn5NTutNO+1rQhI/9BV0Wx/tW3PRguDBCGFWrHch
+ 3s/qal1lLIwCHIwyIopsoifWGbZtPayvcb2BRdg5rAygQxh4OIUgIlICjH8L2ZnXu7nlnbWUCzA
+ 5+/BTXrr9XlsWT3/dt0QsWEuL5x3l5GhIfr9oU85cxXW6nxatKGgMPhM7UedHNPipeVSJRdXGib
+ wAwA=
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -105,39 +105,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When using OF_LIVE, the debug UART driver won't be probed if it's a
-subnode of the geni-se-qup controller. Add a NOP driver for the
-controller to correctly discover its child nodes.
+We don't support USB super-speed in U-Boot yet, we lack the SS PHY
+drivers, however from my testing even with a PHY driver there seem to be
+other issues when talking to super-speed peripherals.
+
+In pursuit of maintaining upstream DT compatibility, and simplifying
+porting for new devices, let's implement the DT fixups necessary to
+configure USB in high-speed only mode at runtime. The pattern is
+identical for all Qualcomm boards that use the Synaptics DWC3
+controller:
+
+* Add an additional property on the Qualcomm wrapper node
+* Remove the super-speed phy phandle and phy-name entries.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/serial/serial_msm_geni.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ arch/arm/mach-snapdragon/board.c | 88 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 88 insertions(+)
 
-diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
-index e5c3dcffc1c6..6455b0fff63c 100644
---- a/drivers/serial/serial_msm_geni.c
-+++ b/drivers/serial/serial_msm_geni.c
-@@ -606,6 +606,19 @@ U_BOOT_DRIVER(serial_msm_geni) = {
- 	.flags = DM_FLAG_PRE_RELOC,
- };
+diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+index ca300dc843a9..44925e369d8e 100644
+--- a/arch/arm/mach-snapdragon/board.c
++++ b/arch/arm/mach-snapdragon/board.c
+@@ -146,6 +146,93 @@ int board_usb_init(int index, enum usb_init_type init)
+ 	return 0;
+ }
  
-+static const struct udevice_id geniqup_ids[] = {
-+	{ .compatible = "qcom,geni-se-qup" },
-+	{ }
-+};
++/* U-Boot only supports USB high-speed mode on Qualcomm platforms with DWC3
++ * USB controllers. Rather than requiring source level DT changes, we fix up
++ * DT here. This improves compatibility with upstream DT and simplifies the
++ * porting process for new devices.
++ */
++#if CONFIG_IS_ENABLED(OF_LIVE)
++static int fixup_qcom_dwc3(struct device_node *glue_np)
++{
++	struct device_node *dwc3;
++	int ret, len, hsphy_idx = 1;
++	const __be32 *phandles;
++	const char *second_phy_name;
 +
-+U_BOOT_DRIVER(geni_se_qup) = {
-+	.name = "geni-se-qup",
-+	.id = UCLASS_NOP,
-+	.of_match = geniqup_ids,
-+	.bind = dm_scan_fdt_dev,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
++	debug("Fixing up %s\n", glue_np->name);
 +
- #ifdef CONFIG_DEBUG_UART_MSM_GENI
- 
- static struct msm_serial_data init_serial_data = {
++	/* Tell the glue driver to configure the wrapper for high-speed only operation */
++	ret = of_write_prop(glue_np, "qcom,select-utmi-as-pipe-clk", NULL, 0);
++	if (ret) {
++		log_err("Failed to add property 'qcom,select-utmi-as-pipe-clk': %d\n", ret);
++		return ret;
++	}
++
++	/* Find the DWC3 node itself */
++	dwc3 = of_find_compatible_node(glue_np, NULL, "snps,dwc3");
++	if (!dwc3) {
++		log_err("Failed to find dwc3 node\n");
++		return -ENOENT;
++	}
++
++	phandles = of_get_property(dwc3, "phys", &len);
++	len /= sizeof(*phandles);
++	if (len == 1) {
++		log_debug("Only one phy, not a superspeed controller\n");
++		return 0;
++	}
++
++	/* Figure out if the superspeed phy is present and if so then which phy is it? */
++	ret = of_property_read_string_index(dwc3, "phy-names", 1, &second_phy_name);
++	if (ret == -ENODATA) {
++		log_debug("Only one phy, not a super-speed controller\n");
++		return 0;
++	} else if (ret) {
++		log_err("Failed to read second phy name: %d\n", ret);
++		return ret;
++	}
++
++	if (!strncmp("usb3-phy", second_phy_name, strlen("usb3-phy"))) {
++		log_debug("Second phy isn't superspeed (is '%s') assuming first phy is SS\n",
++			  second_phy_name);
++		hsphy_idx = 0;
++	}
++
++	/* Overwrite the "phys" property to only contain the high-speed phy */
++	ret = of_write_prop(dwc3, "phys", sizeof(*phandles), phandles + hsphy_idx);
++	if (ret) {
++		log_err("Failed to overwrite 'phys' property: %d\n", ret);
++		return ret;
++	}
++
++	/* Overwrite "phy-names" to only contain a single entry */
++	ret = of_write_prop(dwc3, "phy-names", strlen("usb2-phy"), "usb2-phy");
++	if (ret) {
++		log_err("Failed to overwrite 'phy-names' property: %d\n", ret);
++		return ret;
++	}
++
++	return 0;
++}
++
++static void fixup_usb_nodes(void)
++{
++	struct device_node *glue_np = NULL;
++	int ret;
++
++	while ((glue_np = of_find_compatible_node(glue_np, NULL, "qcom,dwc3"))) {
++		ret = fixup_qcom_dwc3(glue_np);
++		if (ret)
++			log_warning("Failed to fixup node %s: %d\n", glue_np->name, ret);
++	}
++}
++#else
++static void fixup_usb_nodes(void)
++{
++	log_debug("Unable to dynamically fixup USB nodes, please enable CONFIG_OF_LIVE\n");
++}
++#endif
++
+ /*
+  * Some boards still need board specific init code, they can implement that by
+  * overriding this function.
+@@ -159,6 +246,7 @@ void __weak qcom_board_init(void)
+ int board_init(void)
+ {
+ 	show_psci_version();
++	fixup_usb_nodes();
+ 	qcom_board_init();
+ 	return 0;
+ }
 
 -- 
 2.43.0
