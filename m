@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B306BC47258
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 11:13:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8369BC47258
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 11:13:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC1F987C46;
-	Wed, 31 Jan 2024 12:12:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4044D876F4;
+	Wed, 31 Jan 2024 12:12:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="L7i3Z2Qd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QDukzsUH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A56688785E; Wed, 31 Jan 2024 12:12:46 +0100 (CET)
-Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
- [IPv6:2607:f8b0:4864:20::534])
+ id 0A5EE8746C; Wed, 31 Jan 2024 12:12:51 +0100 (CET)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8288B87B5D
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 12:12:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A64B987C39
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 12:12:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=o451686892@gmail.com
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-5d8bc1caf00so3160817a12.1
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 03:12:44 -0800 (PST)
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-59a8ee08c23so253270eaf.2
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 03:12:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706699563; x=1707304363; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1706699566; x=1707304366; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=aW+wjG9PWWLR8L3CEL3R1/dz5QwV89p/ESCCJ1sEK8Q=;
- b=L7i3Z2QdxMbpdCm3wT5ew16vzXqIhhsg+01gSCgc6arp5twUYp4uYmLLPO9uJhMqXR
- AZ3sMhYF76X0JSaQGMr1axLOi8TBijjGollAVov7o4119Pjax9o9Qla2RV86JoU9ykvz
- U6khEEVp416z1TvZoQVhwT7fIloDwiIdj/wOo39KtY575EDIwMLOxwt7LLtiqKkvt+fv
- P8dv/vxbbFlY2fqi+Da3HpOlAi+tfR5o9jjLovWeEWfEK207QJJBblrUesBZMPdeOhE5
- 6IGMCldA9rsQktqzn/thVxzkuVXU2R/0RVFvNDX2ZYItgkOeqgoFG6uIFDpBuEtSfyMU
- ZUew==
+ :reply-to; bh=kciYJNZYjKPX3+jaEJgC81JS0GkYBkCy5iTG5hyXqpA=;
+ b=QDukzsUHLwwGm9xpbiASyzssk9u6yEPUglilD3pUM5TcbM+hT+384Jrr+6OTLJPyjw
+ Q7quJKcNQRiQX282Uk5EFyzgtTZPemjjFPh8MCUVhPIpk52uYRxv1F1Ay+cjt8QYvRLy
+ kee2lR7SI3m5EwRtcovZPrNDur2xskp/O+Dx4FclLiS93DbQc9nFlSw8pHMRu5g2LIk8
+ 5HOwhRuM0/Ucymev0jcgeGTTDsQ5C2FUiW6gZu8EHqgE2FMKZplHCjLRAYso4TGMAomc
+ tWbHIfrZnniWYgH+hUEZQwfBxZKgd5xbfLjLjlDizrn19SjSGSZubr8yz8+5uUrXq22C
+ R3lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706699563; x=1707304363;
+ d=1e100.net; s=20230601; t=1706699566; x=1707304366;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aW+wjG9PWWLR8L3CEL3R1/dz5QwV89p/ESCCJ1sEK8Q=;
- b=DZZ5ZbUoNTAql6wIp7kYGgX4SlHIimJhxMciR+vYP/vhfezKvb+agevcXHUKPrVSz+
- 4JUqXBh/N4p8e88Qx6SckmfvTrWZCRLytyVbKY0PlQAXeJEnaoD0zawrXOngQ5nvUhn5
- swq2ydLuYIlFjxZ+bzfgNJXeoqNgMQAIiFx44GrZ0tY2LePx0UoB8uadf84G6aNLqbgL
- wugVgYEjO2F6DrMjVQIY4+cSRP3MXouXHnR8IELVPahLKueR3Ux5wudX+mmgrIhwQyo3
- K+NAscI+B7WGqRFszXjB9Af7keSgy9GeceBp3vg2PyZ7gFO9lBzFglEKCGQknpZHCRZL
- VmiQ==
-X-Gm-Message-State: AOJu0Ywxq1vfUgCFmovuHuEm2uiZlur6IicWNA6Y0onjLjT4bYDefFCD
- I0H1wb6iMBA+vhiR1RRaybkmvUhgFl/b3VuEIprkELu8WsNI6VYf
-X-Google-Smtp-Source: AGHT+IE0Sx1I5/eHF57EriN41BB+FfRY0K/1Xa4nuWKQZiBhKkCRbqiohjSmBjNS8jcJilwDBSW7mA==
-X-Received: by 2002:a05:6a20:5d89:b0:19c:9a25:bdea with SMTP id
- km9-20020a056a205d8900b0019c9a25bdeamr997627pzb.59.1706699562184; 
- Wed, 31 Jan 2024 03:12:42 -0800 (PST)
+ bh=kciYJNZYjKPX3+jaEJgC81JS0GkYBkCy5iTG5hyXqpA=;
+ b=AmYV9DfJXWK5S/nyeCfJu7JUOu0eX2gT83GyIZtN98JbgBGaT4jqz8OMtQhX0kOxhJ
+ 42NY4lqLnjrbkS5EVWjJWfk7DFUsVNHoDb4TvjRcCcIcFaaJ9HkqcELrnWHVn+/MjKWQ
+ bSx3/s0Atav8pwCbaAgl0crg4dTMG7GDRu01gzoMbeJBMCor2ceRm/onbpw5f3UaeyhQ
+ iywEnMH6bIATqItSYj22o95KntncF+I7tUif6nPdwo6UOcVFGwr+nK2RAbCN0jEnhRKJ
+ Ey9JRQYSdZ/G/5Suf7HXXNBfCit0vKQSkgOiokqzfSd7RxI5eWRDYV5FIbCVUXieAnn0
+ BOzg==
+X-Gm-Message-State: AOJu0YwS4gXnrDs14vftGuKs/VjtCt3kqHOKt/wrC/CN79OaWuDQcmB8
+ 4S156Bepi7bPr7vVbOZiDNnA9nKxBzeS8VioC7C8zKSFZYSO5tXz
+X-Google-Smtp-Source: AGHT+IGPqfozzQkwGQhzCxIDCdS6pSGj3d9tzsgub5gssOy+JJn6UGG5pd0u8/rPgevUYE3ugJL6PA==
+X-Received: by 2002:a05:6358:6a56:b0:176:cf6d:20a6 with SMTP id
+ c22-20020a0563586a5600b00176cf6d20a6mr1049217rwh.19.1706699565272; 
+ Wed, 31 Jan 2024 03:12:45 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCXfFRkvMJUusymNfURTa6qnsi3qhTRt+YUNXiyn1W3aBvS5Rcsa/Nsmlk4BU50OEgeNo/fXGR902ZQgYSng2WoDFg/e/HqE1U3rURhJYa5kZisWVdWynru5RsUUEf5Zty+/DypZJ9UXpt7ZeZyxdJ9waSwPNg92I9LvJvvd3Witg8ZZn0WBn2Mh/aCXaqJO+t6FVl5MQa12jhDGZNoNr3+Tp1jeasHHi8ZAuscdSLiXSSksacqJvK7LfGUElzJCPsY3tjJIr2ZWlKtfiHVBSQNcvbcvKXjsOtYL1ZD0VrOPd7eb1dOjyk9gSfFNP+6FC7efdeiaQ6TYIwsstw==
+ AJvYcCUK7eC28Lg1R9eIIR7czTqikIIp6rlAsPH3hx1cB2a6Ti0xiD2HxWYtGFeMJii0SrolBgfdIYqQQHqe15CiAm3T66HC9i3hxUbqKLmg4gZUFbgk1CmCXZBkqzPWTQvGt0zObeCv8iNulYuEp9ehwgC6jbmHmTlyaJtKXmtnYi2gW6Vy8OYYG8Q1pFTeTVSZy1EDXzVivWEGyNXtBiLpgGH0Ud1MC1SQ2tcb8SMXH+G7cDtxMNqGa5eiLBkoLI5DXbc7Vi/k029RHa+83bbrJuEjTM3At7QDHGL5vgZi3qWQ68/LUUlAN7H2zJ4vXTiZmyaPzHc4Xmk5W+glCg==
 Received: from ownia.localdomain ([8.210.91.195])
  by smtp.gmail.com with ESMTPSA id
- m1-20020a62f201000000b006ddc03c425bsm9535007pfh.180.2024.01.31.03.12.39
+ m1-20020a62f201000000b006ddc03c425bsm9535007pfh.180.2024.01.31.03.12.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jan 2024 03:12:41 -0800 (PST)
+ Wed, 31 Jan 2024 03:12:44 -0800 (PST)
 From: Weizhao Ouyang <o451686892@gmail.com>
 To: Sughosh Ganu <sughosh.ganu@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
@@ -73,9 +73,9 @@ To: Sughosh Ganu <sughosh.ganu@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jens Wiklander <jens.wiklander@linaro.org>,
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 2/3] driver: rng: Fix SMCCC TRNG crash
-Date: Wed, 31 Jan 2024 11:12:16 +0000
-Message-Id: <20240131111217.30124-3-o451686892@gmail.com>
+Subject: [PATCH v2 3/3] cmd: rng: Add rng list command
+Date: Wed, 31 Jan 2024 11:12:17 +0000
+Message-Id: <20240131111217.30124-4-o451686892@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240131111217.30124-1-o451686892@gmail.com>
 References: <20240131111217.30124-1-o451686892@gmail.com>
@@ -97,28 +97,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix a SMCCC TRNG null pointer crash due to a failed smccc feature
-binding.
+The 'rng list' command probes all RNG devices and list those devices
+that are successfully probed. Also update the help info.
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
 ---
- drivers/rng/smccc_trng.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+v2: update commit message and rng help info
+---
+ cmd/rng.c | 23 ++++++++++++++++++-----
+ 1 file changed, 18 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/rng/smccc_trng.c b/drivers/rng/smccc_trng.c
-index 3a4bb33941..3087cb991a 100644
---- a/drivers/rng/smccc_trng.c
-+++ b/drivers/rng/smccc_trng.c
-@@ -166,7 +166,7 @@ static int smccc_trng_probe(struct udevice *dev)
- 	struct smccc_trng_priv *priv = dev_get_priv(dev);
- 	struct arm_smccc_res res;
+diff --git a/cmd/rng.c b/cmd/rng.c
+index 52f722c7af..b073a6c849 100644
+--- a/cmd/rng.c
++++ b/cmd/rng.c
+@@ -19,6 +19,22 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	struct udevice *dev;
+ 	int ret = CMD_RET_SUCCESS;
  
--	if (!(smccc_trng_is_supported(smccc->invoke_fn)))
-+	if (!smccc || !(smccc_trng_is_supported(smccc->invoke_fn)))
- 		return -ENODEV;
++	if (argc == 2 && !strcmp(argv[1], "list")) {
++		int idx = 0;
++
++		uclass_foreach_dev_probe(UCLASS_RNG, dev) {
++			idx++;
++			printf("RNG #%d - %s\n", dev->seq_, dev->name);
++		}
++
++		if (!idx) {
++			log_err("No RNG device\n");
++			return CMD_RET_FAILURE;
++		}
++
++		return CMD_RET_SUCCESS;
++	}
++
+ 	switch (argc) {
+ 	case 1:
+ 		devnum = 0;
+@@ -56,12 +72,9 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	return ret;
+ }
  
- 	/* At least one of 64bit and 32bit interfaces is available */
+-U_BOOT_LONGHELP(rng,
+-	"[dev [n]]\n"
+-	"  - print n random bytes(max 64) read from dev\n");
+-
+ U_BOOT_CMD(
+ 	rng, 3, 0, do_rng,
+ 	"print bytes from the hardware random number generator",
+-	rng_help_text
++	"list         - list all the probed rng devices\n"
++	"rng [dev] [n]    - print n random bytes(max 64) read from dev\n"
+ );
 -- 
 2.39.2
 
