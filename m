@@ -4,51 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5822EC47DB3
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 13:34:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34F60C47258
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 13:34:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36DAE87CE9;
-	Wed, 31 Jan 2024 14:34:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id A558187CFE;
+	Wed, 31 Jan 2024 14:34:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="bQjYMSzO";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ASsGbx3P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DAD887C39; Wed, 31 Jan 2024 14:34:06 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id AD53087C68; Wed, 31 Jan 2024 14:34:17 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64AF087CE9
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 14:34:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B006A87CFE
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 14:34:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 29F1461769;
- Wed, 31 Jan 2024 13:34:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C8D2DC433B1;
- Wed, 31 Jan 2024 13:34:00 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTP id 04500CE20BE;
+ Wed, 31 Jan 2024 13:34:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 48EC1C433F1;
+ Wed, 31 Jan 2024 13:33:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1706708042;
- bh=yeH/71lmv8PvqvHk15MdyBdXQ4aHXKUziEDWcD69Kec=;
+ s=k20201202; t=1706708040;
+ bh=Hg1axtO9FWU1mvKW/soqsr2Vi6KeYNXKyqqXhlJ8JKU=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=bQjYMSzOpuD1kKqM4TnCco28flwmoRMUWjaabjEkIQVm0Di5li7cGhABnIGBcDyBZ
- AIpZ2ABvDv6m7k7yZxJysswaYCNN6o8yODd47d2c2fs6c00guFlC9/K5ke44bbWbow
- 1HDXMeqCKu8TexmQ1aieUOiwahLjLr49lvnI7S3s8M0BgaVfJj1zqGtanpVzeahuz7
- Y0JH4wEu/9pFrs4L0+hBKxYy1YjM4RrH/L/YnpkMQ8OKm+L62wJbkyOLbjsFWYHqFE
- Pk5aWtWafYm7JTUM4gE9muSQAT0c3REH7Wv1DRxOO3RSDXt8qsB4ZEOmG3vOp2OS7O
- fBi/Adp1j3m6Q==
+ b=ASsGbx3PDddcydAL46UrMhcCem/SXbRCFSnqWXtEsvX+Fme20nbNCgrw0Xydeq1Fd
+ 72J7oLVWwveItDAbMq+tJajYvNqo7dq5f+8TOilAZvBZoBGahKndPzMqhIqLz/dWkn
+ a/8I+/PR7rirBg74fvewctQ/Ep/036K22fMubdAS4eB51mt2r7o+MZhrCr1+lROXw6
+ qEqnqZFWEl0vO0jKHeaEnIYJrpYvKQNxxNlsnP1ObYaFoH9sy8HqeQjOaRa2olgLke
+ hAr5xrf1esvcZ5xywDcuO5/d/VRIEp/bSJnrikQkl/LCV0zBDIB8vEsD251gsGgMDb
+ crvd2r1f+HW/w==
 From: Roger Quadros <rogerq@kernel.org>
 To: trini@konsulko.com,
 	nm@ti.com
 Cc: vigneshr@ti.com, s-vadapalli@ti.com, srk@ti.com, r-gunasekaran@ti.com,
  u-boot@lists.denx.de, Roger Quadros <rogerq@kernel.org>
-Subject: [PATCH 3/3] arm: dts: k3-u-boot: Add missing "bootph-all" property to
- MUX nodes.
-Date: Wed, 31 Jan 2024 15:33:48 +0200
-Message-Id: <20240131133348.182987-4-rogerq@kernel.org>
+Subject: [PATCH 2/3] arm: dts: k3-u-boot: Drop usage of "u-boot, mux-autoprobe"
+Date: Wed, 31 Jan 2024 15:33:47 +0200
+Message-Id: <20240131133348.182987-3-rogerq@kernel.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240131133348.182987-1-rogerq@kernel.org>
 References: <20240131133348.182987-1-rogerq@kernel.org>
@@ -70,66 +69,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As it is present for USB and USB won't work without the MUX
-initialized correctly, add "bootph-all" property to MUX nodes.
+MUX driver should autoprobe if the device tree has "idle-states"
+property. Drop using the custom "u-boot,mux-autoprobe" property.
 
 Signed-off-by: Roger Quadros <rogerq@kernel.org>
 ---
- arch/arm/dts/k3-am642-sk-u-boot.dtsi                | 4 ++++
- arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi | 8 ++++++++
- arch/arm/dts/k3-j721e-sk-u-boot.dtsi                | 8 ++++++++
- 3 files changed, 20 insertions(+)
+ arch/arm/dts/k3-am642-sk-u-boot.dtsi                | 4 ----
+ arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi    | 2 --
+ arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi | 8 --------
+ arch/arm/dts/k3-j721e-sk-u-boot.dtsi                | 8 --------
+ 4 files changed, 22 deletions(-)
 
 diff --git a/arch/arm/dts/k3-am642-sk-u-boot.dtsi b/arch/arm/dts/k3-am642-sk-u-boot.dtsi
-index f3ed376ab7..ea200a1ee1 100644
+index 2eb227c1d0..f3ed376ab7 100644
 --- a/arch/arm/dts/k3-am642-sk-u-boot.dtsi
 +++ b/arch/arm/dts/k3-am642-sk-u-boot.dtsi
-@@ -184,6 +184,10 @@
+@@ -184,10 +184,6 @@
  	bootph-all;
  };
  
-+&serdes_ln_ctrl {
-+	bootph-all;
-+};
-+
+-&serdes_ln_ctrl {
+-	u-boot,mux-autoprobe;
+-};
+-
  &usbss0 {
  	bootph-all;
  };
+diff --git a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
+index 017a5a722e..f83caf7998 100644
+--- a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
++++ b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
+@@ -165,7 +165,6 @@
+ 
+ &serdes_ln_ctrl {
+ 	bootph-all;
+-	u-boot,mux-autoprobe;
+ };
+ 
+ &serdes2_usb_link {
+@@ -174,7 +173,6 @@
+ 
+ &usb_serdes_mux {
+ 	bootph-all;
+-	u-boot,mux-autoprobe;
+ };
+ 
+ &serdes_wiz2 {
 diff --git a/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi b/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi
-index b77f8d92de..9433f3bafa 100644
+index 7ae7cf3d4c..b77f8d92de 100644
 --- a/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi
 +++ b/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi
-@@ -93,6 +93,14 @@
+@@ -93,14 +93,6 @@
  	bootph-all;
  };
  
-+&serdes_ln_ctrl {
-+	bootph-all;
-+};
-+
-+&usb_serdes_mux {
-+	bootph-all;
-+};
-+
+-&serdes_ln_ctrl {
+-	u-boot,mux-autoprobe;
+-};
+-
+-&usb_serdes_mux {
+-	u-boot,mux-autoprobe;
+-};
+-
  &main_usbss0_pins_default {
  	bootph-all;
  };
 diff --git a/arch/arm/dts/k3-j721e-sk-u-boot.dtsi b/arch/arm/dts/k3-j721e-sk-u-boot.dtsi
-index 370fe5190b..fff447094a 100644
+index 479b7bcd6f..370fe5190b 100644
 --- a/arch/arm/dts/k3-j721e-sk-u-boot.dtsi
 +++ b/arch/arm/dts/k3-j721e-sk-u-boot.dtsi
-@@ -89,6 +89,14 @@
+@@ -89,14 +89,6 @@
  	bootph-all;
  };
  
-+&serdes_ln_ctrl {
-+	bootph-all;
-+};
-+
-+&usb_serdes_mux {
-+	bootph-all;
-+};
-+
+-&serdes_ln_ctrl {
+-	u-boot,mux-autoprobe;
+-};
+-
+-&usb_serdes_mux {
+-	u-boot,mux-autoprobe;
+-};
+-
  &main_usbss0_pins_default {
  	bootph-all;
  };
