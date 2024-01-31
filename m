@@ -4,80 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22535C47258
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 22:03:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE84CC47DB3
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jan 2024 22:07:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24BBA87626;
-	Wed, 31 Jan 2024 23:03:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id D181A87889;
+	Wed, 31 Jan 2024 23:07:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="dRI/oedf";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ESKH1zOL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B65A787626; Wed, 31 Jan 2024 23:03:16 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
+ id 6C7F687776; Wed, 31 Jan 2024 23:07:35 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14D7D8760D
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 23:03:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 503738760D
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 23:07:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id BE9BCCE234C
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 22:03:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 09BD5C43390
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 22:03:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1706738591;
- bh=NrURalmEDB8QSQaNJAOtpDGB0/SdbPwjFYWSRsBH0cI=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=dRI/oedfprzgFEjtY+K8niKUu65BM91eAEORQdc6+vijISBASpkMqvFKXuI0sw6Tn
- VxI4zcAP9QrbPWr6lCnOb6YGL8BacDxujq7faSXrIHsp3KKI8Q9p5WPuqZzNJoI3ND
- WoQ6BziisWWI3lbnIqdeePrfBh2E4kfAJ1FW2ho7EZ80ka1Xlxj+pU74n4o/jUwR10
- D2678IDi9bGEzOm2pshQlXIZdm19swPmjrHIzieAg6cbJTlOE4eMw+yutHmz4mo3Sa
- fIkVCioFMGRah9Gpy1g6mWRgKYPt8DBXL6OgoHdYmDV+ZykOGJ3Ox3CRkvs93RxQdz
- HkcTwF9b0RtXQ==
-Received: by mail-lj1-f177.google.com with SMTP id
- 38308e7fff4ca-2cf5917f049so3987021fa.2
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 14:03:10 -0800 (PST)
-X-Gm-Message-State: AOJu0YzEvHixv6fBVeYbx5h/7sxBgiRshd5cW76gymS1DAQ+tReMnG36
- t8vjdtUguzRbyBFyzxyZEToJ+Mput08JHmako2j/+Nz6PN3V+UHLi5c9c64AzKOZRBw/s+Ch4hr
- OJWmHIRPKmQQz3TNdCOHQZWQMgA==
-X-Google-Smtp-Source: AGHT+IGN+6UIGTC1ipujzA/GBue9J6kFeYE1znoIhCLxcIkIvfGo7/NaxtZgSn087dBm68j+dW+OGSQohBpvVyM70us=
-X-Received: by 2002:a2e:87c4:0:b0:2cc:d3b4:18f2 with SMTP id
- v4-20020a2e87c4000000b002ccd3b418f2mr2175581ljj.41.1706738589193; Wed, 31 Jan
- 2024 14:03:09 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=8890=JK=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1706738842;
+ bh=AzFolPQgZKJMEQCUvjVO5ELZK5Qi6Wx2mYhCNcyU8BI=;
+ b=ESKH1zOLbHJtf4o2cmf1TQHmfmqRL1vkkP+XUsOgM0KPzGPHqtpFJNcdy+7J/21gYnNIsfCPP
+ D1TruNXj+utWRpI+XrH+FD/7+TK+RVXnare5qxMKgqJsDGyhOCjmz36mGyqs+ZIdkNzRW8yOvlb
+ LoGgkh6NbNifVwMQnJ2w3nKuVO/dQdU/GXprQGHSU62THLhfumXX5u/V1QShawZg+1aHLnxNjL4
+ 3+/8MHur9lvPnnaQuWtWzAlAfLAkL8viQbBu3CrujbPZdKthyDeOEICuZajo1nLthKh9wGyMLsE
+ jlaPUG8FHEH3FPekmHD0bQWcFrf4sHctiURGGLLzXvGQ==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Jonas Karlman <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] rockchip: rk3568-generic: Enable eMMC HS200 mode
+Date: Wed, 31 Jan 2024 22:07:14 +0000
+Message-ID: <20240131220716.117135-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20231202035511.487946-1-sjg@chromium.org>
- <20231202035511.487946-3-sjg@chromium.org>
- <20231213121353.GA31326@willie-the-truck>
- <CAFLszTjfmSx1YMqzb2TsQf7sP4KrcQB=X7DY_HxRQp0J5HAppQ@mail.gmail.com>
- <CAK7LNAQRCDC03e=TVO=k4FuD2a2RdTy7yLr3UptQjVCX7pM1CA@mail.gmail.com>
- <20240109143349.GR1610741@bill-the-cat>
- <CAFLszTjwhy24UiT6kUJABMC1Xn0h9Q1q9fYpZZJg9DX8Vss9cA@mail.gmail.com>
- <CAFLszTjPAHd6RdO1mvatXC=yRS+h=sgJ_pMdyEnkROTx7yRpog@mail.gmail.com>
- <CAK7LNARsY6-rrx=sNFq6oFqpqf0s5S_=3DrUsCOS7zF0BXcoTg@mail.gmail.com>
-In-Reply-To: <CAK7LNARsY6-rrx=sNFq6oFqpqf0s5S_=3DrUsCOS7zF0BXcoTg@mail.gmail.com>
-From: Rob Herring <robh@kernel.org>
-Date: Wed, 31 Jan 2024 16:02:56 -0600
-X-Gmail-Original-Message-ID: <CAL_JsqLYB0D5wAfedsb6tQp4EmD1AROgxiCncwO7gvA2p1C6Lg@mail.gmail.com>
-Message-ID: <CAL_JsqLYB0D5wAfedsb6tQp4EmD1AROgxiCncwO7gvA2p1C6Lg@mail.gmail.com>
-Subject: Re: [PATCH v9 2/2] arm64: boot: Support Flat Image Tree
-To: Masahiro Yamada <masahiroy@kernel.org>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Will Deacon <will@kernel.org>, 
- linux-arm-kernel@lists.infradead.org, Ahmad Fatoum <a.fatoum@pengutronix.de>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Nicolas Schier <nicolas@fjasle.eu>,
- Catalin Marinas <catalin.marinas@arm.com>, Jonathan Corbet <corbet@lwn.net>, 
- Nathan Chancellor <nathan@kernel.org>, Nick Terrell <terrelln@fb.com>,
- linux-doc@vger.kernel.org, 
- linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org, 
- workflows@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 65bac49aa5651f9f845fb2e6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,212 +68,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jan 30, 2024 at 3:16=E2=80=AFAM Masahiro Yamada <masahiroy@kernel.o=
-rg> wrote:
->
-> On Fri, Jan 26, 2024 at 1:04=E2=80=AFAM Simon Glass <sjg@chromium.org> wr=
-ote:
-> >
-> > Hi,
-> >
-> > On Wed, 17 Jan 2024 at 06:14, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Masahiro, Tom,
-> > >
-> > > On Tue, 9 Jan 2024 at 07:33, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Tue, Jan 09, 2024 at 11:01:42PM +0900, Masahiro Yamada wrote:
-> > > > > Hi Simon,
-> > > > >
-> > > > >
-> > > > > On Wed, Jan 3, 2024 at 8:47=E2=80=AFAM Simon Glass <sjg@chromium.=
-org> wrote:
-> > > > > >
-> > > > > > Hi Masahiro,
-> > > > > >
-> > > > > > On Wed, Dec 13, 2023 at 5:14=E2=80=AFAM Will Deacon <will@kerne=
-l.org> wrote:
-> > > > > > >
-> > > > > > > On Fri, Dec 01, 2023 at 08:54:42PM -0700, Simon Glass wrote:
-> > > > > > > > Add a script which produces a Flat Image Tree (FIT), a sing=
-le file
-> > > > > > > > containing the built kernel and associated devicetree files=
-.
-> > > > > > > > Compression defaults to gzip which gives a good balance of =
-size and
-> > > > > > > > performance.
-> > > > > > > >
-> > > > > > > > The files compress from about 86MB to 24MB using this appro=
-ach.
-> > > > > > > >
-> > > > > > > > The FIT can be used by bootloaders which support it, such a=
-s U-Boot
-> > > > > > > > and Linuxboot. It permits automatic selection of the correc=
-t
-> > > > > > > > devicetree, matching the compatible string of the running b=
-oard with
-> > > > > > > > the closest compatible string in the FIT. There is no need =
-for
-> > > > > > > > filenames or other workarounds.
-> > > > > > > >
-> > > > > > > > Add a 'make image.fit' build target for arm64, as well. Use
-> > > > > > > > FIT_COMPRESSION to select a different algorithm.
-> > > > > > > >
-> > > > > > > > The FIT can be examined using 'dumpimage -l'.
-> > > > > > > >
-> > > > > > > > This features requires pylibfdt (use 'pip install libfdt').=
- It also
-> > > > > > > > requires compression utilities for the algorithm being used=
-. Supported
-> > > > > > > > compression options are the same as the Image.xxx files. Fo=
-r now there
-> > > > > > > > is no way to change the compression other than by editing t=
-he rule for
-> > > > > > > > $(obj)/image.fit
-> > > > > > > >
-> > > > > > > > While FIT supports a ramdisk / initrd, no attempt is made t=
-o support
-> > > > > > > > this here, since it must be built separately from the Linux=
- build.
-> > > > > > > >
-> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > ---
-> > > > > > > >
-> > > > > > > > Changes in v9:
-> > > > > > > > - Move the compression control into Makefile.lib
-> > > > > > > >
-> > > > > > > > Changes in v8:
-> > > > > > > > - Drop compatible string in FDT node
-> > > > > > > > - Correct sorting of MAINTAINERS to before ARM64 PORT
-> > > > > > > > - Turn compress part of the make_fit.py comment in to a sen=
-tence
-> > > > > > > > - Add two blank lines before parse_args() and setup_fit()
-> > > > > > > > - Use 'image.fit: dtbs' instead of BUILD_DTBS var
-> > > > > > > > - Use '$(<D)/dts' instead of '$(dir $<)dts'
-> > > > > > > > - Add 'mkimage' details Documentation/process/changes.rst
-> > > > > > > > - Allow changing the compression used
-> > > > > > > > - Tweak cover letter since there is only one clean-up patch
-> > > > > > > >
-> > > > > > > > Changes in v7:
-> > > > > > > > - Add Image as a dependency of image.fit
-> > > > > > > > - Drop kbuild tag
-> > > > > > > > - Add dependency on dtbs
-> > > > > > > > - Drop unnecessary path separator for dtbs
-> > > > > > > > - Rebase to -next
-> > > > > > > >
-> > > > > > > > Changes in v5:
-> > > > > > > > - Drop patch previously applied
-> > > > > > > > - Correct compression rule which was broken in v4
-> > > > > > > >
-> > > > > > > > Changes in v4:
-> > > > > > > > - Use single quotes for UIMAGE_NAME
-> > > > > > > >
-> > > > > > > > Changes in v3:
-> > > > > > > > - Drop temporary file image.itk
-> > > > > > > > - Drop patch 'Use double quotes for image name'
-> > > > > > > > - Drop double quotes in use of UIMAGE_NAME
-> > > > > > > > - Drop unnecessary CONFIG_EFI_ZBOOT condition for help
-> > > > > > > > - Avoid hard-coding "arm64" for the DT architecture
-> > > > > > > >
-> > > > > > > > Changes in v2:
-> > > > > > > > - Drop patch previously applied
-> > > > > > > > - Add .gitignore file
-> > > > > > > > - Move fit rule to Makefile.lib using an intermediate file
-> > > > > > > > - Drop dependency on CONFIG_EFI_ZBOOT
-> > > > > > > > - Pick up .dtb files separately from the kernel
-> > > > > > > > - Correct pylint too-many-args warning for write_kernel()
-> > > > > > > > - Include the kernel image in the file count
-> > > > > > > > - Add a pointer to the FIT spec and mention of its wide ind=
-ustry usage
-> > > > > > > > - Mention the kernel version in the FIT description
-> > > > > > > >
-> > > > > > > >  Documentation/process/changes.rst |   9 +
-> > > > > > > >  MAINTAINERS                       |   7 +
-> > > > > > > >  arch/arm64/Makefile               |   7 +-
-> > > > > > > >  arch/arm64/boot/.gitignore        |   1 +
-> > > > > > > >  arch/arm64/boot/Makefile          |   6 +-
-> > > > > > > >  scripts/Makefile.lib              |  16 ++
-> > > > > > > >  scripts/make_fit.py               | 291 ++++++++++++++++++=
-++++++++++++
-> > > > > > > >  7 files changed, 334 insertions(+), 3 deletions(-)
-> > > > > > > >  create mode 100755 scripts/make_fit.py
-> > > > > > >
-> > > > > > > I'll need Masahiro's Ack on the scripts/ changes before I can=
- take this
-> > > > > > > one.
-> > > > > >
-> > > > > > Any thoughts on this request, please?
-> > > > > >
-> > > > > > Regards,
-> > > > > > Simon
-> > > > > >
-> > > > >
-> > > > >
-> > > > >
-> > > > > As I mentioned before, I am concerned with having
-> > > > > the same "compatible" entries, with different contents,
-> > > > > as you use the "compatible" string as an ID to selecting
-> > > > > the target config node, right?
-> > > > >
-> > > > >
-> > > > >
-> > > > >
-> > > > >
-> > > > > $ fdtdump  arch/arm64/boot/image.fit
-> > > > >
-> > > > >         ...
-> > > > >
-> > > > >         conf-10 {
-> > > > >             compatible =3D "tq,am642-tqma6442l-mbax4xxl",
-> > > > > "tq,am642-tqma6442l", "ti,am642";
-> > > > >             description =3D "TQ-Systems TQMa64xxL SoM on MBax4xxL=
- carrier board";
-> > > > >             fdt =3D "fdt-10";
-> > > > >             kernel =3D "kernel";
-> > > > >         };
-> > > > >
-> > > > >         ...
-> > > > >
-> > > > >         conf-25 {
-> > > > >             compatible =3D "tq,am642-tqma6442l-mbax4xxl",
-> > > > > "tq,am642-tqma6442l", "ti,am642";
-> > > > >             description =3D "TQ-Systems TQMa64xxL SoM on MBax4xxL=
- carrier board";
-> > > > >             fdt =3D "fdt-25";
-> > > > >             kernel =3D "kernel";
-> > > > >         };
-> > > >
-> > > > I had asked Rob a while ago about if having the same compatible for=
- two
-> > > > functionally different machines is a feature, or a bug, and I don't
-> > > > think either of us fully agreed either way. I'd be leaning towards
-> > > > saying the above example is a bug in the dts files, it's just not b=
-een a
-> > > > bug people have worried about before due to (sadly) how little the
-> > > > top-level compatible has been used.
+Writing to eMMC using HS200 mode work more reliably then other modes on
+RK356x boards.
 
-I much prefer being able to use compatibles over filenames.
+Add device tree props and enable Kconfig options for eMMC HS200 mode on
+the generic RK3566/RK3568 board. Also enable the pinctrl driver in SPL
+and add missing rk3568-generic.dtb to Makefile.
 
-> > >
-> > > Yes I believe this is a bug in the files.
-> > >
-> > > What should the script do in this case? Print a warning, perhaps?
-> >
-> > Is there anything I should do here? Would a warning be helpful, or
-> > just confusing?
->
->
->
-> I do not think it is useful.
-> You would almost always get a warning, and there is no way to fix it.
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+This patch depends on the following series:
+- rockchip: rk35xx: Sync device tree with linux v6.8-rc1 [1]
+- rockchip: rk35xx: Fix writing to eMMC [2]
 
-The above case is due to overlays. Why would you have a FIT image with
-both a base tree and applied overlays?
+[1] https://patchwork.ozlabs.org/cover/1891669/
+[2] https://patchwork.ozlabs.org/cover/1891692/
+---
+ arch/arm/dts/Makefile            |  1 +
+ arch/arm/dts/rk3568-generic.dts  | 12 +++++++++++-
+ configs/generic-rk3568_defconfig |  5 ++++-
+ 3 files changed, 16 insertions(+), 2 deletions(-)
 
-In any case, maybe we need to record in dtb overlays that have been
-applied (which you asked about recently on dtc list). Not sure what
-that looks like though. Overlays have a 'top-level' compatible that we
-add in either separately or merged with the base's top-level
-compatible?
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index 50f35e3db3f0..0fcae77cefe3 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -181,6 +181,7 @@ dtb-$(CONFIG_ROCKCHIP_RK3568) += \
+ 	rk3566-soquartz-model-a.dtb \
+ 	rk3568-bpi-r2-pro.dtb \
+ 	rk3568-evb.dtb \
++	rk3568-generic.dtb \
+ 	rk3568-lubancat-2.dtb \
+ 	rk3568-nanopi-r5c.dtb \
+ 	rk3568-nanopi-r5s.dtb \
+diff --git a/arch/arm/dts/rk3568-generic.dts b/arch/arm/dts/rk3568-generic.dts
+index 1006ea55bb98..88eb1bfd2aab 100644
+--- a/arch/arm/dts/rk3568-generic.dts
++++ b/arch/arm/dts/rk3568-generic.dts
+@@ -10,7 +10,12 @@
+ 	model = "Generic RK3566/RK3568";
+ 	compatible = "rockchip,rk3568";
+ 
+-	chosen: chosen {
++	aliases {
++		mmc0 = &sdhci;
++		mmc1 = &sdmmc;
++	};
++
++	chosen {
+ 		stdout-path = "serial2:1500000n8";
+ 	};
+ };
+@@ -18,6 +23,9 @@
+ &sdhci {
+ 	bus-width = <8>;
+ 	cap-mmc-highspeed;
++	mmc-hs200-1_8v;
++	no-sd;
++	no-sdio;
+ 	non-removable;
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd>;
+@@ -28,6 +36,8 @@
+ 	bus-width = <4>;
+ 	cap-sd-highspeed;
+ 	disable-wp;
++	no-mmc;
++	no-sdio;
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&sdmmc0_bus4 &sdmmc0_clk &sdmmc0_cmd>;
+ 	status = "okay";
+diff --git a/configs/generic-rk3568_defconfig b/configs/generic-rk3568_defconfig
+index 8f0a9c8c449f..18a62b0033a0 100644
+--- a/configs/generic-rk3568_defconfig
++++ b/configs/generic-rk3568_defconfig
+@@ -42,7 +42,7 @@ CONFIG_CMD_MMC=y
+ # CONFIG_SPL_DOS_PARTITION is not set
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_LIVE=y
+-CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_SPL_REGMAP=y
+ CONFIG_SPL_SYSCON=y
+@@ -51,11 +51,14 @@ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_MISC=y
+ # CONFIG_ROCKCHIP_IODOMAIN is not set
+ CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_HS200_SUPPORT=y
++CONFIG_SPL_MMC_HS200_SUPPORT=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_SDMA=y
+ CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_SPL_PINCTRL=y
+ CONFIG_SPL_RAM=y
+ CONFIG_BAUDRATE=1500000
+ CONFIG_DEBUG_UART_SHIFT=2
+-- 
+2.43.0
 
-Rob
