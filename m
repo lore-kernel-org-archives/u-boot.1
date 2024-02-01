@@ -4,41 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E349DC47258
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 02:49:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD258C47258
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 02:50:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04F3587C45;
-	Thu,  1 Feb 2024 03:49:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 072FA87C65;
+	Thu,  1 Feb 2024 03:49:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="eEv/Mj5c";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="emTofoxE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78CD58760D; Thu,  1 Feb 2024 03:49:48 +0100 (CET)
-Received: from mail-m12795.qiye.163.com (mail-m12795.qiye.163.com
- [115.236.127.95])
+ id 6992F87C65; Thu,  1 Feb 2024 03:49:56 +0100 (CET)
+Received: from mail-m12777.qiye.163.com (mail-m12777.qiye.163.com
+ [115.236.127.77])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7610D87613
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 03:49:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 01AA487C74
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 03:49:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=eEv/Mj5czErZ0iGOrK7eB7e7RKAN+Lz5UD3mm3SxaJnmXQ9omrzsZp+wacQJ9QTMU8M4TJXLLDHx39ZfuxZt+8t68HqjVc1jOG3MAwNR0PyH3/QuyXq34jYGtZvvKkVhbxIOKxeVjYvAi5i2vJ+oAZWxt+lksMh7f9V113Z8YXA=;
+ b=emTofoxE9fL8kM2y+1Q6OGvCRL+h0mdGPGSXP20a0gsypOyFjolzhZpUZxx1PaVn9GNAbedwp88difXq7B6R6gDKZkoav+QERNLRV2uzhp57ib2Yyo0PW/AiY1pA0AEyMX+LD7fKN+0irawQb4u5SDw2t5v9AtcH0uIYMksb0AQ=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=4QRrwO6V6wdekHJEEudjVeTWiRwTpBsHEaDQVHI4+ks=;
+ bh=XDyOHWFXyWnrno07bmaY14dGouA2EKOzCsHaCqB4xmA=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id E8793900154;
- Thu,  1 Feb 2024 10:49:33 +0800 (CST)
-Message-ID: <aff0485c-6d69-4b09-af4c-515ce145c545@rock-chips.com>
-Date: Thu, 1 Feb 2024 10:49:33 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 63E209001C1;
+ Thu,  1 Feb 2024 10:49:19 +0800 (CST)
+Message-ID: <53a8002f-9459-470e-b1d1-a4743be4421a@rock-chips.com>
+Date: Thu, 1 Feb 2024 10:49:18 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 11/18] rockchip: merge misc.c into board.c
+Subject: Re: [PATCH 10/18] rockchip: theobroma-systems: ringneck: migrate to
+ rockchip_early_misc_init_r
 Content-Language: en-US
 To: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
@@ -57,20 +58,20 @@ To: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
 Cc: heiko@sntech.de, u-boot@lists.denx.de,
  Quentin Schulz <quentin.schulz@theobroma-systems.com>
 References: <20240123-jaguar-v1-0-1eec1c34953c@theobroma-systems.com>
- <20240123-jaguar-v1-11-1eec1c34953c@theobroma-systems.com>
+ <20240123-jaguar-v1-10-1eec1c34953c@theobroma-systems.com>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240123-jaguar-v1-11-1eec1c34953c@theobroma-systems.com>
+In-Reply-To: <20240123-jaguar-v1-10-1eec1c34953c@theobroma-systems.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQx1JT1YaQ05NHxkaSxgYH01VEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGhhNTFZNTk9CH0xOTklOTUNVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8d62925d9603a9kunme8793900154
+X-HM-Tid: 0a8d6292246803a9kunm63e209001c1
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MjI6Hio6EjMKFE1DPlZDIzlO
- GlEwCilVSlVKTEtNTE5OTExNSExLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSExLSDcG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MRw6PBw6DzMLGE0zUUpNIzUh
+ Oj1PCgxVSlVKTEtNTE5OTE1KTU5IVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPT0xINwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,11 +92,9 @@ X-Virus-Status: Clean
 On 2024/1/23 22:49, Quentin Schulz wrote:
 > From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 >
-> The functions aren't used anywhere else than in board.c, therefore,
-> let's not expose them anymore at all.
->
-> This merges misc.c and board.c together and removes the functions from
-> the misc.h header file.
+> Only setup_boottargets differs from the original misc_init_r from
+> Rockchip mach code, so let's use rockchip_early_misc_init_r instead of
+> reimplementing the whole misc_init_r from Rockchip.
 >
 > Cc: Quentin Schulz <foss+uboot@0leil.net>
 > Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
@@ -104,334 +103,42 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   arch/arm/include/asm/arch-rockchip/misc.h |   5 --
->   arch/arm/mach-rockchip/Makefile           |   1 -
->   arch/arm/mach-rockchip/board.c            | 125 +++++++++++++++++++++++++++
->   arch/arm/mach-rockchip/misc.c             | 135 ------------------------------
->   4 files changed, 125 insertions(+), 141 deletions(-)
+>   .../theobroma-systems/ringneck_px30/ringneck-px30.c  | 20 +-------------------
+>   1 file changed, 1 insertion(+), 19 deletions(-)
 >
-> diff --git a/arch/arm/include/asm/arch-rockchip/misc.h b/arch/arm/include/asm/arch-rockchip/misc.h
-> index 4155af8c3b0..ef37ff1661a 100644
-> --- a/arch/arm/include/asm/arch-rockchip/misc.h
-> +++ b/arch/arm/include/asm/arch-rockchip/misc.h
-> @@ -6,9 +6,4 @@
->    *      Rohan Garg <rohan.garg@collabora.com>
+> diff --git a/board/theobroma-systems/ringneck_px30/ringneck-px30.c b/board/theobroma-systems/ringneck_px30/ringneck-px30.c
+> index ff7e414303d..bfebfe5136d 100644
+> --- a/board/theobroma-systems/ringneck_px30/ringneck-px30.c
+> +++ b/board/theobroma-systems/ringneck_px30/ringneck-px30.c
+> @@ -4,29 +4,11 @@
 >    */
 >   
-> -int rockchip_cpuid_from_efuse(const u32 cpuid_offset,
-> -			      const u32 cpuid_length,
-> -			      u8 *cpuid);
-> -int rockchip_cpuid_set(const u8 *cpuid, const u32 cpuid_length);
-> -int rockchip_setup_macaddr(void);
->   void rockchip_capsule_update_board_setup(void);
-> diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-rockchip/Makefile
-> index 1dc92066bbf..c07bdaee4c3 100644
-> --- a/arch/arm/mach-rockchip/Makefile
-> +++ b/arch/arm/mach-rockchip/Makefile
-> @@ -23,7 +23,6 @@ ifeq ($(CONFIG_SPL_BUILD)$(CONFIG_TPL_BUILD),)
->   # meaning "turn it off".
->   obj-y += boot_mode.o
->   obj-$(CONFIG_ROCKCHIP_COMMON_BOARD) += board.o
-> -obj-$(CONFIG_MISC_INIT_R) += misc.o
->   endif
->   
->   ifeq ($(CONFIG_TPL_BUILD),)
-> diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
-> index d5cb59c10fa..80b4514852f 100644
-> --- a/arch/arm/mach-rockchip/board.c
-> +++ b/arch/arm/mach-rockchip/board.c
-> @@ -1,20 +1,32 @@
->   // SPDX-License-Identifier: GPL-2.0+
->   /*
->    * (C) Copyright 2019 Rockchip Electronics Co., Ltd.
-> + *
-> + * Copyright (C) 2019 Collabora Inc - https://www.collabora.com/
-> + *      Rohan Garg <rohan.garg@collabora.com>
-> + *
-> + * Based on puma-rk3399.c:
-> + *      (C) Copyright 2017 Theobroma Systems Design und Consulting GmbH
->    */
->   #include <common.h>
->   #include <clk.h>
->   #include <cpu_func.h>
-> +#include <env.h>
->   #include <dm.h>
->   #include <efi_loader.h>
->   #include <fastboot.h>
-> +#include <hash.h>
->   #include <init.h>
->   #include <log.h>
->   #include <mmc.h>
-> +#include <dm/uclass-internal.h>
-> +#include <misc.h>
->   #include <part.h>
->   #include <ram.h>
->   #include <syscon.h>
->   #include <uuid.h>
-> +#include <u-boot/crc.h>
-> +#include <u-boot/sha256.h>
->   #include <asm/cache.h>
->   #include <asm/io.h>
->   #include <asm/arch-rockchip/boot_mode.h>
-> @@ -297,6 +309,119 @@ int fastboot_set_reboot_flag(enum fastboot_reboot_reason reason)
->   #endif
->   
->   #ifdef CONFIG_MISC_INIT_R
-> +int rockchip_setup_macaddr(void)
-> +{
-> +#if CONFIG_IS_ENABLED(HASH) && CONFIG_IS_ENABLED(SHA256)
-> +	int ret;
-> +	const char *cpuid = env_get("cpuid#");
-> +	u8 hash[SHA256_SUM_LEN];
-> +	int size = sizeof(hash);
-> +	u8 mac_addr[6];
-> +
-> +	/* Only generate a MAC address, if none is set in the environment */
-> +	if (env_get("ethaddr"))
-> +		return 0;
-> +
-> +	if (!cpuid) {
-> +		debug("%s: could not retrieve 'cpuid#'\n", __func__);
-> +		return -1;
-> +	}
-> +
-> +	ret = hash_block("sha256", (void *)cpuid, strlen(cpuid), hash, &size);
-> +	if (ret) {
-> +		debug("%s: failed to calculate SHA256\n", __func__);
-> +		return -1;
-> +	}
-> +
-> +	/* Copy 6 bytes of the hash to base the MAC address on */
-> +	memcpy(mac_addr, hash, 6);
-> +
-> +	/* Make this a valid MAC address and set it */
-> +	mac_addr[0] &= 0xfe;  /* clear multicast bit */
-> +	mac_addr[0] |= 0x02;  /* set local assignment bit (IEEE802) */
-> +	eth_env_set_enetaddr("ethaddr", mac_addr);
-> +
-> +	/* Make a valid MAC address for ethernet1 */
-> +	mac_addr[5] ^= 0x01;
-> +	eth_env_set_enetaddr("eth1addr", mac_addr);
-> +#endif
-> +	return 0;
-> +}
-> +
-> +int rockchip_cpuid_from_efuse(const u32 cpuid_offset,
-> +			      const u32 cpuid_length,
-> +			      u8 *cpuid)
-> +{
-> +#if IS_ENABLED(CONFIG_ROCKCHIP_EFUSE) || IS_ENABLED(CONFIG_ROCKCHIP_OTP)
-> +	struct udevice *dev;
-> +	int ret;
-> +
-> +	/* retrieve the device */
-> +#if IS_ENABLED(CONFIG_ROCKCHIP_EFUSE)
-> +	ret = uclass_get_device_by_driver(UCLASS_MISC,
-> +					  DM_DRIVER_GET(rockchip_efuse), &dev);
-> +#elif IS_ENABLED(CONFIG_ROCKCHIP_OTP)
-> +	ret = uclass_get_device_by_driver(UCLASS_MISC,
-> +					  DM_DRIVER_GET(rockchip_otp), &dev);
-> +#endif
-> +	if (ret) {
-> +		debug("%s: could not find efuse device\n", __func__);
-> +		return -1;
-> +	}
-> +
-> +	/* read the cpu_id range from the efuses */
-> +	ret = misc_read(dev, cpuid_offset, cpuid, cpuid_length);
-> +	if (ret < 0) {
-> +		debug("%s: reading cpuid from the efuses failed\n",
-> +		      __func__);
-> +		return -1;
-> +	}
-> +#endif
-> +	return 0;
-> +}
-> +
-> +int rockchip_cpuid_set(const u8 *cpuid, const u32 cpuid_length)
-> +{
-> +	u8 low[cpuid_length / 2], high[cpuid_length / 2];
-> +	char cpuid_str[cpuid_length * 2 + 1];
-> +	u64 serialno;
-> +	char serialno_str[17];
-> +	const char *oldid;
-> +	int i;
-> +
-> +	memset(cpuid_str, 0, sizeof(cpuid_str));
-> +	for (i = 0; i < cpuid_length; i++)
-> +		sprintf(&cpuid_str[i * 2], "%02x", cpuid[i]);
-> +
-> +	debug("cpuid: %s\n", cpuid_str);
-> +
-> +	/*
-> +	 * Mix the cpuid bytes using the same rules as in
-> +	 *   ${linux}/drivers/soc/rockchip/rockchip-cpuinfo.c
-> +	 */
-> +	for (i = 0; i < cpuid_length / 2; i++) {
-> +		low[i] = cpuid[1 + (i << 1)];
-> +		high[i] = cpuid[i << 1];
-> +	}
-> +
-> +	serialno = crc32_no_comp(0, low, cpuid_length / 2);
-> +	serialno |= (u64)crc32_no_comp(serialno, high, cpuid_length / 2) << 32;
-> +	snprintf(serialno_str, sizeof(serialno_str), "%016llx", serialno);
-> +
-> +	oldid = env_get("cpuid#");
-> +	if (oldid && strcmp(oldid, cpuid_str) != 0)
-> +		printf("cpuid: value %s present in env does not match hardware %s\n",
-> +		       oldid, cpuid_str);
-> +
-> +	env_set("cpuid#", cpuid_str);
-> +
-> +	/* Only generate serial# when none is set yet */
-> +	if (!env_get("serial#"))
-> +		env_set("serial#", serialno_str);
-> +
-> +	return 0;
-> +}
-> +
->   __weak int rockchip_early_misc_init_r(void)
->   {
->   	return 0;
-> diff --git a/arch/arm/mach-rockchip/misc.c b/arch/arm/mach-rockchip/misc.c
-> deleted file mode 100644
-> index 15397cff009..00000000000
-> --- a/arch/arm/mach-rockchip/misc.c
-> +++ /dev/null
-> @@ -1,135 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0+ */
-> -/*
-> - * RK3399: Architecture common definitions
-> - *
-> - * Copyright (C) 2019 Collabora Inc - https://www.collabora.com/
-> - *      Rohan Garg <rohan.garg@collabora.com>
-> - *
-> - * Based on puma-rk3399.c:
-> - *      (C) Copyright 2017 Theobroma Systems Design und Consulting GmbH
-> - */
-> -
-> -#include <common.h>
-> -#include <env.h>
-> -#include <dm.h>
-> -#include <hash.h>
-> -#include <log.h>
-> -#include <dm/uclass-internal.h>
-> -#include <misc.h>
-> -#include <u-boot/crc.h>
-> -#include <u-boot/sha256.h>
-> -
+>   #include <asm/gpio.h>
 > -#include <asm/arch-rockchip/misc.h>
-> -
-> -int rockchip_setup_macaddr(void)
-> -{
-> -#if CONFIG_IS_ENABLED(HASH) && CONFIG_IS_ENABLED(SHA256)
-> -	int ret;
-> -	const char *cpuid = env_get("cpuid#");
-> -	u8 hash[SHA256_SUM_LEN];
-> -	int size = sizeof(hash);
-> -	u8 mac_addr[6];
-> -
-> -	/* Only generate a MAC address, if none is set in the environment */
-> -	if (env_get("ethaddr"))
-> -		return 0;
-> -
-> -	if (!cpuid) {
-> -		debug("%s: could not retrieve 'cpuid#'\n", __func__);
-> -		return -1;
-> -	}
-> -
-> -	ret = hash_block("sha256", (void *)cpuid, strlen(cpuid), hash, &size);
-> -	if (ret) {
-> -		debug("%s: failed to calculate SHA256\n", __func__);
-> -		return -1;
-> -	}
-> -
-> -	/* Copy 6 bytes of the hash to base the MAC address on */
-> -	memcpy(mac_addr, hash, 6);
-> -
-> -	/* Make this a valid MAC address and set it */
-> -	mac_addr[0] &= 0xfe;  /* clear multicast bit */
-> -	mac_addr[0] |= 0x02;  /* set local assignment bit (IEEE802) */
-> -	eth_env_set_enetaddr("ethaddr", mac_addr);
-> -
-> -	/* Make a valid MAC address for ethernet1 */
-> -	mac_addr[5] ^= 0x01;
-> -	eth_env_set_enetaddr("eth1addr", mac_addr);
-> -#endif
-> -	return 0;
-> -}
-> -
-> -int rockchip_cpuid_from_efuse(const u32 cpuid_offset,
-> -			      const u32 cpuid_length,
-> -			      u8 *cpuid)
-> -{
-> -#if IS_ENABLED(CONFIG_ROCKCHIP_EFUSE) || IS_ENABLED(CONFIG_ROCKCHIP_OTP)
-> -	struct udevice *dev;
+>   #include <linux/delay.h>
+>   #include "../common/common.h"
+>   
+> -int misc_init_r(void)
+> +int rockchip_early_misc_init_r(void)
+>   {
+> -	const u32 cpuid_offset = 0x7;
+> -	const u32 cpuid_length = 0x10;
+> -	u8 cpuid[cpuid_length];
 > -	int ret;
 > -
-> -	/* retrieve the device */
-> -#if IS_ENABLED(CONFIG_ROCKCHIP_EFUSE)
-> -	ret = uclass_get_device_by_driver(UCLASS_MISC,
-> -					  DM_DRIVER_GET(rockchip_efuse), &dev);
-> -#elif IS_ENABLED(CONFIG_ROCKCHIP_OTP)
-> -	ret = uclass_get_device_by_driver(UCLASS_MISC,
-> -					  DM_DRIVER_GET(rockchip_otp), &dev);
-> -#endif
-> -	if (ret) {
-> -		debug("%s: could not find efuse device\n", __func__);
-> -		return -1;
-> -	}
+> -	ret = rockchip_cpuid_from_efuse(cpuid_offset, cpuid_length, cpuid);
+> -	if (ret)
+> -		return ret;
 > -
-> -	/* read the cpu_id range from the efuses */
-> -	ret = misc_read(dev, cpuid_offset, cpuid, cpuid_length);
-> -	if (ret < 0) {
-> -		debug("%s: reading cpuid from the efuses failed\n",
-> -		      __func__);
-> -		return -1;
-> -	}
-> -#endif
-> -	return 0;
-> -}
+> -	ret = rockchip_cpuid_set(cpuid, cpuid_length);
+> -	if (ret)
+> -		return ret;
 > -
-> -int rockchip_cpuid_set(const u8 *cpuid, const u32 cpuid_length)
-> -{
-> -	u8 low[cpuid_length / 2], high[cpuid_length / 2];
-> -	char cpuid_str[cpuid_length * 2 + 1];
-> -	u64 serialno;
-> -	char serialno_str[17];
-> -	const char *oldid;
-> -	int i;
+> -	ret = rockchip_setup_macaddr();
+> -	if (ret)
+> -		return ret;
 > -
-> -	memset(cpuid_str, 0, sizeof(cpuid_str));
-> -	for (i = 0; i < cpuid_length; i++)
-> -		sprintf(&cpuid_str[i * 2], "%02x", cpuid[i]);
-> -
-> -	debug("cpuid: %s\n", cpuid_str);
-> -
-> -	/*
-> -	 * Mix the cpuid bytes using the same rules as in
-> -	 *   ${linux}/drivers/soc/rockchip/rockchip-cpuinfo.c
-> -	 */
-> -	for (i = 0; i < cpuid_length / 2; i++) {
-> -		low[i] = cpuid[1 + (i << 1)];
-> -		high[i] = cpuid[i << 1];
-> -	}
-> -
-> -	serialno = crc32_no_comp(0, low, cpuid_length / 2);
-> -	serialno |= (u64)crc32_no_comp(serialno, high, cpuid_length / 2) << 32;
-> -	snprintf(serialno_str, sizeof(serialno_str), "%016llx", serialno);
-> -
-> -	oldid = env_get("cpuid#");
-> -	if (oldid && strcmp(oldid, cpuid_str) != 0)
-> -		printf("cpuid: value %s present in env does not match hardware %s\n",
-> -		       oldid, cpuid_str);
-> -
-> -	env_set("cpuid#", cpuid_str);
-> -
-> -	/* Only generate serial# when none is set yet */
-> -	if (!env_get("serial#"))
-> -		env_set("serial#", serialno_str);
-> -
-> -	return 0;
-> -}
+>   	setup_boottargets();
+>   
+>   	return 0;
 >
