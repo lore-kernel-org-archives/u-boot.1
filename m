@@ -4,61 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C26DFC4828F
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 14:54:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BC64C48291
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 15:00:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0677787D13;
-	Thu,  1 Feb 2024 15:53:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 5DD5D87CDE;
+	Thu,  1 Feb 2024 16:00:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1706799235;
-	bh=/PFh2XEdhAzvwwXzvm2kBvpJdZl0bCDsWPdCG6szkkY=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=oaSrx7RtGgb0wjwkyKjJ3pi/MfWXQEEJUf/pq3rGvybw/d8VndSi5/hjqAHKxkVMC
-	 Zo7EfrxhzCE6pHc/OeMwG91r++EVOp+uFehHxjJxqE2FhNLojcdSk/LlMfJapPdj9V
-	 KJ5RrIjSyljNYzgcUqah6mTeLml0VEd7KfL2qYVBCfU7F3i0cpuc02ecIpipnoP6Wc
-	 aQcTh6U1neKDnz6ardf2KoD+6o8UM7lxqeXT9k3je13YeByToLuRFc4F/o4kuXc29r
-	 zexY7EsGtgn6jHIFdj3gYsC7BbI8O0JmngmXt/CywyMsw0qzMk977+VkJRw1rCQh/A
-	 kgeCdqXP6Jr4g==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Gycr+Unb";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id AB71087CF6; Thu,  1 Feb 2024 16:00:10 +0100 (CET)
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
+ [IPv6:2607:f8b0:4864:20::82e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id B07BC879F6;
- Thu,  1 Feb 2024 15:53:52 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1706799233;
- bh=/PFh2XEdhAzvwwXzvm2kBvpJdZl0bCDsWPdCG6szkkY=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=XoVhbzkO3xY4/7/LBVV3yKpzY8HU4VoRTqnyjwK6yWCllkLf8Yt1NtVTE88JU9bvA
- PnEFZfYUKU0+P1c3f4zJQWrjSNhQT3Im0jkreSQguO0P6/9lCIKjtUvdajzZbGtEFt
- mgaXnwVUPMzS20xQDK646lfJUkgZbP8gsO0C+fh5lYmf9V9Mqnwbmh9c1TDAjlmi59
- CjS8sYpFrjv3IUA6M8vvjWXAzvw7B2Cj5TVMZD7AffzAtWC10k7O9YTV34T0xZrUzb
- o7G6hLJMxzsvzSrYf90tQFAdZbTGSb7HppHISRikBuY7tBdawTxU4wz4a1uA3X+dfy
- NhSwHB7fZWZYA==
-Message-ID: <810f330e-a5cc-49cc-8a7b-1b7ad5b08910@denx.de>
-Date: Thu, 1 Feb 2024 15:28:10 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id E3D0287CDE
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 16:00:07 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mr.bossman075@gmail.com
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-42a99f34cc8so5475321cf.2
+ for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 07:00:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706799606; x=1707404406; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=iMZZhH3vHqfDacFyzdF8JS1UhMZ3e7wUbOOb9XdKAmY=;
+ b=Gycr+UnbZme5Zg8iRB2JGaVUq5dC0QwRNiMWULlZTSqok0KxKxUiu14mif3c1y03+a
+ SnvEc2iBjBkG8OqzUYr941zldFyCZqf7jQO1mWj0ak+g6xkdVqucPSP7yVj5gLVlDe2v
+ H4dXlqGr5srOSehJDoR6SXzj+IUiIc1INUop9s5vtjOQxQT2yk+QUJNjEQVHPLt0/GR1
+ 6Yd9G09fvwXy1nWaUYJ8aNPz6J88jKAaKNKd61ZVAZ4LrGnOkP6BrUI4/n4uvFkv1I1v
+ NzmfcPgLwWfgcgcgfouaPTfxDDMlKC8OuvuwoUny/v/mkMd69IKqvrimFgv5qp1KRBy9
+ h+Rg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706799606; x=1707404406;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=iMZZhH3vHqfDacFyzdF8JS1UhMZ3e7wUbOOb9XdKAmY=;
+ b=AA6f6x/+s0/FRtQzCwAMZti70l4G9yB4w1uazsL9U2TqLsjXJJQ0AXrLuYtSLYM1TY
+ v2SvQtn65b/fNVVNsue9UAQxN4ww9pQwWce4GwfLV+C5qUVgVBAddXFaPSFDL4zjfWbO
+ L6+H2F6OsMfSIiFjw6KQ61gZBj9s6LjJr8S0sKl+ZKl/M7k9eoPxPiEb0v21JnI4ECZ/
+ c8qdYbS5qv91AQjbOOg/43h25EQqsde7o5YaSCRnAOe1h1+cXOVlGxzhsSkQK6n4Xy4t
+ egyqOGRBj/1FRJ/cAUCCBMAvih9+1gq/i/FWm7HR4U34lLlRIjRbvs6yJJnh+ZMO4tJ2
+ W+aA==
+X-Gm-Message-State: AOJu0YymIazanZzKpDMFCrrjzdWnTrpHHgwFvpUEl8ABo82o974LYmWM
+ TWZQYoJYIkZFP9HkMj29cLIhg+27YvPTYTZ7M9BkDWL53r0pfCfNfOcy0W7F7pc=
+X-Google-Smtp-Source: AGHT+IFt4hlBjRVf9AI+88lTBsJxlzZa65OLzXZ6dR9GfoqPUIO0mLHLuq2P9BEaFK7umPwfNFmEQg==
+X-Received: by 2002:a05:622a:295:b0:42a:509c:aa7c with SMTP id
+ z21-20020a05622a029500b0042a509caa7cmr2939713qtw.46.1706799605874; 
+ Thu, 01 Feb 2024 07:00:05 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCVp4/5tNhPS7JX50xBA70OYKlZXkaZ4HV4VB23fT7oBzuwdozcStEfSGW1gGdl7wlCsDs5iLlYR2kf2c3MxYPrF38szv4axRUOlVU3eAk9pUK2syFjf5bVcFdKxNK5KZthmvI1G+PlTj4vSx1aRKthIGh4YDZHB3Twxm9/e9dLy7LMuIzWSwneY88gcQYP1CublckKHqmPVLJ8hn7xLgQc5V9/yFJFG6A==
+Received: from jesse-desktop.jtp-bos.lab
+ (pool-108-26-179-17.bstnma.fios.verizon.net. [108.26.179.17])
+ by smtp.gmail.com with ESMTPSA id
+ cr8-20020a05622a428800b0042bf0b37b5csm1029789qtb.28.2024.02.01.07.00.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Feb 2024 07:00:05 -0800 (PST)
+From: Jesse Taube <mr.bossman075@gmail.com>
+X-Google-Original-From: Jesse Taube <Mr.Bossman075@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Jesse Taube <Mr.Bossman075@gmail.com>,
+ Giulio Benetti <giulio.benetti@benettiengineering.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Alon Bar-Lev <alon.barlev@gmail.com>
+Subject: [PATCH v1] doc: imx: imxrt1170: Document imxrt1170-evk board
+Date: Thu,  1 Feb 2024 10:00:04 -0500
+Message-ID: <20240201150004.1343366-1-Mr.Bossman075@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] common: usb-hub: Reset hub port before scanning
-Content-Language: en-US
-To: Shantur Rathore <i@shantur.com>
-Cc: Andre Przywara <andre.przywara@arm.com>, bmeng.cn@gmail.com,
- clamor95@gmail.com, Hector Martin <marcan@marcan.st>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-References: <20231209181057.331815-1-i@shantur.com>
- <20240130140123.445f368a@donnerap.manchester.arm.com>
- <CABEcMwWs-_ZzTdt=kRc05JwC=okA9FyvrAVK1rTLa=erTu9N3g@mail.gmail.com>
- <3f508431-c4bd-4885-b3b9-f281b6a653e1@denx.de>
- <CABEcMwXR5VZNCgKbQDbPafj2mmmAkE6_ehoM8KfMuGjCyX09aA@mail.gmail.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CABEcMwXR5VZNCgKbQDbPafj2mmmAkE6_ehoM8KfMuGjCyX09aA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -76,80 +96,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/1/24 12:18, Shantur Rathore wrote:
-> On Thu, Feb 1, 2024 at 11:13 AM Marek Vasut <marex@denx.de> wrote:
->>
->> On 2/1/24 10:39, Shantur Rathore wrote:
->>> Hi Andre,
->>>
->>> On Tue, Jan 30, 2024 at 2:01 PM Andre Przywara <andre.przywara@arm.com> wrote:
->>>>
->>>> On Sat,  9 Dec 2023 18:10:56 +0000
->>>> Shantur Rathore <i@shantur.com> wrote:
->>>>
->>>> Hi,
->>>>
->>>>> Currently when a hub is turned on, all the ports are powered on.
->>>>> This works well for hubs which have individual power control.
->>>>>
->>>>> For the hubs without individual power control this has no effect.
->>>>> Mostly in these scenarios the hub port is powered before the USB
->>>>> controller is enabled, this can lead to some devices in unexpected
->>>>> state.
->>>>>
->>>>> With this patch, we explicitly reset the port while powering up hub
->>>>> This resets the port for hubs without port power control and has
->>>>> no effect on hubs with port power control as the port is still off.
->>>>>
->>>>> Before this patch AMicro AM8180 based NVME to USB adapter won't be
->>>>> detected as a USB3.0 Mass Storage device but with this it works as
->>>>> expected.
->>>>>
->>>>> Tested working after this patch:
->>>>> 1. AMicro AM8180 based NVME to USB Adapter
->>>>> 2. Kingston DataTraveler 3.0
->>>>> 3. GenesysLogic USB3.0 Hub
->>>>>
->>>>> The drives were tested while connected directly and via the hub.
->>>>
->>>> so this broke USB operation on some Allwinner boards. The ports still
->>>> enumerate correctly, but no devices are detected. With mainline
->>>> (containing this patch), and a USB stick connected:
->>>> starting USB...
->>>> Bus usb@5200000: USB EHCI 1.00
->>>> Bus usb@5200400: USB OHCI 1.0
->>>> scanning bus usb@5200000 for devices... 1 USB Device(s) found
->>>> scanning bus usb@5200400 for devices... 1 USB Device(s) found
->>>>          scanning usb for storage devices... 0 Storage Device(s) found
->>>>
->>>> With this patch here reverted:
->>>> starting USB...
->>>> Bus usb@5200000: USB EHCI 1.00
->>>> Bus usb@5200400: USB OHCI 1.0
->>>> scanning bus usb@5200000 for devices... 2 USB Device(s) found
->>>> scanning bus usb@5200400 for devices... 1 USB Device(s) found
->>>>          scanning usb for storage devices... 1 Storage Device(s) found
->>>>
->>>> I have no clue why this happens, there is no discrete hub anywhere in this
->>>> setup, so I guess the code runs for the root hub here?
->>>> I am attaching a log with DEBUG enabled for common/usb_hub.c, for both
->>>> cases.
->>>>
->>>> Any clues, debug suggestions, or even a fix are warmly welcome.
->>>>
->>>
->>> Which USB disk are you using? Is it a USB 2.0 disk ?
->>> Can you try with any other USB disk to confirm?
->>
->> I don't think this is device specific, see the logs. Hardware from Andre
->> worked before this patch, does not work after this patch. There seem to
->> be no connection event with this patch.
-> 
-> I am trying to evaluate if this is happening due to a USB 2.0 device.
-> I see that the host is USB 2.0. I have tested this on my RK3399 board on both
-> USB 2.0 and USB 3.0 ports.
-> If this is not behaving on USB 2.0 ports then I can put a condition
-> for this to happen
-> only on USB 3.0 ports.
+Add documentation for imxrt1170-evk.
 
-Doesn't Linux perform this reset for all ports unconditionally ?
+Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
+---
+ doc/board/nxp/imxrt1170-evk.rst | 42 +++++++++++++++++++++++++++++++++
+ 1 file changed, 42 insertions(+)
+ create mode 100644 doc/board/nxp/imxrt1170-evk.rst
+
+diff --git a/doc/board/nxp/imxrt1170-evk.rst b/doc/board/nxp/imxrt1170-evk.rst
+new file mode 100644
+index 0000000000..4acccdcc93
+--- /dev/null
++++ b/doc/board/nxp/imxrt1170-evk.rst
+@@ -0,0 +1,42 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++imxrt1170-evk
++=============
++
++How to use U-Boot on NXP i.MXRT1170 EVK
++---------------------------------------
++
++- Build U-Boot for i.MXRT1170 EVK:
++
++.. code-block:: bash
++
++   $ make mrproper
++   $ make imxrt1170-evk_defconfig
++   $ make
++
++This will generate the SPL image called SPL and the u-boot.img.
++
++- Flash the SPL image into the micro SD card:
++
++.. code-block:: bash
++
++   $sudo dd if=SPL of=/dev/sdX bs=1k seek=1 conv=notrunc; sync
++
++- Flash the u-boot.img image into the micro SD card:
++
++.. code-block:: bash
++
++   $sudo dd if=u-boot.img of=/dev/sdX bs=1k seek=128 conv=notrunc; sync
++
++- Jumper settings::
++
++   SW1: 1 0 1 0
++   SW2: 0 0 0 0  0 0 0 0  1 0 0 0
++
++where 0 means bottom position and 1 means top position (from the
++switch label numbers reference).
++
++- Connect the USB cable between the EVK and the PC for the console.
++  The USB console connector is the one close the ethernet connector
++
++- Insert the micro SD card in the board, power it up and U-Boot messages should come up.
+-- 
+2.43.0
+
