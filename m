@@ -4,58 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A918FC4828F
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 16:19:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5F7CC4828D
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 16:24:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DABF387BD6;
-	Thu,  1 Feb 2024 17:19:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=benettiengineering.com
+	by phobos.denx.de (Postfix) with ESMTP id E41B387C93;
+	Thu,  1 Feb 2024 17:24:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=aruba.it header.i=@aruba.it header.b="XNK4hBv8";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8432F87BF4; Thu,  1 Feb 2024 17:19:18 +0100 (CET)
-Received: from smtpcmd11116.aruba.it (smtpcmd11116.aruba.it [62.149.156.116])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67855875FA
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 17:19:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=benettiengineering.com
-Authentication-Results: phobos.denx.de; spf=none
- smtp.mailfrom=giulio.benetti@benettiengineering.com
-Received: from [192.168.50.221] ([84.33.84.190])
- by Aruba Outgoing Smtp  with ESMTPSA
- id VZmVrLLPQZ3lVVZmVrbnU5; Thu, 01 Feb 2024 17:19:15 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=aruba.it; s=a1;
- t=1706804355; bh=9+t1YOQ0mx6GW9ZYrBdZ9RvwWJKQB3NLTCE+Q6AhKZE=;
- h=Date:MIME-Version:Subject:To:From:Content-Type;
- b=XNK4hBv8s/etSjGyZzarDKm9KaghoEqzYtZwn0GbkVu28+kFfaLBpG24nkRNYwkmx
- 1D+pdFixozE+mfAB2tm3U4DH8vVnrsE/TUesgPln2fIr1RyLrOWa9oF1qc6Eggq/3O
- YNYuekSmzKHx+MUU5NtayOgwhHXq75twaE7rC5pvdUuBdTNHlzIRR/kt4XDOA5/8sf
- kl8Sd+sJcsGp7ajhp/d8pkRjjkxFSxs00y2x4zwD3sL0slUwLF1SdG3Z0YE0ynzMcI
- 0Va3pTSvW7/NjtCRlnz7MQfVpgfooBKpt06n3MyvZGfloH0q/vCSavQzXXC8fAUUO1
- xX6A8xYLnNxHA==
-Message-ID: <d3f9a32b-7516-4bd0-9b34-dffdae1f2e16@benettiengineering.com>
-Date: Thu, 1 Feb 2024 17:19:15 +0100
+ id 1AEFA87CA3; Thu,  1 Feb 2024 17:24:55 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id F04B8875FA
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 17:24:52 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 16889DA7;
+ Thu,  1 Feb 2024 08:25:35 -0800 (PST)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9B6EF3F738;
+ Thu,  1 Feb 2024 08:24:51 -0800 (PST)
+Date: Thu, 1 Feb 2024 16:24:44 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Ludwig Kormann <ludwig.kormann@ict42.de>, "linux-sunxi@lists.linux.dev"
+ <linux-sunxi@lists.linux.dev>
+Cc: jagan@amarulasolutions.com, trini@konsulko.com, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] sunxi: sun4i: add missing sdelay() to
+ clock_init_safe()
+Message-ID: <20240201162444.1cf81b0b@donnerap.manchester.arm.com>
+In-Reply-To: <20240201084550.200913-1-ludwig.kormann@ict42.de>
+References: <20240201084550.200913-1-ludwig.kormann@ict42.de>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] doc: imx: imxrt1170: Document imxrt1170-evk board
-Content-Language: en-US
-To: Jesse Taube <mr.bossman075@gmail.com>, u-boot@lists.denx.de
-Cc: Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Alon Bar-Lev <alon.barlev@gmail.com>
-References: <20240201150004.1343366-1-Mr.Bossman075@gmail.com>
-From: Giulio Benetti <giulio.benetti@benettiengineering.com>
-In-Reply-To: <20240201150004.1343366-1-Mr.Bossman075@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-CMAE-Envelope: MS4xfDlWu62M1VmHDUHXiLxs2BkNbaugWwElcnCL9Pm5vRyy/+4+ktHGLeuoMDRnwGMIG/KcKvVypXIm6bAxeIrjewtq2pc2CFwuShWqxEEvLaY/k5LAFVwl
- EhdaEJfwePBzZ3NeCtvxYrXQkRIyTUme9Y6D3F5GkUT647sILEB0Cbmhmuim7yg4XBAdyAHuCwbsiiUPzzIVJMdaATaxD/WLJaLIZo/PTnNBzLX43MSGXxRI
- 5uq9cW3OQPNsjARqZpJaB3457/uwQRruT6tgBobT+ub+eaTh/6bhJTbL/dDqBv1jWW//+S36i4f2h9hiSVsvTYqWA6JbNJI1TG6q5zZUvPou2Ky8KlmRNmoR
- KP7E8XwjtLIQnKSNY7VKEztRk/GH6Q==
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,73 +58,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jesse,
+On Thu,  1 Feb 2024 09:45:50 +0100
+Ludwig Kormann <ludwig.kormann@ict42.de> wrote:
 
-On 01/02/24 16:00, Jesse Taube wrote:
-> Add documentation for imxrt1170-evk.
-> 
-> Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
+Hi,
 
-looks good to me
+> This delay is required after switching the clock source.
+>=20
+> See =E2=80=9CA20 Reference manual v1.4=E2=80=9D Page 50 / section
+> =E2=80=9C1.5.4.16. CPU/AHB/APB0 CLOCK RATIO=E2=80=9D: =E2=80=9CIf the clo=
+ck
+> source is changed, at most to wait for 8 present running
+> clock cycles.=E2=80=9D
+>=20
+> This is already implemented in clock_set_pll1(), but was
+> still missing in clock_init_safe().
+>=20
+> Signed-off-by: Ludwig Kormann <ludwig.kormann@ict42.de>
 
-Reviewed-by: Giulio Benetti <giulio.benetti@benettiengineering.com>
+Good catch, thanks for sending this!
 
-Best regards
--- 
-Giulio Benetti
-CEO&CTO@Benetti Engineering sas
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+
+Cheers,
+Andre
 
 > ---
->   doc/board/nxp/imxrt1170-evk.rst | 42 +++++++++++++++++++++++++++++++++
->   1 file changed, 42 insertions(+)
->   create mode 100644 doc/board/nxp/imxrt1170-evk.rst
-> 
-> diff --git a/doc/board/nxp/imxrt1170-evk.rst b/doc/board/nxp/imxrt1170-evk.rst
-> new file mode 100644
-> index 0000000000..4acccdcc93
-> --- /dev/null
-> +++ b/doc/board/nxp/imxrt1170-evk.rst
-> @@ -0,0 +1,42 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
-> +
-> +imxrt1170-evk
-> +=============
-> +
-> +How to use U-Boot on NXP i.MXRT1170 EVK
-> +---------------------------------------
-> +
-> +- Build U-Boot for i.MXRT1170 EVK:
-> +
-> +.. code-block:: bash
-> +
-> +   $ make mrproper
-> +   $ make imxrt1170-evk_defconfig
-> +   $ make
-> +
-> +This will generate the SPL image called SPL and the u-boot.img.
-> +
-> +- Flash the SPL image into the micro SD card:
-> +
-> +.. code-block:: bash
-> +
-> +   $sudo dd if=SPL of=/dev/sdX bs=1k seek=1 conv=notrunc; sync
-> +
-> +- Flash the u-boot.img image into the micro SD card:
-> +
-> +.. code-block:: bash
-> +
-> +   $sudo dd if=u-boot.img of=/dev/sdX bs=1k seek=128 conv=notrunc; sync
-> +
-> +- Jumper settings::
-> +
-> +   SW1: 1 0 1 0
-> +   SW2: 0 0 0 0  0 0 0 0  1 0 0 0
-> +
-> +where 0 means bottom position and 1 means top position (from the
-> +switch label numbers reference).
-> +
-> +- Connect the USB cable between the EVK and the PC for the console.
-> +  The USB console connector is the one close the ethernet connector
-> +
-> +- Insert the micro SD card in the board, power it up and U-Boot messages should come up.
+>  arch/arm/mach-sunxi/clock_sun4i.c | 2 ++
+>  1 file changed, 2 insertions(+)
+>=20
+> diff --git a/arch/arm/mach-sunxi/clock_sun4i.c b/arch/arm/mach-sunxi/cloc=
+k_sun4i.c
+> index 8f1d1b65f0..ac3b7a801f 100644
+> --- a/arch/arm/mach-sunxi/clock_sun4i.c
+> +++ b/arch/arm/mach-sunxi/clock_sun4i.c
+> @@ -25,6 +25,7 @@ void clock_init_safe(void)
+>  	       APB0_DIV_1 << APB0_DIV_SHIFT |
+>  	       CPU_CLK_SRC_OSC24M << CPU_CLK_SRC_SHIFT,
+>  	       &ccm->cpu_ahb_apb0_cfg);
+> +	sdelay(20);
+>  	writel(PLL1_CFG_DEFAULT, &ccm->pll1_cfg);
+>  	sdelay(200);
+>  	writel(AXI_DIV_1 << AXI_DIV_SHIFT |
+> @@ -32,6 +33,7 @@ void clock_init_safe(void)
+>  	       APB0_DIV_1 << APB0_DIV_SHIFT |
+>  	       CPU_CLK_SRC_PLL1 << CPU_CLK_SRC_SHIFT,
+>  	       &ccm->cpu_ahb_apb0_cfg);
+> +	sdelay(20);
+>  #ifdef CONFIG_MACH_SUN7I
+>  	setbits_le32(&ccm->ahb_gate0, 0x1 << AHB_GATE_OFFSET_DMA);
+>  #endif
 
