@@ -4,82 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D826FC4828D
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 16:00:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A918FC4828F
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 16:19:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32ACE87CC1;
-	Thu,  1 Feb 2024 17:00:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id DABF387BD6;
+	Thu,  1 Feb 2024 17:19:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=benettiengineering.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="hQgyWRDT";
+	dkim=pass (2048-bit key; unprotected) header.d=aruba.it header.i=@aruba.it header.b="XNK4hBv8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C604587D16; Thu,  1 Feb 2024 17:00:32 +0100 (CET)
-Received: from mail-vk1-xa31.google.com (mail-vk1-xa31.google.com
- [IPv6:2607:f8b0:4864:20::a31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 284A687C66
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 17:00:30 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-vk1-xa31.google.com with SMTP id
- 71dfb90a1353d-4bff041ebb9so446057e0c.3
- for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 08:00:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1706803229; x=1707408029;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=irwkznNMA9J+MuRsJzmNwmXHSmpr5tIChtQTPt7YVRA=;
- b=hQgyWRDT3wcUSl6T/M82b8XCuS6fL0SoLHlDeOnfhwdJIvSMYCBpWVcP9CjsLqOHFg
- xWmo3LkF9DLxSPDmmfVOzk/27mpANoVp3cN4d/4aAxnhqBnsxYBXwdn4ccmvBW87978i
- 4mlVVLaX8OhSdiabqVNdGuyR8Dns8bcZt5BhYf5KE6KE4QMD1NAU8A22+gi+uWd7xWNc
- H+6QnqrvmxJj2sagg9ErYXwBYxEQCmk1XGvFi0bmsDIMgI7UQ1++F4jAUbSQt42cN2OP
- CJyXLvfaX7NiSTfxmgkBbOC+IVlX16pSiHE9lLyYHBHd1bNCXGz7rBIaHbr69aN+Hy6N
- g9GA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706803229; x=1707408029;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=irwkznNMA9J+MuRsJzmNwmXHSmpr5tIChtQTPt7YVRA=;
- b=TUfYmXVawKuF2fton4jBW2bP25pEabQomMZTgCGWc2ErCU5wb6H6NqgJOZq1YgLpPv
- rPNZTe6qpON40V1CzuTX/ushiOli9RHGxhvKNsQ1hw1G/S1o6gprSyuRrd/Qd4xzzqFi
- lmoaxP6Um1B+MeS9Y8hqAYAWg9dj8cYOlrbs6VmdDA7e9I2B5d/RJk8ZvNo+MXsdfw17
- wWq7pVtCQcrwxbpUOWFeFEi6rk9rF9rzIXlC9vNCG62U6tLt5uTv3AcWxtb7sUgDlLOb
- B5PjOf/IGUgQsrpN+H8j5A35Kp6rIyUh7w2bc5bl5a3DN7hlQ+Yvp4vjkpzwAT4uAReF
- gR/Q==
-X-Gm-Message-State: AOJu0Yy1MCPbzPqiKa0vOnxIWWvRoAnKZZWoRnpyBidM3PkGSv8UJMfV
- ulz0TzMVBbmHxDK+Wke4TpN7Ev0z3zED1jb8Vy73dK+B2CT6ngNfPGzf3nDSoVz5HrNoJEC7a5E
- AqoSVQi3e2i/3jAfYSk0PMCeCW4bfZfCIOU0BNQ==
-X-Google-Smtp-Source: AGHT+IHYCWnpad5eTz/HpH10zaLAM49TTgK4YQIcZrp2UT4fk9ELkZX9G7Vz14DgPLk5nRL2hrOkcW2l4JKs5/TK7z0=
-X-Received: by 2002:a05:6122:4c03:b0:4b6:cb66:778c with SMTP id
- ff3-20020a0561224c0300b004b6cb66778cmr4610525vkb.16.1706803228853; Thu, 01
- Feb 2024 08:00:28 -0800 (PST)
+ id 8432F87BF4; Thu,  1 Feb 2024 17:19:18 +0100 (CET)
+Received: from smtpcmd11116.aruba.it (smtpcmd11116.aruba.it [62.149.156.116])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 67855875FA
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 17:19:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=benettiengineering.com
+Authentication-Results: phobos.denx.de; spf=none
+ smtp.mailfrom=giulio.benetti@benettiengineering.com
+Received: from [192.168.50.221] ([84.33.84.190])
+ by Aruba Outgoing Smtp  with ESMTPSA
+ id VZmVrLLPQZ3lVVZmVrbnU5; Thu, 01 Feb 2024 17:19:15 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=aruba.it; s=a1;
+ t=1706804355; bh=9+t1YOQ0mx6GW9ZYrBdZ9RvwWJKQB3NLTCE+Q6AhKZE=;
+ h=Date:MIME-Version:Subject:To:From:Content-Type;
+ b=XNK4hBv8s/etSjGyZzarDKm9KaghoEqzYtZwn0GbkVu28+kFfaLBpG24nkRNYwkmx
+ 1D+pdFixozE+mfAB2tm3U4DH8vVnrsE/TUesgPln2fIr1RyLrOWa9oF1qc6Eggq/3O
+ YNYuekSmzKHx+MUU5NtayOgwhHXq75twaE7rC5pvdUuBdTNHlzIRR/kt4XDOA5/8sf
+ kl8Sd+sJcsGp7ajhp/d8pkRjjkxFSxs00y2x4zwD3sL0slUwLF1SdG3Z0YE0ynzMcI
+ 0Va3pTSvW7/NjtCRlnz7MQfVpgfooBKpt06n3MyvZGfloH0q/vCSavQzXXC8fAUUO1
+ xX6A8xYLnNxHA==
+Message-ID: <d3f9a32b-7516-4bd0-9b34-dffdae1f2e16@benettiengineering.com>
+Date: Thu, 1 Feb 2024 17:19:15 +0100
 MIME-Version: 1.0
-References: <20231209181057.331815-1-i@shantur.com>
- <20240130140123.445f368a@donnerap.manchester.arm.com>
- <CABEcMwWs-_ZzTdt=kRc05JwC=okA9FyvrAVK1rTLa=erTu9N3g@mail.gmail.com>
- <3f508431-c4bd-4885-b3b9-f281b6a653e1@denx.de>
- <CABEcMwXR5VZNCgKbQDbPafj2mmmAkE6_ehoM8KfMuGjCyX09aA@mail.gmail.com>
- <810f330e-a5cc-49cc-8a7b-1b7ad5b08910@denx.de>
-In-Reply-To: <810f330e-a5cc-49cc-8a7b-1b7ad5b08910@denx.de>
-From: Shantur Rathore <i@shantur.com>
-Date: Thu, 1 Feb 2024 16:00:17 +0000
-Message-ID: <CABEcMwXZUT8KMjFfriwTbPU3bNs7UGP3wW6i_yMSy7fLQ7xasA@mail.gmail.com>
-Subject: Re: [PATCH v3] common: usb-hub: Reset hub port before scanning
-To: Marek Vasut <marex@denx.de>
-Cc: Andre Przywara <andre.przywara@arm.com>, bmeng.cn@gmail.com,
- clamor95@gmail.com, Hector Martin <marcan@marcan.st>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1] doc: imx: imxrt1170: Document imxrt1170-evk board
+Content-Language: en-US
+To: Jesse Taube <mr.bossman075@gmail.com>, u-boot@lists.denx.de
+Cc: Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Alon Bar-Lev <alon.barlev@gmail.com>
+References: <20240201150004.1343366-1-Mr.Bossman075@gmail.com>
+From: Giulio Benetti <giulio.benetti@benettiengineering.com>
+In-Reply-To: <20240201150004.1343366-1-Mr.Bossman075@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-CMAE-Envelope: MS4xfDlWu62M1VmHDUHXiLxs2BkNbaugWwElcnCL9Pm5vRyy/+4+ktHGLeuoMDRnwGMIG/KcKvVypXIm6bAxeIrjewtq2pc2CFwuShWqxEEvLaY/k5LAFVwl
+ EhdaEJfwePBzZ3NeCtvxYrXQkRIyTUme9Y6D3F5GkUT647sILEB0Cbmhmuim7yg4XBAdyAHuCwbsiiUPzzIVJMdaATaxD/WLJaLIZo/PTnNBzLX43MSGXxRI
+ 5uq9cW3OQPNsjARqZpJaB3457/uwQRruT6tgBobT+ub+eaTh/6bhJTbL/dDqBv1jWW//+S36i4f2h9hiSVsvTYqWA6JbNJI1TG6q5zZUvPou2Ky8KlmRNmoR
+ KP7E8XwjtLIQnKSNY7VKEztRk/GH6Q==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,96 +72,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Feb 1, 2024 at 2:53=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
->
-> On 2/1/24 12:18, Shantur Rathore wrote:
-> > On Thu, Feb 1, 2024 at 11:13=E2=80=AFAM Marek Vasut <marex@denx.de> wro=
-te:
-> >>
-> >> On 2/1/24 10:39, Shantur Rathore wrote:
-> >>> Hi Andre,
-> >>>
-> >>> On Tue, Jan 30, 2024 at 2:01=E2=80=AFPM Andre Przywara <andre.przywar=
-a@arm.com> wrote:
-> >>>>
-> >>>> On Sat,  9 Dec 2023 18:10:56 +0000
-> >>>> Shantur Rathore <i@shantur.com> wrote:
-> >>>>
-> >>>> Hi,
-> >>>>
-> >>>>> Currently when a hub is turned on, all the ports are powered on.
-> >>>>> This works well for hubs which have individual power control.
-> >>>>>
-> >>>>> For the hubs without individual power control this has no effect.
-> >>>>> Mostly in these scenarios the hub port is powered before the USB
-> >>>>> controller is enabled, this can lead to some devices in unexpected
-> >>>>> state.
-> >>>>>
-> >>>>> With this patch, we explicitly reset the port while powering up hub
-> >>>>> This resets the port for hubs without port power control and has
-> >>>>> no effect on hubs with port power control as the port is still off.
-> >>>>>
-> >>>>> Before this patch AMicro AM8180 based NVME to USB adapter won't be
-> >>>>> detected as a USB3.0 Mass Storage device but with this it works as
-> >>>>> expected.
-> >>>>>
-> >>>>> Tested working after this patch:
-> >>>>> 1. AMicro AM8180 based NVME to USB Adapter
-> >>>>> 2. Kingston DataTraveler 3.0
-> >>>>> 3. GenesysLogic USB3.0 Hub
-> >>>>>
-> >>>>> The drives were tested while connected directly and via the hub.
-> >>>>
-> >>>> so this broke USB operation on some Allwinner boards. The ports stil=
-l
-> >>>> enumerate correctly, but no devices are detected. With mainline
-> >>>> (containing this patch), and a USB stick connected:
-> >>>> starting USB...
-> >>>> Bus usb@5200000: USB EHCI 1.00
-> >>>> Bus usb@5200400: USB OHCI 1.0
-> >>>> scanning bus usb@5200000 for devices... 1 USB Device(s) found
-> >>>> scanning bus usb@5200400 for devices... 1 USB Device(s) found
-> >>>>          scanning usb for storage devices... 0 Storage Device(s) fou=
-nd
-> >>>>
-> >>>> With this patch here reverted:
-> >>>> starting USB...
-> >>>> Bus usb@5200000: USB EHCI 1.00
-> >>>> Bus usb@5200400: USB OHCI 1.0
-> >>>> scanning bus usb@5200000 for devices... 2 USB Device(s) found
-> >>>> scanning bus usb@5200400 for devices... 1 USB Device(s) found
-> >>>>          scanning usb for storage devices... 1 Storage Device(s) fou=
-nd
-> >>>>
-> >>>> I have no clue why this happens, there is no discrete hub anywhere i=
-n this
-> >>>> setup, so I guess the code runs for the root hub here?
-> >>>> I am attaching a log with DEBUG enabled for common/usb_hub.c, for bo=
-th
-> >>>> cases.
-> >>>>
-> >>>> Any clues, debug suggestions, or even a fix are warmly welcome.
-> >>>>
-> >>>
-> >>> Which USB disk are you using? Is it a USB 2.0 disk ?
-> >>> Can you try with any other USB disk to confirm?
-> >>
-> >> I don't think this is device specific, see the logs. Hardware from And=
-re
-> >> worked before this patch, does not work after this patch. There seem t=
-o
-> >> be no connection event with this patch.
-> >
-> > I am trying to evaluate if this is happening due to a USB 2.0 device.
-> > I see that the host is USB 2.0. I have tested this on my RK3399 board o=
-n both
-> > USB 2.0 and USB 3.0 ports.
-> > If this is not behaving on USB 2.0 ports then I can put a condition
-> > for this to happen
-> > only on USB 3.0 ports.
->
-> Doesn't Linux perform this reset for all ports unconditionally ?
+Hi Jesse,
 
+On 01/02/24 16:00, Jesse Taube wrote:
+> Add documentation for imxrt1170-evk.
+> 
+> Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
 
-Looks like it doesn't
-https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.c#L2841
+looks good to me
+
+Reviewed-by: Giulio Benetti <giulio.benetti@benettiengineering.com>
+
+Best regards
+-- 
+Giulio Benetti
+CEO&CTO@Benetti Engineering sas
+
+> ---
+>   doc/board/nxp/imxrt1170-evk.rst | 42 +++++++++++++++++++++++++++++++++
+>   1 file changed, 42 insertions(+)
+>   create mode 100644 doc/board/nxp/imxrt1170-evk.rst
+> 
+> diff --git a/doc/board/nxp/imxrt1170-evk.rst b/doc/board/nxp/imxrt1170-evk.rst
+> new file mode 100644
+> index 0000000000..4acccdcc93
+> --- /dev/null
+> +++ b/doc/board/nxp/imxrt1170-evk.rst
+> @@ -0,0 +1,42 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +
+> +imxrt1170-evk
+> +=============
+> +
+> +How to use U-Boot on NXP i.MXRT1170 EVK
+> +---------------------------------------
+> +
+> +- Build U-Boot for i.MXRT1170 EVK:
+> +
+> +.. code-block:: bash
+> +
+> +   $ make mrproper
+> +   $ make imxrt1170-evk_defconfig
+> +   $ make
+> +
+> +This will generate the SPL image called SPL and the u-boot.img.
+> +
+> +- Flash the SPL image into the micro SD card:
+> +
+> +.. code-block:: bash
+> +
+> +   $sudo dd if=SPL of=/dev/sdX bs=1k seek=1 conv=notrunc; sync
+> +
+> +- Flash the u-boot.img image into the micro SD card:
+> +
+> +.. code-block:: bash
+> +
+> +   $sudo dd if=u-boot.img of=/dev/sdX bs=1k seek=128 conv=notrunc; sync
+> +
+> +- Jumper settings::
+> +
+> +   SW1: 1 0 1 0
+> +   SW2: 0 0 0 0  0 0 0 0  1 0 0 0
+> +
+> +where 0 means bottom position and 1 means top position (from the
+> +switch label numbers reference).
+> +
+> +- Connect the USB cable between the EVK and the PC for the console.
+> +  The USB console connector is the one close the ethernet connector
+> +
+> +- Insert the micro SD card in the board, power it up and U-Boot messages should come up.
+
