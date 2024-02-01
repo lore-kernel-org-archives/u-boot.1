@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8418BC47DDB
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 12:27:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87D21C4828C
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 12:31:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 951DD87CF4;
-	Thu,  1 Feb 2024 13:26:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D1970877BB;
+	Thu,  1 Feb 2024 13:30:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hSKduIS1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Tjr0LiNi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1364987C49; Thu,  1 Feb 2024 11:17:50 +0100 (CET)
-Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com
- [IPv6:2607:f8b0:4864:20::934])
+ id A986287CEA; Thu,  1 Feb 2024 13:30:57 +0100 (CET)
+Received: from mail-vs1-xe33.google.com (mail-vs1-xe33.google.com
+ [IPv6:2607:f8b0:4864:20::e33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9633F87C32
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 11:17:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 756FE877BB
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 13:30:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-7d130979108so388969241.1
- for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 02:17:41 -0800 (PST)
+Received: by mail-vs1-xe33.google.com with SMTP id
+ ada2fe7eead31-46cf02b9f7eso203916137.3
+ for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 04:30:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706782660; x=1707387460; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1706790653; x=1707395453; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bG4BOnL8LR3Af8UsbVcCehkJH3A2O0zikHgVYjq5WMQ=;
- b=hSKduIS13GE8ou8k28ympZ7SiIUEG9GVfrcanNj+9sjmIu1+2wOug6FO3XHX7Rk+Pp
- hG1E+v++v7t2p8/sqGbWkVhk90ZzHfd7ARIiR4UDl/8D8hzb3h1EIk7finVUYq1lJ+j3
- woapi6qURqQpXruOf5EwBumWfcqlPlD44M2xrdDevwRy73nn+a5D30cru56dz33Qu5s7
- w3C3HSIpTMHCCqou0ftvnyIcwp5uqNCbz2Wm1p2H5Ia+1Dx+w4M20DYv67ftsSxyMwC9
- z/irdt1vd016kd7pKMTLAsYXHjpz5fDwtOB7Qbk1ZON5/51EF8DkYdE0AjLPTEtGcOqw
- U8xA==
+ bh=hwVXnnc49rRGoYShNfUSAFhG2l9jFBSeYlqvJ4Eg96Y=;
+ b=Tjr0LiNiUiCM3h0l56pOb6EBYNO9MIT9T1MZzCMHcxSB8mAHqY3UIP4wmk9An/LcgS
+ lV5MBVUqbLjQkd5X9kd3jMEP9G5UQeNXLoBcvHvYTCfFtmt+Y1vuc+lTb4XNU8Vgo90g
+ txpPEw87cBAfnMVy3flldBG/YkbxfFyBhg2qdTmKewRNKMNAJ274FGr1J9nAsSae9BOe
+ 39rMKI05id8/q7AogCiOdCwn+VBvbqyUBDUcRo9ykpXNc/7b9K+jLUaNhCpKWVkynwcM
+ FhrYkMKzUowJ/KaGhKhJtYsbq12XSEPtP91LQhidJL+gQCLg7fYtY9gqXH/tvC2yZW3R
+ hX8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706782660; x=1707387460;
+ d=1e100.net; s=20230601; t=1706790653; x=1707395453;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bG4BOnL8LR3Af8UsbVcCehkJH3A2O0zikHgVYjq5WMQ=;
- b=bRHyOBiuGs6IHf9auqPTkDiA5T3eekIO6ob0bcg00AGxXs5T3WsPVfmcHrcmOmcCqZ
- A/B6pVP5/xoM4McS6nD4a0xSivm+UU1wBIhkJG7Ioio/pZ2IwFB3URSRIgK2ot/PaG9Q
- 30zVt2jXPstgTHxjLEqZOJzuxiJpceCqQcgTZ15QCy1+gBmPaEXwkryVPEJzt3Qc3KmB
- v3+O4kp7v5wbL9nd5o8dEpWHof1ad5VLNXrMhUIKVO4kKHxbawDr6TmqNuMw5n0YSkWn
- 6LxNe1vOal+/h6M09zLc3IbEP2qkOWQH25utggliLuoZqw8HFJdHHzJCNRRI3nLbjhmJ
- lIJg==
-X-Gm-Message-State: AOJu0YyxuW1eRCnycFFJw+QGJ6u3NiFlVvfMrnWVTegTb9PvH3h6PgNK
- qZA9O9KqO3YCVHVF9Z5adYbXyqVsQJ7fcLV99+uU9GfoSlgY75Bo22B/X5JwUmy3rrnPiuFxJoF
- is065eQe35clCxgG+c7Bw5urWFayeG7pl2sbN4Q==
-X-Google-Smtp-Source: AGHT+IHreCXFYk31fHZnxt5SvhsysyudDrY4cfl6S6oELjLUAcd8q8oXRIh4YSwwMINHEIMiX0B2xCGeUeZtc39pxJ8=
-X-Received: by 2002:a05:6102:5f42:b0:46c:a3dc:9d54 with SMTP id
- il2-20020a0561025f4200b0046ca3dc9d54mr3818943vsb.20.1706782659829; Thu, 01
- Feb 2024 02:17:39 -0800 (PST)
+ bh=hwVXnnc49rRGoYShNfUSAFhG2l9jFBSeYlqvJ4Eg96Y=;
+ b=EC2zLzVtkXi0RZllrmbSdCFclZLqG+Aw499TpMn5bsYfjluY0FTBZtprj12cQ8p230
+ tURAqpmXGQqSDgCnY2JAh7qb4XtEydY2XW+mB+Gqdipvmk+7NmrC1kkTWFscMqwnyZ0S
+ XGriVJCBRezU3HyozCPL+S62PGfH5r+QGH+gkUffrR6InxOVRq9GaMG6xvZTXPMgiMth
+ EwRdc06I5Aj0zS77Y2EZvC5HEQZj7ma6qA3a+4lLVLRcqNpShccfl3eiIxyxNQAi9jpV
+ lRm/JEpb//4gwUs1fWvNR0jDqai+2Ezzq/iC9c+ejy4bOVmHMAgRt2XMazUgJejewOGy
+ +7Lg==
+X-Gm-Message-State: AOJu0YzM1m2tV6WoG4Xy33LAqJ333+TJqSt2uTPfIFSKDZgCfBFo0Ief
+ 2UJseE7akRgGt5avmlWBMMeIXMvQKrNQ4o8ovHnsqMTCFjmuNf9/+YHJ+Ku8yng1AsJt7dffklx
+ tPkyhdRoCYYl+O/xxUSThhtxSE2BDVKGMNe0yVw==
+X-Google-Smtp-Source: AGHT+IGZRD4p/yFe1+KRtGT+2HU8i3kP2zrOimC4J9I0JuzFoXafyHTV6k+33ebZe0lRR+SNimpIiYCkutk81qXr/fw=
+X-Received: by 2002:a67:c985:0:b0:46c:b94c:ee36 with SMTP id
+ y5-20020a67c985000000b0046cb94cee36mr1754166vsk.20.1706790652669; Thu, 01 Feb
+ 2024 04:30:52 -0800 (PST)
 MIME-Version: 1.0
 References: <20240130-b4-qcom-common-target-v3-0-e523cbf9e556@linaro.org>
- <20240130-b4-qcom-common-target-v3-33-e523cbf9e556@linaro.org>
-In-Reply-To: <20240130-b4-qcom-common-target-v3-33-e523cbf9e556@linaro.org>
+ <20240130-b4-qcom-common-target-v3-17-e523cbf9e556@linaro.org>
+In-Reply-To: <20240130-b4-qcom-common-target-v3-17-e523cbf9e556@linaro.org>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Thu, 1 Feb 2024 15:47:27 +0530
-Message-ID: <CAFA6WYM08jy1nAexJi38ULZ+igwLpacNPZCVU_uFSaQGNgHkCA@mail.gmail.com>
-Subject: Re: [PATCH v3 33/36] dts: qcs404-evb: replace with upstream DT
+Date: Thu, 1 Feb 2024 18:00:41 +0530
+Message-ID: <CAFA6WYM=9FrvX+hrkQEPnw0o1S3wEODozJtF3o4tyg6wzBpz0g@mail.gmail.com>
+Subject: Re: [PATCH v3 17/36] mach-snapdragon: generalise board support
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Neil Armstrong <neil.armstrong@linaro.org>,
  Ramon Fried <rfried.dev@gmail.com>, 
@@ -78,7 +78,6 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
  u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Thu, 01 Feb 2024 13:25:59 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,3007 +96,1346 @@ X-Virus-Status: Clean
 
 On Tue, 30 Jan 2024 at 19:35, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> Drop the U-Boot specific DTS in favour of upstream. We'll only include
-> the -4000 variant as that is what U-Boot already supported.
+> Historically, Qualcomm boards have relied on heavy hardcoding in U-Boot,
+> in many cases to the specific SoC but also to the board itself (e.g.
+> memory map). This has been largely resolved by modernising the Qualcomm
+> drivers in U-Boot, however the board code still largely follows this
+> model.
 >
-> Taken from kernel tag v6.7
+> This patch removes the board specific memory maps and duplicated board
+> init code, replacing it with generic init code.
+>
+> The memory map is now built at runtime based on data read from DT, this
+> allows for the memory map to be provided without having to recompile
+> U-Boot. Support is also added for booting with appended DTBs, so that
+> the first-stage bootloader can populate the memory map for us.
+>
+> The sdm845 specific init code is dropped entirely, it set an environment
+> variable depending on if a button was pressed, but this variable wasn't
+> used in U-Boot, and could be written to use the button command instead.
+>
+> The KASLR detection is also dropped as with appended dtb, the kaslr seed
+> can be read directly from the DTB passed to U-Boot.
+>
+> A new qcom_defconfig is added, with the aim of providing a generic
+> U-Boot configuration that will work on as many Qualcomm boards as
+> possible. It replaces the defconfig files for the Dragonboard 845c,
+> Galaxy S9, and QCS404 EVB. For now the db410c and 820c are excluded as
+> they still have some board code left.
+>
+> Similarly, the config headers for db845c, starqltechn, and qcs404-evb
+> are replaced by a single qcom header.
+>
+> The previously db410c-specific board_usb_init() function is made to be
+> generic and is added to mach-snapdragon. While we lack proper modelling
+> for USB configuration, using a well-known named pinctrl state is a
+> reasonably generic middleground, and works using upstream DT. This
+> function will do nothing unless the USB node has a pinctrl state named
+> "device", in which case it will be set when entering USB peripheral
+> mode.
 >
 > Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->  arch/arm/dts/Makefile                    |    2 +-
->  arch/arm/dts/pms405.dtsi                 |  149 +++
->  arch/arm/dts/qcs404-evb-4000-u-boot.dtsi |   26 +
->  arch/arm/dts/qcs404-evb-4000.dts         |   96 ++
->  arch/arm/dts/qcs404-evb-uboot.dtsi       |   30 -
->  arch/arm/dts/qcs404-evb.dts              |  390 -------
->  arch/arm/dts/qcs404-evb.dtsi             |  389 +++++++
->  arch/arm/dts/qcs404.dtsi                 | 1829 ++++++++++++++++++++++++++++++
->  8 files changed, 2490 insertions(+), 421 deletions(-)
+>  arch/arm/Kconfig                                 |   3 +
+>  arch/arm/dts/Makefile                            |   9 +-
+>  arch/arm/mach-snapdragon/Kconfig                 |  96 ++--------
+>  arch/arm/mach-snapdragon/Makefile                |   6 +-
+>  arch/arm/mach-snapdragon/board.c                 | 216 +++++++++++++++++++++++
+>  arch/arm/mach-snapdragon/init_sdm845.c           |  73 --------
+>  arch/arm/mach-snapdragon/sysmap-apq8016.c        |  31 ----
+>  arch/arm/mach-snapdragon/sysmap-apq8096.c        |  31 ----
+>  arch/arm/mach-snapdragon/sysmap-qcs404.c         |  43 -----
+>  arch/arm/mach-snapdragon/sysmap-sdm845.c         |  31 ----
+>  board/qualcomm/dragonboard410c/Kconfig           |  15 --
+>  board/qualcomm/dragonboard410c/dragonboard410c.c |  41 -----
+>  board/qualcomm/dragonboard820c/Kconfig           |  15 --
+>  board/qualcomm/dragonboard820c/dragonboard820c.c |  39 +---
+>  board/qualcomm/dragonboard845c/Kconfig           |  12 --
+>  board/qualcomm/qcs404-evb/Kconfig                |  15 --
+>  board/qualcomm/qcs404-evb/qcs404-evb.c           |  21 +--
+>  configs/dragonboard410c_defconfig                |   6 +-
+>  configs/dragonboard820c_defconfig                |   6 +-
+>  configs/dragonboard845c_defconfig                |  29 ---
+>  configs/qcom_defconfig                           |  73 ++++++++
+>  configs/qcs404evb_defconfig                      |   5 +-
+>  configs/starqltechn_defconfig                    |  41 -----
+>  include/configs/dragonboard845c.h                |  20 ---
+>  include/configs/qcom.h                           |  21 +++
+>  include/configs/qcs404-evb.h                     |  20 ---
+>  include/configs/sdm845.h                         |  26 ---
+>  27 files changed, 352 insertions(+), 592 deletions(-)
 >
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index 9e73b69f1e1f..03ea75cefc0d 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -1085,6 +1085,9 @@ config ARCH_SNAPDRAGON
+>         select OF_SEPARATE
+>         select SMEM
+>         select SPMI
+> +       select OF_BOARD
+> +       select SAVE_PREV_BL_FDT_ADDR
+> +       select LINUX_KERNEL_IMAGE_HEADER
+>         imply CMD_DM
+>
+>  config ARCH_SOCFPGA
 > diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index 03b199d04692..243069c631aa 100644
+> index 773c2546131c..b058def774d4 100644
 > --- a/arch/arm/dts/Makefile
 > +++ b/arch/arm/dts/Makefile
-> @@ -632,7 +632,7 @@ dtb-$(CONFIG_ARCH_SNAPDRAGON) += apq8016-sbc.dtb \
->         apq8096-db820c.dtb \
->         sdm845-db845c.dtb \
->         sdm845-samsung-starqltechn.dtb \
-> -       qcs404-evb.dtb
-> +       qcs404-evb-4000.dtb
+> @@ -628,10 +628,11 @@ dtb-$(CONFIG_TARGET_SL28) += fsl-ls1028a-kontron-sl28.dtb \
+>
+>  dtb-$(CONFIG_TARGET_TEN64) += fsl-ls1088a-ten64.dtb
+>
+> -dtb-$(CONFIG_TARGET_DRAGONBOARD410C) += dragonboard410c.dtb
+> -dtb-$(CONFIG_TARGET_DRAGONBOARD820C) += dragonboard820c.dtb
+> -dtb-$(CONFIG_TARGET_STARQLTECHN) += starqltechn.dtb
+> -dtb-$(CONFIG_TARGET_QCS404EVB) += qcs404-evb.dtb
+> +dtb-$(CONFIG_ARCH_SNAPDRAGON) += dragonboard410c.dtb \
+> +       dragonboard820c.dtb \
+> +       dragonboard845c.dtb \
+> +       starqltechn.dtb \
+> +       qcs404-evb.dtb
 >
 >  dtb-$(CONFIG_TARGET_STEMMY) += ste-ux500-samsung-stemmy.dtb
 >
-> diff --git a/arch/arm/dts/pms405.dtsi b/arch/arm/dts/pms405.dtsi
+> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+> index f897c393464f..96e44e2c5491 100644
+> --- a/arch/arm/mach-snapdragon/Kconfig
+> +++ b/arch/arm/mach-snapdragon/Kconfig
+> @@ -3,6 +3,9 @@ if ARCH_SNAPDRAGON
+>  config SYS_SOC
+>         default "snapdragon"
+>
+> +config SYS_VENDOR
+> +       default "qualcomm"
+> +
+>  config SYS_MALLOC_F_LEN
+>         default 0x2000
+>
+> @@ -12,91 +15,24 @@ config SPL_SYS_MALLOC_F
+>  config SPL_SYS_MALLOC_F_LEN
+>         default 0x2000
+>
+> -config SDM845
+> -       bool "Qualcomm Snapdragon 845 SoC"
+> -       select LINUX_KERNEL_IMAGE_HEADER
+> -       imply CLK_QCOM_SDM845
+> -       imply PINCTRL_QCOM_SDM845
+> -       imply BUTTON_QCOM_PMIC
+> -
+>  config LNX_KRNL_IMG_TEXT_OFFSET_BASE
+>         default 0x80000000
+>
+> -choice
+> -       prompt "Snapdragon board select"
+> -
+> -config TARGET_DRAGONBOARD410C
+> -       bool "96Boards Dragonboard 410C"
+> -       select BOARD_LATE_INIT
+> -       select ENABLE_ARM_SOC_BOOT0_HOOK
+> -       imply CLK_QCOM_APQ8016
+> -       imply PINCTRL_QCOM_APQ8016
+> -       imply BUTTON_QCOM_PMIC
+> +config SYS_BOARD
+> +       string "Qualcomm custom board"
+>         help
+> -         Support for 96Boards Dragonboard 410C. This board complies with
+> -         96Board Open Platform Specifications. Features:
+> -         - Qualcomm Snapdragon 410C SoC - APQ8016 (4xCortex A53, Adreno 306)
+> -         - 1GiB RAM
+> -         - 8GiB eMMC, uSD slot
+> -         - WiFi, Bluetooth and GPS module
+> -         - 2x Host, 1x Device USB port
+> -         - HDMI
+> -         - 20-pin low speed and 40-pin high speed expanders, 4 LED, 3 buttons
+> +         The Dragonboard 410c and 820c have additional board init
+> +         code that isn't shared with other Qualcomm boards.
+> +         Based on this option board/qualcomm/<CONFIG_SYS_BOARD> will
+> +         be used.
+>
+> -config TARGET_DRAGONBOARD820C
+> -       bool "96Boards Dragonboard 820C"
+> -       select LINUX_KERNEL_IMAGE_HEADER
+> -       imply CLK_QCOM_APQ8096
+> -       imply PINCTRL_QCOM_APQ8096
+> -       imply BUTTON_QCOM_PMIC
+> +config SYS_CONFIG_NAME
+> +       string "Board configuration name"
+> +       default SYS_BOARD if SYS_BOARD != ""
+> +       default "qcom"
+>         help
+> -         Support for 96Boards Dragonboard 820C. This board complies with
+> -         96Board Open Platform Specifications. Features:
+> -         - Qualcomm Snapdragon 820C SoC - APQ8096 (4xKyro CPU)
+> -         - 3GiB RAM
+> -         - 32GiB UFS drive
+> -
+> -config TARGET_DRAGONBOARD845C
+> -       bool "96Boards Dragonboard 845C"
+> -       help
+> -         Support for 96Boards Dragonboard 845C aka Robotics RB3 Development
+> -         Platform. This board complies with 96Boards Open Platform
+> -         Specifications. Features:
+> -         - Qualcomm Snapdragon SDA845 SoC
+> -         - 4GiB RAM
+> -         - 64GiB UFS drive
+> -       select MISC_INIT_R
+> -       select SDM845
+> -
+> -config TARGET_STARQLTECHN
+> -       bool "Samsung S9 SM-G9600(starqltechn)"
+> -       help
+> -         Support for Samsung S9 SM-G9600(starqltechn) board.
+> -         Features:
+> -         - Qualcomm Snapdragon SDM845 SoC
+> -         - 4GiB RAM
+> -         - 64GiB UFS drive
+> -       select MISC_INIT_R
+> -       select SDM845
+> -
+> -config TARGET_QCS404EVB
+> -       bool "Qualcomm Technologies, Inc. QCS404 EVB"
+> -       select LINUX_KERNEL_IMAGE_HEADER
+> -       imply CLK_QCOM_QCS404
+> -       imply PINCTRL_QCOM_QCS404
+> -       help
+> -         Support for Qualcomm Technologies, Inc. QCS404 evaluation board.
+> -         Features:
+> -         - Qualcomm Snapdragon QCS404 SoC
+> -         - 1GiB RAM
+> -         - 8GiB eMMC, uSD slot
+> -
+> -endchoice
+> -
+> -source "board/qualcomm/dragonboard410c/Kconfig"
+> -source "board/qualcomm/dragonboard820c/Kconfig"
+> -source "board/qualcomm/dragonboard845c/Kconfig"
+> -source "board/samsung/starqltechn/Kconfig"
+> -source "board/qualcomm/qcs404-evb/Kconfig"
+> +         This option contains information about board configuration name.
+> +         Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
+> +         will be used for board configuration.
+>
+>  endif
+> diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-snapdragon/Makefile
+> index d02432df8b04..857171e593da 100644
+> --- a/arch/arm/mach-snapdragon/Makefile
+> +++ b/arch/arm/mach-snapdragon/Makefile
+> @@ -2,8 +2,4 @@
+>  #
+>  # (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
+>
+> -obj-$(CONFIG_SDM845) += sysmap-sdm845.o
+> -obj-$(CONFIG_SDM845) += init_sdm845.o
+> -obj-$(CONFIG_TARGET_DRAGONBOARD820C) += sysmap-apq8096.o
+> -obj-$(CONFIG_TARGET_DRAGONBOARD410C) += sysmap-apq8016.o
+> -obj-$(CONFIG_TARGET_QCS404EVB) += sysmap-qcs404.o
+> +obj-y += board.o
+> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
 > new file mode 100644
-> index 000000000000..461ad97032f7
+> index 000000000000..3018cc462b8f
 > --- /dev/null
-> +++ b/arch/arm/dts/pms405.dtsi
-> @@ -0,0 +1,149 @@
-> +// SPDX-License-Identifier: GPL-2.0
+> +++ b/arch/arm/mach-snapdragon/board.c
+> @@ -0,0 +1,216 @@
+> +// SPDX-License-Identifier: GPL-2.0+
 > +/*
-> + * Copyright (c) 2018, Linaro Limited
+> + * Common initialisation for Qualcomm Snapdragon boards.
+> + *
+> + * Copyright (c) 2023 Linaro Ltd.
+> + * Author: Caleb Connolly <caleb.connolly@linaro.org>
 > + */
 > +
-> +#include <dt-bindings/spmi/spmi.h>
-> +#include <dt-bindings/input/linux-event-codes.h>
-> +#include <dt-bindings/iio/qcom,spmi-vadc.h>
-> +#include <dt-bindings/thermal/thermal.h>
+> +#define LOG_DEBUG
 > +
-> +/ {
-> +       thermal-zones {
-> +               pms405-thermal {
-> +                       polling-delay-passive = <250>;
-> +                       polling-delay = <1000>;
+> +#include <asm/armv8/mmu.h>
+> +#include <asm/gpio.h>
+> +#include <asm/io.h>
+> +#include <asm/psci.h>
+> +#include <asm/system.h>
+> +#include <dm/device.h>
+> +#include <dm/pinctrl.h>
+> +#include <dm/uclass-internal.h>
+> +#include <dm/read.h>
+> +#include <env.h>
+> +#include <init.h>
+> +#include <linux/arm-smccc.h>
+> +#include <linux/bug.h>
+> +#include <linux/psci.h>
+> +#include <linux/sizes.h>
+> +#include <malloc.h>
+> +#include <usb.h>
 > +
-> +                       thermal-sensors = <&pms405_temp>;
+> +DECLARE_GLOBAL_DATA_PTR;
 > +
-> +                       trips {
-> +                               pms405_alert0: pms405-alert0 {
-> +                                       temperature = <105000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "passive";
-> +                               };
-> +                               pms405_crit: pms405-crit {
-> +                                       temperature = <125000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "critical";
-> +                               };
-> +                       };
-> +               };
-> +       };
-> +};
+> +static struct mm_region rbx_mem_map[CONFIG_NR_DRAM_BANKS + 2] = { { 0 } };
 > +
-> +&spmi_bus {
-> +       pms405_0: pms405@0 {
-> +               compatible = "qcom,pms405", "qcom,spmi-pmic";
-> +               reg = <0x0 SPMI_USID>;
-> +               #address-cells = <1>;
-> +               #size-cells = <0>;
+> +struct mm_region *mem_map = rbx_mem_map;
 > +
-> +               pms405_gpios: gpio@c000 {
-> +                       compatible = "qcom,pms405-gpio", "qcom,spmi-gpio";
-> +                       reg = <0xc000>;
-> +                       gpio-controller;
-> +                       gpio-ranges = <&pms405_gpios 0 0 12>;
-> +                       #gpio-cells = <2>;
-> +                       interrupt-controller;
-> +                       #interrupt-cells = <2>;
-> +               };
+> +int dram_init(void)
+> +{
+> +       return fdtdec_setup_mem_size_base();
+> +}
 > +
-> +               pon@800 {
-> +                       compatible = "qcom,pms405-pon";
-> +                       reg = <0x0800>;
-> +                       mode-bootloader = <0x2>;
-> +                       mode-recovery = <0x1>;
+> +static int ddr_bank_cmp(const void *v1, const void *v2)
+> +{
+> +       const struct {
+> +               phys_addr_t start;
+> +               phys_size_t size;
+> +       } *res1 = v1, *res2 = v2;
 > +
-> +                       pwrkey {
-> +                               compatible = "qcom,pm8941-pwrkey";
-> +                               interrupts = <0x0 0x8 0 IRQ_TYPE_EDGE_BOTH>;
-> +                               debounce = <15625>;
-> +                               bias-pull-up;
-> +                               linux,code = <KEY_POWER>;
-> +                       };
-> +               };
+> +       if (!res1->size)
+> +               return 1;
+> +       if (!res2->size)
+> +               return -1;
 > +
-> +               pms405_temp: temp-alarm@2400 {
-> +                       compatible = "qcom,spmi-temp-alarm";
-> +                       reg = <0x2400>;
-> +                       interrupts = <0 0x24 0 IRQ_TYPE_EDGE_RISING>;
-> +                       io-channels = <&pms405_adc ADC5_DIE_TEMP>;
-> +                       io-channel-names = "thermal";
-> +                       #thermal-sensor-cells = <0>;
-> +               };
+> +       return (res1->start >> 24) - (res2->start >> 24);
+> +}
 > +
-> +               pms405_adc: adc@3100 {
-> +                       compatible = "qcom,pms405-adc", "qcom,spmi-adc-rev2";
-> +                       reg = <0x3100>;
-> +                       interrupts = <0x0 0x31 0x0 IRQ_TYPE_EDGE_RISING>;
-> +                       #address-cells = <1>;
-> +                       #size-cells = <0>;
-> +                       #io-channel-cells = <1>;
+> +int dram_init_banksize(void)
+> +{
+> +       int ret;
 > +
-> +                       channel@0 {
-> +                               reg = <ADC5_REF_GND>;
-> +                               qcom,pre-scaling = <1 1>;
-> +                               label = "ref_gnd";
-> +                       };
+> +       ret = fdtdec_setup_memory_banksize();
+> +       if (ret < 0)
+> +               return ret;
 > +
-> +                       channel@1 {
-> +                               reg = <ADC5_1P25VREF>;
-> +                               qcom,pre-scaling = <1 1>;
-> +                               label = "vref_1p25";
-> +                       };
+> +       if (CONFIG_NR_DRAM_BANKS < 2)
+> +               return 0;
 > +
-> +                       channel@131 {
-> +                               reg = <ADC5_VPH_PWR>;
-> +                               qcom,pre-scaling = <1 3>;
-> +                               label = "vph_pwr";
-> +                       };
+> +       /* Sort our RAM banks -_- */
+> +       qsort(gd->bd->bi_dram, CONFIG_NR_DRAM_BANKS, sizeof(gd->bd->bi_dram[0]), ddr_bank_cmp);
 > +
-> +                       channel@6 {
-> +                               reg = <ADC5_DIE_TEMP>;
-> +                               qcom,pre-scaling = <1 1>;
-> +                               label = "die_temp";
-> +                       };
+> +       return 0;
+> +}
 > +
-> +                       channel@77 {
-> +                               reg = <ADC5_AMUX_THM1_100K_PU>;
-> +                               qcom,ratiometric;
-> +                               qcom,hw-settle-time = <200>;
-> +                               qcom,pre-scaling = <1 1>;
-> +                               label = "pa_therm1";
-> +                       };
+> +static void show_psci_version(void)
+> +{
+> +       struct arm_smccc_res res;
 > +
-> +                       channel@79 {
-> +                               reg = <ADC5_AMUX_THM3_100K_PU>;
-> +                               qcom,ratiometric;
-> +                               qcom,hw-settle-time = <200>;
-> +                               qcom,pre-scaling = <1 1>;
-> +                               label = "pa_therm3";
-> +                       };
+> +       arm_smccc_smc(ARM_PSCI_0_2_FN_PSCI_VERSION, 0, 0, 0, 0, 0, 0, 0, &res);
 > +
-> +                       channel@76 {
-> +                               reg = <ADC5_XO_THERM_100K_PU>;
-> +                               qcom,ratiometric;
-> +                               qcom,hw-settle-time = <200>;
-> +                               qcom,pre-scaling = <1 1>;
-> +                               label = "xo_therm";
-> +                       };
-> +               };
+> +       debug("PSCI:  v%ld.%ld\n",
+> +             PSCI_VERSION_MAJOR(res.a0),
+> +             PSCI_VERSION_MINOR(res.a0));
+> +}
 > +
-> +               rtc@6000 {
-> +                       compatible = "qcom,pm8941-rtc";
-> +                       reg = <0x6000>, <0x6100>;
-> +                       reg-names = "rtc", "alarm";
-> +                       interrupts = <0x0 0x61 0x1 IRQ_TYPE_NONE>;
-> +               };
-> +       };
+> +void *board_fdt_blob_setup(int *err)
+> +{
+> +       phys_addr_t fdt;
+> +       /* Return DTB pointer passed by ABL */
+> +       *err = 0;
+> +       fdt = get_prev_bl_fdt_addr();
 > +
-> +       pms405_1: pms405@1 {
-> +               compatible = "qcom,pms405", "qcom,spmi-pmic";
-> +               reg = <0x1 SPMI_USID>;
-> +
-> +               pms405_spmi_regulators: regulators {
-> +                       compatible = "qcom,pms405-regulators";
-> +               };
-> +       };
-> +};
-> diff --git a/arch/arm/dts/qcs404-evb-4000-u-boot.dtsi b/arch/arm/dts/qcs404-evb-4000-u-boot.dtsi
-> new file mode 100644
-> index 000000000000..5f1be85bd834
-> --- /dev/null
-> +++ b/arch/arm/dts/qcs404-evb-4000-u-boot.dtsi
-> @@ -0,0 +1,26 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +#include <dt-bindings/gpio/gpio.h>
-> +
-> +/delete-node/ &usb3_vbus_reg;
-> +/delete-node/ &usb_vbus_boost_pin;
-> +
-> +/ {
-> +       /* U-Boot uses different bindings for GPIO regulators, this
-> +        * one is required for USB
+> +       /*
+> +        * If we bail then the board will simply not boot, instead let's
+> +        * try and use the FDT built into U-Boot if there is one...
+> +        * This avoids having a hard dependency on the previous stage bootloader
 > +        */
-> +       usb3_vbus_reg: usb3_vbus_reg {
-> +               compatible = "regulator-gpio";
-> +               regulator-name = "usb3_vbus_reg";
-> +               regulator-min-microvolt = <5000000>;
-> +               regulator-max-microvolt = <5000000>;
-> +               enable-gpios = <&pms405_gpios 3 GPIO_ACTIVE_HIGH>;
-> +               enable-active-high;
-> +               states = <0 0>, <5000000 1>;
-> +       };
-> +};
+> +       if (IS_ENABLED(CONFIG_OF_SEPARATE) && (!fdt || fdt != ALIGN(fdt, SZ_4K))) {
+> +               debug("%s: Using built in FDT, bootloader gave us %#llx\n", __func__, fdt);
+> +               return (void *)gd->fdt_blob;
+> +       }
 > +
-> +&usb3_dwc3 {
-> +       /* Make sure the VBUS supply is switched on */
-> +       vbus-supply = <&usb3_vbus_reg>;
-> +};
+> +       return (void *)fdt;
+> +}
+> +
+> +void reset_cpu(void)
+> +{
+> +       psci_system_reset();
+> +}
+> +
+> +/*
+> + * Some Qualcomm boards require GPIO configuration when switching USB modes.
+> + * Support setting this configuration via pinctrl state.
+> + */
+> +int board_usb_init(int index, enum usb_init_type init)
+> +{
+> +       struct udevice *usb;
+> +       int ret = 0;
+> +
+> +       /* USB device */
+> +       ret = uclass_find_device_by_seq(UCLASS_USB, index, &usb);
+> +       if (ret) {
+> +               printf("Cannot find USB device\n");
+> +               return ret;
+> +       }
+> +
+> +       ret = dev_read_stringlist_search(usb, "pinctrl-names",
+> +                                        "device");
+> +       /* No "device" pinctrl state, so just bail */
+> +       if (ret < 0)
+> +               return 0;
+> +
+> +       /* Select "default" or "device" pinctrl */
+> +       switch (init) {
+> +       case USB_INIT_HOST:
+> +               pinctrl_select_state(usb, "default");
+> +               break;
+> +       case USB_INIT_DEVICE:
+> +               pinctrl_select_state(usb, "device");
+> +               break;
+> +       default:
+> +               debug("Unknown usb_init_type %d\n", init);
+> +               break;
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+> +/*
+> + * Some boards still need board specific init code, they can implement that by
+> + * overriding this function.
+> + *
+> + * FIXME: get rid of board specific init code
+> + */
+> +void __weak qcom_board_init(void)
+> +{
+> +}
+> +
+> +int board_init(void)
+> +{
+> +       show_psci_version();
+> +       qcom_board_init();
+> +       return 0;
+> +}
+> +
+> +static void build_mem_map(void)
+> +{
+> +       int i;
+> +
+> +       /*
+> +        * Ensure the peripheral block is sized to correctly cover the address range
+> +        * up to the first memory bank.
+> +        * Don't map the first page to ensure that we actually trigger an abort on a
+> +        * null pointer access rather than just hanging.
+> +        * FIXME: we should probably split this into more precise regions
+> +        */
+> +       mem_map[0].phys = 0x1000;
+> +       mem_map[0].virt = mem_map[0].phys;
+> +       mem_map[0].size = gd->bd->bi_dram[0].start - mem_map[0].phys;
+> +       mem_map[0].attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> +                        PTE_BLOCK_NON_SHARE |
+> +                        PTE_BLOCK_PXN | PTE_BLOCK_UXN;
+> +
+> +       debug("Configured memory map:\n");
+> +       debug("  0x%016llx - 0x%016llx: Peripheral block\n",
+> +             mem_map[0].phys, mem_map[0].phys + mem_map[0].size);
+> +
+> +       /*
+> +        * Now add memory map entries for each DRAM bank, ensuring we don't
+> +        * overwrite the list terminator
+> +        */
+> +       for (i = 0; i < ARRAY_SIZE(rbx_mem_map) - 2 && gd->bd->bi_dram[i].size; i++) {
+> +               if (i == ARRAY_SIZE(rbx_mem_map) - 1) {
+> +                       log_warning("Too many DRAM banks!\n");
+> +                       break;
+> +               }
+> +               mem_map[i + 1].phys = gd->bd->bi_dram[i].start;
+> +               mem_map[i + 1].virt = mem_map[i + 1].phys;
+> +               mem_map[i + 1].size = gd->bd->bi_dram[i].size;
+> +               mem_map[i + 1].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+> +                                    PTE_BLOCK_INNER_SHARE;
+> +
+> +               debug("  0x%016llx - 0x%016llx: DDR bank %d\n",
+> +                     mem_map[i + 1].phys, mem_map[i + 1].phys + mem_map[i + 1].size, i);
+> +       }
+> +}
+> +
+> +u64 get_page_table_size(void)
+> +{
+> +       return SZ_64K;
+> +}
+> +
+> +void enable_caches(void)
+> +{
+> +       build_mem_map();
+> +
+> +       icache_enable();
+> +       dcache_enable();
+> +}
+> diff --git a/arch/arm/mach-snapdragon/init_sdm845.c b/arch/arm/mach-snapdragon/init_sdm845.c
+> deleted file mode 100644
+> index 067acc9a6f44..000000000000
+> --- a/arch/arm/mach-snapdragon/init_sdm845.c
+> +++ /dev/null
+> @@ -1,73 +0,0 @@
+> -// SPDX-License-Identifier: GPL-2.0+
+> -/*
+> - * Common init part for boards based on SDM845
+> - *
+> - * (C) Copyright 2021 Dzmitry Sankouski <dsankouski@gmail.com>
+> - */
+> -
+> -#include <button.h>
+> -#include <init.h>
+> -#include <env.h>
+> -#include <common.h>
+> -#include <asm/system.h>
+> -#include <asm/gpio.h>
+> -#include <dm.h>
+> -
+> -DECLARE_GLOBAL_DATA_PTR;
+> -
+> -int dram_init(void)
+> -{
+> -       return fdtdec_setup_mem_size_base();
+> -}
+> -
+> -void reset_cpu(void)
+> -{
+> -       psci_system_reset();
+> -}
+> -
+> -__weak int board_init(void)
+> -{
+> -       return 0;
+> -}
+> -
+> -/* Check for vol- and power buttons */
+> -__weak int misc_init_r(void)
+> -{
+> -       struct udevice *btn;
+> -       int ret;
+> -       enum button_state_t state;
+> -
+> -       ret = button_get_by_label("pwrkey", &btn);
+> -       if (ret < 0) {
+> -               printf("Couldn't find power button!\n");
+> -               return ret;
+> -       }
+> -
+> -       state = button_get_state(btn);
+> -       if (state == BUTTON_ON) {
+> -               env_set("key_power", "1");
+> -               printf("Power button pressed\n");
+> -       } else {
+> -               env_set("key_power", "0");
+> -       }
+> -
+> -       /*
+> -        * search for kaslr address, set by primary bootloader by searching first
+> -        * 0x100 relocated bytes at u-boot's initial load address range
+> -        */
+> -       uintptr_t start = gd->ram_base;
+> -       uintptr_t end = start + 0x800000;
+> -       u8 *addr = (u8 *)start;
+> -       phys_addr_t *relocaddr = (phys_addr_t *)gd->relocaddr;
+> -       u32 block_size = 0x1000;
+> -
+> -       while (memcmp(addr, relocaddr, 0x100) && (uintptr_t)addr < end)
+> -               addr += block_size;
+> -
+> -       if ((uintptr_t)addr >= end)
+> -               printf("KASLR not found in range 0x%lx - 0x%lx", start, end);
+> -       else
+> -               env_set_addr("KASLR", addr);
+> -
+> -       return 0;
+> -}
+> diff --git a/arch/arm/mach-snapdragon/sysmap-apq8016.c b/arch/arm/mach-snapdragon/sysmap-apq8016.c
+> deleted file mode 100644
+> index ffa3f9aa3532..000000000000
+> --- a/arch/arm/mach-snapdragon/sysmap-apq8016.c
+> +++ /dev/null
+> @@ -1,31 +0,0 @@
+> -// SPDX-License-Identifier: GPL-2.0+
+> -/*
+> - * Qualcomm APQ8016 memory map
+> - *
+> - * (C) Copyright 2016 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
+> - */
+> -
+> -#include <common.h>
+> -#include <asm/armv8/mmu.h>
+> -
+> -static struct mm_region apq8016_mem_map[] = {
+> -       {
+> -               .virt = 0x0UL, /* Peripheral block */
+> -               .phys = 0x0UL, /* Peripheral block */
+> -               .size = 0x8000000UL,
+> -               .attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> -                        PTE_BLOCK_NON_SHARE |
+> -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> -       }, {
+> -               .virt = 0x80000000UL, /* DDR */
+> -               .phys = 0x80000000UL, /* DDR */
+> -               .size = 0x80000000UL,
+> -               .attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+> -                        PTE_BLOCK_INNER_SHARE
+> -       }, {
+> -               /* List terminator */
+> -               0,
+> -       }
+> -};
+> -
+> -struct mm_region *mem_map = apq8016_mem_map;
+> diff --git a/arch/arm/mach-snapdragon/sysmap-apq8096.c b/arch/arm/mach-snapdragon/sysmap-apq8096.c
+> deleted file mode 100644
+> index 0614f8308d02..000000000000
+> --- a/arch/arm/mach-snapdragon/sysmap-apq8096.c
+> +++ /dev/null
+> @@ -1,31 +0,0 @@
+> -// SPDX-License-Identifier: GPL-2.0+
+> -/*
+> - * Qualcomm APQ8096 memory map
+> - *
+> - * (C) Copyright 2017 Jorge Ramirez Ortiz <jorge.ramirez-ortiz@linaro.org>
+> - */
+> -
+> -#include <common.h>
+> -#include <asm/armv8/mmu.h>
+> -
+> -static struct mm_region apq8096_mem_map[] = {
+> -       {
+> -               .virt = 0x0UL, /* Peripheral block */
+> -               .phys = 0x0UL, /* Peripheral block */
+> -               .size = 0x10000000UL,
+> -               .attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> -                        PTE_BLOCK_NON_SHARE |
+> -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> -       }, {
+> -               .virt = 0x80000000UL, /* DDR */
+> -               .phys = 0x80000000UL, /* DDR */
+> -               .size = 0xC0000000UL,
+> -               .attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+> -                        PTE_BLOCK_INNER_SHARE
+> -       }, {
+> -               /* List terminator */
+> -               0,
+> -       }
+> -};
+> -
+> -struct mm_region *mem_map = apq8096_mem_map;
+> diff --git a/arch/arm/mach-snapdragon/sysmap-qcs404.c b/arch/arm/mach-snapdragon/sysmap-qcs404.c
+> deleted file mode 100644
+> index 64ca4adf1bd1..000000000000
+> --- a/arch/arm/mach-snapdragon/sysmap-qcs404.c
+> +++ /dev/null
+> @@ -1,43 +0,0 @@
+> -// SPDX-License-Identifier: GPL-2.0+
+> -/*
+> - * Qualcomm QCS404 memory map
+> - *
+> - * (C) Copyright 2022 Sumit Garg <sumit.garg@linaro.org>
+> - */
+> -
+> -#include <common.h>
+> -#include <asm/armv8/mmu.h>
+> -
+> -static struct mm_region qcs404_mem_map[] = {
+> -       {
+> -               .virt = 0x0UL, /* Peripheral block */
+> -               .phys = 0x0UL, /* Peripheral block */
+> -               .size = 0x8000000UL,
+> -               .attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> -                        PTE_BLOCK_NON_SHARE |
+> -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> -       }, {
+> -               .virt = 0x80000000UL, /* DDR */
+> -               .phys = 0x80000000UL, /* DDR */
+> -               .size = 0x05900000UL,
+> -               .attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+> -                        PTE_BLOCK_INNER_SHARE
+> -       }, {
+> -               .virt = 0x89600000UL, /* DDR */
+> -               .phys = 0x89600000UL, /* DDR */
+> -               .size = 0x162000000UL,
+> -               .attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+> -                        PTE_BLOCK_INNER_SHARE
+> -       }, {
+> -               .virt = 0xa0000000UL, /* DDR */
+> -               .phys = 0xa0000000UL, /* DDR */
+> -               .size = 0x20000000UL,
+> -               .attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+> -                        PTE_BLOCK_INNER_SHARE
+> -       }, {
+> -               /* List terminator */
+> -               0,
+> -       }
+> -};
+> -
+> -struct mm_region *mem_map = qcs404_mem_map;
+> diff --git a/arch/arm/mach-snapdragon/sysmap-sdm845.c b/arch/arm/mach-snapdragon/sysmap-sdm845.c
+> deleted file mode 100644
+> index 721ac411665c..000000000000
+> --- a/arch/arm/mach-snapdragon/sysmap-sdm845.c
+> +++ /dev/null
+> @@ -1,31 +0,0 @@
+> -// SPDX-License-Identifier: GPL-2.0+
+> -/*
+> - * Qualcomm SDM845 memory map
+> - *
+> - * (C) Copyright 2021 Dzmitry Sankouski <dsankousk@gmail.com>
+> - */
+> -
+> -#include <common.h>
+> -#include <asm/armv8/mmu.h>
+> -
+> -static struct mm_region sdm845_mem_map[] = {
+> -       {
+> -               .virt = 0x0UL, /* Peripheral block */
+> -               .phys = 0x0UL, /* Peripheral block */
+> -               .size = 0x10000000UL,
+> -               .attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> -                        PTE_BLOCK_NON_SHARE |
+> -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> -       }, {
+> -               .virt = 0x80000000UL, /* DDR */
+> -               .phys = 0x80000000UL, /* DDR */
+> -               .size = 0x200000000UL, /* 8GiB - maximum allowed memory */
+> -               .attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+> -                        PTE_BLOCK_INNER_SHARE
+> -       }, {
+> -               /* List terminator */
+> -               0,
+> -       }
+> -};
+> -
+> -struct mm_region *mem_map = sdm845_mem_map;
+> diff --git a/board/qualcomm/dragonboard410c/Kconfig b/board/qualcomm/dragonboard410c/Kconfig
+> deleted file mode 100644
+> index 03bd7ae309cd..000000000000
+> --- a/board/qualcomm/dragonboard410c/Kconfig
+> +++ /dev/null
+> @@ -1,15 +0,0 @@
+> -if TARGET_DRAGONBOARD410C
+> -
+> -config SYS_BOARD
+> -       default "dragonboard410c"
+> -
+> -config SYS_VENDOR
+> -       default "qualcomm"
+> -
+> -config SYS_SOC
+> -       default "apq8016"
+> -
+> -config SYS_CONFIG_NAME
+> -       default "dragonboard410c"
+> -
+> -endif
+> diff --git a/board/qualcomm/dragonboard410c/dragonboard410c.c b/board/qualcomm/dragonboard410c/dragonboard410c.c
+> index 40b5448c6ef1..0136cc2237de 100644
+> --- a/board/qualcomm/dragonboard410c/dragonboard410c.c
+> +++ b/board/qualcomm/dragonboard410c/dragonboard410c.c
+> @@ -23,37 +23,6 @@
+>
+>  DECLARE_GLOBAL_DATA_PTR;
+>
+> -#define USB_HUB_RESET_GPIO 2
+> -#define USB_SW_SELECT_GPIO 3
+> -
+> -int board_usb_init(int index, enum usb_init_type init)
+> -{
+> -       struct udevice *usb;
+> -       int ret = 0;
+> -
+> -       /* USB device */
+> -       ret = device_find_global_by_ofnode(ofnode_path("/soc/usb"), &usb);
+> -       if (ret) {
+> -               printf("Cannot find USB device\n");
+> -               return ret;
+> -       }
+> -
+> -       /* Select "default" or "device" pinctrl */
+> -       switch (init) {
+> -       case USB_INIT_HOST:
+> -               pinctrl_select_state(usb, "default");
+> -               break;
+> -       case USB_INIT_DEVICE:
+> -               pinctrl_select_state(usb, "device");
+> -               break;
+> -       default:
+> -               debug("Unknown usb_init_type %d\n", init);
+> -               break;
+> -       }
+> -
+> -       return 0;
+> -}
+> -
+>  /* UNSTUFF_BITS macro taken from Linux Kernel: drivers/mmc/core/sd.c */
+>  #define UNSTUFF_BITS(resp, start, size) \
+>         ({ \
+> @@ -119,11 +88,6 @@ int misc_init_r(void)
+>         return 0;
+>  }
+>
+> -int board_init(void)
+> -{
+> -       return 0;
+> -}
+> -
+>  int board_late_init(void)
+>  {
+>         char serial[16];
+> @@ -166,8 +130,3 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+>                            "local-bd-address", mac, ARP_HLEN, 1);
+>         return 0;
+>  }
+> -
+> -void reset_cpu(void)
+> -{
+> -       psci_system_reset();
+> -}
+> diff --git a/board/qualcomm/dragonboard820c/Kconfig b/board/qualcomm/dragonboard820c/Kconfig
+> deleted file mode 100644
+> index aff9af527128..000000000000
+> --- a/board/qualcomm/dragonboard820c/Kconfig
+> +++ /dev/null
+> @@ -1,15 +0,0 @@
+> -if TARGET_DRAGONBOARD820C
+> -
+> -config SYS_BOARD
+> -       default "dragonboard820c"
+> -
+> -config SYS_VENDOR
+> -       default "qualcomm"
+> -
+> -config SYS_SOC
+> -       default "apq8096"
+> -
+> -config SYS_CONFIG_NAME
+> -       default "dragonboard820c"
+> -
+> -endif
+> diff --git a/board/qualcomm/dragonboard820c/dragonboard820c.c b/board/qualcomm/dragonboard820c/dragonboard820c.c
+> index 2f0db628368b..ac7de711c588 100644
+> --- a/board/qualcomm/dragonboard820c/dragonboard820c.c
+> +++ b/board/qualcomm/dragonboard820c/dragonboard820c.c
+> @@ -27,24 +27,6 @@
+>
+>  DECLARE_GLOBAL_DATA_PTR;
+>
+> -int dram_init(void)
+> -{
+> -       gd->ram_size = PHYS_SDRAM_SIZE;
+> -
+> -       return 0;
+> -}
+> -
+> -int dram_init_banksize(void)
+> -{
+> -       gd->bd->bi_dram[0].start = PHYS_SDRAM_1;
+> -       gd->bd->bi_dram[0].size = PHYS_SDRAM_1_SIZE;
+> -
+> -       gd->bd->bi_dram[1].start = PHYS_SDRAM_2;
+> -       gd->bd->bi_dram[1].size  = PHYS_SDRAM_2_SIZE;
+> -
+> -       return 0;
+> -}
+> -
+>  static void sdhci_power_init(void)
+>  {
+>         const u32 TLMM_PULL_MASK = 0x3;
+> @@ -113,28 +95,9 @@ static void sdhci_power_init(void)
+>                         rclk[i].val  << rclk[i].bit);
+>  }
+>
+> -static void show_psci_version(void)
+> -{
+> -       struct arm_smccc_res res;
+> -
+> -       arm_smccc_smc(ARM_PSCI_0_2_FN_PSCI_VERSION, 0, 0, 0, 0, 0, 0, 0, &res);
+> -
+> -       printf("PSCI:  v%ld.%ld\n",
+> -              PSCI_VERSION_MAJOR(res.a0),
+> -               PSCI_VERSION_MINOR(res.a0));
+> -}
+> -
+> -int board_init(void)
+> +void qcom_board_init(void)
+>  {
+>         sdhci_power_init();
+> -       show_psci_version();
+> -
+> -       return 0;
+> -}
+> -
+> -void reset_cpu(void)
+> -{
+> -       psci_system_reset();
+>  }
+>
+>  /* Check for vol- button - if pressed - stop autoboot */
+> diff --git a/board/qualcomm/dragonboard845c/Kconfig b/board/qualcomm/dragonboard845c/Kconfig
+> deleted file mode 100644
+> index 52fdff288d59..000000000000
+> --- a/board/qualcomm/dragonboard845c/Kconfig
+> +++ /dev/null
+> @@ -1,12 +0,0 @@
+> -if TARGET_DRAGONBOARD845C
+> -
+> -config SYS_BOARD
+> -       default "dragonboard845c"
+> -
+> -config SYS_CONFIG_NAME
+> -       default "dragonboard845c"
+> -
+> -config SYS_VENDOR
+> -       default "qualcomm"
+> -
+> -endif
+> diff --git a/board/qualcomm/qcs404-evb/Kconfig b/board/qualcomm/qcs404-evb/Kconfig
+> deleted file mode 100644
+> index 32657c7d5e31..000000000000
+> --- a/board/qualcomm/qcs404-evb/Kconfig
+> +++ /dev/null
+> @@ -1,15 +0,0 @@
+> -if TARGET_QCS404EVB
+> -
+> -config SYS_BOARD
+> -       default "qcs404-evb"
+> -
+> -config SYS_VENDOR
+> -       default "qualcomm"
+> -
+> -config SYS_SOC
+> -       default "qcs404"
+> -
+> -config SYS_CONFIG_NAME
+> -       default "qcs404-evb"
+> -
+> -endif
+> diff --git a/board/qualcomm/qcs404-evb/qcs404-evb.c b/board/qualcomm/qcs404-evb/qcs404-evb.c
+> index 249dca7e72f1..1a4b1f97a3ae 100644
+> --- a/board/qualcomm/qcs404-evb/qcs404-evb.c
+> +++ b/board/qualcomm/qcs404-evb/qcs404-evb.c
+> @@ -14,16 +14,10 @@
+>  #include <asm/gpio.h>
+>  #include <asm/global_data.h>
+>  #include <fdt_support.h>
+> -#include <asm/arch/dram.h>
+>
+>  DECLARE_GLOBAL_DATA_PTR;
+>
+> -int dram_init(void)
+> -{
+> -       return fdtdec_setup_mem_size_base();
+> -}
+> -
+> -int board_init(void)
+> +void qcom_board_init(void)
+>  {
+>         struct udevice *pmic_gpio;
+>         struct gpio_desc usb_vbus_boost_pin;
+> @@ -34,29 +28,22 @@ int board_init(void)
+>                                         &pmic_gpio);
+>         if (ret < 0) {
+>                 printf("Failed to find pms405_gpios@c000 node.\n");
+> -               return ret;
+> +               return;
+>         }
+>
+>         node = fdt_subnode_offset(gd->fdt_blob, dev_of_offset(pmic_gpio),
+>                                   "usb_vbus_boost_pin");
+>         if (node < 0) {
+>                 printf("Failed to find usb_hub_reset_pm dt node.\n");
+> -               return node;
+> +               return;
+>         }
+>         ret = gpio_request_by_name_nodev(offset_to_ofnode(node), "gpios", 0,
+>                                          &usb_vbus_boost_pin, 0);
+>         if (ret < 0) {
+>                 printf("Failed to request usb_hub_reset_pm gpio.\n");
+> -               return ret;
+> +               return;
+>         }
+>
+>         dm_gpio_set_dir_flags(&usb_vbus_boost_pin,
+>                               GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
+> -
+> -       return 0;
+> -}
+> -
+> -void reset_cpu(void)
+> -{
+> -       psci_system_reset();
+>  }
+> diff --git a/configs/dragonboard410c_defconfig b/configs/dragonboard410c_defconfig
+> index 56a73893d3df..efdee8a40fa3 100644
+> --- a/configs/dragonboard410c_defconfig
+> +++ b/configs/dragonboard410c_defconfig
+> @@ -1,9 +1,10 @@
+>  CONFIG_ARM=y
+> +CONFIG_SYS_BOARD="dragonboard410c"
+>  CONFIG_COUNTER_FREQUENCY=19000000
+> +CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
+>  CONFIG_ARCH_SNAPDRAGON=y
+>  CONFIG_TEXT_BASE=0x8f600000
+>  CONFIG_SYS_MALLOC_LEN=0x802000
+> -CONFIG_NR_DRAM_BANKS=1
+>  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x8007fff0
+>  CONFIG_ENV_SIZE=0x2000
+> @@ -38,7 +39,9 @@ CONFIG_CMD_TIMER=y
+>  CONFIG_ENV_IS_IN_MMC=y
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>  CONFIG_SYS_MMC_ENV_PART=2
+> +CONFIG_BUTTON_QCOM_PMIC=y
+>  CONFIG_CLK=y
+> +CONFIG_CLK_QCOM_APQ8016=y
+>  CONFIG_USB_FUNCTION_FASTBOOT=y
+>  CONFIG_FASTBOOT_BUF_ADDR=0x91000000
+>  CONFIG_FASTBOOT_FLASH=y
+> @@ -52,6 +55,7 @@ CONFIG_MMC_SDHCI_MSM=y
+>  CONFIG_PHY=y
+>  CONFIG_PINCTRL=y
+>  CONFIG_PINCONF=y
+> +CONFIG_PINCTRL_QCOM_APQ8016=y
+>  CONFIG_DM_PMIC=y
+>  CONFIG_PMIC_QCOM=y
+>  CONFIG_MSM_SERIAL=y
+> diff --git a/configs/dragonboard820c_defconfig b/configs/dragonboard820c_defconfig
+> index 7304ff97dd8e..89847ce0b307 100644
+> --- a/configs/dragonboard820c_defconfig
+> +++ b/configs/dragonboard820c_defconfig
+> @@ -1,14 +1,13 @@
+>  CONFIG_ARM=y
+> +CONFIG_SYS_BOARD="dragonboard820c"
+>  CONFIG_COUNTER_FREQUENCY=19000000
+>  CONFIG_ARCH_SNAPDRAGON=y
+>  CONFIG_TEXT_BASE=0x80080000
+>  CONFIG_SYS_MALLOC_LEN=0x804000
+> -CONFIG_NR_DRAM_BANKS=2
+>  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x8007fff0
+>  CONFIG_ENV_SIZE=0x4000
+>  CONFIG_DEFAULT_DEVICE_TREE="dragonboard820c"
+> -CONFIG_TARGET_DRAGONBOARD820C=y
+>  CONFIG_IDENT_STRING="\nQualcomm-DragonBoard 820C"
+>  CONFIG_SYS_LOAD_ADDR=0x80080000
+>  CONFIG_DISTRO_DEFAULTS=y
+> @@ -35,12 +34,15 @@ CONFIG_ENV_IS_IN_EXT4=y
+>  CONFIG_ENV_EXT4_INTERFACE="mmc"
+>  CONFIG_ENV_EXT4_DEVICE_AND_PART="0:1"
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> +CONFIG_BUTTON_QCOM_PMIC=y
+>  CONFIG_CLK=y
+> +CONFIG_CLK_QCOM_APQ8096=y
+>  CONFIG_QCOM_PMIC_GPIO=y
+>  CONFIG_MMC_SDHCI=y
+>  CONFIG_MMC_SDHCI_MSM=y
+>  CONFIG_PINCTRL=y
+>  CONFIG_PINCONF=y
+> +CONFIG_PINCTRL_QCOM_APQ8096=y
+>  CONFIG_DM_PMIC=y
+>  CONFIG_PMIC_QCOM=y
+>  CONFIG_MSM_SERIAL=y
+> diff --git a/configs/dragonboard845c_defconfig b/configs/dragonboard845c_defconfig
+> deleted file mode 100644
+> index f29f11e342e7..000000000000
+> --- a/configs/dragonboard845c_defconfig
+> +++ /dev/null
+> @@ -1,29 +0,0 @@
+> -CONFIG_ARM=y
+> -CONFIG_SKIP_LOWLEVEL_INIT=y
+> -CONFIG_COUNTER_FREQUENCY=19000000
+> -CONFIG_POSITION_INDEPENDENT=y
+> -CONFIG_ARCH_SNAPDRAGON=y
+> -CONFIG_DEFAULT_DEVICE_TREE="dragonboard845c"
+> -CONFIG_TARGET_DRAGONBOARD845C=y
+> -CONFIG_IDENT_STRING="\nQualcomm-DragonBoard 845C"
+> -CONFIG_SYS_LOAD_ADDR=0x80000000
+> -CONFIG_FIT=y
+> -CONFIG_FIT_VERBOSE=y
+> -CONFIG_BOOTDELAY=5
+> -CONFIG_SAVE_PREV_BL_FDT_ADDR=y
+> -CONFIG_SAVE_PREV_BL_INITRAMFS_START_ADDR=y
 
-Following change is needed to get first console prints on QCS404:
+I would suggest keeping this config option in new qcom_defconfig since
+it allows to package FIT image as intramfs within boot.img...
 
-diff --git a/arch/arm/dts/qcs404-evb-4000-u-boot.dtsi
-b/arch/arm/dts/qcs404-evb-4000-u-boot.dtsi
-index 5f1be85bd834..e1bdde62d40a 100644
---- a/arch/arm/dts/qcs404-evb-4000-u-boot.dtsi
-+++ b/arch/arm/dts/qcs404-evb-4000-u-boot.dtsi
-@@ -24,3 +24,7 @@
-        /* Make sure the VBUS supply is switched on */
-        vbus-supply = <&usb3_vbus_reg>;
- };
-+
-+&blsp1_uart2 { /* Console */
-+       bit-rate = <0xFF>;
-+};
+> -CONFIG_SYS_CBSIZE=512
+> -# CONFIG_DISPLAY_CPUINFO is not set
+> -CONFIG_HUSH_PARSER=y
+> -CONFIG_SYS_MAXARGS=64
+> -CONFIG_CMD_GPIO=y
+> -# CONFIG_NET is not set
+> -CONFIG_CLK=y
+> -CONFIG_MSM_GPIO=y
+> -CONFIG_QCOM_PMIC_GPIO=y
+> -CONFIG_PINCTRL=y
+> -CONFIG_DM_PMIC=y
+> -CONFIG_PMIC_QCOM=y
+> -CONFIG_MSM_GENI_SERIAL=y
+> -CONFIG_SPMI_MSM=y
+> -CONFIG_LMB_MAX_REGIONS=64
+> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+> new file mode 100644
+> index 000000000000..8bd6313d50e4
+> --- /dev/null
+> +++ b/configs/qcom_defconfig
+> @@ -0,0 +1,73 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_POSITION_INDEPENDENT=y
+> +CONFIG_ARCH_SNAPDRAGON=y
+> +CONFIG_DEFAULT_DEVICE_TREE="dragonboard845c"
+> +CONFIG_SYS_LOAD_ADDR=0x0
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_BOOTSTD_FULL=y
+> +# CONFIG_BOOTMETH_EXTLINUX is not set
+> +# CONFIG_BOOTMETH_VBE is not set
+> +# CONFIG_BOOTMETH_SCRIPT is not set
+> +CONFIG_BOOTDELAY=1
+> +CONFIG_USE_PREBOOT=y
+> +CONFIG_LOG_MAX_LEVEL=9
+> +CONFIG_LOG_DEFAULT_LEVEL=4
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_HUSH_PARSER=y
+> +CONFIG_SYS_MAXARGS=64
+> +CONFIG_SYS_CBSIZE=512
+> +CONFIG_CMD_BOOTMENU=y
+> +CONFIG_CMD_CLK=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_PART=y
+> +CONFIG_CMD_UFS=y
+> +CONFIG_CMD_USB=y
+> +CONFIG_CMD_CAT=y
+> +CONFIG_CMD_BMP=y
+> +CONFIG_CMD_FAT=y
+> +CONFIG_CMD_FS_GENERIC=y
+> +CONFIG_CMD_LOG=y
+> +CONFIG_EFI_PARTITION=y
+> +# CONFIG_NET is not set
+> +CONFIG_CLK=y
+> +CONFIG_CLK_QCOM_QCS404=y
+> +CONFIG_CLK_QCOM_SDM845=y
+> +CONFIG_MSM_GPIO=y
+> +CONFIG_QCOM_PMIC_GPIO=y
+> +CONFIG_DM_KEYBOARD=y
+> +CONFIG_BUTTON_KEYBOARD=y
+> +CONFIG_BUTTON_QCOM_PMIC=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_MSM=y
+> +CONFIG_PHY=y
+> +CONFIG_PINCTRL=y
+> +CONFIG_PINCTRL_QCOM_QCS404=y
+> +CONFIG_PINCTRL_QCOM_SDM845=y
+> +CONFIG_DM_PMIC=y
+> +CONFIG_PMIC_QCOM=y
+> +CONFIG_SCSI=y
+> +CONFIG_DM_SCSI=y
+> +CONFIG_MSM_SERIAL=y
+> +CONFIG_MSM_GENI_SERIAL=y
+> +CONFIG_SPMI_MSM=y
+> +CONFIG_SYSINFO=y
+> +CONFIG_SYSINFO_SMBIOS=y
+> +CONFIG_USB=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_XHCI_DWC3=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_STORAGE=y
+> +CONFIG_UFS=y
+> +CONFIG_VIDEO=y
+> +# CONFIG_VIDEO_FONT_8X16 is not set
+> +CONFIG_VIDEO_FONT_16X32=y
+> +CONFIG_SYS_WHITE_ON_BLACK=y
+> +CONFIG_NO_FB_CLEAR=y
+> +CONFIG_VIDEO_SIMPLE=y
+> +CONFIG_HEXDUMP=y
+> +# CONFIG_GENERATE_SMBIOS_TABLE is not set
+> +CONFIG_LMB_MAX_REGIONS=64
+> diff --git a/configs/qcs404evb_defconfig b/configs/qcs404evb_defconfig
+> index 700c024e8b6a..d85d193895b0 100644
+> --- a/configs/qcs404evb_defconfig
+> +++ b/configs/qcs404evb_defconfig
+> @@ -1,11 +1,10 @@
+>  CONFIG_ARM=y
+> +CONFIG_SYS_BOARD="qcs404-evb"
+>  CONFIG_SKIP_LOWLEVEL_INIT=y
+>  CONFIG_COUNTER_FREQUENCY=19000000
+>  CONFIG_POSITION_INDEPENDENT=y
+>  CONFIG_ARCH_SNAPDRAGON=y
+>  CONFIG_DEFAULT_DEVICE_TREE="qcs404-evb"
+> -CONFIG_DM_RESET=y
+> -CONFIG_TARGET_QCS404EVB=y
+>  CONFIG_IDENT_STRING="\nQualcomm QCS404-EVB"
+>  CONFIG_SYS_LOAD_ADDR=0x80000000
+>  CONFIG_FIT=y
+> @@ -31,6 +30,7 @@ CONFIG_CMD_FAT=y
+>  CONFIG_CMD_FS_GENERIC=y
+>  # CONFIG_NET is not set
+>  CONFIG_CLK=y
+> +CONFIG_CLK_QCOM_QCS404=y
+>  CONFIG_MSM_GPIO=y
+>  CONFIG_QCOM_PMIC_GPIO=y
+>  CONFIG_MISC=y
+> @@ -42,6 +42,7 @@ CONFIG_PHY=y
+>  CONFIG_PHY_QCOM_USB_HS_28NM=y
+>  CONFIG_PHY_QCOM_USB_SS=y
+>  CONFIG_PINCTRL=y
+> +CONFIG_PINCTRL_QCOM_QCS404=y
+>  CONFIG_DM_PMIC=y
+>  CONFIG_PMIC_QCOM=y
+>  CONFIG_MSM_SERIAL=y
+> diff --git a/configs/starqltechn_defconfig b/configs/starqltechn_defconfig
+> deleted file mode 100644
+> index 6980a8232667..000000000000
+> --- a/configs/starqltechn_defconfig
+> +++ /dev/null
+> @@ -1,41 +0,0 @@
+> -CONFIG_ARM=y
+> -CONFIG_SKIP_LOWLEVEL_INIT=y
+> -CONFIG_COUNTER_FREQUENCY=19000000
+> -CONFIG_POSITION_INDEPENDENT=y
+> -CONFIG_ARCH_SNAPDRAGON=y
+> -CONFIG_DEFAULT_DEVICE_TREE="starqltechn"
+> -CONFIG_TARGET_STARQLTECHN=y
+> -CONFIG_IDENT_STRING="\nSamsung S9 SM-G9600"
+> -CONFIG_SYS_LOAD_ADDR=0x80000000
+> -CONFIG_FIT=y
+> -CONFIG_FIT_VERBOSE=y
+> -CONFIG_BOOTDELAY=0
+> -CONFIG_SAVE_PREV_BL_FDT_ADDR=y
+> -CONFIG_SAVE_PREV_BL_INITRAMFS_START_ADDR=y
+> -CONFIG_SYS_CBSIZE=512
+> -CONFIG_SYS_PBSIZE=532
+> -# CONFIG_DISPLAY_CPUINFO is not set
+> -CONFIG_HUSH_PARSER=y
+> -CONFIG_SYS_MAXARGS=64
+> -CONFIG_CMD_BOOTMENU=y
+> -CONFIG_CMD_GPIO=y
+> -CONFIG_CMD_BMP=y
+> -# CONFIG_NET is not set
+> -CONFIG_BUTTON=y
+> -CONFIG_CLK=y
+> -CONFIG_MSM_GPIO=y
+> -CONFIG_QCOM_PMIC_GPIO=y
+> -CONFIG_DM_KEYBOARD=y
+> -CONFIG_BUTTON_KEYBOARD=y
+> -CONFIG_PINCTRL=y
+> -CONFIG_DM_PMIC=y
+> -CONFIG_PMIC_QCOM=y
+> -CONFIG_MSM_GENI_SERIAL=y
+> -CONFIG_SPMI_MSM=y
+> -CONFIG_VIDEO=y
+> -# CONFIG_VIDEO_FONT_8X16 is not set
+> -CONFIG_VIDEO_FONT_16X32=y
+> -CONFIG_SYS_WHITE_ON_BLACK=y
+> -CONFIG_VIDEO_SIMPLE=y
+> -CONFIG_VIDEO_DT_SIMPLEFB=y
+> -CONFIG_LMB_MAX_REGIONS=64
+> diff --git a/include/configs/dragonboard845c.h b/include/configs/dragonboard845c.h
+> deleted file mode 100644
+> index 14a8a2ca049e..000000000000
+> --- a/include/configs/dragonboard845c.h
+> +++ /dev/null
+> @@ -1,20 +0,0 @@
+> -/* SPDX-License-Identifier: GPL-2.0+ */
+> -/*
+> - * Configuration file for Dragonboard 845c, based on Qualcomm SDA845 chip
+> - *
+> - * (C) Copyright 2022 Sumit Garg <sumit.garg@linaro.org>
+> - */
+> -
+> -#ifndef __CONFIGS_SDM845_H
+> -#define __CONFIGS_SDM845_H
+> -
+> -#include <linux/sizes.h>
+> -
+> -#define CFG_SYS_BAUDRATE_TABLE { 115200, 230400, 460800, 921600 }
+> -
+> -#define CFG_EXTRA_ENV_SETTINGS \
+> -       "bootm_size=0x5000000\0"        \
+> -       "bootm_low=0x80000000\0"        \
+> -       "bootcmd=bootm $prevbl_initrd_start_addr\0"
+> -
+> -#endif
+> diff --git a/include/configs/qcom.h b/include/configs/qcom.h
+> new file mode 100644
+> index 000000000000..e50b3bce5cdd
+> --- /dev/null
+> +++ b/include/configs/qcom.h
+> @@ -0,0 +1,21 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Configuration file for Qualcomm Snapdragon boards
+> + *
+> + * (C) Copyright 2021 Dzmitry Sankouski <dsankouski@gmail.com>
+> + * (C) Copyright 2023 Linaro Ltd.
+> + */
+> +
+> +#ifndef __CONFIGS_SNAPDRAGON_H
+> +#define __CONFIGS_SNAPDRAGON_H
+> +
+> +#define CFG_SYS_BAUDRATE_TABLE { 115200, 230400, 460800, 921600 }
+> +
+> +/* Load addressed are calculated during board_late_init(). See arm/mach-snapdragon/board.c */
+> +#define CFG_EXTRA_ENV_SETTINGS \
+> +       "stdin=serial,button-kbd\0"     \
+> +       "stdout=serial,vidconsole\0"    \
+> +       "stderr=serial,vidconsole\0" \
+> +       "bootcmd=bootm $prevbl_initrd_start_addr\0"
+
+...as otherwise this bootcmd won't work.
 
 -Sumit
 
-> diff --git a/arch/arm/dts/qcs404-evb-4000.dts b/arch/arm/dts/qcs404-evb-4000.dts
-> new file mode 100644
-> index 000000000000..358827c2fbd3
-> --- /dev/null
-> +++ b/arch/arm/dts/qcs404-evb-4000.dts
-> @@ -0,0 +1,96 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (c) 2018, Linaro Limited
-> + */
 > +
-> +/dts-v1/;
-> +
-> +#include <dt-bindings/gpio/gpio.h>
-> +#include "qcs404-evb.dtsi"
-> +
-> +/ {
-> +       model = "Qualcomm Technologies, Inc. QCS404 EVB 4000";
-> +       compatible = "qcom,qcs404-evb-4000", "qcom,qcs404-evb",
-> +                    "qcom,qcs404";
-> +};
-> +
-> +&ethernet {
-> +       status = "okay";
-> +
-> +       snps,reset-gpio = <&tlmm 60 GPIO_ACTIVE_LOW>;
-> +       snps,reset-active-low;
-> +       snps,reset-delays-us = <0 10000 10000>;
-> +
-> +       pinctrl-names = "default";
-> +       pinctrl-0 = <&ethernet_defaults>;
-> +
-> +       phy-handle = <&phy1>;
-> +       phy-mode = "rgmii";
-> +       mdio {
-> +               #address-cells = <1>;
-> +               #size-cells = <0>;
-> +               compatible = "snps,dwmac-mdio";
-> +               phy1: phy@4 {
-> +                       compatible = "ethernet-phy-ieee802.3-c22";
-> +                       device_type = "ethernet-phy";
-> +                       reg = <0x4>;
-> +               };
-> +       };
-> +};
-> +
-> +&tlmm {
-> +       ethernet_defaults: ethernet-defaults-state {
-> +               int-pins {
-> +                       pins = "gpio61";
-> +                       function = "rgmii_int";
-> +                       bias-disable;
-> +                       drive-strength = <2>;
-> +               };
-> +               mdc-pins {
-> +                       pins = "gpio76";
-> +                       function = "rgmii_mdc";
-> +                       bias-pull-up;
-> +               };
-> +               mdio-pins {
-> +                       pins = "gpio75";
-> +                       function = "rgmii_mdio";
-> +                       bias-pull-up;
-> +               };
-> +               tx-pins {
-> +                       pins = "gpio67", "gpio66", "gpio65", "gpio64";
-> +                       function = "rgmii_tx";
-> +                       bias-pull-up;
-> +                       drive-strength = <16>;
-> +               };
-> +               rx-pins {
-> +                       pins = "gpio73", "gpio72", "gpio71", "gpio70";
-> +                       function = "rgmii_rx";
-> +                       bias-disable;
-> +                       drive-strength = <2>;
-> +               };
-> +               tx-ctl-pins {
-> +                       pins = "gpio68";
-> +                       function = "rgmii_ctl";
-> +                       bias-pull-up;
-> +                       drive-strength = <16>;
-> +               };
-> +               rx-ctl-pins {
-> +                       pins = "gpio74";
-> +                       function = "rgmii_ctl";
-> +                       bias-disable;
-> +                       drive-strength = <2>;
-> +               };
-> +               tx-ck-pins {
-> +                       pins = "gpio63";
-> +                       function = "rgmii_ck";
-> +                       bias-pull-up;
-> +                       drive-strength = <16>;
-> +               };
-> +               rx-ck-pins {
-> +                       pins = "gpio69";
-> +                       function = "rgmii_ck";
-> +                       bias-disable;
-> +                       drive-strength = <2>;
-> +               };
-> +       };
-> +};
-> diff --git a/arch/arm/dts/qcs404-evb-uboot.dtsi b/arch/arm/dts/qcs404-evb-uboot.dtsi
+> +#endif
+> diff --git a/include/configs/qcs404-evb.h b/include/configs/qcs404-evb.h
 > deleted file mode 100644
-> index b4c5f3fa4301..000000000000
-> --- a/arch/arm/dts/qcs404-evb-uboot.dtsi
+> index 9501d43665e9..000000000000
+> --- a/include/configs/qcs404-evb.h
 > +++ /dev/null
-> @@ -1,30 +0,0 @@
-> -// SPDX-License-Identifier: GPL-2.0+
+> @@ -1,20 +0,0 @@
+> -/* SPDX-License-Identifier: GPL-2.0+ */
 > -/*
-> - * U-Boot addition to handle QCS404 EVB pre-relocation devices
+> - * Configuration file for QCS404 evaluation board
 > - *
 > - * (C) Copyright 2022 Sumit Garg <sumit.garg@linaro.org>
 > - */
 > -
-> -/ {
-> -       soc {
-> -               bootph-all;
+> -#ifndef __CONFIGS_QCS404EVB_H
+> -#define __CONFIGS_QCS404EVB_H
 > -
-> -               pinctrl_north@1300000 {
-> -                       bootph-all;
-> -               };
+> -#include <linux/sizes.h>
 > -
-> -               clock-controller@1800000 {
-> -                       bootph-all;
-> -               };
+> -#define CFG_SYS_BAUDRATE_TABLE { 115200, 230400, 460800, 921600 }
 > -
-> -               serial@78b1000 {
-> -                       bootph-all;
-> -               };
-> -       };
-> -};
+> -#define CFG_EXTRA_ENV_SETTINGS \
+> -       "bootm_size=0x5000000\0"        \
+> -       "bootm_low=0x80000000\0"        \
+> -       "bootcmd=bootm $prevbl_initrd_start_addr\0"
 > -
-> -&pms405_gpios {
-> -       usb_vbus_boost_pin {
-> -               gpios = <&pms405_gpios 2 0>;
-> -       };
-> -};
-> diff --git a/arch/arm/dts/qcs404-evb.dts b/arch/arm/dts/qcs404-evb.dts
+> -#endif
+> diff --git a/include/configs/sdm845.h b/include/configs/sdm845.h
 > deleted file mode 100644
-> index 07bf7dd0b32f..000000000000
-> --- a/arch/arm/dts/qcs404-evb.dts
+> index 5ad8569b2152..000000000000
+> --- a/include/configs/sdm845.h
 > +++ /dev/null
-> @@ -1,390 +0,0 @@
-> -// SPDX-License-Identifier: GPL-2.0+
+> @@ -1,26 +0,0 @@
+> -/* SPDX-License-Identifier: GPL-2.0+ */
 > -/*
-> - * Qualcomm QCS404 based evaluation board device tree source
+> - * Configuration file for boards, based on Qualcomm SDM845 chip
 > - *
-> - * (C) Copyright 2022 Sumit Garg <sumit.garg@linaro.org>
+> - * (C) Copyright 2021 Dzmitry Sankouski <dsankouski@gmail.com>
 > - */
 > -
-> -/dts-v1/;
+> -#ifndef __CONFIGS_SDM845_H
+> -#define __CONFIGS_SDM845_H
 > -
-> -#include "skeleton64.dtsi"
-> -#include <dt-bindings/gpio/gpio.h>
-> -#include <dt-bindings/clock/qcom,gcc-qcs404.h>
+> -#include <linux/sizes.h>
 > -
-> -/ {
-> -       model = "Qualcomm Technologies, Inc. QCS404 EVB";
-> -       compatible = "qcom,qcs404-evb", "qcom,qcs404";
-> -       #address-cells = <0x2>;
-> -       #size-cells = <0x2>;
+> -#define CFG_SYS_BAUDRATE_TABLE { 115200, 230400, 460800, 921600 }
 > -
-> -       chosen {
-> -               stdout-path = "serial0:115200n8";
-> -       };
+> -#define CFG_EXTRA_ENV_SETTINGS \
+> -       "bootm_size=0x4000000\0"        \
+> -       "bootm_low=0x80000000\0"        \
+> -       "stdin=serial,button-kbd\0"     \
+> -       "stdout=serial,vidconsole\0"    \
+> -       "stderr=serial,vidconsole\0"    \
+> -       "preboot=source $prevbl_initrd_start_addr:prebootscript\0" \
+> -       "bootcmd=source $prevbl_initrd_start_addr:bootscript\0"
 > -
-> -       aliases {
-> -               serial0 = &debug_uart;
-> -               i2c0 = &blsp1_i2c0;
-> -               i2c1 = &blsp1_i2c1;
-> -               i2c2 = &blsp1_i2c2;
-> -               i2c3 = &blsp1_i2c3;
-> -               i2c4 = &blsp1_i2c4;
-> -       };
+> -/* Size of malloc() pool */
 > -
-> -       memory {
-> -               device_type = "memory";
-> -               reg = <0 0x80000000 0 0x40000000>;
-> -       };
-> -
-> -       soc {
-> -               #address-cells = <0x1>;
-> -               #size-cells = <0x1>;
-> -               ranges = <0x0 0x0 0x0 0xffffffff>;
-> -               compatible = "simple-bus";
-> -
-> -               soc_gpios: pinctrl_north@1300000 {
-> -                       compatible = "qcom,qcs404-pinctrl";
-> -                       reg = <0x1300000 0x200000>;
-> -                       gpio-controller;
-> -                       gpio-count = <120>;
-> -                       gpio-bank-name="soc";
-> -                       #gpio-cells = <2>;
-> -
-> -                       blsp1_uart2: uart {
-> -                               pins = "GPIO_17", "GPIO_18";
-> -                               function = "blsp_uart2";
-> -                       };
-> -
-> -                       blsp1_i2c0_default: blsp1-i2c0-default {
-> -                               pins = "GPIO_32", "GPIO_33";
-> -                               function = "blsp_i2c0";
-> -                       };
-> -
-> -                       blsp1_i2c1_default: blsp1-i2c1-default {
-> -                               pins = "GPIO_24", "GPIO_25";
-> -                               function = "blsp_i2c1";
-> -                       };
-> -
-> -                       blsp1_i2c2_default: blsp1-i2c2-default {
-> -                               sda {
-> -                                       pins = "GPIO_19";
-> -                                       function = "blsp_i2c_sda_a2";
-> -                               };
-> -
-> -                               scl {
-> -                                       pins = "GPIO_20";
-> -                                       function = "blsp_i2c_scl_a2";
-> -                               };
-> -                       };
-> -
-> -                       blsp1_i2c3_default: blsp1-i2c3-default {
-> -                               pins = "GPIO_84", "GPIO_85";
-> -                               function = "blsp_i2c3";
-> -                       };
-> -
-> -                       blsp1_i2c4_default: blsp1-i2c4-default {
-> -                               pins = "GPIO_117", "GPIO_118";
-> -                               function = "blsp_i2c4";
-> -                       };
-> -
-> -                       ethernet_defaults: ethernet-defaults {
-> -                               int {
-> -                                       pins = "GPIO_61";
-> -                                       function = "rgmii_int";
-> -                                       bias-disable;
-> -                                       drive-strength = <2>;
-> -                               };
-> -                               mdc {
-> -                                       pins = "GPIO_76";
-> -                                       function = "rgmii_mdc";
-> -                                       bias-pull-up;
-> -                               };
-> -                               mdio {
-> -                                       pins = "GPIO_75";
-> -                                       function = "rgmii_mdio";
-> -                                       bias-pull-up;
-> -                               };
-> -                               tx {
-> -                                       pins = "GPIO_67", "GPIO_66", "GPIO_65", "GPIO_64";
-> -                                       function = "rgmii_tx";
-> -                                       bias-pull-up;
-> -                                       drive-strength = <16>;
-> -                               };
-> -                               rx {
-> -                                       pins = "GPIO_73", "GPIO_72", "GPIO_71", "GPIO_70";
-> -                                       function = "rgmii_rx";
-> -                                       bias-disable;
-> -                                       drive-strength = <2>;
-> -                               };
-> -                               tx-ctl {
-> -                                       pins = "GPIO_68";
-> -                                       function = "rgmii_ctl";
-> -                                       bias-pull-up;
-> -                                       drive-strength = <16>;
-> -                               };
-> -                               rx-ctl {
-> -                                       pins = "GPIO_74";
-> -                                       function = "rgmii_ctl";
-> -                                       bias-disable;
-> -                                       drive-strength = <2>;
-> -                               };
-> -                               tx-ck {
-> -                                       pins = "GPIO_63";
-> -                                       function = "rgmii_ck";
-> -                                       bias-pull-up;
-> -                                       drive-strength = <16>;
-> -                               };
-> -                               rx-ck {
-> -                                       pins = "GPIO_69";
-> -                                       function = "rgmii_ck";
-> -                                       bias-disable;
-> -                                       drive-strength = <2>;
-> -                               };
-> -                       };
-> -               };
-> -
-> -               blsp1_i2c0: i2c@78b5000 {
-> -                       compatible = "qcom,i2c-qup-v2.2.1";
-> -                       reg = <0x078b5000 0x600>;
-> -                       clocks = <&gcc GCC_BLSP1_AHB_CLK>,
-> -                                <&gcc GCC_BLSP1_QUP0_I2C_APPS_CLK>;
-> -                       clock-names = "iface", "core";
-> -                       pinctrl-names = "default";
-> -                       pinctrl-0 = <&blsp1_i2c0_default>;
-> -                       #address-cells = <1>;
-> -                       #size-cells = <0>;
-> -               };
-> -
-> -               blsp1_i2c1: i2c@78b6000 {
-> -                       compatible = "qcom,i2c-qup-v2.2.1";
-> -                       reg = <0x078b6000 0x600>;
-> -                       clocks = <&gcc GCC_BLSP1_AHB_CLK>,
-> -                                <&gcc GCC_BLSP1_QUP1_I2C_APPS_CLK>;
-> -                       clock-names = "iface", "core";
-> -                       pinctrl-names = "default";
-> -                       pinctrl-0 = <&blsp1_i2c1_default>;
-> -                       #address-cells = <1>;
-> -                       #size-cells = <0>;
-> -               };
-> -
-> -               blsp1_i2c2: i2c@78b7000 {
-> -                       compatible = "qcom,i2c-qup-v2.2.1";
-> -                       reg = <0x078b7000 0x600>;
-> -                       clocks = <&gcc GCC_BLSP1_AHB_CLK>,
-> -                                <&gcc GCC_BLSP1_QUP2_I2C_APPS_CLK>;
-> -                       clock-names = "iface", "core";
-> -                       pinctrl-names = "default";
-> -                       pinctrl-0 = <&blsp1_i2c2_default>;
-> -                       #address-cells = <1>;
-> -                       #size-cells = <0>;
-> -               };
-> -
-> -               blsp1_i2c3: i2c@78b8000 {
-> -                       compatible = "qcom,i2c-qup-v2.2.1";
-> -                       reg = <0x078b8000 0x600>;
-> -                       clocks = <&gcc GCC_BLSP1_AHB_CLK>,
-> -                                <&gcc GCC_BLSP1_QUP3_I2C_APPS_CLK>;
-> -                       clock-names = "iface", "core";
-> -                       pinctrl-names = "default";
-> -                       pinctrl-0 = <&blsp1_i2c3_default>;
-> -                       #address-cells = <1>;
-> -                       #size-cells = <0>;
-> -               };
-> -
-> -               blsp1_i2c4: i2c@78b9000 {
-> -                       compatible = "qcom,i2c-qup-v2.2.1";
-> -                       reg = <0x078b9000 0x600>;
-> -                       clocks = <&gcc GCC_BLSP1_AHB_CLK>,
-> -                                <&gcc GCC_BLSP1_QUP4_I2C_APPS_CLK>;
-> -                       clock-names = "iface", "core";
-> -                       pinctrl-names = "default";
-> -                       pinctrl-0 = <&blsp1_i2c4_default>;
-> -                       #address-cells = <1>;
-> -                       #size-cells = <0>;
-> -               };
-> -
-> -               gcc: clock-controller@1800000 {
-> -                       compatible = "qcom,gcc-qcs404";
-> -                       reg = <0x1800000 0x80000>;
-> -                       #address-cells = <0x1>;
-> -                       #size-cells = <0x0>;
-> -                       #clock-cells = <1>;
-> -                       #reset-cells = <1>;
-> -               };
-> -
-> -               debug_uart: serial@78b1000 {
-> -                       compatible = "qcom,msm-uartdm-v1.4";
-> -                       reg = <0x78b1000 0x200>;
-> -                       clock = <&gcc GCC_BLSP1_UART2_APPS_CLK>,
-> -                               <&gcc GCC_BLSP1_AHB_CLK>;
-> -                       bit-rate = <0xFF>;
-> -                       pinctrl-names = "uart";
-> -                       pinctrl-0 = <&blsp1_uart2>;
-> -               };
-> -
-> -               sdhci@7804000 {
-> -                       compatible = "qcom,sdhci-msm-v5";
-> -                       reg = <0x7804000 0x1000 0x7805000 0x1000>;
-> -                       clock = <&gcc GCC_SDCC1_APPS_CLK>,
-> -                               <&gcc GCC_SDCC1_AHB_CLK>;
-> -                       bus-width = <0x8>;
-> -                       index = <0x0>;
-> -                       non-removable;
-> -                       mmc-ddr-1_8v;
-> -                       mmc-hs400-1_8v;
-> -               };
-> -
-> -               usb3_phy: phy@78000 {
-> -                       compatible = "qcom,usb-ss-28nm-phy";
-> -                       #phy-cells = <0>;
-> -                       reg = <0x78000 0x400>;
-> -                       clocks = <&gcc GCC_USB_HS_PHY_CFG_AHB_CLK>,
-> -                                <&gcc GCC_USB3_PHY_PIPE_CLK>;
-> -                       clock-names = "ahb", "pipe";
-> -                       resets = <&gcc GCC_USB3_PHY_BCR>,
-> -                                <&gcc GCC_USB3PHY_PHY_BCR>;
-> -                       reset-names = "com", "phy";
-> -               };
-> -
-> -               usb2_phy_prim: phy@7a000 {
-> -                       compatible = "qcom,usb-hs-28nm-femtophy";
-> -                       #phy-cells = <0>;
-> -                       reg = <0x7a000 0x200>;
-> -                       clocks = <&gcc GCC_USB_HS_PHY_CFG_AHB_CLK>,
-> -                                <&gcc GCC_USB2A_PHY_SLEEP_CLK>;
-> -                       clock-names = "ahb", "sleep";
-> -                       resets = <&gcc GCC_USB_HS_PHY_CFG_AHB_BCR>,
-> -                                <&gcc GCC_USB2A_PHY_BCR>;
-> -                       reset-names = "phy", "por";
-> -               };
-> -
-> -               usb2_phy_sec: phy@7c000 {
-> -                       compatible = "qcom,usb-hs-28nm-femtophy";
-> -                       #phy-cells = <0>;
-> -                       reg = <0x7c000 0x200>;
-> -                       clocks = <&gcc GCC_USB_HS_PHY_CFG_AHB_CLK>,
-> -                                <&gcc GCC_USB2A_PHY_SLEEP_CLK>;
-> -                       clock-names = "ahb", "sleep";
-> -                       resets = <&gcc GCC_QUSB2_PHY_BCR>,
-> -                                <&gcc GCC_USB2_HS_PHY_ONLY_BCR>;
-> -                       reset-names = "phy", "por";
-> -               };
-> -
-> -               usb3: usb@7678800 {
-> -                       compatible = "qcom,dwc3";
-> -                       reg = <0x7678800 0x400>;
-> -                       #address-cells = <1>;
-> -                       #size-cells = <1>;
-> -                       ranges;
-> -                       clocks = <&gcc GCC_USB30_MASTER_CLK>,
-> -                                <&gcc GCC_SYS_NOC_USB3_CLK>,
-> -                                <&gcc GCC_USB30_SLEEP_CLK>,
-> -                                <&gcc GCC_USB30_MOCK_UTMI_CLK>;
-> -                       clock-names = "core", "iface", "sleep", "mock_utmi";
-> -
-> -                       dwc3@7580000 {
-> -                               compatible = "snps,dwc3";
-> -                               reg = <0x7580000 0xcd00>;
-> -                               phys = <&usb2_phy_prim>, <&usb3_phy>;
-> -                               phy-names = "usb2-phy", "usb3-phy";
-> -                               dr_mode = "host";
-> -                               snps,has-lpm-erratum;
-> -                               snps,hird-threshold = /bits/ 8 <0x10>;
-> -                               snps,usb3_lpm_capable;
-> -                               maximum-speed = "super-speed";
-> -                       };
-> -               };
-> -
-> -               usb2: usb@79b8800 {
-> -                       compatible = "qcom,dwc3";
-> -                       reg = <0x79b8800 0x400>;
-> -                       #address-cells = <1>;
-> -                       #size-cells = <1>;
-> -                       ranges;
-> -                       clocks = <&gcc GCC_USB_HS_SYSTEM_CLK>,
-> -                                <&gcc GCC_PCNOC_USB2_CLK>,
-> -                                <&gcc GCC_USB_HS_INACTIVITY_TIMERS_CLK>,
-> -                                <&gcc GCC_USB20_MOCK_UTMI_CLK>;
-> -                       clock-names = "core", "iface", "sleep", "mock_utmi";
-> -
-> -                       dwc3@78c0000 {
-> -                               compatible = "snps,dwc3";
-> -                               reg = <0x78c0000 0xcc00>;
-> -                               phys = <&usb2_phy_sec>;
-> -                               phy-names = "usb2-phy";
-> -                               dr_mode = "peripheral";
-> -                               snps,has-lpm-erratum;
-> -                               snps,hird-threshold = /bits/ 8 <0x10>;
-> -                               snps,usb3_lpm_capable;
-> -                               maximum-speed = "high-speed";
-> -                       };
-> -               };
-> -
-> -               ethernet: ethernet@7a80000 {
-> -                       compatible = "qcom,qcs404-ethqos";
-> -                       reg = <0x07a80000 0x10000>,
-> -                               <0x07a96000 0x100>;
-> -                       reg-names = "stmmaceth", "rgmii";
-> -                       clock-names = "stmmaceth", "pclk", "ptp_ref", "rgmii";
-> -                       clocks = <&gcc GCC_ETH_AXI_CLK>,
-> -                                <&gcc GCC_ETH_SLAVE_AHB_CLK>,
-> -                                <&gcc GCC_ETH_PTP_CLK>,
-> -                                <&gcc GCC_ETH_RGMII_CLK>;
-> -
-> -                       resets = <&gcc GCC_EMAC_BCR>;
-> -                       reset-names = "emac";
-> -
-> -                       snps,tso;
-> -                       rx-fifo-depth = <4096>;
-> -                       tx-fifo-depth = <4096>;
-> -
-> -                       snps,reset-gpio = <&soc_gpios 60 GPIO_ACTIVE_LOW>;
-> -                       snps,reset-active-low;
-> -                       snps,reset-delays-us = <0 10000 10000>;
-> -
-> -                       pinctrl-names = "default";
-> -                       pinctrl-0 = <&ethernet_defaults>;
-> -
-> -                       phy-handle = <&phy1>;
-> -                       phy-mode = "rgmii";
-> -                       max-speed = <1000>;
-> -
-> -                       mdio {
-> -                               #address-cells = <0x1>;
-> -                               #size-cells = <0x0>;
-> -                               compatible = "snps,dwmac-mdio";
-> -                               phy1: phy@3 {
-> -                                       compatible = "ethernet-phy-ieee802.3-c22";
-> -                                       device_type = "ethernet-phy";
-> -                                       reg = <0x3>;
-> -                               };
-> -                       };
-> -               };
-> -
-> -               spmi@200f000 {
-> -                       compatible = "qcom,spmi-pmic-arb";
-> -                       reg = <0x200f000 0x001000>,
-> -                             <0x2400000 0x800000>,
-> -                             <0x2c00000 0x800000>;
-> -                       reg-names = "core", "chnls", "obsrvr";
-> -                       #address-cells = <0x1>;
-> -                       #size-cells = <0x1>;
-> -
-> -                       pms405_0: pms405@0 {
-> -                               compatible = "qcom,spmi-pmic";
-> -                               reg = <0x0 0x1>;
-> -                               #address-cells = <0x1>;
-> -                               #size-cells = <0x1>;
-> -
-> -                               pms405_gpios: pms405_gpios@c000 {
-> -                                       compatible = "qcom,pms405-gpio";
-> -                                       reg = <0xc000 0x400>;
-> -                                       gpio-controller;
-> -                                       gpio-ranges = <&pms405_gpios 0 0 12>;
-> -                                       #gpio-cells = <2>;
-> -                               };
-> -                       };
-> -               };
-> -       };
-> -};
-> -
-> -#include "qcs404-evb-uboot.dtsi"
-> diff --git a/arch/arm/dts/qcs404-evb.dtsi b/arch/arm/dts/qcs404-evb.dtsi
-> new file mode 100644
-> index 000000000000..10655401528e
-> --- /dev/null
-> +++ b/arch/arm/dts/qcs404-evb.dtsi
-> @@ -0,0 +1,389 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (c) 2018, Linaro Limited
-> + */
-> +
-> +#include <dt-bindings/gpio/gpio.h>
-> +#include "qcs404.dtsi"
-> +#include "pms405.dtsi"
-> +#include <dt-bindings/gpio/gpio.h>
-> +#include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
-> +
-> +/ {
-> +       aliases {
-> +               serial0 = &blsp1_uart2;
-> +               serial1 = &blsp1_uart3;
-> +       };
-> +
-> +       chosen {
-> +               stdout-path = "serial0";
-> +       };
-> +
-> +       vph_pwr: vph-pwr-regulator {
-> +               compatible = "regulator-fixed";
-> +               regulator-name = "vph_pwr";
-> +               regulator-always-on;
-> +               regulator-boot-on;
-> +       };
-> +
-> +       vdd_ch0_3p3:
-> +       vdd_esmps3_3p3: vdd-esmps3-3p3-regulator {
-> +               compatible = "regulator-fixed";
-> +               regulator-name = "eSMPS3_3P3";
-> +
-> +               regulator-min-microvolt = <3300000>;
-> +               regulator-max-microvolt = <3300000>;
-> +               regulator-always-on;
-> +       };
-> +
-> +       usb3_vbus_reg: regulator-usb3-vbus {
-> +               compatible = "regulator-fixed";
-> +               regulator-name = "VBUS_BOOST_5V";
-> +               regulator-min-microvolt = <5000000>;
-> +               regulator-max-microvolt = <5000000>;
-> +               gpio = <&pms405_gpios 3 GPIO_ACTIVE_HIGH>;
-> +               pinctrl-names = "default";
-> +               pinctrl-0 = <&usb_vbus_boost_pin>;
-> +               vin-supply = <&vph_pwr>;
-> +               enable-active-high;
-> +
-> +               /* TODO: Drop this when introducing role switching */
-> +               regulator-always-on;
-> +       };
-> +};
-> +
-> +&blsp1_uart3 {
-> +       status = "okay";
-> +
-> +       bluetooth {
-> +               compatible = "qcom,wcn3990-bt";
-> +               vddio-supply = <&vreg_l6_1p8>;
-> +               vddxo-supply = <&vreg_l5_1p8>;
-> +               vddrf-supply = <&vreg_l1_1p3>;
-> +               vddch0-supply = <&vdd_ch0_3p3>;
-> +
-> +               local-bd-address = [ 02 00 00 00 5a ad ];
-> +
-> +               max-speed = <3200000>;
-> +       };
-> +};
-> +
-> +&blsp1_dma {
-> +       qcom,controlled-remotely;
-> +};
-> +
-> +&blsp2_dma {
-> +       qcom,controlled-remotely;
-> +};
-> +
-> +&gcc {
-> +       protected-clocks = <GCC_BIMC_CDSP_CLK>,
-> +                          <GCC_CDSP_CFG_AHB_CLK>,
-> +                          <GCC_CDSP_BIMC_CLK_SRC>,
-> +                          <GCC_CDSP_TBU_CLK>,
-> +                          <141>, /* GCC_WCSS_Q6_AHB_CLK */
-> +                          <142>; /* GCC_WCSS_Q6_AXIM_CLK */
-> +};
-> +
-> +&pms405_spmi_regulators {
-> +       vdd_s3-supply = <&vph_pwr>;
-> +
-> +       pms405_s3: s3 {
-> +               regulator-always-on;
-> +               regulator-boot-on;
-> +               regulator-name = "vdd_apc";
-> +               regulator-initial-mode = <1>;
-> +               regulator-min-microvolt = <1048000>;
-> +               regulator-max-microvolt = <1384000>;
-> +       };
-> +};
-> +
-> +&pcie {
-> +       status = "okay";
-> +
-> +       perst-gpios = <&tlmm 43 GPIO_ACTIVE_LOW>;
-> +
-> +       pinctrl-names = "default";
-> +       pinctrl-0 = <&perst_state>;
-> +};
-> +
-> +&pcie_phy {
-> +       status = "okay";
-> +
-> +       vdda-vp-supply = <&vreg_l3_1p05>;
-> +       vdda-vph-supply = <&vreg_l5_1p8>;
-> +};
-> +
-> +&remoteproc_adsp {
-> +       status = "okay";
-> +};
-> +
-> +&remoteproc_cdsp {
-> +       status = "okay";
-> +};
-> +
-> +&remoteproc_wcss {
-> +       status = "okay";
-> +};
-> +
-> +&rpm_requests {
-> +       regulators {
-> +               compatible = "qcom,rpm-pms405-regulators";
-> +
-> +               vdd_s1-supply = <&vph_pwr>;
-> +               vdd_s2-supply = <&vph_pwr>;
-> +               vdd_s3-supply = <&vph_pwr>;
-> +               vdd_s4-supply = <&vph_pwr>;
-> +               vdd_s5-supply = <&vph_pwr>;
-> +               vdd_l1_l2-supply = <&vreg_s5_1p35>;
-> +               vdd_l3_l8-supply = <&vreg_s5_1p35>;
-> +               vdd_l4-supply = <&vreg_s5_1p35>;
-> +               vdd_l5_l6-supply = <&vreg_s4_1p8>;
-> +               vdd_l7-supply = <&vph_pwr>;
-> +               vdd_l9-supply = <&vreg_s5_1p35>;
-> +               vdd_l10_l11_l12_l13-supply = <&vph_pwr>;
-> +
-> +               vreg_s4_1p8: s4 {
-> +                       regulator-min-microvolt = <1728000>;
-> +                       regulator-max-microvolt = <1920000>;
-> +               };
-> +
-> +               vreg_s5_1p35: s5 {
-> +                       regulator-min-microvolt = <1352000>;
-> +                       regulator-max-microvolt = <1352000>;
-> +               };
-> +
-> +               vreg_l1_1p3: l1 {
-> +                       regulator-min-microvolt = <1240000>;
-> +                       regulator-max-microvolt = <1352000>;
-> +               };
-> +
-> +               vreg_l2_1p275: l2 {
-> +                       regulator-min-microvolt = <1048000>;
-> +                       regulator-max-microvolt = <1280000>;
-> +               };
-> +
-> +               vreg_l3_1p05: l3 {
-> +                       regulator-min-microvolt = <1048000>;
-> +                       regulator-max-microvolt = <1160000>;
-> +               };
-> +
-> +               vreg_l4_1p2: l4 {
-> +                       regulator-min-microvolt = <1144000>;
-> +                       regulator-max-microvolt = <1256000>;
-> +               };
-> +
-> +               vreg_l5_1p8: l5 {
-> +                       regulator-min-microvolt = <1800000>;
-> +                       regulator-max-microvolt = <1800000>;
-> +               };
-> +
-> +               vreg_l6_1p8: l6 {
-> +                       regulator-min-microvolt = <1800000>;
-> +                       regulator-max-microvolt = <1800000>;
-> +                       regulator-always-on;
-> +               };
-> +
-> +               vreg_l7_1p8: l7 {
-> +                       regulator-min-microvolt = <1616000>;
-> +                       regulator-max-microvolt = <3000000>;
-> +               };
-> +
-> +               vreg_l8_1p2: l8 {
-> +                       regulator-min-microvolt = <1136000>;
-> +                       regulator-max-microvolt = <1352000>;
-> +               };
-> +
-> +               vreg_l10_3p3: l10 {
-> +                       regulator-min-microvolt = <2936000>;
-> +                       regulator-max-microvolt = <3088000>;
-> +               };
-> +
-> +               vreg_l11_sdc2: l11 {
-> +                       regulator-min-microvolt = <2696000>;
-> +                       regulator-max-microvolt = <3304000>;
-> +               };
-> +
-> +               vreg_l12_3p3: l12 {
-> +                       regulator-min-microvolt = <3050000>;
-> +                       regulator-max-microvolt = <3300000>;
-> +               };
-> +
-> +               vreg_l13_3p3: l13 {
-> +                       regulator-min-microvolt = <3000000>;
-> +                       regulator-max-microvolt = <3300000>;
-> +               };
-> +       };
-> +};
-> +
-> +&sdcc1 {
-> +       status = "okay";
-> +
-> +       supports-cqe;
-> +       mmc-ddr-1_8v;
-> +       mmc-hs400-1_8v;
-> +       bus-width = <8>;
-> +       non-removable;
-> +
-> +       pinctrl-names = "default", "sleep";
-> +       pinctrl-0 = <&sdc1_on>;
-> +       pinctrl-1 = <&sdc1_off>;
-> +};
-> +
-> +&tlmm {
-> +       perst_state: perst-state {
-> +               pins = "gpio43";
-> +               function = "gpio";
-> +
-> +               drive-strength = <2>;
-> +               bias-disable;
-> +               output-low;
-> +       };
-> +
-> +       sdc1_on: sdc1-on-state {
-> +               clk-pins {
-> +                       pins = "sdc1_clk";
-> +                       bias-disable;
-> +                       drive-strength = <16>;
-> +               };
-> +
-> +               cmd-pins {
-> +                       pins = "sdc1_cmd";
-> +                       bias-pull-up;
-> +                       drive-strength = <10>;
-> +               };
-> +
-> +               data-pins {
-> +                       pins = "sdc1_data";
-> +                       bias-pull-up;
-> +                       drive-strength = <10>;
-> +               };
-> +
-> +               rclk-pins {
-> +                       pins = "sdc1_rclk";
-> +                       bias-pull-down;
-> +               };
-> +       };
-> +
-> +       sdc1_off: sdc1-off-state {
-> +               clk-pins {
-> +                       pins = "sdc1_clk";
-> +                       bias-disable;
-> +                       drive-strength = <2>;
-> +               };
-> +
-> +               cmd-pins {
-> +                       pins = "sdc1_cmd";
-> +                       bias-pull-up;
-> +                       drive-strength = <2>;
-> +               };
-> +
-> +               data-pins {
-> +                       pins = "sdc1_data";
-> +                       bias-pull-up;
-> +                       drive-strength = <2>;
-> +               };
-> +
-> +               rclk-pins {
-> +                       pins = "sdc1_rclk";
-> +                       bias-pull-down;
-> +               };
-> +       };
-> +
-> +       usb3_id_pin: usb3-id-state {
-> +               pins = "gpio116";
-> +               function = "gpio";
-> +
-> +               drive-strength = <2>;
-> +               bias-pull-up;
-> +       };
-> +};
-> +
-> +&pms405_gpios {
-> +       usb_vbus_boost_pin: usb-vbus-boost-state {
-> +               pinconf {
-> +                       pins = "gpio3";
-> +                       function = PMIC_GPIO_FUNC_NORMAL;
-> +                       output-low;
-> +                       power-source = <1>;
-> +               };
-> +       };
-> +       usb3_vbus_pin: usb3-vbus-state {
-> +               pinconf {
-> +                       pins = "gpio12";
-> +                       function = PMIC_GPIO_FUNC_NORMAL;
-> +                       input-enable;
-> +                       bias-pull-down;
-> +                       power-source = <1>;
-> +               };
-> +       };
-> +};
-> +
-> +&usb2 {
-> +       status = "okay";
-> +};
-> +
-> +&usb2_phy_sec {
-> +       vdd-supply = <&vreg_l4_1p2>;
-> +       vdda1p8-supply = <&vreg_l5_1p8>;
-> +       vdda3p3-supply = <&vreg_l12_3p3>;
-> +       status = "okay";
-> +};
-> +
-> +&usb3 {
-> +       status = "okay";
-> +
-> +};
-> +
-> +&usb3_dwc3 {
-> +       dr_mode = "host";
-> +};
-> +
-> +&usb2_phy_prim {
-> +       vdd-supply = <&vreg_l4_1p2>;
-> +       vdda1p8-supply = <&vreg_l5_1p8>;
-> +       vdda3p3-supply = <&vreg_l12_3p3>;
-> +       status = "okay";
-> +};
-> +
-> +&usb3_phy {
-> +       vdd-supply = <&vreg_l3_1p05>;
-> +       vdda1p8-supply = <&vreg_l5_1p8>;
-> +       status = "okay";
-> +};
-> +
-> +&wifi {
-> +       status = "okay";
-> +       vdd-0.8-cx-mx-supply = <&vreg_l2_1p275>;
-> +       vdd-1.8-xo-supply = <&vreg_l5_1p8>;
-> +       vdd-1.3-rfa-supply = <&vreg_l1_1p3>;
-> +};
-> +
-> +/* PINCTRL - additions to nodes defined in qcs404.dtsi */
-> +
-> +&blsp1_uart2_default {
-> +       rx-pins {
-> +               drive-strength = <2>;
-> +               bias-disable;
-> +       };
-> +
-> +       tx-pins {
-> +               drive-strength = <2>;
-> +               bias-disable;
-> +       };
-> +};
-> +
-> +&blsp1_uart3_default {
-> +       cts-pins {
-> +               bias-disable;
-> +       };
-> +
-> +       rts-tx-pins {
-> +               drive-strength = <2>;
-> +               bias-disable;
-> +       };
-> +
-> +       rx-pins {
-> +               bias-pull-up;
-> +       };
-> +};
-> diff --git a/arch/arm/dts/qcs404.dtsi b/arch/arm/dts/qcs404.dtsi
-> new file mode 100644
-> index 000000000000..2721f32dfb71
-> --- /dev/null
-> +++ b/arch/arm/dts/qcs404.dtsi
-> @@ -0,0 +1,1829 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (c) 2018, Linaro Limited
-> + */
-> +
-> +#include <dt-bindings/interrupt-controller/arm-gic.h>
-> +#include <dt-bindings/clock/qcom,gcc-qcs404.h>
-> +#include <dt-bindings/clock/qcom,turingcc-qcs404.h>
-> +#include <dt-bindings/clock/qcom,rpmcc.h>
-> +#include <dt-bindings/power/qcom-rpmpd.h>
-> +#include <dt-bindings/thermal/thermal.h>
-> +
-> +/ {
-> +       interrupt-parent = <&intc>;
-> +
-> +       #address-cells = <2>;
-> +       #size-cells = <2>;
-> +
-> +       chosen { };
-> +
-> +       clocks {
-> +               xo_board: xo-board {
-> +                       compatible = "fixed-clock";
-> +                       #clock-cells = <0>;
-> +                       clock-frequency = <19200000>;
-> +               };
-> +
-> +               sleep_clk: sleep-clk {
-> +                       compatible = "fixed-clock";
-> +                       #clock-cells = <0>;
-> +                       clock-frequency = <32768>;
-> +               };
-> +       };
-> +
-> +       cpus {
-> +               #address-cells = <1>;
-> +               #size-cells = <0>;
-> +
-> +               CPU0: cpu@100 {
-> +                       device_type = "cpu";
-> +                       compatible = "arm,cortex-a53";
-> +                       reg = <0x100>;
-> +                       enable-method = "psci";
-> +                       cpu-idle-states = <&CPU_SLEEP_0>;
-> +                       next-level-cache = <&L2_0>;
-> +                       #cooling-cells = <2>;
-> +                       clocks = <&apcs_glb>;
-> +                       operating-points-v2 = <&cpu_opp_table>;
-> +                       power-domains = <&cpr>;
-> +                       power-domain-names = "cpr";
-> +               };
-> +
-> +               CPU1: cpu@101 {
-> +                       device_type = "cpu";
-> +                       compatible = "arm,cortex-a53";
-> +                       reg = <0x101>;
-> +                       enable-method = "psci";
-> +                       cpu-idle-states = <&CPU_SLEEP_0>;
-> +                       next-level-cache = <&L2_0>;
-> +                       #cooling-cells = <2>;
-> +                       clocks = <&apcs_glb>;
-> +                       operating-points-v2 = <&cpu_opp_table>;
-> +                       power-domains = <&cpr>;
-> +                       power-domain-names = "cpr";
-> +               };
-> +
-> +               CPU2: cpu@102 {
-> +                       device_type = "cpu";
-> +                       compatible = "arm,cortex-a53";
-> +                       reg = <0x102>;
-> +                       enable-method = "psci";
-> +                       cpu-idle-states = <&CPU_SLEEP_0>;
-> +                       next-level-cache = <&L2_0>;
-> +                       #cooling-cells = <2>;
-> +                       clocks = <&apcs_glb>;
-> +                       operating-points-v2 = <&cpu_opp_table>;
-> +                       power-domains = <&cpr>;
-> +                       power-domain-names = "cpr";
-> +               };
-> +
-> +               CPU3: cpu@103 {
-> +                       device_type = "cpu";
-> +                       compatible = "arm,cortex-a53";
-> +                       reg = <0x103>;
-> +                       enable-method = "psci";
-> +                       cpu-idle-states = <&CPU_SLEEP_0>;
-> +                       next-level-cache = <&L2_0>;
-> +                       #cooling-cells = <2>;
-> +                       clocks = <&apcs_glb>;
-> +                       operating-points-v2 = <&cpu_opp_table>;
-> +                       power-domains = <&cpr>;
-> +                       power-domain-names = "cpr";
-> +               };
-> +
-> +               L2_0: l2-cache {
-> +                       compatible = "cache";
-> +                       cache-level = <2>;
-> +                       cache-unified;
-> +               };
-> +
-> +               idle-states {
-> +                       entry-method = "psci";
-> +
-> +                       CPU_SLEEP_0: cpu-sleep-0 {
-> +                               compatible = "arm,idle-state";
-> +                               idle-state-name = "standalone-power-collapse";
-> +                               arm,psci-suspend-param = <0x40000003>;
-> +                               entry-latency-us = <125>;
-> +                               exit-latency-us = <180>;
-> +                               min-residency-us = <595>;
-> +                               local-timer-stop;
-> +                       };
-> +               };
-> +       };
-> +
-> +       cpu_opp_table: opp-table-cpu {
-> +               compatible = "operating-points-v2-kryo-cpu";
-> +               opp-shared;
-> +
-> +               opp-1094400000 {
-> +                       opp-hz = /bits/ 64 <1094400000>;
-> +                       required-opps = <&cpr_opp1>;
-> +               };
-> +               opp-1248000000 {
-> +                       opp-hz = /bits/ 64 <1248000000>;
-> +                       required-opps = <&cpr_opp2>;
-> +               };
-> +               opp-1401600000 {
-> +                       opp-hz = /bits/ 64 <1401600000>;
-> +                       required-opps = <&cpr_opp3>;
-> +               };
-> +       };
-> +
-> +       cpr_opp_table: opp-table-cpr {
-> +               compatible = "operating-points-v2-qcom-level";
-> +
-> +               cpr_opp1: opp1 {
-> +                       opp-level = <1>;
-> +                       qcom,opp-fuse-level = <1>;
-> +               };
-> +               cpr_opp2: opp2 {
-> +                       opp-level = <2>;
-> +                       qcom,opp-fuse-level = <2>;
-> +               };
-> +               cpr_opp3: opp3 {
-> +                       opp-level = <3>;
-> +                       qcom,opp-fuse-level = <3>;
-> +               };
-> +       };
-> +
-> +       firmware {
-> +               scm: scm {
-> +                       compatible = "qcom,scm-qcs404", "qcom,scm";
-> +                       #reset-cells = <1>;
-> +               };
-> +       };
-> +
-> +       memory@80000000 {
-> +               device_type = "memory";
-> +               /* We expect the bootloader to fill in the size */
-> +               reg = <0 0x80000000 0 0>;
-> +       };
-> +
-> +       psci {
-> +               compatible = "arm,psci-1.0";
-> +               method = "smc";
-> +       };
-> +
-> +       rpm: remoteproc {
-> +               compatible = "qcom,qcs404-rpm-proc", "qcom,rpm-proc";
-> +
-> +               glink-edge {
-> +                       compatible = "qcom,glink-rpm";
-> +
-> +                       interrupts = <GIC_SPI 168 IRQ_TYPE_EDGE_RISING>;
-> +                       qcom,rpm-msg-ram = <&rpm_msg_ram>;
-> +                       mboxes = <&apcs_glb 0>;
-> +
-> +                       rpm_requests: rpm-requests {
-> +                               compatible = "qcom,rpm-qcs404";
-> +                               qcom,glink-channels = "rpm_requests";
-> +
-> +                               rpmcc: clock-controller {
-> +                                       compatible = "qcom,rpmcc-qcs404", "qcom,rpmcc";
-> +                                       #clock-cells = <1>;
-> +                                       clocks = <&xo_board>;
-> +                                       clock-names = "xo";
-> +                               };
-> +
-> +                               rpmpd: power-controller {
-> +                                       compatible = "qcom,qcs404-rpmpd";
-> +                                       #power-domain-cells = <1>;
-> +                                       operating-points-v2 = <&rpmpd_opp_table>;
-> +
-> +                                       rpmpd_opp_table: opp-table {
-> +                                               compatible = "operating-points-v2";
-> +
-> +                                               rpmpd_opp_ret: opp1 {
-> +                                                       opp-level = <16>;
-> +                                               };
-> +
-> +                                               rpmpd_opp_ret_plus: opp2 {
-> +                                                       opp-level = <32>;
-> +                                               };
-> +
-> +                                               rpmpd_opp_min_svs: opp3 {
-> +                                                       opp-level = <48>;
-> +                                               };
-> +
-> +                                               rpmpd_opp_low_svs: opp4 {
-> +                                                       opp-level = <64>;
-> +                                               };
-> +
-> +                                               rpmpd_opp_svs: opp5 {
-> +                                                       opp-level = <128>;
-> +                                               };
-> +
-> +                                               rpmpd_opp_svs_plus: opp6 {
-> +                                                       opp-level = <192>;
-> +                                               };
-> +
-> +                                               rpmpd_opp_nom: opp7 {
-> +                                                       opp-level = <256>;
-> +                                               };
-> +
-> +                                               rpmpd_opp_nom_plus: opp8 {
-> +                                                       opp-level = <320>;
-> +                                               };
-> +
-> +                                               rpmpd_opp_turbo: opp9 {
-> +                                                       opp-level = <384>;
-> +                                               };
-> +
-> +                                               rpmpd_opp_turbo_no_cpr: opp10 {
-> +                                                       opp-level = <416>;
-> +                                               };
-> +
-> +                                               rpmpd_opp_turbo_plus: opp11 {
-> +                                                       opp-level = <512>;
-> +                                               };
-> +                                       };
-> +                               };
-> +                       };
-> +               };
-> +       };
-> +
-> +       reserved-memory {
-> +               #address-cells = <2>;
-> +               #size-cells = <2>;
-> +               ranges;
-> +
-> +               tz_apps_mem: memory@85900000 {
-> +                       reg = <0 0x85900000 0 0x500000>;
-> +                       no-map;
-> +               };
-> +
-> +               xbl_mem: memory@85e00000 {
-> +                       reg = <0 0x85e00000 0 0x100000>;
-> +                       no-map;
-> +               };
-> +
-> +               smem_region: memory@85f00000 {
-> +                       reg = <0 0x85f00000 0 0x200000>;
-> +                       no-map;
-> +               };
-> +
-> +               tz_mem: memory@86100000 {
-> +                       reg = <0 0x86100000 0 0x300000>;
-> +                       no-map;
-> +               };
-> +
-> +               wlan_fw_mem: memory@86400000 {
-> +                       reg = <0 0x86400000 0 0x1100000>;
-> +                       no-map;
-> +               };
-> +
-> +               adsp_fw_mem: memory@87500000 {
-> +                       reg = <0 0x87500000 0 0x1a00000>;
-> +                       no-map;
-> +               };
-> +
-> +               cdsp_fw_mem: memory@88f00000 {
-> +                       reg = <0 0x88f00000 0 0x600000>;
-> +                       no-map;
-> +               };
-> +
-> +               wlan_msa_mem: memory@89500000 {
-> +                       reg = <0 0x89500000 0 0x100000>;
-> +                       no-map;
-> +               };
-> +
-> +               uefi_mem: memory@9f800000 {
-> +                       reg = <0 0x9f800000 0 0x800000>;
-> +                       no-map;
-> +               };
-> +       };
-> +
-> +       smem {
-> +               compatible = "qcom,smem";
-> +
-> +               memory-region = <&smem_region>;
-> +               qcom,rpm-msg-ram = <&rpm_msg_ram>;
-> +
-> +               hwlocks = <&tcsr_mutex 3>;
-> +       };
-> +
-> +       soc: soc@0 {
-> +               #address-cells = <1>;
-> +               #size-cells = <1>;
-> +               ranges = <0 0 0 0xffffffff>;
-> +               compatible = "simple-bus";
-> +
-> +               turingcc: clock-controller@800000 {
-> +                       compatible = "qcom,qcs404-turingcc";
-> +                       reg = <0x00800000 0x30000>;
-> +                       clocks = <&gcc GCC_CDSP_CFG_AHB_CLK>;
-> +
-> +                       #clock-cells = <1>;
-> +                       #reset-cells = <1>;
-> +
-> +                       status = "disabled";
-> +               };
-> +
-> +               rpm_msg_ram: sram@60000 {
-> +                       compatible = "qcom,rpm-msg-ram";
-> +                       reg = <0x00060000 0x6000>;
-> +               };
-> +
-> +               usb3_phy: phy@78000 {
-> +                       compatible = "qcom,usb-ss-28nm-phy";
-> +                       reg = <0x00078000 0x400>;
-> +                       #phy-cells = <0>;
-> +                       clocks = <&rpmcc RPM_SMD_LN_BB_CLK>,
-> +                                <&gcc GCC_USB_HS_PHY_CFG_AHB_CLK>,
-> +                                <&gcc GCC_USB3_PHY_PIPE_CLK>;
-> +                       clock-names = "ref", "ahb", "pipe";
-> +                       resets = <&gcc GCC_USB3_PHY_BCR>,
-> +                                <&gcc GCC_USB3PHY_PHY_BCR>;
-> +                       reset-names = "com", "phy";
-> +                       status = "disabled";
-> +               };
-> +
-> +               usb2_phy_prim: phy@7a000 {
-> +                       compatible = "qcom,usb-hs-28nm-femtophy";
-> +                       reg = <0x0007a000 0x200>;
-> +                       #phy-cells = <0>;
-> +                       clocks = <&rpmcc RPM_SMD_LN_BB_CLK>,
-> +                                <&gcc GCC_USB_HS_PHY_CFG_AHB_CLK>,
-> +                                <&gcc GCC_USB2A_PHY_SLEEP_CLK>;
-> +                       clock-names = "ref", "ahb", "sleep";
-> +                       resets = <&gcc GCC_USB_HS_PHY_CFG_AHB_BCR>,
-> +                                <&gcc GCC_USB2A_PHY_BCR>;
-> +                       reset-names = "phy", "por";
-> +                       status = "disabled";
-> +               };
-> +
-> +               usb2_phy_sec: phy@7c000 {
-> +                       compatible = "qcom,usb-hs-28nm-femtophy";
-> +                       reg = <0x0007c000 0x200>;
-> +                       #phy-cells = <0>;
-> +                       clocks = <&rpmcc RPM_SMD_LN_BB_CLK>,
-> +                                <&gcc GCC_USB_HS_PHY_CFG_AHB_CLK>,
-> +                                <&gcc GCC_USB2A_PHY_SLEEP_CLK>;
-> +                       clock-names = "ref", "ahb", "sleep";
-> +                       resets = <&gcc GCC_QUSB2_PHY_BCR>,
-> +                                <&gcc GCC_USB2_HS_PHY_ONLY_BCR>;
-> +                       reset-names = "phy", "por";
-> +                       status = "disabled";
-> +               };
-> +
-> +               qfprom: qfprom@a4000 {
-> +                       compatible = "qcom,qcs404-qfprom", "qcom,qfprom";
-> +                       reg = <0x000a4000 0x1000>;
-> +                       #address-cells = <1>;
-> +                       #size-cells = <1>;
-> +                       cpr_efuse_speedbin: speedbin@13c {
-> +                               reg = <0x13c 0x4>;
-> +                               bits = <2 3>;
-> +                       };
-> +
-> +                       tsens_s0_p1: s0-p1@1f8 {
-> +                               reg = <0x1f8 0x1>;
-> +                               bits = <0 6>;
-> +                       };
-> +
-> +                       tsens_s0_p2: s0-p2@1f8 {
-> +                               reg = <0x1f8 0x2>;
-> +                               bits = <6 6>;
-> +                       };
-> +
-> +                       tsens_s1_p1: s1-p1@1f9 {
-> +                               reg = <0x1f9 0x2>;
-> +                               bits = <4 6>;
-> +                       };
-> +
-> +                       tsens_s1_p2: s1-p2@1fa {
-> +                               reg = <0x1fa 0x1>;
-> +                               bits = <2 6>;
-> +                       };
-> +
-> +                       tsens_s2_p1: s2-p1@1fb {
-> +                               reg = <0x1fb 0x1>;
-> +                               bits = <0 6>;
-> +                       };
-> +
-> +                       tsens_s2_p2: s2-p2@1fb {
-> +                               reg = <0x1fb 0x2>;
-> +                               bits = <6 6>;
-> +                       };
-> +
-> +                       tsens_s3_p1: s3-p1@1fc {
-> +                               reg = <0x1fc 0x2>;
-> +                               bits = <4 6>;
-> +                       };
-> +
-> +                       tsens_s3_p2: s3-p2@1fd {
-> +                               reg = <0x1fd 0x1>;
-> +                               bits = <2 6>;
-> +                       };
-> +
-> +                       tsens_s4_p1: s4-p1@1fe {
-> +                               reg = <0x1fe 0x1>;
-> +                               bits = <0 6>;
-> +                       };
-> +
-> +                       tsens_s4_p2: s4-p2@1fe {
-> +                               reg = <0x1fe 0x2>;
-> +                               bits = <6 6>;
-> +                       };
-> +
-> +                       tsens_s5_p1: s5-p1@200 {
-> +                               reg = <0x200 0x1>;
-> +                               bits = <0 6>;
-> +                       };
-> +
-> +                       tsens_s5_p2: s5-p2@200 {
-> +                               reg = <0x200 0x2>;
-> +                               bits = <6 6>;
-> +                       };
-> +
-> +                       tsens_s6_p1: s6-p1@201 {
-> +                               reg = <0x201 0x2>;
-> +                               bits = <4 6>;
-> +                       };
-> +
-> +                       tsens_s6_p2: s6-p2@202 {
-> +                               reg = <0x202 0x1>;
-> +                               bits = <2 6>;
-> +                       };
-> +
-> +                       tsens_s7_p1: s7-p1@203 {
-> +                               reg = <0x203 0x1>;
-> +                               bits = <0 6>;
-> +                       };
-> +
-> +                       tsens_s7_p2: s7-p2@203 {
-> +                               reg = <0x203 0x2>;
-> +                               bits = <6 6>;
-> +                       };
-> +
-> +                       tsens_s8_p1: s8-p1@204 {
-> +                               reg = <0x204 0x2>;
-> +                               bits = <4 6>;
-> +                       };
-> +
-> +                       tsens_s8_p2: s8-p2@205 {
-> +                               reg = <0x205 0x1>;
-> +                               bits = <2 6>;
-> +                       };
-> +
-> +                       tsens_s9_p1: s9-p1@206 {
-> +                               reg = <0x206 0x1>;
-> +                               bits = <0 6>;
-> +                       };
-> +
-> +                       tsens_s9_p2: s9-p2@206 {
-> +                               reg = <0x206 0x2>;
-> +                               bits = <6 6>;
-> +                       };
-> +
-> +                       tsens_mode: mode@208 {
-> +                               reg = <0x208 1>;
-> +                               bits = <0 3>;
-> +                       };
-> +
-> +                       tsens_base1: base1@208 {
-> +                               reg = <0x208 2>;
-> +                               bits = <3 8>;
-> +                       };
-> +
-> +                       tsens_base2: base2@208 {
-> +                               reg = <0x209 2>;
-> +                               bits = <3 8>;
-> +                       };
-> +
-> +                       cpr_efuse_quot_offset1: qoffset1@231 {
-> +                               reg = <0x231 0x4>;
-> +                               bits = <4 7>;
-> +                       };
-> +                       cpr_efuse_quot_offset2: qoffset2@232 {
-> +                               reg = <0x232 0x4>;
-> +                               bits = <3 7>;
-> +                       };
-> +                       cpr_efuse_quot_offset3: qoffset3@233 {
-> +                               reg = <0x233 0x4>;
-> +                               bits = <2 7>;
-> +                       };
-> +                       cpr_efuse_init_voltage1: ivoltage1@229 {
-> +                               reg = <0x229 0x4>;
-> +                               bits = <4 6>;
-> +                       };
-> +                       cpr_efuse_init_voltage2: ivoltage2@22a {
-> +                               reg = <0x22a 0x4>;
-> +                               bits = <2 6>;
-> +                       };
-> +                       cpr_efuse_init_voltage3: ivoltage3@22b {
-> +                               reg = <0x22b 0x4>;
-> +                               bits = <0 6>;
-> +                       };
-> +                       cpr_efuse_quot1: quot1@22b {
-> +                               reg = <0x22b 0x4>;
-> +                               bits = <6 12>;
-> +                       };
-> +                       cpr_efuse_quot2: quot2@22d {
-> +                               reg = <0x22d 0x4>;
-> +                               bits = <2 12>;
-> +                       };
-> +                       cpr_efuse_quot3: quot3@230 {
-> +                               reg = <0x230 0x4>;
-> +                               bits = <0 12>;
-> +                       };
-> +                       cpr_efuse_ring1: ring1@228 {
-> +                               reg = <0x228 0x4>;
-> +                               bits = <0 3>;
-> +                       };
-> +                       cpr_efuse_ring2: ring2@228 {
-> +                               reg = <0x228 0x4>;
-> +                               bits = <4 3>;
-> +                       };
-> +                       cpr_efuse_ring3: ring3@229 {
-> +                               reg = <0x229 0x4>;
-> +                               bits = <0 3>;
-> +                       };
-> +                       cpr_efuse_revision: revision@218 {
-> +                               reg = <0x218 0x4>;
-> +                               bits = <3 3>;
-> +                       };
-> +               };
-> +
-> +               rng: rng@e3000 {
-> +                       compatible = "qcom,prng-ee";
-> +                       reg = <0x000e3000 0x1000>;
-> +                       clocks = <&gcc GCC_PRNG_AHB_CLK>;
-> +                       clock-names = "core";
-> +               };
-> +
-> +               bimc: interconnect@400000 {
-> +                       reg = <0x00400000 0x80000>;
-> +                       compatible = "qcom,qcs404-bimc";
-> +                       #interconnect-cells = <1>;
-> +                       clock-names = "bus", "bus_a";
-> +                       clocks = <&rpmcc RPM_SMD_BIMC_CLK>,
-> +                               <&rpmcc RPM_SMD_BIMC_A_CLK>;
-> +               };
-> +
-> +               tsens: thermal-sensor@4a9000 {
-> +                       compatible = "qcom,qcs404-tsens", "qcom,tsens-v1";
-> +                       reg = <0x004a9000 0x1000>, /* TM */
-> +                             <0x004a8000 0x1000>; /* SROT */
-> +                       nvmem-cells = <&tsens_mode>,
-> +                                     <&tsens_base1>, <&tsens_base2>,
-> +                                     <&tsens_s0_p1>, <&tsens_s0_p2>,
-> +                                     <&tsens_s1_p1>, <&tsens_s1_p2>,
-> +                                     <&tsens_s2_p1>, <&tsens_s2_p2>,
-> +                                     <&tsens_s3_p1>, <&tsens_s3_p2>,
-> +                                     <&tsens_s4_p1>, <&tsens_s4_p2>,
-> +                                     <&tsens_s5_p1>, <&tsens_s5_p2>,
-> +                                     <&tsens_s6_p1>, <&tsens_s6_p2>,
-> +                                     <&tsens_s7_p1>, <&tsens_s7_p2>,
-> +                                     <&tsens_s8_p1>, <&tsens_s8_p2>,
-> +                                     <&tsens_s9_p1>, <&tsens_s9_p2>;
-> +                       nvmem-cell-names = "mode",
-> +                                          "base1", "base2",
-> +                                          "s0_p1", "s0_p2",
-> +                                          "s1_p1", "s1_p2",
-> +                                          "s2_p1", "s2_p2",
-> +                                          "s3_p1", "s3_p2",
-> +                                          "s4_p1", "s4_p2",
-> +                                          "s5_p1", "s5_p2",
-> +                                          "s6_p1", "s6_p2",
-> +                                          "s7_p1", "s7_p2",
-> +                                          "s8_p1", "s8_p2",
-> +                                          "s9_p1", "s9_p2";
-> +                       #qcom,sensors = <10>;
-> +                       interrupts = <GIC_SPI 184 IRQ_TYPE_LEVEL_HIGH>;
-> +                       interrupt-names = "uplow";
-> +                       #thermal-sensor-cells = <1>;
-> +               };
-> +
-> +               pcnoc: interconnect@500000 {
-> +                       reg = <0x00500000 0x15080>;
-> +                       compatible = "qcom,qcs404-pcnoc";
-> +                       #interconnect-cells = <1>;
-> +                       clock-names = "bus", "bus_a";
-> +                       clocks = <&rpmcc RPM_SMD_PNOC_CLK>,
-> +                               <&rpmcc RPM_SMD_PNOC_A_CLK>;
-> +               };
-> +
-> +               snoc: interconnect@580000 {
-> +                       reg = <0x00580000 0x23080>;
-> +                       compatible = "qcom,qcs404-snoc";
-> +                       #interconnect-cells = <1>;
-> +                       clock-names = "bus", "bus_a";
-> +                       clocks = <&rpmcc RPM_SMD_SNOC_CLK>,
-> +                               <&rpmcc RPM_SMD_SNOC_A_CLK>;
-> +               };
-> +
-> +               remoteproc_cdsp: remoteproc@b00000 {
-> +                       compatible = "qcom,qcs404-cdsp-pas";
-> +                       reg = <0x00b00000 0x4040>;
-> +
-> +                       interrupts-extended = <&intc GIC_SPI 229 IRQ_TYPE_EDGE_RISING>,
-> +                                             <&cdsp_smp2p_in 0 IRQ_TYPE_EDGE_RISING>,
-> +                                             <&cdsp_smp2p_in 1 IRQ_TYPE_EDGE_RISING>,
-> +                                             <&cdsp_smp2p_in 2 IRQ_TYPE_EDGE_RISING>,
-> +                                             <&cdsp_smp2p_in 3 IRQ_TYPE_EDGE_RISING>;
-> +                       interrupt-names = "wdog", "fatal", "ready",
-> +                                         "handover", "stop-ack";
-> +
-> +                       clocks = <&xo_board>;
-> +                       clock-names = "xo";
-> +
-> +                       /*
-> +                        * If the node was using the PIL binding, then include properties:
-> +                        * clocks = <&xo_board>,
-> +                        *          <&gcc GCC_CDSP_CFG_AHB_CLK>,
-> +                        *          <&gcc GCC_CDSP_TBU_CLK>,
-> +                        *          <&gcc GCC_BIMC_CDSP_CLK>,
-> +                        *          <&turingcc TURING_WRAPPER_AON_CLK>,
-> +                        *          <&turingcc TURING_Q6SS_AHBS_AON_CLK>,
-> +                        *          <&turingcc TURING_Q6SS_AHBM_AON_CLK>,
-> +                        *          <&turingcc TURING_Q6SS_Q6_AXIM_CLK>;
-> +                        * clock-names = "xo",
-> +                        *               "sway",
-> +                        *               "tbu",
-> +                        *               "bimc",
-> +                        *               "ahb_aon",
-> +                        *               "q6ss_slave",
-> +                        *               "q6ss_master",
-> +                        *               "q6_axim";
-> +                        * resets = <&gcc GCC_CDSP_RESTART>;
-> +                        * reset-names = "restart";
-> +                        * qcom,halt-regs = <&tcsr 0x19004>;
-> +                        */
-> +
-> +                       memory-region = <&cdsp_fw_mem>;
-> +
-> +                       qcom,smem-states = <&cdsp_smp2p_out 0>;
-> +                       qcom,smem-state-names = "stop";
-> +
-> +                       status = "disabled";
-> +
-> +                       glink-edge {
-> +                               interrupts = <GIC_SPI 141 IRQ_TYPE_EDGE_RISING>;
-> +
-> +                               qcom,remote-pid = <5>;
-> +                               mboxes = <&apcs_glb 12>;
-> +
-> +                               label = "cdsp";
-> +                       };
-> +               };
-> +
-> +               usb3: usb@7678800 {
-> +                       compatible = "qcom,qcs404-dwc3", "qcom,dwc3";
-> +                       reg = <0x07678800 0x400>;
-> +                       #address-cells = <1>;
-> +                       #size-cells = <1>;
-> +                       ranges;
-> +                       clocks = <&gcc GCC_USB30_MASTER_CLK>,
-> +                                <&gcc GCC_SYS_NOC_USB3_CLK>,
-> +                                <&gcc GCC_USB30_SLEEP_CLK>,
-> +                                <&gcc GCC_USB30_MOCK_UTMI_CLK>;
-> +                       clock-names = "core", "iface", "sleep", "mock_utmi";
-> +                       assigned-clocks = <&gcc GCC_USB20_MOCK_UTMI_CLK>,
-> +                                         <&gcc GCC_USB30_MASTER_CLK>;
-> +                       assigned-clock-rates = <19200000>, <200000000>;
-> +                       status = "disabled";
-> +
-> +                       usb3_dwc3: usb@7580000 {
-> +                               compatible = "snps,dwc3";
-> +                               reg = <0x07580000 0xcd00>;
-> +                               interrupts = <GIC_SPI 26 IRQ_TYPE_LEVEL_HIGH>;
-> +                               phys = <&usb2_phy_prim>, <&usb3_phy>;
-> +                               phy-names = "usb2-phy", "usb3-phy";
-> +                               snps,has-lpm-erratum;
-> +                               snps,hird-threshold = /bits/ 8 <0x10>;
-> +                               snps,usb3_lpm_capable;
-> +                               dr_mode = "otg";
-> +                       };
-> +               };
-> +
-> +               usb2: usb@79b8800 {
-> +                       compatible = "qcom,qcs404-dwc3", "qcom,dwc3";
-> +                       reg = <0x079b8800 0x400>;
-> +                       #address-cells = <1>;
-> +                       #size-cells = <1>;
-> +                       ranges;
-> +                       clocks = <&gcc GCC_USB_HS_SYSTEM_CLK>,
-> +                                <&gcc GCC_PCNOC_USB2_CLK>,
-> +                                <&gcc GCC_USB_HS_INACTIVITY_TIMERS_CLK>,
-> +                                <&gcc GCC_USB20_MOCK_UTMI_CLK>;
-> +                       clock-names = "core", "iface", "sleep", "mock_utmi";
-> +                       assigned-clocks = <&gcc GCC_USB20_MOCK_UTMI_CLK>,
-> +                                         <&gcc GCC_USB_HS_SYSTEM_CLK>;
-> +                       assigned-clock-rates = <19200000>, <133333333>;
-> +                       status = "disabled";
-> +
-> +                       usb@78c0000 {
-> +                               compatible = "snps,dwc3";
-> +                               reg = <0x078c0000 0xcc00>;
-> +                               interrupts = <GIC_SPI 44 IRQ_TYPE_LEVEL_HIGH>;
-> +                               phys = <&usb2_phy_sec>;
-> +                               phy-names = "usb2-phy";
-> +                               snps,has-lpm-erratum;
-> +                               snps,hird-threshold = /bits/ 8 <0x10>;
-> +                               snps,usb3_lpm_capable;
-> +                               dr_mode = "peripheral";
-> +                       };
-> +               };
-> +
-> +               tlmm: pinctrl@1000000 {
-> +                       compatible = "qcom,qcs404-pinctrl";
-> +                       reg = <0x01000000 0x200000>,
-> +                             <0x01300000 0x200000>,
-> +                             <0x07b00000 0x200000>;
-> +                       reg-names = "south", "north", "east";
-> +                       interrupts = <GIC_SPI 208 IRQ_TYPE_LEVEL_HIGH>;
-> +                       gpio-ranges = <&tlmm 0 0 120>;
-> +                       gpio-controller;
-> +                       #gpio-cells = <2>;
-> +                       interrupt-controller;
-> +                       #interrupt-cells = <2>;
-> +
-> +                       blsp1_i2c0_default: blsp1-i2c0-default-state {
-> +                               pins = "gpio32", "gpio33";
-> +                               function = "blsp_i2c0";
-> +                       };
-> +
-> +                       blsp1_i2c1_default: blsp1-i2c1-default-state {
-> +                               pins = "gpio24", "gpio25";
-> +                               function = "blsp_i2c1";
-> +                       };
-> +
-> +                       blsp1_i2c2_default: blsp1-i2c2-default-state {
-> +                               sda-pins {
-> +                                       pins = "gpio19";
-> +                                       function = "blsp_i2c_sda_a2";
-> +                               };
-> +
-> +                               scl-pins {
-> +                                       pins = "gpio20";
-> +                                       function = "blsp_i2c_scl_a2";
-> +                               };
-> +                       };
-> +
-> +                       blsp1_i2c3_default: blsp1-i2c3-default-state {
-> +                               pins = "gpio84", "gpio85";
-> +                               function = "blsp_i2c3";
-> +                       };
-> +
-> +                       blsp1_i2c4_default: blsp1-i2c4-default-state {
-> +                               pins = "gpio117", "gpio118";
-> +                               function = "blsp_i2c4";
-> +                       };
-> +
-> +                       blsp1_uart0_default: blsp1-uart0-default-state {
-> +                               pins = "gpio30", "gpio31", "gpio32", "gpio33";
-> +                               function = "blsp_uart0";
-> +                       };
-> +
-> +                       blsp1_uart1_default: blsp1-uart1-default-state {
-> +                               pins = "gpio22", "gpio23";
-> +                               function = "blsp_uart1";
-> +                       };
-> +
-> +                       blsp1_uart2_default: blsp1-uart2-default-state {
-> +                               rx-pins {
-> +                                       pins = "gpio18";
-> +                                       function = "blsp_uart_rx_a2";
-> +                               };
-> +
-> +                               tx-pins {
-> +                                       pins = "gpio17";
-> +                                       function = "blsp_uart_tx_a2";
-> +                               };
-> +                       };
-> +
-> +                       blsp1_uart3_default: blsp1-uart3-default-state {
-> +                               cts-pins {
-> +                                       pins = "gpio84";
-> +                                       function = "blsp_uart3";
-> +                               };
-> +
-> +                               rts-tx-pins {
-> +                                       pins = "gpio85", "gpio82";
-> +                                       function = "blsp_uart3";
-> +                               };
-> +
-> +                               rx-pins {
-> +                                       pins = "gpio83";
-> +                                       function = "blsp_uart3";
-> +                               };
-> +                       };
-> +
-> +                       blsp2_i2c0_default: blsp2-i2c0-default-state {
-> +                               pins = "gpio28", "gpio29";
-> +                               function = "blsp_i2c5";
-> +                       };
-> +
-> +                       blsp1_spi0_default: blsp1-spi0-default-state {
-> +                               pins = "gpio30", "gpio31", "gpio32", "gpio33";
-> +                               function = "blsp_spi0";
-> +                       };
-> +
-> +                       blsp1_spi1_default: blsp1-spi1-default-state {
-> +                               mosi-pins {
-> +                                       pins = "gpio22";
-> +                                       function = "blsp_spi_mosi_a1";
-> +                               };
-> +
-> +                               miso-pins {
-> +                                       pins = "gpio23";
-> +                                       function = "blsp_spi_miso_a1";
-> +                               };
-> +
-> +                               cs-n-pins {
-> +                                       pins = "gpio24";
-> +                                       function = "blsp_spi_cs_n_a1";
-> +                               };
-> +
-> +                               clk-pins {
-> +                                       pins = "gpio25";
-> +                                       function = "blsp_spi_clk_a1";
-> +                               };
-> +                       };
-> +
-> +                       blsp1_spi2_default: blsp1-spi2-default-state {
-> +                               pins = "gpio17", "gpio18", "gpio19", "gpio20";
-> +                               function = "blsp_spi2";
-> +                       };
-> +
-> +                       blsp1_spi3_default: blsp1-spi3-default-state {
-> +                               pins = "gpio82", "gpio83", "gpio84", "gpio85";
-> +                               function = "blsp_spi3";
-> +                       };
-> +
-> +                       blsp1_spi4_default: blsp1-spi4-default-state {
-> +                               pins = "gpio37", "gpio38", "gpio117", "gpio118";
-> +                               function = "blsp_spi4";
-> +                       };
-> +
-> +                       blsp2_spi0_default: blsp2-spi0-default-state {
-> +                               pins = "gpio26", "gpio27", "gpio28", "gpio29";
-> +                               function = "blsp_spi5";
-> +                       };
-> +
-> +                       blsp2_uart0_default: blsp2-uart0-default-state {
-> +                               pins = "gpio26", "gpio27", "gpio28", "gpio29";
-> +                               function = "blsp_uart5";
-> +                       };
-> +               };
-> +
-> +               gcc: clock-controller@1800000 {
-> +                       compatible = "qcom,gcc-qcs404";
-> +                       reg = <0x01800000 0x80000>;
-> +                       #clock-cells = <1>;
-> +                       #reset-cells = <1>;
-> +                       #power-domain-cells = <1>;
-> +
-> +                       clocks = <&xo_board>,
-> +                                <&sleep_clk>,
-> +                                <&pcie_phy>,
-> +                                <0>,
-> +                                <0>,
-> +                                <0>;
-> +
-> +                       assigned-clocks = <&gcc GCC_APSS_AHB_CLK_SRC>;
-> +                       assigned-clock-rates = <19200000>;
-> +               };
-> +
-> +               tcsr_mutex: hwlock@1905000 {
-> +                       compatible = "qcom,tcsr-mutex";
-> +                       reg = <0x01905000 0x20000>;
-> +                       #hwlock-cells = <1>;
-> +               };
-> +
-> +               tcsr: syscon@1937000 {
-> +                       compatible = "qcom,qcs404-tcsr", "syscon";
-> +                       reg = <0x01937000 0x25000>;
-> +               };
-> +
-> +               sram@290000 {
-> +                       compatible = "qcom,rpm-stats";
-> +                       reg = <0x00290000 0x10000>;
-> +               };
-> +
-> +               spmi_bus: spmi@200f000 {
-> +                       compatible = "qcom,spmi-pmic-arb";
-> +                       reg = <0x0200f000 0x001000>,
-> +                             <0x02400000 0x800000>,
-> +                             <0x02c00000 0x800000>,
-> +                             <0x03800000 0x200000>,
-> +                             <0x0200a000 0x002100>;
-> +                       reg-names = "core", "chnls", "obsrvr", "intr", "cnfg";
-> +                       interrupt-names = "periph_irq";
-> +                       interrupts = <GIC_SPI 190 IRQ_TYPE_LEVEL_HIGH>;
-> +                       qcom,ee = <0>;
-> +                       qcom,channel = <0>;
-> +                       #address-cells = <2>;
-> +                       #size-cells = <0>;
-> +                       interrupt-controller;
-> +                       #interrupt-cells = <4>;
-> +               };
-> +
-> +               remoteproc_wcss: remoteproc@7400000 {
-> +                       compatible = "qcom,qcs404-wcss-pas";
-> +                       reg = <0x07400000 0x4040>;
-> +
-> +                       interrupts-extended = <&intc GIC_SPI 153 IRQ_TYPE_EDGE_RISING>,
-> +                                             <&wcss_smp2p_in 0 IRQ_TYPE_EDGE_RISING>,
-> +                                             <&wcss_smp2p_in 1 IRQ_TYPE_EDGE_RISING>,
-> +                                             <&wcss_smp2p_in 2 IRQ_TYPE_EDGE_RISING>,
-> +                                             <&wcss_smp2p_in 3 IRQ_TYPE_EDGE_RISING>;
-> +                       interrupt-names = "wdog", "fatal", "ready",
-> +                                         "handover", "stop-ack";
-> +
-> +                       clocks = <&xo_board>;
-> +                       clock-names = "xo";
-> +
-> +                       memory-region = <&wlan_fw_mem>;
-> +
-> +                       qcom,smem-states = <&wcss_smp2p_out 0>;
-> +                       qcom,smem-state-names = "stop";
-> +
-> +                       status = "disabled";
-> +
-> +                       glink-edge {
-> +                               interrupts = <GIC_SPI 156 IRQ_TYPE_EDGE_RISING>;
-> +
-> +                               qcom,remote-pid = <1>;
-> +                               mboxes = <&apcs_glb 16>;
-> +
-> +                               label = "wcss";
-> +                       };
-> +               };
-> +
-> +               pcie_phy: phy@7786000 {
-> +                       compatible = "qcom,qcs404-pcie2-phy", "qcom,pcie2-phy";
-> +                       reg = <0x07786000 0xb8>;
-> +
-> +                       clocks = <&gcc GCC_PCIE_0_PIPE_CLK>;
-> +                       resets = <&gcc GCC_PCIEPHY_0_PHY_BCR>,
-> +                                <&gcc GCC_PCIE_0_PIPE_ARES>;
-> +                       reset-names = "phy", "pipe";
-> +
-> +                       clock-output-names = "pcie_0_pipe_clk";
-> +                       #clock-cells = <0>;
-> +                       #phy-cells = <0>;
-> +
-> +                       status = "disabled";
-> +               };
-> +
-> +               sdcc1: mmc@7804000 {
-> +                       compatible = "qcom,qcs404-sdhci", "qcom,sdhci-msm-v5";
-> +                       reg = <0x07804000 0x1000>, <0x7805000 0x1000>;
-> +                       reg-names = "hc", "cqhci";
-> +
-> +                       interrupts = <GIC_SPI 123 IRQ_TYPE_LEVEL_HIGH>,
-> +                                    <GIC_SPI 138 IRQ_TYPE_LEVEL_HIGH>;
-> +                       interrupt-names = "hc_irq", "pwr_irq";
-> +
-> +                       clocks = <&gcc GCC_SDCC1_AHB_CLK>,
-> +                                <&gcc GCC_SDCC1_APPS_CLK>,
-> +                                <&xo_board>;
-> +                       clock-names = "iface", "core", "xo";
-> +
-> +                       status = "disabled";
-> +               };
-> +
-> +               blsp1_dma: dma-controller@7884000 {
-> +                       compatible = "qcom,bam-v1.7.0";
-> +                       reg = <0x07884000 0x25000>;
-> +                       interrupts = <GIC_SPI 238 IRQ_TYPE_LEVEL_HIGH>;
-> +                       clocks = <&gcc GCC_BLSP1_AHB_CLK>;
-> +                       clock-names = "bam_clk";
-> +                       #dma-cells = <1>;
-> +                       qcom,ee = <0>;
-> +                       status = "okay";
-> +               };
-> +
-> +               blsp1_uart0: serial@78af000 {
-> +                       compatible = "qcom,msm-uartdm-v1.4", "qcom,msm-uartdm";
-> +                       reg = <0x078af000 0x200>;
-> +                       interrupts = <GIC_SPI 107 IRQ_TYPE_LEVEL_HIGH>;
-> +                       clocks = <&gcc GCC_BLSP1_UART0_APPS_CLK>, <&gcc GCC_BLSP1_AHB_CLK>;
-> +                       clock-names = "core", "iface";
-> +                       dmas = <&blsp1_dma 0>, <&blsp1_dma 1>;
-> +                       dma-names = "tx", "rx";
-> +                       pinctrl-names = "default";
-> +                       pinctrl-0 = <&blsp1_uart0_default>;
-> +                       status = "disabled";
-> +               };
-> +
-> +               blsp1_uart1: serial@78b0000 {
-> +                       compatible = "qcom,msm-uartdm-v1.4", "qcom,msm-uartdm";
-> +                       reg = <0x078b0000 0x200>;
-> +                       interrupts = <GIC_SPI 108 IRQ_TYPE_LEVEL_HIGH>;
-> +                       clocks = <&gcc GCC_BLSP1_UART1_APPS_CLK>, <&gcc GCC_BLSP1_AHB_CLK>;
-> +                       clock-names = "core", "iface";
-> +                       dmas = <&blsp1_dma 2>, <&blsp1_dma 3>;
-> +                       dma-names = "tx", "rx";
-> +                       pinctrl-names = "default";
-> +                       pinctrl-0 = <&blsp1_uart1_default>;
-> +                       status = "disabled";
-> +               };
-> +
-> +               blsp1_uart2: serial@78b1000 {
-> +                       compatible = "qcom,msm-uartdm-v1.4", "qcom,msm-uartdm";
-> +                       reg = <0x078b1000 0x200>;
-> +                       interrupts = <GIC_SPI 118 IRQ_TYPE_LEVEL_HIGH>;
-> +                       clocks = <&gcc GCC_BLSP1_UART2_APPS_CLK>, <&gcc GCC_BLSP1_AHB_CLK>;
-> +                       clock-names = "core", "iface";
-> +                       dmas = <&blsp1_dma 4>, <&blsp1_dma 5>;
-> +                       dma-names = "tx", "rx";
-> +                       pinctrl-names = "default";
-> +                       pinctrl-0 = <&blsp1_uart2_default>;
-> +                       status = "okay";
-> +               };
-> +
-> +               ethernet: ethernet@7a80000 {
-> +                       compatible = "qcom,qcs404-ethqos";
-> +                       reg = <0x07a80000 0x10000>,
-> +                               <0x07a96000 0x100>;
-> +                       reg-names = "stmmaceth", "rgmii";
-> +                       clock-names = "stmmaceth", "pclk", "ptp_ref", "rgmii";
-> +                       clocks = <&gcc GCC_ETH_AXI_CLK>,
-> +                               <&gcc GCC_ETH_SLAVE_AHB_CLK>,
-> +                               <&gcc GCC_ETH_PTP_CLK>,
-> +                               <&gcc GCC_ETH_RGMII_CLK>;
-> +                       interrupts = <GIC_SPI 56 IRQ_TYPE_LEVEL_HIGH>,
-> +                                       <GIC_SPI 55 IRQ_TYPE_LEVEL_HIGH>;
-> +                       interrupt-names = "macirq", "eth_lpi";
-> +
-> +                       snps,tso;
-> +                       rx-fifo-depth = <4096>;
-> +                       tx-fifo-depth = <4096>;
-> +
-> +                       status = "disabled";
-> +               };
-> +
-> +               wifi: wifi@a000000 {
-> +                       compatible = "qcom,wcn3990-wifi";
-> +                       reg = <0xa000000 0x800000>;
-> +                       reg-names = "membase";
-> +                       memory-region = <&wlan_msa_mem>;
-> +                       interrupts = <GIC_SPI 277 IRQ_TYPE_LEVEL_HIGH>,
-> +                                    <GIC_SPI 278 IRQ_TYPE_LEVEL_HIGH>,
-> +                                    <GIC_SPI 279 IRQ_TYPE_LEVEL_HIGH>,
-> +                                    <GIC_SPI 280 IRQ_TYPE_LEVEL_HIGH>,
-> +                                    <GIC_SPI 281 IRQ_TYPE_LEVEL_HIGH>,
-> +                                    <GIC_SPI 282 IRQ_TYPE_LEVEL_HIGH>,
-> +                                    <GIC_SPI 283 IRQ_TYPE_LEVEL_HIGH>,
-> +                                    <GIC_SPI 284 IRQ_TYPE_LEVEL_HIGH>,
-> +                                    <GIC_SPI 285 IRQ_TYPE_LEVEL_HIGH>,
-> +                                    <GIC_SPI 286 IRQ_TYPE_LEVEL_HIGH>,
-> +                                    <GIC_SPI 287 IRQ_TYPE_LEVEL_HIGH>,
-> +                                    <GIC_SPI 288 IRQ_TYPE_LEVEL_HIGH>;
-> +                       status = "disabled";
-> +               };
-> +
-> +               blsp1_uart3: serial@78b2000 {
-> +                       compatible = "qcom,msm-uartdm-v1.4", "qcom,msm-uartdm";
-> +                       reg = <0x078b2000 0x200>;
-> +                       interrupts = <GIC_SPI 119 IRQ_TYPE_LEVEL_HIGH>;
-> +                       clocks = <&gcc GCC_BLSP1_UART3_APPS_CLK>, <&gcc GCC_BLSP1_AHB_CLK>;
-> +                       clock-names = "core", "iface";
-> +                       dmas = <&blsp1_dma 6>, <&blsp1_dma 7>;
-> +                       dma-names = "tx", "rx";
-> +                       pinctrl-names = "default";
-> +                       pinctrl-0 = <&blsp1_uart3_default>;
-> +                       status = "disabled";
-> +               };
-> +
-> +               blsp1_i2c0: i2c@78b5000 {
-> +                       compatible = "qcom,i2c-qup-v2.2.1";
-> +                       reg = <0x078b5000 0x600>;
-> +                       interrupts = <GIC_SPI 95 IRQ_TYPE_LEVEL_HIGH>;
-> +                       clocks = <&gcc GCC_BLSP1_QUP0_I2C_APPS_CLK>,
-> +                                <&gcc GCC_BLSP1_AHB_CLK>;
-> +                       clock-names = "core", "iface";
-> +                       pinctrl-names = "default";
-> +                       pinctrl-0 = <&blsp1_i2c0_default>;
-> +                       #address-cells = <1>;
-> +                       #size-cells = <0>;
-> +                       status = "disabled";
-> +               };
-> +
-> +               blsp1_spi0: spi@78b5000 {
-> +                       compatible = "qcom,spi-qup-v2.2.1";
-> +                       reg = <0x078b5000 0x600>;
-> +                       interrupts = <GIC_SPI 95 IRQ_TYPE_LEVEL_HIGH>;
-> +                       clocks = <&gcc GCC_BLSP1_QUP0_SPI_APPS_CLK>,
-> +                                <&gcc GCC_BLSP1_AHB_CLK>;
-> +                       clock-names = "core", "iface";
-> +                       pinctrl-names = "default";
-> +                       pinctrl-0 = <&blsp1_spi0_default>;
-> +                       #address-cells = <1>;
-> +                       #size-cells = <0>;
-> +                       status = "disabled";
-> +               };
-> +
-> +               blsp1_i2c1: i2c@78b6000 {
-> +                       compatible = "qcom,i2c-qup-v2.2.1";
-> +                       reg = <0x078b6000 0x600>;
-> +                       interrupts = <GIC_SPI 96 IRQ_TYPE_LEVEL_HIGH>;
-> +                       clocks = <&gcc GCC_BLSP1_QUP1_I2C_APPS_CLK>,
-> +                                <&gcc GCC_BLSP1_AHB_CLK>;
-> +                       clock-names = "core", "iface";
-> +                       pinctrl-names = "default";
-> +                       pinctrl-0 = <&blsp1_i2c1_default>;
-> +                       #address-cells = <1>;
-> +                       #size-cells = <0>;
-> +                       status = "disabled";
-> +               };
-> +
-> +               blsp1_spi1: spi@78b6000 {
-> +                       compatible = "qcom,spi-qup-v2.2.1";
-> +                       reg = <0x078b6000 0x600>;
-> +                       interrupts = <GIC_SPI 96 IRQ_TYPE_LEVEL_HIGH>;
-> +                       clocks = <&gcc GCC_BLSP1_QUP1_SPI_APPS_CLK>,
-> +                                <&gcc GCC_BLSP1_AHB_CLK>;
-> +                       clock-names = "core", "iface";
-> +                       pinctrl-names = "default";
-> +                       pinctrl-0 = <&blsp1_spi1_default>;
-> +                       #address-cells = <1>;
-> +                       #size-cells = <0>;
-> +                       status = "disabled";
-> +               };
-> +
-> +               blsp1_i2c2: i2c@78b7000 {
-> +                       compatible = "qcom,i2c-qup-v2.2.1";
-> +                       reg = <0x078b7000 0x600>;
-> +                       interrupts = <GIC_SPI 97 IRQ_TYPE_LEVEL_HIGH>;
-> +                       clocks = <&gcc GCC_BLSP1_QUP2_I2C_APPS_CLK>,
-> +                                <&gcc GCC_BLSP1_AHB_CLK>;
-> +                       clock-names = "core", "iface";
-> +                       pinctrl-names = "default";
-> +                       pinctrl-0 = <&blsp1_i2c2_default>;
-> +                       #address-cells = <1>;
-> +                       #size-cells = <0>;
-> +                       status = "disabled";
-> +               };
-> +
-> +               blsp1_spi2: spi@78b7000 {
-> +                       compatible = "qcom,spi-qup-v2.2.1";
-> +                       reg = <0x078b7000 0x600>;
-> +                       interrupts = <GIC_SPI 97 IRQ_TYPE_LEVEL_HIGH>;
-> +                       clocks = <&gcc GCC_BLSP1_QUP2_SPI_APPS_CLK>,
-> +                                <&gcc GCC_BLSP1_AHB_CLK>;
-> +                       clock-names = "core", "iface";
-> +                       pinctrl-names = "default";
-> +                       pinctrl-0 = <&blsp1_spi2_default>;
-> +                       #address-cells = <1>;
-> +                       #size-cells = <0>;
-> +                       status = "disabled";
-> +               };
-> +
-> +               blsp1_i2c3: i2c@78b8000 {
-> +                       compatible = "qcom,i2c-qup-v2.2.1";
-> +                       reg = <0x078b8000 0x600>;
-> +                       interrupts = <GIC_SPI 98 IRQ_TYPE_LEVEL_HIGH>;
-> +                       clocks = <&gcc GCC_BLSP1_QUP3_I2C_APPS_CLK>,
-> +                                <&gcc GCC_BLSP1_AHB_CLK>;
-> +                       clock-names = "core", "iface";
-> +                       pinctrl-names = "default";
-> +                       pinctrl-0 = <&blsp1_i2c3_default>;
-> +                       #address-cells = <1>;
-> +                       #size-cells = <0>;
-> +                       status = "disabled";
-> +               };
-> +
-> +               blsp1_spi3: spi@78b8000 {
-> +                       compatible = "qcom,spi-qup-v2.2.1";
-> +                       reg = <0x078b8000 0x600>;
-> +                       interrupts = <GIC_SPI 98 IRQ_TYPE_LEVEL_HIGH>;
-> +                       clocks = <&gcc GCC_BLSP1_QUP3_SPI_APPS_CLK>,
-> +                                <&gcc GCC_BLSP1_AHB_CLK>;
-> +                       clock-names = "core", "iface";
-> +                       pinctrl-names = "default";
-> +                       pinctrl-0 = <&blsp1_spi3_default>;
-> +                       #address-cells = <1>;
-> +                       #size-cells = <0>;
-> +                       status = "disabled";
-> +               };
-> +
-> +               blsp1_i2c4: i2c@78b9000 {
-> +                       compatible = "qcom,i2c-qup-v2.2.1";
-> +                       reg = <0x078b9000 0x600>;
-> +                       interrupts = <GIC_SPI 99 IRQ_TYPE_LEVEL_HIGH>;
-> +                       clocks = <&gcc GCC_BLSP1_QUP4_I2C_APPS_CLK>,
-> +                                <&gcc GCC_BLSP1_AHB_CLK>;
-> +                       clock-names = "core", "iface";
-> +                       pinctrl-names = "default";
-> +                       pinctrl-0 = <&blsp1_i2c4_default>;
-> +                       #address-cells = <1>;
-> +                       #size-cells = <0>;
-> +                       status = "disabled";
-> +               };
-> +
-> +               blsp1_spi4: spi@78b9000 {
-> +                       compatible = "qcom,spi-qup-v2.2.1";
-> +                       reg = <0x078b9000 0x600>;
-> +                       interrupts = <GIC_SPI 99 IRQ_TYPE_LEVEL_HIGH>;
-> +                       clocks = <&gcc GCC_BLSP1_QUP4_SPI_APPS_CLK>,
-> +                                <&gcc GCC_BLSP1_AHB_CLK>;
-> +                       clock-names = "core", "iface";
-> +                       pinctrl-names = "default";
-> +                       pinctrl-0 = <&blsp1_spi4_default>;
-> +                       #address-cells = <1>;
-> +                       #size-cells = <0>;
-> +                       status = "disabled";
-> +               };
-> +
-> +               blsp2_dma: dma-controller@7ac4000 {
-> +                       compatible = "qcom,bam-v1.7.0";
-> +                       reg = <0x07ac4000 0x17000>;
-> +                       interrupts = <GIC_SPI 239 IRQ_TYPE_LEVEL_HIGH>;
-> +                       clocks = <&gcc GCC_BLSP2_AHB_CLK>;
-> +                       clock-names = "bam_clk";
-> +                       #dma-cells = <1>;
-> +                       qcom,ee = <0>;
-> +                       status = "disabled";
-> +               };
-> +
-> +               blsp2_uart0: serial@7aef000 {
-> +                       compatible = "qcom,msm-uartdm-v1.4", "qcom,msm-uartdm";
-> +                       reg = <0x07aef000 0x200>;
-> +                       interrupts = <GIC_SPI 297 IRQ_TYPE_LEVEL_HIGH>;
-> +                       clocks = <&gcc GCC_BLSP2_UART0_APPS_CLK>, <&gcc GCC_BLSP2_AHB_CLK>;
-> +                       clock-names = "core", "iface";
-> +                       dmas = <&blsp2_dma 0>, <&blsp2_dma 1>;
-> +                       dma-names = "tx", "rx";
-> +                       pinctrl-names = "default";
-> +                       pinctrl-0 = <&blsp2_uart0_default>;
-> +                       status = "disabled";
-> +               };
-> +
-> +               blsp2_i2c0: i2c@7af5000 {
-> +                       compatible = "qcom,i2c-qup-v2.2.1";
-> +                       reg = <0x07af5000 0x600>;
-> +                       interrupts = <GIC_SPI 299 IRQ_TYPE_LEVEL_HIGH>;
-> +                       clocks = <&gcc GCC_BLSP2_QUP0_I2C_APPS_CLK>,
-> +                                <&gcc GCC_BLSP2_AHB_CLK>;
-> +                       clock-names = "core", "iface";
-> +                       pinctrl-names = "default";
-> +                       pinctrl-0 = <&blsp2_i2c0_default>;
-> +                       #address-cells = <1>;
-> +                       #size-cells = <0>;
-> +                       status = "disabled";
-> +               };
-> +
-> +               blsp2_spi0: spi@7af5000 {
-> +                       compatible = "qcom,spi-qup-v2.2.1";
-> +                       reg = <0x07af5000 0x600>;
-> +                       interrupts = <GIC_SPI 299 IRQ_TYPE_LEVEL_HIGH>;
-> +                       clocks = <&gcc GCC_BLSP2_QUP0_SPI_APPS_CLK>,
-> +                                <&gcc GCC_BLSP2_AHB_CLK>;
-> +                       clock-names = "core", "iface";
-> +                       pinctrl-names = "default";
-> +                       pinctrl-0 = <&blsp2_spi0_default>;
-> +                       #address-cells = <1>;
-> +                       #size-cells = <0>;
-> +                       status = "disabled";
-> +               };
-> +
-> +               sram@8600000 {
-> +                       compatible = "qcom,qcs404-imem", "syscon", "simple-mfd";
-> +                       reg = <0x08600000 0x1000>;
-> +
-> +                       #address-cells = <1>;
-> +                       #size-cells = <1>;
-> +
-> +                       ranges = <0 0x08600000 0x1000>;
-> +
-> +                       pil-reloc@94c {
-> +                               compatible = "qcom,pil-reloc-info";
-> +                               reg = <0x94c 0xc8>;
-> +                       };
-> +               };
-> +
-> +               intc: interrupt-controller@b000000 {
-> +                       compatible = "qcom,msm-qgic2";
-> +                       interrupt-controller;
-> +                       #interrupt-cells = <3>;
-> +                       reg = <0x0b000000 0x1000>,
-> +                             <0x0b002000 0x1000>;
-> +               };
-> +
-> +               apcs_glb: mailbox@b011000 {
-> +                       compatible = "qcom,qcs404-apcs-apps-global",
-> +                                    "qcom,msm8916-apcs-kpss-global", "syscon";
-> +                       reg = <0x0b011000 0x1000>;
-> +                       #mbox-cells = <1>;
-> +                       clocks = <&apcs_hfpll>, <&gcc GCC_GPLL0_AO_OUT_MAIN>;
-> +                       clock-names = "pll", "aux";
-> +                       #clock-cells = <0>;
-> +               };
-> +
-> +               apcs_hfpll: clock-controller@b016000 {
-> +                       compatible = "qcom,hfpll";
-> +                       reg = <0x0b016000 0x30>;
-> +                       #clock-cells = <0>;
-> +                       clock-output-names = "apcs_hfpll";
-> +                       clocks = <&xo_board>;
-> +                       clock-names = "xo";
-> +               };
-> +
-> +               watchdog@b017000 {
-> +                       compatible = "qcom,apss-wdt-qcs404", "qcom,kpss-wdt";
-> +                       reg = <0x0b017000 0x1000>;
-> +                       clocks = <&sleep_clk>;
-> +               };
-> +
-> +               cpr: power-controller@b018000 {
-> +                       compatible = "qcom,qcs404-cpr", "qcom,cpr";
-> +                       reg = <0x0b018000 0x1000>;
-> +                       interrupts = <0 15 IRQ_TYPE_EDGE_RISING>;
-> +                       clocks = <&xo_board>;
-> +                       clock-names = "ref";
-> +                       vdd-apc-supply = <&pms405_s3>;
-> +                       #power-domain-cells = <0>;
-> +                       operating-points-v2 = <&cpr_opp_table>;
-> +                       acc-syscon = <&tcsr>;
-> +
-> +                       nvmem-cells = <&cpr_efuse_quot_offset1>,
-> +                               <&cpr_efuse_quot_offset2>,
-> +                               <&cpr_efuse_quot_offset3>,
-> +                               <&cpr_efuse_init_voltage1>,
-> +                               <&cpr_efuse_init_voltage2>,
-> +                               <&cpr_efuse_init_voltage3>,
-> +                               <&cpr_efuse_quot1>,
-> +                               <&cpr_efuse_quot2>,
-> +                               <&cpr_efuse_quot3>,
-> +                               <&cpr_efuse_ring1>,
-> +                               <&cpr_efuse_ring2>,
-> +                               <&cpr_efuse_ring3>,
-> +                               <&cpr_efuse_revision>;
-> +                       nvmem-cell-names = "cpr_quotient_offset1",
-> +                               "cpr_quotient_offset2",
-> +                               "cpr_quotient_offset3",
-> +                               "cpr_init_voltage1",
-> +                               "cpr_init_voltage2",
-> +                               "cpr_init_voltage3",
-> +                               "cpr_quotient1",
-> +                               "cpr_quotient2",
-> +                               "cpr_quotient3",
-> +                               "cpr_ring_osc1",
-> +                               "cpr_ring_osc2",
-> +                               "cpr_ring_osc3",
-> +                               "cpr_fuse_revision";
-> +               };
-> +
-> +               timer@b120000 {
-> +                       #address-cells = <1>;
-> +                       #size-cells = <1>;
-> +                       ranges;
-> +                       compatible = "arm,armv7-timer-mem";
-> +                       reg = <0x0b120000 0x1000>;
-> +                       clock-frequency = <19200000>;
-> +
-> +                       frame@b121000 {
-> +                               frame-number = <0>;
-> +                               interrupts = <GIC_SPI 8 IRQ_TYPE_LEVEL_HIGH>,
-> +                                            <GIC_SPI 7 IRQ_TYPE_LEVEL_HIGH>;
-> +                               reg = <0x0b121000 0x1000>,
-> +                                     <0x0b122000 0x1000>;
-> +                       };
-> +
-> +                       frame@b123000 {
-> +                               frame-number = <1>;
-> +                               interrupts = <GIC_SPI 9 IRQ_TYPE_LEVEL_HIGH>;
-> +                               reg = <0x0b123000 0x1000>;
-> +                               status = "disabled";
-> +                       };
-> +
-> +                       frame@b124000 {
-> +                               frame-number = <2>;
-> +                               interrupts = <GIC_SPI 10 IRQ_TYPE_LEVEL_HIGH>;
-> +                               reg = <0x0b124000 0x1000>;
-> +                               status = "disabled";
-> +                       };
-> +
-> +                       frame@b125000 {
-> +                               frame-number = <3>;
-> +                               interrupts = <GIC_SPI 11 IRQ_TYPE_LEVEL_HIGH>;
-> +                               reg = <0x0b125000 0x1000>;
-> +                               status = "disabled";
-> +                       };
-> +
-> +                       frame@b126000 {
-> +                               frame-number = <4>;
-> +                               interrupts = <GIC_SPI 12 IRQ_TYPE_LEVEL_HIGH>;
-> +                               reg = <0x0b126000 0x1000>;
-> +                               status = "disabled";
-> +                       };
-> +
-> +                       frame@b127000 {
-> +                               frame-number = <5>;
-> +                               interrupts = <GIC_SPI 13 IRQ_TYPE_LEVEL_HIGH>;
-> +                               reg = <0xb127000 0x1000>;
-> +                               status = "disabled";
-> +                       };
-> +
-> +                       frame@b128000 {
-> +                               frame-number = <6>;
-> +                               interrupts = <GIC_SPI 14 IRQ_TYPE_LEVEL_HIGH>;
-> +                               reg = <0x0b128000 0x1000>;
-> +                               status = "disabled";
-> +                       };
-> +               };
-> +
-> +               remoteproc_adsp: remoteproc@c700000 {
-> +                       compatible = "qcom,qcs404-adsp-pas";
-> +                       reg = <0x0c700000 0x4040>;
-> +
-> +                       interrupts-extended = <&intc GIC_SPI 293 IRQ_TYPE_EDGE_RISING>,
-> +                                             <&adsp_smp2p_in 0 IRQ_TYPE_EDGE_RISING>,
-> +                                             <&adsp_smp2p_in 1 IRQ_TYPE_EDGE_RISING>,
-> +                                             <&adsp_smp2p_in 2 IRQ_TYPE_EDGE_RISING>,
-> +                                             <&adsp_smp2p_in 3 IRQ_TYPE_EDGE_RISING>;
-> +                       interrupt-names = "wdog", "fatal", "ready",
-> +                                         "handover", "stop-ack";
-> +
-> +                       clocks = <&xo_board>;
-> +                       clock-names = "xo";
-> +
-> +                       memory-region = <&adsp_fw_mem>;
-> +
-> +                       qcom,smem-states = <&adsp_smp2p_out 0>;
-> +                       qcom,smem-state-names = "stop";
-> +
-> +                       status = "disabled";
-> +
-> +                       glink-edge {
-> +                               interrupts = <GIC_SPI 289 IRQ_TYPE_EDGE_RISING>;
-> +
-> +                               qcom,remote-pid = <2>;
-> +                               mboxes = <&apcs_glb 8>;
-> +
-> +                               label = "adsp";
-> +                       };
-> +               };
-> +
-> +               pcie: pci@10000000 {
-> +                       compatible = "qcom,pcie-qcs404";
-> +                       reg = <0x10000000 0xf1d>,
-> +                             <0x10000f20 0xa8>,
-> +                             <0x07780000 0x2000>,
-> +                             <0x10001000 0x2000>;
-> +                       reg-names = "dbi", "elbi", "parf", "config";
-> +                       device_type = "pci";
-> +                       linux,pci-domain = <0>;
-> +                       bus-range = <0x00 0xff>;
-> +                       num-lanes = <1>;
-> +                       #address-cells = <3>;
-> +                       #size-cells = <2>;
-> +
-> +                       ranges = <0x81000000 0x0 0x00000000 0x10003000 0x0 0x00010000>, /* I/O */
-> +                                <0x82000000 0x0 0x10013000 0x10013000 0x0 0x007ed000>; /* memory */
-> +
-> +                       interrupts = <GIC_SPI 266 IRQ_TYPE_LEVEL_HIGH>;
-> +                       interrupt-names = "msi";
-> +                       #interrupt-cells = <1>;
-> +                       interrupt-map-mask = <0 0 0 0x7>;
-> +                       interrupt-map = <0 0 0 1 &intc GIC_SPI 68 IRQ_TYPE_LEVEL_HIGH>, /* int_a */
-> +                                       <0 0 0 2 &intc GIC_SPI 224 IRQ_TYPE_LEVEL_HIGH>, /* int_b */
-> +                                       <0 0 0 3 &intc GIC_SPI 267 IRQ_TYPE_LEVEL_HIGH>, /* int_c */
-> +                                       <0 0 0 4 &intc GIC_SPI 268 IRQ_TYPE_LEVEL_HIGH>; /* int_d */
-> +                       clocks = <&gcc GCC_PCIE_0_CFG_AHB_CLK>,
-> +                                <&gcc GCC_PCIE_0_AUX_CLK>,
-> +                                <&gcc GCC_PCIE_0_MSTR_AXI_CLK>,
-> +                                <&gcc GCC_PCIE_0_SLV_AXI_CLK>;
-> +                       clock-names = "iface", "aux", "master_bus", "slave_bus";
-> +
-> +                       resets = <&gcc GCC_PCIE_0_AXI_MASTER_ARES>,
-> +                                <&gcc GCC_PCIE_0_AXI_SLAVE_ARES>,
-> +                                <&gcc GCC_PCIE_0_AXI_MASTER_STICKY_ARES>,
-> +                                <&gcc GCC_PCIE_0_CORE_STICKY_ARES>,
-> +                                <&gcc GCC_PCIE_0_BCR>,
-> +                                <&gcc GCC_PCIE_0_AHB_ARES>;
-> +                       reset-names = "axi_m",
-> +                                     "axi_s",
-> +                                     "axi_m_sticky",
-> +                                     "pipe_sticky",
-> +                                     "pwr",
-> +                                     "ahb";
-> +
-> +                       phys = <&pcie_phy>;
-> +                       phy-names = "pciephy";
-> +
-> +                       status = "disabled";
-> +               };
-> +       };
-> +
-> +       timer {
-> +               compatible = "arm,armv8-timer";
-> +               interrupts = <GIC_PPI 2 0xff08>,
-> +                            <GIC_PPI 3 0xff08>,
-> +                            <GIC_PPI 4 0xff08>,
-> +                            <GIC_PPI 1 0xff08>;
-> +       };
-> +
-> +       smp2p-adsp {
-> +               compatible = "qcom,smp2p";
-> +               qcom,smem = <443>, <429>;
-> +               interrupts = <GIC_SPI 291 IRQ_TYPE_EDGE_RISING>;
-> +               mboxes = <&apcs_glb 10>;
-> +               qcom,local-pid = <0>;
-> +               qcom,remote-pid = <2>;
-> +
-> +               adsp_smp2p_out: master-kernel {
-> +                       qcom,entry-name = "master-kernel";
-> +                       #qcom,smem-state-cells = <1>;
-> +               };
-> +
-> +               adsp_smp2p_in: slave-kernel {
-> +                       qcom,entry-name = "slave-kernel";
-> +                       interrupt-controller;
-> +                       #interrupt-cells = <2>;
-> +               };
-> +       };
-> +
-> +       smp2p-cdsp {
-> +               compatible = "qcom,smp2p";
-> +               qcom,smem = <94>, <432>;
-> +               interrupts = <GIC_SPI 143 IRQ_TYPE_EDGE_RISING>;
-> +               mboxes = <&apcs_glb 14>;
-> +               qcom,local-pid = <0>;
-> +               qcom,remote-pid = <5>;
-> +
-> +               cdsp_smp2p_out: master-kernel {
-> +                       qcom,entry-name = "master-kernel";
-> +                       #qcom,smem-state-cells = <1>;
-> +               };
-> +
-> +               cdsp_smp2p_in: slave-kernel {
-> +                       qcom,entry-name = "slave-kernel";
-> +                       interrupt-controller;
-> +                       #interrupt-cells = <2>;
-> +               };
-> +       };
-> +
-> +       smp2p-wcss {
-> +               compatible = "qcom,smp2p";
-> +               qcom,smem = <435>, <428>;
-> +               interrupts = <GIC_SPI 158 IRQ_TYPE_EDGE_RISING>;
-> +               mboxes = <&apcs_glb 18>;
-> +               qcom,local-pid = <0>;
-> +               qcom,remote-pid = <1>;
-> +
-> +               wcss_smp2p_out: master-kernel {
-> +                       qcom,entry-name = "master-kernel";
-> +                       #qcom,smem-state-cells = <1>;
-> +               };
-> +
-> +               wcss_smp2p_in: slave-kernel {
-> +                       qcom,entry-name = "slave-kernel";
-> +                       interrupt-controller;
-> +                       #interrupt-cells = <2>;
-> +               };
-> +       };
-> +
-> +       thermal-zones {
-> +               aoss-thermal {
-> +                       polling-delay-passive = <250>;
-> +                       polling-delay = <1000>;
-> +
-> +                       thermal-sensors = <&tsens 0>;
-> +
-> +                       trips {
-> +                               aoss_alert0: trip-point0 {
-> +                                       temperature = <105000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "hot";
-> +                               };
-> +                       };
-> +               };
-> +
-> +               q6-hvx-thermal {
-> +                       polling-delay-passive = <250>;
-> +                       polling-delay = <1000>;
-> +
-> +                       thermal-sensors = <&tsens 1>;
-> +
-> +                       trips {
-> +                               q6_hvx_alert0: trip-point0 {
-> +                                       temperature = <105000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "hot";
-> +                               };
-> +                       };
-> +               };
-> +
-> +               lpass-thermal {
-> +                       polling-delay-passive = <250>;
-> +                       polling-delay = <1000>;
-> +
-> +                       thermal-sensors = <&tsens 2>;
-> +
-> +                       trips {
-> +                               lpass_alert0: trip-point0 {
-> +                                       temperature = <105000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "hot";
-> +                               };
-> +                       };
-> +               };
-> +
-> +               wlan-thermal {
-> +                       polling-delay-passive = <250>;
-> +                       polling-delay = <1000>;
-> +
-> +                       thermal-sensors = <&tsens 3>;
-> +
-> +                       trips {
-> +                               wlan_alert0: trip-point0 {
-> +                                       temperature = <105000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "hot";
-> +                               };
-> +                       };
-> +               };
-> +
-> +               cluster-thermal {
-> +                       polling-delay-passive = <250>;
-> +                       polling-delay = <1000>;
-> +
-> +                       thermal-sensors = <&tsens 4>;
-> +
-> +                       trips {
-> +                               cluster_alert0: trip-point0 {
-> +                                       temperature = <95000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "hot";
-> +                               };
-> +                               cluster_alert1: trip-point1 {
-> +                                       temperature = <105000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "passive";
-> +                               };
-> +                               cluster_crit: cluster-crit {
-> +                                       temperature = <120000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "critical";
-> +                               };
-> +                       };
-> +                       cooling-maps {
-> +                               map0 {
-> +                                       trip = <&cluster_alert1>;
-> +                                       cooling-device = <&CPU0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> +                                                      <&CPU1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> +                                                      <&CPU2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> +                                                      <&CPU3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
-> +                               };
-> +                       };
-> +               };
-> +
-> +               cpu0-thermal {
-> +                       polling-delay-passive = <250>;
-> +                       polling-delay = <1000>;
-> +
-> +                       thermal-sensors = <&tsens 5>;
-> +
-> +                       trips {
-> +                               cpu0_alert0: trip-point0 {
-> +                                       temperature = <95000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "hot";
-> +                               };
-> +                               cpu0_alert1: trip-point1 {
-> +                                       temperature = <105000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "passive";
-> +                               };
-> +                               cpu0_crit: cpu-crit {
-> +                                       temperature = <120000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "critical";
-> +                               };
-> +                       };
-> +                       cooling-maps {
-> +                               map0 {
-> +                                       trip = <&cpu0_alert1>;
-> +                                       cooling-device = <&CPU0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> +                                                      <&CPU1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> +                                                      <&CPU2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> +                                                      <&CPU3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
-> +                               };
-> +                       };
-> +               };
-> +
-> +               cpu1-thermal {
-> +                       polling-delay-passive = <250>;
-> +                       polling-delay = <1000>;
-> +
-> +                       thermal-sensors = <&tsens 6>;
-> +
-> +                       trips {
-> +                               cpu1_alert0: trip-point0 {
-> +                                       temperature = <95000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "hot";
-> +                               };
-> +                               cpu1_alert1: trip-point1 {
-> +                                       temperature = <105000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "passive";
-> +                               };
-> +                               cpu1_crit: cpu-crit {
-> +                                       temperature = <120000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "critical";
-> +                               };
-> +                       };
-> +                       cooling-maps {
-> +                               map0 {
-> +                                       trip = <&cpu1_alert1>;
-> +                                       cooling-device = <&CPU0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> +                                                      <&CPU1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> +                                                      <&CPU2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> +                                                      <&CPU3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
-> +                               };
-> +                       };
-> +               };
-> +
-> +               cpu2-thermal {
-> +                       polling-delay-passive = <250>;
-> +                       polling-delay = <1000>;
-> +
-> +                       thermal-sensors = <&tsens 7>;
-> +
-> +                       trips {
-> +                               cpu2_alert0: trip-point0 {
-> +                                       temperature = <95000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "hot";
-> +                               };
-> +                               cpu2_alert1: trip-point1 {
-> +                                       temperature = <105000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "passive";
-> +                               };
-> +                               cpu2_crit: cpu-crit {
-> +                                       temperature = <120000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "critical";
-> +                               };
-> +                       };
-> +                       cooling-maps {
-> +                               map0 {
-> +                                       trip = <&cpu2_alert1>;
-> +                                       cooling-device = <&CPU0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> +                                                      <&CPU1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> +                                                      <&CPU2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> +                                                      <&CPU3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
-> +                               };
-> +                       };
-> +               };
-> +
-> +               cpu3-thermal {
-> +                       polling-delay-passive = <250>;
-> +                       polling-delay = <1000>;
-> +
-> +                       thermal-sensors = <&tsens 8>;
-> +
-> +                       trips {
-> +                               cpu3_alert0: trip-point0 {
-> +                                       temperature = <95000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "hot";
-> +                               };
-> +                               cpu3_alert1: trip-point1 {
-> +                                       temperature = <105000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "passive";
-> +                               };
-> +                               cpu3_crit: cpu-crit {
-> +                                       temperature = <120000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "critical";
-> +                               };
-> +                       };
-> +                       cooling-maps {
-> +                               map0 {
-> +                                       trip = <&cpu3_alert1>;
-> +                                       cooling-device = <&CPU0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> +                                                      <&CPU1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> +                                                      <&CPU2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-> +                                                      <&CPU3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
-> +                               };
-> +                       };
-> +               };
-> +
-> +               gpu-thermal {
-> +                       polling-delay-passive = <250>;
-> +                       polling-delay = <1000>;
-> +
-> +                       thermal-sensors = <&tsens 9>;
-> +
-> +                       trips {
-> +                               gpu_alert0: trip-point0 {
-> +                                       temperature = <95000>;
-> +                                       hysteresis = <2000>;
-> +                                       type = "hot";
-> +                               };
-> +                       };
-> +               };
-> +       };
-> +};
+> -#endif
 >
 > --
 > 2.43.0
