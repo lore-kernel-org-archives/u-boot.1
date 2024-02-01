@@ -4,104 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55228C4828F
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 15:38:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21CF7C4828D
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 15:40:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AE3B87C7B;
-	Thu,  1 Feb 2024 16:38:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 5669987D1A;
+	Thu,  1 Feb 2024 16:40:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="txdSVmB+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GJ/5Uls9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3EFE287D11; Thu,  1 Feb 2024 15:54:08 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id A6E3287D0F; Thu,  1 Feb 2024 16:40:25 +0100 (CET)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DD9C87D14
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 15:54:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 350BD87D1A
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 16:40:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 4F248100011;
- Thu,  1 Feb 2024 17:54:05 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 4F248100011
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1706799245;
- bh=H1ofN8Zv/hMrKkj3ZXx1f0saJPvyqdzU2+JZoVhtskQ=;
- h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version:From;
- b=txdSVmB+tuBlw8G8SUgaFkTQDEYXZW8WXinXswbY8FfR6jC7FzAlFohzd63rQzbUb
- zSdGbyMwpv4tOnGIoWHiREYoY7ZjMX+xZkOrgWrLVA/0/leTh8McvYqZnQP53KhyNf
- QLNqqox+mYausT11cJBjMwmeCd6wrBPznvgUa8b4vsGiV9LnERIGx7SRKT5yypJxkS
- 5J1bC61j14VSM4liSTB7bSEwBTndqP1YcTmAB22yhyhnOdcR7mk73GquJrkh8AKxm3
- d/meYD5LQCTHC5kgLcCsO2fiVY4fRGbxEYLVK8bX+qgVDEZ6b5xK6nWPsXs3qZx8Vk
- w/8BCQ5f8yANg==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu,  1 Feb 2024 17:54:05 +0300 (MSK)
-Received: from p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Thu, 1 Feb 2024 17:54:04 +0300
-Received: from p-i-exch-sc-m01.sberdevices.ru ([fe80::25de:2e74:8821:eb9a]) by
- p-i-exch-sc-m01.sberdevices.ru ([fe80::25de:2e74:8821:eb9a%7]) with
- mapi id 15.02.1118.040; Thu, 1 Feb 2024 17:54:04 +0300
-From: Alexey Romanov <avromanov@salutedevices.com>
-To: Dan Carpenter <dan.carpenter@linaro.org>
-CC: "sjg@chromium.org" <sjg@chromium.org>, "hs@denx.de" <hs@denx.de>,
- "sean.anderson@seco.com" <sean.anderson@seco.com>, "dimorinny@google.com"
- <dimorinny@google.com>, "mkorpershoek@baylibre.com"
- <mkorpershoek@baylibre.com>, "patrick.delaunay@foss.st.com"
- <patrick.delaunay@foss.st.com>, kernel <kernel@sberdevices.ru>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [RFC PATCH v2 2/2] board: ad401: example of fastboot oem board
- realization
-Thread-Topic: [RFC PATCH v2 2/2] board: ad401: example of fastboot oem board
- realization
-Thread-Index: AQHaVO/tacIhsq/EBEWrtLsZKJ51orD1UMQAgAAQCoA=
-Date: Thu, 1 Feb 2024 14:54:04 +0000
-Message-ID: <20240201145359.qov4mqc6njcz7unt@cab-wsm-0029881>
-References: <20240201092027.6258-1-avromanov@salutedevices.com>
- <20240201092027.6258-3-avromanov@salutedevices.com>
- <fc0bc1b6-6ae8-4331-a0b2-3ebd2d30699d@moroto.mountain>
-In-Reply-To: <fc0bc1b6-6ae8-4331-a0b2-3ebd2d30699d@moroto.mountain>
-Accept-Language: ru-RU, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.16.18.93]
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <D85A0C49F203044685CA32F21BB1A0D2@sberdevices.ru>
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-dc6af9a988eso933791276.0
+ for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 07:40:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1706802022; x=1707406822; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=nlv7jhv17qvDgbbQmIswSv5v2FM8BtXFY5j85oUQ/9Q=;
+ b=GJ/5Uls9XI8HQKGtE4MS0X241XtPhclu0mIoVawMd23fxSQljDc+/Ie3Z9MYpJaE3d
+ 9rJ8zhcVIpXb9DrQF0pEn1Rdnw/3lBIicxpQGC8tfFzEEDj88tjsJCpuFLnJiWQTMn0V
+ F7dyvQ4EluSRO4CKhcAQVKYlhg1vhgCd/RHJg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706802022; x=1707406822;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nlv7jhv17qvDgbbQmIswSv5v2FM8BtXFY5j85oUQ/9Q=;
+ b=kVdsOpCy6beokd1Zr810S0QfptKkzVpqlBYP39PyxcMbFho1tyXqcaz+WlUTAxfNrA
+ UWPip9FjSI8Zk/r2YHQrIlNgivXNtICFE4KD26J0dc0wPvSD1b35Ortir+j80ZTmKbWs
+ oVgcZBu+QEeX7hm7AAwZjNPTdULk/A2nCtB9SVN6HN+JVnu8NlVAggfYyg3+9tIbSFxp
+ 3Hm/liJJG8wDCzBiQEjHLRTWuGafcIqgTMkAXK8pyV3AYnzi5ZpkpwxL88h+HWkqGIUq
+ +p04SAGB9drjbJGzLLPrH8cAj0sUiZIEkYyM/z/ynWRK/Hb6alSzQERUsP1UarD8pcMa
+ DAcA==
+X-Gm-Message-State: AOJu0YyQFyGNmOUE521rgCgzOHEsm0pY7IqkjHSj3Cy5xnR8f9Bcw1fw
+ hFiX85T+ncN9Oj61F2alPJsYqNy4Z82q7Amz2DjnxpSTpB6uGMRn/MBsqrLrBxU=
+X-Google-Smtp-Source: AGHT+IFQqAMIAa2Gouvgftko1khNFgc4saqVbBpYBMXShdtab5B8V/qME11v5kssZ3WV9+l0A53jWQ==
+X-Received: by 2002:a25:df14:0:b0:dc2:405b:5930 with SMTP id
+ w20-20020a25df14000000b00dc2405b5930mr5905801ybg.8.1706802021926; 
+ Thu, 01 Feb 2024 07:40:21 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCWIBcqf4sZPrnCjgvXeks1VevEp3ZCiF2df7uep1fppII1RqIscAkiSBbguePnMRGLb4zVleElADg6Gd2HdG8TkDo6UOyjKvaoInl+kXsrt2KVC8ybqDt7wgi7mzzHLND/yeV7+T/tQexNCaKzD/ppB/4bxGvhLyDWDYxYccVYchdeC42IGTOxj20XJ6E5MAub1y43kn4svcp5AWkSFd3RAoNFb7aOfsRhYY6VdNp15D3Zh
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1005.res6.spectrum.com.
+ [2603:6081:7b00:3119::1005]) by smtp.gmail.com with ESMTPSA id
+ c2-20020a258802000000b00dc2366900f9sm4061801ybl.65.2024.02.01.07.40.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Feb 2024 07:40:21 -0800 (PST)
+Date: Thu, 1 Feb 2024 10:40:19 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Ludwig Kormann <ludwig.kormann@ict42.de>
+Cc: jagan@amarulasolutions.com, andre.przywara@arm.com,
+ jernej.skrabec@gmail.com, iuncuim@gmail.com, cfsworks@gmail.com,
+ samuel@sholland.org, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] sunxi: sun4i: Introduce KConfig option
+ SPL_SYS_CLK_FREQ
+Message-ID: <20240201154019.GX1152441@bill-the-cat>
+References: <20240201133014.578083-1-ludwig.kormann@ict42.de>
 MIME-Version: 1.0
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 183123 [Feb 01 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.3
-X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 7 0.3.7
- 6d6bf5bd8eea7373134f756a2fd73e9456bb7d1a, {Track_E25351},
- {Tracking_from_domain_doesnt_match_to}, smtp.sberdevices.ru:7.1.1,5.0.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 127.0.0.199:7.1.2;
- salutedevices.com:7.1.1, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/02/01 13:26:00 #23335101
-X-KSMG-AntiVirus-Status: Clean, skipped
-X-Mailman-Approved-At: Thu, 01 Feb 2024 16:38:08 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="mxJhK5krGNGZfx3Q"
+Content-Disposition: inline
+In-Reply-To: <20240201133014.578083-1-ludwig.kormann@ict42.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,46 +95,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On Thu, Feb 01, 2024 at 04:56:34PM +0300, Dan Carpenter wrote:
-> On Thu, Feb 01, 2024 at 12:20:27PM +0300, Alexey Romanov wrote:
-> > +static int fastboot_nand_write_tpl(struct mtd_info *mtd, void *buffer,
-> > +				   u32 offset, size_t size, int flags)
-> > +{
-> > +	int boot_cpy_num =3D meson_bootloader_copy_num(BOOT_TPL);
-> > +	u64 size_per_copy =3D meson_bootloader_copy_size(mtd, BOOT_TPL);
-> > +	int i;
-> > +
-> > +	for (i =3D 0; i < boot_cpy_num; i++) {
-> > +		size_t retlen, len =3D size;
-> > +		int ret;
-> > +
-> > +		ret =3D nand_write_skip_bad(mtd, offset + (i * size_per_copy),
-> > +					  &len, &retlen, offset + size_per_copy,
->                                                          ^^^^^^^^^^^^^^^^=
-^^^^^^
-> Sorry if I'm missing something obvious, but why is the limit
-> "offset + size_per_copy"?  I would have expected it to be just
-> "size_per_copy" or maybe some kind of limit minus the offset...
+--mxJhK5krGNGZfx3Q
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Yeah, this is incorrect. Should be size_per_copy.=20
+On Thu, Feb 01, 2024 at 02:30:14PM +0100, Ludwig Kormann wrote:
 
-But this patch is just an example of realization.
-
+> This option can be used to modify the initial SPL
+> CPU clock frequency.
 >=20
-> > +					  buffer, flags);
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	return 0;
-> > +}
+> This follows an earlier discussion regarding A20
+> CPUs dying after reboot in SPL initialization due to
+> incompatible CPU clock frequency and core voltage. [1]
 >=20
-> regards,
-> dan carpenter
+> First attempt was to update PLL1_CFG_DEFAULT to a fixed
+> lower frequency (144MHz), which fixed the observed issue
+> but might not suit all A20 users. A KConfig option
+> should be the better solution.
 >=20
+> [1]
+> https://lists.denx.de/pipermail/u-boot/2024-January/544897.html
+>=20
+> Signed-off-by: Ludwig Kormann <ludwig.kormann@ict42.de>
+[snip]
+> +if MACH_SUN4I || MACH_SUN5I || MACH_SUN7I
+> +config SPL_SYS_CLK_FREQ
+> +	int "sunxi SPL CPU clock frequency"
+> +	default 384
+> +	---help---
+> +  A static value for the sunxi SPL CPU frequency, must be a multiple of =
+24.
+> +endif
+
+This should really just be "depends on MACH_SUN4I || MACH_SUN5I ||
+MACH_SUN7I" and then "help".
 
 --=20
-Thank you,
-Alexey=
+Tom
+
+--mxJhK5krGNGZfx3Q
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmW7u1kACgkQFHw5/5Y0
+tywBaQwAiR8hTU3mgCHYyNjKHtrI/78RXtGayGHMtLbRpOKgUssZzda59kUocT8H
+vfsboz2mv0NhSkPCkYCOEu71uHxKrbjPZwGQeh5j1Tz1RGVvu256sRmuBn1sJ10J
+CJGo5eMW7RZv9rZ3d/bha2F2Bxk8wpKuTvTlm1U78dIWar51U0QCLle0a6nvrudK
++7A+NqCfKHOGOxqrsITQu5ZdHJM+e9AqLoYoiBpe4OhlOtPX6ixH9RUgRzoEYpRN
+xOrD3/q7CC2YUYslEOVIWhjrH82UxY7vmfL2hyFfs70jlfTDnsbshqo1CTTUXDv9
+ppEgBk8Gx/TLgFP/zp/0DVzhsgkYI7b1381DxnT3vE47ynTZEPWLWneT2kzHEzFr
+MS+Mv/b2vc6ZKf3lUyKeLBm5GtaKnfad5I6fpPb/uKhnVHIcTpK1TNvoUPBLP/6b
+/nL7Kg0//joq0Rv7cHFXzvTKMRfIOPnUez45ECn3quCCz+cJ3HAnHb2bPf3PNQb3
+LI2ttJmZ
+=tyQ6
+-----END PGP SIGNATURE-----
+
+--mxJhK5krGNGZfx3Q--
