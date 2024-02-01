@@ -4,61 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1D70C47258
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 03:05:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D19EC47258
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 03:06:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5951187C65;
-	Thu,  1 Feb 2024 04:05:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F057B87C56;
+	Thu,  1 Feb 2024 04:06:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="BjZEuomN";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Iw7K6TJW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A48CD87C68; Thu,  1 Feb 2024 04:05:41 +0100 (CET)
-Received: from mail-m1973189.qiye.163.com (mail-m1973189.qiye.163.com
- [220.197.31.89])
+ id A7A7B87C75; Thu,  1 Feb 2024 04:06:11 +0100 (CET)
+Received: from mail-m15594.qiye.163.com (mail-m15594.qiye.163.com
+ [101.71.155.94])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 385DA87C56
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 04:05:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E650987C49
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 04:06:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=BjZEuomN+B/mqddtaA7aG4x3goH6tXU/YqqJQ20G1Ejx9dLTxkEkQIlR8r/QYwY+XOHA7QNGEF+/puysqYej1fv0e/NmmE/kuT8l58ptmvNS+oHMeNrpURa2id8eHrJ8F3RELOhNuAMe1Jm21D6MxSEGgALaQUPEVdM2hocHcx4=;
+ b=Iw7K6TJW7Pi1PuQJL9R1QTb1UNvHQL9T/0Ctuu/ELRd4uO56BWZ6OeQ5y+Z4miLTCdlFVYgxy4OgLYzBTLxc0xkyebM3GeItO9ULWFEtrFsOdlaUX6bJSc6838htsYTzn4M1wMBTHjdyTl/12BstI2S/x6CMm1MUJcYJij67eVQ=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=wWaJWBBa8i/CY/EDazfVs4/aEurPgBfj93DOM4kA+zc=;
+ bh=avo+MvKc/Bt+otqUBitKqF9LGY62a1GL5zIdiQOCQMc=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 5E68B9001E0;
- Thu,  1 Feb 2024 11:05:22 +0800 (CST)
-Message-ID: <0f21a919-74b6-40a5-863c-ca0e5fced00d@rock-chips.com>
-Date: Thu, 1 Feb 2024 11:05:22 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 4ECF8900167;
+ Thu,  1 Feb 2024 11:05:56 +0800 (CST)
+Message-ID: <3f68e05c-3f0e-45c2-8c51-e79354cbdb7a@rock-chips.com>
+Date: Thu, 1 Feb 2024 11:05:56 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 7/7] rockchip: rk35xx: Remove unnecessary status props
+Subject: Re: [PATCH 1/3] rockchip: rk35xx: Remove use of eMMC DDR52 mode
 Content-Language: en-US
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Joshua Riek <jjriek@verizon.net>
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Andy Yan <andyshrk@163.com>,
+ Tianling Shen <cnsztl@gmail.com>, Akash Gajjar <gajjar04akash@gmail.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>, Joshua Riek <jjriek@verizon.net>
 Cc: u-boot@lists.denx.de
-References: <20240126221508.4093334-1-jonas@kwiboo.se>
- <20240126221508.4093334-8-jonas@kwiboo.se>
+References: <20240126232615.6826-1-jonas@kwiboo.se>
+ <20240126232615.6826-2-jonas@kwiboo.se>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240126221508.4093334-8-jonas@kwiboo.se>
+In-Reply-To: <20240126232615.6826-2-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGhgfQlYeSkhDTE4fSx0eQhlVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkxMSVZJSklPHk1MT0pITENVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8d62a0d0b003a9kunm5e68b9001e0
+X-HM-Tid: 0a8d62a1570203a9kunm4ecf8900167
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MCI6OTo5LTMPMk0RVgEoE0I2
- TiEKCjNVSlVKTEtNTE5NTElISUNMVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPSkxINwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MjI6ASo*PTMLGE08VgwjEjMR
+ NCkaCxJVSlVKTEtNTE5NTE5MTUxOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFMTEtDNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,12 +79,11 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2024/1/27 06:14, Jonas Karlman wrote:
-> Remove unnecessary status props from rk35xx u-boot.dtsi files, regular
-> device tree files or default value already enable the affected nodes.
+On 2024/1/27 07:26, Jonas Karlman wrote:
+> Writing to eMMC using DDR52 mode does not work reliably or at all on
+> RK356x and RK3588 boards.
 >
-> Also reorder bootph-pre-ram and clock-frequency props alphabetically in
-> rk3588s-u-boot.dtsi uart2 node.
+> Fix this by removing the mmc-ddr-1_8v prop from sdhci nodes.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -89,107 +91,158 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   arch/arm/dts/rk356x-u-boot.dtsi            | 7 -------
->   arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi | 1 -
->   arch/arm/dts/rk3588s-u-boot.dtsi           | 7 +------
->   3 files changed, 1 insertion(+), 14 deletions(-)
+>   arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi   | 1 -
+>   arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi   | 1 -
+>   arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi | 1 -
+>   arch/arm/dts/rk3566-soquartz-u-boot.dtsi     | 1 -
+>   arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi   | 1 -
+>   arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi   | 1 -
+>   arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi    | 1 -
+>   arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi    | 1 -
+>   arch/arm/dts/rk3568-rock-3a-u-boot.dtsi      | 1 -
+>   arch/arm/dts/rk3588-rock-5b-u-boot.dtsi      | 1 -
+>   arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi   | 1 -
+>   arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi     | 1 -
+>   12 files changed, 12 deletions(-)
 >
-> diff --git a/arch/arm/dts/rk356x-u-boot.dtsi b/arch/arm/dts/rk356x-u-boot.dtsi
-> index cacd45348a49..d347080577d9 100644
-> --- a/arch/arm/dts/rk356x-u-boot.dtsi
-> +++ b/arch/arm/dts/rk356x-u-boot.dtsi
-> @@ -19,7 +19,6 @@
->   	dmc: dmc {
->   		compatible = "rockchip,rk3568-dmc";
->   		bootph-all;
-> -		status = "okay";
->   	};
+> diff --git a/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi b/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi
+> index 11976fd3a6e0..930d660868bb 100644
+> --- a/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi
+> @@ -8,7 +8,6 @@
 >   
->   	otp: nvmem@fe38c000 {
-> @@ -27,7 +26,6 @@
->   		reg = <0x0 0xfe38c000 0x0 0x4000>;
->   		#address-cells = <1>;
->   		#size-cells = <1>;
-> -		status = "okay";
+>   &sdhci {
+>   	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>   	pinctrl-names = "default";
+>   	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
+>   };
+> diff --git a/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi b/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi
+> index 8de9d1535efb..c235b4357f7d 100644
+> --- a/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi
+> @@ -4,7 +4,6 @@
 >   
->   		cpu_id: id@a {
->   			reg = <0x0a 0x10>;
-> @@ -37,27 +35,22 @@
+>   &sdhci {
+>   	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>   	pinctrl-names = "default";
+>   	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
+>   };
+> diff --git a/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi b/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
+> index 158f652cb3b1..e0e501deccfe 100644
+> --- a/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
+> @@ -7,5 +7,4 @@
 >   
->   &xin24m {
->   	bootph-all;
-> -	status = "okay";
+>   &sdhci {
+>   	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>   };
+> diff --git a/arch/arm/dts/rk3566-soquartz-u-boot.dtsi b/arch/arm/dts/rk3566-soquartz-u-boot.dtsi
+> index f65f4067f3e9..5e46a2422d60 100644
+> --- a/arch/arm/dts/rk3566-soquartz-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3566-soquartz-u-boot.dtsi
+> @@ -4,7 +4,6 @@
+>   
+>   &sdhci {
+>   	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>   	pinctrl-names = "default";
+>   	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
+>   };
+> diff --git a/arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi b/arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi
+> index a44ac35bdacd..1597473017ed 100644
+> --- a/arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi
+> @@ -8,7 +8,6 @@
+>   
+>   &sdhci {
+>   	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>   	mmc-hs400-1_8v;
+>   	mmc-hs400-enhanced-strobe;
+>   	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
+> diff --git a/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi b/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi
+> index 62f572c4cf9f..64c43374c042 100644
+> --- a/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi
+> @@ -14,7 +14,6 @@
+>   
+>   &sdhci {
+>   	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>   	mmc-hs200-1_8v;
+>   	mmc-hs400-1_8v;
+>   	mmc-hs400-enhanced-strobe;
+> diff --git a/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi b/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi
+> index ecba91aa30f5..1fc71faa9e07 100644
+> --- a/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi
+> @@ -8,7 +8,6 @@
+>   
+>   &sdhci {
+>   	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>   	mmc-hs200-1_8v;
+>   	mmc-hs400-1_8v;
+>   	mmc-hs400-enhanced-strobe;
+> diff --git a/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi b/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
+> index caf524443079..74755a44eaee 100644
+> --- a/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
+> @@ -16,7 +16,6 @@
+>   
+>   &sdhci {
+>   	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>   	mmc-hs200-1_8v;
+>   	mmc-hs400-1_8v;
+>   	mmc-hs400-enhanced-strobe;
+> diff --git a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
+> index 46ebb77283f1..5b823fcca5fb 100644
+> --- a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
+> @@ -20,7 +20,6 @@
+>   
+>   &sdhci {
+>   	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>   	mmc-hs200-1_8v;
+>   	mmc-hs400-1_8v;
+>   	mmc-hs400-enhanced-strobe;
+> diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+> index e99e60185ebe..9ee9dd051e32 100644
+> --- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+> @@ -31,7 +31,6 @@
+>   
+>   &sdhci {
+>   	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>   	mmc-hs200-1_8v;
 >   };
 >   
->   &cru {
->   	bootph-all;
-> -	status = "okay";
->   };
->   
->   &pmucru {
->   	bootph-all;
-> -	status = "okay";
->   };
->   
->   &grf {
->   	bootph-all;
-> -	status = "okay";
->   };
->   
->   &pmugrf {
->   	bootph-all;
-> -	status = "okay";
->   };
->   
->   &pinctrl {
 > diff --git a/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi b/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
-> index e791b572b6bf..471508a9ed74 100644
+> index 471508a9ed74..ca2a684f3541 100644
 > --- a/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
 > +++ b/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
-> @@ -15,5 +15,4 @@
->   &uart9 {
->   	bootph-pre-ram;
->   	clock-frequency = <24000000>;
-> -	status = "okay";
->   };
-> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
-> index 945b2d62a75e..bf3b1ea8a3c6 100644
-> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
-> @@ -17,7 +17,6 @@
->   	dmc {
->   		compatible = "rockchip,rk3588-dmc";
->   		bootph-all;
-> -		status = "okay";
->   	};
+> @@ -8,7 +8,6 @@
 >   
->   	usb_host0_xhci: usb@fc000000 {
-> @@ -165,17 +164,14 @@
->   
->   &xin24m {
->   	bootph-all;
-> -	status = "okay";
+>   &sdhci {
+>   	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>   	mmc-hs200-1_8v;
 >   };
 >   
->   &cru {
->   	bootph-pre-ram;
-> -	status = "okay";
->   };
+> diff --git a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
+> index 9a6a353088df..efba0c359ba5 100644
+> --- a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
+> @@ -7,6 +7,5 @@
 >   
->   &sys_grf {
->   	bootph-pre-ram;
-> -	status = "okay";
+>   &sdhci {
+>   	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+>   	mmc-hs200-1_8v;
 >   };
->   
->   &pmu1grf {
-> @@ -217,9 +213,8 @@
->   };
->   
->   &uart2 {
-> -	clock-frequency = <24000000>;
->   	bootph-pre-ram;
-> -	status = "okay";
-> +	clock-frequency = <24000000>;
->   };
->   
->   &uart2m0_xfer {
