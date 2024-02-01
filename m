@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B23B3C47DB3
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 00:20:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A79D8C47258
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 00:21:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47E33879A2;
-	Thu,  1 Feb 2024 01:20:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 73B9087BCB;
+	Thu,  1 Feb 2024 01:20:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Y5PNlaoP";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="gh/GMlA6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A76FA87B84; Thu,  1 Feb 2024 01:20:41 +0100 (CET)
+ id B43A0878C9; Thu,  1 Feb 2024 01:20:41 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BA3387B5F
+ by phobos.denx.de (Postfix) with ESMTPS id 5B68487B2A
  for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 01:20:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
@@ -31,19 +31,19 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 6CAAC419B1; 
- Thu,  1 Feb 2024 00:20:36 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 11F62419B0; 
+ Thu,  1 Feb 2024 00:20:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1706746836;
- bh=b7UzdLIqDaaVYpSy8Oc3iaCXijiUt95AvIYa2G2xzdc=;
+ s=20210705; t=1706746833;
+ bh=C0/3rvl/73Rs0Icaag/mYcs2x5ymAKiG9JfSKTpCuIQ=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=Y5PNlaoP0Amri2jl6o9en69I4n1qtqnyt6D2BUDEUqoYyhMtTwKyrTuVrxTBxRn3z
- HSG09jFztq4cZ+fT4nqBQVuainITxcGHmY70J/qtucBMSVk6moV5PXippFxmUhrJrA
- Opj2HMEJmiSvuEPcjbvB1CSCLqk601PjyY/Z4MrQ+LcL7091L0ROl5Smt9aboFP0o9
- 6+ZIbP/J/F/ZkAOv/R36XQ3u2QbQ7BJxBTALc26ldAUqBY/zLQAuZez34zSuiNgoeC
- aU+72vCtLjP8DjsKACO4xdNu6yuq/bz38dWKHTeqFKwkYLQVYABOQFdS6jRfOrKHlI
- AORc972MwwVTg==
+ b=gh/GMlA6DeVIoUX1JbB4PcnEkjuKMmG6kZT1NWYgKKIFEHaoyVySRXsK4OiSyERUy
+ oKjO/tBz1A/lBN5hFpDE9z8K/UJ4TE2c1ntcPww65n5bXUTawE+mU4W4khGTqaMUQg
+ mK40xT16GH+Zw7psyzZoJKwOwZUNn5aCYDHB7DIGF5sn2bJV7OdcOlki3hE6ZDbV7g
+ oAuUxBfngp7g0YYve9X6s5Dl9B3bHkT2LewQimClsfWYIkudgBKVEgzMiIyYXIEwM+
+ BJbrnkbRCicqFNs2MWBTRAbGPq7Yz0uMHJW08CxcfvP2DiA5g7ue3Ek13jGhoHgjFw
+ 09tBsZ8kBaKsg==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -52,9 +52,10 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Eddie James <eajames@linux.ibm.com>, Peter Robinson <pbrobinson@gmail.com>,
  Matthias Brugger <mbrugger@suse.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 2/3] smbios: do not determine maximum structure size
-Date: Thu,  1 Feb 2024 01:20:21 +0100
-Message-ID: <20240201002022.11258-3-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/3] cmd: smbios: show correct table size for SMBIOS2.1 entry
+ point
+Date: Thu,  1 Feb 2024 01:20:20 +0100
+Message-ID: <20240201002022.11258-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240201002022.11258-1-heinrich.schuchardt@canonical.com>
 References: <20240201002022.11258-1-heinrich.schuchardt@canonical.com>
@@ -76,47 +77,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Only the SMBIOS 2.1 entry point has a field for the maximum structure size.
-As we have switched to an SMBIOS 3 entry point remove the superfluous
-calculation.
+The SMBIOS table size for SMBIOS2.1 entry points is in field 'Structure
+Table Length' (offset 0x16) and not in field 'Maximum Structure Size'
+(offset 0x08).
+
+Rename the receiving variable max_struct_size to table_maximum_size
+to avoid future confusion.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- lib/smbios.c | 7 +------
- 1 file changed, 1 insertion(+), 6 deletions(-)
+ cmd/smbios.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/lib/smbios.c b/lib/smbios.c
-index cd750cc218..327f78c8b0 100644
---- a/lib/smbios.c
-+++ b/lib/smbios.c
-@@ -566,7 +566,6 @@ ulong write_smbios_table(ulong addr)
- 	struct smbios_ctx ctx;
- 	ulong tables;
- 	int len = 0;
--	int max_struct_size = 0;
- 	int handle = 0;
- 	int i;
+diff --git a/cmd/smbios.c b/cmd/smbios.c
+index 95bdff6026..e2d82be163 100644
+--- a/cmd/smbios.c
++++ b/cmd/smbios.c
+@@ -126,7 +126,7 @@ static int do_smbios(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	static const char smbios_sig[] = "_SM_";
+ 	static const char smbios3_sig[] = "_SM3_";
+ 	size_t count = 0;
+-	u32 max_struct_size;
++	u32 table_maximum_size;
  
-@@ -588,7 +587,6 @@ ulong write_smbios_table(ulong addr)
- 	/* populate minimum required tables */
- 	for (i = 0; i < ARRAY_SIZE(smbios_write_funcs); i++) {
- 		const struct smbios_write_method *method;
--		int tmp;
+ 	addr = gd_smbios_start();
+ 	if (!addr) {
+@@ -142,7 +142,7 @@ static int do_smbios(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			 entry3->major_ver, entry3->minor_ver, entry3->doc_rev);
+ 		table = (void *)(uintptr_t)entry3->struct_table_address;
+ 		size = entry3->length;
+-		max_struct_size = entry3->max_struct_size;
++		table_maximum_size = entry3->max_struct_size;
+ 	} else if (!memcmp(entry, smbios_sig, sizeof(smbios_sig) - 1)) {
+ 		struct smbios_entry *entry2 = entry;
  
- 		method = &smbios_write_funcs[i];
- 		ctx.subnode_name = NULL;
-@@ -598,10 +596,7 @@ ulong write_smbios_table(ulong addr)
- 				ctx.node = ofnode_find_subnode(parent_node,
- 							       method->subnode_name);
- 		}
--		tmp = method->write((ulong *)&addr, handle++, &ctx);
--
--		max_struct_size = max(max_struct_size, tmp);
--		len += tmp;
-+		len += method->write((ulong *)&addr, handle++, &ctx);
- 	}
+@@ -150,7 +150,7 @@ static int do_smbios(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			 entry2->major_ver, entry2->minor_ver);
+ 		table = (void *)(uintptr_t)entry2->struct_table_address;
+ 		size = entry2->length;
+-		max_struct_size = entry2->max_struct_size;
++		table_maximum_size = entry2->struct_table_length;
+ 	} else {
+ 		log_err("Unknown SMBIOS anchor format\n");
+ 		return CMD_RET_FAILURE;
+@@ -163,7 +163,7 @@ static int do_smbios(struct cmd_tbl *cmdtp, int flag, int argc,
  
- 	/*
+ 	for (struct smbios_header *pos = table; pos; pos = next_table(pos))
+ 		++count;
+-	printf("%zd structures occupying %d bytes\n", count, max_struct_size);
++	printf("%zd structures occupying %d bytes\n", count, table_maximum_size);
+ 	printf("Table at 0x%llx\n", (unsigned long long)map_to_sysmem(table));
+ 
+ 	for (struct smbios_header *pos = table; pos; pos = next_table(pos)) {
 -- 
 2.43.0
 
