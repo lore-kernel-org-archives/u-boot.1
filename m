@@ -4,86 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE413C4828D
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 13:30:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77E69C4828D
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 13:37:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F4F2878F4;
-	Thu,  1 Feb 2024 14:30:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ict42.de
+	by phobos.denx.de (Postfix) with ESMTP id A0B7E878D0;
+	Thu,  1 Feb 2024 14:37:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ict42.de header.i=@ict42.de header.b="ShC0Bvyk";
-	dkim=permerror (0-bit key) header.d=ict42.de header.i=@ict42.de header.b="KWMzANfV";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="UpEeTlDg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D172087968; Thu,  1 Feb 2024 14:30:22 +0100 (CET)
-Received: from mo4-p01-ob.smtp.rzone.de (mo4-p01-ob.smtp.rzone.de
- [85.215.255.51])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B908487C34; Thu,  1 Feb 2024 14:37:06 +0100 (CET)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AFC487252
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 14:30:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D5E35878D0
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 14:37:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=ict42.de
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=ludwig.kormann@ict42.de
-ARC-Seal: i=1; a=rsa-sha256; t=1706794220; cv=none;
- d=strato.com; s=strato-dkim-0002;
- b=pDn9xsKgzXnlb3M9QewDD1mHvNvCJZlbxnZUFcUqk4R2LWYu100+rs+yLbm0Myzi/Q
- IhrRtIRHycI6wnejWZ3lLnrYtaPPJrPpUZhKTApkdBMVwcCGu12rE1UiML/mqfe1MPC/
- t3SkONfAYHt7ZRpwBTDg8yEO11FgsdgecJ0e8+caD1CcOlQx74+OvJ94hwFQAOPUT7Xw
- vseWbBJpX1E+WxCHtIqPTtHv7xtbVZn7/3GOxjWhTYGKLUOhZ+/GS1e9R5FLeIaCK3Eh
- iA97O6YzqZvZxc1vZWIna8Ro2xctR9FxD9DrkbHMjqIXMfUNxyIt8QPdLHWB7cCTEokp
- MABg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1706794220;
- s=strato-dkim-0002; d=strato.com;
- h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
- bh=MGYGHdFeCcbvoRZVTstpm41BP6cBn5k7Rc0Gnf4F7Vk=;
- b=YDFUuLx8g2fY/d63Jl5jHW9rDYyAR0n3CVATaAtm5Sw0LprgDi738bsrRv8RXgedUz
- QYRgnnKrsieG/1nryexLp6y5fjzGLMkxwVHw6TdUOhQ/XOUOS+Aln4NcE+4oJxQCfH8M
- MUcE4vP+HbHwK7mjc7+6b72L88N42cMH7avCKBbHTFkX+cT51BJlWmiWz66mm4t9x8SL
- YX6qdwi6Xiwkwa7K5UA+TikxiQfk89rWFeS7a1wRJ+Fkfxmxh+zsaNE8v3tKx2FOX6aq
- tIUYeEKex0bu5FumdXhjqIWtbbXD0vCgTFwwjDYMvHnp232KKpZ2tzKe8tdHNZPFDMml
- dCEQ==
-ARC-Authentication-Results: i=1; strato.com;
-    arc=none;
-    dkim=none
-X-RZG-CLASS-ID: mo01
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1706794220;
- s=strato-dkim-0002; d=ict42.de;
- h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
- bh=MGYGHdFeCcbvoRZVTstpm41BP6cBn5k7Rc0Gnf4F7Vk=;
- b=ShC0Bvyk7SvIOatBgya9Cg8WgT5R/sB/umZsu6yN8vP8WIlyIZUtGcPwd8axRyeIYJ
- YGTYT6JGLwqCncLND7DXCexm4v6JexdBs/0qkQ3TiFavy3g1Ep20sgggj9eiOTjpFk1S
- Y2a5DoQp338CjA9/Sut8FMCvwlUHvxtpf9EF32PoGTgIRJHHR6zxIRvv9z+EbvxdAXx8
- /fWWaQAYJ6ubgXk3EjvCf+dkusvDr1uYMAC8p4W18TcdtV8QgUplueB//E6Q5Yvvnp4R
- /baGVA+efpviXGh5b18Ig5JpF7rBEIaJRZaXe2I59dr67cJhsMtCWUfr6xyoD0f380Y8
- EFXg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1706794220;
- s=strato-dkim-0003; d=ict42.de;
- h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
- bh=MGYGHdFeCcbvoRZVTstpm41BP6cBn5k7Rc0Gnf4F7Vk=;
- b=KWMzANfVxmQ3s4JdiUBpHSlANrwZRbCQfELdTfBMgIxVja7kIHvWFW3yvuNI1lbrVo
- 1D1SlNd/KAtU5V5GsoBQ==
-X-RZG-AUTH: ":IHkAYkmvNfSwjg/qSc4u8zZOVaURsoXe3UH2mQA0KglxDI1B7BeEcdPLARTmodKwkQi99jFCdZ0="
-Received: from debian-test.local.in-circuit.de
- by smtp.strato.de (RZmta 49.11.2 DYNA|AUTH)
- with ESMTPSA id x7ec2e011DUJUbK
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Thu, 1 Feb 2024 14:30:19 +0100 (CET)
-From: Ludwig Kormann <ludwig.kormann@ict42.de>
-To: jagan@amarulasolutions.com, andre.przywara@arm.com, trini@konsulko.com,
- jernej.skrabec@gmail.com, iuncuim@gmail.com, cfsworks@gmail.com,
- samuel@sholland.org
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-33aeb088324so619851f8f.2
+ for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 05:37:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1706794624; x=1707399424;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=KMFn6klIEYqB6MnRqj/0U30NLKZWFePC7J5RobnIxew=;
+ b=UpEeTlDgdM/5NSWo9j6K5cMAk7qDxIkGnMMeNJvyCRBuGllshbXi2q+Fw+qMi7Rd3X
+ sqW11/JJDbWlKvXDk9vjHD/fI18QVEXhfoivbKyIwmwOh2lHhRqF/GATEhVdAOM7bHYE
+ AX60w1JJziWYi5Wst6IFEYD9r6rHozO3jlWizf3cx0p/7TryXR4YxNmpiIbl6NaMqpm3
+ sGR91LoxEKiB9BUrxVXfN3PyaukjNzHst/wMoaGoiE6pzhS9IOGpCwaMOP8JLchHeLl/
+ HUiz6nvTcvijd4FojzGy2iEP9uk6FE75CByJp2ZGpVh/mb9d7B3YfMYOvWamDXyTJdQb
+ Q0Yg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706794624; x=1707399424;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=KMFn6klIEYqB6MnRqj/0U30NLKZWFePC7J5RobnIxew=;
+ b=lISRizFYRl0+joWY4+/bUF7zp2zlxJEd4a8xXDQggsUtlsiYNGefDa8u6YpQsFSXu5
+ mF6hxW6tXpIuyeANae6xyDTkiJ36KcVaCuhwHNPDEatFznIZ49kqySnIM6czjfEmI9B6
+ Mq0H97p+FxafhG7WeTozAuNPiiZwq9Rr+8ygHlPCvFusQ1mSomMKX1FaGnJUBfBxLTzp
+ 6WGAPIqjfmdSsXzFkZboHGpUCgF+3Lb0JV/ACaa3q/wQRqGxQcwtsAQbF+ojzN8zBYtz
+ mZZXQz/0NvAKCWTnMPTz3CwCTOrf3aCXuPWr/Ao28d6TZjM5nt5FPtU60xdT72UHMn7R
+ QtFA==
+X-Gm-Message-State: AOJu0Yz+NjqZwrBVVQcOZs8PkfSIYDtNCTS3EMMa69CMYNjg17i8QWpg
+ o57Y/vCj2qXW0zn99F/WLTSxtoMUbxCSbrKzUObpeJZ/qF4g3WVklW0SseRvZYE=
+X-Google-Smtp-Source: AGHT+IErL78W4G/+SvdYsrFk2YIA79c7aPve07VcLVjUfUc6KyqeIj9vjPXoZLZ3e7911n86qDVVbw==
+X-Received: by 2002:a5d:5448:0:b0:33b:1a0c:abe0 with SMTP id
+ w8-20020a5d5448000000b0033b1a0cabe0mr944914wrv.8.1706794624111; 
+ Thu, 01 Feb 2024 05:37:04 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCVNn6fslj2ZRtcJEJ6SaCkJk3tlqB/D60mye7l3oFVjNCd5HqXKcUSPpOdoGnrxxykX7tDtedUQcQ8NMldgBbLTiCGG+OuA3pV8OqV5zkH36lS6KQAXRsA2fl1dculN7ilvHdOEad9h7zu5YXCWQRmGZE40iJ5EjJAbYXHorme4a4jWWifKeKopbDTyj4MlkF4PAA==
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ bu16-20020a056000079000b0033b0797cc14sm3790297wrb.51.2024.02.01.05.37.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Feb 2024 05:37:03 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, Caleb
+ Connolly <caleb.connolly@linaro.org>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH 1/1] sunxi: sun4i: Introduce KConfig option SPL_SYS_CLK_FREQ
-Date: Thu,  1 Feb 2024 14:30:14 +0100
-Message-Id: <20240201133014.578083-1-ludwig.kormann@ict42.de>
-X-Mailer: git-send-email 2.39.2
+Subject: Re: [PATCH 3/5] usb: gadget: CDC ACM: call usb_gadget_initialize
+In-Reply-To: <20240131-b4-qcom-usb-v1-3-6438b2a2285e@linaro.org>
+References: <20240131-b4-qcom-usb-v1-0-6438b2a2285e@linaro.org>
+ <20240131-b4-qcom-usb-v1-3-6438b2a2285e@linaro.org>
+Date: Thu, 01 Feb 2024 14:37:02 +0100
+Message-ID: <87bk90mhkx.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,90 +94,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This option can be used to modify the initial SPL
-CPU clock frequency.
+Hi Caleb,
 
-This follows an earlier discussion regarding A20
-CPUs dying after reboot in SPL initialization due to
-incompatible CPU clock frequency and core voltage. [1]
+Thank you for the patch.
 
-First attempt was to update PLL1_CFG_DEFAULT to a fixed
-lower frequency (144MHz), which fixed the observed issue
-but might not suit all A20 users. A KConfig option
-should be the better solution.
+On mer., janv. 31, 2024 at 14:57, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 
-[1]
-https://lists.denx.de/pipermail/u-boot/2024-January/544897.html
+> To actually use the gadget the peripheral driver must be probed and we
+> must call g_dnl_clear_detach(). Otherwise acm_stdio_start() will always
+> fail to find a UDC on DT platforms.
+>
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 
-Signed-off-by: Ludwig Kormann <ludwig.kormann@ict42.de>
----
- arch/arm/include/asm/arch-sunxi/clock_sun4i.h |  4 ++++
- arch/arm/mach-sunxi/Kconfig                   |  8 ++++++++
- arch/arm/mach-sunxi/clock_sun4i.c             | 11 ++++++++++-
- 3 files changed, 22 insertions(+), 1 deletion(-)
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun4i.h b/arch/arm/include/asm/arch-sunxi/clock_sun4i.h
-index 2cec91cb20..11b350824e 100644
---- a/arch/arm/include/asm/arch-sunxi/clock_sun4i.h
-+++ b/arch/arm/include/asm/arch-sunxi/clock_sun4i.h
-@@ -134,12 +134,16 @@ struct sunxi_ccm_reg {
- #define CCM_PLL1_CFG_PLL4_EXCH_SHIFT		25
- #define CCM_PLL1_CFG_BIAS_CUR_SHIFT		20
- #define CCM_PLL1_CFG_DIVP_SHIFT			16
-+#define CCM_PLL1_CFG_DIVP_MASK			(0x3 << CCM_PLL1_CFG_DIVP_SHIFT)
- #define CCM_PLL1_CFG_LCK_TMR_SHIFT		13
- #define CCM_PLL1_CFG_FACTOR_N_SHIFT		8
-+#define CCM_PLL1_CFG_FACTOR_N_MASK		(0x1f << CCM_PLL1_CFG_FACTOR_N_SHIFT)
- #define CCM_PLL1_CFG_FACTOR_K_SHIFT		4
-+#define CCM_PLL1_CFG_FACTOR_K_MASK		(0x3 << CCM_PLL1_CFG_FACTOR_K_SHIFT)
- #define CCM_PLL1_CFG_SIG_DELT_PAT_IN_SHIFT	3
- #define CCM_PLL1_CFG_SIG_DELT_PAT_EN_SHIFT	2
- #define CCM_PLL1_CFG_FACTOR_M_SHIFT		0
-+#define CCM_PLL1_CFG_FACTOR_M_MASK		(0x3 << CCM_PLL1_CFG_FACTOR_M_SHIFT)
- 
- #define PLL1_CFG_DEFAULT	0xa1005000
- 
-diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-index fe89aec6b9..85e3a26855 100644
---- a/arch/arm/mach-sunxi/Kconfig
-+++ b/arch/arm/mach-sunxi/Kconfig
-@@ -705,6 +705,14 @@ config SYS_CLK_FREQ
- 	default 1008000000 if MACH_SUN50I_H616
- 	default 1008000000 if MACH_SUN8I_R528
- 
-+if MACH_SUN4I || MACH_SUN5I || MACH_SUN7I
-+config SPL_SYS_CLK_FREQ
-+	int "sunxi SPL CPU clock frequency"
-+	default 384
-+	---help---
-+  A static value for the sunxi SPL CPU frequency, must be a multiple of 24.
-+endif
-+
- config SYS_CONFIG_NAME
- 	default "suniv" if MACH_SUNIV
- 	default "sun4i" if MACH_SUN4I
-diff --git a/arch/arm/mach-sunxi/clock_sun4i.c b/arch/arm/mach-sunxi/clock_sun4i.c
-index 8f1d1b65f0..04623c1d09 100644
---- a/arch/arm/mach-sunxi/clock_sun4i.c
-+++ b/arch/arm/mach-sunxi/clock_sun4i.c
-@@ -25,7 +25,16 @@ void clock_init_safe(void)
- 	       APB0_DIV_1 << APB0_DIV_SHIFT |
- 	       CPU_CLK_SRC_OSC24M << CPU_CLK_SRC_SHIFT,
- 	       &ccm->cpu_ahb_apb0_cfg);
--	writel(PLL1_CFG_DEFAULT, &ccm->pll1_cfg);
-+	writel((PLL1_CFG_DEFAULT &
-+		~(CCM_PLL1_CFG_FACTOR_N_MASK |
-+		CCM_PLL1_CFG_FACTOR_K_MASK |
-+		CCM_PLL1_CFG_FACTOR_M_MASK |
-+		CCM_PLL1_CFG_DIVP_MASK)) |
-+		(CONFIG_SPL_SYS_CLK_FREQ / 24) << CCM_PLL1_CFG_FACTOR_N_SHIFT |
-+		0 << CCM_PLL1_CFG_FACTOR_K_SHIFT |
-+		0 << CCM_PLL1_CFG_FACTOR_M_SHIFT |
-+		0 << CCM_PLL1_CFG_DIVP_SHIFT,
-+		&ccm->pll1_cfg);
- 	sdelay(200);
- 	writel(AXI_DIV_1 << AXI_DIV_SHIFT |
- 	       AHB_DIV_2 << AHB_DIV_SHIFT |
--- 
-2.39.2
-
+> ---
+>  drivers/usb/gadget/f_acm.c | 9 +++++++++
+>  1 file changed, 9 insertions(+)
+>
+> diff --git a/drivers/usb/gadget/f_acm.c b/drivers/usb/gadget/f_acm.c
+> index de42e0189e8d..ba216128ab27 100644
+> --- a/drivers/usb/gadget/f_acm.c
+> +++ b/drivers/usb/gadget/f_acm.c
+> @@ -623,12 +623,21 @@ static void acm_stdio_puts(struct stdio_dev *dev, const char *str)
+>  
+>  static int acm_stdio_start(struct stdio_dev *dev)
+>  {
+> +	struct udevice *udc;
+>  	int ret;
+>  
+>  	if (dev->priv) { /* function already exist */
+>  		return 0;
+>  	}
+>  
+> +	ret = udc_device_get_by_index(0, &udc);
+> +	if (ret) {
+> +		pr_err("USB init failed: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	g_dnl_clear_detach();
+> +
+>  	ret = g_dnl_register("usb_serial_acm");
+>  	if (ret)
+>  		return ret;
+>
+> -- 
+> 2.43.0
