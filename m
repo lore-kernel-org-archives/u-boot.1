@@ -4,62 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B73FC47DB3
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 00:21:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 035D3C47258
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 02:09:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9EEB687B2D;
-	Thu,  1 Feb 2024 01:20:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id E736887B71;
+	Thu,  1 Feb 2024 03:09:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="bZwEu1Jk";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="JZTad7qP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8257687B2D; Thu,  1 Feb 2024 01:20:52 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ id 5138687B71; Thu,  1 Feb 2024 03:09:05 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2ED8B878C9
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 01:20:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 506C2875EB
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 03:09:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
- [178.202.40.247])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id DD8C8419C3; 
- Thu,  1 Feb 2024 00:20:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1706746839;
- bh=ga0ZNx+R6R1683+mEn7bzaksnL41gZoiUT3OKyxDD3M=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=bZwEu1JkfMG+5FjGjL8YQZ4KcN1V9AE8S/xWdVfkfLKvXiBZWccvnP9Y8D1G7kaLu
- gQaXbDAQ1KjIhzHL8Kn+5Th4WlVK0JbrQSEJBghTC05kvpFqOgLbXlvbJ9icAyi+4k
- RP5sJSK8LvU41gi7u1Py1MvSVp4e9pSAk301XMKxXA9nEqg7gwhMlhqS82DPcH7NVf
- wy3eTpdp2CVcNgQTMBoHtybs33fFA25fad7S1caFb7cmDttH0DDiBege95aZ+NUVTl
- XVOs/wx4fjucbsisI14qMOOvHGZLbbHfBuoV8JE99itwyiPIYKP7kwGHA/HQcloOy6
- C6Zdh2W/bwgoQ==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- Eddie James <eajames@linux.ibm.com>, Peter Robinson <pbrobinson@gmail.com>,
- Matthias Brugger <mbrugger@suse.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 3/3] smbios: correctly name Structure Table Maximum Size field
-Date: Thu,  1 Feb 2024 01:20:22 +0100
-Message-ID: <20240201002022.11258-4-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240201002022.11258-1-heinrich.schuchardt@canonical.com>
-References: <20240201002022.11258-1-heinrich.schuchardt@canonical.com>
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=masahiroy@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id A633960DC6
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 02:09:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4D36EC43394
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 02:09:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1706753340;
+ bh=qpgaAko8Zmepj+CsJYgEeQt49UM0kbaD3f1MmT1j9Y0=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=JZTad7qPMEODueqFLCJmkELXm9HqTKqqlK6oRGm1CWsxL5D8nj56bwWj4KHDjoGAT
+ QFSmCQT+VmLNXD+YWswWbYQE+RgWqX9LeAum2/AnCvO+ta9I+CHn50rG4i6XXPokd8
+ U91f0X5GdhMvb5nfvW2v79oE1kHcUNscpAFW+QK7Ai/LtGVpt0yGNS+0lYKmyWPSmr
+ AHcXS6CJVm3qzRq7Z92J/0nfnmbt1MneKUR8vVc9VPcKkURXwokU2LUCQ21wdsOBZ4
+ Dwa7JdsfOwSE6D4WvoP+ZjeyfdoauCZXdMi5OaSZBDyP83OphTzJriJorHSyZI3mhQ
+ 73WVBu8JzlQWA==
+Received: by mail-lj1-f175.google.com with SMTP id
+ 38308e7fff4ca-2cf338e1438so4124991fa.0
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 18:09:00 -0800 (PST)
+X-Gm-Message-State: AOJu0Yzd6x8eHO6R0PENjiDDbLIHPaMReHlr6/1IO5+URDqjNMMSiibk
+ +Hcnem99jJXO6WMUeV/UbFdw1EpIjVQRHPQRjdoUTO80Mp/kck+hjziUvnvDOR8NO4Qr5eLwspu
+ uzFrHzKuB0NwQ+eWQlicySUz21nY=
+X-Google-Smtp-Source: AGHT+IEZWLOW5AyfTxq3DsArqXYZjZVQKlZdAkdNup913YWdU7itR3gfTo5qLKzEsXv/ztER6wEmyRn8aAlIHDNUV8Y=
+X-Received: by 2002:a2e:a414:0:b0:2cc:78b7:1ef0 with SMTP id
+ p20-20020a2ea414000000b002cc78b71ef0mr1136378ljn.4.1706753338768; Wed, 31 Jan
+ 2024 18:08:58 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231202035511.487946-1-sjg@chromium.org>
+ <20231202035511.487946-3-sjg@chromium.org>
+ <20231213121353.GA31326@willie-the-truck>
+ <CAFLszTjfmSx1YMqzb2TsQf7sP4KrcQB=X7DY_HxRQp0J5HAppQ@mail.gmail.com>
+ <CAK7LNAQRCDC03e=TVO=k4FuD2a2RdTy7yLr3UptQjVCX7pM1CA@mail.gmail.com>
+ <20240109143349.GR1610741@bill-the-cat>
+ <CAFLszTjwhy24UiT6kUJABMC1Xn0h9Q1q9fYpZZJg9DX8Vss9cA@mail.gmail.com>
+ <CAFLszTjPAHd6RdO1mvatXC=yRS+h=sgJ_pMdyEnkROTx7yRpog@mail.gmail.com>
+ <CAK7LNARsY6-rrx=sNFq6oFqpqf0s5S_=3DrUsCOS7zF0BXcoTg@mail.gmail.com>
+ <CAL_JsqLYB0D5wAfedsb6tQp4EmD1AROgxiCncwO7gvA2p1C6Lg@mail.gmail.com>
+In-Reply-To: <CAL_JsqLYB0D5wAfedsb6tQp4EmD1AROgxiCncwO7gvA2p1C6Lg@mail.gmail.com>
+From: Masahiro Yamada <masahiroy@kernel.org>
+Date: Thu, 1 Feb 2024 11:08:21 +0900
+X-Gmail-Original-Message-ID: <CAK7LNAR-3rL6=YdhRRXB9dz+94y2yHTA=9mF4p7OPj7KExd7rg@mail.gmail.com>
+Message-ID: <CAK7LNAR-3rL6=YdhRRXB9dz+94y2yHTA=9mF4p7OPj7KExd7rg@mail.gmail.com>
+Subject: Re: [PATCH v9 2/2] arm64: boot: Support Flat Image Tree
+To: Rob Herring <robh@kernel.org>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Will Deacon <will@kernel.org>, 
+ linux-arm-kernel@lists.infradead.org, Ahmad Fatoum <a.fatoum@pengutronix.de>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, Nicolas Schier <nicolas@fjasle.eu>,
+ Catalin Marinas <catalin.marinas@arm.com>, Jonathan Corbet <corbet@lwn.net>, 
+ Nathan Chancellor <nathan@kernel.org>, Nick Terrell <terrelln@fb.com>,
+ linux-doc@vger.kernel.org, 
+ linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ workflows@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,141 +96,242 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In the SMBIOS 3 entry point the Structure Table Maximum Size field was
-incorrectly named max_struct_size. A Maximum Structure Size field only
-exists in the SMBIOS 2.1 entry point and has a different meaning.
+On Thu, Feb 1, 2024 at 7:03=E2=80=AFAM Rob Herring <robh@kernel.org> wrote:
+>
+> On Tue, Jan 30, 2024 at 3:16=E2=80=AFAM Masahiro Yamada <masahiroy@kernel=
+.org> wrote:
+> >
+> > On Fri, Jan 26, 2024 at 1:04=E2=80=AFAM Simon Glass <sjg@chromium.org> =
+wrote:
+> > >
+> > > Hi,
+> > >
+> > > On Wed, 17 Jan 2024 at 06:14, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Masahiro, Tom,
+> > > >
+> > > > On Tue, 9 Jan 2024 at 07:33, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Tue, Jan 09, 2024 at 11:01:42PM +0900, Masahiro Yamada wrote:
+> > > > > > Hi Simon,
+> > > > > >
+> > > > > >
+> > > > > > On Wed, Jan 3, 2024 at 8:47=E2=80=AFAM Simon Glass <sjg@chromiu=
+m.org> wrote:
+> > > > > > >
+> > > > > > > Hi Masahiro,
+> > > > > > >
+> > > > > > > On Wed, Dec 13, 2023 at 5:14=E2=80=AFAM Will Deacon <will@ker=
+nel.org> wrote:
+> > > > > > > >
+> > > > > > > > On Fri, Dec 01, 2023 at 08:54:42PM -0700, Simon Glass wrote=
+:
+> > > > > > > > > Add a script which produces a Flat Image Tree (FIT), a si=
+ngle file
+> > > > > > > > > containing the built kernel and associated devicetree fil=
+es.
+> > > > > > > > > Compression defaults to gzip which gives a good balance o=
+f size and
+> > > > > > > > > performance.
+> > > > > > > > >
+> > > > > > > > > The files compress from about 86MB to 24MB using this app=
+roach.
+> > > > > > > > >
+> > > > > > > > > The FIT can be used by bootloaders which support it, such=
+ as U-Boot
+> > > > > > > > > and Linuxboot. It permits automatic selection of the corr=
+ect
+> > > > > > > > > devicetree, matching the compatible string of the running=
+ board with
+> > > > > > > > > the closest compatible string in the FIT. There is no nee=
+d for
+> > > > > > > > > filenames or other workarounds.
+> > > > > > > > >
+> > > > > > > > > Add a 'make image.fit' build target for arm64, as well. U=
+se
+> > > > > > > > > FIT_COMPRESSION to select a different algorithm.
+> > > > > > > > >
+> > > > > > > > > The FIT can be examined using 'dumpimage -l'.
+> > > > > > > > >
+> > > > > > > > > This features requires pylibfdt (use 'pip install libfdt'=
+). It also
+> > > > > > > > > requires compression utilities for the algorithm being us=
+ed. Supported
+> > > > > > > > > compression options are the same as the Image.xxx files. =
+For now there
+> > > > > > > > > is no way to change the compression other than by editing=
+ the rule for
+> > > > > > > > > $(obj)/image.fit
+> > > > > > > > >
+> > > > > > > > > While FIT supports a ramdisk / initrd, no attempt is made=
+ to support
+> > > > > > > > > this here, since it must be built separately from the Lin=
+ux build.
+> > > > > > > > >
+> > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > ---
+> > > > > > > > >
+> > > > > > > > > Changes in v9:
+> > > > > > > > > - Move the compression control into Makefile.lib
+> > > > > > > > >
+> > > > > > > > > Changes in v8:
+> > > > > > > > > - Drop compatible string in FDT node
+> > > > > > > > > - Correct sorting of MAINTAINERS to before ARM64 PORT
+> > > > > > > > > - Turn compress part of the make_fit.py comment in to a s=
+entence
+> > > > > > > > > - Add two blank lines before parse_args() and setup_fit()
+> > > > > > > > > - Use 'image.fit: dtbs' instead of BUILD_DTBS var
+> > > > > > > > > - Use '$(<D)/dts' instead of '$(dir $<)dts'
+> > > > > > > > > - Add 'mkimage' details Documentation/process/changes.rst
+> > > > > > > > > - Allow changing the compression used
+> > > > > > > > > - Tweak cover letter since there is only one clean-up pat=
+ch
+> > > > > > > > >
+> > > > > > > > > Changes in v7:
+> > > > > > > > > - Add Image as a dependency of image.fit
+> > > > > > > > > - Drop kbuild tag
+> > > > > > > > > - Add dependency on dtbs
+> > > > > > > > > - Drop unnecessary path separator for dtbs
+> > > > > > > > > - Rebase to -next
+> > > > > > > > >
+> > > > > > > > > Changes in v5:
+> > > > > > > > > - Drop patch previously applied
+> > > > > > > > > - Correct compression rule which was broken in v4
+> > > > > > > > >
+> > > > > > > > > Changes in v4:
+> > > > > > > > > - Use single quotes for UIMAGE_NAME
+> > > > > > > > >
+> > > > > > > > > Changes in v3:
+> > > > > > > > > - Drop temporary file image.itk
+> > > > > > > > > - Drop patch 'Use double quotes for image name'
+> > > > > > > > > - Drop double quotes in use of UIMAGE_NAME
+> > > > > > > > > - Drop unnecessary CONFIG_EFI_ZBOOT condition for help
+> > > > > > > > > - Avoid hard-coding "arm64" for the DT architecture
+> > > > > > > > >
+> > > > > > > > > Changes in v2:
+> > > > > > > > > - Drop patch previously applied
+> > > > > > > > > - Add .gitignore file
+> > > > > > > > > - Move fit rule to Makefile.lib using an intermediate fil=
+e
+> > > > > > > > > - Drop dependency on CONFIG_EFI_ZBOOT
+> > > > > > > > > - Pick up .dtb files separately from the kernel
+> > > > > > > > > - Correct pylint too-many-args warning for write_kernel()
+> > > > > > > > > - Include the kernel image in the file count
+> > > > > > > > > - Add a pointer to the FIT spec and mention of its wide i=
+ndustry usage
+> > > > > > > > > - Mention the kernel version in the FIT description
+> > > > > > > > >
+> > > > > > > > >  Documentation/process/changes.rst |   9 +
+> > > > > > > > >  MAINTAINERS                       |   7 +
+> > > > > > > > >  arch/arm64/Makefile               |   7 +-
+> > > > > > > > >  arch/arm64/boot/.gitignore        |   1 +
+> > > > > > > > >  arch/arm64/boot/Makefile          |   6 +-
+> > > > > > > > >  scripts/Makefile.lib              |  16 ++
+> > > > > > > > >  scripts/make_fit.py               | 291 ++++++++++++++++=
+++++++++++++++
+> > > > > > > > >  7 files changed, 334 insertions(+), 3 deletions(-)
+> > > > > > > > >  create mode 100755 scripts/make_fit.py
+> > > > > > > >
+> > > > > > > > I'll need Masahiro's Ack on the scripts/ changes before I c=
+an take this
+> > > > > > > > one.
+> > > > > > >
+> > > > > > > Any thoughts on this request, please?
+> > > > > > >
+> > > > > > > Regards,
+> > > > > > > Simon
+> > > > > > >
+> > > > > >
+> > > > > >
+> > > > > >
+> > > > > > As I mentioned before, I am concerned with having
+> > > > > > the same "compatible" entries, with different contents,
+> > > > > > as you use the "compatible" string as an ID to selecting
+> > > > > > the target config node, right?
+> > > > > >
+> > > > > >
+> > > > > >
+> > > > > >
+> > > > > >
+> > > > > > $ fdtdump  arch/arm64/boot/image.fit
+> > > > > >
+> > > > > >         ...
+> > > > > >
+> > > > > >         conf-10 {
+> > > > > >             compatible =3D "tq,am642-tqma6442l-mbax4xxl",
+> > > > > > "tq,am642-tqma6442l", "ti,am642";
+> > > > > >             description =3D "TQ-Systems TQMa64xxL SoM on MBax4x=
+xL carrier board";
+> > > > > >             fdt =3D "fdt-10";
+> > > > > >             kernel =3D "kernel";
+> > > > > >         };
+> > > > > >
+> > > > > >         ...
+> > > > > >
+> > > > > >         conf-25 {
+> > > > > >             compatible =3D "tq,am642-tqma6442l-mbax4xxl",
+> > > > > > "tq,am642-tqma6442l", "ti,am642";
+> > > > > >             description =3D "TQ-Systems TQMa64xxL SoM on MBax4x=
+xL carrier board";
+> > > > > >             fdt =3D "fdt-25";
+> > > > > >             kernel =3D "kernel";
+> > > > > >         };
+> > > > >
+> > > > > I had asked Rob a while ago about if having the same compatible f=
+or two
+> > > > > functionally different machines is a feature, or a bug, and I don=
+'t
+> > > > > think either of us fully agreed either way. I'd be leaning toward=
+s
+> > > > > saying the above example is a bug in the dts files, it's just not=
+ been a
+> > > > > bug people have worried about before due to (sadly) how little th=
+e
+> > > > > top-level compatible has been used.
+>
+> I much prefer being able to use compatibles over filenames.
+>
+> > > >
+> > > > Yes I believe this is a bug in the files.
+> > > >
+> > > > What should the script do in this case? Print a warning, perhaps?
+> > >
+> > > Is there anything I should do here? Would a warning be helpful, or
+> > > just confusing?
+> >
+> >
+> >
+> > I do not think it is useful.
+> > You would almost always get a warning, and there is no way to fix it.
+>
+> The above case is due to overlays. Why would you have a FIT image with
+> both a base tree and applied overlays?
 
-Call the Structure Table Length field table_maximum_size.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- cmd/smbios.c                | 2 +-
- drivers/misc/qfw_smbios.c   | 2 +-
- include/smbios.h            | 2 +-
- lib/efi_loader/efi_tcg2.c   | 4 ++--
- lib/efi_loader/smbiosdump.c | 6 +++---
- lib/smbios-parser.c         | 2 +-
- lib/smbios.c                | 2 +-
- 7 files changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/cmd/smbios.c b/cmd/smbios.c
-index e2d82be163..66f6b76137 100644
---- a/cmd/smbios.c
-+++ b/cmd/smbios.c
-@@ -142,7 +142,7 @@ static int do_smbios(struct cmd_tbl *cmdtp, int flag, int argc,
- 			 entry3->major_ver, entry3->minor_ver, entry3->doc_rev);
- 		table = (void *)(uintptr_t)entry3->struct_table_address;
- 		size = entry3->length;
--		table_maximum_size = entry3->max_struct_size;
-+		table_maximum_size = entry3->table_maximum_size;
- 	} else if (!memcmp(entry, smbios_sig, sizeof(smbios_sig) - 1)) {
- 		struct smbios_entry *entry2 = entry;
- 
-diff --git a/drivers/misc/qfw_smbios.c b/drivers/misc/qfw_smbios.c
-index a898cb4eea..c3e8c310d0 100644
---- a/drivers/misc/qfw_smbios.c
-+++ b/drivers/misc/qfw_smbios.c
-@@ -90,7 +90,7 @@ static int qfw_parse_smbios_anchor(struct udevice *dev,
- 		entry->length = sizeof(struct smbios3_entry);
- 		entry->major_ver = entry2->major_ver;
- 		entry->minor_ver = entry2->minor_ver;
--		entry->max_struct_size = entry2->struct_table_length;
-+		entry->table_maximum_size = entry2->struct_table_length;
- 	} else {
- 		ret = -ENOENT;
- 		goto out;
-diff --git a/include/smbios.h b/include/smbios.h
-index e2b7f69584..3df8827b60 100644
---- a/include/smbios.h
-+++ b/include/smbios.h
-@@ -75,7 +75,7 @@ struct __packed smbios3_entry {
- 	/** @reserved: reserved */
- 	u8 reserved;
- 	/** maximum size of SMBIOS table */
--	u32 max_struct_size;
-+	u32 table_maximum_size;
- 	/** @struct_table_address: 64-bit physical starting address */
- 	u64 struct_table_address;
- };
-diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-index b5d4aa7be5..b07e0099c2 100644
---- a/lib/efi_loader/efi_tcg2.c
-+++ b/lib/efi_loader/efi_tcg2.c
-@@ -1098,7 +1098,7 @@ tcg2_measure_smbios(struct udevice *dev,
- 	 */
- 	event_size = sizeof(struct smbios_handoff_table_pointers2) +
- 		     FIELD_SIZEOF(struct efi_configuration_table, guid) +
--		     entry->max_struct_size;
-+		     entry->table_maximum_size;
- 	event = calloc(1, event_size);
- 	if (!event) {
- 		ret = EFI_OUT_OF_RESOURCES;
-@@ -1113,7 +1113,7 @@ tcg2_measure_smbios(struct udevice *dev,
- 	smbios_copy = (struct smbios_header *)((uintptr_t)&event->table_entry[0].table);
- 	memcpy(&event->table_entry[0].table,
- 	       (void *)((uintptr_t)entry->struct_table_address),
--	       entry->max_struct_size);
-+	       entry->table_maximum_size);
- 
- 	smbios_prepare_measurement(entry, smbios_copy);
- 
-diff --git a/lib/efi_loader/smbiosdump.c b/lib/efi_loader/smbiosdump.c
-index f0b901897e..2f0b91a353 100644
---- a/lib/efi_loader/smbiosdump.c
-+++ b/lib/efi_loader/smbiosdump.c
-@@ -329,7 +329,7 @@ efi_status_t do_check(void)
- 			return EFI_LOAD_ERROR;
- 		}
- 		table = (void *)(uintptr_t)smbios3_anchor->struct_table_address;
--		len = smbios3_anchor->max_struct_size;
-+		len = smbios3_anchor->table_maximum_size;
- 	} else {
- 		struct smbios_entry *smbios_anchor;
- 		int r;
-@@ -469,7 +469,7 @@ static efi_status_t do_save(u16 *filename)
- 
- 	smbios3_anchor = get_config_table(&smbios3_guid);
- 	if (smbios3_anchor) {
--		size = 0x20 + smbios3_anchor->max_struct_size;
-+		size = 0x20 + smbios3_anchor->table_maximum_size;
- 		ret = bs->allocate_pool(EFI_LOADER_DATA, size, (void **)&buf);
- 		if (ret != EFI_SUCCESS) {
- 			error(u"Out of memory\n");
-@@ -480,7 +480,7 @@ static efi_status_t do_save(u16 *filename)
- 		memcpy(buf, smbios3_anchor, smbios3_anchor->length);
- 		memcpy(buf + 0x20,
- 		       (void *)(uintptr_t)smbios3_anchor->struct_table_address,
--		       smbios3_anchor->max_struct_size);
-+		       smbios3_anchor->table_maximum_size);
- 
- 		smbios3_anchor = (struct smbios3_entry *)buf;
- 		smbios3_anchor->struct_table_address = 0x20;
-diff --git a/lib/smbios-parser.c b/lib/smbios-parser.c
-index 0d1ac781b3..9a62b3c760 100644
---- a/lib/smbios-parser.c
-+++ b/lib/smbios-parser.c
-@@ -230,7 +230,7 @@ void smbios_prepare_measurement(const struct smbios3_entry *entry,
- 	void *table_end;
- 	struct smbios_header *header;
- 
--	table_end = (void *)((u8 *)smbios_copy + entry->max_struct_size);
-+	table_end = (void *)((u8 *)smbios_copy + entry->table_maximum_size);
- 
- 	for (i = 0; i < ARRAY_SIZE(smbios_filter_tables); i++) {
- 		header = smbios_copy;
-diff --git a/lib/smbios.c b/lib/smbios.c
-index 327f78c8b0..c83af730a9 100644
---- a/lib/smbios.c
-+++ b/lib/smbios.c
-@@ -615,7 +615,7 @@ ulong write_smbios_table(ulong addr)
- 	se->minor_ver = SMBIOS_MINOR_VER;
- 	se->doc_rev = 0;
- 	se->entry_point_rev = 1;
--	se->max_struct_size = len;
-+	se->table_maximum_size = len;
- 	se->struct_table_address = table_addr;
- 	se->checksum = table_compute_checksum(se, sizeof(struct smbios3_entry));
- 	unmap_sysmem(se);
--- 
-2.43.0
+Because they are different hardware.
 
+If FIT includes only base DTBs, how to use a base with extensions?
+
+
+
+
+>
+> In any case, maybe we need to record in dtb overlays that have been
+> applied (which you asked about recently on dtc list). Not sure what
+> that looks like though. Overlays have a 'top-level' compatible that we
+> add in either separately or merged with the base's top-level
+> compatible?
+
+
+If there is a way to make "compatible" unique, that will be good.
+
+But, in my understanding, we can replace a property value,
+but not modify it.
+
+
+
+
+--=20
+Best Regards
+Masahiro Yamada
