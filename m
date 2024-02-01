@@ -4,82 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 035D3C47258
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 02:09:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1BFEC47258
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 02:24:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E736887B71;
-	Thu,  1 Feb 2024 03:09:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 2497E8760D;
+	Thu,  1 Feb 2024 03:24:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="JZTad7qP";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="aD9Tch+j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5138687B71; Thu,  1 Feb 2024 03:09:05 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id D537287B71; Thu,  1 Feb 2024 03:24:39 +0100 (CET)
+Received: from mail-m24122.xmail.ntesmail.com (mail-m24122.xmail.ntesmail.com
+ [45.195.24.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 506C2875EB
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 03:09:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 35A23875EB
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 03:24:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahiroy@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id A633960DC6
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 02:09:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4D36EC43394
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 02:09:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1706753340;
- bh=qpgaAko8Zmepj+CsJYgEeQt49UM0kbaD3f1MmT1j9Y0=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=JZTad7qPMEODueqFLCJmkELXm9HqTKqqlK6oRGm1CWsxL5D8nj56bwWj4KHDjoGAT
- QFSmCQT+VmLNXD+YWswWbYQE+RgWqX9LeAum2/AnCvO+ta9I+CHn50rG4i6XXPokd8
- U91f0X5GdhMvb5nfvW2v79oE1kHcUNscpAFW+QK7Ai/LtGVpt0yGNS+0lYKmyWPSmr
- AHcXS6CJVm3qzRq7Z92J/0nfnmbt1MneKUR8vVc9VPcKkURXwokU2LUCQ21wdsOBZ4
- Dwa7JdsfOwSE6D4WvoP+ZjeyfdoauCZXdMi5OaSZBDyP83OphTzJriJorHSyZI3mhQ
- 73WVBu8JzlQWA==
-Received: by mail-lj1-f175.google.com with SMTP id
- 38308e7fff4ca-2cf338e1438so4124991fa.0
- for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 18:09:00 -0800 (PST)
-X-Gm-Message-State: AOJu0Yzd6x8eHO6R0PENjiDDbLIHPaMReHlr6/1IO5+URDqjNMMSiibk
- +Hcnem99jJXO6WMUeV/UbFdw1EpIjVQRHPQRjdoUTO80Mp/kck+hjziUvnvDOR8NO4Qr5eLwspu
- uzFrHzKuB0NwQ+eWQlicySUz21nY=
-X-Google-Smtp-Source: AGHT+IEZWLOW5AyfTxq3DsArqXYZjZVQKlZdAkdNup913YWdU7itR3gfTo5qLKzEsXv/ztER6wEmyRn8aAlIHDNUV8Y=
-X-Received: by 2002:a2e:a414:0:b0:2cc:78b7:1ef0 with SMTP id
- p20-20020a2ea414000000b002cc78b71ef0mr1136378ljn.4.1706753338768; Wed, 31 Jan
- 2024 18:08:58 -0800 (PST)
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=aD9Tch+jPp45qvheZKWWIgD0vCpSmqmFNAeMP3abNwAeWiVIoEpDCiBcP9WmSyFymz5PtG7Z83mdtvurl7UPd1rd8W2R7DZZ5CrXyak7K3Ci2z+1dLT+MDyV1nZe8VEsf346UayF2VuRonA6Hyoy0SeaFdx8itEOAd8yB9oie2s=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=GRZNfRwuXlSRBw2iBIVP+cK3AWqBIHOgIE+JcS4xYRs=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.93] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id CCAC9900150;
+ Thu,  1 Feb 2024 10:24:22 +0800 (CST)
+Message-ID: <387d16a8-455f-4da4-a653-75691c0876d3@rock-chips.com>
+Date: Thu, 1 Feb 2024 10:24:22 +0800
 MIME-Version: 1.0
-References: <20231202035511.487946-1-sjg@chromium.org>
- <20231202035511.487946-3-sjg@chromium.org>
- <20231213121353.GA31326@willie-the-truck>
- <CAFLszTjfmSx1YMqzb2TsQf7sP4KrcQB=X7DY_HxRQp0J5HAppQ@mail.gmail.com>
- <CAK7LNAQRCDC03e=TVO=k4FuD2a2RdTy7yLr3UptQjVCX7pM1CA@mail.gmail.com>
- <20240109143349.GR1610741@bill-the-cat>
- <CAFLszTjwhy24UiT6kUJABMC1Xn0h9Q1q9fYpZZJg9DX8Vss9cA@mail.gmail.com>
- <CAFLszTjPAHd6RdO1mvatXC=yRS+h=sgJ_pMdyEnkROTx7yRpog@mail.gmail.com>
- <CAK7LNARsY6-rrx=sNFq6oFqpqf0s5S_=3DrUsCOS7zF0BXcoTg@mail.gmail.com>
- <CAL_JsqLYB0D5wAfedsb6tQp4EmD1AROgxiCncwO7gvA2p1C6Lg@mail.gmail.com>
-In-Reply-To: <CAL_JsqLYB0D5wAfedsb6tQp4EmD1AROgxiCncwO7gvA2p1C6Lg@mail.gmail.com>
-From: Masahiro Yamada <masahiroy@kernel.org>
-Date: Thu, 1 Feb 2024 11:08:21 +0900
-X-Gmail-Original-Message-ID: <CAK7LNAR-3rL6=YdhRRXB9dz+94y2yHTA=9mF4p7OPj7KExd7rg@mail.gmail.com>
-Message-ID: <CAK7LNAR-3rL6=YdhRRXB9dz+94y2yHTA=9mF4p7OPj7KExd7rg@mail.gmail.com>
-Subject: Re: [PATCH v9 2/2] arm64: boot: Support Flat Image Tree
-To: Rob Herring <robh@kernel.org>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Will Deacon <will@kernel.org>, 
- linux-arm-kernel@lists.infradead.org, Ahmad Fatoum <a.fatoum@pengutronix.de>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Nicolas Schier <nicolas@fjasle.eu>,
- Catalin Marinas <catalin.marinas@arm.com>, Jonathan Corbet <corbet@lwn.net>, 
- Nathan Chancellor <nathan@kernel.org>, Nick Terrell <terrelln@fb.com>,
- linux-doc@vger.kernel.org, 
- linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org, 
- workflows@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rockchip: board: Add minimal generic RK3588S/RK3588 board
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20240131220854.117650-1-jonas@kwiboo.se>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20240131220854.117650-1-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQktOHlZPSUxLGEhJGh8YTE1VEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8d627b484c03a9kunmccac9900150
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PDY6Hyo5SzMOKk00ESszMlEY
+ OipPCg9VSlVKTEtNTE5PSU1ITU1OVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFDTExINwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,242 +73,239 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Feb 1, 2024 at 7:03=E2=80=AFAM Rob Herring <robh@kernel.org> wrote:
->
-> On Tue, Jan 30, 2024 at 3:16=E2=80=AFAM Masahiro Yamada <masahiroy@kernel=
-.org> wrote:
-> >
-> > On Fri, Jan 26, 2024 at 1:04=E2=80=AFAM Simon Glass <sjg@chromium.org> =
-wrote:
-> > >
-> > > Hi,
-> > >
-> > > On Wed, 17 Jan 2024 at 06:14, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi Masahiro, Tom,
-> > > >
-> > > > On Tue, 9 Jan 2024 at 07:33, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Tue, Jan 09, 2024 at 11:01:42PM +0900, Masahiro Yamada wrote:
-> > > > > > Hi Simon,
-> > > > > >
-> > > > > >
-> > > > > > On Wed, Jan 3, 2024 at 8:47=E2=80=AFAM Simon Glass <sjg@chromiu=
-m.org> wrote:
-> > > > > > >
-> > > > > > > Hi Masahiro,
-> > > > > > >
-> > > > > > > On Wed, Dec 13, 2023 at 5:14=E2=80=AFAM Will Deacon <will@ker=
-nel.org> wrote:
-> > > > > > > >
-> > > > > > > > On Fri, Dec 01, 2023 at 08:54:42PM -0700, Simon Glass wrote=
-:
-> > > > > > > > > Add a script which produces a Flat Image Tree (FIT), a si=
-ngle file
-> > > > > > > > > containing the built kernel and associated devicetree fil=
-es.
-> > > > > > > > > Compression defaults to gzip which gives a good balance o=
-f size and
-> > > > > > > > > performance.
-> > > > > > > > >
-> > > > > > > > > The files compress from about 86MB to 24MB using this app=
-roach.
-> > > > > > > > >
-> > > > > > > > > The FIT can be used by bootloaders which support it, such=
- as U-Boot
-> > > > > > > > > and Linuxboot. It permits automatic selection of the corr=
-ect
-> > > > > > > > > devicetree, matching the compatible string of the running=
- board with
-> > > > > > > > > the closest compatible string in the FIT. There is no nee=
-d for
-> > > > > > > > > filenames or other workarounds.
-> > > > > > > > >
-> > > > > > > > > Add a 'make image.fit' build target for arm64, as well. U=
-se
-> > > > > > > > > FIT_COMPRESSION to select a different algorithm.
-> > > > > > > > >
-> > > > > > > > > The FIT can be examined using 'dumpimage -l'.
-> > > > > > > > >
-> > > > > > > > > This features requires pylibfdt (use 'pip install libfdt'=
-). It also
-> > > > > > > > > requires compression utilities for the algorithm being us=
-ed. Supported
-> > > > > > > > > compression options are the same as the Image.xxx files. =
-For now there
-> > > > > > > > > is no way to change the compression other than by editing=
- the rule for
-> > > > > > > > > $(obj)/image.fit
-> > > > > > > > >
-> > > > > > > > > While FIT supports a ramdisk / initrd, no attempt is made=
- to support
-> > > > > > > > > this here, since it must be built separately from the Lin=
-ux build.
-> > > > > > > > >
-> > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > ---
-> > > > > > > > >
-> > > > > > > > > Changes in v9:
-> > > > > > > > > - Move the compression control into Makefile.lib
-> > > > > > > > >
-> > > > > > > > > Changes in v8:
-> > > > > > > > > - Drop compatible string in FDT node
-> > > > > > > > > - Correct sorting of MAINTAINERS to before ARM64 PORT
-> > > > > > > > > - Turn compress part of the make_fit.py comment in to a s=
-entence
-> > > > > > > > > - Add two blank lines before parse_args() and setup_fit()
-> > > > > > > > > - Use 'image.fit: dtbs' instead of BUILD_DTBS var
-> > > > > > > > > - Use '$(<D)/dts' instead of '$(dir $<)dts'
-> > > > > > > > > - Add 'mkimage' details Documentation/process/changes.rst
-> > > > > > > > > - Allow changing the compression used
-> > > > > > > > > - Tweak cover letter since there is only one clean-up pat=
-ch
-> > > > > > > > >
-> > > > > > > > > Changes in v7:
-> > > > > > > > > - Add Image as a dependency of image.fit
-> > > > > > > > > - Drop kbuild tag
-> > > > > > > > > - Add dependency on dtbs
-> > > > > > > > > - Drop unnecessary path separator for dtbs
-> > > > > > > > > - Rebase to -next
-> > > > > > > > >
-> > > > > > > > > Changes in v5:
-> > > > > > > > > - Drop patch previously applied
-> > > > > > > > > - Correct compression rule which was broken in v4
-> > > > > > > > >
-> > > > > > > > > Changes in v4:
-> > > > > > > > > - Use single quotes for UIMAGE_NAME
-> > > > > > > > >
-> > > > > > > > > Changes in v3:
-> > > > > > > > > - Drop temporary file image.itk
-> > > > > > > > > - Drop patch 'Use double quotes for image name'
-> > > > > > > > > - Drop double quotes in use of UIMAGE_NAME
-> > > > > > > > > - Drop unnecessary CONFIG_EFI_ZBOOT condition for help
-> > > > > > > > > - Avoid hard-coding "arm64" for the DT architecture
-> > > > > > > > >
-> > > > > > > > > Changes in v2:
-> > > > > > > > > - Drop patch previously applied
-> > > > > > > > > - Add .gitignore file
-> > > > > > > > > - Move fit rule to Makefile.lib using an intermediate fil=
-e
-> > > > > > > > > - Drop dependency on CONFIG_EFI_ZBOOT
-> > > > > > > > > - Pick up .dtb files separately from the kernel
-> > > > > > > > > - Correct pylint too-many-args warning for write_kernel()
-> > > > > > > > > - Include the kernel image in the file count
-> > > > > > > > > - Add a pointer to the FIT spec and mention of its wide i=
-ndustry usage
-> > > > > > > > > - Mention the kernel version in the FIT description
-> > > > > > > > >
-> > > > > > > > >  Documentation/process/changes.rst |   9 +
-> > > > > > > > >  MAINTAINERS                       |   7 +
-> > > > > > > > >  arch/arm64/Makefile               |   7 +-
-> > > > > > > > >  arch/arm64/boot/.gitignore        |   1 +
-> > > > > > > > >  arch/arm64/boot/Makefile          |   6 +-
-> > > > > > > > >  scripts/Makefile.lib              |  16 ++
-> > > > > > > > >  scripts/make_fit.py               | 291 ++++++++++++++++=
-++++++++++++++
-> > > > > > > > >  7 files changed, 334 insertions(+), 3 deletions(-)
-> > > > > > > > >  create mode 100755 scripts/make_fit.py
-> > > > > > > >
-> > > > > > > > I'll need Masahiro's Ack on the scripts/ changes before I c=
-an take this
-> > > > > > > > one.
-> > > > > > >
-> > > > > > > Any thoughts on this request, please?
-> > > > > > >
-> > > > > > > Regards,
-> > > > > > > Simon
-> > > > > > >
-> > > > > >
-> > > > > >
-> > > > > >
-> > > > > > As I mentioned before, I am concerned with having
-> > > > > > the same "compatible" entries, with different contents,
-> > > > > > as you use the "compatible" string as an ID to selecting
-> > > > > > the target config node, right?
-> > > > > >
-> > > > > >
-> > > > > >
-> > > > > >
-> > > > > >
-> > > > > > $ fdtdump  arch/arm64/boot/image.fit
-> > > > > >
-> > > > > >         ...
-> > > > > >
-> > > > > >         conf-10 {
-> > > > > >             compatible =3D "tq,am642-tqma6442l-mbax4xxl",
-> > > > > > "tq,am642-tqma6442l", "ti,am642";
-> > > > > >             description =3D "TQ-Systems TQMa64xxL SoM on MBax4x=
-xL carrier board";
-> > > > > >             fdt =3D "fdt-10";
-> > > > > >             kernel =3D "kernel";
-> > > > > >         };
-> > > > > >
-> > > > > >         ...
-> > > > > >
-> > > > > >         conf-25 {
-> > > > > >             compatible =3D "tq,am642-tqma6442l-mbax4xxl",
-> > > > > > "tq,am642-tqma6442l", "ti,am642";
-> > > > > >             description =3D "TQ-Systems TQMa64xxL SoM on MBax4x=
-xL carrier board";
-> > > > > >             fdt =3D "fdt-25";
-> > > > > >             kernel =3D "kernel";
-> > > > > >         };
-> > > > >
-> > > > > I had asked Rob a while ago about if having the same compatible f=
-or two
-> > > > > functionally different machines is a feature, or a bug, and I don=
-'t
-> > > > > think either of us fully agreed either way. I'd be leaning toward=
-s
-> > > > > saying the above example is a bug in the dts files, it's just not=
- been a
-> > > > > bug people have worried about before due to (sadly) how little th=
-e
-> > > > > top-level compatible has been used.
->
-> I much prefer being able to use compatibles over filenames.
->
-> > > >
-> > > > Yes I believe this is a bug in the files.
-> > > >
-> > > > What should the script do in this case? Print a warning, perhaps?
-> > >
-> > > Is there anything I should do here? Would a warning be helpful, or
-> > > just confusing?
-> >
-> >
-> >
-> > I do not think it is useful.
-> > You would almost always get a warning, and there is no way to fix it.
->
-> The above case is due to overlays. Why would you have a FIT image with
-> both a base tree and applied overlays?
+Hi Jonas,
+
+On 2024/2/1 06:08, Jonas Karlman wrote:
+> Add a minimal generic RK3588S/RK3588 board that only have eMMC and SDMMC
+> enabled. This defconfig can be used to boot from eMMC or SD-card on most
+> RK3588S/RK3588 boards that follow reference board design.
+
+For rk3399, the evb-rk3399 is used as generic board because almost all 
+the boards which
+
+follow the rockchip reference design can boot with evb-rk3399_defconfig.
+
+For rk3588, I think we can still use evb-rk3588 as generic board instead 
+of a new generic-rk3588?
+
+Since the board level dts will have to relate to IO, regulator, key and 
+so on, a virtual board
+
+may not able to decide which IO/Hardware to use.
 
 
+Thanks,
 
-Because they are different hardware.
-
-If FIT includes only base DTBs, how to use a base with extensions?
-
-
-
+- Kever
 
 >
-> In any case, maybe we need to record in dtb overlays that have been
-> applied (which you asked about recently on dtc list). Not sure what
-> that looks like though. Overlays have a 'top-level' compatible that we
-> add in either separately or merged with the base's top-level
-> compatible?
-
-
-If there is a way to make "compatible" unique, that will be good.
-
-But, in my understanding, we can replace a property value,
-but not modify it.
-
-
-
-
---=20
-Best Regards
-Masahiro Yamada
+> Also fix the alphabetical order of RK3588 boards listed in Makefile and
+> documentation.
+>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> ---
+> This patch depend on the series "rockchip: rk35xx: Sync device tree
+> with linux v6.8-rc1" [1].
+>
+> [1] https://patchwork.ozlabs.org/cover/1891669/
+> ---
+>   arch/arm/dts/Makefile                   |  5 +-
+>   arch/arm/dts/rk3588-generic-u-boot.dtsi |  3 ++
+>   arch/arm/dts/rk3588-generic.dts         | 44 ++++++++++++++++
+>   board/rockchip/evb_rk3588/MAINTAINERS   |  7 +++
+>   configs/generic-rk3588_defconfig        | 68 +++++++++++++++++++++++++
+>   doc/board/rockchip/rockchip.rst         |  3 +-
+>   6 files changed, 127 insertions(+), 3 deletions(-)
+>   create mode 100644 arch/arm/dts/rk3588-generic-u-boot.dtsi
+>   create mode 100644 arch/arm/dts/rk3588-generic.dts
+>   create mode 100644 configs/generic-rk3588_defconfig
+>
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index 0fcae77cefe3..6361bc5abc37 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -193,13 +193,14 @@ dtb-$(CONFIG_ROCKCHIP_RK3588) += \
+>   	rk3588-edgeble-neu6a-io.dtb \
+>   	rk3588-edgeble-neu6b-io.dtb \
+>   	rk3588-evb1-v10.dtb \
+> +	rk3588-generic.dtb \
+>   	rk3588-nanopc-t6.dtb \
+>   	rk3588s-orangepi-5.dtb \
+>   	rk3588-orangepi-5-plus.dtb \
+>   	rk3588-quartzpro64.dtb \
+> -	rk3588-turing-rk1.dtb \
+>   	rk3588s-rock-5a.dtb \
+> -	rk3588-rock-5b.dtb
+> +	rk3588-rock-5b.dtb \
+> +	rk3588-turing-rk1.dtb
+>   
+>   dtb-$(CONFIG_ROCKCHIP_RV1108) += \
+>   	rv1108-elgin-r1.dtb \
+> diff --git a/arch/arm/dts/rk3588-generic-u-boot.dtsi b/arch/arm/dts/rk3588-generic-u-boot.dtsi
+> new file mode 100644
+> index 000000000000..853ed58cfe58
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3588-generic-u-boot.dtsi
+> @@ -0,0 +1,3 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +#include "rk3588s-u-boot.dtsi"
+> diff --git a/arch/arm/dts/rk3588-generic.dts b/arch/arm/dts/rk3588-generic.dts
+> new file mode 100644
+> index 000000000000..e4721d97a87d
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3588-generic.dts
+> @@ -0,0 +1,44 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Minimal generic DT for RK3588S/RK3588 with eMMC and SD-card enabled
+> + */
+> +
+> +/dts-v1/;
+> +#include "rk3588s.dtsi"
+> +
+> +/ {
+> +	model = "Generic RK3588S/RK3588";
+> +	compatible = "rockchip,rk3588";
+> +
+> +	aliases {
+> +		mmc0 = &sdhci;
+> +		mmc1 = &sdmmc;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = "serial2:1500000n8";
+> +	};
+> +};
+> +
+> +&sdhci {
+> +	bus-width = <8>;
+> +	cap-mmc-highspeed;
+> +	mmc-hs200-1_8v;
+> +	no-sd;
+> +	no-sdio;
+> +	non-removable;
+> +	status = "okay";
+> +};
+> +
+> +&sdmmc {
+> +	bus-width = <4>;
+> +	cap-sd-highspeed;
+> +	disable-wp;
+> +	no-mmc;
+> +	no-sdio;
+> +	status = "okay";
+> +};
+> +
+> +&uart2 {
+> +	status = "okay";
+> +};
+> diff --git a/board/rockchip/evb_rk3588/MAINTAINERS b/board/rockchip/evb_rk3588/MAINTAINERS
+> index 2bd44bc58728..eb771da7b7a0 100644
+> --- a/board/rockchip/evb_rk3588/MAINTAINERS
+> +++ b/board/rockchip/evb_rk3588/MAINTAINERS
+> @@ -7,6 +7,13 @@ F:	configs/evb-rk3588_defconfig
+>   F:	arch/arm/dts/rk3588-evb1-v10.dts
+>   F:	arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
+>   
+> +GENERIC-RK3588
+> +M:	Jonas Karlman <jonas@kwiboo.se>
+> +S:	Maintained
+> +F:	configs/generic-rk3588_defconfig
+> +F:	arch/arm/dts/rk3588-generic.dts
+> +F:	arch/arm/dts/rk3588-generic-u-boot.dtsi
+> +
+>   ORANGEPI-5-RK3588
+>   M:	Jonas Karlman <jonas@kwiboo.se>
+>   S:	Maintained
+> diff --git a/configs/generic-rk3588_defconfig b/configs/generic-rk3588_defconfig
+> new file mode 100644
+> index 000000000000..4755b27c1dea
+> --- /dev/null
+> +++ b/configs/generic-rk3588_defconfig
+> @@ -0,0 +1,68 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_TEXT_BASE=0x00a00000
+> +CONFIG_SPL_LIBCOMMON_SUPPORT=y
+> +CONFIG_SPL_LIBGENERIC_SUPPORT=y
+> +CONFIG_NR_DRAM_BANKS=2
+> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
+> +CONFIG_DEFAULT_DEVICE_TREE="rk3588-generic"
+> +CONFIG_ROCKCHIP_RK3588=y
+> +CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_SPL_STACK_R_ADDR=0x600000
+> +CONFIG_TARGET_EVB_RK3588=y
+> +CONFIG_SPL_STACK=0x400000
+> +CONFIG_DEBUG_UART_BASE=0xFEB50000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SYS_LOAD_ADDR=0xc00800
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> +CONFIG_OF_BOARD_SETUP=y
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-generic.dtb"
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +CONFIG_SPL_PAD_TO=0x7f8000
+> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> +CONFIG_SPL_BSS_START_ADDR=0x4000000
+> +CONFIG_SPL_BSS_MAX_SIZE=0x4000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+> +CONFIG_SPL_STACK_R=y
+> +CONFIG_SPL_ATF=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_MMC=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_OF_LIVE=y
+> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> +CONFIG_SPL_DM_SEQ_ALIAS=y
+> +CONFIG_SPL_REGMAP=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_SPL_CLK=y
+> +CONFIG_ROCKCHIP_GPIO=y
+> +CONFIG_MISC=y
+> +CONFIG_SUPPORT_EMMC_RPMB=y
+> +CONFIG_MMC_HS200_SUPPORT=y
+> +CONFIG_SPL_MMC_HS200_SUPPORT=y
+> +CONFIG_MMC_DW=y
+> +CONFIG_MMC_DW_ROCKCHIP=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_SPL_PINCTRL=y
+> +CONFIG_SPL_RAM=y
+> +CONFIG_BAUDRATE=1500000
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_SYSRESET=y
+> +CONFIG_ERRNO_STR=y
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+> index 9fe69fc9422f..393c84a1309c 100644
+> --- a/doc/board/rockchip/rockchip.rst
+> +++ b/doc/board/rockchip/rockchip.rst
+> @@ -116,10 +116,11 @@ List of mainline supported Rockchip boards:
+>        - Edgeble Neural Compute Module 6A SoM - Neu6a (neu6a-io-rk3588)
+>        - Edgeble Neural Compute Module 6B SoM - Neu6b (neu6b-io-rk3588)
+>        - FriendlyElec NanoPC-T6 (nanopc-t6-rk3588)
+> +     - Generic RK3588S/RK3588 (generic-rk3588)
+>        - Pine64 QuartzPro64 (quartzpro64-rk3588)
+> -     - Turing Machines RK1 (turing-rk1-rk3588)
+>        - Radxa ROCK 5A (rock5a-rk3588s)
+>        - Radxa ROCK 5B (rock5b-rk3588)
+> +     - Turing Machines RK1 (turing-rk1-rk3588)
+>        - Xunlong Orange Pi 5 (orangepi-5-rk3588s)
+>        - Xunlong Orange Pi 5 Plus (orangepi-5-plus-rk3588)
+>   
