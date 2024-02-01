@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B4F7C47DDF
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 05:32:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C645FC47DDF
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 06:33:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96D538785E;
-	Thu,  1 Feb 2024 06:32:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
+	by phobos.denx.de (Postfix) with ESMTP id 07E588756C;
+	Thu,  1 Feb 2024 07:33:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="qZTxKXs7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Tc9yRElg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD4F28785E; Thu,  1 Feb 2024 06:32:08 +0100 (CET)
-Received: from cpanel.siel.si (cpanel.siel.si [46.19.9.99])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8009F87579; Thu,  1 Feb 2024 07:33:51 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D20A887776
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 06:32:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 854628753E
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 07:33:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=norik.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=primoz.fiser@norik.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
- s=default;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=W2G9lTDtEckUCRkXC41gzMk6T509gFdhiF322m++nc4=; b=qZTxKXs7DY0qB+um/Toxr+6S72
- XAdIbaputowobWbCfHZtSqC/fMj+q9s45XIioKJqriipx6B+SH8WHbnhCGWTzAtKtMjiy8rO/SzxH
- 1apxiEPRCIv//8sBT3Q0dB/48heM6eo60Pq0DZN7D9Z9ON773I2Svi8MoEDObp+eerEUf+8FKmAOH
- 0hwaT1E2CPi0dL1h/IGGjRD1W//4MIZ/4MhhRZe+p7JxuAW3QPHmZU6EuAH08L2bg7/mlJ0xVUANd
- JhKOWnGsMw+DspyRfZrR5qRvdNXE7s/xDjoyNDDdb7nr0Jl4EsnC7jbBNpITvYggC0KrkmRqtcs0+
- OS824P5A==;
-Received: from [89.212.21.243] (port=51934 helo=[192.168.69.116])
- by cpanel.siel.si with esmtpsa (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96.2)
- (envelope-from <primoz.fiser@norik.com>) id 1rVPgD-000y1u-1N;
- Thu, 01 Feb 2024 06:32:05 +0100
-Message-ID: <115a88bd-8939-48ff-890c-7bc126a695eb@norik.com>
-Date: Thu, 1 Feb 2024 06:32:04 +0100
+ spf=pass smtp.mailfrom=o451686892@gmail.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-55817a12ad8so633169a12.2
+ for <u-boot@lists.denx.de>; Wed, 31 Jan 2024 22:33:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706769229; x=1707374029; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HDiNUQh8huzRqlNbeSGKbdE/qnZ2KfnadNje1EVhBPU=;
+ b=Tc9yRElgmGmxYGMmlZ1Y+yd07LZpIxvNbsL+eiIOiiWRiYcvxZvfGNDbld9L92jjh0
+ m9qZ41NeJnrE037rzs3k+WTfrIkWju/YBEiNCygmEYpXx2hZCDl2MZipPJM5KxsbKCtX
+ VhZ+ue91eaVE7j3wajDfmdwC6KmYCS5H6nKIzjqrMMo9U4lkWa5xzJOBWEDRcjldv5cn
+ GcgvOHWYFkL3eckEL6ueH0FJyeLki879ks4X9CjhrjzEtZbzlA6/cDDhAtsxaXYm4e5U
+ 9u4EnIWYki+G54xinX/ulWB29YVbJMvvx6VNsJVTASdcsItvDio6Et6pmbAkxrAa5G39
+ VZKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706769229; x=1707374029;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=HDiNUQh8huzRqlNbeSGKbdE/qnZ2KfnadNje1EVhBPU=;
+ b=CFAJPb5CmUj6zO5FNJAJpWiGZKkVeHPVuj13MzuiT2d3MZrAmuAlx7iidfpxq31Osh
+ 7MxQHQOuehasL9YtglSV4bdFgKvwR9MLfXfre4WakPFZ6U5VhcfHyAMa4C4ijxXbPQs+
+ VbWVpuDTLuxFoOG5vK5Q4BCVdFARRXNo99Rfk6t2lXmx20v0tcoJTRhAODblxv+O0wpk
+ tq8upmfARgEOdarJ2zeYFOKS1tLWADGPxuBsVdqA8ZwAVakvF/2XY10531xJqQ265x0i
+ tZHUiapqkP6tJc20zpWrLXWRSxrIWu7mPRbi88ldEJgp0erAYT1EajhuXPsyvD5S+bgT
+ l9aQ==
+X-Gm-Message-State: AOJu0YymcqM7jCGL7ZBygneytIinCgfRNnvNUqhlwxHE0IrRFcv75UZZ
+ NCbZdTMMg5MaYxuWpI0sTsEquuBEuj6pvFrfO8Gicjp5oKyIaj36MGR4rViK5EdkIFDeO3XT1+P
+ hHDDl+wqMVwonWED/jTjBG5EsJjQ=
+X-Google-Smtp-Source: AGHT+IEwX+yzGtO8gw4sr1ajh34x4zQz3S873WQ9cE0goOst9WZxJqxmDWxD8PB+WmE6ICs8IKAw2WFmPV+BRv5VcsQ=
+X-Received: by 2002:a05:6402:150f:b0:55f:c78a:765e with SMTP id
+ f15-20020a056402150f00b0055fc78a765emr53298edw.5.1706769228278; Wed, 31 Jan
+ 2024 22:33:48 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] board: phytec: phycore-imx93: Add
- phyBOARD-Segin-i.MX93 support
-To: Mathieu Othacehe <othacehe@gnu.org>, Peng Fan <peng.fan@nxp.com>,
- Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@denx.de>,
- Fabio Estevam <festevam@gmail.com>,
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
- Mathieu Othacehe <m.othacehe@gmail.com>,
- Christoph Stoidner <c.stoidner@phytec.de>, Wadim Egorov
- <w.egorov@phytec.de>, Yannic Moog <Y.Moog@phytec.de>
-Cc: u-boot@lists.denx.de, upstream@lists.phytec.de
-References: <20240130145037.32672-1-othacehe@gnu.org>
-Content-Language: en-US
-From: Primoz Fiser <primoz.fiser@norik.com>
-Organization: Norik systems d.o.o.
-In-Reply-To: <20240130145037.32672-1-othacehe@gnu.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cpanel.siel.si
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - norik.com
-X-Get-Message-Sender-Via: cpanel.siel.si: authenticated_id:
- primoz.fiser@norik.com
-X-Authenticated-Sender: cpanel.siel.si: primoz.fiser@norik.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+References: <20240126232615.6826-1-jonas@kwiboo.se>
+ <20240126232615.6826-3-jonas@kwiboo.se>
+In-Reply-To: <20240126232615.6826-3-jonas@kwiboo.se>
+From: Weizhao Ouyang <o451686892@gmail.com>
+Date: Thu, 1 Feb 2024 14:33:36 +0800
+Message-ID: <CAHk0HouFqN527cv6TnxXOP9wGVezz8yXK_xoahAV+rprhpfikg@mail.gmail.com>
+Subject: Re: [PATCH 2/3] rockchip: rk356x: Enable eMMC HS200 mode
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>, 
+ Chris Morgan <macromorgan@hotmail.com>,
+ Frank Wunderlich <frank-w@public-files.de>, 
+ Joseph Chen <chenjh@rock-chips.com>, Andy Yan <andyshrk@163.com>, 
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Akash Gajjar <gajjar04akash@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,81 +95,203 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mathieu,
+On Sat, Jan 27, 2024 at 10:32=E2=80=AFAM Jonas Karlman <jonas@kwiboo.se> wr=
+ote:
+>
+> Writing to eMMC using HS200 mode work more reliably then other modes on
+> RK356x boards.
+>
+> Enable MMC_HS200_SUPPORT Kconfig option to prefer use of HS200 mode.
+>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 
-Thanks for v4. I have no more remarks.
-
-Also tested your v4 on the board.
-
-Everything works, even eMMC booting which you were not able to test.
-
-With that my Tested-by: can be applied.
-
-Tested-by: Primoz Fiser <primoz.fiser@norik.com>
+Reviewed-by: Weizhao Ouyang <o451686892@gmail.com>
 
 BR,
-Primoz
+Weizhao
 
-On 30. 01. 24 15:50, Mathieu Othacehe wrote:
-> Add initial support for the PHYTEC phyBOARD-Segin-i.MX93 board based on
-> the PHYTEC phyCORE-i.MX93 SoM.
-> 
-> Supported features:
-> - 1GB LPDDR4 RAM
-> - eMMC
-> - external SD
-> - FEC Ethernet
-> - debug UART
-> - watchdog
-> 
-> Signed-off-by: Mathieu Othacehe <othacehe@gnu.org>
 > ---
-> Hello,
-> 
-> This new revision fixes the remarks of Primoz. The configuration is now
-> aligned on the savedefconfig output. The FEC Ethernet is also tested to be
-> working if this patch is in:
-> 
-> https://patchwork.ozlabs.org/project/uboot/patch/20240130124337.497748-1-primoz.fiser@norik.com/
-> 
-> The proposed patch has been rebased on top of 6faba41.
-> 
-> Thanks,
-> 
-> Mathieu
-> 
-> v3: https://lists.denx.de/pipermail/u-boot/2024-January/544493.html
-> 
->  arch/arm/dts/Makefile                         |    3 +-
->  arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi |  293 ++++
->  arch/arm/dts/imx93-phyboard-segin.dts         |  117 ++
->  arch/arm/dts/imx93-phycore-som.dtsi           |  126 ++
->  arch/arm/mach-imx/imx9/Kconfig                |    6 +
->  board/phytec/phycore_imx93/Kconfig            |   13 +
->  board/phytec/phycore_imx93/MAINTAINERS        |   10 +
->  board/phytec/phycore_imx93/Makefile           |   14 +
->  board/phytec/phycore_imx93/lpddr4_timing.c    | 1546 +++++++++++++++++
->  board/phytec/phycore_imx93/phycore-imx93.c    |   42 +
->  board/phytec/phycore_imx93/phycore_imx93.env  |   73 +
->  board/phytec/phycore_imx93/spl.c              |  148 ++
->  configs/imx93-phyboard-segin_defconfig        |  138 ++
->  doc/board/phytec/imx93-phyboard-segin.rst     |   61 +
->  doc/board/phytec/index.rst                    |    1 +
->  include/configs/phycore_imx93.h               |   28 +
->  16 files changed, 2618 insertions(+), 1 deletion(-)
->  create mode 100644 arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
->  create mode 100644 arch/arm/dts/imx93-phyboard-segin.dts
->  create mode 100644 arch/arm/dts/imx93-phycore-som.dtsi
->  create mode 100644 board/phytec/phycore_imx93/Kconfig
->  create mode 100644 board/phytec/phycore_imx93/MAINTAINERS
->  create mode 100644 board/phytec/phycore_imx93/Makefile
->  create mode 100644 board/phytec/phycore_imx93/lpddr4_timing.c
->  create mode 100644 board/phytec/phycore_imx93/phycore-imx93.c
->  create mode 100644 board/phytec/phycore_imx93/phycore_imx93.env
->  create mode 100644 board/phytec/phycore_imx93/spl.c
->  create mode 100644 configs/imx93-phyboard-segin_defconfig
->  create mode 100644 doc/board/phytec/imx93-phyboard-segin.rst
->  create mode 100644 include/configs/phycore_imx93.h
-> 
-
-<snip>
+>  configs/anbernic-rgxx3-rk3566_defconfig   | 2 ++
+>  configs/bpi-r2-pro-rk3568_defconfig       | 2 ++
+>  configs/evb-rk3568_defconfig              | 2 ++
+>  configs/lubancat-2-rk3568_defconfig       | 2 ++
+>  configs/odroid-m1-rk3568_defconfig        | 2 ++
+>  configs/quartz64-a-rk3566_defconfig       | 2 ++
+>  configs/quartz64-b-rk3566_defconfig       | 2 ++
+>  configs/radxa-cm3-io-rk3566_defconfig     | 2 ++
+>  configs/rock-3a-rk3568_defconfig          | 2 ++
+>  configs/soquartz-blade-rk3566_defconfig   | 2 ++
+>  configs/soquartz-cm4-rk3566_defconfig     | 2 ++
+>  configs/soquartz-model-a-rk3566_defconfig | 2 ++
+>  12 files changed, 24 insertions(+)
+>
+> diff --git a/configs/anbernic-rgxx3-rk3566_defconfig b/configs/anbernic-r=
+gxx3-rk3566_defconfig
+> index ed6643d9d4fa..295c0bd3fc61 100644
+> --- a/configs/anbernic-rgxx3-rk3566_defconfig
+> +++ b/configs/anbernic-rgxx3-rk3566_defconfig
+> @@ -61,6 +61,8 @@ CONFIG_ROCKCHIP_GPIO=3Dy
+>  CONFIG_SYS_I2C_ROCKCHIP=3Dy
+>  CONFIG_MISC=3Dy
+>  CONFIG_SUPPORT_EMMC_RPMB=3Dy
+> +CONFIG_MMC_HS200_SUPPORT=3Dy
+> +CONFIG_SPL_MMC_HS200_SUPPORT=3Dy
+>  CONFIG_MMC_DW=3Dy
+>  CONFIG_MMC_DW_ROCKCHIP=3Dy
+>  CONFIG_MMC_SDHCI=3Dy
+> diff --git a/configs/bpi-r2-pro-rk3568_defconfig b/configs/bpi-r2-pro-rk3=
+568_defconfig
+> index e6e0e6fc6fa6..c9e1cd2c2c85 100644
+> --- a/configs/bpi-r2-pro-rk3568_defconfig
+> +++ b/configs/bpi-r2-pro-rk3568_defconfig
+> @@ -60,6 +60,8 @@ CONFIG_SYS_I2C_ROCKCHIP=3Dy
+>  CONFIG_MISC=3Dy
+>  CONFIG_SUPPORT_EMMC_RPMB=3Dy
+>  CONFIG_SUPPORT_EMMC_BOOT=3Dy
+> +CONFIG_MMC_HS200_SUPPORT=3Dy
+> +CONFIG_SPL_MMC_HS200_SUPPORT=3Dy
+>  CONFIG_MMC_DW=3Dy
+>  CONFIG_MMC_DW_ROCKCHIP=3Dy
+>  CONFIG_MMC_SDHCI=3Dy
+> diff --git a/configs/evb-rk3568_defconfig b/configs/evb-rk3568_defconfig
+> index cb9b87ff12cb..19eab9bf00ac 100644
+> --- a/configs/evb-rk3568_defconfig
+> +++ b/configs/evb-rk3568_defconfig
+> @@ -54,6 +54,8 @@ CONFIG_ROCKCHIP_GPIO=3Dy
+>  CONFIG_SYS_I2C_ROCKCHIP=3Dy
+>  CONFIG_MISC=3Dy
+>  CONFIG_SUPPORT_EMMC_RPMB=3Dy
+> +CONFIG_MMC_HS200_SUPPORT=3Dy
+> +CONFIG_SPL_MMC_HS200_SUPPORT=3Dy
+>  CONFIG_MMC_DW=3Dy
+>  CONFIG_MMC_DW_ROCKCHIP=3Dy
+>  CONFIG_MMC_SDHCI=3Dy
+> diff --git a/configs/lubancat-2-rk3568_defconfig b/configs/lubancat-2-rk3=
+568_defconfig
+> index 80ae6ec3a2e9..c06a447fda26 100644
+> --- a/configs/lubancat-2-rk3568_defconfig
+> +++ b/configs/lubancat-2-rk3568_defconfig
+> @@ -55,6 +55,8 @@ CONFIG_ROCKCHIP_GPIO=3Dy
+>  CONFIG_SYS_I2C_ROCKCHIP=3Dy
+>  CONFIG_MISC=3Dy
+>  CONFIG_SUPPORT_EMMC_RPMB=3Dy
+> +CONFIG_MMC_HS200_SUPPORT=3Dy
+> +CONFIG_SPL_MMC_HS200_SUPPORT=3Dy
+>  CONFIG_MMC_DW=3Dy
+>  CONFIG_MMC_DW_ROCKCHIP=3Dy
+>  CONFIG_MMC_SDHCI=3Dy
+> diff --git a/configs/odroid-m1-rk3568_defconfig b/configs/odroid-m1-rk356=
+8_defconfig
+> index 3130e341e776..7fed6e7da597 100644
+> --- a/configs/odroid-m1-rk3568_defconfig
+> +++ b/configs/odroid-m1-rk3568_defconfig
+> @@ -72,6 +72,8 @@ CONFIG_ROCKCHIP_GPIO=3Dy
+>  CONFIG_SYS_I2C_ROCKCHIP=3Dy
+>  CONFIG_MISC=3Dy
+>  CONFIG_SUPPORT_EMMC_RPMB=3Dy
+> +CONFIG_MMC_HS200_SUPPORT=3Dy
+> +CONFIG_SPL_MMC_HS200_SUPPORT=3Dy
+>  CONFIG_MMC_DW=3Dy
+>  CONFIG_MMC_DW_ROCKCHIP=3Dy
+>  CONFIG_MMC_SDHCI=3Dy
+> diff --git a/configs/quartz64-a-rk3566_defconfig b/configs/quartz64-a-rk3=
+566_defconfig
+> index ade08867f60f..fd6b0e528834 100644
+> --- a/configs/quartz64-a-rk3566_defconfig
+> +++ b/configs/quartz64-a-rk3566_defconfig
+> @@ -71,6 +71,8 @@ CONFIG_ROCKCHIP_GPIO=3Dy
+>  CONFIG_SYS_I2C_ROCKCHIP=3Dy
+>  CONFIG_MISC=3Dy
+>  CONFIG_SUPPORT_EMMC_RPMB=3Dy
+> +CONFIG_MMC_HS200_SUPPORT=3Dy
+> +CONFIG_SPL_MMC_HS200_SUPPORT=3Dy
+>  CONFIG_MMC_DW=3Dy
+>  CONFIG_MMC_DW_ROCKCHIP=3Dy
+>  CONFIG_MMC_SDHCI=3Dy
+> diff --git a/configs/quartz64-b-rk3566_defconfig b/configs/quartz64-b-rk3=
+566_defconfig
+> index 8d01db54407d..ec7a677fd3d3 100644
+> --- a/configs/quartz64-b-rk3566_defconfig
+> +++ b/configs/quartz64-b-rk3566_defconfig
+> @@ -69,6 +69,8 @@ CONFIG_ROCKCHIP_GPIO=3Dy
+>  CONFIG_SYS_I2C_ROCKCHIP=3Dy
+>  CONFIG_MISC=3Dy
+>  CONFIG_SUPPORT_EMMC_RPMB=3Dy
+> +CONFIG_MMC_HS200_SUPPORT=3Dy
+> +CONFIG_SPL_MMC_HS200_SUPPORT=3Dy
+>  CONFIG_MMC_DW=3Dy
+>  CONFIG_MMC_DW_ROCKCHIP=3Dy
+>  CONFIG_MMC_SDHCI=3Dy
+> diff --git a/configs/radxa-cm3-io-rk3566_defconfig b/configs/radxa-cm3-io=
+-rk3566_defconfig
+> index 4b606dcb8e94..10626acfdea2 100644
+> --- a/configs/radxa-cm3-io-rk3566_defconfig
+> +++ b/configs/radxa-cm3-io-rk3566_defconfig
+> @@ -55,6 +55,8 @@ CONFIG_ROCKCHIP_GPIO=3Dy
+>  CONFIG_SYS_I2C_ROCKCHIP=3Dy
+>  CONFIG_MISC=3Dy
+>  CONFIG_SUPPORT_EMMC_RPMB=3Dy
+> +CONFIG_MMC_HS200_SUPPORT=3Dy
+> +CONFIG_SPL_MMC_HS200_SUPPORT=3Dy
+>  CONFIG_MMC_DW=3Dy
+>  CONFIG_MMC_DW_ROCKCHIP=3Dy
+>  CONFIG_MMC_SDHCI=3Dy
+> diff --git a/configs/rock-3a-rk3568_defconfig b/configs/rock-3a-rk3568_de=
+fconfig
+> index 18372a570eb7..2b944163f5a9 100644
+> --- a/configs/rock-3a-rk3568_defconfig
+> +++ b/configs/rock-3a-rk3568_defconfig
+> @@ -68,6 +68,8 @@ CONFIG_ROCKCHIP_GPIO=3Dy
+>  CONFIG_SYS_I2C_ROCKCHIP=3Dy
+>  CONFIG_MISC=3Dy
+>  CONFIG_SUPPORT_EMMC_RPMB=3Dy
+> +CONFIG_MMC_HS200_SUPPORT=3Dy
+> +CONFIG_SPL_MMC_HS200_SUPPORT=3Dy
+>  CONFIG_MMC_DW=3Dy
+>  CONFIG_MMC_DW_ROCKCHIP=3Dy
+>  CONFIG_MMC_SDHCI=3Dy
+> diff --git a/configs/soquartz-blade-rk3566_defconfig b/configs/soquartz-b=
+lade-rk3566_defconfig
+> index 9693cc2f9eb9..af04dccf4923 100644
+> --- a/configs/soquartz-blade-rk3566_defconfig
+> +++ b/configs/soquartz-blade-rk3566_defconfig
+> @@ -62,6 +62,8 @@ CONFIG_ROCKCHIP_GPIO=3Dy
+>  CONFIG_SYS_I2C_ROCKCHIP=3Dy
+>  CONFIG_MISC=3Dy
+>  CONFIG_SUPPORT_EMMC_RPMB=3Dy
+> +CONFIG_MMC_HS200_SUPPORT=3Dy
+> +CONFIG_SPL_MMC_HS200_SUPPORT=3Dy
+>  CONFIG_MMC_DW=3Dy
+>  CONFIG_MMC_DW_ROCKCHIP=3Dy
+>  CONFIG_MMC_SDHCI=3Dy
+> diff --git a/configs/soquartz-cm4-rk3566_defconfig b/configs/soquartz-cm4=
+-rk3566_defconfig
+> index 9c6b12d23028..e669ca14c1cc 100644
+> --- a/configs/soquartz-cm4-rk3566_defconfig
+> +++ b/configs/soquartz-cm4-rk3566_defconfig
+> @@ -62,6 +62,8 @@ CONFIG_ROCKCHIP_GPIO=3Dy
+>  CONFIG_SYS_I2C_ROCKCHIP=3Dy
+>  CONFIG_MISC=3Dy
+>  CONFIG_SUPPORT_EMMC_RPMB=3Dy
+> +CONFIG_MMC_HS200_SUPPORT=3Dy
+> +CONFIG_SPL_MMC_HS200_SUPPORT=3Dy
+>  CONFIG_MMC_DW=3Dy
+>  CONFIG_MMC_DW_ROCKCHIP=3Dy
+>  CONFIG_MMC_SDHCI=3Dy
+> diff --git a/configs/soquartz-model-a-rk3566_defconfig b/configs/soquartz=
+-model-a-rk3566_defconfig
+> index fd72d78a47a8..3beeab1dbba8 100644
+> --- a/configs/soquartz-model-a-rk3566_defconfig
+> +++ b/configs/soquartz-model-a-rk3566_defconfig
+> @@ -63,6 +63,8 @@ CONFIG_ROCKCHIP_GPIO=3Dy
+>  CONFIG_SYS_I2C_ROCKCHIP=3Dy
+>  CONFIG_MISC=3Dy
+>  CONFIG_SUPPORT_EMMC_RPMB=3Dy
+> +CONFIG_MMC_HS200_SUPPORT=3Dy
+> +CONFIG_SPL_MMC_HS200_SUPPORT=3Dy
+>  CONFIG_MMC_DW=3Dy
+>  CONFIG_MMC_DW_ROCKCHIP=3Dy
+>  CONFIG_MMC_SDHCI=3Dy
+> --
+> 2.43.0
+>
