@@ -4,59 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59F2CC47DB3
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 03:19:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7849C47258
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 03:19:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9F0087C7B;
-	Thu,  1 Feb 2024 04:19:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5BE7087C8F;
+	Thu,  1 Feb 2024 04:19:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="kxbagDqf";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="iylUHX2p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A44287C87; Thu,  1 Feb 2024 04:19:37 +0100 (CET)
-Received: from mail-m3296.qiye.163.com (mail-m3296.qiye.163.com
- [220.197.32.96])
+ id 605DD87C8F; Thu,  1 Feb 2024 04:19:46 +0100 (CET)
+Received: from mail-m21473.qiye.163.com (mail-m21473.qiye.163.com
+ [117.135.214.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB7AB8799C
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 04:19:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E7D2A8799C
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 04:19:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=kxbagDqfZR1CoMzl+drmRUYa4+DO33gjgUkyj3SCVkvjosOdpFTwD7fBc+zlDl8yCMr6XbB3T1mPwFqUFdFKvRnfurdM8z1Ov85rbqtJeRe4SCpfeLPRPLCi+DfLELro/zMsmFrdUOjbumf4IeWGBRk1pqdTGhAKYMub4NfsXW8=;
+ b=iylUHX2pCH2N7O1LU8VUqEVXFrpKbXqmkLYLKXwzvnW8QbDnZg/nua+US/iV1FNDjy0SIMKsYly6LEYsr7w5oViTAFstq3g7NmzJYlkhPT+QzIH89WF/SzRQFoi3J6SfopjL6ARcWJYZ+xiju92xmOgNvtirpdhclU7yNKWD3XQ=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=jh/EBp1oilNnQLyr9dOg4tmX1b8+MHPvXpbuuBLFlCo=;
+ bh=1aRl3AwMOyFWIrMeqN3haisgpQxwjAtkKVlnOxQ6Eeo=;
  h=date:mime-version:subject:message-id:from;
 Received: from [192.168.60.65] (unknown [103.29.142.67])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 6330D9001C2;
- Thu,  1 Feb 2024 11:19:21 +0800 (CST)
-Message-ID: <1b2996c7-d5e8-42f4-b979-606f90db8880@rock-chips.com>
-Date: Thu, 1 Feb 2024 11:19:21 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 9391D9001AC;
+ Thu,  1 Feb 2024 11:19:10 +0800 (CST)
+Message-ID: <9df0b07c-8f83-4500-90c8-1875db20668a@rock-chips.com>
+Date: Thu, 1 Feb 2024 11:19:10 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 6/6] rockchip: rv1126: Move RAM disk address
+Subject: Re: [PATCH v2 5/6] rockchip: rv1126: select SPL_OPTEE_IMAGE
 Content-Language: en-US
 To: Tim Lunn <tim@feathertop.org>, u-boot@lists.denx.de
-Cc: Jagan Teki <jagan@edgeble.ai>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
+Cc: Jagan Teki <jagan@edgeble.ai>, Johan Jonker <jbx6244@gmail.com>,
+ John Keeping <john@metanate.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Massimo Pegorer <massimo.pegorer+oss@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 References: <20240124032602.126059-1-tim@feathertop.org>
- <20240124032602.126059-7-tim@feathertop.org>
+ <20240124032602.126059-6-tim@feathertop.org>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240124032602.126059-7-tim@feathertop.org>
+In-Reply-To: <20240124032602.126059-6-tim@feathertop.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaHxgeVhpDGR8fGkodS0NLQlUTARMWGhIXJBQOD1
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaGU1KVkkYTxhLQk8eTR5PTFUTARMWGhIXJBQOD1
  lXWRgSC1lBWUpLSFVJQlVKT0lVTUxZV1kWGg8SFR0UWUFZT0tIVUpNT0lOSFVKS0tVSkJLS1kG
-X-HM-Tid: 0a8d62ad9e9803a9kunm6330d9001c2
+X-HM-Tid: 0a8d62ad76ef03a9kunm9391d9001ac
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PRQ6Mjo*SjMUDE0vSxUCAwsL
- Ci4KFBBVSlVKTEtNTE5MTk1JT0tPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUlKTEw3Bg++
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pj46AQw6GjMNKk0fPBANAxYI
+ LxJPCQpVSlVKTEtNTE5MTk5JT0pLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUlNTEI3Bg++
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,34 +79,33 @@ X-Virus-Status: Clean
 
 
 On 2024/1/24 11:26, Tim Lunn wrote:
-> OPTEE gets loaded into a memory region overlapping with the ram disk.
+> rv1126 requires OPTEE as it provides pcsi support. Mainline Linux
+> kernel will fail to boot without this.
 >
-> Fix the ramdisk address so it doesn't overlap with the OPTEE memory
-> region.
+> Select SPL_OPTEE_IMAGE when building FIT image. TEE must be provided
+> when building.
 >
 > Signed-off-by: Tim Lunn <tim@feathertop.org>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
->
 > ---
 >
 > (no changes since v1)
 >
->   include/configs/rv1126_common.h | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   arch/arm/mach-rockchip/Kconfig | 1 +
+>   1 file changed, 1 insertion(+)
 >
-> diff --git a/include/configs/rv1126_common.h b/include/configs/rv1126_common.h
-> index 168cd8b167..ea290f763c 100644
-> --- a/include/configs/rv1126_common.h
-> +++ b/include/configs/rv1126_common.h
-> @@ -26,7 +26,7 @@
->   	"fdt_addr_r=0x08300000\0" \
->   	"fdtoverlay_addr_r=0x02000000\0" \
->   	"kernel_addr_r=0x02008000\0" \
-> -	"ramdisk_addr_r=0x0a200000\0"
-> +	"ramdisk_addr_r=0x0a400000\0"
->   
->   #define CFG_EXTRA_ENV_SETTINGS \
->   	"fdt_high=0x0fffffff\0" \
+> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+> index 6ff0aa6911..cce118a004 100644
+> --- a/arch/arm/mach-rockchip/Kconfig
+> +++ b/arch/arm/mach-rockchip/Kconfig
+> @@ -359,6 +359,7 @@ config ROCKCHIP_RV1126
+>   	select PMIC_RK8XX
+>   	select BOARD_LATE_INIT
+>   	imply ROCKCHIP_COMMON_BOARD
+> +	select SPL_OPTEE_IMAGE if SPL_FIT
+>   	imply OF_LIBFDT_OVERLAY
+>   	imply ROCKCHIP_OTP
+>   	imply MISC_INIT_R
