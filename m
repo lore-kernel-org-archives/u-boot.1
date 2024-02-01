@@ -4,91 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DF67C4828D
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 14:34:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41AD4C4828D
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 14:36:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDC0387C78;
-	Thu,  1 Feb 2024 15:34:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A4D1B87C76;
+	Thu,  1 Feb 2024 15:36:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="w0FgtGTZ";
+	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="PkoqWmk1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F286187C76; Thu,  1 Feb 2024 15:34:33 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id D305287C9E; Thu,  1 Feb 2024 15:36:30 +0100 (CET)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 440C987C78
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 15:34:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DBD9C87C66
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 15:36:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=foundries.io
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-33b1b21c020so179741f8f.0
- for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 06:34:29 -0800 (PST)
+ spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-510218c4a0eso2000447e87.1
+ for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 06:36:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706798068; x=1707402868; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Xty1A/YKB+bP1+68m+kZFtA+OaqBYfl1/DT11huMdL4=;
- b=w0FgtGTZkdtRTi3CC3hi8ozScnN4z80PLhmBgtdb6ASP5J4n+go6XbI7SFmHBO9DYr
- hvGDQ9bD6Dy/NgnT3aQkpd9PW9UvjoC9wullJUXOCYsEZoo4USuM0DOuSDW0gdp4XImG
- X3dJvRWge+SaeQX2YvSzQqPiQDczSxfnHl39DOZIJKOUv5tbQxbZ3fXGmMaULxrJnJgG
- El1yKa9tv4mm8anqsuPOEI1FtRycMDyaSX6kzGic7aeW8Tupe1+YcpjziSk7haf6OLtF
- XoBD+Y/7V3mjjwXDNwsgH1rm8p1HLulmP7a3PhBFghgon4bdMtNm7pWl7uzcD9GQLBJZ
- CPaA==
+ d=foundries.io; s=google; t=1706798188; x=1707402988; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=08L9iU6l2d0oQPEG46aYtc1bhnX/nVuQTSQZH0IX9oo=;
+ b=PkoqWmk19tg6O4XePzcYNG7oZYCPiLJq0mDqAoXKSQPdY2qPuZ73ArwLHGe4bOXDeH
+ rdDPphkhGzRhaYm2mgbqmWUW7LsxVjtUq3BPLWZfjhcr8Z/fnp6TxrOSJVA1O3VgQdBK
+ SRDoWaGXvh1XUDdhUKBcxY9nSCgA75t+VY6/bxhvePaOnjx4wBJHfOvlNrnDnjNk12s5
+ 3xbU6tuEYTjrpEMk3seGBrNmT3CPehLanz6Q3HtA68mSj28Uo+I7M33LkMv4d9EvVfDp
+ cUHOEwE4427VLlAyO53I8Gz85GjJEuNxTTQ3y9nrGjfpohTBWsPuOKjm8GHp1y/rbfCJ
+ Q44g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706798068; x=1707402868;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Xty1A/YKB+bP1+68m+kZFtA+OaqBYfl1/DT11huMdL4=;
- b=J9dSROMTCCREjlsNGm8ggzbvmiL+83uAJFaQL8WiLpcbmpq31iLxyGKffkdx1CdwHI
- 3lMsIsRt0JiItU6eEgbokwzspY3J/5WW6drv35rPxjzi/jKmmQ0acFKO6dFEbnavVkDo
- PFdRmh/h3qNL+oZlWAfT7MzdsLvVNdVaxqwS3DKVB6MgNzRVI8NpO7bY6dANZcSv05Co
- r43s6vHdGcVF4Msj+SpDpUbzmjCvV8paKAEd+jVN+Io4+kvgJe1iySoG/kt0NF0f6mdB
- KVs86AhlQjVgOJvNegJBeXc59tTWXlUvqqgz96qa3Do+5Dq382G48Z5lbb+K4bSgngZi
- eOqQ==
-X-Gm-Message-State: AOJu0YzruLFFjjcA5elwbmWbrtg/YyswBrSQCh7hJYwa4fVWJGgsfN0i
- eDpu9UmTWwU14mBfTVW0xMj12WEVd05knelHbMDi/OikfbDcx6ltGJFzuvH+ldQ=
-X-Google-Smtp-Source: AGHT+IEYAeajAM23rULB5kn6UpqIT2kuFn5+eXpn8FY3yt1mGFz3RRe+5Cbs+Was1zgyTaeddLfuVA==
-X-Received: by 2002:a5d:4445:0:b0:33b:187c:4ca0 with SMTP id
- x5-20020a5d4445000000b0033b187c4ca0mr1001961wrr.62.1706798068657; 
- Thu, 01 Feb 2024 06:34:28 -0800 (PST)
-X-Forwarded-Encrypted: i=0;
- AJvYcCXuLAtbwV9ttQXFGIlAZ0X8Tm9vWnomqlvb+O3KrFhs/je5hTBavv8ivciYibptN6056Usb6lrvLYUq+cSVeAVGN+bfwflhH4NzIHMM2ZkBeTwc79hn4zvDwHvIrUMtGHcPvqKZrnz6QOH0iQfTbv27zph1H0Cnw8UrHLvhjULBXrbtIvQLCi0NvDrj+sCqn9nvXVl7yJdprjR33J6vkO77DFQGSml7sImi6qpTqwrkj3QCrXrhx0VJAgw9Npnp8hN6LwciLNAvnftHAZHXGHE3BSEHLyvnVASACICBI0hRKMBk2fzi/YvL6T/KuI1Gw9NENBNv6NZHSTMzkE1P3vt8WbUGdUlsqZ5WQRzDXx+n349XNAHk7I5UWRmicH8JRS/a
-Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
- by smtp.gmail.com with ESMTPSA id
- d2-20020adf9c82000000b0033929310ae4sm16384680wre.73.2024.02.01.06.34.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 01 Feb 2024 06:34:28 -0800 (PST)
-Message-ID: <cefe7d3b-876e-4680-b9e2-6b612579b803@linaro.org>
-Date: Thu, 1 Feb 2024 14:34:27 +0000
+ d=1e100.net; s=20230601; t=1706798188; x=1707402988;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=08L9iU6l2d0oQPEG46aYtc1bhnX/nVuQTSQZH0IX9oo=;
+ b=hwyv2XyhVOA5iDpk7lMth7aWX7i05e1S6g+5lVG8TVoalj0XvH4oOE/GzsNabSpO+J
+ Pas9WkHTzQJSDJtIFpzjwoXPYIuEGi3R4xtNWCM58rPmDr8HrcHEUTWXzmHAKC1rKPGL
+ lRC0C6IJHpZ4XdvAzW5QEEYst1OF3s9Zia6n5q/4DhF2mhmDt7RlHHmon3L/7N12mCFT
+ jGGXE8pkVht91yX2Jyz0e802yDtKIrPub8WUjR+YsFVm4dE9SkBoYNUrszYtAkH7ij5T
+ jKrGrIbUB3d2yRaWg3+Y16NvfULUL32xL631qOJgcra2vjI1Sq3gZgfVo15A5jgaLONL
+ 4qZQ==
+X-Gm-Message-State: AOJu0YxLN4vcpHi+3Sp+z8doMeGlGdaQYGWNttNea1OD9TvIp0uXlaDJ
+ FQvB0yz94VZxouZm4WM5dGxp8LKkg2MDx9lq9BcVw1TOFgs7vyF2y3iJA//mTa0wUg+RpR9QOw6
+ 17XCz65PVrfi6yJi8d+TXOGxDHSOQQ4aIqmLAWw==
+X-Google-Smtp-Source: AGHT+IHioHzDwc/cDlueszMfUSQc/7QUbU5jfViE/OLFzxrqChOmpWqW8ZYMUWEdJdnuIww0yGcKWOoCBFfT+ao5isk=
+X-Received: by 2002:a05:6512:3134:b0:510:24dc:aa8f with SMTP id
+ p20-20020a056512313400b0051024dcaa8fmr1009202lfd.14.1706798188043; Thu, 01
+ Feb 2024 06:36:28 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 03/36] mmc: msm_sdhci: use modern clock handling
-Content-Language: en-US
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski
- <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-References: <20240130-b4-qcom-common-target-v3-0-e523cbf9e556@linaro.org>
- <20240130-b4-qcom-common-target-v3-3-e523cbf9e556@linaro.org>
- <CAFA6WYPveDeXdq70-jRV7ZM80g6kZN2=45gFgy92qv49xirfAw@mail.gmail.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFA6WYPveDeXdq70-jRV7ZM80g6kZN2=45gFgy92qv49xirfAw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20240131141426.34926-1-o451686892@gmail.com>
+ <20240131141426.34926-2-o451686892@gmail.com>
+In-Reply-To: <20240131141426.34926-2-o451686892@gmail.com>
+From: Igor Opaniuk <igor.opaniuk@foundries.io>
+Date: Thu, 1 Feb 2024 15:36:16 +0100
+Message-ID: <CAL6CDMGrR9YQzs6iLbKmzwMWXYyX15-ngv2vBDbkW-FSfr38kA@mail.gmail.com>
+Subject: Re: [PATCH v3 1/3] firmware: psci: Fix bind_smccc_features psci check
+To: Weizhao Ouyang <o451686892@gmail.com>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Tom Rini <trini@konsulko.com>, Etienne Carriere <etienne.carriere@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,157 +94,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello Weizhao,
+
+On Wed, Jan 31, 2024 at 3:15=E2=80=AFPM Weizhao Ouyang <o451686892@gmail.co=
+m> wrote:
+>
+> According to PSCI specification DEN0022F, PSCI_FEATURES is used to check
+> whether the SMCCC is implemented by discovering SMCCC_VERSION.
+>
+Could you please add more details to your commit message or as a comment
+explaining what exact steps should be done for a full discovery sequence of=
+ Arm
+Architecture Service functions, so people don't need to search for
+that information explicitly?
+
+For instance:
+Step 1: Determine if SMCCC_VERSION is implemented
+- Use firmware data, device tree PSCI node, or ACPI FADT PSCI flag, to
+determine whether a
+PSCI implementation is present.
+- Use PSCI_VERSION to learn whether PSCI_FEATURES is provided. PSCI_FEATURE=
+S is
+mandatory from version 1.0 of PSCI
+Step 2. etc.
+
+I would just pull that info from the latest SMC Calling Convention version =
+1.5,
+from 9 Appendix B: Discovery of Arm Architecture Service functions.
+
+Thank you!
+> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
+> ---
+> v3: remove fallback smc call
+> v2: check SMCCC_ARCH_FEATURES
+> ---
+>  drivers/firmware/psci.c   | 5 ++++-
+>  include/linux/arm-smccc.h | 6 ++++++
+>  2 files changed, 10 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/firmware/psci.c b/drivers/firmware/psci.c
+> index c6b9efab41..03544d76ed 100644
+> --- a/drivers/firmware/psci.c
+> +++ b/drivers/firmware/psci.c
+> @@ -135,10 +135,13 @@ static int bind_smccc_features(struct udevice *dev,=
+ int psci_method)
+>             PSCI_VERSION_MAJOR(psci_0_2_get_version()) =3D=3D 0)
+>                 return 0;
+>
+> -       if (request_psci_features(ARM_SMCCC_ARCH_FEATURES) =3D=3D
+> +       if (request_psci_features(ARM_SMCCC_VERSION) =3D=3D
+>             PSCI_RET_NOT_SUPPORTED)
+>                 return 0;
+>
+> +       if (invoke_psci_fn(ARM_SMCCC_VERSION, 0, 0, 0) < ARM_SMCCC_VERSIO=
+N_1_1)
+> +               return 0;
+> +
+IMO, to fully comply with SMC Calling Convention version 1.5
+we should also check for SMCCC_ARCH_WORKAROUND_1:
+
+From 9 Appendix B: Discovery of Arm Architecture Service functions,
+Step 2: Determine if Arm Architecture Service function is implemented
+- Use SMCCC_VERSION to learn whether the calling convention complies
+to version 1.1 or above.
+- Use SMCCC_ARCH_FEATURES to query whether the Arm Architecture
+Service function is implemented
+on this system <--- we lack of this step
+
+>         if (psci_method =3D=3D PSCI_METHOD_HVC)
+>                 pdata->invoke_fn =3D smccc_invoke_hvc;
+>         else
+> diff --git a/include/linux/arm-smccc.h b/include/linux/arm-smccc.h
+> index f44e9e8f93..da3d29aabe 100644
+> --- a/include/linux/arm-smccc.h
+> +++ b/include/linux/arm-smccc.h
+> @@ -55,8 +55,14 @@
+>  #define ARM_SMCCC_QUIRK_NONE           0
+>  #define ARM_SMCCC_QUIRK_QCOM_A6                1 /* Save/restore registe=
+r a6 */
+>
+> +#define ARM_SMCCC_VERSION              0x80000000
+>  #define ARM_SMCCC_ARCH_FEATURES                0x80000001
+>
+> +#define ARM_SMCCC_VERSION_1_0          0x10000
+> +#define ARM_SMCCC_VERSION_1_1          0x10001
+> +#define ARM_SMCCC_VERSION_1_2          0x10002
+> +#define ARM_SMCCC_VERSION_1_3          0x10003
+> +
+>  #define ARM_SMCCC_RET_NOT_SUPPORTED    ((unsigned long)-1)
+>
+>  #ifndef __ASSEMBLY__
+> --
+> 2.39.2
+>
 
 
-On 01/02/2024 08:19, Sumit Garg wrote:
-> On Tue, 30 Jan 2024 at 19:35, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>
->> Use the clk_* helper functions and the correct property name for clocks.
-> 
-> This still doesn't handle fixed clocks like in case of QCS404, upstream DT says:
-> 
->                 sdcc1: mmc@7804000 {
->                         compatible = "qcom,qcs404-sdhci", "qcom,sdhci-msm-v5";
->                         ...
->                         clocks = <&gcc GCC_SDCC1_AHB_CLK>,
->                                  <&gcc GCC_SDCC1_APPS_CLK>,
->                                  <&xo_board>;
->                         clock-names = "iface", "core", "xo";
->                         ...
->                 };
-> 
-> Due to that "xo" fixed clock we get:
-> 
-> MMC:   clk_set_rate(clk=00000000ffaf7348, rate=19200000)
-> Unknown clock id 0
-> clk_set_rate(clk=00000000ffaf7598, rate=19200000)
-> Unknown clock id 0
-> clk_set_rate(clk=00000000ffb08868, rate=400000)
-> mmc@7804000: 0
+--=20
+Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
 
-Does MMC work? This doesn't look like a probe failure to me.
-
-But yes this does look odd, somehow qcs404_clk_set_rate() is being
-called with clk->id == 0. The xo_board clock uses a different driver so
-it can't be that...
-
-Could you try and add some more logging around here? I can't see what
-might be causing this.
-> 
-> -Sumit
-> 
->>
->> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->>  drivers/mmc/msm_sdhci.c | 69 ++++++++++++++++++++++++++++++++-----------------
->>  1 file changed, 46 insertions(+), 23 deletions(-)
->>
->> diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
->> index 604f9c3ff99c..863e6007a905 100644
->> --- a/drivers/mmc/msm_sdhci.c
->> +++ b/drivers/mmc/msm_sdhci.c
->> @@ -44,6 +44,7 @@ struct msm_sdhc_plat {
->>  struct msm_sdhc {
->>         struct sdhci_host host;
->>         void *base;
->> +       struct clk_bulk clks;
->>  };
->>
->>  struct msm_sdhc_variant_info {
->> @@ -54,36 +55,56 @@ DECLARE_GLOBAL_DATA_PTR;
->>
->>  static int msm_sdc_clk_init(struct udevice *dev)
->>  {
->> -       int node = dev_of_offset(dev);
->> -       uint clk_rate = fdtdec_get_uint(gd->fdt_blob, node, "clock-frequency",
->> -                                       400000);
->> -       uint clkd[2]; /* clk_id and clk_no */
->> -       int clk_offset;
->> -       struct udevice *clk_dev;
->> -       struct clk clk;
->> -       int ret;
->> +       struct msm_sdhc *prv = dev_get_priv(dev);
->> +       ofnode node = dev_ofnode(dev);
->> +       uint clk_rate;
->> +       int ret, i = 0, n_clks;
->> +       const char *clk_name;
->>
->> -       ret = fdtdec_get_int_array(gd->fdt_blob, node, "clock", clkd, 2);
->> +       ret = ofnode_read_u32(node, "clock-frequency", &clk_rate);
->>         if (ret)
->> -               return ret;
->> +               clk_rate = 400000;
->>
->> -       clk_offset = fdt_node_offset_by_phandle(gd->fdt_blob, clkd[0]);
->> -       if (clk_offset < 0)
->> -               return clk_offset;
->> -
->> -       ret = uclass_get_device_by_of_offset(UCLASS_CLK, clk_offset, &clk_dev);
->> -       if (ret)
->> +       ret = clk_get_bulk(dev, &prv->clks);
->> +       if (ret) {
->> +               debug("Couldn't get mmc clocks: %d\n", ret);
->>                 return ret;
->> +       }
->>
->> -       clk.id = clkd[1];
->> -       ret = clk_request(clk_dev, &clk);
->> -       if (ret < 0)
->> +       ret = clk_enable_bulk(&prv->clks);
->> +       if (ret) {
->> +               debug("Couldn't enable mmc clocks: %d\n", ret);
->>                 return ret;
->> +       }
->>
->> -       ret = clk_set_rate(&clk, clk_rate);
->> -       clk_free(&clk);
->> -       if (ret < 0)
->> -               return ret;
->> +       /* If clock-names is unspecified, then the first clock is the core clock */
->> +       if (!ofnode_get_property(node, "clock-names", &n_clks)) {
->> +               if (!clk_set_rate(&prv->clks.clks[0], clk_rate)) {
->> +                       printf("Couldn't set core clock rate: %d\n", ret);
->> +                       return -EINVAL;
->> +               }
->> +       }
->> +
->> +       /* Find the index of the "core" clock */
->> +       while (i < n_clks) {
->> +               ofnode_read_string_index(node, "clock-names", i, &clk_name);
->> +               if (!strcmp(clk_name, "core"))
->> +                       break;
->> +               i++;
->> +       }
->> +
->> +       if (i >= prv->clks.count) {
->> +               printf("Couldn't find core clock (index %d but only have %d clocks)\n", i,
->> +                      prv->clks.count);
->> +               return -EINVAL;
->> +       }
->> +
->> +       /* The clock is already enabled by the clk_bulk above */
->> +       ret = clk_set_rate(&prv->clks.clks[i], clk_rate);
->> +       if (!ret) {
->> +               printf("Couldn't set core clock rate: %d\n", ret);
->> +               return -EINVAL;
->> +       }
->>
->>         return 0;
->>  }
->> @@ -188,6 +209,8 @@ static int msm_sdc_remove(struct udevice *dev)
->>         if (!var_info->mci_removed)
->>                 writel(0, priv->base + SDCC_MCI_HC_MODE);
->>
->> +       clk_release_bulk(&priv->clks);
->> +
->>         return 0;
->>  }
->>
->>
->> --
->> 2.43.0
->>
-
--- 
-// Caleb (they/them)
+Igor Opaniuk
+Senior Software Engineer, Embedded & Security
+E: igor.opaniuk@foundries.io
+W: www.foundries.io
