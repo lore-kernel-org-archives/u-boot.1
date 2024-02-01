@@ -4,69 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 869DFC48286
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 04:02:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B4F7C47DDF
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 05:32:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E017387C2F;
-	Thu,  1 Feb 2024 05:02:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 96D538785E;
+	Thu,  1 Feb 2024 06:32:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="ItdWgWYd";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="qZTxKXs7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C561C87C44; Thu,  1 Feb 2024 05:02:54 +0100 (CET)
-Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DD4F28785E; Thu,  1 Feb 2024 06:32:08 +0100 (CET)
+Received: from cpanel.siel.si (cpanel.siel.si [46.19.9.99])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACA8887C2F
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 05:02:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id D20A887776
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 06:32:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=none (p=none dis=none) header.from=norik.com
+Authentication-Results: phobos.denx.de;
+ spf=none smtp.mailfrom=primoz.fiser@norik.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
+ s=default;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=W2G9lTDtEckUCRkXC41gzMk6T509gFdhiF322m++nc4=; b=qZTxKXs7DY0qB+um/Toxr+6S72
+ XAdIbaputowobWbCfHZtSqC/fMj+q9s45XIioKJqriipx6B+SH8WHbnhCGWTzAtKtMjiy8rO/SzxH
+ 1apxiEPRCIv//8sBT3Q0dB/48heM6eo60Pq0DZN7D9Z9ON773I2Svi8MoEDObp+eerEUf+8FKmAOH
+ 0hwaT1E2CPi0dL1h/IGGjRD1W//4MIZ/4MhhRZe+p7JxuAW3QPHmZU6EuAH08L2bg7/mlJ0xVUANd
+ JhKOWnGsMw+DspyRfZrR5qRvdNXE7s/xDjoyNDDdb7nr0Jl4EsnC7jbBNpITvYggC0KrkmRqtcs0+
+ OS824P5A==;
+Received: from [89.212.21.243] (port=51934 helo=[192.168.69.116])
+ by cpanel.siel.si with esmtpsa (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96.2)
+ (envelope-from <primoz.fiser@norik.com>) id 1rVPgD-000y1u-1N;
+ Thu, 01 Feb 2024 06:32:05 +0100
+Message-ID: <115a88bd-8939-48ff-890c-7bc126a695eb@norik.com>
+Date: Thu, 1 Feb 2024 06:32:04 +0100
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1706760171;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=0u50TFohILISQ4GZwmOPsVo9WTgv+8iVVpZkAdYpV/Q=;
- b=ItdWgWYdkzNM4ltsUlqf5/TFgkch1dzSjMTNBEKtQPRPxBjNlntBY6WXbu9WXOfBzXES9k
- w3sHsWJjF43X5ZQY6oT8dAhvGXkdk3+DcG+9dp0ZVd0U07sua6wgV1tuynnhfY5tCNs9C8
- cyQBd4lq4Z0Gcm6PdtZvY5GeG9Do4OxmsToLKibg+8PiUB2miii2cwUgCTzyamr+i2WHeg
- AcUH8vFmELjrejWj4nsVMSJdR6Zpf6BjB+GV50P7kVMz82Yz28esjSXuGEy8pmldDWkXoW
- A6J5W2usTxWq6OPIX3anDoXHw8zOcqix2eNPvtouoxgiLd08fKNuRxzd2Qjp8A==
-Date: Thu, 01 Feb 2024 05:02:48 +0100
-From: Dragan Simic <dsimic@manjaro.org>
-To: Kever Yang <kever.yang@rock-chips.com>
-Cc: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Peter Robinson
- <pbrobinson@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>, Klaus Goger
- <klaus.goger@theobroma-systems.com>, Heiko Stuebner
- <heiko.stuebner@cherry.de>, Otavio Salvador <otavio@ossystems.com.br>, Andy
- Yan <andy.yan@rock-chips.com>, Manivannan Sadhasivam
- <manivannan.sadhasivam@linaro.org>, Lukasz Majewski <lukma@denx.de>, Sean
- Anderson <seanga2@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Anatolij Gustschin
- <agust@denx.de>, heiko@sntech.de, u-boot@lists.denx.de, Quentin Schulz
- <quentin.schulz@theobroma-systems.com>
-Subject: Re: [PATCH 06/18] rockchip: pine64: pinebook: migrate to
- rockchip_early_misc_init_r
-In-Reply-To: <86f059d7-c2db-4b23-bc50-0317c70efdae@rock-chips.com>
-References: <20240123-jaguar-v1-0-1eec1c34953c@theobroma-systems.com>
- <20240123-jaguar-v1-6-1eec1c34953c@theobroma-systems.com>
- <86f059d7-c2db-4b23-bc50-0317c70efdae@rock-chips.com>
-Message-ID: <ef680bb049878ca5b97a2a257c918db2@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] board: phytec: phycore-imx93: Add
+ phyBOARD-Segin-i.MX93 support
+To: Mathieu Othacehe <othacehe@gnu.org>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@denx.de>,
+ Fabio Estevam <festevam@gmail.com>,
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ Mathieu Othacehe <m.othacehe@gmail.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>, Wadim Egorov
+ <w.egorov@phytec.de>, Yannic Moog <Y.Moog@phytec.de>
+Cc: u-boot@lists.denx.de, upstream@lists.phytec.de
+References: <20240130145037.32672-1-othacehe@gnu.org>
+Content-Language: en-US
+From: Primoz Fiser <primoz.fiser@norik.com>
+Organization: Norik systems d.o.o.
+In-Reply-To: <20240130145037.32672-1-othacehe@gnu.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cpanel.siel.si
+X-AntiAbuse: Original Domain - lists.denx.de
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - norik.com
+X-Get-Message-Sender-Via: cpanel.siel.si: authenticated_id:
+ primoz.fiser@norik.com
+X-Authenticated-Sender: cpanel.siel.si: primoz.fiser@norik.com
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,73 +92,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Kever and Quentin,
+Hi Mathieu,
 
-On 2024-02-01 03:48, Kever Yang wrote:
-> On 2024/1/23 22:49, Quentin Schulz wrote:
->> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
->> 
->> Compared to the original misc_init_r from Rockchip mach code,
->> setup_iodomain() is added and rockchip_setup_macaddr() is not called.
->> 
->> It is assumed adding rockchip_setup_macaddr() back is fine.
->> Let's use rockchip_early_misc_init_r instead of reimplementing the 
->> whole
->> misc_init_r from Rockchip (the side effect being that
->> rockchip_setup_macaddr() is back).
+Thanks for v4. I have no more remarks.
 
-We might actually introduce some issues with this change.  I'll get
-back later with a more detailed explanation, together with a proposed
-fix, after I check it all in detail.
+Also tested your v4 on the board.
 
-This applies to some other patches in this series as well.
+Everything works, even eMMC booting which you were not able to test.
 
->> Cc: Quentin Schulz <foss+uboot@0leil.net>
->> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+With that my Tested-by: can be applied.
+
+Tested-by: Primoz Fiser <primoz.fiser@norik.com>
+
+BR,
+Primoz
+
+On 30. 01. 24 15:50, Mathieu Othacehe wrote:
+> Add initial support for the PHYTEC phyBOARD-Segin-i.MX93 board based on
+> the PHYTEC phyCORE-i.MX93 SoM.
+> 
+> Supported features:
+> - 1GB LPDDR4 RAM
+> - eMMC
+> - external SD
+> - FEC Ethernet
+> - debug UART
+> - watchdog
+> 
+> Signed-off-by: Mathieu Othacehe <othacehe@gnu.org>
+> ---
+> Hello,
+> 
+> This new revision fixes the remarks of Primoz. The configuration is now
+> aligned on the savedefconfig output. The FEC Ethernet is also tested to be
+> working if this patch is in:
+> 
+> https://patchwork.ozlabs.org/project/uboot/patch/20240130124337.497748-1-primoz.fiser@norik.com/
+> 
+> The proposed patch has been rebased on top of 6faba41.
 > 
 > Thanks,
-> - Kever
->> ---
->>   board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c | 18 
->> ++----------------
->>   1 file changed, 2 insertions(+), 16 deletions(-)
->> 
->> diff --git a/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c 
->> b/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
->> index 4ad780767ea..2408a367305 100644
->> --- a/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
->> +++ b/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
->> @@ -11,7 +11,6 @@
->>   #include <asm/arch-rockchip/clock.h>
->>   #include <asm/arch-rockchip/grf_rk3399.h>
->>   #include <asm/arch-rockchip/hardware.h>
->> -#include <asm/arch-rockchip/misc.h>
->>   #include <linux/printk.h>
->>   #include <power/regulator.h>
->>   @@ -54,23 +53,10 @@ static void setup_iodomain(void)
->>   	rk_setreg(&pmugrf->soc_con0, 1 << PMUGRF_CON0_VSEL_SHIFT);
->>   }
->>   -int misc_init_r(void)
->> +int rockchip_early_misc_init_r(void)
->>   {
->> -	const u32 cpuid_offset = 0x7;
->> -	const u32 cpuid_length = 0x10;
->> -	u8 cpuid[cpuid_length];
->> -	int ret;
->> -
->>   	setup_iodomain();
->>   -	ret = rockchip_cpuid_from_efuse(cpuid_offset, cpuid_length, 
->> cpuid);
->> -	if (ret)
->> -		return ret;
->> -
->> -	ret = rockchip_cpuid_set(cpuid, cpuid_length);
->> -	if (ret)
->> -		return ret;
->> -
->> -	return ret;
->> +	return 0;
->>   }
->>   #endif
->> 
+> 
+> Mathieu
+> 
+> v3: https://lists.denx.de/pipermail/u-boot/2024-January/544493.html
+> 
+>  arch/arm/dts/Makefile                         |    3 +-
+>  arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi |  293 ++++
+>  arch/arm/dts/imx93-phyboard-segin.dts         |  117 ++
+>  arch/arm/dts/imx93-phycore-som.dtsi           |  126 ++
+>  arch/arm/mach-imx/imx9/Kconfig                |    6 +
+>  board/phytec/phycore_imx93/Kconfig            |   13 +
+>  board/phytec/phycore_imx93/MAINTAINERS        |   10 +
+>  board/phytec/phycore_imx93/Makefile           |   14 +
+>  board/phytec/phycore_imx93/lpddr4_timing.c    | 1546 +++++++++++++++++
+>  board/phytec/phycore_imx93/phycore-imx93.c    |   42 +
+>  board/phytec/phycore_imx93/phycore_imx93.env  |   73 +
+>  board/phytec/phycore_imx93/spl.c              |  148 ++
+>  configs/imx93-phyboard-segin_defconfig        |  138 ++
+>  doc/board/phytec/imx93-phyboard-segin.rst     |   61 +
+>  doc/board/phytec/index.rst                    |    1 +
+>  include/configs/phycore_imx93.h               |   28 +
+>  16 files changed, 2618 insertions(+), 1 deletion(-)
+>  create mode 100644 arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
+>  create mode 100644 arch/arm/dts/imx93-phyboard-segin.dts
+>  create mode 100644 arch/arm/dts/imx93-phycore-som.dtsi
+>  create mode 100644 board/phytec/phycore_imx93/Kconfig
+>  create mode 100644 board/phytec/phycore_imx93/MAINTAINERS
+>  create mode 100644 board/phytec/phycore_imx93/Makefile
+>  create mode 100644 board/phytec/phycore_imx93/lpddr4_timing.c
+>  create mode 100644 board/phytec/phycore_imx93/phycore-imx93.c
+>  create mode 100644 board/phytec/phycore_imx93/phycore_imx93.env
+>  create mode 100644 board/phytec/phycore_imx93/spl.c
+>  create mode 100644 configs/imx93-phyboard-segin_defconfig
+>  create mode 100644 doc/board/phytec/imx93-phyboard-segin.rst
+>  create mode 100644 include/configs/phycore_imx93.h
+> 
+
+<snip>
