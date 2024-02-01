@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF369C47258
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 03:18:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7703C47DB3
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 03:18:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C0A487C56;
-	Thu,  1 Feb 2024 04:18:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B196587C74;
+	Thu,  1 Feb 2024 04:18:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="bXMHZhnJ";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="e4+4jDbt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06F0A87C5F; Thu,  1 Feb 2024 04:18:35 +0100 (CET)
-Received: from mail-m1973194.qiye.163.com (mail-m1973194.qiye.163.com
- [220.197.31.94])
+ id F170E87C75; Thu,  1 Feb 2024 04:18:41 +0100 (CET)
+Received: from mail-m121150.qiye.163.com (mail-m121150.qiye.163.com
+ [115.236.121.150])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1B4387C4B
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 04:18:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0514287C77
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 04:18:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=bXMHZhnJP17NMMTb/ysywHK3EcrN5MHBgDWg5VlQQbTLie2bKP/OwDJHBDpW6B/pM36DewpQ7xXySm/YIauEYLN8hICsiJlBPGmaIQ0RinnVnoca9kPqbNQJzyE3ACSmtYWOORar9Ag37HJC4V2hTQRSmDNIUz6ZFnTXWO+GWiE=;
+ b=e4+4jDbtUkK1f7nvOtXegXLaXHNBiv9lzXe+XyNYZrjBKeAuESBn/A2uIU7lbaU8RTaa42nYFUQ7l6zLqGwR3+3PLmROw78hWpkOw/QrvyF5P41Vq2FoeurFcSWHxgQmubbK7WbMEclOBULfcfPvdIqAnQQDVIawjimtrOMlh88=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=/TBhwwhIe5hS4zbT53fxXYuJ7D7p5rtAEdxYa1f/OIY=;
+ bh=oFX1xhtQweA5HoupPBYHHkncNqcLWlFX4z7S2WNZ62s=;
  h=date:mime-version:subject:message-id:from;
 Received: from [192.168.60.65] (unknown [103.29.142.67])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 97C1A90017B;
- Thu,  1 Feb 2024 11:17:35 +0800 (CST)
-Message-ID: <14569bd8-2389-4918-8b33-dd25a9bec1f2@rock-chips.com>
-Date: Thu, 1 Feb 2024 11:17:35 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 1A3E99000E6;
+ Thu,  1 Feb 2024 11:18:06 +0800 (CST)
+Message-ID: <2f574d73-63ac-406c-8a20-6f0b33a21bee@rock-chips.com>
+Date: Thu, 1 Feb 2024 11:18:05 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/6] ram: rockchip: Add rv1126 ddr4 support
+Subject: Re: [PATCH v2 3/6] rockchip: Convert rv1126 to standard boot
 Content-Language: en-US
 To: Tim Lunn <tim@feathertop.org>, u-boot@lists.denx.de
-Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Cc: Jagan Teki <jagan@edgeble.ai>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
 References: <20240124032602.126059-1-tim@feathertop.org>
- <20240124032602.126059-3-tim@feathertop.org>
+ <20240124032602.126059-4-tim@feathertop.org>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240124032602.126059-3-tim@feathertop.org>
+In-Reply-To: <20240124032602.126059-4-tim@feathertop.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaGUwYVkIeTkkdSRofGhlKGFUTARMWGhIXJBQOD1
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCHUtCVk0eSR9LGkNKSBpIQ1UTARMWGhIXJBQOD1
  lXWRgSC1lBWUpLSFVJQlVKT0lVTUxZV1kWGg8SFR0UWUFZT0tIVUpNT0lOSFVKS0tVSkJLS1kG
-X-HM-Tid: 0a8d62ac033503a9kunm97c1a90017b
+X-HM-Tid: 0a8d62ac77b703a9kunm1a3e99000e6
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MUk6OQw4QzMSGE0XLBEKHS8d
- HBYKFEJVSlVKTEtNTE5MT05MSk1IVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUlKSUxINwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Mww6UQw4NTMKCE1KFhwhHQNW
+ KBQaCh5VSlVKTEtNTE5MT0NNQ0xOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUhKSUg3Bg++
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,619 +75,60 @@ X-Virus-Status: Clean
 
 
 On 2024/1/24 11:25, Tim Lunn wrote:
-> Add support for ddr4 on rv1126. Timing detection files are imported
-> from downstream Rockchip BSP u-boot. Allow selecting ddr4 ram with
-> define CONFIG_RAM_ROCKCHIP_DDR4.
+> RV1126 soc appears to have been missed with the conversion of
+> rockchip socs to standard boot.
+>
+> Remove remnants of distro boot for rv1126 common and the one
+> existing board.
 >
 > Signed-off-by: Tim Lunn <tim@feathertop.org>
+> Link: https://lore.kernel.org/all/20230407223645.v8.8.I4cf7708a1ba953b9abd81375d93af34665c7b251@changeid/
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
+>
 > ---
 >
-> (no changes since v1)
+> Changes in v2:
+> - New patch to clean up distro boot from rv1126_common.h
 >
->   .../sdram-rv1126-ddr4-detect-1056.inc         | 75 +++++++++++++++++++
->   .../rockchip/sdram-rv1126-ddr4-detect-328.inc | 75 +++++++++++++++++++
->   .../rockchip/sdram-rv1126-ddr4-detect-396.inc | 75 +++++++++++++++++++
->   .../rockchip/sdram-rv1126-ddr4-detect-528.inc | 75 +++++++++++++++++++
->   .../rockchip/sdram-rv1126-ddr4-detect-664.inc | 75 +++++++++++++++++++
->   .../rockchip/sdram-rv1126-ddr4-detect-784.inc | 75 +++++++++++++++++++
->   .../rockchip/sdram-rv1126-ddr4-detect-924.inc | 75 +++++++++++++++++++
->   drivers/ram/rockchip/sdram_rv1126.c           |  8 ++
->   8 files changed, 533 insertions(+)
->   create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-1056.inc
->   create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-328.inc
->   create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-396.inc
->   create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-528.inc
->   create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-664.inc
->   create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-784.inc
->   create mode 100644 drivers/ram/rockchip/sdram-rv1126-ddr4-detect-924.inc
+>   include/configs/neural-compute-module-2.h | 6 ------
+>   include/configs/rv1126_common.h           | 3 +--
+>   2 files changed, 1 insertion(+), 8 deletions(-)
 >
-> diff --git a/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-1056.inc b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-1056.inc
-> new file mode 100644
-> index 0000000000..295b0871e0
-> --- /dev/null
-> +++ b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-1056.inc
-> @@ -0,0 +1,75 @@
-> +{
-> +	{
-> +		{
-> +			.rank = 0x1,
-> +			.col = 0xA,
-> +			.bk = 0x2,
-> +			.bw = 0x1,
-> +			.dbw = 0x0,
-> +			.row_3_4 = 0x0,
-> +			.cs0_row = 0x11,
-> +			.cs1_row = 0x0,
-> +			.cs0_high16bit_row = 0x11,
-> +			.cs1_high16bit_row = 0x0,
-> +			.ddrconfig = 0
-> +		},
-> +		{
-> +			{0x561d1219},
-> +			{0x10030703},
-> +			{0x00000002},
-> +			{0x00001111},
-> +			{0x0000000c},
-> +			{0x0000034b},
-> +			0x000000ff
-> +		}
-> +	},
-> +	{
-> +		.ddr_freq = 1056,	/* clock rate(MHz) */
-> +		.dramtype = DDR4,
-> +		.num_channels = 1,
-> +		.stride = 0,
-> +		.odt = 1
-> +	},
-> +	{
-> +		{
-> +			{0x00000000, 0x43041010},	/* MSTR */
-> +			{0x00000064, 0x008000b9},	/* RFSHTMG */
-> +			{0x000000d0, 0x00020103},	/* INIT0 */
-> +			{0x000000d4, 0x00690000},	/* INIT1 */
-> +			{0x000000d8, 0x00000100},	/* INIT2 */
-> +			{0x000000dc, 0x07340401},	/* INIT3 */
-> +			{0x000000e0, 0x00100000},	/* INIT4 */
-> +			{0x000000e4, 0x00110000},	/* INIT5 */
-> +			{0x000000e8, 0x00000420},	/* INIT6 */
-> +			{0x000000ec, 0x00000800},	/* INIT7 */
-> +			{0x000000f4, 0x000f011f},	/* RANKCTL */
-> +			{0x00000100, 0x0f102411},	/* DRAMTMG0 */
-> +			{0x00000104, 0x0004041a},	/* DRAMTMG1 */
-> +			{0x00000108, 0x0608060d},	/* DRAMTMG2 */
-> +			{0x0000010c, 0x0040400c},	/* DRAMTMG3 */
-> +			{0x00000110, 0x08030409},	/* DRAMTMG4 */
-> +			{0x00000114, 0x06060403},	/* DRAMTMG5 */
-> +			{0x00000120, 0x07070d07},	/* DRAMTMG8 */
-> +			{0x00000124, 0x00020309},	/* DRAMTMG9 */
-> +			{0x00000180, 0x01000040},	/* ZQCTL0 */
-> +			{0x00000184, 0x00000000},	/* ZQCTL1 */
-> +			{0x00000190, 0x07060004},	/* DFITMG0 */
-> +			{0x00000198, 0x07000101},	/* DFILPCFG0 */
-> +			{0x000001a0, 0xc0400003},	/* DFIUPD0 */
-> +			{0x00000240, 0x06000614},	/* ODTCFG */
-> +			{0x00000244, 0x00000201},	/* ODTMAP */
-> +			{0x00000250, 0x00001f00},	/* SCHED */
-> +			{0x00000490, 0x00000001},	/* PCTRL_0 */
-> +			{0xffffffff, 0xffffffff}
-> +		}
-> +	},
-> +	{
-> +		{
-> +			{0x00000004, 0x0000008c},	/* PHYREG01 */
-> +			{0x00000014, 0x00000010},	/* PHYREG05 */
-> +			{0x00000018, 0x00000000},	/* PHYREG06 */
-> +			{0x0000001c, 0x0000000b},	/* PHYREG07 */
-> +			{0xffffffff, 0xffffffff}
-> +		}
-> +	}
-> +},
-> diff --git a/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-328.inc b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-328.inc
-> new file mode 100644
-> index 0000000000..4b424fb440
-> --- /dev/null
-> +++ b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-328.inc
-> @@ -0,0 +1,75 @@
-> +{
-> +	{
-> +		{
-> +			.rank = 0x1,
-> +			.col = 0xA,
-> +			.bk = 0x2,
-> +			.bw = 0x1,
-> +			.dbw = 0x0,
-> +			.row_3_4 = 0x0,
-> +			.cs0_row = 0x11,
-> +			.cs1_row = 0x0,
-> +			.cs0_high16bit_row = 0x11,
-> +			.cs1_high16bit_row = 0x0,
-> +			.ddrconfig = 0
-> +		},
-> +		{
-> +			{0x4d110a08},
-> +			{0x06020501},
-> +			{0x00000002},
-> +			{0x00001111},
-> +			{0x0000000c},
-> +			{0x00000232},
-> +			0x000000ff
-> +		}
-> +	},
-> +	{
-> +		.ddr_freq = 328,	/* clock rate(MHz) */
-> +		.dramtype = DDR4,
-> +		.num_channels = 1,
-> +		.stride = 0,
-> +		.odt = 0
-> +	},
-> +	{
-> +		{
-> +			{0x00000000, 0x43049010},	/* MSTR */
-> +			{0x00000064, 0x0027003a},	/* RFSHTMG */
-> +			{0x000000d0, 0x00020052},	/* INIT0 */
-> +			{0x000000d4, 0x00220000},	/* INIT1 */
-> +			{0x000000d8, 0x00000100},	/* INIT2 */
-> +			{0x000000dc, 0x00040000},	/* INIT3 */
-> +			{0x000000e0, 0x00000000},	/* INIT4 */
-> +			{0x000000e4, 0x00110000},	/* INIT5 */
-> +			{0x000000e8, 0x00000420},	/* INIT6 */
-> +			{0x000000ec, 0x00000400},	/* INIT7 */
-> +			{0x000000f4, 0x000f011f},	/* RANKCTL */
-> +			{0x00000100, 0x09060b06},	/* DRAMTMG0 */
-> +			{0x00000104, 0x00020209},	/* DRAMTMG1 */
-> +			{0x00000108, 0x0505040a},	/* DRAMTMG2 */
-> +			{0x0000010c, 0x0040400c},	/* DRAMTMG3 */
-> +			{0x00000110, 0x05030206},	/* DRAMTMG4 */
-> +			{0x00000114, 0x03030202},	/* DRAMTMG5 */
-> +			{0x00000120, 0x03030b03},	/* DRAMTMG8 */
-> +			{0x00000124, 0x00020208},	/* DRAMTMG9 */
-> +			{0x00000180, 0x01000040},	/* ZQCTL0 */
-> +			{0x00000184, 0x00000000},	/* ZQCTL1 */
-> +			{0x00000190, 0x07030003},	/* DFITMG0 */
-> +			{0x00000198, 0x07000101},	/* DFILPCFG0 */
-> +			{0x000001a0, 0xc0400003},	/* DFIUPD0 */
-> +			{0x00000240, 0x06000604},	/* ODTCFG */
-> +			{0x00000244, 0x00000201},	/* ODTMAP */
-> +			{0x00000250, 0x00001f00},	/* SCHED */
-> +			{0x00000490, 0x00000001},	/* PCTRL_0 */
-> +			{0xffffffff, 0xffffffff}
-> +		}
-> +	},
-> +	{
-> +		{
-> +			{0x00000004, 0x0000008c},	/* PHYREG01 */
-> +			{0x00000014, 0x0000000a},	/* PHYREG05 */
-> +			{0x00000018, 0x00000000},	/* PHYREG06 */
-> +			{0x0000001c, 0x00000009},	/* PHYREG07 */
-> +			{0xffffffff, 0xffffffff}
-> +		}
-> +	}
-> +},
-> diff --git a/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-396.inc b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-396.inc
-> new file mode 100644
-> index 0000000000..980be8cf18
-> --- /dev/null
-> +++ b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-396.inc
-> @@ -0,0 +1,75 @@
-> +{
-> +	{
-> +		{
-> +			.rank = 0x1,
-> +			.col = 0xA,
-> +			.bk = 0x2,
-> +			.bw = 0x1,
-> +			.dbw = 0x0,
-> +			.row_3_4 = 0x0,
-> +			.cs0_row = 0x11,
-> +			.cs1_row = 0x0,
-> +			.cs0_high16bit_row = 0x11,
-> +			.cs1_high16bit_row = 0x0,
-> +			.ddrconfig = 0
-> +		},
-> +		{
-> +			{0x4d110a0a},
-> +			{0x07020501},
-> +			{0x00000002},
-> +			{0x00001111},
-> +			{0x0000000c},
-> +			{0x00000232},
-> +			0x000000ff
-> +		}
-> +	},
-> +	{
-> +		.ddr_freq = 396,	/* clock rate(MHz) */
-> +		.dramtype = DDR4,
-> +		.num_channels = 1,
-> +		.stride = 0,
-> +		.odt = 0
-> +	},
-> +	{
-> +		{
-> +			{0x00000000, 0x43049010},	/* MSTR */
-> +			{0x00000064, 0x00300046},	/* RFSHTMG */
-> +			{0x000000d0, 0x00020062},	/* INIT0 */
-> +			{0x000000d4, 0x00280000},	/* INIT1 */
-> +			{0x000000d8, 0x00000100},	/* INIT2 */
-> +			{0x000000dc, 0x00040000},	/* INIT3 */
-> +			{0x000000e0, 0x00000000},	/* INIT4 */
-> +			{0x000000e4, 0x00110000},	/* INIT5 */
-> +			{0x000000e8, 0x00000420},	/* INIT6 */
-> +			{0x000000ec, 0x00000400},	/* INIT7 */
-> +			{0x000000f4, 0x000f011f},	/* RANKCTL */
-> +			{0x00000100, 0x09070d07},	/* DRAMTMG0 */
-> +			{0x00000104, 0x0002020a},	/* DRAMTMG1 */
-> +			{0x00000108, 0x0505040a},	/* DRAMTMG2 */
-> +			{0x0000010c, 0x0040400c},	/* DRAMTMG3 */
-> +			{0x00000110, 0x05030206},	/* DRAMTMG4 */
-> +			{0x00000114, 0x03030202},	/* DRAMTMG5 */
-> +			{0x00000120, 0x04040b04},	/* DRAMTMG8 */
-> +			{0x00000124, 0x00020208},	/* DRAMTMG9 */
-> +			{0x00000180, 0x01000040},	/* ZQCTL0 */
-> +			{0x00000184, 0x00000000},	/* ZQCTL1 */
-> +			{0x00000190, 0x07030003},	/* DFITMG0 */
-> +			{0x00000198, 0x07000101},	/* DFILPCFG0 */
-> +			{0x000001a0, 0xc0400003},	/* DFIUPD0 */
-> +			{0x00000240, 0x06000604},	/* ODTCFG */
-> +			{0x00000244, 0x00000201},	/* ODTMAP */
-> +			{0x00000250, 0x00001f00},	/* SCHED */
-> +			{0x00000490, 0x00000001},	/* PCTRL_0 */
-> +			{0xffffffff, 0xffffffff}
-> +		}
-> +	},
-> +	{
-> +		{
-> +			{0x00000004, 0x0000008c},	/* PHYREG01 */
-> +			{0x00000014, 0x0000000a},	/* PHYREG05 */
-> +			{0x00000018, 0x00000000},	/* PHYREG06 */
-> +			{0x0000001c, 0x00000009},	/* PHYREG07 */
-> +			{0xffffffff, 0xffffffff}
-> +		}
-> +	}
-> +},
-> diff --git a/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-528.inc b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-528.inc
-> new file mode 100644
-> index 0000000000..3bde055e8d
-> --- /dev/null
-> +++ b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-528.inc
-> @@ -0,0 +1,75 @@
-> +{
-> +	{
-> +		{
-> +			.rank = 0x1,
-> +			.col = 0xA,
-> +			.bk = 0x2,
-> +			.bw = 0x1,
-> +			.dbw = 0x0,
-> +			.row_3_4 = 0x0,
-> +			.cs0_row = 0x11,
-> +			.cs1_row = 0x0,
-> +			.cs0_high16bit_row = 0x11,
-> +			.cs1_high16bit_row = 0x0,
-> +			.ddrconfig = 0
-> +		},
-> +		{
-> +			{0x4d120a0d},
-> +			{0x09020501},
-> +			{0x00000002},
-> +			{0x00001111},
-> +			{0x0000000c},
-> +			{0x00000232},
-> +			0x000000ff
-> +		}
-> +	},
-> +	{
-> +		.ddr_freq = 528,	/* clock rate(MHz) */
-> +		.dramtype = DDR4,
-> +		.num_channels = 1,
-> +		.stride = 0,
-> +		.odt = 0
-> +	},
-> +	{
-> +		{
-> +			{0x00000000, 0x43049010},	/* MSTR */
-> +			{0x00000064, 0x0040005d},	/* RFSHTMG */
-> +			{0x000000d0, 0x00020082},	/* INIT0 */
-> +			{0x000000d4, 0x00350000},	/* INIT1 */
-> +			{0x000000d8, 0x00000100},	/* INIT2 */
-> +			{0x000000dc, 0x00040000},	/* INIT3 */
-> +			{0x000000e0, 0x00000000},	/* INIT4 */
-> +			{0x000000e4, 0x00110000},	/* INIT5 */
-> +			{0x000000e8, 0x00000420},	/* INIT6 */
-> +			{0x000000ec, 0x00000400},	/* INIT7 */
-> +			{0x000000f4, 0x000f011f},	/* RANKCTL */
-> +			{0x00000100, 0x0a0a1209},	/* DRAMTMG0 */
-> +			{0x00000104, 0x0002020e},	/* DRAMTMG1 */
-> +			{0x00000108, 0x0505040a},	/* DRAMTMG2 */
-> +			{0x0000010c, 0x0040400c},	/* DRAMTMG3 */
-> +			{0x00000110, 0x05030206},	/* DRAMTMG4 */
-> +			{0x00000114, 0x03030202},	/* DRAMTMG5 */
-> +			{0x00000120, 0x04040b04},	/* DRAMTMG8 */
-> +			{0x00000124, 0x00020208},	/* DRAMTMG9 */
-> +			{0x00000180, 0x01000040},	/* ZQCTL0 */
-> +			{0x00000184, 0x00000000},	/* ZQCTL1 */
-> +			{0x00000190, 0x07030003},	/* DFITMG0 */
-> +			{0x00000198, 0x07000101},	/* DFILPCFG0 */
-> +			{0x000001a0, 0xc0400003},	/* DFIUPD0 */
-> +			{0x00000240, 0x06000604},	/* ODTCFG */
-> +			{0x00000244, 0x00000201},	/* ODTMAP */
-> +			{0x00000250, 0x00001f00},	/* SCHED */
-> +			{0x00000490, 0x00000001},	/* PCTRL_0 */
-> +			{0xffffffff, 0xffffffff}
-> +		}
-> +	},
-> +	{
-> +		{
-> +			{0x00000004, 0x0000008c},	/* PHYREG01 */
-> +			{0x00000014, 0x0000000a},	/* PHYREG05 */
-> +			{0x00000018, 0x00000000},	/* PHYREG06 */
-> +			{0x0000001c, 0x00000009},	/* PHYREG07 */
-> +			{0xffffffff, 0xffffffff}
-> +		}
-> +	}
-> +},
-> diff --git a/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-664.inc b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-664.inc
-> new file mode 100644
-> index 0000000000..c9341166d6
-> --- /dev/null
-> +++ b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-664.inc
-> @@ -0,0 +1,75 @@
-> +{
-> +	{
-> +		{
-> +			.rank = 0x1,
-> +			.col = 0xA,
-> +			.bk = 0x2,
-> +			.bw = 0x1,
-> +			.dbw = 0x0,
-> +			.row_3_4 = 0x0,
-> +			.cs0_row = 0x11,
-> +			.cs1_row = 0x0,
-> +			.cs0_high16bit_row = 0x11,
-> +			.cs1_high16bit_row = 0x0,
-> +			.ddrconfig = 0
-> +		},
-> +		{
-> +			{0x4d130a11},
-> +			{0x0c020501},
-> +			{0x00000002},
-> +			{0x00001111},
-> +			{0x0000000c},
-> +			{0x0000023a},
-> +			0x000000ff
-> +		}
-> +	},
-> +	{
-> +		.ddr_freq = 664,	/* clock rate(MHz) */
-> +		.dramtype = DDR4,
-> +		.num_channels = 1,
-> +		.stride = 0,
-> +		.odt = 1
-> +	},
-> +	{
-> +		{
-> +			{0x00000000, 0x43041010},	/* MSTR */
-> +			{0x00000064, 0x00500075},	/* RFSHTMG */
-> +			{0x000000d0, 0x000200a4},	/* INIT0 */
-> +			{0x000000d4, 0x00420000},	/* INIT1 */
-> +			{0x000000d8, 0x00000100},	/* INIT2 */
-> +			{0x000000dc, 0x01040401},	/* INIT3 */
-> +			{0x000000e0, 0x00000000},	/* INIT4 */
-> +			{0x000000e4, 0x00110000},	/* INIT5 */
-> +			{0x000000e8, 0x00000420},	/* INIT6 */
-> +			{0x000000ec, 0x00000400},	/* INIT7 */
-> +			{0x000000f4, 0x000f011f},	/* RANKCTL */
-> +			{0x00000100, 0x0b0c160c},	/* DRAMTMG0 */
-> +			{0x00000104, 0x00020211},	/* DRAMTMG1 */
-> +			{0x00000108, 0x0505040a},	/* DRAMTMG2 */
-> +			{0x0000010c, 0x0040400c},	/* DRAMTMG3 */
-> +			{0x00000110, 0x05030306},	/* DRAMTMG4 */
-> +			{0x00000114, 0x04040302},	/* DRAMTMG5 */
-> +			{0x00000120, 0x05050b05},	/* DRAMTMG8 */
-> +			{0x00000124, 0x00020208},	/* DRAMTMG9 */
-> +			{0x00000180, 0x01000040},	/* ZQCTL0 */
-> +			{0x00000184, 0x00000000},	/* ZQCTL1 */
-> +			{0x00000190, 0x07030003},	/* DFITMG0 */
-> +			{0x00000198, 0x07000101},	/* DFILPCFG0 */
-> +			{0x000001a0, 0xc0400003},	/* DFIUPD0 */
-> +			{0x00000240, 0x06000604},	/* ODTCFG */
-> +			{0x00000244, 0x00000201},	/* ODTMAP */
-> +			{0x00000250, 0x00001f00},	/* SCHED */
-> +			{0x00000490, 0x00000001},	/* PCTRL_0 */
-> +			{0xffffffff, 0xffffffff}
-> +		}
-> +	},
-> +	{
-> +		{
-> +			{0x00000004, 0x0000008c},	/* PHYREG01 */
-> +			{0x00000014, 0x0000000a},	/* PHYREG05 */
-> +			{0x00000018, 0x00000000},	/* PHYREG06 */
-> +			{0x0000001c, 0x00000009},	/* PHYREG07 */
-> +			{0xffffffff, 0xffffffff}
-> +		}
-> +	}
-> +},
-> diff --git a/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-784.inc b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-784.inc
-> new file mode 100644
-> index 0000000000..ef2e9347bf
-> --- /dev/null
-> +++ b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-784.inc
-> @@ -0,0 +1,75 @@
-> +{
-> +	{
-> +		{
-> +			.rank = 0x1,
-> +			.col = 0xA,
-> +			.bk = 0x2,
-> +			.bw = 0x1,
-> +			.dbw = 0x0,
-> +			.row_3_4 = 0x0,
-> +			.cs0_row = 0x11,
-> +			.cs1_row = 0x0,
-> +			.cs0_high16bit_row = 0x11,
-> +			.cs1_high16bit_row = 0x0,
-> +			.ddrconfig = 0
-> +		},
-> +		{
-> +			{0x50160d14},
-> +			{0x0e020502},
-> +			{0x00000002},
-> +			{0x00001111},
-> +			{0x0000000c},
-> +			{0x0000033a},
-> +			0x000000ff
-> +		}
-> +	},
-> +	{
-> +		.ddr_freq = 784,	/* clock rate(MHz) */
-> +		.dramtype = DDR4,
-> +		.num_channels = 1,
-> +		.stride = 0,
-> +		.odt = 1
-> +	},
-> +	{
-> +		{
-> +			{0x00000000, 0x43041010},	/* MSTR */
-> +			{0x00000064, 0x005f008a},	/* RFSHTMG */
-> +			{0x000000d0, 0x000200c1},	/* INIT0 */
-> +			{0x000000d4, 0x004e0000},	/* INIT1 */
-> +			{0x000000d8, 0x00000100},	/* INIT2 */
-> +			{0x000000dc, 0x03140401},	/* INIT3 */
-> +			{0x000000e0, 0x00000000},	/* INIT4 */
-> +			{0x000000e4, 0x00110000},	/* INIT5 */
-> +			{0x000000e8, 0x00000420},	/* INIT6 */
-> +			{0x000000ec, 0x00000400},	/* INIT7 */
-> +			{0x000000f4, 0x000f011f},	/* RANKCTL */
-> +			{0x00000100, 0x0c0e1a0e},	/* DRAMTMG0 */
-> +			{0x00000104, 0x00030314},	/* DRAMTMG1 */
-> +			{0x00000108, 0x0506050b},	/* DRAMTMG2 */
-> +			{0x0000010c, 0x0040400c},	/* DRAMTMG3 */
-> +			{0x00000110, 0x06030307},	/* DRAMTMG4 */
-> +			{0x00000114, 0x04040302},	/* DRAMTMG5 */
-> +			{0x00000120, 0x06060b06},	/* DRAMTMG8 */
-> +			{0x00000124, 0x00020308},	/* DRAMTMG9 */
-> +			{0x00000180, 0x01000040},	/* ZQCTL0 */
-> +			{0x00000184, 0x00000000},	/* ZQCTL1 */
-> +			{0x00000190, 0x07040003},	/* DFITMG0 */
-> +			{0x00000198, 0x07000101},	/* DFILPCFG0 */
-> +			{0x000001a0, 0xc0400003},	/* DFIUPD0 */
-> +			{0x00000240, 0x0600060c},	/* ODTCFG */
-> +			{0x00000244, 0x00000201},	/* ODTMAP */
-> +			{0x00000250, 0x00001f00},	/* SCHED */
-> +			{0x00000490, 0x00000001},	/* PCTRL_0 */
-> +			{0xffffffff, 0xffffffff}
-> +		}
-> +	},
-> +	{
-> +		{
-> +			{0x00000004, 0x0000008c},	/* PHYREG01 */
-> +			{0x00000014, 0x0000000c},	/* PHYREG05 */
-> +			{0x00000018, 0x00000000},	/* PHYREG06 */
-> +			{0x0000001c, 0x00000009},	/* PHYREG07 */
-> +			{0xffffffff, 0xffffffff}
-> +		}
-> +	}
-> +},
-> diff --git a/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-924.inc b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-924.inc
-> new file mode 100644
-> index 0000000000..acb33bd315
-> --- /dev/null
-> +++ b/drivers/ram/rockchip/sdram-rv1126-ddr4-detect-924.inc
-> @@ -0,0 +1,75 @@
-> +{
-> +	{
-> +		{
-> +			.rank = 0x1,
-> +			.col = 0xA,
-> +			.bk = 0x2,
-> +			.bw = 0x1,
-> +			.dbw = 0x0,
-> +			.row_3_4 = 0x0,
-> +			.cs0_row = 0x11,
-> +			.cs1_row = 0x0,
-> +			.cs0_high16bit_row = 0x11,
-> +			.cs1_high16bit_row = 0x0,
-> +			.ddrconfig = 0
-> +		},
-> +		{
-> +			{0x531a0f17},
-> +			{0x0e020603},
-> +			{0x00000002},
-> +			{0x00001111},
-> +			{0x0000000c},
-> +			{0x00000342},
-> +			0x000000ff
-> +		}
-> +	},
-> +	{
-> +		.ddr_freq = 924,	/* clock rate(MHz) */
-> +		.dramtype = DDR4,
-> +		.num_channels = 1,
-> +		.stride = 0,
-> +		.odt = 1
-> +	},
-> +	{
-> +		{
-> +			{0x00000000, 0x43041010},	/* MSTR */
-> +			{0x00000064, 0x007000a2},	/* RFSHTMG */
-> +			{0x000000d0, 0x000200e3},	/* INIT0 */
-> +			{0x000000d4, 0x005c0000},	/* INIT1 */
-> +			{0x000000d8, 0x00000100},	/* INIT2 */
-> +			{0x000000dc, 0x05240401},	/* INIT3 */
-> +			{0x000000e0, 0x00080000},	/* INIT4 */
-> +			{0x000000e4, 0x00110000},	/* INIT5 */
-> +			{0x000000e8, 0x00000420},	/* INIT6 */
-> +			{0x000000ec, 0x00000400},	/* INIT7 */
-> +			{0x000000f4, 0x000f011f},	/* RANKCTL */
-> +			{0x00000100, 0x0e0e1f10},	/* DRAMTMG0 */
-> +			{0x00000104, 0x00030317},	/* DRAMTMG1 */
-> +			{0x00000108, 0x0507050c},	/* DRAMTMG2 */
-> +			{0x0000010c, 0x0040400c},	/* DRAMTMG3 */
-> +			{0x00000110, 0x07030308},	/* DRAMTMG4 */
-> +			{0x00000114, 0x05050303},	/* DRAMTMG5 */
-> +			{0x00000120, 0x07070b07},	/* DRAMTMG8 */
-> +			{0x00000124, 0x00020309},	/* DRAMTMG9 */
-> +			{0x00000180, 0x01000040},	/* ZQCTL0 */
-> +			{0x00000184, 0x00000000},	/* ZQCTL1 */
-> +			{0x00000190, 0x07050003},	/* DFITMG0 */
-> +			{0x00000198, 0x07000101},	/* DFILPCFG0 */
-> +			{0x000001a0, 0xc0400003},	/* DFIUPD0 */
-> +			{0x00000240, 0x06000610},	/* ODTCFG */
-> +			{0x00000244, 0x00000201},	/* ODTMAP */
-> +			{0x00000250, 0x00001f00},	/* SCHED */
-> +			{0x00000490, 0x00000001},	/* PCTRL_0 */
-> +			{0xffffffff, 0xffffffff}
-> +		}
-> +	},
-> +	{
-> +		{
-> +			{0x00000004, 0x0000008c},	/* PHYREG01 */
-> +			{0x00000014, 0x0000000e},	/* PHYREG05 */
-> +			{0x00000018, 0x00000000},	/* PHYREG06 */
-> +			{0x0000001c, 0x0000000a},	/* PHYREG07 */
-> +			{0xffffffff, 0xffffffff}
-> +		}
-> +	}
-> +},
-> diff --git a/drivers/ram/rockchip/sdram_rv1126.c b/drivers/ram/rockchip/sdram_rv1126.c
-> index 9e1376a940..0a78e18c73 100644
-> --- a/drivers/ram/rockchip/sdram_rv1126.c
-> +++ b/drivers/ram/rockchip/sdram_rv1126.c
-> @@ -76,6 +76,14 @@ struct rv1126_sdram_params sdram_configs[] = {
->   # include	"sdram-rv1126-lpddr4-detect-784.inc"
->   # include	"sdram-rv1126-lpddr4-detect-924.inc"
->   # include	"sdram-rv1126-lpddr4-detect-1056.inc"
-> +#elif defined(CONFIG_RAM_ROCKCHIP_DDR4)
-> +# include	"sdram-rv1126-ddr4-detect-328.inc"
-> +# include	"sdram-rv1126-ddr4-detect-396.inc"
-> +# include	"sdram-rv1126-ddr4-detect-528.inc"
-> +# include	"sdram-rv1126-ddr4-detect-664.inc"
-> +# include	"sdram-rv1126-ddr4-detect-784.inc"
-> +# include	"sdram-rv1126-ddr4-detect-924.inc"
-> +# include	"sdram-rv1126-ddr4-detect-1056.inc"
->   #else
->   # include	"sdram-rv1126-ddr3-detect-328.inc"
->   # include	"sdram-rv1126-ddr3-detect-396.inc"
+> diff --git a/include/configs/neural-compute-module-2.h b/include/configs/neural-compute-module-2.h
+> index f0934ae00c..43a560906a 100644
+> --- a/include/configs/neural-compute-module-2.h
+> +++ b/include/configs/neural-compute-module-2.h
+> @@ -12,10 +12,4 @@
+>   
+>   #include <configs/rv1126_common.h>
+>   
+> -#undef BOOT_TARGET_DEVICES
+> -
+> -#define BOOT_TARGET_DEVICES(func) \
+> -	func(MMC, mmc, 0) \
+> -	func(MMC, mmc, 1)
+> -
+>   #endif /* __NEURAL_COMPUTE_MODULE_2_H */
+> diff --git a/include/configs/rv1126_common.h b/include/configs/rv1126_common.h
+> index a64c0c6364..168cd8b167 100644
+> --- a/include/configs/rv1126_common.h
+> +++ b/include/configs/rv1126_common.h
+> @@ -28,7 +28,6 @@
+>   	"kernel_addr_r=0x02008000\0" \
+>   	"ramdisk_addr_r=0x0a200000\0"
+>   
+> -#include <config_distro_bootcmd.h>
+>   #define CFG_EXTRA_ENV_SETTINGS \
+>   	"fdt_high=0x0fffffff\0" \
+>   	"initrd_high=0x0fffffff\0" \
+> @@ -36,6 +35,6 @@
+>   	"partitions=" PARTS_DEFAULT \
+>   	ENV_MEM_LAYOUT_SETTINGS	 \
+>   	ROCKCHIP_DEVICE_SETTINGS \
+> -	BOOTENV
+> +	"boot_targets=" BOOT_TARGETS "\0"
+>   
+>   #endif /* __CONFIG_RV1126_COMMON_H */
