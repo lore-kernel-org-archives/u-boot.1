@@ -4,89 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A995C4828D
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 16:33:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41F13C4828D
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 16:36:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3E2487C45;
-	Thu,  1 Feb 2024 17:33:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id A4CF487CD4;
+	Thu,  1 Feb 2024 17:36:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="fuuCf7JB";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AC1787C61; Thu,  1 Feb 2024 17:33:06 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1E16877FB
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 17:33:03 +0100 (CET)
+ id 8CAD987CDB; Thu,  1 Feb 2024 17:36:43 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 2AC6C87CA4
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 17:36:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 0D8B83FE35
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 16:33:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1706805183;
- bh=PBpwywCLMlBy/fkl7egTsAbGEz3AXHtfI7A2QQXc/bI=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=fuuCf7JBdQ55BkHTedZ4zDDji0TM4VhHUW1J3Rf1Cjb+Mtx7HAEGoTeqmoQ1Qf4Zx
- B0VM45S8ZfJIaiwCMTo328V/EmflM7kZ2ZjmX/akvZx7yPG/qrP2p1WiaO54lYms2A
- B1DxCGmy/nL7qiVY2SUL2E32YqAKLKHvQE2cE7afqwNamke0iS0NSFZ2fCpv+0R1NG
- D2l1nPexUn7K4CEJUgFsnrIaUGBFZnhG8CBaU7i1yDqyEg79GWNhvi26i/dE0oUtYg
- hm2NIbUk23fzjv8ov7dWi9MwrRutyJlmg6abyGMSOb4jk2YRIpyboQgTvGJZmWcuvP
- tshgP1/5vYCzA==
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-40e4478a3afso4888005e9.1
- for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 08:33:03 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706805182; x=1707409982;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=PBpwywCLMlBy/fkl7egTsAbGEz3AXHtfI7A2QQXc/bI=;
- b=Orv9X3Rm79+tLYzk8JfsrxOUPthir46GWVKxY0WBBS7T+eBT40QmSTq2blGMcdGw8b
- y6gEKuzJVCb7TZJrDmCdDjQZdQkiEc8NtHps52mAORkSQh7n6965LwpSki6u+6Tp02q5
- UctioQvZCFF2KKuLVNkQtJr35X7zMtQoec9bdfAUkFkxqqwob89lRHbOAt4jQMNdJDvr
- VKxt2rLJ5PthwOgiRWvtgWasOIKxCNdWE0Ykb6xquiszExQ8/KE1afzq1vc+mlTLIaeF
- oDhmceSeUyBeemkkmt7MyNgxaOC9eHz/7CAWI8pL1RMoUvgFAnQmCpBKwT5zheNhKeZE
- l86Q==
-X-Gm-Message-State: AOJu0YzZ+01AoE6TCzvSaF1zMxB0jang0+lUgRQ7AcRYexDdLFyURvNb
- /VO5r3W2KubZGPnufa/LucXDUl8/Xw0kKwCcDyMso1jlQr2oAEsWGZQPphY38cNebr4WJj/avjf
- H4vT2Q/JX7LqwgghOm/4werDZy+NfUoMh85KIBmT2TJ/cThyGPbDicW/3erjfcr2ztt1dViMFm6
- s=
-X-Received: by 2002:a05:600c:35d2:b0:40e:f88f:c529 with SMTP id
- r18-20020a05600c35d200b0040ef88fc529mr7434795wmq.9.1706805182654; 
- Thu, 01 Feb 2024 08:33:02 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEnprRWfSNZYaLzCTfdqFUW27X1Nwv/3ZMQL962xKWt4zLdESFp/ASPhB43t/XpbQIUBOhGKw==
-X-Received: by 2002:a05:600c:35d2:b0:40e:f88f:c529 with SMTP id
- r18-20020a05600c35d200b0040ef88fc529mr7434781wmq.9.1706805182282; 
- Thu, 01 Feb 2024 08:33:02 -0800 (PST)
-X-Forwarded-Encrypted: i=0;
- AJvYcCX4Hg0qTvsQcoDb4S2eMyb2/Z4CznZg09V9fhSENs29MDlC6f1CtdLqNwGAS7S0gmFPoqCtVW+tUn3UQ5anphJrdSc8eXbrCJr7Gd93So+XuLfvYNVF2B+6sIL5vOqAYCpszs2xowa5
-Received: from workstation5.fritz.box
- (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
- by smtp.gmail.com with ESMTPSA id
- v7-20020a05600c444700b0040e541ddcb1sm32807wmn.33.2024.02.01.08.33.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Feb 2024 08:33:01 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: u-boot@lists.denx.de
-Cc: Chanho Park <chanho61.park@samsung.com>, Shengyu Qu <wiagn233@outlook.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] doc: board: starfive: fix rendering of OpenSBI logo
-Date: Thu,  1 Feb 2024 17:32:53 +0100
-Message-ID: <20240201163254.88477-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4AB03DA7;
+ Thu,  1 Feb 2024 08:37:22 -0800 (PST)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 756293F738;
+ Thu,  1 Feb 2024 08:36:38 -0800 (PST)
+Date: Thu, 1 Feb 2024 16:36:36 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Ludwig Kormann <ludwig.kormann@ict42.de>
+Cc: jagan@amarulasolutions.com, trini@konsulko.com,
+ jernej.skrabec@gmail.com, iuncuim@gmail.com, cfsworks@gmail.com,
+ samuel@sholland.org, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] sunxi: sun4i: Introduce KConfig option
+ SPL_SYS_CLK_FREQ
+Message-ID: <20240201163636.6536ead1@donnerap.manchester.arm.com>
+In-Reply-To: <20240201133014.578083-1-ludwig.kormann@ict42.de>
+References: <20240201133014.578083-1-ludwig.kormann@ict42.de>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,37 +59,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The rendering of the OpenSBI logo should look like the screen output.
+On Thu,  1 Feb 2024 14:30:14 +0100
+Ludwig Kormann <ludwig.kormann@ict42.de> wrote:
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- doc/board/starfive/visionfive2.rst | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+Hi,
 
-diff --git a/doc/board/starfive/visionfive2.rst b/doc/board/starfive/visionfive2.rst
-index 6cb033ead04..abda8ac21bc 100644
---- a/doc/board/starfive/visionfive2.rst
-+++ b/doc/board/starfive/visionfive2.rst
-@@ -133,14 +133,14 @@ Sample boot log from StarFive VisionFive2 board
- 	Trying to boot from MMC2
- 
- 	OpenSBI v1.2-80-g4b28afc
--	____                    _____ ____ _____
--	/ __ \                  / ____|  _ \_   _|
-+	  ____                    _____ ____ _____
-+	 / __ \                  / ____|  _ \_   _|
- 	| |  | |_ __   ___ _ __ | (___ | |_) || |
- 	| |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
- 	| |__| | |_) |  __/ | | |____) | |_) || |_
--	\____/| .__/ \___|_| |_|_____/|___/_____|
--			| |
--			|_|
-+	 \____/| .__/ \___|_| |_|_____/|____/_____|
-+	       | |
-+	       |_|
- 
- 	Platform Name             : StarFive VisionFive 2 v1.3B
- 	Platform Features         : medeleg
--- 
-2.43.0
+> This option can be used to modify the initial SPL
+> CPU clock frequency.
+> 
+> This follows an earlier discussion regarding A20
+> CPUs dying after reboot in SPL initialization due to
+> incompatible CPU clock frequency and core voltage. [1]
+> 
+> First attempt was to update PLL1_CFG_DEFAULT to a fixed
+> lower frequency (144MHz), which fixed the observed issue
+> but might not suit all A20 users. A KConfig option
+> should be the better solution.
+
+Can you please reword this to include more vital information directly in
+the commit message? We had mailing list archives vanish in the past.
+
+Please mention that our default frequency of 384 MHz does not work at
+every voltage, and after just a core reset the PMIC might still use a
+previously programmed lower voltage, that will hang the SPL, on some
+batches of chips.
+
+> [1]
+> https://lists.denx.de/pipermail/u-boot/2024-January/544897.html
+
+Please use the Link: tag:
+
+Link: https://lists.denx.de/....
+
+> 
+> Signed-off-by: Ludwig Kormann <ludwig.kormann@ict42.de>
+> ---
+>  arch/arm/include/asm/arch-sunxi/clock_sun4i.h |  4 ++++
+>  arch/arm/mach-sunxi/Kconfig                   |  8 ++++++++
+>  arch/arm/mach-sunxi/clock_sun4i.c             | 11 ++++++++++-
+>  3 files changed, 22 insertions(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun4i.h b/arch/arm/include/asm/arch-sunxi/clock_sun4i.h
+> index 2cec91cb20..11b350824e 100644
+> --- a/arch/arm/include/asm/arch-sunxi/clock_sun4i.h
+> +++ b/arch/arm/include/asm/arch-sunxi/clock_sun4i.h
+> @@ -134,12 +134,16 @@ struct sunxi_ccm_reg {
+>  #define CCM_PLL1_CFG_PLL4_EXCH_SHIFT		25
+>  #define CCM_PLL1_CFG_BIAS_CUR_SHIFT		20
+>  #define CCM_PLL1_CFG_DIVP_SHIFT			16
+> +#define CCM_PLL1_CFG_DIVP_MASK			(0x3 << CCM_PLL1_CFG_DIVP_SHIFT)
+>  #define CCM_PLL1_CFG_LCK_TMR_SHIFT		13
+>  #define CCM_PLL1_CFG_FACTOR_N_SHIFT		8
+> +#define CCM_PLL1_CFG_FACTOR_N_MASK		(0x1f << CCM_PLL1_CFG_FACTOR_N_SHIFT)
+>  #define CCM_PLL1_CFG_FACTOR_K_SHIFT		4
+> +#define CCM_PLL1_CFG_FACTOR_K_MASK		(0x3 << CCM_PLL1_CFG_FACTOR_K_SHIFT)
+>  #define CCM_PLL1_CFG_SIG_DELT_PAT_IN_SHIFT	3
+>  #define CCM_PLL1_CFG_SIG_DELT_PAT_EN_SHIFT	2
+>  #define CCM_PLL1_CFG_FACTOR_M_SHIFT		0
+> +#define CCM_PLL1_CFG_FACTOR_M_MASK		(0x3 << CCM_PLL1_CFG_FACTOR_M_SHIFT)
+>  
+>  #define PLL1_CFG_DEFAULT	0xa1005000
+>  
+> diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+> index fe89aec6b9..85e3a26855 100644
+> --- a/arch/arm/mach-sunxi/Kconfig
+> +++ b/arch/arm/mach-sunxi/Kconfig
+> @@ -705,6 +705,14 @@ config SYS_CLK_FREQ
+>  	default 1008000000 if MACH_SUN50I_H616
+>  	default 1008000000 if MACH_SUN8I_R528
+>  
+> +if MACH_SUN4I || MACH_SUN5I || MACH_SUN7I
+
+As Tom already mentioned, please use "depends on".
+
+> +config SPL_SYS_CLK_FREQ
+> +	int "sunxi SPL CPU clock frequency"
+
+"sunxi" is redundant here. Please state that this is the early SPL
+frequency, since we switch to SYS_CLK_FREQ in the SPL still, only later.
+
+> +	default 384
+> +	---help---
+> +  A static value for the sunxi SPL CPU frequency, must be a multiple of 24.
+
+Minus sunxi, plus early, as above. Also please mention the safe frequency
+(144 MHz) here, as a recommendation if people experience problems.
+
+> +endif
+> +
+>  config SYS_CONFIG_NAME
+>  	default "suniv" if MACH_SUNIV
+>  	default "sun4i" if MACH_SUN4I
+> diff --git a/arch/arm/mach-sunxi/clock_sun4i.c b/arch/arm/mach-sunxi/clock_sun4i.c
+> index 8f1d1b65f0..04623c1d09 100644
+> --- a/arch/arm/mach-sunxi/clock_sun4i.c
+> +++ b/arch/arm/mach-sunxi/clock_sun4i.c
+> @@ -25,7 +25,16 @@ void clock_init_safe(void)
+>  	       APB0_DIV_1 << APB0_DIV_SHIFT |
+>  	       CPU_CLK_SRC_OSC24M << CPU_CLK_SRC_SHIFT,
+>  	       &ccm->cpu_ahb_apb0_cfg);
+> -	writel(PLL1_CFG_DEFAULT, &ccm->pll1_cfg);
+> +	writel((PLL1_CFG_DEFAULT &
+> +		~(CCM_PLL1_CFG_FACTOR_N_MASK |
+> +		CCM_PLL1_CFG_FACTOR_K_MASK |
+> +		CCM_PLL1_CFG_FACTOR_M_MASK |
+> +		CCM_PLL1_CFG_DIVP_MASK)) |
+> +		(CONFIG_SPL_SYS_CLK_FREQ / 24) << CCM_PLL1_CFG_FACTOR_N_SHIFT |
+> +		0 << CCM_PLL1_CFG_FACTOR_K_SHIFT |
+> +		0 << CCM_PLL1_CFG_FACTOR_M_SHIFT |
+> +		0 << CCM_PLL1_CFG_DIVP_SHIFT,
+> +		&ccm->pll1_cfg);
+
+There is already the PLL1_CFG macro later in that same file, can you reuse
+that, maybe?
+
+Otherwise this is indeed what I had in mind, thanks for providing the
+patch!
+
+Cheers,
+Andre
+
+>  	sdelay(200);
+>  	writel(AXI_DIV_1 << AXI_DIV_SHIFT |
+>  	       AHB_DIV_2 << AHB_DIV_SHIFT |
 
