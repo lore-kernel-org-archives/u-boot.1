@@ -4,74 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 569BCC47DB3
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 02:59:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65C29C47DB3
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 03:00:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC73B87BF4;
-	Thu,  1 Feb 2024 03:59:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 73EA28760D;
+	Thu,  1 Feb 2024 04:00:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=feathertop.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Uq0oZ6zW";
+	dkim=pass (2048-bit key; unprotected) header.d=feathertop.org header.i=@feathertop.org header.b="sSvpPPDX";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="d2Hojf1d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90BD087C09; Thu,  1 Feb 2024 03:59:34 +0100 (CET)
-Received: from mail-m155115.qiye.163.com (mail-m155115.qiye.163.com
- [101.71.155.115])
+ id 199CF87C32; Thu,  1 Feb 2024 04:00:32 +0100 (CET)
+Received: from wout3-smtp.messagingengine.com (wout3-smtp.messagingengine.com
+ [64.147.123.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF6918760D
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 03:59:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1493C8760D
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 04:00:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=feathertop.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=Uq0oZ6zW0WAcYh6TmuoCz8Q/73NZqMTRgpH1Jb2tiK19LbOS5Ik2f9rA0RC1m1LaKtif9yf5YHVHSr22G1ShjSKveWxaSyjMHMOYKnwGWrca+KlqpKjbZngMw08dvqRqAXizkupoKAYq6hQtdXcITwXAtESqDAniNFTerYiv5WI=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=xOxft32NyijFwzL6dDK5D2EFiIFHEUWMqiq3Dlb+8Nw=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.93] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 7608B9001D8;
- Thu,  1 Feb 2024 10:59:18 +0800 (CST)
-Message-ID: <5da3fe6e-9c5c-4b30-af24-2f3a885ce085@rock-chips.com>
-Date: Thu, 1 Feb 2024 10:59:18 +0800
+ spf=pass smtp.mailfrom=tim@feathertop.org
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailout.west.internal (Postfix) with ESMTP id BA1173200B05;
+ Wed, 31 Jan 2024 22:00:22 -0500 (EST)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute3.internal (MEProxy); Wed, 31 Jan 2024 22:00:23 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=feathertop.org;
+ h=cc:cc:content-transfer-encoding:content-type:content-type
+ :date:date:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:subject:subject:to:to; s=fm2;
+ t=1706756422; x=1706842822; bh=4/7N/L+GG4JTQvHrC9SVzOcTRbc1Bud4
+ 5Xa3X7Ol/Wk=; b=sSvpPPDXUtlQY3guhwyf7Qt4qhVw5WFcpahkTdkzUPQ5ewh0
+ qvUCwNlbZ0RPk5wh7dystQdKOpcfyGEBHDbHUFpAlHu3N9w5s40EszalDbXTAewL
+ RYqibxXSM7cmZQxgNs1eB6LYNHGQCsGtBpKZesP0TjWWbKMdQcVwkOJtMsumwLFS
+ dJM2TB3DZ/WzWK9vcZ9HKFzbZV+KSduxKkLT5J6QQX4XlJg71EUNhL28Mux3nfco
+ fwOvlBA++BIFWhGbcIi2NRyDStPivVVys0xphN6mpUgSCBII9kMmsFzeV6D4n7DN
+ dz1F02PhdNGsVM0FDNApIUjqxAWiHOX7hfT59A==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1706756422; x=
+ 1706842822; bh=4/7N/L+GG4JTQvHrC9SVzOcTRbc1Bud45Xa3X7Ol/Wk=; b=d
+ 2Hojf1d7cicbsJIBHP156QwcRc5kU8BYjXRdRW/p+RI9rxXPsXKFpHnV3lZqyrS+
+ TG3zAKJr6BuQEssrrR89qUEiA6aa8CHXWaBtXkIyNu2FLtoh/xAQObzpJFo8yJOx
+ 9gjwe1jZxRgCOENKFPS6KWESpQ1dBSFwkl3vuO1Cq60bGsaB139Eji3a5hPZVp5V
+ kfNbMdtcvHzR3f8Sxrkgg53bsdDg0OEID8kV0VUzuU6QEfrBe3jnCk96uMTe0GRX
+ kGFRfpC0IkTueKaxB0dWtd5W+Rv0dd93ggNO3mqjOAaQX3I2l+vdUk2b6d+L9fA5
+ Pq3Q/LTeJhtvz6pTb/4Cg==
+X-ME-Sender: <xms:RQm7ZT1LZRO11NWQmsM1_9bQeEm-9jyl2pVl7lMPl7tiV53CjY1Qbw>
+ <xme:RQm7ZSHz682-FvS4L3cDujtY-Mp2jNVkyraKQKZm1VUDXpQpoLkBVD28Ob7wWh1Xw
+ DmifMoOmQ>
+X-ME-Received: <xmr:RQm7ZT6DsmG57OgxH_SPQaQ83SU-34u6uvrq28ha_xtESIue6E8TBxh5Nse5_uzovYGWDlg2w8lvWw6vBSYSJT3DUVfU3e35y5gqpw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrfedutddgheefucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepkfffgggfuffvvehfhfgjtgfgsehtkeertddtvdejnecuhfhrohhmpefvihhm
+ ucfnuhhnnhcuoehtihhmsehfvggrthhhvghrthhophdrohhrgheqnecuggftrfgrthhtvg
+ hrnhepueegfefgveeuiedtheffgfefveejkeetiefhhfdvjeevlefhueekudeuleeghfek
+ necuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepthhimh
+ esfhgvrghthhgvrhhtohhprdhorhhg
+X-ME-Proxy: <xmx:RQm7ZY0B9wBMdzThfFaVIzNeA-Fy0Lp0Y-4nDgZm79EJgxwdvRVTNw>
+ <xmx:RQm7ZWEb0ET9gJ4ZziIyxq__Qkf_3BBEw1xUX6Cg10RkIwsu4YIo6g>
+ <xmx:RQm7ZZ9qhyHzUv30PFOOlBBEN4JiCYEfKv3fOywwX4DC43NOKOz9gw>
+ <xmx:Rgm7ZTNN-QiNC535FwZTbaRw9RI5Ky2jnjmRSM8NCA4nMkdjfSPY1g>
+Feedback-ID: i1f8241ce:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 31 Jan 2024 22:00:19 -0500 (EST)
+Message-ID: <15e12fe6-338c-4cc5-9219-876a219c550d@feathertop.org>
+Date: Thu, 1 Feb 2024 14:00:16 +1100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 16/18] rockchip: include asm/io.h directly in
- asm/arch-rockchip/hardware.h
+Subject: Re: [PATCH] board: rockchip: Add Hardkernel ODROID-M1S
 Content-Language: en-US
-To: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Klaus Goger <klaus.goger@theobroma-systems.com>,
- Heiko Stuebner <heiko.stuebner@cherry.de>,
- Otavio Salvador <otavio@ossystems.com.br>, Andy Yan
- <andy.yan@rock-chips.com>,
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Anatolij Gustschin <agust@denx.de>
-Cc: heiko@sntech.de, u-boot@lists.denx.de,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>
-References: <20240123-jaguar-v1-0-1eec1c34953c@theobroma-systems.com>
- <20240123-jaguar-v1-16-1eec1c34953c@theobroma-systems.com>
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240123-jaguar-v1-16-1eec1c34953c@theobroma-systems.com>
+To: Jonas Karlman <jonas@kwiboo.se>, Dongjin Kim <tobetter@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: u-boot@lists.denx.de
+References: <20240125070252.2057679-1-tobetter@gmail.com>
+ <254dcaee-6aca-48da-a09c-35b8f41f0480@kwiboo.se>
+From: Tim Lunn <tim@feathertop.org>
+In-Reply-To: <254dcaee-6aca-48da-a09c-35b8f41f0480@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGRgYT1ZMTh5LSRlOTUhOSk1VEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
- tLWQY+
-X-HM-Tid: 0a8d629b45bc03a9kunm7608b9001d8
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MC46SSo*KjMNNk0YPSI1N0I6
- KDEKCSxVSlVKTEtNTE5NSE1LSUpDVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFITExNTjcG
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,844 +107,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
-On 2024/1/23 22:49, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+On 1/25/24 22:50, Jonas Karlman wrote:
+>> +	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
+>> +};
+> Because this device tree is not yet in linux, hopefully correct props
+> can be applied to device tree and u-boot do not need any overrides.
 >
-> The different macros use writel which is defined in asm/io.h, so let's
-> include the header so users of hardware.h do not need to include
-> asm/io.h as well.
->
-> While at it, remove asm/io.h includes wherever
-> asm/arch-rockchip/hardware.h is included already.
->
-> Cc: Quentin Schulz <foss+uboot@0leil.net>
-> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+I suppose this pinctrl override was copied from Odroid-M1 where the 
+emmc_rst pin is shared with SPI flash. That is not the case on 
+Odroid-M1S which doesnt have SPI flash. So should be ok to drop this 
+override.
 
-Thanks,
-- Kever
-> ---
->   arch/arm/include/asm/arch-rockchip/hardware.h            | 2 ++
->   arch/arm/mach-rockchip/cpu-info.c                        | 1 -
->   arch/arm/mach-rockchip/px30/px30.c                       | 1 -
->   arch/arm/mach-rockchip/rk3036/rk3036.c                   | 1 -
->   arch/arm/mach-rockchip/rk3036/sdram_rk3036.c             | 1 -
->   arch/arm/mach-rockchip/rk3066/rk3066.c                   | 1 -
->   arch/arm/mach-rockchip/rk3188/rk3188.c                   | 1 -
->   arch/arm/mach-rockchip/rk322x/rk322x.c                   | 1 -
->   arch/arm/mach-rockchip/rk3288/rk3288.c                   | 1 -
->   arch/arm/mach-rockchip/rk3308/rk3308.c                   | 1 -
->   arch/arm/mach-rockchip/rk3328/rk3328.c                   | 1 -
->   arch/arm/mach-rockchip/rk3368/rk3368.c                   | 1 -
->   arch/arm/mach-rockchip/rk3399/rk3399.c                   | 1 -
->   arch/arm/mach-rockchip/rk3568/rk3568.c                   | 1 -
->   arch/arm/mach-rockchip/rk3588/rk3588.c                   | 1 -
->   arch/arm/mach-rockchip/rv1126/rv1126.c                   | 1 -
->   board/elgin/elgin_rv1108/elgin_rv1108.c                  | 1 -
->   board/firefly/firefly-rk3308/roc_cc_rk3308.c             | 1 -
->   board/google/gru/gru.c                                   | 1 -
->   board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c   | 1 -
->   board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c | 1 -
->   board/pine64/rockpro64_rk3399/rockpro64-rk3399.c         | 1 -
->   board/rockchip/evb_rv1108/evb_rv1108.c                   | 1 -
->   board/theobroma-systems/puma_rk3399/puma-rk3399.c        | 1 -
->   board/vamrs/rock960_rk3399/rock960-rk3399.c              | 1 -
->   drivers/clk/rockchip/clk_pll.c                           | 1 -
->   drivers/clk/rockchip/clk_px30.c                          | 1 -
->   drivers/clk/rockchip/clk_rk3036.c                        | 1 -
->   drivers/clk/rockchip/clk_rk3066.c                        | 1 -
->   drivers/clk/rockchip/clk_rk3128.c                        | 1 -
->   drivers/clk/rockchip/clk_rk3188.c                        | 1 -
->   drivers/clk/rockchip/clk_rk322x.c                        | 1 -
->   drivers/clk/rockchip/clk_rk3288.c                        | 1 -
->   drivers/clk/rockchip/clk_rk3308.c                        | 1 -
->   drivers/clk/rockchip/clk_rk3328.c                        | 1 -
->   drivers/clk/rockchip/clk_rk3368.c                        | 1 -
->   drivers/clk/rockchip/clk_rk3399.c                        | 1 -
->   drivers/clk/rockchip/clk_rk3568.c                        | 1 -
->   drivers/clk/rockchip/clk_rk3588.c                        | 1 -
->   drivers/clk/rockchip/clk_rv1108.c                        | 1 -
->   drivers/clk/rockchip/clk_rv1126.c                        | 1 -
->   drivers/gpio/rk_gpio.c                                   | 1 -
->   drivers/net/gmac_rockchip.c                              | 1 -
->   drivers/ram/rockchip/dmc-rk3368.c                        | 1 -
->   drivers/ram/rockchip/sdram_px30.c                        | 1 -
->   drivers/ram/rockchip/sdram_rk3066.c                      | 1 -
->   drivers/ram/rockchip/sdram_rk3188.c                      | 1 -
->   drivers/ram/rockchip/sdram_rk322x.c                      | 1 -
->   drivers/ram/rockchip/sdram_rk3288.c                      | 1 -
->   drivers/ram/rockchip/sdram_rk3399.c                      | 1 -
->   drivers/ram/rockchip/sdram_rv1126.c                      | 1 -
->   drivers/rng/rockchip_rng.c                               | 1 -
->   drivers/sysreset/sysreset_rockchip.c                     | 1 -
->   drivers/video/rockchip/dw_mipi_dsi_rockchip.c            | 1 -
->   drivers/video/rockchip/rk3288_hdmi.c                     | 1 -
->   drivers/video/rockchip/rk3288_mipi.c                     | 1 -
->   drivers/video/rockchip/rk3288_vop.c                      | 1 -
->   drivers/video/rockchip/rk3399_hdmi.c                     | 1 -
->   drivers/video/rockchip/rk3399_mipi.c                     | 1 -
->   drivers/video/rockchip/rk3399_vop.c                      | 1 -
->   drivers/video/rockchip/rk_edp.c                          | 1 -
->   drivers/video/rockchip/rk_hdmi.c                         | 1 -
->   drivers/video/rockchip/rk_lvds.c                         | 1 -
->   63 files changed, 2 insertions(+), 62 deletions(-)
->
-> diff --git a/arch/arm/include/asm/arch-rockchip/hardware.h b/arch/arm/include/asm/arch-rockchip/hardware.h
-> index 62e8bed8f31..e4662a2d52d 100644
-> --- a/arch/arm/include/asm/arch-rockchip/hardware.h
-> +++ b/arch/arm/include/asm/arch-rockchip/hardware.h
-> @@ -6,6 +6,8 @@
->   #ifndef _ASM_ARCH_HARDWARE_H
->   #define _ASM_ARCH_HARDWARE_H
->   
-> +#include <asm/io.h>
-> +
->   #define RK_CLRSETBITS(clr, set)		((((clr) | (set)) << 16) | (set))
->   #define RK_SETBITS(set)			RK_CLRSETBITS(0, set)
->   #define RK_CLRBITS(clr)			RK_CLRSETBITS(clr, 0)
-> diff --git a/arch/arm/mach-rockchip/cpu-info.c b/arch/arm/mach-rockchip/cpu-info.c
-> index dac24910e0c..a62ff53c6a0 100644
-> --- a/arch/arm/mach-rockchip/cpu-info.c
-> +++ b/arch/arm/mach-rockchip/cpu-info.c
-> @@ -7,7 +7,6 @@
->   #include <common.h>
->   #include <env.h>
->   #include <init.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/arch/arm/mach-rockchip/px30/px30.c b/arch/arm/mach-rockchip/px30/px30.c
-> index fc7456e680c..b4f655fa4b3 100644
-> --- a/arch/arm/mach-rockchip/px30/px30.c
-> +++ b/arch/arm/mach-rockchip/px30/px30.c
-> @@ -9,7 +9,6 @@
->   #include <init.h>
->   #include <spl.h>
->   #include <asm/armv8/mmu.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/bootrom.h>
->   #include <asm/arch-rockchip/grf_px30.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/arch/arm/mach-rockchip/rk3036/rk3036.c b/arch/arm/mach-rockchip/rk3036/rk3036.c
-> index 0a072cf03a8..e8130abdd77 100644
-> --- a/arch/arm/mach-rockchip/rk3036/rk3036.c
-> +++ b/arch/arm/mach-rockchip/rk3036/rk3036.c
-> @@ -6,7 +6,6 @@
->   #include <common.h>
->   #include <init.h>
->   #include <asm/global_data.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/grf_rk3036.h>
->   #include <asm/arch-rockchip/hardware.h>
->   #include <asm/arch-rockchip/sdram_rk3036.h>
-> diff --git a/arch/arm/mach-rockchip/rk3036/sdram_rk3036.c b/arch/arm/mach-rockchip/rk3036/sdram_rk3036.c
-> index fcae65b2e5a..07cd29a33e6 100644
-> --- a/arch/arm/mach-rockchip/rk3036/sdram_rk3036.c
-> +++ b/arch/arm/mach-rockchip/rk3036/sdram_rk3036.c
-> @@ -4,7 +4,6 @@
->    */
->   #include <common.h>
->   #include <init.h>
-> -#include <asm/io.h>
->   #include <asm/types.h>
->   #include <asm/arch-rockchip/cru_rk3036.h>
->   #include <asm/arch-rockchip/grf_rk3036.h>
-> diff --git a/arch/arm/mach-rockchip/rk3066/rk3066.c b/arch/arm/mach-rockchip/rk3066/rk3066.c
-> index 6661b788295..9a95ff85041 100644
-> --- a/arch/arm/mach-rockchip/rk3066/rk3066.c
-> +++ b/arch/arm/mach-rockchip/rk3066/rk3066.c
-> @@ -4,7 +4,6 @@
->    */
->   
->   #include <common.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/bootrom.h>
->   #include <asm/arch-rockchip/grf_rk3066.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/arch/arm/mach-rockchip/rk3188/rk3188.c b/arch/arm/mach-rockchip/rk3188/rk3188.c
-> index c807221f33f..ffdcaa49a1e 100644
-> --- a/arch/arm/mach-rockchip/rk3188/rk3188.c
-> +++ b/arch/arm/mach-rockchip/rk3188/rk3188.c
-> @@ -10,7 +10,6 @@
->   #include <log.h>
->   #include <syscon.h>
->   #include <asm/global_data.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/bootrom.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/grf_rk3188.h>
-> diff --git a/arch/arm/mach-rockchip/rk322x/rk322x.c b/arch/arm/mach-rockchip/rk322x/rk322x.c
-> index a304795fec6..712c0524266 100644
-> --- a/arch/arm/mach-rockchip/rk322x/rk322x.c
-> +++ b/arch/arm/mach-rockchip/rk322x/rk322x.c
-> @@ -3,7 +3,6 @@
->    * (C) Copyright 2019 Rockchip Electronics Co., Ltd
->    */
->   #include <init.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/bootrom.h>
->   #include <asm/arch-rockchip/grf_rk322x.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/arch/arm/mach-rockchip/rk3288/rk3288.c b/arch/arm/mach-rockchip/rk3288/rk3288.c
-> index 26c7e41cd89..38080aeecc3 100644
-> --- a/arch/arm/mach-rockchip/rk3288/rk3288.c
-> +++ b/arch/arm/mach-rockchip/rk3288/rk3288.c
-> @@ -11,7 +11,6 @@
->   #include <malloc.h>
->   #include <asm/armv7.h>
->   #include <asm/global_data.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/bootrom.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cpu_rk3288.h>
-> diff --git a/arch/arm/mach-rockchip/rk3308/rk3308.c b/arch/arm/mach-rockchip/rk3308/rk3308.c
-> index 6f121bf1304..27a748327e3 100644
-> --- a/arch/arm/mach-rockchip/rk3308/rk3308.c
-> +++ b/arch/arm/mach-rockchip/rk3308/rk3308.c
-> @@ -5,7 +5,6 @@
->   #include <common.h>
->   #include <init.h>
->   #include <malloc.h>
-> -#include <asm/io.h>
->   #include <asm/arch/grf_rk3308.h>
->   #include <asm/arch-rockchip/bootrom.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/arch/arm/mach-rockchip/rk3328/rk3328.c b/arch/arm/mach-rockchip/rk3328/rk3328.c
-> index b591d38fe41..b8e657e9bf4 100644
-> --- a/arch/arm/mach-rockchip/rk3328/rk3328.c
-> +++ b/arch/arm/mach-rockchip/rk3328/rk3328.c
-> @@ -10,7 +10,6 @@
->   #include <asm/arch-rockchip/grf_rk3328.h>
->   #include <asm/arch-rockchip/uart.h>
->   #include <asm/armv8/mmu.h>
-> -#include <asm/io.h>
->   
->   #define CRU_BASE		0xFF440000
->   #define GRF_BASE		0xFF100000
-> diff --git a/arch/arm/mach-rockchip/rk3368/rk3368.c b/arch/arm/mach-rockchip/rk3368/rk3368.c
-> index d009b8758e5..651ba109020 100644
-> --- a/arch/arm/mach-rockchip/rk3368/rk3368.c
-> +++ b/arch/arm/mach-rockchip/rk3368/rk3368.c
-> @@ -8,7 +8,6 @@
->   #include <init.h>
->   #include <syscon.h>
->   #include <asm/armv8/mmu.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/bootrom.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru_rk3368.h>
-> diff --git a/arch/arm/mach-rockchip/rk3399/rk3399.c b/arch/arm/mach-rockchip/rk3399/rk3399.c
-> index a1aa0e3e8b5..7fa1d7c7b7a 100644
-> --- a/arch/arm/mach-rockchip/rk3399/rk3399.c
-> +++ b/arch/arm/mach-rockchip/rk3399/rk3399.c
-> @@ -11,7 +11,6 @@
->   #include <spl_gpio.h>
->   #include <syscon.h>
->   #include <asm/armv8/mmu.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/bootrom.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru.h>
-> diff --git a/arch/arm/mach-rockchip/rk3568/rk3568.c b/arch/arm/mach-rockchip/rk3568/rk3568.c
-> index 69ef19cc85a..b30ea04f737 100644
-> --- a/arch/arm/mach-rockchip/rk3568/rk3568.c
-> +++ b/arch/arm/mach-rockchip/rk3568/rk3568.c
-> @@ -6,7 +6,6 @@
->   #include <common.h>
->   #include <dm.h>
->   #include <asm/armv8/mmu.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/bootrom.h>
->   #include <asm/arch-rockchip/grf_rk3568.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> index 53ee9f1cebc..d9e04ede092 100644
-> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> @@ -7,7 +7,6 @@
->   #include <common.h>
->   #include <spl.h>
->   #include <asm/armv8/mmu.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/bootrom.h>
->   #include <asm/arch-rockchip/hardware.h>
->   #include <asm/arch-rockchip/ioc_rk3588.h>
-> diff --git a/arch/arm/mach-rockchip/rv1126/rv1126.c b/arch/arm/mach-rockchip/rv1126/rv1126.c
-> index b9b898756f7..8589c46f10a 100644
-> --- a/arch/arm/mach-rockchip/rv1126/rv1126.c
-> +++ b/arch/arm/mach-rockchip/rv1126/rv1126.c
-> @@ -5,7 +5,6 @@
->    */
->   
->   #include <common.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/bootrom.h>
->   #include <asm/arch-rockchip/hardware.h>
->   #include <asm/arch-rockchip/grf_rv1126.h>
-> diff --git a/board/elgin/elgin_rv1108/elgin_rv1108.c b/board/elgin/elgin_rv1108/elgin_rv1108.c
-> index eb7a322d847..10398e7f712 100644
-> --- a/board/elgin/elgin_rv1108/elgin_rv1108.c
-> +++ b/board/elgin/elgin_rv1108/elgin_rv1108.c
-> @@ -8,7 +8,6 @@
->   #include <init.h>
->   #include <syscon.h>
->   #include <asm/global_data.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/grf_rv1108.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/board/firefly/firefly-rk3308/roc_cc_rk3308.c b/board/firefly/firefly-rk3308/roc_cc_rk3308.c
-> index bdf3cc03dc5..99a52a77116 100644
-> --- a/board/firefly/firefly-rk3308/roc_cc_rk3308.c
-> +++ b/board/firefly/firefly-rk3308/roc_cc_rk3308.c
-> @@ -5,7 +5,6 @@
->   
->   #include <common.h>
->   #include <adc.h>
-> -#include <asm/io.h>
->   #include <asm/arch/grf_rk3308.h>
->   #include <asm/arch-rockchip/hardware.h>
->   #include <linux/bitops.h>
-> diff --git a/board/google/gru/gru.c b/board/google/gru/gru.c
-> index ecbf702b035..9cb3a525204 100644
-> --- a/board/google/gru/gru.c
-> +++ b/board/google/gru/gru.c
-> @@ -7,7 +7,6 @@
->   #include <dm.h>
->   #include <init.h>
->   #include <syscon.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/grf_rk3399.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c b/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
-> index 2408a367305..5e758ea6cd9 100644
-> --- a/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
-> +++ b/board/pine64/pinebook-pro-rk3399/pinebook-pro-rk3399.c
-> @@ -7,7 +7,6 @@
->   #include <common.h>
->   #include <dm.h>
->   #include <syscon.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/grf_rk3399.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c b/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
-> index de75ee329d8..c9b0d5a061d 100644
-> --- a/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
-> +++ b/board/pine64/pinephone-pro-rk3399/pinephone-pro-rk3399.c
-> @@ -8,7 +8,6 @@
->   #include <dm.h>
->   #include <init.h>
->   #include <syscon.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/grf_rk3399.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c b/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
-> index d0a694ead1d..fd78ad60d14 100644
-> --- a/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
-> +++ b/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
-> @@ -7,7 +7,6 @@
->   #include <dm.h>
->   #include <init.h>
->   #include <syscon.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/grf_rk3399.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/board/rockchip/evb_rv1108/evb_rv1108.c b/board/rockchip/evb_rv1108/evb_rv1108.c
-> index e6ac598648d..0d7a486bed7 100644
-> --- a/board/rockchip/evb_rv1108/evb_rv1108.c
-> +++ b/board/rockchip/evb_rv1108/evb_rv1108.c
-> @@ -8,7 +8,6 @@
->   #include <init.h>
->   #include <syscon.h>
->   #include <asm/global_data.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/grf_rv1108.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/board/theobroma-systems/puma_rk3399/puma-rk3399.c b/board/theobroma-systems/puma_rk3399/puma-rk3399.c
-> index 98a818b135d..8b998ef4556 100644
-> --- a/board/theobroma-systems/puma_rk3399/puma-rk3399.c
-> +++ b/board/theobroma-systems/puma_rk3399/puma-rk3399.c
-> @@ -6,7 +6,6 @@
->   #include <dm.h>
->   #include <syscon.h>
->   #include <dm/pinctrl.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/hardware.h>
->   #include <asm/arch-rockchip/grf_rk3399.h>
-> diff --git a/board/vamrs/rock960_rk3399/rock960-rk3399.c b/board/vamrs/rock960_rk3399/rock960-rk3399.c
-> index a7fc38d42f8..876be8ed9e1 100644
-> --- a/board/vamrs/rock960_rk3399/rock960-rk3399.c
-> +++ b/board/vamrs/rock960_rk3399/rock960-rk3399.c
-> @@ -5,7 +5,6 @@
->   
->   #include <common.h>
->   #include <syscon.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/grf_rk3399.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/drivers/clk/rockchip/clk_pll.c b/drivers/clk/rockchip/clk_pll.c
-> index 1bb31b3313b..66f8bb16695 100644
-> --- a/drivers/clk/rockchip/clk_pll.c
-> +++ b/drivers/clk/rockchip/clk_pll.c
-> @@ -8,7 +8,6 @@
->   #include <dm.h>
->   #include <errno.h>
->   #include <log.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/hardware.h>
->   #include <div64.h>
-> diff --git a/drivers/clk/rockchip/clk_px30.c b/drivers/clk/rockchip/clk_px30.c
-> index 93b76538509..2875c152b20 100644
-> --- a/drivers/clk/rockchip/clk_px30.c
-> +++ b/drivers/clk/rockchip/clk_px30.c
-> @@ -15,7 +15,6 @@
->   #include <asm/arch-rockchip/cru_px30.h>
->   #include <asm/arch-rockchip/hardware.h>
->   #include <asm/global_data.h>
-> -#include <asm/io.h>
->   #include <dm/device-internal.h>
->   #include <dm/lists.h>
->   #include <dt-bindings/clock/px30-cru.h>
-> diff --git a/drivers/clk/rockchip/clk_rk3036.c b/drivers/clk/rockchip/clk_rk3036.c
-> index 6bc6d41ad61..6238b14c29e 100644
-> --- a/drivers/clk/rockchip/clk_rk3036.c
-> +++ b/drivers/clk/rockchip/clk_rk3036.c
-> @@ -10,7 +10,6 @@
->   #include <log.h>
->   #include <malloc.h>
->   #include <syscon.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru_rk3036.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/drivers/clk/rockchip/clk_rk3066.c b/drivers/clk/rockchip/clk_rk3066.c
-> index 2c12f6e0441..f83335df6db 100644
-> --- a/drivers/clk/rockchip/clk_rk3066.c
-> +++ b/drivers/clk/rockchip/clk_rk3066.c
-> @@ -14,7 +14,6 @@
->   #include <malloc.h>
->   #include <mapmem.h>
->   #include <syscon.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru_rk3066.h>
->   #include <asm/arch-rockchip/grf_rk3066.h>
-> diff --git a/drivers/clk/rockchip/clk_rk3128.c b/drivers/clk/rockchip/clk_rk3128.c
-> index 13e176cdad1..182754e7052 100644
-> --- a/drivers/clk/rockchip/clk_rk3128.c
-> +++ b/drivers/clk/rockchip/clk_rk3128.c
-> @@ -10,7 +10,6 @@
->   #include <log.h>
->   #include <malloc.h>
->   #include <syscon.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru_rk3128.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/drivers/clk/rockchip/clk_rk3188.c b/drivers/clk/rockchip/clk_rk3188.c
-> index ebdd1b3f99a..f98b46a0f73 100644
-> --- a/drivers/clk/rockchip/clk_rk3188.c
-> +++ b/drivers/clk/rockchip/clk_rk3188.c
-> @@ -13,7 +13,6 @@
->   #include <malloc.h>
->   #include <mapmem.h>
->   #include <syscon.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru_rk3188.h>
->   #include <asm/arch-rockchip/grf_rk3188.h>
-> diff --git a/drivers/clk/rockchip/clk_rk322x.c b/drivers/clk/rockchip/clk_rk322x.c
-> index 28cdba75758..9371c4f63a4 100644
-> --- a/drivers/clk/rockchip/clk_rk322x.c
-> +++ b/drivers/clk/rockchip/clk_rk322x.c
-> @@ -10,7 +10,6 @@
->   #include <log.h>
->   #include <malloc.h>
->   #include <syscon.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru_rk322x.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/drivers/clk/rockchip/clk_rk3288.c b/drivers/clk/rockchip/clk_rk3288.c
-> index e24c32c0a2a..0b7eefad15f 100644
-> --- a/drivers/clk/rockchip/clk_rk3288.c
-> +++ b/drivers/clk/rockchip/clk_rk3288.c
-> @@ -15,7 +15,6 @@
->   #include <mapmem.h>
->   #include <syscon.h>
->   #include <asm/global_data.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru.h>
->   #include <asm/arch-rockchip/grf_rk3288.h>
-> diff --git a/drivers/clk/rockchip/clk_rk3308.c b/drivers/clk/rockchip/clk_rk3308.c
-> index d0a3f654466..7755b016111 100644
-> --- a/drivers/clk/rockchip/clk_rk3308.c
-> +++ b/drivers/clk/rockchip/clk_rk3308.c
-> @@ -12,7 +12,6 @@
->   #include <malloc.h>
->   #include <syscon.h>
->   #include <asm/global_data.h>
-> -#include <asm/io.h>
->   #include <asm/arch/cru_rk3308.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/drivers/clk/rockchip/clk_rk3328.c b/drivers/clk/rockchip/clk_rk3328.c
-> index ef97381f0ed..cfec1d974ac 100644
-> --- a/drivers/clk/rockchip/clk_rk3328.c
-> +++ b/drivers/clk/rockchip/clk_rk3328.c
-> @@ -15,7 +15,6 @@
->   #include <asm/arch-rockchip/cru_rk3328.h>
->   #include <asm/arch-rockchip/hardware.h>
->   #include <asm/arch-rockchip/grf_rk3328.h>
-> -#include <asm/io.h>
->   #include <dm/device-internal.h>
->   #include <dm/lists.h>
->   #include <dt-bindings/clock/rk3328-cru.h>
-> diff --git a/drivers/clk/rockchip/clk_rk3368.c b/drivers/clk/rockchip/clk_rk3368.c
-> index 3406ff592e1..1c5dfaa3800 100644
-> --- a/drivers/clk/rockchip/clk_rk3368.c
-> +++ b/drivers/clk/rockchip/clk_rk3368.c
-> @@ -18,7 +18,6 @@
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru_rk3368.h>
->   #include <asm/arch-rockchip/hardware.h>
-> -#include <asm/io.h>
->   #include <dm/device-internal.h>
->   #include <dm/lists.h>
->   #include <dt-bindings/clock/rk3368-cru.h>
-> diff --git a/drivers/clk/rockchip/clk_rk3399.c b/drivers/clk/rockchip/clk_rk3399.c
-> index c37e8a53a26..80f65a237e8 100644
-> --- a/drivers/clk/rockchip/clk_rk3399.c
-> +++ b/drivers/clk/rockchip/clk_rk3399.c
-> @@ -14,7 +14,6 @@
->   #include <mapmem.h>
->   #include <syscon.h>
->   #include <bitfield.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/drivers/clk/rockchip/clk_rk3568.c b/drivers/clk/rockchip/clk_rk3568.c
-> index 68f5bbbb9e5..57ef27dda89 100644
-> --- a/drivers/clk/rockchip/clk_rk3568.c
-> +++ b/drivers/clk/rockchip/clk_rk3568.c
-> @@ -13,7 +13,6 @@
->   #include <asm/arch-rockchip/cru_rk3568.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/hardware.h>
-> -#include <asm/io.h>
->   #include <dm/device-internal.h>
->   #include <dm/lists.h>
->   #include <dt-bindings/clock/rk3568-cru.h>
-> diff --git a/drivers/clk/rockchip/clk_rk3588.c b/drivers/clk/rockchip/clk_rk3588.c
-> index a995dd5591d..8f33843179b 100644
-> --- a/drivers/clk/rockchip/clk_rk3588.c
-> +++ b/drivers/clk/rockchip/clk_rk3588.c
-> @@ -14,7 +14,6 @@
->   #include <asm/arch-rockchip/cru_rk3588.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/hardware.h>
-> -#include <asm/io.h>
->   #include <dm/device-internal.h>
->   #include <dm/lists.h>
->   #include <dt-bindings/clock/rockchip,rk3588-cru.h>
-> diff --git a/drivers/clk/rockchip/clk_rv1108.c b/drivers/clk/rockchip/clk_rv1108.c
-> index b0c889ae156..fc442f7eebe 100644
-> --- a/drivers/clk/rockchip/clk_rv1108.c
-> +++ b/drivers/clk/rockchip/clk_rv1108.c
-> @@ -13,7 +13,6 @@
->   #include <malloc.h>
->   #include <syscon.h>
->   #include <asm/global_data.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru_rv1108.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/drivers/clk/rockchip/clk_rv1126.c b/drivers/clk/rockchip/clk_rv1126.c
-> index 580c0b1b0cf..cfdfcbdb0f4 100644
-> --- a/drivers/clk/rockchip/clk_rv1126.c
-> +++ b/drivers/clk/rockchip/clk_rv1126.c
-> @@ -16,7 +16,6 @@
->   #include <asm/arch-rockchip/grf_rv1126.h>
->   #include <asm/arch-rockchip/hardware.h>
->   #include <dm/device-internal.h>
-> -#include <asm/io.h>
->   #include <dm/lists.h>
->   #include <dt-bindings/clock/rockchip,rv1126-cru.h>
->   
-> diff --git a/drivers/gpio/rk_gpio.c b/drivers/gpio/rk_gpio.c
-> index 4a6ae554bf7..c5e096bb1ad 100644
-> --- a/drivers/gpio/rk_gpio.c
-> +++ b/drivers/gpio/rk_gpio.c
-> @@ -11,7 +11,6 @@
->   #include <syscon.h>
->   #include <linux/errno.h>
->   #include <asm/gpio.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/hardware.h>
->   #include <asm/arch-rockchip/gpio.h>
-> diff --git a/drivers/net/gmac_rockchip.c b/drivers/net/gmac_rockchip.c
-> index 04008d2b198..c1bae3f68bd 100644
-> --- a/drivers/net/gmac_rockchip.c
-> +++ b/drivers/net/gmac_rockchip.c
-> @@ -13,7 +13,6 @@
->   #include <phy.h>
->   #include <syscon.h>
->   #include <asm/global_data.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/periph.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/drivers/ram/rockchip/dmc-rk3368.c b/drivers/ram/rockchip/dmc-rk3368.c
-> index 74d8aed571c..c0a60be7f11 100644
-> --- a/drivers/ram/rockchip/dmc-rk3368.c
-> +++ b/drivers/ram/rockchip/dmc-rk3368.c
-> @@ -13,7 +13,6 @@
->   #include <ram.h>
->   #include <regmap.h>
->   #include <syscon.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru_rk3368.h>
->   #include <asm/arch-rockchip/grf_rk3368.h>
-> diff --git a/drivers/ram/rockchip/sdram_px30.c b/drivers/ram/rockchip/sdram_px30.c
-> index 2728d93be32..21498e89570 100644
-> --- a/drivers/ram/rockchip/sdram_px30.c
-> +++ b/drivers/ram/rockchip/sdram_px30.c
-> @@ -10,7 +10,6 @@
->   #include <log.h>
->   #include <ram.h>
->   #include <syscon.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru_px30.h>
->   #include <asm/arch-rockchip/grf_px30.h>
-> diff --git a/drivers/ram/rockchip/sdram_rk3066.c b/drivers/ram/rockchip/sdram_rk3066.c
-> index 39c0be56a6e..562cf544c90 100644
-> --- a/drivers/ram/rockchip/sdram_rk3066.c
-> +++ b/drivers/ram/rockchip/sdram_rk3066.c
-> @@ -17,7 +17,6 @@
->   #include <ram.h>
->   #include <regmap.h>
->   #include <syscon.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru_rk3066.h>
->   #include <asm/arch-rockchip/ddr_rk3188.h>
-> diff --git a/drivers/ram/rockchip/sdram_rk3188.c b/drivers/ram/rockchip/sdram_rk3188.c
-> index 16a68885f1f..f689235b13d 100644
-> --- a/drivers/ram/rockchip/sdram_rk3188.c
-> +++ b/drivers/ram/rockchip/sdram_rk3188.c
-> @@ -17,7 +17,6 @@
->   #include <ram.h>
->   #include <regmap.h>
->   #include <syscon.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru_rk3188.h>
->   #include <asm/arch-rockchip/ddr_rk3188.h>
-> diff --git a/drivers/ram/rockchip/sdram_rk322x.c b/drivers/ram/rockchip/sdram_rk322x.c
-> index 892766a8b43..5fc23c11193 100644
-> --- a/drivers/ram/rockchip/sdram_rk322x.c
-> +++ b/drivers/ram/rockchip/sdram_rk322x.c
-> @@ -12,7 +12,6 @@
->   #include <regmap.h>
->   #include <syscon.h>
->   #include <asm/global_data.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru_rk322x.h>
->   #include <asm/arch-rockchip/grf_rk322x.h>
-> diff --git a/drivers/ram/rockchip/sdram_rk3288.c b/drivers/ram/rockchip/sdram_rk3288.c
-> index ec6bdcb2015..2c1afa93ecf 100644
-> --- a/drivers/ram/rockchip/sdram_rk3288.c
-> +++ b/drivers/ram/rockchip/sdram_rk3288.c
-> @@ -17,7 +17,6 @@
->   #include <ram.h>
->   #include <regmap.h>
->   #include <syscon.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru.h>
->   #include <asm/arch-rockchip/ddr_rk3288.h>
-> diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
-> index 2bf8d48d25a..02cc4a38cf0 100644
-> --- a/drivers/ram/rockchip/sdram_rk3399.c
-> +++ b/drivers/ram/rockchip/sdram_rk3399.c
-> @@ -14,7 +14,6 @@
->   #include <ram.h>
->   #include <regmap.h>
->   #include <syscon.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru.h>
->   #include <asm/arch-rockchip/grf_rk3399.h>
-> diff --git a/drivers/ram/rockchip/sdram_rv1126.c b/drivers/ram/rockchip/sdram_rv1126.c
-> index 9e1376a940f..4377871e092 100644
-> --- a/drivers/ram/rockchip/sdram_rv1126.c
-> +++ b/drivers/ram/rockchip/sdram_rv1126.c
-> @@ -9,7 +9,6 @@
->   #include <dm.h>
->   #include <ram.h>
->   #include <syscon.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/hardware.h>
->   #include <asm/arch-rockchip/cru_rv1126.h>
-> diff --git a/drivers/rng/rockchip_rng.c b/drivers/rng/rockchip_rng.c
-> index 705b424cf3d..9dec7e45dde 100644
-> --- a/drivers/rng/rockchip_rng.c
-> +++ b/drivers/rng/rockchip_rng.c
-> @@ -3,7 +3,6 @@
->    * Copyright (c) 2020 Fuzhou Rockchip Electronics Co., Ltd
->    */
->   #include <asm/arch-rockchip/hardware.h>
-> -#include <asm/io.h>
->   #include <common.h>
->   #include <dm.h>
->   #include <linux/bitops.h>
-> diff --git a/drivers/sysreset/sysreset_rockchip.c b/drivers/sysreset/sysreset_rockchip.c
-> index 0fc6b683f2b..f353f9b4c79 100644
-> --- a/drivers/sysreset/sysreset_rockchip.c
-> +++ b/drivers/sysreset/sysreset_rockchip.c
-> @@ -7,7 +7,6 @@
->   #include <dm.h>
->   #include <errno.h>
->   #include <sysreset.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/cru_rk3328.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-> index 5e75b6ec68c..fb784636e87 100644
-> --- a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-> +++ b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-> @@ -27,7 +27,6 @@
->   #include <common.h>
->   #include <log.h>
->   #include <video.h>
-> -#include <asm/io.h>
->   #include <dm/device-internal.h>
->   #include <linux/bitops.h>
->   #include <linux/time.h>
-> diff --git a/drivers/video/rockchip/rk3288_hdmi.c b/drivers/video/rockchip/rk3288_hdmi.c
-> index 327ae787125..9cbe31e9abd 100644
-> --- a/drivers/video/rockchip/rk3288_hdmi.c
-> +++ b/drivers/video/rockchip/rk3288_hdmi.c
-> @@ -14,7 +14,6 @@
->   #include <regmap.h>
->   #include <syscon.h>
->   #include <asm/gpio.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/hardware.h>
->   #include <asm/arch-rockchip/grf_rk3288.h>
-> diff --git a/drivers/video/rockchip/rk3288_mipi.c b/drivers/video/rockchip/rk3288_mipi.c
-> index c0dffa3cba2..9d42119c826 100644
-> --- a/drivers/video/rockchip/rk3288_mipi.c
-> +++ b/drivers/video/rockchip/rk3288_mipi.c
-> @@ -14,7 +14,6 @@
->   #include "rk_mipi.h"
->   #include <syscon.h>
->   #include <asm/gpio.h>
-> -#include <asm/io.h>
->   #include <dm/uclass-internal.h>
->   #include <linux/err.h>
->   #include <linux/kernel.h>
-> diff --git a/drivers/video/rockchip/rk3288_vop.c b/drivers/video/rockchip/rk3288_vop.c
-> index 44f32bb5fa2..a4683852ea0 100644
-> --- a/drivers/video/rockchip/rk3288_vop.c
-> +++ b/drivers/video/rockchip/rk3288_vop.c
-> @@ -12,7 +12,6 @@
->   #include <syscon.h>
->   #include <video.h>
->   #include <asm/global_data.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/grf_rk3288.h>
->   #include <asm/arch-rockchip/hardware.h>
-> diff --git a/drivers/video/rockchip/rk3399_hdmi.c b/drivers/video/rockchip/rk3399_hdmi.c
-> index 3041360c6ed..5f3f5d26886 100644
-> --- a/drivers/video/rockchip/rk3399_hdmi.c
-> +++ b/drivers/video/rockchip/rk3399_hdmi.c
-> @@ -12,7 +12,6 @@
->   #include <regmap.h>
->   #include <syscon.h>
->   #include <asm/gpio.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/hardware.h>
->   #include <asm/arch-rockchip/grf_rk3399.h>
-> diff --git a/drivers/video/rockchip/rk3399_mipi.c b/drivers/video/rockchip/rk3399_mipi.c
-> index 7fc79ba9045..b62d8086674 100644
-> --- a/drivers/video/rockchip/rk3399_mipi.c
-> +++ b/drivers/video/rockchip/rk3399_mipi.c
-> @@ -14,7 +14,6 @@
->   #include "rk_mipi.h"
->   #include <syscon.h>
->   #include <asm/gpio.h>
-> -#include <asm/io.h>
->   #include <dm/uclass-internal.h>
->   #include <linux/err.h>
->   #include <linux/kernel.h>
-> diff --git a/drivers/video/rockchip/rk3399_vop.c b/drivers/video/rockchip/rk3399_vop.c
-> index a34b491058f..cb589c7537e 100644
-> --- a/drivers/video/rockchip/rk3399_vop.c
-> +++ b/drivers/video/rockchip/rk3399_vop.c
-> @@ -13,7 +13,6 @@
->   #include <video.h>
->   #include <asm/arch-rockchip/hardware.h>
->   #include <asm/global_data.h>
-> -#include <asm/io.h>
->   #include "rk_vop.h"
->   
->   DECLARE_GLOBAL_DATA_PTR;
-> diff --git a/drivers/video/rockchip/rk_edp.c b/drivers/video/rockchip/rk_edp.c
-> index 3697d582510..67bfa788367 100644
-> --- a/drivers/video/rockchip/rk_edp.c
-> +++ b/drivers/video/rockchip/rk_edp.c
-> @@ -17,7 +17,6 @@
->   #include <reset.h>
->   #include <syscon.h>
->   #include <asm/gpio.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/hardware.h>
->   #include <asm/arch-rockchip/edp_rk3288.h>
-> diff --git a/drivers/video/rockchip/rk_hdmi.c b/drivers/video/rockchip/rk_hdmi.c
-> index 8dcd4d59645..044a29ee47a 100644
-> --- a/drivers/video/rockchip/rk_hdmi.c
-> +++ b/drivers/video/rockchip/rk_hdmi.c
-> @@ -15,7 +15,6 @@
->   #include <regmap.h>
->   #include <syscon.h>
->   #include <asm/gpio.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/hardware.h>
->   #include "rk_hdmi.h"
-> diff --git a/drivers/video/rockchip/rk_lvds.c b/drivers/video/rockchip/rk_lvds.c
-> index 9cf3e3ca768..d0a015e31ee 100644
-> --- a/drivers/video/rockchip/rk_lvds.c
-> +++ b/drivers/video/rockchip/rk_lvds.c
-> @@ -13,7 +13,6 @@
->   #include <syscon.h>
->   #include <asm/global_data.h>
->   #include <asm/gpio.h>
-> -#include <asm/io.h>
->   #include <asm/arch-rockchip/clock.h>
->   #include <asm/arch-rockchip/grf_rk3288.h>
->   #include <asm/arch-rockchip/hardware.h>
->
+Regards
+    Tim
