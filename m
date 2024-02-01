@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26BEDC47258
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 03:07:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACE96C47258
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 03:07:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7535487C8E;
+	by phobos.denx.de (Postfix) with ESMTP id F1B9087CCA;
 	Thu,  1 Feb 2024 04:06:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rxpiRoWE";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="M3+dWs9k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4209287C93; Thu,  1 Feb 2024 04:06:50 +0100 (CET)
+ id 3335387CA7; Thu,  1 Feb 2024 04:06:50 +0100 (CET)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E1CF87C9E
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 04:06:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3550E87CCB
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 04:06:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41136bP2082247;
- Wed, 31 Jan 2024 21:06:37 -0600
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41136caQ082269;
+ Wed, 31 Jan 2024 21:06:38 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1706756797;
- bh=wfmN+lkHHbAJHIrfJV3F9S3PY7GDFsk7sLdrJ7AWr70=;
- h=From:To:CC:Subject:Date;
- b=rxpiRoWE39i/0A2dGtfpT76MgEFsIfPKNo1fd/4n8ud9HlkFA5iaeWjGMl9L8YIEX
- /Kxr48cLYWhhQW2cVBV9I6UTrKoT9CrzeVq3qTK19zpAoKPSU7W8FgnnN4R1f09vw3
- 0BnuFu3Rmkm/Fbl4mXbFbZ7MjO79oiSoXB45B1PI=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41136bZm013781
+ s=ti-com-17Q1; t=1706756798;
+ bh=VNhyfk56gH53/Y8Wt4IlB6vortVCqUdV1qvnpkCrnjw=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=M3+dWs9kDjiU0xqLpss0J6rsIe65Si3dOuSeXxjLUxyziTQdV9sGezpfe4qRXof95
+ OAHyxOQOJtlpjhejUd4tXE94608vmG3wBqOk643VVpp0pBLiCaVMO81Br8FtQAK4W0
+ YD8M8IWdzLRuqOZbrLQZhb506GntKxPjuxCthkwI=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41136bMw008947
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 31 Jan 2024 21:06:37 -0600
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 31 Jan 2024 21:06:38 -0600
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 31
  Jan 2024 21:06:37 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Wed, 31 Jan 2024 21:06:37 -0600
 Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41136air098171;
- Wed, 31 Jan 2024 21:06:36 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41136bqN098210;
+ Wed, 31 Jan 2024 21:06:37 -0600
 From: Bryan Brattlof <bb@ti.com>
 To: Tom Rini <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>, Hari
  Nagalla <hnagalla@ti.com>
@@ -57,23 +57,25 @@ CC: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Sumit Garg <sumit.garg@linaro.org>, Nishanth Menon <nm@ti.com>,
  Andrew Davis <afd@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
  UBoot Mailing List <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>
-Subject: [PATCH] arm: dts: k3-am62p5: enable the wkup i2c bus
-Date: Wed, 31 Jan 2024 21:06:35 -0600
-Message-ID: <20240201030634.1120963-16-bb@ti.com>
+Subject: [PATCH v2 12/13] configs: introduce configs needed for the am62px
+Date: Wed, 31 Jan 2024 21:06:48 -0600
+Message-ID: <20240201030634.1120963-29-bb@ti.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240201030634.1120963-16-bb@ti.com>
+References: <20240201030634.1120963-16-bb@ti.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1322; i=bb@ti.com;
- h=from:subject; bh=bMbm6EasAoULcYq4OYaetVllJEo5DnKCeF6bSWpgeV4=;
- b=owNCWmg5MUFZJlNZSeW4eAAAa3///v5J769/G37/3c/+3r9/6717y9faj/83X90r7f39+V6wA
- RtWUhoAADQAaAD1A0AaGINDTTQaAAGhoAAAAGQaDRkaAaZA0xDCep6maTTNqiHqAGgaA0AAAADa
- gNADQ0A0ANDRhGJpoMCGT1HqNNGgADTTTIAaA0G1HqeiHRp6g2oyNDamg0Bo0aAGmjTQ00GhpoN
- DQ0AaMhoyAGmIaGg0PU00AAyaAyBiAaDQAApBOAu1+AMeZsIaaJE0UOKy45E6C+gIaIpQ2Ij3nB
- ORUF0ARaK50nc5ScGckt5N7sSGnnMNQ1ng5qYqw8IOt4RGXo8r1DqVLBhTBDfrz7WiVVaoTn1h9
- 8gBKa2KYWkgxmTMZy5Zex5rAWvtXF9oZPw8SHtPTKviL1irYXy8EuMQnNjoMTN3gRKu/4Dtlhq3
- I/enI/kaJ4jVjDnn8Gzx5KtRs8XiJ5A5eXf4sLqFGoy2IsUl4Jr19CCTEPdEsnBZwriXlzLSPXC
- 5nzzjJKhRS+oQiQk2i+GWnJPZ9r1Bdg5Tv37dgHVfoRZmmrzGYmmUwsUnB4c59WoJ/vpN/iZTxc
- IQNQxM/dUlgoB4+KMMf+LNuQHCs1M+Ak+QVpsZFIIG7ANDskAeMTZNOapFV/zYxdPr7/RMIO6Sy
- IeUKMFmFAGYU60GfQTQP8XckU4UJBJ5bh4A
+X-Developer-Signature: v=1; a=openpgp-sha256; l=10255; i=bb@ti.com;
+ h=from:subject; bh=6YjIzFqdIC4NCMbMWLKGEqnsz3FhLM3d+X/hFRqU14I=;
+ b=owNCWmg5MUFZJlNZtYIqJAAAbX///v9r5+//nvOUf77vX7tef1225fdfnl6X9Jw87JnGneWwA
+ RsZo5AaGjRppoyDTQ0Mg0GgyGgBpoANBoNGgNAPSaGTEAAGQ00ZqG9RDQ0fqnqP1IgepkAyA9QG
+ 1DQNDE0D1NA009CaaGg0aMRo0ZAAeUB6hpo0GRk2oAHqeoyDQBiDvVD1NNPUzUHpMmTQA9TENNG
+ jIyaDIGgDTQAyMhoAaZNGQAZAaGmjIaNAaMg9TQEFVB2aEjkhRuXUuBBX6NAvGDgD9t4+zkW6Ld
+ IXEqYITAiM8+AmZz0PY351AvsYot6QZlC7E/Q/WopK5Wwl5wkVqjrK0KGfQHjzxR/dGB/DiXaEq
+ 8FdF0/0giAg9gM75YsqcEUd2E0GbgSZBTHWBXLDL74YAM3RDcdcRDwShBnvaLiaF2xJbRZKihp/
+ gzHbkc8pFGC48qMZ2pODqq5sjcOJ8vpa5KpTz/l6Dm0rZz2A67/lLq7OCfBihzo4h/t1zhbC/d1
+ AoKZzOUHu8lsQ1aoQS404RmO7ZXVB79xgTdgDwjCgSPbgxFzxJJIO3YuvAkD0fPZNRDs/J7vT3Y
+ iCuO59kYB+T8SGkB1kQg0A0ICK9wQmFJcIvldP/vdCA8miK/Z/iTUQlOJqi0jhlQv4HlEB3o8M/
+ rQNH8YJ4Ll1n/+LuSKcKEhawRUSAA==
 X-Developer-Key: i=bb@ti.com; a=openpgp;
  fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
 Content-Transfer-Encoding: 8bit
@@ -95,49 +97,365 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The PMIC for the am62p5-sk is connected to the i2c bus on the wakeup
-island. While we do not have a driver yet, enable it anyway so we can
-begin development of the driver and characterization of the board.
+Introduce the initial configs needed to support the am62px SoC family
 
 Signed-off-by: Bryan Brattlof <bb@ti.com>
 ---
- arch/arm/dts/k3-am62p5-sk.dts | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ configs/am62px_evm_a53_defconfig | 178 +++++++++++++++++++++++++++++++
+ configs/am62px_evm_r5_defconfig  | 137 ++++++++++++++++++++++++
+ include/configs/am62px_evm.h     |  14 +++
+ 3 files changed, 329 insertions(+)
+ create mode 100644 configs/am62px_evm_a53_defconfig
+ create mode 100644 configs/am62px_evm_r5_defconfig
+ create mode 100644 include/configs/am62px_evm.h
 
-diff --git a/arch/arm/dts/k3-am62p5-sk.dts b/arch/arm/dts/k3-am62p5-sk.dts
-index 9e4479aa78886..77298d31a986f 100644
---- a/arch/arm/dts/k3-am62p5-sk.dts
-+++ b/arch/arm/dts/k3-am62p5-sk.dts
-@@ -790,6 +790,13 @@
- &mcu_pmx0 {
- 	bootph-all;
- 
-+	wkup_i2c0_pins_default: wkup-i2c0-default-pins {
-+		pinctrl-single,pins = <
-+			AM62PX_MCU_IOPAD(0x04c, PIN_INPUT, 0)	/* (A13) WKUP_I2C0_SCL */
-+			AM62PX_MCU_IOPAD(0x050, PIN_INPUT, 0)	/* (C11) WKUP_I2C0_SDA */
-+		>;
-+	};
+diff --git a/configs/am62px_evm_a53_defconfig b/configs/am62px_evm_a53_defconfig
+new file mode 100644
+index 0000000000000..bd8002108b10c
+--- /dev/null
++++ b/configs/am62px_evm_a53_defconfig
+@@ -0,0 +1,178 @@
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_TI_SECURE_DEVICE=y
++CONFIG_SYS_MALLOC_F_LEN=0x8000
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_SOC_K3_AM62P5=y
++CONFIG_K3_ATF_LOAD_ADDR=0x9e780000
++CONFIG_TARGET_AM62P5_A53_EVM=y
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80480000
++CONFIG_SF_DEFAULT_SPEED=25000000
++CONFIG_ENV_SIZE=0x40000
++CONFIG_DM_GPIO=y
++CONFIG_SPL_DM_SPI=y
++CONFIG_OF_UPSTREAM=y
++CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am62p5-sk"
++CONFIG_SPL_TEXT_BASE=0x80080000
++CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_DM_RESET=y
++CONFIG_SPL_MMC=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_STACK_R_ADDR=0x82000000
++CONFIG_SPL_FS_FAT=y
++CONFIG_SPL_LIBDISK_SUPPORT=y
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
++CONFIG_BOOTSTD_FULL=y
++CONFIG_BOOTSTD_DEFAULTS=y
++CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
++CONFIG_SPL_MAX_SIZE=0x58000
++CONFIG_SPL_PAD_TO=0x0
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x80a00000
++CONFIG_SPL_BSS_MAX_SIZE=0x80000
++CONFIG_SPL_SYS_MALLOC_SIMPLE=y
++CONFIG_SPL_STACK_R=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
++CONFIG_SPL_DMA=y
++CONFIG_SPL_ENV_SUPPORT=y
++CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
++CONFIG_SPL_I2C=y
++CONFIG_SPL_DM_MAILBOX=y
++CONFIG_SPL_MTD_SUPPORT=y
++CONFIG_SPL_DM_SPI_FLASH=y
++CONFIG_SPL_POWER_DOMAIN=y
++CONFIG_SPL_RAM_SUPPORT=y
++CONFIG_SPL_RAM_DEVICE=y
++# CONFIG_SPL_SPI_FLASH_TINY is not set
++CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x280000
++CONFIG_SPL_THERMAL=y
++CONFIG_SPL_YMODEM_SUPPORT=y
++CONFIG_SYS_MAXARGS=64
++CONFIG_CMD_CLK=y
++CONFIG_CMD_DFU=y
++CONFIG_CMD_DM=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_MTD=y
++CONFIG_CMD_REMOTEPROC=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_CMD_MTDPARTS=y
++CONFIG_CMD_UBI=y
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_MULTI_DTB_FIT=y
++CONFIG_SPL_MULTI_DTB_FIT=y
++CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_SPL_DM=y
++CONFIG_SPL_DM_DEVICE_REMOVE=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_REGMAP=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_SPL_OF_TRANSLATE=y
++CONFIG_CLK=y
++CONFIG_SPL_CLK=y
++CONFIG_CLK_TI_SCI=y
++CONFIG_DFU_MMC=y
++CONFIG_DFU_MTD=y
++CONFIG_DFU_RAM=y
++CONFIG_DFU_SF=y
++CONFIG_SYS_DFU_DATA_BUF_SIZE=0x40000
++CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
++CONFIG_DMA_CHANNELS=y
++CONFIG_TI_K3_NAVSS_UDMA=y
++CONFIG_USB_FUNCTION_FASTBOOT=y
++CONFIG_FASTBOOT_BUF_ADDR=0xC0000000
++CONFIG_FASTBOOT_BUF_SIZE=0x2F000000
++CONFIG_TI_SCI_PROTOCOL=y
++CONFIG_SPL_DM_GPIO_LOOKUP_LABEL=y
++CONFIG_DA8XX_GPIO=y
++CONFIG_DM_PCA953X=y
++CONFIG_SPL_DM_PCA953X=y
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_OMAP24XX=y
++CONFIG_DM_MAILBOX=y
++CONFIG_K3_SEC_PROXY=y
++CONFIG_I2C_EEPROM=y
++CONFIG_SPL_I2C_EEPROM=y
++CONFIG_FS_LOADER=y
++CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_MMC_IO_VOLTAGE=y
++CONFIG_SPL_MMC_IO_VOLTAGE=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_SPL_MMC_HS400_SUPPORT=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_ADMA=y
++CONFIG_SPL_MMC_SDHCI_ADMA=y
++CONFIG_MMC_SDHCI_AM654=y
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_MTD_SPI_NAND=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_SOFT_RESET=y
++CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
++CONFIG_SPI_FLASH_SPANSION=y
++CONFIG_SPI_FLASH_S28HX_T=y
++CONFIG_PHY_TI_DP83867=y
++CONFIG_TI_AM65_CPSW_NUSS=y
++CONFIG_PINCTRL=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_PINCTRL_SINGLE=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_TI_SCI_POWER_DOMAIN=y
++CONFIG_DM_REGULATOR=y
++CONFIG_SPL_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_SPL_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_SPL_DM_REGULATOR_GPIO=y
++CONFIG_K3_SYSTEM_CONTROLLER=y
++CONFIG_REMOTEPROC_TI_K3_ARM64=y
++CONFIG_REMOTEPROC_TI_K3_DSP=y
++CONFIG_REMOTEPROC_TI_K3_R5F=y
++CONFIG_RESET_TI_SCI=y
++CONFIG_DM_SERIAL=y
++CONFIG_SOC_DEVICE=y
++CONFIG_SOC_DEVICE_TI_K3=y
++CONFIG_SOC_TI=y
++CONFIG_SPI=y
++CONFIG_DM_SPI=y
++CONFIG_CADENCE_QSPI=y
++CONFIG_SYSRESET=y
++CONFIG_SPL_SYSRESET=y
++CONFIG_SYSRESET_TI_SCI=y
++CONFIG_DM_THERMAL=y
++CONFIG_USB=y
++CONFIG_DM_USB_GADGET=y
++CONFIG_SPL_DM_USB_GADGET=y
++CONFIG_SPL_USB_HOST=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_SPL_USB_DWC3_GENERIC=y
++CONFIG_SPL_USB_STORAGE=y
++CONFIG_USB_GADGET=y
++CONFIG_SPL_USB_GADGET=y
++CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
++CONFIG_USB_GADGET_VENDOR_NUM=0x0451
++CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
++CONFIG_SPL_DFU=y
++CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
+diff --git a/configs/am62px_evm_r5_defconfig b/configs/am62px_evm_r5_defconfig
+new file mode 100644
+index 0000000000000..25505167f018b
+--- /dev/null
++++ b/configs/am62px_evm_r5_defconfig
+@@ -0,0 +1,137 @@
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_TI_SECURE_DEVICE=y
++CONFIG_SYS_MALLOC_F_LEN=0x9000
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_SOC_K3_AM62P5=y
++CONFIG_TARGET_AM62P5_R5_EVM=y
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x43c4a7f0
++CONFIG_SF_DEFAULT_SPEED=25000000
++CONFIG_SF_DEFAULT_MODE=0
++CONFIG_ENV_SIZE=0x20000
++CONFIG_ENV_OFFSET=0x680000
++CONFIG_SPL_DM_SPI=y
++CONFIG_DEFAULT_DEVICE_TREE="k3-am62p5-r5-sk"
++CONFIG_SPL_TEXT_BASE=0x43c00000
++CONFIG_DM_RESET=y
++CONFIG_SPL_MMC=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_STACK_R_ADDR=0x82000000
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
++CONFIG_SPL_SIZE_LIMIT=0x3C000
++CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x5000
++CONFIG_SPL_FS_FAT=y
++CONFIG_SPL_LIBDISK_SUPPORT=y
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x80080000
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_SPL_SIZE_LIMIT_SUBTRACT_GD=y
++CONFIG_SPL_SIZE_LIMIT_SUBTRACT_MALLOC=y
++CONFIG_SPL_MAX_SIZE=0x3B000
++CONFIG_SPL_PAD_TO=0x0
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x43c4b000
++CONFIG_SPL_BSS_MAX_SIZE=0x3000
++CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
++CONFIG_SPL_SYS_MALLOC_SIMPLE=y
++CONFIG_SPL_STACK_R=y
++CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x200000
++CONFIG_SPL_SEPARATE_BSS=y
++CONFIG_SYS_SPL_MALLOC=y
++CONFIG_HAS_CUSTOM_SPL_MALLOC_START=y
++CONFIG_CUSTOM_SYS_SPL_MALLOC_ADDR=0x84000000
++CONFIG_SYS_SPL_MALLOC_SIZE=0x1000000
++CONFIG_SPL_EARLY_BSS=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
++CONFIG_SPL_DMA=y
++CONFIG_SPL_DM_MAILBOX=y
++CONFIG_SPL_MTD_SUPPORT=y
++CONFIG_SPL_DM_SPI_FLASH=y
++CONFIG_SPL_DM_RESET=y
++CONFIG_SPL_POWER_DOMAIN=y
++CONFIG_SPL_RAM_SUPPORT=y
++CONFIG_SPL_RAM_DEVICE=y
++CONFIG_SPL_REMOTEPROC=y
++# CONFIG_SPL_SPI_FLASH_TINY is not set
++CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
++CONFIG_SPL_THERMAL=y
++CONFIG_SPL_YMODEM_SUPPORT=y
++CONFIG_HUSH_PARSER=y
++CONFIG_CMD_ASKENV=y
++CONFIG_CMD_DFU=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_REMOTEPROC=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_TIME=y
++CONFIG_CMD_FAT=y
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_ENV_IS_NOWHERE=y
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_SYS_MMC_ENV_PART=1
++# CONFIG_NET is not set
++CONFIG_SPL_DM=y
++CONFIG_SPL_DM_DEVICE_REMOVE=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_REGMAP=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_OF_TRANSLATE=y
++CONFIG_CLK=y
++CONFIG_SPL_CLK=y
++CONFIG_SPL_CLK_CCF=y
++CONFIG_SPL_CLK_K3_PLL=y
++CONFIG_SPL_CLK_K3=y
++CONFIG_DMA_CHANNELS=y
++CONFIG_TI_K3_NAVSS_UDMA=y
++CONFIG_TI_SCI_PROTOCOL=y
++# CONFIG_GPIO is not set
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_OMAP24XX=y
++CONFIG_DM_MAILBOX=y
++CONFIG_K3_SEC_PROXY=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_ADMA=y
++CONFIG_SPL_MMC_SDHCI_ADMA=y
++CONFIG_MMC_SDHCI_AM654=y
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_MTD_SPI_NAND=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_SOFT_RESET=y
++CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
++CONFIG_SPI_FLASH_SPANSION=y
++CONFIG_SPI_FLASH_S28HX_T=y
++CONFIG_PINCTRL=y
++# CONFIG_PINCTRL_GENERIC is not set
++CONFIG_SPL_PINCTRL=y
++# CONFIG_SPL_PINCTRL_GENERIC is not set
++CONFIG_PINCTRL_SINGLE=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_TI_POWER_DOMAIN=y
++CONFIG_K3_SYSTEM_CONTROLLER=y
++CONFIG_REMOTEPROC_TI_K3_ARM64=y
++CONFIG_RESET_TI_SCI=y
++CONFIG_SPECIFY_CONSOLE_INDEX=y
++CONFIG_DM_SERIAL=y
++CONFIG_SOC_DEVICE=y
++CONFIG_SOC_DEVICE_TI_K3=y
++CONFIG_SOC_TI=y
++CONFIG_SPI=y
++CONFIG_DM_SPI=y
++CONFIG_CADENCE_QSPI=y
++CONFIG_TIMER=y
++CONFIG_SPL_TIMER=y
++CONFIG_OMAP_TIMER=y
++CONFIG_LIB_RATIONAL=y
++CONFIG_SPL_LIB_RATIONAL=y
+diff --git a/include/configs/am62px_evm.h b/include/configs/am62px_evm.h
+new file mode 100644
+index 0000000000000..06b12860e21f7
+--- /dev/null
++++ b/include/configs/am62px_evm.h
+@@ -0,0 +1,14 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Configuration header file for K3 AM62Px SoC family
++ *
++ * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
++ */
 +
- 	wkup_uart0_pins_default: wkup-uart0-default-pins {
- 		pinctrl-single,pins = <
- 			AM62PX_MCU_IOPAD(0x02c, PIN_INPUT, 0)	/* (C7) WKUP_UART0_CTSn */
-@@ -801,6 +808,13 @@
- 	};
- };
- 
-+&wkup_i2c0 {
-+	status = "okay";
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&wkup_i2c0_pins_default>;
-+	clock-frequency = <400000>;
-+};
++#ifndef __CONFIG_AM62PX_EVM_H
++#define __CONFIG_AM62PX_EVM_H
 +
- &wkup_uart0 {
- 	/* WKUP UART0 is used by DM firmware */
- 	pinctrl-names = "default";
-
-base-commit: b0d717b732ee28e446baf94522b3491e590f7fbb
++/* Now for the remaining common defines */
++#include <configs/ti_armv7_common.h>
++
++#endif /* __CONFIG_AM62PX_EVM_H */
 -- 
 2.43.0
 
