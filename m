@@ -4,73 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CC00C47DDF
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 08:42:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 737ACC47DDF
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 08:45:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B68DD87C44;
-	Thu,  1 Feb 2024 09:42:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D048587C4C;
+	Thu,  1 Feb 2024 09:45:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ict42.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fQhExl/i";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ict42.de header.i=@ict42.de header.b="MGgWeQxS";
+	dkim=permerror (0-bit key) header.d=ict42.de header.i=@ict42.de header.b="vBZs4unO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8504087C45; Thu,  1 Feb 2024 09:42:47 +0100 (CET)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9759D87C4D; Thu,  1 Feb 2024 09:45:56 +0100 (CET)
+Received: from mo4-p00-ob.smtp.rzone.de (mo4-p00-ob.smtp.rzone.de
+ [85.215.255.24])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 810DC87C34
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 09:42:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BE4B887C34
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 09:45:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=ict42.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-5112a04c7acso953322e87.3
- for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 00:42:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706776965; x=1707381765; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZDCPrbpjznQRpqMiEx/2Scs9ecf7ZhX0f8uh5B+GRFE=;
- b=fQhExl/iWCwrKh9p5vJPa/FesHJFZHT/okgV04owYgwnAvh8FFzVdxUIy5Hbnk1Qki
- fO4stS1/wOCXBwMr2HvQVpyNVenhUZstVZeAdrTL/mwcsXM+6nJ64KjcdlJf2cPYxRrj
- E9Oh+1yu6imIjinkq4wFwXVb5Pgb2clGK7Z/bcD6Z//qvNamFAZR7UlhP48Q0zJPqBtg
- FR2b13jFv5q9Tlx13iEa6X2rqGY8qU9UBETCmuRJeHjPZWvTLkD9XxA7L9voLZW9kfIt
- DOSurPB/eGFq50sgytrEfBIedZbBXXAyQXRUwrpYPL/cyeSI4ouoB0r4eAQRiloUhwsD
- nL2A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706776965; x=1707381765;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZDCPrbpjznQRpqMiEx/2Scs9ecf7ZhX0f8uh5B+GRFE=;
- b=VVqwVpRmp1/BsH17uYUHgVFsHth7rr2iR63fZytsfNoISRP7W3CKmIDJe9y53EIEzI
- oxwUQOCpGY3i0KRGocN1HrWUKVeyN53E3BfkRWulIUf8ezxR8Z7aq51IRTmezVbn3lOT
- dNowCOrnszqeLRW2dmOneyDT5Vz40l9JFR2XLejGDSID9gP46oDGhLTLSIGb3kJpRAz8
- UxkVTfStDzmVChtCYrVf7PV996KDIPhVHtuMrbaBN5LzS2zxoE0ZBJ4T1kbqRWmQUJGK
- FvnfYG8FMOBFTjaHE7NsopFxacx6B9uyeb4yrCBOfbFFuv3vR8RRk3gMBBTTnH6mIlbh
- zmIQ==
-X-Gm-Message-State: AOJu0YypuvVqKAKq1/mdJSf00JpI6Yar/P78u21QMxjqeLCSTGc/FhxS
- wVZOvqIoZg0RFtZQcFI+u7sn36TUkvffOGRWbce2zEauDmglyIEcTq2mn+QmKsrkXSirIMhoWf2
- J4rQX1BFNG5bftd6rvTjA9i0f0PNFWYHIKBGa7Q==
-X-Google-Smtp-Source: AGHT+IEYVva8S45JAoE5vdoMMfdKTZDmq9klU7gzkv+4N7CSau6SVA/6he19GMR5YSe0rWx2/3o82uv0kpGunuEJ/K0=
-X-Received: by 2002:ac2:4567:0:b0:50e:f5b5:71af with SMTP id
- k7-20020ac24567000000b0050ef5b571afmr1235625lfm.40.1706776964743; Thu, 01 Feb
- 2024 00:42:44 -0800 (PST)
+ spf=none smtp.mailfrom=ludwig.kormann@ict42.de
+ARC-Seal: i=1; a=rsa-sha256; t=1706777154; cv=none;
+ d=strato.com; s=strato-dkim-0002;
+ b=JDLSUmHxYL24qhzdHe+EX54KpMZtiVGqcjyvL/vh4hqtBHfzBts/AzljSD7WEa1Ou+
+ WMAFp7khwOLIFcX9Z4t+EpXOEKywveL+U+aQnYkK631ZMztL8h4knnOdEJ1tXbqMcci4
+ pnjr9rh3tQmBnbevgLV4G7Xg5x1kg42D6+SQqUmXoSDT/p9a3B89uRYVthqGf+ObQHFv
+ wdWPPi70X9HVmXOwon6+AOswJq/eDVf0EdrtCvvllbrcyDjrNV6kfoXhygELXmTXYLvk
+ rSnf7hYFRgiq6P/2AUF/GR6N9wg4LZd63LicNCna6vyPMx8seeLY8IpaRIB49GkllpC/
+ xKgw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1706777154;
+ s=strato-dkim-0002; d=strato.com;
+ h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
+ bh=JmNFLNjenaX5fRlOCX4e9HAM0NYAsrBJiyk3ByqYh8M=;
+ b=Pa2I92P67wO44of3JXfTh+mawocbmTPbHYeBTKjmQIR+2WAns2sjt5M0dWrhPYlEd5
+ NBPClf+1IWKDx7SQdFXhrFgH8fKJgYQbY1LlDJNiA6yr2E1mrTzSX4I2SIvftA0dZpYP
+ xSbPiFERr6iqYjcFOurLLSpga8yct2464MGwofR/CSsFPt4ylgpj7oxBgKMxWmyTnEX9
+ voaFLK2aiEEjhEjWWITh0MGMFSFmKtQUN0XhuwiOYwNwEF4YGIsxQelpQ7nF0yXhqsHu
+ 8Gf1i76pTHFXAFV6CrBWnFoZX8m0c6lyghUmvOZ9o5AGk73qMaTOoPOI8famcbRDhkFc
+ 0ilA==
+ARC-Authentication-Results: i=1; strato.com;
+    arc=none;
+    dkim=none
+X-RZG-CLASS-ID: mo00
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1706777154;
+ s=strato-dkim-0002; d=ict42.de;
+ h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
+ bh=JmNFLNjenaX5fRlOCX4e9HAM0NYAsrBJiyk3ByqYh8M=;
+ b=MGgWeQxSmYBbKfec5ZeClB+tmQ7RCy/gcOGZNAaEFz8kysRj2rTClBb0Ykcaz0P9HD
+ LyyxfKcfC+C5RfTDLc/u6wCzj7hKvFrCRSeqYd82Ku5yoiUSIhEW1u1xxhSp0uktltJm
+ vl7MwMN5A1L8lEHWxhpJYjTrKgJst/j5ZqfhlMzBPmKqZKJrNULDgisD8QgpMt1PU0H9
+ S+Ruu4wYAI6bU0VxQlJ/MyNSDUSwbzP+E+8875Izi1CXWcCwwg2VubS7tgxcKeoZ2cMI
+ fbXUsbeTbSCNRcvkOQlB2h7TVdrd+JQ/PgPQ/fXIT/NiEWBQ0czSicEYRdqQrehJNBlC
+ eJyQ==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1706777154;
+ s=strato-dkim-0003; d=ict42.de;
+ h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
+ bh=JmNFLNjenaX5fRlOCX4e9HAM0NYAsrBJiyk3ByqYh8M=;
+ b=vBZs4unOcmDizHaHUxjrmBnNBsFe97p98Fpm7yHBGjqQJXkOFPwoL8DaREM0q7nBmb
+ feGi7fWYvnzo68Q1HcCA==
+X-RZG-AUTH: ":IHkAYkmvNfSwjg/qSc4u8zZOVaURsoXe3UH2mQA0KglxDI1B7BeEcdPLARTmodKwkQi99jFCdZ0="
+Received: from debian-test.local.in-circuit.de
+ by smtp.strato.de (RZmta 49.11.2 DYNA|AUTH)
+ with ESMTPSA id x7ec2e0118jsRNQ
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+ (Client did not present a certificate);
+ Thu, 1 Feb 2024 09:45:54 +0100 (CET)
+From: Ludwig Kormann <ludwig.kormann@ict42.de>
+To: jagan@amarulasolutions.com,
+	andre.przywara@arm.com,
+	trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [PATCH 1/1] sunxi: sun4i: add missing sdelay() to clock_init_safe()
+Date: Thu,  1 Feb 2024 09:45:50 +0100
+Message-Id: <20240201084550.200913-1-ludwig.kormann@ict42.de>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <20240129210453.31070-1-heinrich.schuchardt@canonical.com>
- <20240129210453.31070-8-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240129210453.31070-8-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 1 Feb 2024 10:42:08 +0200
-Message-ID: <CAC_iWjLw5iLz+MAsiQvSWnJj6BsqajDJ36fd-ikbvqDYfYJN3g@mail.gmail.com>
-Subject: Re: [PATCH 7/7] smbios: correctly fill chassis handle
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,38 +100,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 29 Jan 2024 at 23:05, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> The chassis handle field in the type 2 structure must point to the handle
-> of the type 3 structure.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/smbios.c | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/lib/smbios.c b/lib/smbios.c
-> index 50072adb4e8..5a6a980ff6f 100644
-> --- a/lib/smbios.c
-> +++ b/lib/smbios.c
-> @@ -420,6 +420,7 @@ static int smbios_write_type2(ulong *current, int handle,
->         t->asset_tag_number = smbios_add_prop(ctx, "asset-tag", NULL);
->         t->feature_flags = SMBIOS_BOARD_FEATURE_HOSTING;
->         t->board_type = SMBIOS_BOARD_MOTHERBOARD;
-> +       t->chassis_handle = handle + 1;
->
->         len = t->length + smbios_string_table_len(ctx);
->         *current += len;
-> @@ -548,6 +549,7 @@ static struct smbios_write_method smbios_write_funcs[] = {
->         { smbios_write_type0, "bios", },
->         { smbios_write_type1, "system", },
->         { smbios_write_type2, "baseboard", },
-> +       /* Type 3 must immediately follow type 2 due to chassis handle. */
->         { smbios_write_type3, "chassis", },
->         { smbios_write_type4, },
->         { smbios_write_type32, },
-> --
-> 2.43.0
->
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+This delay is required after switching the clock source.
+
+See “A20 Reference manual v1.4” Page 50 / section
+“1.5.4.16. CPU/AHB/APB0 CLOCK RATIO”: “If the clock
+source is changed, at most to wait for 8 present running
+clock cycles.”
+
+This is already implemented in clock_set_pll1(), but was
+still missing in clock_init_safe().
+
+Signed-off-by: Ludwig Kormann <ludwig.kormann@ict42.de>
+---
+ arch/arm/mach-sunxi/clock_sun4i.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/arm/mach-sunxi/clock_sun4i.c b/arch/arm/mach-sunxi/clock_sun4i.c
+index 8f1d1b65f0..ac3b7a801f 100644
+--- a/arch/arm/mach-sunxi/clock_sun4i.c
++++ b/arch/arm/mach-sunxi/clock_sun4i.c
+@@ -25,6 +25,7 @@ void clock_init_safe(void)
+ 	       APB0_DIV_1 << APB0_DIV_SHIFT |
+ 	       CPU_CLK_SRC_OSC24M << CPU_CLK_SRC_SHIFT,
+ 	       &ccm->cpu_ahb_apb0_cfg);
++	sdelay(20);
+ 	writel(PLL1_CFG_DEFAULT, &ccm->pll1_cfg);
+ 	sdelay(200);
+ 	writel(AXI_DIV_1 << AXI_DIV_SHIFT |
+@@ -32,6 +33,7 @@ void clock_init_safe(void)
+ 	       APB0_DIV_1 << APB0_DIV_SHIFT |
+ 	       CPU_CLK_SRC_PLL1 << CPU_CLK_SRC_SHIFT,
+ 	       &ccm->cpu_ahb_apb0_cfg);
++	sdelay(20);
+ #ifdef CONFIG_MACH_SUN7I
+ 	setbits_le32(&ccm->ahb_gate0, 0x1 << AHB_GATE_OFFSET_DMA);
+ #endif
+-- 
+2.39.2
+
