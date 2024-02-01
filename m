@@ -4,78 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDEDBC4828D
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 18:35:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85910C48286
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 18:44:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 184B787BDC;
-	Thu,  1 Feb 2024 19:35:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id DAFFA8753E;
+	Thu,  1 Feb 2024 19:44:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="2/QkMLeQ";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="MOTJQWCq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCEDB87CF6; Thu,  1 Feb 2024 19:35:45 +0100 (CET)
-Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com
- [IPv6:2607:f8b0:4864:20::934])
+ id CCC3E87BDB; Thu,  1 Feb 2024 19:44:26 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6613C87BDB
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 19:35:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FC7F86FCE
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 19:44:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-7d317aafbd1so564077241.2
- for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 10:35:43 -0800 (PST)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a364b5c5c19so216651966b.1
+ for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 10:44:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1706812542; x=1707417342;
+ d=amarulasolutions.com; s=google; t=1706813064; x=1707417864;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ccsHI/NO9wb9Z1+Bt2vCzEmhEyi0GEpCRd7QOQxUMU0=;
- b=2/QkMLeQjgAuvRNlyPiyor5WWYkVTecShQjlzA05SEIxwKauNb0YM2XLegLJ/lXEnv
- WqiP4DmRADJZD/Zm0uYo5/Ju0g9Lv6GG6dHjoGE3MFvkDQemncoqhcxWZYHi7ZZ97zjv
- wfDY9ynrmhkh1RW4iFU95JdRChEt1oBxXdvcFxHZAA4kVp8vokixG7tnOPTVFPtntkLB
- QzHdIdQbnjJiQuEmhoQbMi29foS783esjYoIOXE01QrFzw4DGCMs2T1hXesGaDFdy2Ds
- xT6+mTuQ3fUxUmMYKfVktrgTXebQgRi9QGxViSAoeXeNeLC6YeTMcrnCD8qElbCVBWmk
- ecEA==
+ bh=rPejtyBJLo7WhAx4ggUc1/se02NfsVglmCJu18mirTI=;
+ b=MOTJQWCqZXdM+KaKibNkwuU+/Mt8uyP8gVMK2TIJzOgNH+n9LF+CRW++7ZWk5rf3BP
+ 5k5KCBO+2BhMc3P5SXBql8+uHW2Q2oEdwlL3z/OLewsK97daAM1fNkH52HRRXCerdrVI
+ tggzHX3FZrK967QwryYljpFMPQfUNNtyTs0B4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706812542; x=1707417342;
+ d=1e100.net; s=20230601; t=1706813064; x=1707417864;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ccsHI/NO9wb9Z1+Bt2vCzEmhEyi0GEpCRd7QOQxUMU0=;
- b=H0ToQhRNOYH1Q5KOoFBroViNfHn3M8B64t3BJhHC4OK8yZJ0bJlt7K5T71OydPxnqC
- 4oI3h/yS7IG3VRMpDeVs3PnlwTFGKJ+p84SNPrh/HVVtjJ8gqhRkvv+8Uur4OGGo5W8v
- TdW0VMpL3uiIiBte4jQlbxIvS/HXLDmkew49cmGqBnH2ckIveAXgKlVlND4p5I9CzSvT
- 9mqWjlGd7YV3uUMseFduCQZdUQ5m9SYSN3YgEMzjjry7Gehi7QOvhlAoK1OgVtz1K6l1
- EsBwDwn8PowAXi7mCNTlyvhIkdIKTlTr+0EFPD2jKzM3OBKsPoTa5OQ5Z/LFqjARMx50
- Zp8A==
-X-Gm-Message-State: AOJu0Ywo5MUCDPnN2JMewZVSGtqmhqv0D3IaZGYJd5vJ6eU87xSsnRym
- 4IBiWUJhk0+ZN8eyxJheYs4rfT7D8GtzICHMRtO/w0h6g7ZkNCiy9a9TIcJGizdLmY3D8N7TEKE
- YcP6qNBIiPQ3GpYwLPWe8D6iwBaVMMCb6uMbFgg==
-X-Google-Smtp-Source: AGHT+IGy7w66+jHx1c4iuzDoJCWz0zar70M+2PiUu3p8TCxgjhs7MCvJaB3e1T0l8pgzNdJ1pbjJke2WW4yWWR6Xn+w=
-X-Received: by 2002:a05:6122:4449:b0:4b6:f582:2bac with SMTP id
- cy9-20020a056122444900b004b6f5822bacmr5564067vkb.16.1706812541956; Thu, 01
- Feb 2024 10:35:41 -0800 (PST)
+ bh=rPejtyBJLo7WhAx4ggUc1/se02NfsVglmCJu18mirTI=;
+ b=SYJBhS3Ll+CePh/cKiv1NVMYwu8qAEDowRUghrXL/joCMhJzBqVhv0jxm58PLQsDCX
+ 6pFESd/6l76zsK9e/Gu1Pj7y69B8VyTT516iKNkjozQxiUeHdsSFXBnLVCOSeRkdxr6U
+ KMwF/4zEzBGsxMhHZK+y1aDRqCHi295FN4H2hfXl1/rwwJZv/KlzmAMms/yT9On0az32
+ ML5VMZ9smZLOvBJJ63+6HIM3u+lJVy9vafnn92LtFaO145Rlto9AEWGOenw+z9CY6IS/
+ Plw5GqC5tFiKXFpMbrBsMv2h+m3o/1aD/Q3v+REjnB2G9hoyafbAf8gjm4gcpOVujmlP
+ D1og==
+X-Gm-Message-State: AOJu0YyUtZXcRUmBFXkZ6mOdW1cIV52KlZpBFbBj5NNyXweHrMa43+7g
+ xJBhMHpB7EaIvjPZCStRzs8j0c1L0xmsnzWlPfu8uHEn0cVQHiB/EGj2J6k+AlakNbQ9osrfdNZ
+ vEeadvoN7A+R2arDyZfxjct6s0NdAltmv3gj1TA==
+X-Google-Smtp-Source: AGHT+IEo+JA4gbMYQq84LTzB0EgDY03qg4f32D80MU35CgTZBekVYIF+xJDWu2vkyrcfSyZpic00QhblG7aG0mrTpVA=
+X-Received: by 2002:a17:906:aec5:b0:a35:756b:d3ed with SMTP id
+ me5-20020a170906aec500b00a35756bd3edmr4496614ejb.9.1706813063727; Thu, 01 Feb
+ 2024 10:44:23 -0800 (PST)
 MIME-Version: 1.0
-References: <20231209181057.331815-1-i@shantur.com>
- <20240130140123.445f368a@donnerap.manchester.arm.com>
- <CABEcMwWs-_ZzTdt=kRc05JwC=okA9FyvrAVK1rTLa=erTu9N3g@mail.gmail.com>
- <20240201164604.13315fa6@donnerap.manchester.arm.com>
-In-Reply-To: <20240201164604.13315fa6@donnerap.manchester.arm.com>
-From: Shantur Rathore <i@shantur.com>
-Date: Thu, 1 Feb 2024 18:35:28 +0000
-Message-ID: <CABEcMwXYw9L957wykfZ5HcC5V88hbgEDZ-E_fYL9LhG_hyxb=g@mail.gmail.com>
-Subject: Re: [PATCH v3] common: usb-hub: Reset hub port before scanning
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: marex@denx.de, bmeng.cn@gmail.com, clamor95@gmail.com, 
- Hector Martin <marcan@marcan.st>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
+References: <20240201181851.221701-1-sean.anderson@seco.com>
+In-Reply-To: <20240201181851.221701-1-sean.anderson@seco.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Thu, 1 Feb 2024 19:44:12 +0100
+Message-ID: <CAOf5uwmaN=X+zwd+afKnqJx0=YZy+-87ojxSJmP5s1GAtSQ6KA@mail.gmail.com>
+Subject: Re: [PATCH] lib: sparse: Fix error checking for write_sparse_chunk_raw
+To: Sean Anderson <sean.anderson@seco.com>
+Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ qianfanguijin@163.com, Dan Carpenter <dan.carpenter@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -94,106 +86,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andre,
-
-On Thu, Feb 1, 2024 at 4:46=E2=80=AFPM Andre Przywara <andre.przywara@arm.c=
-om> wrote:
+On Thu, Feb 1, 2024 at 7:19=E2=80=AFPM Sean Anderson <sean.anderson@seco.co=
+m> wrote:
 >
-> On Thu, 1 Feb 2024 09:39:54 +0000
-> Shantur Rathore <i@shantur.com> wrote:
+> The return value of write_sparse_chunk_raw is unsigned, so the existing
+> check has no effect. Use IS_ERR_VALUE to detect error instead, which is
+> what write_sparse_chunk_raw does itself.
 >
-> Hi Shantur,
+> Fixes: 62649165cb0 ("lib: sparse: Make CHUNK_TYPE_RAW buffer aligned")
+> Reported-by: Dan Carpenter <dan.carpenter@linaro.org>
+> Link: https://lore.kernel.org/u-boot/1b323ec3-59b0-490b-a2f0-fd961dafcf49=
+@moroto.mountain/
+> Signed-off-by: Sean Anderson <sean.anderson@seco.com>
+> ---
 >
-> > On Tue, Jan 30, 2024 at 2:01=E2=80=AFPM Andre Przywara <andre.przywara@=
-arm.com> wrote:
-> > >
-> > > On Sat,  9 Dec 2023 18:10:56 +0000
-> > > Shantur Rathore <i@shantur.com> wrote:
-> > >
-> > > Hi,
-> > >
-> > > > Currently when a hub is turned on, all the ports are powered on.
-> > > > This works well for hubs which have individual power control.
-> > > >
-> > > > For the hubs without individual power control this has no effect.
-> > > > Mostly in these scenarios the hub port is powered before the USB
-> > > > controller is enabled, this can lead to some devices in unexpected
-> > > > state.
-> > > >
-> > > > With this patch, we explicitly reset the port while powering up hub
-> > > > This resets the port for hubs without port power control and has
-> > > > no effect on hubs with port power control as the port is still off.
-> > > >
-> > > > Before this patch AMicro AM8180 based NVME to USB adapter won't be
-> > > > detected as a USB3.0 Mass Storage device but with this it works as
-> > > > expected.
-> > > >
-> > > > Tested working after this patch:
-> > > > 1. AMicro AM8180 based NVME to USB Adapter
-> > > > 2. Kingston DataTraveler 3.0
-> > > > 3. GenesysLogic USB3.0 Hub
-> > > >
-> > > > The drives were tested while connected directly and via the hub.
-> > >
-> > > so this broke USB operation on some Allwinner boards. The ports still
-> > > enumerate correctly, but no devices are detected. With mainline
-> > > (containing this patch), and a USB stick connected:
-> > > starting USB...
-> > > Bus usb@5200000: USB EHCI 1.00
-> > > Bus usb@5200400: USB OHCI 1.0
-> > > scanning bus usb@5200000 for devices... 1 USB Device(s) found
-> > > scanning bus usb@5200400 for devices... 1 USB Device(s) found
-> > >        scanning usb for storage devices... 0 Storage Device(s) found
-> > >
-> > > With this patch here reverted:
-> > > starting USB...
-> > > Bus usb@5200000: USB EHCI 1.00
-> > > Bus usb@5200400: USB OHCI 1.0
-> > > scanning bus usb@5200000 for devices... 2 USB Device(s) found
-> > > scanning bus usb@5200400 for devices... 1 USB Device(s) found
-> > >        scanning usb for storage devices... 1 Storage Device(s) found
-> > >
-> > > I have no clue why this happens, there is no discrete hub anywhere in=
- this
-> > > setup, so I guess the code runs for the root hub here?
-> > > I am attaching a log with DEBUG enabled for common/usb_hub.c, for bot=
-h
-> > > cases.
-> > >
-> > > Any clues, debug suggestions, or even a fix are warmly welcome.
-> > >
-> >
-> > Which USB disk are you using? Is it a USB 2.0 disk ?
-> > Can you try with any other USB disk to confirm?
+>  lib/image-sparse.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> Yes, this was some USB 2.0 memory stick, on an USB 2.0 port.
-> Most sunxi boards only have USB 2.0, but there is one SoC with USB 3.0, I
-> will try some combinations later tonight.
+> diff --git a/lib/image-sparse.c b/lib/image-sparse.c
+> index f8289064692..09225692e9b 100644
+> --- a/lib/image-sparse.c
+> +++ b/lib/image-sparse.c
+> @@ -211,7 +211,7 @@ int write_sparse_image(struct sparse_storage *info,
 >
-> Thanks,
-> Andre
+>                         blks =3D write_sparse_chunk_raw(info, blk, blkcnt=
+,
+>                                                       data, response);
+> -                       if (blks < 0)
+> +                       if (IS_ERR_VALUE(blks))
+>                                 return -1;
+>
+>                         blk +=3D blks;
+> --
+> 2.35.1.1320.gc452695387.dirty
+>
 
-That would be awesome.
-We need to test
+Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
 
-USB 3.0 and 2.0 ports with USB 3.0 and 2.0 drives.
+Michael
 
-Once you have tested it, can you please try the patch below
+--
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
 
-        debug("enabling power on all ports\n");
-        for (i =3D 0; i < dev->maxchild; i++) {
--               usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESET);
--               debug("Reset : port %d returns %lX\n", i + 1, dev->status);
-+               if (usb_hub_is_superspeed(hub)) {
-+                       usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESE=
-T);
-+                       debug("Reset : port %d returns %lX\n", i + 1,
-dev->status);
-+               }
-                usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_POWER);
-                debug("PowerOn : port %d returns %lX\n", i + 1, dev->status=
-);
-        }
-
-
-Thanks
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
