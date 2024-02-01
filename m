@@ -4,148 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F822C48286
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 18:19:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDEDBC4828D
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 18:35:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA9BA87527;
-	Thu,  1 Feb 2024 19:19:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=seco.com
+	by phobos.denx.de (Postfix) with ESMTP id 184B787BDC;
+	Thu,  1 Feb 2024 19:35:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=seco.com header.i=@seco.com header.b="kRlufws6";
-	dkim=pass (2048-bit key) header.d=seco.com header.i=@seco.com header.b="kRlufws6";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="2/QkMLeQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA46687C56; Thu,  1 Feb 2024 19:19:25 +0100 (CET)
-Received: from EUR01-VE1-obe.outbound.protection.outlook.com
- (mail-ve1eur01on070d.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe1f::70d])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id BCEDB87CF6; Thu,  1 Feb 2024 19:35:45 +0100 (CET)
+Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com
+ [IPv6:2607:f8b0:4864:20::934])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E28C87142
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 19:19:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6613C87BDB
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 19:35:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=seco.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sean.anderson@seco.com
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
- b=UtT7PiEdwM702bWHHpWrd9+IfjXI/muO4cbUyWy33ewrj6MEGqD2pTlyiMrer/Q+6F2CZ3VKA9VuX8mR0bgxLf3nkCw9d8I563lXsSe5nnIK5ZLcLLD3LzdWnl9uv2UTtsTqUEOjOMicLs+yw1TbpIDKJPy8q++mmP/2XFNJJ3fxRa1LGNxparxm2OxJmPGZ83QJW58T/sRy7zirj0nU7RTznziLB+2TM8kr74ttSK1N5Y8M+qKjV7cnLVItoVgyuAvw501tihNJzmxsHyRBt7vDrxbPFFiV5ezvUSkYT0N7hkLna6N5yiT5Z/d+ukKuyO2fFTUzmPz3JmXrwuq4IQ==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jc/MbLg/nZ9nF23Mu0GcvLHnx70Njivldcr9EMQTJJg=;
- b=PguFj2KlWEXTXhREn6abgAWjQcDiaSn04xJdXiv30D5N00T+0U4O2uEFgbsrcy6L3c9Rsya7VriK7ZsS2YiNDIggcDmWE/UEMcawn7QuW1h8x7OiRiN8eFEfWxb3b1YnaVXxT6mLxvMs7Jb/fwSE9L4LyfR2EmRkxPfoyjRb0pAcryPtz3s8BuJdNWb0GB4yyQqlFhPEN9PW7SULEx03ZUdFqYwKPuZ84Kg9kgGHUsppZk/H9ldhaky42tCgljRegXepEV82dGRXTbptOeT1JbgKg+ISRfII63WlbNKV94GMpGtdhXfxNmqWJ5uLb6AbGjIbrD5cWSxeo9J5Rv/scw==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 20.160.56.85) smtp.rcpttodomain=163.com smtp.mailfrom=seco.com; dmarc=pass
- (p=reject sp=reject pct=100) action=none header.from=seco.com; dkim=pass
- (signature was verified) header.d=seco.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=seco.com] dkim=[1,1,header.d=seco.com]
- dmarc=[1,1,header.from=seco.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seco.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jc/MbLg/nZ9nF23Mu0GcvLHnx70Njivldcr9EMQTJJg=;
- b=kRlufws6EL51kXp/dKr4nzr0p0PspR6zpaMJk54b5vC/Mgm8eGeEMYrCQMbnMMue+NbrG0QUtL1kml9LKvs6BtABnpNVrLla9UMUPiuWWKoKPs+qdg/r7LgJ8JjRTPIztvx1RgqB1VKJPJDG5pdzV5Nxo08rNEppt7FhhfNd1TWvyg1VUIVNAA53HQtdSheuAbTtw8RAoVT+EeTlH/Zm5VaxmUbK9bOPH27Dm5JHnj1tPBXUVEwkxdqi02IGsUnr9duEKKfl1O2qEKvVME5phPv/Heod+6yWr9PQzYABUh0CSW+l17zfqFI+Ds2q6eGrjMhQJHeca7t6hl7CH1v4vw==
-Received: from DB7PR03CA0097.eurprd03.prod.outlook.com (2603:10a6:10:72::38)
- by AM9PR03MB6865.eurprd03.prod.outlook.com (2603:10a6:20b:2db::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7249.26; Thu, 1 Feb
- 2024 18:19:21 +0000
-Received: from DB8EUR05FT031.eop-eur05.prod.protection.outlook.com
- (2603:10a6:10:72:cafe::83) by DB7PR03CA0097.outlook.office365.com
- (2603:10a6:10:72::38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7249.24 via Frontend
- Transport; Thu, 1 Feb 2024 18:19:19 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 20.160.56.85)
- smtp.mailfrom=seco.com; dkim=pass (signature was verified)
- header.d=seco.com;dmarc=pass action=none header.from=seco.com;
-Received-SPF: Pass (protection.outlook.com: domain of seco.com designates
- 20.160.56.85 as permitted sender) receiver=protection.outlook.com;
- client-ip=20.160.56.85; helo=repost-eu.tmcas.trendmicro.com; pr=C
-Received: from repost-eu.tmcas.trendmicro.com (20.160.56.85) by
- DB8EUR05FT031.mail.protection.outlook.com (10.233.239.193) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.7249.29
- via Frontend Transport; Thu, 1 Feb 2024 18:19:19 +0000
-Received: from outmta (unknown [192.168.82.133])
- by repost-eu.tmcas.trendmicro.com (Trend Micro CAS) with ESMTP id
- B4D2820095388; Thu,  1 Feb 2024 18:19:18 +0000 (UTC)
-Received: from EUR03-DBA-obe.outbound.protection.outlook.com (unknown
- [104.47.51.168])
- by repre.tmcas.trendmicro.com (Trend Micro CAS) with ESMTPS id 84FCE2008006F; 
- Thu,  1 Feb 2024 18:19:14 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kPuzN2yYII7dXLGORsn+RNneMNGGeaA4H8g9bsZU19SvCXNmNTtOpva9rPgCRYapwXugCWPMhKL4K/gduj42UKrasX2t/sy5HX8Fjz3QI2V5/8HCYekWFytUs+IN5Dopc2W2ZiBSHSPVDHYT+/YlodzlrQESzbz2dXbgAQ2//Knm69UprDj8/HkFUqtbOs0j6MITlfJ0vImXnlGe3PncFjcG+iyzswCJ6NBisPSsJyLzYDSNEwByMdognMZuStgIX0Rm0Yehzef0oDr7gh8sm21J2pbH2/+509qX8g70+DnYgyYEEnG70YcKSGkTYr155VwXWwEZRAxZRdmgF2MDzw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jc/MbLg/nZ9nF23Mu0GcvLHnx70Njivldcr9EMQTJJg=;
- b=nsJ05UgjfOaakTRMcCnsaeaUtW5Uv1IvBt+1x6ZNOrOsJ4xRcnZzvPEQhnxvjcODxU9ZxnxKhVCWEX4eqKpLiQwFsh3G+FLMaMhMDLHwBC9YNmb4iFY/hm/MGoMjmnxk5RLVDCwffBxihjGvrtCMM77rQzQOGOnFsGly3KR9YeqKHF9INCAHs24svdg2SfNpUyo8c0YkJdmNrxr8CqBKRkQOqDQ+9MCK4Ugla5EmhAynAXJ3GonPo+5QPG6MljnxITLTFUxlfQqi0Mygr0AydZ7iU0CWnjy1LCgOQisMvRK85XnBqwkimxkJGX3uUagI0QmsKKsu7v5RiPCiGngF1g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=seco.com; dmarc=pass action=none header.from=seco.com;
- dkim=pass header.d=seco.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seco.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jc/MbLg/nZ9nF23Mu0GcvLHnx70Njivldcr9EMQTJJg=;
- b=kRlufws6EL51kXp/dKr4nzr0p0PspR6zpaMJk54b5vC/Mgm8eGeEMYrCQMbnMMue+NbrG0QUtL1kml9LKvs6BtABnpNVrLla9UMUPiuWWKoKPs+qdg/r7LgJ8JjRTPIztvx1RgqB1VKJPJDG5pdzV5Nxo08rNEppt7FhhfNd1TWvyg1VUIVNAA53HQtdSheuAbTtw8RAoVT+EeTlH/Zm5VaxmUbK9bOPH27Dm5JHnj1tPBXUVEwkxdqi02IGsUnr9duEKKfl1O2qEKvVME5phPv/Heod+6yWr9PQzYABUh0CSW+l17zfqFI+Ds2q6eGrjMhQJHeca7t6hl7CH1v4vw==
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=seco.com;
-Received: from DB9PR03MB8847.eurprd03.prod.outlook.com (2603:10a6:10:3dd::13)
- by PAWPR03MB9948.eurprd03.prod.outlook.com (2603:10a6:102:365::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7249.23; Thu, 1 Feb
- 2024 18:19:12 +0000
-Received: from DB9PR03MB8847.eurprd03.prod.outlook.com
- ([fe80::ec0a:c3a4:c8f9:9f84]) by DB9PR03MB8847.eurprd03.prod.outlook.com
- ([fe80::ec0a:c3a4:c8f9:9f84%7]) with mapi id 15.20.7249.023; Thu, 1 Feb 2024
- 18:19:11 +0000
-From: Sean Anderson <sean.anderson@seco.com>
-To: u-boot@lists.denx.de,
-	Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: qianfanguijin@163.com, Dan Carpenter <dan.carpenter@linaro.org>,
- Sean Anderson <sean.anderson@seco.com>
-Subject: [PATCH] lib: sparse: Fix error checking for write_sparse_chunk_raw
-Date: Thu,  1 Feb 2024 13:18:51 -0500
-Message-Id: <20240201181851.221701-1-sean.anderson@seco.com>
-X-Mailer: git-send-email 2.35.1.1320.gc452695387.dirty
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR13CA0044.namprd13.prod.outlook.com
- (2603:10b6:a03:2c2::19) To DB9PR03MB8847.eurprd03.prod.outlook.com
- (2603:10a6:10:3dd::13)
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-ua1-x934.google.com with SMTP id
+ a1e0cc1a2514c-7d317aafbd1so564077241.2
+ for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 10:35:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1706812542; x=1707417342;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ccsHI/NO9wb9Z1+Bt2vCzEmhEyi0GEpCRd7QOQxUMU0=;
+ b=2/QkMLeQjgAuvRNlyPiyor5WWYkVTecShQjlzA05SEIxwKauNb0YM2XLegLJ/lXEnv
+ WqiP4DmRADJZD/Zm0uYo5/Ju0g9Lv6GG6dHjoGE3MFvkDQemncoqhcxWZYHi7ZZ97zjv
+ wfDY9ynrmhkh1RW4iFU95JdRChEt1oBxXdvcFxHZAA4kVp8vokixG7tnOPTVFPtntkLB
+ QzHdIdQbnjJiQuEmhoQbMi29foS783esjYoIOXE01QrFzw4DGCMs2T1hXesGaDFdy2Ds
+ xT6+mTuQ3fUxUmMYKfVktrgTXebQgRi9QGxViSAoeXeNeLC6YeTMcrnCD8qElbCVBWmk
+ ecEA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706812542; x=1707417342;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ccsHI/NO9wb9Z1+Bt2vCzEmhEyi0GEpCRd7QOQxUMU0=;
+ b=H0ToQhRNOYH1Q5KOoFBroViNfHn3M8B64t3BJhHC4OK8yZJ0bJlt7K5T71OydPxnqC
+ 4oI3h/yS7IG3VRMpDeVs3PnlwTFGKJ+p84SNPrh/HVVtjJ8gqhRkvv+8Uur4OGGo5W8v
+ TdW0VMpL3uiIiBte4jQlbxIvS/HXLDmkew49cmGqBnH2ckIveAXgKlVlND4p5I9CzSvT
+ 9mqWjlGd7YV3uUMseFduCQZdUQ5m9SYSN3YgEMzjjry7Gehi7QOvhlAoK1OgVtz1K6l1
+ EsBwDwn8PowAXi7mCNTlyvhIkdIKTlTr+0EFPD2jKzM3OBKsPoTa5OQ5Z/LFqjARMx50
+ Zp8A==
+X-Gm-Message-State: AOJu0Ywo5MUCDPnN2JMewZVSGtqmhqv0D3IaZGYJd5vJ6eU87xSsnRym
+ 4IBiWUJhk0+ZN8eyxJheYs4rfT7D8GtzICHMRtO/w0h6g7ZkNCiy9a9TIcJGizdLmY3D8N7TEKE
+ YcP6qNBIiPQ3GpYwLPWe8D6iwBaVMMCb6uMbFgg==
+X-Google-Smtp-Source: AGHT+IGy7w66+jHx1c4iuzDoJCWz0zar70M+2PiUu3p8TCxgjhs7MCvJaB3e1T0l8pgzNdJ1pbjJke2WW4yWWR6Xn+w=
+X-Received: by 2002:a05:6122:4449:b0:4b6:f582:2bac with SMTP id
+ cy9-20020a056122444900b004b6f5822bacmr5564067vkb.16.1706812541956; Thu, 01
+ Feb 2024 10:35:41 -0800 (PST)
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic: DB9PR03MB8847:EE_|PAWPR03MB9948:EE_|DB8EUR05FT031:EE_|AM9PR03MB6865:EE_
-X-MS-Office365-Filtering-Correlation-Id: 95b6d2f2-702e-4986-a46d-08dc23524e82
-X-TrendMicro-CAS-OUT-LOOP-IDENTIFIER: 656f966764b7fb185830381c646b41a1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original: oWOKhOpzU5fE0yxYWS/UBNB1JNLXoNbj+ZtwvvgjImtnjFe04kxfJDkFY3+NUHImTzr8l8GjQSJG2tiAWPpj3MZAIueTnviKscz4EmtEC10OVe9AFc8rIWrqVOr3ts2rSJUkdwFKqNNSiy2Q1b2MLjuvTQ+dzaCarJtbM02ep7apl1plL7V1DXpItCGuKjDsHJHgDdxQL0IGUg7dKyLu2QQ4w08T/UqDjVZo5U1HLfu1//OeZiQzaCx9PA3jd7rUR8bGBP7dneL5ysdZfvYFtuMrmv92lzPoRKy8Hy51ywrcJDeFYVyb7mpaah+TgoMUmYn0i44BUyPg5kMSk3ufZEMPzm+uK9TAM5oGJAmxB7a/1mxy16B37xwmq7hqeBjXjzpCuaGP9fRds0TPNPAhGeTHXC1XvKGmRaArikwFTR6/HgbbT8O9w6RJDe3n9+lTCVhs+rYxb4YxFFCl/9m0HM9ETR5CdGT70pR5eMnK2DEJhbDhUjquhRy9USw8WU0cGPpxDcuQgBYweNLDZ/xGcED1zKTEXkifRl3emhKwQfniE7pckBcGZHMfrMWObctr09SiNOxoweSwQ2vK1+icF4ybcuWUwDqhIVKskeRL7Y4=
-X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
- SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:DB9PR03MB8847.eurprd03.prod.outlook.com;
- PTR:; CAT:NONE;
- SFS:(13230031)(396003)(136003)(346002)(39850400004)(366004)(376002)(230922051799003)(186009)(451199024)(1800799012)(64100799003)(41300700001)(478600001)(66946007)(2906002)(44832011)(8676002)(4326008)(4744005)(8936002)(5660300002)(86362001)(66556008)(6916009)(316002)(52116002)(36756003)(6666004)(38350700005)(54906003)(966005)(83380400001)(38100700002)(66476007)(6506007)(6512007)(6486002)(26005)(2616005)(1076003)(107886003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR03MB9948
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: DB8EUR05FT031.eop-eur05.prod.protection.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 4d14e541-a24a-4a3c-adcc-08dc235249d0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: PQkAmP/RyfYx6gbnd9OfGFowQ/HcxdEfNPlnMwfhXSyV8nbKcAqx7S3UYiwzFAGSjJOEO3JdHEYTzNFT0CmEDnoo0BkCixi84hutoS1VSxtgNV7hmpcdbaNNaoh2iUySXN1Lg9t3rVn+yQ/X460AC28dKcWzBAYAtanzi2RAL8d8DNeg+N4ZVtviM2ZxeuGxUUlH8Av3U15svS5SXgKh3D6gnWoJx6v1X6brOCBsRWrIhuLKk8szTnpbAat306XK+ILmrb3sl8pHVLtQZ/t0ritbK3fepY7Q3jZOGEA9gc5mdnZd5fgNHnawXVADB3sZf5dLgJ5TEOBjnCIqwkhjsFr6FEZsI+/Uehmjv3osngbts5N0AoDSYiSFdMaqJ8Ih4XmzA1Amq7kCd0vDRCVlglZLyeDlETSeQ4ViHtSz/KdN7RkpYDoYVKAHlEgBODs8OF32LZtOZ/os7RZtkKeO1R7+vPntADVguavyJkags2Tmz6Z++4PfMpYkD8NH6DQ4fqI3xj3anBPl5BRzmxBwUx3nUyUHfIiZHXPGuOEVTRBtTDbbc/EU+bAvxw6EEkdWCWh2hO3/2WeGEc0f/c6HqU52G0MB2b0VmU0OFnpTrwRlQet84maf0xXnS890NhwrsKmKocsbdJJRdcEzCOsSQGZmvKZixBrWo6g7ytNO5e3aEJ6+0W1WyxdsmQHALA5mFRPnS1g4uJ8Vx+YAxyUSbugRbnL/tHf+K6o+kP77FRMI1xwNCw5eMObmjlO0uOn9
-X-Forefront-Antispam-Report: CIP:20.160.56.85; CTRY:NL; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:repost-eu.tmcas.trendmicro.com;
- PTR:repost-eu.tmcas.trendmicro.com; CAT:NONE;
- SFS:(13230031)(376002)(39850400004)(136003)(396003)(346002)(230922051799003)(1800799012)(64100799003)(451199024)(82310400011)(186009)(46966006)(40470700004)(36840700001)(6512007)(6666004)(6506007)(336012)(8676002)(1076003)(107886003)(2616005)(4326008)(26005)(8936002)(4744005)(54906003)(44832011)(36756003)(316002)(6916009)(2906002)(5660300002)(86362001)(70586007)(70206006)(41300700001)(966005)(6486002)(478600001)(34020700004)(47076005)(356005)(7596003)(7636003)(40480700001)(83380400001)(82740400003)(36860700001)(40460700003);
- DIR:OUT; SFP:1102; 
-X-OriginatorOrg: seco.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Feb 2024 18:19:19.0617 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 95b6d2f2-702e-4986-a46d-08dc23524e82
-X-MS-Exchange-CrossTenant-Id: bebe97c3-6438-442e-ade3-ff17aa50e733
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bebe97c3-6438-442e-ade3-ff17aa50e733; Ip=[20.160.56.85];
- Helo=[repost-eu.tmcas.trendmicro.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB8EUR05FT031.eop-eur05.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR03MB6865
+References: <20231209181057.331815-1-i@shantur.com>
+ <20240130140123.445f368a@donnerap.manchester.arm.com>
+ <CABEcMwWs-_ZzTdt=kRc05JwC=okA9FyvrAVK1rTLa=erTu9N3g@mail.gmail.com>
+ <20240201164604.13315fa6@donnerap.manchester.arm.com>
+In-Reply-To: <20240201164604.13315fa6@donnerap.manchester.arm.com>
+From: Shantur Rathore <i@shantur.com>
+Date: Thu, 1 Feb 2024 18:35:28 +0000
+Message-ID: <CABEcMwXYw9L957wykfZ5HcC5V88hbgEDZ-E_fYL9LhG_hyxb=g@mail.gmail.com>
+Subject: Re: [PATCH v3] common: usb-hub: Reset hub port before scanning
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: marex@denx.de, bmeng.cn@gmail.com, clamor95@gmail.com, 
+ Hector Martin <marcan@marcan.st>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -162,32 +94,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The return value of write_sparse_chunk_raw is unsigned, so the existing
-check has no effect. Use IS_ERR_VALUE to detect error instead, which is
-what write_sparse_chunk_raw does itself.
+Hi Andre,
 
-Fixes: 62649165cb0 ("lib: sparse: Make CHUNK_TYPE_RAW buffer aligned")
-Reported-by: Dan Carpenter <dan.carpenter@linaro.org>
-Link: https://lore.kernel.org/u-boot/1b323ec3-59b0-490b-a2f0-fd961dafcf49@moroto.mountain/
-Signed-off-by: Sean Anderson <sean.anderson@seco.com>
----
+On Thu, Feb 1, 2024 at 4:46=E2=80=AFPM Andre Przywara <andre.przywara@arm.c=
+om> wrote:
+>
+> On Thu, 1 Feb 2024 09:39:54 +0000
+> Shantur Rathore <i@shantur.com> wrote:
+>
+> Hi Shantur,
+>
+> > On Tue, Jan 30, 2024 at 2:01=E2=80=AFPM Andre Przywara <andre.przywara@=
+arm.com> wrote:
+> > >
+> > > On Sat,  9 Dec 2023 18:10:56 +0000
+> > > Shantur Rathore <i@shantur.com> wrote:
+> > >
+> > > Hi,
+> > >
+> > > > Currently when a hub is turned on, all the ports are powered on.
+> > > > This works well for hubs which have individual power control.
+> > > >
+> > > > For the hubs without individual power control this has no effect.
+> > > > Mostly in these scenarios the hub port is powered before the USB
+> > > > controller is enabled, this can lead to some devices in unexpected
+> > > > state.
+> > > >
+> > > > With this patch, we explicitly reset the port while powering up hub
+> > > > This resets the port for hubs without port power control and has
+> > > > no effect on hubs with port power control as the port is still off.
+> > > >
+> > > > Before this patch AMicro AM8180 based NVME to USB adapter won't be
+> > > > detected as a USB3.0 Mass Storage device but with this it works as
+> > > > expected.
+> > > >
+> > > > Tested working after this patch:
+> > > > 1. AMicro AM8180 based NVME to USB Adapter
+> > > > 2. Kingston DataTraveler 3.0
+> > > > 3. GenesysLogic USB3.0 Hub
+> > > >
+> > > > The drives were tested while connected directly and via the hub.
+> > >
+> > > so this broke USB operation on some Allwinner boards. The ports still
+> > > enumerate correctly, but no devices are detected. With mainline
+> > > (containing this patch), and a USB stick connected:
+> > > starting USB...
+> > > Bus usb@5200000: USB EHCI 1.00
+> > > Bus usb@5200400: USB OHCI 1.0
+> > > scanning bus usb@5200000 for devices... 1 USB Device(s) found
+> > > scanning bus usb@5200400 for devices... 1 USB Device(s) found
+> > >        scanning usb for storage devices... 0 Storage Device(s) found
+> > >
+> > > With this patch here reverted:
+> > > starting USB...
+> > > Bus usb@5200000: USB EHCI 1.00
+> > > Bus usb@5200400: USB OHCI 1.0
+> > > scanning bus usb@5200000 for devices... 2 USB Device(s) found
+> > > scanning bus usb@5200400 for devices... 1 USB Device(s) found
+> > >        scanning usb for storage devices... 1 Storage Device(s) found
+> > >
+> > > I have no clue why this happens, there is no discrete hub anywhere in=
+ this
+> > > setup, so I guess the code runs for the root hub here?
+> > > I am attaching a log with DEBUG enabled for common/usb_hub.c, for bot=
+h
+> > > cases.
+> > >
+> > > Any clues, debug suggestions, or even a fix are warmly welcome.
+> > >
+> >
+> > Which USB disk are you using? Is it a USB 2.0 disk ?
+> > Can you try with any other USB disk to confirm?
+>
+> Yes, this was some USB 2.0 memory stick, on an USB 2.0 port.
+> Most sunxi boards only have USB 2.0, but there is one SoC with USB 3.0, I
+> will try some combinations later tonight.
+>
+> Thanks,
+> Andre
 
- lib/image-sparse.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+That would be awesome.
+We need to test
 
-diff --git a/lib/image-sparse.c b/lib/image-sparse.c
-index f8289064692..09225692e9b 100644
---- a/lib/image-sparse.c
-+++ b/lib/image-sparse.c
-@@ -211,7 +211,7 @@ int write_sparse_image(struct sparse_storage *info,
- 
- 			blks = write_sparse_chunk_raw(info, blk, blkcnt,
- 						      data, response);
--			if (blks < 0)
-+			if (IS_ERR_VALUE(blks))
- 				return -1;
- 
- 			blk += blks;
--- 
-2.35.1.1320.gc452695387.dirty
+USB 3.0 and 2.0 ports with USB 3.0 and 2.0 drives.
 
+Once you have tested it, can you please try the patch below
+
+        debug("enabling power on all ports\n");
+        for (i =3D 0; i < dev->maxchild; i++) {
+-               usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESET);
+-               debug("Reset : port %d returns %lX\n", i + 1, dev->status);
++               if (usb_hub_is_superspeed(hub)) {
++                       usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESE=
+T);
++                       debug("Reset : port %d returns %lX\n", i + 1,
+dev->status);
++               }
+                usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_POWER);
+                debug("PowerOn : port %d returns %lX\n", i + 1, dev->status=
+);
+        }
+
+
+Thanks
