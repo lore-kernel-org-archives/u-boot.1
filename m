@@ -4,81 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03D02C48286
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 21:03:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 092F8C4828D
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 22:27:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EBF087D25;
-	Thu,  1 Feb 2024 22:03:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 1319686F7E;
+	Thu,  1 Feb 2024 23:27:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Cxjo1K37";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZwpKCHWF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B85887D22; Thu,  1 Feb 2024 22:03:38 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9E84F87CFE; Thu,  1 Feb 2024 23:27:49 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6EFA87D22
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 22:03:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DE1887CDB
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 23:27:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id D801862159
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 21:03:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7A74AC43601
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 21:03:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1706821412;
- bh=+flYHaxiiXVtYmqDZv2gN3djzmehGKcoz3OtVdDwp+o=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=Cxjo1K376rwpu7UYZOr9aMO05t3cCz8KPneQVPj5PntewwHD5ilzB/iZtE70cyzkU
- 0SYQx5DUPgm6jjHgi2N7DGMy3ipkEuhbV0IDfIabUcmWdOlj8KvTUExZqcj3mwD9Fb
- 8JgAfatIOABoVeZbddpMKNZaw05amlCjr1ScbtzQKcdnSOaA0C/iTHJP9QbrKu/Qux
- yRIesFBy7B6rl2kltacE6QqNq/7VSkAxL3i03uVzDVt9r39TO/hWn986n4b6MLhwSj
- Fnkj22LEfpoj2v4kR2h/0afQW1d6Wym+c9CSSw2Pb1lKF9Hf5rcnhANyKhMsMr1EKN
- MNEmkefUbKa6g==
-Received: by mail-lj1-f175.google.com with SMTP id
- 38308e7fff4ca-2d07d74bdeeso11829011fa.3
- for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 13:03:32 -0800 (PST)
-X-Gm-Message-State: AOJu0YwnW+z042cIVpV/+DAOCSA/zXJ+57PPw35C3zIPRwDlq6/OCPFd
- 7F+BSI9992P5rJijnZxKs5S+xE1cWKlapSECuNFkITUGO8RGPVJGBPrnN83FrItZevipsVXqe6Z
- cC3LNtfKKQPn0FB6wNVQ8ugCU3w==
-X-Google-Smtp-Source: AGHT+IGzXNSqC7E6769kd/2xdpiea6EMl2p9n2g6bO3UOt4X6FoIKqHQBCJAG835S2EUEqj7TL/aui7eP8q5hFngQDQ=
-X-Received: by 2002:a2e:80d5:0:b0:2cf:20f5:efdb with SMTP id
- r21-20020a2e80d5000000b002cf20f5efdbmr2335478ljg.38.1706821410513; Thu, 01
- Feb 2024 13:03:30 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 411MRhXl064120;
+ Thu, 1 Feb 2024 16:27:43 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1706826463;
+ bh=K6FS+M6NxkWJGPUEFgkIIYUGxufE6xtjmdY3x8gZfXE=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=ZwpKCHWF/DsFrZY8xJyC3d1bxkI73Lrrbf033z//VQ3AzwLY/BJrdphNFuioA7ZMg
+ ZVIbuW5atL08Z5cFZg5T5DabzMzVlkQ+jNleJ0ha082OPeC2CYiCDccOTHRx0Huok/
+ Nh1/kQlurMvesdT4Ea1OQc6QjvXy1nXsKqG0KMok=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 411MRh6e049919
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 1 Feb 2024 16:27:43 -0600
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 1
+ Feb 2024 16:27:43 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 1 Feb 2024 16:27:43 -0600
+Received: from lelvsmtp5.itg.ti.com ([10.249.42.149])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 411MRgJe076123;
+ Thu, 1 Feb 2024 16:27:43 -0600
+From: Andrew Davis <afd@ti.com>
+To: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>
+Subject: [PATCH 2/2] arm: dts: k3-am64: Sync with kernel v6.8-rc1
+Date: Thu, 1 Feb 2024 16:27:41 -0600
+Message-ID: <20240201222741.141074-2-afd@ti.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240201222741.141074-1-afd@ti.com>
+References: <20240201222741.141074-1-afd@ti.com>
 MIME-Version: 1.0
-References: <20231202035511.487946-1-sjg@chromium.org>
- <20231202035511.487946-3-sjg@chromium.org>
- <20231213121353.GA31326@willie-the-truck>
- <CAFLszTjfmSx1YMqzb2TsQf7sP4KrcQB=X7DY_HxRQp0J5HAppQ@mail.gmail.com>
- <CAK7LNAQRCDC03e=TVO=k4FuD2a2RdTy7yLr3UptQjVCX7pM1CA@mail.gmail.com>
- <20240109143349.GR1610741@bill-the-cat>
- <CAFLszTjwhy24UiT6kUJABMC1Xn0h9Q1q9fYpZZJg9DX8Vss9cA@mail.gmail.com>
- <CAFLszTjPAHd6RdO1mvatXC=yRS+h=sgJ_pMdyEnkROTx7yRpog@mail.gmail.com>
- <CAK7LNARsY6-rrx=sNFq6oFqpqf0s5S_=3DrUsCOS7zF0BXcoTg@mail.gmail.com>
- <CAL_JsqLYB0D5wAfedsb6tQp4EmD1AROgxiCncwO7gvA2p1C6Lg@mail.gmail.com>
- <CAK7LNAR-3rL6=YdhRRXB9dz+94y2yHTA=9mF4p7OPj7KExd7rg@mail.gmail.com>
-In-Reply-To: <CAK7LNAR-3rL6=YdhRRXB9dz+94y2yHTA=9mF4p7OPj7KExd7rg@mail.gmail.com>
-From: Rob Herring <robh@kernel.org>
-Date: Thu, 1 Feb 2024 15:03:17 -0600
-X-Gmail-Original-Message-ID: <CAL_JsqLeTDALoKBuk9r+4NGXo0pc9LbK6bhDiZET+=UHG60fEA@mail.gmail.com>
-Message-ID: <CAL_JsqLeTDALoKBuk9r+4NGXo0pc9LbK6bhDiZET+=UHG60fEA@mail.gmail.com>
-Subject: Re: [PATCH v9 2/2] arm64: boot: Support Flat Image Tree
-To: Masahiro Yamada <masahiroy@kernel.org>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Will Deacon <will@kernel.org>, 
- linux-arm-kernel@lists.infradead.org, Ahmad Fatoum <a.fatoum@pengutronix.de>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Nicolas Schier <nicolas@fjasle.eu>,
- Catalin Marinas <catalin.marinas@arm.com>, Jonathan Corbet <corbet@lwn.net>, 
- Nathan Chancellor <nathan@kernel.org>, Nick Terrell <terrelln@fb.com>,
- linux-doc@vger.kernel.org, 
- linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org, 
- workflows@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,262 +80,226 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jan 31, 2024 at 8:09=E2=80=AFPM Masahiro Yamada <masahiroy@kernel.o=
-rg> wrote:
->
-> On Thu, Feb 1, 2024 at 7:03=E2=80=AFAM Rob Herring <robh@kernel.org> wrot=
-e:
-> >
-> > On Tue, Jan 30, 2024 at 3:16=E2=80=AFAM Masahiro Yamada <masahiroy@kern=
-el.org> wrote:
-> > >
-> > > On Fri, Jan 26, 2024 at 1:04=E2=80=AFAM Simon Glass <sjg@chromium.org=
-> wrote:
-> > > >
-> > > > Hi,
-> > > >
-> > > > On Wed, 17 Jan 2024 at 06:14, Simon Glass <sjg@chromium.org> wrote:
-> > > > >
-> > > > > Hi Masahiro, Tom,
-> > > > >
-> > > > > On Tue, 9 Jan 2024 at 07:33, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Tue, Jan 09, 2024 at 11:01:42PM +0900, Masahiro Yamada wrote=
-:
-> > > > > > > Hi Simon,
-> > > > > > >
-> > > > > > >
-> > > > > > > On Wed, Jan 3, 2024 at 8:47=E2=80=AFAM Simon Glass <sjg@chrom=
-ium.org> wrote:
-> > > > > > > >
-> > > > > > > > Hi Masahiro,
-> > > > > > > >
-> > > > > > > > On Wed, Dec 13, 2023 at 5:14=E2=80=AFAM Will Deacon <will@k=
-ernel.org> wrote:
-> > > > > > > > >
-> > > > > > > > > On Fri, Dec 01, 2023 at 08:54:42PM -0700, Simon Glass wro=
-te:
-> > > > > > > > > > Add a script which produces a Flat Image Tree (FIT), a =
-single file
-> > > > > > > > > > containing the built kernel and associated devicetree f=
-iles.
-> > > > > > > > > > Compression defaults to gzip which gives a good balance=
- of size and
-> > > > > > > > > > performance.
-> > > > > > > > > >
-> > > > > > > > > > The files compress from about 86MB to 24MB using this a=
-pproach.
-> > > > > > > > > >
-> > > > > > > > > > The FIT can be used by bootloaders which support it, su=
-ch as U-Boot
-> > > > > > > > > > and Linuxboot. It permits automatic selection of the co=
-rrect
-> > > > > > > > > > devicetree, matching the compatible string of the runni=
-ng board with
-> > > > > > > > > > the closest compatible string in the FIT. There is no n=
-eed for
-> > > > > > > > > > filenames or other workarounds.
-> > > > > > > > > >
-> > > > > > > > > > Add a 'make image.fit' build target for arm64, as well.=
- Use
-> > > > > > > > > > FIT_COMPRESSION to select a different algorithm.
-> > > > > > > > > >
-> > > > > > > > > > The FIT can be examined using 'dumpimage -l'.
-> > > > > > > > > >
-> > > > > > > > > > This features requires pylibfdt (use 'pip install libfd=
-t'). It also
-> > > > > > > > > > requires compression utilities for the algorithm being =
-used. Supported
-> > > > > > > > > > compression options are the same as the Image.xxx files=
-. For now there
-> > > > > > > > > > is no way to change the compression other than by editi=
-ng the rule for
-> > > > > > > > > > $(obj)/image.fit
-> > > > > > > > > >
-> > > > > > > > > > While FIT supports a ramdisk / initrd, no attempt is ma=
-de to support
-> > > > > > > > > > this here, since it must be built separately from the L=
-inux build.
-> > > > > > > > > >
-> > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > > ---
-> > > > > > > > > >
-> > > > > > > > > > Changes in v9:
-> > > > > > > > > > - Move the compression control into Makefile.lib
-> > > > > > > > > >
-> > > > > > > > > > Changes in v8:
-> > > > > > > > > > - Drop compatible string in FDT node
-> > > > > > > > > > - Correct sorting of MAINTAINERS to before ARM64 PORT
-> > > > > > > > > > - Turn compress part of the make_fit.py comment in to a=
- sentence
-> > > > > > > > > > - Add two blank lines before parse_args() and setup_fit=
-()
-> > > > > > > > > > - Use 'image.fit: dtbs' instead of BUILD_DTBS var
-> > > > > > > > > > - Use '$(<D)/dts' instead of '$(dir $<)dts'
-> > > > > > > > > > - Add 'mkimage' details Documentation/process/changes.r=
-st
-> > > > > > > > > > - Allow changing the compression used
-> > > > > > > > > > - Tweak cover letter since there is only one clean-up p=
-atch
-> > > > > > > > > >
-> > > > > > > > > > Changes in v7:
-> > > > > > > > > > - Add Image as a dependency of image.fit
-> > > > > > > > > > - Drop kbuild tag
-> > > > > > > > > > - Add dependency on dtbs
-> > > > > > > > > > - Drop unnecessary path separator for dtbs
-> > > > > > > > > > - Rebase to -next
-> > > > > > > > > >
-> > > > > > > > > > Changes in v5:
-> > > > > > > > > > - Drop patch previously applied
-> > > > > > > > > > - Correct compression rule which was broken in v4
-> > > > > > > > > >
-> > > > > > > > > > Changes in v4:
-> > > > > > > > > > - Use single quotes for UIMAGE_NAME
-> > > > > > > > > >
-> > > > > > > > > > Changes in v3:
-> > > > > > > > > > - Drop temporary file image.itk
-> > > > > > > > > > - Drop patch 'Use double quotes for image name'
-> > > > > > > > > > - Drop double quotes in use of UIMAGE_NAME
-> > > > > > > > > > - Drop unnecessary CONFIG_EFI_ZBOOT condition for help
-> > > > > > > > > > - Avoid hard-coding "arm64" for the DT architecture
-> > > > > > > > > >
-> > > > > > > > > > Changes in v2:
-> > > > > > > > > > - Drop patch previously applied
-> > > > > > > > > > - Add .gitignore file
-> > > > > > > > > > - Move fit rule to Makefile.lib using an intermediate f=
-ile
-> > > > > > > > > > - Drop dependency on CONFIG_EFI_ZBOOT
-> > > > > > > > > > - Pick up .dtb files separately from the kernel
-> > > > > > > > > > - Correct pylint too-many-args warning for write_kernel=
-()
-> > > > > > > > > > - Include the kernel image in the file count
-> > > > > > > > > > - Add a pointer to the FIT spec and mention of its wide=
- industry usage
-> > > > > > > > > > - Mention the kernel version in the FIT description
-> > > > > > > > > >
-> > > > > > > > > >  Documentation/process/changes.rst |   9 +
-> > > > > > > > > >  MAINTAINERS                       |   7 +
-> > > > > > > > > >  arch/arm64/Makefile               |   7 +-
-> > > > > > > > > >  arch/arm64/boot/.gitignore        |   1 +
-> > > > > > > > > >  arch/arm64/boot/Makefile          |   6 +-
-> > > > > > > > > >  scripts/Makefile.lib              |  16 ++
-> > > > > > > > > >  scripts/make_fit.py               | 291 ++++++++++++++=
-++++++++++++++++
-> > > > > > > > > >  7 files changed, 334 insertions(+), 3 deletions(-)
-> > > > > > > > > >  create mode 100755 scripts/make_fit.py
-> > > > > > > > >
-> > > > > > > > > I'll need Masahiro's Ack on the scripts/ changes before I=
- can take this
-> > > > > > > > > one.
-> > > > > > > >
-> > > > > > > > Any thoughts on this request, please?
-> > > > > > > >
-> > > > > > > > Regards,
-> > > > > > > > Simon
-> > > > > > > >
-> > > > > > >
-> > > > > > >
-> > > > > > >
-> > > > > > > As I mentioned before, I am concerned with having
-> > > > > > > the same "compatible" entries, with different contents,
-> > > > > > > as you use the "compatible" string as an ID to selecting
-> > > > > > > the target config node, right?
-> > > > > > >
-> > > > > > >
-> > > > > > >
-> > > > > > >
-> > > > > > >
-> > > > > > > $ fdtdump  arch/arm64/boot/image.fit
-> > > > > > >
-> > > > > > >         ...
-> > > > > > >
-> > > > > > >         conf-10 {
-> > > > > > >             compatible =3D "tq,am642-tqma6442l-mbax4xxl",
-> > > > > > > "tq,am642-tqma6442l", "ti,am642";
-> > > > > > >             description =3D "TQ-Systems TQMa64xxL SoM on MBax=
-4xxL carrier board";
-> > > > > > >             fdt =3D "fdt-10";
-> > > > > > >             kernel =3D "kernel";
-> > > > > > >         };
-> > > > > > >
-> > > > > > >         ...
-> > > > > > >
-> > > > > > >         conf-25 {
-> > > > > > >             compatible =3D "tq,am642-tqma6442l-mbax4xxl",
-> > > > > > > "tq,am642-tqma6442l", "ti,am642";
-> > > > > > >             description =3D "TQ-Systems TQMa64xxL SoM on MBax=
-4xxL carrier board";
-> > > > > > >             fdt =3D "fdt-25";
-> > > > > > >             kernel =3D "kernel";
-> > > > > > >         };
-> > > > > >
-> > > > > > I had asked Rob a while ago about if having the same compatible=
- for two
-> > > > > > functionally different machines is a feature, or a bug, and I d=
-on't
-> > > > > > think either of us fully agreed either way. I'd be leaning towa=
-rds
-> > > > > > saying the above example is a bug in the dts files, it's just n=
-ot been a
-> > > > > > bug people have worried about before due to (sadly) how little =
-the
-> > > > > > top-level compatible has been used.
-> >
-> > I much prefer being able to use compatibles over filenames.
-> >
-> > > > >
-> > > > > Yes I believe this is a bug in the files.
-> > > > >
-> > > > > What should the script do in this case? Print a warning, perhaps?
-> > > >
-> > > > Is there anything I should do here? Would a warning be helpful, or
-> > > > just confusing?
-> > >
-> > >
-> > >
-> > > I do not think it is useful.
-> > > You would almost always get a warning, and there is no way to fix it.
-> >
-> > The above case is due to overlays. Why would you have a FIT image with
-> > both a base tree and applied overlays?
->
->
->
-> Because they are different hardware.
+Sync with kernel v6.8-rc1 and sync up the u-boot dts files accordingly.
 
-Meaning the base tree is valid on its own without any overlays?
+Signed-off-by: Andrew Davis <afd@ti.com>
+---
+ arch/arm/dts/k3-am64-main.dtsi        | 22 +++++++++++++++++-----
+ arch/arm/dts/k3-am642-evm-u-boot.dtsi | 21 +--------------------
+ arch/arm/dts/k3-am642-evm.dts         | 12 +++++++++---
+ arch/arm/dts/k3-am642-sk-u-boot.dtsi  | 20 --------------------
+ arch/arm/dts/k3-am642-sk.dts          | 10 ++++++++--
+ 5 files changed, 35 insertions(+), 50 deletions(-)
 
-> If FIT includes only base DTBs, how to use a base with extensions?
+diff --git a/arch/arm/dts/k3-am64-main.dtsi b/arch/arm/dts/k3-am64-main.dtsi
+index 0be642bc1b8..e348114f42e 100644
+--- a/arch/arm/dts/k3-am64-main.dtsi
++++ b/arch/arm/dts/k3-am64-main.dtsi
+@@ -63,7 +63,7 @@
+ 			#phy-cells = <1>;
+ 		};
+ 
+-		epwm_tbclk: clock-controller@4140 {
++		epwm_tbclk: clock-controller@4130 {
+ 			compatible = "ti,am64-epwm-tbclk";
+ 			reg = <0x4130 0x4>;
+ 			#clock-cells = <1>;
+@@ -138,8 +138,13 @@
+ 			      <0x00 0x4c000000 0x00 0x20000>,
+ 			      <0x00 0x4a820000 0x00 0x20000>,
+ 			      <0x00 0x4aa40000 0x00 0x20000>,
+-			      <0x00 0x4bc00000 0x00 0x100000>;
+-			reg-names = "gcfg", "bchanrt", "rchanrt", "tchanrt", "ringrt";
++			      <0x00 0x4bc00000 0x00 0x100000>,
++			      <0x00 0x48600000 0x00 0x8000>,
++			      <0x00 0x484a4000 0x00 0x2000>,
++			      <0x00 0x484c2000 0x00 0x2000>,
++			      <0x00 0x48420000 0x00 0x2000>;
++			reg-names = "gcfg", "bchanrt", "rchanrt", "tchanrt", "ringrt",
++				    "ring", "tchan", "rchan", "bchan";
+ 			msi-parent = <&inta_main_dmss>;
+ 			#dma-cells = <3>;
+ 
+@@ -155,8 +160,13 @@
+ 			reg = <0x00 0x485c0000 0x00 0x100>,
+ 			      <0x00 0x4a800000 0x00 0x20000>,
+ 			      <0x00 0x4aa00000 0x00 0x40000>,
+-			      <0x00 0x4b800000 0x00 0x400000>;
+-			reg-names = "gcfg", "rchanrt", "tchanrt", "ringrt";
++			      <0x00 0x4b800000 0x00 0x400000>,
++			      <0x00 0x485e0000 0x00 0x20000>,
++			      <0x00 0x484a0000 0x00 0x4000>,
++			      <0x00 0x484c0000 0x00 0x2000>,
++			      <0x00 0x48430000 0x00 0x4000>;
++			reg-names = "gcfg", "rchanrt", "tchanrt", "ringrt",
++				    "ring", "tchan", "rchan", "rflow";
+ 			msi-parent = <&inta_main_dmss>;
+ 			#dma-cells = <2>;
+ 
+@@ -623,6 +633,7 @@
+ 		ti,otap-del-sel-mmc-hs = <0x0>;
+ 		ti,otap-del-sel-ddr52 = <0x6>;
+ 		ti,otap-del-sel-hs200 = <0x7>;
++		status = "disabled";
+ 	};
+ 
+ 	sdhci1: mmc@fa00000 {
+@@ -641,6 +652,7 @@
+ 		ti,otap-del-sel-sdr104 = <0x6>;
+ 		ti,otap-del-sel-ddr50 = <0x9>;
+ 		ti,clkbuf-sel = <0x7>;
++		status = "disabled";
+ 	};
+ 
+ 	cpsw3g: ethernet@8000000 {
+diff --git a/arch/arm/dts/k3-am642-evm-u-boot.dtsi b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
+index a052941e235..c98adc65e89 100644
+--- a/arch/arm/dts/k3-am642-evm-u-boot.dtsi
++++ b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
+@@ -43,29 +43,10 @@
+ };
+ 
+ &main_bcdma {
+-	reg = <0x00 0x485c0100 0x00 0x100>,
+-	      <0x00 0x4c000000 0x00 0x20000>,
+-	      <0x00 0x4a820000 0x00 0x20000>,
+-	      <0x00 0x4aa40000 0x00 0x20000>,
+-	      <0x00 0x4bc00000 0x00 0x100000>,
+-	      <0x00 0x48600000 0x00 0x8000>,
+-	      <0x00 0x484a4000 0x00 0x2000>,
+-	      <0x00 0x484c2000 0x00 0x2000>;
+-	reg-names = "gcfg", "bchanrt", "rchanrt", "tchanrt", "ringrt",
+-		    "cfg", "tchan", "rchan";
++	bootph-all;
+ };
+ 
+ &main_pktdma {
+-	reg = <0x00 0x485c0000 0x00 0x100>,
+-	      <0x00 0x4a800000 0x00 0x20000>,
+-	      <0x00 0x4aa00000 0x00 0x40000>,
+-	      <0x00 0x4b800000 0x00 0x400000>,
+-	      <0x00 0x485e0000 0x00 0x20000>,
+-	      <0x00 0x484a0000 0x00 0x4000>,
+-	      <0x00 0x484c0000 0x00 0x2000>,
+-	      <0x00 0x48430000 0x00 0x4000>;
+-	reg-names = "gcfg", "rchanrt", "tchanrt", "ringrt", "cfg",
+-		    "tchan", "rchan", "rflow";
+ 	bootph-all;
+ };
+ 
+diff --git a/arch/arm/dts/k3-am642-evm.dts b/arch/arm/dts/k3-am642-evm.dts
+index 4dba1894101..8c5651d2cf5 100644
+--- a/arch/arm/dts/k3-am642-evm.dts
++++ b/arch/arm/dts/k3-am642-evm.dts
+@@ -468,11 +468,15 @@
+ 	bootph-all;
+ };
+ 
+-/* mcu_gpio0 is reserved for mcu firmware usage */
++/* mcu_gpio0 and mcu_gpio_intr are reserved for mcu firmware usage */
+ &mcu_gpio0 {
+ 	status = "reserved";
+ };
+ 
++&mcu_gpio_intr {
++	status = "reserved";
++};
++
+ &main_spi0 {
+ 	status = "okay";
+ 	pinctrl-names = "default";
+@@ -487,17 +491,19 @@
+ 	};
+ };
+ 
++/* eMMC */
+ &sdhci0 {
+-	/* emmc */
++	status = "okay";
+ 	bus-width = <8>;
+ 	non-removable;
+ 	ti,driver-strength-ohm = <50>;
+ 	disable-wp;
+ };
+ 
++/* SD/MMC */
+ &sdhci1 {
+-	/* SD/MMC */
+ 	bootph-all;
++	status = "okay";
+ 	vmmc-supply = <&vdd_mmc1>;
+ 	pinctrl-names = "default";
+ 	bus-width = <4>;
+diff --git a/arch/arm/dts/k3-am642-sk-u-boot.dtsi b/arch/arm/dts/k3-am642-sk-u-boot.dtsi
+index 818867df8d9..b71f2fb067c 100644
+--- a/arch/arm/dts/k3-am642-sk-u-boot.dtsi
++++ b/arch/arm/dts/k3-am642-sk-u-boot.dtsi
+@@ -71,30 +71,10 @@
+ };
+ 
+ &main_bcdma {
+-	reg = <0x00 0x485c0100 0x00 0x100>,
+-	      <0x00 0x4c000000 0x00 0x20000>,
+-	      <0x00 0x4a820000 0x00 0x20000>,
+-	      <0x00 0x4aa40000 0x00 0x20000>,
+-	      <0x00 0x4bc00000 0x00 0x100000>,
+-	      <0x00 0x48600000 0x00 0x8000>,
+-	      <0x00 0x484a4000 0x00 0x2000>,
+-	      <0x00 0x484c2000 0x00 0x2000>;
+-	reg-names = "gcfg", "bchanrt", "rchanrt", "tchanrt", "ringrt",
+-		    "cfg", "tchan", "rchan";
+ 	bootph-all;
+ };
+ 
+ &main_pktdma {
+-	reg = <0x00 0x485c0000 0x00 0x100>,
+-	      <0x00 0x4a800000 0x00 0x20000>,
+-	      <0x00 0x4aa00000 0x00 0x40000>,
+-	      <0x00 0x4b800000 0x00 0x400000>,
+-	      <0x00 0x485e0000 0x00 0x20000>,
+-	      <0x00 0x484a0000 0x00 0x4000>,
+-	      <0x00 0x484c0000 0x00 0x2000>,
+-	      <0x00 0x48430000 0x00 0x4000>;
+-	reg-names = "gcfg", "rchanrt", "tchanrt", "ringrt", "cfg",
+-		    "tchan", "rchan", "rflow";
+ 	bootph-all;
+ };
+ 
+diff --git a/arch/arm/dts/k3-am642-sk.dts b/arch/arm/dts/k3-am642-sk.dts
+index f29c8a9b59b..1dddd6fc1a0 100644
+--- a/arch/arm/dts/k3-am642-sk.dts
++++ b/arch/arm/dts/k3-am642-sk.dts
+@@ -433,12 +433,17 @@
+ 	};
+ };
+ 
+-/* mcu_gpio0 is reserved for mcu firmware usage */
++/* mcu_gpio0 and mcu_gpio_intr are reserved for mcu firmware usage */
+ &mcu_gpio0 {
+ 	status = "reserved";
+ };
+ 
++&mcu_gpio_intr {
++	status = "reserved";
++};
++
+ &sdhci0 {
++	status = "okay";
+ 	vmmc-supply = <&wlan_en>;
+ 	bus-width = <4>;
+ 	non-removable;
+@@ -458,9 +463,10 @@
+ 	};
+ };
+ 
++/* SD/MMC */
+ &sdhci1 {
+-	/* SD/MMC */
+ 	bootph-all;
++	status = "okay";
+ 	vmmc-supply = <&vdd_mmc1>;
+ 	pinctrl-names = "default";
+ 	bus-width = <4>;
+-- 
+2.39.2
 
-I would expect that you package up base and overlays or DTs with
-already applied overlays, but not both together. That would be based
-on whether your bootloader can apply overlays or not.
-
-This problem boils down to your firmware knows or gains the knowledge
-of some set of extra features or h/w pop options. The result is you
-need base plus X, Y, Z whether those are a list of overlays or an
-encoding of filename or something else. For example, FIT entries could
-have a field that just lists those X, Y, Z features. But I'd much
-rather have something that works outside of FIT images.
-
-> > In any case, maybe we need to record in dtb overlays that have been
-> > applied (which you asked about recently on dtc list). Not sure what
-> > that looks like though. Overlays have a 'top-level' compatible that we
-> > add in either separately or merged with the base's top-level
-> > compatible?
->
->
-> If there is a way to make "compatible" unique, that will be good.
->
-> But, in my understanding, we can replace a property value,
-> but not modify it.
-
-Currently yes, but that shouldn't be too hard to add. The dtc
-modification is the easy part. The hard part is figuring out the
-policy around how we would use that.
-
-But I don't really know what you want to accomplish with FIT here.
-IMO, if you need filenames, then use a filesystem. They work pretty
-well for storing large collections of files.
-
-Rob
