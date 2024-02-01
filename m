@@ -4,49 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29F89C47DDF
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 10:50:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B9F9C47DDB
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 10:51:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AFB587C3D;
-	Thu,  1 Feb 2024 11:50:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 9385287C49;
+	Thu,  1 Feb 2024 11:51:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1706784650;
-	bh=suaskAb/Ila9asaDwCF8b5yN2bZIZ5nm96xsZXxVAJM=;
-	h=Date:To:From:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=h+M6om9n8pJ4rQc38ktlIUgPH2DxU97zAGgMVlK4j58Xa1Nt4B4r5O8Bxe0XBJ5MM
-	 OHuBLhLRUJZA+ts0uVFNHPeluHQfgkXOztTbwx1zfWzgszK15gMT1WDCE9DlYSFFJD
-	 yecX1yRAspkGDUPL5toI9h4acp0DrLvVjUWsP0UNG/qk+osv5K63y2OUjbtx7cAnlY
-	 udSRng/aiL5ld8rSKX6Tpvk+AdrlOneTed4hMIJ3Grvx7bUwtTv27DTCLF2tOfQ1ke
-	 g8tTT0o9t6+LPUGOkOXJPuXqt16F3lmLUVR93h9DHXpBlzXVGBAr/y1lG741Vi2jgJ
-	 0Dl0hQGpbyERg==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="HI3svnTz";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F33887C74; Thu,  1 Feb 2024 11:50:49 +0100 (CET)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
+ id 18D7187C7A; Thu,  1 Feb 2024 11:51:28 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1682D87C49
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 11:50:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 25C8F86DEE
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 11:51:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4TQbKc3csDz9scD;
- Thu,  1 Feb 2024 11:50:44 +0100 (CET)
-Message-ID: <d46b4ac3-8834-42e1-8371-dbbc596af962@denx.de>
-Date: Thu, 1 Feb 2024 11:50:43 +0100
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=8890=JK=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1706784665;
+ bh=nCAm3AoQJ4rfdDGDOdBgyIBvQIbOAi60s+DChP3VcJM=;
+ b=HI3svnTznV/JDSAGkOkzGyb63La+tKFvdFCnlWqVrzhktzrGHUg7eiFAyG52Gkd2aUBudMkbT
+ GJ+KyP6ij6BvvDP2buoqJ7H8qTFaYoR/1T5FpDjcai2eT3SRFqaC3bVs1RHHCw+W8n6mlgPsiBB
+ 7FofRKQ6IkAJ92iDcSlKKjIWuyZNg1DbI571ITvGPUU8SX0rwVBGO4fCdgJz58EXxn1jjkDIkWP
+ 3YGrA99xWzuJ8d0jiJbOjxWuvAaLJi2hE+2u431QLSEBj+JhEGgbgvfWzZ/esvZ1OxyuNYUhef6
+ 6o0rAsgJLQXXMlRl+J4EZwrnPCDeRBgIxiNe8l78a7mQ==
+Message-ID: <e9d6883b-4331-4237-be19-5df6126a3962@kwiboo.se>
+Date: Thu, 1 Feb 2024 11:51:01 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] rockchip: rk35xx: Remove use of eMMC DDR52 mode
+To: Quentin Schulz <quentin.schulz@theobroma-systems.com>, Eugen Hristev
+ <eugen.hristev@collabora.com>
+Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>, Simon
+ Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom
+ Rini <trini@konsulko.com>, Nicolas Frattaroli
+ <frattaroli.nicolas@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Andy Yan <andyshrk@163.com>, Tianling Shen <cnsztl@gmail.com>, Akash
+ Gajjar <gajjar04akash@gmail.com>, Joshua Riek <jjriek@verizon.net>
+References: <20240126232615.6826-1-jonas@kwiboo.se>
+ <20240126232615.6826-2-jonas@kwiboo.se>
+ <515157a9-8d19-42f9-ae6d-914aaea8a3ba@collabora.com>
+ <e1417a87-15ee-4e1b-9513-c101a02118d4@kwiboo.se>
+ <23d7337a-88b7-4dcb-be08-c42b21e9dbd1@theobroma-systems.com>
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-From: Stefan Roese <sr@denx.de>
-Subject: Please pull u-boot-watchdog/master
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <23d7337a-88b7-4dcb-be08-c42b21e9dbd1@theobroma-systems.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 65bb779825cafd4e4cc3519c
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,53 +81,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Quentin,
 
-please pull the following watchdog related last minute fixes:
+On 2024-02-01 11:18, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 1/27/24 12:15, Jonas Karlman wrote:
+>> Hi Eugen,
+>>
+>> On 2024-01-27 04:48, Eugen Hristev wrote:
+>>> Hi Jonas,
+>>>
+>>>
+>>> On 1/27/24 01:26, Jonas Karlman wrote:
+>>>> Writing to eMMC using DDR52 mode does not work reliably or at all on
+>>>> RK356x and RK3588 boards.
+>>>>
+>>>
+>>>
+>>> This is related to the old issue I encountered last year with mmc write?
+>>
+>> Yes, I think it is.
+>>
+>> I did some testing on RK3566/RK3568/RK3588S/RK3588 boards with different
+>> eMMC modules with following result:
+>>
+>> Read seem to work with all enabled modes:
+>> RK3566: MMC legacy, MMC High Speed (26MHz), MMC High Speed (52MHz),
+>>          MMC DDR52 (52MHz) and HS200 (200MHz)
+>> RK3568/RK3588S/RK3588: all above + HS400 (200MHz) and HS400ES (200MHz)
+>>
+>> However, write had issues with some of the modes:
+>> MMC DDR52 (52MHz): all RK35xx
+>> HS400/HS400ES: only on RK3568 after changing hs400_txclk_tapnum to 8
+>>
+>> HS200 seem to be the most stable write speed that worked on all SoCs.
+>>
+>> So, dropping MMC DDR52 (52MHz) and enable use of HS200 (200MHz) seem to
+>> be the best option to get speedy and working read and write eMMC.
+>>
+> 
+> 1) we have this enabled on RK3588 Jaguar in upstream Linux... I may have 
+> improperly tested it then, would you mind sharing how you tested this 
+> mode on RK3588 so I can reproduce this and fix it on our product if 
+> we're impacted? I assume because we have HS200/HS400/HS400-ES enabled, 
+> DDR52 would never be used? (our eMMC is soldered and support the former 
+> modes).
 
-----------------------------------------------------------------
-- add andes atcwdt200 support (Randolph)
-----------------------------------------------------------------
+My main mode of testing eMMC in U-Boot has been to enable following
+Kconfig options,
 
-Here the Azure build, without any issues:
+CONFIG_MMC_HS200_SUPPORT=y
+CONFIG_MMC_HS400_SUPPORT=y
+CONFIG_MMC_HS400_ES_SUPPORT=y
+CONFIG_MMC_SPEED_MODE_SET=y
 
-https://dev.azure.com/sr0718/u-boot/_build/results?buildId=339&view=results
+and from U-Boot cli run following,
 
-Thanks,
-Stefan
+=> mmc rescan <mode> && mmc info && mmc read 10000000 2000 10000
+=> mmc rescan <mode> && mmc info && mmc write 20000000 4000 10000
 
+for each of the modes below.
 
-The following changes since commit b6d8969bcb94321dfed1399f2eaa8768ba42caaa:
+  0 = MMC legacy
+  1 = MMC High Speed (26MHz)
+  3 = MMC High Speed (52MHz)
+  4 = MMC DDR52 (52MHz)
+  10 = HS200 (200MHz)
+  11 = HS400 (200MHz)
+  12 = HS400ES (200MHz)
 
-   Merge tag 'u-boot-at91-2024.04-a' of 
-https://source.denx.de/u-boot/custodians/u-boot-at91 (2024-01-31 
-10:44:33 -0500)
+on different boards and different eMMC modules.
 
-are available in the Git repository at:
+Using some modes the read or write return ERROR instead of OK. When
+ERROR was reported a rescan or board reset was needed to test next mode.
 
-   git@source.denx.de:u-boot/custodians/u-boot-watchdog.git
+Please also note that I have only tested in U-Boot, not in linux.
 
-for you to fetch changes up to 094eda0660d419f35e10c49fade75a6738a56137:
+> 
+> 2) Why are we not enabling HS400/HS400-ES for RK3588 boards? You seem to 
+> be saying there are issues with HS400/HS400-ES on RK3568 but you didn't 
+> mention the status for RK3588. Did I misunderstand the last sentence? 
+> Can you please rephrase in that case?
 
-   configs: andes: add watchdog support fot andes ae350 (2024-02-01 
-09:08:44 +0100)
+I can see now that my wording was very confusing.
 
-----------------------------------------------------------------
-Randolph (2):
-       drivers: watchdog: add andes atcwdt200 support
-       configs: andes: add watchdog support fot andes ae350
+Write for HS400/HS400ES mode only worked on RK3568 after modification to
+the driver, on RK3588 write always returned error for me.
 
-  configs/ae350_rv32_defconfig         |   4 +
-  configs/ae350_rv32_spl_defconfig     |   4 +
-  configs/ae350_rv32_spl_xip_defconfig |   4 +
-  configs/ae350_rv32_xip_defconfig     |   4 +
-  configs/ae350_rv64_defconfig         |   4 +
-  configs/ae350_rv64_spl_defconfig     |   4 +
-  configs/ae350_rv64_spl_xip_defconfig |   4 +
-  configs/ae350_rv64_xip_defconfig     |   4 +
-  drivers/watchdog/Kconfig             |   6 +
-  drivers/watchdog/Makefile            |   1 +
-  drivers/watchdog/atcwdt200_wdt.c     | 220 
-+++++++++++++++++++++++++++++++++++
-  11 files changed, 259 insertions(+)
-  create mode 100644 drivers/watchdog/atcwdt200_wdt.c
+So on RK3568 HS400 modes could be made work, on remaining SoCs there was
+issues.
+
+Regards,
+Jonas
+
+> 
+> Cheers,
+> Quentin
+
