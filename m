@@ -4,80 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03877C47DDB
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 10:25:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76EB0C47DDF
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 10:47:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24C0287C5A;
-	Thu,  1 Feb 2024 11:25:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C228687957;
+	Thu,  1 Feb 2024 11:47:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nlTErwkW";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1706784454;
+	bh=gO6yGWnn2rfxdVyhdHCpDwjtPkabXe2KEVRnPkursjU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=if3+8WrQ4mW5S/D/HUbrFf3MxYVhci//hu0Sh3nU4iFci+2c5U7Ke4o77Jk/cTtk2
+	 yBsL6gpJQLBt2Ps/tR3G2LGr4lGvOjqh7156v210HiUaoF5Lll/X03cKaoHGk6bIok
+	 6kIyofOM1phBbQenM4bcLDRGfW/iHtIfpXsMjxlw/iT8/FKIYaQEV12OSzuMUKWjuW
+	 5Aai3LDdRyY/Y5LubHLvyNNpaSfL/uQqt6UOKeONDIGNzqJh1mAvKK27YluwzSbCKl
+	 +l4mjua78fHwtYDQzne2sJZ/ZxUliq7Ycf8ZWPhZu+EVhajdO08nkREG+LE19IWZWc
+	 ed3Hg22q/FGWw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AB8E87C68; Thu,  1 Feb 2024 11:25:41 +0100 (CET)
-Received: from mail-vs1-xe31.google.com (mail-vs1-xe31.google.com
- [IPv6:2607:f8b0:4864:20::e31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F046787C5C; Thu,  1 Feb 2024 11:47:32 +0100 (CET)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4209587C5A
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 11:25:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B1D0B875B9
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 11:47:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe31.google.com with SMTP id
- ada2fe7eead31-46b29f09401so305088137.2
- for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 02:25:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706783138; x=1707387938; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/vW+HIpDcqRZe3lEoxXcu/ZuvGahrIcZERAnzP4WGII=;
- b=nlTErwkWriff2DfQbaWKxXtTvRJPuI+nY2xUFudnMKF5YCVM24IO0nfrJ3thm2mFoz
- uehZCuZ6JwdekMxhePdYIPFOVPQp08fQ49OJtJ2XJv0O7glsxt3CE+KStlryANMVEbnW
- FaeLyWiNNn2Ze/zo2eJSqL0QAWS6EksQ1yKrNHYVB0qxMHfQ/4/FoApJrrqTNORKnC34
- hWtvVe4tcaPmFK/Pp1383CEUa79h7GjSv5xZjB7pirQc0U8BiEFn7qjdMV+VsjbX1SoG
- S1y7ZVZzIFYPGOOlDzB1BlOl+s8O1oLsj89BhvsgrWrhiT2WiCqB9NwPmqgNGdJkWC92
- v7Cg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706783138; x=1707387938;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/vW+HIpDcqRZe3lEoxXcu/ZuvGahrIcZERAnzP4WGII=;
- b=sX39midxesRI4do1CBIGrc9+vzdKEX3ODlQ7Q/BUyqfCv1vGAsDoa5tu7LNStULs9w
- Cj7f8w+QLD0JiXYna2U3C+R68FE+24DUzwvhKK94t0oubTdxycLRAh3V5iExclxvU8mj
- k5HUvi0GJriAZMAq9fn+ATtsv6FAkY6L1anFScbQLV1it7fMWrwqgUDL2xEPor63AOHr
- rATA7rw5eXYHSpF2g+iB/mOD1hGOSH0ETzmWNl4AM9fvJjxcNjKzCsI7t6/GAagcsKbN
- 7ntfcrelvDNM3aMSLdaiYhvqq4dEi12ixWVi0kcXrRv5CALvH8hCdWI6Cjh+nyfV0hBR
- O7sA==
-X-Gm-Message-State: AOJu0Yw1bgTC9Rvv6AKyUf8CSIRZxGbuMy3PDPSjhtZQqDVHDhhfuapf
- RltqtrwJCXq5UFnQUA9/dyny1MEedhRSD/nBdKmS4bMjTML3uRI5EtKJftWei/wbM0fqYw7C5WA
- Pgdu5Bln2mag2RmLK5o5ZPA9FVjBlFuEHzwCu3w==
-X-Google-Smtp-Source: AGHT+IG9xqYJtGhLc97D+1wdixQ9hAQ2kt5sOIKkH4llRouty7FOHOr//QVMxGRrWtCeMYPrYsJtwjCVdomp6SYgoXc=
-X-Received: by 2002:a67:fc4b:0:b0:46c:f267:90c with SMTP id
- p11-20020a67fc4b000000b0046cf267090cmr1135489vsq.14.1706783138003; Thu, 01
- Feb 2024 02:25:38 -0800 (PST)
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4TQbFr2FKvz9sNl;
+ Thu,  1 Feb 2024 11:47:28 +0100 (CET)
+Message-ID: <955e59c2-9dc4-4f6a-84ce-97a1bfb16b0c@denx.de>
+Date: Thu, 1 Feb 2024 11:47:26 +0100
 MIME-Version: 1.0
-References: <20240130-b4-qcom-common-target-v3-0-e523cbf9e556@linaro.org>
- <20240130-b4-qcom-common-target-v3-6-e523cbf9e556@linaro.org>
-In-Reply-To: <20240130-b4-qcom-common-target-v3-6-e523cbf9e556@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Thu, 1 Feb 2024 15:55:26 +0530
-Message-ID: <CAFA6WYN3GA17ACSXpr-ukrpvgh_5jnby8VU9QA54Wj-RpGGqVw@mail.gmail.com>
-Subject: Re: [PATCH v3 06/36] clock/qcom: qcs404: fix clk_set_rate
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, 
- Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH V4 2/2] configs: andes: add watchdog support fot andes
+ ae350
+Content-Language: en-US
+To: Randolph Lin <randolph@andestech.com>
+Cc: u-boot@lists.denx.de, randolph.sklin@gmail.com,
+ CL Wang <cl634@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>
+References: <20240124062133.439469-1-randolph@andestech.com>
+ <20240124062133.439469-2-randolph@andestech.com>
+ <5a7375c1-1b3d-4085-847e-1be68b049423@denx.de> <ZbnpEQkMqIT3u7Bz@atctrx>
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <ZbnpEQkMqIT3u7Bz@atctrx>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4TQbFr2FKvz9sNl
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,90 +74,218 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 30 Jan 2024 at 19:35, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> We should be returning the rate that we set the clock to, drivers like
-> MMC rely on this. So fix it.
+Hi Randolph,
 
-I suppose following diff make sense on top of this patch given the MMC
-driver clock changes:
+On 1/31/24 07:30, Randolph Lin wrote:
+> On Wed, Jan 24, 2024 at 09:37:41AM +0100, Stefan Roese wrote:
+> Hi Stefan,
+> Thank you for testing and reviewing.
+> I have checked the error message and the relationship to my patch.
+> The reason for the failure has nothing to do with my patch.
+> Could you kindly help me run the CI test again?
 
-diff --git a/drivers/clk/qcom/clock-qcs404.c b/drivers/clk/qcom/clock-qcs404.c
-index 03fd65a9328b..97668f18cd8c 100644
---- a/drivers/clk/qcom/clock-qcs404.c
-+++ b/drivers/clk/qcom/clock-qcs404.c
-@@ -208,9 +208,6 @@ static ulong qcs404_clk_set_rate(struct clk *clk,
-ulong rate)
-                clk_enable_gpll0(priv->base, &gpll0_vote_clk);
-                clk_enable_cbc(priv->base + SDCC_APPS_CBCR(1));
-                return rate;
--       case GCC_SDCC1_AHB_CLK:
--               clk_enable_cbc(priv->base + SDCC_AHB_CBCR(1));
--               break;
-        case GCC_ETH_RGMII_CLK:
-                if (rate == 250000000)
-                        clk_rcg_set_rate_mnd(priv->base, &emac_regs, 3, 0, 0,
-@@ -225,9 +222,11 @@ static ulong qcs404_clk_set_rate(struct clk *clk,
-ulong rate)
-                        clk_rcg_set_rate_mnd(priv->base, &emac_regs, 3, 1, 50,
-                                             CFG_CLK_SRC_GPLL1, 8);
-                return rate;
-+       default:
-+               log_warning("Unknown clock id %ld\n", clk->id);
-+               break;
-        }
+Now it works. Thanks for clarifying and sorry for the confusion.
 
--       log_warning("Unknown clock id %ld\n", clk->id);
-        return 0;
- }
+Thanks,
+Stefan
 
-@@ -304,6 +303,9 @@ static int qcs404_clk_enable(struct clk *clk)
-                clk_rcg_set_rate(priv->base, &blsp1_qup4_i2c_apps_regs, 0,
-                                 CFG_CLK_SRC_CXO);
-                break;
-+       case GCC_SDCC1_AHB_CLK:
-+               clk_enable_cbc(priv->base + SDCC_AHB_CBCR(1));
-+               break;
-        default:
-                return 0;
-        }
+> Randolph
+> Sincerely
+>> Hi Randolph,
+>>
+>> On 1/24/24 07:21, Randolph wrote:
+>>> It adds the ATCWDT200 support for Andes AE350 platform.
+>>> It also enables wdt command support.
+>>>
+>>> Signed-off-by: CL Wang <cl634@andestech.com>
+>>> Signed-off-by: Randolph <randolph@andestech.com>
+>>> Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+>>
+>> This fails in world CI build in "test.py for sandbox":
+>>
+>> https://dev.azure.com/sr0718/0cded7c3-6e6a-4b57-8d0f-65c99496c42f/_apis/build/builds/338/logs/181
+>>
+>> Not sure how this is related. Could you please take a look?
+>>
+>> Thanks,
+>> Stefan
+>>
+>>> ---
+>>>    configs/ae350_rv32_defconfig         | 4 ++++
+>>>    configs/ae350_rv32_spl_defconfig     | 4 ++++
+>>>    configs/ae350_rv32_spl_xip_defconfig | 4 ++++
+>>>    configs/ae350_rv32_xip_defconfig     | 4 ++++
+>>>    configs/ae350_rv64_defconfig         | 4 ++++
+>>>    configs/ae350_rv64_spl_defconfig     | 4 ++++
+>>>    configs/ae350_rv64_spl_xip_defconfig | 4 ++++
+>>>    configs/ae350_rv64_xip_defconfig     | 4 ++++
+>>>    8 files changed, 32 insertions(+)
+>>>
+>>> diff --git a/configs/ae350_rv32_defconfig b/configs/ae350_rv32_defconfig
+>>> index 3bfa3e9f8e..35ad62c845 100644
+>>> --- a/configs/ae350_rv32_defconfig
+>>> +++ b/configs/ae350_rv32_defconfig
+>>> @@ -23,6 +23,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+>>>    CONFIG_CMD_IMLS=y
+>>>    CONFIG_CMD_MMC=y
+>>>    CONFIG_CMD_SF_TEST=y
+>>> +CONFIG_CMD_WDT=y
+>>>    # CONFIG_CMD_SETEXPR is not set
+>>>    CONFIG_BOOTP_PREFER_SERVERIP=y
+>>>    CONFIG_CMD_CACHE=y
+>>> @@ -49,3 +50,6 @@ CONFIG_BAUDRATE=38400
+>>>    CONFIG_SYS_NS16550=y
+>>>    CONFIG_SPI=y
+>>>    CONFIG_ATCSPI200_SPI=y
+>>> +# CONFIG_WATCHDOG_AUTOSTART is not set
+>>> +CONFIG_WDT=y
+>>> +CONFIG_WDT_ATCWDT200=y
+>>> diff --git a/configs/ae350_rv32_spl_defconfig b/configs/ae350_rv32_spl_defconfig
+>>> index aeb50206d2..41cd457bc3 100644
+>>> --- a/configs/ae350_rv32_spl_defconfig
+>>> +++ b/configs/ae350_rv32_spl_defconfig
+>>> @@ -33,6 +33,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+>>>    CONFIG_CMD_IMLS=y
+>>>    CONFIG_CMD_MMC=y
+>>>    CONFIG_CMD_SF_TEST=y
+>>> +CONFIG_CMD_WDT=y
+>>>    # CONFIG_CMD_SETEXPR is not set
+>>>    CONFIG_BOOTP_PREFER_SERVERIP=y
+>>>    CONFIG_CMD_CACHE=y
+>>> @@ -58,3 +59,6 @@ CONFIG_SYS_NS16550=y
+>>>    CONFIG_SPI=y
+>>>    CONFIG_ATCSPI200_SPI=y
+>>>    # CONFIG_BINMAN_FDT is not set
+>>> +# CONFIG_WATCHDOG_AUTOSTART is not set
+>>> +CONFIG_WDT=y
+>>> +CONFIG_WDT_ATCWDT200=y
+>>> diff --git a/configs/ae350_rv32_spl_xip_defconfig b/configs/ae350_rv32_spl_xip_defconfig
+>>> index f15ec301ce..954e2f2de7 100644
+>>> --- a/configs/ae350_rv32_spl_xip_defconfig
+>>> +++ b/configs/ae350_rv32_spl_xip_defconfig
+>>> @@ -34,6 +34,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+>>>    CONFIG_CMD_IMLS=y
+>>>    CONFIG_CMD_MMC=y
+>>>    CONFIG_CMD_SF_TEST=y
+>>> +CONFIG_CMD_WDT=y
+>>>    # CONFIG_CMD_SETEXPR is not set
+>>>    CONFIG_BOOTP_PREFER_SERVERIP=y
+>>>    CONFIG_CMD_CACHE=y
+>>> @@ -59,3 +60,6 @@ CONFIG_SYS_NS16550=y
+>>>    CONFIG_SPI=y
+>>>    CONFIG_ATCSPI200_SPI=y
+>>>    # CONFIG_BINMAN_FDT is not set
+>>> +# CONFIG_WATCHDOG_AUTOSTART is not set
+>>> +CONFIG_WDT=y
+>>> +CONFIG_WDT_ATCWDT200=y
+>>> diff --git a/configs/ae350_rv32_xip_defconfig b/configs/ae350_rv32_xip_defconfig
+>>> index c40eb043c5..95863595d2 100644
+>>> --- a/configs/ae350_rv32_xip_defconfig
+>>> +++ b/configs/ae350_rv32_xip_defconfig
+>>> @@ -24,6 +24,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+>>>    CONFIG_CMD_IMLS=y
+>>>    CONFIG_CMD_MMC=y
+>>>    CONFIG_CMD_SF_TEST=y
+>>> +CONFIG_CMD_WDT=y
+>>>    # CONFIG_CMD_SETEXPR is not set
+>>>    CONFIG_BOOTP_PREFER_SERVERIP=y
+>>>    CONFIG_CMD_CACHE=y
+>>> @@ -50,3 +51,6 @@ CONFIG_BAUDRATE=38400
+>>>    CONFIG_SYS_NS16550=y
+>>>    CONFIG_SPI=y
+>>>    CONFIG_ATCSPI200_SPI=y
+>>> +# CONFIG_WATCHDOG_AUTOSTART is not set
+>>> +CONFIG_WDT=y
+>>> +CONFIG_WDT_ATCWDT200=y
+>>> diff --git a/configs/ae350_rv64_defconfig b/configs/ae350_rv64_defconfig
+>>> index 7ae938aeb2..988214285a 100644
+>>> --- a/configs/ae350_rv64_defconfig
+>>> +++ b/configs/ae350_rv64_defconfig
+>>> @@ -23,6 +23,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+>>>    CONFIG_CMD_IMLS=y
+>>>    CONFIG_CMD_MMC=y
+>>>    CONFIG_CMD_SF_TEST=y
+>>> +CONFIG_CMD_WDT=y
+>>>    # CONFIG_CMD_SETEXPR is not set
+>>>    CONFIG_BOOTP_PREFER_SERVERIP=y
+>>>    CONFIG_CMD_CACHE=y
+>>> @@ -49,3 +50,6 @@ CONFIG_BAUDRATE=38400
+>>>    CONFIG_SYS_NS16550=y
+>>>    CONFIG_SPI=y
+>>>    CONFIG_ATCSPI200_SPI=y
+>>> +# CONFIG_WATCHDOG_AUTOSTART is not set
+>>> +CONFIG_WDT=y
+>>> +CONFIG_WDT_ATCWDT200=y
+>>> diff --git a/configs/ae350_rv64_spl_defconfig b/configs/ae350_rv64_spl_defconfig
+>>> index 68ac4325ab..e929320433 100644
+>>> --- a/configs/ae350_rv64_spl_defconfig
+>>> +++ b/configs/ae350_rv64_spl_defconfig
+>>> @@ -33,6 +33,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+>>>    CONFIG_CMD_IMLS=y
+>>>    CONFIG_CMD_MMC=y
+>>>    CONFIG_CMD_SF_TEST=y
+>>> +CONFIG_CMD_WDT=y
+>>>    # CONFIG_CMD_SETEXPR is not set
+>>>    CONFIG_BOOTP_PREFER_SERVERIP=y
+>>>    CONFIG_CMD_CACHE=y
+>>> @@ -58,3 +59,6 @@ CONFIG_SYS_NS16550=y
+>>>    CONFIG_SPI=y
+>>>    CONFIG_ATCSPI200_SPI=y
+>>>    # CONFIG_BINMAN_FDT is not set
+>>> +# CONFIG_WATCHDOG_AUTOSTART is not set
+>>> +CONFIG_WDT=y
+>>> +CONFIG_WDT_ATCWDT200=y
+>>> diff --git a/configs/ae350_rv64_spl_xip_defconfig b/configs/ae350_rv64_spl_xip_defconfig
+>>> index 839ca335d4..3f92643b07 100644
+>>> --- a/configs/ae350_rv64_spl_xip_defconfig
+>>> +++ b/configs/ae350_rv64_spl_xip_defconfig
+>>> @@ -34,6 +34,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+>>>    CONFIG_CMD_IMLS=y
+>>>    CONFIG_CMD_MMC=y
+>>>    CONFIG_CMD_SF_TEST=y
+>>> +CONFIG_CMD_WDT=y
+>>>    # CONFIG_CMD_SETEXPR is not set
+>>>    CONFIG_BOOTP_PREFER_SERVERIP=y
+>>>    CONFIG_CMD_CACHE=y
+>>> @@ -59,3 +60,6 @@ CONFIG_SYS_NS16550=y
+>>>    CONFIG_SPI=y
+>>>    CONFIG_ATCSPI200_SPI=y
+>>>    # CONFIG_BINMAN_FDT is not set
+>>> +# CONFIG_WATCHDOG_AUTOSTART is not set
+>>> +CONFIG_WDT=y
+>>> +CONFIG_WDT_ATCWDT200=y
+>>> diff --git a/configs/ae350_rv64_xip_defconfig b/configs/ae350_rv64_xip_defconfig
+>>> index 5432b6d6d7..835f020990 100644
+>>> --- a/configs/ae350_rv64_xip_defconfig
+>>> +++ b/configs/ae350_rv64_xip_defconfig
+>>> @@ -24,6 +24,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+>>>    CONFIG_CMD_IMLS=y
+>>>    CONFIG_CMD_MMC=y
+>>>    CONFIG_CMD_SF_TEST=y
+>>> +CONFIG_CMD_WDT=y
+>>>    # CONFIG_CMD_SETEXPR is not set
+>>>    CONFIG_BOOTP_PREFER_SERVERIP=y
+>>>    CONFIG_CMD_CACHE=y
+>>> @@ -50,3 +51,6 @@ CONFIG_BAUDRATE=38400
+>>>    CONFIG_SYS_NS16550=y
+>>>    CONFIG_SPI=y
+>>>    CONFIG_ATCSPI200_SPI=y
+>>> +# CONFIG_WATCHDOG_AUTOSTART is not set
+>>> +CONFIG_WDT=y
+>>> +CONFIG_WDT_ATCWDT200=y
+>>
+>> Viele Grüße,
+>> Stefan Roese
+>>
+>> -- 
+>> DENX Software Engineering GmbH,      Managing Director: Erika Unter
+>> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+>> Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
 
--Sumit
+Viele Grüße,
+Stefan Roese
 
->
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  drivers/clk/qcom/clock-qcs404.c | 7 +++----
->  1 file changed, 3 insertions(+), 4 deletions(-)
->
-> diff --git a/drivers/clk/qcom/clock-qcs404.c b/drivers/clk/qcom/clock-qcs404.c
-> index f5b352803927..03fd65a9328b 100644
-> --- a/drivers/clk/qcom/clock-qcs404.c
-> +++ b/drivers/clk/qcom/clock-qcs404.c
-> @@ -207,7 +207,7 @@ static ulong qcs404_clk_set_rate(struct clk *clk, ulong rate)
->                                      CFG_CLK_SRC_GPLL0, 8);
->                 clk_enable_gpll0(priv->base, &gpll0_vote_clk);
->                 clk_enable_cbc(priv->base + SDCC_APPS_CBCR(1));
-> -               break;
-> +               return rate;
->         case GCC_SDCC1_AHB_CLK:
->                 clk_enable_cbc(priv->base + SDCC_AHB_CBCR(1));
->                 break;
-> @@ -224,11 +224,10 @@ static ulong qcs404_clk_set_rate(struct clk *clk, ulong rate)
->                 else if (rate == 5000000)
->                         clk_rcg_set_rate_mnd(priv->base, &emac_regs, 3, 1, 50,
->                                              CFG_CLK_SRC_GPLL1, 8);
-> -               break;
-> -       default:
-> -               return 0;
-> +               return rate;
->         }
->
-> +       log_warning("Unknown clock id %ld\n", clk->id);
->         return 0;
->  }
->
->
-> --
-> 2.43.0
->
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
