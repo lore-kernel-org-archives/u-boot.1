@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FD61C47258
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 03:09:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC19DC47DB3
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 03:09:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E143787D20;
-	Thu,  1 Feb 2024 04:07:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 06F5B87CAA;
+	Thu,  1 Feb 2024 04:07:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xz6UWtp0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="l5eJl6/r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9FAD87D0A; Thu,  1 Feb 2024 04:06:57 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 635F887CC2; Thu,  1 Feb 2024 04:06:58 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AACE987C56
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 04:06:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A60CF87CDE
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 04:06:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41136bWp082257;
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41136bwa078949;
  Wed, 31 Jan 2024 21:06:37 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1706756797;
- bh=WSQQBLcOO/okrb3iI8KDXQ/uw/rr+ivJRbfbPpxI0SE=;
+ bh=wfBsg9D4TSPHXYBerUySrkvvvGldvfCJF+pxgTyI1NU=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=xz6UWtp0p7Kamo8P7aM90JCtTnArCLMslNR0dZ7Hk94Tv7kKpxhiO8aXR+ScxEfyH
- 3R6RfzwrxwZdpdE6kada0Q7G5HynAk6WV6leu0A/aonABHYfeWLnwT6onBA5nlT33Z
- v8se/GLC3BXKHV2PXUOjiob+IvfX7S3MDunHmVVc=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41136bT8124157
+ b=l5eJl6/rQjDuB1D69I8ee4o60rxGavp+Gzc2wKAIdx2k1Xs00ckte4WStQCekWMXA
+ l/pXpzRif8041SMSBxtoRVHct1XWvGu/oUwfgFsxWFWfWFqS6FtUUiNWxMraYhTblc
+ 7hwR5L0f4hq+YfWNX3g6RgJusN8YBxR78gSL3TpY=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41136bKf008939
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Wed, 31 Jan 2024 21:06:37 -0600
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 31
  Jan 2024 21:06:37 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Wed, 31 Jan 2024 21:06:37 -0600
 Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41136bdA098200;
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41136bv4098194;
  Wed, 31 Jan 2024 21:06:37 -0600
 From: Bryan Brattlof <bb@ti.com>
 To: Tom Rini <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>, Hari
@@ -57,26 +57,26 @@ CC: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Sumit Garg <sumit.garg@linaro.org>, Nishanth Menon <nm@ti.com>,
  Andrew Davis <afd@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
  UBoot Mailing List <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>
-Subject: [PATCH v2 06/13] arch: mach-k3: introduce basic files to support the
- am62px SoC family
-Date: Wed, 31 Jan 2024 21:06:42 -0600
-Message-ID: <20240201030634.1120963-23-bb@ti.com>
+Subject: [PATCH v2 03/13] arm: mach-k3: am62px: introduce clock and device
+ files for wkup spl
+Date: Wed, 31 Jan 2024 21:06:39 -0600
+Message-ID: <20240201030634.1120963-20-bb@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240201030634.1120963-16-bb@ti.com>
 References: <20240201030634.1120963-16-bb@ti.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=17148; i=bb@ti.com;
- h=from:subject; bh=rLb6N1Pk1HAxuTeovdppNGd/4aBi4XSAaQmUd2uduUU=;
- b=owNCWmg5MUFZJlNZVbvorwAAbf////d//y/5XfuPy/1Otv/2/2v7b549nUrz6b46jtvk/dcwA
- Rti2OgANAAAANAGQAAGgDTygADIAyA0ekANDQDRo/VA2o9Q9J5R5QabUPUep6iDIaDQAGh6QAAG
- I0NME0AZADED1GAjQMQ0YJiaA0ZAAAAeU09QyYnqDFDaTQaDEaaBoGQ0aGmmTIaNAaDQeoAaMmg
- MjCGJiNNDI0aNDTI0NAANDTIaGggQcirZiJTfAUdgCxjYsSEuiP4sVOogW9sJIaAtP9oHTCRdcG
- GTJIg57zB+04opZo3djGXPiXwDbsBmNM+VsOQjY++T5D1d7ONKjpBShCBINECrPqvGzYItQY74v
- Yg1MJowvRcxKx4JMLBL7WKfyZBlg/EBoOvpX2t8Tzta6ZMVuFhsbIHLxG721CtTLAhSC36sn040
- 5kWZglkulChzo99Lro4nNI3s9gsVqj2/lRqFKT5OFSBhCgWqSYlE0NAzAb9w6E4evUOzNFBFTHU
- VYsl4iYZ0eikuARdBj/SMw+ByA/YK8ghXSpKHD3QLqpDYCQBZ93Z+cvGwgF/Ct9xb9ptZkJ/fm1
- Em2bUr2u7hlP5AIW6MtwcsV89SadMDTkT/A/sAwW0O6sgHkkFjctqGxgyhTkCAcxt5MTfY1CHnH
- nqkFL/i7kinChIKt30V4A==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=24604; i=bb@ti.com;
+ h=from:subject; bh=UIGSDy0C1xu3WtfBtUZdYwl3FP27P2oipXc09autvnA=;
+ b=owNCWmg5MUFZJlNZXVPXuQAAaP///7/7yrO+v5X33P1sun/D/+e33f9vi9fz/d994v3NvV2wA
+ RsYjtQAaAAxBoBiA9QAGg0AAAaaAPUAAAA0GjQAaA0aA0MaRtQaNPIzUiAA0Gg0PUAAAADIDQAA
+ A0DJ6jQ9QaBkaA02oA0HqaekfqQaeozUNqGhoaaGgNDITNQxBoMTIA0AZMIYhoADIAAYjE0wgME
+ MmgABoZNNGjE00A0AAAAcPOiarXgH1MAWBg6GBhCffHgnQdT7rLcXRjhgC2/rW3MEDLEw0xfLpG
+ QYQ/YEGSGVAHcCwJbcUtpOshvPpti9DxLudj0TWTtEiX2YcWh0A6sycDbsAwYYf3p8+IW/nINEJ
+ MAfQKEQ0h7PTS+GvmGiQUsT7awayr25Rg9xkhX0T4IcQc6Ql4150UpVgn7fSZuYoYvendowgWIx
+ 6xvTlljp97pdUlgY9x4dxkWIVyK48pJR/FbKp1KzUVhzJxkOaMON+u7Y8dVYcWB90IC5Akgj0K/
+ gFcgBGmHGIbX9aw4oqikZ1IsUoKIZ3SCqzyEYt/epoytZFF1qp9OpvZBVgIREoSHqGuVRQJE97v
+ NP+pfglaSxfhmJQS4M2OEHhp2zeyWX4mGC3flEJJL2aUzLgtgMG5njCllAKgwEzUA5kFOJef4u5
+ IpwoSC6p69y
 X-Developer-Key: i=bb@ti.com; a=openpgp;
  fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
 Content-Transfer-Encoding: 8bit
@@ -98,559 +98,514 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce the basic functions and definitions needed to properly
-initialize TI's am62p family of SoCs
+Include the clock and lpsc tree files needed for the wkup spl to
+initialize the proper PLLs and power domains to boot the SoC.
 
 Signed-off-by: Bryan Brattlof <bb@ti.com>
 ---
- arch/arm/mach-k3/Kconfig                      |   7 +-
- arch/arm/mach-k3/am62p5_init.c                | 280 ++++++++++++++++++
- arch/arm/mach-k3/am62px/Kconfig               |  32 ++
- .../arm/mach-k3/include/mach/am62p_hardware.h |  83 ++++++
- arch/arm/mach-k3/include/mach/am62p_spl.h     |  49 +++
- arch/arm/mach-k3/include/mach/hardware.h      |   4 +
- arch/arm/mach-k3/include/mach/spl.h           |   4 +
- 7 files changed, 458 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/mach-k3/am62p5_init.c
- create mode 100644 arch/arm/mach-k3/am62px/Kconfig
- create mode 100644 arch/arm/mach-k3/include/mach/am62p_hardware.h
- create mode 100644 arch/arm/mach-k3/include/mach/am62p_spl.h
+ arch/arm/mach-k3/r5/Makefile           |   1 +
+ arch/arm/mach-k3/r5/am62px/Makefile    |   6 +
+ arch/arm/mach-k3/r5/am62px/clk-data.c  | 325 +++++++++++++++++++++++++
+ arch/arm/mach-k3/r5/am62px/dev-data.c  |  71 ++++++
+ drivers/clk/ti/clk-k3.c                |   6 +
+ drivers/power/domain/ti-power-domain.c |   6 +
+ include/k3-clk.h                       |   1 +
+ include/k3-dev.h                       |   1 +
+ 8 files changed, 417 insertions(+)
+ create mode 100644 arch/arm/mach-k3/r5/am62px/Makefile
+ create mode 100644 arch/arm/mach-k3/r5/am62px/clk-data.c
+ create mode 100644 arch/arm/mach-k3/r5/am62px/dev-data.c
 
-diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
-index 0574e81075e6d..02a9c423ecdb8 100644
---- a/arch/arm/mach-k3/Kconfig
-+++ b/arch/arm/mach-k3/Kconfig
-@@ -22,6 +22,9 @@ config SOC_K3_AM625
- config SOC_K3_AM62A7
- 	bool "TI's K3 based AM62A7 SoC Family Support"
+diff --git a/arch/arm/mach-k3/r5/Makefile b/arch/arm/mach-k3/r5/Makefile
+index b99199d337411..d1cd96d459bc4 100644
+--- a/arch/arm/mach-k3/r5/Makefile
++++ b/arch/arm/mach-k3/r5/Makefile
+@@ -8,6 +8,7 @@ obj-$(CONFIG_SOC_K3_J721E) += j7200/
+ obj-$(CONFIG_SOC_K3_J721S2) += j721s2/
+ obj-$(CONFIG_SOC_K3_AM625) += am62x/
+ obj-$(CONFIG_SOC_K3_AM62A7) += am62ax/
++obj-$(CONFIG_SOC_K3_AM62P5) += am62px/
  
-+config SOC_K3_AM62P5
-+	bool "TI's K3 based AM62P5 SoC Family Support"
-+
- endchoice
- 
- if SOC_K3_J721E
-@@ -34,7 +37,7 @@ config SYS_SOC
- 
- config SYS_K3_NON_SECURE_MSRAM_SIZE
- 	hex
--	default 0x80000 if SOC_K3_AM654
-+	default 0x80000 if SOC_K3_AM654 || SOC_K3_AM62P5
- 	default 0x100000 if SOC_K3_J721E || SOC_K3_J721S2
- 	default 0x1c0000 if SOC_K3_AM642
- 	default 0x3c000 if SOC_K3_AM625 || SOC_K3_AM62A7
-@@ -78,6 +81,7 @@ config SYS_K3_BOOT_PARAM_TABLE_INDEX
- 	default 0x43c3f290 if SOC_K3_AM625
- 	default 0x43c3f290 if SOC_K3_AM62A7 && CPU_V7R
- 	default 0x7000f290 if SOC_K3_AM62A7 && ARM64
-+	default 0x43c4f290 if SOC_K3_AM62P5
- 	help
- 	  Address at which ROM stores the value which determines if SPL
- 	  is booted up by primary boot media or secondary boot media.
-@@ -153,6 +157,7 @@ source "arch/arm/mach-k3/am65x/Kconfig"
- source "arch/arm/mach-k3/am64x/Kconfig"
- source "arch/arm/mach-k3/am62x/Kconfig"
- source "arch/arm/mach-k3/am62ax/Kconfig"
-+source "arch/arm/mach-k3/am62px/Kconfig"
- source "arch/arm/mach-k3/j721e/Kconfig"
- source "arch/arm/mach-k3/j721s2/Kconfig"
- 
-diff --git a/arch/arm/mach-k3/am62p5_init.c b/arch/arm/mach-k3/am62p5_init.c
+ obj-y += lowlevel_init.o
+ obj-y += r5_mpu.o
+diff --git a/arch/arm/mach-k3/r5/am62px/Makefile b/arch/arm/mach-k3/r5/am62px/Makefile
 new file mode 100644
-index 0000000000000..5b6795cc7d246
+index 0000000000000..50b0df20a3d1a
 --- /dev/null
-+++ b/arch/arm/mach-k3/am62p5_init.c
-@@ -0,0 +1,280 @@
-+// SPDX-License-Identifier: GPL-2.0
++++ b/arch/arm/mach-k3/r5/am62px/Makefile
+@@ -0,0 +1,6 @@
++# SPDX-License-Identifier:	GPL-2.0+
++#
++# Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
++
++obj-y += clk-data.o
++obj-y += dev-data.o
+diff --git a/arch/arm/mach-k3/r5/am62px/clk-data.c b/arch/arm/mach-k3/r5/am62px/clk-data.c
+new file mode 100644
+index 0000000000000..4b9892fe05167
+--- /dev/null
++++ b/arch/arm/mach-k3/r5/am62px/clk-data.c
+@@ -0,0 +1,325 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * AM62P5: SoC specific initialization
++ * AM62PX specific clock platform data
 + *
-+ * Copyright (C) 2022 Texas Instruments Incorporated - https://www.ti.com/
++ * This file is auto generated. Please do not hand edit and report any issues
++ * to Bryan Brattlof <bb@ti.com>.
++ *
++ * Copyright (C) 2020-2023 Texas Instruments Incorporated - https://www.ti.com/
 + */
 +
-+#include <spl.h>
-+#include <asm/io.h>
-+#include <asm/arch/hardware.h>
-+#include "sysfw-loader.h"
-+#include "common.h"
-+#include <dm.h>
-+#include <dm/uclass-internal.h>
-+#include <dm/pinctrl.h>
++#include <linux/clk-provider.h>
++#include "k3-clk.h"
 +
-+struct fwl_data cbass_main_fwls[] = {
-+	{ "FSS_DAT_REG3", 7, 8 },
++static const char * const gluelogic_hfosc0_clkout_parents[] = {
++	NULL,
++	NULL,
++	"osc_24_mhz",
++	"osc_25_mhz",
++	"osc_26_mhz",
++	NULL,
 +};
 +
-+/*
-+ * This uninitialized global variable would normal end up in the .bss section,
-+ * but the .bss is cleared between writing and reading this variable, so move
-+ * it to the .data section.
-+ */
-+u32 bootindex __section(".data");
-+static struct rom_extended_boot_data bootdata __section(".data");
++static const char * const clk_32k_rc_sel_out0_parents[] = {
++	"gluelogic_rcosc_clk_1p0v_97p65k",
++	"gluelogic_hfosc0_clkout",
++	"gluelogic_rcosc_clk_1p0v_97p65k",
++	"gluelogic_lfosc0_clkout",
++};
 +
-+static void store_boot_info_from_rom(void)
-+{
-+	bootindex = *(u32 *)(CONFIG_SYS_K3_BOOT_PARAM_TABLE_INDEX);
-+	memcpy(&bootdata, (uintptr_t *)ROM_EXTENDED_BOOT_DATA_INFO,
-+	       sizeof(struct rom_extended_boot_data));
-+}
++static const char * const main_emmcsd1_io_clklb_sel_out0_parents[] = {
++	"board_0_mmc1_clklb_out",
++	"board_0_mmc1_clk_out",
++};
 +
-+static void ctrl_mmr_unlock(void)
-+{
-+	/* Unlock all WKUP_CTRL_MMR0 module registers */
-+	mmr_unlock(WKUP_CTRL_MMR0_BASE, 0);
-+	mmr_unlock(WKUP_CTRL_MMR0_BASE, 1);
-+	mmr_unlock(WKUP_CTRL_MMR0_BASE, 2);
-+	mmr_unlock(WKUP_CTRL_MMR0_BASE, 3);
-+	mmr_unlock(WKUP_CTRL_MMR0_BASE, 4);
-+	mmr_unlock(WKUP_CTRL_MMR0_BASE, 5);
-+	mmr_unlock(WKUP_CTRL_MMR0_BASE, 6);
-+	mmr_unlock(WKUP_CTRL_MMR0_BASE, 7);
++static const char * const main_ospi_loopback_clk_sel_out0_parents[] = {
++	"board_0_ospi0_dqs_out",
++	"board_0_ospi0_lbclko_out",
++};
 +
-+	/* Unlock all CTRL_MMR0 module registers */
-+	mmr_unlock(CTRL_MMR0_BASE, 0);
-+	mmr_unlock(CTRL_MMR0_BASE, 1);
-+	mmr_unlock(CTRL_MMR0_BASE, 2);
-+	mmr_unlock(CTRL_MMR0_BASE, 4);
-+	mmr_unlock(CTRL_MMR0_BASE, 5);
-+	mmr_unlock(CTRL_MMR0_BASE, 6);
++static const char * const main_usb0_refclk_sel_out0_parents[] = {
++	"gluelogic_hfosc0_clkout",
++	"postdiv4_16ff_main_0_hsdivout8_clk",
++};
 +
-+	/* Unlock all MCU_CTRL_MMR0 module registers */
-+	mmr_unlock(MCU_CTRL_MMR0_BASE, 0);
-+	mmr_unlock(MCU_CTRL_MMR0_BASE, 1);
-+	mmr_unlock(MCU_CTRL_MMR0_BASE, 2);
-+	mmr_unlock(MCU_CTRL_MMR0_BASE, 3);
-+	mmr_unlock(MCU_CTRL_MMR0_BASE, 4);
-+	mmr_unlock(MCU_CTRL_MMR0_BASE, 6);
++static const char * const main_usb1_refclk_sel_out0_parents[] = {
++	"gluelogic_hfosc0_clkout",
++	"postdiv4_16ff_main_0_hsdivout8_clk",
++};
 +
-+	/* Unlock PADCFG_CTRL_MMR padconf registers */
-+	mmr_unlock(PADCFG_MMR0_BASE, 1);
-+	mmr_unlock(PADCFG_MMR1_BASE, 1);
-+}
++static const char * const sam62_pll_ctrl_wrap_main_0_sysclkout_clk_parents[] = {
++	"gluelogic_hfosc0_clkout",
++	"hsdiv4_16fft_main_0_hsdivout0_clk",
++};
 +
-+void board_init_f(ulong dummy)
-+{
-+	struct udevice *dev;
-+	int ret;
++static const char * const sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk_parents[] = {
++	"gluelogic_hfosc0_clkout",
++	"hsdiv4_16fft_mcu_0_hsdivout0_clk",
++};
 +
-+	if (IS_ENABLED(CONFIG_CPU_V7R))
-+		setup_k3_mpu_regions();
++static const char * const clkout0_ctrl_out0_parents[] = {
++	"hsdiv4_16fft_main_2_hsdivout1_clk",
++	"hsdiv4_16fft_main_2_hsdivout1_clk",
++};
 +
-+	/*
-+	 * Cannot delay this further as there is a chance that
-+	 * K3_BOOT_PARAM_TABLE_INDEX can be over written by SPL MALLOC section.
-+	 */
-+	store_boot_info_from_rom();
++static const char * const main_emmcsd0_refclk_sel_out0_parents[] = {
++	"postdiv4_16ff_main_0_hsdivout5_clk",
++	"hsdiv4_16fft_main_2_hsdivout2_clk",
++};
 +
-+	ctrl_mmr_unlock();
++static const char * const main_emmcsd1_refclk_sel_out0_parents[] = {
++	"postdiv4_16ff_main_0_hsdivout5_clk",
++	"hsdiv4_16fft_main_2_hsdivout2_clk",
++};
 +
-+	/* Init DM early */
-+	ret = spl_early_init();
-+	if (ret)
-+		panic("spl_early_init() failed: %d\n", ret);
++static const char * const main_gtcclk_sel_out0_parents[] = {
++	"postdiv4_16ff_main_2_hsdivout5_clk",
++	"postdiv4_16ff_main_0_hsdivout6_clk",
++	"board_0_cp_gemac_cpts0_rft_clk_out",
++	NULL,
++	"board_0_mcu_ext_refclk0_out",
++	"board_0_ext_refclk1_out",
++	"sam62_pll_ctrl_wrap_mcu_0_chip_div1_clk_clk",
++	"sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk",
++};
 +
-+	/*
-+	 * Process pinctrl for the serial0 and serial3, aka WKUP_UART0 and
-+	 * MAIN_UART1 modules and continue regardless of the result of pinctrl.
-+	 * Do this without probing the device, but instead by searching the
-+	 * device that would request the given sequence number if probed. The
-+	 * UARTs will be used by the DM firmware and TIFS firmware images
-+	 * respectively and the firmware depend on SPL to initialize the pin
-+	 * settings.
-+	 */
-+	ret = uclass_find_device_by_seq(UCLASS_SERIAL, 0, &dev);
-+	if (!ret)
-+		pinctrl_select_state(dev, "default");
++static const char * const main_ospi_ref_clk_sel_out0_parents[] = {
++	"hsdiv4_16fft_main_0_hsdivout1_clk",
++	"postdiv1_16fft_main_1_hsdivout5_clk",
++};
 +
-+	ret = uclass_find_device_by_seq(UCLASS_SERIAL, 3, &dev);
-+	if (!ret)
-+		pinctrl_select_state(dev, "default");
++static const char * const main_timerclkn_sel_out0_parents[] = {
++	"gluelogic_hfosc0_clkout",
++	"clk_32k_rc_sel_out0",
++	"postdiv4_16ff_main_0_hsdivout7_clk",
++	"gluelogic_rcosc_clkout",
++	"board_0_mcu_ext_refclk0_out",
++	"board_0_ext_refclk1_out",
++	NULL,
++	"board_0_cp_gemac_cpts0_rft_clk_out",
++	"hsdiv4_16fft_main_1_hsdivout3_clk",
++	"postdiv4_16ff_main_2_hsdivout6_clk",
++	NULL,
++	NULL,
++	NULL,
++	NULL,
++	NULL,
++	NULL,
++};
 +
-+	/*
-+	 * Allow establishing an early console as required for example when
-+	 * doing a UART-based boot. Note that this console may not "survive"
-+	 * through a SYSFW PM-init step and will need a re-init in some way
-+	 * due to changing module clock frequencies.
-+	 */
-+	if (IS_ENABLED(CONFIG_K3_EARLY_CONS))
-+		ret = early_console_init();
-+		if (ret)
-+			panic("early_console_init() failed: %d\n", ret);
-+	}
++static const char * const wkup_clkout_sel_out0_parents[] = {
++	NULL,
++	"gluelogic_lfosc0_clkout",
++	"hsdiv4_16fft_main_0_hsdivout2_clk",
++	"hsdiv4_16fft_main_1_hsdivout2_clk",
++	"postdiv4_16ff_main_2_hsdivout9_clk",
++	"clk_32k_rc_sel_out0",
++	"gluelogic_rcosc_clkout",
++	"gluelogic_hfosc0_clkout",
++};
 +
-+	/*
-+	 * Configure and start up system controller firmware. Provide
-+	 * the U-Boot console init function to the SYSFW post-PM configuration
-+	 * callback hook, effectively switching on (or over) the console
-+	 * output.
-+	 */
-+	if (IS_ENABLED(CONFIG_K3_LOAD_SYSFW) {
-+		ret = is_rom_loaded_sysfw(&bootdata);
-+		if (!ret)
-+			panic("ROM has not loaded TIFS firmware\n");
++static const char * const wkup_clkout_sel_io_out0_parents[] = {
++	"wkup_clkout_sel_out0",
++	"gluelogic_hfosc0_clkout",
++};
 +
-+		k3_sysfw_loader(true, NULL, NULL);
-+	}
++static const char * const wkup_clksel_out0_parents[] = {
++	"hsdiv3_16fft_main_15_hsdivout0_clk",
++	"hsdiv4_16fft_mcu_0_hsdivout0_clk",
++};
 +
-+	/*
-+	 * Force probe of clk_k3 driver here to ensure basic default clock
-+	 * configuration is always done.
-+	 */
-+	if (IS_ENABLED(CONFIG_SPL_CLK_K3)) {
-+		ret = uclass_get_device_by_driver(UCLASS_CLK,
-+						  DM_DRIVER_GET(ti_clk),
-+						  &dev);
-+		if (ret)
-+			printf("Failed to initialize clk-k3!\n");
-+	}
++static const char * const main_usart0_fclk_sel_out0_parents[] = {
++	"usart_programmable_clock_divider_out0",
++	"hsdiv4_16fft_main_1_hsdivout1_clk",
++};
 +
-+	preloader_console_init();
++static const struct clk_data clk_list[] = {
++	CLK_FIXED_RATE("osc_26_mhz", 26000000, 0),
++	CLK_FIXED_RATE("osc_25_mhz", 25000000, 0),
++	CLK_FIXED_RATE("osc_24_mhz", 24000000, 0),
++	CLK_MUX("gluelogic_hfosc0_clkout", gluelogic_hfosc0_clkout_parents, 6, 0x43000030, 0, 3, 0),
++	CLK_FIXED_RATE("gluelogic_rcosc_clkout", 12500000, 0),
++	CLK_FIXED_RATE("gluelogic_rcosc_clk_1p0v_97p65k", 97656, 0),
++	CLK_FIXED_RATE("board_0_cp_gemac_cpts0_rft_clk_out", 0, 0),
++	CLK_FIXED_RATE("board_0_ext_refclk1_out", 0, 0),
++	CLK_FIXED_RATE("board_0_i2c0_scl_out", 0, 0),
++	CLK_FIXED_RATE("board_0_mcu_ext_refclk0_out", 0, 0),
++	CLK_FIXED_RATE("board_0_mmc1_clklb_out", 0, 0),
++	CLK_FIXED_RATE("board_0_mmc1_clk_out", 0, 0),
++	CLK_FIXED_RATE("board_0_ospi0_dqs_out", 0, 0),
++	CLK_FIXED_RATE("board_0_ospi0_lbclko_out", 0, 0),
++	CLK_FIXED_RATE("board_0_tck_out", 0, 0),
++	CLK_FIXED_RATE("dmtimer_dmc1ms_main_0_timer_pwm", 0, 0),
++	CLK_FIXED_RATE("emmcsd4ss_main_0_emmcsdss_io_clk_o", 0, 0),
++	CLK_FIXED_RATE("fss_ul_main_0_ospi_0_ospi_oclk_clk", 0, 0),
++	CLK_FIXED_RATE("mshsi2c_main_0_porscl", 0, 0),
++	CLK_PLL("pllfracf2_ssmod_16fft_main_0_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x680000, 0),
++	CLK_DIV("pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk_subdiv", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680038, 16, 3, 0, CLK_DIVIDER_ONE_BASED),
++	CLK_DIV("pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk_subdiv", 0x680038, 24, 3, 0, CLK_DIVIDER_ONE_BASED),
++	CLK_PLL_DEFFREQ("pllfracf2_ssmod_16fft_main_1_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x681000, 0, 1920000000),
++	CLK_DIV("pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk_subdiv", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681038, 16, 3, 0, CLK_DIVIDER_ONE_BASED),
++	CLK_DIV("pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk", "pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk_subdiv", 0x681038, 24, 3, 0, CLK_DIVIDER_ONE_BASED),
++	CLK_PLL("pllfracf2_ssmod_16fft_main_12_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x68c000, 0),
++	CLK_PLL("pllfracf2_ssmod_16fft_main_15_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x68f000, 0),
++	CLK_PLL("pllfracf2_ssmod_16fft_main_2_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x682000, 0),
++	CLK_DIV("pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk_subdiv", "pllfracf2_ssmod_16fft_main_2_foutvcop_clk", 0x682038, 16, 3, 0, CLK_DIVIDER_ONE_BASED),
++	CLK_DIV("pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk", "pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk_subdiv", 0x682038, 24, 3, 0, CLK_DIVIDER_ONE_BASED),
++	CLK_PLL("pllfracf2_ssmod_16fft_main_8_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x688000, 0),
++	CLK_PLL("pllfracf2_ssmod_16fft_mcu_0_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x4040000, 0),
++	CLK_DIV("postdiv1_16fft_main_1_hsdivout5_clk", "pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk", 0x681094, 0, 7, 0, 0),
++	CLK_DIV("postdiv4_16ff_main_0_hsdivout5_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", 0x680094, 0, 7, 0, 0),
++	CLK_DIV("postdiv4_16ff_main_0_hsdivout6_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", 0x680098, 0, 7, 0, 0),
++	CLK_DIV("postdiv4_16ff_main_0_hsdivout7_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", 0x68009c, 0, 7, 0, 0),
++	CLK_DIV("postdiv4_16ff_main_0_hsdivout8_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", 0x6800a0, 0, 7, 0, 0),
++	CLK_DIV("postdiv4_16ff_main_2_hsdivout5_clk", "pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk", 0x682094, 0, 7, 0, 0),
++	CLK_DIV("postdiv4_16ff_main_2_hsdivout6_clk", "pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk", 0x682098, 0, 7, 0, 0),
++	CLK_DIV("postdiv4_16ff_main_2_hsdivout8_clk", "pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk", 0x6820a0, 0, 7, 0, 0),
++	CLK_DIV("postdiv4_16ff_main_2_hsdivout9_clk", "pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk", 0x6820a4, 0, 7, 0, 0),
++	CLK_MUX("clk_32k_rc_sel_out0", clk_32k_rc_sel_out0_parents, 4, 0x4508058, 0, 2, 0),
++	CLK_MUX("main_emmcsd1_io_clklb_sel_out0", main_emmcsd1_io_clklb_sel_out0_parents, 2, 0x108168, 16, 1, 0),
++	CLK_MUX("main_ospi_loopback_clk_sel_out0", main_ospi_loopback_clk_sel_out0_parents, 2, 0x108500, 4, 1, 0),
++	CLK_MUX("main_usb0_refclk_sel_out0", main_usb0_refclk_sel_out0_parents, 2, 0x43008190, 0, 1, 0),
++	CLK_MUX("main_usb1_refclk_sel_out0", main_usb1_refclk_sel_out0_parents, 2, 0x43008194, 0, 1, 0),
++	CLK_DIV("hsdiv0_16fft_main_12_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_12_foutvcop_clk", 0x68c080, 0, 7, 0, 0),
++	CLK_DIV("hsdiv0_16fft_main_8_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_8_foutvcop_clk", 0x688080, 0, 7, 0, 0),
++	CLK_DIV("hsdiv3_16fft_main_15_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_15_foutvcop_clk", 0x68f080, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_main_0_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680080, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_main_0_hsdivout1_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680084, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_main_0_hsdivout2_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680088, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_main_0_hsdivout3_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x68008c, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_main_0_hsdivout4_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680090, 0, 7, 0, 0),
++	CLK_DIV_DEFFREQ("hsdiv4_16fft_main_1_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681080, 0, 7, 0, 0, 192000000),
++	CLK_DIV("hsdiv4_16fft_main_1_hsdivout1_clk", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681084, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_main_1_hsdivout2_clk", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681088, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_main_1_hsdivout3_clk", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x68108c, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_main_2_hsdivout1_clk", "pllfracf2_ssmod_16fft_main_2_foutvcop_clk", 0x682084, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_main_2_hsdivout2_clk", "pllfracf2_ssmod_16fft_main_2_foutvcop_clk", 0x682088, 0, 7, 0, 0),
++	CLK_DIV("hsdiv4_16fft_mcu_0_hsdivout0_clk", "pllfracf2_ssmod_16fft_mcu_0_foutvcop_clk", 0x4040080, 0, 7, 0, 0),
++	CLK_MUX_PLLCTRL("sam62_pll_ctrl_wrap_main_0_sysclkout_clk", sam62_pll_ctrl_wrap_main_0_sysclkout_clk_parents, 2, 0x410000, 0),
++	CLK_DIV("sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk", "sam62_pll_ctrl_wrap_main_0_sysclkout_clk", 0x410118, 0, 5, 0, 0),
++	CLK_MUX_PLLCTRL("sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk", sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk_parents, 2, 0x4020000, 0),
++	CLK_DIV("sam62_pll_ctrl_wrap_mcu_0_chip_div1_clk_clk", "sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk", 0x4020118, 0, 5, 0, 0),
++	CLK_MUX("clkout0_ctrl_out0", clkout0_ctrl_out0_parents, 2, 0x108010, 0, 1, 0),
++	CLK_MUX("main_emmcsd0_refclk_sel_out0", main_emmcsd0_refclk_sel_out0_parents, 2, 0x108160, 0, 1, 0),
++	CLK_MUX("main_emmcsd1_refclk_sel_out0", main_emmcsd1_refclk_sel_out0_parents, 2, 0x108168, 0, 1, 0),
++	CLK_MUX("main_gtcclk_sel_out0", main_gtcclk_sel_out0_parents, 8, 0x43008030, 0, 3, 0),
++	CLK_MUX("main_ospi_ref_clk_sel_out0", main_ospi_ref_clk_sel_out0_parents, 2, 0x108500, 0, 1, 0),
++	CLK_MUX("main_timerclkn_sel_out0", main_timerclkn_sel_out0_parents, 16, 0x1081b0, 0, 4, 0),
++	CLK_DIV_DEFFREQ("usart_programmable_clock_divider_out0", "hsdiv4_16fft_main_1_hsdivout0_clk", 0x108240, 0, 2, 0, 0, 48000000),
++	CLK_MUX("wkup_clkout_sel_out0", wkup_clkout_sel_out0_parents, 8, 0x43008020, 0, 3, 0),
++	CLK_MUX("wkup_clkout_sel_io_out0", wkup_clkout_sel_io_out0_parents, 2, 0x43008020, 24, 1, 0),
++	CLK_MUX("wkup_clksel_out0", wkup_clksel_out0_parents, 2, 0x43008010, 0, 1, 0),
++	CLK_MUX("main_usart0_fclk_sel_out0", main_usart0_fclk_sel_out0_parents, 2, 0x108280, 0, 1, 0),
++	CLK_DIV("sam62_pll_ctrl_wrap_main_0_chip_div24_clk_clk", "sam62_pll_ctrl_wrap_main_0_sysclkout_clk", 0x41011c, 0, 5, 0, 0),
++	CLK_DIV("sam62_pll_ctrl_wrap_mcu_0_chip_div24_clk_clk", "sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk", 0x402011c, 0, 5, 0, 0),
++};
 +
-+	/* Output System Firmware version info */
-+	k3_sysfw_print_ver();
++static const struct dev_clk soc_dev_clk_data[] = {
++	DEV_CLK(16, 0, "hsdiv4_16fft_main_0_hsdivout1_clk"),
++	DEV_CLK(16, 1, "hsdiv4_16fft_main_0_hsdivout2_clk"),
++	DEV_CLK(16, 2, "hsdiv4_16fft_main_0_hsdivout3_clk"),
++	DEV_CLK(16, 3, "hsdiv4_16fft_main_0_hsdivout4_clk"),
++	DEV_CLK(16, 4, "gluelogic_hfosc0_clkout"),
++	DEV_CLK(16, 5, "board_0_ext_refclk1_out"),
++	DEV_CLK(16, 6, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(16, 7, "postdiv4_16ff_main_2_hsdivout8_clk"),
++	DEV_CLK(16, 8, "gluelogic_hfosc0_clkout"),
++	DEV_CLK(16, 9, "board_0_ext_refclk1_out"),
++	DEV_CLK(16, 10, "gluelogic_rcosc_clkout"),
++	DEV_CLK(16, 11, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(16, 12, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(36, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(36, 2, "main_timerclkn_sel_out0"),
++	DEV_CLK(36, 3, "gluelogic_hfosc0_clkout"),
++	DEV_CLK(36, 4, "clk_32k_rc_sel_out0"),
++	DEV_CLK(36, 5, "postdiv4_16ff_main_0_hsdivout7_clk"),
++	DEV_CLK(36, 6, "gluelogic_rcosc_clkout"),
++	DEV_CLK(36, 7, "board_0_mcu_ext_refclk0_out"),
++	DEV_CLK(36, 8, "board_0_ext_refclk1_out"),
++	DEV_CLK(36, 10, "board_0_cp_gemac_cpts0_rft_clk_out"),
++	DEV_CLK(36, 11, "hsdiv4_16fft_main_1_hsdivout3_clk"),
++	DEV_CLK(36, 12, "postdiv4_16ff_main_2_hsdivout6_clk"),
++	DEV_CLK(57, 1, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(57, 2, "main_emmcsd0_refclk_sel_out0"),
++	DEV_CLK(57, 3, "postdiv4_16ff_main_0_hsdivout5_clk"),
++	DEV_CLK(57, 4, "hsdiv4_16fft_main_2_hsdivout2_clk"),
++	DEV_CLK(58, 0, "main_emmcsd1_io_clklb_sel_out0"),
++	DEV_CLK(58, 1, "board_0_mmc1_clklb_out"),
++	DEV_CLK(58, 2, "board_0_mmc1_clk_out"),
++	DEV_CLK(58, 5, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(58, 6, "main_emmcsd1_refclk_sel_out0"),
++	DEV_CLK(58, 7, "postdiv4_16ff_main_0_hsdivout5_clk"),
++	DEV_CLK(58, 8, "hsdiv4_16fft_main_2_hsdivout2_clk"),
++	DEV_CLK(61, 0, "main_gtcclk_sel_out0"),
++	DEV_CLK(61, 1, "postdiv4_16ff_main_2_hsdivout5_clk"),
++	DEV_CLK(61, 2, "postdiv4_16ff_main_0_hsdivout6_clk"),
++	DEV_CLK(61, 3, "board_0_cp_gemac_cpts0_rft_clk_out"),
++	DEV_CLK(61, 5, "board_0_mcu_ext_refclk0_out"),
++	DEV_CLK(61, 6, "board_0_ext_refclk1_out"),
++	DEV_CLK(61, 7, "sam62_pll_ctrl_wrap_mcu_0_chip_div1_clk_clk"),
++	DEV_CLK(61, 8, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(61, 9, "wkup_clksel_out0"),
++	DEV_CLK(61, 10, "hsdiv3_16fft_main_15_hsdivout0_clk"),
++	DEV_CLK(61, 11, "hsdiv4_16fft_mcu_0_hsdivout0_clk"),
++	DEV_CLK(75, 0, "board_0_ospi0_dqs_out"),
++	DEV_CLK(75, 1, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(75, 2, "main_ospi_loopback_clk_sel_out0"),
++	DEV_CLK(75, 3, "board_0_ospi0_dqs_out"),
++	DEV_CLK(75, 4, "board_0_ospi0_lbclko_out"),
++	DEV_CLK(75, 6, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(75, 7, "main_ospi_ref_clk_sel_out0"),
++	DEV_CLK(75, 8, "hsdiv4_16fft_main_0_hsdivout1_clk"),
++	DEV_CLK(75, 9, "postdiv1_16fft_main_1_hsdivout5_clk"),
++	DEV_CLK(77, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(102, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(102, 1, "board_0_i2c0_scl_out"),
++	DEV_CLK(102, 2, "hsdiv4_16fft_main_1_hsdivout0_clk"),
++	DEV_CLK(135, 0, "hsdiv0_16fft_main_8_hsdivout0_clk"),
++	DEV_CLK(146, 0, "main_usart0_fclk_sel_out0"),
++	DEV_CLK(146, 1, "usart_programmable_clock_divider_out0"),
++	DEV_CLK(146, 2, "hsdiv4_16fft_main_1_hsdivout1_clk"),
++	DEV_CLK(146, 5, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(157, 36, "clkout0_ctrl_out0"),
++	DEV_CLK(157, 37, "hsdiv4_16fft_main_2_hsdivout1_clk"),
++	DEV_CLK(157, 38, "hsdiv4_16fft_main_2_hsdivout1_clk"),
++	DEV_CLK(157, 40, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(157, 54, "mshsi2c_main_0_porscl"),
++	DEV_CLK(157, 91, "sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk"),
++	DEV_CLK(157, 101, "emmcsd4ss_main_0_emmcsdss_io_clk_o"),
++	DEV_CLK(157, 103, "emmcsd4ss_main_0_emmcsdss_io_clk_o"),
++	DEV_CLK(157, 143, "fss_ul_main_0_ospi_0_ospi_oclk_clk"),
++	DEV_CLK(157, 145, "fss_ul_main_0_ospi_0_ospi_oclk_clk"),
++	DEV_CLK(157, 161, "sam62_pll_ctrl_wrap_main_0_sysclkout_clk"),
++	DEV_CLK(157, 163, "dmtimer_dmc1ms_main_0_timer_pwm"),
++	DEV_CLK(157, 174, "wkup_clkout_sel_io_out0"),
++	DEV_CLK(157, 175, "wkup_clkout_sel_out0"),
++	DEV_CLK(157, 176, "gluelogic_hfosc0_clkout"),
++	DEV_CLK(161, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(161, 1, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(161, 2, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(161, 3, "main_usb0_refclk_sel_out0"),
++	DEV_CLK(161, 4, "gluelogic_hfosc0_clkout"),
++	DEV_CLK(161, 5, "postdiv4_16ff_main_0_hsdivout8_clk"),
++	DEV_CLK(161, 10, "board_0_tck_out"),
++	DEV_CLK(162, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(162, 1, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(162, 2, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(162, 3, "main_usb1_refclk_sel_out0"),
++	DEV_CLK(162, 4, "gluelogic_hfosc0_clkout"),
++	DEV_CLK(162, 5, "postdiv4_16ff_main_0_hsdivout8_clk"),
++	DEV_CLK(162, 10, "board_0_tck_out"),
++	DEV_CLK(166, 3, "hsdiv0_16fft_main_8_hsdivout0_clk"),
++	DEV_CLK(166, 5, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(169, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(169, 1, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(170, 1, "hsdiv0_16fft_main_12_hsdivout0_clk"),
++	DEV_CLK(170, 2, "board_0_tck_out"),
++	DEV_CLK(170, 3, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++};
 +
-+	/* Disable ROM configured firewalls right after loading sysfw */
-+	remove_fwl_configs(cbass_main_fwls, ARRAY_SIZE(cbass_main_fwls));
-+
-+	if (IS_ENABLED(CONFIG_K3_AM62A_DDRSS)) {
-+		ret = uclass_get_device(UCLASS_RAM, 0, &dev);
-+		if (ret)
-+			panic("DRAM init failed: %d\n", ret);
-+	}
-+
-+	spl_enable_cache();
-+	debug("am62px_init: %s done\n", __func__);
-+}
-+
-+u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
-+{
-+	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
-+	u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
-+				MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
-+	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
-+			    MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
-+
-+	switch (bootmode) {
-+	case BOOT_DEVICE_EMMC:
-+		return MMCSD_MODE_EMMCBOOT;
-+	case BOOT_DEVICE_MMC:
-+		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
-+			return MMCSD_MODE_RAW;
-+	default:
-+		return MMCSD_MODE_FS;
-+	}
-+}
-+
-+static u32 __get_backup_bootmedia(u32 devstat)
-+{
-+	u32 bkup_bootmode = (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
-+				MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT;
-+	u32 bkup_bootmode_cfg =
-+			(devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK) >>
-+				MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT;
-+
-+	switch (bkup_bootmode) {
-+	case BACKUP_BOOT_DEVICE_UART:
-+		return BOOT_DEVICE_UART;
-+
-+	case BACKUP_BOOT_DEVICE_USB:
-+		return BOOT_DEVICE_USB;
-+
-+	case BACKUP_BOOT_DEVICE_ETHERNET:
-+		return BOOT_DEVICE_ETHERNET;
-+
-+	case BACKUP_BOOT_DEVICE_MMC:
-+		if (bkup_bootmode_cfg)
-+			return BOOT_DEVICE_MMC2;
-+		return BOOT_DEVICE_MMC1;
-+
-+	case BACKUP_BOOT_DEVICE_SPI:
-+		return BOOT_DEVICE_SPI;
-+
-+	case BACKUP_BOOT_DEVICE_I2C:
-+		return BOOT_DEVICE_I2C;
-+
-+	case BACKUP_BOOT_DEVICE_DFU:
-+		if (bkup_bootmode_cfg & MAIN_DEVSTAT_BACKUP_USB_MODE_MASK)
-+			return BOOT_DEVICE_USB;
-+		return BOOT_DEVICE_DFU;
-+	};
-+
-+	return BOOT_DEVICE_RAM;
-+}
-+
-+static u32 __get_primary_bootmedia(u32 devstat)
-+{
-+	u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
-+				MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
-+	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
-+				MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
-+
-+	switch (bootmode) {
-+	case BOOT_DEVICE_OSPI:
-+		fallthrough;
-+	case BOOT_DEVICE_QSPI:
-+		fallthrough;
-+	case BOOT_DEVICE_XSPI:
-+		fallthrough;
-+	case BOOT_DEVICE_SPI:
-+		return BOOT_DEVICE_SPI;
-+
-+	case BOOT_DEVICE_ETHERNET_RGMII:
-+		fallthrough;
-+	case BOOT_DEVICE_ETHERNET_RMII:
-+		return BOOT_DEVICE_ETHERNET;
-+
-+	case BOOT_DEVICE_EMMC:
-+		return BOOT_DEVICE_MMC1;
-+
-+	case BOOT_DEVICE_SPI_NAND:
-+		return BOOT_DEVICE_SPINAND;
-+
-+	case BOOT_DEVICE_MMC:
-+		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK) >>
-+				MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT)
-+			return BOOT_DEVICE_MMC2;
-+		return BOOT_DEVICE_MMC1;
-+
-+	case BOOT_DEVICE_DFU:
-+		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK) >>
-+		    MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT)
-+			return BOOT_DEVICE_USB;
-+		return BOOT_DEVICE_DFU;
-+
-+	case BOOT_DEVICE_NOBOOT:
-+		return BOOT_DEVICE_RAM;
-+	}
-+
-+	return bootmode;
-+}
-+
-+u32 spl_boot_device(void)
-+{
-+	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
-+	u32 bootmedia;
-+
-+	if (bootindex == K3_PRIMARY_BOOTMODE)
-+		bootmedia = __get_primary_bootmedia(devstat);
-+	else
-+		bootmedia = __get_backup_bootmedia(devstat);
-+
-+	debug("am62px_init: %s: devstat = 0x%x bootmedia = 0x%x bootindex = %d\n",
-+	      __func__, devstat, bootmedia, bootindex);
-+	return bootmedia;
-+}
-diff --git a/arch/arm/mach-k3/am62px/Kconfig b/arch/arm/mach-k3/am62px/Kconfig
++const struct ti_k3_clk_platdata am62px_clk_platdata = {
++	.clk_list = clk_list,
++	.clk_list_cnt = ARRAY_SIZE(clk_list),
++	.soc_dev_clk_data = soc_dev_clk_data,
++	.soc_dev_clk_data_cnt = ARRAY_SIZE(soc_dev_clk_data),
++};
+diff --git a/arch/arm/mach-k3/r5/am62px/dev-data.c b/arch/arm/mach-k3/r5/am62px/dev-data.c
 new file mode 100644
-index 0000000000000..38a9e6811b119
+index 0000000000000..3cc211ea20259
 --- /dev/null
-+++ b/arch/arm/mach-k3/am62px/Kconfig
-@@ -0,0 +1,32 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+
-+if SOC_K3_AM62P5
-+
-+choice
-+	prompt "TI K3 AM62Px based boards"
-+	optional
-+
-+config TARGET_AM62P5_A53_EVM
-+	bool "TI K3 based AM62P5 EVM running on A53"
-+	select ARM64
-+	select BINMAN
-+
-+config TARGET_AM62P5_R5_EVM
-+	bool "TI K3 based AM62P5 EVM running on R5"
-+	select CPU_V7R
-+	select SYS_THUMB_BUILD
-+	select K3_LOAD_SYSFW
-+	select RAM
-+	select SPL_RAM
-+	select K3_DDRSS
-+	select BINMAN
-+	imply SYS_K3_SPL_ATF
-+
-+endchoice
-+
-+source "board/ti/am62px/Kconfig"
-+
-+endif
-diff --git a/arch/arm/mach-k3/include/mach/am62p_hardware.h b/arch/arm/mach-k3/include/mach/am62p_hardware.h
-new file mode 100644
-index 0000000000000..923466c41f456
---- /dev/null
-+++ b/arch/arm/mach-k3/include/mach/am62p_hardware.h
-@@ -0,0 +1,83 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
++++ b/arch/arm/mach-k3/r5/am62px/dev-data.c
+@@ -0,0 +1,71 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * K3: AM62Px SoC definitions, structures etc.
++ * AM62PX specific device platform data
 + *
-+ * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
++ * This file is auto generated. Please do not hand edit and report any issues
++ * to Bryan Brattlof <bb@ti.com>.
++ *
++ * Copyright (C) 2020-2023 Texas Instruments Incorporated - https://www.ti.com/
 + */
 +
-+#ifndef __ASM_ARCH_AM62P_HARDWARE_H
-+#define __ASM_ARCH_AM62P_HARDWARE_H
++#include "k3-dev.h"
 +
-+#include <config.h>
-+#ifndef __ASSEMBLY__
-+#include <linux/bitops.h>
++static struct ti_psc soc_psc_list[] = {
++	[0] = PSC(0, 0x00400000),
++};
++
++static struct ti_pd soc_pd_list[] = {
++	[0] = PSC_PD(0, &soc_psc_list[0], NULL),
++	[1] = PSC_PD(3, &soc_psc_list[0], &soc_pd_list[0]),
++	[2] = PSC_PD(4, &soc_psc_list[0], &soc_pd_list[1]),
++	[3] = PSC_PD(13, &soc_psc_list[0], &soc_pd_list[0]),
++};
++
++static struct ti_lpsc soc_lpsc_list[] = {
++	[0] = PSC_LPSC(0, &soc_psc_list[0], &soc_pd_list[0], NULL),
++	[1] = PSC_LPSC(12, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[5]),
++	[2] = PSC_LPSC(13, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[6]),
++	[3] = PSC_LPSC(20, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[8]),
++	[4] = PSC_LPSC(21, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[8]),
++	[5] = PSC_LPSC(23, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[8]),
++	[6] = PSC_LPSC(24, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[8]),
++	[7] = PSC_LPSC(28, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[8]),
++	[8] = PSC_LPSC(34, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[8]),
++	[9] = PSC_LPSC(53, &soc_psc_list[0], &soc_pd_list[1], &soc_lpsc_list[8]),
++	[10] = PSC_LPSC(56, &soc_psc_list[0], &soc_pd_list[2], &soc_lpsc_list[9]),
++	[11] = PSC_LPSC(72, &soc_psc_list[0], &soc_pd_list[3], &soc_lpsc_list[8]),
++	[12] = PSC_LPSC(73, &soc_psc_list[0], &soc_pd_list[3], &soc_lpsc_list[11]),
++	[13] = PSC_LPSC(74, &soc_psc_list[0], &soc_pd_list[3], &soc_lpsc_list[12]),
++};
++
++static struct ti_dev soc_dev_list[] = {
++	PSC_DEV(16, &soc_lpsc_list[0]),
++	PSC_DEV(77, &soc_lpsc_list[0]),
++	PSC_DEV(61, &soc_lpsc_list[0]),
++	PSC_DEV(178, &soc_lpsc_list[1]),
++	PSC_DEV(179, &soc_lpsc_list[2]),
++	PSC_DEV(57, &soc_lpsc_list[3]),
++	PSC_DEV(58, &soc_lpsc_list[4]),
++	PSC_DEV(161, &soc_lpsc_list[5]),
++	PSC_DEV(162, &soc_lpsc_list[6]),
++	PSC_DEV(75, &soc_lpsc_list[7]),
++	PSC_DEV(36, &soc_lpsc_list[8]),
++	PSC_DEV(102, &soc_lpsc_list[8]),
++	PSC_DEV(146, &soc_lpsc_list[8]),
++	PSC_DEV(166, &soc_lpsc_list[9]),
++	PSC_DEV(135, &soc_lpsc_list[10]),
++	PSC_DEV(170, &soc_lpsc_list[11]),
++	PSC_DEV(177, &soc_lpsc_list[12]),
++	PSC_DEV(55, &soc_lpsc_list[13]),
++};
++
++const struct ti_k3_pd_platdata am62px_pd_platdata = {
++	.psc = soc_psc_list,
++	.pd = soc_pd_list,
++	.lpsc = soc_lpsc_list,
++	.devs = soc_dev_list,
++	.num_psc = ARRAY_SIZE(soc_psc_list),
++	.num_pd = ARRAY_SIZE(soc_pd_list),
++	.num_lpsc = ARRAY_SIZE(soc_lpsc_list),
++	.num_devs = ARRAY_SIZE(soc_dev_list),
++};
+diff --git a/drivers/clk/ti/clk-k3.c b/drivers/clk/ti/clk-k3.c
+index eb76195bd75da..ef7cac937f25f 100644
+--- a/drivers/clk/ti/clk-k3.c
++++ b/drivers/clk/ti/clk-k3.c
+@@ -86,6 +86,12 @@ static const struct soc_attr ti_k3_soc_clk_data[] = {
+ 		.family = "AM62AX",
+ 		.data = &am62ax_clk_platdata,
+ 	},
 +#endif
-+
-+#define PADCFG_MMR0_BASE			0x04080000
-+#define PADCFG_MMR1_BASE			0x000f0000
-+#define CTRL_MMR0_BASE				0x00100000
-+#define MCU_CTRL_MMR0_BASE			0x04500000
-+#define WKUP_CTRL_MMR0_BASE			0x43000000
-+
-+#define CTRLMMR_MAIN_DEVSTAT			(WKUP_CTRL_MMR0_BASE + 0x30)
-+#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK	GENMASK(6, 3)
-+#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT	3
-+#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK	GENMASK(9, 7)
-+#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT	7
-+#define MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK	GENMASK(12, 10)
-+#define MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT	10
-+#define MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK	BIT(13)
-+#define MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT	13
-+
-+/* Primary Bootmode MMC Config macros */
-+#define MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK	0x4
-+#define MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT	2
-+#define MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK	0x1
-+#define MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_SHIFT	0
-+
-+/* Primary Bootmode USB Config macros */
-+#define MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT	1
-+#define MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK	0x02
-+
-+/* Backup Bootmode USB Config macros */
-+#define MAIN_DEVSTAT_BACKUP_USB_MODE_MASK	0x01
-+
-+/*
-+ * The CTRL_MMR0 memory space is divided into several equally-spaced
-+ * partitions, so defining the partition size allows us to determine
-+ * register addresses common to those partitions.
-+ */
-+#define CTRL_MMR0_PARTITION_SIZE		0x4000
-+
-+/*
-+ * CTRL_MMR0, WKUP_CTRL_MMR0, and MCU_CTRL_MMR0 lock/kick-mechanism
-+ * shared register definitions. The same registers are also used for
-+ * PADCFG_MMR lock/kick-mechanism.
-+ */
-+#define CTRLMMR_LOCK_KICK0			0x1008
-+#define CTRLMMR_LOCK_KICK0_UNLOCK_VAL		0x68ef3490
-+#define CTRLMMR_LOCK_KICK1			0x100c
-+#define CTRLMMR_LOCK_KICK1_UNLOCK_VAL		0xd172bc5a
-+
-+#define MCU_CTRL_LFXOSC_CTRL			(MCU_CTRL_MMR0_BASE + 0x8038)
-+#define MCU_CTRL_LFXOSC_TRIM			(MCU_CTRL_MMR0_BASE + 0x803c)
-+#define MCU_CTRL_LFXOSC_32K_DISABLE_VAL		BIT(7)
-+
-+#define MCU_CTRL_DEVICE_CLKOUT_32K_CTRL		(MCU_CTRL_MMR0_BASE + 0x8058)
-+#define MCU_CTRL_DEVICE_CLKOUT_LFOSC_SELECT_VAL	(0x3)
-+
-+#define ROM_EXTENDED_BOOT_DATA_INFO		0x43c4f1e0
-+
-+#define K3_BOOT_PARAM_TABLE_INDEX_OCRAM         0x7000F290
-+
-+#define TI_SRAM_SCRATCH_BOARD_EEPROM_START	0x43c30000
-+
-+#if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
-+
-+static const u32 put_device_ids[] = {};
-+
-+static const u32 put_core_ids[] = {};
-+
-+#endif
-+
-+#endif /* __ASM_ARCH_AM62P_HARDWARE_H */
-diff --git a/arch/arm/mach-k3/include/mach/am62p_spl.h b/arch/arm/mach-k3/include/mach/am62p_spl.h
-new file mode 100644
-index 0000000000000..db145a7bc83ba
---- /dev/null
-+++ b/arch/arm/mach-k3/include/mach/am62p_spl.h
-@@ -0,0 +1,49 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#ifndef _ASM_ARCH_AM62P_SPL_H_
-+#define _ASM_ARCH_AM62P_SPL_H_
-+
-+/* Primary BootMode devices */
-+#define BOOT_DEVICE_SPI_NAND		0x00
-+#define BOOT_DEVICE_RAM			0xFF
-+#define BOOT_DEVICE_OSPI		0x01
-+#define BOOT_DEVICE_QSPI		0x02
-+#define BOOT_DEVICE_SPI			0x03
-+#define BOOT_DEVICE_CPGMAC		0x04
-+#define BOOT_DEVICE_ETHERNET_RGMII	0x04
-+#define BOOT_DEVICE_ETHERNET_RMII	0x05
-+#define BOOT_DEVICE_I2C			0x06
-+#define BOOT_DEVICE_UART		0x07
-+#define BOOT_DEVICE_MMC			0x08
-+#define BOOT_DEVICE_EMMC		0x09
-+
-+#define BOOT_DEVICE_USB			0x2A
-+#define BOOT_DEVICE_DFU			0x0A
-+#define BOOT_DEVICE_GPMC_NAND		0x0B
-+#define BOOT_DEVICE_GPMC_NOR		0x0C
-+#define BOOT_DEVICE_XSPI		0x0E
-+#define BOOT_DEVICE_NOBOOT		0x0F
-+
-+/* U-Boot used aliases */
-+#define BOOT_DEVICE_ETHERNET		0x04
-+#define BOOT_DEVICE_SPINAND		0x10
-+#define BOOT_DEVICE_MMC2		0x08
-+#define BOOT_DEVICE_MMC1		0x09
-+/* Invalid */
-+#define BOOT_DEVICE_MMC2_2		0x1F
-+
-+/* Backup BootMode devices */
-+#define BACKUP_BOOT_DEVICE_DFU		0x01
-+#define BACKUP_BOOT_DEVICE_UART		0x03
-+#define BACKUP_BOOT_DEVICE_ETHERNET	0x04
-+#define BACKUP_BOOT_DEVICE_MMC		0x05
-+#define BACKUP_BOOT_DEVICE_SPI		0x06
-+#define BACKUP_BOOT_DEVICE_I2C		0x07
-+#define BACKUP_BOOT_DEVICE_USB		0x09
-+
-+#define K3_PRIMARY_BOOTMODE		0x0
-+
-+#endif /* _ASM_ARCH_AM62P_SPL_H_ */
-diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
-index 040288150b12f..c035386d0978c 100644
---- a/arch/arm/mach-k3/include/mach/hardware.h
-+++ b/arch/arm/mach-k3/include/mach/hardware.h
-@@ -33,6 +33,10 @@
- #include "am62a_qos.h"
- #endif
- 
 +#ifdef CONFIG_SOC_K3_AM62P5
-+#include "am62p_hardware.h"
-+#endif
-+
- /* Assuming these addresses and definitions stay common across K3 devices */
- #define CTRLMMR_WKUP_JTAG_ID	(WKUP_CTRL_MMR0_BASE + 0x14)
- #define JTAG_ID_VARIANT_SHIFT	28
-diff --git a/arch/arm/mach-k3/include/mach/spl.h b/arch/arm/mach-k3/include/mach/spl.h
-index 3ddc7eb6b63c2..f3b77cdcbb59e 100644
---- a/arch/arm/mach-k3/include/mach/spl.h
-+++ b/arch/arm/mach-k3/include/mach/spl.h
-@@ -30,4 +30,8 @@
- #include "am62a_spl.h"
++	{
++		.family = "AM62PX",
++		.data = &am62px_clk_platdata,
++	},
  #endif
- 
-+#ifdef CONFIG_SOC_K3_AM62P5
-+#include "am62p_spl.h"
+ 	{ /* sentinel */ }
+ };
+diff --git a/drivers/power/domain/ti-power-domain.c b/drivers/power/domain/ti-power-domain.c
+index dc5d74539edcf..c2f58c7af2131 100644
+--- a/drivers/power/domain/ti-power-domain.c
++++ b/drivers/power/domain/ti-power-domain.c
+@@ -99,6 +99,12 @@ static const struct soc_attr ti_k3_soc_pd_data[] = {
+ 		.family = "AM62AX",
+ 		.data = &am62ax_pd_platdata,
+ 	},
 +#endif
-+
- #endif /* _ASM_ARCH_SPL_H_ */
++#if IS_ENABLED(CONFIG_SOC_K3_AM62P5)
++	{
++		.family = "AM62PX",
++		.data = &am62px_pd_platdata,
++	},
+ #endif
+ 	{ /* sentinel */ }
+ };
+diff --git a/include/k3-clk.h b/include/k3-clk.h
+index 1b6ab8fe65405..74d1741c9f24c 100644
+--- a/include/k3-clk.h
++++ b/include/k3-clk.h
+@@ -176,6 +176,7 @@ extern const struct ti_k3_clk_platdata j7200_clk_platdata;
+ extern const struct ti_k3_clk_platdata j721s2_clk_platdata;
+ extern const struct ti_k3_clk_platdata am62x_clk_platdata;
+ extern const struct ti_k3_clk_platdata am62ax_clk_platdata;
++extern const struct ti_k3_clk_platdata am62px_clk_platdata;
+ 
+ struct clk *clk_register_ti_pll(const char *name, const char *parent_name,
+ 				void __iomem *reg);
+diff --git a/include/k3-dev.h b/include/k3-dev.h
+index 072e10ba6321f..80797a9c3dac2 100644
+--- a/include/k3-dev.h
++++ b/include/k3-dev.h
+@@ -80,6 +80,7 @@ extern const struct ti_k3_pd_platdata j7200_pd_platdata;
+ extern const struct ti_k3_pd_platdata j721s2_pd_platdata;
+ extern const struct ti_k3_pd_platdata am62x_pd_platdata;
+ extern const struct ti_k3_pd_platdata am62ax_pd_platdata;
++extern const struct ti_k3_pd_platdata am62px_pd_platdata;
+ 
+ u8 ti_pd_state(struct ti_pd *pd);
+ u8 lpsc_get_state(struct ti_lpsc *lpsc);
 -- 
 2.43.0
 
