@@ -4,80 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3335C4828D
-	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 14:33:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DF67C4828D
+	for <u-boot@archiver.kernel.org>; Thu,  1 Feb 2024 14:34:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E9F18789B;
-	Thu,  1 Feb 2024 15:33:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
+	by phobos.denx.de (Postfix) with ESMTP id DDC0387C78;
+	Thu,  1 Feb 2024 15:34:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="Y7oto/aM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="w0FgtGTZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FECC878EE; Thu,  1 Feb 2024 15:33:09 +0100 (CET)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
+ id F286187C76; Thu,  1 Feb 2024 15:34:33 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F08187527
- for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 15:33:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=foundries.io
+ by phobos.denx.de (Postfix) with ESMTPS id 440C987C78
+ for <u-boot@lists.denx.de>; Thu,  1 Feb 2024 15:34:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2cf206e4d56so12841751fa.3
- for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 06:33:07 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-33b1b21c020so179741f8f.0
+ for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 06:34:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1706797987; x=1707402787; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MBQh+/5XQtSffU6fpRd5fzUm/wRjrw1elDLhxvNKQ5Y=;
- b=Y7oto/aMLBkwVrL3bHL5nJdhr/SLG64C5crRT20YlYOAIEu0bS8NZskwqZu0GyD5Dx
- b1w2buMv0ryT2I7EqOeOiCMIcUi8/iCbgU9C81jCWdTBs1xvhvr5fqupLWvHVq2UjT05
- KWiGzOynDpIFCbtP0WSYtqdrUwCnXop/JeXTBVohBvFvJsEHojujF0TBU3XhylCm0SjT
- CZK7IhgAt+5hxtWMYbk83cKHnPZRbLe4yy2EnM3v5M70AK6G2MjBliB49Xe/t3ZdajmY
- jhfBT9wj4udlAHvztSzHNVGbKp+LRkMKBDPD+ruqz43AFtEgE/cESMUefG9eT8tWxLU/
- IKVQ==
+ d=linaro.org; s=google; t=1706798068; x=1707402868; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Xty1A/YKB+bP1+68m+kZFtA+OaqBYfl1/DT11huMdL4=;
+ b=w0FgtGTZkdtRTi3CC3hi8ozScnN4z80PLhmBgtdb6ASP5J4n+go6XbI7SFmHBO9DYr
+ hvGDQ9bD6Dy/NgnT3aQkpd9PW9UvjoC9wullJUXOCYsEZoo4USuM0DOuSDW0gdp4XImG
+ X3dJvRWge+SaeQX2YvSzQqPiQDczSxfnHl39DOZIJKOUv5tbQxbZ3fXGmMaULxrJnJgG
+ El1yKa9tv4mm8anqsuPOEI1FtRycMDyaSX6kzGic7aeW8Tupe1+YcpjziSk7haf6OLtF
+ XoBD+Y/7V3mjjwXDNwsgH1rm8p1HLulmP7a3PhBFghgon4bdMtNm7pWl7uzcD9GQLBJZ
+ CPaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706797987; x=1707402787;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MBQh+/5XQtSffU6fpRd5fzUm/wRjrw1elDLhxvNKQ5Y=;
- b=BTbPtMOXktdRoHzjckzWbiTnKtU/tfHvjnprSbaChv0xfLd56GoMzVw/3kiQ9ULcZf
- 3IlzBwZmVhlFNevHzeYElL8oKMPKjAfczp2+MpWxwDfGIsd3etzZoBJQcswkJtA9as4c
- Ax9/po478eNVZjJbNxrtMkioyFCTWXsRuUh6SGHUUxqXHTG1OzXvD6B6abffGPB0KzlY
- ECXuky3LoQ8A6BATY03J7xxLxTN5BBQATNuppS35gkkqnYx8olCkFhf9FlaDPZE89qfN
- Oc4Zp2xCv6YV8IIpQwsE4xwo9Ybug7vVt0DNISO0Epfu52uOJETatf7Bcl3ZxiySauY6
- 68jQ==
-X-Gm-Message-State: AOJu0YwblJvZu9wkmde1mmrtMxVGDOohbMUrS2ndN5PAGY0YjaRYsiDB
- YdWB0hALnCP3njbhtY2a2lL2WrkuG++Prqx5w37Dn4iyb8zdZWeP5rNdiMHJoqY1/IvAowGXPlf
- 6FhTCCyNyyyR3Vob/hHbwcDt2K7Z+NVmUom3mSA==
-X-Google-Smtp-Source: AGHT+IHFS6cr3wyhdfzNa0d4zFn53CvnsF7j6YQreyn/jymBf702Sc2SC1tUBsAE56LoGYbY72dDTDxAh37WfKnenck=
-X-Received: by 2002:a05:651c:c96:b0:2cc:830f:69f8 with SMTP id
- bz22-20020a05651c0c9600b002cc830f69f8mr2159350ljb.11.1706797986587; Thu, 01
- Feb 2024 06:33:06 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706798068; x=1707402868;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Xty1A/YKB+bP1+68m+kZFtA+OaqBYfl1/DT11huMdL4=;
+ b=J9dSROMTCCREjlsNGm8ggzbvmiL+83uAJFaQL8WiLpcbmpq31iLxyGKffkdx1CdwHI
+ 3lMsIsRt0JiItU6eEgbokwzspY3J/5WW6drv35rPxjzi/jKmmQ0acFKO6dFEbnavVkDo
+ PFdRmh/h3qNL+oZlWAfT7MzdsLvVNdVaxqwS3DKVB6MgNzRVI8NpO7bY6dANZcSv05Co
+ r43s6vHdGcVF4Msj+SpDpUbzmjCvV8paKAEd+jVN+Io4+kvgJe1iySoG/kt0NF0f6mdB
+ KVs86AhlQjVgOJvNegJBeXc59tTWXlUvqqgz96qa3Do+5Dq382G48Z5lbb+K4bSgngZi
+ eOqQ==
+X-Gm-Message-State: AOJu0YzruLFFjjcA5elwbmWbrtg/YyswBrSQCh7hJYwa4fVWJGgsfN0i
+ eDpu9UmTWwU14mBfTVW0xMj12WEVd05knelHbMDi/OikfbDcx6ltGJFzuvH+ldQ=
+X-Google-Smtp-Source: AGHT+IEYAeajAM23rULB5kn6UpqIT2kuFn5+eXpn8FY3yt1mGFz3RRe+5Cbs+Was1zgyTaeddLfuVA==
+X-Received: by 2002:a5d:4445:0:b0:33b:187c:4ca0 with SMTP id
+ x5-20020a5d4445000000b0033b187c4ca0mr1001961wrr.62.1706798068657; 
+ Thu, 01 Feb 2024 06:34:28 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCXuLAtbwV9ttQXFGIlAZ0X8Tm9vWnomqlvb+O3KrFhs/je5hTBavv8ivciYibptN6056Usb6lrvLYUq+cSVeAVGN+bfwflhH4NzIHMM2ZkBeTwc79hn4zvDwHvIrUMtGHcPvqKZrnz6QOH0iQfTbv27zph1H0Cnw8UrHLvhjULBXrbtIvQLCi0NvDrj+sCqn9nvXVl7yJdprjR33J6vkO77DFQGSml7sImi6qpTqwrkj3QCrXrhx0VJAgw9Npnp8hN6LwciLNAvnftHAZHXGHE3BSEHLyvnVASACICBI0hRKMBk2fzi/YvL6T/KuI1Gw9NENBNv6NZHSTMzkE1P3vt8WbUGdUlsqZ5WQRzDXx+n349XNAHk7I5UWRmicH8JRS/a
+Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
+ by smtp.gmail.com with ESMTPSA id
+ d2-20020adf9c82000000b0033929310ae4sm16384680wre.73.2024.02.01.06.34.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 01 Feb 2024 06:34:28 -0800 (PST)
+Message-ID: <cefe7d3b-876e-4680-b9e2-6b612579b803@linaro.org>
+Date: Thu, 1 Feb 2024 14:34:27 +0000
 MIME-Version: 1.0
-References: <20240131141426.34926-1-o451686892@gmail.com>
- <20240131141426.34926-4-o451686892@gmail.com>
-In-Reply-To: <20240131141426.34926-4-o451686892@gmail.com>
-From: Igor Opaniuk <igor.opaniuk@foundries.io>
-Date: Thu, 1 Feb 2024 15:32:55 +0100
-Message-ID: <CAL6CDMFtvYNjAssFCzWkrkpRw3u_C_ZvMUm8U4P89mhp_1OkNQ@mail.gmail.com>
-Subject: Re: [PATCH v3 3/3] cmd: rng: Add rng list command
-To: Weizhao Ouyang <o451686892@gmail.com>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Tom Rini <trini@konsulko.com>, Etienne Carriere <etienne.carriere@foss.st.com>,
- Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 03/36] mmc: msm_sdhci: use modern clock handling
+Content-Language: en-US
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski
+ <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
+References: <20240130-b4-qcom-common-target-v3-0-e523cbf9e556@linaro.org>
+ <20240130-b4-qcom-common-target-v3-3-e523cbf9e556@linaro.org>
+ <CAFA6WYPveDeXdq70-jRV7ZM80g6kZN2=45gFgy92qv49xirfAw@mail.gmail.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAFA6WYPveDeXdq70-jRV7ZM80g6kZN2=45gFgy92qv49xirfAw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,73 +105,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Reviewed-by: Igor Opaniuk <igor.opaniuk@foundries.io>
-
-On Wed, Jan 31, 2024 at 3:15=E2=80=AFPM Weizhao Ouyang <o451686892@gmail.co=
-m> wrote:
->
-> The 'rng list' command probes all RNG devices and list those devices
-> that are successfully probed. Also update the help info.
->
-> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
-> ---
->  cmd/rng.c | 23 ++++++++++++++++++-----
->  1 file changed, 18 insertions(+), 5 deletions(-)
->
-> diff --git a/cmd/rng.c b/cmd/rng.c
-> index 52f722c7af..b073a6c849 100644
-> --- a/cmd/rng.c
-> +++ b/cmd/rng.c
-> @@ -19,6 +19,22 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, int=
- argc, char *const argv[])
->         struct udevice *dev;
->         int ret =3D CMD_RET_SUCCESS;
->
-> +       if (argc =3D=3D 2 && !strcmp(argv[1], "list")) {
-> +               int idx =3D 0;
-> +
-> +               uclass_foreach_dev_probe(UCLASS_RNG, dev) {
-> +                       idx++;
-> +                       printf("RNG #%d - %s\n", dev->seq_, dev->name);
-> +               }
-> +
-> +               if (!idx) {
-> +                       log_err("No RNG device\n");
-> +                       return CMD_RET_FAILURE;
-> +               }
-> +
-> +               return CMD_RET_SUCCESS;
-> +       }
-> +
->         switch (argc) {
->         case 1:
->                 devnum =3D 0;
-> @@ -56,12 +72,9 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, int=
- argc, char *const argv[])
->         return ret;
->  }
->
-> -U_BOOT_LONGHELP(rng,
-> -       "[dev [n]]\n"
-> -       "  - print n random bytes(max 64) read from dev\n");
-> -
->  U_BOOT_CMD(
->         rng, 3, 0, do_rng,
->         "print bytes from the hardware random number generator",
-> -       rng_help_text
-> +       "list         - list all the probed rng devices\n"
-> +       "rng [dev] [n]    - print n random bytes(max 64) read from dev\n"
->  );
-> --
-> 2.39.2
->
 
 
---=20
-Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
+On 01/02/2024 08:19, Sumit Garg wrote:
+> On Tue, 30 Jan 2024 at 19:35, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>>
+>> Use the clk_* helper functions and the correct property name for clocks.
+> 
+> This still doesn't handle fixed clocks like in case of QCS404, upstream DT says:
+> 
+>                 sdcc1: mmc@7804000 {
+>                         compatible = "qcom,qcs404-sdhci", "qcom,sdhci-msm-v5";
+>                         ...
+>                         clocks = <&gcc GCC_SDCC1_AHB_CLK>,
+>                                  <&gcc GCC_SDCC1_APPS_CLK>,
+>                                  <&xo_board>;
+>                         clock-names = "iface", "core", "xo";
+>                         ...
+>                 };
+> 
+> Due to that "xo" fixed clock we get:
+> 
+> MMC:   clk_set_rate(clk=00000000ffaf7348, rate=19200000)
+> Unknown clock id 0
+> clk_set_rate(clk=00000000ffaf7598, rate=19200000)
+> Unknown clock id 0
+> clk_set_rate(clk=00000000ffb08868, rate=400000)
+> mmc@7804000: 0
 
-Igor Opaniuk
-Senior Software Engineer, Embedded & Security
-E: igor.opaniuk@foundries.io
-W: www.foundries.io
+Does MMC work? This doesn't look like a probe failure to me.
+
+But yes this does look odd, somehow qcs404_clk_set_rate() is being
+called with clk->id == 0. The xo_board clock uses a different driver so
+it can't be that...
+
+Could you try and add some more logging around here? I can't see what
+might be causing this.
+> 
+> -Sumit
+> 
+>>
+>> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>> ---
+>>  drivers/mmc/msm_sdhci.c | 69 ++++++++++++++++++++++++++++++++-----------------
+>>  1 file changed, 46 insertions(+), 23 deletions(-)
+>>
+>> diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
+>> index 604f9c3ff99c..863e6007a905 100644
+>> --- a/drivers/mmc/msm_sdhci.c
+>> +++ b/drivers/mmc/msm_sdhci.c
+>> @@ -44,6 +44,7 @@ struct msm_sdhc_plat {
+>>  struct msm_sdhc {
+>>         struct sdhci_host host;
+>>         void *base;
+>> +       struct clk_bulk clks;
+>>  };
+>>
+>>  struct msm_sdhc_variant_info {
+>> @@ -54,36 +55,56 @@ DECLARE_GLOBAL_DATA_PTR;
+>>
+>>  static int msm_sdc_clk_init(struct udevice *dev)
+>>  {
+>> -       int node = dev_of_offset(dev);
+>> -       uint clk_rate = fdtdec_get_uint(gd->fdt_blob, node, "clock-frequency",
+>> -                                       400000);
+>> -       uint clkd[2]; /* clk_id and clk_no */
+>> -       int clk_offset;
+>> -       struct udevice *clk_dev;
+>> -       struct clk clk;
+>> -       int ret;
+>> +       struct msm_sdhc *prv = dev_get_priv(dev);
+>> +       ofnode node = dev_ofnode(dev);
+>> +       uint clk_rate;
+>> +       int ret, i = 0, n_clks;
+>> +       const char *clk_name;
+>>
+>> -       ret = fdtdec_get_int_array(gd->fdt_blob, node, "clock", clkd, 2);
+>> +       ret = ofnode_read_u32(node, "clock-frequency", &clk_rate);
+>>         if (ret)
+>> -               return ret;
+>> +               clk_rate = 400000;
+>>
+>> -       clk_offset = fdt_node_offset_by_phandle(gd->fdt_blob, clkd[0]);
+>> -       if (clk_offset < 0)
+>> -               return clk_offset;
+>> -
+>> -       ret = uclass_get_device_by_of_offset(UCLASS_CLK, clk_offset, &clk_dev);
+>> -       if (ret)
+>> +       ret = clk_get_bulk(dev, &prv->clks);
+>> +       if (ret) {
+>> +               debug("Couldn't get mmc clocks: %d\n", ret);
+>>                 return ret;
+>> +       }
+>>
+>> -       clk.id = clkd[1];
+>> -       ret = clk_request(clk_dev, &clk);
+>> -       if (ret < 0)
+>> +       ret = clk_enable_bulk(&prv->clks);
+>> +       if (ret) {
+>> +               debug("Couldn't enable mmc clocks: %d\n", ret);
+>>                 return ret;
+>> +       }
+>>
+>> -       ret = clk_set_rate(&clk, clk_rate);
+>> -       clk_free(&clk);
+>> -       if (ret < 0)
+>> -               return ret;
+>> +       /* If clock-names is unspecified, then the first clock is the core clock */
+>> +       if (!ofnode_get_property(node, "clock-names", &n_clks)) {
+>> +               if (!clk_set_rate(&prv->clks.clks[0], clk_rate)) {
+>> +                       printf("Couldn't set core clock rate: %d\n", ret);
+>> +                       return -EINVAL;
+>> +               }
+>> +       }
+>> +
+>> +       /* Find the index of the "core" clock */
+>> +       while (i < n_clks) {
+>> +               ofnode_read_string_index(node, "clock-names", i, &clk_name);
+>> +               if (!strcmp(clk_name, "core"))
+>> +                       break;
+>> +               i++;
+>> +       }
+>> +
+>> +       if (i >= prv->clks.count) {
+>> +               printf("Couldn't find core clock (index %d but only have %d clocks)\n", i,
+>> +                      prv->clks.count);
+>> +               return -EINVAL;
+>> +       }
+>> +
+>> +       /* The clock is already enabled by the clk_bulk above */
+>> +       ret = clk_set_rate(&prv->clks.clks[i], clk_rate);
+>> +       if (!ret) {
+>> +               printf("Couldn't set core clock rate: %d\n", ret);
+>> +               return -EINVAL;
+>> +       }
+>>
+>>         return 0;
+>>  }
+>> @@ -188,6 +209,8 @@ static int msm_sdc_remove(struct udevice *dev)
+>>         if (!var_info->mci_removed)
+>>                 writel(0, priv->base + SDCC_MCI_HC_MODE);
+>>
+>> +       clk_release_bulk(&priv->clks);
+>> +
+>>         return 0;
+>>  }
+>>
+>>
+>> --
+>> 2.43.0
+>>
+
+-- 
+// Caleb (they/them)
