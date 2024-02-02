@@ -4,56 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CB5AC47258
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 04:30:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2AACC47258
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 04:50:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D59F587CB0;
-	Fri,  2 Feb 2024 05:30:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 14FE887CDB;
+	Fri,  2 Feb 2024 05:50:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="XWM8Y3AF";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="avQ6C1bW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3A7387D14; Fri,  2 Feb 2024 05:30:48 +0100 (CET)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6CE5E87CEA; Fri,  2 Feb 2024 05:50:21 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B46C87C1F
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 05:30:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 2D70587C1F
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 05:50:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=r-gunasekaran@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4124oBQ8092628;
+ Thu, 1 Feb 2024 22:50:11 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1706849411;
+ bh=aHESBlrvQie/IFfYbAHLaf3Svo0R4JgqluiyxWuvE8s=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=avQ6C1bWvOizbIPrVIolsvuYZlSg5eV0xyEo3n/X9xUdL7bJtIe9Wk/lGsQyJUHXA
+ Ffu8QROhe8AzWMQHST08VOPJLUv8JmDAF95YUSIYrOwQtGWpdLk3tnjOJweNsQ13Gk
+ oRSpYKQlhjiUIEBmGwhUoQI3MQsIFXyhBeiGWSFc=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4124oB64003566
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 1 Feb 2024 22:50:11 -0600
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 1
+ Feb 2024 22:50:11 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 1 Feb 2024 22:50:11 -0600
+Received: from [10.249.129.226] ([10.249.129.226])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4124o5P6004602;
+ Thu, 1 Feb 2024 22:50:07 -0600
+Message-ID: <c563a375-7d45-409d-aa4a-3ca770168550@ti.com>
+Date: Fri, 2 Feb 2024 10:20:04 +0530
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1706848244;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=w28QWmi75QVWqkJKBifLxdNAUksbVfN0p6ALG1bsNw0=;
- b=XWM8Y3AFq4dae5dRsjKl5FJe5U8DcCdWO2EQrg7gZ1vLIM1seQ4P1cr8NHFiAODgG9Qltl
- +6K6qMdYrijU5l1KHg7CDgNjA/TeaIMFEMvnJzdL+nhlGpN2EwiXK44wQZ0LDLuKyYd/SI
- gDZ8UpCnlmuvZGStu8gOXbcBDWDzjSkEhVqMG+edY0I4Dr8sz3SOgi7WggWC+bB5Pn9AU3
- snJ7H2cGNxI69dCZa4BsxMC1bpIz1EExkAuP+GTjF6MCa2LLf4aUl9VzJDx2pvXxgjzGYz
- w/UPp0lheGU7ypGkrzCUCpgvROPlVWO4YcMAs1MoKlQ6jW3LLbyQzStwdLwapQ==
-Date: Fri, 02 Feb 2024 05:30:44 +0100
-From: Dragan Simic <dsimic@manjaro.org>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- u-boot@lists.denx.de
-Subject: Re: [RFC] rockchip: spl: Support reading FIT from eMMC boot partition
-In-Reply-To: <20240202001129.530825-1-jonas@kwiboo.se>
-References: <20240202001129.530825-1-jonas@kwiboo.se>
-Message-ID: <aa1c02c2fc23e212879f5845d285914f@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] misc: fs-loader: Use fw_storage_interface instead of
+ storage_interface
+Content-Language: en-US
+To: MD Danish Anwar <danishanwar@ti.com>, Sean Anderson <seanga2@gmail.com>,
+ Qu Wenruo <wqu@suse.com>, Michal Simek <michal.simek@amd.com>, Simon Glass
+ <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
+ Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Roger Quadros <rogerq@kernel.org>
+References: <20240130062627.2344282-1-danishanwar@ti.com>
+From: Ravi Gunasekaran <r-gunasekaran@ti.com>
+In-Reply-To: <20240130062627.2344282-1-danishanwar@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,129 +85,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Jonas,
 
-On 2024-02-02 01:11, Jonas Karlman wrote:
-> Enable support for loading FIT from eMMC boot partition when
-> SUPPORT_EMMC_BOOT Kconfig option is enabled.
-> 
-> FIT is only loaded from boot partition when the boot partition is set 
-> to
-> boot0 (1) or boo1 (2) in the extcsd partition config. FIT is read from
-> sector 1024 (512 KiB) of the configured boot partition.
-> 
-> Following can be used to write U-Boot to boot partition 1 of eMMC:
-> 
->   # Load TPL+SPL from SD-card
->   => load mmc 1:1 20000000 idbloader.img
-> 
->   => mmc dev 0
->   # Access eMMC user partition
->   => mmc partconf 0 0 0 0
->   # Write TPL+SPL to eMMC user partition (512 KiB @ 32 KiB)
->   => mmc write 20000000 40 400
-> 
->   # Load FIT from SD-card
->   => load mmc 1:1 20000000 u-boot.itb
-> 
->   => mmc dev 0
->   # Access eMMC boot partition 1
->   => mmc partconf 0 0 0 1
->   # Write FIT to eMMC boot partition 1 (2 MiB @ 512 KiB)
->   => mmc write 20000000 400 1000
-> 
->   # Configure to use boot partition 1
->   => mmc partconf 0 0 1 0
->   # Show partition config
->   => mmc partconf 0
-> 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+
+On 1/30/2024 11:56 AM, MD Danish Anwar wrote:
+> The fs-loader driver reads env storage_interface and uses it to load
+> firmware file into memory using the medium set by env. Update the driver
+> to use env fw_storage_interface as this variable is only used to load
+> firmwares. The env storage_interface will act as fallback so that the
+> existing implementations do not break.
+>
+> Also update the FS Loader documentation accordingly.
+>
+> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
 > ---
-> - Is loading FIT from emmc boot partition a feature of intereset to
->   anyone else?
+> Changes from v3 to v4:
+> *) No functional change. Splitted the patch out of the series as suggested
+>    by Nishant.
+> *) Droppped the RFC tag.
+>
+> v3: https://lore.kernel.org/all/20240124064930.1787929-3-danishanwar@ti.com/
 
-I find this quite usable.  Thus, I'd support this feature to be polished
-further and eventually merged.
-
-> - I used a @ 512 KiB offset for FIT, should leave enough space for e.g.
->   TPL/SPL, vendor storage or environment before FIT.
-> - Is @ 512 KiB offset a good default option? Or would e.g. @ 0 or
->   @ 32KiB a more apropriate offset?
-> - This does not add kind of fallback to use the normal @ 8 MiB offset 
-> in
->   user partition. Is that something that would be needed?
-
-I'd say that the fallback is needed, because we still want to be able
-to continue booting the standard way.
-
-> ---
->  arch/arm/mach-rockchip/spl.c     | 23 +++++++++++++++++++++++
->  configs/generic-rk3568_defconfig |  1 +
->  configs/generic-rk3588_defconfig |  1 +
->  3 files changed, 25 insertions(+)
-> 
-> diff --git a/arch/arm/mach-rockchip/spl.c 
-> b/arch/arm/mach-rockchip/spl.c
-> index c4d3983a6735..2015d9d72dbd 100644
-> --- a/arch/arm/mach-rockchip/spl.c
-> +++ b/arch/arm/mach-rockchip/spl.c
-> @@ -68,9 +68,32 @@ u32 spl_boot_device(void)
-> 
->  u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
->  {
-> +	if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT) && !IS_SD(mmc)) {
-> +		switch (EXT_CSD_EXTRACT_BOOT_PART(mmc->part_config)) {
-> +		case 1:
-> +		case 2:
-> +			/* Read FIT from a boot partition */
-> +			return MMCSD_MODE_EMMCBOOT;
-> +		}
-> +	}
-> +
->  	return MMCSD_MODE_RAW;
->  }
-> 
-> +unsigned long arch_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
-> unsigned long raw_sect)
-> +{
-> +	if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT) && !IS_SD(mmc)) {
-> +		switch (EXT_CSD_EXTRACT_BOOT_PART(mmc->part_config)) {
-> +		case 1:
-> +		case 2:
-> +			/* Read FIT from sector 1024 (512 KiB) of boot partition */
-> +			return 0x400;
-> +		}
-> +	}
-> +
-> +	return raw_sect;
-> +}
-> +
->  #define TIMER_LOAD_COUNT_L	0x00
->  #define TIMER_LOAD_COUNT_H	0x04
->  #define TIMER_CONTROL_REG	0x10
-> diff --git a/configs/generic-rk3568_defconfig 
-> b/configs/generic-rk3568_defconfig
-> index 18a62b0033a0..b90ecb643dc7 100644
-> --- a/configs/generic-rk3568_defconfig
-> +++ b/configs/generic-rk3568_defconfig
-> @@ -51,6 +51,7 @@ CONFIG_ROCKCHIP_GPIO=y
->  CONFIG_MISC=y
->  # CONFIG_ROCKCHIP_IODOMAIN is not set
->  CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_SUPPORT_EMMC_BOOT=y
->  CONFIG_MMC_HS200_SUPPORT=y
->  CONFIG_SPL_MMC_HS200_SUPPORT=y
->  CONFIG_MMC_DW=y
-> diff --git a/configs/generic-rk3588_defconfig 
-> b/configs/generic-rk3588_defconfig
-> index 4755b27c1dea..a9329eb1c625 100644
-> --- a/configs/generic-rk3588_defconfig
-> +++ b/configs/generic-rk3588_defconfig
-> @@ -52,6 +52,7 @@ CONFIG_SPL_CLK=y
->  CONFIG_ROCKCHIP_GPIO=y
->  CONFIG_MISC=y
->  CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_SUPPORT_EMMC_BOOT=y
->  CONFIG_MMC_HS200_SUPPORT=y
->  CONFIG_SPL_MMC_HS200_SUPPORT=y
->  CONFIG_MMC_DW=y
+Acked-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
