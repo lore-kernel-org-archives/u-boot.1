@@ -4,79 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 159B0C47258
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 04:17:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B09F3C4828E
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 04:26:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A74C87C56;
-	Fri,  2 Feb 2024 05:17:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=foundries.io
+	by phobos.denx.de (Postfix) with ESMTP id 1A03787C66;
+	Fri,  2 Feb 2024 05:26:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="Vz+Td2W9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D2e/qDk0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43E7387C66; Fri,  2 Feb 2024 05:17:05 +0100 (CET)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id AE94287CDB; Fri,  2 Feb 2024 05:26:03 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9763987C13
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 05:17:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=foundries.io
+ by phobos.denx.de (Postfix) with ESMTPS id 98AC787C66
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 05:26:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=oleksandr.suvorov@foundries.io
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-21499c9650cso953789fac.1
- for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 20:17:02 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=o451686892@gmail.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-55ff5f6a610so114884a12.3
+ for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 20:26:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1706847421; x=1707452221; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=S2OLfGQKAgCfwtj1/Iyu1B8P9JPv/rSM/r0qw5HDqZs=;
- b=Vz+Td2W9X9F1Uf8ftvQ1DGq8SUYKpEEUTlX+TqmrCngNOoS4hh/Gqzb+yxm3sIEgTS
- Dvebu7SrZY/Mn2u9S9ws7Gi9y9q3gfPn54p/rTvsZkz8CxEHTqNneBAE0zTDNDnv8l3b
- fswgGgJLS+FXIYfrQB7u759lBv91dur7n9jYezCloIGsRIO1BiRw3CfXfgQ7Tw6N15IT
- o5cmCXlar4qLl5bfO2WqRfjtEi02Z0vTBacn26Ori3S+nchBfI+0ag1qQAWpMs8iB4qP
- y6Sce8q46X7Rl+GFPli5bXGTCRRZoVsrTpKekuAVRE1VzzHqnxx0GHGJzJIkXvku2gyS
- PAQg==
+ d=gmail.com; s=20230601; t=1706847961; x=1707452761; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Iccfjty7abi6Xet5UzZI9gLS4u2H7b83x4vuR+eibrw=;
+ b=D2e/qDk0zwWA+2fDY1TEr30LIM7lp44KDOwhiy/VKJUXaX2r8qUR8IbhbROhRjGj29
+ KcpWWUMPjjgly19YFDzxDRD8O+l98cwNPJ6ZFfG3en+i1B9QYzbOhuYpmwwevsrSqZjZ
+ 8D8PAr8Y9/ODV/nOXEmmVi2aay9mBEouet4hRZFrT95E4enSkvPEbG0LFauptZf2Prio
+ AoYvIquve8PMLXGSwldszyJq2qa+Eut01oux9l9QuW7Jz/8qFPVCUuQG2UqPAyL2DLQ6
+ xU5I/IiNrgcU/bsFra1yFaJrZeodnwX7pJhUhdP7qhHW9G7JGWR5r/cPtrd7iFKW7FDM
+ CNUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706847421; x=1707452221;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=S2OLfGQKAgCfwtj1/Iyu1B8P9JPv/rSM/r0qw5HDqZs=;
- b=PRvQ9g4+CCF393n/k2Na1MTgy+j3owvfFFT4/IpfWtfkqRgRjnQcjM7iUS4AF4lRU4
- 7UIPd+3HnaOuChtruk1evUXReBLOQVskH3ZPdCvWd4KyhlHLKPc915toDp0vONTRs4V6
- +DwIJq67QiGZusYlIiiM1YPgb1mXFyG/7qZeoiBO1PN1GnHEbJuD+IaKKKSHiyaK/nkz
- 85OLQ3GLOMDk8oxvFjpggNcoxKw9Kyjojwfb35HlUx3DMUuHkY60ao6Nwisa0xxSMeFn
- RUra50tgwujkGD3hp9UT5yW3kowrhXmJFuOinxA6A4UFcsigCH6zXvsdAZGQQisGg82H
- ZOSQ==
-X-Gm-Message-State: AOJu0YwzD5KZzVJbCQ3NDe9d4cUZYYwu0NWf+9xkjyFGYaCbUVvNcxhR
- SykRNixiDOB8HTcRt3TMPm88jv+Lv9UF435Vs64RjXuwTTgmnPSHYXxTK+9jds3Di19pKjl/kBn
- VSM+g+hCqjyx364vExbKx7h0gEm8qJu+IPFc82T5yVB5zi3+nLUY=
-X-Google-Smtp-Source: AGHT+IH/jkdp15/0IUI/hf+sMGAYILKq6xpsmgJLRFsWfiDBeCtw6SCaVFyYOhH/opZOVQxjZA0W0OBo8r2iP2nNht0=
-X-Received: by 2002:a05:6870:3045:b0:214:27cf:bd1d with SMTP id
- u5-20020a056870304500b0021427cfbd1dmr886152oau.25.1706847421156; Thu, 01 Feb
- 2024 20:17:01 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706847961; x=1707452761;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Iccfjty7abi6Xet5UzZI9gLS4u2H7b83x4vuR+eibrw=;
+ b=ZaV16qKARoyRccgO39DmLy+lg8LDNThAt5uZJN7SpvNO77AWvG5fWa6kxPNCuzVwZT
+ bHzlh5M07LqD8f25HKW6EjlfIrMfo/UMYI/vWC/w2vrAFAfmvdYQexDbUsKnt7J66jjC
+ fW5MQ0k0DWKWvOzraVPlNtBMvUow8OZW61thhwgMQAV/lW7ZDWVq5Rg16ySk6swWeFDa
+ etND/ztBMtzeHd6HKuyRJAIo8JV6of/+oRYHFv8lMa1YTbm/h/Qs9vVkjMzXnHnSagpY
+ Q4Sw+qavZu3COKPde+1KXcZVnqnVuzzBMciqMo9oJl4yDNjv4PKAlaUhOVdVLt5jKpkn
+ 6i7w==
+X-Gm-Message-State: AOJu0YzFI986aclP4uVMX31uRSIK4jCdpPjcFSO7wesVCI1DDmqPVfwd
+ 4EWhfw1liTD7rg9VB/ybMm4fypu7hnzD8jTnjs7Q84vx6kPxlw29xgIQd1Ym4YmABQx/gf2peiH
+ oFnSmz6rtg23Tj6O4FC5GW04eQzmGHa8LWtDOWTT5oYYAvw==
+X-Google-Smtp-Source: AGHT+IEardeAMcJf4IF432vtKd9QLI3vJDuqjasWHHFKtEql5tiiQbTNhfKaIZz5kBD+DgrlkcsSBpr5aSbq2aeID+M=
+X-Received: by 2002:a05:6402:2d1:b0:55e:d8a8:ef6d with SMTP id
+ b17-20020a05640202d100b0055ed8a8ef6dmr4971723edx.35.1706847960165; Thu, 01
+ Feb 2024 20:26:00 -0800 (PST)
 MIME-Version: 1.0
-References: <20240201124054.2094572-1-igor.opaniuk@foundries.io>
-In-Reply-To: <20240201124054.2094572-1-igor.opaniuk@foundries.io>
-From: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Date: Fri, 2 Feb 2024 06:16:49 +0200
-Message-ID: <CAOF=9AtCdqhNTK34niKXew1kuDMckOh9jjmfvD4fBb7j56tjEw@mail.gmail.com>
-Subject: Re: [PATCH v2] qemu-arm: round down memory to multiple of 2MB for LPAE
-To: Igor Opaniuk <igor.opaniuk@foundries.io>
-Cc: U-Boot-Denx <u-boot@lists.denx.de>, ardb@kernel.org,
- jens.wiklander@linaro.org, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>, 
- Bin Meng <bmeng@tinylab.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+References: <20240123-jaguar-v1-0-1eec1c34953c@theobroma-systems.com>
+ <20240123-jaguar-v1-1-1eec1c34953c@theobroma-systems.com>
+In-Reply-To: <20240123-jaguar-v1-1-1eec1c34953c@theobroma-systems.com>
+From: Weizhao Ouyang <o451686892@gmail.com>
+Date: Fri, 2 Feb 2024 12:25:48 +0800
+Message-ID: <CAHk0Hov=ZOozDt9zjkQC3_sDwRWNXTfcbUoi1t2y+JqsRMdMmA@mail.gmail.com>
+Subject: Re: [PATCH 01/18] rockchip: rk3588: use mainline pmu-grf compatible
+To: Quentin Schulz <foss+uboot@0leil.net>
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Klaus Goger <klaus.goger@theobroma-systems.com>, 
+ Heiko Stuebner <heiko.stuebner@cherry.de>,
+ Otavio Salvador <otavio@ossystems.com.br>, 
+ Andy Yan <andy.yan@rock-chips.com>, 
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
+ Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Anatolij Gustschin <agust@denx.de>,
+ heiko@sntech.de, 
+ u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@theobroma-systems.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,90 +103,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Feb 1, 2024, 14:41 Igor Opaniuk <igor.opaniuk@foundries.io> wrote:
+On Tue, Jan 23, 2024 at 10:50=E2=80=AFPM Quentin Schulz <foss+uboot@0leil.n=
+et> wrote:
+>
+> From: Heiko Stuebner <heiko.stuebner@cherry.de>
+>
+> The compatible for the pmugrf in the mainline kernel is dfferent from the
+> one currently used in u-boot. Adapt the -u-boot.dtsi and syscon driver
+> to use the correct compatible.
 
-> QEMU's -m option can take fractional megabyte values,
-> and lowest granularity seems to be 0x2000.
-> For example, run qemu with amount of memory set to 100005k (0x61A9400):
->
-> $ qemu-system-arm -machine virt -cpu cortex-a15 -m 100005k \
-> -bios denx/u-boot.bin -nographic
->
-> => fdt addr $fdt_addr
-> => fdt print /memory@40000000
-> memory@40000000 {
->         reg = <0x00000000 0x40000000 0x00000000 0x061aa000>;
->         device_type = "memory";
-> };
->
-> When LPAE is enabled, 1:1 mapping is created using 2 MB blocks.
-> In case amount of memory provided to QEMU is not multiple
-> of 2 MB, hang occurs during MMU initialization.
->
-> How to reproduce:
-> qemu-system-arm -machine virt -m 1058 -nographic -bios u-boot.bin - boots
-> qemu-system-arm -machine virt -m 1057 -nographic -bios u-boot.bin - hangs
->
-> DRAM:  1 GiB
-> initcall: 60011df8
-> initcall: 60011904
-> New Stack Pointer is: 80fffe90
-> initcall: 60011a20
-> initcall: 60011bcc
-> initcall: 60011bd4
-> initcall: 600119b4
-> Relocation Offset is: 22042000
-> Relocating to 82042000, new gd at 81001ed0, sp at 80fffe90
-> initcall: 60011b8c
-> initcall: 82053ea0
-> initcall: 82053ea8
-> initcall: 60012040 (relocated to 82054040)
-> dram_bank_mmu_setup: bank: 0
-> - hang here during mmu init -
->
-> This patches rounds down to the nearest multiple of 2MB when
-> CONFIG_ARMV7_LPAE=y.
->
-> Fixes: 3fa914af82("arm: qemu: implement enable_caches()")
-> Signed-off-by: Igor Opaniuk <igor.opaniuk@foundries.io>
->
+Reviewed-by: Weizhao Ouyang <o451686892@gmail.com>
 
-Reviewed-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io
-<igor.opaniuk@foundries.io>>
+BR,
+Weizhao
 
+>
+> Signed-off-by: Heiko Stuebner <heiko.stuebner@cherry.de>
+> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 > ---
+>  arch/arm/dts/rk3588s-u-boot.dtsi              | 2 +-
+>  arch/arm/mach-rockchip/rk3588/syscon_rk3588.c | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
 >
-> Changes in v2:
-> - Adjust commit message, add more details
+> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-bo=
+ot.dtsi
+> index c0fd16c4022..9a5ffec926e 100644
+> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
+> @@ -66,7 +66,7 @@
 >
->  board/emulation/qemu-arm/qemu-arm.c | 12 ++++++++++++
->  1 file changed, 12 insertions(+)
+>         pmu1_grf: syscon@fd58a000 {
+>                 bootph-all;
+> -               compatible =3D "rockchip,rk3588-pmu1-grf", "syscon";
+> +               compatible =3D "rockchip,rk3588-pmugrf", "syscon";
+>                 reg =3D <0x0 0xfd58a000 0x0 0x2000>;
+>         };
 >
-> diff --git a/board/emulation/qemu-arm/qemu-arm.c
-> b/board/emulation/qemu-arm/qemu-arm.c
-> index 942f1fff571..ecfd19f1a7e 100644
-> --- a/board/emulation/qemu-arm/qemu-arm.c
-> +++ b/board/emulation/qemu-arm/qemu-arm.c
-> @@ -127,6 +127,18 @@ int dram_init(void)
->         if (fdtdec_setup_mem_size_base() != 0)
->                 return -EINVAL;
+> diff --git a/arch/arm/mach-rockchip/rk3588/syscon_rk3588.c b/arch/arm/mac=
+h-rockchip/rk3588/syscon_rk3588.c
+> index e8772d3a382..7b2cf37d9da 100644
+> --- a/arch/arm/mach-rockchip/rk3588/syscon_rk3588.c
+> +++ b/arch/arm/mach-rockchip/rk3588/syscon_rk3588.c
+> @@ -10,7 +10,7 @@
 >
-> +       /*
-> +        * When LPAE is enabled (ARMv7),
-> +        * 1:1 mapping is created using 2 MB blocks.
-> +        *
-> +        * In case amount of memory provided to QEMU
-> +        * is not multiple of 2 MB, round down the amount
-> +        * of available memory to avoid hang during MMU
-> +        * initialization.
-> +        */
-> +       if (CONFIG_IS_ENABLED(ARMV7_LPAE))
-> +               gd->ram_size -= (gd->ram_size % 0x200000);
-> +
->         return 0;
->  }
+>  static const struct udevice_id rk3588_syscon_ids[] =3D {
+>         { .compatible =3D "rockchip,rk3588-sys-grf", .data =3D ROCKCHIP_S=
+YSCON_GRF },
+> -       { .compatible =3D "rockchip,rk3588-pmu1-grf", .data =3D ROCKCHIP_=
+SYSCON_PMUGRF },
+> +       { .compatible =3D "rockchip,rk3588-pmugrf",  .data =3D ROCKCHIP_S=
+YSCON_PMUGRF },
+>         { .compatible =3D "rockchip,rk3588-vop-grf", .data =3D ROCKCHIP_S=
+YSCON_VOP_GRF },
+>         { .compatible =3D "rockchip,rk3588-vo-grf",  .data =3D ROCKCHIP_S=
+YSCON_VO_GRF },
+>         { .compatible =3D "rockchip,pcie30-phy-grf", .data =3D ROCKCHIP_S=
+YSCON_PCIE30_PHY_GRF },
 >
 > --
-> 2.34.1
->
+> 2.43.0
 >
