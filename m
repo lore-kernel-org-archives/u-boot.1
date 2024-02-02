@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33992C4828F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 13:06:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19BF1C47DB3
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 13:06:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79F3187C7B;
-	Fri,  2 Feb 2024 14:06:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E092587C7D;
+	Fri,  2 Feb 2024 14:06:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Bh5L8SzY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GvYf9K70";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0FFD87C7B; Fri,  2 Feb 2024 14:06:30 +0100 (CET)
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
- [IPv6:2607:f8b0:4864:20::430])
+ id B393C87C78; Fri,  2 Feb 2024 14:06:37 +0100 (CET)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F11187C78
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 14:06:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7487387CE3
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 14:06:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-6de24201aa6so1296022b3a.2
- for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 05:06:26 -0800 (PST)
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1d8dc0172d7so13712385ad.1
+ for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 05:06:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706879184; x=1707483984; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1706879193; x=1707483993; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XZ2DFBwhO2WYJwi8rn6sF84aQnhnxv9yyY/a8AQ1ExY=;
- b=Bh5L8SzYBTXzf+Ehgjt0h8pO5s+rfbPxfCM0sfGPQ8MpHxRTcboOXtn5fA7KP2TTb2
- C/BSfF1JiIa1fgtnXXd2VvWuYkvRsM37Vcv5Tw+6e0GgRAbOnSob+vZnUJIzH6UY5qyB
- zNyn+7KfTtEcMhgFwIyDHHahxlsn73gDqdVSA0w8WOlcya83qy82e7luBONWjmzz4U9K
- +W4WRNoqrROzC+XVt1OrIGdyH2AVyzS2owAoZGXSdnOAkaSr/gsuYx6ZHOoPTHJO3kOh
- vtXsOQIkm3zDZaiY0rYhaI192ThbScP1WaPtQA5bAhZJ27lxpN5f5/x2JG1jRnXVSEdZ
- 5TKQ==
+ bh=FZyRiozEVbTqo9oMcq8lbIwXjVNaeje4ktcNZtXFrQE=;
+ b=GvYf9K70H+qTbcWIP121nwgMiEIvBcrPpk2xZYhr8pCVItPNQV/oCg6twTvVSD08r1
+ j4ygAz5UDkHKPpOTvmDraSQgyzQYtZq4T8RbIVe3vqsbzRfzMm9syD2D8NZLn0JN+opl
+ eNWhjWI5zzE1TER2+Vf4WStZKnouICk0KwA9Rsqb+9HVmJ46z9dzaSdZ263pcZVL9xUH
+ LU2QaDUvYSJdC10M1W0Jbq8pDDdl4gu7g5gcC+mkNg712N1rE/JkEVCeMaBJhfrgMhLh
+ 26SBLQTbCv96p1mN4NyGJd9GR9d8Yp8lwCpc7SCEhAprEbZAKfB9PYTM2iTdtuADTlpP
+ Ilmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706879184; x=1707483984;
+ d=1e100.net; s=20230601; t=1706879193; x=1707483993;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XZ2DFBwhO2WYJwi8rn6sF84aQnhnxv9yyY/a8AQ1ExY=;
- b=HAEEhJVr3VOWe7CjWOaXbkwgfbJfNCQ26rrzCtAZTXwd2BFcaxnZ9GntvkvzLfzrFV
- 1KcDtkBfA5gj8rPlgtSgnK6I8nJij6bf97FpoG2Gei8Awy/4XtiZkFMTXsKXFx4nPQyg
- Qg6bYl+VIdWa+DKtELt/hMoxUv/IOhhEOQ923Dd6hQUfGTIetsbE4z0Ni1srPxgmixz+
- PuW86AQof4LogZauSUDA3BeCqFW/okphjQvwfJk7KITzstbHPLCSVV8qIXWX/nBvCB9O
- ygKzNVO0UaZOtrBFtwlUVET9+yru2E3TT20tSkr1u8pyj6/amCb2FgfiZPqE98ExAetm
- nqRg==
-X-Gm-Message-State: AOJu0YxTAdbdR/045hB5NBxdFfUuOwo67pfi7ERtDCZVrO5x96XAZvV2
- jkGMYb2fnS0bDsdRWuG5w4dAS8TWt1rp9x2d4IlvGyiQzCxWCNCVJCHLExAPCMuM0RbdO6Jon5Q
- n9Gg=
-X-Google-Smtp-Source: AGHT+IE21rKAedGyz9KXKPmh1gR2NyFun0IGrdndgwdUOGKfqA/vSm0ETJDz5yyl0j9q3MPgDZ4P4A==
-X-Received: by 2002:a17:903:11d1:b0:1d4:47d4:82b4 with SMTP id
- q17-20020a17090311d100b001d447d482b4mr9306724plh.15.1706879184573; 
- Fri, 02 Feb 2024 05:06:24 -0800 (PST)
+ bh=FZyRiozEVbTqo9oMcq8lbIwXjVNaeje4ktcNZtXFrQE=;
+ b=u5lS7olEeXshAxzmbBxqceXdvBxTAQU5C6VvUL9lZB0GO4YYVZcGP334FfvkrhD4tp
+ 0js9R9BLxKqTsYaIIOX3W/QuFRHBsQM6bvsy/L9vNfLPb7YcmtwCNZP8W6Wi0MTwirRE
+ qop+ANgLpcBuv8c6U7pa2DjbF1nQKeQRbJf6WZVl08sXX/a7EgXv5UB0RqYYH6xUNMzQ
+ UTx133WZDej8mxqCyFEq9sjbmapIzbJAqWGHZjHKevIWIplkUTH4I4DLEA+u/6g6JdTz
+ nVISxfIHbEOC9A40OV3CrC0is9poM8cBAAJRxGrCJmjIHb3LBVe0XD9UPQE++u7RlT+F
+ Qj/w==
+X-Gm-Message-State: AOJu0YzKQ95kRL5LPI5K3Bxr8hnJn0qA619qcIRhKboNXeTqZNMVhXkR
+ F5BWTudUm2pZ30K1KwVPxwOdg0cJbZ4tvyqhJNA7UWvCyYUU+X3Cjm29Af0r75NN69EFFLGLvl7
+ sBZQ=
+X-Google-Smtp-Source: AGHT+IFDpffcil8J9/ZtT9GVdE/vF7HfGZrRnrcfg150z1qhn3zODJq3F0l6axgXbVsRA7/qj3vNIA==
+X-Received: by 2002:a17:903:192:b0:1d9:46a4:117d with SMTP id
+ z18-20020a170903019200b001d946a4117dmr8192321plg.30.1706879193494; 
+ Fri, 02 Feb 2024 05:06:33 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCXWkBIJI0LFF3IR1B6s/yaV5wIJYWIvViRHOE4id0GtC7iYCqfYI3s9RmVOdq8h3rIU8Kaob8LvdVzBDFX4og+dW3nFti9uwE3zkjK0YsPJzqfc6MFP343xYECDkCdMui/Vc24RfiEctEVWagq8Jy0w+zQ/V+X3EwvO3T2JyTLhQQHcAWQC8jcAMB39bQ+1NBCbsSkr99/ZWDN7yop/90zJ7ULpfZ124IpKdj1vrWFXuHoyQNwR7YDU6B2FKLkGQlsR6BhSH6y/ApMNRNIh5S6IhZzl98J9HF7rvLmMwm+VEqUxUEOBsgzz9N6zBq+qNm0+71W9IR5fOMypl12iyoFXUkeZm6O8wNJlnVXXDLzzZNcmnxrPselrOGr8W4FwcCsnbvTGIP7fo/J33Bf8s75wy9hLYVfScDh0+jVrGYQihTd3eSoRcG3YUfpJDsQC0klb4zLHgwE2nelHlrLVqVwPHZLcUYtbljCj/KTuypCZyoyRQ1/ArEMpz6Kga+oK/PZtdGK550naS+NaR1u0z+rIgJM3SIMf41j1ZCst1JRt6ELi8X6z2V4ypvqIq/vcDrzM4Et9ZOKgckmKDVKQj5wQz1w50CEUy37bB1BA2hNClEB+T7iOITH7b4WOpqY7GaJhyDAj9pvRA/syac7UaImRt53S1cbMlG1IqPcGiPt6ebNseHmUdMj5hFUvyyy3UI2Y6Hu9LnxAzxwvAC9BzfPLrnExIrEYJIjlTE8vsP1uZsZQMi2w4k38ZXcCQELpFo+Mtb9rKeH4WZsAdBy5RFXwm6bmvQdfNThrxtZHL3jCYky3XdsJpTqV/w4yEGcyM7V+Xaq9khxruo8yLVv5UQtCIxQGPMjuDH1dUs91nODKa30Fz/zKe6Fp17HSJQ5Vf1R7rX2+s+Ef9I38rO2l8jjOTN1QMmqtZ3di
+ AJvYcCXi0fm+FqzHl3LFcHTWX0TP7Z2vJCxh+u4cCKtgSOWuVDpQz+vsMKvCc+YzitlbQG3YiTwivsje1lVqfpURyyPbVrXXPkmIkIcP9aLu30OHpHyRceBOOCtDc/83UdJU0CqDKzlv7LwF1VvEP637OIMJUvAW3yV540Fz112nrgmRWJFZfuuOMsvQt0kSYFCmizOgdi9bM1pis2VSTLjCcRrvIn4+xiOxE10avcikXu6cth7hTiaxetAB0U3GI9V3ZLvfUiK4aEkAswJtlWakDY1w2PCuyDWaEFfC9wgW8IW8Ebr0IJvHTTYc/G6zZLTte48o3UpiDfnub1Jzah1t3N9grwbJr7YHAnuBTNfJAnRzQF9QC2i4a3JnSjbdBaOUyqTRB0Al4JE3pnJrXnJ2DHH1A1d6+5jamUKiAQFrEw9n62MB8en9TeQrIjJvOnlMXu3K+olu1+4kRDX8bgmFxLW0nwOR6zoXNE5oJ3NECHCGJWgkB4CMe9pll7BR2VGaTe7RGmWV+BSLhblyowByEcLtZ1Zk+aKIhtqIpfQC3ZCLhy9HJizWuDeVeJ5/ED2iUEz3bpLDvf0ELlut39aFNcTCHcgVNc/uE4y6aLg68BrhBFRZf+Y6TVUIgLwo5bG76Lv+9iP9d7ZkybokpcdTOwHmAx898etUxgXCE02PmdB+d3h+cHcEBJWoOD0WUWcZ0NEuMdyYNacsJ5KZEU1TflfHA1/lVfJoKTNt3NYemdKpWqUPyY+WjnQbwtrR7XfKL0hsYOdG+c+j7C2koRs5xmqZS3DT1TzuRM7zQT5SeaF4Ygksa6ZG9E+HwHJBCaDuzwa1w9vtq8muctlgo83LR0eq2hVysrgsdrbzPk23Nvjf0cgUI57MA/sPTpRlEk9f9yL7G4d0IjW3wjglDOHPYsRQxKeOS94bws/G
 Received: from sumit-X1.. ([223.178.213.44]) by smtp.gmail.com with ESMTPSA id
- q23-20020a170902edd700b001d923684323sm1542407plk.195.2024.02.02.05.06.16
+ q23-20020a170902edd700b001d923684323sm1542407plk.195.2024.02.02.05.06.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Feb 2024 05:06:24 -0800 (PST)
+ Fri, 02 Feb 2024 05:06:33 -0800 (PST)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
  u-boot-custodians@lists.denx.de
@@ -79,10 +79,10 @@ Cc: trini@konsulko.com, sjg@chromium.org, robh+dt@kernel.org,
  rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com, bb@ti.com,
  mark.kettenis@xs4all.nl, festevam@gmail.com, nm@ti.com,
  andre.przywara@arm.com, Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v5 03/11] scripts/Makefile.lib: Statically define
- *-u-boot.dtsi files location
-Date: Fri,  2 Feb 2024 18:35:26 +0530
-Message-Id: <20240202130534.1051438-4-sumit.garg@linaro.org>
+Subject: [PATCH v5 04/11] Makefile: Allow upstream DT subtree to provide DT
+ includes
+Date: Fri,  2 Feb 2024 18:35:27 +0530
+Message-Id: <20240202130534.1051438-5-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240202130534.1051438-1-sumit.garg@linaro.org>
 References: <20240202130534.1051438-1-sumit.garg@linaro.org>
@@ -104,18 +104,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allow u-boot to build DTB from a different directory tree such that
-*-u-boot.dtsi files can be included from a common location. Currently
-that location is arch/$(ARCH)/dts/, so statically define that common
-location.
+Allow platforms to reuse DT headers and dtsi includes directly form
+upstream DT subtree which will be frequently synced with Linux kernel.
+This will further allow us to drop corresponding DT includes copy from
+U-Boot tree.
 
-This is needed for platform owners to start building DTB files from
-devicetree-rebasing directory but still being able to include
-*-u-boot.dtsi files.
+Also, since the DT includes from upstream DT subtree are done after DT
+includes from U-Boot tree, so it shouldn't cause any conflicts.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Tested-by: Bryan Brattlof <bb@ti.com>
 Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 ---
 
@@ -123,78 +120,49 @@ Changes in v5:
 - None
 
 Changes in v4:
-- Incorporate fix to resolve rk3399 migration issue reported by Simon.
+- New patch to reuse upstream DT includes by U-Boot as per Brian's use-case
+  for TI K3 SoCs.
 
-Changes in v3:
-- Picked up review tags
+ Makefile             | 3 ++-
+ scripts/Makefile.lib | 5 +++++
+ 2 files changed, 7 insertions(+), 1 deletion(-)
 
-Changes in v2:
-- s/UBOOT_DTSI_LOC/u_boot_dtsi_loc/
-
- scripts/Makefile.lib | 27 +++++++++++++++------------
- 1 file changed, 15 insertions(+), 12 deletions(-)
-
+diff --git a/Makefile b/Makefile
+index c7e5e0384af3..996a43c8624a 100644
+--- a/Makefile
++++ b/Makefile
+@@ -835,7 +835,8 @@ UBOOTINCLUDE    := \
+ 				-I$(srctree)/arch/arm/thumb1/include), \
+ 			-I$(srctree)/arch/arm/thumb1/include)) \
+ 	-I$(srctree)/arch/$(ARCH)/include \
+-	-include $(srctree)/include/linux/kconfig.h
++	-include $(srctree)/include/linux/kconfig.h \
++	-I$(srctree)/dts/upstream/include
+ 
+ NOSTDINC_FLAGS += -nostdinc -isystem $(shell $(CC) -print-file-name=include)
+ 
 diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-index f82b3169e874..fe2a0aadc417 100644
+index fe2a0aadc417..fbcaf335f9aa 100644
 --- a/scripts/Makefile.lib
 +++ b/scripts/Makefile.lib
-@@ -159,18 +159,20 @@ cpp_flags      = -Wp,-MD,$(depfile) $(NOSTDINC_FLAGS) $(UBOOTINCLUDE)     \
- ld_flags       = $(KBUILD_LDFLAGS) $(ldflags-y) $(LDFLAGS_$(@F))
+@@ -189,12 +189,17 @@ dtsi_include_list = $(strip $(u_boot_dtsi_options_debug) \
+ dtsi_include_list += $(CONFIG_DEVICE_TREE_INCLUDES)
  
- # Try these files in order to find the U-Boot-specific .dtsi include file
--u_boot_dtsi_options = $(strip $(wildcard $(dir $<)$(basename $(notdir $<))-u-boot.dtsi) \
--	$(wildcard $(dir $<)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi) \
--	$(wildcard $(dir $<)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi) \
--	$(wildcard $(dir $<)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi) \
--	$(wildcard $(dir $<)u-boot.dtsi))
-+u_boot_dtsi_loc = $(srctree)/arch/$(ARCH)/dts/
-+
-+u_boot_dtsi_options = $(strip $(wildcard $(u_boot_dtsi_loc)$(basename $(notdir $<))-u-boot.dtsi) \
-+	$(wildcard $(u_boot_dtsi_loc)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi) \
-+	$(wildcard $(u_boot_dtsi_loc)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi) \
-+	$(wildcard $(u_boot_dtsi_loc)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi) \
-+	$(wildcard $(u_boot_dtsi_loc)u-boot.dtsi))
- 
- u_boot_dtsi_options_raw = $(warning Automatic .dtsi inclusion: options: \
--	$(dir $<)$(basename $(notdir $<))-u-boot.dtsi \
--	$(dir $<)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi \
--	$(dir $<)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi \
--	$(dir $<)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi \
--	$(dir $<)u-boot.dtsi ... \
-+	$(u_boot_dtsi_loc)$(basename $(notdir $<))-u-boot.dtsi \
-+	$(u_boot_dtsi_loc)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi \
-+	$(u_boot_dtsi_loc)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi \
-+	$(u_boot_dtsi_loc)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi \
-+	$(u_boot_dtsi_loc)u-boot.dtsi ... \
- 	found: $(if $(u_boot_dtsi_options),"$(u_boot_dtsi_options)",nothing!))
- 
- # Uncomment for debugging
-@@ -190,6 +192,7 @@ dtsi_include_list += $(CONFIG_DEVICE_TREE_INCLUDES)
+ # Modified for U-Boot
++upstream_dtsi_include = $(addprefix -I, $(srctree)/dts/upstream/src/ \
++	$(sort $(dir $(wildcard $(srctree)/dts/upstream/src/$(ARCH)/*/*))) \
++	$(if (CONFIG_ARM64), \
++		 $(sort $(dir $(wildcard $(srctree)/dts/upstream/src/arm64/*/*)))))
  dtc_cpp_flags  = -Wp,-MD,$(depfile).pre.tmp -nostdinc                    \
  		 $(UBOOTINCLUDE)                                         \
  		 -I$(dir $<)                                             \
-+		 -I$(u_boot_dtsi_loc)                                     \
+ 		 -I$(u_boot_dtsi_loc)                                     \
  		 -I$(srctree)/arch/$(ARCH)/dts/include                   \
  		 -I$(srctree)/include                                    \
++		 $(upstream_dtsi_include)                                \
  		 -D__ASSEMBLY__                                          \
-@@ -328,7 +331,7 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
- 	  echo '$(pound)include "$(f)"' >> $(pre-tmp);) \
- 	$(HOSTCC) -E $(dtc_cpp_flags) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
- 	$(DTC) -O dtb -o $@ -b 0 \
--		-i $(dir $<) $(DTC_FLAGS) \
-+		-i $(dir $<) -i $(u_boot_dtsi_loc) $(DTC_FLAGS) \
- 		-d $(depfile).dtc.tmp $(dtc-tmp) || \
- 		(echo "Check $(shell pwd)/$(pre-tmp) for errors" && false) \
- 		; \
-@@ -354,7 +357,7 @@ ifdef CONFIG_EFI_CAPSULE_AUTHENTICATE
- dtsi_include_list += $(capsule_esl_dtsi)
- endif
+ 		 -undef -D__DTS__
  
--dtsi_include_list_deps = $(addprefix $(obj)/,$(subst $(quote),,$(dtsi_include_list)))
-+dtsi_include_list_deps = $(addprefix $(u_boot_dtsi_loc),$(subst $(quote),,$(dtsi_include_list)))
- 
- ifneq ($(CHECK_DTBS),)
- DT_CHECKER ?= dt-validate
 -- 
 2.34.1
 
