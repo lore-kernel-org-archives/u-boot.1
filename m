@@ -4,84 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EAE0C4828F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 16:01:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BB46C4828F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 16:04:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7914B87B8E;
-	Fri,  2 Feb 2024 17:01:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 1F71187BD6;
+	Fri,  2 Feb 2024 17:04:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ASNKroKc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SsFO0mf+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE97687BA8; Fri,  2 Feb 2024 17:01:14 +0100 (CET)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id 3454487BDC; Fri,  2 Feb 2024 17:04:16 +0100 (CET)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7EC6878FF
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 17:01:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E7BA78791E
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 17:04:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-6e133d5271cso1084978a34.0
- for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 08:01:11 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1d748f1320aso2682475ad.0
+ for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 08:04:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1706889670; x=1707494470; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qWOWYYEAxtKEbCbBz7L28/OQ2XY0i2cVeG9NC/yetZM=;
- b=ASNKroKclKtcKzhvQ2brt4jOudTsMK0pPPEkMS5YYWy2nVJoYhn54z0bIw8PuGGkJI
- dYwcf3tCGoWZeRaLEBQqGVg1HtgesQXHEzoGhH/VEIjoxRnANp+htINPIe8M8iHZej9Y
- FEEz5vK92NDCwujPCNnIcRDD1r3JiBBjmsCkE=
+ d=gmail.com; s=20230601; t=1706889852; x=1707494652; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=t1FsDmAF2QPYijV9s842Wj9EyfI5HO+HEqpX8JqtCMw=;
+ b=SsFO0mf+9fR/WKuGY5rvcGSweg6u4wxb21oki8m/whCmw4Hc18XWsbOnDVBzZr3Qez
+ WK9Dg0PSxrNJeQpfFcHEWrZAbwRKh+MQWyTt3DvybIsqC5PmSxyIYUAg2QJu4BLJy1t5
+ Vgv7Mec0ZP14ID/0bhY7A1cgdmCpujGxGi2eMRDaL21GND/fnWCEzZH1o5VmdMc8IbMX
+ ipsvpcy2FvwucYZsJ2dv21s6AA+L9RlmMXvCGkxg5WasMPrO74YikI/mRo7mgKDtgNCG
+ D50CepWIndQey/HSbx1YqdRGb1AUbEzN76ZhYDd5s1jFoXOTNQDQeBtM3OdXd2nmRuqG
+ Gztg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706889670; x=1707494470;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qWOWYYEAxtKEbCbBz7L28/OQ2XY0i2cVeG9NC/yetZM=;
- b=SMkuw+N7IhAwwootrr9r5Xj/lLZy0aT5PdOR7L5emuXzBxwBQ/wsPTstKuEvf2lDNf
- 55OU063NbBdf3MPisKBXClH+d/EA2+Hb/K//S25KXmf04MGYychjkvegYM9i1/vqK2no
- Gu/KuHGWanfrXvQmVUY3or0pJ0H38FNHpozjHGzDUlkrv/1M000ytkxNpzLYfHi6nvoB
- Xk8snuOJFa4Ncc4yD1TklNNnvB41cUkh6rrIm2lJHVAuoOiw9I/BZ9XqQCYqrs9pxssl
- gPWJReuyvqACChO7rtDIXxbuOWbQpwWgCHVrRldcwLI9k4vP2tyr5dZpkmCqz16RWJ+L
- mHSg==
-X-Gm-Message-State: AOJu0Yw3sGyHtGstldedw4INCbLfyh4RoKiB6rINEDefUAunA8krnduF
- WRpAaLw5aSYZ1nfGs0KP17RSvUs0jU2RyPphtg/eQFHH+TtY2UQE8FQ4Te3WLGsp4btc/JvigzI
- IbT6Ld15Rti29r0KZ8FxKeJW+P2KSGMnnEt9k
-X-Google-Smtp-Source: AGHT+IGkfsdQlA+htwDeD7zH3WjVhxGzYd3xt2y1hGo9/Xb3yR38PfLF0lt60z2VvCERYfrrO1dHkdBi+J+oKwjqgVQ=
-X-Received: by 2002:a05:6870:d10c:b0:219:4033:a21c with SMTP id
- e12-20020a056870d10c00b002194033a21cmr98007oac.33.1706889668519; Fri, 02 Feb
- 2024 08:01:08 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706889852; x=1707494652;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=t1FsDmAF2QPYijV9s842Wj9EyfI5HO+HEqpX8JqtCMw=;
+ b=jTJACPN16cK+2+XafMyw+OTDL3YGy2X64u9anaOofIC7nPE82lzVEVgwMKwAb8ED9g
+ I92IIvB2MlvtXT6+5rEit3h78GT43aVz0wkCivsKK5jMZLebrqZP9VimDQmIpomxckMR
+ LKyE3vjPHxCdVRtaLh/c80sw+Ppud6ukmbuL2REcS3MtMn2KdsWTmWvVr1SGxwLpO69n
+ zrjMXpowKqnMsZSt+DMp96TasLIENTRFTqIrBmG4wR9RSIlY9HvFCxUh0DG6jzV+45ae
+ JFBBwa7mjHR/wl8gCU4nhGxYTB73Ni7hdj7OclRmTfWgcFxjD5QqCGeo4sQB0MKR9AVb
+ oiwg==
+X-Forwarded-Encrypted: i=0;
+ AJvYcCWdB1vAkx3UxmocI/bnRD7ydYsBOXHffB8DO2g6S1VSFP0ZQ3wr0Prkf5m7bnPRCjMC8fQUrwsQtCnN8k2ynj6HBayDfg==
+X-Gm-Message-State: AOJu0Yze2P6qPb+heSDEG9AfTB83KDcF0U9Ps/Uxm+6XyOPjGgbooMb3
+ qAXFPKd/rHvG0R363lgtA7XdA9sBxcBNbGrsiRAdOIuGH1ggpUKHpKWx6ZwP
+X-Google-Smtp-Source: AGHT+IHHolLFdFlZ4TLoF78iG+XxGUHK2Tjx3IHyaDKlmWpYqyOAnJskbTOa1ZE0g4pbrGEajKBXKQ==
+X-Received: by 2002:a17:902:ea82:b0:1d9:61ef:1876 with SMTP id
+ x2-20020a170902ea8200b001d961ef1876mr4032282plb.1.1706889851945; 
+ Fri, 02 Feb 2024 08:04:11 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCVH6zhWMzryxGFP9GZpb+4JrAuXdWsvlyw3l8dHSA/OyW/rZqoAsdG56yYfBs7BhGoobICtkeJz6zIiwMVM9cpxJivp0hJn1SmZLGaqRAh+tPHt5nN+Tat/Ib6eMNCuGoIbi3AlPEWdcS63
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:fa09:d56a:f130:f280])
+ by smtp.gmail.com with ESMTPSA id
+ v4-20020a170902b7c400b001d8b8bf8e44sm1780086plz.92.2024.02.02.08.04.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 02 Feb 2024 08:04:11 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: sbabic@denx.de,
+	trini@konsulko.com
+Cc: uboot-imx@nxp.com, u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
+Subject: [PATCH v2 1/3] mx6sabresd: Fix U-Boot corruption after saving the
+ environment
+Date: Fri,  2 Feb 2024 13:04:03 -0300
+Message-Id: <20240202160405.4126192-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20231202035511.487946-1-sjg@chromium.org>
- <20231202035511.487946-3-sjg@chromium.org>
- <20231213121353.GA31326@willie-the-truck>
- <CAFLszTjfmSx1YMqzb2TsQf7sP4KrcQB=X7DY_HxRQp0J5HAppQ@mail.gmail.com>
- <CAK7LNAQRCDC03e=TVO=k4FuD2a2RdTy7yLr3UptQjVCX7pM1CA@mail.gmail.com>
- <20240109143349.GR1610741@bill-the-cat>
- <CAFLszTjwhy24UiT6kUJABMC1Xn0h9Q1q9fYpZZJg9DX8Vss9cA@mail.gmail.com>
- <CAFLszTjPAHd6RdO1mvatXC=yRS+h=sgJ_pMdyEnkROTx7yRpog@mail.gmail.com>
- <CAK7LNARsY6-rrx=sNFq6oFqpqf0s5S_=3DrUsCOS7zF0BXcoTg@mail.gmail.com>
-In-Reply-To: <CAK7LNARsY6-rrx=sNFq6oFqpqf0s5S_=3DrUsCOS7zF0BXcoTg@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 2 Feb 2024 09:00:57 -0700
-Message-ID: <CAFLszTgYMrj2AhYdAXBjGACQjehvVBnJ2EsKg2TO7c50Dp_ukQ@mail.gmail.com>
-Subject: Re: [PATCH v9 2/2] arm64: boot: Support Flat Image Tree
-To: Masahiro Yamada <masahiroy@kernel.org>
-Cc: Tom Rini <trini@konsulko.com>, Will Deacon <will@kernel.org>, 
- linux-arm-kernel@lists.infradead.org, Ahmad Fatoum <a.fatoum@pengutronix.de>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Nicolas Schier <nicolas@fjasle.eu>,
- Catalin Marinas <catalin.marinas@arm.com>, Jonathan Corbet <corbet@lwn.net>, 
- Nathan Chancellor <nathan@kernel.org>, Nick Terrell <terrelln@fb.com>,
- linux-doc@vger.kernel.org, 
- linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org, 
- workflows@vger.kernel.org, Rob Herring <robh@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,319 +94,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Masahiro,
+From: Fabio Estevam <festevam@denx.de>
 
-On Tue, 30 Jan 2024 at 02:16, Masahiro Yamada <masahiroy@kernel.org> wrote:
->
-> On Fri, Jan 26, 2024 at 1:04=E2=80=AFAM Simon Glass <sjg@chromium.org> wr=
-ote:
-> >
-> > Hi,
-> >
-> > On Wed, 17 Jan 2024 at 06:14, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Masahiro, Tom,
-> > >
-> > > On Tue, 9 Jan 2024 at 07:33, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Tue, Jan 09, 2024 at 11:01:42PM +0900, Masahiro Yamada wrote:
-> > > > > Hi Simon,
-> > > > >
-> > > > >
-> > > > > On Wed, Jan 3, 2024 at 8:47=E2=80=AFAM Simon Glass <sjg@chromium.=
-org> wrote:
-> > > > > >
-> > > > > > Hi Masahiro,
-> > > > > >
-> > > > > > On Wed, Dec 13, 2023 at 5:14=E2=80=AFAM Will Deacon <will@kerne=
-l.org> wrote:
-> > > > > > >
-> > > > > > > On Fri, Dec 01, 2023 at 08:54:42PM -0700, Simon Glass wrote:
-> > > > > > > > Add a script which produces a Flat Image Tree (FIT), a sing=
-le file
-> > > > > > > > containing the built kernel and associated devicetree files=
-.
-> > > > > > > > Compression defaults to gzip which gives a good balance of =
-size and
-> > > > > > > > performance.
-> > > > > > > >
-> > > > > > > > The files compress from about 86MB to 24MB using this appro=
-ach.
-> > > > > > > >
-> > > > > > > > The FIT can be used by bootloaders which support it, such a=
-s U-Boot
-> > > > > > > > and Linuxboot. It permits automatic selection of the correc=
-t
-> > > > > > > > devicetree, matching the compatible string of the running b=
-oard with
-> > > > > > > > the closest compatible string in the FIT. There is no need =
-for
-> > > > > > > > filenames or other workarounds.
-> > > > > > > >
-> > > > > > > > Add a 'make image.fit' build target for arm64, as well. Use
-> > > > > > > > FIT_COMPRESSION to select a different algorithm.
-> > > > > > > >
-> > > > > > > > The FIT can be examined using 'dumpimage -l'.
-> > > > > > > >
-> > > > > > > > This features requires pylibfdt (use 'pip install libfdt').=
- It also
-> > > > > > > > requires compression utilities for the algorithm being used=
-. Supported
-> > > > > > > > compression options are the same as the Image.xxx files. Fo=
-r now there
-> > > > > > > > is no way to change the compression other than by editing t=
-he rule for
-> > > > > > > > $(obj)/image.fit
-> > > > > > > >
-> > > > > > > > While FIT supports a ramdisk / initrd, no attempt is made t=
-o support
-> > > > > > > > this here, since it must be built separately from the Linux=
- build.
-> > > > > > > >
-> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > ---
-> > > > > > > >
-> > > > > > > > Changes in v9:
-> > > > > > > > - Move the compression control into Makefile.lib
-> > > > > > > >
-> > > > > > > > Changes in v8:
-> > > > > > > > - Drop compatible string in FDT node
-> > > > > > > > - Correct sorting of MAINTAINERS to before ARM64 PORT
-> > > > > > > > - Turn compress part of the make_fit.py comment in to a sen=
-tence
-> > > > > > > > - Add two blank lines before parse_args() and setup_fit()
-> > > > > > > > - Use 'image.fit: dtbs' instead of BUILD_DTBS var
-> > > > > > > > - Use '$(<D)/dts' instead of '$(dir $<)dts'
-> > > > > > > > - Add 'mkimage' details Documentation/process/changes.rst
-> > > > > > > > - Allow changing the compression used
-> > > > > > > > - Tweak cover letter since there is only one clean-up patch
-> > > > > > > >
-> > > > > > > > Changes in v7:
-> > > > > > > > - Add Image as a dependency of image.fit
-> > > > > > > > - Drop kbuild tag
-> > > > > > > > - Add dependency on dtbs
-> > > > > > > > - Drop unnecessary path separator for dtbs
-> > > > > > > > - Rebase to -next
-> > > > > > > >
-> > > > > > > > Changes in v5:
-> > > > > > > > - Drop patch previously applied
-> > > > > > > > - Correct compression rule which was broken in v4
-> > > > > > > >
-> > > > > > > > Changes in v4:
-> > > > > > > > - Use single quotes for UIMAGE_NAME
-> > > > > > > >
-> > > > > > > > Changes in v3:
-> > > > > > > > - Drop temporary file image.itk
-> > > > > > > > - Drop patch 'Use double quotes for image name'
-> > > > > > > > - Drop double quotes in use of UIMAGE_NAME
-> > > > > > > > - Drop unnecessary CONFIG_EFI_ZBOOT condition for help
-> > > > > > > > - Avoid hard-coding "arm64" for the DT architecture
-> > > > > > > >
-> > > > > > > > Changes in v2:
-> > > > > > > > - Drop patch previously applied
-> > > > > > > > - Add .gitignore file
-> > > > > > > > - Move fit rule to Makefile.lib using an intermediate file
-> > > > > > > > - Drop dependency on CONFIG_EFI_ZBOOT
-> > > > > > > > - Pick up .dtb files separately from the kernel
-> > > > > > > > - Correct pylint too-many-args warning for write_kernel()
-> > > > > > > > - Include the kernel image in the file count
-> > > > > > > > - Add a pointer to the FIT spec and mention of its wide ind=
-ustry usage
-> > > > > > > > - Mention the kernel version in the FIT description
-> > > > > > > >
-> > > > > > > >  Documentation/process/changes.rst |   9 +
-> > > > > > > >  MAINTAINERS                       |   7 +
-> > > > > > > >  arch/arm64/Makefile               |   7 +-
-> > > > > > > >  arch/arm64/boot/.gitignore        |   1 +
-> > > > > > > >  arch/arm64/boot/Makefile          |   6 +-
-> > > > > > > >  scripts/Makefile.lib              |  16 ++
-> > > > > > > >  scripts/make_fit.py               | 291 ++++++++++++++++++=
-++++++++++++
-> > > > > > > >  7 files changed, 334 insertions(+), 3 deletions(-)
-> > > > > > > >  create mode 100755 scripts/make_fit.py
-> > > > > > >
-> > > > > > > I'll need Masahiro's Ack on the scripts/ changes before I can=
- take this
-> > > > > > > one.
-> > > > > >
-> > > > > > Any thoughts on this request, please?
-> > > > > >
-> > > > > > Regards,
-> > > > > > Simon
-> > > > > >
-> > > > >
-> > > > >
-> > > > >
-> > > > > As I mentioned before, I am concerned with having
-> > > > > the same "compatible" entries, with different contents,
-> > > > > as you use the "compatible" string as an ID to selecting
-> > > > > the target config node, right?
-> > > > >
-> > > > >
-> > > > >
-> > > > >
-> > > > >
-> > > > > $ fdtdump  arch/arm64/boot/image.fit
-> > > > >
-> > > > >         ...
-> > > > >
-> > > > >         conf-10 {
-> > > > >             compatible =3D "tq,am642-tqma6442l-mbax4xxl",
-> > > > > "tq,am642-tqma6442l", "ti,am642";
-> > > > >             description =3D "TQ-Systems TQMa64xxL SoM on MBax4xxL=
- carrier board";
-> > > > >             fdt =3D "fdt-10";
-> > > > >             kernel =3D "kernel";
-> > > > >         };
-> > > > >
-> > > > >         ...
-> > > > >
-> > > > >         conf-25 {
-> > > > >             compatible =3D "tq,am642-tqma6442l-mbax4xxl",
-> > > > > "tq,am642-tqma6442l", "ti,am642";
-> > > > >             description =3D "TQ-Systems TQMa64xxL SoM on MBax4xxL=
- carrier board";
-> > > > >             fdt =3D "fdt-25";
-> > > > >             kernel =3D "kernel";
-> > > > >         };
-> > > >
-> > > > I had asked Rob a while ago about if having the same compatible for=
- two
-> > > > functionally different machines is a feature, or a bug, and I don't
-> > > > think either of us fully agreed either way. I'd be leaning towards
-> > > > saying the above example is a bug in the dts files, it's just not b=
-een a
-> > > > bug people have worried about before due to (sadly) how little the
-> > > > top-level compatible has been used.
-> > >
-> > > Yes I believe this is a bug in the files.
-> > >
-> > > What should the script do in this case? Print a warning, perhaps?
-> >
-> > Is there anything I should do here? Would a warning be helpful, or
-> > just confusing?
->
->
->
-> I do not think it is useful.
-> You would almost always get a warning, and there is no way to fix it.
->
->
->
-> With arm64 defconfig, image.fit will include a thousand DTBs.
->
->
-> The config node of my board was listed 214th.
-> (I found it by fdtdump)
->
->
-> Then, I learned
->
->   >  bootm  ${loadaddr}#conf-214
->
-> is the correct command to boot my board.
->
->
-> Of course, the "214" will be different in the future.
->
-> The node names, conf-*, are useless.
->
->
->
-> Only the useful way is to enable CONFIG_FIT_BEST_MATCH in U-Boot,
-> but this relies on the uniqueness of a compatible string,
-> which is not true.
+U-Boot binary has grown in such a way that it goes beyond the reserved
+area for the environment variables.
+    
+Running "saveenv" and rebooting the board causes U-Boot to hang because
+of this overlap.
+    
+Fix this problem by selecting CONFIG_LTO so that the U-Boot proper
+size can be reduced.
+    
+Also, to prevent this same problem to happen in the future, use
+CONFIG_BOARD_SIZE_LIMIT, which can detect the overlap in build-time.
+    
+CONFIG_BOARD_SIZE_LIMIT is calculated as follows:
 
-See my other email, but I think this is a problem we should fix.
+CONFIG_BOARD_SIZE_LIMIT = CONFIG_ENV_OFFSET - u-boot-img.dtb offset
+CONFIG_BOARD_SIZE_LIMIT = 0xc000 - 69 * 1024
+CONFIG_BOARD_SIZE_LIMIT = 715766
 
->
-> (I do not know how to do it in barebox)
->
->
->
->
->
-> I think using the file name as a config node
-> mitigates the issue because a file name is
-> considered unique.
->
->
-> For example, with composite DTBs:
->
-> imx8mm-venice-gw72xx-0x-imx219-dtbs :=3D imx8mm-venice-gw72xx-0x.dtb
-> imx8mm-venice-gw72xx-0x-imx219.dtbo
-> imx8mm-venice-gw72xx-0x-rpidsi-dtbs :=3D imx8mm-venice-gw72xx-0x.dtb
-> imx8mm-venice-gw72xx-0x-rpidsi.dtbo
->
->
->
->
-> configurations {
->       imx8mm-venice-gw72xx-0x-imx219 {
->             ...
->       };
->
->       imx8mm-venice-gw72xx-0x-rpidsi {
->             ...
->       }
-> };
->
->
->
-> Then, we can distinguish them by node, even if they have
-> the same compatible string.
-> At least we can do
->
->   > bootm  ${loadaddr}#imx8mm-venice-gw72xx-0x-imx219
->
->
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+Changes since v1:
+- Select LTO. (Tom)
 
-Sure, but the goal with FIT is to be able to boot with the correct dtb
-automatically. What you have above would require some sort of boot
-script, or some other information about the configuration-node name.
+ configs/mx6sabresd_defconfig | 3 +++
+ 1 file changed, 3 insertions(+)
 
->
->
-> For the issue including stale DTBs, you can use my patch:
-> [PATCH 1/4] kbuild: create a list of all built DTB files
-> (https://lore.kernel.org/linux-kbuild/CAK7LNASOxi-gzve+_d-sCW9z_eEJ5TMMnz=
-PEvN2Nj2AwgVjF9g@mail.gmail.com/T/#ma3595627a96a04554a78cbbd22056831e13db26=
-0)
->
->
-> You can change scripts/make_fit.py to take
-> the DTB files instead of the directory to search.
->
-> Optionally, you can support '@' syntax to
-> take command arguments from a file.
->
->
-> scripts/make_fit.py ... @arch/$(SRCARCH)/boot/dts/dtbs-list
+diff --git a/configs/mx6sabresd_defconfig b/configs/mx6sabresd_defconfig
+index a90efe4a7786..d4fb55622cf1 100644
+--- a/configs/mx6sabresd_defconfig
++++ b/configs/mx6sabresd_defconfig
+@@ -21,6 +21,9 @@ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL=y
+ CONFIG_SPL_LIBDISK_SUPPORT=y
+ CONFIG_PCI=y
++CONFIG_LTO=y
++CONFIG_HAS_BOARD_SIZE_LIMIT=y
++CONFIG_BOARD_SIZE_LIMIT=715766
+ CONFIG_FIT=y
+ CONFIG_SPL_FIT_PRINT=y
+ CONFIG_SPL_LOAD_FIT=y
+-- 
+2.34.1
 
-Thank you for doing that. I will take a look and send v10.
-
->
->
->
->
->
->
-> For the separate base and overlays support,
-> you can use my patch as a base:
-> [PATCH 3/4] kbuild: create a list of base and overlays for each DTB
-> (https://lore.kernel.org/linux-kbuild/CAK7LNASOxi-gzve+_d-sCW9z_eEJ5TMMnz=
-PEvN2Nj2AwgVjF9g@mail.gmail.com/T/#m32c5bdde9098901b7c7776b932827493a05c82d=
-5)
->
->
->
->
->
-> Lastly, you do not need to require mkimage for
-> args.external.
-> You can simply concatenate files.
-
-Yes, that's true. Do you think there is a problem with using mkimage?
-
-Regards,
-Simon
