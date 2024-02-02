@@ -4,74 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31130C47DB3
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 13:53:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E093C48291
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 14:13:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 906CB8784B;
-	Fri,  2 Feb 2024 14:53:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 05BDE877BB;
+	Fri,  2 Feb 2024 15:13:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gTLU0RF+";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="T9tIv5nq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C138187968; Fri,  2 Feb 2024 14:53:50 +0100 (CET)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AB12B87873; Fri,  2 Feb 2024 15:13:05 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7742B877BB
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 14:53:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A46A587252
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 15:13:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-296424aaa95so448984a91.3
- for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 05:53:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706882027; x=1707486827; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ROAdJXM+Sgvkrra5Mam+ok7i2m2NneVY7QgMYnUvKbs=;
- b=gTLU0RF+oqXX1M3NiHOkDGMifb91RGKlY9LHDQ+Ot/TlasmZyOlIrDq0DuRcVfgPlt
- GI8U8H//PluSWjgIotX9z2huhvMMk52LDtjSc3hOKZ95hdaIrir4sEacCFEL9A5Z54ss
- dAJCDkXWs2vvr8CwsCdpNJJMtTFDCtccMlOF9wFtPUriD6MLqYye/6eRtcW6tpvwZttF
- fv3CYO9c7/aSzEXDSko0wh61PdCxxlu3M/TYDvQ3WiCGCJlVLAAL/YJJTrFAeiPxrr34
- x2V8v8Bc5mpvj6egY3+Zs+5OHSGGFpy1VjbTOINiCcEwxggnFSAt2IvD7Uf7Eqwzesdx
- a2Qw==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
+ [209.85.218.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 8CEDA3F829
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 14:13:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1706883182;
+ bh=02b1L0K+oYk2Fo6D88lwEEXevB330iYaLK6OUZMV2AE=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type;
+ b=T9tIv5nqZHsfRvhJNludd//ftthCSmPCIkvJqi50l3gPwdyLTOtq6dkkEwcdK5e6d
+ dyiq3WFNfOxgHaNHjed29GyxpW0jkIRO6GfwjD6uoRhrKj596QXibGi+om/NLr7rb4
+ AAn4QiyumvYYjyoeDBvy7nFLt1aUaOMBUnUeMZYiguM243T61SmwlbIjFZCjd2yabq
+ apGXLYqW3EnXy5grpoxrFwTKAvTJFkZAv/23WsYmGv9kvM0rmm8qU8fBs03IyoIx38
+ KG6IlofqfDn/tXehIhH4bn2dmVZ/fQt63HiWB9V4giBhc4i0y7un95lY8IuF35yOoK
+ VmpZSft4mSavg==
+Received: by mail-ej1-f71.google.com with SMTP id
+ a640c23a62f3a-a35860bff34so198096266b.0
+ for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 06:13:02 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706882027; x=1707486827;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ROAdJXM+Sgvkrra5Mam+ok7i2m2NneVY7QgMYnUvKbs=;
- b=j8ypmH9ghA9wyL5t2rxM4xqtbnQYQNhy2w+8Df7+TEYvsSvNXTPv1gBwkaz58s1sNl
- 38HB+Zix0PNRN92gFg0n7cE6AM8zD0pEOE2Rguh8PWx3rHAP8Xeek6Eud67FiWCDUReU
- YHoYtEIQpC8duGvGXpFKJVzZhW+l/ejW4lHg6kxsXQkQEKRovqmaJcVW07/TM6LAXSw6
- y3QuhMQN9mr95yWZt3lV/y9TzwFXQv1qPjXm+7npqRQOHnjGcergBAflPfa2n6pr3kIp
- 3ilx/lRoJlNytDi8s6WPIz3TqxpVBQTWgHEMEPpmTLXLgP7bHYeMPC+91xo5AcIifQLG
- Ed9w==
-X-Gm-Message-State: AOJu0YwvjhMDD0+qgSC+uM22q91qJnG5xLCliETqakciDfyTV7xsthMP
- ZX6FCP+D7BGXp+QBX2bf9olsZmykigr/cUm3jWJS9l41FlDZY1yejRXZAu4uY5JN8uiQtFx/RQ7
- VPBvtKTwFEUfbi7/6zs3DdVw3Gb0=
-X-Google-Smtp-Source: AGHT+IGw6aDXYDiJtRSdSHQvU9qoU4x042gA4wOJmtiVOuMhC644LAy1Nd/uTRgkhQNjmSDq4SX9YOM2pjtjjWyhJVU=
-X-Received: by 2002:a17:90a:b117:b0:296:1ac3:c573 with SMTP id
- z23-20020a17090ab11700b002961ac3c573mr4410264pjq.15.1706882026591; Fri, 02
- Feb 2024 05:53:46 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706883182; x=1707487982;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=02b1L0K+oYk2Fo6D88lwEEXevB330iYaLK6OUZMV2AE=;
+ b=EdUQlbjb1ZTnaETZ5KsjGWlhQ7SgWV+ArMSdbz+Dm57DMP1VqX04PsAPW3zntRyEEQ
+ l23xhU69aSv9h3PdnqATrHN41ojORWzeIBdqfaqUldXZasUcYD8mxKTkOsgruLRh5ERH
+ RMhlbRHQWNy1ftJS3VPVTjgDlEjbuIX6W4yGTQKKs/RlQ398IY5HfJrL0xuxdd691+qY
+ N4up0NPHIxBTGTV7win24VaJ1paHnpxCiu2Z7ce6dLUPxBQ2ztvQbBkBjhvEhKMO1JLi
+ 7caV6iOi1D/HOA/k59qPzKE45Y2tfPm420raoaB6YG1MGLb+JFMmg+bknIUE8Zs3vHFv
+ NZuQ==
+X-Gm-Message-State: AOJu0YxbHjo6lmFZzmMjONMiUDa7gsDD3f/8tyXlVxj21FWjCMJVKwOu
+ +CcxRDbH22/cIc59IxBCifRVJaD2MsEOgFONbj7N8BYKfrXFHVbRVDkCg3ipgygF6x/2jpcvQKE
+ b3j/SSYyyo6o9BhyC4GK985NG7Y25fVzSEeRxlCWddVr8QGaC6D96GUJHnkm/muEsz0g=
+X-Received: by 2002:a17:906:19b:b0:a36:fd11:984 with SMTP id
+ 27-20020a170906019b00b00a36fd110984mr1753246ejb.5.1706883182228; 
+ Fri, 02 Feb 2024 06:13:02 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHcvZf8NBddpPtDBQKMklhHlG+IGejpZR2G9oI+cFZ0E0s+lQYvQQfCNLJhU2k/YSz3kAlsiA==
+X-Received: by 2002:a17:906:19b:b0:a36:fd11:984 with SMTP id
+ 27-20020a170906019b00b00a36fd110984mr1753233ejb.5.1706883181871; 
+ Fri, 02 Feb 2024 06:13:01 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCUGUJMmtE842w+VQoVFkSKgf5e7hEhC/phBGKWShRiy0dpCLMbl03NG2iXNRHldoz+Fu10OsoHAnZvPvGw2MQmFbP5AJlpmdNhY4p0Erhk9AbZrazynrnEcCqIYkKyJghk34UHL7KOw
+Received: from workstation5.fritz.box
+ (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
+ by smtp.gmail.com with ESMTPSA id
+ wn7-20020a170907068700b00a2e9f198cffsm912901ejb.72.2024.02.02.06.13.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 02 Feb 2024 06:13:01 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] efi_loader: simplify error message in
+ efi_disk_create_raw()
+Date: Fri,  2 Feb 2024 15:12:52 +0100
+Message-ID: <20240202141252.62378-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <1705043234-39185-1-git-send-email-ye.li@nxp.com>
-In-Reply-To: <1705043234-39185-1-git-send-email-ye.li@nxp.com>
-From: Adam Ford <aford173@gmail.com>
-Date: Fri, 2 Feb 2024 07:53:35 -0600
-Message-ID: <CAHCN7xLCyitv+WF2kjcvsnmTjBVQO-RgfSYVre9fS6YTEgfxZw@mail.gmail.com>
-Subject: Re: [PATCH] arm: imx: imx8m: Enable the SError exception
-To: Ye Li <ye.li@nxp.com>
-Cc: sbabic@denx.de, u-boot@lists.denx.de, peng.fan@nxp.com, uboot-imx@nxp.com, 
- thomas.schaefer@kontron.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,46 +104,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jan 12, 2024 at 1:07=E2=80=AFAM Ye Li <ye.li@nxp.com> wrote:
->
-> To work with commit 2f3c920(imx8m: workaround ROM serror),
-> we need to enable the SError exception and install vector in SPL.
->
-> Signed-off-by: Ye Li <ye.li@nxp.com>
-> Reviewed-by: Peng Fan <peng.fan@nxp.com>
-> ---
->  arch/arm/mach-imx/imx8m/Kconfig | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/arch/arm/mach-imx/imx8m/Kconfig b/arch/arm/mach-imx/imx8m/Kc=
-onfig
-> index 67da198..88ef732 100644
-> --- a/arch/arm/mach-imx/imx8m/Kconfig
-> +++ b/arch/arm/mach-imx/imx8m/Kconfig
-> @@ -11,14 +11,17 @@ config IMX8MQ
->         bool
->         select IMX8M
->         select CLK_IMX8MQ
-> +       select ARMV8_SPL_EXCEPTION_VECTORS
->
->  config IMX8MM
->         bool
->         select IMX8M
-> +       select ARMV8_SPL_EXCEPTION_VECTORS
->
->  config IMX8MN
->         bool
->         select IMX8M
-> +       select ARMV8_SPL_EXCEPTION_VECTORS
->
->  config IMX8MP
->         bool
-> --
-> 2.7.4
->
+The error message
 
-Would this not also work for 8MP?  If that's the case, should the
-section of ARMV8_SPL_EXCEPTION_VECTORS fall under "config IMX8M" for
-simplicity?
+    Adding disk for usb_mass_storage.lun0 failed (err=-9223372036854775788/0x8000000000000014)
 
-adam
+provides a decimal and a hexadecimal notation of the EFI status code
+EFI_ALREADY_STARTED which is defined as (EFI_ERROR_MASK | 20).
+The decimal output does not convey the value 20 clearly.
+
+With the patch we write
+
+    Adding block device usb_mass_storage.lun0 failed, r = 20
+
+similar to other EFI error messages.
+
+Fixes: 952018117ab4 ("dm: sandbox: Switch over to using the new host uclass")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ lib/efi_loader/efi_disk.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+index b1739d99201..2fefd05fbdc 100644
+--- a/lib/efi_loader/efi_disk.c
++++ b/lib/efi_loader/efi_disk.c
+@@ -574,7 +574,8 @@ static int efi_disk_create_raw(struct udevice *dev, efi_handle_t agent_handle)
+ 			log_notice("Disk %s not ready\n", dev->name);
+ 			ret = -EBUSY;
+ 		} else {
+-			log_err("Adding disk for %s failed (err=%ld/%#lx)\n", dev->name, ret, ret);
++			log_err("Adding block device %s failed, r = %lu\n",
++				dev->name, ret & ~EFI_ERROR_MASK);
+ 			ret = -ENOENT;
+ 		}
+ 
+-- 
+2.43.0
+
