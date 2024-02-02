@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BB46C4828F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 16:04:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F889C4828F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 16:04:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F71187BD6;
-	Fri,  2 Feb 2024 17:04:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7DE0D87BF2;
+	Fri,  2 Feb 2024 17:04:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SsFO0mf+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="StkhgVmB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3454487BDC; Fri,  2 Feb 2024 17:04:16 +0100 (CET)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id 60F2287BF2; Fri,  2 Feb 2024 17:04:18 +0100 (CET)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7BA78791E
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 17:04:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A65C87186
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 17:04:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1d748f1320aso2682475ad.0
- for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 08:04:13 -0800 (PST)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-1d722740622so4049775ad.0
+ for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 08:04:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706889852; x=1707494652; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=t1FsDmAF2QPYijV9s842Wj9EyfI5HO+HEqpX8JqtCMw=;
- b=SsFO0mf+9fR/WKuGY5rvcGSweg6u4wxb21oki8m/whCmw4Hc18XWsbOnDVBzZr3Qez
- WK9Dg0PSxrNJeQpfFcHEWrZAbwRKh+MQWyTt3DvybIsqC5PmSxyIYUAg2QJu4BLJy1t5
- Vgv7Mec0ZP14ID/0bhY7A1cgdmCpujGxGi2eMRDaL21GND/fnWCEzZH1o5VmdMc8IbMX
- ipsvpcy2FvwucYZsJ2dv21s6AA+L9RlmMXvCGkxg5WasMPrO74YikI/mRo7mgKDtgNCG
- D50CepWIndQey/HSbx1YqdRGb1AUbEzN76ZhYDd5s1jFoXOTNQDQeBtM3OdXd2nmRuqG
- Gztg==
+ d=gmail.com; s=20230601; t=1706889854; x=1707494654; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FTvyaINkirJySMHirPeZLKqUxFNBlnKeiZ2Cggxua8E=;
+ b=StkhgVmBq3ekSk6ueXyn+V1jlBXmN1ma+Q223fDcRhLsuPA/LBkltGPnJBgp8SXXxJ
+ PLjnVQnNCnv5iZZNgAcyH1vzGh+g2HAjJGHeUkZpemtOBzTTc2TN74hLeFaHSZywYM6d
+ 9pMRsO2JRDhrlQ56vX7Ob6UmX1DrLnClXOPf2aSD+gnLDmlljQG3erFhBOZ1bSPNsK+3
+ aLghdgLfpoelVBGd121zv8tVIPD8lSdTaVwrSuHZhRxEn+enYAGFm+qDe6lbyckT0SYU
+ aJlG98A69oxKvXbGhwb6+wXSplDvmmERBWbvX3IuBhdmL58nJk/2Wfj1yoTIDS9R+4CM
+ chQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706889852; x=1707494652;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=t1FsDmAF2QPYijV9s842Wj9EyfI5HO+HEqpX8JqtCMw=;
- b=jTJACPN16cK+2+XafMyw+OTDL3YGy2X64u9anaOofIC7nPE82lzVEVgwMKwAb8ED9g
- I92IIvB2MlvtXT6+5rEit3h78GT43aVz0wkCivsKK5jMZLebrqZP9VimDQmIpomxckMR
- LKyE3vjPHxCdVRtaLh/c80sw+Ppud6ukmbuL2REcS3MtMn2KdsWTmWvVr1SGxwLpO69n
- zrjMXpowKqnMsZSt+DMp96TasLIENTRFTqIrBmG4wR9RSIlY9HvFCxUh0DG6jzV+45ae
- JFBBwa7mjHR/wl8gCU4nhGxYTB73Ni7hdj7OclRmTfWgcFxjD5QqCGeo4sQB0MKR9AVb
- oiwg==
+ d=1e100.net; s=20230601; t=1706889854; x=1707494654;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=FTvyaINkirJySMHirPeZLKqUxFNBlnKeiZ2Cggxua8E=;
+ b=LHi9mur6bU/SxyNpNHilZAyuwnGVWr8NuUbQjtzrg7lYEBX+KyRPzwfaxmMSWDacLb
+ MYm4XqpxvQ0QDU1/LROwrHi8N7qzg8M0Qgyz2foqGrvV59uXyr2eq2OKL3homMaVCrXT
+ JJodniUaRpR5D9GkkukcIrTpFhqL0FBc1Q6V92hqoLrR2PcF5n9bBUjFnavb0Oax/lYy
+ xn2qaPcMD84nTD7ptpHWQuzZL/veYQ7mO7wfg5RAwd4Ebgnn9FVxIV9NicEtPqhEpqYX
+ 8dSkAt1u2SwA9QOT4rOn/1SE1dp8CtNpDZZtaF9UUdvky7V2vHINtvALoaIehFTBzdL4
+ 9rog==
+X-Gm-Message-State: AOJu0Yy7Na8elCjd2Ii1+O6kBzOORT41adxzTIFQ2yPeRTZt113C1VW2
+ yvqfM4R19TRV8uMHA3yfsQnVTObaWnIVDSt3IqUqK6GgF0eKy+II
+X-Google-Smtp-Source: AGHT+IEUbl8RkiP8sw2KHJN0S/eBBD7gT12TYv2wwu1qCM3oJN10IujMqQVLAqUOqlD9yFgmPC7EMA==
+X-Received: by 2002:a17:902:ee85:b0:1d8:f06a:9b6f with SMTP id
+ a5-20020a170902ee8500b001d8f06a9b6fmr6446267pld.1.1706889854376; 
+ Fri, 02 Feb 2024 08:04:14 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCWdB1vAkx3UxmocI/bnRD7ydYsBOXHffB8DO2g6S1VSFP0ZQ3wr0Prkf5m7bnPRCjMC8fQUrwsQtCnN8k2ynj6HBayDfg==
-X-Gm-Message-State: AOJu0Yze2P6qPb+heSDEG9AfTB83KDcF0U9Ps/Uxm+6XyOPjGgbooMb3
- qAXFPKd/rHvG0R363lgtA7XdA9sBxcBNbGrsiRAdOIuGH1ggpUKHpKWx6ZwP
-X-Google-Smtp-Source: AGHT+IHHolLFdFlZ4TLoF78iG+XxGUHK2Tjx3IHyaDKlmWpYqyOAnJskbTOa1ZE0g4pbrGEajKBXKQ==
-X-Received: by 2002:a17:902:ea82:b0:1d9:61ef:1876 with SMTP id
- x2-20020a170902ea8200b001d961ef1876mr4032282plb.1.1706889851945; 
- Fri, 02 Feb 2024 08:04:11 -0800 (PST)
-X-Forwarded-Encrypted: i=0;
- AJvYcCVH6zhWMzryxGFP9GZpb+4JrAuXdWsvlyw3l8dHSA/OyW/rZqoAsdG56yYfBs7BhGoobICtkeJz6zIiwMVM9cpxJivp0hJn1SmZLGaqRAh+tPHt5nN+Tat/Ib6eMNCuGoIbi3AlPEWdcS63
+ AJvYcCU0W4xk/E+OS5aqMawteFrw9ih7Sxa4kulCpZTPEqn/uAhOWNF0J5bYnR5nvOSSpGW7YnpclK38yO+sFtQfVux+ucc9EYJ9d015ZhA5UiDi+8qxFfnbG1+pYItTuhMlczX/ThDBWigEVZyn
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:fa09:d56a:f130:f280])
  by smtp.gmail.com with ESMTPSA id
- v4-20020a170902b7c400b001d8b8bf8e44sm1780086plz.92.2024.02.02.08.04.10
+ v4-20020a170902b7c400b001d8b8bf8e44sm1780086plz.92.2024.02.02.08.04.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Feb 2024 08:04:11 -0800 (PST)
+ Fri, 02 Feb 2024 08:04:14 -0800 (PST)
 From: Fabio Estevam <festevam@gmail.com>
 To: sbabic@denx.de,
 	trini@konsulko.com
 Cc: uboot-imx@nxp.com, u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
-Subject: [PATCH v2 1/3] mx6sabresd: Fix U-Boot corruption after saving the
- environment
-Date: Fri,  2 Feb 2024 13:04:03 -0300
-Message-Id: <20240202160405.4126192-1-festevam@gmail.com>
+Subject: [PATCH v2 2/3] mx6sabresd: Convert to watchdog driver model
+Date: Fri,  2 Feb 2024 13:04:04 -0300
+Message-Id: <20240202160405.4126192-2-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240202160405.4126192-1-festevam@gmail.com>
+References: <20240202160405.4126192-1-festevam@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,46 +96,63 @@ X-Virus-Status: Clean
 
 From: Fabio Estevam <festevam@denx.de>
 
-U-Boot binary has grown in such a way that it goes beyond the reserved
-area for the environment variables.
-    
-Running "saveenv" and rebooting the board causes U-Boot to hang because
-of this overlap.
-    
-Fix this problem by selecting CONFIG_LTO so that the U-Boot proper
-size can be reduced.
-    
-Also, to prevent this same problem to happen in the future, use
-CONFIG_BOARD_SIZE_LIMIT, which can detect the overlap in build-time.
-    
-CONFIG_BOARD_SIZE_LIMIT is calculated as follows:
+Commit 68dcbdd594d4 ("ARM: imx: Add weak default reset_cpu()") caused
+the 'reset' command in U-Boot to not cause a board reset.
 
-CONFIG_BOARD_SIZE_LIMIT = CONFIG_ENV_OFFSET - u-boot-img.dtb offset
-CONFIG_BOARD_SIZE_LIMIT = 0xc000 - 69 * 1024
-CONFIG_BOARD_SIZE_LIMIT = 715766
+Fix it by switching to the watchdog driver model via sysreset, which
+is the preferred method for implementing the watchdog reset.
 
 Signed-off-by: Fabio Estevam <festevam@denx.de>
 ---
 Changes since v1:
-- Select LTO. (Tom)
+- None.
 
- configs/mx6sabresd_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+ arch/arm/dts/imx6qdl-sabresd-u-boot.dtsi | 9 +++++++++
+ configs/mx6sabresd_defconfig             | 3 +++
+ 2 files changed, 12 insertions(+)
 
+diff --git a/arch/arm/dts/imx6qdl-sabresd-u-boot.dtsi b/arch/arm/dts/imx6qdl-sabresd-u-boot.dtsi
+index 5c4101b76da2..9e9c4422f00e 100644
+--- a/arch/arm/dts/imx6qdl-sabresd-u-boot.dtsi
++++ b/arch/arm/dts/imx6qdl-sabresd-u-boot.dtsi
+@@ -9,6 +9,11 @@
+ 	aliases {
+ 		mmc1 = &usdhc3;
+ 	};
++	wdt-reboot {
++		compatible = "wdt-reboot";
++		wdt = <&wdog2>;
++		bootph-pre-ram;
++	};
+ };
+ 
+ &usdhc3 {
+@@ -18,3 +23,7 @@
+ &pinctrl_usdhc3 {
+ 	bootph-pre-ram;
+ };
++
++&wdog2 {
++	bootph-pre-ram;
++};
 diff --git a/configs/mx6sabresd_defconfig b/configs/mx6sabresd_defconfig
-index a90efe4a7786..d4fb55622cf1 100644
+index f19df607e7ae..69685f12eb10 100644
 --- a/configs/mx6sabresd_defconfig
 +++ b/configs/mx6sabresd_defconfig
-@@ -21,6 +21,9 @@ CONFIG_SPL_SERIAL=y
- CONFIG_SPL=y
- CONFIG_SPL_LIBDISK_SUPPORT=y
- CONFIG_PCI=y
-+CONFIG_LTO=y
-+CONFIG_HAS_BOARD_SIZE_LIMIT=y
-+CONFIG_BOARD_SIZE_LIMIT=715766
- CONFIG_FIT=y
- CONFIG_SPL_FIT_PRINT=y
- CONFIG_SPL_LOAD_FIT=y
+@@ -103,6 +103,8 @@ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_GPIO=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_MXC_UART=y
++CONFIG_SYSRESET=y
++CONFIG_SYSRESET_WATCHDOG=y
+ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+ CONFIG_MXC_SPI=y
+@@ -129,3 +131,4 @@ CONFIG_IMX_HDMI=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
+ CONFIG_BMP_16BPP=y
++CONFIG_IMX_WATCHDOG=y
 -- 
 2.34.1
 
