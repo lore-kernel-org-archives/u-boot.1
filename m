@@ -4,70 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78B4EC48295
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 23:02:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7DB3C4828F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 23:54:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00D7687EAC;
-	Sat,  3 Feb 2024 00:02:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id D427887ED6;
+	Sat,  3 Feb 2024 00:54:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="lGHNw2Ir";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jUX9s7en";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80F3E87E91; Sat,  3 Feb 2024 00:02:00 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3D3A687ED7; Sat,  3 Feb 2024 00:54:29 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A422387EA1
- for <u-boot@lists.denx.de>; Sat,  3 Feb 2024 00:01:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D49E87ED0
+ for <u-boot@lists.denx.de>; Sat,  3 Feb 2024 00:54:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 9435ACE2E9F;
- Fri,  2 Feb 2024 23:01:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id CDF83C433C7;
- Fri,  2 Feb 2024 23:01:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1706914913;
- bh=Gix55upFRpTbj0sEOU5okjE0nTUWV9r1SFeRhjZR+ao=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=lGHNw2Ir2O2hyySN8NiBEQpZQQasOZR8ieYTjxEUFKsqelmOh0eokaXEVaanvvSk2
- ec9ZwZIEvzFyM3T+k/a7fZhzbokpC0BhK17NCArIEvEIwVwoJKbXu6VSJhd1BJxtMu
- JEM2lZ3xMW5BUYMBg/LRAoAEn6oS08AgASaGdzm2Z2o92Ee4Bt+6RTRdJZBXhKAIo4
- qjQavO4waNbugv4kKcrhK7MId+O62bpIEQRcio3aIXjywbkGXR6WmlR0P90BdW+85G
- eVngwupDvnc1OI9NERRBzV9WZ6ETj1roDHDuQzX7xYHy9yNWnvnnAG1ppWBHAAsCzx
- c5tOl1e0S+SFg==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id B6193C48298;
- Fri,  2 Feb 2024 23:01:53 +0000 (UTC)
-From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
-Date: Sat, 03 Feb 2024 07:01:55 +0800
-Subject: [PATCH 2/3] usb: dwc3: replace argument mode with child ofnode
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=shawn.guo@linaro.org
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-55f19a3ca7aso7259013a12.1
+ for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 15:54:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1706918066; x=1707522866; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TkgOcOwUjVFCYTmHvZJC/mu2YJ+6vSJb6WSKt/9CX6M=;
+ b=jUX9s7enrsjs7JiJYFwxJ+V/13Mty74ldFrnSvJRtQfZJcCeu5vfr7EilMZ38Iln+u
+ N5cFDrzaX1nBSP1vuKT94pdNp+Ng2j4Uk+VN5HzkgoyXpCAE5mJCU3XxxLhtOC/THheG
+ zAb7iM++/JQBXRGt01b6wtLWGysquOSOi+un+KgHeVlDviB8AWRgrDqT6Bs5J9J5UUov
+ qtDycGxp2kxVEy4Gwh7LLq78rmeihScmeYHRBHcQs/yyXlSWFJq1TFVmv3ZYAuQ805A3
+ Z8AXFeQ9chBlZG05aUkCeL5+CFXa7oqhsxm48i68XE2aTtm4snuFRSxRpoNDrhvFFAUx
+ tM6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706918066; x=1707522866;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TkgOcOwUjVFCYTmHvZJC/mu2YJ+6vSJb6WSKt/9CX6M=;
+ b=wC9arFzhFVw0opE3RThJpC54jtaT9sjAvKTQChhkIA2mFw8M/pBDFcYvtKzZ8Ik1K9
+ SIXYFUg2LzqI69i5ZbUBmwaqN+RzqUAM+h6ORGDrRBcN6eKM8vwioKN36dnL6y8gIUU0
+ GWXvbDEd6CmJd1+HoP68QOT+xU6qG3YSx2xliMoF0O8/JRUpyFnylIK5+bxGE8yiZJnQ
+ ILc5S4hgHobjqgn5oPCQbivjjPx85/g/lHmo3+tQhDZvRdu16HLUPb9V4PHVuQMoPweG
+ JZXp/bVkCGVK1DZS7bJUzDt4evxP5w8P26I/0aJ25CM1eEKqVgPoNtXrFITbtpD3swKW
+ Yewg==
+X-Gm-Message-State: AOJu0YyOeWRP6zfTpi82+D+3klA+NtcPDZ9NM4x3wvStYTG3UHfaLA6Z
+ JeV97MoSN0GA+XnOz+ZpooezpLGrJSLBEM/gIdLTcG0oLR7qCooStGDEnKEyx4E4dtL38FfhSKa
+ H1zmWajF3IwMlxlhxOUzDRpbSez0w8y8SAHdlLA==
+X-Google-Smtp-Source: AGHT+IHKNPxApyc5YI0zFq3SQXO+nUu05MdScTwMBb69hyMLv+1bhMwZ308S67DfMcCvn+RMxR+ulAy9KS3YLY0msXo=
+X-Received: by 2002:a17:907:77d8:b0:a36:c275:55e4 with SMTP id
+ kz24-20020a17090777d800b00a36c27555e4mr111007ejc.15.1706918066515; Fri, 02
+ Feb 2024 15:54:26 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240203-hisi-dwc3-v1-2-448050c7b690@outlook.com>
-References: <20240203-hisi-dwc3-v1-0-448050c7b690@outlook.com>
-In-Reply-To: <20240203-hisi-dwc3-v1-0-448050c7b690@outlook.com>
-To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
- Sean Anderson <sean.anderson@seco.com>
-Cc: u-boot@lists.denx.de, Yang Xiwen <forbidden405@outlook.com>
-X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1706914914; l=2458;
- i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
- bh=fQ5QzLzIEP736TZtMfCMIaL07xA0BFdi1MT0kuti3Io=;
- b=srurWlm0t/x9iDhboAy+9ZAk7JMDkr6dHaCL93HafrQ3rCjJzO+zoRTK9GNSa0llUqiJnDFVT
- 3bFIdzp5XmNBPSQbW+o0MI6iqhhwJp4TXlw3NcbTOSHeGVvNNJ+0Cot
-X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
- pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
-X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
- auth_id=67
-X-Original-From: Yang Xiwen <forbidden405@outlook.com>
+References: <20240202214429.2185563-1-igor.opaniuk@foundries.io>
+In-Reply-To: <20240202214429.2185563-1-igor.opaniuk@foundries.io>
+From: Shawn Guo <shawn.guo@linaro.org>
+Date: Sat, 3 Feb 2024 07:54:22 +0800
+Message-ID: <CAAQ0ZWRFak3LwsSVCxi7sd6AmpJsegdv6A4Y=piwb8eStLTjLw@mail.gmail.com>
+Subject: Re: [PATCH] poplar: add myself as co-maintainer
+To: Igor Opaniuk <igor.opaniuk@foundries.io>
+Cc: u-boot@lists.denx.de, Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,84 +84,24 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: forbidden405@outlook.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Yang Xiwen <forbidden405@outlook.com>
+On Sat, Feb 3, 2024 at 5:44=E2=80=AFAM Igor Opaniuk <igor.opaniuk@foundries=
+.io> wrote:
+>
+> Add myself as co-maintainer for Poplar board, as I'm currently
+> working on it (re-testing releases, addressing issues etc).
+>
+> CC: Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
+> CC: Shawn Guo <shawn.guo@linaro.org>
+> Signed-off-by: Igor Opaniuk <igor.opaniuk@foundries.io>
 
-child ofnode is more useful and can be used to query a lot of other
-props of child device. dr_mode can be also queried from it.
+Acked-by: Shawn Guo <shawn.guo@linaro.org>
 
-Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
----
- drivers/usb/dwc3/dwc3-generic.c | 12 ++++--------
- drivers/usb/dwc3/dwc3-generic.h |  3 +--
- 2 files changed, 5 insertions(+), 10 deletions(-)
+I'm not actively working on poplar any more, so maybe remove me in the mean=
+time.
 
-diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-index 6fb2de8a5a..d892042b91 100644
---- a/drivers/usb/dwc3/dwc3-generic.c
-+++ b/drivers/usb/dwc3/dwc3-generic.c
-@@ -272,8 +272,7 @@ U_BOOT_DRIVER(dwc3_generic_host) = {
- };
- #endif
- 
--void dwc3_imx8mp_glue_configure(struct udevice *dev, int index,
--				enum usb_dr_mode mode)
-+void dwc3_imx8mp_glue_configure(struct udevice *dev, ofnode child, int index)
- {
- /* USB glue registers */
- #define USB_CTRL0		0x00
-@@ -323,8 +322,7 @@ struct dwc3_glue_ops imx8mp_ops = {
- 	.glue_configure = dwc3_imx8mp_glue_configure,
- };
- 
--void dwc3_ti_glue_configure(struct udevice *dev, int index,
--			    enum usb_dr_mode mode)
-+void dwc3_ti_glue_configure(struct udevice *dev, ofnode child, int index)
- {
- #define USBOTGSS_UTMI_OTG_STATUS		0x0084
- #define USBOTGSS_UTMI_OTG_OFFSET		0x0480
-@@ -348,6 +346,7 @@ enum dwc3_omap_utmi_mode {
- 	u32 reg;
- 	u32 utmi_mode;
- 	u32 utmi_status_offset = USBOTGSS_UTMI_OTG_STATUS;
-+	enum usb_dr_mode mode = usb_get_dr_mode(child);
- 
- 	struct dwc3_glue_data *glue = dev_get_plat(dev);
- 	void *base = map_physmem(glue->regs, 0x10000, MAP_NOCACHE);
-@@ -577,12 +576,9 @@ int dwc3_glue_probe(struct udevice *dev)
- 	}
- 
- 	while (child) {
--		enum usb_dr_mode dr_mode;
--
--		dr_mode = usb_get_dr_mode(dev_ofnode(child));
- 		device_find_next_child(&child);
- 		if (ops && ops->glue_configure)
--			ops->glue_configure(dev, index, dr_mode);
-+			ops->glue_configure(dev, dev_ofnode(child), index);
- 		index++;
- 	}
- 
-diff --git a/drivers/usb/dwc3/dwc3-generic.h b/drivers/usb/dwc3/dwc3-generic.h
-index 40902c8923..46c14a338b 100644
---- a/drivers/usb/dwc3/dwc3-generic.h
-+++ b/drivers/usb/dwc3/dwc3-generic.h
-@@ -22,8 +22,7 @@ struct dwc3_glue_data {
- 
- struct dwc3_glue_ops {
- 	int (*glue_get_ctrl_dev)(struct udevice *parent, ofnode *node);
--	void (*glue_configure)(struct udevice *dev, int index,
--			       enum usb_dr_mode mode);
-+	void (*glue_configure)(struct udevice *parent, ofnode node, int index);
- };
- 
- int dwc3_glue_bind(struct udevice *parent);
-
--- 
-2.43.0
-
+Shawn
