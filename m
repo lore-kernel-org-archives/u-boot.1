@@ -4,62 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F4126C4828D
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 02:35:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C6D6C47258
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 03:41:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01B3D87C5B;
-	Fri,  2 Feb 2024 03:35:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 265D787C43;
+	Fri,  2 Feb 2024 04:40:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="c/Pjf5vA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ErwMzqex";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2070C87BD1; Fri,  2 Feb 2024 03:35:29 +0100 (CET)
-Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 083F487C56; Fri,  2 Feb 2024 04:40:58 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 857BD87C5B
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 03:35:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 0C21287C13
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 04:40:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=o451686892@gmail.com
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-55fe4534e9bso650384a12.0
+ for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 19:40:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706845255; x=1707450055; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=R/3tHTcCN3MIp8LBSYugW4ibtJfSxTYY2RjoawTjdj4=;
+ b=ErwMzqex1VTk+QzAuqAlneRXae59EFsDHxGMWS0dN+lAgirUiZgYGOgChLfIcnzGh3
+ 9RX3WNjRsBWv80HyM5vfXvjm4QkNSAUN+3oxoEPuirctbDW9FHjByPlEp/gDnht2eWlt
+ ea5YMSuuD1A7y1VXQPbZEnMXD95wWos4biBBgNu0h9wae+nNVB9eSntcFbsQrTFs0Hal
+ 8rsegejIDyNtsG3uyiLe6eUdDhhLEuKI5+ZArnRX6VpU8CKHKEjFgmItixzJb3whouHX
+ D/OilKt7CRf9v6ylTa9oNzewyKsfPlsbHJ4q1FTlp795WtmakToXxw2+uixB8Q5eGBkh
+ Zm3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706845255; x=1707450055;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=R/3tHTcCN3MIp8LBSYugW4ibtJfSxTYY2RjoawTjdj4=;
+ b=V97Zf+9SYP4c0qkoNqr4DIpDrjGV5BpwFEi9MqzBmzb+GiCQ15frL52iUffM2nBDAc
+ WLgyW0Ypx2p4vz/YY93cqQEV28Be7aQ3RlqKe3/HHYonYxzJa1Pl2ydHMaqUbUEojnnO
+ k1zf0ER0Dbdr44AIa91zbI0jf9bznoNcUGmvZcQ9Ur/BLVKcfkEsAKhvHvEZ065DTtek
+ WeRFFc0cRLseMjaGrcxiosb8J/cJDok2ToMjHr5R1GuMr6odfYaLOijJfPQSbizWN38B
+ R7RdX9v3HeREj9ciIqEupgwBZ4qzjZ+fmp9wfLQu6H9pc8kPMjwkAi/2UAJ19SltKJvU
+ pB+w==
+X-Gm-Message-State: AOJu0Yy2zLt3MycCRU/3kI4bQ8e/E8BsXDpkLBErpsM0F6rfKfZ1zLN9
+ VxwhYf3PAQNiuWLYoXBj0kwpsIgPeZbulpcpWwppLlawHGA+LObBkOFa24EujkCLgQlMdJJ0/Ua
+ dnVkBqVf87yNvDLWHKwQrlLwaOSk=
+X-Google-Smtp-Source: AGHT+IFogxAuFj2879nqafGGtSrKCdefyWIAfCwa9Us02Z0x1h4UnxZXgkPxBG8qxOn6ZBqVI7B1Gswqs2KFTQ+HPNU=
+X-Received: by 2002:aa7:c888:0:b0:55f:99:c895 with SMTP id
+ p8-20020aa7c888000000b0055f0099c895mr376034eds.20.1706845254627; 
+ Thu, 01 Feb 2024 19:40:54 -0800 (PST)
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1706841325;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=mar/eM3RYzFapEDxLou61jAOiXlT4I3x5BTIOIF9xmY=;
- b=c/Pjf5vArG07iy2jauoJk4Zf/LTThTUQqzMs68weRSYQKeQ/v6EHMLgaVTxf5YFlZlPZnH
- Yz86YvKhDygoqUDL4bq4/tACLKaa5g2r+BJnrVvXXjzGh0LFf80txCTbP9INrovgFiBRJM
- EDLqUJoDxAZDAQWyAiu8gSjlyNk3nkRjLBVSm24A96O9m55TALGlghW4Pu6to9QxcXCEyU
- 08lrR1b+UbwrPua4GQO+yI/4Dku6PY8Av3ZqXrUoTGSh4v+gwWa0GZtJeRnSnSZetOr6KM
- m6JRq2FltBOxKxqhGl2u8bATMegPgJk91kooRQGxtOGiWkOntaJq21lRPYwntw==
-Date: Fri, 02 Feb 2024 03:35:24 +0100
-From: Dragan Simic <dsimic@manjaro.org>
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Shantur Rathore <i@shantur.com>, marex@denx.de, bmeng.cn@gmail.com,
- clamor95@gmail.com, Hector Martin <marcan@marcan.st>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v3] common: usb-hub: Reset hub port before scanning
-In-Reply-To: <20240202001218.63b4e9c3@minigeek.lan>
-References: <20231209181057.331815-1-i@shantur.com>
- <20240130140123.445f368a@donnerap.manchester.arm.com>
- <CABEcMwWs-_ZzTdt=kRc05JwC=okA9FyvrAVK1rTLa=erTu9N3g@mail.gmail.com>
- <20240201164604.13315fa6@donnerap.manchester.arm.com>
- <CABEcMwXYw9L957wykfZ5HcC5V88hbgEDZ-E_fYL9LhG_hyxb=g@mail.gmail.com>
- <20240202001218.63b4e9c3@minigeek.lan>
-Message-ID: <0f15ffcce8c15b86e5a44a3255ef265c@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+References: <20240131141426.34926-1-o451686892@gmail.com>
+ <20240131141426.34926-2-o451686892@gmail.com>
+ <20240201114030.GA112745@e130802.arm.com>
+In-Reply-To: <20240201114030.GA112745@e130802.arm.com>
+From: Weizhao Ouyang <o451686892@gmail.com>
+Date: Fri, 2 Feb 2024 11:40:43 +0800
+Message-ID: <CAHk0Houhd4q0Z9R-D8AfJjz3y5R8Ktx=HNB2+tX8XMo2H_YP4A@mail.gmail.com>
+Subject: Re: [PATCH v3 1/3] firmware: psci: Fix bind_smccc_features psci check
+To: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
+ Etienne Carriere <etienne.carriere@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Peng Fan <peng.fan@nxp.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jens Wiklander <jens.wiklander@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,141 +93,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Andre,
+Hi Abdellatif,
 
-On 2024-02-02 01:12, Andre Przywara wrote:
-> On Thu, 1 Feb 2024 18:35:28 +0000 Shantur Rathore <i@shantur.com> 
-> wrote:
->> On Thu, Feb 1, 2024 at 4:46 PM Andre Przywara <andre.przywara@arm.com> 
->> wrote:
->> > On Thu, 1 Feb 2024 09:39:54 +0000 Shantur Rathore <i@shantur.com> wrote:
->> > > On Tue, Jan 30, 2024 at 2:01 PM Andre Przywara <andre.przywara@arm.com> wrote:
->> > > > On Sat,  9 Dec 2023 18:10:56 +0000 Shantur Rathore <i@shantur.com> wrote:
->> > > > > Currently when a hub is turned on, all the ports are powered on.
->> > > > > This works well for hubs which have individual power control.
->> > > > >
->> > > > > For the hubs without individual power control this has no effect.
->> > > > > Mostly in these scenarios the hub port is powered before the USB
->> > > > > controller is enabled, this can lead to some devices in unexpected
->> > > > > state.
->> > > > >
->> > > > > With this patch, we explicitly reset the port while powering up hub
->> > > > > This resets the port for hubs without port power control and has
->> > > > > no effect on hubs with port power control as the port is still off.
->> > > > >
->> > > > > Before this patch AMicro AM8180 based NVME to USB adapter won't be
->> > > > > detected as a USB3.0 Mass Storage device but with this it works as
->> > > > > expected.
->> > > > >
->> > > > > Tested working after this patch:
->> > > > > 1. AMicro AM8180 based NVME to USB Adapter
->> > > > > 2. Kingston DataTraveler 3.0
->> > > > > 3. GenesysLogic USB3.0 Hub
->> > > > >
->> > > > > The drives were tested while connected directly and via the hub.
->> > > >
->> > > > so this broke USB operation on some Allwinner boards. The ports still
->> > > > enumerate correctly, but no devices are detected. With mainline
->> > > > (containing this patch), and a USB stick connected:
->> > > > starting USB...
->> > > > Bus usb@5200000: USB EHCI 1.00
->> > > > Bus usb@5200400: USB OHCI 1.0
->> > > > scanning bus usb@5200000 for devices... 1 USB Device(s) found
->> > > > scanning bus usb@5200400 for devices... 1 USB Device(s) found
->> > > >        scanning usb for storage devices... 0 Storage Device(s) found
->> > > >
->> > > > With this patch here reverted:
->> > > > starting USB...
->> > > > Bus usb@5200000: USB EHCI 1.00
->> > > > Bus usb@5200400: USB OHCI 1.0
->> > > > scanning bus usb@5200000 for devices... 2 USB Device(s) found
->> > > > scanning bus usb@5200400 for devices... 1 USB Device(s) found
->> > > >        scanning usb for storage devices... 1 Storage Device(s) found
->> > > >
->> > > > I have no clue why this happens, there is no discrete hub anywhere in this
->> > > > setup, so I guess the code runs for the root hub here?
->> > > > I am attaching a log with DEBUG enabled for common/usb_hub.c, for both
->> > > > cases.
->> > > >
->> > > > Any clues, debug suggestions, or even a fix are warmly welcome.
->> > > >
->> > >
->> > > Which USB disk are you using? Is it a USB 2.0 disk ?
->> > > Can you try with any other USB disk to confirm?
->> >
->> > Yes, this was some USB 2.0 memory stick, on an USB 2.0 port.
->> > Most sunxi boards only have USB 2.0, but there is one SoC with USB 3.0, I
->> > will try some combinations later tonight.
->> 
->> That would be awesome.
->> We need to test
->> 
->> USB 3.0 and 2.0 ports with USB 3.0 and 2.0 drives.
-> 
-> So I had some mixed and apparently inconsistent results:
-> - On the Pine-H64 (H6 SoC with USB 3.0 + USB 2.0) it worked with
->   mainline, but only after I applied some pending sunxi USB PHY
->   regulator patches. This is an unrelated issue, those patches
->   are needed to enable USB 3.0 support on that board (shared regulator
->   conflict).
->   I tested a USB 2.0 and a USB 3.0 drive in both kind of slots, with
->   and without the patch.
-> - On the OrangePi Zero 3 (H616 SoC with USB 2.0 only), the USB 3.0
->   drive would not work with mainline. A USB 2.0 drive was fine.
->   Applying your patch below fixed that problem, now both drives worked.
+On Thu, Feb 1, 2024 at 7:40=E2=80=AFPM Abdellatif El Khlifi
+<abdellatif.elkhlifi@arm.com> wrote:
+>
+> Hi Weizhao,
+>
+> > -     if (request_psci_features(ARM_SMCCC_ARCH_FEATURES) =3D=3D
+> > +     if (request_psci_features(ARM_SMCCC_VERSION) =3D=3D
+> >           PSCI_RET_NOT_SUPPORTED)
+> >               return 0;
+> >
+> > +     if (invoke_psci_fn(ARM_SMCCC_VERSION, 0, 0, 0) < ARM_SMCCC_VERSIO=
+N_1_1)
+> > +             return 0;
+>
+> It makes sense to me, thanks.
+>
+> > diff --git a/include/linux/arm-smccc.h b/include/linux/arm-smccc.h
+> > index f44e9e8f93..da3d29aabe 100644
+> > --- a/include/linux/arm-smccc.h
+> > +++ b/include/linux/arm-smccc.h
+> > @@ -55,8 +55,14 @@
+> >  #define ARM_SMCCC_QUIRK_NONE         0
+> >  #define ARM_SMCCC_QUIRK_QCOM_A6              1 /* Save/restore registe=
+r a6 */
+> >
+> > +#define ARM_SMCCC_VERSION            0x80000000
+> >  #define ARM_SMCCC_ARCH_FEATURES              0x80000001
+> >
+> > +#define ARM_SMCCC_VERSION_1_0                0x10000
+> > +#define ARM_SMCCC_VERSION_1_1                0x10001
+> > +#define ARM_SMCCC_VERSION_1_2                0x10002
+> > +#define ARM_SMCCC_VERSION_1_3                0x10003
+>
+> Apart from ARM_SMCCC_VERSION_1_1, are the other ARM_SMCCC_VERSION_1_x def=
+ines needed ?
 
-Let me interject, please...
+I'm trying to synchronize with linux kernel, it might be a bit odd to
+add only one version.
 
-Huh, this (mih)behavior with the tested OrangePi Zero 3 is really
-strange.  As we know, a USB 3.0 drive plugged into a USB 2.0 port
-should behave just like a USB 2.0 drive, using the separate set
-of pins inside the connector.
+BR,
+Weizhao
 
-If possible, performing some additional testing with another USB
-3.0 drive would be quite interesting.  Could it be that something
-is wrong with the USB 2.0 receptacle on your OrangePi Zero 3,
-mechanically or electrically?
-
-> - On the OrangePi Zero (H3 with USB 2.0 only), it worked with and
->   without the patch below, with both the USB 2.0 and USB 3.0 drive.
-> - On the BananaPi M64 (A64 with USB 2.0 only and an onboard USB 2.0
->   hub) it also worked in all cases: with and without the patch, USB 2.0
->   and USB 3.0 drive.
-> 
-> So the good news is: with the patch below it worked in all cases, with
-> all drives in all slots, on all boards. With current mainline some
-> drives don't work at least on the board with the H616 SoC.
-> 
-> I cannot really say if that makes sense, and the results above maybe
-> more per board than per SoC (different VBUS supply), but would
-> pragmatically tend to use the patch, feel free to add my Tested-by:
-> when sending:
-> 
-> Tested-by: Andre Przywara <andre.przywara@arm.com>
-> 
-> Just one tiny thing:
-> 
->> Once you have tested it, can you please try the patch below
->> 
->>         debug("enabling power on all ports\n");
->>         for (i = 0; i < dev->maxchild; i++) {
->> -               usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESET);
->> -               debug("Reset : port %d returns %lX\n", i + 1, 
->> dev->status);
->> +               if (usb_hub_is_superspeed(hub)) {
-> 
-> this must be: usb_hub_is_superspeed(dev)
-> 
-> So many thanks for that patch, that seem to have fixed it for me - even
-> though I don't understand why. But then again I only have superficial
-> USB knowledge.
-> 
->> +                       usb_set_port_feature(dev, i + 1, 
->> USB_PORT_FEAT_RESET);
->> +                       debug("Reset : port %d returns %lX\n", i + 1,
->> dev->status);
->> +               }
->>                 usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_POWER);
->>                 debug("PowerOn : port %d returns %lX\n", i + 1, 
->> dev->status);
->>         }
+>
+> Cheers,
+> Abdellatif
