@@ -4,80 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00587C4828F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 13:51:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31130C47DB3
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 13:53:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9D7887B7F;
-	Fri,  2 Feb 2024 14:51:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 906CB8784B;
+	Fri,  2 Feb 2024 14:53:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dIfBXJMd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gTLU0RF+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 480E787B7F; Fri,  2 Feb 2024 14:51:35 +0100 (CET)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id C138187968; Fri,  2 Feb 2024 14:53:50 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17C42877BB
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 14:51:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7742B877BB
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 14:53:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-604191522daso20734387b3.1
- for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 05:51:33 -0800 (PST)
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-296424aaa95so448984a91.3
+ for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 05:53:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1706881891; x=1707486691; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=a+AKf5Us8AL6QEs+i2cjyXi2mnORovjO0efCuGV6JCM=;
- b=dIfBXJMdpYU/Mni/nYQdINgofVp9V4nQbRYOtN8y1n5DTI3ZJRxRxMUiL7n5cjyBS6
- TYu3qkhWAzsMT672fMMvB/CBHcHvT0MzrpQIfj702mTDFbHAnisvd+rci/yD5gXNYX+e
- ZuWESuDwrONhWndZQVZFnZyuYWPQfczpadb94=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706881891; x=1707486691;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1706882027; x=1707486827; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=a+AKf5Us8AL6QEs+i2cjyXi2mnORovjO0efCuGV6JCM=;
- b=Il492O46v3hM2YtQ/kSwQ2+iAuYf0XB8MiTkJDndwuycyelfv7psfctgDBkxQmUJ4t
- ta8PrrFkQrj5JQ5gXFnrVVvQv3/Msek864OAYmv1Kz/a6XSjEL2JRWKawaEKkGr24/ap
- rq8WQzf1Asp6wK2zU1cmVn9XTxFg9nelfEgmbRa89TakItUt3E/+TMiKV5yZN+POzPJG
- lIlyvHYWObeR2m281CQrS8LZfwkRyZ+rjoTknzhcN9HHj7c/RPffdVxGu11IoNmHJ/j6
- RriEZgwQMwu3ZBPKWK3fTfaEVAcnZdiU64HqmpAUit9NRvHJJUHYOjH5Tj/8rHFuzsnS
- /ucQ==
-X-Gm-Message-State: AOJu0YxUwJ0nMg278SAd9Wn2+YLkSvB/ASQiLkt7JsJUNIf3m5wbi1SA
- 1yrl2tDfvKgkOuYjoguwN1W0NsXmsL0u2ls79kxFfo0PCOTKK7DM/QJsb5JceM0=
-X-Google-Smtp-Source: AGHT+IGKQX+F8MGUSRKWn2KpD6DORO3rpoHep4FJlwZ/iRdeLlLgxoy63tj/a9420RO8DcVRznpr7g==
-X-Received: by 2002:a0d:e28a:0:b0:5f6:d2ee:2686 with SMTP id
- l132-20020a0de28a000000b005f6d2ee2686mr8837801ywe.2.1706881891683; 
- Fri, 02 Feb 2024 05:51:31 -0800 (PST)
-X-Forwarded-Encrypted: i=0;
- AJvYcCXMYLwgvijP1m44Z8jXrSK52TSDYi07D7eHYk0xHTh4CF5xEVHu7HEWjAodbvQPhTa8f8lpjwbfU/kZkaLoc9AQu2gX9lRs7vnW+zseMCyij6hWEtXGLd9pFn1uT/vse3Mwnm11LgCc5X4=
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- fl13-20020a05690c338d00b005ffc15cea80sm410415ywb.26.2024.02.02.05.51.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Feb 2024 05:51:29 -0800 (PST)
-Date: Fri, 2 Feb 2024 08:51:28 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: sbabic@denx.de, uboot-imx@nxp.com, u-boot@lists.denx.de,
- Fabio Estevam <festevam@denx.de>
-Subject: Re: [PATCH 1/2] mx6sabresd: Fix U-Boot corruption after saving the
- environment
-Message-ID: <20240202135128.GA1152441@bill-the-cat>
-References: <20240202014849.4022787-1-festevam@gmail.com>
+ bh=ROAdJXM+Sgvkrra5Mam+ok7i2m2NneVY7QgMYnUvKbs=;
+ b=gTLU0RF+oqXX1M3NiHOkDGMifb91RGKlY9LHDQ+Ot/TlasmZyOlIrDq0DuRcVfgPlt
+ GI8U8H//PluSWjgIotX9z2huhvMMk52LDtjSc3hOKZ95hdaIrir4sEacCFEL9A5Z54ss
+ dAJCDkXWs2vvr8CwsCdpNJJMtTFDCtccMlOF9wFtPUriD6MLqYye/6eRtcW6tpvwZttF
+ fv3CYO9c7/aSzEXDSko0wh61PdCxxlu3M/TYDvQ3WiCGCJlVLAAL/YJJTrFAeiPxrr34
+ x2V8v8Bc5mpvj6egY3+Zs+5OHSGGFpy1VjbTOINiCcEwxggnFSAt2IvD7Uf7Eqwzesdx
+ a2Qw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706882027; x=1707486827;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ROAdJXM+Sgvkrra5Mam+ok7i2m2NneVY7QgMYnUvKbs=;
+ b=j8ypmH9ghA9wyL5t2rxM4xqtbnQYQNhy2w+8Df7+TEYvsSvNXTPv1gBwkaz58s1sNl
+ 38HB+Zix0PNRN92gFg0n7cE6AM8zD0pEOE2Rguh8PWx3rHAP8Xeek6Eud67FiWCDUReU
+ YHoYtEIQpC8duGvGXpFKJVzZhW+l/ejW4lHg6kxsXQkQEKRovqmaJcVW07/TM6LAXSw6
+ y3QuhMQN9mr95yWZt3lV/y9TzwFXQv1qPjXm+7npqRQOHnjGcergBAflPfa2n6pr3kIp
+ 3ilx/lRoJlNytDi8s6WPIz3TqxpVBQTWgHEMEPpmTLXLgP7bHYeMPC+91xo5AcIifQLG
+ Ed9w==
+X-Gm-Message-State: AOJu0YwvjhMDD0+qgSC+uM22q91qJnG5xLCliETqakciDfyTV7xsthMP
+ ZX6FCP+D7BGXp+QBX2bf9olsZmykigr/cUm3jWJS9l41FlDZY1yejRXZAu4uY5JN8uiQtFx/RQ7
+ VPBvtKTwFEUfbi7/6zs3DdVw3Gb0=
+X-Google-Smtp-Source: AGHT+IGw6aDXYDiJtRSdSHQvU9qoU4x042gA4wOJmtiVOuMhC644LAy1Nd/uTRgkhQNjmSDq4SX9YOM2pjtjjWyhJVU=
+X-Received: by 2002:a17:90a:b117:b0:296:1ac3:c573 with SMTP id
+ z23-20020a17090ab11700b002961ac3c573mr4410264pjq.15.1706882026591; Fri, 02
+ Feb 2024 05:53:46 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="SupZ30t2rJxGm7Pm"
-Content-Disposition: inline
-In-Reply-To: <20240202014849.4022787-1-festevam@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <1705043234-39185-1-git-send-email-ye.li@nxp.com>
+In-Reply-To: <1705043234-39185-1-git-send-email-ye.li@nxp.com>
+From: Adam Ford <aford173@gmail.com>
+Date: Fri, 2 Feb 2024 07:53:35 -0600
+Message-ID: <CAHCN7xLCyitv+WF2kjcvsnmTjBVQO-RgfSYVre9fS6YTEgfxZw@mail.gmail.com>
+Subject: Re: [PATCH] arm: imx: imx8m: Enable the SError exception
+To: Ye Li <ye.li@nxp.com>
+Cc: sbabic@denx.de, u-boot@lists.denx.de, peng.fan@nxp.com, uboot-imx@nxp.com, 
+ thomas.schaefer@kontron.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,60 +88,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---SupZ30t2rJxGm7Pm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Feb 01, 2024 at 10:48:48PM -0300, Fabio Estevam wrote:
-
-> From: Fabio Estevam <festevam@denx.de>
->=20
-> U-Boot binary has grown in such a way that it goes beyond the reserved
-> area for the environment variables.
->    =20
-> Running "saveenv" and rebooting the board causes U-Boot to hang because
-> of this overlap.
->    =20
-> Fix this problem by increasing the CONFIG_ENV_OFFSET.
->    =20
-> Also, to prevent this same problem to happen in the future, use
-> CONFIG_BOARD_SIZE_LIMIT, which can detect the overlap in build-time.
->    =20
-> CONFIG_BOARD_SIZE_LIMIT is calculated as follows:
->=20
-> CONFIG_BOARD_SIZE_LIMIT =3D CONFIG_ENV_OFFSET - u-boot-img.dtb offset
-> CONFIG_BOARD_SIZE_LIMIT =3D 0xd000 - 69 * 1024
-> CONFIG_BOARD_SIZE_LIMIT =3D 781312
->=20
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
+On Fri, Jan 12, 2024 at 1:07=E2=80=AFAM Ye Li <ye.li@nxp.com> wrote:
+>
+> To work with commit 2f3c920(imx8m: workaround ROM serror),
+> we need to enable the SError exception and install vector in SPL.
+>
+> Signed-off-by: Ye Li <ye.li@nxp.com>
+> Reviewed-by: Peng Fan <peng.fan@nxp.com>
 > ---
->  configs/mx6sabresd_defconfig | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
+>  arch/arm/mach-imx/imx8m/Kconfig | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/arch/arm/mach-imx/imx8m/Kconfig b/arch/arm/mach-imx/imx8m/Kc=
+onfig
+> index 67da198..88ef732 100644
+> --- a/arch/arm/mach-imx/imx8m/Kconfig
+> +++ b/arch/arm/mach-imx/imx8m/Kconfig
+> @@ -11,14 +11,17 @@ config IMX8MQ
+>         bool
+>         select IMX8M
+>         select CLK_IMX8MQ
+> +       select ARMV8_SPL_EXCEPTION_VECTORS
+>
+>  config IMX8MM
+>         bool
+>         select IMX8M
+> +       select ARMV8_SPL_EXCEPTION_VECTORS
+>
+>  config IMX8MN
+>         bool
+>         select IMX8M
+> +       select ARMV8_SPL_EXCEPTION_VECTORS
+>
+>  config IMX8MP
+>         bool
+> --
+> 2.7.4
+>
 
-I don't like when we have to move the environment like this, can we trim
-things down instead? Perhaps LTO?
+Would this not also work for 8MP?  If that's the case, should the
+section of ARMV8_SPL_EXCEPTION_VECTORS fall under "config IMX8M" for
+simplicity?
 
---=20
-Tom
-
---SupZ30t2rJxGm7Pm
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmW881wACgkQFHw5/5Y0
-tyyPfQv9EzShBLp6DoElLl3Dkw0dKESYgJGr0h+MoGQxggeK16J8EjCbgdnsww8R
-uqAlj4hKqqXDZ7sYzfa/5tKwTBRsnVZYztFEEoLuHCsNKmVIDCLHgVy4OKOu4wb6
-TN/y7qdorChjPG0YhgboSsvoT/aIppvQTDjt1sG8XfhyuRBWi6+Egs6uUm1HKveW
-36HuQ2Yqvz7P6cjlXhv8NwZ9gSXOGIWRqRW/MF3EmyELJ3N9xG6oCjRlDDqgrIsX
-l0oJIWJqYGjuph/G6La+0OPUqNf8pGvR/3nbgQH9rwOF4AX0WdkSrnAMjJyZSmBP
-Lvo0ngC5i+VEegMBPfdUYmPKcaxSu1rJk29f4cmp3negqa7G0kvJNSPBXaIBXL9o
-dFODLGuA+SThn/cvMSj7R0yAcSE3dJkJ1b2EZGARgoJvPLaXWOUoaTKbubzFcBzX
-hOsxCDI2EawRWoieRmEnqYab1ad94ifEWc7m7iprZ+jj+lBZnLGbHXC6X57bJ3Uj
-6JK6Z0oo
-=Z57T
------END PGP SIGNATURE-----
-
---SupZ30t2rJxGm7Pm--
+adam
