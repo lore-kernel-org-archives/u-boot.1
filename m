@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61BAAC4828F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 20:45:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8EB1C4828F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 21:16:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AB9E87E38;
-	Fri,  2 Feb 2024 21:45:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DF78687E50;
+	Fri,  2 Feb 2024 22:16:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UWNkpnvc";
+	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="C6UESUI4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B528587E32; Fri,  2 Feb 2024 21:45:47 +0100 (CET)
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
- [IPv6:2607:f8b0:4864:20::42a])
+ id 6D11387E23; Fri,  2 Feb 2024 22:16:54 +0100 (CET)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73EE587E3A
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 21:45:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5615187E50
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 22:16:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=foundries.io
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mr.bossman075@gmail.com
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-6dddf4fc85dso2010598b3a.0
- for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 12:45:45 -0800 (PST)
+ spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2d090c83d45so6134061fa.3
+ for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 13:16:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706906744; x=1707511544; darn=lists.denx.de;
+ d=foundries.io; s=google; t=1706908611; x=1707513411; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OaEOEzaRSBs7xN2ARowr7ZlOyR5goZcbyOI8HKtddkM=;
- b=UWNkpnvcxmw/H8pFAis3xmNOa6+njUL4d3zrCEbN71kiyeeU/pbee2zUkTMVTo72bp
- 243y8Arhb3s06aV9j3+1h/3mnlDihoS3b7AI5f340wmcfu41d3g0h2ZyfUpoeCtuy/Fe
- skpOwd5fw9YURXoF4IvtU1jsJhUtnL9ZhAcb+TfNA6NR9zYmCnedVM8LXgKLvdcq8/qw
- SYcNE3n2Ia1ZAJXDR199RyjI/UJCbjefg5VCT6AxuBfQj7PQ8TEpKgP/pbhKez9icBiX
- pM/Bpm6iqGHc//lpXtjIsqI7trn1Qzt7n2CiYzsBs1qIq5oxx/dUgIAk3je8QExH4N+v
- DPeg==
+ bh=TDldGXpyVFPp0lYAcoUyEH13ld7qlh1GnYU0GUtnkq4=;
+ b=C6UESUI41pHjEk/sdO+XY0UVGn2P6MMT9u8XVP67rxQa43mnB0uxzCI8ElUpWs2SSw
+ mWzC9gsJVcbfEZGPPUGryuZMLPGECBCv3thcM/xIkmDhpsCoElNmnj+azPBrzrvZZtou
+ R5A9C21DDehLmz4rZ7SZP21C//M6fxpl1Re7kv3SDfNSosD7VbR3bwINn4uV7rwDuTS3
+ uRhKR715tl9zgNlvv6fo4IogTIjZhSBMAKwXFDitOzfq0XUkJeR7Ko1XTW0oSZAXDEz+
+ hztMibvKaiwZZsZ3TI7T7fVmGEVQKKLBAxbbJCOMbrcIt+vlVpxjKsw4Pv/vp1ndjaq4
+ jdJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706906744; x=1707511544;
+ d=1e100.net; s=20230601; t=1706908611; x=1707513411;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OaEOEzaRSBs7xN2ARowr7ZlOyR5goZcbyOI8HKtddkM=;
- b=wGCQWfKtjjOWxXhL5GWKeKXI0LV09IuHYa4FkukaaW7qFlcpdfDfMEqgEiC1s4/teN
- MKhMgmceNxa4FWKvfCo34R1z6RJAijSLol1kShaYZGTJ7ewUppRMUC8NyWwnuE609KZg
- s898V5TmPRKMpZFv6kCEicwqfZ2x4L4yzkwv9pwpgTXWQQwQVXKgSuJXLw8KXUDEfk9D
- zd3VuKmylKNbR4SGt9I5UGBFPQFBc6dx8DsHXCzWyLOZAs7OeFGw7UjVoovHiuzas7/6
- 60x+MvvW4gKtgAtJorcdXKOPaKlqje1J+c0B9Ocuz9wyGVo8QO5HZFdz4OFd/u+Kdp8X
- PQEg==
-X-Gm-Message-State: AOJu0YxBH7CDWqgxgFhT6REvbrAoRx+OSlEvFQLCox6wZqSn5ccf/kuw
- /SGotNFlSXVHuzeT6rNNw+sxXiG1ccyvx/UB8XIHonmt4Vj2NIPeW4G9YaxZKXGGLcs9KWigfov
- MWAjK9ZcqCYlIunbayXVanyxx/4Al4k3EqI8=
-X-Google-Smtp-Source: AGHT+IFHqILmPwug86wWXKWWq5H3SQXePErF1q/Hmbb9U4c/qPbi93NoO2ImCKuhMPYaqLo53DGYrMTcACRGzRrqUAg=
-X-Received: by 2002:a05:6a21:8cc1:b0:199:49cc:87e2 with SMTP id
- ta1-20020a056a218cc100b0019949cc87e2mr3405233pzb.56.1706906743644; Fri, 02
- Feb 2024 12:45:43 -0800 (PST)
+ bh=TDldGXpyVFPp0lYAcoUyEH13ld7qlh1GnYU0GUtnkq4=;
+ b=Y0yE7UQpn45Wyetj2srq+eD/jPbHJBIcCNRtkCkaKSseCT18SwQQ9cs+er66aPoS0t
+ H5WEYxdD+7HnZqYThi1P8psqt7+MZ4a9DF0bUEZex3/WiPah2EgTU2nj5L5VCl7BZk0m
+ 0sATSPgtIOn5ciDnkg1VzbYi73Ru3sjYLzUVdzsnH6VufihJBIYnJJyArW2PkpoGn5Fv
+ DeNlX3QHmNvQg1HmoiRRbFuIQ+HklKGjcUd6D1JYPeOFoTfWNU2J84p+a8tcOQXM/EUC
+ zrmdpHxjlV4e1JdPDFRixYOGPutRsKQYd2tJsrgHX/2/oGsSHfzy9mn72LMWMohjq7Gq
+ TxWQ==
+X-Gm-Message-State: AOJu0YyaT7vwARfdqQIIq96A4BlRCoU3w1OsneH4B8qdQtnVNKbnSQE1
+ 6nJL13Lou17/0Sp6oOzX/wTphfBh0hkqFMW6kS1k410ThfkT1mQpLDwc4gF1b4oeXiow6F8Jv2O
+ u9vg/E5h3iKntQV6nsxtK1iHvY2gjYEAQ4uLZAQ==
+X-Google-Smtp-Source: AGHT+IEnDmFt27mZRSnCol1JtX/JdPezHI6rQLTZpqzTSYrsLFHr/rEhbwacu7SsuJdxjKBlHVFkcX4HA+7+Uxug4UQ=
+X-Received: by 2002:a2e:850b:0:b0:2d0:7613:5fd9 with SMTP id
+ j11-20020a2e850b000000b002d076135fd9mr1968092lji.31.1706908611474; Fri, 02
+ Feb 2024 13:16:51 -0800 (PST)
 MIME-Version: 1.0
-References: <20240201150004.1343366-1-Mr.Bossman075@gmail.com>
- <76dff51f-c9d5-477e-8ab2-0832073d2f33@gmx.de>
-In-Reply-To: <76dff51f-c9d5-477e-8ab2-0832073d2f33@gmx.de>
-From: Jesse T <mr.bossman075@gmail.com>
-Date: Fri, 2 Feb 2024 15:45:07 -0500
-Message-ID: <CAJFTR8Rs4nvUQRKjX3=iXxq-wkUc97BC++o=ew+4BH1A9U-duw@mail.gmail.com>
-Subject: Re: [PATCH v1] doc: imx: imxrt1170: Document imxrt1170-evk board
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Giulio Benetti <giulio.benetti@benettiengineering.com>, 
- Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Tom Rini <trini@konsulko.com>, 
- Alon Bar-Lev <alon.barlev@gmail.com>, u-boot@lists.denx.de
+References: <20240202160405.4126192-1-festevam@gmail.com>
+ <CAL6CDMFC0tmQgE1jWP0_s1uKVBpSH_9U9xqs9sPY4Mv2u9R_4Q@mail.gmail.com>
+In-Reply-To: <CAL6CDMFC0tmQgE1jWP0_s1uKVBpSH_9U9xqs9sPY4Mv2u9R_4Q@mail.gmail.com>
+From: Igor Opaniuk <igor.opaniuk@foundries.io>
+Date: Fri, 2 Feb 2024 22:16:39 +0100
+Message-ID: <CAL6CDMG0Rawp0BuYvzrA=g5dyYQ3YFgjftymaWKsp31gMXRCyw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] mx6sabresd: Fix U-Boot corruption after saving the
+ environment
+To: Fabio Estevam <festevam@gmail.com>
+Cc: sbabic@denx.de, trini@konsulko.com, uboot-imx@nxp.com, 
+ u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -91,85 +90,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Feb 2, 2024 at 3:40=E2=80=AFAM Heinrich Schuchardt <xypron.glpk@gmx=
-.de> wrote:
+On Fri, Feb 2, 2024 at 9:34=E2=80=AFPM Igor Opaniuk <igor.opaniuk@foundries=
+.io> wrote:
 >
-> On 2/1/24 16:00, Jesse Taube wrote:
-> > Add documentation for imxrt1170-evk.
+> On Fri, Feb 2, 2024 at 5:04=E2=80=AFPM Fabio Estevam <festevam@gmail.com>=
+ wrote:
 > >
-> > Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
+> > From: Fabio Estevam <festevam@denx.de>
+> >
+> > U-Boot binary has grown in such a way that it goes beyond the reserved
+> > area for the environment variables.
+> >
+> > Running "saveenv" and rebooting the board causes U-Boot to hang because
+> > of this overlap.
+> >
+> > Fix this problem by selecting CONFIG_LTO so that the U-Boot proper
+> > size can be reduced.
+> >
+> > Also, to prevent this same problem to happen in the future, use
+> > CONFIG_BOARD_SIZE_LIMIT, which can detect the overlap in build-time.
+> >
+> > CONFIG_BOARD_SIZE_LIMIT is calculated as follows:
+> >
+> > CONFIG_BOARD_SIZE_LIMIT =3D CONFIG_ENV_OFFSET - u-boot-img.dtb offset
+> > CONFIG_BOARD_SIZE_LIMIT =3D 0xc000 - 69 * 1024
+> > CONFIG_BOARD_SIZE_LIMIT =3D 715766
+> >
+> > Signed-off-by: Fabio Estevam <festevam@denx.de>
 > > ---
-> >   doc/board/nxp/imxrt1170-evk.rst | 42 ++++++++++++++++++++++++++++++++=
-+
-> >   1 file changed, 42 insertions(+)
-> >   create mode 100644 doc/board/nxp/imxrt1170-evk.rst
+> > Changes since v1:
+> > - Select LTO. (Tom)
 > >
-> > diff --git a/doc/board/nxp/imxrt1170-evk.rst b/doc/board/nxp/imxrt1170-=
-evk.rst
-> > new file mode 100644
-> > index 0000000000..4acccdcc93
-> > --- /dev/null
-> > +++ b/doc/board/nxp/imxrt1170-evk.rst
-> > @@ -0,0 +1,42 @@
-> > +.. SPDX-License-Identifier: GPL-2.0+
-> > +
-> > +imxrt1170-evk
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +
-> > +How to use U-Boot on NXP i.MXRT1170 EVK
-> > +---------------------------------------
-> > +
-> > +- Build U-Boot for i.MXRT1170 EVK:
-> > +
-> > +.. code-block:: bash
-> > +
-> > +   $ make mrproper
-> > +   $ make imxrt1170-evk_defconfig
-> > +   $ make
-> > +
-> > +This will generate the SPL image called SPL and the u-boot.img.
-> > +
-> > +- Flash the SPL image into the micro SD card:
-> > +
-> > +.. code-block:: bash
-> > +
-> > +   $sudo dd if=3DSPL of=3D/dev/sdX bs=3D1k seek=3D1 conv=3Dnotrunc; sy=
-nc
+> >  configs/mx6sabresd_defconfig | 3 +++
+> >  1 file changed, 3 insertions(+)
+> >
+> > diff --git a/configs/mx6sabresd_defconfig b/configs/mx6sabresd_defconfi=
+g
+> > index a90efe4a7786..d4fb55622cf1 100644
+> > --- a/configs/mx6sabresd_defconfig
+> > +++ b/configs/mx6sabresd_defconfig
+> > @@ -21,6 +21,9 @@ CONFIG_SPL_SERIAL=3Dy
+> >  CONFIG_SPL=3Dy
+> >  CONFIG_SPL_LIBDISK_SUPPORT=3Dy
+> >  CONFIG_PCI=3Dy
+> > +CONFIG_LTO=3Dy
+> > +CONFIG_HAS_BOARD_SIZE_LIMIT=3Dy
+> > +CONFIG_BOARD_SIZE_LIMIT=3D715766
+> >  CONFIG_FIT=3Dy
+> >  CONFIG_SPL_FIT_PRINT=3Dy
+> >  CONFIG_SPL_LOAD_FIT=3Dy
+> > --
+> > 2.34.1
+> >
+> Reviewed-by: Igor Opaniuk <igor.opaniuk@foundries.io>
 >
-> This location conflicts with GPT partitioning. Does the SoC support an
-> alternative location for the SPL?
+> btw, from my experience, the same issue will probably occur again in futu=
+re,
+> especially when the current U-Boot size is already close to the defined l=
+imit
+> (yes, with this patch it will be reported during compile time, but still)=
+.
+>
+> Have you considered adjusting the boot image layout instead
+> (moving CONFIG_ENV_OFFSET, so unlikely
+> U-Boot image will overlap again) to tackle feature problems?
+I've just checked the previous patch version, where
+you addressed that exactly with CONFIG_ENV_OFFSET change and
+following suggestions/objections from Tom, so sorry for the noise :)
 
-Unfortunately, it doesn't seem to, but it will still work as the
-secondary table entry is intact.
-As this is abuse of the GUID Partition Table it's probably best to just use=
- MBR
+>
+> --
+> Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
+>
+> Igor Opaniuk
+> Senior Software Engineer, Embedded & Security
+> E: igor.opaniuk@foundries.io
+> W: www.foundries.io
 
-Thanks,
-Jesse Taube
->
-> Best regards
->
-> Heinrich
->
-> > +
-> > +- Flash the u-boot.img image into the micro SD card:
-> > +
-> > +.. code-block:: bash
-> > +
-> > +   $sudo dd if=3Du-boot.img of=3D/dev/sdX bs=3D1k seek=3D128 conv=3Dno=
-trunc; sync
-> > +
-> > +- Jumper settings::
-> > +
-> > +   SW1: 1 0 1 0
-> > +   SW2: 0 0 0 0  0 0 0 0  1 0 0 0
-> > +
-> > +where 0 means bottom position and 1 means top position (from the
-> > +switch label numbers reference).
-> > +
-> > +- Connect the USB cable between the EVK and the PC for the console.
-> > +  The USB console connector is the one close the ethernet connector
-> > +
-> > +- Insert the micro SD card in the board, power it up and U-Boot messag=
-es should come up.
->
+
+--=20
+Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
+
+Igor Opaniuk
+Senior Software Engineer, Embedded & Security
+E: igor.opaniuk@foundries.io
+W: www.foundries.io
