@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F889C4828F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 16:04:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5663EC48291
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 16:04:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DE0D87BF2;
-	Fri,  2 Feb 2024 17:04:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DFDE687C3D;
+	Fri,  2 Feb 2024 17:04:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="StkhgVmB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q/0ByGB4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60F2287BF2; Fri,  2 Feb 2024 17:04:18 +0100 (CET)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id 7B72887C15; Fri,  2 Feb 2024 17:04:20 +0100 (CET)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A65C87186
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 17:04:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D8A187BF1
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 17:04:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1d722740622so4049775ad.0
- for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 08:04:16 -0800 (PST)
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1d97d086756so662575ad.1
+ for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 08:04:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706889854; x=1707494654; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1706889856; x=1707494656; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FTvyaINkirJySMHirPeZLKqUxFNBlnKeiZ2Cggxua8E=;
- b=StkhgVmBq3ekSk6ueXyn+V1jlBXmN1ma+Q223fDcRhLsuPA/LBkltGPnJBgp8SXXxJ
- PLjnVQnNCnv5iZZNgAcyH1vzGh+g2HAjJGHeUkZpemtOBzTTc2TN74hLeFaHSZywYM6d
- 9pMRsO2JRDhrlQ56vX7Ob6UmX1DrLnClXOPf2aSD+gnLDmlljQG3erFhBOZ1bSPNsK+3
- aLghdgLfpoelVBGd121zv8tVIPD8lSdTaVwrSuHZhRxEn+enYAGFm+qDe6lbyckT0SYU
- aJlG98A69oxKvXbGhwb6+wXSplDvmmERBWbvX3IuBhdmL58nJk/2Wfj1yoTIDS9R+4CM
- chQw==
+ bh=OGbaT51S6dZ/iUgH4jNh2ugjc/NvPEGM9rEU36lf/8A=;
+ b=Q/0ByGB4u7D+VMeFqw2+x752dpp9ayCkBAFy5DfSsl1+Su05Q2B0/4vqIHcW4qUYv5
+ pvW0A4K9B0TY7ShvBgazLvwLas9AvztziSnsxJmcep58lw5448gWbjFnPxLXe7XCl+zF
+ wGB/D0GmIdhg0zxG1NgTIzthOoG3gGOjbrMNYiKvbu9dbAXS6YM0MVJuNFLih5K5+52t
+ ATXC8MHJkbk9IhNKHJKh1Ou8adgbC7se07SVpq28+T62cuzIJSS8+C+rABxY74v638EH
+ qVs3+corpNeWs/WeqDC9n5/wVqY6ufbflUcGWIZobngTUeAEsQxD/P38bQayXrlONAaD
+ bSOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706889854; x=1707494654;
+ d=1e100.net; s=20230601; t=1706889856; x=1707494656;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FTvyaINkirJySMHirPeZLKqUxFNBlnKeiZ2Cggxua8E=;
- b=LHi9mur6bU/SxyNpNHilZAyuwnGVWr8NuUbQjtzrg7lYEBX+KyRPzwfaxmMSWDacLb
- MYm4XqpxvQ0QDU1/LROwrHi8N7qzg8M0Qgyz2foqGrvV59uXyr2eq2OKL3homMaVCrXT
- JJodniUaRpR5D9GkkukcIrTpFhqL0FBc1Q6V92hqoLrR2PcF5n9bBUjFnavb0Oax/lYy
- xn2qaPcMD84nTD7ptpHWQuzZL/veYQ7mO7wfg5RAwd4Ebgnn9FVxIV9NicEtPqhEpqYX
- 8dSkAt1u2SwA9QOT4rOn/1SE1dp8CtNpDZZtaF9UUdvky7V2vHINtvALoaIehFTBzdL4
- 9rog==
-X-Gm-Message-State: AOJu0Yy7Na8elCjd2Ii1+O6kBzOORT41adxzTIFQ2yPeRTZt113C1VW2
- yvqfM4R19TRV8uMHA3yfsQnVTObaWnIVDSt3IqUqK6GgF0eKy+II
-X-Google-Smtp-Source: AGHT+IEUbl8RkiP8sw2KHJN0S/eBBD7gT12TYv2wwu1qCM3oJN10IujMqQVLAqUOqlD9yFgmPC7EMA==
-X-Received: by 2002:a17:902:ee85:b0:1d8:f06a:9b6f with SMTP id
- a5-20020a170902ee8500b001d8f06a9b6fmr6446267pld.1.1706889854376; 
- Fri, 02 Feb 2024 08:04:14 -0800 (PST)
+ bh=OGbaT51S6dZ/iUgH4jNh2ugjc/NvPEGM9rEU36lf/8A=;
+ b=Q+jXXV0AqnoEHVjkimUWzTTlzIKALQdfZJk6FprIfDf9BtLYQ3GTM/3FeXi6fCRuHC
+ e1f0orzVxB7A9eCHr1PUrE/xnCXHX6O64lKam2DBY61SXrPPM5m6MdIMylOeM9YADyx7
+ mCLnuFQAG34NakSlNFV37NMEZw5UOP/2fnXhjLyL8jxEI6M05VAmjKPD2odvpJxoaYrD
+ djUjuRAIjoXNCG3HSOAhGZfAFBn1Yzw2OtxqUx/YhR9JyHuzOsCodUEYKR8MSRFEKrSO
+ VRYdERi2TPHjIpyoIYwH6WW+C/ES5OlGWGuHmD9siQd4wOTfxst0n+BleEeh7zgXTBLS
+ ec+A==
+X-Gm-Message-State: AOJu0YzmG8pNDdR1D558wXziIo7Ca6+hmfHLEEaqfQQCL3u2nqmG0kZ6
+ nZTnp3aY31xU5sY7CBej+Osx3/lmWcUkD++hdBEB/BBH20BFs13j
+X-Google-Smtp-Source: AGHT+IE3Am5h/+ljLNWYfN+GN8R4nM55RVG3vPEm9yIihZ3zVflx2iSiSWAFjvSOfMtr5WUOpvOosw==
+X-Received: by 2002:a17:902:ec89:b0:1d8:eac8:5e00 with SMTP id
+ x9-20020a170902ec8900b001d8eac85e00mr6400593plg.4.1706889856446; 
+ Fri, 02 Feb 2024 08:04:16 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCU0W4xk/E+OS5aqMawteFrw9ih7Sxa4kulCpZTPEqn/uAhOWNF0J5bYnR5nvOSSpGW7YnpclK38yO+sFtQfVux+ucc9EYJ9d015ZhA5UiDi+8qxFfnbG1+pYItTuhMlczX/ThDBWigEVZyn
+ AJvYcCXJbJq6XSafWgOhOp7lHBgyoTtLBmVz2nrrKpc0FF+YeKj3IbjOj9HrbwKAB+S6LcycGL4D4CNbWShps3OZghFTTlysrlsCSzePQ8dt2pTB+emoQxKLnnInO9lJDmuEKm0go/Rf9xPqv2zV
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:fa09:d56a:f130:f280])
  by smtp.gmail.com with ESMTPSA id
- v4-20020a170902b7c400b001d8b8bf8e44sm1780086plz.92.2024.02.02.08.04.12
+ v4-20020a170902b7c400b001d8b8bf8e44sm1780086plz.92.2024.02.02.08.04.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Feb 2024 08:04:14 -0800 (PST)
+ Fri, 02 Feb 2024 08:04:16 -0800 (PST)
 From: Fabio Estevam <festevam@gmail.com>
 To: sbabic@denx.de,
 	trini@konsulko.com
 Cc: uboot-imx@nxp.com, u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
-Subject: [PATCH v2 2/3] mx6sabresd: Convert to watchdog driver model
-Date: Fri,  2 Feb 2024 13:04:04 -0300
-Message-Id: <20240202160405.4126192-2-festevam@gmail.com>
+Subject: [PATCH v2 3/3] mx6sabresd: Remove board_phy_config()
+Date: Fri,  2 Feb 2024 13:04:05 -0300
+Message-Id: <20240202160405.4126192-3-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240202160405.4126192-1-festevam@gmail.com>
 References: <20240202160405.4126192-1-festevam@gmail.com>
@@ -96,63 +96,73 @@ X-Virus-Status: Clean
 
 From: Fabio Estevam <festevam@denx.de>
 
-Commit 68dcbdd594d4 ("ARM: imx: Add weak default reset_cpu()") caused
-the 'reset' command in U-Boot to not cause a board reset.
+With Ethernet DM in place, there is no longer the need for having
+the board_phy_config() anymore.
+    
+Remove it.
 
-Fix it by switching to the watchdog driver model via sysreset, which
-is the preferred method for implementing the watchdog reset.
+Confirmed that TFTP transfer still works fine without board_phy_config().
 
 Signed-off-by: Fabio Estevam <festevam@denx.de>
 ---
 Changes since v1:
-- None.
+- Newly introduced.
 
- arch/arm/dts/imx6qdl-sabresd-u-boot.dtsi | 9 +++++++++
- configs/mx6sabresd_defconfig             | 3 +++
- 2 files changed, 12 insertions(+)
+ board/freescale/mx6sabresd/mx6sabresd.c | 34 -------------------------
+ 1 file changed, 34 deletions(-)
 
-diff --git a/arch/arm/dts/imx6qdl-sabresd-u-boot.dtsi b/arch/arm/dts/imx6qdl-sabresd-u-boot.dtsi
-index 5c4101b76da2..9e9c4422f00e 100644
---- a/arch/arm/dts/imx6qdl-sabresd-u-boot.dtsi
-+++ b/arch/arm/dts/imx6qdl-sabresd-u-boot.dtsi
-@@ -9,6 +9,11 @@
- 	aliases {
- 		mmc1 = &usdhc3;
- 	};
-+	wdt-reboot {
-+		compatible = "wdt-reboot";
-+		wdt = <&wdog2>;
-+		bootph-pre-ram;
-+	};
- };
+diff --git a/board/freescale/mx6sabresd/mx6sabresd.c b/board/freescale/mx6sabresd/mx6sabresd.c
+index b558a596dff8..bb066a5d36c3 100644
+--- a/board/freescale/mx6sabresd/mx6sabresd.c
++++ b/board/freescale/mx6sabresd/mx6sabresd.c
+@@ -7,7 +7,6 @@
  
- &usdhc3 {
-@@ -18,3 +23,7 @@
- &pinctrl_usdhc3 {
- 	bootph-pre-ram;
- };
-+
-+&wdog2 {
-+	bootph-pre-ram;
-+};
-diff --git a/configs/mx6sabresd_defconfig b/configs/mx6sabresd_defconfig
-index f19df607e7ae..69685f12eb10 100644
---- a/configs/mx6sabresd_defconfig
-+++ b/configs/mx6sabresd_defconfig
-@@ -103,6 +103,8 @@ CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_DM_SERIAL=y
- CONFIG_MXC_UART=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_WATCHDOG=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_MXC_SPI=y
-@@ -129,3 +131,4 @@ CONFIG_IMX_HDMI=y
- CONFIG_SPLASH_SCREEN=y
- CONFIG_SPLASH_SCREEN_ALIGN=y
- CONFIG_BMP_16BPP=y
-+CONFIG_IMX_WATCHDOG=y
+ #include <image.h>
+ #include <init.h>
+-#include <net.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/imx-regs.h>
+ #include <asm/arch/iomux.h>
+@@ -254,39 +253,6 @@ int board_mmc_init(struct bd_info *bis)
+ }
+ #endif
+ 
+-static int ar8031_phy_fixup(struct phy_device *phydev)
+-{
+-	unsigned short val;
+-
+-	/* To enable AR8031 ouput a 125MHz clk from CLK_25M */
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x7);
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0xe, 0x8016);
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x4007);
+-
+-	val = phy_read(phydev, MDIO_DEVAD_NONE, 0xe);
+-	val &= 0xffe3;
+-	val |= 0x18;
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0xe, val);
+-
+-	/* introduce tx clock delay */
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0x1d, 0x5);
+-	val = phy_read(phydev, MDIO_DEVAD_NONE, 0x1e);
+-	val |= 0x0100;
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, val);
+-
+-	return 0;
+-}
+-
+-int board_phy_config(struct phy_device *phydev)
+-{
+-	ar8031_phy_fixup(phydev);
+-
+-	if (phydev->drv->config)
+-		phydev->drv->config(phydev);
+-
+-	return 0;
+-}
+-
+ #if defined(CONFIG_VIDEO_IPUV3)
+ static void disable_lvds(struct display_info_t const *dev)
+ {
 -- 
 2.34.1
 
