@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04885C47258
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 05:38:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C64C5C47258
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 05:42:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5808B87D14;
-	Fri,  2 Feb 2024 06:38:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 1C45B87D38;
+	Fri,  2 Feb 2024 06:42:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Dh6doJiC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="o/YyKuM3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7595A87D14; Fri,  2 Feb 2024 06:38:11 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 567BE87CEA; Fri,  2 Feb 2024 06:42:28 +0100 (CET)
+Received: from mail-ua1-x92d.google.com (mail-ua1-x92d.google.com
+ [IPv6:2607:f8b0:4864:20::92d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB6DA87BDB
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 06:38:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 02D3787D63
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 06:42:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahiroy@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 7DA7ACE2971
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 05:38:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 97F61C43399
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 05:38:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1706852285;
- bh=E2GR5XDHSPikBayOkcLuyu7j9MvZrOlxRVXQ5WJoxgs=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=Dh6doJiCFcemsy8VlbfxgnCRA+eZWVPGbFB9UvG3bHNtDfM8WoaTSxgSEJm1/M4oZ
- NdIop9HwGOQRrcyEozvi7PvbrwZrLc4NPoNc6iIv3Wi070m+J0EtNvoUvJyT2Utehl
- 9ifhg0bvSFE7DARAleCceFpuIa0hv8hLzqq09n5etBFQ3Sfw1JvJz/HPhx8GRWymno
- h5lHFXJo40UBto6r48dmQCmkOC2ewLwdY8Mr27kCm1UPNFuBfASI8W2SCCS+WAKNnX
- VyheKGVwxtFxh6xnIKEejK2h9gbVuEDBM3WwaEG5THoyp7WUS5tfgQUCfAlseHTM0n
- TkVo2+HWX30XA==
-Received: by mail-lf1-f45.google.com with SMTP id
- 2adb3069b0e04-50eac018059so2118349e87.0
- for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 21:38:05 -0800 (PST)
-X-Gm-Message-State: AOJu0YwRMi9TCZFI2io/Qg7ujbLjUodMPQxPIrli/WBMjTKlsv5OhXgv
- rGG9KgV9cN1mD2g+g5CVKYggLDXJySDGgOl3FOTeK1tBiwF24q9PYhpetWz5ibULXDeTl937qwR
- 2QgyDJuTOQuz4MN6CDSxR0dAsXmQ=
-X-Google-Smtp-Source: AGHT+IEx5d3cL+SHteHuJJiPnd5pqIM+E+Jcy3+p18zXc92ZL6sviKC9fFLdsRcahqJ5y84jQK7dxuxpkrNT7J8dh8U=
-X-Received: by 2002:a19:6702:0:b0:511:341b:ff94 with SMTP id
- b2-20020a196702000000b00511341bff94mr578145lfc.26.1706852283931; Thu, 01 Feb
- 2024 21:38:03 -0800 (PST)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x92d.google.com with SMTP id
+ a1e0cc1a2514c-7ce603b9051so871059241.2
+ for <u-boot@lists.denx.de>; Thu, 01 Feb 2024 21:42:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1706852544; x=1707457344; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Zrv1uHB8+MWS/SjvNnzNXUaXTd2rYYBUPHShc3L8pHo=;
+ b=o/YyKuM3XNlg/kWzAAWKMUAFfuUfxknyX3Llt3ZDQWGxjjrqCag51MmbaWqlquerJR
+ j93dEU2PP6DrQgelSwyNuus6P+t7toZOc9nV++j6etDSu3oO5p+haRBXxK++rkpoqTPy
+ RHc8++IfJxHlRgiie/2/GpScXeXR0+DHBve8O8nJbwtTWch+iCFg4fImmehhP4tuSE4x
+ 4k3ylJBTNP3ugBfFbawEBhayLCngE4brT1G3oyDCs2r86tYIfSJFnMnyY8QHygG34QJg
+ OniuEUx2bHNEn4F5l95h6S6lrWSRv1p5bmxx4CChS6nC8XfQ9IjhndWKfxEPE8BF6Evu
+ v37A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706852544; x=1707457344;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Zrv1uHB8+MWS/SjvNnzNXUaXTd2rYYBUPHShc3L8pHo=;
+ b=NIjQ4AwdjZ7mmKm7B0vF9duo8FKABbWxbcAz7MnWCs7lr47yYcGO4qiVkrkDL9ln1j
+ RnyCJbkG/OCLHTgzeug1iYULu077+Az2y2LhPpNVLvCadjJldqmzMcU1zpH5+SlqPWMj
+ vqg83G3FTaupGf2Uw3wpidIxQNbxCnrKMus52e0hTeITIf0G0vIR6CE7p3l1iaNb67V0
+ YQ3RPC63AzsVl8NW9a43GMBg9xqi2Cri2RwIJj5DMcSGMEwc+Ov+cHhuzAhxzjyxoEdw
+ eVzU9Ep5svNWprJNRgngrbhF/6jq3I+tTx8FwaxQ0zMw8T+YyrB70TwlbNdARPurZuE0
+ +yMg==
+X-Gm-Message-State: AOJu0Yx33Hgz4Wde9uh6MJNERqoyZnlewJ6eN5WVxzoi0GT5aXMzqIRL
+ 0dhL82CRhYOnCe1153s1vLI/bCDQNAnSYKTHttMxtnDoZQ0qMJeG1Fem71yv6uWJnrFfE2qNltj
+ FAki9xaKimOnkpWpfbNUOJ6UylG9MPBr2W7NleQ==
+X-Google-Smtp-Source: AGHT+IFN2oZ8+8aG+LJtc22mIFPsRVuYqTZwTAB0ZWXiynsk75lQlIkGMgbPpZp6y5vMl7ptwxPopWOmk1iU6xQytJA=
+X-Received: by 2002:a05:6102:518:b0:46a:faf9:9bd3 with SMTP id
+ l24-20020a056102051800b0046afaf99bd3mr1135391vsa.29.1706852544641; Thu, 01
+ Feb 2024 21:42:24 -0800 (PST)
 MIME-Version: 1.0
-References: <20231202035511.487946-1-sjg@chromium.org>
- <20231202035511.487946-3-sjg@chromium.org>
- <20231213121353.GA31326@willie-the-truck>
- <CAFLszTjfmSx1YMqzb2TsQf7sP4KrcQB=X7DY_HxRQp0J5HAppQ@mail.gmail.com>
- <CAK7LNAQRCDC03e=TVO=k4FuD2a2RdTy7yLr3UptQjVCX7pM1CA@mail.gmail.com>
- <20240109143349.GR1610741@bill-the-cat>
- <CAFLszTjwhy24UiT6kUJABMC1Xn0h9Q1q9fYpZZJg9DX8Vss9cA@mail.gmail.com>
- <CAFLszTjPAHd6RdO1mvatXC=yRS+h=sgJ_pMdyEnkROTx7yRpog@mail.gmail.com>
- <CAK7LNARsY6-rrx=sNFq6oFqpqf0s5S_=3DrUsCOS7zF0BXcoTg@mail.gmail.com>
- <CAL_JsqLYB0D5wAfedsb6tQp4EmD1AROgxiCncwO7gvA2p1C6Lg@mail.gmail.com>
- <CAK7LNAR-3rL6=YdhRRXB9dz+94y2yHTA=9mF4p7OPj7KExd7rg@mail.gmail.com>
- <CAL_JsqLeTDALoKBuk9r+4NGXo0pc9LbK6bhDiZET+=UHG60fEA@mail.gmail.com>
-In-Reply-To: <CAL_JsqLeTDALoKBuk9r+4NGXo0pc9LbK6bhDiZET+=UHG60fEA@mail.gmail.com>
-From: Masahiro Yamada <masahiroy@kernel.org>
-Date: Fri, 2 Feb 2024 14:37:27 +0900
-X-Gmail-Original-Message-ID: <CAK7LNARSHiNGwHy4Tocbfkgyio1SbHV6sRJCA7yTrcTOXYEQHQ@mail.gmail.com>
-Message-ID: <CAK7LNARSHiNGwHy4Tocbfkgyio1SbHV6sRJCA7yTrcTOXYEQHQ@mail.gmail.com>
-Subject: Re: [PATCH v9 2/2] arm64: boot: Support Flat Image Tree
-To: Rob Herring <robh@kernel.org>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Will Deacon <will@kernel.org>, 
- linux-arm-kernel@lists.infradead.org, Ahmad Fatoum <a.fatoum@pengutronix.de>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Nicolas Schier <nicolas@fjasle.eu>,
- Catalin Marinas <catalin.marinas@arm.com>, Jonathan Corbet <corbet@lwn.net>, 
- Nathan Chancellor <nathan@kernel.org>, Nick Terrell <terrelln@fb.com>,
- linux-doc@vger.kernel.org, 
- linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org, 
- workflows@vger.kernel.org
+References: <20240130-b4-qcom-common-target-v3-0-e523cbf9e556@linaro.org>
+ <20240130-b4-qcom-common-target-v3-3-e523cbf9e556@linaro.org>
+ <CAFA6WYPveDeXdq70-jRV7ZM80g6kZN2=45gFgy92qv49xirfAw@mail.gmail.com>
+ <cefe7d3b-876e-4680-b9e2-6b612579b803@linaro.org>
+In-Reply-To: <cefe7d3b-876e-4680-b9e2-6b612579b803@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Fri, 2 Feb 2024 11:12:13 +0530
+Message-ID: <CAFA6WYNLGcLn+9S-m98by6Ym8nxna3yYnFDtH0frfgdnKWjznw@mail.gmail.com>
+Subject: Re: [PATCH v3 03/36] mmc: msm_sdhci: use modern clock handling
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Ramon Fried <rfried.dev@gmail.com>, 
+ Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,337 +96,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Feb 2, 2024 at 6:03=E2=80=AFAM Rob Herring <robh@kernel.org> wrote:
+On Thu, 1 Feb 2024 at 20:04, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> On Wed, Jan 31, 2024 at 8:09=E2=80=AFPM Masahiro Yamada <masahiroy@kernel=
-.org> wrote:
+>
+>
+> On 01/02/2024 08:19, Sumit Garg wrote:
+> > On Tue, 30 Jan 2024 at 19:35, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> >>
+> >> Use the clk_* helper functions and the correct property name for clocks.
 > >
-> > On Thu, Feb 1, 2024 at 7:03=E2=80=AFAM Rob Herring <robh@kernel.org> wr=
-ote:
-> > >
-> > > On Tue, Jan 30, 2024 at 3:16=E2=80=AFAM Masahiro Yamada <masahiroy@ke=
-rnel.org> wrote:
-> > > >
-> > > > On Fri, Jan 26, 2024 at 1:04=E2=80=AFAM Simon Glass <sjg@chromium.o=
-rg> wrote:
-> > > > >
-> > > > > Hi,
-> > > > >
-> > > > > On Wed, 17 Jan 2024 at 06:14, Simon Glass <sjg@chromium.org> wrot=
-e:
-> > > > > >
-> > > > > > Hi Masahiro, Tom,
-> > > > > >
-> > > > > > On Tue, 9 Jan 2024 at 07:33, Tom Rini <trini@konsulko.com> wrot=
-e:
-> > > > > > >
-> > > > > > > On Tue, Jan 09, 2024 at 11:01:42PM +0900, Masahiro Yamada wro=
-te:
-> > > > > > > > Hi Simon,
-> > > > > > > >
-> > > > > > > >
-> > > > > > > > On Wed, Jan 3, 2024 at 8:47=E2=80=AFAM Simon Glass <sjg@chr=
-omium.org> wrote:
-> > > > > > > > >
-> > > > > > > > > Hi Masahiro,
-> > > > > > > > >
-> > > > > > > > > On Wed, Dec 13, 2023 at 5:14=E2=80=AFAM Will Deacon <will=
-@kernel.org> wrote:
-> > > > > > > > > >
-> > > > > > > > > > On Fri, Dec 01, 2023 at 08:54:42PM -0700, Simon Glass w=
-rote:
-> > > > > > > > > > > Add a script which produces a Flat Image Tree (FIT), =
-a single file
-> > > > > > > > > > > containing the built kernel and associated devicetree=
- files.
-> > > > > > > > > > > Compression defaults to gzip which gives a good balan=
-ce of size and
-> > > > > > > > > > > performance.
-> > > > > > > > > > >
-> > > > > > > > > > > The files compress from about 86MB to 24MB using this=
- approach.
-> > > > > > > > > > >
-> > > > > > > > > > > The FIT can be used by bootloaders which support it, =
-such as U-Boot
-> > > > > > > > > > > and Linuxboot. It permits automatic selection of the =
-correct
-> > > > > > > > > > > devicetree, matching the compatible string of the run=
-ning board with
-> > > > > > > > > > > the closest compatible string in the FIT. There is no=
- need for
-> > > > > > > > > > > filenames or other workarounds.
-> > > > > > > > > > >
-> > > > > > > > > > > Add a 'make image.fit' build target for arm64, as wel=
-l. Use
-> > > > > > > > > > > FIT_COMPRESSION to select a different algorithm.
-> > > > > > > > > > >
-> > > > > > > > > > > The FIT can be examined using 'dumpimage -l'.
-> > > > > > > > > > >
-> > > > > > > > > > > This features requires pylibfdt (use 'pip install lib=
-fdt'). It also
-> > > > > > > > > > > requires compression utilities for the algorithm bein=
-g used. Supported
-> > > > > > > > > > > compression options are the same as the Image.xxx fil=
-es. For now there
-> > > > > > > > > > > is no way to change the compression other than by edi=
-ting the rule for
-> > > > > > > > > > > $(obj)/image.fit
-> > > > > > > > > > >
-> > > > > > > > > > > While FIT supports a ramdisk / initrd, no attempt is =
-made to support
-> > > > > > > > > > > this here, since it must be built separately from the=
- Linux build.
-> > > > > > > > > > >
-> > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > > > ---
-> > > > > > > > > > >
-> > > > > > > > > > > Changes in v9:
-> > > > > > > > > > > - Move the compression control into Makefile.lib
-> > > > > > > > > > >
-> > > > > > > > > > > Changes in v8:
-> > > > > > > > > > > - Drop compatible string in FDT node
-> > > > > > > > > > > - Correct sorting of MAINTAINERS to before ARM64 PORT
-> > > > > > > > > > > - Turn compress part of the make_fit.py comment in to=
- a sentence
-> > > > > > > > > > > - Add two blank lines before parse_args() and setup_f=
-it()
-> > > > > > > > > > > - Use 'image.fit: dtbs' instead of BUILD_DTBS var
-> > > > > > > > > > > - Use '$(<D)/dts' instead of '$(dir $<)dts'
-> > > > > > > > > > > - Add 'mkimage' details Documentation/process/changes=
-.rst
-> > > > > > > > > > > - Allow changing the compression used
-> > > > > > > > > > > - Tweak cover letter since there is only one clean-up=
- patch
-> > > > > > > > > > >
-> > > > > > > > > > > Changes in v7:
-> > > > > > > > > > > - Add Image as a dependency of image.fit
-> > > > > > > > > > > - Drop kbuild tag
-> > > > > > > > > > > - Add dependency on dtbs
-> > > > > > > > > > > - Drop unnecessary path separator for dtbs
-> > > > > > > > > > > - Rebase to -next
-> > > > > > > > > > >
-> > > > > > > > > > > Changes in v5:
-> > > > > > > > > > > - Drop patch previously applied
-> > > > > > > > > > > - Correct compression rule which was broken in v4
-> > > > > > > > > > >
-> > > > > > > > > > > Changes in v4:
-> > > > > > > > > > > - Use single quotes for UIMAGE_NAME
-> > > > > > > > > > >
-> > > > > > > > > > > Changes in v3:
-> > > > > > > > > > > - Drop temporary file image.itk
-> > > > > > > > > > > - Drop patch 'Use double quotes for image name'
-> > > > > > > > > > > - Drop double quotes in use of UIMAGE_NAME
-> > > > > > > > > > > - Drop unnecessary CONFIG_EFI_ZBOOT condition for hel=
-p
-> > > > > > > > > > > - Avoid hard-coding "arm64" for the DT architecture
-> > > > > > > > > > >
-> > > > > > > > > > > Changes in v2:
-> > > > > > > > > > > - Drop patch previously applied
-> > > > > > > > > > > - Add .gitignore file
-> > > > > > > > > > > - Move fit rule to Makefile.lib using an intermediate=
- file
-> > > > > > > > > > > - Drop dependency on CONFIG_EFI_ZBOOT
-> > > > > > > > > > > - Pick up .dtb files separately from the kernel
-> > > > > > > > > > > - Correct pylint too-many-args warning for write_kern=
-el()
-> > > > > > > > > > > - Include the kernel image in the file count
-> > > > > > > > > > > - Add a pointer to the FIT spec and mention of its wi=
-de industry usage
-> > > > > > > > > > > - Mention the kernel version in the FIT description
-> > > > > > > > > > >
-> > > > > > > > > > >  Documentation/process/changes.rst |   9 +
-> > > > > > > > > > >  MAINTAINERS                       |   7 +
-> > > > > > > > > > >  arch/arm64/Makefile               |   7 +-
-> > > > > > > > > > >  arch/arm64/boot/.gitignore        |   1 +
-> > > > > > > > > > >  arch/arm64/boot/Makefile          |   6 +-
-> > > > > > > > > > >  scripts/Makefile.lib              |  16 ++
-> > > > > > > > > > >  scripts/make_fit.py               | 291 ++++++++++++=
-++++++++++++++++++
-> > > > > > > > > > >  7 files changed, 334 insertions(+), 3 deletions(-)
-> > > > > > > > > > >  create mode 100755 scripts/make_fit.py
-> > > > > > > > > >
-> > > > > > > > > > I'll need Masahiro's Ack on the scripts/ changes before=
- I can take this
-> > > > > > > > > > one.
-> > > > > > > > >
-> > > > > > > > > Any thoughts on this request, please?
-> > > > > > > > >
-> > > > > > > > > Regards,
-> > > > > > > > > Simon
-> > > > > > > > >
-> > > > > > > >
-> > > > > > > >
-> > > > > > > >
-> > > > > > > > As I mentioned before, I am concerned with having
-> > > > > > > > the same "compatible" entries, with different contents,
-> > > > > > > > as you use the "compatible" string as an ID to selecting
-> > > > > > > > the target config node, right?
-> > > > > > > >
-> > > > > > > >
-> > > > > > > >
-> > > > > > > >
-> > > > > > > >
-> > > > > > > > $ fdtdump  arch/arm64/boot/image.fit
-> > > > > > > >
-> > > > > > > >         ...
-> > > > > > > >
-> > > > > > > >         conf-10 {
-> > > > > > > >             compatible =3D "tq,am642-tqma6442l-mbax4xxl",
-> > > > > > > > "tq,am642-tqma6442l", "ti,am642";
-> > > > > > > >             description =3D "TQ-Systems TQMa64xxL SoM on MB=
-ax4xxL carrier board";
-> > > > > > > >             fdt =3D "fdt-10";
-> > > > > > > >             kernel =3D "kernel";
-> > > > > > > >         };
-> > > > > > > >
-> > > > > > > >         ...
-> > > > > > > >
-> > > > > > > >         conf-25 {
-> > > > > > > >             compatible =3D "tq,am642-tqma6442l-mbax4xxl",
-> > > > > > > > "tq,am642-tqma6442l", "ti,am642";
-> > > > > > > >             description =3D "TQ-Systems TQMa64xxL SoM on MB=
-ax4xxL carrier board";
-> > > > > > > >             fdt =3D "fdt-25";
-> > > > > > > >             kernel =3D "kernel";
-> > > > > > > >         };
-> > > > > > >
-> > > > > > > I had asked Rob a while ago about if having the same compatib=
-le for two
-> > > > > > > functionally different machines is a feature, or a bug, and I=
- don't
-> > > > > > > think either of us fully agreed either way. I'd be leaning to=
-wards
-> > > > > > > saying the above example is a bug in the dts files, it's just=
- not been a
-> > > > > > > bug people have worried about before due to (sadly) how littl=
-e the
-> > > > > > > top-level compatible has been used.
-> > >
-> > > I much prefer being able to use compatibles over filenames.
-> > >
-> > > > > >
-> > > > > > Yes I believe this is a bug in the files.
-> > > > > >
-> > > > > > What should the script do in this case? Print a warning, perhap=
-s?
-> > > > >
-> > > > > Is there anything I should do here? Would a warning be helpful, o=
-r
-> > > > > just confusing?
-> > > >
-> > > >
-> > > >
-> > > > I do not think it is useful.
-> > > > You would almost always get a warning, and there is no way to fix i=
-t.
-> > >
-> > > The above case is due to overlays. Why would you have a FIT image wit=
-h
-> > > both a base tree and applied overlays?
+> > This still doesn't handle fixed clocks like in case of QCS404, upstream DT says:
 > >
+> >                 sdcc1: mmc@7804000 {
+> >                         compatible = "qcom,qcs404-sdhci", "qcom,sdhci-msm-v5";
+> >                         ...
+> >                         clocks = <&gcc GCC_SDCC1_AHB_CLK>,
+> >                                  <&gcc GCC_SDCC1_APPS_CLK>,
+> >                                  <&xo_board>;
+> >                         clock-names = "iface", "core", "xo";
+> >                         ...
+> >                 };
 > >
+> > Due to that "xo" fixed clock we get:
 > >
-> > Because they are different hardware.
+> > MMC:   clk_set_rate(clk=00000000ffaf7348, rate=19200000)
+> > Unknown clock id 0
+> > clk_set_rate(clk=00000000ffaf7598, rate=19200000)
+> > Unknown clock id 0
+> > clk_set_rate(clk=00000000ffb08868, rate=400000)
+> > mmc@7804000: 0
 >
-> Meaning the base tree is valid on its own without any overlays?
-
-
-
-If the base board is directly added to dtb-y, we need to assume
-it is valid as a standalone board.
-
-
-k3-am654-gp-evm-dtbs is a base of other composite DTBs, and
-it is also added to dtb-y.
-
-
-dtb-$(CONFIG_ARCH_K3) +=3D k3-am654-base-board.dtb
-
-
-
-Not only the base board.
-
-
-There are multiple composite DTBs that have the same compatible string.
-
-
-k3-am654-gp-evm-dtbs :=3D k3-am654-base-board.dtb
-k3-am654-base-board-rocktech-rk101-panel.dtbo
-k3-am654-evm-dtbs :=3D k3-am654-base-board.dtb k3-am654-icssg2.dtbo
-
-
-
-k3-am654-base-board.dtb, k3-am654-gp-evm-dtbs, and k3-am654-evm-dtbs
-have the same top-level compatible string.
-
-
-
-
+> Does MMC work? This doesn't look like a probe failure to me.
 >
-> > If FIT includes only base DTBs, how to use a base with extensions?
+
+Yeah it's not a breaking change for MMC but rather an annoying one.
+MMC works with following DT hack (as per my comments on the other
+patch) and defconfig change as follows:
+
+diff --git a/arch/arm/dts/qcs404.dtsi b/arch/arm/dts/qcs404.dtsi
+index 2721f32dfb71..5e6705e82837 100644
+--- a/arch/arm/dts/qcs404.dtsi
++++ b/arch/arm/dts/qcs404.dtsi
+@@ -730,9 +730,7 @@
+
+                tlmm: pinctrl@1000000 {
+                        compatible = "qcom,qcs404-pinctrl";
+-                       reg = <0x01000000 0x200000>,
+-                             <0x01300000 0x200000>,
+-                             <0x07b00000 0x200000>;
++                       reg = <0x01300000 0x200000>;
+                        reg-names = "south", "north", "east";
+                        interrupts = <GIC_SPI 208 IRQ_TYPE_LEVEL_HIGH>;
+                        gpio-ranges = <&tlmm 0 0 120>;
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index 3c6bdc2071b2..3596bc650b41 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -43,6 +43,8 @@ CONFIG_BUTTON_KEYBOARD=y
+ CONFIG_BUTTON_QCOM_PMIC=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_MSM=y
++CONFIG_MMC_HS200_SUPPORT=y
++CONFIG_MMC_SDHCI_ADMA=y
+ CONFIG_PHY=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_QCOM_QCS404=y
+
+> But yes this does look odd, somehow qcs404_clk_set_rate() is being
+> called with clk->id == 0. The xo_board clock uses a different driver so
+> it can't be that...
 >
-> I would expect that you package up base and overlays or DTs with
-> already applied overlays, but not both together. That would be based
-> on whether your bootloader can apply overlays or not.
+> Could you try and add some more logging around here? I can't see what
+> might be causing this.
 
+I tried to dump the call chain as follows. It starts with clk_get_bulk().
 
-Correct.
+clk_get_bulk()
+clk_get_by_index()
+clk_get_by_index_nodev()
+clk_get_by_index_tail()
+clk_set_defaults(clock-controller@1800000)
+clk_set_default_rates()
+clk_get_by_indexed_prop(dev=00000000ffb05d70, index=0, clk=00000000ffaf7588)
+clk_get_by_index_tail()
+clk_set_defaults(clock-controller@1800000)
+clk_set_default_rates()
+clk_get_by_indexed_prop(dev=00000000ffb05e50, index=0, clk=00000000ffaf7328)
+clk_get_by_index_tail()
+clk_set_defaults(clock-controller@1800000)
+clk_set_default_rates()
+clk_get_by_indexed_prop(dev=00000000ffb05e50, index=0, clk=00000000ffaf7318)
+clk_get_by_index_tail()
+clk_set_rate(clk=00000000ffaf7318, rate=19200000)
+Unknown clock id 0
+clk_set_rate(clk=00000000ffaf7588, rate=19200000)
+Unknown clock id 0
 
-
-
-> This problem boils down to your firmware knows or gains the knowledge
-> of some set of extra features or h/w pop options. The result is you
-> need base plus X, Y, Z whether those are a list of overlays or an
-> encoding of filename or something else. For example, FIT entries could
-> have a field that just lists those X, Y, Z features. But I'd much
-> rather have something that works outside of FIT images.
->
-> > > In any case, maybe we need to record in dtb overlays that have been
-> > > applied (which you asked about recently on dtc list). Not sure what
-> > > that looks like though. Overlays have a 'top-level' compatible that w=
-e
-> > > add in either separately or merged with the base's top-level
-> > > compatible?
-> >
-> >
-> > If there is a way to make "compatible" unique, that will be good.
-> >
-> > But, in my understanding, we can replace a property value,
-> > but not modify it.
->
-> Currently yes, but that shouldn't be too hard to add. The dtc
-> modification is the easy part. The hard part is figuring out the
-> policy around how we would use that.
->
-> But I don't really know what you want to accomplish with FIT here.
-> IMO, if you need filenames, then use a filesystem. They work pretty
-> well for storing large collections of files.
-
-
-Whom does the term "you" point to?
-
-If you have questions about the motivation for this patch,
-ask its author.
-
-
-
-There are two ways to look up the config node;
-node-name or compatible string.
-
-The key-value lookup works only when the key is unique.
-
-Apparently, the compatible string is not unique
-when overlay comes into play.
-
-
-
-
-
-
-
->
-> Rob
-
---
-Best Regards
-Masahiro Yamada
+-Sumit
