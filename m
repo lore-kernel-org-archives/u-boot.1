@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEFCEC47258
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 08:40:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D254C4828E
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 08:48:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA1AB87BDB;
-	Fri,  2 Feb 2024 09:40:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id D900886F80;
+	Fri,  2 Feb 2024 09:48:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="EF8X5qim";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="F6IFD8Nu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 39B7887BDB; Fri,  2 Feb 2024 09:40:56 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E1BBF86F7E; Fri,  2 Feb 2024 09:48:23 +0100 (CET)
+Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
+ [IPv6:2607:f8b0:4864:20::e32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4342987956
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 09:40:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D0F688753E
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 09:48:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1706863251; x=1707468051; i=xypron.glpk@gmx.de;
- bh=Tp7cGli5yE8DVLAfJv0HDkvU7dFjjPXmsPYJfDoe5tQ=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=EF8X5qimznUnZsrZPfAQgbz+MKBPjMrMlyi3OBSFu0TG4hoZFmFaoGDaNxtXbLAy
- pPdFDDtJxfEfWqweq6FURJqEuMtK4as2yQqW3XRO8Z1tPYBJLm9kHY9BcaTsDeIWZ
- jH7j9G90cvQfxOmONRkFxahCZ6rEfw+GusNeUpcE4aDtlIjh+Cw+7bijqj6ctVNyQ
- 6GVubeUyPLhGzqStXl/R1hNwD6y0Awf+WYeqxnCfirb48H+F3UzQThSLZIzGnfYR0
- HTm1frqt2rzIou9eYq5AeW1zCZ72dkF6uusB0zcVQiE9T53uht4WriUM9P+0ogY1Y
- Qq7IfEvI5QmTCs8uVA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.88] ([178.202.40.247]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M4s0j-1rVYFo1JJf-001xFJ; Fri, 02
- Feb 2024 09:40:51 +0100
-Message-ID: <76dff51f-c9d5-477e-8ab2-0832073d2f33@gmx.de>
-Date: Fri, 2 Feb 2024 09:40:50 +0100
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-vs1-xe32.google.com with SMTP id
+ ada2fe7eead31-46cfc9a79ebso249121137.3
+ for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 00:48:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1706863698; x=1707468498; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=1fIl6ZsGNCVvN7ZCp+BWgd/CtXDaW+zFCx31P2bDNPs=;
+ b=F6IFD8NuIefSSYqPaZgNlhm1f4d+gxbKTwVvgcTx2gXiaY3kg/dMe0nUp39mFeYYKY
+ EMLh/eHF71eQOSOmTXSTjFLlslKPnZ06pO+kl88Z+8a1AqDcPMBwQOsa1AnLSzdQsgIl
+ MjbVVhMtoxaH/Xjr2sUr3Hd5Zj/oMaN3V6vDu/x3eXLDsh6ogr1x/cVd5M+6cUZQfS7w
+ sgbUeretT6Q02VdLtyfKRZDTgddcKmkr7ObO4GG7iPXinvG81sGKeT/9yaCKtquDS5RG
+ ETI6SEkskuZcr+dzkACMefue0LaEz9qq+Ii/5PU4j3qf4VZpzmMrrTyqEHNzxC7xkcHa
+ IHrg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706863698; x=1707468498;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1fIl6ZsGNCVvN7ZCp+BWgd/CtXDaW+zFCx31P2bDNPs=;
+ b=M2A8CALdlEN2W72HR0dnzAEFDeK/H7KGPhkdx+P/QcZ+ExbP/juJIeYgKkBs99nNjM
+ rWdBBtric+z8gtBVaW2oEsw5j5Cd4dIs/PY+TZTnGyq6iDsR8bBgTnD5f3a2RdgN9pf/
+ ZdtD0zHCOuPxoZn4YgJrdGmQaeFIBbjsVNSPBeFcp6s0nngnXc4i46BuyeEbxW9QUpYR
+ zPTyJP/H6BDqefzSqt8+//1vhlJ2YMtbz85+FICdS0eVJaz6FrlmAOKbw5Na2V1SCbb5
+ lsaGZFvbVeMdNVwfRtWYFyFeeOsXAEYpANGGiOMJFlx8yO6BC0/eodF+3Jg+xTiZPWHq
+ 9WYA==
+X-Gm-Message-State: AOJu0Ywww10q32gt+SRzfpsMtJ9kg7A3/aujhFF9/pJp2l26Zv799u6j
+ +mPWLIDlj6tja5L0WZMhVjkn6DCw4oXQlmnbd/C2S4v4nFxQ5i/GVFE13pexZzVf6PgwwqY8KiG
+ h8w2p0iLwPPjgy2G9aHymh+2gQrWDP/vqD9agNA==
+X-Google-Smtp-Source: AGHT+IEDobV8xYKDrF+uE01pEpyuwgRJKU6csc+Z65G3UcT7vXKgWIhI+3BYbRwmo320hDIh90/H7mORmrT5Po3/76Y=
+X-Received: by 2002:a67:f84e:0:b0:469:8762:4e68 with SMTP id
+ b14-20020a67f84e000000b0046987624e68mr1502090vsp.33.1706863698321; Fri, 02
+ Feb 2024 00:48:18 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] doc: imx: imxrt1170: Document imxrt1170-evk board
-Content-Language: en-US
-To: Jesse Taube <mr.bossman075@gmail.com>
-Cc: Giulio Benetti <giulio.benetti@benettiengineering.com>,
- Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team"
- <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
- Alon Bar-Lev <alon.barlev@gmail.com>, u-boot@lists.denx.de
-References: <20240201150004.1343366-1-Mr.Bossman075@gmail.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240201150004.1343366-1-Mr.Bossman075@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:xuuInKDPMABJ4aMy4inr5ozpVPAOVx5nIhXA0avGUF8gWn9WBNz
- JV81Ish4Ihh/kfL5qNPNpUYkXrVbqMZ065IHAmFbZ4Zw5k4HKR5c7NZ85BBW2WRDVI/X1zr
- ztxzFfap8gCswxvGTSuda08MebD7aytyIYQHtfhci1NJ8yJIqiubnRkQ3na424Fh52HaGnT
- PR0WdZK6vF4T3CzGOBNeA==
-UI-OutboundReport: notjunk:1;M01:P0:to/DwnusKyk=;t4e05ZvZ0haWfaVSO21WhGkEL+9
- 5EajxU+Tqr3ckgmyY8t7SbmmMr0+VivgYbVTHe2o2Cwnmm7AgGmb/Uqtv6kvw8gy8wbsdhfhX
- BGM6j0UDB4DsCW7K6xU3CHL9T2DnPf3SJxibsS8aWH9ZXU/TrZ3T8vpLfKGX2LVFJGV8b4QVL
- ua/D4X+zjXCKb3iK3+tPbYqzn3COV1W8l0q2MIA6fA7/S3XjoFrNYmRg2gTGr9SaYuBQM6gN7
- W0dDh5gHm2vqVj5M0p1M21jiSpu96Szyx+rFuJicQ5FNYwKI6I137OBmBcSRvVafZd7XMfo67
- g4RbLCr5IX4tOgLZG91PRLjro328xbeQbWLtDJRQa7lotYst9mB9LR+p2/k8SaTK320SXaKbX
- Fp0pdB4/n26wweu+NJzDgaC6r3+ggcVp7wGVnkWeoYfGGpnYEwKLI5KgfpGDKuaBewMYOnep3
- 4nvlTFtT0qfi6ojn/YrBFgszOyfMqpND2cGiHIuszpCi5lmRhA81rb8kv9mfMAoB49i43AYC5
- b8UwDT0RIU6gY3af7IlnkH3H7ITSBWXQb9c/lUuOOwafjSAtskQ7AwtLEkYf7sRb7mAjPKnB5
- AxYfjo7zVaAHMV3JwLVlf5/H10SN4YQg84vS2M1m5jnFuVNs3+SeVU6C4tQwPR1It7OB1sRxZ
- FzGR2jx9qgA9Pk/UMUlp7+fZBXr1ny9zCCJgh6HuifYwLtyZnA7EW4x29SUwjsRlcWkOrx3kn
- wOza/wIalOaAoU9pWH7LOWdpjQPA34oOqCpIviRqkhGIv7uxPtyJCZg+jUuxAK9jM76Z7sGf2
- mscFKcDFJyb2dmwIV4f7XxsXtgPoTxk2nxv9mVjjYdnwc=
+References: <20240130-b4-qcom-common-target-v3-0-e523cbf9e556@linaro.org>
+ <20240130-b4-qcom-common-target-v3-26-e523cbf9e556@linaro.org>
+In-Reply-To: <20240130-b4-qcom-common-target-v3-26-e523cbf9e556@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Fri, 2 Feb 2024 14:18:07 +0530
+Message-ID: <CAFA6WYMDijFRzQyfQmQU=opjBRs59mTOrOsd=By1-8sdHKTQew@mail.gmail.com>
+Subject: Re: [PATCH v3 26/36] dts: msm8916: import PMIC dtsi files
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Ramon Fried <rfried.dev@gmail.com>, 
+ Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,73 +94,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/1/24 16:00, Jesse Taube wrote:
-> Add documentation for imxrt1170-evk.
+On Tue, 30 Jan 2024 at 19:35, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
+> Import the supporting pm8916.dtsi and msm8916-pm8916.dtsi files from
+> upstream in preparation for switching boards over.
+>
+> Taken from kernel tag v6.7
+>
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   doc/board/nxp/imxrt1170-evk.rst | 42 +++++++++++++++++++++++++++++++++
->   1 file changed, 42 insertions(+)
->   create mode 100644 doc/board/nxp/imxrt1170-evk.rst
+>  arch/arm/dts/msm8916-pm8916.dtsi | 157 ++++++++++++++++++++++++++++++++++
+>  arch/arm/dts/pm8916.dtsi         | 178 +++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 335 insertions(+)
 >
-> diff --git a/doc/board/nxp/imxrt1170-evk.rst b/doc/board/nxp/imxrt1170-e=
-vk.rst
+
+[snip]
+
+> diff --git a/arch/arm/dts/pm8916.dtsi b/arch/arm/dts/pm8916.dtsi
 > new file mode 100644
-> index 0000000000..4acccdcc93
+> index 000000000000..f4de86787743
 > --- /dev/null
-> +++ b/doc/board/nxp/imxrt1170-evk.rst
-> @@ -0,0 +1,42 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
+> +++ b/arch/arm/dts/pm8916.dtsi
+> @@ -0,0 +1,178 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +#include <dt-bindings/iio/qcom,spmi-vadc.h>
+> +#include <dt-bindings/input/linux-event-codes.h>
+> +#include <dt-bindings/interrupt-controller/irq.h>
+> +#include <dt-bindings/spmi/spmi.h>
 > +
-> +imxrt1170-evk
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +&spmi_bus {
 > +
-> +How to use U-Boot on NXP i.MXRT1170 EVK
-> +---------------------------------------
+> +       pm8916_0: pmic@0 {
+> +               compatible = "qcom,pm8916", "qcom,spmi-pmic";
+> +               reg = <0x0 SPMI_USID>;
+> +               #address-cells = <1>;
+> +               #size-cells = <0>;
 > +
-> +- Build U-Boot for i.MXRT1170 EVK:
+> +               pon@800 {
+> +                       compatible = "qcom,pm8916-pon";
+> +                       reg = <0x800>;
+> +                       mode-bootloader = <0x2>;
+> +                       mode-recovery = <0x1>;
 > +
-> +.. code-block:: bash
+> +                       pwrkey {
+> +                               compatible = "qcom,pm8941-pwrkey";
+> +                               interrupts = <0x0 0x8 0 IRQ_TYPE_EDGE_BOTH>;
+> +                               debounce = <15625>;
+> +                               bias-pull-up;
+> +                               linux,code = <KEY_POWER>;
+> +                       };
 > +
-> +   $ make mrproper
-> +   $ make imxrt1170-evk_defconfig
-> +   $ make
+> +                       pm8916_resin: resin {
+> +                               compatible = "qcom,pm8941-resin";
+> +                               interrupts = <0x0 0x8 1 IRQ_TYPE_EDGE_BOTH>;
+> +                               debounce = <15625>;
+> +                               bias-pull-up;
+> +                               status = "disabled";
+> +                       };
 > +
-> +This will generate the SPL image called SPL and the u-boot.img.
-> +
-> +- Flash the SPL image into the micro SD card:
-> +
-> +.. code-block:: bash
-> +
-> +   $sudo dd if=3DSPL of=3D/dev/sdX bs=3D1k seek=3D1 conv=3Dnotrunc; syn=
-c
+> +                       watchdog {
+> +                               compatible = "qcom,pm8916-wdt";
+> +                               interrupts = <0x0 0x8 6 IRQ_TYPE_EDGE_RISING>;
+> +                               timeout-sec = <60>;
+> +                       };
 
-This location conflicts with GPT partitioning. Does the SoC support an
-alternative location for the SPL?
+watchdog button isn't supported by the U-Boot driver code. So it leads
+to spurious error as follows:
 
-Best regards
+Unknown button node 'watchdog' should be 'pwrkey' or 'resin'
 
-Heinrich
+I suppose the button-qcom-pmic driver should gracefully handle the
+unsupported case.
 
-> +
-> +- Flash the u-boot.img image into the micro SD card:
-> +
-> +.. code-block:: bash
-> +
-> +   $sudo dd if=3Du-boot.img of=3D/dev/sdX bs=3D1k seek=3D128 conv=3Dnot=
-runc; sync
-> +
-> +- Jumper settings::
-> +
-> +   SW1: 1 0 1 0
-> +   SW2: 0 0 0 0  0 0 0 0  1 0 0 0
-> +
-> +where 0 means bottom position and 1 means top position (from the
-> +switch label numbers reference).
-> +
-> +- Connect the USB cable between the EVK and the PC for the console.
-> +  The USB console connector is the one close the ethernet connector
-> +
-> +- Insert the micro SD card in the board, power it up and U-Boot message=
-s should come up.
-
+-Sumit
