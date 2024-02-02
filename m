@@ -4,80 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3483FC47258
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 08:38:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEFCEC47258
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 08:40:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EC36879FE;
-	Fri,  2 Feb 2024 09:38:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EA1AB87BDB;
+	Fri,  2 Feb 2024 09:40:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mGyyYjZd";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="EF8X5qim";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1AC087956; Fri,  2 Feb 2024 09:38:27 +0100 (CET)
-Received: from mail-ua1-x92a.google.com (mail-ua1-x92a.google.com
- [IPv6:2607:f8b0:4864:20::92a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 39B7887BDB; Fri,  2 Feb 2024 09:40:56 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FB85879FE
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 09:38:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4342987956
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 09:40:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x92a.google.com with SMTP id
- a1e0cc1a2514c-7d5bbbe592dso958384241.0
- for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 00:38:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706863103; x=1707467903; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RXEGh/erDdsTtFSpQQLpenwkurAUQo7QGTMVvo1KVFU=;
- b=mGyyYjZdu9jictXdUue553MeF1onbMtEXgW5upZi1bG5VL+V/5ejFhnSu6+o+nxlLz
- PNVr5xL1ejDirtnBDGvw3uPfhYHMA6lOz7z5tglXXie8PdBkFQhP4Vvz4tM+hj2Ql8O6
- 4u2BB9gw5S/gtabrFGS1tDba3psUfw9s2S+c+Y/lN7afVx58d11MnUqmU+BWWAHyN4KJ
- 4kxbjXs28/UHRvPqUd55BO4X3B2CBEsR4KBmPVwCAQQ7caTIVBLv6DNo0UOEzicxZTXq
- 8dr903ViA/xVcC6R8JmiWftMFoicH6fX/NE0PiDkFAEYq7/du+fy8frXnCOT6Xq4juaU
- QrGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706863103; x=1707467903;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RXEGh/erDdsTtFSpQQLpenwkurAUQo7QGTMVvo1KVFU=;
- b=Zo+p9RMD/Q3ZPynpR0hPVc7u/jYoIgaz4F6hkm5//V6z7EsdLYA8YBMIN0Tmcbbi34
- SdEl5oSny6OpeLCoSnq/S2ToUQuwb3qHqpd8eQMHLIQPqDqpSAsehhzljgka3B8jU7G4
- 6nv4oXPEkesifAHi3heWNYgXia37FAvhNMcYpHBvmYkLLnz0M2Rms8vH9Lc57++olFC2
- Ih7gs7+7HQTEHZE6sqn+UeAXYY3aLA4lgl3TpQKFtzoGoLF+c4G6yTdhOUIesh5uktDF
- idlUTDBabuGhbDjMrKOaUhbkj+o6ms9IcpdmTuers4/KYJdWE+lbHqjwhmtfdX+ZI1CB
- temQ==
-X-Gm-Message-State: AOJu0YzfRNdowqsAGXRr+QnjSsw8OKE4fy6eCHK5EC9ntNZG2K/BsHkl
- qUWaBvZ4jG3Tlfp8PHSQR67R4s7U8CVIcVX5bMU7srY6Q7RXut9BRxdHS1vPgQvHZPvhqXehXSX
- f9u/abTvEj4jvOqoQxU8oSLeRU/tcC5TPpgtm7w==
-X-Google-Smtp-Source: AGHT+IGlhSwmp7xYseWOoRCqsHFObu0TQwa9xKcPun/IBAPRrM4emc2EcJNP9VupfyQQYKSlnSOIfgSscFwnVAdTcmA=
-X-Received: by 2002:a67:e9cd:0:b0:46c:fcd9:c615 with SMTP id
- q13-20020a67e9cd000000b0046cfcd9c615mr2145527vso.24.1706863103643; Fri, 02
- Feb 2024 00:38:23 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1706863251; x=1707468051; i=xypron.glpk@gmx.de;
+ bh=Tp7cGli5yE8DVLAfJv0HDkvU7dFjjPXmsPYJfDoe5tQ=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=EF8X5qimznUnZsrZPfAQgbz+MKBPjMrMlyi3OBSFu0TG4hoZFmFaoGDaNxtXbLAy
+ pPdFDDtJxfEfWqweq6FURJqEuMtK4as2yQqW3XRO8Z1tPYBJLm9kHY9BcaTsDeIWZ
+ jH7j9G90cvQfxOmONRkFxahCZ6rEfw+GusNeUpcE4aDtlIjh+Cw+7bijqj6ctVNyQ
+ 6GVubeUyPLhGzqStXl/R1hNwD6y0Awf+WYeqxnCfirb48H+F3UzQThSLZIzGnfYR0
+ HTm1frqt2rzIou9eYq5AeW1zCZ72dkF6uusB0zcVQiE9T53uht4WriUM9P+0ogY1Y
+ Qq7IfEvI5QmTCs8uVA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.88] ([178.202.40.247]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M4s0j-1rVYFo1JJf-001xFJ; Fri, 02
+ Feb 2024 09:40:51 +0100
+Message-ID: <76dff51f-c9d5-477e-8ab2-0832073d2f33@gmx.de>
+Date: Fri, 2 Feb 2024 09:40:50 +0100
 MIME-Version: 1.0
-References: <20240130-b4-qcom-common-target-v3-0-e523cbf9e556@linaro.org>
- <20240130-b4-qcom-common-target-v3-27-e523cbf9e556@linaro.org>
-In-Reply-To: <20240130-b4-qcom-common-target-v3-27-e523cbf9e556@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 2 Feb 2024 14:08:12 +0530
-Message-ID: <CAFA6WYMOndY_UeLAqTAq2oZnBotESfVbRwG7MrweNwu40HtR7g@mail.gmail.com>
-Subject: Re: [PATCH v3 27/36] dts: msm8916: replace with upstream DTS
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, 
- Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1] doc: imx: imxrt1170: Document imxrt1170-evk board
+Content-Language: en-US
+To: Jesse Taube <mr.bossman075@gmail.com>
+Cc: Giulio Benetti <giulio.benetti@benettiengineering.com>,
+ Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team"
+ <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Alon Bar-Lev <alon.barlev@gmail.com>, u-boot@lists.denx.de
+References: <20240201150004.1343366-1-Mr.Bossman075@gmail.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240201150004.1343366-1-Mr.Bossman075@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:xuuInKDPMABJ4aMy4inr5ozpVPAOVx5nIhXA0avGUF8gWn9WBNz
+ JV81Ish4Ihh/kfL5qNPNpUYkXrVbqMZ065IHAmFbZ4Zw5k4HKR5c7NZ85BBW2WRDVI/X1zr
+ ztxzFfap8gCswxvGTSuda08MebD7aytyIYQHtfhci1NJ8yJIqiubnRkQ3na424Fh52HaGnT
+ PR0WdZK6vF4T3CzGOBNeA==
+UI-OutboundReport: notjunk:1;M01:P0:to/DwnusKyk=;t4e05ZvZ0haWfaVSO21WhGkEL+9
+ 5EajxU+Tqr3ckgmyY8t7SbmmMr0+VivgYbVTHe2o2Cwnmm7AgGmb/Uqtv6kvw8gy8wbsdhfhX
+ BGM6j0UDB4DsCW7K6xU3CHL9T2DnPf3SJxibsS8aWH9ZXU/TrZ3T8vpLfKGX2LVFJGV8b4QVL
+ ua/D4X+zjXCKb3iK3+tPbYqzn3COV1W8l0q2MIA6fA7/S3XjoFrNYmRg2gTGr9SaYuBQM6gN7
+ W0dDh5gHm2vqVj5M0p1M21jiSpu96Szyx+rFuJicQ5FNYwKI6I137OBmBcSRvVafZd7XMfo67
+ g4RbLCr5IX4tOgLZG91PRLjro328xbeQbWLtDJRQa7lotYst9mB9LR+p2/k8SaTK320SXaKbX
+ Fp0pdB4/n26wweu+NJzDgaC6r3+ggcVp7wGVnkWeoYfGGpnYEwKLI5KgfpGDKuaBewMYOnep3
+ 4nvlTFtT0qfi6ojn/YrBFgszOyfMqpND2cGiHIuszpCi5lmRhA81rb8kv9mfMAoB49i43AYC5
+ b8UwDT0RIU6gY3af7IlnkH3H7ITSBWXQb9c/lUuOOwafjSAtskQ7AwtLEkYf7sRb7mAjPKnB5
+ AxYfjo7zVaAHMV3JwLVlf5/H10SN4YQg84vS2M1m5jnFuVNs3+SeVU6C4tQwPR1It7OB1sRxZ
+ FzGR2jx9qgA9Pk/UMUlp7+fZBXr1ny9zCCJgh6HuifYwLtyZnA7EW4x29SUwjsRlcWkOrx3kn
+ wOza/wIalOaAoU9pWH7LOWdpjQPA34oOqCpIviRqkhGIv7uxPtyJCZg+jUuxAK9jM76Z7sGf2
+ mscFKcDFJyb2dmwIV4f7XxsXtgPoTxk2nxv9mVjjYdnwc=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,96 +89,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 30 Jan 2024 at 19:35, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+On 2/1/24 16:00, Jesse Taube wrote:
+> Add documentation for imxrt1170-evk.
 >
-> Drop the U-Boot specific dragonboard410c.dts in favour of the upstream
-> msm8916-sbc.dts. No additional changes are needed to this DTS for U-Boot
-> support.
->
-> Taken from kernel tag v6.7
->
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
 > ---
->  arch/arm/dts/Makefile                   |    2 +-
->  arch/arm/dts/apq8016-sbc-u-boot.dtsi    |   11 +
->  arch/arm/dts/apq8016-sbc.dts            |  729 +++++++++
->  arch/arm/dts/dragonboard410c-uboot.dtsi |   44 -
->  arch/arm/dts/dragonboard410c.dts        |  221 ---
->  arch/arm/dts/msm8916.dtsi               | 2702 +++++++++++++++++++++++++++++++
->  configs/dragonboard410c_defconfig       |    2 +-
->  7 files changed, 3444 insertions(+), 267 deletions(-)
+>   doc/board/nxp/imxrt1170-evk.rst | 42 +++++++++++++++++++++++++++++++++
+>   1 file changed, 42 insertions(+)
+>   create mode 100644 doc/board/nxp/imxrt1170-evk.rst
 >
-> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index 92a4465f5f41..4c8b29b983a4 100644
-> --- a/arch/arm/dts/Makefile
-> +++ b/arch/arm/dts/Makefile
-> @@ -628,7 +628,7 @@ dtb-$(CONFIG_TARGET_SL28) += fsl-ls1028a-kontron-sl28.dtb \
->
->  dtb-$(CONFIG_TARGET_TEN64) += fsl-ls1088a-ten64.dtb
->
-> -dtb-$(CONFIG_ARCH_SNAPDRAGON) += dragonboard410c.dtb \
-> +dtb-$(CONFIG_ARCH_SNAPDRAGON) += apq8016-sbc.dtb \
->         dragonboard820c.dtb \
->         sdm845-db845c.dtb \
->         sdm845-samsung-starqltechn.dtb \
-> diff --git a/arch/arm/dts/apq8016-sbc-u-boot.dtsi b/arch/arm/dts/apq8016-sbc-u-boot.dtsi
+> diff --git a/doc/board/nxp/imxrt1170-evk.rst b/doc/board/nxp/imxrt1170-e=
+vk.rst
 > new file mode 100644
-> index 000000000000..838e629a8ade
+> index 0000000000..4acccdcc93
 > --- /dev/null
-> +++ b/arch/arm/dts/apq8016-sbc-u-boot.dtsi
-> @@ -0,0 +1,11 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (c) 2024, Linaro Ltd.
-> + */
+> +++ b/doc/board/nxp/imxrt1170-evk.rst
+> @@ -0,0 +1,42 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
 > +
-> +/ {
-> +       /* When running as a first-stage bootloader this isn't filled in automatically */
-> +       memory@80000000 {
-> +               reg = <0 0x80000000 0 0x3da00000>;
-> +       };
-> +};
+> +imxrt1170-evk
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +How to use U-Boot on NXP i.MXRT1170 EVK
+> +---------------------------------------
+> +
+> +- Build U-Boot for i.MXRT1170 EVK:
+> +
+> +.. code-block:: bash
+> +
+> +   $ make mrproper
+> +   $ make imxrt1170-evk_defconfig
+> +   $ make
+> +
+> +This will generate the SPL image called SPL and the u-boot.img.
+> +
+> +- Flash the SPL image into the micro SD card:
+> +
+> +.. code-block:: bash
+> +
+> +   $sudo dd if=3DSPL of=3D/dev/sdX bs=3D1k seek=3D1 conv=3Dnotrunc; syn=
+c
 
-With U-Boot booting as the first stage bootloader, we have to enable
-the serial driver prior to relocation. Although we have
-DM_FLAG_PRE_RELOC for clock and the serial driver, what about the
-pinctrl driver required to configure UART specific pins prior to
-relocation? Without following change we get broken U-Boot log without
-header prints:
+This location conflicts with GPT partitioning. Does the SoC support an
+alternative location for the SPL?
 
-diff --git a/arch/arm/dts/apq8016-sbc-u-boot.dtsi
-b/arch/arm/dts/apq8016-sbc-u-boot.dtsi
-index 838e629a8ade..0a21732be6cb 100644
---- a/arch/arm/dts/apq8016-sbc-u-boot.dtsi
-+++ b/arch/arm/dts/apq8016-sbc-u-boot.dtsi
-@@ -9,3 +9,11 @@
-                reg = <0 0x80000000 0 0x3da00000>;
-        };
- };
-+
-+&tlmm {
-+       bootph-all;
-+
-+       blsp-uart2-default-state {
-+               bootph-all;
-+       };
-+};
+Best regards
 
-Fixes broken U-Boot log:
+Heinrich
 
-S - Flash Throughput, 82000 KB/s  (1503304 Bytes,  18330 us)
-S - DDR Frequency, 400 MHz
-Core:  135 devices, 20 uclasses, devicetree: board
-MMC:   mmc@7824900: 0, mmc@7864900: 1
-Loading Environment from MMC... OK
-In:    serial@78b0000
-Out:   serial@78b0000
-Err:   serial@78b0000
-## Error: Can't overwrite "serial#"
-## Error inserting "serial#" variable, errno=1
-Net:   No ethernet found.
-Hit any key to stop autoboot:  0
-dragonboard410c =>
+> +
+> +- Flash the u-boot.img image into the micro SD card:
+> +
+> +.. code-block:: bash
+> +
+> +   $sudo dd if=3Du-boot.img of=3D/dev/sdX bs=3D1k seek=3D128 conv=3Dnot=
+runc; sync
+> +
+> +- Jumper settings::
+> +
+> +   SW1: 1 0 1 0
+> +   SW2: 0 0 0 0  0 0 0 0  1 0 0 0
+> +
+> +where 0 means bottom position and 1 means top position (from the
+> +switch label numbers reference).
+> +
+> +- Connect the USB cable between the EVK and the PC for the console.
+> +  The USB console connector is the one close the ethernet connector
+> +
+> +- Insert the micro SD card in the board, power it up and U-Boot message=
+s should come up.
 
--Sumit
