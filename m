@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23233C48291
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 15:13:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 637D0C48291
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 15:13:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5233F8753E;
+	by phobos.denx.de (Postfix) with ESMTP id B347F87C68;
 	Fri,  2 Feb 2024 16:13:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=solid-run.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=solidrn.onmicrosoft.com header.i=@solidrn.onmicrosoft.com header.b="eVkkEzLL";
+	dkim=pass (1024-bit key; unprotected) header.d=solidrn.onmicrosoft.com header.i=@solidrn.onmicrosoft.com header.b="EBBhDxsG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70D0987C5A; Fri,  2 Feb 2024 16:13:43 +0100 (CET)
+ id E924F87527; Fri,  2 Feb 2024 16:13:43 +0100 (CET)
 Received: from EUR01-VE1-obe.outbound.protection.outlook.com
  (mail-ve1eur01on070f.outbound.protection.outlook.com
  [IPv6:2a01:111:f400:fe1f::70f])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76AE587527
+ by phobos.denx.de (Postfix) with ESMTPS id A225F87B8C
  for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 16:13:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=solid-run.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=josua@solid-run.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=S1hdDajFq1XRLg0y+qw2jRNL+dNqV1NjtcRDWpwAWC5N/KbR0eR+Vh4yKPij/JDbHaZC3rnTEDn3yUhDLmXYLgGKAMCyT/GRFsK+LcUYklD3KH4je47ugVjpwkB0q7eEYxSBOeJ5PVbhQwi2y8xuaLLgoVyVP44RvvbQoibOqYWUqIQxplMJsTOKnIToGY1/BUc5Pp5uQWLKIuJpDCURa8mKaB1M4JffwcCBreM+guGn6VxcUFR4/KjHHmkTyNQhZgHZ7jORlHl+sLEUP0F70OsqizuCehukYOPVrXUuep4BfLdUDUYvFbmx6h8YivLfX47gPfAj2MWYtSuuov0Avg==
+ b=C47C5yu9YoXgBiVag4HxFdGX2uScL8c1lSOcHJ4gC9JmrX5vhSorexBZ7XFabyOBHVcyRHQ/ttYb8Gd2+XQqjTlpac+xZtsFPReIhnuZnE56auw7DDT4MqCOOowu1wcSwn3eT3T7klPaZRjwb+9zRSZ4NbTgvy+Ai/gPYkcUomLmPS66+iOJ20XZ7dBabiC3wPz+D7EdRP/gKqNetLvO4Wo5YK3zuWAXMIaQGhmSpWEv6cFwV7uKvPzpHenAsSegqhiu1x3GmLBn20UyznaokEM/laIQuFhM89rB6sPn+DhUDlJKrEMR7rJcOuzuWqQFSyIk1YvWcYrH4JTXNG4Jkg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FZwN3kPi3qR5N7WheKRXqeYxC2J82C8zGyvtO4tHnLM=;
- b=Zv5YbZH3VIMagzvRACy9Oq3Z+yEvxbtL/JN0te4256TUPaYw4tA56RvHzPvkWsyzFIRPsY5zaYAoRvA16xFNq6kbti1znY6ylokN/cZ7R4OQ3Q+t/sXwYaCESmaKr3enYf7OzlM7m/+7nj3QdWfWLQeIJOj0LytH9JxLWpW2KH1elv8pgMOIAw6nz+jaFadtTkFXiSJumV9rpe8lGbKUr9okK1JYso0xOfqlKqkkVEccXdmAOaPHHR/ZzaLHesWxzV+HWM7Roy2YHE0AqktoeQlT3fSqgZVwgPM9RqEUKCEsPBptJfUFz33Cgvz36/FbxZs13wNVNWwbWZFP9ahFyA==
+ bh=dkMHqHHmUnObYFdD5eWf4xcOkNseicLTMTji/U6BSTQ=;
+ b=KWtcsvCIqSCUewQ4aETtCdkXZy/IOSPk5plej4KQ1l8lmxkABKcOTIyQTvSVod5Yzst+J4synQwn0sv2Jv2NjRxSs4Hue8EdO+8oBnQHcNiPuVJIXBMUjBdpk8NdFbNCwzCPDf8ft4lDK3TQ36pmf+NSUZGytNJF4tEtw+axHSC/Hlqp1BgRja63V5EVnuKFpBiJ3dDnoe5tdUZySvyowX9jAJyVhQhUYqSbTW+XBAh3d4qZjP0+H9qqG0NdQlkOVwj8Ed0vFRgfFw3DjfTM5PC/eyuz8wxHM63sn9p90CboVg+hdSqe+L3mZl1DdqWxM2Z3LTMnatfV430/cLWX0g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=solid-run.com; dmarc=pass action=none
  header.from=solid-run.com; dkim=pass header.d=solid-run.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=solidrn.onmicrosoft.com; s=selector1-solidrn-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FZwN3kPi3qR5N7WheKRXqeYxC2J82C8zGyvtO4tHnLM=;
- b=eVkkEzLLNbGuislHA34V5Jkw3d8V1v+PXvjxR9aFGZvjxqVPjvNx+qWrHXabLHUU3wkMRG9ltPoZTmdTuVBafUeTY9VuhHKjO5G7MpsRIdad1WfIXx9Lp+7p5NniNZbv0VhStDVvHqgMVVNvEfvsMoP2f2KZ9FSQxdqXYNn8ge8=
+ bh=dkMHqHHmUnObYFdD5eWf4xcOkNseicLTMTji/U6BSTQ=;
+ b=EBBhDxsGnPkEOIp0mo2rXZB6Vt89FoResehhOFpTDnv9B3n03a2IRx5331W9KkQuhlhXghcusi/MZfsg+XMb1MJbALr4GscYXM10BXLYXBNNb+vFg//GRrM6hRw8bUmjmlOEJq+Ff807gQf4ZdSTUUhMvYOYUVmQc56vloz1Bn4=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=solid-run.com;
 Received: from AM9PR04MB7586.eurprd04.prod.outlook.com (2603:10a6:20b:2d5::17)
@@ -54,14 +54,15 @@ Received: from AM9PR04MB7586.eurprd04.prod.outlook.com
  ([fe80::3b94:f607:ebe1:7d6c%7]) with mapi id 15.20.7249.027; Fri, 2 Feb 2024
  15:13:39 +0000
 From: Josua Mayer <josua@solid-run.com>
-Date: Fri, 02 Feb 2024 16:13:32 +0100
-Subject: [PATCH v2 1/3] arm: dts: armada-38x-solidrun-microsom: configure
- i2c0 bus
+Subject: [PATCH v2 0/3] arm: mvebu: helios-4: add config fragment for spi
+ booting et al
+Date: Fri, 02 Feb 2024 16:13:31 +0100
+Message-Id: <20240202-helios4-spi-v2-0-df085461d894@solid-run.com>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240202-helios4-spi-v2-1-df085461d894@solid-run.com>
-References: <20240202-helios4-spi-v2-0-df085461d894@solid-run.com>
-In-Reply-To: <20240202-helios4-spi-v2-0-df085461d894@solid-run.com>
+X-B4-Tracking: v=1; b=H4sIAJsGvWUC/23MQQ6CMBCF4auQWTumLQWNK+5hWJQy2kmQko42G
+ sLdraxd/i953wpCiUngUq2QKLNwnEuYQwU+uPlOyGNpMMpYpXWNgSaOYlEWRm2tOjdeDYM/QXk
+ siW783rVrXzqwPGP67HjWv/W/kzUqNK5p29ppRa3rJE48YnrNRx8f0G/b9gVMQFJqqgAAAA==
 To: Dennis Gilmore <dgilmore@redhat.com>, Tom Rini <trini@konsulko.com>
 Cc: Stefan Roese <sr@denx.de>, u-boot@lists.denx.de, 
  Josua Mayer <josua@solid-run.com>
@@ -72,61 +73,61 @@ X-ClientProxiedBy: FR0P281CA0109.DEUP281.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AM9PR04MB7586:EE_|PAXPR04MB8686:EE_
-X-MS-Office365-Filtering-Correlation-Id: ebb6293b-f414-49e9-a473-08dc2401892b
+X-MS-Office365-Filtering-Correlation-Id: bec6580c-b6d9-4919-9718-08dc240188e3
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: VqJegNT1aAJHTQRY5U4QPiQ8M/hU954ItskLaWg1JUW9GLDSDNx3/MfbMnKTqwHT3AtY3QWL+KV1SQTellqmMMYwYVp1w1PAWAuFKmHWgSywA5I63AJU5FJ61i4lO9iNDGE43GUU5LIJsgZwGMcLO3LrhsbcqvK7eOd2qyYq9BbfTDENmpeu/6KkQBwPJzsg8jf+wm+S9P5QhAv12PMDZXITqznCcF42pVuSGYrROY9tmplYSv7t/e2LDRh/oBQD6BsFa/HbfCDyxPUzH3mJswnMhBYqWcdjrBXZXx8RYgUUkJ4aNWyhLllfm/tfw3oncPROICnr7OSW9RvqMujAdIq1E6xA536QSVnodSxbxxQPJdPqQL1sGII8RjdzF+FHxGWsRF1LtB/8V/NB8CikdvUDdNyQivyCxeTneI0y3u1ifMVCNlJIJcMgDF/OvJwGueWjR29Spxo1lejtm/3i+otxnhjuwuhFngl16fgR7LXC/iYDVrpuqQ3TLU3hzT7p3xxVV9fnmKGR5cZFQrHdXhHe1uevfyo3te8LJ2tHJY0OlMJ7yD3Exu6vnNiCfMoi4cZmkGfnVIu9SMAm2wbbgTnlxW/abO0RVN7ynEKDND3sTyyy2OB0uxkNMcEZ0DEa
+X-Microsoft-Antispam-Message-Info: 12uxfGH48KN2TRA6812oDKlQ1x7QuBD7CQQ+3gkZKF5M/QySx1fjQP//vSa/F+vCrEX82xeBHybspdIdd+bug1uT7wpgM6YAoewNI7LkTfXsL2memLsbutpMYe265OGtqlPsZYmkOfk1qsgUDM/gQU98xBa2n1l8bWbKwrV6EuGHuwDts8KHcO6jiXI8AxbcQtNBxQbvCrYC7HjPqOgSVRHjhtlFfxpNCoCkVou4jbTnjxlucsabheePg4hbO4PAPY5d4DzB6WDyvm6cw6y3w4XEHFUCVgJbMachW31vY8Ihfp7i+uWgrh9OA9W7WJ70/lO04bBZpnoGPG0QYtwzJwEvepkCd+3Rudi99BuhHbS/9bxArJM1sIjFk+u/6F+XNLjrvMbSw8h0H+aQQ+I4TcAEkYWVtHQB+85s22CurwXHXdr0mtScCdud6P0P1zBPbq9FbzCVSQr+RGeA5f4c0gvBVjFdZO8VyKIuwwq388pMl95lqe3gmMYlPYTovRY52AKmYj53DMPkpLOUC94ui+oTRGX1DncY0xKGeVPSL6R4ap6o6ryVWEt9zHfHwSRECk3o4AsDZ8Y7A1cMFOSmZBGH3sBb+UOlR8Kc6AqJkEY=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AM9PR04MB7586.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(396003)(136003)(39840400004)(376002)(346002)(230922051799003)(451199024)(186009)(1800799012)(64100799003)(66946007)(54906003)(110136005)(38100700002)(26005)(107886003)(41300700001)(83380400001)(6506007)(6666004)(2616005)(6512007)(52116002)(5660300002)(2906002)(8676002)(4326008)(8936002)(4744005)(316002)(66556008)(478600001)(6486002)(86362001)(66476007)(36756003)(38350700005);
+ SFS:(13230031)(366004)(396003)(136003)(39840400004)(376002)(346002)(230922051799003)(451199024)(186009)(1800799012)(64100799003)(66946007)(54906003)(110136005)(38100700002)(26005)(107886003)(41300700001)(83380400001)(6506007)(6666004)(2616005)(6512007)(52116002)(5660300002)(2906002)(8676002)(4326008)(8936002)(4744005)(316002)(66556008)(478600001)(6486002)(966005)(86362001)(66476007)(36756003)(38350700005);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cHhKMzlaYzdYNitBcEkraWxNazZDUDZ4RkFSb0hYVHNCNWtEUTFVZkVPN3or?=
- =?utf-8?B?U1pzUnRBbVpLK2dHNGNaRWhKZjUrZUNMUlIyb3Jjb1pKVEtVMnEvUy9oelFw?=
- =?utf-8?B?NTNNOTArZ3dDT3A4SDNSY083MXVRMTdNbElPVzQvcGVsaDhxS0M3K285UlpX?=
- =?utf-8?B?ZkF3UlFlRGNUaXhKbVEwYzVBNFRURmdlQkhFM2FHakRvSkR6aEdMSHA0a210?=
- =?utf-8?B?Q3laZEIxdlpZcGd2UGp4aVJobytnSzJhTGsxU1BJdm5EaHVwT1FLZGxYWHJL?=
- =?utf-8?B?N3YyL253dGk4YTIwNXVqWWptU0tMaUs2SGRMeFFxZGM5aFVlcHZoSTBlZHNx?=
- =?utf-8?B?a29Yb2xzTmtxeXp3UnhEZVlTdjdFa04xUUc4cjh2U29VTllyeVZEMUovNWpo?=
- =?utf-8?B?QWttKzAvS254bDZXZGptTGltQnppL2h6VHc1djY5N2xBYnhjM0NPdEVCWm1x?=
- =?utf-8?B?MEhPY0F6ZExiOE55SjJoZDlSeGI1YTIxVEJ3UUhYMmtqUGQzOER5TDRIeG5L?=
- =?utf-8?B?WW5xZWNuWm9VQlpDaUoyUmxSdHByR05lcVZLTGJpSERiWXFLcFh1bjFWMXZm?=
- =?utf-8?B?dG54aFBZU2hQMjhmUGlhUFdrVStSRGR1M0pvK2RnWW1TZWp2eFdpT0VMU3l2?=
- =?utf-8?B?ZURWcWFFc2JGandpSEVDZWYrVkxocjhsMUcwNTkybGRHbUVKWjRpMWEwcE5T?=
- =?utf-8?B?eFpqSEVpZStIa1lVdHR3Qmh2cllxY0tTd05hcFEwM01SVWlVbG94TWNhR0JD?=
- =?utf-8?B?aERKWU5XcGdyUnR3N3FZOGE4SWpDS2tlT0pvd041STcyaEdXV05VVDMrbHpW?=
- =?utf-8?B?WWNOczI2anRxWDRBcWd6RXF1TFVhNEJtNkt1dVRBZllwcHNTeVNHS2E0ZHo0?=
- =?utf-8?B?Z0xtSWd3MGVGdjZnemg4aFMwUlFIUVZpTmowVWtFVXZUcDY3Sjc2TjF4Umw4?=
- =?utf-8?B?TVJKcENkM0tsYzdYWGdmdkFrTVNoWUtCK2dGWklGUDFtOEUxUlRHdHVGWjNv?=
- =?utf-8?B?TktPWDF4a3A3dy9JeUdjdmtKR1pEb0liSjZqTnV2MVR0bFRzS3hOQlN4a1c4?=
- =?utf-8?B?QVd0aFRQNklrWnpNUHhCd204ZXcvVWIyY0NXRG5nRFJQYmJNSzBYNHUxbGcr?=
- =?utf-8?B?SlZyTmd0Y2dBTDJCM0YxUkdpVnlRc3FSOU5HeThIUE9DU0d3dUZUalBJWUxJ?=
- =?utf-8?B?d2NONFRDMHA2Z1AvSHpGM3ZwK0Njd05mTGNpbTdUVzU4cUJ4cys5UE4zbFRX?=
- =?utf-8?B?T0FHV2ZwMTl5aHJrVDdWaWdmWXB4L3lGTWZjdFgvSGZyWkZCSDN0NG94dkVx?=
- =?utf-8?B?RXRMUVBjem5jS1pkRnJBQXIzYjdsakVuV1NMVGJUQVRXTXpjbmpYVGhMSzgx?=
- =?utf-8?B?RkM2U3ZTZE1ZTVhqRVNqcEU0ck1JMG5rbTc0UFpZTmRpL0ltNkozbnp3QlRW?=
- =?utf-8?B?QlRna0N1c0x5cVFxam5waThZOFBLY3BEM0JrN1lqRWJPdlM4eHI3Nm9qNjBS?=
- =?utf-8?B?Sm9hOU5hU2g2eEZFVW42ZHJWcmc1V1AyOVcyZlovNytVL3p1ZHFXMVcvVXlD?=
- =?utf-8?B?blR4eFBFalhocWkyU3NOczEwWkw0ZHdWNE9DT0dJY0lHNkZJbCtDcTFyMFR3?=
- =?utf-8?B?NTdrcDJLbHNGKzlnL3pZVmhnRjNrdTNoVXBJamU5RkVMQitDN0w0cU1JK3Bt?=
- =?utf-8?B?WEgrajdIeEJnZVdvTUVPOStGWk8zNk9LZFpodTNwNEFnbzhaM1FaVGNTMVBX?=
- =?utf-8?B?WE1XcEdRTFJJSmMrK3VzYk82OFFZR3dRdlhhYlNUTVpCbGQzRHcyd2VoUm1j?=
- =?utf-8?B?ZVl0eUxjSzdKdUllU1lCQWQ5Vlk2MHVuOC9tUm9RSDlsdTFUdndXc3Q1ZThu?=
- =?utf-8?B?MUc5M29ZSVY4TkFLalBIeTBrOGpHeGdhK0JJT3JpbndSQTJIa293QmtURHla?=
- =?utf-8?B?TUZZdnBrYmF1RGJueUk3TVlkS21VU1dqVGF0Ry9kSXBuRC80NkkvcUZBQnp1?=
- =?utf-8?B?SUkvcFRvSUY4M1VRUW94ZStuZkc0MXRTSXQ4bW1qSTdSdlVGVnYwZVZVT1pN?=
- =?utf-8?B?SURJb21ma0ZxMHdFL2lSS1NpU01rcEE5VjJvWm5FZlZuRHBzdG9VNWx5bk9r?=
- =?utf-8?Q?Y/XS7Z6RSQ1YIWGIxYtygVZIO?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Znh6RHZsZEV1UDdLaEYxYk9Wc2d6YlRFK0htV2dGaHBHd3BGbWtidU5FUDJJ?=
+ =?utf-8?B?V3ZUR3VVaUs0T21QLzV1bzlLMWR2M2YxeG1yUnZ6VGYwM2dGZU15YUxVOWRN?=
+ =?utf-8?B?dHkzM0pzbmswckRaMTBZbldhUTkvUXE2cWYxVGRabFc1OXU3SHhnaFZtMHZK?=
+ =?utf-8?B?TzZUNFNpWjlmQVFQMHU0TVFPY0V4bGJObW9QcjJsRHB4am9EMjhWQkFZVGpE?=
+ =?utf-8?B?K0NxWDdmdENlK0txQUlzYUEydXcvZU1PU1ZvRXh1VFNtQmQ0emh0RE41UGQ1?=
+ =?utf-8?B?UmhxbWNPRTNqV3VLenZkcTBNZ1JrUzhWRHlDTmY0K1g4TGdzTER6QTk1dmJk?=
+ =?utf-8?B?OHg3RkdoU0NNSXZiamRuNkF1a2luRWdUd0VnaHBOaktMT01TNzVPbnEzb042?=
+ =?utf-8?B?aStYdzU3bEFMSXFodWxHcEszYzFuV0xORE5kSjFUNW4wcVNsRk8xK0Jvd1I2?=
+ =?utf-8?B?M1dEWnVDTnJzcVV3cVFqRTJ5WGtPdWFyWHB1aGZLOFRPWjU5SjZpSHU3Mm5H?=
+ =?utf-8?B?RVkzR0RwM01rQytKSkxmTE1SSUdDM25DK2NrTCsrSFhScGpFZWoxMmlXbzJV?=
+ =?utf-8?B?eWZrR2lJcGxyNFp0RVBoMjlyVzd2a05XUll4NjRnWkdvdEY4L0JlYkkwUDZi?=
+ =?utf-8?B?L0FpK0VLTFNuaUJVM3oySTZkaXpoNExURGhOMVV3djcwK3V3YlFJcEEvOUto?=
+ =?utf-8?B?Z1dYTFlwSStjMUtlVncreFhpdnBMUFM0QnQyT2tEQTlCNnBRdVVZNXhNTHlS?=
+ =?utf-8?B?Sm10NjcwdGNIRGZ0WkhhR2hvOURscEVZc3UwcWV6MTFKbW9SSGgvVVdrbGhK?=
+ =?utf-8?B?cEU4OU9YU0RrZG15WEw5ZXlpaDVuNUVZMnhza0tSTGdiczBOaDZmOWNtQ3J4?=
+ =?utf-8?B?OVRiZjBoa1o2bmJ2RlVUNXZ5c0lJeml1MHB5Rm91Njh1NUtQdE45NkUrc1Z4?=
+ =?utf-8?B?TVRrUWxMTlBvMmcyQWRRZUVqVm5wUC96U1RJd1dFcTlBM1FNRFpyMkgrWW1t?=
+ =?utf-8?B?YXNSZWlML0RIYzJWY0RZbW9iLzY3R3VoUFNIRXRtNVdVazFwNUpFUmd0MWJj?=
+ =?utf-8?B?Yk4wSTZjV01PNU42R3Q1N2hLVmlVMXZ6aWJQSElsc0lHRDJ1Tlc2WURNNUgx?=
+ =?utf-8?B?Y0ZNcW11VXpNbUVXdjZLdDBadEs3dlFzbitGWG5XdDZtSFhpbUo3WXcvUkxi?=
+ =?utf-8?B?aW9PQytTZEJvOTZ5MjVta29tbFRCRm9rbjh2Z21yeVdWYXgyNExvOEJHNCs4?=
+ =?utf-8?B?Z2NBUnBvcTFRZURLTU5Ea3E3dXdacTBMQTR4dHZaY1ZnVzVUZHg3OStibmtY?=
+ =?utf-8?B?Qm5OODBpejJEV0VpYXdpSlJUYnpuMWhEK1VYSlhnYUU0ck0wVVBjL1NPSkVB?=
+ =?utf-8?B?OUVsbWlDZWtQQ3BoaTlPODdpWVUxcDVOOU1NNzltZ045MTVGOFVOeENEajFk?=
+ =?utf-8?B?R3VhQ1IzZGE4cXhCOHM1M0RZdkpLdENnS3VRZngyTTd1SFkzSml1bFk4NG8y?=
+ =?utf-8?B?M1pTSmxtaEZheGlVOGkxYjZDZXdzNENCbDdocytHTjhDU0p3MklOMGlpTGc1?=
+ =?utf-8?B?RjRxcmQzUGRieDgyUUU5Wkk2eXRJNVVMMUNHL25ObWlBZGtTblk5L2RPSVNR?=
+ =?utf-8?B?dGFJdVBGcmtKZkk5S0IrUk5RelpMUFVxYUVOWlNlNGFBNlhVT2ZGTmc3VVdX?=
+ =?utf-8?B?cEd3bHkyYmxWbDRMVy8zYzdUVUhVK2NaZ25wb3JDdDAycFZvbFpjMlh0S0xH?=
+ =?utf-8?B?L3d4VUhjRVhyNXppWjBuKzhrb2ZndXIxeVpjVFhETU41TWtCR3p3dVBhYVFj?=
+ =?utf-8?B?SWwxc0hNOUd4UGUrWE9TdXU1UEJUNnB6aVRwS21QYjRaczg5aUxYRHoyazNG?=
+ =?utf-8?B?NnJNWmQ1cnpBajljOWQ2UWNCME16VlVZbXBPNXBGMS90K0VPd2lqZm4xc0U1?=
+ =?utf-8?B?bTJ2VVEvT1BKSHM4N2UxWFZvelRGeSt3VUpYSmVqN0s1VXlLYkFlcC9RMDNn?=
+ =?utf-8?B?YkErRlFCakJZcUtWTTU4dnB3dE9GenZMWmhYOUp6amZJWkxnTllFYStyWFNZ?=
+ =?utf-8?B?UkRXd1hQanRxemVrK2hDU1NzYWhLS3F4eWZKY1VFN1l3VzU3bmdtUUZYRlQ3?=
+ =?utf-8?Q?OC0HQQotfkjkItBN61YEYJpmL?=
 X-OriginatorOrg: solid-run.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ebb6293b-f414-49e9-a473-08dc2401892b
+X-MS-Exchange-CrossTenant-Network-Message-Id: bec6580c-b6d9-4919-9718-08dc240188e3
 X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB7586.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Feb 2024 15:13:39.5954 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Feb 2024 15:13:39.2294 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: a4a8aaf3-fd27-4e27-add2-604707ce5b82
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: R6h6ZvZqLqriXj/2vulfdNvlwfwWxYe01Cll7hdjRe/b7JrupU+EUEfS1JlYiT61TqcYjcMjxvMWkJkD7vXEVg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: B5wKjRdLYazwqnlF6+Is07u+12PH24PnS4gsM/yRCC6Sn/CLLZ855l3hByzXDlTYkyfO+SCkYJOZFXBTvwvxuw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8686
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -144,39 +145,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SolidRun Armada-388 SoM has an i2c bus supporting on-som eeprom, and
-peripherals on a carrier.
-armada-38x.dtsi disables this bus by default, it should be enabled by
-som or carrier dts.
+This patch-set introduces a new config fragment for spi booting on kobol
+helios-4.
 
-Linux has moved i2c0 from helios-4 board dts to som dtsi, including
-status, pinctrl and clock speed.
-Copy these settings from mainline.
-
-This fixes accessing i2c bus from u-boot commandline.
+Additionally add minor update for default defconfig to enable setexpr
+command, and fix u-boot command access to i2c0 bus.
 
 Signed-off-by: Josua Mayer <josua@solid-run.com>
 ---
+Changes in v2:
+- replaced new defconfig with config fragment in board directory
+  (suggested by Tom Rini <trini@konsulko.com>)
+- Link to v1: https://lore.kernel.org/r/20240113-helios4-spi-v1-0-2a5663a10e6a@solid-run.com
+
+---
+Josua Mayer (3):
+      arm: dts: armada-38x-solidrun-microsom: configure i2c0 bus
+      arm: mvebu: helios4_defconfig: enable setexpr command
+      board: helios-4: add config fragment for spi booting
+
  arch/arm/dts/armada-38x-solidrun-microsom.dtsi | 5 +++++
- 1 file changed, 5 insertions(+)
+ board/kobol/helios4/spiboot.config             | 4 ++++
+ configs/helios4_defconfig                      | 1 -
+ 3 files changed, 9 insertions(+), 1 deletion(-)
+---
+base-commit: 050a9b981d6a835133521b599be3ae189ce70f41
+change-id: 20240113-helios4-spi-144085c0bbc7
 
-diff --git a/arch/arm/dts/armada-38x-solidrun-microsom.dtsi b/arch/arm/dts/armada-38x-solidrun-microsom.dtsi
-index f6ae784bed..1540162e03 100644
---- a/arch/arm/dts/armada-38x-solidrun-microsom.dtsi
-+++ b/arch/arm/dts/armada-38x-solidrun-microsom.dtsi
-@@ -99,6 +99,11 @@
- };
- 
- &i2c0 {
-+	clock-frequency = <400000>;
-+	pinctrl-0 = <&i2c0_pins>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+
- 	eeprom@53 {
- 		compatible = "atmel,24c02";
- 		reg = <0x53>;
-
+Sincerely,
 -- 
-2.35.3
+Josua Mayer <josua@solid-run.com>
 
