@@ -4,63 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72731C47DB3
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 12:29:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F29FDC4828E
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 12:31:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A296887C6A;
-	Fri,  2 Feb 2024 13:29:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 52F0087C76;
+	Fri,  2 Feb 2024 13:31:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="aYYOA7De";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="I0rrj5ee";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67A6987C6D; Fri,  2 Feb 2024 13:29:18 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 950358753E; Fri,  2 Feb 2024 08:59:30 +0100 (CET)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE4A487C69
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 13:29:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 18E2487876
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 08:59:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
+ dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 0DA2462563;
- Fri,  2 Feb 2024 12:29:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 301EBC43390;
- Fri,  2 Feb 2024 12:29:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1706876953;
- bh=yrDSyXuAellJdubNUxWwU8avyaR+mQbZcsuoXighl9g=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=aYYOA7DeoBL/AZje60QWi7yVfOCPWw0po68jrTzsbLfAfddgV2nsF6r1LQitoV3eh
- fw0d+9I7zEYmVTTURSRgkAyXYC+w6OL0WkVNpX7cjjcXmjfZ/7GH0We2/epETuSyXA
- rE+8ZG8oChq7SasJStREhWVTN1uCsMmtGFHXOWCvc123bSvu9DmzCwxdSLe6OPZm2d
- 5Oufs8edvh2bY5wpH1JE6T4ju8qzzFgVmJSDhVc2yMc5KYOWFLYHh47XmDuG35FTyJ
- lPZp/4uZqOVjVeZmwkR0fv0loCORvamgCKdzfkONELAYflUWWn5A3UXFPLWbAarACu
- GTqkNqjspe1Vw==
-Message-ID: <44fdf099-1810-447b-9f25-ecc6c9629a6a@kernel.org>
-Date: Fri, 2 Feb 2024 14:29:08 +0200
+ spf=pass smtp.mailfrom=D.Schultz@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1706860767; x=1709452767;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=cZjBE1ZgCt4LDaRSrJGzJ5B/CZjSaqBZmBWEnygvWu8=;
+ b=I0rrj5eeCXlL2yyvO6cq6qicuCje56SWacXYSTVY69TD0DEU/oWpIlKK/LqwNfyA
+ waRPfIyBEFaouwvLcHm0ztJqg0TJuIFGbtdDBk6PZsPplo+LNbTJ04uum1+p52FO
+ ajxubS+c0tRjwvyllF/BlXpj8Te3QcmDhCJRXdeFEtc=;
+X-AuditID: ac14000a-fbefe7000000290d-b6-65bca0df6f2c
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id F8.B8.10509.FD0ACB56;
+ Fri,  2 Feb 2024 08:59:27 +0100 (CET)
+Received: from [10.0.0.19] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Fri, 2 Feb 2024
+ 08:59:25 +0100
+Message-ID: <6b162651-df07-4ddc-a763-ef75cdfee4b1@phytec.de>
+Date: Fri, 2 Feb 2024 08:59:22 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/1] net: ti: am65-cpsw-nuss: Remove incorrect RGMII_ID
- bit functionality
-Content-Language: en-US
-To: Ken Sloat <ken.s@variscite.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "mripard@kernel.org" <mripard@kernel.org>,
- "dannenberg@ti.com" <dannenberg@ti.com>, "sjg@chromium.org"
- <sjg@chromium.org>, "s-anna@ti.com" <s-anna@ti.com>,
- "s-vadapalli@ti.com" <s-vadapalli@ti.com>,
- "rfried.dev@gmail.com" <rfried.dev@gmail.com>,
- "joe.hershberger@ni.com" <joe.hershberger@ni.com>
-Cc: Nate Drude <Nate.D@variscite.com>, Eran Matityahu <eran.m@variscite.com>
-References: <AS8PR08MB79915B184330438FBFE664DAEC432@AS8PR08MB7991.eurprd08.prod.outlook.com>
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <AS8PR08MB79915B184330438FBFE664DAEC432@AS8PR08MB7991.eurprd08.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8
+To: <u-boot@lists.denx.de>
+References: <20240129091314.925120-2-w.egorov@phytec.de>
+Subject: Re: [PATCH 1/2] board: phytec: am64x: Add PHYTEC phyCORE-AM64x SoM
+Content-Language: de-DE
+CC: Wadim Egorov <w.egorov@phytec.de>
+From: Daniel Schultz <d.schultz@phytec.de>
+In-Reply-To: <20240129091314.925120-2-w.egorov@phytec.de>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrOLMWRmVeSWpSXmKPExsWyRpKBR/f+gj2pBivnqFi83dvJ7sDocfbO
+ DsYAxigum5TUnMyy1CJ9uwSujL5bx1gLFjFVbOm6wNzA+Iyxi5GTQ0LARGLO/edANheHkMBi
+ JonPy6+wgiSEBG4ySlx+IAhi8wrYSKw+so4ZxGYRUJF4tek3M0RcUOLkzCcsILaogLzE/Vsz
+ 2EFsEQEpiZedG4FqOIDmWEjcfMsHEhYW8JZY8WUa2F5mAXGJTc++s0LYqhJTZ5wHi7MJaEnc
+ 2TIXrJVTwFKib4sxRImFxOI3B9khbHmJ7W/nMENcqSAxe9tkqFfkJaade80MYYdKHNm0mmkC
+ o/AsJIfOQrJ5FpKxs5CMXcDIsopRKDczOTu1KDNbryCjsiQ1WS8ldRMjKLBFGLh2MPbN8TjE
+ yMTBeIhRgoNZSYR3pdzOVCHelMTKqtSi/Pii0pzU4kOM0hwsSuK8qzuCU4UE0hNLUrNTUwtS
+ i2CyTBycUg2McdxH12r+bzpxz+SmTFii/dWLcicVbig9+j2/vVjXQ942bs2C5KwDrn2L972+
+ H7GjtiBj1Qf+i40moTrtFY+WLfTOZP/E3PyF7ZCHAd+PxZuenPGUaAhIb5i9+I2D0f0r2k+m
+ PL+U//RnK4Nlrci6w/PlHWcsnbtmxnE9R+WQv2/SXLPe3dRnV2Ipzkg01GIuKk4EAOlPvSJa
+ AgAA
+X-Mailman-Approved-At: Fri, 02 Feb 2024 13:31:24 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,27 +89,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hey Wadim,
 
+just trying to give you feedback through the archived mail. (That's why 
+the content is missing).
 
-On 01/02/2024 22:17, Ken Sloat wrote:
-> The CPSW implementations on the AM6x platforms do not support the
-> selectable RGMII TX clk delay functionality via the RGMII_ID_MODE bit as
-> the earlier platforms did. While it is possible to write the bit,
-> according to various TI AM6x datasheets, reference manuals, hardware
-> design guides and TI forum posts from TI, this bit is "not timed, tested
-> or characterized. RGMII_ID is enabled by default."
-> 
-> The driver implementation today however, will incorrectly set this bit
-> whenever the interface mode is in RGMII_ID or RGMII_TXID. Since
-> disabling the delay (bit=1) is not supported by TI, this bit should
-> always be written as 0.
-> 
-> See:
-> https://e2e.ti.com/support/processors-group/processors/f/processors-forum/1211306/am625-enet1_ctrl_rgmii_id-_mode
-> https://www.ti.com/lit/pdf/spruiv7 (Rev. B Figure 14-1717)
-> https://www.ti.com/lit/gpn/am625 (Rev. B Figure 7-31 Note A)
-> https://www.ti.com/lit/an/sprad05b/sprad05b.pdf (Rev. B Section 7.4)
-> 
-> Signed-off-by: Ken Sloat <ken.s@variscite.com>
+The R5 config has 0x800 as value for 
+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR. This offset wasn't changed 
+upstream and the TI EVM still uses 0x400.
 
-Reviewed-by: Roger Quadros <rogerq@kernel.org>
+Regards,
+Daniel
+
