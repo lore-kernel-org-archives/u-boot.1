@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2095EC4828F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 20:14:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59F76C4828F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 20:35:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C09787E19;
-	Fri,  2 Feb 2024 21:14:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7DB4A87E2E;
+	Fri,  2 Feb 2024 21:35:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="Mi67L4hd";
+	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="d5fo7XxZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB0F187E1D; Fri,  2 Feb 2024 21:14:51 +0100 (CET)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
+ id 5AF1987E29; Fri,  2 Feb 2024 21:35:28 +0100 (CET)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A189F87E19
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 21:14:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F89B87E2E
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 21:35:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=foundries.io
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2d0512f6e32so30221311fa.1
- for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 12:14:49 -0800 (PST)
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-3bb9d54575cso1636953b6e.2
+ for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 12:35:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1706904889; x=1707509689; darn=lists.denx.de;
+ d=foundries.io; s=google; t=1706906124; x=1707510924; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=m/miyXERwqxqfqL4/PQJMmiJUolp8gBqbJ+H1L5VQAI=;
- b=Mi67L4hdsczLB8X1eQXBpWUblSWC7j286BNpCGM6t1aXwX8gwOFIXTlzciXhFVkosI
- qcakCM6EETt3llWybXJhwPZQigS0ddpMmzZL2UXNYYrWZ1y6bJhYau5bsGp5aHrYx9NC
- Qbgz1nK4hozPWBBUBDMS79ho00PH2yPMo1QqKZh14q0wGWUsxj5ZlIaWjVTleK4Nt36n
- 0Tlu8NWI/HNI3xxWSkOM0ZdAZdqDNYcLSGl0l5hNIyqkB6vxMXx5TAcP2jspWPlaOXVE
- mkLwmjBRWIXTchRyFxvxzeo+5FaFoz37+nf6924ft626C8eNByxxPhdAbH6gD7idQ+It
- 8jjA==
+ bh=sW8yFV6bkB8+A80z0T3iUUNcL9oGBejWBsi+a6A0JP4=;
+ b=d5fo7XxZcJbS8ChPwOR1oxwpxKhX1bH4oATxBk48Z3Hxf56vF0czEHymxkcBVQVc4N
+ XVPLmfnqr3z6nZXbA63UvQy7ptuhoKxu5Zw0p0ofI4Ta+z4gCHEFweAwIChR8kRp8aGL
+ KfUaO/fNw4bw69pwv4UZAFO8l4cSJO/hjBo2rB0YVWNOTmttZBPUXV7KAlIRJMPDeOYF
+ I8TrxnE+b6vtsLkWjqzQAEcSmz8r/cj3UpC887IK3PIL3b1iFBYkSQQJhjlLUkX9E5oq
+ M1/vlIzDj8iXLlYYNClPTRMdzvu5JIcE5Z759CG40liVlwK2qxg974240hyqSxjdpwc4
+ aXXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706904889; x=1707509689;
+ d=1e100.net; s=20230601; t=1706906124; x=1707510924;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=m/miyXERwqxqfqL4/PQJMmiJUolp8gBqbJ+H1L5VQAI=;
- b=u0l8QeotRQeSgy+hC2dwQ8kyEtFJS9aAuH9ioPXTYy8p7Co890luDpA7vLhjmzjkMC
- NYKZTgt9s/8CeGfZS6tWl/5qstnPr6L6186I6o0vOeKs+LSrTcy6NbH+x7KRLs6yN2UN
- Nbc6E1MfILFDZExnGxqzaMgsIycY/WSbJvQhkVL0cJ4eKbM9sO1S3BSSz/fAmFJ5Pz7j
- BtMIlaV/zOSfem18BS1h0xo+ZX83PjSID/RxTJfL9/unGG0rMnihPlpTx1X4sZSCYxdC
- +QO0FXvUbAonrs9xLnL44lfdzsSE5xLoS+Qo/OdYho3kk3Rbn44R7rr1UN6jCHEueL92
- FW1g==
-X-Gm-Message-State: AOJu0Yw8Ec/Y63ZpdmAvTqhwkE/CdOIa8EI4umFM1r5DFU4vPZszfND8
- /WSVAHXkcj5o7zsmX7zT7JuJAxXNWkL9c93kSurL9gsIMAa630qFski9P51FQC5Orwpvd6qHDDF
- /EZfGMnx9tVImE8P6Nx0BpTpPTOIU97ZHCs5awA==
-X-Google-Smtp-Source: AGHT+IFjf65tyMoriEmj8f30pNjDTDrvRdcXgUUJuDay/UBjYdxyGHq5OLfdkC02nWsJA0TzH4foqtBAIsGxo6DziWc=
-X-Received: by 2002:a2e:a589:0:b0:2d0:5f90:2b29 with SMTP id
- m9-20020a2ea589000000b002d05f902b29mr5019662ljp.12.1706904888494; Fri, 02 Feb
- 2024 12:14:48 -0800 (PST)
+ bh=sW8yFV6bkB8+A80z0T3iUUNcL9oGBejWBsi+a6A0JP4=;
+ b=LbUB3Ti1o6J+T/k53PAuXc9y+PNwXnDrUZxU81q9nqExyQm+zBPKh+YnW8j5j5pRum
+ 938usEWjMAbgbmSCGyWcQLFxcgxNvawZHjoJ3MqOm6D5jz/Lbq5YtwIfRlDWqsXeImoZ
+ tOpqqe3I/VHU5xB+pDinpsQvDRhI9eZSBkwe1tTHmuOTlAIZAy7C8G4dVUOV0jpZrzl+
+ +7a/IWASjOkLkM734kFqroXTtjjqTdb2sXcJjX13PB5zVY4w/zeVb9nB8FsfdPSHfF3i
+ wD+wNRQrDnYvYkQ3Xar8Nn76ucCnYm5omPcDW49KQrFxY+NQTTMycRApMHXc98AEignR
+ wzXA==
+X-Gm-Message-State: AOJu0Yxd9KtQjNtQoRQJtDEoi8l4bTh+/ZrZwdrv1jmASZapSF26Yeff
+ XD3NjMPt00NRjV4rMiZxTv3AHWDrZIhxe98p1skLAgQ9VOB7/cX3gL8cl/LHJCMMTjx3zNZVAMh
+ a44rqNwpEmXHOopjM2KwmYuse4kCjyDY1YNGL7w==
+X-Google-Smtp-Source: AGHT+IGPheMK1MBVYg3sNmJne9hpk8UzqTOL+UKkcPYEVUvkoKbwRnfUpzLbDKgFJYbzJVuQw/PSTXz5nvrnvGCaJww=
+X-Received: by 2002:a05:6871:68b:b0:210:a495:ba1f with SMTP id
+ l11-20020a056871068b00b00210a495ba1fmr964025oao.15.1706906124610; Fri, 02 Feb
+ 2024 12:35:24 -0800 (PST)
 MIME-Version: 1.0
 References: <20240202160405.4126192-1-festevam@gmail.com>
- <20240202160405.4126192-3-festevam@gmail.com>
-In-Reply-To: <20240202160405.4126192-3-festevam@gmail.com>
+In-Reply-To: <20240202160405.4126192-1-festevam@gmail.com>
 From: Igor Opaniuk <igor.opaniuk@foundries.io>
-Date: Fri, 2 Feb 2024 21:14:36 +0100
-Message-ID: <CAL6CDMGa=7R1MNX0xz42_Vy=Bs4GQRr_gZoY=mEWcZsuOUXLFQ@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] mx6sabresd: Remove board_phy_config()
+Date: Fri, 2 Feb 2024 21:34:48 +0100
+Message-ID: <CAL6CDMFC0tmQgE1jWP0_s1uKVBpSH_9U9xqs9sPY4Mv2u9R_4Q@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] mx6sabresd: Fix U-Boot corruption after saving the
+ environment
 To: Fabio Estevam <festevam@gmail.com>
 Cc: sbabic@denx.de, trini@konsulko.com, uboot-imx@nxp.com, 
  u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
@@ -89,86 +89,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Fabio,
-
 On Fri, Feb 2, 2024 at 5:04=E2=80=AFPM Fabio Estevam <festevam@gmail.com> w=
 rote:
 >
 > From: Fabio Estevam <festevam@denx.de>
 >
-> With Ethernet DM in place, there is no longer the need for having
-> the board_phy_config() anymore.
+> U-Boot binary has grown in such a way that it goes beyond the reserved
+> area for the environment variables.
 >
-> Remove it.
+> Running "saveenv" and rebooting the board causes U-Boot to hang because
+> of this overlap.
 >
-> Confirmed that TFTP transfer still works fine without board_phy_config().
+> Fix this problem by selecting CONFIG_LTO so that the U-Boot proper
+> size can be reduced.
+>
+> Also, to prevent this same problem to happen in the future, use
+> CONFIG_BOARD_SIZE_LIMIT, which can detect the overlap in build-time.
+>
+> CONFIG_BOARD_SIZE_LIMIT is calculated as follows:
+>
+> CONFIG_BOARD_SIZE_LIMIT =3D CONFIG_ENV_OFFSET - u-boot-img.dtb offset
+> CONFIG_BOARD_SIZE_LIMIT =3D 0xc000 - 69 * 1024
+> CONFIG_BOARD_SIZE_LIMIT =3D 715766
 >
 > Signed-off-by: Fabio Estevam <festevam@denx.de>
 > ---
 > Changes since v1:
-> - Newly introduced.
+> - Select LTO. (Tom)
 >
->  board/freescale/mx6sabresd/mx6sabresd.c | 34 -------------------------
->  1 file changed, 34 deletions(-)
+>  configs/mx6sabresd_defconfig | 3 +++
+>  1 file changed, 3 insertions(+)
 >
-> diff --git a/board/freescale/mx6sabresd/mx6sabresd.c b/board/freescale/mx=
-6sabresd/mx6sabresd.c
-> index b558a596dff8..bb066a5d36c3 100644
-> --- a/board/freescale/mx6sabresd/mx6sabresd.c
-> +++ b/board/freescale/mx6sabresd/mx6sabresd.c
-> @@ -7,7 +7,6 @@
->
->  #include <image.h>
->  #include <init.h>
-> -#include <net.h>
->  #include <asm/arch/clock.h>
->  #include <asm/arch/imx-regs.h>
->  #include <asm/arch/iomux.h>
-> @@ -254,39 +253,6 @@ int board_mmc_init(struct bd_info *bis)
->  }
->  #endif
->
-> -static int ar8031_phy_fixup(struct phy_device *phydev)
-> -{
-> -       unsigned short val;
-> -
-> -       /* To enable AR8031 ouput a 125MHz clk from CLK_25M */
-> -       phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x7);
-> -       phy_write(phydev, MDIO_DEVAD_NONE, 0xe, 0x8016);
-> -       phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x4007);
-> -
-> -       val =3D phy_read(phydev, MDIO_DEVAD_NONE, 0xe);
-> -       val &=3D 0xffe3;
-> -       val |=3D 0x18;
-> -       phy_write(phydev, MDIO_DEVAD_NONE, 0xe, val);
-> -
-> -       /* introduce tx clock delay */
-> -       phy_write(phydev, MDIO_DEVAD_NONE, 0x1d, 0x5);
-> -       val =3D phy_read(phydev, MDIO_DEVAD_NONE, 0x1e);
-> -       val |=3D 0x0100;
-> -       phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, val);
-> -
-> -       return 0;
-> -}
-> -
-> -int board_phy_config(struct phy_device *phydev)
-> -{
-> -       ar8031_phy_fixup(phydev);
-> -
-> -       if (phydev->drv->config)
-> -               phydev->drv->config(phydev);
-> -
-> -       return 0;
-> -}
-> -
->  #if defined(CONFIG_VIDEO_IPUV3)
->  static void disable_lvds(struct display_info_t const *dev)
->  {
+> diff --git a/configs/mx6sabresd_defconfig b/configs/mx6sabresd_defconfig
+> index a90efe4a7786..d4fb55622cf1 100644
+> --- a/configs/mx6sabresd_defconfig
+> +++ b/configs/mx6sabresd_defconfig
+> @@ -21,6 +21,9 @@ CONFIG_SPL_SERIAL=3Dy
+>  CONFIG_SPL=3Dy
+>  CONFIG_SPL_LIBDISK_SUPPORT=3Dy
+>  CONFIG_PCI=3Dy
+> +CONFIG_LTO=3Dy
+> +CONFIG_HAS_BOARD_SIZE_LIMIT=3Dy
+> +CONFIG_BOARD_SIZE_LIMIT=3D715766
+>  CONFIG_FIT=3Dy
+>  CONFIG_SPL_FIT_PRINT=3Dy
+>  CONFIG_SPL_LOAD_FIT=3Dy
 > --
 > 2.34.1
 >
-
 Reviewed-by: Igor Opaniuk <igor.opaniuk@foundries.io>
+
+btw, from my experience, the same issue will probably occur again in future=
+,
+especially when the current U-Boot size is already close to the defined lim=
+it
+(yes, with this patch it will be reported during compile time, but still).
+
+Have you considered adjusting the boot image layout instead
+(moving CONFIG_ENV_OFFSET, so unlikely
+U-Boot image will overlap again) to tackle feature problems?
 
 --=20
 Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
