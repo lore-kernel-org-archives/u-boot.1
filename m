@@ -4,78 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D254C4828E
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 08:48:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24626C4828E
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 08:51:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D900886F80;
-	Fri,  2 Feb 2024 09:48:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 80CE086F80;
+	Fri,  2 Feb 2024 09:51:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="F6IFD8Nu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Vth0qfdf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1BBF86F7E; Fri,  2 Feb 2024 09:48:23 +0100 (CET)
-Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
- [IPv6:2607:f8b0:4864:20::e32])
+ id 139C6879FE; Fri,  2 Feb 2024 09:51:40 +0100 (CET)
+Received: from mail-vs1-xe35.google.com (mail-vs1-xe35.google.com
+ [IPv6:2607:f8b0:4864:20::e35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0F688753E
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 09:48:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EC22A86F7E
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 09:51:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe32.google.com with SMTP id
- ada2fe7eead31-46cfc9a79ebso249121137.3
- for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 00:48:19 -0800 (PST)
+Received: by mail-vs1-xe35.google.com with SMTP id
+ ada2fe7eead31-46b11fced44so684172137.2
+ for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 00:51:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706863698; x=1707468498; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1706863896; x=1707468696; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1fIl6ZsGNCVvN7ZCp+BWgd/CtXDaW+zFCx31P2bDNPs=;
- b=F6IFD8NuIefSSYqPaZgNlhm1f4d+gxbKTwVvgcTx2gXiaY3kg/dMe0nUp39mFeYYKY
- EMLh/eHF71eQOSOmTXSTjFLlslKPnZ06pO+kl88Z+8a1AqDcPMBwQOsa1AnLSzdQsgIl
- MjbVVhMtoxaH/Xjr2sUr3Hd5Zj/oMaN3V6vDu/x3eXLDsh6ogr1x/cVd5M+6cUZQfS7w
- sgbUeretT6Q02VdLtyfKRZDTgddcKmkr7ObO4GG7iPXinvG81sGKeT/9yaCKtquDS5RG
- ETI6SEkskuZcr+dzkACMefue0LaEz9qq+Ii/5PU4j3qf4VZpzmMrrTyqEHNzxC7xkcHa
- IHrg==
+ bh=16pnuYfBG2qtc8XySWxs6r91MNecYPxP9lCH4UD4Ok4=;
+ b=Vth0qfdfOd8VhbN1XG7qYwwWPrH2Ghunyu7CiKNloNr4oFt3zy0AZbj1cJ3RiqTRur
+ PWFvcYDwxR2t80/wP7L2qox6lgRlEbGbVP77h6YYh5hOKYyrg1BWBVa1pkp3LSOUf6Hr
+ iXPPrAU3wQ5xrW5Liuu0nfLWOS2WVZyWT0RIS8MAyH54BfCNlfEcxJmo61XGUYBtIgPh
+ Aw1LyurRnmfp9Pb+lQxcDKtLM8nTsIYmN139vWPFxrc2RIqYSqe2UB00APtp+dZo2fUu
+ RsK/kaI82HzX9zwKN5cNxHqs8f23FZfIFuwvj1M4e7OHVtQO+1QH4RNByAxDENMVH5qE
+ focQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706863698; x=1707468498;
+ d=1e100.net; s=20230601; t=1706863896; x=1707468696;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1fIl6ZsGNCVvN7ZCp+BWgd/CtXDaW+zFCx31P2bDNPs=;
- b=M2A8CALdlEN2W72HR0dnzAEFDeK/H7KGPhkdx+P/QcZ+ExbP/juJIeYgKkBs99nNjM
- rWdBBtric+z8gtBVaW2oEsw5j5Cd4dIs/PY+TZTnGyq6iDsR8bBgTnD5f3a2RdgN9pf/
- ZdtD0zHCOuPxoZn4YgJrdGmQaeFIBbjsVNSPBeFcp6s0nngnXc4i46BuyeEbxW9QUpYR
- zPTyJP/H6BDqefzSqt8+//1vhlJ2YMtbz85+FICdS0eVJaz6FrlmAOKbw5Na2V1SCbb5
- lsaGZFvbVeMdNVwfRtWYFyFeeOsXAEYpANGGiOMJFlx8yO6BC0/eodF+3Jg+xTiZPWHq
- 9WYA==
-X-Gm-Message-State: AOJu0Ywww10q32gt+SRzfpsMtJ9kg7A3/aujhFF9/pJp2l26Zv799u6j
- +mPWLIDlj6tja5L0WZMhVjkn6DCw4oXQlmnbd/C2S4v4nFxQ5i/GVFE13pexZzVf6PgwwqY8KiG
- h8w2p0iLwPPjgy2G9aHymh+2gQrWDP/vqD9agNA==
-X-Google-Smtp-Source: AGHT+IEDobV8xYKDrF+uE01pEpyuwgRJKU6csc+Z65G3UcT7vXKgWIhI+3BYbRwmo320hDIh90/H7mORmrT5Po3/76Y=
-X-Received: by 2002:a67:f84e:0:b0:469:8762:4e68 with SMTP id
- b14-20020a67f84e000000b0046987624e68mr1502090vsp.33.1706863698321; Fri, 02
- Feb 2024 00:48:18 -0800 (PST)
+ bh=16pnuYfBG2qtc8XySWxs6r91MNecYPxP9lCH4UD4Ok4=;
+ b=j3m99JmUWo1tQHQyhIwFxdEhe3zyI66Ean5t13sCs4jh5nV9vYwm2valKwUPlBEXVY
+ kVcUpxrD7of+RvCjPG4eQb1qluSSpa9eg+VPOGvSc/dqsV6eIutOsibOc7M/d6ralqp8
+ qFUHfaWjN/NgjhcIgYLzXyOrfEFufKKQkTFRDDGTI4H+06CgKYDSoYGgb+F/Q9r0yK4W
+ +DHHhyNUavouPbUOfF9hmFydwXhfDcAFB4Ot6F2uVZ143iQMOkAZDOtZ66WOIKsl8jtP
+ Knt/phhXa/KVLrAn59BDkh6j6x0T9NuqgMh3n8EP6Zy8pLx0qwdfrU44K+b2Ljlu5pAW
+ LaeA==
+X-Gm-Message-State: AOJu0Yza6PYxF1RU8v7VnIQcvL5h0XJclUlTEKRsCSkryoLNhTmSBKc8
+ 7fqiwSqQpg8l3TPE8xCPUl5fXDKF+D0XCM9SKhyhUKaKCVU1MgDH+69Y0/4UM/W69j/5fS7geq+
+ 6twn4pbPZcCQogbncDCXANdUYCIX39cDTH7y6rg5rFIM5YxmBVNY=
+X-Google-Smtp-Source: AGHT+IFAHjma21A8JxuZd4M10iiR7GwE3HIAFvfox5cE2YMz25pA9E15rUvzXgiCk3WS/JTrguOEbKwy6ZaFmcWFPik=
+X-Received: by 2002:a67:e292:0:b0:46d:706:dc04 with SMTP id
+ g18-20020a67e292000000b0046d0706dc04mr306356vsf.13.1706863896620; Fri, 02 Feb
+ 2024 00:51:36 -0800 (PST)
 MIME-Version: 1.0
-References: <20240130-b4-qcom-common-target-v3-0-e523cbf9e556@linaro.org>
- <20240130-b4-qcom-common-target-v3-26-e523cbf9e556@linaro.org>
-In-Reply-To: <20240130-b4-qcom-common-target-v3-26-e523cbf9e556@linaro.org>
+References: <12e63b80-3c65-494c-94b4-bfd949232ef7@moroto.mountain>
+In-Reply-To: <12e63b80-3c65-494c-94b4-bfd949232ef7@moroto.mountain>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 2 Feb 2024 14:18:07 +0530
-Message-ID: <CAFA6WYMDijFRzQyfQmQU=opjBRs59mTOrOsd=By1-8sdHKTQew@mail.gmail.com>
-Subject: Re: [PATCH v3 26/36] dts: msm8916: import PMIC dtsi files
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, 
- Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+Date: Fri, 2 Feb 2024 14:21:25 +0530
+Message-ID: <CAFA6WYM9zQSG9nu32iHy1o5NGbYqRbm47cSf9Dgw-=Jn-07pwA@mail.gmail.com>
+Subject: Re: [PATCH] button: qcom-pmic: fix some error checking
+To: Dan Carpenter <dan.carpenter@linaro.org>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -94,77 +88,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 30 Jan 2024 at 19:35, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+On Wed, 31 Jan 2024 at 12:39, Dan Carpenter <dan.carpenter@linaro.org> wrote:
 >
-> Import the supporting pm8916.dtsi and msm8916-pm8916.dtsi files from
-> upstream in preparation for switching boards over.
+> The pmic_reg_read() function can return errors.  Add a check for that.
 >
-> Taken from kernel tag v6.7
->
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> Fixes: 4e8aa0065d4b ("button: qcom-pmic: introduce Qualcomm PMIC button driver")
+> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
 > ---
->  arch/arm/dts/msm8916-pm8916.dtsi | 157 ++++++++++++++++++++++++++++++++++
->  arch/arm/dts/pm8916.dtsi         | 178 +++++++++++++++++++++++++++++++++++++++
->  2 files changed, 335 insertions(+)
+> This patch is mostly to make static checkers happy but it's obvious and
+> harmless.
+>
+>  drivers/button/button-qcom-pmic.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
 
-[snip]
-
-> diff --git a/arch/arm/dts/pm8916.dtsi b/arch/arm/dts/pm8916.dtsi
-> new file mode 100644
-> index 000000000000..f4de86787743
-> --- /dev/null
-> +++ b/arch/arm/dts/pm8916.dtsi
-> @@ -0,0 +1,178 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +#include <dt-bindings/iio/qcom,spmi-vadc.h>
-> +#include <dt-bindings/input/linux-event-codes.h>
-> +#include <dt-bindings/interrupt-controller/irq.h>
-> +#include <dt-bindings/spmi/spmi.h>
-> +
-> +&spmi_bus {
-> +
-> +       pm8916_0: pmic@0 {
-> +               compatible = "qcom,pm8916", "qcom,spmi-pmic";
-> +               reg = <0x0 SPMI_USID>;
-> +               #address-cells = <1>;
-> +               #size-cells = <0>;
-> +
-> +               pon@800 {
-> +                       compatible = "qcom,pm8916-pon";
-> +                       reg = <0x800>;
-> +                       mode-bootloader = <0x2>;
-> +                       mode-recovery = <0x1>;
-> +
-> +                       pwrkey {
-> +                               compatible = "qcom,pm8941-pwrkey";
-> +                               interrupts = <0x0 0x8 0 IRQ_TYPE_EDGE_BOTH>;
-> +                               debounce = <15625>;
-> +                               bias-pull-up;
-> +                               linux,code = <KEY_POWER>;
-> +                       };
-> +
-> +                       pm8916_resin: resin {
-> +                               compatible = "qcom,pm8941-resin";
-> +                               interrupts = <0x0 0x8 1 IRQ_TYPE_EDGE_BOTH>;
-> +                               debounce = <15625>;
-> +                               bias-pull-up;
-> +                               status = "disabled";
-> +                       };
-> +
-> +                       watchdog {
-> +                               compatible = "qcom,pm8916-wdt";
-> +                               interrupts = <0x0 0x8 6 IRQ_TYPE_EDGE_RISING>;
-> +                               timeout-sec = <60>;
-> +                       };
-
-watchdog button isn't supported by the U-Boot driver code. So it leads
-to spurious error as follows:
-
-Unknown button node 'watchdog' should be 'pwrkey' or 'resin'
-
-I suppose the button-qcom-pmic driver should gracefully handle the
-unsupported case.
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 
 -Sumit
+
+> diff --git a/drivers/button/button-qcom-pmic.c b/drivers/button/button-qcom-pmic.c
+> index 34a976d1e6c6..e778e51a4f36 100644
+> --- a/drivers/button/button-qcom-pmic.c
+> +++ b/drivers/button/button-qcom-pmic.c
+> @@ -86,7 +86,7 @@ static int qcom_pwrkey_probe(struct udevice *dev)
+>         }
+>
+>         ret = pmic_reg_read(priv->pmic, priv->base + REG_SUBTYPE);
+> -       if ((ret & 0x7) == 0) {
+> +       if (ret < 0 || (ret & 0x7) == 0) {
+>                 printf("%s: unexpected PMCI function subtype %d\n", dev->name, ret);
+>                 return -ENXIO;
+>         }
+> --
+> 2.43.0
+>
