@@ -4,80 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29909C4828F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 21:19:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F202C4828E
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 21:27:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B92C87E50;
-	Fri,  2 Feb 2024 22:19:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
+	by phobos.denx.de (Postfix) with ESMTP id 70B3B87E63;
+	Fri,  2 Feb 2024 22:27:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="ERp2b/3Y";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FTvvO6h6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A62E87E51; Fri,  2 Feb 2024 22:19:09 +0100 (CET)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
+ id F39C487E63; Fri,  2 Feb 2024 22:27:47 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECD4287E23
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 22:19:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=foundries.io
+ by phobos.denx.de (Postfix) with ESMTPS id C4CE987DFC
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 22:27:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2cf328885b4so31499521fa.3
- for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 13:19:06 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-40fb7427044so5102065e9.0
+ for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 13:27:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1706908746; x=1707513546; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1706909265; x=1707514065; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gSdON60VaWpTOCxIFx+KP4pT/cxk5W9+zo/sY2J1YtM=;
- b=ERp2b/3YDDtLcvpqgARjAVwtyYmRlJu2fFNuxnlgT6Rmz7SPmXn88YGi/9maWhwvmB
- eHKtrJoqxNGokF2OBgtzKsNV1PRGhpWRoWVV3rhkEC3RC7C77r6A7xhtj7SecE8E14IT
- BlpAblVGTP4IGOs8dyQNgsxS4cZtZW2zhzJE/A8wD2KYkPtQsSnSDpf4OOv4y13g/P1o
- /nqhCA2inEH8U5d4WAUcWd+lT9qVpwmdp75/LYWeq2xVjNmtmfzncwLW4IuWzmKBy91V
- 2qd9gPQXKu2sPyaFdjYiJX8QlhRvmTrCVdi9urSsCBdVvHZ97K/Dso9UL7/SZiGuEGso
- lkZA==
+ bh=TzgyOY/urQcgO9+tXlmpqy0ShqBb/RN6o4Lpn3O0mc8=;
+ b=FTvvO6h62gVzniLtPQKYl8Rs84B1OwM/86Yj1PfptP4cyw/iaDBBOztQLk41N72Slg
+ 1dltXYsCXPOwH3cOR6gwzYguz3hNGVUqHOrA7vPMkA/Y9H0sPibiwI1OpmQoWWWBxtvS
+ C5ew4Y48zls0NUEu+wo80d4Vvv5CJlQmYGAlGdpaUXRcWf67/zN7MWnb2wt5+VbpAQZT
+ xYSRvSySqfVJOzk+A5qdBmpVTuqv+ZSJ5xGzQeNtcupnKEnmKeIyP64A0rn41ZpeiDOc
+ bvQeMLgtFkWJdhf9SQPkOG5qy588OUPc8sXV7ixQo6tvQAUZXA3T3qDjYled3tWSg4le
+ EOSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706908746; x=1707513546;
+ d=1e100.net; s=20230601; t=1706909265; x=1707514065;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gSdON60VaWpTOCxIFx+KP4pT/cxk5W9+zo/sY2J1YtM=;
- b=hZB61yFrRKBfmUAb2HGk4hz25s9ghFlSTJoLs+IfldFSdZ5Sdi3clT/XCPVQGQ0JgO
- 0J66fbi/Mf+u+61q0Hspr0y3E94Qhd1EEPwd142KZvQHsQ8hpasuwEnBx42mRsGhkj/w
- KNO3r65AdT4eBGjQBtnnRhFmSTkT+ku+qRUDD9ZuRcEMeHEpAeBMU0uhOLeuHzXzdpbJ
- w0LMI4BNEfKSTwwBe+tqWQe2tLeVHinLD7jLfuPpS/2cUxLFW+A6VcGgD5j6Ug22S/XH
- LlQRSHQ4fSzUqb+knGLgJOoIU6zCfyUBIrsDKANqLbJpzZ5uZeDSw5eqdA8iqwlMcV05
- tyaA==
-X-Gm-Message-State: AOJu0Yy4WexZKJtyLM4qAT7m4xpNSjTqFMxQC1QXsEKkAP1ZZYtreP8l
- fJu3z6Nxt4pMXjTkqy+ZsqqeGh+G6e+nLlhex6Acm+dIKLPAEH9uqNECcm138yZh1YX76tXg4rj
- Q4bkdQFYNanzWJ9q99f2BwYki1TBLLb1AUYAk2OAU+kXIYuUjrQ7z2g==
-X-Google-Smtp-Source: AGHT+IHQmofH82x1aj7GQGmhOmJbXWtRrBzQjR8/m8h5vhYgUVQEszX4PCmyirVr034+ui0ZtkEeeRMixtgYEn0G8Rk=
-X-Received: by 2002:a05:651c:1242:b0:2cf:4e53:7c38 with SMTP id
- h2-20020a05651c124200b002cf4e537c38mr5922222ljh.22.1706908745975; Fri, 02 Feb
- 2024 13:19:05 -0800 (PST)
+ bh=TzgyOY/urQcgO9+tXlmpqy0ShqBb/RN6o4Lpn3O0mc8=;
+ b=BVd/anxDt7FVPAaWG7/itWG0Bb9G0sNKGjxfIsbu+YQtdz7bxQl2dUF7cw5gqMiSer
+ CjFH3jOGBO6GsLLewOfAhYQoAg76KmbmPozAfR4pP67ZO5XtindUXnPBoYGa4Ry0n2vB
+ qhSD8BFjI3/stOxPyLTneaYqZ1QteXcoeq6KGZhfB7r3GICmb+/ljOuDUmnfTphIUZFA
+ 9l4rrGWQxPaDCHmrEooM6BNm61wLfGeVX/B2T9GE3jPcYGZ01v7aXnwox3/t/a0LP08K
+ sw2w16wbRjsSQ4KBQBlC8z2EQ9TZKUr3eQcxsxFpkeaFluo4rdJj5JkeWzMj2nKmsWCx
+ o7pA==
+X-Forwarded-Encrypted: i=0;
+ AJvYcCVgh3C/DV8pNd84YgOX0IB0gqu48+HO4vdrpceUSlqE74pdM9fMy7i0o2x83s5UziyATvxV7cHIheVFEe3bkk3zaeV1og==
+X-Gm-Message-State: AOJu0YzV94FYUplywY25ESjJ1TamP8uRKegvTd9omEOhiQ3qZVp3DCTg
+ 8QN0AfnzipNr9TtE+Fo0F+G0+L+fHxxk2K8UN8x7oTMd8A7fUWeuAA2fWeod6ei0wXH8ZADFdy1
+ e5YtzvBSIZ2WAQ/bVqwdVGYTY4rc=
+X-Google-Smtp-Source: AGHT+IEf5l95/UQ/IdYqgyAyWK6glhXcnMR0x9FIrnFS9zWIvVcaC4cBMKF/4u9o8DKsOg63zpW7p/dCkFPCygD5P/c=
+X-Received: by 2002:a5d:43ce:0:b0:33b:1a51:733c with SMTP id
+ v14-20020a5d43ce000000b0033b1a51733cmr3585792wrr.6.1706909264746; Fri, 02 Feb
+ 2024 13:27:44 -0800 (PST)
 MIME-Version: 1.0
-References: <20240131141426.34926-1-o451686892@gmail.com>
- <20240131141426.34926-2-o451686892@gmail.com>
- <CAL6CDMGrR9YQzs6iLbKmzwMWXYyX15-ngv2vBDbkW-FSfr38kA@mail.gmail.com>
- <CAHk0Hos6PozkGtbqZw1aDUfHJD6wTTiKW=5R9sND389wOyPa1A@mail.gmail.com>
-In-Reply-To: <CAHk0Hos6PozkGtbqZw1aDUfHJD6wTTiKW=5R9sND389wOyPa1A@mail.gmail.com>
-From: Igor Opaniuk <igor.opaniuk@foundries.io>
-Date: Fri, 2 Feb 2024 22:18:54 +0100
-Message-ID: <CAL6CDMG3KT2aTdR2b34ebc+EQKC4CC-f1YG7YQaNzHmNS7HpyA@mail.gmail.com>
-Subject: Re: [PATCH v3 1/3] firmware: psci: Fix bind_smccc_features psci check
-To: Weizhao Ouyang <o451686892@gmail.com>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Tom Rini <trini@konsulko.com>, Etienne Carriere <etienne.carriere@foss.st.com>,
- Simon Glass <sjg@chromium.org>, Peng Fan <peng.fan@nxp.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, u-boot@lists.denx.de
+References: <20240131173204.100407-1-jpaulo.silvagoncalves@gmail.com>
+In-Reply-To: <20240131173204.100407-1-jpaulo.silvagoncalves@gmail.com>
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Date: Fri, 2 Feb 2024 22:27:32 +0100
+Message-ID: <CAByghJZzuFaw1yZ8gRKxBJKNZ8WcHztje+E+okQJ-ZjUx1N1Sg@mail.gmail.com>
+Subject: Re: [PATCH] toradex: tdx-cfg-block: add 0086 i.mx8m mini sku
+To: Joao Paulo Goncalves <jpaulo.silvagoncalves@gmail.com>
+Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
+ Joao Paulo Goncalves <joao.goncalves@toradex.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -96,160 +90,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Weizhao,
+On Wed, Jan 31, 2024 at 6:32=E2=80=AFPM Joao Paulo Goncalves
+<jpaulo.silvagoncalves@gmail.com> wrote:
+>
+> From: Joao Paulo Goncalves <joao.goncalves@toradex.com>
+>
+> Add new product id 0086 Verdin iMX8M Mini DualLite 2GB IT.
+>
+> Signed-off-by: Joao Paulo Goncalves <joao.goncalves@toradex.com>
+> ---
+>
+> Hello,
+>
+> The change was based on u-boot-imx/master-next because of [1].
+>
+> [1] https://lore.kernel.org/u-boot/20240122200930.673447-1-jpaulo.silvago=
+ncalves@gmail.com/
+>
+> Best Regards,
+> Joao Paulo Goncalves
+>
+>  board/toradex/common/tdx-cfg-block.c | 1 +
+>  board/toradex/common/tdx-cfg-block.h | 1 +
+>  2 files changed, 2 insertions(+)
+>
+> diff --git a/board/toradex/common/tdx-cfg-block.c b/board/toradex/common/=
+tdx-cfg-block.c
+> index 3f2f6b94391..4a7de5483d2 100644
+> --- a/board/toradex/common/tdx-cfg-block.c
+> +++ b/board/toradex/common/tdx-cfg-block.c
+> @@ -156,6 +156,7 @@ const struct toradex_som toradex_modules[] =3D {
+>         [83] =3D { "Apalis iMX6Q 1GB",                     TARGET_IS_ENAB=
+LED(APALIS_IMX6)     },
+>         [84] =3D { "Apalis iMX6D 1GB IT",                  TARGET_IS_ENAB=
+LED(APALIS_IMX6)     },
+>         [85] =3D { "Apalis iMX6Q 2GB IT",                  TARGET_IS_ENAB=
+LED(APALIS_IMX6)     },
+> +       [86] =3D { "Verdin iMX8M Mini DualLite 2GB IT",    TARGET_IS_ENAB=
+LED(VERDIN_IMX8MM)   },
+>  };
+>
+>  struct pid4list {
+> diff --git a/board/toradex/common/tdx-cfg-block.h b/board/toradex/common/=
+tdx-cfg-block.h
+> index b783537ce76..021cc21b5e2 100644
+> --- a/board/toradex/common/tdx-cfg-block.h
+> +++ b/board/toradex/common/tdx-cfg-block.h
+> @@ -111,6 +111,7 @@ enum {
+>         APALIS_IMX6Q_NOWINCE,
+>         APALIS_IMX6D_IT_NOWINCE,
+>         APALIS_IMX6Q_IT_NOWINCE, /* 85 */
+> +       VERDIN_IMX8MMDL_2G_IT,
+>  };
+>
+>  enum {
+> --
+> 2.34.1
 
-On Fri, Feb 2, 2024 at 4:43=E2=80=AFAM Weizhao Ouyang <o451686892@gmail.com=
-> wrote:
->
-> Hi Igor,
->
-> On Thu, Feb 1, 2024 at 10:36=E2=80=AFPM Igor Opaniuk <igor.opaniuk@foundr=
-ies.io> wrote:
-> >
-> > Hello Weizhao,
-> >
-> > On Wed, Jan 31, 2024 at 3:15=E2=80=AFPM Weizhao Ouyang <o451686892@gmai=
-l.com> wrote:
-> > >
-> > > According to PSCI specification DEN0022F, PSCI_FEATURES is used to ch=
-eck
-> > > whether the SMCCC is implemented by discovering SMCCC_VERSION.
-> > >
-> > Could you please add more details to your commit message or as a commen=
-t
-> > explaining what exact steps should be done for a full discovery sequenc=
-e of Arm
-> > Architecture Service functions, so people don't need to search for
-> > that information explicitly?
-> >
-> > For instance:
-> > Step 1: Determine if SMCCC_VERSION is implemented
-> > - Use firmware data, device tree PSCI node, or ACPI FADT PSCI flag, to
-> > determine whether a
-> > PSCI implementation is present.
-> > - Use PSCI_VERSION to learn whether PSCI_FEATURES is provided. PSCI_FEA=
-TURES is
-> > mandatory from version 1.0 of PSCI
-> > Step 2. etc.
-> >
-> > I would just pull that info from the latest SMC Calling Convention vers=
-ion 1.5,
-> > from 9 Appendix B: Discovery of Arm Architecture Service functions.
-> >
-> > Thank you!
-> > > Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
-> > > ---
-> > > v3: remove fallback smc call
-> > > v2: check SMCCC_ARCH_FEATURES
-> > > ---
-> > >  drivers/firmware/psci.c   | 5 ++++-
-> > >  include/linux/arm-smccc.h | 6 ++++++
-> > >  2 files changed, 10 insertions(+), 1 deletion(-)
-> > >
-> > > diff --git a/drivers/firmware/psci.c b/drivers/firmware/psci.c
-> > > index c6b9efab41..03544d76ed 100644
-> > > --- a/drivers/firmware/psci.c
-> > > +++ b/drivers/firmware/psci.c
-> > > @@ -135,10 +135,13 @@ static int bind_smccc_features(struct udevice *=
-dev, int psci_method)
-> > >             PSCI_VERSION_MAJOR(psci_0_2_get_version()) =3D=3D 0)
-> > >                 return 0;
-> > >
-> > > -       if (request_psci_features(ARM_SMCCC_ARCH_FEATURES) =3D=3D
-> > > +       if (request_psci_features(ARM_SMCCC_VERSION) =3D=3D
-> > >             PSCI_RET_NOT_SUPPORTED)
-> > >                 return 0;
-> > >
-> > > +       if (invoke_psci_fn(ARM_SMCCC_VERSION, 0, 0, 0) < ARM_SMCCC_VE=
-RSION_1_1)
-> > > +               return 0;
-> > > +
-> > IMO, to fully comply with SMC Calling Convention version 1.5
-> > we should also check for SMCCC_ARCH_WORKAROUND_1:
-> >
-> > From 9 Appendix B: Discovery of Arm Architecture Service functions,
-> > Step 2: Determine if Arm Architecture Service function is implemented
-> > - Use SMCCC_VERSION to learn whether the calling convention complies
-> > to version 1.1 or above.
-> > - Use SMCCC_ARCH_FEATURES to query whether the Arm Architecture
-> > Service function is implemented
-> > on this system <--- we lack of this step
->
-> Thanks for your review. The 9 Appendix B describes an approach to
-> discovery the maximize ability without causing unsafe behavior on
-> existing platforms. Regarding the second step, it is just using
-> SMCCC_ARCH_WORKAROUND_1 as an example to test SMCCC_ARCH_FEATURES.
->
-> For the U-Boot case, we can revisit this from two perspectives:
-> 1. SMCCC_ARCH_FEATURES is MANDATORY from SMCCC v1.1.
-> 2. SMCCC_VERSION is OPTIONAL for SMCCC v1.0, so we should consider a
-> safe behavior.
-> 3. U-Boot is using CONFIG_ARM_SMCCC_FEATURES to probe and bind SMCCC
-> service driver if this driver is reported as supported.
-> 4. U-Boot SMCCC service driver can embed its discovery process in
-> is_supported() callback.
->
-> So now we can choose the following approach in U-Boot:
-> - Use firmware data (check "arm,psci-1.0") to determine whether a PSCI
-> implementation is present.
-> - Use PSCI_VERSION (psci_0_2_get_version() major version >=3D 0) to learn
-> whether PSCI_FEATURES is provided.
-> - Use PSCI_FEATURES with the SMCCC_VERSION Function Identifier as a
-> parameter to determine that SMCCC_VERSION is implemented.
-> - Use SMCCC_VERSION to learn whether the calling convention complies to
-> version 1.1 or above.
-> - Trying to probe and bind SMCCC service driver.
-
-Thanks for the detailed explanation!
 Reviewed-by: Igor Opaniuk <igor.opaniuk@foundries.io>
-
->
-> BR,
-> Weizhao
->
-> >
-> > >         if (psci_method =3D=3D PSCI_METHOD_HVC)
-> > >                 pdata->invoke_fn =3D smccc_invoke_hvc;
-> > >         else
-> > > diff --git a/include/linux/arm-smccc.h b/include/linux/arm-smccc.h
-> > > index f44e9e8f93..da3d29aabe 100644
-> > > --- a/include/linux/arm-smccc.h
-> > > +++ b/include/linux/arm-smccc.h
-> > > @@ -55,8 +55,14 @@
-> > >  #define ARM_SMCCC_QUIRK_NONE           0
-> > >  #define ARM_SMCCC_QUIRK_QCOM_A6                1 /* Save/restore reg=
-ister a6 */
-> > >
-> > > +#define ARM_SMCCC_VERSION              0x80000000
-> > >  #define ARM_SMCCC_ARCH_FEATURES                0x80000001
-> > >
-> > > +#define ARM_SMCCC_VERSION_1_0          0x10000
-> > > +#define ARM_SMCCC_VERSION_1_1          0x10001
-> > > +#define ARM_SMCCC_VERSION_1_2          0x10002
-> > > +#define ARM_SMCCC_VERSION_1_3          0x10003
-> > > +
-> > >  #define ARM_SMCCC_RET_NOT_SUPPORTED    ((unsigned long)-1)
-> > >
-> > >  #ifndef __ASSEMBLY__
-> > > --
-> > > 2.39.2
-> > >
-> >
-> >
-> > --
-> > Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
-> >
-> > Igor Opaniuk
-> > Senior Software Engineer, Embedded & Security
-> > E: igor.opaniuk@foundries.io
-> > W: www.foundries.io
-
-
 
 --=20
 Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
 
 Igor Opaniuk
-Senior Software Engineer, Embedded & Security
-E: igor.opaniuk@foundries.io
-W: www.foundries.io
+
+mailto: igor.opaniuk@gmail.com
+skype: igor.opanyuk
++48 666 108 041
+http://ua.linkedin.com/in/iopaniuk
