@@ -4,81 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F26BC4828F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 17:16:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB6C0C4828F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 18:02:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 962AA87D13;
-	Fri,  2 Feb 2024 18:16:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0973487D82;
+	Fri,  2 Feb 2024 19:02:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XGmZe33O";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KDgLi0P/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BA7F87C3D; Fri,  2 Feb 2024 18:16:06 +0100 (CET)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id 0A02B87D83; Fri,  2 Feb 2024 19:02:43 +0100 (CET)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 951BB87D4D
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 18:16:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E1E487D84
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 19:02:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6818a9fe3d4so12324386d6.0
- for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 09:16:02 -0800 (PST)
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-68c813ba956so10404366d6.3
+ for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 10:02:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1706894161; x=1707498961; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1706896958; x=1707501758; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ZdJzThSy2XmZDJ/rhyXpEH+hmmaNE9j13N3OXHcLgT0=;
- b=XGmZe33O+CiTxmG3yYs9H+ms8P4vr/8tUDHjoLtaWrGGHKhNB5x/qPGXr9rl3p89UF
- 9ZDxgXCF8Uz+UugRZtfuEkiFoCLQi5DqrFfvSJkEVpbfT++11iP856AlZB6M4Oyy2kLe
- SLNowwPmg2/JAKzErvlLlJP6+Tuc10wdNlYZ8=
+ bh=ikCoWzu3aYA7x3gUE8fRZkoqiwKJc4G1nAp4b+pRdwU=;
+ b=KDgLi0P/00NRhiiH5TYoXXcza3LsXI3e5o5cnFw3BPMWMUTtkydVkvt9julwgpRIYC
+ tCW3nawhNlaCK4zquZOOhmge75oi0FpLd6FRLbbvGIp6lSK2WsuhMy1X3UXf7sAluCEM
+ GDF9s8OWEwVbOYGWWXyQ7XXLVZ0GCSYqs0OSk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706894161; x=1707498961;
+ d=1e100.net; s=20230601; t=1706896958; x=1707501758;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZdJzThSy2XmZDJ/rhyXpEH+hmmaNE9j13N3OXHcLgT0=;
- b=dw1Tf39Yv/MtyLd9jkl3ZojZYEUJDpC0scWxrUVjvcRUHUd61yIpkRxzXV2BhDCy0Y
- ld2YqB9CGt9qyF8fD8HYgiYj+RDBow/acwNcY4G1BPZJ5iu8MdcGB3YhHgoS0YbSbvG7
- YmbBOTmjCIKtxfu7XZEcFGRX9hTRV3rXtQgX2WyRnGeEjsC96FzaXl71fRFGesaGVyI2
- Vx4uFE6AovWgakvKbQul+NszxTUVUN6GTu1iX3pJQW//b7n9N/9CjwqqFxlMzW3uZzSA
- Ts7kbHHZfvfo+SbeIWzKjKTUgLvLgN8pDzSzo6cPQInb4XRFVcLdu3FYW4/cgglEQUJt
- vqSw==
-X-Gm-Message-State: AOJu0YwkufRS4qftw+W/Abr2IHvshTzxsGRI8p6mgiiVS7bBhipcpU5K
- oNnEGDyocohByYhQSR8A/KrabHeT8Uc8bvtLiq4HgqqK3jublHhBUTCGniNznsg=
-X-Google-Smtp-Source: AGHT+IEnVOlQ1ZP9670aT5vWaSAWH+o66hpTCK9Dc2nPXY/nDHSRAyJpWypr01GvmtCeDzGpRUTGdw==
-X-Received: by 2002:ad4:5bcf:0:b0:68c:6b70:ff4a with SMTP id
- t15-20020ad45bcf000000b0068c6b70ff4amr9864023qvt.37.1706894161239; 
- Fri, 02 Feb 2024 09:16:01 -0800 (PST)
+ bh=ikCoWzu3aYA7x3gUE8fRZkoqiwKJc4G1nAp4b+pRdwU=;
+ b=MmrNsf27JncR9FoU/69MmGLMJT1OVqlVzhmnhDOzbq64d/hV1hy887IXKGNrkqUqPt
+ E/2nAbuAGvPR1RiTO43rJ2SXEf9/6I2eXCHPNEGmU1ZyQhM34prdTauAaID4y+2EOMoW
+ X5qayFuPBhzHOzMmV/HWEwTikyBU/vkdobpIBH7NgRgzyXdtrJKaQj6FdelwTanltdUb
+ /aENivfYq88htna8nKeusbfu0Yg/SHwAVOBF5upHzcxhVblK5MfRz8bg2RBXRLfXJBk8
+ wnWY+PboptwRxk/L1iwCyk9ch+vOu8p6vc6KJo+2R3xxcq8jYwqnvSPZRvJhQVOSuRaX
+ FhRg==
+X-Gm-Message-State: AOJu0YxVqiAvri+R4FPW07cpC3sV262//UTSvDPCbtNRiAkIuMcEp+mx
+ AOMtXv6tJwC6Wovk8AYMbdmuFI9k8ovtxeiwEkX/XAQ6WsT0YK2Y80akrsWYP8c=
+X-Google-Smtp-Source: AGHT+IEL6a+emR8iVTn61JN3UiFucOkdPsKv/VPusMoWlgEr1PM/7xxyFuB4O8nB5kllUMmX6tTL3w==
+X-Received: by 2002:a0c:f281:0:b0:68c:8a61:fd2d with SMTP id
+ k1-20020a0cf281000000b0068c8a61fd2dmr1373108qvl.2.1706896957666; 
+ Fri, 02 Feb 2024 10:02:37 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCXJYFHTY+lyWKCpgYcafzdCcE9EDSWdfyYUjSZzjR496nio9wR/yL8nfeAEOQASnm9hY+0RYfmnz/Lh2gM9vB4s3LvvBcF3HNMT9KQ80qfFPa8vapxiBFZAO2XxXU/yW3cVOs1Ud0UXSaE=
+ AJvYcCXqYnApDsIbF7+SQWcdA8wxQ0Vm7lWpvtHafg+9lcD4KhLCSZLkmcx6WHuPVghYaKRnd2UrIMopejdGV8USsvfYo4isfXlbSIYufr2S3D7/kD4H84P3FSsfpcA+dfFaMnJ5z1OPdjtAtOxR+T+OmQYC2gSekY4FWne3mKbFnHQQcnjiFeZC4x1CCJ+prrOYf2vEWavYrabUvLnf0rUuOaYHehHFK2btABp21Tefdzi7ciarQNIhxoJ2mtpWzez4mXLXSA5ttaBL6V9/syHcuGc8+11qBc462lVrdR41PlBiMS29jq09BwlK6Y1GnPxGMW0FE17XU5kp9F9oQsyWx/fEdgI12TkPlijiZIM9e5NrwmreW310yU879GLL/+yXQAlKkta8wPpu55uxUFdwY91Fk6WXDLhlrDjPX6PqYkmpd/nkn11GhvWJ6pNOcqNXEb0he2ebRUCNnwlZsz1INb46G/3Wbpj2QWTYM3GHN8orF49jyubEq5fHvA8nETFlG5DVMtqzUlL1JuQFWFRzHhaFeJW+geH0WKBdMAsQueNFncmM6mpZNbBe+AFomF6gCfKlBsu2xw0NiLqTvm26OjLokzKsxwJnh2/ayvP3d8TDHRebuLziLfjCbAaq2NVfCTPlm6es0/2UfJnEvtQbkhMkTH6BNb2NVm4fsSRPE18Q4aYl4KqobuaXdp7T+I6v+qx++JD6P2JfURSwu9X9I2z4iOBk4ZgSqk3PzJG9/cy5Qv2PBP5hLdPUAbpMmh9SlhMQwIQVa84pDhG92G3S1TBcxuYGQXoUze9rzZrBedm5LYrqA3n6CxVPE8ehNnfbyYoRHFDu91D7/D9MvD3jklInAmmyOYviz+mTyoOR04CD1ypJ4HdCIrEZ3b/x7LuYVA5olA==
 Received: from bill-the-cat
  (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
  [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- mz9-20020a0562142d0900b0068c4b6000ccsm973635qvb.121.2024.02.02.09.16.00
+ qq2-20020a0562142c0200b0068c8b31787bsm327048qvb.139.2024.02.02.10.02.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Feb 2024 09:16:00 -0800 (PST)
-Date: Fri, 2 Feb 2024 12:15:58 -0500
+ Fri, 02 Feb 2024 10:02:37 -0800 (PST)
+Date: Fri, 2 Feb 2024 13:02:26 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: sbabic@denx.de, uboot-imx@nxp.com, u-boot@lists.denx.de,
- Fabio Estevam <festevam@denx.de>
-Subject: Re: [PATCH v2 2/3] mx6sabresd: Convert to watchdog driver model
-Message-ID: <20240202171558.GE1152441@bill-the-cat>
-References: <20240202160405.4126192-1-festevam@gmail.com>
- <20240202160405.4126192-2-festevam@gmail.com>
- <20240202160702.GD1152441@bill-the-cat>
- <CAOMZO5CupvpiGeQDSNve1xho5s7=CPiYWezs4O=fjmZVo_vTtg@mail.gmail.com>
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
+ u-boot-custodians@lists.denx.de, sjg@chromium.org,
+ robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org,
+ conor@kernel.org, neil.armstrong@linaro.org,
+ caleb.connolly@linaro.org, ff@shokubai.tech,
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
+ pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
+ b.galvani@gmail.com, xypron.glpk@gmx.de, michal.simek@amd.com,
+ seanga2@gmail.com, rasmus.villemoes@prevas.dk, peng.fan@nxp.com,
+ jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de,
+ mibodhi@gmail.com, bb@ti.com, mark.kettenis@xs4all.nl,
+ festevam@gmail.com, nm@ti.com, andre.przywara@arm.com
+Subject: Re: [PATCH v5 00/11] An effort to bring DT bindings compliance
+ within U-Boot
+Message-ID: <20240202180226.GF1152441@bill-the-cat>
+References: <20240202130534.1051438-1-sumit.garg@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="86Xi7dx7FPlh1mm2"
+ protocol="application/pgp-signature"; boundary="8AzBqysBa+jAAGLt"
 Content-Disposition: inline
-In-Reply-To: <CAOMZO5CupvpiGeQDSNve1xho5s7=CPiYWezs4O=fjmZVo_vTtg@mail.gmail.com>
+In-Reply-To: <20240202130534.1051438-1-sumit.garg@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,44 +105,46 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---86Xi7dx7FPlh1mm2
-Content-Type: text/plain; charset=utf-8
+--8AzBqysBa+jAAGLt
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 02, 2024 at 01:17:06PM -0300, Fabio Estevam wrote:
-> On Fri, Feb 2, 2024 at 1:07=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
-e:
->=20
-> > Can all of this be upstreamed as well?
->=20
-> I can try it, but that would go into kernel 6.9 in the best case.
->=20
-> For now, let's keep it in u-boot.dtsi.
+On Fri, Feb 02, 2024 at 06:35:23PM +0530, Sumit Garg wrote:
 
-Yes, sorry, I'm not saying don't do this here, but can you please submit
-it so that long term this can be converted to OF_UPSTREAM and also not
-have a -u-boot.dtsi potentially.
+> Changes in v5:
+> --------------
+> - Rebased on tip of master (050a9b981d6a835133521b599be3ae189ce70f41)
+> - Created v5_dt branch for testing purposes:
+>   https://github.com/b49020/u-boot/tree/v5_dt
+> - Patch #6: Added support to cherry-pick fixes in subtree update script.
+>   Also, used https:// instead of git://.
+> - Patch #7: Fixed inappropriate documentation update.
+> - Patch #8: Document how to cherry-pick fixes from devicetree-rebasing
+>   tree.
+
+OK, for v6 please push this through CI. I've started a run now to check
+other things, but just sandbox currently fails to build right now.
 
 --=20
 Tom
 
---86Xi7dx7FPlh1mm2
+--8AzBqysBa+jAAGLt
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmW9I0sACgkQFHw5/5Y0
-tyzWhgv/fnHzDaeJPeTDNI5LkypEXZAF29mjLIyjVCPFxmW0+i9Q9vbMprZNH9TE
-Kl9gggX7mIQ6N4ZF54UAocFeIlM5kIVBD0vHGdqC61lEDit0U6fYD5VqvuQHiXbM
-2l6OJfb86MIHiovCszsPVCGy9iEBh1Q7sKnsryCIKeUhoj3l1oxeVrZ/Ii1Ci+MP
-3WyiGIv3/l2qwZxSbUYE7ZHgpSBGzSq9F/ZQQoGSAVnilyC1aVcydlmc8IcMnxY+
-lRZebgdZj9XOj3iuSlHb1OvK08YQJvMdnuXOnodXq6m6DG7SXbTWi13mGMXr9DfA
-R5dKvwCBQtPQrOCPvKXpG7X4YQlgF2i1VcVIud72KSuyWiSLQauRKl2ZDJQrrZsX
-OFXtlZTpEq1Z7w3MvH2jxFPBNwtsUl+e3h3KNfSp0+eT1IqH0jUqLYXhj+Ij9hSJ
-uCLcfcVZXqOKFjV7lc6WjbvedTXDJFtVXfmlzc+GdOEWB9Z85zzoxv/onc7PjDnX
-l98+hQHW
-=Lsge
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmW9Li8ACgkQFHw5/5Y0
+tyxvZAv/ft70KJ7IMe6F7NhgZx9lco9F1vb/PYGDoB6LvMfR8g0NhUVJdR1KMIXe
+bLPAzQH761Zwa5OSyOJjiv3kCMPKSmcFXaSlvaHurLpIHhEN3600pXOeEIbBHRx9
+MrzKPQ2ITZChkwpvuxJKYDeDP+54kOXPGLyM+en6Z+KaDDuaa4pM50hvkCB7o0fV
+LalPr46rUoT3/J2alHFhgNtT6EOMfwg0kFPDkmNtoMkst+aPDTvDS76Sdprj1usO
+VOpfr+b+JUdDT0r+iSMyX8j4eKEhxoZmGJkHbnqGK1nARZDDrh3gvPG1KbLCGmpT
+Iq5nxpTSiGVqdr9xu6o922kTt+PQ/XBsyA3WviO8wYj0hOLFmwWVPBBx670rPlme
+41bOGoW8Q1hXpSTJDj4BShvskZZt3Oza92LOGY1ojDVCg2E8MkDoXsHO0qp4eLBQ
+1dC/fBK93Pcg/UDET2mPYMi8CBiDu914FqzOvNkKfcoMphZzJ20UqUWAVO2b4QFY
+qMwPAnSZ
+=Locy
 -----END PGP SIGNATURE-----
 
---86Xi7dx7FPlh1mm2--
+--8AzBqysBa+jAAGLt--
