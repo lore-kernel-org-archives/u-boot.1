@@ -4,90 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E093C48291
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 14:13:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A67AC4828F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 14:41:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05BDE877BB;
-	Fri,  2 Feb 2024 15:13:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 82DBF87B8C;
+	Fri,  2 Feb 2024 15:41:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="T9tIv5nq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hbThH+K4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB12B87873; Fri,  2 Feb 2024 15:13:05 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A08C487B8C; Fri,  2 Feb 2024 15:37:06 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A46A587252
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 15:13:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AAA4C878ED
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 15:37:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
- [209.85.218.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 8CEDA3F829
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 14:13:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1706883182;
- bh=02b1L0K+oYk2Fo6D88lwEEXevB330iYaLK6OUZMV2AE=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type;
- b=T9tIv5nqZHsfRvhJNludd//ftthCSmPCIkvJqi50l3gPwdyLTOtq6dkkEwcdK5e6d
- dyiq3WFNfOxgHaNHjed29GyxpW0jkIRO6GfwjD6uoRhrKj596QXibGi+om/NLr7rb4
- AAn4QiyumvYYjyoeDBvy7nFLt1aUaOMBUnUeMZYiguM243T61SmwlbIjFZCjd2yabq
- apGXLYqW3EnXy5grpoxrFwTKAvTJFkZAv/23WsYmGv9kvM0rmm8qU8fBs03IyoIx38
- KG6IlofqfDn/tXehIhH4bn2dmVZ/fQt63HiWB9V4giBhc4i0y7un95lY8IuF35yOoK
- VmpZSft4mSavg==
-Received: by mail-ej1-f71.google.com with SMTP id
- a640c23a62f3a-a35860bff34so198096266b.0
- for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 06:13:02 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=massimiliano.minella@gmail.com
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-40ef6bbb61fso18112855e9.1
+ for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 06:37:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706884624; x=1707489424; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fV6Q/zhyZsN4/omdfWqz4QgadMmqODKpRkZ0qhHWfZM=;
+ b=hbThH+K4oHNyFYB9M70A5DsDrltTFDmOnS3odD+oG0jd771RnW9RVLcQjyZT2/Nsll
+ yZd6Fbv9DN2rzgvDJXphLplABhAwb+sLqLUJVNBuGwCECvOP7b14wnEJh2cdvNXm6WS9
+ lZgiEeDCcvjuswt7YHOpU8i2KpHjyeupit7mEqZkJBIvUTN+sZoyR0rvZ8dkvPY35Zlh
+ 0JyKDexfj+Y6NgSQ1Xfhoo06KWbjNPj6S77jsfJpUDie1zYAadbPHO7sRputNinV8Jim
+ DR7SaBGhlExoMYIwvs96CHt03Sx+cehU7p0S2nqI1+PmDeSaiDPi2wOfaBwROngpqW5T
+ zk7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706883182; x=1707487982;
+ d=1e100.net; s=20230601; t=1706884624; x=1707489424;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=02b1L0K+oYk2Fo6D88lwEEXevB330iYaLK6OUZMV2AE=;
- b=EdUQlbjb1ZTnaETZ5KsjGWlhQ7SgWV+ArMSdbz+Dm57DMP1VqX04PsAPW3zntRyEEQ
- l23xhU69aSv9h3PdnqATrHN41ojORWzeIBdqfaqUldXZasUcYD8mxKTkOsgruLRh5ERH
- RMhlbRHQWNy1ftJS3VPVTjgDlEjbuIX6W4yGTQKKs/RlQ398IY5HfJrL0xuxdd691+qY
- N4up0NPHIxBTGTV7win24VaJ1paHnpxCiu2Z7ce6dLUPxBQ2ztvQbBkBjhvEhKMO1JLi
- 7caV6iOi1D/HOA/k59qPzKE45Y2tfPm420raoaB6YG1MGLb+JFMmg+bknIUE8Zs3vHFv
- NZuQ==
-X-Gm-Message-State: AOJu0YxbHjo6lmFZzmMjONMiUDa7gsDD3f/8tyXlVxj21FWjCMJVKwOu
- +CcxRDbH22/cIc59IxBCifRVJaD2MsEOgFONbj7N8BYKfrXFHVbRVDkCg3ipgygF6x/2jpcvQKE
- b3j/SSYyyo6o9BhyC4GK985NG7Y25fVzSEeRxlCWddVr8QGaC6D96GUJHnkm/muEsz0g=
-X-Received: by 2002:a17:906:19b:b0:a36:fd11:984 with SMTP id
- 27-20020a170906019b00b00a36fd110984mr1753246ejb.5.1706883182228; 
- Fri, 02 Feb 2024 06:13:02 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHcvZf8NBddpPtDBQKMklhHlG+IGejpZR2G9oI+cFZ0E0s+lQYvQQfCNLJhU2k/YSz3kAlsiA==
-X-Received: by 2002:a17:906:19b:b0:a36:fd11:984 with SMTP id
- 27-20020a170906019b00b00a36fd110984mr1753233ejb.5.1706883181871; 
- Fri, 02 Feb 2024 06:13:01 -0800 (PST)
+ bh=fV6Q/zhyZsN4/omdfWqz4QgadMmqODKpRkZ0qhHWfZM=;
+ b=Q7eZ1yC7YtG2RP8ru45u27qW+RezuLYf8ZgqAbU2GIEwExSGaAHFVlV/QxmMLEeDj2
+ E6E07siyAhayAVEy/HYWnJlcIk0QwEKMT/evIehc+SSSOTaVE4pmGp6mYiMt0TgTCm5H
+ FNhRlZsWHwumhgP0IiJN/wJfk0BYXyMybkURaIXicee/WDDxfNNpPPRVHWtvbuWieDD7
+ Q0BR4S/E9FsdWPAGUj5E9QbAvPo71Ga4y0VciCpceTRU12q3lXrMF9yCdRWOMd6zrA0e
+ 1tumsEFkywbGYzwN7L6sy+0zzFGgSMD92oVW6blY3YAzSRc+CqNCgB5T2VMd0VXrsK/y
+ LuPg==
+X-Gm-Message-State: AOJu0YyVjSsAoTA7MPrFEY91Ya1LtcKA8rC0+Dm8PU4sdfUFHSKDPKIl
+ 8KMmRwvzItI8969rhqLZlvJSEBep1VjfsrvgcmxqegoXVYF4wXLyjbYpYgwg/e12fQ==
+X-Google-Smtp-Source: AGHT+IGYDQ0GUEqF7r0VP7XAoDvGlkJg9H13RUOA7Egv9S2G2BWY5LYvMg68DXYcOEhnH9mkqP7kGA==
+X-Received: by 2002:a05:600c:1ca4:b0:40e:a3b8:a2b8 with SMTP id
+ k36-20020a05600c1ca400b0040ea3b8a2b8mr1593821wms.26.1706884623430; 
+ Fri, 02 Feb 2024 06:37:03 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCUGUJMmtE842w+VQoVFkSKgf5e7hEhC/phBGKWShRiy0dpCLMbl03NG2iXNRHldoz+Fu10OsoHAnZvPvGw2MQmFbP5AJlpmdNhY4p0Erhk9AbZrazynrnEcCqIYkKyJghk34UHL7KOw
-Received: from workstation5.fritz.box
- (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
- by smtp.gmail.com with ESMTPSA id
- wn7-20020a170907068700b00a2e9f198cffsm912901ejb.72.2024.02.02.06.13.01
+ AJvYcCWv+4HWt4dcrAOBbJ/IHGb25vTYYaXr+DObLws5X14W9dnwoDOgy7Vh8GpO2dTwcoIOssSJyPMGtKb+UN0qjn2bsI97dbjj8oZiBjY=
+Received: from localhost ([165.225.81.67]) by smtp.gmail.com with ESMTPSA id
+ p9-20020a05600c468900b0040fb989f4bdsm75869wmo.23.2024.02.02.06.37.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Feb 2024 06:13:01 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_loader: simplify error message in
- efi_disk_create_raw()
-Date: Fri,  2 Feb 2024 15:12:52 +0100
-Message-ID: <20240202141252.62378-1-heinrich.schuchardt@canonical.com>
+ Fri, 02 Feb 2024 06:37:02 -0800 (PST)
+From: Massimiliano Minella <massimiliano.minella@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Roland Gaudig <roland.gaudig@weidmueller.com>,
+ Massimiliano Minella <massimiliano.minella@se.com>
+Subject: [PATCH] cmd: setexpr: fix no matching string in gsub return empty
+ value
+Date: Fri,  2 Feb 2024 15:36:56 +0100
+Message-ID: <20240202143657.3883166-1-massimiliano.minella@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 02 Feb 2024 15:41:31 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,40 +92,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The error message
+From: Massimiliano Minella <massimiliano.minella@se.com>
 
-    Adding disk for usb_mass_storage.lun0 failed (err=-9223372036854775788/0x8000000000000014)
+In gsub, when the destination string is empty, the string 't' is
+provided and the regular expression doesn't match, then the final result
+is an empty string.
 
-provides a decimal and a hexadecimal notation of the EFI status code
-EFI_ALREADY_STARTED which is defined as (EFI_ERROR_MASK | 20).
-The decimal output does not convey the value 20 clearly.
+Example:
 
-With the patch we write
+=> echo ${foo}
 
-    Adding block device usb_mass_storage.lun0 failed, r = 20
+=> setenv foo
+=> setexpr foo gsub e a bar
+=> echo ${foo}
 
-similar to other EFI error messages.
+=>
 
-Fixes: 952018117ab4 ("dm: sandbox: Switch over to using the new host uclass")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+The variable ${foo} should contain "bar" and the lack of match shouldn't
+be considered an error.
+
+This patch fixes the erroneous behavior by removing the return
+statement and breaking out of the loop in case of lack of match.
+
+Also add a test for the no match case.
+
+Signed-off-by: Massimiliano Minella <massimiliano.minella@se.com>
 ---
- lib/efi_loader/efi_disk.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ cmd/setexpr.c      |  6 ++----
+ test/cmd/setexpr.c | 10 ++++++++++
+ 2 files changed, 12 insertions(+), 4 deletions(-)
 
-diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-index b1739d99201..2fefd05fbdc 100644
---- a/lib/efi_loader/efi_disk.c
-+++ b/lib/efi_loader/efi_disk.c
-@@ -574,7 +574,8 @@ static int efi_disk_create_raw(struct udevice *dev, efi_handle_t agent_handle)
- 			log_notice("Disk %s not ready\n", dev->name);
- 			ret = -EBUSY;
- 		} else {
--			log_err("Adding disk for %s failed (err=%ld/%#lx)\n", dev->name, ret, ret);
-+			log_err("Adding block device %s failed, r = %lu\n",
-+				dev->name, ret & ~EFI_ERROR_MASK);
- 			ret = -ENOENT;
+diff --git a/cmd/setexpr.c b/cmd/setexpr.c
+index 233471f6cb..6a7c0c914b 100644
+--- a/cmd/setexpr.c
++++ b/cmd/setexpr.c
+@@ -216,14 +216,12 @@ int setexpr_regex_sub(char *data, uint data_size, char *nbuf, uint nbuf_size,
+ 		if (res == 0) {
+ 			if (loop == 0) {
+ 				debug("%s: No match\n", data);
+-				return 1;
+ 			} else {
+-				break;
++				debug("## MATCH ## %s\n", data);
+ 			}
++			break;
  		}
  
+-		debug("## MATCH ## %s\n", data);
+-
+ 		if (!s)
+ 			return 1;
+ 
+diff --git a/test/cmd/setexpr.c b/test/cmd/setexpr.c
+index 312593e1e3..ee329e94b8 100644
+--- a/test/cmd/setexpr.c
++++ b/test/cmd/setexpr.c
+@@ -179,6 +179,16 @@ static int setexpr_test_regex(struct unit_test_state *uts)
+ 	val = env_get("mary");
+ 	ut_asserteq_str("this is a test", val);
+ 
++	/* No match */
++	ut_assertok(run_command("setenv fred 'this is a test'", 0));
++	ut_assertok(run_command("setenv mary ''", 0));
++	ut_assertok(run_command("setexpr fred gsub us is \"${fred}\"", 0));
++	ut_assertok(run_command("setexpr mary gsub us is \"${fred}\"", 0));
++	val = env_get("fred");
++	ut_asserteq_str("this is a test", val);
++	val = env_get("mary");
++	ut_asserteq_str("this is a test", val);
++
+ 	unmap_sysmem(buf);
+ 
+ 	return 0;
 -- 
 2.43.0
 
