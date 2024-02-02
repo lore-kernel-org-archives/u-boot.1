@@ -4,54 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3FF8C4828F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 00:12:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFDD2C48286
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 00:13:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0E4987D59;
-	Fri,  2 Feb 2024 01:12:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 5792283CF3;
+	Fri,  2 Feb 2024 01:13:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="cDcNFY+g";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5548387073; Fri,  2 Feb 2024 01:12:43 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 675CF87D59
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 01:12:40 +0100 (CET)
+ id 5B81987D63; Fri,  2 Feb 2024 01:13:29 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 7A7EE87CDB
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 01:13:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=ad07=JL=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1706832752;
- bh=sc0V2N1qM6R3+3tDhg5S7wU86m8ckbDJ0kBXABLRr10=;
- b=cDcNFY+g9FoFO7VdwxC2Rf7xHZi1Kvqv+mFf4XbCDbBVTpGgCng1LD5WAjmyhs+MP7fGXCce5
- /jdgkGc2jebNw8Z9SsGV9K/r2pxD8GmNX9Bc2FuhyfXRKfweTp9Xry5JzzZ+oMbxN4+7JS02FFj
- dCALC2AOTC8QXiDdqOawGLle2BLuWBaaUaiQWfk8e8OM0jXf+c16tnmVpl/KY0XarXUO9hvp/Gq
- CCi1LqjfQWelKKDt2DEIL5lEF0jAEZT7wN53Hvu7HRNjpAV/z6QmezM/RrfZusWxgxfc8lOc6l2
- K1nt4mcGdVwCKjZileYBiIyF8fkBYUe3WoCm3ZoQ1sMw==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Jonas Karlman <jonas@kwiboo.se>
-Cc: u-boot@lists.denx.de
-Subject: [RFC] rockchip: Reset to bootrom download mode on hang
-Date: Fri,  2 Feb 2024 00:12:18 +0000
-Message-ID: <20240202001221.531207-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.43.0
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 715A5DA7;
+ Thu,  1 Feb 2024 16:14:06 -0800 (PST)
+Received: from minigeek.lan (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 97B4C3F5A1;
+ Thu,  1 Feb 2024 16:13:22 -0800 (PST)
+Date: Fri, 2 Feb 2024 00:12:18 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Shantur Rathore <i@shantur.com>
+Cc: marex@denx.de, bmeng.cn@gmail.com, clamor95@gmail.com, Hector Martin
+ <marcan@marcan.st>, Patrick Delaunay <patrick.delaunay@foss.st.com>, Simon
+ Glass <sjg@chromium.org>, u-boot@lists.denx.de, Tom Rini
+ <trini@konsulko.com>
+Subject: Re: [PATCH v3] common: usb-hub: Reset hub port before scanning
+Message-ID: <20240202001218.63b4e9c3@minigeek.lan>
+In-Reply-To: <CABEcMwXYw9L957wykfZ5HcC5V88hbgEDZ-E_fYL9LhG_hyxb=g@mail.gmail.com>
+References: <20231209181057.331815-1-i@shantur.com>
+ <20240130140123.445f368a@donnerap.manchester.arm.com>
+ <CABEcMwWs-_ZzTdt=kRc05JwC=okA9FyvrAVK1rTLa=erTu9N3g@mail.gmail.com>
+ <20240201164604.13315fa6@donnerap.manchester.arm.com>
+ <CABEcMwXYw9L957wykfZ5HcC5V88hbgEDZ-E_fYL9LhG_hyxb=g@mail.gmail.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 65bc336fb6304ca20eda0046
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,194 +62,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support to reset to bootrom download mode on hang in U-Boot SPL and
-proper. ROCKCHIP_HANG_TO_BROM can be used to enable this feature.
+On Thu, 1 Feb 2024 18:35:28 +0000
+Shantur Rathore <i@shantur.com> wrote:
 
-Example when SPL cannot load FIT:
+Hi Shantur,
 
-  U-Boot SPL 2024.04-rc1 (Feb 01 2024 - 23:01:12 +0000)
-  Trying to boot from MMC1
-  mmc_load_image_raw_sector: mmc block read error
-  Trying to boot from MMC2
-  Card did not respond to voltage select! : -110
-  spl: mmc init failed with error: -95
-  Trying to boot from MMC1
-  mmc_load_image_raw_sector: mmc block read error
-  SPL: failed to boot from all boot devices
-  ### ERROR ### Please RESET the board ###
-  entering download mode ...
-  resetting ...
+> Hi Andre,
+>=20
+> On Thu, Feb 1, 2024 at 4:46=E2=80=AFPM Andre Przywara <andre.przywara@arm=
+.com> wrote:
+> >
+> > On Thu, 1 Feb 2024 09:39:54 +0000
+> > Shantur Rathore <i@shantur.com> wrote:
+> >
+> > Hi Shantur,
+> > =20
+> > > On Tue, Jan 30, 2024 at 2:01=E2=80=AFPM Andre Przywara <andre.przywar=
+a@arm.com> wrote: =20
+> > > >
+> > > > On Sat,  9 Dec 2023 18:10:56 +0000
+> > > > Shantur Rathore <i@shantur.com> wrote:
+> > > >
+> > > > Hi,
+> > > > =20
+> > > > > Currently when a hub is turned on, all the ports are powered on.
+> > > > > This works well for hubs which have individual power control.
+> > > > >
+> > > > > For the hubs without individual power control this has no effect.
+> > > > > Mostly in these scenarios the hub port is powered before the USB
+> > > > > controller is enabled, this can lead to some devices in unexpected
+> > > > > state.
+> > > > >
+> > > > > With this patch, we explicitly reset the port while powering up h=
+ub
+> > > > > This resets the port for hubs without port power control and has
+> > > > > no effect on hubs with port power control as the port is still of=
+f.
+> > > > >
+> > > > > Before this patch AMicro AM8180 based NVME to USB adapter won't be
+> > > > > detected as a USB3.0 Mass Storage device but with this it works as
+> > > > > expected.
+> > > > >
+> > > > > Tested working after this patch:
+> > > > > 1. AMicro AM8180 based NVME to USB Adapter
+> > > > > 2. Kingston DataTraveler 3.0
+> > > > > 3. GenesysLogic USB3.0 Hub
+> > > > >
+> > > > > The drives were tested while connected directly and via the hub. =
+=20
+> > > >
+> > > > so this broke USB operation on some Allwinner boards. The ports sti=
+ll
+> > > > enumerate correctly, but no devices are detected. With mainline
+> > > > (containing this patch), and a USB stick connected:
+> > > > starting USB...
+> > > > Bus usb@5200000: USB EHCI 1.00
+> > > > Bus usb@5200400: USB OHCI 1.0
+> > > > scanning bus usb@5200000 for devices... 1 USB Device(s) found
+> > > > scanning bus usb@5200400 for devices... 1 USB Device(s) found
+> > > >        scanning usb for storage devices... 0 Storage Device(s) found
+> > > >
+> > > > With this patch here reverted:
+> > > > starting USB...
+> > > > Bus usb@5200000: USB EHCI 1.00
+> > > > Bus usb@5200400: USB OHCI 1.0
+> > > > scanning bus usb@5200000 for devices... 2 USB Device(s) found
+> > > > scanning bus usb@5200400 for devices... 1 USB Device(s) found
+> > > >        scanning usb for storage devices... 1 Storage Device(s) found
+> > > >
+> > > > I have no clue why this happens, there is no discrete hub anywhere =
+in this
+> > > > setup, so I guess the code runs for the root hub here?
+> > > > I am attaching a log with DEBUG enabled for common/usb_hub.c, for b=
+oth
+> > > > cases.
+> > > >
+> > > > Any clues, debug suggestions, or even a fix are warmly welcome.
+> > > > =20
+> > >
+> > > Which USB disk are you using? Is it a USB 2.0 disk ?
+> > > Can you try with any other USB disk to confirm? =20
+> >
+> > Yes, this was some USB 2.0 memory stick, on an USB 2.0 port.
+> > Most sunxi boards only have USB 2.0, but there is one SoC with USB 3.0,=
+ I
+> > will try some combinations later tonight.
+> >
+> > Thanks,
+> > Andre =20
+>=20
+> That would be awesome.
+> We need to test
+>=20
+> USB 3.0 and 2.0 ports with USB 3.0 and 2.0 drives.
 
-Procedure to start bootrom download mode:
-- U-Boot SPL or proper write 0xEF08A53C to BOOT_MODE_REG and then reset
-- Bootrom loads and run boot code (TPL) from e.g. SPI > eMMC > SD-card
-- TPL check for 0xEF08A53C in BOOT_MODE_REG very early, i.e. Rockchip
-  TPL blobs check for this value directly at start
-- TPL return to bootrom with a return value != 0
-- Bootrom enter download mode
+So I had some mixed and apparently inconsistent results:
+- On the Pine-H64 (H6 SoC with USB 3.0 + USB 2.0) it worked with
+  mainline, but only after I applied some pending sunxi USB PHY
+  regulator patches. This is an unrelated issue, those patches
+  are needed to enable USB 3.0 support on that board (shared regulator
+  conflict).
+  I tested a USB 2.0 and a USB 3.0 drive in both kind of slots, with
+  and without the patch.
+- On the OrangePi Zero 3 (H616 SoC with USB 2.0 only), the USB 3.0
+  drive would not work with mainline. A USB 2.0 drive was fine.
+  Applying your patch below fixed that problem, now both drives worked.
+- On the OrangePi Zero (H3 with USB 2.0 only), it worked with and
+  without the patch below, with both the USB 2.0 and USB 3.0 drive.
+- On the BananaPi M64 (A64 with USB 2.0 only and an onboard USB 2.0
+  hub) it also worked in all cases: with and without the patch, USB 2.0
+  and USB 3.0 drive.
 
-This also fixes an issue where the BOOT_MODE_REG is reset to 0 when
-board is reset on RK35xx after TF-A has been loaded. To fix this the
-SOC_CON1 reg value is reset prior to issuing a global reset.
+So the good news is: with the patch below it worked in all cases, with
+all drives in all slots, on all boards. With current mainline some
+drives don't work at least on the board with the H616 SoC.
 
-The RK356x TF-A blobs will clear SOC_CON1 as part of a PSCI reset,
-however the RK3588 TF-A blobs does not seem to clear SOC_CON1.
+I cannot really say if that makes sense, and the results above maybe
+more per board than per SoC (different VBUS supply), but would
+pragmatically tend to use the patch, feel free to add my Tested-by:
+when sending:
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
-- Is reset to bootrom download mode on hang a feature of intereset to
-  anyone else?
-- How can we best handle the issue with BOOT_MODE_REG being reset?
-- Should we instead enable SYSRESET_PSCI and relay on TF-A to properly
-  reset without loosing value in BOOT_MODE_REG? Currently works on
-  RK356x bl31 blobs but not on the RK3588 bl31 blobs.
----
- arch/arm/mach-rockchip/Kconfig     |  9 +++++++
- arch/arm/mach-rockchip/Makefile    |  9 ++++---
- arch/arm/mach-rockchip/boot_mode.c | 38 ++++++++++++++++++++++++++----
- configs/generic-rk3568_defconfig   |  1 +
- configs/generic-rk3588_defconfig   |  1 +
- 5 files changed, 48 insertions(+), 10 deletions(-)
+Tested-by: Andre Przywara <andre.przywara@arm.com>
 
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index 6ff0aa6911e2..66556d30af27 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -508,6 +508,15 @@ config TPL_ROCKCHIP_EARLYRETURN_TO_BROM
- 	  This enables support code in the BOOT0 hook for the TPL stage
- 	  to allow multiple entries.
- 
-+config ROCKCHIP_HANG_TO_BROM
-+	bool "Reset to bootrom download mode on hang"
-+	select SHOW_BOOT_PROGRESS
-+
-+config SPL_ROCKCHIP_HANG_TO_BROM
-+	bool "Reset to bootrom download mode on hang in SPL"
-+	default y if ROCKCHIP_HANG_TO_BROM
-+	select SPL_SHOW_BOOT_PROGRESS
-+
- config SPL_MMC
- 	default y if !SPL_ROCKCHIP_BACK_TO_BROM
- 
-diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-rockchip/Makefile
-index 1dc92066bbf3..ab4446bb6b51 100644
---- a/arch/arm/mach-rockchip/Makefile
-+++ b/arch/arm/mach-rockchip/Makefile
-@@ -16,17 +16,16 @@ obj-tpl-$(CONFIG_ROCKCHIP_PX30) += px30-board-tpl.o
- obj-spl-$(CONFIG_ROCKCHIP_RK3036) += rk3036-board-spl.o
- 
- ifeq ($(CONFIG_SPL_BUILD)$(CONFIG_TPL_BUILD),)
-+obj-$(CONFIG_ROCKCHIP_COMMON_BOARD) += board.o
-+obj-$(CONFIG_MISC_INIT_R) += misc.o
-+endif
- 
-+ifeq ($(CONFIG_TPL_BUILD),)
- # Always include boot_mode.o, as we bypass it (i.e. turn it off)
- # inside of boot_mode.c when CONFIG_ROCKCHIP_BOOT_MODE_REG is 0.  This way,
- # we can have the preprocessor correctly recognise both 0x0 and 0
- # meaning "turn it off".
- obj-y += boot_mode.o
--obj-$(CONFIG_ROCKCHIP_COMMON_BOARD) += board.o
--obj-$(CONFIG_MISC_INIT_R) += misc.o
--endif
--
--ifeq ($(CONFIG_TPL_BUILD),)
- obj-$(CONFIG_DISPLAY_CPUINFO) += cpu-info.o
- endif
- 
-diff --git a/arch/arm/mach-rockchip/boot_mode.c b/arch/arm/mach-rockchip/boot_mode.c
-index eb8f65ae4e9d..de9ec1414926 100644
---- a/arch/arm/mach-rockchip/boot_mode.c
-+++ b/arch/arm/mach-rockchip/boot_mode.c
-@@ -5,6 +5,7 @@
- 
- #include <common.h>
- #include <adc.h>
-+#include <bootstage.h>
- #include <command.h>
- #include <env.h>
- #include <log.h>
-@@ -23,11 +24,31 @@ int setup_boot_mode(void)
- 
- #else
- 
--void set_back_to_bootrom_dnl_flag(void)
-+static void set_back_to_bootrom_dnl_flag(void)
- {
-+	/*
-+	 * These SOC_CON1 regs needs to be cleared before a reset or the
-+	 * BOOT_MODE_REG do not retain its value and it is not possible
-+	 * to reset to bootrom download mode once TF-A has been started.
-+	 *
-+	 * TF-A blobs for RK3568 already clear SOC_CON1 for PSCI reset.
-+	 * However, the TF-A blobs for RK3588 does not clear SOC_CON1.
-+	 */
-+	if (IS_ENABLED(CONFIG_ROCKCHIP_RK3568))
-+		writel(0x40000, 0xFDC20104);
-+	if (IS_ENABLED(CONFIG_ROCKCHIP_RK3588))
-+		writel(0xFFFF0000, 0xFD58A004);
-+
- 	writel(BOOT_BROM_DOWNLOAD, CONFIG_ROCKCHIP_BOOT_MODE_REG);
- }
- 
-+static void rockchip_reset_to_dnl_mode(void)
-+{
-+	puts("entering download mode ...\n");
-+	set_back_to_bootrom_dnl_flag();
-+	do_reset(NULL, 0, 0, NULL);
-+}
-+
- /*
-  * detect download key status by adc, most rockchip
-  * based boards use adc sample the download key status,
-@@ -71,12 +92,19 @@ __weak int rockchip_dnl_key_pressed(void)
- 		return false;
- }
- 
--void rockchip_dnl_mode_check(void)
-+#if CONFIG_IS_ENABLED(ROCKCHIP_HANG_TO_BROM)
-+void show_boot_progress(int val)
-+{
-+	if (val == -BOOTSTAGE_ID_NEED_RESET)
-+		rockchip_reset_to_dnl_mode();
-+}
-+#endif
-+
-+static void rockchip_dnl_mode_check(void)
- {
- 	if (rockchip_dnl_key_pressed()) {
--		printf("download key pressed, entering download mode...");
--		set_back_to_bootrom_dnl_flag();
--		do_reset(NULL, 0, 0, NULL);
-+		puts("download key pressed, ");
-+		rockchip_reset_to_dnl_mode();
- 	}
- }
- 
-diff --git a/configs/generic-rk3568_defconfig b/configs/generic-rk3568_defconfig
-index b90ecb643dc7..9edd4c33000e 100644
---- a/configs/generic-rk3568_defconfig
-+++ b/configs/generic-rk3568_defconfig
-@@ -11,6 +11,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
- CONFIG_DEFAULT_DEVICE_TREE="rk3568-generic"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
-+CONFIG_ROCKCHIP_HANG_TO_BROM=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_SPL_STACK=0x400000
-diff --git a/configs/generic-rk3588_defconfig b/configs/generic-rk3588_defconfig
-index a9329eb1c625..5872bd4802c5 100644
---- a/configs/generic-rk3588_defconfig
-+++ b/configs/generic-rk3588_defconfig
-@@ -11,6 +11,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
- CONFIG_DEFAULT_DEVICE_TREE="rk3588-generic"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
-+CONFIG_ROCKCHIP_HANG_TO_BROM=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_TARGET_EVB_RK3588=y
--- 
-2.43.0
+Just one tiny thing:
+
+> Once you have tested it, can you please try the patch below
+>=20
+>         debug("enabling power on all ports\n");
+>         for (i =3D 0; i < dev->maxchild; i++) {
+> -               usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESET);
+> -               debug("Reset : port %d returns %lX\n", i + 1, dev->status=
+);
+> +               if (usb_hub_is_superspeed(hub)) {
+
+this must be: usb_hub_is_superspeed(dev)
+
+So many thanks for that patch, that seem to have fixed it for me - even
+though I don't understand why. But then again I only have superficial
+USB knowledge.
+
+Cheers,
+Andre
+
+
+> +                       usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RE=
+SET);
+> +                       debug("Reset : port %d returns %lX\n", i + 1,
+> dev->status);
+> +               }
+>                 usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_POWER);
+>                 debug("PowerOn : port %d returns %lX\n", i + 1, dev->stat=
+us);
+>         }
+>=20
+>=20
+> Thanks
 
