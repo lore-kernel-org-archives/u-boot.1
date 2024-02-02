@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 068F2C47DB3
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 13:07:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EE19C4828F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 13:07:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC0AE87D0A;
-	Fri,  2 Feb 2024 14:07:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6A60687C7B;
+	Fri,  2 Feb 2024 14:07:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="M1Fb4IUO";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="w8VMDsv9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8522487C9A; Fri,  2 Feb 2024 14:07:06 +0100 (CET)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id CCD3387C78; Fri,  2 Feb 2024 14:07:14 +0100 (CET)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46AD087C9A
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 14:07:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 146AA87C7B
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 14:07:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1d780a392fdso17313265ad.3
- for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 05:07:02 -0800 (PST)
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-1d958e0d73dso6195805ad.1
+ for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 05:07:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706879220; x=1707484020; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1706879229; x=1707484029; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xD1luGAP2JCOy74S0Dvk++4XEGenbMM27aVFBieuLJA=;
- b=M1Fb4IUO9EQxmfu/dNixVH1Y1dIauenB2gZbyWmAr5hvzI2PU8rdOGtN+FcGuEUway
- /bZrJnQ35luWPfUYrwuXZMfe6ZduhV35mKFlqkbLk8F5pgUDAdYlv0tm+npWzq7RTor1
- netMaRq4JwWwRyA6SG0+TS8oTUfFzRzhXzxqGdD5QF3MkVNisNAB9WReP3o1FJKLBTUO
- kA6A5wZmFGFx0pSbBpXI6c+s98XoN7u/ux8CY4UJ4jVDO6Wh/U3oa4q9sr1ac1KpTA9X
- wuTqFYKosSX9qsNzVsUIoJ3hG8Ly9JStNdwVxb2YZjKy+Z3egtCi+Xe3YZHIq2DX43AB
- fcVw==
+ bh=jTp7WRmJjSv/n60Wl5ntm7/E/DeVXPBvn58BiICXmBY=;
+ b=w8VMDsv9m5vTLpbBX8BPKDdpnFS55wuTDAUYDUVm7srTwyP5HF4vFl7Q2vxilAid7Y
+ PveyO3oPeTee7pEWVoSjlYoqB7F8mmGVksPqlvtye3u3VPvENa86sAigpOujHRBY+jkH
+ l5eS2EV5ebeyrARbp5JZAQGsr2/IIcTdEhKo2H3Obxc8pxpPHqtOgKIZfgC3P3swva6p
+ 5Mwk5M2HD3gYHNJEGWp9O7v5lOzVQ6h8OJZowp9QoncrZuyVdarNc5ZvuXDF7TPxHln/
+ 9wBs/dNbOWWVlIgPcgPzbt0A0opA6R6onc0t8FUNKa7k2nqbFLPTz3tXEVPzaBwsqMGS
+ 5Y0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706879220; x=1707484020;
+ d=1e100.net; s=20230601; t=1706879229; x=1707484029;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xD1luGAP2JCOy74S0Dvk++4XEGenbMM27aVFBieuLJA=;
- b=arBUVeNtbt8VcXmIbVd7tM541PR3GRkK2DdsgZW5RqRyXN+qcBrV9wm9n5K1P1HefU
- /PQ9JwDvz2edX939PZQsk1ooeDUYEXbU1Zg5GbByacuUDvhMsyJZwV+6MgDFm9E1INCx
- Fxk242wduOS6Qft1MzF33vUezYVGBa9JRw+b9RN5Z+42Dqzsq+PJE+RnO06HzbdY8qC2
- m2C/BwRhtNM/vvaT8vULtgv9Ece6EbxY2V1/pg18CWxmuYxhpk9ZdwmNo59bdGV33oB/
- mTLiFqRS+LKjOH7gSV8ZeDpkVyH+9cF+WqM6T9QjwRoNhGVdKL6WmlSCMlu9+s4ni3VT
- WRZA==
-X-Gm-Message-State: AOJu0YzZ6/rl93Ne6TbMcGkGHvdHr4Hv06tTwHNJ+AnaEERt8FEVm5Cz
- dfLdJrCJeCFHVZaVuArLPjqs4O9zRM+hUzh9J2LMdakJotHkkwwOnXjZ+CM2GlppPGLeSqQ/U38
- J+7s=
-X-Google-Smtp-Source: AGHT+IE0j7/2Pxu9Osh+UzeHQH/A3iPov633x7R0SbLNm7WsN6hXQN2IU5chUSAqyOEsWp3AY3zixQ==
-X-Received: by 2002:a17:902:eac6:b0:1d9:4834:e1b8 with SMTP id
- p6-20020a170902eac600b001d94834e1b8mr4840345pld.33.1706879220138; 
- Fri, 02 Feb 2024 05:07:00 -0800 (PST)
+ bh=jTp7WRmJjSv/n60Wl5ntm7/E/DeVXPBvn58BiICXmBY=;
+ b=Gk1yjlJzSiBWhWnQMv6i7e6IzsJM+TdN2n98cF0OSrgxAkGAxUzWxap1DNqFp877qT
+ 0ouVbv/G2GC33niKdrTbP9fPVmQggUHUDZri5s4tRlADWQBz5LYEUl1tYqW6kmSgJu+w
+ WpZcZqwcpUyN2bO6faxEcVamHcCxwJPk7Ph1+6Bkd7tekhvqWYMNxoIno3dTV02gc+dG
+ x4lchfk/WsgATC6pSUXC48vfAxaIWoUH1TdbX28nLXRfzfBQp2Sa6gOStTcB3DEgxHix
+ EMgVJ6vwSbj5QT3tuygmly5cw/77lUvTViX/m/nnrAPPD9dyx7nrePhgBPhQt09uJH2A
+ douA==
+X-Gm-Message-State: AOJu0Yye7Q+gSiQ+L1y4txw0c3iZz3pW0p3PwFOjDzpuLAzQbIW3fVz6
+ 7dzMGHDF/tRMk2gOvNym+uXzmENxOijRNlnOfp2gTuS9fsvOsY/S982X/MqMXy/CNPf82qLJ61q
+ R1aU=
+X-Google-Smtp-Source: AGHT+IFHObvFXB8rrghDes+swKlqcoup9431vWrwEJ2IrWvacENLtE/nzLZZEw3dVN6JE6mI8CJ3BA==
+X-Received: by 2002:a17:902:d50a:b0:1d9:14ac:239e with SMTP id
+ b10-20020a170902d50a00b001d914ac239emr3106630plg.28.1706879229011; 
+ Fri, 02 Feb 2024 05:07:09 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCXTEyYtgLa9bgrvREoGfi4WDLkto38OjMK0aMxBfQGKUZlbI9gj6a9P3nuvJGrDXXl/5g9BGUsqoU7v3LUWuISPAt94MTuh7d5wIvbcsIF847aZcbcI0Duu86EJIYJJVclRAZDkmw6oL0xvR+PckRpRbGBwskkwkaU3MCTKKSRZ+NIW45Ik1+xoKBB/adEsR/qILKwBTTAgK49ae8Lbgx+MwOITiQIoZcWnLqc8OXoRzioKrIQADK2i5F/aEAty5L6EqpH6X0Ijj8rEY0nTayKaAj9KUyQhFPMDyAVMQh1jRhDkeQBdQeVncOSR1qx+nCnbruXlzLVNaBmY/rvE9zzYnO5fyvrmRduEJMc4SGNky5G43lyhVQpIb9VgtMInFl5OTFLiVb4CGGeKFkjG+3GMfTe+U/4ZofJyQo1v5heGuyAce/RaE/vWmEyEAhrT5syfGx8gKSybY/VN1W13ksurTViXwBKp3kTfMeceJSouah7+JlQ4pDSIdd58+6yCt2MW0rGRlYkaT398cfTD/MX+tNEW1HXq1pF23Mw06Mo+MH5UME1x0tNU73x91Wp9gNnIu4Iy/1CMUOfQD6DHZK7vX+X4T8HnHu+PHlvLQ0zdCpWkhpkHe0NTvqzt2lXNWXB+jXC97VW8WJrcPSWuALlL58aAne9cEWBQbnKMVYouj05EK6sRAZdTW2mHFGWoWCqeyzgIstVQcuQkGg0K+Mtdpo5YmkzLu+uKh3By7PgAhqxMDOpGc4TA2xxfSJtOBXY3sJP8ZxSx+cqdNX3mPFiIqu0bnsjgNHfzaQafFq0FqnNAdoJ7RvRaMQVpG+dGDmrcH5xbEqalaXybyYviGMmLidkgXt2QH3ARo4aR0vyE7hOBLOjon/kd7cknPCDltb9ZgmrOE2x5jt3yvyz1o2l1gfvS5tVXiaiQ
+ AJvYcCUCVh4VbLLEkIhOkafzpd9YeTCzlbdN33k/NRZq/mX/4+M/meqk98jthCxIty6CrFWL0PkotnvVU87fRv+EsXF1r9WvcD4dicUo/AWKR6tYh/cBomCnah/F+x5CxL6ZbciZiUI6FSPxO+y1dTrl09jx9/WNurAvPfeQKzAO/dU5GDwshfFTvX8F6blr5dCin1l8KWuNRCX2pBxy8/b7tDwxyu8hclyPhPRsFz8he+dtk2/YndOThDpg7mtCXpO1qxBQ5LRFlL6TLmK5v5xZqzsoKyV0to1/FkVFOTlctxPDvuErGD9axIpzOZDv1fTj4opVrL7I2PLIKVIpGgg7HUB9YHQSX7ymrBf94sADlWrNqsvdlQUSQgfQN6L4wswGPUcRzgdDdcKeOziNPshwOZuumsZs92e7qouDFzvcsQ953ch7Wr7nUH7DV6By/jy+8p04MH+6RpzqgfjdLE3jtNmqJdGaX/xjJV7Rechw6zngO3CbRDKp5LKM1qJlSo1fTOX5N+tSeGtPfCDcggB6i0kaR6zGWQs770szS2sB0Vz0gte+lVPofQI+xcJD/L3dWVC7ettX9GQObP2z7IOgOj84B8ZCj9eaB13Wmt3GQTONn6np+F8BwamFZHVIzz9EPyOSvBygYexRxKaYDmB3FwBBvNqobAxxtti1Ca1EBxXErvk2jnHtfloYqzm7ZxbbxOvF8etFHvpSW9UwIF7ECss9myY5WH1or70z2yx/I3JXPj3Wf4AnhyW7AmJrTCB0SXxbFtT2vk4uaQzRi09YwswQjzfo8ZWAK6RI9uxjhTSy/dHGpbKapteLDAp8qGhQHJcxOwA9Z0HWOIvOmxSoKuAicj2C/JSqSYt7fXc8IKbIcdjna8QSPgmqesgn8dsp6FaApzqn56cvDu3IeATTgPu6VBGCbwp5rH+N
 Received: from sumit-X1.. ([223.178.213.44]) by smtp.gmail.com with ESMTPSA id
- q23-20020a170902edd700b001d923684323sm1542407plk.195.2024.02.02.05.06.51
+ q23-20020a170902edd700b001d923684323sm1542407plk.195.2024.02.02.05.07.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Feb 2024 05:06:59 -0800 (PST)
+ Fri, 02 Feb 2024 05:07:08 -0800 (PST)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
  u-boot-custodians@lists.denx.de
@@ -79,10 +79,10 @@ Cc: trini@konsulko.com, sjg@chromium.org, robh+dt@kernel.org,
  rfried.dev@gmail.com, marex@denx.de, mibodhi@gmail.com, bb@ti.com,
  mark.kettenis@xs4all.nl, festevam@gmail.com, nm@ti.com,
  andre.przywara@arm.com, Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v5 07/11] doc: devicetree: Align documentation to use Kconfig
- options
-Date: Fri,  2 Feb 2024 18:35:30 +0530
-Message-Id: <20240202130534.1051438-8-sumit.garg@linaro.org>
+Subject: [PATCH v5 08/11] doc: devicetree: Updates for devicetree-rebasing
+ subtree
+Date: Fri,  2 Feb 2024 18:35:31 +0530
+Message-Id: <20240202130534.1051438-9-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240202130534.1051438-1-sumit.garg@linaro.org>
 References: <20240202130534.1051438-1-sumit.garg@linaro.org>
@@ -104,136 +104,218 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since U-Boot switched away from manual CONFIG_* defines to Kconfig
-options, align devicetree documentation accordingly.
+Encourage SoC/board maintainers to migrate to using devicetree-rebasing
+subtree and maintain a regular sync with Linux kernel devicetree files
+and bindings.
+
+Along with that add documentation regarding how to run DT bindings
+schema checks.
 
 Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 ---
 
 Changes in v5:
-- Fixed inappropriate documentation update.
+- Document how to cherry-pick fixes from devicetree-rebasing tree.
 
 Changes in v4:
-- Separate patch to align documentation to use Kconfig symbols instead.
+- Switched subtree to be imported as dts/upstream sub-directory rather
+  than devicetree-rebasing sub-directory to better suite U-Boot
+  directory structure.
+- Since we now have v6.7-dts tag available now, so switch subtree to
+  that from its beginning.
+- Clarify subtree uprev schedule as a separate documentation section.
+  Also, fixed documentation typos.
 
- doc/develop/devicetree/control.rst | 48 ++++++++++++++----------------
- 1 file changed, 22 insertions(+), 26 deletions(-)
+Changes in v3:
+- Replace CONFIG_* with Kconfig options
+
+Changes in v2:
+- s/U-boot/U-Boot/
+
+ doc/develop/devicetree/control.rst | 117 ++++++++++++++++++++++++-----
+ 1 file changed, 97 insertions(+), 20 deletions(-)
 
 diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
-index 11c92d440f4d..9a0cb90336df 100644
+index 9a0cb90336df..4440d4b82c6a 100644
 --- a/doc/develop/devicetree/control.rst
 +++ b/doc/develop/devicetree/control.rst
-@@ -29,7 +29,7 @@ a number of similar boards with different peripherals, you can describe
- the features of each board in the devicetree file, and have a single
- generic source base.
+@@ -1,5 +1,6 @@
+ .. SPDX-License-Identifier: GPL-2.0+
+ .. sectionauthor:: Copyright 2011 The Chromium OS Authors
++.. Copyright 2023-2024 Linaro Ltd.
  
--To enable this feature, add CONFIG_OF_CONTROL to your board config file.
-+To enable this feature, select `OF_CONTROL` via Kconfig.
+ Devicetree Control in U-Boot
+ ============================
+@@ -22,12 +23,11 @@ for three reasons:
+   hierarchical format
+ - It is fairly efficient to read incrementally
+ 
+-The arch/<arch>/dts directories contains a Makefile for building the devicetree
+-blob and embedding it in the U-Boot image. This is useful since it allows
+-U-Boot to configure itself according to what it finds there. If you have
+-a number of similar boards with different peripherals, you can describe
+-the features of each board in the devicetree file, and have a single
+-generic source base.
++The U-Boot Makefile infrastructure allows for building the devicetree blob
++and embedding it in the U-Boot image. This is useful since it allows U-Boot
++to configure itself according to what it finds there. If you have a number
++of similar boards with different peripherals, you can describe the features
++of each board in the devicetree file, and have a single generic source base.
+ 
+ To enable this feature, select `OF_CONTROL` via Kconfig.
+ 
+@@ -68,8 +68,14 @@ a binary file. U-Boot adds its own `fdtgrep` for creating subsets of the file.
+ Where do I get a devicetree file for my board?
+ ----------------------------------------------
+ 
+-You may find that the Linux kernel has a suitable file. Look in the
+-kernel source in arch/<arch>/boot/dts.
++Linux kernel Git repository has been the place where devicetree files along
++with devicetree bindings are stored and maintained. There is devicetee-rebasing
++(dtrepo_) which maintains a forked copy of devicetree files along with bindings
++at every Linux kernel major release or intermediate release candidates.
++
++U-Boot maintains a Git subtree for devicetee-rebasing repo as `dts/upstream/`
++sub-directory. You may find that the `dts/upstream/` sub-directory has a
++suitable devicetree file for your board. Look in `dts/upstream/src/<arch>/`.
+ 
+ If not you might find other boards with suitable files that you can
+ modify to your needs. Look in the board directories for files with a
+@@ -78,17 +84,38 @@ modify to your needs. Look in the board directories for files with a
+ Failing that, you could write one from scratch yourself!
  
  
- What is a Flattened Devicetree?
-@@ -81,12 +81,8 @@ Failing that, you could write one from scratch yourself!
++Resyncing with devicetree-rebasing
++----------------------------------
++
++U-Boot regularly sync `dts/upstream/` subtree whenever the next window opens
++with the next available kernel major release. `dts/update-dts-subtree.sh` script
++provides a wrapper around git subtree pull command, usage from the top level
++U-Boot source tree, run::
++
++    ./dts/update-dts-subtree.sh pull <devicetree-rebasing-release-tag>
++
++If required it is also possible to cherry-pick fixes from devicetree-rebasing
++tree prior to next sync, usage::
++
++    ./dts/update-dts-subtree.sh pick <devicetree-rebasing-commit-id>
++
++
  Configuration
  -------------
  
--Use::
--
--   #define CONFIG_DEFAULT_DEVICE_TREE	"<name>"
--
--to set the filename of the devicetree source. Then put your devicetree
--file into::
-+Set up "<name>" when prompted for `DEFAULT_DEVICE_TREE` by Kconfig. Then put
-+your devicetree file into::
+-Set up "<name>" when prompted for `DEFAULT_DEVICE_TREE` by Kconfig. Then put
+-your devicetree file into::
++Traditionally, U-Boot placed copies of devicetree source files from Linux
++kernel into `arch/<arch>/dts/<name>.dts` which can be selected via setting
++"<name>" when prompted for `DEFAULT_DEVICE_TREE` by Kconfig.
  
-    arch/<arch>/dts/<name>.dts
+-   arch/<arch>/dts/<name>.dts
++However, it has become cumbersome over time for each SoC/board maintainer to
++keep devicetree files in sync with Linux kernel. Therefore, SoC/board
++maintainers are encouraged to migrate to use synced copies from
++`dts/upstream/src/<arch>/<vendor>`. To do that enable `OF_UPSTREAM` for the
++SoC being used via Kconfig and set up "<vendor>/<name>" when prompted for
++`DEFAULT_DEVICE_TREE` by Kconfig.
  
-@@ -94,24 +90,24 @@ This should include your CPU or SOC's devicetree file, placed in
- `arch/<arch>/dts`, and then make any adjustments required using a u-boot-dtsi
- file for your board.
+-This should include your CPU or SOC's devicetree file, placed in
+-`arch/<arch>/dts`, and then make any adjustments required using a u-boot-dtsi
+-file for your board.
++This should include your CPU or SOC's devicetree file. On top of that any U-Boot
++specific tweaks (see: dttweaks_) can be made for your board.
  
--If CONFIG_OF_EMBED is defined, then it will be picked up and built into
-+If `OF_EMBED` is selected by Kconfig, then it will be picked up and built into
+ If `OF_EMBED` is selected by Kconfig, then it will be picked up and built into
  the U-Boot image (including u-boot.bin). This is suitable for debugging
- and development only and is not recommended for production devices.
+@@ -155,8 +182,9 @@ ways:
+ Adding tweaks for U-Boot
+ ------------------------
  
--If CONFIG_OF_SEPARATE is defined, then it will be built and placed in
-+If `OF_SEPARATE` is selected by Kconfig, then it will be built and placed in
- a u-boot.dtb file alongside u-boot-nodtb.bin with the combined result placed
--in u-boot.bin so you can still just flash u-boot.bin onto your board. If you are
--using CONFIG_SPL_FRAMEWORK, then u-boot.img will be built to include the device
--tree binary.
-+in u-boot.bin so you can still just flash u-boot.bin onto your board. If Kconfig
-+option `SPL_FRAMEWORK` is enabled, then u-boot.img will be built to include the
-+device tree binary.
+-It is strongly recommended that devicetree files in U-Boot are an exact copy of
+-those in Linux, so that it is easy to sync them up from time to time.
++With `dts/upstream` Git subtree, it is ensured that devicetree files in U-Boot
++are an exact copy of those in Linux kernel available under
++`dts/upstream/src/<arch>/<vendor>`.
  
--If CONFIG_OF_BOARD is defined, a board-specific routine will provide the
-+If `OF_BOARD` is selected by Kconfig, a board-specific routine will provide the
- devicetree at runtime, for example if an earlier bootloader stage creates
- it and passes it to U-Boot.
+ U-Boot is of course a very different project from Linux, e.g. it operates under
+ much more restrictive memory and code-size constraints. Where Linux may use a
+@@ -169,8 +197,8 @@ constraints are even more extreme and the devicetree is shrunk to remove
+ unwanted nodes, or even turned into C code to avoid access overhead.
  
--If CONFIG_BLOBLIST is defined, the devicetree may come from a bloblist passed
--from a previous stage, if present.
-+If `BLOBLIST` is selected by Kconfig, the devicetree may come from a bloblist
-+passed from a previous stage, if present.
+ U-Boot automatically looks for and includes a file with updates to the standard
+-devicetree for your board, searching for them in the same directory as the
+-main file, in this order::
++devicetree for your board, searching for them in `arch/<arch>/dts/` in this
++order::
  
--If CONFIG_SANDBOX is defined, then it will be read from a file on
-+If `SANDBOX` is selected by Kconfig, then it will be read from a file on
- startup. Use the -d flag to U-Boot to specify the file to read, -D for the
- default and -T for the test devicetree, used to run sandbox unit tests.
- 
-@@ -145,7 +141,7 @@ Build:
- After the board configuration is done, fdt supported u-boot can be built in two
- ways:
- 
--#  build the default dts which is defined from CONFIG_DEFAULT_DEVICE_TREE::
-+#  build the default dts which is selected by DEFAULT_DEVICE_TREE Kconfig::
- 
-     $ make
- 
-@@ -198,8 +194,8 @@ As mentioned above, the U-Boot build system automatically includes a
- `*-u-boot.dtsi` file, if found, containing U-Boot specific
- quirks. However, some data, such as the mentioned public keys, are not
- appropriate for upstream U-Boot but are better kept and maintained
--outside the U-Boot repository. You can use CONFIG_DEVICE_TREE_INCLUDES
--to specify a list of .dtsi files that will also be included when
-+outside the U-Boot repository. You can use `DEVICE_TREE_INCLUDES` Kconfig
-+option to specify a list of .dtsi files that will also be included when
+    <orig_filename>-u-boot.dtsi
+    <CONFIG_SYS_SOC>-u-boot.dtsi
+@@ -199,6 +227,54 @@ option to specify a list of .dtsi files that will also be included when
  building .dtb files.
  
  
-@@ -213,14 +209,14 @@ The full devicetree is available to U-Boot proper, but normally only a subset
- 'SPL Support' in doc/driver-model/design.rst for more details.
++Devicetree bindings schema checks
++---------------------------------
++
++With devicetee-rebasing Git subtree, the devicetree bindings are also regularly
++synced with Linux kernel as `dts/upstream/Bindings/` sub-directory. This
++allows U-Boot to run devicetree bindings schema checks which will bring
++compliance to U-Boot core/drivers regarding usage of devicetree.
++
++Dependencies
++~~~~~~~~~~~~
++
++The DT schema project must be installed in order to validate the DT schema
++binding documents and validate DTS files using the DT schema. The DT schema
++project can be installed with pip::
++
++    pip3 install dtschema
++
++Note that 'dtschema' installation requires 'swig' and Python development files
++installed first. Please, refer to the GCC build documentation for installation
++instructions :doc:`../../build/gcc`.
++
++Several executables (dt-doc-validate, dt-mk-schema, dt-validate) will be
++installed. Ensure they are in your PATH (~/.local/bin by default).
++
++Recommended is also to install yamllint (used by dtschema when present). On
++Debian/Ubuntu systems::
++
++    apt install yamllint
++
++Running checks
++~~~~~~~~~~~~~~
++
++In order to perform validation of DTB files, use the ``dtbs_check`` target::
++
++    make dtbs_check
++
++It is also possible to run checks with a subset of matching schema files by
++setting the ``DT_SCHEMA_FILES`` variable to 1 or more specific schema files or
++patterns (partial match of a fixed string). Each file or pattern should be
++separated by ':'.
++
++::
++
++    make dtbs_check DT_SCHEMA_FILES=trivial-devices.yaml:rtc.yaml
++    make dtbs_check DT_SCHEMA_FILES=/gpio/
++    make dtbs_check DT_SCHEMA_FILES=trivial-devices.yaml
++
++
+ Relocation, SPL and TPL
+ -----------------------
  
+@@ -260,8 +336,9 @@ used it before Linux (e.g. snow). The two projects developed in parallel
+ and there are still some differences in the bindings for certain boards.
+ While there has been discussion of having a separate repository for devicetree
+ files, in practice the Linux kernel Git repository has become the place where
+-these are stored, with U-Boot taking copies and adding tweaks with u-boot.dtsi
+-files.
++these are stored, with U-Boot taking copies via devicetree-rebasing repo
++(see: dtrepo_) and adding tweaks with u-boot.dtsi files.
  
--Using several DTBs in the SPL (CONFIG_SPL_MULTI_DTB)
------------------------------------------------------
-+Using several DTBs in the SPL (SPL_MULTI_DTB_FIT Kconfig option)
-+----------------------------------------------------------------
- In some rare cases it is desirable to let SPL be able to select one DTB among
- many. This usually not very useful as the DTB for the SPL is small and usually
- fits several platforms. However the DTB sometimes include information that do
- work on several platforms (like IO tuning parameters).
--In this case it is possible to use CONFIG_SPL_MULTI_DTB. This option appends to
--the SPL a FIT image containing several DTBs listed in SPL_OF_LIST.
-+In this case it is possible to use SPL_MULTI_DTB_FIT Kconfig option. This option
-+appends to the SPL a FIT image containing several DTBs listed in SPL_OF_LIST.
- board_fit_config_name_match() is called to select the right DTB.
- 
- If board_fit_config_name_match() relies on DM (DM driver to access an EEPROM
-@@ -247,10 +243,10 @@ architectures.
- 
- It is important to understand that the fdt only selects options
- available in the platform / drivers. It cannot add new drivers (yet). So
--you must still have the CONFIG option to enable the driver. For example,
--you need to define CONFIG_SYS_NS16550 to bring in the NS16550 driver,
-+you must still have the Kconfig option to enable the driver. For example,
-+you need to enable SYS_NS16550 Kconfig option to bring in the NS16550 driver,
- but can use the fdt to specific the UART clock, peripheral address, etc.
--In very broad terms, the CONFIG options in general control *what* driver
-+In very broad terms, the Kconfig options in general control *what* driver
- files are pulled in, and the fdt controls *how* those files work.
- 
- History
+ .. _dtspec: https://www.devicetree.org/specifications/
+ .. _dtlist: https://www.spinics.net/lists/devicetree-compiler/
++.. _dtrepo: https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git
 -- 
 2.34.1
 
