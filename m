@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5663EC48291
-	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 16:04:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D24BC48291
+	for <u-boot@archiver.kernel.org>; Fri,  2 Feb 2024 16:06:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFDE687C3D;
-	Fri,  2 Feb 2024 17:04:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 98F7E87B8E;
+	Fri,  2 Feb 2024 17:06:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q/0ByGB4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VqC3TTPB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B72887C15; Fri,  2 Feb 2024 17:04:20 +0100 (CET)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id B342987186; Fri,  2 Feb 2024 17:06:23 +0100 (CET)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D8A187BF1
- for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 17:04:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 34E6187BDC
+ for <u-boot@lists.denx.de>; Fri,  2 Feb 2024 17:06:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1d97d086756so662575ad.1
- for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 08:04:18 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-68c3ac1fdb9so10169086d6.2
+ for <u-boot@lists.denx.de>; Fri, 02 Feb 2024 08:06:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1706889856; x=1707494656; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OGbaT51S6dZ/iUgH4jNh2ugjc/NvPEGM9rEU36lf/8A=;
- b=Q/0ByGB4u7D+VMeFqw2+x752dpp9ayCkBAFy5DfSsl1+Su05Q2B0/4vqIHcW4qUYv5
- pvW0A4K9B0TY7ShvBgazLvwLas9AvztziSnsxJmcep58lw5448gWbjFnPxLXe7XCl+zF
- wGB/D0GmIdhg0zxG1NgTIzthOoG3gGOjbrMNYiKvbu9dbAXS6YM0MVJuNFLih5K5+52t
- ATXC8MHJkbk9IhNKHJKh1Ou8adgbC7se07SVpq28+T62cuzIJSS8+C+rABxY74v638EH
- qVs3+corpNeWs/WeqDC9n5/wVqY6ufbflUcGWIZobngTUeAEsQxD/P38bQayXrlONAaD
- bSOw==
+ d=konsulko.com; s=google; t=1706889979; x=1707494779; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=3+gPYO3r7wzEkmj6Gz01V7cGsjGadn+6Ew0Mtv/VwwI=;
+ b=VqC3TTPBbjJPHA70xa2AYqrgCcL12xI+PN18KuWE7RWVZ5/BDzvoVt8hLWLHJE4+zO
+ R/d04vH5Ha1aHw1P8mU0M5fRfEaXa4CvedhTTxOmB15iSjfbHlWC8+EM6QMucwyIydJy
+ /zwNwZWma905EQ9HITdrLqZW+N47VJpJq00dA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706889856; x=1707494656;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=OGbaT51S6dZ/iUgH4jNh2ugjc/NvPEGM9rEU36lf/8A=;
- b=Q+jXXV0AqnoEHVjkimUWzTTlzIKALQdfZJk6FprIfDf9BtLYQ3GTM/3FeXi6fCRuHC
- e1f0orzVxB7A9eCHr1PUrE/xnCXHX6O64lKam2DBY61SXrPPM5m6MdIMylOeM9YADyx7
- mCLnuFQAG34NakSlNFV37NMEZw5UOP/2fnXhjLyL8jxEI6M05VAmjKPD2odvpJxoaYrD
- djUjuRAIjoXNCG3HSOAhGZfAFBn1Yzw2OtxqUx/YhR9JyHuzOsCodUEYKR8MSRFEKrSO
- VRYdERi2TPHjIpyoIYwH6WW+C/ES5OlGWGuHmD9siQd4wOTfxst0n+BleEeh7zgXTBLS
- ec+A==
-X-Gm-Message-State: AOJu0YzmG8pNDdR1D558wXziIo7Ca6+hmfHLEEaqfQQCL3u2nqmG0kZ6
- nZTnp3aY31xU5sY7CBej+Osx3/lmWcUkD++hdBEB/BBH20BFs13j
-X-Google-Smtp-Source: AGHT+IE3Am5h/+ljLNWYfN+GN8R4nM55RVG3vPEm9yIihZ3zVflx2iSiSWAFjvSOfMtr5WUOpvOosw==
-X-Received: by 2002:a17:902:ec89:b0:1d8:eac8:5e00 with SMTP id
- x9-20020a170902ec8900b001d8eac85e00mr6400593plg.4.1706889856446; 
- Fri, 02 Feb 2024 08:04:16 -0800 (PST)
+ d=1e100.net; s=20230601; t=1706889979; x=1707494779;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3+gPYO3r7wzEkmj6Gz01V7cGsjGadn+6Ew0Mtv/VwwI=;
+ b=abs/DZ1ABTgPn5X6ED4v5kxwB0aISoVLdFk7eLtxQt+gSfHiudPUmOvZVOL5/76UqI
+ t6u0Q9Ypsu321/Y9oCHr7973diidAbzshr11AjZKu0RXE9gRep3TbujOWYDtcqk4Ynap
+ kAHcjttyao3BBmvqhYuLbLus/0apzR3+77NofndoGJ9N3+dkjMGcpMhnYi8vHmnY5DkD
+ 4XD7neP5DTIZE70Tu8YFIiQtf5C8n7n3N3yJuY9NDGQHZGfvKs26ZBJjvj7LrocsziNy
+ pPt5904Td3P41GlBEEFJjJIuWJG5E3h8HWWfcA061Y+xmnjN9DmLodmeBLzsyzXLJ9Af
+ C8vA==
+X-Gm-Message-State: AOJu0YyflUeV7e9QnuI8jBWBb4oyL5wDecXnbuAGVuJ25s6gNbREp9lx
+ R19UWoxcMae/295AaBEh+rjn8rckNmmc4BSU326GKVzJqNlKSZ3new2051Z3KSAOC5BHrAoiH32
+ N
+X-Google-Smtp-Source: AGHT+IH1x+n29Xqhwhcr3hEBurvXkuZKMsKaba8DUBERSx5hbBVyhHTqE7+0QZDXtXCHCJKSMezizA==
+X-Received: by 2002:a05:6214:2608:b0:686:261a:76a1 with SMTP id
+ gu8-20020a056214260800b00686261a76a1mr11608774qvb.19.1706889978910; 
+ Fri, 02 Feb 2024 08:06:18 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCXJbJq6XSafWgOhOp7lHBgyoTtLBmVz2nrrKpc0FF+YeKj3IbjOj9HrbwKAB+S6LcycGL4D4CNbWShps3OZghFTTlysrlsCSzePQ8dt2pTB+emoQxKLnnInO9lJDmuEKm0go/Rf9xPqv2zV
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:fa09:d56a:f130:f280])
- by smtp.gmail.com with ESMTPSA id
- v4-20020a170902b7c400b001d8b8bf8e44sm1780086plz.92.2024.02.02.08.04.14
+ AJvYcCUt/kHwiGPvvN2anMTr4Et7FaHI4dQeGMyYfVZHLvxByNg6uzSEkb89AmrzGX1ejXxc67Q48nfBERlUarJUm1TZrwqU71K95Oib7PVsUIxSzJhPQcXYVUqln+fypa2c251U7+MDEA4Vnus=
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ a9-20020ad441c9000000b0068c3e575edesm921186qvq.87.2024.02.02.08.06.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Feb 2024 08:04:16 -0800 (PST)
-From: Fabio Estevam <festevam@gmail.com>
-To: sbabic@denx.de,
-	trini@konsulko.com
-Cc: uboot-imx@nxp.com, u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
-Subject: [PATCH v2 3/3] mx6sabresd: Remove board_phy_config()
-Date: Fri,  2 Feb 2024 13:04:05 -0300
-Message-Id: <20240202160405.4126192-3-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240202160405.4126192-1-festevam@gmail.com>
+ Fri, 02 Feb 2024 08:06:18 -0800 (PST)
+Date: Fri, 2 Feb 2024 11:06:15 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: sbabic@denx.de, uboot-imx@nxp.com, u-boot@lists.denx.de,
+ Fabio Estevam <festevam@denx.de>
+Subject: Re: [PATCH v2 1/3] mx6sabresd: Fix U-Boot corruption after saving
+ the environment
+Message-ID: <20240202160615.GB1152441@bill-the-cat>
 References: <20240202160405.4126192-1-festevam@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="XeWbC0aiwftkaYSq"
+Content-Disposition: inline
+In-Reply-To: <20240202160405.4126192-1-festevam@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,75 +95,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
 
-With Ethernet DM in place, there is no longer the need for having
-the board_phy_config() anymore.
-    
-Remove it.
+--XeWbC0aiwftkaYSq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Confirmed that TFTP transfer still works fine without board_phy_config().
+On Fri, Feb 02, 2024 at 01:04:03PM -0300, Fabio Estevam wrote:
 
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
-Changes since v1:
-- Newly introduced.
+> From: Fabio Estevam <festevam@denx.de>
+>=20
+> U-Boot binary has grown in such a way that it goes beyond the reserved
+> area for the environment variables.
+>    =20
+> Running "saveenv" and rebooting the board causes U-Boot to hang because
+> of this overlap.
+>    =20
+> Fix this problem by selecting CONFIG_LTO so that the U-Boot proper
+> size can be reduced.
+>    =20
+> Also, to prevent this same problem to happen in the future, use
+> CONFIG_BOARD_SIZE_LIMIT, which can detect the overlap in build-time.
+>    =20
+> CONFIG_BOARD_SIZE_LIMIT is calculated as follows:
+>=20
+> CONFIG_BOARD_SIZE_LIMIT =3D CONFIG_ENV_OFFSET - u-boot-img.dtb offset
+> CONFIG_BOARD_SIZE_LIMIT =3D 0xc000 - 69 * 1024
+> CONFIG_BOARD_SIZE_LIMIT =3D 715766
+>=20
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
 
- board/freescale/mx6sabresd/mx6sabresd.c | 34 -------------------------
- 1 file changed, 34 deletions(-)
+Thanks!
 
-diff --git a/board/freescale/mx6sabresd/mx6sabresd.c b/board/freescale/mx6sabresd/mx6sabresd.c
-index b558a596dff8..bb066a5d36c3 100644
---- a/board/freescale/mx6sabresd/mx6sabresd.c
-+++ b/board/freescale/mx6sabresd/mx6sabresd.c
-@@ -7,7 +7,6 @@
- 
- #include <image.h>
- #include <init.h>
--#include <net.h>
- #include <asm/arch/clock.h>
- #include <asm/arch/imx-regs.h>
- #include <asm/arch/iomux.h>
-@@ -254,39 +253,6 @@ int board_mmc_init(struct bd_info *bis)
- }
- #endif
- 
--static int ar8031_phy_fixup(struct phy_device *phydev)
--{
--	unsigned short val;
--
--	/* To enable AR8031 ouput a 125MHz clk from CLK_25M */
--	phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x7);
--	phy_write(phydev, MDIO_DEVAD_NONE, 0xe, 0x8016);
--	phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x4007);
--
--	val = phy_read(phydev, MDIO_DEVAD_NONE, 0xe);
--	val &= 0xffe3;
--	val |= 0x18;
--	phy_write(phydev, MDIO_DEVAD_NONE, 0xe, val);
--
--	/* introduce tx clock delay */
--	phy_write(phydev, MDIO_DEVAD_NONE, 0x1d, 0x5);
--	val = phy_read(phydev, MDIO_DEVAD_NONE, 0x1e);
--	val |= 0x0100;
--	phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, val);
--
--	return 0;
--}
--
--int board_phy_config(struct phy_device *phydev)
--{
--	ar8031_phy_fixup(phydev);
--
--	if (phydev->drv->config)
--		phydev->drv->config(phydev);
--
--	return 0;
--}
--
- #if defined(CONFIG_VIDEO_IPUV3)
- static void disable_lvds(struct display_info_t const *dev)
- {
--- 
-2.34.1
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
+--=20
+Tom
+
+--XeWbC0aiwftkaYSq
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmW9EvEACgkQFHw5/5Y0
+tyzADQv/asM5oMDz7Lfx5Inw6GSrPbZ7ISQnuPTMtdCzD3p+eeu52zuW24YHZkNs
+3lO7A9kh5glKN8FlXhieaeJNHjjHOcUNTupyLn8Xajh0QZh+bQsf2ic5imO7mctE
+tHsIhWox2AfX/akLnUBGvX5sEhqo7v15jjsf8/01jQeeR2vrvcyVM4m7a6LKmbhD
+5Hl/H+KCtFiJuhLLH3BlUvrFiWFYCPWOMOeiSJF/0bWxnkG52XysfhVWZGvdlRtN
+igH3RPXWn9jv2xR/OQR8UaOgMC+t27kNtxshmwQEYybL2/cMw51NmPk0nCigj5HA
+287ernZDN7jr7LIhjUWwB9JiCua9OCgmVgzuZY9N+tm6bVEdnDj8gKnDwYK07wOp
+Uzuqgn5IDK9K4lFjTWW018h59xv0wkf7xb0A/3pPU65Z3mafVSyjZVsNxVvHTg/q
+CZiQThVW0ihVmJOyRe93KrGojNnRmzGe3UyNNawJwqesQzLg7OuRjnizXM+NNd/Z
+UPRlAUNm
+=hz9B
+-----END PGP SIGNATURE-----
+
+--XeWbC0aiwftkaYSq--
