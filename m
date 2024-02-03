@@ -4,70 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E2D7C4828D
-	for <u-boot@archiver.kernel.org>; Sat,  3 Feb 2024 08:57:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA822C4828F
+	for <u-boot@archiver.kernel.org>; Sat,  3 Feb 2024 10:19:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57AF78809D;
-	Sat,  3 Feb 2024 09:57:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 26D3688053;
+	Sat,  3 Feb 2024 11:19:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="czoOW7yD";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="m33AoaBS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A72EE88117; Sat,  3 Feb 2024 09:57:32 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C0E34880E2; Sat,  3 Feb 2024 11:19:30 +0100 (CET)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66F8E88053
- for <u-boot@lists.denx.de>; Sat,  3 Feb 2024 09:57:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 949578801F
+ for <u-boot@lists.denx.de>; Sat,  3 Feb 2024 11:19:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1706950649; x=1707555449; i=xypron.glpk@gmx.de;
- bh=kDJQNH9pceNjn6rvVh64ahEXsynCzMIRsrLd0yyycak=;
- h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
- b=czoOW7yDsgmxkj3yy/iI/sxyQTmR2Pi6nlc6SneDb65XIjg+ezV/IHY+PtoIjo80
- 4g7nnlZ0f+M5V7UDjX9dKzmRNrlgW2WOq4fphJdyNSx63z0SPARU+6FUqObrJru+Q
- hKzAYIfT6jABoyPo+kfx4HT6AAcov1o2TJZRm3hwhWGNOmbBYyMgMIyH5BAtZCoyh
- lvL+oCnyqNnWDiyljWyEQarHjQeqYmUZQpp7xxtoAvc/k78TnREkhRjeyoDpsvRV7
- Tf/CwiSEUdil7yAZGaQm45CCXTBiKBt3tnxxB8j0TkosxazUKNVYCBZP0NflAQ3lB
- W4Cqsutyp7i7yVNqlg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MFsUp-1rFtkF3JXD-00HKk8; Sat, 03
- Feb 2024 09:57:28 +0100
-Message-ID: <0ff1a399-e295-480f-9949-4e021f0794f4@gmx.de>
-Date: Sat, 3 Feb 2024 09:57:30 +0100
+ spf=pass smtp.mailfrom=jorge.ramirez.ortiz@gmail.com
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-33b0e5d1e89so2147395f8f.0
+ for <u-boot@lists.denx.de>; Sat, 03 Feb 2024 02:19:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706955568; x=1707560368; darn=lists.denx.de;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:date:from:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=/+F/xnuFQQp5WUnEVoX35R4vEVw2uynDPH21adws9m0=;
+ b=m33AoaBSii+h0g4VoAL2cRA+AxYZ776rbftE+Z6RUQgAbNcXpKn6JQk9b7Lw9Ngu3S
+ 6gflhS7MX7M9XKCfkKKxLBgFtE+rX1OZkL22U/+WuAgkYuJpAoI4eqfIqgR1Cp2EXUhE
+ +TEFdE7KwZtscu50xx/SP454v3oK+wrgrwuD51xmFChw6MrxNNrd4PGtw8LYd1boI6Eo
+ eEF7jfIPvv+vZy1K6LOJzZBt1Hy20GDafIV7Pr/CGQb5u4i4h7HNW2AuZwzy/hcluSls
+ +m6KmGzN2lcu3FKa5XPU+yV4OGth5A2s++KyUMRPr0UCB+Rfy/cjaljZvnis/VAiP0Yp
+ 389g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706955568; x=1707560368;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:date:from
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=/+F/xnuFQQp5WUnEVoX35R4vEVw2uynDPH21adws9m0=;
+ b=aYbprEE/6q6a8r/6OjkPOj+/JI/JRnIwFLYOKorDE/OR1Lg9DWDDQxTi1qY5dk7B4M
+ PzIALFA0a66+l4VVyiFM5zkpTlHqJrkJNhAJUN+Gx0Q0s4SzXbTKs28W1LLdZJDHUx8k
+ mc2TqstdjmcwsS9+7pl3g0q+FgV6LWDoDhE2qsuCJhEDsqq1OPJv+If/qQVRztMqAUGH
+ 3GxgbPLDNF9kGDUs0x7TuffFi6Dbry0kPt0rRUJCWtirjCg6Z9KBGHCWlhUTgUc4EiC5
+ 8JjSl2QRRjWTNH/wjHSU1k2BgPmQQsqV6DOFhRXVu3GmfA+IzP9Tj9WES0+cvtv/mjAH
+ JeBA==
+X-Forwarded-Encrypted: i=0;
+ AJvYcCXQpxN3naWLb8YAXnrdLX5NGnfcmMzHhA1cyu+eEufozRCUDXjk5Wrj1Qen57j6nttwxGixZ3iWLjTvTRM0QEo/2K9U4g==
+X-Gm-Message-State: AOJu0YyZnqhtx5sjvAUvOnFb3WMmYBDqbfb+u3m4h72r5241tRTygXz9
+ XrtrDJeZL0naqqFjRt3dFut60awakYOVm39vwbEclpKPRK3XL3u3
+X-Google-Smtp-Source: AGHT+IHYnNGCiDLLWSVzmzEX6XQkbjkXNQK5hHkt600ohmXqnz3pwKAoJ5Lcf3zzyoO8YqzgMq9NvA==
+X-Received: by 2002:a5d:6a8a:0:b0:33a:e8b5:28f3 with SMTP id
+ s10-20020a5d6a8a000000b0033ae8b528f3mr5260570wru.24.1706955567696; 
+ Sat, 03 Feb 2024 02:19:27 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCXglK3yztyTeUVTHI9Ls9GLhwWq9c1QiQFP6coFPzm8dtPOLupnihziN7DJZpYSRAXJc5TV9rgpoXHkiBfxxHJrWS1A7d0gHASVknlbneqwdHFSUPDnntLYR+wUwM39z7KVRw5pjL65Xf4vyT+XJ2RrZztfgUUzUmMKomlW58fvpxPSZ/6t7uyRFp1SqOa4DipM9c8PYlkmG153Tq7o/rD1btQrRjUwf4UX8Rj3SgY6FyvbCkeJ
+Received: from trax (8.red-79-144-185.dynamicip.rima-tde.net. [79.144.185.8])
+ by smtp.gmail.com with ESMTPSA id
+ n8-20020a5d4208000000b0033b1b01e4fcsm3744910wrq.96.2024.02.03.02.19.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 03 Feb 2024 02:19:27 -0800 (PST)
+From: "Jorge Ramirez-Ortiz, Gmail" <jorge.ramirez.ortiz@gmail.com>
+X-Google-Original-From: "Jorge Ramirez-Ortiz, Gmail" <JorgeRamirez-Ortiz>
+Date: Sat, 3 Feb 2024 11:19:26 +0100
+To: Yang Xiwen <forbidden405@foxmail.com>
+Cc: "Jorge Ramirez-Ortiz, Gmail" <jorge.ramirez.ortiz@gmail.com>,
+ Shawn Guo <shawn.guo@linaro.org>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] poplar: add myself as co-maintainer
+Message-ID: <Zb4TLv2E58KvrgCO@trax>
+References: <20240202214429.2185563-1-igor.opaniuk@foundries.io>
+ <CAAQ0ZWRFak3LwsSVCxi7sd6AmpJsegdv6A4Y=piwb8eStLTjLw@mail.gmail.com>
+ <Zb36M+p4z2+zd+XB@trax>
+ <tencent_0A657770FEC7B98668A070C65A10F4166007@qq.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US, de-DE
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Matthias Brugger <mbrugger@suse.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Pull request smbios-2024-04-rc2
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:dyjLZU7wrTeVlge3ElAfdKfGPqEfNSU4NfoB5ZNWfKNwFe3vrRa
- UzTe1ck1i72X3nf5Oebow2yyAw3/nfUqmCG6yDVby0hllTpTgBmrHh89gNTIpTpXL32tFj8
- 7Wd/9x9r9qEs2auaKaQ96G5166mlrTuTCQ+y7mHwmE8Xy3HOkka2xZIJQs0vIAURHQpyRJ3
- fjTUVGA1hNBGoV9r+cV3Q==
-UI-OutboundReport: notjunk:1;M01:P0:+kWuT9RSOCU=;DjFdmQES/BTsqZ2F+tcqAnr8VQp
- cr56qYoyMwfLabbfIRc2FCjaBCWRGBweEVh/VZgs7YWOmfJt38a2G37KB1zPrHVkA0lyJ5nDy
- hXyFC7HHN4ku7NEmLQLslBoH4qsfIzu91BIxjM7cT92s5q6tRZl+SGEi6YY1Tuo7pZFdELe7L
- Z1EZXYSA1NPD4M3dSQPaEmMXnHMZOJ9YN6iu4HofDI5NLjl86yV44TYGtyq9W5slRvYtyoY9z
- TlOjDMM91TuMJfQvxdJQZSS0pQgOnZk2559MwiALIgVpqiBXt8AK2A2Y89msY8dj/nRhjARaT
- uc6s7JtdKCp6HTjXC71YpmmI0XcnWLEyf50GTJH+vDfsrQOJVA/S7Rr98l/+8Tn3jrptun5IT
- w34NrB3jyBEmx5wNzEE4nZHyc3UvdXOA5yR5wwM7mu0cH9OqvcWpYWrrW06gOqYyP34S7n9JR
- /bALCJEGJ/oEkpUsI5Huw+clD/5nhngmtL/sTJ/J/crD0E9Mfi/dPTliaV2U5VoDUGAZljVg+
- UvdOdwIjpvjA8PxpMSDis+ipIcFs1ugDeO2fh9ZEI0ub7FKzh7EtFOqFtYt2lV4gmO0nrSEsC
- vZV3FB6PG7HbQSDOltBLgit/IrBB72ZnVu+LW6u4hxCaH2wQeu/S4Zeahfmp9Ddrs9Es/3cG9
- wQEeYzs1viR6wiH/boEUkRbmYiXgp3VxlzGihex7LumZkAWHtjEDeOEAeXgP5oxHHlBTutAH/
- F46YMGcVXXo4bdOgrT01+ukWZcYIcLF0s7Z2JaFiR4bS7QpwjDnBt80gL+4wIUJJmGHjsKjqT
- YBOjGh3MDNUvqG2RsG9ILqlFfDYjrukBHe7VOX1eA8ZBI=
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <tencent_0A657770FEC7B98668A070C65A10F4166007@qq.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,66 +104,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+On 03/02/24 17:45:42, Yang Xiwen wrote:
+> On 2/3/2024 4:32 PM, Jorge Ramirez-Ortiz, Gmail wrote:
+> > On 03/02/24 07:54:22, Shawn Guo wrote:
+> > > On Sat, Feb 3, 2024 at 5:44 AM Igor Opaniuk <igor.opaniuk@foundries.io> wrote:
+> > > >
+> > > > Add myself as co-maintainer for Poplar board, as I'm currently
+> > > > working on it (re-testing releases, addressing issues etc).
+> > > >
+> > > > CC: Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
+> > > > CC: Shawn Guo <shawn.guo@linaro.org>
+> > > > Signed-off-by: Igor Opaniuk <igor.opaniuk@foundries.io>
+> > >
+> > > Acked-by: Shawn Guo <shawn.guo@linaro.org>
+> > >
+> > > I'm not actively working on poplar any more, so maybe remove me in the meantime.
+> >
+> >
+> > hi Igor,
+> >
+> > Yes please go ahead and thanks for offering.
+> >
+> > I'll sync with you later next week (I found my Poplar in storage, so maybe we cam improve things a little)
+> > Also it would be good if we knew there are still users.
+> >
+> >
+> > Acked-by: Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
+> >
+> Hi, everyone. I'm working on a set-top box with a Hi3798MV200 SoC. It is
+> very similar to the Hi3798CV200 SoC and many peripherals and drivers can be
+> reused. I think you can try moving arch/arm/include/asm/arch-hi3798cv200 to
+> arch/arm/mach-histb and let's maintain all HiSTB series SoCs/boards under it
+> altogether? The same thing also applies to TF-A. Currently upstream code
+> refers to poplar everywhere but actually the port is portable enough to
+> handle a lot of other Hi3798-series SoCs such as Hi3798MV2x, Hi3798MV3x
+> etc..
 
-The following changes since commit 050a9b981d6a835133521b599be3ae189ce70f4=
-1:
+Sure, if this is indeed a family we should do that (documentation was
+scarce back them when I did the initial port).
 
-   Merge tag 'u-boot-amlogic-fixes-20240201' of
-https://source.denx.de/u-boot/custodians/u-boot-amlogic (2024-02-01
-09:59:53 -0500)
+maybe you'd like to take a stab Igor?
 
-are available in the Git repository at:
 
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-tags/smbios-2024-04-rc2
-
-for you to fetch changes up to 406c410ef747d66e16f2f5494cbf88ba1307224f:
-
-   smbios: correctly name Structure Table Maximum Size field (2024-02-02
-19:57:45 +0100)
-
-Gitlab CI showed no issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/19538
-
-=2D---------------------------------------------------------------
-Pull request smbios-2024-04-rc2
-
-* In smbios command
-   - write 'Not Specified' for missing strings
-   - show correct table size for SMBIOS2.1 entry point
-   - adjust formatting of handle numbers
-   - add missing colon after UUID
-* In generated SMBIOS table
-   - avoid introducing 'Unknown' string for missing properties
-   - provide RISC-V vendor ID in the type 4 structure
-   - provide the correct chassis handle in structure type 2
-* Rename Structure Table Maximum Size field in SMBIOS 3 entry point
-
-=2D---------------------------------------------------------------
-Heinrich Schuchardt (11):
-       lib: smbios_entr() use logical or for booleans
-       smbios: get_str_from_dt() - add sysinfo_id description
-       cmd: smbios: always use '0x%04x' for printing handles
-       cmd: smbios: add missing colon after UUID
-       cmd: smbios: replace missing string by 'Not Specified'
-       smbios: if a string value is unknown, use string number 0
-       smbios: provide type 4 RISC-V SMBIOS Processor ID
-       smbios: correctly fill chassis handle
-       cmd: smbios: show correct table size for SMBIOS2.1 entry point
-       smbios: do not determine maximum structure size
-       smbios: correctly name Structure Table Maximum Size field
-
-Matthias Brugger (1):
-       smbios: Fix table when no string is present
-
-  cmd/smbios.c                | 20 ++++++++++--------
-  drivers/cpu/riscv_cpu.c     | 12 +++++++++++
-  drivers/misc/qfw_smbios.c   |  2 +-
-  include/smbios.h            |  2 +-
-  lib/efi_loader/efi_tcg2.c   |  4 ++--
-  lib/efi_loader/smbiosdump.c |  6 +++---
-  lib/smbios-parser.c         |  4 ++--
-  lib/smbios.c                | 49
-+++++++++++++++++++++++++--------------------
-  8 files changed, 60 insertions(+), 39 deletions(-)
+> > >
+> > > Shawn
+>
