@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04EA2C4828F
-	for <u-boot@archiver.kernel.org>; Sat,  3 Feb 2024 14:12:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C5B0C4828F
+	for <u-boot@archiver.kernel.org>; Sat,  3 Feb 2024 14:12:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E9DB87968;
+	by phobos.denx.de (Postfix) with ESMTP id CE6C38799D;
 	Sat,  3 Feb 2024 15:12:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foxmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=foxmail.com header.i=@foxmail.com header.b="X3hYi4ks";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LQP3OMX1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D20D287CED; Sat,  3 Feb 2024 11:33:50 +0100 (CET)
-Received: from out203-205-221-149.mail.qq.com (out203-205-221-149.mail.qq.com
- [203.205.221.149])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id EDA39875E9; Sat,  3 Feb 2024 15:02:24 +0100 (CET)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 150F187CBE
- for <u-boot@lists.denx.de>; Sat,  3 Feb 2024 11:33:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D9E61871DF
+ for <u-boot@lists.denx.de>; Sat,  3 Feb 2024 15:02:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foxmail.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=forbidden405@foxmail.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foxmail.com;
- s=s201512; t=1706956421;
- bh=0MClFFMtE9S+/8bpVZTEKJZHPtoPYlLMAbDNS8L0i/Y=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To;
- b=X3hYi4ksiKlO/uCnfZ5HsnfZnv8/Lc+82J72tVxoWBcq7RQfoZL7g9scvV1Yn1lLH
- QJ9Pa+ZV3lj922WQgwr87ZKXw2UzzmEanh6XmKOr3v8+S/ZnSvzzio4gf0TkchXsAR
- PrNYDaZ3Ll7emDNVJS6kU+nGMvsirtUN2GFn/HVo=
-Received: from [IPV6:2409:8a4c:807c:e7c1:c8d:b527:44bf:a351]
- ([2409:8a4c:807c:e7c1:c8d:b527:44bf:a351])
- by newxmesmtplogicsvrszb6-0.qq.com (NewEsmtp) with SMTP
- id 867854F8; Sat, 03 Feb 2024 18:33:39 +0800
-X-QQ-mid: xmsmtpt1706956419t2jy5gc77
-Message-ID: <tencent_D52DF41AE002F7337EA9B99E68CA70C1DA07@qq.com>
-X-QQ-XMAILINFO: NGZp1yYNf7Y+VKkU/viHmodpER5qGj1FYWBSqrAzJRFFh/AU9ezqIx8sD5W0ww
- 7tltPoZo1U4Wi+XIJh5B9Q9bHJsARNpiJdJSFGANiXR9Xtz9/q1T9itRP+6Kr4mSj4tINEOZo775
- uRHsuIxaPw9fJWeCnhZ/DSLkHW4lEC24kH2T8RVQ7rhDljdxk07T5B4FbEeoR5jEfPhoUL8NKrcR
- 9d2KPwUNPH3wwKuBEcEkj3yBvBTGW2i6xdfXELQilU8n/aitUDS/vaBB2Od4RGnB7Q+VJDIZWKAP
- W/RXDV/adWuIDuaPHKXUP9IN7/0wNIxZtPkKbTtjsh8ofVzSJA8CvP069iusx4TNsXw3AOZo/mey
- Xg+xNbuijIoSSq7UTFAv7qgS8SmDXoDUbAnyGjXlxm22B9eo+msO89v+BKuWXvu9osKz50dcYDGb
- 5nOWxDfcierSyhCpu3UPsKQt7dcNjF66rf6L39Vk0UiS16LV5JhO5c2Z2WwpybvW+EDrHhRMgJqq
- dN7g/cly2R+RReAQwqu5eMJRwSc6VpCn19qD6/gZAWViGsauvE2aZQqTolO0b4m7h/pHumezGQEH
- wMTc5njyT0YFAYUfzNNuHHwrIX0351HU4VpTzrfpbqPwAq9eaXkgXihQ33v5J7tpfyKZ7zfWgNNd
- UxSR0XFHFxxCBwFT8kQh+9kdN2/lJ8zXokTO+5ALyo+m4HDgnvEl4+vORFTZ9rH2MJzK6HRNNnYW
- Kjhn36cnicQ+5WZnGF+iQCY4Ls76WrGHkL435ZSOveNei/S2EdhptA3Zyojyb1Lxzd64jmVYdpgL
- X+b3mh+nHb7x5DPOu73bNMPuq2MbHNGLJ4NVMh0I8HRWoeOT+RxQRUkxWD0M9g31k8oOPMEa2vJr
- 0OQwMsiAGdcX/aIrYGgz5WuTWYt9edm2UMOwz9U0Wo7MjRcZqMWU2QtxEy4UHTvUlDgOBEU4ho2y
- ZeCSro5l9l0qdaYKJb3tSKPOjRQfZP7uvjK1MJH1to1p1kzjy/wqyCUj+S9JPYXiYia31lHzXKsp
- RdmLH6XpI3JeQSsHd0PGWHf4dsmRPZC/bI0VeTOr0A1L1J4MXp/FhyRKkVHSLn2gSX6CqeGd77YB
- M262r+
-X-QQ-XMRINFO: Nq+8W0+stu50PRdwbJxPCL0=
-X-OQ-MSGID: <6366c731-a4b0-4120-b78d-4e4aa62662da@foxmail.com>
-Date: Sat, 3 Feb 2024 18:33:39 +0800
+ spf=pass smtp.mailfrom=seashell11234455@gmail.com
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-33b0e5d1e89so2243154f8f.0
+ for <u-boot@lists.denx.de>; Sat, 03 Feb 2024 06:02:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706968942; x=1707573742; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nkYEEd9Gqosa9Owd3cikEfHef/xAvf3F9yjaKhUBdsM=;
+ b=LQP3OMX1yAgdI0/A+aFN1oorX+EAzTvHhqBTBaXSo0f9TRKV5SF4ceJ+N1ja6Xyhxm
+ 8DkkEn027xtOIADIrRPjuWzym5OojiVKIKS8ogmc41ykU20ebFOSOsEPg2wY071rxpnZ
+ ddwO1h0LhUH6gQRgT/cwgsoU2i6niXZF8hfugriIHFttVJjNZmTl89Gba2mDP62nI7bZ
+ s2O4fF6gQxqtRip6A5wk9HoJhT1Idr5vbemLhMCifZ6PZgnwqr3e2HkU72VFJDbmIMru
+ N5iojxYBXa9lw5ajXFCXsAnGhQ2kcx1vhavKnUYsXUhJgKa7NyhJrTIaZ4Vgg3OEaT0Z
+ ekGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706968942; x=1707573742;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nkYEEd9Gqosa9Owd3cikEfHef/xAvf3F9yjaKhUBdsM=;
+ b=AbjCTaOtkuE7jLUX5kEJ1vGZ64ntin380gVCOuqUBct7lpNOcNaC+3Fn0YPw625yF1
+ Fc/I9LC6aE0Gn9rpau00lTT09SloKooDYb+sUiawXAv5b7QqxSmIlnAJcpJBV2fKR+0d
+ YrMIJhKEsX+g3c/OUhBVxUCNxPb/wbU93pxzQC+ZNRWdTjHjpI3bljXyEcPEMWu7u6oN
+ sOvb9COj2DtaX65losxpbSIPm9fuFqAMFVkp6owr/H1bq0uWoHilRgb0SPnMIeGqBOkL
+ BmFPIHjQo3l8vnojgbmy+gxIyh/7TK+UGn/V37k30x3SzzxbBBtQq6/WHMiomZ25XUfT
+ qsGg==
+X-Gm-Message-State: AOJu0YzJXvkxRBhKAwuQ++auHsfP5hgJsTwfmixufWtfn7BNL05zjEIw
+ g+FkR78opj8VjX95wt2OpXDZK4abGSrUCY4W3jYhU52ljZFZUuKlxFE/bX4x9UpvQwOZQzmv5Lb
+ vczdiWGWFPtmQpYxqDwtxuK79sL8=
+X-Google-Smtp-Source: AGHT+IFSKCN6OkUuZoS3YpLqjkdHLVny1WLqhMaAj6nD3aUNRULM4b/gfwwT6LwMQK8PHq3fQNF/XZoy83aFFSv+qko=
+X-Received: by 2002:a5d:51d1:0:b0:33b:1ac8:aebe with SMTP id
+ n17-20020a5d51d1000000b0033b1ac8aebemr5289770wrv.44.1706968941928; Sat, 03
+ Feb 2024 06:02:21 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] poplar: add myself as co-maintainer
-Content-Language: en-US
-To: "Jorge Ramirez-Ortiz, Gmail" <jorge.ramirez.ortiz@gmail.com>
-Cc: Shawn Guo <shawn.guo@linaro.org>, Igor Opaniuk
- <igor.opaniuk@foundries.io>, u-boot@lists.denx.de,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20240202214429.2185563-1-igor.opaniuk@foundries.io>
- <CAAQ0ZWRFak3LwsSVCxi7sd6AmpJsegdv6A4Y=piwb8eStLTjLw@mail.gmail.com>
- <Zb36M+p4z2+zd+XB@trax> <tencent_0A657770FEC7B98668A070C65A10F4166007@qq.com>
- <Zb4TLv2E58KvrgCO@trax>
-From: Yang Xiwen <forbidden405@foxmail.com>
-In-Reply-To: <Zb4TLv2E58KvrgCO@trax>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20240202093748.330658-1-seashell11234455@gmail.com>
+ <20240202093748.330658-2-seashell11234455@gmail.com>
+ <8186f3b4-267c-4865-bee7-f59a49e5bea2@canonical.com>
+In-Reply-To: <8186f3b4-267c-4865-bee7-f59a49e5bea2@canonical.com>
+From: Kongyang Liu <seashell11234455@gmail.com>
+Date: Sat, 3 Feb 2024 22:02:09 +0800
+Message-ID: <CAOKwTdpxm6n3w_RqvUAHVjkWhQjoS2va_3FQcYZfEjgt-ODcbA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] riscv: cpu: cv1800b: Add support for cv1800b SoC
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Anup Patel <anup@brainfault.org>, Bin Meng <bmeng@tinylab.org>,
+ Leo <ycliang@andestech.com>, 
+ Michal Simek <michal.simek@amd.com>, Randolph <randolph@andestech.com>, 
+ Rick Chen <rick@andestech.com>, Samuel Holland <samuel@sholland.org>, 
+ Shengyu Qu <wiagn233@outlook.com>, Tom Rini <trini@konsulko.com>, 
+ Yu Chien Peter Lin <peterlin@andestech.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Sat, 03 Feb 2024 15:12:12 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,59 +95,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/3/2024 6:19 PM, Jorge Ramirez-Ortiz, Gmail wrote:
-> On 03/02/24 17:45:42, Yang Xiwen wrote:
->> On 2/3/2024 4:32 PM, Jorge Ramirez-Ortiz, Gmail wrote:
->>> On 03/02/24 07:54:22, Shawn Guo wrote:
->>>> On Sat, Feb 3, 2024 at 5:44 AM Igor Opaniuk <igor.opaniuk@foundries.io> wrote:
->>>>>
->>>>> Add myself as co-maintainer for Poplar board, as I'm currently
->>>>> working on it (re-testing releases, addressing issues etc).
->>>>>
->>>>> CC: Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
->>>>> CC: Shawn Guo <shawn.guo@linaro.org>
->>>>> Signed-off-by: Igor Opaniuk <igor.opaniuk@foundries.io>
->>>>
->>>> Acked-by: Shawn Guo <shawn.guo@linaro.org>
->>>>
->>>> I'm not actively working on poplar any more, so maybe remove me in the meantime.
->>>
->>>
->>> hi Igor,
->>>
->>> Yes please go ahead and thanks for offering.
->>>
->>> I'll sync with you later next week (I found my Poplar in storage, so maybe we cam improve things a little)
->>> Also it would be good if we knew there are still users.
->>>
->>>
->>> Acked-by: Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
->>>
->> Hi, everyone. I'm working on a set-top box with a Hi3798MV200 SoC. It is
->> very similar to the Hi3798CV200 SoC and many peripherals and drivers can be
->> reused. I think you can try moving arch/arm/include/asm/arch-hi3798cv200 to
->> arch/arm/mach-histb and let's maintain all HiSTB series SoCs/boards under it
->> altogether? The same thing also applies to TF-A. Currently upstream code
->> refers to poplar everywhere but actually the port is portable enough to
->> handle a lot of other Hi3798-series SoCs such as Hi3798MV2x, Hi3798MV3x
->> etc..
-> 
-> Sure, if this is indeed a family we should do that (documentation was
-> scarce back them when I did the initial port).
-About docs, I've got some. But still, some critical datasheets are 
-missing. Most peripherals are the common ones, like DWC3(USB), 
-PL061(GPIO), DWMMC(eMMC/SD), PL011(serial), SP905(watchdog). But there 
-are some cores that are difficult to find docs. e.g. USB2 INNO PHY, USB3 
-nano PHY, PMU, TZPC/TZASC, HDMI etc..
+Heinrich Schuchardt <heinrich.schuchardt@canonical.com> =E4=BA=8E2024=E5=B9=
+=B42=E6=9C=882=E6=97=A5=E5=91=A8=E4=BA=94 19:11=E5=86=99=E9=81=93=EF=BC=9A
+>
+> On 02.02.24 10:37, Kongyang Liu wrote:
+> > Add Sophgo cv1800b SoC to support RISC-V arch.
+> >
+> > Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
+> >
+> > ---
+> >
+> >   arch/riscv/Kconfig              |  1 +
+> >   arch/riscv/cpu/cv1800b/Kconfig  | 12 ++++++++++++
+> >   arch/riscv/cpu/cv1800b/Makefile |  6 ++++++
+> >   arch/riscv/cpu/cv1800b/cpu.c    | 22 ++++++++++++++++++++++
+> >   arch/riscv/cpu/cv1800b/dram.c   | 21 +++++++++++++++++++++
+> >   board/sophgo/milkv_duo/Kconfig  |  4 ++--
+> >   6 files changed, 64 insertions(+), 2 deletions(-)
+> >   create mode 100644 arch/riscv/cpu/cv1800b/Kconfig
+> >   create mode 100644 arch/riscv/cpu/cv1800b/Makefile
+> >   create mode 100644 arch/riscv/cpu/cv1800b/cpu.c
+> >   create mode 100644 arch/riscv/cpu/cv1800b/dram.c
+> >
+> > diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+> > index ac52c5e6da..2c92b0d9f6 100644
+> > --- a/arch/riscv/Kconfig
+> > +++ b/arch/riscv/Kconfig
+> > @@ -93,6 +93,7 @@ source "board/xilinx/mbv/Kconfig"
+> >
+> >   # platform-specific options below
+> >   source "arch/riscv/cpu/andesv5/Kconfig"
+> > +source "arch/riscv/cpu/cv1800b/Kconfig"
+> >   source "arch/riscv/cpu/fu540/Kconfig"
+> >   source "arch/riscv/cpu/fu740/Kconfig"
+> >   source "arch/riscv/cpu/generic/Kconfig"
+> > diff --git a/arch/riscv/cpu/cv1800b/Kconfig b/arch/riscv/cpu/cv1800b/Kc=
+onfig
+> > new file mode 100644
+> > index 0000000000..7225b1210c
+> > --- /dev/null
+> > +++ b/arch/riscv/cpu/cv1800b/Kconfig
+> > @@ -0,0 +1,12 @@
+> > +# SPDX-License-Identifier: GPL-2.0+
+> > +#
+> > +# Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
+> > +
+> > +config SOPHGO_CV1800B
+> > +     bool
+> > +     select ARCH_EARLY_INIT_R
+> > +     select SYS_CACHE_SHIFT_6
+> > +     imply CPU
+> > +     imply CPU_RISCV
+> > +     imply RISCV_TIMER
+> > +     imply CMD_CPU
+> > diff --git a/arch/riscv/cpu/cv1800b/Makefile b/arch/riscv/cpu/cv1800b/M=
+akefile
+> > new file mode 100644
+> > index 0000000000..da12e0f64e
+> > --- /dev/null
+> > +++ b/arch/riscv/cpu/cv1800b/Makefile
+> > @@ -0,0 +1,6 @@
+> > +# SPDX-License-Identifier: GPL-2.0+
+> > +#
+> > +# Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
+> > +
+> > +obj-y +=3D dram.o
+> > +obj-y +=3D cpu.o
+> > diff --git a/arch/riscv/cpu/cv1800b/cpu.c b/arch/riscv/cpu/cv1800b/cpu.=
+c
+> > new file mode 100644
+> > index 0000000000..f13c18942f
+> > --- /dev/null
+> > +++ b/arch/riscv/cpu/cv1800b/cpu.c
+> > @@ -0,0 +1,22 @@
+> > +// SPDX-License-Identifier: GPL-2.0+
+> > +/*
+> > + * Copyright (C) 2018, Bin Meng <bmeng.cn@gmail.com>
+> > + */
+> > +
+> > +#include <irq_func.h>
+> > +#include <asm/cache.h>
+> > +
+> > +/*
+> > + * cleanup_before_linux() is called just before we call linux
+> > + * it prepares the processor for linux
+> > + *
+> > + * we disable interrupt and caches.
+> > + */
+> > +int cleanup_before_linux(void)
+> > +{
+> > +     disable_interrupts();
+> > +
+> > +     cache_flush();
+> > +
+> > +     return 0;
+> > +}
+>
+> Thank you for enabling another board.
+>
+> The same cleanup_before_linux() code can be found in:
+>
+> arch/riscv/cpu/fu740/cpu.c
+> arch/riscv/cpu/andesv5/cpu.c
+> arch/riscv/cpu/fu540/cpu.c
+> arch/riscv/cpu/generic/cpu.c
+> arch/riscv/cpu/jh7110/cpu.c
+>
+> We should try to avoid this code duplication.
+>
+> disable_interrupts() is already called by bootm_disable_interrupts().
+>
+> flushing the instruction cache after loading a binary is not
+> architecture specific either. This is why bootm_load_os() calls
+> flush_cache().
+>
+> It should be sufficient to let weak function flush_dcache_range() in
+> arch/riscv/lib/cache.c call flush_dcache_all(). And then remove all
+> cleanup_before_linux() implementations.
+>
 
-Please ping me if you find some documents about them. Especially PMU and 
-USB PHYs, it's quite hard to write a mainline driver for them without 
-datasheets.
-> 
-> maybe you'd like to take a stab Igor?
-> 
-> 
->>>>
->>>> Shawn
->>
+Thanks for your explanation.
 
+Currently, we have only implemented cache for SoC cv1800b, and for the sake
+of compatibility, the remaining code has been simply copied from the generi=
+c
+folder without a thorough examination.
+
+If this function is unnecessary, it will be removed in the next version.
+
+Best regards
+Kongyang Liu
+
+> Best regards
+>
+> Heinrich
+>
+>
+> > diff --git a/arch/riscv/cpu/cv1800b/dram.c b/arch/riscv/cpu/cv1800b/dra=
+m.c
+> > new file mode 100644
+> > index 0000000000..91007c0a3d
+> > --- /dev/null
+> > +++ b/arch/riscv/cpu/cv1800b/dram.c
+> > @@ -0,0 +1,21 @@
+> > +// SPDX-License-Identifier: GPL-2.0+
+> > +/*
+> > + * Copyright (C) 2018, Bin Meng <bmeng.cn@gmail.com>
+> > + */
+> > +
+> > +#include <fdtdec.h>
+> > +#include <init.h>
+> > +#include <asm/global_data.h>
+> > +#include <linux/sizes.h>
+> > +
+> > +DECLARE_GLOBAL_DATA_PTR;
+> > +
+> > +int dram_init(void)
+> > +{
+> > +     return fdtdec_setup_mem_size_base();
+> > +}
+> > +
+> > +int dram_init_banksize(void)
+> > +{
+> > +     return fdtdec_setup_memory_banksize();
+> > +}
+> > diff --git a/board/sophgo/milkv_duo/Kconfig b/board/sophgo/milkv_duo/Kc=
+onfig
+> > index 2a458f291c..040a7487f1 100644
+> > --- a/board/sophgo/milkv_duo/Kconfig
+> > +++ b/board/sophgo/milkv_duo/Kconfig
+> > @@ -7,7 +7,7 @@ config SYS_VENDOR
+> >       default "sophgo"
+> >
+> >   config SYS_CPU
+> > -     default "generic"
+> > +     default "cv1800b"
+> >
+> >   config SYS_CONFIG_NAME
+> >       default "milkv_duo"
+> > @@ -23,6 +23,6 @@ config ENV_SECT_SIZE
+> >
+> >   config BOARD_SPECIFIC_OPTIONS
+> >       def_bool y
+> > -     select GENERIC_RISCV
+> > +     select SOPHGO_CV1800B
+> >
+> >   endif
+>
