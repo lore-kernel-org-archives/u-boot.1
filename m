@@ -4,71 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42146C4828D
-	for <u-boot@archiver.kernel.org>; Sat,  3 Feb 2024 15:18:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0826C4828D
+	for <u-boot@archiver.kernel.org>; Sat,  3 Feb 2024 16:37:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5D67871DF;
-	Sat,  3 Feb 2024 16:18:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0F9EB876F8;
+	Sat,  3 Feb 2024 17:37:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="jOEe4vwL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="f2pcqk7e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6FA7871DF; Sat,  3 Feb 2024 16:18:34 +0100 (CET)
-Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5ECBD87969; Sat,  3 Feb 2024 17:37:27 +0100 (CET)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95739876F8
- for <u-boot@lists.denx.de>; Sat,  3 Feb 2024 16:18:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 4994E876F8
+ for <u-boot@lists.denx.de>; Sat,  3 Feb 2024 17:37:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6818a9fe3d4so16424086d6.0
+ for <u-boot@lists.denx.de>; Sat, 03 Feb 2024 08:37:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1706978243; x=1707583043; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=s0QUr+vGJT2OVwuGAvGseMwf7F+ou1rQWq+Jocu4wok=;
+ b=f2pcqk7eC2pfB1bW9kNYj32SMQ0YFqggAzfNmv0plSddCltBtPq8YZaSZFbHXajHuv
+ EFBVqNYTiK41+N/TcBMCZKaLRKpIpFd0w18piEy9lltcEiM9lBVgeJ6MfsJiXkTMAfH8
+ 2HQlEfIHUMSzPOSoUkbw99DfiIeLUZ04kbXDDNiOCumuR3/VMQKRvlWm9MKJDLeSX7rD
+ dEizohCwfxmC465qtWSW78wtDwBTrscJjcEOd0OipF5eArr4AGTS0OyqWgzeeggLiY5a
+ LfKrxeZg71thIWyl3Q77b5lZupMf+pKamUR0hqimfyPCIZe8MacYRfUkcbJvhiS7Ey10
+ cmoQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706978243; x=1707583043;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=s0QUr+vGJT2OVwuGAvGseMwf7F+ou1rQWq+Jocu4wok=;
+ b=Ir4mcrpTdtE3Kfjtv+QeT9cGBgRJflmL60Gdx8CBQbFdHGK29yESf1KFMG7GodvtWV
+ MoRIVcS9Y8unpJ1ahaUdfRipSfqhbN43FauF8FjFul8G9TVnN+zjRFUuOwdQF5OvbxIy
+ FhbAt8ufKB5nVJHHyV7L5wJKE5o4SBRSbhjR+QWlFOlyPZLA8bNFSzZ2z4wlRygLq6Mq
+ WFq7UOuTNwCj3wWtkpcWcuKTYjH/aFY+WBoDdddRgUBrbqlpY8GJ9HZrRjaOlpjPWMlj
+ 3aJlGrVnfb8myyOLqZzt7Iieiefj9FKcD3x/PJNJSOc6n47s4ubSCXA4hnLbgSXRPXZl
+ ZgWQ==
+X-Gm-Message-State: AOJu0YwH34dKQi8zOuB9UyytBtNHVpah7hw9EbaEIBvywmbNWRv9bYp9
+ w4q+YeRJ2u7xmnCj323/dD+w2VdgXCPEyH0EGVWoU1Lm1kLpa9KbS0X/887FacqLDVQIC2Y3uOT
+ t
+X-Google-Smtp-Source: AGHT+IHS0DQ/TJyd0C0NnapTrDcHmn345JBem1V/7JYy7xjKg9SZD2aZB1h+RFO93IPP4VqD1ZzJIQ==
+X-Received: by 2002:a05:6214:62e:b0:68c:7fed:d1ca with SMTP id
+ a14-20020a056214062e00b0068c7fedd1camr1535968qvx.0.1706978243623; 
+ Sat, 03 Feb 2024 08:37:23 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCVvIA3wf7LH6b85actDNwnRfexBHRDGABOi9Ie1pa7Mom+1Ws3UkvCqxiDHSCG8WLidC05Vo2/K8Mttww6g5DoBzXmRQC/sfwGuKQI8TlEYGGlJZLmXMbb5MJuw37uOA2aQFDsobsSu359AmtAQ3BuCRJAjuKrE+NS4wcJAiCC7nZU9b8ExeYiJvjlGsFJPnDi6ThK3WrQrQMnZ1bar6EIOyU0BT01Mgd0RQMX16CuziL4lXr2NHjFk4+12JN2WLKYYRVk7LWTEeK9q1qUsZ7FH96xcGYO7RjsW9J3TtH6poIladiCZZq8H1G7pqFwINkrfojKIQLQkBM+yRcJuGhowhM24kzwrbn8MFgW6vIzMhmWM3AZPU22CQA7ZnUGu
+Received: from ubuntu.localdomain
+ (cpe688f2e182063-cm688f2e182060.sdns.net.rogers.com. [174.115.4.214])
+ by smtp.gmail.com with ESMTPSA id
+ oj16-20020a056214441000b006869d54c818sm1909086qvb.109.2024.02.03.08.37.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 03 Feb 2024 08:37:23 -0800 (PST)
+From: Raymond Mao <raymond.mao@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Kevin Chen <kevin_chen@aspeedtech.com>,
+ Sean Anderson <sean.anderson@seco.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Nikhil M Jain <n-jain1@ti.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Shiji Yang <yangshiji66@outlook.com>, Michal Simek <michal.simek@amd.com>,
+ Stefan Roese <sr@denx.de>, Qu Wenruo <wqu@suse.com>
+Subject: [PATCH v8 0/8] Handoff bloblist from previous boot stage
+Date: Sat,  3 Feb 2024 08:36:19 -0800
+Message-Id: <20240203163631.177508-1-raymond.mao@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1706973511;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=hJPs6iDtOR3OZC9iDFHly1FxrCWhEF+Q6YwWyyeIFPM=;
- b=jOEe4vwLcj2vyjLEc0U7wbWjj82NFMN3u2QKnkUeVQh4S2gGtQ+KXb+bSl3eORQv+hMsbH
- k850zpsbtzlWF7oRuEiaz83E417PwCJIh5uYNcCPgMvnAMg+MLxbEjyPVgQtSP5430v5O2
- R8xBwHc5wSL3s6fUYehXjI2lGXXMuNa33ZYQ4QP6laOIe3lJ0YL+TknEEVUzLv1VwyGwdD
- b+rNtdkXHdFJit1t2wC9Us90mmuVkVi0Fo/3Da2LC7sN07BAIKcElqowRVGjb4r7tvKaqS
- 0f8lFCXuzCAuBmmAeZSvtjgTuSwkfDwrf+cC92yBGZnI4C73OFXon1q4LSFzzg==
-Date: Sat, 03 Feb 2024 16:18:29 +0100
-From: Dragan Simic <dsimic@manjaro.org>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Kever Yang
- <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Peter Robinson <pbrobinson@gmail.com>, Jagan
- Teki <jagan@amarulasolutions.com>, Klaus Goger
- <klaus.goger@theobroma-systems.com>, Heiko Stuebner
- <heiko.stuebner@cherry.de>, Otavio Salvador <otavio@ossystems.com.br>, Andy
- Yan <andy.yan@rock-chips.com>, Manivannan Sadhasivam
- <manivannan.sadhasivam@linaro.org>, Lukasz Majewski <lukma@denx.de>, Sean
- Anderson <seanga2@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Anatolij Gustschin
- <agust@denx.de>, heiko@sntech.de, u-boot@lists.denx.de, Quentin Schulz
- <quentin.schulz@theobroma-systems.com>
-Subject: Re: [PATCH 08/18] rockchip: pine64: rockpro64: migrate to
- rockchip_early_misc_init_r
-In-Reply-To: <be58f85e-5564-4b10-aa24-cb4d794cc09b@kwiboo.se>
-References: <20240123-jaguar-v1-0-1eec1c34953c@theobroma-systems.com>
- <20240123-jaguar-v1-8-1eec1c34953c@theobroma-systems.com>
- <0d74e5e5482cd32d7cad714e731d4fb8@manjaro.org>
- <be58f85e-5564-4b10-aa24-cb4d794cc09b@kwiboo.se>
-Message-ID: <30c40f7596affef5899099ce68eb96c1@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,179 +99,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Jonas,
+This patch set adds/adapts a few bloblist APIs and implements Arm arch
+custom function to retrieve the bloblist (aka. Transfer List) from
+previous loader via boot arguments when BLOBLIST option is enabled and
+all boot arguments are compliant to the register conventions defined
+in the Firmware Handoff spec v0.9.
 
-On 2024-02-03 15:18, Jonas Karlman wrote:
-> On 2024-02-03 14:19, Dragan Simic wrote:
->> Please see my comments below.
->> 
->> On 2024-01-23 15:49, Quentin Schulz wrote:
->>> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
->>> 
->>> Only setup_iodomain() differs from the original misc_init_r from
->>> Rockchip mach code, so let's use rockchip_early_misc_init_r instead 
->>> of
->>> reimplementing the whole misc_init_r from Rockchip.
->> 
->> Your patches from this series are fine, but the trouble is that
->> we end up executing rockchip_setup_macaddr() for the devices
->> that don't use the RK3339's built-in Gigabit Ethernet interface,
->> which includes the Pinebook Pro and the Pinephone Pro.
-> 
-> The rockchip_setup_macaddr() is not just for integrated ethernet
-> interface. The main purpose is to have a reliably mac address assigned
-> to any device assigned to the ethernet0/ethernet1 alias in the device
-> tree, see fdt_fixup_ethernet().
+If an arch wishes to have different behaviors for loading bloblist
+from the previous boot stage, it is required to implement the custom
+function xferlist_from_boot_arg().
 
-Sure, I had already checked fdt_fixup_ethernet() before commenting.
+V5:
+Drop [PATCH v4 8/9] fdt: update the document and Kconfig description.
+V6:
+Drop [PATCH v5 8/8] fdt: get FDT from bloblist.
+V7:
+Fixed CI pipeline failures.
+V8:
+Refine asm code.
 
-As a note, there are no ethernetX aliases in the Pinebook Pro and
-Pinephone Pro dts files, or at least there will be none eventually,
-as the redundant aliases have already been removed in the Linux
-kernel. [1]  No such aliases means that fdt_fixup_ethernet() should
-end up doing nothing.
+Raymond Mao (8):
+  bloblist: add API to check the register conventions
+  bloblist: check bloblist with specified buffer size
+  bloblist: refactor of bloblist_reloc()
+  arm: armv7: save boot arguments
+  arm: armv8: save boot arguments
+  arm: Get bloblist from boot arguments
+  bloblist: Load the bloblist from the previous loader
+  dts: OF_HAS_PRIOR_STAGE should depend on !BLOBLIST
 
->> We should add more ifdef guards to rockchip_setup_macaddr(),
->> to prevent the execution of its body for devices such as the
->> ones listed above, which eliminates the unneeded code from the
->> resulting U-Boot images, making them a bit smaller, and saves
->> some CPU cycles and a bit of time on boot.  It also prevents
->> the unneeded "ethaddr" and "eth1addr" variables from being
->> added to the environment.
-> 
-> Adding the ethernet addresses only adds a few ms to boot, if you care
-> about boot speed, please look into if we can disable CONFIG_USE_PREBOOT
-> for these boards, running "usb start" as preboot adds several seconds 
-> to
-> the boot.
+ arch/arm/cpu/armv7/start.S | 29 +++++++++++++
+ arch/arm/cpu/armv8/start.S | 23 +++++++++++
+ arch/arm/lib/Makefile      |  2 +
+ arch/arm/lib/xferlist.c    | 25 +++++++++++
+ arch/arm/lib/xferlist.h    | 19 +++++++++
+ common/bloblist.c          | 85 ++++++++++++++++++++++++++++----------
+ common/board_f.c           |  9 ++--
+ dts/Kconfig                |  1 +
+ include/bloblist.h         | 47 +++++++++++++++++----
+ test/bloblist.c            |  8 ++--
+ 10 files changed, 208 insertions(+), 40 deletions(-)
+ create mode 100644 arch/arm/lib/xferlist.c
+ create mode 100644 arch/arm/lib/xferlist.h
 
-I see, but I personally don't care that much about how long the
-U-Boot takes to execute;  a couple of seconds more don't bother me
-much.  I care more about excluding the unneded code.
+-- 
+2.25.1
 
->> The patch below should do the trick, which also performs a few
->> small code cleanups for additional file-level consistency:
->> 
->> diff --git a/arch/arm/mach-rockchip/misc.c
->> b/arch/arm/mach-rockchip/misc.c
->> index 7d03f0c2b679..ed5bdab5a648 100644
->> --- a/arch/arm/mach-rockchip/misc.c
->> +++ b/arch/arm/mach-rockchip/misc.c
->> @@ -23,7 +23,8 @@
->> 
->>   int rockchip_setup_macaddr(void)
->>   {
->> -#if CONFIG_IS_ENABLED(HASH) && CONFIG_IS_ENABLED(SHA256)
->> +#if CONFIG_IS_ENABLED(HASH) && CONFIG_IS_ENABLED(SHA256) && \
->> +    CONFIG_IS_ENABLED(GMAC_ROCKCHIP)
-> 
-> This would exclude any board not enabling GMAC_ROCKCHIP in U-Boot but
-> want a mac-address being set in DT fixup. And for newer RK35xx SoCs the
-> GMAC_ROCKCHIP driver is not used.
-
-Thanks for pointing that out.  Not good.
-
-> A new Kconfig option should be introduced if there is a need for some
-> boards to disable this.
-
-Is there any simpler way to achieve that?  If there isn't, perhaps
-we could leave rockchip_setup_macaddr() generate the MAC address
-and rely on fdt_fixup_ethernet() ending up doing nothing when no
-ethernetX aliases exist.
-
->>   	int ret;
->>   	const char *cpuid = env_get("cpuid#");
->>   	u8 hash[SHA256_SUM_LEN];
->> @@ -64,15 +65,15 @@ int rockchip_cpuid_from_efuse(const u32
->> cpuid_offset,
->>   			      const u32 cpuid_length,
->>   			      u8 *cpuid)
->>   {
->> -#if IS_ENABLED(CONFIG_ROCKCHIP_EFUSE) ||
->> IS_ENABLED(CONFIG_ROCKCHIP_OTP)
->> +#if CONFIG_IS_ENABLED(ROCKCHIP_EFUSE) ||
-> 
-> This changes behavior and is wrong. IS_ENABLED check for specific 
-> config
-> flag, CONFIG_IS_ENABLED would check for e.g. CONFIG_SPL_ROCKCHIP_EFUSE
-> or similar.
-
-Sorry, my bad, somehow I managed to forget that.  Thanks for
-pointing that out.
-
->> CONFIG_IS_ENABLED(ROCKCHIP_OTP)
->>   	struct udevice *dev;
->>   	int ret;
->> 
->>   	/* retrieve the device */
->> -#if IS_ENABLED(CONFIG_ROCKCHIP_EFUSE)
->> +#if CONFIG_IS_ENABLED(ROCKCHIP_EFUSE)
-> 
-> Same as above.
-> 
->>   	ret = uclass_get_device_by_driver(UCLASS_MISC,
->>   					  DM_DRIVER_GET(rockchip_efuse), &dev);
->> -#elif IS_ENABLED(CONFIG_ROCKCHIP_OTP)
->> +#elif CONFIG_IS_ENABLED(ROCKCHIP_OTP)
-> 
-> Same as above.
-> 
-> Regards,
-> Jonas
-> 
->>   	ret = uclass_get_device_by_driver(UCLASS_MISC,
->>   					  DM_DRIVER_GET(rockchip_otp), &dev);
->>   #endif
->> 
->>> Cc: Quentin Schulz <foss+uboot@0leil.net>
->>> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
->>> ---
->>>  board/pine64/rockpro64_rk3399/rockpro64-rk3399.c | 20
->>> ++------------------
->>>  1 file changed, 2 insertions(+), 18 deletions(-)
->>> 
->>> diff --git a/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
->>> b/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
->>> index d79084614f1..d0a694ead1d 100644
->>> --- a/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
->>> +++ b/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
->>> @@ -11,7 +11,6 @@
->>>  #include <asm/arch-rockchip/clock.h>
->>>  #include <asm/arch-rockchip/grf_rk3399.h>
->>>  #include <asm/arch-rockchip/hardware.h>
->>> -#include <asm/arch-rockchip/misc.h>
->>> 
->>>  #define GRF_IO_VSEL_BT565_SHIFT 0
->>>  #define PMUGRF_CON0_VSEL_SHIFT 8
->>> @@ -31,26 +30,11 @@ static void setup_iodomain(void)
->>>  	rk_setreg(&pmugrf->soc_con0, 1 << PMUGRF_CON0_VSEL_SHIFT);
->>>  }
->>> 
->>> -int misc_init_r(void)
->>> +int rockchip_early_misc_init_r(void)
->>>  {
->>> -	const u32 cpuid_offset = 0x7;
->>> -	const u32 cpuid_length = 0x10;
->>> -	u8 cpuid[cpuid_length];
->>> -	int ret;
->>> -
->>>  	setup_iodomain();
->>> 
->>> -	ret = rockchip_cpuid_from_efuse(cpuid_offset, cpuid_length, cpuid);
->>> -	if (ret)
->>> -		return ret;
->>> -
->>> -	ret = rockchip_cpuid_set(cpuid, cpuid_length);
->>> -	if (ret)
->>> -		return ret;
->>> -
->>> -	ret = rockchip_setup_macaddr();
->>> -
->>> -	return ret;
->>> +	return 0;
->>>  }
->>> 
->>>  #endif
-
-[1] 
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=5d90cb1edcf7c1854e4cecb52871421f29d3d849
