@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9295C4828F
-	for <u-boot@archiver.kernel.org>; Sat,  3 Feb 2024 16:38:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42A2BC4828D
+	for <u-boot@archiver.kernel.org>; Sat,  3 Feb 2024 16:38:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5625D876F8;
-	Sat,  3 Feb 2024 17:38:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C713A87B6B;
+	Sat,  3 Feb 2024 17:38:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="F34yrvsJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lTcC6SF/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B41D487A0E; Sat,  3 Feb 2024 17:38:03 +0100 (CET)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
+ id 5497987A4B; Sat,  3 Feb 2024 17:38:09 +0100 (CET)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90A998767C
- for <u-boot@lists.denx.de>; Sat,  3 Feb 2024 17:38:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 162F987BCE
+ for <u-boot@lists.denx.de>; Sat,  3 Feb 2024 17:38:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-210dec2442eso1923891fac.2
- for <u-boot@lists.denx.de>; Sat, 03 Feb 2024 08:38:01 -0800 (PST)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-68c4673eff5so19487276d6.1
+ for <u-boot@lists.denx.de>; Sat, 03 Feb 2024 08:38:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1706978280; x=1707583080; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1706978285; x=1707583085; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PqXyfHBqMSkxZ7lDO2aXzwVXS3GdMqigO7TWvRT1RX4=;
- b=F34yrvsJUJoSrucNYjy29wOXxrhCnpcnrJbSIdLdbKTvE13vOdbSnZhK9VVy+OTSQc
- k6AiJADQzhPzjGZ0prYRzHP44n7VOHy2Bb5ysTG42aKXXb56UeeFeeCvTlONJgZcDqmD
- ZJFBszs32EwMquxdQ9WOeQ3KotKkdF8Hfr8zqjUFi97Q/VVhnXbXfoHRHOnv//KRmLib
- RscrkxiFns3vrg6KiIb2SlDKAUwsEAUCmOY8PnrQiYLeAOenkJGMLDZ/GSf2oLNu7nBh
- VhDt4CmY+NzRmAJt97P1jva5GYOuCsOyZ1tHxSQ6JnB47iXG7hR8dzGmw5VX1Kvv8I/G
- bNIw==
+ bh=VSJBOWNIRqSVYDzIiscSVAhg6hnt/+Kbpc+KtWN0q0k=;
+ b=lTcC6SF/MT8eOluRkqeTZtzSfd1HdJi1MkXWm8Nlf9sHYfRBhqj6p5DRh9Y4Kg9iSB
+ UAld2pIX9orOVcvHJ/RHKNYRAj2UT0YdVf2vwFtNWFKbhOo3+dcsRXH9KWx1FwYe+8Ng
+ Ov91Y2b7Kk9rL3jaU1RuXcW4gLGq0asOQFCrBAaH5ZtqZmq5PgzWOWYeqXEgU80MLGmL
+ etZtjVw0a1kHRLVmSKOouV+sMUvZgoa7aibvr+hL3PHhREBjdYMGDfskwYJr90vZfO0j
+ 0Fm+t1ZZP3Y7aCao5r9XlHL0HA7zezPdm6rzTLoKywmXFirAXnm4lVTUkzYt3y2mul+y
+ HiZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706978280; x=1707583080;
+ d=1e100.net; s=20230601; t=1706978285; x=1707583085;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PqXyfHBqMSkxZ7lDO2aXzwVXS3GdMqigO7TWvRT1RX4=;
- b=vpMD+6Gzh7ynf5wLm90jZpeUpBcFzl7ZC5/m6udx3/Uk3dMTVbDG7Zovx+i7NJLUS7
- OOQ3Ovde42/JRB7xbwF1sJN1xN2JAnUWlI3z4l8ewyPQIkD3mQPEjHgoHpxlZ0ogMgHT
- bThYf0PUzN89kiMO04T3yX7vewK0EBllKLE22UtnICla6ke1dqiqy9Z44QLuZ1IUd22l
- OGoXinQoUcO2IxynBdxoON/cBgjwOn+uleTSIedHkl7A+haFfwCqOFi0/JQQ9UTF7NtJ
- pBZzaOqpQ7oFb4sCQQe5QVGS0j0tqj3WJkSmupqn4PkRRhuw7HCYqsy7WugqnTemc3ym
- uWgw==
-X-Gm-Message-State: AOJu0Yx62JbZFYMGOUKVrhpH7Bd43dRv+pKntv4U6BjUQHtxeNeXXT6l
- AbBhSkIa4V8ccId23MoAn03KDCx7sNTThOJmgXDFOqcx0dmDGuAiwX+NeYTlW2riIq5lsEUP5OR
- V
-X-Google-Smtp-Source: AGHT+IEzcaOnWuj+egT5CP9AZbKLUYHAYktjgvcsWnnUjcFWaC/r3oTxY79osnBihPXKdY2pm9mA8w==
-X-Received: by 2002:a05:6870:440e:b0:219:433d:8b4c with SMTP id
- u14-20020a056870440e00b00219433d8b4cmr2904623oah.14.1706978279839; 
- Sat, 03 Feb 2024 08:37:59 -0800 (PST)
+ bh=VSJBOWNIRqSVYDzIiscSVAhg6hnt/+Kbpc+KtWN0q0k=;
+ b=dzA2heReqxsS4dzjqbNRneBlPOOItkZZKJGmSM5qUvJmOmR8Cc3BLbUjSTR89c6r76
+ hH3v7qlwaPMrIyfXrvUBtHtXdfhXuMeC5TVUPtFxLohCpOG6Yj1JeGVK5TEjh7reBy8x
+ nJUZK0fJPORovE+Iz7tTVY9j0zphPvetBrLs21/6MOw+JCzj0rvOvyhXtVQ1lz343/Hz
+ wl1iEJjNpNv2ncNMtVIx/LWnjMi+fys4LzgpCAnXobiS8qgK3iiguVkuVOQtdCywTcdA
+ zQIqUdKsOvA+XFOXfnW7hqUqKabDOcg1fAup9EHmkAf6nhiXzoJmogYHSI9Qto4PUpn1
+ CrPg==
+X-Gm-Message-State: AOJu0YzzQ+J6FQ7MiCzS5k4ArF41kgZbBoynxK5vlLI/0kqmchuD+Sft
+ zmPQKiWbu53BqyEVmSqBPv5aIUsu2kny6jO/KaQD05pXVdPugMHfC4fWWxLMDUOm+V93adYRJW6
+ x
+X-Google-Smtp-Source: AGHT+IHyQkxS0yD/FOIM+yBVgZghp0tIq3OlIwJ2MNpn7Nnm85MFhm2sCr1qCzTsmTY5A0RX7JGccg==
+X-Received: by 2002:a05:6214:410e:b0:68c:8268:b5c4 with SMTP id
+ kc14-20020a056214410e00b0068c8268b5c4mr2026907qvb.45.1706978285451; 
+ Sat, 03 Feb 2024 08:38:05 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCX5zRuJwm7YxpkYGMY1KjvjtXMqvnZli+mKUK9KDtABg87tsQ+A0vvBtUJihsxDd+mDIPESOhpD5z/c5SZvGPwEN23eHCkFkUG8TYApkYybUZSOcyO/b3zIpsG0ENA39W+SReI4ydQJrB3Wo134vXOW3xL6D3WY1KcHDpdaoVGGCg3uvtgcSkrUkKlhG/aSfKJ9jLSelcbLVHt7+mPnpTmNM2FtWqTp4RbwfBhu07PvCDorszpJNGUBWcB8Z94ea07ry+D4bOOigN2aANPWzuyFOm4+SWFXDIT04IMgDYxDbNCYPhkgyDkRuCm6lqM1LF2t/HU0AManoolJUo0JC6EY8E22CBK2SyYut8CMPhyp1wKNxID0FswvaeTU7b3HGTrJBmUS2H5Wn+kY8oanC4N7FNakh//VvbbXpcJ6tgY=
+ AJvYcCXcmjHf1C+jZfD4D44RbVpBpGk7vWFJZqSz4ntFmX4GWI+OPSRg8kOl+Yz9hafDOV0JSr5kiLpaK+yZSo0f0k1r43J+rtPhPpupJAn27keFwI+TTi+h+ia8GrECTJHu4OjxUyD/BXlRSGdmb4OMUJYjhLxb3bFvns+bu4y3B8yqaRLBf8bgNqQKdxnPWsSS2ySe8xPcE/cH2Q/kKvuLNepWD6nOeO6OIKVptu4P/41DL9Rd97OZ3wHTqSaGFjGGExditsExuZX3ujeczrpRYFjB6ApS6+kAbiy6etBv1ewzOD4OUi6st9U7bQRXkSwkKgwg7Zl0qZ5Es33jtUti3lZeAkseaNDozLqNR32eTic+dYDR0L8H42+tMcTzZcF10Ew=
 Received: from ubuntu.localdomain
  (cpe688f2e182063-cm688f2e182060.sdns.net.rogers.com. [174.115.4.214])
  by smtp.gmail.com with ESMTPSA id
- oj16-20020a056214441000b006869d54c818sm1909086qvb.109.2024.02.03.08.37.58
+ oj16-20020a056214441000b006869d54c818sm1909086qvb.109.2024.02.03.08.38.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 03 Feb 2024 08:37:59 -0800 (PST)
+ Sat, 03 Feb 2024 08:38:05 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>, Ard Biesheuvel <ardb@kernel.org>,
- Simon Glass <sjg@chromium.org>, Kevin Chen <kevin_chen@aspeedtech.com>,
+Cc: Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Kevin Chen <kevin_chen@aspeedtech.com>,
  Sean Anderson <sean.anderson@seco.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
- Shiji Yang <yangshiji66@outlook.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michal Simek <michal.simek@amd.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Qu Wenruo <wqu@suse.com>
-Subject: [PATCH v8 5/8] arm: armv8: save boot arguments
-Date: Sat,  3 Feb 2024 08:36:24 -0800
-Message-Id: <20240203163631.177508-6-raymond.mao@linaro.org>
+ Devarsh Thakkar <devarsht@ti.com>, Shiji Yang <yangshiji66@outlook.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Michal Simek <michal.simek@amd.com>, Stefan Roese <sr@denx.de>
+Subject: [PATCH v8 6/8] arm: Get bloblist from boot arguments
+Date: Sat,  3 Feb 2024 08:36:25 -0800
+Message-Id: <20240203163631.177508-7-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240203163631.177508-1-raymond.mao@linaro.org>
 References: <20240203163631.177508-1-raymond.mao@linaro.org>
@@ -103,58 +102,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Save boot arguments x[0-3] into an array for handover of bloblist from
-previous boot stage.
+Add arch custom function to get bloblist from boot arguments.
+Check whether boot arguments aligns with the register conventions
+defined in FW Handoff spec v0.9.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-Suggested-by: Ard Biesheuvel <ardb@kernel.org>
 ---
 Changes in v2
-- New patch file created for v2.
+- Remove low level code for copying boot arguments.
+- Refactor board_fdt_blob_setup() and remove direct access of gd->bloblist.
+Changes in v3
+- Optimize board_bloblist_from_boot_arg().
+Changes in v4
+- Move the function as an Arm-arch library instead of a board-specific one.
 Changes in V5
 - Drop the dependence on OF_BOARD.
+- Move external declaration to header file.
+- Adjust the position of BLOBLIST in defconfig file.
+Changes in V6
+- Drop imply OF_HAS_PRIOR_STAGE from qemu-arm.
 Changes in V7
-- Exclude the saved_args when BLOBLIST is disabled.
-Changes in V8
-- Use PC-relative reference for saved_args.
-- Add 4-byte alignment for saved_args.
+- Revert changes in V6.
+- Remove BLOBLIST_ settings from qemu_arm64_defconfig.
 
- arch/arm/cpu/armv8/start.S | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
+ arch/arm/lib/Makefile   |  2 ++
+ arch/arm/lib/xferlist.c | 25 +++++++++++++++++++++++++
+ arch/arm/lib/xferlist.h | 19 +++++++++++++++++++
+ 3 files changed, 46 insertions(+)
+ create mode 100644 arch/arm/lib/xferlist.c
+ create mode 100644 arch/arm/lib/xferlist.h
 
-diff --git a/arch/arm/cpu/armv8/start.S b/arch/arm/cpu/armv8/start.S
-index 6cc1d26e5e..7461280261 100644
---- a/arch/arm/cpu/armv8/start.S
-+++ b/arch/arm/cpu/armv8/start.S
-@@ -370,5 +370,28 @@ ENTRY(c_runtime_cpu_setup)
- ENDPROC(c_runtime_cpu_setup)
+diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
+index b1bcd37466..67275fba61 100644
+--- a/arch/arm/lib/Makefile
++++ b/arch/arm/lib/Makefile
+@@ -85,6 +85,8 @@ obj-y	+= psci-dt.o
  
- WEAK(save_boot_params)
-+#if (IS_ENABLED(CONFIG_BLOBLIST))
-+	/* Calculate the PC-relative address of saved_args */
-+	adr	x9, saved_args_offset
-+	ldr	w10, saved_args_offset
-+	add	x9, x9, w10, sxtw
+ obj-$(CONFIG_DEBUG_LL)	+= debug.o
+ 
++obj-$(CONFIG_BLOBLIST)  += xferlist.o
 +
-+	stp	x0, x1, [x9]
-+	stp	x2, x3, [x9, #16]
-+#endif
- 	b	save_boot_params_ret	/* back to my caller */
- ENDPROC(save_boot_params)
+ # For EABI conformant tool chains, provide eabi_compat()
+ ifneq (,$(findstring -mabi=aapcs-linux,$(PLATFORM_CPPFLAGS)))
+ extra-y	+= eabi_compat.o
+diff --git a/arch/arm/lib/xferlist.c b/arch/arm/lib/xferlist.c
+new file mode 100644
+index 0000000000..f9c5d88bd4
+--- /dev/null
++++ b/arch/arm/lib/xferlist.c
+@@ -0,0 +1,25 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2023 Linaro Limited
++ * Author: Raymond Mao <raymond.mao@linaro.org>
++ */
++#include <linux/types.h>
++#include <errno.h>
++#include <bloblist.h>
++#include "xferlist.h"
 +
-+#if (IS_ENABLED(CONFIG_BLOBLIST))
-+saved_args_offset:
-+	.long	saved_args - .	/* offset from current code to save_args */
++int xferlist_from_boot_arg(ulong addr, ulong size)
++{
++	int ret;
 +
-+	.section .data
-+	.align 2
-+	.global saved_args
-+saved_args:
-+	.rept 4
-+	.dword 0
-+	.endr
-+END(saved_args)
-+#endif
++	ret = bloblist_check(saved_args[3], size);
++	if (ret)
++		return ret;
++
++	ret = bloblist_check_reg_conv(saved_args[0], saved_args[2],
++				      saved_args[1]);
++	if (ret)
++		return ret;
++
++	return bloblist_reloc((void *)addr, size);
++}
+diff --git a/arch/arm/lib/xferlist.h b/arch/arm/lib/xferlist.h
+new file mode 100644
+index 0000000000..60d79c1a8e
+--- /dev/null
++++ b/arch/arm/lib/xferlist.h
+@@ -0,0 +1,19 @@
++/* SPDX-License-Identifier: GPL-2.0+ BSD-3-Clause */
++/*
++ * Copyright (C) 2023 Linaro Limited
++ * Author: Raymond Mao <raymond.mao@linaro.org>
++ */
++
++#ifndef _XFERLIST_H_
++#define _XFERLIST_H_
++
++/*
++ * Boot parameters saved from start.S
++ * saved_args[0]: FDT base address
++ * saved_args[1]: Bloblist signature
++ * saved_args[2]: must be 0
++ * saved_args[3]: Bloblist base address
++ */
++extern unsigned long saved_args[];
++
++#endif /* _XFERLIST_H_ */
 -- 
 2.25.1
 
