@@ -4,73 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F606C4828D
-	for <u-boot@archiver.kernel.org>; Sat,  3 Feb 2024 06:56:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13A52C4828D
+	for <u-boot@archiver.kernel.org>; Sat,  3 Feb 2024 08:32:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A981880D1;
-	Sat,  3 Feb 2024 07:56:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id C0C8788098;
+	Sat,  3 Feb 2024 09:32:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QqT81lAw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HYx8EzFm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33364880D2; Sat,  3 Feb 2024 07:55:59 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B4BC28809D; Sat,  3 Feb 2024 09:32:56 +0100 (CET)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36210880C9
- for <u-boot@lists.denx.de>; Sat,  3 Feb 2024 07:55:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B79E087CBA
+ for <u-boot@lists.denx.de>; Sat,  3 Feb 2024 09:32:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1706943353; x=1707548153; i=xypron.glpk@gmx.de;
- bh=ekJ7LhaWSRkzKpczBS1Rt3IVVIjfDKDkUsAH5s+xi/M=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=QqT81lAwvavaDN26gBWTGN5x4wivYLEMfk4tSFRJhjvEhQXV9iFY8wh6XiiR69YR
- jDXbKV24mpBvCrAsR9ofChdeyAdpd5T1xZWD6NgGY5QVrlrvdds/Ma34/Jk9JP49H
- FMWo3aoTguP/YcWlTIjeUZnhBiLezCiitwwxUqWcjVhxgPVdHs/fbNOrTZ1COwO6K
- tTx11Bn2yjxMOSFTU23YnpqTGTDpsnurGBcSCGDr+r3Ureq5q5PmJU/EHs3ysRaey
- j7ufHeuE3qjmA8cC40W2qq/jlByg2eW6urt+Yfobkuqxrf5fteGErs11is2XvzDp+
- AmiGk+URwvTb8h0+eA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MwQTF-1rCyzs2iwP-00sQee; Sat, 03
- Feb 2024 07:55:53 +0100
-Message-ID: <eea108f1-8cc7-486e-b324-4b0cf031be06@gmx.de>
-Date: Sat, 3 Feb 2024 07:55:47 +0100
+ spf=pass smtp.mailfrom=jorge.ramirez.ortiz@gmail.com
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-5113a8ab4ceso1450462e87.1
+ for <u-boot@lists.denx.de>; Sat, 03 Feb 2024 00:32:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1706949174; x=1707553974; darn=lists.denx.de;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:date:from:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=UfrmVqBJECb3VwdBHJjC6T15FZ3+QdffmbCLBUW6i7U=;
+ b=HYx8EzFm9mpQgh7B1Hx5j3kg9CGKz3rOuxA0YSvJxNNY/CKirJ2yMjLsM2VC+LsRSM
+ qkrYMDmBOzX6C4Vn2XAtipgHlQTT9bXP/WQ3MEF7Df4XStS5V6cxkq+nSNrB903Bt8Mp
+ o+LSwTTI2EhUblRSky+2qvVnP9tpEm7tPWpHOtChE0Zf4LYYuF4D/9fUerImbQqy7mi3
+ 9MFDSyfK0YJ90wXtzz0iZ7K+B6yJvCl3zUrTthNCQ/3NjMraMJWxoDQptoiDcpB7WFZL
+ Z3t1+UbEiZF3C/gCbwpmVMxzXnQ9O/PdOy8ZxpcUwwTBmUGd+s3e4k13px/nltJgzJXx
+ 92hw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706949174; x=1707553974;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:date:from
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=UfrmVqBJECb3VwdBHJjC6T15FZ3+QdffmbCLBUW6i7U=;
+ b=OpJ+IUf8y3YUHJNCB0p+ya1Qs6J0yDDxhLo1t17FoabL6ZdNeDdbhvIyoj9gJeRc3U
+ xgkItNvizDZRlrcuc/uH+nSJSeiaaaSbV47j3UUmtSua7EMvt7uQfS19twTk2GVOgXkf
+ yNFUG9UrmFNHV95gRv7UrbV/UOod3Jw9IW9JtDGP+SDJIiH1IM9H4T+JFcnhZk3uBnuc
+ azRU2nrl9yc0+PUILGW0r/U2U3sabrzSsVr8iMFM41G4IA2xiR6F8EGTA8idj/mwJT+k
+ SNCBJFB1rZ5RrU+L7YTGt8eAN3HcDJbGDI6FooZCo8r8GxFGSDpED5JLg6MsS8ePC2MU
+ yNBg==
+X-Gm-Message-State: AOJu0Yw19v0URKeNAD0rtddNXdHh55Ux22q8j1SutZyXnpU13Uf73TiD
+ HnEOzpwdB5xR3T6y6iNZeGuDoGByGDSDqHuoXV8EK1BiZEC5Yw5E
+X-Google-Smtp-Source: AGHT+IFkFXZBH8ZVfswuh1XHTAAmopKoDLIFw4uN1Tu/vKbujEhjw+cic3YZZDl2c2FWMCZemjOhhQ==
+X-Received: by 2002:ac2:528c:0:b0:511:3a1f:1cec with SMTP id
+ q12-20020ac2528c000000b005113a1f1cecmr2167304lfm.0.1706949173665; 
+ Sat, 03 Feb 2024 00:32:53 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCXp2DDOisFd9OvesfbG0l1g4QM+oAdc7FYqO88YJyDivEYBNwzEfLuJ8MgmCHhAbFIk7pzLOH/2PFzm5+DSXTrfdyPUVWAhtOK2DvRpX+RxbIH2ROCgfSpwfqpli0tb6O4g2tCXUEhtWSyFSPC/+dTq0l7gFVThXoQPH3Ph7KXKMoYNGlF7edyy6LnaS4oA0BD4VF4DGEtMHDNkqSu1jEOTPz9g
+Received: from trax (8.red-79-144-185.dynamicip.rima-tde.net. [79.144.185.8])
+ by smtp.gmail.com with ESMTPSA id
+ n41-20020a05600c3ba900b0040ec66021a7sm2205265wms.1.2024.02.03.00.32.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 03 Feb 2024 00:32:52 -0800 (PST)
+From: "Jorge Ramirez-Ortiz, Gmail" <jorge.ramirez.ortiz@gmail.com>
+X-Google-Original-From: "Jorge Ramirez-Ortiz, Gmail" <JorgeRamirez-Ortiz>
+Date: Sat, 3 Feb 2024 09:32:51 +0100
+To: Shawn Guo <shawn.guo@linaro.org>
+Cc: Igor Opaniuk <igor.opaniuk@foundries.io>, u-boot@lists.denx.de,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] poplar: add myself as co-maintainer
+Message-ID: <Zb36M+p4z2+zd+XB@trax>
+References: <20240202214429.2185563-1-igor.opaniuk@foundries.io>
+ <CAAQ0ZWRFak3LwsSVCxi7sd6AmpJsegdv6A4Y=piwb8eStLTjLw@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] test: cmd: mbr: Fix Smatch static checker warning
-To: Alexander Gendin <agendin@matrox.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Dan Carpenter <dan.carpenter@linaro.org>
-References: <Zb2rU_JCEkRionLj@alg-gentoo>
-Content-Language: en-US, de-DE
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <Zb2rU_JCEkRionLj@alg-gentoo>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:fT54PVmseeNkVqZR0F2IoY6bDRTiuvIz2/Gg1QxF+8gY26UscUA
- eni8wM4wQ2Jbi+zVWZWEb/5ff5i3IQJrZ/d6lvVCQXQTcs8ejH3vtztpYTylXyRzfKbXne+
- zPmkEte2+4qAmWnvxYtaYvjhhx3dO9cL3yKS5QG8I6GU06UqTBU/76OWnTm3ApmhT8rm42d
- hnMl2WiRo4CGzLA6n8ICg==
-UI-OutboundReport: notjunk:1;M01:P0:6BftEvslLu8=;RqeoevxSEx5aSFeGmMreLt50G7/
- ZXNjdoMgpo1IWQuqizB0TaUOOgzVqYzI/zEk1bR+ggAiIyNgvgHX8Ctqttflkmfc7sI/cylB8
- 6nWvTGpgsEP1ZWCb49Q4OgJbrGcuogBdoJmYPCeNu4oILX5Y0Nu1V1dGJMV5/R8KYBxuBFXUN
- 848Dg3mk0vG4qTgF2tVqq2BhbNw7GQwP2JUUbwdZwpr30H3Lc2PdwWIseAJEZOm4NIKhLZGu4
- ORVh+rO9JLWYgaKmZkXDXRd7toESPGN4c1QPfx+g3UkyTI9bDUq00+2B6auclakKul2iX1rmj
- Bruep/A31luWFphYNLN+bLeNHfi58Uxydo9wHXJSwR/szAbtaLDBjJNUOnE2A6Oz7PjKsUT2+
- R1e7IJqdoMfV6pgaip3lUYrNaC3e4gtoInn3TjyZsjWR98wB2VWrOq9KYFk5tc3Bt9NIoHrJS
- LbhrymTIIuxkyoPTiNKbHcP7K+Qtqlkt35PMl5Caxje64vMmZwXFRpd6JLzW6gd26FOE3xbSj
- h9ktPsyrNSJzfxu3egAFYLlmkfrHFAJYnMNGjEjEFg4mo6NL2LIxrHGurbEk3G4F0mm2Exjde
- +KCVnQ8prpWAOgD0rqaBKq46vSeh02jRCxoOYZiajvzuzRxPeDiA9irS+/LSLmM9UO8/Q8pzD
- HxrlChHOvn5NL8uBEQoz9QY4AIHzJsUtUsDyxPkzcV3cgBH2MmJewlllnfibOo25OXf36G5uh
- UllOD2xx0GeezevBwNaUjgIwVXC0UT5PQRqQy0EHBJXa+l/C9utsfcsOGV/YEk38qrWpAdsU2
- DjP3lFmJhF83hcjorYCn39r7BMvcCLQqBBtBnpH8t21Bg=
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAAQ0ZWRFak3LwsSVCxi7sd6AmpJsegdv6A4Y=piwb8eStLTjLw@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,36 +99,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/3/24 03:56, Alexander Gendin wrote:
-> This patch fixes Smatch static checker warning:
->          test/cmd/mbr.c:243 mbr_test_run()
->          warn: sizeof(NUMBER)?
+On 03/02/24 07:54:22, Shawn Guo wrote:
+> On Sat, Feb 3, 2024 at 5:44 AM Igor Opaniuk <igor.opaniuk@foundries.io> wrote:
+> >
+> > Add myself as co-maintainer for Poplar board, as I'm currently
+> > working on it (re-testing releases, addressing issues etc).
+> >
+> > CC: Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
+> > CC: Shawn Guo <shawn.guo@linaro.org>
+> > Signed-off-by: Igor Opaniuk <igor.opaniuk@foundries.io>
 >
-> Reported-by: Dan Carpenter <dan.carpenter@linaro.org>
-> Signed-off-by: Alexander Gendin <agendin@matrox.com>
-
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
-> ---
->   test/cmd/mbr.c | 6 +++++-
->   1 file changed, 5 insertions(+), 1 deletion(-)
+> Acked-by: Shawn Guo <shawn.guo@linaro.org>
 >
-> diff --git a/test/cmd/mbr.c b/test/cmd/mbr.c
-> index 46b78e706c..235b363290 100644
-> --- a/test/cmd/mbr.c
-> +++ b/test/cmd/mbr.c
-> @@ -240,7 +240,11 @@ static int mbr_test_run(struct unit_test_state *uts=
-)
->   	ut_assert(ofnode_valid(node));
->   	ut_assertok(lists_bind_fdt(gd->dm_root, node, &dev, NULL, false));
->
-> -	mbr_parts_max =3D sizeof('\0') + 2 +
-> +	/*
-> +	 * 1 byte for null character
-> +	 * 2 reserved bytes
-> +	 */
-> +	mbr_parts_max =3D 1 + 2 +
->   		strlen(mbr_parts_header) +
->   		strlen(mbr_parts_p1) +
->   		strlen(mbr_parts_p2) +
+> I'm not actively working on poplar any more, so maybe remove me in the meantime.
 
+
+hi Igor,
+
+Yes please go ahead and thanks for offering.
+
+I'll sync with you later next week (I found my Poplar in storage, so maybe we cam improve things a little)
+Also it would be good if we knew there are still users.
+
+
+Acked-by: Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
+
+>
+> Shawn
