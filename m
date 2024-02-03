@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA8E3C4828F
-	for <u-boot@archiver.kernel.org>; Sat,  3 Feb 2024 15:04:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42146C4828D
+	for <u-boot@archiver.kernel.org>; Sat,  3 Feb 2024 15:18:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17EB6876D3;
-	Sat,  3 Feb 2024 16:04:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id A5D67871DF;
+	Sat,  3 Feb 2024 16:18:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="HnZ2P6gD";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="jOEe4vwL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17726871DF; Sat,  3 Feb 2024 16:04:30 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ id C6FA7871DF; Sat,  3 Feb 2024 16:18:34 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 973EB876D3
- for <u-boot@lists.denx.de>; Sat,  3 Feb 2024 16:04:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 95739876F8
+ for <u-boot@lists.denx.de>; Sat,  3 Feb 2024 16:18:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=eede=JN=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1706972644;
- bh=mbnwt1jcdSw5CkrEImKQ45M5hOlcxW2IFSVivjwQkrE=;
- b=HnZ2P6gDswmrL2X1ndXnEYVdu02NvIEAr1udVPjVz9rpPSbBiJfMZUb10rZqeH4B75fIRxK3j
- EoQp95YWBUJj1pxhn2fIEY5lJ7MYvtjc7K2y7pXjwrhQdtPPW7LbqV6xou4yOdSX+kGj/sbjyhH
- 29yp/oNdVM92DYAf8Ev5aA/kd3TboFDALGYHlV6pvBpp6CM4e3ST8/g/vuyWs9yGtYxIeFpcQdW
- xMOhbmLkqv+9w2I0+CTy0FJy5qBMbKL0FxJvOKQ/IlpNh9DW5r5XY2qIbkT5iI4nPKsTfaUQbf4
- bNcw1YYe8bjz5zDzXwftow46jHh+U/W61y9Ce+pTTjsg==
-Message-ID: <3fffabfd-8f3c-429f-b613-672849232046@kwiboo.se>
-Date: Sat, 3 Feb 2024 16:03:58 +0100
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] rockchip: rk35xx: Remove use of eMMC DDR52 mode
-Content-Language: en-US
-To: Quentin Schulz <quentin.schulz@theobroma-systems.com>, Eugen Hristev
- <eugen.hristev@collabora.com>
-Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>, Simon
- Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom
- Rini <trini@konsulko.com>, Nicolas Frattaroli
- <frattaroli.nicolas@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Andy Yan <andyshrk@163.com>, Tianling Shen <cnsztl@gmail.com>, Akash
- Gajjar <gajjar04akash@gmail.com>, Joshua Riek <jjriek@verizon.net>
-References: <20240126232615.6826-1-jonas@kwiboo.se>
- <20240126232615.6826-2-jonas@kwiboo.se>
- <515157a9-8d19-42f9-ae6d-914aaea8a3ba@collabora.com>
- <e1417a87-15ee-4e1b-9513-c101a02118d4@kwiboo.se>
- <23d7337a-88b7-4dcb-be08-c42b21e9dbd1@theobroma-systems.com>
- <e9d6883b-4331-4237-be19-5df6126a3962@kwiboo.se>
- <ab9af16d-37f5-43a1-9dc6-9d1ba93c1689@theobroma-systems.com>
- <54ad872d-c47a-46ea-a4a5-c9776ae6213f@kwiboo.se>
- <10f0b268-0a9d-41a8-ba4e-d02abb62e418@theobroma-systems.com>
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <10f0b268-0a9d-41a8-ba4e-d02abb62e418@theobroma-systems.com>
-Content-Type: text/plain; charset=UTF-8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1706973511;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=hJPs6iDtOR3OZC9iDFHly1FxrCWhEF+Q6YwWyyeIFPM=;
+ b=jOEe4vwLcj2vyjLEc0U7wbWjj82NFMN3u2QKnkUeVQh4S2gGtQ+KXb+bSl3eORQv+hMsbH
+ k850zpsbtzlWF7oRuEiaz83E417PwCJIh5uYNcCPgMvnAMg+MLxbEjyPVgQtSP5430v5O2
+ R8xBwHc5wSL3s6fUYehXjI2lGXXMuNa33ZYQ4QP6laOIe3lJ0YL+TknEEVUzLv1VwyGwdD
+ b+rNtdkXHdFJit1t2wC9Us90mmuVkVi0Fo/3Da2LC7sN07BAIKcElqowRVGjb4r7tvKaqS
+ 0f8lFCXuzCAuBmmAeZSvtjgTuSwkfDwrf+cC92yBGZnI4C73OFXon1q4LSFzzg==
+Date: Sat, 03 Feb 2024 16:18:29 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Kever Yang
+ <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, Alper Nebi Yasak
+ <alpernebiyasak@gmail.com>, Peter Robinson <pbrobinson@gmail.com>, Jagan
+ Teki <jagan@amarulasolutions.com>, Klaus Goger
+ <klaus.goger@theobroma-systems.com>, Heiko Stuebner
+ <heiko.stuebner@cherry.de>, Otavio Salvador <otavio@ossystems.com.br>, Andy
+ Yan <andy.yan@rock-chips.com>, Manivannan Sadhasivam
+ <manivannan.sadhasivam@linaro.org>, Lukasz Majewski <lukma@denx.de>, Sean
+ Anderson <seanga2@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Anatolij Gustschin
+ <agust@denx.de>, heiko@sntech.de, u-boot@lists.denx.de, Quentin Schulz
+ <quentin.schulz@theobroma-systems.com>
+Subject: Re: [PATCH 08/18] rockchip: pine64: rockpro64: migrate to
+ rockchip_early_misc_init_r
+In-Reply-To: <be58f85e-5564-4b10-aa24-cb4d794cc09b@kwiboo.se>
+References: <20240123-jaguar-v1-0-1eec1c34953c@theobroma-systems.com>
+ <20240123-jaguar-v1-8-1eec1c34953c@theobroma-systems.com>
+ <0d74e5e5482cd32d7cad714e731d4fb8@manjaro.org>
+ <be58f85e-5564-4b10-aa24-cb4d794cc09b@kwiboo.se>
+Message-ID: <30c40f7596affef5899099ce68eb96c1@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
 Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 65be55e24babf999bf9ca7df
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,272 +85,179 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hello Jonas,
 
-On 2024-02-02 12:10, Quentin Schulz wrote:
-> Hi Jonas,
+On 2024-02-03 15:18, Jonas Karlman wrote:
+> On 2024-02-03 14:19, Dragan Simic wrote:
+>> Please see my comments below.
+>> 
+>> On 2024-01-23 15:49, Quentin Schulz wrote:
+>>> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+>>> 
+>>> Only setup_iodomain() differs from the original misc_init_r from
+>>> Rockchip mach code, so let's use rockchip_early_misc_init_r instead 
+>>> of
+>>> reimplementing the whole misc_init_r from Rockchip.
+>> 
+>> Your patches from this series are fine, but the trouble is that
+>> we end up executing rockchip_setup_macaddr() for the devices
+>> that don't use the RK3339's built-in Gigabit Ethernet interface,
+>> which includes the Pinebook Pro and the Pinephone Pro.
 > 
-> On 2/1/24 21:06, Jonas Karlman wrote:
->> Hi Quentin,
->>
->> On 2024-02-01 13:40, Quentin Schulz wrote:
->>> Hi Jonas,
->>>
->>> On 2/1/24 11:51, Jonas Karlman wrote:
->>>> Hi Quentin,
->>>>
->>>> On 2024-02-01 11:18, Quentin Schulz wrote:
->>>>> Hi Jonas,
->>>>>
->>>>> On 1/27/24 12:15, Jonas Karlman wrote:
->>>>>> Hi Eugen,
->>>>>>
->>>>>> On 2024-01-27 04:48, Eugen Hristev wrote:
->>>>>>> Hi Jonas,
->>>>>>>
->>>>>>>
->>>>>>> On 1/27/24 01:26, Jonas Karlman wrote:
->>>>>>>> Writing to eMMC using DDR52 mode does not work reliably or at all on
->>>>>>>> RK356x and RK3588 boards.
->>>>>>>>
->>>>>>>
->>>>>>>
->>>>>>> This is related to the old issue I encountered last year with mmc write?
->>>>>>
->>>>>> Yes, I think it is.
->>>>>>
->>>>>> I did some testing on RK3566/RK3568/RK3588S/RK3588 boards with different
->>>>>> eMMC modules with following result:
->>>>>>
->>>>>> Read seem to work with all enabled modes:
->>>>>> RK3566: MMC legacy, MMC High Speed (26MHz), MMC High Speed (52MHz),
->>>>>>            MMC DDR52 (52MHz) and HS200 (200MHz)
->>>>>> RK3568/RK3588S/RK3588: all above + HS400 (200MHz) and HS400ES (200MHz)
->>>>>>
->>>>>> However, write had issues with some of the modes:
->>>>>> MMC DDR52 (52MHz): all RK35xx
->>>>>> HS400/HS400ES: only on RK3568 after changing hs400_txclk_tapnum to 8
->>>>>>
->>>>>> HS200 seem to be the most stable write speed that worked on all SoCs.
->>>>>>
->>>>>> So, dropping MMC DDR52 (52MHz) and enable use of HS200 (200MHz) seem to
->>>>>> be the best option to get speedy and working read and write eMMC.
->>>>>>
->>>>>
->>>>> 1) we have this enabled on RK3588 Jaguar in upstream Linux... I may have
->>>>> improperly tested it then, would you mind sharing how you tested this
->>>>> mode on RK3588 so I can reproduce this and fix it on our product if
->>>>> we're impacted? I assume because we have HS200/HS400/HS400-ES enabled,
->>>>> DDR52 would never be used? (our eMMC is soldered and support the former
->>>>> modes).
->>>>
->>>> My main mode of testing eMMC in U-Boot has been to enable following
->>>> Kconfig options,
->>>>
->>>> CONFIG_MMC_HS200_SUPPORT=y
->>>> CONFIG_MMC_HS400_SUPPORT=y
->>>> CONFIG_MMC_HS400_ES_SUPPORT=y
->>>> CONFIG_MMC_SPEED_MODE_SET=y
->>>>
->>>> and from U-Boot cli run following,
->>>>
->>>> => mmc rescan <mode> && mmc info && mmc read 10000000 2000 10000
->>>> => mmc rescan <mode> && mmc info && mmc write 20000000 4000 10000
->>>>
->>>> for each of the modes below.
->>>>
->>>>     0 = MMC legacy
->>>>     1 = MMC High Speed (26MHz)
->>>>     3 = MMC High Speed (52MHz)
->>>>     4 = MMC DDR52 (52MHz)
->>>>     10 = HS200 (200MHz)
->>>>     11 = HS400 (200MHz)
->>>>     12 = HS400ES (200MHz)
->>>>
->>>> on different boards and different eMMC modules.
->>>>
->>>> Using some modes the read or write return ERROR instead of OK. When
->>>> ERROR was reported a rescan or board reset was needed to test next mode.
->>>>
->>>> Please also note that I have only tested in U-Boot, not in linux.
->>>>
->>>
->>> Thanks for the tips on how to test these.
->>>
->>> I have run the following commands on an RK3588 Jaguar (master branch +
->>> your v6.8-rc1 DTS sync patch series + Jaguar patch series):
->>>
->>> => for j in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19; do for i
->>> in 0 1 3 4 10 11 12; do mmc rescan $i && mmc read 10000000 2000 100000;
->>> if test $? -ne 0; then echo $i FAILED; fi; done; done
->>>
->>> Which is 20 iterations of an mmc read at each of the 7 supported modes.
->>> The result is:
->>> 1 fail in HS200, 2 fails in HS400, the rest passes just fine.
->>
->> I am wondering if your HS200 fails could be because MMC DDR52 (52MHz)
->> was being tested prior to the HS200 mode.
->>
->> What happens if you exclude the mmc-ddr-1_8v prop and mode 4 in your
->> test loops?
->>
->> I did some quick re-test on a ROCK 5A (rk3588s) and ROCK 5B (rk3588)
->> with DDR52 removed and could only see very few read fails with HS400.
->>
+> The rockchip_setup_macaddr() is not just for integrated ethernet
+> interface. The main purpose is to have a reliably mac address assigned
+> to any device assigned to the ethernet0/ethernet1 alias in the device
+> tree, see fdt_fixup_ethernet().
+
+Sure, I had already checked fdt_fixup_ethernet() before commenting.
+
+As a note, there are no ethernetX aliases in the Pinebook Pro and
+Pinephone Pro dts files, or at least there will be none eventually,
+as the redundant aliases have already been removed in the Linux
+kernel. [1]  No such aliases means that fdt_fixup_ethernet() should
+end up doing nothing.
+
+>> We should add more ifdef guards to rockchip_setup_macaddr(),
+>> to prevent the execution of its body for devices such as the
+>> ones listed above, which eliminates the unneeded code from the
+>> resulting U-Boot images, making them a bit smaller, and saves
+>> some CPU cycles and a bit of time on boot.  It also prevents
+>> the unneeded "ethaddr" and "eth1addr" variables from being
+>> added to the environment.
 > 
-> OK so I did something completely different instead. rescan in one mode, 
-> do a read, power cycle, rescan in another mode, do a read, power cycle, 
-> etc....
+> Adding the ethernet addresses only adds a few ms to boot, if you care
+> about boot speed, please look into if we can disable CONFIG_USE_PREBOOT
+> for these boards, running "usb start" as preboot adds several seconds 
+> to
+> the boot.
+
+I see, but I personally don't care that much about how long the
+U-Boot takes to execute;  a couple of seconds more don't bother me
+much.  I care more about excluding the unneded code.
+
+>> The patch below should do the trick, which also performs a few
+>> small code cleanups for additional file-level consistency:
+>> 
+>> diff --git a/arch/arm/mach-rockchip/misc.c
+>> b/arch/arm/mach-rockchip/misc.c
+>> index 7d03f0c2b679..ed5bdab5a648 100644
+>> --- a/arch/arm/mach-rockchip/misc.c
+>> +++ b/arch/arm/mach-rockchip/misc.c
+>> @@ -23,7 +23,8 @@
+>> 
+>>   int rockchip_setup_macaddr(void)
+>>   {
+>> -#if CONFIG_IS_ENABLED(HASH) && CONFIG_IS_ENABLED(SHA256)
+>> +#if CONFIG_IS_ENABLED(HASH) && CONFIG_IS_ENABLED(SHA256) && \
+>> +    CONFIG_IS_ENABLED(GMAC_ROCKCHIP)
 > 
-> All tests passed.
+> This would exclude any board not enabling GMAC_ROCKCHIP in U-Boot but
+> want a mac-address being set in DT fixup. And for newer RK35xx SoCs the
+> GMAC_ROCKCHIP driver is not used.
+
+Thanks for pointing that out.  Not good.
+
+> A new Kconfig option should be introduced if there is a need for some
+> boards to disable this.
+
+Is there any simpler way to achieve that?  If there isn't, perhaps
+we could leave rockchip_setup_macaddr() generate the MAC address
+and rely on fdt_fixup_ethernet() ending up doing nothing when no
+ethernetX aliases exist.
+
+>>   	int ret;
+>>   	const char *cpuid = env_get("cpuid#");
+>>   	u8 hash[SHA256_SUM_LEN];
+>> @@ -64,15 +65,15 @@ int rockchip_cpuid_from_efuse(const u32
+>> cpuid_offset,
+>>   			      const u32 cpuid_length,
+>>   			      u8 *cpuid)
+>>   {
+>> -#if IS_ENABLED(CONFIG_ROCKCHIP_EFUSE) ||
+>> IS_ENABLED(CONFIG_ROCKCHIP_OTP)
+>> +#if CONFIG_IS_ENABLED(ROCKCHIP_EFUSE) ||
 > 
-> Then...
+> This changes behavior and is wrong. IS_ENABLED check for specific 
+> config
+> flag, CONFIG_IS_ENABLED would check for e.g. CONFIG_SPL_ROCKCHIP_EFUSE
+> or similar.
+
+Sorry, my bad, somehow I managed to forget that.  Thanks for
+pointing that out.
+
+>> CONFIG_IS_ENABLED(ROCKCHIP_OTP)
+>>   	struct udevice *dev;
+>>   	int ret;
+>> 
+>>   	/* retrieve the device */
+>> -#if IS_ENABLED(CONFIG_ROCKCHIP_EFUSE)
+>> +#if CONFIG_IS_ENABLED(ROCKCHIP_EFUSE)
 > 
->>>
->>> => for j in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19; do for i
->>> in 0 1 3 4 10 11 12; do mmc rescan $i && mmc write 20000000 4000 100000;
->>> if test $? -ne 0; then echo $i FAILED; fi; done; done
->>>
->>> Which is 20 iterations of an mmc write at each of the 7 supported modes.
->>> The result is:
->>> 20 fails in DDR52, 2 fails in HS200, the rest passes just fine.
->>>
->>> So it seems DDR52, HS200 and HS400 aren't stable on my board, but
->>> HS400ES somehow is (which is enabled in our defconfig).
->>
+> Same as above.
 > 
-> I did the same for the write:
+>>   	ret = uclass_get_device_by_driver(UCLASS_MISC,
+>>   					  DM_DRIVER_GET(rockchip_efuse), &dev);
+>> -#elif IS_ENABLED(CONFIG_ROCKCHIP_OTP)
+>> +#elif CONFIG_IS_ENABLED(ROCKCHIP_OTP)
 > 
-> rescan in one mode, do a write, power cycle, rescan in another mode, do 
-> a write, power cycle, etc....
+> Same as above.
 > 
-> And this brought surprising results:
+> Regards,
+> Jonas
 > 
-> EVERYTHING except HS200, HS400 and HS400ES failed. Like not even a block 
-> was written.
+>>   	ret = uclass_get_device_by_driver(UCLASS_MISC,
+>>   					  DM_DRIVER_GET(rockchip_otp), &dev);
+>>   #endif
+>> 
+>>> Cc: Quentin Schulz <foss+uboot@0leil.net>
+>>> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+>>> ---
+>>>  board/pine64/rockpro64_rk3399/rockpro64-rk3399.c | 20
+>>> ++------------------
+>>>  1 file changed, 2 insertions(+), 18 deletions(-)
+>>> 
+>>> diff --git a/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
+>>> b/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
+>>> index d79084614f1..d0a694ead1d 100644
+>>> --- a/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
+>>> +++ b/board/pine64/rockpro64_rk3399/rockpro64-rk3399.c
+>>> @@ -11,7 +11,6 @@
+>>>  #include <asm/arch-rockchip/clock.h>
+>>>  #include <asm/arch-rockchip/grf_rk3399.h>
+>>>  #include <asm/arch-rockchip/hardware.h>
+>>> -#include <asm/arch-rockchip/misc.h>
+>>> 
+>>>  #define GRF_IO_VSEL_BT565_SHIFT 0
+>>>  #define PMUGRF_CON0_VSEL_SHIFT 8
+>>> @@ -31,26 +30,11 @@ static void setup_iodomain(void)
+>>>  	rk_setreg(&pmugrf->soc_con0, 1 << PMUGRF_CON0_VSEL_SHIFT);
+>>>  }
+>>> 
+>>> -int misc_init_r(void)
+>>> +int rockchip_early_misc_init_r(void)
+>>>  {
+>>> -	const u32 cpuid_offset = 0x7;
+>>> -	const u32 cpuid_length = 0x10;
+>>> -	u8 cpuid[cpuid_length];
+>>> -	int ret;
+>>> -
+>>>  	setup_iodomain();
+>>> 
+>>> -	ret = rockchip_cpuid_from_efuse(cpuid_offset, cpuid_length, cpuid);
+>>> -	if (ret)
+>>> -		return ret;
+>>> -
+>>> -	ret = rockchip_cpuid_set(cpuid, cpuid_length);
+>>> -	if (ret)
+>>> -		return ret;
+>>> -
+>>> -	ret = rockchip_setup_macaddr();
+>>> -
+>>> -	return ret;
+>>> +	return 0;
+>>>  }
+>>> 
+>>>  #endif
 
-I now vaguely remember something similar from when I tested back in
-November, however during re-testing before posting this series I only
-tested without a full power reset between different modes :-)
-
-> 
-> Now, that was not really what I remember happening yesterday. So it 
-> seems that the modes before HS200 may rely somehow on previous 
-> rescans/reads.
-> 
-> So I tested this theory by just running a single mmc read of one block 
-> after doing a rescan and before doing a write. This didn't help.
-> 
-> Now, I forced a HS400ES read before doing writes at modes below HS200 
-> (excluded) and they didn't work. However, once I did a single block read 
-> in HS400 instead of HS400ES, the writes in those same modes started to 
-> work (except DDR52).
-> 
-> They also worked when doing a single block read in HS200.
-
-Thanks for testing this more thoroughly!
-
-> 
-> For all those tests, I still had mmc-ddr-1_8v in my DT.
-> 
-> So, I would say everything that isn't HS200+ is broken on RK3588? Did 
-> the modes below DDR52 work for you?
-
-I re-tested booting of a SD-card on RK3588 and found out following:
-
-- Write in DDR52 mode never works, hence this patch
-- Read works in all modes directly after a power reset
-
-- First write in modes that isn't HS200+ fails
-  => mmc rescan 0 && mmc write 2000000 4000 1 # ERROR
-
-- Second+ write in same mode that just failed works
-  => mmc write 2000000 4000 1 # OK
-
-- After a rescan to HS200 mode (probably any HS200+) first write in
-  modes that isn't HS200+ no longer fails until power reset
-  => mmc rescan 10 && mmc rescan 0 && mmc write 2000000 4000 1 # OK
-
-- When rockchip_sdhci_execute_tuning() is empty, changing to HS200 mode
-  no longer "fixes" the write for slower modes
-  => mmc rescan 10 && mmc rescan 0 && mmc write 2000000 4000 1 # ERROR
-
-- Trying to execute tuning for modes slower then HS200 fails as expected
-
-So based on testing I would say that any mode that isn't HS200+ is only
-semi-broken because writing seem to start working after a second try.
-And after tuning has been executed in HS200+ any other mode seem to work.
-
-Maybe we should enable the HS200 options for ROCKCHIP_RK3588 by default
-instead of explicitly enabling it in defconfig for boards that have
-MMC_SDHCI_ROCKCHIP enabled?
-
---- a/drivers/mmc/Kconfig
-+++ b/drivers/mmc/Kconfig
-@@ -665,6 +665,8 @@ config MMC_SDHCI_ROCKCHIP
-        depends on ARCH_ROCKCHIP
-        depends on DM_MMC && BLK
-        depends on MMC_SDHCI
-+       imply MMC_HS200_SUPPORT if ROCKCHIP_RK3588
-+       imply SPL_MMC_HS200_SUPPORT if ROCKCHIP_RK3588
-        help
-          Support for Arasan SDHCI host controller on Rockchip ARM SoCs platform
-
-Regards,
-Jonas
-
-> 
-> Cheers,
-> Quentin
-> 
->> Please re-test with DDR52 mode skipped and see if you get any other
->> result for HS200 mode.
->>
->> And you are correct, HR400ES seem to also be working fine on my RK3588
->> boards. I can see now that on my old testing commit [1] I only mention
->> and drop the hs400 mode and not the hs400es mode for rk3588. Could also
->> be the change to emmc_data_strobe pinctrl that got synced from linux
->> v6.7 that help improve HR400ES mode results.
->>
->>  From a very quick re-test on two boards with two different emmc modules
->> I could only see a few "Select HS400 failed -70" lines being reported
->> when testing read and/or write using your test loops (with a few modes
->> skipped and smaller amount of data to read/write). Remaining modes seem
->> to be working okay.
->>
->> [1] https://github.com/Kwiboo/u-boot-rockchip/commit/cb1521aea8dee730bddcc5772afa28aa71fc69f9
->> [2] https://lore.kernel.org/all/20231205202900.4617-2-CFSworks@gmail.com/
->>
->> Regards,
->> Jonas
->>
->>>
->>> I'll check if there's an easier way to test the Linux kernel than
->>> rebooting with a newer DTB between every try.
->>>
->>> Cheers,
->>> Quentin
->>>
->>>>>
->>>>> 2) Why are we not enabling HS400/HS400-ES for RK3588 boards? You seem to
->>>>> be saying there are issues with HS400/HS400-ES on RK3568 but you didn't
->>>>> mention the status for RK3588. Did I misunderstand the last sentence?
->>>>> Can you please rephrase in that case?
->>>>
->>>> I can see now that my wording was very confusing.
->>>>
->>>> Write for HS400/HS400ES mode only worked on RK3568 after modification to
->>>> the driver, on RK3588 write always returned error for me.
->>>>
->>>> So on RK3568 HS400 modes could be made work, on remaining SoCs there was
->>>> issues.
->>>>
->>>> Regards,
->>>> Jonas
->>>>
->>>>>
->>>>> Cheers,
->>>>> Quentin
->>>>
->>
-
+[1] 
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=5d90cb1edcf7c1854e4cecb52871421f29d3d849
