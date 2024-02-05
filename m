@@ -4,19 +4,19 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2E40C48292
-	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 19:09:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7255C4828D
+	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 19:09:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A96887C4E;
+	by phobos.denx.de (Postfix) with ESMTP id 8C99787C5B;
 	Mon,  5 Feb 2024 20:09:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B540387B7F; Mon,  5 Feb 2024 20:09:12 +0100 (CET)
+ id 1E05B87A80; Mon,  5 Feb 2024 20:09:13 +0100 (CET)
 Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69A4787C2B
+ by phobos.denx.de (Postfix) with ESMTPS id A28BE87C31
  for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 20:09:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=gateworks.com
@@ -25,16 +25,16 @@ Authentication-Results: phobos.denx.de;
 Received: from 068-189-091-139.biz.spectrum.com ([68.189.91.139]
  helo=tharvey.pdc.gateworks.com)
  by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1rX4L0-00BXW2-Hq;
- Mon, 05 Feb 2024 19:09:02 +0000
+ (envelope-from <tharvey@gateworks.com>) id 1rX4L1-00BXW2-0p;
+ Mon, 05 Feb 2024 19:09:03 +0000
 From: Tim Harvey <tharvey@gateworks.com>
 To: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>,
  Fabio Estevam <festevam@gmail.com>
 Cc: "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
  Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH 4/5] arm: dts: imx8mm-venice-gw71xx: add TPM device
-Date: Mon,  5 Feb 2024 11:08:57 -0800
-Message-Id: <20240205190858.3076363-5-tharvey@gateworks.com>
+Subject: [PATCH 5/5] arm: dts: imx8mp-venice-gw71xx: add TPM device
+Date: Mon,  5 Feb 2024 11:08:58 -0800
+Message-Id: <20240205190858.3076363-6-tharvey@gateworks.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240205190858.3076363-1-tharvey@gateworks.com>
 References: <20240205190858.3076363-1-tharvey@gateworks.com>
@@ -62,37 +62,35 @@ This hangs off of SPI2, uses gpio1_10 as a CS and gpio1_11 as RST#.
 
 Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 ---
- arch/arm/dts/imx8mm-venice-gw71xx-0x-u-boot.dtsi |  7 +++++++
- arch/arm/dts/imx8mm-venice-gw71xx.dtsi           | 11 +++++++++--
- 2 files changed, 16 insertions(+), 2 deletions(-)
+ arch/arm/dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi |  9 +++++++++
+ arch/arm/dts/imx8mp-venice-gw71xx.dtsi           | 10 +++++++++-
+ 2 files changed, 18 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/imx8mm-venice-gw71xx-0x-u-boot.dtsi b/arch/arm/dts/imx8mm-venice-gw71xx-0x-u-boot.dtsi
-index b3592331c72b..07789c8d8835 100644
---- a/arch/arm/dts/imx8mm-venice-gw71xx-0x-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mm-venice-gw71xx-0x-u-boot.dtsi
-@@ -25,6 +25,13 @@
- 		gpios = <9 GPIO_ACTIVE_HIGH>;
- 		line-name = "dio1";
- 	};
-+
+diff --git a/arch/arm/dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi b/arch/arm/dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi
+index 5c33f8c9cdcf..216a7a0d8d7c 100644
+--- a/arch/arm/dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi
+@@ -4,6 +4,15 @@
+  */
+ #include "imx8mp-venice-gw702x-u-boot.dtsi"
+ 
++&gpio1 {
 +	tpm_rst {
 +		gpio-hog;
 +		output-high;
 +		gpios = <11 GPIO_ACTIVE_HIGH>;
 +		line-name = "tpm_rst#";
 +	};
- };
- 
++};
++
  &gpio4 {
-diff --git a/arch/arm/dts/imx8mm-venice-gw71xx.dtsi b/arch/arm/dts/imx8mm-venice-gw71xx.dtsi
-index 2e90466db89a..ff8b367b3ab2 100644
---- a/arch/arm/dts/imx8mm-venice-gw71xx.dtsi
-+++ b/arch/arm/dts/imx8mm-venice-gw71xx.dtsi
-@@ -49,12 +49,18 @@
- 	};
- };
- 
--/* off-board header */
+ 	dio_1 {
+ 		gpio-hog;
+diff --git a/arch/arm/dts/imx8mp-venice-gw71xx.dtsi b/arch/arm/dts/imx8mp-venice-gw71xx.dtsi
+index 86999f52d4b2..4b1dbaa64b6b 100644
+--- a/arch/arm/dts/imx8mp-venice-gw71xx.dtsi
++++ b/arch/arm/dts/imx8mp-venice-gw71xx.dtsi
+@@ -48,8 +48,15 @@
  &ecspi2 {
  	pinctrl-names = "default";
  	pinctrl-0 = <&pinctrl_spi2>;
@@ -108,12 +106,12 @@ index 2e90466db89a..ff8b367b3ab2 100644
 +	};
  };
  
- &gpio1 {
-@@ -202,6 +208,7 @@
- 			MX8MM_IOMUXC_ECSPI2_MOSI_ECSPI2_MOSI	0xd6
- 			MX8MM_IOMUXC_ECSPI2_MISO_ECSPI2_MISO	0xd6
- 			MX8MM_IOMUXC_ECSPI2_SS0_GPIO5_IO13	0xd6
-+			MX8MM_IOMUXC_GPIO1_IO10_GPIO1_IO10	0xd6
+ &gpio4 {
+@@ -217,6 +224,7 @@
+ 			MX8MP_IOMUXC_ECSPI2_MOSI__ECSPI2_MOSI	0x140
+ 			MX8MP_IOMUXC_ECSPI2_MISO__ECSPI2_MISO	0x140
+ 			MX8MP_IOMUXC_ECSPI2_SS0__GPIO5_IO13	0x140
++			MX8MP_IOMUXC_GPIO1_IO10_GPIO1_IO10	0x140
  		>;
  	};
  
