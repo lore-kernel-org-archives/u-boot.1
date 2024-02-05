@@ -4,54 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17A54C4828D
-	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 11:40:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85C29C4828D
+	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 11:59:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EA4787811;
-	Mon,  5 Feb 2024 12:40:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id C2E6987811;
+	Mon,  5 Feb 2024 12:59:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="P9hvshJA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mpqrBzNS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03487878CB; Mon,  5 Feb 2024 12:40:24 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9F59E8782E; Mon,  5 Feb 2024 12:59:43 +0100 (CET)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6120A86D38
- for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 12:40:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EC45C86DBD
+ for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 12:59:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id AE31361001;
- Mon,  5 Feb 2024 11:40:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 897E2C433F1;
- Mon,  5 Feb 2024 11:40:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1707133218;
- bh=yzSKd2xPLwQYqV4s+8XhGEZgmj5zRpSFTXhnYKzbomM=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=P9hvshJAgAlzGFd0t58nTwySG7G0OW7wVU2/7KdmbRNDJ1H4CLD804FjIm3f8jSdx
- npsepsOY2nM3UjGZ+4qgn0k5ss/sSnX1Ka7PrrY6K02EJL4bVUM/z+TiQesKE92sCA
- dDhIBsbvb1i5ZssfVbjtC/c8VNjU1aJTaVSizM1Bf78mazHKquPh8dlS/2PTKgaGWZ
- 8KPT4S1CtEHX8gDhLEAlNdFfIUtSseqn+1/iebQf/jxS/6u52o1ZHTaFcnZa2wdIbF
- JhY0dt04l6e5gNdUlr1P1pBuLGQfzo3258oS25ovKy7cf0mjWG3Hmc76mYHygq4pKT
- HdwKOqb9FalIg==
-Date: Mon, 5 Feb 2024 12:40:14 +0100
-From: Marek =?UTF-8?B?QmVow7pu?= <kabel@kernel.org>
-To: Max Resch <resch.max@gmail.com>
-Cc: u-boot@lists.denx.de, sr@denx.de
-Subject: Re: [PATCH v2] rng: Add Turris Mox rWTM RNG driver
-Message-ID: <20240205124014.6f7b1957@dellmb>
-In-Reply-To: <20240121201737.671340-1-resch.max@gmail.com>
-References: <20240121201737.671340-1-resch.max@gmail.com>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.39; x86_64-pc-linux-gnu)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-68ca560ecb1so2802566d6.1
+ for <u-boot@lists.denx.de>; Mon, 05 Feb 2024 03:59:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1707134379; x=1707739179; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dd19UudtUta4YgE00lNWpRXLRxXDC1CL2JnJndHo4kM=;
+ b=mpqrBzNS1RiBlCxS+l0V/ec9e0ZBVoSxGIqAzKXuqwaI1XQrGhjlZu9OqRuWef5PvC
+ ulukAyzxVlMnqs8skGo69I6RN634ffHe+J22663tEQUt09BuWawSUcFD8Z70Fd0K6k6m
+ ARR5BdrkB5DImzvv9mXZwr/KbToX/7bjC62Do=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707134379; x=1707739179;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dd19UudtUta4YgE00lNWpRXLRxXDC1CL2JnJndHo4kM=;
+ b=X6iOBVM3BdYSjaCqI8Y8baV0HOoK+m+Js6dMN4WpY6BYtvjcpzKSnF7wzzPIeOVIyN
+ IoPLIjJEs3AJ4tkAWWEq5bSBxdiCDjb3P39xYfCB68VP0xbLr5WDYaVW//9iJ62yaXDa
+ BCnXyEoC1ffdu9Rg3j/EpQnoOv7G2CUn9RlCkJyfhGEkO5vDRJrtGUXqmRIqEeQyhpFp
+ +22m2Jgya+LYXP2qI3EeQ9J24CXNOKESbhihUonZ8qZhODN0Q8VBsHnq2yYhJCcGMjEh
+ QGszLJLP98S777MfaWoChWH3PGE91nLQBxRxuKcEWMnC2QveDYtvThxG66tGUl7EDxFB
+ qC/w==
+X-Gm-Message-State: AOJu0Yxzv2VT6uUYfyXiiYVEunqwY6/rekU8gEROE0F2EMhPxW8VYHEJ
+ ANb1kLYw9LrJL9UC+xIoD3nYJbmahgitfV9HQMyGmAGbjevOm3X2nEy6C0KxMYd2OwReZUV8xAS
+ KoZVA2VhtuezuUagnfb14VGiVGBDNbgJ/fhZE
+X-Google-Smtp-Source: AGHT+IFjWKMmhCR7ryd5mUFrZeoW5VjXZFwefVLKCjiSO60UBKWaqicUaXM/D+cAJk0ueWOKWBzJ8moWvs0gXRm/Ku4=
+X-Received: by 2002:a05:6214:e4f:b0:68c:539b:b493 with SMTP id
+ o15-20020a0562140e4f00b0068c539bb493mr7522718qvc.20.1707134379670; Mon, 05
+ Feb 2024 03:59:39 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <20231116172859.393744-1-sjg@chromium.org>
+ <20231208150042.GA1278773-robh@kernel.org>
+ <CAPnjgZ2i4gvgiUeHPOfHuOdBooV4e=QQEq6iMo0JbDwOS6dCwA@mail.gmail.com>
+ <CAL_Jsq+xMZ8yz4H9D59uCSyX4h5W+4ruGF++=wVA=msXz+Y01A@mail.gmail.com>
+ <CAPnjgZ1uW8T6woXSqFUNm301=W3zBYOrADREkrz=DuwSW87qZg@mail.gmail.com>
+ <20231214172702.GA617226-robh@kernel.org>
+ <CAPnjgZ2oJSGPO91Y_aLbe+v250WFrND4n3T0mOvhERYidVu=eQ@mail.gmail.com>
+ <CAFLszTizRRVbRO6_ygE2X-Lp5dENWSc4uMGL5GPJAFGAbRdCyQ@mail.gmail.com>
+ <CAL_Jsq+j7_KZtQ2ENq9+vsw0LOZF=spu293_G=AxOmBM+m_f-g@mail.gmail.com>
+ <CAFLszTimaFw9sf=JKvQXG4fS6V_2T=2n+pfvYLCiuG1o+7cHPA@mail.gmail.com>
+ <20240205085056.44278f2c@xps-13>
+In-Reply-To: <20240205085056.44278f2c@xps-13>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 5 Feb 2024 04:59:28 -0700
+Message-ID: <CAFLszTi+8ygXOidnhxj7sdJwc6X5i+++QvnUyfe-kde5eSts_w@mail.gmail.com>
+Subject: Re: [PATCH v6 1/3] dt-bindings: mtd: partitions: Add binman compatible
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Rob Herring <robh@kernel.org>, devicetree@vger.kernel.org, 
+ linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>, 
+ Michael Walle <mwalle@kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Pratyush Yadav <ptyadav@amazon.de>, 
+ =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
+ Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
+ linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,179 +101,200 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Max,
+Hi Miquel,
 
-Out of curiousity, what is your use case for having these random
-numbers on this platform in U-Boot?
+On Mon, 5 Feb 2024 at 00:50, Miquel Raynal <miquel.raynal@bootlin.com> wrot=
+e:
+>
+> Hi Simon,
+>
+> sjg@chromium.org wrote on Sun, 4 Feb 2024 05:07:38 -0700:
+>
+> > Hi Rob,
+> >
+> > On Wed, 17 Jan 2024 at 08:56, Rob Herring <robh@kernel.org> wrote:
+> > >
+> > > On Thu, Jan 4, 2024 at 3:54=E2=80=AFPM Simon Glass <sjg@chromium.org>=
+ wrote:
+> > > >
+> > > > Hi Rob,
+> > > >
+> > > > On Thu, Dec 14, 2023 at 2:09=E2=80=AFPM Simon Glass <sjg@chromium.o=
+rg> wrote:
+> > > > >
+> > > > > Hi Rob,
+> > > > >
+> > > > > On Thu, 14 Dec 2023 at 10:27, Rob Herring <robh@kernel.org> wrote=
+:
+> > > > > >
+> > > > > > On Fri, Dec 08, 2023 at 03:58:10PM -0700, Simon Glass wrote:
+> > > > > > > Hi Rob,
+> > > > > > >
+> > > > > > > On Fri, 8 Dec 2023 at 14:56, Rob Herring <robh@kernel.org> wr=
+ote:
+> > > > > > > >
+> > > > > > > > On Fri, Dec 8, 2023 at 11:47=E2=80=AFAM Simon Glass <sjg@ch=
+romium.org> wrote:
+> > > > > > > > >
+> > > > > > > > > Hi Rob,
+> > > > > > > > >
+> > > > > > > > > On Fri, 8 Dec 2023 at 08:00, Rob Herring <robh@kernel.org=
+> wrote:
+> > > > > > > > > >
+> > > > > > > > > > On Thu, Nov 16, 2023 at 10:28:50AM -0700, Simon Glass w=
+rote:
+> > > > > > > > > > > Add a compatible string for binman, so we can extend =
+fixed-partitions
+> > > > > > > > > > > in various ways.
+> > > > > > > > > > >
+> > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > > > ---
+> > > > > > > > > > >
+> > > > > > > > > > > (no changes since v5)
+> > > > > > > > > > >
+> > > > > > > > > > > Changes in v5:
+> > > > > > > > > > > - Add #address/size-cells and parternProperties
+> > > > > > > > > > > - Drop $ref to fixed-partitions.yaml
+> > > > > > > > > > > - Drop 'select: false'
+> > > > > > > > > > >
+> > > > > > > > > > > Changes in v4:
+> > > > > > > > > > > - Change subject line
+> > > > > > > > > > >
+> > > > > > > > > > > Changes in v3:
+> > > > > > > > > > > - Drop fixed-partition additional compatible string
+> > > > > > > > > > > - Drop fixed-partitions from the example
+> > > > > > > > > > > - Mention use of compatible instead of label
+> > > > > > > > > > >
+> > > > > > > > > > > Changes in v2:
+> > > > > > > > > > > - Drop mention of 'enhanced features' in fixed-partit=
+ions.yaml
+> > > > > > > > > > > - Mention Binman input and output properties
+> > > > > > > > > > > - Use plain partition@xxx for the node name
+> > > > > > > > > > >
+> > > > > > > > > > >  .../bindings/mtd/partitions/binman.yaml       | 68 +=
+++++++++++++++++++
+> > > > > > > > > > >  .../bindings/mtd/partitions/partitions.yaml   |  1 +
+> > > > > > > > > > >  MAINTAINERS                                   |  5 +=
++
+> > > > > > > > > > >  3 files changed, 74 insertions(+)
+> > > > > > > > > > >  create mode 100644 Documentation/devicetree/bindings=
+/mtd/partitions/binman.yaml
+> > > > > > > > > > >
+> > > > > > > > > > > diff --git a/Documentation/devicetree/bindings/mtd/pa=
+rtitions/binman.yaml b/Documentation/devicetree/bindings/mtd/partitions/bin=
+man.yaml
+> > > > > > > > > > > new file mode 100644
+> > > > > > > > > > > index 000000000000..329217550a98
+> > > > > > > > > > > --- /dev/null
+> > > > > > > > > > > +++ b/Documentation/devicetree/bindings/mtd/partition=
+s/binman.yaml
+> > > > > > > > > > > @@ -0,0 +1,68 @@
+> > > > > > > > > > > +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+> > > > > > > > > > > +# Copyright 2023 Google LLC
+> > > > > > > > > > > +
+> > > > > > > > > > > +%YAML 1.2
+> > > > > > > > > > > +---
+> > > > > > > > > > > +$id: http://devicetree.org/schemas/mtd/partitions/bi=
+nman.yaml#
+> > > > > > > > > > > +$schema: http://devicetree.org/meta-schemas/core.yam=
+l#
+> > > > > > > > > > > +
+> > > > > > > > > > > +title: Binman firmware layout
+> > > > > > > > > > > +
+> > > > > > > > > > > +maintainers:
+> > > > > > > > > > > +  - Simon Glass <sjg@chromium.org>
+> > > > > > > > > > > +
+> > > > > > > > > > > +description: |
+> > > > > > > > > > > +  The binman node provides a layout for firmware, us=
+ed when packaging firmware
+> > > > > > > > > > > +  from multiple projects. It is based on fixed-parti=
+tions, with some
+> > > > > > > > > > > +  extensions, but uses 'compatible' to indicate the =
+contents of the node, to
+> > > > > > > > > > > +  avoid perturbing or confusing existing installatio=
+ns which use 'label' for a
+> > > > > > > > > > > +  particular purpose.
+> > > > > > > > > > > +
+> > > > > > > > > > > +  Binman supports properties used as inputs to the f=
+irmware-packaging process,
+> > > > > > > > > > > +  such as those which control alignment of partition=
+s. This binding addresses
+> > > > > > > > > > > +  these 'input' properties. For example, it is commo=
+n for the 'reg' property
+> > > > > > > > > > > +  (an 'output' property) to be set by Binman, based =
+on the alignment requested
+> > > > > > > > > > > +  in the input.
+> > > > > > > > > > > +
+> > > > > > > > > > > +  Once processing is complete, input properties have=
+ mostly served their
+> > > > > > > > > > > +  purpose, at least until the firmware is repacked l=
+ater, e.g. due to a
+> > > > > > > > > > > +  firmware update. The 'fixed-partitions' binding sh=
+ould provide enough
+> > > > > > > > > > > +  information to read the firmware at runtime, inclu=
+ding decompression if
+> > > > > > > > > > > +  needed.
+> > > > > > > > > >
+> > > > > > > > > > How is this going to work exactly? binman reads these n=
+odes and then
+> > > > > > > > > > writes out 'fixed-partitions' nodes. But then you've lo=
+st the binman
+> > > > > > > > > > specifc parts needed for repacking.
+> > > > > > > > >
+> > > > > > > > > No, they are the same node. I do want the extra informati=
+on to stick
+> > > > > > > > > around. So long as it is compatible with fixed-partition =
+as well, this
+> > > > > > > > > should work OK.
+> > > > > > > >
+> > > > > > > > How can it be both? The partitions node compatible can be e=
+ither
+> > > > > > > > 'fixed-partitions' or 'binman'.
+> > > > > > >
+> > > > > > > Can we not allow it to be both? I have tried to adjust things=
+ in
+> > > > > > > response to feedback but perhaps the feedback was leading me =
+down the
+> > > > > > > wrong path?
+> > > > > >
+> > > > > > Sure, but then the schema has to and that means extending
+> > > > > > fixed-partitions.
+> > > > >
+> > > > > Can we cross that bridge later? There might be resistance to it. =
+I'm
+> > > > > not sure. For now, perhaps just a binman compatible works well en=
+ough
+> > > > > to make progress.
+> > > >
+> > > > Is there any way to make progress on this? I would like to have
+> > > > software which doesn't understand the binman compatible to at least=
+ be
+> > > > able to understand the fixed-partition compatible. Is that acceptab=
+le?
+> > >
+> > > There's only 2 ways that it can work. Either binman writes out
+> > > fixed-partition nodes dropping/replacing anything only defined for
+> > > binman or fixed-partition is extended to include what binman needs.
+> >
+> > OK, then I suppose the best way is to add a new binman compatible, as
+> > is done with this v6 series. People then need to choose it instead of
+> > fixed-partition.
+>
+> I'm sorry this is not at all what Rob suggested, or did I totally
+> misunderstand his answer?
+>
+> In both cases the solution is to generate a "fixed-partition" node. Now
+> up to you to decide whether binman should adapt the output to the
+> current schema, or if the current schema should be extended to
+> understand all binman's output.
+>
+> At least that is my understanding and also what I kind of agree with.
 
-Below are a few more things to change and then you I'll give my
-Reviewed-by tag.
+I do want to binman schema to include all the features of Binman.
 
-On Sun, 21 Jan 2024 21:17:16 +0100
-Max Resch <resch.max@gmail.com> wrote:
+So are you saying that there should not be a 'binman'  schema, but I
+should just add all the binman properties to the fixed-partition
+schema?
 
-> A RNG driver for Armada 3720 boards running the Turris Mox rWTM firmware
-> from CZ.NIC in the secure processor.
-> 
-> Signed-off-by: Max Resch <resch.max@gmail.com>
-> ---
-> 
-> Changes in v2:
->  - Removed ring buffer implementation
-> 
->  drivers/rng/Kconfig           |   8 +++
->  drivers/rng/Makefile          |   1 +
->  drivers/rng/turris_rwtm_rng.c | 122 ++++++++++++++++++++++++++++++++++
->  3 files changed, 131 insertions(+)
->  create mode 100644 drivers/rng/turris_rwtm_rng.c
-> 
-> diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
-> index a89c899568..cd72852a47 100644
-> --- a/drivers/rng/Kconfig
-> +++ b/drivers/rng/Kconfig
-> @@ -105,4 +105,12 @@ config RNG_JH7110
->  	help
->  	  Enable True Random Number Generator in StarFive JH7110 SoCs.
->  
-> +config RNG_TURRIS_RWTM
-> +	bool "Turris Mox TRNG in Secure Processor"
-> +	depends on DM_RNG && ARMADA_3700
-> +	help
-> +	  Use TRNG in Turris Mox Secure Processor Firmware. Can be used
-> +	  on other Armada-3700 devices (like EspressoBin) if Secure
-> +	  Firmware from CZ.NIC is used.
-> +
->  endif
-> diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
-> index 7e64c4cdfc..ecae1a3da3 100644
-> --- a/drivers/rng/Makefile
-> +++ b/drivers/rng/Makefile
-> @@ -17,3 +17,4 @@ obj-$(CONFIG_RNG_SMCCC_TRNG) += smccc_trng.o
->  obj-$(CONFIG_RNG_ARM_RNDR) += arm_rndr.o
->  obj-$(CONFIG_TPM_RNG) += tpm_rng.o
->  obj-$(CONFIG_RNG_JH7110) += jh7110_rng.o
-> +obj-$(CONFIG_RNG_TURRIS_RWTM) += turris_rwtm_rng.o
-> diff --git a/drivers/rng/turris_rwtm_rng.c b/drivers/rng/turris_rwtm_rng.c
-> new file mode 100644
-> index 0000000000..143fe0b47f
-> --- /dev/null
-> +++ b/drivers/rng/turris_rwtm_rng.c
-> @@ -0,0 +1,122 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-> +/*
-> + * Copyright (c) 2024, Max Resch
-> + */
-> +
-> +#include <dm.h>
-> +#include <malloc.h>
-> +#include <rng.h>
-> +#include <asm/dma-mapping.h>
-> +#include <asm/types.h>
-> +#include <mach/mbox.h>
-> +
-> +/* size of entropy buffer */
-> +#define RNG_BUFFER_SIZE	128U
-> +
-> +struct turris_rwtm_rng_priv {
-> +	phys_addr_t buffer;
-> +};
-> +
-> +static int turris_rwtm_rng_fill_entropy(phys_addr_t entropy, size_t size)
-> +{
-> +	u32 args[3] = { 1, (u32)entropy, size };
-> +	int ret;
-> +
-> +	/* flush data cache */
-> +	flush_dcache_range(entropy, entropy + size);
-> +
-> +	/*
-> +	 * get entropy
-> +	 * args[0] = 1 copies BYTES array in args[1] of length args[2]
-> +	 */
-> +	ret = mbox_do_cmd(MBOX_CMD_GET_RANDOM, args, 3, NULL, 0);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	/* invalidate data cache */
-> +	invalidate_dcache_range(entropy, entropy + size);
-> +
-> +	return 0;
-> +}
-> +
-> +static int turris_rwtm_rng_random_read(struct udevice *dev, void *data, size_t count)
-> +{
-> +	phys_addr_t p;
-> +	size_t size;
-> +	int ret;
-> +
-> +	p = ((struct turris_rwtm_rng_priv *)dev_get_priv(dev))->buffer;
-
-Please declare
-
-  struct turris_rwtm_rng_priv *priv = dev_get_priv(dev);
-  phys_addr_t phys;
-  size_t size;
-  int ret;
-
-and then do 
-
-  phys = priv->buffer;
-
-> +	while (count) {
-> +		size = min_t(size_t, RNG_BUFFER_SIZE, count);
-> +
-> +		ret = turris_rwtm_rng_fill_entropy(p, size);
-> +
-> +		memcpy(data, (void *)p, size);
-> +		count -= size;
-> +		data = (u8 *)data + size;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int turris_rwtm_rng_probe(struct udevice *dev)
-> +{
-> +	struct turris_rwtm_rng_priv *priv;
-
-  = dev_get_priv(dev);
-
-> +	u32 args[] = { 0 };
-> +	int ret;
-> +
-> +	/*
-> +	 * check if the random command is supported
-> +	 * args[0] = 0 would copy 16 DWORDS entropy to out but we ignore them
-> +	 */
-> +	ret = mbox_do_cmd(MBOX_CMD_GET_RANDOM, args, ARRAY_SIZE(args), NULL, 0);
-> +
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	/* entropy buffer */
-> +	priv = (struct turris_rwtm_rng_priv *)dev_get_priv(dev);
-no need here, do it at the beginning
-
-
-> +	priv->buffer = 0;
-> +
-> +	/* buffer address need to be aligned */
-> +	dma_alloc_coherent(RNG_BUFFER_SIZE, (unsigned long *)&priv->buffer);
-> +	if (!priv->buffer)
-> +		return -ENOMEM;
-> +
-> +	return 0;
-> +}
-> +
-> +static int turris_rwtm_rng_remove(struct udevice *dev)
-> +{
-> +	phys_addr_t p;
-rename this to phys, and please do it as I described above.
-
-> +
-> +	p = ((struct turris_rwtm_rng_priv *)dev_get_priv(dev))->buffer;
-> +	dma_free_coherent((void *)p);
-> +
-> +	return 0;
-
-Marek
+Regards,
+Simon
