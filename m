@@ -4,56 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BF17C4828D
-	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 14:54:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 263CAC4828D
+	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 15:04:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DA1087947;
-	Mon,  5 Feb 2024 15:54:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 43E51875E9;
+	Mon,  5 Feb 2024 16:04:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="VoPr3/m8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xEDSAAjf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 505CE8798F; Mon,  5 Feb 2024 15:54:20 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3845787811; Mon,  5 Feb 2024 16:04:45 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2916878CB
- for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 15:54:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 06B3386314
+ for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 16:04:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 6EE3460F8B;
- Mon,  5 Feb 2024 14:54:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2FD84C433C7;
- Mon,  5 Feb 2024 14:54:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1707144856;
- bh=aMfqAuihV/buwtwb/U6mDuME5HsEK/CV4uuQZlc8+B0=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=VoPr3/m8aF1Tju4vMZw3bkNVJAzIMB46qXyd51hPrQV72h7Dn7rNypvSsGzkUmUGV
- 7DC+FKiHLT19m9enUuF+Td3pu11p1/tKn3jMxj90ak+/ouY7NOL88SQRVFNXZdWma8
- 9HCKmmW3gkMtArWhJ6KTeJOVj4q2+/rNYQKMpTzuEM8FUIY1hCJ7memsCY8XGn9S/q
- NKvXcEpD4vVm7wOcYDWWFOTeDhnX6oD7D4XWmKuToBZo4YwHfPbXQZ4ICgkCCCV3dV
- XZauIDorScJwCwxE4+Dm/XOB70hT3eucmh0MAqWJTVSx9oYEnm5bLqD2aCGHK4G4jN
- eR9T71wy9l9sw==
-Date: Mon, 5 Feb 2024 15:54:12 +0100
-From: Marek =?UTF-8?B?QmVow7pu?= <kabel@kernel.org>
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: resch.max@gmail.com, u-boot@lists.denx.de, sr@denx.de
-Subject: Re: [PATCH v2] rng: Add Turris Mox rWTM RNG driver
-Message-ID: <20240205155412.63482336@dellmb>
-In-Reply-To: <874jenqb0v.fsf@bloch.sibelius.xs4all.nl>
-References: <20240121201737.671340-1-resch.max@gmail.com>
- <20240205124014.6f7b1957@dellmb>
- <874jenqb0v.fsf@bloch.sibelius.xs4all.nl>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.39; x86_64-pc-linux-gnu)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dan.carpenter@linaro.org
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a370e7e1e02so312478366b.0
+ for <u-boot@lists.denx.de>; Mon, 05 Feb 2024 07:04:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1707145482; x=1707750282; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=aNmkImz9/Flbkd5VfEszB9XH4tGc7iXI+lD0cnHmbCQ=;
+ b=xEDSAAjf+wOsSJNaruQ8W82/oXSWGuSlJ2ekGAqGEQBJeTICJB7/EmwuQxcg2utaRR
+ xcBcwJrmSAPNqn77Yhu57NWoLjiSimBCs8QSKa/+VXCXkdlWkkPWSm0Fn1/LQ2lRIlto
+ xUn+L2aS7lI+iq+yw/qvWDK7/HIGffYz0GLmlA79RGwjc02A0q7UKkBM1aVGwpCRzaBS
+ IHKTwmxzaRp+ofd1nsICCzhI1ecuCkmcDcHFoy1k+7uDsCZiN0ropgbelAhIWr54hEzs
+ bH76cvWKCVIJ8PWryOF/GRNj4dWEuKuc5TJvdrD9lW5cCG6mQOslwtsl/GCNnS289ui3
+ x0Ng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707145482; x=1707750282;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aNmkImz9/Flbkd5VfEszB9XH4tGc7iXI+lD0cnHmbCQ=;
+ b=ilR2G3VWOT+BckB8ibm7jDuJGgutESvcy78n1Z6EQoI+oZrpICYr1IIkU8AyBcTu3s
+ OR98jBvMAyA3USJcSOVfoygLY+uEltY/ODRODaWT/ixcCVx9Ryyboy+aWDpbu4XyDFCt
+ Z4k0Z/abhAzkvWv3G7ZVl8miWVlBe4UwxX4wnMcrUb4MGzs8NAyydvkHNykvPM3ad/OR
+ RFd/7vbE5IxoBUMzWA6yJ4pazuOnfm6R4jwFIvFgCfLqc01253eYCJd41kFzt8RRJk4e
+ +pRx248+aqxLGGyY2BIqseVBaSBUnZChB4WQFl65HyMm5TqnR0bRe/Ly3UxbHBPL0ca2
+ 6iiQ==
+X-Gm-Message-State: AOJu0YxO4M6ZNdvV9O0+o7tn6vBXiKRGo1/R2FBI7Z34yEUovdOGZVeD
+ 3I28fLaFrvg3jrcgXe4OswONm1PPQlsU7Q5h2mZ1CcI+x+dwpDWktrA8CnQGejg=
+X-Google-Smtp-Source: AGHT+IHRZw7s5JUXqqpEKb2tfUrm4K6N9OSh/mPt1Zl/eq044cpDkvdtztSO9OgOw9fSJKEpGLBCVg==
+X-Received: by 2002:a17:906:3102:b0:a37:1def:bd73 with SMTP id
+ 2-20020a170906310200b00a371defbd73mr7474995ejx.38.1707145482409; 
+ Mon, 05 Feb 2024 07:04:42 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCXak0S/R3A8+gprNIsj3pHWtBjiMa++tFInkf0M4zsRN5OgNcnU8TyCGk1xPVpxVw3GAy49sGzB/S9ab/uWQIm9UWJtAUacpfBEls5cTyEqYwDvxTTbBui6fAa5gGF2N6XuQFAeLNvqOSspj0wSCCsVVIm0jotv8d5tYYRuXXjmnmW58Pil406v9jts0eFwgAnqH37pSry64voUlu7s8VkDaVBOEGvr7ZY+iSicLUCYpsXaA9k5T8J5awa6cEYt0WD+WzL0M2dVCKPEXoFPz4NLPawzxNR/
+Received: from localhost ([102.222.70.76]) by smtp.gmail.com with ESMTPSA id
+ cx7-20020a170907168700b00a3161adb239sm4431286ejd.158.2024.02.05.07.04.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 Feb 2024 07:04:42 -0800 (PST)
+Date: Mon, 5 Feb 2024 18:04:38 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Jacky Chou <jacky_chou@aspeedtech.com>
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, trini@konsulko.com,
+ michal.simek@amd.com, marek.vasut+renesas@mailbox.org,
+ u-boot@lists.denx.de, BMC-SW@aspeedtech.com
+Subject: Re: [PATCH] net: phy: ncsi: Correct the endian of the checksum
+Message-ID: <da9231ac-1386-48fc-81b9-8e027cd5dff5@moroto.mountain>
+References: <20240205080228.140001-1-jacky_chou@aspeedtech.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240205080228.140001-1-jacky_chou@aspeedtech.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,209 +93,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-So you're using A3720 with OpenBSD? Can I ask which A3720 boards do you
-use?
+On Mon, Feb 05, 2024 at 04:02:28PM +0800, Jacky Chou wrote:
+> There is no need to perform the endian twice here.
+> 
+> Signed-off-by: Jacky Chou <jacky_chou@aspeedtech.com>
 
-Marek
+Reviewed-by: Dan Carpenter <dan.carpenter@linaro.org>
+Fixes: f641a8ac93e0 ("phy: Add support for the NC-SI protocol")
 
-On Mon, 05 Feb 2024 14:46:24 +0100
-Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
+How did this ever work?  Was this always tested on big endian hardware
+or was nothing verifying the checksums?
 
-> > Date: Mon, 5 Feb 2024 12:40:14 +0100
-> > From: Marek Beh=C3=BAn <kabel@kernel.org>
-> >=20
-> > Hello Max,
-> >=20
-> > Out of curiousity, what is your use case for having these random
-> > numbers on this platform in U-Boot? =20
->=20
-> It means that U-Boot will implement the EFI RNG protocol.  The OpenBSD
-> bootloader will use that to fill an initial pool of random numbers for
-> the kernel.  And the Linux kernel EFI stub uses it to do kernel
-> address space randomization.
->=20
-> Cheers,
->=20
-> Mark
->=20
-> > Below are a few more things to change and then you I'll give my
-> > Reviewed-by tag.
-> >=20
-> > On Sun, 21 Jan 2024 21:17:16 +0100
-> > Max Resch <resch.max@gmail.com> wrote:
-> >  =20
-> > > A RNG driver for Armada 3720 boards running the Turris Mox rWTM firmw=
-are
-> > > from CZ.NIC in the secure processor.
-> > >=20
-> > > Signed-off-by: Max Resch <resch.max@gmail.com>
-> > > ---
-> > >=20
-> > > Changes in v2:
-> > >  - Removed ring buffer implementation
-> > >=20
-> > >  drivers/rng/Kconfig           |   8 +++
-> > >  drivers/rng/Makefile          |   1 +
-> > >  drivers/rng/turris_rwtm_rng.c | 122 ++++++++++++++++++++++++++++++++=
-++
-> > >  3 files changed, 131 insertions(+)
-> > >  create mode 100644 drivers/rng/turris_rwtm_rng.c
-> > >=20
-> > > diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
-> > > index a89c899568..cd72852a47 100644
-> > > --- a/drivers/rng/Kconfig
-> > > +++ b/drivers/rng/Kconfig
-> > > @@ -105,4 +105,12 @@ config RNG_JH7110
-> > >  	help
-> > >  	  Enable True Random Number Generator in StarFive JH7110 SoCs.
-> > > =20
-> > > +config RNG_TURRIS_RWTM
-> > > +	bool "Turris Mox TRNG in Secure Processor"
-> > > +	depends on DM_RNG && ARMADA_3700
-> > > +	help
-> > > +	  Use TRNG in Turris Mox Secure Processor Firmware. Can be used
-> > > +	  on other Armada-3700 devices (like EspressoBin) if Secure
-> > > +	  Firmware from CZ.NIC is used.
-> > > +
-> > >  endif
-> > > diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
-> > > index 7e64c4cdfc..ecae1a3da3 100644
-> > > --- a/drivers/rng/Makefile
-> > > +++ b/drivers/rng/Makefile
-> > > @@ -17,3 +17,4 @@ obj-$(CONFIG_RNG_SMCCC_TRNG) +=3D smccc_trng.o
-> > >  obj-$(CONFIG_RNG_ARM_RNDR) +=3D arm_rndr.o
-> > >  obj-$(CONFIG_TPM_RNG) +=3D tpm_rng.o
-> > >  obj-$(CONFIG_RNG_JH7110) +=3D jh7110_rng.o
-> > > +obj-$(CONFIG_RNG_TURRIS_RWTM) +=3D turris_rwtm_rng.o
-> > > diff --git a/drivers/rng/turris_rwtm_rng.c b/drivers/rng/turris_rwtm_=
-rng.c
-> > > new file mode 100644
-> > > index 0000000000..143fe0b47f
-> > > --- /dev/null
-> > > +++ b/drivers/rng/turris_rwtm_rng.c
-> > > @@ -0,0 +1,122 @@
-> > > +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-> > > +/*
-> > > + * Copyright (c) 2024, Max Resch
-> > > + */
-> > > +
-> > > +#include <dm.h>
-> > > +#include <malloc.h>
-> > > +#include <rng.h>
-> > > +#include <asm/dma-mapping.h>
-> > > +#include <asm/types.h>
-> > > +#include <mach/mbox.h>
-> > > +
-> > > +/* size of entropy buffer */
-> > > +#define RNG_BUFFER_SIZE	128U
-> > > +
-> > > +struct turris_rwtm_rng_priv {
-> > > +	phys_addr_t buffer;
-> > > +};
-> > > +
-> > > +static int turris_rwtm_rng_fill_entropy(phys_addr_t entropy, size_t =
-size)
-> > > +{
-> > > +	u32 args[3] =3D { 1, (u32)entropy, size };
-> > > +	int ret;
-> > > +
-> > > +	/* flush data cache */
-> > > +	flush_dcache_range(entropy, entropy + size);
-> > > +
-> > > +	/*
-> > > +	 * get entropy
-> > > +	 * args[0] =3D 1 copies BYTES array in args[1] of length args[2]
-> > > +	 */
-> > > +	ret =3D mbox_do_cmd(MBOX_CMD_GET_RANDOM, args, 3, NULL, 0);
-> > > +	if (ret < 0)
-> > > +		return ret;
-> > > +
-> > > +	/* invalidate data cache */
-> > > +	invalidate_dcache_range(entropy, entropy + size);
-> > > +
-> > > +	return 0;
-> > > +}
-> > > +
-> > > +static int turris_rwtm_rng_random_read(struct udevice *dev, void *da=
-ta, size_t count)
-> > > +{
-> > > +	phys_addr_t p;
-> > > +	size_t size;
-> > > +	int ret;
-> > > +
-> > > +	p =3D ((struct turris_rwtm_rng_priv *)dev_get_priv(dev))->buffer; =
-=20
-> >=20
-> > Please declare
-> >=20
-> >   struct turris_rwtm_rng_priv *priv =3D dev_get_priv(dev);
-> >   phys_addr_t phys;
-> >   size_t size;
-> >   int ret;
-> >=20
-> > and then do=20
-> >=20
-> >   phys =3D priv->buffer;
-> >  =20
-> > > +	while (count) {
-> > > +		size =3D min_t(size_t, RNG_BUFFER_SIZE, count);
-> > > +
-> > > +		ret =3D turris_rwtm_rng_fill_entropy(p, size);
-> > > +
-> > > +		memcpy(data, (void *)p, size);
-> > > +		count -=3D size;
-> > > +		data =3D (u8 *)data + size;
-> > > +	}
-> > > +
-> > > +	return 0;
-> > > +}
-> > > +
-> > > +static int turris_rwtm_rng_probe(struct udevice *dev)
-> > > +{
-> > > +	struct turris_rwtm_rng_priv *priv; =20
-> >=20
-> >   =3D dev_get_priv(dev);
-> >  =20
-> > > +	u32 args[] =3D { 0 };
-> > > +	int ret;
-> > > +
-> > > +	/*
-> > > +	 * check if the random command is supported
-> > > +	 * args[0] =3D 0 would copy 16 DWORDS entropy to out but we ignore =
-them
-> > > +	 */
-> > > +	ret =3D mbox_do_cmd(MBOX_CMD_GET_RANDOM, args, ARRAY_SIZE(args), NU=
-LL, 0);
-> > > +
-> > > +	if (ret < 0)
-> > > +		return ret;
-> > > +
-> > > +	/* entropy buffer */
-> > > +	priv =3D (struct turris_rwtm_rng_priv *)dev_get_priv(dev); =20
-> > no need here, do it at the beginning
-> >=20
-> >  =20
-> > > +	priv->buffer =3D 0;
-> > > +
-> > > +	/* buffer address need to be aligned */
-> > > +	dma_alloc_coherent(RNG_BUFFER_SIZE, (unsigned long *)&priv->buffer);
-> > > +	if (!priv->buffer)
-> > > +		return -ENOMEM;
-> > > +
-> > > +	return 0;
-> > > +}
-> > > +
-> > > +static int turris_rwtm_rng_remove(struct udevice *dev)
-> > > +{
-> > > +	phys_addr_t p; =20
-> > rename this to phys, and please do it as I described above.
-> >  =20
-> > > +
-> > > +	p =3D ((struct turris_rwtm_rng_priv *)dev_get_priv(dev))->buffer;
-> > > +	dma_free_coherent((void *)p);
-> > > +
-> > > +	return 0; =20
-> >=20
-> > Marek
-> >  =20
+regards,
+dan carpenter
 
