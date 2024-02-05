@@ -4,56 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 388E9C48292
-	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 18:27:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C359C48292
+	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 18:59:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80FE187887;
-	Mon,  5 Feb 2024 19:27:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 4541187B98;
+	Mon,  5 Feb 2024 19:59:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="JujC0LZY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="f8JuIZhc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E30C8791C; Mon,  5 Feb 2024 19:27:56 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DF09287B98; Mon,  5 Feb 2024 19:59:04 +0100 (CET)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90E9D86DBD
- for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 19:27:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A410879AF
+ for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 19:59:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=4887=JP=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1707157661;
- bh=cYFXsyFEqF53D/u4TL7QDgoJT1Uz/KgWluCAF8FBvP4=;
- b=JujC0LZYd+IBNCowtNsNj6dU3lSxroHUpw5sCa0X0eib9OeL9ZnEvmLEp5CfWj6PoBEV20HVK
- 6JnpfK5hCZEt/obloQVAauoUPl44WxI0btx1gLqiRiv4FAAc0P7/s6v7wUviS3emqpGoChFHgWC
- GByYNHF9nqlYxrDpGEETOYePUUIstaNHj8/fumQuGUpn6J6GZ8EJPOKYh6UVGQEoMRxnLYVNoc2
- OgkFzCX7QizMQgstaqvdN6FWCBfzCihB3lt56BxG/HlVU1y/kFZjV9NsAcPRbOjvbCjlIUqeSHb
- uG9yr93vG0FcetE/79OBGAo/Yk2kCa9ujZFBxJR/AotA==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>, Jonas Karlman
- <jonas@kwiboo.se>, u-boot@lists.denx.de
-Subject: [PATCH] mmc: rockchip_sdhci: Use bounce buffer in SPL to fix read
- performance
-Date: Mon,  5 Feb 2024 18:27:33 +0000
-Message-ID: <20240205182736.2770679-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=macroalpha82@gmail.com
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-3bfcbfbfd92so10117b6e.2
+ for <u-boot@lists.denx.de>; Mon, 05 Feb 2024 10:59:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1707159540; x=1707764340; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1motExGwroWKH3vgZfR/Cw1ttlp4dkKkXyriFyrpX0A=;
+ b=f8JuIZhcvHP4bZ/bmA+rGkU25DoeVXQXc1U9CLQJzi6O4z7EnSbr2Wryi2GIqKrlyZ
+ EAY+JboRGxrPlDldPGgINM+MaJ8E+XJp30YMOMkSyi5Al3BEqtR9jKNyI4pfPJN473QC
+ uFbIht7qQPNbx4LHYlmfqrYIGSMi6gviOK1phUf16LrsmE4X3zKVno/X0Eh550pSmPum
+ ElKMzYA3Qto/C8nlRnazTTfdks/7254P54paHqcHu3N57eHx8rQ2vYF9jZtW8fkWxrNJ
+ WzXAOri+KTLhoABQoScYx07eyEttt58DMt4JJUE/FSo0lXXPZAtupjbqQvWZDuBonUeB
+ 1bBQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707159540; x=1707764340;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=1motExGwroWKH3vgZfR/Cw1ttlp4dkKkXyriFyrpX0A=;
+ b=sQ5DeLDjDD1Vq8nwfAxuG7jTwg71XzddAh0RfahIfQiCFU2axE1lqynuOZ8kbVlWpt
+ a141Jkh4AWptwbW9NyCv0HbeoRGajgfae6+ReHO5nAAwnMwbRDyz9TuzdNBWj8niFTRK
+ w6JBi7YhUnk5T4y8d2BnemyZgBzDnSKLEHNgWPw3jGuqlVoBmV9eqb16SRmjqJmM3lcP
+ TOENrGjx8T9ABwL0d8s+85qPjsDifqGQgovBYqgPoJmbyPETh8QxOz16d8bJpvoxCexY
+ UU0mF8hRJOOUVhuwKoxMprQUr6+UNIfUlGoFmXuz8g7EP8LLDQ257p9vfJqe/G510BE6
+ yWaw==
+X-Gm-Message-State: AOJu0YzVNOZtG7x0sYrwa/Mt4c4x4yjkAb94Hf3agw+EpqfOd+SPS+gM
+ f3noU9mMNgSuWVvJoudAav+CBc+de4u7+qM7kTl8oTu/YMoUM993VK9DEy8T
+X-Google-Smtp-Source: AGHT+IH49LqAWjjW08Pdmo6KGl82fFI3RLNuxVDuhnHrQ/SCZEUakivd54eUYRCiUSYQT5QtD6tsbw==
+X-Received: by 2002:a05:6808:10c9:b0:3be:4522:43c9 with SMTP id
+ s9-20020a05680810c900b003be452243c9mr567433ois.10.1707159540433; 
+ Mon, 05 Feb 2024 10:59:00 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCXUnUadryC27KMaSXNkl8fDtABqBkqLqd7ioYvq+k6c+J6McyVvvc33KA3ZhrfTscGzhxHQaD2JkPJjN0060bPJRfNO17KS9rqNtLt4t9qPrnlTBNuJzZyyOSmi2jlqX7KD85AwSE81gKrBJMyZk6sjVDbO7CrNgMh9Ev1/AoK+GV44QSoWhBZt2FDz3rIX+FqjpnqufzEbp+c7o5bdCtVh
+Received: from localhost.localdomain ([75.28.21.198])
+ by smtp.gmail.com with ESMTPSA id
+ cn22-20020a056808351600b003bfdfc7e5d6sm65692oib.42.2024.02.05.10.59.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 Feb 2024 10:59:00 -0800 (PST)
+From: Chris Morgan <macroalpha82@gmail.com>
+To: u-boot@lists.denx.de
+Cc: kever.yang@rock-chips.com, philipp.tomsich@vrull.eu, sjg@chromium.org,
+ jonas@kwiboo.se, jagan@amarulasolutions.com,
+ Chris Morgan <macromorgan@hotmail.com>
+Subject: [PATCH 1/4] arm: dts: rockchip: rk3566: Remove unnecessary clks from
+ rgxx3
+Date: Mon,  5 Feb 2024 12:58:52 -0600
+Message-Id: <20240205185855.21508-2-macroalpha82@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240205185855.21508-1-macroalpha82@gmail.com>
+References: <20240205185855.21508-1-macroalpha82@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 65c1289d42f435b07bc4d9fe
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,88 +96,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The commit 3b804b370dd8 ("mmc: rockchip_sdhci: Disable DMA mode using a
-device tree property") and commit 2cc6cde647e2 ("mmc: rockchip_sdhci:
-Limit number of blocks read in a single command") implemented a
-workaround to fix loading a part of TF-A into SRAM from eMMC in SPL.
+From: Chris Morgan <macromorgan@hotmail.com>
 
-This has resulted in very slow read performance of FIT from eMMC in SPL
-on RK3588.
+Remove unnecessary clock frequency defines from the RGxx3 u-boot dts.
+Move the necessary defines to the RGxx3 main dts file.
 
-Change to make use of a bounce buffer to significantly improve the read
-performance when malloc_limit is large enough and use PIO mode as fall
-back.
-
-Also update the size of align_buffer to use SDHCI_DEFAULT_BOUNDARY_SIZE
-instead of a hardcoded 512 * 1024.
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
 ---
-- This has been tested on RK3588 boards with malloc_limit above 512 KiB
-  and on RK3399 boards with less than 512 KiB malloc_limit.
-- Together with HS200 mode [1] and D-cache [2] enabled in SPL loading of
-  FIT can be very fast on RK3588.
+ .../arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi | 31 -------------------
+ arch/arm/dts/rk3566-anbernic-rgxx3.dts        |  7 +++++
+ 2 files changed, 7 insertions(+), 31 deletions(-)
 
-[1] https://patchwork.ozlabs.org/patch/1895043/
-[2] https://patchwork.ozlabs.org/patch/1891025/
----
- drivers/mmc/rockchip_sdhci.c | 20 ++++++++++++++++----
- drivers/mmc/sdhci.c          |  2 +-
- 2 files changed, 17 insertions(+), 5 deletions(-)
-
-diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
-index 706fb1235796..528544b1eff8 100644
---- a/drivers/mmc/rockchip_sdhci.c
-+++ b/drivers/mmc/rockchip_sdhci.c
-@@ -21,6 +21,9 @@
- #include <syscon.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/hardware.h>
-+#include <asm/global_data.h>
+diff --git a/arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi b/arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi
+index f986e1941e..ef4f81500b 100644
+--- a/arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi
++++ b/arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi
+@@ -15,37 +15,6 @@
+ 	};
+ };
+ 
+-&cru {
+-	assigned-clocks =
+-			<&pmucru CLK_RTC_32K>,
+-			<&pmucru PLL_PPLL>,
+-			<&pmucru PCLK_PMU>, <&cru PLL_CPLL>,
+-			<&cru PLL_GPLL>,
+-			<&cru ACLK_BUS>, <&cru PCLK_BUS>,
+-			<&cru ACLK_TOP_HIGH>, <&cru ACLK_TOP_LOW>,
+-			<&cru HCLK_TOP>, <&cru PCLK_TOP>,
+-			<&cru ACLK_PERIMID>, <&cru HCLK_PERIMID>,
+-			<&cru CPLL_500M>, <&cru CPLL_333M>,
+-			<&cru CPLL_250M>, <&cru CPLL_125M>,
+-			<&cru CPLL_100M>, <&cru CPLL_62P5M>,
+-			<&cru CPLL_50M>, <&cru CPLL_25M>;
+-		assigned-clock-rates =
+-			<32768>,
+-			<200000000>,
+-			<100000000>, <1000000000>,
+-			<1188000000>,
+-			<150000000>, <100000000>,
+-			<500000000>, <400000000>,
+-			<150000000>, <100000000>,
+-			<300000000>, <150000000>,
+-			<500000000>, <333333333>,
+-			<250000000>, <125000000>,
+-			<100000000>, <62500000>,
+-			<50000000>, <25000000>;
+-		assigned-clock-parents =
+-			<&pmucru CLK_RTC32K_FRAC>;
+-};
+-
+ &dsi_dphy0 {
+ 	status = "okay";
+ };
+diff --git a/arch/arm/dts/rk3566-anbernic-rgxx3.dts b/arch/arm/dts/rk3566-anbernic-rgxx3.dts
+index 404dddfafb..9e0aa9e63b 100644
+--- a/arch/arm/dts/rk3566-anbernic-rgxx3.dts
++++ b/arch/arm/dts/rk3566-anbernic-rgxx3.dts
+@@ -16,3 +16,10 @@
+ 		     "anbernic,rg353v", "anbernic,rg353vs",
+ 		     "anbernic,rg503", "rockchip,rk3566";
+ };
 +
-+DECLARE_GLOBAL_DATA_PTR;
- 
- /* DWCMSHC specific Mode Select value */
- #define DWCMSHC_CTRL_HS400		0x7
-@@ -591,12 +594,21 @@ static int rockchip_sdhci_probe(struct udevice *dev)
- 		return ret;
- 
- 	/*
--	 * Disable use of DMA and force use of PIO mode in SPL to fix an issue
--	 * where loading part of TF-A into SRAM using DMA silently fails.
-+	 * Use a bounce buffer or PIO mode in SPL to fix an issue where loading
-+	 * part of TF-A directly into SRAM using DMA silently fails.
- 	 */
- 	if (IS_ENABLED(CONFIG_SPL_BUILD) &&
--	    dev_read_bool(dev, "u-boot,spl-fifo-mode"))
--		host->flags &= ~USE_DMA;
-+	    dev_read_bool(dev, "u-boot,spl-fifo-mode")) {
-+		if (CONFIG_IS_ENABLED(SYS_MALLOC_F) &&
-+		    gd->malloc_limit > SDHCI_DEFAULT_BOUNDARY_SIZE) {
-+			cfg->b_max = SDHCI_DEFAULT_BOUNDARY_SIZE /
-+				     MMC_MAX_BLOCK_LEN;
-+			host->force_align_buffer = true;
-+			host->quirks |= SDHCI_QUIRK_32BIT_DMA_ADDR;
-+		} else {
-+			host->flags &= ~USE_DMA;
-+		}
-+	}
- 
- 	/*
- 	 * Reading more than 4 blocks with a single CMD18 command in PIO mode
-diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
-index 0178ed8a11e1..cc855dc7ba3d 100644
---- a/drivers/mmc/sdhci.c
-+++ b/drivers/mmc/sdhci.c
-@@ -736,7 +736,7 @@ static int sdhci_init(struct mmc *mmc)
- 	host->force_align_buffer = true;
- #else
- 	if (host->quirks & SDHCI_QUIRK_32BIT_DMA_ADDR) {
--		host->align_buffer = memalign(8, 512 * 1024);
-+		host->align_buffer = memalign(8, SDHCI_DEFAULT_BOUNDARY_SIZE);
- 		if (!host->align_buffer) {
- 			printf("%s: Aligned buffer alloc failed!!!\n",
- 			       __func__);
++&cru {
++	assigned-clocks = <&pmucru CLK_RTC_32K>, <&cru PLL_GPLL>,
++			  <&pmucru PLL_PPLL>, <&cru PLL_VPLL>;
++	assigned-clock-rates = <32768>, <1200000000>,
++			       <200000000>, <241500000>;
++};
 -- 
-2.43.0
+2.34.1
 
