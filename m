@@ -4,74 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 435A9C4828D
-	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 12:18:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68F03C48295
+	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 12:35:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9564987811;
-	Mon,  5 Feb 2024 13:18:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 985448785A;
+	Mon,  5 Feb 2024 13:35:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="BnEbuHmr";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="or7TZvlj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E9FD87811; Mon,  5 Feb 2024 13:18:00 +0100 (CET)
-Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::221])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C678F87887; Mon,  5 Feb 2024 13:35:11 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C65F78785A
- for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 13:17:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EB60877CB
+ for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 13:35:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 52612240002;
- Mon,  5 Feb 2024 12:17:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1707135477;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=y+evZiLiKD7b5CexFbHLoJ/nJKE/+uE1gXiR+q3+Wjw=;
- b=BnEbuHmrgDWYV4Zwx4pHhHb3Ef7KcMKvOrrZ3+iq0AlT6UzxQe6TSa5R+imYuJy+U2bXIU
- a+QR5CQQc6wC3mNcshL90wOLjj9XtlN/9ES/waKZElJwZmkMK3wbSyFpi0iF3RFaYeI0c7
- 3qHtNNtiOVMvIfRHQFVm8m+A378FLmy2D7C/hVAIujzXfWkJaojaMCzCMATuwLF4bGvxHF
- 3tcSOVVUN47ZwjomCKVhHj4/GtFvlbgMzOh7AT+jic5X2ZO7o52QWvFjOlSmH5PXhhjp/Q
- Urp2dzCUeAdb4lpNuvf5W6ncJCEARN691Mmkn8ydX0tWH4RVvG1sQ4szSJBLtQ==
-Date: Mon, 5 Feb 2024 13:17:55 +0100
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Rob Herring <robh@kernel.org>, devicetree@vger.kernel.org,
- linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>, Michael Walle
- <mwalle@kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>, Conor
- Dooley <conor+dt@kernel.org>, Krzysztof Kozlowski
- <krzysztof.kozlowski+dt@linaro.org>, Pratyush Yadav <ptyadav@amazon.de>,
- =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, Richard Weinberger
- <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v6 1/3] dt-bindings: mtd: partitions: Add binman compatible
-Message-ID: <20240205131755.3462084f@xps-13>
-In-Reply-To: <CAFLszTi+8ygXOidnhxj7sdJwc6X5i+++QvnUyfe-kde5eSts_w@mail.gmail.com>
-References: <20231116172859.393744-1-sjg@chromium.org>
- <20231208150042.GA1278773-robh@kernel.org>
- <CAPnjgZ2i4gvgiUeHPOfHuOdBooV4e=QQEq6iMo0JbDwOS6dCwA@mail.gmail.com>
- <CAL_Jsq+xMZ8yz4H9D59uCSyX4h5W+4ruGF++=wVA=msXz+Y01A@mail.gmail.com>
- <CAPnjgZ1uW8T6woXSqFUNm301=W3zBYOrADREkrz=DuwSW87qZg@mail.gmail.com>
- <20231214172702.GA617226-robh@kernel.org>
- <CAPnjgZ2oJSGPO91Y_aLbe+v250WFrND4n3T0mOvhERYidVu=eQ@mail.gmail.com>
- <CAFLszTizRRVbRO6_ygE2X-Lp5dENWSc4uMGL5GPJAFGAbRdCyQ@mail.gmail.com>
- <CAL_Jsq+j7_KZtQ2ENq9+vsw0LOZF=spu293_G=AxOmBM+m_f-g@mail.gmail.com>
- <CAFLszTimaFw9sf=JKvQXG4fS6V_2T=2n+pfvYLCiuG1o+7cHPA@mail.gmail.com>
- <20240205085056.44278f2c@xps-13>
- <CAFLszTi+8ygXOidnhxj7sdJwc6X5i+++QvnUyfe-kde5eSts_w@mail.gmail.com>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=4887=JP=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1707136501;
+ bh=hHcpQbJrNukx/r+5VZSDlgLGSOIMErL9GdIzGfcYwXk=;
+ b=or7TZvljM8qYZZfTOlw2UX1jnRghJCd2NEP/tk4e10xbzpj1ngSlqFiZZA9oQ1aYgkNq08P5v
+ s+okb/5UfhwM+3DL+1mx0gYKR89IoZexllY0IPB7K0gLKU8mIGguSywozPaLdPukjkIxQiJAXBe
+ PEYXRX23Vb8gNjhFRKYL8k+/7hGhE1dIHH6rPNvUErp8YxRVK97j3di2YMgupB382cduX2+ATmr
+ ISDs8B8hB+oVpG6cCrlk+O4k0e6bvqQXuflQNNG7WD2YsHVzQyDWFJdhQ+uTXkqSZqTe7K6DfQg
+ EYF/er5xiuHOm3ob5j8+ameMkY0kgsYZx8xGy756XC9A==
+Message-ID: <5041c1cc-1183-4fc6-aab8-8a7e12b7daac@kwiboo.se>
+Date: Mon, 5 Feb 2024 13:34:57 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC] rockchip: Reset to bootrom download mode on hang
+To: Quentin Schulz <quentin.schulz@theobroma-systems.com>, Kever Yang
+ <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, Simon Glass
+ <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: u-boot@lists.denx.de
+References: <20240202001221.531207-1-jonas@kwiboo.se>
+ <85ab4e51-2d93-4672-881c-8df353232d1f@theobroma-systems.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <85ab4e51-2d93-4672-881c-8df353232d1f@theobroma-systems.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: miquel.raynal@bootlin.com
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 65c0d5f597f98d916623bde1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,104 +74,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Quentin,
 
-> > > > > > > > > > > > +description: |
-> > > > > > > > > > > > +  The binman node provides a layout for firmware, =
-used when packaging firmware
-> > > > > > > > > > > > +  from multiple projects. It is based on fixed-par=
-titions, with some
-> > > > > > > > > > > > +  extensions, but uses 'compatible' to indicate th=
-e contents of the node, to
-> > > > > > > > > > > > +  avoid perturbing or confusing existing installat=
-ions which use 'label' for a
-> > > > > > > > > > > > +  particular purpose.
-> > > > > > > > > > > > +
-> > > > > > > > > > > > +  Binman supports properties used as inputs to the=
- firmware-packaging process,
-> > > > > > > > > > > > +  such as those which control alignment of partiti=
-ons. This binding addresses
-> > > > > > > > > > > > +  these 'input' properties. For example, it is com=
-mon for the 'reg' property
-> > > > > > > > > > > > +  (an 'output' property) to be set by Binman, base=
-d on the alignment requested
-> > > > > > > > > > > > +  in the input.
-> > > > > > > > > > > > +
-> > > > > > > > > > > > +  Once processing is complete, input properties ha=
-ve mostly served their
-> > > > > > > > > > > > +  purpose, at least until the firmware is repacked=
- later, e.g. due to a
-> > > > > > > > > > > > +  firmware update. The 'fixed-partitions' binding =
-should provide enough
-> > > > > > > > > > > > +  information to read the firmware at runtime, inc=
-luding decompression if
-> > > > > > > > > > > > +  needed. =20
-> > > > > > > > > > >
-> > > > > > > > > > > How is this going to work exactly? binman reads these=
- nodes and then
-> > > > > > > > > > > writes out 'fixed-partitions' nodes. But then you've =
-lost the binman
-> > > > > > > > > > > specifc parts needed for repacking. =20
-> > > > > > > > > >
-> > > > > > > > > > No, they are the same node. I do want the extra informa=
-tion to stick
-> > > > > > > > > > around. So long as it is compatible with fixed-partitio=
-n as well, this
-> > > > > > > > > > should work OK. =20
-> > > > > > > > >
-> > > > > > > > > How can it be both? The partitions node compatible can be=
- either
-> > > > > > > > > 'fixed-partitions' or 'binman'. =20
-> > > > > > > >
-> > > > > > > > Can we not allow it to be both? I have tried to adjust thin=
-gs in
-> > > > > > > > response to feedback but perhaps the feedback was leading m=
-e down the
-> > > > > > > > wrong path? =20
-> > > > > > >
-> > > > > > > Sure, but then the schema has to and that means extending
-> > > > > > > fixed-partitions. =20
-> > > > > >
-> > > > > > Can we cross that bridge later? There might be resistance to it=
-. I'm
-> > > > > > not sure. For now, perhaps just a binman compatible works well =
-enough
-> > > > > > to make progress. =20
-> > > > >
-> > > > > Is there any way to make progress on this? I would like to have
-> > > > > software which doesn't understand the binman compatible to at lea=
-st be
-> > > > > able to understand the fixed-partition compatible. Is that accept=
-able? =20
-> > > >
-> > > > There's only 2 ways that it can work. Either binman writes out
-> > > > fixed-partition nodes dropping/replacing anything only defined for
-> > > > binman or fixed-partition is extended to include what binman needs.=
- =20
-> > >
-> > > OK, then I suppose the best way is to add a new binman compatible, as
-> > > is done with this v6 series. People then need to choose it instead of
-> > > fixed-partition. =20
-> >
-> > I'm sorry this is not at all what Rob suggested, or did I totally
-> > misunderstand his answer?
-> >
-> > In both cases the solution is to generate a "fixed-partition" node. Now
-> > up to you to decide whether binman should adapt the output to the
-> > current schema, or if the current schema should be extended to
-> > understand all binman's output.
-> >
-> > At least that is my understanding and also what I kind of agree with. =
-=20
->=20
-> I do want to binman schema to include all the features of Binman.
->=20
-> So are you saying that there should not be a 'binman'  schema, but I
-> should just add all the binman properties to the fixed-partition
-> schema?
+On 2024-02-05 11:49, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 2/2/24 01:12, Jonas Karlman wrote:
+>> Add support to reset to bootrom download mode on hang in U-Boot SPL and
+>> proper. ROCKCHIP_HANG_TO_BROM can be used to enable this feature.
+>>
+>> Example when SPL cannot load FIT:
+>>
+>>    U-Boot SPL 2024.04-rc1 (Feb 01 2024 - 23:01:12 +0000)
+>>    Trying to boot from MMC1
+>>    mmc_load_image_raw_sector: mmc block read error
+>>    Trying to boot from MMC2
+>>    Card did not respond to voltage select! : -110
+>>    spl: mmc init failed with error: -95
+>>    Trying to boot from MMC1
+>>    mmc_load_image_raw_sector: mmc block read error
+>>    SPL: failed to boot from all boot devices
+>>    ### ERROR ### Please RESET the board ###
+>>    entering download mode ...
+>>    resetting ...
+>>
+>> Procedure to start bootrom download mode:
+>> - U-Boot SPL or proper write 0xEF08A53C to BOOT_MODE_REG and then reset
+>> - Bootrom loads and run boot code (TPL) from e.g. SPI > eMMC > SD-card
+>> - TPL check for 0xEF08A53C in BOOT_MODE_REG very early, i.e. Rockchip
+>>    TPL blobs check for this value directly at start
+>> - TPL return to bootrom with a return value != 0
+>> - Bootrom enter download mode
+>>
+>> This also fixes an issue where the BOOT_MODE_REG is reset to 0 when
+>> board is reset on RK35xx after TF-A has been loaded. To fix this the
+>> SOC_CON1 reg value is reset prior to issuing a global reset.
+>>
+>> The RK356x TF-A blobs will clear SOC_CON1 as part of a PSCI reset,
+>> however the RK3588 TF-A blobs does not seem to clear SOC_CON1.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> 
+> I'm wondering if there isn't a simpler way to do this?
+> 
+> board_boot_order() could parse u-boot,spl-boot-order for e.g. "bootrom", 
+> the same way it does for "same-as-spl" for example.
+> 
+> If it is set, then add BOOT_DEVICE_BOOTROM to spl_boot_list.
+> 
+> Then this would call spl_return_to_bootrom() from 
+> common/spl/spl_bootrom.c which in turns would call 
+> board_return_to_bootrom() and back_to_bootrom().
+> 
+> What do you think?
 
-This is my current understanding, yes. But acknowledgment from Rob is
-also welcome.
+Something like that is what I did in my initial implementation :-)
 
-Thanks,
-Miqu=C3=A8l
+I appended a BOOT_DEVICE_BOOTROM at the end of board_boot_order() and
+implemented necessary parts in spl_return_to_bootrom(), and that worked
+great for SPL.
+
+However, to catch a hang() in U-Boot proper, e.g. a failed initcall, the
+only existing integration callback for hang() is to override
+show_boot_progress().
+
+Because the use of show_boot_progress() worked for both SPL and U-Boot
+proper (probably also TPL) it seemed better to only have one integration
+part for all phases.
+
+I am still not sure exactly when we would want to fall back into bootrom
+download mode. Always at a hang() or at controlled parts e.g. when no
+FIT can be loaded.
+
+I am open for any suggestions.
+
+Regards,
+Jonas
+
+> 
+> Cheers,
+> Quentin
+
