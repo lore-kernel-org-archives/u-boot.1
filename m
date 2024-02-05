@@ -4,66 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33BABC4828D
-	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 06:42:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DB1BC48291
+	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 06:42:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDFCE8777F;
-	Mon,  5 Feb 2024 07:42:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 857088775F;
+	Mon,  5 Feb 2024 07:42:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="SV7gTEr/";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="E3rVyx05";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F743875E9; Mon,  5 Feb 2024 07:42:08 +0100 (CET)
-Received: from mail-m92239.xmail.ntesmail.com (mail-m92239.xmail.ntesmail.com
- [103.126.92.239])
+ id D074B8782E; Mon,  5 Feb 2024 07:42:10 +0100 (CET)
+Received: from ec2-44-216-146-128.compute-1.amazonaws.com
+ (ec2-44-216-146-128.compute-1.amazonaws.com [44.216.146.128])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C4EE875E9
- for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 07:42:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 691B88775F
+ for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 07:42:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=SV7gTEr/9yZIPZNlzFgfynGSTP+ihbimFi9AgZZAeMtaHR0I5MvW3R66MLfj52V4Q4ijWcuEtyXwI7mf8U+JPl+TLAPuk4z4y7HbAEQTKW9DyK1n7pk+gfVEK4GCfsRsp+sPB+uUdRHrg074NkGntjGYezaxQmIVysmVdFFRwYs=;
+ b=E3rVyx05KhZ150YQiq6CX5BnY0tbEe5/oIH3fZzaTxWQ5t1qZN8S1xBdiTxs+eN92uQtatCnoQcYnRVUW5cuZW9mRKmSpCRuMe37ShUI/pFaxs7I9gNYec3jXywbvlHuMX7Yv/HG7nRFaVYE1kTYa2O4v+TOp5nlHjkXLeWwSIk=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=bEY/2FOlZTAM3SwOhsGAzilYqy2/ifM6SxyriuSXKVc=;
+ bh=nOBAvad4Q4D9H08/OjaARAJ/JshlqipZfhhlMdhQ9aI=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 4B9719001A6;
- Mon,  5 Feb 2024 14:41:46 +0800 (CST)
-Message-ID: <46203e74-05f1-40b6-85a7-ff27136df36a@rock-chips.com>
-Date: Mon, 5 Feb 2024 14:41:45 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 0970890017D;
+ Mon,  5 Feb 2024 14:41:56 +0800 (CST)
+Message-ID: <664cc78c-7f6d-4485-9f4e-a322408c977a@rock-chips.com>
+Date: Mon, 5 Feb 2024 14:41:56 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] rockchip: rk35xx: Remove use of eMMC DDR52 mode
+Subject: Re: [PATCH v2 2/3] rockchip: rk35xx: Enable eMMC HS200 mode by default
 Content-Language: en-US
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
- Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Andy Yan <andyshrk@163.com>, Tianling Shen <cnsztl@gmail.com>,
- Akash Gajjar <gajjar04akash@gmail.com>,
- Eugen Hristev <eugen.hristev@collabora.com>, Joshua Riek <jjriek@verizon.net>
-Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Tianling Shen <cnsztl@gmail.com>
+Cc: Eugen Hristev <eugen.hristev@collabora.com>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
  Weizhao Ouyang <o451686892@gmail.com>, u-boot@lists.denx.de
 References: <20240204205312.2342868-1-jonas@kwiboo.se>
- <20240204205312.2342868-2-jonas@kwiboo.se>
+ <20240204205312.2342868-3-jonas@kwiboo.se>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240204205312.2342868-2-jonas@kwiboo.se>
+In-Reply-To: <20240204205312.2342868-3-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGRoYGFZMHRkaTx9PTRkeSxpVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkpKSVZKGE5CQk0fGhgaGUxVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8d7800602803a9kunm4b9719001a6
+X-HM-Tid: 0a8d780089b903a9kunm0970890017d
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pxw6ASo6KDMcKTwZDDoYFEo2
- FkIKC05VSlVKTEtMSkpOSEtMT0xLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFDSExCNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Kww6Gjo4GjMOFzwsKjlIFE8f
+ HihPCyJVSlVKTEtMSkpOSEpDS0tOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOT0pPNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,21 +79,23 @@ X-Virus-Status: Clean
 
 
 On 2024/2/5 04:53, Jonas Karlman wrote:
-> Testing has shown that writing to eMMC using DDR52 mode does not seem to
-> work on RK356x and RK3588 boards.
+> Testing has shown that writing to eMMC using a slower mode then HS200
+> typically generate an ERROR on first attempt on RK3588.
 >
-> A simple test of writing a single block to e.g. sector 0x4000 fails:
->
->    # Rescan using DDR52 mode
->    => mmc rescan 4
+>    # Rescan using MMC legacy mode
+>    => mmc rescan 0
 >
 >    # Write a single block to sector 0x4000 fails with ERROR
 >    => mmc write 20000000 4000 1
 >
+>    # Write a single block to sector 0x4000 now works
+>    => mmc write 20000000 4000 1
+>
 > With the MMC_SPEED_MODE_SET Kconfig option enabled.
 >
-> Fix this by removing the mmc-ddr-1_8v prop from sdhci nodes in affected
-> board u-boot.dtsi files.
+> Writing to eMMC using HS200 mode work more reliably than slower modes on
+> RK35xx boards. Enable MMC_HS200_SUPPORT Kconfig option by default to
+> prefer use of HS200 mode on RK356x and RK3588.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -105,162 +104,78 @@ Thanks,
 - Kever
 > ---
 > Changes in v2:
+> - Imply MMC_HS200_SUPPORT and SPL_MMC_HS200_SUPPORT in arch Kconfig
+>    instead of adding to each boards defconfig
+> - R-b tags not collected because of above change
+> - Combine changes for rk356x and rk3588 in one patch
 > - Update commit message
 >
-> Link to v1: https://patchwork.ozlabs.org/patch/1891695/
+> Link to v1: https://patchwork.ozlabs.org/patch/1891693/
 > ---
->   arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi   | 1 -
->   arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi   | 1 -
->   arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi | 1 -
->   arch/arm/dts/rk3566-soquartz-u-boot.dtsi     | 1 -
->   arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi   | 1 -
->   arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi   | 1 -
->   arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi    | 1 -
->   arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi    | 1 -
->   arch/arm/dts/rk3568-rock-3a-u-boot.dtsi      | 1 -
->   arch/arm/dts/rk3588-rock-5b-u-boot.dtsi      | 1 -
->   arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi   | 1 -
->   arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi     | 1 -
->   12 files changed, 12 deletions(-)
+>   arch/arm/mach-rockchip/Kconfig      | 4 ++++
+>   configs/nanopi-r5c-rk3568_defconfig | 2 --
+>   configs/nanopi-r5s-rk3568_defconfig | 2 --
+>   configs/radxa-e25-rk3568_defconfig  | 2 --
+>   4 files changed, 4 insertions(+), 6 deletions(-)
 >
-> diff --git a/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi b/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi
-> index 11976fd3a6e0..930d660868bb 100644
-> --- a/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi
-> @@ -8,7 +8,6 @@
->   
->   &sdhci {
->   	cap-mmc-highspeed;
-> -	mmc-ddr-1_8v;
->   	pinctrl-names = "default";
->   	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
->   };
-> diff --git a/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi b/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi
-> index 8de9d1535efb..c235b4357f7d 100644
-> --- a/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi
-> @@ -4,7 +4,6 @@
->   
->   &sdhci {
->   	cap-mmc-highspeed;
-> -	mmc-ddr-1_8v;
->   	pinctrl-names = "default";
->   	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
->   };
-> diff --git a/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi b/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
-> index 158f652cb3b1..e0e501deccfe 100644
-> --- a/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
-> @@ -7,5 +7,4 @@
->   
->   &sdhci {
->   	cap-mmc-highspeed;
-> -	mmc-ddr-1_8v;
->   };
-> diff --git a/arch/arm/dts/rk3566-soquartz-u-boot.dtsi b/arch/arm/dts/rk3566-soquartz-u-boot.dtsi
-> index f65f4067f3e9..5e46a2422d60 100644
-> --- a/arch/arm/dts/rk3566-soquartz-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3566-soquartz-u-boot.dtsi
-> @@ -4,7 +4,6 @@
->   
->   &sdhci {
->   	cap-mmc-highspeed;
-> -	mmc-ddr-1_8v;
->   	pinctrl-names = "default";
->   	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
->   };
-> diff --git a/arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi b/arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi
-> index a44ac35bdacd..1597473017ed 100644
-> --- a/arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi
-> @@ -8,7 +8,6 @@
->   
->   &sdhci {
->   	cap-mmc-highspeed;
-> -	mmc-ddr-1_8v;
->   	mmc-hs400-1_8v;
->   	mmc-hs400-enhanced-strobe;
->   	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_datastrobe>;
-> diff --git a/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi b/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi
-> index 62f572c4cf9f..64c43374c042 100644
-> --- a/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi
-> @@ -14,7 +14,6 @@
->   
->   &sdhci {
->   	cap-mmc-highspeed;
-> -	mmc-ddr-1_8v;
->   	mmc-hs200-1_8v;
->   	mmc-hs400-1_8v;
->   	mmc-hs400-enhanced-strobe;
-> diff --git a/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi b/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi
-> index ecba91aa30f5..1fc71faa9e07 100644
-> --- a/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi
-> @@ -8,7 +8,6 @@
->   
->   &sdhci {
->   	cap-mmc-highspeed;
-> -	mmc-ddr-1_8v;
->   	mmc-hs200-1_8v;
->   	mmc-hs400-1_8v;
->   	mmc-hs400-enhanced-strobe;
-> diff --git a/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi b/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
-> index caf524443079..74755a44eaee 100644
-> --- a/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
-> @@ -16,7 +16,6 @@
->   
->   &sdhci {
->   	cap-mmc-highspeed;
-> -	mmc-ddr-1_8v;
->   	mmc-hs200-1_8v;
->   	mmc-hs400-1_8v;
->   	mmc-hs400-enhanced-strobe;
-> diff --git a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> index 46ebb77283f1..5b823fcca5fb 100644
-> --- a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> @@ -20,7 +20,6 @@
->   
->   &sdhci {
->   	cap-mmc-highspeed;
-> -	mmc-ddr-1_8v;
->   	mmc-hs200-1_8v;
->   	mmc-hs400-1_8v;
->   	mmc-hs400-enhanced-strobe;
-> diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> index e99e60185ebe..9ee9dd051e32 100644
-> --- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> @@ -31,7 +31,6 @@
->   
->   &sdhci {
->   	cap-mmc-highspeed;
-> -	mmc-ddr-1_8v;
->   	mmc-hs200-1_8v;
->   };
->   
-> diff --git a/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi b/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
-> index 471508a9ed74..ca2a684f3541 100644
-> --- a/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
-> @@ -8,7 +8,6 @@
->   
->   &sdhci {
->   	cap-mmc-highspeed;
-> -	mmc-ddr-1_8v;
->   	mmc-hs200-1_8v;
->   };
->   
-> diff --git a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-> index 9a6a353088df..efba0c359ba5 100644
-> --- a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-> @@ -7,6 +7,5 @@
->   
->   &sdhci {
->   	cap-mmc-highspeed;
-> -	mmc-ddr-1_8v;
->   	mmc-hs200-1_8v;
->   };
+> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+> index 6ff0aa6911e2..946ef5d7023d 100644
+> --- a/arch/arm/mach-rockchip/Kconfig
+> +++ b/arch/arm/mach-rockchip/Kconfig
+> @@ -292,6 +292,8 @@ config ROCKCHIP_RK3568
+>   	imply OF_LIBFDT_OVERLAY
+>   	imply ROCKCHIP_OTP
+>   	imply MISC_INIT_R
+> +	imply MMC_HS200_SUPPORT if MMC_SDHCI_ROCKCHIP
+> +	imply SPL_MMC_HS200_SUPPORT if SPL_MMC && MMC_HS200_SUPPORT
+>   	help
+>   	  The Rockchip RK3568 is a ARM-based SoC with quad-core Cortex-A55,
+>   	  including NEON and GPU, 512K L3 cache, Mali-G52 based graphics,
+> @@ -317,6 +319,8 @@ config ROCKCHIP_RK3588
+>   	imply OF_LIBFDT_OVERLAY
+>   	imply ROCKCHIP_OTP
+>   	imply MISC_INIT_R
+> +	imply MMC_HS200_SUPPORT if MMC_SDHCI_ROCKCHIP
+> +	imply SPL_MMC_HS200_SUPPORT if SPL_MMC && MMC_HS200_SUPPORT
+>   	imply CLK_SCMI
+>   	imply SCMI_FIRMWARE
+>   	help
+> diff --git a/configs/nanopi-r5c-rk3568_defconfig b/configs/nanopi-r5c-rk3568_defconfig
+> index 833cff0e457d..f5a472d03d78 100644
+> --- a/configs/nanopi-r5c-rk3568_defconfig
+> +++ b/configs/nanopi-r5c-rk3568_defconfig
+> @@ -58,8 +58,6 @@ CONFIG_ROCKCHIP_GPIO=y
+>   CONFIG_SYS_I2C_ROCKCHIP=y
+>   CONFIG_MISC=y
+>   CONFIG_SUPPORT_EMMC_RPMB=y
+> -CONFIG_MMC_HS200_SUPPORT=y
+> -CONFIG_SPL_MMC_HS200_SUPPORT=y
+>   CONFIG_MMC_DW=y
+>   CONFIG_MMC_DW_ROCKCHIP=y
+>   CONFIG_MMC_SDHCI=y
+> diff --git a/configs/nanopi-r5s-rk3568_defconfig b/configs/nanopi-r5s-rk3568_defconfig
+> index 2736d382a352..99692d341f44 100644
+> --- a/configs/nanopi-r5s-rk3568_defconfig
+> +++ b/configs/nanopi-r5s-rk3568_defconfig
+> @@ -58,8 +58,6 @@ CONFIG_ROCKCHIP_GPIO=y
+>   CONFIG_SYS_I2C_ROCKCHIP=y
+>   CONFIG_MISC=y
+>   CONFIG_SUPPORT_EMMC_RPMB=y
+> -CONFIG_MMC_HS200_SUPPORT=y
+> -CONFIG_SPL_MMC_HS200_SUPPORT=y
+>   CONFIG_MMC_DW=y
+>   CONFIG_MMC_DW_ROCKCHIP=y
+>   CONFIG_MMC_SDHCI=y
+> diff --git a/configs/radxa-e25-rk3568_defconfig b/configs/radxa-e25-rk3568_defconfig
+> index 5a613abe0d2d..fedb137877ab 100644
+> --- a/configs/radxa-e25-rk3568_defconfig
+> +++ b/configs/radxa-e25-rk3568_defconfig
+> @@ -60,8 +60,6 @@ CONFIG_ROCKCHIP_GPIO=y
+>   CONFIG_SYS_I2C_ROCKCHIP=y
+>   CONFIG_MISC=y
+>   CONFIG_SUPPORT_EMMC_RPMB=y
+> -CONFIG_MMC_HS200_SUPPORT=y
+> -CONFIG_SPL_MMC_HS200_SUPPORT=y
+>   CONFIG_MMC_DW=y
+>   CONFIG_MMC_DW_ROCKCHIP=y
+>   CONFIG_MMC_SDHCI=y
