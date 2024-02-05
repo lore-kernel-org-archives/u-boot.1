@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DB1BC48291
-	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 06:42:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3161C48291
+	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 06:42:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 857088775F;
-	Mon,  5 Feb 2024 07:42:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 48ACD8786C;
+	Mon,  5 Feb 2024 07:42:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="E3rVyx05";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="eAC3plvu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D074B8782E; Mon,  5 Feb 2024 07:42:10 +0100 (CET)
-Received: from ec2-44-216-146-128.compute-1.amazonaws.com
- (ec2-44-216-146-128.compute-1.amazonaws.com [44.216.146.128])
+ id B82788792D; Mon,  5 Feb 2024 07:42:30 +0100 (CET)
+Received: from mail-m3288.qiye.163.com (mail-m3288.qiye.163.com
+ [220.197.32.88])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 691B88775F
- for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 07:42:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4005B879FB
+ for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 07:42:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=E3rVyx05KhZ150YQiq6CX5BnY0tbEe5/oIH3fZzaTxWQ5t1qZN8S1xBdiTxs+eN92uQtatCnoQcYnRVUW5cuZW9mRKmSpCRuMe37ShUI/pFaxs7I9gNYec3jXywbvlHuMX7Yv/HG7nRFaVYE1kTYa2O4v+TOp5nlHjkXLeWwSIk=;
+ b=eAC3plvuGITb4s+aMrGaVA6+J4L9vnU4aEM7DsL0RgSrSa3pSEd2Df1FUc5mpD1oDk91yeuhb4ytr2Xt15CC1uzcAALlCm90yaZcfDWHq8IfiuHN812W+Y44Y695lrFQdD8ftg/Ano139I3aSPH/5musvzcXOL8ZAT5y4ocChmM=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=nOBAvad4Q4D9H08/OjaARAJ/JshlqipZfhhlMdhQ9aI=;
+ bh=hFCgcf8ULICVLTbvq/KA/aN1Ja4SGr0QOhnmUxeW2MI=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 0970890017D;
- Mon,  5 Feb 2024 14:41:56 +0800 (CST)
-Message-ID: <664cc78c-7f6d-4485-9f4e-a322408c977a@rock-chips.com>
-Date: Mon, 5 Feb 2024 14:41:56 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 25EA790015C;
+ Mon,  5 Feb 2024 14:42:19 +0800 (CST)
+Message-ID: <494a43cb-aae4-4156-ad44-e3247ea04cca@rock-chips.com>
+Date: Mon, 5 Feb 2024 14:42:18 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] rockchip: rk35xx: Enable eMMC HS200 mode by default
+Subject: Re: [PATCH v2 3/3] mmc: rockchip_sdhci: Fix HS400 mode write on RK3568
 Content-Language: en-US
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Tianling Shen <cnsztl@gmail.com>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
 Cc: Eugen Hristev <eugen.hristev@collabora.com>,
  Quentin Schulz <quentin.schulz@theobroma-systems.com>,
  Weizhao Ouyang <o451686892@gmail.com>, u-boot@lists.denx.de
 References: <20240204205312.2342868-1-jonas@kwiboo.se>
- <20240204205312.2342868-3-jonas@kwiboo.se>
+ <20240204205312.2342868-4-jonas@kwiboo.se>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240204205312.2342868-3-jonas@kwiboo.se>
+In-Reply-To: <20240204205312.2342868-4-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkpKSVZKGE5CQk0fGhgaGUxVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGR4eHlZMTh4ZHUMeTh1CGU5VEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8d780089b903a9kunm0970890017d
+X-HM-Tid: 0a8d7800df9f03a9kunm25ea790015c
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Kww6Gjo4GjMOFzwsKjlIFE8f
- HihPCyJVSlVKTEtMSkpOSEpDS0tOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOT0pPNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OlE6IRw4SjMJMTw1DD9WCzUS
+ My8KCxpVSlVKTEtMSkpOSEhCQkxMVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFIQ01LNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,23 +79,12 @@ X-Virus-Status: Clean
 
 
 On 2024/2/5 04:53, Jonas Karlman wrote:
-> Testing has shown that writing to eMMC using a slower mode then HS200
-> typically generate an ERROR on first attempt on RK3588.
+> Testing has shown that writing to eMMC using HS400 modes on RK3568
+> result in an ERROR.
 >
->    # Rescan using MMC legacy mode
->    => mmc rescan 0
+> Change the tap number for transmit clock to fix this.
 >
->    # Write a single block to sector 0x4000 fails with ERROR
->    => mmc write 20000000 4000 1
->
->    # Write a single block to sector 0x4000 now works
->    => mmc write 20000000 4000 1
->
-> With the MMC_SPEED_MODE_SET Kconfig option enabled.
->
-> Writing to eMMC using HS200 mode work more reliably than slower modes on
-> RK35xx boards. Enable MMC_HS200_SUPPORT Kconfig option by default to
-> prefer use of HS200 mode on RK356x and RK3588.
+> Also stop DLL when config_dll() is called to disable DLL.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -104,78 +93,50 @@ Thanks,
 - Kever
 > ---
 > Changes in v2:
-> - Imply MMC_HS200_SUPPORT and SPL_MMC_HS200_SUPPORT in arch Kconfig
->    instead of adding to each boards defconfig
-> - R-b tags not collected because of above change
-> - Combine changes for rk356x and rk3588 in one patch
-> - Update commit message
->
-> Link to v1: https://patchwork.ozlabs.org/patch/1891693/
+> - New patch to fix HS400 mode write on RK3568
 > ---
->   arch/arm/mach-rockchip/Kconfig      | 4 ++++
->   configs/nanopi-r5c-rk3568_defconfig | 2 --
->   configs/nanopi-r5s-rk3568_defconfig | 2 --
->   configs/radxa-e25-rk3568_defconfig  | 2 --
->   4 files changed, 4 insertions(+), 6 deletions(-)
+>   drivers/mmc/rockchip_sdhci.c | 9 +++++----
+>   1 file changed, 5 insertions(+), 4 deletions(-)
 >
-> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-> index 6ff0aa6911e2..946ef5d7023d 100644
-> --- a/arch/arm/mach-rockchip/Kconfig
-> +++ b/arch/arm/mach-rockchip/Kconfig
-> @@ -292,6 +292,8 @@ config ROCKCHIP_RK3568
->   	imply OF_LIBFDT_OVERLAY
->   	imply ROCKCHIP_OTP
->   	imply MISC_INIT_R
-> +	imply MMC_HS200_SUPPORT if MMC_SDHCI_ROCKCHIP
-> +	imply SPL_MMC_HS200_SUPPORT if SPL_MMC && MMC_HS200_SUPPORT
->   	help
->   	  The Rockchip RK3568 is a ARM-based SoC with quad-core Cortex-A55,
->   	  including NEON and GPU, 512K L3 cache, Mali-G52 based graphics,
-> @@ -317,6 +319,8 @@ config ROCKCHIP_RK3588
->   	imply OF_LIBFDT_OVERLAY
->   	imply ROCKCHIP_OTP
->   	imply MISC_INIT_R
-> +	imply MMC_HS200_SUPPORT if MMC_SDHCI_ROCKCHIP
-> +	imply SPL_MMC_HS200_SUPPORT if SPL_MMC && MMC_HS200_SUPPORT
->   	imply CLK_SCMI
->   	imply SCMI_FIRMWARE
->   	help
-> diff --git a/configs/nanopi-r5c-rk3568_defconfig b/configs/nanopi-r5c-rk3568_defconfig
-> index 833cff0e457d..f5a472d03d78 100644
-> --- a/configs/nanopi-r5c-rk3568_defconfig
-> +++ b/configs/nanopi-r5c-rk3568_defconfig
-> @@ -58,8 +58,6 @@ CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_MISC=y
->   CONFIG_SUPPORT_EMMC_RPMB=y
-> -CONFIG_MMC_HS200_SUPPORT=y
-> -CONFIG_SPL_MMC_HS200_SUPPORT=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/nanopi-r5s-rk3568_defconfig b/configs/nanopi-r5s-rk3568_defconfig
-> index 2736d382a352..99692d341f44 100644
-> --- a/configs/nanopi-r5s-rk3568_defconfig
-> +++ b/configs/nanopi-r5s-rk3568_defconfig
-> @@ -58,8 +58,6 @@ CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_MISC=y
->   CONFIG_SUPPORT_EMMC_RPMB=y
-> -CONFIG_MMC_HS200_SUPPORT=y
-> -CONFIG_SPL_MMC_HS200_SUPPORT=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
-> diff --git a/configs/radxa-e25-rk3568_defconfig b/configs/radxa-e25-rk3568_defconfig
-> index 5a613abe0d2d..fedb137877ab 100644
-> --- a/configs/radxa-e25-rk3568_defconfig
-> +++ b/configs/radxa-e25-rk3568_defconfig
-> @@ -60,8 +60,6 @@ CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_MISC=y
->   CONFIG_SUPPORT_EMMC_RPMB=y
-> -CONFIG_MMC_HS200_SUPPORT=y
-> -CONFIG_SPL_MMC_HS200_SUPPORT=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
+> diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
+> index 285332d9f4fd..706fb1235796 100644
+> --- a/drivers/mmc/rockchip_sdhci.c
+> +++ b/drivers/mmc/rockchip_sdhci.c
+> @@ -71,7 +71,6 @@
+>   #define DLL_RXCLK_NO_INVERTER		BIT(29)
+>   #define DLL_RXCLK_ORI_GATE		BIT(31)
+>   #define DLL_TXCLK_TAPNUM_DEFAULT	0x10
+> -#define DLL_TXCLK_TAPNUM_90_DEGREES	0x9
+>   #define DLL_TXCLK_TAPNUM_FROM_SW	BIT(24)
+>   #define DLL_TXCLK_NO_INVERTER		BIT(29)
+>   #define DLL_STRBIN_TAPNUM_DEFAULT	0x4
+> @@ -314,8 +313,10 @@ static int rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
+>   	int val, ret;
+>   	u32 extra, txclk_tapnum;
+>   
+> -	if (!enable)
+> +	if (!enable) {
+> +		sdhci_writel(host, 0, DWCMSHC_EMMC_DLL_CTRL);
+>   		return 0;
+> +	}
+>   
+>   	if (clock >= 100 * MHz) {
+>   		/* reset DLL */
+> @@ -648,7 +649,7 @@ static const struct sdhci_data rk3568_data = {
+>   	.config_dll = rk3568_sdhci_config_dll,
+>   	.flags = FLAG_INVERTER_FLAG_IN_RXCLK,
+>   	.hs200_txclk_tapnum = DLL_TXCLK_TAPNUM_DEFAULT,
+> -	.hs400_txclk_tapnum = DLL_TXCLK_TAPNUM_DEFAULT,
+> +	.hs400_txclk_tapnum = 0x8,
+>   };
+>   
+>   static const struct sdhci_data rk3588_data = {
+> @@ -656,7 +657,7 @@ static const struct sdhci_data rk3588_data = {
+>   	.set_clock = rk3568_sdhci_set_clock,
+>   	.config_dll = rk3568_sdhci_config_dll,
+>   	.hs200_txclk_tapnum = DLL_TXCLK_TAPNUM_DEFAULT,
+> -	.hs400_txclk_tapnum = DLL_TXCLK_TAPNUM_90_DEGREES,
+> +	.hs400_txclk_tapnum = 0x9,
+>   };
+>   
+>   static const struct udevice_id sdhci_ids[] = {
