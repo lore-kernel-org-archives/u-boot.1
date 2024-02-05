@@ -4,59 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25CE0C48286
-	for <u-boot@archiver.kernel.org>; Sun,  4 Feb 2024 20:54:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF332C4828F
+	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 00:51:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5246D87C3D;
-	Sun,  4 Feb 2024 21:53:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id DE772878C6;
+	Mon,  5 Feb 2024 01:51:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="wszjlZcB";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="KVBvXqdY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D21C187C51; Sun,  4 Feb 2024 21:53:51 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ id 37E018786C; Mon,  5 Feb 2024 01:51:30 +0100 (CET)
+Received: from mail-m127108.qiye.163.com (mail-m127108.qiye.163.com
+ [115.236.127.108])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E088787C3F
- for <u-boot@lists.denx.de>; Sun,  4 Feb 2024 21:53:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D6766879F3
+ for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 01:51:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=cbd4=JO=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1707080011; bh=QvQ+OFe+CgpsC3HXaN85SRTMXYNIaeQbJLKF8FEqLB0=;
- b=wszjlZcB2cGMDmyygnag6of+awBycx5HLXeB403tTiz5Qf1W0vg34d7EnXFvbi/kwNJ11CsMm
- z45vt21MtSTY2kZQuS1nMeFLWIWTI9tVwJiq7P9Vt6Hdi0BQOClTkIXtPpIgrG6QRvgdrdSFo8M
- t1efZg1x66HANe/R6OQlcYEOH7J7vvkhYTFDFvBbBjRnmIMG2yjETvFpXOvtH3dAlRYWJtaZRFZ
- 26jPnC8uAJd+MUyezEfwUNuVQviUVsLcVoJzB5aAt9JbgYpsVTzIny5BXWCbharX+vByNF0bOzg
- 2QcRuLKdEcEr3g5OD7H85i4wAqBAs9xei46r7JSYxT4Q==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
-Cc: Eugen Hristev <eugen.hristev@collabora.com>, Quentin Schulz
- <quentin.schulz@theobroma-systems.com>, Weizhao Ouyang
- <o451686892@gmail.com>, u-boot@lists.denx.de, Jonas Karlman
- <jonas@kwiboo.se>
-Subject: [PATCH v2 3/3] mmc: rockchip_sdhci: Fix HS400 mode write on RK3568
-Date: Sun,  4 Feb 2024 20:53:07 +0000
-Message-ID: <20240204205312.2342868-4-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240204205312.2342868-1-jonas@kwiboo.se>
-References: <20240204205312.2342868-1-jonas@kwiboo.se>
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=KVBvXqdYZoPse/B9gaAuni9ZlHc260bdfnpsH3IXtESX82PIaprISK0+DfHnKh00WvWXJfHAK3VfNkElmeTlteFTywkxrISZDaA5v8+qt6cpd36Qdn95Ot7zKap2caef83c3iZ8VBLHbwe6C6sxkHMazpBPxRqo7q28TsVmJ26k=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=64wYFkAVvRToruzLVqPW0pqPsgbl4CHR5z4sk13O/To=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.93] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id BF8419000FE;
+ Mon,  5 Feb 2024 08:51:10 +0800 (CST)
+Message-ID: <44c406a7-48d3-4b2b-a8c6-076423b636aa@rock-chips.com>
+Date: Mon, 5 Feb 2024 08:51:10 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] rockchip: spl: Enable caches to speed up checksum
+ validation
+Content-Language: en-US
+To: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, u-boot@lists.denx.de
+References: <20240125211905.3649948-1-jonas@kwiboo.se>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20240125211905.3649948-1-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 65bff94a6f7b756870de3912
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0sdTlZLSkweHkpCTB5OT0tVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8d76bf646e03a9kunmbf8419000fe
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PzI6GSo5TTMTVj4SHQsoOUs1
+ PCIaFAFVSlVKTEtMS0JPSUxKTEtKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFIQk1DNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,63 +74,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Testing has shown that writing to eMMC using HS400 modes on RK3568
-result in an ERROR.
+Hi Jonas,
 
-Change the tap number for transmit clock to fix this.
+     This patch fail to build with armv7 platform:
 
-Also stop DLL when config_dll() is called to disable DLL.
++arch/arm/mach-rockchip/spl.c: In function 'board_init_f':
++arch/arm/mach-rockchip/spl.c:143:17: error: implicit declaration of 
+function 'enable_caches' [-Werror=implicit-function-declaration]
++  143 |                 enable_caches();
++      |                 ^~~~~~~~~~~~~
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
-Changes in v2:
-- New patch to fix HS400 mode write on RK3568
----
- drivers/mmc/rockchip_sdhci.c | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
-index 285332d9f4fd..706fb1235796 100644
---- a/drivers/mmc/rockchip_sdhci.c
-+++ b/drivers/mmc/rockchip_sdhci.c
-@@ -71,7 +71,6 @@
- #define DLL_RXCLK_NO_INVERTER		BIT(29)
- #define DLL_RXCLK_ORI_GATE		BIT(31)
- #define DLL_TXCLK_TAPNUM_DEFAULT	0x10
--#define DLL_TXCLK_TAPNUM_90_DEGREES	0x9
- #define DLL_TXCLK_TAPNUM_FROM_SW	BIT(24)
- #define DLL_TXCLK_NO_INVERTER		BIT(29)
- #define DLL_STRBIN_TAPNUM_DEFAULT	0x4
-@@ -314,8 +313,10 @@ static int rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
- 	int val, ret;
- 	u32 extra, txclk_tapnum;
- 
--	if (!enable)
-+	if (!enable) {
-+		sdhci_writel(host, 0, DWCMSHC_EMMC_DLL_CTRL);
- 		return 0;
-+	}
- 
- 	if (clock >= 100 * MHz) {
- 		/* reset DLL */
-@@ -648,7 +649,7 @@ static const struct sdhci_data rk3568_data = {
- 	.config_dll = rk3568_sdhci_config_dll,
- 	.flags = FLAG_INVERTER_FLAG_IN_RXCLK,
- 	.hs200_txclk_tapnum = DLL_TXCLK_TAPNUM_DEFAULT,
--	.hs400_txclk_tapnum = DLL_TXCLK_TAPNUM_DEFAULT,
-+	.hs400_txclk_tapnum = 0x8,
- };
- 
- static const struct sdhci_data rk3588_data = {
-@@ -656,7 +657,7 @@ static const struct sdhci_data rk3588_data = {
- 	.set_clock = rk3568_sdhci_set_clock,
- 	.config_dll = rk3568_sdhci_config_dll,
- 	.hs200_txclk_tapnum = DLL_TXCLK_TAPNUM_DEFAULT,
--	.hs400_txclk_tapnum = DLL_TXCLK_TAPNUM_90_DEGREES,
-+	.hs400_txclk_tapnum = 0x9,
- };
- 
- static const struct udevice_id sdhci_ids[] = {
--- 
-2.43.0
+Thanks,
 
+- Kever
+
+On 2024/1/26 05:19, Jonas Karlman wrote:
+> FIT checksum validation is very slow in SPL due to D-cache not being
+> enabled.
+>
+> Enable caches in SPL on ARM64 SoCs to speed up FIT checksum validation,
+> from seconds to milliseconds.
+>
+> This change enables caches in SPL on all Rockchip ARM64 boards, the
+> Kconfig options SPL_SYS_ICACHE_OFF and SPL_SYS_DCACHE_OFF can be used to
+> disable caches for a specific board or SoC if needed.
+>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> ---
+> Changes in v3:
+> - Limit to ARM64 SoCs
+> - Fix build with SPL_SYS_ICACHE_OFF or SPL_SYS_DCACHE_OFF enabled
+> - Use cleanup_before_linux() in spl_board_prepare_for_boot() to disable
+>    caches before jumping from SPL to next stage
+> - Collect r-b tag
+>
+> Changes in v2:
+> - None
+>
+> This has been tested on multiple RK3328, RK3399, RK356x and RK3588
+> boards without any issues, vendor U-Boot also enables caches in SPL for
+> all SoCs.
+>
+> This only worked on RK3288 because the default enable_caches() that does
+> not enable caches was being used. Trying to enable caches on my RK3288
+> froze my boards in mmu_setup(). So v3 limits the enable_caches() call to
+> only include ARM64 SoCs.
+>
+> Link to RFC: https://patchwork.ozlabs.org/patch/1802303/
+> Link to v2: https://patchwork.ozlabs.org/patch/1889319/
+> ---
+>   arch/arm/mach-rockchip/spl.c | 14 ++++++++++++++
+>   1 file changed, 14 insertions(+)
+>
+> diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
+> index 87280e2ba7cc..c4d3983a6735 100644
+> --- a/arch/arm/mach-rockchip/spl.c
+> +++ b/arch/arm/mach-rockchip/spl.c
+> @@ -136,6 +136,20 @@ void board_init_f(ulong dummy)
+>   	}
+>   	gd->ram_top = gd->ram_base + get_effective_memsize();
+>   	gd->ram_top = board_get_usable_ram_top(gd->ram_size);
+> +
+> +	if (IS_ENABLED(CONFIG_ARM64) && !CONFIG_IS_ENABLED(SYS_DCACHE_OFF)) {
+> +		gd->relocaddr = gd->ram_top;
+> +		arch_reserve_mmu();
+> +		enable_caches();
+> +	}
+>   #endif
+>   	preloader_console_init();
+>   }
+> +
+> +void spl_board_prepare_for_boot(void)
+> +{
+> +	if (!IS_ENABLED(CONFIG_ARM64) || CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
+> +		return;
+> +
+> +	cleanup_before_linux();
+> +}
