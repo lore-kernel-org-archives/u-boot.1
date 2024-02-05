@@ -4,76 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BC51C4828D
-	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 20:20:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAD75C48292
+	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 21:10:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34BA887AEC;
-	Mon,  5 Feb 2024 21:20:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id EB23886EEC;
+	Mon,  5 Feb 2024 22:10:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks-com.20230601.gappssmtp.com header.i=@gateworks-com.20230601.gappssmtp.com header.b="fzHA8NAA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uLKY1R09";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B94C87AEC; Mon,  5 Feb 2024 21:20:03 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 39F1686F8E; Mon,  5 Feb 2024 22:10:41 +0100 (CET)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A26F87A80
- for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 21:20:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 761DD80245
+ for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 22:10:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a29c4bbb2f4so584309566b.1
- for <u-boot@lists.denx.de>; Mon, 05 Feb 2024 12:20:00 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-603fdc46852so51530997b3.2
+ for <u-boot@lists.denx.de>; Mon, 05 Feb 2024 13:10:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks-com.20230601.gappssmtp.com; s=20230601; t=1707164399; x=1707769199;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CG9IurWwlKsf+Zc8lhBvw1AtUp/mWdva8MciR1+LVAE=;
- b=fzHA8NAAkodoiHKhx7YyM1BFwhhfQW2z9P1/RCpqNq6rJf2W3nOzEcd0UMbN3bmCB3
- 67jqQ3puEXggWKquorXe7FI6CCcJ8MTw4eLFfQOXV48BA4o8WZgOedf/h5gxug1xcHOH
- 6Yats195znLbIisHPpTcZin7o3V9KE71H42v4+TGs0zJRhpoNdNsWSYFxQ+BU8mkKWg2
- 5DOc2WnUZiix1esg1Cho37QdYAIHzLMLW7n0Az/P8JCwYS6cz93i7CgQCUj0kRvdMLNn
- wm9lZI5ASH+OyOPAO2Bd3lmJ6wY+M7nQ6IY6Y3ME8Puj4aWmOlJZnWN4Pd0N4RaHcmTR
- 89mA==
+ d=konsulko.com; s=google; t=1707167436; x=1707772236; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=rvTZVS8TXOHJ6cMHYKi/G6/ZUv5RllBGFzmfYcTfYIc=;
+ b=uLKY1R09bP6ILOv4uHezPLUlT5ODjwG+1xpHTlvmA9M11Y7I2CW1O574V33J+yQZUN
+ 1SXSjWKK1kT1OK47NiYMK6sQ4WC476pwUCGG66Z2sQ25Eq88dBu1+a5a2gcd5yyLbs0y
+ U1dI3r/Jr9x9a7q+JM20JjYkov9yPstQmhUQQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707164399; x=1707769199;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CG9IurWwlKsf+Zc8lhBvw1AtUp/mWdva8MciR1+LVAE=;
- b=Q9oD9TlNq9DApMNZLc54du95qf73w9HSvxE4TW1LCqZS2N0MaxARwju14A11qLbGSA
- 8QWT2Zj0+53KOCCcY05gV0nptw1uF+7mQ+VT0ZyyJH7iftUEJi4fEhaxmeZdUs1cAEHO
- ZVvkIxMMtfFl+tuucWUDYkViok8lBuL9UXNmLmh0h1Vz1aw8WHSXPJ3WjCpiMLKDKcOG
- SS5J7huuRsjHWWpY1W1ipJk2MD27vwdUOZMMVIz2s6NuC4lvQ2l0cTL/tIuptiJ5+KuM
- Yls1PYVfL73GnpB1xM0K47+ECaT/dwmmFL/8DvqhiKppMy/t7OqDZ6AZp89syo2i4HBm
- pv/A==
-X-Gm-Message-State: AOJu0YyNy4AdMYNP8sxlZTzYHRgDEqGIlcNn/vPIKtVgwTHiP9r062F6
- FGX7ufsTnKq8r9apHSJ8Lp8gQI+2f9oEAjGJkFyLijUkU5WvqeDoaXNoY3NS1Qq2lLZOTCdvZ1v
- wmpPMLkq7QaFNiaIlnCrLONZkmW7k/xPex0UL0g==
-X-Google-Smtp-Source: AGHT+IGfpiVMkb8Ruz2JEmV6e1z+8VSgNEBnJ7IVRVLVjw3y5520BQfFGjCoAT634F128JcjPycv09p600fivOkKZ4s=
-X-Received: by 2002:a17:906:2ac7:b0:a37:9b79:9c27 with SMTP id
- m7-20020a1709062ac700b00a379b799c27mr38853eje.37.1707164399516; Mon, 05 Feb
- 2024 12:19:59 -0800 (PST)
-MIME-Version: 1.0
+ d=1e100.net; s=20230601; t=1707167436; x=1707772236;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rvTZVS8TXOHJ6cMHYKi/G6/ZUv5RllBGFzmfYcTfYIc=;
+ b=VCeUKnQWhBqTUEyUYAD06KrdTwa6W4ntJVEhxXMrXhsSCbkNivvqM/+8SDtqyw9Dra
+ dybHsVAosqMWVunrSGzwcoCGZDs3kwKIad4Ur03gC6wZFe+E1jcoCEW48Hh5VNdh1uxN
+ Go8g9aCyIY7TsvgIqlNEXC7IgWQRgqZTPtT6GJYfb/gMzfMaIFAfyWgfsu4AxfnYFF5o
+ uCOjgy5HB97/3nVmlaB/CHhv/QubBZq6BgJo+o7VCKkewwnAkRoaYU+i0sj28y4MgXgg
+ Kho0f1/n2KG0J2pg0uzpvgfm78Ux43EynYbKXkCdePVhnNRIUkAf7Ft6bQ9dsXb+3mer
+ sCWg==
+X-Gm-Message-State: AOJu0YxVfsJfPmMV1eIxk4KoWXzmNxI9BBAtZvGtiE+LazsA2Eh7vp2y
+ N1IhfD+0GsfLe4N8SWG05JJbpBzVis/8+TRSUoAmKOrHyv78o//V1Cv7I9hXSGY=
+X-Google-Smtp-Source: AGHT+IGDXkw8DIhTZ2XEU0Q/whfj5bIxJCZ+fGl+1cEY3aO5qHdg2vK0R/bpnsnYuSotHhVO7w+D7A==
+X-Received: by 2002:a05:690c:e06:b0:602:b343:60c9 with SMTP id
+ cp6-20020a05690c0e0600b00602b34360c9mr148799ywb.26.1707167436076; 
+ Mon, 05 Feb 2024 13:10:36 -0800 (PST)
+X-Forwarded-Encrypted: i=0;
+ AJvYcCU6Io016Ctk2j4EafW46CHQTGcbFTSy/VazD2WhbsJ8e32Q1t9ULOW8guxPO+dKCz6IMiAGqIKjvwOYmZkpT6+hqR6QVL1F03bPKhevbHfnmasBuGmfLD8whenr0iDyp+dIYCiewiYI
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ y10-20020ac8128a000000b0042a6e6792basm289165qti.69.2024.02.05.13.10.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 Feb 2024 13:10:35 -0800 (PST)
+Date: Mon, 5 Feb 2024 16:10:33 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: Fabio Estevam <festevam@gmail.com>, u-boot@lists.denx.de,
+ Stefano Babic <sbabic@denx.de>,
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
+Subject: Re: [PATCH 0/5] update venice dts
+Message-ID: <20240205211033.GM1152441@bill-the-cat>
 References: <20240205190858.3076363-1-tharvey@gateworks.com>
  <CAOMZO5CmMDhHKndFbbKsR8e82ShXnSz95yE2nPXqQog_2CpE_Q@mail.gmail.com>
-In-Reply-To: <CAOMZO5CmMDhHKndFbbKsR8e82ShXnSz95yE2nPXqQog_2CpE_Q@mail.gmail.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Mon, 5 Feb 2024 12:19:47 -0800
-Message-ID: <CAJ+vNU2XHZBzabTpR=4WG8pQgbdQ5HcOMG1pueAEo0zBfZ7X-A@mail.gmail.com>
-Subject: Re: [PATCH 0/5] update venice dts
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, 
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CAJ+vNU2XHZBzabTpR=4WG8pQgbdQ5HcOMG1pueAEo0zBfZ7X-A@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="WGAHYKcHstOOfDiW"
+Content-Disposition: inline
+In-Reply-To: <CAJ+vNU2XHZBzabTpR=4WG8pQgbdQ5HcOMG1pueAEo0zBfZ7X-A@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,49 +96,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Feb 5, 2024 at 11:22=E2=80=AFAM Fabio Estevam <festevam@gmail.com> =
-wrote:
->
-> Hi Tim,
->
-> On Mon, Feb 5, 2024 at 4:09=E2=80=AFPM Tim Harvey <tharvey@gateworks.com>=
- wrote:
+
+--WGAHYKcHstOOfDiW
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Feb 05, 2024 at 12:19:47PM -0800, Tim Harvey wrote:
+> On Mon, Feb 5, 2024 at 11:22=E2=80=AFAM Fabio Estevam <festevam@gmail.com=
+> wrote:
 > >
-> > This series brings some recent upstream Linux dt updates into U-Boot fo=
-r
-> > the Gateworks Venice family.
->
-> Please specify what "some recent upstream Linux dt" means.
->
-> Is it 6.8-rc, linux-next, or Shawn's tree?
->
-> Can't you instead sync the imx8mm-venice DTs in U-Boot with this kernel t=
-ree?
->
-> > Tim Harvey (5):
-> >   arm: dts: imx8mm-venice-gw7901: add digital I/O direction control GPI=
-O's
-> >   arm: dts: imx8mm-venice-gw7901: add TPM device
-> >   arm: dts: imx8mm-venice-gw71xx: fix USB OTG VBUS
-> >   arm: dts: imx8mm-venice-gw71xx: add TPM device
-> >   arm: dts: imx8mp-venice-gw71xx: add TPM device
+> > Hi Tim,
 > >
-> >  .../dts/imx8mm-venice-gw71xx-0x-u-boot.dtsi   |  7 ++++
-> >  arch/arm/dts/imx8mm-venice-gw71xx.dtsi        | 40 +++++++++----------
-> >  arch/arm/dts/imx8mm-venice-gw7901-u-boot.dtsi | 14 +++++++
->
-> Why is u-boot.dtsi being touched? Please add a justification.
->
-> >  arch/arm/dts/imx8mm-venice-gw7901.dts         | 14 ++++++-
-> >  .../dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi   |  9 +++++
->
-> Same here.
+> > On Mon, Feb 5, 2024 at 4:09=E2=80=AFPM Tim Harvey <tharvey@gateworks.co=
+m> wrote:
+> > >
+> > > This series brings some recent upstream Linux dt updates into U-Boot =
+for
+> > > the Gateworks Venice family.
+> >
+> > Please specify what "some recent upstream Linux dt" means.
+> >
+> > Is it 6.8-rc, linux-next, or Shawn's tree?
+> >
+> > Can't you instead sync the imx8mm-venice DTs in U-Boot with this kernel=
+ tree?
+> >
+> > > Tim Harvey (5):
+> > >   arm: dts: imx8mm-venice-gw7901: add digital I/O direction control G=
+PIO's
+> > >   arm: dts: imx8mm-venice-gw7901: add TPM device
+> > >   arm: dts: imx8mm-venice-gw71xx: fix USB OTG VBUS
+> > >   arm: dts: imx8mm-venice-gw71xx: add TPM device
+> > >   arm: dts: imx8mp-venice-gw71xx: add TPM device
+> > >
+> > >  .../dts/imx8mm-venice-gw71xx-0x-u-boot.dtsi   |  7 ++++
+> > >  arch/arm/dts/imx8mm-venice-gw71xx.dtsi        | 40 +++++++++--------=
+--
+> > >  arch/arm/dts/imx8mm-venice-gw7901-u-boot.dtsi | 14 +++++++
+> >
+> > Why is u-boot.dtsi being touched? Please add a justification.
+> >
+> > >  arch/arm/dts/imx8mm-venice-gw7901.dts         | 14 ++++++-
+> > >  .../dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi   |  9 +++++
+> >
+> > Same here.
+>=20
+> Fabio,
+>=20
+> Ok, makes sense - drop this series. I will send a single patch instead
+> with more detail if needed in the commit log.
 
-Fabio,
+Can you please look at
+https://patchwork.ozlabs.org/project/uboot/list/?series=3D393337&state=3D*
+and work on top of that? I would like to pull that in to v2024.04,
+still, and that will be a better long term path for your platforms as
+well.  And if it looks like it would be a problem, getting that kind of
+feedback now is also appreciated. Thanks!
 
-Ok, makes sense - drop this series. I will send a single patch instead
-with more detail if needed in the commit log.
+--=20
+Tom
 
-Best regards,
+--WGAHYKcHstOOfDiW
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Tim
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmXBTsYACgkQFHw5/5Y0
+tyxIxAv/X6EykYqxSRo65NdGZijgC5ds5BLg8vZVwwniFZ9osdROeVg+KwuTnxLE
+RRPQVSQkMOJw/glEQkcBhjrbOG21sZNXjIl2g9PEwjrpB1XgdLJG18oPlBtDlaQz
+KacerTKSlsJuj6GJRZmIiZP+JGli1qoTvULIG0nHoS5dQ47wKL9bgOFQ2dy4SqrI
+ihWlWJuey519kTmrEGSC5450xFKKYUev1BD29yPOEda3fQLXUzeKLe7ozBH6tXu8
+CzZyVNPIajdqpX3wc7rSouzioOD6DbWG7lofX3M2c7wM+JDctK9N7rUFu7AvcinG
+1pTuVhwlwSRn7ckJjNI/TA0GgYzfp8kCsS3ZxUFiYqF+BA+VZt9stYggfOTJSnor
+y9dpL6Y98+AHsY2/Z2EfYb/8uzoB++iQMVL413NjsHkMO9rit7Vsv3TdszQrK0MV
+JAX/H6+0yp9qVzWiKvDxaH3SVzCRKHS7U3IdOSK+1+THkh+qEZ8t+DzE8dVXBX/H
+FYWL7zLl
+=sxCe
+-----END PGP SIGNATURE-----
+
+--WGAHYKcHstOOfDiW--
