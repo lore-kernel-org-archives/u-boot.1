@@ -4,50 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28663C4828D
-	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 13:51:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BB5EC48295
+	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 13:51:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98B4C87BFC;
-	Mon,  5 Feb 2024 14:51:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
+	by phobos.denx.de (Postfix) with ESMTP id 2352A87C3D;
+	Mon,  5 Feb 2024 14:51:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="WmB5yf3U";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89E988777D; Mon,  5 Feb 2024 07:59:06 +0100 (CET)
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
- by phobos.denx.de (Postfix) with ESMTP id 33E7B875E9
- for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 07:59:02 +0100 (CET)
+ id DE8A5877B0; Mon,  5 Feb 2024 09:02:38 +0100 (CET)
+Received: from TWMBX01.aspeed.com (211-20-114-70.hinet-ip.hinet.net
+ [211.20.114.70])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D3BB875E9
+ for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 09:02:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jhb_ee@163.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=JNI8B
- BewjWWkGmtDZ3+TXovBIEoV0LQFfL2KhKzGMAg=; b=WmB5yf3UDJLEIncN6SLAe
- 1qppAZRfU87z4SIT2xA+4ryJgRqr61amcVHrqmAFPk16IqGW+Fr5IaWH/qNo9CBp
- Ly92TV7BiWIBxj8nTi7UhAtv0daWLVttV35TuuZtJCmWi2JNOL68lwJprHDHU3oO
- fy8wUMiWMrdbazbcVnuFHc=
-Received: from SZ-jihb.starsmicrosystem.com (unknown [113.105.127.219])
- by gzga-smtp-mta-g1-5 (Coremail) with SMTP id _____wD3360vh8BlsNaAAw--.2577S2; 
- Mon, 05 Feb 2024 14:58:55 +0800 (CST)
-From: Hongbin Ji <jhb_ee@163.com>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com,
-	Hongbin Ji <jhb_ee@163.com>
-Subject: [PATCH] xyzModem: Correct xmodem blk verification conditions
-Date: Mon,  5 Feb 2024 14:58:50 +0800
-Message-Id: <20240205065850.7556-1-jhb_ee@163.com>
-X-Mailer: git-send-email 2.34.1
+ spf=fail smtp.mailfrom=jacky_chou@aspeedtech.com
+Received: from TWMBX02.aspeed.com (192.168.0.24) by TWMBX01.aspeed.com
+ (192.168.0.124) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.2.1258.12; Mon, 5 Feb
+ 2024 16:03:07 +0800
+Received: from aspeedtech.com (192.168.10.10) by TWMBX02.aspeed.com
+ (192.168.0.24) with Microsoft SMTP Server id 15.0.1497.2 via Frontend
+ Transport; Mon, 5 Feb 2024 16:02:30 +0800
+From: Jacky Chou <jacky_chou@aspeedtech.com>
+To: <joe.hershberger@ni.com>, <rfried.dev@gmail.com>, <trini@konsulko.com>,
+ <michal.simek@amd.com>, <marek.vasut+renesas@mailbox.org>,
+ <u-boot@lists.denx.de>
+CC: <BMC-SW@aspeedtech.com>
+Subject: [PATCH] net: phy: ncsi: Correct the endian of the checksum
+Date: Mon, 5 Feb 2024 16:02:28 +0800
+Message-ID: <20240205080228.140001-1-jacky_chou@aspeedtech.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: _____wD3360vh8BlsNaAAw--.2577S2
-X-Coremail-Antispam: 1Uf129KBjvdXoWrKrWkuw1UKrW5KF43GF1fXrb_yoWxtrcEgF
- W8Wr17tw409Fsxtw47u3yfZr18t34kGF18K3WUAr98Kr1UZFsxJrn8Jr1rXFWjg3WUZry3
- Wan8tws5Ar4I9jkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUvcSsGvfC2KfnxnUUI43ZEXa7sRE9a93UUUUU==
-X-Originating-IP: [113.105.127.219]
-X-CM-SenderInfo: 5mkesvrh6rljoofrz/1tbiYRB7fGV4G6TRFgAAsT
+Content-Type: text/plain
 X-Mailman-Approved-At: Mon, 05 Feb 2024 14:51:45 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -65,27 +59,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When the blk sequence number is 255 and cblk is 0, the original XOR condition
-produces a result of 0,and the judgment condition will be unsuccessful.
+There is no need to perform the endian twice here.
 
-Signed-off-by: Hongbin Ji <jhb_ee@163.com>
+Signed-off-by: Jacky Chou <jacky_chou@aspeedtech.com>
 ---
- common/xyzModem.c | 2 +-
+ drivers/net/phy/ncsi.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/common/xyzModem.c b/common/xyzModem.c
-index fb319f7119..0bc1a87067 100644
---- a/common/xyzModem.c
-+++ b/common/xyzModem.c
-@@ -373,7 +373,7 @@ xyzModem_get_hdr (void)
-     }
-   ZM_DEBUG (zm_dump (__LINE__));
-   /* Validate the message */
--  if ((xyz.blk ^ xyz.cblk) != (unsigned char) 0xFF)
-+  if (~xyz.blk != xyz.cblk)
-     {
-       ZM_DEBUG (zm_dprintf
- 		("Framing error - blk: %x/%x/%x\n", xyz.blk, xyz.cblk,
+diff --git a/drivers/net/phy/ncsi.c b/drivers/net/phy/ncsi.c
+index eb3fd65bb4..74c5386d2e 100644
+--- a/drivers/net/phy/ncsi.c
++++ b/drivers/net/phy/ncsi.c
+@@ -551,7 +551,7 @@ static int ncsi_send_command(unsigned int np, unsigned int nc, unsigned int cmd,
+ 	checksum = ncsi_calculate_checksum((unsigned char *)hdr,
+ 					   sizeof(*hdr) + len);
+ 	pchecksum = (__be32 *)((void *)(hdr + 1) + len);
+-	put_unaligned_be32(htonl(checksum), pchecksum);
++	put_unaligned_be32(checksum, pchecksum);
+ 
+ 	if (wait) {
+ 		net_set_timeout_handler(1000UL, ncsi_timeout_handler);
 -- 
-2.34.1
+2.25.1
 
