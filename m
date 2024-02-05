@@ -4,136 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA8D4C4828D
-	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 09:59:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB067C48291
+	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 10:06:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20ABC8777F;
-	Mon,  5 Feb 2024 10:59:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
+	by phobos.denx.de (Postfix) with ESMTP id 0DE368777F;
+	Mon,  5 Feb 2024 11:06:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="F5T0pdyf";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="MDnxB0qB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49FC8877CB; Mon,  5 Feb 2024 10:59:02 +0100 (CET)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20700.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::700])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 62E47877CB; Mon,  5 Feb 2024 11:06:41 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC70687730
- for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 10:58:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=theobroma-systems.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=quentin.schulz@theobroma-systems.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=MuWERLqOn+PyatLdcsrUCHt59WGUTJAxMeYbXDRKINtWYHimD8aDFTC8NLtVNZKSziugdIcbpObLItbKoO883AX9PGJB/4G19jUGuvQ1ka+DCE2jbFfrs/67aNM4woeDwB4ztONDN95V23oHTwxqrLcvo7b9GBe5ow9POTX+28e6xmSroYgz2aL+fcod3wuOfSEVLMnmJ4zTJkKdElI8+wrBg2ERnyYhdF0nt2loQK503dLhcBzMStFUbFV9EewXEIhxrzgxXioJ0SJtwqTWtsZVA0EQDotvdd5aaovtm5L7JYtvdid8dcYfkApWnddocWKxk7DbEj6hTTSO16Sy/Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GfrJmfMwbHIwGn5LXx4X2u4TzQJrZMBsacaQ6lOFQDc=;
- b=E0EF2OyGsnjNaQLhCfPERrg0wVS3HxLEw+m/BrnNTOLT0eKhks+BgwzDTVDNlkJxSZecoVhs7ywwSmlVSAs24y+mxTs2vZP/RXsC7VOpJ+Q2wrQCpw1cH2h9VBwcYofhat3dDgUo1W0wyFZEIyfkoe6a6vY521XSRallzRokWczwVneCnTm6tD2sfYw4YqJwCteCdXsjlaLBLgtz2pvvQK4LTclck5duUXWXlfe8ZX2bIb3hUO6HBVi2ehjYkcxw+1qfUDP60a0WXMuguaohzr2B9R9M3aeVk1K/FLA9oFucnnD6QTI+bFv228Zw8UfBxDI65qyzPdj3/slREHhI9Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
- header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GfrJmfMwbHIwGn5LXx4X2u4TzQJrZMBsacaQ6lOFQDc=;
- b=F5T0pdyf2aTavdeYqcKItz7wSShQ2/WFIiTXWOgP0UgzuqL4hER2mE0prYXEXKOAPY4xLF8gGKtnMYlcxasXhrxNUuNaNi1Yi3XmKiwQ2eSXSigdppxXQsKerarzetwcKtYJGNaTl3haD2VkAyHav6ByubgIqPzKwZG/AQN3hE6JpAbLjvWVfq9+Vb8V3LzU0GhicbiMdpyB/7Q9JIE6Kx5Rwu9IPxSuaRtdC7+o1FCPrDcfPy9gc6FKFwB7b8CnxmUiVq5hEc+RVZplnUfkupTFZfXDDItDkIkL03b7Se0U/d823whjUiNiaAXsIyGZ4pDKKhlmt9qyI+2NRhfwbg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=theobroma-systems.com;
-Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
- by PAXPR04MB8733.eurprd04.prod.outlook.com (2603:10a6:102:21d::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7249.34; Mon, 5 Feb
- 2024 09:58:57 +0000
-Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
- ([fe80::550d:ad96:e3cb:9a6e]) by DU2PR04MB8536.eurprd04.prod.outlook.com
- ([fe80::550d:ad96:e3cb:9a6e%5]) with mapi id 15.20.7249.032; Mon, 5 Feb 2024
- 09:58:57 +0000
-Message-ID: <db14c4e0-7857-4e20-8b02-3fbd7aa1eb36@theobroma-systems.com>
-Date: Mon, 5 Feb 2024 10:58:55 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 1/6] rockchip: rk3399: simplify logic for getting SPL
- boot medium DT node
-Content-Language: en-US
-To: Kever Yang <kever.yang@rock-chips.com>,
- Quentin Schulz <foss+uboot@0leil.net>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: heiko@sntech.de, u-boot@lists.denx.de, jonas@kwiboo.se
-References: <20240118-rk3588-spl-boot-dev-v5-0-a8df3e50f486@theobroma-systems.com>
- <20240118-rk3588-spl-boot-dev-v5-1-a8df3e50f486@theobroma-systems.com>
- <71f45740-0ff4-445a-a941-69c079dae421@rock-chips.com>
-From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-In-Reply-To: <71f45740-0ff4-445a-a941-69c079dae421@rock-chips.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR4P281CA0210.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:e5::11) To DU2PR04MB8536.eurprd04.prod.outlook.com
- (2603:10a6:10:2d7::10)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E2B487730
+ for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 11:06:38 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 16B12CE0AF6;
+ Mon,  5 Feb 2024 10:06:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 71BB4C433C7;
+ Mon,  5 Feb 2024 10:06:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1707127595;
+ bh=X3LnkCB2YeFYf7NEzTyiaTqhHPNxfbBbyHNhxbs9NSE=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=MDnxB0qBAk52J1T5169wlibVLRI0MRZDpUguK4d9cqNg2RytGCaEZaUZAzMgZxfOB
+ C8FTDZnWFRDfxdgBhpy9YpdJgd/oi8u7O8jS45LNuh9f2numFj3QKiROa7C8yuhvBu
+ cRwDcyHzuv7D32GyCE8LKTz2XzjefiuZBvT7sgNuKwj1GskBjNlb7F/wCrm38Zrx17
+ GnnzbfN9o+bV2AbZnJL2/FD4weqKhQ7JOc48qvLHaivxM1vSJbRAFK60tzE0dm1YtU
+ sRTLgJgRFEuRpCxR32+Q8wQSbxnnpi7NDgR3NyPKFljj59AD7NgKP6rqSRT+7Ebp7T
+ 3l3q1IoIYCuXw==
+Message-ID: <d0b4530d-b12a-4b2c-8171-35ca003d4234@kernel.org>
+Date: Mon, 5 Feb 2024 12:06:29 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|PAXPR04MB8733:EE_
-X-MS-Office365-Filtering-Correlation-Id: a4ca7b1b-4624-4cfc-64c2-08dc2631118a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: gdVCzpvAo5t7tIPzZJ8kaGZFYuyWwXPA72KtE2yzt3hX373gL4Oc2Vs2emtVB/5O2xBQO9R8tEz+WboeBVxd3xgFs+aF7cnLhNOjneuct6eItEhlZJKF2ml3tmbxR0QZh05oJJWTRVeLHj4owRFh3pzv4RWnYKcFutDUgTn41G0c8uyU2ffvqo9etutajPl/T7YbeH6NdmVKtMxWP1Ef+TNOHjWL61I38T9opAZGhYW38qT9CqLm25LYAD6NqgH0JzeNm5xLqVXh2siRQagoGpQGuU4eZf/jTnq5eST7R/G0BhlLtthAIhG7UpcUID7V0B7hf0Y8mZ20jGDhrjJi0d9sNYQt7VqgwQG/Hv6SkQ2/Wsq3BVL0cWoP78Ce8JCQx5OxSgUAW9TvXsXKux935F6JWaTPMrFz/5npUOHZA4Jws1xehx015vCaHJ943SNf9GW2fkUgXet96DWhnrZUjSBhetJAnZMNQR+CUIKZW6pKCve7jo2UB+gxx3fKtrv2CazDRdMlhvGAdQ/GnZ9jevrWJ34QcRv/SArkyFuoHiY5sPlZtQ3m2vZXFFwVGuDDNHupL6dNg2hNrYjJHvXnsQv5cDOopPl2GwLodDx/vODBrt/9/bb1uWVSLOtK6Dbu
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(396003)(366004)(376002)(346002)(39850400004)(136003)(230922051799003)(1800799012)(451199024)(186009)(64100799003)(31686004)(41300700001)(83380400001)(966005)(6486002)(26005)(2616005)(6512007)(38100700002)(478600001)(53546011)(6506007)(4326008)(8676002)(8936002)(36756003)(66556008)(66946007)(31696002)(5660300002)(86362001)(4744005)(2906002)(110136005)(66476007)(44832011)(316002)(45980500001)(43740500002);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bEVFOXgrSEhteXhySzNacmFlYWRjK0lqMHljUkxma20zcGxaMXkyYlhFVERW?=
- =?utf-8?B?cTFKUUZNS1JLeFZlemtVeHFyUlRienVSVlZycFluU0F1VjQ3WUZCbG5hZEht?=
- =?utf-8?B?K1FQRDdjay9hdTkzNGJobE1SdFlCL0ZMWWx3Y2NWNHZhcU1qb3JyYUFJSTha?=
- =?utf-8?B?YWtIQyt3bk44Ny9kWGRNbGpSd0hBUTJtWWxZTEFPWWFWMHpvTTJtRXJzNGp5?=
- =?utf-8?B?U0xtcWU3UGsycXd1UHAxMFI2d3VoM054VVZ3RTdhbThHM053QUFrUnZza1dM?=
- =?utf-8?B?dlVvRnJnWXlXNUVtcTRia2F1Q1lYcUlkdlRUbEEwSFBXNU8rZ0ZORDNzQVNs?=
- =?utf-8?B?enVEUHl0cTZXM3FWTXNhQTBTdEs5UUJkdWx2VGRqcDdsL0pqUm54OUtmVDNm?=
- =?utf-8?B?QlNhVk5YMkJUOVJjUTU2dUN6aE16VmdQbTBVUXJKZzVIMXc1Q3BDN2hROWpu?=
- =?utf-8?B?bDVDNHppblEyZVN2bC9keHB2UU5hRUhuNkYraENJMkxFbzhtRXh6T1NjaDgv?=
- =?utf-8?B?dXJ4N1RHNjlTazZ3R1NtaTF6b2FKQkNCRUZwWGM0RjdrS3JobVNqN3haOHhw?=
- =?utf-8?B?WXV3ekF5Q3VpTzREWWpWbDM3UDlpdlN0aXpTZkNuWHhrODJHSW8rWHZvQnhV?=
- =?utf-8?B?VS9raXc1bEd2SlA4UXl3MVVoMFA2cTRsUmYxMXErSmtueGg2a0ZkWGhVbWFr?=
- =?utf-8?B?RDJaTUc3dDlLc0VCRS9QMkdRb0xEWUZFN3JMeXFiV3hkZHZldDJWYklkRDRS?=
- =?utf-8?B?NDJKa0I1R25RakxnWGYyWVVlRkExelBoVHd5T2w5UmEzMWhvMzhMT2I0RVhT?=
- =?utf-8?B?NWZTMmtDL0pmUmJUc3REOTdZRE94Rk4yaGhDVU1lZ1FzWDBZQmhqWCtYYXRB?=
- =?utf-8?B?N0kzY2hXQmlhK0RkUnRnbjVBaGFnbEc3L09GTmhWVUxHMHluTG0xY1NlZG9Y?=
- =?utf-8?B?TnRibFlRU1hEWmNxWTZxWWpISDk5bktOdm1pSWIzd1U0YUhrWEFVQzdCUUpP?=
- =?utf-8?B?ejlKanAvc3ZRaENhRDNwNGJPLzczSldIa3pNd0lKUjl2a3Y1UmRqR2pOMXh1?=
- =?utf-8?B?ejNUU0RwL2xBZ0ZJZjVrUFFFdU9ERGZpRUxaYXlERm9XUjYvcUxKNGhFU2VS?=
- =?utf-8?B?RktmbEsyMTZoZW92U0NHSGQwL2MycEZ4Y3o4ZzZ4d3lJRUQ4SGpUbVpQOG9s?=
- =?utf-8?B?Z1lNekRGZU9tdXVsMDhvT0NWSjk1SGZKM28vejR2NG1nbWQwd3FDWFl1SE8z?=
- =?utf-8?B?NHdxMU1tQ1J5M1VlMjcwWXJmeU9VQ2VvTEErRmZHSzBzdTNIZkpHbXZSR2N6?=
- =?utf-8?B?WU9wZnFDN2d1QUFVTHc3YkhiT2RWRDdSSzFDNXl5Q285cTVYbURYb3cxY2dB?=
- =?utf-8?B?czdaWW1CUXVzbU9iZVU4R1BSQUNYdG5pMDJKaDNLYnNveHRDRnZOSTgwTDFm?=
- =?utf-8?B?enJHaS9RQThNMFQxSGYxaWV2aDIrUEVZZlJzZ0VDVG9VMTc3ZWdYUEpzZ3kr?=
- =?utf-8?B?ZTNqRUVjZmdKZ3o1bDBQMGtHS3l2aU1oU1Z1VFJGcStRUTE1V2VuMk9EbDRi?=
- =?utf-8?B?alo1bVRSRUdVMXVnT0FVd3VUZGphYjMyM09TN3NrOU5HcVNnUjI0cGRoQU04?=
- =?utf-8?B?c21HMnFLTURkY0kwV3BEelNlWFhkWHc1ZDBQa0dEMFNmdjhuc2FlcFZUUE9l?=
- =?utf-8?B?VkFocDNSei9KY2dNZm42MW9id1Z4YU5FRDUyRkVvQy9QYXBWTys3VkVtZmpZ?=
- =?utf-8?B?WDVZclEzY1JObTNQaVFmN20yMlVRcDlUTlFLRUJmLzY4NVZpWUJFZDQ5VXNJ?=
- =?utf-8?B?dURRZjE1cEFjUm5nYWNpdytuOTFWcVV1NThWTE05bjQ2RkFlNHpHOW0zZ1lw?=
- =?utf-8?B?ZG5FaGNBWTRvb1pYZlhWc0VUZkpIMkJrTG80cmVzMDlYRjA5L3c1bkh5aXNp?=
- =?utf-8?B?ZVRvUEFKSS9CbWt4S0xFN0xKK3RBQi9acmZneXZ0bFd3M0k4NjFXQXVnVEMw?=
- =?utf-8?B?eTFOTUlhblljTldmekVlQnI2amxCdEVsUmE1U1I4NXdoTTVqMFFXTnY0UHNw?=
- =?utf-8?B?dDVOYlZkUm9YWnRDemduUmJrbnYzbnFOUDZUQld6TXRmektBc1kwdWN2M28v?=
- =?utf-8?B?L0c4cGgwVmYyZnAzZjRZL3p3QUdtTmNEVnA2ZnJWaXNKc29YV2lVcnhtNnB0?=
- =?utf-8?Q?2xHPlhWXdrT/eBP8XndkMo4=3D?=
-X-OriginatorOrg: theobroma-systems.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a4ca7b1b-4624-4cfc-64c2-08dc2631118a
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2024 09:58:57.1053 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LBVxPeVgZjvOt8xzgKEwigqvedi30d+2zUNmWZJVBTydZHeSr3qwQ7PgJ8rryivI2ykG1tnibnlZNsRTN5/rjrPwlPl0aMuWtmoeRxdegJheGfKKINk/L3BfzRwHeUfN
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8733
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] remoteproc: uclass: Add methods to load firmware to
+ rproc and boot rproc
+Content-Language: en-US
+To: "Anwar, Md Danish" <a0501179@ti.com>, MD Danish Anwar
+ <danishanwar@ti.com>, Max Krummenacher <max.krummenacher@toradex.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, srk@ti.com, Vignesh Raghavendra <vigneshr@ti.com>,
+ r-gunasekaran@ti.com
+References: <20240130063322.2345057-1-danishanwar@ti.com>
+ <e72403f9-a0aa-4286-97d2-456735fd3aac@kernel.org>
+ <8bc580b4-5faf-48f4-9d68-052fb9e114e8@ti.com>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <8bc580b4-5faf-48f4-9d68-052fb9e114e8@ti.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,21 +77,327 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kever,
 
-On 2/4/24 11:45, Kever Yang wrote:
-> Hi  Quentin,
+
+On 02/02/2024 18:40, Anwar, Md Danish wrote:
+> Hi Roger,
 > 
->      Could you help to rebase and send this patch again?
+> On 2/2/2024 4:49 PM, Roger Quadros wrote:
+>>
+>>
+>> On 30/01/2024 08:33, MD Danish Anwar wrote:
+>>> Add APIs to set a firmware_name to a rproc and boot the rproc with the
+>>> same firmware.
+>>>
+>>> Clients can call rproc_set_firmware() API to set firmware_name for a rproc
+>>> whereas rproc_boot() will load the firmware set by rproc_set_firmware() to
+>>> a buffer by calling request_firmware_into_buf(). rproc_boot() will then
+>>> load the firmware file to the remote processor and start the remote
+>>> processor.
+>>>
+>>> Also include "fs-loader.h" and make remoteproc driver select FS_LOADER in
+>>> Kconfig so that we can call request_firmware_into_buf() from remoteproc
+>>> driver.
+>>>
+>>> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
+>>> ---
+>>> Changes from v3 to v4:
+>>> *) No functional change. Splitted the patch out of the series as suggested
+>>>    by Nishant.
+>>> *) Droppped the RFC tag.
+>>>
+>>> v3: https://lore.kernel.org/all/20240124064930.1787929-4-danishanwar@ti.com/
+>>>
+>>>  drivers/remoteproc/Kconfig        |  1 +
+>>>  drivers/remoteproc/rproc-uclass.c | 85 +++++++++++++++++++++++++++++++
+>>>  include/remoteproc.h              | 35 +++++++++++++
+>>>  3 files changed, 121 insertions(+)
+>>>
+>>> diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
+>>> index 781de530af..0fdf1b38ea 100644
+>>> --- a/drivers/remoteproc/Kconfig
+>>> +++ b/drivers/remoteproc/Kconfig
+>>> @@ -10,6 +10,7 @@ menu "Remote Processor drivers"
+>>>  # All users should depend on DM
+>>>  config REMOTEPROC
+>>>  	bool
+>>> +	select FS_LOADER
+>>>  	depends on DM
+>>>  
+>>>  # Please keep the configuration alphabetically sorted.
+>>> diff --git a/drivers/remoteproc/rproc-uclass.c b/drivers/remoteproc/rproc-uclass.c
+>>> index 28b362c887..76db4157f7 100644
+>>> --- a/drivers/remoteproc/rproc-uclass.c
+>>> +++ b/drivers/remoteproc/rproc-uclass.c
+>>> @@ -13,6 +13,7 @@
+>>>  #include <log.h>
+>>>  #include <malloc.h>
+>>>  #include <virtio_ring.h>
+>>> +#include <fs_loader.h>
+>>>  #include <remoteproc.h>
+>>>  #include <asm/io.h>
+>>>  #include <dm/device-internal.h>
+>>> @@ -961,3 +962,87 @@ unsigned long rproc_parse_resource_table(struct udevice *dev, struct rproc *cfg)
+>>>  
+>>>  	return 1;
+>>>  }
+>>> +
+>>> +int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name)
+>>> +{
+>>> +	struct dm_rproc_uclass_pdata *uc_pdata;
+>>> +	int len;
+>>> +	char *p;
+>>> +
+>>> +	if (!rproc_dev || !fw_name)
+>>> +		return -EINVAL;
+>>> +
+>>> +	uc_pdata = dev_get_uclass_plat(rproc_dev);
+>>
+>> This can return NULL and you shuould error out if it does.
+>>
 > 
->      I can't see the version v5 on patchwork.
+> Sure.
+> 
+>>> +
+>>> +	len = strcspn(fw_name, "\n");
+>>> +	if (!len) {
+>>> +		debug("can't provide empty string for firmware name\n");
+>>
+>> how about "invalid filename" ?
+>>
+> 
+> Sure.
+> 
+>>> +		return -EINVAL;
+>>> +	}
+>>> +
+>>> +	p = strndup(fw_name, len);
+>>> +	if (!p)
+>>> +		return -ENOMEM;
+>>> +
+>>> +	uc_pdata->fw_name = p;
+>>> +
+>>> +	return 0;
+>>> +}
+>>> +
+>>> +int rproc_boot(struct udevice *rproc_dev, size_t fw_size)
+>>> +{
+>>> +	struct dm_rproc_uclass_pdata *uc_pdata;
+>>> +	struct udevice *fs_loader;
+>>> +	void *addr = malloc(fw_size);
+>>
+>> I will suggest to do malloc just before you need the buffer.
+>> You need to free up the buffer an all return paths after that.
+>>
+> 
+> That is correct. I will do malloc just before calling
+> request_firmware_into_buf() API.
+> 
+>>> +	int core_id, ret = 0;
+>>> +	char *firmware;
+>>> +	ulong rproc_addr;
+>>
+>> do you really need rproc_addr? You could use addr itself.
+>>
+> 
+> Sure.
+> 
+>>> +
+>>> +	if (!rproc_dev)
+>>> +		return -EINVAL;
+>>> +
+>>> +	if (!addr)
+>>> +		return -ENOMEM;
+>>> +
+>>> +	uc_pdata = dev_get_uclass_plat(rproc_dev);
+>>> +	core_id = dev_seq(rproc_dev);
+>>> +	firmware = uc_pdata->fw_name;
+>>> +
+>>> +	if (!firmware) {
+>>> +		debug("No firmware set for rproc core %d\n", core_id);
+>>> +		return -EINVAL;
+>>> +	}
+>>> +
+>>> +	/* Initialize all rproc cores */
+>>> +	rproc_init();
+>>
+>> 	if (!rproc_is_initialized()) {
+>> 		ret = rproc_init()
+>> 		if (ret) {
+>> 			debug("rproc_init() failed: %d\n", ret);
+>> 			return ret;
+>> 		}
+>> 	}
+>>
+> 
+> Sure.
+> 
+>>> +
+>>> +	/* Loading firmware to a given address */
+>>> +	ret = get_fs_loader(&fs_loader);
+>>> +	if (ret) {
+>>> +		debug("could not get fs loader: %d\n", ret);
+>>> +		return ret;
+>>> +	}
+>>> +
+>>> +	ret = request_firmware_into_buf(fs_loader, firmware, addr, fw_size, 0);
+>>> +	if (ret < 0) {
+>>> +		debug("could not request %s: %d\n", firmware, ret);
+>>> +		return ret;
+>>> +	}
+>>> +
+>>> +	rproc_addr = (ulong)addr;
+>>> +
+>>> +	ret = rproc_load(core_id, rproc_addr, ret);
+>>
+>> ret = rproc_load(coare_id, (ulong)addr, ret);
+>>
+>>> +	if (ret) {
+>>> +		debug("failed to load %s to rproc core %d from addr 0x%08lX err %d\n",
+>>> +		      uc_pdata->fw_name, core_id, rproc_addr, ret);
+>>> +		return ret;
+>>> +	}
+>>> +
+>>> +	ret = rproc_start(core_id);
+>>> +	if (ret) {
+>>> +		debug("failed to start rproc core %d\n", core_id);
+>>> +		return ret;
+>>> +	}
+>>> +
+>>> +	return ret;
+>>
+>> return 0;
+>>
+>>> +}
+>>> diff --git a/include/remoteproc.h b/include/remoteproc.h
+>>> index 91a88791a4..e53f85ba51 100644
+>>> --- a/include/remoteproc.h
+>>> +++ b/include/remoteproc.h
+>>> @@ -403,6 +403,7 @@ enum rproc_mem_type {
+>>>   * @name: Platform-specific way of naming the Remote proc
+>>>   * @mem_type: one of 'enum rproc_mem_type'
+>>>   * @driver_plat_data: driver specific platform data that may be needed.
+>>> + * @fw_name: firmware name
+>>>   *
+>>>   * This can be accessed with dev_get_uclass_plat() for any UCLASS_REMOTEPROC
+>>>   * device.
+>>> @@ -412,6 +413,7 @@ struct dm_rproc_uclass_pdata {
+>>>  	const char *name;
+>>>  	enum rproc_mem_type mem_type;
+>>>  	void *driver_plat_data;
+>>> +	char *fw_name;
+>>>  };
+>>>  
+>>>  /**
+>>> @@ -705,6 +707,35 @@ unsigned long rproc_parse_resource_table(struct udevice *dev,
+>>>  struct resource_table *rproc_find_resource_table(struct udevice *dev,
+>>>  						 unsigned int addr,
+>>>  						 int *tablesz);
+>>> +/**
+>>> + * rproc_set_firmware() - assign a new firmware
+>>
+>> firmware/firmware name.
+>>
+>>> + * @rproc_dev: device for wich new firmware is being assigned
+>>
+>> firmware/firmware name
+>> wich/which
+>>
+>>> + * @fw_name: new firmware name to be assigned
+>>> + *
+>>> + * This function allows remoteproc drivers or clients to configure a custom
+>>> + * firmware name. The function does not trigger a remote processor boot,
+>>> + * only sets the firmware name used for a subsequent boot.
+>>> + *
+>>> + * This function sets the fw_name field in uclass pdata of the Remote proc
+>>> + *
+>>> + * Return: 0 on success or a negative value upon failure
+>>> + */
+>>> +int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name);
+>>> +
+>>> +/**
+>>> + * rproc_boot() - boot a remote processor
+>>> + * @rproc_dev: rproc device to boot
+>>> + * @fw_size: Size of the memory to allocate for firmeware
+>>
+>> firmeware/firmware
+>>
+> 
+> I'll fix all these typos.
+> 
+>> How does caller know what firmware size to set to?
+>> This should already be private to the rproc as it knows 
+>> how large is its program memory.
+>>
+> 
+> Caller is trying to boot the rproc with a firmware binary. Caller should
+> know the size of binary that it wants to load to rproc core. Caller will
+> specify the binary size to rproc_boot(). Based on the size provided by
+> caller, rproc_boot() will then allocate that much memory and call
+> request_firmware_into_buf() with the size and allocated buffer. If the
+> caller doesn't provide minimum size rproc_load() will fail.
+
+Caller only knows the filename. It need not know more details.
+Also see my comment below about rproc_boot() API.
+
+> 
+> rproc_load() calls respective driver ops, for example: pru_load().
+> pru_load() [1] API checks the required size of firmware to load by
+> casting the buffer into Elf32_Ehdr and Elf32_Phdr and returns error if
+> size provided by caller is less than this.
+> 
+> 
+> 	if (offset + filesz > size) {
+> 		dev_dbg(dev, "truncated fw: need 0x%x avail 0x%zx\n",
+> 			offset + filesz, size);
+> 		ret = -EINVAL;
+> 		break;
+> 	}
+> 
+>>> + *
+>>> + * Boot a remote processor (i.e. load its firmware, power it on, ...).
+>>> + *
+>>> + * This function first loads the firmware set in the uclass pdata of Remote
+>>> + * processor to a buffer and then loads firmware to the remote processor
+>>> + * using rproc_load().
+>>> + *
+>>> + * Return: 0 on success, and an appropriate error value otherwise
+>>> + */
+>>> +int rproc_boot(struct udevice *rproc_dev, size_t fw_size);
+>>
+>> Was wondering if you need separate API for rproc_set_firmware or we can just
+>> pass firmware name as argument to rproc_boot()?
+>>
+> 
+> Technically we can. But when we discussed this approach first in v1, you
+> had asked to keep the APIs similar to upstream linux. Upstream linux has
+> these two APIs so I kept it that way. If you want I can drop the first
+> API. Please let me know.
+
+Sure you can keep it as it is in Linux, but there, rproc_boot doesn't
+take fw_size argument. So wondering why you should have it in u-boot.
+
+> 
+>>>  #else
+>>>  static inline int rproc_init(void) { return -ENOSYS; }
+>>>  static inline int rproc_dev_init(int id) { return -ENOSYS; }
+>>> @@ -744,6 +775,10 @@ static inline int rproc_elf_load_rsc_table(struct udevice *dev, ulong fw_addr,
+>>>  					   ulong fw_size, ulong *rsc_addr,
+>>>  					   ulong *rsc_size)
+>>>  { return -ENOSYS; }
+>>> +static inline int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name)
+>>> +{ return -ENOSYS; }
+>>> +static inline int rproc_boot(struct udevice *rproc_dev, size_t fw_size)
+>>> +{ return -ENOSYS; }
+>>>  #endif
+>>>  
+>>>  #endif	/* _RPROC_H_ */
+>>
+> 
+> [1]
+> https://elixir.bootlin.com/u-boot/latest/source/drivers/remoteproc/pru_rproc.c#L324
 > 
 
-This is already merged:
-
-https://source.denx.de/u-boot/u-boot/-/commit/543f24dffcf1a85faf95228c0d0ba2dee097939f
-
-So not sure to understand the request? What do you want me to do?
-
-Cheers,
-Quentin
+-- 
+cheers,
+-roger
