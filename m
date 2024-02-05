@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 699A0C4828D
-	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 19:22:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BC51C4828D
+	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 20:20:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C502D86F80;
-	Mon,  5 Feb 2024 20:22:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 34BA887AEC;
+	Mon,  5 Feb 2024 21:20:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dHxbByE6";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks-com.20230601.gappssmtp.com header.i=@gateworks-com.20230601.gappssmtp.com header.b="fzHA8NAA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03E2D87C31; Mon,  5 Feb 2024 20:22:53 +0100 (CET)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
+ id 7B94C87AEC; Mon,  5 Feb 2024 21:20:03 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1991587944
- for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 20:22:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A26F87A80
+ for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 21:20:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-55b5a37acb6so1643533a12.0
- for <u-boot@lists.denx.de>; Mon, 05 Feb 2024 11:22:50 -0800 (PST)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a29c4bbb2f4so584309566b.1
+ for <u-boot@lists.denx.de>; Mon, 05 Feb 2024 12:20:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1707160968; x=1707765768; darn=lists.denx.de;
+ d=gateworks-com.20230601.gappssmtp.com; s=20230601; t=1707164399; x=1707769199;
+ darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yes/q1YghRIWpwkr8bDLtZsDbIH00q/oPBGYm9uATGQ=;
- b=dHxbByE6I6WqUmXgUfzbuma0NpbjwQF/EZ9O05E0aHzNjBUv7ob5u6I2dYccZyF+dK
- MSVJPPT5JBEovLLhM06gQ6VaGS52oYVwP/LgClAVBQ27eraG3v645OazWlV8km17YGC+
- eAL55H9U+k83Qv1dHU3V3X0/wKVQ5s2xISMvQbrLC+WVOjoil4W9o2eWQ2yppxH21lzL
- +m5nsi0Hce7pZYZylhB5+SOeMj8h1m2tR2gwWf9DVyzyEhzU3q5PWVT4YmHHS6h64t4B
- d0CtFVXAvRo6FAXAFwwgOe9+6TJYu704PNlUghwzMPzZNF7H8GoCw4GMC6T5dr2/wwtL
- lCgg==
+ bh=CG9IurWwlKsf+Zc8lhBvw1AtUp/mWdva8MciR1+LVAE=;
+ b=fzHA8NAAkodoiHKhx7YyM1BFwhhfQW2z9P1/RCpqNq6rJf2W3nOzEcd0UMbN3bmCB3
+ 67jqQ3puEXggWKquorXe7FI6CCcJ8MTw4eLFfQOXV48BA4o8WZgOedf/h5gxug1xcHOH
+ 6Yats195znLbIisHPpTcZin7o3V9KE71H42v4+TGs0zJRhpoNdNsWSYFxQ+BU8mkKWg2
+ 5DOc2WnUZiix1esg1Cho37QdYAIHzLMLW7n0Az/P8JCwYS6cz93i7CgQCUj0kRvdMLNn
+ wm9lZI5ASH+OyOPAO2Bd3lmJ6wY+M7nQ6IY6Y3ME8Puj4aWmOlJZnWN4Pd0N4RaHcmTR
+ 89mA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707160968; x=1707765768;
+ d=1e100.net; s=20230601; t=1707164399; x=1707769199;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yes/q1YghRIWpwkr8bDLtZsDbIH00q/oPBGYm9uATGQ=;
- b=hQ9cwzmYP+PW9lLr1ajNiIpC3+Cjhhn7Rd7zvPWlq1UFRM3D6mE2o/Ultii2hQr7q4
- 8dhmCXzLXizXP7BxDh/nnUgk8NEANkaQ0HFWlb2mX9wrWQTUcmVGDAOcbZ7eEBtuXChI
- fp3fsPJXAMwqNS1+2cJJA8mV6xZIww/mn9L1myTforg6pT9qEcUgxT9eyZmIzEBoODXn
- 3RmuZHrJL1P34A9Uv8q5mqIml5eOvJ7/aV22SQvK8516Wz2EmVgHorZFsdTzYUK+wHR3
- dHAUNPIep1+tSsRf6Dmd9OS3/ubxtVioDEGXGlZwOupg0y2INc+NWE0OPd92SrVjSJ6h
- hxdQ==
-X-Gm-Message-State: AOJu0YyVo9j+0Z4qVyZfWufy7eFxs2Sb0euWIoDMmYkPqN7Q9MVLmktG
- kPR2WnyxSe641AXd+a3kvYrzHUI2orhPAIp7AuTdQ6pkEZZFM40Zpl/xpB5rRjQGhabvRkFlC1C
- GdDpRtXOpPMe2oIkR9k5LodqdRrWiMbz8zLI=
-X-Google-Smtp-Source: AGHT+IF/NZstcqPOZ06YhQga8bLWwK+ANr/hLPSx/o5AS7si4dd7pGZZQgECJaq11ph9FNBjbzEEi95pThBbxv3CaBw=
-X-Received: by 2002:a17:90b:17d0:b0:295:cfd1:a861 with SMTP id
- me16-20020a17090b17d000b00295cfd1a861mr374333pjb.4.1707160968252; Mon, 05 Feb
- 2024 11:22:48 -0800 (PST)
+ bh=CG9IurWwlKsf+Zc8lhBvw1AtUp/mWdva8MciR1+LVAE=;
+ b=Q9oD9TlNq9DApMNZLc54du95qf73w9HSvxE4TW1LCqZS2N0MaxARwju14A11qLbGSA
+ 8QWT2Zj0+53KOCCcY05gV0nptw1uF+7mQ+VT0ZyyJH7iftUEJi4fEhaxmeZdUs1cAEHO
+ ZVvkIxMMtfFl+tuucWUDYkViok8lBuL9UXNmLmh0h1Vz1aw8WHSXPJ3WjCpiMLKDKcOG
+ SS5J7huuRsjHWWpY1W1ipJk2MD27vwdUOZMMVIz2s6NuC4lvQ2l0cTL/tIuptiJ5+KuM
+ Yls1PYVfL73GnpB1xM0K47+ECaT/dwmmFL/8DvqhiKppMy/t7OqDZ6AZp89syo2i4HBm
+ pv/A==
+X-Gm-Message-State: AOJu0YyNy4AdMYNP8sxlZTzYHRgDEqGIlcNn/vPIKtVgwTHiP9r062F6
+ FGX7ufsTnKq8r9apHSJ8Lp8gQI+2f9oEAjGJkFyLijUkU5WvqeDoaXNoY3NS1Qq2lLZOTCdvZ1v
+ wmpPMLkq7QaFNiaIlnCrLONZkmW7k/xPex0UL0g==
+X-Google-Smtp-Source: AGHT+IGfpiVMkb8Ruz2JEmV6e1z+8VSgNEBnJ7IVRVLVjw3y5520BQfFGjCoAT634F128JcjPycv09p600fivOkKZ4s=
+X-Received: by 2002:a17:906:2ac7:b0:a37:9b79:9c27 with SMTP id
+ m7-20020a1709062ac700b00a379b799c27mr38853eje.37.1707164399516; Mon, 05 Feb
+ 2024 12:19:59 -0800 (PST)
 MIME-Version: 1.0
 References: <20240205190858.3076363-1-tharvey@gateworks.com>
-In-Reply-To: <20240205190858.3076363-1-tharvey@gateworks.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 5 Feb 2024 16:22:36 -0300
-Message-ID: <CAOMZO5CmMDhHKndFbbKsR8e82ShXnSz95yE2nPXqQog_2CpE_Q@mail.gmail.com>
+ <CAOMZO5CmMDhHKndFbbKsR8e82ShXnSz95yE2nPXqQog_2CpE_Q@mail.gmail.com>
+In-Reply-To: <CAOMZO5CmMDhHKndFbbKsR8e82ShXnSz95yE2nPXqQog_2CpE_Q@mail.gmail.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Mon, 5 Feb 2024 12:19:47 -0800
+Message-ID: <CAJ+vNU2XHZBzabTpR=4WG8pQgbdQ5HcOMG1pueAEo0zBfZ7X-A@mail.gmail.com>
 Subject: Re: [PATCH 0/5] update venice dts
-To: Tim Harvey <tharvey@gateworks.com>
+To: Fabio Estevam <festevam@gmail.com>
 Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, 
  "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
@@ -88,36 +90,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tim,
-
-On Mon, Feb 5, 2024 at 4:09=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> w=
-rote:
+On Mon, Feb 5, 2024 at 11:22=E2=80=AFAM Fabio Estevam <festevam@gmail.com> =
+wrote:
 >
-> This series brings some recent upstream Linux dt updates into U-Boot for
-> the Gateworks Venice family.
-
-Please specify what "some recent upstream Linux dt" means.
-
-Is it 6.8-rc, linux-next, or Shawn's tree?
-
-Can't you instead sync the imx8mm-venice DTs in U-Boot with this kernel tre=
-e?
-
-> Tim Harvey (5):
->   arm: dts: imx8mm-venice-gw7901: add digital I/O direction control GPIO'=
-s
->   arm: dts: imx8mm-venice-gw7901: add TPM device
->   arm: dts: imx8mm-venice-gw71xx: fix USB OTG VBUS
->   arm: dts: imx8mm-venice-gw71xx: add TPM device
->   arm: dts: imx8mp-venice-gw71xx: add TPM device
+> Hi Tim,
 >
->  .../dts/imx8mm-venice-gw71xx-0x-u-boot.dtsi   |  7 ++++
->  arch/arm/dts/imx8mm-venice-gw71xx.dtsi        | 40 +++++++++----------
->  arch/arm/dts/imx8mm-venice-gw7901-u-boot.dtsi | 14 +++++++
+> On Mon, Feb 5, 2024 at 4:09=E2=80=AFPM Tim Harvey <tharvey@gateworks.com>=
+ wrote:
+> >
+> > This series brings some recent upstream Linux dt updates into U-Boot fo=
+r
+> > the Gateworks Venice family.
+>
+> Please specify what "some recent upstream Linux dt" means.
+>
+> Is it 6.8-rc, linux-next, or Shawn's tree?
+>
+> Can't you instead sync the imx8mm-venice DTs in U-Boot with this kernel t=
+ree?
+>
+> > Tim Harvey (5):
+> >   arm: dts: imx8mm-venice-gw7901: add digital I/O direction control GPI=
+O's
+> >   arm: dts: imx8mm-venice-gw7901: add TPM device
+> >   arm: dts: imx8mm-venice-gw71xx: fix USB OTG VBUS
+> >   arm: dts: imx8mm-venice-gw71xx: add TPM device
+> >   arm: dts: imx8mp-venice-gw71xx: add TPM device
+> >
+> >  .../dts/imx8mm-venice-gw71xx-0x-u-boot.dtsi   |  7 ++++
+> >  arch/arm/dts/imx8mm-venice-gw71xx.dtsi        | 40 +++++++++----------
+> >  arch/arm/dts/imx8mm-venice-gw7901-u-boot.dtsi | 14 +++++++
+>
+> Why is u-boot.dtsi being touched? Please add a justification.
+>
+> >  arch/arm/dts/imx8mm-venice-gw7901.dts         | 14 ++++++-
+> >  .../dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi   |  9 +++++
+>
+> Same here.
 
-Why is u-boot.dtsi being touched? Please add a justification.
+Fabio,
 
->  arch/arm/dts/imx8mm-venice-gw7901.dts         | 14 ++++++-
->  .../dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi   |  9 +++++
+Ok, makes sense - drop this series. I will send a single patch instead
+with more detail if needed in the commit log.
 
-Same here.
+Best regards,
+
+Tim
