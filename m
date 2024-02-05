@@ -4,42 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7255C4828D
-	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 19:09:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 699A0C4828D
+	for <u-boot@archiver.kernel.org>; Mon,  5 Feb 2024 19:22:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C99787C5B;
-	Mon,  5 Feb 2024 20:09:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id C502D86F80;
+	Mon,  5 Feb 2024 20:22:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dHxbByE6";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E05B87A80; Mon,  5 Feb 2024 20:09:13 +0100 (CET)
-Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 03E2D87C31; Mon,  5 Feb 2024 20:22:53 +0100 (CET)
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
+ [IPv6:2607:f8b0:4864:20::530])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A28BE87C31
- for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 20:09:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1991587944
+ for <u-boot@lists.denx.de>; Mon,  5 Feb 2024 20:22:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: from 068-189-091-139.biz.spectrum.com ([68.189.91.139]
- helo=tharvey.pdc.gateworks.com)
- by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1rX4L1-00BXW2-0p;
- Mon, 05 Feb 2024 19:09:03 +0000
-From: Tim Harvey <tharvey@gateworks.com>
-To: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>,
- Fabio Estevam <festevam@gmail.com>
-Cc: "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
- Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH 5/5] arm: dts: imx8mp-venice-gw71xx: add TPM device
-Date: Mon,  5 Feb 2024 11:08:58 -0800
-Message-Id: <20240205190858.3076363-6-tharvey@gateworks.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240205190858.3076363-1-tharvey@gateworks.com>
-References: <20240205190858.3076363-1-tharvey@gateworks.com>
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-55b5a37acb6so1643533a12.0
+ for <u-boot@lists.denx.de>; Mon, 05 Feb 2024 11:22:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1707160968; x=1707765768; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yes/q1YghRIWpwkr8bDLtZsDbIH00q/oPBGYm9uATGQ=;
+ b=dHxbByE6I6WqUmXgUfzbuma0NpbjwQF/EZ9O05E0aHzNjBUv7ob5u6I2dYccZyF+dK
+ MSVJPPT5JBEovLLhM06gQ6VaGS52oYVwP/LgClAVBQ27eraG3v645OazWlV8km17YGC+
+ eAL55H9U+k83Qv1dHU3V3X0/wKVQ5s2xISMvQbrLC+WVOjoil4W9o2eWQ2yppxH21lzL
+ +m5nsi0Hce7pZYZylhB5+SOeMj8h1m2tR2gwWf9DVyzyEhzU3q5PWVT4YmHHS6h64t4B
+ d0CtFVXAvRo6FAXAFwwgOe9+6TJYu704PNlUghwzMPzZNF7H8GoCw4GMC6T5dr2/wwtL
+ lCgg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1707160968; x=1707765768;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yes/q1YghRIWpwkr8bDLtZsDbIH00q/oPBGYm9uATGQ=;
+ b=hQ9cwzmYP+PW9lLr1ajNiIpC3+Cjhhn7Rd7zvPWlq1UFRM3D6mE2o/Ultii2hQr7q4
+ 8dhmCXzLXizXP7BxDh/nnUgk8NEANkaQ0HFWlb2mX9wrWQTUcmVGDAOcbZ7eEBtuXChI
+ fp3fsPJXAMwqNS1+2cJJA8mV6xZIww/mn9L1myTforg6pT9qEcUgxT9eyZmIzEBoODXn
+ 3RmuZHrJL1P34A9Uv8q5mqIml5eOvJ7/aV22SQvK8516Wz2EmVgHorZFsdTzYUK+wHR3
+ dHAUNPIep1+tSsRf6Dmd9OS3/ubxtVioDEGXGlZwOupg0y2INc+NWE0OPd92SrVjSJ6h
+ hxdQ==
+X-Gm-Message-State: AOJu0YyVo9j+0Z4qVyZfWufy7eFxs2Sb0euWIoDMmYkPqN7Q9MVLmktG
+ kPR2WnyxSe641AXd+a3kvYrzHUI2orhPAIp7AuTdQ6pkEZZFM40Zpl/xpB5rRjQGhabvRkFlC1C
+ GdDpRtXOpPMe2oIkR9k5LodqdRrWiMbz8zLI=
+X-Google-Smtp-Source: AGHT+IF/NZstcqPOZ06YhQga8bLWwK+ANr/hLPSx/o5AS7si4dd7pGZZQgECJaq11ph9FNBjbzEEi95pThBbxv3CaBw=
+X-Received: by 2002:a17:90b:17d0:b0:295:cfd1:a861 with SMTP id
+ me16-20020a17090b17d000b00295cfd1a861mr374333pjb.4.1707160968252; Mon, 05 Feb
+ 2024 11:22:48 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240205190858.3076363-1-tharvey@gateworks.com>
+In-Reply-To: <20240205190858.3076363-1-tharvey@gateworks.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 5 Feb 2024 16:22:36 -0300
+Message-ID: <CAOMZO5CmMDhHKndFbbKsR8e82ShXnSz95yE2nPXqQog_2CpE_Q@mail.gmail.com>
+Subject: Re: [PATCH 0/5] update venice dts
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, 
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,65 +88,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the TPM device found on the GW71xx revision E PCB.
+Hi Tim,
 
-This hangs off of SPI2, uses gpio1_10 as a CS and gpio1_11 as RST#.
+On Mon, Feb 5, 2024 at 4:09=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> w=
+rote:
+>
+> This series brings some recent upstream Linux dt updates into U-Boot for
+> the Gateworks Venice family.
 
-Signed-off-by: Tim Harvey <tharvey@gateworks.com>
----
- arch/arm/dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi |  9 +++++++++
- arch/arm/dts/imx8mp-venice-gw71xx.dtsi           | 10 +++++++++-
- 2 files changed, 18 insertions(+), 1 deletion(-)
+Please specify what "some recent upstream Linux dt" means.
 
-diff --git a/arch/arm/dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi b/arch/arm/dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi
-index 5c33f8c9cdcf..216a7a0d8d7c 100644
---- a/arch/arm/dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi
-@@ -4,6 +4,15 @@
-  */
- #include "imx8mp-venice-gw702x-u-boot.dtsi"
- 
-+&gpio1 {
-+	tpm_rst {
-+		gpio-hog;
-+		output-high;
-+		gpios = <11 GPIO_ACTIVE_HIGH>;
-+		line-name = "tpm_rst#";
-+	};
-+};
-+
- &gpio4 {
- 	dio_1 {
- 		gpio-hog;
-diff --git a/arch/arm/dts/imx8mp-venice-gw71xx.dtsi b/arch/arm/dts/imx8mp-venice-gw71xx.dtsi
-index 86999f52d4b2..4b1dbaa64b6b 100644
---- a/arch/arm/dts/imx8mp-venice-gw71xx.dtsi
-+++ b/arch/arm/dts/imx8mp-venice-gw71xx.dtsi
-@@ -48,8 +48,15 @@
- &ecspi2 {
- 	pinctrl-names = "default";
- 	pinctrl-0 = <&pinctrl_spi2>;
--	cs-gpios = <&gpio5 13 GPIO_ACTIVE_LOW>;
-+	cs-gpios = <&gpio5 13 GPIO_ACTIVE_LOW>,
-+		   <&gpio1 10 GPIO_ACTIVE_LOW>;
- 	status = "okay";
-+
-+	tpm@1 {
-+		compatible = "tcg,tpm_tis-spi";
-+		reg = <0x1>;
-+		spi-max-frequency = <36000000>;
-+	};
- };
- 
- &gpio4 {
-@@ -217,6 +224,7 @@
- 			MX8MP_IOMUXC_ECSPI2_MOSI__ECSPI2_MOSI	0x140
- 			MX8MP_IOMUXC_ECSPI2_MISO__ECSPI2_MISO	0x140
- 			MX8MP_IOMUXC_ECSPI2_SS0__GPIO5_IO13	0x140
-+			MX8MP_IOMUXC_GPIO1_IO10_GPIO1_IO10	0x140
- 		>;
- 	};
- 
--- 
-2.25.1
+Is it 6.8-rc, linux-next, or Shawn's tree?
 
+Can't you instead sync the imx8mm-venice DTs in U-Boot with this kernel tre=
+e?
+
+> Tim Harvey (5):
+>   arm: dts: imx8mm-venice-gw7901: add digital I/O direction control GPIO'=
+s
+>   arm: dts: imx8mm-venice-gw7901: add TPM device
+>   arm: dts: imx8mm-venice-gw71xx: fix USB OTG VBUS
+>   arm: dts: imx8mm-venice-gw71xx: add TPM device
+>   arm: dts: imx8mp-venice-gw71xx: add TPM device
+>
+>  .../dts/imx8mm-venice-gw71xx-0x-u-boot.dtsi   |  7 ++++
+>  arch/arm/dts/imx8mm-venice-gw71xx.dtsi        | 40 +++++++++----------
+>  arch/arm/dts/imx8mm-venice-gw7901-u-boot.dtsi | 14 +++++++
+
+Why is u-boot.dtsi being touched? Please add a justification.
+
+>  arch/arm/dts/imx8mm-venice-gw7901.dts         | 14 ++++++-
+>  .../dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi   |  9 +++++
+
+Same here.
