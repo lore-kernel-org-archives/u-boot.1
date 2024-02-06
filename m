@@ -4,66 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B6B4C4828D
-	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 22:32:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EE54C48297
+	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 22:32:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A24087C7F;
-	Tue,  6 Feb 2024 23:32:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BFACD87C93;
+	Tue,  6 Feb 2024 23:32:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC6FD8718A; Tue,  6 Feb 2024 23:32:00 +0100 (CET)
-Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com
- [209.85.167.43])
+ id AE009876AE; Tue,  6 Feb 2024 23:32:02 +0100 (CET)
+Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com
+ [209.85.167.45])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF3D2876AE
- for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 23:31:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CE3E2876AE
+ for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 23:32:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=foundries.io
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-lf1-f43.google.com with SMTP id
- 2adb3069b0e04-51156cf5766so530784e87.0
- for <u-boot@lists.denx.de>; Tue, 06 Feb 2024 14:31:58 -0800 (PST)
+Received: by mail-lf1-f45.google.com with SMTP id
+ 2adb3069b0e04-5114a21176cso1355733e87.1
+ for <u-boot@lists.denx.de>; Tue, 06 Feb 2024 14:32:00 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1707258718; x=1707863518;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Qsutu8er/cIaJyQ/yayCF3FWojj90NlbsFvFkdl93vQ=;
- b=nMQOYRn7HBEwy0BsgIKcsXvRP2N7d4cX1hQ9TvnzH4JjyEiEYY0XvDD6n3hfNFEctB
- ROFGVkZ4GCdoWla/I7X5+0GJxzhzxA3rGco1S4EBXwKruhT3GClhS1x4DHRdhkT3qCck
- Odxl8Lg70hOjVM+byQdoi0+RWLS9OJdINo8b+9x7zuXhUHD38F0CvXtpKQBjI1pcWgOc
- lIQpZvLw/cbB/FZOzzMCL7moDDgjgoMrnLcJ6/vkH2GBi10MUIDbPEjwPmqX0J9Ehjb1
- 3PsuVrcofKQncpPK0AFHRCLtwBjCbjDt5bVExCFcSxLrCIP8p/3Qshe/7NBlHJypqfRJ
- apxw==
-X-Gm-Message-State: AOJu0YxzErcx5KkL+FYoRIVyRT+5VnbgEDxjennQMlAKZqsNOVg1fcIc
- 2yt+opRdeymwwIyiUFjyxq1jJ9PIsXi+jDw8N4LJ4ajYyqkRQeQt1tJakxNoCfHX8w==
-X-Google-Smtp-Source: AGHT+IGF4/J376rH+TC9wMFzctYta1QCmNSrWXkBPnofa4HKtLUhv1STw4umnRbwjoVIQhdZcAfERQ==
-X-Received: by 2002:a19:9114:0:b0:511:63eb:8cea with SMTP id
- t20-20020a199114000000b0051163eb8ceamr400346lfd.4.1707258717393; 
- Tue, 06 Feb 2024 14:31:57 -0800 (PST)
+ d=1e100.net; s=20230601; t=1707258720; x=1707863520;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=SNjPCCwE4bQz2Zn/IhDIXv3ByYtXVT9kgvh3YH/mlbQ=;
+ b=GJI/VJUztG01U2sK6jkvTO8IYRa5R/kMcLsJYcxt7rG1a2b/E9Kk8/zKZL38SKy7At
+ GqtOtqvBVSavO0SRoN++wAd1yzlIFqbhR3Q8yVsxS8acK45ySkIyZ165atksA3Rw8KLn
+ JSVXN4604GAKGtrxVLwnYAqGb8IgdCLSzGPqX8szO2N2E8VKj3T/OXi3wxvmju2YEf6g
+ aEDdyLdn3Cz2XOZPlZn5lgP5m+Qbs02q3i2AWe0YwmATUNQmiJ+FdrtCKHOiBrykDS8X
+ EeC5wZX8slcLv2TEg3mZ0ExR6a+6SiznS4PvhYBIskHXpe2FBgKExiGzvjMaqq6LLest
+ YvDg==
+X-Gm-Message-State: AOJu0YziRw0Oi/UTlCSBQL13iXSBz1yGINV0YL4DtME7iOkKuIvBL+Wf
+ df9cVBrHJhq5cEjQN8sFLDHe2Mss2BcKpO8nkDl7SFzEkJPRAvnDs4buLvYPzznm1A==
+X-Google-Smtp-Source: AGHT+IH5+dL8B47JiqgOGUKbHayn9BdCsotxcLTXn5sYYzR/u3iAa2VZ9a5a+UjphBalK//aDrSDcg==
+X-Received: by 2002:a05:6512:511:b0:511:5b35:d119 with SMTP id
+ o17-20020a056512051100b005115b35d119mr2199921lfb.2.1707258719430; 
+ Tue, 06 Feb 2024 14:31:59 -0800 (PST)
 X-Forwarded-Encrypted: i=0;
- AJvYcCUa2o7DKeSk4uoDgkDKYBvUJTT6KXMoBScYZLckEko7XbaJnSnJuhVsyyyR/YpT0wUMfaE3/FbtLflBti2EqPjHF7BUIK5ZBlzqXN1vEycvSTRFTZQh7WhZjf0748wW+BTfrliPc7mgkrOgGL4byDjK7Tnt+GXISe4KBVgrkLxXxQM9Ftzd3TUd44m4PdsGWDDOzAj77yXtm6wlwSkwcKpAQ4chSq2tqb2//HnPwwXX4JiOVIUhApuoY9ggaztuH3eCb4MByTgmy9IYX/UAEja5dBdL5XseY5jYAZGtRiQcSfTqCkl6KQ7o793+vMQWJ5LmPCRTUSjn2g==
+ AJvYcCVR4qDyfnD//AINFxAwfrALCU802sHmkaiSQ8Geix0XJlED2DFnrBO0ZeH4USdU0bAMfpqCGzpOm+Zbjwcm9BINXGSZU1VDFj7TuCsBY1xoI9PlQ2p4aptMKdRtHMMutvQQzuPb3S8f7Juh0FVdj8rNdlXXapzxVvUfMj2r+IuYZ9AVrYVUVSJCox9IKd+O6mg=
 Received: from localhost ([109.108.76.111]) by smtp.gmail.com with ESMTPSA id
- w19-20020a19c513000000b00511510cb561sm353047lfe.79.2024.02.06.14.31.56
+ v10-20020a05651203aa00b005113abb16fdsm356005lfp.284.2024.02.06.14.31.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Feb 2024 14:31:56 -0800 (PST)
+ Tue, 06 Feb 2024 14:31:58 -0800 (PST)
 From: Igor Opaniuk <igor.opaniuk@foundries.io>
 To: u-boot@lists.denx.de
 Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Igor Opaniuk <igor.opaniuk@foundries.io>,
  Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Ivan Khoronzhuk <ivan.khoronzhuk@gmail.com>,
- Jens Wiklander <jens.wiklander@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Qu Wenruo <wqu@suse.com>,
- Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 0/7] AVB: cosmetic adjustments/improvements
-Date: Tue,  6 Feb 2024 23:31:46 +0100
-Message-Id: <20240206223153.3060433-1-igor.opaniuk@foundries.io>
+ Jens Wiklander <jens.wiklander@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v1 1/7] common: avb_verify: don't call mmc_switch_part for SD
+Date: Tue,  6 Feb 2024 23:31:47 +0100
+Message-Id: <20240206223153.3060433-2-igor.opaniuk@foundries.io>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240206223153.3060433-1-igor.opaniuk@foundries.io>
+References: <20240206223153.3060433-1-igor.opaniuk@foundries.io>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -82,31 +80,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series include:
-- Simplify and add more context for debug/error prints where it's needed.
-- Move SPDX license identifiers to the first line, so it conforms
-  to license placement rule.
-- Use mmc_switch_part() only for eMMC.
-- Rework do_avb_verify_part, take into account device lock state for setting correct
-  androidboot.verifiedbootstate.
-- Adjust AVB documentation, add info about slot_suffix param.
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
 
-Igor Opaniuk (7):
-  common: avb_verify: don't call mmc_switch_part for SD
-  avb: move SPDX license itdentifiers to the first line
-  common: avb_verify: rework error/debug prints
-  cmd: avb: rework prints
-  common: avb_verify: add str_avb_io_error/str_avb_slot_error
-  cmd: avb: rework do_avb_verify_part
-  doc: android: avb: add slot_suffix param details
+mmc_switch_part() is used for switching between hw partitions
+on eMMC (boot0, boot1, user, rpmb).
+There is no need to do that for SD card.
 
- cmd/avb.c                              | 206 ++++++++++++-------------
- common/avb_verify.c                    |  89 +++++++++--
- doc/android/avb2.rst                   |   8 +-
- include/avb_verify.h                   |   7 +-
- test/py/tests/test_android/test_avb.py |   3 +-
- 5 files changed, 177 insertions(+), 136 deletions(-)
+Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+---
 
+ common/avb_verify.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/common/avb_verify.c b/common/avb_verify.c
+index 48ba8db51e5..59f2c25e0de 100644
+--- a/common/avb_verify.c
++++ b/common/avb_verify.c
+@@ -358,9 +358,11 @@ static struct mmc_part *get_partition(AvbOps *ops, const char *partition)
+ 		goto err;
+ 	}
+ 
+-	ret = mmc_switch_part(part->mmc, part_num);
+-	if (ret)
+-		goto err;
++	if (IS_MMC(part->mmc)) {
++		ret = mmc_switch_part(part->mmc, part_num);
++		if (ret)
++			goto err;
++	}
+ 
+ 	mmc_blk = mmc_get_blk_desc(part->mmc);
+ 	if (!mmc_blk) {
 -- 
 2.34.1
 
