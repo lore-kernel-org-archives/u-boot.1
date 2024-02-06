@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92F64C48297
-	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 17:20:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A42D4C48297
+	for <u-boot@archiver.kernel.org>; Tue,  6 Feb 2024 17:28:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE627876AE;
-	Tue,  6 Feb 2024 18:20:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id DD3208751B;
+	Tue,  6 Feb 2024 18:28:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="uDd569ZL";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ug03wT2y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E383C870A4; Tue,  6 Feb 2024 18:20:32 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 88D4A875E9; Tue,  6 Feb 2024 18:28:54 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2310875E9
- for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 18:20:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FBEB86308
+ for <u-boot@lists.denx.de>; Tue,  6 Feb 2024 18:28:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 1CB81615E4;
- Tue,  6 Feb 2024 17:20:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8956C433F1;
- Tue,  6 Feb 2024 17:20:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1707240028;
- bh=nOtHy9gE55bxD12SUrL+WoDMjhL5Xjk19weAJCXu4zg=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=uDd569ZLz4ddnZy9QRIUHD6D1WIW7zs0OcJGlMVWrZFKkqPVwTY3usZn6SLkI9k9F
- 02O3mKP5PTHVONwdj451SBfShDRgw53KgZLwVSgnROrrbL5WTpK0BzN2Z1RiO3A/YI
- cUNIVjQAl45J9K6Xy2SPp6yuiBQvR8gEMbLugneQ3IbGJM99EcWrjo+WFgVgMCSGxd
- mlJZaqQdZeAG+Wj5Fweuc4+EwtuHAAdzU9PJFphgzoMNebamLNuxd+2m92pWhwmj34
- suNF2IDAMZ67DKyuCoNszdo4zqpTWOtj1rNTyzJtzNEqbaw45YJrkw1zpPjgod6uUw
- xtyBaKPuAeHCA==
-Date: Tue, 6 Feb 2024 17:20:23 +0000
-From: Conor Dooley <conor@kernel.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Conor Dooley <conor.dooley@microchip.com>, Simon Glass <sjg@chromium.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Raymond Mao <raymond.mao@linaro.org>, Marek Vasut <marex@denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Andre Przywara <andre.przywara@arm.com>, Baruch Siach <baruch@tkos.co.il>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerry Van Baren <vanbaren@cideas.com>, Johan Jonker <jbx6244@gmail.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Samuel Holland <samuel@sholland.org>, Shiji Yang <yangshiji66@outlook.com>
-Subject: Re: [PATCH v7] fdt: Allow the devicetree to come from a bloblist
-Message-ID: <20240206-trusting-arguable-1d7ac134b5db@spud>
-References: <20240104014919.413568-1-sjg@chromium.org>
- <20240116-snowbound-symptom-aa07c4dcf736@wendy>
- <20240122-pranker-shininess-8953eb6182b4@spud>
- <20240122184717.GQ3652023@bill-the-cat>
- <20240122-finicky-ancient-797ba048f927@spud>
- <20240123-aviation-caretaker-3c49d8da42dd@spud>
- <20240123180300.GW3652023@bill-the-cat>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 416HSnNk022786;
+ Tue, 6 Feb 2024 11:28:49 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1707240529;
+ bh=JLC4zJZq8k8BOQqDV7DsHayQ+QKmJMYfd63UModrJRU=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=Ug03wT2yLFeAISjOLHM1KReGEiWO0XfAQ7jur3Fa4jwXe1Ceb25fxJTV6yYhDXfrn
+ KqLL6RXTsJTz7o3XHjua3t41LUKJbOP2v9Y8CJ972Za4TyeVu+XqtTsdkof8ch0YaO
+ GKZaV33Fm+vUAFup0nBtEjjUJpjKDFz98JdRORVE=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 416HSnh5014460
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 6 Feb 2024 11:28:49 -0600
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 6
+ Feb 2024 11:28:48 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 6 Feb 2024 11:28:48 -0600
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 416HSmH7023539;
+ Tue, 6 Feb 2024 11:28:48 -0600
+Message-ID: <d6ce0d0b-0116-454a-814c-e037c7a63a44@ti.com>
+Date: Tue, 6 Feb 2024 11:28:48 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="zvnq5J0GNC/mBjH6"
-Content-Disposition: inline
-In-Reply-To: <20240123180300.GW3652023@bill-the-cat>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: mach-k3: Refactor QoS settings
+Content-Language: en-US
+To: Aradhya Bhatia <a-bhatia1@ti.com>, Tom Rini <trini@konsulko.com>, Nishanth
+ Menon <nm@ti.com>, Bryan Brattlof <bb@ti.com>
+CC: u-boot Mailing List <u-boot@lists.denx.de>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Udit Kumar <u-kumar1@ti.com>, Devarsh Thakkar
+ <devarsht@ti.com>, Jai Luthra <j-luthra@ti.com>, Aniket Limaye
+ <a-limaye@ti.com>
+References: <20240206085610.3226136-1-a-bhatia1@ti.com>
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20240206085610.3226136-1-a-bhatia1@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,83 +83,228 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 2/6/24 2:56 AM, Aradhya Bhatia wrote:
+> Refactor common QoS code into a new common header file, and the soc
+> specific setup_qos functions into a common API.
+> 
+> Rename $(soc)_qos_count and $(soc)_qos_data variables to qos_count and
+> qos_data. When QoS settings of more SoCs are added, only one pair will
+> be defined at a time, based on the config SOC_K3_$(soc).
+> 
+> This refactoring has been done for 2 major purposes.
+> 
+> - The auto-generated $(soc)_qos_data.c and $(soc)_qos.h files cannot
+>    have any code that is specific to any bootloader. Those files have to
+>    remain agnostic of different bootloader implementations and their
+>    header files.
+> 
+> - The existing implementation was less than ideal and would have enabled
+>    multiple $(soc)_qos_count and $(soc)_qos_data variables for all SoC
+>    variants.
+> 
+> Signed-off-by: Aradhya Bhatia <a-bhatia1@ti.com>
+> ---
+>   arch/arm/mach-k3/Kconfig                      |  8 +++++++
+>   arch/arm/mach-k3/am62a7_init.c                | 14 ------------
+>   arch/arm/mach-k3/common.c                     | 12 ++++++++++
+>   arch/arm/mach-k3/common.h                     |  8 +++++++
+>   arch/arm/mach-k3/include/mach/hardware.h      |  9 --------
+>   arch/arm/mach-k3/include/mach/k3-qos.h        | 22 +++++++++++++++++++
+>   arch/arm/mach-k3/r5/am62ax/Makefile           |  2 +-
+>   .../{include/mach => r5/am62ax}/am62a_qos.h   |  0
+>   .../{am62a_qos_data.c => am62a_qos_uboot.c}   |  9 ++++----
+>   9 files changed, 56 insertions(+), 28 deletions(-)
+>   create mode 100644 arch/arm/mach-k3/include/mach/k3-qos.h
+>   rename arch/arm/mach-k3/{include/mach => r5/am62ax}/am62a_qos.h (100%)
+>   rename arch/arm/mach-k3/r5/am62ax/{am62a_qos_data.c => am62a_qos_uboot.c} (85%)
+> 
+> diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
+> index 03898424c954..ffc4a9c29029 100644
+> --- a/arch/arm/mach-k3/Kconfig
+> +++ b/arch/arm/mach-k3/Kconfig
+> @@ -139,6 +139,14 @@ config K3_DM_FW
+>   	  bootloader, it makes RM and PM services not being available
+>   	  during R5 SPL execution time.
+>   
+> +config K3_QOS
+> +	bool "Enable Quality of Service (QoS) Settings for TI K3 SoCs"
+> +	default y if CPU_V7R && SOC_K3_AM62A7
 
---zvnq5J0GNC/mBjH6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+If this is R5 only, then put it in the arch/arm/mach-k3/r5 Kconfig
+and you can drop the CPU_V7R check.
 
-On Tue, Jan 23, 2024 at 01:03:00PM -0500, Tom Rini wrote:
-> On Tue, Jan 23, 2024 at 11:27:57AM +0000, Conor Dooley wrote:
-> > On Mon, Jan 22, 2024 at 06:55:01PM +0000, Conor Dooley wrote:
-> > > On Mon, Jan 22, 2024 at 01:47:17PM -0500, Tom Rini wrote:
-> > > > On Mon, Jan 22, 2024 at 06:36:31PM +0000, Conor Dooley wrote:
-> > > > > Hey,
-> > > > >=20
-> > > > > On Tue, Jan 16, 2024 at 01:48:06PM +0000, Conor Dooley wrote:
-> > > > > > Yo,
-> > > > > >=20
-> > > > > > On Wed, Jan 03, 2024 at 06:49:19PM -0700, Simon Glass wrote:
-> > > > > > > Standard passage provides for a bloblist to be passed from on=
-e firmware
-> > > > > > > phase to the next. That can be used to pass the devicetree al=
-ong as well.
-> > > > > > > Add an option to support this.
-> > > > > > >=20
-> > > > > > > Tests for this will be added as part of the Universal Payload=
- work.
-> > > > > > >=20
-> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > >=20
-> > > > > > Since this was merged into master, U-Boot is no longer booting =
-on my
-> > > > > > icicle kit (At least that's what my bisection tells me). This i=
-s a
-> > > > > > RISC-V board and U-Boot for it is built from
-> > > > > > microchip_mpfs_icicle_defconfig.
-> > > > > >=20
-> > > > > > There's zero output on the console from U-Boot at all, the last=
- thing
-> > > > > > that I see is OpenSBI before things grind to a halt.
-> > > > >=20
-> > > > > Just wondering if there's anything I can do to help this one alon=
-g?
-> > > > > Got a red CI complaining at me every morning about it :|
-> > > >=20
-> > > > Well, can you please look in to what part of this is causing the
-> > > > failure? I don't really see what would have changed on
-> > > > microchip_mpfs_icicle_defconfig from this as BLOBLIST isn't set bef=
-ore
-> > > > nor after this change.
-> > >=20
-> > > Sure. I'll try to look into it more tomorrow.
-> >=20
-> > I gave it a try, it seems to be the FDTSRC_BLOBLIST additions that kill
-> > it, not the actual code in fdtdec_setup().
->=20
-> Well that's very unexpected. Can you see what boundary we're crossing or
-> whatever has overflowed now or something on your platform?
+Andrew
 
-And you know what else was not expected? The issue randomly disappearing
-a few days after I sent this email. Or maybe that should be expected
-given how the issue actually cropped up in the first place.
-I didn't have a chance yet to see how this particular patch may have
-interacted with the sections etc, but looking into it is still on my
-todo list, just much lower down now that things actually boot again for
-me...
-
-Thanks,
-Conor.
-
---zvnq5J0GNC/mBjH6
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZcJqVwAKCRB4tDGHoIJi
-0oyYAQDbbFP8qlbOSjG1PCyIULrZ8V3gT7y8oZ/VmXjJm1IxmwEAyTBZTFHsJZ3G
-u53+h3GXno1KLScemCobZ1T7Ux7f9gE=
-=yvVf
------END PGP SIGNATURE-----
-
---zvnq5J0GNC/mBjH6--
+> +	help
+> +	  This option enables the R5 SPL to apply QoS settings for various
+> +	  HW controllers inside the TI K3 SoCs. The files for QoS settings are
+> +	  generated from Sysconfig and k3-resource-partitioning tools.
+> +
+>   config K3_X509_SWRV
+>   	int "SWRV for X509 certificate used for boot images"
+>   	default 1
+> diff --git a/arch/arm/mach-k3/am62a7_init.c b/arch/arm/mach-k3/am62a7_init.c
+> index d72e19936b9b..080274e3af58 100644
+> --- a/arch/arm/mach-k3/am62a7_init.c
+> +++ b/arch/arm/mach-k3/am62a7_init.c
+> @@ -69,20 +69,6 @@ static void ctrl_mmr_unlock(void)
+>   	mmr_unlock(PADCFG_MMR1_BASE, 1);
+>   }
+>   
+> -#if (IS_ENABLED(CONFIG_CPU_V7R))
+> -static void setup_qos(void)
+> -{
+> -	u32 i;
+> -
+> -	for (i = 0; i < am62a_qos_count; i++)
+> -		writel(am62a_qos_data[i].val, (uintptr_t)am62a_qos_data[i].reg);
+> -}
+> -#else
+> -static void setup_qos(void)
+> -{
+> -}
+> -#endif
+> -
+>   void board_init_f(ulong dummy)
+>   {
+>   	struct udevice *dev;
+> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+> index f411366778f0..b54f2ddc4729 100644
+> --- a/arch/arm/mach-k3/common.c
+> +++ b/arch/arm/mach-k3/common.c
+> @@ -28,6 +28,8 @@
+>   #include <elf.h>
+>   #include <soc.h>
+>   
+> +#include <asm/arch/k3-qos.h>
+> +
+>   #if IS_ENABLED(CONFIG_SYS_K3_SPL_ATF)
+>   enum {
+>   	IMAGE_ID_ATF,
+> @@ -595,3 +597,13 @@ int misc_init_r(void)
+>   void __weak do_board_detect(void)
+>   {
+>   }
+> +
+> +#if (IS_ENABLED(CONFIG_K3_QOS))
+> +void setup_qos(void)
+> +{
+> +	u32 i;
+> +
+> +	for (i = 0; i < qos_count; i++)
+> +		writel(qos_data[i].val, (uintptr_t)qos_data[i].reg);
+> +}
+> +#endif
+> diff --git a/arch/arm/mach-k3/common.h b/arch/arm/mach-k3/common.h
+> index e9db9fbfb63d..53aa186b31a4 100644
+> --- a/arch/arm/mach-k3/common.h
+> +++ b/arch/arm/mach-k3/common.h
+> @@ -45,3 +45,11 @@ void ti_secure_image_post_process(void **p_image, size_t *p_size);
+>   struct ti_sci_handle *get_ti_sci_handle(void);
+>   void do_board_detect(void);
+>   void ti_secure_image_check_binary(void **p_image, size_t *p_size);
+> +
+> +#if (IS_ENABLED(CONFIG_K3_QOS))
+> +void setup_qos(void);
+> +#else
+> +static inline void setup_qos(void)
+> +{
+> +}
+> +#endif
+> diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
+> index a1a9dfbde66c..52ef82e70b07 100644
+> --- a/arch/arm/mach-k3/include/mach/hardware.h
+> +++ b/arch/arm/mach-k3/include/mach/hardware.h
+> @@ -30,7 +30,6 @@
+>   
+>   #ifdef CONFIG_SOC_K3_AM62A7
+>   #include "am62a_hardware.h"
+> -#include "am62a_qos.h"
+>   #endif
+>   
+>   /* Assuming these addresses and definitions stay common across K3 devices */
+> @@ -97,12 +96,4 @@ struct rom_extended_boot_data {
+>   	u32 num_components;
+>   };
+>   
+> -struct k3_qos_data {
+> -	u32 reg;
+> -	u32 val;
+> -};
+> -
+> -extern struct k3_qos_data am62a_qos_data[];
+> -extern u32 am62a_qos_count;
+> -
+>   #endif /* _ASM_ARCH_HARDWARE_H_ */
+> diff --git a/arch/arm/mach-k3/include/mach/k3-qos.h b/arch/arm/mach-k3/include/mach/k3-qos.h
+> new file mode 100644
+> index 000000000000..e00e1de5b9cb
+> --- /dev/null
+> +++ b/arch/arm/mach-k3/include/mach/k3-qos.h
+> @@ -0,0 +1,22 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Quality of Service (QoS) Configuration Header File
+> + *
+> + * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
+> + */
+> +#ifndef _K3_QOS_H_
+> +#define _K3_QOS_H_
+> +
+> +#include <linux/kernel.h>
+> +
+> +struct k3_qos_data {
+> +	u32 reg;
+> +	u32 val;
+> +};
+> +
+> +#if (IS_ENABLED(CONFIG_K3_QOS))
+> +extern struct k3_qos_data qos_data[];
+> +extern u32 qos_count;
+> +#endif
+> +
+> +#endif /* _K3_QOS_H_ */
+> diff --git a/arch/arm/mach-k3/r5/am62ax/Makefile b/arch/arm/mach-k3/r5/am62ax/Makefile
+> index 02a941805e9a..e4e55ce5c7dd 100644
+> --- a/arch/arm/mach-k3/r5/am62ax/Makefile
+> +++ b/arch/arm/mach-k3/r5/am62ax/Makefile
+> @@ -4,4 +4,4 @@
+>   
+>   obj-y += clk-data.o
+>   obj-y += dev-data.o
+> -obj-y += am62a_qos_data.o
+> +obj-y += am62a_qos_uboot.o
+> diff --git a/arch/arm/mach-k3/include/mach/am62a_qos.h b/arch/arm/mach-k3/r5/am62ax/am62a_qos.h
+> similarity index 100%
+> rename from arch/arm/mach-k3/include/mach/am62a_qos.h
+> rename to arch/arm/mach-k3/r5/am62ax/am62a_qos.h
+> diff --git a/arch/arm/mach-k3/r5/am62ax/am62a_qos_data.c b/arch/arm/mach-k3/r5/am62ax/am62a_qos_uboot.c
+> similarity index 85%
+> rename from arch/arm/mach-k3/r5/am62ax/am62a_qos_data.c
+> rename to arch/arm/mach-k3/r5/am62ax/am62a_qos_uboot.c
+> index 38db4f2f5c8e..9a82944d5fe9 100644
+> --- a/arch/arm/mach-k3/r5/am62ax/am62a_qos_data.c
+> +++ b/arch/arm/mach-k3/r5/am62ax/am62a_qos_uboot.c
+> @@ -5,10 +5,11 @@
+>    *
+>    * Copyright (C) 2022 Texas Instruments Incorporated - https://www.ti.com/
+>    */
+> -#include <asm/arch/hardware.h>
+> -#include "common.h"
+>   
+> -struct k3_qos_data am62a_qos_data[] = {
+> +#include <asm/arch/k3-qos.h>
+> +#include "am62a_qos.h"
+> +
+> +struct k3_qos_data qos_data[] = {
+>   	/* modules_qosConfig0 - 1 endpoints, 4 channels */
+>   	{
+>   		.reg = K3_DSS_UL_MAIN_0_VBUSM_DMA + 0x100 + 0x4 * 0,
+> @@ -43,4 +44,4 @@ struct k3_qos_data am62a_qos_data[] = {
+>   	},
+>   };
+>   
+> -uint32_t am62a_qos_count = sizeof(am62a_qos_data) / sizeof(am62a_qos_data[0]);
+> +u32 qos_count = ARRAY_SIZE(qos_data);
+> 
+> base-commit: daa3100250839dd30626f7f4b7daf041f1114f1c
